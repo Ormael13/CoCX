@@ -64,7 +64,6 @@ public class Mountain extends BaseContent
 						chance: 0.5,
 						call  : SceneLib.alvinaFollower.alvinaSecondEncounter
 					}, {
-					}, {
 						name  : "alvina2",
 						when  : function():Boolean {
 							return flags[kFLAGS.ALVINA_FOLLOWER] == 9

@@ -88,30 +88,52 @@ package classes.Scenes
 			outputText("-7 new achievments.\n");
 			outputText("-Monsters can now go into negative HP without loosing by HP as long they got anything like Diehard/Ferocity effects active.\n");
 			outputText("-2 new things added to stats page (general subpage): current possesed amount of ascension points and possible to gain ascension points when PC will ascend.\n");
-			outputText("-Magical soulskill lost their spells power modifier. Since they not spells but soulskill they not needed it to wreck havoc anyway, right?\n");
+			outputText("-Magical soulskill lost their spells power modifier. Since they not spells but soulskills they not needed it to wreck havoc anyway, right?\n");
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New soulskill: Devourer. Req. ... Devour up to 400 lust and wrath from enemy transfering 50% of it back to player. Cooldown: 3 turns.\n");
 			//outputText("-(Heavy WIP) Raging Inferno now boost by 10% fire spells/attacks damage and each turn spend without casting fire spell lower that bonus damage by 10% till it return to 100%.\n");
-			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF
+			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
 			//outputText("\n");cel na 0.8: dodać kitsune/nekomanta TF
 			//outputText("\n");cel na 0.8: dodać yuki-onna TF
 			outputText("-New dungeon: Ebon Labyrinth. Founded in Caves. It's endless dungeon without any usable map or end, traveling between rooms takes 15 min instead of 5. PC can keep explore it and fight enemies inside it up to even needing to sleep inside it. Sleeping inside giving 50% chance of been attacked in sleep. It's possible to leave dungeon at any moment if player decide it getting too hard to keep staying inside labyrinth.\n");
-			outputText("-New types of enemies could be meet in Ebon Labyrinth: Stay demons (stray succubus/incubus/omnibus), Ancient tentacle beast, Labyrinth minotaur.\n");
+			outputText("-New types of enemies could be meet in Ebon Labyrinth: Stray demons (stray succubus/incubus/omnibus), Ancient tentacle beast, Labyrinth minotaur.\n");
 			outputText("-New melee weapon (by Ormael): Dual large axes - dropped by Labyrinth Minotaur. Cost 1440 gems. Base atk is 28. Requires height of 6'6 to wield. They are dual large weapons.\n");
 			outputText("-New physical soulskill: Sextuple Thrust. Req. buying manual from golem merchant for 24 spirit stones after PC reach Soul Personage stage and knowing Triple Trust soulskill. Enhanced version of Triple Thrust with adding 3 more attacks. Base cost: 70 soulforce. Cooldown: 1 turns.\n");
 			outputText("-New physical soulskill: Nonuple Thrust. Req. buying manual from golem merchant for 58 spirit stones after PC reach Soul Sprite stage and knowing Sextuple Trust soulskill. Enhanced version of Sextuple Thrust with adding 3 more attacks. Base cost: 150 soulforce. Cooldown: 2 turns.\n");
 			outputText("-New magical soulskill: Hail of Blades. Req. buying manual from golem merchant for 20 spirit stones. Creates 6 magical blades that are then send toward enemy. Base cost: 50 soulforce.\n");
 			outputText("-New magical soulskill: Grandiose Hail of Blades. Req. buying manual from golem merchant for 80 spirit stones after PC reach Soul Personage and knowing Hail of Blades. Creates 18 magical blades that are then send toward enemy. Base cost: 200 soulforce. Cooldown: 3 turns.\n");
 			outputText("-New magical soulskill: Grandiose Hail of Moon Blades. Req. buying manual from golem merchant for 320 spirit stones after PC reach Soul Sprite and knowing Grandiose Hail of Blades. Creates 54 magical blades that are then send toward enemy. Base cost: 800 soulforce. Cooldown: 9 turns.\n");
-			outputText("-Req. for Toolbelt in Lumi workshop was moved form display in main screen section to tooltip on greyed out button below.\n");
+			outputText("-Req. for Toolbelt in Lumi workshop was moved from display in main screen section to tooltip on greyed out button below.\n");
+			outputText("-Wolk added toggle for melee/range attacks damage overhaul. When it's enabled final damages can be somwhere between 15% and 115%. High wisdom  or intelligence could rise those minimum and maximum caps up to 10%.\n");
+			outputText("-New consumable (by Liadri): Strawberry shortcake - gained from Wonderland exploration or bought in Dinah shop. Costs 30 gems and will cause PC to become shorter.\n");
+			outputText("-New consumable (by Liadri): Big chocolate cake - gained from Wonderland exploration or bought in Dinah shop. Costs 30 gems and will cause PC to become taller.\n");
+			outputText("-Increased difficulty for higher than Normal difficulty mode meaning not only enemy HP but also other stats like Lust/Wrath/Fatigue/Mana/Soulforce would scale up (as long enemy use particular one resource). Exp rewards for fighting enemies in higher difficulty setting are also a bit increased (it's not as massive increase in % of bonus exp than enemies stats rise but still something to sweaten tougher fights a bit).\n");
+			outputText("-Boss type enemy perk will now boost enemy secondary stats (HP/Lust/...etc.) by 300% of base value. Each enemy that is at least lvl 25 would have secondary stats boosted by 100% of base value and each 25 levels that boost will increase by 100%.\n");
+			outputText("-There was changes to goo race - renamed to slime race and spliting into 3 subtypes: Slime (they got new goo colors: pink, magenta), Magma Slime and Dark Slime. Each of them got now half slime, slime and slime queen stages. New race bonuses and req. pts for them are as follow: Half Slime/Slime/Slime Queen bonuses at 5/11/15 race score pts: +45/105/115 to max Tou (scal), -20/40/50 to max Spe (scal), +50/100/160 to max Lib (scal); ");
+			outputText("Half Magma Slime/Magma Slime/Slime Magma Queen bonuses at 6/13/17 race score pts: +15/35/45 to max Str (scal), +45/100/115 to max Tou (scal), -20/40/50 to max Spe (scal), +50/100/145 to max Lib (scal); Half Dark Slime/Dark Slime/Slime Dark Queen bonuses at 6/13/17 race score pts: +45/90/115 to max Tou (scal), -20/40/50 to max Spe (scal), +15/45/45 to max Int (scal), +50/100/145 to max Lib (scal).\n");
+			outputText("-New body part - arms: Goo Arms. Req. Goo Skin\n");
+			outputText("-New body part - rear body: Metamorphic. Req. Goo Legs and Slime Core perk\n");
+			outputText("-New event perk: Fluid Body. Gained by having full race score in any slime type (11 for normal slime and 13 for other two subtypes). Effects: You are extremely resilient to physical strike when naked reducing physical damage taken by 50% but become aroused as attacks penetrates you. You also can slip out of any mundane grapple without effort (100% escape chance). Lethicve or Harpy Queen binding are cases where this perk will not help to escape.\n");
+			outputText("-New p. special: Sling goo. Req. to be slime with full race score - 11 or 13 pts. Throw slime at your opponent, lacing it with your aphrodisiac compound and reduce their speed.\n");
+			outputText("-New m. special: Slime bolt. Req. to be Dark Slime with 13+ pts in score. Summon a huge slimy projectile and  toss it at your opponent causing serious lust and physical damage, reducing speed.\n");
+			outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
+			outputText("-Each 10 rooms (excluding each 50th room) in Ebon Labyrinth PC can find loot chest that contain between 10 to 50% exp needed to level up and between 500 to 1000 gems.\n");
+			outputText("-Rest of damaging magical specials aside Infernal Flare got dmg increase when toggle for spells cooldowns is on so they then deal more damage to match increased spells damage.\n");
+			outputText("-After finishing Alvina Advanced Study PC can confess and get trial from dark lolita to win her heart: brining her Black Rose. It would req. to venture into Ebon Labyrinth and fight boss at 50th room. After returning alive and with Rose Alvina will find PC interesting enough to have sex with him/her. First time succesful sex scene will change her status to Lover along with moving from Followers to Lovers tab in camp.\n");
+			outputText("-New type of enemy to meet in caves or Ebon Labyrinth: Dark Slime. It's slime that is having additional lightning vulnerability on top of her typical weakness to fire. But she also can use magic specials that other slimes can't. Fight with her can be avoided if PC is slime himself/herself.\n");
+			outputText("-New TF item: Dark Slime Jelly. Dropping form defeated Dark Slimes. using ti will gradualy change pc into dark slime.\n");
+			outputText("-New body part - ears: Displacer Ears. No req.\n");
+			outputText("-New body part - eyes: Displacer Eyes. Req. Cat Tongue\n");
+			outputText("-Displacer Beast race have change for body parts. Cat Eyes > Displacer Eyes (yellow), Lion ears > Displacer Ears, Cat Legs > Lion Legs. Full race bonus was increased to 14 pts from 13 giving 15 more points to max str.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: None slime PC getting hunger refilled from sex scenes involving been filled with any liquid, option to make bottle with mid-grade pill redirect to get bottle of low-grade pills, bottle of low grade pill when swallowed giving effect of just 1 pill instead of 10, displacer beast and hellcat race scores not allowing to pick cat races mutation perks, green gel gathering quest on adventure guild been disabled, ");
-			outputText("using mech melee attack not clearing previous text\n");/*ostatni punkt changelogu
+			outputText("using mech melee attack not clearing previous text, Aurora not assiting in fighhts after picking her as teammate, spawning ocassionaly more than one enemy per room in River Dungeon, Devil TF giving wrong type of legs\n");/*ostatni punkt changelogu
 			outputText("-New TF item: . Gained by bringing Orc Mead to Lumi for enhancing. Using this item will turn PC into high orc. High Orc (scalable): +130 to max Str, +30 to max Tou, +10 to max Spe, -30 to max Int, +25 to max Lib, +20% to max Wrath.\n");
 			outputText("-New TF item: . Gained by bringing Elf Ear to Lumi for enhancing. Using this item will turn PC into high elf. High Elf (scalable): -10 to max Str, -15 to max Tou, +80 to max Spe, +80 to max Int, +60 to max Wis, +30 max/min Sens, +20% to max Mana.\n");
 			outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
@@ -164,6 +186,20 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -171,6 +207,30 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -200,6 +260,27 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we wlasciwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -456,7 +537,7 @@ package classes.Scenes
 			outputText("-Stat gains on Farm from helping was changed to be based max stat % value (so for ex. instead been checking if stat is below 40 it will check if stat is below 40% of max value for that stat).\n");
 			outputText("-New M. Special: Blazing battle spirit. Gained by having 12+ pts in mouse score and having Hinezumi Amrs and Legs. Unarmed damage is increased by 100% as fire damage, lust resistance is maximized. Take massively increased damage from ice attacks. (Cannot be used underwater)\n");
 			outputText("-New M. Special: Cauterize. Gained by having 12+ pts in mouse score and having Hinezumi Amrs and Legs. Flash burn your wounds to cause them to close. Take damage but recover over time. (PC takes 5% of his max health as damage but recover 1,5% per round for 10 rounds)\n");
-			outputText("-Passive ability: Hinezumi coat - req. to be Hinezumi to gain it and maintain (it would be meantione don Stats page under effects section). If PC stop been Hinezumi it would be lost. Effect: Unarmed attacks minor deal fire damage and discharge lust (1 point per attack) when you are aroused above 50%.\n");
+			outputText("-Passive ability: Hinezumi coat - req. to be Hinezumi to gain it and maintain (it would be meantioned on Stats page under effects section). If PC stop been Hinezumi it would be lost. Effect: Unarmed attacks minor deal fire damage and discharge lust (1 point per attack) when you are aroused above 50%.\n");
 			outputText("-Hinezumi can gain also Fire Affinity perk (req. to gain the same as for Hinezumi Coat)\n");
 			outputText("-Phylla stones gathering got bit changed to rise a bit minimum of stones gained and bonus stones gathered from amount of ant kids increased form 20 to 30 at 4k kids making 15 instead of 10 milestones when amount of gained stones increase\n");
 			outputText("-Two new merchants in He'Xin'Dao: Eraendir and Orsbulg. First one is male light elf that is former grey elf which sells all type of small weapons (all small weapons from other shops was moved to his inventory). Second one is female orc that sells all wrath weapon (all current wrath weapons was moved from other shops to her).\n");
@@ -826,7 +907,7 @@ package classes.Scenes
 			outputText("<b>Version 0.8j3 (Bugfixing + new Adv Guild quest):</b>\n\n");
 			outputText("-Req. Cow/Minotaur score for Evolved and Final Form racial perks are lowered by 1/2 pts.\n");
 			outputText("-Construct, Plant, Goo type enemies gained immunity to bleed.\n");
-			outputText("-New quest on Adventure Guild: hunting minotaurs. First time completing reward is tome teaching Cleave, second time completing is 1 perk ponit and all afterward completetions giving 8 spirit stones.\n");
+			outputText("-New quest on Adventure Guild: hunting minotaurs. First time completing reward is tome teaching Cleave, second time completing is 1 perk ponit and all afterward completing giving 8 spirit stones.\n");
 			outputText("-New P. Special: Cleave - req. finishing 1 time minotaur hunt quest to get tome teaching this special. It can be used with either axe, sword or dueling sword type weapon and would apply bleeding on top of normal damage. If it's used on groups base dmg (not bleed) would be 3x higher.\n");
 			outputText("-Fixed bugs: Hellcat reverting to Cat text proc-ing each hour, overlapping all cat races racial bonuses, can't use weapon sharpening option in Konstantin menu if PC not hold any melee weapon\n\n");
 			outputText("<b>Version 0.8j3a (Sean shop fix):</b>\n\n");

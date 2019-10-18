@@ -1066,6 +1066,7 @@ public class DebugMenu extends BaseContent
 			[Eyes.CAVE_WYRM, "21 CAVE_WYRM"],
 			[Eyes.HINEZUMI, "22 HINEZUMI"],
 			[Eyes.BEAR, "23 BEAR"],
+			[Eyes.DISPLACER, "24 DISPLACER"],
 		];
 		private static const EAR_TYPE_CONSTANTS:Array    = [
 			[Ears.HUMAN, "0 HUMAN"],
@@ -1103,6 +1104,8 @@ public class DebugMenu extends BaseContent
 			[Ears.CAVE_WYRM, "32 CAVE_WYRM"],
 			[Ears.BEAR, "33 BEAR"],
 			[Ears.PANDA, "34 PANDA"],
+			[Ears.SHARK, "35 SHARK"],
+			[Ears.DISPLACER, "36 DISPLACER"],
 		];
 		private static const HORN_TYPE_CONSTANTS:Array    = [
 			[Horns.NONE, "0 NONE"],
@@ -1268,6 +1271,7 @@ public class DebugMenu extends BaseContent
 			[Arms.CAVE_WYRM, "33 CAVE_WYRM"],
 			[Arms.HINEZUMI, "34 HINEZUMI"],
 			[Arms.BEAR, "35 BEAR"],
+			[Arms.GOO, "36 GOO"],
 		];
 		private static const CLAW_TYPE_CONSTANTS:Array = [
 			[Claws.NORMAL, "0 NORMAL"],
@@ -1424,6 +1428,7 @@ public class DebugMenu extends BaseContent
 			[LowerBody.MOUSE, "48 MOUSE"],
 			[LowerBody.HINEZUMI, "49 HINEZUMI"],
 			[LowerBody.BEAR, "50 BEAR"],
+			[LowerBody.HYDRA, "51 HYDRA"],
 		];
 		private static const LEG_COUNT_CONSTANTS:Array = [
 			1,2,4,6,8,
@@ -1442,6 +1447,7 @@ public class DebugMenu extends BaseContent
 			[RearBody.BAT_COLLAR, "9 BAT_COLLAR"],
 			[RearBody.WOLF_COLLAR, "10 WOLF_COLLAR"],
 			[RearBody.DISPLACER_TENTACLES, "11 DISPLACER_TENTACLES"],
+			[RearBody.METAMORPHIC_GOO, "13 METAMORPHIC_GOO"],
 		];
 		private function changeArmType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.arms.type = setIdx;

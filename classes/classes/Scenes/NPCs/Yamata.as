@@ -157,7 +157,7 @@ import classes.internals.*;
 			clearOutput();
 			outputText("You struggle against Yamata’s grip with every ounce of strength you can muster, desperately trying to free yourself.\n\n");
 			var brokeFree:Boolean;			
-			if ((rand(player.str) > (this.str / 4)*3) || rand(5)==0) {
+			if ((rand(player.str) > (this.str / 4)*3) || rand(5)==0 || player.hasPerk(PerkLib.FluidBody)) {
 				brokeFree = true;
 			}
 			if (brokeFree) {

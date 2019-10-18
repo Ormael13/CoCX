@@ -426,6 +426,12 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			bd = buttons.add("Hypnosis", NagaHypnosis).hint("Lull your opponent into a trance but only allow a limited set of options.", "Hypnosis");
 		}
+		if (player.gooScore() >= 11 || player.magmagooScore() >= 13 || player.darkgooScore() >= 13) {
+			bd = buttons.add("Slime Bolt", SlimeBolt).hint("Summon a huge slimy projectile and toss it at your opponent causing serious lust and physical damage, reducing speed.\n\nMana Cost: " + spellCostWhite(50) + "");
+			if (player.mana < spellCost(50)) {
+				bd.disable("Your mana is too low to toss slime bolt.");
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) {
 			bd = buttons.add("Air E.Asp", ElementalAspectAir);
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectAir)) {
@@ -550,12 +556,6 @@ public class MagicSpecials extends BaseCombatContent {
 		var damage:Number = int(player.level * (8 + player.wolfScore()) + rand(60));
 		damage = calcGlacialMod(damage);
 		if (monster.hasPerk(PerkLib.EnemyGroupType)) damage *= 5;
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
-		if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
-		if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		damage = Math.round(damage);
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, a powerful wave of cold blasting the area in front of you.  " + monster.capitalA + monster.short + " does " + monster.pronoun3 + " best to avoid it, but the wave of freezing air is too fast.");
@@ -592,7 +592,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("You manage to block your own ice wave with your [shield]!");
 			}
 			else {
-				damage = player.takeMagicDamage(damage);
+				damage = player.takeIceDamage(damage);
 				outputText("Your own ice wave smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
@@ -608,8 +608,8 @@ public class MagicSpecials extends BaseCombatContent {
 				else outputText("are");
 				outputText("too resolute to be frozen by your attack.</b>");
 			}
-			damage = doDamage(damage);
-			outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+			outputText(" ");
+			damage = doIceDamage(damage, true , true);
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
@@ -653,12 +653,6 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.tou >= 951) damage += ((player.tou * 5.5) + rand(player.tou * 6));
 		else damage += (player.tou/3 + rand(player.tou/2));
 		damage = calcGlacialMod(damage);
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
-		if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
-		if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		damage = Math.round(damage);
 		outputText("You inhale deeply, then blow a freezing breath attack at your opponent, encasing it in ice!");
@@ -695,7 +689,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("You manage to block your own ice wave with your [shield]!");
 			}
 			else {
-				damage = player.takeMagicDamage(damage);
+				damage = player.takeIceDamage(damage);
 				outputText("Your own ice wave smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
@@ -714,8 +708,8 @@ public class MagicSpecials extends BaseCombatContent {
 				else outputText("are");
 				outputText("too resolute to be frozen by your attack.</b>");
 			}
-			damage = doDamage(damage);
-			outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+			outputText(" ");
+			damage = doIceDamage(damage, true, true);
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
@@ -900,16 +894,12 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//High damage to goes.
 		damage = calcVoltageMod(damage);
-		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
-		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
-		if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		damage = Math.round(damage);
-		outputText("<b><font color=\"#800000\">" + damage + "</font></b> damage. ");
+		damage = doLightingDamage(damage, true, true);
+		outputText(" damage. ");
 		if (crit1 == true) outputText(" <b>*Critical Hit!*</b>");
-		monster.HP -= damage;
 		dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
 		var lustDmgF:Number = 20 + rand(6);
 		var lustBoostToLustDmg:Number = 0;
@@ -1030,11 +1020,6 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += 50 + rand(20);
 		damage += (player.level * 10);
 		damage = calcInfernoMod(damage);
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -1109,12 +1094,11 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer. ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 			damage = Math.round(damage * 1.5);
-			damage = doDamage(damage);
-			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
+			damage = doFireDamage(damage, true, true);
 		}
 		else {
-			damage = doDamage(damage);
-			outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+			outputText(" ");
+			damage = doFireDamage(damage, true, true);
 		}
 		if(!monster.hasPerk(PerkLib.Resolute)) {
 			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
@@ -1193,8 +1177,8 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("\n\n");
 		}
 		else {
-			damage = doDamage(damage);
-			outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+			outputText(" ");
+			damage = doMagicDamage(damage, true, true);
 		}
 		outputText("\n\n");
 		if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
@@ -1223,11 +1207,6 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += player.tou;
 		damage += scalingBonusToughness();// * 0.5
 		damage = calcInfernoMod(damage);
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -1302,13 +1281,9 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer. ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 			damage = Math.round(damage * 1.5);
-			damage = doDamage(damage);
-			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
+			damage = doFireDamage(damage, true, true);
 		}
-		else {
-			damage = doDamage(damage);
-			outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-		}
+		else damage = doFireDamage(damage, true, true);
 		outputText("\n\n");
 		monster.createStatusEffect(StatusEffects.BurnDoT,5,0.02,0,0);
 		checkAchievementDamage(damage);
@@ -1342,11 +1317,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damage *= 3;
 		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damage *= 5;
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -1411,7 +1382,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("You manage to block your own fire with your [shield]!");
 			}
 			else {
-				damage = player.takeMagicDamage(damage);
+				damage = player.takeFireDamage(damage);
 				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
@@ -1421,23 +1392,21 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer. ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 			damage = Math.round(damage * 1.5);
-			damage = doDamage(damage);
+			damage = doFireDamage(damage, true, true);
 			monster.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
-			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
 		}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
-				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back. ");
 				monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			}
 			else {
 				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
 				if(!monster.plural) outputText("is ");
 				else outputText("are");
-				outputText("too resolute to be stunned by your attack.</b>");
+				outputText("too resolute to be stunned by your attack.</b> ");
 			}
-			damage = doDamage(damage);
-			outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+			damage = doFireDamage(damage, true, true);
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
@@ -1468,12 +1437,8 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damage *= 3;
 		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damage *= 5;
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
-		if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -1520,17 +1485,16 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
-				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back. ");
 				monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			}
 			else {
 				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
 				if(!monster.plural) outputText("is ");
 				else outputText("are");
-				outputText("too resolute to be stunned by your attack.</b>");
+				outputText("too resolute to be stunned by your attack.</b> ");
 			}
-			damage = doDamage(damage);
-			outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+			damage = doIceDamage(damage, true, true);
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
@@ -1560,12 +1524,8 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damage *= 3;
 		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damage *= 5;
-		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
-		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
-        if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
-        if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -1612,17 +1572,16 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
-				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back. ");
 				monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			}
 			else {
 				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
 				if(!monster.plural) outputText("is ");
 				else outputText("are");
-				outputText("too resolute to be stunned by your attack.</b>");
+				outputText("too resolute to be stunned by your attack.</b> ");
 			}
-			damage = doDamage(damage);
-			outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+			damage = doLightingDamage(damage, true, true);
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
@@ -1652,11 +1611,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damage *= 3;
 		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damage *= 5;
-		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.2;
-		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 5;
-//	if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -1703,17 +1658,16 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
-				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back. ");
 				monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			}
 			else {
 				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
 				if(!monster.plural) outputText("is ");
 				else outputText("are");
-				outputText("too resolute to be stunned by your attack.</b>");
+				outputText("too resolute to be stunned by your attack.</b> ");
 			}
-			damage = doDamage(damage);
-			outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+			damage = doDarknessDamage(damage, true, true);
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
@@ -1753,6 +1707,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + ((player.lust100 * 0.01) * 0.25));
 			if (combat.wearingWinterScarf()) damage *= 1.05;
+			if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 			damage *= 10;
 			damage = Math.round(damage);
 			//Shell
@@ -1809,8 +1764,9 @@ public class MagicSpecials extends BaseCombatContent {
 					else outputText("are");
 					outputText("too resolute to be stunned by your attack, but still");
 				}
-				damage = doDamage(damage);
-				outputText(" takes <b>(<font color=\"#800000\">" + damage + "</font>)</b> from the immense blast.");
+				outputText(" takes ");
+				damage = doMagicDamage(damage, true, true);
+				outputText(" from the immense blast.");
 			}
 			outputText("\n\n");
 			checkAchievementDamage(damage);
@@ -1850,17 +1806,11 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-
 		var damage:Number;
 		damage = int(player.level * 10 + 45 + rand(10));
 		damage = calcInfernoMod(damage);
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		damage = Math.round(damage);
-
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
@@ -1932,6 +1882,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!\n\n");
 			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
 			damage = int(player.level * 10 + 45 + rand(10));
+			if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 			damage *= 1.75;
 			outputText(" (" + damage + ")");
 			monster.HP -= damage;
@@ -1955,8 +1906,8 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("<b>Your breath is massively dissipated by the swirling vortex, causing it to hit with far less force!</b>  ");
 				damage = Math.round(0.5 * damage);
 			}
-			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
-			monster.HP -= damage;
+			damage = doFireDamage(damage, true, true); 
+			outputText("\n\n");
 			if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		}
 		checkAchievementDamage(damage);
@@ -1977,6 +1928,7 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(20, USEFATG_MAGIC_NOBM);
 		var damage:Number = (player.level * 8 + rand(10) + player.inte / 2 + player.cor / 5);
 		damage = calcInfernoMod(damage);
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			clearOutput();
@@ -1997,6 +1949,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!");
 			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
 			damage = int(player.level * 8 + rand(10) + player.cor / 5);
+			if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 			damage *= 1.75;
 			outputText(" (" + damage + ")");
 			monster.HP -= damage;
@@ -2051,15 +2004,10 @@ public class MagicSpecials extends BaseCombatContent {
 		else {
 			if(monster.inte < 10) {
 				outputText("  Your foe lets out a shriek as their form is engulfed in the blistering flames.");
-				if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-				if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-				if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-				if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-				if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 				damage = Math.round(damage);
 				damage = int(damage);
+				damage = doFireDamage(damage, true, true);
 				outputText("<b>(<font color=\"#800000\">+" + damage + "</font>)</b>\n");
-				monster.HP -= damage;
 			}
 			else {
 				if(monster.lustVuln > 0) {
@@ -2349,13 +2297,10 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = calcInfernoMod(damage);
 		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		damage = Math.round(damage);
-		outputText("for <b><font color=\"#800000\">" + damage + "</font></b> damage.");
+		outputText("for ");
+		damage = doFireDamage(damage, true, true);
+		outputText(" damage.");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
@@ -2368,7 +2313,6 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.SPELLS_CAST]++;
 	//	if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 	//	spellPerkUnlock();
-		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if (monster.HP <= monster.minHP())
@@ -2463,13 +2407,8 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		damage = Math.round(damage);
-		damage = doDamage(damage);
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
@@ -2510,7 +2449,8 @@ public class MagicSpecials extends BaseCombatContent {
 		//ew. bonusy do lust dmg tutaj
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
-		outputText("  <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
+		outputText(" ");
+		damage = doFireDamage(damage, true, true);
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		statScreenRefresh();
@@ -2571,13 +2511,8 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		damage = Math.round(damage);
-		damage = doDamage(damage);
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
@@ -2619,7 +2554,8 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
-		outputText("  <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
+		outputText(" ");
+		damage = doFireDamage(damage, true, true);
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		statScreenRefresh();
@@ -2687,14 +2623,9 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		if (player.headjewelryName == "fox hairpin") damage *= 1.2;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		damage = Math.round(damage);
-		damage = doDamage(damage);
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
@@ -2739,7 +2670,8 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
-		outputText("  <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
+		outputText(" ");
+		damage = doFireDamage(damage, true, true);
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		statScreenRefresh();
@@ -2801,13 +2733,8 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		damage = Math.round(damage);
-		damage = doDamage(damage);
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
@@ -2851,7 +2778,8 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
-		outputText("  <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
+		outputText(" ")
+		damage = doFireDamage(damage, true, true);
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		statScreenRefresh();
@@ -2918,13 +2846,8 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		damage = Math.round(damage);
-		damage = doDamage(damage);
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
@@ -2969,7 +2892,8 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
-		outputText("  <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
+		outputText(" ");
+		damage = doFireDamage(damage, true, true);
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		statScreenRefresh();
@@ -3137,6 +3061,95 @@ public class MagicSpecials extends BaseCombatContent {
 			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
+	
+	//Slime Bolt
+	public function SlimeBolt():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		useMana(50);
+		outputText("You wave a sign in the air, summoning a huge slime blob which you proceed to hurl at your opponent. " + monster.capitalA + monster.short + " is caught in the sticky blast, getting completely soaked in slime. ");
+		var lustDmgF:Number = 20 + rand(6);
+		var lustBoostToLustDmg:Number = 0;
+		var bimbo:Boolean   = false;
+		var bro:Boolean     = false;
+		var futa:Boolean    = false;
+		if (player.findPerk(PerkLib.SensualLover) >= 0) lustDmgF += 2;
+		if (player.findPerk(PerkLib.Seduction) >= 0) lustDmgF += 5;
+		if (player.findPerk(PerkLib.SluttySeduction) >= 0) lustDmgF += player.perkv1(PerkLib.SluttySeduction);
+		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) lustDmgF += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+		if (bimbo || bro || futa) lustDmgF += 5;
+		if (player.findPerk(PerkLib.FlawlessBody) >= 0) lustDmgF += 10;
+		lustDmgF += scalingBonusLibido() * 0.1;
+		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmgF *= 1.5;
+		if (player.findPerk(PerkLib.JobSeducer) >= 0) lustDmgF += player.teaseLevel * 3;
+		else lustDmgF += player.teaseLevel * 2;
+		if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) lustDmgF *= 1.2;
+		switch (player.coatType()) {
+			case Skin.FUR:
+				lustDmgF += (1 + player.newGamePlusMod());
+				break;
+			case Skin.SCALES:
+				lustDmgF += (2 * (1 + player.newGamePlusMod()));
+				break;
+			case Skin.CHITIN:
+				lustDmgF += (3 * (1 + player.newGamePlusMod()));
+				break;
+			case Skin.BARK:
+				lustDmgF += (4 * (1 + player.newGamePlusMod()));
+				break;
+		}
+		if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") lustDmgF *= (1 + ((10 + rand(11)) / 100));
+		if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) lustDmgF *= (1 + (player.lust100 * 0.01));
+		if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) lustDmgF *= (1 + combat.historyWhoreBonus());
+		lustBoostToLustDmg += lustDmgF * 0.01;
+		lustDmgF *= 0.2;
+		if (player.lust100 * 0.01 >= 0.9) lustDmgF += (lustBoostToLustDmg * 140);
+		else if (player.lust100 * 0.01 < 0.2) lustDmgF += (lustBoostToLustDmg * 140);
+		else lustDmgF += (lustBoostToLustDmg * 2 * (20 - (player.lust100 * 0.01)));
+		//Determine if critical tease!
+		var critL:Boolean = false;
+		var critChanceL:int = 5;
+		if (player.findPerk(PerkLib.CriticalPerformance) >= 0) {
+			if (player.lib <= 100) critChanceL += player.lib / 5;
+			if (player.lib > 100) critChanceL += 20;
+		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChanceL = 0;
+		if (rand(100) < critChanceL) {
+			critL = true;
+			lustDmgF *= 1.75;
+		}
+		if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
+		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) lustDmgF *= 1.5;
+		lustDmgF = lustDmgF * monster.lustVuln;
+		lustDmgF = Math.round(lustDmgF);
+		monster.teased(lustDmgF);
+		if (critL == true) outputText(" <b>Critical!</b>");
+		monster.spe -= 15;
+		if (monster.spe < 1) monster.spe = 1;
+		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+		var damage:Number = scalingBonusIntelligence() * spellMod() * 1.2;
+		if (damage < 10) damage = 10;
+		//Determine if critical hit!
+		var critP:Boolean = false;
+		var critChanceP:int = 5;
+		critChanceP += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChanceP = 0;
+		if (rand(100) < critChanceP) {
+			critP = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		outputText(" ");
+		damage = doMagicDamage(damage, true, true);
+		if (critP == true) outputText(" <b>*Critical Hit!*</b>");
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		outputText("\n\n");
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
 
 	//cursed riddle
 	public function CursedRiddle():void {
@@ -3180,8 +3193,7 @@ public class MagicSpecials extends BaseCombatContent {
 				damage *= 1.75;
 			}
 			damage = Math.round(damage);
-			damage = doDamage(damage);
-			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+			damage = doMagicDamage(damage, true, true);
 			//Lust damage dealth
 			if (monster.lustVuln > 0) {
 				outputText(" ");
@@ -3459,9 +3471,10 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += unarmedAttack();
 		damage *= spellMod();
 		damage = Math.round(damage);
+		outputText("You growl as you unsheath your claws, enhancing them with a dash of fire magic. You leap forward and viciously rend your opponent for " + damage + " physical and ");
 		damage = doDamage(damage);//phys dmg
-		damage = doDamage(damage);//fire dmg
-		outputText("You growl as you unsheath your claws, enhancing them with a dash of fire magic. You leap forward and viciously rend your opponent for " + damage + " physical and " + damage + " fire damage. Reeling in pain " + monster.a + monster.short + " begins to bleed and burn at the same time.");
+		damage = doFireDamage(damage, true, true);
+		outputText(" fire damage. Reeling in pain " + monster.a + monster.short + " begins to bleed and burn at the same time.");
 		monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05, 0, 0);
 		monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
 		outputText("\n\n");

@@ -491,11 +491,15 @@ public class PlayerInfo extends BaseContent {
 		var interpersonStats:String = "";
 			
 		if (flags[kFLAGS.AIKO_TIMES_MET] > 0) {
-			interpersonStats  += "<b>Aiko Affection</b>: "+flags[kFLAGS.AIKO_AFFECTION]+"\n";
+			interpersonStats  += "<b>Aiko Affection:</b> "+flags[kFLAGS.AIKO_AFFECTION]+"\n";
 			if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0)
-				interpersonStats  += "<b>Aiko Corruption</b>: "+flags[kFLAGS.AIKO_CORRUPTION]+"\n";
+				interpersonStats  += "<b>Aiko Corruption:</b> "+flags[kFLAGS.AIKO_CORRUPTION]+"\n";
 		}
-		
+
+		if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) {
+			interpersonStats  += "<b>Alvina's Relationship Level:</b> " + (flags[kFLAGS.ALVINA_FOLLOWER] >= 20 ? "Lover" : "Follower") + "\n";
+		}
+
 		if (SceneLib.anzu.anzuRelationshipLevel() > 0) {
 			interpersonStats += "<b>Anzu's Affection:</b> " + flags[kFLAGS.ANZU_AFFECTION] + "%\n";
 			interpersonStats += "<b>Anzu's Relationship Level:</b> " + (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 1 ? "Acquaintances" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 2 ? "Friend" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 3 ? "Close Friend" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 4 ? "Lover" : "Undefined") + "\n";
@@ -615,7 +619,7 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.EMBER_LVL_UP] == 2) interpersonStats += "<b>Ember lvl:</b> 32\n";
 			if (flags[kFLAGS.EMBER_LVL_UP] == 1) interpersonStats += "<b>Ember lvl:</b> 26\n";
 			if (flags[kFLAGS.EMBER_LVL_UP] < 1) interpersonStats += "<b>Ember lvl:</b> 20\n";
-		}
+		}/*
 
 		if (flags[kFLAGS.GALIA_LVL_UP] > 0.5) {
 			interpersonStats += "<b>Galia Affection:</b> " + Math.round(flags[kFLAGS.GALIA_AFFECTION]) + "%\n";
@@ -624,7 +628,7 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.GALIA_LVL_UP] == 3) interpersonStats += "<b>Galia lvl:</b> 13\n";
 			if (flags[kFLAGS.GALIA_LVL_UP] == 2) interpersonStats += "<b>Galia lvl:</b> 7\n";
 			if (flags[kFLAGS.GALIA_LVL_UP] == 1) interpersonStats += "<b>Galia lvl:</b> 1\n";
-		}
+		}*/
 
 		if (SceneLib.helFollower.helAffection() > 0)
             interpersonStats += "<b>Helia Affection:</b> " + Math.round(SceneLib.helFollower.helAffection()) + "%\n";

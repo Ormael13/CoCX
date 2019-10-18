@@ -5,6 +5,7 @@
 package classes.Scenes.NPCs 
 {
 import classes.*;
+import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Useable;
 import classes.display.SpriteDb;
@@ -46,10 +47,6 @@ public function alvinaSecondEncounter():void
 	outputText("\"<i>There is a demon lair located somewhere in the deep woods ran by a greater imp who apparently lost the demon queen’s favor. Perhaps you could coax him into divulging the information you seek. Oh, and you should know my name is Alvina. It’s a pleasure to formally meet you.</i>\"\n\n");
 	outputText("On those words, she picks up her book and adjusts her glasses, as she resumes reading. You could talk to her and perhaps get some information from her about the place, she seems very knowledgeable.\n\n");
 	flags[kFLAGS.ALVINA_FOLLOWER] = 9;
-	alvinaSecondEncounterLeave();
-}
-public function alvinaSecondEncounterLeave():void
-{
 	menu();
 	addButton(0, "Talk", alvinaSecondEncounterTalk);
 	addButton(4, "Leave", camp.returnToCampUseOneHour);
@@ -90,7 +87,7 @@ public function alvinaSecondBonusEncounter():void
 	outputText("\"<i>Is that so? Even then, what keeps you on Mareth still? Shouldn’t you have gone back to your homeland already? Perhaps it is something else that you seek. Regardless, if purging Mareth of the remaining corruption is your goal, you should go to the blight ridge. The area is dangerous and filled with demons, but surely the bane of Lethice should be able to get by without any issues?</i>\"\n\n");
 	outputText("She chuckles as a gust of wind throws dust at you, causing you to shield your eyes. The moment you look back at her, she is gone.\n\n");
 	flags[kFLAGS.ALVINA_FOLLOWER] = 10;
-	alvinaSecondEncounterLeave();
+	doNext(camp.returnToCampUseOneHour);
 }
 
 public function alvinaThirdEncounter():void
@@ -190,11 +187,15 @@ public function alvinaMainCampMenu():void
 	menu();
 	addButton(0, "Appearance", alvinaMainCampMenuAppearance).hint("Examine Alvina detailed appearance.");
 	if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 4 && flags[kFLAGS.ALVINA_FOLLOWER] >= 16) {
-		if (flags[kFLAGS.ALVINA_FOLLOWER] >= 19) addButtonDisabled(2, "Sex", "Still WIP section.");//alvinaMainCampSexMenu
+		if (flags[kFLAGS.ALVINA_FOLLOWER] >= 19) addButton(2, "Sex", alvinaMainCampSexMenu);
 		if (flags[kFLAGS.ALVINA_FOLLOWER] == 16 || flags[kFLAGS.ALVINA_FOLLOWER] == 18) addButton(2, "Confession", alvinaMainCampMenuConfession).hint("If you not know what it mean then... whatever I lost faith in your player intelligance.");
 	}
 	else addButtonDisabled(2, "???", "Need to finish Advanced Study to unlock this option.");
-	if (flags[kFLAGS.ALVINA_FOLLOWER] >= 19) addButtonDisabled(4, "Team", "Still WIP section.");
+	if (player.hasPerk(PerkLib.BasicLeadership) && flags[kFLAGS.ALVINA_FOLLOWER] >= 19) {
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(4, "Team", alvinaHenchmanOption).hint("Ask Alvina to join you in adventures outside camp.");
+		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") addButton(4, "Team", alvinaHenchmanOption).hint("Ask Alvina to stay in camp.");
+		else addButtonDisabled(4, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Alvina about accompaning you.");
+	}
 	if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) addButtonDisabled(10, "Study", "You already completed basic Study.");
 	else addButton(10, "Study", alvinaCampStudy);
 	if (player.hasStatusEffect(StatusEffects.AlvinaTraining) && player.statusEffectv1(StatusEffects.AlvinaTraining2) < 2) addButton(11, "Advanced Study", alvinaCampAdvancedStudy);
@@ -207,7 +208,8 @@ public function alvinaMainCampMenu():void
 		}
 		if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 4) addButtonDisabled(11, "Advanced Study", "You already completed Advanced Study.");
 	}
-	addButton(14, "Back", camp.campFollowers);
+	if (flags[kFLAGS.ALVINA_FOLLOWER] >= 20) addButton(14, "Back", camp.campLoversMenu);
+	else addButton(14, "Back", camp.campFollowers);
 }
 
 public function alvinaMainCampMenuAppearance():void
@@ -237,16 +239,26 @@ public function alvinaMainCampMenuConfession():void
 		outputText("You present the flower to Alvina who blushes in surprise. Delicately taking the flower from your hand, she places it in a glass display case.\n\n");
 		outputText("\"<i>I wasn’t sure you would come back alive and with the rose no less, but you did fulfill your end of the bargain and I will fulfill mine. I haven’t had proper sex in a century, so fine, I will give you a try, let’s see what you're made off.</i>\"\n\n");
 		flags[kFLAGS.ALVINA_FOLLOWER] = 19;
-		/*if (player.lib > 50) {
-			outputText("Alvina is perfectly aware that you are analysing her but, as usual, is more concerned about whatever lecture she is on then about you sizing her up.\n\n");
-			outputText("\"<i>Well then, when you are done sizing my body up, maybe you can tell me what you are here for?</i>\"\n\n");
+		if (player.lib > 50) {
+			outputText("You smile perversely and offer to do it right here and right now on your "+(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "bed" : "bedroll")+".\n\n");
+			outputText("\"<i>Bah! That bed is for amateurs, I recall teaching you bigger than that. Watch this!</i>\"\n\n");
+			outputText("She chants an arcane line and a closed door appears out of the ether, seemingly standing on nothing. You ask her what she’s up to when she opens the door. Beyond the cadre, you see what looks like a magnificent bedroom with a large bed fit for an empress and decorated with translucent purple drapes. ");
+			outputText("There are various decorations all the more arousing, as well as a cupboard filled with various toys. More than hyped up, you pick up Alvina’s hand and guide her to the bed.\n\n");
+			outputText("\"<i>");
+			//outputText("(If married with Alvina) It’s been so long since last we consummated our love. I’m quite glad you asked, as you know(End of cut) ");
+			outputText("I can spice things up for you, depending on your tastes, by summoning a malefice, so what will it be?</i>\"\n\n");
+			outputText("Alvina licks her lips in anticipation, for once interested in something else than her scholarly researches.");
+			//outputText(" (If married) Not that you mind. Since the wedding, Alvina has been doing less research on how to bend the universe and more on how for the both of you to have the best mind-blowing sex, an initiative you greatly appreciate.(end of cut)");
+			outputText("\n\n");
+			flags[kFLAGS.ALVINA_FOLLOWER] = 20;
+			alvinaMainCampSexMenu2();
 		}
-		else {*/
+		else {
 			outputText("It's barely been an hour and Alvina has already become quite bored. She shakes her head negatively and removes herself from you.\n\n");
-			outputText("\"<i>You lack both originality and talent even for a demon, where’s your libido?! I’m quite disappointed, so nah, I don’t think you're worth my while on this field. Now if you would excuse me I have my stuff to pack up.</i>\"\n\n");
+			outputText("\"<i>You lack both originality and talent even for a demon. Just where’s your libido?! I’m quite disappointed, so nah, I don’t think you're worth my while on this field. Now if you would excuse me I have my stuff to pack up.</i>\"\n\n");
 			doNext(camp.campFollowers);
-			cheatTime2(5);
-		//}
+			cheatTime2(45);
+		}
 	}
 	if (flags[kFLAGS.ALVINA_FOLLOWER] == 16) {
 		outputText("You find Alvina somewhat busy packing up her gear. You're surprised she’s leaving this early.\n\n");
@@ -267,7 +279,263 @@ public function alvinaMainCampMenuConfession():void
 }
 public function alvinaMainCampSexMenu():void
 {
-	
+	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+	clearOutput();
+	if (flags[kFLAGS.ALVINA_FOLLOWER] > 19) {
+		outputText("Not sure if lia wanted some short text before picking sex scenes so well here it's for now unless it will get removed or replaced with proper paragraph.\n\n");
+	}
+	else {
+		outputText("You tell Alvina you improved on your bed skills and offer her to try you up again.\n\n");
+		outputText("\"<i>Ugh if you werent my pupil I wouldn't even consider the idea. Fine then, lets see if you make for a decent lover now.</i>\"\n\n");
+		if (player.lib > 50) {
+			outputText("You smile perversely and offer to do it right here and right now on your "+(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "bed" : "bedroll")+".\n\n");
+			outputText("\"<i>Bah! That bed is for amateurs, I recall teaching you bigger than that. Watch this!</i>\"\n\n");
+			outputText("She chants an arcane line and a closed door appears out of the ether, seemingly standing on nothing. You ask her what she’s up to when she opens the door. Beyond the cadre, you see what looks like a magnificent bedroom with a large bed fit for an empress and decorated with translucent purple drapes. ");
+			outputText("There are various decorations all the more arousing, as well as a cupboard filled with various toys. More than hyped up, you pick up Alvina’s hand and guide her to the bed.\n\n");
+			outputText("\"<i>");
+			//outputText("(If married with Alvina) It’s been so long since last we consummated our love. I’m quite glad you asked, as you know(End of cut) ");
+			outputText("I can spice things up for you, depending on your tastes, by summoning a malefice, so what will it be?</i>\"\n\n");
+			outputText("Alvina licks her lips in anticipation, for once interested in something else than her scholarly researches.");
+			//outputText(" (If married) Not that you mind. Since the wedding, Alvina has been doing less research on how to bend the universe and more on how for the both of you to have the best mind-blowing sex, an initiative you greatly appreciate.(end of cut)");
+			outputText("\n\n");
+			alvinaMainCampSexMenu2();
+		}
+		else {
+			outputText("It's barely been an hour and Alvina has already become quite bored. She shakes her head negatively and removes herself from you.\n\n");
+			outputText("\"<i>You lack both originality and talent even for a demon. Just where’s your libido?! I’m quite disappointed, so nah, I don’t think you're worth my while on this field. Now if you would excuse me I have my stuff to pack up.</i>\"\n\n");
+			doNext(camp.campFollowers);
+			cheatTime2(45);
+		}
+	}
+}
+public function alvinaMainCampSexMenu2():void
+{
+	menu();
+	if (player.hasCock()) addButton(0, "Pride of Lucifer", alvinaMainCampSexMenuPrideOfLucifer);
+	else addButtonDisabled(0, "Pride of Lucifer", "Need to be Male or Herm for this.");
+	addButtonDisabled(1, "Greed of Mammon", "Still unwritten.");
+	if (player.hasVagina()) addButton(2, "Blaspheme of Baphomet", alvinaMainCampSexMenuBlasphemeOfBaphomet);
+	else addButtonDisabled(2, "Blaspheme of Baphomet", "Need to have pussy for this.");
+	if (player.hasVagina()) addButton(3, "Contract of Mephistopheles", alvinaMainCampSexMenuContractOfMephistopheles);
+	else addButtonDisabled(3, "Contract of Mephistopheles", "Need to have pussy for this.");
+	if (player.hasVagina()) addButton(4, "Gluttony of Beelzebub", alvinaMainCampSexMenuGluttonyOfBeelzebub).hint("Warning this one is weird");
+	else addButtonDisabled(4, "Gluttony of Beelzebub", "Not yet coded.");
+	addButton(14, "Back", alvinaMainCampMenu);
+}
+public function alvinaMainCampSexMenuPrideOfLucifer():void
+{
+	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+	clearOutput();
+	//outputText("(If Married) You suggest Alvina takes charge this time around and she replies to you with a smug grin. (end of cut) ");
+	outputText("You grab the girl by the shoulder and pull her to you for a kiss, Alvina replies in the same way. For someone with such a small looking body, Alvina is way more experienced than she looks. You wrestle for several minutes trying to catch each other’s tongue, but it doesn't end there as Alvina suddenly casts a spell.\n\n");
+	outputText("Her form suddenly changes as shadows cover her small frame. She gets taller, up to 6 feet, her breast swelling up as her firm backside fills into a shape closer to that of a standard succubus. Her twilight black hair grows as well, reaching ass length. Finally, her wings also get slightly larger now, stretching wide enough to encompass both sides of the bed. ");
+	outputText("Gods above, the perfect hourglass shape, sensual mouth with those perfect cock pillows, juicy pussy dripping with excitement, and generous bosom of your infernal princess look like they were made to tempt and corrupt the hearts of men. She sashays to you, winking playfully at your reaction.\n\n");
+	//outputText("\"<i>I know you love this form a lot, so today...</i>\"");(if married) 
+	outputText("\"<i>You thought I couldn't change my shape to that of a proper succubus? Think again, because I’m going to show you all the delightful things this perfect temptress body can do.</i>\"");
+	if (player.tallness > 48) outputText(" pressing her immaculate form against you, your mind fully enveloped by the rush of elation from her erect teets boring into your chest, her soft cheek pressing against yours as those plush lips whisper a tantalizing promise ");
+	else outputText(" pressing her immaculate form against you, your head fully enveloped by those plump mounds, intoxicating sweet fragrance mingling with her natural titillating musk and light coat of alluring spice. Her form envelops yours, her chin pressed atop of your cranium, she curls down so her lips rest against the tip of your ear, warm breath cascading over the sensitive skin, ");
+	outputText("\"<i>I’m going to ravish you with it.</i>\"\n\n");
+	outputText("You barely have the time to register her sentence as her bestial paw hands slowly but firmly push you down on the bed, but your primal instincts are stirred, Alvina leering as her prize stands at full mast beneath her. Your [cocks] draws her attentions, paw gliding against the base and teasing along the veins towards the tip. ");
+	outputText("A claw pokes at the entrance of your urethra, threatening to penetrate the cum-tunnel. She pulls her paw away moments later, grinning down eagerly as she advances along your enthralled form. ");
+	if (player.cockTotal() == 2) {
+		outputText("Alvina leers at her pair of prizes, each one throbbing eagerly, desperate to steal her attentions away from the other. \"<i>Only two, [name]? Just enough to satisfy me, but nowhere close to impressing me.</i>\" She leans down, wrapping an arm around the stiff pair, she holds them flush against her bosom. Leering at the thick meat rods as the wolf does to the ");
+		outputText("prized calf, fattened and ripe. Languidly dragging her dexterous tongue along the tip, the devil queen purrs in delight. \"<i>But I suppose you deserve a reward for paltry display.</i>\" Releasing your members from her grasp, she crawls over your enthralled form, tormenting the tips with her infernal skin as she moves past.");
+	}
+	if (player.cockTotal() == 3) {
+		outputText("Alvina smirks at the distended set, playing a claw along each head, rocking her head back and forth. \"<i>What have you been indulging in, [name]? Very few denizens of this insignificant plane can even hope to take this many fat cocks into their wanting holes. Or were you just trying to impress me? Have you been practicing with a few of the beasts you’ve ");
+		outputText("decided are worthy, reveling in their hapless cries?.</i>\" She leans in, planting a deep kiss on each of the heads, \"<i>It is...cute to see your attempts to leave me in awe, [name]. Maybe a few more and you may just make my black heart beat.</i>\" Surging forwards, you find yourself face to face with Alvina, her paws pinning your down, eyes boring into your own. ");
+		outputText("She leans in, pressing her cheek against yours as whispers into your ear, \"<i>But until then, I will take great pleasure in wringing the rapture from your bones until you are nothing but a writhing heap beneath me.</i>\"");
+	}
+	if (player.cockTotal() == 4) {
+		outputText("A light chuckle escapes those plush lips as she teases the quartet of bitch-breakers at her mercy. \"<i>Mmm, look at you, [name]. Come prepared with enough equipment to fill my holes. Such a sweet "+player.mf("boy","girl")+". I’ll be sure to show you just how much I appreciate your gifts.</i>\" She leans in, planting a deep, sensual kiss along the base of your ");
+		outputText("[cock largest], moaning at the delicious flavor of your meat. Languidly licking her way from base to tip, she flows over your group of distended shafts, being sure to tease the tips with a fleeting caress as she advances upon your form.");
+	}
+	if (player.cockTotal() >= 4) {
+		outputText("Alvina licks her lips as she glares down at the forest of meat, looking ready to pounce and devour each meat rod in a moment. Her hot breath washes over the sensitive tips, making them throb with a desire for touch. \"<i>My my my...how ever will I choose which of these cocks to wring dry first? They all looks so delicious, so <i>full</i>! I simply can’t decide which ");
+		outputText("I want to devour first.</i>\" The heavy tone of desire carried her voice is shared by her visage; a twisted, voracious smile on her lips, extensive tongue rolling against those plush lips. \"<i>I must congratulate you, [name]. You have finally managed to impress me! Such a depraved individual, hosting such a delectable forest of meat...</i>\" ");
+		outputText("she pulls the mass of throbbing mounds flush against her luscious pillows, brushing her lips against the tips and playfully teasing the engorged heads, \"<i>and all of it for me~. Mmm~.</i>\" A veteran huntress, eyes wild, frenzied, burning alight as the scent of her prey, of fear, of you, fills her nostrils.");
+	}
+	outputText("\n\n");
+	outputText("Those fiendish eyes, infernal irises encompassing slitted pupils are firmly locked onto your own [eyes]. And in that moment, every ounce of want, need, desire, longing, hunger, every wild surge, primal instincts claiming precedence; every fibre of your being tormented by raging lust. In a moment, every ounce of passion Alvina is afflicted by is transferred through a single look.\n\n");
+	outputText("Before you can blink, she is already on top of you. Her claws digging into your arms, restraining you. A massive grin, teeth bared, displaying the rows of perfect, shining white fangs ready to sink themselves deep into your flesh. The devil sorceress leans down, your faces nearly touching, your vision taken by those feral orbs. You feel a faint pressure against your lips, ");
+	outputText("the fleeting taste of her left on your lips. She seamlessly drifts across your body, tormenting your skin with such expertise even the most salacious demons would be astonished. Every flick, caress, pinch and stroke perfect; each enthralling touch mesmerizing; your body gladly submitting to your dark mistress above, falling into each skilled brush of her skin against yours.\n\n");
+	outputText("You feel her fur sliding sensually on your legs as she climbs up into position, wrapping her immaculate E cup breasts around your [cock]. Pressing your tool against her chest, holding it snuggling between her two massive globes, she coats your trapped member in her infernal saliva. Her hellish saliva cascades down your member, the liquid intensifying every sensation felt tenfold. ");
+	outputText("Relishing in that look of helplessness on your face for a few moments longer, she finally leans down and starts to lick your tip. You moan as a blinding ray of colors explodes across your vision as she plays with your [cockhead], and you arc into her motions as your body now demands more. She only ever stopping so you can catch your breath, toying with your twitching form. Her tongue ");
+	outputText("is just as dexterous as her hand, gently prodding your urethra while tracing your veins making you shiver in agonizing pleasure, thrusting you to the brink of consciousness only to rip you back; unrelenting excruciating ecstasy coursing through every vein. She could get you off within seconds if she wanted but instead, she delays the orgasm with just the right pace to keep you hanging.\n\n");
+	outputText("\"<i>I could make you cum like a virgin if I wanted");
+	//outputText("(if pc is virgin) and hell you are one, I can taste it(end of cut)");
+	outputText(". Honestly though, I want to lengthen the torments of your penis longer then that so that you’re mewling in my arms, just as you should be.</i>\"\n\n");
+	outputText("As if to prove her point, she begins shifting her flawless bust along your cock.  Agonizing pleasure flows through your form, plush breasts pressing against every vein and igniting every neuron as she moves. Her succubus mouth teases you for a few more minutes, her delectable tits on full display, begging for your touch. ");
+	outputText("You manage to grab hold of her unrivaled tits with shaky hands. Groping the cushiony flesh of her breast, you coax a delighted sigh from Alvina as you help her titfuck your cock until your burst. But just as you are about to blow, she retires just in time to deny your release.\n\n");
+	outputText("\"<i>You are being very selfish, lover. what about ‘my’ pleasure?</i>\"\n\n");
+	outputText("Your frustration doesn't last long as she approaches with the true prize, her slavering pussy, towards your throbbing cock on the verge of orgasm. Expertly wrapping her wonderful vagina around your [cock] she slides down your tool, her impeccable pussy throttling your meat, wrenching you from hitting your peak of pleasure, easily keeping the orgasm at bay. ");
+	outputText("She points at your crotch with her clawed hand, a small jolt of magic striking at your penis. You only understand what she’s done a second later as she smirks.\n\n");
+	outputText("\"<i>It would be a shame if we didn’t cum together, right? Your delicious cock won’t erupt before I reach an orgasm myself and trust me, I’m very hard to satisfy.</i>\"\n\n");
+	outputText("Your pleasure starts peaking again as she begins to slide on your length in earnest, her pussy walls massaging your length with an expertise worth of a hundred years of sexual training! But to your complete dismay, no matter how much pleasure you get, no matter how tightly her pussy clamps down on your tool or how quickly she bounces atop your form you just can’t cum. ");
+	outputText("Her expert pussy torments your cock like a master torturer, pleasing you beyond the threshold, way above human tolerance! So measured are her movements, so precise her motions that not even a drop of precum escapes your member; her torturous movements racking your afflicted form with agonizing pleasure.\n\n");
+	outputText("Your eyes roll as you begin drooling like a beast, your mind a chaotic haze teetering on the brink of madness, the only clear demand amidst the disarray is to achieve gratification. To cum. Entirely focused on your pleasure addled cock, screaming for release as your hips betray you, your desperation finally reaching its pinnacle. Your body hopelessly pumps into her sex, ");
+	outputText("faster and harder than ever before! But, no matter how hard you fight to reach your peak, you remain ever hopeless in the wake of her torments, never achieving the sweet orgasm they so crave.\n\n");
+	outputText("Your balls churn with more and more cum, ripening to Alvina’s taste. She finally reaches her long-awaited peak, screaming your name as your tortured cock explodes in a torrent of cum. Every inch of your cock"+(player.cockTotal() > 1 ? "s" : "")+" burns alight with a galvanizing myriad of ecstasies, ");
+	outputText("Alvina’s womb quickly overflowing from the relentless torrent of cum that streams from your cock"+(player.cockTotal() > 1 ? "s" : "")+" is unable to contain the excess, pulling away from you,  leaving you and the bed to be showered in your spooge. Alvina, however, is not done as she grabs your still erupting cock.\n\n");
+	outputText("\"<i>Mmmmmm... time for my treat. This looks just about ripe.</i>\"\n\n");
+	outputText("She licks her lips in delight and to make sure not to lose a drop, as she starts to suck on your drooling penis, drinking the cum as it comes out and prolonging your orgasm. You faint against her as the rush of pleasure overloads your brain, your cock still twitching in her grasp.\n\n");
+	alvinaMainCampSexMenu3();
+}
+public function alvinaMainCampSexMenuGreedOfMammon():void
+{
+	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+	clearOutput();
+	outputText("You find Alvina somewhat busy packing up her gear. You're surprised she’s leaving this early.\n\n");
+	outputText("\"<i>There's no point in me staying here, you successfully learned all I know and did all I asked. I have no further need or interest for you.</i>\"\n\n");
+	alvinaMainCampSexMenu3();
+}
+public function alvinaMainCampSexMenuBlasphemeOfBaphomet():void
+{
+	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+	clearOutput();
+	outputText("You grab the devil girl by the shoulders, pulling her into a deep kiss. Alvina all too eager to reciprocate. Your tongues dance for a few minutes, the infernal venom coating her orifice igniting your passions, your hands exploring her form greedily but this is not enough. ");
+	outputText("You really could use a fucking right now and ask your twilight princess if she has any sex toys in reserve for that.\n\n");
+	outputText("\"<i>Oh, a toy won’t be necessary. I can arrange that just fine, it has been some time since last used this spell anyway.</i>\"\n\n");
+	outputText("Alvina slowly pulls you down on the bed sitting on your lap and exposing her lovely pussy to your face. It drools a few drops of corrupt femjuice over your chest, the accursed substance making your skin tingle with delight.\n\n");
+	outputText("\"<i>To awaken this magic");
+	//outputText("(if married), as you know already(end of cut)");
+	outputText(", I need to be more aroused than this. So if you would please show me your talents…</i>\"\n\n");
+	outputText("She doesn’t have to tell you twice, diving head first towards her infernal cunt, you begin to lick her lunchbox, tasting the juices of your girl-fiend, delivering the pleasure she desires. Indulging in more of her infernal juices has stirred something deep within, now an unquenchable desire for her pleasure plagues your mind, clouding your thoughts in a thick haze of lust. ");
+	outputText("You ravenously attack her cunt, your tongue darting around near sporadically as you try to hit every sensitive spot to bring the naughty devil to orgasm. Her girl juice ignites fires along your tongue, pleasure courses through your form.");
+	if (player.tongue.type == Tongue.DEMONIC) outputText(" That said, your demon tongue is perfectly capable of bringing the both of you to orgasm and you ravenously play with her cunt using your unique appendage, easily able to stimulate every sensitive area, your prowess aptly exemplified. From above,  you can hear Alvina gasp in delight.");
+	outputText("\n\n\"<i>OHHhhh yes [name] keep it up I feel the magic building…!”</i>\"\n\n");
+	outputText("Her pussy gushes with juices, coating your gluttonous maw in her infernal ichor.  To your surprise, her clit begins to pulse as it engorges and grows, flecks of violet demonic energy dances across the engorged flesh. Her enlarging clit notably becomes...sweeter, juicier. Your continued attention enriching the sudden growth, and enthralling you. The unholy, addicting taste ");
+	outputText("of her growing appendage pulls your mind away, stealing your will and conforming it to her own demands for pleasure. Growing longer and thicker, her clit occasionally pulses with energy until it turns into something that might as well be a cock. The 15.6 inches long beast of demonic flesh rests happily between her pussy lips, as if jutting out of a sheath, the tip flared ");
+	outputText("like that of a horse.\n\nAn intoxicating smell rises from Alvina’s newly grown equine cock, a dollop of pre-cum emerging from the slit. You can’t help but lurch forwards, gripping her new tool between your hands and pulling it to your mouth, vehemently devouring her meaty crown, savoring the flavor of the corrupting fluid. Hells under, her clitcock tastes so good! You need ");
+	outputText("this cock! You need this luscious tool to satiate you! You need that cream! Every single drop must be yours!\n\n");
+	outputText("Alvina looks down at your form, barely reacting to your worship. Her only sign of acknowledgment, the passive stare in her eyes as she looks at you knowingly.\n\n");
+	outputText("\"<i>Can’t resist, right? I bet that's the best cock you’ve ever seen up close, let alone tasted. As with any greater demon, my endowments are charged full of corruption and will drive even the most pious of man insane with desire. Anyone who even dares to stare too long may find themselves enthralled. And while your worship is quite pleasant…!</i>\"\n\n");
+	outputText("A clawed hand comes down, latching onto your skull and squeezing down. Searing pain rips through your skull, Alvina’s astounding strength made known in an instant, stalling your ministrations. Her monstrous tool still partially lodged in your maw, its essence still dripping onto your tongue, blessing your taste buds with its addictive juice. ");
+	outputText("\"<i>Your worship is pathetic, champion. Here, allow me.</i>\"\n\nYou cannot fight her wishes, your mind enthralled by her precum, ");
+	outputText("head held in her grip, her cock lodged inside your mouth, and Alvina herself clearly craving more pleasure. Panic wells in your eyes as they widen, Alvina now forcing more of her pseudo-member into your mouth. It’s much thicker than you had first realized, only now as your jaw is forced to accommodate her girth do you understand that fact.\n\n");
+	outputText("Peering through her claws, you note your devil-girl’s visage to be one of pure rapture. Eyes fluttering rapidly, bottom lip bit barely holding back her moans, Alvina finally seems to be enjoying your ministrations. It is then that she peers down at you, those fiendish irises locking onto your own. A shift in her countenance, no longer one of bliss but domination. ");
+	outputText("A massive grin now on her face, her rows of fangs now visible to the world as she relishes in the growing apprehension suffusing your form.\n\n");
+	outputText("A sudden jerk of your cranium is all the warning you receive before that behemoth is shoved against the entrance of your throat. Alvina shivers, her body racked by pleasure before pulling back slightly, readying herself to conquer your throat. Knowing her exact intentions, you place a "+(player.haveNaturalClaws() ? "claw":"hand")+" against her knee, ");
+	outputText("begging her to stop or at the very least take you slowly. Yet this only seems to invigorate your partner, her eyes glowing with malicious glee as her grin widens.\n\n");
+	outputText("She slams herself forwards, taking your throat in a single thrust. You sputter and gag, choking on the sudden protrusion buried deep within your gullet, while Alvina arcs into your form, pressing your head into her crotch as she lets out a cry of ecstasy. Her cries for more are the only thing you can even remotely register. Foregoing any cautionary thoughts, you force down ");
+	outputText("more and more of her captivating flesh, now graciously deep throating her beguiling member all of your own will. Alvina joins your motions, now moving her hips, thrusting more of that mind-blowing meat down your gullet until her entire length is coated in a thin sheen of saliva. She abruptly pulls her cock away, depositing a few delicious drops of corrupt precum in your mouth.\n\n");
+	outputText("She taunts you with her bewitching cock, only allowing you a minute to sample what you crave, what you desire and what you need. A piteous cry of longing flies from your battered throat as you attempt to pounce at your mistress, driven by your insatiable thirst for her seed. A sudden spark flares in Alvina’s eyes as her lip curls in loathing at your actions.\n\n");
+	outputText("Tendrils of malicious arcane seep from her fingertips; shadowy flames running through her veins, her infernal blood running black as her claw slams onto your head. Her disdain in light of your actions now made known, her incredible strength bearing down upon your skull, threatening to shatter your frail cranium.  Forcing you to look into her eyes, her seething glare piercing ");
+	outputText("through your petrified peer.\n\n\"<i>You overstep your bounds, you worthless "+player.mf("bastard","cunt")+". I blessed you with my cock, allowed you to slather my tool in your detestable juices, and the moment I remove myself for a reprieve from your paltry administrations, you dare attempt to overpower me? Such a boorish excuse of a pet you are, champion. No control, ");
+	outputText("no restraint, no respect.</i>\"\n\nShe squeezes down on your skull for but a moment, sending a jolt of excruciating pain through your head, forcing a yelp of anguish from your lips.\n\n");
+	outputText("\"<i>Seeing as you are so adamant on worshipping my glorious member, I will grace you with every single inch of your desire.</i>\" Her voice low, the malicious undertone heralding a callous reply.\n\n");
+	outputText("Her moist meat rod breaks through your lips once more, her grip tightens, ripping you forwards. Her cock slides down your throat with ease, your head slamming into her crotch in a single thrust, her monstrous strength coercing your lips into an intimate relationship with the thick base of her shaft. ");
+	outputText("\"<i>There, champion. All the cock you could ever want.</i>\"\n\n");
+	outputText("While this "+(player.hasPerk(PerkLib.Masochist) ? "":", minus the pain")+", is exactly what you want, there is a glaring issue with this scenario: air.\n\n");
+	outputText("Alvina’s cock now holds absolute dominion over your airways, and you can already feel your lungs burning up, begging for fresh air. You tap your demonic partner’s thighs, yet she still keeps you pressed against her groin.\n\n\"<i>What’s the matter, champion? ");
+	outputText("Isn’t this what you wanted? Your throat is now utterly filled with my cock! Isn’t it wonderful? Oh? You want me to pull out again? Because of what? Fresh air? How could I ever be so cruel as to leave my champion without its favorite meal. Certainly not before you make me cum? If you want your precious air to fill your lungs, my cock cream fills your throat first.</i>\"\n\n");
+	outputText("With an unrelenting grip, Alvina forces your head flush against her crotch, refuting any of your attempts to pull away. Luckily, judging from the constant throbbing of her shaft, you can tell she’s nearing her climax. All your previous efforts to worship her magnificent tool affording you a modicum of hope, however minor it may be. The frequency of her cock pulses ");
+	outputText("thankfully relays that she’s at least halfway there! You’ve got a chance at getting her off before running out of air!\n\n");
+	outputText("Your tongue remains crushed under her massive cock rammed down your throat. Her scorching rod incinerates your tongue’s surface, tears streaming down your face due to the pain of being forced to suffer such excruciating heat. And yet, the lust that burns through your veins and clouds your mind in a dense fog ignite your passions, masochistic pleasure taking command of your actions. ");
+	outputText("It hurts, but it hurts oh so well! You want more of this unbearable heat, more of this ravenous flame, more of this overbearing inferno!\n\n");
+	outputText("Enthralled by your lust, enslaved by your needs you waste no time. Tongue crushed under her thick tool, lips mashed against her base, your ministrations are heavily impeded. Alvina’s haughty glare never shifts. You try to pull some sort of visible pleasure from the demoness, dragging the tip of your [tongue] along the base of her cock, outlining the pulsing veins that are within ");
+	outputText("your reach, manage to choke out meek moans, sending out pleasing shocks along her demonic tool. Her distended member lodged deep in your throat, nearly defiling the inner sanctum of your stomach with its foul presence, dribbles a sparse sample of unholy blessing.\n\n");
+	outputText("Alvina moans as the drop of cum slides down your tight throat. The burning drop running down your esophagus adding to the lustful pyre ignited by her musk, her sweet juices, and her utter dominance of your form. It’s so wrong to love it, to love this blatant abuse, her claws squeezing your head painfully as she watches you choke on her cock. But every moment you spend suffocating ");
+	outputText("on that beast of a tool, every meager drop of cum given for your work, every scorching sensation that torments your tongue as you please your rightful mistress compels you further along your journey into depravity. What toll is too great to pay for such blasphemous ecstasies?\n\n");
+	outputText("Tears stream down your face as your body screams for air. Alvina’s grip on your head tightens as she begins to drizzle that sweet, corrupting ichor down your throat. The sensations of such delectable cream going down your throat while your consciousness slowly fades away with each labored breath are exhilarating! ");
+	outputText("You keep moaning meekly, sending shocks of pleasure through your mistress’ delicious cock, being rewarded with a steady stream of cum.\n\n");
+	outputText("Alvina is getting close! Mistress will feed you her cum! Just a bit more an-\n\n");
+	outputText("Alvina abruptly pulls her cock out of your throat, causing you to fall forwards sputtering and hacking, desperately sucking in as much air as possible. Eyes still on her bitch-breaker, its payload steadily leaking out of her cumslit. You make to crawl forwards, desperate to devour the dribbling stream going to waste. Yet the ominous glare Alvina fixes you with halts you in your tracks.\n\n");
+	if (player.biggestTitSize() >= 2) outputText("She gropes your lovely [breasts] teasing your nipples as she gets into position, using your globes for handles. ");
+	outputText("Alvina begins to part your pussy lips with her flared tip, smearing corrupted pre around your entrance which tingle and puff up right away in delight at the liquid corruption. You moan deliriously, pleading her to go in and fill you full of her demonic horseflesh. Alvina smirks cutely, showing her fangs, as she slowly inserts her cock inch by inch in your [pussy], ");
+	outputText("her veins pulsing against your walls. She is purposely making the initial insertion as long as possible to torment you and hell this is exactly how you like to be treated. Her pulsing flesh molds your cunt around her cock naturally either because your pussy is made for it or because her cock is the perfect tool capable of fitting any vagina to its shape. ");
+	outputText("You can’t control yourself and you scream for her to fuck your soul out of your succubus pussy and heck, if your soul wasn’t already out of your body you think it would have flowed out by now from the sheer power of pleasure you are receiving. You begin to buck your hips in an attempt to stimulate your partner and Alvina moans in pleasure as the both of you begin to slide in and out ");
+	outputText("of each other, her horsecock hitting your clitoris on every strike. Before you know it you are orgasming several times, your pussy gushing corrupted juice which only arouses Alvina more, fucking your pussy until you can’t cum anymore. Speaking of cum, no matter how many time the demoness fills your cunt with strands of white sponge her cock simply won't deflate. ");
+	outputText("It goes for so long that the bed itself becomes soaked with your combined fluids.\n\nYou pass out from the overstimulation as your pussy gush yet again, losing track of time and space, only recovering awareness several hours later, still getting fucked by Alvina but utterly satisfied. She gives you a gentle kiss before whispering in your ear.\n\n");
+	outputText("\"<i>Finally satisfied lover…? Your pussy just wouldn’t let go. You sure are a thirsty one aren’t you? ");
+	//outputText("(Married) This is one of the things I love so much about you.");
+	outputText("I like that in a girl.");
+	outputText("</i>\"\n\nThe dimension fades as the two of you reappear in camp feeling energized. She’s god damn right and you sure would do it again.\n\n");
+	dynStats("lib", 2 + rand(3));
+	dynStats("str", 2 + rand(3));
+	dynStats("inte", 2 + rand(3));
+	alvinaMainCampSexMenu3();
+}
+public function alvinaMainCampSexMenuContractOfMephistopheles():void
+{
+	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+	clearOutput();
+	outputText("Alvina makes an impish smile as she readies the malefice and the entire room suddenly starts to fade, turning into what looks like a fleshy cavern. You aren’t that sure of what’s going on until the walls suddenly turn alive with tentacles slithering out from them. Alvina doesn’t seem to be scared, heck she is already caressing one of the things like a well-loved pet ");
+	outputText("and it wriggles in her hand coiling for further affection.\n\n\"<i>You ought to admit, you always were curious about what an eternity of getting fucked by tentacle beasts must feel like. Truthfully, I sometimes lock myself in this secret pleasure room of mine for entire days. Just lay back and enjoy, though I must warn you, they tend to get carried away. Their contract is clear, ");
+	outputText("they will fuck the both of us until we lie as broken and drooling messes on the ground... think you can endure it?</i>\"\n\nThe tentacles get to work, slowly coiling around Alvina’s body, as some stretches to yours. Truth be told, even if you wanted to repel them now, without a weapon or armor it would be a difficult battle. Furthermore, you believe Alvina is in complete control ");
+	outputText("of this pocket dimension and wouldn’t let her pupil suffer a slimy end at their ministrations. As the fleshy things coil around your legs, you move to Alvina, embracing her body along with the tentacles coiling around her. The slithering flesh of the tentacles slides around your skin and hers groping at your and Alvina’s breasts and masterfully squeezing them. Your eyes open wide ");
+	outputText("in surprise as the things pull your two legs away holding you in the air for a tentacle to wildly ram itself into your pussy sliding in up to your womb where it starts to wriggle wildly. Another tentacle finds your ass making you gasp as it stretches your pucker wide. Alvina’s cheeks are already bright red from the fucking as she smashes her breast with yours trying to increase ");
+	outputText("the tentacles stimulations. A tentacle decides to help you both by sliding between the sandwich of your tits.\n\n");
+	outputText("\"<i>See? You're making such a wonderful face right now. These creatures respond to pleasure and the more you will allow them the more they will take. Oooooh fuuuck YES!!! Do me! Do me more!!!...</i>\"\n\n");
+	outputText("You moan and spasm at the crazy fuck, your very innards coming to life and just as you open your mouth to scream your delirious pleasure in a slutty moan, you feel your stomach churning and your eyes rolling as the tentacle in your bowel finally finish its course, slithering out of your throat and gagging you, as it rushes into Alvina’s waiting mouth connecting the both of you ");
+	outputText("into a perverse kiss. You barely register the tentacle surging out of her anus in a gush of cum as the both of you are fucked silly, your stomachs bulging and squirming with the tentacles inside. Your pussy has gone crazy, your anus has gone crazy, your entire body has gone crazy, you’ve gone crazy. ");
+	if (player.hasCock()) {
+		outputText("Just as you thought it couldn't get better, you feel your cock being grabbed by something as a tentacle equipped with a fleshy suction cup plugs you in and begins to suck up all of your leaking precum. Soon, you’re cumming a constant river into the tube as shattering pleasure rushes to your mind like a tidal wave, as your pussy and cock takes on a mind of their own and betray you, ");
+		outputText("forcing your body to buck up in tandem with the tentacles movement. ");
+	}
+	outputText("You slowly lose the concept of time as the tentacles fuck you, drenches you in cum, and wrecks your spasming body again and again. A tentacle even forced its way into Alvina’s ass and surged back out of her mouth and shoved itself right into yours, exploring your body up to the exit and cumming out of your anus. ");
+	outputText("The ground is constantly soaked with your fluids, which you barely register being drunk by some kind of weird orifice.\n\n");
+	outputText("You pass out from the overstimulation abandoning yourself to the wild fucking of the tentacles.\n\n");
+	alvinaMainCampSexMenu3();
+}
+public function alvinaMainCampSexMenuGluttonyOfBeelzebub():void
+{
+	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+	clearOutput();
+	outputText("You grab the girl by the shoulder and pull her in for a kiss as your girl-fiend replies in the same way. For someone with such a small, immature looking body, Alvina is way more experienced than she looks. You wrestle for several minutes, suckling on each other’s tits, fingering and grinding pussies, but it doesn't end there, as Alvina suddenly casts a spell. ");
+	outputText("Before you know it the bed turned into a living mass of cock shaped larvae looking for an orifice. You gasp in surprise and delight when some of them enter your pussy, filling your holes and squirming inside. Alvina isn’t spared either her vagina is already squirming with the penis shaped larvae.\n\n");
+	outputText("\"<i>Ahhhn! Beelzebub's couch is quite a lovely spell, I could never get rid of it. These larvae feed on fluids and are quite smart, do you feel it… all up to your cervix? Do let them satisfy their endless gluttony.</i>\"\n\n");
+	outputText("Oh yes, you can feel them… it's like the larvae are all working together to bring you to climax! You cum once, twice, thrice! Each time you cum the worms squirming intensify as they rush into your vagina to be the first to get a drop, making a constant maelstrom in your pussy as they all push into your clit. You can’t hold it anymore, your eyes rolling as you lock in a hug with Alvina, ");
+	outputText("mindlessly bucking your hips in the air as the inside of your hole is filled with squirming madness. The both of you begin to grind your pussies against each other to increase the maddening pleasure and, not content with simply driving your inside insane, the larvae begin to flood from your pussy to Alvina’s and backward sliding between the two of you and connecting your cunts ");
+	outputText("with a slimy double dildo made of squirming bugs. You keep bucking your hips as your pussies touch then part ways linked by a chain of squirming larvae. Your vagina suddenly fills up with cum as the dick-larvae all starts to bottom out inside your pussy, cuming in all directions and painting your inner walls. That done the larvae all proceed to leave your cunt one by one. ");
+	outputText("This is way too much and you start orgasming consecutively each time one slides out, your pussy spewing them out with a torrent of cum as you begin to babble and drool. Alvina is in a similar state smiling with an ecstatic expression as the larvae flood out of her drenching pussy. Once outside, they merge back in the bed, disappearing in whatever dimensional hole they came from.\n\n");
+	outputText("The both of you stay entangled in one another still tired after the crazy ordeal.\n\n");
+	alvinaMainCampSexMenu3();
+}
+public function alvinaMainCampSexMenu3():void
+{
+	if (flags[kFLAGS.ALVINA_FOLLOWER] >= 20) {
+		outputText("A while later you wake up. Alvina is sitting next to you yawning as she dresses up.\n\n");
+		outputText("\"<i>Always a delight to have a good time with you, lover. We will resume for another round a different time because for now, I have experiments and researches to continue.");
+		//outputText("(If married) You know all too well I ought to find better ways to improve our pleasure because in all honesty sex with you is one of my biggest joys in life.(end of cut)");
+		outputText("</i>\"\n\nYou get dressed and part with her as you head back to your things.\n\n");
+	}
+	else {
+		outputText("A while later you wake up. Alvina is sitting next to you yawning as she begins to re-dress in her usual somewhat minimalist bikini mage armor.\n\n");
+		outputText("\"<i>You ain’t that bad of a demon. I expected you to freak out or perhaps even die from the stimulation but you endured it, so I guess I'll keep you as my lover for a while. See me in camp if you're interested in some fun big "+player.mf("boy","girl")+".</i>\"\n\n");
+		outputText("You re-dress and part with her as you head back to your things.\n\n");
+		outputText("<b>Alvina is now your lover.</b>\n\n");
+		flags[kFLAGS.ALVINA_FOLLOWER] = 20;
+	}
+	player.orgasm();
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function alvinaHenchmanOption():void
+{
+	clearOutput();
+	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+		outputText("\"<i>Such sloth, you truly do ask me to fight for you? Well I might just humor you and practice my more ‘experimental’ magic on your enemies. New spells requires experiments and I am always eager for new ‘living’ test subjects.</i>\"\n\n");
+		outputText("Alvina is now following you around.\n\n");
+		var strAlvina:Number = 375;
+		var inteAlvina:Number = 480;
+		var libAlvina:Number = 375;
+		strAlvina *= (1 + (0.2 * player.newGamePlusMod()));
+		strAlvina = Math.round(strAlvina);
+		inteAlvina *= (1 + (0.2 * player.newGamePlusMod()));
+		inteAlvina = Math.round(inteAlvina);
+		libAlvina *= (1 + (0.2 * player.newGamePlusMod()));
+		libAlvina = Math.round(libAlvina);
+		player.createStatusEffect(StatusEffects.CombatFollowerAlvina, strAlvina, inteAlvina, libAlvina, 0);
+		flags[kFLAGS.PLAYER_COMPANION_1] = "Alvina";
+	}
+	else {
+		outputText("Alvina is no longer following you around.\n\n");
+		player.removeStatusEffect(StatusEffects.CombatFollowerAlvina);
+		flags[kFLAGS.PLAYER_COMPANION_1] = "";
+	}
+	doNext(alvinaMainCampMenu);
+	cheatTime(1/12);
 }
 
 public function alvinaCampStudy():void

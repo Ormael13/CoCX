@@ -38,10 +38,20 @@ public function accessMetamorphMenu():void {
 	outputText("<b>Race added to Metamorph:\n");
 	outputText("Alicorn, Bat, Bee, Bicorn, Boar, Cat, Cheshire Cat, Cow, Couatl, Demon, Devil, Displacer Beast, Dragon, Elf, Fox, Gorgon, Harpy, Hellcat, Horse, Human, Kitsune, Lizard, Manticore, Mantis, Minotaur, Naga, Nekomata, Nightmare, Oni, Orc, Orca, Phoenix, Pig, Raiju, Red Panda, Salamander, Shark, Sphinx, Spider (+Drider), Unicorn, Vampire</b>");
 	menu();
+	if (player.hasPerk(PerkLib.MetamorphEx)) {
+		addButton(5, "Page Ex (1)", accessPageEx1MetamorphMenu);
+		//addButton(6, "Page Ex (2)", accessPageEx2MetamorphMenu);
+		//addButton(7, "Page Ex (3)", accessPageEx3MetamorphMenu);
+	}
+	else {
+		addButtonDisabled(5, "Page Ex (1)", "Req. to have Metamorph (Ex) to open this options.");
+		//addButtonDisabled(6, "Page Ex (2)", "Req. to have Metamorph (Ex) to open this options.");
+		//addButtonDisabled(7, "Page Ex (3)", "Req. to have Metamorph (Ex) to open this options.");
+	}
 	addButton(10, "Page 1", accessPage1MetamorphMenu).hint("Hair, Face, Tongue, Eyes, Ears, Horns");
 	addButton(11, "Page 2", accessPage2MetamorphMenu).hint("Arms, Wings, Legs");
 	addButton(12, "Page 3", accessPage3MetamorphMenu).hint("Skin, Skin Patterns/Tattoes, Rear Body, Antennae, Gills, Tail");
-//	addButton(13, "Page 4", accessPage4MetamorphMenu);
+	//addButton(13, "Page 4", accessPage4MetamorphMenu);
 	if (player.hasPerk(PerkLib.JobSoulCultivator)) addButton(14, "Back", SceneLib.soulforce.accessSoulforceMenu);
 	else addButton(14, "Back", playerMenu);
 }
@@ -305,6 +315,10 @@ private function accessPage2EyesMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcEyes) && player.eyes.type == Eyes.ORC) addButtonDisabled(6, "Orc", "You already have orc eyes.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcEyes) && player.eyes.type != Eyes.ORC && player.soulforce < 100) addButtonDisabled(6, "Orc", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(6, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEyes) && player.eyes.type != Eyes.DISPLACER && player.soulforce >= 100) addButton(10, "Displacer", metamorphDisplacerEyes);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEyes) && player.eyes.type == Eyes.DISPLACER) addButtonDisabled(10, "Displacer", "You already have displacer eyes.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEyes) && player.eyes.type != Eyes.DISPLACER && player.soulforce < 100) addButtonDisabled(10, "Displacer", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(10, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessPage1EarsMenu():void {
@@ -393,6 +407,10 @@ private function accessPage3EarsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaEars) && player.ears.type == Ears.RED_PANDA) addButtonDisabled(1, "Red Panda", "You already have red panda ears.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaEars) && player.ears.type != Ears.RED_PANDA && player.soulforce < 100) addButtonDisabled(1, "Red Panda", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(1, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEars) && player.ears.type != Ears.DISPLACER && player.soulforce >= 100) addButton(8, "Displacer", metamorphDisplacerEars);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEars) && player.ears.type == Ears.DISPLACER) addButtonDisabled(8, "Displacer", "You already have displacer ears.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEars) && player.ears.type != Ears.DISPLACER && player.soulforce < 100) addButtonDisabled(8, "Displacer", "You not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(8, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessPage1HornsMenu():void {
@@ -1153,6 +1171,168 @@ private function accessHairMenu():void {
 	addButton(14, "Back", accessPage4MetamorphMenu);
 }
 */
+private function accessPageEx1MetamorphMenu():void {
+	menu();
+	if (player.soulforce >= 300) addButton(0, "Height +1", metamorphHeight1U);
+	else addButtonDisabled(0, "Height +1", "You not have enough Soulforce for this metamorphosis.");
+	if (player.soulforce >= 700) addButton(1, "Height +2", metamorphHeight2U);
+	else addButtonDisabled(1, "Height +2", "You not have enough Soulforce for this metamorphosis.");
+	if (player.soulforce >= 100) addButton(2, "Height -1", metamorphHeight1D);
+	else addButtonDisabled(2, "Height -1", "You not have enough Soulforce for this metamorphosis.");
+	if (player.soulforce >= 300) addButton(3, "Height -2", metamorphHeight2D);
+	else addButtonDisabled(3, "Height -2", "You not have enough Soulforce for this metamorphosis.");
+	if (player.soulforce >= 300) addButton(4, "Hair +1", metamorphHair1U);
+	else addButtonDisabled(4, "Hair +1", "You not have enough Soulforce for this metamorphosis.");
+	//addButton(5, "Back", accessMetamorphMenu);
+	//addButton(6, "Back", accessMetamorphMenu);
+	//addButton(7, "Back", accessMetamorphMenu);
+	//addButton(8, "Back", accessMetamorphMenu);
+	if (player.soulforce >= 100) addButton(9, "Hair -1", metamorphHair1D);
+	else addButtonDisabled(9, "Hair -1", "You not have enough Soulforce for this metamorphosis.");
+	//addButton(10, "Back", accessMetamorphMenu);
+	//addButton(11, "Back", accessMetamorphMenu);
+	//addButton(12, "Back", accessMetamorphMenu);
+	//addButton(13, "Back", accessMetamorphMenu);
+	addButton(14, "Back", accessMetamorphMenu);
+}
+private function accessPageEx2MetamorphMenu():void {
+	menu();
+	addButton(0, "Back", accessMetamorphMenu);
+	addButton(1, "Back", accessMetamorphMenu);
+	addButton(2, "Back", accessMetamorphMenu);
+	addButton(3, "Back", accessMetamorphMenu);
+	addButton(4, "Back", accessMetamorphMenu);
+	addButton(5, "Back", accessMetamorphMenu);
+	addButton(6, "Back", accessMetamorphMenu);
+	addButton(7, "Back", accessMetamorphMenu);
+	addButton(8, "Back", accessMetamorphMenu);
+	addButton(9, "Back", accessMetamorphMenu);
+	addButton(10, "Back", accessMetamorphMenu);
+	addButton(11, "Back", accessMetamorphMenu);
+	addButton(12, "Back", accessMetamorphMenu);
+	addButton(13, "Back", accessMetamorphMenu);
+	addButton(14, "Back", accessMetamorphMenu);
+}
+private function accessPageEx3MetamorphMenu():void {
+	menu();
+	addButton(0, "Skin", accessMetamorphMenu);
+	addButton(1, "Hair", accessMetamorphMenu);
+	addButton(2, "Fur", accessMetamorphMenu);/*
+	addButton(3, "Back", accessMetamorphMenu);
+	addButton(4, "Back", accessMetamorphMenu);
+	addButton(5, "Back", accessMetamorphMenu);
+	addButton(6, "Back", accessMetamorphMenu);
+	addButton(7, "Back", accessMetamorphMenu);
+	addButton(8, "Back", accessMetamorphMenu);
+	addButton(9, "Back", accessMetamorphMenu);
+	addButton(10, "Back", accessMetamorphMenu);
+	addButton(11, "Back", accessMetamorphMenu);
+	addButton(12, "Back", accessMetamorphMenu);
+	addButton(13, "Back", accessMetamorphMenu);*/
+	addButton(14, "Back", accessMetamorphMenu);
+}
+//color: hair/fur/scales?/skin tone? 3 menu z kolorami dla każdego z tych pozycji jako submenu
+private function metamorphHeight1U():void {
+	clearOutput();
+	player.soulforce -= 300;
+	outputText("\n\nWhoa wait did you just gain some height!? You indeed notice you've grown by an inch.");
+	player.tallness += 1;
+	if (player.tallness >= 132) player.tallness = 132;
+	doNext(accessPageEx1MetamorphMenu);
+}
+private function metamorphHeight2U():void {
+	clearOutput();
+	player.soulforce -= 700;
+	outputText("\n\nWhoa wait did you just gain some height!? You indeed notice you've grown by two inches.");
+	player.tallness += 2;
+	if (player.tallness >= 132) player.tallness = 132;
+	doNext(accessPageEx1MetamorphMenu);
+}
+private function metamorphHeight1D():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nWhoa wait did you just lost some height!? You indeed notice you've shrunk by an inch.");
+	player.tallness -= 1;
+	if (player.tallness < 42) player.tallness = 42;
+	doNext(accessPageEx1MetamorphMenu);
+}
+private function metamorphHeight2D():void {
+	clearOutput();
+	player.soulforce -= 300;
+	outputText("\n\nWhoa wait did you just lost some height!? You indeed notice you've shrunk by two inches.");
+	player.tallness -= 2;
+	if (player.tallness < 42) player.tallness = 42;
+	doNext(accessPageEx1MetamorphMenu);
+}
+private function metamorphHair1U():void {
+	clearOutput();
+	player.soulforce -= 300;
+	outputText("\n\nWhoa wait did your hair just lenghten!? You indeed notice they're longer by an inch.");
+	player.hairLength += 1;
+	doNext(accessPageEx1MetamorphMenu);
+}
+private function metamorphHair1D():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nWhoa wait did your hair just lost some lenght!? You indeed notice they shortened by an inch.");
+	player.hairLength -= 1;
+	if (player.hairLength < 0) player.hairLength = 0;
+	doNext(accessPageEx1MetamorphMenu);
+}
+
+
+private function metamorph000Fur():void {
+	clearOutput();
+	player.soulforce -= 100;
+	
+	
+	doNext(accessMetamorphMenu);
+}
+private function metamorph001Fur():void {
+	clearOutput();
+	player.soulforce -= 100;
+	
+	
+	doNext(accessMetamorphMenu);
+}
+private function metamorph002Fur():void {
+	clearOutput();
+	player.soulforce -= 100;
+	
+	
+	doNext(accessMetamorphMenu);
+}/*
+private function metamorph1Fur():void {
+	clearOutput();
+	player.soulforce -= 100;
+	
+	
+	doNext(accessMetamorphMenu);
+}
+private function metamorph1Fur():void {
+	clearOutput();
+	player.soulforce -= 100;
+	
+	
+	doNext(accessMetamorphMenu);
+}
+private function metamorph1Fur():void {
+	clearOutput();
+	player.soulforce -= 100;
+	
+	
+	doNext(accessMetamorphMenu);
+}
+private function metamorph1Fur():void {
+	clearOutput();
+	player.soulforce -= 100;
+	
+	
+	doNext(accessMetamorphMenu);
+}*/
+
+
+
 /*
 private function metamorph1Fur():void {
 	clearOutput();
@@ -1346,6 +1526,21 @@ private function metamorphLionEars():void {
 	outputText("\n\nYour ears suddenly stretch painfully, making you scream in pain as they move toward the top of your head, growing rounder and bigger. Putting your hands to your ears you discover they are now covered with a fair amount of dark fur. <b>You now have lion ears.</b>");
 	player.ears.type = Ears.LION;
 	doNext(accessPage2EarsMenu);
+}
+private function metamorphDisplacerEars():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nYour ears begin to prickle and burn as the skin tears and stretches migrating to the top of your head as they change into long wide, deep ears, perfect for catching any stray sound. Which becomes apparent when your hearing becomes far more clear than it has ever been. <b>Sound has become an entirely new experience now that you have displacer beast ears!</b>");
+	player.ears.type = Ears.DISPLACER;
+	doNext(accessPage3EarsMenu);
+}
+private function metamorphDisplacerEyes():void {
+	clearOutput();
+	player.soulforce -= 100;
+	outputText("\n\nFor a moment your sight shifts as the ambient light suddenly turns extremely bright, almost blinding you. You walk around disoriented for a moment until the luminosity fades back to normal. You run to a puddle of water to check your reflection and quickly notice your eyes are now yellow and cat-like however just as you watch your reflection the white of your eyes also begins to darken turning black not unlike the eyes of a displacer beast.  <b>You now have displacer beast eyes.</b>");
+	player.eyes.type = Eyes.DISPLACER;
+	player.eyes.colour = "yellow";
+	doNext(accessPage2EyesMenu);
 }
 private function metamorphDisplacerArms():void {
 	clearOutput();
@@ -3248,4 +3443,4 @@ private function restoreHumanArms():void {
 	player.arms.type = Arms.HUMAN;
 }
 	}
-}
+}

@@ -1,6 +1,7 @@
 package classes.Scenes.Dungeons 
 {
 import classes.BaseContent;
+import classes.StatusEffects;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 
@@ -345,7 +346,14 @@ public class DungeonEngine extends BaseContent
 			cheatTime2(5);
 			room();
 		}
+		public function navigateToRoomRD(room:Function = null):void {
+			if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
+			cheatTime2(5);
+			room();
+		}
 		public function navigateToRoomEL(room:Function = null):void {
+			if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
+			player.addStatusValue(StatusEffects.EbonLabyrinthB, 1, 1);
 			cheatTime2(15);
 			room();
 		}
@@ -378,25 +386,43 @@ public class DungeonEngine extends BaseContent
 			if (westFunction != null) addButton(10, "West", navigateToRoom, westFunction);
 			if (eastFunction != null) addButton(12, "East", navigateToRoom, eastFunction);
             if (player.lust >= 30) addButton(8, "Masturbate", SceneLib.masturbation.masturbateGo);
+			else addButtonDisabled(8, "Masturbate", "Req. 30+ lust.");
             addButton(13, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 			addButton(14, "Map", map.displayMap).hint("View the map of this dungeon.");
 			setTopButtons();
 		}
-		public function setDungeonButtonsEL(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null):void {
+		public function setDungeonButtonsRD(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null):void {
 			statScreenRefresh();
 			hideUpDown();
 			spriteSelect(-1);
 			menu();
-			if (northFunction != null) addButton(6, "North", navigateToRoomEL, northFunction);
-			if (southFunction != null) addButton(11, "South", navigateToRoomEL, southFunction);
-			if (westFunction != null) addButton(10, "West", navigateToRoomEL, westFunction);
-			if (eastFunction != null) addButton(12, "East", navigateToRoomEL, eastFunction);
-            addButton(3, "Exit", ebonlabyrinth.exitDungeon);
-            if (model.time.hours >= 21 || model.time.hours < 6) addButton(4, "Sleep", ebonlabyrinth.doSleepEL).hint("Turn yourself in for the night. May result in monster ambush!");
-			else addButtonDisabled(4, "Sleep", "It's still too early to go to sleep.");
+			if (northFunction != null) addButton(6, "North", navigateToRoomRD, northFunction);
+			if (southFunction != null) addButton(11, "South", navigateToRoomRD, southFunction);
+			if (westFunction != null) addButton(10, "West", navigateToRoomRD, westFunction);
+			if (eastFunction != null) addButton(12, "East", navigateToRoomRD, eastFunction);
             if (player.lust >= 30) addButton(8, "Masturbate", SceneLib.masturbation.masturbateGo);
-			addButton(13, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
+			else addButtonDisabled(8, "Masturbate", "Req. 30+ lust.");
+            addButton(13, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 			addButton(14, "Map", map.displayMap).hint("View the map of this dungeon.");
+			setTopButtons();
+		}
+		public function setDungeonButtonsEL(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null, upFunction:Function = null, downFunction:Function = null):void {
+			statScreenRefresh();
+			hideUpDown();
+			spriteSelect(-1);
+			menu();
+			addButton(2, "North", navigateToRoomEL, northFunction);
+			addButton(12, "South", navigateToRoomEL, southFunction);
+			addButton(6, "West", navigateToRoomEL, westFunction);
+			addButton(8, "East", navigateToRoomEL, eastFunction);
+			addButton(1, "Up", navigateToRoomEL, upFunction);
+			addButton(13, "Down", navigateToRoomEL, downFunction);
+            if (model.time.hours >= 21 || model.time.hours < 6) addButton(0, "Sleep", ebonlabyrinth.doSleepEL).hint("Turn yourself in for the night. May result in monster ambush!");
+			else addButtonDisabled(0, "Sleep", "It's still too early to go to sleep.");
+            if (player.lust >= 30) addButton(5, "Masturbate", SceneLib.masturbation.masturbateGo);
+			else addButtonDisabled(5, "Masturbate", "Req. 30+ lust.");
+			addButton(9, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
+            addButton(14, "Exit", ebonlabyrinth.exitDungeon);
 			setTopButtons();
 		}
 		

@@ -141,12 +141,12 @@ use namespace CoC;
 			if (choice == 3) darkslimeMagic();
 			if (choice == 4) darkslimePoison();
 		}
-		/*
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.lake.gooGirlScene.beatUpGoo();
+			SceneLib.caves.darkslimeScene.beatingDarkSlime();
 		}
-		*/
+		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			/*if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) */SceneLib.dungeons.ebonlabyrinth.defeatedByDarkSlime();
@@ -176,8 +176,8 @@ use namespace CoC;
 				this.bonusLust = 10;
 				this.level = 6;
 			}
-			this.a = "dark ";
-			this.short = "slime";
+			this.a = "";
+			this.short = "dark slime";
 			this.imageName = "googirl";
 			this.long = "This slime looks similar to the goo girls from the lake. However, it’s nucleus is the size of an apple and spherical, not to mention it's purple gel coloration. Surprisingly, it seems intelligent enough to even speak so you better watch out for other oddities.";
 			// this.long = false;
@@ -202,9 +202,10 @@ use namespace CoC;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = rand(6) + 4;
 			this.drop = new ChainedDrop().add(weapons.PIPE,1/10)
-					.add(consumables.WETCLTH,1/2)
+					.add(consumables.DSLIMEJ,1/2)
 					.elseDrop(useables.GREENGL);
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
+			this.createPerk(PerkLib.LightningVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGooType, 0, 0, 0, 0);
 			checkMonster();
 		}

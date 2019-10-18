@@ -79,6 +79,8 @@ use namespace CoC;
 					outputText("You spend one hour exploring the caves but you don't manage to
 					dynStats("tou", .5);
 					doNext(camp.returnToCampUseOneHour);
+					//clearOutput();
+					//outputText("You spend one hour exploring the caves but you don't manage to find anything interesting, unless feeling of becoming slight tougher counts.");
 					break;*/
 				case 1://2:
 					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
@@ -87,8 +89,6 @@ use namespace CoC;
 				case 2://3:
 					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
 					darkslimeScene.cavesDarkSlimeEncounter();
-					//clearOutput();
-					//outputText("You spend one hour exploring the caves but you don't manage to find anything interesting, unless feeling of becoming slight tougher counts.");
 					break;
 				case 3://4:
 					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);

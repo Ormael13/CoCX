@@ -129,17 +129,17 @@ use namespace CoC;
 			damage += this.spe * 2;
 			damage = Math.round(damage);
 			damage = player.takePhysDamage(damage, true);
-			removeStatusEffect(StatusEffects.Flying);
 		}
 		
 		override protected function performCombatAction():void
 		{
-			if(hasStatusEffect(StatusEffects.Flying) && statusEffectv1(StatusEffects.Flying) <= 1) {
+			if (hasStatusEffect(StatusEffects.Flying) && statusEffectv1(StatusEffects.Flying) <= 1) {
 				outputText("The chimera lands next to you. Ready to resume its assault.\n\n");
 				removeStatusEffect(StatusEffects.Flying);
 			}
 			if (hasStatusEffect(StatusEffects.Flying)) {
-				if (rand(3) == 0) PentaAttack();//temporal fix - damn you lazy lia
+				if (!player.hasStatusEffect(StatusEffects.Sealed)) Curse();
+				else if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) Dragonbreath();
 				else FlybyAttack();
 			}
 			var choice:Number = rand(7);
@@ -187,16 +187,16 @@ use namespace CoC;
 			this.armorName = "chitin";
 			this.armorDef = 60;
 			this.armorMDef = 10;
-			this.bonusHP = 5000;
+			this.bonusHP = 100000;
 			this.bonusLust = 40;
 			this.gems = 200 + rand(80);
 			this.additionalXP = 1500;
 			this.level = 70;
 			this.lustVuln = 0.45;
-			//this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
-			//this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
-			//this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
-			//this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.drop = NO_DROP;
 			this.checkMonster();

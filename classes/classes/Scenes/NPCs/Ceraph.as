@@ -86,7 +86,7 @@ public class Ceraph extends Monster
 		{
 			clearOutput();
 			outputText("You wriggle in the tight binding, trying your best to escape.  ");
-			if (player.statusEffectv1(StatusEffects.Bound) - 1 <= 0) {
+			if ((player.statusEffectv1(StatusEffects.Bound) - 1 <= 0) || player.hasPerk(PerkLib.FluidBody)) {
 				outputText("With a mighty twist and stretch, the whip gives and uncurls from you all at once.  You've regained your freedom");
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
 					outputText(", though you miss the tight leathery embrace");

@@ -51,6 +51,7 @@ public class FrostGiant extends Monster
 		}
 		public function giantGrabStruggle():void {
 			if (rand(200) >= player.str || rand(10) == 0) giantGrabFail();
+			else if (player.hasPerk(PerkLib.FluidBody)) giantGrabSuccess();
 			else giantGrabSuccess();
 		}
 		public function giantGrabFail(struggle:Boolean = true):void {

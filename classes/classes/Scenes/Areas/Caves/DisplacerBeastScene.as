@@ -7,6 +7,7 @@ package classes.Scenes.Areas.Caves
 	import classes.*;
 	import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Dungeons.DungeonAbstractContent;
 	
 	public class DisplacerBeastScene extends BaseContent
 	{
@@ -64,6 +65,9 @@ public function displacerBeastDefeat():void {
 	if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 		outputText(" You wake up somewhere out of the labyrinth still sore but otherwise unharmed.");
 		player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
+		if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
+		if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
+		DungeonAbstractContent.dungeonLoc = 0;
 	}
 	cleanupAfterCombat();
 }

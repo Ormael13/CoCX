@@ -113,7 +113,8 @@ import classes.BodyParts.Wings;
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind.  Also the claws on your fingers reverts back into ordinary nails.");
 					break;
 				case Arms.DISPLACER:
-					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind.  Also the claws on your fingers reverts back into ordinary nails and both pairs fuse back into one.");
+					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind.  Also the claws on your fingers reverts back into ordinary nails.");
+					outputText("\n\nYou feel highly uncomfortable as your extra set of arms vanishes into your body following the loss of your leonine paw hands. Guess your back with only two arms now.");
 					break;
 				case Arms.ELF:
 				case Arms.KITSUNE:
@@ -323,6 +324,7 @@ import classes.BodyParts.Wings;
 		[Arms.FOX, StatusEffects.UnlockedFoxArms],
 		[Arms.GARGOYLE, null],
 		[Arms.GARGOYLE_2, null],
+		[Arms.GOO, null],
 		[Arms.GRYPHON, null],
 		[Arms.HARPY, StatusEffects.UnlockedHarpyArms],
 		[Arms.HINEZUMI, null],
@@ -359,6 +361,7 @@ import classes.BodyParts.Wings;
 		[Ears.CAT, StatusEffects.UnlockedCatEars],
 		[Ears.COW, StatusEffects.UnlockedCowEars],
 		[Ears.DEER, null],
+		[Ears.DISPLACER, StatusEffects.UnlockedDisplacerEars],
 		[Ears.DOG, null],
 		[Ears.DRAGON, StatusEffects.UnlockedDraconicEars],
 		[Ears.ECHIDNA, null],
@@ -381,6 +384,7 @@ import classes.BodyParts.Wings;
 		[Ears.RACCOON, null],
 		[Ears.RED_PANDA, StatusEffects.UnlockedRedPandaEars],
 		[Ears.RHINO, null],
+		[Ears.SHARK, null],
 		[Ears.SNAKE, StatusEffects.UnlockedSnakeEars],
 		[Ears.VAMPIRE, StatusEffects.UnlockedVampireEars],
 		[Ears.WEASEL, StatusEffects.UnlockedRaijuEars],
@@ -399,6 +403,7 @@ import classes.BodyParts.Wings;
 		[Eyes.BEAR, null],
 		[Eyes.BLACK_EYES_SAND_TRAP, null],
 		[Eyes.CAT_SLITS, StatusEffects.UnlockedCatEyes],
+		[Eyes.DISPLACER, StatusEffects.UnlockedDisplacerEyes],
 		[Eyes.DRAGON, StatusEffects.UnlockedDraconicEyes],
 		[Eyes.DEVIL, StatusEffects.UnlockedDevilEyes],
 		[Eyes.ELF, StatusEffects.UnlockedElfEyes],
@@ -558,6 +563,7 @@ import classes.BodyParts.Wings;
 		[LowerBody.HINEZUMI, null],
 		[LowerBody.HOOFED, StatusEffects.UnlockedHoofedLegs],
 		[LowerBody.HUMAN, StatusEffects.UnlockedHumanLowerBody],
+		[LowerBody.HYDRA, null],
 		[LowerBody.KANGAROO, null],
 		[LowerBody.LION, StatusEffects.UnlockedLionLegs],
 		[LowerBody.LIZARD, StatusEffects.UnlockedLizardLegs],
@@ -593,6 +599,7 @@ import classes.BodyParts.Wings;
 		[RearBody.DRACONIC_SPIKES, null],
 		[RearBody.FENRIR_ICE_SPIKES, null],
 		[RearBody.LION_MANE, StatusEffects.UnlockedLionMane],
+		[RearBody.METAMORPHIC_GOO, null],
 		[RearBody.NONE, StatusEffects.UnlockedHumanNoRearBody],
 		[RearBody.ORCA_BLOWHOLE, StatusEffects.UnlockedOrcaBlowhole],
 		[RearBody.RAIJU_MANE, StatusEffects.UnlockedRaijuMane],

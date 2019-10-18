@@ -1745,6 +1745,9 @@ public class PerkLib
 				"Grants 15% chance per round of cleansing poisons/drugs from your body. Increases HP restoration on rest.",
 				"You choose the 'Medicine' perk, giving you a chance to remove debilitating poisons automatically! Also, increases HP restoration on rest.");
 		public static const Metamorph:MetamorphPerk = new MetamorphPerk();
+		public static const MetamorphEx:PerkType = mk("Metamorph (Ex)", "Metamorph (Ex)",
+				"Mold your own body even further than before using genetic memory and soulforce.",
+				"You choose the 'Metamorph (Ex)' perk, giving you a more options to mold your own body.");
 		public static const Metamorphable:PerkType = mk("Metamorphable", "Metamorphable",
 				"You can manipulate your soul force to change your body... but this increases your soul force by 10%.",
 				"You choose the 'Metamorphable' perk, gaining +10% max Soulforce.");
@@ -2080,8 +2083,10 @@ public class PerkLib
 				"Allow to reload in middle of shooting as long PC have enough fatigue for that without ending turn.",
 				"You choose the 'Lightning Reload' perk, lowering even more time needed to reload with ammo range weapons like pistols.");
 		public static const RagingInferno:PerkType = mk("Raging Inferno", "Raging Inferno",
-				"Cumulative 10% damage increase for every subsequent fire spell. Each turn without casted fire spell lower damage by 10%.",
-				"You choose the 'Raging Inferno' perk. Cumulative 10% damage increase for every subsequent fire spell.");
+				"Cumulative 20% damage increase for every subsequent fire spell without interruption.",
+				"You choose the 'Raging Inferno' perk. Cumulative 20% damage increase for every subsequent fire spell without interruption.");
+				//"Cumulative 10% damage increase for every subsequent fire spell. Each turn without casted fire spell lower damage by 10%.",
+				//"You choose the 'Raging Inferno' perk. Cumulative 10% damage increase for every subsequent fire spell.");
 		public static const RecoveryMantra:PerkType = mk("Recovery mantra", "Recovery mantra",
 				"Gain soulforce recovery equal to 2% of your total soulforce.",
 				"You choose the 'Recovery mantra' perk, gaining soulfroce recovery rate equal to 2% of your total soulforce.");
@@ -2577,7 +2582,7 @@ public class PerkLib
 				"You choose the 'Venom Glands (Evolved)' perk, continuous usage of the venom caused your venom glands evolution into more complete form.");
 		public static const VenomGlandsFinalForm:PerkType = mk("Venom Glands (Final Form)", "Venom Glands (Final Form)",
 				"Your body posses fully developed venom glands with large reservoir of venom and good recharge speed. (+10% to poison resistance and +10 max Tou (scalable))",
-				"You choose the 'Venom Glands (Final Form)' perk, after long time iusage of venom frm your glands they evolved into their final form.");
+				"You choose the 'Venom Glands (Final Form)' perk, after long time usage of venom from your glands they evolved into their final form.");
 		public static const VitalShot:PerkType = mk("Vital Shot", "Vital Shot",
 				"Gain a +10% chance to do a critical strike with arrows.",
 				"You choose the 'Vital Shot' perk, gaining an additional +10% chance to cause a critical hit with arrows.");
@@ -2898,6 +2903,8 @@ public class PerkLib
 				"Keeps your pussy permanently gaped and increases pregnancy speed.");
 		public static const FireLord:PerkType = mk("Fire Lord", "Fire Lord",
 				"Akbal's blessings grant the ability to breathe burning green flames.");
+		public static const FluidBody:PerkType = mk("Fluid Body", "Fluid Body",
+				"You are extremely resilient to physical strike when naked reducing physical damage taken by 50% but become aroused as attacks penetrates you. You also can slip out of any mundane grapple without effort (100% escape chance).");
 		public static const GargoyleCorrupted:PerkType = mk("Corrupted Gargoyle", "Corrupted Gargoyle",
 				"You need constant intakes of sexual fluids to stay alive.");
 		public static const GargoylePure:PerkType = mk("Gargoyle", "Pure Gargoyle",
@@ -2979,7 +2986,7 @@ public class PerkLib
 		public static const IceNature:PerkType = mk("Ice Nature", "Ice Nature", "");
 		public static const IceVulnerability:PerkType = mk("Ice Vulnerability", "Ice Vulnerability", "");
 		public static const LightningNature:PerkType = mk("Lightning Nature", "Lightning Nature", "");//NYU
-		public static const LightningVulnerability:PerkType = mk("Lightning Vulnerability", "Lightning Vulnerability", "");//NYU
+		public static const LightningVulnerability:PerkType = mk("Lightning Vulnerability", "Lightning Vulnerability", "");
 		public static const MonsterRegeneration:PerkType = mk("Monster Regeneration", "Monster Regeneration", "");
 		public static const NoGemsLost:PerkType = mk("No Gems Lost", "No Gems Lost", "");
 		public static const Phylactery:PerkType = mk("Phylactery", "Phylactery", "");
@@ -4989,6 +4996,7 @@ public class PerkLib
 			}
 			*/
             Metamorph.requirePerk(GeneticMemory);
+            MetamorphEx.requirePerk(Metamorph);
             //	JobArtificer.requireInt(25)
             //				.requireWis(25);
             JobBeastWarrior.requireStr(20)
@@ -5839,3 +5847,4 @@ public class PerkLib
 	initDependencies();
 }
 }
+

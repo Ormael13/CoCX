@@ -2651,7 +2651,8 @@ public class Appearance extends Utils
 					[Arms.PIG, "pig"],
 					[Arms.BOAR, "boar"],
 					[Arms.DISPLACER, "displacer"],
-					[Arms.CAVE_WYRM, "cave wyrm"]
+					[Arms.CAVE_WYRM, "cave wyrm"],
+					[Arms.GOO, "goo"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2808,7 +2809,8 @@ public class Appearance extends Utils
 					[LowerBody.AVIAN, "avian"],
 					[LowerBody.GRYPHON, "gryphon"],
 					[LowerBody.ORC, "orc"],
-					[LowerBody.CAVE_WYRM, "cave wyrm"]
+					[LowerBody.CAVE_WYRM, "cave wyrm"],
+					[LowerBody.HYDRA, "hydra"]
 				]
 		);
 		// <mod name="Dragon patch" author="Stadler76">
@@ -2824,7 +2826,8 @@ public class Appearance extends Utils
 					[RearBody.ORCA_BLOWHOLE, "orca blowhole"],
 					[RearBody.RAIJU_MANE, "raiju mane"],
 					[RearBody.WOLF_COLLAR, "wolf mane"],
-					[RearBody.DISPLACER_TENTACLES, "displacer tentacles"]
+					[RearBody.DISPLACER_TENTACLES, "displacer tentacles"],
+					[RearBody.METAMORPHIC_GOO, "metamorphic goo"]
 				]
 		);
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(

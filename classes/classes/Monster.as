@@ -19,6 +19,7 @@ import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
+import classes.Scenes.Dungeons.EbonLabyrinth.Hydra;
 import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
 import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
 import classes.Scenes.NPCs.ChiChi;
@@ -299,21 +300,11 @@ import flash.utils.getQualifiedClassName;
 			if (statusEffectv2(StatusEffects.SaiyanNumber2a) > 0) multimax += statusEffectv2(StatusEffects.SaiyanNumber2a);
 			if (statusEffectv2(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv2(StatusEffects.SaiyanNumber3a);
 			temp *= multimax;
-			temp = Math.round(temp);
-			return temp;
-		}
-		protected override function maxHP_mult():Number {
-			var temp:Number = 1.0;
 			if (findPerk(PerkLib.ShieldWielder) >= 0) temp *= 1.5;
-			if (findPerk(PerkLib.EnemyBossType) >= 0) temp *= 2;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) temp *= 3;
 			if (findPerk(PerkLib.EnemyGroupType) >= 0) temp *= 5;
-			//Apply difficulty
-			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) temp *= 1.0;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 1.25;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 1.5;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 2.0;
-			else temp *= 3.0;
+			temp *= stats_multi_based_on_misc();
+			temp = Math.round(temp);
 			return temp;
 		}
 		public override function maxHP():Number {
@@ -419,6 +410,7 @@ import flash.utils.getQualifiedClassName;
 			if (statusEffectv3(StatusEffects.SaiyanNumber2a) > 0) multimax += statusEffectv3(StatusEffects.SaiyanNumber2a);
 			if (statusEffectv3(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv3(StatusEffects.SaiyanNumber3a);
 			temp *= multimax;
+			temp *= stats_multi_based_on_misc();
 			temp = Math.round(temp);
 			return temp;
 		}
@@ -463,6 +455,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.LimitBreakerHeart1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerHeart2ndStage) >= 0) multimax += 0.1;
 			temp *= multimax;
+			temp *= stats_multi_based_on_misc();
 			temp = Math.round(temp);
 			return temp;
 		}
@@ -531,6 +524,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.LimitBreakerSoul1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerSoul2ndStage) >= 0) multimax += 0.1;
 			temp *= multimax;
+			temp *= stats_multi_based_on_misc();
 			temp = Math.round(temp);
 			if ((hasPerk(PerkLib.EnemyTrueDemon) && !hasPerk(PerkLib.Phylactery)) || (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience))) temp = 0;
 			return temp;
@@ -601,6 +595,7 @@ import flash.utils.getQualifiedClassName;
 			if (statusEffectv4(StatusEffects.SaiyanNumber2a) > 0) multimax += statusEffectv4(StatusEffects.SaiyanNumber2a);
 			if (statusEffectv4(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv4(StatusEffects.SaiyanNumber3a);
 			temp *= multimax;
+			temp *= stats_multi_based_on_misc();
 			temp = Math.round(temp);
 			if (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience)) temp = 0;
 			return temp;
@@ -655,11 +650,33 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0) tempmulti += 0.2;
 				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0) tempmulti += 0.3;
 				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0) tempmulti += 0.4;
-				temp *= tempmulti;
 			}
 			if (findPerk(PerkLib.LimitBreakerSoul1stStage) >= 0) tempmulti += 0.05;
 			if (findPerk(PerkLib.LimitBreakerSoul2ndStage) >= 0) tempmulti += 0.1;
+			temp *= tempmulti;
+			temp *= stats_multi_based_on_misc();
+			temp = Math.round(temp);
 			if (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience)) temp = 0;
+			return temp;
+		}
+
+		private function stats_multi_based_on_misc():Number {
+			var temp:Number = 1.0;
+			if (findPerk(PerkLib.EnemyEliteType) >= 0) temp += 1;
+			if (findPerk(PerkLib.EnemyChampionType) >= 0) temp += 2;
+			if (findPerk(PerkLib.EnemyBossType) >= 0) temp += 3;
+			if (this.level >= 25) temp += 1;
+			if (this.level >= 50) temp += 1;
+			if (this.level >= 75) temp += 1;
+			if (this.level >= 100) temp += 1;
+			if (this.level >= 125) temp += 1;
+			if (this.level >= 150) temp += 1;
+			if (this.level >= 175) temp += 1;
+			if (this.level >= 200) temp += 1;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 1.5;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 2;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 3;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp *= 5;
 			return temp;
 		}
 
@@ -1556,6 +1573,10 @@ import flash.utils.getQualifiedClassName;
 		protected function baseXP():Number
 		{
 			var baseMonXP:Number = this.level * 5;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) baseMonXP += this.level * 0.5;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 2) baseMonXP += this.level;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 3) baseMonXP += this.level * 1.5;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 4) baseMonXP += this.level * 2;
 			if (this.level < 7) baseMonXP += (this.level * 5) + rand(this.level * 5);
 			else baseMonXP += rand(this.level * 5);
 			return baseMonXP;
@@ -2809,8 +2830,25 @@ import flash.utils.getQualifiedClassName;
 					var hemorrhage:Number = 0;
 					hemorrhage += maxHP() * statusEffectv2(StatusEffects.Hemorrhage);
 					hemorrhage = SceneLib.combat.doDamage(hemorrhage);
-					if (plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your attack left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
-					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your attack left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
+					if (plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your attack left behind. <b>(<font color=\"#800000\">" + hemorrhage + "</font>)</b>\n\n");
+					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your attack left behind. <b>(<font color=\"#800000\">" + hemorrhage + "</font>)</b>\n\n");
+				}
+			}
+			if(hasStatusEffect(StatusEffects.Hemorrhage2)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.Hemorrhage2, 1, -1);
+				//Heal wounds
+				if (statusEffectv1(StatusEffects.Hemorrhage2) <= 0) {
+					outputText("The wounds your companion left on " + a + short + " stop bleeding so profusely.\n\n");
+					removeStatusEffect(StatusEffects.Hemorrhage2);
+				}
+				//Deal damage if still wounded.
+				else {
+					var hemorrhage2:Number = 0;
+					hemorrhage2 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage2);
+					hemorrhage2 = SceneLib.combat.doDamage(hemorrhage2);
+					if (plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your companion attack left behind. <b>(<font color=\"#800000\">" + hemorrhage2 + "</font>)</b>\n\n");
+					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your companion attack left behind. <b>(<font color=\"#800000\">" + hemorrhage2 + "</font>)</b>\n\n");
 				}
 			}
 			if (hasStatusEffect(StatusEffects.Bloodlust)) {
@@ -2938,6 +2976,24 @@ import flash.utils.getQualifiedClassName;
 					else outputText(capitalA + short + " burns from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
 				}
 			}
+			//Burn DoT
+			if (hasStatusEffect(StatusEffects.BurnDoT2)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.BurnDoT2,1,-1);
+				//Heal wounds
+				if(statusEffectv1(StatusEffects.BurnDoT2) <= 0) {
+					outputText("Flames left by Burn " + a + short + " finally stop burning.\n\n");
+					removeStatusEffect(StatusEffects.BurnDoT2);
+				}
+				//Deal damage if still wounded.
+				else {
+					var store8:Number = (player.str + player.spe + player.tou) * 2.5;
+					store8 += maxHP() * statusEffectv2(StatusEffects.BurnDoT2);
+					store8 = SceneLib.combat.doDamage(store8);
+					if(plural) outputText(capitalA + short + " burn from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store8 + "</font>)</b>\n\n");
+					else outputText(capitalA + short + " burns from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store8 + "</font>)</b>\n\n");
+				}
+			}
 			//Fire Punch Burn DoT
 			if (hasStatusEffect(StatusEffects.FirePunchBurnDoT)) {
 				//Countdown to heal
@@ -2955,6 +3011,16 @@ import flash.utils.getQualifiedClassName;
 					else outputText(capitalA + short + " burns from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
 				}
 			}
+			//Regen Inhibitor
+			if (hasStatusEffect(StatusEffects.RegenInhibitor)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.RegenInhibitor,1,-1);
+				//Heal wounds
+				if (statusEffectv1(StatusEffects.RegenInhibitor) <= 0) {
+					if (this is Hydra) outputText("The hydra sighs in relief as her wounds resume regenerating!\n\n");
+					removeStatusEffect(StatusEffects.RegenInhibitor);
+				}
+			}
 			//Acid DoT
 			if (hasStatusEffect(StatusEffects.AcidDoT)) {
 				//Countdown to heal
@@ -2970,8 +3036,8 @@ import flash.utils.getQualifiedClassName;
 					var store7:Number = (player.str + player.spe + player.tou) * 2.5;
 					store7 += maxHP() * statusEffectv2(StatusEffects.AcidDoT);
 					store7 = SceneLib.combat.doDamage(store7);
-					if(plural) outputText(capitalA + short + " are hurt by lingering Acid after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
-					else outputText(capitalA + short + " is hurt by lingering Acid after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
+					if(plural) outputText(capitalA + short + " are hurt by lingering Acid after-effect. <b>(<font color=\"#800000\">" + store7 + "</font>)</b>\n\n");
+					else outputText(capitalA + short + " is hurt by lingering Acid after-effect. <b>(<font color=\"#800000\">" + store7 + "</font>)</b>\n\n");
 				}
 			}
 			if (hasStatusEffect(StatusEffects.Maleficium)) {
@@ -2996,10 +3062,11 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
 				if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
 				if (findPerk(PerkLib.Ferocity) >= 0 && this.HP < 1) healingPercent -= 1;
-				if (findPerk(PerkLib.Diehard) >= 0 && !findPerk(PerkLib.EpicDiehard) >= 0 && this.HP < 1) healingPercent -= 1;
 				if (findPerk(PerkLib.EnemyPlantType) >= 0) healingPercent += 1;
 				if (findPerk(PerkLib.MonsterRegeneration) >= 0) healingPercent += perkv1(PerkLib.MonsterRegeneration);
 				if (hasStatusEffect(StatusEffects.MonsterRegen)) healingPercent += statusEffectv2(StatusEffects.MonsterRegen);
+				if (hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent = 0;
+				if (findPerk(PerkLib.Diehard) >= 0 && !findPerk(PerkLib.EpicDiehard) >= 0 && this.HP < 1) healingPercent -= 1;
 				temp2 = Math.round(maxHP() * healingPercent / 100);
 				if (findPerk(PerkLib.Lifeline) >= 0) temp2 += (45 * (1 + newGamePlusMod()));
 				if (findPerk(PerkLib.ImprovedLifeline) >= 0) temp2 += (60 * (1 + newGamePlusMod()));
@@ -3007,16 +3074,19 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.EpicLifeline) >= 0) temp2 += (120 * (1 + newGamePlusMod()));
 				if (hasStatusEffect(StatusEffects.MonsterRegen2)) temp2 += statusEffectv2(StatusEffects.MonsterRegen2);
 				if (hasStatusEffect(StatusEffects.MonsterVPT)) temp2 += statusEffectv1(StatusEffects.MonsterVPT);
-				if (this is ChiChi && (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2 || hasStatusEffect(StatusEffects.MonsterRegen))) {
-					outputText("To your surprise, Chi Chi’s wounds start closing! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
+				if (temp2 > 0) {
+					temp2 = Math.round(temp2);
+					if (this is ChiChi && (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2 || hasStatusEffect(StatusEffects.MonsterRegen))) {
+						outputText("To your surprise, Chi Chi’s wounds start closing! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
+					}
+					else {
+						outputText("Due to natural regeneration " + short + " recover");
+						if (plural) outputText("s");
+						else outputText("ed");
+						outputText(" some HP! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
+					}
+					addHP(temp2);
 				}
-				else {
-					outputText("Due to natural regeneration " + short + " recover");
-					if (plural) outputText("s");
-					else outputText("ed");
-					outputText(" some HP! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
-				}
-				addHP(temp2);
 			}
 			//soulforce and mana regeneration for monsters
 			if (findPerk(PerkLib.JobSoulCultivator) >= 0 && this.soulforce < maxSoulforce()) {

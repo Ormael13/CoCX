@@ -952,7 +952,7 @@ public function companionsCount():Number {
 
 public function followersCount():Number {
 	var counter:Number = 0;
-	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) counter++;
+	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12 && flags[kFLAGS.ALVINA_FOLLOWER] < 20) counter++;
 	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) counter++;
 	if (flags[kFLAGS.AURORA_LVL] >= 1) counter++;
 	if (emberScene.followerEmber()) counter++;
@@ -999,6 +999,7 @@ public function slavesCount():Number {
 
 public function loversCount():Number {
 	var counter:Number = 0;
+	if (flags[kFLAGS.ALVINA_FOLLOWER] > 19) counter++;
 	if (arianScene.arianFollower()) counter++;
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
 	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
@@ -1094,6 +1095,11 @@ public function campLoversMenu(descOnly:Boolean = false):void {
         Holidays.DLCPrompt("Lovers DLC", "Get the Lovers DLC to be able to interact with them and have sex! Start families! The possibilities are endless!", "$4.99", doCamp);
         return;
 	}
+	//Alvina
+	if (flags[kFLAGS.ALVINA_FOLLOWER] > 19) {
+		outputText("Alvina isn’t so far from here, having made her camp in a corrupted plant groove she created so to have easy access to reagents.\n\n");
+		buttons.add( "Alvina", SceneLib.alvinaFollower.alvinaMainCampMenu).hint("Check up on Alvina.");
+	}
 	//AMILY
 	if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0 && !descOnly) {
 		outputText("Amily is currently strolling around your camp, ");
@@ -1154,7 +1160,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		buttons.add("Diana", SceneLib.dianaScene.mainCampMenu).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) > 0,"Training.");
 	}
 	//Electra
-	
+//	buttons.add("???").disable("Charge Up!!!");
 	//Etna
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) {
 		outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
@@ -1498,7 +1504,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 		buttons.add( "Aurora", SceneLib.auroraFollower.auroraCampMenu).hint("Check up on Aurora.").disableIf(player.statusEffectv2(StatusEffects.CampSparingNpcsTimers4) > 0,"Training.");
 	}
 	//Alvina
-	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) {
+	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12 && flags[kFLAGS.ALVINA_FOLLOWER] < 20) {
 		outputText("Alvina isn’t so far from here, having made her camp in a corrupted plant groove she created so to have easy access to reagents.\n\n");
 		buttons.add( "Alvina", SceneLib.alvinaFollower.alvinaMainCampMenu).hint("Check up on Alvina.");
 	}
@@ -1757,6 +1763,12 @@ private function campBuildingSim():void {
 		//addButton(2, "Build Cabin(O)", campUpgrades.buildCampMembersCabinsMenu).hint("Work on your camp members cabins.");
 		addButton(5, "Build Misc", campUpgrades.buildmisc1Menu).hint("Build other structures than walls or cabins for your camp.");
 		//addButton(6, "Build Misc(O)", campUpgrades.).hint("Other structures than walls or cabins for your camp.");
+	}
+	else {
+		addButtonDisabled(0, "Build Wall", "Req. Carpenter's Toolbox.");
+		//addButtonDisabled(2, "Build Cabin(O)", "Req. Carpenter's Toolbox.");
+		addButtonDisabled(5, "Build Misc", "Req. Carpenter's Toolbox.");
+		//addButtonDisabled(6, "Build Misc(O)", "Req. Carpenter's Toolbox.");
 	}
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 10) addButton(1, "Build Cabin", cabinProgress.initiateCabin).hint("Work on your cabin."); //Work on cabin.
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 && player.hasItem(useables.IMPSKLL, 1)) addButton(10, "AddImpSkull", promptHangImpSkull).hint("Add an imp skull to decorate the wall and to serve as deterrent for imps.", "Add Imp Skull");
@@ -4345,3 +4357,4 @@ private function fixHistory():void {
 */
 }
 }
+

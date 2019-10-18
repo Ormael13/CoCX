@@ -296,6 +296,10 @@ public class HeXinDao extends BaseContent
 					sayLine2(consumables.HOB3MAN,"It's manual for Grandiose Hail of Moon Blades, this technique allows to form huge amount of etheral weapons traveling at extreme speeds that will became stronger and stronger as you train your body and soul."),
 					"\n\nSince you going deeper into all that 'soulforce' stuff you now got something to train.  Although seems name of the manual is odd but it makes you remember something...but what and from where you not certain.  "
 			).hint("Grandiose Hail of Moon Blades Manual.");
+			/*addButton(2, "Yin Yang Blast", buyItem2,consumables.YYB_MAN,
+					sayLine2(consumables.YYB_MAN,"It's manual for Yin Yang Blast, this technique allows to make team attack using Yin Palm and Yang Fist to ."),
+					"\n\nSince you going deeper into all that 'soulforce' stuff you now got something to train with someone that would goes into fights alongside you.  Maybe there is some more of those 'combined' soulskills somewhere?  "
+			).hint("Yin Yang Blast Manual.");*/
 			addButton(14, "Back", golemmerchant);
             statScreenRefresh();
 		}/*

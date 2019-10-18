@@ -30,12 +30,15 @@ import classes.Scenes.Areas.HighMountains.IzumiScene;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
+import classes.Scenes.Dungeons.EbonLabyrinth.ChaosChimera;
+import classes.Scenes.Dungeons.EbonLabyrinth.DarkSlimeEmpress;
 import classes.Scenes.Monsters.DarkElfRanger;
 import classes.Scenes.Monsters.DarkElfScout;
 import classes.Scenes.Monsters.DarkElfSlaver;
 import classes.Scenes.Monsters.DarkElfSniper;
 import classes.Scenes.Monsters.Malicore;
 import classes.Scenes.Monsters.Manticore;
+import classes.Scenes.NPCs.Alvina;
 import classes.Scenes.NPCs.Aria;
 import classes.Scenes.NPCs.Aurora;
 import classes.Scenes.NPCs.CelessScene;
@@ -216,7 +219,8 @@ use namespace CoC;
 			addButton(4, "Materials", MaterialMenu).hint("For creting various materials for tests.");
 			addButton(5, "Enemies", EnemiesMenu).hint("For spawning various enemies to test fight them.");
 			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
-			addButton(7, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
+			addButton(7, "Body State", BodyStateMenu).hint("For more precise adjusting of few other body values or parts than Stats Adj option.");
+			addButton(8, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			//if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
 			if (player.hasPerk(PerkLib.Metamorph)) addButton(9, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Metamorph all options unlock.");
 			//addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
@@ -240,6 +244,26 @@ public function FightNeisa():void {
 	clearOutput();
 	outputText("Entering battle with Neisa! Enjoy ^^");
 	startCombat(new Neisa());
+}
+public function FightAlvina():void {
+	clearOutput();
+	outputText("Entering battle with Alvina! Enjoy ^^");
+	startCombat(new Alvina());
+}
+public function FightChaosChimera():void {
+	clearOutput();
+	outputText("Entering battle with Chaos Chimera! Enjoy ^^");
+	startCombat(new ChaosChimera());
+}
+public function FightDarkSlimeEmpress():void {
+	clearOutput();
+	outputText("Entering battle with Dark Slime Empress! Enjoy ^^");
+	if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,65,0,0,0);
+	else {
+		if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,70,0,0,0);
+		else player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
+	}
+	startCombat(new DarkSlimeEmpress());
 }
 		public function AddReptaTongue():void {
 			outputText("\n\n<b>(Gained set of items to make Repta-Tongue Potion!)</b>\n\n");
@@ -452,6 +476,8 @@ public function FightNeisa():void {
 			if (!player.hasStatusEffect(StatusEffects.UnlockedCheshireFace)) player.createStatusEffect(StatusEffects.UnlockedCheshireFace,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedCheshireSmile)) player.createStatusEffect(StatusEffects.UnlockedCheshireSmile,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedLionEars)) player.createStatusEffect(StatusEffects.UnlockedLionEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDisplacerEars)) player.createStatusEffect(StatusEffects.UnlockedDisplacerEars,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedDisplacerEyes)) player.createStatusEffect(StatusEffects.UnlockedDisplacerEyes,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedDisplacerArms)) player.createStatusEffect(StatusEffects.UnlockedDisplacerArms,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedDisplacerBTentacles)) player.createStatusEffect(StatusEffects.UnlockedDisplacerBTentacles,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningTail)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningTail,0,0,0,0);
@@ -471,8 +497,6 @@ public function FightNeisa():void {
 			if (!player.hasStatusEffect(StatusEffects.UnlockedManticoreEyes)) player.createStatusEffect(StatusEffects.UnlockedManticoreEyes,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedSphinxWings)) player.createStatusEffect(StatusEffects.UnlockedSphinxWings,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedSphinxArms)) player.createStatusEffect(StatusEffects.UnlockedSphinxArms,0,0,0,0);/*
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);
@@ -985,6 +1009,121 @@ public function FightNeisa():void {
 			if (player.level < 140) addButton(13, "Add 10 LvL's", AddLvL2).hint("Add 10 Levels (with stat and perk points).");
 			addButton(14, "Back", SoulforceCheats);
 		}
+		public function BodyStateMenu():void {
+			menu();
+			addButton(0, "Height U1", AddTallness1).hint("Add 2 to Height.");
+			addButton(2, "Height D1", SubTallness1).hint("Substract 2 from Height.");
+			addButton(1, "Height U2", AddTallness2).hint("Add 12 to Height.");
+			addButton(3, "Height D2", SubTallness2).hint("Substract 12 from Height.");
+			addButton(4, "Hair L. Up", AddHairLength).hint("Add 2 to Hair Length.");
+			addButton(9, "Hair L. Down", SubHairLength).hint("Substract 2 from Hair Length.");
+			addButton(5, "Cup Up", AddCupSize).hint("Add 1 to Cup Size.");
+			addButton(6, "Cup Down", SubCupSize).hint("Substract 1 from Cup Size.");
+			addButton(7, "Cock Up", AddCockLength).hint("Add 1 to Cock Length.");
+			addButton(8, "Cock Down", SubCockLength).hint("Substract 1 from Cock Length.");
+			addButton(10, "Add Pussy", AddPussy).hint("Add Vagina.");
+			addButton(11, "Rem Pussy", RemovePussy).hint("Remove Vagina.");
+			addButton(12, "Add C+B", AddCockBalls).hint("Add Cock+Balls.");
+			addButton(13, "Rem C+B", RemoveCockBalls).hint("Remove Cock+Balls.");
+			addButton(14, "Back", SoulforceCheats);
+		}
+		public function AddTallness1():void {
+			player.tallness += 2;
+			if (player.tallness >= 132) player.tallness = 132;
+			BodyStateMenu();
+		}
+		public function AddTallness2():void {
+			player.tallness += 12;
+			if (player.tallness >= 132) player.tallness = 132;
+			BodyStateMenu();
+		}
+		public function AddHairLength():void {
+			player.hairLength += 2;
+			BodyStateMenu();
+		}
+		public function AddCupSize():void {
+			var growth:int = 1;
+			if (player.breastRows[0].breastRating < 2) growth++;
+			player.growTits(growth, player.breastRows.length, true, 3);
+			BodyStateMenu();
+		}
+		public function AddCockLength():void {
+			player.lengthChange(1, 1);
+			BodyStateMenu();
+		}
+		public function AddPussy():void {
+			player.createVagina();
+			player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
+			player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
+			player.vaginas[0].virgin = true;
+			player.clitLength = .25;
+			if (player.fertility <= 5) player.fertility = 6;
+			BodyStateMenu();
+		}
+		public function AddCockBalls():void {
+			player.createCock();
+			player.cocks[0].cockLength = 4;
+			player.cocks[0].cockThickness = 1;
+			player.cocks[0].cockType = CockTypesEnum.HUMAN;
+			player.clitLength = .25;
+			if (player.balls <= 1) {
+				player.balls = 2;
+				player.ballSize = 1;
+			}
+			BodyStateMenu();
+		}
+		public function SubTallness1():void {
+			player.tallness -= 2;
+			if (player.tallness < 42) player.tallness = 42;
+			BodyStateMenu();
+		}
+		public function SubTallness2():void {
+			player.tallness -= 12;
+			if (player.tallness < 42) player.tallness = 42;
+			BodyStateMenu();
+		}
+		public function SubHairLength():void {
+			player.hairLength -= 2;
+			if (player.hairLength < 0) player.hairLength = 0;
+			BodyStateMenu();
+		}
+		public function SubCupSize():void {
+			if (player.breastRows[0].breastRating >= 1) player.breastRows[0].breastRating--;
+			BodyStateMenu();
+		}
+		public function SubCockLength():void {
+			var index:int = 0;
+			player.lengthChange(-1, 1);
+			if (player.cocks[index].cockLength < 2) {
+				outputText("  ");
+				player.killCocks(1);
+			}
+			BodyStateMenu();
+		}
+		public function RemovePussy():void {
+			player.removeVagina(0, 1);
+			player.clitLength = .25;
+			BodyStateMenu();
+		}
+		public function RemoveCockBalls():void {
+			player.killCocks(1);
+			if (player.balls > 1) {
+				player.balls = 0;
+				player.ballSize = 0;
+			}
+			BodyStateMenu();
+		}
+		
+				/*if (player.breastRows.length == 0) {
+					outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
+					player.createBreastRow();
+					player.breastRows[0].breasts = 2;
+					//player.breastRows[0].breastsPerRow = 2;
+					player.breastRows[0].nipplesPerBreast = 1;
+					player.breastRows[0].breastRating = 2;
+					outputText("\n");
+				}
+			}*/
 		public function FasterOrInstantCampNPCRecruitment():void {
 			menu();
 			addButton(0, "E.I.K.", EmberIsabellaKiha).hint("Ember / Isabella / Kiha (If PC have all 3 nothing will happen after choosing this option.)");
@@ -1374,9 +1513,11 @@ public function FightNeisa():void {
 			menu();
 			addButton(0, "FightForPearl", FightForPearl).hint("Test fight to get Sky Poison Pearl legally (aside we cheat to start fight)");
 			addButton(1, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
-			addButton(2, "Sonya", FightSonya).hint("Test fight with Sonya.");
-			addButton(3, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
+			//addButton(2, "Sonya", FightSonya).hint("Test fight with Sonya.");
+			//addButton(3, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
 			//addButton(4, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
+			addButton(2, "ChaosChimera", FightChaosChimera).hint("Test fight with Chaos Chimera.");
+			addButton(3, "Alvina", FightAlvina).hint("Test fight with Alvina.");
 			addButton(4, "Neisa", FightNeisa).hint("Test fight with Neisa.");
 			addButton(5, "Lethice", FightLethice).hint("Test fight with Lethice.");
 			//addButton(5, "DE Ranger", FightDarkElfRanger).hint("Test fight with Dark Elf Ranger. (lvl 39)");
@@ -1385,6 +1526,7 @@ public function FightNeisa():void {
 			addButton(7, "Electra", FightElectra).hint("Test fight with Electra.");
 			addButton(8, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
 			addButton(9, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
+			addButton(10, "DarkSlimeEmpress", FightDarkSlimeEmpress).hint("Test fight with Dark Slime Empress.");
 			addButton(11, "LvLUP Aurora", LvLUPAurora).hint("LvL UP forcefully Aurora for testing purpose up to the limit.");
 			addButton(12, "DELvL Aurora", DELvLAurora).hint("DE LvL forcefully Aurora for testing purpose down toward the lvl 1.");
 			addButton(13, "FeralT.Beast", FightFeralImp).hint("Test fight with feral tentacle beast.");

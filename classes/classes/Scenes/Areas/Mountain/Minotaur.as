@@ -51,7 +51,7 @@ import classes.internals.*;
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
-				SceneLib.dungeons.ebonlabyrinth.defeatedByLabyrinthMinotaur();
+				SceneLib.mountain.minotaurScene.getRapedByMinotaur();
 			} else if (hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);
 				SceneLib.desert.antsScene.phyllaPCLostToMino();

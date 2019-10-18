@@ -25,7 +25,9 @@ public final class Mutations extends MutationsHelper
 	{
 		public function Mutations() {}
 
-        public static const gooSkinColors:Array = ["green","purple","blue","cerulean","emerald"];
+        public static const gooSkinColors:Array = ["green","magenta","blue","cerulean","emerald","pink"];
+		public static const magmagooSkinColors:Array = ["red","orange","reddish orange"];
+		public static const darkgooSkinColors:Array = ["indigo","light purple","purple","purplish black"];
 		public static const oniEyeColors:Array = ["red", "orange", "yellow", "green"];
 // import classes.ItemSlotClass;
 
@@ -75,7 +77,6 @@ public final class Mutations extends MutationsHelper
 			player.refillHunger(10);
 			if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
 		}
-
 //Agility Elixir
 		public function agilityElixir(player:Player):void
 		{
@@ -104,8 +105,7 @@ public final class Mutations extends MutationsHelper
 				player.wis += 1 + rand(2);
 				dynStats();
 			}
-		}
-/*
+		}/*
 //Dao Dew
 		public function daoDew(player:Player):void
 		{
@@ -117,8 +117,7 @@ public final class Mutations extends MutationsHelper
 			else if (player.wis < 200) dynStats("wis", 2 + rand(3));
 			else dynStats("wis", 2 + rand(2));
 			player.refillHunger(10);
-		}
-*/
+		}*/
 //Vixen Tea
 		public function vixenTea(player:Player):void
 		{
@@ -143,7 +142,28 @@ public final class Mutations extends MutationsHelper
 			else dynStats("lib", -(2 + rand(2)));
 			player.refillHunger(15);
 		}
-
+//Strawberry shortcake
+		public function strawberryShortcake(player:Player):void
+		{
+			clearOutput();
+			outputText("You eat and savor the cake. You have no clue were the spoon and plate came from but they were there with the food.");
+			if (player.tallness > 42) {
+				outputText("\n\nWhoa wait did you just lost some height!? You indeed notice you've shrunk by a few inches.");
+				player.tallness -= 1 + rand(3);
+				if (player.tallness < 42) player.tallness = 42;
+			}
+		}
+//Big chocolate cake
+		public function bigChocolateCake(player:Player):void
+		{
+			clearOutput();
+			outputText("You eat and savor the cake. You have no clue were the spoon and plate came from but they were there with the food.");
+			if (player.tallness < 132) {
+				outputText("\n\nWhoa wait did you just gain some height!? You indeed notice you've grown by a few inches.");
+				player.tallness += 1 + rand(3);
+				if (player.tallness > 132) player.tallness = 132;
+			}
+		}
 //Airweed
 		public function airweed(player:Player):void
 		{
@@ -240,6 +260,15 @@ public final class Mutations extends MutationsHelper
 				outputText("You shudder as a small orgasm passes through you. When you recover you actually feel more aroused.");
 				dynStats("lus", 45);
 			}
+			statScreenRefresh();
+		}
+		
+		public function peppermintwhite(player:Player):void {
+			clearOutput();
+            outputText("You pull the cork off the gift from the mysterious stranger.  The scent of alluring mint fills your nose once again.  You bring the head of the bottle to your lips and tip it back, the creamy white fluid hits your tongue and slips down your throat.  The liquid is surprisingly refreshing, the creamy mint flavor clings to your tongue and mouth, and makes your breath feel cool as you exhale over your lips.  You can feel the liquid drip down to your stomach and fill you with a pleasant warmth and holiday cheer.\n\n");
+            //Recovers health and fatigue, adds five to max health, and one to libido.*/
+            HPChange(EngineCore.maxHP(),true);
+            fatigue(-100);
 			statScreenRefresh();
 		}
 
@@ -3862,24 +3891,41 @@ public final class Mutations extends MutationsHelper
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
-		public function gooGasmic(player:Player):void
+		public function gooGasmic(type:Number,player:Player):void
 		{
+			//'type' refers to the variety of slime TF's.
+			//0 == normal slime
+			//1 == magma slime
+			//2 == dark slime
+			//3 == ??? slime
+			player.slimeFeed();
+			var changes:Number = 0;
+			var changeLimit:Number = 1;
+			if (rand(2) == 0) changeLimit++;
+			if (rand(3) == 0) changeLimit++;
+			if (rand(4) == 0) changeLimit++;
+			if (rand(5) == 0) changeLimit++;
+			changeLimit += additionalTransformationChances();
 			clearOutput();
-			outputText("You take the wet cloth in hand and rub it over your body, smearing the strange slime over your [skin.type] slowly.");
+			if (type == 0) outputText("You take the wet cloth in hand and rub it over your body, smearing the strange slime over your [skin.type] slowly.");
+			if (type == 2) outputText("Well here goes nothing you gulp down the thing and, sure enough, you begin to feel strange as you ingest the jelly. Well at least it tastes like grapes..");
 			//Stat changes
 			//libido up to 80
-			if (player.lib < 80) {
-				dynStats("lib", (.5 + (90 - player.lib) / 10), "lus", player.lib / 2);
+			if (player.lib < 80 && changes < changeLimit) {
 				outputText("\n\nBlushing and feeling horny, you make sure to rub it over your chest and erect nipples, letting the strange slimy fluid soak into you.");
+				dynStats("lib", (.5 + (90 - player.lib) / 10), "lus", player.lib / 2);
+				changes++;
 			}
 			//sensitivity moves towards 50
-			if (player.sens < 50) {
+			if (player.sens < 50 && changes < changeLimit) {
 				outputText("\n\nThe slippery slime soaks into your [skin.type], making it tingle with warmth, sensitive to every touch.");
 				dynStats("sen", 1);
+				changes++;
 			}
-			else if (player.sens > 50) {
+			else if (player.sens > 50 && changes < changeLimit) {
 				outputText("\n\nThe slippery slime numbs your [skin.type] slightly, leaving behind only gentle warmth.");
 				dynStats("sen", -1);
+				changes++;
 			}
 			/*Calculate goopiness
 			 var goopiness:Number = 0;
@@ -3890,19 +3936,47 @@ public final class Mutations extends MutationsHelper
 			 }*/
 			//Cosmetic changes based on 'goopyness'
 			//Remove wings
-			if (player.wings.type > Wings.NONE) {
+			if (player.wings.type > Wings.NONE && rand(2) == 0 && changes < changeLimit) {
 				outputText("\n\nYou sigh, feeling a hot wet tingling down your back.  It tickles slightly as you feel your wings slowly turn to sludge, dripping to the ground as your body becomes more goo-like.");
 				setWingType(Wings.NONE, "non-existant");
-				return;
+				changes++;
 			}
 			//Human face
-			if (player.faceType != Face.HUMAN && rand(2) == 0) {
+			if (player.faceType != Face.HUMAN && rand(2) == 0 && changes < changeLimit) {
 				outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look.  <b>You have a human looking face again!</b>");
 				setFaceType(Face.HUMAN);
-				return;
+				changes++;
 			}
-			//Goopy hair
-			if (player.hairType != 3 && !player.isGargoyle()) {
+			//1.Goopy arms
+			if (player.arms.type != Arms.GOO && changes < changeLimit && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nYour arms become increasingly wet, as if they were sweating heavily, until eventually you're unsure whether or not they are even solid. The sweat clears up, turning to " + player.skinTone + " slime. At first, it feels weird, because they are neither entirely solid or liquid, but the simple act of lengthening your limbs to ridiculous reach amuses you. Furthermore you can see right through your hands as if looking through water. Perhaps there's some use to your <b>new goo dripping arms.</b>");
+				setArmType(Arms.GOO);
+				changes++;
+			}
+			//2.Goopy skin
+			if (!player.hasGooSkin() && !player.isGargoyle() && rand(3) == 0 && changes < changeLimit) {
+				if (player.hasPlainSkinOnly()) outputText("\n\nYou sigh, feeling your [armor] sink into you as your skin becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!");
+				else if (player.hasFur()) outputText("\n\nYou sigh, suddenly feeling your fur become hot and wet.  You look down as your [armor] sinks partway into you.  With a start you realize your fur has melted away, melding into the slime-like coating that now serves as your skin.  You've become partly liquid and incredibly gooey!");
+				else if (player.hasScales()) outputText("\n\nYou sigh, feeling slippery wetness over your scales.  You reach to scratch it and come away with a slippery wet coating.  Your scales have transformed into a slimy goop!  Looking closer, you realize your entire body has become far more liquid in nature, and is semi-solid.  Your [armor] has even sunk partway into you.");
+				else if (player.skin.base.type != Skin.GOO) outputText("\n\nYou sigh, feeling your [armor] sink into you as your [skin] becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!");
+				player.skin.setBaseOnly({adj:"slimy",type:Skin.GOO});
+				if (!InCollection(player.skin.base.color,gooSkinColors) && type == 0) {
+					player.skin.base.color = randomChoice(gooSkinColors);
+					outputText("  Stranger still, your skintone changes to [skin color]!");
+				}
+				if (!InCollection(player.skin.base.color,magmagooSkinColors) && type == 1) {
+					player.skin.base.color = randomChoice(magmagooSkinColors);
+					outputText("  Stranger still, your skintone changes to [skin color]!");
+				}
+				if (!InCollection(player.skin.base.color,darkgooSkinColors) && type == 2) {
+					player.skin.base.color = randomChoice(darkgooSkinColors);
+					outputText("  Stranger still, your skintone changes to [skin color]!");
+				}
+				changes++;
+			}
+			////2a.Make alterations to dick/vaginal/nippular descriptors to match
+			//3.Goopy hair
+			if (player.hasGooSkin() && player.hairType != 3 && rand(2) == 0 && changes < changeLimit) {
 				setHairType(Hair.GOO);
 				//if bald
 				if (player.hairLength <= 0) {
@@ -3921,34 +3995,15 @@ public final class Mutations extends MutationsHelper
 				}
 				if (player.hairColor != "green" && player.hairColor != "purple" && player.hairColor != "blue" && player.hairColor != "cerulean" && player.hairColor != "emerald") {
 					outputText("  Stranger still, the hue of your semi-liquid hair changes to ");
-					var blah:int = rand(10);
-					if (blah <= 2) player.hairColor = "green";
-					else if (blah <= 4) player.hairColor = "purple";
-					else if (blah <= 6) player.hairColor = "blue";
-					else if (blah <= 8) player.hairColor = "cerulean";
-					else player.hairColor = "emerald";
+					player.hairColor = player.skin.base.color;
 					outputText(player.hairColor + ".");
 				}
 				dynStats("lus", 10);
-				return;
+				changes++;
 			}
-			//1.Goopy skin
-			if (player.hairType == 3 && !player.hasGooSkin()) {
-				if (player.hasPlainSkinOnly()) outputText("\n\nYou sigh, feeling your [armor] sink into you as your skin becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!");
-				else if (player.hasFur()) outputText("\n\nYou sigh, suddenly feeling your fur become hot and wet.  You look down as your [armor] sinks partway into you.  With a start you realize your fur has melted away, melding into the slime-like coating that now serves as your skin.  You've become partly liquid and incredibly gooey!");
-				else if (player.hasScales()) outputText("\n\nYou sigh, feeling slippery wetness over your scales.  You reach to scratch it and come away with a slippery wet coating.  Your scales have transformed into a slimy goop!  Looking closer, you realize your entire body has become far more liquid in nature, and is semi-solid.  Your [armor] has even sunk partway into you.");
-				else if (player.skin.base.type != Skin.GOO) outputText("\n\nYou sigh, feeling your [armor] sink into you as your [skin] becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!");
-				player.skin.setBaseOnly({adj:"slimy",type:Skin.GOO});
-				if (!InCollection(player.skin.base.color,gooSkinColors)) {
-					player.skin.base.color = randomChoice(gooSkinColors);
-					outputText("  Stranger still, your skintone changes to [skin color]!");
-				}
-				return;
-			}
-			////1a.Make alterations to dick/vaginal/nippular descriptors to match
 			//DONE EXCEPT FOR TITS & MULTIDICKS (UNFINISHED KINDA)
-			//2.Goo legs
-			if (player.skinAdj == "slimy" && player.skinDesc == "skin" && player.lowerBody != LowerBody.GOO && player.lowerBody != LowerBody.GARGOYLE) {
+			//4.Goo legs
+			if (player.skinAdj == "slimy" && player.skinDesc == "skin" && player.arms.type == Arms.GOO && player.lowerBody != LowerBody.GOO && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\nYour viewpoint rapidly drops as everything below your " + buttDescript() + " and groin melts together into an amorphous blob.  Thankfully, you discover you can still roll about on your new slimey undercarriage, but it's still a whole new level of strange.");
 				player.tallness -= 3 + rand(2);
 				if (player.tallness < 36) {
@@ -3957,29 +4012,37 @@ public final class Mutations extends MutationsHelper
 				}
 				setLowerBody(LowerBody.GOO);
 				player.legCount = 1;
-				return;
+				changes++;
 			}
-			//3a. Grow vagina if none
-			if (!player.hasVagina() && player.lowerBody != LowerBody.GARGOYLE) {
+			//5.Goopy rear body
+			if (player.rearBody.type != RearBody.METAMORPHIC_GOO && player.lowerBody == LowerBody.GOO && player.findPerk(PerkLib.SlimeCore) >= 0 && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou suddenly lose shape turning into a puddle on the ground. Confused you begin to try and stand up   At the center of the mass that is your translucent " + player.skinTone + " body, you actually do have something solid that allows you to shape your form, a heart, or more accurately, a core. You try and pull yourself back up, translucent liquid arms and torso shaping back from your body mass as you need them. ");
+				outputText("Once you've recovered the top of your goey human shape you sigh in relief. Curious you begin to try out your new very malleable form reshaping yourself in various forms from a cube to a literal human dildo. Giggling you take back your standard shape thinking of the many naughty things you can do now with this gooey body of yours.");
+				setRearBody(RearBody.METAMORPHIC_GOO);
+				changes++;
+			}
+			//6a. Grow vagina if none
+			if (!player.hasVagina() && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\nA wet warmth spreads through your slimey groin as a narrow gash appears on the surface of your groin.  <b>You have grown a vagina.</b>");
 				player.createVagina();
 				player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_DROOLING;
 				player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
 				player.clitLength = .4;
-				return;
+				changes++;
 
 			}
-			//3b.Infinite Vagina
-			if (player.vaginalCapacity() < 9000) {
+			//6b.Infinite Vagina
+			if (player.vaginalCapacity() < 9000 && rand(3) == 0 && changes < changeLimit) {
 				if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 9000, 0, 0, 0);
 				else player.addStatusValue(StatusEffects.BonusVCapacity, 1, 9000);
 				outputText("\n\nYour [vagina]'s internal walls feel a tingly wave of strange tightness.  Experimentally, you slip a few fingers, then your hand, then most of your forearm inside yourself.  <b>It seems you're now able to accommodate just about ANYTHING inside your sex.</b>");
-				return;
+				changes++;
 			}
-			else if (player.tallness < 100 && rand(3) <= 1) {
+			else if (player.tallness < 100 && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\nYour gel-like body swells up from the intake of additional slime.  If you had to guess, you'd bet you were about two inches taller.");
 				player.tallness += 2;
 				dynStats("str", 1, "tou", 1);
+				changes++;
 			}
 			//Big slime girl
 			else {
@@ -5409,9 +5472,9 @@ public final class Mutations extends MutationsHelper
 				setEarType(Ears.CAT);
 				changes++;
 			}
-			if (player.ears.type != Ears.LION && player.tailType != Tail.GARGOYLE && type == 3 && rand(3) == 0 && changes < changeLimit) {
-				outputText("\n\nYour ears suddenly stretch painfully, making you scream in pain as they move toward the top of your head, growing rounder and bigger. Putting your hands to your ears you discover they are now covered with a fair amount of dark fur. <b>You now have lion ears.</b>");
-				setEarType(Ears.LION);
+			if (player.ears.type != Ears.DISPLACER && player.tailType != Tail.GARGOYLE && type == 3 && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nYour ears begin to prickle and burn as the skin tears and stretches migrating to the top of your head as they change into long wide, deep ears, perfect for catching any stray sound. Which becomes apparent when your hearing becomes far more clear than it has ever been. <b>Sound has become an entirely new experience now that you have displacer beast ears!</b>");
+				setEarType(Ears.DISPLACER);
 				changes++;
 			}
 			//DA TAIL (IF ALREADY HAZ URZ)
@@ -5457,7 +5520,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Da paws (if already haz tail)
-			if ((player.tailType == Tail.CAT || player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3) && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
+			if ((player.tailType == Tail.CAT || player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3) && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT && type != 3) {
 				//hoof to cat:
 				if (player.lowerBody == LowerBody.HOOFED) {
 					outputText("\n\nYou feel your hooves suddenly splinter, growing into five unique digits. Their flesh softens as your hooves reshape into furred cat paws. <b>You now have cat paws.</b>");
@@ -5470,6 +5533,14 @@ public final class Mutations extends MutationsHelper
 				//non hoof to cat:
 				else outputText("\n\nYou scream in agony as you feel the bones in your [feet] break and begin to rearrange. When the pain fades, you feel surprisingly well-balanced. <b>You now have cat paws.</b>");
 				setLowerBody(LowerBody.CAT);
+				player.legCount = 2;
+				changes++;
+			}
+			if (player.tailType == Tail.CAT && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.LION && type == 3) {
+				outputText("\n\n");
+				if (player.lowerBody != LowerBody.HUMAN) outputText("You watch, spellbound, while your legs gradually change its entire outer structure into a plain human-like form. ");
+				outputText("Your legs suddenly shift painfully, forcing you down on all fours as the bones of your feet changes shape into something entirely different. You feel hairs growing at a rapid rate all over your legs. Something juts out of your toes as they clench into the ground. As you feel the pain recede you sit and take a look at your foot; or rather, your large leonine hind paws, now armed with sharp, retractable claws. <b>You now have leonine paws.</b>");
+				setLowerBody(LowerBody.LION);
 				player.legCount = 2;
 				changes++;
 			}
@@ -5543,10 +5614,16 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//DAT EYES
-			if (rand(3) == 0 && changes < changeLimit && player.tongue.type == Tongue.CAT && player.eyes.type != Eyes.CAT_SLITS) {
+			if (rand(3) == 0 && changes < changeLimit && player.tongue.type == Tongue.CAT && player.eyes.type != Eyes.CAT_SLITS && type != 3) {
 				//Gain cat-like eyes
 				outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.  <b>Your eyes has turned into those of cat with vertical slit.</b>");
 				setEyeType(Eyes.CAT_SLITS);
+				changes++;
+			}
+			if (rand(3) == 0 && changes < changeLimit && player.tongue.type == Tongue.CAT && player.eyes.type != Eyes.DISPLACER && type == 3) {
+				//Gain displacer eyes
+				outputText("\n\nFor a moment your sight shifts as the ambient light suddenly turns extremely bright, almost blinding you. You walk around disoriented for a moment until the luminosity fades back to normal. You run to a puddle of water to check your reflection and quickly notice your eyes are now yellow and cat-like however just as you watch your reflection the white of your eyes also begins to darken turning black not unlike the eyes of a displacer beast.  <b>You now have displacer beast eyes.</b>");
+				setEyeTypeAndColor(Eyes.DISPLACER, "yellow");
 				changes++;
 			}
 			//cheshire fur color
@@ -5568,6 +5645,15 @@ public final class Mutations extends MutationsHelper
 					player.skin.coverage = Skin.COVERAGE_COMPLETE;
 					changes++;
 				}
+			}
+			//-Skin color change – dark grey
+			if (player.skinTone != "dark grey" && !player.isGargoyle() && changes < changeLimit && rand(3) == 0 && type == 3) {
+				outputText("\n\nIt takes a while for you to notice, but <b>");
+				if (player.hasFur()) outputText("the skin under your [skin coat.color] " + player.skinDesc);
+				else outputText("your " + player.skinDesc);
+				outputText(" has changed to become dark grey colored.</b>");
+				player.skinTone = "dark grey";
+				changes++;
 			}
 			//TURN INTO A FURRAH!  OH SHIT
 			if (player.eyes.type == Eyes.CAT_SLITS && rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
@@ -13022,9 +13108,9 @@ public final class Mutations extends MutationsHelper
 			}
 			//physical changes
 			//legs
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.lowerBody != LowerBody.CLOVEN_HOOFED) {
+			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.lowerBody != LowerBody.HOOFED) {
 				outputText("\n\nYou feel an odd sensation in your lower region. Your [feet] shift and you hear bones cracking as they reform. Fur grows on your legs and soon you're looking at a <b>new pair of goat legs</b>.");
-				setLowerBody(LowerBody.CLOVEN_HOOFED);
+				setLowerBody(LowerBody.HOOFED);
 				player.legCount = 2;
 				changes++;
 			}
@@ -13851,3 +13937,4 @@ public final class Mutations extends MutationsHelper
 		}
 	}
 }
+

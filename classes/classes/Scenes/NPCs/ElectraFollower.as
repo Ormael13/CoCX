@@ -186,20 +186,20 @@ public function ElectraSeXYesF():void
 }
 public function ElectraSeXHeadpat():void
 {
-	outputText("For reason unknown you feel like headpating ");
+	outputText("For reasons unknown you feel like headpating ");
 	if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 3) outputText("Electra");
 	else outputText("the raiju");
 	outputText(". At first she looks at you, somewhat confused, before a dopey smile start breaking out on her face.\n\n");
 	outputText("You proceed to gently rub her hairs then her ears, something not unlike static electricity slowly charging beneath your fingers. As the static transfer from her body to yours it begins focusing down between your legs, your");
 	if (player.hasCock()) {
 		outputText(" cock fully reaching its full erect state within no time");
-		if (player.hasVagina()) outputText(", as your pussy gushes with tingling pleasure anticipation");
+		if (player.hasVagina()) outputText(", as your pussy gushes with tingling pleasure and anticipation");
 	}
 	if (player.hasVagina()) outputText(" pussy gushing with tingling pleasure and anticipation");
 	outputText(". The raiju seems to be deeply enjoying this gentle treatment her pussy discharging small leaks of plasma as her body evacuate its static through your caring hand. Only as her charge is fully transferred do you reach your own orgasm your cum mixing up with the plasma already on the ground.\n\n");
 	outputText("The raiju eye seems clearer now, more focused and she stutter an apology as you slowly remove your still tingling hand.\n\n");
-	outputText("\"<i>Thank you so much for that I really need it. I have to go now but here take this jewel and these gems for your trouble. I hope we see each others again.</i>\"");
-	outputText("She hand you over a yellow jewel and a good amount of gems before leaving. As for you, your entire body still feels sensitive and aches for touch from the slowly receding voltage. Something however tells you that indulging yourself would be a bad idea.\n\n");
+	outputText("\"<i>Thank you so much for that I really need it. I have to go now but here take this jewel and these gems for your trouble. I hope we see each other again.</i>\"");
+	outputText("She hands you over a yellow jewel and a good amount of gems before leaving. As for you, your entire body still feels sensitive and aches for touch from the slowly receding voltage. Something however tells you that indulging yourself would be a bad idea.\n\n");
 	if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 		player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
 		player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);

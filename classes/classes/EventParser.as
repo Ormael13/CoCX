@@ -615,6 +615,7 @@ public class EventParser {
         if (CoC.instance.model.time.minutes > 59) {
             CoC.instance.timeQ++;
             CoC.instance.model.time.minutes -= 60;
+            if (!EngineCore.buttonIsVisible(0)) goNext(CoC.instance.timeQ, needNext);
         }
         time = Math.floor(time);
         //Advance hours

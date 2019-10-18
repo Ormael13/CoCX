@@ -377,6 +377,21 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.changeStatusValue(StatusEffects.SlimeCraving, 2, 0); //Reset stored hp/toughness values
 				needNext = true;
 			}
+			if (player.findPerk(PerkLib.FluidBody) < 0 && player.isGoo() && (player.gooScore() >= 11 || player.magmagooScore() >= 13 || player.darkgooScore() >= 13)) {
+				outputText("\nWoa your body is so malleable now attacks running through you can't damage you much anymore. This said the feeling of being penetrated by just anything leaves you with mind melting pleasure.\n(<b>Gained New Perk: Fluid Body.</b>\n)");
+				player.createPerk(PerkLib.FluidBody, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.findPerk(PerkLib.FluidBody) >= 0 && !player.isGoo() && (player.gooScore() < 11 || player.magmagooScore() < 13 || player.darkgooScore() < 13)) {
+				outputText("\nYour body no longer being slime enough you worry that weapon will draw blood the next time they strike you as you lose your fluidic nature.\n(<b>Lost Perk: Fluid Body.</b>\n)");
+				player.removePerk(PerkLib.FluidBody);
+				needNext = true;
+			}
+			if (player.rearBody.type == RearBody.METAMORPHIC_GOO && player.lowerBody != LowerBody.GOO) {
+				outputText("\n<b>Your body becomes way less malleable due to being less slime like.</b>\n");
+				player.rearBody.type = RearBody.NONE;
+				needNext = true;
+			}
 			if (player.hasStatusEffect(StatusEffects.Fullness)) {
 				player.addStatusValue(StatusEffects.Fullness, 1, -1);
 				if (player.statusEffectv1(StatusEffects.Fullness) <= 0) player.removeStatusEffect(StatusEffects.Fullness);

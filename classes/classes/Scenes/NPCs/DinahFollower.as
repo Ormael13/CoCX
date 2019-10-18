@@ -167,6 +167,8 @@ import classes.internals.Utils;
 			addButton(5, consumables.MANTICV.shortName, buyItem3, 5).hint("Buy a vial of manticore venom.");
 			addButton(6, consumables.VOLTTOP.shortName, buyItem3, 6).hint("Buy a Voltage topaz.");
 			addButton(7, consumables.REDVIAL.shortName, buyItem3, 7).hint("Buy a vial of ominous red liquid.");
+			addButton(10, consumables.STRASCA.shortName, buyItem2, 8).hint("Buy a Strawberry shortcake.");
+			addButton(11, consumables.BCHCAKE.shortName, buyItem2, 9).hint("Buy a Big chocolate cake.");
 			addButton(14, "Back", DinahMainMenu);
 		}
 		private function buyItem1(item:Number = 0):void {
@@ -177,6 +179,8 @@ import classes.internals.Utils;
 			if (item == 2) catChimeraBuy2(consumables.WOFRUIT);
 			if (item == 3) catChimeraBuy2(consumables.G_FRUIT);
 			if (item == 4) catChimeraBuy2(consumables.D_FRUIT);
+			if (item == 8) catChimeraBuy2(consumables.STRASCA);
+			if (item == 9) catChimeraBuy2(consumables.BCHCAKE);
 		}
 		private function buyItem3(item:Number = 0):void {
 			if (item == 5) catChimeraBuy2(consumables.MANTICV);
