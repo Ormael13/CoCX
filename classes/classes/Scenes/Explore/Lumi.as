@@ -70,7 +70,8 @@ public class Lumi extends BaseContent {
             [consumables.SDELITE,consumables.S_DREAM],
             [consumables.PIGTRUF,consumables.BOARTRU],
             [consumables.PURHONY,consumables.SPHONEY],
-            [consumables.REDVIAL,consumables.VAMPBLD]
+            [consumables.REDVIAL,consumables.VAMPBLD],
+            [consumables.ECTOPLS,consumables.PROTPLS]
         ];
         if(justCheck){
             for each(var improvable:Array in improvables){

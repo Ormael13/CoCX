@@ -167,8 +167,16 @@ import classes.internals.Utils;
 			addButton(5, consumables.MANTICV.shortName, buyItem3, 5).hint("Buy a vial of manticore venom.");
 			addButton(6, consumables.VOLTTOP.shortName, buyItem3, 6).hint("Buy a Voltage topaz.");
 			addButton(7, consumables.REDVIAL.shortName, buyItem3, 7).hint("Buy a vial of ominous red liquid.");
-			addButton(10, consumables.STRASCA.shortName, buyItem2, 8).hint("Buy a Strawberry shortcake.");
-			addButton(11, consumables.BCHCAKE.shortName, buyItem2, 9).hint("Buy a Big chocolate cake.");
+			addButton(8, consumables.STRASCA.shortName, buyItem2, 8).hint("Buy a Strawberry shortcake.");
+			addButton(9, consumables.BCHCAKE.shortName, buyItem2, 9).hint("Buy a Big chocolate cake.");
+			if (flags[kFLAGS.DINAH_LVL_UP] >= 1) {
+				if (player.statusEffectv1(StatusEffects.TFDealer1) > 0) addButton(10, consumables.DSLIMEJ.shortName, buyItem3, 10).hint("Buy a Big Dark slime jelly.");
+				else addButtonDisabled(10, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
+				if (player.statusEffectv2(StatusEffects.TFDealer1) > 0) addButton(11, consumables.HYDRASC.shortName, buyItem3, 11).hint("Buy a hydra scale.");
+				else addButtonDisabled(11, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
+				if (player.statusEffectv3(StatusEffects.TFDealer1) > 0) addButton(12, consumables.FSNAILS.shortName, buyItem3, 12).hint("Buy a Fire snail Saliva.");
+				else addButtonDisabled(12, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
+			}
 			addButton(14, "Back", DinahMainMenu);
 		}
 		private function buyItem1(item:Number = 0):void {
@@ -186,6 +194,9 @@ import classes.internals.Utils;
 			if (item == 5) catChimeraBuy2(consumables.MANTICV);
 			if (item == 6) catChimeraBuy2(consumables.VOLTTOP);
 			if (item == 7) catChimeraBuy2(consumables.REDVIAL);
+			if (item == 10) catChimeraBuy2(consumables.DSLIMEJ);
+			if (item == 11) catChimeraBuy2(consumables.HYDRASC);
+			if (item == 12) catChimeraBuy2(consumables.FSNAILS);
 		}
 		public function catChimeraBuy1(itype:ItemType):void {
 			clearOutput();

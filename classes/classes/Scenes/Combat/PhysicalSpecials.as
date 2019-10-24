@@ -55,10 +55,20 @@ public class PhysicalSpecials extends BaseCombatContent {
 				buttons.add("ViciousBite", bite).hint("Vicious bite your opponent with your sharp teeths causing bleed.");
 				if (player.hasPerk(PerkLib.FreezingBreath)) buttons.add("Frostbite", fenrirFrostbite).hint("You bite in your foe slowly infecting it with cold chill weakening its strength and resolve.");
 			}
+			//hydra bite - variant of snake bite
 			if (player.faceType == Face.SNAKE_FANGS || player.hasPerk(PerkLib.VenomGlands)) {
-				bd = buttons.add("SnakeBite", nagaBiteAttack).hint("Attempt to bite your opponent and inject venom. (lower enemy str and spe)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-				if (player.tailVenom < 25) {
-					bd.disable("You do not have enough venom to use snake bite right now!");
+				if (player.lowerBody == LowerBody.HYDRA) {
+					bd = buttons.add("HydraBite", hydraBiteAttack).hint("Deal as many attacks as pc got heads. Also delivers naga poison for as many time as pc got heads. (lower enemy str and spe)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+					if (player.tailVenom < 25) {
+						bd.disable("You do not have enough venom to use snake bite right now!");
+					}
+					bd.requireFatigue(physicalCost(10 * player.statusEffectv1(StatusEffects.HydraTailsPlayer)));
+				}
+				else {
+					bd = buttons.add("SnakeBite", nagaBiteAttack).hint("Attempt to bite your opponent and inject venom. (lower enemy str and spe)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+					if (player.tailVenom < 25) {
+						bd.disable("You do not have enough venom to use snake bite right now!");
+					}
 				}
 			}
 			if (player.faceType == Face.SPIDER_FANGS || player.hasPerk(PerkLib.VenomGlands)) {
@@ -2903,6 +2913,71 @@ public class PhysicalSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 
+	public function hydraBiteAttack():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		//Amily!
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
+			enemyAI();
+			return;
+		}
+		if (monster is LivingStatue)
+		{
+			outputText("Your fangs can't even penetrate the giant's flesh.");
+			enemyAI();
+			return;
+		}
+		fatigue((10 * player.statusEffectv1(StatusEffects.HydraTailsPlayer)), USEFATG_PHYSICAL);
+		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
+		outputText("You stand up erect and pull back for a second only to dart out at with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at " + monster.a + monster.short + " rending flesh and delivering your deadly venom in the process. ");
+		hydraBiteAttackpoweeeeer();
+		hydraBiteAttackpoweeeeer();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 3) hydraBiteAttackpoweeeeer();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 4) hydraBiteAttackpoweeeeer();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 5) hydraBiteAttackpoweeeeer();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 6) hydraBiteAttackpoweeeeer();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 7) hydraBiteAttackpoweeeeer();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 8) hydraBiteAttackpoweeeeer();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 9) hydraBiteAttackpoweeeeer();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 10) hydraBiteAttackpoweeeeer();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 11) hydraBiteAttackpoweeeeer();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12) hydraBiteAttackpoweeeeer();
+		//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
+		monster.str -= 2;
+		monster.spe -= 2;
+		if(monster.str < 1) monster.str = 1;
+		if(monster.spe < 1) monster.spe = 1;
+		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
+		{
+			monster.addStatusValue(StatusEffects.NagaVenom,2,2);
+			monster.addStatusValue(StatusEffects.NagaVenom,1,2);
+		}
+		else monster.createStatusEffect(StatusEffects.NagaVenom,2,2,0,0);
+		outputText("\n\n");
+		player.tailVenom -= 25;
+		flags[kFLAGS.VENOM_TIMES_USED] += 1;
+		if (!combatIsOver()) enemyAI();
+	}
+	public function hydraBiteAttackpoweeeeer():void {
+		var HBD:Number = 0;
+		HBD += player.str;
+		HBD += combat.unarmedAttack();
+		HBD += scalingBonusStrength() * 0.25;
+		if (HBD < 10) HBD = 10;
+		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) HBD *= combat.historyFighterBonus();
+		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) HBD *= 1 + player.perkv1(PerkLib.DemonSlayer);
+		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) HBD *= 1 + player.perkv1(PerkLib.FeralHunter);
+		if (player.hasPerk(PerkLib.JobWarrior)) HBD *= 1.05;
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) HBD *= 2;
+		if (player.armor == armors.SPKIMO) HBD *= 1.2;
+		if (player.necklace == necklaces.OBNECK) HBD *= 1.2;
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) HBD *= combat.oniRampagePowerMulti();
+		if (player.hasStatusEffect(StatusEffects.Overlimit)) HBD *= 2;
+		HBD = Math.round(HBD);
+		HBD = doDamage(HBD, true, true);
+	}
 	public function nagaBiteAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();

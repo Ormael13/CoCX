@@ -195,6 +195,9 @@ public class PerkLib
 		public static const ExpertAllRounderEducation:PerkType = mk("Expert All-Rounder Education", "Expert All-Rounder Education",
 				"Limit of advanced job you can learn is increased by 3.",
 				"You choose the 'Expert All-Rounder Education' perk, expanding amount of advanced jobs you can learn. (+3)");
+		public static const FourthRing:PerkType = mk("Fourth Ring", "Fourth Ring",
+				"Your expert understanding of magic pools allows you to equip fourth ring.",
+				"You choose the 'Fourth Ring' perk, reaching expert understanding of magic pools to allow you equip fourth ring.");
 		public static const GreaterGiftOfLust:PerkType = mk("Greater Gift of Lust", "Greater Gift of Lust",
 				"You enhanced your Transference special second time to transfer 40% of your current arousal to your opponent at doubled fatigue cost compared to previous enhance (1,5x of orginal fatigue cost).",
 				"You choose the 'Greater Gift of Lust' perk, enhancing Transference special second time to transfer 15% more lust to enemy at increased fatigue cost.");
@@ -210,9 +213,15 @@ public class PerkLib
 		public static const IntermediateAllRounderEducation:PerkType = mk("Intermediate All-Rounder Education", "Intermediate All-Rounder Education",
 				"Limit of advanced job you can learn is increased by 3.",
 				"You choose the 'Intermediate All-Rounder Education' perk, expanding amount of advanced jobs you can learn. (+3)");
+		public static const SecondRing:PerkType = mk("Second Ring", "Second Ring",
+				"Your basic understanding of magic pools allows you to equip second ring.",
+				"You choose the 'Second Ring' perk, reaching basic understanding of magic pools to allow you equip second ring.");
 		public static const SwiftCasting:PerkType = mk("Swift casting", "Swift casting",
 				"When attacking with melee using a one handed weapon with no shield equiped, pc can choose an available spell in combat options to cast during the round. It will be used at the end of the full attack.",
 				"You choose the 'Swift casting' perk, allowing to cast one of simple spells after melee attack.");
+		public static const ThirdRing:PerkType = mk("Third Ring", "Third Ring",
+				"Your advanced understanding of magic pools allows you to equip third ring.",
+				"You choose the 'Third Ring' perk, reaching advanced understanding of magic pools to allow you equip third ring.");
 		public static const VampiricBlade:PerkType = mk("Vampiric blade", "Vampiric blade",
 				"PC recovers 0.5/1/2/4 % of its health each time it strikes with a melee attack. (% restored depend on weapon size used)",
 				"You choose the 'Vampiric blade' perk, recovering some HP after each succesfull melee attack.");
@@ -220,7 +229,7 @@ public class PerkLib
 				"Increases magical and physical critical chance by up to 25% based on intelligence.",
 				"You choose the 'War caster' perk, increasing magical and physical critical chance by up to 25% based on intelligence.");
 		public static const TooAngryToDie:PerkType = mk("Too Angry to Die", "Too Angry to Die",
-				"+600 to max Wrath.",//stay alive when berserking at cost of super fast 5-15% max wrath drain per turn when below min HP or above max Lust?
+				"+600 to max Wrath.",//stay alive when berserking at cost of super fast 20% max wrath drain per turn when below min HP or above max Lust (?drain decreased by some specific perks?)?
 				"You choose the 'Too Angry to Die' perk, .");
 		public static const ElementsOfMarethBasic:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -252,18 +261,15 @@ public class PerkLib
 		public static const CaveWyrmLungsFinalForm:PerkType = mk("Cave Wyrm Lungs (Final Form)", "Cave Wyrm Lungs (Final Form)",
 				".",
 				"You choose the 'Cave Wyrm Lungs (Final Form)' perk, .");
-		public static const SecondRing:PerkType = mk("Second Ring", "Second Ring",
-				"Your basic understanding of magic pools allows you to equip second ring.",
-				"You choose the 'Second Ring' perk, reaching basic understanding of magic pools to allow you equip second ring.");
-		public static const ThirdRing:PerkType = mk("Third Ring", "Third Ring",
-				"Your advanced understanding of magic pools allows you to equip third ring.",
-				"You choose the 'Third Ring' perk, reaching advanced understanding of magic pools to allow you equip third ring.");
-		public static const FourthRing:PerkType = mk("Fourth Ring", "Fourth Ring",
-				"Your expert understanding of magic pools allows you to equip fourth ring.",
-				"You choose the 'Fourth Ring' perk, reaching expert understanding of magic pools to allow you equip fourth ring.");
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You choose the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
+		public static const :PerkType = mk("", "",
+				".",
+				"You choose the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You choose the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You choose the '' perk, .");
@@ -2821,6 +2827,10 @@ public class PerkLib
 				"Your blood is highly susceptible to chemical drugs, stimulants and poisons.");
 		public static const HarpyWomb:PerkType = mk("Harpy Womb", "Harpy Womb",
 				"Increases all laid eggs to large size so long as you have harpy legs and a harpy tail.");
+		public static const HydraAcidBreath:PerkType = mk("Hydra acid breath", "Hydra acid breath",
+				"Allows access to a hydra acid breath attack.");
+		public static const HydraRegeneration:PerkType = mk("Hydra Regeneration", "Hydra Regeneration",
+				"(Amount of hydra heads)% health and (Amount of hydra heads) points of fatigue regeneration but double hunger decaying speed. Stops for 5 rounds when damaged by fire.");
 		public static const ImprovedVenomGland:PerkType = mk("Improved venom gland", "Improved venom gland",
 				"Increase your venom max capacity and refill speed.");
 		public static const Incorporeality:PerkType = mk("Incorporeality", "Incorporeality",
@@ -2872,6 +2882,8 @@ public class PerkLib
 				"Allows you to lay eggs through a special organ on your arachnid abdomen, though you need at least 10 eggs to lay.");
 		public static const ThickSkin:PerkType = mk("Thick Skin", "Thick Skin",
 				"Toughens your dermis to provide 2 points of armor and 1 point of magic resistance.");
+		public static const TitanicStrength:PerkType = mk("Titanic Strength", "Titanic Strength",
+				"Increase max Strength by a percentage equal to the size in ft of the player x4.");
 		public static const TransformationResistance:PerkType = mk("Transformation Resistance", "Transformation Resistance",
 				"Reduces the likelihood of undergoing a transformation. Disables Bad Ends from transformative items.");
 				
@@ -2975,6 +2987,7 @@ public class PerkLib
 		public static const EnemyConstructType:PerkType = mk("Construct-type enemy", "Construct-type enemy", "");
 		public static const EnemyEliteType:PerkType = mk("Elite-type enemy", "Elite-type enemy", "");//NYU
 		public static const EnemyFeralType:PerkType = mk("Feral-type enemy", "Feral-type enemy", "");
+		public static const EnemyGhostType:PerkType = mk("Ghost-type enemy", "Ghost-type enemy", "");
 		public static const EnemyGigantType:PerkType = mk("Gigant-sized type enemy", "Gigant-sized type enemy", "");
 		public static const EnemyGodType:PerkType = mk("God-type enemy", "God-type enemy", "");
 		public static const EnemyGooType:PerkType = mk("Goo-type enemy", "Goo-type enemy", "");
@@ -2994,7 +3007,7 @@ public class PerkLib
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
 		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");
-		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");undead/ghost?
+		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");undead?
 		//public static const :PerkType = mk("", "", ""); na poźniej dopisane perki wzór
 //dodać także typy perków dla poszczególnych ras przeciwników tak, ze bedą mogły one mieć jakieś korzyści też (np. jak ma Dragon nature to bonusy jak PC miałby dragon score > 6))
 		private static function mk(id:String, name:String, desc:String, longDesc:String = null, keepOnAscension:Boolean = false):PerkType
@@ -4974,7 +4987,7 @@ public class PerkLib
                 return player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS);
 				}, "Spider or Snake fangs")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.spiderScore() >= 4 || player.nagaScore() >= 4 || player.gorgonScore() >= 4 || player.vouivreScore() >= 4 || player.couatlScore() >= 4;
+                return player.spiderScore() >= 4 || player.nagaScore() >= 4 || player.gorgonScore() >= 4 || player.vouivreScore() >= 4 || player.couatlScore() >= 4 || player.hydraScore() >= 4;
             }, "Spider or any snake-like race");
             /*
 			if (player.() >=  && ) {
@@ -5232,7 +5245,7 @@ public class PerkLib
                 return player.vampireScore() >= 8;//potem dodać mosquito race i ew. inne co mogą wypijać krew
             }, "Vampire race");
 			VenomGlandsEvolved.requireLevel(12).requirePerk(VenomGlands).requireCustomFunction(function (player:Player):Boolean {
-                return player.spiderScore() >= 8 || player.nagaScore() >= 8 || player.gorgonScore() >= 8 || player.vouivreScore() >= 8 || player.couatlScore() >= 8;
+                return player.spiderScore() >= 8 || player.nagaScore() >= 8 || player.gorgonScore() >= 8 || player.vouivreScore() >= 8 || player.couatlScore() >= 8 || player.hydraScore() >= 8;
             }, "Spider or any snake-like race");
             ChimericalBodySemiBasicStage.requirePerk(ChimericalBodyInitialStage)
                     .requireLevel(12)
@@ -5429,7 +5442,7 @@ public class PerkLib
                 return player.beeScore() >= 12 || player.mantisScore() >= 12 || player.scorpionScore() >= 12 || player.spiderScore() >= 12;
             }, "Any insect race");
 			VenomGlandsFinalForm.requireLevel(24).requirePerk(VenomGlandsEvolved).requireCustomFunction(function (player:Player):Boolean {
-                return player.spiderScore() >= 12 || player.nagaScore() >= 12 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12;
+                return player.spiderScore() >= 12 || player.nagaScore() >= 12 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12 || player.hydraScore() >= 12;
             }, "Spider or any snake-like race");
 			ChimericalBodySemiAdvancedStage.requirePerk(ChimericalBodyBasicStage)
                     .requireLevel(24)
@@ -5847,4 +5860,4 @@ public class PerkLib
 	initDependencies();
 }
 }
-
+

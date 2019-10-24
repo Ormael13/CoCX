@@ -62,7 +62,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.hasPerk(PerkLib.Incorporeality)) {
-			buttons.add("Possess", possess).hint("Attempt to temporarily possess a foe and force them to raise their own lusts.");
+			buttons.add("Possess", possess).hint("Attempt to temporarily possess a foe and force them to raise their own lusts.\nWould go into cooldown after use for: 2 rounds\n");
 			if (player.hasStatusEffect(StatusEffects.CooldownPossess)) {
 				bd.disable("<b>You need more time before you can use Possess again.</b>\n\n");
 			}
@@ -397,6 +397,12 @@ public class MagicSpecials extends BaseCombatContent {
 			bd.requireFatigue(spellCost(100),true);
 			if (monster is LivingStatue) {
 				bd.disable("Your enemy seems to be immune to the petrify immobilizing effect.");
+			}
+		}
+		if (player.lowerBody == LowerBody.HYDRA) {
+			bd = buttons.add("Hydra acid breath", hydraAcidBreath).hint("Deal acid damage based on natural weapon damage and toughness modifier. Increase by 100% for each head and deals increased damage against groups. Increase damage taken from physical attacks by 10% for each heads for 6 rounds and stun for one round. \n\nWould go into cooldown after use for: 8 rounds \n");
+			if (player.hasStatusEffect(StatusEffects.CooldownHydraAcidBreath)) {
+				bd.disable("You need more time before you can use Hydra acid breath again.\n\n");
 			}
 		}
 		if (player.hasPerk(PerkLib.Whispered)) {
@@ -2353,6 +2359,66 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		enemyAI();
 	}
+	
+	public function hydraAcidBreath():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		fatigue(40, USEFATG_MAGIC_NOBM);
+		//Shell
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
+			outputText("As soon as your breath touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+			enemyAI();
+			return;
+		}
+		//Amily!
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
+			enemyAI();
+			return;
+		}
+		if (monster is LivingStatue)
+		{
+			outputText("The acid courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
+			enemyAI();
+			return;
+		}
+		player.createStatusEffect(StatusEffects.CooldownHydraAcidBreath, 8, 0, 0, 0);
+		outputText("Your move your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads in an attack formation, belching acid at " + monster.a + monster.short + ". Your acid begins to eat at your opponent natural defences. ");
+		hydraAcidBreathWeaponD();
+		hydraAcidBreathWeaponD();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 3) hydraAcidBreathWeaponD();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 4) hydraAcidBreathWeaponD();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 5) hydraAcidBreathWeaponD();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 6) hydraAcidBreathWeaponD();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 7) hydraAcidBreathWeaponD();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 8) hydraAcidBreathWeaponD();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 9) hydraAcidBreathWeaponD();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 10) hydraAcidBreathWeaponD();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 11) hydraAcidBreathWeaponD();
+		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12) hydraAcidBreathWeaponD();
+		outputText("\n\n");
+		combat.heroBaneProc2();
+		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+		{
+			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			enemyAI();
+		}
+		else combatRoundOver();
+	}
+	public function hydraAcidBreathWeaponD():void {
+		var damage:Number = 0;
+		damage += combat.unarmedAttack();
+		damage += player.tou;
+		damage += scalingBonusToughness();// * 0.5
+		damage = Math.round(damage);
+		damage = doMagicDamage(damage, true, true);
+		if (monster.hasStatusEffect(StatusEffects.AcidDoT)) monster.addStatusValue(StatusEffects.AcidDoT, 4, 1); //More heads will produce more potent acid
+		else monster.createStatusEffect(StatusEffects.AcidDoT, 6, 0, 0, 1);
+		checkAchievementDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) flags[kFLAGS.HERO_BANE_DAMAGE_BANK] += damage;
+	}
 	//(Puppeter)
 	public function nekomataPuppeteer():void {
 		clearOutput();
@@ -3399,8 +3465,17 @@ public class MagicSpecials extends BaseCombatContent {
 	public function possess():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
-		var maxIntCapForFail:Number = 100;
-		if (monster.hasPerk(PerkLib.Incorporeality)) {
+		var maxIntCapForFail:Number = player.inte;
+		var luckyNumber:Number = rand(7);
+		if (player.poltergeistScore() >= 12) {
+			maxIntCapForFail += Math.round(player.inte * 0.5);
+			luckyNumber += 3 + rand(4);
+		}
+		if (player.poltergeistScore() >= 18) {
+			maxIntCapForFail += player.inte;
+			luckyNumber += 6 + rand(7);
+		}
+		if (monster.hasPerk(PerkLib.EnemyGhostType)) {
 			outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself toward the opponent's frame.  Sadly, it was doomed to fail, as you bounce right off your foe's ghostly form.");
 		}
 		else if (monster is LivingStatue)
@@ -3409,14 +3484,30 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else if ((!monster.hasCock() && !monster.hasVagina()) || monster.lustVuln == 0 || monster.inte == 0 || monster.inte > maxIntCapForFail) {
 			outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into the opponent's frame.  Unfortunately, it seems ");
-			if(monster.inte > 100) outputText("they were FAR more mentally prepared than anything you can handle, and you're summarily thrown out of their body before you're even able to have fun with them.  Darn, you muse.\n\n");
+			if (monster.inte > maxIntCapForFail) outputText("they were FAR more mentally prepared than anything you can handle, and you're summarily thrown out of their body before you're even able to have fun with them.  Darn, you muse.\n\n");
 			else outputText("they have a body that's incompatible with any kind of possession.\n\n");
 		}
 		//Success!
-		else if (player.inte >= (monster.inte - 10) + rand(21)) {
-			outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into your opponent's frame. Before they can regain the initiative, you take control of one of their arms, vigorously masturbating for several seconds before you're finally thrown out. Recorporealizing, you notice your enemy's blush, and know your efforts were somewhat successful.");
+		else if (player.inte + luckyNumber - monster.armorMDef >= monster.inte) {
+			if (player.poltergeistScore() >= 18) {
+				outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into your opponent’s frame. Before they can regain the initiative, you take control of their entire body, though still facing a form of resistance, making you unable to take certain drastic actions, though there is one tried method that definitely works, based on your experience. ");
+				outputText("With great vigor you begin masturbating as you see yourself most fit with your current temporary host, rubbing your adversary’s body all over for several seconds before you’re finally thrown out. Recorporealizing, you see a puddle of fluids around your enemy, and know your efforts were quite more than successful. You feel as if your own lust has subsided somewhat.");
+			}
+			else if (player.poltergeistScore() >= 12) {
+				outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into your opponent’s frame. Before they can regain the initiative, you take control of both of their arms, vigorously masturbating with both hands for several seconds before you’re finally thrown out. ");
+				outputText("Recorporealizing, you notice your enemy’s blush and arousal, and know your efforts were definitely successful.");
+			}
+			else {
+				outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into your opponent's frame. Before they can regain the initiative, you take control of one of their arms, vigorously masturbating for several seconds before you're finally thrown out. ");
+				outputText("Recorporealizing, you notice your enemy's blush, and know your efforts were somewhat successful.");
+			}
 			var damage:Number = Math.round(player.inte / 5) + rand(player.level) + player.level;
+			damage *= Math.round(1 + (0.1 * player.poltergeistScore()));
 			if (player.hasPerk(PerkLib.EromancyExpert)) damage *= 1.5;
+			if (player.poltergeistScore() >= 18) {
+				damage += Math.round(player.lust * 0.1);
+				player.lust -= Math.round(player.lust * 0.1);
+			}
 			monster.teased(monster.lustVuln * damage);
 			outputText("\n\n");
 			if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());

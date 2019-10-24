@@ -53,6 +53,8 @@ public class Face extends SaveableBodyPart {
 	public static const ANIMAL_TOOTHS:int	 = 44;
 	public static const BEAR:int			 = 45;
 	public static const PANDA:int			 = 46;
+	public static const FIRE_SNAIL:int		 = 47;
+	public static const GHOST:int			 = 48;
 	// Don't forget to add new types in DebugMenu.as list FACE_TYPE_CONSTANTS
 	
 	public function Face(creature:Creature) {

@@ -2438,6 +2438,7 @@ public class Appearance extends Utils
 			[Skin.MOSS, "moss", "moss", "", false],
 			[Skin.AQUA_RUBBER_LIKE, "AQUA_RUBBER_LIKE", "slippery rubber-like skin", "", false],
 			[Skin.FEATHER, "FEATHER", "feather", "", false],
+			[Skin.TRANSPARENT, "TRANSPARENT", "transparent", "", false],
 			[Skin.TATTOED_ONI, "TATTOED_ONI", "tattooed skin", "", false],
 			[Skin.PARTIAL_DRAGON_SCALES, "partial dragon scales", "partial dragon scales", "", true],
 			[Skin.PARTIAL_STONE, "partial stone", "partial stone", "", false],
@@ -2517,7 +2518,11 @@ public class Appearance extends Utils
 					[Face.AVIAN, "avian"],
 					[Face.WOLF_FANGS, "wolf fangs"],
 					[Face.ORC_FANGS, "orc fangs"],
-					[Face.ANIMAL_TOOTHS, "animal tooths"]
+					[Face.ANIMAL_TOOTHS, "animal tooths"],
+					[Face.BEAR, "bear"],
+					[Face.PANDA, "panda"],
+					[Face.FIRE_SNAIL, "fire snail"]
+					[Face.GHOST, "ghost"]
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2530,7 +2535,8 @@ public class Appearance extends Utils
 					[Tongue.CAT, "cat"],
 					[Tongue.ELF, "elf"],
 					[Tongue.DOG, "dog"],
-					[Tongue.CAVE_WYRM, "draconic"]
+					[Tongue.CAVE_WYRM, "draconic"],
+					[Tongue.GHOST, "ghost"]
 				]
 		);
 		public static const DEFAULT_EYES_NAMES:Object = createMapFromPairs(
@@ -2553,7 +2559,14 @@ public class Appearance extends Utils
 					[Eyes.GEMSTONES, "gemstones"],
 					[Eyes.FERAL, "feral"],
 					[Eyes.GRYPHON, "gryphon"],
-					[Eyes.CAVE_WYRM, "cave wyrm"]
+					[Eyes.INFERNAL, "infernal"],
+					[Eyes.ORC, "orc"],
+					[Eyes.CAVE_WYRM, "cave wyrm"],
+					[Eyes.HINEZUMI, "hinezumi"],
+					[Eyes.BEAR, "bear"],
+					[Eyes.DISPLACER, "displacer"],
+					[Eyes.FIRE_SNAIL, "fire snail"],
+					[Eyes.GHOST, "ghost"]
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
@@ -2588,7 +2601,11 @@ public class Appearance extends Utils
 					[Ears.RED_PANDA, "red-panda"],
 					[Ears.AVIAN, "avian"],
 					[Ears.GRYPHON, "gryphon"],
-					[Ears.CAVE_WYRM, "cave wyrm"]
+					[Ears.CAVE_WYRM, "cave wyrm"],
+					[Ears.BEAR, "bear"],
+					[Ears.PANDA, "panda"],
+					[Ears.SHARK, "shark"],
+					[Ears.DISPLACER, "displacer"]
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2607,14 +2624,17 @@ public class Appearance extends Utils
 					[Horns.ORCHID, "orchid"],
 					[Horns.ONI, "1 oni"],
 					[Horns.ONI_X2, "2 oni"],
-					[Horns.BICORN, "bicorn"]
+					[Horns.BICORN, "bicorn"],
+					[Horns.GHOST, "ghost"]
 				]
 		);
 		public static const DEFAULT_ANTENNAE_NAMES:Object = createMapFromPairs(
 				[
 					[Antennae.NONE, "non-existant"],
 					[Antennae.BEE, "bee"],
-					[Antennae.MANTIS, "mantis"]
+					[Antennae.MANTIS, "mantis"],
+					[Antennae.FIRE_SNAIL, "fire snail"],
+					[Antennae.MOTH, "moth"]
 				]
 		);
 		public static const DEFAULT_ARM_NAMES:Object = createMapFromPairs(
@@ -2652,7 +2672,11 @@ public class Appearance extends Utils
 					[Arms.BOAR, "boar"],
 					[Arms.DISPLACER, "displacer"],
 					[Arms.CAVE_WYRM, "cave wyrm"],
-					[Arms.GOO, "goo"]
+					[Arms.HINEZUMI, "hinezumi"],
+					[Arms.BEAR, "bear"],
+					[Arms.GOO, "goo"],
+					[Arms.HYDRA, "hydra"],
+					[Arms.GHOST, "phantom"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2805,12 +2829,18 @@ public class Appearance extends Utils
 					[LowerBody.ONI, "oni"],
 					[LowerBody.ELF, "elf"],
 					[LowerBody.RAIJU, "raiju"],
-					[LowerBody.RED_PANDA, "red-panda"],
+					[LowerBody.RED_PANDA, "red panda"],
 					[LowerBody.AVIAN, "avian"],
 					[LowerBody.GRYPHON, "gryphon"],
 					[LowerBody.ORC, "orc"],
 					[LowerBody.CAVE_WYRM, "cave wyrm"],
-					[LowerBody.HYDRA, "hydra"]
+					[LowerBody.MOUSE, "mouse"],
+					[LowerBody.HINEZUMI, "hinezumi"],
+					[LowerBody.BEAR, "bear"],
+					[LowerBody.HYDRA, "hydra"],
+					[LowerBody.FIRE_SNAIL, "fire snail"],
+					[LowerBody.GHOST, "phantom"],
+					[LowerBody.GHOST_2, "poltergeist"]
 				]
 		);
 		// <mod name="Dragon patch" author="Stadler76">
@@ -2827,7 +2857,9 @@ public class Appearance extends Utils
 					[RearBody.RAIJU_MANE, "raiju mane"],
 					[RearBody.WOLF_COLLAR, "wolf mane"],
 					[RearBody.DISPLACER_TENTACLES, "displacer tentacles"],
-					[RearBody.METAMORPHIC_GOO, "metamorphic goo"]
+					[RearBody.SNAIL_SHELL, "snail shell"],
+					[RearBody.METAMORPHIC_GOO, "metamorphic goo"],
+					[RearBody.GHOST, "ghost"]
 				]
 		);
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(
@@ -3434,4 +3466,4 @@ public class Appearance extends Utils
 			return descript;
 		}
 	}
-}
+}

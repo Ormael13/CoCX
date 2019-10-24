@@ -282,7 +282,8 @@
         <cell rect="351,150,49,59" name="arms_bg/scales" dx="46" dy="64"/>
         <cell rect="401,150,49,59" name="arms_bg/goo" dx="46" dy="64"/>
         <cell rect="701,150,49,59" name="arms_bg/panda" dx="46" dy="64"/>
-        <cell rect="1,853,49,59" name="arms_bg/displacerquad" dx="46" dy="56"/>
+        <cell rect="801,150,49,59" name="arms_bg/demonlewd" dx="46" dy="64"/>
+        <cell rect="1,853,49,59" name="arms_bg/displacerquad_human" dx="46" dy="56"/>
         <cell rect="51,853,49,59" name="arms_bg/displacerquad_fur" dx="46" dy="56"/>
         <cell rect="101,853,49,59" name="arms_bg/displacerquad_scales" dx="46" dy="56"/>
         <cell rect="151,853,49,59" name="arms_bg/displacerquad_pscales" dx="46" dy="56"/>
@@ -308,12 +309,14 @@
         <cell rect="274,702,90,90" name="arms/manticore_sit_pscales" dx="50" dy="61"/>
         <cell rect="365,702,90,90" name="arms/manticore_sit_chitin" dx="50" dy="61"/>
         <cell rect="456,702,90,90" name="arms/manticore_sit_orca" dx="50" dy="61"/>
-        <cell rect="1,913,49,59" name="arms/displacerquad" dx="91" dy="56"/>
+        <cell rect="1,913,49,59" name="arms/displacerquad_human" dx="91" dy="56"/>
         <cell rect="51,913,49,59" name="arms/displacerquad_fur" dx="91" dy="56"/>
         <cell rect="101,913,49,59" name="arms/displacerquad_scales" dx="91" dy="56"/>
         <cell rect="151,913,49,59" name="arms/displacerquad_pscales" dx="91" dy="56"/>
         <cell rect="201,913,49,59" name="arms/displacerquad_chitin" dx="91" dy="56"/>
         <cell rect="251,913,49,59" name="arms/displacerquad_orca" dx="91" dy="56"/>
+        <cell rect="801,210,49,59" name="arms/demonlewd" dx="88" dy="54"/>
+        <cell rect="851,210,49,59" name="arms_fg/demonlewd" dx="88" dy="54"/>
         <cell rect="451,210,49,59" name="arms_pattern/Bstripe" dx="94" dy="64"/>
         <cell rect="501,210,49,59" name="arms_pattern/Blightning" dx="94" dy="64"/>
         <cell rect="651,210,49,59" name="arms_pattern/Btatoo" dx="94" dy="64"/>
@@ -365,6 +368,7 @@
         <cell rect="274,520,90,90" name="legs/harpy_pscales" dx="50" dy="99"/>
         <cell rect="365,520,90,90" name="legs/harpy_chitin" dx="50" dy="99"/>
         <cell rect="456,520,90,90" name="legs/harpy_orca" dx="50" dy="99"/>
+        <cell rect="547,520,90,90" name="legs/demonlewd" dx="50" dy="99"/>
         <cell rect="1,973,90,90" name="legs/displacer_human" dx="52" dy="68"/>
         <cell rect="92,973,90,90" name="legs/displacer_fur" dx="52" dy="68"/>
         <cell rect="183,973,90,90" name="legs/displacer_scales" dx="52" dy="68"/>
@@ -387,6 +391,7 @@
         <cell rect="551,450,49,59" name="feet/furracoon" dx="69" dy="115"/>
         <cell rect="651,450,49,59" name="feet/panda" dx="69" dy="115"/>
         <cell rect="151,450,49,59" name="overfeet/fire" dx="69" dy="115"/>
+		<cell rect="701,90,49,59" name="muscle/muscle" dx="69" dy="64"/>
     </spritemap>
     <spritemap file="extra.png">
         <cell rect="2,55,147,128" name="legs_fg/alraune" dx="24" dy="82"/>
@@ -468,6 +473,7 @@
         <cell rect="421,110,29,32" name="face/cheshire" dx="80" dy="37"/>
         <cell rect="451,110,29,32" name="face/panda" dx="80" dy="37"/>
         <cell rect="481,110,29,32" name="face/bovine" dx="80" dy="37"/>
+        <cell rect="511,110,29,32" name="face/demonlewd" dx="80" dy="37"/>
         <cell rect="1,150,29,32" name="eyes/human" dx="80" dy="37"/>
         <cell rect="31,150,29,32" name="eyes/devil" dx="80" dy="37"/>
         <cell rect="61,150,29,32" name="eyes/cat" dx="80" dy="37"/>
@@ -742,6 +748,7 @@
 
 	<!-- LAYER AREA -->
     <layers>
+		<layer name="arms_fg"/>
         <layer name="antennae"/>
         <layer name="horns"/>
         <layer name="ears"/>
@@ -775,7 +782,8 @@
 		<layer name="legs_pattern"/>
         <layer name="legs"/>
 
-		<layer name="torso_pattern"/>	
+		<layer name="torso_pattern"/>
+		<layer name="muscle"/>	
         <layer name="torso"/>	
 		<layer name="ears_truebg"/>
         <layer name="hair_bg"/>
@@ -840,7 +848,8 @@
             </else>
         </if>
 		
-		 <set var="big" value="(cocks[0].cockLength gt 12) ? 'big' : ''"/>
+		<set var="hydraTails" value="statusEffectv1(StatusEffects.HydraTailsPlayer)"/>
+		<set var="big" value="(cocks[0].cockLength gt 12) ? 'big' : ''"/>
 		
 		<!-- ANTENNAE AREA -->
         <switch value="antennae.type">
@@ -1012,7 +1021,7 @@
                 <show part="eyes/infernal"/>
             </case>
 			<case values="Eyes.DISPLACER">
-                <show part="eyes/displacer"/>
+                <show part="eyes/devil"/>
             </case>
             <default>
                 <show part="eyes/human"/>
@@ -1194,7 +1203,11 @@
 
         <switch value="faceType">
             <case values="Face.HUMAN">
-                <show part="face/human"/>
+				<show part="face/human"/>
+				<if test="cor &gt;=50">
+					<hide part="face/human"/>
+					<show part="face/demonlewd"/>
+				</if>
             </case>
             <case values="Face.HORSE,Face.KANGAROO,Face.FOX,Face.PIG,Face.BOAR,Face.RHINO,Face.ECHIDNA,Face.DEER"><!--TODO -->
                 <show part="face/fur"/>
@@ -1273,6 +1286,48 @@
         <switch value="arms.type">
             <case values="Arms.HUMAN,Arms.KITSUNE,Arms.ONI,Arms.ELF,Arms.RAIJU">
                 <!--see switch[value=skin.coverage]-->
+				<if test="femininity &gt;=40">
+					<if test="cor &gt;=50">
+						<if test="skin.coverage==Skin.COVERAGE_NONE">
+							<if test="lowerBody==LowerBody.HUMAN">
+								<hide part="hands/*"/>
+								<hide part="hands_bg/*"/>
+								<hide part="arms/*"/>
+								<hide part="arms_bg/*"/>
+								<show part="arms/demonlewd"/>
+								<show part="arms_bg/demonlewd"/>
+								<show part="arms_fg/demonlewd"/>
+							</if>
+							<if test="lowerBody==LowerBody.DEMONIC_HIGH_HEELS">
+								<hide part="hands/*"/>
+								<hide part="hands_bg/*"/>
+								<hide part="arms/*"/>
+								<hide part="arms_bg/*"/>
+								<show part="arms/demonlewd"/>
+								<show part="arms_bg/demonlewd"/>
+								<show part="arms_fg/demonlewd"/>
+							</if>
+							<if test="lowerBody==LowerBody.ELF">
+								<hide part="hands/*"/>
+								<hide part="hands_bg/*"/>
+								<hide part="arms/*"/>
+								<hide part="arms_bg/*"/>
+								<show part="arms/demonlewd"/>
+								<show part="arms_bg/demonlewd"/>
+								<show part="arms_fg/demonlewd"/>
+							</if>
+							<if test="lowerBody==LowerBody.KITSUNE">
+								<hide part="hands/*"/>
+								<hide part="hands_bg/*"/>
+								<hide part="arms/*"/>
+								<hide part="arms_bg/*"/>
+								<show part="arms/demonlewd"/>
+								<show part="arms_bg/demonlewd"/>
+								<show part="arms_fg/demonlewd"/>
+							</if>
+						</if>
+					</if>
+				</if>
             </case>
             <case values="Arms.HARPY,Arms.PHOENIX">
                 <show part="hands/harpy"/>
@@ -1328,58 +1383,60 @@
 						<hide part="arms_bg/*"/>
 						<hide part="hands/*"/>
 						<hide part="hands_bg/*"/>
-						<if test="rearBody.type==RearBody.DISPLACER_TENTACLES">
-							<switch>
-								<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
-									<show part="arms/displacerquad_pscales"/>
-									<show part="arms_bg/displacerquad_pscales"/>
-								</case>
-								<case test="hasFullCoatOfType(Skin.FUR)">
-									<show part="arms/displacerquad_fur"/>
-									<show part="arms_bg/displacerquad_fur"/>
-								</case>
-								<case test="hasFullCoatOfType(Skin.CHITIN)">
-									<show part="arms/displacerquad_chitin"/>
-									<show part="arms_bg/displacerquad_chitin"/>
-								</case>
-								<case test="hasFullCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
-									<show part="arms/displacerquad_scales"/>
-									<show part="arms_bg/displacerquad_scales"/>
-								</case>
-								<default>
-									<show part="arms/displacerquad"/>
-									<show part="arms_bg/displacerquad"/>
-								</default>
-							</switch>
-							<else>
-								<switch>
-									<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
-										<show part="arms/manticore_sit_pscales"/>
-										<show part="arms_bg/manticore_sit_pscales"/>
-									</case>
-									<case test="hasFullCoatOfType(Skin.FUR)">
-										<show part="arms/manticore_sit_fur"/>
-										<show part="arms_bg/manticore_sit_fur"/>
-									</case>
-									<case test="hasFullCoatOfType(Skin.CHITIN)">
-										<show part="arms/manticore_sit_chitin"/>
-										<show part="arms_bg/manticore_sit_chitin"/>
-									</case>
-									<case test="hasFullCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
-										<show part="arms/manticore_sit_scales"/>
-										<show part="arms_bg/manticore_sit_scales"/>
-									</case>
-									<default>
-										<show part="arms/manticore_sit"/>
-										<show part="arms_bg/manticore_sit"/>
-									</default>
-								</switch>
-							</else>
-						</if>
+						<switch>
+							<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+								<show part="arms/manticore_sit_pscales"/>
+								<show part="arms_bg/manticore_sit_pscales"/>
+							</case>
+							<case test="hasFullCoatOfType(Skin.FUR)">
+								<show part="arms/manticore_sit_fur"/>
+								<show part="arms_bg/manticore_sit_fur"/>
+							</case>
+							<case test="hasFullCoatOfType(Skin.CHITIN)">
+								<show part="arms/manticore_sit_chitin"/>
+								<show part="arms_bg/manticore_sit_chitin"/>
+							</case>
+							<case test="hasFullCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+								<show part="arms/manticore_sit_scales"/>
+								<show part="arms_bg/manticore_sit_scales"/>
+							</case>
+							<default>
+								<show part="arms/manticore_sit"/>
+								<show part="arms_bg/manticore_sit"/>
+							</default>
+						</switch>
 					</if>
                 </if>
             </case>
-            <case values="Arms.LIZARD,Arms.DRAGON">
+			<case values="Arms.DISPLACER">
+				<hide part="arms/*"/>
+				<hide part="arms_bg/*"/>
+				<hide part="hands/*"/>
+				<hide part="hands_bg/*"/>
+				<switch>
+					<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+						<show part="arms/displacerquad_pscales"/>
+						<show part="arms_bg/displacerquad_pscales"/>
+					</case>
+					<case test="hasFullCoatOfType(Skin.FUR)">
+						<show part="arms/displacerquad_fur"/>
+						<show part="arms_bg/displacerquad_fur"/>
+					</case>
+					<case test="hasFullCoatOfType(Skin.CHITIN)">
+							<show part="arms/displacerquad_chitin"/>
+							<show part="arms_bg/displacerquad_chitin"/>
+					</case>
+					<case test="hasFullCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+						<show part="arms/displacerquad_scales"/>
+						<show part="arms_bg/displacerquad_scales"/>
+					</case>
+					<default>
+						<show part="arms/displacerquad_human"/>
+						<show part="arms_bg/displacerquad_human"/>
+					</default>
+				</switch>
+			</case>
+            <case values="Arms.LIZARD,Arms.DRAGON,Arms.HYDRA">
                 <show part="hands/scales"/>
                 <show part="hands_bg/scales"/>
             </case>
@@ -1419,8 +1476,29 @@
 
 		<!-- LEGS AREA -->
         <switch value="lowerBody">
-            <case values="LowerBody.HUMAN">
+            <case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
                 <!--see switch[value=skin.coverage]-->
+				<if test="femininity &gt;=40">
+					<if test="cor &gt;=50">
+						<if test="skin.coverage==Skin.COVERAGE_NONE">
+							<if test="arms.type==Arms.HUMAN">
+								<hide part="feet/*"/>
+								<hide part="legs/*"/>
+								<show part="legs/demonlewd"/>
+							</if>
+							<if test="arms.type==Arms.ELF">
+								<hide part="feet/*"/>
+								<hide part="legs/*"/>
+								<show part="legs/demonlewd"/>
+							</if>
+							<if test="arms.type==Arms.KITSUNE">
+								<hide part="feet/*"/>
+								<hide part="legs/*"/>
+								<show part="legs/demonlewd"/>
+							</if>
+						</if>
+					</if>
+				</if>
             </case>
             <case values="LowerBody.HOOFED,LowerBody.PONY,LowerBody.CLOVEN_HOOFED">
                 <hide part="legs/*"/>
@@ -1493,7 +1571,11 @@
                 <hide part="legs/*"/>
 				<hide part="feet/*"/>
 				<hide part="tail/*"/>
-				<switch value="tailCount">
+				<switch values="hydraTails">
+					<case values="1">
+						<show part="legs_fg/hydra2"/>
+						<show part="legs_bg/hydra2"/>
+                    </case>
                     <case values="2">
 						<show part="legs_fg/hydra2"/>
 						<show part="legs_bg/hydra2"/>
@@ -1634,10 +1716,31 @@
 					<show part="legs/cattaur"/>
                     <show part="legs_fg/cattaur"/>
 					<else>
-						<if test="arms.type==Arms.LION">
-							<hide part="legs/*"/>
-							<hide part="feet/*"/>
-							<if test="rearBody.type==RearBody.DISPLACER_TENTACLES">
+						<switch>
+							<case test="arms.type==Arms.LION">
+								<hide part="legs/*"/>
+								<hide part="feet/*"/>
+								<switch>
+									<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+										<show part="legs/manticore_sit_pscales"/>
+									</case>
+									<case test="hasFullCoatOfType(Skin.FUR)">
+										<show part="legs/manticore_sit_fur"/>
+									</case>
+									<case test="hasFullCoatOfType(Skin.CHITIN)">
+										<show part="legs/manticore_sit_chitin"/>
+									</case>
+									<case test="hasFullCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+									<show part="legs/manticore_sit_scales"/>
+									</case>
+									<default>
+										<show part="legs/manticore_sit"/>
+									</default>
+								</switch>
+							</case>
+							<case test="arms.type==Arms.DISPLACER">
+								<hide part="legs/*"/>
+								<hide part="feet/*"/>
 								<switch>
 									<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
 										<show part="legs/displacer_pscales"/>
@@ -1649,33 +1752,14 @@
 										<show part="legs/displacer_chitin"/>
 									</case>
 									<case test="hasFullCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
-									<show part="legs/displacer_scales"/>
+										<show part="legs/displacer_scales"/>
 									</case>
 									<default>
-										<show part="legs/displacer"/>
+										<show part="legs/displacer_human"/>
 									</default>
 								</switch>
-								<else>
-									<switch>
-										<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
-											<show part="legs/manticore_sit_pscales"/>
-										</case>
-										<case test="hasFullCoatOfType(Skin.FUR)">
-											<show part="legs/manticore_sit_fur"/>
-										</case>
-										<case test="hasFullCoatOfType(Skin.CHITIN)">
-											<show part="legs/manticore_sit_chitin"/>
-										</case>
-										<case test="hasFullCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
-										<show part="legs/manticore_sit_scales"/>
-										</case>
-										<default>
-											<show part="legs/manticore_sit"/>
-										</default>
-									</switch>
-								</else>
-							</if>
-						</if>
+							</case>
+						</switch>
 					</else>
                 </if>
             </case>
@@ -2081,6 +2165,16 @@
 			</if>
         </if>
 		
+		<!-- Muscle AREA -->
+		<if test="tone&gt;=65">
+			<if test="skin.coverage==Skin.COVERAGE_NONE">
+				<show part="muscle/muscle"/>
+			</if>
+			<if test="skin.coverage==Skin.COVERAGE_LOW">
+				<show part="muscle/muscle"/>
+			</if>
+        </if>
+		
 		<!-- PATTERN AREA -->
         <switch value="skin.pattern">
             <case values="Skin.PATTERN_NONE"></case>
@@ -2120,14 +2214,127 @@
             </default>
         </switch>
 
+		<!-- HIDING INVALID ARM PATTERN AREA <if test="(arms.type == Arms.HUMAN || arms.type == Arms.ELF || arms.type == Arms.KITSUNE) && (lowerBody == LowerBody.HUMAN || lowerBody == LowerBody.ELF || lowerBody == LowerBody.KITSUNE) && cor &gt;=50 && skin.coverage==Skin.COVERAGE_NONE">-->
+		<if test="arms.type == Arms.DISPLACER">
+			<hide part="arms_pattern/*"/>
+			<hide part="arms_bg_pattern/*"/>
+			<if test="lowerBody == LowerBody.LION">
+				<hide part="legs_pattern/*"/>
+			</if>
+		</if>
+		
+		<if test="femininity &gt;=40">
+			<if test="cor &gt;=50">
+				<if test="skin.coverage==Skin.COVERAGE_NONE">
+					<switch>
+						<case test="arms.type == Arms.HUMAN">
+							<if test="lowerBody == LowerBody.HUMAN">
+								<hide part="arms_pattern/*"/>
+								<hide part="arms_bg_pattern/*"/>
+								<hide part="legs_pattern/*"/>
+							</if>
+							<if test="lowerBody == LowerBody.ELF">
+								<hide part="arms_pattern/*"/>
+								<hide part="arms_bg_pattern/*"/>
+								<hide part="legs_pattern/*"/>
+							</if>
+							<if test="lowerBody == LowerBody.KITSUNE">
+								<hide part="arms_pattern/*"/>
+								<hide part="arms_bg_pattern/*"/>
+								<hide part="legs_pattern/*"/>
+							</if>
+							<if test="lowerBody == LowerBody.DEMONIC_HIGH_HEELS">
+								<hide part="arms_pattern/*"/>
+								<hide part="arms_bg_pattern/*"/>
+								<hide part="legs_pattern/*"/>
+							</if>
+						</case>
+						<case test="arms.type == Arms.ELF">
+							<if test="lowerBody == LowerBody.HUMAN">
+								<hide part="arms_pattern/*"/>
+								<hide part="arms_bg_pattern/*"/>
+								<hide part="legs_pattern/*"/>
+							</if>
+							<if test="lowerBody == LowerBody.ELF">
+								<hide part="arms_pattern/*"/>
+								<hide part="arms_bg_pattern/*"/>
+								<hide part="legs_pattern/*"/>
+							</if>
+							<if test="lowerBody == LowerBody.KITSUNE">
+								<hide part="arms_pattern/*"/>
+								<hide part="arms_bg_pattern/*"/>
+								<hide part="legs_pattern/*"/>
+							</if>
+							<if test="lowerBody == LowerBody.DEMONIC_HIGH_HEELS">
+								<hide part="arms_pattern/*"/>
+								<hide part="arms_bg_pattern/*"/>
+								<hide part="legs_pattern/*"/>
+							</if>
+						</case>
+						<case test="arms.type == Arms.HUMAN">
+							<if test="lowerBody == LowerBody.HUMAN">
+								<hide part="arms_pattern/*"/>
+								<hide part="arms_bg_pattern/*"/>
+								<hide part="legs_pattern/*"/>
+							</if>
+							<if test="lowerBody == LowerBody.ELF">
+								<hide part="arms_pattern/*"/>
+								<hide part="arms_bg_pattern/*"/>
+								<hide part="legs_pattern/*"/>
+							</if>
+							<if test="lowerBody == LowerBody.KITSUNE">
+								<hide part="arms_pattern/*"/>
+								<hide part="arms_bg_pattern/*"/>
+								<hide part="legs_pattern/*"/>
+							</if>
+							<if test="lowerBody == LowerBody.DEMONIC_HIGH_HEELS">
+								<hide part="arms_pattern/*"/>
+								<hide part="arms_bg_pattern/*"/>
+								<hide part="legs_pattern/*"/>
+							</if>
+						</case>
+						<case test="arms.type == Arms.KITSUNE">
+							<if test="lowerBody == LowerBody.HUMAN">
+								<hide part="arms_pattern/*"/>
+								<hide part="arms_bg_pattern/*"/>
+								<hide part="legs_pattern/*"/>
+							</if>
+							<if test="lowerBody == LowerBody.ELF">
+								<hide part="arms_pattern/*"/>
+								<hide part="arms_bg_pattern/*"/>
+								<hide part="legs_pattern/*"/>
+							</if>
+							<if test="lowerBody == LowerBody.KITSUNE">
+								<hide part="arms_pattern/*"/>
+								<hide part="arms_bg_pattern/*"/>
+								<hide part="legs_pattern/*"/>
+							</if>
+							<if test="lowerBody == LowerBody.DEMONIC_HIGH_HEELS">
+								<hide part="arms_pattern/*"/>
+								<hide part="arms_bg_pattern/*"/>
+								<hide part="legs_pattern/*"/>
+							</if>
+						</case>
+					</switch>
+				</if>
+			</if>
+		</if>
+		
+		<!-- HIDING INVALID LEG PATTERN AREA -->
 		<if test="lowerBody == LowerBody.CRAB_TAUR">
-				<hide part="legs_pattern/*"/>
-			</if>
-			<if test="lowerBody == LowerBody.DRIDER">
-				<hide part="legs_pattern/*"/>
-			</if>
-			<if test="isTaur()">
-				<hide part="legs_pattern/*"/>
+			<hide part="legs_pattern/*"/>
+		</if>
+		<if test="lowerBody == LowerBody.DRIDER">
+			<hide part="legs_pattern/*"/>
+		</if>
+		<if test="isTaur()">
+			<hide part="legs_pattern/*"/>
+		</if>
+		<if test="lowerBody == LowerBody.NAGA">
+			<hide part="legs_pattern/*"/>
+		</if>
+		<if test="lowerBody == LowerBody.HYDRA">
+			<hide part="legs_pattern/*"/>
 		</if>
 		
     </logic>

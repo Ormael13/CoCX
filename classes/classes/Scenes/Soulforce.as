@@ -30,8 +30,7 @@ import classes.Scenes.Areas.HighMountains.IzumiScene;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
-import classes.Scenes.Dungeons.EbonLabyrinth.ChaosChimera;
-import classes.Scenes.Dungeons.EbonLabyrinth.DarkSlimeEmpress;
+import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Monsters.DarkElfRanger;
 import classes.Scenes.Monsters.DarkElfScout;
 import classes.Scenes.Monsters.DarkElfSlaver;
@@ -264,6 +263,26 @@ public function FightDarkSlimeEmpress():void {
 		else player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
 	}
 	startCombat(new DarkSlimeEmpress());
+}
+public function FightHydra():void {
+	clearOutput();
+	outputText("Entering battle with Hydra! Enjoy ^^");
+	if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,65,0,0,0);
+	else {
+		if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,70,0,0,0);
+		else player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
+	}
+	startCombat(new Hydra());
+}
+public function FightHellfireSnail():void {
+	clearOutput();
+	outputText("Entering battle with Hellfire Snail! Enjoy ^^");
+	if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,65,0,0,0);
+	else {
+		if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,70,0,0,0);
+		else player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
+	}
+	startCombat(new HellfireSnail());
 }
 		public function AddReptaTongue():void {
 			outputText("\n\n<b>(Gained set of items to make Repta-Tongue Potion!)</b>\n\n");
@@ -1479,7 +1498,8 @@ public function FightDarkSlimeEmpress():void {
 			//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
 			addButton(5, "Enigmanium", AddEnigmanium).hint("Add 1 vial of Enigmanium.");
 			addButton(6, "VT RV WF", AddVoltageTopaz).hint("Add 1 Voltage Topaz, 1 vial of Red Blood (Bat TF) and 1 Wonder Fruit.");
-			addButton(7, "Skelp", AddSkelp).hint("Add 1 Skelp (WIP Melkie TF).");
+			addButton(7, "DSJ HS FSS", AddDarkSlimeJelly).hint("Add 1 Dark Slime Jelly, 1 Hydra Scale and 1 Fire Snail Saliva.");
+			//addButton(7, "Skelp", AddSkelp).hint("Add 1 Skelp (WIP Melkie TF).");
 			//addButton(7, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
 			//addButton(8, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
 			//addButton(9, "A.R.CON", AddArcaneRegenConcotion).hint("Add 1 Arcane Regen Concotion.");
@@ -1516,17 +1536,19 @@ public function FightDarkSlimeEmpress():void {
 			//addButton(2, "Sonya", FightSonya).hint("Test fight with Sonya.");
 			//addButton(3, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
 			//addButton(4, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
-			addButton(2, "ChaosChimera", FightChaosChimera).hint("Test fight with Chaos Chimera.");
-			addButton(3, "Alvina", FightAlvina).hint("Test fight with Alvina.");
-			addButton(4, "Neisa", FightNeisa).hint("Test fight with Neisa.");
-			addButton(5, "Lethice", FightLethice).hint("Test fight with Lethice.");
+			addButton(2, "Alvina", FightAlvina).hint("Test fight with Alvina.");
+			addButton(3, "Neisa", FightNeisa).hint("Test fight with Neisa.");
+			addButton(4, "Lethice", FightLethice).hint("Test fight with Lethice.");
+			addButton(5, "DarkSlimeEmpress", FightDarkSlimeEmpress).hint("Test fight with Dark Slime Empress.");
+			addButton(6, "Hydra", FightHydra).hint("Test fight with Hydra.");
+			addButton(7, "HellfireSnail", FightHellfireSnail).hint("Test fight with Hellfire Snail.");
 			//addButton(5, "DE Ranger", FightDarkElfRanger).hint("Test fight with Dark Elf Ranger. (lvl 39)");
 			//addButton(6, "DE Sniper", FightDarkElfSniper).hint("Test fight with Dark Elf Sniper. (lvl 51)");
-			addButton(6, "SomeMalicore", FightRandomnManticore).hint("Test fight with some malicore.");
-			addButton(7, "Electra", FightElectra).hint("Test fight with Electra.");
+			//addButton(6, "SomeMalicore", FightRandomnManticore).hint("Test fight with some malicore.");
+			//addButton(7, "Electra", FightElectra).hint("Test fight with Electra.");
 			addButton(8, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
 			addButton(9, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
-			addButton(10, "DarkSlimeEmpress", FightDarkSlimeEmpress).hint("Test fight with Dark Slime Empress.");
+			addButton(10, "ChaosChimera", FightChaosChimera).hint("Test fight with Chaos Chimera.");
 			addButton(11, "LvLUP Aurora", LvLUPAurora).hint("LvL UP forcefully Aurora for testing purpose up to the limit.");
 			addButton(12, "DELvL Aurora", DELvLAurora).hint("DE LvL forcefully Aurora for testing purpose down toward the lvl 1.");
 			addButton(13, "FeralT.Beast", FightFeralImp).hint("Test fight with feral tentacle beast.");
@@ -1590,6 +1612,18 @@ public function FightDarkSlimeEmpress():void {
 		public function AddWonderFruit():void {
 			outputText("\n\n<b>(Gained 1 Wonder Fruit!)</b>\n\n");
 			inventory.takeItem(consumables.WOFRUIT, NonEquipmentMenu);
+		}
+		public function AddDarkSlimeJelly():void {
+			outputText("\n\n<b>(Gained 1 Dark Slime Jelly!)</b>\n\n");
+			inventory.takeItem(consumables.DSLIMEJ, AddHydraScale);
+		}
+		public function AddHydraScale():void {
+			outputText("\n\n<b>(Gained 1 Hydra Scale!)</b>\n\n");
+			inventory.takeItem(consumables.HYDRASC, AddFireSnailSaliva);
+		}
+		public function AddFireSnailSaliva():void {
+			outputText("\n\n<b>(Gained 1 Fire Snail Saliva!)</b>\n\n");
+			inventory.takeItem(consumables.FSNAILS, NonEquipmentMenu);
 		}
 		public function AddGorgonOil():void {
 			outputText("\n\n<b>(Gained 1 vial of Gorgon Oil!)</b>\n\n");

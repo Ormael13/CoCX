@@ -42,7 +42,6 @@ public function desertEncounters():void {
 		outputText("You tell her that your name is [name].\n\n");
 		outputText("Cradling her head in a hand while propping the arm up with one crossed underneath, she regards you with an amused smile.\n\n");
 		outputText("\"<i>That is a strange name for a naga. But you weren’t born one, so an exotic name like that is expected. And now that we have exchanged names...</i>\"\n\n");
-		outputText("Unlike the last few times, she spots you from far away and slithers up to you. A sudden rush of excitement arcs up your spine, her tail tip teasing its way up your scaled lower half as she closes the distance, \"<i>how do you feel about getting some stress relief lover?</i>\" She wraps her arms around your waist as she draws you closer to her, making her intentions clear.\n\n");
 		nagaDefaultSexScene();
 	}
 	else if (flags[kFLAGS.SAMIRAH_AFFECTION] >= 20 && flags[kFLAGS.SAMIRAH_AFFECTION] < 100) {
@@ -85,7 +84,7 @@ public function desertEncounters():void {
 		else {
 			outputText("You decide to head back into the desert and spot Samirah atop a nearby dune, basking in the golden glow of the sun, her form absolutely radiant. You catch yourself staring just a bit too long and shake yourself from the stupor. Had you wished to take the initiative in this encounter, your previous hesitation has made that all but impossible. Samirah is already making her way towards you. ");
 			outputText("A sly grin on her face as she slithers towards her companion. Once she’s near you, she wraps herself and her tail around you in a warm hug.\n\n");
-			outputText("\"<i>Welcome back, lover mine~. You were staring for quite a while, [name], but that is to be expected when I am the focus of your attentions.</i>\" She pulls back with a knowing smile on her lips. \"<i>Come to keep little old me company? Between hunting for food and trying to make contact with the natives of this dimension, there is nothing interesting to do. \n\n");
+			outputText("\"<i>Welcome back, lover mine~. You were staring for quite a while, [name], but that is to be expected when I am the focus of your attentions.</i>\" She pulls back with a knowing smile on her lips. \"<i>Come to keep little old me company? Between hunting for food and trying to make contact with the natives of this dimension, there is nothing interesting to do. ");
 			outputText("I’ve tried holding conversations with the natives recently. Since our talks are so interesting, I hoped that there would be some among their kind that would be the same. But their speech pattern is so strange. How am I supposed to even understand them if they don’t have a tail to begin with?</i>\"\n\n");
 			outputText("Wait, not only is there no way that she can be understood by anyone, but she also has absolutely no idea of what people are saying? And what does the tail have to do with how language is perceived?\n\n");
 			outputText("\"<i>Of course I can’t understand them! How can they even properly speak without tails? I can guess their mood by their facial expression, but that's about it.</i>\"\n\n");

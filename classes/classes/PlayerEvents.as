@@ -735,6 +735,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				if (player.findPerk(PerkLib.Survivalist) >= 0) multiplier -= 0.2;
 				if (player.findPerk(PerkLib.Survivalist2) >= 0) multiplier -= 0.2;
 				if (player.findPerk(PerkLib.ManticoreCumAddict) >= 0) multiplier *= 2;
+				if (player.findPerk(PerkLib.HydraRegeneration) >= 0) multiplier *= 2;
 				//Hunger drain rate. If above 50, 1.5 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
 				//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger. Can be increased to 125 then 166 hours with Survivalist perks.
 				if (player.hasStatusEffect(StatusEffects.FastingPill)) player.hunger += 2;
@@ -835,7 +836,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				player.createPerk(PerkLib.ImprovedVenomGland, 0, 0, 0, 0);
 			}
 			//Flexibility perk
-			if ((player.tailType == Tail.CAT || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.tailType == Tail.BURNING) && player.lowerBody == LowerBody.CAT && (player.arms.type == Arms.CAT || player.arms.type == Arms.LION || player.arms.type == Arms.DISPLACER)) { //Check for gain of cat agility - requires legs, tail, and arms
+			if ((player.tailType == Tail.CAT || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.tailType == Tail.BURNING) && (player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LION) && (player.arms.type == Arms.CAT || player.arms.type == Arms.LION || player.arms.type == Arms.DISPLACER)) { //Check for gain of cat agility - requires legs, tail, and arms
 				if (player.findPerk(PerkLib.Flexibility) < 0) {
 					outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?\n\n(<b>Gained Perk: Flexibility</b>)\n");
 					player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
@@ -860,6 +861,17 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				player.removePerk(PerkLib.Lustzerker);
 				needNext = true;
 			}
+			//Hydra Regeneration and Hydra acid breath perk
+			if (player.findPerk(PerkLib.HydraRegeneration) >= 0 && player.lowerBody != LowerBody.HYDRA) { //Remove hydra regeneration perk if not meeting requirements
+				outputText("\nYou accidentally cut yourself but to your stupor the wound does not close as fast as it should. Guess you are no longer a hydra enough to benefit from superior regeneration.\n\n(<b>Lost Perk: Hydra Regeneration</b>)");
+				player.removePerk(PerkLib.HydraRegeneration);
+				needNext = true;
+			}
+			if (player.findPerk(PerkLib.HydraAcidBreath) >= 0 && player.lowerBody != LowerBody.HYDRA) { //Remove hydra acid breath perk if not meeting requirements
+				outputText("\nAs your lead hydra head vanishes so do your ability to belch acid.\n\n(<b>Lost Perk: Hydra Acid Breath</b>)");
+				player.removePerk(PerkLib.HydraAcidBreath);
+				needNext = true;
+			}
 			//Lizan Regeneration perk
 			if ((player.tailType == Tail.LIZARD && player.lowerBody == LowerBody.LIZARD && player.arms.type == Arms.LIZARD) || (player.findPerk(PerkLib.LizanRegeneration) < 0 && player.findPerk(PerkLib.LizanMarrow) >= 0)) { //Check for gain of lizan regeneration - requires legs, arms and tail
 				if (player.findPerk(PerkLib.LizanRegeneration) < 0) {
@@ -868,7 +880,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					needNext = true;
 				}
 			}
-			else if (player.findPerk(PerkLib.LizanRegeneration) >= 0 && player.perkv4(PerkLib.LizanRegeneration) == 0 && player.findPerk(PerkLib.LizanMarrow) < 0) { //Remove lizan regeneration perk if not meeting requirements
+			else if (player.findPerk(PerkLib.LizanRegeneration) >= 0 && player.perkv4(PerkLib.LizanRegeneration) == 0 && player.findPerk(PerkLib.LizanMarrow) < 0 && player.findPerk(PerkLib.HydraRegeneration) < 0) { //Remove lizan regeneration perk if not meeting requirements
 				outputText("\nAll of sudden something change inside your body.  You think about a long while, until it dawned on you.  You can't feel that refreshing feeling inside your body anymore meaning for now just human rate of recovery from all kind of injuries.\n\n(<b>Lost Perk: Lizan Regeneration</b>)");
 				player.removePerk(PerkLib.LizanRegeneration);
 				needNext = true;
@@ -953,12 +965,12 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				needNext = true;
 			}
 			//Fire Affinity
-			if ((player.salamanderScore() >= 4 || player.phoenixScore() >= 10 || player.hellcatScore() >= 10 || (player.mouseScore() >= 12 && player.lowerBody == LowerBody.HINEZUMI && player.arms.type == Arms.HINEZUMI && player.tailType == Tail.HINEZUMI)) && player.findPerk(PerkLib.FireAffinity) < 0) {
+			if ((player.salamanderScore() >= 4 || player.phoenixScore() >= 10 || player.hellcatScore() >= 10 || player.firesnailScore() >= 15 || (player.mouseScore() >= 12 && player.lowerBody == LowerBody.HINEZUMI && player.arms.type == Arms.HINEZUMI && player.tailType == Tail.HINEZUMI)) && player.findPerk(PerkLib.FireAffinity) < 0) {
 				outputText("\nYou suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until your finaly at ease with your bodily heat. You doubt any more heat is gunna make you more incomfortable then this as you quietly soak in the soothing warmth your body naturaly produce. Its like your body is made out of living fire.\n\n(<b>Gained Perk: Fire Affinity</b>)\n");
 				player.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((player.salamanderScore() < 4 && player.phoenixScore() < 10 && player.hellcatScore() < 10 && player.mouseScore() < 12 && player.lowerBody != LowerBody.HINEZUMI && player.arms.type != Arms.HINEZUMI && player.tailType != Tail.HINEZUMI) && player.findPerk(PerkLib.FireAffinity) >= 0) {
+			else if ((player.salamanderScore() < 4 && player.phoenixScore() < 10 && player.hellcatScore() < 10 && player.firesnailScore() < 15 && player.mouseScore() < 12 && player.lowerBody != LowerBody.HINEZUMI && player.arms.type != Arms.HINEZUMI && player.tailType != Tail.HINEZUMI) && player.findPerk(PerkLib.FireAffinity) >= 0) {
 				outputText("\nYou suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.\n\n<b>(Lost Perk: Fire Affinity)</b>\n");
 				player.removePerk(PerkLib.FireAffinity);
 				needNext = true;
@@ -1058,6 +1070,17 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				outputText("\nAs you become less of a cave wyrm your spit and fluids begins to lose their acidic propriety until its back to being ordinary drool and fluids. With no acid to ignite it seems you also lost the ability to breath fire.\n\n<b>(Lost the Acid Spit and Azureflame Breath perks!)</b>\n");
 				player.removePerk(PerkLib.AcidSpit);
 				player.removePerk(PerkLib.AzureflameBreath);
+				needNext = true;
+			}
+			//Titanic Strength
+			if ((player.hydraScore() >= 14 || player.oniScore() >= 12) && player.findPerk(PerkLib.TitanicStrength) < 0) {
+				outputText("\nWhoa you've grown so big its sheer miracle if you don't damage the landscape while moving. This said your size contribute to your strength as well now.\n\n<b>(Gained Titanic Strength perk!)</b>\n");
+				player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.hydraScore() < 14 && player.oniScore() < 12 && player.findPerk(PerkLib.TitanicStrength) >= 0) {
+				outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
+				player.removePerk(PerkLib.TitanicStrength);
 				needNext = true;
 			}
 			//Soul Sense

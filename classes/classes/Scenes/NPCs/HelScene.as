@@ -299,7 +299,7 @@ private function helDefeatedCorrupt():void {
 		{
 			addButton(0, "Rape Ass", rapingHelsAssMeansYourCorruptCauseAnalIsEvil);
 		}
-		else if (!player.hasCock() || player.cockThatFits(85) == -1)
+		else if (player.cockThatFits(85) == -1)
 		{
 			outputText("\n\nYour dick is too big to fuck her anally.");
 		}

@@ -335,7 +335,7 @@ use namespace CoC;
 					else wingbuffetattack();
 				}
 				//if (choice3 == 4) x
-				//if (choice3 == 5) x
+				//if (choice3 == 5) some elemental melee soulskill like fire / ice fist / punch chi chi teach
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 5 && flags[kFLAGS.AURORA_LVL] < 7) {
 				var choice2:Number = rand(3);
@@ -390,7 +390,7 @@ use namespace CoC;
 					}
 					else wingbuffetattack();
 				}
-				//if (choice2 == 4) some elemental melee soulskill like fire / ice fist / punch chi chi teach
+				//if (choice2 == 4) Yin Palm
 			}
 			else if (flags[kFLAGS.AURORA_LVL] >= 3 && flags[kFLAGS.AURORA_LVL] < 5) {
 				var choice1:Number = rand(3);

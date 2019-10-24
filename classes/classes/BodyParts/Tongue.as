@@ -10,6 +10,7 @@ public class Tongue extends BodyPart{
 	public static const ELF:int			= 6;
 	public static const DOG:int			= 7;
 	public static const CAVE_WYRM:int	= 8;
+	public static const GHOST:int		= 9;
 	// Don't forget to add new types in DebugMenu.as list TONGUE_TYPE_CONSTANTS
 	
 	public function Tongue() {

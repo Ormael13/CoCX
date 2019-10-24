@@ -827,15 +827,15 @@ public function basemeleeattacks():void {
 	if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Small" && player.weaponPerk != "Dual Small" && player.weaponPerk != "Massive" && player.weaponPerk != "Staff" && !isWieldingRangedWeapon()) {
 		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
 			if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) {
-				if (player.hasPerk(PerkLib.HexaAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+				if (player.hasPerk(PerkLib.HexaAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			}
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4) {
-				if (player.hasPerk(PerkLib.PentaAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+				if (player.hasPerk(PerkLib.PentaAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 5;
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			}
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 3) {
-				if (player.hasPerk(PerkLib.QuadrupleAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+				if (player.hasPerk(PerkLib.QuadrupleAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 4;
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			}
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 2) {
@@ -875,7 +875,8 @@ public function basemeleeattacks():void {
 				else {
 					player.wrath -= mutlimeleeattacksCost;
 					if (player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && player.weaponPerk == "Dual") {
-						if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 9) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 4;
+						if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 9) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 6;
+						else if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 5) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 4;
 						else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
 					}
 				}
@@ -3938,7 +3939,10 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 		damage *= bonusDamageFromMissingHP;
 	}
 	if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
-	if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+	if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
+		if (monster.statusEffectv3(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+		if (monster.statusEffectv4(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.1 * monster.statusEffectv4(StatusEffects.AcidDoT)));
+	}
 	damage = DamageOverhaul(damage);
 	if (damage == 0) MSGControllForEvasion = true;
 	if (monster.HP - damage <= monster.minHP()) {
@@ -5298,6 +5302,11 @@ private function combatStatusesUpdate():void {
 			player.removeStatusEffect(StatusEffects.AcidDoT);
 		}
 	}
+	//Hydra Regeneration Inhibition
+	if (player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) {
+		player.addStatusValue(StatusEffects.HydraRegenerationDisabled,1,-1);
+		if (player.statusEffectv1(StatusEffects.HydraRegenerationDisabled) <= 0) player.removeStatusEffect(StatusEffects.HydraRegenerationDisabled);
+	}
 	//Giant boulder
 	if (player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 		outputText("<b>There is a large boulder coming your way. If you don't avoid it in time, you might take some serious damage.</b>\n\n");
@@ -5617,6 +5626,15 @@ private function combatStatusesUpdate():void {
 		}
 		else {
 			player.addStatusValue(StatusEffects.CooldownPhoenixFireBreath,1,-1);
+		}
+	}
+	//Hydra Acid Breath
+	if (player.hasStatusEffect(StatusEffects.CooldownHydraAcidBreath)) {
+		if (player.statusEffectv1(StatusEffects.CooldownHydraAcidBreath) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownHydraAcidBreath);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownHydraAcidBreath,1,-1);
 		}
 	}
 	//Illusion
@@ -6032,9 +6050,10 @@ public function PercentBasedRegeneration():Number {
 	if (player.armor == armors.NURSECL) maxPercentRegen += 0.5;
 	if (player.weapon == weapons.SESPEAR) maxPercentRegen += 2;
 	if (player.hasPerk(PerkLib.LustyRegeneration)) maxPercentRegen += 0.5;
-	if (player.hasPerk(PerkLib.LizanRegeneration)) maxPercentRegen += 1.5;
-	if (player.hasPerk(PerkLib.LizanMarrow)) maxPercentRegen += 0.5;
-	if (player.hasPerk(PerkLib.LizanMarrowEvolved)) maxPercentRegen += 1;
+	if (player.hasPerk(PerkLib.LizanRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1.5;
+	if (player.hasPerk(PerkLib.LizanMarrow) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 0.5;
+	if (player.hasPerk(PerkLib.LizanMarrowEvolved) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1;
+	if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
 	if (player.hasPerk(PerkLib.BodyCultivator)) maxPercentRegen += 0.5;
 	if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
 	if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
@@ -6059,9 +6078,10 @@ public function maximumRegeneration():Number {
 	if (player.newGamePlusMod() >= 3) maxRegen += 1;
 	if (player.newGamePlusMod() >= 4) maxRegen += 1;
 	if (player.newGamePlusMod() >= 5) maxRegen += 1;
-	if (player.hasPerk(PerkLib.LizanRegeneration)) maxRegen += 1.5;
-	if (player.hasPerk(PerkLib.LizanMarrow)) maxRegen += 0.5;
-	if (player.hasPerk(PerkLib.LizanMarrowEvolved)) maxRegen += 1;
+	if (player.hasPerk(PerkLib.LizanRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxRegen += 1.5;
+	if (player.hasPerk(PerkLib.LizanMarrow) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxRegen += 0.5;
+	if (player.hasPerk(PerkLib.LizanMarrowEvolved) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxRegen += 1;
+	if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
 	if ((player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater)) && player.hasPerk(PerkLib.AquaticAffinity) && player.necklaceName == "Magic coral and pearl necklace") maxRegen += 1;
 	if (player.hasStatusEffect(StatusEffects.CrinosShape) && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) maxRegen += 2;
 	if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) maxRegen += 5;
@@ -6094,6 +6114,7 @@ public function fatigueRecovery2():Number {
 	if (player.hasPerk(PerkLib.CorruptedKitsune)) fatiguecombatrecovery += 1;
 	if (player.hasPerk(PerkLib.MasteredDefenceStance)) fatiguecombatrecovery += 1;
 	if (player.hasPerk(PerkLib.PerfectDefenceStance)) fatiguecombatrecovery += 1;
+	if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) fatiguecombatrecovery += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
 	fatiguecombatrecovery *= fatigueRecoveryMultiplier();
 	fatiguecombatrecovery = Math.round(fatiguecombatrecovery);
 	return fatiguecombatrecovery;
@@ -6504,6 +6525,7 @@ public function display():void {
 			if (monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType)) generalTypes.push("Beast or Animal-morph");
 			if (monster.hasPerk(PerkLib.EnemyConstructType)) generalTypes.push("Construct");
 			if (monster.hasPerk(PerkLib.EnemyFeralType)) generalTypes.push("Feral");
+			if (monster.hasPerk(PerkLib.EnemyGhostType)) generalTypes.push("Ghost");
 			if (monster.hasPerk(PerkLib.EnemyGigantType)) generalTypes.push("Gigant");
 			if (monster.hasPerk(PerkLib.EnemyGooType)) generalTypes.push("Goo");
 			if (monster.hasPerk(PerkLib.EnemyGroupType)) generalTypes.push("Group");
@@ -7319,7 +7341,7 @@ public function runAway(callHook:Boolean = true):void {
 		return;
 	}
 	//Rut doesnt let you run from dicks.
-	if(player.inRut && monster.cockTotal() > 0) {
+	if (player.inRut && monster.cockTotal() > 0) {
 		clearOutput();
 		outputText("The thought of another male in your area competing for all the pussy infuriates you!  No way will you run!");
 //Pass false to combatMenu instead:		menuLoc = 3;
@@ -7328,7 +7350,7 @@ public function runAway(callHook:Boolean = true):void {
 		addButton(0, "Next", combatMenu, false);
 		return;
 	}
-	if(monster.hasStatusEffect(StatusEffects.Level) && player.canFly() && monster is SandTrap) {
+	if (monster.hasStatusEffect(StatusEffects.Level) && player.canFly() && monster is SandTrap) {
 		clearOutput();
 		outputText("You flex the muscles in your back and, shaking clear of the sand, burst into the air!  Wasting no time you fly free of the sandtrap and its treacherous pit.  \"One day your wings will fall off, little ant,\" the snarling voice of the thwarted androgyne carries up to you as you make your escape.  \"And I will be waiting for you when they do!\"");
 		inCombat = false;
@@ -7336,7 +7358,7 @@ public function runAway(callHook:Boolean = true):void {
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
-	if(monster.hasStatusEffect(StatusEffects.GenericRunDisabled) || SceneLib.urtaQuest.isUrta()) {
+	if (monster.hasStatusEffect(StatusEffects.GenericRunDisabled) || SceneLib.urtaQuest.isUrta()) {
 		outputText("You can't escape from this fight!");
 //Pass false to combatMenu instead:		menuLoc = 3;
 //		doNext(combatMenu);
@@ -7344,7 +7366,15 @@ public function runAway(callHook:Boolean = true):void {
 		addButton(0, "Next", combatMenu, false);
 		return;
 	}
-	if(monster.hasStatusEffect(StatusEffects.Level) && monster.statusEffectv1(StatusEffects.Level) < 4 && monster is SandTrap) {
+	if (player.firesnailScore() > 14) {
+		outputText("You too slow to escape from this fight!");
+//Pass false to combatMenu instead:		menuLoc = 3;
+//		doNext(combatMenu);
+		menu();
+		addButton(0, "Next", combatMenu, false);
+		return;
+	}
+	if (monster.hasStatusEffect(StatusEffects.Level) && monster.statusEffectv1(StatusEffects.Level) < 4 && monster is SandTrap) {
 		outputText("You're too deeply mired to escape!  You'll have to <b>climb</b> some first!");
 //Pass false to combatMenu instead:		menuLoc = 3;
 //		doNext(combatMenu);
@@ -7352,7 +7382,7 @@ public function runAway(callHook:Boolean = true):void {
 		addButton(0, "Next", combatMenu, false);
 		return;
 	}
-	if(monster.hasStatusEffect(StatusEffects.RunDisabled)) {
+	if (monster.hasStatusEffect(StatusEffects.RunDisabled)) {
 		outputText("You'd like to run, but you can't scale the walls of the pit with so many demonic hands pulling you down!");
 //Pass false to combatMenu instead:		menuLoc = 3;
 //		doNext(combatMenu);
@@ -7360,7 +7390,7 @@ public function runAway(callHook:Boolean = true):void {
 		addButton(0, "Next", combatMenu, false);
 		return;
 	}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] == 1 && (monster.short == "minotaur gang" || monster.short == "minotaur tribe")) {
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] == 1 && (monster.short == "minotaur gang" || monster.short == "minotaur tribe")) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 0;
 		//(Free run away) 
 		clearOutput();
@@ -7370,7 +7400,7 @@ public function runAway(callHook:Boolean = true):void {
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
-	else if(monster.short == "minotaur tribe" && monster.HPRatio() >= 0.75) {
+	else if (monster.short == "minotaur tribe" && monster.HPRatio() >= 0.75) {
 		clearOutput();
 		outputText("There's too many of them surrounding you to run!");
 //Pass false to combatMenu instead:		menuLoc = 3;
@@ -7379,7 +7409,7 @@ public function runAway(callHook:Boolean = true):void {
 		addButton(0, "Next", combatMenu, false);
 		return;
 	}
-	if(inDungeon || inRoomedDungeon) {
+	if (inDungeon || inRoomedDungeon) {
 		clearOutput();
 		outputText("You're trapped in your foe's home turf - there is nowhere to run!\n\n");
 		enemyAI();
@@ -7390,7 +7420,7 @@ public function runAway(callHook:Boolean = true):void {
 		return;
 	}
 	//Attempt texts!
-	if(monster.short == "Marae") {
+	if (monster.short == "Marae") {
 		outputText("Your boat is blocked by tentacles! ");
 		if(!player.canFly()) outputText("You may not be able to swim fast enough. ");
 		else outputText("You grit your teeth with effort as you try to fly away but the tentacles suddenly grab your [legs] and pull you down. ");
@@ -7398,7 +7428,7 @@ public function runAway(callHook:Boolean = true):void {
 		enemyAI();
 		return;
 	}
-	if(monster.short == "Ember") {
+	if (monster.short == "Ember") {
 		outputText("You take off");
 		if(!player.canFly()) outputText(" running");
 		else outputText(", flapping as hard as you can");
@@ -7411,7 +7441,7 @@ public function runAway(callHook:Boolean = true):void {
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
-	else if(player.canFly()) outputText("Gritting your teeth with effort, you beat your wings quickly and lift off!  ");
+	else if (player.canFly()) outputText("Gritting your teeth with effort, you beat your wings quickly and lift off!  ");
 	//Nonflying PCs
 	else {
 		//In prison!
@@ -7451,7 +7481,7 @@ public function runAway(callHook:Boolean = true):void {
 		if(player.ballSize >= 120 && player.balls > 0) escapeMod += 10;
 	}
 	//ANEMONE OVERRULES NORMAL RUN
-	if(monster.short == "anemone") {
+	if (monster.short == "anemone") {
 		//Autosuccess - less than 60 lust
 		if(player.lust < (player.maxLust() * 0.6)) {
 			clearOutput();
@@ -7483,7 +7513,7 @@ public function runAway(callHook:Boolean = true):void {
 		}
 	}
 	//SEA ANEMONE OVERRULES NORMAL RUN
-	if(monster.short == "sea anemone") {
+	if (monster.short == "sea anemone") {
 		//Autosuccess - less than 60 lust
 		if(player.lust < (player.maxLust() * 0.6)) {
 			clearOutput();
@@ -7515,7 +7545,7 @@ public function runAway(callHook:Boolean = true):void {
 		}
 	}
 	//Ember is SPUCIAL
-	if(monster.short == "Ember") {
+	if (monster.short == "Ember") {
 		//GET AWAY
 		if(player.spe > rand(monster.spe + escapeMod) || (player.hasPerk(PerkLib.Runner) && rand(100) < 50)) {
 			if(player.hasPerk(PerkLib.Runner)) outputText("Using your skill at running, y");
@@ -7561,7 +7591,7 @@ public function runAway(callHook:Boolean = true):void {
 		return;
 	}
 	//Runner perk chance
-	else if(player.hasPerk(PerkLib.Runner) && rand(100) < 50) {
+	else if (player.hasPerk(PerkLib.Runner) && rand(100) < 50) {
 		inCombat = false;
 		outputText("Thanks to your talent for running, you manage to escape.");
 		if(monster.short == "Izma") {

@@ -46,12 +46,12 @@ use namespace CoC;
 			outputText("\n\n");
 		}
 		private function hydraOmniBreathWeaponD():void {
-			var damage:Number = this.inte * 0.4;
-			damage += eBaseIntelligenceDamage() * 0.4;
+			var damage:Number = this.inte * 0.2;
+			damage += eBaseIntelligenceDamage() * 0.2;
 			damage = Math.round(damage);
 			damage = player.takeMagicDamage(damage, true);
-			if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.addStatusValue(StatusEffects.AcidDoT, 2, 5); //More heads will produce more potent acid
-			else player.createStatusEffect(StatusEffects.AcidDoT, 4, 5, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.addStatusValue(StatusEffects.AcidDoT, 2, 10); //More heads will produce more potent acid
+			else player.createStatusEffect(StatusEffects.AcidDoT, 6, 10, 0, 0);
 		}
 		
 		private function hydraOmnibites():void
@@ -72,8 +72,8 @@ use namespace CoC;
 			outputText("\n\n");
 		}
 		private function hydraOmnibitesD():void {
-			var damage:Number = this.str * 0.2;
-			damage += this.spe * 0.2;
+			var damage:Number = this.str * 0.1;
+			damage += this.spe * 0.1;
 			var damage2:Number = 0.9;
 			damage2 += (rand(21) * 0.01);
 			damage *= damage2;
@@ -125,6 +125,7 @@ use namespace CoC;
 				this.armorMDef = 20;
 				this.bonusHP = 1000;
 				this.level = 65;
+				this.gems = 200 + rand(80);
 			}
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 70) {
 				initStrTouSpeInte(174, 290, 186, 163);
@@ -133,6 +134,7 @@ use namespace CoC;
 				this.armorMDef = 25;
 				this.bonusHP = 2000;
 				this.level = 70;
+				this.gems = 250 + rand(90);
 			}
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 75) {
 				initStrTouSpeInte(212, 330, 214, 184);
@@ -141,6 +143,7 @@ use namespace CoC;
 				this.armorMDef = 30;
 				this.bonusHP = 3000;
 				this.level = 75;
+				this.gems = 300 + rand(100);
 			}
 			this.a = "";
 			this.short = "Hydra";
@@ -168,13 +171,7 @@ use namespace CoC;
 			this.bonusLust = 10;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.gems = rand(5) + 8;
-			this.drop = new WeightedDrop().
-				add(null,1).
-				add(useables.PCSHARD,6).
-				add(headjewelries.GNHAIR,5).
-				add(consumables.REPTLUM,4).
-				add(consumables.SNAKOIL, 3);
+			this.drop = new WeightedDrop(consumables.HYDRASC, 1);
 			this.createStatusEffect(StatusEffects.HydraTails, 5, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.MonsterRegeneration, 5, 0, 0, 0);

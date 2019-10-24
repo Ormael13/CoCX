@@ -2700,8 +2700,8 @@ public static const UNKNOWN_FLAG_NUMBER_02691:int                               
 public static const UNKNOWN_FLAG_NUMBER_02692:int                                   = 2692;
 public static const UNKNOWN_FLAG_NUMBER_02693:int                                   = 2693;
 public static const UNKNOWN_FLAG_NUMBER_02694:int                                   = 2694;
-public static const UNKNOWN_FLAG_NUMBER_02695:int                                   = 2695;
-public static const UNKNOWN_FLAG_NUMBER_02696:int                                   = 2696;
+public static const ALVINA_DIARY:int                                   				= 2695;
+public static const HELLFIRE_SNAIL_ENC:int                                   		= 2696;
 public static const UNKNOWN_FLAG_NUMBER_02697:int                                   = 2697;
 public static const UNKNOWN_FLAG_NUMBER_02698:int                                   = 2698;
 public static const UNKNOWN_FLAG_NUMBER_02699:int                                   = 2699;
