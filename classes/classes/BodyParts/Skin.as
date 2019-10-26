@@ -385,6 +385,8 @@ public class Skin extends SaveableBodyPart {
 		 PLAIN, COVERAGE_NONE, 0],
 		[FEATHER,
 		 PLAIN, COVERAGE_HIGH, FEATHER],
+		[TRANSPARENT,
+		 TRANSPARENT, COVERAGE_NONE, 0],
 	]);
 	private static const TYPE_TO_BASE:Object               = TYPE_TO_BASE_COVERAGE_COAT[0];
 	private static const TYPE_TO_COVERAGE:Object           = TYPE_TO_BASE_COVERAGE_COAT[1];

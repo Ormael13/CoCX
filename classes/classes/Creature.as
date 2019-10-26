@@ -1988,7 +1988,8 @@ public class Creature extends Utils
 			var isPierced:Boolean = (cocks.length == 1) && (cocks[index].isPierced); //Only describe as pierced or sock covered if the creature has just one cock
 			var hasSock:Boolean = (cocks.length == 1) && (cocks[index].sock != "");
 			var isGooey:Boolean = (skin.type == Skin.GOO);
-			return Appearance.cockAdjective(cocks[index].cockType, cocks[index].cockLength, cocks[index].cockThickness, lust, cumQ(), isPierced, hasSock, isGooey);
+			var isGhastly:Boolean = (skin.type == Skin.TRANSPARENT);
+			return Appearance.cockAdjective(cocks[index].cockType, cocks[index].cockLength, cocks[index].cockThickness, lust, cumQ(), isPierced, hasSock, isGooey, isGhastly);
 		}
 
 		public function wetness():Number
@@ -2654,6 +2655,7 @@ public class Creature extends Utils
 			Wings.FEATHERED_SPHINX,
 			Wings.FEATHERED_ALICORN,
 			Wings.NIGHTMARE,
+			Wings.ETHEREAL_WINGS,
 			//WING_TYPE_IMP_LARGE,
 		];
 
@@ -3201,6 +3203,7 @@ public class Creature extends Utils
 		public function hasPartialCoat(coat_type:int):Boolean { return skin.hasPartialCoat(coat_type); }
 		public function hasPlainSkin():Boolean { return skin.hasPlainSkin(); }
 		public function hasGooSkin():Boolean { return skin.hasGooSkin(); }
+		public function hasGhostSkin():Boolean { return skin.hasGhostSkin(); }
 		public function isGargoyle():Boolean { return skin.hasBaseOnly(Skin.STONE); }
 		public function skinDescript():String { return skin.describe('basic'); }
 		public function skinFurScales():String { return skin.describe('cover'); }

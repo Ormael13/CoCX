@@ -1388,6 +1388,9 @@ public class PlayerAppearance extends BaseContent {
 		if (player.rearBody.type == RearBody.METAMORPHIC_GOO) {
 			outputText("  Since your body is made of malleable goo you can reshape your form however you want to gain tentacle or any limb or appendage whenever you need one either for combat or for fun.");
 		}
+		if (player.rearBody.type == RearBody.GHOSTLY_AURA) {
+			outputText("  An eerie ghostly aura surrounds you. Your ominous presence is enough to disturb even the bravest of souls.");
+		}
 	}
 	public function describeWings():void {
 //WINGS!
@@ -1452,6 +1455,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (wingType == Wings.NIGHTMARE){
 			outputText("  A pair of large ominous black leathery wings expand from your back. You can open them wide to soar high in the sky.");
+		}
+		if (wingType == Wings.ETHEREAL_WINGS){
+			outputText("  Three pairs of otherworldly tendrils grow out of your back. They have an ethereal glow around them and they gently sway against an invisible wind.");
 		}
 	}
 	public function describeHorns():void {
@@ -1555,6 +1561,10 @@ public class PlayerAppearance extends BaseContent {
 			if (player.horns.count > 0)
 				outputText("  You have a single horns on your head warning anyone who looks that you are an oni and do mean serious business.");
 		}
+		if (player.horns.type == Horns.GHOSTLY_WISPS) {
+			if (player.horns.count > 0)
+				outputText("  Floating above your head is several wispy balls of light. They hold an unsettling ethereal presence around them though in reality they’re merely an extension of yourself.");
+		}
 	}
 	public function describeTongue():void {
 //Tongue
@@ -1575,7 +1585,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.tongue.type == Tongue.CAVE_WYRM)
 			outputText("  A slowly undulating neon blue tongue that glow in the dark occasionally slips from between your lips.  It hangs nearly two feet long when you let the whole thing slide out, though you can retract it to appear normal.");
 		else if (player.tongue.type == Tongue.GHOST)
-			outputText("  Your tongue is rough like that of a cat. You sometimes groom yourself with it.");
+			outputText("  Occasionally a long transparent tongue slicks out of your mouth, stretching out about a foot in length.");
 	}
 	public function describeBeard():void {
 //Beards!
@@ -1656,7 +1666,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your eyes are normal save for your [eyecolor] iris which glows like smoldering embers.");
 		}
 		else if(eyeType == Eyes.GHOST){
-			outputText("  Your eyes are [eyecolor].");
+			outputText("  Your eyes glow [eyecolor] with a ghostly aura. You can see clearly in the shadows and might terrify anyone wandering around alone at night.");
 		}
 		else outputText("  Your eyes are [eyecolor].");
 	}
@@ -2289,7 +2299,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your face is human in shape and structure but your mouth is drooling from constant arousal.");
 		}
 		if (faceType == Face.GHOST) {
-			outputText("  Your face is human in shape and structure but your mouth is drooling from constant arousal.");
+			outputText("  Your face is in human shape and structure. The only thing out of place is the ever present wide smile on your face. Your unsettling smile often hides your true emotions much to the dismay of others.");
 		}
 		//</mod>
 	}

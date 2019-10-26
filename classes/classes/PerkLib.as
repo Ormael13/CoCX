@@ -5009,7 +5009,7 @@ public class PerkLib
 			}
 			*/
             Metamorph.requirePerk(GeneticMemory);
-            MetamorphEx.requirePerk(Metamorph);
+            //MetamorphEx.requirePerk(Metamorph);
             //	JobArtificer.requireInt(25)
             //				.requireWis(25);
             JobBeastWarrior.requireStr(20)

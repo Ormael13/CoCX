@@ -5242,23 +5242,27 @@ use namespace CoC;
 				poltergeistCounter++;
 			if (tongue.type == Tongue.GHOST)
 				poltergeistCounter++;
+			if (horns.type == Horns.GHOSTLY_WISPS)
+				poltergeistCounter++;
 			if (arms.type == Arms.GHOST)
 				poltergeistCounter++;
 			if (lowerBody == LowerBody.GHOST)
 				poltergeistCounter++;
 			if (lowerBody == LowerBody.GHOST_2)
 				poltergeistCounter += 2;
-			if (wings.type == Wings.NONE)
-				poltergeistCounter++;
+			if (wings.type == Wings.ETHEREAL_WINGS)
+				poltergeistCounter += 2;
 			if (tailType == Tail.NONE)
 				poltergeistCounter++;
 			if (antennae.type == Antennae.NONE)
 				poltergeistCounter++;
-			if (rearBody.type == RearBody.GHOST)
+			if (rearBody.type == RearBody.GHOSTLY_AURA)
 				poltergeistCounter++;
 			if (skin.base.pattern == Skin.PATTERN_WHITE_BLACK_VEINS)
 				poltergeistCounter++;
 			if (hasPlainSkinOnly() && (skinAdj == "milky" && skinTone == "white") || (skinAdj == "ashen" && skinTone == "sable"))
+				poltergeistCounter++;
+			if (hasGhostSkin() && (skinAdj == "milky" || skinAdj == "ashen"))
 				poltergeistCounter++;
 			if (findPerk(PerkLib.Incorporeality) >= 0)
 				poltergeistCounter++;

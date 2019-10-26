@@ -391,7 +391,7 @@
         <cell rect="551,450,49,59" name="feet/furracoon" dx="69" dy="115"/>
         <cell rect="651,450,49,59" name="feet/panda" dx="69" dy="115"/>
         <cell rect="151,450,49,59" name="overfeet/fire" dx="69" dy="115"/>
-		<cell rect="701,90,49,59" name="muscle/muscle" dx="69" dy="64"/>
+        <cell rect="701,90,49,59" name="muscle/muscle" dx="69" dy="64"/>
     </spritemap>
     <spritemap file="extra.png">
         <cell rect="2,55,147,128" name="legs_fg/alraune" dx="24" dy="82"/>
@@ -426,6 +426,8 @@
         <cell rect="470,1114,173,156" name="legs_bg/hydra4" dx="19" dy="47"/>
         <cell rect="122,1272,173,156" name="legs_bg/hydra5" dx="19" dy="47"/>
         <cell rect="296,1272,173,156" name="legs_bg/hydra6" dx="19" dy="47"/>
+        <cell rect="470,956,173,156" name="fullbody/femalejiangshi" dx="6" dy="23"/>
+        <cell rect="470,1272,173,156" name="fullbody/malejiangshi" dx="6" dy="23"/>
         <cell rect="260,620,21,28" name="neck/goocore" dx="85" dy="67"/>
         <cell rect="162,59,54,31" name="neck/manticore" dx="67" dy="47"/>
         <cell rect="217,59,54,31" name="neck/weasel" dx="67" dy="50"/>
@@ -748,6 +750,7 @@
 
 	<!-- LAYER AREA -->
     <layers>
+		<layer name="fullbody"/>
 		<layer name="arms_fg"/>
         <layer name="antennae"/>
         <layer name="horns"/>
@@ -1621,8 +1624,8 @@
 						<show part="legs_bg/hydra6"/>
                     </case>
                     <default>
-						<show part="legs_fg/hydra2"/>
-						<show part="legs_bg/hydra2"/>
+						<show part="legs_fg/hydra6"/>
+						<show part="legs_bg/hydra6"/>
                     </default>
                 </switch>			
             </case>

@@ -332,6 +332,10 @@ public class Appearance extends Utils
 					"slippery "];
 				description += randomChoice(options);
 			}
+			if (!haveDescription && i_creature.hasGhostSkin()) {
+				options = ["transparent "];
+				description += randomChoice(options);
+			}
 			if (!haveDescription && i_creature.hasStatusEffect(StatusEffects.BlackNipples)) {
 				options = ["black ",
 					"ebony ",
@@ -561,15 +565,16 @@ public class Appearance extends Utils
 			var isPierced:Boolean = (creature.cocks.length == 1) && (creature.cocks[cockIndex].isPierced); //Only describe as pierced or sock covered if the creature has just one cock
 			var hasSock:Boolean = (creature.cocks.length == 1) && (creature.cocks[cockIndex].sock != "");
 			var isGooey:Boolean = (creature.skin.hasGooSkin());
-			return cockDescription(cockType, creature.cocks[cockIndex].cockLength, creature.cocks[cockIndex].cockThickness, creature.lust, creature.cumQ(), isPierced, hasSock, isGooey);
+			var isGhastly:Boolean = (creature.skin.hasGhostSkin());
+			return cockDescription(cockType, creature.cocks[cockIndex].cockLength, creature.cocks[cockIndex].cockThickness, creature.lust, creature.cumQ(), isPierced, hasSock, isGooey, isGhastly);
 		}
 
 		//This function takes all the variables independently so that a creature object is not required for a cockDescription.
 		//This allows a single cockDescription function to produce output for both cockDescript and the old NPCCockDescript.
-		public static function cockDescription(cockType:CockTypesEnum, length:Number, girth:Number, lust:int = 50, cumQ:Number = 10, isPierced:Boolean = false, hasSock:Boolean = false, isGooey:Boolean = false): String {
+		public static function cockDescription(cockType:CockTypesEnum, length:Number, girth:Number, lust:int = 50, cumQ:Number = 10, isPierced:Boolean = false, hasSock:Boolean = false, isGooey:Boolean = false, isGhastly:Boolean = false): String {
 			if (rand(2) == 0) {
-				if(cockType == CockTypesEnum.HUMAN) return cockAdjective(cockType, length, girth, lust, cumQ, isPierced, hasSock, isGooey) + " " + cockNoun(cockType);
-				else return cockAdjective(cockType, length, girth, lust, cumQ, isPierced, hasSock, isGooey) + ", " + cockNoun(cockType);
+				if(cockType == CockTypesEnum.HUMAN) return cockAdjective(cockType, length, girth, lust, cumQ, isPierced, hasSock, isGooey, isGhastly) + " " + cockNoun(cockType);
+				else return cockAdjective(cockType, length, girth, lust, cumQ, isPierced, hasSock, isGooey, isGhastly) + ", " + cockNoun(cockType);
 			}
 			return cockNoun(cockType);
 		}
@@ -838,11 +843,12 @@ public class Appearance extends Utils
 
 		//New cock adjectives.  The old one sucked dicks
 		//This function handles all cockAdjectives. Previously there were separate functions for the player, monsters and NPCs.
-		public static function cockAdjective(cockType:CockTypesEnum, length:Number, girth:Number, lust:int = 50, cumQ:Number = 10, isPierced:Boolean = false, hasSock:Boolean = false, isGooey:Boolean = false):String {
+		public static function cockAdjective(cockType:CockTypesEnum, length:Number, girth:Number, lust:int = 50, cumQ:Number = 10, isPierced:Boolean = false, hasSock:Boolean = false, isGooey:Boolean = false, isGhastly:Boolean = false):String {
 			//First, the four possible special cases
 			if (isPierced && rand(5) == 0) return "pierced";
 			if (hasSock && rand(5) == 0) return randomChoice("sock-sheathed", "garment-wrapped", "smartly dressed", "cloth-shrouded", "fabric swaddled", "covered");
 			if (isGooey && rand(4) == 0) return randomChoice("goopey", "gooey", "slimy");
+			if (isGhastly && rand(4) == 0) return randomChoice("transparent", "ghostly");
 			//Length 1/3 chance
 			if (rand(3) == 0) {
 				if (length < 3) return randomChoice("little", "toy-sized", "mini", "budding", "tiny");
@@ -1532,7 +1538,12 @@ public class Appearance extends Utils
 					"gooey",
 					"slimy"];
 				description += randomChoice(options);
-
+			}
+			//Ghost skin
+			if (i_creature.hasGhostSkin()) {
+				if (description) description += " ";
+				options = ["transparent"];
+				description += randomChoice(options);
 			}
 			if (description) description += " ";
 
@@ -1657,6 +1668,11 @@ public class Appearance extends Utils
 					description += "gooey";
 				else
 					description += "slimy";
+			}
+			if (description == "" && i_creature.hasGhostSkin()) {
+				if (description != "")
+					description += ", ";
+				description += "transparent";
 			}
 			if (i_creature.vaginaType() == 5 && (forceDesc || Math.floor(Math.random() * 2) == 0)) {
 				if (description != "") description += ", ";
@@ -2625,7 +2641,7 @@ public class Appearance extends Utils
 					[Horns.ONI, "1 oni"],
 					[Horns.ONI_X2, "2 oni"],
 					[Horns.BICORN, "bicorn"],
-					[Horns.GHOST, "ghost"]
+					[Horns.GHOSTLY_WISPS, "ghostly wisps"]
 				]
 		);
 		public static const DEFAULT_ANTENNAE_NAMES:Object = createMapFromPairs(
@@ -2752,7 +2768,8 @@ public class Appearance extends Utils
 					[Wings.VAMPIRE, "large bat"],
 					[Wings.FEY_DRAGON_WINGS, "large majestic fey draconic"],
 					[Wings.FEATHERED_AVIAN, "avian"],
-					[Wings.NIGHTMARE, "leathery"]
+					[Wings.NIGHTMARE, "leathery"],
+					[Wings.ETHEREAL_WINGS, "etheral tendrils"]
 				]
 		);
 		public static const DEFAULT_WING_DESCS:Object = createMapFromPairs(
@@ -2783,7 +2800,8 @@ public class Appearance extends Utils
 					[Wings.MANTICORE_LIKE_LARGE, "large manticore-like"],
 					[Wings.FEY_DRAGON_WINGS, "large majestic fey draconic"],
 					[Wings.FEATHERED_AVIAN, "large feathery"],
-					[Wings.NIGHTMARE, "large leathery"]
+					[Wings.NIGHTMARE, "large leathery"],
+					[Wings.ETHEREAL_WINGS, "etheral tendrils"]
 				]
 		);
 		public static const DEFAULT_LOWER_BODY_NAMES:Object = createMapFromPairs(
@@ -2859,7 +2877,7 @@ public class Appearance extends Utils
 					[RearBody.DISPLACER_TENTACLES, "displacer tentacles"],
 					[RearBody.SNAIL_SHELL, "snail shell"],
 					[RearBody.METAMORPHIC_GOO, "metamorphic goo"],
-					[RearBody.GHOST, "ghost"]
+					[RearBody.GHOSTLY_AURA, "ghostly aura"]
 				]
 		);
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(
@@ -3466,4 +3484,4 @@ public class Appearance extends Utils
 			return descript;
 		}
 	}
-}
+}

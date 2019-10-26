@@ -125,10 +125,10 @@ package classes.Scenes
 			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
 			//outputText("\n");cel na 0.8: dodać kitsune/nekomanta TF
 			//outputText("\n");cel na 0.8: dodać yuki-onna TF
+			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			outputText("-New dungeon: Ebon Labyrinth. Founded in Caves. It's endless dungeon without any usable map or end, traveling between rooms takes 15 min instead of 5. PC can keep explore it and fight enemies inside it up to even needing to sleep inside it. Sleeping inside giving 50% chance of been attacked in sleep. It's possible to leave dungeon at any moment if player decide it getting too hard to keep staying inside labyrinth.\n");
 			outputText("-New types of enemies could be meet in Ebon Labyrinth: Stray demons (stray succubus/incubus/omnibus), Ancient tentacle beast, Labyrinth minotaur.\n");
 			outputText("-New melee weapon (by Ormael): Dual large axes - dropped by Labyrinth Minotaur. Cost 1440 gems. Base atk is 28. Requires height of 6'6 to wield. They are dual large weapons.\n");
-			outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			outputText("-Each 10 rooms (excluding each 50th room) in Ebon Labyrinth PC can find loot chest that contain between 10 to 50% exp needed to level up and between 500 to 1000 gems.\n");
 			outputText("-After finishing Alvina Advanced Study PC can confess and get trial from dark lolita to win her heart: brining her Black Rose. It would req. to venture into Ebon Labyrinth and fight boss at 50th room. After returning alive and with Rose Alvina will find PC interesting enough to have sex with him/her. First time succesful sex scene will change her status to Lover along with moving from Followers to Lovers tab in camp.\n");
 			outputText("-New type of enemy to meet in caves or Ebon Labyrinth: Dark Slime. It's slime that is having additional lightning vulnerability on top of her typical weakness to fire. But she also can use magic specials that other slimes can't. Fight with her can be avoided if PC is slime himself/herself.\n");
@@ -150,12 +150,21 @@ package classes.Scenes
 			outputText("-New TF item: Protoplasm. Made by Lumi by enhancing Ectoplasm. Allow to change from Phantom race into Poltergeist/Eldritch Poltergeist race with race bonuses at 12+/18+: -25/45 to max Str (scal), -25/45 to max Tou (scal), +90/150 to max Spe (scal), +90/150 to max Int (scal), +45/60 to max Wis (scal).\n");
 			outputText("-New body part - eyes: Ghost Eyes. Req. Ghost Hair\n");
 			outputText("-New body part - lower body: Poltergeist Legs. Req. Phantom Legs and use of Protoplasm\n");
+			//tutaj poniżej gdzieś błąd jest
 			outputText("-New body part - face: Ghost Face. Req. Ghost Eyes and use of Protoplasm\n");
 			outputText("-New body part - tongue: Ghost Tongue. Req. use of Protoplasm\n");
-			//outputText("-New body part - horns: . No Req.\n");
-			//outputText("-New body part - skin: Transparent Skin. No Req.\n");
-			//outputText("-New body part - skin pattern: . No Req.\n");
-			//outputText("-New body part - rear body: . Req. Poltergeist Legs\n");
+			outputText("-New body part - horns: Ghostly Wisps. Req. Ghost Hair and use of Protoplasm\n");
+			outputText("-New body part - skin: Transparent Skin. Req. Plain/Human skin and use of Protoplasm\n");
+			outputText("-New body part - skin pattern: white/black veins. Req. Transparent Skin\n");
+			outputText("-New body part - rear body: Ghostly Aura. Req. Poltergeist Legs\n");
+			outputText("-New body part - wings: Ethereal Wings. Req. Ghostly Aura\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-New enemy perk: Ghost enemy type. Shouldra only use atm this perk. It would make enemies immune to Possess special.\n");// and reduce demages they take
 			outputText("-Fixed bugs: None slime PC getting hunger refilled from sex scenes involving been filled with any liquid, option to make bottle with mid-grade pill redirect to get bottle of low-grade pills, bottle of low grade pill when swallowed giving effect of just 1 pill instead of 10, displacer beast and hellcat race scores not allowing to pick cat races mutation perks, green gel gathering quest on adventure guild been disabled, ");
 			outputText("using mech melee attack not clearing previous text, Aurora not assiting in fighhts after picking her as teammate, spawning ocassionaly more than one enemy per room in River Dungeon, Devil TF giving wrong type of legs, Temepst perk to increase times PC attacks been too low for higher amount of base attacks per turn, 4th to 6th additional normal weapon attack gained with perks not been added\n");/*ostatni punkt changelogu
@@ -221,11 +230,7 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -261,10 +266,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we wlasciwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

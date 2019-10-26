@@ -8676,7 +8676,7 @@ public final class Mutations extends MutationsHelper
 			}
 			//Eyes
 			if (player.hairType == 2 && player.eyes.type != Eyes.GHOST && rand(3) == 0 && changes < changeLimit) {
-				outputText("\n\nWIP (Ghost Eyes) <b>WIP</b>");
+				outputText("\n\nYour vision becomes blurry making it hard to see. You blink repeatedly trying to clear your eyes. As your vision returns to normal, you notice that your surroundings appear sharper than normal. The shadows are as clear as day, though everything is tinted with a faint ethereal glow. You look in a puddle to see that your eyes glow an eerie [eyecolor]. <b>You now have glowing ghost eyes.</b>");
 				setEyeType(Eyes.GHOST);
 				changes++;
 			}
@@ -8726,7 +8726,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Removes wings
-			if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.NONE) && rand(3) == 0 && changes < changeLimit) {
+			if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.ETHEREAL_WINGS, Wings.NONE) && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades.  After a moment the pain passes, though your wings are gone!");
 				setWingType(Wings.NONE, "non-existant");
 				changes++;
@@ -8748,13 +8748,13 @@ public final class Mutations extends MutationsHelper
 			}
 			//Face
 			if (player.eyes.type == Eyes.GHOST && player.faceType != Face.GHOST && changes < changeLimit && rand(3) == 0 && type == 1) {
-				outputText("\n\nWIP (Ghost Face) <b>WIP</b>");
+				outputText("\n\nYour face slowly grows numb and stiff. The muscles in your face seem to pull and shift. As the numbness fades, you notice that your face is stuck in a permanent smile You try to stop smiling but the muscles in your face refuse to budge. <b>People might be disturbed by your unsettling smile.</b>");
 				setFaceType(Face.GHOST);
 				changes++;
 			}
 			//Tongue
 			if (player.tongue.type == Tongue.HUMAN && player.tongue.type != Tongue.GHOST && changes < changeLimit && rand(3) == 0 && type == 1) {
-				outputText("\n\nWIP (Ghost Tongue) <b>WIP</b>");
+				outputText("\n\nYour tongue tingles and feels heavy in your mouth. You mouth as tongue slips out further than what is considered normal. Your tongue grows at least a foot in length tapering to a point. It slowly becomes more transparent until you’re able to see right through it. <b>You now have a long, transparent, ghostly tongue.</b>");
 				setTongueType(Tongue.GHOST);
 				changes++;
 			}
@@ -8763,29 +8763,55 @@ public final class Mutations extends MutationsHelper
 				setTongueType(Tongue.HUMAN);
 				changes++;
 			}
-			//Rear body
-			/*if (player.lowerBody == LowerBody.GHOST_2 && player.rearBody.type != RearBody.GHOST && changes < changeLimit && rand(3) == 0 && type == 1) {
-				outputText("\n\nWIP (Ghost Rear Body) <b>WIP</b>");
-				setRearBody(RearBody.GHOST);
-				changes++;
-			}*/
-			//Wings
-			/*if (player.wings.type == Wings.NONE && changes < changeLimit && rand(3) == 0 && type == 1) {
-				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, [haircolor] wings.</b>");
-				setWingType(Wings.FEATHERED_LARGE, "large, feathered");
-				changes++;
-			}*/
-			//Skin pattern - black or white veins pattern - adv ghost tf
-			/*if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit && type == 1) {
-				outputText("\n\nYou suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>");
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
-					outputText("\n\n<b>Genetic Memory: Lighting Tattoed Skin - Memorized!</b>\n\n");
-					player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
+			//Horns
+			if (player.hairType == Hair.GHOST && changes < changeLimit && rand(3) == 0 && type == 1) {
+				if (player.horns.count == 0 && player.horns.type == Horns.NONE) {
+					outputText("\n\nYou notice something bright moving out of the corner of your eye. You look over to see an ethereal ball of light floating above your head. You can see four more floating with it slowly circling above your head. You touch one surprised that you can actually feel it accompanied by a chilling sensation. <b>It seems that these ghostly wisps are a part of you.</b>");
+					setHornType(Horns.GHOSTLY_WISPS, 2);
+					changes++;
 				}
-				player.skin.base.pattern = Skin.PATTERN_WHITE_BLACK_VEINS;
-				player.skin.base.adj = "black veins";
+				if (player.horns.count > 0 && player.horns.type != Horns.GHOSTLY_WISPS) {
+					outputText("\n\nYour old horns slowly crumbling away until nothing is left. Then you notice something bright moving out of the corner of your eye. You look over to see an ethereal ball of light floating above your head. You can see four more floating with it slowly circling above your head. You touch one surprised that you can actually feel it accompanied by a chilling sensation. <b>It seems that these ghostly wisps are a part of you.</b>");
+					setHornType(Horns.GHOSTLY_WISPS, 2);
+					changes++;
+				}
+			}
+			//Rear body
+			if (player.lowerBody == LowerBody.GHOST_2 && player.rearBody.type != RearBody.GHOSTLY_AURA && changes < changeLimit && rand(3) == 0 && type == 1) {
+				outputText("\n\nA chill makes its way through your body. You can feel your body has changed and become something more incorporeal. An eerie glow surrounds wraps around your body as you fully become an otherworldly apparition.");
+				setRearBody(RearBody.GHOSTLY_AURA);
 				changes++;
-			}*/
+			}
+			//Wings
+			if (player.wings.type == Wings.NONE && player.rearBody.type == RearBody.GHOSTLY_AURA && changes < changeLimit && rand(3) == 0 && type == 1) {
+				outputText("\n\nYour body feels lighter than usual, almost as if you’re floating on air. Unintentionally you lean forward finding yourself floating a few feet off the ground. Confused as to what is happening, you try to move, floating a few paces in the direction you want to go. That’s when you notice three pairs of wispy otherworldly tendrils growing out of your back. They glow faintly and almost appear as though they’re moving with the wind. They don’t even hold any weight. <b>You can get used to floating like this with your ethereal wings.</b>");
+				setWingType(Wings.ETHEREAL_WINGS, "etheral tendrils");
+				changes++;
+			}
+			//Transparent skin
+			if (player.hasPlainSkinOnly() && !player.hasGhostSkin() && !player.isGargoyle() && rand(3) == 0 && changes < changeLimit && type == 1) {
+				outputText("\n\nYou feel lightheaded all of a sudden. You bring your hands up to clutch your head only to find the color slowly fading from your skin or rather it’s losing its opacity altogether. You examine your body and see that you’ve become almost entirely transparent adding to your ethereal appearance. <b>You now have transparent skin.</b>");
+				player.skin.setBaseOnly({adj:"transparent",type:Skin.TRANSPARENT});
+				changes++;
+			}
+			//Skin pattern - black or white veins pattern - adv ghost tf
+			if (!player.skin.hasWhiteBlackVeins() && player.hasGhostSkin() && (player.skinTone == "white" || player.skinTone == "sable") && rand(3) == 0 && changes < changeLimit && type == 1) {
+				outputText("\n\nYour skin tingles and itches faintly. You look down to see ");
+				if (player.skinTone == "sable") outputText("black");
+				if (player.skinTone == "white") outputText("white");
+				outputText(" veins etching deep into your skin across the entirety of your body. <b>You now have ");
+				if (player.skinTone == "sable") outputText("black");
+				if (player.skinTone == "white") outputText("white");
+				outputText(" veins.</b>");/*
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
+					outputText("\n\n<b>Genetic Memory: White/Black Veins - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
+				}*/
+				player.skin.base.pattern = Skin.PATTERN_WHITE_BLACK_VEINS;
+				if (player.skinTone == "sable") player.skin.base.adj = "black veined";
+				if (player.skinTone == "white") player.skin.base.adj = "white veined";
+				changes++;
+			}
 			//Effect Script 8: 100% chance of healing
 			if (changes == 0) {
 				outputText("You feel strangely refreshed, as if you just gobbled down a bottle of sunshine.  A smile graces your lips as vitality fills you.  ");

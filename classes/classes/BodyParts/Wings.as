@@ -31,6 +31,7 @@ public class Wings extends BodyPart {
 	public static const FEATHERED_AVIAN:int      = 27;
 	public static const NIGHTMARE:int    		 = 28;
 	public static const FEATHERED_SPHINX:int     = 29;//button 0 on 3rd page of metamorph
+	public static const ETHEREAL_WINGS:int    	 = 30;
 	// Don't forget to add new types in DebugMenu.as list WING_TYPE_CONSTANTS
 	
 	public var desc:String = "non-existant";

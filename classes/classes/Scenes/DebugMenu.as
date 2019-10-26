@@ -799,6 +799,7 @@ public class DebugMenu extends BaseContent
 			[Skin.STONE, "7 STONE"],
 			[Skin.AQUA_RUBBER_LIKE, "7 AQUA_RUBBER_LIKE"],
 			[Skin.FEATHER, "21 FEATHER"],
+			[Skin.TRANSPARENT, "22 TRANSPARENT"],
 		];
 		private static const SKIN_COAT_TYPES:Array = [
 			[Skin.FUR, "1 FUR"],
@@ -809,7 +810,6 @@ public class DebugMenu extends BaseContent
 			[Skin.AQUA_SCALES, "9 AQUA_SCALES"],
 			[Skin.DRAGON_SCALES, "10 DRAGON_SCALES"],
 			[Skin.MOSS, "11 MOSS"],
-			[Skin.TRANSPARENT, "12 TRANSPARENT"],
 		];
 		private static const PATTERN_BASE_TYPES:Array = [
 			[Skin.PATTERN_NONE, "0 NONE"],
@@ -1130,7 +1130,7 @@ public class DebugMenu extends BaseContent
 			[Horns.ONI_X2, "12 ONI_X2"],
 			[Horns.ONI, "13 ONI"],
 			[Horns.BICORN, "14 BICORN"],
-			[Horns.GHOST, "15 GHOST"],
+			[Horns.GHOSTLY_WISPS, "15 GHOSTLY_WISPS"],
 		];
 		private static const HORN_COUNT_CONSTANTS:Array = [
 				0,1,2,3,4,
@@ -1381,6 +1381,7 @@ public class DebugMenu extends BaseContent
 			[Wings.FEATHERED_AVIAN, "27 FEATHERED_AVIAN"],
 			[Wings.NIGHTMARE, "28 NIGHTMARE"],
 			[Wings.FEATHERED_SPHINX, "29 FEATHERED_SPHINX"],
+			[Wings.ETHEREAL_WINGS, "30 ETHEREAL_WINGS"],
 		];
 		private static const WING_DESC_CONSTANTS:Array = [
 			"(none)","non-existant","tiny hidden","huge","small",
@@ -1464,7 +1465,7 @@ public class DebugMenu extends BaseContent
 			[RearBody.DISPLACER_TENTACLES, "11 DISPLACER_TENTACLES"],
 			[RearBody.SNAIL_SHELL, "12 SNAIL_SHELL"],
 			[RearBody.METAMORPHIC_GOO, "13 METAMORPHIC_GOO"],
-			[RearBody.GHOST, "15 GHOST"],
+			[RearBody.GHOSTLY_AURA, "15 GHOSTLY_AURA"],
 		];
 		private function changeArmType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.arms.type = setIdx;
