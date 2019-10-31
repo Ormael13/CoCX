@@ -17,6 +17,7 @@ public class Horns extends BodyPart {
 	public static const ONI:int                      = 13;
 	public static const BICORN:int                   = 14;//button 0 on 2nd page of metamorph
 	public static const GHOSTLY_WISPS:int            = 15;
+	public static const SPELL_TAG:int           	 = 16;
 	// Don't forget to add new types in DebugMenu.as list HORN_TYPE_CONSTANTS
 	
 	public function Horns() {

@@ -82,7 +82,6 @@ package classes.Scenes
 			outputText("-Character viewer was updated once again due to hard work of Liadri and aimozg.\n");
 			outputText("-Fixed bugs: Siegweird Advanced Studies not progressing beyond crafting holy symbol stage, 3rd bracer been uncraftable due to wrong one of requirements, one of Celess scenes having small error in code, opening map in one of Hidden cave room causing glitch\n\n");
 			outputText("<b>Version 0.8n4:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New TF item: Dark Slime Jelly. Dropping from defeated Dark Slimes. Using it will gradualy change pc into dark slime.\n");
 			outputText("-New body part - arms: Goo Arms. Req. Goo Skin\n");
 			outputText("-New body part - rear body: Metamorphic. Req. Goo Legs and Slime Core perk\n");
@@ -106,7 +105,7 @@ package classes.Scenes
 			outputText("-Displacer Beast race have change for body parts. Cat Eyes > Displacer Eyes (yellow), Lion ears > Displacer Ears, Cat Legs > Lion Legs. Full race bonus was increased to 14 pts from 13 giving 15 more points to max str.\n");
 			outputText("-Iron Stomach perks would increase limit when PC gain weight from eating over max Hunger cap by 5/10/15 (so all 3 will grant increase of 30).\n");
 			outputText("-Increased max lvl camp npc's can attain after reaching end of training: Aurora (lvl 19), Dinah (lvl 38)\n");
-			outputText("-7 new achievments.\n");
+			outputText("-8 new achievments (1 shadow one). Some of achievments names was a bit changed to prepare for future ones.\n");
 			outputText("-Monsters can now go into negative HP without loosing by HP as long they got anything like Diehard/Ferocity effects active.\n");
 			outputText("-2 new things added to stats page (general subpage): current possesed amount of ascension points and possible to gain ascension points when PC will ascend.\n");
 			outputText("-Magical soulskill lost their spells power modifier. Since they not spells but soulskills they not needed it to wreck havoc anyway, right?\n");
@@ -150,7 +149,6 @@ package classes.Scenes
 			outputText("-New TF item: Protoplasm. Made by Lumi by enhancing Ectoplasm. Allow to change from Phantom race into Poltergeist/Eldritch Poltergeist race with race bonuses at 12+/18+: -25/45 to max Str (scal), -25/45 to max Tou (scal), +90/150 to max Spe (scal), +90/150 to max Int (scal), +45/60 to max Wis (scal).\n");
 			outputText("-New body part - eyes: Ghost Eyes. Req. Ghost Hair\n");
 			outputText("-New body part - lower body: Poltergeist Legs. Req. Phantom Legs and use of Protoplasm\n");
-			//tutaj poniżej gdzieś błąd jest
 			outputText("-New body part - face: Ghost Face. Req. Ghost Eyes and use of Protoplasm\n");
 			outputText("-New body part - tongue: Ghost Tongue. Req. use of Protoplasm\n");
 			outputText("-New body part - horns: Ghostly Wisps. Req. Ghost Hair and use of Protoplasm\n");
@@ -158,16 +156,34 @@ package classes.Scenes
 			outputText("-New body part - skin pattern: white/black veins. Req. Transparent Skin\n");
 			outputText("-New body part - rear body: Ghostly Aura. Req. Poltergeist Legs\n");
 			outputText("-New body part - wings: Ethereal Wings. Req. Ghostly Aura\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New consumable items: Bag of Cosmos (A1), Bag of Cosmos (A2), Bag of Cosmos (A3) - dropped by Soul Cultivator enemies (horse-morph at Lake, sheep-morph at Owca village, dragon boy at Hidden Cave/outside of it). Contain randomn amount of spirit stones inside.\n");
+			outputText("-Soul Gem crafting by Evangelin was shortened form 5 days to just 1 day. Those that have her currently crafting gem will need to wait all 5 days before next one gem will take only day.\n");
+			outputText("-New event perk: Ghost-slinger. Gained by having 12+ in poltergeist score. Effects: +1 to poltergeist score, increases damage with guns/thrown weapons by 10%.\n");
+			outputText("-New event perk: Phantom Shooting. Gained by having 12+ in poltergeist score. Effects: +1 to poltergeist score, using part of own body PC form phantom bullets or throwing weapons to attack enemy (throwing/firearm shooting will not use fatigue/ammo instead draining small amount of PC ectoplasmic body (HP)).\n");
+			outputText("-New NPC showing up in Journey to the East. He giving proposition of giving 3000 gems to PC if pc participate in experiment. Req. to participate in that experiment is been fully physicaly human looking PC.\n");
+			outputText("-New possible race to become: Jiangshi - at 20+ pts they giving following bonuses: +140 to max Strength, +100 to max Toughness, -90 to max Speed, -90 to max Intelligence, +110 to max Wisdom, +130 to max Libido (all scaling with NG tiers)\n");
+			outputText("-New body part - eyes: Jiangshi Eyes. Req. After event\n");
+			outputText("-New body part - face: Jiangshi Face. Req. After event\n");
+			outputText("-New body part - arms: Jiangshi Arms. Req. After event\n");
+			outputText("-New body part - legs: Jiangshi Legs. Req. After event\n");
+			outputText("-New body part - horn: Spell tag. Req. After event\n");
+			outputText("-New event perk: Halted vitals. Gained after becoming Jiangshi. Effects: Your vitals are frozen in time by the magic of the curse tag, allowing you to live without the need for breathing, eating and a heartbeat. It also reduces damage taken from physical attacks by 20%.\n");
+			outputText("-PC that broughthenchman to dungeon could now masturbate without been notified it's too dangerous and should be done in safetly of the camp. Hurray for selfish henchman that shall stand guard during PC 'release'. Maybe in future they could join the fun too...\n");
+			outputText("-Been Jiangshi have other benefits or penalties: effective bonus from str stat is doubles; each melee hit dmg increased by 5% and would debuff enemy speed+toughness and dealing lust dmg (if enemy not lust resistanct); can't escpae form fights; can't naturaly recover fatigue unless hitting with hands enemy; each melee attack will restore a bit of hp, mana, fatigue and soulforce; can't equip any melee weapon, range weapon, shield or armor; ");
+			outputText("each feeding increase speed by 5 and intelligence by 12 until PC reach 18 stacks, each evening PC will loose one stack of gathered life force; PC can switch between feral or normal combat style\n");
+			outputText("-New armor (by Liadri): Traditional clothes - gained after becoming Jiangshi. Cost 160 gems, 0 armor, 0 magic resistance, Slutty Seduction 10, +40% to soulskills power.\n");
+			outputText("-New event perk: Super strength. Gained after becoming Jiangshi. Effects: Unarmed strike damage modifier from strength is doubled.\n");
+			outputText("-New event perk: Poison nails. Gained after becoming Jiangshi. Effects: Your nails inflict a deadly poison on strike, damaging your foe’s toughness, speed and arousing them.\n");
+			outputText("-New event perk: Rigidity. Gained after becoming Jiangshi. Effects: Your cadaverous rigidity prevents any form of escape in battle.\n");
+			outputText("-New event perk: Life leech. Gained after becoming Jiangshi. Effects: Your unarmed strike steals vital energy from your victims, dealing 5% extra damage and restoring 1% mana, health, fatigue and soulforce per hit.\n");
+			outputText("-New event perk: Undeath. Gained after becoming Jiangshi. Effects: Pretty much the same as gargoyle Transformation Immunity.\n");
+			outputText("-New event perk: Energy dependent. Gained after becoming Jiangshi. Effects: You become faster, smarter and clearer of mind when well fed in life force. However you become dim witted and stiffer than a corpse when starved. You cannot recover soul force through normal means.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-New enemy perk: Ghost enemy type. Shouldra only use atm this perk. It would make enemies immune to Possess special.\n");// and reduce demages they take
 			outputText("-Fixed bugs: None slime PC getting hunger refilled from sex scenes involving been filled with any liquid, option to make bottle with mid-grade pill redirect to get bottle of low-grade pills, bottle of low grade pill when swallowed giving effect of just 1 pill instead of 10, displacer beast and hellcat race scores not allowing to pick cat races mutation perks, green gel gathering quest on adventure guild been disabled, ");
 			outputText("using mech melee attack not clearing previous text, Aurora not assiting in fighhts after picking her as teammate, spawning ocassionaly more than one enemy per room in River Dungeon, Devil TF giving wrong type of legs, Temepst perk to increase times PC attacks been too low for higher amount of base attacks per turn, 4th to 6th additional normal weapon attack gained with perks not been added\n");/*ostatni punkt changelogu
+			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New TF item: . Gained by bringing Orc Mead to Lumi for enhancing. Using this item will turn PC into high orc. High Orc (scalable): +130 to max Str, +30 to max Tou, +10 to max Spe, -30 to max Int, +25 to max Lib, +20% to max Wrath.\n");
 			outputText("-New TF item: . Gained by bringing Elf Ear to Lumi for enhancing. Using this item will turn PC into high elf. High Elf (scalable): -10 to max Str, -15 to max Tou, +80 to max Spe, +80 to max Int, +60 to max Wis, +30 max/min Sens, +20% to max Mana.\n");
 			outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
@@ -216,11 +232,7 @@ package classes.Scenes
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: .\n");
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: .\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -266,18 +278,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we wlasciwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

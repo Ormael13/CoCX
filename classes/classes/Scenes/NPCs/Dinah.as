@@ -360,6 +360,7 @@ import classes.internals.*;
 				this.bonusLust = 10;
 				this.lustVuln = .9;
 				this.level = 2;
+				this.drop = new WeightedDrop(consumables.BAGOCA1, 1);
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 1) {
 				this.a = "";
@@ -461,30 +462,35 @@ import classes.internals.*;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 0;
-			this.drop = NO_DROP;
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 1 && flags[kFLAGS.DINAH_LVL_UP] < 4) {
 				this.lustVuln = .9;
 				this.createStatusEffect(StatusEffects.EvasiveTeleport, 40, 0, 0, 0);
+				this.drop = new WeightedDrop(consumables.BAGOCA1, 1);
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 4 && flags[kFLAGS.DINAH_LVL_UP] < 7) {
 				this.lustVuln = .8;
 				this.createStatusEffect(StatusEffects.EvasiveTeleport, 70, 0, 0, 0);
+				this.drop = new WeightedDrop(consumables.BAGOCA2, 1);
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 7 && flags[kFLAGS.DINAH_LVL_UP] < 10) {
 				this.lustVuln = .7;
 				this.createStatusEffect(StatusEffects.EvasiveTeleport, 100, 0, 0, 0);
+				this.drop = new WeightedDrop(consumables.BAGOCA3, 1);
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 10 && flags[kFLAGS.DINAH_LVL_UP] < 12) {
 				this.lustVuln = .6;
 				this.createStatusEffect(StatusEffects.EvasiveTeleport, 130, 0, 0, 0);
+				this.drop = NO_DROP;//
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 12 && flags[kFLAGS.DINAH_LVL_UP] < 14) {
 				this.lustVuln = .5;
 				this.createStatusEffect(StatusEffects.EvasiveTeleport, 160, 0, 0, 0);
+				this.drop = NO_DROP;//
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 14) {
 				this.lustVuln = .4;
 				this.createStatusEffect(StatusEffects.EvasiveTeleport, 190, 0, 0, 0);
+				this.drop = NO_DROP;//
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 1) {
 				this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);

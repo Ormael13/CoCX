@@ -278,6 +278,7 @@ public class Achievements extends BaseContent
 			//addAchievement("xXx 9: Dark Fate", kACHIEVEMENTS.EPIC_XXX9_DARK_FATE, "Start NG 8+ (or higher) game.", "", true);
 			addAchievement("Guardian of Notre-Dame", kACHIEVEMENTS.EPIC_GUARDIAN_OF_NOTRE_DAME, "Become Gargoyle.", "", true);
 			addAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA, "Became Devil.", "", true);
+			addAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER, "Became Jiangshi.", "", true);
 			//odblokowanie pierwszego animal ancestory starting bonus at chara creation
 			addAchievement("My own Demon Weapon", kACHIEVEMENTS.EPIC_MY_OWN_DEMON_WEAPON, "Find an evolving weapon.", "", true);
 			//znalezienie ewolującą zbroje
@@ -351,11 +352,11 @@ public class Achievements extends BaseContent
 			addAchievement("Urta's True Lover", kACHIEVEMENTS.GENERAL_URTA_TRUE_LOVER, "Complete Urta's infertility quest then have her give birth to a baby fox.");
 			addAchievement("Dress-tacular", kACHIEVEMENTS.GENERAL_DRESSTACULAR, "Give Rubi every outfit available.");
 			addAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER, "Defeat corrupted Marae.", "", true);
-			addAchievement("Follow the Leader", kACHIEVEMENTS.GENERAL_FOLLOW_THE_LEADER, "Get every follower in the game.");
-			addAchievement("Gotta Love 'Em All", kACHIEVEMENTS.GENERAL_GOTTA_LOVE_THEM_ALL, "Get every lover in the game. (Nieve optional)");
-			addAchievement("Meet Your " + player.mf("Master", "Mistress"), kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER, "Get every slave in the game. (Corrupt Jojo & Amily, and Bimbo Sophie optional.)");
+			addAchievement("Follow the Leader (1)", kACHIEVEMENTS.GENERAL_FOLLOW_THE_LEADER, "Get seven followers in the game.");//Get every follower in the game.
+			addAchievement("Gotta Love 'Em All (1)", kACHIEVEMENTS.GENERAL_GOTTA_LOVE_THEM_ALL, "Get eight lovers in the game.");//Get every lover in the game. (Nieve optional)
+			addAchievement("Meet Your " + player.mf("Master", "Mistress") + " (1)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER, "Get four slaves in the game. (Corrupt Jojo & Amily, and Bimbo Sophie optional.)");//Get every slave in the game.
 			addAchievement("Slaver", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE, "Get every slave in the game, including corrupt Jojo and Amily, and Bimbo Sophie.", "", true);
-			addAchievement("All Your People are Belong to Me", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME, "Obtain every follower, lover, and slave. (Excluding mutual exclusivity)");
+			addAchievement("All Your People are Belong to Me (1)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME, "Obtain in total nineteen followers, lovers, and slaves. (Excluding mutual exclusivity)");//Obtain every follower, lover, and slave.
 			addAchievement("Scholar", kACHIEVEMENTS.GENERAL_SCHOLAR, "Fill out all codex entries available in the game.");
 			addAchievement("Freeloader", kACHIEVEMENTS.GENERAL_FREELOADER, "Visit the Kitsune's mansion 3 times.");
 			addAchievement("Schizophrenic", kACHIEVEMENTS.GENERAL_SCHIZO, "Go between pure and corrupt 4 times. (Threshold of 20 and 80 corruption)");

@@ -29,7 +29,7 @@ use namespace CoC;
 			outputText(". ");
 			if (player.isLactating()) outputText("One of them even made suction cup tentacles in order to milk your breasts. ");
 			outputText("You’re being violated from all sides and in all possible ways by a full harem of jelly girls!\n\n");
-			player.dynStats("lus", 17 + rand(7) + this.sens / 5);
+			player.dynStats("lus", 17 + rand(7) + this.sens / 5, "scale", false);
 			if (!hasStatusEffect(StatusEffects.LingeringSlime)) createStatusEffect(StatusEffects.LingeringSlime, 0, 0, 0, 0);
 		}
 		
@@ -55,15 +55,16 @@ use namespace CoC;
 			td += player.lib / 8;
 			td += player.sens / 8;
 			td = Math.round(td);
+			td = td * (EngineCore.lustPercent() / 100);
 			if (!hasStatusEffect(StatusEffects.LingeringSlime)) createStatusEffect(StatusEffects.LingeringSlime, 0, 0, 0, 0);
-			outputText("\nLust swells up in your body as the substance splash on you. <b>(<font color=\"#800000\">" + td + "</font>)</b> lust damage.");
-			player.dynStats("lus", td);
+			outputText("\nLust swells up in your body as the substance splash on you. <b>(<font color=\"#ff00ff\">" + (Math.round(td * 10) / 10) + "</font>)</b> lust damage.");
+			player.dynStats("lus", td, "scale", false);
 		}
 		
 		private function gooGroupGrapple():void
 		{
 			outputText("The slime girls suddenly attempt to grapple you one after another to restrict your movements!");
-			if((player.findPerk(PerkLib.Evade) && rand(6) == 0) || (player.spe > rand(300))) outputText("You barely manage to break out of their clingy bodies!");
+			if((player.findPerk(PerkLib.Evade) && rand(6) == 0) || (player.spe > ((this.spe * 1.5) + rand(200)))) outputText("You barely manage to break out of their clingy bodies!");
 			else {
 				outputText("Before you know it you’re covered and pulled down by their combined bodies.");
 				if (!player.hasStatusEffect(StatusEffects.GooBind)) player.createStatusEffect(StatusEffects.GooBind, 0, 0, 0, 0);
@@ -101,8 +102,8 @@ use namespace CoC;
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 65) {
 				initStrTouSpeInte(120, 240, 160, 150);
 				initWisLibSensCor(150, 240, 200, 10);
-				this.armorDef = 30;
-				this.armorMDef = 90;
+				this.armorDef = 60;
+				this.armorMDef = 180;
 				this.bonusHP = 10000;
 				this.level = 65;
 				this.gems = 200 + rand(80);
@@ -110,8 +111,8 @@ use namespace CoC;
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 70) {
 				initStrTouSpeInte(140, 290, 200, 180);
 				initWisLibSensCor(180, 290, 210, 10);
-				this.armorDef = 40;
-				this.armorMDef = 120;
+				this.armorDef = 80;
+				this.armorMDef = 240;
 				this.bonusHP = 20000;
 				this.level = 70;
 				this.gems = 250 + rand(90);
@@ -119,8 +120,8 @@ use namespace CoC;
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 75) {
 				initStrTouSpeInte(160, 340, 240, 210);
 				initWisLibSensCor(210, 340, 220, 10);
-				this.armorDef = 50;
-				this.armorMDef = 150;
+				this.armorDef = 100;
+				this.armorMDef = 300;
 				this.bonusHP = 30000;
 				this.level = 75;
 				this.gems = 300 + rand(100);

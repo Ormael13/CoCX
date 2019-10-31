@@ -802,6 +802,7 @@ use namespace CoC;
 			outputText("\n\nWhen you come to your senses a few minutes later, the phoenix-girl is asleep, still holding you tight.  You pull her deflated lizard dick out of your ass and shudder as a torrent of her sizzling hot spunk dribbles out onto her thighs and hips.  You wriggle out of her tight embrace and give her a little kiss on the cheek before collecting your [armor] and heading out.");
 			//(Return to Mezzanine main menu)
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.orgasm();
 			doNext(playerMenu);
 		}
@@ -839,6 +840,7 @@ use namespace CoC;
 			//v3 = quantity
 			player.createStatusEffect(StatusEffects.Eggs, rand(6), 0, (5 + rand(3)), 0);
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			//(Return to Mezzanine main menu)
 			player.orgasm();
 			doNext(playerMenu);

@@ -117,6 +117,7 @@ public function loosingToHermCaveWyrm():void {
 		outputText("When you wake up, she is already gone and your ass is still leaking with bluish fluorescent cum but at least she left your equipment in a tidy pile next to you.");
 	}
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	player.orgasm();
 	cleanupAfterCombat();
 }

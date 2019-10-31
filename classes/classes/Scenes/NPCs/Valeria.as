@@ -282,6 +282,7 @@ public function valeriaGetFucked():void {
 	}
 	outputText("and looms over you.  \"<i>That was fun, partner,</i>\" she says, leaning down to give you a wet peck on the cheek. \"<i>Let's do that again soon, all right?</i>\"");
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	player.orgasm();
 	dynStats("sen", -1);
 	HPChange(25 + (player.newGamePlusMod() * 15),false);
@@ -316,6 +317,7 @@ public function gooFlation(clearText:Boolean = true):void {
 		player.orgasm();
 		dynStats("sen", 1);
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+		if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 		HPChange(25 + (player.newGamePlusMod() * 15),false);
 		doNext(camp.returnToCampUseOneHour);
 	}
@@ -677,6 +679,7 @@ private function valeriaGooRapeII():void {
 	//Prevent pregnancy if has a vagina when it happens.
 	//Be sure to track what holes get filled, as body parts may change before birth!
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED]++;
 	player.orgasm();
 	//v1 = time till birth.

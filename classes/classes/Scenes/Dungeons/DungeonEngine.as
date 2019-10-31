@@ -403,7 +403,24 @@ public class DungeonEngine extends BaseContent
             if (player.lust >= 30) addButton(8, "Masturbate", SceneLib.masturbation.masturbateGo);
 			else addButtonDisabled(8, "Masturbate", "Req. 30+ lust.");
             addButton(13, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
-			addButton(14, "Map", map.displayMap).hint("View the map of this dungeon.");
+			addButton(14, "Map", map.displayMap2).hint("View the map of this dungeon.");
+			setTopButtons();
+		}
+		public function setDungeonButtonsRD3D(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null, upFunction:Function = null, downFunction:Function = null):void {
+			statScreenRefresh();
+			hideUpDown();
+			spriteSelect(-1);
+			menu();
+			if (northFunction != null) addButton(6, "North", navigateToRoomRD, northFunction);
+			if (southFunction != null) addButton(11, "South", navigateToRoomRD, southFunction);
+			if (westFunction != null) addButton(10, "West", navigateToRoomRD, westFunction);
+			if (eastFunction != null) addButton(12, "East", navigateToRoomRD, eastFunction);
+            if (upFunction != null) addButton(5, "Up", navigateToRoomRD, upFunction);
+			if (downFunction != null) addButton(7, "Down", navigateToRoomRD, downFunction);
+            if (player.lust >= 30) addButton(8, "Masturbate", SceneLib.masturbation.masturbateGo);
+			else addButtonDisabled(8, "Masturbate", "Req. 30+ lust.");
+            addButton(13, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
+			addButton(14, "Map", map.displayMap2).hint("View the map of this dungeon.");
 			setTopButtons();
 		}
 		public function setDungeonButtonsEL(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null, upFunction:Function = null, downFunction:Function = null):void {

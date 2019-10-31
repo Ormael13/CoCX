@@ -2537,8 +2537,9 @@ public class Appearance extends Utils
 					[Face.ANIMAL_TOOTHS, "animal tooths"],
 					[Face.BEAR, "bear"],
 					[Face.PANDA, "panda"],
-					[Face.FIRE_SNAIL, "fire snail"]
-					[Face.GHOST, "ghost"]
+					[Face.FIRE_SNAIL, "fire snail"],
+					[Face.GHOST, "ghost"],
+					[Face.JIANGSHI, "jiangshi"]
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2582,7 +2583,8 @@ public class Appearance extends Utils
 					[Eyes.BEAR, "bear"],
 					[Eyes.DISPLACER, "displacer"],
 					[Eyes.FIRE_SNAIL, "fire snail"],
-					[Eyes.GHOST, "ghost"]
+					[Eyes.GHOST, "ghost"],
+					[Eyes.JIANGSHI, "jiangshi"]
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
@@ -2641,7 +2643,8 @@ public class Appearance extends Utils
 					[Horns.ONI, "1 oni"],
 					[Horns.ONI_X2, "2 oni"],
 					[Horns.BICORN, "bicorn"],
-					[Horns.GHOSTLY_WISPS, "ghostly wisps"]
+					[Horns.GHOSTLY_WISPS, "ghostly wisps"],
+					[Horns.SPELL_TAG, "spell tag"]
 				]
 		);
 		public static const DEFAULT_ANTENNAE_NAMES:Object = createMapFromPairs(
@@ -2692,7 +2695,8 @@ public class Appearance extends Utils
 					[Arms.BEAR, "bear"],
 					[Arms.GOO, "goo"],
 					[Arms.HYDRA, "hydra"],
-					[Arms.GHOST, "phantom"]
+					[Arms.GHOST, "phantom"],
+					[Arms.JIANGSHI, "jiangshi"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2858,7 +2862,8 @@ public class Appearance extends Utils
 					[LowerBody.HYDRA, "hydra"],
 					[LowerBody.FIRE_SNAIL, "fire snail"],
 					[LowerBody.GHOST, "phantom"],
-					[LowerBody.GHOST_2, "poltergeist"]
+					[LowerBody.GHOST_2, "poltergeist"],
+					[LowerBody.JIANGSHI, "jiangshi"]
 				]
 		);
 		// <mod name="Dragon patch" author="Stadler76">
@@ -3484,4 +3489,4 @@ public class Appearance extends Utils
 			return descript;
 		}
 	}
-}
+}

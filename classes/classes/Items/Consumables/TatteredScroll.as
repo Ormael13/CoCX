@@ -16,7 +16,7 @@ public class TatteredScroll extends Consumable {
 	override public function useItem():Boolean {
 		clearOutput();
 		outputText("Your wobbly [legs] give out underneath you as your body's willpower seems to evaporate, your mouth reading the words on the scroll with a backwards sounding sing-song voice.\n\n");
-		if (player.hairColor == "sandy blonde" && player.findPerk(PerkLib.TransformationImmunity) < 0) {
+		if (player.hairColor == "sandy blonde" && player.findPerk(PerkLib.TransformationImmunity) < 0 && player.findPerk(PerkLib.Undeath) < 0) {
 			outputText("Your mouth forms a smile of its own volition, reading, \"<i>Tresed eht retaw llahs klim ruoy.</i>\"\n\n");
 			if (player.breastRows.length == 0 || player.biggestTitSize() == 0) {
 				outputText("You grow a perfectly rounded pair of C-cup breasts!  ");

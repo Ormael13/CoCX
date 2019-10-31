@@ -2138,6 +2138,7 @@ private function getButtWreckedByArian():void {
 		outputText("\n\nYou promise [Arian ey] will, and plant a quick kiss on [Arian eir] brow.  As the lizan settles down to rest, you quietly redress yourself and leave [Arian em] to [Arian eir] slumbers.");
 	}
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	player.orgasm();
 	dynStats("sen", 2);
 	doNext(camp.returnToCampUseOneHour);
@@ -2235,6 +2236,7 @@ private function suckAriansDick():void {
 	outputText("\n\n\"<i>Uuuh... see you soon?</i>\"");
 	outputText("\n\nYou throw [Arian em] a smirk over your shoulder, shake your [ass] for [Arian eir] benefit, and head on out.");
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	dynStats("lus", 10+player.lib/5);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2393,6 +2395,7 @@ private function getPenetratedByArianAndHisHitlerMustache():void {
 	
 	outputText("\n\nGrinning, you pull [Arian em] into a final kiss, telling [Arian em] this is just something for [Arian em] to think about.  Having said that, you quickly redress and excuse yourself, leaving one flustered lizan behind to rest.");
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	player.orgasm();
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);

@@ -402,9 +402,19 @@ package classes.GlobalFlags
 		public static const DUNGEON_PAN_AINT_GOT_NOTHING_ON_YOU:int	= 355;
 		public static const DUNGEON_MASTER_OF_THE_LABYRINT:int		= 356;
 		public static const DUNGEON_WHY_ARE_YOU_HERE:int			= 357;
-		public static const UNKNOWN_ACHIEVEMENT_358:int				= 358;
+		public static const EPIC_THRILLER:int						= 358;
 		public static const UNKNOWN_ACHIEVEMENT_359:int				= 359;
 		public static const UNKNOWN_ACHIEVEMENT_360:int				= 360;
+		public static const UNKNOWN_ACHIEVEMENT_361:int				= 361;
+		public static const UNKNOWN_ACHIEVEMENT_362:int				= 362;
+		public static const UNKNOWN_ACHIEVEMENT_363:int				= 363;
+		public static const UNKNOWN_ACHIEVEMENT_364:int				= 364;
+		public static const UNKNOWN_ACHIEVEMENT_365:int				= 365;
+		public static const UNKNOWN_ACHIEVEMENT_366:int				= 366;
+		public static const UNKNOWN_ACHIEVEMENT_367:int				= 367;
+		public static const UNKNOWN_ACHIEVEMENT_368:int				= 368;
+		public static const UNKNOWN_ACHIEVEMENT_369:int				= 369;
+		public static const UNKNOWN_ACHIEVEMENT_370:int				= 370;
 		
 	}
 

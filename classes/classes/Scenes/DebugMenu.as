@@ -1033,6 +1033,7 @@ public class DebugMenu extends BaseContent
 			[Face.PANDA, "46 PANDA"],
 			[Face.FIRE_SNAIL, "47 FIRE_SNAIL"],
 			[Face.GHOST, "48 GHOST"],
+			[Face.JIANGSHI, "49 JIANGSHI"],
 		];
 		private static const TONGUE_TYPE_CONSTANTS:Array = [
 			[Tongue.HUMAN, "0 HUMAN"],
@@ -1074,6 +1075,7 @@ public class DebugMenu extends BaseContent
 			[Eyes.DISPLACER, "24 DISPLACER"],
 			[Eyes.FIRE_SNAIL, "25 FIRE_SNAIL"],
 			[Eyes.GHOST, "26 GHOST"],
+			[Eyes.JIANGSHI, "27 JIANGSHI"],
 		];
 		private static const EAR_TYPE_CONSTANTS:Array    = [
 			[Ears.HUMAN, "0 HUMAN"],
@@ -1131,6 +1133,7 @@ public class DebugMenu extends BaseContent
 			[Horns.ONI, "13 ONI"],
 			[Horns.BICORN, "14 BICORN"],
 			[Horns.GHOSTLY_WISPS, "15 GHOSTLY_WISPS"],
+			[Horns.SPELL_TAG, "16 SPELL_TAG"],
 		];
 		private static const HORN_COUNT_CONSTANTS:Array = [
 				0,1,2,3,4,
@@ -1284,6 +1287,7 @@ public class DebugMenu extends BaseContent
 			[Arms.GOO, "36 GOO"],
 			[Arms.HYDRA, "37 HYDRA"],
 			[Arms.GHOST, "38 GHOST"],
+			[Arms.JIANGSHI, "39 JIANGSHI"],
 		];
 		private static const CLAW_TYPE_CONSTANTS:Array = [
 			[Claws.NORMAL, "0 NORMAL"],
@@ -1445,6 +1449,7 @@ public class DebugMenu extends BaseContent
 			[LowerBody.FIRE_SNAIL, "52 FIRE_SNAIL"],
 			[LowerBody.GHOST, "53 PHANTOM"],
 			[LowerBody.GHOST_2, "54 POLTERGEIST"],
+			[LowerBody.JIANGSHI, "55 JIANGSHI"],
 		];
 		private static const LEG_COUNT_CONSTANTS:Array = [
 			1,2,4,6,8,

@@ -280,6 +280,7 @@ private function heckelLovesAnal2():void {
 	outputText("You lay on the bench for a few moments as Heckel ruffles your hair again. \"<i>Not bad, partner. You're the best fuck I've had in years, you know that? Not to mention the best workout!</i>\"\n\n");
 	outputText("She laughs as she stands and heads for the shower, letting you clean yourself up and head back to camp.");
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	player.orgasm();
 	dynStats("sen", 4);
 	doNext(camp.returnToCampUseFourHours);

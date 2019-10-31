@@ -78,10 +78,12 @@ package classes.Items
 					}
 					output += game.player.lowerGarment.longName;
 				}
-
 				output += ". You should consider removing them. You put it back into your inventory.";
-
 				outputText(output);
+				return false;
+			}
+			else if (game.player.hasPerk(PerkLib.Rigidity)) {
+				outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
 				return false;
 			}
 			return super.canUse();

@@ -275,6 +275,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			outputText(" damage!");
 		}
 		outputText("\n\n");
+		combat.heroBaneProc2();
+		combat.EruptingRiposte2();
 		enemyAI();
 	}
 	public function SextupleThrust():void {
@@ -314,6 +316,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			outputText(" damage!");
 		}
 		outputText("\n\n");
+		combat.heroBaneProc2();
+		combat.EruptingRiposte2();
 		enemyAI();
 	}
 	public function NonupleThrust():void {
@@ -360,6 +364,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.heroBaneProc2();
+		combat.EruptingRiposte2();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
@@ -462,6 +467,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		if (player.hasStatusEffect(StatusEffects.HeroBane)) flags[kFLAGS.HERO_BANE_DAMAGE_BANK] += damage;
+		if (player.hasStatusEffect(StatusEffects.EruptingRiposte)) flags[kFLAGS.ERUPTING_RIPOSTE_DAMAGE_BANK] += monster.tou + monster.inte + monster.wis;
 	}
 
 	public function DracoSweep():void {
@@ -575,6 +581,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
@@ -697,6 +704,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		BladesD();
 		outputText(" damage!\n\n");
 		combat.heroBaneProc2();
+		combat.EruptingRiposte2();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
@@ -735,6 +743,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		BladesD();
 		outputText(" damage!\n\n");
 		combat.heroBaneProc2();
+		combat.EruptingRiposte2();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
@@ -809,6 +818,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		BladesD();
 		outputText(" damage!\n\n");
 		combat.heroBaneProc2();
+		combat.EruptingRiposte2();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
@@ -839,6 +849,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
 		if (player.hasStatusEffect(StatusEffects.HeroBane)) flags[kFLAGS.HERO_BANE_DAMAGE_BANK] += damage;
+		if (player.hasStatusEffect(StatusEffects.EruptingRiposte)) flags[kFLAGS.ERUPTING_RIPOSTE_DAMAGE_BANK] += monster.tou + monster.inte + monster.wis;
 	}
 
 	public function CleansingPalm():void {
@@ -914,6 +925,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		monster.HP -= damage;
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		statScreenRefresh();
 		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
@@ -979,6 +991,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		outputText("\n\n");
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
@@ -1025,6 +1038,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		outputText("\n\n");
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
@@ -1101,6 +1115,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}

@@ -209,8 +209,8 @@ public function alvinaMainCampMenu():void
 	if (player.hasStatusEffect(StatusEffects.AlvinaTraining) && player.statusEffectv1(StatusEffects.AlvinaTraining2) < 2) addButton(11, "Advanced Study", alvinaCampAdvancedStudy);
 	else {
 		if (player.hasStatusEffect(StatusEffects.AlvinaTraining) && player.statusEffectv1(StatusEffects.AlvinaTraining2) == 2) {
-			if (player.hasItem(useables.AMETIST, 1) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.SOULGEM, 10) && (player.hasKeyItem("Marae's Lethicite") >= 0 || player.hasKeyItem("Stone Statue Lethicite") >= 0)) addButton(11, "Advanced Study", alvinaCampAdvancedStudy);
-			else addButtonDisabled(11, "Advanced Study", "You need to gather a flawless Amethyst necklace, five lust drafts, ten soul gems, and a piece of very powerful Lethicite before you can progress.");
+			if (player.hasItem(useables.AMETIST, 1) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.SOULGEM, 5) && (player.hasKeyItem("Marae's Lethicite") >= 0 || player.hasKeyItem("Stone Statue Lethicite") >= 0)) addButton(11, "Advanced Study", alvinaCampAdvancedStudy);
+			else addButtonDisabled(11, "Advanced Study", "You need to gather a flawless Amethyst necklace, five lust drafts, five soul gems, and a piece of very powerful Lethicite before you can progress.");
 		}
 		if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3) {
 			if (player.hasKeyItem("Siegweird's holy symbol") >= 0) addButton(11, "Advanced Study", alvinaCampAdvancedStudy);
@@ -771,10 +771,10 @@ public function alvinaCampAdvancedStudy():void
 		inventory.takeItem(consumables.POL_MID, camp.campFollowers);
 		cheatTime2(5);
 	}
-	else if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 2 && player.hasItem(useables.AMETIST, 1) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.SOULGEM, 10) && (player.hasKeyItem("Marae's Lethicite") >= 0 || player.hasKeyItem("Stone Statue Lethicite") >= 0)) {
+	else if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 2 && player.hasItem(useables.AMETIST, 1) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.SOULGEM, 5) && (player.hasKeyItem("Marae's Lethicite") >= 0 || player.hasKeyItem("Stone Statue Lethicite") >= 0)) {
 		player.destroyItems(useables.AMETIST, 1);
 		player.destroyItems(consumables.L_DRAFT, 5);
-		player.destroyItems(useables.SOULGEM, 10);
+		player.destroyItems(useables.SOULGEM, 5);
 		if (player.hasKeyItem("Stone Statue Lethicite") >= 0) player.removeKeyItem("Stone Statue Lethicite");
 		else {
 			if (player.keyItemv1("Marae's Lethicite") > 1) player.addKeyValue("Marae's Lethicite", 1, -1);
@@ -823,7 +823,7 @@ public function alvinaCampAdvancedStudy():void
 				outputText("\"<i>Couldn’t make a choice? Well, an omnibus fits you perfectly. I was never very interested in having all the possible endowments, however.</i>\"\n\n");
 			}
 			outputText("Alvina circles you for a moment, examining you thoroughly.\n\n");
-			outputText("\"<i>You look demonic alright, but you still lack the power, a power only a soulless body can provide. First, we need to create the soul prison. Get me a flawless Amethyst necklace, five lust drafts, ten soul gems, and a piece of very powerful Lethicite then we can begin.</i>\"\n\n");
+			outputText("\"<i>You look demonic alright, but you still lack the power, a power only a soulless body can provide. First, we need to create the soul prison. Get me a flawless Amethyst necklace, five lust drafts, five soul gems, and a piece of very powerful Lethicite then we can begin.</i>\"\n\n");
 			player.addStatusValue(StatusEffects.AlvinaTraining2, 1, 1);
 		}
 		else outputText("\"<i>You are still way too pure for us to proceed further. Corrupt your body with some demonic transformatives and we will continue.</i>\"\n\n");

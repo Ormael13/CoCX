@@ -419,7 +419,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				doNext(bookMenu);
 				return;
 			}
-			outputText("Giacomo shrug.  \"<i>You may think this item to be unnecessary but its in the kit of any smart adventurers wishing to explore nowadays, who knows it might even save your life. Only 100 gems I recommand it realy.</i>\"");
+			outputText("Giacomo shrugs.  \"<i>You may think this item to be unnecessary but it’s in the kit of any smart adventurers wishing to explore nowadays, who knows it might even save your life. Only 100 gems, I recommend it, really.</i>\"");
 			doYesNo(buyTorch, bookMenu);
 		}
 		

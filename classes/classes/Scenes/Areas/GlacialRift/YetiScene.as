@@ -57,6 +57,7 @@ public class YetiScene extends BaseContent
 			outputText("You struggle against the ice binding your limbs, one of them cracked from the earlier rutting, and with some effort you manage to break free. ");
 			outputText("Collecting your things, you notice you lost some gems during the struggle, but you ignore them since you are eager to leave the cavern. Taking the exit the yeti had used to wander back out into the rift, you begin your long walk to camp.. but as you trek through the frigid fields of the glacial rift, you notice your ass stays hot despite the cold. Perhaps it’s a special quality of the yeti’s cum?");
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.orgasm();
 			cleanupAfterCombat();
 		}
@@ -120,6 +121,7 @@ public class YetiScene extends BaseContent
 			outputText("You give out a final, whimpered moan as you climax, humping on the yeti’s prick as fast as you can while his arms restrain you. Shocks of pleasure shoot through you, making your whole body spasm in the beasts embrace. As your [vagina] squeezes down on him, the yeti throws his head back and, with a final mighty thrust into your depths, cums as well, hilting in you as much as he can manage as you pumps you full of his thick, hot spunk. Pouring into you, the yeti’s cum warms your gut and lower body in ways that make you groan and gasp with pleasure. His baseball-sized balls fill you well past your limits as spunk floods your innermost depths, spilling out to drench your thighs and groin, squelching wetly between your entwined bodies. \n\n");
 			outputText("With a wet pop, the yeti’s cock slides from your over-stuffed hole and back into its sheathe, letting more spunk spill out to stain his fur. Still gasping from your recent orgasm, you spend the next few minutes snuggled up to the warm, damp yeti, clinging to his soft fur until you feel it’s time to go. You look up to the yeti to say goodbye, but find him snoring quietly, his chest hefting your entire body with every breath. With a little smirk, you give him a kiss on the cheek and, securing your equipment, head back to camp.");
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.orgasm();
 			cleanupAfterCombat();
 		}

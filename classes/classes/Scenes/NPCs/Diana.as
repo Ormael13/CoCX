@@ -351,6 +351,7 @@ package classes.Scenes.NPCs
 					add(weapons.W_STAFF,1/10).
 					add(consumables.H_PILL,1/5).
 					add(consumables.VDARCON,1/5).
+					add(consumables.BAGOCA1,1/5).
 					add(consumables.EQUINUM,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 0 && flags[kFLAGS.DIANA_FOLLOWER] == 3) {
@@ -369,6 +370,7 @@ package classes.Scenes.NPCs
 					add(weapons.W_STAFF,1/10).
 					add(consumables.H_PILL,1/5).
 					add(consumables.D_ARCON,1/5).
+					add(consumables.BAGOCA1,1/5).
 					add(consumables.EQUINUM,1/2);
 			}
 			if ((flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_LVL_UP] < 8) && flags[kFLAGS.DIANA_FOLLOWER] < 3) {
@@ -385,8 +387,9 @@ package classes.Scenes.NPCs
 				this.gems = rand(5) + 10;
 				this.drop = new ChainedDrop().
 					add(weapons.W_STAFF,1/10).
-					add(consumables.H_PILL,1/5).
+					add(consumables.MH_PILL,1/5).
 					add(consumables.D_ARCON,1/5).
+					add(consumables.BAGOCA1,1/5).
 					add(consumables.UNICORN,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_FOLLOWER] == 4) {
@@ -403,8 +406,9 @@ package classes.Scenes.NPCs
 				this.gems = rand(5) + 10;
 				this.drop = new ChainedDrop().
 					add(weapons.W_STAFF,1/10).
-					add(consumables.H_PILL,1/5).
+					add(consumables.MH_PILL,1/5).
 					add(consumables.AREGCON,1/5).
+					add(consumables.BAGOCA2,1/5).
 					add(consumables.UNICORN,1/2);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 8 && (flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5)) {
@@ -421,8 +425,9 @@ package classes.Scenes.NPCs
 				this.gems = rand(5) + 15;
 				this.drop = new ChainedDrop().
 					add(weapons.W_STAFF,1/10).
-					add(consumables.H_PILL,1/5).
+					add(consumables.MH_PILL,1/5).
 					add(consumables.AREGCON,1/5).
+					add(consumables.BAGOCA3,1/5).
 					add(consumables.ALICORN,1/2);
 			}
 			// this.plural = false;

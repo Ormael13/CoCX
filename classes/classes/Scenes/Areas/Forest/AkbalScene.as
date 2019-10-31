@@ -498,6 +498,7 @@ public class AkbalScene extends BaseContent
 				//Preggers chance!
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
 				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 				player.cuntChange(monster.cockArea(0), true, true, false);
 				player.orgasm();
 				dynStats("cor", 1);
@@ -595,6 +596,7 @@ public class AkbalScene extends BaseContent
 				//Preggers chance!
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
 				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			}
 			cleanupAfterCombat();
 		}
@@ -867,6 +869,7 @@ public class AkbalScene extends BaseContent
 				dynStats("spe", 1 + rand(2));
 				player.orgasm();
 				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 				//[Chance of butt growth]
 				if (player.butt.type < 8)
 				{
@@ -946,6 +949,7 @@ public class AkbalScene extends BaseContent
 				dynStats("spe", 1 + rand(2));
 				player.orgasm();
 				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 				//[Chance of butt growth]
 				if (player.butt.type < 8)
 				{
@@ -1027,6 +1031,7 @@ public class AkbalScene extends BaseContent
 			dynStats("spe", 1 + rand(2));
 			player.orgasm();
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			//[Chance of butt growth]
 			if (player.butt.type < 8)
 			{
@@ -1412,6 +1417,7 @@ public class AkbalScene extends BaseContent
 			player.orgasm();
 			dynStats("cor", 3);
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			if (player.hasVagina()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1535,6 +1541,7 @@ public class AkbalScene extends BaseContent
 				player.orgasm();
 				dynStats("cor", 3);
 				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 				if (player.hasVagina()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
 				doNext(camp.returnToCampUseOneHour);
 			}
@@ -1633,6 +1640,7 @@ public class AkbalScene extends BaseContent
 				outputText("\n\nYour [vagOrAss] is blissfully sore and crazy sensitive as you ease yourself off the demon’s wonderful dick.  With a smile on your [face] you gather your [armor] and turn to leave the forest.  Lost in giddy elation you walk, each movement sending an almost painful jolt of post orgasm pleasure through your [vagOrAss].  It isn’t until you hear the cackling of imps and goblins that you remember that you left Akbal bound and vulnerable... oops.");
 				if (player.hasVagina()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
 				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			}
 			player.orgasm();
 			dynStats("cor", 3);
@@ -1784,6 +1792,7 @@ public class AkbalScene extends BaseContent
 
 				outputText("\n\nWithout a backwards glance, you gather your [armor] and leave the forest with a big smile on your [face].");
 				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			}
 			if (player.hasVagina())
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);

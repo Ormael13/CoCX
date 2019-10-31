@@ -2,6 +2,7 @@
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.PregnancyStore;
+import classes.StatusEffects;
 import classes.PerkLib;
 
 public class Lilium extends BazaarAbstractContent{
@@ -202,6 +203,7 @@ private function liliumDickRidah():void {
 
 	outputText("After a moment of recovery time you get up to get dressed before starting your journey back to camp.  \"<i>Don't be a stranger, now,</i>\" calls the voice over your shoulder. A slight smile appears on your face.\n\n");
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	player.orgasm();
 	dynStats("cor", 1);
 	//(imp preg check)

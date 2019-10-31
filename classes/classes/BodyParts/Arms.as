@@ -40,6 +40,7 @@ public class Arms extends BodyPart {
 	public static const GOO:int			= 36;
 	public static const HYDRA:int		= 37;
 	public static const GHOST:int		= 38;
+	public static const JIANGSHI:int	= 39;
 	// Don't forget to add new types in DebugMenu.as list ARM_TYPE_CONSTANTS
 
 	public function Arms() {

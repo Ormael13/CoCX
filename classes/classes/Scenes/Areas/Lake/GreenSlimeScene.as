@@ -465,6 +465,7 @@ private function femaleRapesOoze():void {
 	}
 	outputText("filling you past full and flowing out along the creature's cock, leaving you with a slight bulge at your belly and a pool of green fluids on the ground beneath you.  You gasp and hold your breath as you lay on the creature, its grip slowly loosening.  Its cock slides out of you and a flood of liquid pours out of your " + vaginaDescript(0) + " as it begins to leak out from under you, gently letting you onto the ground.  You tremble on the ground for a few moments as you recover your wits, and once you do you realize that the creature has left.  You find no trace of the creature's presence afterward except a thin trail of green fluid leading to the nearby waters.");
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	player.orgasm();
 	dynStats("sen", 3);
 }
@@ -528,6 +529,7 @@ private function oozeButtRapesYou():void
 	else if(player.cockTotal() > 0) outputText("The additional pressure against your prostate finally pushes you over the edge and you come hard, spraying your load against the ground.  Thick ropes of jizm spray onto the ground as the feeling wracks your body.  ");
  	outputText("You shudder beneath the creature as it slowly begins to pull out of you, which brings another moan to your lips.  When it finally pops free of your body you feel a deluge of fluid rush from your ass and onto the ground.  You recover yourself as the creature retreats back into the waters, leaving nothing but a trail of slime leading to the water's edge.");
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	player.orgasm();
 	dynStats("sen", 4);
 }
@@ -564,6 +566,7 @@ private function oozeRapesYouOrally():void
 		}
 		else outputText("The creature withdraws while you're distracted, leaving no traces of its presence save for what it left on your body.");
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(35);
+		if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 		player.refillHunger(35);
 	}
 	//standard
@@ -574,6 +577,7 @@ private function oozeRapesYouOrally():void
 		outputText("Without warning the creature leans forward, grabs you head, and pulls forward as it thrusts, forcing your face into its soft body as its cock goes as deep as it can possibly go.  Its cock practically shivers as you steel yourself for what's about to come, but the creature pulls you off, a powerful blast of thin, green fluid catching you in the face as soon as your mouth is empty.  You try to push your head forward to catch the thing's load more out of instinct than conscious thought, only to have it hold you back as it releases several powerful torrents of ejaculate onto your face.\n");
 		outputText("The beast moves off of you and you roll over onto your hands and knees, coughing and spitting up green fluid as you recover your senses.  When you finish you look around for the creature but find no traces of it except the fluid on the ground and a slight taste of mint in your mouth.");
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(15);
+		if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 		player.refillHunger(15);
 	}
 	//resistant
@@ -588,6 +592,7 @@ private function oozeRapesYouOrally():void
 			outputText("The beast moves off of you and you roll over onto your hands and knees, coughing and spitting up green fluid as you recover your senses.  When you finish you look around for the creature but find no traces of it except the fluid on the ground and a slight taste of mint in your mouth.");
 		}
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(35);
+		if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 		player.refillHunger(35);
 	}
 	dynStats("lib", 2, "sen", 2, "lus", 10);

@@ -1583,6 +1583,20 @@ else if (SceneLib.d3._currentRoom == "southwestcourtyard") {
 			menu();
 			addButton(0, "Close Map", playerMenu);
 		}
+		public function displayMap2():void {
+			clearOutput();
+			player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
+			outputText("<b><font face=\"_typewriter\">");
+			if (inRoomedDungeon) chooseRoomToDisplayD3();
+			else chooseRoomToDisplay();
+			outputText("</font></b>");
+			outputText("\n\n<b><u>Legend</u></b>");
+			outputText("\n<font face=\"_typewriter\"><b>P</b></font> — Player Location");
+			outputText("\n<font face=\"_typewriter\"><b>L</b></font> — Locked Door");
+			outputText("\n<font face=\"_typewriter\"><b>S</b></font> — Stairs");
+			menu();
+			addButton(0, "Close Map", playerMenu);
+		}
 		
 	}
 

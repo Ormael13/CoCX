@@ -2793,6 +2793,8 @@ public class PerkLib
 				"Removes all negative modifiers to PC max Str/Tou/Spe caps caused by picking perk Elemental Conjurer Sacrifice.");
 		public static const ElvenSense:PerkType = mk("Elven Sense", "Elven Sense",
 				"Gain a chance to dodge attacks and an increased chance to score critical hits.");
+		public static const EnergyDependent:PerkType = mk("Energy dependent", "Energy dependent",
+				"You become faster, smarter and clearer of mind when well fed in life force. However you become dim witted and stiffer than a corpse when starved. You cannot recover soul force through normal means.");
 		public static const EnlightenedKitsune:PerkType = mk("Enlightened Kitsune", "Enlightened Kitsune",
 				"The mystical energy of the kitsunes surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells.",null,true);
 		public static const EnlightenedNinetails:PerkType = mk("Enlightened Nine-tails", "Enlightened Nine-tails",
@@ -2823,8 +2825,12 @@ public class PerkLib
 				"Ensures that your body fits the Futa look (Tits DD+, Dick 8\"+, & Pussy).  Also keeps your lusts burning bright and improves the tease skill.");
 		public static const GeneticMemory:PerkType = mk("Genetic Memory", "Genetic Memory",
 				"Your body can remember almost any transformation it undergone.");
+		public static const Ghostslinger:PerkType = mk("Ghost-slinger", "Ghost-slinger",
+				"Increases damage with guns and thrown weapons by 15%.");
 		public static const GoblinoidBlood:PerkType = mk("Goblinoid blood", "Goblinoid blood",
 				"Your blood is highly susceptible to chemical drugs, stimulants and poisons.");
+		public static const HaltedVitals:PerkType = mk("Halted vitals", "Halted vitals",
+				"Your vitals are frozen in time by the magic of the curse tag, allowing you to live without the need for breathing, eating and a heartbeat. It also reduces damage taken from physical attacks by 20%.");
 		public static const HarpyWomb:PerkType = mk("Harpy Womb", "Harpy Womb",
 				"Increases all laid eggs to large size so long as you have harpy legs and a harpy tail.");
 		public static const HydraAcidBreath:PerkType = mk("Hydra acid breath", "Hydra acid breath",
@@ -2839,6 +2845,8 @@ public class PerkLib
 				"Allows you to shoot blinding and probably slightly arousing ink out of your genitalia similar like octopus.");
 		public static const JunglesWanderer:PerkType = mk("Jungle’s Wanderer", "Jungle’s Wanderer",
 				"Your nimble body has adapted to moving through jungles and forests, evading enemy attacks with ease and making yourself harder to catch. (+35 to the Evasion percentage)");
+		public static const LifeLeech:PerkType = mk("Life leech", "Life leech",
+				"Your unarmed strike steals vital energy from your victims, dealing 5% extra damage and restoring 1% mana, health, fatigue and soulforce per hit.");
 		public static const Lycanthropy:PerkType = mk("Lycanthropy", "Lycanthropy",
 				"Your strength and urges are directly tied to the cycle of the moon. Furthermore, your skin is more resistant to physical damage and your claws are sharper than normal.");
 		public static const LycanthropyDormant:PerkType = mk("Dormant Lycanthropy", "Dormant Lycanthropy",
@@ -2868,18 +2876,26 @@ public class PerkLib
 				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  You tread narrow path between corruption and true enlightment maintaining balance that allow to fuse both sides powers.",null,true);
 		public static const Oviposition:PerkType = mk("Oviposition", "Oviposition",
 				"Causes you to regularly lay eggs when not otherwise pregnant.");
+		public static const PhantomShooting:PerkType = mk("Phantom Shooting", "Phantom Shooting",
+				"Thanks to your ghostly form, throwing weapons and firearms now drains some of your ectoplasm with each use instead of using ammunition. (+5% dmg)");
 		public static const PhoenixFireBreath:PerkType = mk("Phoenix fire breath", "Phoenix fire breath",
 				"Allows access to a phoenix fire breath attack.");
+		public static const PoisonNails:PerkType = mk("Poison nails", "Poison nails",
+				"Your nails inflict a deadly poison on strike, damaging your foe’s toughness, speed and arousing them.");
 		public static const PurityBlessing:PerkType = mk("Purity Blessing", "Purity Blessing",
 				"Reduces the rate at which your corruption, libido, and lust increase. Reduces minimum libido and lust slightly.");
 		public static const RapierTraining:PerkType = mk("Rapier Training", "Rapier Training",
 				"After finishing of your training, increase attack power of any rapier you're using.");
+		public static const Rigidity:PerkType = mk("Rigidity", "Rigidity",
+				"Your cadaverous rigidity prevents any form of escape in battle.");
 		public static const SatyrSexuality:PerkType = mk("Satyr Sexuality", "Satyr Sexuality",
 				"Thanks to your satyr biology, you now have the ability to impregnate both vaginas and asses. Also increases your virility rating. (Anal impregnation not implemented yet)");
 		public static const SlimeCore:PerkType = mk("Slime Core", "Slime Core",
 				"Grants more control over your slimy body, allowing you to go twice as long without fluids.");
 		public static const SpiderOvipositor:PerkType = mk("Spider Ovipositor", "Spider Ovipositor",
 				"Allows you to lay eggs through a special organ on your arachnid abdomen, though you need at least 10 eggs to lay.");
+		public static const SuperStrength:PerkType = mk("Super strength", "Super strength",
+				"Unarmed strike damage modifier from strength is doubled.");
 		public static const ThickSkin:PerkType = mk("Thick Skin", "Thick Skin",
 				"Toughens your dermis to provide 2 points of armor and 1 point of magic resistance.");
 		public static const TitanicStrength:PerkType = mk("Titanic Strength", "Titanic Strength",
@@ -2966,6 +2982,8 @@ public class PerkLib
 				"Your strong affinity toward soullforce helped to denvelop another sense called 'Soul Sense' by a fellow soul cultivators.");
 		public static const TransformationImmunity:PerkType = mk("Transformation immunity", "Transformation Immunity",
 				"As a magical construct you are immune to all effects that change the body of living beings, including most transformatives on Mareth (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although stats increasing effects still could be triggered).");
+		public static const Undeath:PerkType = mk("Undeath", "Undeath",
+				"With a body that lacks a heartbeat, breath or working digestive system you are unable to gain benefit from transformative items. You're bodily functions are pretty much dead for lack of a better word (it reduce the odds of getting a body part tf'd to 0%).");
 		public static const UnicornBlessing:PerkType = mk("Unicorn Blessing", "Unicorn Blessing",
 				"You are blessed with the power of a unicorn and while below 20 corruption all white magic spells are 20% stronger and lust resistance increased by 10%.");
 		public static const Whispered:PerkType = mk("Whispered", "Whispered",
@@ -5860,4 +5878,4 @@ public class PerkLib
 	initDependencies();
 }
 }
-
+

@@ -241,6 +241,10 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const AdventureGuildQuests2:StatusEffectType          = mk("Adventure Guild Quests 2");//Feral Tentacle Beasts Hunt / Feral Imps Hunt / x / x
 		public static const AdventureGuildQuests3:StatusEffectType          = mk("Adventure Guild Quests 3");//x / x / x / x
 		public static const AdventureGuildQuests4:StatusEffectType          = mk("Adventure Guild Quests 4");//Chitin gathering / Gel gathering / x / x
+		public static const AdventureGuildQuestsCounter1:StatusEffectType   = mk("Adventure Guild Quests Counter 1");
+		public static const AdventureGuildQuestsCounter2:StatusEffectType   = mk("Adventure Guild Quests Counter 2");
+		public static const AdventureGuildQuestsCounter3:StatusEffectType   = mk("Adventure Guild Quests Counter 3");
+		public static const AdventureGuildQuestsCounter4:StatusEffectType   = mk("Adventure Guild Quests Counter 4");
 		public static const Airweed:StatusEffectType                 		= mk("Airweed");
 		public static const AllNaturalOnaholeUsed:StatusEffectType          = mk("all-natural onahole used");
 		public static const AlrauneFlower:StatusEffectType                  = mk("Alraune Flower");
@@ -315,6 +319,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const EmberFuckCooldown:StatusEffectType              = mk("ember fuck cooldown");
 		public static const EmberMilk:StatusEffectType                      = mk("Ember's Milk");
 		public static const EmberNapping:StatusEffectType                   = mk("Ember Napping");
+		public static const EnergyDependent:StatusEffectType                = mk("Energy dependent");
 		public static const EverRapedJojo:StatusEffectType                  = mk("Ever Raped Jojo");
 		public static const Exgartuan:StatusEffectType                      = mk("Exgartuan");
 		public static const ExploredDeepwoods:StatusEffectType              = mk("exploredDeepwoods");
@@ -609,6 +614,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const EbonLabyrinthBoss1:StatusEffectType = mk("Ebon Labyrinth Boss 1");
 		public static const EbonLabyrinthBoss2:StatusEffectType = mk("Ebon Labyrinth Boss 2");
 		public static const EmbraceVampire:StatusEffectType     = mk("Embrace (Vampire)");
+		public static const EruptingRiposte:StatusEffectType    = mk("Erupting riposte");
 		public static const EvasiveTeleport:StatusEffectType    = mk("Evasive Teleport");
 		public static const Fear:StatusEffectType               = mk("Fear");
 		public static const FearCounter:StatusEffectType        = mk("FearCounter");
@@ -652,6 +658,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const IgnisCounter:StatusEffectType  		= mk("Ignis Counter");
 		public static const Pounce:StatusEffectType  			= mk("Pounce");
 		public static const RaijuUltReady:StatusEffectType      = mk("Raiju Ult Ready");
+		public static const RisingInferno:StatusEffectType      = mk("Rising inferno");
 		public static const Round:StatusEffectType              = mk("Round");
 		public static const round:StatusEffectType              = mk("round");
 		public static const RunDisabled:StatusEffectType        = mk("Run Disabled");
@@ -926,4 +933,4 @@ import classes.StatusEffects.VampireThirstEffect;
 			return new StatusEffectType(id,CombatStatusEffect,1);
 		}
 	}
-}
+}

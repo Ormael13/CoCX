@@ -495,6 +495,7 @@ private function rideDatSandTarpLikeIts1999():void {
 	outputText("\n\n\"<i>What do you say, slave?</i>\"");
 	outputText("\n\nIt takes the creature several moments to gather its wits.  \"<i>Th-thank you, lion.</i>\"  Glowing with satisfaction, you begin the climb out of your conquest's hole and back towards camp.");
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	player.orgasm();
 	dynStats("sen", -1);
 	cleanupAfterCombat();

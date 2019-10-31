@@ -1220,6 +1220,7 @@ import classes.lists.Gender;
 			}
 			outputText("\n\nAs he helps you clean up he tells you how much he likes your ass. After chatting for a little bit he tells you he has to get back to work. As you walk out the tent flap all eyes are on you. After a few moments one of the satyrs sticks his fingers to his lips and gives a high pitched wolf whistle. Some of the tables with people in them erupt in stomping and clapping. Harry's harpy wife catches your eye and gives you a conspiratorial wink, rubbing her pussy through her tight little cut off pants as she watches you leave.");
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			flags[kFLAGS.BLACK_COCK_HARRY_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
@@ -1392,6 +1393,7 @@ import classes.lists.Gender;
 			fatigue(25);
 			dynStats("lib", 1, "sens", 2, "cor", 1);
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			if (player.hasVagina()) player.knockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR);
 			player.buttKnockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR);
 			doNext(camp.returnToCampUseOneHour);
@@ -1428,7 +1430,7 @@ import classes.lists.Gender;
 					dynStats("lib", 1);
 				}
 			}
-			if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
+			if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
 			if (rand(3) == 0 && changes < changeLimit && player.cocks[player.smallestCockIndex()].length < 12) {
 				outputText("\n\nHeat funnels into your cock as the alcohol flushes through you. Reaching down to inspect it, you find it has grown longer.");
 				player.cocks[player.smallestCockIndex()].length++;

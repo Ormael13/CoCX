@@ -2000,10 +2000,10 @@ public static const UNKNOWN_FLAG_NUMBER_01991:int                               
 public static const UNKNOWN_FLAG_NUMBER_01992:int                                   = 1992;
 public static const UNKNOWN_FLAG_NUMBER_01993:int                                   = 1993;
 public static const UNKNOWN_FLAG_NUMBER_01994:int                                   = 1994;
-public static const UNKNOWN_FLAG_NUMBER_01995:int                                   = 1995;
-public static const UNKNOWN_FLAG_NUMBER_01996:int                                   = 1996;
-public static const UNKNOWN_FLAG_NUMBER_01997:int                                   = 1997;
-public static const UNKNOWN_FLAG_NUMBER_01998:int                                   = 1998;
+public static const PLAYER_DISARMED_ARMOR_ID:int                                    = 1995;
+public static const PLAYER_DISARMED_SHIELD_ID:int                                   = 1996;
+public static const PLAYER_DISARMED_WEAPON_R_ID:int                                 = 1997;
+public static const ERUPTING_RIPOSTE_DAMAGE_BANK:int                                = 1998;
 public static const HERO_BANE_DAMAGE_BANK:int                                   	= 1999;
 public static const CAMP_CABIN_METAL_PIECES_RESOURCES:int                           = 2000;
 public static const TIMES_ORGASMED:int                                              = 2001; //The reason flags are moved down there is to provide room when CoC ever gets updated and flags gets added. This is to avoid screwing up saves.
@@ -2702,7 +2702,7 @@ public static const UNKNOWN_FLAG_NUMBER_02693:int                               
 public static const UNKNOWN_FLAG_NUMBER_02694:int                                   = 2694;
 public static const ALVINA_DIARY:int                                   				= 2695;
 public static const HELLFIRE_SNAIL_ENC:int                                   		= 2696;
-public static const UNKNOWN_FLAG_NUMBER_02697:int                                   = 2697;
+public static const CURSE_OF_THE_JIANGSHI:int                                   	= 2697;
 public static const UNKNOWN_FLAG_NUMBER_02698:int                                   = 2698;
 public static const UNKNOWN_FLAG_NUMBER_02699:int                                   = 2699;
 public static const UNKNOWN_FLAG_NUMBER_02700:int                                   = 2700;
@@ -3007,3 +3007,4 @@ public static const HYPER_HAPPY:int                                             
 public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999; // ------------------------- Jojo Debug Flag?
 	}    
 }
+

@@ -489,6 +489,7 @@ public class KitsuneScene extends BaseContent
 			outputText("Exhausted by the ordeal, you relax into a blissful stupor, only vaguely aware of the feeling of being dragged onto the deck.  The last thing you recall before slipping into unconsciousness is the three sisters crawling up alongside you, coaxing your twice-spent member back to life yet again with their magic, eyes glinting hungrily.");
 			//Increase PC cum production slightly due to residual effects from the kitsunes' magic.
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.orgasm();
 			outro();
 		} //end stillHungry();
@@ -1057,6 +1058,7 @@ public class KitsuneScene extends BaseContent
 
 			//Advance time 8 hrs, lose X gems, return to camp. +Sensitivity, +Libido.
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
 			cleanupAfterCombat();
@@ -2080,6 +2082,7 @@ public class KitsuneScene extends BaseContent
 			outputText("You turn to gather your [armor], cleaning up and dressing once more, then whip around to the sound of rustling leaves.  A set of sticky footprints leads your gaze to the edge of a bush, a flash of red tails and a pair of plump hind cheeks disappearing into the forest.");
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
 			cleanupAfterCombat();

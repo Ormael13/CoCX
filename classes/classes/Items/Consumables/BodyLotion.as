@@ -86,7 +86,7 @@ import classes.PerkLib;
 		}
 		
 		override public function useItem():Boolean {
-			if (game.player.skinAdj == _adj || player.hasPerk(PerkLib.TransformationImmunity)) {
+			if (game.player.skinAdj == _adj || player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) {
 				outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the flask of lotion and rubbing", "uncork the flask of lotion and rub") + " the " + liquidDesc() + " across your body. Once you’ve finished you feel reinvigorated. ");
 				EngineCore.HPChange(10, true);
 			}

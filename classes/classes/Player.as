@@ -800,8 +800,8 @@ use namespace CoC;
 		//Natural Claws (arm types and weapons that can substitude them)
 		public function haveNaturalClaws():Boolean
 		{
-			return arms.type == Arms.CAT || arms.type == Arms.DEVIL || arms.type == Arms.DISPLACER || arms.type == Arms.DRAGON || arms.type == Arms.FOX || arms.type == Arms.GARGOYLE || arms.type == Arms.LION
-			 || arms.type == Arms.LIZARD || arms.type == Arms.RAIJU || arms.type == Arms.RED_PANDA || arms.type == Arms.SALAMANDER || arms.type == Arms.WOLF || arms.type == Arms.HYDRA;
+			return arms.type == Arms.CAT || arms.type == Arms.DEVIL || arms.type == Arms.DISPLACER || arms.type == Arms.DRAGON || arms.type == Arms.FOX || arms.type == Arms.GARGOYLE || arms.type == Arms.LION || arms.type == Arms.WOLF
+			 || arms.type == Arms.LIZARD || arms.type == Arms.RAIJU || arms.type == Arms.RED_PANDA || arms.type == Arms.SALAMANDER || arms.type == Arms.HYDRA || arms.type == Arms.JIANGSHI;
 		}
 		public function haveNaturalClawsTypeWeapon():Boolean
 		{
@@ -1709,6 +1709,9 @@ use namespace CoC;
 			if (findPerk(PerkLib.FluidBody) >= 0 && meetUnhinderedReq()) {
 				mult -= 50;
 				dynStats("lus", (5 * (1 + game.player.newGamePlusMod())));
+			}
+			if (findPerk(PerkLib.HaltedVitals) >= 0) {
+				mult -= 20;
 			}
 			//--STATUS AFFECTS--
 			//Black cat beer = 25% reduction!
@@ -3281,6 +3284,11 @@ use namespace CoC;
 				}
 			}
 			
+			if (jiangshiScore() >= 20)
+			{
+				race = "Jiangshi";
+			}
+			
 			if (chimeraScore() >= 3)
 			{
 				race = "chimera";
@@ -3701,6 +3709,48 @@ use namespace CoC;
 			
 			End("Player","racialScore");
 			return grandchimeraCounter;
+		}
+
+		//Determine Jiangshi Rating
+		public function jiangshiScore():Number {
+			Begin("Player","racialScore","jiangshi");
+			var jiangshiCounter:Number = 0;
+			if (hasPlainSkinOnly() && skinTone != "slippery")
+				jiangshiCounter++;
+			if (skinTone == "ghostly pale" || skinTone == "light blue")
+				jiangshiCounter++;
+			if (hairType == Hair.NORMAL)
+				jiangshiCounter++;
+			if (faceType == Face.JIANGSHI)
+				jiangshiCounter++;
+			if (eyes.type == Eyes.JIANGSHI)
+				jiangshiCounter += 2;
+			if (ears.type == Ears.HUMAN)
+				jiangshiCounter++;
+			if (tongue.type == 0)
+				jiangshiCounter++;
+			if (gills.type == 0)
+				jiangshiCounter++;
+			if (antennae.type == 0)
+				jiangshiCounter++;
+			if (horns.type == Horns.SPELL_TAG && horns.count > 0)
+				jiangshiCounter++;
+			if (wings.type == Wings.NONE)
+				jiangshiCounter += 2;
+			if (tailType == 0)
+				jiangshiCounter++;
+			if (arms.type == Arms.JIANGSHI)
+				jiangshiCounter++;
+			if (lowerBody == LowerBody.JIANGSHI)
+				jiangshiCounter++;
+			if (rearBody.type == RearBody.NONE)
+				jiangshiCounter++;
+			if (skin.base.pattern == Skin.PATTERN_NONE)
+				jiangshiCounter++;
+			if (findPerk(PerkLib.Undeath) >= 0)
+				jiangshiCounter += 2;
+			End("Player","racialScore");
+			return jiangshiCounter;
 		}
 
 		//determine demon rating
@@ -5265,6 +5315,10 @@ use namespace CoC;
 			if (hasGhostSkin() && (skinAdj == "milky" || skinAdj == "ashen"))
 				poltergeistCounter++;
 			if (findPerk(PerkLib.Incorporeality) >= 0)
+				poltergeistCounter++;
+			if (findPerk(PerkLib.Ghostslinger) >= 0)
+				poltergeistCounter++;
+			if (findPerk(PerkLib.PhantomShooting) >= 0)
 				poltergeistCounter++;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && poltergeistCounter >= 4)
 				poltergeistCounter += 1;
@@ -8831,6 +8885,14 @@ use namespace CoC;
 				maxLib += (5 * internalChimeraScore() * newGamePlusMod);
 				maxSen += (5 * internalChimeraScore() * newGamePlusMod);
 			}
+			if (jiangshiScore() >= 20) {
+				maxStr += (140 * newGamePlusMod);
+				maxTou += (100 * newGamePlusMod);
+				maxSpe -= (90 * newGamePlusMod);
+				maxInt -= (90 * newGamePlusMod);
+				maxWis += (110 * newGamePlusMod);
+				maxLib += (130 * newGamePlusMod);
+			}//+110 strength +80 toughness +60 Wisdom +100 Libido +50 sensitivity
 			if (gargoyleScore() >= 20) {
 				if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
 					maxStr += (165 * newGamePlusMod);
@@ -9364,6 +9426,10 @@ use namespace CoC;
 				maxSpe += statusEffectv2(StatusEffects.UnderwaterCombatBoost);
 			}
 			if (hasStatusEffect(StatusEffects.PlayerPhylactery)) maxInt += (75 * newGamePlusMod);
+			if (hasStatusEffect(StatusEffects.EnergyDependent)) {
+				maxSpe += statusEffectv1(StatusEffects.EnergyDependent);
+				maxInt += statusEffectv2(StatusEffects.EnergyDependent);
+			}
 			//Equipment
 			if (this.jewelryName == "Ring of Intelligence") maxInt += 5;
 			if (this.jewelryName2 == "Ring of Intelligence") maxInt += 5;
@@ -10115,6 +10181,16 @@ use namespace CoC;
 			if (options.orgasm) {
 				orgasm(otype);
 			}
+		}
+		
+		public function EnergyDependentRestore():void {
+			addStatusValue(StatusEffects.EnergyDependent, 1, 5);
+			addStatusValue(StatusEffects.EnergyDependent, 2, 12);
+			spe += statusEffectv1(StatusEffects.EnergyDependent);
+			inte += statusEffectv2(StatusEffects.EnergyDependent);
+			soulforce += maxSoulforce() * 0.04;
+			if (soulforce > maxSoulforce()) soulforce = maxSoulforce();
+			outputText(" You feel slightly more alive from the soulforce you vampirised from your sexual partner orgasm.");
 		}
 		
 		protected override function maxHP_base():Number {

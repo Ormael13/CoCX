@@ -442,6 +442,7 @@ private function urethraFuckDatGiantCock():void {
 	//[Corruption increases slightly, lust is decreased]
 	flags[kFLAGS.KAIJU_BAD_END_COUNTER]++;
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	player.orgasm();
 	dynStats("cor", 1);
 	doNext(camp.returnToCampUseOneHour);
@@ -686,6 +687,7 @@ private function yesTurnKaijuFuta():void {
 	flags[kFLAGS.KAIJU_COCK] = 1;
 	//[Corruption increases slightly, lust is decreased]
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	player.orgasm();
 	dynStats("cor", 1);
 	doNext(camp.returnToCampUseOneHour);
@@ -786,4 +788,4 @@ private function badEndPartTwo():void {
 	EventParser.gameOver();
 }
 }
-}
+}

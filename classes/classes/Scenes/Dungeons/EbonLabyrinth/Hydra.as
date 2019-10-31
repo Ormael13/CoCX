@@ -72,8 +72,8 @@ use namespace CoC;
 			outputText("\n\n");
 		}
 		private function hydraOmnibitesD():void {
-			var damage:Number = this.str * 0.1;
-			damage += this.spe * 0.1;
+			var damage:Number = this.str * 0.3;
+			damage += this.spe * 0.3;
 			var damage2:Number = 0.9;
 			damage2 += (rand(21) * 0.01);
 			damage *= damage2;
@@ -121,8 +121,8 @@ use namespace CoC;
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 65) {
 				initStrTouSpeInte(136, 250, 158, 142);
 				initWisLibSensCor(150, 255, 160, 40);
-				this.armorDef = 40;
-				this.armorMDef = 20;
+				this.armorDef = 80;
+				this.armorMDef = 80;
 				this.bonusHP = 1000;
 				this.level = 65;
 				this.gems = 200 + rand(80);
@@ -130,8 +130,8 @@ use namespace CoC;
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 70) {
 				initStrTouSpeInte(174, 290, 186, 163);
 				initWisLibSensCor(172, 280, 180, 40);
-				this.armorDef = 50;
-				this.armorMDef = 25;
+				this.armorDef = 100;
+				this.armorMDef = 100;
 				this.bonusHP = 2000;
 				this.level = 70;
 				this.gems = 250 + rand(90);
@@ -139,8 +139,8 @@ use namespace CoC;
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 75) {
 				initStrTouSpeInte(212, 330, 214, 184);
 				initWisLibSensCor(194, 305, 200, 40);
-				this.armorDef = 60;
-				this.armorMDef = 30;
+				this.armorDef = 120;
+				this.armorMDef = 120;
 				this.bonusHP = 3000;
 				this.level = 75;
 				this.gems = 300 + rand(100);

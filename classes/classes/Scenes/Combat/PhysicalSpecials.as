@@ -487,6 +487,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		enemyAI();
 	}
 	public function powerAttack3x():void {
@@ -529,6 +530,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		enemyAI();
 	}
 	public function powerAttack4x():void {
@@ -571,6 +573,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		enemyAI();
 	}
 	public function powerAttack5x():void {
@@ -613,6 +616,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		enemyAI();
 	}
 	public function powerAttack6x():void {
@@ -655,6 +659,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		enemyAI();
 	}
 	public function powerAttack7x():void {
@@ -697,6 +702,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		enemyAI();
 	}
 	public function powerAttack8x():void {
@@ -751,6 +757,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		enemyAI();
 	}
 	public function powerfistscoooooost():Number {
@@ -869,6 +876,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		if (monster.canMonsterBleed()) {
 			if (monster.hasStatusEffect(StatusEffects.IzmaBleed)) {
 				if (monster.statusEffectv4(StatusEffects.IzmaBleed) == 0) monster.addStatusValue(StatusEffects.IzmaBleed, 4, 1);
@@ -1038,6 +1046,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.checkAchievementDamage(damage);
 		combat.WrathWeaponsProc();
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		enemyAI();
 	}
 	
@@ -1141,6 +1150,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		enemyAI();
 	}
 
@@ -1229,6 +1239,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		enemyAI();
 	}
 
@@ -1331,6 +1342,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		enemyAI();
 	}
 
@@ -1451,6 +1463,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		enemyAI();
 	}
 
@@ -1592,6 +1605,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (silly()) outputText(" The force causes you to literally bounce off of " + monster.a + monster.short + ", allowing the camera to get a nice shot of " + monster.a + monster.short + " twitching in an indent in their general shape.");
 		outputText("\n\n");
 		combat.heroBaneProc(slamDmg);
+		combat.EruptingRiposte();
 		enemyAI();
 	}
 	public function minThicknessReq():Number {
@@ -1717,6 +1731,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		enemyAI();
 	}
 
@@ -2055,6 +2070,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		doNext(playerMenu);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
@@ -2127,6 +2143,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		enemyAI();
 	}
 
@@ -2201,6 +2218,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		enemyAI();
 	}
 
@@ -2270,6 +2288,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		enemyAI();
 	}
 	
@@ -2339,6 +2358,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		enemyAI();
 	}
 
@@ -2394,6 +2414,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		enemyAI();
 	}
 	
@@ -2800,6 +2821,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
 		outputText("\n\n");
 		enemyAI();
@@ -2892,6 +2914,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			checkAchievementDamage(damage);
 			outputText("\n\n");
 			combat.heroBaneProc(damage);
+			combat.EruptingRiposte();
 			monster.createStatusEffect(StatusEffects.Pounce, 4 + rand(2), 0, 0, 0);
 			player.removeStatusEffect(StatusEffects.Flying);
 			if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
@@ -3221,6 +3244,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n");
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] >= 1) {
 			flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
 			mantisMultipleAttacks();
@@ -3386,6 +3410,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		//Victory ORRRRR enemy turn.
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
@@ -3507,6 +3532,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		//Victory ORRRRR enemy turn.
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else {
@@ -3855,6 +3881,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		//Kick back to main if no damage occured!
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) {
 			enemyAI();
@@ -4010,6 +4037,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		if (!combatIsOver())enemyAI();
 	}
 
@@ -4043,6 +4071,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		fatigue(20, USEFATG_PHYSICAL);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		if (player.statusEffectv1(StatusEffects.CounterAction) == 1) {
 			player.removeStatusEffect(StatusEffects.CounterAction);
 			doNext(playerMenu);

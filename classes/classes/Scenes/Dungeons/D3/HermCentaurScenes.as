@@ -4,6 +4,7 @@ import classes.BaseContent;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.PregnancyStore;
+import classes.StatusEffects;
 import classes.Scenes.SceneLib;
 import classes.PerkLib;
 
@@ -249,6 +250,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 			player.orgasm();
 			dynStats("cor+", 5);
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			menu();
             cleanupAfterCombat(SceneLib.d3.resumeFromFight);

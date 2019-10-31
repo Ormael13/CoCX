@@ -617,6 +617,7 @@ private function loseButtGinity():void {
 		//<Lust sated, slimefeed>
 	}
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	player.orgasm();
 	dynStats("sen", 2);
 	player.slimeFeed();

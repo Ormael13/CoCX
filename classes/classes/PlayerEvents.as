@@ -607,6 +607,12 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				DivaScene.instance.tookVialToday = false;
 				//Clear sidewinder cooldown
 				if (player.hasStatusEffect(StatusEffects.CooldownSideWinder)) player.removeStatusEffect(StatusEffects.CooldownSideWinder);
+				//Energy Dependent
+				if (player.hasStatusEffect(StatusEffects.EnergyDependent) && player.statusEffectv1(StatusEffects.EnergyDependent) > 0) {
+					player.addStatusValue(StatusEffects.EnergyDependent, 1, -1);
+					player.spe -= 5;
+					player.inte -= 12;
+				}
 				//Daily Fishery production
 				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) {
 					if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) {
@@ -859,6 +865,31 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 			else if (player.findPerk(PerkLib.Lustzerker) >= 0 && player.perkv4(PerkLib.Lustzerker) == 0 && player.findPerk(PerkLib.SalamanderAdrenalGlands) < 0) { //Remove lustzerker perk if not meeting requirements
 				outputText("\nAll of sudden something change inside your body.  You think about a long while, until it dawned on you.  You can't feel that slight warm feeling inside your body anymore meaning for now no more lustzerking.\n\n(<b>Lost Perk: Lustzerker</b>)");
 				player.removePerk(PerkLib.Lustzerker);
+				needNext = true;
+			}
+			//Ghost-slinger perk
+			if (player.poltergeistScore() >= 12 && player.findPerk(PerkLib.Ghostslinger) < 0) {
+				outputText("\nYour head is suddenly filled with strange otherworldly knowledge. Things you didn't think possible before could become a reality now thanks to your supernatural intellect and abilities. You could even apply these newfound abilities to your equipment.\n\n(<b>Gained Perk: Ghost-slinger</b>)");
+				player.createPerk(PerkLib.Ghostslinger, 0, 0, 0, 0);
+				needNext = true;
+			}
+			else if (player.poltergeistScore() < 12 && player.findPerk(PerkLib.Ghostslinger) >= 0) {// && player.findPerk(PerkLib.LizanMarrow) < 0
+				outputText("\nYour supernatural knowledge fades along with the abilities that came with it as you become more corporeal.\n\n(<b>Lost Perk: Ghost-slinger</b>)");
+				player.removePerk(PerkLib.Ghostslinger);
+				needNext = true;
+			}
+			//Phantom Shooting perk
+			if (player.poltergeistScore() >= 12 && player.findPerk(PerkLib.PhantomShooting) < 0) {
+				outputText("\n");
+				if (player.weaponRangePerk == "Throwing" || player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle") outputText("With your expanded otherworldly knowledge, a thought comes to mind. You apply your ghostly abilities to your " + player.weaponRangeName + " then "+(player.weaponRangePerk == "Throwing" ? "throw it":"shoot")+" at a nearby rock. You can feel a small piece of yourself leave, but the impact of your weapon all but shatters the rock. Using a bit of your ectoplasm instead of basic ammunition definitely made your " + player.weaponRangeName + " stronger.");
+				else outputText("With your expanded otherworldly knowledge, a thought comes to mind. If you used some of your ectoplasm instead of basic ammunition for a firearm or throwing weapon, perhaps your weapons will have more of an impact.");
+				outputText("\n\n(<b>Gained Perk: Phantom Shooting</b>)");
+				player.createPerk(PerkLib.PhantomShooting, 0, 0, 0, 0);
+				needNext = true;
+			}
+			else if (player.poltergeistScore() < 12 && player.findPerk(PerkLib.PhantomShooting) >= 0) {// && player.findPerk(PerkLib.LizanMarrow) < 0
+				outputText("\nAs you become more corporeal again, the otherworldly knowledge you once held begins to fade along with your ectoplasm. Looks like it's back to using normal ammunition for your firearms and throwing weapons again...\n\n(<b>Lost Perk: Phantom Shooting</b>)");
+				player.removePerk(PerkLib.PhantomShooting);
 				needNext = true;
 			}
 			//Hydra Regeneration and Hydra acid breath perk

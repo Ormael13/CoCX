@@ -237,6 +237,7 @@ public class LizanRogueScene extends BaseContent
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			doNext(camp.returnToCampUseOneHour);
             if (CoC.instance.inCombat) cleanupAfterCombat();
         }
@@ -288,6 +289,7 @@ public class LizanRogueScene extends BaseContent
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			doNext(camp.returnToCampUseOneHour);
             if (CoC.instance.inCombat) cleanupAfterCombat();
         }
@@ -350,6 +352,7 @@ public class LizanRogueScene extends BaseContent
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(60);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			doNext(camp.returnToCampUseOneHour);
             if (CoC.instance.inCombat) cleanupAfterCombat();
         }
@@ -451,6 +454,7 @@ public class LizanRogueScene extends BaseContent
 			player.createStatusEffect(StatusEffects.Eggs, rand(6), 0, rand(3) + 5, 0);
 			player.orgasm();
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			cleanupAfterCombat();
 		}
 	}

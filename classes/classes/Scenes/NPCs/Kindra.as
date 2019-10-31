@@ -383,6 +383,18 @@ use namespace CoC;
 				this.bonusHP = 450;
 				this.level = 75;
 			}
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 6) {
+				this.drop = new ChainedDrop().
+						add(consumables.BAGOCA3,0.2).
+						add(consumables.MG_SFRP,0.3).
+						add(consumables.SHEEPMK,0.6);
+			}
+			else {
+				this.drop = new ChainedDrop().
+						add(consumables.BAGOCA2,0.2).
+						add(consumables.LG_SFRP,0.3).
+						add(consumables.SHEEPMK,0.6);
+			}
 			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_TIGHT);
 			createBreastRow(Appearance.breastCupInverse("C"));
 			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
@@ -399,9 +411,6 @@ use namespace CoC;
 			this.lust = 20;
 			this.lustVuln = .95;
 			this.gems = 0;
-			this.drop = new ChainedDrop().
-					add(consumables.LG_SFRP,0.3).
-					add(consumables.SHEEPMK,0.6);
 			this.createPerk(PerkLib.JobRanger, 0, 0, 0, 0);
 			this.createPerk(PerkLib.BasicEndurance, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ArchersStaminaI, 0, 0, 0, 0);

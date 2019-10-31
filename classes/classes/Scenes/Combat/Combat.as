@@ -33,9 +33,11 @@ import classes.Scenes.Areas.HighMountains.Harpy;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
+import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.EbonLabyrinth.ChaosChimera;
 import classes.Scenes.Dungeons.EbonLabyrinth.DarkSlimeEmpress;
+import classes.Scenes.Dungeons.EbonLabyrinth.HellfireSnail;
 import classes.Scenes.Dungeons.HelDungeon.HarpyMob;
 import classes.Scenes.Dungeons.HelDungeon.HarpyQueen;
 import classes.Scenes.NPCs.*;
@@ -323,7 +325,7 @@ public function cleanupAfterCombatImpl(nextFunc:Function = null):void {
 			//Keep gems from going below zero.
 			if (gemsLost > player.gems) gemsLost = player.gems;
 			var timePasses:int = monster.handleCombatLossText(inDungeon, gemsLost); //Allows monsters to customize the loss text and the amount of time lost
-			if (player.hasStatusEffect(StatusEffects.SoulArena)) timePasses = 1;
+			if (player.hasStatusEffect(StatusEffects.SoulArena) || (monster.short == "Hellfire Snail" && player.hasPerk(PerkLib.FireAffinity))) timePasses = 1;
 			player.gems -= gemsLost;
 			inCombat = false;
 			if (player.hasStatusEffect(StatusEffects.SoulArena)) player.removeStatusEffect(StatusEffects.SoulArena);
@@ -1139,45 +1141,36 @@ public function elementalattacks(elementType:int, summonedElementals:int):void {
 			default: elementalDamage *= 1.5; break;
 		}
 	}
+	if (elementType != AIR && elementType != ETHER) elementalDamage *= (monster.damagePercent() / 100);
+	elementalDamage = Math.round(elementalDamage);
+	outputText("Your elemental hit [monster a] [monster name]! ");
 	switch(elementType){
 		case EARTH:
 		case WOOD:
 			elementalDamage *= 2.5;
+			doDamage(elementalDamage,true,true);
 			break;
 		case METAL:
 			elementalDamage *= 1.5;
+			doDamage(elementalDamage,true,true);
 			break;
 		case FIRE:
-			if (monster.hasPerk(PerkLib.IceNature)) elementalDamage *= 5;
-			if (monster.hasPerk(PerkLib.FireVulnerability)) elementalDamage *= 2;
-			if (monster.hasPerk(PerkLib.IceVulnerability)) elementalDamage *= 0.5;
-			if (monster.hasPerk(PerkLib.FireNature)) elementalDamage *= 0.2;
+			doFireDamage(elementalDamage,true,true);
 			break;
 		case WATER:
 		case ICE:
-			if (monster.hasPerk(PerkLib.IceNature)) elementalDamage *= 0.2;
-			if (monster.hasPerk(PerkLib.FireVulnerability)) elementalDamage *= 0.5;
-			if (monster.hasPerk(PerkLib.IceVulnerability)) elementalDamage *= 2;
-			if (monster.hasPerk(PerkLib.FireNature)) elementalDamage *= 5;
+			doIceDamage(elementalDamage,true,true);
 			break;
 		case LIGHTNING:
-			if (monster.hasPerk(PerkLib.DarknessNature)) elementalDamage *= 5;
-			if (monster.hasPerk(PerkLib.LightningVulnerability)) elementalDamage *= 2;
-			if (monster.hasPerk(PerkLib.DarknessVulnerability)) elementalDamage *= 0.5;
-			if (monster.hasPerk(PerkLib.LightningNature)) elementalDamage *= 0.2;
+			doLightingDamage(elementalDamage,true,true);
 			break;
 		case DARKNESS:
-			if (monster.hasPerk(PerkLib.DarknessNature)) elementalDamage *= 0.2;
-			if (monster.hasPerk(PerkLib.LightningVulnerability)) elementalDamage *= 0.5;
-			if (monster.hasPerk(PerkLib.DarknessVulnerability)) elementalDamage *= 2;
-			if (monster.hasPerk(PerkLib.LightningNature)) elementalDamage *= 5;
+			doDarknessDamage(elementalDamage,true,true);
 			break;
-		default: break;
+		default:
+			doDamage(elementalDamage,true,true);
+			break;
 	}
-	if (elementType != AIR && elementType != ETHER) elementalDamage *= (monster.damagePercent() / 100);
-	elementalDamage = Math.round(elementalDamage);
-	outputText("Your elemental hit [monster a] [monster name]! ");
-	doDamage(elementalDamage,true,true);
 	if (crit == true) outputText(" <b>Critical! </b>");
 	outputText("\n\n");
 	//checkMinionsAchievementDamage(elementalDamage);
@@ -1376,6 +1369,7 @@ public function meleeDamageAccSawblade():void {
 	outputText("\n");
 	checkAchievementDamage(damage);
 	heroBaneProc(damage);
+	EruptingRiposte();
 	if (monster.HP <= monster.minHP()){doNext(endHpVictory); return;}
 	if (monster.lust >= monster.maxLust()){doNext(endLustVictory); return; }
 	outputText("\n");
@@ -1481,9 +1475,11 @@ internal function wait():void {
 	}
 	else if (player.hasStatusEffect(StatusEffects.GooBind)) {
 		clearOutput();
-		if (monster is DarkSlimeEmpress) outputText("You writhe uselessly, trapped inside the dark slime girls warm, seething bodies. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girls pulsing bodies around yours.");
+		if (monster is HellfireSnail) outputText("Your flesh begins burning as the snail embraces you with her molten body! Ironically this is both extremely hot and painful!");
+		else if (monster is DarkSlimeEmpress) outputText("You writhe uselessly, trapped inside the dark slime girls warm, seething bodies. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girls pulsing bodies around yours.");
 		else outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours.");
-		player.takePhysDamage(.35 * player.maxHP(), true);
+		if (monster is HellfireSnail) player.takeFireDamage((.1 + (.01 * monster.statusEffectv1(StatusEffects.RisingInferno))) * player.maxHP(), true);
+		else player.takePhysDamage(.35 * player.maxHP(), true);
 		skipMonsterAction = true;
 	}
 	else if (player.hasStatusEffect(StatusEffects.GooArmorBind)) {
@@ -1627,15 +1623,21 @@ internal function wait2():void {
 		clearOutput();
 		//[Struggle](successful) :
 		if (rand(3) == 0 || rand(80) < player.str) {
-			if (monster is DarkSlimeEmpress) outputText("You barely manage to break out of the slimes clingy bodies standing up to resume the battle.");
+			if (monster is HellfireSnail) {
+				outputText("You manage to break out of the snail’s burning embrace and she sighs in frustration as you take some distance.");
+				outputText("\n\n\"<i>Aw come back here! I just want a hug!</i>\"");
+			}
+			else if (monster is DarkSlimeEmpress) outputText("You barely manage to break out of the slimes clingy bodies standing up to resume the battle.");
 			else outputText("You claw your fingers wildly within the slime and manage to brush against her heart-shaped nucleus. The girl silently gasps and loses cohesion, allowing you to pull yourself free while she attempts to solidify.");
 			player.removeStatusEffect(StatusEffects.GooBind);
 		}
 		//Failed struggle
 		else {
-			if (monster is DarkSlimeEmpress) outputText("You writhe uselessly, trapped inside the dark slime girls warm, seething bodies. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girls pulsing bodies around yours.");
+			if (monster is HellfireSnail) outputText("Your flesh begins burning as the snail embraces you with her molten body! Ironically this is both extremely hot and painful!");
+			else if (monster is DarkSlimeEmpress) outputText("You writhe uselessly, trapped inside the dark slime girls warm, seething bodies. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girls pulsing bodies around yours.");
 			else outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours. ");
-			player.takePhysDamage(.15 * player.maxHP(), true);
+			if (monster is HellfireSnail) player.takeFireDamage((.05 + (.005 * monster.statusEffectv1(StatusEffects.RisingInferno))) * player.maxHP(), true);
+		else player.takePhysDamage(.15 * player.maxHP(), true);
 		}
 		skipMonsterAction = true;
 	}
@@ -2336,8 +2338,11 @@ public function throwWeapon():void {
 	var accRange:Number = 0;
 	accRange += (arrowsAccuracy() / 2);
 	if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
-	if (player.weaponRange != weaponsrange.SHUNHAR || player.weaponRange != weaponsrange.KSLHARP || player.weaponRange != weaponsrange.LEVHARP) player.ammo--;
-	fatigue(fc);
+	if (player.hasPerk(PerkLib.PhantomShooting)) player.takePhysDamage(fc);
+	else {
+		if (player.weaponRange != weaponsrange.SHUNHAR || player.weaponRange != weaponsrange.KSLHARP || player.weaponRange != weaponsrange.LEVHARP) player.ammo--;
+		fatigue(fc);
+	}
 	if (rand(100) < accRange) {
 		var damage:Number = 0;
 		damage += player.str;
@@ -2423,6 +2428,8 @@ public function throwWeapon():void {
 		}
 		if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= historyScoutBonus();
 		if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
+		if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
+		if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
@@ -2508,7 +2515,8 @@ public function shootWeapon():void {
 	var accRange:Number = 0;
 	accRange += (firearmsAccuracy() / 2);
 	if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
-	player.ammo--;
+	if (player.hasPerk(PerkLib.PhantomShooting)) player.takePhysDamage(25);
+	else player.ammo--;
 	if (rand(100) < accRange) {
 		var damage:Number = 0;
 		damage += player.weaponRangeAttack * 20;
@@ -2621,6 +2629,8 @@ public function shootWeapon():void {
 		}
 		if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= historyScoutBonus();
 		if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
+		if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
+		if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 			if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
@@ -3055,6 +3065,7 @@ public function meleeDamageAcc():void {
 		//BASIC DAMAGE STUFF
 		damage += player.str;
 		damage += scalingBonusStrength() * 0.25;
+		if (player.hasPerk(PerkLib.SuperStrength) && player.isFistOrFistWeapon()) damage *= 2;
 		if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
 			damage += player.spe;
 			damage += scalingBonusSpeed() * 0.20;
@@ -3147,6 +3158,7 @@ public function meleeDamageAcc():void {
 		if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) damage *= 1.05;
 		//One final round
 		damage = Math.round(damage);
 		//ANEMONE SHIT
@@ -3376,6 +3388,20 @@ public function meleeDamageAcc():void {
 				outputText("  Reeling in pain " + monster.a + monster.short + " begins to burn.");
 				monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
 			}
+			if (player.hasPerk(PerkLib.PoisonNails) && player.isFistOrFistWeapon()) {
+				var lust0damage:Number = 35 + rand(player.lib / 10);
+				lust0damage *= 0.14;
+				monster.teased(monster.lustVuln * lust0damage);
+				monster.tou -= 2;
+				monster.spe -= 2;
+				if (monster.tou < 1) monster.tou = 1;
+				if (monster.spe < 1) monster.spe = 1;
+				if (monster.hasStatusEffect(StatusEffects.NagaVenom))
+				{
+					monster.addStatusValue(StatusEffects.NagaVenom,3,1);
+				}
+				else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+			}
 		}
 		if (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] == 1 && (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small")) {
 			if (player.tailVenom >= 10) {
@@ -3504,6 +3530,7 @@ public function meleeDamageAcc():void {
 		checkAchievementDamage(damage);
 		WrathWeaponsProc();
 		heroBaneProc(damage);
+		EruptingRiposte();
 		if (player.hasPerk(PerkLib.SwiftCasting) && player.isOneHandedWeapons() && flags[kFLAGS.ELEMENTAL_MELEE] > 0) {
 			if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && player.mana >= spellCostWhite(40)) {
 				if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
@@ -3529,6 +3556,16 @@ public function meleeDamageAcc():void {
 				outputText("\n");
 				magic.spellDarknessShard2();
 			}
+		}
+		if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) {
+			player.HP += player.maxHP() * 0.01;
+			player.mana += player.maxMana() * 0.01;
+			player.fatigue -= player.maxFatigue() * 0.01;
+			player.soulforce += player.maxSoulforce() * 0.01;
+			if (player.HP > player.maxHP()) player.HP = player.maxHP();
+			if (player.mana > player.maxMana()) player.mana = player.maxMana();
+			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			if (player.fatigue < 0) player.fatigue = 0;
 		}
 	}
 	else {
@@ -3680,6 +3717,29 @@ public function heroBaneProc2():void {
 	}
 	if (player.HP <= player.minHP()) {
 		doNext(endHpLoss);
+	}
+}
+
+public function EruptingRiposte():void {
+	if (monster.hasStatusEffect(StatusEffects.EruptingRiposte)) {
+		var ERD:Number = monster.tou + monster.inte + monster.wis;
+		outputText("\nAs you strike the snail her shell erupts with magma, splashing with liquid fire. \n");
+		player.takeFireDamage(ERD, true);
+		outputText(" \n");
+		if (player.HP <= player.minHP()) {
+			doNext(endHpLoss);
+		}
+	}
+}
+public function EruptingRiposte2():void {
+	if (monster.hasStatusEffect(StatusEffects.EruptingRiposte)) {
+		outputText("\nAs you strike the snail her shell erupts with magma, splashing with liquid fire. \n");
+		player.takeFireDamage(flags[kFLAGS.ERUPTING_RIPOSTE_DAMAGE_BANK], true);
+		flags[kFLAGS.ERUPTING_RIPOSTE_DAMAGE_BANK] = 0;
+		outputText(" \n");
+		if (player.HP <= player.minHP()) {
+			doNext(endHpLoss);
+		}
 	}
 }
 
@@ -6131,6 +6191,7 @@ public function soulforceregeneration(combat:Boolean = true):void {
 		if (player.hasPerk(PerkLib.RecoveryMantra)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
 		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedsoulforce *= 2;
 		gainedsoulforce = Math.round(gainedsoulforce);
+		if (player.hasPerk(PerkLib.EnergyDependent)) gainedsoulforce = 0;
 		EngineCore.SoulforceChange(gainedsoulforce, false);
 	}
 	else {
@@ -6139,6 +6200,7 @@ public function soulforceregeneration(combat:Boolean = true):void {
 		if (player.hasPerk(PerkLib.Necromancy)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
 		if (player.hasPerk(PerkLib.RecoveryMantra)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
 		gainedsoulforce = Math.round(gainedsoulforce);
+		if (player.hasPerk(PerkLib.EnergyDependent)) gainedsoulforce = 0;
 		EngineCore.SoulforceChange(gainedsoulforce, false);
 	}
 }
@@ -7374,6 +7436,14 @@ public function runAway(callHook:Boolean = true):void {
 		addButton(0, "Next", combatMenu, false);
 		return;
 	}
+	if (player.jiangshiScore() > 19) {
+		outputText("Your cadaverous rigidity prevents any form of escape in battle!");
+//Pass false to combatMenu instead:		menuLoc = 3;
+//		doNext(combatMenu);
+		menu();
+		addButton(0, "Next", combatMenu, false);
+		return;
+	}
 	if (monster.hasStatusEffect(StatusEffects.Level) && monster.statusEffectv1(StatusEffects.Level) < 4 && monster is SandTrap) {
 		outputText("You're too deeply mired to escape!  You'll have to <b>climb</b> some first!");
 //Pass false to combatMenu instead:		menuLoc = 3;
@@ -7411,8 +7481,17 @@ public function runAway(callHook:Boolean = true):void {
 	}
 	if (inDungeon || inRoomedDungeon) {
 		clearOutput();
-		outputText("You're trapped in your foe's home turf - there is nowhere to run!\n\n");
-		enemyAI();
+		if (monster.short == "Hellfire Snail") {
+			outputText("You run as fast as you can, taking random corridors and running past the confused enemies all the way back to the labyrinth entrance. Of course the slug thing can't follow you she's way too slow however as a result you lose all the progression you made in the maze!\n\n");
+			player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
+			player.createStatusEffect(StatusEffects.EbonLabyrinthB, 0, 0, 0, 0);
+			DungeonAbstractContent.dungeonLoc = 131;
+			doNext(playerMenu);
+		}
+		else {
+			outputText("You're trapped in your foe's home turf - there is nowhere to run!\n\n");
+			enemyAI();
+		}
 		return;
 	}
 	if (prison.inPrison && !prison.prisonCanEscapeRun()) {
@@ -7877,6 +7956,7 @@ public function soulskillMod():Number {
 	if (player.hasPerk(PerkLib.SeersInsight)) modss += player.perkv1(PerkLib.SeersInsight);
 	if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modss *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
 	if (player.shieldName == "spirit focus") modss += .2;
+	if (player.armorName == "Traditional clothes") modss += .4;
 	modss = Math.round(modss * 100)/100;
 	return modss;
 }
