@@ -113,13 +113,17 @@ public class Questlog extends BaseContent
 			if (SceneLib.dungeons.checkFactoryClear() && flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] < 2) addButton(0, "Factory", takeRewardForFactory);
 			if (SceneLib.dungeons.checkDeepCaveClear() && flags[kFLAGS.DEFEATED_ZETAZ] < 2) addButton(1, "Deep Cave", takeRewardForDeepCave);
 			if (SceneLib.dungeons.checkLethiceStrongholdClear() && flags[kFLAGS.LETHICE_DEFEATED] < 2) addButton(2, "Stronghold", takeRewardForStronghold);
+			//button 3 - ?Demon Mine? czy też przesunąc Lethice Stronghold niżej z 2 przycisku jak dodam lochy w main storyline przed D3?
+			//button 4 - ?Demon Secret Lab?
 			if (SceneLib.dungeons.checkSandCaveClear() && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] < 2) addButton(5, "Sand Cave", takeRewardForSandCave);
 			if (SceneLib.dungeons.checkPhoenixTowerClear() && flags[kFLAGS.CLEARED_HEL_TOWER] < 2) addButton(6, "Phoenix Tower", takeRewardForPhoenixTower);
+			//button 7 - ???
 			if (SceneLib.dungeons.checkRiverDungeon1stFloorClear() && !player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) addButton(8, "River Dungeon", takeRewardForRiverDungeon1stFloor).hint("1st floor");
-			//button 9 - Ebon Labyrinth
+			if (SceneLib.dungeons.checkPhoenixTowerClear() && flags[kFLAGS.EBON_LABYRINTH] < 3) addButton(9, "Ebon Labyrinth", takeRewardForEbonLabyrinth);
 			if (SceneLib.dungeons.checkHiddenCaveClear() && flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 6) addButton(10, "Hidden Cave", takeRewardForHiddenCave);
 			if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear() && flags[kFLAGS.HIDDEN_CAVE_BOSSES] < 3) addButton(10, "Hidden C.(HS)", takeRewardForHiddenCaveHiddenStage).hint("Hidden Cave (Hidden Stage bonus)");
 			if (SceneLib.dungeons.checkDenOfDesireClear() && flags[kFLAGS.DEN_OF_DESIRE_QUEST] < 2) addButton(11, "Den of Desire", takeRewardForDenOfDesire);
+			//button 12 - ???
 			//button 13 - Lia undersea chtulu dungeon
 			addButton(14, "Back", playerMenu);
 		}
@@ -184,6 +188,16 @@ public class Questlog extends BaseContent
 			player.createStatusEffect(StatusEffects.RiverDungeonFloorRewards,1,0,0,0);
 			doNext(accessQuestlogMainMenu);
 		}
+		public function takeRewardForEbonLabyrinth():void {
+			clearOutput();
+			outputText("Your contribution in changing Mareth have been noticed.\n\n");
+			outputText("<b>Gained 2 perk points and 10 stat points</b>");
+			player.perkPoints = player.perkPoints + 2;
+			player.statPoints = player.statPoints + 10;
+			statScreenRefresh();
+			flags[kFLAGS.EBON_LABYRINTH] = 3;
+			doNext(accessQuestlogMainMenu);
+		}
 		public function takeRewardForHiddenCave():void {
 			clearOutput();
 			outputText("Your contribution in changing Mareth have been noticed.\n\n");
@@ -207,9 +221,9 @@ public class Questlog extends BaseContent
 		public function takeRewardForDenOfDesire():void {
 			clearOutput();
 			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 2 perk points and 10 stat points</b>");
-			player.perkPoints = player.perkPoints + 2;
-			player.statPoints = player.statPoints + 10;
+			outputText("<b>Gained 3 perk points and 15 stat points</b>");
+			player.perkPoints = player.perkPoints + 3;
+			player.statPoints = player.statPoints + 15;
 			statScreenRefresh();
 			flags[kFLAGS.DEN_OF_DESIRE_QUEST] = 2;
 			doNext(accessQuestlogMainMenu);

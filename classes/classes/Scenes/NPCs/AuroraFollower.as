@@ -69,7 +69,7 @@ public function AuroraWonSparring():void {
 }
 public function AuroraLostSparring():void {
 	clearOutput();
-	outputText("\"<i>I need get stronger to be of better use to " + player.mf("Master", "Mistress") + ",</i>\" she mumbles under her breath.");/*
+	outputText("\"<i>I need get stronger to be of better use to " + player.mf("Master", "Mistress") + ",</i>\" she mumbles under her breath.");
 	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 		if (flags[kFLAGS.AURORA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.AURORA_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.AURORA_DEFEATS_COUNTER] = 1;
@@ -90,8 +90,20 @@ public function AuroraLostSparring():void {
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 18, 0, 0);
 			flags[kFLAGS.AURORA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.AURORA_LVL] = 4;
+		}/*
+		if (flags[kFLAGS.AURORA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.AURORA_LVL] == 4) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, 24);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 24, 0, 0);
+			flags[kFLAGS.AURORA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.AURORA_LVL] = 5;
 		}
-	}*/
+		if (flags[kFLAGS.AURORA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.AURORA_LVL] == 5) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, 30);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 30, 0, 0);
+			flags[kFLAGS.AURORA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.AURORA_LVL] = 6;
+		}*/
+	}
 	cleanupAfterCombat();
 }
 
@@ -103,11 +115,46 @@ public function auroraHenchmanOption():void
 		outputText("Aurora is now following you around.\n\n");
 		var strAurora:Number = 10;
 		var touAurora:Number = 300;
-		var meleeAtkAurora:Number = 5;/*
+		var meleeAtkAurora:Number = 5;
 		if (flags[kFLAGS.AURORA_LVL] >= 1) {
-			strEtna += 10 * flags[kFLAGS.AURORA_LVL];
-			libEtna += 20 * flags[kFLAGS.AURORA_LVL];
-		}*/
+			if (flags[kFLAGS.AURORA_LVL] == 2) {
+				meleeAtkAurora += 4;
+			}
+			if (flags[kFLAGS.AURORA_LVL] == 3) {
+				touAurora += 20;
+				meleeAtkAurora += 10;
+			}
+			if (flags[kFLAGS.AURORA_LVL] == 4) {
+				touAurora += 20;
+				meleeAtkAurora += 18;
+			}/*
+			if (flags[kFLAGS.AURORA_LVL] == 5) {
+				touAurora += 40;
+				meleeAtkAurora += 28;
+			} 
+			if (flags[kFLAGS.AURORA_LVL] == 6) {
+				touAurora += 40;
+				meleeAtkAurora += 40;
+			}
+			if (flags[kFLAGS.AURORA_LVL] == 7) {
+				touAurora += 60;
+				meleeAtkAurora += 54;
+			}
+			if (flags[kFLAGS.AURORA_LVL] == 8) {
+				touAurora += 60;
+				meleeAtkAurora += 70;
+			}
+			if (flags[kFLAGS.AURORA_LVL] == 9) {
+				touAurora += 80;
+				meleeAtkAurora += 88;
+			}
+			if (flags[kFLAGS.AURORA_LVL] >= 2 && flags[kFLAGS.AURORA_LVL] < 10) strAurora += 40 * (2 - flags[kFLAGS.AURORA_LVL]);
+			if (flags[kFLAGS.AURORA_LVL] >= 10) {
+				strAurora += 320 + (3 * (11 - flags[kFLAGS.AURORA_LVL]));
+				touAurora += 80 + (6 * (11 - flags[kFLAGS.AURORA_LVL]));
+				meleeAtkAurora += 88 + (4 * (11 - flags[kFLAGS.AURORA_LVL]));
+			}*/
+		}
 		strAurora *= (1 + (0.2 * player.newGamePlusMod()));
 		strAurora = Math.round(strAurora);
 		touAurora *= (1 + (0.2 * player.newGamePlusMod()));

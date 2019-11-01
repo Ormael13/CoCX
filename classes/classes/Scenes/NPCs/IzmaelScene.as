@@ -236,6 +236,7 @@ import classes.Scenes.SceneLib;
 			outputText("\n\n\"<i>That was freaking boss, alpha " + player.mf("bro", "chick") + "!</i>\" he says after he has gathered his breath, grinning at the person he's covered in his seed without the faintest trace of irony. You shakily sit yourself down, touch at the deep teeth marks he's left upon your shoulders and stare at him in faint disbelief. He sounds less like a man at the end of a sordid sexual marathon than one at the end of a really good work-out. \"<i>We're totally gonna do that again, right " + player.mf("boy", "girl") + "?</i>\" he enthuses. \"<i>You have the best ideas for calith... callous... for gym stuff. I normally have to force myself to do presses, but when you're involved...</i>\" a familiar stoned expression appears on the shark morph's face, and his semi-flaccid dick begins to swell again. You realize with a cold, almost frightened thrill that there is no exhausting this being you've created; you could fuck Izmael until he turned your vagina inside out, and he'd still be ready to do it all over again at the end of it. You dismiss him with a feeble wave of your hand before the idea can occur to him, and make your wobbly way to the stream for a thorough clean up.");
 			player.orgasm();
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.knockUp(PregnancyStore.PREGNANCY_IZMA, PregnancyStore.INCUBATION_IZMA);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -305,6 +306,7 @@ import classes.Scenes.SceneLib;
 			if (player.isGoo()) outputText(" It takes a while to persuade much of your slimy bulk to follow you out of the pool, relaxed and diffused into the steaming waters as it is. You find yourself wondering how the lake slimes do it so effortlessly.");
 			outputText("\n\n<i>Alpha " + player.mf("dude", "chick") + "... I'm gonna need, like, 3 warm downs to get over this one,</i>\" he groans.  You laugh as you take in his exhausted, submerged frame.  The water has been polluted by the copious fluids the two of you have spurted out; you can smell the hot musk from here.  You suspect by the time Izmael himself manages to pull his frame out of the morass, he will be just as horny as he was when he got in.  Grinning, you saunter your steaming, naked self back to camp in search of something to towel yourself down.");
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -377,6 +379,7 @@ import classes.Scenes.SceneLib;
 			outputText("\n\nEventually, after spending a time joined together panting, your sweat drying on your skin, Izmael slowly retracts out of your abused [butt], his still-leaking dick flopping out and swinging like an obscene pendulum. You suppress the urge to moan as a small waterfall of cum oozes out of your backside and onto the ground. Izmael really busted a nut in you - or four. Slowly, trying to ignore the wet, warm looseness inundating your lower half, you get to your feet and manage a grin at the shark morph, who looks slightly dazed. You slide your arms around him, feeling warm and satiated as he gathers the few thoughts he has.");
 			outputText("\n\n\"<i>Woah s... bro, that was...</i>\" he sets his jaw thinks about it for a bit. With his balls emptied, he apparently can think clearly- at least for the next five minutes. \"..." + (silly() ? "Jawesome" : "Awesome") + ".\" He looks at you pressed into his chest and you see something different in his eyes - a hungry, predatory look which sends a small shiver down your spine. It is gone in the next instant though and he is clasping your shoulder, chummily punching you lightly across the face. \"<i>We are gonna have to do that again some time, bro. Cuz, I gotta be honest, you got one hell of a sweet ass.</i>\" You give him a coy smile and send him on his way with a slap to the butt. He stops halfway back to the stream as something slowly occurs to him. \"<i>Uh, no homo.</i>\"");
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			flags[kFLAGS.IZMAEL_ENTRAPPED]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);

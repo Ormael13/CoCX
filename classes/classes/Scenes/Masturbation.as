@@ -207,7 +207,7 @@ public class Masturbation extends BaseContent {
 					outputText("casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n");
 				}
 			}
-			else if (prison.inPrison) {
+			else if (prison.inPrison || (inDungeon && DungeonAbstractContent.dungeonLoc != -10 && flags[kFLAGS.PLAYER_COMPANION_1] != "")) {
 				outputText("You walk to a secluded corner" + player.clothedOrNakedLower(", remove your [lowergarment]") + " and sit down. ");
 			}
 			//In cabin
@@ -283,8 +283,8 @@ public class Masturbation extends BaseContent {
 				doNext(playerMenu);
 				return;
 			}
-			if (inDungeon && DungeonAbstractContent.dungeonLoc != -10) {
-				outputText("There is no way you could get away with masturbating in a place like this!  You'd better find your way back to camp if you want to take care of that.");
+			if (inDungeon && DungeonAbstractContent.dungeonLoc != -10 && flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+				outputText("There is no way you could get away with masturbating in a place like this!  You'd better find your way back to camp if you want to take care of that. Or find someone to guard you during the deed.");
 				doNext(playerMenu);
 				return;		
 			}
@@ -314,6 +314,9 @@ public class Masturbation extends BaseContent {
 				flags[kFLAGS.TIMES_MASTURBATED]++;
 				gildedCockTurbate();
 				return;
+			}
+			if (inDungeon && DungeonAbstractContent.dungeonLoc != -10 && flags[kFLAGS.PLAYER_COMPANION_1] != "") {
+				outputText("You go to the side, asking " + flags[kFLAGS.PLAYER_COMPANION_1] + " to guard you while taking some time off to relieve yourself.\n\n");
 			}
 			var autofellatio:Boolean = false;
 			var hermtastic:Boolean = false;
@@ -828,7 +831,11 @@ public class Masturbation extends BaseContent {
 					else outputText("You sigh and drift off to sleep."); //Genderless ending
 				}
 			}
-			doNext(camp.returnToCampUseOneHour);
+			if (inDungeon && DungeonAbstractContent.dungeonLoc != -10 && flags[kFLAGS.PLAYER_COMPANION_1] != "") {
+				cheatTime2(60);
+				doNext(playerMenu);
+			}
+			else doNext(camp.returnToCampUseOneHour);
 		}
 		
 		//Genderless people suck!

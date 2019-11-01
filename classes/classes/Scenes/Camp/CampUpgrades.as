@@ -31,9 +31,13 @@ flags[kFLAGS.MATERIALS_STORAGE_UPGRADES]:
 3 - Wood storage built
 4 - Stone storage built
 5 - Stone constructions guide bought
-6 - Sand storage built
-7 - Concrete storage built (unless building won't be req. so much of it to need another storage ^^ or just make one storage that will increase slightly both sand and concrete store space)
-(8 - Possible special materials storage/and or addidtional building guide for specific structures (fireproof dweeling that even with stones and concrete isn't enough?))
+?5a - expanding Wood storage?
+?5b - expanding Stones storage?
+?5c - expanding Nails storage?
+?6 - Sand storage built?
+?6a - water cystern or req. dam be high enough expanded to provide water in unlimited amount as if needed?
+?7 - Concrete storage built (unless building won't be req. so much of it to need another storage ^^ or just make one storage that will increase slightly both sand and concrete store space)?
+?(8 - Possible special materials storage/and or addidtional building guide for specific structures (fireproof dweeling that even with stones and concrete isn't enough?))?
 
 flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY]:
 1 - 1st Warehouse 1st part built
@@ -54,30 +58,40 @@ flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS]:
 2 - find the spot
 3 - dig a pool
 4 - add the wood walls
+?5 - expanding hot springs?
 
 flags[kFLAGS.CAMP_UPGRADES_SPARING_RING]:
 1 - unlocking building ring
-2 - ring build (small)
+2 - ring build (small) - 6x training time for npc's
+?3 - ring build (large) - 5x training time for npc's?	/NYI
+?4 - ring build (massive) - 4x training time for npc's?	/NYI
+?5 - ring build (massive w/ wood floor) - 3x training time for npc's?	/NYI
+?6 - ring build (massive w/ stone floor) - 2x training time for npc's?	/NYI
 
 flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE]:
 1 - first arcane circle
 2 - second arcane circle
 3 - third arcane circle
-?4 - 4th?
+?4 - fourth arcane circle?
+?5 - fifth arcane circle?
 
 flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD]:
 1 - readed Warding Tome
 2 - builded Ward / Inactive Ward
 3 - Active Ward
+?4 - ugrade magic ward to better protect camp?
+?5 - upgade range of protection fo ward?
 
 flags[kFLAGS.CAMP_UPGRADES_DAM]:
 1 - minor wood dam
-2 - major wood dam
-3 - minor stone dam
-4 - x
+2 - major wood dam	/NYI
+3 - minor stone dam	/NYI
+4 - major stone dam	/NYI
 
 flags[kFLAGS.CAMP_UPGRADES_FISHERY]:
-1 - fishery
+1 - fishery (grade 1)
+2 - fishery (grade 2)	/NYI
+2 - fishery (grade 3)	/NYI
 
 flags[kFLAGS.CAMP_UPGRADES_]:
 1 - 
@@ -200,6 +214,7 @@ private function doWoodStorageWork():void {
 	fatigueAmount -= player.spe / 10;
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
 	fatigueAmount /= (helpers + 1);
+	fatigueAmount = Math.round(fatigueAmount);
 	if (fatigueAmount < 10) fatigueAmount = 10;
 	fatigue(fatigueAmount);
 	if (helpers >= 2) {
@@ -269,6 +284,7 @@ private function doStoneStorageWork():void {
 	fatigueAmount -= player.spe / 10;
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
 	fatigueAmount /= (helpers + 1);
+	fatigueAmount = Math.round(fatigueAmount);
 	if (fatigueAmount < 10) fatigueAmount = 10;
 	fatigue(fatigueAmount);
 	if (helpers >= 2) {
@@ -378,6 +394,7 @@ private function do1stWarehouse1Work():void {
 	fatigueAmount -= player.spe / 10;
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
 	fatigueAmount /= (helpers + 1);
+	fatigueAmount = Math.round(fatigueAmount);
 	if (fatigueAmount < 10) fatigueAmount = 10;
 	fatigue(fatigueAmount);
 	if (helpers >= 2) {
@@ -447,6 +464,7 @@ private function do1stWarehouse2Work():void {
 	fatigueAmount -= player.spe / 10;
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
 	fatigueAmount /= (helpers + 1);
+	fatigueAmount = Math.round(fatigueAmount);
 	if (fatigueAmount < 10) fatigueAmount = 10;
 	fatigue(fatigueAmount);
 	if (helpers >= 2) {
@@ -523,6 +541,7 @@ private function doGranary1Work():void {
 	fatigueAmount -= player.spe / 10;
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
 	fatigueAmount /= (helpers + 1);
+	fatigueAmount = Math.round(fatigueAmount);
 	if (fatigueAmount < 10) fatigueAmount = 10;
 	fatigue(fatigueAmount);
 	if (helpers >= 2) {
@@ -592,6 +611,7 @@ private function doGranary2Work():void {
 	fatigueAmount -= player.spe / 10;
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
 	fatigueAmount /= (helpers + 1);
+	fatigueAmount = Math.round(fatigueAmount);
 	if (fatigueAmount < 10) fatigueAmount = 10;
 	fatigue(fatigueAmount);
 	if (helpers >= 2) {
@@ -668,6 +688,7 @@ private function do2ndWarehouse1Work():void {
 	fatigueAmount -= player.spe / 10;
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
 	fatigueAmount /= (helpers + 1);
+	fatigueAmount = Math.round(fatigueAmount);
 	if (fatigueAmount < 10) fatigueAmount = 10;
 	fatigue(fatigueAmount);
 	if (helpers >= 2) {
@@ -737,6 +758,7 @@ private function do2ndWarehouse2Work():void {
 	fatigueAmount -= player.spe / 10;
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
 	fatigueAmount /= (helpers + 1);
+	fatigueAmount = Math.round(fatigueAmount);
 	if (fatigueAmount < 10) fatigueAmount = 10;
 	fatigue(fatigueAmount);
 	if (helpers >= 2) {
@@ -999,6 +1021,7 @@ private function doDigAPoolWork():void {
 	fatigueAmount -= player.spe / 10;
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
 	fatigueAmount /= (helpers + 1);
+	fatigueAmount = Math.round(fatigueAmount);
 	if (fatigueAmount < 10) fatigueAmount = 10;
 	fatigue(fatigueAmount);
 	if (helpers >= 2) {
@@ -1066,6 +1089,7 @@ private function doAddAWoodenWallsWork():void {
 	fatigueAmount -= player.spe / 10;
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
 	fatigueAmount /= (helpers + 1);
+	fatigueAmount = Math.round(fatigueAmount);
 	if (fatigueAmount < 10) fatigueAmount = 10;
 	fatigue(fatigueAmount);
 	if (helpers >= 2) {
@@ -1303,6 +1327,7 @@ private function setUpMagicWard2():void {
 	fatigueAmount -= player.tou / 10;
 	fatigueAmount -= player.spe / 10;
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
+	fatigueAmount = Math.round(fatigueAmount);
 	if (fatigueAmount < 10) fatigueAmount = 10;
 	fatigue(fatigueAmount);
 	doNext(camp.returnToCampUseEightHours);
@@ -1358,6 +1383,7 @@ private function buildUpMinorWoodDam2():void {
 	fatigueAmount -= player.tou / 10;
 	fatigueAmount -= player.spe / 10;
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
+	fatigueAmount = Math.round(fatigueAmount);
 	if (fatigueAmount < 10) fatigueAmount = 10;
 	fatigue(fatigueAmount);
 	doNext(camp.returnToCampUseEightHours);
@@ -1387,6 +1413,7 @@ private function buildUpWoodDam2():void {
 	fatigueAmount -= player.tou / 10;
 	fatigueAmount -= player.spe / 10;
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 40;
+	fatigueAmount = Math.round(fatigueAmount);
 	if (fatigueAmount < 10) fatigueAmount = 10;
 	fatigue(fatigueAmount);
 	doNext(camp.returnToCampUseEightHours);
@@ -1416,6 +1443,7 @@ private function buildUpMajorWoodDam2():void {
 	fatigueAmount -= player.tou / 10;
 	fatigueAmount -= player.spe / 10;
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 60;
+	fatigueAmount = Math.round(fatigueAmount);
 	if (fatigueAmount < 10) fatigueAmount = 10;
 	fatigue(fatigueAmount);
 	doNext(camp.returnToCampUseEightHours);
@@ -1474,6 +1502,7 @@ private function buildUpFishery1Yes():void {
 	fatigueAmount -= player.tou / 10;
 	fatigueAmount -= player.spe / 10;
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
+	fatigueAmount = Math.round(fatigueAmount);
 	if (fatigueAmount < 10) fatigueAmount = 10;
 	fatigue(fatigueAmount);
 	doNext(camp.returnToCampUseEightHours);
@@ -1503,6 +1532,7 @@ private function buildUpFishery2Yes():void {
 	fatigueAmount -= player.tou / 10;
 	fatigueAmount -= player.spe / 10;
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
+	fatigueAmount = Math.round(fatigueAmount);
 	if (fatigueAmount < 10) fatigueAmount = 10;
 	fatigue(fatigueAmount);
 	doNext(camp.returnToCampUseEightHours);
@@ -1566,7 +1596,7 @@ public function checkMaterials():void {
 // ?button 5 - Kid A barrel changes?
 // ?button 6 - Behemoth lair upgr?
 // ?button 7 - Lith lair upgr? (Rycharde corr drider slave)
-// ?button 8 - Kimika(Kindra) living place upgr? (Adorable Sheep-morph archer with "a slight issue" ^^)
+// ?button 8 - (Kimika)Kindra living place upgr? (Adorable Sheep-morph archer with "a slight issue" ^^)
 // button 9 - previous page
 // ?button 10 - Helia + Helspawn living place?
 // button 14 - back

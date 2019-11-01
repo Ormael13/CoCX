@@ -5,10 +5,19 @@
 package classes.Scenes.Places.HeXinDao 
 {
 	import classes.*;
+	import classes.BodyParts.Arms;
+	import classes.BodyParts.Eyes;
+	import classes.BodyParts.Face;
+	import classes.BodyParts.Horns;
+	import classes.BodyParts.LowerBody;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.SceneLib;
 	import classes.BodyParts.Tail;
 	import classes.Scenes.Dungeons.RiverDungeon;
+	import classes.Items.ArmorLib;
+	import classes.Items.ShieldLib;
+	import classes.Items.WeaponLib;
+	import classes.Items.WeaponRangeLib;
 	
 	public class JourneyToTheEast extends HeXinDaoAbstractContent
 	{
@@ -34,6 +43,10 @@ package classes.Scenes.Places.HeXinDao
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 1) addButton(11, "ShieldMaiden", firstTimeMeetingNeisa);
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 2) addButton(11, "Neisa", meetingNeisaAfterDecline);
 			//if (flags[kFLAGS.NEISA_FOLLOWER] == 4) addButton(11, "Neisa", meetingNeisaPostDungeonExploration);
+			if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 2 && (player.humanScore() >= (player.humanMaxScore() - player.internalChimeraScore()))) {
+				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 1) addButton(13, "???", firstTimeMeetingNekomataBoy).hint("A strange cat morph with two tails is sitting at one of the tables muttering to himself.");
+				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 1) addButton(13, "???", firstTimeMeetingNekomataBoy).hint("A strange cat morph with two tails is sitting at one of the tables muttering to himself.");
+			}
 			addButton(14, "Leave", heXinDao.riverislandVillageStuff);
 		}
 		
@@ -138,7 +151,7 @@ package classes.Scenes.Places.HeXinDao
 			else {
 				addButtonDisabled(4, "Demons", "Only for Iron tier Adventurer.");
 			}
-			//addButton(5, "Gel", BoardkeeperYangQuestGel).hint("Copper tier Quest.");
+			addButton(5, "Gel", BoardkeeperYangQuestGel).hint("Copper tier Quest.");
 			addButton(6, "Chitin", BoardkeeperYangQuestChitin).hint("Copper tier Quest.");
 			if (flags[kFLAGS.GALIA_LVL_UP] == 0.53 || (flags[kFLAGS.GALIA_LVL_UP] >= 0.5 && flags[kFLAGS.GALIA_TALKS] > 0)) addButtonDisabled(10, "Ferals (C)", "You already finished this quest.");
 			else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) >= 2) {
@@ -781,6 +794,118 @@ package classes.Scenes.Places.HeXinDao
 			//addButton(1, "Yes", firstTimeMeetingNeisaYes);
 			//addButton(3, "No", firstTimeMeetingNeisaNo);
 			addButton(4, "Back", curry(enteringInn, false));
+		}
+		
+		public function firstTimeMeetingNekomataBoy():void {
+			clearOutput();
+			if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 1) {
+				outputText("You wave again at the sketchy cat morph.\n\n");
+				outputText("\"<i>Hey it's you the human! Have you thought it through and are you ready to take on my offer? There's 3000 gems down the line if you say yes.</i>\"\n\n");
+			}
+			else {
+				outputText("You wave at the weird cat morph who lifts his eyes from his drink to acknowledge you then opens his eyes wide in surprise.\n\n");
+				outputText("\"<i>A real human, here of all places? You just came at the perfect time "+player.mf("mister","miss")+"!</i>\"\n\n");
+				outputText("The perfect time?\n\n");
+				outputText("\"<i>I am a researcher studying the flow of Chi in the human body, the spiritual energy outsiders calls soulforce. I would like you to assist me in proving my thesis that humans are naturally disposed to soulforce.</i>\"\n\n");
+				outputText("What is in it for you?\n\n");
+				outputText("\"<i>Gems… how about three thousand? I know you outsiders have no interest in spirit stones and all I need is your collaboration here and now.</i>\"\n\n");
+				outputText("Why now… he sure did make an interesting offer. Do you shake hands and seal the deal with him?"+(flags[kFLAGS.PATCHOULI_FOLLOWER] >= 2 ? " Something tells you cats morph aren't exactly the most trustworthy of people. It might be Patchouli who's getting in your head again.":"")+"\n\n");
+			}
+			menu();
+			addButton(1, "No", firstTimeMeetingNekomataBoyNo);
+			addButton(3, "Yes", firstTimeMeetingNekomataBoyYes);
+		}
+		public function firstTimeMeetingNekomataBoyNo():void {
+			outputText("Yeah no, this is looking too good to be true and truth be told it likely is. You tell the sketchy cat you will pass on it for now and head back towards the bar.\n\n");
+			flags[kFLAGS.CURSE_OF_THE_JIANGSHI] = 1;
+			doNext(curry(enteringInn,false));
+		}
+		public function firstTimeMeetingNekomataBoyYes():void {
+			clearOutput();
+			outputText("You shake hand with the twin tailed cat morph.\n\n");
+			outputText("\"<i>It's a deal! Now come over to my house, I will get those tests done fast and then you can leave three thousand gems richer.</i>\"\n\n");
+			outputText("He leads you to a big house at the far side of town and once inside, shows you the way to his lobby.\n\n");
+			outputText("\"<i>After you, just go sit in the chair on the side, close your eyes and relax.</i>\"\n\n");
+			outputText("You walk down the stairs then head for a chair to the side but just as you head for the seat you're suddenly struck by something heavy behind the head.\n\n");
+			flags[kFLAGS.CURSE_OF_THE_JIANGSHI] = 2;
+			doNext(firstTimeMeetingNekomataBoyYesPart2);
+		}
+		public function firstTimeMeetingNekomataBoyYesPart2():void {
+			clearOutput();
+			outputText("You wake up a few minutes later strapped to what appears to be a table. Your mind feels hazy, as if you were floating in the fog.\n\n");
+			outputText("\"<i>Awake so soon? Well I guess that’s fine, it’s not like I don't enjoy when they struggle anyway. Can you even hear me in there? Well that's unlikely, what with all the sedative I injected in you, couldn't afford you waking and putting up a fight while I was playing dress up right?</i>\"\n\n");
+			outputText("The cat morph chuckles to himself and you indeed notice the guy took his time to rid you of your armor, weaponry and other troublesome equipment. You're now dressed in what appears to be traditional oriental clothes fit for a "+player.mf("man","woman albeit of a somewhat riské style")+", he even took the time to braid your hair.\n\n");
+			outputText("\"<i>See I have a client up there who is VERY fond of humans… human sex slaves that is. This guy likes his slaves obedient and always ready to serve with the bare minimum willpower yet willing and capable of defending him. Friend, it so happens that the slave market is an ever evolving business, one I intend to get rich with, so you’re going to help me with that. Did you know that by ");
+			outputText("violently stripping potential slaves of their life forces, pouring a decent amount of corruption and making them energy dependant, you can create effiencient and willing sex zombies? You of all people shall become the fruit of my years of research into creating the perfect slave, I call this new model of sex zombie, Jiangshi. First things first though, let's make you better looking.</i>\"\n\n");
+			outputText("You try to protest but before you know it the mad cat grabs what appears to be a paper tag and sticks it to your forehead. The cat chuckles.\n\n");
+			outputText("\"<i>Don't you worry it will all be over soon, the suffering is momentary if there is any. All you will think about is sex and within seconds you will be too empty headed to care about anything else.</i>\"\n\n");
+			if (player.gender > 1 && player.biggestTitSize() > 0) {
+				outputText("You moan, confused as your breast begin to heat up and inflate, your nipples stiffening as your boobs balloons in to ");
+				if (player.biggestTitSize() < 7) {
+					outputText("a pretty impressive E.");
+					player.growTits((7 - player.biggestTitSize()), 1, false, 3);
+				}
+				else {
+					player.growTits(1, 1, false, 3);
+					outputText("a pretty impressive " + player.biggestTitSize() + ".");
+				}
+				if (player.hasCock()) outputText(" This said the transformation doesn't end there as heat begins to move down to your crotch.");
+			}
+			if (player.gender == 1) {
+				outputText(" Your penis suddenly begins to drip pre as you immediately go erect, the blood vessels pulsing purple as if your cock was possessed while your member inflates in size, gaining five extra inches!");
+				player.increaseCock(0, 5);
+			}
+			if (player.femininity > 50) player.femininity = 100;
+			else player.femininity = 0;
+			outputText(" The sexual changes are so intense you cum at once, your expression turning vacant. Your face begins to tingle as the magic alters your hormones, maxing out your "+player.mf("masculinity","femininity")+", you sure must look great right now. It'd be nice if it ended there but it doesn't, you watch in horror as your skin begins to bleach out, becoming paler by the second. You hear the last ");
+			outputText("of your heartbeat a few seconds later before it falls silent. Your body stiffens to mimic this inertia, moving your joints is going to be difficult. Despite all this your sensations don't all die out, instead you begin to hear a different kind of heartbeat, the cat’s cock looks increasingly tempting now. How do you know it has a cock? It'd be a simple guess if not for the fact ");
+			outputText("that you can smell and literally see his soulforce accumulating at his crotch. You need to get off this table and get to it, you yearn for it desperately. Food… this thing is food! Your mind begins to recede into a sluggish state, all of your thoughts focusing on sex. You voice your need with a long dim witted moan, trying to reach for the cat morph’s robe with your stiff yet tied up arms.\n\n");
+			outputText("\"<i>Looks like the changes are about over, Ahh don't I love that vacant stupid expression of yours, that’s the look of just anybody who can only think about dicks and cunts. So, since you’re already this eager, how about you took a direct taste of mine, Eh???</i>\"\n\n");
+			outputText("He grins wide and opens up his wizard robe, revealing the hardening cock you have been focusing on all this time before he unstraps you from the table and lets you get up on your own. Without hesitation you take his cock inside your mouth. He grumbles to himself, annoyed at your sluggish somewhat stiff motions but you still manage to properly suck him.\n\n");
+			outputText("\"<i>Um, I didn't consider rigor mortis in my calculation, I will need to mention this hiccup to the client… at least "+player.mf("he","she")+" makes up for the clumsy moves with sheer determination and relentlessness.</i>\"\n\n");
+			outputText("A few seconds later he finally orgasms, causing that amassed energy in his cock to flood down your throat in a white cascade. You almost faint as pleasure floods your head along with his energy yet thoughts becomes increasingly clearer as this seems to not only restore your mind but also sharpen it, heck not just your mind but your movement also becomes more fluid. ");
+			outputText("It would seem your torturer messed up something in the charm and instead of removing your free will only emptied you of it, turning you into some kind of energy vampire that gets dumber when starved. Well your face might be stuck in that zombie like expression right now but your mind is racing as you take full awareness of the situation, and how easily it would be to turn the tables on your captor.\n\n");
+			outputText("Satisfied with fucking your throat, the cat morph heads to the back of the room to retrieve a big box, likely the one he intended for you to lay into until he shipped you to whatever asshole serves as his client. Poor guy thinks you're too stupid to attempt anything. He gets one hell of a surprise as you grab his left arm with until now unprecedented agility, immobilizing him and begin ");
+			outputText("to drink directly from the tap of his life force through your hand. He did say something about making you capable of guarding your master too, right? Seems he loaded you with quite a few upgrades. Guess he didn't account for the risks of getting overwhelmed by his own creations as you literally drain his soulforce until he passes out. ");
+			outputText("You let him fall limply on the ground and look at him, he has foam at the mouth. Geeze your nails are poisonous too? While you doubt you killed him, you don't want him to just get away with this either so you dump him in the box he originally reserved for you and lock him up.\n\n");
+			outputText("Thinking your problems to be over, you attempt to remove the cursed spell tag on your forehead but to your surprise it just doesn't come off. Guess you're stuck into this weird zombie like existence until you can find someone to help you with this. You literally hop out of the mage’s house, arm stretched forward, and head back to camp.\n\n");
+			if (rand(2) == 0) player.skinTone = "ghostly pale";
+			else player.skinTone = "light blue";
+			player.faceType = Face.JIANGSHI;
+			player.eyes.type = Eyes.JIANGSHI;
+			player.eyes.colour = "turquoise";
+			player.horns.type = Horns.SPELL_TAG;
+			player.horns.count = 1;
+			player.arms.type = Arms.JIANGSHI;
+			player.lowerBody = LowerBody.JIANGSHI;
+			player.createPerk(PerkLib.HaltedVitals, 0, 0, 0, 0);
+			player.createPerk(PerkLib.SuperStrength, 0, 0, 0, 0);
+			player.createPerk(PerkLib.PoisonNails, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Rigidity, 0, 0, 0, 0);
+			player.createPerk(PerkLib.LifeLeech, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Undeath, 0, 0, 0, 0);
+			player.createPerk(PerkLib.EnergyDependent, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.EnergyDependent, 0, 0, 0, 0);
+			if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD]++;
+			if (player.weapon != WeaponLib.FISTS && flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 1) {
+				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 1) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 2;
+				player.setWeapon(WeaponLib.FISTS);
+				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
+			}
+			if (player.weaponRange != WeaponRangeLib.NOTHING) {
+				player.setWeaponRange(WeaponRangeLib.NOTHING);
+				flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = player.weaponRange.id;
+			}
+			if (player.shield != ShieldLib.NOTHING && flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 1) {
+				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 1) flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 2;
+				player.setShield(ShieldLib.NOTHING);
+				flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID] = player.shield.id;
+			}
+			if (player.armor != ArmorLib.NOTHING) {
+				player.setArmor(armors.TRADITC);
+				flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] = player.armor.id;
+			}
+			doNext(camp.returnToCampUseFourHours);
 		}
 		
 		public function ChiChiDrunkSex():void {

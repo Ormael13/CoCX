@@ -167,8 +167,8 @@ public function alraunezeMe():void {
 		outputText("<i>\"Well, aren’t you sweet? So envious of me and Hollicyntia that you tried to become a flower yourself! Your level of devotion to your goddess is truly touching. How about I remake you, improve you, all while giving you what you truly desire? Then, adopt you as my fully fledged daughter? My first real convert to the new religion? Think of it as a... final reward.</i>\"");
 	}
 	menu();
-	addButton(0, "No", alraunezeMeNo).hint("");
-	addButton(1, "Yes", alraunezeMeYes).hint("");
+	addButton(1, "No", alraunezeMeNo);
+	addButton(3, "Yes", alraunezeMeYes);
 }
 
 private function alraunezeMeNo():void {

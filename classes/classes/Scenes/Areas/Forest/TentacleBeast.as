@@ -16,7 +16,8 @@ public class TentacleBeast extends Monster
 		
 		private function tentaclePhysicalAttack():void {
 			outputText("The shambling horror throws its tentacles at you with a murderous force.\n");
-			var temp:int = int((str + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
+			var temp:int = int((str + weaponAttack) - Math.random() * (player.tou) - player.armorDef);
+			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) temp += str + weaponAttack;
 			if(temp < 0) temp = 0;
 			//Miss
 			if(temp == 0 || (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80)) {
@@ -79,22 +80,25 @@ public class TentacleBeast extends Monster
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (hpVictory) {
-				outputText("Overcome by your wounds, you turn to make a last desperate attempt to run...\n\n");
-				if (hasStatusEffect(StatusEffects.PhyllaFight)) {
-					removeStatusEffect(StatusEffects.PhyllaFight);
-					outputText("...and make it into the nearby tunnel.  ");
-					SceneLib.desert.antsScene.phyllaTentaclePCLoss();
-				} else
-					SceneLib.forest.tentacleBeastScene.tentacleLossRape();
-			} else {
-				outputText("You give up on fighting, too aroused to resist any longer.  Shrugging, you walk into the writhing mass...\n\n");
-				if(hasStatusEffect(StatusEffects.PhyllaFight)) {
-					removeStatusEffect(StatusEffects.PhyllaFight);
-					outputText("...but an insistent voice rouses you from your stupor.  You manage to run into a nearby tunnel.  ");
-					SceneLib.desert.antsScene.phyllaTentaclePCLoss();
-				} else
-					doNext(SceneLib.forest.tentacleBeastScene.tentacleLossRape);
+			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) SceneLib.dungeons.ebonlabyrinth.defeatedByAncientTentacleBeast();
+			else {
+				if (hpVictory) {
+					outputText("Overcome by your wounds, you turn to make a last desperate attempt to run...\n\n");
+					if (hasStatusEffect(StatusEffects.PhyllaFight)) {
+						removeStatusEffect(StatusEffects.PhyllaFight);
+						outputText("...and make it into the nearby tunnel.  ");
+						SceneLib.desert.antsScene.phyllaTentaclePCLoss();
+					} else
+						SceneLib.forest.tentacleBeastScene.tentacleLossRape();
+				} else {
+					outputText("You give up on fighting, too aroused to resist any longer.  Shrugging, you walk into the writhing mass...\n\n");
+					if(hasStatusEffect(StatusEffects.PhyllaFight)) {
+						removeStatusEffect(StatusEffects.PhyllaFight);
+						outputText("...but an insistent voice rouses you from your stupor.  You manage to run into a nearby tunnel.  ");
+						SceneLib.desert.antsScene.phyllaTentaclePCLoss();
+					} else
+						doNext(SceneLib.forest.tentacleBeastScene.tentacleLossRape);
+				}
 			}
 		}
 
@@ -112,9 +116,9 @@ public class TentacleBeast extends Monster
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 				this.short = "ancient tentacle beast";
 				this.long = "You see the titanic, shambling form of the tentacle beast before you.  Appearing as a massive shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.";
-				initStrTouSpeInte(219, 270, 75, 135);
-				initWisLibSensCor(120, 270, 60, 100);
-				this.weaponAttack = 10;
+				initStrTouSpeInte(292, 320, 150, 120);
+				initWisLibSensCor(100, 270, 60, 100);
+				this.weaponAttack = 50;
 				this.armorDef = 90;
 				this.armorMDef = 20;
 				this.bonusHP = 4000;
@@ -168,7 +172,6 @@ public class TentacleBeast extends Monster
 			this.drop = new WeightedDrop(null, 1);
 			this.special1 = tentaclePhysicalAttack;
 			this.special2 = tentacleEntwine;
-			this.special3 = tentaclePhysicalAttack;
 			this.tailType = Tail.DEMONIC;
 			checkMonster();
 		}

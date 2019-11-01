@@ -58,6 +58,11 @@ public class LowerBody extends SaveableBodyPart {
 	public static const MOUSE:int	          	  = 48;
 	public static const HINEZUMI:int	          = 49;
 	public static const BEAR:int		          = 50;
+	public static const HYDRA:int		          = 51;
+	public static const FIRE_SNAIL:int		      = 52;
+	public static const GHOST:int			      = 53;
+	public static const GHOST_2:int			      = 54;
+	public static const JIANGSHI:int			  = 55;
 	// Don't forget to add new types in DebugMenu.as list LOWER_TYPE_CONSTANTS
 	
 	override public function set type(value:int):void {
@@ -66,6 +71,7 @@ public class LowerBody extends SaveableBodyPart {
 		switch (value) {
 			case GOO:
 			case NAGA:
+			case HYDRA:
 				legCount = 1;
 				break;
 			case AVIAN:
@@ -149,6 +155,7 @@ public class LowerBody extends SaveableBodyPart {
 			case HOOFED: return "legs";
 			case DOG:  return "legs";
 			case NAGA: return "snake-like coils";
+			case HYDRA: return "snake-like coils";
 			case GOO:  return "mounds of goo";
 			case PONY: return "cute pony-legs";
 			case BUNNY: {
@@ -201,6 +208,8 @@ public class LowerBody extends SaveableBodyPart {
 				return "leg";
 			case NAGA:
 				return "snake-tail";
+			case HYDRA:
+				return "hydra-tail";
 			case CENTAUR:
 				return "equine leg";
 			case GOO:
@@ -242,6 +251,7 @@ public class LowerBody extends SaveableBodyPart {
 			case HOOFED: return "hooves";
 			case DOG: return "paws";
 			case NAGA: return "coils";
+			case HYDRA: return "coils";
 			case CENTAUR: return "hooves";
 			case DEMONIC_HIGH_HEELS: return "demonic high-heels";
 			case DEMONIC_CLAWS: return "demonic foot-claws";
@@ -287,6 +297,7 @@ public class LowerBody extends SaveableBodyPart {
 			case HOOFED: return "hoof";
 			case DOG: return "paw";
 			case NAGA: return "coiled tail";
+			case HYDRA: return "coiled tail";
 			case CENTAUR: return "hoof";
 			case GOO: return "slimey undercarriage";
 			case PONY: return "flat pony-foot";
@@ -334,7 +345,7 @@ public class LowerBody extends SaveableBodyPart {
 		return legCount == 2;
 	}
 	public function isNaga():Boolean {
-		return type == NAGA;
+		return type == NAGA || type == HYDRA;
 	}
 
 	public function isTaur():Boolean {

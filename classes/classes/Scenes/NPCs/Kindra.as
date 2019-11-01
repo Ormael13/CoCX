@@ -116,15 +116,13 @@ use namespace CoC;
 		
 		override protected function performCombatAction():void
 		{
-			if (flags[kFLAGS.KINDRA_LVL_UP] >= 7) {
-				if (HPRatio() < .5 && soulforce >= 100 && !hasStatusEffect(StatusEffects.MonsterVPT)) {
-					outputText("Kindra eyes starts to glow with a violet hua and you can see all of her wounds are now slowly healing.\n");
-					createStatusEffect(StatusEffects.MonsterVPT, 200, 0, 0, 0);
-				}
-				if (hasStatusEffect(StatusEffects.MonsterVPT)) {
-					if (HPRatio() > .9 || soulforce < 100) removeStatusEffect(StatusEffects.MonsterVPT);
-					else soulforce -= 100;
-				}
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 7 && HPRatio() < .5 && soulforce >= 100 && !hasStatusEffect(StatusEffects.MonsterVPT)) {
+				outputText("Kindra eyes starts to glow with a violet hue and you can see all of her wounds are now slowly healing.\n");
+				createStatusEffect(StatusEffects.MonsterVPT, 200, 0, 0, 0);
+			}
+			if (hasStatusEffect(StatusEffects.MonsterVPT)) {
+				if (HPRatio() > .9 || soulforce < 100) removeStatusEffect(StatusEffects.MonsterVPT);
+				else soulforce -= 100;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 11) {
 				if (fatigue < (maxFatigue() - (bowShooting() * 6))) {
@@ -385,6 +383,18 @@ use namespace CoC;
 				this.bonusHP = 450;
 				this.level = 75;
 			}
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 6) {
+				this.drop = new ChainedDrop().
+						add(consumables.BAGOCA3,0.2).
+						add(consumables.MG_SFRP,0.3).
+						add(consumables.SHEEPMK,0.6);
+			}
+			else {
+				this.drop = new ChainedDrop().
+						add(consumables.BAGOCA2,0.2).
+						add(consumables.LG_SFRP,0.3).
+						add(consumables.SHEEPMK,0.6);
+			}
 			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_TIGHT);
 			createBreastRow(Appearance.breastCupInverse("C"));
 			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
@@ -401,9 +411,6 @@ use namespace CoC;
 			this.lust = 20;
 			this.lustVuln = .95;
 			this.gems = 0;
-			this.drop = new ChainedDrop().
-					add(consumables.LG_SFRP,0.3).
-					add(consumables.SHEEPMK,0.6);
 			this.createPerk(PerkLib.JobRanger, 0, 0, 0, 0);
 			this.createPerk(PerkLib.BasicEndurance, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ArchersStaminaI, 0, 0, 0, 0);
@@ -414,6 +421,7 @@ use namespace CoC;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 1) {
 				this.createPerk(PerkLib.BasicSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.HclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 				this.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 2) {
@@ -434,6 +442,7 @@ use namespace CoC;
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 7) {
 				this.createPerk(PerkLib.ArchersStaminaI, 0, 0, 0, 0);
 				this.createPerk(PerkLib.PrestigeJobArcaneArcher, 0, 0, 0, 0);
+				this.createPerk(PerkLib.GclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 				this.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 8) {

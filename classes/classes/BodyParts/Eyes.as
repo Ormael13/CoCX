@@ -26,6 +26,10 @@ public class Eyes extends BodyPart {
 	public static const CAVE_WYRM:int		     = 21;
 	public static const HINEZUMI:int		     = 22;
 	public static const BEAR:int			     = 23;
+	public static const DISPLACER:int			 = 24;
+	public static const FIRE_SNAIL:int			 = 25;
+	public static const GHOST:int				 = 26;
+	public static const JIANGSHI:int			 = 27;
 	// Don't forget to add new types in DebugMenu.as list EYE_TYPE_CONSTANTS
 	
 	public var colour:String = "brown";

@@ -49,8 +49,11 @@ use namespace CoC;
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (flags[kFLAGS.DISPLACER_BEAST_WINS] < 1) flags[kFLAGS.DISPLACER_BEAST_WINS] = 1;
-			SceneLib.displacerbeastScene.displacerBeastDefeat();
+			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) SceneLib.dungeons.ebonlabyrinth.defeatedByDisplacerBeast();
+			else {
+				if (flags[kFLAGS.DISPLACER_BEAST_WINS] < 1) flags[kFLAGS.DISPLACER_BEAST_WINS] = 1;
+				SceneLib.displacerbeastScene.displacerBeastDefeat();
+			}
 		}
 		
 		override public function get long():String {
@@ -95,7 +98,7 @@ use namespace CoC;
 			this.drop = new ChainedDrop().
 					add(useables.EBONBLO,1/20).
 					add(consumables.D_FRUIT,0.7);
-			this.createStatusEffect(StatusEffects.EvasiveTeleport, 0, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.EvasiveTeleport, 190, 0, 0, 0);
 			checkMonster();
 		}
 	}

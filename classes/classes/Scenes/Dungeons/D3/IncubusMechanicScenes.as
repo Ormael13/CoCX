@@ -6,6 +6,7 @@ import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.PregnancyStore;
+import classes.StatusEffects;
 import classes.Scenes.Dungeons.Factory.IncubusMechanic;
 import classes.Scenes.SceneLib;
 
@@ -520,6 +521,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 
 			outputText("\n\nShaking your head, you clear away the errant thoughts and focus on the battles to come.");
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.orgasm();
 			dynStats("cor+", 5);
 

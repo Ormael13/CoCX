@@ -33,17 +33,17 @@ public class HarpyMob extends Monster
 		
 		public function harpyHordeGangBangStruggle(clearDisp:Boolean = true):void {
 			if(clearDisp) clearOutput();
+			//Success: 
+			if((rand(10) == 0 && player.str/5 + rand(20) >= 23) || player.hasPerk(PerkLib.FluidBody)) {
+				player.removeStatusEffect(StatusEffects.HarpyBind);
+				outputText("With a mighty roar, you throw off the harpies grabbing you and return to the fight!");
+			}
 			//Failure: 
 			//If fail:
-			if(rand(10) > 0 && player.str/5 + rand(20) < 23) {
+			else {
 				var damage:Number = 80 + rand(40);
 				outputText("You struggle in the harpies' grasp, but can't quite get free.  The brood continues to hammer away at your defenseless self. ");
 				damage = player.takePhysDamage(damage, true);
-			}
-			//Success: 
-			else {
-				player.removeStatusEffect(StatusEffects.HarpyBind);
-				outputText("With a mighty roar, you throw off the harpies grabbing you and return to the fight!");
 			}
 		}
 		

@@ -37,7 +37,9 @@ import classes.internals.*;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(hasStatusEffect(StatusEffects.PhyllaFight)) {
+			/*if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
+				SceneLib.mountain.minotaurScene.minoVictoryRapeChoices();
+			} else */if (hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);
 				outputText("You defeat a minotaur!  ", true);
 				SceneLib.desert.antsScene.phyllaBeatAMino();
@@ -48,7 +50,9 @@ import classes.internals.*;
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(hasStatusEffect(StatusEffects.PhyllaFight)) {
+			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
+				SceneLib.mountain.minotaurScene.getRapedByMinotaur();
+			} else if (hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);
 				SceneLib.desert.antsScene.phyllaPCLostToMino();
 			} else if (pcCameWorms){
@@ -76,8 +80,8 @@ import classes.internals.*;
 			trace(game.flags);
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 				this.short = "labyrinth minotaur";
-				initStrTouSpeInte(225, 210, 105, 60);
-				initWisLibSensCor(60, 80 + this.ballSize * 3, 30 + this.ballSize * 3, 35);
+				initStrTouSpeInte(350, 300, 175, 100);
+				initWisLibSensCor(100, 120 + this.ballSize * 3, 45 + this.ballSize * 3, 35);
 				this.weaponName = "pair of deadly battle axes";
 				this.weaponVerb = "cleave";
 				this.weaponAttack = 100;

@@ -172,6 +172,7 @@ package classes.Scenes.Areas.Forest
 			player.createPerk(PerkLib.BicornBlessing, 0, 0, 0, 0);
 			player.cor = 100;
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
 			player.addStatusValue(StatusEffects.CanMeetNightmare, 1, 1);
 			CelessScene.instance.nightmareDefeated();

@@ -47,6 +47,7 @@ public class Skin extends SaveableBodyPart {
 	public static const AQUA_RUBBER_LIKE:int      = 19;
 	public static const TATTOED_ONI:int           = 20;
 	public static const FEATHER:int 	          = 21;
+	public static const TRANSPARENT:int 	      = 22;
 	// Don't forget to add new types in DebugMenu.as lists SKIN_BASE_TYPES or SKIN_COAT_TYPES
 	
 	public static const PATTERN_NONE:int = 0;
@@ -59,6 +60,7 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_LIGHTNING_SHAPED_TATTOO:int = 7;
 	public static const PATTERN_RED_PANDA_UNDERBODY:int = 8;
 	public static const PATTERN_SCAR_SHAPED_TATTOO:int = 9;
+	public static const PATTERN_WHITE_BLACK_VEINS:int = 10;
 	// Don't forget to add new types in DebugMenu.as lists SKIN_BASE_TYPES or SKIN_COAT_TYPES
 	
 	public var base:SkinLayer;
@@ -96,6 +98,10 @@ public class Skin extends SaveableBodyPart {
 	}
 	public function get adj():String {
 		return skinValue(base.adj, coat.adj);
+	}
+	public function get pattern():int {
+		if (coverage >= COVERAGE_NONE && coat.pattern != PATTERN_NONE) return coat.pattern;
+		return base.pattern;
 	}
 	/**
 	 * Returns `s` (default "is") if the skin main layer noun is singular (skin,fur,chitin)
@@ -268,6 +274,9 @@ public class Skin extends SaveableBodyPart {
 	public function hasGooSkin():Boolean {
 		return base.isAny(GOO);
 	}
+	public function hasGhostSkin():Boolean {
+		return base.isAny(TRANSPARENT);
+	}
 	public function hasFeather():Boolean {
 		return coat.isAny(FEATHER);
 	}
@@ -294,6 +303,9 @@ public class Skin extends SaveableBodyPart {
 	}
 	public function hasScarShapedTattoo():Boolean {
 		return base.pattern == PATTERN_SCAR_SHAPED_TATTOO;
+	}
+	public function hasWhiteBlackVeins():Boolean {
+		return base.pattern == PATTERN_WHITE_BLACK_VEINS;
 	}
 	override public function restore(keepTone:Boolean = true):void {
 		coverage = COVERAGE_NONE;
@@ -373,6 +385,8 @@ public class Skin extends SaveableBodyPart {
 		 PLAIN, COVERAGE_NONE, 0],
 		[FEATHER,
 		 PLAIN, COVERAGE_HIGH, FEATHER],
+		[TRANSPARENT,
+		 TRANSPARENT, COVERAGE_NONE, 0],
 	]);
 	private static const TYPE_TO_BASE:Object               = TYPE_TO_BASE_COVERAGE_COAT[0];
 	private static const TYPE_TO_COVERAGE:Object           = TYPE_TO_BASE_COVERAGE_COAT[1];

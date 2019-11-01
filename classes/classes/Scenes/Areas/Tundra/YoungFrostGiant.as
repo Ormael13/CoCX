@@ -52,6 +52,7 @@ import classes.internals.WeightedDrop;
 		}
 		public function youngGiantGrabStruggle():void {
 			if (rand(200) >= player.str || rand(10) == 0) youngGiantGrabFail();
+			else if (player.hasPerk(PerkLib.FluidBody)) youngGiantGrabSuccess();
 			else youngGiantGrabSuccess();
 		}
 		public function youngGiantGrabFail(struggle:Boolean = true):void {

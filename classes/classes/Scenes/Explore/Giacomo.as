@@ -104,7 +104,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			}
 			menu();
 			addButton(0, "Potions", potionMenu);
-			addButton(1, "Books", bookMenu);
+			addButton(1, "Books/Misc", bookMenu);
 			addButton(2, "Erotica", eroticaMenu);
 			if (player.hasStatusEffect(StatusEffects.WormOffer) && player.hasStatusEffect(StatusEffects.Infested)) addButton(3, "Worm Cure", wormRemovalOffer);
 			addButton(4, "Leave", camp.returnToCampUseOneHour);
@@ -152,6 +152,8 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			addButton(5, "White Book", pitchWhiteBook);
 			addButton(6, "Black Book", pitchBlackBook);
 			if (player.findPerk(PerkLib.PrestigeJobGreySage) >= 0) addButton(7, "Grey Book", pitchGreyBook);
+			else addButtonDisabled(7, "???", "Req. Prestige Job: Grey Sage");
+			addButton(10, "Torch", pitchTorch);
 			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
 		}
@@ -407,6 +409,34 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				statScreenRefresh();
 			}
 			doNext(bookMenu);
+		}
+		
+		private function pitchTorch():void {
+			spriteSelect(23);
+			clearOutput();
+			if (player.hasKeyItem("Torch") >= 0) {
+				outputText("<b>You already have Torch.</b>");
+				doNext(bookMenu);
+				return;
+			}
+			outputText("Giacomo shrugs.  \"<i>You may think this item to be unnecessary but it’s in the kit of any smart adventurers wishing to explore nowadays, who knows it might even save your life. Only 100 gems, I recommend it, really.</i>\"");
+			doYesNo(buyTorch, bookMenu);
+		}
+		
+		private function buyTorch():void {
+			spriteSelect(23);
+			clearOutput();
+			if (player.gems < 100) {
+				outputText("\n\nGiacomo sighs, indicating you need 100 gem to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("\n\nThe crazy merchant nods satisfied when you hand him over hundred gems and in exchange gives you a torch.");
+				player.gems -= 100;
+				statScreenRefresh();
+				player.createKeyItem("Torch", 0, 0, 0, 0);
+				doNext(bookMenu);
+			}
 		}
 		
 		private function pitchWhiteBook():void {

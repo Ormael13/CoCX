@@ -36,7 +36,7 @@ public class Scorpinum extends Consumable {
 			outputText("\n\nAfter drinking the potion, you feel a bit tougher.");
 			dynStats("tou", 1);
 		}
-		if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
+		if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
 		//gain scorpion tail
 		if (changes < changeLimit && player.tailType != Tail.SCORPION && player.tailType != Tail.GARGOYLE && rand(2) == 0) {
 			if (player.tailType != Tail.NONE) outputText("\n\nPainful swelling just above your " + Appearance.buttDescription(player) + " doubles you over, and you hear the sound of your tail dropping off onto the ground!  Before you can consider the implications, the pain gets worse, and you feel your backside bulge outward sickeningly, cracking and popping as a segmented scorpion-like tail grows in place of your old one.  It grows large enough to be impossible to hide, and with a note of finality, your stinger slides free with an audible 'snick'.  <b>You have a scorpion tail.</b>");

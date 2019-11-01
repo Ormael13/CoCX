@@ -254,6 +254,7 @@ public class CeraphScene extends NPCAwareContent
 			player.orgasm();
 			dynStats("lib", 3, "sen", 3, "cor", 1);
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
             if (CoC.instance.inCombat)
                 cleanupAfterCombat();

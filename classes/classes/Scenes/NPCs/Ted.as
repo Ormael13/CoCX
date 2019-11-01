@@ -9,6 +9,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.internals.WeightedDrop;
 
 use namespace CoC;
 	
@@ -146,6 +147,9 @@ use namespace CoC;
 				this.a = "the ";
 				this.short = "mysterious dragon-boy";
 			}
+			if (flags[kFLAGS.TED_LVL_UP] >= 6) this.drop = new WeightedDrop(consumables.BAGOCA3, 1);
+			else if (flags[kFLAGS.TED_LVL_UP] >= 3 && flags[kFLAGS.TED_LVL_UP] < 6) this.drop = new WeightedDrop(consumables.BAGOCA2, 1);
+			else this.drop = new WeightedDrop(consumables.BAGOCA1, 1);
 			this.imageName = "mysterious dragon-boy";
 			this.long = "Before you stands a dragon-boy.  Though he stands only six and half feet tall, he is covered in lean muscle and moves with grace no lesser than most skilled balet dancers.  He wears armor made of green dragon scales and fight using an oversized hammer that got inscribed on it words 'bam' and 'hammer'. Thou to be truth to be said word 'bam' looks like it was orginaly word 'ban'.";
 			// this.plural = false;
@@ -171,7 +175,6 @@ use namespace CoC;
 			this.lustVuln = .9;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.gems = rand(10) + 5;
-			this.drop = NO_DROP;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);

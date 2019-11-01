@@ -106,7 +106,7 @@ public class VampireBlood extends Consumable {
 		if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
 		if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
 		if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
-        if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
+        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
 		for each (var tf:Object in tfArr) {
             if (changes >= changeLimit) break;
             if (trueOnceInN(tf.Chance? tf.Chance : 3)) {

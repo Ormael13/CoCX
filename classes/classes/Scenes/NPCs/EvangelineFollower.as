@@ -8,6 +8,14 @@ package classes.Scenes.NPCs
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Monsters.Imp;
+	import classes.Items.Armor;
+	import classes.Items.ArmorLib;
+	import classes.Items.Shield;
+	import classes.Items.ShieldLib;
+	import classes.Items.Weapon;
+	import classes.Items.WeaponLib;
+	import classes.Items.WeaponRange;
+	import classes.Items.WeaponRangeLib;
 	
 	public class EvangelineFollower extends NPCAwareContent
 	{	
@@ -128,6 +136,11 @@ public function meetEvangeline():void {
 	addButton(4, "Alchemy", evangelineAlchemyMenu).hint("Ask Evangeline to make some transformation item.");
 	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 5 && flags[kFLAGS.EVANGELINE_LVL_UP] >= 1) addButton(5, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her expenses on getting stronger.");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
+	if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 2) addButton(12, "Jiangshi", curingJiangshi);
+	if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 3) {
+		if (player.hasItem(consumables.VITAL_T, 5) && player.hasItem(consumables.PPHILTR, 5)) addButton(12, "Jiangshi", curingJiangshi);
+		else addButtonDisabled(12, "Jiangshi", "Req. five vitality tinctures and five purity philters to fix your 'issue'.");
+	}
 	if (player.hasKeyItem("Soul Gem Research") >= 0 && flags[kFLAGS.GARGOYLE_QUEST] >= 3) {
 		if (player.statusEffectv1(StatusEffects.SoulGemCrafting) == 0)  addButton(13, "Soul Gem", recivingCraftedSoulGem).hint("Pick up crafted Soul Gem.");
 		if (!player.hasStatusEffect(StatusEffects.SoulGemCrafting)) addButton(13, "Soul Gem", craftingSoulGem).hint("Ask Evangeline for crafting Soul Gem.");
@@ -734,6 +747,49 @@ private function JustDoIt():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
+private function curingJiangshi():void {
+	clearOutput();
+	if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 3) {
+		player.destroyItems(consumables.VITAL_T, 5);
+		player.destroyItems(consumables.PPHILTR, 5);
+		outputText("Evangeline nods as you bring her the ingredients, getting to work. As soon as the potion is finished she pours it over your cursed talisman, causing it to smoke and crumble. The first thing you do as the nasty thing peels off is head back to He’Xin’Dao and look for your gear. Thankfully it doesn't take you long to find it in a chest not to far from the table on which the crazy cat messed you up. Gosh, it feels good to be alive, like REALLY alive.\n\n");
+		if (player.weapon == WeaponLib.FISTS || flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
+			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
+			player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
+		}
+		if (player.weaponRange == WeaponRangeLib.NOTHING) {
+			player.setWeaponRange(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID]) as WeaponRange);
+		}
+		if (player.shield == ShieldLib.NOTHING || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
+			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
+			player.setShield(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID]) as Shield);
+		}
+		if (player.armor == armors.TRADITC) {
+			player.setArmor(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID]) as Armor);
+		}
+		player.removePerk(PerkLib.HaltedVitals);
+		player.removePerk(PerkLib.SuperStrength);
+		player.removePerk(PerkLib.PoisonNails);
+		player.removePerk(PerkLib.Rigidity);
+		player.removePerk(PerkLib.LifeLeech);
+		player.removePerk(PerkLib.Undeath);
+		player.removePerk(PerkLib.EnergyDependent);
+		player.removeStatusEffect(StatusEffects.EnergyDependent);
+		outputText("Done with this place you head back to camp.\n\n");
+		flags[kFLAGS.CURSE_OF_THE_JIANGSHI]++;
+		doNext(camp.returnToCampUseTwoHours);
+	}
+	else {
+		outputText("Evangeline barely turns to look at you before jumping in surprise.\n\n");
+		outputText("\"<i>Oh god just what happened to you [name]! There is a clear obvious issue with your vitality.</i>\"\n\n");
+		outputText("You explain your situation to her somewhat.\n\n");
+		outputText("\"<i>Look, I will need five vitality tinctures and five purity philters to fix this up, how you get the two is up you you.</i>\"\n\n");
+		flags[kFLAGS.CURSE_OF_THE_JIANGSHI]++;
+		doNext(camp.campFollowers);
+		cheatTime2(15);
+	}
+}
+
 private function craftingSoulGem():void {
 	clearOutput();
 	outputText("\"<i>Wait, you want me to craft a soul gem!? What do you even intend to do with it? These things are used to capture and hold souls!</i>\"\n\n");
@@ -744,7 +800,7 @@ private function craftingSoulGem():void {
 		player.gems -= 2000;
 		statScreenRefresh();
 		outputText("\"<i>I hope you know what you're doing. Hand me the recipe and materials, and I will get to work.</i>\"");
-		player.createStatusEffect(StatusEffects.SoulGemCrafting,120,0,0,0);
+		player.createStatusEffect(StatusEffects.SoulGemCrafting,24,0,0,0);
 		doNext(camp.returnToCampUseOneHour);
 	}
 	else {

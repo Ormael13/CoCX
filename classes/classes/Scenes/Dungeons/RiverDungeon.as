@@ -61,15 +61,17 @@ import classes.StatusEffects;
 				player.createPerk(PerkLib.BasicLeadership,0,0,0,0);
 			}
 			else outputText("You leave the river dungeon behind and take off through the He'Xin'Dao back towards the camp.");
+			if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
 			player.removeStatusEffect(StatusEffects.RiverDungeonA);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		private function encountersRuletteA():void {
-			if (rand(100) < player.statusEffectv1(StatusEffects.RiverDungeonA)) {
+			if ((rand(100) < player.statusEffectv1(StatusEffects.RiverDungeonA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 				var reset:Number = 10;
 				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
+				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				var choice1:Number = rand(3);
 				if (choice1 == 0) {
 					spriteSelect(29);
@@ -214,7 +216,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u>Entrance</u></b>\n");
 			outputText("You run into an old campsite. by the looks of it an adventurer must have rested there, through the fire likely died a month ago by the look of it. What a peculiar fire too, just who the hell would grab bones, set them in a stone circle and then impale a skull on a rusty longsword before setting fire to it?");
-			dungeons.setDungeonButtons(null, null, null, roomA02);
+			dungeons.setDungeonButtonsRD(null, null, null, roomA02);
 			if (flags[kFLAGS.NEISA_AFFECTION] < 10) addButtonDisabled(10, "Up", "You would leave now but you have yet to find enough to pay Neisa."); 
 			else addButton(10, "Up", exitDungeon);
 		}
@@ -225,7 +227,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Small glittering bones covers the rocky ground ahead of you. Likely those are the remains of some ancient monsters that used to live on Mareth a long time ago.");
-			dungeons.setDungeonButtons(roomA03, null, roomA01, null);
+			dungeons.setDungeonButtonsRD(roomA03, null, roomA01, null);
 		}
 		public function roomA03():void {
 			dungeonLoc = 70;
@@ -234,7 +236,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("You spot a small lizard lazily resting on the cold hard stone above you. The air is humid and cold. On the walls are old graffiti likely left by ancient civilisations of animal morphs.");
-			dungeons.setDungeonButtons(roomA08, roomA02, null, roomA04);
+			dungeons.setDungeonButtonsRD(roomA08, roomA02, null, roomA04);
 			if (flags[kFLAGS.NEISA_AFFECTION] < 5) tresureRoom1A();
 		}
 		public function roomA04():void {
@@ -244,7 +246,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("You can hear water running on a nearby wall from a fissure in the rock. You can only hope this thing won’t break open and flood the place over while you are deeper in.");
-			dungeons.setDungeonButtons(null, null, roomA03, roomA05);
+			dungeons.setDungeonButtonsRD(null, null, roomA03, roomA05);
 		}
 		public function roomA05():void {
 			dungeonLoc = 72;
@@ -253,7 +255,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Small glittering bones covers the rocky ground ahead of you. Likely those are the remains of some ancient monsters that used to live on Mareth a long time ago.");
-			dungeons.setDungeonButtons(roomA16, roomA06, roomA04, null);
+			dungeons.setDungeonButtonsRD(roomA16, roomA06, roomA04, null);
 		}
 		public function roomA06():void {
 			dungeonLoc = 73;
@@ -262,7 +264,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Small Bats fly out as you walk by above your head hangs some large stalactites. You think to yourself it would be most unfortunate if one of these was to randomly fall down and run you through.");
-			dungeons.setDungeonButtons(roomA05, null, null, null);
+			dungeons.setDungeonButtonsRD(roomA05, null, null, null);
 			addButtonDisabled(11, "Down", "Lower floors still too dangerous to let in PC party!!!");
 		}
 		public function roomA07():void {
@@ -272,7 +274,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("You run into an old campsite. by the looks of it an adventurer must have rested there, through the fire likely died a month ago by the look of it. What a peculiar fire too, just who the hell would grab bones, set them in a stone circle and then impale a skull on a rusty longsword before setting fire to it?");
-			dungeons.setDungeonButtons(roomA11, null, null, roomA08);
+			dungeons.setDungeonButtonsRD(roomA11, null, null, roomA08);
 		}
 		public function roomA08():void {
 			dungeonLoc = 75;
@@ -281,7 +283,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Small Bats fly out as you walk by above your head hangs some large stalactites. You think to yourself it would be most unfortunate if one of these was to randomly fall down and run you through.");
-			dungeons.setDungeonButtons(null, roomA03, roomA07, roomA09);
+			dungeons.setDungeonButtonsRD(null, roomA03, roomA07, roomA09);
 		}
 		public function roomA09():void {
 			dungeonLoc = 76;
@@ -290,7 +292,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("You can hear running water above you, the river is likely flowing right up your head. Guess explosive magic right now is ill advised.");
-			dungeons.setDungeonButtons(roomA10, null, roomA08, null);
+			dungeons.setDungeonButtonsRD(roomA10, null, roomA08, null);
 		}
 		public function roomA10():void {
 			dungeonLoc = 77;
@@ -299,7 +301,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("You spot a small lizard lazily resting on the cold hard stone above you. The air is humid and cold. On the walls are old graffiti likely left by ancient civilisations of animal morphs.");
-			dungeons.setDungeonButtons(null, roomA09, null, null);
+			dungeons.setDungeonButtonsRD(null, roomA09, null, null);
 			if (flags[kFLAGS.NEISA_AFFECTION] == 5) tresureRoom2A();
 		}
 		public function roomA11():void {
@@ -309,7 +311,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("The walls around you are covered with ancient lichen. You can see a fissure from which small droplets of water fall down the rivulet flowing down deeper in the dungeon.");
-			dungeons.setDungeonButtons(roomA12, roomA07, null, null);
+			dungeons.setDungeonButtonsRD(roomA12, roomA07, null, null);
 		}
 		public function roomA12():void {
 			dungeonLoc = 79;
@@ -318,7 +320,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Small glowy mushrooms cover the walls of the room you move through, just enough for you to see a short distance ahead.");
-			dungeons.setDungeonButtons(null, roomA11, roomA13, null);
+			dungeons.setDungeonButtonsRD(null, roomA11, roomA13, null);
 		}
 		public function roomA13():void {
 			dungeonLoc = 80;
@@ -327,7 +329,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("A small underground lake has formed in the massive room you move by. You thread a safe distance away from the dark waters wary of what may lurk in its depths.");
-			dungeons.setDungeonButtons(roomA15, null, roomA14, roomA12);
+			dungeons.setDungeonButtonsRD(roomA15, null, roomA14, roomA12);
 		}
 		public function roomA14():void {
 			dungeonLoc = 81;
@@ -336,7 +338,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("The walls around you are covered with ancient lichen. You can see a fissure from which small droplets of water fall down the rivulet flowing down deeper in the dungeon.");
-			dungeons.setDungeonButtons(null, null, null, roomA13);
+			dungeons.setDungeonButtonsRD(null, null, null, roomA13);
 		}
 		public function roomA15():void {
 			dungeonLoc = 82;
@@ -350,7 +352,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("You find some old bones on the ground likely those of a beast that died here. These are at least the size of what could pass back in Ingnam for a cow.");
-			dungeons.setDungeonButtons(null, roomA13, null, null);
+			dungeons.setDungeonButtonsRD(null, roomA13, null, null);
 		}
 		public function roomA16():void {
 			dungeonLoc = 83;
@@ -359,7 +361,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("You can hear running water above you, the river is likely flowing right up your head. Guess explosive magic right now is ill advised.");
-			dungeons.setDungeonButtons(roomA17, roomA05, null, null);
+			dungeons.setDungeonButtonsRD(roomA17, roomA05, null, null);
 		}
 		public function roomA17():void {
 			dungeonLoc = 84;
@@ -368,7 +370,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Small glowy mushrooms cover the walls of the room you move through, just enough for you to see a short distance ahead.");
-			dungeons.setDungeonButtons(null, roomA16, null, roomA18);
+			dungeons.setDungeonButtonsRD(null, roomA16, null, roomA18);
 		}
 		public function roomA18():void {
 			dungeonLoc = 85;
@@ -377,7 +379,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("A small underground lake has formed in the massive room you move by. You thread a safe distance away from the dark waters wary of what may lurk in its depths.");
-			dungeons.setDungeonButtons(roomA20, null, roomA17, roomA19);
+			dungeons.setDungeonButtonsRD(roomA20, null, roomA17, roomA19);
 		}
 		public function roomA19():void {
 			dungeonLoc = 86;
@@ -386,7 +388,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("You can hear water running on a nearby wall from a fissure in the rock. You can only hope this thing won’t break open and flood the place over while you are deeper in.");
-			dungeons.setDungeonButtons(null, null, roomA18, null);
+			dungeons.setDungeonButtonsRD(null, null, roomA18, null);
 		}
 		public function roomA20():void {
 			dungeonLoc = 87;
@@ -400,7 +402,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("You find some old bones on the ground likely those of a beast that died here. These are at least the size of what could pass back in Ingnam for a cow.");
-			dungeons.setDungeonButtons(null, roomA18, null, null);
+			dungeons.setDungeonButtonsRD(null, roomA18, null, null);
 		}
 		
 		private function tresureRoom1A():void {

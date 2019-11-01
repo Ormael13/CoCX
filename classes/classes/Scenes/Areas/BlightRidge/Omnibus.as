@@ -12,6 +12,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Monsters.AbstractSuccubus;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 use namespace CoC;
@@ -28,15 +29,16 @@ use namespace CoC;
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			TrueDemons.loseToAOmnibus();
+			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) SceneLib.dungeons.ebonlabyrinth.defeatedByStrayDemon();
+			else TrueDemons.loseToAOmnibus();
 		}
 		
 		public function Omnibus()
 		{
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 				this.short = "stray omnibus";
-				initStrTouSpeInte(240, 225, 180, 165);
-				initWisLibSensCor(165, 180, 90, 100);
+				initStrTouSpeInte(280, 245, 210, 175);
+				initWisLibSensCor(175, 180, 90, 100);
 				this.weaponAttack = 52;
 				this.armorDef = 48;
 				this.armorMDef = 8;

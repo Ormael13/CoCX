@@ -331,7 +331,7 @@ public class Izumi extends Monster
 		{	
 			clearOutput();
 			var brokeFree:Boolean;
-			if (rand(player.str) > this.str / 2)
+			if ((rand(player.str) > this.str / 2) || player.hasPerk(PerkLib.FluidBody))
 			{
 				brokeFree = true;
 			}
@@ -480,7 +480,7 @@ public class Izumi extends Monster
 		{
 			if (combatDebug) trace("Titsmother Struggle");
 			var brokeFree:Boolean;
-			if (rand(player.str) > this.str / 4)
+			if ((rand(player.str) > this.str / 4) || player.hasPerk(PerkLib.FluidBody))
 			{
 				brokeFree = true;
 			}

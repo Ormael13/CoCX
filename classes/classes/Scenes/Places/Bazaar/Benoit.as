@@ -1032,6 +1032,7 @@ private function eggySuggest():void {
 	outputText("\n\n\"<i>Ze shark ladies are always coming up from ze lake to sell me zis,</i>\" " + benoitMF("he","she") + " says. \"<i>It is a very effective, 'ow you say, 'counter septic'?");
 	player.orgasm();
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
 		outputText("  I would not inflict my children upon you.  Ere, take as much as you like.</i>\"");
 		simpleChoices("Take It", takeBenoitsContraceptives, "", null, "", null, "", null, "Leave", dontTakeEggtraceptives);
@@ -1131,6 +1132,7 @@ private function repeatSexWithBenoitLetHim():void {
 		outputText("\n\n\"<i>Zat was... wow,</i>\" " + benoitMF("he","she") + " manages.  With " + benoitMF("his","her") + " dick wrung of every last drop of " + benoitMF("his","her") + " seed you can see " + benoitMF("he","she") + " is returning to himself, and " + benoitMF("his","her") + " hand on your shoulder is cautious.  \"<i>Was zat... alright for you?  I do not know if... I get zese smells in my 'ead and zen...</i>\"  You answer " + benoitMF("him","her") + " by kissing " + benoitMF("him","her") + " on the cheek and saying with teasing huskiness that it was good, but perhaps next time " + benoitMF("he","she") + " shouldn't hold back so much.  " + benoitMF("He","She") + " grins at this.  You spend a bit more time cuddling whilst recovering from the intense fuck, before finally clambering to your feet.  Your final act before dressing and taking your leave is to dip a lazy finger into your cunt and faintly brush your scent across " + benoitMF("Benoit","Benoite") + "'s nose again, telling " + benoitMF("him","her") + " you expect " + benoitMF("him","her") + " to be ready and primed the next time this naughty girl pays a visit.  " + benoitMF("He","She") + " doesn't respond - maybe " + benoitMF("he","she") + " is still privately ashamed about losing " + benoitMF("his","her") + " cool over you - but you can tell by the lines of " + benoitMF("his","her") + " face and the way " + benoitMF("his","her") + " head moves unconsciously to follow your path out of " + benoitMF("his","her") + " shop that " + benoitMF("him","her") + " not being aroused by you isn't something you're ever going to have to worry about.");
 	}
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
 	benoitKnocksUpPCCheck();
 	benoitAffection(2);
@@ -1216,6 +1218,7 @@ private function repeatBenoitFuckTakeCharge():void {
 		outputText("\n\n\"<i>I am not really sure what I did to deserve you,</i>\" says " + benoitMF("Benoit","Benoite") + " eventually, " + benoitMF("his","her") + " voice barely above a raspy murmur in " + benoitMF("his","her") + " throat.  You give " + benoitMF("him","her") + " a playful dig in the ribs and say you're only in it for the counter sceptic.  " + benoitMF("He","She") + " grins and the two of you get up, get dressed, and go your separate ways.");
 	}
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	benoitKnocksUpPCCheck();
 	benoitAffection(2);
 	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
@@ -1334,6 +1337,7 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 	}
 	if (player.pregnancyType == PregnancyStore.PREGNANCY_BASILISK) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	doNext(camp.returnToCampUseOneHour);
 	player.orgasm();
 	dynStats("sen", -2);

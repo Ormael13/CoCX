@@ -833,15 +833,15 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 			clearOutput();
 			outputText("Which would you like to unequip?\n\n");
 			menu();
-			if (player.weapon != WeaponLib.FISTS)
+			if (player.weapon != WeaponLib.FISTS && !player.hasPerk(PerkLib.Rigidity))
 			{
 				addButton(0, "Weapon (M)", unequipWeapon).hint(player.weapon.description, capitalizeFirstLetter(player.weapon.name));
 			}
-			if (player.weaponRange != WeaponRangeLib.NOTHING)
+			if (player.weaponRange != WeaponRangeLib.NOTHING && !player.hasPerk(PerkLib.Rigidity))
 			{
 				addButton(1, "Weapon (R)", unequipWeaponRange).hint(player.weaponRange.description, capitalizeFirstLetter(player.weaponRange.name));
 			}
-			if (player.shield != ShieldLib.NOTHING)
+			if (player.shield != ShieldLib.NOTHING && !player.hasPerk(PerkLib.Rigidity))
 			{
 				addButton(2, "Shield", unequipShield).hint(player.shield.description, capitalizeFirstLetter(player.shield.name));
 			}/*
@@ -857,7 +857,7 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 			{
 				addButton(4, "Ring 2", unequipJewel2).hint(player.jewelry2.description, capitalizeFirstLetter(player.jewelry2.name));
 			}
-			if (player.armor != ArmorLib.NOTHING)
+			if (player.armor != ArmorLib.NOTHING && !player.hasPerk(PerkLib.Rigidity))
 			{
 				addButton(5, "Armour", unequipArmor).hint(player.armor.description, capitalizeFirstLetter(player.armor.name));
 			}

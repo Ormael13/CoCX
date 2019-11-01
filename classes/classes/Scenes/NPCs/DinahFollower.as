@@ -85,7 +85,7 @@ import classes.internals.Utils;
 				addButton(1, "Spar", DinahSparring);
 				addButtonDisabled(3, "Talk", "NYI");
 				addButtonDisabled(4, "Sex", "NYI");
-				addButtonDisabled(5, "Present", "NYI");//2 i 3 skopiować z MarbleScene.as i dostosować
+				addButtonDisabled(5, "Present", "NYI");//5 i 6 skopiować z MarbleScene.as i dostosować
 				addButtonDisabled(6, "Give Item", "NYI");
 				//addButton(6, "Give Item", canGiveItem() ? giveItem : null);
 				addButton(14, "Back", camp.campFollowers);
@@ -118,14 +118,13 @@ import classes.internals.Utils;
 		public function DinahLostSparring():void {
 			clearOutput();
 			outputText("\"<i>Was that your will, Lady Godiva?</i>\" she mumbles under her breath.");
-			/*if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] >= 1) flags[kFLAGS.DINAH_DEFEATS_COUNTER]++;
 				else flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 1;
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 1 && flags[kFLAGS.DINAH_LVL_UP] == 1) {
 					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 6);
 					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 6, 0);
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.DINAH_SPELLS_CASTED] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 2;
 				}
 				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 2 && flags[kFLAGS.DINAH_LVL_UP] == 2) {
@@ -140,7 +139,19 @@ import classes.internals.Utils;
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 4;
 				}
-			}*/
+				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 4 && flags[kFLAGS.DINAH_LVL_UP] == 4) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 24);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 24, 0);
+					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.DINAH_LVL_UP] = 5;
+				}
+				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 5 && flags[kFLAGS.DINAH_LVL_UP] == 5) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 30);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 30, 0);
+					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.DINAH_LVL_UP] = 6;
+				}
+			}
 			cleanupAfterCombat();
 		}
 		
@@ -156,6 +167,16 @@ import classes.internals.Utils;
 			addButton(5, consumables.MANTICV.shortName, buyItem3, 5).hint("Buy a vial of manticore venom.");
 			addButton(6, consumables.VOLTTOP.shortName, buyItem3, 6).hint("Buy a Voltage topaz.");
 			addButton(7, consumables.REDVIAL.shortName, buyItem3, 7).hint("Buy a vial of ominous red liquid.");
+			addButton(8, consumables.STRASCA.shortName, buyItem2, 8).hint("Buy a Strawberry shortcake.");
+			addButton(9, consumables.BCHCAKE.shortName, buyItem2, 9).hint("Buy a Big chocolate cake.");
+			if (flags[kFLAGS.DINAH_LVL_UP] >= 1) {
+				if (player.statusEffectv1(StatusEffects.TFDealer1) > 0) addButton(10, consumables.DSLIMEJ.shortName, buyItem3, 10).hint("Buy a Big Dark slime jelly.");
+				else addButtonDisabled(10, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
+				if (player.statusEffectv2(StatusEffects.TFDealer1) > 0) addButton(11, consumables.HYDRASC.shortName, buyItem3, 11).hint("Buy a hydra scale.");
+				else addButtonDisabled(11, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
+				if (player.statusEffectv3(StatusEffects.TFDealer1) > 0) addButton(12, consumables.FSNAILS.shortName, buyItem3, 12).hint("Buy a Fire snail Saliva.");
+				else addButtonDisabled(12, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
+			}
 			addButton(14, "Back", DinahMainMenu);
 		}
 		private function buyItem1(item:Number = 0):void {
@@ -166,11 +187,16 @@ import classes.internals.Utils;
 			if (item == 2) catChimeraBuy2(consumables.WOFRUIT);
 			if (item == 3) catChimeraBuy2(consumables.G_FRUIT);
 			if (item == 4) catChimeraBuy2(consumables.D_FRUIT);
+			if (item == 8) catChimeraBuy2(consumables.STRASCA);
+			if (item == 9) catChimeraBuy2(consumables.BCHCAKE);
 		}
 		private function buyItem3(item:Number = 0):void {
 			if (item == 5) catChimeraBuy2(consumables.MANTICV);
 			if (item == 6) catChimeraBuy2(consumables.VOLTTOP);
 			if (item == 7) catChimeraBuy2(consumables.REDVIAL);
+			if (item == 10) catChimeraBuy2(consumables.DSLIMEJ);
+			if (item == 11) catChimeraBuy2(consumables.HYDRASC);
+			if (item == 12) catChimeraBuy2(consumables.FSNAILS);
 		}
 		public function catChimeraBuy1(itype:ItemType):void {
 			clearOutput();

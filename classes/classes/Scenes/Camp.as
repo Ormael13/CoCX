@@ -952,7 +952,7 @@ public function companionsCount():Number {
 
 public function followersCount():Number {
 	var counter:Number = 0;
-	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) counter++;
+	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12 && flags[kFLAGS.ALVINA_FOLLOWER] < 20) counter++;
 	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) counter++;
 	if (flags[kFLAGS.AURORA_LVL] >= 1) counter++;
 	if (emberScene.followerEmber()) counter++;
@@ -999,6 +999,7 @@ public function slavesCount():Number {
 
 public function loversCount():Number {
 	var counter:Number = 0;
+	if (flags[kFLAGS.ALVINA_FOLLOWER] > 19) counter++;
 	if (arianScene.arianFollower()) counter++;
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) counter++;
 	if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
@@ -1094,6 +1095,11 @@ public function campLoversMenu(descOnly:Boolean = false):void {
         Holidays.DLCPrompt("Lovers DLC", "Get the Lovers DLC to be able to interact with them and have sex! Start families! The possibilities are endless!", "$4.99", doCamp);
         return;
 	}
+	//Alvina
+	if (flags[kFLAGS.ALVINA_FOLLOWER] > 19) {
+		outputText("Alvina isn’t so far from here, having made her camp in a corrupted plant groove she created so to have easy access to reagents.\n\n");
+		buttons.add( "Alvina", SceneLib.alvinaFollower.alvinaMainCampMenu).hint("Check up on Alvina.");
+	}
 	//AMILY
 	if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0 && !descOnly) {
 		outputText("Amily is currently strolling around your camp, ");
@@ -1154,7 +1160,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		buttons.add("Diana", SceneLib.dianaScene.mainCampMenu).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) > 0,"Training.");
 	}
 	//Electra
-	
+//	buttons.add("???").disable("Charge Up!!!");
 	//Etna
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) {
 		outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
@@ -1495,10 +1501,10 @@ public function campFollowers(descOnly:Boolean = false):void {
 	}
 	//Aurora
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
-		buttons.add( "Aurora", SceneLib.auroraFollower.auroraCampMenu).hint("Check up on Aurora.");
+		buttons.add( "Aurora", SceneLib.auroraFollower.auroraCampMenu).hint("Check up on Aurora.").disableIf(player.statusEffectv2(StatusEffects.CampSparingNpcsTimers4) > 0,"Training.");
 	}
 	//Alvina
-	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) {
+	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12 && flags[kFLAGS.ALVINA_FOLLOWER] < 20) {
 		outputText("Alvina isn’t so far from here, having made her camp in a corrupted plant groove she created so to have easy access to reagents.\n\n");
 		buttons.add( "Alvina", SceneLib.alvinaFollower.alvinaMainCampMenu).hint("Check up on Alvina.");
 	}
@@ -1574,7 +1580,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 	//Dinah
 	if (flags[kFLAGS.DINAH_LVL_UP] >= 1) {
 		outputText("You can see a cart with various vials standing next to bedroll. Dinah must be somewhere nearby.\n\n");
-		buttons.add( "Dinah", SceneLib.dinahScene.DinahIntro2).hint("Visit Dinah the cat chimera merchant.");
+		buttons.add( "Dinah", SceneLib.dinahScene.DinahIntro2).hint("Visit Dinah the cat chimera merchant.").disableIf(player.statusEffectv1(StatusEffects.CampSparingNpcsTimers3) > 0,"Training.");
 	}
 	//Helspawn
 	if (helspawnFollower()) {
@@ -1644,7 +1650,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 		else if (model.time.hours <= 12) outputText("You ursine smith is currently at work, sharpening and polishing blades.");
 		else if (model.time.hours <= 15) outputText("Konstantin has stopped his work to have a meal, and quite an abundant one. From where you are, you can smell the cooked meat and spice from his plate.");
 		else if (model.time.hours <= 18) outputText("The sound of metal on metal is heard, and you easily find the source. The bear smith is currently shaping some plates, polishing them each now and then and putting them aside once he satisfied with how they look.");
-		else if (model.time.hours <= 20) outputText("Your local smith, Konstantin isn’t not working right now. He has gone to his tent to rest and relax for awhile.");
+		else if (model.time.hours <= 20) outputText("Your local smith, Konstantin isn’t working right now. He has gone to his tent to rest and relax for awhile.");
 		else {
 			outputText("Konstantin is lying on a patch of grass, peacefully looking at the ");
 			outputText("red sky.");
@@ -1744,7 +1750,7 @@ private function campMiscActions():void {
 	menu();
 	if (player.hasItem(consumables.LG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(0, "Fill bottle", fillUpPillBottle00).hint("Fill up one of your pill bottles with low-grade soulforce recovery pills.");
 	else addButtonDisabled(0, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
-	if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(1, "Fill bottle", fillUpPillBottle00).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
+	if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(1, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
 	else addButtonDisabled(1, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
 	addButton(14, "Back", campActions);
 }
@@ -1757,6 +1763,12 @@ private function campBuildingSim():void {
 		//addButton(2, "Build Cabin(O)", campUpgrades.buildCampMembersCabinsMenu).hint("Work on your camp members cabins.");
 		addButton(5, "Build Misc", campUpgrades.buildmisc1Menu).hint("Build other structures than walls or cabins for your camp.");
 		//addButton(6, "Build Misc(O)", campUpgrades.).hint("Other structures than walls or cabins for your camp.");
+	}
+	else {
+		addButtonDisabled(0, "Build Wall", "Req. Carpenter's Toolbox.");
+		//addButtonDisabled(2, "Build Cabin(O)", "Req. Carpenter's Toolbox.");
+		addButtonDisabled(5, "Build Misc", "Req. Carpenter's Toolbox.");
+		//addButtonDisabled(6, "Build Misc(O)", "Req. Carpenter's Toolbox.");
 	}
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 10) addButton(1, "Build Cabin", cabinProgress.initiateCabin).hint("Work on your cabin."); //Work on cabin.
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 && player.hasItem(useables.IMPSKLL, 1)) addButton(10, "AddImpSkull", promptHangImpSkull).hint("Add an imp skull to decorate the wall and to serve as deterrent for imps.", "Add Imp Skull");
@@ -2765,7 +2777,7 @@ private function dungeons():void {
 	//Side dungeons
 	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", dungeonS.enterDungeon).hint("Visit the cave you've found in the desert." + (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "") + (SceneLib.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""));
 	if (SceneLib.dungeons.checkPhoenixTowerClear()) addButton(6, "Phoenix Tower", dungeonH.returnToHeliaDungeon).hint("Re-visit the tower you went there as part of Helia's quest." + (SceneLib.dungeons.checkPhoenixTowerClear() ? "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED!" : ""));
-	if (flags[kFLAGS.EBON_LABYRINTH] > 0) addButton(12, "EbonLabyrinth", dungeonEL.enterDungeon).hint("Visit Ebon Labyrinth." + (SceneLib.dungeons.checkEbonLabyrinthClear() ? "\n\nSEMI-CLEARED!" : ""));
+	if (flags[kFLAGS.EBON_LABYRINTH] > 0) addButton(9, "EbonLabyrinth", dungeonEL.enterDungeon).hint("Visit Ebon Labyrinth." + (SceneLib.dungeons.checkEbonLabyrinthClear() ? "\n\nSEMI-CLEARED!" : ""));
 	if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) addButton(10, "Hidden Cave", dungeonHC.enterDungeon).hint("Visit the hidden cave in the hills." + (SceneLib.dungeons.checkHiddenCaveClear() ? "\n\nCLEARED!" : ""));
 	if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) addButton(11, "Den of Desire", dungeonDD.enterDungeon).hint("Visit the den in blight ridge." + (SceneLib.dungeons.checkDenOfDesireClear() ? "\n\nCLEARED!" : ""));
 	if (flags[kFLAGS.LUMI_MET] > 0) addButton(12, "Lumi's Lab", SceneLib.lumi.lumiEncounter).hint("Visit Lumi's laboratory.");
@@ -3106,66 +3118,8 @@ private function promptAscend():void {
 private function ascendForReal():void {
 	//Check performance!
 	var performancePoints:int = 0;
-	//Companions
-	performancePoints += companionsCount();
-	if (flags[kFLAGS.ALVINA_FOLLOWER] == 12) performancePoints++;
-	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 3) performancePoints++;
-	if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2) performancePoints++;
-	if (flags[kFLAGS.PATCHOULI_FOLLOWER] == 3) performancePoints++;
-	if (player.hasStatusEffect(StatusEffects.DianaOff)) performancePoints++;
-	if (player.hasStatusEffect(StatusEffects.DivaOff)) performancePoints++;
-	if (player.hasStatusEffect(StatusEffects.ElectraOff)) performancePoints++;
-	if (player.hasStatusEffect(StatusEffects.EtnaOff)) performancePoints++;
-	if (player.hasStatusEffect(StatusEffects.LunaOff)) performancePoints++;
-	//Dungeons
-	if (SceneLib.dungeons.checkFactoryClear()) performancePoints++;
-	if (SceneLib.dungeons.checkDeepCaveClear()) performancePoints += 2;
-	if (SceneLib.dungeons.checkLethiceStrongholdClear()) performancePoints += 3;
-	if (SceneLib.dungeons.checkSandCaveClear()) performancePoints++;
-	if (SceneLib.dungeons.checkHiddenCaveClear()) performancePoints++;
-	if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear()) performancePoints++;
-	if (SceneLib.dungeons.checkRiverDungeon1stFloorClear()) performancePoints++;
-	if (SceneLib.dungeons.checkDenOfDesireClear()) performancePoints++;
-	if (SceneLib.dungeons.checkEbonLabyrinthClear()) performancePoints++;
-	if (SceneLib.dungeons.checkPhoenixTowerClear()) performancePoints += 2;
-	//Quests
-	if (flags[kFLAGS.MARBLE_PURIFIED] > 0) performancePoints += 2;
-	if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) performancePoints += 2;
-	if (flags[kFLAGS.URTA_QUEST_STATUS] > 0) performancePoints += 2;
-	if (player.findPerk(PerkLib.Enlightened) >= 0) performancePoints += 1;
-	if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0 || flags[kFLAGS.PURE_MARAE_ENDGAME] >= 2) performancePoints += 3;
-	if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) >= 4) performancePoints += 2;
-	if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) >= 4) performancePoints += 2;
-	if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) >= 4) performancePoints += 2;
-	if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) >= 4) performancePoints += 2;
-	if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) >= 4) performancePoints += 2;
-	if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) >= 2) performancePoints++;
-	if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) >= 2) performancePoints++;
-	if (flags[kFLAGS.GALIA_LVL_UP] >= 0.5) performancePoints += 5;
-	//Camp structures
-	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) performancePoints += 10;
-	if (flags[kFLAGS.CAMP_WALL_GATE] > 0) performancePoints += 11;
-	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] > 2) performancePoints += 2;
-	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] > 3) performancePoints += 2;
-	if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 1) performancePoints += 2;
-	if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 3) performancePoints += 2;
-	if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 5) performancePoints += 2;
-	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] > 3) performancePoints += 2;
-	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] > 3) performancePoints += 2;
-	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) performancePoints += 2;
-	if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) performancePoints += flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE];
-	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] > 1) performancePoints += 2;
-	if (flags[kFLAGS.CAMP_UPGRADES_DAM] > 0) performancePoints += (flags[kFLAGS.CAMP_UPGRADES_DAM] * 2);
-	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) performancePoints += (flags[kFLAGS.CAMP_UPGRADES_FISHERY] * 2);
-	//Children
-	var childPerformance:int = 0;
-	childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + izmaScene.totalIzmaChildren() + isabellaScene.totalIsabellaChildren() + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren());
-	childPerformance += (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + flags[kFLAGS.KELLY_KIDS] + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] + flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] + joyScene.getTotalLitters());
-	childPerformance += ((flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4) + (flags[kFLAGS.LYNNETTE_BABY_COUNT] / 4) + (flags[kFLAGS.ANT_KIDS] / 100) + (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] / 4));
-	performancePoints += Math.sqrt(childPerformance);
-	//Level
-	performancePoints += player.level;
 	//Sum up ascension perk points!
+	performancePoints += possibleToGainAscensionPoints();
 	player.ascensionPerkPoints += performancePoints;
 	player.knockUpForce(); //Clear pregnancy
 	//Scene GO!
@@ -3177,6 +3131,69 @@ private function ascendForReal():void {
 	if (marbleFollower()) outputText("\n\n\"<i>Sweetie, I'm going to miss you. See you in the next playthrough,</i>\" Marble says, tears leaking from her eyes.");
 	outputText("\n\nThe world around you slowly fades to black and stars dot the endless void. <b>You have ascended.</b>");
 	doNext(CoC.instance.charCreation.ascensionMenu);
+}
+public function possibleToGainAscensionPoints():Number {
+	var performancePointsPrediction:Number = 0;
+	//Companions
+	performancePointsPrediction += companionsCount();
+	if (flags[kFLAGS.ALVINA_FOLLOWER] == 12) performancePointsPrediction++;
+	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 3) performancePointsPrediction++;
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2) performancePointsPrediction++;
+	if (flags[kFLAGS.PATCHOULI_FOLLOWER] == 3) performancePointsPrediction++;
+	if (player.hasStatusEffect(StatusEffects.DianaOff)) performancePointsPrediction++;
+	if (player.hasStatusEffect(StatusEffects.DivaOff)) performancePointsPrediction++;
+	if (player.hasStatusEffect(StatusEffects.ElectraOff)) performancePointsPrediction++;
+	if (player.hasStatusEffect(StatusEffects.EtnaOff)) performancePointsPrediction++;
+	if (player.hasStatusEffect(StatusEffects.LunaOff)) performancePointsPrediction++;
+	//Dungeons
+	if (SceneLib.dungeons.checkFactoryClear()) performancePointsPrediction++;
+	if (SceneLib.dungeons.checkDeepCaveClear()) performancePointsPrediction += 2;
+	if (SceneLib.dungeons.checkLethiceStrongholdClear()) performancePointsPrediction += 3;
+	if (SceneLib.dungeons.checkSandCaveClear()) performancePointsPrediction++;
+	if (SceneLib.dungeons.checkHiddenCaveClear()) performancePointsPrediction++;
+	if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear()) performancePointsPrediction++;
+	if (SceneLib.dungeons.checkRiverDungeon1stFloorClear()) performancePointsPrediction++;
+	if (SceneLib.dungeons.checkDenOfDesireClear()) performancePointsPrediction++;
+	if (SceneLib.dungeons.checkEbonLabyrinthClear()) performancePointsPrediction += 3;
+	if (SceneLib.dungeons.checkPhoenixTowerClear()) performancePointsPrediction += 2;
+	//Quests
+	if (flags[kFLAGS.MARBLE_PURIFIED] > 0) performancePointsPrediction += 2;
+	if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) performancePointsPrediction += 2;
+	if (flags[kFLAGS.URTA_QUEST_STATUS] > 0) performancePointsPrediction += 2;
+	if (player.findPerk(PerkLib.Enlightened) >= 0) performancePointsPrediction += 1;
+	if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0 || flags[kFLAGS.PURE_MARAE_ENDGAME] >= 2) performancePointsPrediction += 3;
+	if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) >= 4) performancePointsPrediction += 2;
+	if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) >= 4) performancePointsPrediction += 2;
+	if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) >= 4) performancePointsPrediction += 2;
+	if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) >= 4) performancePointsPrediction += 2;
+	if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) >= 4) performancePointsPrediction += 2;
+	if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) >= 2) performancePointsPrediction++;
+	if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) >= 2) performancePointsPrediction++;
+	if (flags[kFLAGS.GALIA_LVL_UP] >= 0.5) performancePointsPrediction += 5;
+	//Camp structures
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) performancePointsPrediction += 10;
+	if (flags[kFLAGS.CAMP_WALL_GATE] > 0) performancePointsPrediction += 11;
+	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] > 2) performancePointsPrediction += 2;
+	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] > 3) performancePointsPrediction += 2;
+	if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 1) performancePointsPrediction += 2;
+	if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 3) performancePointsPrediction += 2;
+	if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 5) performancePointsPrediction += 2;
+	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] > 3) performancePointsPrediction += 2;
+	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] > 3) performancePointsPrediction += 2;
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) performancePointsPrediction += 2;
+	if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) performancePointsPrediction += flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE];
+	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] > 1) performancePointsPrediction += 2;
+	if (flags[kFLAGS.CAMP_UPGRADES_DAM] > 0) performancePointsPrediction += (flags[kFLAGS.CAMP_UPGRADES_DAM] * 2);
+	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) performancePointsPrediction += (flags[kFLAGS.CAMP_UPGRADES_FISHERY] * 2);
+	//Children
+	var childPerformance:int = 0;
+	childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + izmaScene.totalIzmaChildren() + isabellaScene.totalIsabellaChildren() + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren());
+	childPerformance += (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + flags[kFLAGS.KELLY_KIDS] + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] + flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] + joyScene.getTotalLitters());
+	childPerformance += ((flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4) + (flags[kFLAGS.LYNNETTE_BABY_COUNT] / 4) + (flags[kFLAGS.ANT_KIDS] / 100) + (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] / 4));
+	performancePointsPrediction += Math.sqrt(childPerformance);
+	//Level
+	performancePointsPrediction += player.level;
+	return performancePointsPrediction;
 }
 
 public function setLevelButton(allowAutoLevelTransition:Boolean):Boolean {
@@ -4096,7 +4113,6 @@ private function updateAchievements():void {
 	}
 	if (SceneLib.dungeons.checkEbonLabyrinthClear()) {
 		awardAchievement("Honorary Minotaur", kACHIEVEMENTS.DUNGEON_HONORARY_MINOTAUR);
-		awardAchievement("Dungeonmaster", kACHIEVEMENTS.DUNGEON_DUNGEONMASTER);
 		dungeonsCleared++;
 	}
 	if (dungeonsCleared >= 1) awardAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER);
@@ -4237,10 +4253,14 @@ private function updateAchievements():void {
 	if (helspawnFollower()) awardAchievement("Helspawn", kACHIEVEMENTS.GENERAL_HELSPAWN);
 	if (flags[kFLAGS.URTA_KIDS_MALES] + flags[kFLAGS.URTA_KIDS_FEMALES] + flags[kFLAGS.URTA_KIDS_HERMS] > 0) awardAchievement("Urta's True Lover", kACHIEVEMENTS.GENERAL_URTA_TRUE_LOVER);
 	if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER);
-	if (followersCount() >= 7) awardAchievement("Follow the Leader", kACHIEVEMENTS.GENERAL_FOLLOW_THE_LEADER);//ponownie przeliczyć followers, lovers, slaves counter
-	if (loversCount() >= 8) awardAchievement("Gotta Love 'Em All", kACHIEVEMENTS.GENERAL_GOTTA_LOVE_THEM_ALL);
-	if (slavesCount() >= 4) awardAchievement("Meet Your " + player.mf("Master", "Mistress") , kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER);
-	if (followersCount() + loversCount() + slavesCount() >= 19) awardAchievement("All Your People are Belong to Me", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME);
+	if (followersCount() >= 7) awardAchievement("Follow the Leader (1)", kACHIEVEMENTS.GENERAL_FOLLOW_THE_LEADER);//ponownie przeliczyć followers, lovers, slaves counter
+	//if (followersCount() >= 14) awardAchievement("Follow the Leader (2)", kACHIEVEMENTS.GENERAL_FOLLOW_THE_LEADER);
+	if (loversCount() >= 8) awardAchievement("Gotta Love 'Em All (1)", kACHIEVEMENTS.GENERAL_GOTTA_LOVE_THEM_ALL);
+	//if (loversCount() >= 16) awardAchievement("Gotta Love 'Em All (2)", kACHIEVEMENTS.GENERAL_GOTTA_LOVE_THEM_ALL); na razie 15 lovers :(
+	if (slavesCount() >= 4) awardAchievement("Meet Your " + player.mf("Master", "Mistress") + " (1)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER);
+	//if (slavesCount() >= 8) awardAchievement("Meet Your " + player.mf("Master", "Mistress") + " (2)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER);
+	if (followersCount() + loversCount() + slavesCount() >= 19) awardAchievement("All Your People are Belong to Me (1)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME);
+	//if (followersCount() + loversCount() + slavesCount() >= 38) awardAchievement("All Your People are Belong to Me (2)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME);
 	if (flags[kFLAGS.MANSION_VISITED] >= 3) awardAchievement("Freeloader", kACHIEVEMENTS.GENERAL_FREELOADER);
 	if (player.perks.length >= 25) awardAchievement("Perky", kACHIEVEMENTS.GENERAL_PERKY);
 	if (player.perks.length >= 50) awardAchievement("Super Perky", kACHIEVEMENTS.GENERAL_SUPER_PERKY);
@@ -4312,6 +4332,7 @@ private function updateAchievements():void {
 	
 	if (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) awardAchievement("Guardian of Notre-Dame", kACHIEVEMENTS.EPIC_GUARDIAN_OF_NOTRE_DAME);
 	if (player.hasStatusEffect(StatusEffects.PlayerPhylactery)) awardAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA);
+	if (player.jiangshiScore() >= 20) awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
 	
 	if (player.hasStatusEffect(StatusEffects.AchievementsNormalShadowTotal)) {
 		//Shadow

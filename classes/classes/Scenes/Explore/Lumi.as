@@ -70,7 +70,8 @@ public class Lumi extends BaseContent {
             [consumables.SDELITE,consumables.S_DREAM],
             [consumables.PIGTRUF,consumables.BOARTRU],
             [consumables.PURHONY,consumables.SPHONEY],
-            [consumables.REDVIAL,consumables.VAMPBLD]
+            [consumables.REDVIAL,consumables.VAMPBLD],
+            [consumables.ECTOPLS,consumables.PROTPLS]
         ];
         if(justCheck){
             for each(var improvable:Array in improvables){
@@ -906,7 +907,6 @@ public class Lumi extends BaseContent {
 				player.addStatusValue(StatusEffects.LumiWorkshop,1,1);
 			}
 			outputText("Which blueprints will you work on today?\n\n");
-			if (player.hasKeyItem("Blueprint - Toolbelt") >= 0) outputText("Toolbelt - Req. 25+ int, 1 metal piece.\n");
 			if (player.hasKeyItem("Blueprint - Potent Drug injectors") >= 0) outputText("Potent Drug injectors - Req. 100+ int, Improved Drug injectors, 3 metal pieces, 30 nails, 15 Lust Drafts.\n");
 			if (player.hasKeyItem("Blueprint - Improved Drug injectors") >= 0) outputText("Improved Drug injectors - Req. 75+ int, Drug injectors, 2 metal pieces, 20 nails, 10 Lust Drafts.\n");
 			if (player.hasKeyItem("Blueprint - Drug injectors") >= 0) outputText("Drug injectors - Req. 50+ int, Toolbelt, 1 metal piece, 10 nails, 5 Lust Drafts.\n");
@@ -925,6 +925,7 @@ public class Lumi extends BaseContent {
 			if (player.hasKeyItem("Blueprint - Mechanism") >= 0 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200) addButton(1, "Mechanism", lumiWorkshopMechanism).hint("Mechanism - A complex set of gear and gyro. Necessary for advanced engineering - 200 nails, 5 metal piece, 4 hours of work.");
 			else addButtonDisabled(1, "Mechanism", "Req. 200 nails, 5 metal piece.");
 			if (player.hasKeyItem("Blueprint - Toolbelt") >= 0 && player.inte >= 25 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 1) addButton(2, "Toolbelt", lumiWorkshopToolbelt).hint("Toolbelt - A toolbelt to hang your various engineering tool such as arclight spanner and screwdrivers. To wear around the waist. Necessary for basic engineering - 25+ int, 1 metal piece, 4 hours of work.");
+			else addButtonDisabled(2, "Toolbelt", "Req. 25+ Int, 1 metal piece.");
 			if (player.hasKeyItem("Blueprint - Potent Drug injectors") >= 0 && player.inte >= 100 && player.hasKeyItem("Improved Drug injectors") >= 0 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 3 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 30 && player.hasItem(consumables.L_DRAFT, 15)) addButton(3, "P.D.Injectors", lumiWorkshopPotentDrugInjectors).hint("Potent Drug injectors - Improve the toolbelt with an even better drug injector to wear around your waist. Makes you hornier and slutier at all time thanks to the chemicals but at the same time raise your sensitivity. This improved version is even more potent - 100+ int, Improved Drug injectors, 3 metal pieces, 30 nails, 15 Lust Drafts, 12 hours of work");
 			if (player.hasKeyItem("Blueprint - Improved Drug injectors") >= 0 && player.hasKeyItem("Drug injectors") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 2 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 20 && player.hasItem(consumables.L_DRAFT, 10)) addButton(3, "I.D.Injectors", lumiWorkshopImprovedDrugInjectors).hint("Improved Drug injectors - Improve the toolbelt with a better drug injector to wear around your waist. Makes you hornier and slutier at all time thanks to the chemicals but at the same time raise your sensitivity. This improved version is more potent - 75+ int, Drug injectors, 2 metal pieces, 20 nails, 10 Lust Drafts, 8 hours of work");
 			if (player.hasKeyItem("Blueprint - Drug injectors") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 1 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 10 && player.hasItem(consumables.L_DRAFT, 5)) addButton(3, "D,Injectors", lumiWorkshopDrugInjectors).hint("Drug injectors - Improve the toolbelt with a drug injector to wear around your waist. Makes you hornier and slutier at all time thanks to the chemicals but at the same time raise your sensitivity - 50+ int, Toolbelt, 1 metal piece, 10 nails, 5 Lust Drafts, 4 hours of work");
@@ -1448,3 +1449,4 @@ public class Lumi extends BaseContent {
 	}*/
 }
 }
+

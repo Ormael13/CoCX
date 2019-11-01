@@ -158,6 +158,7 @@ public class InfestedHellhoundScene extends BaseContent
 					player.createStatusEffect(StatusEffects.WormPlugged, 1 + rand(5), 0, 0, 0);
 				player.knockUpForce(PregnancyStore.PREGNANCY_WORM_STUFFED, 100 + player.statusEffectv1(StatusEffects.WormPlugged)); //Will be cleared when the WormPlugged effect ends
 				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 				player.orgasm();
 				dynStats("lib", 1, "cor", 1);
 				cleanupAfterCombat();
@@ -190,6 +191,7 @@ public class InfestedHellhoundScene extends BaseContent
 				outputText("Unable to support yourself any longer, you collapse, your hips held up by the demonic black dog-dick lodged in your orifice.  They keep cumming and cumming, until your body takes a slow slide off to the ground.  Your eyes drift closed, lulled to sleep by the squirming warmth plugging your " + assholeDescript() + " and coating your back.");
 				outputText("  ");
 				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 				player.buttChange(monster.cockArea(0), true);
 				player.orgasm();
 				dynStats("lib", 1, "cor", 1);

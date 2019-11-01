@@ -121,7 +121,8 @@ public class CombatUI extends BaseCombatContent {
 			else btnPSpecials.show("P. Specials", submenuPhySpecials, "Physical special attack menu.", "Physical Specials");
 		}
 		if (!player.isFlying() && monster.isFlying() && !player.canFly()) {
-			btnPSpecials.disable("No way you could reach enemy in air with p. specials.");
+			if (player.isInGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
+			else btnPSpecials.disable("No way you could reach enemy in air with p. specials.");
 		}
 		// Submenu - Magical Specials
 		combat.mspecials.buildMenu(magspButtons);
@@ -289,9 +290,13 @@ public class CombatUI extends BaseCombatContent {
 				}
 			}
 		} else if (flags[kFLAGS.PLAYER_COMPANION_1] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) {
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") combat.comfoll.neisaCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") combat.comfoll.neisaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") combat.comfoll.etnaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") combat.comfoll.neisaCombatActions();
 		} else if (flags[kFLAGS.PLAYER_COMPANION_2] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) {
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina") combat.comfoll.neisaCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Aurora") combat.comfoll.neisaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Etna") combat.comfoll.etnaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") combat.comfoll.neisaCombatActions();
 		}

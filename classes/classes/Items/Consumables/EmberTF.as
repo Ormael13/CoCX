@@ -43,7 +43,7 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 	//Temporary storage
 	var temp:Number = 0;
-	if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
+	if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
 	//Gain Dragon Dick
 	if (changes < changeLimit && player.dragonCocks() < player.cockTotal() && rand(3) == 0) {
 		temp = 0;

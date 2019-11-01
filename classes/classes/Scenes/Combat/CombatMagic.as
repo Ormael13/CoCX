@@ -1193,17 +1193,18 @@ public class CombatMagic extends BaseCombatContent {
 			damage *= 1.75;
 		}
 		damage = Math.round(damage);
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
+		outputText(monster.capitalA + monster.short + " takes ");
+		damage = doMagicDamage(damage, true, true);
+		outputText(" damage.");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else
 		{
 			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
@@ -1623,7 +1624,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		spellIceSpike2();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 	public function spellIceSpike2():void {
@@ -1641,17 +1642,13 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		//High damage to goes.
 		damage = calcGlacialMod(damage);
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
-		if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
-		if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		damage = Math.round(damage);
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
+		outputText(monster.capitalA + monster.short + " takes ");
+		damage = doIceDamage(damage, true, true);
+		outputText(" damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
 		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -1664,7 +1661,6 @@ public class CombatMagic extends BaseCombatContent {
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 	}
@@ -1694,7 +1690,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		spellDarknessShard2();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 	public function spellDarknessShard2():void {
@@ -1712,16 +1708,12 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		//High damage to goes.
 		damage = calcEclypseMod(damage);
-		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.2;
-		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 5;
-//	if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
-//	if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		damage = Math.round(damage);
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
+		outputText(monster.capitalA + monster.short + " takes ");
+		damage = doDarknessDamage(damage, true, true);
+		outputText(" damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
 		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -1734,7 +1726,6 @@ public class CombatMagic extends BaseCombatContent {
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 	}
@@ -1848,17 +1839,13 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		//High damage to goes.
 		damage = calcGlacialMod(damage);
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
-		if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
-		if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		damage = Math.round(damage);
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
+		outputText(monster.capitalA + monster.short + " takes ");
+		damage = doIceDamage(damage, true, true);
+		outputText(" damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
 		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -1871,10 +1858,9 @@ public class CombatMagic extends BaseCombatContent {
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -1917,16 +1903,12 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		//High damage to goes.
 		damage = calcEclypseMod(damage);
-		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.2;
-		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 5;
-//	if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
-//	if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		damage = Math.round(damage);
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
+		outputText(monster.capitalA + monster.short + " takes ");
+		damage = doDarknessDamage(damage, true, true);
+		outputText(" damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
 		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -1939,10 +1921,9 @@ public class CombatMagic extends BaseCombatContent {
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -1983,20 +1964,18 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		//High damage to goes.
 		damage = calcGlacialMod(damage);
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
-		if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
-		if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		damage = Math.round(damage);
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bedą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		if (monster.plural == true) damage *= 5;
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">(" + damage + ")");
-		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) outputText(" (" + damage + ")  (" + damage + ")");
-		outputText("</font></b> damage.");
+		outputText(monster.capitalA + monster.short + " takes ");
+		damage = doIceDamage(damage, true, true);
+		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) {
+			damage = doIceDamage(damage, true, true);
+			damage = doIceDamage(damage, true, true);
+		}
+		outputText(" damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
 		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -2010,10 +1989,9 @@ public class CombatMagic extends BaseCombatContent {
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -2036,20 +2014,17 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			//High damage to goes.
 			damage = calcGlacialMod(damage);
-			if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
-			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
-			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
-			if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
-			if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 			if (combat.wearingWinterScarf()) damage *= 1.2;
 			damage = Math.round(damage);
 			//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bedą dostawać bonusowe obrażenia
 			//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 			if (monster.plural == true) damage *= 5;
-			outputText("<b><font color=\"#800000\">(" + damage + ")");
-			if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) outputText(" (" + damage + ")  (" + damage + ") ");
-			outputText("</font></b> damage!");
+			damage = doIceDamage(damage, true, true);
+			if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) {
+				damage = doIceDamage(damage, true, true);
+				damage = doIceDamage(damage, true, true);
+			}
+			outputText(" damage!");
 			//Using fire attacks on the goo]
 			//if(monster.short == "goo-girl") {
 			//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -2064,10 +2039,9 @@ public class CombatMagic extends BaseCombatContent {
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
-			monster.HP -= damage;
 			combat.heroBaneProc(damage);
 			statScreenRefresh();
-			if(monster.HP < 1) doNext(endHpVictory);
+			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			else enemyAI();
 		}
 		else {
@@ -2139,15 +2113,14 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
 		if (monster.plural == true) damage *= 5;
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		damage = Math.round(damage);
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">(" + damage + ")");
-		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) outputText(" (" + damage + ") (" + damage + ")");
-		outputText("</font></b> damage.");
+		outputText(monster.capitalA + monster.short + " takes ");
+		damage = doFireDamage(damage, true, true);
+		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) {
+			damage = doFireDamage(damage, true, true);
+			damage = doFireDamage(damage, true, true);
+		}
+		outputText(" damage.");
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
 			outputText("  Your fire storm lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -2161,10 +2134,9 @@ public class CombatMagic extends BaseCombatContent {
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -2197,12 +2169,45 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 			damage = Math.round(damage);
 			if (monster.plural == true) damage *= 5;
-			outputText("<b><font color=\"#800000\">(" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ")");
+			damage = doFireDamage(damage, true, true);
+			damage = doFireDamage(damage, true, true);
+			damage = doFireDamage(damage, true, true);
+			damage = doFireDamage(damage, true, true);
+			damage = doFireDamage(damage, true, true);
+			damage = doFireDamage(damage, true, true);
+			damage = doFireDamage(damage, true, true);
+			damage = doFireDamage(damage, true, true);
+			damage = doFireDamage(damage, true, true);
+			damage = doFireDamage(damage, true, true);
+			damage = doFireDamage(damage, true, true);
+			damage = doFireDamage(damage, true, true);
 			if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) {
-				outputText(" (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ")");
-				outputText(" (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ") (" + damage + ")");
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
+				damage = doFireDamage(damage, true, true);
 			}
-			outputText("</font></b> damage!");
+			outputText(" damage!");
 			//Using fire attacks on the goo]
 			if(monster.short == "goo-girl") {
 				outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -2218,10 +2223,9 @@ public class CombatMagic extends BaseCombatContent {
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
-			monster.HP -= damage;
 			combat.heroBaneProc(damage);
 			statScreenRefresh();
-			if(monster.HP < 1) doNext(endHpVictory);
+			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			else enemyAI();
 		}
 		else {
@@ -2580,7 +2584,7 @@ public class CombatMagic extends BaseCombatContent {
 				flags[kFLAGS.SPELLS_CAST]++;
 				if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 				spellPerkUnlock();
-				if(monster.HP < 1) doNext(endHpVictory);
+				if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 				else enemyAI();
 				return;
 			}
@@ -2671,7 +2675,7 @@ public class CombatMagic extends BaseCombatContent {
 				damage *= 1.75;
 			}
 			damage *= 1.75;
-			outputText(" (" + damage + ")");
+			damage = doFireDamage(damage, true, true);
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 			outputText("\n\n");
@@ -2680,7 +2684,6 @@ public class CombatMagic extends BaseCombatContent {
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
-			monster.HP -= damage;
 			combat.heroBaneProc(damage);
 			statScreenRefresh();
 		}
@@ -2689,7 +2692,7 @@ public class CombatMagic extends BaseCombatContent {
 			clearOutput();
 			spellWhitefire2();
 		}
-		if (monster.HP < 1)
+		if (monster.HP <= monster.minHP())
 		{
 			doNext(endHpVictory);
 		}
@@ -2720,13 +2723,10 @@ public class CombatMagic extends BaseCombatContent {
 		damage = calcInfernoMod(damage);
 		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-		if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		damage = Math.round(damage);
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
+		outputText(monster.capitalA + monster.short + " takes ");
+		damage = doFireDamage(damage, true, true);
+		outputText(" damage.");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
@@ -2740,7 +2740,6 @@ public class CombatMagic extends BaseCombatContent {
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 	}
@@ -2762,7 +2761,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		spellLightningBolt2();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 	public function spellLightningBolt2():void {
@@ -2780,16 +2779,13 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		//High damage to goes.
 		damage = calcVoltageMod(damage);
-		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
-		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
-		if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 		damage = Math.round(damage);
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
-		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
+		outputText(monster.capitalA + monster.short + " takes ");
+		damage = doLightingDamage(damage, true, true);
+		outputText(" damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
 		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -2802,7 +2798,6 @@ public class CombatMagic extends BaseCombatContent {
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 	}
@@ -2841,7 +2836,7 @@ public class CombatMagic extends BaseCombatContent {
 				damage *= 1.75;
 			}
 			damage *= 1.75;
-			outputText(" (" + damage + ")");
+			damage = doFireDamage(damage, true, true);
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		}
 		else
@@ -2863,13 +2858,10 @@ public class CombatMagic extends BaseCombatContent {
 			damage = calcInfernoMod(damage);
 			if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 			if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
-			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 			damage = Math.round(damage);
-			outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.");
+			outputText(monster.capitalA + monster.short + " takes ");
+			damage = doFireDamage(damage, true, true);
+			outputText(" damage.");
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			//Using fire attacks on the goo]
 			if(monster.short == "goo-girl") {
@@ -2884,10 +2876,9 @@ public class CombatMagic extends BaseCombatContent {
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		if (monster.HP < 1)
+		if (monster.HP <= monster.minHP())
 		{
 			doNext(endHpVictory);
 		}
@@ -2936,16 +2927,13 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		//High damage to goes.
 		damage = calcVoltageMod(damage);
-		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
-		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
-		if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 		damage = Math.round(damage);
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
-		outputText("for <b><font color=\"#800000\">" + damage + "</font></b> damage.");
+		outputText("for ");
+		damage = doLightingDamage(damage, true, true);
+		outputText(" damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
 		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -2958,10 +2946,9 @@ public class CombatMagic extends BaseCombatContent {
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		monster.HP -= damage;
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 

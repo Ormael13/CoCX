@@ -220,6 +220,7 @@ package classes.Scenes.Places.Prison
 					outputText("(Placeholder) Mistress Elly seems to accept her offering and walks over to where you and Billie sit locked together at the hips. She then takes a firm grasp on each of your heads, shoves her cock between your mouths, and begins to use your faces to pleasure herself. This sends Billie into a state of ecstasy, and she begins to fuck at your [vagOrAss] like a jackrabbit, quickly pulling you into a similiar state. Before long Mistress Elly begins to squirt between your lips, and as she paints the two of you white Billie erupts within you, dragging you through a series of messy orgasms as well.\n\n");
 				}
 				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 				prisonCaptorBillieHappinessSet(0);
 				player.orgasm();
 			}

@@ -21,6 +21,7 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
+import classes.StatusEffects;
 import classes.CockTypesEnum;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
@@ -59,7 +60,8 @@ public class CharViewContext extends ExecContext {
 				Tail         : Tail,
 				Tongue       : Tongue,
 				UnderBody    : UnderBody,
-				Wings        : Wings
+				Wings        : Wings,
+				StatusEffects: StatusEffects
 			}
 		]);
 		this.charview = charview;
@@ -82,6 +84,9 @@ class Pattern {
 	public static const BATTLE_TATTOO:int           = classes.BodyParts.Skin.PATTERN_BATTLE_TATTOO;
 	public static const SPOTTED:int                 = classes.BodyParts.Skin.PATTERN_SPOTTED;
 	public static const LIGHTNING_SHAPED_TATTOO:int = classes.BodyParts.Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
+	public static const RED_PANDA_UNDERBODY:int     = classes.BodyParts.Skin.PATTERN_RED_PANDA_UNDERBODY;
+	public static const SCAR_SHAPED_TATTOO:int      = classes.BodyParts.Skin.PATTERN_SCAR_SHAPED_TATTOO;
+	public static const WHITE_BLACK_VEINS:int       = classes.BodyParts.Skin.PATTERN_WHITE_BLACK_VEINS;
 }
 class UnderBody {
 

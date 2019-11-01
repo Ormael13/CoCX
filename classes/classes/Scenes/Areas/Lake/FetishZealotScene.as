@@ -210,6 +210,7 @@ public class FetishZealotScene extends AbstractLakeContent
 					}
 					outputText("After a moment, your student pulls out of you and helps you back up.\n\n");
 					if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+					if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 				}
 			}
 			//Wrapping things up
@@ -297,6 +298,7 @@ public class FetishZealotScene extends AbstractLakeContent
 				outputText("Your lusts sated for now, you rise up off of him and put your [armor] back on.  You decide to leave him lying there, still coughing from the blow to his stomach.  ");
 				player.cuntChange(monster.cockArea(0), true);
 				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			}
 			player.orgasm();
 			cleanupAfterCombat();

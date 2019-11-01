@@ -25,7 +25,7 @@ import classes.PerkLib;
 		}
 		
 		override public function useItem():Boolean {
-			if (game.player.skinTone == _color || player.hasPerk(PerkLib.TransformationImmunity)) {
+			if (game.player.skinTone == _color || player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) {
 				outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the bottle of oil and rubbing", "uncork the bottle of oil and rub") + " the smooth liquid across your body. Once you’ve finished you feel rejuvenated.");
 				EngineCore.fatigue(-10);
 			}

@@ -102,6 +102,22 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("Your current soulforce is too low.");
 			}
 		}
+		if (player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) {
+			bd = buttons.add("Sextuple Thrust", SextupleThrust).hint("Use a little bit of soulforce to infuse your weapon and thrust six times toward your enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nSoulforce cost: " + 70 * soulskillCost() * soulskillcostmulti());
+			if (player.hasStatusEffect(StatusEffects.CooldownSextupleThrust)) {
+				bd.disable("You need more time before you can use Sextuple Thrust again.");
+			} else if (player.soulforce < 70 * soulskillCost() * soulskillcostmulti()) {
+				bd.disable("Your current soulforce is too low.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsNonupleThrust)) {
+			bd = buttons.add("Nonuple Thrust", NonupleThrust).hint("Use a little bit of soulforce to infuse your weapon and thrust nine times toward your enemy.  \n\nWould go into cooldown after use for: 2 rounds  \n\nSoulforce cost: " + 150 * soulskillCost() * soulskillcostmulti());
+			if (player.hasStatusEffect(StatusEffects.CooldownNonupleThrust)) {
+				bd.disable("You need more time before you can use Nonuple Thrust again.");
+			} else if (player.soulforce < 150 * soulskillCost() * soulskillcostmulti()) {
+				bd.disable("Your current soulforce is too low.");
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsDracoSweep)) {
 			bd = buttons.add("Draco Sweep", DracoSweep).hint("Use a little bit of soulforce to infuse your weapon and then sweep ahead hitting as many enemies as possible.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
 			if (player.soulforce < 50 * soulskillCost() * soulskillcostmulti()) {
@@ -173,6 +189,37 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
 			}
 		}
+		if (player.hasStatusEffect(StatusEffects.KnowsHailOfBlades)) {
+			bd = buttons.add("Hail of Blades", HailOfBlades1).hint("Form six weapons from your soulforce traveling at extreme speeds.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
+			if (player.soulforce < 50 * soulskillCost() * soulskillcostmulti()) {
+				bd.disable("Your current soulforce is too low.");
+			} else if (player.hasStatusEffect(StatusEffects.OniRampage)) {
+				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+			}
+			
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfBlades)) {
+			bd = buttons.add("G.Hail of Blades", HailOfBlades2).hint("Form eighteen weapons from your soulforce traveling at extreme speeds.  \n\nWould go into cooldown after use for: 3 rounds  \n\nSoulforce cost: " + 200 * soulskillCost() * soulskillcostmulti());
+			if (player.soulforce < 200 * soulskillCost() * soulskillcostmulti()) {
+				bd.disable("Your current soulforce is too low.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownGrandioseHailOfBlades)) {
+				bd.disable("You need more time before you can use Grandiose Hail of Blades again.");
+			} else if (player.hasStatusEffect(StatusEffects.OniRampage)) {
+				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+			}
+			
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfMoonBlades)) {
+			bd = buttons.add("G.Hail of M.Blades", HailOfBlades3).hint("Form fifty four weapons from your soulforce traveling at extreme speeds.  \n\nWould go into cooldown after use for: 9 rounds  \n\nSoulforce cost: " + 800 * soulskillCost() * soulskillcostmulti());
+			if (player.soulforce < 800 * soulskillCost() * soulskillcostmulti()) {
+				bd.disable("Your current soulforce is too low.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownGrandioseHailOfMoonBlades)) {
+				bd.disable("You need more time before you can use Grandiose Hail of Moon Blades again.");
+			} else if (player.hasStatusEffect(StatusEffects.OniRampage)) {
+				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+			}
+			
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
 			if (player.hasStatusEffect(StatusEffects.VioletPupilTransformation)) {
 				bd = buttons.add("Deactiv VPT", DeactivateVioletPupilTransformation)
@@ -211,6 +258,117 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
+		if (monster.hasStatusEffect(StatusEffects.Frozen)) {
+			outputText("Your [weapon] hits the ice in three specific points, making it explode along with your frozen adversary!");
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			monster.spe += monster.statusEffectv1(StatusEffects.Frozen);
+			monster.removeStatusEffect(StatusEffects.Frozen);
+			outputText(" damage!");
+		}
+		else {
+			outputText("Your [weapon] hits thrice against " + monster.a + monster.short + ",");
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			outputText(" damage!");
+		}
+		outputText("\n\n");
+		combat.heroBaneProc2();
+		combat.EruptingRiposte2();
+		enemyAI();
+	}
+	public function SextupleThrust():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		outputText("You ready your [weapon] and prepare to thrust it towards " + monster.a + monster.short + ".  ");
+		if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
+			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
+			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
+			enemyAI();
+			return;
+		}
+		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
+		player.soulforce -= soulforcecost;
+		player.createStatusEffect(StatusEffects.CooldownSextupleThrust, 1, 0, 0, 0);
+		if (monster.hasStatusEffect(StatusEffects.Frozen)) {
+			outputText("Your [weapon] hits the ice in three specific points, making it explode along with your frozen adversary!");
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			monster.spe += monster.statusEffectv1(StatusEffects.Frozen);
+			monster.removeStatusEffect(StatusEffects.Frozen);
+			outputText(" damage!");
+		}
+		else {
+			outputText("Your [weapon] hits thrice against " + monster.a + monster.short + ",");
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			outputText(" damage!");
+		}
+		outputText("\n\n");
+		combat.heroBaneProc2();
+		combat.EruptingRiposte2();
+		enemyAI();
+	}
+	public function NonupleThrust():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		outputText("You ready your [weapon] and prepare to thrust it towards " + monster.a + monster.short + ".  ");
+		if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
+			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
+			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
+			enemyAI();
+			return;
+		}
+		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
+		player.soulforce -= soulforcecost;
+		player.createStatusEffect(StatusEffects.CooldownNonupleThrust, 2, 0, 0, 0);
+		if (monster.hasStatusEffect(StatusEffects.Frozen)) {
+			outputText("Your [weapon] hits the ice in three specific points, making it explode along with your frozen adversary!");
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			monster.spe += monster.statusEffectv1(StatusEffects.Frozen);
+			monster.removeStatusEffect(StatusEffects.Frozen);
+			outputText(" damage!");
+		}
+		else {
+			outputText("Your [weapon] hits thrice against " + monster.a + monster.short + ",");
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			MultiThrustD();
+			outputText(" damage!");
+		}
+		outputText("\n\n");
+		combat.heroBaneProc2();
+		combat.EruptingRiposte2();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	private function MultiThrustD():void {
 		var damage:Number = player.str;
 		damage += scalingBonusStrength() * 0.5;
 		if (damage < 10) damage = 10;
@@ -230,30 +388,6 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.haveWeaponForJouster()) {
 			if (player.isMeetingNaturalJousterReq()) damage *= 3;
 			if (player.isMeetingNaturalJousterMasterGradeReq()) damage *= 5;
-		}
-		if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-		}
-		if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-			if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
-			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
-			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
-		}
-		if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-			if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
-			if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
-			if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
-			if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
-		}
-		if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-			if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.2;
-			if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.5;
-			if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 2;
-			if (monster.hasPerk(PerkLib.LightningNature)) damage *= 5;
 		}
 		if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU) {
 			if (monster.cor < 33) damage = Math.round(damage * 1.0);
@@ -301,9 +435,10 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-		//triple strike bonus
-		damage *= 3;
 		if (monster.hasStatusEffect(StatusEffects.Frozen)) damage *= 2;
+		var d2:Number = 0.9;
+		d2 += (rand(21) * 0.01);
+		damage *= d2;
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		if (player.isSwordTypeWeapon()) critChance += 10;
@@ -316,13 +451,12 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
-		damage = doDamage(damage);
-		if (monster.hasStatusEffect(StatusEffects.Frozen)) {
-			monster.spe += monster.statusEffectv1(StatusEffects.Frozen);
-			monster.removeStatusEffect(StatusEffects.Frozen);
-			outputText("Your [weapon] hits the ice in three specific points, making it explode along with your frozen adversary! <b><font color=\"#800000\">" + damage + "</font></b> damage!");
-		}
-		else outputText("Your [weapon] hits thrice against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
+		outputText(" ");
+		if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doFireDamage(damage, true, true);
+		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doIceDamage(damage, true, true);
+		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doLightingDamage(damage, true, true);
+		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doDarknessDamage(damage, true, true);
+		else damage = doDamage(damage, true, true);
 		if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -332,10 +466,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		checkAchievementDamage(damage);
-		outputText("\n\n");
-		combat.heroBaneProc(damage);
-		if (monster.HP < 1) doNext(endHpVictory);
-		else enemyAI();
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) flags[kFLAGS.HERO_BANE_DAMAGE_BANK] += damage;
+		if (player.hasStatusEffect(StatusEffects.EruptingRiposte)) flags[kFLAGS.ERUPTING_RIPOSTE_DAMAGE_BANK] += monster.tou + monster.inte + monster.wis;
 	}
 
 	public function DracoSweep():void {
@@ -371,30 +503,6 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.isMeetingNaturalJousterReq()) damage *= 3;
 			if (player.isMeetingNaturalJousterMasterGradeReq()) damage *= 5;
 		}
-		if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-		}
-		if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-			if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
-			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
-			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
-		}
-		if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-			if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
-			if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
-			if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
-			if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
-		}
-		if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-			if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.2;
-			if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.5;
-			if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 2;
-			if (monster.hasPerk(PerkLib.LightningNature)) damage *= 5;
-		}
 		if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU) {
 			if (monster.cor < 33) damage = Math.round(damage * 1.0);
 			else if (monster.cor < 50) damage = Math.round(damage * 1.1);
@@ -455,8 +563,13 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
-		damage = doDamage(damage);
-		outputText("Your [weapon] sweeps against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
+		outputText("Your [weapon] sweeps against " + monster.a + monster.short + ", dealing ");
+		if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doFireDamage(damage, true, true);
+		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doIceDamage(damage, true, true);
+		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doLightingDamage(damage, true, true);
+		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doDarknessDamage(damage, true, true);
+		else damage = doDamage(damage, true, true);
+		outputText(" damage! ");
 		if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -468,7 +581,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
-		if (monster.HP < 1) doNext(endHpVictory);
+		combat.EruptingRiposte();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -490,7 +604,6 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.soulforce -= soulforcecost;
 		var damage:Number = scalingBonusWisdom();
 		if (damage < 10) damage = 10;
-		damage *= spellMod();
 		//soulskill mod effect
 		damage *= combat.soulskillMagicalMod();
 		//other bonuses
@@ -509,14 +622,20 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage = doDamage(damage);
 		if (silly ()) {
 			outputText("You snap your fingers, and at once every bird lends their high pitched voice to a unified, glass shattering cry:");
-			outputText("\n\n\"<i>AAAAAAAAAAAAAAAAAAAAAAAAAAAAA</i>\" (" + monster.a + monster.short + " take <b><font color=\"#800000\">" + damage + "</font></b> damage) ");
+			outputText("\n\n\"<i>AAAAAAAAAAAAAAAAAAAAAAAAAAAAA</i>\" (" + monster.a + monster.short + " take ");
+			damage = doMagicDamage(damage, true, true);
+			outputText(" damage) ");
 		}
-		else outputText("Crystal hits " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
+		else {
+			outputText("Crystal hits " + monster.a + monster.short + ", dealing ");
+			damage = doMagicDamage(damage, true, true);
+			outputText(" damage! ");
+		}
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
-		if (monster.HP < 1) doNext(endHpVictory);
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -536,7 +655,6 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.soulforce -= soulforcecost;
 		var damage:Number = scalingBonusWisdom();
 		if (damage < 10) damage = 10;
-		damage *= spellMod();
 		//soulskill mod effect
 		damage *= combat.soulskillMagicalMod();
 		//group enemies bonus
@@ -553,18 +671,188 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
-		damage = doDamage(damage);
-		outputText("Comet fragments hits " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
+		outputText("Comet fragments hits " + monster.a + monster.short + ", dealing ");
+		damage = doMagicDamage(damage, true, true);
+		outputText(" damage! ");
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
-		if (monster.HP < 1) doNext(endHpVictory);
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
+	
+	public function HailOfBlades1():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		outputText("Letting soulforce leak out around you, you form six ethereal two meter long weapons. You thrust your hand outwards and in the blink of an eye, weapons shoot forwards " + monster.a + monster.short + ".  ");
+		if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids weapons!");
+			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges weapons with superior quickness!");
+			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids weapons.");
+			enemyAI();
+			return;
+		}
+		var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();
+		player.soulforce -= soulforcecost;
+		outputText("Weapons hits " + monster.a + monster.short + ", dealing ");
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		outputText(" damage!\n\n");
+		combat.heroBaneProc2();
+		combat.EruptingRiposte2();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	public function HailOfBlades2():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		outputText("Letting soulforce leak out around you, you form eighteen ethereal two meter long weapons in two rows. You thrust your hand outwards and in the blink of an eye, weapons shoot forwards " + monster.a + monster.short + ".  ");
+		if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 10 && int(Math.random() * (((monster.spe - player.spe) / 5) + 70)) > 80)) {
+			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids weapons!");
+			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges weapons with superior quickness!");
+			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids weapons.");
+			enemyAI();
+			return;
+		}
+		var soulforcecost:int = 200 * soulskillCost() * soulskillcostmulti();
+		player.soulforce -= soulforcecost;
+		player.createStatusEffect(StatusEffects.CooldownGrandioseHailOfBlades, 3, 0, 0, 0);
+		outputText("Weapons hits " + monster.a + monster.short + ", dealing ");
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		outputText(" damage!\n\n");
+		combat.heroBaneProc2();
+		combat.EruptingRiposte2();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	public function HailOfBlades3():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		outputText("Letting soulforce leak out around you, you form fifty four ethereal two meter long weapons in four rows. You thrust your hand outwards and in the blink of an eye, weapons shoot forwards " + monster.a + monster.short + ".  ");
+		if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 20 && int(Math.random() * (((monster.spe - player.spe) / 6) + 60)) > 80)) {
+			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids weapons!");
+			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges weapons with superior quickness!");
+			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids weapons.");
+			enemyAI();
+			return;
+		}
+		var soulforcecost:int = 800 * soulskillCost() * soulskillcostmulti();
+		player.soulforce -= soulforcecost;
+		player.createStatusEffect(StatusEffects.CooldownGrandioseHailOfMoonBlades, 9, 0, 0, 0);
+		outputText("Weapons hits " + monster.a + monster.short + ", dealing ");
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		BladesD();
+		outputText(" damage!\n\n");
+		combat.heroBaneProc2();
+		combat.EruptingRiposte2();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	private function BladesD():void {
+		var damage:Number = player.wis * 0.5;
+		damage += scalingBonusWisdom() * 0.5;
+		if (damage < 10) damage = 10;
+		//soulskill mod effect
+		damage *= combat.soulskillMagicalMod();
+		//other bonuses
+		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		var d2:Number = 0.9;
+		d2 += (rand(21) * 0.01);
+		damage *= d2;
+		//final touches
+		damage *= (monster.damagePercent() / 100);
+		outputText(" ");
+		damage = doDamage(damage, true, true);
+		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		checkAchievementDamage(damage);
+		if (player.hasStatusEffect(StatusEffects.HeroBane)) flags[kFLAGS.HERO_BANE_DAMAGE_BANK] += damage;
+		if (player.hasStatusEffect(StatusEffects.EruptingRiposte)) flags[kFLAGS.ERUPTING_RIPOSTE_DAMAGE_BANK] += monster.tou + monster.inte + monster.wis;
+	}
 
-	public function CleansingPalm():void
-	{
+	public function CleansingPalm():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		doNext(combatMenu);
@@ -637,8 +925,9 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		monster.HP -= damage;
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		statScreenRefresh();
-		if(monster.HP < 1) doNext(endHpVictory);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 	
@@ -668,9 +957,9 @@ public class CombatSoulskills extends BaseCombatContent {
 		//final touches
 		damage *= (monster.damagePercent() / 100);
 		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) damage *= 2;
-		damage = doDamage(damage);
 		monster.spe -= 20;
-		outputText("Air seems to lose all temperature around your fist as you dash at " + monster.a + monster.short + " and shove your palm on " + monster.pronoun2 + ", " + monster.pronoun3 + " body suddenly is frozen solid, encased in a thick block of ice! (<b><font color=\"#800000\">" + damage + "</font></b>)");
+		outputText("Air seems to lose all temperature around your fist as you dash at " + monster.a + monster.short + " and shove your palm on " + monster.pronoun2 + ", " + monster.pronoun3 + " body suddenly is frozen solid, encased in a thick block of ice! ");
+		damage = doIceDamage(damage, true, true);
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		if (monster.hasStatusEffect(StatusEffects.Frozen)) {
 			if (monster.spe - 20 >= 0) {
@@ -702,8 +991,9 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		outputText("\n\n");
-		if (monster.HP < 1) doNext(endHpVictory);
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -720,20 +1010,6 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 			if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 			else damage *= 2;
-			if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
-			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.4;
-			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
-		}
-		if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
-			var damage1:Number = damage;
-			if (monster.hasPerk(PerkLib.IceNature)) damage1 += (damage1 * 0.5);
-			if (monster.hasPerk(PerkLib.FireVulnerability)) damage1 += (damage1 * 0.2);
-			if (monster.hasPerk(PerkLib.IceVulnerability)) damage1 += (damage1 * 0.05);
-			if (monster.hasPerk(PerkLib.FireNature)) damage1 += (damage1 * 0.02);
-			if (player.hasPerk(PerkLib.FireAffinity)) damage1 *= 2;
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
-			damage += damage1;
 		}
 		//other bonuses
 		if (player.findPerk(PerkLib.PerfectStrike) >= 0 && (monster.hasStatusEffect(StatusEffects.Frozen) || monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.FreezingBreathStun))) damage *= 1.5;
@@ -750,14 +1026,21 @@ public class CombatSoulskills extends BaseCombatContent {
 		//final touches
 		damage *= (monster.damagePercent() / 100);
 		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) damage *= 2;
-		damage = doDamage(damage);
 		monster.createStatusEffect(StatusEffects.FirePunchBurnDoT,16,0,0,0);
-		outputText("Setting your fist ablaze, you rush at " + monster.a + monster.short + " and scorch " + monster.pronoun2 + " with your searing flames. (<b><font color=\"#800000\">" + damage + "</font></b>)");
+		outputText("Setting your fist ablaze, you rush at " + monster.a + monster.short + " and scorch " + monster.pronoun2 + " with your searing flames. ");
+		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
+			damage += Math.round(damage * 0.1);
+			damage = doFireDamage(damage, true, true);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			damage = Math.round(damage * 1.1);
+		}
+		else damage = doFireDamage(damage, true, true);
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
 		outputText("\n\n");
-		if (monster.HP < 1) doNext(endHpVictory);
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -832,7 +1115,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
-		if (monster.HP < 1) doNext(endHpVictory);
+		combat.EruptingRiposte();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -864,9 +1148,9 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
-		damage = doDamage(damage);
 		player.createStatusEffect(StatusEffects.CooldownSoulBlast, 15, 0, 0, 0);
-		outputText("You wave the sign of the gate, tiger and serpent as you unlock all of your soulforce for an attack. " + monster.capitalA + monster.short + " can’t figure out what you are doing until a small sphere of energy explodes at the end of your fist in a massive beam of condensed soulforce. <b><font color=\"#800000\">" + damage + "</font></b> damage!");
+		outputText("You wave the sign of the gate, tiger and serpent as you unlock all of your soulforce for an attack. " + monster.capitalA + monster.short + " can’t figure out what you are doing until a small sphere of energy explodes at the end of your fist in a massive beam of condensed soulforce. ");
+		damage = doMagicDamage(damage, true, true);
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
 		else {
@@ -878,7 +1162,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
-		if (monster.HP < 1) doNext(endHpVictory);
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 
@@ -1226,7 +1510,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 outputText("Your [weapon] hits thrice against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
 	 checkAchievementDamage(damage);
 	 outputText("\n\n");
-	 if (monster.HP < 1) doNext(endHpVictory);
+	 if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 	 else enemyAI();
 	 }*/
 }

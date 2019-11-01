@@ -489,6 +489,7 @@ public class KitsuneScene extends BaseContent
 			outputText("Exhausted by the ordeal, you relax into a blissful stupor, only vaguely aware of the feeling of being dragged onto the deck.  The last thing you recall before slipping into unconsciousness is the three sisters crawling up alongside you, coaxing your twice-spent member back to life yet again with their magic, eyes glinting hungrily.");
 			//Increase PC cum production slightly due to residual effects from the kitsunes' magic.
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.orgasm();
 			outro();
 		} //end stillHungry();
@@ -1057,6 +1058,7 @@ public class KitsuneScene extends BaseContent
 
 			//Advance time 8 hrs, lose X gems, return to camp. +Sensitivity, +Libido.
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
 			cleanupAfterCombat();
@@ -2080,6 +2082,7 @@ public class KitsuneScene extends BaseContent
 			outputText("You turn to gather your [armor], cleaning up and dressing once more, then whip around to the sound of rustling leaves.  A set of sticky footprints leads your gaze to the edge of a bush, a flash of red tails and a pair of plump hind cheeks disappearing into the forest.");
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
+			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
 			cleanupAfterCombat();
@@ -2277,7 +2280,7 @@ public class KitsuneScene extends BaseContent
 				if (flags[kFLAGS.KITSUNE_SHRINE_VISIT] > 0 && player.ears.type == Ears.FOX && player.tailCount >= 2) {
 					spriteSelect(SpriteDb.s_ayane);
 					outputText("As you wander the woods you spot a floating blue flame yet again. Being a kitsune yourself you’ve grown wise to that tactic, and go straight for the trickster herself. Surprisingly, it’s not one of the kitsune sisters you were expecting, but a different person. She wears a formal kimono and has hair as white as snow. When she notices you, she starts by giving you the classic \"<i>Hello adventurer would you like to...</i>\" line until she realises you also have a pair of fox ears and multiple tails. There is an awkward silence as she sizes you up, then sighs.\n\n");
-					outputText("\"<i>My apologies, I heard there was a human wandering the woods as of late, and I couldn’t stop myself from thinking of a potential meal. My name is Ayane. I don’t recall meeting you within the region, are you new?</i>\"\n\n");
+					outputText("\"<i>My apologies, I heard there was a non kitsune outsider wandering the woods as of late, and I couldn’t stop myself from thinking of a potential meal. My name is Ayane. I don’t recall meeting you within the region, are you from a different forest?</i>\"\n\n");
 					outputText("You decide to play fair and admit you actually are a former human and that you have been looking for a way to become a kitsune yourself.\n\n");
 					outputText("\"<i>Oh, so you are interested in becoming one of the blessed children of Taoth? I guess that can be arranged, it’s not like you are the first person to try, and I see you have already begun the conversion on your own initiative. Still, if you truly wish to reach enlightenment and become one of us, simply taking transformatives won’t suffice. You must also commit yourself to him truly. I can help you with that. Anytime you wish to further your transformation, visit the shrine. I will be there for you and perhaps, if you're lucky enough, the trickster god will see you worthy of his blessings.</i>\" Having finished talking she vanishes, leaving you alone in the woods.\n\n");
 					outputText("<b>You can now visit the forest shrine at will.</b>");

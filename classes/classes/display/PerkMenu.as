@@ -86,7 +86,7 @@ public class PerkMenu extends BaseContent {
 		if (doubleAttackVal == 1) outputText("twice");
 		if (doubleAttackVal < 1) outputText("once");
 		outputText(" in combat turn.\n\nYou can change it to different amount of attacks.");
-		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0) {
+		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0 || player.jiangshiScore() >= 20) {
 			outputText("\n\nYou can choose between fighting feral or normaly with your fists. (Req. to have natural claws or gaunlet type weapon with claws to enable feral mode)");
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 0) outputText("\n\nFighting Style: <b>Normal</b>");
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1) outputText("\n\nFighting Style: <b>Feral</b>");
@@ -190,7 +190,7 @@ public class PerkMenu extends BaseContent {
 			&& flags[kFLAGS.ENVENOMED_MELEE_ATTACK] != 1) {
             addButton(4, "Venom", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,true);
 		}
-		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0) {
+		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0 || player.jiangshiScore() >= 20) {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] != 0) addButton(5, "Normal", toggleflag, kFLAGS.FERAL_COMBAT_MODE, false);
 			if (((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(8, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
 			else addButtonDisabled(8, "Feral", "You not meet all req. to use this. Need to not have any melee weapon equipped OR have equipped gaunlet with any type of artifical claws.");

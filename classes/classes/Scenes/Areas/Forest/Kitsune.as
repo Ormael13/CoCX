@@ -31,7 +31,7 @@ public class Kitsune extends Monster
 			//Struggle:
 			outputText("You struggle against the kitsune's tails with all your might, desperately trying to free yourself before she has her way with you.");
 			//Success
-			if (rand(20) + player.str / 20 + statusEffectv1(StatusEffects.PCTailTangle) >= 12) {
+			if ((rand(20) + player.str / 20 + statusEffectv1(StatusEffects.PCTailTangle) >= 12) || player.hasPerk(PerkLib.FluidBody)) {
 				outputText("  Summoning up reserves of strength you didn't know you had, you wrench yourself free of her tails, pushing her away.\n\n");
 				removeStatusEffect(StatusEffects.PCTailTangle);
 			}

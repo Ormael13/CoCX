@@ -106,7 +106,7 @@ public class Enigmanium extends Consumable{
 				changes++;
 			}
 
-		if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
+		if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
 			
 		//Mare
 		if (player.gender == 2 || player.gender == 3) {

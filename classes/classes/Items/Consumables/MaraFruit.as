@@ -58,7 +58,7 @@ public class MaraFruit extends Consumable{
 			dynStats("spe", -1);
 			changes++;
 		}
-		if (player.hasPerk(PerkLib.TransformationImmunity)) changeLimit = 0;
+		if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
 		//Female changes - pussy to flower (for now unused)
 		if (player.gender == 2 || (player.gender == 3 && player.mf("m", "f") == "f")) {
 			var boobsGrew:Boolean = false;
@@ -207,11 +207,14 @@ public class MaraFruit extends Consumable{
 			mutations.humanizeSkin();
 			changes++;
 		}
-		if (player.hasPlainSkinOnly() && player.skinTone != "leaf green" && player.skinTone != "lime green" && player.skinTone != "turquoise" && changes < changeLimit && rand(2) == 0) {
+		if (player.hasPlainSkinOnly() && player.skinTone != "leaf green" && player.skinTone != "lime green" && player.skinTone != "turquoise" && player.skinTone != "light green" && changes < changeLimit && rand(2) == 0) {
 			if (rand(10) == 0) player.skinTone = "turquoise";
 			else {
-				if (rand(5) == 0) player.skinTone = "lime green";
-				else player.skinTone = "leaf green";
+				if (rand(7) == 0) player.skinTone = "lime green";
+				else {
+					if (rand(4) == 0) player.skinTone = "leaf green";
+					else player.skinTone = "light green";
+				}
 			}
 			changes++;
 			outputText("\n\nWhoah, that was weird.  You just hallucinated that your skin turned " + player.skinTone + ".  No way!  It's staying, it really changed color!");

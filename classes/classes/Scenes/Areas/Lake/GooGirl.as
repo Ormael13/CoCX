@@ -185,11 +185,6 @@ public class GooGirl extends Monster
 			this.drop = new ChainedDrop().add(weapons.PIPE,1/10)
 					.add(consumables.WETCLTH,1/2)
 					.elseDrop(useables.GREENGL);
-/* These are actually green slime functions and were never called in GooGirl due to override of performCombatAction
-			this.special1 = 5040;
-			this.special2 = 5039;
-			this.special3 = 5039;
-*/
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGooType, 0, 0, 0, 0);
 			checkMonster();

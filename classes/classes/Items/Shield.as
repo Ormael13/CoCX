@@ -51,6 +51,10 @@ public class Shield extends Useable //Equipable
 				outputText("Your current weapon requires two hands. Unequip your current weapon or switch to one-handed before equipping this shield. ");
 				return false;
 			}
+			else if (game.player.hasPerk(PerkLib.Rigidity)) {
+				outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
+				return false;
+			}
 			return true;
 		}
 		

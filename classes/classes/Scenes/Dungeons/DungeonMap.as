@@ -1084,7 +1084,7 @@ public class DungeonMap extends BaseContent
 			else if (DungeonAbstractContent.dungeonLoc >= 104 && DungeonAbstractContent.dungeonLoc < 131) { //River Dungeon: Floor 2
 				rawOutputText("River Dungeon");
 				if (DungeonAbstractContent.dungeonLoc == 104) {
-					rawOutputText(", Floor 1");
+					rawOutputText(", Floor 2");
 					rawOutputText("\n            [ ]-   ");
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
@@ -1138,19 +1138,39 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |     ");
 				}*/
 			}
-			else if (DungeonAbstractContent.dungeonLoc >= 131 && DungeonAbstractContent.dungeonLoc < 68) { //Den of Desire
+			else if (DungeonAbstractContent.dungeonLoc >= 131 && DungeonAbstractContent.dungeonLoc < 135) { //Ebon Labyrinth
 				rawOutputText("Ebon Labyrinth");
 				if (DungeonAbstractContent.dungeonLoc == 131) {
 					rawOutputText(", Corridor");
-					rawOutputText("\n     |     ");
-					rawOutputText("\n   —[P]—   ");
-					rawOutputText("\n     |     ");
+					rawOutputText("\n   |   |   ");
+					rawOutputText("\n —[P]—[ ]— ");
+					rawOutputText("\n   |   |   ");
+					rawOutputText("\n —[ ]—[ ]— ");
+					rawOutputText("\n   |   |   ");
 				}
 				else if (DungeonAbstractContent.dungeonLoc == 132) {
 					rawOutputText(", Corridor");
-					rawOutputText("\n     |     ");
-					rawOutputText("\n   —[P]—   ");
-					rawOutputText("\n     |     ");
+					rawOutputText("\n   |   |   ");
+					rawOutputText("\n —[ ]—[P]— ");
+					rawOutputText("\n   |   |   ");
+					rawOutputText("\n —[ ]—[ ]— ");
+					rawOutputText("\n   |   |   ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 133) {
+					rawOutputText(", Corridor");
+					rawOutputText("\n   |   |   ");
+					rawOutputText("\n —[ ]—[ ]— ");
+					rawOutputText("\n   |   |   ");
+					rawOutputText("\n —[ ]—[P]— ");
+					rawOutputText("\n   |   |   ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 134) {
+					rawOutputText(", Corridor");
+					rawOutputText("\n   |   |   ");
+					rawOutputText("\n —[ ]—[ ]— ");
+					rawOutputText("\n   |   |   ");
+					rawOutputText("\n —[P]—[ ]— ");
+					rawOutputText("\n   |   |   ");
 				}
 			}
 			
@@ -1552,6 +1572,20 @@ else if (SceneLib.d3._currentRoom == "southwestcourtyard") {
 		
 		public function displayMap():void {
 			clearOutput();
+			outputText("<b><font face=\"_typewriter\">");
+			if (inRoomedDungeon) chooseRoomToDisplayD3();
+			else chooseRoomToDisplay();
+			outputText("</font></b>");
+			outputText("\n\n<b><u>Legend</u></b>");
+			outputText("\n<font face=\"_typewriter\"><b>P</b></font> — Player Location");
+			outputText("\n<font face=\"_typewriter\"><b>L</b></font> — Locked Door");
+			outputText("\n<font face=\"_typewriter\"><b>S</b></font> — Stairs");
+			menu();
+			addButton(0, "Close Map", playerMenu);
+		}
+		public function displayMap2():void {
+			clearOutput();
+			player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 			outputText("<b><font face=\"_typewriter\">");
 			if (inRoomedDungeon) chooseRoomToDisplayD3();
 			else chooseRoomToDisplay();
