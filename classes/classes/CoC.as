@@ -254,7 +254,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_0.8n4";
-			version = ver + " (<b>, character viewer update (p.4)</b>)";
+			version = ver + " (<b>Ebon Labyrinth, ghost TF rework, goo tf rework (p.1), Hydra and Fire Snail TF's, character viewer update (p.4), other smaller changes</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

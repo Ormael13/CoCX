@@ -16,17 +16,19 @@ import classes.Scenes.SceneLib;
 		
 		public function encountersRuletteBossesEL1Hydra():void {
 			outputText("The first telltale that something might have gone really wrong is the hissing which seems to come from all around the room. The only warning you get of the impending attack is a sudden move of the shadows as a massive snake head bites the air mere inches from your face. You ready for battle as several huge snakes comes out of the shadow, each connected to a single junction to what appears to be the body of a very tall woman.\n\n");
-			if (player.isNaga()) encountersRuletteBossesEL1HydraNagas();
-			else encountersRuletteBossesEL1HydraOthers();
-		}
-		public function encountersRuletteBossesEL1HydraNagas():void {
-			outputText("\"<i>Why, would you look at that, how did you little grass snake make it all the way here. Are you perhaps lost?</i>\"\n\n");
-			outputText("Sometimes you forget that as a naga your body language allows you to understand snakes of all kinds. You reply to the hydra that you're exploring the labyrinth in search of power and treasures.\n\n");
-			outputText("\"<i>Um well there's no treasure I know of in this room but perhaps if you can help me with my arousal problem I’d be willing to give you something close to the first. A hydra scale, nothing short, nothing less. That is of course if becoming like me is of any interest to poor puny you. So how about it?</i>\"\n\n");
-			menu();
-			addButton(1, "Sex", encountersRuletteBossesEL1HydraSex);
-			addButton(2, "Pass", encountersRuletteBossesEL1HydraPass);
-			addButton(3, "Fight", encountersRuletteBossesEL1HydraFight);
+			/*if (player.isNaga()) {
+				outputText("\"<i>Why, would you look at that, how did you little grass snake make it all the way here. Are you perhaps lost?</i>\"\n\n");
+				outputText("Sometimes you forget that as a naga your body language allows you to understand snakes of all kinds. You reply to the hydra that you're exploring the labyrinth in search of power and treasures.\n\n");
+				outputText("\"<i>Um well there's no treasure I know of in this room but perhaps if you can help me with my arousal problem I’d be willing to give you something close to the first. A hydra scale, nothing short, nothing less. That is of course if becoming like me is of any interest to poor puny you. So how about it?</i>\"\n\n");
+				menu();
+				addButton(1, "Sex", encountersRuletteBossesEL1HydraSex);
+				addButton(2, "Pass", encountersRuletteBossesEL1HydraPass);
+				addButton(3, "Fight", encountersRuletteBossesEL1HydraFight);
+			}
+			else {*/
+				outputText("She hisses in perfect coordination with the snakes, her slitted eyes fixating you obsessively, as a drooling gaping slit at the junction between the snakes and her human body tells you exactly what she wants from you. You don't feel you should indulge her however and as such ready to battle.\n\n");
+				startCombat(new Hydra(), true);
+			//}
 		}
 		public function encountersRuletteBossesEL1HydraOthers():void {
 			outputText("She hisses in perfect coordination with the snakes, her slitted eyes fixating you obsessively, as a drooling gaping slit at the junction between the snakes and her human body tells you exactly what she wants from you. You don't feel you should indulge her however and as such ready to battle.\n\n");

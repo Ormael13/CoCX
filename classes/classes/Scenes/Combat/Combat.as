@@ -2165,7 +2165,6 @@ public function multiArrowsStrike():void {
 				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) damage = doLightingDamage(damage, true, true);
 				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) damage = doDarknessDamage(damage, true, true);
 				else damage = doDamage(damage, true, true);
-				MSGControll = true;
 			}
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			heroBaneProc(damage);
@@ -2176,8 +2175,6 @@ public function multiArrowsStrike():void {
 				if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControll == false)) outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 			}
 			else {
-				if (MSGControll == false) {
-					MSGControll = true;
 				var lustArrowDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 				if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects [monster him].  ");
 				if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
@@ -2188,7 +2185,6 @@ public function multiArrowsStrike():void {
 					outputText(monster.capitalA + monster.short + "'");
 					if(!monster.plural) outputText("s");
 					outputText(" eyes glaze over with desire for a moment.  ");
-				}
 				}
 				lustArrowDmg *= 0.25;
 				lustArrowDmg = Math.round(lustArrowDmg);
@@ -2483,7 +2479,6 @@ public function throwWeapon():void {
 			if (MSGControll == false) {
 				outputText(".  It's clearly very painful. >");
 				damage = doDamage(damage, true, true);
-				MSGControll = true;
 			}
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			outputText("\n\n");
@@ -2681,9 +2676,7 @@ public function shootWeapon():void {
 		else {
 			if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0)) outputText(" damage.");
 			else {
-				if (MSGControll == false){ outputText(".  It's clearly very painful. <b>(<font color=\"#800000\">" + String(damage) + "</font>)</b>");
-				MSGControll == true;
-				}
+				if (MSGControll == false) outputText(".  It's clearly very painful. <b>(<font color=\"#800000\">" + String(damage) + "</font>)</b>");
 				if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			//	if (flaga dla efektu arouse arrow) outputText(" tekst dla arouse arrow effect.");
 			//	if (flaga dla efektu poison arrow) outputText(" tekst dla poison arrow effect.");
@@ -3286,7 +3279,6 @@ public function meleeDamageAcc():void {
 			}
 			else if (MSGControll == false) {
 				outputText("You hit [monster a] [monster name]! "); // for not displaying the same msg a lot of times.
-				MSGControll = true;
 			}
 			if (crit == true) {
 				outputText("<b>Critical! </b>");
@@ -3296,7 +3288,6 @@ public function meleeDamageAcc():void {
 				if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
 				else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 			}
-			if (damage > 1000) CommasForDigits(damage);
 			if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doFireDamage(damage, true, true);
 			else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doIceDamage(damage, true, true);
 			else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doLightingDamage(damage, true, true);
@@ -4030,7 +4021,10 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 		if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
 	}
 	if (display) {
-		if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+		if (damage > 0) {
+			if (damage > 1000) CommasForDigits(damage);
+			else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+		}
 		else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
 		else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
 	}
@@ -4090,7 +4084,10 @@ public function doMagicDamage(damage:Number, apply:Boolean = true, display:Boole
 		if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
 	}
 	if (display) {
-		if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+		if (damage > 0) {
+			if (damage > 1000) CommasForDigits(damage);
+			else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+		}
 		else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
 		else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
 	}
@@ -4155,7 +4152,10 @@ public function doFireDamage(damage:Number, apply:Boolean = true, display:Boolea
 		if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
 	}
 	if (display) {
-		if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+		if (damage > 0) {
+			if (damage > 1000) CommasForDigits(damage);
+			else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+		}
 		else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
 		else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
 	}
@@ -4224,7 +4224,10 @@ public function doIceDamage(damage:Number, apply:Boolean = true, display:Boolean
 		if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
 	}
 	if (display) {
-		if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+		if (damage > 0) {
+			if (damage > 1000) CommasForDigits(damage);
+			else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+		}
 		else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
 		else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
 	}
@@ -4289,7 +4292,10 @@ public function doLightingDamage(damage:Number, apply:Boolean = true, display:Bo
 		if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
 	}
 	if (display) {
-		if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+		if (damage > 0) {
+			if (damage > 1000) CommasForDigits(damage);
+			else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+		}
 		else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
 		else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
 	}
@@ -4354,7 +4360,10 @@ public function doDarknessDamage(damage:Number, apply:Boolean = true, display:Bo
 		if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
 	}
 	if (display) {
-		if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+		if (damage > 0) {
+			if (damage > 1000) CommasForDigits(damage);
+			else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+		}
 		else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
 		else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
 	}
@@ -4414,7 +4423,10 @@ public function doPoisonDamage(damage:Number, apply:Boolean = true, display:Bool
 		if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
 	}
 	if (display) {
-		if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+		if (damage > 0) {
+			if (damage > 1000) CommasForDigits(damage);
+			else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+		}
 		else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
 		else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
 	}
@@ -8137,4 +8149,4 @@ public function scalingBonusLibido():Number {
 	return inteWisLibScale(player.lib);
 }
 }
-}
+}
