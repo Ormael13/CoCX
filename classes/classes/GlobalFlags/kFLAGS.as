@@ -1998,8 +1998,8 @@ public static const UNKNOWN_FLAG_NUMBER_01989:int                               
 public static const UNKNOWN_FLAG_NUMBER_01990:int                                   = 1990;
 public static const UNKNOWN_FLAG_NUMBER_01991:int                                   = 1991;
 public static const UNKNOWN_FLAG_NUMBER_01992:int                                   = 1992;
-public static const UNKNOWN_FLAG_NUMBER_01993:int                                   = 1993;
-public static const UNKNOWN_FLAG_NUMBER_01994:int                                   = 1994;
+public static const PLAYER_DISARMED_UNDERWEAR_UPPER_ID:int                          = 1993;
+public static const PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID:int                         = 1994;
 public static const PLAYER_DISARMED_ARMOR_ID:int                                    = 1995;
 public static const PLAYER_DISARMED_SHIELD_ID:int                                   = 1996;
 public static const PLAYER_DISARMED_WEAPON_R_ID:int                                 = 1997;

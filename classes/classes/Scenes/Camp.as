@@ -1,6 +1,9 @@
 ﻿package classes.Scenes{
 import classes.*;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
+import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
@@ -3835,14 +3838,65 @@ private function promptSaveUpdate():void {
 		doNext(doCamp);
 		return;
 	}
-/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 25) {
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 25) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 26;
 		clearOutput();
-		outputText("Text.");
+		outputText("For all those poor Jiangshi. Go forth young zombie and be alive again... with a bit of recompesation ;) Also Adventure Guld Quest counters. I heard some of you likes to know how many times you brough those blood dripping imp skulls to our cute panda girl so... here you go.");
+		if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] > 1) {
+			player.setWeapon(weapons.BFTHSWORD);
+			player.setWeaponRange(weaponsrange.AVELYNN);
+			player.setShield(shields.DRGNSHL);
+			player.setArmor(armors.LAYOARM);
+			flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
+			player.skinTone = "light";
+			player.faceType = Face.HUMAN;
+			player.eyes.type = Eyes.HUMAN;
+			player.horns.type = Horns.NONE;
+			player.horns.count = 0;
+			player.arms.type = Arms.HUMAN;
+			player.lowerBody = LowerBody.HUMAN;
+			if (player.hasPerk(PerkLib.HaltedVitals)) player.removePerk(PerkLib.HaltedVitals);
+			if (player.hasPerk(PerkLib.SuperStrength)) player.removePerk(PerkLib.SuperStrength);
+			if (player.hasPerk(PerkLib.PoisonNails)) player.removePerk(PerkLib.PoisonNails);
+			if (player.hasPerk(PerkLib.Rigidity)) player.removePerk(PerkLib.Rigidity);
+			if (player.hasPerk(PerkLib.LifeLeech)) player.removePerk(PerkLib.LifeLeech);
+			if (player.hasPerk(PerkLib.Undeath)) player.removePerk(PerkLib.Undeath);
+			if (player.hasPerk(PerkLib.EnergyDependent)) player.removePerk(PerkLib.EnergyDependent);
+			if (player.hasStatusEffect(StatusEffects.EnergyDependent)) player.removeStatusEffect(StatusEffects.EnergyDependent);
+			flags[kFLAGS.CURSE_OF_THE_JIANGSHI] = 0;
+		}
+		if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests1)) {
+			player.createStatusEffect(StatusEffects.AdventureGuildQuestsCounter1, 0, 0, 0, 0);
+			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 2) player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 1, 1);
+			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 4) player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 1, 2);
+			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 7) player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 1, 3);
+			if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 2) player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 2, 1);
+			if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 4) player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 2, 2);
+			if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 7) player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 2, 3);
+			if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 2) player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 3, 1);
+			if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 4) player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 3, 2);
+			if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 7) player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 3, 3);
+		}
+		if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests2)) {
+			player.createStatusEffect(StatusEffects.AdventureGuildQuestsCounter2, 0, 0, 0, 0);
+			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 2) player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 1, 1);
+			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 4) player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 1, 2);
+			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 7) player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 1, 3);
+			if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 2) player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 2, 1);
+			if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 4) player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 2, 2);
+			if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 7) player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 2, 3);
+		}
+		if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests4)) {
+			player.createStatusEffect(StatusEffects.AdventureGuildQuestsCounter4, 0, 0, 0, 0);
+			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 2) player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter4, 1, 1);
+			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 5) player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter4, 1, 2);
+			if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) == 2) player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter4, 2, 1);
+			if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) == 5) player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter4, 2, 2);
+		}
 		doNext(doCamp);
 		return;
 	}
-	if (flags[kFLAGS.MOD_SAVE_VERSION] == 26) {
+/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 26) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 27;
 		clearOutput();
 		outputText("Text.");

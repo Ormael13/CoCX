@@ -28,7 +28,7 @@ public function siegweirdFirstEncounter():void
 	outputText("\"<i>I’ve been unable to solve this problem for days, but I’m in quite a pickle as my sword was stolen by an imp somewhere on the ridge.. Mmmmm… I’m sure there is a way to recover it.</i>\"");
 	menu();
 	addButton(1, "Help him", siegweirdFirstEncounterHelpHim).hint("Helping him may lead to recrutiment (if all went according to the plan) so that will lock out chance to get Alvina. So think carefully fi you sure you want get him over Alvina.");
-	addButton(3, "Do not help him", siegweirdFirstEncounterDoNotHelpHim).hint("later on PC will be still able meet him and get offer to help.");
+	addButton(3, "Do not help him", siegweirdFirstEncounterDoNotHelpHim).hint("Later on PC will be still able meet him and get offer to help.");
 }
 public function siegweirdFirstEncounterHelpHim():void
 {

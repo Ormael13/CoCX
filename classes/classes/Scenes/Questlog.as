@@ -96,9 +96,9 @@ public class Questlog extends BaseContent
 			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 2 || player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 5) outputText("Completed (for today)");
 			else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 1 || player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 4) outputText("In Progress");
 			else outputText("Not Started");
-			//outputText("\n<i><b>Spider-silk Gathering:</b> Soon</i>");
+			outputText("\n<i><b>Spider-silk Gathering:</b> Soon</i>");
 			//outputText("\n<i><b>Dragonscale Gathering:</b> Soon</i>");
-			//outputText("\n<i><b>Ebonbloom Gathering:</b> Soon</i>");
+			outputText("\n<i><b>Ebonbloom Gathering:</b> Soon</i>");
 			//outputText("\n<i><b>World Tree Branch Gathering:</b> Soon</i>");
 			outputText("\n\n<u><b>Twilight of the Gods</b></u>");
 			outputText("\n<b>Feral Imps Capture:</b> ");

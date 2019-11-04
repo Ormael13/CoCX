@@ -155,6 +155,27 @@ public class DungeonEngine extends BaseContent
 		private static const DUNGEON_EBON_LABYRINTH_2:int	= 133;
 		private static const DUNGEON_EBON_LABYRINTH_3:int	= 134;
 		
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_01:int  = 135;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_02:int  = 136;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_03:int  = 137;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_04:int  = 138;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_05:int  = 139;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_06:int  = 140;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_07:int  = 141;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_08:int  = 142;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_09:int  = 143;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_10:int  = 144;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_11:int  = 145;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_12:int  = 146;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_13:int  = 147;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_14:int  = 148;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_15:int  = 149;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_16:int  = 150;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_17:int  = 151;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_18:int  = 152;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_19:int  = 153;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_20:int  = 154;
+		
 		//Register dungeons
 		public var factory:Factory = new Factory;
 		public var deepcave:DeepCave = new DeepCave;
@@ -166,6 +187,7 @@ public class DungeonEngine extends BaseContent
 		public var denofdesire:DenOfDesire = new DenOfDesire();
 		public var anzupalace:AnzuPalace = new AnzuPalace();
 		public var ebonlabyrinth:EbonLabyrinth = new EbonLabyrinth;
+		public var beehive:BeeHive = new BeeHive;
 		
 		public var map:DungeonMap = new DungeonMap;
 		

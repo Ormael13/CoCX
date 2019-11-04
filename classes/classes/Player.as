@@ -4824,16 +4824,18 @@ use namespace CoC;
 		{
 			Begin("Player","racialScore","goo");
 			var gooCounter:Number = 0;
-			if (hairType == Hair.GOO)
+			if (skinTone != "red" || skinTone != "orange" || skinTone != "reddish orange" || skinTone != "indigo" || skinTone != "light purple" || skinTone != "purple" || skinTone != "purplish black") {
 				gooCounter++;
-			if (arms.type == Arms.GOO)
-				gooCounter++;
-			if (lowerBody == LowerBody.GOO)
-				gooCounter += 3;
-			if (rearBody.type == RearBody.METAMORPHIC_GOO)
-				gooCounter += 2;
-			if (hasGooSkin() && skinAdj == "slimy") {
-				gooCounter++;
+				if (hairType == Hair.GOO)
+					gooCounter++;
+				if (arms.type == Arms.GOO)
+					gooCounter++;
+				if (lowerBody == LowerBody.GOO)
+					gooCounter += 3;
+				if (rearBody.type == RearBody.METAMORPHIC_GOO)
+					gooCounter += 2;
+				if (hasGooSkin() && skinAdj == "slimy")
+					gooCounter++;
 				if (faceType == Face.HUMAN)
 					gooCounter++;
 				if (eyes.type == Eyes.HUMAN)
@@ -4844,28 +4846,25 @@ use namespace CoC;
 					gooCounter++;
 				if (hasVagina())
 					gooCounter++;
+				if (antennae.type == Antennae.NONE)
+					gooCounter++;
+				if (wings.type == Wings.NONE)
+					gooCounter++;
+				if (gills.type == Gills.NONE)
+					gooCounter++;
 			}
-			if (antennae.type == Antennae.NONE)
-				gooCounter++;
-			if (wings.type == Wings.NONE)
-				gooCounter++;
-			if (gills.type == Gills.NONE)
-				gooCounter++;
 			if (vaginalCapacity() > 9000)
 				gooCounter++;
 			if (hasStatusEffect(StatusEffects.SlimeCraving))
 				gooCounter++;
 			//if (findPerk(PerkLib.SlimeCore) >= 0)
 			//	gooCounter++;
-			if (skinTone == "red" || skinTone == "orange" || skinTone == "reddish orange" || skinTone == "indigo" || skinTone == "light purple" || skinTone == "purple" || skinTone == "purplish black")
-				gooCounter -= 16;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				gooCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && gooCounter >= 4)
 				gooCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && gooCounter >= 8)
 				gooCounter += 1;
-			if (gooCounter < 0) gooCounter = 0;
 			if (isGargoyle()) gooCounter = 0;
 			End("Player","racialScore");
 			return gooCounter;
@@ -4875,18 +4874,18 @@ use namespace CoC;
 		{
 			Begin("Player","racialScore","magmagoo");
 			var magmagooCounter:Number = 0;
-			if (hairType == Hair.GOO)
-				magmagooCounter++;
-			if (arms.type == Arms.GOO)
-				magmagooCounter++;
-			if (lowerBody == LowerBody.GOO)
-				magmagooCounter += 3;
-			if (rearBody.type == RearBody.METAMORPHIC_GOO)
+			if (skinTone == "red" || skinTone == "orange" || skinTone == "reddish orange") {
 				magmagooCounter += 2;
-			if (hasGooSkin() && skinAdj == "slimy") {
-				magmagooCounter++;
-				if (skinTone == "red" || skinTone == "orange" || skinTone == "reddish orange")
+				if (hairType == Hair.GOO)
+					magmagooCounter++;
+				if (arms.type == Arms.GOO)
+					magmagooCounter++;
+				if (lowerBody == LowerBody.GOO)
+					magmagooCounter += 3;
+				if (rearBody.type == RearBody.METAMORPHIC_GOO)
 					magmagooCounter += 2;
+				if (hasGooSkin() && skinAdj == "slimy")
+					magmagooCounter++;
 				if (faceType == Face.HUMAN)
 					magmagooCounter++;
 				if (eyes.type == Eyes.HUMAN)
@@ -4897,13 +4896,13 @@ use namespace CoC;
 					magmagooCounter++;
 				if (hasVagina())
 					magmagooCounter++;
+				if (antennae.type == Antennae.NONE)
+					magmagooCounter++;
+				if (wings.type == Wings.NONE)
+					magmagooCounter++;
+				if (gills.type == Gills.NONE)
+					magmagooCounter++;
 			}
-			if (antennae.type == Antennae.NONE)
-				magmagooCounter++;
-			if (wings.type == Wings.NONE)
-				magmagooCounter++;
-			if (gills.type == Gills.NONE)
-				magmagooCounter++;
 			if (vaginalCapacity() > 9000)
 				magmagooCounter++;
 			if (hasStatusEffect(StatusEffects.SlimeCraving))
@@ -4925,17 +4924,17 @@ use namespace CoC;
 		{
 			Begin("Player","racialScore","darkgoo");
 			var darkgooCounter:Number = 0;
-			if (hairType == Hair.GOO)
+			if (skinTone == "indigo" || skinTone == "light purple" || skinTone == "purple" || skinTone == "purplish black") {
 				darkgooCounter++;
-			if (arms.type == Arms.GOO) 
-				darkgooCounter++;
-			if (lowerBody == LowerBody.GOO)
-				darkgooCounter += 3;
-			if (rearBody.type == RearBody.METAMORPHIC_GOO)
-				darkgooCounter += 2;
-			if (hasGooSkin() && skinAdj == "slimy") {
-				darkgooCounter++;
-				if (skinTone == "indigo" || skinTone == "light purple" || skinTone == "purple" || skinTone == "purplish black")
+				if (hairType == Hair.GOO)
+					darkgooCounter++;
+				if (arms.type == Arms.GOO) 
+					darkgooCounter++;
+				if (lowerBody == LowerBody.GOO)
+					darkgooCounter += 3;
+				if (rearBody.type == RearBody.METAMORPHIC_GOO)
+					darkgooCounter += 2;
+				if (hasGooSkin() && skinAdj == "slimy")
 					darkgooCounter++;
 				if (faceType == Face.HUMAN)
 					darkgooCounter++;
@@ -4947,28 +4946,25 @@ use namespace CoC;
 					darkgooCounter++;
 				if (hasVagina())
 					darkgooCounter++;
+				if (antennae.type == Antennae.NONE)
+					darkgooCounter++;
+				if (wings.type == Wings.NONE)
+					darkgooCounter++;
+				if (gills.type == Gills.NONE)
+					darkgooCounter++;
 			}
-			if (antennae.type == Antennae.NONE)
-				darkgooCounter++;
-			if (wings.type == Wings.NONE)
-				darkgooCounter++;
-			if (gills.type == Gills.NONE)
-				darkgooCounter++;
 			if (vaginalCapacity() > 9000)
 				darkgooCounter++;
 			if (hasStatusEffect(StatusEffects.SlimeCraving))
 				darkgooCounter++;
 			//if (findPerk(PerkLib.SlimeCore) >= 0)
 			//	darkgooCounter++;
-			if (skinTone == "red" || skinTone == "orange" || skinTone == "reddish orange")
-				darkgooCounter -= 16;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				darkgooCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && darkgooCounter >= 4)
 				darkgooCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && darkgooCounter >= 8)
 				darkgooCounter += 1;
-			if (darkgooCounter < 0) darkgooCounter = 0;
 			if (isGargoyle()) darkgooCounter = 0;
 			End("Player","racialScore");
 			return darkgooCounter;
@@ -7294,7 +7290,7 @@ use namespace CoC;
 		 * @param	nl
 		 */
 		public function refillHunger(amnt:Number = 0, nl:Boolean = true):void {
-			if ((flags[kFLAGS.HUNGER_ENABLED] > 0 || flags[kFLAGS.IN_PRISON] > 0) && !isGargoyle())
+			if ((flags[kFLAGS.HUNGER_ENABLED] > 0 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] != 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] != 3 || flags[kFLAGS.IN_PRISON] > 0) && (!hasPerk(PerkLib.GargoylePure) || !hasPerk(PerkLib.GargoyleCorrupted)))
 			{
 				
 				var oldHunger:Number = hunger;
@@ -7426,7 +7422,7 @@ use namespace CoC;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 60) raw /= 2;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 80) raw /= 2;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 90) raw /= 2;
-			if(findPerk(PerkLib.MinotaurCumResistance) >= 0 || findPerk(PerkLib.ManticoreCumAddict) >= 0) raw *= 0;
+			if(findPerk(PerkLib.MinotaurCumResistance) >= 0 || findPerk(PerkLib.ManticoreCumAddict) >= 0 || findPerk(PerkLib.HaltedVitals) >= 0) raw *= 0;
 			//If in withdrawl, readdiction is potent!
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) raw += 10;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) raw += 5;

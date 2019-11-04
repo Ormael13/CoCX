@@ -736,7 +736,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 
 		private function hourlyHunger():Boolean {
 			var needNext:Boolean = false;
-			if (flags[kFLAGS.HUNGER_ENABLED] > 0 || prison.inPrison) {
+			if (flags[kFLAGS.HUNGER_ENABLED] > 0 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] != 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] != 3 || prison.inPrison) {
 				var multiplier:Number = 1.0;
 				if (player.findPerk(PerkLib.Survivalist) >= 0) multiplier -= 0.2;
 				if (player.findPerk(PerkLib.Survivalist2) >= 0) multiplier -= 0.2;
@@ -1956,7 +1956,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
                 return true;
 			}
 			//Pussytail Bad End
-			if (player.tailType == Tail.MANTICORE_PUSSYTAIL && player.hasCock()) {
+			if (player.tailType == Tail.MANTICORE_PUSSYTAIL && player.hasCock() && !debug) {
 				SceneLib.camp.campUniqueScenes.badendManticoreOuroboros();
 				return true;
 			}

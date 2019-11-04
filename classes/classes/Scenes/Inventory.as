@@ -861,11 +861,11 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 			{
 				addButton(5, "Armour", unequipArmor).hint(player.armor.description, capitalizeFirstLetter(player.armor.name));
 			}
-			if (player.upperGarment != UndergarmentLib.NOTHING)
+			if (player.upperGarment != UndergarmentLib.NOTHING && !player.hasPerk(PerkLib.Rigidity))
 			{
 				addButton(6, "Upperwear", unequipUpperwear).hint(player.upperGarment.description, capitalizeFirstLetter(player.upperGarment.name));
 			}
-			if (player.lowerGarment != UndergarmentLib.NOTHING)
+			if (player.lowerGarment != UndergarmentLib.NOTHING && !player.hasPerk(PerkLib.Rigidity))
 			{
 				addButton(7, "Lowerwear", unequipLowerwear).hint(player.lowerGarment.description, capitalizeFirstLetter(player.lowerGarment.name));
 			}

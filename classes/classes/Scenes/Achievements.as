@@ -286,6 +286,10 @@ public class Achievements extends BaseContent
 			addAchievement("Us Evolve", kACHIEVEMENTS.EPIC_US_EVOLVE, "Find two evolving items.", "", true);
 			//znalezienie 4 ewolujących przedmiotów
 			//znalezienie 8 ewolujących przedmiotów
+			//przeprowadznie 1 ewolucji przedmiotu
+			//przeprowadznie 2 ewolucji przedmiotu
+			//przeprowadznie 4 ewolucji przedmiotu
+			//przeprowadznie 8 ewolucji przedmiotu
 			addAchievement("Achievementception", kACHIEVEMENTS.EPIC_ACHIEVEMENTCEPTION, "Unlocking 10 achievements.", "", true);
 			addAchievement("Achievement within Achievement", kACHIEVEMENTS.EPIC_ACHIEVEMENT_WITHIN_ACHIEVEMENT, "Unlocking 30 achievements.", "", true);
 			addAchievement("Achievements - Going Deeper (1st layer)", kACHIEVEMENTS.EPIC_ACHIEVEMENTS_GOING_DEEPER_1L, "Unlocking 60 achievements.", "", true);

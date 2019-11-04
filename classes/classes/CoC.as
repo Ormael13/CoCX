@@ -72,7 +72,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 25;
+    public var modSaveVersion:Number = 26;
     public var levelCap:Number = 150;
 
     //Used to restrict random drops from overlapping uniques
@@ -253,8 +253,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8n4";
-			version = ver + " (<b>Ebon Labyrinth, ghost TF rework, goo tf rework (p.1), Hydra and Fire Snail TF's, character viewer update (p.4), other smaller changes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8n4a";//5
+			version = ver + " (<b>Bugfixes</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

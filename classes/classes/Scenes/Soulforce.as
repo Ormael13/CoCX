@@ -180,7 +180,6 @@ use namespace CoC;
 				outputText("Mortal\n");
 			outputText("<b>Cultivation level:</b> " + flags[kFLAGS.SOUL_CULTIVATION] + "\n");
 			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 1430\n");
-			if (player.hasStatusEffect(StatusEffects.AlvinaTraining2)) outputText("ALvi training 2 value: " + player.statusEffectv1(StatusEffects.AlvinaTraining2) + "\n");
 		/*	outputText("<b>Progress toward clearing next meridian: </b>");
 			if (flags[kFLAGS.UNLOCKED_MERIDIANS] == 2)
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
@@ -224,11 +223,52 @@ use namespace CoC;
 			//if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
 			if (player.hasPerk(PerkLib.Metamorph)) addButton(9, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Metamorph all options unlock.");
 			//addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
-			addButton(10, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
+			addButton(10, "De-Jian", AddTheSeerHairpinAndCo01);
+			//addButton(10, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
 			addButton(11, "PerkGalore1", GargoyleMenu2);
 			addButton(12, "PerkGalore2", GargoyleMenu3);
 			addButton(13, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			addButton(14, "Back", accessSoulforceMenu);
+		}
+		public function AddTheSeerHairpinAndCo01():void {
+			outputText("\n\n");
+			inventory.takeItem(consumables.VITAL_T, AddTheSeerHairpinAndCo02);
+		}
+		public function AddTheSeerHairpinAndCo02():void {
+			outputText("\n");
+			inventory.takeItem(consumables.VITAL_T, AddTheSeerHairpinAndCo03);
+		}
+		public function AddTheSeerHairpinAndCo03():void {
+			outputText("\n");
+			inventory.takeItem(consumables.VITAL_T, AddTheSeerHairpinAndCo04);
+		}
+		public function AddTheSeerHairpinAndCo04():void {
+			outputText("\n");
+			inventory.takeItem(consumables.VITAL_T, AddTheSeerHairpinAndCo05);
+		}
+		public function AddTheSeerHairpinAndCo05():void {
+			outputText("\n");
+			inventory.takeItem(consumables.VITAL_T, AddTheSeerHairpinAndCo06);
+		}
+		public function AddTheSeerHairpinAndCo06():void {
+			outputText("\n");
+			inventory.takeItem(consumables.PPHILTR, AddTheSeerHairpinAndCo07);
+		}
+		public function AddTheSeerHairpinAndCo07():void {
+			outputText("\n");
+			inventory.takeItem(consumables.PPHILTR, AddTheSeerHairpinAndCo08);
+		}
+		public function AddTheSeerHairpinAndCo08():void {
+			outputText("\n");
+			inventory.takeItem(consumables.PPHILTR, AddTheSeerHairpinAndCo09);
+		}
+		public function AddTheSeerHairpinAndCo09():void {
+			outputText("\n");
+			inventory.takeItem(consumables.PPHILTR, AddTheSeerHairpinAndCo10);
+		}
+		public function AddTheSeerHairpinAndCo10():void {
+			outputText("\n");
+			inventory.takeItem(consumables.PPHILTR, SoulforceCheats);
 		}
 public function FightAria():void {
 	clearOutput();
