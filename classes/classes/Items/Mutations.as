@@ -13792,7 +13792,7 @@ public final class Mutations extends MutationsHelper
 					if (rand (2) == 0) player.hairColor = "orange";
 					else player.hairColor = "pinkish orange";
 				}
-				outputText("\n\nAs if sweating wasn't bad enough your body temperature suddenly spikes again. Before you know it your entire body is set on fire, especially your hair of which the tips glows like smoldering embers. Not only that but Instead of normal sweat your entire body now quite literally seethes liquid fire. <b>Guess you are now a full fire snail with those burning hair of yours.</b>");
+				outputText("\n\nAs if sweating wasn't bad enough your body temperature suddenly spikes again. Before you know it your entire body is set on fire, especially your hair of which the tips glows like smoldering embers. Not only that but Instead of normal sweat your entire body now quite literally seethes liquid fire. <b>Guess you’re a full fire snail now with this burning hair of yours.</b>");
 				setHairType(Hair.BURNING);
 				changes++;
 			}
@@ -14260,4 +14260,4 @@ public final class Mutations extends MutationsHelper
 		}
 	}
 }
-
+

@@ -6,12 +6,20 @@ package classes.Scenes.NPCs
 	 */
 	
 	import classes.*;
+	import classes.BodyParts.Arms;
+	import classes.BodyParts.Eyes;
+	import classes.BodyParts.Face;
+	import classes.BodyParts.Horns;
+	import classes.BodyParts.LowerBody;
+	import classes.BodyParts.Tail;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Monsters.Imp;
 	import classes.Items.Armor;
 	import classes.Items.ArmorLib;
 	import classes.Items.Shield;
 	import classes.Items.ShieldLib;
+	import classes.Items.Undergarment;
+	import classes.Items.UndergarmentLib;
 	import classes.Items.Weapon;
 	import classes.Items.WeaponLib;
 	import classes.Items.WeaponRange;
@@ -754,19 +762,31 @@ private function curingJiangshi():void {
 		player.destroyItems(consumables.PPHILTR, 5);
 		outputText("Evangeline nods as you bring her the ingredients, getting to work. As soon as the potion is finished she pours it over your cursed talisman, causing it to smoke and crumble. The first thing you do as the nasty thing peels off is head back to He’Xin’Dao and look for your gear. Thankfully it doesn't take you long to find it in a chest not to far from the table on which the crazy cat messed you up. Gosh, it feels good to be alive, like REALLY alive.\n\n");
 		if (player.weapon == WeaponLib.FISTS || flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
-			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
 			player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
 		}
 		if (player.weaponRange == WeaponRangeLib.NOTHING) {
 			player.setWeaponRange(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID]) as WeaponRange);
 		}
 		if (player.shield == ShieldLib.NOTHING || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
-			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
 			player.setShield(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID]) as Shield);
 		}
 		if (player.armor == armors.TRADITC) {
 			player.setArmor(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID]) as Armor);
 		}
+		if (player.lowerGarment == UndergarmentLib.NOTHING) {
+			player.setUndergarment(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID]) as Undergarment, UndergarmentLib.TYPE_LOWERWEAR);
+		}
+		if (player.upperGarment == UndergarmentLib.NOTHING) {
+			player.setUndergarment(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID]) as Undergarment, UndergarmentLib.TYPE_UPPERWEAR);
+		}
+		flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
+		player.skinTone = "light";
+		player.faceType = Face.HUMAN;
+		player.eyes.type = Eyes.HUMAN;
+		player.horns.type = Horns.NONE;
+		player.horns.count = 0;
+		player.arms.type = Arms.HUMAN;
+		player.lowerBody = LowerBody.HUMAN;
 		player.removePerk(PerkLib.HaltedVitals);
 		player.removePerk(PerkLib.SuperStrength);
 		player.removePerk(PerkLib.PoisonNails);
@@ -776,6 +796,7 @@ private function curingJiangshi():void {
 		player.removePerk(PerkLib.EnergyDependent);
 		player.removeStatusEffect(StatusEffects.EnergyDependent);
 		outputText("Done with this place you head back to camp.\n\n");
+		outputText("<b>(Lost Perks: Halted vitals, Super strength, Poison nails, Rigidity, Life leech, Undeath, Energy dependent)</b>\n\n");
 		flags[kFLAGS.CURSE_OF_THE_JIANGSHI]++;
 		doNext(camp.returnToCampUseTwoHours);
 	}

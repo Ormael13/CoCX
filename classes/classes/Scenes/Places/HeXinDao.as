@@ -537,7 +537,6 @@ public class HeXinDao extends BaseContent
         clearOutput();//Serena - female siren npc
         outputText("After entering the shop with a sign saying 'Equipment' over the doors you see a few shelves filled with various weapons, shields, armors and even more rare items like rings or necklaces. Behind the desk that looks like a central point of the shop you see a woman that seems to have mixed races traits. A shark face and a tail that sometimes show up on either side of the desk which is contrasting to its feather covered arms that are not looking at all like shark ones and more similar to bird wings.");
         outputText("\n\n\"<i>Greeting dear customer. I'm Serena and this is my humble shop. Look around and if something catch your eyes let me know,</i>\" she say all that almost on one breath after noticing your near.");
-        outputText("\n\n<b>Spirit Stones: </b>" + flags[kFLAGS.SPIRIT_STONES] + "\n");
         menu();
         addButton(1, "Shelf 1", soulequipmentshelf1);
         addButton(2, "Shelf 2", soulequipmentshelf2);

@@ -754,7 +754,8 @@
         <cell rect="1,350,84,139" name="wings_bg/demon" dx="10" dy="20"/>
         <cell rect="86,350,83,139" name="wings/demon" dx="95" dy="20"/>
         <cell rect="86,490,83,139" name="wings_front/demon" dx="95" dy="20"/>
-        <cell rect="339,350,168,139" name="wings/ghost" dx="17" dy="39"/>
+        <cell rect="339,350,168,139" name="wings/specter" dx="17" dy="39"/>
+        <cell rect="508,350,168,139" name="wings/ghost" dx="11" dy="27"/>
         <cell rect="170,350,168,139" name="rearbody/displacertentacle" dx="14" dy="20"/>
     </spritemap>
 
@@ -1360,6 +1361,10 @@
                 <show part="hands_bg/harpy"/>
             </case>
 			<case values="Arms.GHOST">
+				<hide part="hands/*"/>
+				<hide part="hands_bg/*"/>
+				<hide part="arms/*"/>
+				<hide part="arms_bg/*"/>
                 <show part="arms/demonlewd"/>
                 <show part="arms_bg/demonlewd"/>
             </case>
@@ -1800,7 +1805,7 @@
             </case>
 			<case values="LowerBody.GHOST_2">
                 <hide part="legs/*"/>
-                <show part="legs/GHOST"/>
+                <show part="legs/ghost"/>
             </case>
             <!--<case values="LowerBody.YGG_ROOT_CLAWS">TODO </case>-->
             <case values="'never'"><!--TODO liliraune-->
@@ -1851,6 +1856,9 @@
             </case>
 			<case values="Wings.ETHEREAL_WINGS">
                 <show part="wings/ghost"/>
+            </case>
+			<case values="Wings.SPECTER">
+                <show part="wings/specter"/>
             </case>
             <default>
             </default>

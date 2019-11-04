@@ -10,12 +10,14 @@ package classes.Scenes.Places.HeXinDao
 	import classes.BodyParts.Face;
 	import classes.BodyParts.Horns;
 	import classes.BodyParts.LowerBody;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.SceneLib;
 	import classes.BodyParts.Tail;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
+	import classes.Scenes.SceneLib;
 	import classes.Scenes.Dungeons.RiverDungeon;
 	import classes.Items.ArmorLib;
 	import classes.Items.ShieldLib;
+	import classes.Items.UndergarmentLib;
 	import classes.Items.WeaponLib;
 	import classes.Items.WeaponRangeLib;
 	
@@ -172,6 +174,7 @@ package classes.Scenes.Places.HeXinDao
 					if (player.hasItem(useables.IMPSKLL, 5)) {
 						outputText("Yang examine the skulls to make sure those are imps then nods giving you your payment.\n\n");
 						outputText("\"<i>Good job [name] here is your payment.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
 						player.destroyItems(useables.IMPSKLL, 5);
 						flags[kFLAGS.SPIRIT_STONES] += 7;
@@ -191,6 +194,7 @@ package classes.Scenes.Places.HeXinDao
 					if (player.hasItem(useables.IMPSKLL, 4)) {
 						outputText("Yang examine the skulls to make sure those are imps then nods giving you your payment.\n\n");
 						outputText("\"<i>Good job [name] here is your payment along with a special training scroll.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
 						player.destroyItems(useables.IMPSKLL, 4);
 						player.perkPoints += 1;
@@ -212,6 +216,7 @@ package classes.Scenes.Places.HeXinDao
 						outputText("(<b>Acquired demon hunter amulet!</b>)\n\n");
 						outputText("(<b>Gained New Perk: Sense Corruption</b>)");
 						if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0) player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
+						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
 						player.createKeyItem("Demon Hunter Amulet", 0, 0, 0, 0);
 						player.createPerk(PerkLib.SenseCorruption, 0, 0, 0, 0);
@@ -226,6 +231,7 @@ package classes.Scenes.Places.HeXinDao
 			else {
 				outputText("Yang eyes you with keen interest then ask.\n\n");
 				outputText("\"<i>Would you actually be interested into something easier? Right now there's a bounty on imp slaying. Bring me back 3 imp skulls and I will see it through that you are properly rewarded.</i>\"\n\n");
+				if (!player.hasStatusEffect(StatusEffects.AdventureGuildQuestsCounter1)) player.createStatusEffect(StatusEffects.AdventureGuildQuestsCounter1, 0, 0, 0, 0);
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests1)) player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
 				else player.createStatusEffect(StatusEffects.AdventureGuildQuests1, 1, 0, 0, 0);
 			}
@@ -242,6 +248,7 @@ package classes.Scenes.Places.HeXinDao
 					if (player.hasItem(useables.SEVTENT, 3)) {
 						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
 						outputText("\"<i>Good job there. I hope those plants did not prove to much trouble. Here is your payment.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
 						player.destroyItems(useables.SEVTENT, 3);
 						flags[kFLAGS.SPIRIT_STONES] += 8;
@@ -257,6 +264,7 @@ package classes.Scenes.Places.HeXinDao
 					if (player.hasItem(useables.SEVTENT, 2)) {
 						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
 						outputText("\"<i>Good job [name] here is your payment along with a special training scroll.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
 						player.destroyItems(useables.SEVTENT, 2);
 						player.perkPoints += 1;
@@ -275,6 +283,7 @@ package classes.Scenes.Places.HeXinDao
 						outputText("\"<i>Everyone makes mistakes and plants assignments are way more dangerous than imps, you clearly outpaced expectation. Here is your payment. This reminds me some man told me to leave you this scroll as a reward too... should help you sense the anger of your opponents he said.</i>\"\n\n");
 						outputText("(<b>Gained New Perk: Sense Wrath</b>)");
 						if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0) player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
+						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
 						player.createPerk(PerkLib.SenseWrath, 0, 0, 0, 0);
 						player.destroyItems(useables.SEVTENT, 1);
@@ -285,6 +294,7 @@ package classes.Scenes.Places.HeXinDao
 			else {
 				outputText("\"<i>Someone put up a bounty for slaying tentacle beast. I would need lets say 1 tentacle from those mishapen creature as proof of your deed. Of course you will be rewarded for the job.</i>\"\n\n");
 				outputText("You shrug and accept the job. Plants... what could go wrong?\n\n");
+				if (!player.hasStatusEffect(StatusEffects.AdventureGuildQuestsCounter2)) player.createStatusEffect(StatusEffects.AdventureGuildQuestsCounter2, 0, 0, 0, 0);
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests2)) player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
 				else player.createStatusEffect(StatusEffects.AdventureGuildQuests2, 1, 0, 0, 0);
 			}
@@ -301,6 +311,7 @@ package classes.Scenes.Places.HeXinDao
 					if (player.hasItem(useables.DEMSKLL, 3)) {
 						outputText("You turn in the quest and Yang nod.\n\n");
 						outputText("\"<i>Good job as usual here is your payment.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
 						player.destroyItems(useables.DEMSKLL, 3);
 						flags[kFLAGS.SPIRIT_STONES] += 8;
@@ -321,6 +332,7 @@ package classes.Scenes.Places.HeXinDao
 					if (player.hasItem(useables.DEMSKLL, 2)) {
 						outputText("You turn in the quest and Yang nod.\n\n");
 						outputText("\"<i>Good job [name] here is your payment along with a special training scroll.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
 						player.destroyItems(useables.DEMSKLL, 2);
 						player.perkPoints += 1;
@@ -348,6 +360,7 @@ package classes.Scenes.Places.HeXinDao
 						outputText("You spend the four next hour with the rattel morph learning new demon killing tricks. By the end of your training you have accumulated a good bank of knowledge on demon weak points and how to exploit them. Chika leaves by the end warning that you and her will eventually meet again.\n\n");
 						outputText("(<b>Gained New Perk: Demon Slayer</b>)");
 						if (player.hasKeyItem("Adventurer Guild: Iron plate") >= 0) player.addKeyValue("Adventurer Guild: Iron plate", 1, 1);
+						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
 						player.createPerk(PerkLib.DemonSlayer, 0.1, 0, 0, 0);
 						player.destroyItems(useables.DEMSKLL, 1);
@@ -362,6 +375,7 @@ package classes.Scenes.Places.HeXinDao
 				outputText("\"<i>Hey [name] happen I have a new higher grade job for you if you’re interested.</i>\"\n\n");
 				outputText("Of course your interested what’s the job?\n\n");
 				outputText("\"<i>See it happens the town offer a generous sum for every demon slain. If you can bring me proof of the death of demon. Should you come back I have a special reward for you in addition to your pay.</i>\"\n\n");
+				if (!player.hasStatusEffect(StatusEffects.AdventureGuildQuestsCounter1)) player.createStatusEffect(StatusEffects.AdventureGuildQuestsCounter1, 0, 0, 0, 0);
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests1)) player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
 				else player.createStatusEffect(StatusEffects.AdventureGuildQuests1, 0, 1, 0, 0);
 			}
@@ -378,6 +392,7 @@ package classes.Scenes.Places.HeXinDao
 					if (player.hasItem(useables.FIMPSKL, 5)) {
 						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
 						outputText("\"<i>Good job there. I heard those creatures are actually out there killing instead of raping, it’s quite chilling. Here is your payment.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
 						player.destroyItems(useables.FIMPSKL, 5);
 						flags[kFLAGS.SPIRIT_STONES] += 7;
@@ -393,6 +408,7 @@ package classes.Scenes.Places.HeXinDao
 					if (player.hasItem(useables.FIMPSKL, 4)) {
 						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
 						outputText("\"<i>Good job there. I heard those creatures are actually out there killing instead of raping, it’s quite chilling. Here is your payment along with a special training scroll.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
 						player.destroyItems(useables.FIMPSKL, 4);
 						player.perkPoints += 1;
@@ -411,6 +427,7 @@ package classes.Scenes.Places.HeXinDao
 						outputText("\"<i>Everyone makes mistakes and feral imps assignments are way more dangerous than normal imps, you clearly outpaced expectation. Here is your payment. This reminds me some man told me to leave you this scroll as a reward too... should help you fight feral opponents he said.</i>\"\n\n");
 						outputText("(<b>Gained New Perk: Feral Hunter</b>)");
 						if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0) player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
+						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
 						player.createPerk(PerkLib.FeralHunter, 0.1, 0, 0, 0);
 						player.destroyItems(useables.FIMPSKL, 3);
@@ -421,6 +438,7 @@ package classes.Scenes.Places.HeXinDao
 			else {
 				outputText("\"<i>Someone put up a bounty for slaying feral imps. I would need lets say 3 feral imps skulls from those mishapen creature as proof of your deed. Of course you will be rewarded for the job.</i>\"\n\n");
 				outputText("You shrug and accept the job. It's time to hunt some imps.\n\n");
+				if (!player.hasStatusEffect(StatusEffects.AdventureGuildQuestsCounter2)) player.createStatusEffect(StatusEffects.AdventureGuildQuestsCounter2, 0, 0, 0, 0);
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests2)) player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
 				else player.createStatusEffect(StatusEffects.AdventureGuildQuests2, 0, 1, 0, 0);
 			}
@@ -437,6 +455,7 @@ package classes.Scenes.Places.HeXinDao
 					if (player.hasItem(useables.MINOHOR, 4)) {
 						outputText("Yang count the horns then smile.\n\n");
 						outputText("\"<i>Well you did bag four out of four nice job. The guild asked me to pay you this reward money as usual for slaying bulls. Do come and find me later on for a new job, or for something else...</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 3, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 3, 1);
 						player.destroyItems(useables.MINOHOR, 4);
 						flags[kFLAGS.SPIRIT_STONES] += 8;
@@ -452,6 +471,7 @@ package classes.Scenes.Places.HeXinDao
 					if (player.hasItem(useables.MINOHOR, 3)) {
 						outputText("Yang count the horns then smile.\n\n");
 						outputText("\"<i>Well you did bag three out of three nice job. The guild asked me to pay you with this special training scroll for slaying bulls. Do come and find me later on for a new job, or for something else...</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 3, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 3, 1);
 						player.destroyItems(useables.MINOHOR, 3);
 						player.perkPoints += 1;
@@ -468,6 +488,7 @@ package classes.Scenes.Places.HeXinDao
 						outputText("\"<i>Well you indeed did bag two out of two. The guild asked me to pay you this specific tome. Betcha will find nice uses for these. Do come and find me later on for a new job, or for something else...</i>\"\n\n");
 						outputText("Yang gives you a telltale wink before handing you over your reward.\n\n");
 						if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0) player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
+						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 3, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 3, 1);
 						player.destroyItems(useables.MINOHOR, 2);
 						inventory.takeItem(consumables.TCLEAVE, curry(enteringInn,false));
@@ -478,6 +499,7 @@ package classes.Scenes.Places.HeXinDao
 			else {
 				outputText("Yang takes on a grave expression.\n\n");
 				outputText("\"<i>Look [name] I won’t sugar coat it up for you. We’re buried knee deep into horsecocks, specificaly minotaur cocks. What the guild would like you to do is go out, kill some of the bulls out there, say two or so of them, and bring back their horns. You do that for us and we'll reward you accordingly.</i>\"\n\n");
+				if (!player.hasStatusEffect(StatusEffects.AdventureGuildQuestsCounter1)) player.createStatusEffect(StatusEffects.AdventureGuildQuestsCounter1, 0, 0, 0, 0);
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests1)) player.addStatusValue(StatusEffects.AdventureGuildQuests1, 3, 1);
 				else player.createStatusEffect(StatusEffects.AdventureGuildQuests1, 0, 0, 1, 0);
 			}
@@ -494,6 +516,7 @@ package classes.Scenes.Places.HeXinDao
 					if (player.hasItem(useables.GREENGL, 5)) {
 						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
 						outputText("\"<i>Good job there. I hope gathering these did not prove to much trouble. Here is your payment.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter4, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests4, 2, 1);
 						player.destroyItems(useables.GREENGL, 5);
 						flags[kFLAGS.SPIRIT_STONES] += 3;
@@ -510,6 +533,7 @@ package classes.Scenes.Places.HeXinDao
 						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
 						outputText("\"<i>My my, nice job. I can only hope you kept that weapon clean of innocent blood. Regardless here is your payment. This reminds me the client told me to leave you this scroll as a reward too you know what to do with it I suppose?</i>\"\n\n");
 						if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0) player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
+						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter4, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests4, 2, 1);
 						player.destroyItems(useables.GREENGL, 5);
 						player.perkPoints += 1;
@@ -519,6 +543,7 @@ package classes.Scenes.Places.HeXinDao
 			}
 			else {
 				outputText("\"<i>You may or may not like that one. The good news is you are going out to gather gel the bad news is it primarily drop from goo girls which is a friendly species so your morality may be put to the test. How you handle that is up to you. Regardless bring us back 5 gel and your job will be done.</i>\"\n\n");
+				if (!player.hasStatusEffect(StatusEffects.AdventureGuildQuestsCounter4)) player.createStatusEffect(StatusEffects.AdventureGuildQuestsCounter4, 0, 0, 0, 0);
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests4)) player.addStatusValue(StatusEffects.AdventureGuildQuests4, 2, 1);
 				else player.createStatusEffect(StatusEffects.AdventureGuildQuests4, 0, 1, 0, 0);
 			}
@@ -535,6 +560,7 @@ package classes.Scenes.Places.HeXinDao
 					if (player.hasItem(useables.B_CHITN, 5)) {
 						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
 						outputText("\"<i>Good job there. I hope gathering these did not prove to much trouble. Here is your payment.</i>\"\n\n");
+						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter4, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests4, 1, 1);
 						player.destroyItems(useables.B_CHITN, 5);
 						flags[kFLAGS.SPIRIT_STONES] += 4;
@@ -556,6 +582,7 @@ package classes.Scenes.Places.HeXinDao
 						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
 						outputText("\"<i>My my, nice job. I can only hope you kept that weapon clean of innocent blood. Regardless here is your payment. This reminds me the client told me to leave you this scroll as a reward too you know what to do with it I suppose?</i>\"\n\n");
 						if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0) player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
+						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter4, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests4, 1, 1);
 						if (player.statusEffectv3(StatusEffects.AdventureGuildQuests4) > 0) {
 							player.removeStatusEffect(StatusEffects.AdventureGuildQuests4);
@@ -570,6 +597,7 @@ package classes.Scenes.Places.HeXinDao
 			else {
 				outputText("\"<i>You may or may not like that one. The good news is you are going out to gather chitin the bad news is it primarily drop from bee girls which is a friendly species so your morality may be put to the test. How you handle that is up to you, ");
 				outputText("for all I know chitin is often found on the forest ground where bee girls trives. Regardless bring us back 5 chitin and your job will be done.</i>\"\n\n");
+				if (!player.hasStatusEffect(StatusEffects.AdventureGuildQuestsCounter4)) player.createStatusEffect(StatusEffects.AdventureGuildQuestsCounter4, 0, 0, 0, 0);
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests4)) player.addStatusValue(StatusEffects.AdventureGuildQuests4, 1, 1);
 				else player.createStatusEffect(StatusEffects.AdventureGuildQuests4, 1, 0, 0, 0);
 			}
@@ -869,6 +897,7 @@ package classes.Scenes.Places.HeXinDao
 			outputText("to drink directly from the tap of his life force through your hand. He did say something about making you capable of guarding your master too, right? Seems he loaded you with quite a few upgrades. Guess he didn't account for the risks of getting overwhelmed by his own creations as you literally drain his soulforce until he passes out. ");
 			outputText("You let him fall limply on the ground and look at him, he has foam at the mouth. Geeze your nails are poisonous too? While you doubt you killed him, you don't want him to just get away with this either so you dump him in the box he originally reserved for you and lock him up.\n\n");
 			outputText("Thinking your problems to be over, you attempt to remove the cursed spell tag on your forehead but to your surprise it just doesn't come off. Guess you're stuck into this weird zombie like existence until you can find someone to help you with this. You literally hop out of the mage’s house, arm stretched forward, and head back to camp.\n\n");
+			outputText("(<b>Gained Perks: Halted vitals, Super strength, Poison nails, Rigidity, Life leech, Undeath, Energy dependent</b>)\n\n");
 			if (rand(2) == 0) player.skinTone = "ghostly pale";
 			else player.skinTone = "light blue";
 			player.faceType = Face.JIANGSHI;
@@ -887,24 +916,33 @@ package classes.Scenes.Places.HeXinDao
 			player.createPerk(PerkLib.EnergyDependent, 0, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.EnergyDependent, 0, 0, 0, 0);
 			if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD]++;
-			if (player.weapon != WeaponLib.FISTS && flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 1) {
-				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 1) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 2;
-				player.setWeapon(WeaponLib.FISTS);
+			if (player.weapon != WeaponLib.FISTS) {
+				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
+				player.setWeapon(WeaponLib.FISTS);
 			}
 			if (player.weaponRange != WeaponRangeLib.NOTHING) {
-				player.setWeaponRange(WeaponRangeLib.NOTHING);
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = player.weaponRange.id;
+				player.setWeaponRange(WeaponRangeLib.NOTHING);
 			}
-			if (player.shield != ShieldLib.NOTHING && flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 1) {
-				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 1) flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 2;
-				player.setShield(ShieldLib.NOTHING);
+			if (player.shield != ShieldLib.NOTHING) {
+				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
 				flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID] = player.shield.id;
+				player.setShield(ShieldLib.NOTHING);
 			}
 			if (player.armor != ArmorLib.NOTHING) {
-				player.setArmor(armors.TRADITC);
 				flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] = player.armor.id;
+				player.setArmor(armors.TRADITC);
 			}
+			if (player.lowerGarment != UndergarmentLib.NOTHING) {
+				flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID] = player.lowerGarment.id;
+				player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR);
+			}
+			if (player.upperGarment != UndergarmentLib.NOTHING) {
+				flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] = player.upperGarment.id;
+				player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR);
+			}
+			awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
 			doNext(camp.returnToCampUseFourHours);
 		}
 		
