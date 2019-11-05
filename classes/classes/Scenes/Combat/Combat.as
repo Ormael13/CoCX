@@ -6349,7 +6349,8 @@ public function wrathregeneration2():Number {
 	if (player.jewelry3 == jewelries.FLLIRNG) wrathregen += 1;
 	if (player.jewelry3 == jewelries.INMORNG) wrathregen += 1;
 	if (player.jewelry4 == jewelries.FLLIRNG) wrathregen += 1;
-	if (player.jewelry4 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) wrathregen += 3;
+	if (player.jewelry4 == jewelries.INMORNG) wrathregen += 1;
+	if (player.jewelry4 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS || player.jewelry2 == jewelries.UNDKINS || player.jewelry == jewelries.UNDKINS) wrathregen += 3;
 	return wrathregen;
 }
 

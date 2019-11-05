@@ -5586,7 +5586,7 @@ public class PerkLib
                 return player.pigScore() >= 12;
             }, "Pig/Boar race");
             SalamanderAdrenalGlandsFinalForm.requireLevel(30).requirePerk(SalamanderAdrenalGlandsEvolved).requireCustomFunction(function (player:Player):Boolean {
-                return player.salamanderScore() >= 11;
+                return player.salamanderScore() >= 10;
             }, "Salamander race");
 			VampiricBloodsteamFinalForm.requireLevel(30).requirePerk(VampiricBloodsteamEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.hasStatusEffect(StatusEffects.VampireThirst);
@@ -5878,4 +5878,4 @@ public class PerkLib
 	initDependencies();
 }
 }
-
+
