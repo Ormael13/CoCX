@@ -4834,24 +4834,25 @@ use namespace CoC;
 					gooCounter += 3;
 				if (rearBody.type == RearBody.METAMORPHIC_GOO)
 					gooCounter += 2;
-				if (hasGooSkin() && skinAdj == "slimy")
+				if (hasGooSkin() && skinAdj == "slimy") {
 					gooCounter++;
-				if (faceType == Face.HUMAN)
-					gooCounter++;
-				if (eyes.type == Eyes.HUMAN)
-					gooCounter++;
-				if (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN)
-					gooCounter++;
-				if (tallness > 107)
-					gooCounter++;
-				if (hasVagina())
-					gooCounter++;
-				if (antennae.type == Antennae.NONE)
-					gooCounter++;
-				if (wings.type == Wings.NONE)
-					gooCounter++;
-				if (gills.type == Gills.NONE)
-					gooCounter++;
+					if (faceType == Face.HUMAN)
+						gooCounter++;
+					if (eyes.type == Eyes.HUMAN)
+						gooCounter++;
+					if (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN)
+						gooCounter++;
+					if (tallness > 107)
+						gooCounter++;
+					if (hasVagina())
+						gooCounter++;
+					if (antennae.type == Antennae.NONE)
+						gooCounter++;
+					if (wings.type == Wings.NONE)
+						gooCounter++;
+					if (gills.type == Gills.NONE)
+						gooCounter++;
+				}
 			}
 			if (vaginalCapacity() > 9000)
 				gooCounter++;
@@ -4884,24 +4885,25 @@ use namespace CoC;
 					magmagooCounter += 3;
 				if (rearBody.type == RearBody.METAMORPHIC_GOO)
 					magmagooCounter += 2;
-				if (hasGooSkin() && skinAdj == "slimy")
+				if (hasGooSkin() && skinAdj == "slimy") {
 					magmagooCounter++;
-				if (faceType == Face.HUMAN)
-					magmagooCounter++;
-				if (eyes.type == Eyes.HUMAN)
-					magmagooCounter++;
-				if (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN)
-					magmagooCounter++;
-				if (tallness > 107)
-					magmagooCounter++;
-				if (hasVagina())
-					magmagooCounter++;
-				if (antennae.type == Antennae.NONE)
-					magmagooCounter++;
-				if (wings.type == Wings.NONE)
-					magmagooCounter++;
-				if (gills.type == Gills.NONE)
-					magmagooCounter++;
+					if (faceType == Face.HUMAN)
+						magmagooCounter++;
+					if (eyes.type == Eyes.HUMAN)
+						magmagooCounter++;
+					if (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN)
+						magmagooCounter++;
+					if (tallness > 107)
+						magmagooCounter++;
+					if (hasVagina())
+						magmagooCounter++;
+					if (antennae.type == Antennae.NONE)
+						magmagooCounter++;
+					if (wings.type == Wings.NONE)
+						magmagooCounter++;
+					if (gills.type == Gills.NONE)
+						magmagooCounter++;
+				}
 			}
 			if (vaginalCapacity() > 9000)
 				magmagooCounter++;
@@ -4934,24 +4936,25 @@ use namespace CoC;
 					darkgooCounter += 3;
 				if (rearBody.type == RearBody.METAMORPHIC_GOO)
 					darkgooCounter += 2;
-				if (hasGooSkin() && skinAdj == "slimy")
+				if (hasGooSkin() && skinAdj == "slimy") {
 					darkgooCounter++;
-				if (faceType == Face.HUMAN)
-					darkgooCounter++;
-				if (eyes.type == Eyes.HUMAN || eyes.type == Eyes.DEVIL)
-					darkgooCounter++;
-				if (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN)
-					darkgooCounter++;
-				if (tallness > 107)
-					darkgooCounter++;
-				if (hasVagina())
-					darkgooCounter++;
-				if (antennae.type == Antennae.NONE)
-					darkgooCounter++;
-				if (wings.type == Wings.NONE)
-					darkgooCounter++;
-				if (gills.type == Gills.NONE)
-					darkgooCounter++;
+					if (faceType == Face.HUMAN)
+						darkgooCounter++;
+					if (eyes.type == Eyes.HUMAN || eyes.type == Eyes.DEVIL)
+						darkgooCounter++;
+					if (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN)
+						darkgooCounter++;
+					if (tallness > 107)
+						darkgooCounter++;
+					if (hasVagina())
+						darkgooCounter++;
+					if (antennae.type == Antennae.NONE)
+						darkgooCounter++;
+					if (wings.type == Wings.NONE)
+						darkgooCounter++;
+					if (gills.type == Gills.NONE)
+						darkgooCounter++;
+				}
 			}
 			if (vaginalCapacity() > 9000)
 				darkgooCounter++;
