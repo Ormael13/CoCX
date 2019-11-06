@@ -2477,7 +2477,7 @@ public function throwWeapon():void {
 		}
 		else {
 			if (MSGControll == false) {
-				outputText(".  It's clearly very painful. >");
+				outputText(".  It's clearly very painful. ");
 				damage = doDamage(damage, true, true);
 			}
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
@@ -2674,9 +2674,15 @@ public function shootWeapon():void {
 			return;
 		}
 		else {
-			if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0)) outputText(" damage.");
+			if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0)) {
+				outputText(".  It's clearly very painful. ");
+				damage = doDamage(damage, true, true);
+			}
 			else {
-				if (MSGControll == false) outputText(".  It's clearly very painful. <b>(<font color=\"#800000\">" + String(damage) + "</font>)</b>");
+				if (MSGControll == false) {
+					outputText(".  It's clearly very painful. ");
+					damage = doDamage(damage, true, true);
+				}
 				if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			//	if (flaga dla efektu arouse arrow) outputText(" tekst dla arouse arrow effect.");
 			//	if (flaga dla efektu poison arrow) outputText(" tekst dla poison arrow effect.");
@@ -6398,9 +6404,9 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 	if (player.weaponRange == weaponsrange.TRJAVEL) player.ammo = 10;
 	if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
 	if (player.weaponRange == weaponsrange.BLUNDER) player.ammo = 9;
-	if (player.weaponRange == weaponsrange.FLINTLK) player.ammo = 6;
 	if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
 	if (player.weaponRange == weaponsrange.ADBSCAT) player.ammo = 2;
+	if (player.weaponRange == weaponsrange.FLINTLK) player.ammo = 1;
 	if (player.weaponRange == weaponsrange.DUEL_P_) player.ammo = 1;
 	if (player.weaponRange == weaponsrange.SHUNHAR || player.weaponRange == weaponsrange.KSLHARP || player.weaponRange == weaponsrange.LEVHARP) player.ammo = 1;
 	if (player.statusEffectv1(StatusEffects.SoulDrill1) > 0) {
@@ -6460,9 +6466,9 @@ public function startCombatImmediateImpl(monster_:Monster, _plotFight:Boolean):v
 	if (player.weaponRange == weaponsrange.TRJAVEL) player.ammo = 10;
 	if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
 	if (player.weaponRange == weaponsrange.BLUNDER) player.ammo = 9;
-	if (player.weaponRange == weaponsrange.FLINTLK) player.ammo = 6;
 	if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
 	if (player.weaponRange == weaponsrange.ADBSCAT) player.ammo = 2;
+	if (player.weaponRange == weaponsrange.FLINTLK) player.ammo = 1;
 	if (player.weaponRange == weaponsrange.DUEL_P_) player.ammo = 1;
 	if (player.weaponRange == weaponsrange.SHUNHAR || player.weaponRange == weaponsrange.KSLHARP || player.weaponRange == weaponsrange.LEVHARP) player.ammo = 1;
 	if (player.statusEffectv1(StatusEffects.SoulDrill1) > 0) {

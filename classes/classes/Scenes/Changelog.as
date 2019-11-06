@@ -35,9 +35,10 @@ package classes.Scenes
 			outputText("-Each slime subrace score will mainly relay on having skin(goo) color that is typical for that subtype. Which mean magma or dark slimes got specific colors and normal slimes would be slimes with any other skin color.\n");
 			outputText("-Most of repeatable quests in Adventure Guild get counter on Stats page how many times PC already completed them (sadly it can/t track back so it will start counting them from this version).\n");
 			outputText("-Fixed bugs: one of achievments not been awarded, game not memorizing and removing equipment when becoming Jiangshi, even in debug mode game forcing manticore bad end, Infernal Mouse ring not giving wrath generation bonus when equipped in 4th ring slot, Petrify stun duration on single enemy with and w/o Gorgon Eyes been switched, ");
-			outputText("too high req. salamander score for 3rd racial perk, Neisa bug happening with Aurora/Alvina\n\n");/*ostatni punkt changelogu	not unequipping melee weapon/shield if not yet found Aether Twins
+			outputText("too high req. salamander score for 3rd racial perk, starting as half slime, getting fat without hunger mode on, Neisa bug happening with Aurora/Alvina, no firearms damage despite number appearing on screen, Flintlock pistol ammo incorrectly set too high at combat start\n\n");/*ostatni punkt changelogu
 			outputText("<b>Version 0.8n5:</b>\n\n");
-			outputText("-\n");//bug with starting as half slime fixed, bug with getting fat without hunger mode on
+			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-Wait and Rest options opens submenu to choose from few options: from 1 to 8 hours or until evening/midnight/fully healing.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: \n");
