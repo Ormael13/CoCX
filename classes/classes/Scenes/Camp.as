@@ -30,6 +30,7 @@ use namespace CoC;
 			CoC.instance.timeQ = value;
 		}
 		private var campQ:Boolean = false;
+		private var waitingORresting:int = 1;
 
 		protected function hasItemInStorage(itype:ItemType):Boolean
 		{
@@ -892,6 +893,8 @@ CoC.instance.saves.saveGame(player.slotName);
 	}
 	addButton(12, "Wait", doWait).hint("Wait for four hours.\n\nShift-click to wait until the night comes.");
 	if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(12, "Rest", rest).hint("Rest for four hours.\n\nShift-click to rest until fully healed or night comes.");
+//	addButton(12, "Wait", doWaitMenu).hint("Wait for one to eigth hours. Or until the night comes.");
+//	if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(12, "Rest", restMenu).hint("Rest for one to eight hours. Or until fully healed / night comes.");
 	if (model.time.hours >= 21 || model.time.hours < 6) addButton(12, "Sleep", doSleep).hint("Turn yourself in for the night.");
 //	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && player.findPerk(PerkLib.EzekielBlessing) < 0) addButton(13, "Remov. Curse", EzekielCurseQuickFix).hint("Quick fix for Ezekiel curse when ezekiel fruit was lost.");
 
@@ -2166,6 +2169,35 @@ private function watchStars():void {
 //-----------------
 //-- REST
 //-----------------
+/*public function restMenu():void {
+	menu();
+	addButton(0, "1 Hour", rest1).hint("Rest for one hour.");
+	addButton(1, "2 Hours", rest2).hint("Rest for two hours.");
+	addButton(2, "4 Hours", rest4).hint("Rest for four hours.");
+	addButton(3, "8 Hours", rest8).hint("Rest for eight hours.");
+	addButton(4, "Till FH/M/HW", restTillFullyHealedMidnightOrHungerWake).hint("Rest until fully healed or midnight.");
+	addButton(14, "Back", playerMenu);
+}
+public function rest1():void {
+	waitingORresting = 1;
+	rest();
+}
+public function rest2():void {
+	waitingORresting = 2;
+	rest();
+}
+public function rest4():void {
+	waitingORresting = 4;
+	rest();
+}
+public function rest8():void {
+	waitingORresting = 8;
+	rest();
+}
+public function restTillFullyHealedMidnightOrHungerWake():void {
+	waitingORresting = 0;
+	rest();
+}*/
 public function rest():void {
 	campQ = true;
 	clearOutput();
@@ -2210,6 +2242,7 @@ public function rest():void {
 			if (timeQ > 21 - model.time.hours) timeQ = 21 - model.time.hours;
 		} else {
 			timeQ = Math.min(4, 21 - model.time.hours);
+			//timeQ = Math.min(waitingORresting, 21 - model.time.hours);
 			HPChange(timeQ * hpRecovery * multiplier, false);
 			fatigue(timeQ * -fatRecovery * multiplier);
 		}
@@ -2271,6 +2304,35 @@ public function rest():void {
 //-----------------
 //-- WAIT
 //-----------------
+/*public function doWaitMenu():void {
+	menu();
+	addButton(0, "1 Hour", doWait1).hint("Wait one hour.");
+	addButton(1, "2 Hours", doWait2).hint("Wait two hours.");
+	addButton(2, "4 Hours", doWait4).hint("Wait four hours.");
+	addButton(3, "8 Hours", doWait8).hint("Wait eight hours.");
+	addButton(4, "Till Dusk", doWaitTillDusk).hint("Wait until the night comes.");
+	addButton(14, "Back", playerMenu);
+}
+public function doWait1():void {
+	waitingORresting = 1;
+	doWait();
+}
+public function doWait2():void {
+	waitingORresting = 2;
+	doWait();
+}
+public function doWait4():void {
+	waitingORresting = 4;
+	doWait();
+}
+public function doWait8():void {
+	waitingORresting = 8;
+	doWait();
+}
+public function doWaitTillDusk():void {
+	waitingORresting = 21 - model.time.hours;
+	doWait();
+}*/
 public function doWait():void {
 	campQ = true;
 	clearOutput();
@@ -2286,6 +2348,7 @@ public function doWait():void {
 	if (timeQ == 0) {
 		timeQ = 4;
 		if (flags[kFLAGS.SHIFT_KEY_DOWN] > 0) timeQ = 21 - model.time.hours;
+		//timeQ = waitingORresting;
 		if (player.lowerBody == LowerBody.PLANT_FLOWER) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hours...\n");
 		else outputText("You wait " + num2Text(timeQ) + " hours...\n");
 		//Marble withdrawl

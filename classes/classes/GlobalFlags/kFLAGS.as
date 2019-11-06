@@ -2579,7 +2579,7 @@ public static const PATCHOULI_HAIR_COLOR:int                                   	
 public static const PATCHOULI_COCK_TYPE:int                                   		= 2571;
 public static const GOO_GIRLS_AND_GREEN_SLIMES:int                                  = 2572;
 public static const MINO_CHEF_TALKED_RED_RIVER_ROOT:int                             = 2573;
-public static const NEISA_FOLLOWER:int                                   			= 2574;	//Not Yet Used Flag
+public static const NEISA_FOLLOWER:int                                   			= 2574;
 public static const NEISA_AFFECTION:int                                   			= 2575;	//Not Yet Used Flag
 public static const NEISA_LVL_UP:int                                   				= 2576;	//Not Yet Used Flag
 public static const NEISA_DEFEATS_COUNTER:int                                   	= 2577;	//Not Yet Used Flag
@@ -2618,7 +2618,7 @@ public static const UNKNOWN_FLAG_NUMBER_02609:int                               
 public static const UNKNOWN_FLAG_NUMBER_02610:int                                   = 2610;//lvl 72		//Not Yet Used Flag
 public static const UNKNOWN_FLAG_NUMBER_02611:int                                   = 2611;//lvl 102	//Not Yet Used Flag
 public static const UNKNOWN_FLAG_NUMBER_02612:int                                   = 2612;//lvl 102	//Not Yet Used Flag
-public static const TED_02613:int                                   = 2613;
+public static const TED_02613:int                                   = 2613;								//Not Yet Used Flag
 public static const TED_WRATH:int                                   				= 2614;
 public static const TED_DEFEATS_COUNTER:int                                   		= 2615;
 public static const TED_LVL_UP:int                                   				= 2616;
