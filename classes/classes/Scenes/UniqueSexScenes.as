@@ -46,10 +46,16 @@ public function pcUniqueSexScenesChoiceMenu():void {
 	else addButtonDisabled(3, "Get Pollinated", "Req. to have Alraune lower body and enemy with cock.");
 	if (player.lowerBody == LowerBody.PLANT_FLOWER && monster.hasVagina()) addButton(4, "Seeding", alrauneSeedingScene);
 	else addButtonDisabled(4, "Seeding", "Req. to have Alraune lower body and enemy with vagina.");
-	//5 - electric races scene
+	if (player.raijuScore() >= 10 && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) addButton(5, "Volt Transfer", raijuVoltTransfer);
+	else addButtonDisabled(5, "Volt Transfer", "Req. to be Raiju and enemy must be non-gigant humanoid.");
 	/*if (player.hasStatusEffect(StatusEffects.HinezumiCoat) && player.lust >= player.lust100() * 0.5 && !monster.hasPerk(PerkLib.EnemyGigantType)) 
 	else */addButtonDisabled(6, "Heat transfer", "Req. to have Hinezumi Coat, over 50% of max lust, enemy must be humanoid and not giant. (not yet added scene)");
 	addButtonDisabled(7, "Cooldown", "Req. to have (Winter wolf/other cold cum creatures, pc must be female salamander or hinezumi). (not yet added scene)");
+	if (player.isInGoblinMech() && player.hasKeyItem("Cum Reservoir") >= 0 && monster.hasCock()) {
+		if (player.keyItemv1("Cum Reservoir") == 4) addButtonDisabled(13, "Fill the reservoir", "Reservoir is already full. You need to use all this stored cum before you harvest new one.");
+		else addButton(13, "Fill the reservoir", gobomechFillTheReservoir);
+	}
+	else addButtonDisabled(13, "Fill the reservoir", "Req. to be in goblin mech, having Cum Reservoir upgrade instaled on it and enemy with cock.");
 	addButton (14, "Leave", cleanupAfterCombat);
 }
 public function cumOmeter(changes:Number = 0):Number {
@@ -175,11 +181,52 @@ public function alrauneSeedingScene():void {
 	cleanupAfterCombat();
 	return;
 }
+public function raijuVoltTransfer():void {
+	clearOutput();
+	outputText("You ponder what to do with your defeated opponent then realize your body is overflowing with static. Your opponent shudders as you grab " + monster.pronoun2 + " by the neck.\n\n");
+	outputText("\"<i>Do you know how charged I am right now? I’ll need to get rid of that before I lose my mind. Thankfully you came along at the perfect moment.</i>\"\n\n");
+	outputText("" + monster.capitalA + monster.short + " only understands what you mean when you kiss " + monster.pronoun2 + ", your static starting to lick " + monster.pronoun3 + " skin, leaving a tingle of pleasure and arousal as you start to vent your electricity out.\n\n");
+	outputText("Voltage rushes out of your body as it transfers to your victim");
+	if (monster.hasCock()) outputText(" wrapping and sheathing around " + monster.pronoun3 + " penis,");
+	if (monster.biggestTitSize() >= 1) outputText(" massaging the shape of " + monster.pronoun3 + " " + monster.breastDescript(0) + ",");
+	if (monster.hasVagina()) outputText(" licking the entrance of " + monster.pronoun3 + " pussy");
+	outputText(" and spreading across the rest of " + monster.pronoun3 + " skin. You smile in contentment as the haze of lust progressively clears from your mind which is the opposite of what can be said for your victim. The excess of your static slowly passes into " + monster.a + monster.short + " prone form and you almost achieve climax from the relief as you purge all of this bad energy out of yourself.\n\n");
+	outputText("Your victim, however, is not so lucky. As you pour in your lust " + monster.pronoun1 + " begins to completely lose control, attempting to fiercely masturbate this excess of desire out, to no avail. As you are close to done your partner is a wrecked mess on the floor, desperate to gain release but unable to achieve it fully as the supernatural electricity keeps building " + monster.pronoun3 + " desire way beyond normal, obliterating self-restraint and pride along the way. You move away from " + monster.a + monster.short + " just as " + monster.pronoun3 + " hands begin to draw fluids out of " + monster.pronoun3 + " lust filled endowment. ");
+	outputText("You stay clear as your victim’s lust explodes, spewing ");
+	if (monster.hasCock()) outputText("cum");
+	if (monster.hasVagina()) outputText("girlcum");
+	if (monster.biggestTitSize() > 0) outputText(" and milk");
+	outputText(" everywhere in the vicinity. You can see the pulse of your statics as a small glow in every thrust of " + monster.pronoun3 + " hips as " + monster.pronoun1 + " keep fiercely masturbating in an attempt to expel the lust.\n\n");
+	outputText("You leave your lust receptacle there, it's unlikely " + monster.pronoun1 + " will stop masturbating anytime soon.");
+	player.orgasm();
+	statScreenRefresh();
+	cleanupAfterCombat();
+	return;
+}
 public function hinezumiHeatTransferScene():void {
 	clearOutput();
 	outputText("You feel like some payback is in order, however, this time around you have something different in mind than your regular antics.\n\n");
 	outputText("You feel like some payback is in order, however, this time around you have something different in mind than your regular antics.\n\n");
+	outputText("You feel like some payback is in order, however, this time around you have something different in mind than your regular antics.\n\n");
+	outputText("You feel like some payback is in order, however, this time around you have something different in mind than your regular antics.\n\n");
 	
+	cleanupAfterCombat();
+	return;
+}
+public function gobomechFillTheReservoir():void {
+	clearOutput();
+	player.addKeyValue("Cum Reservoir", 1, 1);
+	outputText("Gosh you really aren't horny right now but that doesn’t mean you're going to let all this precious baby making gold go to waste!\n\n");
+	outputText("You jump out of your mech and painfully grab " + monster.a + monster.short + " by the cock in order to make your next statement clear.\n\n");
+	outputText("\"<i>You don’t move one inch while I work or I swear you will regret it… understood, shank???</i>\"\n\n");
+	outputText("Having made your intentions obvious, you get under your mech and pull out the reservoir tube, paying no heed to your confused victim, " + monster.pronoun1 + "'s going to find out soon enough anyway. You run back to " + monster.a + monster.short + ", tube in hand, and plug it on " + monster.pronoun3 + " " + monster.cockDescriptShort(0) + " fastening it in place with straps. Satisfied with the result, you run back to your mech and press the start button activating the vacuum.\n\n");
+	outputText("" + monster.capitalA + monster.short + "’s eyes widen as your engine forcely starts milking " + monster.pronoun3 + " dick. Of course " + monster.pronoun1 + " struggles for a bit against the pleasure inducing contraption but the aphrodisiac dripping syringes you added in the fastening make short work of any resistance " + monster.pronoun1 + " has left, causing " + monster.pronoun2 + " to jerk up and down on the ground in unwanted, yet forced consecutive orgasms. You watch with keen interest as the tube fills up with a constant flow of freshly harvested cum, smiling at the fluctuation of the volume needle on your motherboard. ");
+	outputText("Since you have nothing to do but wait, you slowly enjoy a coffee, laid back in your driver’s seat and whistling, as the engine’s cum-o-meter fills up. Soon " + monster.a + monster.short + " eyes rolls in their socket as " + monster.pronoun1 + " completely lose control of " + monster.pronoun3 + " body, " + monster.pronoun3 + " sexual organ taking over for " + monster.pronoun3 + " brain. The needle finally reaches ");
+	if (player.keyItemv1("Cum Reservoir") == 1) outputText("1 quarters");
+	if (player.keyItemv1("Cum Reservoir") == 2) outputText("2 quarters");
+	if (player.keyItemv1("Cum Reservoir") == 3) outputText("3 quarters");
+	if (player.keyItemv1("Cum Reservoir") == 4) outputText("full");
+	outputText(", a little before the cum pump falls unconscious, well that's a good harvest.\n\nYou go to the passed out cum cow and unfasten your equipment before jumping back into the mech, heading back to camp.\n\n");
 	cleanupAfterCombat();
 	return;
 }

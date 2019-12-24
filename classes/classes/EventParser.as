@@ -83,6 +83,18 @@ public class EventParser {
         }
         CoC.instance.inCombat = false;
         DungeonAbstractContent.dungeonLoc = 0; //Replaces inDungeon = false;
+		
+		if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
+			if (CoC.instance.player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) CoC.instance.player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
+			CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthA);
+			CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
+			if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
+			if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
+		}
+		if (CoC.instance.player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
+			if (CoC.instance.player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) CoC.instance.player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
+			CoC.instance.player.removeStatusEffect(StatusEffects.RiverDungeonA);
+		}
     }
 
     private static function gameOverMenuOverride():void { //Game over event; override whatever the fuck has been done to the UI up to this point to force display of the data and new game buttons

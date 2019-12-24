@@ -143,7 +143,6 @@ public class CombatTeases extends BaseCombatContent {
 		}
 		//slutty simplicity bonus
 		if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") damage *= (1 + ((10 + rand(11)) / 100));
-		damage = Math.round(damage);
 		//==============================
 		//TEASE SELECT CHOICES
 		//==BASICS========
@@ -1505,6 +1504,7 @@ public class CombatTeases extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 			if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) damage *= 1.5;
 			damage = (damage + rand(bonusDamage)) * monster.lustVuln;
+			damage = Math.round(damage);
 			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 15) {
 				outputText("\n" + monster.a + monster.short + " is so mesmerised by your show that it stands there gawking.");
 				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);

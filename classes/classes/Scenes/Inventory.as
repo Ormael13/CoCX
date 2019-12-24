@@ -28,6 +28,7 @@ import classes.Items.WeaponRange;
 import classes.Items.WeaponRangeLib;
 import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.NPCs.HolliPureScene;
+import classes.Scenes.NPCs.MagnoliaFollower;
 
 use namespace CoC;
 
@@ -43,6 +44,7 @@ use namespace CoC;
 		private var currentItemSlot:ItemSlotClass;	//The slot previously occupied by the current item - only needed for stashes and items with a sub menu.
 		public var HolliPure:HolliPureScene = new HolliPureScene();
 		public var Gardening:UniqueCampScenes = new UniqueCampScenes();
+		public var Magnolia:MagnoliaFollower = new MagnoliaFollower();
 		
 		public function Inventory(saveSystem:Saves) {
 			itemStorage = [];
@@ -165,36 +167,47 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 		public function miscitemsMenu():void {
 			var foundItem:Boolean = false;
 			menu();
-            if (Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
-                addButton(0, "Snow", Holidays.nieveBuilding);
-                foundItem = true;
-				}
-				if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4) {
-					addButton(2, (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), SceneLib.holliScene.treeMenu);
+            if (Holidays.nieveHoliday()) {
+				if (flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
+					addButton(0, "Snow", Holidays.nieveBuilding);
 					foundItem = true;
 				}
-				if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4) {
-					addButton(2, (flags[kFLAGS.FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), HolliPure.treeMenu);
+				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0 && player.hasKeyItem("Mysterious Seed") >= 0) {
+					addButton(7, "Mysterious Seed", Magnolia.treeMenu);
 					foundItem = true;
 				}
-				if (player.hasKeyItem("Dragon Egg") >= 0) {
-					addButton(3, "Egg", SceneLib.emberScene.emberEggInteraction);
+				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 1 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8) {
+					if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 6 && player.hasKeyItem("Decorations") >= 0) addButton(7, "Decorate Tree", Magnolia.treeMenu);
+					else addButton(7, (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] >= 7 ? "Ch. Tree" : "Green Tree"), Magnolia.treeMenu);
 					foundItem = true;
 				}
-				if (flags[kFLAGS.ANEMONE_KID] > 0) {
-					//CoC.instance.anemoneScene.anemoneBarrelDescription();
-					if (model.time.hours >= 6) addButton(4, "Anemone", SceneLib.anemoneScene.approachAnemoneBarrel);
-				}
-				if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
-					if (model.time.hours >= 6) addButton(5, "Garden", Gardening.manageuyourgarden).hint("Visit your plant offspring");
-				}
-				if (player.hasKeyItem("Gryphon Statuette") >= 0) {
-					addButton(6, "Gryphon", CoC.instance.mutations.skybornSeed, 1);
-				}
-				if (player.hasKeyItem("Peacock Statuette") >= 0) {
-					addButton(6, "Peacock", CoC.instance.mutations.skybornSeed, 2);
-				}
-				addButton(14, "Back", inventoryMenu);
+			}
+			if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4) {
+				addButton(2, (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), SceneLib.holliScene.treeMenu);
+				foundItem = true;
+			}
+			if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4) {
+				addButton(2, (flags[kFLAGS.FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), HolliPure.treeMenu);
+				foundItem = true;
+			}
+			if (player.hasKeyItem("Dragon Egg") >= 0) {
+				addButton(3, "Egg", SceneLib.emberScene.emberEggInteraction);
+				foundItem = true;
+			}
+			if (flags[kFLAGS.ANEMONE_KID] > 0) {
+				//CoC.instance.anemoneScene.anemoneBarrelDescription();
+				if (model.time.hours >= 6) addButton(4, "Anemone", SceneLib.anemoneScene.approachAnemoneBarrel);
+			}
+			if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
+				if (model.time.hours >= 6) addButton(5, "Garden", Gardening.manageyourgarden).hint("Visit your plant offspring");
+			}
+			if (player.hasKeyItem("Gryphon Statuette") >= 0) {
+				addButton(6, "Gryphon", CoC.instance.mutations.skybornSeed, 1);
+			}
+			if (player.hasKeyItem("Peacock Statuette") >= 0) {
+				addButton(6, "Peacock", CoC.instance.mutations.skybornSeed, 2);
+			}
+			addButton(14, "Back", inventoryMenu);
 		}
 		
 		public function BagOfCosmosMenu():void {

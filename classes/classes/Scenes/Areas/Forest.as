@@ -203,6 +203,13 @@ use namespace CoC;
 						chance: 0.5,
 						call: SceneLib.dianaScene.postNameForestEnc
 					}, {
+						name: "m1 cerberus",
+						when: function ():Boolean {
+							return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1;
+						},
+						chance: 3,
+						call: partsofM1Cerberus
+					}, {
 						name: "walk",
 						call: forestWalkFn
 					}, {
@@ -281,12 +288,18 @@ use namespace CoC;
 			}, {
 				name  : "electra",
 				when  : function():Boolean {
-					return flags[kFLAGS.ELECTRA_FOLLOWER] < 1
+					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2
 						   && flags[kFLAGS.ELECTRA_AFFECTION] >= 2
 						   && !player.hasStatusEffect(StatusEffects.ElectraOff);
 				},
 				chance: 0.5,
-				call  : SceneLib.electraScene.repeatDeepwoodsEnc
+				call  : function ():void {
+					if (flags[kFLAGS.ELECTRA_AFFECTION] == 100) {
+						if (flags[kFLAGS.ELECTRA_FOLLOWER] == 1) SceneLib.electraScene.ElectraRecruitingAgain();
+						else SceneLib.electraScene.ElectraRecruiting();
+					}
+					else SceneLib.electraScene.repeatDeepwoodsEnc();
+				}
 			}, {
 				name: "kitsune",
 				when: function():Boolean {
@@ -662,6 +675,15 @@ use namespace CoC;
 			} else {
 				alrauneScene.alrauneDeepwoods();
 			}
+		}
+		public function partsofM1Cerberus():void {
+			clearOutput();
+			outputText("As you explore the forest you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
+			outputText("You carefully put the pieces of the M1 Cerberus in your back and head back to your camp.\n\n");
+			player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 1, 1);
+			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
+			player.createKeyItem("M1 Cerberus", 0, 0, 0, 0);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		public function discoverDeepwoods():void {
 			player.createStatusEffect(StatusEffects.ExploredDeepwoods, 0, 0, 0, 0);

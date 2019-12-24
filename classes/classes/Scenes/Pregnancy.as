@@ -4,6 +4,7 @@ import classes.CoC_Settings;
 import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Camp.CampScenes;
 import classes.PerkLib;
 import classes.PregnancyStore;
 import classes.Scenes.NPCs.CelessScene;
@@ -21,6 +22,9 @@ public class Pregnancy extends NPCAwareContent {
 //21 == URTA
 //22 == SAND WITCH
 //23 == FROG BUTT EGG
+
+	public var campScenes:CampScenes = new CampScenes();
+
     public function updatePregnancy():Boolean {
         var displayedUpdate:Boolean = false;
         var pregText:String = "";
@@ -275,6 +279,63 @@ public class Pregnancy extends NPCAwareContent {
                     //Increase lactation!
                     if(player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
                         EngineCore.outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.  You wonder just what kind of creature they're getting ready to feed.\n");
+                        player.boostLactation(.5);
+                    }
+                    if(player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() > 0 && player.biggestLactation() < 1) {
+                        EngineCore.outputText("\nDrops of breastmilk escape your nipples as your body prepares for the coming birth.\n");
+                        player.boostLactation(.5);
+                    }
+                    //Lactate if large && not lactating
+                    if(player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() == 0) {
+                        EngineCore.outputText("<b>\nYou realize your breasts feel full, and occasionally lactate</b>.  It must be due to the pregnancy.\n");
+                        player.boostLactation(1);
+                    }
+                    //Enlarge if too small for lactation
+                    if(player.biggestTitSize() == 2 && player.mostBreastsPerRow() > 1) {
+                        EngineCore.outputText("<b>\nYour breasts have swollen to C-cups,</b> in light of your coming pregnancy.\n");
+                        player.growTits(1, 1, false, 3);
+                    }
+                    //Enlarge if really small!
+                    if(player.biggestTitSize() == 1 && player.mostBreastsPerRow() > 1) {
+                        EngineCore.outputText("<b>\nYour breasts have grown to B-cups,</b> likely due to the hormonal changes of your pregnancy.\n");
+                        player.growTits(1, 1, false, 3);
+                    }
+                }
+            }
+            //Goblin Pregnancy!
+            if (player.pregnancyType == PregnancyStore.PREGNANCY_GOBLIN) {
+                if(player.pregnancyIncubation == 150) {
+                    EngineCore.outputText("\n<b>You realize your belly has gotten bigger. Maybe you should cut back on all the strange food.</b>\n");
+                    displayedUpdate = true;
+                }
+                if(player.pregnancyIncubation == 125) {
+                    EngineCore.outputText("\n<b>Your belly is getting more noticeably distended. You are probably pregnant which for you, is great news.</b>\n");
+                    displayedUpdate = true;
+                }
+                if(player.pregnancyIncubation == 100) {
+                    EngineCore.outputText("\n<b>The unmistakable bulge of pregnancy is visible in your tummy. You stroke the orb and wonder with a half-grin how much your daughter will take after you.</b>\n");
+                    player.dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 2);
+                    displayedUpdate = true;
+                }
+                if(player.pregnancyIncubation == 75) {
+                    EngineCore.outputText("\n<b>The sudden impact of a tiny kick from inside your womb startles you. Moments later it happens again, making you gasp. The baby inside you really must be quite agitated.</b>\n");
+                    displayedUpdate = true;
+                }
+                if(player.pregnancyIncubation == 50) {
+                    EngineCore.outputText("\n<b>You're already as big as any pregnant woman back home. Well...for a goblin that is because you are quite smaller than a human to begin with.</b>\n");
+                    player.dynStats("spe", -1, "lib", .5, "sen", .5, "lus", 4);
+                    displayedUpdate = true;
+                }
+                if(player.pregnancyIncubation == 25) {
+                    EngineCore.outputText("\n<b>It seems impossible for your pregnant belly to grow any larger, but you are at your happiest yet, satisfied that somehow, you are fulfilling your role. It feels so right to be pregnant, and you can't wait to get knocked up again afterwards.</b>\n");
+                    player.dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 4);
+                    displayedUpdate = true;
+                }
+                if(player.pregnancyIncubation == 12 || player.pregnancyIncubation == 24 || player.pregnancyIncubation == 36 || player.pregnancyIncubation == 48) {
+                    displayedUpdate = true;
+                    //Increase lactation!
+                    if(player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
+                        EngineCore.outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.\n");
                         player.boostLactation(.5);
                     }
                     if(player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() > 0 && player.biggestLactation() < 1) {
@@ -1905,6 +1966,13 @@ public class Pregnancy extends NPCAwareContent {
             displayedUpdate = true;
             EngineCore.outputText("\n");
             player.knockUpForce(); //Clear Pregnancy
+        }
+        //Give birth to goblins
+        if (player.pregnancyIncubation == 1 && player.pregnancyType == PregnancyStore.PREGNANCY_GOBLIN) {
+            player.boostLactation(.01);
+			player.createStatusEffect(StatusEffects.PCDaughters,0,0,0,0);
+            player.knockUpForce(); //Clear Pregnancy
+            return false;
         }
         //Give birth if it's time (to a mouse!)
         if (player.pregnancyIncubation == 1 && (player.pregnancyType == PregnancyStore.PREGNANCY_MOUSE || player.pregnancyType == PregnancyStore.PREGNANCY_JOJO)) {

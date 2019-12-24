@@ -14,7 +14,7 @@ package classes.Scenes.Camp
 		{	//flags[kFLAGS.ALRAUNE_GROWING] == 15 - 2 weeks old children
 		}	//flags[kFLAGS.ALRAUNE_GROWING] == 22 - 3 weeks old children
 
-public function manageuyourgarden():void
+public function manageyourgarden():void
 {
 	clearOutput();
 	outputText("Your daughters are busy bickering about whose the most beautiful flower of them all.\n\n");

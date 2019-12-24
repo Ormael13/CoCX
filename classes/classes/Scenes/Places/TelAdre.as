@@ -1095,7 +1095,28 @@ private function buyItemNo():void {
 //-----------------
 public function tripxiShopMainMenu():void {
 	clearOutput();
-	if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxi) == 2) {
+		outputText("You enter the shop and deliver the gun parts to Tripxi who overjoyed begins to rebuild the gun immediately drawing schematics in the process.\n\n");
+		outputText("\"<i>Great job with this we are one step closer to restoring what was lost in the demon war all thanks to you! Come back tomorrow and I will have a brand new gun ready for you.</i>\"\n\n");
+		player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
+		if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) == 1) {
+			player.removeKeyItem("Desert Eagle");
+			player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 1, 1);
+		}
+		if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) == 1) {
+			player.removeKeyItem("M1 Cerberus");
+			player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 1, 1);
+		}
+		if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) == 1) {
+			player.removeKeyItem("Tripxi Fatbilly");
+			player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 1, 1);
+		}
+		if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) == 1) {
+			player.removeKeyItem("Harpoon gun");
+			player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 2, 1);
+		}
+	}
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
 		outputText("Tripxi move on from whatever weird experiment she was on to greet you at the counter.\n\n");
 		outputText("\"<i>Day [name] did you waltz over to buy firearms?</i>\"\n\n");
 	}
@@ -1110,60 +1131,156 @@ public function tripxiShopMainMenu():void {
 		flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
 		outputText("<b>New codex entry unlocked: Goblins!</b>")
 	}
-	doNext(tripxiShopMainMenu2);
+	doNext(tripxiShopMainMenu2a);
 }
 
-public function tripxiShopMainMenu2():void {
+public function tripxiShopMainMenu2a():void {
 	menu();
-	addButton(0, weaponsrange.FLINTLK.shortName, buyItem2, weaponsrange.FLINTLK);
-    addButton(1, weaponsrange.BLUNDER.shortName, buyItem2, weaponsrange.BLUNDER);
-    addButton(2, weaponsrange.IVIARG_.shortName, buyItem2, weaponsrange.IVIARG_);
-	//addButton(3, weaponsrange.FLINTLK.shortName, buyItem2, weaponsrange.);
-	//addButton(4, weaponsrange.FLINTLK.shortName, buyItem2, weaponsrange.);
-	addButton(5, weaponsrange.DUEL_P_.shortName, buyItem2, weaponsrange.DUEL_P_);
-	addButton(6, weaponsrange.ADBSHOT.shortName, buyItem2, weaponsrange.ADBSHOT);
-	addButton(7, weaponsrange.ADBSCAT.shortName, buyItem2, weaponsrange.ADBSCAT);
-	//addButton(8, weaponsrange.FLINTLK.shortName, buyItem2, weaponsrange.);
-	//addButton(9, weaponsrange.FLINTLK.shortName, buyItem2, weaponsrange.);
-	//addButton(10, weaponsrange.FLINTLK.shortName, buyItem2, weaponsrange.);
-	//addButton(11, weaponsrange.FLINTLK.shortName, buyItem2, weaponsrange.);
-	//addButton(12, weaponsrange.FLINTLK.shortName, buyItem2, weaponsrange.);
-	//addButton(13, weaponsrange.FLINTLK.shortName, buyItem2, weaponsrange.);
+	addButton(0, weaponsrange.FLINTLK.shortName, buyItemT1, weaponsrange.FLINTLK);
+	addButton(1, weaponsrange.BLUNDER.shortName, buyItemT1, weaponsrange.BLUNDER);
+	addButton(2, weaponsrange.DUEL_P_.shortName, buyItemT1, weaponsrange.DUEL_P_);
+	addButton(3, weaponsrange.ADBSHOT.shortName, buyItemT1, weaponsrange.ADBSHOT);
+	addButton(4, weaponsrange.ADBSCAT.shortName, buyItemT1, weaponsrange.ADBSCAT);
+	addButton(5, weaponsrange.IVIARG_.shortName, buyItemT1, weaponsrange.IVIARG_);
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) > 2) addButton(6, weaponsrange.DESEAGL.shortName, buyItemT1, weaponsrange.DESEAGL);
+	else if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) == 2) addButtonDisabled(6, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(6, "???", "Search the Desert.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) > 2) addButton(7, weaponsrange.M1CERBE.shortName, buyItemT1, weaponsrange.M1CERBE);
+	else if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) == 2) addButtonDisabled(7, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(7, "???", "Search the Forest.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) > 2) addButton(8, weaponsrange.TRFATBI.shortName, buyItemT1, weaponsrange.TRFATBI);
+	else if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) == 2) addButtonDisabled(8, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(8, "???", "Search the Vulcanic Crag.");
+	//addButton(9, weaponsrange.FLINTLK.shortName, buyItemT1, weaponsrange.);
+	//addButton(10, weaponsrange.FLINTLK.shortName, buyItemT1, weaponsrange.);
+	//addButton(11, weaponsrange.FLINTLK.shortName, buyItemT1, weaponsrange.);
+	//addButton(13, weaponsrange.FLINTLK.shortName, buyItemT1, weaponsrange.);
+	addButtonDisabled(10, "-1-", "Shelf 1");
+	addButton(11, "-2-", tripxiShopMainMenu2b);
+	//addButton(12, "-3-", tripxiShopMainMenu2c);
+	addButton(13, "Talk", tripxiShopTalk);
+	addButton(14, "Leave", telAdreMenu);
+}
+public function tripxiShopMainMenu2b():void {
+	menu();
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) > 2) addButton(5, weaponsrange.HARPGUN.shortName, buyItemT2, weaponsrange.HARPGUN);
+	else if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) == 2) addButtonDisabled(5, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(5, "???", "Search the Beach.");
+	addButton(10, "-1-", tripxiShopMainMenu2a);
+	addButtonDisabled(11, "-2-", "Shelf 2");
+	//addButton(12, "-2-", tripxiShopMainMenu2c);
+	addButton(14, "Leave", telAdreMenu);
+}
+public function tripxiShopMainMenu2c():void {
+	menu();
+	
+	addButton(10, "-1-", tripxiShopMainMenu2a);
+	addButton(11, "-2-", tripxiShopMainMenu2b);
+	addButtonDisabled(12, "-3-", "Shelf 3");
 	addButton(14, "Leave", telAdreMenu);
 }
 
 public function tripxiShopInside():void {
 	clearOutput();
-	outputText("Still need text.\n\n");
-	//outputText("\"<i>Now now is there anything else this good merchant could sell to you?</i>\"\n\n");
-	tripxiShopMainMenu2();
+	outputText("Tripxi move on from whatever weird experiment she was on to greet you at the counter.\n\n");
+	outputText("\"<i>Day [name] did you waltz over to buy firearms?</i>\"\n\n");
+	tripxiShopMainMenu2a();
 }
 
-private function buyItem2(odd:ItemType):void{
+private function buyItemT1(odd:ItemType, page:int = 1):void{
 	clearOutput();
-	var cost:int = odd.value;// * 3
+	var cost:int = odd.value;
 	outputText("You point at the " + odd.longName + " and Tripxi put it on the counter.\n\n\"<i>Yea sure this thing will only be " + odd.value + " gems. hope you got the money on you.</i>\"\n\n");
 	if (player.gems < cost){
 		outputText("Sadly no you don't and Tripxi put back the thing in its display case.\n\n");
 		outputText("\"<i>Anything else I can do for you then?</i>\"\n\n");
-		doNext(tripxiShopInside);
+		doNext(tripxiShopMainMenu2a);
 		return;
 	}
-	else doYesNo(curry(buyItem2Yes,odd), buyItem2No);
+	else doYesNo(curry(buyItemT1Yes,odd), buyItemT1No);
 }
-
-private function buyItem2Yes(odd:ItemType):void {
-	player.gems -= odd.value;// * 3
+private function buyItemT1Yes(odd:ItemType):void {
+	player.gems -= odd.value;
 	statScreenRefresh();
 	outputText("You pass on the gems to Tripxi who hands you the weapon over.\n\n");
 	outputText("\"<i>Kill some demons with this baby will you. I'd like to think that my tools help clean the place some of my peers are busy dirtying with stupid sex toys.</i>\"\n\n");
-	inventory.takeItem(odd, tripxiShopInside);
+	inventory.takeItem(odd, tripxiShopMainMenu2a);
 }
-
-private function buyItem2No():void {
+private function buyItemT1No():void {
 	outputText("After thinking no you will think it through first.\n\n");
 	outputText("\"<i>Fine no skin of my back it's not like the city has me paying a rent for this shop anyway since I provide them with weapons.</i>\"\n\n");
-	doNext(tripxiShopInside);
+	doNext(tripxiShopMainMenu2a);
+}
+private function buyItemT2(odd:ItemType):void{
+	clearOutput();
+	var cost:int = odd.value;
+	outputText("You point at the " + odd.longName + " and Tripxi put it on the counter.\n\n\"<i>Yea sure this thing will only be " + odd.value + " gems. hope you got the money on you.</i>\"\n\n");
+	if (player.gems < cost){
+		outputText("Sadly no you don't and Tripxi put back the thing in its display case.\n\n");
+		outputText("\"<i>Anything else I can do for you then?</i>\"\n\n");
+		doNext(tripxiShopMainMenu2b);
+		return;
+	}
+	else doYesNo(curry(buyItemT2Yes,odd), buyItemT2No);
+}
+private function buyItemT2Yes(odd:ItemType):void {
+	player.gems -= odd.value;
+	statScreenRefresh();
+	outputText("You pass on the gems to Tripxi who hands you the weapon over.\n\n");
+	outputText("\"<i>Kill some demons with this baby will you. I'd like to think that my tools help clean the place some of my peers are busy dirtying with stupid sex toys.</i>\"\n\n");
+	inventory.takeItem(odd, tripxiShopMainMenu2b);
+}
+private function buyItemT2No():void {
+	outputText("After thinking no you will think it through first.\n\n");
+	outputText("\"<i>Fine no skin of my back it's not like the city has me paying a rent for this shop anyway since I provide them with weapons.</i>\"\n\n");
+	doNext(tripxiShopMainMenu2b);
+}
+private function buyItemT3(odd:ItemType):void{
+	clearOutput();
+	var cost:int = odd.value;
+	outputText("You point at the " + odd.longName + " and Tripxi put it on the counter.\n\n\"<i>Yea sure this thing will only be " + odd.value + " gems. hope you got the money on you.</i>\"\n\n");
+	if (player.gems < cost){
+		outputText("Sadly no you don't and Tripxi put back the thing in its display case.\n\n");
+		outputText("\"<i>Anything else I can do for you then?</i>\"\n\n");
+		doNext(tripxiShopMainMenu2c);
+		return;
+	}
+	else doYesNo(curry(buyItemT3Yes,odd), buyItemT3No);
+}
+private function buyItemT3Yes(odd:ItemType):void {
+	player.gems -= odd.value;
+	statScreenRefresh();
+	outputText("You pass on the gems to Tripxi who hands you the weapon over.\n\n");
+	outputText("\"<i>Kill some demons with this baby will you. I'd like to think that my tools help clean the place some of my peers are busy dirtying with stupid sex toys.</i>\"\n\n");
+	inventory.takeItem(odd, tripxiShopMainMenu2c);
+}
+private function buyItemT3No():void {
+	outputText("After thinking no you will think it through first.\n\n");
+	outputText("\"<i>Fine no skin of my back it's not like the city has me paying a rent for this shop anyway since I provide them with weapons.</i>\"\n\n");
+	doNext(tripxiShopMainMenu2c);
+}
+
+private function tripxiShopTalk():void {
+	menu();
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxi) > 0) addButtonDisabled(5, "Small Selection", "You already talked about this subject.");
+	else addButton(5, "SmallSelection", tripxiShopTalkSmallSelection);
+	addButton(14, "Leave", tripxiShopInside);
+}
+
+private function tripxiShopTalkSmallSelection():void {
+	clearOutput();
+	outputText("You look up her inventory and note that she only sell basic firearms.\n\n");
+	outputText("\"<i>Well yes I do? That's because the tech was lost when our civilisation fell. No one makes guns anymore and I barely got the base knowledge to assemble these pieces of junk, primitive isn't it? We had stuff ranging from bomb launchers to gatling guns and all of it is now lost god knows were in the waste of Mareth. This said you're an adventurer, aren't you?</i>\"\n\n");
+	outputText("You nod to that, you are indeed an adventuring hero, the champion of Ingnam to be exact.\n\n");
+	outputText("\"<i>Yea sure whatever this just means you could help me with something. Fact is goblin technology is lost but not gone. There are good odds that while traveling around Mareth you may run into old gun parts. Gather them and bring them back here. I will study them and create brand new firearms for you.</i>\"\n\n");
+	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns1, 0, 0, 0, 0);
+	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns2, 0, 0, 0, 0);
+	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns3, 0, 0, 0, 0);
+	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns4, 0, 0, 0, 0);
+	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns5, 0, 0, 0, 0);
+	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns6, 0, 0, 0, 0);
+	player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
+	doNext(tripxiShopTalk)
 }
 
 //[Invetigate]

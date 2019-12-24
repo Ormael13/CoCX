@@ -395,7 +395,8 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				doNext(playerMenu);
 				return true;
 			}
-			if (checkedMarbleMilk++ == 0 && model.time.hours == 6 && player.findPerk(PerkLib.MarblesMilk) >= 0) {
+			if (checkedMarbleMilk == 0 && model.time.hours == 6 && player.findPerk(PerkLib.MarblesMilk) >= 0) {
+				checkedMarbleMilk++;
 				//In prison
 				if (prison.inPrison) {
 					outputText("\nYou get up and complain about not getting your daily dose of Marble's milk. ");
@@ -2443,7 +2444,7 @@ private function canGiveItem():Boolean {
 		if (player.hasItem(consumables.REDUCTO, 1)) return true;
 		if (player.hasItem(consumables.LACTAID, 1)) return true;
 	}
-	else if (player.findPerk(PerkLib.MarblesMilk) >= 0) return true;
+	else if (player.findPerk(PerkLib.MarblesMilk) >= 0 && player.hasItem(consumables.LACTAID, 1)) return true;
 	return false;
 }
 
@@ -2465,7 +2466,7 @@ public function giveItem():void {
 		if (player.hasItem(consumables.REDUCTO, 1)) addButton(8, "ReductoBust", marblePurification.pureMurbleUsesReducto);
 		if (player.hasItem(consumables.LACTAID, 1)) addButton(0, "Lactaid", marblePurification.lactaidForPureMurble);
 	}
-	else if (player.findPerk(PerkLib.MarblesMilk) >= 0) addButton(0, "Lactaid", giveMarbleLactaid);
+	else if (player.findPerk(PerkLib.MarblesMilk) >= 0 && player.hasItem(consumables.LACTAID, 1)) addButton(0, "Lactaid", giveMarbleLactaid);
 	addButton(9, "Back", interactWithMarbleAtCamp);
 }
 
@@ -3575,7 +3576,8 @@ private function marbleNightSexChicks():void {
 		}
 		outputText("The two of you give one more shudder from the wonderful stimulation, before collapsing on top of one another.  ");
 		//Pregnancy chance for PC, ¼ their fertility
-		player.knockUp(PregnancyStore.PREGNANCY_MARBLE, PregnancyStore.INCUBATION_MARBLE, 150);
+		if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+		else player.knockUp(PregnancyStore.PREGNANCY_MARBLE, PregnancyStore.INCUBATION_MARBLE, 150);
 		player.cuntChange(flags[kFLAGS.MARBLE_DICK_THICKNESS] * flags[kFLAGS.MARBLE_DICK_LENGTH], true);
 	}
 	marbleSexFinish();
@@ -4174,7 +4176,8 @@ private function milkMarbleTakeHerDick():void
 	dynStats( "lib", .5 );
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-	player.knockUp(PregnancyStore.PREGNANCY_MARBLE, PregnancyStore.INCUBATION_MARBLE, 150);
+	if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	else player.knockUp(PregnancyStore.PREGNANCY_MARBLE, PregnancyStore.INCUBATION_MARBLE, 150);
 	doNext(camp.returnToCampUseTwoHours);
 }
 
@@ -4463,3 +4466,4 @@ private function hammerQuest():void {
 
 }
 }
+

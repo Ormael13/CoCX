@@ -40,7 +40,66 @@ import classes.StatusEffects;
 		private static const DUNGEON_RIVER_FLOOR_01_ROOM_19:int	= 86;
 		private static const DUNGEON_RIVER_FLOOR_01_ROOM_20:int	= 87;
 		
-		public function RiverDungeon() {}//flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] 1 - pok 1 golema, 2 pokonanie 2 golem, 3 pokonanie obu golemów
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_01:int	= 104;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_02:int	= 105;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_03:int	= 106;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_04:int	= 107;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_05:int	= 108;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_06:int	= 109;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_07:int	= 110;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_08:int = 111;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_09:int = 112;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_10:int = 113;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_11:int = 114;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_12:int = 115;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_13:int = 116;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_14:int = 117;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_15:int = 118;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_16:int = 119;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_17:int = 120;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_18:int = 121;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_19:int = 122;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_20:int = 123;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_21:int = 124;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_22:int = 125;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_23:int = 126;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_24:int = 127;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_25:int = 128;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_26:int = 129;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_27:int = 130;
+		
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_01:int = 135;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_02:int = 136;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_03:int = 137;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_04:int = 138;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_05:int = 139;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_06:int = 140;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_07:int = 141;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_08:int = 142;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_09:int = 143;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_10:int = 144;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_11:int = 145;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_12:int = 146;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_13:int = 147;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_14:int = 148;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_15:int = 149;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_16:int = 150;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_17:int = 151;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_18:int = 152;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_19:int = 153;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_20:int = 154;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_21:int = 155;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_22:int = 156;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_23:int = 157;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_24:int = 158;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_25:int = 159;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_26:int = 160;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_27:int = 161;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_28:int = 162;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_29:int = 163;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_30:int = 164;
+		
+		public function RiverDungeon() {}//flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] 1 - pok 1 golema, 2 pokonanie obu golemów
 		
 		public function enterDungeon():void {
 			inDungeon = true;
@@ -72,8 +131,8 @@ import classes.StatusEffects;
 				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
-				var choice1:Number = rand(3);
-				if (choice1 == 0) {
+				var choice:Number = rand(3);
+				if (choice == 0) {
 					spriteSelect(29);
 					outputText("A feral imp suddenly appears from nearby passage and attacks!");
 					if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
@@ -83,12 +142,12 @@ import classes.StatusEffects;
 					flags[kFLAGS.FERAL_EXTRAS] = 5;
 					startCombat(new FeralImps(), true);
 				}
-				if (choice1 == 1) {
+				if (choice == 1) {
 					spriteSelect(25);
 					outputText("A soft shuffling sound catches your attention and you turn around, spotting an amorphous green mass sliding towards you!  Realizing it's been spotted, the ooze's mass surges upwards into a humanoid form with thick arms and wide shoulders.  The beast surges forward to attack!");
 					startCombat(new GreenSlime(), true);
 				}
-				if (choice1 == 2) {
+				if (choice == 2) {
 					spriteSelect(27);
 					outputText("You hear a fiery howl as a demonic, two-headed beast-man leaps out of nearby passage!");
 					if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
@@ -187,13 +246,63 @@ import classes.StatusEffects;
 			else inventory.takeItem(item, roomA15);
 		}
 		
+		private function encountersRuletteB():void {
+			/*if ((rand(100) < player.statusEffectv1(StatusEffects.RiverDungeonA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+				var reset:Number = 10;
+				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
+				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
+				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
+				var choice:Number = rand(4);
+				if (choice == 0 || choice == 3) {
+					spriteSelect(29);
+					outputText("A feral imp suddenly appears from nearby passage and attacks!");
+					if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
+						flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
+						outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
+					}
+					flags[kFLAGS.FERAL_EXTRAS] = 5;
+					startCombat(new FeralImps(), true);
+				}
+				if (choice == 1) {
+					spriteSelect(25);
+					outputText("A soft shuffling sound catches your attention and you turn around, spotting an amorphous green mass sliding towards you!  Realizing it's been spotted, the ooze's mass surges upwards into a humanoid form with thick arms and wide shoulders.  The beast surges forward to attack!");
+					startCombat(new GreenSlime(), true);
+				}
+				if (choice == 2) {
+					spriteSelect(27);
+					outputText("You hear a fiery howl as a demonic, two-headed beast-man leaps out of nearby passage!");
+					if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
+						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
+						outputText("\n\n<b>New codex entry unlocked: Hellhounds!</b>")
+					}
+					startCombat(new HellHound(), true);
+				}
+				doNext(playerMenu);
+			}
+			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);*/
+		}
+		
 		/*public function defeatedBy():void {
 			clearOutput();
 			outputText("Placeholder Bad End.\n\n");
 			inDungeon = true;
-			dungeonLoc = ;starting for each floor room
+			dungeonLoc = 105;
 			playerMenu();
 		}
+		public function defeatedBy():void {
+			clearOutput();
+			outputText("Placeholder Bad End.\n\n");
+			inDungeon = true;
+			dungeonLoc = 105;
+			playerMenu();
+		}
+		public function defeatedBy<Boss enemy>():void {
+			clearOutput();
+			outputText("Placeholder Bad End.\n\n");
+			//[GAME OVER]
+			EventParser.gameOver();
+		}
+		
 		public function defeatedBy():void {
 			clearOutput();
 			outputText("Placeholder Bad End.\n\n");
@@ -264,8 +373,10 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Small Bats fly out as you walk by above your head hangs some large stalactites. You think to yourself it would be most unfortunate if one of these was to randomly fall down and run you through.");
-			dungeons.setDungeonButtonsRD(roomA05, null, null, null);
-			addButtonDisabled(11, "Down", "Lower floors still too dangerous to let in PC party!!!");
+			dungeons.setDungeonButtonsRD(roomA05, null, null, null);/*
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1) addButton(11, "Down", roomB01);
+			else addButtonDisabled(11, "Down", "You still need to beat guardians of this floor to descend into lower strata of the dungeon.");*/
+			addButtonDisabled(11, "Down", "You still need to wait for our brave goblins team to come back (alive) to descend into lower strata of the dungeon.");
 		}
 		public function roomA07():void {
 			dungeonLoc = 74;
@@ -405,6 +516,264 @@ import classes.StatusEffects;
 			dungeons.setDungeonButtonsRD(null, roomA18, null, null);
 		}
 		
+		public function roomB01():void {
+			dungeonLoc = 104;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(roomB02, null, null, null);
+			addButton(11, "Up", roomA06);
+		}
+		public function roomB02():void {
+			dungeonLoc = 105;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(roomB16, roomB01, null, roomB06);
+		}
+		public function roomB03():void {
+			dungeonLoc = 106;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(null, roomB04, roomB25, null);
+		}
+		public function roomB04():void {
+			dungeonLoc = 107;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(roomB05, roomB03, null, roomB07);
+		}
+		public function roomB05():void {
+			dungeonLoc = 108;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(roomB06, roomB04, null, roomB08);
+		}
+		public function roomB06():void {
+			dungeonLoc = 109;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(null, roomB05, roomB02, roomB09);
+		}
+		public function roomB07():void {
+			dungeonLoc = 110;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(roomB08, null, roomB04, roomB10);
+		}
+		public function roomB08():void {
+			dungeonLoc = 111;
+			clearOutput();//boss room
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(roomB09, roomB07, roomB05, roomB11);
+		}
+		public function roomB09():void {
+			dungeonLoc = 112;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(null, roomB08, roomB06, roomB12);
+		}
+		public function roomB10():void {
+			dungeonLoc = 113;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(roomB11, null, roomB07, roomB14);
+		}
+		public function roomB11():void {
+			dungeonLoc = 114;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(roomB12, roomB10, roomB08, null);
+		}
+		public function roomB12():void {
+			dungeonLoc = 115;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(roomB13, roomB12, roomB09, null);
+		}
+		public function roomB13():void {
+			dungeonLoc = 116;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(null, roomB12, null, roomB19);
+		}
+		public function roomB14():void {
+			dungeonLoc = 117;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(roomB15, roomB22, roomB10, null);
+		}
+		public function roomB15():void {
+			dungeonLoc = 118;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(null, roomB14, null, null);
+			/*if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > ) addButton(6, "Down", );
+			else */addButtonDisabled(6, "Down", "You still need to beat guardian of this floor to descend into lower strata of the dungeon.");
+		}
+		public function roomB16():void {
+			dungeonLoc = 119;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(null, roomB02, roomB17, null);
+		}
+		public function roomB17():void {
+			dungeonLoc = 120;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(null, roomB18, null, roomB16);
+		}
+		public function roomB18():void {
+			dungeonLoc = 121;
+			clearOutput();//room with trigger for boss
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(roomB17, null, null, null);
+		}
+		public function roomB19():void {
+			dungeonLoc = 122;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(roomB20, null, roomB13, null);
+		}
+		public function roomB20():void {
+			dungeonLoc = 123;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(null, roomB19, roomB21, null);
+		}
+		public function roomB21():void {
+			dungeonLoc = 124;
+			clearOutput();//room with trigger for boss
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(null, null, null, roomB20);
+		}
+		public function roomB22():void {
+			dungeonLoc = 125;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(roomB14, null, null, roomB23);
+		}
+		public function roomB23():void {
+			dungeonLoc = 126;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(roomB24, null, roomB22, null);
+		}
+		public function roomB24():void {
+			dungeonLoc = 127;
+			clearOutput();//room with trigger for boss
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(null, roomB23, null, null);
+		}
+		public function roomB25():void {
+			dungeonLoc = 128;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(null, roomB26, null, roomB03);
+		}
+		public function roomB26():void {
+			dungeonLoc = 129;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(roomB25, null, null, roomB27);
+		}
+		public function roomB27():void {
+			dungeonLoc = 130;
+			clearOutput();//room with trigger for boss
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(null, null, roomB26, null);
+		}
+		/*
+		public function roomC01():void {
+			dungeonLoc = 1xx;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+			addButton(6, "Up", roomA06);
+		}
+		*/
 		private function tresureRoom1A():void {
 			clearOutput();
 			outputText("You notice a small glimmer in the distance and approach it. it is revealed to be a wall covered with gemstones. Neisa is quick to notice it too.\n\n");

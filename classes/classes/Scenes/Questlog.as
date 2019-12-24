@@ -64,8 +64,14 @@ public class Questlog extends BaseContent
 				if (player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) outputText("Completed (Reward taken)");
 				else outputText("Completed");
 			}
+			else outputText("Not Started/In Progress");
+			outputText("\n<b>2nd Floor:</b> ");
+			if (SceneLib.dungeons.checkRiverDungeon2ndFloorClear()) {
+				if (player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) > 1) outputText("Completed (Reward taken)");
+				else outputText("Completed");
+			}
 			else outputText("Not Started/In Progress");/*
-			outputText("\n<i><b>2nd Floor:</b> Soon</i>");*/
+			outputText("\n<i><b>3rd Floor:</b> Soon</i>");*/
 			outputText("\n\n<u><b>Adventure Guild Quests</b></u>");
 			outputText("\n<b>Imps Hunt:</b> ");
 			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 2 || player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 4 || player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 7) outputText("Completed (for today)");
@@ -161,7 +167,7 @@ public class Questlog extends BaseContent
 		public function takeRewardForSandCave():void {
 			clearOutput();
 			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 1 perk points and 5 stat points</b>");
+			outputText("<b>Gained 1 perk point and 5 stat points</b>");
 			player.perkPoints = player.perkPoints + 1;
 			player.statPoints = player.statPoints + 5;
 			statScreenRefresh();
@@ -181,11 +187,21 @@ public class Questlog extends BaseContent
 		public function takeRewardForRiverDungeon1stFloor():void {
 			clearOutput();
 			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 1 perk points and 5 stat points</b>");
+			outputText("<b>Gained 1 perk point and 5 stat points</b>");
 			player.perkPoints = player.perkPoints + 1;
 			player.statPoints = player.statPoints + 5;
 			statScreenRefresh();
 			player.createStatusEffect(StatusEffects.RiverDungeonFloorRewards,1,0,0,0);
+			doNext(accessQuestlogMainMenu);
+		}
+		public function takeRewardForRiverDungeon2ndFloor():void {
+			clearOutput();
+			outputText("Your contribution in changing Mareth have been noticed.\n\n");
+			outputText("<b>Gained 2 perk points and 10 stat points</b>");
+			player.perkPoints = player.perkPoints + 2;
+			player.statPoints = player.statPoints + 10;
+			statScreenRefresh();
+			player.addStatusValue(StatusEffects.RiverDungeonFloorRewards,1,1);
 			doNext(accessQuestlogMainMenu);
 		}
 		public function takeRewardForEbonLabyrinth():void {
@@ -201,7 +217,7 @@ public class Questlog extends BaseContent
 		public function takeRewardForHiddenCave():void {
 			clearOutput();
 			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 1 perk points and 5 stat points</b>");
+			outputText("<b>Gained 1 perk point and 5 stat points</b>");
 			player.perkPoints = player.perkPoints + 1;
 			player.statPoints = player.statPoints + 5;
 			statScreenRefresh();
@@ -211,7 +227,7 @@ public class Questlog extends BaseContent
 		public function takeRewardForHiddenCaveHiddenStage():void {
 			clearOutput();
 			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 1 perk points and 5 stat points</b>");
+			outputText("<b>Gained 1 perk point and 5 stat points</b>");
 			player.perkPoints = player.perkPoints + 1;
 			player.statPoints = player.statPoints + 5;
 			statScreenRefresh();

@@ -35,79 +35,207 @@ package classes.Scenes
 			outputText("-Each slime subrace score will mainly relay on having skin(goo) color that is typical for that subtype. Which mean magma or dark slimes got specific colors and normal slimes would be slimes with any other skin color.\n");
 			outputText("-Most of repeatable quests in Adventure Guild get counter on Stats page how many times PC already completed them (sadly it can/t track back so it will start counting them from this version).\n");
 			outputText("-Fixed bugs: one of achievments not been awarded, game not memorizing and removing equipment when becoming Jiangshi, even in debug mode game forcing manticore bad end, Infernal Mouse ring not giving wrath generation bonus when equipped in 4th ring slot, Petrify stun duration on single enemy with and w/o Gorgon Eyes been switched, ");
-			outputText("too high req. salamander score for 3rd racial perk, starting as half slime, getting fat without hunger mode on, Neisa bug happening with Aurora/Alvina, no firearms damage despite number appearing on screen, Flintlock pistol ammo incorrectly set too high at combat start\n\n");/*ostatni punkt changelogu
+			outputText("too high req. salamander score for 3rd racial perk, starting as half slime, getting fat without hunger mode on, Neisa bug happening with Aurora/Alvina, no firearms damage despite number appearing on screen, Flintlock pistol ammo incorrectly set too high at combat start\n\n");
 			outputText("<b>Version 0.8n5:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-New tier 0 misc lvl-up perk: Job: Leader. Req. 10+ int, 10+ wis. Effect: +5 to max Inteligence/Wisdom (scalable), -5 to max Libido (scalable) and would give will-o'-the-wisp pet.\n");
+			outputText("-New tier 0 misc lvl-up perk: Natural punching bag. Req. Bouncy body perk, free fat tissure mutation slot and 4+ pts in goblin score. Effect: +1 to goblin score. Increase dmg reduction from bouncy body by 5% and +5 to max toughness.\n");
+			outputText("-New tier 0 misc lvl-up perk: Motivation. Req. Job: Leader and Basic Leadership perks. Effect: Decrease to 35% henchmans idle time during combat.\n");
+			outputText("-New tier 1 wisdom lvl-up perk: Elements of Mareth: Advanced. Req. Elements of Mareth: Basics perk and 50+ wis. Effect: Increase limit of summoned elementals by 1 and unlock summoning of poison, purity and corruption elementals.\n");
+			outputText("-New tier 1 misc lvl-up perk: Shoot the load and hit the road. Req. Job: Leader perk, 60+ int, 60+ wis. Effect: It would remove penalty to libido and +5 to max Speed (scalable).\n");
+			outputText("-New tier 1 misc lvl-up perk: Wisp Lieutenant. Req. Job: Leader perk, 50+ int, 50+ wis and 3+ other minions/pet aside wisp. Effect: Increase wisp commanding aura boosting other summoned pets/minions attack power effects by 20% (30% in total).\n");
+			outputText("-New tier 2 misc lvl-up perk: Natural punching bag (Evolved). Req. Natural punching bag perk and 8+ pts in goblin score. Effect: +1 to goblin score. Increase healing pills effectiveness by 50%, dmg reduction from bouncy body by 10% and +10 to max toughness.\n");
+			outputText("-New tier 3 misc lvl-up perk: Motivation (Ex). Req. Motivation perk. Effect: Decrease to 20% henchmans idle time during combat.\n");
+			outputText("-New tier 4 misc lvl-up perk: Wisp Captain. Req. Wisp Lieutenant, 100+ int, 100+ wis and 6+ other minions/pet aside wisp. Effect: Increase wisp commanding aura boosting other summoned pets/minions attack power effects by 30% (60% in total).\n");
+			outputText("-New tier 5 misc lvl-up perk: Natural punching bag (Final Form). Req. Natural punching bag (Evolved) perk and 12+ pts in goblin score. Effect: +1 to goblin score. Increase healing pills effectiveness by 50%, dmg reduction from bouncy body by 20% and +20 to max toughness.\n");
+			outputText("-New tier 6 misc lvl-up perk: Motivation (Su). Req. Motivation (Ex) perk. Effect: Decrease to 5% henchmans idle time during combat.\n");
+			outputText("-New tier 7 intelligence lvl-up perk: Prestige Job: Warlock. Req. Grand Archmage (3rd Circle), Job: Eromancer perks; 200+ int and completing Alvina storyline up to fight with Siegweird. Effect: +60 to max int and +20 to max lib (scalable with NG tiers), access to learning hex spells from Black Books.\n");
+			outputText("-New tier 7 misc lvl-up perk: Wisp Major. Req. Wisp Captain, 150+ int, 150+ wis and 10+ other minions/pet aside wisp. Effect: Increase wisp commanding aura boosting other summoned pets/minions attack power effects by 40% (100% in total).\n");
+			outputText("-New tier 8 intelligence lvl-up perk: Hex Knowledge. Req. Prestige Job: Warlock perk, 225+ int. Effect: Allow to learn Hex spells form black books and removing access to any white spell. Black and Hex magic would deal 20% more dmg against pure enemies. Additionaly Hex magic req. to be over 80 corruption to cast.\n");
+			outputText("-New tier 8 misc lvl-up perk: Master All-Rounder Education. Req. Expert All-Rounder Education perk. Effect: Limit of advanced job you can learn is increased by 3.\n");
+			outputText("-New tier 9 wisdom lvl-up perk: Strongest Elemental Bond (Ex). Req. Elemental Contract Rank 10, Strongest Elemental Bond perks and 250+ wis. Effect: Lower by 40 needed mana to sustain active elemental in combat\n");
+			outputText("-New tier 10 misc lvl-up perk: Chimerical Body: Semi-Epic Stage. Req. Chimerical Body: Peerless Stage perk and 61+ points in Internal Chimerical Disposition score. Effect: delay by another 11 points appearing effect of negative HP regeneration and +5 to max Str/Tou/Spe (scalable), +10 to max Int/Wis/Lib/Sens (scalable).\n");
+			outputText("-New tier 11 wisdom lvl-up perk: Elemental Contract Rank 12. Req. perk Elemental Contract Rank 11 and 300+ wis. Effect: Increase limit of summoned elementals by 2 and unlock rank-up for elementals to 7th elder rank\n");
+			outputText("-New tier 12 wisdom lvl-up perk: Elemental Contract Rank 13. Req. perk Elemental Contract Rank 12 and 325+ wis. Effect: Increase limit of summoned elementals by 2 and unlock rank-up for elementals to 6th elder rank\n");
+			outputText("-New tier 12 misc lvl-up perk: Wisp Colonel. Req. Wisp Major, 200+ int, 200+ wis and 15+ other minions/pet aside wisp. Effect: Increase wisp commanding aura boosting other summoned pets/minions attack power effects by 50% (150% in total).\n");
+			outputText("-New tier 13 wisdom lvl-up perk: Elemental Contract Rank 14. Req. perk Elemental Contract Rank 13 and 350+ wis. Effect: Increase limit of summoned elementals by 2 and unlock rank-up for elementals to 5th elder rank\n");
+			outputText("-New tier 14 wisdom lvl-up perk: Elemental Contract Rank 15. Req. perk Elemental Contract Rank 14 and 375+ wis. Effect: Increase limit of summoned elementals by 2 and unlock rank-up for elementals to 4th elder rank\n");
+			outputText("-New tier 15 wisdom lvl-up perk: Elemental Contract Rank 16. Req. perk Elemental Contract Rank 15 and 400+ wis. Effect: Increase limit of summoned elementals by 2 and unlock rank-up for elementals to 3rd elder rank\n");
+			outputText("-New tier 16 wisdom lvl-up perk: Elemental Contract Rank 17. Req. perk Elemental Contract Rank 16 and 425+ wis. Effect: Increase limit of summoned elementals by 2 and unlock rank-up for elementals to 2nd elder rank\n");
+			outputText("-New tier 17 wisdom lvl-up perk: Elemental Contract Rank 18. Req. perk Elemental Contract Rank 17 and 450+ wis. Effect: Increase limit of summoned elementals by 2 and unlock rank-up for elementals to 1st elder rank\n");
+			outputText("-New tier 18 wisdom lvl-up perk: Elemental Contract Rank 19. Req. perk Elemental Contract Rank 18 and 475+ wis. Effect: Increase limit of summoned elementals by 2 and unlock rank-up for elementals to grand elder rank\n");
+			outputText("-New tier 19 wisdom lvl-up perk: Elemental Contract Rank 20. Req. perk Elemental Contract Rank 19 and 500+ wis. Effect: Increase limit of summoned elementals by 3 and unlock rank-up for elementals to (low) lord rank\n");
+			outputText("-New tier 20 wisdom lvl-up perk: Elemental Contract Rank 21. Req. perk Elemental Contract Rank 20 and 525+ wis. Effect: Increase limit of summoned elementals by 3 and unlock rank-up for elementals to (mid) lord rank\n");
+			outputText("-New tier 21 wisdom lvl-up perk: Elemental Contract Rank 22. Req. perk Elemental Contract Rank 21 and 550+ wis. Effect: Increase limit of summoned elementals by 3 and unlock rank-up for elementals to (advanced) lord rank\n");
+			outputText("-New tier 22 wisdom lvl-up perk: Elemental Contract Rank 23. Req. perk Elemental Contract Rank 22 and 575+ wis. Effect: Increase limit of summoned elementals by 3 and unlock rank-up for elementals to (peak) lord rank\n");
+			outputText("-New tier 23 wisdom lvl-up perk: Elemental Contract Rank 24. Req. perk Elemental Contract Rank 23 and 600+ wis. Effect: Increase limit of summoned elementals by 3 and unlock rank-up for elementals to (low) baron rank\n");
+			outputText("-New tier 24 wisdom lvl-up perk: Elemental Contract Rank 25. Req. perk Elemental Contract Rank 24 and 625+ wis. Effect: Increase limit of summoned elementals by 3 and unlock rank-up for elementals to (mid) baron rank\n");
+			outputText("-New tier 25 wisdom lvl-up perk: Elemental Contract Rank 26. Req. perk Elemental Contract Rank 25 and 650+ wis. Effect: Increase limit of summoned elementals by 3 and unlock rank-up for elementals to (advanced) baron rank\n");
+			outputText("-New tier 26 wisdom lvl-up perk: Elemental Contract Rank 27. Req. perk Elemental Contract Rank 26 and 675+ wis. Effect: Increase limit of summoned elementals by 3 and unlock rank-up for elementals to (peak) baron rank\n");
+			outputText("-New tier 27 wisdom lvl-up perk: Elemental Contract Rank 28. Req. perk Elemental Contract Rank 27 and 700+ wis. Effect: Increase limit of summoned elementals by 3 and unlock rank-up for elementals to (low) viscount rank\n");
+			outputText("-New tier 28 wisdom lvl-up perk: Elemental Contract Rank 29. Req. perk Elemental Contract Rank 28 and 725+ wis. Effect: Increase limit of summoned elementals by 3 and unlock rank-up for elementals to (mid) baron rank\n");
+			outputText("-New tier 29 wisdom lvl-up perk: Elemental Contract Rank 30. Req. perk Elemental Contract Rank 29 and 750+ wis. Effect: Increase limit of summoned elementals by 3 and unlock rank-up for elementals to (advanced) baron rank\n");
+			outputText("-New tier 30 wisdom lvl-up perk: Elemental Contract Rank 31. Req. perk Elemental Contract Rank 30 and 775+ wis. Effect: Increase limit of summoned elementals by 3 and unlock rank-up for elementals to (peak) baron rank\n");
+			outputText("-New tier 30 misc lvl-up perk: Perfection. Req. Saturation perk. Effect: number of possible effects of transformatives +1.\n");
+			outputText("-New tier 30 misc lvl-up perk: Soul Powered. Req. Metamorphable perk. Effect: +10% max soulforce.\n");
+			outputText("-New tier 30 misc lvl-up perk: Soul of Steel. Req. Mind of Steel perk. Effect: +10% melee phys dmg.\n");
+			outputText("-New tier 30 misc lvl-up perk: Blessed by Lady Godiva. Req. Hoarder perk. Effect: 15% more gems from victories.\n");
+			outputText("-New tier 30 misc lvl-up perk: Surgeon. Req. Surgeon's Aide perk. Effect: increases HP gains by 20%.\n");
+			outputText("-New tier 30 misc lvl-up perk: Cardinal. Req. Saint perk. Effect: -2 min libido and +5% to lust resistance.\n");
+			outputText("-New tier 30 misc lvl-up perk: President. Req. Dean perk. Effect: +10% max mana.\n");
+			outputText("-New tier 30 misc lvl-up perk: Spy's Enemy. Req. Sniper's Friend perk. Effect: +10% range phys dmg.\n");
+			outputText("-New tier 30 misc lvl-up perk: ZZZ. Req. Napping perk. Effect: +20% to fatigue recovery.\n");
+			outputText("-New tier 30 misc lvl-up perk: Weapon. Req. Anvil perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
+			outputText("-New tier 30 misc lvl-up perk: Sex Champion. Req. Pornstar perk. Effect: +15% tease dmg.\n");
+			outputText("-New event perk: Big hand and feet. Gained by having yeti hand and feet. Effects: Increase strength modifier on unarmed attack by 100%.\n");
+			outputText("-New event perk: Lightning claw. Gained by been Raiju. Effects: Add 1/3 tease damage to all feral style attack. Attacking raise tease exp at a ratio of 1/3 per attack.\n");
+			outputText("-New event perk: Bouncy body. Gained by having 10+ in goblin score. Effects: Attacks that would deal more than half of your health have a chance to simply punt you around, reducing damage taken by 25%. +1 to goblin score.\n");
+			outputText("-New key Item (by Liadri): Cum Reservoir - req. Toolbelt - Allows you to store cum from defeated male opponents in the reservoir for future use. (goblin mech upgrade)\n");
+			outputText("-New key Item (by Liadri): SPMK1 - req. Toolbelt - A minor modification to your old panties, adding a ringed shaped key slot on the front for use with the Mech. There is a hollowed reverse strapon inside as to plug to your pussy and allow cum to freely flow in once the mech is properly linked with the panties. (goblin mech upgrade)\n");
+			outputText("-New key Item (by Liadri): Impregnator 1.0 - req. SPMK1 - PC uses a tube contraption to self inseminate with gathered cum. Kid always result into goblins. (goblin mech upgrade)\n");
+			outputText("-New key Item (by Liadri): Missile launcher - req. Toolbelt - Deals ordinary damage in single opponent encounters, but the missile unleashed by this attack will cover a wide area of effect dealing 5 times the PC’s physical damage to groups and giant enemies. (goblin mech upgrade)\n");
+			outputText("-New key Item (by Liadri): Omni Missile - req. Missile launcher - Deals ordinary damage in single opponent encounters, but the missiles unleashed by this attack will cover a wide area of effect dealing 10 times the PC’s physical damage to groups and giant enemies. (goblin mech upgrade)\n");
+			outputText("-New key Item (by Liadri): Aphrodigas Gun - req. Toolbelt - Unlocks the tease ability when using the mech, using a new tease animation based on gassing the opponent with aphrodisiacs. (goblin mech upgrade)\n");
+			outputText("-New key Item (by Liadri): Lustnade Launcher - req. Aphrodigas Gun - When using the weapon a Lustnade is launched, dealing really heavy lust damage (one of the best lust attack in the game) based on intelligence and tease. This attack has a 5 round cooldown and deals massive lust damage to groups. (goblin mech upgrade)\n");
+			outputText("-New key Item (by Liadri): Jetpack - req. Toolbelt - The mech can hover in the air and fly, allowing for flight in battle (5 turns). Cooldwon before another use of jetpack - 3 turns. (goblin mech upgrade)\n");
+			outputText("-New key Item (by Liadri): MK2 Jetpack - req. Jetpack - An improvement to the Jetpack, increasing your evasiveness by 25% while airborne. (goblin mech upgrade)\n");
+			outputText("-New key Item (by Liadri): Stimpack Dispenser 1.0 - req. Toolbelt and spell Heal - Gives a 10 round regeneration effect, healing the PC for a 10th of a Heal value each round via a stimpack. Raises lust by 1% when healed. Have 20 round cooldown. (goblin mech upgrade)\n");
+			outputText("-New key Item (by Liadri): Medical Dispenser 2.0 - req. Stimpack Dispenser 1.0 - Gives a 10 round effect of better regeneration, healing the PC for a 5th of Heal value each round via a stimpack. Raises lust by 0.5% (min 1) when healed. Have 15 round cooldown. (goblin mech upgrade)\n");
+			outputText("-New key Item (by Liadri): Raijin blaster - req. Lightning Bolt spell, Taser with an overcharged battery - A powerful energy weaponry hit half as hard as whitefire cannon but deals quad damage on groups. Also deals lust damage as arouse. (goblin mech upgrade)\n");
+			outputText("-New key Item (by Liadri): Gravity shots - req. Darkness Shard spell, MK2 Jetpack - A powerful energy weaponry hit half as hard as whitefire cannon but deals quad damage on groups. Airborne enemies are stunned for 4 rounds. This is a darkness damage effect. (goblin mech upgrade)\n");
+			outputText("-New vehicle (by Liadri): Goblin Mech Prime - found in Lethice’s stronghold, Magpie Hall. Req. to have built Workshop to bring it back to camp. Cost 2000 gems. Would increase Armor and Magic Resistance by 20 and increase firearms power by 50%. Can be upgraded by using blueprint and materials. All upgrades from Alpha model could be carried over to this one.\n");
+			outputText("-New necklace (by Liadri): Yin Yang Amulet - obtained by having weedings with Chi Chi. Cost 800 gems. +15% to soulskills power.\n");
+			outputText("-New consumable (by Liadri): Alchemical Thunder - made by Rathazul by using 2 Raiju Plasma and 1 Lust Draft. Costing 50 gems and adds +30% weapon total damage as lightning for the battle (or one hour).\n");
+			outputText("-New consumable (by Ormael): Pack of nails - dropped ocassionaly by any goblin enemy. Costing 20 gems and adds 10 to 30 nails to storage (going over limit of nails storage will cause loosing nails that wnet over the limit).\n");
+			outputText("-New usable item: Raiju Plasma. Costing 100 gems and it's obtainable after sex with Electra. Usefull in making Alchemical Thunder.\n");
+			outputText("-New melee weapon (by Ormael): Lust Rapier - buyable at Sean shop. Cost 640 gems. Base atk is 8. Each attack that would deal damage to enemy would apply a small dose of aphrodisiac similary to lust dagger.\n");
+			outputText("-New melee weapon (by Ormael): Lusty Claws - buyable at Sean shop. Cost 200 gems. Base atk is 0. Each attack that would deal damage to enemy would apply a small dose of aphrodisiac similary to lust dagger. It also compatibile to be used with feral combat.\n");
+			outputText("-New range weapon (by Liadri): Desert Eagle - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Desert area. Cost 620 gems. Base atk is 25 and ammo clip size 4.\n");
+			outputText("-New range weapon (by Liadri): M1 Cerberus - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Forest area. Cost 1080 gems. Base atk is 45 and ammo clip size 6. Shoot all 6 bullets in one attack and will multiply dmg for each perk that is giving more than one shoot per turn. It's 2H Firearm type range weapon.\n");
+			outputText("-New range weapon (by Liadri): Harpoon gun - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Beach area. Cost 1030 gems. Base atk is 50 and ammo clip size 1. +20% dmg underwater.\n");
+			outputText("-New range weapon (by Liadri): Tripxi Fatbilly - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Vulcanic Crag area. Cost 5230 gems. Base atk is 260 and ammo clip size 1. Can't use multishoot, can't be used with sneak range attack, can't crit and it deal AoE damage. It's 2H Firearm type range weapon.\n");
+			outputText("-New black spell: Lifetap. The can be learned by using black book after picking Hex Knowledge perk. Effect: Sacrifice a quarter of your hp to recover a quarter of your mana.\n");
+			outputText("-New black spell: Life syphon. The can be learned by using black book after picking Hex Knowledge perk. Effect: Create a funnel between you and your target, forcefully stealing its vitality to recover your own. (Deals low damage but last 15 round.)\n");
+			outputText("-New black spell: Consuming darkness. The can be learned by using black book after picking Hex Knowledge perk. Effect: For the next 7 round the target is devoured by living shadow trying to tear its body apart deals good damage on each round.\n");
+			outputText("-New black spell: Curse of Desire. The can be learned by using black book after picking Hex Knowledge perk. Effect: Arouse yourself and curse the target with lewd thoughts, weakening its resistance to lust and forcing it to take low lust damage each round for 8 rounds.\n");
+			outputText("-New black spell: Curse of Weeping. The can be learned by using black book after picking Hex Knowledge perk. Effect: Draw your own blood (50%) and inflict on your target a terrible curse, dealing high damage for 6 rounds.\n");
+			outputText("-New m. special: Plasma blast. Req. to PC have Cum cannon/Milk blast and Orgasmic lightning strike. Work as Cum cannon/Milk blast with a 20% extra lust damage. However no longer deplete lust on use and instead raise lust by 5%. If pc shoot from both breast and dick add 50% more damage and lust damage but raise lust by 10% instead. (it have it own seperate cooldown)\n");
+			outputText("-New tag for range weapons - 2H Firearm. It will act the same way as Large/Massive melee weapons in regard to using/equiping shields.\n");
+			outputText("-New unique sex scene: Volt Transfer - req. to be raiju and enemy must be non gigant humanoid.\n");
+			outputText("-New unique sex scene post fight: Fill the reservoir - req. to have goblin mech with Cum Reservoir upgrade and enemy with cock. Allow to fill 1/4 of tank.\n");
+			outputText("-New masturbation menu option: Impregnator 1.0 - req. to have fully filled Cum Reservoir. Result in pregnancy.\n");
+			outputText("-New possible pregnancy for PC: Goblins. Almost everything that not fill PC with imps would be giving goblin pregnancy as long PC is having high enough goblin score at moment of pregnancy start. It last 7 days and may result in 1 to 5 daughters. Firstborn goblin daughter can be named. PC brood size can be checked on Children subpage of Stats. They will count toward ascension points from children\n");
+			outputText("-New body part - rear body: Yeti Fur. Req. Fluffy Hair (+4 armor (scalable) and +20% to ice resistance (also will be needed to trigger unlocking new accesory for character viewer xD))\n");
+			outputText("-New body part - arms: Raiju Paws. Req. Raiju Arms (it can freely switch between this and other raiju arms variant with each use of raiju tf)\n");
+			outputText("-New body part - wings: Thunderous aura. Req. Raiju Mane\n");
+			outputText("-Added new item possible to find at Battlefield - Metal Plate (item used in goblin engenerring)\n");
+			outputText("-Yeti race bonuses are now gained at 7 or 14 pts in racial score: +50/100 to max Str, +40/80 to max Tou, +25/50 to max Spe and Lib, -35/70 to max Int\n");
+			outputText("-After saving goblin form Drider boss in Lethice Stronghold we can finaly take the goblin back to camp as vanilla promised. Would req. to leave stronghold by entrance and not lift + having Rathazul in camp to help her. After birning items Rath ask for PC would be faced with another choice to keep Mitzi in camp or shoo her away.\n");
+			outputText("-When PC decided to keep Mitzi in camp after cure she can talk on two subjects with PC, be fucked or pc can check her appearance.\n");
+			outputText("-Mitzi can get pregnant. After succesfull deed her pregnancy last 13 days and will result in 4 daughters born. Her daughters will stay in camp and it would be possible to interact with them. They would gather some items each day in barrels that pc can pick.\n");
+			outputText("-After Mitzi's brood grow to at least 6 daughters it would became possible to take Mitzi and few of her daughters as henchman (they all count as one henchman).\n");
+			outputText("-Due to specific situation of Mitzi and her brood henchman stats will relay on amount of daughters she have. If scaling prove to be too strong it would be lowered in future.\n");
 			outputText("-Wait and Rest options opens submenu to choose from few options: from 1 to 8 hours or until evening/midnight/fully healing.\n");
+			outputText("-Melee attack been avialable or disabled realted to enemy been on ground or flying and taking into account if pc fly itself, use goblin mech or have throwable melee wepaons was changed to remove cuirrent errors like throwable weapon still not letting attack flying enemy from ground.\n");
+			outputText("-Elementals damage scaling was increased and using option to replace melee attack with elemental attack would make attack stronger (depending on level of elemental bonus may be from 100% to 300% of base dmg).\n");
+			outputText("-Having 2 or more elementals would cause additional increase to max HP or Lust is PC have one of two perks: Elemental Bond: Flesh or Elemental Bond: Urges\n");
+			outputText("-Due to types of elementals reach limit for some of selection menu they were split into two pages.\n");
+			outputText("-Sawblade instaled on goblin mech can be now used to gather woods. It allow to cut more trees and return faster to camp than with other wood gathering options.\n");
+			outputText("-Neisa the shield maiden can be hired after PC leave River Dungeon for the first time. She's still at Journey to the East inn and will ask for 1 spirit stone per day. Failing to pay her after 7 days + 3 more would cause her to leave camp and be back to inn (and reset her loyalty). Before rehiring her PC would need to pay the debt.\n");
+			outputText("-She can be picked as henchman, can spar with her or check her appearance.\n");//
+			outputText("-After reaching 100 affection meeting Electra will give chance to recruit her. Declining would reset her affection to 0% and it would be needed to reach again 100% before she again before player would have another chance to recruit her.\n");
+			outputText("-When in camp Electra can have he appearance checked, talked on 3 subjects, asked for stom jewel (once a day), sparred with or sexed.\n");
+			outputText("-Meeting raiju/Electra as Raiju will give new option to finish encounter with her.\n");
+			outputText("-Added Lighting Nature perk to Electra making her take less dmg from lighting attacks and much more from darkness attacks.\n");
+			outputText("-Having 10+ goblin daughters will trigger morning even when they will build workshop. PC can sue it too instead of going to Lumi workshop to work on goblin items or goblin mech upgrades. Working in it will shorten all times by 4 hours (to min. 1 hour).\n");
+			outputText("-Each morning PC can check what spare parts was left after goblin daughters was working previous day. If not picked spare parts will be added each morning until PC pick them all. Among possible to find items are: nails, metal plates, mechanisms and energy cores.\n");
+			outputText("-After finishing base study option with Alvina PC can find Soul Gem Research key item at Zetaz boss room. So no need to go for gargoyle quest just to get option to make soul gems with Eva help. That also mean if by any chance PC was doing both alvina path to lichdom or path to gargoyle form it would count in gargoyle quest path ");
+			outputText("as done step preventing from quest been stuck due to inability to pick those research materials (since they are already picked).\n");
+			outputText("-Emerald added as possible skin tone for goblins. Due to adding goblin racial mutation perk now Pig/Boar Fat perk gained new req. - having free fat tissue mutation slot.\n");
+			outputText("-Tripxi have Talk option. Small selection subject will unlock scavenging option in all areas. Finding any pieces of firearm and bringing them to Tripxi will result in adding this one weapon to her selection next day.\n");
+			outputText("-Will-o'-the-wisp pet can be in one of modes: fight/command. First is wisp personaly attacking enemy and second is wisp commanding other summoned pets/minions boosting their attack power (+10%).\n");
+			outputText("-Job: Elemental Conjuer was included in switch from once a day mana regeneration for non-mages to per hour recovery of mages. It would also increase mana regeneration by +5 per hour.\n");
+			outputText("-Tooltip to elemental summoning added to show whow much mana and fatigue it will cost to summon/enhance this particular elemental.\n");
+			outputText("-Lust 'poison' after using weapons like lust dagger or Depravatio/Ascensus would have varied effect to prevent exploiting some of builds that can hit more often to have massively higher output of lust gains on enemies.\n");
+			outputText("-Between current rank 7 elemental and 3rd elder rank was added 4 more ranks: rank 8, rank 9, 9th elder and 8th elder. Also specials of elementals effects scaling was extended to cover all ranks possible to attain ingame by elementals.\n");
+			outputText("-During december and january PC can buy from Giacomo Mysterious Seed that would be then possible to plant in camp (option in misc submenu of inventory menu) and then water it (or feed with soulforce infused blood) regulary till it grow into healthy tree. After it's fully grown tree Giacomo offer PC set of decoration to decorate tree (again an option in Misc. tab of Inventory).\n");
+			outputText("-Arcane circle can be upgraded 3rd, 4th, 5th, 6th and 7th time enabling 4 more steps in making elementals stronger per added circle.\n");
+			outputText("-Strongest Elemental Bond perk reduction of mana cost was lowered to 30 from 40. Additionaly mana cost to command elemental to attack would take into account rank of elemental (with much more mana needed for those above 9th elder rank and then above (low) lord rank.\n");
+			outputText("-Max level cap was increased to 185 from 150. Exp needed to lvl-up increase to 200x level from lvl 42, then to 300x from lvl 102 and to 400x from lvl 180.\n");
+			outputText("-New things added to stats page (general subpage): Jiangshi feeding meter, needed exp points to lvl-up\n");//
+			outputText("-2 new achievments. (1 shadow ones)\n");
+			outputText("-Updates to character viewer by Liadri.\n");
+			outputText("-Fixed bugs: Dynapunch Glove, Whitefire Beam Cannon, Snowball Generator specials for goblin mech cooldowns not expiring before end of the combat, Siegweird hidding after Alvina gave PC assasinate order on his furry head, scene for last advanced study not showing when pc return with bear holy symbol instead showing first adv study scene, Infernal Wine not granting body parts ");
+			outputText("after getting legs one, Izumi Smoke Pipe lowering libido and/or sensitivity to 100 if they are above 100, Niamh beer drinking not taking into account libido above 100, autocasting Berzerker or Lustzerker not working, giving Lactacid to Marble when PC is addicted and not having actualy any Lactacid, inaccurate color for goblin hair color in Goblin Ale hair color change tf effect, ");
+			outputText("allowing PC bypass goblin race check on retry to buy goblin mech alpha if first time pc was too low on gems for it, Chi Chi zombie (when pc not save her after one of fights in HXD) drunk sex scene proc\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Fixed bugs: \n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			//outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New soulskill: Devourer. Req. ... Devour up to 400 lust and wrath from enemy transfering 50% of it back to player. Cooldown: 3 turns.\n");
 			//outputText("-(Heavy WIP) Raging Inferno now boost by 10% fire spells/attacks damage and each turn spend without casting fire spell lower that bonus damage by 10% till it return to 100%.\n");
+			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
+			//outputText("-New enemy possible to encounter during Bog exploration: Dark Elf Ranger - lvl 39\n");
 			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
 			//outputText("\n");cel na 0.8: dodać kitsune/nekomanta TF
 			//outputText("\n");cel na 0.8: dodać yuki-onna TF
+			//outputText("\n");cel na 0.8: dodać yuki-onna TF
+			//outputText("\n");cel na 0.8: dodać siren TF
+			//outputText("-New TF item: . Gained by bringing Orc Mead to Lumi for enhancing. Using this item will turn PC into high orc. High Orc (scalable): +130 to max Str, +30 to max Tou, +10 to max Spe, -30 to max Int, +25 to max Lib, +20% to max Wrath.\n");
+			//outputText("-New TF item: . Gained by bringing Elf Ear to Lumi for enhancing. Using this item will turn PC into high elf. High Elf (scalable): -10 to max Str, -15 to max Tou, +80 to max Spe, +80 to max Int, +60 to max Wis, +30 max/min Sens, +20% to max Mana.\n");
+			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
+			//outputText("-New armor (by Liadri): Goblin Technomancer clothes - gained after becoming Jiangshi. Cost 160 gems, 0 armor, 0 magic resistance, Slutty Seduction 10, +40% to soulskills power.\n");
+			//outputText("-New underwear (upper) (by Liadri): \n");
+			//outputText("-New underwear (bottom) (by Liadri): \n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
-			outputText("-New TF item: . Gained by bringing Orc Mead to Lumi for enhancing. Using this item will turn PC into high orc. High Orc (scalable): +130 to max Str, +30 to max Tou, +10 to max Spe, -30 to max Int, +25 to max Lib, +20% to max Wrath.\n");
-			outputText("-New TF item: . Gained by bringing Elf Ear to Lumi for enhancing. Using this item will turn PC into high elf. High Elf (scalable): -10 to max Str, -15 to max Tou, +80 to max Spe, +80 to max Int, +60 to max Wis, +30 max/min Sens, +20% to max Mana.\n");
-			outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
 			outputText("-New necklace (by Ormael):  - obtained by . Cost xx0 gems. \n");
 			outputText("-New head accesory (by Ormael):  - obtained by . Cost xx0 gems. \n");
 			outputText("-New ring (by Ormael):  - obtained by . Cost xx0 gems. \n");
-			outputText("\n");cel na 0.8: dodać yuki-onna TF
-			outputText("\n");cel na 0.8: dodać siren TF
+			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-New event perk: . Gained by . Effects: \n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
-			outputText("-New tier 10 misc lvl-up perk: Chimerical Body: Semi-Epic Stage. Req. Chimerical Body: Peerless Stage perk and 61+ points in Internal Chimerical Disposition score. Effect: delay by another 11 points appearing effect of negative HP regeneration and +5 to max Str/Tou/Spe (scalable), +10 to max Int/Wis/Lib/Sens (scalable).\n");
 			outputText("-New tier 11 misc lvl-up perk: Chimerical Body: Epic Stage. Req. Chimerical Body: Semi-Epic Stage perk and 72+ points in Internal Chimerical Disposition score. Effect: delay by another 12 points appearing effect of negative HP regeneration and +5 to max Lib/Sens (scalable), +10 to max Str/Tou/Spe/Int/Wis (scalable).\n");
-			outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
-			outputText("-New enemy possible to encounter during Bog exploration: Dark Elf Ranger - lvl 39\n");
-			outputText("-New tier ?? misc lvl-up perk: Perfection. Req. Saturation perk. Effect: number of possible effects of transformatives +1.\n");
-			outputText("-New tier ?? misc lvl-up perk: Soul Powered. Req. Metamorphable perk. Effect: +10% max soulforce.\n");
-			outputText("-New tier ?? misc lvl-up perk: Soul of Steel. Req. Mind of Steel perk. Effect: +10% melee phys dmg.\n");
-			outputText("-New tier ?? misc lvl-up perk: Blessed by Lady Godiva. Req. Hoarder perk. Effect: 15% more gems from victories.\n");		Tier 22 perks?
-			outputText("-New tier ?? misc lvl-up perk: Surgeon. Req. Surgeon's Aide perk. Effect: increases HP gains by 20%.\n");
-			outputText("-New tier ?? misc lvl-up perk: Cardinal. Req. Saint perk. Effect: -2 min libido and +5% to lust resistance.\n");
-			outputText("-New tier ?? misc lvl-up perk: President. Req. Dean perk. Effect: +10% max mana.\n");
-			outputText("-New tier ?? misc lvl-up perk: Spy's Enemy. Req. Sniper's Friend perk. Effect: +10% range phys dmg.\n");
-			outputText("-New tier ?? misc lvl-up perk: ZZZ. Req. Napping perk. Effect: +20% to fatigue recovery.\n");
-			//slut line
-			outputText("-New tier ?? misc lvl-up perk: Weapon. Req. Anvil perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
-			outputText("-New tier ?? misc lvl-up perk: Sex Champion. Req. Pornstar perk. Effect: +15% tease dmg.\n");
+			outputText("-New tier 12 misc lvl-up perk: Chimerical Body: ... Stage. Req. Chimerical Body: Epic Stage perk and xx+ points in Internal Chimerical Disposition score. Effect: delay by another xx points appearing effect of negative HP regeneration and +5 to max Lib/Sens (scalable), +10 to max Str/Tou/Spe/Int/Wis (scalable).\n");
 			outputText("-New tier ?? misc lvl-up perk: Creationism. Req. Perfection perk. Effect: number of possible effects of transformatives +1.\n");
 			outputText("-New tier ?? misc lvl-up perk: All-Seeing. Req. Soul Powered perk. Effect: +10% max soulforce.\n");
 			outputText("-New tier ?? misc lvl-up perk: God of Steel. Req. Soul of Steel perk. Effect: +10% melee phys dmg.\n");
 			outputText("-New tier ?? misc lvl-up perk: Lady Godiva's favorite Child. Req. Blessed by Lady Godiva perk. Effect: 15% more gems from victories.\n");
 			outputText("-New tier ?? misc lvl-up perk: MEDIC!!!. Req. Surgeon perk. Effect: increases HP gains by 20%.\n");
-			outputText("-New tier ?? misc lvl-up perk: Pope. Req. Cardinal perk. Effect: -2 min libido and +5% to lust resistance.\n");				Tier 27 perks?
+			outputText("-New tier ?? misc lvl-up perk: Pope. Req. Cardinal perk. Effect: -2 min libido and +5% to lust resistance.\n");				Tier 43 perks?
 			outputText("-New tier ?? misc lvl-up perk: NERD!!!. Req. President perk. Effect: +10% max mana.\n");
 			outputText("-New tier ?? misc lvl-up perk: SHIT YOU TOUCHED SASHA!!! Req. Spy's Enemy perk. Effect: +10% range phys dmg.\n");
 			outputText("-New tier ?? misc lvl-up perk: LAZY!!! Req. ZZZ perk. Effect: +20% to fatigue recovery.\n");
 			//slut line
 			outputText("-New tier ?? misc lvl-up perk: Armor. Req. Weapon perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
 			outputText("-New tier ?? misc lvl-up perk: Sex Deity. Req. Sex Champion perk. Effect: +15% tease dmg.\n");
-			outputText("-New tier 1 misc lvl-up perk: . Req. History: Slut or Past Life: Slut perk. Effect: .\n");.
-			outputText("-New tier 4 misc lvl-up perk: . Req.  perk. Effect: .\n");
-			outputText("-New tier 7 misc lvl-up perk: . Req.  perk. Effect: .\n");
-			outputText("-New tier 12 misc lvl-up perk: . Req.  perk. Effect: .\n");
-			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: .\n");
-			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: .\n");
-			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: .\n");
+			outputText("-New tier 1 misc lvl-up perk: . Req. History: Slut or Past Life: Slut perk. Effect: +10% max lust.\n");.
+			outputText("-New tier 4 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
+			outputText("-New tier 7 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
+			outputText("-New tier 12 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
+			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
+			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
+			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
 			outputText("-\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("\n");
 			outputText("\n");
@@ -121,18 +249,22 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			ooutputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
 			outputText("\n");
-			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Mouse-morph, Scorpion-morph
+			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Scorpion-morph
 			outputText("\n");
 			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
 			outputText("\n");aqua seed - item mający być siren tf item
 			outputText("\n");
 			outputText("<b>Version 0.8o:</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("<b>Version 0.8p:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("\n");
@@ -140,39 +272,9 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
 			outputText("\n");cel na 0.8(/9): dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
 			outputText("\n");cel na 0.8(/9): pododawanie kilku(nastu) nowych opisów cześci ciała, powiazanie tego z poszczegolnymi animal-morphami, dodanie nieco specjalnych zdolnosci do kilku z nich, balansowanie ich, itp.
-			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we wlasciwy sposob ^^
+			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			utputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -233,7 +335,7 @@ package classes.Scenes
 			outputText("-New consumable (by Liadri): tome with Meteor Shower spell - gained from last advanced study session with Siegweird. Costs 200 gems and teach PC Meteor Shower spell.\n");
 			outputText("-New usable item: Silver ignot. Costing 500 gems and it's buyable at Jewelry shop in Tel'Adre. Usefull in making accesories.\n");
 			outputText("-New Grey Spell: Meteor Shower - learned from tome given by Siegweird. Cost 250 mana and deal AoE fire dmg and stun enemies for 1 turns. Have 1 turn channel time and cooldown of 12 turns.\n");
-			outputText("-6 new achievments (5 shadow one).\n");
+			outputText("-6 new achievments (5 shadow ones).\n");
 			outputText("-Flawless Ametist Necklace needed to Alvina advanced studies could be bought in Jewelry shop in Tel'Adre in addition to finding one in Hidden cave (the one form Hidden cave may be ocassionaly glitch and not count).\n");
 			outputText("-Siegweird gained option to refuse recruit him after help with reclaiming his greatsword. After picking No option he can be ocassionaly found in Blight Ridge.\n");
 			outputText("-Magic Bolt cost and power increased 5x. There is new toggle option in game settings that allow to choose between default spells powers without cooldowns and much stronger in terms of damage spells that have cooldowns.\n");
@@ -301,7 +403,7 @@ package classes.Scenes
 			outputText("-New body part - skin pattern: white/black veins. Req. Transparent Skin\n");
 			outputText("-New body part - rear body: Ghostly Aura. Req. Poltergeist Legs\n");
 			outputText("-New body part - wings: Ethereal Wings. Req. Ghostly Aura\n");
-			outputText("-New event perk: Ghost-slinger. Gained by having 12+ in poltergeist score. Effects: +1 to poltergeist score, increases damage with guns/thrown weapons by 10%.\n");
+			outputText("-New event perk: Ghost-slinger. Gained by having 12+ in poltergeist score. Effects: +1 to poltergeist score, increases damage with guns/thrown weapons by 15%.\n");
 			outputText("-New event perk: Phantom Shooting. Gained by having 12+ in poltergeist score. Effects: +1 to poltergeist score, using part of own body PC form phantom bullets or throwing weapons to attack enemy (throwing/firearm shooting will not use fatigue/ammo instead draining small amount of PC ectoplasmic body (HP)).\n");
 			outputText("-New enemy perk: Ghost enemy type. Shouldra only use this perk atm. It would make enemies immune to Possess special.\n");// and reduce demages they take
 			outputText("-New possible race to become: Jiangshi - at 20+ pts they giving following bonuses: +140 to max Strength, +100 to max Toughness, -90 to max Speed, -90 to max Intelligence, +110 to max Wisdom, +130 to max Libido (all scaling with NG tiers)\n");
@@ -324,6 +426,7 @@ package classes.Scenes
 			outputText("-New magical soulskill: Hail of Blades. Req. buying manual from golem merchant for 20 spirit stones. Creates 6 magical blades that are then send toward enemy. Base cost: 50 soulforce.\n");
 			outputText("-New magical soulskill: Grandiose Hail of Blades. Req. buying manual from golem merchant for 80 spirit stones after PC reach Soul Personage and knowing Hail of Blades. Creates 18 magical blades that are then send toward enemy. Base cost: 200 soulforce. Cooldown: 3 turns.\n");
 			outputText("-New magical soulskill: Grandiose Hail of Moon Blades. Req. buying manual from golem merchant for 320 spirit stones after PC reach Soul Sprite and knowing Grandiose Hail of Blades. Creates 54 magical blades that are then send toward enemy. Base cost: 800 soulforce. Cooldown: 9 turns.\n");
+			outputText("-New melee weapon (by Ormael): Dual large axes - dropped by Labyrinth Minotaur. Cost 1440 gems. Base atk is 28. Requires height of 6'6 to wield. They are dual large weapons.\n");
 			outputText("-New armor (by Liadri): Traditional clothes - gained after becoming Jiangshi. Cost 160 gems, 0 armor, 0 magic resistance, Slutty Seduction 10, +40% to soulskills power.\n");
 			outputText("-New consumable (by Liadri): Strawberry shortcake - gained from Wonderland exploration or bought in Dinah shop. Costs 30 gems and will cause PC to become shorter.\n");
 			outputText("-New consumable (by Liadri): Big chocolate cake - gained from Wonderland exploration or bought in Dinah shop. Costs 30 gems and will cause PC to become taller.\n");
@@ -346,14 +449,13 @@ package classes.Scenes
 			outputText("-Rest of damaging magical specials aside Infernal Flare got dmg increase when toggle for spells cooldowns is on so they then deal more damage to match increased spells damage.\n");
 			outputText("-New dungeon: Ebon Labyrinth. Founded in Caves. It's endless dungeon without any usable map or end, traveling between rooms takes 15 min instead of 5. PC can keep explore it and fight enemies inside it up to even needing to sleep inside it. Sleeping inside giving 50% chance of been attacked in sleep. It's possible to leave dungeon at any moment if player decide it getting too hard to keep staying inside labyrinth.\n");
 			outputText("-New types of enemies could be meet in Ebon Labyrinth: Stray demons (stray succubus/incubus/omnibus), Ancient tentacle beast, Labyrinth minotaur.\n");
-			outputText("-New melee weapon (by Ormael): Dual large axes - dropped by Labyrinth Minotaur. Cost 1440 gems. Base atk is 28. Requires height of 6'6 to wield. They are dual large weapons.\n");
 			outputText("-Each 10 rooms (excluding each 50th room) in Ebon Labyrinth PC can find loot chest that contain between 10 to 50% exp needed to level up and between 500 to 1000 gems.\n");
 			outputText("-After finishing Alvina Advanced Study PC can confess and get trial from dark lolita to win her heart: brining her Black Rose. It would req. to venture into Ebon Labyrinth and fight boss at 50th room. After returning alive and with Rose Alvina will find PC interesting enough to have sex with him/her. First time succesful sex scene will change her status to Lover along with moving from Followers to Lovers tab in camp.\n");
 			outputText("-New type of enemy to meet in caves or Ebon Labyrinth: Dark Slime. It's slime that is having additional lightning vulnerability on top of her typical weakness to fire. But she also can use magic specials that other slimes can't. Fight with her can be avoided if PC is slime himself/herself.\n");
 			outputText("-If player beat any of Ebon Labyrinth bosses once their respective tf drop items would be buyable at Dinah shop (if PC have her in camp already). Probably temporaly placed here till we get some proper 'Dark Soul-ish' merchant to deal with those.\n");
 			outputText("-Soul Gem crafting by Evangelin was shortened form 5 days to just 1 day. Those that have her currently crafting gem will need to wait all 5 days before next one gem will take only day.\n");
 			outputText("-New NPC showing up in Journey to the East. He giving proposition of giving 3000 gems to PC if pc participate in experiment. Req. to participate in that experiment is been fully physicaly human looking PC.\n");
-			outputText("-PC that broughthenchman to dungeon could now masturbate without been notified it's too dangerous and should be done in safetly of the camp. Hurray for selfish henchman that shall stand guard during PC 'release'. Maybe in future they could join the fun too...\n");
+			outputText("-PC that brought henchman to dungeon could now masturbate without been notified it's too dangerous and should be done in safetly of the camp. Hurray for selfish henchman that shall stand guard during PC 'release'. Maybe in future they could join the fun too...\n");
 			outputText("-Fixed bugs: Non slime PC getting hunger refilled from sex scenes involving been filled with any liquid, option to make bottle with mid-grade pill redirect to get bottle of low-grade pills, bottle of low grade pill when swallowed giving effect of just 1 pill instead of 10, displacer beast and hellcat race scores not allowing to pick cat races mutation perks, green gel gathering quest on adventure guild been disabled, using mech ");
 			outputText("melee attack not clearing previous text, Aurora not assiting in fighhts after picking her as teammate, spawning ocassionaly more than one enemy per room in River Dungeon, Devil TF giving wrong type of legs, Temepst perk to increase times PC attacks been too low for higher amount of base attacks per turn, 4th to 6th additional normal weapon attack gained with perks not been added, empty screen when should be woodcutting scene ocassionaly");
 			menu();

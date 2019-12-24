@@ -111,6 +111,7 @@ import classes.BodyParts.Wings;
 				case Arms.CAT:
 				case Arms.BOAR:
 				case Arms.BEAR:
+				case Arms.RAIJU_2:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind.  Also the claws on your fingers reverts back into ordinary nails.");
 					break;
 				case Arms.DISPLACER:
@@ -348,6 +349,7 @@ import classes.BodyParts.Wings;
 		[Arms.PLANT, null],
 		[Arms.PLANT2, null],
 		[Arms.RAIJU, StatusEffects.UnlockedRaijuArms],
+		[Arms.RAIJU_2, StatusEffects.UnlockedRaijuArms2],
 		[Arms.RED_PANDA, StatusEffects.UnlockedRedPandaArms],
 		[Arms.SALAMANDER, StatusEffects.UnlockedSalamanderArms],
 		[Arms.SHARK, StatusEffects.UnlockedSharkArms],
@@ -626,6 +628,7 @@ import classes.BodyParts.Wings;
 		[RearBody.SHARK_FIN, StatusEffects.UnlockedSharkFin],
 		[RearBody.SNAIL_SHELL, null],
 		[RearBody.WOLF_COLLAR, null],
+		[RearBody.YETI_FUR, null],
 	]);
 
 	public function setTongueType(tongueType:int):Boolean {
@@ -750,6 +753,7 @@ import classes.BodyParts.Wings;
 		[Wings.NONE, StatusEffects.UnlockedHumanNoWings],
 		[Wings.PLANT, null],
 		[Wings.SHARK_FIN, null],
+		[Wings.THUNDEROUS_AURA, StatusEffects.UnlockedRaijuThunderousAura],
 	]);
 
 	/**

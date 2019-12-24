@@ -698,13 +698,13 @@ package classes.Scenes
 			outputText("<b>Eye color:</b> Generally in all shades of greens and teals\n");
 			outputText("<b>Notable feature:</b> Lightning shaped hairs\n");
 			headerSub("Appearance");
-			outputText("The raiju or storm weasel is a species of animal morph especially attuned to lightning, its body is constantly building up electricity. While it is not harmful to the raiju itself this static electricity cause its arousal to constantly increase in proportion to the voltage stored. Unable to achieve orgasm on its own a raiju will seek a partner to discharge its electricity and achieve release. A raiju can cause massive pleasure from a simple touch and its electricity is unstable by nature. Creature who were jolted by a raiju would be well advised to avoid masturbating until the discharge is gone for the electricity build up on pleasure and will only increase as a result of self indulging.");
+			outputText("The raiju or storm weasel is a species of animal morph especially attuned to lightning, its body is constantly building up electricity. While it is not harmful to the raiju itself this static electricity causes its arousal to constantly increase in proportion to the voltage stored. Unable to achieve orgasm on its own a raiju will seek a partner to discharge its electricity and achieve release. A raiju can cause massive pleasure from a simple touch and its electricity is unstable by nature. Creature who were jolted by a raiju would be well advised to avoid masturbating until the discharge is gone for the electricity build up on pleasure and will only increase as a result of self indulging.");
 			headerSub("Behavior");
-			outputText("The Raiju prefers to live in mountainous area where they are closer to the sky. Generally hunting alone, a raiju presence will cause the wildlife to flee in panic. Raiju feeds from ambient static therefore they do not need to hunt save for a partner to discharge their flux.");
+			outputText("The Raiju prefers to live in mountainous area where they are closer to the sky. Generally hunting alone, a raiju’s presence will cause the wildlife to flee in panic. Raiju feeds from ambient static therefore they do not need to hunt save for a partner to discharge their flux.");
 			headerSub("History");
 			outputText("Raiju’s are a natural Marethian species. And have been recorded to exist since the appearance of animal morphs. Its unknown which gods created them but it's clear the god of storms had a hand in it.");
 			headerSub("Storm jewels");
-			outputText("Sometime raiju electricity will somehow coalesce into a crystal known as a storm jewel. Storm jewels can be used as a potent energy source if well handled but its volatility makes it hazardous to uses as it can accidentally dissolve back into lightning and discharge itself on whatever unsuspecting individuals holds it.");
+			outputText("Sometime raiju electricity will somehow coalesce into a crystal known as a storm jewel. A Storm jewel can be used as a potent energy source if well handled but its volatility makes it hazardous to use as it can accidentally dissolve back into lightning and discharge itself on whatever unsuspecting individuals holds it.");
 			outputText("\n\n(Written By: Liadri)");
 			setCodexMenusAfterDisplay();
 		}

@@ -320,6 +320,16 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
+		public function requireFatTissueMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxFatTissueMutations() > 0;
+				},
+				text: "Free Fat Tissue Mutation Slot",
+				type: "fattissuemutation"
+			});
+			return this;
+		}
 		public function requireHungerEnabled():PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {

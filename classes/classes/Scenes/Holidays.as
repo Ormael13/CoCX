@@ -3134,7 +3134,8 @@ public class Holidays {
             EngineCore.addButton(0, "Next", processJackFrostEvent);
             flags[kFLAGS.JACK_FROST_PROGRESS] = 5;
             //Preggers chance!
-            player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
+			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+            else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
         }
 
         //[=Spank and Finger Ass=]

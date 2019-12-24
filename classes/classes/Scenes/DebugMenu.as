@@ -1288,6 +1288,7 @@ public class DebugMenu extends BaseContent
 			[Arms.HYDRA, "37 HYDRA"],
 			[Arms.GHOST, "38 GHOST"],
 			[Arms.JIANGSHI, "39 JIANGSHI"],
+			[Arms.RAIJU_2, "40 RAIJU_2"],
 		];
 		private static const CLAW_TYPE_CONSTANTS:Array = [
 			[Claws.NORMAL, "0 NORMAL"],
@@ -1386,6 +1387,7 @@ public class DebugMenu extends BaseContent
 			[Wings.NIGHTMARE, "28 NIGHTMARE"],
 			[Wings.FEATHERED_SPHINX, "29 FEATHERED_SPHINX"],
 			[Wings.ETHEREAL_WINGS, "30 ETHEREAL_WINGS"],
+			[Wings.THUNDEROUS_AURA, "31 THUNDEROUS_AURA"],
 		];
 		private static const WING_DESC_CONSTANTS:Array = [
 			"(none)","non-existant","tiny hidden","huge","small",
@@ -1471,6 +1473,7 @@ public class DebugMenu extends BaseContent
 			[RearBody.SNAIL_SHELL, "12 SNAIL_SHELL"],
 			[RearBody.METAMORPHIC_GOO, "13 METAMORPHIC_GOO"],
 			[RearBody.GHOSTLY_AURA, "15 GHOSTLY_AURA"],
+			[RearBody.YETI_FUR, "16 YETI_FUR"],
 		];
 		private function changeArmType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.arms.type = setIdx;

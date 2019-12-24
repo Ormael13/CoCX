@@ -403,9 +403,9 @@ package classes.GlobalFlags
 		public static const DUNGEON_MASTER_OF_THE_LABYRINT:int		= 356;
 		public static const DUNGEON_WHY_ARE_YOU_HERE:int			= 357;
 		public static const EPIC_THRILLER:int						= 358;
-		public static const UNKNOWN_ACHIEVEMENT_359:int				= 359;
-		public static const UNKNOWN_ACHIEVEMENT_360:int				= 360;
-		public static const UNKNOWN_ACHIEVEMENT_361:int				= 361;
+		public static const EPIC_LETS_GO_FISHING:int				= 359;
+		public static const FASHION_SUIT_UP:int						= 360;
+		public static const FASHION_ROLLIN_ROLLIN:int				= 361;
 		public static const UNKNOWN_ACHIEVEMENT_362:int				= 362;
 		public static const UNKNOWN_ACHIEVEMENT_363:int				= 363;
 		public static const UNKNOWN_ACHIEVEMENT_364:int				= 364;

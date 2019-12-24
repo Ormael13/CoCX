@@ -122,7 +122,7 @@ public function treeMenu(output:Boolean = true):void {
 			}
 		}
 		// [Fuck]		[Ride]		[Tentacle]	[Drink]		[HolliFruit]
-		// [MaraFruit]	[Guard		[]			[]			[Farm]
+		// [MaraFruit]	[Guard]		[]			[]			[Farm]
 		// []			[]			[]			[]			[Leave]
 		menu();
 		if(player.hasCock() && player.lust >= 33) {

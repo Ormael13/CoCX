@@ -154,7 +154,7 @@ public class PlayerInfo extends BaseContent {
 			miscStats += "<b>Metal Pieces:</b> " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "/200" + "\n";
 		}
 
-		miscStats += "<b>Basic Jobs:</b> " + player.currentBasicJobs() + " / 10\n";
+		miscStats += "<b>Basic Jobs:</b> " + player.currentBasicJobs() + " / 9\n";
 		miscStats += "<b>Advanced Jobs:</b> " + player.currentAdvancedJobs() + " / " + player.maxAdvancedJobs() + "\n";
 		//miscStats += "<b>Hidden Jobs:</b> " + player.currentHiddenJobs() + " / " + player.maxHiddenJobs() + "\n";
 		miscStats += "<b>Prestige Jobs:</b> " + player.currentPrestigeJobs() + " / " + player.maxPrestigeJobs() + "\n";
@@ -209,6 +209,9 @@ public class PlayerInfo extends BaseContent {
 			miscStats += "\n";
 		}
 	
+		miscStats += "<b>Exp needed to lvl up:</b> ";
+		if (player.level < CoC.instance.levelCap) miscStats += "" + player.requiredXP() + "\n";
+		else miscStats += "N/A (You already at max lvl)\n";
 		miscStats += "<b>Ascension points (curently possesed):</b> " + player.ascensionPerkPoints + "\n";
 		miscStats += "<b>Ascension points (possible to gain during next ascension):</b> " + camp.possibleToGainAscensionPoints() + "\n";
 
@@ -328,6 +331,10 @@ public class PlayerInfo extends BaseContent {
 			statEffects += "Vampire Thirst: " + vthirst.value1 + "/" + vthirst.maxThirst() + " ";
 			if (vthirst.currentBoost > 0) statEffects += "(+" + vthirst.currentBoost + " to str / spe / int / lib)";
 			statEffects += "\n";
+		}
+		
+		if (player.hasStatusEffect(StatusEffects.EnergyDependent)) {
+			statEffects += "Energy Dependent: " + Math.round(player.statusEffectv1(StatusEffects.EnergyDependent)) + "/45 (+" + Math.round(player.statusEffectv1(StatusEffects.EnergyDependent)) * 5 + " to spe, +" + Math.round(player.statusEffectv1(StatusEffects.EnergyDependent)) * 12 + " to int)\n";
 		}
 
 		if (player.statusEffectv1(StatusEffects.Bammed1) > 0) {
@@ -560,7 +567,8 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.CHI_CHI_AFFECTION] > 0) {
 			interpersonStats += "<b>Chi Chi Affection:</b> " + Math.round(flags[kFLAGS.CHI_CHI_AFFECTION]) + "%\n";
-			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 4) interpersonStats += "<b>Chi Chi status:</b> Wife\n";
+			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 6) interpersonStats += "<b>Chi Chi status:</b> Wife\n";
+			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 5) interpersonStats += "<b>Chi Chi status:</b> <font color=\"#800000\">Taken Away by Chon Lao</font>\n";
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 3) interpersonStats += "<b>Chi Chi status:</b> Lover\n";
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2) interpersonStats += "<b>Chi Chi status:</b> <font color=\"#800000\">Dead</font>\n";
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 2) interpersonStats += "<b>Chi Chi status:</b> Apprentice\n";
@@ -732,6 +740,18 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.LUNA_LVL_UP] == 1) interpersonStats += "<b>Luna lvl:</b> 15\n";
 			if (flags[kFLAGS.LUNA_LVL_UP] == 0) interpersonStats += "<b>Luna lvl:</b> 9\n";
 		}
+		
+		if (flags[kFLAGS.NEISA_FOLLOWER] >= 7)  {
+			if (flags[kFLAGS.NEISA_AFFECTION] < 50) interpersonStats += "<b>Neisa Loyalty:</b> " + Math.round(flags[kFLAGS.NEISA_AFFECTION]) * 2 + "%\n";
+			else interpersonStats += "<b>Neisa Loyalty:</b> 100%\n";
+			if (flags[kFLAGS.NEISA_FOLLOWER] >= 14)  interpersonStats += "<b>Days that passed since last paycheck for Neisa:</b> " + (Math.round(flags[kFLAGS.NEISA_AFFECTION]) - 7) + " days (If you npot pay before 10th day she would leave)\n";
+			else interpersonStats += "<b>Days that passed since last paycheck for Neisa:</b> " + (Math.round(flags[kFLAGS.NEISA_AFFECTION]) - 7) + " days\n";
+			//interpersonStats += "<b>Luna Affection:</b> " + Math.round(flags[kFLAGS.LUNA_AFFECTION]) + "%\n";
+			if (flags[kFLAGS.NEISA_LVL_UP] == 4) interpersonStats += "<b>Neisa lvl:</b> 21\n";
+			if (flags[kFLAGS.NEISA_LVL_UP] == 3) interpersonStats += "<b>Neisa lvl:</b> 15\n";
+			if (flags[kFLAGS.NEISA_LVL_UP] == 2) interpersonStats += "<b>Neisa lvl:</b> 9\n";
+			if (flags[kFLAGS.NEISA_LVL_UP] == 1) interpersonStats += "<b>Neisa lvl:</b> 3\n";
+		}
 		if (flags[kFLAGS.OWCAS_ATTITUDE] > 0)
 			interpersonStats += "<b>Owca's Attitude:</b> " + flags[kFLAGS.OWCAS_ATTITUDE] + "\n";
 
@@ -846,6 +866,9 @@ public class PlayerInfo extends BaseContent {
 
 		if (player.statusEffectv1(StatusEffects.Birthed) > 0)
 			childStats += "<b>Times Given Birth:</b> " + player.statusEffectv1(StatusEffects.Birthed) + "\n";
+
+		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0)
+			childStats += "<b>[name] goblin daughters:</b> " + flags[kFLAGS.PC_GOBLIN_DAUGHTERS] + "\n";
 
 		if (flags[kFLAGS.AMILY_MET] > 0)
 			childStats += "<b>Litters With Amily:</b> " + (flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n";

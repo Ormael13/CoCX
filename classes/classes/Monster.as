@@ -2947,7 +2947,7 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.ImmolationDoT,1,-1);
 				//Heal wounds
 				if(statusEffectv1(StatusEffects.ImmolationDoT) <= 0) {
-					outputText("Flames left by immolation spell " + a + short + " finally stop burning.\n\n");
+					outputText("Flames left by immolation spell on " + a + short + " finally stop burning.\n\n");
 					removeStatusEffect(StatusEffects.ImmolationDoT);
 				}
 				//Deal damage if still wounded.
@@ -2964,7 +2964,7 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.BurnDoT,1,-1);
 				//Heal wounds
 				if(statusEffectv1(StatusEffects.BurnDoT) <= 0) {
-					outputText("Flames left by Burn " + a + short + " finally stop burning.\n\n");
+					outputText("Flames left by Burn on " + a + short + " finally stop burning.\n\n");
 					removeStatusEffect(StatusEffects.BurnDoT);
 				}
 				//Deal damage if still wounded.
@@ -2982,7 +2982,7 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.BurnDoT2,1,-1);
 				//Heal wounds
 				if(statusEffectv1(StatusEffects.BurnDoT2) <= 0) {
-					outputText("Flames left by Burn " + a + short + " finally stop burning.\n\n");
+					outputText("Flames left by Burn on " + a + short + " finally stop burning.\n\n");
 					removeStatusEffect(StatusEffects.BurnDoT2);
 				}
 				//Deal damage if still wounded.
@@ -3000,7 +3000,7 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.FirePunchBurnDoT,1,-1);
 				//Heal wounds
 				if(statusEffectv1(StatusEffects.FirePunchBurnDoT) <= 0) {
-					outputText("Flames left by Fire Punch " + a + short + " finally stop burning.\n\n");
+					outputText("Flames left by Fire Punch on " + a + short + " finally stop burning.\n\n");
 					removeStatusEffect(StatusEffects.FirePunchBurnDoT);
 				}
 				//Deal damage if still wounded.
@@ -3026,19 +3026,106 @@ import flash.utils.getQualifiedClassName;
 				//Countdown to heal
 				addStatusValue(StatusEffects.AcidDoT,1,-1);
 				if (statusEffectv4(StatusEffects.AcidDoT) == 0) {
-					if (statusEffectv3(StatusEffects.AcidDoT) > 1) addStatusValue(StatusEffects.AcidDoT, 3, -1);
+					if (statusEffectv1(StatusEffects.AcidDoT) > 1) addStatusValue(StatusEffects.AcidDoT, 1, -1);
 					//Heal wounds
 					if (statusEffectv1(StatusEffects.AcidDoT) <= 0) {
-						outputText("Wound left by Acid " + a + short + " finally close ups.\n\n");
+						outputText("Wound left by acid on " + a + short + " finally close ups.\n\n");
 						removeStatusEffect(StatusEffects.AcidDoT);
 					}
 					//Deal damage if still wounded.
 					else {
 						var store7:Number = (player.str + player.spe + player.tou) * 2.5;
 						store7 += maxHP() * statusEffectv2(StatusEffects.AcidDoT);
-						store7 = SceneLib.combat.doMagicDamage(store7);
-						if(plural) outputText(capitalA + short + " are hurt by lingering Acid after-effect. <b>(<font color=\"#800000\">" + store7 + "</font>)</b>\n\n");
-						else outputText(capitalA + short + " is hurt by lingering Acid after-effect. <b>(<font color=\"#800000\">" + store7 + "</font>)</b>\n\n");
+						if(plural) outputText(capitalA + short + " are hurt by lingering Acid after-effect. ");
+						else outputText(capitalA + short + " is hurt by lingering Acid after-effect. ");
+						store7 = SceneLib.combat.doMagicDamage(store7, true, true);
+						outputText("\n\n");
+					}
+				}
+			}
+			//Poison Dot
+			if (hasStatusEffect(StatusEffects.PoisonDoT)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.PoisonDoT,1,-1);
+				if (statusEffectv4(StatusEffects.PoisonDoT) == 0) {
+					if (statusEffectv1(StatusEffects.PoisonDoT) > 1) addStatusValue(StatusEffects.PoisonDoT, 1, -1);
+					//Heal wounds
+					if (statusEffectv1(StatusEffects.PoisonDoT) <= 0) {
+						outputText("Wound left by poison on " + a + short + " finally close ups.\n\n");
+						removeStatusEffect(StatusEffects.PoisonDoT);
+					}
+					//Deal damage if still wounded.
+					else {
+						var store10:Number =  (player.str + player.spe + player.tou) * 2.5;
+						store10 += maxHP() * statusEffectv2(StatusEffects.PoisonDoT);
+						if(plural) outputText(capitalA + short + " are hurt by lingering Poison after-effect. ");
+						else outputText(capitalA + short + " is hurt by lingering Poison after-effect. ");
+						store10 = SceneLib.combat.doMagicDamage(store10, true, true);
+						outputText("\n\n");
+					}
+				}
+			}
+			if (hasStatusEffect(StatusEffects.PoisonDoTH)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.PoisonDoTH,1,-1);
+				if (statusEffectv4(StatusEffects.PoisonDoTH) == 0) {
+					if (statusEffectv1(StatusEffects.PoisonDoTH) > 1) addStatusValue(StatusEffects.PoisonDoTH, 1, -1);
+					//Heal wounds
+					if (statusEffectv1(StatusEffects.PoisonDoTH) <= 0) {
+						outputText("Wound left by poison on " + a + short + " finally close ups.\n\n");
+						removeStatusEffect(StatusEffects.PoisonDoTH);
+					}
+					//Deal damage if still wounded.
+					else {
+						var store9:Number = 0;
+						store9 += maxHP() * statusEffectv2(StatusEffects.PoisonDoTH);
+						if(plural) outputText(capitalA + short + " are hurt by lingering Poison after-effect. ");
+						else outputText(capitalA + short + " is hurt by lingering Poison after-effect. ");
+						store9 = SceneLib.combat.doMagicDamage(store9, true, true);
+						outputText("\n\n");
+					}
+				}
+			}
+			//Lust Dot
+			if (hasStatusEffect(StatusEffects.LustDoT)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.LustDoT,1,-1);
+				if (statusEffectv4(StatusEffects.LustDoT) == 0) {
+					if (statusEffectv1(StatusEffects.LustDoT) > 1) addStatusValue(StatusEffects.LustDoT, 1, -1);
+					//Heal wounds
+					if (statusEffectv1(StatusEffects.LustDoT) <= 0) {
+						outputText("Lingering lust-induncing after-effect on " + a + short + " finally ends.\n\n");
+						removeStatusEffect(StatusEffects.LustDoT);
+					}
+					//Deal damage if still wounded.
+					else {
+						var lustDmg1:Number = Math.round(player.lib / 10);
+						lustDmg1 += maxLust() * statusEffectv2(StatusEffects.LustDoT);
+						if(plural) outputText(capitalA + short + " are aroused by lingering lust-induncing after-effect. ");
+						else outputText(capitalA + short + " is aroused by lingering lust-induncing after-effect. ");
+						teased(lustDmg1);
+						outputText("\n\n");
+					}
+				}
+			}
+			if (hasStatusEffect(StatusEffects.LustDoTH)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.LustDoTH,1,-1);
+				if (statusEffectv4(StatusEffects.LustDoTH) == 0) {
+					if (statusEffectv1(StatusEffects.LustDoTH) > 1) addStatusValue(StatusEffects.LustDoTH, 1, -1);
+					//Heal wounds
+					if (statusEffectv1(StatusEffects.LustDoTH) <= 0) {
+						outputText("Lingering lust-induncing after-effect on " + a + short + " finally ends.\n\n");
+						removeStatusEffect(StatusEffects.LustDoTH);
+					}
+					//Deal damage if still wounded.
+					else {
+						var lustDmg2:Number = 0;
+						lustDmg2 += maxLust() * statusEffectv2(StatusEffects.LustDoTH);
+						if(plural) outputText(capitalA + short + " are aroused by lingering lust-induncing after-effect. ");
+						else outputText(capitalA + short + " is aroused by lingering lust-induncing after-effect. ");
+						teased(lustDmg2);
+						outputText("\n\n");
 					}
 				}
 			}
@@ -3048,6 +3135,42 @@ import flash.utils.getQualifiedClassName;
 					outputText("<b>Enemy Maleficium effect wore off!</b>\n\n");
 				}
 				else addStatusValue(StatusEffects.Maleficium,1,-1);
+			}
+			//Consuming darkness
+			if (player.hasStatusEffect(StatusEffects.ConsumingDarkness)) {
+				if (player.statusEffectv1(StatusEffects.ConsumingDarkness) <= 0) player.removeStatusEffect(StatusEffects.ConsumingDarkness);
+				else {
+					player.addStatusValue(StatusEffects.ConsumingDarkness, 1, -1);
+					outputText("Hungry darkness gnaw at your foe for ");
+					var store11:Number = 0;
+					store11 += maxHP() * statusEffectv2(StatusEffects.ConsumingDarkness);
+					store11 = SceneLib.combat.doDarknessDamage(store11, true, true);
+					outputText(" damage!\n\n");
+				}
+			}
+			//Curse of Desire
+			if (player.hasStatusEffect(StatusEffects.CurseOfDesire)) {
+				if (player.statusEffectv1(StatusEffects.CurseOfDesire) <= 0) player.removeStatusEffect(StatusEffects.CurseOfDesire);
+				else {
+					player.addStatusValue(StatusEffects.CurseOfDesire, 1, -1);
+					var lustDmg3:Number = 0;
+					lustDmg3 += maxLust() * statusEffectv2(StatusEffects.CurseOfDesire);
+					outputText("The curse of desire slowly sap at your victim's resolve and countenance. ");
+					teased(lustDmg3);
+					outputText("\n\n");
+				}
+			}
+			//Curse of Weeping
+			if (player.hasStatusEffect(StatusEffects.CurseOfWeeping)) {
+				if (player.statusEffectv1(StatusEffects.CurseOfWeeping) <= 0) player.removeStatusEffect(StatusEffects.CurseOfWeeping);
+				else {
+					player.addStatusValue(StatusEffects.CurseOfWeeping, 1, -1);
+					outputText("Your foe is bleeding due to your curse. ");
+					var hemorrhage3:Number = 0;
+					hemorrhage3 += maxHP() * statusEffectv2(StatusEffects.CurseOfWeeping);
+					hemorrhage3 = SceneLib.combat.doDamage(hemorrhage3);
+					outputText("<b>(<font color=\"#800000\">" + hemorrhage3 + "</font>)</b>\n\n");
+				}
 			}
 			//regeneration perks for monsters
 			if (((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0 || findPerk(PerkLib.ImprovedLifeline) >= 0 
@@ -3394,6 +3517,12 @@ import flash.utils.getQualifiedClassName;
 				inte += (5 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.JobKnight)) tou += (10 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.JobLeader)) {
+				inte += (5 * (1 + newGamePlusMod()));
+				wis += (5 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.ShootTheLoadAndHitTheRoad)) spe += (5 * (1 + newGamePlusMod()));
+				if (!hasPerk(PerkLib.ShootTheLoadAndHitTheRoad)) lib -= (5 * (1 + newGamePlusMod()));
+			}
 			if (hasPerk(PerkLib.JobMonk)) wis += (15 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.JobRanger)) spe += (5 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.JobRogue)) {
@@ -3435,6 +3564,10 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.PrestigeJobTempest)) {
 				str += (40 * (1 + newGamePlusMod()));
 				spe += (40 * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.PrestigeJobWarlock)) {
+				inte += (60 * (1 + newGamePlusMod()));
+				lib += (20 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.DeityJobMunchkin)) {
 				str += (25 * (1 + newGamePlusMod()));
@@ -3615,4 +3748,4 @@ import flash.utils.getQualifiedClassName;
 			armorMDef += ((int)(1 + armorMDef / 10)) * newGamePlusMod();
 		}
 	}
-}
+}

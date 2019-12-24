@@ -135,6 +135,8 @@ use namespace CoC;
 			addButton(3, consumables.AGILI_E.shortName, buyItem, 3);
 			addButton(5, consumables.CFISHS.shortName, buyItem, 5);
 			addButton(6, consumables.VIXEN_T.shortName, buyItem, 6);
+			addButton(8, weapons.L_CLAWS.shortName, buyItem, 8);
+			addButton(9, weapons.LRAPIER.shortName, buyItem, 9);
 			addButton(10, weapons.SUCWHIP.shortName, buyItem, 10);
 			addButton(11, weapons.PSWHIP.shortName, buyItem, 11);
 			addButton(12, weaponsrange.SSKETCH.shortName, buyItem, 12);
@@ -150,6 +152,8 @@ use namespace CoC;
 			if (item == 3) incubusBuy(consumables.AGILI_E);
 			if (item == 5) incubusBuy(consumables.CFISHS);
 			if (item == 6) incubusBuy(consumables.VIXEN_T);
+			if (item == 8) incubusBuy(weapons.L_CLAWS);
+			if (item == 9) incubusBuy(weapons.LRAPIER);
 			if (item == 10) incubusBuy(weapons.SUCWHIP);
 			if (item == 11) incubusBuy(weapons.PSWHIP);
 			if (item == 12) incubusBuy(weaponsrange.SSKETCH);
@@ -1177,7 +1181,7 @@ use namespace CoC;
 			else {
 				dungeons.setDungeonButtons(null, roomGatheringHall, null, roomSecretPassage);
 			}
-			if (flags[kFLAGS.GARGOYLE_QUEST] == 2) addButton(0, "Drawer", ZetazsBedroomDrawer);
+			if ((flags[kFLAGS.GARGOYLE_QUEST] == 2 || player.hasStatusEffect(StatusEffects.AlvinaTraining)) && player.hasKeyItem("Soul Gem Research") < 0) addButton(0, "Drawer", ZetazsBedroomDrawer);
 		}
 		
 		public function ZetazsBedroomDrawer():void {
@@ -1185,10 +1189,8 @@ use namespace CoC;
 			outputText("Inside the drawer you find a book of advanced research notes on Lethicite, as well as soul containment inside of gems. Such research seems to imply that the creation of a soul gem requires both a large amount of concentrated pure water and ectoplasm obtained from the manifested imprint of a soul that has survived for decades or more to be combined and crystallized through some complicated alchemical process.");
 			outputText("\n\n<b>(Key Item Acquired: Soul Gem Research!)</b>");
 			player.createKeyItem("Soul Gem Research", 0, 0, 0, 0);
-			flags[kFLAGS.GARGOYLE_QUEST]++;
+			if (flags[kFLAGS.GARGOYLE_QUEST] == 2) flags[kFLAGS.GARGOYLE_QUEST]++;
 			doNext(playerMenu);
 		}
-
 	}
-
-}
+}

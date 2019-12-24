@@ -442,31 +442,26 @@ public function alvinaMainCampSexMenu():void
 {
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 	clearOutput();
-	if (flags[kFLAGS.ALVINA_FOLLOWER] > 19) {
-		outputText("Not sure if lia wanted some short text before picking sex scenes so well here it's for now unless it will get removed or replaced with proper paragraph.\n\n");
+	outputText("You tell Alvina you improved on your bed skills and offer her to try you up again.\n\n");
+	outputText("\"<i>Ugh if you werent my pupil I wouldn't even consider the idea. Fine then, lets see if you make for a decent lover now.</i>\"\n\n");
+	if (player.lib > 50) {
+		outputText("You smile perversely and offer to do it right here and right now on your "+(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "bed" : "bedroll")+".\n\n");
+		outputText("\"<i>Bah! That bed is for amateurs, I recall teaching you bigger than that. Watch this!</i>\"\n\n");
+		outputText("She chants an arcane line and a closed door appears out of the ether, seemingly standing on nothing. You ask her what she’s up to when she opens the door. Beyond the cadre, you see what looks like a magnificent bedroom with a large bed fit for an empress and decorated with translucent purple drapes. ");
+		outputText("There are various decorations all the more arousing, as well as a cupboard filled with various toys. More than hyped up, you pick up Alvina’s hand and guide her to the bed.\n\n");
+		outputText("\"<i>");
+		//outputText("(If married with Alvina) It’s been so long since last we consummated our love. I’m quite glad you asked, as you know(End of cut) ");
+		outputText("I can spice things up for you, depending on your tastes, by summoning a malefice, so what will it be?</i>\"\n\n");
+		outputText("Alvina licks her lips in anticipation, for once interested in something else than her scholarly researches.");
+		//outputText(" (If married) Not that you mind. Since the wedding, Alvina has been doing less research on how to bend the universe and more on how for the both of you to have the best mind-blowing sex, an initiative you greatly appreciate.(end of cut)");
+		outputText("\n\n");
+		alvinaMainCampSexMenu2();
 	}
 	else {
-		outputText("You tell Alvina you improved on your bed skills and offer her to try you up again.\n\n");
-		outputText("\"<i>Ugh if you werent my pupil I wouldn't even consider the idea. Fine then, lets see if you make for a decent lover now.</i>\"\n\n");
-		if (player.lib > 50) {
-			outputText("You smile perversely and offer to do it right here and right now on your "+(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "bed" : "bedroll")+".\n\n");
-			outputText("\"<i>Bah! That bed is for amateurs, I recall teaching you bigger than that. Watch this!</i>\"\n\n");
-			outputText("She chants an arcane line and a closed door appears out of the ether, seemingly standing on nothing. You ask her what she’s up to when she opens the door. Beyond the cadre, you see what looks like a magnificent bedroom with a large bed fit for an empress and decorated with translucent purple drapes. ");
-			outputText("There are various decorations all the more arousing, as well as a cupboard filled with various toys. More than hyped up, you pick up Alvina’s hand and guide her to the bed.\n\n");
-			outputText("\"<i>");
-			//outputText("(If married with Alvina) It’s been so long since last we consummated our love. I’m quite glad you asked, as you know(End of cut) ");
-			outputText("I can spice things up for you, depending on your tastes, by summoning a malefice, so what will it be?</i>\"\n\n");
-			outputText("Alvina licks her lips in anticipation, for once interested in something else than her scholarly researches.");
-			//outputText(" (If married) Not that you mind. Since the wedding, Alvina has been doing less research on how to bend the universe and more on how for the both of you to have the best mind-blowing sex, an initiative you greatly appreciate.(end of cut)");
-			outputText("\n\n");
-			alvinaMainCampSexMenu2();
-		}
-		else {
-			outputText("It's barely been an hour and Alvina has already become quite bored. She shakes her head negatively and removes herself from you.\n\n");
-			outputText("\"<i>You lack both originality and talent even for a demon. Just where’s your libido?! I’m quite disappointed, so nah, I don’t think you're worth my while on this field. Now if you would excuse me I have my stuff to pack up.</i>\"\n\n");
-			doNext(camp.campFollowers);
-			cheatTime2(45);
-		}
+		outputText("It's barely been an hour and Alvina has already become quite bored. She shakes her head negatively and removes herself from you.\n\n");
+		outputText("\"<i>You lack both originality and talent even for a demon. Just where’s your libido?! I’m quite disappointed, so nah, I don’t think you're worth my while on this field. Now if you would excuse me I have my stuff to pack up.</i>\"\n\n");
+		doNext(camp.campFollowers);
+		cheatTime2(45);
 	}
 }
 public function alvinaMainCampSexMenu2():void
@@ -761,7 +756,7 @@ public function alvinaCampAdvancedStudy():void
 {
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 	clearOutput();
-	if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3 && player.hasKeyItem("Siegweird holy symbol") >= 0) {
+	if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3 && player.hasKeyItem("Siegweird's holy symbol") >= 0) {
 		player.removeKeyItem("Siegweird's holy symbol");
 		outputText("You hand over the holy symbol to Alvina, who smirks as if a long drawn out battle was finally over.\n\n");
 		outputText("\"<i>That concludes our business. I took the liberty of writing this spell in a scroll. So here, you can have it.</i>\"\n\n");
@@ -897,4 +892,4 @@ public function alvinaMaincampMenu():void
 */
 	}
 
-}
+}

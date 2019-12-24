@@ -53,7 +53,8 @@ use namespace CoC;
 			choice[choice.length] = 3; //Goblin/Imp group enemies
 			choice[choice.length] = 4; //Goblin/Imp group enemies
 			choice[choice.length] = 5; //Items
-			choice[choice.length] = 6; //Find nothing!
+			choice[choice.length] = 6; //Items
+			choice[choice.length] = 7; //Find nothing!
 			
 			select = choice[rand(choice.length)];
 			switch(select) {
@@ -89,6 +90,12 @@ use namespace CoC;
 							inventory.takeItem(consumables.D_ARCON, camp.returnToCampUseOneHour);
 						}
 					}
+					break;
+				case 6:
+					clearOutput();
+					outputText("While exploring the battlefield you find the remains of some metal scraps. At first you think you won't find anything useful there but a metal plate draws your attention, it could be useful later. You put the item in your backpack and head back to camp.\n\n");
+					outputText("<b>You found a metal plate.</b>");
+					flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]++;
 					break;
 				default:
 					clearOutput();

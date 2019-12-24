@@ -80,6 +80,9 @@ public class Masturbation extends BaseContent {
 			if (player.canOviposit() && player.hasFuckableNipples() && player.lust >= 33 && player.biggestTitSize() >= 21) {
 				addButton(button++, "LayInTits", layEggsInYerTits);
 			}
+			if (player.hasVagina() && player.isInGoblinMech() && player.keyItemv1("Cum Reservoir") == 4) {
+				addButton(button++, "Impregnator 1.0", gobomechImpregnator1);
+			}
 			if (fappingItems(false))
 				addButton(13 ,"Items", fappingItems);
 			else if (button == 1) { //If you can only masturbate or meditate the normal way then do that automatically
@@ -2322,6 +2325,17 @@ public class Masturbation extends BaseContent {
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
+		private function gobomechImpregnator1():void {
+			clearOutput();
+			outputText("You take a look at your mech reservoir and smile gleefully noticing how it is about full, you're going to enjoy this!\n\n");
+			outputText("You sit in your mech’s driver seat, open your personal compartment and draw out the tube taking your time to methodically plug it after your SPMK1 socket and use the fastener to lock it in place so it doesn't flail out wildly. That done you press the ON button and lay back to enjoy the fruit of your labor.\n\n");
+			outputText("The mech beeps for a few seconds as the pump starts working, and soon freshly harvested cum flows up the tube straight into your thirsty goblin pussy. You moan from pleasure as the reversed strapon vibrates with the cum flow, hitting every side of your vaginal wall. Now this is how you like sex! Efficient, pleasurable and sure to end with a top tier bukake with a heavy pregnancy percentage rate!\n\n");
+			outputText("The machine enters its second stage as the cable start producing small jolts of electricity in your cunt, shocking your clitty in just the right way. Your eyes roll back in absolute bliss and you cum at once as your belly slowly inflates from the sheer amount of fluids your creation is pumping in, filling your addled mind with fireworks. You giggle in delight as the flow slowly ebbs, your SPMK1 holding the cum inside so no drops can leaks out. Once it's over, you unfasten the tube and put it back in its compartment as you pat your belly in contentment. You really hope it took and if it didn’t, you will just have to harvest some more… hurray for progress!");
+			player.cuntChange(8, true, true, false);
+			player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
 		private function catAutoLick():void { //Male cat masturbation
 			clearOutput();
 			//NOT FEXIBLE
@@ -3770,3 +3784,4 @@ public class Masturbation extends BaseContent {
 		}
 	}
 }
+

@@ -15,6 +15,7 @@ package classes.Items
 		public static const NOTHING:Nothing = new Nothing();
 		
 		public const GOBMALP:GoblinMechAlpha = new GoblinMechAlpha();
+		public const GOBMPRI:GoblinMechPrime = new GoblinMechPrime();
 		
 		public function VehiclesLib() 
 		{

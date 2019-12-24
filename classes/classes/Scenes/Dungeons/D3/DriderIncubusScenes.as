@@ -396,9 +396,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			outputText("You give Mitzi a friendly pat once she’s ready to go and tell her to wait for you outside.");
 			outputText("\n\nShe beams ecstatically and bows. <i>“Thankyousomuchyouwon’tregretthis!”</i>");
 			outputText("\n\nThe excitable thing is gone the next moment.");
-
 			flags[kFLAGS.MITZI_RECRUITED] = 1;
-
 			menu();
 			driderDefeatMenu();
 		}

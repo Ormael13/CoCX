@@ -108,6 +108,13 @@ use namespace CoC;
 						},
 						call: wstaffEncounter
 					}, {
+						name: "desert eagle",
+						when: function ():Boolean {
+							return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1;
+						},
+						chance: 3,
+						call: partsofDesertEagle
+					}, {
 						name: "nails",
 						when: function ():Boolean {
 							return player.hasKeyItem("Carpenter's Toolbox") >= 0 && player.keyItemv1("Carpenter's Toolbox") < 200;
@@ -209,6 +216,16 @@ use namespace CoC;
 			outputText("The snake-woman tosses the burnt potato away and cries, \"<i>Hora hora.</i>\"  She suddenly turns and looks directly at you.  Her gaze is piercing and intent, but she vanishes before you can react.  The only reminder she was ever there is a burning potato in the sand.   Your curiosity overcomes your caution, and you approach the fiery inferno.  There isn't even a trail in the sand, and the library is going to be an unsalvageable wreck in short order.   Perhaps the only item worth considering is the stick with the burning potato.  It's quite oddly shaped, and when you reach down to touch it you can feel a resonant tingle.  Perhaps it was some kind of wizard's staff?\n\n");
 			flags[kFLAGS.FOUND_WIZARD_STAFF]++;
 			inventory.takeItem(weapons.W_STAFF, camp.returnToCampUseOneHour);
+		}
+		
+		public function partsofDesertEagle():void {
+			clearOutput();
+			outputText("As you explore the desert you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
+			outputText("You carefully put the pieces of the Desert Eagle in your back and head back to your camp.\n\n");
+			player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 1, 1);
+			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
+			player.createKeyItem("Desert Eagle", 0, 0, 0, 0);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function mirageDesert():void

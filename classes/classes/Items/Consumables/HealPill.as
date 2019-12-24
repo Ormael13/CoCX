@@ -3,6 +3,7 @@ package classes.Items.Consumables
 import classes.EngineCore;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
+import classes.PerkLib;
 
 /**
 	 * Moderate boost to HP.
@@ -21,7 +22,10 @@ import classes.Items.ConsumableLib;
 			var rand:int = Math.random() * 100;
 			outputText("You pop the small pill into your mouth and swallow. ");
 			
-			if (EngineCore.HPChange(50 + player.tou, true)) {
+			if (player.HP < player.maxHP()) {
+				if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) EngineCore.HPChange(Math.round((50 + player.tou) * 2), true);
+				else if ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagEvolved)) || player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) EngineCore.HPChange(Math.round((50 + player.tou) * 1.5), true);
+				else EngineCore.HPChange(50 + player.tou, true);
 				outputText("Some of your wounds are healed. ");
 			}
 			else

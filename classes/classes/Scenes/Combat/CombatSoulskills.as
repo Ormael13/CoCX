@@ -939,6 +939,10 @@ public class CombatSoulskills extends BaseCombatContent {
 		var damage:Number = unarmedAttack();
 		damage += player.str;
 		damage += scalingBonusStrength();
+		if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) {
+			damage += player.str;
+			damage += scalingBonusStrength();
+		}
 		damage += player.wis;
 		damage += scalingBonusWisdom();
 		//other bonuses
@@ -1005,6 +1009,10 @@ public class CombatSoulskills extends BaseCombatContent {
 		var damage:Number = unarmedAttack();
 		damage += player.str;
 		damage += scalingBonusStrength();
+		if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) {
+			damage += player.str;
+			damage += scalingBonusStrength();
+		}
 		damage += player.wis;
 		damage += scalingBonusWisdom();
 		if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
@@ -1072,6 +1080,10 @@ public class CombatSoulskills extends BaseCombatContent {
 		var damage:Number = unarmedAttack();
 		damage += player.str;
 		damage += scalingBonusStrength();
+		if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) {
+			damage += player.str;
+			damage += scalingBonusStrength();
+		}
 		damage += player.wis;
 		damage += scalingBonusWisdom();
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {

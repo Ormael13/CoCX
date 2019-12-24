@@ -4022,7 +4022,10 @@ private function fillMeUpPleaseUrta():void {
 	urtaLove(2);
 	flags[kFLAGS.TIMES_FUCKED_URTA]++;
 	player.slimeFeed();
-	if(flags[kFLAGS.URTA_FERTILE] == 1) player.knockUp(PregnancyStore.PREGNANCY_URTA, PregnancyStore.INCUBATION_URTA, 25);
+	if (flags[kFLAGS.URTA_FERTILE] == 1) {
+		if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+		else player.knockUp(PregnancyStore.PREGNANCY_URTA, PregnancyStore.INCUBATION_URTA, 25);
+	}
 	player.orgasm();
 	dynStats("lib", .2, "sen", -3);
 }

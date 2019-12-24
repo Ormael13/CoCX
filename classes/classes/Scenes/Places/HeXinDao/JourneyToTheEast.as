@@ -34,17 +34,19 @@ package classes.Scenes.Places.HeXinDao
 				outputText("You enter the town local Inn ‘Journey to the East’ and look around. ");
 			}
 			outputText("You can see many people enjoying a meal or drink in the dining hall, a barman standing by ready to serve drinks.");
-			if (model.time.hours >= 18 && rand(4) == 0) {
+			if (flags[kFLAGS.CHI_CHI_FOLLOWER] != 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && model.time.hours >= 18 && rand(4) == 0) {
 				ChiChiDrunkSex();
 				return;
 			}
 			menu();
 			addButton(0, "Drink", drinkAlcohol);
 			addButton(4, "Adv.Guild", BoardkeeperYangMain);
-			//addButtonDisabled(10, "???", "You see some suspicious looking squirrel in one of inn corners. (Liadri + Star should bring this npc to more completness)");
+			if (flags[kFLAGS.MICHIKO_FOLLOWER] < 1) addButton(10, "???", SceneLib.michikoFollower.firstMeetingMichiko).hint("You see some suspicious looking squirrel in one of inn corners.");
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 1) addButton(11, "ShieldMaiden", firstTimeMeetingNeisa);
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 2) addButton(11, "Neisa", meetingNeisaAfterDecline);
-			//if (flags[kFLAGS.NEISA_FOLLOWER] == 4) addButton(11, "Neisa", meetingNeisaPostDungeonExploration);
+			if (flags[kFLAGS.NEISA_FOLLOWER] == 4 || flags[kFLAGS.NEISA_FOLLOWER] == 5) addButton(11, "Neisa", meetingNeisaPostDungeonExploration).hint("Neisa is sitting at a table enjoying one of the local drinks.");
+			if (flags[kFLAGS.NEISA_FOLLOWER] == 6) addButton(11, "Neisa", meetingNeisaPostDungeonExploration2).hint("Neisa is sitting at a table enjoying one of the local drinks.");
+			addButtonDisabled(12, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
 			if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 2 && (player.humanScore() >= (player.humanMaxScore() - player.internalChimeraScore()))) {
 				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 1) addButton(13, "???", firstTimeMeetingNekomataBoy).hint("A strange cat morph with two tails is sitting at one of the tables muttering to himself.");
 				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 1) addButton(13, "???", firstTimeMeetingNekomataBoy).hint("A strange cat morph with two tails is sitting at one of the tables muttering to himself.");
@@ -817,11 +819,56 @@ package classes.Scenes.Places.HeXinDao
 			addButton(3, "No", firstTimeMeetingNeisaNo);
 		}
 		public function meetingNeisaPostDungeonExploration():void {
-			outputText("Placeholder until this part of the text will be written.\n\n");
+			if (flags[kFLAGS.NEISA_FOLLOWER] == 5) {
+				outputText("You walk up to Neisa who reminds you right away.\n\n");
+				outputText("\"<i>I work for 1 spirit stone a day and payment is once per week, this is not negotiable.</i>\"\n\n");
+			}
+			else {
+				outputText("You walk up to Neisa who acknowledges your presence right away.\n\n");
+				outputText("\"<i>Aye [name] how's the adventuring going? I've been without a contract for a while now and it so happens I could lend you my help. For a modest fee of course. Only 1 spirit stone a day payable once per week, I need something to subsist on.</i>\"\n\n");
+				outputText("Do you hire her?\n\n");
+			}
 			menu();
-			//addButton(1, "Yes", firstTimeMeetingNeisaYes);
-			//addButton(3, "No", firstTimeMeetingNeisaNo);
-			addButton(4, "Back", curry(enteringInn, false));
+			addButton(1, "Hire her", meetingNeisaPostDungeonExplorationHireHer);
+			addButton(3, "No", meetingNeisaPostDungeonExplorationNo);
+		}
+		public function meetingNeisaPostDungeonExploration2():void {
+			outputText("Neisa gets to the point right away.\n\n");
+			outputText("\"<i>I'm still waiting for those 10 spirit stone you owe me [name].</i>\"\n\n");
+			menu();
+			if (flags[kFLAGS.SPIRIT_STONES] >= 10) addButton(1, "Pay", meetingNeisaPostDungeonExplorationPay);
+			else addButtonDisabled(1, "Pay", "You still not have 10 spirit stones to pay back.");
+			addButton(3, "Don't pay", meetingNeisaPostDungeonExplorationDontPay);
+		}
+		public function meetingNeisaPostDungeonExplorationDontPay():void {
+			outputText("You walk away to go get the cash, gosh you're lucky she doesn't send the city guards on your back.\n\n");
+			doNext(curry(enteringInn,false));
+		}
+		public function meetingNeisaPostDungeonExplorationPay():void {
+			flags[kFLAGS.SPIRIT_STONES] -= 10;
+			outputText("You hand over the payment, Neisa counting to be sure.\n\n");
+			outputText("\"<i>Looks like we're even. I'll pass on the fact you skipped the payment and offer you my aid again so long as you can afford it.</i>\"\n\n");
+			menu();
+			addButton(1, "Hire her", meetingNeisaPostDungeonExplorationHireHer);
+			addButton(3, "No", meetingNeisaPostDungeonExplorationNo);
+		}
+		public function meetingNeisaPostDungeonExplorationHireHer():void {
+			outputText("Neisa packs up her things, ready to accompany you.\n\n");
+			outputText("\"<i>Well lead the way, Boss.</i>\"\n\n");
+			outputText("(<b>Neisa has been added to the Followers menu!</b>)\n\n");
+			if (flags[kFLAGS.NEISA_FOLLOWER] < 6) {
+				flags[kFLAGS.NEISA_LVL_UP] = 1;
+				flags[kFLAGS.NEISA_AFFECTION] = 1;
+				flags[kFLAGS.NEISA_DEFEATS_COUNTER] = 0;
+			}
+			flags[kFLAGS.NEISA_FOLLOWER] = 7;
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function meetingNeisaPostDungeonExplorationNo():void {
+			outputText("Nah you don't have that much right now.\n\n");
+			outputText("\"<i>Well I hope whatever you meet out there doesn't outright kill or fuck the soul out of you then. See me again if you ever change your mind.</i>\"\n\n");
+			if (flags[kFLAGS.NEISA_FOLLOWER] == 4) flags[kFLAGS.NEISA_FOLLOWER] = 5;
+			doNext(curry(enteringInn,false));
 		}
 		
 		public function firstTimeMeetingNekomataBoy():void {

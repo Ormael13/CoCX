@@ -27,6 +27,7 @@ package classes.Scenes.Explore {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
+import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 
 public class Giacomo extends BaseContent implements TimeAwareInterface {
@@ -153,6 +154,10 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			addButton(6, "Black Book", pitchBlackBook);
 			if (player.findPerk(PerkLib.PrestigeJobGreySage) >= 0) addButton(7, "Grey Book", pitchGreyBook);
 			else addButtonDisabled(7, "???", "Req. Prestige Job: Grey Sage");
+			if (Holidays.nieveHoliday()) {
+				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0) addButton(8, "Mysterious Seed", pitchMysteriousSeed);
+				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 5) addButton(9, "Decorations", pitchDecorations);
+			}
 			addButton(10, "Torch", pitchTorch);
 			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
@@ -409,6 +414,54 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				statScreenRefresh();
 			}
 			doNext(bookMenu);
+		}
+		
+		private function pitchMysteriousSeed():void {
+			spriteSelect(23);
+			clearOutput();
+			outputText("\"<i>Ah, that. That's just a seed I acquired from someone on my travels. They said planting it will result in something truly extraordinary to happen but I haven't really had the time to get around to it. Perhaps it'll be better suited for someone with more time on their hands? Maybe for let's say… 30 gems?</i>\"");
+			doYesNo(buyMysteriousSeed, bookMenu);
+		}
+		
+		private function buyMysteriousSeed():void {
+			spriteSelect(23);
+			clearOutput();
+			if (player.gems < 30) {
+				outputText("\n\nGiacomo sighs, indicating you need 30 gem to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("\n\nYou decided to buy the seed. It’s actually fairly large and light brown in color. Other than that it just looks like an ordinary seed. Maybe you'll plant it later to see what it'll grow into. <b>You acquired the Mysterious Seed.</b>");
+				player.gems -= 100;
+				statScreenRefresh();
+				flags[kFLAGS.CHRISTMAS_TREE_LEVEL] = 1;
+				player.createKeyItem("Mysterious Seed", 0, 0, 0, 0);
+				doNext(bookMenu);
+			}
+		}
+		
+		private function pitchDecorations():void {
+			spriteSelect(23);
+			clearOutput();
+			outputText("\"<i>Ah, yes! I make sure to keep these in stock for the season! Though not many people around here really buy these anymore… I can sell these to you for a decent price. Let's say about 100 gems?</i>\"");
+			doYesNo(buyDecorations, bookMenu);
+		}
+		
+		private function buyDecorations():void {
+			spriteSelect(23);
+			clearOutput();
+			if (player.gems < 100) {
+				outputText("\n\nGiacomo sighs, indicating you need 100 gem to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("\n\nYou decided to buy the seed. It’s actually fairly large and light brown in color. Other than that it just looks like an ordinary seed. Maybe you'll plant it later to see what it'll grow intoYou buy the package filled with holiday decorations. Inside are shiny, colorful ornaments, garland, and lights. You can't help but think this will be perfect for decorating the tree back at camp. <b>You acquired Holiday Decorations.</b>");
+				player.gems -= 100;
+				statScreenRefresh();
+				flags[kFLAGS.CHRISTMAS_TREE_LEVEL] = 6;
+				player.createKeyItem("Decorations", 0, 0, 0, 0);
+				doNext(bookMenu);
+			}
 		}
 		
 		private function pitchTorch():void {
