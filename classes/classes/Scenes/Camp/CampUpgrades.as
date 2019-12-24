@@ -72,8 +72,11 @@ flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE]:
 1 - first arcane circle
 2 - second arcane circle
 3 - third arcane circle
-?4 - fourth arcane circle?
-?5 - fifth arcane circle?
+4 - fourth arcane circle
+5 - fifth arcane circle
+6 - sixth arcane circle
+7 - seventh arcane circle
+8 - eighth arcane circle
 
 flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD]:
 1 - readed Warding Tome
@@ -117,7 +120,7 @@ public function buildmisc1Menu():void {
 	}
 	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 2 || flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 3) addButton(3, "Hot Spring", hotspring).hint("Build up hot spring at the camp. (Req. 100 fatigue)");
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 1 && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2) addButton(4, "Sparring Ring", sparringRing).hint("Build up sparring ring at the camp. (Unlock sparring option for all camp members that have this option)(Req. 50 fatigue)");
-	if (player.findPerk(PerkLib.JobElementalConjurer) >= 0 && flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 3) addButton(5, "Arcane Circle", arcaneCircle).hint("Build an arcane circle at the camp. (Unlock elementals summons related options)(Req. 50 fatigue, enough mana and blood)");
+	if (player.findPerk(PerkLib.JobElementalConjurer) >= 0 && flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 8) addButton(5, "Arcane Circle", arcaneCircle).hint("Build an arcane circle at the camp. (Unlock elementals summons related options)(Req. 50 fatigue, enough stones, mana and blood)");
 	if (player.inte >= 50 && flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 1) addButton(6, "Magic Ward", magicWard).hint("Set up a Magic Ward around the camp. (Req. 200 fatigue)");
 	if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1) addButton(7, "Dam", dam).hint("Build up a dam on the steam next to the camp. (Req. 200 fatigue * tier of build dam)");
 	if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1 && flags[kFLAGS.CAMP_UPGRADES_FISHERY] < 1) addButton(8, "Fishery", fishery).hint("Build up a fishery on the steam next to the camp. (Req. 200 fatigue)");
@@ -1184,8 +1187,58 @@ public function arcaneCircle():void {
 				outputText("You lack the proper knowledge and skill to work on this new ritual circle yet!");
 				doNext(playerMenu);
 			}
+		}
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 3) { 
+			if (player.findPerk(PerkLib.ElementalContractRank12) >= 0) {
+				buildFourthArcaneCircle();
+				return;
+			}
+			else {
+				outputText("You lack the proper knowledge and skill to work on this new ritual circle yet!");
+				doNext(playerMenu);
+			}
+		}
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 4) { 
+			if (player.findPerk(PerkLib.ElementalContractRank16) >= 0) {
+				buildFifthArcaneCircle();
+				return;
+			}
+			else {
+				outputText("You lack the proper knowledge and skill to work on this new ritual circle yet!");
+				doNext(playerMenu);
+			} 
+		}
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 5) { 
+			if (player.findPerk(PerkLib.ElementalContractRank20) >= 0) {
+				buildSixthArcaneCircle();
+				return;
+			}
+			else {
+				outputText("You lack the proper knowledge and skill to work on this new ritual circle yet!");
+				doNext(playerMenu);
+			} 
+		}
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 6) { 
+			if (player.findPerk(PerkLib.ElementalContractRank24) >= 0) {
+				buildSeventhArcaneCircle();
+				return;
+			}
+			else {
+				outputText("You lack the proper knowledge and skill to work on this new ritual circle yet!");
+				doNext(playerMenu);
+			} 
+		}
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 7) { 
+			if (player.findPerk(PerkLib.ElementalContractRank28) >= 0) {
+				buildEighthArcaneCircle();
+				return;
+			}
+			else {
+				outputText("You lack the proper knowledge and skill to work on this new ritual circle yet!");
+				doNext(playerMenu);
+			} 
 		}/*
-		if (flags[kFLAGS.] == 3) { 
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 8) { 
 			addAWoodenWalls() 
 			return; 
 		}*/
@@ -1277,6 +1330,146 @@ private function doBuildThirdArcaneCircle():void {
 	HPChange(-225, true);
 	fatigue(fatigueAmount);
 	useMana(300);
+	doNext(camp.returnToCampUseEightHours);
+}
+public function buildFourthArcaneCircle():void {
+	outputText("Do you start work on making fourth arcane circle? (Cost: 16 stones, 300 HP and 400 mana.)\n");
+	checkMaterials();
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 16 && player.HP >= 300 && player.mana >= 400)
+	{
+		doYesNo(doBuildFourthArcaneCircle, noThanks);
+	}
+	else
+	{
+		errorNotEnough();
+		doNext(playerMenu);
+	}
+}
+private function doBuildFourthArcaneCircle():void {
+	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 16;
+	clearOutput();
+	outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw a fourth larger circle around the smaller one inscribing additional protections and ward. Satisfied you nod at the result.");
+	flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] += 1;
+	outputText(" \"<b>You can now perform the rituals to release more of your minions powers!</b>\"");
+	//Gain fatigue.
+	var fatigueAmount:int = 50;
+	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
+	outputText("\n\n");
+	HPChange(-300, true);
+	fatigue(fatigueAmount);
+	useMana(400);
+	doNext(camp.returnToCampUseEightHours);
+}
+public function buildFifthArcaneCircle():void {
+	outputText("Do you start work on making fifth arcane circle? (Cost: 20 stones, 375 HP and 500 mana.)\n");
+	checkMaterials();
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 20 && player.HP >= 375 && player.mana >= 500)
+	{
+		doYesNo(doBuildFifthArcaneCircle, noThanks);
+	}
+	else
+	{
+		errorNotEnough();
+		doNext(playerMenu);
+	}
+}
+private function doBuildFifthArcaneCircle():void {
+	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 20;
+	clearOutput();
+	outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw a fifth larger circle around the smaller one inscribing additional protections and ward. Satisfied you nod at the result.");
+	flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] += 1;
+	outputText(" \"<b>You can now perform the rituals to release more of your minions powers!</b>\"");
+	//Gain fatigue.
+	var fatigueAmount:int = 50;
+	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
+	outputText("\n\n");
+	HPChange(-375, true);
+	fatigue(fatigueAmount);
+	useMana(500);
+	doNext(camp.returnToCampUseEightHours);
+}
+public function buildSixthArcaneCircle():void {
+	outputText("Do you start work on making sixth arcane circle? (Cost: 24 stones, 450 HP and 600 mana.)\n");
+	checkMaterials();
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 24 && player.HP >= 450 && player.mana >= 600)
+	{
+		doYesNo(doBuildSixthArcaneCircle, noThanks);
+	}
+	else
+	{
+		errorNotEnough();
+		doNext(playerMenu);
+	}
+}
+private function doBuildSixthArcaneCircle():void {
+	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 24;
+	clearOutput();
+	outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw a sixth larger circle around the smaller one inscribing additional protections and ward. Satisfied you nod at the result.");
+	flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] += 1;
+	outputText(" \"<b>You can now perform the rituals to release more of your minions powers!</b>\"");
+	//Gain fatigue.
+	var fatigueAmount:int = 50;
+	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
+	outputText("\n\n");
+	HPChange(-450, true);
+	fatigue(fatigueAmount);
+	useMana(600);
+	doNext(camp.returnToCampUseEightHours);
+}
+public function buildSeventhArcaneCircle():void {
+	outputText("Do you start work on making seventh arcane circle? (Cost: 28 stones, 525 HP and 700 mana.)\n");
+	checkMaterials();
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 28 && player.HP >= 525 && player.mana >= 700)
+	{
+		doYesNo(doBuildSeventhArcaneCircle, noThanks);
+	}
+	else
+	{
+		errorNotEnough();
+		doNext(playerMenu);
+	}
+}
+private function doBuildSeventhArcaneCircle():void {
+	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 28;
+	clearOutput();
+	outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw a seventh larger circle around the smaller one inscribing additional protections and ward. Satisfied you nod at the result.");
+	flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] += 1;
+	outputText(" \"<b>You can now perform the rituals to release more of your minions powers!</b>\"");
+	//Gain fatigue.
+	var fatigueAmount:int = 50;
+	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
+	outputText("\n\n");
+	HPChange(-525, true);
+	fatigue(fatigueAmount);
+	useMana(700);
+	doNext(camp.returnToCampUseEightHours);
+}
+public function buildEighthArcaneCircle():void {
+	outputText("Do you start work on making eighth arcane circle? (Cost: 32 stones, 600 HP and 800 mana.)\n");
+	checkMaterials();
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 32 && player.HP >= 600 && player.mana >= 800)
+	{
+		doYesNo(doBuildEighthArcaneCircle, noThanks);
+	}
+	else
+	{
+		errorNotEnough();
+		doNext(playerMenu);
+	}
+}
+private function doBuildEighthArcaneCircle():void {
+	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 32;
+	clearOutput();
+	outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw a eighth larger circle around the smaller one inscribing additional protections and ward. Satisfied you nod at the result.");
+	flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] += 1;
+	outputText(" \"<b>You can now perform the rituals to release more of your minions powers!</b>\"");
+	//Gain fatigue.
+	var fatigueAmount:int = 50;
+	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
+	outputText("\n\n");
+	HPChange(-600, true);
+	fatigue(fatigueAmount);
+	useMana(800);
 	doNext(camp.returnToCampUseEightHours);
 }
 

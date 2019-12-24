@@ -3,10 +3,12 @@ package classes.Scenes.Dungeons.D3
 import classes.BaseContent;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumables.SimpleConsumable;
+import classes.Items.Vehicles;
 import classes.Items.Weapon;
 import classes.Scenes.SceneLib;
 import classes.EventParser;
 import classes.room;
+import classes.StatusEffects;
 
 /**
 	 * ...
@@ -267,7 +269,20 @@ import classes.room;
 		{
 			inRoomedDungeon = false;
 			inRoomedDungeonResume = null;
-			camp.returnToCampUseOneHour();
+			if (flags[kFLAGS.MITZI_RECRUITED] == 1 && player.hasStatusEffect(StatusEffects.CampRathazul)) {
+				clearOutput();
+				outputText("With the threat of the demon queen taken care of, you head back outside where you told Mitzi to wait. When you open the doors, you look around and spot the goblin laying against the wall struggling to stay awake. You head over and barely manage to catch her as she slumps to the side. She shivers and shakes in your arms and a heavy blush is plastered on her face. Fearing something else could be wrong with her, you pick up the drug addled goblin then carry her back to your camp. She mumbles and moans faintly as you carry her. With the amount of mind numbing lust inducing drugs pumped into her, you're not sure if she can simply shake this herself. Maybe Rathazul can help in that regard. Once you reach camp, you head right to the elder rat's lab. He notices you coming over with the barely conscious goblin in your arms.\n\n");
+				outputText("<i>“[name]! It's good to see you return safe and sound. Hm? Is that a goblin you have there?”</i>\n\n");
+				outputText("You elaborate what occurred in Lethice's stronghold and how you saved the diminutive woman from the drider incubus. Rathazul nods his head in understanding then motions for you to lay her on his examination table. After a quick inspection, he turns to you with a concerned look on his face.\n\n");
+				outputText("<i>“Whatever drugs she was given were pretty powerful. They seem to be having a rather profound effect on her body and mind.”</i>\n\n");
+				outputText("You figured that much. However, you wonder if there's anything he can do for her. Is there a way to counteract the drugs pumped into her? The elder rat strokes his beard in thought.\n\n");
+				outputText("<i>“I might be able to create a brew that could help restore her. However, I can not guarantee that it will restore her to the way she used to be.”</i>\n\n");
+				outputText("You suppose it's better than nothing. You ask him what exactly he needs to make the brew.\n\n");
+				outputText("<i>“I would need five scholar teas, five vitality tinctures, one bottle of pure spring water, and one vial of pure honey should be enough for the mixture. Bring them to me once you have them. I'll keep an eye on the poor girl until you return.”</i>\n\n");
+				flags[kFLAGS.MITZI_RECRUITED] = 2;
+				doNext(camp.returnToCampUseOneHour);
+			}
+			else camp.returnToCampUseOneHour();
 		}
 
 		public function gargoyleBadEndD3():void
@@ -366,6 +381,7 @@ import classes.room;
 		{
 			outputText("<b><u>Entrance Room</u></b>\n");
 			outputText("The inside of this cave is damp and dark, but it bears signs of frequent use. The map you got from Zetaz matches the curves of this winding passage exactly. There can be no doubt that this is the place, even though his map ends a short distance into the tunnel. Either he knew it would be a linear path or was so familiar with the territory that he didn’t think it was worth writing down. You can go east, deeper into the mountain towards Lethice’s fortress, or leave to the west.");
+			if (flags[kFLAGS.MITZI_RECRUITED] == 1) outputText("\n\n<b>Mitzi is waiting outside the entrance where you told her. With all the drugs pumped into her you know she'll need help purging her system of them. Perhaps someone with the knowledge of brewing potions can help.</b>");
 			return false;
 		}
 		
@@ -492,6 +508,7 @@ import classes.room;
 			if (!(flagNum & BROWN)) addButton(4, "Brown", takeEgg, BROWN);
 			if (!(flagNum & PURPLE)) addButton(5, "Purple", takeEgg, PURPLE);
 			if (flags[kFLAGS.D3_DEMONIC_SCYTHE] == 0) addButton(6, "Scythe", takeScythe);
+			if (flags[kFLAGS.D3_GOBLIN_MECH_PRIME] == 0) addButton(7, "Mech", takeMech);
 			
 			addButton(14, "Back", resumeFromFight);
 		}
@@ -526,6 +543,23 @@ import classes.room;
 			outputText("You pluck out " + item.longName + " ");			
 			flags[kFLAGS.D3_DEMONIC_SCYTHE] = 1;
 			inventory.takeItem(item, playerMenu);
+		}
+		
+		private function takeMech():void
+		{
+			clearOutput();
+			outputText("A large goblin mech similar to the one you own but of a way better quality is parked amongst the pile of trash the basilisk’s gathered. ");
+			if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
+				var item:Vehicles;
+				item = vehicles.GOBMPRI;
+				outputText("You decide to haul it back home and call on the walkie talkie system in your mech to tell your daughters to come and pick it up for you. It should be at camp the next time you're there and ready to install any and all upgrades you already own.");
+				flags[kFLAGS.D3_GOBLIN_MECH_PRIME] = 1;
+				inventory.takeItem(item, playerMenu);
+			}
+			else {
+				outputText("Sadly you don't have the resources or the personnel to haul back this new mech at the time.");
+				doNext(playerMenu);
+			}
 		}
 		
 		private function fallbackFromMagpieHallS():void

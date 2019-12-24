@@ -261,7 +261,8 @@ public class MaleSpiderMorphScene extends BaseContent
 			else outputText("paying no heed to the thick flows of spunk that drip down your [legs].");
 			player.slimeFeed();
 			//Pregnancy Goes Here
-			player.knockUp(PregnancyStore.PREGNANCY_SPIDER, PregnancyStore.INCUBATION_SPIDER, 151);
+			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+            else player.knockUp(PregnancyStore.PREGNANCY_SPIDER, PregnancyStore.INCUBATION_SPIDER, 151);
 			player.orgasm();
 			cleanupAfterCombat();
 		}
@@ -406,7 +407,8 @@ public class MaleSpiderMorphScene extends BaseContent
 			outputText("You sigh and close your eyes, slowly slumping down while your hips keep twitching.  You've been sated, and though your body keeps hungering for more, you slip into unconsciousness.");
 			player.slimeFeed();
 			player.orgasm();
-			player.knockUp(PregnancyStore.PREGNANCY_SPIDER, PregnancyStore.INCUBATION_SPIDER);
+			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+            else player.knockUp(PregnancyStore.PREGNANCY_SPIDER, PregnancyStore.INCUBATION_SPIDER);
 			cleanupAfterCombat();
 		}
 

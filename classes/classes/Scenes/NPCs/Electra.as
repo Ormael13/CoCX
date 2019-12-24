@@ -22,17 +22,17 @@ use namespace CoC;
 		public var electraScene:ElectraFollower = SceneLib.electraScene;
 		
 		public function moveLightningClaw():void {
-			if (game.flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 1) outputText("Electra");
+			if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 1) outputText("Electra");
 			else outputText("The raiju");
-			outputText(" rushes at you with a mad glare trying to hit you with her claws.");
+			outputText(" rushes at you with a mad glare, trying to hit you with her claws.");
 			HitOrMiss();
 			HitOrMiss();
 		}
 		private function HitOrMiss():void {
 			outputText("\n\n");
-			if (game.flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 1) outputText("Electra");
+			if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 1) outputText("Electra");
 			else outputText("The raiju");
-			outputText(" attempt to strike you with her claw.");
+			outputText(" attempts to strike you with her claw.");
 			if (player.getEvasionRoll()) {
 				outputText("\nThrowing yourself out of the way, you manage to avoid the strike.");
 			}
@@ -49,22 +49,24 @@ use namespace CoC;
 		}
 		
 		public function moveStaticDischarge():void {
-			if (game.flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 1) outputText("Electra");
+			if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 1) outputText("Electra");
 			else outputText("The raiju");
-			outputText(" touches you with her claw and you feel some of her electricity rush and course through your body slowly building your arousal. This is very bad; there is no telling how long you will be able to stand it.");
+			outputText(" touches you with her claw and you feel some of her electricity rush and course through your body, slowly building your arousal. This is very bad! There is no telling how long you will be able to stand it.");
+			var discharge:Number = 4 + int(player.sens) / 8;
 			if (player.hasStatusEffect(StatusEffects.RaijuStaticDischarge)) {
 				outputText(" Her repeated touches increase the voltage!!!!");
-				player.dynStats("lus", 8 + int(player.sens) / 8);
+				discharge += 4;
+				player.dynStats("lus", discharge);
 			}
 			else {
 				player.createStatusEffect(StatusEffects.RaijuStaticDischarge, 0, 0, 0, 0);
-				player.dynStats("lus", 4 + int(player.sens) / 8);
+				player.dynStats("lus", discharge);
 			}
 			outputText("\n\n");
 		}
 		
 		public function moveMasturbate():void {
-			if (game.flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 1) outputText("Electra");
+			if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 1) outputText("Electra");
 			else outputText("The raiju");
 			var damageLust:Number = 0;
 			damageLust += Math.round(this.lib / 10);
@@ -76,9 +78,9 @@ use namespace CoC;
 			createStatusEffect(StatusEffects.RaijuUltReady,0,0,0,0);
 		}
 		public function moveOrgasmicLightningBolt():void {
-			if (game.flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 1) outputText("Electra");
+			if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 1) outputText("Electra");
 			else outputText("The raiju");
-			outputText(" screams in pleasure as a bolt of lightning rush out of her pussy straight toward you.");
+			outputText(" screams in pleasure as a bolt of lightning rushes out of her pussy straight toward you.");
 			if (player.getEvasionRoll()) {
 				outputText(" Throwing yourself out of the way, you manage to avoid the bolt.");
 			}
@@ -116,10 +118,8 @@ use namespace CoC;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			/*if (flags[kFLAGS.ETNA_FOLLOWER] >= 2) etnaScene.etnaRapeIntro2();
-			else if (flags[kFLAGS.ETNA_AFFECTION] > 75) etnaScene.etnaReady2Come2Camp();
-			else if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] < 1 && flags[kFLAGS.ETNA_AFFECTION] > 15) etnaScene.etnaRape3rdWin();
-			else */electraScene.PlayerSexElectra();
+			if (flags[kFLAGS.ELECTRA_FOLLOWER] >= 2) electraScene.PlayerSexElectraPostSpar();
+			else electraScene.PlayerSexElectra();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -129,15 +129,51 @@ use namespace CoC;
 		
 		public function Electra() 
 		{
-			if (game.flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 1) {
+			if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 1) {
 				this.a = "";
 				this.short = "Electra";
-				this.long = "You are fighting Electra, a lightning imbued weasel morph. She is fiercely masturbating as she looks you from a distance and you have issues figuring whenever she is going to strike.";
+				this.long = "You are fighting Electra, a lightning imbued weasel morph. She is fiercely masturbating as she looks at you from a distance and you have issues figuring out whenever she is going to strike.";
 			}
 			else {
 				this.a = "the ";
 				this.short = "raiju";
-				this.long = "You are fighting a Raiju, a lightning imbued weasel morph. She is fiercely masturbating as she looks you from a distance and you have issues figuring whenever she is going to strike.";
+				this.long = "You are fighting a Raiju, a lightning imbued weasel morph. She is fiercely masturbating as she looks at you from a distance and you have issues figuring out whenever she is going to strike.";
+			}
+			if (flags[kFLAGS.ELECTRA_LVL_UP] < 2) {
+				initStrTouSpeInte(60, 110, 100, 150);
+				initWisLibSensCor(150, 220, 160, 80);
+				this.weaponAttack = 12;
+				this.armorDef = 12;
+				this.armorMDef = 10;
+				this.bonusHP = 100;
+				this.level = 30;
+			}
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 2) {
+				initStrTouSpeInte(70, 125, 120, 160);
+				initWisLibSensCor(160, 250, 180, 80);
+				this.weaponAttack = 15;
+				this.armorDef = 18;
+				this.armorMDef = 20;
+				this.bonusHP = 150;
+				this.level = 36;
+			}
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 3) {
+				initStrTouSpeInte(80, 140, 140, 170);
+				initWisLibSensCor(170, 280, 200, 80);
+				this.weaponAttack = 18;
+				this.armorDef = 24;
+				this.armorMDef = 30;
+				this.bonusHP = 200;
+				this.level = 42;
+			}
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 4) {
+				initStrTouSpeInte(90, 165, 160, 180);
+				initWisLibSensCor(180, 310, 220, 80);
+				this.weaponAttack = 21;
+				this.armorDef = 30;
+				this.armorMDef = 40;
+				this.bonusHP = 250;
+				this.level = 48;
 			}
 			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,60,0,0,0);
@@ -151,20 +187,13 @@ use namespace CoC;
 			this.skinTone = "light";
 			this.hairColor = "blue";
 			this.hairLength = 13;
-			initStrTouSpeInte(60, 110, 100, 150);
-			initWisLibSensCor(150, 220, 80, 80);
 			this.weaponName = "claw";
 			this.weaponVerb="claw-slash";
-			this.weaponAttack = 12;
 			this.armorName = "indecent spider silk robe";
-			this.armorDef = 12;
-			this.armorMDef = 10;
-			this.bonusHP = 100;
 			this.bonusLust = 50;
 			this.lust = 30;
 			this.lustVuln = .8;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 30;
 			this.gems = 500;
 			this.drop = new ChainedDrop().
 					add(armors.INDESSR,1/10).
@@ -175,10 +204,23 @@ use namespace CoC;
 			this.lowerBody = LowerBody.RAIJU;
 			this.tailType = Tail.RAIJU;
 			this.tailRecharge = 0;
-			//if (flags[kFLAGS.ETNA_FOLLOWER] > 1 || flags[kFLAGS.ETNA_TALKED_ABOUT_HER] > 1) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.LightningNature, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			//if (flags[kFLAGS.ELECTRA_LVL_UP] > 1 || flags[kFLAGS.ETNA_TALKED_ABOUT_HER] > 1) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			if (flags[kFLAGS.ELECTRA_LVL_UP] >= 2) {
+				this.createPerk(PerkLib.BasicSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.JobSeducer, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.ELECTRA_LVL_UP] >= 3) {
+				this.createPerk(PerkLib.HalfStepToImprovedSelfControl, 0, 0, 0, 0);
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.ELECTRA_LVL_UP] >= 4) {
+				this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
+			}
 			checkMonster();
 		}
 		

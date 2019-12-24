@@ -13,12 +13,13 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.*;
 import classes.Items.*;
+import classes.Scenes.Camp.CampScenes;
+import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.Dreams;
 import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.SceneLib;
-import classes.Scenes.Camp.UniqueCampScenes;
 import classes.StatusEffects.VampireThirstEffect;
 
 public class PlayerEvents extends BaseContent implements TimeAwareInterface {
@@ -29,6 +30,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private var campUniqueScene:UniqueCampScenes = new UniqueCampScenes();
+		private var campScenes:CampScenes = new CampScenes();
 		private var checkedTurkey:int; //Make sure we test each of these events just once in timeChangeLarge
 		private var checkedDream:int;
 		private var displayedBeeCock:Boolean;
@@ -159,6 +161,24 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.statusEffectv4(StatusEffects.CampSparingNpcsTimers4) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 4, -1);
 				if (player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) <= 0 && player.statusEffectv2(StatusEffects.CampSparingNpcsTimers4) <= 0 && player.statusEffectv3(StatusEffects.CampSparingNpcsTimers4) <= 0 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers4) <= 0) {
 					player.removeStatusEffect(StatusEffects.CampSparingNpcsTimers4);
+				}
+			}
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) {
+				if (player.statusEffectv1(StatusEffects.CampSparingNpcsTimers5) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 1, -1);
+				if (player.statusEffectv2(StatusEffects.CampSparingNpcsTimers5) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 2, -1);
+				if (player.statusEffectv3(StatusEffects.CampSparingNpcsTimers5) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, -1);
+				if (player.statusEffectv4(StatusEffects.CampSparingNpcsTimers5) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 4, -1);
+				if (player.statusEffectv1(StatusEffects.CampSparingNpcsTimers5) <= 0 && player.statusEffectv2(StatusEffects.CampSparingNpcsTimers5) <= 0 && player.statusEffectv3(StatusEffects.CampSparingNpcsTimers5) <= 0 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers5) <= 0) {
+					player.removeStatusEffect(StatusEffects.CampSparingNpcsTimers5);
+				}
+			}
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers6)) {
+				if (player.statusEffectv1(StatusEffects.CampSparingNpcsTimers6) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers6, 1, -1);
+				if (player.statusEffectv2(StatusEffects.CampSparingNpcsTimers6) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers6, 2, -1);
+				if (player.statusEffectv3(StatusEffects.CampSparingNpcsTimers6) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers6, 3, -1);
+				if (player.statusEffectv4(StatusEffects.CampSparingNpcsTimers6) > 0) player.addStatusValue(StatusEffects.CampSparingNpcsTimers6, 4, -1);
+				if (player.statusEffectv1(StatusEffects.CampSparingNpcsTimers6) <= 0 && player.statusEffectv2(StatusEffects.CampSparingNpcsTimers6) <= 0 && player.statusEffectv3(StatusEffects.CampSparingNpcsTimers6) <= 0 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers6) <= 0) {
+					player.removeStatusEffect(StatusEffects.CampSparingNpcsTimers6);
 				}
 			}
 			//Sidonie checks
@@ -593,6 +613,8 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				if (flags[kFLAGS.ALRAUNE_GROWING] > 0 && flags[kFLAGS.ALRAUNE_GROWING] < 15) flags[kFLAGS.ALRAUNE_GROWING]++;
 				//Reset SelfSustain & RepresLust daily counter
 				if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] > 0) flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] = 0;
+				//Reset Electra Strom Jewel daiy limit
+				if (flags[kFLAGS.ELECTRA_DAILY_STORM_JEWEL] > 0) flags[kFLAGS.ELECTRA_DAILY_STORM_JEWEL] = 0;
 				//Reset Etna Venom Vial daiy limit
 				if (flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] > 0) flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] = 0;
 				//Reset Ceani Training daiy limit
@@ -613,6 +635,34 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					player.spe -= 5;
 					player.inte -= 12;
 				}
+				//Tripxi firearms selection update
+				if (player.statusEffectv2(StatusEffects.TelAdreTripxi) == 3) {
+					player.addStatusValue(StatusEffects.TelAdreTripxi, 2, -2);
+					if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 1, 1);
+					if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 2, 1);
+					if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 3, 1);
+					if (player.statusEffectv4(StatusEffects.TelAdreTripxiGuns1) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 4, 1);
+					if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 1, 1);
+					if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 2, 1);
+					if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 3, 1);
+					if (player.statusEffectv4(StatusEffects.TelAdreTripxiGuns2) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 4, 1);
+					if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 1, 1);
+					if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 2, 1);
+					if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns3) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 3, 1);
+					if (player.statusEffectv4(StatusEffects.TelAdreTripxiGuns3) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 4, 1);
+					if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns4, 1, 1);
+					if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns4) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns4, 2, 1);
+					if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns4) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns4, 3, 1);
+					if (player.statusEffectv4(StatusEffects.TelAdreTripxiGuns4) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns4, 4, 1);
+					if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 1, 1);
+					if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 2, 1);
+					if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns5) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 3, 1);
+					if (player.statusEffectv4(StatusEffects.TelAdreTripxiGuns5) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 4, 1);
+					if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns6, 1, 1);
+					if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns6) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns6, 2, 1);
+					if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns6) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns6, 3, 1);
+					if (player.statusEffectv4(StatusEffects.TelAdreTripxiGuns6) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns6, 4, 1);
+				}
 				//Daily Fishery production
 				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) {
 					if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) {
@@ -621,6 +671,14 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					}
 					if (flags[kFLAGS.CEANI_FOLLOWER] > 0) flags[kFLAGS.FISHES_STORED_AT_FISHERY] -= 5;
 				}
+				//Daily barrels refill
+				if (player.hasStatusEffect(StatusEffects.MitziDaughtersBarrels)) {
+					if (rand(3) == 0) player.addStatusValue(StatusEffects.MitziDaughtersBarrels, 1, 5);
+					else {
+						if (rand(2) == 0) player.addStatusValue(StatusEffects.MitziDaughtersBarrels, 2, 5);
+						else player.addStatusValue(StatusEffects.MitziDaughtersBarrels, 3, 5);
+					}
+				}
 				//Daily regeneration of soulforce for non soul cultivators && Metamorph bonus SF gain till cap
 				if (player.findPerk(PerkLib.JobSoulCultivator) < 0 && (player.soulforce < player.maxSoulforce())) {
 					player.soulforce += 50;
@@ -628,7 +686,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				}
 				if (player.perkv1(PerkLib.Metamorph) < 18) player.addPerkValue(PerkLib.Metamorph, 1, 1)
 				//Daily regeneration of mana for non mages
-				if (player.findPerk(PerkLib.JobSorcerer) < 0 && (player.mana < player.maxMana())) {
+				if (player.findPerk(PerkLib.JobSorcerer) < 0 && player.findPerk(PerkLib.JobElementalConjurer) < 0 && (player.mana < player.maxMana())) {
 					player.mana += 100;
 					if (player.mana > player.maxMana()) player.mana = player.maxMana();
 				}
@@ -730,13 +788,62 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					if (player.hasPerk(PerkLib.VampiricBloodsteamEvolved) && player.statusEffectv2(StatusEffects.VampireThirst) < 1) player.addStatusValue(StatusEffects.VampireThirst, 2, 1);
 					else vthirst.modSatiety(-1);
 				}
+				//Getting chrismas tree
+				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 1) {
+					outputText("Around the edge of your camp, you spot some plant-life beginning to sprout.  The barren, wasteland crust is fractured and broken, giving up a leafy green shoot.  It only reaches up to your knee, but the plant looks healthy and young.  Perhaps it will grow larger?  There is a central stem that supports most of the weight, but a dozen branches fork off, supporting a bevy of shiny green leaves. Looks like the seed was able to take root in the barren land after all.\n");
+					flags[kFLAGS.CHRISTMAS_TREE_GROWTH_COUNTER] = 0;
+					flags[kFLAGS.CHRISTMAS_TREE_LEVEL] = 2;
+					needNext = true;
+				}
+				if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 9 && !player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
+					campScenes.PCGoblinDaughtersBuilingWorkshop();
+					needNext = true;
+				}
+				if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 9 && player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
+					var nails:Number = 0;
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) nails += 10 + rand(21);
+					var metalpieces:Number = 0;
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) metalpieces += 1;
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) metalpieces += 1;
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) metalpieces += 1;
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) metalpieces += 1;
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) metalpieces += 1;
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) metalpieces += 1;
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) metalpieces += 1;
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) metalpieces += 1;
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) metalpieces += 1;
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) metalpieces += 1;
+					var mechanism:Number = 0;
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) mechanism += 1;
+					var energycore:Number = 0;
+					if (rand(100) > flags[kFLAGS.PC_GOBLIN_DAUGHTERS]) energycore += 1;
+					if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshopSpareParts)) {
+						if (nails > 0) player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 1, nails);
+						if (metalpieces > 0) player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 2, metalpieces);
+						if (mechanism > 0) player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 3, mechanism);
+						if (energycore > 0) player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 4, energycore);
+					}
+					else {
+						nails += 1;
+						player.createStatusEffect(StatusEffects.PCDaughtersWorkshopSpareParts,nails,metalpieces,mechanism,energycore);
+					}
+				}
 			}
 			return needNext;
 		}
 
 		private function hourlyHunger():Boolean {
 			var needNext:Boolean = false;
-			if ((flags[kFLAGS.HUNGER_ENABLED] > 0 && flags[kFLAGS.CURSE_OF_THE_JIANGSHI] != 2 && flags[kFLAGS.CURSE_OF_THE_JIANGSHI] != 3) || prison.inPrison) {
+			if ((flags[kFLAGS.HUNGER_ENABLED] > 0 && (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] > 3)) || prison.inPrison) {
 				var multiplier:Number = 1.0;
 				if (player.findPerk(PerkLib.Survivalist) >= 0) multiplier -= 0.2;
 				if (player.findPerk(PerkLib.Survivalist2) >= 0) multiplier -= 0.2;
@@ -1024,22 +1131,23 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 			//Lightning Affinity
 			if ((player.raijuScore() >= 7 || player.thunderbirdScore() >= 12) && player.findPerk(PerkLib.LightningAffinity) < 0) {
 				outputText("\nYou suddenly feel a rush of electricity run across your skin as your arousal builds up and begin to masturbate in order to get rid of your creeping desire. However even after achieving orgasm not only are you still aroused but you are even hornier than before! You realise deep down that the only way for you to be freed from this jolting pleasure is to have sex with a partner!\n");
-				outputText("\n(<b>Gained the lightning affinity perk, electrified desire perk, Pleasure bolt ability and Orgasmic lightning strike ability!</b>)\n");
+				outputText("\n(<b>Gained the lightning affinity perk, electrified desire perk, Lightning claw perk, Pleasure bolt ability and Orgasmic lightning strike ability!</b>)\n");
 				if (player.thunderbirdScore() >= 12) player.createStatusEffect(StatusEffects.IsThunderbird,0,0,0,0);
 				if (player.raijuScore() >= 7) player.createStatusEffect(StatusEffects.IsRaiju,0,0,0,0);
 				player.createPerk(PerkLib.LightningAffinity, 0, 0, 0, 0);
 				player.createPerk(PerkLib.ElectrifiedDesire, 0, 0, 0, 0);
+				player.createPerk(PerkLib.LightningClaw, 0, 0, 0, 0);
 				needNext = true;
 			}
 			else if (player.raijuScore() < 7 && player.findPerk(PerkLib.LightningAffinity) >= 0 && player.hasStatusEffect(StatusEffects.IsRaiju) && !player.hasStatusEffect(StatusEffects.IsThunderbird)) {
-				outputText("\nYour natural electricity production start dropping at a dramatic rate until finally there is no more. You realise you likely aren’t raiju enough to build electricity anymore which, considering you can reach satisfaction again, might not be a bad thing.\n\n<b>(Lost the lightning affinity perk, electrified desire perk, Pleasure bolt ability and Orgasmic lightning strike ability!)</b>\n");
+				outputText("\nYour natural electricity production start dropping at a dramatic rate until finally there is no more. You realise you likely aren’t raiju enough to build electricity anymore which, considering you can reach satisfaction again, might not be a bad thing.\n\n<b>(Lost the lightning affinity perk, electrified desire perk, Lightning claw perk, Pleasure bolt ability and Orgasmic lightning strike ability!)</b>\n");
 				player.removeStatusEffect(StatusEffects.IsRaiju);
 				player.removePerk(PerkLib.LightningAffinity);
 				player.removePerk(PerkLib.ElectrifiedDesire);
 				needNext = true;
 			}
 			else if (player.thunderbirdScore() < 12 && player.findPerk(PerkLib.LightningAffinity) >= 0 && player.hasStatusEffect(StatusEffects.IsThunderbird) && !player.hasStatusEffect(StatusEffects.IsRaiju)) {
-				outputText("\nYour natural electricity production start dropping at a dramatic rate until finally there is no more. You realise you likely aren’t thunderbird enough to build electricity anymore which, considering you can reach satisfaction again, might not be a bad thing.\n\n<b>(Lost the lightning affinity perk, electrified desire perk, Pleasure bolt ability and Orgasmic lightning strike ability!)</b>\n");
+				outputText("\nYour natural electricity production starts dropping at a dramatic rate until finally there is no more. You realise you likely aren’t raiju enough to build electricity anymore which, considering you can reach satisfaction again, might not be a bad thing.\n\n<b>(Lost the lightning affinity perk, electrified desire perk, Lightning claw perk, Pleasure bolt ability and Orgasmic lightning strike ability!)</b>\n");
 				player.removeStatusEffect(StatusEffects.IsThunderbird);
 				player.removePerk(PerkLib.LightningAffinity);
 				player.removePerk(PerkLib.ElectrifiedDesire);
@@ -1067,6 +1175,23 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				player.removePerk(PerkLib.LightningAffinity);
 				needNext = true;
 			}*/
+			//Yeti stuff
+			if (player.rearBody.type == RearBody.YETI_FUR && !player.hasStatusEffect(StatusEffects.YetiScarf)) {
+				player.createStatusEffect(StatusEffects.YetiScarf,0,0,0,0);
+			}
+			if (player.rearBody.type != RearBody.YETI_FUR && player.hasStatusEffect(StatusEffects.YetiScarf)) {
+				player.removeStatusEffect(StatusEffects.YetiScarf);
+			}
+			if (player.lowerBody == LowerBody.YETI && player.arms.type == Arms.YETI && player.findPerk(PerkLib.BigHandAndFeet) < 0) {
+				outputText("\nGeeze with those oversized hands and foot you should just drop your weapon and punch things out cold. Why do you even need a weapon for anyway?\n\n<b>(Lost the Big hand and feet perk!)</b>\n");
+				player.createPerk(PerkLib.BigHandAndFeet, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if ((player.lowerBody != LowerBody.YETI || player.arms.type != Arms.YETI) && player.findPerk(PerkLib.BigHandAndFeet) >= 0) {
+				outputText("\nYour limbs now back to normal size it might be smart to use weapon over your bare hands and feet for fighting.\n\n<b>(Lost the Big hand and feet perk!)</b>\n");
+				player.removePerk(PerkLib.BigHandAndFeet);
+				needNext = true;
+			}
 			//Necromancy perk
 			if (((player.tailType == Tail.CAT && player.tailCount == 2) || player.tailType == Tail.NEKOMATA_FORKED_2_3 || player.tailType == Tail.NEKOMATA_FORKED_1_3) && player.findPerk(PerkLib.Necromancy) < 0) {
 				outputText("\nYou feel tremendous fell powers investing your being. You blink and almost jump as you realise you can literally can see the souls of the dead as well as those of the living now. Your powers over life and death have grown as <b>you seem to have acquired a natural talents for the darker arts.</b>\n\n(<b>Gained Perk: Necromancy</b>)\n");
@@ -1133,7 +1258,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				player.removeStatusEffect(StatusEffects.HinezumiCoat);
 				needNext = true;
 			}
-			//Goblinoid blood
+			//Goblinoid blood &7 Bouncy body
 			if (player.goblinScore() >= 10 && player.findPerk(PerkLib.GoblinoidBlood) < 0) {
 				outputText("\nAs you become a goblinoid again you can feel the chemicals pumped in by your gadgets resume working.\n");
 				outputText("\n(<b>Gained Perk: Goblinoid blood</b>)\n");
@@ -1144,6 +1269,18 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				outputText("\nYou feel the drugs in your blood losing effect. Damnit, of course it won’t work since those chemical power ups were tested for goblinoids only. Guess perhaps a in few years you could try and develop a variant.\n");
 				outputText("\n<b>(Lost Perk: Goblinoid blood)</b>\n");
 				player.removePerk(PerkLib.GoblinoidBlood);
+				needNext = true;
+			}
+			if (player.goblinScore() >= 10 && player.findPerk(PerkLib.BouncyBody) < 0) {
+				outputText("\nGeeze with how round and small you've become its like you’ve got natural cushion now. The worst that will happen is that you'll get yourself punted by some random people mistaking you for a ball. Your body is so bouncy that it naturally has a chance to reduce damage from attacks.\n");
+				outputText("\n(<b>Gained Perk: Bouncy body</b>)\n");
+				player.createPerk(PerkLib.BouncyBody, 0, 0, 0, 0);
+				needNext = true;
+			}
+			else if (player.goblinScore() < 10 && player.findPerk(PerkLib.BouncyBody) >= 0 && player.findPerk(PerkLib.NaturalPunchingBagFinalForm) < 0) {
+				outputText("\nYou're not as cushiony as you used to be. Better avoid getting hit.\n");
+				outputText("\n<b>(Lost Perk: Bouncy body)</b>\n");
+				player.removePerk(PerkLib.BouncyBody);
 				needNext = true;
 			}
 			//H class Heaven Tribulation
@@ -1716,6 +1853,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				if (player.statusEffectv1(StatusEffects.KonstantinWeaponSharpening) <= 0) player.removeStatusEffect(StatusEffects.KonstantinWeaponSharpening);
 				else player.addStatusValue(StatusEffects.KonstantinWeaponSharpening, 1, -1);
 			}
+			if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) player.removeStatusEffect(StatusEffects.AlchemicalThunderBuff);
 			if (player.findPerk(PerkLib.FutaForm) >= 0) { //Futa checks
 				if (!player.hasCock()) { //(Dick regrowth)
 					player.createCock();

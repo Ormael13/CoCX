@@ -12,6 +12,10 @@ package classes.Items
 	{
 		public static const DEFAULT_VALUE:Number = 6;	//cena dla broni dyst bazowa to 50 gems a nie 40 gems
 		public static const NOTHING:WeaponRange = new Nothing();	//cena broni palnych to: (wart atk * 20) + (ilość naboi w magazynku * 30)
+		public const DESEAGL:WeaponRange = new WeaponRange("DesEagl", "DesertEagle", "Desert Eagle", "a Desert Eagle", "shot", 25, 620, "A single hand firearm, the desert eagle has the largest bullets out of the pistol family. Its shots are deadly and precises through the gun has one hell of a recoil.", "Rifle");
+		public const M1CERBE:WeaponRange = new WeaponRange("M1Cerbe", "M1Cerberus", "M1 Cerberus", "a M1 Cerberus", "shot", 45, 1080, "A rifle prized for its precision and versatility, the Cerberus shoots multiple bullet in salvo ensuring that if one shot land all the others do with minimal recoil.", "2H Firearm");
+		public const HARPGUN:WeaponRange = new WeaponRange("HarpGun", "HarpoonGun", "Harpoon gun", "a Harpoon gun", "shot", 50, 1030, "Standard issue goblin weaponry for underwater combat.", "Rifle");
+		public const TRFATBI:WeaponRange = new WeaponRange("TrFatbi", "TripxiFatbilly", "Tripxi Fatbilly", "a Tripxi Fatbilly", "shot", 260, 5230, "Tripxi has one moto… if you can't aim right, deliver an artillery shot so wide it hit everything in the next 200 yard reliably.", "2H Firearm");
 		//pump action shotgun, Lawgiver (wzorowany na broni z Judge Dreed xD), x
 		public const ADBSCAT:WeaponRangeWithPerk = new WeaponRangeWithPerk("DBScatt", "A.D.B.Scattergun", "antique double barrel scattergun", "an antique double barrel scattergun", "shot", 28, 920, "This is a double barrel scattergun. It's effective at short range but poor at long range. When fighting multiple enemies it bullet splitting after leaving muzzle cause to deal a bit more damage to enemies.", "Rifle",
 				PerkLib.Accuracy2,60,0,0,0);

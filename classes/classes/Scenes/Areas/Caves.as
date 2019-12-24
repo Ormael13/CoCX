@@ -57,7 +57,7 @@ use namespace CoC;
 				}
 			}
 			//Ebon Labyrinth
-			if (flags[kFLAGS.EBON_LABYRINTH] < 1) {
+			if (flags[kFLAGS.EBON_LABYRINTH] < 1 && rand(3) == 0) {
 				dungeonEL.ebonlabyrinthdiscovery();
 				return;
 			}

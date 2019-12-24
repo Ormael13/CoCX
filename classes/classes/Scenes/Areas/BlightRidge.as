@@ -72,8 +72,9 @@ use namespace CoC;
 				return;
 			}
 			//Siegweird
-			if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 3 && rand(4) == 0) {
-				SceneLib.siegweirdFollower.siegweirdFirstEncounter();
+			if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3 && rand(4) == 0) {
+				if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 3) SceneLib.siegweirdFollower.siegweirdFirstEncounter();
+				else SceneLib.siegweirdFollower.siegweirdRepeatEncounterPostFight();
 				return;
 			}
 			if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 2 && rand(4) == 0) {

@@ -293,20 +293,16 @@ public class Izumi extends Monster
 		public function roundhouseKick():void
 		{
 			outputText("Izumi leaps backwards onto one foot, spinning around and unleashing a thundering roundhouse kick.  Luckily, you manage to duck just in time, avoiding what surely would have been a monstrously powerful blow.  Unfortunately, as Izumi’s leg scythes through the air over your head, you find your gaze naturally following the line of her thigh muscles until you’re staring directly up the fluttering folds of Izumi’s increasingly impractical kimono.\n\n");
-
 			if (player.cor >= 50 || player.lib >= 50 || player.sens >= 50)
 			{
 				outputText("You fall backwards and stagger away, already feeling a flush of warmth colouring your cheeks, trying to drag your mind back to the fight and away from... other things.");
-
 				player.dynStats("lus", 10 + player.lib / 10);
 			}
 			else
 			{
 				outputText("You furrow a brow at the Oni's ineffectual attack, not entirely sure if she was intending to hurt you or turn you on.  Her thighs did look rather tantalizing though...");
-
 				player.dynStats("lus", 5 + player.lib / 20);
 			}
-
 		}
 		
 		// Bind player for 3 turns. If the player doesn't break out in time, they take huge damage.

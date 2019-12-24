@@ -1099,7 +1099,10 @@ import classes.lists.Gender;
 				outputText("\n\nAndy chuckles as you look down at him, \"<i>Sorry about the knot, [name].</i>\" You shrug because it’s no big deal. You can feel the hot wetness of Andy’s seed inside you as the two of you wait for the swelling of his knot to go down.");
 				outputText("\n\nThe two of you talk, holding an engaging conversation that discusses a range of unimportant but interesting topics. When his dick and knot finally deflate and send a cascade of satyr spunk dripping from your used hole you stay for a minute and enjoy his company. After a short time the two of you rise and you reward him with a kiss before grabbing your [armor] and pulling it on as you head back to camp.");
 			}
-			if (player.hasVagina()) player.knockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR, 50); //2x chance of pregnancy
+			if (player.hasVagina()) {
+				if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				else player.knockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR, 50); //2x chance of pregnancy
+			}
 			else player.buttKnockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR, 50);
 			player.slimeFeed();
 			player.orgasm();
@@ -1394,7 +1397,8 @@ import classes.lists.Gender;
 			dynStats("lib", 1, "sens", 2, "cor", 1);
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-			if (player.hasVagina()) player.knockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR);
+			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			else if (player.hasVagina()) player.knockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR);
 			player.buttKnockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR);
 			doNext(camp.returnToCampUseOneHour);
 		}

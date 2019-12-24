@@ -54,12 +54,14 @@ private function benoitKnocksUpPCCheck():void {
 	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0 || player.findPerk(PerkLib.BasiliskWomb) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
 		if (player.findPerk(PerkLib.BasiliskWomb) >= 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 1) {
 			if (player.pregnancyType != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0) {
-				player.knockUp(PregnancyStore.PREGNANCY_BENOIT, PregnancyStore.INCUBATION_BASILISK);
+				if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				else player.knockUp(PregnancyStore.PREGNANCY_BENOIT, PregnancyStore.INCUBATION_BASILISK);
 			}
 			if (player.pregnancyIncubation > 0) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
 		}
 		else {
-			player.knockUp(PregnancyStore.PREGNANCY_BASILISK, PregnancyStore.INCUBATION_BASILISK);
+			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			else player.knockUp(PregnancyStore.PREGNANCY_BASILISK, PregnancyStore.INCUBATION_BASILISK);
 		}
 	}
 }

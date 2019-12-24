@@ -140,12 +140,10 @@ public class Lumi extends BaseContent {
 		addButton(0, "Lust Draft", lumiLustDraftPitch);
 		addButton(1, "Goblin Ale", lumiPitchGobboAle);
 		addButton(2, "Ovi Elixir", lumiPitchOviElixer);
+		//addButton(5, "", lumiPitchGoblinTechnomancerClothes);
+		//addButton(6, "", lumiPitchTechnomancerBra);
+		//addButton(7, "", lumiPitchTechnomancerPanties);
 		addButton(14, "Leave", lumiLabChoices);
-        /*The player is given a list of choices, clicking on one gives the description and the price, like Giacomo.
-		simpleChoices(consumables.L_DRAFT.shortName, lumiLustDraftPitch,
-                consumables.GOB_ALE.shortName, lumiPitchGobboAle,
-                consumables.OVIELIX.shortName, lumiPitchOviElixer,
-                "", null, "Leave", lumiLabChoices);*/
     }
 //Lust Draft
     private function lumiLustDraftPitch():void {
@@ -165,6 +163,30 @@ public class Lumi extends BaseContent {
     }
 //Ovi Elixir
     private function lumiPitchOviElixer():void {
+        spriteSelect(37);
+        clearOutput();
+        outputText("You point at the curious hexagonal bottle. \"<i>De Oviposar Elixir? Made baithsed on da giant bee's special stuff dey give deir queen. It will help make de burfing go faster, an if you dwink it while you awen pweggy, iw will give you some eggs to burf later. More dwinks, eqwals more and biggar eggs. Lumi charges 45 gems for each dose.</i>\"\n\n");
+        outputText("Will you buy the Ovi Elixir?");
+        doYesNo(curry(lumiPurchase, consumables.OVIELIX), lumiShop);
+    }
+//Goblin Technomancer clothes
+    private function lumiPitchGoblinTechnomancerClothes():void {
+        spriteSelect(37);
+        clearOutput();
+        outputText("You point at the curious hexagonal bottle. \"<i>De Oviposar Elixir? Made baithsed on da giant bee's special stuff dey give deir queen. It will help make de burfing go faster, an if you dwink it while you awen pweggy, iw will give you some eggs to burf later. More dwinks, eqwals more and biggar eggs. Lumi charges 45 gems for each dose.</i>\"\n\n");
+        outputText("Will you buy the Ovi Elixir?");
+        doYesNo(curry(lumiPurchase, consumables.OVIELIX), lumiShop);
+    }
+//Technomancer bra
+    private function lumiPitchTechnomancerBra():void {
+        spriteSelect(37);
+        clearOutput();
+        outputText("You point at the curious hexagonal bottle. \"<i>De Oviposar Elixir? Made baithsed on da giant bee's special stuff dey give deir queen. It will help make de burfing go faster, an if you dwink it while you awen pweggy, iw will give you some eggs to burf later. More dwinks, eqwals more and biggar eggs. Lumi charges 45 gems for each dose.</i>\"\n\n");
+        outputText("Will you buy the Ovi Elixir?");
+        doYesNo(curry(lumiPurchase, consumables.OVIELIX), lumiShop);
+    }
+//Technomancer panties
+    private function lumiPitchTechnomancerPanties():void {
         spriteSelect(37);
         clearOutput();
         outputText("You point at the curious hexagonal bottle. \"<i>De Oviposar Elixir? Made baithsed on da giant bee's special stuff dey give deir queen. It will help make de burfing go faster, an if you dwink it while you awen pweggy, iw will give you some eggs to burf later. More dwinks, eqwals more and biggar eggs. Lumi charges 45 gems for each dose.</i>\"\n\n");
@@ -243,7 +265,8 @@ public class Lumi extends BaseContent {
 		outputText("You inquire on the goblin mech.\n\n");
 		outputText("\"<i>Oh ya came back on your decision? Sure I still have it in the backroom. 500 gems as before.</i>\"\n\n");
 		menu();
-		addButton(1, "Yes", lumiGarageYes);
+		if (player.goblinScore() >= 10) addButton(1, "Yes", lumiGarageYes);
+		else addButtonDisabled(1, "Yes", "You still not enough goblin to get this beauty. Money can't buy everything, ok?");
 		addButton(3, "No", lumiGarageNo);
 	}
 	
@@ -306,14 +329,19 @@ public class Lumi extends BaseContent {
 		if (player.hasKeyItem("Dynapunch Glove") < 0 && player.hasKeyItem("Blueprint - Dynapunch Glove") < 0) addButton(4, "Dynapunch G.", lumiEngineeringBuyBlueprintDynapunchGlove).hint("Dynapunch Glove BP - 500 gems");
 		if (player.hasKeyItem("Whitefire Beam Cannon") < 0 && player.hasKeyItem("Blueprint - Whitefire Beam Cannon") < 0) addButton(5, "Whitefire B.C.", lumiEngineeringBuyBlueprintWhitefireBeamCannon).hint("Whitefire Beam Cannon BP - 1000 gems");
 		if (player.hasKeyItem("Snowball Generator") < 0 && player.hasKeyItem("Blueprint - Snowball Generator") < 0) addButton(6, "Snowball G.", lumiEngineeringBuyBlueprintSnowballGenerator).hint("Snowball Generator BP - 1000 gems");
-		//if (player.hasKeyItem("Rocket Boots") < 0 || player.hasKeyItem("Nitro Boots") < 0 || player.hasKeyItem("Blueprint - Rocket Boots") < 0) addButton(4, "Rocket Boots", ).hint("Rocket Boots BP - 500 gems");
-		//if (player.hasKeyItem("Spring Boots") < 0 || player.hasKeyItem("Rocket Boots") < 0 || player.hasKeyItem("Nitro Boots") < 0 || player.hasKeyItem("Blueprint - Spring Boots") < 0) addButton(4, "Spring Boots", ).hint("Spring Boots BP - 100 gems");
-		//addButton(9, "Leave", ).hint("");
-		//addButton(9, "Leave", ).hint("");
-		//addButton(9, "Leave", ).hint("");
-		//addButton(10, "Leave", ).hint("");
-		//addButton(10, "Leave", ).hint("");
-		//addButton(10, "Leave", ).hint("");
+		if (player.hasKeyItem("Raijin blaster") < 0 && player.hasKeyItem("Blueprint - Raijin blaster") < 0 && player.hasKeyItem("Taser with an overcharged battery") >= 0) addButton(7, "Raijin blaster", lumiEngineeringBuyBlueprintRaijinBlaster).hint("Raijin blaster BP - 1500 gems");
+		if (player.hasKeyItem("Gravity shots") < 0 && player.hasKeyItem("Blueprint - Gravity shots") < 0 && player.hasKeyItem("MK2 Jetpack") >= 0) addButton(8, "Gravity shots", lumiEngineeringBuyBlueprintGravityShots).hint("Gravity shots - 1000 gems");
+		if (player.hasKeyItem("Medical Dispenser 2.0") < 0 && player.hasKeyItem("Blueprint - Medical Dispenser 2.0") < 0) addButton(9, "Medical Dispenser 2.0", lumiEngineeringBuyBlueprintMedicalDispenser2).hint("Medical Dispenser 2.0 BP - 500 gems");
+		if (player.hasKeyItem("Stimpack Dispenser 1.0") < 0 && player.hasKeyItem("Medical Dispenser 2.0") < 0 && player.hasKeyItem("Blueprint - Stimpack Dispenser 1.0") < 0) addButton(9, "Stimpack Dispenser 1.0", lumiEngineeringBuyBlueprintStimpackDispenser1).hint("Stimpack Dispenser 1.0 BP - 100 gems");
+		if (player.hasKeyItem("Omni Missile") < 0 && player.hasKeyItem("Blueprint - Omni Missile") < 0) addButton(10, "Omni Missile", lumiEngineeringBuyBlueprintOmniMissile).hint("Omni Missile BP - 1000 gems");
+		if (player.hasKeyItem("Missile launcher") < 0 && player.hasKeyItem("Omni Missile") < 0 && player.hasKeyItem("Blueprint - Missile launcher") < 0) addButton(10, "Missile launcher", lumiEngineeringBuyBlueprintMissileLauncher).hint("Missile launcher BP - 500 gems");
+		if (player.hasKeyItem("Lustnade Launcher") < 0 && player.hasKeyItem("Blueprint - Lustnade Launcher") < 0) addButton(11, "Lustnade Launcher", lumiEngineeringBuyBlueprintLustnadeLauncher).hint("Lustnade Launcher BP - 1000 gems");
+		if (player.hasKeyItem("Aphrodigas Gun") < 0 && player.hasKeyItem("Lustnade Launcher") < 0 && player.hasKeyItem("Blueprint - Aphrodigas Gun") < 0) addButton(11, "Aphrodigas Gun", lumiEngineeringBuyBlueprintAphrodigasGun).hint("Aphrodigas Gun BP - 10 gems");
+		if (player.hasKeyItem("Impregnator 1.0") < 0 && player.hasKeyItem("Blueprint - Impregnator 1.0") < 0) addButton(12, "Impregnator 1.0", lumiEngineeringBuyBlueprintImpregnator1).hint("Impregnator 1.0 BP - 100 gems");
+		if (player.hasKeyItem("SPMK1") < 0 && player.hasKeyItem("Impregnator 1.0") < 0 && player.hasKeyItem("Blueprint - SPMK1") < 0) addButton(12, "SPMK1", lumiEngineeringBuyBlueprintSPMK1).hint("SPMK1 BP - 100 gems");
+		if (player.hasKeyItem("Cum Reservoir") < 0 && player.hasKeyItem("SPMK1") < 0 && player.hasKeyItem("Impregnator 1.0") < 0 && player.hasKeyItem("Blueprint - Cum Reservoir") < 0) addButton(12, "Cum Reservoir", lumiEngineeringBuyBlueprintCumReservoir).hint("Cum Reservoir BP - 100 gems");
+		if (player.hasKeyItem("MK2 Jetpack") < 0 && player.hasKeyItem("Blueprint - MK2 Jetpack") < 0) addButton(13, "MK2 Jetpack", lumiEngineeringBuyBlueprintMK2Jetpack).hint("MK2 Jetpack BP - 500 gems");
+		if (player.hasKeyItem("Jetpack") < 0 && player.hasKeyItem("MK2 Jetpack") < 0 && player.hasKeyItem("Blueprint - Jetpack") < 0) addButton(13, "Jetpack", lumiEngineeringBuyBlueprintJetpack).hint("Jetpack BP - 100 gems");
 		addButton(14, "Back", lumiEngineering);
 	}
 	public function lumiEngineeringBuyBlueprintToolbelt():void {
@@ -731,59 +759,176 @@ public class Lumi extends BaseContent {
 			doNext(lumiEngineering);
 		}
 		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintRaijinBlaster():void {
+		clearOutput();
+		if (player.gems >= 1500) {
+			player.gems -= 1500;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Raijin blaster!</b>");
+			player.createKeyItem("Blueprint - Raijin blaster", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintGravityShots():void {
+		clearOutput();
+		if (player.gems >= 1000) {
+			player.gems -= 1000;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Gravity shots!</b>");
+			player.createKeyItem("Blueprint - Gravity shots", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintMedicalDispenser2():void {
+		clearOutput();
+		if (player.gems >= 500) {
+			player.gems -= 500;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Medical Dispenser 2.0!</b>");
+			player.createKeyItem("Blueprint - Medical Dispenser 2.0", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintStimpackDispenser1():void {
+		clearOutput();
+		if (player.gems >= 100) {
+			player.gems -= 100;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Stimpack Dispenser 1.0!</b>");
+			player.createKeyItem("Blueprint - Stimpack Dispenser 1.0", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintMissileLauncher():void {
+		clearOutput();
+		if (player.gems >= 500) {
+			player.gems -= 500;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Missile launcher!</b>");
+			player.createKeyItem("Blueprint - Missile launcher", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintOmniMissile():void {
+		clearOutput();
+		if (player.gems >= 1000) {
+			player.gems -= 1000;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Omni Missile!</b>");
+			player.createKeyItem("Blueprint - Omni Missile", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintAphrodigasGun():void {
+		clearOutput();
+		if (player.gems >= 100) {
+			player.gems -= 100;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Aphrodigas Gun!</b>");
+			player.createKeyItem("Blueprint - Aphrodigas Gun", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintLustnadeLauncher():void {
+		clearOutput();
+		if (player.gems >= 1000) {
+			player.gems -= 1000;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Lustnade Launcher!</b>");
+			player.createKeyItem("Blueprint - Lustnade Launcher", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintCumReservoir():void {
+		clearOutput();
+		if (player.gems >= 100) {
+			player.gems -= 100;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Cum Reservoir!</b>");
+			player.createKeyItem("Blueprint - Cum Reservoir", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintSPMK1():void {
+		clearOutput();
+		if (player.gems >= 100) {
+			player.gems -= 100;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - SPMK1!</b>");
+			player.createKeyItem("Blueprint - SPMK1", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintImpregnator1():void {
+		clearOutput();
+		if (player.gems >= 100) {
+			player.gems -= 100;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Impregnator 1.0!</b>");
+			player.createKeyItem("Blueprint - Impregnator 1.0", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintJetpack():void {
+		clearOutput();
+		if (player.gems >= 500) {
+			player.gems -= 500;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Jetpack!</b>");
+			player.createKeyItem("Blueprint - Jetpack", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintMK2Jetpack():void {
+		clearOutput();
+		if (player.gems >= 100) {
+			player.gems -= 100;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - MK2 Jetpack!</b>");
+			player.createKeyItem("Blueprint - MK2 Jetpack", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
 	}/*
-	public function lumiEngineeringBuyBlueprintToolbelt():void {
-		clearOutput();
-		if (player.gems >= 50) {
-			player.gems -= 100;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Toolbelt!</b>");
-			player.createKeyItem("Blueprint - Toolbelt", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
-	}
-	public function lumiEngineeringBuyBlueprintToolbelt():void {
-		clearOutput();
-		if (player.gems >= 50) {
-			player.gems -= 100;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Toolbelt!</b>");
-			player.createKeyItem("Blueprint - Toolbelt", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
-	}
-	public function lumiEngineeringBuyBlueprintToolbelt():void {
-		clearOutput();
-		if (player.gems >= 50) {
-			player.gems -= 100;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Toolbelt!</b>");
-			player.createKeyItem("Blueprint - Toolbelt", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
-	}
-	public function lumiEngineeringBuyBlueprintToolbelt():void {
-		clearOutput();
-		if (player.gems >= 50) {
-			player.gems -= 100;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Toolbelt!</b>");
-			player.createKeyItem("Blueprint - Toolbelt", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
-	}
 	public function lumiEngineeringBuyBlueprintToolbelt():void {
 		clearOutput();
 		if (player.gems >= 50) {
@@ -825,7 +970,7 @@ public class Lumi extends BaseContent {
 	}
 	public function lumiEngineeringBuyBlueprintNotEnoughGems():void {
 		outputText("You would like to buy this item but you're short on gems...\n\n");
-		outputText("\"<i>Forry friend but I don't give my fhings far free. Ya get the gem you need then come back here ta buy it.</i>\"\n\n");
+		outputText("\"<i>Forry friend but I don't give my fhings far free. Ya get the gems you need then come back here ta buy it.</i>\"\n\n");
 		doNext(lumiEngineering);
 	}
 	public function lumiEngineeringBuyMetalPieces():void {
@@ -897,14 +1042,25 @@ public class Lumi extends BaseContent {
 	public function lumiWorkshop():void {
 		if (player.goblinScore() >= 10) {
 			clearOutput();
-			if (player.statusEffectv1(StatusEffects.LumiWorkshop) > 0) {
-				outputText("\"<i>Well sure I laft yer worf desk untouched so anything ya may have started is ftill there.</i>\"\n\n");
-				outputText("Lumi hands you a key and you use it to get inside the workshop.\n\n");
+			if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
+				outputText("You reply that you're here to perform some tinkering of your own.\n\n");
+				if (player.statusEffectv1(StatusEffects.PCDaughtersWorkshop) > 1) outputText("\"<i>Well sure Ma, we left your work desk untouched so anything you may have started is still there.</i>\"\n\n");
+				else {
+					outputText("\"<i>Just pick any work desk you want Mom, we’re all looking forward to see what ya'll create.</i>\"\n\n");
+					player.addStatusValue(StatusEffects.PCDaughtersWorkshop, 1, 2);
+				}
+				outputText("You wave her a 'See you later' then move over to your table. Time to get to work.\n\n");
 			}
 			else {
-				outputText("\"<i>Ga ahead then, jast don’t break anyfhing that is not yours. Ya may use da table in the left corner though obviously ya use yer own tools and materials, nof mines.</i>\"\n\n");
-				outputText("Lumi hands you a key and you use it to get inside the workshop. It’s actually neat inside with ample space to craft. As told you find a work desk on the left which will likely be where you will make most of your contraptions. There is even the proper area to park your mech for upgrades.\n\n");
-				player.addStatusValue(StatusEffects.LumiWorkshop,1,1);
+				if (player.statusEffectv1(StatusEffects.LumiWorkshop) > 0) {
+					outputText("\"<i>Well sure I laft yer worf desk untouched so anything ya may have started is ftill there.</i>\"\n\n");
+					outputText("Lumi hands you a key and you use it to get inside the workshop.\n\n");
+				}
+				else {
+					outputText("\"<i>Ga ahead then, jast don’t break anyfhing that is not yours. Ya may use da table in the left corner though obviously ya use yer own tools and materials, nof mines.</i>\"\n\n");
+					outputText("Lumi hands you a key and you use it to get inside the workshop. It’s actually neat inside with ample space to craft. As told you find a work desk on the left which will likely be where you will make most of your contraptions. There is even the proper area to park your mech for upgrades.\n\n");
+					player.addStatusValue(StatusEffects.LumiWorkshop,1,1);
+				}
 			}
 			outputText("Which blueprints will you work on today?\n\n");
 			if (player.hasKeyItem("Blueprint - Potent Drug injectors") >= 0) outputText("Potent Drug injectors - Req. 100+ int, Improved Drug injectors, 3 metal pieces, 30 nails, 15 Lust Drafts.\n");
@@ -950,9 +1106,10 @@ public class Lumi extends BaseContent {
 			else addButtonDisabled(11, "Ripper 1.0", "Req. 75+ int, Machined greatsword, 10 metal pieces, 500 nails, 2 energy core, 5 mechanism.");
 			if (player.hasKeyItem("Blueprint - Ripper 2.0") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 30 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.ENECORE, 5) && player.hasItem(useables.MECHANI, 10) && player.hasItem(weapons.RIPPER1, 1)) addButton(12, "Ripper 2.0", lumiWorkshopRipper2).hint("Ripper 2.0 - Similar to the machined great sword this weapon is highly mechanical. Instead of a sharp straight blade the weapon sides is a set of sharp metal tooth's that constantly move in order to properly saw through flesh and more solid mather, creating grievous wounds. The blades movement is so fast it creates heat along the length and thanks to a small system set the saw constantly aflame. Aside of cutting fleshy things in half it is very good for taking down trees - 100+ int, Ripper 1.0, 30 metal pieces, 500 nails, 5 energy core, 10 mechanism, 12 hours of work");
 			else addButtonDisabled(12, "Ripper 2.0", "Req. 100+ int, Ripper 1.0, 30 metal pieces, 500 nails, 5 energy core, 10 mechanism.");
-			if (player.vehiclesName == "Goblin Mech Alpha") addButton(13, "Mech UPGR", lumiWorkshopMechUpgrades);
+			if (player.vehiclesName == "Goblin Mech Alpha" || player.vehiclesName == "Goblin Mech Prime") addButton(13, "Mech UPGR", lumiWorkshopMechUpgrades);
 			else addButtonDisabled(13, "Mech UPGR", "You need to have goblin mech currently used to craft upgrades for it.");
-			addButton(14, "Leave", camp.returnToCampUseOneHour);
+			if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) addButton(14, "Back", playerMenu);
+			else addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 		else {
 			spriteSelect(37);
@@ -966,7 +1123,7 @@ public class Lumi extends BaseContent {
 		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0) outputText("Upgraded Armor plating 3.0 - Req. 100+ int, Upgraded Armor plating 2.0, 20 metal pieces, 500 nails.\n");
 		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0) outputText("Upgraded Armor plating 2.0 - Req. 75+ int, Upgraded Armor plating 1.0, 10 metal pieces, 300 nails.\n");
 		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0) outputText("Upgraded Armor plating 1.0 - Req. 50+ int, 5 metal pieces, 200 nails.\n");
-		if (player.hasKeyItem("Blueprint - Taser with an overcharged battery") >= 0)outputText("Taser with an overcharged battery - Req. 100+ int, Tazer, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core.\n");
+		if (player.hasKeyItem("Blueprint - Taser with an overcharged battery") >= 0) outputText("Taser with an overcharged battery - Req. 100+ int, Tazer, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core.\n");
 		if (player.hasKeyItem("Blueprint - Taser") >= 0) outputText("Taser - Req. 75+ int, Toolbelt, 10 metal pieces, 300 nails, 1 mechanism, 1 energy core.\n");
 		if (player.hasKeyItem("Blueprint - Safety bubble") >= 0) outputText("Safety bubble - Req. 1 metal pieces, 100 nails, 1 energy core.\n");
 		if (player.hasKeyItem("Blueprint - Machine Gun MK3") >= 0) outputText("Machine Gun MK3 - Req. 125+ int, 15 metal pieces, 500 nails, 10 mechanism.\n");
@@ -976,126 +1133,155 @@ public class Lumi extends BaseContent {
 		if (player.hasKeyItem("Blueprint - Dynapunch Glove") >= 0) outputText("Dynapunch Glove - Req. 50+ int, 2 metal pieces, 100 nails, 1 mechanism.\n");
 		if (player.hasKeyItem("Blueprint - Whitefire Beam Cannon") >= 0) outputText("Whitefire Beam Cannon - Req. 75+ int, knowing Whitefire spell, 20 metal pieces, 500 nails, 5 energy core.\n");
 		if (player.hasKeyItem("Blueprint - Snowball Generator") >= 0) outputText("Snowball Generator - Req. 75+ int, knowing Ice Spike spell, 20 metal pieces, 500 nails, 5 energy core.\n");
+		if (player.hasKeyItem("Blueprint - Raijin blaster") >= 0) outputText("Raijin blaster - Req. 100+ int, knowing Lightning Bolt spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core, 5 raiju plasma.\n");
+		if (player.hasKeyItem("Blueprint - Gravity shots") >= 0) outputText("Gravity shots - Req. 100+ int, knowing Darkness Shard spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core.\n");
+		if (player.hasKeyItem("Blueprint - Medical Dispenser 2.0") >= 0) outputText("Medical Dispenser 2.0 - Req. 100+ int, Stimpack Dispenser 1.0, 20 metal pieces, 500 nails, 5 healing pills, 5 energy cores.\n");
+		if (player.hasKeyItem("Blueprint - Stimpack Dispenser 1.0") >= 0) outputText("Stimpack Dispenser 1.0 - Req. 50+ int, knowing Heal spell, Toolbelt, 10 metal pieces, 200 nails, 5 healing pills.\n");
+		if (player.hasKeyItem("Blueprint - Omni Missile") >= 0) outputText("Omni Missile - Req. 100+ int, Missile launcher, 20 metal pieces, 500 nails, 10 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Missile launcher") >= 0) outputText("Missile launcher - Req. 75+ int, Toolbelt, 10 metal pieces, 500 nails, 5 mechanisms.\n");
+		if (player.hasKeyItem("Blueprint - Lustnade Launcher") >= 0) outputText("Lustnade Launcher - Req. 100+ int, Aphrodigas Gun, 20 metal pieces, 500 nails, 10 mechanism, 10 lust drafts.\n");
+		if (player.hasKeyItem("Blueprint - Aphrodigas Gun") >= 0) outputText("Aphrodigas Gun - Req. 25+ int, Toolbelt, 2 metal pieces, 100 nails, 5 lust drafts.\n");
+		if (player.hasKeyItem("Blueprint - Impregnator 1.0") >= 0) outputText("Impregnator 1.0 - Req. 100+ int, SPMK1, 5 metal pieces, 100 nails.\n");
+		if (player.hasKeyItem("Blueprint - SPMK1") >= 0) outputText("SPMK1 - Req. 75+ int, Cum Reservoir, 1 metal piece.\n");
+		if (player.hasKeyItem("Blueprint - Cum Reservoir") >= 0) outputText("Cum Reservoir - Req. 50+ int, Toolbelt, taken Cock Milker or Breast Pump from Factory, 5 metal pieces, 100 nails.\n");
+		if (player.hasKeyItem("Blueprint - MK2 Jetpack") >= 0) outputText("MK2 Jetpack - Req. 100+ int, Jetpack, 10 metal pieces, 300 nails, 2 energy core.\n");
+		if (player.hasKeyItem("Blueprint - Jetpack") >= 0) outputText("Jetpack - Req. 50+ int, Toolbelt, 3 metal pieces, 100 nails, 1 energy core.\n");
 		menu();
 		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0 && player.hasKeyItem("Upgraded Armor plating 2.0") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500) addButton(0, "UpgrArmor 3.0", lumiWorkshopUpgradedArmorPlating3).hint("Upgraded Armor plating 3.0 - +15 armor/magic resistance to the mech. +50% Health. - 100+ int, Upgraded Armor plating 2.0, 20 metal pieces, 500 nails and 12 hours of work");
 		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0 && player.hasKeyItem("Upgraded Armor plating 1.0") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300) addButton(0, "UpgrArmor 2.0", lumiWorkshopUpgradedArmorPlating2).hint("Upgraded Armor plating 2.0 - +10 armor/magic resistance to the mech. +35% Health. - 75+ int, Upgraded Armor plating 1.0, 10 metal pieces, 300 nails and 8 hours of work");
 		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200) addButton(0, "UpgrArmor 1.0", lumiWorkshopUpgradedArmorPlating1).hint("Upgraded Armor plating 1.0 - +5 armor/magic resistance to the mech. +20% Health. - 50+ int, Toolbelt, 5 metal pieces, 200 nails and 4 hours of work");
 		if (player.hasKeyItem("Blueprint - Taser with an overcharged battery") >= 0 && player.hasKeyItem("Taser") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.ENECORE, 5) && player.hasItem(useables.MECHANI, 2)) addButton(1, "Tazer O.B.", lumiWorkshopTaserOverchargeBattery).hint("Taser with an overcharged battery - Increases the Taser’s effectiveness and paralysis duration. - 100+ int, Tazer, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core and 8 hours of work");
 		if (player.hasKeyItem("Blueprint - Taser") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300 && player.hasItem(useables.ENECORE, 1) && player.hasItem(useables.MECHANI, 1)) addButton(1, "Tazer", lumiWorkshopTaser).hint("Tazer - Adds an Tazer option to your mech. - 75+ int, Toolbelt, 10 metal pieces, 300 nails, 1 mechanism, 1 energy core and 8 hours of work");
-		if (player.hasKeyItem("Blueprint - Safety bubble") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 1 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) addButton(2, "Safety bubble", lumiWorkshopSafetyBubble).hint("Safety bubble - Allows you to use the mech underwater. Too fragile for standard combat use but provide fresh air. - 1 metal pieces, 100 nails, 1 energy core and 4 hour work.");
-		if (player.hasKeyItem("Blueprint - Machine Gun MK3") >= 0 && player.hasKeyItem("Machine Gun MK2") >= 0 && player.inte >= 125 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.MECHANI, 10)) addButton(3, "Machine Gun MK3", lumiWorkshopMachineGunMK3).hint("Machine Gun MK3 - Increase range attack by 80% if using a firearm. Change the firearm text to a goblin machine gun text. - 125+ int, 15 metal pieces, 500 nails, 10 mechanism and 12 hour work.");
-		if (player.hasKeyItem("Blueprint - Machine Gun MK2") >= 0 && player.hasKeyItem("Machine Gun MK1") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.MECHANI, 5)) addButton(3, "Machine Gun MK2", lumiWorkshopMachineGunMK2).hint("Machine Gun MK2 - Increase range attack by 60% if using a firearm. Change the firearm text to a goblin machine gun text. - 100+ int, 10 metal pieces, 500 nails, 5 mechanism, and 8 hour work.");
-		if (player.hasKeyItem("Blueprint - Machine Gun MK1") >= 0 && player.hasKeyItem("Repeater Gun") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && player.hasItem(useables.MECHANI, 5)) addButton(3, "Machine Gun MK1", lumiWorkshopMachineGunMK1).hint("Machine Gun MK1 - Increase range attack by 40% if using a firearm. Change the firearm text to a goblin machine gun text. - 75+ int, 10 metal pieces, 200 nails, 5 mechanism and 4 hour work.");
+		if (player.hasKeyItem("Blueprint - Safety bubble") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 1 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) addButton(2, "Safety bubble", lumiWorkshopSafetyBubble).hint("Safety bubble - Allows you to use the mech underwater. Too fragile for standard combat use but provide fresh air. - 1 metal pieces, 100 nails, 1 energy core and 4 hours of work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK3") >= 0 && player.hasKeyItem("Machine Gun MK2") >= 0 && player.inte >= 125 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.MECHANI, 10)) addButton(3, "Machine Gun MK3", lumiWorkshopMachineGunMK3).hint("Machine Gun MK3 - Increase range attack by 80% if using a firearm. Change the firearm text to a goblin machine gun text. - 125+ int, 15 metal pieces, 500 nails, 10 mechanism and 12 hours of work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK2") >= 0 && player.hasKeyItem("Machine Gun MK1") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.MECHANI, 5)) addButton(3, "Machine Gun MK2", lumiWorkshopMachineGunMK2).hint("Machine Gun MK2 - Increase range attack by 60% if using a firearm. Change the firearm text to a goblin machine gun text. - 100+ int, 10 metal pieces, 500 nails, 5 mechanism, and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK1") >= 0 && player.hasKeyItem("Repeater Gun") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && player.hasItem(useables.MECHANI, 5)) addButton(3, "Machine Gun MK1", lumiWorkshopMachineGunMK1).hint("Machine Gun MK1 - Increase range attack by 40% if using a firearm. Change the firearm text to a goblin machine gun text. - 75+ int, 10 metal pieces, 200 nails, 5 mechanism and 4 hours of work.");
 		if (player.hasKeyItem("Blueprint - Repeater Gun") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 2 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) addButton(3, "Repeater Gun", lumiWorkshopRepeaterGun).hint("Repeater Gun - Increase range attack by 20% if using a firearm. Change the firearm text to a goblin machine gun text. - 50+ int, 2 metal pieces, 100 nails and 4 hour work.");
 		if (player.hasKeyItem("Blueprint - Dynapunch Glove") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 2 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && player.hasItem(useables.MECHANI, 1)) addButton(4, "Dynapunch G.", lumiWorkshopDynapunchGlove).hint("Dynapunch Glove - Adds a punching option to your mech. - 50+ int, 2 metal pieces, 100 nails, 1 mechanism and 4 hour work.");
-		if (player.hasKeyItem("Blueprint - Whitefire Beam Cannon") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.ENECORE, 5) && player.hasStatusEffect(StatusEffects.KnowsWhitefire)) addButton(5, "Whitefire B.C.", lumiWorkshopWhitefireBeamCannon).hint("Whitefire Beam Cannon - Adds a whitefire beam cannon option to your mech. - 75+ int, knowing Whitefire spell, 20 metal pieces, 500 nails, 5 energy core and 8 hour work.");
-		if (player.hasKeyItem("Blueprint - Snowball Generator") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.ENECORE, 5) && player.hasStatusEffect(StatusEffects.KnowsIceSpike)) addButton(6, "Snowball G.", lumiWorkshopSnowballGenerator).hint("Snowball Generator - Adds a snowball generator option to your mech. - 75+ int, knowing Ice Spike spell, 20 metal pieces, 500 nails, 5 energy core and 8 hour work.");
-		//addButton(9, "Leave", ).hint("");
-		//addButton(9, "Leave", ).hint("");
-		//addButton(9, "Leave", ).hint("");
-		//addButton(10, "Leave", ).hint("");
-		//addButton(10, "Leave", ).hint("");
-		//addButton(10, "Leave", ).hint("");
+		if (player.hasKeyItem("Blueprint - Whitefire Beam Cannon") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.ENECORE, 5) && player.hasStatusEffect(StatusEffects.KnowsWhitefire)) addButton(5, "Whitefire B.C.", lumiWorkshopWhitefireBeamCannon).hint("Whitefire Beam Cannon - Adds a whitefire beam cannon option to your mech. - 75+ int, knowing Whitefire spell, 20 metal pieces, 500 nails, 5 energy core and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Snowball Generator") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.ENECORE, 5) && player.hasStatusEffect(StatusEffects.KnowsIceSpike)) addButton(6, "Snowball G.", lumiWorkshopSnowballGenerator).hint("Snowball Generator - Adds a snowball generator option to your mech. - 75+ int, knowing Ice Spike spell, 20 metal pieces, 500 nails, 5 energy core and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Raijin blaster") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.MECHANI, 2) && player.hasItem(useables.ENECORE, 5) && player.hasItem(useables.RPLASMA, 5) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) addButton(7, "Raijin blaster", lumiWorkshopRaijinBlaster).hint("Raijin blaster - Adds a Raijin blaster option to your mech. - 100+ int, knowing Darkness Shard spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core, 5 raiju plasma and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Gravity shots") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.MECHANI, 2) && player.hasItem(useables.ENECORE, 5) && player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) addButton(8, "Gravity shots", lumiWorkshopGravityShots).hint("Gravity shots - Adds a Gravity shots option to your mech. - 100+ int, knowing Darkness Shard spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Medical Dispenser 2.0") >= 0 && player.hasKeyItem("Stimpack Dispenser 1.0") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.ENECORE, 5) && player.hasItem(consumables.H_PILL, 5)) addButton(9, "Medical Dispenser 2.0", lumiWorkshopMedicalDispenser2).hint("Medical Dispenser 2.0 - Healing for 10 turns 20% of Heal spell value rising lust by 0,5% each turn. - 100+ int, Stimpack Dispenser 1.0, 20 metal pieces, 500 nails, 5 healing pills, 5 energy cores and 12 hours of work");
+		if (player.hasKeyItem("Blueprint - Stimpack Dispenser 1.0") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && player.hasItem(consumables.H_PILL, 5) && player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(9, "Stimpack Dispenser 1.0", lumiWorkshopStimpackDispenser1).hint("Stimpack Dispenser 1.0 - Healing for 10 turns 10% of Heal spell value rising lust by 1% each turn. - 50+ int, knowing Heal spell, Toolbelt, 10 metal pieces, 200 nails, 5 healing pills and 4 hours of work");
+		if (player.hasKeyItem("Blueprint - Omni Missile") >= 0 && player.hasKeyItem("Missile launcher") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.MECHANI, 10)) addButton(10, "Omni Missile", lumiWorkshopOmniMissile).hint("Omni Missile - Increases Missile launcher effectiveness vs groups. - 100+ int, Missile launcher, 20 metal pieces, 500 nails, 10 mechanism and 12 hours of work");
+		if (player.hasKeyItem("Blueprint - Missile launcher") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.MECHANI, 5)) addButton(10, "Missile launcher", lumiWorkshopMissileLauncher).hint("Missile launcher - Adds an Missile launcher option to your mech. - 75+ int, Toolbelt, 10 metal pieces, 500 nails, 5 mechanisms and 8 hours of work");
+		if (player.hasKeyItem("Blueprint - Lustnade Launcher") >= 0 && player.hasKeyItem("Aphrodigas Gun") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(consumables.L_DRAFT, 10) && player.hasItem(useables.MECHANI, 10)) addButton(11, "Lustnade Launcher", lumiWorkshopLustnadeLauncher).hint("Lustnade Launcher - Upgraded version of Aphrodigas Gun. - 100+ int, Aphrodigas Gun, 20 metal pieces, 500 nails, 10 mechanism, 10 lust drafts and 4 hours of work");
+		if (player.hasKeyItem("Blueprint - Aphrodigas Gun") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 25 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 2 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && player.hasItem(consumables.L_DRAFT, 5)) addButton(11, "Aphrodigas Gun",lumiWorkshopAphrodigasGun).hint("Aphrodigas Gun - Adds an Aphrodigas Gun option to your mech. - 25+ int, Toolbelt, 2 metal pieces, 100 nails, 5 lust drafts and 4 hours of work");
+		if (player.hasKeyItem("Blueprint - Impregnator 1.0") >= 0 && player.hasKeyItem("SPMK1") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) addButton(12, "Impregnator 1.0", lumiWorkshopImpregnator1).hint("Impregnator 1.0 - Allows you to store cum from defeated male opponents in the reservoir for future use. - 75+ int, Toolbelt, taken Cock Milker or Breast Pump from Factory, 5 metal pieces, 100 nails and 4 hours of work.");
+		if (player.hasKeyItem("Blueprint - SPMK1") >= 0 && player.hasKeyItem("Cum Reservoir") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 1) addButton(12, "SPMK1", lumiWorkshopSPMK1).hint("SPMK1 - Allows you to store cum from defeated male opponents in the reservoir for future use. - 75+ int, Toolbelt, taken Cock Milker or Breast Pump from Factory, 5 metal pieces, 100 nails and 4 hours of work.");
+		if (player.hasKeyItem("Blueprint - Cum Reservoir") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.FACTORY_MILKER_BUILT] > 0 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) addButton(12, "Cum Reservoir", lumiWorkshopCumReservoir).hint("Cum Reservoir - Allows you to store cum from defeated male opponents in the reservoir for future use. - 75+ int, Toolbelt, taken Cock Milker or Breast Pump from Factory, 5 metal pieces, 100 nails and 4 hours of work.");
+		if (player.hasKeyItem("Blueprint - MK2 Jetpack") >= 0 && player.hasKeyItem("Jetpack") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300 && player.hasItem(useables.ENECORE, 2)) addButton(13, "MK2 Jetpack", lumiWorkshopMK2Jetpack).hint("MK2 Jetpack - An improvement to the Jetpack, increasing your evasiveness by 25% while airborne. - 100+ int, Jetpack, 10 metal pieces, 300 nails, 2 energy cores and 8 hours of work");
+		if (player.hasKeyItem("Blueprint - Jetpack") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 3 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && player.hasItem(useables.ENECORE, 1)) addButton(13, "Jetpack", lumiWorkshopJetpack).hint("Jetpack - The mech can hover in the air and fly, allowing for flight in battle. - 50+ int, Toolbelt, 3 metal pieces, 100 nails, 1 energy core and 4 hours of work");
 		addButton(14, "Back", lumiWorkshop);
 	}
 	public function lumiWorkshopEnergyCore():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 5;
 		player.destroyItems(useables.GOLCORE, 3);
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Energy Core is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Energy Core is ready.\n\n");
 		statScreenRefresh();
-		inventory.takeItem(useables.ENECORE, camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) inventory.takeItem(useables.ENECORE, camp.returnToCampUseOneHour);
+		else inventory.takeItem(useables.ENECORE, camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopMechanism():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 5;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Mechanism is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Mechanism is ready.\n\n");
 		statScreenRefresh();
-		inventory.takeItem(useables.MECHANI, camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) inventory.takeItem(useables.MECHANI, camp.returnToCampUseOneHour);
+		else inventory.takeItem(useables.MECHANI, camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopToolbelt():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Toolbelt is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Toolbelt is ready.\n\n");
 		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Toolbelt");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopPotentDrugInjectors():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 3;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 30;
 		player.destroyItems(consumables.L_DRAFT, 15);
-		outputText("You get to work spending the necessary time to craft your newest toy. After twelve hours your brand new Potent Drug injectors is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Potent Drug injectors is ready.\n\n");
 		player.createKeyItem("Potent Drug injectors", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Potent Drug injectors");
 		player.removeKeyItem("Improved Drug injectors");
 		player.lib += 25;
 		player.sens += 5;
 		statScreenRefresh();
-		doNext(camp.returnToCampUseTwelveHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
+		else doNext(camp.returnToCampUseTwelveHours);
 	}
 	public function lumiWorkshopImprovedDrugInjectors():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 2;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 20;
 		player.destroyItems(consumables.L_DRAFT, 10);
-		outputText("You get to work spending the necessary time to craft your newest toy. After eight hours your brand new Improved Drug injectors is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Improved Drug injectors is ready.\n\n");
 		player.createKeyItem("Improved Drug injectors", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Improved Drug injectors");
 		player.removeKeyItem("Drug injectors");
 		player.lib += 25;
 		player.sens += 5;
 		statScreenRefresh();
-		doNext(camp.returnToCampUseEightHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
 	}
 	public function lumiWorkshopDrugInjectors():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 1;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 10;
 		player.destroyItems(consumables.L_DRAFT, 5);
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Drug injectors is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Drug injectors is ready.\n\n");
 		player.createKeyItem("Drug injectors", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Drug injectors");
 		player.lib += 25;
 		player.sens += 5;
 		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopGunScopeWithAimbot():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 10;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
 		player.destroyItems(useables.ENECORE, 1);
-		outputText("You get to work spending the necessary time to craft your newest toy. After twelve hours your brand new Gun Scope with Aimbot is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Gun Scope with Aimbot is ready.\n\n");
 		player.createKeyItem("Gun Scope with Aimbot", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Gun Scope with Aimbot");
 		player.removeKeyItem("Gun Scope with Aim tech");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseTwelveHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
+		else doNext(camp.returnToCampUseTwelveHours);
 	}
 	public function lumiWorkshopGunScopeWithAimTech():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 5;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 300;
-		outputText("You get to work spending the necessary time to craft your newest toy. After eight hours your brand new Gun Scope with Aim tech is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Gun Scope with Aim tech is ready.\n\n");
 		player.createKeyItem("Gun Scope with Aim tech", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Gun Scope with Aim tech");
 		player.removeKeyItem("Gun Scope");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseEightHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
 	}
 	public function lumiWorkshopGunScope():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 1;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Gun Scope is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Gun Scope is ready.\n\n");
 		player.createKeyItem("Gun Scope", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Gun Scope");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopSATechGoggle():void {
 		clearOutput();
@@ -1103,9 +1289,10 @@ public class Lumi extends BaseContent {
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
 		player.destroyItems(useables.ENECORE, 5);
 		player.destroyItems(headjewelries.SCANGOG, 1);
-		outputText("You get to work spending the necessary time to craft your newest toy. After twelve hours your brand new S.A Tech Goggle is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new S.A Tech Goggle is ready.\n\n");
 		statScreenRefresh();
-		inventory.takeItem(headjewelries.SATGOG, camp.returnToCampUseTwelveHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) inventory.takeItem(headjewelries.SATGOG, camp.returnToCampUseEightHours);
+		else inventory.takeItem(headjewelries.SATGOG, camp.returnToCampUseTwelveHours);
 	}
 	public function lumiWorkshopScannerGoggle():void {
 		clearOutput();
@@ -1113,17 +1300,19 @@ public class Lumi extends BaseContent {
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
 		player.destroyItems(useables.ENECORE, 2);
 		player.destroyItems(headjewelries.MACHGOG, 1);
-		outputText("You get to work spending the necessary time to craft your newest toy. After eight hours your brand new Scanner goggle is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Scanner goggle is ready.\n\n");
 		statScreenRefresh();
-		inventory.takeItem(headjewelries.SCANGOG, camp.returnToCampUseEightHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) inventory.takeItem(headjewelries.SCANGOG, camp.returnToCampUseFourHours);
+		else inventory.takeItem(headjewelries.SCANGOG, camp.returnToCampUseEightHours);
 	}
 	public function lumiWorkshopMachinistGoggles():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 1;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Machinist Goggles is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Machinist Goggles is ready.\n\n");
 		statScreenRefresh();
-		inventory.takeItem(headjewelries.MACHGOG, camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) inventory.takeItem(headjewelries.MACHGOG, camp.returnToCampUseOneHour);
+		else inventory.takeItem(headjewelries.MACHGOG, camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopNitroBoots():void {
 		clearOutput();
@@ -1131,12 +1320,13 @@ public class Lumi extends BaseContent {
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 300;
 		player.destroyItems(useables.MECHANI, 3);
 		player.destroyItems(consumables.SALAMFW, 5);
-		outputText("You get to work spending the necessary time to craft your newest toy. After twelve hours your brand new Nitro Boots is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Nitro Boots is ready.\n\n");
 		player.createKeyItem("Nitro Boots", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Nitro Boots");
 		player.removeKeyItem("Rocket Boots");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseTwelveHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
+		else doNext(camp.returnToCampUseTwelveHours);
 	}
 	public function lumiWorkshopRocketBoots():void {
 		clearOutput();
@@ -1144,58 +1334,63 @@ public class Lumi extends BaseContent {
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
 		player.destroyItems(useables.MECHANI, 2);
 		player.destroyItems(consumables.SALAMFW, 1);
-		outputText("You get to work spending the necessary time to craft your newest toy. After eight hours your brand new Rocket Boots is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Rocket Boots is ready.\n\n");
 		player.createKeyItem("Rocket Boots", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Rocket Boots");
 		player.removeKeyItem("Spring Boots");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseEightHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
 	}
 	public function lumiWorkshopSpringBoots():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 5;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
 		player.destroyItems(useables.MECHANI, 1);
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Spring Boots is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Spring Boots is ready.\n\n");
 		player.createKeyItem("Spring Boots", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Spring Boots");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopMGSBracer():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 10;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
 		player.destroyItems(useables.ENECORE, 4);
-		outputText("You get to work spending the necessary time to craft your newest toy. After twelve hours your brand new M.G.S. bracer is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new M.G.S. bracer is ready.\n\n");
 		player.createKeyItem("M.G.S. bracer", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - M.G.S. bracer");
 		player.removeKeyItem("Powboy");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseTwelveHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
+		else doNext(camp.returnToCampUseTwelveHours);
 	}
 	public function lumiWorkshopPowboy():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 5;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
 		player.destroyItems(useables.ENECORE, 1);
-		outputText("You get to work spending the necessary time to craft your newest toy. After eight hours your brand new Powboy is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Powboy is ready.\n\n");
 		player.createKeyItem("Powboy", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Powboy");
 		player.removeKeyItem("Power bracer");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseEightHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
 	}
 	public function lumiWorkshopPowerBracer():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 3;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
 		player.destroyItems(useables.ENECORE, 1);
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Power bracer is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Power bracer is ready.\n\n");
 		player.createKeyItem("Power bracer", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Power bracer");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopRipper2():void {
 		clearOutput();
@@ -1204,9 +1399,10 @@ public class Lumi extends BaseContent {
 		player.destroyItems(useables.ENECORE, 5);
 		player.destroyItems(useables.MECHANI, 10);
 		player.destroyItems(weapons.RIPPER1, 1);
-		outputText("You get to work spending the necessary time to craft your newest toy. After twelve hours your brand new Ripper 2.0 is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Ripper 2.0 is ready.\n\n");
 		statScreenRefresh();
-		inventory.takeItem(weapons.RIPPER2, camp.returnToCampUseTwelveHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) inventory.takeItem(weapons.RIPPER2, camp.returnToCampUseEightHours);
+		else inventory.takeItem(weapons.RIPPER2, camp.returnToCampUseTwelveHours);
 	}
 	public function lumiWorkshopRipper1():void {
 		clearOutput();
@@ -1215,9 +1411,10 @@ public class Lumi extends BaseContent {
 		player.destroyItems(useables.ENECORE, 2);
 		player.destroyItems(useables.MECHANI, 5);
 		player.destroyItems(weapons.MACGRSW, 1);
-		outputText("You get to work spending the necessary time to craft your newest toy. After eight hours your brand new Ripper 1.0 is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Ripper 1.0 is ready.\n\n");
 		statScreenRefresh();
-		inventory.takeItem(weapons.RIPPER1, camp.returnToCampUseEightHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) inventory.takeItem(weapons.RIPPER1, camp.returnToCampUseFourHours);
+		else inventory.takeItem(weapons.RIPPER1, camp.returnToCampUseEightHours);
 	}
 	public function lumiWorkshopMachinedGreatsword():void {
 		clearOutput();
@@ -1225,41 +1422,45 @@ public class Lumi extends BaseContent {
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
 		player.destroyItems(useables.ENECORE, 1);
 		player.destroyItems(useables.MECHANI, 2);
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Machined greatsword is ready.\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Machined greatsword is ready.\n\n");
 		statScreenRefresh();
-		inventory.takeItem(weapons.MACGRSW, camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) inventory.takeItem(weapons.MACGRSW, camp.returnToCampUseOneHour);
+		else inventory.takeItem(weapons.MACGRSW, camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopUpgradedArmorPlating3():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 20;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
-		outputText("You get to work spending the necessary time to craft your newest toy. After twelve hours your brand new Upgraded Armor plating 3.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Upgraded Armor plating 3.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Upgraded Armor plating 3.0", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Upgraded Armor plating 3.0");
 		player.removeKeyItem("Upgraded Armor plating 2.0");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseTwelveHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
+		else doNext(camp.returnToCampUseTwelveHours);
 	}
 	public function lumiWorkshopUpgradedArmorPlating2():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 10;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 300;
-		outputText("You get to work spending the necessary time to craft your newest toy. After eight hours your brand new Upgraded Armor plating 2.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Upgraded Armor plating 2.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Upgraded Armor plating 2.0", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Upgraded Armor plating 2.0");
 		player.removeKeyItem("Upgraded Armor plating 1.0");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseEightHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
 	}
 	public function lumiWorkshopUpgradedArmorPlating1():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 5;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Upgraded Armor plating 1.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Upgraded Armor plating 1.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Upgraded Armor plating 1.0", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Upgraded Armor plating 1.0");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopTaserOverchargeBattery():void {
 		clearOutput();
@@ -1267,11 +1468,12 @@ public class Lumi extends BaseContent {
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
 		player.destroyItems(useables.ENECORE, 5);
 		player.destroyItems(useables.MECHANI, 2);
-		outputText("You get to work spending the necessary time to craft your newest toy. After eight hours your brand new Taser with an overcharged battery is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Taser with an overcharged battery is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Taser with an overcharged battery", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Taser with an overcharged battery");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopTaser():void {
 		clearOutput();
@@ -1279,174 +1481,311 @@ public class Lumi extends BaseContent {
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 300;
 		player.destroyItems(useables.ENECORE, 1);
 		player.destroyItems(useables.MECHANI, 1);
-		outputText("You get to work spending the necessary time to craft your newest toy. After eight hours your brand new Taser is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Taser is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Taser", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Taser");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopSafetyBubble():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 1;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
 		player.destroyItems(useables.ENECORE, 1);
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Safety bubble is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Safety bubble is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Safety bubble", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Safety bubble");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopMachineGunMK3():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 15;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
 		player.destroyItems(useables.MECHANI, 10);
-		outputText("You get to work spending the necessary time to craft your newest toy. After twelve hours your brand new Machine Gun MK3 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Machine Gun MK3 is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Machine Gun MK3", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Machine Gun MK3");
 		player.removeKeyItem("Machine Gun MK2");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseTwelveHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
+		else doNext(camp.returnToCampUseTwelveHours);
 	}
 	public function lumiWorkshopMachineGunMK2():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 10;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
 		player.destroyItems(useables.MECHANI, 5);
-		outputText("You get to work spending the necessary time to craft your newest toy. After eight hours your brand new Machine Gun MK2 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Machine Gun MK2 is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Machine Gun MK2", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Machine Gun MK2");
 		player.removeKeyItem("Machine Gun MK1");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseEightHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
 	}
 	public function lumiWorkshopMachineGunMK1():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 10;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
 		player.destroyItems(useables.MECHANI, 5);
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Machine Gun MK1 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Machine Gun MK1 is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Machine Gun MK1", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Machine Gun MK1");
 		player.removeKeyItem("Repeater Gun");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopRepeaterGun():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 2;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Repeater Gun is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Repeater Gun is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Repeater Gun", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Repeater Gun");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopDynapunchGlove():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 2;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
 		player.destroyItems(useables.MECHANI, 1);
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Dynapunch Glove is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Dynapunch Glove is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Dynapunch Glove", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Dynapunch Glove");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopWhitefireBeamCannon():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 20;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
 		player.destroyItems(useables.ENECORE, 5);
-		outputText("You get to work spending the necessary time to craft your newest toy. After eight hours your brand new Whitefire Beam Cannon is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Whitefire Beam Cannon is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Whitefire Beam Cannon", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Whitefire Beam Cannon");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseEightHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
 	}
 	public function lumiWorkshopSnowballGenerator():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 20;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
 		player.destroyItems(useables.ENECORE, 5);
-		outputText("You get to work spending the necessary time to craft your newest toy. After eight hour your brand new Snowball Generator is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Snowball Generator is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Snowball Generator", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Snowball Generator");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseEightHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
+	}
+	public function lumiWorkshopRaijinBlaster():void {
+		clearOutput();
+		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 15;
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
+		player.destroyItems(useables.MECHANI, 2);
+		player.destroyItems(useables.ENECORE, 5);
+		player.destroyItems(useables.RPLASMA, 5);
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Raijin blaster is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Raijin blaster", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Raijin blaster");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
+	}
+	public function lumiWorkshopGravityShots():void {
+		clearOutput();
+		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 15;
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
+		player.destroyItems(useables.MECHANI, 2);
+		player.destroyItems(useables.ENECORE, 5);
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Gravity shots is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Gravity shots", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Gravity shots");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
+	}
+	public function lumiWorkshopMedicalDispenser2():void {
+		clearOutput();
+		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 20;
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
+		player.destroyItems(consumables.H_PILL, 5);
+		player.destroyItems(useables.ENECORE, 5);
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Medical Dispenser 2.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Medical Dispenser 2.0", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Medical Dispenser 2.0");
+		player.removeKeyItem("Stimpack Dispenser 1.0");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
+		else doNext(camp.returnToCampUseTwelveHours);
+	}
+	public function lumiWorkshopStimpackDispenser1():void {
+		clearOutput();
+		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 10;
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
+		player.destroyItems(consumables.H_PILL, 5);
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Stimpack Dispenser 1.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Stimpack Dispenser 1.0", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Stimpack Dispenser 1.0");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
+	}
+	public function lumiWorkshopOmniMissile():void {
+		clearOutput();
+		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 20;
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
+		player.destroyItems(useables.MECHANI, 10);
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Omni Missile is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Omni Missile", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Omni Missile");
+		player.removeKeyItem("Missile launcher");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
+		else doNext(camp.returnToCampUseTwelveHours);
+	}
+	public function lumiWorkshopMissileLauncher():void {
+		clearOutput();
+		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 10;
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
+		player.destroyItems(useables.MECHANI, 5);
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Missile launcher is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Missile launcher", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Missile launcher");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
+	}
+	public function lumiWorkshopLustnadeLauncher():void {
+		clearOutput();
+		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 20;
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 500;
+		player.destroyItems(consumables.L_DRAFT, 10);
+		player.destroyItems(useables.MECHANI, 10);
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Lustnade Launcher is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Lustnade Launcher", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Lustnade Launcher");
+		player.removeKeyItem("Aphrodigas Gun");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
+	}
+	public function lumiWorkshopAphrodigasGun():void {
+		clearOutput();
+		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 2;
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
+		player.destroyItems(consumables.L_DRAFT, 5);
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Aphrodigas Gun is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Aphrodigas Gun", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Aphrodigas Gun");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
+	}
+	public function lumiWorkshopImpregnator1():void {
+		clearOutput();
+		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 5;
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Impregnator 1.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Impregnator 1.0", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Impregnator 1.0");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
+	}
+	public function lumiWorkshopSPMK1():void {
+		clearOutput();
+		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 1;
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new SPMK1 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("SPMK1", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - SPMK1");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
+	}
+	public function lumiWorkshopCumReservoir():void {
+		clearOutput();
+		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 5;
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Cum Reservoir is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Cum Reservoir", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Cum Reservoir");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
+	}
+	public function lumiWorkshopMK2Jetpack():void {
+		clearOutput();
+		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 10;
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 300;
+		player.destroyItems(useables.ENECORE, 2);
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new MK2 Jetpack is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("MK2 Jetpack", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - MK2 Jetpack");
+		player.removeKeyItem("Jetpack");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
+	}
+	public function lumiWorkshopJetpack():void {
+		clearOutput();
+		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 3;
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
+		player.destroyItems(useables.ENECORE, 1);
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Jetpack is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Jetpack", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Jetpack");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
 	}/*
 	public function lumiWorkshop0():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Toolbelt is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Toolbelt is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Toolbelt");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshop0():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Toolbelt is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Toolbelt is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Toolbelt");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshop0():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Toolbelt is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Toolbelt is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Toolbelt");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshop0():void {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Toolbelt is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Toolbelt is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Toolbelt");
 		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
-	}
-	public function lumiWorkshop0():void {
-		clearOutput();
-		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Toolbelt is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Toolbelt");
-		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
-	}
-	public function lumiWorkshop0():void {
-		clearOutput();
-		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Toolbelt is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Toolbelt");
-		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
-	}
-	public function lumiWorkshop0():void {
-		clearOutput();
-		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Toolbelt is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Toolbelt");
-		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
-	}
-	public function lumiWorkshop0():void {
-		clearOutput();
-		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After four hours your brand new Toolbelt is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Toolbelt");
-		statScreenRefresh();
-		doNext(camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		else doNext(camp.returnToCampUseFourHours);
 	}*/
 }
 }
-

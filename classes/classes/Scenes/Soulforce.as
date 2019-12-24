@@ -61,7 +61,6 @@ use namespace CoC;
 		public var izumiScenes:IzumiScene = new IzumiScene();
 		public var wolrdtreeScene:WorldTree = new WorldTree();
 		
-		
 		public function accessSoulforceMenu():void {
 			clearOutput();
 			if (player.level >= 1 && player.findPerk(PerkLib.JobSoulCultivator) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 0) flags[kFLAGS.SOUL_CULTIVATION] += 1;
@@ -178,6 +177,12 @@ use namespace CoC;
 				outputText("Early Soul Apprentice\n");
 			else
 				outputText("Mortal\n");
+			var dailySoulforceUsesLimit:Number = 0;
+			if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) dailySoulforceUsesLimit++;
+			if (player.findPerk(PerkLib.SoulWarrior) >= 0) dailySoulforceUsesLimit++;
+			if (player.findPerk(PerkLib.SoulElder) >= 0) dailySoulforceUsesLimit++;
+			if (player.findPerk(PerkLib.SoulTyrant) >= 0) dailySoulforceUsesLimit++;
+			if (player.findPerk(PerkLib.SoulAncestor) >= 0) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
 			outputText("<b>Cultivation level:</b> " + flags[kFLAGS.SOUL_CULTIVATION] + "\n");
 			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 1430\n");
 		/*	outputText("<b>Progress toward clearing next meridian: </b>");
@@ -187,12 +192,7 @@ use namespace CoC;
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
 			else
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
-		*/	var dailySoulforceUsesLimit:Number = 0;
-			if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) dailySoulforceUsesLimit++;
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) dailySoulforceUsesLimit++;
-			if (player.findPerk(PerkLib.SoulElder) >= 0) dailySoulforceUsesLimit++;
-			if (player.findPerk(PerkLib.SoulTyrant) >= 0) dailySoulforceUsesLimit++;
-			if (player.findPerk(PerkLib.SoulAncestor) >= 0) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
+		*/	outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
 			menu();
 			if (player.hasPerk(PerkLib.EnergyDependent)) addButtonDisabled(0, "Cultivate", "You're unable to recover soulforce by cultivating.");
 			else addButton(0, "Cultivate", SoulforceRegeneration).hint("Spend some time on restoring some of the used soulforce.");
@@ -223,53 +223,24 @@ use namespace CoC;
 			//if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
 			if (player.hasPerk(PerkLib.Metamorph)) addButton(9, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Metamorph all options unlock.");
 			//addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
-			addButton(10, "De-Jian", AddTheSeerHairpinAndCo01);
+			//addButton(10, "Protoplasm", AddProtoplasm);
+			//addButton(10, "MitziSpawn", SpawnMitzi);
 			//addButton(10, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
 			addButton(11, "PerkGalore1", GargoyleMenu2);
 			addButton(12, "PerkGalore2", GargoyleMenu3);
 			addButton(13, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
-		public function AddTheSeerHairpinAndCo01():void {
-			outputText("\n\n");
-			inventory.takeItem(consumables.VITAL_T, AddTheSeerHairpinAndCo02);
+		public function AddProtoplasm():void {
+			outputText("\n\n<b>(Gained 1 Protoplasm!)</b>\n\n");
+			inventory.takeItem(consumables.PROTPLS, SoulforceCheats);
 		}
-		public function AddTheSeerHairpinAndCo02():void {
-			outputText("\n");
-			inventory.takeItem(consumables.VITAL_T, AddTheSeerHairpinAndCo03);
-		}
-		public function AddTheSeerHairpinAndCo03():void {
-			outputText("\n");
-			inventory.takeItem(consumables.VITAL_T, AddTheSeerHairpinAndCo04);
-		}
-		public function AddTheSeerHairpinAndCo04():void {
-			outputText("\n");
-			inventory.takeItem(consumables.VITAL_T, AddTheSeerHairpinAndCo05);
-		}
-		public function AddTheSeerHairpinAndCo05():void {
-			outputText("\n");
-			inventory.takeItem(consumables.VITAL_T, AddTheSeerHairpinAndCo06);
-		}
-		public function AddTheSeerHairpinAndCo06():void {
-			outputText("\n");
-			inventory.takeItem(consumables.PPHILTR, AddTheSeerHairpinAndCo07);
-		}
-		public function AddTheSeerHairpinAndCo07():void {
-			outputText("\n");
-			inventory.takeItem(consumables.PPHILTR, AddTheSeerHairpinAndCo08);
-		}
-		public function AddTheSeerHairpinAndCo08():void {
-			outputText("\n");
-			inventory.takeItem(consumables.PPHILTR, AddTheSeerHairpinAndCo09);
-		}
-		public function AddTheSeerHairpinAndCo09():void {
-			outputText("\n");
-			inventory.takeItem(consumables.PPHILTR, AddTheSeerHairpinAndCo10);
-		}
-		public function AddTheSeerHairpinAndCo10():void {
-			outputText("\n");
-			inventory.takeItem(consumables.PPHILTR, SoulforceCheats);
-		}
+public function SpawnMitzi():void {
+	clearOutput();
+	outputText("Mitzi cum to camp! Enjoy ^^");
+	flags[kFLAGS.MITZI_RECRUITED] = 4;
+	doNext(SoulforceCheats);
+}
 public function FightAria():void {
 	clearOutput();
 	outputText("Entering battle with Melkie! Enjoy ^^");
@@ -496,6 +467,8 @@ public function FightHellfireSnail():void {
 			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuEars)) player.createStatusEffect(StatusEffects.UnlockedRaijuEars,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuEyes)) player.createStatusEffect(StatusEffects.UnlockedRaijuEyes,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuHair)) player.createStatusEffect(StatusEffects.UnlockedRaijuHair,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuArms2)) player.createStatusEffect(StatusEffects.UnlockedRaijuArms2,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.UnlockedRaijuThunderousAura)) player.createStatusEffect(StatusEffects.UnlockedRaijuThunderousAura,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedBatEars)) player.createStatusEffect(StatusEffects.UnlockedBatEars,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedBatWings)) player.createStatusEffect(StatusEffects.UnlockedBatWings,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedBatCollar)) player.createStatusEffect(StatusEffects.UnlockedBatCollar,0,0,0,0);
@@ -659,57 +632,39 @@ public function FightHellfireSnail():void {
 				player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Sensual Lover!)</b>");
 			}
-			if (player.findPerk(PerkLib.Saturation) >= 0 && player.findPerk(PerkLib.Perfection) < 0) {
-				player.createPerk(PerkLib.Perfection, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Perfection!)</b>");
+			if (player.findPerk(PerkLib.Perfection) >= 0 && player.findPerk(PerkLib.Creationism) < 0) {
 				player.createPerk(PerkLib.Creationism, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Creationism!)</b>");
 			}
-			if (player.findPerk(PerkLib.Metamorphable) >= 0 && player.findPerk(PerkLib.SoulPowered) < 0) {
-				player.createPerk(PerkLib.SoulPowered, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Soul Powered!)</b>");
+			if (player.findPerk(PerkLib.SoulPowered) >= 0 && player.findPerk(PerkLib.AllSeeing) < 0) {
 				player.createPerk(PerkLib.AllSeeing, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: All-Seeing!)</b>");
 			}
-			if (player.findPerk(PerkLib.MindOfSteel) >= 0 && player.findPerk(PerkLib.SoulOfSteel) < 0) {
-				player.createPerk(PerkLib.SoulOfSteel, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Soul of Steel!)</b>");
+			if (player.findPerk(PerkLib.SoulOfSteel) >= 0 && player.findPerk(PerkLib.GodOfSteel) < 0) {
 				player.createPerk(PerkLib.GodOfSteel, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: God of Steel!)</b>");
 			}
-			if (player.findPerk(PerkLib.Hoarder) >= 0 && player.findPerk(PerkLib.BlessedByLadyGodiva) < 0) {
-				player.createPerk(PerkLib.BlessedByLadyGodiva, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Blessed by Lady Godiva!)</b>");
+			if (player.findPerk(PerkLib.BlessedByLadyGodiva) >= 0 && player.findPerk(PerkLib.LadyGodivasFavoriteChild) < 0) {
 				player.createPerk(PerkLib.LadyGodivasFavoriteChild, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Lady Godiva's favorite Child!)</b>");
 			}
-			if (player.findPerk(PerkLib.SurgeonsAide) >= 0 && player.findPerk(PerkLib.Surgeon) < 0) {
-				player.createPerk(PerkLib.Surgeon, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Surgeon!)</b>");
+			if (player.findPerk(PerkLib.Surgeon) >= 0 && player.findPerk(PerkLib.Medic) < 0) {
 				player.createPerk(PerkLib.Medic, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: MEDIC!!!!)</b>");
 			}
-			if (player.findPerk(PerkLib.Saint) >= 0 && player.findPerk(PerkLib.Cardinal) < 0) {
-				player.createPerk(PerkLib.Cardinal, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Cardinal!)</b>");
+			if (player.findPerk(PerkLib.Cardinal) >= 0 && player.findPerk(PerkLib.Pope) < 0) {
 				player.createPerk(PerkLib.Pope, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Pope!)</b>");
 			}
-			if (player.findPerk(PerkLib.Dean) >= 0 && player.findPerk(PerkLib.President) < 0) {
-				player.createPerk(PerkLib.President, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: President!)</b>");
+			if (player.findPerk(PerkLib.President) >= 0 && player.findPerk(PerkLib.Nerd) < 0) {
 				player.createPerk(PerkLib.Nerd, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: NERD!!!!)</b>");
 			}
-			if (player.findPerk(PerkLib.SnipersFriend) >= 0 && player.findPerk(PerkLib.SpysEnemy) < 0) {
-				player.createPerk(PerkLib.SpysEnemy, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Spy's Enemy!)</b>");
+			if (player.findPerk(PerkLib.SpysEnemy) >= 0 && player.findPerk(PerkLib.ShitYouTouchedSasha) < 0) {
 				player.createPerk(PerkLib.ShitYouTouchedSasha, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: SHIT YOU TOUCHED SASHA!!!)</b>");
 			}
-			if (player.findPerk(PerkLib.Napping) >= 0 && player.findPerk(PerkLib.ZZZ) < 0) {
-				player.createPerk(PerkLib.ZZZ, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: ZZZ!)</b>");
+			if (player.findPerk(PerkLib.ZZZ) >= 0 && player.findPerk(PerkLib.Lazy) < 0) {
 				player.createPerk(PerkLib.Lazy, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: LAZY!!!!)</b>");
 			}/*		Slut
@@ -721,15 +676,11 @@ public function FightHellfireSnail():void {
 				player.createPerk(PerkLib., 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: !)</b>");
 			}*/
-			if (player.findPerk(PerkLib.Anvil) >= 0 && player.findPerk(PerkLib.Weap0n) < 0) {
-				player.createPerk(PerkLib.Weap0n, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Weapon!)</b>");
+			if (player.findPerk(PerkLib.Weap0n) >= 0 && player.findPerk(PerkLib.Arm0r) < 0) {
 				player.createPerk(PerkLib.Arm0r, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Armor!)</b>");
 			}
-			if (player.findPerk(PerkLib.Pornstar) >= 0 && player.findPerk(PerkLib.SexChampion) < 0) {
-				player.createPerk(PerkLib.SexChampion, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Sex Champion!)</b>");
+			if (player.findPerk(PerkLib.SexChampion) >= 0 && player.findPerk(PerkLib.SexDeity) < 0) {
 				player.createPerk(PerkLib.SexDeity, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Sex Deity!)</b>");
 			}
@@ -747,6 +698,18 @@ public function FightHellfireSnail():void {
 			if (player.findPerk(PerkLib.PrestigeJobSoulArcher) < 0) {
 				player.createPerk(PerkLib.PrestigeJobSoulArcher, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Prestige Job: Soul Archer!)</b>");
+			}
+			if (player.findPerk(PerkLib.PrestigeJobGreySage) < 0) {
+				player.createPerk(PerkLib.PrestigeJobGreySage, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Prestige Job: Grey Sage!)</b>");
+			}
+			if (player.findPerk(PerkLib.PrestigeJobSpellKnight) < 0) {
+				player.createPerk(PerkLib.PrestigeJobSpellKnight, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Prestige Job: Spell Knight!)</b>");
+			}
+			if (player.findPerk(PerkLib.PrestigeJobWarlock) < 0) {
+				player.createPerk(PerkLib.PrestigeJobWarlock, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: Prestige Job: Warlock!)</b>");
 			}
 			if (player.findPerk(PerkLib.PiercedCrimstone) < 0) {
 				player.createPerk(PerkLib.PiercedCrimstone, 5, 0, 0, 0);
@@ -1065,8 +1028,8 @@ public function FightHellfireSnail():void {
 			addButton(8, "Add EXP 4", AddEXP4).hint("Add 100000 EXP.");
 			if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) < 0) addButton(10, "Trib Perks", TribulationPerks).hint("Add 2 Tribulation perks.");
 			if (player.findPerk(PerkLib.SoulAncestor) < 0) addButton(11, "10-12 St.", Stage10to12SoulPerks).hint("Add all soul cultivator related perks for stages 10-12 of cultivation.");
-			if (player.level < 150) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
-			if (player.level < 140) addButton(13, "Add 10 LvL's", AddLvL2).hint("Add 10 Levels (with stat and perk points).");
+			if (player.level < CoC.instance.levelCap - 1) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
+			if (player.level < CoC.instance.levelCap - 10) addButton(13, "Add 10 LvL's", AddLvL2).hint("Add 10 Levels (with stat and perk points).");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function BodyStateMenu():void {
@@ -1519,12 +1482,11 @@ public function FightHellfireSnail():void {
 			addButton(2, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
 			addButton(3, "Evelyn", AddTheEvelyn).hint("Add 1 Evelyn Crossbow.");
 			addButton(4, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
-			addButton(5, "Duel.Pistol", AddDuelingPistol).hint("Add 1 Dueling pistol.");
-			addButton(6, "ADBShotgun", AddAntiqueDoubleBarrelShotgun).hint("Add 1 Antique double barrel shotgun.");
-			addButton(7, "ADBScattergun", AddAntiqueDoubleBarrelScattergun).hint("Add 1 Antique double barrel scattergun.");
-			addButton(8, "NineTailWhip", AddNineTailWhip).hint("Add 1 Nine Tail Whip.");
-			addButton(9, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Bastet Whip.");
-			addButton(10, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
+			addButton(5, "NineTailWhip", AddNineTailWhip).hint("Add 1 Nine Tail Whip.");
+			addButton(6, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Bastet Whip.");
+			addButton(7, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
+			addButton(8, "HBA Armor", AddHBAArmor).hint("Add 1 HBA Armor for testing purposes.");
+			addButton(11, "GobMechPrime", AddGoblinMechPrime).hint("Add 1 Goblin Mech Prime for testing purposes.");
 			addButton(12, "MatrixArmory1", AddTheSeerHairpinAndCo).hint("Adds: 1 Eldritch Staff, 1 master Gloves, 1 Gnoll Throwing Axes, 1 Hodr's Bow, 1 Truestrike Sword, 1 Sceptre of Command, 1 Demonic Scythe, 1 Seer's Hairpin, Sakura Petal Kimono, Oni bead necklace");
 			addButton(13, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
 			addButton(14, "Back", SoulforceCheats);
@@ -1741,18 +1703,6 @@ public function FightHellfireSnail():void {
 		public function AddTheEvelyn():void {
 			outputText("\n\n<b>(Gained 1 Evelyn Crossbow!)</b>\n\n");
 			inventory.takeItem(weaponsrange.EVELYN_, EquipmentMenu);
-		}
-		public function AddDuelingPistol():void {
-			outputText("\n\n<b>(Gained 1 Dueling pistol!)</b>\n\n");
-			inventory.takeItem(weaponsrange.DUEL_P_, EquipmentMenu);
-		}
-		public function AddAntiqueDoubleBarrelShotgun():void {
-			outputText("\n\n<b>(Gained 1 Antique double barrel shotgun!)</b>\n\n");
-			inventory.takeItem(weaponsrange.ADBSHOT, EquipmentMenu);
-		}
-		public function AddAntiqueDoubleBarrelScattergun():void {
-			outputText("\n\n<b>(Gained 1 Antique double barrel scattergun!)</b>\n\n");
-			inventory.takeItem(weaponsrange.ADBSCAT, EquipmentMenu);
 		}
 		public function AddTheSeerHairpinAndCo():void {
 			outputText("\n\n<b>(Gained 1 Eldritch Staff!)</b>\n\n");
@@ -2277,6 +2227,14 @@ public function FightHellfireSnail():void {
 		public function AddLightAyoArmor():void {
 			outputText("\n\n<b>(Gained 1 Light Ayo Armor!)</b>\n\n");
 			inventory.takeItem(armors.LAYOARM, EquipmentMenu);
+		}
+		public function AddHBAArmor():void {
+			outputText("\n\n<b>(Gained 1 HBA Armor!)</b>\n\n");
+			inventory.takeItem(armors.HBA_ARM, EquipmentMenu);
+		}
+		public function AddGoblinMechPrime():void {
+			outputText("\n\n<b>(Gained 1 Goblin Mech Prime!)</b>\n\n");
+			inventory.takeItem(vehicles.GOBMPRI, EquipmentMenu);
 		}
 		public function AddNineTailWhip():void {
 			outputText("\n\n<b>(Gained 1 Nine Tail Whip!)</b>\n\n");
@@ -3469,4 +3427,4 @@ public function FightHellfireSnail():void {
 			}
 		}
 	}
-}
+}

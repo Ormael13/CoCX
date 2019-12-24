@@ -37,6 +37,7 @@ public function auroraCampMenu():void {
 	outputText("As you approach Aurora, she turns toward you as she notices you’re walking towards her.\n\n\"<i>Greetings " + player.mf("Master", "Mistress") + ", What do you need?</i>\"\n\n");
 	menu();
 	addButton(0, "Appearance", auroraAppearance).hint("Examine Aurora appearance.");
+	//talk
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(4, "Spar", auroraSparsWithPC).hint("Ask Aurora for a mock battle.");
 	if (player.hasPerk(PerkLib.BasicLeadership)) {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", auroraHenchmanOption).hint("Ask Aurora to join you in adventures outside camp.");

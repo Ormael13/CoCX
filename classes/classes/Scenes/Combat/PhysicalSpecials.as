@@ -336,6 +336,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.isInGoblinMech()) {
+			if (player.hasKeyItem("Dynapunch Glove") >= 0) {
+				bd = buttons.add("Dynapunch G.", mechDynapunchGlove).hint("Shoot a springed gloved fist at the opponent with a rocket punch stunning for one round and dealing damage. \n\nWould go into cooldown after use for: 8 rounds");
+				if (player.hasStatusEffect(StatusEffects.CooldownDynapunchGlove)) {
+					bd.disable("<b>You need more time before you can use Dynapunch Glove again.</b>\n\n");
+				}
+			}
 			if (player.hasKeyItem("Taser") >= 0) {
 				if (player.hasKeyItem("Taser with an overcharged battery") >= 0) bd = buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals some lesser lightning damage and stun for 4 rounds. \n\nWould go into cooldown after use for: 8 rounds");
 				else bd = buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals no damage and stun for 2 rounds. \n\nWould go into cooldown after use for: 8 rounds");
@@ -343,12 +349,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You need more time before you can use Tazer again.</b>\n\n");
 				}
 			}
-			if (player.hasKeyItem("Dynapunch Glove") >= 0) {
-				bd = buttons.add("Dynapunch G.", mechDynapunchGlove).hint("Shoot a springed gloved fist at the opponent with a rocket punch stunning for one round and dealing damage. \n\nWould go into cooldown after use for: 8 rounds");
-				if (player.hasStatusEffect(StatusEffects.CooldownDynapunchGlove)) {
-					bd.disable("<b>You need more time before you can use Dynapunch Glove again.</b>\n\n");
-				}
-			}
+			if (player.hasKeyItem("Missile launcher") >= 0) bd = buttons.add("Missile launcher", mechOmniMissile).hint("Fire missile that will cover a wide area of effect.");
+			if (player.hasKeyItem("Omni Missile") >= 0) bd = buttons.add("Omni Missile", mechOmniMissile).hint("Fire omni missiles that will cover a wide area of effect.");
 			if (player.hasKeyItem("Whitefire Beam Cannon") >= 0) {
 				bd = buttons.add("Whitefire B.C.", mechWhitefireBeamCannon).hint("Shoot with the whitefire beam cannon at enemy burning him. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownWhitefireBeamCannon)) {
@@ -359,6 +361,31 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Snowball G.", mechSnowballGenerator).hint("Activate the snowball generator taking aim and launching a volley of snowballs at the enemy. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownSnowballGenerator)) {
 					bd.disable("<b>You need more time before you can use Snowball Generator again.</b>\n\n");
+				}
+			}
+			if (player.hasKeyItem("Raijin blaster") >= 0) {
+				bd = buttons.add("Raijin Blaster", mechRaijinBlaster).hint("Activate the raijin blaster taking aim and zapping enemy. \n\nWould go into cooldown after use for: 8 rounds");
+				if (player.hasStatusEffect(StatusEffects.CooldownRaijinBlaster)) {
+					bd.disable("<b>You need more time before you can use Raijin Blaster again.</b>\n\n");
+				}
+			}
+			if (player.hasKeyItem("Gravity shots") >= 0) {
+				bd = buttons.add("Gravity Shots", mechGravityShots).hint("Activate the gravity shots unleashing the gravity sphere at the enemy. \n\nWould go into cooldown after use for: 8 rounds");
+				if (player.hasStatusEffect(StatusEffects.CooldownGravityShots)) {
+					bd.disable("<b>You need more time before you can use Gravity Shots again.</b>\n\n");
+				}
+			}
+			if (player.hasKeyItem("Stimpack Dispenser 1.0") >= 0 || player.hasKeyItem("Medical Dispenser 2.0") >= 0) {
+				if (player.hasKeyItem("Medical Dispenser 2.0") >= 0) bd = buttons.add("Medical Dispenser 2.0", mechStimpackMedicalDispenser).hint("Activate to gain swift improved medical treatment. Be wary of secondary effects. \n\nWould go into cooldown after use for: 15 rounds");
+				else bd = buttons.add("Stimpack Dispenser 1.0", mechStimpackMedicalDispenser).hint("Activate to gain swift medical treatment. Be wary of secondary effects. \n\nWould go into cooldown after use for: 20 rounds");
+				if (player.hasStatusEffect(StatusEffects.CooldownStimpackDispenser)) {
+					bd.disable("<b>You need more time before you can use "+(player.hasKeyItem("Medical Dispenser 2.0") >= 0 ? "Medical Dispenser":"Stimpack Dispenser")+" again.</b>\n\n");
+				}
+			}
+			if (player.hasKeyItem("Jetpack") >= 0 || player.hasKeyItem("MK2 Jetpack") >= 0) {
+				buttons.add("Jetpack", takeFlightGoglinMech).hint("Make use of your mech jetpack to take flight into the air for up to 5 turns. \n\nWould go into cooldown after use for: 3 rounds");
+				if (player.hasStatusEffect(StatusEffects.CooldownJetpack)) {
+					bd.disable("<b>You need more time before you can use jetpack again.</b>\n\n");
 				}
 			}
 		}
@@ -392,19 +419,21 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.isInGoblinMech()) {
-			if (player.hasKeyItem("Taser") >= 0) {
-				if (player.hasKeyItem("Taser overcharge battery") >= 0) bd = buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals some lesser lightning damage and stun for 4 rounds. \n\nWould go into cooldown after use for: 8 rounds");
-				else bd = buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals no damage and stun for 2 rounds. \n\nWould go into cooldown after use for: 8 rounds");
-				if (player.hasStatusEffect(StatusEffects.CooldownTazer)) {
-					bd.disable("<b>You need more time before you can use Tazer again.</b>\n\n");
-				}
-			}
 			if (player.hasKeyItem("Dynapunch Glove") >= 0) {
 				bd = buttons.add("Dynapunch G.", mechDynapunchGlove).hint("Shoot a springed gloved fist at the opponent with a rocket punch stunning for one round and dealing damage. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownDynapunchGlove)) {
 					bd.disable("<b>You need more time before you can use Dynapunch Glove again.</b>\n\n");
 				}
 			}
+			if (player.hasKeyItem("Taser") >= 0) {
+				if (player.hasKeyItem("Taser with an overcharged battery") >= 0) bd = buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals some lesser lightning damage and stun for 4 rounds. \n\nWould go into cooldown after use for: 8 rounds");
+				else bd = buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals no damage and stun for 2 rounds. \n\nWould go into cooldown after use for: 8 rounds");
+				if (player.hasStatusEffect(StatusEffects.CooldownTazer)) {
+					bd.disable("<b>You need more time before you can use Tazer again.</b>\n\n");
+				}
+			}
+			if (player.hasKeyItem("Missile launcher") >= 0) bd = buttons.add("Missile launcher", mechOmniMissile).hint("Fire missile that will cover a wide area of effect.");
+			if (player.hasKeyItem("Omni Missile") >= 0) bd = buttons.add("Omni Missile", mechOmniMissile).hint("Fire omni missiles that will cover a wide area of effect.");
 			if (player.hasKeyItem("Whitefire Beam Cannon") >= 0) {
 				bd = buttons.add("Whitefire B.C.", mechWhitefireBeamCannon).hint("Shoot with the whitefire beam cannon at enemy burning him. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownWhitefireBeamCannon)) {
@@ -415,6 +444,25 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Snowball G.", mechSnowballGenerator).hint("Activate the snowball generator taking aim and launching a volley of snowballs at the enemy. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownSnowballGenerator)) {
 					bd.disable("<b>You need more time before you can use Snowball Generator again.</b>\n\n");
+				}
+			}
+			if (player.hasKeyItem("Raijin blaster") >= 0) {
+				bd = buttons.add("Raijin Blaster", mechRaijinBlaster).hint("Activate the raijin blaster taking aim and zapping enemy. \n\nWould go into cooldown after use for: 8 rounds");
+				if (player.hasStatusEffect(StatusEffects.CooldownRaijinBlaster)) {
+					bd.disable("<b>You need more time before you can use Raijin Blaster again.</b>\n\n");
+				}
+			}
+			if (player.hasKeyItem("Gravity shots") >= 0) {
+				bd = buttons.add("Gravity Shots", mechGravityShots).hint("Activate the gravity shots unleashing the gravity sphere at the enemy. \n\nWould go into cooldown after use for: 8 rounds");
+				if (player.hasStatusEffect(StatusEffects.CooldownGravityShots)) {
+					bd.disable("<b>You need more time before you can use Gravity Shots again.</b>\n\n");
+				}
+			}
+			if (player.hasKeyItem("Stimpack Dispenser 1.0") >= 0 || player.hasKeyItem("Medical Dispenser 2.0") >= 0) {
+				if (player.hasKeyItem("Medical Dispenser 2.0") >= 0) bd = buttons.add("Medical Dispenser 2.0", mechStimpackMedicalDispenser).hint("Activate to gain swift improved medical treatment. Be wary of secondary effects. \n\nWould go into cooldown after use for: 15 rounds");
+				else bd = buttons.add("Stimpack Dispenser 1.0", mechStimpackMedicalDispenser).hint("Activate to gain swift medical treatment. Be wary of secondary effects. \n\nWould go into cooldown after use for: 20 rounds");
+				if (player.hasStatusEffect(StatusEffects.CooldownStimpackDispenser)) {
+					bd.disable("<b>You need more time before you can use "+(player.hasKeyItem("Medical Dispenser 2.0") >= 0 ? "Medical Dispenser":"Stimpack Dispenser")+" again.</b>\n\n");
 				}
 			}
 		}
@@ -1262,6 +1310,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		fatigue(50, USEFATG_PHYSICAL);
 		var damage:Number = 0;
 		damage += (scalingBonusStrength() * 0.3) + ((player.str + unarmedAttack()) * 1.5);
+		if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += (scalingBonusStrength() * 0.3) + ((player.str + unarmedAttack()) * 1.5);
 		if (player.hasPerk(PerkLib.WhirlwindFeral)) damage += (scalingBonusStrength() * 0.15) + ((player.str + unarmedAttack()) * 0.75);
 		if (damage < 15) damage = 15;
 		//weapon bonus
@@ -1436,6 +1485,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("  Twirling like a top, you bat your opponents with your tail.");
 			var damage:Number = unarmedAttack();
 			damage += player.str;
+			if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += player.str;
 			damage = calcInfernoMod(damage);
 			if (monster.plural == true) damage *= 5;
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
@@ -1579,6 +1629,18 @@ public class PhysicalSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 
+	public function takeFlightGoglinMech():void {
+		clearOutput();
+		outputText("You open you wing taking flight.\n\n");
+		player.createStatusEffect(StatusEffects.Flying, 5, 0, 0, 0);
+		if (!player.hasPerk(PerkLib.Resolute)) {
+			player.createStatusEffect(StatusEffects.FlyingNoStun, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
+		}
+		monster.createStatusEffect(StatusEffects.MonsterAttacksDisabled, 0, 0, 0, 0);
+		enemyAI();
+	}
+
 	public function bodySlam():void {
 		clearOutput();
 		fatigue(50, USEFATG_PHYSICAL);
@@ -1698,6 +1760,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.thirdtierWingsForWingSlap()) damage += unarmedAttack();
 			//if (tu jak byłyby 4th tier wings dodane) damage += unarmedAttack();
 			damage += player.str;
+			if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += player.str;
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 			if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
@@ -1772,6 +1835,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+			dmgamp += 0.1;
+			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
+			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
+			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
+			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
+		}
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
@@ -1826,6 +1896,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+			dmgamp += 0.1;
+			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
+			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
+			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
+			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
+		}
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
@@ -1881,6 +1958,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
 		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+			dmgamp += 0.1;
+			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
+			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
+			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
+			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
+		}
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
@@ -1923,6 +2007,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
 		if (player.hasPerk(PerkLib.LegendaryGolemMaker)) dmgamp += 0.65;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+			dmgamp += 0.1;
+			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
+			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
+			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
+			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
+		}
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
@@ -1959,6 +2050,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
 		if (player.hasPerk(PerkLib.LegendaryGolemMaker)) dmgamp += 0.65;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+			dmgamp += 0.1;
+			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
+			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
+			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
+			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
+		}
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
@@ -1995,6 +2093,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
 		if (player.hasPerk(PerkLib.LegendaryGolemMaker)) dmgamp += 0.65;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+			dmgamp += 0.1;
+			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
+			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
+			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
+			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
+		}
 		damage *= dmgamp;
 		damage = Math.round(damage);
 		damage = doDamage(damage);
@@ -2055,6 +2160,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		outputText("You propel yourself up and kick " + monster.a + monster.short + " in the face leaving burns in the process. ");
 		var damage:Number = player.str;
+		if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += player.str;
 		if (damage < 10) damage = 10;
 		damage += (unarmedAttack() * 2);
 		damage *= (spellMod() * 2);
@@ -2986,8 +3092,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function hydraBiteAttackpoweeeeer():void {
 		var HBD:Number = 0;
 		HBD += player.str;
-		HBD += combat.unarmedAttack();
 		HBD += scalingBonusStrength() * 0.25;
+		if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) HBD *= 2;
+		HBD += combat.unarmedAttack();
 		if (HBD < 10) HBD = 10;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) HBD *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) HBD *= 1 + player.perkv1(PerkLib.DemonSlayer);
@@ -3313,6 +3420,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.horns.count > 40) player.horns.count = 40;
 			//Determine damage - str modified by enemy toughness!
 			damage = int((unarmedAttack() + player.str + player.spe + horns) * 2 * (monster.damagePercent() / 100));
+			if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += (player.str * (monster.damagePercent() / 100));
 			if (!monster.hasStatusEffect(StatusEffects.GoreBleed)) monster.createStatusEffect(StatusEffects.GoreBleed,16,0,0,0);
 			else {
 				monster.removeStatusEffect(StatusEffects.GoreBleed);
@@ -3973,7 +4081,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Determine damage
 		//Base:
 		var damage:Number = unarmedAttack();
-		damage += scalingBonusStrength() * 0.5;
+		if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += scalingBonusStrength();
+		else damage += scalingBonusStrength() * 0.5;
 		damage += scalingBonusSpeed() * 0.5;
 		//Leg bonus
 		//Bunny - 20, 1 hoof = 30, 2 hooves = 40, Kangaroo - 50
@@ -4425,12 +4534,150 @@ public class PhysicalSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 	
+	public function mechOmniMissile():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		if (player.hasKeyItem("Omni Missile") >= 0) outputText("You deploy the omni Missile and rain death on " + monster.a + monster.short + ", covering the entire area with explosions for ");
+		else outputText("You deploy the missile launcher and aim at " + monster.a + monster.short + ", for a big explosion. ");
+		var damage:Number = 0;
+		damage += 300 + rand(121);
+		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyGigantType)) {
+			if (player.hasKeyItem("Omni Missile") >= 0) damage *= 10;
+			else damage *= 5;
+		}
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		damage = doDamage(damage, true, true);
+		outputText(" damage!");
+		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		outputText("\n\n");
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		enemyAI();
+	}
+	
+	public function mechStimpackMedicalDispenser():void {
+		clearOutput();
+		if (player.hasKeyItem("Medical Dispenser 2.0") >= 0) player.createStatusEffect(StatusEffects.CooldownStimpackDispenser, 15, 0, 0, 0);
+		else player.createStatusEffect(StatusEffects.CooldownStimpackDispenser, 20, 0, 0, 0);
+		outputText("You activate the medical dispenser, recovering from wounds at the expense of feeling your body throb and heat up. Bah, side effects!");
+		var heal:Number = 0;
+		heal += scalingBonusIntelligence();
+		if (player.hasPerk(PerkLib.WisenedHealer)) heal += scalingBonusWisdom();
+		heal *= healModWhite();
+		if (player.armorName == "skimpy nurse's outfit") heal *= 1.2;
+		if (player.weaponName == "unicorn staff") heal *= 1.5;
+		if (player.hasPerk(PerkLib.CloseToDeath) && player.HP < (player.maxHP() * 0.25)) {
+			if (player.hasPerk(PerkLib.CheatDeath) && player.HP < (player.maxHP() * 0.1)) heal *= 2.5;
+			else heal *= 1.5;
+		}
+		//Determine if critical heal!
+		var crit:Boolean = false;
+		var critHeal:int = 5;
+		critHeal += combatMagicalCritical();
+		if (rand(100) < critHeal) {
+			crit = true;
+			heal *= 1.75;
+		}
+		if (player.hasKeyItem("Medical Dispenser 2.0") >= 0) heal *= 0.2;
+		else heal *= 0.1;
+		heal = Math.round(heal);
+		player.createStatusEffect(StatusEffects.GoblinMechStimpack, 10, heal, 0, 0);
+		enemyAI();
+	}
+	
+	public function mechGravityShots():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		outputText("You press the spiral button and aim, unleashing the gravity sphere at " + monster.a + monster.short + ". ");
+		player.createStatusEffect(StatusEffects.CooldownGravityShots,8,0,0,0);
+		var damage:Number = 0;
+		damage = scalingBonusIntelligence() * spellModBlack() * 2;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (monster.hasPerk(PerkLib.EnemyGroupType)) damage *= 8;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		damage = doDarknessDamage(damage, true, true);
+		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		if (monster.isFlying()) {
+			outputText(" There is something very satisfying about hampering your opponent’s ability to fly around by messing with their space.");
+			monster.createStatusEffect(StatusEffects.Stunned, 4, 0, 0, 0);
+		}
+		outputText("\n\n");
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		enemyAI();
+	}
+	
+	public function mechRaijinBlaster():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		outputText("You press the BIG lightning button and aim, smirking wide as the Raijin blaster power up your mech zapping " + monster.a + monster.short + " for ");
+		player.createStatusEffect(StatusEffects.CooldownRaijinBlaster,8,0,0,0);
+		var damage:Number = 0;
+		damage = scalingBonusIntelligence() * spellModWhite() * 2;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (monster.hasPerk(PerkLib.EnemyGroupType)) damage *= 8;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		damage = doLightingDamage(damage, true, true);
+		outputText(" damage! ");
+		if (crit == true) outputText("<b>*Critical Hit!*</b> ");
+		var lustDmg:Number = monster.lustVuln * (player.inte / 5 * spellModBlack() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+		//Determine if critical tease!
+		var crit1:Boolean = false;
+		var critChance1:int = 5;
+		if (player.hasPerk(PerkLib.CriticalPerformance)) {
+			if (player.lib <= 100) critChance1 += player.lib / 5;
+			if (player.lib > 100) critChance1 += 20;
+		}
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance1 = 0;
+		if (rand(100) < critChance1) {
+			crit1 = true;
+			lustDmg *= 1.75;
+		}
+		lustDmg = Math.round(lustDmg);
+		monster.teased(lustDmg);
+		if (crit1 == true) outputText(" <b>Critical!</b>");
+		outputText("\n\n");
+		monster.HP -= damage;
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		enemyAI();
+	}
+	
 	public function mechSnowballGenerator():void {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		outputText("You activate the snowball generator, taking aim and launching a volley of snowballs at the " + monster.a + monster.short + " for ");
 		player.createStatusEffect(StatusEffects.CooldownSnowballGenerator,8,0,0,0);
-		var damage:Number;
+		var damage:Number = 0;
 		damage = scalingBonusIntelligence() * spellModBlack() * 4;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		//Determine if critical hit!
@@ -4459,7 +4706,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		outputText("You shoot with the Whitefire beam cannon at " + monster.a + monster.short + " burning " + monster.pronoun3 + " badly for ");
 		player.createStatusEffect(StatusEffects.CooldownWhitefireBeamCannon,8,0,0,0);
-		var damage:Number;
+		var damage:Number = 0;
 		damage = scalingBonusIntelligence() * spellModWhite() * 4;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		//Determine if critical hit!

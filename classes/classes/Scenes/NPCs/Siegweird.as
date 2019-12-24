@@ -31,11 +31,12 @@ import classes.internals.*;
 			else if (this.weaponAttack >= 151 && this.weaponAttack < 201) damage *= (4.75 + ((this.weaponAttack - 150) * 0.015));
 			else damage *= (5.5 + ((this.weaponAttack - 200) * 0.01));
 			if (hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 2;
-			outputText("Siegweird smashes his weapon at you! The impact makes you reel for " + damage + " damage!");
-			if (hasStatusEffect(StatusEffects.ChargeWeapon)) damage = player.takeFireDamage(damage);//, true
-			else damage = player.takePhysDamage(damage);//, true
+			damage = Math.round(damage);
+			outputText("Siegweird smashes his weapon at you! The impact makes you reel for ");
+			if (hasStatusEffect(StatusEffects.ChargeWeapon)) damage = player.takeFireDamage(damage, true);
+			else damage = player.takePhysDamage(damage, true);
 			statScreenRefresh();
-			outputText("\n");
+			outputText(" damage!\n");
 		}
 		
 		private function siegweirdBerserk():void {

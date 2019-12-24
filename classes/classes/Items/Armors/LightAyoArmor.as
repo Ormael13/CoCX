@@ -19,5 +19,13 @@ package classes.Items.Armors
 			if (game.flags[kFLAGS.SOULFORCE_STORED] > 0) return 30;
 			else return 15;
 		}
+		
+		override public function canUse():Boolean {
+			if (game.player.tallness >= 80) {
+				return false;
+			}
+			outputText("You aren't tall enough to wear this kimono!  ");
+			return true;
+		}
 	}
 }

@@ -16,6 +16,7 @@ public class RearBody extends BodyPart {
 	public static const SNAIL_SHELL:int			= 12;
 	public static const METAMORPHIC_GOO:int		= 13;
 	public static const GHOSTLY_AURA:int		= 15;
+	public static const YETI_FUR:int			= 16;
 	// Don't forget to add new types in DebugMenu.as list REAR_TYPE_CONSTANTS
 	
 	public function RearBody() {

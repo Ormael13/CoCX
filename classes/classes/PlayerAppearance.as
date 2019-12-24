@@ -1077,7 +1077,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.lowerBody == LowerBody.ELF)
 			outputText("  Your " + num2Text(player.legCount) + " perfect lissom legs end in delicate, but agile elven feet allowing you to move gracefully and swiftly.");
 		else if (player.lowerBody == LowerBody.RAIJU)
-			outputText("  You have " + num2Text(player.legCount) + " fluffy, furred legs that look vaguely like kneehigh socks. Your pawed feet end in four thick toes, which serve as your main source of balance. You can walk on them as normally as your old plantigrade legs. A thick strand of darkly colored fur breaks out from your ankles, emulating a bolt of lighting in appearance.");
+			outputText("  You have " + num2Text(player.legCount) + " fluffy, furred legs that look vaguely like knee high socks. Your pawed feet end in four thick toes, which serve as your main source of balance. You can walk on them as normally as your old plantigrade legs. A thick strand of darkly colored fur breaks out from your ankles, emulating a bolt of lighting in appearance.");
 		else if (player.lowerBody == LowerBody.RED_PANDA)
 			outputText("  Your " + num2Text(player.legCount) + " legs are equally covered in [skin coat.color] fur, ending on red-panda paws with short claws. They have a nimble and strong build, in case you need to escape from something.");
 		else if (player.lowerBody == LowerBody.AVIAN)
@@ -1115,8 +1115,6 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Below your waist, your body fuses and fades away, like a ghost.");
 		else if (player.lowerBody == LowerBody.JIANGSHI)
 			outputText("  While your legs are human in appearance your body is so rigid due to this pseudo rigor mortis that the only way you found for movement is by hopping around.");
-		if (player.findPerk(PerkLib.Incorporeality) >= 0)
-			outputText("  Of course, your [legs] are partially transparent due to their ghostly nature."); // isn't goo transparent anyway?
 	}
 	public function describeTail():void {
 		if (player.tailType == Tail.HORSE)
@@ -1327,6 +1325,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your delicate elven hands are almost supernaturally dexterous allowing you to manipulate objects or cast spells with inhuman agility.");
 		else if (armType == Arms.RAIJU)
 			outputText("  Your arms and hands are practically human save for the sharp white claws that have replaced your normal nails.");
+		else if (armType == Arms.RAIJU_2)
+			outputText("  Your forearms are covered with dense fur upon which an electric current runs free. Your pawed hands end with sharp claws capable of delivering powerful discharges.");
 		else if (armType == Arms.RED_PANDA)
 			outputText("  Soft, black-brown fluff cover your arms. Your paws have cute, pink paw pads and short claws.");
 		else if (armType == Arms.CAT)
@@ -1397,6 +1397,9 @@ public class PlayerAppearance extends BaseContent {
 		if (player.rearBody.type == RearBody.GHOSTLY_AURA) {
 			outputText("  An eerie ghostly aura surrounds you. Your ominous presence is enough to disturb even the bravest of souls.");
 		}
+		if (player.rearBody.type == RearBody.YETI_FUR) {
+			outputText("  Covered with a natural "+(player.biggestTitSize() > 1 ? "fur bikini":"layer of fur")+", your "+(player.biggestTitSize() > 1 ? "chest and ":"")+"crotch is protected against the cold.");
+		}
 	}
 	public function describeWings():void {
 //WINGS!
@@ -1464,6 +1467,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (wingType == Wings.ETHEREAL_WINGS){
 			outputText("  Three pairs of otherworldly tendrils grow out of your back. They have an ethereal glow around them and they gently sway against an invisible wind.");
+		}
+		if (wingType == Wings.THUNDEROUS_AURA){
+			outputText("  You generate so much electricity that the sound of static and voltage follows you around, announcing your arrival.");
 		}
 	}
 	public function describeHorns():void {
@@ -1752,7 +1758,7 @@ public class PlayerAppearance extends BaseContent {
 			else if(earType == Ears.ELVEN)
 				outputText("  A pair of cute, long, elven, pointy ears, bigger than your old human ones and alert to every sound stick out from your skull.");
 			else if(earType == Ears.WEASEL)
-				outputText("  A pair of sideways leaning weasel ears that flick toward every slight sound stick out from your skull.");
+				outputText("  A pair of sideways leaning raiju ears that flick toward every slight sound stick out from your skull.");
 			if (earType == Ears.BAT){
 				outputText("  A pair of bat ears sit atop your head, always perked up to catch any stray sound.");
 			}
@@ -1855,7 +1861,7 @@ public class PlayerAppearance extends BaseContent {
 				outputText(".");
 			}
 			else if(earType == Ears.WEASEL)
-				outputText("  Your [hair] is parted by two sideways leaning weasel ears that flick toward every slight sound.");
+				outputText("  Your [hair] is parted by two sideways leaning raiju ears that flick toward every slight sound.");
 			if (earType == Ears.BAT){
 				outputText("  The [hair] on your head is parted by large bat ears atop your head, always perked up to catch any stray sound.");
 			}
@@ -3016,9 +3022,9 @@ public function RacialScores():void {
 	else if (player.vouivreScore() >= 1 && player.vouivreScore() < 11) outputText("\n<font color=\"#008000\">Vouivre: " + player.vouivreScore() + "</font>");
 	else if (player.vouivreScore() < 1) outputText("\n<font color=\"#ff0000\">Vouivre: 0</font>");
 	//Yeti
-	if (player.yetiScore() >= 12) outputText("\n<font color=\"#0000a0\">Yeti: " + player.yetiScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())) + " max Spe, -" + (60 * (1 + player.newGamePlusMod())) + " max Int, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.yetiScore() >= 6 && player.yetiScore() < 12) outputText("\n<font color=\"#0000a0\">Half Yeti: " + player.yetiScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (25 * (1 + player.newGamePlusMod())) + " max Spe, -" + (30 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.yetiScore() >= 1 && player.yetiScore() < 6) outputText("\n<font color=\"#008000\">Half Yeti: " + player.yetiScore() + "</font>");
+	if (player.yetiScore() >= 14) outputText("\n<font color=\"#0000a0\">Yeti: " + player.yetiScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())) + " max Spe, -" + (70 * (1 + player.newGamePlusMod())) + " max Int, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+	else if (player.yetiScore() >= 7 && player.yetiScore() < 14) outputText("\n<font color=\"#0000a0\">Half Yeti: " + player.yetiScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (25 * (1 + player.newGamePlusMod())) + " max Spe, -" + (35 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+	else if (player.yetiScore() >= 1 && player.yetiScore() < 7) outputText("\n<font color=\"#008000\">Half Yeti: " + player.yetiScore() + "</font>");
 	else if (player.yetiScore() < 1) outputText("\n<font color=\"#ff0000\">Half Yeti: 0</font>");
 	//Yggdrasil
 	if (player.yggdrasilScore() >= 10) outputText("\n<font color=\"#0000a0\">Yggdrasil: " + player.yggdrasilScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Wis, -" + (50 * (1 + player.newGamePlusMod())) + " max Lib, +" + (10 * (1 + player.newGamePlusMod())) + " Armor)</font>");

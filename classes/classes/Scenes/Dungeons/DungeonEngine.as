@@ -122,59 +122,69 @@ public class DungeonEngine extends BaseContent
 		private static const DUNGEON_ANZU_BASEMENT:int 			= 102;
 		private static const DUNGEON_ANZU_ARMORY:int 			= 103;
 		
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_01:int  = 104;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_02:int  = 105;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_03:int  = 106;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_04:int  = 107;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_05:int  = 108;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_06:int  = 109;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_07:int  = 110;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_08:int  = 111;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_09:int  = 112;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_10:int  = 113;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_11:int  = 114;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_12:int  = 115;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_13:int  = 116;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_14:int  = 117;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_15:int  = 118;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_16:int  = 119;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_17:int  = 120;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_18:int  = 121;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_19:int  = 122;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_20:int  = 123;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_21:int  = 124;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_22:int  = 125;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_23:int  = 126;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_24:int  = 127;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_25:int  = 128;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_26:int  = 129;
-		private static const DUNGEON_RIVER_FLOOR_02_ROOM_27:int  = 130;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_01:int = 104;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_02:int = 105;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_03:int = 106;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_04:int = 107;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_05:int = 108;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_06:int = 109;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_07:int = 110;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_08:int = 111;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_09:int = 112;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_10:int = 113;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_11:int = 114;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_12:int = 115;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_13:int = 116;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_14:int = 117;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_15:int = 118;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_16:int = 119;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_17:int = 120;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_18:int = 121;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_19:int = 122;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_20:int = 123;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_21:int = 124;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_22:int = 125;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_23:int = 126;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_24:int = 127;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_25:int = 128;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_26:int = 129;
+		private static const DUNGEON_RIVER_FLOOR_02_ROOM_27:int = 130;
 		
 		private static const DUNGEON_EBON_LABYRINTH_0:int	= 131;
 		private static const DUNGEON_EBON_LABYRINTH_1:int	= 132;
 		private static const DUNGEON_EBON_LABYRINTH_2:int	= 133;
 		private static const DUNGEON_EBON_LABYRINTH_3:int	= 134;
 		
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_01:int  = 135;
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_02:int  = 136;
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_03:int  = 137;
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_04:int  = 138;
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_05:int  = 139;
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_06:int  = 140;
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_07:int  = 141;
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_08:int  = 142;
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_09:int  = 143;
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_10:int  = 144;
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_11:int  = 145;
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_12:int  = 146;
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_13:int  = 147;
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_14:int  = 148;
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_15:int  = 149;
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_16:int  = 150;
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_17:int  = 151;
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_18:int  = 152;
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_19:int  = 153;
-		private static const DUNGEON_RIVER_FLOOR_03_ROOM_20:int  = 154;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_01:int = 135;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_02:int = 136;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_03:int = 137;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_04:int = 138;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_05:int = 139;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_06:int = 140;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_07:int = 141;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_08:int = 142;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_09:int = 143;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_10:int = 144;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_11:int = 145;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_12:int = 146;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_13:int = 147;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_14:int = 148;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_15:int = 149;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_16:int = 150;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_17:int = 151;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_18:int = 152;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_19:int = 153;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_20:int = 154;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_21:int = 155;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_22:int = 156;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_23:int = 157;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_24:int = 158;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_25:int = 159;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_26:int = 160;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_27:int = 161;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_28:int = 162;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_29:int = 163;
+		private static const DUNGEON_RIVER_FLOOR_03_ROOM_30:int = 164;
 		
 		//Register dungeons
 		public var factory:Factory = new Factory;
@@ -266,7 +276,7 @@ public class DungeonEngine extends BaseContent
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_HIDDEN_CAVE_MEDIUM_CAVE) hiddencave.roomMediumCave();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_HIDDEN_CAVE_SMALL_CAVE_E) hiddencave.roomSmallCaveE();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_HIDDEN_CAVE_SMALL_CAVE_N) hiddencave.roomSmallCaveN();
-			//River Dungeon
+			//River Dungeon 1st floor
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_01) riverdungeon.roomA01();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_02) riverdungeon.roomA02();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_03) riverdungeon.roomA03();
@@ -287,6 +297,34 @@ public class DungeonEngine extends BaseContent
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_18) riverdungeon.roomA18();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_19) riverdungeon.roomA19();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_20) riverdungeon.roomA20();
+			//River Dungeon 2nd floor
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_01) riverdungeon.roomB01();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_02) riverdungeon.roomB02();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_03) riverdungeon.roomB03();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_04) riverdungeon.roomB04();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_05) riverdungeon.roomB05();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_06) riverdungeon.roomB06();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_07) riverdungeon.roomB07();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_08) riverdungeon.roomB08();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_09) riverdungeon.roomB09();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_10) riverdungeon.roomB10();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_11) riverdungeon.roomB11();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_12) riverdungeon.roomB12();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_13) riverdungeon.roomB13();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_14) riverdungeon.roomB14();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_15) riverdungeon.roomB15();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_16) riverdungeon.roomB16();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_17) riverdungeon.roomB17();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_18) riverdungeon.roomB18();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_19) riverdungeon.roomB19();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_20) riverdungeon.roomB20();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_21) riverdungeon.roomB21();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_22) riverdungeon.roomB22();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_23) riverdungeon.roomB23();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_24) riverdungeon.roomB24();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_25) riverdungeon.roomB25();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_26) riverdungeon.roomB26();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_27) riverdungeon.roomB27();
 			//Den of Desire
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_DEN_OF_DESIRE_ENTRANCE) denofdesire.roomEntrance();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_DEN_OF_DESIRE_GREAT_HALL_AREA) denofdesire.roomGreatHallArea();
@@ -341,7 +379,10 @@ public class DungeonEngine extends BaseContent
 			return (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 2);
 		}
 		public function checkRiverDungeon1stFloorClear():Boolean {
-			return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1);//1 - pok 1 golema, 2 pokonanie obu golemów
+			return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1);//1 - pokonanie 1 golema, 2 pokonanie obu golemów
+		}
+		public function checkRiverDungeon2ndFloorClear():Boolean {
+			return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 4);//x - pokonanie chimerycznego żywiołaka
 		}
 		public function checkEbonLabyrinthClear():Boolean {
 			return (flags[kFLAGS.EBON_LABYRINTH] > 1);//exploracja 50 pokoi bez porażki

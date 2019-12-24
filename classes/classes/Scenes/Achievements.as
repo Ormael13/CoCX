@@ -192,6 +192,8 @@ public class Achievements extends BaseContent
 			addAchievement("Throne of Strength", kACHIEVEMENTS.FASHION_THRONE_OF_STRENGTH, "Equip all strength boosting accessories.");
 			addAchievement("Throne of Toughness", kACHIEVEMENTS.FASHION_THRONE_OF_TOUGHNESS, "Equip all toughness boosting accessories.");
 			addAchievement("Throne of Wisdom", kACHIEVEMENTS.FASHION_THRONE_OF_WISDOM, "Equip all wisdom boosting accessories.");
+			addAchievement("Suit Up!", kACHIEVEMENTS.FASHION_SUIT_UP, "Equip any vehicle.");
+			addAchievement("Rollin'", kACHIEVEMENTS.FASHION_SUIT_UP, "Equip Goblin Mech Prime.", "", true);
 			
 			titleAchievementSection("Wealth"); //9 achievements
 			addAchievement("Rich", kACHIEVEMENTS.WEALTH_RICH, "Have 1,000 gems.");
@@ -286,10 +288,11 @@ public class Achievements extends BaseContent
 			addAchievement("Us Evolve", kACHIEVEMENTS.EPIC_US_EVOLVE, "Find two evolving items.", "", true);
 			//znalezienie 4 ewolujących przedmiotów
 			//znalezienie 8 ewolujących przedmiotów
-			//przeprowadznie 1 ewolucji przedmiotu
-			//przeprowadznie 2 ewolucji przedmiotu
-			//przeprowadznie 4 ewolucji przedmiotu
-			//przeprowadznie 8 ewolucji przedmiotu
+			//przeprowadzenie 1 ewolucji przedmiotu
+			//przeprowadzenie 2 ewolucji przedmiotu
+			//przeprowadzenie 4 ewolucji przedmiotu
+			//przeprowadzenie 8 ewolucji przedmiotu
+			addAchievement("Let's go fishing!", kACHIEVEMENTS.EPIC_LETS_GO_FISHING, "Beat down Kaiju type enemy in Mech.", "", true);
 			addAchievement("Achievementception", kACHIEVEMENTS.EPIC_ACHIEVEMENTCEPTION, "Unlocking 10 achievements.", "", true);
 			addAchievement("Achievement within Achievement", kACHIEVEMENTS.EPIC_ACHIEVEMENT_WITHIN_ACHIEVEMENT, "Unlocking 30 achievements.", "", true);
 			addAchievement("Achievements - Going Deeper (1st layer)", kACHIEVEMENTS.EPIC_ACHIEVEMENTS_GOING_DEEPER_1L, "Unlocking 60 achievements.", "", true);

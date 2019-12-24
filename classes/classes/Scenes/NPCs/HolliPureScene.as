@@ -144,7 +144,7 @@ private function waterIt():void {
 	outputText("For a moment you think what to do with this ");
 	if (flags[kFLAGS.FLOWER_LEVEL] == 3) outputText("tree");
 	else outputText("plant");
-	outputText(".  Maybe bring some water from near the steam to water it?  Or is this realm causing them to not need it?  After a moment of hesitation you go to the steam looking for some way to bring water.  Few runs later you finished watering it and feeling tired spend some time resting.");
+	outputText(". Maybe bring some water from near the stream to water it? Or is this realm causing them to not need it? After a moment of hesitation, you go to the stream looking for some way to bring water. A few runs later you finished watering it and feeling tired, spend some time resting.");
 	fatigue(50);
 	if(flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER]++;
 	flags[kFLAGS.TIMES_RIDDEN_FLOWER]++;
@@ -155,13 +155,13 @@ private function useSouforceInfusedBlood():void {
 	outputText("For a moment you think what to do with this ");
 	if (flags[kFLAGS.FLOWER_LEVEL] == 3) outputText("tree");
 	else outputText("plant");
-	outputText(".  Bringing water is fine but it seems the plant is growing too slowly.  What else could make it grow faster?  While thinking you casually remember about something you started to develop: soulforce.  After visiting the river village you’ve seen that it can even enhance natural healing.  So maybe if you could use it now it could provide better nourishment to this ");
+	outputText(". Bringing water is fine but it seems the plant is growing too slowly. What else could make it grow faster? While thinking you casually remember about something you started to develop: Soulforce. After visiting the river village you’ve seen that it can even enhance natural healing. So maybe if you could use it now it could provide better nourishment for this ");
 	if (flags[kFLAGS.FLOWER_LEVEL] == 3) outputText("tree");
 	else outputText("plant");
-	outputText(" than mere water.  For a moment you ponder if it is actually a good idea to spray it with your own blood.  Probably that it would also give it some of your soulforce.  Preparing mentally to that as you focus on infusing tiny bit of your soulforce into your blood you cut your hand and drip a little bit of your blood at the ");
+	outputText(" than mere water. For a moment you ponder if it is actually a good idea to spray it with your own blood. Probably that it would also give it some of your Soulforce. Preparing mentally to do that as you focus on infusing a tiny bit of your soulforce into your blood, you cut your hand and drip a little bit of your blood at the ");
 	if (flags[kFLAGS.FLOWER_LEVEL] == 3) outputText("tree");
 	else outputText("plant");
-	outputText(".  It seems to greedily absorb the liquid for a moment turning slightly crimson in place where blood made contact with it, while you go to patch your hand.  Better hope the blood scent doesn't attract something to the camp.");
+	outputText(". It seems to greedily absorb the liquid for a moment, turning slightly crimson in the place where blood made contact with it, while you go to patch your hand. Better hope the blood scent doesn’t attract something to the camp.");
 	player.HP -= 150;
 	player.soulforce -= 50;
 	if(flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] += 4;

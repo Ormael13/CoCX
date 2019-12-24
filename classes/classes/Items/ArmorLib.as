@@ -53,6 +53,7 @@ package classes.Items
 		public const GELARMR:Armor = new Armor("GelArmr","GelArmr","glistening gel-armor plates","a suit of gel armor",10,0,600,"This suit of interlocking plates is made from a strange green material.  It feels spongy to the touch but is amazingly resiliant.","Heavy");
 		public const GOOARMR:GooArmor = new GooArmor();
 		public const H_GARB_:HereticsGarb = new HereticsGarb();
+		public const HBA_ARM:HBAspArmor = new HBAspArmor();
 		public const I_CORST:InquisitorsCorset = new InquisitorsCorset();
 		public const I_ROBES:InquisitorsRobes = new InquisitorsRobes();
 		public const INDECST:ArmorWithPerk = new ArmorWithPerk("IndecSt","Indec StAr","practically indecent steel armor","a suit of practically indecent steel armor",5,0,400,"This suit of steel 'armor' has two round disks that barely cover the nipples, a tight chainmail bikini, and circular butt-plates.","Medium",

@@ -5,6 +5,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.EventParser;
 
 public class MaraeScene extends AbstractBoatContent implements TimeAwareInterface {
 

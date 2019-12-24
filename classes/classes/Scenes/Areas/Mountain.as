@@ -67,6 +67,7 @@ public class Mountain extends BaseContent
 						name  : "alvina2",
 						when  : function():Boolean {
 							return flags[kFLAGS.ALVINA_FOLLOWER] == 9
+								   && flags[kFLAGS.LETHICE_DEFEATED] > 0
 								   && !player.hasStatusEffect(StatusEffects.LethiceRedemed);
 						},
 						chance: 0.5,
@@ -182,12 +183,18 @@ public class Mountain extends BaseContent
 					}, {
 						name: "electra",
 						when: function ():Boolean {
-							return flags[kFLAGS.ELECTRA_FOLLOWER] < 1 && !player.hasStatusEffect(StatusEffects.ElectraOff);
+							return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ElectraOff);
 						},
 						chance:0.5,
 						call: function ():void {
 							if (flags[kFLAGS.ELECTRA_AFFECTION] < 2) SceneLib.electraScene.firstEnc();
-							else SceneLib.electraScene.repeatMountainEnc();
+							else {
+								if (flags[kFLAGS.ELECTRA_AFFECTION] == 100) {
+									if (flags[kFLAGS.ELECTRA_FOLLOWER] == 1) SceneLib.electraScene.ElectraRecruitingAgain();
+									else SceneLib.electraScene.ElectraRecruiting();
+								}
+								else SceneLib.electraScene.repeatMountainEnc();
+							}
 						}
 					}, {
 						name: "diva",
@@ -463,7 +470,8 @@ public class Mountain extends BaseContent
 			}
 			//Chance to impregnate PC, get mino-fix, and maybe relief from feeder perk.
 			player.minoCumAddiction(10);
-			player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
+			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+            else player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(60);
 			if (player.hasStatusEffect(StatusEffects.Feeder)) {
 				//You've now been milked, reset the timer for that

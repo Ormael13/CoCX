@@ -377,7 +377,10 @@ public class BehemothScene extends BaseContent
 			outputText("\n\nYou wake up from your nap refreshed and invigorated and give the Behemoth a kiss before you " + player.clothedOrNaked("redress yourself in your [armor], and") + "make your way back to your camp.");
 			player.orgasm();
 			player.slimeFeed();
-			if (flags[kFLAGS.BEHEMOTH_CHILDREN] < 3 && player.cor < 25 + player.corruptionTolerance()) player.knockUp(PregnancyStore.PREGNANCY_BEHEMOTH, PregnancyStore.INCUBATION_BEHEMOTH, 50 + (flags[kFLAGS.BEHEMOTH_CHILDREN] * 15) + player.cor);
+			if (flags[kFLAGS.BEHEMOTH_CHILDREN] < 3 && player.cor < 25 + player.corruptionTolerance()) {
+				if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				else player.knockUp(PregnancyStore.PREGNANCY_BEHEMOTH, PregnancyStore.INCUBATION_BEHEMOTH, 50 + (flags[kFLAGS.BEHEMOTH_CHILDREN] * 15) + player.cor);
+			}
 			flags[kFLAGS.BEHEMOTH_VAGINAL_CATCH]++;
 			dynStats("str", 0.5, "tou", 0.5);
 			HPChange(50 + (player.maxHP() / 5), false);

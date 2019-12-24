@@ -612,7 +612,8 @@ private function keltMainEncounter3():void {
 			//(+5 Submissive)
 			player.addStatusValue(StatusEffects.Kelt,2,5);
 			//(Pregnancy Chance)
-			player.knockUp(PregnancyStore.PREGNANCY_KELT, PregnancyStore.INCUBATION_CENTAUR, 50);
+			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			else player.knockUp(PregnancyStore.PREGNANCY_KELT, PregnancyStore.INCUBATION_CENTAUR, 50);
 				//Should be equivalent to the old way, but now Kelt does all the usual things like checking for contraceptives and fertilizing eggs if PC can oviposit
 			if (player.pregnancyType == PregnancyStore.PREGNANCY_KELT) trace("PLAYER GOT KNOCKED UP BY KELT");
 			doNext(camp.returnToCampUseOneHour);

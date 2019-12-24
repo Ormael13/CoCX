@@ -267,11 +267,12 @@ public function blackCatBeerEffects(player:Player,clearScreen:Boolean = true,new
 	outputText("\n\nA wonderful warmth fills your body, making your pain fade away.  However, it also makes your crotch tingle - combined with the relaxation imparted already, you feel <b>very</b> turned-on.  A beautiful, warm, fuzzy sensation follows and fills your head, like your brain is being wrapped in cotton wool.  You don't feel quite as smart as before, but that's all right, it feels so nice...");
 	outputText("\n\nYour balance suddenly feels off-kilter and you stumble, narrowly avoiding falling.  You just can't move as fast as you could, not with your head feeling so full of fluff and fuzz; your body prickles and tingles with the warmth once your head feels full, the sensation concentrating around your erogenous zones.  You just feel so fluffy... you want to hold somebody and share your warmth with them, too; it's just so wonderful.");
 	//Regain 40 to 60 lost health, increase lust by 10 to 20 points, decrease Intelligence and Speed by 5, increase Libido by 5//
-	HPChange(40 + rand(21),false);
+	HPChange(40 + rand(21), false);
+	var maxes:Object = player.getAllMaxStats();
 	var lib:Number = 0;
 	if(player.hasStatusEffect(StatusEffects.BlackCatBeer)) {
-		if(100 - player.lib >= 10) lib = 10;
-		else lib = 100 - player.lib;
+		if(maxes.lib - player.lib >= 10) lib = 10;
+		else lib = maxes.lib - player.lib;
 		player.addStatusValue(StatusEffects.BlackCatBeer,1,4);
 		player.addStatusValue(StatusEffects.BlackCatBeer,2,lib);
 		outputText("\n\nDamn, it's even better with every extra drink!");
@@ -891,16 +892,20 @@ private function barBeerOrgyTits():void {
 			if(player.pregnancyType == 0) outputText("  You can't help but wonder how virile those dog morphs might have been as their cum and the cum of other customers sloshes around inside your uterus.");
 			switch(rand(6)) {
 				case 0:
-					player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
+					if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+					else player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
 					break;
 				case 1:
-					player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE);
+					if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+					else player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE);
 					break;
 				case 2:
-					player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE); //I'm betting this was meant to be dog morph chance
+					if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+					else player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE); //I'm betting this was meant to be dog morph chance
 					break;
 				default:
-					player.knockUp(PregnancyStore.PREGNANCY_CENTAUR, PregnancyStore.INCUBATION_CENTAUR);
+					if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+					else player.knockUp(PregnancyStore.PREGNANCY_CENTAUR, PregnancyStore.INCUBATION_CENTAUR);
 					break;
 			}
 		}

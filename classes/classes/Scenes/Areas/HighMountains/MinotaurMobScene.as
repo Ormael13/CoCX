@@ -393,7 +393,8 @@ private function nonAddictMinotaurGangBang():void {
 	//Force cum bottle loot!
 	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.MINOCUM.id;
 	//Preggers chance!
-	player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR, 75);
+	if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+    else player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR, 75);
 	player.orgasm();
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", -.5, "cor", 1);
 	player.slimeFeed();
@@ -820,7 +821,8 @@ private function victoryAllThePenetrationsMinotaurGangBang():void {
 	outputText("After getting dressed, you idly scoop a handful of cum from your sodden box and devour it - the perfect snack for the long walk home.");
 
 	//Preggers chance!
-	player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR, 75);
+	if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+    else player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR, 75);
 	player.orgasm();
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", -.5, "cor", 1);
 	player.slimeFeed();

@@ -140,7 +140,7 @@ import classes.internals.Utils;
 		public function YuShopTalkWoodplank():void {
 			clearOutput();
 			outputText("So what exactly is that thing she’s been riding on outside?\n\n");
-			outputText("\"<i>Yu call it a snowboard. Its flat and it moves downhill superfast if you can hold to it. Yu think this should be a sport activity in Mareth but no one thinks about exercise and good health, its always demon this demon that.</i>\"\n\n");
+			outputText("\"<i>Yu call it a snowboard. Its flat and it moves downhill superfast if you can hold to it. Yu think this should be a sport activity in Mareth but no one thinks about exercise and good health, it's always demon this demon that.</i>\"\n\n");
 			outputText("You could have a snowboard too?\n\n");
 			outputText("\"<i>Yea sure! Yu got plenty in shop if [name] need one.</i>\"");
 			doNext(YuShopTalkMain);
@@ -179,7 +179,7 @@ import classes.internals.Utils;
 				outputText("\"<i>It might be a little cold at first so take in some of Yu saliva. It will help make it better.</i>\"\n\n");
 				outputText("She kiss you again exchanging some of her Saliva with yours and to your surprise the ambient cold start to diminish as your body becomes increasingly hot or increasingly numb perhaps? " + (flags[kFLAGS.MET_YETI_FIRST_TIME] == 1 ? "Unsurprisingly, like for all Yeti" : "Surprisingly") + " her fluids actually create a tingling warmth in the partner body meant to facilitate intercourse even at the lowest ambient temperature. ");
 				outputText("If Yu had wanted to fuck with you in the middle of a blizzard she could just have. Her cool breath contrast highly with the warmth of her pussy and you are pretty sure that " + (flags[kFLAGS.MET_YETI_FIRST_TIME] == 1 ? "just as with all yeti " : "") + "she could freeze you solid by blowing on you if she wanted. Yet right now her breath only gives you the right amount of fresh air you need. ");
-				outputText("While you are lost in though, Yu use the opportunity to insert the glacial dildo into your cunt making you gasp as the home made toy give your burning body some seriously needed cool. You need to calm that heat and the only way you have is this icy dildo! You barely register as Yu mount the dildo herself and begin sliding against it causing it to slide in and out of your own pussy. ");
+				outputText("While you are lost in thought, Yu use the opportunity to insert the glacial dildo into your cunt making you gasp as the home made toy give your burning body some seriously needed cool. You need to calm that heat and the only way you have is this icy dildo! You barely register as Yu mount the dildo herself and begin sliding against it causing it to slide in and out of your own pussy. ");
 				outputText("You need it deeper and faster and to make it clear you slide up to the middle of the length causing Yu to yelp in surprise at the swift insertion. The both of you keep fucking until you both cum, your pussy juices freezing on the dildo yet your cunt burning brightly with the need for a good working. Eventually the both of you fall off asleep. Yu making sure to protect you from the cold.\n\n");
 			}
 			player.orgasm();

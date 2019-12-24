@@ -360,7 +360,7 @@ import classes.internals.*;
 				this.bonusLust = 10;
 				this.lustVuln = .9;
 				this.level = 2;
-				this.drop = new WeightedDrop(consumables.BAGOCA1, 1);
+				this.drop = NO_DROP;
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 1) {
 				this.a = "";

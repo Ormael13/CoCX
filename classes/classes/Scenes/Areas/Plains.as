@@ -64,10 +64,16 @@ use namespace CoC;
 			}, {
 				name: "electra",
 				when: function():Boolean {
-					return flags[kFLAGS.ELECTRA_FOLLOWER] < 1 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && !player.hasStatusEffect(StatusEffects.ElectraOff);
+					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && !player.hasStatusEffect(StatusEffects.ElectraOff);
 				},
 				chance: 0.5,
-				call: SceneLib.electraScene.repeatPlainsEnc
+				call: function ():void {
+					if (flags[kFLAGS.ELECTRA_AFFECTION] == 100) {
+						if (flags[kFLAGS.ELECTRA_FOLLOWER] == 1) SceneLib.electraScene.ElectraRecruitingAgain();
+						else SceneLib.electraScene.ElectraRecruiting();
+					}
+					else SceneLib.electraScene.repeatPlainsEnc();
+				}
 			}, {
 				name: "sidonie",
 				when: function ():Boolean {

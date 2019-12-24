@@ -86,7 +86,7 @@ public class Appearance extends Utils
 				else if (i_creature.hairType == Hair.SILKEN) description += "silk-like ";
 				else if (i_creature.hairType == Hair.BURNING) description += "burning ";
 				description += "mane";
-				if (i_creature.hairType == Hair.STORM) description += " that ends with glowing lightning shaped locks";
+				if (i_creature.hairType == Hair.STORM) description += ". The tips ends with glowing lightning shaped locks";
 				return description;
 			}
 			//if medium length refer to as locks sometimes
@@ -108,7 +108,7 @@ public class Appearance extends Utils
 			else if (i_creature.hairType == Hair.SILKEN) description += "silk-like ";
 			if (i_creature.hairType == Hair.BURNING) description += "mane of fire that burns things only when you wish it to";
 			else description += "hair";
-			if (i_creature.hairType == Hair.STORM) description += " that ends with glowing lightning shaped locks";
+			if (i_creature.hairType == Hair.STORM) description += ". The tips ends with glowing lightning shaped locks";
 			return description;
 		}
 		
@@ -2696,7 +2696,8 @@ public class Appearance extends Utils
 					[Arms.GOO, "goo"],
 					[Arms.HYDRA, "hydra"],
 					[Arms.GHOST, "phantom"],
-					[Arms.JIANGSHI, "jiangshi"]
+					[Arms.JIANGSHI, "jiangshi"],
+					[Arms.RAIJU_2, "raiju paws"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2773,7 +2774,8 @@ public class Appearance extends Utils
 					[Wings.FEY_DRAGON_WINGS, "large majestic fey draconic"],
 					[Wings.FEATHERED_AVIAN, "avian"],
 					[Wings.NIGHTMARE, "leathery"],
-					[Wings.ETHEREAL_WINGS, "etheral tendrils"]
+					[Wings.ETHEREAL_WINGS, "etheral tendrils"],
+					[Wings.THUNDEROUS_AURA, "thunderous aura"]
 				]
 		);
 		public static const DEFAULT_WING_DESCS:Object = createMapFromPairs(
@@ -2805,7 +2807,8 @@ public class Appearance extends Utils
 					[Wings.FEY_DRAGON_WINGS, "large majestic fey draconic"],
 					[Wings.FEATHERED_AVIAN, "large feathery"],
 					[Wings.NIGHTMARE, "large leathery"],
-					[Wings.ETHEREAL_WINGS, "etheral tendrils"]
+					[Wings.ETHEREAL_WINGS, "etheral tendrils"],
+					[Wings.THUNDEROUS_AURA, "thunderous aura"]
 				]
 		);
 		public static const DEFAULT_LOWER_BODY_NAMES:Object = createMapFromPairs(
@@ -2882,7 +2885,8 @@ public class Appearance extends Utils
 					[RearBody.DISPLACER_TENTACLES, "displacer tentacles"],
 					[RearBody.SNAIL_SHELL, "snail shell"],
 					[RearBody.METAMORPHIC_GOO, "metamorphic goo"],
-					[RearBody.GHOSTLY_AURA, "ghostly aura"]
+					[RearBody.GHOSTLY_AURA, "ghostly aura"],
+					[RearBody.YETI_FUR, "yeti furkini"]
 				]
 		);
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(
@@ -3489,4 +3493,4 @@ public class Appearance extends Utils
 			return descript;
 		}
 	}
-}
+}

@@ -25,7 +25,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function MagicSpecials() {}
 	internal function applyAutocast2():void {
 		outputText("\n\n");
-		if (player.wrath >= 50 && (flags[kFLAGS.ZERKER_COMBAT_MODE] == 1 && flags[kFLAGS.ZERKER_COMBAT_MODE] == 3)) {
+		if (player.wrath >= 50 && (flags[kFLAGS.ZERKER_COMBAT_MODE] == 1 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 3)) {
 			player.wrath -= 50;
 			var berzerkDuration:Number = 10;
 			if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsEvolved)) berzerkDuration += 2;
@@ -33,7 +33,7 @@ public class MagicSpecials extends BaseCombatContent {
 			player.createStatusEffect(StatusEffects.Berzerking,berzerkDuration,0,0,0);
 			outputText("<b>Berzerking was used succesfully.</b>\n\n");
 		}
-		if (player.wrath >= 50 && (flags[kFLAGS.ZERKER_COMBAT_MODE] == 2 && flags[kFLAGS.ZERKER_COMBAT_MODE] == 3)) {
+		if (player.wrath >= 50 && (flags[kFLAGS.ZERKER_COMBAT_MODE] == 2 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 3)) {
 			player.wrath -= 50;
 			var lustzerkDuration:Number = 10;
 			if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsEvolved)) lustzerkDuration += 2;
@@ -70,6 +70,13 @@ public class MagicSpecials extends BaseCombatContent {
 		if ((player.raijuScore() >= 7 || (player.thunderbirdScore() >= 10 && player.tailType == Tail.THUNDERBIRD)) && player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
 			bd = buttons.add("Orgasmic L.S.", OrgasmicLightningStrike, "Masturbate to unleash a massive discharge.", "Orgasmic Lightning Strike");
 			bd = buttons.add("Pleasure bolt", PleasureBolt, "Release a discharge of your lust inducing electricity. It will rise your lust by 2% of max lust after each use.", "Pleasure bolt");
+			if ((player.hasVagina() && (player.cowScore() >= 9 || player.hasPerk(PerkLib.LactaBovinaOvaries))) || (player.hasCock() && (player.minotaurScore() >= 9 || player.hasPerk(PerkLib.MinotaurTesticles)))) {
+				bd = buttons.add("Plasma blast", PlasmaBlast, "Masturbate to unleash a massive discharge of milk/cum mized with plasma.", "Plasma blast");
+				if (player.hasStatusEffect(StatusEffects.CooldownMilkBlast) || player.hasStatusEffect(StatusEffects.CooldownCumCannon)) {
+					if (player.hasPerk(PerkLib.LactaBovinaOvariesFinalForm) || player.hasPerk(PerkLib.MinotaurTesticlesFinalForm)) bd.disable("\n<b>You need more time before you can do it again.</b>");
+					else bd.disable("You can't use it more than once during fight.");
+				}
+			}
 		}
 		if (player.tailType == Tail.FOX && player.tailCount >= 2 && player.tailCount < 7) {
 			bd = buttons.add("Fox Fire", basicFoxFire, "Unleash fox flame at your opponent for high damage. \n");
@@ -498,7 +505,25 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You already used darkness elemental aspect in this fight.");
 			}
 		}
-		//?lust/corruption?
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPoison)) {
+			bd = buttons.add("Poison E.Asp", ElementalAspectPoison);
+			if (player.hasStatusEffect(StatusEffects.CooldownEAspectPoison)) {
+				bd.disable("You already used poison elemental aspect in this fight.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) {
+			bd = buttons.add("Purity E.Asp", ElementalAspectPurity);
+			if (player.hasStatusEffect(StatusEffects.CooldownEAspectPurity)) {
+				bd.disable("You already used purity elemental aspect in this fight.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) {
+			bd = buttons.add("Corruption E.Asp", ElementalAspectCorruption);
+			if (player.hasStatusEffect(StatusEffects.CooldownEAspectCorruption)) {
+				bd.disable("You already used corruption elemental aspect in this fight.");
+			}
+		}
+		//?lust?
 		if (player.hasStatusEffect(StatusEffects.ShieldingSpell)) buttons.add("Shielding", shieldingSpell);
 		if (player.hasStatusEffect(StatusEffects.ImmolationSpell)) buttons.add("Immolation", immolationSpell);
 		if (player.hasStatusEffect(StatusEffects.IcePrisonSpell)) buttons.add("Ice Prison", iceprisonSpell);
@@ -788,7 +813,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		var temp2:Number = 0;
 		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
-			outputText("You achieve a thundering orgasm, lightning surging out of your body as you direct it toward " + monster.a + monster.short + ", gleefully zapping " + monster.pronoun2 + " body with your accumulated lust! Your desire, however, only continue to ramp up.\n\n");
+			outputText("You achieve a thundering orgasm, lightning surging out of your body as you direct it toward " + monster.a + monster.short + ", gleefully zapping " + monster.pronoun2 + " body with your accumulated lust! Your desire, however, only continues to ramp up.\n\n");
 			temp2 = 5 + rand(player.lib / 5 + player.cor / 10);
 			dynStats("lus", temp2, "scale", false);
 			var lustDmgF:Number = 20 + rand(6);
@@ -863,7 +888,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 		}
 		else if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
-			outputText("You continue masturbating, lost in the sensation as lightning run across your form. You are almost there!\n\n");
+			outputText("You continue masturbating, lost in the sensation as lightning runs across your form. You are almost there!\n\n");
 			temp2 = 5 + rand(player.lib / 5 + player.cor / 10);
 			dynStats("lus", temp2, "scale", false);
 			player.addStatusValue(StatusEffects.ChanneledAttack, 1, 1);
@@ -979,6 +1004,75 @@ public class MagicSpecials extends BaseCombatContent {
 		statScreenRefresh();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
+	}
+	
+	public function PlasmaBlast():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		if (player.hasPerk(PerkLib.LactaBovinaOvariesFinalForm) || player.hasPerk(PerkLib.MinotaurTesticlesFinalForm)) player.createStatusEffect(StatusEffects.CooldownPlasmaBlast, 4, 0, 0, 0);
+		else player.createStatusEffect(StatusEffects.CooldownPlasmaBlast, 0, 0, 0, 0);
+		var damage:Number = 0;
+		if (player.gender == 1) {
+			if (player.isTaur()) outputText("You rear up and moan, using your forepaws to jerk and molest your [cock] as you grope your [chest] with your free hands. Finally you scream in thunderous orgasmic bliss as your cock shoots a massive jet of cum mixed with plasma. ");
+			else outputText("You begin to masturbate fiercely, your [balls] expending with stacked semen as you ready to blow. Your cock shoots a massive jet of cum mixed with plasma, projecting " + monster.a + monster.short + " away and knocking it prone. ");
+			damage += player.cumQ();
+			damage *= (player.lust100 * 0.01);
+			damage *= 1.2;
+			damage = Math.round(damage);
+			damage = doLightingDamage(damage, true, true);
+			if (monster.lustVuln > 0) {
+				outputText(" ");
+				var CumLustDmg:Number = 0;
+				CumLustDmg += combat.scalingBonusLibido() * 0.2;
+				monster.teased(CumLustDmg);
+			}
+			player.lust += (player.lust100 * 0.05);
+		}
+		if (player.gender == 2) {
+			outputText("You grab both of your udder smirking as you point them toward your somewhat confused target. You moan a pleasured Mooooooo as you open the dam, splashing " + monster.a + monster.short + " with twin jets of milk mixed with plasma so powerful it is blown away, hitting the nearest obstacle. ");
+			damage += player.lactationQ();
+			damage *= (player.lust100 * 0.01);
+			damage *= 1.2;
+			damage = Math.round(damage);
+			damage = doLightingDamage(damage, true, true);
+			if (monster.lustVuln > 0) {
+				outputText(" ");
+				var MilkLustDmg:Number = 0;
+				MilkLustDmg += combat.scalingBonusLibido() * 0.2;
+				monster.teased(MilkLustDmg);
+			}
+			player.lust += (player.lust100 * 0.05);
+		}
+		if (player.gender == 3) {
+			if (player.isTaur()) outputText("You rear up and moan, using your forepaws to jerk and molest your [cock] as you grope your [chest] with your free hands. Finally you scream in thunderous orgasmic bliss as your cock shoots a massive jet of cum mixed with plasma followed shortly by a twin shot of plasma infused breast milk. ");
+			else outputText("You moan as you begin to molest your [cock] using your free hand to grope at your [chest]. Finally you scream in a thunderous orgasmic pleasure as your cock shoots a massive jet of cum mixed with plasma followed shortly by a twin shot of plasma infused breast milk. ");
+			damage += player.lactationQ();
+			damage += player.cumQ();
+			damage *= 1.5;
+			damage *= (player.lust100 * 0.02);
+			damage = Math.round(damage);
+			damage = doLightingDamage(damage, true, true);
+			if (monster.lustVuln > 0) {
+				outputText(" ");
+				var MilkCumLustDmg:Number = 0;
+				MilkCumLustDmg += combat.scalingBonusLibido() * 0.4;
+				monster.teased(MilkCumLustDmg);
+			}
+			player.lust += (player.lust100 * 0.1);
+		}
+		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+		outputText("\n\n");
+		combat.heroBaneProc(damage);
+		enemyAI();
+	}
+	public function milkBlast():void {
+		
+		
+	}
+	
+	public function cumCannon():void {
+			
+		
 	}
 
 	public function startOniRampage():void {
@@ -3635,8 +3729,32 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 3) windwallduration += 1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 4) windwallduration += 1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 5) windwallduration += 1;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 6) windwallduration += 2;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 7) windwallduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 6) windwallduration += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 7) windwallduration += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 8) windwallduration += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 9) windwallduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 10) windwallduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 11) windwallduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 12) windwallduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 13) windwallduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 14) windwallduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 15) windwallduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 16) windwallduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 17) windwallduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 18) windwallduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 19) windwallduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 20) windwallduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 21) windwallduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 22) windwallduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 23) windwallduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 24) windwallduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 25) windwallduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 26) windwallduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 27) windwallduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 28) windwallduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 29) windwallduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 30) windwallduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 31) windwallduration += 3;
 		player.createStatusEffect(StatusEffects.WindWall, 0, windwallduration, 0, 0);
 		outputText("You call on your elemental projecting a air wall between you and " + monster.a + monster.short + " to deflect incoming projectiles.\n\n");
 		enemyAI();
@@ -3655,8 +3773,32 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 3) stoneskinduration += 1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 4) stoneskinduration += 1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 5) stoneskinduration += 1;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 6) stoneskinduration += 2;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 7) stoneskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 6) stoneskinduration += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 7) stoneskinduration += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 8) stoneskinduration += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 9) stoneskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 10) stoneskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 11) stoneskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 12) stoneskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 13) stoneskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 14) stoneskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 15) stoneskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 16) stoneskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 17) stoneskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 18) stoneskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 19) stoneskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 20) stoneskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 21) stoneskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 22) stoneskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 23) stoneskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 24) stoneskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 25) stoneskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 26) stoneskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 27) stoneskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 28) stoneskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 29) stoneskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 30) stoneskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 31) stoneskinduration += 3;
 		player.createStatusEffect(StatusEffects.StoneSkin, stoneskinbonus, stoneskinduration, 0, 0);
 		outputText("Your elemental lifts stone and dirt from the ground, encasing you in a earthen shell stronger than any armor.\n\n");
 		enemyAI();
@@ -3667,40 +3809,42 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		player.createStatusEffect(StatusEffects.CooldownEAspectFire, 0, 0, 0, 0);
 		var damage:Number = 0;
+		var multiInt:Number = 0.1;
+		var multiWis:Number = 0.1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 2) {
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 3) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 4) {
-					if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 5) {
-						if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 7) damage += scalingBonusIntelligence();
-							else damage += scalingBonusIntelligence() * 0.8;
-						}
-						else damage += scalingBonusIntelligence() * 0.6;
-					}
-					else damage += scalingBonusIntelligence() * 0.4;
-				}
-				else damage += scalingBonusIntelligence() * 0.3;
-			}
-			else damage += scalingBonusIntelligence() * 0.2;
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 1);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 1);
 		}
-		else damage += scalingBonusIntelligence() * 0.1;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 2) {
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 3) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 4) {
-					if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 5) {
-						if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 7) damage += scalingBonusWisdom();
-							else damage += scalingBonusWisdom() * 0.8;
-						}
-						else damage += scalingBonusWisdom() * 0.6;
-					}
-					else damage += scalingBonusWisdom() * 0.4;
-				}
-				else damage += scalingBonusWisdom() * 0.3;
-			}
-			else damage += scalingBonusWisdom() * 0.2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 5) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 4);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 4);
 		}
-		else damage += scalingBonusWisdom() * 0.1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 9) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 8);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 8);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 13) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 12);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 12);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 17) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 16);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 16);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 21) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 20);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 20);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 25) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 24);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 24);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 29) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 28);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 28);
+		}
+		damage += scalingBonusIntelligence() * multiInt;
+		damage += scalingBonusWisdom() * multiWis;
 		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
 		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
 		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
@@ -3728,40 +3872,42 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		player.createStatusEffect(StatusEffects.CooldownEAspectWater, 0, 0, 0, 0);
 		var temp:Number = 0;
+		var multiInt:Number = 0.1;
+		var multiWis:Number = 0.1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 2) {
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 3) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 4) {
-					if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 5) {
-						if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 7) temp += scalingBonusIntelligence();
-							else temp += scalingBonusIntelligence() * 0.8;
-						}
-						else temp += scalingBonusIntelligence() * 0.6;
-					}
-					else temp += scalingBonusIntelligence() * 0.4;
-				}
-				else temp += scalingBonusIntelligence() * 0.3;
-			}
-			else temp += scalingBonusIntelligence() * 0.2;
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 1);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 1);
 		}
-		else temp += scalingBonusIntelligence() * 0.1;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 2) {
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 3) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 4) {
-					if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 5) {
-						if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 7) temp += scalingBonusWisdom();
-							else temp += scalingBonusWisdom() * 0.8;
-						}
-						else temp += scalingBonusWisdom() * 0.6;
-					}
-					else temp += scalingBonusWisdom() * 0.4;
-				}
-				else temp += scalingBonusWisdom() * 0.3;
-			}
-			else temp += scalingBonusWisdom() * 0.2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 5) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 4);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 4);
 		}
-		else temp += scalingBonusWisdom() * 0.1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 9) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 8);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 8);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 13) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 12);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 12);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 17) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 16);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 16);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 21) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 20);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 20);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 25) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 24);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 24);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 29) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 28);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 28);
+		}
+		temp += scalingBonusIntelligence() * multiInt;
+		temp += scalingBonusWisdom() * multiWis;
 		temp = Math.round(temp);
 		outputText("Your elemental encases your body within a bubble of curative spring water, slowly closing your wounds. The bubbles pop leaving you wet, but on the way to full recovery. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>");
 		HPChange(temp,false);
@@ -3774,40 +3920,42 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		player.createStatusEffect(StatusEffects.CooldownEAspectEther, 0, 0, 0, 0);
 		var damage:Number = 0;
+		var multiInt:Number = 0.1;
+		var multiWis:Number = 0.1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 2) {
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 3) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 4) {
-					if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 5) {
-						if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 7) damage += scalingBonusIntelligence();
-							else damage += scalingBonusIntelligence() * 0.8;
-						}
-						else damage += scalingBonusIntelligence() * 0.6;
-					}
-					else damage += scalingBonusIntelligence() * 0.4;
-				}
-				else damage += scalingBonusIntelligence() * 0.3;
-			}
-			else damage += scalingBonusIntelligence() * 0.2;
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 1);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 1);
 		}
-		else damage += scalingBonusIntelligence() * 0.1;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 2) {
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 3) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 4) {
-					if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 5) {
-						if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 7) damage += scalingBonusWisdom();
-							else damage += scalingBonusWisdom() * 0.8;
-						}
-						else damage += scalingBonusWisdom() * 0.6;
-					}
-					else damage += scalingBonusWisdom() * 0.4;
-				}
-				else damage += scalingBonusWisdom() * 0.3;
-			}
-			else damage += scalingBonusWisdom() * 0.2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 5) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 4);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 4);
 		}
-		else damage += scalingBonusWisdom() * 0.1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 9) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 8);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 8);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 13) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 12);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 12);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 17) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 16);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 16);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 21) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 20);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 20);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) >= 25) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 24);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 24);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 29) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 28);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 28);
+		}
+		damage += scalingBonusIntelligence() * multiInt;
+		damage += scalingBonusWisdom() * multiWis;
 		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
 		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
 		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
@@ -3847,44 +3995,70 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 3) barkskinduration += 1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 4) barkskinduration += 1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 5) barkskinduration += 1;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 6) barkskinduration += 2;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 7) barkskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 6) barkskinduration += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 7) barkskinduration += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 8) barkskinduration += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 9) barkskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 10) barkskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 11) barkskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 12) barkskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 13) barkskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 14) barkskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 15) barkskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 16) barkskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 17) barkskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 18) barkskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 19) barkskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 20) barkskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 21) barkskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 22) barkskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 23) barkskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 24) barkskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 25) barkskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 26) barkskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 27) barkskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 28) barkskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 29) barkskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 30) barkskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 31) barkskinduration += 3;
 		player.createStatusEffect(StatusEffects.BarkSkin, barkskinbonus, barkskinduration, 0, 0);
 		var temp:Number = 0;
+		var multiInt:Number = 0.05;
+		var multiWis:Number = 0.05;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 2) {
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 3) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 4) {
-					if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 5) {
-						if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 7) temp += scalingBonusIntelligence();
-							else temp += scalingBonusIntelligence() * 0.4;
-						}
-						else temp += scalingBonusIntelligence() * 0.3;
-					}
-					else temp += scalingBonusIntelligence() * 0.2;
-				}
-				else temp += scalingBonusIntelligence() * 0.15;
-			}
-			else temp += scalingBonusIntelligence() * 0.1;
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 1);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 1);
 		}
-		else temp += scalingBonusIntelligence() * 0.05;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 2) {
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 3) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 4) {
-					if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 5) {
-						if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 7) temp += scalingBonusWisdom();
-							else temp += scalingBonusWisdom() * 0.4;
-						}
-						else temp += scalingBonusWisdom() * 0.3;
-					}
-					else temp += scalingBonusWisdom() * 0.2;
-				}
-				else temp += scalingBonusWisdom() * 0.15;
-			}
-			else temp += scalingBonusWisdom() * 0.1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 5) {
+			multiInt += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 4);
+			multiWis += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 4);
 		}
-		else temp += scalingBonusWisdom() * 0.05;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 9) {
+			multiInt += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 8);
+			multiWis += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 8);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 13) {
+			multiInt += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 12);
+			multiWis += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 12);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 17) {
+			multiInt += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 16);
+			multiWis += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 16);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 21) {
+			multiInt += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 20);
+			multiWis += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 20);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 25) {
+			multiInt += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 24);
+			multiWis += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 24);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 29) {
+			multiInt += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 28);
+			multiWis += 0.025 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 28);
+		}
+		temp += scalingBonusIntelligence() * multiInt;
+		temp += scalingBonusWisdom() * multiWis;
 		temp = Math.round(temp);
 		outputText("Your elemental temporarily covers your skin with bark, shielding you against strikes. This is the bark of medicinal plants and as such you recover from your injuries. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>");
 		HPChange(temp,false);
@@ -3905,8 +4079,32 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 3) metalskinduration += 1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 4) metalskinduration += 1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 5) metalskinduration += 1;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 6) metalskinduration += 2;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 7) metalskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 6) metalskinduration += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 7) metalskinduration += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 8) metalskinduration += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 9) metalskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 10) metalskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 11) metalskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 12) metalskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 13) metalskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 14) metalskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 15) metalskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 16) metalskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 17) metalskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 18) metalskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 19) metalskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 20) metalskinduration += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 21) metalskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 22) metalskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 23) metalskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 24) metalskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 25) metalskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 26) metalskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 27) metalskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 28) metalskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 29) metalskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 30) metalskinduration += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 31) metalskinduration += 3;
 		player.createStatusEffect(StatusEffects.MetalSkin, metalskinbonus, metalskinduration, 0, 0);
 		outputText("Your elemental encases your body into a layer of flexible yet solid steel. The metal gives strength to your frame, empowering your unarmed strikes.\n\n");
 		enemyAI();
@@ -3917,40 +4115,42 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		player.createStatusEffect(StatusEffects.CooldownEAspectIce, 0, 0, 0, 0);
 		var damage:Number = 0;
+		var multiInt:Number = 0.1;
+		var multiWis:Number = 0.1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 2) {
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 3) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 4) {
-					if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 5) {
-						if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 7) damage += scalingBonusIntelligence();
-							else damage += scalingBonusIntelligence() * 0.8;
-						}
-						else damage += scalingBonusIntelligence() * 0.6;
-					}
-					else damage += scalingBonusIntelligence() * 0.4;
-				}
-				else damage += scalingBonusIntelligence() * 0.3;
-			}
-			else damage += scalingBonusIntelligence() * 0.2;
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 1);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 1);
 		}
-		else damage += scalingBonusIntelligence() * 0.1;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 2) {
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 3) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 4) {
-					if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 5) {
-						if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 7) damage += scalingBonusWisdom();
-							else damage += scalingBonusWisdom() * 0.8;
-						}
-						else damage += scalingBonusWisdom() * 0.6;
-					}
-					else damage += scalingBonusWisdom() * 0.4;
-				}
-				else damage += scalingBonusWisdom() * 0.3;
-			}
-			else damage += scalingBonusWisdom() * 0.2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 5) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 4);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 4);
 		}
-		else damage += scalingBonusWisdom() * 0.1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 9) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 8);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 8);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 13) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 12);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 12);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 17) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 16);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 16);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 21) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 20);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 20);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 25) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 24);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 24);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 29) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 28);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 28);
+		}
+		damage += scalingBonusIntelligence() * multiInt;
+		damage += scalingBonusWisdom() * multiWis;
 		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
 		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
 		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
@@ -3979,40 +4179,42 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		player.createStatusEffect(StatusEffects.CooldownEAspectLightning, 0, 0, 0, 0);
 		var damage:Number = 0;
+		var multiInt:Number = 0.1;
+		var multiWis:Number = 0.1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 2) {
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 3) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 4) {
-					if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 5) {
-						if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 7) damage += scalingBonusIntelligence();
-							else damage += scalingBonusIntelligence() * 0.8;
-						}
-						else damage += scalingBonusIntelligence() * 0.6;
-					}
-					else damage += scalingBonusIntelligence() * 0.4;
-				}
-				else damage += scalingBonusIntelligence() * 0.3;
-			}
-			else damage += scalingBonusIntelligence() * 0.2;
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 1);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 1);
 		}
-		else damage += scalingBonusIntelligence() * 0.1;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 2) {
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 3) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 4) {
-					if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 5) {
-						if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 7) damage += scalingBonusWisdom();
-							else damage += scalingBonusWisdom() * 0.8;
-						}
-						else damage += scalingBonusWisdom() * 0.6;
-					}
-					else damage += scalingBonusWisdom() * 0.4;
-				}
-				else damage += scalingBonusWisdom() * 0.3;
-			}
-			else damage += scalingBonusWisdom() * 0.2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 5) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 4);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 4);
 		}
-		else damage += scalingBonusWisdom() * 0.1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 9) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 8);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 8);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 13) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 12);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 12);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 17) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 16);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 16);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 21) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 20);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 20);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 25) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 24);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 24);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 29) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 28);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 28);
+		}
+		damage += scalingBonusIntelligence() * multiInt;
+		damage += scalingBonusWisdom() * multiWis;
 		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
 		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
 		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
@@ -4040,40 +4242,42 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		player.createStatusEffect(StatusEffects.CooldownEAspectDarkness, 0, 0, 0, 0);
 		var damage:Number = 0;
+		var multiInt:Number = 0.1;
+		var multiWis:Number = 0.1;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 2) {
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 3) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 4) {
-					if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 5) {
-						if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 7) damage += scalingBonusIntelligence();
-							else damage += scalingBonusIntelligence() * 0.8;
-						}
-						else damage += scalingBonusIntelligence() * 0.6;
-					}
-					else damage += scalingBonusIntelligence() * 0.4;
-				}
-				else damage += scalingBonusIntelligence() * 0.3;
-			}
-			else damage += scalingBonusIntelligence() * 0.2;
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 1);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 1);
 		}
-		else damage += scalingBonusIntelligence() * 0.1;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 2) {
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 3) {
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 4) {
-					if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 5) {
-						if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 6) {
-							if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 7) damage += scalingBonusWisdom();
-							else damage += scalingBonusWisdom() * 0.8;
-						}
-						else damage += scalingBonusWisdom() * 0.6;
-					}
-					else damage += scalingBonusWisdom() * 0.4;
-				}
-				else damage += scalingBonusWisdom() * 0.3;
-			}
-			else damage += scalingBonusWisdom() * 0.2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 5) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 4);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 4);
 		}
-		else damage += scalingBonusWisdom() * 0.1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 9) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 8);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 8);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 13) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 12);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 12);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 17) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 16);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 16);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 21) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 20);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 20);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 25) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 24);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 24);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 29) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 28);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 28);
+		}
+		damage += scalingBonusIntelligence() * multiInt;
+		damage += scalingBonusWisdom() * multiWis;
 		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.2;
 		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.5;
 		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 2;
@@ -4091,6 +4295,225 @@ public class MagicSpecials extends BaseCombatContent {
 		}*/
 		damage = doDamage(damage);
 		outputText("Your darkness elemental condenses shadows into solid matter, striking your opponent with them doing <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+		outputText(" damage.\n\n");
+		//checkMinionsAchievementDamage(damage);
+		enemyAI();
+	}
+
+	public function ElementalAspectPoison():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		player.createStatusEffect(StatusEffects.CooldownEAspectPoison, 0, 0, 0, 0);
+		var damage:Number = 0;
+		var multiInt:Number = 0.1;
+		var multiWis:Number = 0.1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 2) {
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 1);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 1);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 5) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 4);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 4);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 9) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 8);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 8);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 13) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 12);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 12);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 17) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 16);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 16);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 21) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 20);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 20);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 25) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 24);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 24);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 29) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 28);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 28);
+		}
+		damage += scalingBonusIntelligence() * multiInt;
+		damage += scalingBonusWisdom() * multiWis;
+		damage = Math.round(damage);
+		/*if(!monster.hasPerk(PerkLib.Resolute)) {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
+		}//późniejsze lvl-e dodadzą stun chance
+		else {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+			if(!monster.plural) outputText("is ");
+			else outputText("are");
+			outputText("too resolute to be stunned by your attack.</b>");
+		}*/
+		damage = doDamage(damage);
+		outputText("Your poison elemental condenses aphrodisiac poison into spike, striking your opponent with them doing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.");
+		var lustdamage:Number = 20 + rand(player.statusEffectv2(StatusEffects.SummonedElementalsPoison) + 1);
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 2) damage += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 3) damage += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 4) damage += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 5) damage += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 6) damage += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 7) damage += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 8) damage += 1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 9) damage += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 10) damage += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 11) damage += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 12) damage += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 13) damage += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 14) damage += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 15) damage += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 16) damage += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 17) damage += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 18) damage += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 19) damage += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 20) damage += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 21) damage += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 22) damage += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 23) damage += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 24) damage += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 25) damage += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 26) damage += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 27) damage += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 28) damage += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 29) damage += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 30) damage += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 31) damage += 3;
+		monster.teased(monster.lustVuln * lustdamage);
+		outputText("\n\n");
+		//checkMinionsAchievementDamage(damage);
+		enemyAI();
+	}
+
+	public function ElementalAspectPurity():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		player.createStatusEffect(StatusEffects.CooldownEAspectPurity, 0, 0, 0, 0);
+		var damage:Number = 0;
+		var multiInt:Number = 0.1;
+		var multiWis:Number = 0.1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) >= 2) {
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 1);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 1);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) >= 5) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 4);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 4);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) >= 9) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 8);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 8);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) >= 13) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 12);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 12);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) >= 17) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 16);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 16);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) >= 21) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 20);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 20);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) >= 25) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 24);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 24);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) >= 29) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 28);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 28);
+		}
+		damage += scalingBonusIntelligence() * multiInt;
+		damage += scalingBonusWisdom() * multiWis;
+		if (monster.cor < 33) damage = Math.round(damage * 1.0);
+		else if (monster.cor < 50) damage = Math.round(damage * 1.1);
+		else if (monster.cor < 75) damage = Math.round(damage * 1.2);
+		else if (monster.cor < 90) damage = Math.round(damage * 1.3);
+		else damage = Math.round(damage * 1.4);
+		damage = Math.round(damage);
+		/*if(!monster.hasPerk(PerkLib.Resolute)) {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
+		}//późniejsze lvl-e dodadzą stun chance
+		else {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+			if(!monster.plural) outputText("is ");
+			else outputText("are");
+			outputText("too resolute to be stunned by your attack.</b>");
+		}*/
+		damage = doDamage(damage);
+		outputText("Your purity elemental produces a ray of hyper condensed and pure light and aims it straight at " + monster.a + monster.short + "  <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+		outputText(" damage.\n\n");
+		//checkMinionsAchievementDamage(damage);
+		enemyAI();
+	}
+
+	public function ElementalAspectCorruption():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		player.createStatusEffect(StatusEffects.CooldownEAspectCorruption, 0, 0, 0, 0);
+		var damage:Number = 0;
+		var multiInt:Number = 0.1;
+		var multiWis:Number = 0.1;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) >= 2) {
+			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 1);
+			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 1);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) >= 5) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 4);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 4);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) >= 9) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 8);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 8);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) >= 13) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 12);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 12);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) >= 17) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 16);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 16);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) >= 21) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 20);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 20);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) >= 25) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 24);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 24);
+		}
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) >= 29) {
+			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 28);
+			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 28);
+		}
+		damage += scalingBonusIntelligence() * multiInt;
+		damage += scalingBonusWisdom() * multiWis;
+		if (monster.cor >= 66) damage = Math.round(damage * 1.0);
+		else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
+		else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
+		else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
+		else damage = Math.round(damage * 1.4);
+		damage = Math.round(damage);
+		/*if(!monster.hasPerk(PerkLib.Resolute)) {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
+		}//późniejsze lvl-e dodadzą stun chance
+		else {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+			if(!monster.plural) outputText("is ");
+			else outputText("are");
+			outputText("too resolute to be stunned by your attack.</b>");
+		}*/
+		damage = doDamage(damage);
+		outputText("Your corruption elemental condenses corruption from air into solid matter, striking your opponent with them doing <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 		outputText(" damage.\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();

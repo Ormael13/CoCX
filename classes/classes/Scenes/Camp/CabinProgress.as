@@ -132,7 +132,7 @@ import classes.Scenes.SceneLib;
 		}
 
 		public function canGatherWoods():Boolean {
-			return (player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.weapon == weapons.L__AXE || player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2) && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < maxWoodSupply;
+			return (player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.weapon == weapons.L__AXE || player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2 || player.isInGoblinMech()) && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < maxWoodSupply;
 		}
 		//STAGE 4 - Gather woods, explore forest to encounter.
 		public function gatherWoods():void {
@@ -168,6 +168,11 @@ import classes.Scenes.SceneLib;
 					outputText("You are carrying a Machined greatsword with you.");
 					addButton(1, "Mach.Greatsword", cutTreeMechTIMBER);
 				}
+			}
+			if (player.isInGoblinMech())
+			{
+				outputText("You are in goblin mech that have sawblade as melee weapon.\n");
+				addButton(0, "Sawblade", cutTreeMechTIMBER);
 			}
 			if (camp.followerKiha()) 
 			{
@@ -217,14 +222,27 @@ import classes.Scenes.SceneLib;
 		private function cutTreeMechTIMBER():void {
 			clearOutput();
 			outputText("You rev up your ");
-			if (player.weapon == weapons.RIPPER2) outputText("Ripper 2.0");
-			else if (player.weapon == weapons.RIPPER1) outputText("Ripper 1.0");
-			else outputText("chainsaw sword");
-			outputText(" as the metal teeth begin to spin. Grabbing a hold of the handle, you press the blade into the trunk of the tree, watching it cut straight through as wood chips fly all over the place. Eventually you reach the other side of the trunk, and the tree falls over with a mighty thud. You then proceed to cut the trunk into smaller pieces and haul them back to your camp.\n\n");
-			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (13 + Math.floor(player.str / 7));
-			incrementWoodSupply(13 + Math.floor(player.str / 7));
-			fatigue(50, USEFATG_PHYSICAL);
-			doNext(camp.returnToCampUseTwoHours);
+			if (player.isInGoblinMech()) outputText("chainsaw");
+			else {
+				if (player.weapon == weapons.RIPPER2) outputText("Ripper 2.0");
+				else if (player.weapon == weapons.RIPPER1) outputText("Ripper 1.0");
+				else outputText("chainsaw sword");
+			}
+			outputText(" as the metal teeth begin to spin. ");
+			if (player.isInGoblinMech()) outputText("Pressing the joystick on your command board you move ");
+			else outputText("Grabbing a hold of the handle, you press ");
+			outputText("the blade into the trunk of the tree, watching it cut straight through as wood chips fly all over the place. Eventually you reach the other side of the trunk, and the tree falls over with a mighty thud. You then proceed to cut the trunk into smaller pieces and haul them back to your camp.\n\n");
+			if (player.isInGoblinMech()) {
+				flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (22 + Math.floor(player.str / 4));
+				incrementWoodSupply(22 + Math.floor(player.str / 4));
+				doNext(camp.returnToCampUseOneHour);
+			}
+			else {
+				flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (13 + Math.floor(player.str / 7));
+				incrementWoodSupply(13 + Math.floor(player.str / 7));
+				fatigue(50, USEFATG_PHYSICAL);
+				doNext(camp.returnToCampUseTwoHours);
+			}
 		}
 
 		private function checkToolbox():void {

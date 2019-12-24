@@ -165,7 +165,13 @@ public class SceneLib {
 
     public static var marblePurification:MarblePurification = new MarblePurification();
 
+    public static var michikoFollower:Michiko = new Michiko();
+
     public static var milkWaifu:MilkWaifu = new MilkWaifu();
+
+    public static var neisaFollower:NeisaFollower = new NeisaFollower();
+
+    public static var mitziFollower:MitziFollower = new MitziFollower();
 
     public static var patchouliScene:PatchouliScene = new PatchouliScene();
 

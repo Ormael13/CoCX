@@ -311,7 +311,7 @@ public class LethiceScenes extends BaseContent
 			outputText("\n\n");
 			if (player.cor < 66) outputText("Scowling at the haughty bitch’s implications");
 			else outputText("Laughing right in the bitch’s face");
-			outputText(", you swing a [leg] over her and straddle her shoulders, shutting her up with a face-full of [cunt]. Lethice splutters and squirms under you, kicking her legs up in a pitiful show of resistance. Using your [knees], you pin her arms and wings to the flagstone floor while you grab her by the horns, forcing her face up into your crotch. After a few moments, the demoness’s resistance falters, and you feel her full lips start to move. Some demonic instinct to just give in to sex, you think to yourself... that, or Lethice might just have a subby streak under all that bravado!");
+			outputText(", you swing a [leg] over her and straddle her shoulders, shutting her up with a face-full of [cunt]. Lethice splutters and squirms under you, kicking her legs up in a pitiful show of resistance. Using your [legs], you pin her arms and wings to the flagstone floor while you grab her by the horns, forcing her face up into your crotch. After a few moments, the demoness’s resistance falters, and you feel her full lips start to move. Some demonic instinct to just give in to sex, you think to yourself... that, or Lethice might just have a subby streak under all that bravado!");
 			
 			outputText("\n\nEither way, you’re treated to a kiss right on your lower lips, spreading them ever-so-slightly apart so that Lethice’s slender tongue can slide inside. You moan,");
 			if (player.biggestTitSize() >= 2) outputText(" cupping a tit");

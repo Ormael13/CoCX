@@ -341,10 +341,10 @@ import classes.Scenes.UniqueSexScenes;
 			player.spe += deltaSpd;
 			player.sens += deltaSns;
 			player.lib += deltaLib;
-			
+			var maxes:Object = player.getAllMaxStats();
 			if (player.spe <= 0) player.spe = 1;
-			if (player.sens >= 100) player.sens = 100;
-			if (player.lib >= 100) player.lib = 100;
+			if (player.sens >= maxes.sens) player.sens = maxes.sens;
+			if (player.lib >= maxes.lib) player.lib = maxes.lib;
 			
 			showStatDown('spe');
 			showStatUp('sens');

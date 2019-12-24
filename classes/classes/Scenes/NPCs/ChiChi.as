@@ -224,7 +224,7 @@ use namespace CoC;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 45 + rand(40);
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2) this.drop = NO_DROP;
-			else this.drop = new ChainedDrop().add(consumables.MOUSECO, 0.2);//do zmiany potem
+			else this.drop = new ChainedDrop().add(consumables.FIERYS_, 0.2);
 			//this.arms.type = LION;
 			//this.lowerBody = LION;
 			//this.tailType = MANTICORE_PUSSYTAIL;

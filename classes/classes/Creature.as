@@ -386,6 +386,9 @@ public class Creature extends Utils
 				if (hasStatusEffect(StatusEffects.SummonedElementalsIce)) max += maxLust_ElementalBondFleshMulti() * statusEffectv2(StatusEffects.SummonedElementalsIce);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsLightning)) max += maxLust_ElementalBondFleshMulti() * statusEffectv2(StatusEffects.SummonedElementalsLightning);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) max += maxLust_ElementalBondFleshMulti() * statusEffectv2(StatusEffects.SummonedElementalsDarkness);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsPoison)) max += maxLust_ElementalBondFleshMulti() * statusEffectv2(StatusEffects.SummonedElementalsPoison);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsPurity)) max += maxLust_ElementalBondFleshMulti() * statusEffectv2(StatusEffects.SummonedElementalsPurity);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) max += maxLust_ElementalBondFleshMulti() * statusEffectv2(StatusEffects.SummonedElementalsCorruption);
 			}
 			if (findPerk(PerkLib.JobGuardian) >= 0) max += 30;
 			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) max += 150;
@@ -482,6 +485,9 @@ public class Creature extends Utils
 				if (hasStatusEffect(StatusEffects.SummonedElementalsIce)) max += maxLust_ElementalBondUrgesMulti() * statusEffectv2(StatusEffects.SummonedElementalsIce);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsLightning)) max += maxLust_ElementalBondUrgesMulti() * statusEffectv2(StatusEffects.SummonedElementalsLightning);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) max += maxLust_ElementalBondUrgesMulti() * statusEffectv2(StatusEffects.SummonedElementalsDarkness);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsPoison)) max += maxLust_ElementalBondUrgesMulti() * statusEffectv2(StatusEffects.SummonedElementalsPoison);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsPurity)) max += maxLust_ElementalBondUrgesMulti() * statusEffectv2(StatusEffects.SummonedElementalsPurity);
+				if (hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) max += maxLust_ElementalBondUrgesMulti() * statusEffectv2(StatusEffects.SummonedElementalsCorruption);
 			}
 			if (findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) max += 20;
 			if (findPerk(PerkLib.OmnibusGift) >= 0) max += 15;
@@ -511,6 +517,11 @@ public class Creature extends Utils
 				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.2;
 				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.35;
 				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.5;
+			}
+			if (game.player.vehiclesName == "Goblin Mech Prime") {
+				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.4;
+				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.7;
+				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 1;
 			}
 			return maxHP_mult1;
 		}
@@ -2759,7 +2770,8 @@ public class Creature extends Utils
 		public function pcCanUseUniqueSexScene():Boolean
 		{
 			if ((game.player.tailType == Tail.MANTICORE_PUSSYTAIL && game.monster.hasCock()) || (game.player.lowerBody == LowerBody.PLANT_FLOWER && game.monster.hasCock()) || (game.player.lowerBody == LowerBody.PLANT_FLOWER && game.monster.hasVagina()) || game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.SALAMANDER || 
-			((game.player.gender == 1 || game.player.gender == 2) && (game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.MOUSE || game.player.tailType == Tail.DEMONIC)))
+			((game.player.gender == 1 || game.player.gender == 2) && (game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.MOUSE || game.player.tailType == Tail.DEMONIC)) || (game.player.isInGoblinMech() && game.player.hasKeyItem("Cum Reservoir") >= 0 && game.monster.hasCock()) || 
+			(game.player.raijuScore() >= 10 && !game.monster.hasPerk(PerkLib.EnemyGigantType) && !game.monster.isAlraune() && !game.monster.isDrider() && !game.monster.isGoo() && !game.monster.isNaga() && !game.monster.isScylla() && !game.monster.isTaur()))
 				return true;
 			return false;
 		}
@@ -3906,38 +3918,18 @@ public class Creature extends Utils
 			var flychance:Number = 20;
 			if (findPerk(PerkLib.AdvancedAerialCombat) >= 0) flychance += 5;
 			if (findPerk(PerkLib.GreaterAerialCombat) >= 0) flychance += 15;
-			if (hasStatusEffect(StatusEffects.Flying)) chance += flychance;
+			if ((game.player.hasKeyItem("Jetpack") >= 0 || game.player.hasKeyItem("MK2 Jetpack") >= 0) && game.player.isInGoblinMech()) flychance += 25;
 			if (findPerk(PerkLib.Evade) >= 0) {
 				chance += 5;
-				flychance += 5;
-				if (findPerk(PerkLib.ImprovedEvade) >= 0) {
-					chance += 10;
-					flychance += 10;
-				}
-				if (findPerk(PerkLib.GreaterEvade) >= 0) {
-					chance += 15;
-					flychance += 15;
-				}
-				if (findPerk(PerkLib.JobRogue) >= 0) {
-					chance += 5;
-					flychance += 5;
-				}
-				if (findPerk(PerkLib.Spectre) >= 0 && findPerk(PerkLib.Incorporeality) >= 0) {
-					chance += 10;
-					flychance += 10;
-				}
+				if (findPerk(PerkLib.ImprovedEvade) >= 0) chance += 10;
+				if (findPerk(PerkLib.GreaterEvade) >= 0) chance += 15;
+				if (findPerk(PerkLib.JobRogue) >= 0) chance += 5;
+				if (findPerk(PerkLib.Spectre) >= 0 && findPerk(PerkLib.Incorporeality) >= 0) chance += 10;
 			}
 			if (findPerk(PerkLib.ElvenSense) >= 0) {
 				chance += 5;
-				flychance += 5;
-				if (findPerk(PerkLib.ElvishPeripheralNervSysEvolved) >= 0) {
-					chance += 10;
-					flychance += 10;
-				}
-				if (findPerk(PerkLib.ElvishPeripheralNervSysFinalForm) >= 0) {
-					chance += 15;
-					flychance += 15;
-				}
+				if (findPerk(PerkLib.ElvishPeripheralNervSysEvolved) >= 0) chance += 10;
+				if (findPerk(PerkLib.ElvishPeripheralNervSysFinalForm) >= 0) chance += 15;
 			}
 			if (findPerk(PerkLib.Flexibility) >= 0) chance += 6;
 			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit") chance += 10;
@@ -3958,6 +3950,7 @@ public class Creature extends Utils
 				if (hasStatusEffect(StatusEffects.EverywhereAndNowhere)) chance += 80;
 				else chance += 30;
 			}
+			if (hasStatusEffect(StatusEffects.Flying)) chance += flychance;
 			return chance;
 		}
 

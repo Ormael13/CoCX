@@ -63,7 +63,8 @@ public class CombatUI extends BaseCombatContent {
 		//Standard menu before modifications.
 		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2) {
 			btnMelee.show("E.Attack", combat.baseelementalattacks, "Command your elemental to attack the enemy.  Damage it will deal is affcted by your wisdom and intelligence.");
-		} else {
+		}
+		else {/*
 			btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your "+player.weaponName+".  Damage done is determined by your strength and weapon.");
 			if (!player.isFlying() && monster.isFlying() && !player.haveThrowableMeleeWeapon()) {
 				btnMelee.disable("No way you could reach enemy in air with melee attacks.");
@@ -78,6 +79,29 @@ public class CombatUI extends BaseCombatContent {
 				outputText("\n<b>You'll need to close some distance before you can use any physical attacks!</b>");
 			} else if (player.isInGoblinMech()) {
 				btnMelee.show("Sawblade", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech sawblade.  Damage done is determined by your strength and weapon.");
+			}*/
+			if (player.isInGoblinMech()) {
+				if (monster.isFlying()) {
+					if (player.isFlying()) btnMelee.show("Sawblade", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech sawblade.  Damage done is determined by your strength and weapon.");
+					else btnMelee.disable("No way you could reach enemy in air with melee attacks.");
+				}
+				else btnMelee.show("Sawblade", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech sawblade.  Damage done is determined by your strength and weapon.");
+			}
+			else {
+				if (monster.isFlying()) {
+					if (player.isFlying() || player.haveThrowableMeleeWeapon()) {
+						if (player.isFlying()) {
+							if (player.hasPerk(PerkLib.AerialCombat)) {
+								if (player.wings.type == Wings.BAT_ARM) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
+								else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.");
+							}
+							else btnMelee.disable("No way you could hit enemy with melee attacks while flying.");
+						}
+						else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.");
+					}
+					else btnMelee.disable("No way you could reach enemy in air with melee attacks.");
+				}
+				else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.");
 			}
 		}
 		// Ranged
@@ -104,7 +128,10 @@ public class CombatUI extends BaseCombatContent {
 		if (player.isFlying() && player.wings.type == Wings.BAT_ARM){btnRanged.disable("It would be rather difficult to aim while flapping your arms."); }
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) {
-				if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle") btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
+				if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm") {
+					if (player.isUsingGoblinMechFriendlyFirearms()) btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
+					else btnRanged.disable("Your firearms is not compatibile to be used with current piloted mech.");
+				}
 				else btnRanged.disable("You could use your range weapon while piloting goblin mech if it would be any form of firearms.");
 			}
 			else btnRanged.disable("No way you could use your range weapon while piloting goblin mech.");
@@ -147,7 +174,12 @@ public class CombatUI extends BaseCombatContent {
 		
 		btnFantasize.show("Fantasize", combat.fantasize, "Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
 		if (player.isInGoblinMech()) {
-			btnTease.disable("No way you could make an enemy more aroused by striking a seductive pose and exposing parts of your body while piloting goblin mech.");
+			if (player.hasKeyItem("Lustnade Launcher") >= 0) {
+				btnTease.show("Lustnade Launcher", combat.goboLustnadeLauncher, "Launch Lustnade at enemy, dealing really heavy lust damage.");
+				if (player.hasStatusEffect(StatusEffects.CooldownLustnadeLauncher)) btnTease.disable("<b>You need more time before you can use Lustnade Launcher again.</b>");
+			}
+			else if (player.hasKeyItem("Aphrodigas Gun") >= 0) btnTease.show("Aphrodigas Gun", combat.goboLustnadeLauncher, "Gassing the opponent with aphrodisiacs.");
+			else btnTease.disable("No way you could make an enemy more aroused by striking a seductive pose and exposing parts of your body while piloting goblin mech.");
 			
 		}
 		else btnTease.show("Tease", combat.teaseAttack, "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.");
@@ -264,6 +296,8 @@ public class CombatUI extends BaseCombatContent {
 				}
 			}
 			addButton(4, "Release", combat.BearLeggoMyEggo);
+		} else if (player.hasPerk(PerkLib.JobLeader) && flags[kFLAGS.WILL_O_THE_WISP] == 0 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1) {
+			combat.willothewispattacks();
 		} else if (player.hasPerk(PerkLib.FirstAttackElementals) && flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] != 1) {
 			menu();
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", combat.baseelementalattacks, Combat.AIR);
@@ -293,12 +327,20 @@ public class CombatUI extends BaseCombatContent {
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") combat.comfoll.alvinaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") combat.comfoll.auroraCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") combat.comfoll.etnaCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") combat.comfoll.mitziCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") combat.comfoll.neisaCombatActions();
 		} else if (flags[kFLAGS.PLAYER_COMPANION_2] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) {
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina") combat.comfoll.alvinaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Aurora") combat.comfoll.auroraCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Etna") combat.comfoll.etnaCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Mitzi") combat.comfoll.mitziCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") combat.comfoll.neisaCombatActions();
+		} else if (flags[kFLAGS.PLAYER_COMPANION_3] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) {
+			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina") combat.comfoll.alvinaCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Aurora") combat.comfoll.auroraCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Etna") combat.comfoll.etnaCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Mitzi") combat.comfoll.mitziCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Neisa") combat.comfoll.neisaCombatActions();
 		}
 		
 		// Modifications - monster-special actions

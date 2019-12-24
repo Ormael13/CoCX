@@ -4,11 +4,13 @@
  */
 package classes.Items
 {
-	import classes.ItemType;
-	import classes.PerkLib;
-	import classes.Player;
 
-	public class WeaponRange extends Useable //Equipable
+import classes.ItemType;
+import classes.PerkLib;
+import classes.Player;
+import classes.Scenes.SceneLib;
+
+public class WeaponRange extends Useable //Equipable
 	{
 		private var _verb:String;
 		private var _attack:Number;
@@ -39,6 +41,7 @@ package classes.Items
 			else if (perk == "Crossbow") desc += "(Crossbow)";
 			else if (perk == "Pistol") desc += "(Pistol)";
 			else if (perk == "Rifle") desc += "(Rifle)";
+			else if (perk == "2H Firearm") desc += "(2H Firearm)";
 			else if (perk == "Throwing") desc += "(Throwing)";
 		//	else if (verb == "smash") desc += "(Blunt)";
 		//	else if (verb == "slash" || verb == "keen cut") desc += "(Sword)";
@@ -66,9 +69,9 @@ package classes.Items
 		}
 		
 		public function playerEquip():WeaponRange { //This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
-		//	if (perk == "Large" && game.player.shield != ShieldLib.NOTHING) {
-		//		game.inventory.unequipShield();
-		//	}
+			if (perk == "2H Firearm" && game.player.shield != ShieldLib.NOTHING) {
+				SceneLib.inventory.unequipShield();
+			}
 			return this;
 		}
 		

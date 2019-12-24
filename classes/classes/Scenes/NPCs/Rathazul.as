@@ -281,6 +281,7 @@ private function rathazulWorkOffer():Boolean {
 			outputText("\n\n");
 		}
 		if (flags[kFLAGS.SAMIRAH_FOLLOWER] == 6) rathazulReptaTonguePotionOffer();
+		if (flags[kFLAGS.ELECTRA_FOLLOWER] == 2 && !player.hasStatusEffect(StatusEffects.ElectraOff) && player.hasItem(useables.RPLASMA, 1)) rathazulAlchemicalThunderOffer();
 	}
 	if(totalOffers == 0 && spoken) {
 		doNext(camp.returnToCampUseOneHour);
@@ -296,14 +297,22 @@ private function rathazulWorkOffer():Boolean {
 		else
 			addButtonDisabled(0, "Shop", "You can't afford anything Rathazul has to offer.");
 		addButton(1, "Purify", purifySomething).hint("Ask him to purify any tainted potions. \n\nCost: 20 Gems.");
-		if (dyes && player.hasItem(consumables.REPTLUM, 1) && flags[kFLAGS.ARIAN_SCALES] > 0) addButton(5, "Make Dye", makeDyes).hint("Ask him to make a special dye for you. (Only dyes here are for Arian) \n\nCost: 50 Gems.");
-		if (player.hasItem(consumables.BEEHONY)) addButton(6, consumables.PURHONY.shortName, rathazulMakesPureHoney).hint("Ask him to distill a vial of bee honey into a pure honey. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
-		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(7, "ProLactaid", rathazulMakesMilkPotion).hint("Ask him to brew a special lactation potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.");
-		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(8, "Scorpinum", rathazulMakesScorpioPotion).hint("Ask him to brew a special potion that could aid in gaining scorpion tail. \n\nCost: 100 Gems \nNeeds 2 vials of Bee Honey and 2 vials of Snake Oil.");
-		if (debimbo) addButton(10, "Debimbo", makeADeBimboDraft).hint("Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
+		if (dyes && player.hasItem(consumables.REPTLUM, 1) && flags[kFLAGS.ARIAN_SCALES] > 0) addButton(4, "Make Dye", makeDyes).hint("Ask him to make a special dye for you. (Only dyes here are for Arian) \n\nCost: 50 Gems.");
+		if (player.hasItem(consumables.BEEHONY)) addButton(5, consumables.PURHONY.shortName, rathazulMakesPureHoney).hint("Ask him to distill a vial of bee honey into a pure honey. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
+		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(6, "ProLactaid", rathazulMakesMilkPotion).hint("Ask him to brew a special lactation potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.");
+		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(7, "Scorpinum", rathazulMakesScorpioPotion).hint("Ask him to brew a special potion that could aid in gaining scorpion tail. \n\nCost: 100 Gems \nNeeds 2 vials of Bee Honey and 2 vials of Snake Oil.");
+		if (debimbo) addButton(8, "Debimbo", makeADeBimboDraft).hint("Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
+		if (flags[kFLAGS.ELECTRA_FOLLOWER] > 2 && !player.hasStatusEffect(StatusEffects.ElectraOff)) {
+			if (player.hasItem(useables.RPLASMA, 2) && player.hasItem(consumables.L_DRAFT, 1)) addButton(9, "Alch.Thun.", makeAlchemicalThunder).hint("Ask him to help Mitzi. \n\nNeeds two raiju plasmas and one lust draft");
+			else addButtonDisabled(9, "Alch.Thun.", "Need to gather two raiju plasmas and one lust draft for this.");
+		}
+		if (flags[kFLAGS.MITZI_RECRUITED] == 2) {
+			if (player.hasItem(consumables.SMART_T, 5) && player.hasItem(consumables.VITAL_T, 5) && player.hasItem(consumables.S_WATER, 1) && player.hasItem(consumables.PURHONY, 1)) addButton(10, "Mitzi", cureMitzi).hint("Ask him to help Mitzi. \n\nNeeds five scholar teas, five vitality tinctures, one bottle of pure spring water, and one vial of pure honey");
+			else addButtonDisabled(10, "Mitzi", "Need to gather five scholar teas, five vitality tinctures, one bottle of pure spring water, and one vial of pure honey for this.");
+		}
 		if (flags[kFLAGS.SAMIRAH_FOLLOWER] == 7) {
 			if (player.hasItem(consumables.HUMMUS_, 1) && player.hasItem(consumables.REPTLUM, 1) && player.hasItem(consumables.OVIELIX, 1)) addButton(11, "ReptaTongue P", makeReptaTonguePotion).hint("Ask him to make Repta-Tongue Potion. \n\nNeeds 1 Hummus, 1 Reptilium and 1 Ovi Elixir");
-			else addButtonDisabled(11, "ReptaTongue P", "need to gather 1 Hummus, 1 Reptilium and 1 Ovi Elixir for this potion.");
+			else addButtonDisabled(11, "ReptaTongue P", "Need to gather 1 Hummus, 1 Reptilium and 1 Ovi Elixir for this potion.");
 		}
 		if (player.hasItem(consumables.PURHONY, 1) && player.hasItem(consumables.C__MINT, 1) && player.hasItem(consumables.PURPEAC, 1) && player.hasKeyItem("Rathazul's Purity Potion") < 0 &&(flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10)) {
 			addButton(12, "Pure Potion", rathazulMakesPurifyPotion).hint("Ask him to brew a purification potion for Minerva.");
@@ -461,6 +470,86 @@ private function rathazulDebimboOffer():void {
 		flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED]++;
 	}
 	//Rath menu
+	menu();
+	addButton(0,"Next",campRathazul);
+}
+
+private function rathazulAlchemicalThunderOffer():void {
+	spriteSelect(49);
+	clearOutput();
+	outputText("\"<i>I have been studying the fluids produced by your raiju friend and I may be able to produce a powerful substance that would add the fulgurating property of Raiju lightning to your weapon. Provide me with two Raiju Plasma and a Lust Draft and I will create some for you.</i>\"\n\n");
+	flags[kFLAGS.ELECTRA_FOLLOWER] = 3;
+	//Rath menu
+	menu();
+	addButton(0,"Next",campRathazul);
+}
+private function makeAlchemicalThunder():void {
+	spriteSelect(49);
+	clearOutput();
+	player.consumeItem(useables.RPLASMA, 2);
+	player.consumeItem(consumables.L_DRAFT, 1);
+	outputText("You hand over the ingredients and Rathazul gets to work, heating and mixing the things. Eventually he hands you what appears to be a set of purple vials.\n\n");
+	outputText("\"<i>Apply those to your weapon before a fight, I promise you it will be most efficient especially against underwater creatures.</i>\"\n\n");
+	inventory.takeItem(consumables.ALCTHUN, makeAlchemicalThunder1);
+}
+private function makeAlchemicalThunder1():void {
+	inventory.takeItem(consumables.ALCTHUN, makeAlchemicalThunder2);
+}
+private function makeAlchemicalThunder2():void {
+	inventory.takeItem(consumables.ALCTHUN, makeAlchemicalThunder3);
+}
+private function makeAlchemicalThunder3():void {
+	inventory.takeItem(consumables.ALCTHUN, makeAlchemicalThunder4);
+}
+private function makeAlchemicalThunder4():void {
+	inventory.takeItem(consumables.ALCTHUN, returnToRathazulMenu);
+}
+
+private function cureMitzi():void {
+	spriteSelect(49);
+	clearOutput();
+	player.consumeItem(consumables.SMART_T, 5);
+	player.consumeItem(consumables.VITAL_T, 5);
+	player.consumeItem(consumables.S_WATER, 1);
+	player.consumeItem(consumables.PURHONY, 1);
+	outputText("You turn over the items Rathazul requested. He takes them and pours the tea, tinctures, and spring water into a mixing bowl. He stirs it together then adds in just a few drops of pure honey, turning the brew a bright purple.\n\n");
+	outputText("\"<i>Let's hope this will be enough...</i>\"\n\n");
+	outputText("He picks up the bowl then takes it over to Mitzi. You lean over the drugged up goblin and help her sit up. The elder rat holds the bowl to her lips. Mitzi unconsciously gulps down the bowl's contents until it's all gone. Not even a moment after she finishes the brew, her body convulses and shakes. She clutches her head and groans as the brew works to expel the demonic concoction from her system. You hold her close as the tremors in her body slowly wind down until she's just left breathing heavily in your grip. Once she finally calms down, she looks up at you, confused. Her eyes noticeably have a spark of clarity. Seems the brew did the trick.\n\n");
+	outputText("\"<i>W-What... where am I</i>\"\n\n");
+	outputText("You let her go and explain to the goblin girl her situation. As you go on you notice that she's shivering a bit. You ask her if she's alright.\n\n");
+	outputText("\"<i>Y-Yeah… It's just… after so long… Thank you.</i>\"\n\n");
+	outputText("Mitzi is grateful for you saving her though you can't help but notice that her breasts seem to have grown to a hefty G cup and her hips more waspish. Even her lips seem even more plump with a long purple tongue slicking out from between them. Rathazul hums in thought.\n\n");
+	outputText("\"<i>I see… It seems while the brew did help, the purging of those drugs left an... adverse effect on her body.</i>\"\n\n");
+	outputText("The goblin looks at her sizable love pillows and fuller hips in surprise. She squeezed her breasts together then lets them go, making them bounce and wobble. She giggles, enjoying her increased assets.\n\n");
+	outputText("\"<i>Now this I can get used to.</i>\"\n\n");
+	outputText("At least the goblin isn't upset about it. Now that she is free from the drugs influence, you ask her what she plans to do next. Mitzi's brow furrowed.\n\n");
+	outputText("\"<i>Oh… I never really thought about that. After being used by that drider for so long, I thought that would be my life for the rest of my days. That is until you saved me of course.</i>\"\n\n");
+	outputText("You can imagine that it would be hard to think about after so long. If she did leave, then she'll more than like just return to the forest with the rest of the goblins lurking there. Then again you could make room in your camp for her though you're not sure what it'll be like to have a resident goblin woman living so close without jumping you for your seed. What will you do?\n\n");
+	menu();
+	addButton(1,"Make Leave",cureMitziMakeLeave);
+	addButton(3,"Stay",cureMitziStay);
+}
+private function cureMitziMakeLeave():void {
+	outputText("You may have saved the goblin but you certainly don't want her to stay here. Mitzi looks shocked with tears starting to well up in her eyes.\n\n");
+	outputText("\"<i>B-But I thought since you saved me…</i>\"\n\n");
+	outputText("Her shock turns to sadness as she hops off the cot.\n\n");
+	outputText("\"<i>And here I thought you were actually a nice "+player.mf("guy","girl")+" but I guess I was wrong… again…</i>\"\n\n");
+	outputText("She turns and then walks out of Rathazul's lab. She heads towards the forest, sparing one last glance over shoulder before disappearing into the distance. You shake your head, thinking you'll more than likely never see her again. Not much you can do now that she's gone.\n\n");
+	flags[kFLAGS.MITZI_RECRUITED] = 3;
+	menu();
+	addButton(0,"Next",campRathazul);
+}
+private function cureMitziStay():void {
+	outputText("Well, since she doesn't have anywhere to go, she can always stay here in your camp. She looks up at you in shock.\n\n");
+	outputText("\"<i>You mean it? I can really stay here with you?</i>\"\n\n");
+	outputText("You nod your head, ensuring her it's okay with the promise that she doesn't make a nuisance of herself. Her smile widens as she leaps from her cot and "+(player.tallness > 48 ? "tries to wrap her arms around you to hug, squishing her large breast against you":"tackles you into a hug")+".\n\n");
+	outputText("\"<i>Thank you, uh… ummm… I don't think I caught your name before.</i>\"\n\n");
+	outputText("You tell her your name.\n\n");
+	outputText("\"<i>Thank you [name]... I swear I won't cause any trouble!</i>\"\n\n");
+	outputText("Mitzi hops off the cot and thanks Rathazul before heading out of the lab. She shoots you a flirtatious wink over her shoulder then heads into camp. It's obvious she wants something more from you. The elder rat shakes his head.\n\n");
+	outputText("\"<i>Honestly, [name]. You find the strangest people out there.</i>\"\n\n");
+	outputText("(<b>Mitzi has been added to the Followers menu!</b>)\n\n");
+	flags[kFLAGS.MITZI_RECRUITED] = 4;
 	menu();
 	addButton(0,"Next",campRathazul);
 }

@@ -1055,7 +1055,10 @@ use namespace CoC;
 			outputText("Should the sacrifice still be alive, it’s physical body will likely die as its soul is sucked into your creation. There is no turning back once it's done, so make sure the subject is ready physically and psychologically to welcome the change. Stand facing the statue but on the opposite side of the central altar and recite the following arcane word in order to proceed to the transfer.\n\n");
 			outputText("Shira Khrim Almisry Ohm Ak Tar Marae Kann Tharr Shul Elysro An Siryr Ahn Ekatyr Evenar Sethe Omaris.\n\n");
 			outputText("You think you could use this information to perhaps turn yourself into a living weapon in order to defeat the demons with relative ease. The question you should ask yourself however is... is this really what you want?");
-			if (flags[kFLAGS.GARGOYLE_QUEST] == 1) flags[kFLAGS.GARGOYLE_QUEST]++;
+			if (flags[kFLAGS.GARGOYLE_QUEST] == 1) {
+				if (player.hasKeyItem("Soul Gem Research") >= 0) flags[kFLAGS.GARGOYLE_QUEST] = 3;
+				flags[kFLAGS.GARGOYLE_QUEST]++;
+			}
 			doNext(templeBasement);
 		}
 		
@@ -1863,6 +1866,18 @@ use namespace CoC;
 			}
 			if (player.hasPerk(PerkLib.MinotaurTesticlesFinalForm)) {
 				player.removePerk(PerkLib.MinotaurTesticlesFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.NaturalPunchingBag)) {
+				player.removePerk(PerkLib.NaturalPunchingBag);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.NaturalPunchingBagEvolved)) {
+				player.removePerk(PerkLib.NaturalPunchingBagEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) {
+				player.removePerk(PerkLib.NaturalPunchingBagFinalForm);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.NekomataThyroidGland)) {
