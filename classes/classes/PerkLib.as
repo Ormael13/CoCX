@@ -187,6 +187,15 @@ public class PerkLib
 				"Seductive experience causes your tease attacks to be 15% more effective.", null, true);
 		
 		// Ordinary (levelup) perks
+		public static const FrozenHeart:PerkType = mk("Frozen heart", "Frozen heart",
+				"Allow to retain the ability Ice barrage and hungering cold at all time and increase their damage by 10%.",
+				"You choose the 'Frozen heart' perk, freezing your heart.");
+		public static const FrozenHeartEvolved:PerkType = mk("Frozen heart (Evolved)", "Frozen heart (Evolved)",
+				"Ice barrage and hungering cold abilities increase their damage by additional 20%, hungering cold last for 1 additional turn and recharge 1 turn faster.",
+				"You choose the 'Frozen heart (Evolved)' perk, deepening your heart freezing.");
+		public static const FrozenHeartFinalForm:PerkType = mk("Frozen heart (Final Form)", "Frozen heart (Final Form)",
+				"Ice barrage and hungering cold abilities increase their damage by another 30%, hungering cold last for 3 additional turn and recharge 3 turn faster. Gain an extra modifier from your intelligence to health. (Increase original value by 50%).",
+				"You choose the 'Frozen heart (Final Form)' perk, goying beyond just a very frozen heart.");
 		public static const HexKnowledge:PerkType = mk("Hex Knowledge", "Hex Knowledge",
 				"Allow to cast hex magic spells as long corruption is 80+, locks out access to white spells and deal 20% more dmg when using black or hex magic to attack pure enemies.",
 				"You choose the 'Hex Knowledge' perk, gaining access to hex magic.");
@@ -2448,6 +2457,9 @@ public class PerkLib
 		public static const StrongestElementalBondEx:PerkType = mk("Strongest Elemental Bond (Ex)", "Strongest Elemental Bond (Ex)",
 				"Lower by 40 needed mana to sustain active elemental in combat.",
 				"You choose the 'Strongest Elemental Bond (Ex)' perk, reaching near the peak of connection strength with your elementals.");
+		public static const StrongestElementalBondSu:PerkType = mk("Strongest Elemental Bond (Su)", "Strongest Elemental Bond (Su)",
+				"Lower by 40 needed mana to sustain active elemental in combat.",
+				"You choose the 'Strongest Elemental Bond (Su)' perk, reaching near the peak of connection strength with your elementals.");
 		public static const Studious:PerkType = mk("Studious", "Studious",
 				"You're a new student, kinda have to be studious. Your hours of study has helped you increase max mana by 10%.",
 				"You choose the 'Studious' perk, gaining +10% max Mana.");
@@ -2880,6 +2892,8 @@ public class PerkLib
 				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells, but your method of attaining it has corrupted the transformation, preventing you from achieving true enlightenment.",null,true);
 		public static const DarkCharm:PerkType = mk("Dark Charm", "Dark Charm",
 				"Allows access to demons charm attacks.");
+		public static const DeadMetabolism:PerkType = mk("Dead metabolism", "Dead metabolism",
+				"Kills off hunger. (hunger meter wouldn't decay with time)");
 		public static const Diapause:PerkType = mk("Diapause", "Diapause",
 				"Pregnancy does not advance normally, but develops quickly after taking in fluids.");
 		public static const DragonDarknessBreath:PerkType = mk("Dragon darkness breath", "Dragon darkness breath",
@@ -2944,6 +2958,8 @@ public class PerkLib
 				"Allows access to a hydra acid breath attack.");
 		public static const HydraRegeneration:PerkType = mk("Hydra Regeneration", "Hydra Regeneration",
 				"(Amount of hydra heads)% health and (Amount of hydra heads) points of fatigue regeneration but double hunger decaying speed. Stops for 5 rounds when damaged by fire.");
+		public static const IcyFlesh:PerkType = mk("Icy flesh", "Icy flesh",
+				"You are about as frigid and dead as a corpse however your mastery of ice magic grants you the ability to harden your flesh to the durability of diamonds. Gain an intelligence modifier as a bonus to health calculation equal to that of toughness as well as 1% regeneration. Gain an extra 40% resistance to cold.");
 		public static const ImprovedVenomGland:PerkType = mk("Improved venom gland", "Improved venom gland",
 				"Increase your venom max capacity and refill speed.");
 		public static const Incorporeality:PerkType = mk("Incorporeality", "Incorporeality",
@@ -4651,6 +4667,10 @@ public class PerkLib
 			ElementalContractRank20.requirePerk(ElementalContractRank19)
                     .requireWis(500)
                     .requireLevel(114);
+            StrongestElementalBondSu.requirePerk(StrongestElementalBondEx)
+                    .requirePerk(ElementalContractRank20)
+                    .requireWis(500)
+                    .requireLevel(114);
 			///Tier 20 Wisdom perks
 			ElementalContractRank21.requirePerk(ElementalContractRank20)
                     .requireWis(525)
@@ -5119,6 +5139,9 @@ public class PerkLib
             ElvishPeripheralNervSys.requirePerk(ElvenSense).requireCustomFunction(function (player:Player):Boolean {
                 return player.elfScore() >= 4;
             }, "Elf race");
+            FrozenHeart.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+                return player.yukiOnnaScore() >= 14;
+            }, "Yuki onna race");
             GorgonsEyes.requireCustomFunction(function (player:Player):Boolean {
                 return player.eyes.type == 4;
 				}, "Gorgon eyes")
@@ -5273,6 +5296,11 @@ public class PerkLib
 					.requireCustomFunction(function (player:Player):Boolean {
 						return player.catScore() >= 8 || player.nekomataScore() >= 8 || player.displacerbeastScore() >= 8 || player.hellcatScore() >= 8 || player.cheshireScore() >= 8;
 					}, "Any cat race");
+            FrozenHeartEvolved.requireLevel(6)
+				.requirePerk(FrozenHeart)
+				.requireCustomFunction(function (player:Player):Boolean {
+                return player.yukiOnnaScore() >= 14;
+            }, "Yuki onna race");
             GorgonsEyesEvolved.requireLevel(6)
 				.requirePerk(GorgonsEyes)
 				.requireCustomFunction(function (player:Player):Boolean {
@@ -5681,6 +5709,11 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.demonScore() >= 14;
             }, "Demon race");
+            FrozenHeartFinalForm.requireLevel(24)
+				.requirePerk(FrozenHeartEvolved)
+				.requireCustomFunction(function (player:Player):Boolean {
+                return player.yukiOnnaScore() >= 14;
+            }, "Yuki onna race");
             ObsidianHeartFinalForm.requireLevel(24)
 				.requirePerk(ObsidianHeartEvolved)
 				.requireCor(100)
@@ -6150,29 +6183,29 @@ public class PerkLib
             //Tier 29
 			
             //Tier 30
-			/*Saturation.requireLevel(180)
-					.requirePerk(Refinement);
-			Metamorphable.requireLevel(180)
-					.requirePerk(InControl);
-			MindOfSteel.requireLevel(180)
-					.requirePerk(BodyOfSteel);
-			Hoarder.requireLevel(180)
-					.requirePerk(Collector);
-			SurgeonsAide.requireLevel(180)
-					.requirePerk(Paramedic);
-			Saint.requireLevel(180)
-					.requirePerk(Pastor);
-			Dean.requireLevel(180)
-					.requirePerk(Principle);
-			SnipersFriend.requireLevel(180)
-					.requirePerk(EngineersFriend);
-			Napping.requireLevel(180)
-					.requirePerk(SkippingWork);
+			Perfection.requireLevel(180)
+					.requirePerk(Saturation);
+			SoulPowered.requireLevel(180)
+					.requirePerk(Metamorphable);
+			SoulOfSteel.requireLevel(180)
+					.requirePerk(MindOfSteel);
+			BlessedByLadyGodiva.requireLevel(180)
+					.requirePerk(Hoarder);
+			Surgeon.requireLevel(180)
+					.requirePerk(SurgeonsAide);
+			Cardinal.requireLevel(180)
+					.requirePerk(Saint);
+			President.requireLevel(180)
+					.requirePerk(Dean);
+			SpysEnemy.requireLevel(180)
+					.requirePerk(SnipersFriend);
+			ZZZ.requireLevel(180)
+					.requirePerk(Napping);
 			//??Slut??
-			Anvil.requireLevel(180)
-					.requirePerk(Hammer);
-			Pornstar.requireLevel(180)
-					.requirePerk(BrothelOwner);*/
+			Weap0n.requireLevel(180)
+					.requirePerk(Anvil);
+			SexChampion.requireLevel(180)
+					.requirePerk(Pornstar);
 			// ChimericalBodyUltimateStage.requirePerk(ChimericalBodyInitialStage)
             //        .requireLevel(1)
             //        .requireCustomFunction(function (player:Player):Boolean {
@@ -6185,4 +6218,3 @@ public class PerkLib
 	initDependencies();
 }
 }
-

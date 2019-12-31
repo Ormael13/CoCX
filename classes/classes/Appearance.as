@@ -85,6 +85,7 @@ public class Appearance extends Utils
 				else if (i_creature.hairType == Hair.GRASS) description += "grass-";
 				else if (i_creature.hairType == Hair.SILKEN) description += "silk-like ";
 				else if (i_creature.hairType == Hair.BURNING) description += "burning ";
+				else if (i_creature.hairType == Hair.SNOWY) description += "snowy ";
 				description += "mane";
 				if (i_creature.hairType == Hair.STORM) description += ". The tips ends with glowing lightning shaped locks";
 				return description;
@@ -106,9 +107,14 @@ public class Appearance extends Utils
 			else if (i_creature.hairType == Hair.FLUFFY) description += "fluffy ";
 			else if (i_creature.hairType == Hair.GRASS) description += "grass-";
 			else if (i_creature.hairType == Hair.SILKEN) description += "silk-like ";
+			else if (i_creature.hairType == Hair.SNOWY) description += "snowy ";
 			if (i_creature.hairType == Hair.BURNING) description += "mane of fire that burns things only when you wish it to";
 			else description += "hair";
 			if (i_creature.hairType == Hair.STORM) description += ". The tips ends with glowing lightning shaped locks";
+			else if (i_creature.hairType == Hair.SNOWY) {
+				description += " are human in appearance but snow flurries regularly nest within them";
+				if (i_creature.rearBody.type == RearBody.GLACIAL_AURA) description += " your bone chilling aura might have something to do with that";
+			}
 			return description;
 		}
 		
@@ -2477,7 +2483,8 @@ public class Appearance extends Utils
 					[Hair.FLUFFY, "fluffy"],
 					[Hair.GRASS, "grass"],
 					[Hair.SILKEN, "silk-like"],
-					[Hair.STORM, "glowing lightning shaped"]
+					[Hair.STORM, "glowing lightning shaped"],
+					[Hair.SNOWY, "snowy"]
 				]
 		);
 		public static const DEFAULT_BEARD_NAMES:Object = createMapFromPairs(
@@ -2539,7 +2546,8 @@ public class Appearance extends Utils
 					[Face.PANDA, "panda"],
 					[Face.FIRE_SNAIL, "fire snail"],
 					[Face.GHOST, "ghost"],
-					[Face.JIANGSHI, "jiangshi"]
+					[Face.JIANGSHI, "jiangshi"],
+					[Face.YUKI_ONNA, "yuki onna"]
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2697,7 +2705,8 @@ public class Appearance extends Utils
 					[Arms.HYDRA, "hydra"],
 					[Arms.GHOST, "phantom"],
 					[Arms.JIANGSHI, "jiangshi"],
-					[Arms.RAIJU_2, "raiju paws"]
+					[Arms.RAIJU_2, "raiju paws"],
+					[Arms.YUKI_ONNA, "yuki onna"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2808,7 +2817,8 @@ public class Appearance extends Utils
 					[Wings.FEATHERED_AVIAN, "large feathery"],
 					[Wings.NIGHTMARE, "large leathery"],
 					[Wings.ETHEREAL_WINGS, "etheral tendrils"],
-					[Wings.THUNDEROUS_AURA, "thunderous aura"]
+					[Wings.THUNDEROUS_AURA, "thunderous aura"],
+					[Wings.LEVITATION, "levitation"]
 				]
 		);
 		public static const DEFAULT_LOWER_BODY_NAMES:Object = createMapFromPairs(
@@ -2866,7 +2876,8 @@ public class Appearance extends Utils
 					[LowerBody.FIRE_SNAIL, "fire snail"],
 					[LowerBody.GHOST, "phantom"],
 					[LowerBody.GHOST_2, "poltergeist"],
-					[LowerBody.JIANGSHI, "jiangshi"]
+					[LowerBody.JIANGSHI, "jiangshi"],
+					[LowerBody.YUKI_ONNA, "yuki onna"]
 				]
 		);
 		// <mod name="Dragon patch" author="Stadler76">
@@ -2886,7 +2897,8 @@ public class Appearance extends Utils
 					[RearBody.SNAIL_SHELL, "snail shell"],
 					[RearBody.METAMORPHIC_GOO, "metamorphic goo"],
 					[RearBody.GHOSTLY_AURA, "ghostly aura"],
-					[RearBody.YETI_FUR, "yeti furkini"]
+					[RearBody.YETI_FUR, "yeti furkini"],
+					[RearBody.GLACIAL_AURA, "glacial aura"]
 				]
 		);
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(

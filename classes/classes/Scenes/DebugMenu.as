@@ -864,6 +864,7 @@ public class DebugMenu extends BaseContent
 			[Hair.SILKEN, "10 SILKEN"],
 			[Hair.STORM, "11 STORM"],
 			[Hair.BURNING, "12 BURNING"],
+			[Hair.SNOWY, "13 SNOWY"],
 		];
 		/*
 		private static const HAIR_COLOR_CONSTANTS:Array = [
@@ -1034,6 +1035,7 @@ public class DebugMenu extends BaseContent
 			[Face.FIRE_SNAIL, "47 FIRE_SNAIL"],
 			[Face.GHOST, "48 GHOST"],
 			[Face.JIANGSHI, "49 JIANGSHI"],
+			[Face.YUKI_ONNA, "50 YUKI_ONNA"],
 		];
 		private static const TONGUE_TYPE_CONSTANTS:Array = [
 			[Tongue.HUMAN, "0 HUMAN"],
@@ -1289,6 +1291,7 @@ public class DebugMenu extends BaseContent
 			[Arms.GHOST, "38 GHOST"],
 			[Arms.JIANGSHI, "39 JIANGSHI"],
 			[Arms.RAIJU_2, "40 RAIJU_2"],
+			[Arms.YUKI_ONNA, "41 YUKI_ONNA"],
 		];
 		private static const CLAW_TYPE_CONSTANTS:Array = [
 			[Claws.NORMAL, "0 NORMAL"],
@@ -1388,6 +1391,7 @@ public class DebugMenu extends BaseContent
 			[Wings.FEATHERED_SPHINX, "29 FEATHERED_SPHINX"],
 			[Wings.ETHEREAL_WINGS, "30 ETHEREAL_WINGS"],
 			[Wings.THUNDEROUS_AURA, "31 THUNDEROUS_AURA"],
+			[Wings.LEVITATION, "32 LEVITATION"],
 		];
 		private static const WING_DESC_CONSTANTS:Array = [
 			"(none)","non-existant","tiny hidden","huge","small",
@@ -1452,6 +1456,7 @@ public class DebugMenu extends BaseContent
 			[LowerBody.GHOST, "53 PHANTOM"],
 			[LowerBody.GHOST_2, "54 POLTERGEIST"],
 			[LowerBody.JIANGSHI, "55 JIANGSHI"],
+			[LowerBody.YUKI_ONNA, "56 YUKI_ONNA"],
 		];
 		private static const LEG_COUNT_CONSTANTS:Array = [
 			1,2,4,6,8,
@@ -1474,6 +1479,7 @@ public class DebugMenu extends BaseContent
 			[RearBody.METAMORPHIC_GOO, "13 METAMORPHIC_GOO"],
 			[RearBody.GHOSTLY_AURA, "15 GHOSTLY_AURA"],
 			[RearBody.YETI_FUR, "16 YETI_FUR"],
+			[RearBody.GLACIAL_AURA, "17 GLACIAL_AURA"],
 		];
 		private function changeArmType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.arms.type = setIdx;

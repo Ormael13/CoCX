@@ -2077,6 +2077,7 @@ use namespace CoC;
 		public override function damageIcePercent():Number {
 			var mult:Number = damageMagicalPercent();
 			if (findPerk(PerkLib.FromTheFrozenWaste) >= 0 || findPerk(PerkLib.ColdAffinity) >= 0) mult -= 50;
+			if (findPerk(PerkLib.IcyFlesh) >= 0) mult -= 40;
 			if (findPerk(PerkLib.FireAffinity) >= 0) mult += 100;
 			if (upperGarmentName == "Fur bikini top") mult -= 10;
 			if (lowerGarmentName == "Fur loincloth" || lowerGarmentName == "Fur panty") mult -= 10;
@@ -3095,6 +3096,10 @@ use namespace CoC;
 					else race = "half yeti";
 				}
 			}
+			if (yukiOnnaScore() >= 14)
+			{
+				race = "Yuki Onna";
+			}
 			if (couatlScore() >= 11)
 			{
 				if (isTaur()) race = "couatl-taur";
@@ -3425,13 +3430,13 @@ use namespace CoC;
 				humanCounter++;
 			if (skin.base.pattern == Skin.PATTERN_NONE)
 				humanCounter++;
-			humanCounter += (62 - internalChimeraScore());
+			humanCounter += (65 - internalChimeraScore());
 			if (isGargoyle()) humanCounter = 0;
 			End("Player","racialScore");
 			return humanCounter;
 		}
 		public function humanMaxScore():Number {
-			var humanMaxCounter:Number = 79;//17 + 62 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
+			var humanMaxCounter:Number = 82;//17 + 65 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
 			return humanMaxCounter;
 		}
 		
@@ -3494,6 +3499,12 @@ use namespace CoC;
 			if (findPerk(PerkLib.ElvishPeripheralNervSysEvolved) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.ElvishPeripheralNervSysFinalForm) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.FrozenHeart) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.FrozenHeartEvolved) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.FrozenHeartFinalForm) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.GorgonsEyes) >= 0)
 				internalChimeraCounter++;
@@ -3727,6 +3738,8 @@ use namespace CoC;
 			if (sirenScore() >= 10)
 				chimeraCounter++;
 			if (yetiScore() >= 14)
+				chimeraCounter++;
+			if (yukiOnnaScore() >= 14)
 				chimeraCounter++;
 			if (batScore() >= 10)
 				chimeraCounter++;
@@ -6101,6 +6114,53 @@ use namespace CoC;
 			return yetiCounter;
 		}
 
+		//Yuki Onna score
+		public function yukiOnnaScore():Number {
+			Begin("Player","racialScore","yuki onna");
+			var yukiOnnaCounter:Number = 0;
+			if (skinTone == "snow white")
+				yukiOnnaCounter++;
+			if (skinAdj == "cold")
+				yukiOnnaCounter++;
+			if (eyes.colour == "light purple")
+				yukiOnnaCounter++;
+			if (hairColor == "snow white" || hairColor == "silver white" || hairColor == "platinum blonde")
+				yukiOnnaCounter++;
+			if (hairType == Hair.SNOWY)
+				yukiOnnaCounter++;
+			if (lowerBody == LowerBody.YUKI_ONNA)
+				yukiOnnaCounter++;
+			if (arms.type == Arms.YUKI_ONNA)
+				yukiOnnaCounter++;
+			if (faceType == Face.YUKI_ONNA)
+				yukiOnnaCounter++;
+			if (rearBody.type == RearBody.GLACIAL_AURA)
+				yukiOnnaCounter += 2;
+			if (wings.type == Wings.LEVITATION)
+				yukiOnnaCounter += 3;
+			if (femininity > 99)
+				yukiOnnaCounter++;
+			if (!hasCock())
+				yukiOnnaCounter++;
+			if (hasVagina())
+				yukiOnnaCounter++;
+			if (findPerk(PerkLib.FrozenHeart) >= 0)
+				yukiOnnaCounter++;
+			if (findPerk(PerkLib.FrozenHeartEvolved) >= 0)
+				yukiOnnaCounter++;
+			if (findPerk(PerkLib.FrozenHeartFinalForm) >= 0)
+				yukiOnnaCounter++;
+			if (findPerk(PerkLib.FrozenHeart) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
+				yukiOnnaCounter++;
+			if (findPerk(PerkLib.FrozenHeartEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
+				yukiOnnaCounter++;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				yukiOnnaCounter += 50;
+			if (isGargoyle()) yukiOnnaCounter = 0;
+			End("Player","racialScore");
+			return yukiOnnaCounter;
+		}
+
 		//Centaur score
 		public function centaurScore():Number
 		{
@@ -7282,9 +7342,13 @@ use namespace CoC;
 			var heartMutations:Number = 1;
 			if (findPerk(PerkLib.BlackHeart) >= 0)
 				heartMutations--;
+			if (findPerk(PerkLib.FrozenHeart) >= 0)
+				heartMutations--;
 			if (findPerk(PerkLib.ObsidianHeart) >= 0)
 				heartMutations--;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
+				heartMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
 				heartMutations++;
 			return heartMutations;
 		}
@@ -7296,6 +7360,8 @@ use namespace CoC;
 				musclesMutations--;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
 				musclesMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
+				musclesMutations++;
 			return musclesMutations;
 		}
 		public function maxMouthMutations():Number {
@@ -7305,6 +7371,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.HollowFangs) >= 0)
 				mouthMutations--;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
+				mouthMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
 				mouthMutations++;
 			return mouthMutations;
 		}
@@ -7316,6 +7384,8 @@ use namespace CoC;
 				adrenalglandsMutations--;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
 				adrenalglandsMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
+				adrenalglandsMutations++;
 			return adrenalglandsMutations;
 		}
 		public function maxBloodsteamMutations():Number {
@@ -7326,6 +7396,8 @@ use namespace CoC;
 				bloodsteamMutations--;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
 				bloodsteamMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
+				bloodsteamMutations++;
 			return bloodsteamMutations;
 		}
 		public function maxFatTissueMutations():Number {
@@ -7335,6 +7407,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.NaturalPunchingBag) >= 0)
 				fattissueMutations--;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
+				fattissueMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
 				fattissueMutations++;
 			return fattissueMutations;
 		}
@@ -7422,7 +7496,7 @@ use namespace CoC;
 		 * @param	nl
 		 */
 		public function refillHunger(amnt:Number = 0, nl:Boolean = true):void {
-			if ((flags[kFLAGS.HUNGER_ENABLED] > 0 && (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] > 3) || flags[kFLAGS.IN_PRISON] > 0) && (!hasPerk(PerkLib.GargoylePure) || !hasPerk(PerkLib.GargoyleCorrupted)))
+			if ((flags[kFLAGS.HUNGER_ENABLED] > 0 && (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] > 3) || !hasPerk(PerkLib.DeadMetabolism) || flags[kFLAGS.IN_PRISON] > 0) && (!hasPerk(PerkLib.GargoylePure) || !hasPerk(PerkLib.GargoyleCorrupted)))
 			{
 				
 				var oldHunger:Number = hunger;
@@ -9486,6 +9560,7 @@ use namespace CoC;
 			}
 			if (hasPerk(PerkLib.ProductivityDrugs)) maxLib += perkv1(PerkLib.ProductivityDrugs);
 			if (hasPerk(PerkLib.TitanicStrength)) maxStr += Math.round(maxStr * 0.01 * Math.round(tallness / 3) * newGamePlusMod);
+			if (hasPerk(PerkLib.IcyFlesh)) maxTou = 1;
 			End("Player","getAllMaxStats.perks2");
 			Begin("Player","getAllMaxStats.effects");
 			//Apply New Game+
@@ -9674,10 +9749,10 @@ use namespace CoC;
 			var xpm:Number = 100;
 			if (level >= 42) xpm += 100;
 			if (level >= 102) xpm += 100;
-			//if (level >= 180) 
+			if (level >= 180) xpm += 100;
 			//if (level >= 274) 
 			var temp:int = (level + 1) * xpm;
-			if (temp > 48600) temp = 48600;//(max lvl)162 * 300(exp multi)
+			if (temp > 74000) temp = 74000;//(max lvl)185 * 400(exp multi)
 			return temp;
 		}
 		

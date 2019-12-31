@@ -12954,6 +12954,204 @@ public final class Mutations extends MutationsHelper
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 		
+		public function whiteIceShard(player:Player):void
+		{
+			player.slimeFeed();
+			//init variables
+			var changes:Number = 0;
+			var changeLimit:Number = 1;
+			var temp:Number = 0;
+			var temp2:Number = 0;
+			var temp3:Number = 0;
+			//Randomly choose affects limit
+			if (rand(2) == 0) changeLimit++;
+			if (rand(3) == 0) changeLimit++;
+			changeLimit += additionalTransformationChances();
+			//clear screen
+			clearOutput();
+			outputText("As you examine the shard it spontaneously melts. Rivulets of freezing liquid flow down your arms and a frigid chill spreads throughout your body.");
+			//tou down to 20
+			if (player.tou > 20 && rand(2) == 0 && changes < changeLimit) {
+				outputText("\n\nAs the cold spreads through your frame, your vitality drains away and you feel oddly fragile, almost as if you were made of the ice yourself.");
+				dynStats("tou", -1);
+				changes++;
+			}
+			//spe up to 80
+			if (player.spe < 80 && rand(2) == 0 && changes < changeLimit) {
+				outputText("\n\nYou feel light and airy, almost as if you are coming apart at the seams. You glance down at yourself and are relieved to see you are still there.");
+				dynStats("spe", 1);
+				changes++;
+			}
+			//int up to 100
+			if (player.inte < 100 && rand(2) == 0 && changes < changeLimit) {
+				outputText("\n\nFor a moment your mind is filled with visions. You can make out very little in the images of blowing snow and the featureless expanse but somehow you feel enlightened.");
+				dynStats("int", 1);
+				changes++;
+			}
+			//sens down to 10
+			if (player.lib > 10 && rand(2) == 0 && changes < changeLimit) {
+				outputText("\n\nYour skin feels brittle and numb in the aftermath of the cold. You pinch yourself and confirm, you feel less than before.");
+				dynStats("sens", -1);
+				changes++;
+			}
+			if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+			if (player.cocks.length > 0 && rand(2) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
+				//If the player has at least one dick, decrease the size of each slightly,
+				outputText("\n\n");
+				temp = 0;
+				temp2 = player.cocks.length;
+				temp3 = 0;
+				//Find biggest cock
+				while (temp2 > 0) {
+					temp2--;
+					if (player.cocks[temp].cockLength <= player.cocks[temp2].cockLength) temp = temp2;
+				}
+				//Shrink said cock
+				if (player.cocks[temp].cockLength < 6 && player.cocks[temp].cockLength >= 2.9) {
+					player.cocks[temp].cockLength -= .5;
+					temp3 -= .5;
+				}
+				temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
+				player.lengthChange(temp3, 1);
+				if (player.cocks[temp].cockLength < 2) {
+					outputText("  ");
+					if (player.cockTotal() == 1 && !player.hasVagina()) {
+						outputText("Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.");
+						if (player.balls > 0) outputText("  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.");
+						outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>");
+						player.balls = 0;
+						player.ballSize = 1;
+						player.createVagina();
+						player.clitLength = .25;
+						player.removeCock(0, 1);
+					}
+					else {
+						player.killCocks(1);
+					}
+				}
+				//if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
+				if (player.cocks.length == 0 && !player.hasVagina()) {
+					player.createVagina();
+					player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
+					player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
+					player.vaginas[0].virgin = true;
+					player.clitLength = .25;
+					outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
+					changes++;
+					dynStats("lus", 10);
+				}
+			}
+			var boobsGrew:Boolean = false;
+			//Increase player's breast size
+			if (player.gender > 1 && player.biggestTitSize() < 4 && changes < changeLimit && rand(3) == 0) {
+				if (rand(2) == 0) outputText("\n\nYour [breasts] tingle for a moment before becoming larger.");
+				else outputText("\n\nYou feel a little weight added to your chest as your [breasts] seem to inflate and settle in a larger size.");
+				player.growTits(1 + rand(3), 1, false, 3);
+				changes++;
+				dynStats("sen", .5);
+				boobsGrew = true;
+			}
+			if (player.breastRows.length == 0) {
+				outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
+				player.createBreastRow();
+				player.breastRows[0].breasts = 2;
+				//player.breastRows[0].breastsPerRow = 2;
+				player.breastRows[0].nipplesPerBreast = 1;
+				player.breastRows[0].breastRating = 2;
+				outputText("\n");
+			}
+			//Physical
+			//Face
+			if (player.lowerBody != LowerBody.GARGOYLE && player.faceType != Face.YUKI_ONNA && changes < changeLimit && rand(4) == 0) {
+				outputText("\n\nYour lips go numb with cold for a moment and you can barely feel them. You raise your hands and poke at them finding that they are still there and slowly feeling trickles back into them. You examine them and find that they have turned pale blue in color, a sign of the cold nature you now possess, small fumes of cold air regularly escaping your lip.");
+				setFaceType(Face.YUKI_ONNA);
+				changes++;
+			}
+			//Legs
+			if (player.lowerBody != LowerBody.YUKI_ONNA && player.faceType == Face.YUKI_ONNA && changes < changeLimit && rand(4) == 0) {
+				if (player.lowerBody == LowerBody.HUMAN) {
+					outputText("\n\nYou feel your feet going numb and the numbness spreading up your lower legs. You look down to your feet and notice with surprise that you no longer feel them, aside of the nails turning pale blue there's little to explain the ice forming under your steps. <b>Your feet now chill the ground beneath you.</b>");
+					setLowerBody(LowerBody.YUKI_ONNA);
+				}
+				else {
+					humanizeLowerBody();
+				}
+				changes++;
+			}
+			//Arms
+			if (player.lowerBody == LowerBody.YUKI_ONNA && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.YUKI_ONNA) && changes < changeLimit && rand(4) == 0) {
+				outputText("\n\nSomething weird happens in your hands. For a few seconds you lose the sense of touch and as it comes back your nails turn pale blue. You can feel terrible cold running at your fingertips.  While you can dismiss this cold and enable it at will you can’t help but smirk at your newfound ability. <b>Woe to whoever you decide to touch with your glacial hands.</b>");
+				setArmType(Arms.YUKI_ONNA);
+				changes++;
+			}
+			//eyes color
+			if (player.eyes.colour != "light purple" && changes < changeLimit && rand(3) == 0) {
+				if (player.eyes.type == Eyes.HUMAN) {
+					player.eyes.colour = "light purple";
+					outputText("\n\nFrigid water trickles from your eyes as if you are crying and pain forces them closed. You double over as they burn but slowly the agonizing sensation fades away and you blink to clear them. At first everything looks hazy as if seen through a clouded glass but it eventually clears up. <b>You glance down at your reflection in a puddle and find that your irises turned light purple like the reflection of the sun on snow.</b>");
+				}
+				else humanizeEyes();
+				changes++;
+			}
+			//Hair
+			if (player.faceType == Face.YUKI_ONNA && player.hairType != Hair.SNOWY && changes < changeLimit && rand(4) == 0) {
+				if (rand(3) == 0) player.hairColor = "snow white";
+				else {
+					if (rand(2) == 0) player.hairColor = "silver white";
+					else player.hairColor = "platinum blonde";
+				}
+				outputText("\n\nThe feeling of your hair against your skin suddenly changes and it is now cold against you. You notice wisps of snow sometime falling down past your face and straining your eyes to look up you can see them slowly drifting down from your long snowy white hair.");
+				setHairType(Hair.SNOWY);
+				changes++;
+			}
+			//Read body + Wings slot
+			if (player.hairType == Hair.SNOWY && player.faceType == Face.YUKI_ONNA && player.arms.type == Arms.YUKI_ONNA && player.lowerBody == LowerBody.YUKI_ONNA && player.rearBody.type != RearBody.GLACIAL_AURA && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nCold… so cold! You ball yourself up, trying to get some heat but no matter how much you try it gets colder and colder. Just as you think you are about to freeze to death it stops. You look around you in confusion. The air is chilling yet you don't feel it. The ice at your feet covered up with snow and somehow you know deep down if you wanted you could conjure out a blizzard. ");
+				outputText("Furthermore you feel lighter then the air now and, as if to demonstrate your new powers, you allow yourself to be carried by the icy wind achieving a form of levitation. Well it seems you are full Yuki Onna now. <b>You gained a Glacial aura and the ability to levitate!</b>");
+				setWingType(Wings.LEVITATION, "levitation");
+				setRearBody(RearBody.GLACIAL_AURA);
+				changes++;
+			}
+			if (player.hasPlainSkinOnly() && !player.isGargoyle() && player.skinTone != "snow white" && player.skinAdj != "cold" && changes < changeLimit && rand(3) == 0) {
+				player.skinTone = "snow white";
+				player.skinAdj = "cold";
+				outputText("\n\nYou feel a rush of goosebumps spreading over your body. When you look down at yourself you see that your skin has been bleached of all color, not unlike someone who froze to death. <b>You now have snow white skin.</b>");
+				changes++;
+			}
+			if (!player.hasPlainSkinOnly() && rand(2) == 0 && changes < changeLimit) {
+				if (player.skin.base.pattern != Skin.PATTERN_NONE) {
+					player.skin.base.pattern = Skin.PATTERN_NONE;
+					player.skin.base.adj = "";
+				}
+				if (player.skinAdj != "") player.skinAdj = "";
+				humanizeSkin();
+				changes++;
+			}
+			if (player.yukiOnnaScore() >= 14) {
+				if (player.hasPerk(PerkLib.IcyFlesh) && changes < changeLimit && rand(3) == 0) {
+					outputText("\n\nThe very ice and snow around you feels like an extension of your body. You gesture with a hand and the clouds of snow follow the gesture. You smile and in that moment your smile is cold, whoever will provoke you is not going to like what you have in store. <b>You can now use Hungering cold, Ice Barrage and Frigid Kiss.</b>");
+					if (!player.hasPerk(PerkLib.ColdAffinity)) player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
+					changes++;
+				}
+				if (player.findPerk(PerkLib.IcyFlesh) < 0 && changes < changeLimit && rand(3) == 0) {
+					outputText("\n\nFolding your arms against your chest, you desperately yearn for warmth and also at the same time for some reason fears it. If you are still alive, your body gives little sign of it, as if it had been dead for months and from the look of your pale frozen flesh you might as well be an icy specter. This said, a whole different form of vitality fills you as if on cue, your frozen flesh begins to harden to a diamond like resilience and your wounds magically begins to close. You don't feel hunger anymore either or the need to drink and even the cold is beginning to subside, ");
+					outputText("leaving you with numbed sensations which makes you yearn for the pleasure of touch all the more. Your body seems to keep itself in a form of unnatural suspended animation, your very heart having came to a halt that could as well just be death yet you still can feel the caress of the cold icy wind on your skin albeit the sensation is no longer so unpleasant to begin with, it might even pass for pleasurable.");
+					outputText("\n\n(<b>Perks Gained: Dead metabolism and Icy Flesh!</b>)");
+					player.createPerk(PerkLib.DeadMetabolism, 0, 0, 0, 0);
+					player.createPerk(PerkLib.IcyFlesh, 0, 0, 0, 0);
+					changes++;
+				}
+			}
+			//-Femininity to 90
+			if (player.femininity < 90 && changes < changeLimit && rand(3) == 0) {
+				changes++;
+				outputText(player.modFem(90, 2));
+			}
+			if (rand(2) == 0 && changes < changeLimit) outputText(player.modThickness(10, 5));
+			if (rand(2) == 0 && changes < changeLimit) outputText(player.modTone(10, 2));
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+		}
+		
 		public function aquaSeed(player:Player):void
 		{
 			player.slimeFeed();
@@ -14383,4 +14581,3 @@ public final class Mutations extends MutationsHelper
 		}
 	}
 }
-

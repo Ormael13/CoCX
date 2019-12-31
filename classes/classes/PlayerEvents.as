@@ -695,6 +695,8 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 					if (flags[kFLAGS.CHI_CHI_LVL_UP] < 2) flags[kFLAGS.CHI_CHI_LVL_UP] = 2;
 					else flags[kFLAGS.CHI_CHI_LVL_UP]++;
 				}
+				//Excellia fixing counter
+				if (flags[kFLAGS.EXCELLIA_RECRUITED] > 2 && flags[kFLAGS.EXCELLIA_RECRUITED] < 33) flags[kFLAGS.EXCELLIA_RECRUITED]++;
 				//Alvina timer
 				if (SceneLib.dungeons.checkFactoryClear() && flags[kFLAGS.ALVINA_FOLLOWER] < 8) flags[kFLAGS.ALVINA_FOLLOWER]++;
 				//Siegweird
@@ -843,7 +845,7 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 
 		private function hourlyHunger():Boolean {
 			var needNext:Boolean = false;
-			if ((flags[kFLAGS.HUNGER_ENABLED] > 0 && (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] > 3)) || prison.inPrison) {
+			if ((flags[kFLAGS.HUNGER_ENABLED] > 0 && (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] > 3) && !player.hasPerk(PerkLib.DeadMetabolism)) || prison.inPrison) {
 				var multiplier:Number = 1.0;
 				if (player.findPerk(PerkLib.Survivalist) >= 0) multiplier -= 0.2;
 				if (player.findPerk(PerkLib.Survivalist2) >= 0) multiplier -= 0.2;
@@ -1096,10 +1098,19 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 				player.createPerk(PerkLib.FreezingBreathYeti, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.yetiScore() < 6 && player.findPerk(PerkLib.ColdAffinity) >= 0) {
+			else if (player.yetiScore() < 6 && player.yukiOnnaScore() < 14 && player.findPerk(PerkLib.ColdAffinity) >= 0) {
 				outputText("\nYou suddenly feel a chill in the air. You guess you somehow no longer resist the cold.\n\n<b>(Lost Perks: Cold Affinity and Freezing Breath Yeti)</b>\n");
 				player.removePerk(PerkLib.ColdAffinity);
 				player.removePerk(PerkLib.FreezingBreathYeti);
+				needNext = true;
+			}
+			//Icy flesh
+			if (player.findPerk(PerkLib.IcyFlesh) >= 0 && player.yukiOnnaScore() < 14) {
+				outputText("\nYour body slowly comes back to life as if it has been hibernating for a long time. You feel sickly as if dying, hungry as if you'd been starving for weeks and thirstier than if you'd been wandering the desert without drinks for about half as much.\n\n(<b>Lost Perks: "+((player.hasPerk(PerkLib.ColdAffinity) && player.yetiScore() < 6) ? "Cold Affinity, ":"")+"Dead metabolism and Icy flesh</b>)\n");
+				if (player.hasPerk(PerkLib.ColdAffinity) && player.yetiScore() < 6) player.removePerk(PerkLib.ColdAffinity);
+				player.removePerk(PerkLib.DeadMetabolism);
+				if (player.tou < 10) player.tou = 10;
+				player.removePerk(PerkLib.IcyFlesh);
 				needNext = true;
 			}
 			//Fire Affinity

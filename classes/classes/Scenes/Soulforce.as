@@ -223,8 +223,7 @@ use namespace CoC;
 			//if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
 			if (player.hasPerk(PerkLib.Metamorph)) addButton(9, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Metamorph all options unlock.");
 			//addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
-			//addButton(10, "Protoplasm", AddProtoplasm);
-			//addButton(10, "MitziSpawn", SpawnMitzi);
+			addButton(10, "WhiteIceS.", AddProtoplasm).hint("White Ice Shard");
 			//addButton(10, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
 			addButton(11, "PerkGalore1", GargoyleMenu2);
 			addButton(12, "PerkGalore2", GargoyleMenu3);
@@ -232,15 +231,9 @@ use namespace CoC;
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		public function AddProtoplasm():void {
-			outputText("\n\n<b>(Gained 1 Protoplasm!)</b>\n\n");
-			inventory.takeItem(consumables.PROTPLS, SoulforceCheats);
+			outputText("\n\n<b>(Gained 1 White Ice Shard!)</b>\n\n");
+			inventory.takeItem(consumables.WHITEIS, SoulforceCheats);
 		}
-public function SpawnMitzi():void {
-	clearOutput();
-	outputText("Mitzi cum to camp! Enjoy ^^");
-	flags[kFLAGS.MITZI_RECRUITED] = 4;
-	doNext(SoulforceCheats);
-}
 public function FightAria():void {
 	clearOutput();
 	outputText("Entering battle with Melkie! Enjoy ^^");
@@ -913,6 +906,8 @@ public function FightHellfireSnail():void {
 			addButton(7, "Str Down 3", SubStr3).hint("Substract 50 from Str.");
 			addButton(3, "Str Up 4", AddStr4).hint("Add 200 to Str.");
 			addButton(8, "Str Down 4", SubStr4).hint("Substract 200 from Str.");
+			addButton(4, "Str Up 5", AddStr5).hint("Add 1000 to Str.");
+			addButton(9, "Str Down 5", SubStr5).hint("Substract 1000 from Str.");
 			addButton(14, "Back", StatsAscensionMenu);
 		}
 		public function StatsMenuTou():void {
@@ -925,6 +920,8 @@ public function FightHellfireSnail():void {
 			addButton(7, "Tou Down 3", SubTou3).hint("Substract 50 from Tou.");
 			addButton(3, "Tou Up 4", AddTou4).hint("Add 200 to Tou.");
 			addButton(8, "Tou Down 4", SubTou4).hint("Substract 200 from Tou.");
+			addButton(4, "Tou Up 5", AddTou5).hint("Add 1000 to Tou.");
+			addButton(9, "Tou Down 5", SubTou5).hint("Substract 1000 from Tou.");
 			addButton(14, "Back", StatsAscensionMenu);
 		}
 		public function StatsMenuSpe():void {
@@ -937,6 +934,8 @@ public function FightHellfireSnail():void {
 			addButton(7, "Spe Down 3", SubSpe3).hint("Substract 50 from Spe.");
 			addButton(3, "Spe Up 4", AddSpe4).hint("Add 200 to Spe.");
 			addButton(8, "Spe Down 4", SubSpe4).hint("Substract 200 from Spe.");
+			addButton(4, "Spe Up 5", AddSpe5).hint("Add 1000 to Spe.");
+			addButton(9, "Spe Down 5", SubSpe5).hint("Substract 1000 from Spe.");
 			addButton(14, "Back", StatsAscensionMenu);
 		}
 		public function StatsMenuInte():void {
@@ -949,6 +948,8 @@ public function FightHellfireSnail():void {
 			addButton(7, "Inte Down 3", SubInte3).hint("Substract 50 from Inte.");
 			addButton(3, "Inte Up 4", AddInte4).hint("Add 200 to Inte.");
 			addButton(8, "Inte Down 4", SubInte4).hint("Substract 200 from Inte.");
+			addButton(4, "Inte Up 5", AddInte5).hint("Add 1000 to Inte.");
+			addButton(9, "Inte Down 5", SubInte5).hint("Substract 1000 from Inte.");
 			addButton(14, "Back", StatsAscensionMenu);
 		}
 		public function StatsMenuWis():void {
@@ -961,6 +962,8 @@ public function FightHellfireSnail():void {
 			addButton(7, "Wis Down 3", SubWis3).hint("Substract 50 from Wis.");
 			addButton(3, "Wis Up 4", AddWis4).hint("Add 200 to Wis.");
 			addButton(8, "Wis Down 4", SubWis4).hint("Substract 200 from Wis.");
+			addButton(4, "Wis Up 5", AddWis5).hint("Add 1000 to Wis.");
+			addButton(9, "Wis Down 5", SubWis5).hint("Substract 1000 from Wis.");
 			addButton(14, "Back", StatsAscensionMenu);
 		}
 		public function StatsMenuLib():void {
@@ -973,6 +976,8 @@ public function FightHellfireSnail():void {
 			addButton(7, "Lib Down 3", SubLib3).hint("Substract 50 from Lib.");
 			addButton(3, "Lib Up 4", AddLib4).hint("Add 200 to Lib.");
 			addButton(8, "Lib Down 4", SubLib4).hint("Substract 200 from Lib.");
+			addButton(4, "Lib Up 5", AddLib5).hint("Add 1000 to Lib.");
+			addButton(9, "Lib Down 5", SubLib5).hint("Substract 1000 from Lib.");
 			addButton(14, "Back", StatsAscensionMenu);
 		}
 		public function StatsMenuSens():void {
@@ -985,6 +990,8 @@ public function FightHellfireSnail():void {
 			addButton(7, "Sens Down 3", SubSens3).hint("Substract 50 from Sens.");
 			addButton(3, "Sens Up 4", AddSens4).hint("Add 200 to Sens.");
 			addButton(8, "Sens Down 4", SubSens4).hint("Substract 200 from Sens.");
+			addButton(4, "Sens Up 5", AddSens5).hint("Add 1000 to Sens.");
+			addButton(9, "Sens Down 5", SubSens5).hint("Substract 1000 from Sens.");
 			addButton(14, "Back", StatsAscensionMenu);
 		}
 		public function StatsMenuCor():void {
@@ -1028,8 +1035,8 @@ public function FightHellfireSnail():void {
 			addButton(8, "Add EXP 4", AddEXP4).hint("Add 100000 EXP.");
 			if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) < 0) addButton(10, "Trib Perks", TribulationPerks).hint("Add 2 Tribulation perks.");
 			if (player.findPerk(PerkLib.SoulAncestor) < 0) addButton(11, "10-12 St.", Stage10to12SoulPerks).hint("Add all soul cultivator related perks for stages 10-12 of cultivation.");
-			if (player.level < CoC.instance.levelCap - 1) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
-			if (player.level < CoC.instance.levelCap - 10) addButton(13, "Add 10 LvL's", AddLvL2).hint("Add 10 Levels (with stat and perk points).");
+			if (player.level < CoC.instance.levelCap) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
+			if (player.level < CoC.instance.levelCap - 9) addButton(13, "Add 10 LvL's", AddLvL2).hint("Add 10 Levels (with stat and perk points).");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function BodyStateMenu():void {
@@ -1798,6 +1805,11 @@ public function FightHellfireSnail():void {
 			statScreenRefresh();
 			StatsMenuStr();
 		}
+		public function AddStr5():void {
+			player.str = player.str + 1000;
+			statScreenRefresh();
+			StatsMenuStr();
+		}
 		public function AddTou1():void {
 			player.tou = player.tou + 1;
 			statScreenRefresh();
@@ -1815,6 +1827,11 @@ public function FightHellfireSnail():void {
 		}
 		public function AddTou4():void {
 			player.tou = player.tou + 200;
+			statScreenRefresh();
+			StatsMenuTou();
+		}
+		public function AddTou5():void {
+			player.tou = player.tou + 1000;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
@@ -1838,6 +1855,11 @@ public function FightHellfireSnail():void {
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
+		public function AddSpe5():void {
+			player.spe = player.spe + 1000;
+			statScreenRefresh();
+			StatsMenuSpe();
+		}
 		public function AddInte1():void {
 			player.inte = player.inte + 1;
 			statScreenRefresh();
@@ -1855,6 +1877,11 @@ public function FightHellfireSnail():void {
 		}
 		public function AddInte4():void {
 			player.inte = player.inte + 200;
+			statScreenRefresh();
+			StatsMenuInte();
+		}
+		public function AddInte5():void {
+			player.inte = player.inte + 1000;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
@@ -1878,6 +1905,11 @@ public function FightHellfireSnail():void {
 			statScreenRefresh();
 			StatsMenuWis();
 		}
+		public function AddWis5():void {
+			player.wis = player.wis + 1000;
+			statScreenRefresh();
+			StatsMenuWis();
+		}
 		public function AddLib1():void {
 			player.lib = player.lib + 1;
 			statScreenRefresh();
@@ -1898,6 +1930,11 @@ public function FightHellfireSnail():void {
 			statScreenRefresh();
 			StatsMenuLib();
 		}
+		public function AddLib5():void {
+			player.lib = player.lib + 1000;
+			statScreenRefresh();
+			StatsMenuLib();
+		}
 		public function AddSens1():void {
 			player.sens = player.sens + 1;
 			statScreenRefresh();
@@ -1915,6 +1952,11 @@ public function FightHellfireSnail():void {
 		}
 		public function AddSens4():void {
 			player.sens = player.sens + 200;
+			statScreenRefresh();
+			StatsMenuSens();
+		}
+		public function AddSens5():void {
+			player.sens = player.sens + 1000;
 			statScreenRefresh();
 			StatsMenuSens();
 		}
@@ -1988,6 +2030,11 @@ public function FightHellfireSnail():void {
 			statScreenRefresh();
 			StatsMenuStr();
 		}
+		public function SubStr5():void {
+			player.str = player.str - 1000;
+			statScreenRefresh();
+			StatsMenuStr();
+		}
 		public function SubTou1():void {
 			player.tou = player.tou - 1;
 			statScreenRefresh();
@@ -2005,6 +2052,11 @@ public function FightHellfireSnail():void {
 		}
 		public function SubTou4():void {
 			player.tou = player.tou - 200;
+			statScreenRefresh();
+			StatsMenuTou();
+		}
+		public function SubTou5():void {
+			player.tou = player.tou - 1000;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
@@ -2028,6 +2080,11 @@ public function FightHellfireSnail():void {
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
+		public function SubSpe5():void {
+			player.spe = player.spe - 1000;
+			statScreenRefresh();
+			StatsMenuSpe();
+		}
 		public function SubInte1():void {
 			player.inte = player.inte - 1;
 			statScreenRefresh();
@@ -2045,6 +2102,11 @@ public function FightHellfireSnail():void {
 		}
 		public function SubInte4():void {
 			player.inte = player.inte - 200;
+			statScreenRefresh();
+			StatsMenuInte();
+		}
+		public function SubInte5():void {
+			player.inte = player.inte - 1000;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
@@ -2068,6 +2130,11 @@ public function FightHellfireSnail():void {
 			statScreenRefresh();
 			StatsMenuWis();
 		}
+		public function SubWis5():void {
+			player.wis = player.wis - 1000;
+			statScreenRefresh();
+			StatsMenuWis();
+		}
 		public function SubLib1():void {
 			player.lib = player.lib - 1;
 			statScreenRefresh();
@@ -2088,6 +2155,11 @@ public function FightHellfireSnail():void {
 			statScreenRefresh();
 			StatsMenuLib();
 		}
+		public function SubLib5():void {
+			player.lib = player.lib - 1000;
+			statScreenRefresh();
+			StatsMenuLib();
+		}
 		public function SubSens1():void {
 			player.sens = player.sens - 1;
 			statScreenRefresh();
@@ -2105,6 +2177,11 @@ public function FightHellfireSnail():void {
 		}
 		public function SubSens4():void {
 			player.sens = player.sens - 200;
+			statScreenRefresh();
+			StatsMenuSens();
+		}
+		public function SubSens5():void {
+			player.sens = player.sens - 1000;
 			statScreenRefresh();
 			StatsMenuSens();
 		}

@@ -127,6 +127,8 @@ public class SceneLib {
 
     public static var evangelineFollower:EvangelineFollower = new EvangelineFollower();
 
+    public static var excelliaFollower:ExcelliaFollower = new ExcelliaFollower();
+
     public static var exgartuan:Exgartuan = new Exgartuan();
 
     public static var galiaFollower:GaliaFollower = new GaliaFollower();

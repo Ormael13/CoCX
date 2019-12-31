@@ -17,11 +17,183 @@ package classes.Scenes
 		{}
 		
 		public function accessChangelogMenu():void {
-			Changelog30();
+			Changelog31();
 		}
-		//zrobić do 2019 na świeta event z choinką i reniferami i nie odblokowywać go do ok. 20-24 grudnia 2019 xD
+		//zrobić do 2020 na świeta event z reniferami i nie odblokowywać go do ok. 20-24 grudnia 2020 xD
+		private function Changelog32():void {
+			clearOutput();
+			menu();
+			addButton(0, "Next", Changelog31);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
+		}
 		private function Changelog31():void {
 			clearOutput();
+			outputText("<b>Version 0.8n6:</b>\n\n");
+			outputText("-New tier 0 misc lvl-up perk: Frozen heart. Req. Free heart mutation slot and 14+ in yuki onna score. Effect: Allow to retain the ability Ice barrage and hungering cold at all time and increase their damage by 10%.\n");
+			outputText("-New tier 1 misc lvl-up perk: Frozen heart (Evolved). Req. Frozen heart perk and 14+ in yuki onna score. Effect: Ice barrage and hungering cold damage increase by 20%, hungering cold last for 1 additional turn and recharge 1 turn faster.\n");
+			outputText("-New tier 4 misc lvl-up perk: Frozen heart (Final Form). Req. Frozen heart (Evolved) perk and 14+ in yuki onna score. Effect: Ice barrage and hungering cold damage increase by 30%, hungering cold last for 3 additional turn and recharge 3 turn faster. Gain an extra modifier from your intelligence to health. (Increase original value by 50%).\n");
+			outputText("-New tier 19 wisdom lvl-up perk: Strongest Elemental Bond (Su). Req. Elemental Contract Rank 20, Strongest Elemental Bond (Ex) perks and 500+ wis. Effect: Lower by 50 needed mana to sustain active elemental in combat\n");
+			outputText("-New event perk: Icy flesh. Gained by use White Ice Shard when having 14+ in yuki onna score. Effects: Would decrease max Tou to 1 and replace toughness stat in max HP calculaton with inteligence stat.\n");
+			outputText("-New event perk: Dead metabolism. Gained by use White Ice Shard when having 14+ in yuki onna score. Effects: Kills off hunger. (hunger meter wouldn't decay with time)\n");
+			outputText("-New rare ascension perk -> Ascension: Additional Organ Mutation (2nd Stage). Req. Ascension: Additional Organ Mutation (1st Stage) perk, 20+ in internal chimera score and be at fourth ascension. It costs 40 asc points and will give 1 more slot for organ mutations. Like heart, muscles or mouth related racial mutation perks.\n");
+			outputText("-New body part - face: Yuki Onna face. No Req.\n");
+			outputText("-New body part - legs: Yuki Onna legs. Req. Yuki Onna face\n");
+			outputText("-New body part - arms: Yuki Onna arms. Req. Yuki Onna legs\n");
+			outputText("-New body part - hair: Snowy hair. No Req.\n");
+			outputText("-New body part - rear body: Glacial Aura. Req. Snowy hair, Yuki Onna arms, Yuki Onna legs, Yuki Onna face\n");
+			outputText("-New body part - wings: Levitation. Req. Snowy hair, Yuki Onna arms, Yuki Onna legs, Yuki Onna face\n");
+			outputText("-New M. Special: Ice Barrage. Req. full yuki onna score and cold affinity. Effect: Call up a frigid storm to freeze and bombard your enemies.\n");
+			outputText("-New M. Special: Hungering cold. Req. full yuki onna score and cold affinity. Effect: Freeze the air around your target, encasing it in ice and dealing hypothermia damage. Weakens opponents ice resistance increasing damage of further attacks by 50% stacking up to 3 times. Damage increase will reset when Frostburn effect ends. (Frostbite last for 8 turns and cd of special is 10 turns)\n");
+			outputText("-New TF item: White Ice Shard. Currently found in Yu shop (will later be moved to be only drop form specific enemy). Allow to change into Yuki Onna race with race bonuses at 14+: +70 to max Spe (scal), +140 to max Int (scal), +70 to max Wis (scal), +50 to max Lib (scal).\n");
+			outputText("-Increased max caps on HP, Lust, Wrath, Fatigue, Mana and Soulforce acording to increased lvl cap and recently added perks. Sorry OPK it's still too low cap for your PC i know but noone is close to your over 9000 power level :(\n");
+			//outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");
+			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
+			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
+			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
+			//outputText("-New soulskill: Devourer. Req. ... Devour up to 400 lust and wrath from enemy transfering 50% of it back to player. Cooldown: 3 turns.\n");
+			//outputText("-(Heavy WIP) Raging Inferno now boost by 10% fire spells/attacks damage and each turn spend without casting fire spell lower that bonus damage by 10% till it return to 100%.\n");
+			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
+			//outputText("-New enemy possible to encounter during Bog exploration: Dark Elf Ranger - lvl 39\n");
+			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
+			//outputText("\n");cel na 0.8: dodać kitsune/nekomanta TF
+			//outputText("\n");cel na 0.8: dodać yuki-onna TF
+			//outputText("\n");cel na 0.8: dodać yuki-onna TF
+			//outputText("\n");cel na 0.8: dodać siren TF
+			//outputText("-New TF item: . Gained by bringing Orc Mead to Lumi for enhancing. Using this item will turn PC into high orc. High Orc (scalable): +130 to max Str, +30 to max Tou, +10 to max Spe, -30 to max Int, +25 to max Lib, +20% to max Wrath.\n");
+			//outputText("-New TF item: . Gained by bringing Elf Ear to Lumi for enhancing. Using this item will turn PC into high elf. High Elf (scalable): -10 to max Str, -15 to max Tou, +80 to max Spe, +80 to max Int, +60 to max Wis, +30 max/min Sens, +20% to max Mana.\n");
+			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
+			//outputText("-New armor (by Liadri): Goblin Technomancer clothes - gained after becoming Jiangshi. Cost 160 gems, 0 armor, 0 magic resistance, Slutty Seduction 10, +40% to soulskills power.\n");
+			//outputText("-New underwear (upper) (by Liadri): \n");
+			//outputText("-New underwear (bottom) (by Liadri): \n");
+			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
+			outputText("-Fixed bugs: Derpy forgetting to actualy rise lvl cap up to 185 from inbetween value during work on test builds, Mitzi pregnancy chance been always 100%\n\n");/*ostatni punkt changelogu
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-New necklace (by Ormael):  - obtained by . Cost xx0 gems. \n");
+			outputText("-New head accesory (by Ormael):  - obtained by . Cost xx0 gems. \n");
+			outputText("-New ring (by Ormael):  - obtained by . Cost xx0 gems. \n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-New event perk: . Gained by . Effects: \n");
+			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
+			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
+			outputText("-New tier 11 misc lvl-up perk: Chimerical Body: Epic Stage. Req. Chimerical Body: Semi-Epic Stage perk and 72+ points in Internal Chimerical Disposition score. Effect: delay by another 12 points appearing effect of negative HP regeneration and +5 to max Lib/Sens (scalable), +10 to max Str/Tou/Spe/Int/Wis (scalable).\n");
+			outputText("-New tier 12 misc lvl-up perk: Chimerical Body: ... Stage. Req. Chimerical Body: Epic Stage perk and xx+ points in Internal Chimerical Disposition score. Effect: delay by another xx points appearing effect of negative HP regeneration and +5 to max Lib/Sens (scalable), +10 to max Str/Tou/Spe/Int/Wis (scalable).\n");
+			outputText("-New tier ?? misc lvl-up perk: Creationism. Req. Perfection perk. Effect: number of possible effects of transformatives +1.\n");
+			outputText("-New tier ?? misc lvl-up perk: All-Seeing. Req. Soul Powered perk. Effect: +10% max soulforce.\n");
+			outputText("-New tier ?? misc lvl-up perk: God of Steel. Req. Soul of Steel perk. Effect: +10% melee phys dmg.\n");
+			outputText("-New tier ?? misc lvl-up perk: Lady Godiva's favorite Child. Req. Blessed by Lady Godiva perk. Effect: 15% more gems from victories.\n");
+			outputText("-New tier ?? misc lvl-up perk: MEDIC!!!. Req. Surgeon perk. Effect: increases HP gains by 20%.\n");
+			outputText("-New tier ?? misc lvl-up perk: Pope. Req. Cardinal perk. Effect: -2 min libido and +5% to lust resistance.\n");				Tier 43 perks?
+			outputText("-New tier ?? misc lvl-up perk: NERD!!!. Req. President perk. Effect: +10% max mana.\n");
+			outputText("-New tier ?? misc lvl-up perk: SHIT YOU TOUCHED SASHA!!! Req. Spy's Enemy perk. Effect: +10% range phys dmg.\n");
+			outputText("-New tier ?? misc lvl-up perk: LAZY!!! Req. ZZZ perk. Effect: +20% to fatigue recovery.\n");
+			//slut line
+			outputText("-New tier ?? misc lvl-up perk: Armor. Req. Weapon perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
+			outputText("-New tier ?? misc lvl-up perk: Sex Deity. Req. Sex Champion perk. Effect: +15% tease dmg.\n");
+			outputText("-New tier 1 misc lvl-up perk: . Req. History: Slut or Past Life: Slut perk. Effect: +10% max lust.\n");.
+			outputText("-New tier 4 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
+			outputText("-New tier 7 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
+			outputText("-New tier 12 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
+			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
+			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
+			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
+			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
+			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
+			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
+			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("\n");
+			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Scorpion-morph
+			outputText("\n");
+			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
+			outputText("\n");aqua seed - item mający być siren tf item
+			outputText("\n");
+			outputText("<b>Version 0.8o:</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("<b>Version 0.8p:</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("\n");
+			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bedą one wcześniej już za czesto wypadać
+			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");cel na 0.8(/9): dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
+			outputText("\n");cel na 0.8(/9): pododawanie kilku(nastu) nowych opisów cześci ciała, powiazanie tego z poszczegolnymi animal-morphami, dodanie nieco specjalnych zdolnosci do kilku z nich, balansowanie ich, itp.
+			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
+			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
+			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");*/
+			outputText("\n\n\n");
+			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
+			outputText("-Add more soulforce options.\n");
+			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
+			outputText("-Add soulforce stuff to kitsune encounters.\n");
+			outputText("-Add Wuxia themed area and enemies.\n");
+			outputText("-Add few new options during chara creation.\n");
+			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
+			outputText("-More camp build options (involving using stones and etc.)\n");
+			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
 			menu();
 			addButton(0, "Next", Changelog30);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
@@ -36,7 +208,7 @@ package classes.Scenes
 			outputText("-Most of repeatable quests in Adventure Guild get counter on Stats page how many times PC already completed them (sadly it can/t track back so it will start counting them from this version).\n");
 			outputText("-Fixed bugs: one of achievments not been awarded, game not memorizing and removing equipment when becoming Jiangshi, even in debug mode game forcing manticore bad end, Infernal Mouse ring not giving wrath generation bonus when equipped in 4th ring slot, Petrify stun duration on single enemy with and w/o Gorgon Eyes been switched, ");
 			outputText("too high req. salamander score for 3rd racial perk, starting as half slime, getting fat without hunger mode on, Neisa bug happening with Aurora/Alvina, no firearms damage despite number appearing on screen, Flintlock pistol ammo incorrectly set too high at combat start\n\n");
-			outputText("<b>Version 0.8n5:</b>\n\n");
+			outputText("<b>Version 0.8n5 Mitzi Special Christmas Edition (Mitzi, Electra and Neisa camp x-packs, Traditional X-mas Perk-o-calipse 5 (49 perks), Job: Leader, Max lvl cap increase, many small fixes and QoL changes):</b>\n\n");
 			outputText("-New tier 0 misc lvl-up perk: Job: Leader. Req. 10+ int, 10+ wis. Effect: +5 to max Inteligence/Wisdom (scalable), -5 to max Libido (scalable) and would give will-o'-the-wisp pet.\n");
 			outputText("-New tier 0 misc lvl-up perk: Natural punching bag. Req. Bouncy body perk, free fat tissure mutation slot and 4+ pts in goblin score. Effect: +1 to goblin score. Increase dmg reduction from bouncy body by 5% and +5 to max toughness.\n");
 			outputText("-New tier 0 misc lvl-up perk: Motivation. Req. Job: Leader and Basic Leadership perks. Effect: Decrease to 35% henchmans idle time during combat.\n");
@@ -166,148 +338,7 @@ package classes.Scenes
 			outputText("-Updates to character viewer by Liadri.\n");
 			outputText("-Fixed bugs: Dynapunch Glove, Whitefire Beam Cannon, Snowball Generator specials for goblin mech cooldowns not expiring before end of the combat, Siegweird hidding after Alvina gave PC assasinate order on his furry head, scene for last advanced study not showing when pc return with bear holy symbol instead showing first adv study scene, Infernal Wine not granting body parts ");
 			outputText("after getting legs one, Izumi Smoke Pipe lowering libido and/or sensitivity to 100 if they are above 100, Niamh beer drinking not taking into account libido above 100, autocasting Berzerker or Lustzerker not working, giving Lactacid to Marble when PC is addicted and not having actualy any Lactacid, inaccurate color for goblin hair color in Goblin Ale hair color change tf effect, ");
-			outputText("allowing PC bypass goblin race check on retry to buy goblin mech alpha if first time pc was too low on gems for it, Chi Chi zombie (when pc not save her after one of fights in HXD) drunk sex scene proc\n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			//outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");
-			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
-			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
-			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
-			//outputText("-New soulskill: Devourer. Req. ... Devour up to 400 lust and wrath from enemy transfering 50% of it back to player. Cooldown: 3 turns.\n");
-			//outputText("-(Heavy WIP) Raging Inferno now boost by 10% fire spells/attacks damage and each turn spend without casting fire spell lower that bonus damage by 10% till it return to 100%.\n");
-			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
-			//outputText("-New enemy possible to encounter during Bog exploration: Dark Elf Ranger - lvl 39\n");
-			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
-			//outputText("\n");cel na 0.8: dodać kitsune/nekomanta TF
-			//outputText("\n");cel na 0.8: dodać yuki-onna TF
-			//outputText("\n");cel na 0.8: dodać yuki-onna TF
-			//outputText("\n");cel na 0.8: dodać siren TF
-			//outputText("-New TF item: . Gained by bringing Orc Mead to Lumi for enhancing. Using this item will turn PC into high orc. High Orc (scalable): +130 to max Str, +30 to max Tou, +10 to max Spe, -30 to max Int, +25 to max Lib, +20% to max Wrath.\n");
-			//outputText("-New TF item: . Gained by bringing Elf Ear to Lumi for enhancing. Using this item will turn PC into high elf. High Elf (scalable): -10 to max Str, -15 to max Tou, +80 to max Spe, +80 to max Int, +60 to max Wis, +30 max/min Sens, +20% to max Mana.\n");
-			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
-			//outputText("-New armor (by Liadri): Goblin Technomancer clothes - gained after becoming Jiangshi. Cost 160 gems, 0 armor, 0 magic resistance, Slutty Seduction 10, +40% to soulskills power.\n");
-			//outputText("-New underwear (upper) (by Liadri): \n");
-			//outputText("-New underwear (bottom) (by Liadri): \n");
-			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
-			outputText("-New necklace (by Ormael):  - obtained by . Cost xx0 gems. \n");
-			outputText("-New head accesory (by Ormael):  - obtained by . Cost xx0 gems. \n");
-			outputText("-New ring (by Ormael):  - obtained by . Cost xx0 gems. \n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
-			outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-New event perk: . Gained by . Effects: \n");
-			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
-			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
-			outputText("-New tier 11 misc lvl-up perk: Chimerical Body: Epic Stage. Req. Chimerical Body: Semi-Epic Stage perk and 72+ points in Internal Chimerical Disposition score. Effect: delay by another 12 points appearing effect of negative HP regeneration and +5 to max Lib/Sens (scalable), +10 to max Str/Tou/Spe/Int/Wis (scalable).\n");
-			outputText("-New tier 12 misc lvl-up perk: Chimerical Body: ... Stage. Req. Chimerical Body: Epic Stage perk and xx+ points in Internal Chimerical Disposition score. Effect: delay by another xx points appearing effect of negative HP regeneration and +5 to max Lib/Sens (scalable), +10 to max Str/Tou/Spe/Int/Wis (scalable).\n");
-			outputText("-New tier ?? misc lvl-up perk: Creationism. Req. Perfection perk. Effect: number of possible effects of transformatives +1.\n");
-			outputText("-New tier ?? misc lvl-up perk: All-Seeing. Req. Soul Powered perk. Effect: +10% max soulforce.\n");
-			outputText("-New tier ?? misc lvl-up perk: God of Steel. Req. Soul of Steel perk. Effect: +10% melee phys dmg.\n");
-			outputText("-New tier ?? misc lvl-up perk: Lady Godiva's favorite Child. Req. Blessed by Lady Godiva perk. Effect: 15% more gems from victories.\n");
-			outputText("-New tier ?? misc lvl-up perk: MEDIC!!!. Req. Surgeon perk. Effect: increases HP gains by 20%.\n");
-			outputText("-New tier ?? misc lvl-up perk: Pope. Req. Cardinal perk. Effect: -2 min libido and +5% to lust resistance.\n");				Tier 43 perks?
-			outputText("-New tier ?? misc lvl-up perk: NERD!!!. Req. President perk. Effect: +10% max mana.\n");
-			outputText("-New tier ?? misc lvl-up perk: SHIT YOU TOUCHED SASHA!!! Req. Spy's Enemy perk. Effect: +10% range phys dmg.\n");
-			outputText("-New tier ?? misc lvl-up perk: LAZY!!! Req. ZZZ perk. Effect: +20% to fatigue recovery.\n");
-			//slut line
-			outputText("-New tier ?? misc lvl-up perk: Armor. Req. Weapon perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
-			outputText("-New tier ?? misc lvl-up perk: Sex Deity. Req. Sex Champion perk. Effect: +15% tease dmg.\n");
-			outputText("-New tier 1 misc lvl-up perk: . Req. History: Slut or Past Life: Slut perk. Effect: +10% max lust.\n");.
-			outputText("-New tier 4 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
-			outputText("-New tier 7 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
-			outputText("-New tier 12 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
-			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
-			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
-			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
-			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
-			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
-			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
-			outputText("\n");
-			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Scorpion-morph
-			outputText("\n");
-			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
-			outputText("\n");aqua seed - item mający być siren tf item
-			outputText("\n");
-			outputText("<b>Version 0.8o:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
-			outputText("<b>Version 0.8p:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
-			outputText("\n");
-			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bedą one wcześniej już za czesto wypadać
-			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
-			outputText("\n");cel na 0.8(/9): dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
-			outputText("\n");cel na 0.8(/9): pododawanie kilku(nastu) nowych opisów cześci ciała, powiazanie tego z poszczegolnymi animal-morphami, dodanie nieco specjalnych zdolnosci do kilku z nich, balansowanie ich, itp.
-			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
-			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
-			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");*/
-			outputText("\n\n\n");
-			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
-			outputText("-Add more soulforce options.\n");
-			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
-			outputText("-Add soulforce stuff to kitsune encounters.\n");
-			outputText("-Add Wuxia themed area and enemies.\n");
-			outputText("-Add few new options during chara creation.\n");
-			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
-			outputText("-More camp build options (involving using stones and etc.)\n");
-			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
+			outputText("allowing PC bypass goblin race check on retry to buy goblin mech alpha if first time pc was too low on gems for it, Chi Chi zombie (when pc not save her after one of fights in HXD) drunk sex scene proc");
 			menu();
 			addButton(0, "Next", Changelog29);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);

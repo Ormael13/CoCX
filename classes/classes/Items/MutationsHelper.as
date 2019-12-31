@@ -124,6 +124,7 @@ import classes.BodyParts.Wings;
 				case Arms.ORC:
 				case Arms.RAIJU:
 				case Arms.PIG:
+				case Arms.YUKI_ONNA:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' claws retracting back into ordinary nails. You hand looks human again.");
 					break;
 				case Arms.SHARK:
@@ -357,6 +358,7 @@ import classes.BodyParts.Wings;
 		[Arms.SPIDER, StatusEffects.UnlockedSpiderArms],
 		[Arms.WOLF, null],
 		[Arms.YETI, null],
+		[Arms.YUKI_ONNA, null],
 	]);
 
 	public function setEarType(earType:int):Boolean {
@@ -490,6 +492,7 @@ import classes.BodyParts.Wings;
 		[Face.WOLF, null],
 		[Face.WOLF_FANGS, null],
 		[Face.YETI_FANGS, null],
+		[Face.YUKI_ONNA, null],
 	]);
 
 	public function setGillType(gillType:int):Boolean {
@@ -518,6 +521,7 @@ import classes.BodyParts.Wings;
 		[Hair.NORMAL, StatusEffects.UnlockedHumanHair],
 		[Hair.QUILL, null],
 		[Hair.SILKEN, StatusEffects.UnlockedElfHair],
+		[Hair.SNOWY, null],
 		[Hair.STORM, StatusEffects.UnlockedRaijuHair],
 	]);
 
@@ -607,6 +611,7 @@ import classes.BodyParts.Wings;
 		[LowerBody.WOLF, null],
 		[LowerBody.YETI, null],
 		[LowerBody.YGG_ROOT_CLAWS, null],
+		[LowerBody.YUKI_ONNA, null],
 	]);
 
 	public function setRearBody(rearBody:int):Boolean {
@@ -620,6 +625,7 @@ import classes.BodyParts.Wings;
 		[RearBody.DRACONIC_SPIKES, null],
 		[RearBody.FENRIR_ICE_SPIKES, null],
 		[RearBody.GHOSTLY_AURA, null],
+		[RearBody.GLACIAL_AURA, null],
 		[RearBody.LION_MANE, StatusEffects.UnlockedLionMane],
 		[RearBody.METAMORPHIC_GOO, null],
 		[RearBody.NONE, StatusEffects.UnlockedHumanNoRearBody],
@@ -744,6 +750,7 @@ import classes.BodyParts.Wings;
 		[Wings.GIANT_DRAGONFLY, null],
 		[Wings.HARPY, null],
 		[Wings.IMP, null],
+		[Wings.LEVITATION, null],
 		[Wings.MANTICORE_LIKE_LARGE, StatusEffects.UnlockedManticoreWingsLarge],
 		[Wings.MANTICORE_LIKE_SMALL, StatusEffects.UnlockedManticoreWingsSmall],
 		[Wings.MANTIS_LIKE_LARGE, StatusEffects.UnlockedMantisWingsLarge],

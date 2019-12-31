@@ -308,61 +308,169 @@ public class Creature extends Utils
 		protected function maxHP_base():Number {
 			var max:Number = 0;
 			var multimax:Number = 1;
-			max += int(tou * 2 + 50);
-			if (tou >= 21) max += Math.round(tou);
-			if (tou >= 41) max += Math.round(tou);
-			if (tou >= 61) max += Math.round(tou);
-			if (tou >= 81) max += Math.round(tou);
-			if (tou >= 101) max += Math.round(tou);
-			if (tou >= 151) max += Math.round(tou);
-			if (tou >= 201) max += Math.round(tou);
-			if (tou >= 251) max += Math.round(tou);
-			if (tou >= 301) max += Math.round(tou);
-			if (tou >= 351) max += Math.round(tou);
-			if (tou >= 401) max += Math.round(tou);
-			if (tou >= 451) max += Math.round(tou);
-			if (tou >= 501) max += Math.round(tou);
-			if (tou >= 551) max += Math.round(tou);
-			if (tou >= 601) max += Math.round(tou);
-			if (tou >= 651) max += Math.round(tou);
-			if (tou >= 701) max += Math.round(tou);
-			if (tou >= 751) max += Math.round(tou);
-			if (tou >= 801) max += Math.round(tou);
-			if (tou >= 851) max += Math.round(tou);
-			if (tou >= 901) max += Math.round(tou);
-			if (tou >= 951) max += Math.round(tou);
-			if (tou >= 1001) max += Math.round(tou);
-			if (tou >= 1051) max += Math.round(tou);
-			if (tou >= 1101) max += Math.round(tou);
-			if (tou >= 1151) max += Math.round(tou);
-			if (tou >= 1201) max += Math.round(tou);
-			if (tou >= 1251) max += Math.round(tou);
-			if (tou >= 1301) max += Math.round(tou);
-			if (tou >= 1351) max += Math.round(tou);
-			if (tou >= 1401) max += Math.round(tou);
-			if (tou >= 1451) max += Math.round(tou);
-			if (tou >= 1501) max += Math.round(tou);
-			if (tou >= 1551) max += Math.round(tou);
-			if (tou >= 1601) max += Math.round(tou);
-			if (tou >= 1651) max += Math.round(tou);
-			if (tou >= 1701) max += Math.round(tou);
-			if (tou >= 1751) max += Math.round(tou);
-			if (tou >= 1801) max += Math.round(tou);
-			if (tou >= 1851) max += Math.round(tou);
-			if (tou >= 1901) max += Math.round(tou);
-			if (tou >= 1951) max += Math.round(tou);
+			if (findPerk(PerkLib.IcyFlesh) >= 0) {
+				max += int(inte * 2 + 50);
+				if (inte >= 21) max += Math.round(inte);
+				if (inte >= 41) max += Math.round(inte);
+				if (inte >= 61) max += Math.round(inte);
+				if (inte >= 81) max += Math.round(inte);
+				if (inte >= 101) max += Math.round(inte);
+				if (inte >= 151) max += Math.round(inte);
+				if (inte >= 201) max += Math.round(inte);
+				if (inte >= 251) max += Math.round(inte);
+				if (inte >= 301) max += Math.round(inte);
+				if (inte >= 351) max += Math.round(inte);
+				if (inte >= 401) max += Math.round(inte);
+				if (inte >= 451) max += Math.round(inte);
+				if (inte >= 501) max += Math.round(inte);
+				if (inte >= 551) max += Math.round(inte);
+				if (inte >= 601) max += Math.round(inte);
+				if (inte >= 651) max += Math.round(inte);
+				if (inte >= 701) max += Math.round(inte);
+				if (inte >= 751) max += Math.round(inte);
+				if (inte >= 801) max += Math.round(inte);
+				if (inte >= 851) max += Math.round(inte);
+				if (inte >= 901) max += Math.round(inte);
+				if (inte >= 951) max += Math.round(inte);
+				if (inte >= 1001) max += Math.round(inte);
+				if (inte >= 1051) max += Math.round(inte);
+				if (inte >= 1101) max += Math.round(inte);
+				if (inte >= 1151) max += Math.round(inte);
+				if (inte >= 1201) max += Math.round(inte);
+				if (inte >= 1251) max += Math.round(inte);
+				if (inte >= 1301) max += Math.round(inte);
+				if (inte >= 1351) max += Math.round(inte);
+				if (inte >= 1401) max += Math.round(inte);
+				if (inte >= 1451) max += Math.round(inte);
+				if (inte >= 1501) max += Math.round(inte);
+				if (inte >= 1551) max += Math.round(inte);
+				if (inte >= 1601) max += Math.round(inte);
+				if (inte >= 1651) max += Math.round(inte);
+				if (inte >= 1701) max += Math.round(inte);
+				if (inte >= 1751) max += Math.round(inte);
+				if (inte >= 1801) max += Math.round(inte);
+				if (inte >= 1851) max += Math.round(inte);
+				if (inte >= 1901) max += Math.round(inte);
+				if (inte >= 1951) max += Math.round(inte);
+				if (inte >= 2001) max += Math.round(inte);
+				if (inte >= 2051) max += Math.round(inte);
+				if (inte >= 2101) max += Math.round(inte);
+				if (inte >= 2151) max += Math.round(inte);
+				if (inte >= 2201) max += Math.round(inte);
+				if (inte >= 2251) max += Math.round(inte);
+				if (inte >= 2301) max += Math.round(inte);
+				if (inte >= 2351) max += Math.round(inte);
+				if (inte >= 2401) max += Math.round(inte);
+				if (inte >= 2451) max += Math.round(inte);
+				if (inte >= 2501) max += Math.round(inte);
+				if (inte >= 2551) max += Math.round(inte);
+				if (inte >= 2601) max += Math.round(inte);
+				if (inte >= 2651) max += Math.round(inte);
+				if (inte >= 2701) max += Math.round(inte);
+				if (inte >= 2751) max += Math.round(inte);
+				if (inte >= 2801) max += Math.round(inte);
+				if (inte >= 2851) max += Math.round(inte);
+				if (inte >= 2901) max += Math.round(inte);
+				if (inte >= 2951) max += Math.round(inte);
+				if (findPerk(PerkLib.FrozenHeartFinalForm) >= 0) max *= 1.5;
+			}
+			else {
+				max += int(tou * 2 + 50);
+				if (tou >= 21) max += Math.round(tou);
+				if (tou >= 41) max += Math.round(tou);
+				if (tou >= 61) max += Math.round(tou);
+				if (tou >= 81) max += Math.round(tou);
+				if (tou >= 101) max += Math.round(tou);
+				if (tou >= 151) max += Math.round(tou);
+				if (tou >= 201) max += Math.round(tou);
+				if (tou >= 251) max += Math.round(tou);
+				if (tou >= 301) max += Math.round(tou);
+				if (tou >= 351) max += Math.round(tou);
+				if (tou >= 401) max += Math.round(tou);
+				if (tou >= 451) max += Math.round(tou);
+				if (tou >= 501) max += Math.round(tou);
+				if (tou >= 551) max += Math.round(tou);
+				if (tou >= 601) max += Math.round(tou);
+				if (tou >= 651) max += Math.round(tou);
+				if (tou >= 701) max += Math.round(tou);
+				if (tou >= 751) max += Math.round(tou);
+				if (tou >= 801) max += Math.round(tou);
+				if (tou >= 851) max += Math.round(tou);
+				if (tou >= 901) max += Math.round(tou);
+				if (tou >= 951) max += Math.round(tou);
+				if (tou >= 1001) max += Math.round(tou);
+				if (tou >= 1051) max += Math.round(tou);
+				if (tou >= 1101) max += Math.round(tou);
+				if (tou >= 1151) max += Math.round(tou);
+				if (tou >= 1201) max += Math.round(tou);
+				if (tou >= 1251) max += Math.round(tou);
+				if (tou >= 1301) max += Math.round(tou);
+				if (tou >= 1351) max += Math.round(tou);
+				if (tou >= 1401) max += Math.round(tou);
+				if (tou >= 1451) max += Math.round(tou);
+				if (tou >= 1501) max += Math.round(tou);
+				if (tou >= 1551) max += Math.round(tou);
+				if (tou >= 1601) max += Math.round(tou);
+				if (tou >= 1651) max += Math.round(tou);
+				if (tou >= 1701) max += Math.round(tou);
+				if (tou >= 1751) max += Math.round(tou);
+				if (tou >= 1801) max += Math.round(tou);
+				if (tou >= 1851) max += Math.round(tou);
+				if (tou >= 1901) max += Math.round(tou);
+				if (tou >= 1951) max += Math.round(tou);
+				if (tou >= 2001) max += Math.round(tou);
+				if (tou >= 2051) max += Math.round(tou);
+				if (tou >= 2101) max += Math.round(tou);
+				if (tou >= 2151) max += Math.round(tou);
+				if (tou >= 2201) max += Math.round(tou);
+				if (tou >= 2251) max += Math.round(tou);
+				if (tou >= 2301) max += Math.round(tou);
+				if (tou >= 2351) max += Math.round(tou);
+				if (tou >= 2401) max += Math.round(tou);
+				if (tou >= 2451) max += Math.round(tou);
+				if (tou >= 2501) max += Math.round(tou);
+				if (tou >= 2551) max += Math.round(tou);
+				if (tou >= 2601) max += Math.round(tou);
+				if (tou >= 2651) max += Math.round(tou);
+				if (tou >= 2701) max += Math.round(tou);
+				if (tou >= 2751) max += Math.round(tou);
+				if (tou >= 2801) max += Math.round(tou);
+				if (tou >= 2851) max += Math.round(tou);
+				if (tou >= 2901) max += Math.round(tou);
+				if (tou >= 2951) max += Math.round(tou);
+			}
 			if (findPerk(PerkLib.RefinedBodyI) >= 0) max += 50;
 			if (findPerk(PerkLib.RefinedBodyII) >= 0) max += 50;
 			if (findPerk(PerkLib.RefinedBodyIII) >= 0) max += 50;
 			if (findPerk(PerkLib.RefinedBodyIV) >= 0) max += 50;
 			if (findPerk(PerkLib.RefinedBodyV) >= 0) max += 50;
 			if (findPerk(PerkLib.RefinedBodyVI) >= 0) max += 50;
-			if (findPerk(PerkLib.TankI) >= 0) max += Math.round(tou*3);
-			if (findPerk(PerkLib.TankII) >= 0) max += Math.round(tou*3);
-			if (findPerk(PerkLib.TankIII) >= 0) max += Math.round(tou*3);
-			if (findPerk(PerkLib.TankIV) >= 0) max += Math.round(tou*3);
-			if (findPerk(PerkLib.TankV) >= 0) max += Math.round(tou*3);
-			if (findPerk(PerkLib.TankVI) >= 0) max += Math.round(tou*3);
+			if (findPerk(PerkLib.IcyFlesh) >= 0) {
+				if (findPerk(PerkLib.FrozenHeartFinalForm) >= 0) {
+					if (findPerk(PerkLib.TankI) >= 0) max += Math.round(inte*4.5);
+					if (findPerk(PerkLib.TankII) >= 0) max += Math.round(inte*4.5);
+					if (findPerk(PerkLib.TankIII) >= 0) max += Math.round(inte*4.5);
+					if (findPerk(PerkLib.TankIV) >= 0) max += Math.round(inte*4.5);
+					if (findPerk(PerkLib.TankV) >= 0) max += Math.round(inte*4.5);
+					if (findPerk(PerkLib.TankVI) >= 0) max += Math.round(inte*4.5);
+				}
+				else {
+					if (findPerk(PerkLib.TankI) >= 0) max += Math.round(inte*3);
+					if (findPerk(PerkLib.TankII) >= 0) max += Math.round(inte*3);
+					if (findPerk(PerkLib.TankIII) >= 0) max += Math.round(inte*3);
+					if (findPerk(PerkLib.TankIV) >= 0) max += Math.round(inte*3);
+					if (findPerk(PerkLib.TankV) >= 0) max += Math.round(inte*3);
+					if (findPerk(PerkLib.TankVI) >= 0) max += Math.round(inte*3);
+				}
+			}
+			else {
+				if (findPerk(PerkLib.TankI) >= 0) max += Math.round(tou*3);
+				if (findPerk(PerkLib.TankII) >= 0) max += Math.round(tou*3);
+				if (findPerk(PerkLib.TankIII) >= 0) max += Math.round(tou*3);
+				if (findPerk(PerkLib.TankIV) >= 0) max += Math.round(tou*3);
+				if (findPerk(PerkLib.TankV) >= 0) max += Math.round(tou*3);
+				if (findPerk(PerkLib.TankVI) >= 0) max += Math.round(tou*3);
+			}
 			if (findPerk(PerkLib.GoliathI) >= 0) max += Math.round(str*2);
 			if (findPerk(PerkLib.GoliathII) >= 0) max += Math.round(str*2);
 			if (findPerk(PerkLib.GoliathIII) >= 0) max += Math.round(str*2);
@@ -542,14 +650,14 @@ public class Creature extends Utils
 		}
 		public function maxHP():Number {
 			var max:Number = Math.round(maxHP_base()*maxHP_mult());
-			return Math.min(3699999,max);
+			return Math.min(9999999,max);
 		}
 		public function minHP():Number {
 			return 0;
 		}
 		public function maxLust():Number {
 			var max:Number = Math.round(maxLust_base()*maxLust_mult());
-			return Math.min(139999,max);
+			return Math.min(199999,max);
 		}
 		public function maxFatigue():Number {
 			return 150;
