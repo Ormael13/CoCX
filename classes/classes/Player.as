@@ -8946,6 +8946,12 @@ use namespace CoC;
 					maxLib += (25 * newGamePlusMod);
 				}
 			}
+			if (yukiOnnaScore() >= 14) {
+				maxSpe += (70 * newGamePlusMod);
+				maxInt += (140 * newGamePlusMod);
+				maxWis += (70 * newGamePlusMod);
+				maxLib += (50 * newGamePlusMod);
+			}
 			if (poltergeistScore() >= 6) {
 				if (poltergeistScore() >= 18) {
 					maxStr -= (45 * newGamePlusMod);
