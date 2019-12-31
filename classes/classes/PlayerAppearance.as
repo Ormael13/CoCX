@@ -1115,6 +1115,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Below your waist, your body fuses and fades away, like a ghost.");
 		else if (player.lowerBody == LowerBody.JIANGSHI)
 			outputText("  While your legs are human in appearance your body is so rigid due to this pseudo rigor mortis that the only way you found for movement is by hopping around.");
+		else if (player.lowerBody == LowerBody.YUKI_ONNA)
+			outputText("  Your legs are human in appearance albeit for the bluish nails.");
 	}
 	public function describeTail():void {
 		if (player.tailType == Tail.HORSE)
@@ -1360,6 +1362,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your arms and hands are practically human save for the fact that they are ghastly in nature.");
 		else if (armType == Arms.JIANGSHI)
 			outputText("  Your arms are human in shape and appearance but underneath your purple nail is a thick layer of deadly poison.");
+		else if (armType == Arms.YUKI_ONNA)
+			outputText("  Your arms and hands are human in appearance but your blue nailed hands touch is void of warmth and colder then death.");
 		else if (player.wings.type == Wings.BAT_ARM)
 			outputText("  The bones in your arms are thin and light, as if made of only cartilage, granting you the ability to take flight. Instead of the five fingers you started out with, you now have three that are both larger and stronger. They allow you to hold various items even with your abnormal hands, albeit at the cost of preventing flight while doing so and making some things a little more awkward to grip.");
 	}
@@ -1470,6 +1474,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (wingType == Wings.THUNDEROUS_AURA){
 			outputText("  You generate so much electricity that the sound of static and voltage follows you around, announcing your arrival.");
+		}
+		if (wingType == Wings.LEVITATION){
+			outputText("  You have the ability to levitate in the air should you wish to although you prefer to stay at ground level not to alert your would be victims to your otherworldly nature.");
 		}
 	}
 	public function describeHorns():void {
@@ -2334,13 +2341,34 @@ public class PlayerAppearance extends BaseContent {
 			if (player.hasFullCoatOfType(Skin.FEATHER)) outputText("   The rest of your face is decorated with a coat of [skin coat].")
 		}
 		if (faceType == Face.FIRE_SNAIL) {
-			outputText("  Your face is human in shape and structure but your mouth is drooling from constant arousal.");
+			outputText("  Your face is human in shape and structure");
+			if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
+			else if (skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
+			else if (skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
+			else if (skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
+			else if (skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+			outputText(" but your mouth is drooling from constant arousal.");
 		}
 		if (faceType == Face.GHOST) {
-			outputText("  Your face is in human shape and structure. The only thing out of place is the ever present wide smile on your face. Your unsettling smile often hides your true emotions much to the dismay of others.");
+			outputText("  Your face is in human shape and structure");
+			if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
+			else if (skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
+			else if (skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
+			else if (skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
+			else if (skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+			outputText(". The only thing out of place is the ever present wide smile on your face. Your unsettling smile often hides your true emotions much to the dismay of others.");
 		}
 		if (faceType == Face.JIANGSHI) {
 			outputText("  Your face is human in form and shape but your expression is kind of zombie like.");
+		}
+		if (faceType == Face.YUKI_ONNA) {
+			outputText("  Your face is fully human");
+			if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
+			else if (skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
+			else if (skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
+			else if (skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
+			else if (skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+			outputText(" in appearance although your lips are dyed blue by the cold.");
 		}
 		//</mod>
 	}
@@ -3030,6 +3058,10 @@ public function RacialScores():void {
 	if (player.yggdrasilScore() >= 10) outputText("\n<font color=\"#0000a0\">Yggdrasil: " + player.yggdrasilScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Wis, -" + (50 * (1 + player.newGamePlusMod())) + " max Lib, +" + (10 * (1 + player.newGamePlusMod())) + " Armor)</font>");
 	else if (player.yggdrasilScore() >= 1 && player.yggdrasilScore() < 10) outputText("\n<font color=\"#008000\">Yggdrasil: " + player.yggdrasilScore() + "</font>");
 	else if (player.yggdrasilScore() < 1) outputText("\n<font color=\"#ff0000\">Yggdrasil: 0</font>");
+	//Yeti
+	if (player.yukiOnnaScore() >= 14) outputText("\n<font color=\"#0000a0\">Yuki Onna: " + player.yukiOnnaScore() + " (+" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (140 * (1 + player.newGamePlusMod())) + " max Int, +" + (70 * (1 + player.newGamePlusMod())) + " max Wis, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib"+(player.hasPerk(PerkLib.IcyFlesh) ? ", max Tou fixed at 1":"")+")</font>");
+	else if (player.yukiOnnaScore() >= 1 && player.yukiOnnaScore() < 14) outputText("\n<font color=\"#008000\">Yuki Onna: " + player.yukiOnnaScore() + "</font>");
+	else if (player.yukiOnnaScore() < 1) outputText("\n<font color=\"#ff0000\">Yuki Onna: 0</font>");
 	menu();
 	addButton(0, "Next", playerMenu);
 }
@@ -3096,4 +3128,4 @@ public function GenderForcedSettingFemale():void {
 		else outputText("<b>Yo, this is an error.</b>");
 	}
 }
-}
+}

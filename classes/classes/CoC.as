@@ -73,7 +73,7 @@ public class CoC extends MovieClip
 
     //Mod save version.
     public var modSaveVersion:Number = 26;
-    public var levelCap:Number = 172;
+    public var levelCap:Number = 185;
 
     //Used to restrict random drops from overlapping uniques
     public var plotFight:Boolean = false;
@@ -253,8 +253,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8n5 Mitzi Special Christmas Edition";
-			version = ver + " (<b>Mitzi, Electra and Neisa camp x-packs, Traditional X-mas Perk-o-calipse 5 (49 perks), Job: Leader, Max lvl cap increase, many small fixes and QoL changes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8n6";
+			version = ver + " (<b>Yuki onna TF, some bugfixes</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

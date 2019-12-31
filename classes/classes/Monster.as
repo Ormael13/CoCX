@@ -3021,6 +3021,28 @@ import flash.utils.getQualifiedClassName;
 					removeStatusEffect(StatusEffects.RegenInhibitor);
 				}
 			}
+			//Ice DoT
+			if (hasStatusEffect(StatusEffects.FrostburnDoT)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.FrostburnDoT,1,-1);
+				if (statusEffectv4(StatusEffects.FrostburnDoT) == 0) {
+					if (statusEffectv1(StatusEffects.FrostburnDoT) > 1) addStatusValue(StatusEffects.FrostburnDoT, 1, -1);
+					//Heal wounds
+					if (statusEffectv1(StatusEffects.FrostburnDoT) <= 0) {
+						outputText("Wound left by frostburn on " + a + short + " finally close ups.\n\n");
+						removeStatusEffect(StatusEffects.FrostburnDoT);
+					}
+					//Deal damage if still wounded.
+					else {
+						var store12:Number = (player.str + player.spe + player.tou) * 2.5;
+						store12 += maxHP() * statusEffectv2(StatusEffects.FrostburnDoT);
+						if(plural) outputText(capitalA + short + " are hurt by lingering Frostburn after-effect. ");
+						else outputText(capitalA + short + " is hurt by lingering Frostburn after-effect. ");
+						store12 = SceneLib.combat.doIceDamage(store12, true, true);
+						outputText("\n\n");
+					}
+				}
+			}
 			//Acid DoT
 			if (hasStatusEffect(StatusEffects.AcidDoT)) {
 				//Countdown to heal
@@ -3174,14 +3196,15 @@ import flash.utils.getQualifiedClassName;
 			}
 			//regeneration perks for monsters
 			if (((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0 || findPerk(PerkLib.ImprovedLifeline) >= 0 
-			|| findPerk(PerkLib.GreaterLifeline) >= 0 || findPerk(PerkLib.EpicLifeline) >= 0 || findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && this.HP < maxHP()) 
-			|| (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxHP()) && (this.HP > 0))) {
+			|| findPerk(PerkLib.GreaterLifeline) >= 0 || findPerk(PerkLib.EpicLifeline) >= 0 || findPerk(PerkLib.IcyFlesh) >= 0 || findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2))
+			&& this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxHP()) && (this.HP > 0))) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				if (findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + newGamePlusMod()));
 				if (findPerk(PerkLib.LizanRegeneration) >= 0 && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1.5;
 				if (findPerk(PerkLib.LizanMarrow) >= 0 && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 0.5;
 				if (findPerk(PerkLib.LizanMarrowEvolved) >= 0 && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1;
+				if (findPerk(PerkLib.IcyFlesh) >= 0) healingPercent += 1;
 				if (findPerk(PerkLib.BodyCultivator) >= 0) healingPercent += 0.5;
 				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
 				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;

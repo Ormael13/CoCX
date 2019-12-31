@@ -1776,6 +1776,14 @@ import coc.view.MainView;
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0) addButtonDisabled(btn, "A.O.M.(1st)", "You already bought Additional Organ Mutation (1st Stage) perk.");
 			else addButtonDisabled(btn, "A.O.M.(1st)", "You need ascend more times and have 10+ in internal mutation score to buy this perk.");
 			btn++;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.internalChimeraScore() >= 20 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0) {
+				if (player.ascensionPerkPoints >= 40 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation02) < 0) addButton(btn, "A.O.M.(2nd)", perkAdditionalOrganMutation02).hint("Perk allowing to get one more slot for the same iternal organ mutations. (As an example: 3 slots instead 2 for heart related mutations)\n\nCost: 40 points");
+				else if (player.ascensionPerkPoints < 40) addButtonDisabled(btn, "A.O.M.(2nd)", "You not have enough ascension perk points!");
+				else addButtonDisabled(btn, "A.O.M.(2nd)", "You already bought Additional Organ Mutation (2nd Stage) perk.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.internalChimeraScore() >= 20 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation01) < 0) addButtonDisabled(btn, "A.O.M.(2nd)", "You need to buy Additional Organ Mutation (1st Stage) perk first.");
+			else addButtonDisabled(btn, "A.O.M.(2nd)", "You need ascend more times and have 20+ in internal mutation score to buy this perk.");
+			btn++;
 			if (player.ascensionPerkPoints >= 5 && player.findPerk(PerkLib.AscensionBuildingPrestige01) < 0) addButton(btn, "B.Prestige(1st)", perkBuildingPrestige01).hint("Perk allowing to get one more slot for prestige job perks.\n\nCost: 5 points");
 			else if (player.ascensionPerkPoints < 5) addButtonDisabled(btn, "B.Prestige(1st)", "You not have enough ascension perk points!");
 			else addButtonDisabled(btn, "B.Prestige(1st)", "You already bought Building Prestige (1st Stage) perk.");
@@ -1846,6 +1854,13 @@ import coc.view.MainView;
 			player.createPerk(PerkLib.AscensionAdditionalOrganMutation01,0,0,0,1);
 			clearOutput();
 			outputText("Your gained Additional Organ Mutation (1st Stage) perk.");
+			doNext(rarePerks1);
+		}
+		private function perkAdditionalOrganMutation02():void {
+			player.ascensionPerkPoints -= 40;
+			player.createPerk(PerkLib.AscensionAdditionalOrganMutation02,0,0,0,1);
+			clearOutput();
+			outputText("Your gained Additional Organ Mutation (2nd Stage) perk.");
 			doNext(rarePerks1);
 		}
 		private function perkBuildingPrestige01():void {

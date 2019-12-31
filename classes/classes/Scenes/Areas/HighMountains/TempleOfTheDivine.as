@@ -1764,6 +1764,18 @@ use namespace CoC;
 				player.removePerk(PerkLib.ElvishPeripheralNervSysFinalForm);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.FrozenHeart)) {
+				player.removePerk(PerkLib.FrozenHeart);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.FrozenHeartEvolved)) {
+				player.removePerk(PerkLib.FrozenHeartEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.FrozenHeartFinalForm)) {
+				player.removePerk(PerkLib.FrozenHeartFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.GorgonsEyes)) {
 				player.removePerk(PerkLib.GorgonsEyes);
 				player.perkPoints += 1;

@@ -304,6 +304,18 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You need more time before you can use Freezing Breath again.");
 			}
 		}
+		if ((player.yukiOnnaScore() >= 14 && player.hasPerk(PerkLib.ColdAffinity)) || player.hasPerk(PerkLib.FrozenHeart)) {
+			bd = buttons.add("Ice Barrage", iceBarrage).hint("Call up a frigid storm to freeze and bombard your enemies.", "Ice Barrage");
+			bd.requireFatigue(spellCost(40));
+			var HCCDv:Number = 10;
+			if (player.hasPerk(PerkLib.FrozenHeartEvolved)) HCCDv -= 1;
+			if (player.hasPerk(PerkLib.FrozenHeartFinalForm)) HCCDv -= 3;
+			bd = buttons.add("HungeringCold", hungeringCold).hint("Freeze the air around your target, encasing it in ice and dealing hypothermia damage. Weakens opponents ice resistance to further attacks damage by 50% stacking up to 3 times. \n\nWould go into cooldown after use for: " + HCCDv + " rounds", "Hungering cold");
+			bd.requireFatigue(spellCost(40));
+			if (player.hasStatusEffect(StatusEffects.CooldownHungeringCold)) {
+				bd.disable("You need more time before you can use Hungering cold again.");
+			}
+		}
 		if (player.hasPerk(PerkLib.FireLord)) {
 			bd = buttons.add("Fire Breath",fireballuuuuu).hint("Unleash fire from your mouth. \n", "Fire Breath");
 			bd.requireFatigue(20);
@@ -1221,6 +1233,115 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 		}
 		else combatRoundOver();
+	}
+
+	public function iceBarrage():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		fatigue(40, USEFATG_MAGIC_NOBM);
+		var damage:Number = scalingBonusIntelligence() * spellModBlack();
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (player.hasPerk(PerkLib.FrozenHeart)) {
+			var IBM:Number = 1.1;
+			if (player.hasPerk(PerkLib.FrozenHeartEvolved)) IBM += 0.2;
+			if (player.hasPerk(PerkLib.FrozenHeartFinalForm)) IBM += 0.3;
+			damage *= IBM;
+		}
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		//High damage to goes.
+		damage = calcGlacialMod(damage);
+		if (combat.wearingWinterScarf()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) damage = Math.round(damage * 1.2);
+		damage = Math.round(damage);
+		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
+		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
+		outputText("You thrust both hands forward, gathering moisture and freezing it in the shape of Icy dagger like shards. The wind whips past you, cold and carrying with it long pointed shards of ice. They crash against " + monster.a + monster.short + ". " + monster.Pronoun1 + " screams in pain as " + monster.pronoun3 + " body is impaled multiple time by the barrage of projectiles. ");
+		damage = doIceDamage(damage, true, true);
+		//Using fire attacks on the goo]
+		//if(monster.short == "goo-girl") {
+		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
+		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
+		//}
+		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		outputText("\n\n");
+		monster.createStatusEffect(StatusEffects.Hemorrhage, 4, 0.05, 0, 0);
+		if (monster.hasStatusEffect(StatusEffects.FrostburnDoT)) {
+			monster.addStatusValue(StatusEffects.FrostburnDoT,1,1);
+			monster.addStatusValue(StatusEffects.FrostburnDoT,3,1);
+		}
+		else monster.createStatusEffect(StatusEffects.FrostburnDoT,4,0.02,0,0);
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+	}
+
+	public function hungeringCold():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		fatigue(40, USEFATG_MAGIC_NOBM);
+		var HCCD:Number = 10;
+		var HCD:Number = 8;
+		if (player.hasPerk(PerkLib.FrozenHeartEvolved)) {
+			HCCD -= 1;
+			HCD += 1;
+		}
+		if (player.hasPerk(PerkLib.FrozenHeartFinalForm)) {
+			HCCD -= 3;
+			HCD += 3;
+		}
+		player.createStatusEffect(StatusEffects.CooldownHungeringCold,HCCD,0,0,0);
+		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 0.2;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (player.hasPerk(PerkLib.FrozenHeart)) {
+			var HCM:Number = 1.1;
+			if (player.hasPerk(PerkLib.FrozenHeartEvolved)) HCM += 0.2;
+			if (player.hasPerk(PerkLib.FrozenHeartFinalForm)) HCM += 0.3;
+			damage *= HCM;
+		}
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		//High damage to goes.
+		damage = calcGlacialMod(damage);
+		if (combat.wearingWinterScarf()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) damage = Math.round(damage * 1.2);
+		damage = Math.round(damage);
+		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
+		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
+		outputText("You condense the natural humidity ambient in the air to a focal point and encase " + monster.a + monster.short + " in a solid block of ice! You can almost feel " + monster.pronoun2 + " shivering in there from the sudden temperature spike. ");
+		damage = doIceDamage(damage, true, true);
+		//Using fire attacks on the goo]
+		//if(monster.short == "goo-girl") {
+		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
+		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
+		//}
+		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		outputText("\n\n");
+		monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+		if (monster.hasStatusEffect(StatusEffects.FrostburnDoT)) {
+			monster.addStatusValue(StatusEffects.FrostburnDoT,1,1);
+			if (monster.statusEffectv3(StatusEffects.FrostburnDoT) < 3) monster.addStatusValue(StatusEffects.FrostburnDoT,3,1);
+		}
+		else monster.createStatusEffect(StatusEffects.FrostburnDoT,HCD,0.02,1,0);
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
 	}
 
 	public function acidSpit():void {

@@ -46,10 +46,35 @@ public class MinotaurKingScenes extends BaseContent
 			outputText("\n\nA slow, quiet clap begins from the rear of the room. <i>“Well done, Champion... quite well done.”</i> The Queen herself is smiling at you, though her eyes are as cold as dark ice on a winter’s eve. <i>“Avail yourself of your prizes. It wouldn’t be sporting to take you on while you’re all worked up. My underling’s loyal retainers might get the wrong idea about my strength.”</i> Her eyes flash dangerously.");
 			outputText("\n\nOf course. If she preyed on you while you were still recovering from the minotaur, her subordinates might think her weak or afraid. You have a semi-conscious royal and his cow-slut to use as you will. Or you could just put them out of their misery.");
 			if (player.cor <= 33) outputText(" The poor things are so corrupted.");
-
 			menu();
 			addButton(0, "Kill Them", murderhobo);
+			var smallCockIdx:int = -1;
+			for (var i:int = 0; i < player.cocks.length; i++)
+			{
+				if (player.cocks[i].cockLength <= 12)
+				{
+					if (smallCockIdx != -1 && player.cocks[smallCockIdx].cockLength < player.cocks[i].cockLength)
+					{
+						smallCockIdx = i;
+					}
+				}
+			}
+			if (smallCockIdx != -1) addButton(1, "Docking", dockucocku, smallCockIdx);
+			if (player.hasCock())
+			{
+				addButton(2, "Buttfuck", buttufucku);
+				addButton(3, "Titfuck", titfuckCowslut);
+				addButton(4, "SloppySeconds", sloppySeconds);
+			}
+			if (player.hasVagina()) addButton(5, "Ride Him", mechanicalbullhue);
+			//addButton(14, "TouchCow", touchTheCowDoItNow).hint("Touch the Cow. Do it Now. (Or maybe it was to keep her after you deal with the Lethice? Who cares?)");
+		}
 
+		private function touchTheCowDoItNow():void
+		{
+			flags[kFLAGS.EXCELLIA_RECRUITED] = 1;
+			menu();
+			addButton(0, "Kingslayer", murderhobo);
 			var smallCockIdx:int = -1;
 			for (var i:int = 0; i < player.cocks.length; i++)
 			{

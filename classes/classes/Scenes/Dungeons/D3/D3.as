@@ -269,17 +269,20 @@ import classes.StatusEffects;
 		{
 			inRoomedDungeon = false;
 			inRoomedDungeonResume = null;
-			if (flags[kFLAGS.MITZI_RECRUITED] == 1 && player.hasStatusEffect(StatusEffects.CampRathazul)) {
+			if ((flags[kFLAGS.MITZI_RECRUITED] == 1 && player.hasStatusEffect(StatusEffects.CampRathazul)) || (flags[kFLAGS.EXCELLIA_RECRUITED] == 1 && !camp.followerShouldra())) {
 				clearOutput();
-				outputText("With the threat of the demon queen taken care of, you head back outside where you told Mitzi to wait. When you open the doors, you look around and spot the goblin laying against the wall struggling to stay awake. You head over and barely manage to catch her as she slumps to the side. She shivers and shakes in your arms and a heavy blush is plastered on her face. Fearing something else could be wrong with her, you pick up the drug addled goblin then carry her back to your camp. She mumbles and moans faintly as you carry her. With the amount of mind numbing lust inducing drugs pumped into her, you're not sure if she can simply shake this herself. Maybe Rathazul can help in that regard. Once you reach camp, you head right to the elder rat's lab. He notices you coming over with the barely conscious goblin in your arms.\n\n");
-				outputText("<i>“[name]! It's good to see you return safe and sound. Hm? Is that a goblin you have there?”</i>\n\n");
-				outputText("You elaborate what occurred in Lethice's stronghold and how you saved the diminutive woman from the drider incubus. Rathazul nods his head in understanding then motions for you to lay her on his examination table. After a quick inspection, he turns to you with a concerned look on his face.\n\n");
-				outputText("<i>“Whatever drugs she was given were pretty powerful. They seem to be having a rather profound effect on her body and mind.”</i>\n\n");
-				outputText("You figured that much. However, you wonder if there's anything he can do for her. Is there a way to counteract the drugs pumped into her? The elder rat strokes his beard in thought.\n\n");
-				outputText("<i>“I might be able to create a brew that could help restore her. However, I can not guarantee that it will restore her to the way she used to be.”</i>\n\n");
-				outputText("You suppose it's better than nothing. You ask him what exactly he needs to make the brew.\n\n");
-				outputText("<i>“I would need five scholar teas, five vitality tinctures, one bottle of pure spring water, and one vial of pure honey should be enough for the mixture. Bring them to me once you have them. I'll keep an eye on the poor girl until you return.”</i>\n\n");
-				flags[kFLAGS.MITZI_RECRUITED] = 2;
+				if (flags[kFLAGS.EXCELLIA_RECRUITED] == 1 && !!camp.followerShouldra()) outputText("Before you go, you look for where you left the former cow queen. You find her laying in an imp nest covered in cum. She appears to have fallen asleep sometime during the battle. Shaking your head, you wipe most of the mess from her body then drag her back to camp, leaving the stronghold behind.\n\n");
+				if (flags[kFLAGS.MITZI_RECRUITED] == 1 && player.hasStatusEffect(StatusEffects.CampRathazul)) {
+					outputText("With the threat of the demon queen taken care of, you head back outside where you told Mitzi to wait. When you open the doors, you look around and spot the goblin laying against the wall struggling to stay awake. You head over and barely manage to catch her as she slumps to the side. She shivers and shakes in your arms and a heavy blush is plastered on her face. Fearing something else could be wrong with her, you pick up the drug addled goblin then carry her back to your camp. She mumbles and moans faintly as you carry her. With the amount of mind numbing lust inducing drugs pumped into her, you're not sure if she can simply shake this herself. Maybe Rathazul can help in that regard. Once you reach camp, you head right to the elder rat's lab. He notices you coming over with the barely conscious goblin in your arms.\n\n");
+					outputText("<i>“[name]! It's good to see you return safe and sound. Hm? Is that a goblin you have there?”</i>\n\n");
+					outputText("You elaborate what occurred in Lethice's stronghold and how you saved the diminutive woman from the drider incubus. Rathazul nods his head in understanding then motions for you to lay her on his examination table. After a quick inspection, he turns to you with a concerned look on his face.\n\n");
+					outputText("<i>“Whatever drugs she was given were pretty powerful. They seem to be having a rather profound effect on her body and mind.”</i>\n\n");
+					outputText("You figured that much. However, you wonder if there's anything he can do for her. Is there a way to counteract the drugs pumped into her? The elder rat strokes his beard in thought.\n\n");
+					outputText("<i>“I might be able to create a brew that could help restore her. However, I can not guarantee that it will restore her to the way she used to be.”</i>\n\n");
+					outputText("You suppose it's better than nothing. You ask him what exactly he needs to make the brew.\n\n");
+					outputText("<i>“I would need five scholar teas, five vitality tinctures, one bottle of pure spring water, and one vial of pure honey should be enough for the mixture. Bring them to me once you have them. I'll keep an eye on the poor girl until you return.”</i>\n\n");
+					flags[kFLAGS.MITZI_RECRUITED] = 2;
+				}
 				doNext(camp.returnToCampUseOneHour);
 			}
 			else camp.returnToCampUseOneHour();

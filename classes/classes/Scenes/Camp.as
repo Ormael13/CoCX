@@ -604,6 +604,10 @@ CoC.instance.saves.saveGame(player.slotName);
 		kihaFollower.kihaTellsChildrenStory();
 		return;
 	}
+	if (flags[kFLAGS.EXCELLIA_RECRUITED] == 1) {
+		SceneLib.excelliaFollower.ExcelliaPathChoice();
+		return;
+	}
 	//Go through Helia's first time move in interactions if  you haven't yet.
 	if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 2 && SceneLib.helScene.followerHel() && flags[kFLAGS.HEL_INTROS_LEVEL] == 0) {
 		helFollower.helFollowersIntro();
@@ -1015,6 +1019,7 @@ public function followersCount():Number {
 	if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) counter++;
 	if (flags[kFLAGS.NEISA_FOLLOWER] >= 7) counter++;
 	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
+	if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 3) counter++;
 	if (flags[kFLAGS.MITZI_RECRUITED] >= 4) counter++;
 	if (flags[kFLAGS.MITZI_DAUGHTERS] >= 4) counter++;
 	if (helspawnFollower()) counter++;
@@ -1033,6 +1038,7 @@ public function followersCount():Number {
 
 public function slavesCount():Number {
 	var counter:Number = 0;
+	if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2) counter++;
 	if (latexGooFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0) counter++;
 	if (vapulaSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) counter++;
 	if (campCorruptJojo() && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) counter++;
@@ -1092,6 +1098,7 @@ public function loversHotBathCount():Number {
 	//if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
 	//if (flags[kFLAGS.GALIA_LVL_UP] >= 1) counter++;
 	//if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) counter++;
+	if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) counter++;
 	if (flags[kFLAGS.MITZI_RECRUITED] >= 4) counter++;
 	if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
 	if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
@@ -1516,6 +1523,11 @@ public function campSlavesMenu(descOnly:Boolean = false):void {
 		if (flags[kFLAGS.GALIA_AFFECTION] < 10) outputText("Near the [camp] edge nearly next to Evangeline bedroll sits a large wooden cage for keeping female imp brought back from Adventure Guild. Despite been one of those more feral she most of the time spend sitting motionlessly and gazing into the horizon.\n\n");
 		else outputText("Nothing to see here yet.\n\n");
 	}
+	//Excellia Slave
+	if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2) {
+		outputText("Excellia sits near your "+(flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "cabin":"tent")+". She moos faintly as she idly caresses her own full breasts and wet snatch. When she notices you, she spreads her legs a bit and her tail eagerly swishes back and forth, hoping you'll come over.\n\n");
+		buttons.add( "Excellia", SceneLib.excelliaFollower.ExcelliaCampMainMenuMakeSlave).hint("Visit Excellia.");
+	}
 	//Patchouli
 	if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 5) {
 		if (flags[kFLAGS.PATCHOULI_FOLLOWER] == 5) outputText("Patchouli is still tied to a tree. Even incapacitated in this way, he keeps grinning at you, as if taunting you.\n\n");
@@ -1708,6 +1720,12 @@ public function campFollowers(descOnly:Boolean = false):void {
 			}
 			outputText(". -Rathazul</i>\".\n\n");
 		}
+	}
+	//Excellia Follower
+	if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 3) {
+		if (flags[kFLAGS.EXCELLIA_RECRUITED] < 33) outputText("Excellia sits just outside her tent looking a bit lost and confused. When she sees you, she immediately perks up, swishing her tail back and forth in the hopes that you come over to her.\n\n");
+		else outputText("Excellia seems to be working on her combat skills against a training dummy. When she notices you, she gives a friendly nod before going back to pummeling the dummy.\n\n");
+		buttons.add( "Excellia", SceneLib.excelliaFollower.ExcelliaCampMainMenuFixHer).hint("Visit Excellia.");
 	}
 	//Mitzi + brood
 	if (flags[kFLAGS.MITZI_RECRUITED] >= 4) {
@@ -4552,4 +4570,4 @@ private function fixHistory():void {
 }
 */
 }
-}
+}

@@ -1151,7 +1151,7 @@ public function baseelementalattacks(elementType:int = -1):void {
 	if (summonedElementals >= 6 && manaCost > 22 && player.hasPerk(PerkLib.StrongerElementalBond)) manaCost -= 20;
 	if (summonedElementals >= 8 && manaCost > 33 && player.hasPerk(PerkLib.StrongestElementalBond)) manaCost -= 30;
 	if (summonedElementals >= 11 && manaCost > 44 && player.hasPerk(PerkLib.StrongestElementalBondEx)) manaCost -= 40;
-	//if (summonedElementals >= 21 && manaCost > 55 && player.hasPerk(PerkLib.)) manaCost -= 50;
+	if (summonedElementals >= 21 && manaCost > 55 && player.hasPerk(PerkLib.StrongestElementalBondSu)) manaCost -= 50;
 	if (player.mana < manaCost) {
 		outputText("Your mana is too low to fuel your elemental attack!\n\n");
 		flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 1;
@@ -4450,10 +4450,12 @@ public function doIceDamage(damage:Number, apply:Boolean = true, display:Boolean
 	}
 	if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
 	if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+	if (monster.hasStatusEffect(StatusEffects.FrostburnDoT) && monster.statusEffectv3(StatusEffects.FrostburnDoT) > 0) damage *= (1 + (0.5 * monster.statusEffectv3(StatusEffects.FrostburnDoT)));
 	if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
 	if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
 	if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
 	if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
+	if (monster.hasPerk(PerkLib.IcyFlesh)) damage *= 0.6;
 	if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 	damage = DamageOverhaul(damage);
 	if (damage == 0) MSGControllForEvasion = true;
@@ -6004,6 +6006,15 @@ private function combatStatusesUpdate():void {
 			player.addStatusValue(StatusEffects.CooldownHydraAcidBreath,1,-1);
 		}
 	}
+	//Hungering cold
+	if (player.hasStatusEffect(StatusEffects.CooldownHungeringCold)) {
+		if (player.statusEffectv1(StatusEffects.CooldownHungeringCold) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownHungeringCold);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownHungeringCold,1,-1);
+		}
+	}
 	//Illusion
 	if (player.hasStatusEffect(StatusEffects.CooldownIllusion)) {
 		if (player.statusEffectv1(StatusEffects.CooldownIllusion) <= 0) {
@@ -6502,6 +6513,7 @@ public function PercentBasedRegeneration():Number {
 	if (player.hasPerk(PerkLib.LizanMarrow) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 0.5;
 	if (player.hasPerk(PerkLib.LizanMarrowEvolved) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1;
 	if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
+	if (player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 1;
 	if (player.hasPerk(PerkLib.BodyCultivator)) maxPercentRegen += 0.5;
 	if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
 	if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
@@ -6539,6 +6551,7 @@ public function maximumRegeneration():Number {
 		if (player.hasPerk(PerkLib.HinezumiBurningBloodEvolved)) maxRegen += 0.5;
 		if (player.hasPerk(PerkLib.HinezumiBurningBloodFinalForm)) maxRegen += 0.5;
 	}
+	if (player.hasPerk(PerkLib.IcyFlesh)) maxRegen += 1;
 	if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) maxRegen += 0.5;
 	if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) maxRegen += 0.5;
 	if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) maxRegen += 0.5;
@@ -8545,4 +8558,4 @@ public function scalingBonusLibido():Number {
 	return inteWisLibScale(player.lib);
 }
 }
-}
+}

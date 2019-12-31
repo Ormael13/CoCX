@@ -785,10 +785,10 @@ public function soularena():void {
         //addButton(2, "Gaunlet 3", gaunletchallange3).hint("Fight 5 diff enemies one after another.");
         //addButton(3, "Gaunlet 4", gaunletchallange4).hint("Fight 6 diff enemies one after another.");
         //addButton(4, "Gaunlet 5", gaunletchallange5).hint("Fight 7 diff enemies one after another.");
-        addButton(5, "Golemancer", arenaSelection,Jeniffer);
-        addButton(6, "AyotechManiac", arenaSelection,Jinx);
-        addButton(7, "MachoSalamander", arenaSelection,Syth);
-        addButton(8, "MissSalamander", arenaSelection,Asuka);
+        //addButton(5, "Golemancer", arenaSelection,Jeniffer);
+        //addButton(6, "AyotechManiac", arenaSelection,Jinx);
+        //addButton(7, "MachoSalamander", arenaSelection,Syth);
+        //addButton(8, "MissSalamander", arenaSelection,Asuka);
         addButton(9, "LvL 24 Gargoyle", arenaSelection,GargoyleBasic);
         //if (flags[kFLAGS.CHI_CHI_AFFECTION] < 15) addButton(10, "Chi Chi", chichiScene.EnterOfTheChiChi);
         //addButton(10, "MissOni", arenaSelection,Rangiku);
