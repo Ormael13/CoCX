@@ -28,7 +28,7 @@ package classes.Scenes
 		}
 		private function Changelog31():void {
 			clearOutput();
-			outputText("<b>Version 0.8n6:</b>\n\n");
+			outputText("<b>Version 0.8n6 (Yuki onna TF, some bugfixes):</b>\n\n");
 			outputText("-New tier 0 misc lvl-up perk: Frozen heart. Req. Free heart mutation slot and 14+ in yuki onna score. Effect: Allow to retain the ability Ice barrage and hungering cold at all time and increase their damage by 10%.\n");
 			outputText("-New tier 1 misc lvl-up perk: Frozen heart (Evolved). Req. Frozen heart perk and 14+ in yuki onna score. Effect: Ice barrage and hungering cold damage increase by 20%, hungering cold last for 1 additional turn and recharge 1 turn faster.\n");
 			outputText("-New tier 4 misc lvl-up perk: Frozen heart (Final Form). Req. Frozen heart (Evolved) perk and 14+ in yuki onna score. Effect: Ice barrage and hungering cold damage increase by 30%, hungering cold last for 3 additional turn and recharge 3 turn faster. Gain an extra modifier from your intelligence to health. (Increase original value by 50%).\n");
