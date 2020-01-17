@@ -34,6 +34,7 @@ public class CharView extends Sprite {
 	private var loaderLocation:String;
 	private var parts:Statement;
 	private var _palette:Palette;
+	public var bgFill:uint = 0;
 
 	public function get palette():Palette {
 		return _palette;
@@ -103,7 +104,7 @@ public class CharView extends Sprite {
 		if (n == 0) loadLayers(xml);
 		var g:Graphics = graphics;
 		g.clear();
-		g.beginFill(0, 0);
+		g.beginFill(bgFill&0x00ffffff, ((bgFill>>24)&0xff)/256.0);
 		g.drawRect(0, 0, _width, _height);
 		g.endFill();
 		scale       = parseFloat(xml.@scale);
@@ -183,6 +184,9 @@ public class CharView extends Sprite {
 		var bd:BitmapData    = composite.draw(keyColors);
 		var g:Graphics       = graphics;
 		g.clear();
+		g.beginFill(bgFill&0x00ffffff, ((bgFill>>24)&0xff)/256.0);
+		g.drawRect(0, 0, _width, _height);
+		g.endFill();
 		g.beginBitmapFill(bd);
 		g.drawRect(0, 0, _width, _height);
 		g.endFill();

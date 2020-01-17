@@ -508,10 +508,16 @@ public class GameSettings extends BaseContent {
 		if (flags[kFLAGS.CHARVIEWER_ENABLED] == 1) outputText("<font color=\"#008000\"><b>ON</b></font>\n Player visualiser is available under \\[Appearance\\].");
 		else outputText("<font color=\"#800000\"><b>OFF</b></font>\n Player visualiser is disabled.");
 		outputText("\nChar View Style: ");
-		if (flags[kFLAGS.CHARVIEW_STYLE] < 1){
-			outputText("<font color=\"#008000\"><b>NEW</b></font>\n Viewer is inline with text");
-		} else {
-			outputText("<font color=\"#800000\"><b>OLD</b></font>\n Viewer is separate from text");
+		switch (flags[kFLAGS.CHARVIEW_STYLE]) {
+			case 0:
+				outputText("<font color=\"#008000\"><b>NEW</b></font>\n Viewer is inline with text");
+				break;
+			case 1:
+				outputText("<font color=\"#800000\"><b>OLD</b></font>\n Viewer is shown at right");
+				break;
+			case 2:
+				outputText("<font color=\"#000080\"><b>ALWAYS</b></font>\n Viewer is shown at right, always visible");
+				break;
 		}
 		outputText("\n\n");
 
@@ -560,7 +566,7 @@ public class GameSettings extends BaseContent {
 		addButton(6, "Time Format", toggleTimeFormat).hint("Toggles between 12-hour and 24-hour format.");
 		addButton(7, "Measurements", toggleMeasurements).hint("Switch between imperial and metric measurements.  \n\nNOTE: Only applies to your appearance screen.");
 		addButton(8, "Toggle CharView", toggleCharViewer).hint("Turn PC visualizer on/off.");
-		addButton(9, "Charview Style",toggleCharViewer,kFLAGS.CHARVIEW_STYLE).hint("Change between in text and sidebar display");
+		addButton(9, "Charview Style",toggleCharViewerStyle).hint("Change between in text and sidebar display");
 		addButton(14, "Back", settingsScreenMain);
 	}
 	public function menuMainBackground():void {
@@ -599,6 +605,10 @@ public class GameSettings extends BaseContent {
 		} else {
 			flags[flag] = 0;
 		}
+		settingsScreenInterfaceSettings();
+	}
+	public function toggleCharViewerStyle():void {
+		flags[kFLAGS.CHARVIEW_STYLE] = (flags[kFLAGS.CHARVIEW_STYLE]+1)%3;
 		settingsScreenInterfaceSettings();
 	}
 
