@@ -625,10 +625,8 @@ public class GameSettings extends BaseContent {
 	}
 
 		public function setMainBackground(type:int):void {
-			flags[kFLAGS.BACKGROUND_STYLE]           = type;
-			mainView.background.bitmapClass          = MainView.Backgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
-			mainView.statsView.setBackground(StatsView.SidebarBackgrounds[flags[kFLAGS.BACKGROUND_STYLE]]);
-			mainView.monsterStatsView.setBackground(StatsView.SidebarBackgrounds[flags[kFLAGS.BACKGROUND_STYLE]]);
+			flags[kFLAGS.BACKGROUND_STYLE]     = type;
+			mainViewManager.setTheme();
 			settingsScreenInterfaceSettings();
 		}
 

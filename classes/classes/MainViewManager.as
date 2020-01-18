@@ -45,16 +45,9 @@ public class MainViewManager extends BaseContent {
 		var i:int = 0; //Will be used for array.
 
 		//Set background
-		mainView.background.bitmapClass = MainView.Backgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
-		var sidebarBg:Class         = StatsView.SidebarBackgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
-		mainView.statsView.setBackground(sidebarBg);
-		mainView.monsterStatsView.setBackground(sidebarBg);
-		//Set font
+		var style:int                      = flags[kFLAGS.BACKGROUND_STYLE];
 		var font:String      = (flags[kFLAGS.USE_OLD_FONT] > 0) ? StatsView.ValueFontOld : StatsView.ValueFont;
-		var textColor:*      = textColorArray[flags[kFLAGS.BACKGROUND_STYLE]];
-		var barAlpha:* = barAlphaArray[flags[kFLAGS.BACKGROUND_STYLE]];
-		mainView.statsView.setTheme(font, textColor, barAlpha);
-		mainView.monsterStatsView.setTheme(font, textColor, barAlpha);
+		mainView.setTheme(style, font);
 	}
 
 	public function hideSprite():void {
@@ -109,7 +102,7 @@ public class MainViewManager extends BaseContent {
 			mainView.statsView.alpha += 0.05;
 		});
 		t.addEventListener(TimerEvent.TIMER_COMPLETE, function ():void {
-			mainView.statsView.x     = 0;
+			mainView.statsView.x     = MainView.STATBAR_X;
 			mainView.statsView.alpha = 1;
 		});
 		t.start();
@@ -125,7 +118,7 @@ public class MainViewManager extends BaseContent {
 			if (mainView.statsView.alpha < 0) mainView.statsView.alpha = 0;
 		});
 		t.addEventListener(TimerEvent.TIMER_COMPLETE, function ():void {
-			mainView.statsView.x     = -200;
+			mainView.statsView.x     = -1000;
 			mainView.statsView.alpha = 0;
 		});
 		t.start();

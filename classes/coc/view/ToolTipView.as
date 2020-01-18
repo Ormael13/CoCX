@@ -1,6 +1,7 @@
 package coc.view {
 import flash.display.DisplayObject;
 import flash.display.Sprite;
+import flash.geom.Point;
 import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
 
@@ -15,24 +16,31 @@ import flash.text.TextFieldAutoSize;
 			hd:TextField,
 			tf:TextField;
 
-		//protected var model:GameModel;
+		private var mainView:MainView;
+		private static const MIN_HEIGHT:Number = 239;
+		private static const WIDTH:Number = 350;
 
 		public function ToolTipView(mainView:MainView/*, model:GameModel*/):void {
 			super();
-			//this.model = model;
+			this.mainView = mainView;
 
 			this.bg = addBitmapDataSprite({
 				x:0, y:0,
-				width:350,height:239,stretch: true,
+				width: WIDTH,
+				height:239,
+				stretch: true,
 				bitmapClass: tooltipBg
 			});
 			this.ln = addBitmapDataSprite({
 				x:15,y:40,
-				width:320,height:1,fillColor:'#000000'
+				width: WIDTH-30,
+				height:1,
+				fillColor:'#000000'
 			});
 			this.hd = addTextField({
 				x:15,y:15,
-				width:316,height:25.35,
+				width: WIDTH-34,
+				height: 25.35,
 				multiline:true,
 				wordWrap:false,
 				embedFonts:true,
@@ -43,7 +51,7 @@ import flash.text.TextFieldAutoSize;
 			});
 			this.tf = addTextField({
 				x:15,y:40,
-				width:316,
+				width: WIDTH-34,
 				multiline:true,wordWrap:true,
 				defaultTextFormat:{
 					size:15
@@ -52,26 +60,29 @@ import flash.text.TextFieldAutoSize;
 			this.tf.autoSize = TextFieldAutoSize.LEFT;
 		}
 
-		public function showForButton(button:DisplayObject):void {
-			var bx:Number = button.x,
-				by:Number = button.y;
-
-			// TODO: Should we try to remove some of these numbers?
-			/*if (this.model.mobile) {
-				bx = (bx >= 410 ? 405: bx);
-				this.x = bx + 98;
-				this.y = by - 347;
-			}*/
-			//else {
-			bg.height = Math.max(tf.height + 63,239)
-			bx = (bx >= 688 ? 680: bx);
-			this.x = bx - 13;
-			var y:Number = by - this.height - 2;
-			if (y < 0) y = by + button.height + 6;
-			this.y = y;
-			//}
-
+		/**
+		 * Display tooltip near rectangle with specified coordinates
+		 */
+		public function show(bx:Number, by:Number, bw:Number, bh:Number):void {
+			this.x = bx;
+			if (this.x < 0) {
+				this.x = 0; // left border
+			} else if (this.x + this.width > mainView.width) {
+				this.x = mainView.width - this.width; // right border
+			}
+			bg.height = Math.max(tf.height + 63, MIN_HEIGHT);
+			if (by+bh < mainView.height/2) {
+				// put to the bottom
+				this.y = by + bh;
+			} else {
+				// put on top
+				this.y = by - this.height;
+			}
 			this.visible = true;
+		}
+		public function showForElement(e:DisplayObject):void {
+			var lpt:Point = e.getRect(this.parent).topLeft;
+			show(lpt.x, lpt.y, e.width, e.height);
 		}
 
 		public function hide():void {

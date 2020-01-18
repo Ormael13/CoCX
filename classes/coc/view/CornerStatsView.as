@@ -28,7 +28,10 @@ public class CornerStatsView extends Block {
 			x:0,y:0,
 			width: this.width,
 			height: this.height,
-			stretch: true
+			crop: true,
+			borderColor: '#A37C17',
+			borderWidth: 1,
+			borderRadius: 2
 		},{ ignore:true });
 		advancementText = addTextField({
 			text:'Advancement',

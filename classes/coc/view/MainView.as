@@ -37,7 +37,80 @@ public class MainView extends Block {
 	public static var Background4:Class;
 	[Embed(source="../../../res/ui/backgroundKaizo.png")]
 	public static var BackgroundKaizo:Class;
-	public static var Backgrounds:Array = [Background1, Background2, Background3, Background4, null, BackgroundKaizo];
+	public static var Themes:Array = [
+		// Style 1, "Map"
+		{
+			dark           : false,
+			bgBitmap       : Background1,
+			glass          : 0xffffff,
+			glassAlpha     : 0.4,
+			statGlass      : 0xffffff,
+			statGlassAlpha : 0.4,
+			statBorderColor: 0x000000,
+			statTextColor  : 0x000000,
+			barAlpha       : 0.4
+		},
+		// Style 2, "Parchment"
+		{
+			dark           : false,
+			bgBitmap       : Background2,
+			glass          : 0xffffff,
+			glassAlpha     : 0.4,
+			statGlass      : 0xffffff,
+			statGlassAlpha : 0.4,
+			statBorderColor: 0x000000,
+			statTextColor  : 0x000000,
+			barAlpha       : 0.4
+		},
+		// Style 3, "Marble"
+		{
+			dark           : false,
+			bgBitmap       : Background3,
+			glass          : 0xffffff,
+			glassAlpha     : 0.4,
+			statGlass      : 0xffffff,
+			statGlassAlpha : 0.4,
+			statBorderColor: 0x000000,
+			statTextColor  : 0x000000,
+			barAlpha       : 0.4
+		},
+		// Style 4, "Obsidian"
+		{
+			dark           : false,
+			bgBitmap       : Background4,
+			glass          : 0xffffff,
+			glassAlpha     : 0.7,
+			statGlass      : 0xffffff,
+			statGlassAlpha : 0.2,
+			statBorderColor: 0xA37C17,
+			statTextColor  : 0xFFFFFF,
+			barAlpha       : 0.5
+		},
+		// Style 5, "Black"
+		{
+			dark           : true,
+			bgBitmap       : null,
+			glass          : 0xffffff,
+			glassAlpha     : 0,
+			statGlass      : 0xffffff,
+			statGlassAlpha : 0,
+			statBorderColor: 0xA37C17,
+			statTextColor  : 0xFFFFFF,
+			barAlpha       : 1
+		},
+		// Style 6, "Kaizo"
+		{
+			dark           : false,
+			bgBitmap       : BackgroundKaizo,
+			glass          : 0xffffff,
+			glassAlpha     : 0.4,
+			statGlass      : 0xffffff,
+			statGlassAlpha : 0.4,
+			statBorderColor: 0x000000,
+			statTextColor  : 0x000000,
+			barAlpha       : 0.4
+		}
+	];
 
 	[Embed(source="../../../res/ui/button0.jpg")]
 	public static var ButtonBackground0:Class;
@@ -130,7 +203,7 @@ public class MainView extends Block {
 	internal static const TOPROW_H:Number        = BTN_H;
 	internal static const TOPROW_BOTTOM:Number   = TOPROW_Y + TOPROW_H + GAP;
 	// Stat bar and its columns. Height depends on charview size
-	internal static const STATBAR_X:Number       = COLUMN_1_X;
+	public static const STATBAR_X:Number       = COLUMN_1_X;
 	internal static const STATBAR_Y:Number       = TOPROW_BOTTOM + GAP;
 	internal static const STATBAR_1_X:Number     = STATBAR_X;
 	internal static const STATBAR_1_RIGHT:Number = STATBAR_1_X + STATBAR_COL_W + HALFGAP;
@@ -175,6 +248,7 @@ public class MainView extends Block {
 	public var textBGWhite:BitmapDataSprite;
 	public var textBGTan:BitmapDataSprite;
 	public var background:BitmapDataSprite;
+	public var backgroundGlass:BitmapDataSprite;
 	public var sprite:BitmapDataSprite;
 
 	public var mainText:TextField;
@@ -222,6 +296,16 @@ public class MainView extends Block {
 			height     : SCREEN_H,
 			fillColor  : 0,
 			repeat     : true
+		}));
+		addElement(backgroundGlass = new BitmapDataSprite({
+			fillColor: '#ffffff',
+			borderColor: '#222222',
+			borderWidth: 1,
+			x        : TEXTZONE_X,
+			y        : TEXTZONE_Y,
+			width    : TEXTZONE_W,
+			height   : TEXTZONE_H,
+			alpha    : 0.4
 		}));
 		addElement(topRow = new Block({
 			x           : TOPROW_X,
@@ -450,8 +534,8 @@ public class MainView extends Block {
 
 		for each(b in this.allButtons) {
 			b.mouseChildren = false;
-			b.addEventListener(MouseEvent.ROLL_OVER, this.hoverButton);
-			b.addEventListener(MouseEvent.ROLL_OUT, this.dimButton);
+			b.addEventListener(MouseEvent.ROLL_OVER, this.hoverElement);
+			b.addEventListener(MouseEvent.ROLL_OUT, this.dimElement);
 		}
 	}
 
@@ -516,7 +600,7 @@ public class MainView extends Block {
 		this.toolTipView.hide();
 	}
 
-	protected function hoverButton(event:MouseEvent):void {
+	protected function hoverElement(event:MouseEvent):void {
 		var button:CoCButton;
 
 		button = event.target as CoCButton;
@@ -524,14 +608,14 @@ public class MainView extends Block {
 		if (button && button.visible && button.toolTipText) {
 			this.toolTipView.header = button.toolTipHeader;
 			this.toolTipView.text   = button.toolTipText;
-			this.toolTipView.showForButton(button);
+			this.toolTipView.showForElement(button);
 		}
 		else {
 			this.toolTipView.hide();
 		}
 	}
 
-	protected function dimButton(event:MouseEvent):void {
+	protected function dimElement(event:MouseEvent):void {
 		this.toolTipView.hide();
 	}
 
@@ -811,6 +895,15 @@ public class MainView extends Block {
 		sprite.graphics.endFill();
 		// sprite.x = SCREEN_W - GAP - sprite.width; // align right
 		// sprite.y = SCREEN_H - GAP - sprite.height; // align bottom
+	}
+	public function setTheme(theme:int, font:String):void {
+		var style:* = Themes[theme];
+		if (!style) return;
+		background.bitmapClass    = style.bgBitmap;
+		backgroundGlass.fillColor = style.glass;
+		backgroundGlass.alpha     = style.glassAlpha;
+		statsView.setTheme(theme, font);
+		monsterStatsView.setTheme(theme, font);
 	}
 }
 }

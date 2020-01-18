@@ -49,7 +49,10 @@ public class MonsterStatsView extends Block {
 		sideBarBG = addBitmapDataSprite({
 			width  : MainView.MONSTER_W,
 			height : MainView.MONSTER_H,
-			stretch: true
+			crop: true,
+			borderColor: '#A37C17',
+			borderWidth: 1,
+			borderRadius: 2
 		}, {ignore: true});
 		nameText  = addTextField({
 			defaultTextFormat: StatsView.LABEL_FORMAT
@@ -153,28 +156,29 @@ public class MonsterStatsView extends Block {
 		elementalTypeValue.text = elementalTypes.join("\n");
 		invalidateLayout();
 	}
-	public function setBackground(bitmapClass:Class):void {
-		sideBarBG.bitmapClass = bitmapClass;
-	}
-	public function setTheme(font:String,
-							 textColor:uint,
-							 barAlpha:Number):void {
+	public function setTheme(type:int, font:String):void {
+		var style:* = MainView.Themes[type];
+		if (!style) return;
+		sideBarBG.borderColor = style.statBorderColor;
+		sideBarBG.fillColor = style.statGlass;
+		sideBarBG.fillAlpha = style.statGlassAlpha;
+		
 		var dtf:TextFormat;
 		for (var ci:int = 0, cn:int = this.numElements; ci < cn; ci++) {
 			var e:StatBar = this.getElementAt(ci) as StatBar;
 			if (!e) continue;
 			dtf = e.valueLabel.defaultTextFormat;
-			dtf.color = textColor;
+			dtf.color = style.statTextColor;
 			dtf.font = font;
 			e.valueLabel.defaultTextFormat = dtf;
 			e.valueLabel.setTextFormat(dtf);
-			e.nameColor = textColor;
-			if (e.bar) e.bar.alpha    = barAlpha;
-			if (e.minBar) e.minBar.alpha = (1 - (1 - barAlpha) / 2); // 2 times less transparent than bar
+			e.nameColor = style.statTextColor;
+			if (e.bar) e.bar.alpha    = style.barAlpha;
+			if (e.minBar) e.minBar.alpha = (1 - (1 - style.barAlpha) / 2); // 2 times less transparent than bar
 		}
 		for each(var tf:TextField in [nameText]) {
 			dtf = tf.defaultTextFormat;
-			dtf.color = textColor;
+			dtf.color = style.statTextColor;
 			tf.defaultTextFormat = dtf;
 			tf.setTextFormat(dtf);
 		}

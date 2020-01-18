@@ -12,17 +12,6 @@ import flash.text.TextFormat;
 import flash.text.TextFormatAlign;
 
 public class StatsView extends Block {
-	[Embed(source = "../../../res/ui/sidebar1.png")]
-	public static var SidebarBg1:Class;
-	[Embed(source = "../../../res/ui/sidebar2.png")]
-	public static var SidebarBg2:Class;
-	[Embed(source = "../../../res/ui/sidebar3.png")]
-	public static var SidebarBg3:Class;
-	[Embed(source = "../../../res/ui/sidebar4.png")]
-	public static var SidebarBg4:Class;
-	[Embed(source = "../../../res/ui/sidebarKaizo.png")]
-	public static var SidebarBgKaizo:Class;
-	public static var SidebarBackgrounds:Array = [SidebarBg1,SidebarBg2,SidebarBg3,SidebarBg4,null,SidebarBgKaizo];
 	public static const ValueFontOld:String    = 'Lucida Sans Typewriter';
 	public static const ValueFont:String       = 'Georgia';
 	
@@ -81,8 +70,11 @@ public class StatsView extends Block {
 			x:0,y:0,
 			width: MainView.STATBAR_W,
 			height: MainView.STATBAR_H,
-			stretch: true
-		},{ ignore:true });
+			crop: true,
+			borderColor: '#A37C17',
+			borderWidth: 1,
+			borderRadius: 2
+		});
 		nameText      = addTextField({
 			x:0,y:0,
 			width: MainView.STATBAR_W,
@@ -387,27 +379,30 @@ public class StatsView extends Block {
 		invalidateLayout();
 	}
 
-	public function setBackground(bitmapClass:Class):void {
-		sideBarBG.bitmapClass = bitmapClass;
-		corner.bg.bitmapClass = bitmapClass;
-	}
-	public function setTheme(font:String,
-							 textColor:uint,
-							 barAlpha:Number):void {
+	public function setTheme(type:int, font:String):void {
+		var style:* = MainView.Themes[type];
+		if (!style) return;
+		sideBarBG.borderColor = style.statBorderColor;
+		sideBarBG.fillColor = style.statGlass;
+		sideBarBG.fillAlpha = style.statGlassAlpha;
+		corner.bg.borderColor = style.statBorderColor;
+		corner.bg.fillColor = style.statGlass;
+		corner.bg.fillAlpha = style.statGlassAlpha;
+		
 		var dtf:TextFormat;
 		for each(var e:StatBar in allStats) {
 			dtf = e.valueLabel.defaultTextFormat;
-			dtf.color = textColor;
+			dtf.color = style.statTextColor;
 			dtf.font = font;
 			e.valueLabel.defaultTextFormat = dtf;
 			e.valueLabel.setTextFormat(dtf);
-			e.nameColor = textColor;
-			if (e.bar) e.bar.alpha    = barAlpha;
-			if (e.minBar) e.minBar.alpha = (1 - (1 - barAlpha) / 2); // 2 times less transparent than bar
+			e.nameColor = style.statTextColor;
+			if (e.bar) e.bar.alpha    = style.barAlpha;
+			if (e.minBar) e.minBar.alpha = (1 - (1 - style.barAlpha) / 2); // 2 times less transparent than bar
 		}
 		for each(var tf:TextField in [nameText,coreStatsText,combatStatsText,corner.advancementText,corner.timeText]) {
 			dtf = tf.defaultTextFormat;
-			dtf.color = textColor;
+			dtf.color = style.statTextColor;
 			tf.defaultTextFormat = dtf;
 			tf.setTextFormat(dtf);
 		}
