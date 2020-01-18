@@ -7,20 +7,11 @@ import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
 import flash.text.TextField;
+import flash.text.TextFieldAutoSize;
 import flash.text.TextFormat;
+import flash.text.TextFormatAlign;
 
 public class StatsView extends Block {
-	[Embed(source = "../../../res/ui/sidebar1.png")]
-	public static var SidebarBg1:Class;
-	[Embed(source = "../../../res/ui/sidebar2.png")]
-	public static var SidebarBg2:Class;
-	[Embed(source = "../../../res/ui/sidebar3.png")]
-	public static var SidebarBg3:Class;
-	[Embed(source = "../../../res/ui/sidebar4.png")]
-	public static var SidebarBg4:Class;
-	[Embed(source = "../../../res/ui/sidebarKaizo.png")]
-	public static var SidebarBgKaizo:Class;
-	public static var SidebarBackgrounds:Array = [SidebarBg1,SidebarBg2,SidebarBg3,SidebarBg4,null,SidebarBgKaizo];
 	public static const ValueFontOld:String    = 'Lucida Sans Typewriter';
 	public static const ValueFont:String       = 'Georgia';
 	
@@ -42,8 +33,6 @@ public class StatsView extends Block {
 	private var nameText:TextField;
 	private var coreStatsText:TextField;
 	private var combatStatsText:TextField;
-	private var advancementText:TextField;
-	private var timeText:TextField;
 	private var strBar:StatBar;
 	private var touBar:StatBar;
 	private var speBar:StatBar;
@@ -62,136 +51,148 @@ public class StatsView extends Block {
 	private var esteemBar:StatBar;
 	private var willBar:StatBar;
 	private var obeyBar:StatBar;
-	private var levelBar:StatBar;
-	private var xpBar:StatBar;
-	private var gemsBar:StatBar;
-	private var spiritstonesBar:StatBar;
 
 	private var allStats:Array;
 
+	private var col1:Block;
+	private var col2:Block;
+	private var corner:CornerStatsView;
 
-
-	public function StatsView(mainView:MainView/*, model:GameModel*/) {
+	public function StatsView(mainView:MainView, cornerStatsView:CornerStatsView) {
 		super({
 			x    : MainView.STATBAR_X,
 			y    : MainView.STATBAR_Y,
 			width: MainView.STATBAR_W,
+			height: MainView.STATBAR_H
+		});
+		this.corner = cornerStatsView;
+		sideBarBG     = addBitmapDataSprite({
+			x:0,y:0,
+			width: MainView.STATBAR_W,
+			height: MainView.STATBAR_H,
+			crop: true,
+			borderColor: '#A37C17',
+			borderWidth: 1,
+			borderRadius: 2
+		});
+		nameText      = addTextField({
+			x:0,y:0,
+			width: MainView.STATBAR_W,
+			defaultTextFormat: Utils.extend({},LABEL_FORMAT,{
+				align:TextFormatAlign.CENTER
+			})
+		});
+		addElement(col1 = new Block({
+			x: 0,
+			y: 20,
+			width: MainView.STATBAR_COL_W,
 			height: MainView.STATBAR_H,
 			layoutConfig: {
-				padding: MainView.GAP,
+				padding: MainView.HALFGAP,
 				type: 'flow',
 				direction: 'column',
 				ignoreHidden: true,
 				gap: 1
 			}
-		});
-		StatBar.setDefaultOptions({
-			barColor: '#600000',
-			width: innerWidth
-		});
-		sideBarBG     = addBitmapDataSprite({
-			width: MainView.STATBAR_W,
+		}));
+		addElement(col2 = new Block({
+			x: MainView.STATBAR_COL_W,
+			y: 20,
+			width: MainView.STATBAR_COL_W,
 			height: MainView.STATBAR_H,
-			stretch: true
-		},{ ignore:true });
-		nameText      = addTextField({
-			defaultTextFormat: LABEL_FORMAT
-		});
-		coreStatsText = addTextField({
+			layoutConfig: {
+				padding: MainView.HALFGAP,
+				type: 'flow',
+				direction: 'column',
+				ignoreHidden: true,
+				gap: 1
+			}
+		}));
+		coreStatsText = col1.addTextField({
 			text: 'Core stats:',
 			defaultTextFormat: LABEL_FORMAT
 		},{before:1});
-		addElement(strBar = new StatBar({statName: "Strength:"}));
-		addElement(touBar = new StatBar({statName: "Toughness:"}));
-		addElement(speBar = new StatBar({statName: "Speed:"}));
-		addElement(intBar = new StatBar({statName: "Intelligence:"}));
-		addElement(wisBar = new StatBar({statName: "Wisdom:"}));
-		addElement(libBar = new StatBar({statName: "Libido:"}));
-		addElement(senBar = new StatBar({statName: "Sensitivity:"}));
-		addElement(corBar = new StatBar({statName: "Corruption:"}));
-		combatStatsText = addTextField({
+		col1.addElement(strBar = new StatBar({statName: "Strength:"}));
+		col1.addElement(touBar = new StatBar({statName: "Toughness:"}));
+		col1.addElement(speBar = new StatBar({statName: "Speed:"}));
+		col1.addElement(intBar = new StatBar({statName: "Intelligence:"}));
+		col1.addElement(wisBar = new StatBar({statName: "Wisdom:"}));
+		col1.addElement(libBar = new StatBar({statName: "Libido:"}));
+		col1.addElement(senBar = new StatBar({statName: "Sensitivity:"}));
+		col1.addElement(corBar = new StatBar({statName: "Corruption:"}));
+		
+		combatStatsText = col2.addTextField({
 			text: 'Combat stats',
 			defaultTextFormat: LABEL_FORMAT
 		},{before:1});
-		addElement(hpBar = new StatBar({
+		col2.addElement(hpBar = new StatBar({
 			statName: "HP:",
 			barColor: '#008000',
 			bgColor : '#ff0000',
 			showMax : true
 		}));
-		addElement(lustBar = new StatBar({
+		col2.addElement(lustBar = new StatBar({
 			statName   : "Lust:",
 		//	barColor   : '#ff1493',
 			minBarColor: '#ff0000',
 			hasMinBar  : true,
 			showMax    : true
 		}));
-		addElement(wrathBar = new StatBar({
+		col2.addElement(wrathBar = new StatBar({
 			statName: "Wrath:",
 			showMax : true
 		}));
-		addElement(fatigueBar = new StatBar({
+		col2.addElement(fatigueBar = new StatBar({
 			statName: "Fatigue:",
 			showMax : true
 		}));
-		addElement(manaBar = new StatBar({
+		col2.addElement(manaBar = new StatBar({
 			statName: "Mana:",
 		//	barColor: '#0000ff',
 			showMax : true
 		}));
-		addElement(soulforceBar = new StatBar({
+		col2.addElement(soulforceBar = new StatBar({
 			statName: "SF:",
 		//	barColor: '#ffd700',
 			showMax : true
 		}));
-		addElement(hungerBar = new StatBar({
+		col2.addElement(hungerBar = new StatBar({
 			statName: "Satiety:",
 			showMax : true
 		}));
-		addElement(esteemBar = new StatBar({
+		col2.addElement(esteemBar = new StatBar({
 			statName: "Self Esteem:",
 			showMax : true
 		}));
-		addElement(willBar = new StatBar({
+		col2.addElement(willBar = new StatBar({
 			statName: "Willpower:",
 			showMax : true
 		}));
-		addElement(obeyBar = new StatBar({
+		col2.addElement(obeyBar = new StatBar({
 			statName: "Obedience:",
 			showMax : true
 		}));
-		advancementText = addTextField({
-			text:'Advancement',
-			defaultTextFormat: LABEL_FORMAT
-		},{before:1});
-		addElement(levelBar = new StatBar({
-			statName: "Level:",
-			hasBar  : false
-		}));
-		addElement(xpBar = new StatBar({
-			statName: "XP:"
-		}));
-		addElement(gemsBar = new StatBar({
-			statName: "Gems:",
-			hasBar: false
-		}));
-		addElement(spiritstonesBar = new StatBar({
-			statName: "Spirit Stones:",
-			hasBar: false
-		}));
-		timeText = addTextField({
-			htmlText: '<u>Day#: 0</u>\nTime: 00:00',
-			defaultTextFormat: TIME_FORMAT
-		},{before:1});
 		///////////////////////////
 		allStats = [];
-		for (var ci:int = 0, cn:int = this.numElements; ci < cn; ci++) {
-			var e:StatBar = this.getElementAt(ci) as StatBar;
+		for (var ci:int = 0, cn:int = col1.numElements; ci < cn; ci++) {
+			var e:StatBar = col1.getElementAt(ci) as StatBar;
+			if (e) allStats.push(e);
+		}
+		for (ci = 0, cn = col2.numElements; ci < cn; ci++) {
+			e = col2.getElementAt(ci) as StatBar;
+			if (e) allStats.push(e);
+		}
+		for (ci = 0, cn = cornerStatsView.numElements; ci < cn; ci++) {
+			e = cornerStatsView.getElementAt(ci) as StatBar;
 			if (e) allStats.push(e);
 		}
 	}
-
-
+	override public function invalidateLayout():void {
+		super.invalidateLayout();
+		if (col1) col1.invalidateLayout();
+		if (col2) col2.invalidateLayout();
+		if (corner) corner.invalidateLayout();
+	}
 	public function show():void {
 		this.visible = true;
 	}
@@ -199,7 +200,12 @@ public class StatsView extends Block {
 	public function hide():void {
 		this.visible = false;
 	}
-
+	
+	
+	override public function set visible(value:Boolean):void {
+		super.visible = value;
+		if (corner) corner.visible = visible;
+	}
 	// <- hideUpDown
 	public function hideUpDown():void {
 		var ci:int, cc:int = this.allStats.length;
@@ -211,11 +217,11 @@ public class StatsView extends Block {
 	}
 
 	public function showLevelUp():void {
-		this.levelBar.isUp = true;
+		this.corner.levelBar.isUp = true;
 	}
 
 	public function hideLevelUp():void {
-		this.levelBar.isUp = false;
+		this.corner.levelBar.isUp = false;
 	}
 
 	public function statByName(statName:String):StatBar {
@@ -253,11 +259,11 @@ public class StatsView extends Block {
 			case 'hunger':
 				return hungerBar;
 			case 'level':
-				return levelBar;
+				return corner.levelBar;
 			case 'xp':
-				return xpBar;
+				return corner.xpBar;
 			case 'gems':
-				return gemsBar;
+				return corner.gemsBar;
 			case 'will':
 				return willBar;
 			case 'esteem':
@@ -265,7 +271,7 @@ public class StatsView extends Block {
 			case 'obey':
 				return obeyBar;
 			case 'spiritstones':
-				return spiritstonesBar;
+				return corner.spiritstonesBar;
 		}
 		return null;
 	}
@@ -287,7 +293,7 @@ public class StatsView extends Block {
 	public function refreshStats(game:CoC):void {
 		var player:Player            = game.player;
 		var maxes:Object      = player.getAllMaxStats();
-		nameText.htmlText     = "<b>Name: " + player.short + "</b>";
+		nameText.htmlText     = "<b>" + player.short + "</b>";
 		strBar.maxValue       = maxes.str;
 		strBar.value          = player.str;
 		touBar.maxValue       = maxes.tou;
@@ -328,12 +334,12 @@ public class StatsView extends Block {
 		esteemBar.visible     		  = inPrison;
 		willBar.visible      		  = inPrison;
 		obeyBar.visible       		  = inPrison;
-		levelBar.visible      		  = !inPrison;
-		xpBar.visible         		  = !inPrison;
-		gemsBar.visible       		  = !inPrison;
-		spiritstonesBar.visible       = !inPrison;
+		corner.levelBar.visible      		  = !inPrison;
+		corner.xpBar.visible         		  = !inPrison;
+		corner.gemsBar.visible       		  = !inPrison;
+		corner.spiritstonesBar.visible       = !inPrison;
 		if (inPrison) {
-			advancementText.htmlText = "<b>Prison Stats</b>";
+			corner.advancementText.htmlText = "<b>Prison Stats</b>";
 			esteemBar.maxValue       = 100;
 			esteemBar.value          = player.esteem;
 			willBar.maxValue         = 100;
@@ -341,18 +347,18 @@ public class StatsView extends Block {
 			obeyBar.maxValue         = 100;
 			obeyBar.value            = player.obey;
 		} else {
-			advancementText.htmlText = "<b>Advancement</b>";
-			levelBar.value           = player.level;
+			corner.advancementText.htmlText = "<b>Advancement</b>";
+			corner.levelBar.value           = player.level;
 			if (player.level < CoC.instance.levelCap) {
-				xpBar.maxValue = player.requiredXP();
-				xpBar.value    = player.XP;
+				corner.xpBar.maxValue = player.requiredXP();
+				corner.xpBar.value    = player.XP;
 			} else {
-				xpBar.maxValue  = player.XP;
-				xpBar.value     = player.XP;
-				xpBar.valueText = 'MAX';
+				corner.xpBar.maxValue  = player.XP;
+				corner.xpBar.value     = player.XP;
+				corner.xpBar.valueText = 'MAX';
 			}
-			gemsBar.valueText = Utils.addComma(Math.floor(player.gems));
-			spiritstonesBar.valueText = game.flags[kFLAGS.SPIRIT_STONES];
+			corner.gemsBar.valueText = Utils.addComma(Math.floor(player.gems));
+			corner.spiritstonesBar.valueText = game.flags[kFLAGS.SPIRIT_STONES];
 		}
 
 		var minutesDisplay:String = "" + game.model.time.minutes;
@@ -367,32 +373,36 @@ public class StatsView extends Block {
 			hrs  = (hours % 12 == 0) ? "12" : "" + (hours % 12);
 			ampm = hours < 12 ? "am" : "pm";
 		}
-		timeText.htmlText = "<u>Day#: " + game.model.time.days + "</u>"+
+		corner.timeText.htmlText = "<u>Day#: " + game.model.time.days + "</u>"+
 						"\nTime: " + hrs + ":" + minutesDisplay + ampm;
 
 		invalidateLayout();
 	}
 
-	public function setBackground(bitmapClass:Class):void {
-		sideBarBG.bitmapClass = bitmapClass;
-	}
-	public function setTheme(font:String,
-							 textColor:uint,
-							 barAlpha:Number):void {
+	public function setTheme(type:int, font:String):void {
+		var style:* = MainView.Themes[type];
+		if (!style) return;
+		sideBarBG.borderColor = style.statBorderColor;
+		sideBarBG.fillColor = style.statGlass;
+		sideBarBG.fillAlpha = style.statGlassAlpha;
+		corner.bg.borderColor = style.statBorderColor;
+		corner.bg.fillColor = style.statGlass;
+		corner.bg.fillAlpha = style.statGlassAlpha;
+		
 		var dtf:TextFormat;
 		for each(var e:StatBar in allStats) {
 			dtf = e.valueLabel.defaultTextFormat;
-			dtf.color = textColor;
+			dtf.color = style.statTextColor;
 			dtf.font = font;
 			e.valueLabel.defaultTextFormat = dtf;
 			e.valueLabel.setTextFormat(dtf);
-			e.nameColor = textColor;
-			if (e.bar) e.bar.alpha    = barAlpha;
-			if (e.minBar) e.minBar.alpha = (1 - (1 - barAlpha) / 2); // 2 times less transparent than bar
+			e.nameColor = style.statTextColor;
+			if (e.bar) e.bar.alpha    = style.barAlpha;
+			if (e.minBar) e.minBar.alpha = (1 - (1 - style.barAlpha) / 2); // 2 times less transparent than bar
 		}
-		for each(var tf:TextField in [nameText,coreStatsText,combatStatsText,advancementText,timeText]) {
+		for each(var tf:TextField in [nameText,coreStatsText,combatStatsText,corner.advancementText,corner.timeText]) {
 			dtf = tf.defaultTextFormat;
-			dtf.color = textColor;
+			dtf.color = style.statTextColor;
 			tf.defaultTextFormat = dtf;
 			tf.setTextFormat(dtf);
 		}

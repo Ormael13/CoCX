@@ -15,11 +15,13 @@ public class BitmapDataSprite extends Sprite {
 		options = Utils.extend({},options);
 		if (options) {
 			_fillColor = UIUtils.convertColor(Utils.moveValue(options,'fillColor',_fillColor));
+			_borderColor = UIUtils.convertColor(Utils.moveValue(options,'borderColor',_borderColor));
 			_width = Utils.moveValue(options,'width',_width);
 			_height = Utils.moveValue(options,'height',_height);
 			if (_width || _height) setSize(_width,_height);
 			_stretch = Utils.moveValue(options,'stretch',_stretch);
 			_repeat = Utils.moveValue(options,'repeat',_repeat);
+			_crop = Utils.moveValue(options,'crop',_crop);
 			bitmapClass = Utils.moveValue(options,'bitmapClass',null);
 			bitmap = Utils.moveValue(options,'bitmap',_bitmap);
 			for (var key:String in options) {
@@ -36,10 +38,15 @@ public class BitmapDataSprite extends Sprite {
 	}
 	private var _bitmap:Bitmap   = null;
 	private var _fillColor:uint  = 0;
+	private var _fillAlpha:Number  = 1.0;
+	private var _borderColor:uint  = 0;
+	private var _borderWidth:uint  = 0;
+	private var _borderRadius:uint  = 0;
 	private var _width:Number    = 0;
 	private var _height:Number   = 0;
 	private var _stretch:Boolean = false;
 	private var _repeat:Boolean  = false;
+	private var _crop:Boolean  = false;
 	public function set bitmapClass(value:Class):void {
 		if (value as Class) bitmap = (new value()) as Bitmap;
 		else bitmap = null;
@@ -54,18 +61,52 @@ public class BitmapDataSprite extends Sprite {
 		if (_bitmap == value) return;
 		_bitmap = value;
 		if (value) {
-			if (_width == 0 || !stretch && !repeat) _width = value.width;
-			if (_height == 0 || !stretch && !repeat) _height = value.height;
+			if (_width == 0 || !crop && !stretch && !repeat) _width = value.width;
+			if (_height == 0 || !crop && !stretch && !repeat) _height = value.height;
 		}
 		redraw();
 	}
 	public function get fillColor():uint {
 		return _fillColor;
 	}
-	public function set fillColor(value:uint):void {
+	public function set fillColor(value:*):void {
+		if (!(value is Number)) value = Color.convertColor(value);
 		if (_fillColor == value) return;
 		_fillColor = value;
 		redraw();
+	}
+	public function get fillAlpha():Number {
+		return _fillAlpha;
+	}
+	public function set fillAlpha(value:Number):void {
+		if (_fillAlpha == value) return;
+		_fillAlpha = value;
+		redraw();
+	}
+	public function get borderColor():uint {
+		return _borderColor;
+	}
+	public function set borderColor(value:*):void {
+		if (!(value is Number)) value = Color.convertColor(value);
+		if (_borderColor == value) return;
+		_borderColor = value;
+		if (_borderWidth) redraw();
+	}
+	public function get borderWidth():uint {
+		return _borderWidth;
+	}
+	public function set borderWidth(value:uint):void {
+		if (_borderWidth == value) return;
+		_borderWidth = value;
+		redraw();
+	}
+	public function get borderRadius():uint {
+		return _borderRadius;
+	}
+	public function set borderRadius(value:uint):void {
+		if (_borderRadius == value) return;
+		_borderRadius = value;
+		if (borderWidth) redraw();
 	}
 	override public function set width(value:Number):void {
 		setSize(value,_height);
@@ -96,8 +137,17 @@ public class BitmapDataSprite extends Sprite {
 		_repeat = value;
 		redraw();
 	}
+	public function get crop():Boolean {
+		return _crop;
+	}
+	public function set crop(value:Boolean):void {
+		if (_crop == value) return;
+		_crop = value;
+		redraw();
+	}
 	private function redraw():void {
 		this.graphics.clear();
+		this.graphics.lineStyle(borderWidth,_borderColor,borderWidth>0?1.0:0);
 		if (bitmap) {
 			if (stretch) {
 				var m:Matrix = new Matrix();
@@ -106,13 +156,15 @@ public class BitmapDataSprite extends Sprite {
 			} else {
 				this.graphics.beginBitmapFill(bitmap.bitmapData, null, repeat);
 			}
-			this.graphics.drawRect(0, 0, _width, _height);
-			this.graphics.endFill();
 		} else {
-			this.graphics.beginFill(_fillColor, 1.0);
-			this.graphics.drawRect(0, 0, _width, _height);
-			this.graphics.endFill();
+			this.graphics.beginFill(_fillColor, _fillAlpha);
 		}
+		if (_borderRadius) {
+			this.graphics.drawRoundRect(0, 0, _width, _height, _borderRadius, _borderRadius);
+		} else {
+			this.graphics.drawRect(0, 0, _width, _height);
+		}
+		this.graphics.endFill();
 	}
 }
 }

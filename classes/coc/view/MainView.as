@@ -19,6 +19,8 @@ import fl.controls.ScrollBarDirection;
 import fl.controls.UIScrollBar;
 import fl.data.DataProvider;
 
+import flash.display.BitmapData;
+
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.MouseEvent;
@@ -35,7 +37,80 @@ public class MainView extends Block {
 	public static var Background4:Class;
 	[Embed(source="../../../res/ui/backgroundKaizo.png")]
 	public static var BackgroundKaizo:Class;
-	public static var Backgrounds:Array = [Background1, Background2, Background3, Background4, null, BackgroundKaizo];
+	public static var Themes:Array = [
+		// Style 1, "Map"
+		{
+			dark           : false,
+			bgBitmap       : Background1,
+			glass          : 0xffffff,
+			glassAlpha     : 0.4,
+			statGlass      : 0xffffff,
+			statGlassAlpha : 0.4,
+			statBorderColor: 0x000000,
+			statTextColor  : 0x000000,
+			barAlpha       : 0.4
+		},
+		// Style 2, "Parchment"
+		{
+			dark           : false,
+			bgBitmap       : Background2,
+			glass          : 0xffffff,
+			glassAlpha     : 0.4,
+			statGlass      : 0xffffff,
+			statGlassAlpha : 0.4,
+			statBorderColor: 0x000000,
+			statTextColor  : 0x000000,
+			barAlpha       : 0.4
+		},
+		// Style 3, "Marble"
+		{
+			dark           : false,
+			bgBitmap       : Background3,
+			glass          : 0xffffff,
+			glassAlpha     : 0.4,
+			statGlass      : 0xffffff,
+			statGlassAlpha : 0.4,
+			statBorderColor: 0x000000,
+			statTextColor  : 0x000000,
+			barAlpha       : 0.4
+		},
+		// Style 4, "Obsidian"
+		{
+			dark           : false,
+			bgBitmap       : Background4,
+			glass          : 0xffffff,
+			glassAlpha     : 0.7,
+			statGlass      : 0xffffff,
+			statGlassAlpha : 0.2,
+			statBorderColor: 0xA37C17,
+			statTextColor  : 0xFFFFFF,
+			barAlpha       : 0.5
+		},
+		// Style 5, "Black"
+		{
+			dark           : true,
+			bgBitmap       : null,
+			glass          : 0xffffff,
+			glassAlpha     : 0,
+			statGlass      : 0xffffff,
+			statGlassAlpha : 0,
+			statBorderColor: 0xA37C17,
+			statTextColor  : 0xFFFFFF,
+			barAlpha       : 1
+		},
+		// Style 6, "Kaizo"
+		{
+			dark           : false,
+			bgBitmap       : BackgroundKaizo,
+			glass          : 0xffffff,
+			glassAlpha     : 0.4,
+			statGlass      : 0xffffff,
+			statGlassAlpha : 0.4,
+			statBorderColor: 0x000000,
+			statTextColor  : 0x000000,
+			barAlpha       : 0.4
+		}
+	];
 
 	[Embed(source="../../../res/ui/button0.jpg")]
 	public static var ButtonBackground0:Class;
@@ -81,69 +156,99 @@ public class MainView extends Block {
 
 
 	public static const GAP:Number   = 4; // Gap between UI panels
+	public static const HALFGAP:Number = GAP/2;
 	internal static const BTN_W:Number = 150; // Button size
 	internal static const BTN_H:Number = 40;
 
-	internal static const SCREEN_W:Number       = 1200;
+	internal static const SCREEN_W:Number       = 1420;
 	internal static const SCREEN_H:Number       = 800;
 
 	// TOPROW: [Main Menu]/[New Game], [Data] ... [Appearance]
-
-	// [ TOP ROW           ] -empty-
-	// [STATBAR] [TEXT ZONE] -empty-
-	// [STATBAR] [ BUTTONS ] [SPRITE]
-
-	// Top Row.
-	internal static const TOPROW_X:Number       = GAP; // left = screen left
-	internal static const TOPROW_Y:Number       = GAP; // top = screen top
-	internal static const TOPROW_H:Number       = BTN_H + 2 * GAP; // height = button height
-	internal static const TOPROW_BOTTOM:Number  = TOPROW_Y+TOPROW_H;
-	// width = statbar width + textzone width, so calculated later
-	internal static const TOPROW_NUMBTNS:Number = 6;
-	// Stats panel
-	internal static const STATBAR_X:Number = GAP; // left = screen left
-	internal static const STATBAR_Y:Number = TOPROW_BOTTOM; // top = toprow bottom
-	internal static const STATBAR_W:Number = 205; // width = const
-	internal static const STATBAR_H:Number = SCREEN_H - STATBAR_Y - GAP; // height = all remaining space
-	internal static const STATBAR_RIGHT:Number = STATBAR_X + STATBAR_W + GAP;
-	// Text area
-	/*
-	// I'd like to have the position calculable, but the borders are part of the bg picture so have to use magic numbers
-	internal static const TEXTZONE_X:Number = STATBAR_RIGHT; // left = statbar right
-	internal static const TEXTZONE_Y:Number = TOPROW_BOTTOM; // top = toprow bottom
-	internal static const TEXTZONE_W:Number = 770; // width = const
-	internal static const TEXTZONE_H:Number = SCREEN_H - TOPROW_H - BOTTOM_H; // height = screen height - toprow height - buttons height, so calculated later
-	 */
-	internal static const TEXTZONE_X:Number = 208; // left = const
-	internal static const TEXTZONE_Y:Number = 52; // top = const
-	internal static const TEXTZONE_W:Number = 769; // width = const
-	internal static const VSCROLLBAR_W:Number = 15;
-	internal static const TEXTZONE_H:Number = 602; // height = const
-	// Sprite (bottom right)
-	internal static const SPRITE_W:Number = 80;
-	internal static const SPRITE_H:Number = 80;
-	internal static const SPRITE_X:Number = SCREEN_W - SPRITE_W - GAP; // right = screen right
-	internal static const SPRITE_Y:Number = SCREEN_H - SPRITE_H - GAP; // bottom = screen bottom
-	// toprow width = statbar width + textzone width, so calculated later
-	internal static const TOPROW_W:Number = TEXTZONE_X + TEXTZONE_W;
-	// Bottom buttons
-	internal static const BOTTOM_X:Number         = STATBAR_RIGHT; // left = statbar right
+	
+	// Columns:
+	//      1               2          3
+	//
+	//     [ TOPROW                 ]
+	//     [STAT1 | STAT2] /TEXTZONE\ [SPRITE ]
+	//     [   CHARVIEW  ] \TEXTZONE/ [MONSTER]
+	//                     [BUTTONS ]
+	// Rows are NOT fixed, so stat1/2 and sprite are NOT of same height
+	
+	// Misc properties
+	internal static const TOPROW_NUMBTNS:Number   = 6;
+	internal static const VSCROLLBAR_W:Number     = 15;
 	internal static const BOTTOM_COLS:Number      = 5;
 	internal static const BOTTOM_ROWS:Number      = 3;
 	internal static const BOTTOM_BUTTON_COUNT:int = BOTTOM_COLS * BOTTOM_ROWS;
-	internal static const BOTTOM_H:Number         = (GAP + BTN_H) * BOTTOM_ROWS; // height = rows x button height
-	internal static const BOTTOM_W:Number         = TEXTZONE_W; // width = textzone width
-	internal static const BOTTOM_HGAP:Number      = (BOTTOM_W - BTN_W * BOTTOM_COLS) / (2 * BOTTOM_COLS); // between btns
-	internal static const BOTTOM_Y:Number         = SCREEN_H - BOTTOM_H; // bottom = screen bottom
-	internal static const MONSTER_X:Number        = TEXTZONE_X + MainView.TEXTZONE_W + GAP;
-	internal static const MONSTER_Y:Number        = TEXTZONE_Y;
-	internal static const MONSTER_W:Number        = SCREEN_W - MONSTER_X;
-	internal static const MONSTER_H:Number        = TEXTZONE_H;
+	
+	// Column 1 core
+	internal static const STATBAR_COL_W:Number   = 205;
+	internal static const STATBAR_W:Number       = STATBAR_COL_W * 2;
+	internal static const CHARVIEW_W:Number      = 200*2;
+	internal static const COLUMN_1_X:Number      = HALFGAP;
+	internal static const COLUMN_1_W:Number      = Math.max(STATBAR_W, CHARVIEW_W);
+	internal static const COLUMN_1_RIGHT:Number  = COLUMN_1_X + COLUMN_1_W;
+	// Column 2 core
+	internal static const TEXTZONE_W:Number      = 770;
+	internal static const COLUMN_2_X:Number      = COLUMN_1_RIGHT + GAP;
+	internal static const COLUMN_2_W:Number      = TEXTZONE_W;
+	internal static const COLUMN_2_RIGHT:Number  = COLUMN_2_X + COLUMN_2_W;
+	// Column 3 core
+	internal static const COLUMN_3_X:Number      = COLUMN_2_RIGHT + GAP;
+	internal static const COLUMN_3_RIGHT:Number  = SCREEN_W - HALFGAP;
+	internal static const COLUMN_3_W:Number      = COLUMN_3_RIGHT - COLUMN_3_X;
+	// Top row. Its width depends on textzone size and declared later
+	internal static const TOPROW_X:Number        = COLUMN_1_X;
+	internal static const TOPROW_Y:Number        = HALFGAP;
+	internal static const TOPROW_H:Number        = BTN_H;
+	internal static const TOPROW_BOTTOM:Number   = TOPROW_Y + TOPROW_H + GAP;
+	// Stat bar and its columns. Height depends on charview size
+	public static const STATBAR_X:Number       = COLUMN_1_X;
+	internal static const STATBAR_Y:Number       = TOPROW_BOTTOM + GAP;
+	internal static const STATBAR_1_X:Number     = STATBAR_X;
+	internal static const STATBAR_1_RIGHT:Number = STATBAR_1_X + STATBAR_COL_W + HALFGAP;
+	internal static const STATBAR_2_X:Number     = STATBAR_1_RIGHT;
+	internal static const STATBAR_2_RIGHT:Number = STATBAR_2_X + STATBAR_COL_W + HALFGAP;
+	internal static const STATBAR_RIGHT:Number   = STATBAR_2_RIGHT;
+	// Char viewer
+	internal static const CHARVIEW_X:Number      = 0;
+	internal static const CHARVIEW_H:Number      = 202*2;
+	internal static const CHARVIEW_BOTTOM:Number = SCREEN_H;
+	// Text zone
+	internal static const TEXTZONE_X:Number      = STATBAR_RIGHT;
+	internal static const TEXTZONE_Y:Number      = TOPROW_BOTTOM + GAP;
+	internal static const TEXTZONE_RIGHT:Number  = TEXTZONE_X + TEXTZONE_W + GAP;
+	// Bottom menu
+	internal static const BOTTOM_X:Number        = STATBAR_RIGHT + HALFGAP;
+	internal static const BOTTOM_H:Number        = (GAP + BTN_H) * BOTTOM_ROWS; // height = rows x button height
+	internal static const BOTTOM_W:Number        = TEXTZONE_W; // width = textzone width
+	internal static const BOTTOM_HGAP:Number     = (BOTTOM_W - BTN_W * BOTTOM_COLS) / (2 * BOTTOM_COLS); // between btns
+	internal static const BOTTOM_Y:Number        = SCREEN_H - BOTTOM_H; // bottom = screen bottom
+	// Sprite (top right)
+	internal static const SPRITE_X:Number           = COLUMN_3_X;
+	internal static const SPRITE_Y:Number           = TEXTZONE_Y;
+	internal static const SPRITE_MAX_W:Number       = SCREEN_W - SPRITE_X - GAP;
+	internal static const SPRITE_MAX_H:Number       = SPRITE_MAX_W;
+	// monster stats (top right below sprite)
+	internal static const MONSTER_X:Number          = COLUMN_3_X;
+	internal static const MONSTER_W:Number          = SPRITE_MAX_W;
+	internal static const MONSTER_H:Number          = 300;
+	internal static const MONSTER_Y:Number          = SPRITE_Y + SPRITE_MAX_H + GAP;
+	// corner stats (bottom right)
+	internal static const CORNERSTATS_X:Number      = COLUMN_3_X;
+	internal static const CORNERSTATS_W:Number      = COLUMN_3_W;
+	internal static const CORNERSTATS_BOTTOM:Number = SCREEN_H - HALFGAP;
+	// Various dependencies
+	internal static const TEXTZONE_H:Number         = SCREEN_H - TEXTZONE_Y - BOTTOM_H - 2 * GAP;
+	internal static const TOPROW_W:Number           = TEXTZONE_X + TEXTZONE_W;
+	internal static const STATBAR_BOTTOM:Number     = CHARVIEW_BOTTOM - CHARVIEW_H - GAP;
+	internal static const STATBAR_H:Number          = STATBAR_BOTTOM - STATBAR_Y;
 
 	private var blackBackground:BitmapDataSprite;
 	public var textBGWhite:BitmapDataSprite;
 	public var textBGTan:BitmapDataSprite;
 	public var background:BitmapDataSprite;
+	public var backgroundGlass:BitmapDataSprite;
 	public var sprite:BitmapDataSprite;
 
 	public var mainText:TextField;
@@ -153,6 +258,7 @@ public class MainView extends Block {
 	private var comboboxHandler:Function;
 
 	public var toolTipView:ToolTipView;
+	public var cornerStatsView:CornerStatsView;
 	public var statsView:StatsView;
 	public var monsterStatsView:MonsterStatsView;
 	public var sideBarDecoration:Sprite;
@@ -190,6 +296,16 @@ public class MainView extends Block {
 			height     : SCREEN_H,
 			fillColor  : 0,
 			repeat     : true
+		}));
+		addElement(backgroundGlass = new BitmapDataSprite({
+			fillColor: '#ffffff',
+			borderColor: '#222222',
+			borderWidth: 1,
+			x        : TEXTZONE_X,
+			y        : TEXTZONE_Y,
+			width    : TEXTZONE_W,
+			height   : TEXTZONE_H,
+			alpha    : 0.4
 		}));
 		addElement(topRow = new Block({
 			x           : TOPROW_X,
@@ -290,8 +406,14 @@ public class MainView extends Block {
 				font: 'Arial'
 			}
 		});
+		StatBar.setDefaultOptions({
+			barColor: '#600000',
+			width: STATBAR_COL_W - 2*HALFGAP
+		});
+		this.cornerStatsView = new CornerStatsView();
+		this.addElement(this.cornerStatsView);
 		// Init subviews.
-		this.statsView = new StatsView(this/*, this.model*/);
+		this.statsView = new StatsView(this, this.cornerStatsView);
 		this.statsView.hide();
 		this.addElement(this.statsView);
 
@@ -326,6 +448,7 @@ public class MainView extends Block {
 		this.scaleX = 1;
 		this.scaleY = 1;
 		charView         = new CharView();
+		//charView.bgFill  = 0xff808080;
 		charView.name    = "charview";
 //		this.charView.x       = TEXTZONE_X + TEXTZONE_W + GAP;
 //		this.charView.y       = TEXTZONE_Y;
@@ -411,8 +534,8 @@ public class MainView extends Block {
 
 		for each(b in this.allButtons) {
 			b.mouseChildren = false;
-			b.addEventListener(MouseEvent.ROLL_OVER, this.hoverButton);
-			b.addEventListener(MouseEvent.ROLL_OUT, this.dimButton);
+			b.addEventListener(MouseEvent.ROLL_OVER, this.hoverElement);
+			b.addEventListener(MouseEvent.ROLL_OUT, this.dimElement);
 		}
 	}
 
@@ -477,7 +600,7 @@ public class MainView extends Block {
 		this.toolTipView.hide();
 	}
 
-	protected function hoverButton(event:MouseEvent):void {
+	protected function hoverElement(event:MouseEvent):void {
 		var button:CoCButton;
 
 		button = event.target as CoCButton;
@@ -485,14 +608,14 @@ public class MainView extends Block {
 		if (button && button.visible && button.toolTipText) {
 			this.toolTipView.header = button.toolTipHeader;
 			this.toolTipView.text   = button.toolTipText;
-			this.toolTipView.showForButton(button);
+			this.toolTipView.showForElement(button);
 		}
 		else {
 			this.toolTipView.hide();
 		}
 	}
 
-	protected function dimButton(event:MouseEvent):void {
+	protected function dimElement(event:MouseEvent):void {
 		this.toolTipView.hide();
 	}
 
@@ -751,6 +874,36 @@ public class MainView extends Block {
 	}
 	public function placeComboBox(x:Number,y:Number):void {
 		aCb.move(x,y);
+	}
+	public function placeCharviewAtRight():void {
+		charView.x = CHARVIEW_X;
+		charView.y = CHARVIEW_BOTTOM - CHARVIEW_H;
+	}
+	public function showSpriteBitmap(bmp:BitmapData):void {
+		if (!bmp) return;
+		sprite.visible              = true;
+		var scale:Number = SPRITE_MAX_W/bmp.width;
+		if (bmp.height*scale > SPRITE_MAX_H) {
+			scale = SPRITE_MAX_H/bmp.height;
+		}
+		if (scale > 4) scale = 4;
+		sprite.scaleX               = scale;
+		sprite.scaleY               = scale;
+		sprite.graphics.clear();
+		sprite.graphics.beginBitmapFill(bmp, null, false, false);
+		sprite.graphics.drawRect(0, 0, bmp.width, bmp.height);
+		sprite.graphics.endFill();
+		// sprite.x = SCREEN_W - GAP - sprite.width; // align right
+		// sprite.y = SCREEN_H - GAP - sprite.height; // align bottom
+	}
+	public function setTheme(theme:int, font:String):void {
+		var style:* = Themes[theme];
+		if (!style) return;
+		background.bitmapClass    = style.bgBitmap;
+		backgroundGlass.fillColor = style.glass;
+		backgroundGlass.alpha     = style.glassAlpha;
+		statsView.setTheme(theme, font);
+		monsterStatsView.setTheme(theme, font);
 	}
 }
 }
