@@ -21,8 +21,51 @@ public class AkbalScene extends BaseContent
 		public function akbalDefeated(hpVictory:Boolean):void{
 			flags[kFLAGS.AKBAL_SUBMISSION_STATE] = 1;
 			clearOutput();
-			if (hpVictory) //[General Victory]
-			{
+			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] >= 1) flags[kFLAGS.AKBAL_DEFEATS_COUNTER]++;
+				else flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 1;
+				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 1 && flags[kFLAGS.AKBAL_LVL_UP] < 1) {
+					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.AKBAL_LVL_UP] = 1;
+				}
+				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 2 && flags[kFLAGS.AKBAL_LVL_UP] == 1) {
+					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.AKBAL_LVL_UP] = 2;
+				}
+				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 3 && flags[kFLAGS.AKBAL_LVL_UP] == 2) {
+					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.AKBAL_LVL_UP] = 3;
+				}
+				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 4 && flags[kFLAGS.AKBAL_LVL_UP] == 3) {
+					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.AKBAL_LVL_UP] = 4;
+				}
+				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 5 && flags[kFLAGS.AKBAL_LVL_UP] == 4) {
+					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.AKBAL_LVL_UP] = 5;
+				}
+				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 6 && flags[kFLAGS.AKBAL_LVL_UP] == 5) {
+					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.AKBAL_LVL_UP] = 6;
+				}
+				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 7 && flags[kFLAGS.AKBAL_LVL_UP] == 6) {
+					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.AKBAL_LVL_UP] = 7;
+				}
+				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 8 && flags[kFLAGS.AKBAL_LVL_UP] == 7) {
+					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.AKBAL_LVL_UP] = 8;
+				}
+				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 9 && flags[kFLAGS.AKBAL_LVL_UP] == 8) {
+					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.AKBAL_LVL_UP] = 9;
+				}
+				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 10 && flags[kFLAGS.AKBAL_LVL_UP] == 9) {
+					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.AKBAL_LVL_UP] = 10;
+				}
+			}
+			if (hpVictory) {//[General Victory]
 				/*if(rand(10) == 0) {
 				   outputText("Akbal falls to the ground, but as you raise your [weapon] to deliver the final blow, a harsh ripping sound rends the air.  A dark form covered in burning violet light flies out of the jaguar's body; the demon has fled, leaving a corpse behind.  You have no doubt that the demon can gain another body, but it's best to take the old one with you to make sure it doesn't regain its form easily.");
 				   //9999 change monster name to let itemloot know what item to drop.
@@ -31,8 +74,8 @@ public class AkbalScene extends BaseContent
 				 }*/
 				//[Common chance of dropping 'Incubus Draft', 'Smart Tea' or 'Pipe']
 				outputText("Akbal falls to the ground in a beaten bloody heap.");
-			} else //[Victory via Lust]
-			{
+			}
+			else {//[Victory via Lust]
 				outputText("Akbal falls to the ground, unable to go on. Yet a growl still rumbles in his chest, and you quickly recognize the submissive gesture when he bows his head, his cat belly hugging the ground.  His body begins shifting, and soon he has a vaguely humanoid form. You assume this is the form he uses for sex, as his lust is out of control.\n\n");
 				if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0)
 				{

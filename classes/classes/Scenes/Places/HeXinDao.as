@@ -65,7 +65,8 @@ public class HeXinDao extends BaseContent
 		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2016) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "monkey";
 		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2017) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rooster";
 		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2018) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "dog";
-		else if (flags[kFLAGS.LUNAR_NEW_YEAR] >= 2019) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "pig";;
+		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2019) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "pig";
+		else if (flags[kFLAGS.LUNAR_NEW_YEAR] >= 2020) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rat";
 		outputText("You go deeper in town and discover the whole place is indeed covered in red. The big question now is what should you check upon first?");
 		menu();
 		if (!player.hasStatusEffect(StatusEffects.CanGetLunarGift)) addButton(0, "Gifts", riverislandVillageStuffLunarGifts);
@@ -775,28 +776,38 @@ public function soularena():void {
     public function soularenaChallenge():void {
         clearOutput();
         outputText("Picking the one in the middle prepared for challanges you enter there and looking around checking who if there is currently anyone up for a challange.");
-        menu();
-        if (player.statusEffectv1(StatusEffects.SoulArenaGaunlets1) > 1) addButtonDisabled(0, "Gaunlet 1", "You already won this gaunlet today. Come back tomorrow.");
-		else addButton(0, "Gaunlet 1", gaunletchallange1fight1).hint("Fight 3 diff enemies one after another.");
-        if (player.statusEffectv1(StatusEffects.SoulArenaGaunlets1) > 0) {
-			if (player.statusEffectv2(StatusEffects.SoulArenaGaunlets1) > 1) addButtonDisabled(1, "Gaunlet 2", "You already won this gaunlet today. Come back tomorrow.");
-			else addButton(1, "Gaunlet 2", gaunletchallange2fight1).hint("Fight 4 diff enemies one after another.");
-		}
-        //addButton(2, "Gaunlet 3", gaunletchallange3).hint("Fight 5 diff enemies one after another.");
-        //addButton(3, "Gaunlet 4", gaunletchallange4).hint("Fight 6 diff enemies one after another.");
-        //addButton(4, "Gaunlet 5", gaunletchallange5).hint("Fight 7 diff enemies one after another.");
-        //addButton(5, "Golemancer", arenaSelection,Jeniffer);
-        //addButton(6, "AyotechManiac", arenaSelection,Jinx);
-        //addButton(7, "MachoSalamander", arenaSelection,Syth);
-        //addButton(8, "MissSalamander", arenaSelection,Asuka);
-        addButton(9, "LvL 24 Gargoyle", arenaSelection,GargoyleBasic);
-        //if (flags[kFLAGS.CHI_CHI_AFFECTION] < 15) addButton(10, "Chi Chi", chichiScene.EnterOfTheChiChi);
-        //addButton(10, "MissOni", arenaSelection,Rangiku);
-        addButton(11, "LvL 33 Golems", arenaSelection,GolemsBasic);
-        addButton(12, "LvL 42 Golems", arenaSelection,GolemsImproved);
-        addButton(13, "LvL 51 Golems", arenaSelection,GolemsAdvanced);
-        addButton(14, "Back", soularena);
+        soularenaChallengeSubpages();
     }
+	private function soularenaChallengeSubpages(page:int = 1):void {
+		menu();
+		if (page == 1) {
+			if (player.statusEffectv1(StatusEffects.SoulArenaGaunlets1) > 1) addButtonDisabled(0, "Gaunlet 1", "You already won this gaunlet today. Come back tomorrow.");
+			else addButton(0, "Gaunlet 1", gaunletchallange1fight1).hint("Fight 3 diff enemies one after another.");
+			if (player.statusEffectv1(StatusEffects.SoulArenaGaunlets1) > 0) {
+				if (player.statusEffectv2(StatusEffects.SoulArenaGaunlets1) > 1) addButtonDisabled(1, "Gaunlet 2", "You already won this gaunlet today. Come back tomorrow.");
+				else addButton(1, "Gaunlet 2", gaunletchallange2fight1).hint("Fight 4 diff enemies one after another.");
+			}
+			//addButton(2, "Gaunlet 3", gaunletchallange3).hint("Fight 5 diff enemies one after another.");
+			//addButton(3, "Gaunlet 4", gaunletchallange4).hint("Fight 6 diff enemies one after another.");
+			//addButton(4, "Gaunlet 5", gaunletchallange5).hint("Fight 7 diff enemies one after another.");
+			//addButton(5, "Gaunlet 6", gaunletchallange6).hint("Fight 8 diff enemies one after another.");gdzieś tam tu dodać grupowe tylko walki dające na pierszej walce oblokowanie perków do powiekszania drużyny
+			addButton(9, "LvL 24 Gargoyle", arenaSelection,GargoyleBasic);
+			addButton(10, "LvL 33 Golems", arenaSelection,GolemsBasic);
+			addButton(11, "LvL 42 Golems", arenaSelection,GolemsImproved);
+			addButton(12, "LvL 51 Golems", arenaSelection, GolemsAdvanced);
+			addButton(13, "-2-", soularenaChallengeSubpages, page + 1);
+			addButton(14, "Back", soularena);
+		}
+		if (page == 2) {
+			addButton(5, "Golemancer", arenaSelection,Jeniffer);
+			addButton(6, "AyotechManiac", arenaSelection,Jinx);
+			addButton(7, "MachoSalamander", arenaSelection,Syth);
+			addButton(8, "MissSalamander", arenaSelection,Asuka);
+			addButton(9, "MissOni", arenaSelection,Rangiku);
+			addButton(13, "-1-", soularenaChallengeSubpages, page - 1);
+			addButton(14, "Back", soularena);
+		}
+	}
     private function arenaSelection(mon:Class):void{
         player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
         if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;

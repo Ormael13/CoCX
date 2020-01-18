@@ -1480,51 +1480,51 @@ import classes.Scenes.UniqueSexScenes;
 		{
 			flags[kFLAGS.IZUMI_LAST_ENCOUNTER] = 3;
 			flags[kFLAGS.IZUMI_TIMES_GRABBED_THE_HORN]++;
-			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] >= 1) flags[kFLAGS.IZUMI_DEFEATS_COUNTER]++;
-			else flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 1;
-			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 1 && flags[kFLAGS.IZUMI_LVL_UP] < 1) {
-				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
-				flags[kFLAGS.IZUMI_LVL_UP] = 1;
+			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+				if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] >= 1) flags[kFLAGS.IZUMI_DEFEATS_COUNTER]++;
+				else flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 1;
+				if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 1 && flags[kFLAGS.IZUMI_LVL_UP] < 1) {
+					flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.IZUMI_LVL_UP] = 1;
+				}
+				if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 2 && flags[kFLAGS.IZUMI_LVL_UP] == 1) {
+					flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.IZUMI_LVL_UP] = 2;
+				}
+				if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 3 && flags[kFLAGS.IZUMI_LVL_UP] == 2) {
+					flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.IZUMI_LVL_UP] = 3;
+				}
+				if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 4 && flags[kFLAGS.IZUMI_LVL_UP] == 3) {
+					flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.IZUMI_LVL_UP] = 4;
+				}
+				if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 5 && flags[kFLAGS.IZUMI_LVL_UP] == 4) {
+					flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.IZUMI_LVL_UP] = 5;
+				}
+				if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 6 && flags[kFLAGS.IZUMI_LVL_UP] == 5) {
+					flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.IZUMI_LVL_UP] = 6;
+				}
+				if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 7 && flags[kFLAGS.IZUMI_LVL_UP] == 6) {
+					flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.IZUMI_LVL_UP] = 7;
+				}
+				if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 8 && flags[kFLAGS.IZUMI_LVL_UP] == 7) {
+					flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.IZUMI_LVL_UP] = 8;
+				}
+				if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 9 && flags[kFLAGS.IZUMI_LVL_UP] == 8) {
+					flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.IZUMI_LVL_UP] = 9;
+				}
+				if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 10 && flags[kFLAGS.IZUMI_LVL_UP] == 9) {
+					flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.IZUMI_LVL_UP] = 10;
+				}
 			}
-			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 2 && flags[kFLAGS.IZUMI_LVL_UP] == 1) {
-				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
-				flags[kFLAGS.IZUMI_LVL_UP] = 2;
-			}
-			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 3 && flags[kFLAGS.IZUMI_LVL_UP] == 2) {
-				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
-				flags[kFLAGS.IZUMI_LVL_UP] = 3;
-			}
-			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 4 && flags[kFLAGS.IZUMI_LVL_UP] == 3) {
-				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
-				flags[kFLAGS.IZUMI_LVL_UP] = 4;
-			}
-			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 5 && flags[kFLAGS.IZUMI_LVL_UP] == 4) {
-				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
-				flags[kFLAGS.IZUMI_LVL_UP] = 5;
-			}
-			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 6 && flags[kFLAGS.IZUMI_LVL_UP] == 5) {
-				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
-				flags[kFLAGS.IZUMI_LVL_UP] = 6;
-			}
-			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 7 && flags[kFLAGS.IZUMI_LVL_UP] == 6) {
-				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
-				flags[kFLAGS.IZUMI_LVL_UP] = 7;
-			}
-			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 8 && flags[kFLAGS.IZUMI_LVL_UP] == 7) {
-				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
-				flags[kFLAGS.IZUMI_LVL_UP] = 8;
-			}
-			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 9 && flags[kFLAGS.IZUMI_LVL_UP] == 8) {
-				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
-				flags[kFLAGS.IZUMI_LVL_UP] = 9;
-			}
-			if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 10 && flags[kFLAGS.IZUMI_LVL_UP] == 9) {
-				flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
-				flags[kFLAGS.IZUMI_LVL_UP] = 10;
-			}
-			
 			clearOutput();
-
 			outputText("Izumi slips backwards onto one knee and holds up a hand for pause,");
 			if((player.HP/player.maxHP()) <= 0.1) outputText(" the brief reprieve giving both of you a moment to recover.\n\n");
 			else if(monster.lust >= monster.maxLust()) outputText(" the Oni’s cheeks tinged a rosy peach in contrast to her alabaster skin.\n\n");

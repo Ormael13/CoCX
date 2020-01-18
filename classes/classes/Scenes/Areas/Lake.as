@@ -32,8 +32,22 @@ use namespace CoC;
 			player.exploredLake++;
 			if (Holidays.poniesYN()) return;
 
+			
+			//Izma
+			if (player.level >= 3 && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0 && (player.exploredLake >= 10) && (flags[kFLAGS.IZMA_WORMS_SCARED] == 0 || !player.hasStatusEffect(StatusEffects.Infested)) && flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0 && player.exploredLake % 8 == 0) {
+				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
+				SceneLib.izmaScene.meetIzmaAtLake();
+				return;
+			}
+			//Diana
+			if (player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(10) == 0) {
+				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
+				SceneLib.dianaScene.repeatLakeEnc();
+				return;
+			}
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
+				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
@@ -41,12 +55,6 @@ use namespace CoC;
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0) {
 				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 				SceneLib.etnaScene.repeatYandereEnc();
-				return;
-			}
-			//Diana
-			if (player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(10) == 0) {
-				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
-				SceneLib.dianaScene.repeatLakeEnc();
 				return;
 			}
 			if (player.exploredLake % 20 == 0) {
@@ -78,15 +86,12 @@ use namespace CoC;
 			if (player.level < 3 || player.spe < 50) choice[choice.length] = 0;
 			choice[choice.length] = 1;
 			choice[choice.length] = 2;
-			//Fetish cultist not encountered till level 2
+			//Fetish cultist not encountered till level 3
 			if (player.level >= 3 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0)
 				choice[choice.length] = 3;
-			//Slimes/Ooze = level >= 2
+			//Slimes/Ooze = level >= 3
 			if (player.level >= 3)
 				choice[choice.length] = 4;
-			//Izma
-			if (flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0 && (player.exploredLake >= 10) && (flags[kFLAGS.IZMA_WORMS_SCARED] == 0 || !player.hasStatusEffect(StatusEffects.Infested)) && flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0)
-				choice[choice.length] = 5;
 			//Rathazul
 			if (!player.hasStatusEffect(StatusEffects.CampRathazul))
 				choice[choice.length] = 6;
@@ -100,23 +105,23 @@ use namespace CoC;
 			//Chance of dick-dragging! OLD:10% + 10% per two foot up to 30%
 			var chance:Number = 10 + (player.longestCockLength() - player.tallness) / 24 * 10;
 			if (chance > 0 && player.longestCockLength() >= player.tallness - 10 && player.totalCockThickness() >= 8)
-				choice[choice.length] = 8;
+				choice[choice.length] = 5;
 
 			//Encounter golems, goblins and imps in NG+
 			if (player.level >= 3 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0)
-				choice[choice.length] = 12;
+				choice[choice.length] = 10;
 				
 			//ONE TIME EVENTS
 			//Amily Village discovery
 			if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] == 0)
-				choice[choice.length] = 9;
+				choice[choice.length] = 7;
 			//Sword/Bow/Staff/Shield Discovery
 			if (!player.hasStatusEffect(StatusEffects.TookBlessedBow) && !player.hasStatusEffect(StatusEffects.BBowBroken) && !player.hasStatusEffect(StatusEffects.TookBlessedShield) && !player.hasStatusEffect(StatusEffects.BShieldBroken)
 			&& !player.hasStatusEffect(StatusEffects.TookBlessedStaff) && !player.hasStatusEffect(StatusEffects.BStaffBroken) && !player.hasStatusEffect(StatusEffects.TookBlessedSword) && !player.hasStatusEffect(StatusEffects.BSwordBroken))
-				choice[choice.length] = 10;
+				choice[choice.length] = 8;
 			//Pre-emptive chance of finding the boat
 			if (!player.hasStatusEffect(StatusEffects.BoatDiscovery))
-				choice[choice.length] = 11;
+				choice[choice.length] = 9;
 				
 			//CHOOSE YOUR POISON!
 			select = choice[rand(choice.length)];
@@ -125,11 +130,11 @@ use namespace CoC;
 			//EVENTS GO HERE!
 			//==============================
 			//Pre-emptive chance of discovering Amily the stupidshit mouse
-			if (select == 9) {
+			if (select == 7) {
 				SceneLib.amilyScene.discoverAmilyVillage();
 			}
 			//Pre-emptive chance of discovering the Beautiful Sword
-			else if (select == 10) {
+			else if (select == 8) {
 				if (player.hasStatusEffect(StatusEffects.TookBlessedSword)) {
 					if (player.hasStatusEffect(StatusEffects.TookBlessedBow)) {
 						if (player.hasStatusEffect(StatusEffects.TookBlessedStaff)) swordInStone.findShieldInStone();
@@ -140,17 +145,8 @@ use namespace CoC;
 				else swordInStone.findSwordInStone();
 			}
 			//Pre-emptive chance of finding the boat
-			else if (select == 11) {
+			else if (select == 9) {
 				SceneLib.boat.discoverBoat();
-			}
-			//Meet Izma every 8 attempts
-			else if (select == 5) {
-				SceneLib.izmaScene.meetIzmaAtLake();
-			}
-			//Chance of dick-dragging! 10% + 10% per two foot up to 30%
-			else if (select == 8) {
-				//True sets to use lake scene!
-				SceneLib.forest.bigJunkForestScene(true);
 			}
 			else if (select == 4) {
 				//Chance of seeing ooze convert goo!
@@ -215,6 +211,11 @@ use namespace CoC;
 					dynStats("lib", 1, "lus", 10);
 					startCombat(new GreenSlime());
 				}
+			}
+			//Chance of dick-dragging! 10% + 10% per two foot up to 30%
+			else if (select == 5) {
+				//True sets to use lake scene!
+				SceneLib.forest.bigJunkForestScene(true);
 			}
 			else if (select == 0) {
 				clearOutput();
@@ -288,12 +289,12 @@ use namespace CoC;
 			else if (select == 6) {
 				SceneLib.rathazul.encounterRathazul();
 			}
-			else if (select == 12) {
+			else if (select == 10) {
 				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 				SceneLib.exploration.genericGolGobImpEncounters();
 			}
 			else {
-				outputText("OH SHIT! LAKE EXPLORE BE BROKED.  SELECT: " + select + ".  You should probably go to fenoxo.com and click the mod threat link to report a bug and tell Ormael/Aimozg/Oxdeception (since they making the mod) about it or come to CoC Mods discord and tell them.");
+				outputText("OH SHIT! LAKE EXPLORE BE BROKED.  SELECT: " + select + ".  You should probably go to fenoxo.com and click the mod threat link to report a bug and tell Ormael/Aimozg (since they making the mod) about it or come to CoC Mods discord and tell them.");
 			}
 		}
 		

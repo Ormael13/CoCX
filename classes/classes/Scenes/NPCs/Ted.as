@@ -132,11 +132,11 @@ use namespace CoC;
 				this.level = 21;
 			}
 			if (flags[kFLAGS.TED_LVL_UP] == 3) {
-				initStrTouSpeInte(60, 110, 110, 60);
-				initWisLibSensCor(60, 35, 70, 50);
-				this.weaponAttack = 14;
-				this.armorDef = 20;
-				this.armorMDef = 65;
+				initStrTouSpeInte(63, 115, 115, 62);
+				initWisLibSensCor(62, 36, 70, 50);
+				this.weaponAttack = 15;
+				this.armorDef = 21;
+				this.armorMDef = 66;
 				this.level = 27;
 			}
 			if (flags[kFLAGS.TED_LVL_UP] >= 3) {

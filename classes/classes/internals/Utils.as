@@ -390,6 +390,11 @@ package classes.internals
 		public static function trimSides(s:String):String {
 			return trimLeft(trimRight(s));
 		}
+		public static function tieredBonus(stat:Number, step:Number, tier1:Number):Number {
+		  var tier:Number = Math.floor( (stat-tier1)/step + 1 );
+		  var offset:Number = step*( (tier+1)*tier / 2); // Calculates sum of tier boundaries
+		  return tier*stat-offset;
+		}
 
 		private static var PF_NAME:Array      = []; // stack: classname+'.'+methodname
 		private static var PF_START:Array     = []; // stack: start time

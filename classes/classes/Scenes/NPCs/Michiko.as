@@ -44,6 +44,9 @@ public function firstMeetingMichiko():void {
 	outputText("She makes a good case...and free info is always welcome. She understands the risk too. Well, there really is no other option but to say yes, is there? Fine. You’ll take her along with you.\n\n");
 	outputText("\"<i>Great! And you don’t need to escort me, I know the way. When you return to camp and you ever want to chat, just call out for me when you’re near the forest. I’ll be there in a second.</i>\"\n\n");
 	outputText("Right. Having nothing else to talk about, you dig into your meal. You both finish around the same time, and you thank her once more for purchasing the food for you. \"<i>Really, it’s no trouble at all, [name]. For now, I’ll get started moving to camp. I’ll see you there.</i>\" You exit the tavern alongside her, waving goodbye as she walks down the road.\n\n");
+	outputText("Michiko moves into your camp, setting up a tent which she fills up with books and scrolls she picks up from her bag.\n\n");
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) outputText("Intrigued, Jojo snoops up to check on your new scholarly guest.\n\n");
+	if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("Rathazul raises an eyebrow as the squirrel girl walks around and sets up her installations, though he swiftly goes back to his experiments.\n\n");
 	outputText("(<b>Michiko has been added to the Followers menu!</b>)\n\n");
 	flags[kFLAGS.MICHIKO_FOLLOWER] = 1;
 	doNext(camp.returnToCampUseOneHour);
@@ -51,32 +54,131 @@ public function firstMeetingMichiko():void {
 
 public function campMichikoMainMenu():void {
 	clearOutput();
-	outputText("Striding towards the edge of the woods at camp, you call out for your squirrel-morph companion.\n\n");
+	outputText("You approach Michiko who waves at you, stowing away her inkpot and feather to address you.\n\n");
+	outputText("\"<i>Good day [name], if you have questions I got the answers.</i>\"\n\n");
 	menu();
+	addButton(0, "Appearance", campMichikoAppearance).hint("Examine Michiko detailed appearance.");
 	addButton(1, "Talk", campMichikoTalkMM).hint("Ask Michiko about something.");
 	addButton(14, "Back", camp.campFollowers);
 }
 
 public function campMichikoAppearance():void {
 	clearOutput();
-	outputText("\n\n");
-	outputText("\n\n");
-	outputText("\n\n");
+	outputText("Michiko is a young ratatoskr, wise and erudite. Her hair is short, the strands starting out dark brown on the forehead before turning lighter on the side, fully changing to white at the tips like a chipmunk.\n\n");
+	outputText("Her green slitted eyes are always attentive to information yet betray that smug know it all attitude of hers. Her mouth looks human enough. Her furry squirrel ears are always attentive to sound, trying to pick up gossip and information to store for later.\n\n");
+	outputText("Michiko’s arms are covered in fur up to the hands which similar to those of a human, end with five digits and sharp nailed fingers. Her fur similar to her hair alters between light brown, deep brown and white. Her legs like her arms have fur up to the middle of her thighs and turns to squirrel paws at her feet. Up her shapely ass is a massive tail easily as big as she is, as is characteristic of the ratatoskr species.\n\n");
+	outputText("Michiko like most of the small people has a chest to match with a modest pair of b cup breasts.\n\n");
+	outputText("Her small pussy is still that of a virgin.\n\n");
 	menu();
 	addButton(14, "Back", campMichikoMainMenu);
 }
 
 public function campMichikoTalkMM():void {
 	clearOutput();
-	
-	
+	outputText("You do happen to have some questions for her actually.\n\n");
+	outputText("\"<i>Well that's good, better prepared than sorry. Just choose a topic and I will tell you what I know.</i>\"\n\n");
 	menu();
-	addButton(0, "Love in Mareth", campMichikoTalkMarriage);
+	addButton(0, "Region", campMichikoTalkRegion);
+	addButton(10, "LoveInMareth", campMichikoTalkMarriage);
 	addButton(14, "Back", camp.campFollowers);
 }
+public function campMichikoTalkRegion():void {
+	menu();
+	outputText("You would like to know more about the various area of mareth.\n\n");
+	outputText("\"<i>Sure [name], which one you want to know about?</i>\"\n\n");
+	addButton(0, "Wasteland", campMichikoTalkRegionWasteland);
+	addButton(1, "Forest", campMichikoTalkRegionForest);
+	addButton(2, "Deepwood", campMichikoTalkRegionDeepwood);
+	addButton(3, "Lake", campMichikoTalkRegionLake);
+	addButton(4, "Desert", campMichikoTalkRegionDesert);
+	//5 Mountains
+	//6 High Mountains
+	//7 Battlefield
+	//8 Plains
+	//9 Swamp
+	//10 Bogs
+	//11 Blight Ridge
+	//12 Beach
+	//13 Ocean
+	//14 Deep Sea
+	//15 Glacial Rift
+	//16 Vulcanic Crag
+	addButton(14, "Back", campMichikoTalkMM);
+}
+public function campMichikoTalkRegionWasteland():void {
+	clearOutput();
+	outputText("You inquire about the Mareth wasteland. The endless expanse of nothingness that spans most of the area.\n\n");
+	outputText("\"<i>Mareth is a big place [name] but just because it appears empty does not mean it is. Several people have been spotted wandering the area, including that weirdo merchant Giacomo. There's also rumors that  a goblin trader has settled up shop there somewhere, that is if you can find her of course. It's also possible one or more of the cave systems in the area could be inhabited.</i>\"\n\n");
+	doNext(campMichikoTalkRegion);
+	cheatTime2(15);
+}
+public function campMichikoTalkRegionForest():void {
+	clearOutput();
+	outputText("What can Michiko tell you about the Woods.\n\n");
+	outputText("\"<i>The woods are both one of the purest areas of Mareth and one of the most corrupt. Depending on your luck you could either run across a bee girl or a Tentacle beast. The bees, despite using hypnosis and such to lull victims into accepting their eggs, are actually pure of soul and intentions. I've heard several rumors about the area such as that a monk in exile wanders the place trying to cleanse the corruption ");
+	outputText("or that a weird hybrid between a plant and cow wanders about. There’s even rumors that somewhere in the woods is a hidden pure grove guarded by a unicorn, for all I know the race is almost extinct. Should you seek the unicorn out I would advise you come to it as a virgin, they are more trustful of virgins, never knew why.</i>\"\n\n");
+	doNext(campMichikoTalkRegion);
+	cheatTime2(15);
+}
+public function campMichikoTalkRegionDeepwood():void {
+	clearOutput();
+	outputText("You ask Michiko if she got anything on the deep woods.\n\n");
+	outputText("\"<i>Yea I kind of do, the place is nasty as it's pretty much the source of all the corruption in the forest. At first you would think it’s just that sealed demon Akhbal but truth be told it goes way deeper than that, it's like the deepwoods became a refuge for fiends ranging from the infamous Erlking’s Wyld hunt to the dark mistress of the twilight grove. Amidst all this corruption the kitsunes somehow still manage to thrive in secrecy ");
+	outputText("while the fairies flutter around. Be wary of who you trust in those woods.</i>\"\n\n");
+	doNext(campMichikoTalkRegion);
+	cheatTime2(15);
+}
+public function campMichikoTalkRegionLake():void {
+	clearOutput();
+	outputText("You inquire about Mareth’s largest lake. What exactly can you expect there?\n\n");
+	outputText("\"<i>Well aside from old Whitney’s farm, there's the ruins of an old mousefolk town, they say it’s haunted. On the side of the locals though a large community of shark girls reside in the lake and you may run across a slime girl or two, also from the lake. I highly advise against swimming there unless you would favor getting stung by an anemone. Now that’s the nicer locales, amongst the nasties are the Ooze, ");
+	outputText("always at war with the slimes, and the cultist of the fetish, a faction of sex crazed lunatics worshiping demonised ex gods. There's a rumor Marae might still live somewhere on an island at the center of the lake, might be worth investigating.</i>\"\n\n");
+	doNext(campMichikoTalkRegion);
+	cheatTime2(15);
+}
+public function campMichikoTalkRegionDesert():void {
+	clearOutput();
+	outputText("What can Michiko tell you about the desert area.\n\n");
+	outputText("\"<i>Ain't much to see there, the place is almost as empty as the wasteland, at least at a first glance. Empty is a very suggestive word because several things hints at the presence of a hidden city somewhere in the desert aside from the many ant fortresses. If you are the adventuring sort you may run into Sand witches across the desert, they may or may not be helpful. Aside from them there has been spottings of a Naga or two living in there. ");
+	outputText("I recommend you keep watch for traps and most of all sand traps when wandering around there, these bugs live for a chance to stick their eggs down someone’s butt. Demons like almost everywhere else also have been spotted partying in the desert.</i>\"\n\n");
+	doNext(campMichikoTalkRegion);
+	cheatTime2(15);
+}/*
+public function campMichikoTalkRegion():void {
+	clearOutput();
+	outputText("\n\n");
+	outputText("\"<i>");
+	outputText("</i>\"\n\n");
+	doNext(campMichikoTalkRegion);
+	cheatTime2(15);
+}
+public function campMichikoTalkRegion():void {
+	clearOutput();
+	outputText("\n\n");
+	outputText("\"<i>");
+	outputText("</i>\"\n\n");
+	doNext(campMichikoTalkRegion);
+	cheatTime2(15);
+}
+public function campMichikoTalkRegion():void {
+	clearOutput();
+	outputText("\n\n");
+	outputText("\"<i>");
+	outputText("</i>\"\n\n");
+	doNext(campMichikoTalkRegion);
+	cheatTime2(15);
+}
+public function campMichikoTalkRegion():void {
+	clearOutput();
+	outputText("\n\n");
+	outputText("\"<i>");
+	outputText("</i>\"\n\n");
+	doNext(campMichikoTalkRegion);
+	cheatTime2(15);
+}*/
 public function campMichikoTalkMarriage():void {
 	clearOutput();
-	outputText("With the whole demon invasion and sex everywhere you're surprised love  still manages to blossom around Mareth in one way or another with people not going Aphrodiphobic. Thinking on it you've never considered to ask any of your partners how courtship and weddings even happen here if such a concept as matrimony and faithfulness still hold any shadow of a value here.\n\n");
+	outputText("With the whole demon invasion and sex everywhere you're surprised love still manages to blossom around Mareth in one way or another with people not going Aphrodiphobic. Thinking on it you've never considered to ask any of your partners how courtship and weddings even happen here if such a concept as matrimony and faithfulness still hold any shadow of a value here.\n\n");
 	outputText("\"<i>Oh courtship in Mareth is no different from other worlds, people fall in love and hang together all the same, sometimes they even marry. This said, Marriage on Mareth especially in those difficult times has been given some leniency. A man or woman may have multiple partners but as a rule of thumb you only marry once. It is also customary for the proposal to include a wedding ring. ");
 	outputText("Whoever you chose becomes the official queen or king of your would be harem by principe. Loving people equally? Ah... what a lie, everyone has a favorite whether they want to admit it or not.</i>\"\n\n");
 	outputText("So in order to marry someone you just need an engagement ring?\n\n");
@@ -85,28 +187,14 @@ public function campMichikoTalkMarriage():void {
 	doNext(campMichikoTalkMM);
 	cheatTime2(15);
 }
-public function campMichikoTalk1():void {
+public function campMichikoTalk7():void {
 	clearOutput();
 	outputText("\n\n");
 	outputText("\"<i></i>\"\n\n");
 	doNext(campMichikoTalkMM);
 	cheatTime2(15);
 }
-public function campMichikoTalk2():void {
-	clearOutput();
-	outputText("\n\n");
-	outputText("\"<i></i>\"\n\n");
-	doNext(campMichikoTalkMM);
-	cheatTime2(15);
-}
-public function campMichikoTalk3():void {
-	clearOutput();
-	outputText("\n\n");
-	outputText("\"<i></i>\"\n\n");
-	doNext(campMichikoTalkMM);
-	cheatTime2(15);
-}
-public function campMichikoTalk4():void {
+public function campMichikoTalk6():void {
 	clearOutput();
 	outputText("\n\n");
 	outputText("\"<i></i>\"\n\n");
@@ -120,7 +208,28 @@ public function campMichikoTalk5():void {
 	doNext(campMichikoTalkMM);
 	cheatTime2(15);
 }
-public function campMichikoTalk6():void {
+public function campMichikoTalk4():void {
+	clearOutput();
+	outputText("\n\n");
+	outputText("\"<i></i>\"\n\n");
+	doNext(campMichikoTalkMM);
+	cheatTime2(15);
+}
+public function campMichikoTalk3():void {
+	clearOutput();
+	outputText("\n\n");
+	outputText("\"<i></i>\"\n\n");
+	doNext(campMichikoTalkMM);
+	cheatTime2(15);
+}
+public function campMichikoTalk2():void {
+	clearOutput();
+	outputText("\n\n");
+	outputText("\"<i></i>\"\n\n");
+	doNext(campMichikoTalkMM);
+	cheatTime2(15);
+}
+public function campMichikoTalk1():void {
 	clearOutput();
 	outputText("\n\n");
 	outputText("\"<i></i>\"\n\n");

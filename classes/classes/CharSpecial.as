@@ -398,6 +398,7 @@ import classes.Items.*;
 	
 			player.createPerk(PerkLib.StrongBack, 0, 0, 0, 0);
 			player.createPerk(PerkLib.StrongBack2, 0, 0, 0, 0);
+			player.createPerk(PerkLib.StrongBack3, 0, 0, 0, 0);
 	
 			//Equipment: 
 			//Weapon: Warhammer
@@ -416,9 +417,10 @@ import classes.Items.*;
 			player.itemSlot1.setItemAndQty(consumables.LACTAID,5);
 			player.itemSlot2.setItemAndQty(consumables.GROPLUS,5);
 			player.itemSlot3.setItemAndQty(consumables.BIMBOLQ,1);
-			player.itemSlot4.unlocked = true;
 			player.itemSlot4.setItemAndQty(armors.BIMBOSK,1);
-			player.itemSlot5.unlocked = true;
+			player.itemSlot6.unlocked = true;
+			player.itemSlot7.unlocked = true;
+			player.itemSlot8.unlocked = true;
 			outputText("You've got large breasts prone to lactation.  You aren't sure WHY you got chosen as a champion, but with your considerable strength, you're sure you'll do a good job protecting Ingnam.");
 		}
 		
@@ -1540,9 +1542,11 @@ import classes.Items.*;
 			player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeScholar)) player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
 			player.createPerk(PerkLib.StrongBack,0,0,0,0);
-			player.itemSlot4.unlocked = true;
-			player.itemSlot5.unlocked = true;
 			player.createPerk(PerkLib.StrongBack2,0,0,0,0);
+			player.createPerk(PerkLib.StrongBack3,0,0,0,0);
+			player.itemSlot6.unlocked = true;
+			player.itemSlot7.unlocked = true;
+			player.itemSlot8.unlocked = true;
 			if (!player.hasPerk(PerkLib.PastLifeSlacker)) player.createPerk(PerkLib.HistorySlacker,0,0,0,0);
 			player.str += 4;
 			player.tou += 4;
@@ -1681,8 +1685,9 @@ import classes.Items.*;
 				if (player.teaseLevel < 3) player.teaseLevel = 3; }			
 			
 			// almost compulsive hoarder, start with backpack, chests and racks... never enough storage space
-			if (player.findPerk(PerkLib.StrongBack) < 0) { player.createPerk(PerkLib.StrongBack, 0, 0, 0, 0); player.itemSlot4.unlocked = true; }
-			if (player.findPerk(PerkLib.StrongBack2) < 0) { player.createPerk(PerkLib.StrongBack2, 0, 0, 0, 0); player.itemSlot5.unlocked = true; }
+			if (player.findPerk(PerkLib.StrongBack) < 0) { player.createPerk(PerkLib.StrongBack, 0, 0, 0, 0); player.itemSlot6.unlocked = true; }
+			if (player.findPerk(PerkLib.StrongBack2) < 0) { player.createPerk(PerkLib.StrongBack2, 0, 0, 0, 0); player.itemSlot7.unlocked = true; }
+			if (player.findPerk(PerkLib.StrongBack3) < 0) { player.createPerk(PerkLib.StrongBack3, 0, 0, 0, 0); player.itemSlot8.unlocked = true; }
 			var i:int = 0;			
 			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 5, 0, 0, 0);			
 			if (player.hasKeyItem("Camp - Chest") < 0) { player.createKeyItem("Camp - Chest", 0, 0, 0, 0); for (i = 0; i < 6; i++) inventory.createStorage(); }			

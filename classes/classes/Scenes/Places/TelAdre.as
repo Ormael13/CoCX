@@ -603,6 +603,9 @@ public function carpentryShopBuyNails():void {
 		addButton(2, "Buy 50", carpentryShopBuyNailsAmount, 50);
 		addButton(3, "Buy 75", carpentryShopBuyNailsAmount, 75);
 		addButton(4, "Buy 100", carpentryShopBuyNailsAmount, 100);
+		addButton(5, "Buy 150", carpentryShopBuyNailsAmount, 150);
+		addButton(6, "Buy 200", carpentryShopBuyNailsAmount, 200);
+		addButton(7, "Buy 300", carpentryShopBuyNailsAmount, 300);
 		addButton(14, "Back", carpentryShopInside);
 	}
 	else {
@@ -657,10 +660,13 @@ public function carpentryShopBuyWood():void {
 	}
 	menu();
 	addButton(0, "Buy 10", carpentryShopBuyWoodAmount, 10);
-	addButton(1, "Buy 20", carpentryShopBuyWoodAmount, 20);
-	addButton(2, "Buy 30", carpentryShopBuyWoodAmount, 30);
-	addButton(3, "Buy 40", carpentryShopBuyWoodAmount, 40);
-	addButton(4, "Buy 50", carpentryShopBuyWoodAmount, 50);
+	addButton(1, "Buy 25", carpentryShopBuyWoodAmount, 25);
+	addButton(2, "Buy 50", carpentryShopBuyWoodAmount, 50);
+	addButton(3, "Buy 75", carpentryShopBuyWoodAmount, 75);
+	addButton(4, "Buy 100", carpentryShopBuyWoodAmount, 100);
+	addButton(5, "Buy 150", carpentryShopBuyWoodAmount, 150);
+	addButton(6, "Buy 200", carpentryShopBuyWoodAmount, 200);
+	addButton(7, "Buy 300", carpentryShopBuyWoodAmount, 300);
 	addButton(14, "Back", carpentryShopInside);
 }	
 
@@ -710,10 +716,13 @@ public function carpentryShopBuyStone():void {
 	}
 	menu();
 	addButton(0, "Buy 10", carpentryShopBuyStoneAmount, 10);
-	addButton(1, "Buy 20", carpentryShopBuyStoneAmount, 20);
-	addButton(2, "Buy 30", carpentryShopBuyStoneAmount, 30);
-	addButton(3, "Buy 40", carpentryShopBuyStoneAmount, 40);
-	addButton(4, "Buy 50", carpentryShopBuyStoneAmount, 50);
+	addButton(1, "Buy 25", carpentryShopBuyStoneAmount, 25);
+	addButton(2, "Buy 50", carpentryShopBuyStoneAmount, 50);
+	addButton(3, "Buy 75", carpentryShopBuyStoneAmount, 75);
+	addButton(4, "Buy 100", carpentryShopBuyStoneAmount, 100);
+	addButton(5, "Buy 150", carpentryShopBuyStoneAmount, 150);
+	addButton(6, "Buy 200", carpentryShopBuyStoneAmount, 200);
+	addButton(7, "Buy 300", carpentryShopBuyStoneAmount, 300);
 	addButton(14, "Back", carpentryShopInside);
 }
 
@@ -762,12 +771,15 @@ public function carpentryShopSellNails():void {
 		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200")
 	}
 	menu();
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 10) addButton(0, "Sell 10", carpentryShopSellNailsAmount, 10);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 25) addButton(1, "Sell 25", carpentryShopSellNailsAmount, 25);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 50) addButton(2, "Sell 50", carpentryShopSellNailsAmount, 50);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 75) addButton(3, "Sell 75", carpentryShopSellNailsAmount, 75);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) addButton(3, "Sell 100", carpentryShopSellNailsAmount, 100);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 0) addButton(4, "Sell All", carpentryShopSellNailsAmount, flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]);
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 1) addButton(0, "Sell 1", carpentryShopSellNailsAmount, 1);
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 5) addButton(1, "Sell 5", carpentryShopSellNailsAmount, 5);
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 10) addButton(2, "Sell 10", carpentryShopSellNailsAmount, 10);
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 25) addButton(3, "Sell 25", carpentryShopSellNailsAmount, 25);
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 50) addButton(4, "Sell 50", carpentryShopSellNailsAmount, 50);
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) addButton(5, "Sell 100", carpentryShopSellNailsAmount, 100);
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200) addButton(6, "Sell 200", carpentryShopSellNailsAmount, 200);
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300) addButton(7, "Sell 300", carpentryShopSellNailsAmount, 300);
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 0) addButton(8, "Sell All", carpentryShopSellNailsAmount, flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]);
 	addButton(14, "Back", carpentryShopInside);
 }
 
@@ -812,7 +824,11 @@ public function carpentryShopSellWood():void {
 	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 5) addButton(1, "Sell 5", carpentryShopSellWoodAmount, 5);
 	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 10) addButton(2, "Sell 10", carpentryShopSellWoodAmount, 10);
 	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 25) addButton(3, "Sell 25", carpentryShopSellWoodAmount, 25);
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 0) addButton(4, "Sell All", carpentryShopSellWoodAmount, flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES]);
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50) addButton(4, "Sell 50", carpentryShopSellWoodAmount, 50);
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100) addButton(5, "Sell 100", carpentryShopSellWoodAmount, 100);
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 200) addButton(6, "Sell 200", carpentryShopSellWoodAmount, 200);
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 300) addButton(7, "Sell 300", carpentryShopSellWoodAmount, 300);
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 0) addButton(8, "Sell All", carpentryShopSellWoodAmount, flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES]);
 	addButton(14, "Back", carpentryShopInside);
 }	
 
@@ -857,7 +873,11 @@ public function carpentryShopSellStone():void {
 	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 5) addButton(1, "Sell 5", carpentryShopSellStoneAmount, 5);
 	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 10) addButton(2, "Sell 10", carpentryShopSellStoneAmount, 10);
 	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 25) addButton(3, "Sell 25", carpentryShopSellStoneAmount, 25);
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 0) addButton(4, "Sell All", carpentryShopSellStoneAmount, flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES]);
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 50) addButton(4, "Sell 50", carpentryShopSellStoneAmount, 50);
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 100) addButton(5, "Sell 100", carpentryShopSellStoneAmount, 100);
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 200) addButton(6, "Sell 200", carpentryShopSellStoneAmount, 200);
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 300) addButton(7, "Sell 300", carpentryShopSellStoneAmount, 300);
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 0) addButton(8, "Sell All", carpentryShopSellStoneAmount, flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES]);
 	addButton(14, "Back", carpentryShopInside);
 }
 

@@ -8,10 +8,21 @@ import classes.*;
 import classes.GlobalFlags.*;
 import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Holidays;
+import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
+import classes.display.SpriteDb;
 
 public class Cinderbloom extends Alraune
 	{
+		override public function defeated(hpVictory:Boolean):void
+		{
+			SceneLib.forest.alrauneScene.alrauneDeepwoodsWon();
+		}
+
+		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
+		{
+			SceneLib.forest.alrauneScene.alrauneDeepwoodsLost();
+		}
 		
 		public function Cinderbloom() 
 		{
@@ -24,7 +35,7 @@ public class Cinderbloom extends Alraune
 			}
 			else {
 				this.short = "cinderbloom alraune";
-				this.long = "You are fighting against an Cinderbloom, an intelligent plant with the torso of a woman and the lower body of a giant flower. She seems really keen on raping you.";
+				this.long = "You are fighting against a Cinderbloom, an intelligent plant with the torso of a woman and the lower body of a giant flower. She seems really keen on raping you.";
 				this.skinTone = "chocolate";
 				this.hairColor = "blonde";
 			}

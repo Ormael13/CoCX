@@ -33,7 +33,7 @@ import classes.Scenes.NPCs.MagnoliaFollower;
 use namespace CoC;
 
 	public class Inventory extends BaseContent {
-		private static const inventorySlotName:Array = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"];
+		private static const inventorySlotName:Array = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen"];
 		
 		private var itemStorage:Array;
 		private var pearlStorage:Array;
@@ -70,9 +70,9 @@ use namespace CoC;
 		
 		public function itemGoNext():void { if (callNext != null) doNext(callNext); }
 		
-		public function inventoryMenu():void {
+		public function inventoryMenu(page:int = 1):void {
 			var x:int;
-			var foundItem:Boolean = false;
+			//var foundItem:Boolean = false;
             if (CoC.instance.inCombat) {
                 callNext = inventoryCombatHandler; //Player will return to combat after item use
 			}
@@ -104,14 +104,25 @@ use namespace CoC;
 			if (player.keyItems.length > 0) outputText("<b><u>\nKey Items:</u></b>\n");
 			for (x = 0; x < player.keyItems.length; x++) outputText(player.keyItems[x].keyName + "\n");
 			menu();
-			for (x = 0; x < 10; x++) {
-				if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
-					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), useItemInInventory, x);
-					foundItem = true;
+			if (page == 1) {
+				for (x = 0; x < 9; x++) {
+					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
+						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), useItemInInventory, x);
+						//foundItem = true;
+					}
 				}
+				if (getMaxSlots() > 9) addButton(9, "Next", inventoryMenu, page + 1);
 			}
-
-if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
+			if (page == 2) {
+				for (x = 9; x < 18; x++) {
+					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
+						addButton(x-9, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), useItemInInventory, x);
+						//foundItem = true;
+					}
+				}
+				addButton(9, "Prev", inventoryMenu, page - 1);
+			}
+			if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
                 var miscNieve:Boolean = Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
                 var miscHolli:Boolean         = flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 || flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4);
 				if (miscNieve
@@ -120,7 +131,8 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 					|| player.hasKeyItem("Gryphon Statuette") >= 0
 					|| player.hasKeyItem("Peacock Statuette") >= 0
 					|| flags[kFLAGS.ANEMONE_KID] > 0
-					|| flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
+					|| flags[kFLAGS.ALRAUNE_SEEDS] > 0
+					|| (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 1 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8)) {
 					if (miscNieve) {
 						if (flags[kFLAGS.NIEVE_STAGE] == 1)
 							outputText("\nThere's some odd snow here that you could do something with...\n");
@@ -149,14 +161,14 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 					addButton(12, "Sky P. Pearl", SkyPoisonPearlMenu);
 				}
 			}
-			if (foundItem) {
+			//if (foundItem) {
                 if (CoC.instance.inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv1(StatusEffects.Sealed) == 3) {
                     outputText("\nYou reach for your items, but you just can't get your pouches open.  <b>Your ability to use items was sealed, and now you've wasted a chance to attack!</b>\n\n");
                     SceneLib.combat.enemyAIImpl();
                     return;
 				}
 				outputText("\nWhich item will you use? (To discard unwanted items, hold Shift then click the item.)");
-			}
+			//}
 			outputText("\n<b>Capacity:</b> " + getOccupiedSlots() + " / " + getMaxSlots());
             if (CoC.instance.inCombat)
                 addButton(14, "Back", SceneLib.combat.combatMenu, false); //Player returns to the combat menu on cancel
@@ -465,13 +477,14 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 		}
 		
 		public function getMaxSlots():int {
-			var slots:int = 3;
+			var slots:int = 5;
 			if (player.findPerk(PerkLib.StrongBack) >= 0) slots++;
 			if (player.findPerk(PerkLib.StrongBack2) >= 0) slots++;
+			if (player.findPerk(PerkLib.StrongBack3) >= 0) slots++;
 			slots += player.keyItemv1("Backpack");
-			//Constrain slots to between 3 and 10.
-			if (slots < 3) slots = 3;
-			if (slots > 10) slots = 10;
+			//Constrain slots to between 5 and 18.
+			if (slots < 5) slots = 5;
+			if (slots > 18) slots = 18;
 			return slots;
 		}
 		public function getOccupiedSlots():int {
@@ -903,7 +916,6 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 				addButton(12, "Vehicle", unequipVehicle).hint(player.vehicles.description, capitalizeFirstLetter(player.vehicles.name));
 			}/*
 			zrobić sloty:
-			może jeszcze 1-3 kolejne ringi (poza pierwszym orginalnym slotem)
 			coś w stylu slotu na prawdziwe akcesoria
 			może coś na item związany z soulforce - ala latający miecz lub takie tam itemy ^^
 			przy dodawaniu tych slotow popatrzec czy ktorys nie bedzie musial uzywac tego fragmentu kodu:
@@ -916,18 +928,31 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 		}
 		//Unequip!
 		private function unequipWeapon():void {
-			takeItem(player.setWeapon(WeaponLib.FISTS), inventoryMenu);
+			if (player.weaponName == "Aether (Dex)") {
+				player.weapon.removeText();
+				player.setWeapon(WeaponLib.FISTS);
+				doNext(manageEquipment);
+			}
+			else takeItem(player.setWeapon(WeaponLib.FISTS), inventoryMenu);
 		}
 		private function unequipWeaponRange():void {
 			takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), inventoryMenu);
 		}
+		public function unequipShield():void {
+			if (player.shieldName == "Aether (Sin)") {
+				player.shield.removeText();
+				player.setShield(ShieldLib.NOTHING);
+				doNext(manageEquipment);
+			}
+			else takeItem(player.setShield(ShieldLib.NOTHING), inventoryMenu);
+		}
 		public function unequipArmor():void {
-			if (player.armorName != "goo armor") takeItem(player.setArmor(ArmorLib.NOTHING), inventoryMenu); 
-			else { //Valeria belongs in the camp, not in your inventory!
+			if (player.armorName == "goo armor") { //Valeria belongs in the camp, not in your inventory!
 				player.armor.removeText();
 				player.setArmor(ArmorLib.NOTHING);
 				doNext(manageEquipment);
 			}
+			else takeItem(player.setArmor(ArmorLib.NOTHING), inventoryMenu);
 		}
 		public function unequipUpperwear():void {
 			takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR), inventoryMenu);
@@ -955,9 +980,6 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 		}
 		public function unequipVehicle():void {
 			takeItem(player.setVehicle(VehiclesLib.NOTHING), inventoryMenu);
-		}
-		public function unequipShield():void {
-			takeItem(player.setShield(ShieldLib.NOTHING), inventoryMenu);
 		}
 
 		//Pick item to take from storage

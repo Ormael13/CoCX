@@ -68,16 +68,33 @@ public class GameSettings extends BaseContent {
 			else outputText("Difficulty: <font color=\"#808000\"><b>Normal</b></font>\n No opponent stats modifiers. You can resume from bad-ends with penalties.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) {
-			outputText("Difficulty: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 50% more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does 15% more damage and giving ~10% more EXP. Bad-ends can ruin your game.");
+			outputText("Difficulty: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 1,5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does 15% more damage and giving ~10% more EXP. Bad-ends can ruin your game.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) {
-			outputText("Difficulty: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 100% more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does 30% more damage and giving ~20% more EXP.");
+			outputText("Difficulty: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 2x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does 30% more damage and giving ~20% more EXP.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) {
-			outputText("Difficulty: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 200% more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does more 50% damage and giving ~30% more EXP.");
+			outputText("Difficulty: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 3x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does more 50% damage and giving ~30% more EXP.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) {
-			outputText("Difficulty: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 400% more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does more 100% damage and giving ~40% more EXP.");
+			outputText("Difficulty: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does more 100% damage and giving ~40% more EXP.");
+		}
+
+		outputText("\n\n");
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 0) {
+			outputText("Difficulty: <font color=\"#808000\"><b>Normal</b></font>\n No opponent secondary stats modifiers.");
+		}
+		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
+			outputText("Difficulty: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+		}
+		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) {
+			outputText("Difficulty: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 10x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+		}
+		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) {
+			outputText("Difficulty: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 25x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+		}
+		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) {
+			outputText("Difficulty: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 100x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 
 		/*if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG])
@@ -246,6 +263,7 @@ public class GameSettings extends BaseContent {
 		addButton(6, "Spells Cooldowns", toggleSpellsCooldowns).hint("Toggles Spells cooldowns. If enabled, spells would have cooldowns and they will be stronger.");
 		addButton(8, "Str scalling", toggleStrScaling).hint("Toggles Strength scalling for all attacks using it. If enabled, strength scaling would be less randomn with big generaly a bit higher values on averange.");
 		addButton(9, "Spe scalling", toggleSpeScaling).hint("Toggles Speed scalling for all attacks using it. If enabled, speed scaling would be less randomn with big generaly a bit higher values on averange.");
+		addButton(10, "Sec.Mon.Stat", difficultySelectionMenu2).hint("Adjust monsters secondary stats multi to make game easier or harder.");
 		addButton(14, "Back", settingsScreenGameSettings);
 	}
 
@@ -278,10 +296,10 @@ public class GameSettings extends BaseContent {
 		outputText("You can choose a difficulty to set how hard battles will be.\n");
 		outputText("\n<b>Easy:</b> -50% damage, can ignore bad-ends.");
 		outputText("\n<b>Normal:</b> No stats changes.");
-		outputText("\n<b>Hard:</b> +25% HP, +15% damage.");
-		outputText("\n<b>Nightmare:</b> +50% HP, +30% damage.");
-		outputText("\n<b>Extreme:</b> +100% HP, +50% damage.");
-		outputText("\n<b>Xianxia:</b> +200% HP, +100% damage.");
+		outputText("\n<b>Hard:</b> 1,5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, +15% damage, ~10% more EXP.");
+		outputText("\n<b>Nightmare:</b> 2x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, +30% damage, ~20% more EXP.");
+		outputText("\n<b>Extreme:</b> 3x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, +50% damage, ~30% more EXP.");
+		outputText("\n<b>Xianxia:</b> 5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, +100% damage, ~40% more EXP.");
 		menu();
 		addButton(0, "Easy", chooseDifficulty, -1);
 		addButton(1, "Normal", chooseDifficulty, 0);
@@ -302,6 +320,28 @@ public class GameSettings extends BaseContent {
 			flags[kFLAGS.GAME_DIFFICULTY]       = difficulty;
 		}
 		settingsScreenGameSettings();
+	}
+	
+	public function difficultySelectionMenu2():void {
+		clearOutput();
+		outputText("You can choose a difficulty to set how hard battles will be.\n");
+		outputText("\n<b>Normal:</b> No stats changes.");
+		outputText("\n<b>Hard:</b> 2x multi for secondary stats for monsters.");
+		outputText("\n<b>Nightmare:</b> 5x multi for secondary stats for monsters.");
+		outputText("\n<b>Extreme:</b> 10x multi for secondary stats for monsters.");
+		outputText("\n<b>Xianxia:</b> 25x multi for secondary stats for monsters.");
+		menu();
+		addButton(0, "Normal", chooseDifficulty2, 0);
+		addButton(1, "Hard", chooseDifficulty2, 1);
+		addButton(2, "Nightmare", chooseDifficulty2, 2);
+		addButton(3, "EXTREME", chooseDifficulty2, 3);
+		addButton(4, "XIANXIA", chooseDifficulty2, 4);
+		addButton(14, "Back", settingsScreenGameSettings2);
+	}
+
+	public function chooseDifficulty2(difficulty:int = 0):void {
+		flags[kFLAGS.SECONDARY_STATS_SCALING] = difficulty;
+		settingsScreenGameSettings2();
 	}
 
 //Not used anymore as there's difficulty settings.

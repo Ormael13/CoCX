@@ -1769,6 +1769,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 	}
 	//Michiko
 	if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) {
+		outputText("Michiko is sitting on a tree stump, busy writing her latest notes about your adventures.\n\n");
 		buttons.add( "Michiko", SceneLib.michikoFollower.campMichikoMainMenu).hint("Check up on Michiko.");
 	}
 	//Sidonie
@@ -1916,11 +1917,11 @@ private function SparrableNPCsMenu():void {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_1]);
 		else outputText(", (no combat companion)");
 	}/*
-	if () {
+	if (player.hasPerk(PerkLib.IntermediateLeadership)) {
 		if (flags[kFLAGS.PLAYER_COMPANION_2] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_2]);
 		else outputText(", (no combat companion)");
 	}
-	if () {
+	if (player.hasPerk(PerkLib.AdvancedLeadership)) {
 		if (flags[kFLAGS.PLAYER_COMPANION_3] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_3]);
 		else outputText(", (no combat companion)");
 	}*/
@@ -2252,7 +2253,7 @@ private function watchStars():void {
 			outputText("\n\nAh, the familiar Big Dipper. Wait a minute... you remember that constellation back in Ingnam. You swear the star arrangements are nearly the same.");
 			break;
 		default:
-			outputText("\n\nSomehow, one of them spells out \"ERROR\". Maybe you should let Ormael/Aimozg/Oxdeception know?");
+			outputText("\n\nSomehow, one of them spells out \"ERROR\". Maybe you should let Ormael/Aimozg know?");
 	}
 	outputText("\n\nYou let your mind wander and relax.");
 	dynStats("lus", -15, "scale", false);
@@ -4052,7 +4053,11 @@ private function promptSaveUpdate():void {
 /*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 26) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 27;
 		clearOutput();
-		outputText("Text.");
+		outputText("A little Backpack cleanup - nothing to worry about. Or maybe... what will you put into a new and larger inventory? Refound included if nessesary.");
+		if (player.hasKeyItem("Backpack") >= 0) {
+			player.gems += 200 * player.keyItemv1("Backpack");
+			player.removeKeyItem("Backpack");
+		}
 		doNext(doCamp);
 		return;
 	}
@@ -4193,7 +4198,7 @@ private function updateSaveFlags():void {
 		}
 	}
 	//flags[kFLAGS.SHIFT_KEY_DOWN] = 0; //Moved to unFuckSave().
-	outputText("Don't worry. Just save the game and you're good to go. We, Ormael/Aimozg/Oxdeception, will work out the bugs from time to time, while also bringing in cool new stuff!");
+	outputText("Don't worry. Just save the game and you're good to go. We, Ormael/Aimozg, will work out the bugs from time to time, while also bringing in cool new stuff!");
 	doNext(doCamp);
 }
 
@@ -4570,4 +4575,4 @@ private function fixHistory():void {
 }
 */
 }
-}
+}

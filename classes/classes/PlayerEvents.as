@@ -45,13 +45,19 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.cumMultiplier > 19999) player.cumMultiplier = 19999;
 			if (player.ballSize > 400) player.ballSize = 400;
 			var maxSlots:int = inventory.getMaxSlots();
-			player.itemSlot4.unlocked = maxSlots >= 4;
-			player.itemSlot5.unlocked = maxSlots >= 5;
 			player.itemSlot6.unlocked = maxSlots >= 6;
 			player.itemSlot7.unlocked = maxSlots >= 7;
 			player.itemSlot8.unlocked = maxSlots >= 8;
 			player.itemSlot9.unlocked = maxSlots >= 9;
 			player.itemSlot10.unlocked = maxSlots >= 10;
+			player.itemSlot11.unlocked = maxSlots >= 11;
+			player.itemSlot12.unlocked = maxSlots >= 12;
+			player.itemSlot13.unlocked = maxSlots >= 13;
+			player.itemSlot14.unlocked = maxSlots >= 14;
+			player.itemSlot15.unlocked = maxSlots >= 15;
+			player.itemSlot16.unlocked = maxSlots >= 16;
+			player.itemSlot17.unlocked = maxSlots >= 17;
+			player.itemSlot18.unlocked = maxSlots >= 18;
 			if (flags[kFLAGS.SOCK_COUNTER] > 0) {
 				flags[kFLAGS.SOCK_COUNTER]--;
 				if (flags[kFLAGS.SOCK_COUNTER] < 0) flags[kFLAGS.SOCK_COUNTER] = 0;
@@ -510,10 +516,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//No better place for these since the code for the event is part of CoC.as or one of its included files
 			if (flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] > 0) flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC]--; //Vala post-rape countdown
 			if (flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] > 0 && flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] < 500) flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY]++;
-
-if (CoC.instance.model.time.hours > 23) { //Once per day
+			if (CoC.instance.model.time.hours > 23) { //Once per day
                 if (flags[kFLAGS.STAT_GAIN_MODE] == CoC.STAT_GAIN_DAILY) {
-					if (player.level > player.statPoints) {
+					if ((player.level + 1) > player.statPoints) {
 						if (player.level < 6) player.statPoints = 15;
 						else if (player.level >= 6 && player.level < 12) player.statPoints = 18;
 						else if (player.level >= 12 && player.level < 18) player.statPoints = 21;
@@ -845,7 +850,13 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 
 		private function hourlyHunger():Boolean {
 			var needNext:Boolean = false;
-			if ((flags[kFLAGS.HUNGER_ENABLED] > 0 && (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] > 3) && !player.hasPerk(PerkLib.DeadMetabolism)) || prison.inPrison) {
+			var hungerActive:Boolean = false;
+			if (flags[kFLAGS.HUNGER_ENABLED] > 0) hungerActive = true;
+			if (hungerActive) {
+				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 3) hungerActive = false;
+				else if (player.hasPerk(PerkLib.DeadMetabolism)) hungerActive = false;
+			}
+			if (hungerActive || prison.inPrison) {
 				var multiplier:Number = 1.0;
 				if (player.findPerk(PerkLib.Survivalist) >= 0) multiplier -= 0.2;
 				if (player.findPerk(PerkLib.Survivalist2) >= 0) multiplier -= 0.2;
@@ -2125,3 +2136,4 @@ if (CoC.instance.model.time.hours > 23) { //Once per day
 		//End of Interface Implementation
 	}
 }
+

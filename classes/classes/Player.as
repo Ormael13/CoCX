@@ -64,7 +64,15 @@ use namespace CoC;
 			itemSlot8 = new ItemSlotClass();
 			itemSlot9 = new ItemSlotClass();
 			itemSlot10 = new ItemSlotClass();
-			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5, itemSlot6, itemSlot7, itemSlot8, itemSlot9, itemSlot10];
+			itemSlot11 = new ItemSlotClass();
+			itemSlot12 = new ItemSlotClass();
+			itemSlot13 = new ItemSlotClass();
+			itemSlot14 = new ItemSlotClass();
+			itemSlot15 = new ItemSlotClass();
+			itemSlot16 = new ItemSlotClass();
+			itemSlot17 = new ItemSlotClass();
+			itemSlot18 = new ItemSlotClass();
+			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5, itemSlot6, itemSlot7, itemSlot8, itemSlot9, itemSlot10, itemSlot11, itemSlot12, itemSlot13, itemSlot14, itemSlot15, itemSlot16, itemSlot17, itemSlot18];
 		}
 		
 		protected final function outputText(text:String, clear:Boolean = false):void
@@ -131,6 +139,14 @@ use namespace CoC;
 		public var itemSlot8:ItemSlotClass;
 		public var itemSlot9:ItemSlotClass;
 		public var itemSlot10:ItemSlotClass;
+		public var itemSlot11:ItemSlotClass;
+		public var itemSlot12:ItemSlotClass;
+		public var itemSlot13:ItemSlotClass;
+		public var itemSlot14:ItemSlotClass;
+		public var itemSlot15:ItemSlotClass;
+		public var itemSlot16:ItemSlotClass;
+		public var itemSlot17:ItemSlotClass;
+		public var itemSlot18:ItemSlotClass;
 		public var itemSlots:Array;
 		
 		public var prisonItemSlots:Array = [];
@@ -4736,6 +4752,8 @@ use namespace CoC;
 				kitsuneCounter++;
 			if (findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
 				kitsuneCounter++;
+			if (findPerk(PerkLib.KitsunesDescendant) >= 0 || findPerk(PerkLib.BloodlineKitsune) >= 0)
+				kitsuneCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				kitsuneCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && kitsuneCounter >= 4)
@@ -4805,6 +4823,8 @@ use namespace CoC;
 				dragonCounter++;
 			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
 				dragonCounter++;
+			if (findPerk(PerkLib.DragonsDescendant) >= 0 || findPerk(PerkLib.BloodlineDragon) >= 0)
+				dragonCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				dragonCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && dragonCounter >= 4)
@@ -5730,9 +5750,11 @@ use namespace CoC;
 			if (elfCounter >= 11) {
 				if (wings.type == Wings.)
 					elfCounter++;
-			}
+			}*/
+			if (findPerk(PerkLib.ElfsDescendant) >= 0 || findPerk(PerkLib.BloodlineElf) >= 0)
+				elfCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
-				elfCounter += 50;*/
+				elfCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && elfCounter >= 4)
 				elfCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && elfCounter >= 8)
@@ -6118,13 +6140,13 @@ use namespace CoC;
 		public function yukiOnnaScore():Number {
 			Begin("Player","racialScore","yuki onna");
 			var yukiOnnaCounter:Number = 0;
-			if (skinTone == "snow white")
+			if (skinTone == "snow white" || skinTone == "pale blue")
 				yukiOnnaCounter++;
 			if (skinAdj == "cold")
 				yukiOnnaCounter++;
 			if (eyes.colour == "light purple")
 				yukiOnnaCounter++;
-			if (hairColor == "snow white" || hairColor == "silver white" || hairColor == "platinum blonde")
+			if (hairColor == "snow white" || hairColor == "silver white" || hairColor == "platinum blonde" || hairColor == "quartz white")
 				yukiOnnaCounter++;
 			if (hairType == Hair.SNOWY)
 				yukiOnnaCounter++;
@@ -7496,13 +7518,18 @@ use namespace CoC;
 		 * @param	nl
 		 */
 		public function refillHunger(amnt:Number = 0, nl:Boolean = true):void {
-			if ((flags[kFLAGS.HUNGER_ENABLED] > 0 && (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] > 3) || !hasPerk(PerkLib.DeadMetabolism) || flags[kFLAGS.IN_PRISON] > 0) && (!hasPerk(PerkLib.GargoylePure) || !hasPerk(PerkLib.GargoyleCorrupted)))
-			{
-				
+			var hungerActive:Boolean = false;
+			if (flags[kFLAGS.HUNGER_ENABLED] > 0) hungerActive = true;
+			if (hungerActive) {
+				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 3) hungerActive = false;
+				else if (hasPerk(PerkLib.DeadMetabolism)) hungerActive = false;
+				else if (hasPerk(PerkLib.GargoylePure) || hasPerk(PerkLib.GargoyleCorrupted)) hungerActive = false;
+			}
+			if (flags[kFLAGS.IN_PRISON] > 0) hungerActive = true;
+			if (hungerActive) {
 				var oldHunger:Number = hunger;
 				var weightChange:int = 0;
 				var overeatingLimit:int = 0;
-				
 				overeatingLimit += 10;
 				if (findPerk(PerkLib.IronStomach) >= 0) overeatingLimit += 5;
 				if (findPerk(PerkLib.IronStomachEx) >= 0) overeatingLimit += 10;
@@ -7511,8 +7538,7 @@ use namespace CoC;
 				overeatingLimit += 20;overeating ex perk chyba		achiev polegający na przeżyciu x dni bez jedzenie czegokolwiek wic każde podniesienie hunger resetuje ten timer xD
 				overeatingLimit += 40;overeating su perk chyba*/
 				hunger += amnt;
-				if (hunger > maxHunger())
-				{
+				if (hunger > maxHunger()) {
 					while (hunger > (maxHunger() + overeatingLimit) && !SceneLib.prison.inPrison) {
 						weightChange++;
 						hunger -= overeatingLimit;

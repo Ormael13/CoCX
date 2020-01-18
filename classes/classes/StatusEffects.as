@@ -353,7 +353,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Heat:StatusEffectType                           = mk("heat");
 		public static const HinezumiCoat:StatusEffectType                   = mk("Hinezumi Coat");
 		public static const HorseWarning:StatusEffectType                   = mk("horse warning");
-		public static const HydraRegenerationDisabled:StatusEffectType  	= mk("Hydra Acid Breath");
+		public static const HydraRegenerationDisabled:StatusEffectType  	= mk("Hydra Regeneration Disabled");
 		public static const HydraTailsPlayer:StatusEffectType  				= mk("Hydra Tails Player");
 		public static const IcePrisonSpell:StatusEffectType                 = mk("Ice Prison Spell");
 		public static const ImmolationSpell:StatusEffectType                = mk("Immolation Spell");
@@ -457,6 +457,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const MetRathazul:StatusEffectType                    = mk("metRathazul");
 		public static const MetWorms:StatusEffectType                       = mk("metWorms");
 		public static const MetWhitney:StatusEffectType                     = mk("Met Whitney");
+		public static const MetYukiOnna:StatusEffectType                    = mk("metYukiOnna");
 		public static const Milked:StatusEffectType                         = mk("Milked");
 		public static const MinoPlusCowgirl:StatusEffectType                = mk("Mino + Cowgirl");
 		public static const MitziDaughtersBarrels:StatusEffectType          = mk("Mitzi Daughters Barrels");
@@ -470,6 +471,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const PCDaughtersWorkshop:StatusEffectType            = mk("PC Daughters Workshop");
 		public static const PCDaughtersWorkshopSpareParts:StatusEffectType  = mk("PC Daughters Workshop Spare parts");
 		public static const PlainOnaholeUsed:StatusEffectType               = mk("plain onahole used");
+		public static const PlayerHasViewableOutfit:StatusEffectType        = mk("Player Has Viewable Outfit");
 		public static const PlayerPhylactery:StatusEffectType               = mk("Player Phylactery");
 		public static const PhoukaWhiskeyAffect:StatusEffectType            = mk("PhoukaWhiskeyAffect");
 		public static const PostAkbalSubmission:StatusEffectType            = mk("Post Akbal Submission");
@@ -481,24 +483,42 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const RiverDungeonA:StatusEffectType          		= mk("River Dungeon A");
 		public static const RiverDungeonFloorRewards:StatusEffectType       = mk("River Dungeon Floor Rewards");
 		public static const Rut:StatusEffectType                            = mk("rut");
-		public static const SaiyanNumber1a:StatusEffectType          		= mk("Saiyan Number 1a");//LVL-UP counter value / HP multi / Lust multi / Wrath multi
-		public static const SaiyanNumber1b:StatusEffectType          		= mk("Saiyan Number 1b");//Str+Spe multi / Tou multi / Lib multi / Other stats multi
+		public static const SaiyanNumber1a:StatusEffectType          		= mk("Saiyan Number 1a");//NPC status in-game (friend, lover, etc.) / LVL-UP counter value / Training time left for next lvl-up / Wrath multi
+		public static const SaiyanNumber1b:StatusEffectType          		= mk("Saiyan Number 1b");//Str multi / Spe multi / Tou multi / Wis multi
+		public static const SaiyanNumber1c:StatusEffectType          		= mk("Saiyan Number 1c");//Int multi / Lib multi / Sens multi / HP multi
+		public static const SaiyanNumber1d:StatusEffectType          		= mk("Saiyan Number 1d");//Soulforce multi / Lust multi / other secondary bars multi / x
 		public static const SaiyanNumber2a:StatusEffectType          		= mk("Saiyan Number 2a");
 		public static const SaiyanNumber2b:StatusEffectType          		= mk("Saiyan Number 2b");
+		public static const SaiyanNumber2c:StatusEffectType          		= mk("Saiyan Number 2c");
+		public static const SaiyanNumber2d:StatusEffectType          		= mk("Saiyan Number 2d");
 		public static const SaiyanNumber3a:StatusEffectType          		= mk("Saiyan Number 3a");
 		public static const SaiyanNumber3b:StatusEffectType          		= mk("Saiyan Number 3b");
+		public static const SaiyanNumber3c:StatusEffectType          		= mk("Saiyan Number 3c");
+		public static const SaiyanNumber3d:StatusEffectType          		= mk("Saiyan Number 3d");
 		public static const SaiyanNumber4a:StatusEffectType          		= mk("Saiyan Number 4a");
 		public static const SaiyanNumber4b:StatusEffectType          		= mk("Saiyan Number 4b");
+		public static const SaiyanNumber4c:StatusEffectType          		= mk("Saiyan Number 4c");
+		public static const SaiyanNumber4d:StatusEffectType          		= mk("Saiyan Number 4d");
 		public static const SaiyanNumber5a:StatusEffectType          		= mk("Saiyan Number 5a");
 		public static const SaiyanNumber5b:StatusEffectType          		= mk("Saiyan Number 5b");
+		public static const SaiyanNumber5c:StatusEffectType          		= mk("Saiyan Number 5c");
+		public static const SaiyanNumber5d:StatusEffectType          		= mk("Saiyan Number 5d");
 		public static const SaiyanNumber6a:StatusEffectType          		= mk("Saiyan Number 6a");
 		public static const SaiyanNumber6b:StatusEffectType          		= mk("Saiyan Number 6b");
+		public static const SaiyanNumber6c:StatusEffectType          		= mk("Saiyan Number 6c");
+		public static const SaiyanNumber6d:StatusEffectType          		= mk("Saiyan Number 6d");
 		public static const SaiyanNumber7a:StatusEffectType          		= mk("Saiyan Number 7a");
 		public static const SaiyanNumber7b:StatusEffectType          		= mk("Saiyan Number 7b");
+		public static const SaiyanNumber7c:StatusEffectType          		= mk("Saiyan Number 7c");
+		public static const SaiyanNumber7d:StatusEffectType          		= mk("Saiyan Number 7d");
 		public static const SaiyanNumber8a:StatusEffectType          		= mk("Saiyan Number 8a");
 		public static const SaiyanNumber8b:StatusEffectType          		= mk("Saiyan Number 8b");
+		public static const SaiyanNumber8c:StatusEffectType          		= mk("Saiyan Number 8c");
+		public static const SaiyanNumber8d:StatusEffectType          		= mk("Saiyan Number 8d");
 		public static const SaiyanNumber9a:StatusEffectType          		= mk("Saiyan Number 9a");
 		public static const SaiyanNumber9b:StatusEffectType          		= mk("Saiyan Number 9b");
+		public static const SaiyanNumber9c:StatusEffectType          		= mk("Saiyan Number 9c");
+		public static const SaiyanNumber9d:StatusEffectType          		= mk("Saiyan Number 9d");
 		public static const SharkGirl:StatusEffectType                      = mk("Shark-Girl");
 		public static const ShieldingSpell:StatusEffectType                 = mk("Shielding Spell");
 		public static const ShiraOfTheEastFoodBuff1:StatusEffectType        = mk("Shira of the east food buff part 1");
@@ -559,10 +579,12 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TookBlessedShield:StatusEffectType              = mk("Took Blessed Shield");
 		public static const TookBlessedStaff:StatusEffectType               = mk("Took Blessed Staff");
 		public static const TookBlessedSword:StatusEffectType               = mk("Took Blessed Sword");
-		public static const WildMalicore:StatusEffectType                   = mk("Wild Malicore");
+		public static const WildMalikore:StatusEffectType                   = mk("Wild Malikore");
 		public static const WildManticore:StatusEffectType                  = mk("Wild Manticore");
 		public static const VampireThirst:StatusEffectType                  = VampireThirstEffect.TYPE;
 		public static const YetiScarf:StatusEffectType                      = mk("Yeti Scarf");
+		public static const YukiOnnaHairpin:StatusEffectType                = mk("Yuki Onna Hairpin");
+		public static const YukiOnnaKimono:StatusEffectType                 = mk("Yuki Onna Kimono");
 		
 		//Old status plots. DEPRECATED, DO NOT USE. Currently cannot be removed without breaking existing saves.
 		public static const DungeonShutDown:StatusEffectType         = mk("DungeonShutDown");
@@ -651,6 +673,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const HolliBurning:StatusEffectType       = mk("Holli Burning");
 		public static const HypnosisNaga:StatusEffectType  		= mk("Hypnosis Naga");
 		public static const HydraTails:StatusEffectType  		= mk("Hydra Tails");
+		public static const Hypermode:StatusEffectType  		= mk("Hypermode");
+		public static const IceArmor:StatusEffectType           = mk("Ice Armor");
 		public static const Illusion:StatusEffectType           = mk("Illusion");
 		public static const ImpSkip:StatusEffectType            = mk("ImpSkip");
 		public static const ImpUber:StatusEffectType            = mk("ImpUber");
@@ -774,6 +798,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Frostbite:StatusEffectType                 = mkCombat("Frostbite");
 		public static const FrostburnDoT:StatusEffectType              = mkCombat("Frostburn DoT");
 		public static const Frozen:StatusEffectType	                   = mkCombat("Frozen");
+		public static const FrozenLung:StatusEffectType	               = mkCombat("Frozen Lung");
 		public static const GiantBoulder:StatusEffectType              = mkCombat("Giant Boulder");
 		public static const GiantGrabbed:StatusEffectType              = mkCombat("Giant Grabbed");
 		public static const GoblinMechStimpack:StatusEffectType        = mkCombat("Goblin Mech Stimpack");
@@ -981,4 +1006,4 @@ import classes.StatusEffects.VampireThirstEffect;
 			return new StatusEffectType(id,CombatStatusEffect,1);
 		}
 	}
-}
+}

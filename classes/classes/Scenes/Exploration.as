@@ -10,9 +10,16 @@ import classes.Scenes.Areas.Beach;
 import classes.Scenes.Areas.BlightRidge;
 import classes.Scenes.Areas.BlightRidge.*;
 import classes.Scenes.Areas.DeepSea;
+import classes.Scenes.Areas.Forest;
+import classes.Scenes.Areas.Forest.AlrauneMaiden;
+import classes.Scenes.Areas.Forest.WapsHuntress;
+import classes.Scenes.Areas.Forest.HornetGirl;
+import classes.Scenes.Areas.Forest.WaspGirl;
+import classes.Scenes.Areas.Forest.WaspAssassin;
 import classes.Scenes.Areas.Ocean;
 import classes.Scenes.Dungeons.HiddenCave;
 import classes.Scenes.Explore.ExploreDebug;
+import classes.Scenes.Explore.RNGod;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.RyuBiDragon;
@@ -64,8 +71,7 @@ public class Exploration extends BaseContent
 		//const HAS_SEEN_MINO_AND_COWGIRL:int = 892;
 		//const EXPLORATION_PAGE:int = 1015;
 		//const BOG_EXPLORED:int = 1016;
-		public function doExplore():void
-		{
+		public function doExplore():void {
 			clearOutput();
 			if (player.explored <= 0) {
 				outputText("You tentatively step away from your campsite, alert and scanning the ground and sky for danger.  You walk for the better part of an hour, marking the rocks you pass for a return trip to your camp.  It worries you that the portal has an opening on this side, and it was totally unguarded...\n\n...Wait a second, why is your campsite in front of you? The portal's glow is clearly visible from inside the tall rock formation.   Looking carefully you see your footprints leaving the opposite side of your camp, then disappearing.  You look back the way you came and see your markings vanish before your eyes.  The implications boggle your mind as you do your best to mull over them.  Distance, direction, and geography seem to have little meaning here, yet your campsite remains exactly as you left it.  A few things click into place as you realize you found your way back just as you were mentally picturing the portal!  Perhaps memory influences travel here, just like time, distance, and speed would in the real world!\n\nThis won't help at all with finding new places, but at least you can get back to camp quickly.  You are determined to stay focused the next time you explore and learn how to traverse this gods-forsaken realm.");
@@ -80,6 +86,10 @@ public class Exploration extends BaseContent
 
 			if (flags[kFLAGS.EXPLORATION_PAGE] == 2) {
 				explorePageII();
+				return;
+			}
+			if (flags[kFLAGS.EXPLORATION_PAGE] == 3) {
+				explorePageIII();
 				return;
 			}
 			hideMenus();
@@ -98,13 +108,11 @@ public class Exploration extends BaseContent
 			if (flags[kFLAGS.DISCOVERED_BEACH] > 0) addButton(11, "Beach", SceneLib.beach.exploreBeach).hint("Visit the sunny beach. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BEACH] : ""));
 			if (flags[kFLAGS.DISCOVERED_CAVES] > 0) addButton(12, "Caves", SceneLib.caves.exploreCaves).hint("Visit the gloomy caves. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_CAVES] : ""));
 			
-			if (debug) addButton(9, "Debug", exploreDebug.doExploreDebug);
 			addButton(4, "Next", explorePageII);
+			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
 			addButton(14, "Back", playerMenu);
 		}
-
-		private function explorePageII():void
-		{
+		private function explorePageII():void {
 			flags[kFLAGS.EXPLORATION_PAGE] = 2;
 			hideMenus();
 			menu();
@@ -122,18 +130,41 @@ public class Exploration extends BaseContent
 			//if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.canSwimUnderwater()) addButton(11, "Deep Sea", SceneLib.deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... krakens. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
 			//if (!player.canSwimUnderwater() && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(11, "Deep Sea", "Without any way to breathe underwater you can't explore this area!");
 			//if (flags[kFLAGS.DISCOVERED_ABYSS] > 0) addButton(12, "Abyss", CoC.instance.abyss.exploreAbyss).hint("Visit the abyss. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_ABYSS] : ""));
-			if (player.level >= 51) addButton(12, "ML Explore", tryDiscover2).hint("Explore to find new enemies.");
-			else addButtonDisabled(12, "ML Explore", "Req. lvl 51+");
-			if (player.level >= 70) addButton(13, "HL Explore", tryDiscover3).hint("Explore to find strong and dangerous enemies.");
-			else addButtonDisabled(13, "HL Explore", "Req. lvl 70+");
-			if (debug) addButton(4, "Debug", exploreDebug.doExploreDebug);
+			
+			addButton(4, "Next", explorePageIII);
 			addButton(9, "Previous", goBackToPageI);
+			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
+			addButton(14, "Back", playerMenu);
+		}
+		private function explorePageIII():void {
+			flags[kFLAGS.EXPLORATION_PAGE] = 3;
+			hideMenus();
+			menu();
+			if (player.level >= 31) addButton(0, "LL Explore", tryDiscoverLL).hint("Explore to find weakest new enemies.");
+			else addButtonDisabled(0, "LL Explore", "Req. lvl 31+");
+			if (player.level >= 51) addButton(1, "ML Explore", tryDiscoverML).hint("Explore to find weaker new enemies.");
+			else addButtonDisabled(1, "ML Explore", "Req. lvl 51+");
+			if (player.level >= 70) addButton(2, "HL Explore", tryDiscoverHL).hint("Explore to find below averange new enemies.");
+			else addButtonDisabled(2, "HL Explore", "Req. lvl 70+");
+			if (player.level >= 95) addButton(3, "XHL Explore", tryDiscoverXHL).hint("Explore to find bit above averange new enemies.");
+			else addButtonDisabled(3, "XHL Explore", "Req. lvl 95+");
+			if (player.level >= 125) addButton(4, "XXHL Explore", tryDiscoverXXHL).hint("Explore to find strong new enemies.");
+			else addButtonDisabled(4, "XXHL Explore", "Req. lvl 125+");
+			
+			addButton(10, "42", tryRNGod).hint("Explore to find the answer for your prayers.Or maybe you really not wanna find it fearing answer will not be happy with you?");
+			addButton(9, "Previous", goBackToPageII);
+			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
 			addButton(14, "Back", playerMenu);
 		}
 
 		private function goBackToPageI():void
 		{
 			flags[kFLAGS.EXPLORATION_PAGE] = 1;
+			doExplore();
+		}
+		private function goBackToPageII():void
+		{
+			flags[kFLAGS.EXPLORATION_PAGE] = 2;
 			doExplore();
 		}
 		
@@ -758,24 +789,64 @@ public class Exploration extends BaseContent
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
-		//Temporaly place of finding enemies for medium high lvl PC's (between 51 and 70)
-		public function tryDiscover2():void  {
+		//Temporaly place of finding enemies for lvl between 31 and 49
+		public function tryDiscoverLL():void {
 			clearOutput();
 			if (rand(2) == 0) {
+				outputText("You're walking in the woods\n\n");
+				outputText("There's no one around\n\n");
+				outputText("And your phone is dead\n\n");
+				outputText("Out of the corner of your eye you spot her\n\n");
+				outputText("<b>A Wasp Girl...</b>");
+				startCombat(new WaspGirl());//lvl 33
+				return;
+			}
+			else {
+				outputText("You're walking in the woods\n\n");
+				outputText("There's no one around\n\n");
+				outputText("And your phone is dead\n\n");
+				outputText("Out of the corner of your eye you spot her\n\n");
+				outputText("<b>A Wasp Huntress...</b>");
+				startCombat(new WapsHuntress());//lvl 48
+				return;
+			}
+		}
+		//Temporaly place of finding enemies for lvl between 51 and 69
+		public function tryDiscoverML():void {
+			clearOutput();
+			if (rand(4) == 0) {
 				outputText("Traversing Mareth vast areas you're stopped by the arrow to the <u>kne</u> 'place between ground and your waist'.");
 				outputText("\n\n<b>A wild Dark Elf Sniper Appears.</b>");
 				startCombat(new DarkElfSniper());//lvl 51
 				return;
 			}
-			else {
+			else if (rand(3) == 0) {
+				outputText("You're walking in the woods\n\n");
+				outputText("There's no one around\n\n");
+				outputText("And your phone is dead\n\n");
+				outputText("Out of the corner of your eye you spot her\n\n");
+				outputText("<b>An Alraune Maiden...</b>");
+				startCombat(new AlrauneMaiden());//lvl 54
+				return;
+			}
+			else if (rand(2) == 0) {
 				outputText("Traversing Mareth vast areas you stops near something looking like a soul cultivator cave.");
 				outputText("\n\n<b>A wild Kitsune Elder Appears.</b>");
 				startCombat(new KitsuneElder());//lvl 55
 				return;
 			}
+			else {
+				outputText("You're walking in the woods\n\n");
+				outputText("There's no one around\n\n");
+				outputText("And your phone is dead\n\n");
+				outputText("Out of the corner of your eye you spot her\n\n");
+				outputText("<b>A Wasp Assassin...</b>");
+				startCombat(new WaspAssassin());//lvl 63
+				return;
+			}
 		}
-		//Temporaly place of finding enemies for high lvl PC's (70+)
-		public function tryDiscover3():void {
+		//Temporaly place of finding enemies for lvl between 70 and 94
+		public function tryDiscoverHL():void {
 			clearOutput();
 			if (rand(2) == 0) {
 				outputText("Traversing Mareth vast areas you're suddenly found yourself underwater!!!");
@@ -785,19 +856,23 @@ public class Exploration extends BaseContent
 				startCombat(new Scylla());//lvl 70
 				return;
 			}
-			else if (rand(2) == 0) {
+			else {
 				outputText("Traversing Mareth vast areas you stops near something looking like a soul cultivator cave.");
 				outputText("\n\n<b>A wild Kitsune Sage Appears.</b>");
 				startCombat(new KitsuneAncestor());//lvl 80
 				return;
 			}
-			else if (rand(2) == 0) {
+		}
+		//Temporaly place of finding enemies for lvl between 95 and 124
+		public function tryDiscoverXHL():void {
+			clearOutput();
+			//if (rand(2) == 0) {
 				outputText("Traversing Mareth vast areas you're suddenly found yourself underwater!!!");
 				outputText("\n\n<b>Aaaand....A wild Kraken Appears.</b>");
 				player.underwaterCombatBoost();
 				if (!player.canSwimUnderwater()) player.createStatusEffect(StatusEffects.UnderwaterOutOfAir,0,0,0,0);
 				startCombat(new Kraken());//lvl 100 GIGANT BOSS
-				return;
+				return;/*
 			}
 			else {
 				outputText("Traversing Mareth vast areas you're suddenly found yourself underwater tangled in some sort of vines!!!");
@@ -807,7 +882,27 @@ public class Exploration extends BaseContent
 				if (!player.canSwimUnderwater()) player.createStatusEffect(StatusEffects.UnderwaterOutOfAir,0,0,0,0);
 				startCombat(new SeabedAlrauneBoss());//lvl 135 GIGANT PLANT BOSS
 				return;
-			}
+			}*/
+		}
+		//Temporaly place of finding enemies for lvl 125+
+		public function tryDiscoverXXHL():void {
+			clearOutput();
+			//else {
+				outputText("Traversing Mareth vast areas you're suddenly found yourself underwater tangled in some sort of vines!!!");
+				outputText("\n\n<b>Aaaand....A wild Seabed Alraune Appears.</b>");
+				player.createStatusEffect(StatusEffects.HeroBane, 10, 0, 0, 0);
+				player.underwaterCombatBoost();
+				if (!player.canSwimUnderwater()) player.createStatusEffect(StatusEffects.UnderwaterOutOfAir,0,0,0,0);
+				startCombat(new SeabedAlrauneBoss());//lvl 135 GIGANT PLANT BOSS
+				return;
+			//}
+		}
+		
+		public function tryRNGod():void {
+			clearOutput();
+			outputText("Traversing Mareth vast areas you're suddenly found yourself... somewhere!!! Abnd looks like prayers was heard!!! (Even if you not prayed at all!!!)");
+			outputText("\n\n<b>Aaaand....A RNGod Appears.</b>");
+			startCombat(new RNGod());
 		}
 
 		public function pearldiscovery():void {

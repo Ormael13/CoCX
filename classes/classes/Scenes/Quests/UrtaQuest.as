@@ -55,6 +55,14 @@ public var urtaQItems7:ItemSlotClass = new ItemSlotClass();
 public var urtaQItems8:ItemSlotClass = new ItemSlotClass();
 public var urtaQItems9:ItemSlotClass = new ItemSlotClass();
 public var urtaQItems10:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems11:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems12:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems13:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems14:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems15:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems16:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems17:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems18:ItemSlotClass = new ItemSlotClass();
 
 public function urtaBusy():Boolean {
 	return (telAdre.edryn.pregnancy.type == PregnancyStore.PREGNANCY_TAOTH || flags[kFLAGS.URTA_QUEST_STATUS] == -1);
@@ -181,6 +189,14 @@ private function resetToPC():void {
 	player.itemSlot8 = urtaQItems8;
 	player.itemSlot9 = urtaQItems9;
 	player.itemSlot10 = urtaQItems10;
+	player.itemSlot11 = urtaQItems11;
+	player.itemSlot12 = urtaQItems12;
+	player.itemSlot13 = urtaQItems13;
+	player.itemSlot14 = urtaQItems14;
+	player.itemSlot15 = urtaQItems15;
+	player.itemSlot16 = urtaQItems16;
+	player.itemSlot17 = urtaQItems17;
+	player.itemSlot18 = urtaQItems18;
 	model.player = player;
 
 	// See called method comment.
@@ -204,6 +220,14 @@ public function startUrtaQuest():void {
 	urtaQItems8 = player.itemSlot8;
 	urtaQItems9 = player.itemSlot9;
 	urtaQItems10 = player.itemSlot10;
+	urtaQItems11 = player.itemSlot11;
+	urtaQItems12 = player.itemSlot12;
+	urtaQItems13 = player.itemSlot13;
+	urtaQItems14 = player.itemSlot14;
+	urtaQItems15 = player.itemSlot15;
+	urtaQItems16 = player.itemSlot16;
+	urtaQItems17 = player.itemSlot17;
+	urtaQItems18 = player.itemSlot18;
 	player.itemSlot1 = new ItemSlotClass();
 	player.itemSlot2 = new ItemSlotClass();
 	player.itemSlot3 = new ItemSlotClass();
@@ -214,6 +238,14 @@ public function startUrtaQuest():void {
 	player.itemSlot8 = new ItemSlotClass();
 	player.itemSlot9 = new ItemSlotClass();
 	player.itemSlot10 = new ItemSlotClass();
+	player.itemSlot11 = new ItemSlotClass();
+	player.itemSlot12 = new ItemSlotClass();
+	player.itemSlot13 = new ItemSlotClass();
+	player.itemSlot14 = new ItemSlotClass();
+	player.itemSlot15 = new ItemSlotClass();
+	player.itemSlot16 = new ItemSlotClass();
+	player.itemSlot17 = new ItemSlotClass();
+	player.itemSlot18 = new ItemSlotClass();
 	player2 = player;
 
 	player = new Player();
@@ -266,12 +298,12 @@ public function startUrtaQuest():void {
 	player.gems = 183;
 	player.level = 26;
 	player.teaseLevel = 5;
-	player.str += (player.newGamePlusMod() * 30);
-	player.tou += (player.newGamePlusMod() * 33);
-	player.spe += (player.newGamePlusMod() * 36);
-	player.inte += (player.newGamePlusMod() * 18);
-	player.wis += (player.newGamePlusMod() * 15);
-	player.lib += (player.newGamePlusMod() * 27);
+	player.str += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30);
+	player.tou += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 33);
+	player.spe += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 36);
+	player.inte += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 18);
+	player.wis += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 15);
+	player.lib += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 27);
 
 	//PERKS
 	player.createPerk(PerkLib.Agility,0,0,0,0);

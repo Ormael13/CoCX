@@ -143,11 +143,11 @@ public class Valkyrie extends Monster
 			initStrTouSpeInte(185, 165, 140, 75);
 			initWisLibSensCor(75, 40, 50, 15);
 			this.weaponName = "spear and shield";
-			this.weaponVerb="pummel";
-			this.weaponAttack = 34;
+			this.weaponVerb="lunge";
+			this.weaponAttack = 38;
 			this.armorName = "bronze plates";
-			this.armorDef = 29;
-			this.armorMDef = 12;
+			this.armorDef = 0;
+			this.armorMDef = 0;
 			this.bonusHP = 450;
 			this.bonusLust = 10;
 			this.lust = 25 + rand(15);

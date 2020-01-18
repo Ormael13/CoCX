@@ -46,6 +46,26 @@ package classes.Scenes
 			outputText("-New M. Special: Hungering cold. Req. full yuki onna score and cold affinity. Effect: Freeze the air around your target, encasing it in ice and dealing hypothermia damage. Weakens opponents ice resistance increasing damage of further attacks by 50% stacking up to 3 times. Damage increase will reset when Frostburn effect ends. (Frostbite last for 8 turns and cd of special is 10 turns)\n");
 			outputText("-New TF item: White Ice Shard. Currently found in Yu shop (will later be moved to be only drop form specific enemy). Allow to change into Yuki Onna race with race bonuses at 14+: +70 to max Spe (scal), +140 to max Int (scal), +70 to max Wis (scal), +50 to max Lib (scal).\n");
 			outputText("-Increased max caps on HP, Lust, Wrath, Fatigue, Mana and Soulforce acording to increased lvl cap and recently added perks. Sorry OPK it's still too low cap for your PC i know but noone is close to your over 9000 power level :(\n");
+			outputText("-Fixed bugs: Derpy forgetting to actualy rise lvl cap up to 185 from inbetween value during work on test builds, Mitzi pregnancy chance been always 100%\n\n");
+			outputText("<b>Version 0.8n7:</b>\n\n");
+			outputText("-New tier 0 strength lvl-up perk: Strong Back 3: Strong Hardest. Req. Strong Back 2: Strong Harder perk, 60+ str and lvl 4+. Effect: Unlocks eighth inventory slot.\n");
+			outputText("-Added new starting History: Tactician perk (will give Job: Leader perk at start and would boost pets/minions dmg by 10%)\n");
+			outputText("-New armor (by Liadri): Blizzard Kimono - one of possible Yuki Onna drops OR from Yu shop. Cost 1600 gems, 0 armor, 8 magic resistance, reduce spell cost by 40% and raise Cold damage by 50% while weakening fire damaged by 50%. Causes constant health degeneration 10% to anyone without Cold Affinity wearing it. A yuki onna also gains a periodic 5% health regeneration.\n");
+			outputText("-New head accesory (by Liadri): Snowflake hairpin - one of possible Yuki Onna drops OR from Yu shop. Cost 400 gems, +30% ice spells power, -30% fire spells power.\n");
+			outputText("-New dyes (by Liadri): Snow White (10 gems) and Quartz White (50 gems). Gained as one of possible Yuki Onna drops.\n");
+			outputText("-New enemy possible to encounter during Glacial Rift exploration: A Santa Clau... err joking it's ofc Yuki Onna - lvl 40\n");
+			outputText("-New enemy possible to encounter during Forest exploration: Bee Girl Huntress - lvl 16. She is in essence buffed version of regular bee girl and in sex scenes would be reffered as just bee girl. But still should pack a punch for those that felt her younger sisters was... weak forest enemy ;) ");
+			outputText("Oh did i meantion PC will have no way to guess if it huntress or normal bee before deciding to punch her? It's not like both are so different in outside appearance so...it's sometimes wise to stop and think... do i really want fight her? and what if it huntress one not normal one bee?\n");
+			outputText("-New buff used by enemies: Ice Armor - would decrease all damage from attacks by 90%. Using ice attack on enemy then would extend duration of buff by 1 turn and fire damage would shorten duration by 1 turn. Using more than one fire/ice attack in turn will result in duration shortened/extended by multiple turns.\n");
+			outputText("-Bonus EXP for PC with high enough human score will start from 10 pts not 5 and would be lost after pc humanity score is 10+ below max humanity.\n");
+			outputText("-PC starting game with 5 inventory slots unlocked instead of 3. Strong Back and Strong Back 2: Strong Harder req. for str was lowered to respectively 20 and 40. And latter perk req. lvl 2+ now to be avialable in lvl-up perks choices.\n");
+			outputText("-Basic inventory size cap was increased from 10 to 18 slots. Backpacks Benoit sell was a bit changed to be 5 options from 2 to 10 slots and costing from 400 to 2000 gems.\n");
+			outputText("-White Ice Shard item was retired from Yu shop to one of the enemies possible to meet in Glacial Rift. Also it cost was... lowered to it intended cost that is only 30 gems.\n");
+			outputText("-Wood/Stone/Nail buy/sell options get a bit reorganized with adding few more options for larger than before buy/sell options.\n");
+			outputText("-Made out of camp npc's leveling been enabled by toggle that govern incamp npc's training mode (so those outside camp won't get stronger without way to stop them at certain level).\n");
+			outputText("-Added few new statistics to Stats NPC's Menu: Izumi, Minerva, Akbal current lvl's (will show even if PC not meet them yet and they will have additional note on stats page when they would reach current lvl cap for their lvl-up's)\n");
+			outputText("-HP and other secondary stats for enemies will scale with current New Game tier (up to ng 5+ after which it will not scale up anymore).\n");
+			outputText("-While attacking enemies it would be now taken into account level difference between player and enemy. The higher difference in either way would make PC deal more or less damage up to either dealing 2x more dmg or not been able to hurt enemy due to been too low leveled compared to enemy.\n");
 			//outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
@@ -56,21 +76,31 @@ package classes.Scenes
 			//outputText("-New enemy possible to encounter during Bog exploration: Dark Elf Ranger - lvl 39\n");
 			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
 			//outputText("\n");cel na 0.8: dodać kitsune/nekomanta TF
-			//outputText("\n");cel na 0.8: dodać yuki-onna TF
-			//outputText("\n");cel na 0.8: dodać yuki-onna TF
 			//outputText("\n");cel na 0.8: dodać siren TF
 			//outputText("-New TF item: . Gained by bringing Orc Mead to Lumi for enhancing. Using this item will turn PC into high orc. High Orc (scalable): +130 to max Str, +30 to max Tou, +10 to max Spe, -30 to max Int, +25 to max Lib, +20% to max Wrath.\n");
 			//outputText("-New TF item: . Gained by bringing Elf Ear to Lumi for enhancing. Using this item will turn PC into high elf. High Elf (scalable): -10 to max Str, -15 to max Tou, +80 to max Spe, +80 to max Int, +60 to max Wis, +30 max/min Sens, +20% to max Mana.\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
+			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-New armor (by Liadri): Goblin Technomancer clothes - gained after becoming Jiangshi. Cost 160 gems, 0 armor, 0 magic resistance, Slutty Seduction 10, +40% to soulskills power.\n");
 			//outputText("-New underwear (upper) (by Liadri): \n");
 			//outputText("-New underwear (bottom) (by Liadri): \n");
-			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
-			outputText("-Fixed bugs: Derpy forgetting to actualy rise lvl cap up to 185 from inbetween value during work on test builds, Mitzi pregnancy chance been always 100%\n\n");/*ostatni punkt changelogu
+			outputText("-Michiko got few more talk options including those about nearly each area ingame.\n");
+			outputText("-As Izumi may felt lonely been only one off camp npc that could lvl-up to become better challange for PC there are new ones npc's that would join her club: Minerva, Akbal, Priscilla\n");
+			outputText("-Malikore enemies could use their poison to cleanse other poison/lust poisons that are affecting them.\n");
+			outputText("-As the lvl cap increased a bit explore options for new (mostly) finished new enemies get split into 4 groups instead of current 2.\n");
+			outputText("-New sprites for Cinderbloom and Snow Lily to replace in fight and post fight scenes default Alraune sprite.\n");
+			outputText("-Another setting at options menu. Would increase base secondary stats similary to difficulty setting for those that jsut want to have more... beffy enemies. Possible in version from 5x to 100x multi. It will stack on top of difficulty so with Xianxia setting in this option and difficulty will result in secondary stats for monsters (like HP, Lust) increase by 500 times.\n");
+			outputText("-Added general estimation of how much soulforce is needed to find encounters/npc's in Soul Sense menu.\n");
+			outputText("-Priscilla has been added as possible Soul Sense encounter (but that won't remove her from general pool of encounter for goblins enemies so RNG GOD can still pick her instead of any other weaker goblin to throw at PC)\n");
+			outputText("-Cruel Chimera's Thesis ascension perk was moved form 3rd to 2nd ascension. After having this perk and ascensing 3rd time when pc starts 4th game with the same PC would be have new selection during creation of the character to pick non-human ancestor resulting in +2 bonus to race scroe for this race. ");
+			outputText("Possible to pick races: Dragon, Elf, Kitsune. This option can be permed like History perk at next ascension and in case PC got all avialable options could choose None option that will instead give 12 bonus perk points at start.\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-Fixed bugs: Giacomo taking much more gems than he meantioned for Mysterious Seed, missing req. for Job: All-Rounder, Tamani daughters replacing Tamani encounters after there is 16+ of them, missing 3 newest elemental types from menu for picking elemental to attack in combat, Misc. submenu not showing in Invenotry with only Mysterious Seed bought, Thunderbird TF ");
+			outputText("having wrong req. to get eyes tf, Izma appearaing at lake before PC reach lvl 3, repeating some texts in scenes, Named Bullet perk adding bonus dmg to wrong type of enemies, Adventure Guild promotion to higher tier not taking any Spirit Stones\n\n");/*ostatni punkt changelogu
 			outputText("-New necklace (by Ormael):  - obtained by . Cost xx0 gems. \n");
 			outputText("-New head accesory (by Ormael):  - obtained by . Cost xx0 gems. \n");
 			outputText("-New ring (by Ormael):  - obtained by . Cost xx0 gems. \n");
@@ -108,10 +138,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -147,20 +174,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -592,7 +605,7 @@ package classes.Scenes
 			outputText("-New Grey Spell: Polar Midnight - learned from scroll given by Alvina. Cost 250 mana and deal AoE ice dmg and stun enemies for 5 turns. Have 1 turn channel time and cooldown of 12 turns.\n");
 			outputText("-Added 24 new archievments including 4 shadow ones. Some easier and some harder to get. And 2 that won't be possible to unlock till bit in future but one can dream that mod will grow till they get possible to complete.\n");
 			outputText("-After meeting Etna (at that time still not named) will cause to another unnamed manticore start to prowl High Mountains and Caves. It would be generic lvl 30 enemy encounter.\n");
-			outputText("-Some time after fighting both Etna and her others fellow unnamed manticore in high mountains and caves would start to prowl another generic enemy - lvl 39 malicore. Faster, stronger and more feral strain of manticore race. (Yes that IS a feral manticore so not expect her to be in mood for sex)\n");
+			outputText("-Some time after fighting both Etna and her others fellow unnamed manticore in high mountains and caves would start to prowl another generic enemy - lvl 39 malikore. Faster, stronger and more feral strain of manticore race. (Yes that IS a feral manticore so not expect her to be in mood for sex)\n");
 			outputText("-If player would wear specific combination of equipment will gain additional bonuses depending on amount of weared items.\n");
 			outputText("-Player that wear all protection accesories (4 rings, head accesory and necklace) that is giving protection for fire / ice / lighting / darkness / poison / lust will have +15% more of resistance to that type of damage.\n");
 			outputText("-Guided bow attack was rised to 6 and cost to 2400 gems.\n");

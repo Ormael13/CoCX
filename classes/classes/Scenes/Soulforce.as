@@ -35,7 +35,7 @@ import classes.Scenes.Monsters.DarkElfRanger;
 import classes.Scenes.Monsters.DarkElfScout;
 import classes.Scenes.Monsters.DarkElfSlaver;
 import classes.Scenes.Monsters.DarkElfSniper;
-import classes.Scenes.Monsters.Malicore;
+import classes.Scenes.Monsters.Malikore;
 import classes.Scenes.Monsters.Manticore;
 import classes.Scenes.NPCs.Alvina;
 import classes.Scenes.NPCs.Aria;
@@ -203,7 +203,7 @@ use namespace CoC;
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 			if (player.findPerk(PerkLib.Metamorph) >= 0) addButton(6, "Metamorf", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");//używanie metamorfowania z użyciem soulforce
 			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
-			//addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
+			addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul king to soul ancestor w momencie robienia release version
 		public function SoulforceCheats():void {
@@ -223,16 +223,23 @@ use namespace CoC;
 			//if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
 			if (player.hasPerk(PerkLib.Metamorph)) addButton(9, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Metamorph all options unlock.");
 			//addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
-			addButton(10, "WhiteIceS.", AddProtoplasm).hint("White Ice Shard");
+			//addButton(10, "WhiteIceS.", AddProtoplasm).hint("White Ice Shard");
+			addButton(10, "M.S.B.", AddMaxBackpack).hint("Max sized Backpack!");
 			//addButton(10, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
-			addButton(11, "PerkGalore1", GargoyleMenu2);
-			addButton(12, "PerkGalore2", GargoyleMenu3);
+			addButton(11, "PerkGalore1", PerkGalore1);
+			addButton(12, "PerkGalore2", PerkGalore2);
 			addButton(13, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		public function AddProtoplasm():void {
 			outputText("\n\n<b>(Gained 1 White Ice Shard!)</b>\n\n");
 			inventory.takeItem(consumables.WHITEIS, SoulforceCheats);
+		}
+		public function AddMaxBackpack():void {
+			outputText("\n\n<b>(Max sized Backpack! Go! Go! Go!)</b>\n\n");
+			if (player.hasKeyItem("Backpack") >= 0) player.removeKeyItem("Backpack");
+			player.createKeyItem("Backpack", 10, 0, 0, 0);
+			doNext(SoulforceCheats);
 		}
 public function FightAria():void {
 	clearOutput();
@@ -536,7 +543,7 @@ public function FightHellfireSnail():void {
 			if (!player.hasStatusEffect(StatusEffects.)) player.createStatusEffect(StatusEffects.,0,0,0,0);*/
 			doNext(SoulforceCheats);
 		}
-		public function GargoyleMenu2():void {
+		public function PerkGalore1():void {
 			if (player.findPerk(PerkLib.CorruptedKitsune) < 0) {
 				player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Corrupted Kitsune!)</b>");
@@ -679,7 +686,7 @@ public function FightHellfireSnail():void {
 			}
 			doNext(SoulforceCheats);
 		}
-		public function GargoyleMenu3():void {
+		public function PerkGalore2():void {
 			if (player.findPerk(PerkLib.PrestigeJobNecromancer) < 0) {
 				player.createPerk(PerkLib.PrestigeJobNecromancer, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Prestige Job: Necromancer!)</b>");
@@ -1493,6 +1500,7 @@ public function FightHellfireSnail():void {
 			addButton(6, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Bastet Whip.");
 			addButton(7, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
 			addButton(8, "HBA Armor", AddHBAArmor).hint("Add 1 HBA Armor for testing purposes.");
+			addButton(9, "YODrops", AddYukiOnnaStuff).hint("Add both Yuki Onna equipment drops for testing purposes.");
 			addButton(11, "GobMechPrime", AddGoblinMechPrime).hint("Add 1 Goblin Mech Prime for testing purposes.");
 			addButton(12, "MatrixArmory1", AddTheSeerHairpinAndCo).hint("Adds: 1 Eldritch Staff, 1 master Gloves, 1 Gnoll Throwing Axes, 1 Hodr's Bow, 1 Truestrike Sword, 1 Sceptre of Command, 1 Demonic Scythe, 1 Seer's Hairpin, Sakura Petal Kimono, Oni bead necklace");
 			addButton(13, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
@@ -2309,6 +2317,14 @@ public function FightHellfireSnail():void {
 			outputText("\n\n<b>(Gained 1 HBA Armor!)</b>\n\n");
 			inventory.takeItem(armors.HBA_ARM, EquipmentMenu);
 		}
+		public function AddYukiOnnaStuff():void {
+			outputText("\n\n<b>(Gained 1st Yuki Onna item!)</b>\n\n");
+			inventory.takeItem(armors.BLIZZ_K, AddYukiOnnaStuff2);
+		}
+		public function AddYukiOnnaStuff2():void {
+			outputText("\n\n<b>(Gained 2nd Yuki Onna item!)</b>\n\n");
+			inventory.takeItem(headjewelries.SNOWFH, EquipmentMenu);
+		}
 		public function AddGoblinMechPrime():void {
 			outputText("\n\n<b>(Gained 1 Goblin Mech Prime!)</b>\n\n");
 			inventory.takeItem(vehicles.GOBMPRI, EquipmentMenu);
@@ -2396,7 +2412,7 @@ public function FightHellfireSnail():void {
 		public function FightRandomnManticore():void {
 			clearOutput();
 			outputText("Entering battle with some malicore! Enjoy ^^");
-			startCombat(new Malicore());
+			startCombat(new Malikore());
 		}
 		public function FightElectra():void {
 			clearOutput();
@@ -3423,17 +3439,19 @@ public function FightHellfireSnail():void {
 			outputText("Using a tiny amount of soulforce you could try to use soul sense to locate some of people you meet of location you found before without wasting hours for that. Especialy if those people are usualy roaming around or places that constantly changing their location.");
 			outputText("\n\nAmount of soulforce used to locate them using soul sense depening of relative power of searched person or location.");
 			menu();
-			if (flags[kFLAGS.SOUL_SENSE_TAMANI] >= 3) addButton(0, "Tamani", TamaniEnc);
+			if (flags[kFLAGS.SOUL_SENSE_TAMANI] >= 3) addButton(0, "Tamani", TamaniEnc).hint("Req. 80+ soulforce");
 			else addButtonDisabled(0, "Tamani", "");
-			if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] >= 3) addButton(1, "Tamani D.", TamaniDaughtersEnc);
+			if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] >= 3) addButton(1, "Tamani D.", TamaniDaughtersEnc).hint("Req. at least 80+ soulforce (more daughters will increase needed SF)");
 			else addButtonDisabled(1, "Tamani D.", "");
-			if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] >= 3) addButton(2, "KitsuMansion", KitsuneMansion);
+			if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] >= 3) addButton(2, "KitsuMansion", KitsuneMansion).hint("Req. 90+ soulforce");
 			else addButtonDisabled(2, "KitsuMansion", "");
-			if (flags[kFLAGS.SOUL_SENSE_IZUMI] >= 3) addButton(3, "Izumi", IzumiEnc);
+			if (flags[kFLAGS.SOUL_SENSE_IZUMI] >= 3) addButton(3, "Izumi", IzumiEnc).hint("Req. 300+ soulforce");
 			else addButtonDisabled(3, "Izumi", "");
-			if (flags[kFLAGS.SOUL_SENSE_WORLD_TREE] >= 1) addButton(10, "WorldTree", findWorldTree);
+			if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] >= 3) addButton(5, "Priscilla", PriscillaEnc).hint("Req. 320+ soulforce");
+			else addButtonDisabled(5, "Priscilla", "");
+			if (flags[kFLAGS.SOUL_SENSE_WORLD_TREE] >= 1) addButton(10, "WorldTree", findWorldTree).hint("Req. 100+ soulforce");
 			else addButtonDisabled(10, "WorldTree", "");
-			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) addButton(13, "Giacomo", findGiacomo);
+			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) addButton(13, "Giacomo", findGiacomo).hint("Req. 100+ soulforce");
 			else addButtonDisabled(13, "Giacomo", "");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
@@ -3481,6 +3499,19 @@ public function FightHellfireSnail():void {
 				doNext(SoulSense);
 			}
 		}
+		public function PriscillaEnc():void {
+			if (player.soulforce >= 320) {
+				player.soulforce -= 320;
+				statScreenRefresh();
+				SceneLib.goblinElderScene.goblinElderEncounter();
+				spriteSelect(122);
+			}
+			else {
+				outputText("Your current soulforce is too low.");
+				doNext(SoulSense);
+			}
+		}
+		
 		public function findWorldTree():void {
 			if (player.soulforce >= 100) {
 				player.soulforce -= 100;

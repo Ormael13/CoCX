@@ -356,7 +356,7 @@ public class EventParser {
         if (player.hasStatusEffect(StatusEffects.LootEgg)) {
             trace("EGG LOOT HAS");
             if (!player.hasStatusEffect(StatusEffects.Eggs)) { //Handling of errors.
-                EngineCore.outputText("Oops, looks like something went wrong with the coding regarding gathering eggs after pregnancy. Hopefully this should never happen again. If you encounter this again, please let Ormael/Aimozg/Oxdeception know so he can fix it.");
+                EngineCore.outputText("Oops, looks like something went wrong with the coding regarding gathering eggs after pregnancy. Hopefully this should never happen again. If you encounter this again, please let Ormael/Aimozg know so he can fix it.");
                 player.removeStatusEffect(StatusEffects.LootEgg);
                 EngineCore.doNext(playerMenu);
                 return 2;

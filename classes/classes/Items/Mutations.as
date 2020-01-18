@@ -9559,7 +9559,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			var raiju_eyes_color:Array = ["blue", "green", "teal"];
-			if (player.ears.type == Ears.WEASEL && player.eyes.type != Eyes.RAIJU && changes < changeLimit && rand(3) == 0) {
+			if (player.ears.type == Ears.ELFIN && player.eyes.type != Eyes.RAIJU && changes < changeLimit && rand(3) == 0) {
 				if (player.eyes.type == Eyes.HUMAN) {
 					player.eyes.colour = randomChoice(raiju_eyes_color);
 					outputText("\n\nBright lights flash into your vision as your eyes glow with electric light. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment, but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>glowing [eyecolor] bestial slitted eyes staring back at you.</b>");
@@ -13101,6 +13101,7 @@ public final class Mutations extends MutationsHelper
 					else player.hairColor = "platinum blonde";
 				}
 				outputText("\n\nThe feeling of your hair against your skin suddenly changes and it is now cold against you. You notice wisps of snow sometime falling down past your face and straining your eyes to look up you can see them slowly drifting down from your long snowy white hair.");
+				if (player.hairLength < 25) player.hairLength = 25;
 				setHairType(Hair.SNOWY);
 				changes++;
 			}
@@ -14580,4 +14581,4 @@ public final class Mutations extends MutationsHelper
 			HPChange(Math.round(player.maxHP() * 0.1), true);
 		}
 	}
-}
+}

@@ -912,6 +912,10 @@
 		
 		<set var="hydraTails" value="statusEffectv1(StatusEffects.HydraTailsPlayer)"/>
 		<set var="scarf" value="hasStatusEffect(StatusEffects.YetiScarf)"/>
+		<set var="yukiDress" value="hasStatusEffect(StatusEffects.YukiOnnaKimono)"/>
+		<set var="SuccubusDress" value="hasStatusEffect(StatusEffects.PLACEHOLDER)"/>
+		<set var="yukiHairpin" value="hasStatusEffect(StatusEffects.YukiOnnaHairpin)"/>
+		<set var="PlayerHasViewableOutfit" value="hasStatusEffect(StatusEffects.PlayerHasViewableOutfit)"/>
 		<set var="big" value="(cocks[0].cockLength gt 12) ? 'big' : ''"/>
 		
 		<!-- ANTENNAE AREA -->
@@ -1215,7 +1219,8 @@
                             <show part="hair_bg/yeti"/>
                         </default>
                     </switch>
-                </case>
+                </case>		
+				
                 <default> <!-- covers Hair.NORMAL, Hair.GHOST, Hair.ANEMONE, Hair.QUILL, Hair.LEAF, Hair.FLUFFY, Hair.GRASS, Hair.SILKEN, Hair.STORM --> <!-- TODO  -->
                     <switch>
                         <case test="hairLength lt 16">
@@ -1396,48 +1401,51 @@
 		<!-- ARMS AREA -->
         <switch value="arms.type">
             <case values="Arms.HUMAN,Arms.KITSUNE,Arms.ONI,Arms.ELF,Arms.RAIJU">
-                <!--see switch[value=skin.coverage]-->
-				<if test="femininity &gt;=40">
-					<if test="cor &gt;=50">
-						<if test="skin.coverage==Skin.COVERAGE_NONE">
-							<if test="lowerBody==LowerBody.HUMAN">
-								<hide part="hands/*"/>
-								<hide part="hands_bg/*"/>
-								<hide part="arms/*"/>
-								<hide part="arms_bg/*"/>
-								<show part="arms/demonlewd"/>
-								<show part="arms_bg/demonlewd"/>
-								<show part="arms_fg/demonlewd"/>
-							</if>
-							<if test="lowerBody==LowerBody.DEMONIC_HIGH_HEELS">
-								<hide part="hands/*"/>
-								<hide part="hands_bg/*"/>
-								<hide part="arms/*"/>
-								<hide part="arms_bg/*"/>
-								<show part="arms/demonlewd"/>
-								<show part="arms_bg/demonlewd"/>
-								<show part="arms_fg/demonlewd"/>
-							</if>
-							<if test="lowerBody==LowerBody.ELF">
-								<hide part="hands/*"/>
-								<hide part="hands_bg/*"/>
-								<hide part="arms/*"/>
-								<hide part="arms_bg/*"/>
-								<show part="arms/demonlewd"/>
-								<show part="arms_bg/demonlewd"/>
-								<show part="arms_fg/demonlewd"/>
-							</if>
-							<if test="lowerBody==LowerBody.KITSUNE">
-								<hide part="hands/*"/>
-								<hide part="hands_bg/*"/>
-								<hide part="arms/*"/>
-								<hide part="arms_bg/*"/>
-								<show part="arms/demonlewd"/>
-								<show part="arms_bg/demonlewd"/>
-								<show part="arms_fg/demonlewd"/>
+				<if test="PlayerHasViewableOutfit">
+					<if test="SuccubusDress"> <!--For future addons-->
+						<!--see switch[value=skin.coverage]-->
+						<if test="femininity &gt;=40">
+							<if test="cor &gt;=50">
+								<if test="skin.coverage==Skin.COVERAGE_NONE">
+									<switch value="lowerBody.type">
+										<case values="LowerBody.HUMAN,LowerBody.DEMONIC_HIGH_HEELS,LowerBody.ELF,LowerBody.KITSUNE">
+											<hide part="hands/*"/>
+											<hide part="hands_bg/*"/>
+											<hide part="arms/*"/>
+											<hide part="arms_bg/*"/>
+											<show part="arms/demonlewd"/>
+											<show part="arms_bg/demonlewd"/>
+											<show part="arms_fg/demonlewd"/>
+										</case>
+										<default>
+										</default>
+									</switch>
+								</if>
 							</if>
 						</if>
 					</if>
+					<else>
+						<!--see switch[value=skin.coverage]-->
+						<if test="femininity &gt;=40">
+							<if test="cor &gt;=50">
+								<if test="skin.coverage==Skin.COVERAGE_NONE">
+									<switch value="lowerBody.type">
+										<case values="LowerBody.HUMAN,LowerBody.DEMONIC_HIGH_HEELS,LowerBody.ELF,LowerBody.KITSUNE">
+											<hide part="hands/*"/>
+											<hide part="hands_bg/*"/>
+											<hide part="arms/*"/>
+											<hide part="arms_bg/*"/>
+											<show part="arms/demonlewd"/>
+											<show part="arms_bg/demonlewd"/>
+											<show part="arms_fg/demonlewd"/>
+										</case>
+										<default>
+										</default>
+									</switch>
+								</if>
+							</if>
+						</if>
+					</else>
 				</if>
             </case>
             <case values="Arms.HARPY,Arms.PHOENIX">
@@ -1706,21 +1714,15 @@
 				<if test="femininity &gt;=40">
 					<if test="cor &gt;=50">
 						<if test="skin.coverage==Skin.COVERAGE_NONE">
-							<if test="arms.type==Arms.HUMAN">
-								<hide part="feet/*"/>
-								<hide part="legs/*"/>
-								<show part="legs/demonlewd"/>
-							</if>
-							<if test="arms.type==Arms.ELF">
-								<hide part="feet/*"/>
-								<hide part="legs/*"/>
-								<show part="legs/demonlewd"/>
-							</if>
-							<if test="arms.type==Arms.KITSUNE">
-								<hide part="feet/*"/>
-								<hide part="legs/*"/>
-								<show part="legs/demonlewd"/>
-							</if>
+							<switch value="arms.type">
+								<case values="Arms.HUMAN,arms.type==Arms.ELF,arms.type==Arms.KITSUNE">
+									<hide part="feet/*"/>
+									<hide part="legs/*"/>
+									<show part="legs/demonlewd"/>
+								</case>
+								<default>
+								</default>
+							</switch>
 						</if>
 					</if>
 				</if>
@@ -1997,6 +1999,8 @@
 									</default>
 								</switch>
 							</case>
+							<default>
+							</default>
 						</switch>
 					</else>
                 </if>
@@ -2549,97 +2553,26 @@
 		
 		<if test="femininity &gt;=40">
 			<if test="cor &gt;=50">
-				<if test="skin.coverage==Skin.COVERAGE_NONE">
-					<switch>
-						<case test="arms.type == Arms.HUMAN">
-							<if test="lowerBody == LowerBody.HUMAN">
-								<hide part="arms_pattern/*"/>
-								<hide part="arms_bg_pattern/*"/>
-								<hide part="legs_pattern/*"/>
-							</if>
-							<if test="lowerBody == LowerBody.ELF">
-								<hide part="arms_pattern/*"/>
-								<hide part="arms_bg_pattern/*"/>
-								<hide part="legs_pattern/*"/>
-							</if>
-							<if test="lowerBody == LowerBody.KITSUNE">
-								<hide part="arms_pattern/*"/>
-								<hide part="arms_bg_pattern/*"/>
-								<hide part="legs_pattern/*"/>
-							</if>
-							<if test="lowerBody == LowerBody.DEMONIC_HIGH_HEELS">
-								<hide part="arms_pattern/*"/>
-								<hide part="arms_bg_pattern/*"/>
-								<hide part="legs_pattern/*"/>
-							</if>
-						</case>
-						<case test="arms.type == Arms.ELF">
-							<if test="lowerBody == LowerBody.HUMAN">
-								<hide part="arms_pattern/*"/>
-								<hide part="arms_bg_pattern/*"/>
-								<hide part="legs_pattern/*"/>
-							</if>
-							<if test="lowerBody == LowerBody.ELF">
-								<hide part="arms_pattern/*"/>
-								<hide part="arms_bg_pattern/*"/>
-								<hide part="legs_pattern/*"/>
-							</if>
-							<if test="lowerBody == LowerBody.KITSUNE">
-								<hide part="arms_pattern/*"/>
-								<hide part="arms_bg_pattern/*"/>
-								<hide part="legs_pattern/*"/>
-							</if>
-							<if test="lowerBody == LowerBody.DEMONIC_HIGH_HEELS">
-								<hide part="arms_pattern/*"/>
-								<hide part="arms_bg_pattern/*"/>
-								<hide part="legs_pattern/*"/>
-							</if>
-						</case>
-						<case test="arms.type == Arms.HUMAN">
-							<if test="lowerBody == LowerBody.HUMAN">
-								<hide part="arms_pattern/*"/>
-								<hide part="arms_bg_pattern/*"/>
-								<hide part="legs_pattern/*"/>
-							</if>
-							<if test="lowerBody == LowerBody.ELF">
-								<hide part="arms_pattern/*"/>
-								<hide part="arms_bg_pattern/*"/>
-								<hide part="legs_pattern/*"/>
-							</if>
-							<if test="lowerBody == LowerBody.KITSUNE">
-								<hide part="arms_pattern/*"/>
-								<hide part="arms_bg_pattern/*"/>
-								<hide part="legs_pattern/*"/>
-							</if>
-							<if test="lowerBody == LowerBody.DEMONIC_HIGH_HEELS">
-								<hide part="arms_pattern/*"/>
-								<hide part="arms_bg_pattern/*"/>
-								<hide part="legs_pattern/*"/>
-							</if>
-						</case>
-						<case test="arms.type == Arms.KITSUNE">
-							<if test="lowerBody == LowerBody.HUMAN">
-								<hide part="arms_pattern/*"/>
-								<hide part="arms_bg_pattern/*"/>
-								<hide part="legs_pattern/*"/>
-							</if>
-							<if test="lowerBody == LowerBody.ELF">
-								<hide part="arms_pattern/*"/>
-								<hide part="arms_bg_pattern/*"/>
-								<hide part="legs_pattern/*"/>
-							</if>
-							<if test="lowerBody == LowerBody.KITSUNE">
-								<hide part="arms_pattern/*"/>
-								<hide part="arms_bg_pattern/*"/>
-								<hide part="legs_pattern/*"/>
-							</if>
-							<if test="lowerBody == LowerBody.DEMONIC_HIGH_HEELS">
-								<hide part="arms_pattern/*"/>
-								<hide part="arms_bg_pattern/*"/>
-								<hide part="legs_pattern/*"/>
-							</if>
-						</case>
-					</switch>
+				<if test="yukiDress">
+					<else>
+						<if test="skin.coverage==Skin.COVERAGE_NONE">
+							<switch value="arms.type">
+								<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE">
+									<switch value="lowerBody.type">
+										<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.KITSUNE,LowerBody.DEMONIC_HIGH_HEELS">
+											<hide part="arms_pattern/*"/>
+											<hide part="arms_bg_pattern/*"/>
+											<hide part="legs_pattern/*"/>
+										</case>
+										<default>
+										</default>
+									</switch>
+								</case>
+								<default>
+								</default>
+							</switch>
+						</if>
+					</else>
 				</if>
 			</if>
 		</if>
@@ -2719,6 +2652,40 @@
 		<if test="scarf">
 			<show part="clothe/scarf"/>	
 		</if>
+		
+		<!-- Yuki Onna Dress -->
+		<if test="yukiDress">
+			<switch value="arms.type">
+				<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.ONI,Arms.YUKI_ONNA">
+					<show part="clothe/blizzardtop"/>
+					<switch value="lowerBody.type">
+						<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.KITSUNE,LowerBody.DEMONIC_HIGH_HEELS,LowerBody.ONI,LowerBody.YUKI_ONNA">
+							<show part="clothe/blizzardbottom"/>	
+						</case>
+						<default>
+						</default>
+					</switch>
+				</case>
+				<default>
+				</default>
+			</switch>
+		</if>
+		
+		<if test="yukiHairpin">
+			<switch>
+                <case test="hairLength lt 16">
+					<hide part="hair/*"/>
+					<hide part="hair_bg/*"/>
+                    <show part="hair/yukionna"/>
+                </case>
+                <default>
+					<hide part="hair/*"/>
+					<hide part="hair_bg/*"/>
+                    <show part="hair/yukionna"/>
+                    <show part="hair_bg/yukionna"/>
+                </default>
+            </switch>
+			</if>
 		
     </logic>
 </model>
