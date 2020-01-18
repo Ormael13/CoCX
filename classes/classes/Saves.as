@@ -290,7 +290,7 @@ public function loadScreen():void
 
 public function saveScreen():void
 {
-	mainView.nameBox.x = 210;
+	mainView.nameBox.x = mainView.mainText.x;
 	mainView.nameBox.y = 620;
 	mainView.nameBox.width = 550;
 	mainView.nameBox.text = "";

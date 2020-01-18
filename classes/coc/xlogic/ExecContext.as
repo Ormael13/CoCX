@@ -2,6 +2,8 @@
  * Coded by aimozg on 27.08.2017.
  */
 package coc.xlogic {
+import classes.CoC;
+
 public class ExecContext {
 	public function ExecContext(_thiz:Array) {
 		this._scopes = _thiz;
@@ -51,6 +53,7 @@ public class ExecContext {
 	 * For debugging
 	 */
 	public function debug(where:Statement,s:String):void {
+		if (!CoC.instance.debug) return;
 		trace(''+where+' '+s);
 	}
 }
