@@ -21,7 +21,8 @@ public class KeyColor {
 		for each (var tf:String in tfs) {
 			var fn:Array               = tf.match(/^(\w+)\(([\d.,-]+)\)/);
 			var fname:String  = fn ? fn[1] : undefined;
-			var values:/*Number*/Array = fn ? fn[2].split(",") : [];
+			var values:Array = fn ? fn[2].split(",") : [];
+			for (var i:int = 0; i<values.length; i++) values[i] = parseFloat(values[i]);
 			switch (fname) {
 				case "shift":
 				case "h":
