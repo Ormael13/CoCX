@@ -807,6 +807,17 @@ public function historyScoutBonus():Number {
 	if (player.findPerk(PerkLib.ShitYouTouchedSasha) >= 0) historyScoutB += 0.1;
 	return historyScoutB;
 }
+public function historyTacticianBonus():Number {
+	var historyTacticianB:Number = 1.1;
+	/*if (player.findPerk(PerkLib.) >= 0) historyTacticianB += 0.1;
+	if (player.findPerk(PerkLib.) >= 0) historyTacticianB += 0.1;
+	if (player.findPerk(PerkLib.) >= 0) historyTacticianB += 0.1;
+	if (player.findPerk(PerkLib.) >= 0) historyTacticianB += 0.1;
+	if (player.findPerk(PerkLib.) >= 0) historyTacticianB += 0.1;
+	if (player.findPerk(PerkLib.) >= 0) historyTacticianB += 0.1;
+	if (player.findPerk(PerkLib.) >= 0) historyTacticianB += 0.1;*/
+	return historyTacticianB;
+}
 public function historyWhoreBonus():Number {
 	var historyWhoreB:Number = 0.15;
 	if (player.findPerk(PerkLib.Amateur) >= 0) historyWhoreB += 0.15;
@@ -1083,11 +1094,13 @@ public function basemeleeattacks():void {
 public function willothewispattacks():void {
 	clearOutput();
 	var willothewispDamage:Number = 0;
-	willothewispDamage += intwisscaling() * 0.2;/*	bonus do dmgh wisp-a jeśli sa inne pety/miniony ^^ im wiecej podwładnch ma tym mocniej sam bedzie bił (jak effekt perku później w drzewie Job: Leader ^^)
+	willothewispDamage += intwisscaling() * 0.2;
+	/*bonus do dmgh wisp-a jeśli sa inne pety/miniony ^^ im wiecej podwładnch ma tym mocniej sam bedzie bił (jak effekt perku później w drzewie Job: Leader ^^)
 	if (summonedElementals >= 1) elementalDamage += baseDamage;
 	if (summonedElementals >= 5) elementalDamage += baseDamage;
 	if (summonedElementals >= 9) elementalDamage += baseDamage;*/
 	if (willothewispDamage < 10) willothewispDamage = 10;
+	if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) willothewispDamage *= historyTacticianBonus();
 	var willothewispamplification:Number = 1;
 	if (player.weapon == weapons.SCECOMM) willothewispamplification += 0.5;
 	willothewispDamage *= willothewispamplification;
@@ -1175,6 +1188,7 @@ public function elementalattacks(elementType:int, summonedElementals:int):void {
 	if (summonedElementals >= 5) elementalDamage += baseDamage;
 	if (summonedElementals >= 9) elementalDamage += baseDamage;
 	if (elementalDamage < 10) elementalDamage = 10;
+	if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) elementalDamage *= historyTacticianBonus();
 	if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2) {
 		if (summonedElementals >= 9) elementalDamage *= 4;
 		else if (summonedElementals >= 5) elementalDamage *= 3;
@@ -2586,7 +2600,9 @@ public function throwWeapon():void {
 		}
 		if (player.ammo == 0) outputText("\n\n<b>You're out of weapons to throw in this fight.</b>\n\n");
 		enemyAI();
-	}	
+	}
+	if(monster.HP <= monster.minHP()){ doNext(endHpVictory); return;}
+	if(monster.lust >= monster.maxLust()){ doNext(endLustVictory); return;}
 	else if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) {
 		flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
 		flags[kFLAGS.ARROWS_ACCURACY] += 15;
@@ -2626,7 +2642,7 @@ public function shootWeapon():void {
 			if (player.weaponRange == weaponsrange.TRFATBI) damage *= 5;
 		}
 		if (player.hasPerk(PerkLib.ExplosiveCartridge) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
-		if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyGroupType)) damage *= 1.5;
+		if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.5;
 		//other effects
 		if (player.weaponRange == weaponsrange.M1CERBE) {
 			var M1:Number = 6;
@@ -2824,6 +2840,8 @@ public function shootWeapon():void {
 		if (monster.plural) outputText("s");
 		outputText(".\n\n");
 	}
+	if(monster.HP <= monster.minHP()){ doNext(endHpVictory); return;}
+	if(monster.lust >= monster.maxLust()){ doNext(endLustVictory); return;}
 	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) {
 		if (player.ammo > 0) {
 			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
@@ -4231,9 +4249,33 @@ public function DamageOverhaul(damage:Number):Number {
 	// outputText(random_value.toString()); for test only
 	// End of overhaul and of sh*t coding
 }
+//DR depending on diff in lvl between PC and enemy(ies)
+public function doDamageReduction():Number {
+	var damagereduction:Number = 1;
+	var plaLvl:Number = player.level + playerLevelAdjustment();
+	var monLvl:Number = monster.level + monsterLevelAdjustment();
+	if (plaLvl > monLvl) {
+		damagereduction += 0.02 * (plaLvl - monLvl);
+		if (damagereduction > 2) damagereduction = 2;//200% dmg przy różnicy 50+ lvl-i 
+	}
+	if (plaLvl < monLvl) {
+		if ((monLvl - plaLvl) < 50) damagereduction -= 0.02 * (monLvl - plaLvl);
+		else damagereduction = 0;
+	}
+	return damagereduction;
+}
+public function playerLevelAdjustment():Number {
+	var playerLevelAdjustment:Number = 0;
+	return playerLevelAdjustment;
+}
+public function monsterLevelAdjustment():Number {
+	var monsterLevelAdjustment:Number = 0;
+	return monsterLevelAdjustment;
+}
 //DEAL DAMAGE
 public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 	MDOCount ++; // for multipile attacks to prevent stupid repeating of damage messages
+	damage *= doDamageReduction();
 	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
 		dynStats("lus", 3);
@@ -4247,6 +4289,7 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 		}
 		damage *= bonusDamageFromMissingHP;
 	}
+	if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
 	if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
 	if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
 		if (monster.statusEffectv3(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
@@ -4300,6 +4343,7 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 }
 public function doMagicDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 	MDOCount ++; // for multipile attacks to prevent stupid repeating of damage messages
+	damage *= doDamageReduction();
 	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
 		dynStats("lus", 3);
@@ -4313,6 +4357,7 @@ public function doMagicDamage(damage:Number, apply:Boolean = true, display:Boole
 		}
 		damage *= bonusDamageFromMissingHP;
 	}
+	if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
 	if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
 	if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
 	damage = DamageOverhaul(damage);
@@ -4363,6 +4408,7 @@ public function doMagicDamage(damage:Number, apply:Boolean = true, display:Boole
 }
 public function doFireDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 	MDOCount ++; // for multipile attacks to prevent stupid repeating of damage messages
+	damage *= doDamageReduction();
 	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
 		dynStats("lus", 3);
@@ -4376,6 +4422,7 @@ public function doFireDamage(damage:Number, apply:Boolean = true, display:Boolea
 		}
 		damage *= bonusDamageFromMissingHP;
 	}
+	if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
 	if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
 	if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
 	if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
@@ -4431,10 +4478,15 @@ public function doFireDamage(damage:Number, apply:Boolean = true, display:Boolea
 		monster.createStatusEffect(StatusEffects.RegenInhibitor, 5, 0, 0, 0);
 		if (monster.short == "Hydra") outputText(" The hydra hisses in anger as her wound cauterised, preventing regeneration. It's the time to strike!");
 	}
+	if (monster.hasStatusEffect(StatusEffects.IceArmor)) {
+		monster.addStatusValue(StatusEffects.IceArmor, 1, -1);
+		outputText(" The icy shield encasing " + monster.a + monster.short + " begins to melt from the heat.");
+	}
 	return damage;
 }
 public function doIceDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 	MDOCount ++; // for multipile attacks to prevent stupid repeating of damage messages
+	damage *= doDamageReduction();
 	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
 		dynStats("lus", 3);
@@ -4448,6 +4500,7 @@ public function doIceDamage(damage:Number, apply:Boolean = true, display:Boolean
 		}
 		damage *= bonusDamageFromMissingHP;
 	}
+	if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
 	if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
 	if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
 	if (monster.hasStatusEffect(StatusEffects.FrostburnDoT) && monster.statusEffectv3(StatusEffects.FrostburnDoT) > 0) damage *= (1 + (0.5 * monster.statusEffectv3(StatusEffects.FrostburnDoT)));
@@ -4501,10 +4554,15 @@ public function doIceDamage(damage:Number, apply:Boolean = true, display:Boolean
 	if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
 	//Keep shit in bounds.
 	if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
+	if (monster.hasStatusEffect(StatusEffects.IceArmor)) {
+		monster.addStatusValue(StatusEffects.IceArmor, 1, 1);
+		outputText(" The icy shield encasing " + monster.a + monster.short + " hardens from the cold.");
+	}
 	return damage;
 }
 public function doLightingDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 	MDOCount ++; // for multipile attacks to prevent stupid repeating of damage messages
+	damage *= doDamageReduction();
 	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
 		dynStats("lus", 3);
@@ -4518,6 +4576,7 @@ public function doLightingDamage(damage:Number, apply:Boolean = true, display:Bo
 		}
 		damage *= bonusDamageFromMissingHP;
 	}
+	if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
 	if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
 	if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
 	if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
@@ -4573,6 +4632,7 @@ public function doLightingDamage(damage:Number, apply:Boolean = true, display:Bo
 }
 public function doDarknessDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 	MDOCount ++; // for multipile attacks to prevent stupid repeating of damage messages
+	damage *= doDamageReduction();
 	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
 		dynStats("lus", 3);
@@ -4586,6 +4646,7 @@ public function doDarknessDamage(damage:Number, apply:Boolean = true, display:Bo
 		}
 		damage *= bonusDamageFromMissingHP;
 	}
+	if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
 	if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
 	if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
 	if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.2;
@@ -4641,6 +4702,7 @@ public function doDarknessDamage(damage:Number, apply:Boolean = true, display:Bo
 }
 public function doPoisonDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 	MDOCount ++; // for multipile attacks to prevent stupid repeating of damage messages
+	damage *= doDamageReduction();
 	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
 		dynStats("lus", 3);
@@ -4654,6 +4716,7 @@ public function doPoisonDamage(damage:Number, apply:Boolean = true, display:Bool
 		}
 		damage *= bonusDamageFromMissingHP;
 	}
+	if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
 	if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
 	if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
 	damage = DamageOverhaul(damage);
@@ -4982,6 +5045,7 @@ public function awardPlayer(nextFunc:Function = null):void
 		if (player.hasPerk(PerkLib.Hoarder)) bonusGems2 += monster.gems * 0.15;
 		if (player.hasPerk(PerkLib.BlessedByLadyGodiva)) bonusGems2 += monster.gems * 0.15;
 		if (player.hasPerk(PerkLib.LadyGodivasFavoriteChild)) bonusGems2 += monster.gems * 0.15;
+		bonusGems2 = Math.round(bonusGems2);
 		monster.gems += bonusGems2;
 	}
 	if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) {
@@ -5634,6 +5698,37 @@ private function combatStatusesUpdate():void {
 			player.removeStatusEffect(StatusEffects.AcidDoT);
 		}
 	}
+	//Frostburn DoT
+	if (player.hasStatusEffect(StatusEffects.FrostburnDoT)) {
+		player.addStatusValue(StatusEffects.FrostburnDoT,1,-1);
+		//Heal wounds
+		if (player.statusEffectv1(StatusEffects.FrostburnDoT) <= 0) {
+			outputText("Frostburn wounds left by " + monster.a + monster.short + " finally close ups.\n\n");
+			player.removeStatusEffect(StatusEffects.FrostburnDoT);
+		}
+		else {
+			var frostburnPlayer:Number = (monster.str + monster.spe + monster.tou) * 2.5;
+			frostburnPlayer += player.maxHP() * player.statusEffectv2(StatusEffects.FrostburnDoT);
+			outputText("You are hurt by lingering Frostburn after-effect. ");
+			player.takeIceDamage(frostburnPlayer, true);
+			outputText("\n\n");
+		}
+	}
+	//Frozen Lung DoT
+	if (player.hasStatusEffect(StatusEffects.FrozenLung)) {
+		player.addStatusValue(StatusEffects.FrozenLung,1,-1);
+		//Heal wounds
+		if (player.statusEffectv1(StatusEffects.FrozenLung) <= 0) {
+			outputText("Frozen Lung left by " + monster.a + monster.short + " finally ends.\n\n");
+			player.removeStatusEffect(StatusEffects.FrozenLung);
+		}
+		else {
+			var frozenlung:Number = player.maxHP() * player.statusEffectv2(StatusEffects.FrozenLung);
+			outputText("You are hurt by lingering Frozen Lung after-effect. ");
+			player.takeIceDamage(frostburnPlayer, true);
+			outputText("\n\n");
+		}
+	}
 	//Hydra Regeneration Inhibition
 	if (player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) {
 		player.addStatusValue(StatusEffects.HydraRegenerationDisabled,1,-1);
@@ -6013,6 +6108,15 @@ private function combatStatusesUpdate():void {
 		}
 		else {
 			player.addStatusValue(StatusEffects.CooldownHungeringCold,1,-1);
+		}
+	}
+	//Frozen kiss
+	if (player.hasStatusEffect(StatusEffects.CooldownFrozenKiss)) {
+		if (player.statusEffectv1(StatusEffects.CooldownFrozenKiss) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownFrozenKiss);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownFrozenKiss,1,-1);
 		}
 	}
 	//Illusion
@@ -6507,6 +6611,10 @@ public function PercentBasedRegeneration():Number {
 		if (player.hasPerk(PerkLib.Regeneration6)) maxPercentRegen += 0.5;
 	}
 	if (player.armor == armors.NURSECL) maxPercentRegen += 0.5;
+	if (player.armor == armors.BLIZZ_K) {
+		if (!player.hasPerk(PerkLib.ColdAffinity)) maxPercentRegen -= 10;
+		if (player.yukiOnnaScore() >= 14) maxPercentRegen += 5;
+	}
 	if (player.weapon == weapons.SESPEAR) maxPercentRegen += 2;
 	if (player.hasPerk(PerkLib.LustyRegeneration)) maxPercentRegen += 0.5;
 	if (player.hasPerk(PerkLib.LizanRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1.5;
@@ -6555,6 +6663,7 @@ public function maximumRegeneration():Number {
 	if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) maxRegen += 0.5;
 	if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) maxRegen += 0.5;
 	if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) maxRegen += 0.5;
+	if (player.armor == armors.BLIZZ_K && player.yukiOnnaScore() >= 14) maxRegen += 5;
 	if (combat && player.headJewelry == headjewelries.CUNDKIN && player.HP < 1) maxRegen += 1;
 	if (player.hasKeyItem("M.G.S. bracer") >= 0) maxRegen += 2;
 	return maxRegen;
@@ -7004,6 +7113,8 @@ public function display():void {
 		}
 		if (player.hasPerk(PerkLib.EyesOfTheHunterAdept) && player.sens >= 50) {
 			if (monster.hasPerk(PerkLib.EnemyBossType)) generalTypes.push("Boss");
+			if (monster.hasPerk(PerkLib.EnemyChampionType)) generalTypes.push("Champion");
+			if (monster.hasPerk(PerkLib.EnemyEliteType)) generalTypes.push("Elite");
 			if (monster.hasPerk(PerkLib.EnemyGodType)) generalTypes.push("God");
 		}
 		if (player.hasPerk(PerkLib.EyesOfTheHunterAdept) && player.sens >= 50) {
@@ -8508,15 +8619,15 @@ private function touSpeStrScale(stat:int):Number{
 	for(var i:int = 20; (i <= 80) && (i <= stat); i += 20){
 		scale += stat - i;
 	}
-	for(i = 100; (i <= 4000) && (i <= stat); i += 50){
+	for(i = 100; (i <= 10000) && (i <= stat); i += 50){
 		scale += stat - i;
 	}
 	return scale;
 }
 private function inteWisLibScale(stat:int):Number{
-	var scale:Number = 20.75;
+	var scale:Number = 50.75;
 	var changeBy:Number = 0.50;
-	if(stat <= 4000){
+	if(stat <= 10000){
 		if(stat <= 100){
 			scale = (2/6) + ((int(stat/100)/20) * (1/6));
 			changeBy = 0.25;
@@ -8558,4 +8669,4 @@ public function scalingBonusLibido():Number {
 	return inteWisLibScale(player.lib);
 }
 }
-}
+}

@@ -755,6 +755,7 @@ package classes.Scenes.Places.HeXinDao
 					outputText("She hand you over a new necklace which you proceed to don up.\n\n");
 					player.removeKeyItem("Adventurer Guild: Copper plate");
 					player.createKeyItem("Adventurer Guild: Iron plate", 0, 0, 0, 0);
+					flags[kFLAGS.SPIRIT_STONES] -= 10;
 				}
 				else {
 					outputText("Yeah sure, you will get promoted. Or rather you would like to but you lack the required spirit stones for the promotion fee.\n\n");
@@ -767,6 +768,7 @@ package classes.Scenes.Places.HeXinDao
 					outputText("She hand you over a new necklace which you proceed to don up.\n\n");
 					player.removeKeyItem("Adventurer Guild: Iron plate");
 					player.createKeyItem("Adventurer Guild: Bronze plate", 0, 0, 0, 0);
+					flags[kFLAGS.SPIRIT_STONES] -= 15;
 				}
 				else {
 					outputText("Yeah sure, you will get promoted. Or rather you would like to but you lack the required spirit stones for the promotion fee.\n\n");

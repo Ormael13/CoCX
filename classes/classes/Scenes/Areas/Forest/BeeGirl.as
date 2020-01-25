@@ -23,7 +23,7 @@ public class BeeGirl extends Monster {
 				else {
 					outputText("You smile in satisfaction as the " + short + " spreads her legs and starts frigging her honey-soaked cunt.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully, and you see an easy way to relieve it..\n\nWhat do you do to her?");
 				}
-				player.lust = 98;
+				player.lust += 33;
 				player.dynStats("lus", 1);
 				SceneLib.forest.beeGirlScene.afterfightoptionswithBeeGirl();
 			}
@@ -79,7 +79,7 @@ public class BeeGirl extends Monster {
 				if (player.gender == 2) outputText("planting your aching sex over her face while you lick her sweet honeypot. ");
 				if (player.gender == 3) outputText("or cocks, tits, and puffy nipples. ");
 				player.dynStats("lus", 25);
-				if (player.lust > 60) {
+				if (player.lust > player.lust100 * 0.6) {
 					outputText(" You shake your head and struggle to stay focused,");
 					if (player.gender == 1 || player.gender == 3) outputText(" but it's difficult with the sensitive bulge in your groin.");
 					if (player.gender == 2) outputText(" but can't ignore the soaking wetness in your groin.");
@@ -99,7 +99,7 @@ public class BeeGirl extends Monster {
 					player.addStatusEffect(paralyze);
 					outputText("  You've fallen prey to paralyzation venom!  Better end this quick!");
 				}
-				paralyze.increase();
+				paralyze.increaseBee();
 			}
 			if (player.lust >= player.maxLust())
 				doNext(SceneLib.combat.endLustLoss);
@@ -112,7 +112,7 @@ public class BeeGirl extends Monster {
 			this.a = "a ";
 			this.short = "bee-girl";
 			this.imageName = "beegirl";
-			this.long = "A bee-girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae.type, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.";
+			this.long = "A bee-girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.";
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_GAPING);
 			createBreastRow(Appearance.breastCupInverse("DD"));
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;

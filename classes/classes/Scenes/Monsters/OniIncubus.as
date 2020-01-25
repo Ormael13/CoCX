@@ -14,10 +14,32 @@ import classes.internals.*;
 
 	public class OniIncubus extends Monster
 	{
-		public function straightJab():void
-		{
+		public function oniHypermode():void {
+			if (hasStatusEffect(StatusEffects.Uber)) {
+				removeStatusEffect(StatusEffects.Uber);
+				if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FreezingBreathStun) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Fear) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce)) {
+					outputText(short+" reels in frustration as his concentration breaks under your assaults.\n\n");
+				}
+				else {
+					outputText(short+" release a primal shout as he begins to rampage!!!\n\n");
+					createStatusEffect(StatusEffects.Hypermode, 4, 10, 0, 0);
+				}
+			}
+			else {
+				outputText(short+" begins to slam his foot around in a weird dance causing the ground to shake as he grows in power. You have flashbacks of Izumi doing the same before and it'd be wise to interrupt it.");
+				createStatusEffect(StatusEffects.Uber, 0, 0, 0, 0);
+			}
+		}
+		
+		public function oniPulverise():void {
+			outputText(short + " suddenly closes his fist and slam you into the ground with enough strength to dig you into a hole. You're going to have some trouble freeing yourself.");
+			player.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
+		}
+		
+		public function straightJab():void {
 			outputText("Quick as a flash, "+short+" lashes out with his free hand, aiming for your head.");
 			var damage:int = int((str + 175) - rand(player.tou) - player.armorDef);
+			if (hasStatusEffect(StatusEffects.Hypermode)) damage *= 10;
 			if (player.getEvasionRoll())
 			{
 				outputText("  You deftly dodge under the lightning-quick punch.");
@@ -38,8 +60,21 @@ import classes.internals.*;
 		
 		override protected function performCombatAction():void
 		{
-			if (rand(2) == 0) straightJab();
-			else eAttack();
+			if (hasStatusEffect(StatusEffects.Uber)) {
+				oniHypermode();
+				return;
+			}
+			var choice:Number = rand(4);
+			if (choice == 0) eAttack();
+			if (choice == 1) straightJab();
+			if (choice == 2) {
+				if (player.hasStatusEffect(StatusEffects.Stunned)) eAttack();
+				else oniPulverise();
+			}
+			if (choice == 3) {
+				if (hasStatusEffect(StatusEffects.Hypermode)) straightJab();
+				else oniHypermode();
+			}
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -69,9 +104,9 @@ import classes.internals.*;
 			this.imageName = "chonlao";
 			this.long = "If you thought Oni were immune to demonic corruption, Chon Lao the Ushi Oni is the proof that they are not. The man is easily 10 feet tall and just as strong, if not stronger than, Izumi. Massive horns dot his forehead, with 2 larger ones crowning the side like the head of a bull, and the massive 36 inches of man meat pulsing under his pants would scare the hell out of any normal woman. He glares at you, as if preparing to squash a bug.";
 			// this.plural = false;
-			this.createCock(36,8);
+			this.createCock(36,7);
 			this.balls = 2;
-			this.ballSize = 4;
+			this.ballSize = 5;
 			this.cumMultiplier = 1;
 			this.hoursSinceCum = 1000;
 			createBreastRow(0);

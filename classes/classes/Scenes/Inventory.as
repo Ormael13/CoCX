@@ -33,7 +33,7 @@ import classes.Scenes.NPCs.MagnoliaFollower;
 use namespace CoC;
 
 	public class Inventory extends BaseContent {
-		private static const inventorySlotName:Array = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"];
+		private static const inventorySlotName:Array = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"];
 		
 		private var itemStorage:Array;
 		private var pearlStorage:Array;
@@ -70,9 +70,9 @@ use namespace CoC;
 		
 		public function itemGoNext():void { if (callNext != null) doNext(callNext); }
 		
-		public function inventoryMenu():void {
+		public function inventoryMenu(page:int = 1):void {
 			var x:int;
-			var foundItem:Boolean = false;
+			//var foundItem:Boolean = false;
             if (CoC.instance.inCombat) {
                 callNext = inventoryCombatHandler; //Player will return to combat after item use
 			}
@@ -99,19 +99,35 @@ use namespace CoC;
 			if (player.findPerk(PerkLib.FourthRing) >= 0) outputText("<b>Ring (4th):</b> " + player.jewelry4.name + "\n");
 			//outputText("<b>Accessory:</b> " + player.jewelryName + "\n");
 			outputText("<b>Vehicle:</b> " + player.vehiclesName + "\n");
-			if (player.hasKeyItem("Bag of Cosmos") >= 0) outputText("\nAt your belt hangs bag of cosmos.\n");
-			if (player.hasKeyItem("Sky Poison Pearl") >= 0) outputText("\nThere is a circular green imprint at the palm of your left hand.\n");
-			if (player.keyItems.length > 0) outputText("<b><u>\nKey Items:</u></b>\n");
+			if (player.hasKeyItem("Bag of Cosmos") >= 0 || player.hasKeyItem("Sky Poison Pearl") >= 0) {
+				outputText("\n");
+				if (player.hasKeyItem("Bag of Cosmos") >= 0) outputText("<i>At your belt hangs bag of cosmos.</i>\n");
+				if (player.hasKeyItem("Sky Poison Pearl") >= 0) outputText("<i>There is a circular green imprint at the palm of your left hand.</i>\n");
+			}
+			outputText("\nWhich item will you use? (To discard unwanted items, hold Shift then click the item.)");
+			outputText("\n<b>Capacity:</b> " + getOccupiedSlots() + " / " + getMaxSlots() + "\n");
+			if (player.keyItems.length > 0) outputText("\n<b><u>Key Items:</u></b>\n");
 			for (x = 0; x < player.keyItems.length; x++) outputText(player.keyItems[x].keyName + "\n");
 			menu();
-			for (x = 0; x < 10; x++) {
-				if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
-					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), useItemInInventory, x);
-					foundItem = true;
+			if (page == 1) {
+				for (x = 0; x < 10; x++) {
+					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
+						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), useItemInInventory, x);
+						//foundItem = true;
+					}
 				}
+				if (getMaxSlots() > 10) addButton(13, "Next", inventoryMenu, page + 1);
 			}
-
-if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
+			if (page == 2) {
+				for (x = 10; x < 20; x++) {
+					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
+						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), useItemInInventory, x);
+						//foundItem = true;
+					}
+				}
+				addButton(13, "Prev", inventoryMenu, page - 1);
+			}/*
+			if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
                 var miscNieve:Boolean = Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
                 var miscHolli:Boolean         = flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 || flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4);
 				if (miscNieve
@@ -120,7 +136,8 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 					|| player.hasKeyItem("Gryphon Statuette") >= 0
 					|| player.hasKeyItem("Peacock Statuette") >= 0
 					|| flags[kFLAGS.ANEMONE_KID] > 0
-					|| flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
+					|| flags[kFLAGS.ALRAUNE_SEEDS] > 0
+					|| (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 1 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8)) {
 					if (miscNieve) {
 						if (flags[kFLAGS.NIEVE_STAGE] == 1)
 							outputText("\nThere's some odd snow here that you could do something with...\n");
@@ -139,9 +156,9 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 					}
 					addButton(13, "Misc.", miscitemsMenu);
 				}
-			}
+			}*/
             if (!CoC.instance.inCombat) {
-                addButton(10, "Unequip", manageEquipment);
+                addButton(10, "Unequip/Misc", manageEquipmentmiscitemsMenu);
 				if (player.hasKeyItem("Bag of Cosmos") >= 0) {
 					addButton(11, "Bag of Cosmos", BagOfCosmosMenu);
 				}
@@ -149,21 +166,64 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 					addButton(12, "Sky P. Pearl", SkyPoisonPearlMenu);
 				}
 			}
-			if (foundItem) {
-                if (CoC.instance.inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv1(StatusEffects.Sealed) == 3) {
-                    outputText("\nYou reach for your items, but you just can't get your pouches open.  <b>Your ability to use items was sealed, and now you've wasted a chance to attack!</b>\n\n");
-                    SceneLib.combat.enemyAIImpl();
-                    return;
-				}
-				outputText("\nWhich item will you use? (To discard unwanted items, hold Shift then click the item.)");
+            if (CoC.instance.inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv1(StatusEffects.Sealed) == 3) {
+				outputText("\nYou reach for your items, but you just can't get your pouches open.  <b>Your ability to use items was sealed, and now you've wasted a chance to attack!</b>\n\n");
+				SceneLib.combat.enemyAIImpl();
+				return;
 			}
-			outputText("\n<b>Capacity:</b> " + getOccupiedSlots() + " / " + getMaxSlots());
-            if (CoC.instance.inCombat)
+			if (CoC.instance.inCombat)
                 addButton(14, "Back", SceneLib.combat.combatMenu, false); //Player returns to the combat menu on cancel
 			else addButton(14, "Back", playerMenu);
 //Gone			menuLoc = 1;
 		}
 		
+		public function manageEquipmentmiscitemsMenu():void {
+			menu();
+			if (inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
+				var miscNieve:Boolean = Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
+                var miscHolli:Boolean = flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 || flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4);
+				if (miscNieve || miscHolli || player.hasKeyItem("Dragon Egg") >= 0 || player.hasKeyItem("Gryphon Statuette") >= 0 || player.hasKeyItem("Peacock Statuette") >= 0
+					|| flags[kFLAGS.ANEMONE_KID] > 0 || flags[kFLAGS.ALRAUNE_SEEDS] > 0 || (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 1 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8)) {
+					if (miscNieve) {
+						if (flags[kFLAGS.NIEVE_STAGE] == 1)
+							outputText("\nThere's some odd snow here that you could do something with...\n");
+                        else outputText("\nYou have a snow" + Holidays.nieveMF("man", "woman") + " here that seems like it could use a little something...\n");
+                    }
+					if (player.hasKeyItem("Dragon Egg") >= 0) {
+                        SceneLib.emberScene.emberCampDesc();
+					}
+					if (flags[kFLAGS.ANEMONE_KID] > 0) {
+						SceneLib.anemoneScene.anemoneBarrelDescription();
+					}
+					if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
+						outputText("\nYou have " + flags[kFLAGS.ALRAUNE_SEEDS] + " alraune seeds planted in your garden.");
+						if (flags[kFLAGS.ALRAUNE_GROWING] > 14) outputText(" Some have already grown to adulthood.");
+						outputText("\n");
+					}
+					if (Holidays.nieveHoliday()) {
+						if (flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) addButton(1, "Snow", Holidays.nieveBuilding);
+						if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0 && player.hasKeyItem("Mysterious Seed") >= 0) addButton(7, "Mysterious Seed", Magnolia.treeMenu);
+						if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 1 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8) {
+							if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 6 && player.hasKeyItem("Decorations") >= 0) addButton(7, "Decorate Tree", Magnolia.treeMenu);
+							else addButton(7, (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] >= 7 ? "Ch. Tree" : "Green Tree"), Magnolia.treeMenu);
+						}
+					}
+					if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4) addButton(2, (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), SceneLib.holliScene.treeMenu);
+					if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4) addButton(2, (flags[kFLAGS.FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), HolliPure.treeMenu);
+					if (player.hasKeyItem("Dragon Egg") >= 0) addButton(3, "Egg", SceneLib.emberScene.emberEggInteraction);
+					if (flags[kFLAGS.ANEMONE_KID] > 0) {
+						//CoC.instance.anemoneScene.anemoneBarrelDescription();
+						if (model.time.hours >= 6) addButton(4, "Anemone", SceneLib.anemoneScene.approachAnemoneBarrel);
+					}
+					if (flags[kFLAGS.ALRAUNE_SEEDS] > 0 && model.time.hours >= 6) addButton(0, "Garden", Gardening.manageyourgarden).hint("Visit your plant offspring");
+					if (player.hasKeyItem("Gryphon Statuette") >= 0) addButton(6, "Gryphon", CoC.instance.mutations.skybornSeed, 1);
+					if (player.hasKeyItem("Peacock Statuette") >= 0) addButton(6, "Peacock", CoC.instance.mutations.skybornSeed, 2);
+				}
+			}
+			addButton(10, "Unequip", manageEquipment);
+			addButton(14, "Back", inventoryMenu);
+		}
+		/*
 		public function miscitemsMenu():void {
 			var foundItem:Boolean = false;
 			menu();
@@ -208,7 +268,7 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 				addButton(6, "Peacock", CoC.instance.mutations.skybornSeed, 2);
 			}
 			addButton(14, "Back", inventoryMenu);
-		}
+		}*/
 		
 		public function BagOfCosmosMenu():void {
 			hideMenus();
@@ -465,13 +525,14 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 		}
 		
 		public function getMaxSlots():int {
-			var slots:int = 3;
+			var slots:int = 5;
 			if (player.findPerk(PerkLib.StrongBack) >= 0) slots++;
 			if (player.findPerk(PerkLib.StrongBack2) >= 0) slots++;
+			if (player.findPerk(PerkLib.StrongBack3) >= 0) slots++;
 			slots += player.keyItemv1("Backpack");
-			//Constrain slots to between 3 and 10.
-			if (slots < 3) slots = 3;
-			if (slots > 10) slots = 10;
+			//Constrain slots to between 5 and 20.
+			if (slots < 5) slots = 5;
+			if (slots > 20) slots = 20;
 			return slots;
 		}
 		public function getOccupiedSlots():int {
@@ -679,13 +740,28 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 			}
 		}
 		
-		private function takeItemFull(itype:ItemType, showUseNow:Boolean, source:ItemSlotClass):void {
+		private function takeItemFull(itype:ItemType, showUseNow:Boolean, source:ItemSlotClass, page:int = 1):void {
+			var x:int;
 			outputText("There is no room for " + itype.longName + " in your inventory.  You may replace the contents of a pouch with " + itype.longName + " or abandon it.");
 			menu();
+			if (page == 1) {
+				for (x = 0; x < 10; x++) {
+					if (player.itemSlots[x].unlocked)
+						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
+				}
+				if (getMaxSlots() > 10) addButton(11, "Next", curry(takeItemFull, itype, showUseNow, source, page + 1));
+			}
+			if (page == 2) {
+				for (x = 10; x < 20; x++) {
+					if (player.itemSlots[x].unlocked)
+						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
+				}
+				addButton(11, "Prev", curry(takeItemFull, itype, showUseNow, source, page - 1));
+			}/*
 			for (var x:int = 0; x < 10; x++) {
 				if (player.itemSlots[x].unlocked)
 					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
-			}
+			}*/
 			if (source != null) {
 				currentItemSlot = source;
 				addButton(12, "Put Back", createCallBackFunction2(returnItemToInventory, itype, false));
@@ -842,70 +918,63 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 			}
 		}
 		
-		public function manageEquipment():void {
+		public function manageEquipment(page:int = 1):void {
 			clearOutput();
 			outputText("Which would you like to unequip?\n\n");
 			menu();
-			if (player.weapon != WeaponLib.FISTS && !player.hasPerk(PerkLib.Rigidity))
-			{
-				addButton(0, "Weapon (M)", unequipWeapon).hint(player.weapon.description, capitalizeFirstLetter(player.weapon.name));
+			if (page == 1) {
+				if (player.weapon != WeaponLib.FISTS && !player.hasPerk(PerkLib.Rigidity)) {
+					addButton(0, "Weapon (M)", unequipWeapon).hint(player.weapon.description, capitalizeFirstLetter(player.weapon.name));
+				}
+				if (player.weaponRange != WeaponRangeLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
+					addButton(1, "Weapon (R)", unequipWeaponRange).hint(player.weaponRange.description, capitalizeFirstLetter(player.weaponRange.name));
+				}
+				if (player.shield != ShieldLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
+					addButton(2, "Shield", unequipShield).hint(player.shield.description, capitalizeFirstLetter(player.shield.name));
+				}
+				if (player.armor != ArmorLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
+					addButton(5, "Armour", unequipArmor).hint(player.armor.description, capitalizeFirstLetter(player.armor.name));
+				}
+				if (player.upperGarment != UndergarmentLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
+					addButton(6, "Upperwear", unequipUpperwear).hint(player.upperGarment.description, capitalizeFirstLetter(player.upperGarment.name));
+				}
+				if (player.lowerGarment != UndergarmentLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
+					addButton(7, "Lowerwear", unequipLowerwear).hint(player.lowerGarment.description, capitalizeFirstLetter(player.lowerGarment.name));
+				}
+				if (player.vehicles != VehiclesLib.NOTHING) {
+					addButton(10, "Vehicle", unequipVehicle).hint(player.vehicles.description, capitalizeFirstLetter(player.vehicles.name));
+				}
+				addButton(13, "-2-", manageEquipment, page + 1);
 			}
-			if (player.weaponRange != WeaponRangeLib.NOTHING && !player.hasPerk(PerkLib.Rigidity))
-			{
-				addButton(1, "Weapon (R)", unequipWeaponRange).hint(player.weaponRange.description, capitalizeFirstLetter(player.weaponRange.name));
+			if (page == 2) {
+				if (player.jewelry != JewelryLib.NOTHING) {
+					addButton(0, "Ring 1", unequipJewel1).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
+				}
+				if (player.jewelry2 != JewelryLib.NOTHING) {
+					addButton(1, "Ring 2", unequipJewel2).hint(player.jewelry2.description, capitalizeFirstLetter(player.jewelry2.name));
+				}
+				if (player.jewelry3 != JewelryLib.NOTHING) {
+					addButton(2, "Ring 3", unequipJewel3).hint(player.jewelry3.description, capitalizeFirstLetter(player.jewelry3.name));
+				}
+				if (player.jewelry4 != JewelryLib.NOTHING) {
+					addButton(3, "Ring 4", unequipJewel4).hint(player.jewelry4.description, capitalizeFirstLetter(player.jewelry4.name));
+				}
+				if (player.headJewelry != HeadJewelryLib.NOTHING) {
+					addButton(5, "Head Acc", unequipHeadJewel).hint(player.headJewelry.description, capitalizeFirstLetter(player.headJewelry.name));
+				}		
+				if (player.necklace != NecklaceLib.NOTHING) {
+					addButton(6, "Necklace", unequipNecklace).hint(player.necklace.description, capitalizeFirstLetter(player.necklace.name));
+				}
+				addButton(13, "-1-", manageEquipment, page - 1);
 			}
-			if (player.shield != ShieldLib.NOTHING && !player.hasPerk(PerkLib.Rigidity))
-			{
-				addButton(2, "Shield", unequipShield).hint(player.shield.description, capitalizeFirstLetter(player.shield.name));
-			}/*
-			if (player.jewelry != JewelryLib.NOTHING)
-			{
+			/*if (player.jewelry != JewelryLib.NOTHING) {
 				addButton(3, "Accessory", unequipJewel).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
-			}*/
-			if (player.jewelry != JewelryLib.NOTHING)
-			{
-				addButton(3, "Ring 1", unequipJewel1).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
 			}
-			if (player.jewelry2 != JewelryLib.NOTHING)
-			{
-				addButton(4, "Ring 2", unequipJewel2).hint(player.jewelry2.description, capitalizeFirstLetter(player.jewelry2.name));
-			}
-			if (player.armor != ArmorLib.NOTHING && !player.hasPerk(PerkLib.Rigidity))
-			{
-				addButton(5, "Armour", unequipArmor).hint(player.armor.description, capitalizeFirstLetter(player.armor.name));
-			}
-			if (player.upperGarment != UndergarmentLib.NOTHING && !player.hasPerk(PerkLib.Rigidity))
-			{
-				addButton(6, "Upperwear", unequipUpperwear).hint(player.upperGarment.description, capitalizeFirstLetter(player.upperGarment.name));
-			}
-			if (player.lowerGarment != UndergarmentLib.NOTHING && !player.hasPerk(PerkLib.Rigidity))
-			{
-				addButton(7, "Lowerwear", unequipLowerwear).hint(player.lowerGarment.description, capitalizeFirstLetter(player.lowerGarment.name));
-			}
-			if (player.jewelry3 != JewelryLib.NOTHING)
-			{
-				addButton(8, "Ring 3", unequipJewel3).hint(player.jewelry3.description, capitalizeFirstLetter(player.jewelry3.name));
-			}
-			if (player.jewelry4 != JewelryLib.NOTHING)
-			{
-				addButton(9, "Ring 4", unequipJewel4).hint(player.jewelry4.description, capitalizeFirstLetter(player.jewelry4.name));
-			}
-			if (player.headJewelry != HeadJewelryLib.NOTHING)
-			{
-				addButton(10, "Head Acc", unequipHeadJewel).hint(player.headJewelry.description, capitalizeFirstLetter(player.headJewelry.name));
-			}		
-			if (player.necklace != NecklaceLib.NOTHING)
-			{
-				addButton(11, "Necklace", unequipNecklace).hint(player.necklace.description, capitalizeFirstLetter(player.necklace.name));
-			}
-			if (player.vehicles != VehiclesLib.NOTHING)
-			{
-				addButton(12, "Vehicle", unequipVehicle).hint(player.vehicles.description, capitalizeFirstLetter(player.vehicles.name));
-			}/*
 			zrobić sloty:
-			może jeszcze 1-3 kolejne ringi (poza pierwszym orginalnym slotem)
 			coś w stylu slotu na prawdziwe akcesoria
 			może coś na item związany z soulforce - ala latający miecz lub takie tam itemy ^^
+			na pas/belt?
+			2 bransolety/bracelets(on arm wrists)?
 			przy dodawaniu tych slotow popatrzec czy ktorys nie bedzie musial uzywac tego fragmentu kodu:
 			else if (item is Shield) {
 				player.shield.removeText();
@@ -916,18 +985,31 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 		}
 		//Unequip!
 		private function unequipWeapon():void {
-			takeItem(player.setWeapon(WeaponLib.FISTS), inventoryMenu);
+			if (player.weaponName == "Aether (Dex)") {
+				player.weapon.removeText();
+				player.setWeapon(WeaponLib.FISTS);
+				manageEquipment(1);
+			}
+			else takeItem(player.setWeapon(WeaponLib.FISTS), inventoryMenu);
 		}
 		private function unequipWeaponRange():void {
 			takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), inventoryMenu);
 		}
+		public function unequipShield():void {
+			if (player.shieldName == "Aether (Sin)") {
+				player.shield.removeText();
+				player.setShield(ShieldLib.NOTHING);
+				manageEquipment(1);
+			}
+			else takeItem(player.setShield(ShieldLib.NOTHING), inventoryMenu);
+		}
 		public function unequipArmor():void {
-			if (player.armorName != "goo armor") takeItem(player.setArmor(ArmorLib.NOTHING), inventoryMenu); 
-			else { //Valeria belongs in the camp, not in your inventory!
+			if (player.armorName == "goo armor") { //Valeria belongs in the camp, not in your inventory!
 				player.armor.removeText();
 				player.setArmor(ArmorLib.NOTHING);
-				doNext(manageEquipment);
+				manageEquipment(1);
 			}
+			else takeItem(player.setArmor(ArmorLib.NOTHING), inventoryMenu);
 		}
 		public function unequipUpperwear():void {
 			takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR), inventoryMenu);
@@ -955,9 +1037,6 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 		}
 		public function unequipVehicle():void {
 			takeItem(player.setVehicle(VehiclesLib.NOTHING), inventoryMenu);
-		}
-		public function unequipShield():void {
-			takeItem(player.setShield(ShieldLib.NOTHING), inventoryMenu);
 		}
 
 		//Pick item to take from storage
@@ -1173,52 +1252,100 @@ if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && 
 		private function undergarmentAcceptable(itype:ItemType):Boolean { return itype is Undergarment; }
 		
 		//Place in storage functions
-		private function pickItemToPlaceInStorage(placeInStorageFunction:Function, typeAcceptableFunction:Function, text:String, showEmptyWarning:Boolean):void {
+		private function pickItemToPlaceInStorage(placeInStorageFunction:Function, typeAcceptableFunction:Function, text:String, showEmptyWarning:Boolean, page:int = 1):void {
+			var x:int;
 			clearOutput(); //Selects an item to place in a gear slot. Rewritten so that it no longer needs to use numbered events
 			hideUpDown();
 			outputText("What item slot do you wish to empty into your " + text + "?");
 			menu();
 			var foundItem:Boolean = false;
-			for (var x:int = 0; x < 10; x++) {
-				if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
-					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
-					foundItem = true;
+			if (page == 1) {
+				for (x = 0; x < 10; x++) {
+					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
+						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
+						foundItem = true;
+					}
 				}
+				if (getMaxSlots() > 10) addButton(13, "Next", curry(pickItemToPlaceInStorage, placeInStorageFunction, typeAcceptableFunction, text, showEmptyWarning, page + 1));
+			}
+			if (page == 2) {
+				for (x = 10; x < 20; x++) {
+					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
+						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
+						foundItem = true;
+					}
+				}
+				addButton(13, "Prev", curry(pickItemToPlaceInStorage, placeInStorageFunction, typeAcceptableFunction, text, showEmptyWarning, page - 1));
 			}
 			if (showEmptyWarning && !foundItem) outputText("\n<b>You have no appropriate items to put in this " + text + ".</b>");
 			addButton(14, "Back", stash);
 		}
+		private function pickItemToPlaceInStorageA(page:int = 1):void {
+			
+		}
 		
-		private function pickItemToPlaceInStorage2(placeInStorageFunction:Function, typeAcceptableFunction:Function, text:String, showEmptyWarning:Boolean):void {
+		private function pickItemToPlaceInStorage2(placeInStorageFunction:Function, typeAcceptableFunction:Function, text:String, showEmptyWarning:Boolean, page:int = 1):void {
+			var x:int;
 			clearOutput(); //Selects an item to place in a gear slot. Rewritten so that it no longer needs to use numbered events
 			hideUpDown();
 			outputText("What item slot do you wish to empty into your " + text + "?");
 			menu();
 			var foundItem:Boolean = false;
-			for (var x:int = 0; x < 10; x++) {
-				if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
-					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
-					foundItem = true;
+			if (page == 1) {
+				for (x = 0; x < 10; x++) {
+					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
+						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
+						foundItem = true;
+					}
 				}
+				if (getMaxSlots() > 10) addButton(13, "Next", curry(pickItemToPlaceInStorage2, placeInStorageFunction, typeAcceptableFunction, text, showEmptyWarning, page + 1));
+			}
+			if (page == 2) {
+				for (x = 10; x < 20; x++) {
+					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
+						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
+						foundItem = true;
+					}
+				}
+				addButton(13, "Prev", curry(pickItemToPlaceInStorage2, placeInStorageFunction, typeAcceptableFunction, text, showEmptyWarning, page - 1));
 			}
 			if (showEmptyWarning && !foundItem) outputText("\n<b>You have no appropriate items to put in this " + text + ".</b>");
 			addButton(14, "Back", inventoryMenu);
 		}
+		private function pickItemToPlaceInStorage2A():void {
+			
+		}
 		
-		private function pickItemToPlaceInStorage3(placeInStorageFunction:Function, typeAcceptableFunction:Function, text:String, showEmptyWarning:Boolean):void {
+		private function pickItemToPlaceInStorage3(placeInStorageFunction:Function, typeAcceptableFunction:Function, text:String, showEmptyWarning:Boolean, page:int = 1):void {
+			var x:int;
 			clearOutput(); //Selects an item to place in a gear slot. Rewritten so that it no longer needs to use numbered events
 			hideUpDown();
 			outputText("What item slot do you wish to empty into your " + text + "?");
 			menu();
 			var foundItem:Boolean = false;
-			for (var x:int = 0; x < 10; x++) {
-				if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
-					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
-					foundItem = true;
+			if (page == 1) {
+				for (x = 0; x < 10; x++) {
+					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
+						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
+						foundItem = true;
+					}
 				}
+				if (getMaxSlots() > 10) addButton(13, "Next", curry(pickItemToPlaceInStorage3, placeInStorageFunction, typeAcceptableFunction, text, showEmptyWarning, page + 1));
+			}
+			if (page == 2) {
+				for (x = 10; x < 20; x++) {
+					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
+						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
+						foundItem = true;
+					}
+				}
+				addButton(13, "Prev", curry(pickItemToPlaceInStorage3, placeInStorageFunction, typeAcceptableFunction, text, showEmptyWarning, page - 1));
 			}
 			if (showEmptyWarning && !foundItem) outputText("\n<b>You have no appropriate items to put in this " + text + ".</b>");
 			addButton(14, "Back", warehouse);
+		}
+		private function pickItemToPlaceInStorage3A(page:int = 1):void {
+			
 		}
 		
 		private function placeInCampStorage(slotNum:int):void {

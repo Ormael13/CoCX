@@ -290,7 +290,7 @@ public function loadScreen():void
 
 public function saveScreen():void
 {
-	mainView.nameBox.x = 210;
+	mainView.nameBox.x = mainView.mainText.x;
 	mainView.nameBox.y = 620;
 	mainView.nameBox.width = 550;
 	mainView.nameBox.text = "";
@@ -638,6 +638,7 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.WISDOM_SCALLING] = flags[kFLAGS.WISDOM_SCALLING];
 		saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALLING] = flags[kFLAGS.INTELLIGENCE_SCALLING];
 		saveFile.data.flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] = flags[kFLAGS.MELEE_DAMAGE_OVERHAUL];
+		saveFile.data.flags[kFLAGS.SECONDARY_STATS_SCALING] = flags[kFLAGS.SECONDARY_STATS_SCALING];
 		saveFile.data.flags[kFLAGS.SPELLS_COOLDOWNS] = flags[kFLAGS.SPELLS_COOLDOWNS];
 		//saveFile.data.settings = [];
 		//saveFile.data.settings.useMetrics = Measurements.useMetrics;
@@ -694,6 +695,7 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.WISDOM_SCALLING] != undefined) flags[kFLAGS.WISDOM_SCALLING] = saveFile.data.flags[kFLAGS.WISDOM_SCALLING];
 			if (saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALLING] != undefined) flags[kFLAGS.INTELLIGENCE_SCALLING] = saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALLING];
 			if (saveFile.data.flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] != undefined) flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] = saveFile.data.flags[kFLAGS.MELEE_DAMAGE_OVERHAUL];
+			if (saveFile.data.flags[kFLAGS.SECONDARY_STATS_SCALING] != undefined) flags[kFLAGS.SECONDARY_STATS_SCALING] = saveFile.data.flags[kFLAGS.SECONDARY_STATS_SCALING];
 			if (saveFile.data.flags[kFLAGS.SPELLS_COOLDOWNS] != undefined) flags[kFLAGS.SPELLS_COOLDOWNS] = saveFile.data.flags[kFLAGS.SPELLS_COOLDOWNS];
 		}
 		//if(saveFile.data.settings){if(saveFile.data.settings.useMetrics != undefined){Measurements.useMetrics = saveFile.data.settings.useMetrics;}}
@@ -1149,12 +1151,12 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.itemSlot4 = [];
 		saveFile.data.itemSlot4.quantity = player.itemSlot4.quantity;
 		saveFile.data.itemSlot4.id = player.itemSlot4.itype.id;
-		saveFile.data.itemSlot4.unlocked = player.itemSlot4.unlocked;
+		saveFile.data.itemSlot4.unlocked = true;
 		
 		saveFile.data.itemSlot5 = [];
 		saveFile.data.itemSlot5.quantity = player.itemSlot5.quantity;
 		saveFile.data.itemSlot5.id = player.itemSlot5.itype.id;
-		saveFile.data.itemSlot5.unlocked = player.itemSlot5.unlocked;
+		saveFile.data.itemSlot5.unlocked = true;
 		
 		saveFile.data.itemSlot6 = [];
 		saveFile.data.itemSlot6.quantity = player.itemSlot6.quantity;
@@ -1180,6 +1182,56 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.itemSlot10.quantity = player.itemSlot10.quantity;
 		saveFile.data.itemSlot10.id = player.itemSlot10.itype.id;
 		saveFile.data.itemSlot10.unlocked = player.itemSlot10.unlocked;
+		
+		saveFile.data.itemSlot11 = [];
+		saveFile.data.itemSlot11.quantity = player.itemSlot11.quantity;
+		saveFile.data.itemSlot11.id = player.itemSlot11.itype.id;
+		saveFile.data.itemSlot11.unlocked = player.itemSlot11.unlocked;
+		
+		saveFile.data.itemSlot12 = [];
+		saveFile.data.itemSlot12.quantity = player.itemSlot12.quantity;
+		saveFile.data.itemSlot12.id = player.itemSlot12.itype.id;
+		saveFile.data.itemSlot12.unlocked = player.itemSlot12.unlocked;
+		
+		saveFile.data.itemSlot13 = [];
+		saveFile.data.itemSlot13.quantity = player.itemSlot13.quantity;
+		saveFile.data.itemSlot13.id = player.itemSlot13.itype.id;
+		saveFile.data.itemSlot13.unlocked = player.itemSlot13.unlocked;
+		
+		saveFile.data.itemSlot14 = [];
+		saveFile.data.itemSlot14.quantity = player.itemSlot14.quantity;
+		saveFile.data.itemSlot14.id = player.itemSlot14.itype.id;
+		saveFile.data.itemSlot14.unlocked = player.itemSlot14.unlocked;
+		
+		saveFile.data.itemSlot15 = [];
+		saveFile.data.itemSlot15.quantity = player.itemSlot15.quantity;
+		saveFile.data.itemSlot15.id = player.itemSlot15.itype.id;
+		saveFile.data.itemSlot15.unlocked = player.itemSlot15.unlocked;
+		
+		saveFile.data.itemSlot16 = [];
+		saveFile.data.itemSlot16.quantity = player.itemSlot16.quantity;
+		saveFile.data.itemSlot16.id = player.itemSlot16.itype.id;
+		saveFile.data.itemSlot16.unlocked = player.itemSlot16.unlocked;
+		
+		saveFile.data.itemSlot17 = [];
+		saveFile.data.itemSlot17.quantity = player.itemSlot17.quantity;
+		saveFile.data.itemSlot17.id = player.itemSlot17.itype.id;
+		saveFile.data.itemSlot17.unlocked = player.itemSlot17.unlocked;
+		
+		saveFile.data.itemSlot18 = [];
+		saveFile.data.itemSlot18.quantity = player.itemSlot18.quantity;
+		saveFile.data.itemSlot18.id = player.itemSlot18.itype.id;
+		saveFile.data.itemSlot18.unlocked = player.itemSlot18.unlocked;
+		
+		saveFile.data.itemSlot19 = [];
+		saveFile.data.itemSlot19.quantity = player.itemSlot19.quantity;
+		saveFile.data.itemSlot19.id = player.itemSlot19.itype.id;
+		saveFile.data.itemSlot19.unlocked = player.itemSlot19.unlocked;
+		
+		saveFile.data.itemSlot20 = [];
+		saveFile.data.itemSlot20.quantity = player.itemSlot20.quantity;
+		saveFile.data.itemSlot20.id = player.itemSlot20.itype.id;
+		saveFile.data.itemSlot20.unlocked = player.itemSlot20.unlocked;
 
 		
 		// Keybinds
@@ -2374,16 +2426,17 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.itemSlot3.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot3.id || saveFile.data.itemSlot3.shortName),
 				saveFile.data.itemSlot3.quantity);
-		player.itemSlot4.unlocked = saveFile.data.itemSlot4.unlocked;
+		player.itemSlot4.unlocked = true;
 		player.itemSlot4.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot4.id || saveFile.data.itemSlot4.shortName),
 				saveFile.data.itemSlot4.quantity);
-		player.itemSlot5.unlocked = saveFile.data.itemSlot5.unlocked;
+		player.itemSlot5.unlocked = true;
 		player.itemSlot5.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot5.id || saveFile.data.itemSlot5.shortName),
 				saveFile.data.itemSlot5.quantity);
 		//Extra slots from the mod.
-		if (saveFile.data.itemSlot6 != undefined && saveFile.data.itemSlot7 != undefined && saveFile.data.itemSlot8 != undefined && saveFile.data.itemSlot9 != undefined && saveFile.data.itemSlot10 != undefined) {
+		if (saveFile.data.itemSlot6 != undefined && saveFile.data.itemSlot7 != undefined && saveFile.data.itemSlot8 != undefined && saveFile.data.itemSlot9 != undefined && saveFile.data.itemSlot10 != undefined && saveFile.data.itemSlot11 != undefined && saveFile.data.itemSlot12 != undefined
+			 && saveFile.data.itemSlot13 != undefined && saveFile.data.itemSlot14 != undefined && saveFile.data.itemSlot15 != undefined && saveFile.data.itemSlot16 != undefined && saveFile.data.itemSlot17 != undefined && saveFile.data.itemSlot18 != undefined && saveFile.data.itemSlot19 != undefined && saveFile.data.itemSlot20 != undefined) {
 		player.itemSlot6.unlocked = saveFile.data.itemSlot6.unlocked;
 		player.itemSlot6.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot6.id || saveFile.data.itemSlot6.shortName),
@@ -2404,6 +2457,46 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.itemSlot10.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot10.id || saveFile.data.itemSlot10.shortName),
 				saveFile.data.itemSlot10.quantity);
+		player.itemSlot11.unlocked = saveFile.data.itemSlot11.unlocked;
+		player.itemSlot11.setItemAndQty(ItemType.lookupItem(
+				saveFile.data.itemSlot11.id || saveFile.data.itemSlot11.shortName),
+				saveFile.data.itemSlot11.quantity);
+		player.itemSlot12.unlocked = saveFile.data.itemSlot12.unlocked;
+		player.itemSlot12.setItemAndQty(ItemType.lookupItem(
+				saveFile.data.itemSlot12.id || saveFile.data.itemSlot12.shortName),
+				saveFile.data.itemSlot12.quantity);
+		player.itemSlot13.unlocked = saveFile.data.itemSlot13.unlocked;
+		player.itemSlot13.setItemAndQty(ItemType.lookupItem(
+				saveFile.data.itemSlot13.id || saveFile.data.itemSlot13.shortName),
+				saveFile.data.itemSlot13.quantity);
+		player.itemSlot14.unlocked = saveFile.data.itemSlot14.unlocked;
+		player.itemSlot14.setItemAndQty(ItemType.lookupItem(
+				saveFile.data.itemSlot14.id || saveFile.data.itemSlot14.shortName),
+				saveFile.data.itemSlot14.quantity);
+		player.itemSlot15.unlocked = saveFile.data.itemSlot15.unlocked;
+		player.itemSlot15.setItemAndQty(ItemType.lookupItem(
+				saveFile.data.itemSlot15.id || saveFile.data.itemSlot15.shortName),
+				saveFile.data.itemSlot15.quantity);
+		player.itemSlot16.unlocked = saveFile.data.itemSlot16.unlocked;
+		player.itemSlot16.setItemAndQty(ItemType.lookupItem(
+				saveFile.data.itemSlot16.id || saveFile.data.itemSlot16.shortName),
+				saveFile.data.itemSlot16.quantity);
+		player.itemSlot17.unlocked = saveFile.data.itemSlot17.unlocked;
+		player.itemSlot17.setItemAndQty(ItemType.lookupItem(
+				saveFile.data.itemSlot17.id || saveFile.data.itemSlot17.shortName),
+				saveFile.data.itemSlot17.quantity);
+		player.itemSlot18.unlocked = saveFile.data.itemSlot18.unlocked;
+		player.itemSlot18.setItemAndQty(ItemType.lookupItem(
+				saveFile.data.itemSlot18.id || saveFile.data.itemSlot18.shortName),
+				saveFile.data.itemSlot18.quantity);
+		player.itemSlot19.unlocked = saveFile.data.itemSlot19.unlocked;
+		player.itemSlot19.setItemAndQty(ItemType.lookupItem(
+				saveFile.data.itemSlot19.id || saveFile.data.itemSlot19.shortName),
+				saveFile.data.itemSlot19.quantity);
+		player.itemSlot20.unlocked = saveFile.data.itemSlot20.unlocked;
+		player.itemSlot20.setItemAndQty(ItemType.lookupItem(
+				saveFile.data.itemSlot20.id || saveFile.data.itemSlot20.shortName),
+				saveFile.data.itemSlot20.quantity);
 		}
 
 		loadAllAwareClasses(CoC.instance); //Informs each saveAwareClass that it must load its values from the flags array

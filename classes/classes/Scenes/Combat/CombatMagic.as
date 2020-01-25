@@ -1735,6 +1735,8 @@ public class CombatMagic extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcGlacialMod(damage);
 		if (combat.wearingWinterScarf()) damage *= 1.2;
+		if (player.armor == armors.BLIZZ_K) damage *= 1.5;
+		if (player.headJewelry == headjewelries.SNOWFH) damage *= 1.3;
 		if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) damage = Math.round(damage * 1.2);
 		damage = Math.round(damage);
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
@@ -1935,6 +1937,8 @@ public class CombatMagic extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcGlacialMod(damage);
 		if (combat.wearingWinterScarf()) damage *= 1.2;
+		if (player.armor == armors.BLIZZ_K) damage *= 1.5;
+		if (player.headJewelry == headjewelries.SNOWFH) damage *= 1.3;
 		if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) damage = Math.round(damage * 1.2);
 		damage = Math.round(damage);
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
@@ -2306,6 +2310,8 @@ public class CombatMagic extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcGlacialMod(damage);
 		if (combat.wearingWinterScarf()) damage *= 1.2;
+		if (player.armor == armors.BLIZZ_K) damage *= 1.5;
+		if (player.headJewelry == headjewelries.SNOWFH) damage *= 1.3;
 		damage = Math.round(damage);
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bedą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
@@ -2356,6 +2362,8 @@ public class CombatMagic extends BaseCombatContent {
 			//High damage to goes.
 			damage = calcGlacialMod(damage);
 			if (combat.wearingWinterScarf()) damage *= 1.2;
+			if (player.armor == armors.BLIZZ_K) damage *= 1.5;
+			if (player.headJewelry == headjewelries.SNOWFH) damage *= 1.3;
 			damage = Math.round(damage);
 			//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bedą dostawać bonusowe obrażenia
 			//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
@@ -2451,6 +2459,8 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		//High damage to goes.
 		damage = calcInfernoMod(damage);
+		if (player.armor == armors.BLIZZ_K) damage *= 0.5;
+		if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
 		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
 		if (monster.plural == true) damage *= 5;
@@ -3016,6 +3026,8 @@ public class CombatMagic extends BaseCombatContent {
 				damage *= 1.75;
 			}
 			damage *= 1.75;
+			if (player.armor == armors.BLIZZ_K) damage *= 0.5;
+			if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
 			damage = doFireDamage(damage, true, true);
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
@@ -3062,6 +3074,8 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		//High damage to goes.
 		damage = calcInfernoMod(damage);
+		if (player.armor == armors.BLIZZ_K) damage *= 0.5;
+		if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
 		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
 		damage = Math.round(damage);
@@ -3177,6 +3191,8 @@ public class CombatMagic extends BaseCombatContent {
 				damage *= 1.75;
 			}
 			damage *= 1.75;
+			if (player.armor == armors.BLIZZ_K) damage *= 0.5;
+			if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
 			damage = doFireDamage(damage, true, true);
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		}
@@ -3197,6 +3213,8 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			//High damage to goes.
 			damage = calcInfernoMod(damage);
+			if (player.armor == armors.BLIZZ_K) damage *= 0.5;
+			if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
 			if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 			if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
 			damage = Math.round(damage);

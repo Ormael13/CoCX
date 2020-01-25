@@ -64,7 +64,17 @@ use namespace CoC;
 			itemSlot8 = new ItemSlotClass();
 			itemSlot9 = new ItemSlotClass();
 			itemSlot10 = new ItemSlotClass();
-			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5, itemSlot6, itemSlot7, itemSlot8, itemSlot9, itemSlot10];
+			itemSlot11 = new ItemSlotClass();
+			itemSlot12 = new ItemSlotClass();
+			itemSlot13 = new ItemSlotClass();
+			itemSlot14 = new ItemSlotClass();
+			itemSlot15 = new ItemSlotClass();
+			itemSlot16 = new ItemSlotClass();
+			itemSlot17 = new ItemSlotClass();
+			itemSlot18 = new ItemSlotClass();
+			itemSlot19 = new ItemSlotClass();
+			itemSlot20 = new ItemSlotClass();
+			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5, itemSlot6, itemSlot7, itemSlot8, itemSlot9, itemSlot10, itemSlot11, itemSlot12, itemSlot13, itemSlot14, itemSlot15, itemSlot16, itemSlot17, itemSlot18, itemSlot19, itemSlot20];
 		}
 		
 		protected final function outputText(text:String, clear:Boolean = false):void
@@ -131,6 +141,16 @@ use namespace CoC;
 		public var itemSlot8:ItemSlotClass;
 		public var itemSlot9:ItemSlotClass;
 		public var itemSlot10:ItemSlotClass;
+		public var itemSlot11:ItemSlotClass;
+		public var itemSlot12:ItemSlotClass;
+		public var itemSlot13:ItemSlotClass;
+		public var itemSlot14:ItemSlotClass;
+		public var itemSlot15:ItemSlotClass;
+		public var itemSlot16:ItemSlotClass;
+		public var itemSlot17:ItemSlotClass;
+		public var itemSlot18:ItemSlotClass;
+		public var itemSlot19:ItemSlotClass;
+		public var itemSlot20:ItemSlotClass;
 		public var itemSlots:Array;
 		
 		public var prisonItemSlots:Array = [];
@@ -2766,12 +2786,12 @@ use namespace CoC;
 				else
 					race = "wolf-" + mf("boy", "girl");
 			}
-			if (werewolfScore() >= 6)
+			if (werewolfScore() >= 12)
 			{
-				if (werewolfScore() >= 12)
+				//if (werewolfScore() >= 12)
+				//	race = "Werewolf";
+				//else
 					race = "Werewolf";
-				else
-					race = "half werewolf";
 			}
 			if (foxScore() >= 4)
 			{
@@ -4736,6 +4756,8 @@ use namespace CoC;
 				kitsuneCounter++;
 			if (findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
 				kitsuneCounter++;
+			if (findPerk(PerkLib.KitsunesDescendant) >= 0 || findPerk(PerkLib.BloodlineKitsune) >= 0)
+				kitsuneCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				kitsuneCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && kitsuneCounter >= 4)
@@ -4805,6 +4827,8 @@ use namespace CoC;
 				dragonCounter++;
 			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
 				dragonCounter++;
+			if (findPerk(PerkLib.DragonsDescendant) >= 0 || findPerk(PerkLib.BloodlineDragon) >= 0)
+				dragonCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				dragonCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && dragonCounter >= 4)
@@ -4926,6 +4950,8 @@ use namespace CoC;
 				goblinCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && goblinCounter >= 8)
 				goblinCounter += 1;
+			if (findPerk(PerkLib.GoblinsDescendant) >= 0 || findPerk(PerkLib.BloodlineKitsune) >= 0)
+				goblinCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				goblinCounter += 50;
 			if (isGargoyle()) goblinCounter = 0;
@@ -5730,9 +5756,11 @@ use namespace CoC;
 			if (elfCounter >= 11) {
 				if (wings.type == Wings.)
 					elfCounter++;
-			}
+			}*/
+			if (findPerk(PerkLib.ElfsDescendant) >= 0 || findPerk(PerkLib.BloodlineElf) >= 0)
+				elfCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
-				elfCounter += 50;*/
+				elfCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && elfCounter >= 4)
 				elfCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && elfCounter >= 8)
@@ -5827,6 +5855,8 @@ use namespace CoC;
 				raijuCounter++;
 			if (hairColor == "purple" || hairColor == "light blue" || hairColor == "yellow" || hairColor == "white" || hairColor == "lilac" || hairColor == "green")
 				raijuCounter++;
+			if (findPerk(PerkLib.RaijusDescendant) >= 0 || findPerk(PerkLib.BloodlineRaiju) >= 0)
+				raijuCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				raijuCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && raijuCounter >= 4)
@@ -6118,13 +6148,13 @@ use namespace CoC;
 		public function yukiOnnaScore():Number {
 			Begin("Player","racialScore","yuki onna");
 			var yukiOnnaCounter:Number = 0;
-			if (skinTone == "snow white")
+			if (skinTone == "snow white" || skinTone == "pale blue")
 				yukiOnnaCounter++;
 			if (skinAdj == "cold")
 				yukiOnnaCounter++;
 			if (eyes.colour == "light purple")
 				yukiOnnaCounter++;
-			if (hairColor == "snow white" || hairColor == "silver white" || hairColor == "platinum blonde")
+			if (hairColor == "snow white" || hairColor == "silver white" || hairColor == "platinum blonde" || hairColor == "quartz white")
 				yukiOnnaCounter++;
 			if (hairType == Hair.SNOWY)
 				yukiOnnaCounter++;
@@ -7496,13 +7526,18 @@ use namespace CoC;
 		 * @param	nl
 		 */
 		public function refillHunger(amnt:Number = 0, nl:Boolean = true):void {
-			if ((flags[kFLAGS.HUNGER_ENABLED] > 0 && (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] > 3) || !hasPerk(PerkLib.DeadMetabolism) || flags[kFLAGS.IN_PRISON] > 0) && (!hasPerk(PerkLib.GargoylePure) || !hasPerk(PerkLib.GargoyleCorrupted)))
-			{
-				
+			var hungerActive:Boolean = false;
+			if (flags[kFLAGS.HUNGER_ENABLED] > 0) hungerActive = true;
+			if (hungerActive) {
+				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 3) hungerActive = false;
+				else if (hasPerk(PerkLib.DeadMetabolism)) hungerActive = false;
+				else if (hasPerk(PerkLib.GargoylePure) || hasPerk(PerkLib.GargoyleCorrupted)) hungerActive = false;
+			}
+			if (flags[kFLAGS.IN_PRISON] > 0) hungerActive = true;
+			if (hungerActive) {
 				var oldHunger:Number = hunger;
 				var weightChange:int = 0;
 				var overeatingLimit:int = 0;
-				
 				overeatingLimit += 10;
 				if (findPerk(PerkLib.IronStomach) >= 0) overeatingLimit += 5;
 				if (findPerk(PerkLib.IronStomachEx) >= 0) overeatingLimit += 10;
@@ -7511,8 +7546,7 @@ use namespace CoC;
 				overeatingLimit += 20;overeating ex perk chyba		achiev polegający na przeżyciu x dni bez jedzenie czegokolwiek wic każde podniesienie hunger resetuje ten timer xD
 				overeatingLimit += 40;overeating su perk chyba*/
 				hunger += amnt;
-				if (hunger > maxHunger())
-				{
+				if (hunger > maxHunger()) {
 					while (hunger > (maxHunger() + overeatingLimit) && !SceneLib.prison.inPrison) {
 						weightChange++;
 						hunger -= overeatingLimit;
@@ -8352,19 +8386,19 @@ use namespace CoC;
 					maxInt -= (10 * newGamePlusMod);
 				}
 			}//+15(60)((70))(((140))) / 10 - 20(50 - 60)((70 - 80))(((130 - 140)))
-			if (werewolfScore() >= 6) {
-				if (werewolfScore() >= 12) {
+			if (werewolfScore() >= 12) {
+				/*if (werewolfScore() >= 12) {
 					maxStr += (100 * newGamePlusMod);
 					maxTou += (40 * newGamePlusMod);
 					maxSpe += (60 * newGamePlusMod);
 					maxInt -= (20 * newGamePlusMod);
 				}
-				else {
-					maxStr += (50 * newGamePlusMod);
-					maxTou += (20 * newGamePlusMod);
-					maxSpe += (30 * newGamePlusMod);
-					maxInt -= (10 * newGamePlusMod);
-				}
+				else {*/
+					maxStr += (100 * newGamePlusMod);
+					maxTou += (40 * newGamePlusMod);
+					maxSpe += (60 * newGamePlusMod);
+					maxInt -= (20 * newGamePlusMod);
+				//}
 			}
 			if (foxScore() >= 4) {
 				if (foxScore() >= 7) {

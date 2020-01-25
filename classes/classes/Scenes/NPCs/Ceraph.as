@@ -326,6 +326,7 @@ public class Ceraph extends Monster
 			this.special1 = ceraphSpecial1;
 			this.special2 = ceraphSpecial2;
 			this.special3 = ceraphSpecial3;
+			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			checkMonster();
 		}
 

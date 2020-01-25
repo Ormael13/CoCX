@@ -228,9 +228,9 @@ import coc.view.MainView;
 			player.itemSlot2.emptySlot();
 			player.itemSlot3.unlocked = true;
 			player.itemSlot3.emptySlot();
-			player.itemSlot4.unlocked = false;
+			player.itemSlot4.unlocked = true;
 			player.itemSlot4.emptySlot();
-			player.itemSlot5.unlocked = false;
+			player.itemSlot5.unlocked = true;
 			player.itemSlot5.emptySlot();
 			player.itemSlot6.unlocked = false;
 			player.itemSlot6.emptySlot();
@@ -242,6 +242,26 @@ import coc.view.MainView;
 			player.itemSlot9.emptySlot();
 			player.itemSlot10.unlocked = false;
 			player.itemSlot10.emptySlot();
+			player.itemSlot11.unlocked = false;
+			player.itemSlot11.emptySlot();
+			player.itemSlot12.unlocked = false;
+			player.itemSlot12.emptySlot();
+			player.itemSlot13.unlocked = false;
+			player.itemSlot13.emptySlot();
+			player.itemSlot14.unlocked = false;
+			player.itemSlot14.emptySlot();
+			player.itemSlot15.unlocked = false;
+			player.itemSlot15.emptySlot();
+			player.itemSlot16.unlocked = false;
+			player.itemSlot16.emptySlot();
+			player.itemSlot17.unlocked = false;
+			player.itemSlot17.emptySlot();
+			player.itemSlot18.unlocked = false;
+			player.itemSlot18.emptySlot();
+			player.itemSlot19.unlocked = false;
+			player.itemSlot19.emptySlot();
+			player.itemSlot20.unlocked = false;
+			player.itemSlot20.emptySlot();
             //PIERCINGS
             player.nipplesPierced = 0;
             player.nipplesPShort = "";
@@ -379,7 +399,7 @@ import coc.view.MainView;
 			//player.perkPoints = player.level - 1;
 			var newFlags:DefaultDict = new DefaultDict();
 			if (player.hasKeyItem("Ascension") >= 0) {
-				for each(var flag:int in [kFLAGS.NEW_GAME_PLUS_LEVEL, kFLAGS.HUNGER_ENABLED, kFLAGS.HARDCORE_MODE, kFLAGS.HARDCORE_SLOT, kFLAGS.GAME_DIFFICULTY, kFLAGS.EASY_MODE_ENABLE_FLAG, kFLAGS.NO_GORE_MODE, kFLAGS.WISDOM_SCALLING, kFLAGS.INTELLIGENCE_SCALLING, kFLAGS.STRENGTH_SCALLING, kFLAGS.SPEED_SCALLING, kFLAGS.SPELLS_COOLDOWNS,
+				for each(var flag:int in [kFLAGS.NEW_GAME_PLUS_LEVEL, kFLAGS.HUNGER_ENABLED, kFLAGS.HARDCORE_MODE, kFLAGS.HARDCORE_SLOT, kFLAGS.GAME_DIFFICULTY, kFLAGS.EASY_MODE_ENABLE_FLAG, kFLAGS.NO_GORE_MODE, kFLAGS.WISDOM_SCALLING, kFLAGS.INTELLIGENCE_SCALLING, kFLAGS.STRENGTH_SCALLING, kFLAGS.SPEED_SCALLING, kFLAGS.SECONDARY_STATS_SCALING, kFLAGS.SPELLS_COOLDOWNS,
 				kFLAGS.WATERSPORTS_ENABLED, kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.STAT_GAIN_MODE, kFLAGS.SFW_MODE, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.MELEE_DAMAGE_OVERHAUL]) {
 					newFlags[flag] = flags[flag];
 				}
@@ -1196,7 +1216,7 @@ import coc.view.MainView;
 			player.thickness += 3;
 			//Add bonus +25% strength gain
 			if (player.findPerk(PerkLib.Strong) < 0) player.createPerk(PerkLib.Strong, 0.25, 0, 0, 0);
-			chooseHistory();
+			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentToughness():void {
@@ -1205,45 +1225,45 @@ import coc.view.MainView;
 			player.thickness += 5;
 			if (player.findPerk(PerkLib.Tough) < 0) player.createPerk(PerkLib.Tough, 0.25, 0, 0, 0);
 			player.HP = EngineCore.maxHP();
-			chooseHistory();
+			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentSpeed():void {
 			player.spe += 5;
 			player.tone += 10;
 			if (player.findPerk(PerkLib.Fast) < 0) player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
-			chooseHistory();
+			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentSmarts():void {
 			player.inte += 5;
 			player.thickness -= 5;
 			if (player.findPerk(PerkLib.Smart) < 0) player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0);
-			chooseHistory();
+			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentWise():void {
 			player.wis += 5;
 			if (player.findPerk(PerkLib.Wise) < 0) player.createPerk(PerkLib.Wise, 0.25, 0, 0, 0);
-			chooseHistory();
+			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentLibido():void {
 			player.lib += 5;
 			if (player.findPerk(PerkLib.Lusty) < 0) player.createPerk(PerkLib.Lusty, 0.25, 0, 0, 0);
-			chooseHistory();
+			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentTouch():void {
 			player.sens += 5;
 			if (player.findPerk(PerkLib.Sensitive) < 0) player.createPerk(PerkLib.Sensitive, 0.25, 0, 0, 0);
-			chooseHistory();
+			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentPerversion():void {
 			player.cor += 5;
 			if (player.findPerk(PerkLib.Pervert) < 0) player.createPerk(PerkLib.Pervert, 0.25, 0, 0, 0);
-			chooseHistory();
+			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentBigCock():void {
@@ -1252,28 +1272,28 @@ import coc.view.MainView;
 			player.cocks[0].cockThickness = 1.5;
 			trace("Creation - cock modded to 8inches");
 			if (player.findPerk(PerkLib.BigCock) < 0) player.createPerk(PerkLib.BigCock, 1.25, 0, 0, 0);
-			chooseHistory();
+			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentMessyOrgasms():void {
 			player.femininity -= 2;
 			player.cumMultiplier = 1.5;
 			if (player.findPerk(PerkLib.MessyOrgasms) < 0) player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
-			chooseHistory();
+			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentBigBreasts():void {
 			player.femininity += 5;
 			player.breastRows[0].breastRating += 2;
 			if (player.findPerk(PerkLib.BigTits) < 0) player.createPerk(PerkLib.BigTits, 1.5, 0, 0, 0);
-			chooseHistory();
+			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentBigClit():void {
 			player.femininity -= 5;
 			player.clitLength = 1;
 			if (player.findPerk(PerkLib.BigClit) < 0) player.createPerk(PerkLib.BigClit, 1.25, 0, 0, 0);
-			chooseHistory();
+			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentFertile():void {
@@ -1281,13 +1301,72 @@ import coc.view.MainView;
 			player.fertility += 25;
 			player.hips.type += 2;
 			if (player.findPerk(PerkLib.Fertile) < 0) player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
-			chooseHistory();
+			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentWetVagina():void {
 			player.femininity += 7;
 			player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_WET;
 			if (player.findPerk(PerkLib.WetPussy) < 0) player.createPerk(PerkLib.WetPussy, 2, 0, 0, 0);
+			chooseBloodlineorNot();
+		}
+		
+		//-----------------
+		//-- BLOODLINE PERKS
+		//-----------------
+		public function chooseBloodlineorNot():void {
+			if (player.findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) chooseBloodline();
+			else chooseHistory();
+		}
+		public function chooseBloodline():void {
+			clearOutput();
+			outputText("In your veins coursing non-human blood.  What race was your ancestor?");
+			menu();
+			if (player.findPerk(PerkLib.BloodlineDragon) < 0) addButton(0, "Dragon", confirmBloodline, PerkLib.DragonsDescendant);
+			else addButtonDisabled(0, "Dragon", "You already have this bloodline!");
+			if (player.findPerk(PerkLib.BloodlineElf) < 0) addButton(1, "Elf", confirmBloodline, PerkLib.ElfsDescendant);
+			else addButtonDisabled(1, "Elf", "You already have this bloodline!");
+			if (player.findPerk(PerkLib.BloodlineGoblin) < 0) addButton(2, "Goblin", confirmBloodline, PerkLib.GoblinsDescendant);
+			else addButtonDisabled(2, "Goblin", "You already have this bloodline!");
+			if (player.findPerk(PerkLib.BloodlineKitsune) < 0) addButton(3, "Kitsune", confirmBloodline, PerkLib.KitsunesDescendant);
+			else addButtonDisabled(3, "Kitsune", "You already have this bloodline!");
+			if (player.findPerk(PerkLib.BloodlineRaiju) < 0) addButton(4, "Raiju", confirmBloodline, PerkLib.RaijusDescendant);
+			else addButtonDisabled(4, "Raiju", "You already have this bloodline!");
+			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either not have any non-human blood in you or can't pick any new one.It mean you only will get some bonus perk points for start instead new bloodline.");
+		}
+		
+		private function confirmBloodline(choice:PerkType):void {
+			clearOutput();
+			switch (choice) {
+				case PerkLib.DragonsDescendant:
+					outputText("Your ancestor was a dragon?");
+					break;
+				case PerkLib.ElfsDescendant:
+					outputText("Your ancestor was an elf?");
+					break;
+				case PerkLib.GoblinsDescendant:
+					outputText("Your ancestor was a goblin");
+					break;
+				case PerkLib.KitsunesDescendant:
+					outputText("Your ancestor was a kitsune");
+					break;
+				case PerkLib.RaijusDescendant:
+					outputText("Your ancestor was a raiju");
+					break;
+				default:
+					outputText("Your ancestor was a dragon?");
+			}
+			menu();
+			addButton(0, "Yes", setBloodline, choice);
+			addButton(1, "No", chooseHistory);
+		}
+		
+		private function setBloodline(choice:PerkType):void {
+			player.createPerk(choice, 0, 0, 0, 0);
+			completeCharacterCreation();
+		}
+		private function noBloodlineAtAllCuzYouAscendedTooManyTimesAlready():void {
+			player.perkPoints += 12;
 			chooseHistory();
 		}
 		
@@ -1323,8 +1402,10 @@ import coc.view.MainView;
 			else addButtonDisabled(9, "Slutting", "You already have this History as one of Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeSmith) < 0) addButton(10, "Smithing", confirmHistory, PerkLib.HistorySmith);
 			else addButtonDisabled(10, "Smithing", "You already have this History as one of Past Lives!");
-			if (player.findPerk(PerkLib.PastLifeWhore) < 0) addButton(11, "Whoring", confirmHistory, PerkLib.HistoryWhore);
-			else addButtonDisabled(11, "Whoring", "You already have this History as one of Past Lives!");
+			if (player.findPerk(PerkLib.PastLifeTactician) < 0) addButton(11, "Tactician", confirmHistory, PerkLib.HistoryTactician);
+			else addButtonDisabled(11, "Tactician", "You already have this History as one of Past Lives!");
+			if (player.findPerk(PerkLib.PastLifeWhore) < 0) addButton(12, "Whoring", confirmHistory, PerkLib.HistoryWhore);
+			else addButtonDisabled(12, "Whoring", "You already have this History as one of Past Lives!");
 			addButton(14, "None", noHistoryAtAllCuzYouAscendedTooManyTimesAlready).hint("You either never been doing anything before or you have memories of so many past lives you spend all your current live trying to not go postal from those memories. (Yes you not gonna get any History perk only just a few perk points so maybe not use this option till you get all others History perks, ya?)");
 			
 		}
@@ -1365,6 +1446,9 @@ import coc.view.MainView;
 				case PerkLib.HistorySmith:
 					outputText("You managed to get an apprenticeship with the local blacksmith.  Because of your time spent at the blacksmith's side, you've learned how to fit armor for maximum protection.  You will start with Job: Guardian perk.  Is this your history?");
 					break;
+				case PerkLib.HistoryTactician:
+					outputText("You were being groomed to take over the elderly chief's position until you were chosen as the Champion.  You will start with Job: Leader perk.  Is this your history?");
+					break;
 				default:
 					outputText("You managed to find work as a whore.  Because of your time spent trading seduction for profit, you're more effective at teasing (+15% tease damage).  You will start with Job: Seducer perk.  Is this your history?");
 			}
@@ -1396,7 +1480,6 @@ import coc.view.MainView;
 				flags[kFLAGS.HISTORY_PERK_SELECTED] = 1;
 				playerMenu();
 			}
-			
 		}
 		private function noHistoryAtAllCuzYouAscendedTooManyTimesAlready():void {
 			player.perkPoints += 12;
@@ -1603,6 +1686,7 @@ import coc.view.MainView;
 			if (player.findPerk(PerkLib.HistoryScout) >= 0 || player.findPerk(PerkLib.PastLifeScout) >= 0) player.createPerk(PerkLib.JobRanger, 0, 0, 0, 0);
 			if (player.findPerk(PerkLib.HistoryScholar) >= 0 || player.findPerk(PerkLib.PastLifeScholar) >= 0) player.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 			if (player.findPerk(PerkLib.HistorySmith) >= 0 || player.findPerk(PerkLib.PastLifeSmith) >= 0) player.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
+			if (player.findPerk(PerkLib.HistoryTactician) >= 0 || player.findPerk(PerkLib.PastLifeTactician) >= 0) player.createPerk(PerkLib.JobLeader, 0, 0, 0, 0);
 			if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) player.createPerk(PerkLib.JobSeducer, 0, 0, 0, 0);
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.HistoryFortune) >= 0 || player.findPerk(PerkLib.HistoryHealer) >= 0 || player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.HistorySlacker) >= 0 || player.findPerk(PerkLib.HistorySlut) >= 0) player.perkPoints += 1;
 			if (player.findPerk(PerkLib.PastLifeAlchemist) >= 0) player.perkPoints += 1;
@@ -1665,6 +1749,11 @@ import coc.view.MainView;
 			else addButtonDisabled(6, "Perm G.M.", "You not have Ascension: Transcendental Genetic Memory (Stage 1) perk to use this option.");
 			if (player.ascensionPerkPoints >= 5) addButton(7, "Past Life", historyTopastlife).hint("Spend Ascension Points to change current possesed History perk into Past Life perk (5 per perk).", "Perk Selection");
 			else addButtonDisabled(7, "Past Life", "You not have enough Ascension Perk Points to use this option.");
+			if (player.findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) {
+				if (player.ascensionPerkPoints >= 10) addButton(8, "Bloodline", bloodlineACQ).hint("Spend Ascension Points to change current possesed Descendante perk into Bloodline perk (10 per perk).", "Perk Selection");
+				else addButtonDisabled(8, "Bloodline", "You not have enough Ascension Perk Points to use this option.");
+			}
+			else addButtonDisabled(8, "???", "You not have Ascended enough times or/and have required ascension perk to use this option.");
 			addButton(10, "Rename", renamePrompt).hint("Change your name at no charge?");
 			addButton(11, "Reincarnate", reincarnatePrompt).hint("Reincarnate and start an entirely new adventure?");
 		}
@@ -1820,12 +1909,12 @@ import coc.view.MainView;
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && player.findPerk(PerkLib.AscensionBuildingPrestige04) < 0) addButtonDisabled(btn, "B.Prestige(5th)", "You need to buy Building Prestige (4th Stage) perk first.");
 			else addButtonDisabled(btn, "B.Prestige(5th)", "You need ascend more times to buy this perk.");
 			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.findPerk(PerkLib.AscensionHybridTheory) >= 0) {
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionHybridTheory) >= 0) {
 				if (player.ascensionPerkPoints >= 20 && player.findPerk(PerkLib.AscensionCruelChimerasThesis) < 0) addButton(btn, "C Chimera's T", perkCruelChimerasThesis).hint("Perk allowing reduce by one req. race points to recive race bonuses (still req. min 8 race points to work).\n\nCost: 20 points");
 				else if (player.ascensionPerkPoints < 20) addButtonDisabled(btn, "C Chimera's T", "You not have enough ascension perk points!");
 				else addButtonDisabled(btn, "C Chimera's T", "You already bought Cruel Chimera's Thesis perk.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButtonDisabled(btn, "C Chimera's T", "You need to buy Hybrid Theory perk first.");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButtonDisabled(btn, "C Chimera's T", "You need to buy Hybrid Theory perk first.");
 			else addButtonDisabled(btn, "C Chimera's T", "You need ascend more times to buy this perk.");
 			btn++;
 			if (player.ascensionPerkPoints >= 5 && player.findPerk(PerkLib.AscensionHerosHeritage) < 0) addButton(btn, "HeroHeritage", perkHerosHeritage).hint("Perk giving additional 3 perk points and 15 stat points at the start of the game (scalling with current NG tier).\n\nCost: 5 points");
@@ -2128,6 +2217,11 @@ import coc.view.MainView;
 				player.createPerk(PerkLib.PastLifeSmith,0,0,0,1);
 				historyTopastlife2();
 			}
+			else if (player.findPerk(PerkLib.HistoryTactician) >= 0) {
+				player.removePerk(PerkLib.HistoryTactician);
+				player.createPerk(PerkLib.PastLifeTactician,0,0,0,1);
+				historyTopastlife2();
+			}
 			else if (player.findPerk(PerkLib.HistoryWhore) >= 0) {
 				player.removePerk(PerkLib.HistoryWhore);
 				player.createPerk(PerkLib.PastLifeWhore,0,0,0,1);
@@ -2139,11 +2233,48 @@ import coc.view.MainView;
 			}
 			doNext(ascensionMenu);
 		}
-		
 		private function historyTopastlife2():void {
 			player.ascensionPerkPoints -= 5;
 			clearOutput();
 			outputText("Your History perk became your Past Life perk.");
+		}
+		
+		private function bloodlineACQ():void {
+			if (player.findPerk(PerkLib.DragonsDescendant) >= 0) {
+				player.removePerk(PerkLib.DragonsDescendant);
+				player.createPerk(PerkLib.BloodlineDragon,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.findPerk(PerkLib.ElfsDescendant) >= 0) {
+				player.removePerk(PerkLib.ElfsDescendant);
+				player.createPerk(PerkLib.BloodlineElf,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.findPerk(PerkLib.GoblinsDescendant) >= 0) {
+				player.removePerk(PerkLib.GoblinsDescendant);
+				player.createPerk(PerkLib.BloodlineGoblin,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.findPerk(PerkLib.KitsunesDescendant) >= 0) {
+				player.removePerk(PerkLib.KitsunesDescendant);
+				player.createPerk(PerkLib.BloodlineKitsune,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.findPerk(PerkLib.RaijusDescendant) >= 0) {
+				player.removePerk(PerkLib.RaijusDescendant);
+				player.createPerk(PerkLib.BloodlineRaiju,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else {
+				clearOutput();
+				outputText("You not have any Descendant perk to change into Bloodline perk.");
+			}
+			doNext(ascensionMenu);
+		}
+		private function bloodlineACQ2():void {
+			player.ascensionPerkPoints -= 10;
+			clearOutput();
+			outputText("Your have gained new Bloodline.");
 		}
 		
 		private function ascensionPermeryMenu(page:int = 1):void {
@@ -3363,3 +3494,4 @@ import coc.view.MainView;
 		}	//ale potem zamienić to na specialne soulskills z każdego z klanów
 	}
 }
+

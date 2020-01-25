@@ -249,6 +249,7 @@ public class ImpOverlord extends Imp
 					add(armors.BEEARMR, 1);
 			this.wings.type = Wings.IMP;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

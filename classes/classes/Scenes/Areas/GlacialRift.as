@@ -20,6 +20,7 @@ use namespace CoC;
 	
 	public class GlacialRift extends BaseContent
 	{
+		public var yukionnaScene:YukiOnnaScene = new YukiOnnaScene();
 		public var valkyrieScene:ValkyrieScene = new ValkyrieScene();
 		public var yetiScene:YetiScene = new YetiScene();
 		public var giantScene:FrostGiantScene = new FrostGiantScene();
@@ -38,7 +39,7 @@ use namespace CoC;
 			var select:int;
 			
 			//Build choice list!
-			choice[choice.length] = 0; //Valkyrie
+			choice[choice.length] = 0; //Yuki Onna OR Valkyrie (Valkyrie later on move down to Tundra ^^)
 			choice[choice.length] = 1; //Yeti
 			choice[choice.length] = 2; //Frost Giant
 			choice[choice.length] = 3; //Winter Wolf
@@ -77,11 +78,14 @@ use namespace CoC;
 			}
 			select = choice[rand(choice.length)];
 			switch(select) {
-				case 0: //Valkyrie
+				case 0: //Yuki Onna OR Valkyrie
 					clearOutput();
-					outputText("Making your way across the hard-packed ice of the Rift, you’re surprised to see the thick gray clouds part overhead.  You see a beautiful woman descend from on high, her snow-white wings flapping powerfully behind her back.  Armed with a long spear and shield, and clad in a bronze cuirass and a winged helm, she looks every bit the part of a mighty warrior.\n\n");
-					outputText("She touches down gently a few feet before you, her shield and spear raised.  \"<i>You seem a worthy sort to test my skills against, wanderer.  Prepare yourself!</i>\" she shouts, bearing down on you.  She doesn’t look like she’s going to back down -- you ready your [weapon] for a fight!");
-					startCombat(new Valkyrie());
+					if (rand(2) == 0 && flags[kFLAGS.YU_SHOP] > 0) yukionnaScene.encounterYukiOnna();
+					else {
+						outputText("Making your way across the hard-packed ice of the Rift, you’re surprised to see the thick gray clouds part overhead.  You see a beautiful woman descend from on high, her snow-white wings flapping powerfully behind her back.  Armed with a long spear and shield, and clad in a bronze cuirass and a winged helm, she looks every bit the part of a mighty warrior.\n\n");
+						outputText("She touches down gently a few feet before you, her shield and spear raised.  \"<i>You seem a worthy sort to test my skills against, wanderer.  Prepare yourself!</i>\" she shouts, bearing down on you.  She doesn’t look like she’s going to back down -- you ready your [weapon] for a fight!");
+						startCombat(new Valkyrie());
+					}
 					break;
 				case 1: //Yeti
 					clearOutput();
@@ -169,7 +173,7 @@ use namespace CoC;
 					else {
 						if (rand(2) == 0) {
 							var stonesHarvested:Number = 10;
-							var stonesCapacity:Number = 301;
+							var stonesCapacity:Number = 300;
 							if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) stonesCapacity += 600;
 							outputText("You find a big amount of stone rubble in the rift and begin to harvest them for your constructions. ");
 							if (SceneLib.emberScene.followerEmber() || SceneLib.kihaFollower.followerKiha()) {
@@ -178,7 +182,10 @@ use namespace CoC;
 									outputText("Kiha and Ember");
 									stonesHarvested += 10;
 								}
-								else if (SceneLib.emberScene.followerEmber()) outputText("Ember");
+								else if (SceneLib.emberScene.followerEmber()) {
+									outputText("Ember");
+									if (SceneLib.kihaFollower.followerKiha()) outputText(" and ");
+								}
 								else outputText("Kiha");
 								outputText(" assist you into bringing as many as possible back to camp. ");
 							}

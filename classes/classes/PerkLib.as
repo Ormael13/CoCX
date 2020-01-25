@@ -135,7 +135,37 @@ public class PerkLib
 	//			".");
 	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
 	//			".");
-		
+
+		// Bloodline perks
+		public static const DragonsDescendant:PerkType = mk("Dragon's descendant", "Dragon's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and a Dragon. (+2 to dragon score)");
+		public static const BloodlineDragon:PerkType = mk("Bloodline: Dragon", "Bloodline: Dragon",
+				"Your Dragon bloodline appears strongly within you. (+2 to dragon score)", null, true);
+		public static const ElfsDescendant:PerkType = mk("Elf's descendant", "Elf's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and an Elf. (+2 to elf score)");
+		public static const BloodlineElf:PerkType = mk("Bloodline: Elf", "Bloodline: Elf",
+				"Your Elf bloodline appears strongly within you. (+2 to elf score)", null, true);
+		public static const GoblinsDescendant:PerkType = mk("Race's descendant", "Race's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and a Goblin. (+2 to goblin score)");
+		public static const BloodlineGoblin:PerkType = mk("Bloodline: Goblin", "Bloodline: Goblin",
+				"Your Goblin bloodline appears strongly within you. (+2 to goblin score)", null, true);
+		public static const KitsunesDescendant:PerkType = mk("Kitsune's descendant", "Kitsune's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and a Kitsune. (+2 to kitsune score)");
+		public static const BloodlineKitsune:PerkType = mk("Bloodline: Kitsune", "Bloodline: Kitsune",
+				"Your Kitsune bloodline appears strongly within you. (+2 to kitsune score)", null, true);
+		public static const RaijusDescendant:PerkType = mk("Raiju's descendant", "Raiju's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and a Raiju. (+2 to raiju score)");
+		public static const BloodlineRaiju:PerkType = mk("Bloodline: Raiju", "Bloodline: Raiju",
+				"Your Raiju bloodline appears strongly within you. (+2 to raiju score)", null, true);
+		public static const sDescendant:PerkType = mk("Race's descendant", "Race's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and a (Race). (+2 to  score)");
+		public static const Bloodline:PerkType = mk("Bloodline: Demon", "Bloodline: Demon",
+				"Your Demonic bloodline appears strongly within you. (+2 to  score)", null, true);
+	//	public static const sDescendant:PerkType = mk("Race's descendant", "Race's descendant",
+	//			"You are a descendant of your ancestor, who was the child of a human and a (Race). (+2 to  score)");
+	//	public static const Bloodline:PerkType = mk("Bloodline: Demon", "Bloodline: Demon",
+	//			"Your Demonic bloodline appears strongly within you. (+2 to  score)", null, true);
+
 		// History perks
 		public static const HistoryAlchemist:PerkType = mk("History: Alchemist", "History: Alchemist",
 				"Alchemical experience makes items more reactive to your body.");
@@ -181,6 +211,10 @@ public class PerkLib
 				"Knowledge of armor and fitting increases armor effectiveness by roughly 5% each (phys + mag).");
 		public static const PastLifeSmith:PerkType = mk("Past Life: Smith", "Past Life: Smith",
 				"Knowledge of armor and fitting increases armor effectiveness by roughly 5% each (phys + mag).", null, true);
+		public static const HistoryTactician:PerkType = mk("History: Tactician", "History: Tactician",
+				" (+10% to minions/pets damage).");
+		public static const PastLifeTactician:PerkType = mk("Past Life: Tactician", "Past Life: Tactician",
+				" (+10% to minions/pets damage).", null, true);
 		public static const HistoryWhore:PerkType = mk("History: Whore", "History: Whore",
 				"Seductive experience causes your tease attacks to be 15% more effective.");
 		public static const PastLifeWhore:PerkType = mk("Past Life: Whore", "Past Life: Whore",
@@ -2497,11 +2531,14 @@ public class PerkLib
 				"Basic attack with wizard's staff is replaced with ranged magic bolt.",
 				"You choose the 'Staff Channeling' perk. Basic attack with wizard's staff is replaced with ranged magic bolt.");
 		public static const StrongBack:PerkType = mk("Strong Back", "Strong Back",
-				"Enables fourth item slot.",
-				"You choose the 'Strong Back' perk, enabling a fourth item slot.");
+				"Enables sixth item slot.",
+				"You choose the 'Strong Back' perk, enabling a sixth item slot.");
 		public static const StrongBack2:PerkType = mk("Strong Back 2: Strong Harder", "Strong Back 2: Strong Harder",
-				"Enables fifth item slot.",
-				"You choose the 'Strong Back 2: Strong Harder' perk, enabling a fifth item slot.");
+				"Enables seventh item slot.",
+				"You choose the 'Strong Back 2: Strong Harder' perk, enabling a seventh item slot.");
+		public static const StrongBack3:PerkType = mk("Strong Back 3: Strong Hardest", "Strong Back 3: Strong Hardest",
+				"Enables eighth item slot.",
+				"You choose the 'Strong Back 3: Strong Hardest' perk, enabling a eighth item slot.");
 		public static const SwiftCasting:PerkType = mk("Swift casting", "Swift casting",
 				"When attacking with melee using a one handed weapon with no shield equiped, pc can choose an available spell in combat options to cast during the round. It will be used at the end of the full attack.",
 				"You choose the 'Swift casting' perk, allowing to cast one of simple spells after melee attack.");
@@ -2770,7 +2807,6 @@ public class PerkLib
 		public static const JobBarbarian:PerkType = mk("Job: Barbarian", "Job: Barbarian",
 				"You've trained in using large weapons in fights.",
 				"You choose 'Job: Barbarian' perk, training yourself to became Barbarian.");
-		
 
 		// Needlework perks
 		public static const ChiReflowAttack:PerkType = mk("Chi Reflow - Attack", "Chi Reflow - Attack",
@@ -3153,6 +3189,7 @@ public class PerkLib
 		public static const Sentience:PerkType = mk("Sentience", "Sentience", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
+		public static const UniqueNPC:PerkType = mk("Unique npc", "Unique npc", "");
 		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");
 		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");undead?
 		//public static const :PerkType = mk("", "", ""); na poźniej dopisane perki wzór
@@ -3169,9 +3206,13 @@ public class PerkLib
             // STRENGTH
             //------------
             JobWarrior.requireStr(10);
-            StrongBack.requireStr(25);
-            StrongBack2.requirePerk(StrongBack)
-                    .requireStr(50);
+            StrongBack.requireStr(20);
+            StrongBack2.requireLevel(2)
+					.requirePerk(StrongBack)
+                    .requireStr(40);
+            StrongBack3.requireLevel(4)
+					.requirePerk(StrongBack2)
+                    .requireStr(60);
             BasicTranquilness.requireStr(30)
                     .requireTou(10)
                     .requireSpe(10);
@@ -5734,6 +5775,7 @@ public class PerkLib
             JobAllRounder.requireLevel(24)
                     .requirePerk(JobBeastWarrior)
                     .requirePerk(JobGuardian)
+                    .requirePerk(JobLeader)
                     .requirePerk(JobRanger)
                     .requirePerk(JobSeducer)
                     .requirePerk(JobSorcerer)
@@ -6217,4 +6259,4 @@ public class PerkLib
 	}
 	initDependencies();
 }
-}
+}

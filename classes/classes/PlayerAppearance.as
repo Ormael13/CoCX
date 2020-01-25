@@ -1363,7 +1363,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (armType == Arms.JIANGSHI)
 			outputText("  Your arms are human in shape and appearance but underneath your purple nail is a thick layer of deadly poison.");
 		else if (armType == Arms.YUKI_ONNA)
-			outputText("  Your arms and hands are human in appearance but your blue nailed hands touch is void of warmth and colder then death.");
+			outputText("  Your arms and hands are human in appearance but your blue nailed hands touch is void of warmth and colder than death.");
 		else if (player.wings.type == Wings.BAT_ARM)
 			outputText("  The bones in your arms are thin and light, as if made of only cartilage, granting you the ability to take flight. Instead of the five fingers you started out with, you now have three that are both larger and stronger. They allow you to hold various items even with your abnormal hands, albeit at the cost of preventing flight while doing so and making some things a little more awkward to grip.");
 	}
@@ -1403,6 +1403,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (player.rearBody.type == RearBody.YETI_FUR) {
 			outputText("  Covered with a natural "+(player.biggestTitSize() > 1 ? "fur bikini":"layer of fur")+", your "+(player.biggestTitSize() > 1 ? "chest and ":"")+"crotch is protected against the cold.");
+		}
+		if (player.rearBody.type == RearBody.GLACIAL_AURA) {
+			outputText("  The air temperature around you naturally drops to water freezing levels, causing snow flurries to appear around you every now and then as moisture enters your personal space.");
 		}
 	}
 	public function describeWings():void {
@@ -1476,7 +1479,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  You generate so much electricity that the sound of static and voltage follows you around, announcing your arrival.");
 		}
 		if (wingType == Wings.LEVITATION){
-			outputText("  You have the ability to levitate in the air should you wish to although you prefer to stay at ground level not to alert your would be victims to your otherworldly nature.");
+			outputText("  You have the ability to levitate in the air should you wish to although you prefer to stay at ground level to not alert your would be victims to your otherworldly nature.");
 		}
 	}
 	public function describeHorns():void {
@@ -2652,12 +2655,17 @@ public function RacialScores():void {
 	else if (player.horseScore() >= 1 && player.horseScore() < 4) outputText("\n<font color=\"#008000\">Half Horse-morph: " + player.horseScore() + "</font>");
 	else if (player.horseScore() < 1) outputText("\n<font color=\"#ff0000\">Half Horse-morph: 0</font>");
 	//HUMANITY
-	if (player.humanScore() == player.humanMaxScore()) outputText("\n<font color=\"#0000a0\">HUMANITY: " + player.humanMaxScore() + " (+" + (5 * (player.level + 1)) + " bonus EXP gains)</font>");
-	else if (player.humanScore() == player.humanMaxScore() - 1) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 1) + " (+" + (4 * (player.level + 1)) + " bonus EXP gains)</font>");
-	else if (player.humanScore() == player.humanMaxScore() - 2) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 2) + " (+" + (3 * (player.level + 1)) + " bonus EXP gains)</font>");
-	else if (player.humanScore() == player.humanMaxScore() - 3) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 3) + " (+" + (2 * (player.level + 1)) + " bonus EXP gains)</font>");
-	else if (player.humanScore() == player.humanMaxScore() - 4) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 4) + " (+" + (1 * (player.level + 1)) + " bonus EXP gains)</font>");
-	else if (player.humanScore() < player.humanMaxScore() - 4) outputText("\n<font color=\"#008000\">HUMANITY: " + player.humanScore() + "</font>");
+	if (player.humanScore() == player.humanMaxScore()) outputText("\n<font color=\"#0000a0\">HUMANITY: " + player.humanMaxScore() + " (+" + (10 * (player.level + 1)) + " bonus EXP gains)</font>");
+	else if (player.humanScore() == player.humanMaxScore() - 1) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 1) + " (+" + (9 * (player.level + 1)) + " bonus EXP gains)</font>");
+	else if (player.humanScore() == player.humanMaxScore() - 2) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 2) + " (+" + (8 * (player.level + 1)) + " bonus EXP gains)</font>");
+	else if (player.humanScore() == player.humanMaxScore() - 3) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 3) + " (+" + (7 * (player.level + 1)) + " bonus EXP gains)</font>");
+	else if (player.humanScore() == player.humanMaxScore() - 4) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 4) + " (+" + (6 * (player.level + 1)) + " bonus EXP gains)</font>");
+	else if (player.humanScore() == player.humanMaxScore() - 5) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 5) + " (+" + (5 * (player.level + 1)) + " bonus EXP gains)</font>");
+	else if (player.humanScore() == player.humanMaxScore() - 6) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 6) + " (+" + (4 * (player.level + 1)) + " bonus EXP gains)</font>");
+	else if (player.humanScore() == player.humanMaxScore() - 7) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 7) + " (+" + (3 * (player.level + 1)) + " bonus EXP gains)</font>");
+	else if (player.humanScore() == player.humanMaxScore() - 8) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 8) + " (+" + (2 * (player.level + 1)) + " bonus EXP gains)</font>");
+	else if (player.humanScore() == player.humanMaxScore() - 9) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 9) + " (+" + (1 * (player.level + 1)) + " bonus EXP gains)</font>");
+	else if (player.humanScore() < player.humanMaxScore() - 9) outputText("\n<font color=\"#008000\">HUMANITY: " + player.humanScore() + "</font>");
 	//Hydra
 	if (player.hydraScore() >= 14) {
 		if (player.lowerBody == LowerBody.HYDRA) {
@@ -3015,10 +3023,9 @@ public function RacialScores():void {
 	else if (player.thunderbirdScore() >= 1 && player.thunderbirdScore() < 12) outputText("\n<font color=\"#008000\">Thunderbird: " + player.thunderbirdScore() + "</font>");
 	else if (player.thunderbirdScore() < 1) outputText("\n<font color=\"#ff0000\">Thunderbird: 0</font>");
 	//Werewolf
-	if (player.werewolfScore() >= 11) outputText("\n<font color=\"#0000a0\">Werewolf: " + player.werewolfScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, -" + (20 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.wolfScore() >= 6 && player.wolfScore() < 12) outputText("\n<font color=\"#0000a0\">Half Werewolf: " + player.werewolfScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.wolfScore() >= 1 && player.wolfScore() < 6) outputText("\n<font color=\"#008000\">Half Werewolf: " + player.werewolfScore() + "</font>");
-	else if (player.wolfScore() < 1) outputText("\n<font color=\"#ff0000\">Half Werewolf: 0</font>");
+	if (player.werewolfScore() >= 12) outputText("\n<font color=\"#0000a0\">Werewolf: " + player.werewolfScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, -" + (20 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+	else if (player.wolfScore() >= 1 && player.wolfScore() < 12) outputText("\n<font color=\"#008000\">Werewolf: " + player.werewolfScore() + "</font>");
+	else if (player.wolfScore() < 1) outputText("\n<font color=\"#ff0000\">Werewolf: 0</font>");
 	//Wolf
 	if (player.wolfScore() >= 10) outputText("\n<font color=\"#0000a0\">Fenrir: " + player.wolfScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 	else if (player.wolfScore() >= 7 && player.coatColor == "glacial white") outputText("\n<font color=\"#0000a0\">Winter wolf: " + player.wolfScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");

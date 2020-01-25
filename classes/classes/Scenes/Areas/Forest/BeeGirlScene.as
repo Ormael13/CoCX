@@ -64,8 +64,6 @@ public class BeeGirlScene extends BaseContent
 				menu();
 				addButton(0, "Yes", beeEncounterSelect);
 				addButton(4, "Back", camp.returnToCampUseOneHour);
-				//Yes goes to beeEncounterLevel2(), no goes to camp
-				//simpleChoices("Yes", beeEncounterSelect, "", null, "", null, "", null, "Back", camp.returnToCampUseOneHour);
 			}
 			//If not smart enough, proceed.
 			else beeEncounterSelect(false);
@@ -122,7 +120,12 @@ public class BeeGirlScene extends BaseContent
 						//Chance to avoid raaaaeeeeep
 						if ((player.lib + player.cor < 160 + (40 * player.newGamePlusMod())) || rand(2) == 0) {
 							outputText("You barely stop yourself from gleefully throwing yourself into her arms.  You realize the harmonic buzzing of her wings and the unearthly scent of her honey briefly robbed you of your reason.  Feeling momentarily more clear-headed, what do you do?");
-							simpleChoices("Fight", fightTheBeeGirl, "Talk", beeTalk, "Seduce", null, "", null, "Leave", camp.returnToCampUseOneHour);
+							menu();
+							addButton(0, "Fight", fightTheBeeGirl);
+							addButton(1, "Talk", beeTalk);
+							addButtonDisabled(2, "Seduce", "Suprising it was for all the time here... sadly only herm part is mostly done without male/female varaints so i will look into some writer help with finishing this scene for all genders soon.");
+							//addButton(2, "Seduce", seduceBeeGirl);
+							addButton(4, "Leave", camp.returnToCampUseOneHour);
 						}
 						else beeEncounterClassic(false);
 				}
@@ -409,9 +412,16 @@ public class BeeGirlScene extends BaseContent
 		
 		private function fightTheBeeGirl():void {
 			clearOutput();
-			outputText("You clear your head and resolve to defeat the monstrous bee-woman.");
 			spriteSelect(6);
-			startCombat(new BeeGirl());
+			outputText("You clear your head and resolve to defeat the monstrous bee-girl");
+			if ((rand(3) == 0 && player.level < 12) || (rand(3) > 0 && player.level >= 12)) {
+				outputText(" huntress.");
+				startCombat(new BeeGirlHuntress());
+			}
+			else {
+				outputText(".");
+				startCombat(new BeeGirl());
+			}
 		}
 		
 		public function afterfightoptionswithBeeGirl():void {

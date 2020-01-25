@@ -12,7 +12,7 @@ package classes.Items.Weapons
 		
 		public function DualBFWhip() 
 		{
-			super("DBFWhip", "D.B.F.Whip", "dual big fucking whips", "a pair of big fucking whips", "whipping", 36, 2880, "Big Fucking Whips - the best solution for master tiny e-pen complex at this side of the Mareth!  This pair of 2H 5 meters long whips requires xx0 strength to fully unleash it power.", "Dual Large");
+			super("DBFWhip", "D.B.F.Whip", "dual big fucking whips", "a pair of big fucking whips", "whipping", 36, 2880, "Big Fucking Whips - the best solution for master tiny e-pen complex at this side of the Mareth!  This pair of 2H 5 meters long whips requires 225 (strength+speed) to fully unleash it power.", "Dual Large");
 		}
 		
 		override public function get attack():Number {

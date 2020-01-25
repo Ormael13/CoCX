@@ -184,7 +184,6 @@ public class Alraune extends Monster
 				//	.add(consumables.W__BOOK, 1 / 4)
 				//	.add(consumables.BEEHONY, 1 / 2)
 				//	.elseDrop(useables.B_CHITN);
-			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyPlantType, 0, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);

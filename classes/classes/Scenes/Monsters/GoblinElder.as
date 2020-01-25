@@ -34,14 +34,14 @@ public class GoblinElder extends Goblin
 			}
 			//Spell time!
 			//Charge Weapon
-			if (spellChooser == 0 && fatigue <= (100 - spellCostCharge)) {
+			if (spellChooser == 0 && (mana + spellCostCharge) <= maxMana()) {
 				outputText("The goblin utters word of power, summoning an electrical charge around her sword. <b>It looks like she'll deal more physical damage now!</b>");
 				createStatusEffect(StatusEffects.ChargeWeapon, 15 * spellMultiplier(), 0, 0, 0);
 				this.weaponAttack += 15 * spellMultiplier();
-				fatigue += spellCostCharge;
+				mana -= spellCostCharge;
 			}
 			//Blind
-			else if (spellChooser == 1 && fatigue <= (100 - spellCostBlind)) {
+			else if (spellChooser == 1 && (mana + spellCostBlind) <= maxMana()) {
 				outputText("The goblin glares at you and points at you! A bright flash erupts before you!  ");
 				if ((player.findPerk(PerkLib.GorgonsEyes) < 0 && rand(player.inte / 5) <= 4) && !player.hasPerk(PerkLib.BlindImmunity)) {
 					outputText("<b>You are blinded!</b>");
@@ -53,10 +53,10 @@ public class GoblinElder extends Goblin
 				else {
 					outputText("You manage to blink in the nick of time!");
 				}
-				fatigue += spellCostBlind;
+				mana -= spellCostBlind;
 			}
 			//Whitefire
-			else if (spellChooser == 2 && fatigue <= (100 - spellCostWhitefire)) {
+			else if (spellChooser == 2 && (mana + spellCostWhitefire) <= maxMana()) {
 				outputText("The goblin narrows her eyes and focuses her mind with deadly intent. She snaps her fingers and you are enveloped in a flash of white flames!  ");
 				var damage:int = inte + rand(50) * spellMultiplier();
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
@@ -74,33 +74,33 @@ public class GoblinElder extends Goblin
 				else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damage *= 2;
 				damage = Math.round(damage);
 				player.takeFireDamage(damage, true);
-				fatigue += spellCostWhitefire;
+				mana -= spellCostWhitefire;
 			}
 			//Arouse
-			else if (spellChooser == 3 && fatigue <= (100 - spellCostArouse)) {
+			else if (spellChooser == 3 && (mana + spellCostArouse) <= maxMana()) {
 				outputText("She makes a series of arcane gestures, drawing on her lust to inflict it upon you! ");
 				var lustDamage:int = (inte / 10) + (player.lib / 10) + rand(10) * spellMultiplier();
 				lustDamage = lustDamage * (EngineCore.lustPercent() / 100);
 				player.dynStats("lus", lustDamage, "scale", false);
 				outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDamage * 10) / 10) + "</font>)</b>");
-				fatigue += spellCostArouse;
+				mana -= spellCostArouse;
 			}
 			//Heal
-			else if (spellChooser == 4 && fatigue <= (100 - spellCostHeal)) {
+			else if (spellChooser == 4 && (mana + spellCostHeal) <= maxMana()) {
 				outputText("She focuses on her body and her desire to end pain, trying to draw on her arousal without enhancing it.");
 				var temp:int = int(10 + (inte/2) + rand(inte/3)) * spellMultiplier();
 				outputText("She flushes with success as her wounds begin to knit! <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
 				addHP(temp);
-				fatigue += spellCostHeal;
+				mana -= spellCostHeal;
 			}
 			//Might
-			else if (spellChooser == 5 && fatigue <= (100 - spellCostMight)) {
+			else if (spellChooser == 5 && (mana + spellCostMight) <= maxMana()) {
 				outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
 				outputText("The rush of success and power flows through her body.  She feels like she can do anything!");
 				createStatusEffect(StatusEffects.Might, 15 * spellMultiplier(), 15 * spellMultiplier(), 0, 0);
 				str += 15 * spellMultiplier();
 				tou += 15 * spellMultiplier();
-				fatigue += spellCostMight;
+				mana -= spellCostMight;
 			}
 		}
 		
@@ -114,7 +114,8 @@ public class GoblinElder extends Goblin
 				outputText("Her strike connects with you! ");
 				//Get hit
 				var damage:int = str + weaponAttack + rand(40);
-				if (damage < 10) damage = 10;
+				if (flags[kFLAGS.PRISCILLA_LVL_UP] >= 1) damage += (flags[kFLAGS.PRISCILLA_LVL_UP] + rand(15)) * 4;
+				if (damage < 40) damage = 40;
 				player.takePhysDamage(damage, true);
 			}
 		}
@@ -132,6 +133,7 @@ public class GoblinElder extends Goblin
 					player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 				}
 				var damage:int = str + rand(10);
+				if (flags[kFLAGS.PRISCILLA_LVL_UP] >= 1) damage += flags[kFLAGS.PRISCILLA_LVL_UP] + rand(15);
 				if (damage < 10) damage = 10;
 				player.takePhysDamage(damage, true);
 			}
@@ -168,6 +170,105 @@ public class GoblinElder extends Goblin
 		
 		public function GoblinElder() 
 		{
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] < 1) {
+				initStrTouSpeInte(115, 95, 80, 120);
+				initWisLibSensCor(120, 65, 35, 45);
+				this.weaponAttack = 35;
+				this.armorDef = 48;
+				this.armorMDef = 18;
+				this.bonusHP = 900;
+				this.level = 32;
+			}
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 1) {
+				initStrTouSpeInte(135, 105, 98, 140);
+				initWisLibSensCor(140, 70, 40, 45);
+				this.weaponAttack = 40;
+				this.armorDef = 55;
+				this.armorMDef = 21;
+				this.bonusHP = 1050;
+				this.level = 38;
+			}
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 2) {
+				initStrTouSpeInte(155, 115, 116, 160);
+				initWisLibSensCor(160, 75, 45, 45);
+				this.weaponAttack = 45;
+				this.armorDef = 62;
+				this.armorMDef = 24;
+				this.bonusHP = 1200;
+				this.level = 44;
+			}
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 3) {
+				initStrTouSpeInte(175, 125, 134, 180);
+				initWisLibSensCor(180, 80, 50, 45);
+				this.weaponAttack = 50;
+				this.armorDef = 69;
+				this.armorMDef = 27;
+				this.bonusHP = 1350;
+				this.level = 50;
+			}
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 4) {
+				initStrTouSpeInte(195, 135, 152, 200);
+				initWisLibSensCor(200, 85, 55, 45);
+				this.weaponAttack = 55;
+				this.armorDef = 76;
+				this.armorMDef = 30;
+				this.bonusHP = 1500;
+				this.level = 56;
+			}
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 5) {
+				initStrTouSpeInte(215, 145, 170, 220);
+				initWisLibSensCor(220, 90, 60, 45);
+				this.weaponAttack = 60;
+				this.armorDef = 83;
+				this.armorMDef = 33;
+				this.bonusHP = 1650;
+				this.level = 62;
+			}
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 6) {
+				initStrTouSpeInte(235, 155, 188, 240);
+				initWisLibSensCor(240, 95, 65, 45);
+				this.weaponAttack = 65;
+				this.armorDef = 90;
+				this.armorMDef = 36;
+				this.bonusHP = 1800;
+				this.level = 68;
+			}
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 7) {
+				initStrTouSpeInte(255, 165, 206, 260);
+				initWisLibSensCor(260, 100, 70, 45);
+				this.weaponAttack = 70;
+				this.armorDef = 97;
+				this.armorMDef = 39;
+				this.bonusHP = 1950;
+				this.level = 74;
+			}
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 8) {
+				initStrTouSpeInte(275, 175, 224, 280);
+				initWisLibSensCor(280, 105, 75, 45);
+				this.weaponAttack = 75;
+				this.armorDef = 104;
+				this.armorMDef = 42;
+				this.bonusHP = 2100;
+				this.level = 80;
+			}
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 9) {
+				initStrTouSpeInte(295, 185, 242, 300);
+				initWisLibSensCor(300, 110, 80, 45);
+				this.weaponAttack = 80;
+				this.armorDef = 111;
+				this.armorMDef = 45;
+				this.bonusHP =2250;
+				this.level = 86;
+			}
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 10) {
+				initStrTouSpeInte(315, 195, 250, 320);
+				initWisLibSensCor(320, 115, 85, 45);
+				this.weaponAttack = 85;
+				this.armorDef = 118;
+				this.armorMDef = 48;
+				this.bonusHP = 2400;
+				this.level = 92;
+			}
 			this.a = "the ";
 			this.short = "goblin elder";
 			if (flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER] > 0) {
@@ -188,21 +289,14 @@ public class GoblinElder extends Goblin
 			this.skinTone = "yellowish-green";
 			this.hairColor = "dark green";
 			this.hairLength = 4;
-			initStrTouSpeInte(115, 95, 80, 120);
-			initWisLibSensCor(120, 65, 35, 45);
 			this.weaponName = "primal sword";
 			this.weaponVerb = "slash";
-			this.weaponAttack = 35;
 			this.armorName = "bone armor";
-			this.armorDef = 48;
-			this.armorMDef = 18;
 			this.fatigue = 0;
-			this.bonusHP = 900;
 			this.bonusLust = 20;
 			this.lust = 35;
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 32;
 			this.gems = rand(10) + 40;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE, 5).
@@ -217,6 +311,16 @@ public class GoblinElder extends Goblin
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] >= 1) this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] >= 2) this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] >= 3) this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] >= 4) this.createPerk(PerkLib.ManaAffinityI, 0, 0, 0, 0);
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] >= 5) this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] >= 6) this.createPerk(PerkLib.MindOverBodyI, 0, 0, 0, 0);
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] >= 7) this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] >= 8) this.createPerk(PerkLib.PrestigeJobSpellKnight, 0, 0, 0, 0);
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] >= 9) this.createPerk(PerkLib.EpicLifeline, 0, 0, 0, 0);
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] >= 10) this.createPerk(PerkLib.MythicalToughness, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

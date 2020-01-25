@@ -18,7 +18,7 @@ import classes.internals.*;
 
 use namespace CoC;
 
-	public class Malicore extends Monster
+	public class Malikore extends Monster
 	{
 		public var bashemathScene:BashemathFollower = SceneLib.bashemathScene;
 		
@@ -32,7 +32,7 @@ use namespace CoC;
 			TailSpike();
 		}
 		public function TailSpike():void {
-			outputText("The malicore's tail curls over and shoots a spike at you. The bony spike ");
+			outputText("The malikore's tail curls over and shoots a spike at you. The bony spike ");
 			if (rand(100) < (this.spe - player.spe) / 2) {
 				if (player.hasStatusEffect(StatusEffects.WindWall)) {
 					outputText("hits wind wall doing no damage to you.");
@@ -72,12 +72,12 @@ use namespace CoC;
 		}
 		
 		public function moveTakeFlight():void {
-			outputText("The malicore takes flight, aiming with her tail as she prepares to unleash a volley of spikes at you!");
+			outputText("The malikore takes flight, aiming with her tail as she prepares to unleash a volley of spikes at you!");
 			createStatusEffect(StatusEffects.Flying,7,0,0,0);
 		}
 		
 		public function moveBoobCrash():void {
-			outputText("The flying malicore dives in your direction crashing into you breasts first! For a few seconds you go red in confusion and arousal as your face is lost in her cleavage then she pulls off leaving you dazed and aroused as she readies her next attack!");
+			outputText("The flying malikore dives in your direction crashing into you breasts first! For a few seconds you go red in confusion and arousal as your face is lost in her cleavage then she pulls off leaving you dazed and aroused as she readies her next attack!");
 			var boobcrashdmg:Number = Math.round(this.str / 8);
 			var lustdmg:Number = Math.round(this.lib / 3);
 			player.dynStats("lus", lustdmg, "scale", false);
@@ -89,7 +89,7 @@ use namespace CoC;
 		
 		public function moveBite():void {
 			var bitedmg:Number = Math.round(this.str / 25);
-			outputText("The malicore bites into your ");
+			outputText("The malikore bites into your ");
 			if (hasStatusEffect(StatusEffects.Pounce)) outputText("arm");
 			else if (player.lowerBody == 26) outputText("tentacle");
 			else outputText("tail");
@@ -101,9 +101,20 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.Pounce)) removeStatusEffect(StatusEffects.Pounce);
 		}
 		
+		public function moveCleanse():void {
+			outputText("The malikore stabs herself with her tail, cleansing herself from poison!");
+			if (hasStatusEffect(StatusEffects.PoisonDoT)) removeStatusEffect(StatusEffects.PoisonDoT);
+			if (hasStatusEffect(StatusEffects.PoisonDoTH)) removeStatusEffect(StatusEffects.PoisonDoTH);
+			if (hasStatusEffect(StatusEffects.LustDoT)) removeStatusEffect(StatusEffects.LustDoT);
+			if (hasStatusEffect(StatusEffects.LustDoTH)) removeStatusEffect(StatusEffects.LustDoTH);
+		}
+		
 		override protected function performCombatAction():void
 		{
-			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla)) {
+			if (!monsterIsStunned() && (hasStatusEffect(StatusEffects.PoisonDoT) || hasStatusEffect(StatusEffects.PoisonDoTH) || hasStatusEffect(StatusEffects.LustDoT) || hasStatusEffect(StatusEffects.LustDoTH))) {
+				moveCleanse();
+			}
+			else if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla)) {
 				moveBite();
 			}
 			else if (statusEffectv1(StatusEffects.Flying) == 3) {
@@ -122,27 +133,27 @@ use namespace CoC;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			player.removeStatusEffect(StatusEffects.WildMalicore);
+			player.removeStatusEffect(StatusEffects.WildMalikore);
 			cleanupAfterCombat();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			player.removeStatusEffect(StatusEffects.WildMalicore);
+			player.removeStatusEffect(StatusEffects.WildMalikore);
 			cleanupAfterCombat();
 		}
 		
 		override public function get long():String {
 			var str:String = "";
-			if (hasStatusEffect(StatusEffects.Flying)) str += "The malicore is circling you in the air readying a salvo of spike to throw at you.";
-			else str += "The malicore is currently circling you looking for an opening to strike. She’s actually good on the eye and you would give her more attention if not for the fact she’s trying to beat you down and rape you.";
+			if (hasStatusEffect(StatusEffects.Flying)) str += "The malikore is circling you in the air readying a salvo of spike to throw at you.";
+			else str += "The malikore is currently circling you looking for an opening to strike. She’s actually good on the eye and you would give her more attention if not for the fact she’s trying to beat you down and rape you.";
 			return str;
 		}
 		
-		public function Malicore() 
+		public function Malikore() 
 		{
 			this.a = "the ";
-			this.short = "malicore";
+			this.short = "malikore";
 			this.long = "";
 			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,75,0,0,0);

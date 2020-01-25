@@ -113,6 +113,8 @@ public class SpriteDb {
 	public static function get s_chickenHarpy(): Class {
 		return is8bit ? null : s_chickenHarpy_16bit;
 	}
+	[Embed(source="../../../res/sprites/cinderbloom.png")]
+	public static var s_cinderbloom:Class;
 	[Embed(source="../../../res/sprites/christmas elf.png")]
 	public static var s_christmas_elf_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/xmas-elf-old.png")]
@@ -655,6 +657,8 @@ public class SpriteDb {
 	public static function get s_sophieBimbo(): Class {
 		return is8bit ? s_sophieBimbo_8bit : s_sophieBimbo_16bit;
 	}
+	[Embed(source="../../../res/sprites/snow_lily.png")]
+	public static var s_snow_lily:Class;
 	[Embed(source="../../../res/sprites/spear gnoll.png")]
 	public static var s_spear_gnoll_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/gnoll-spearthrower-old.png")]

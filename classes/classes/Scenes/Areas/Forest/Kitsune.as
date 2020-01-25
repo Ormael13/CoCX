@@ -208,6 +208,7 @@ public class Kitsune extends Monster
 				this.ballSize = 2 + rand(13);
 				this.cumMultiplier = 1.5;
 				this.hoursSinceCum = ballSize * 10;
+				this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			}
 			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);

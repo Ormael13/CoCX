@@ -338,13 +338,14 @@ public function benoitsBuyMenu():void {
 			flags[kFLAGS.BENOIT_2],createCallBackFunction(benoitTransactBuy,2),
 			flags[kFLAGS.BENOIT_3],createCallBackFunction(benoitTransactBuy,3),
 			"", null, "", null);
-	if (player.keyItemv1("Backpack") < 5) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
+	if (player.keyItemv1("Backpack") < 10) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(6, "Alarm Clock", buyAlarmClock).hint("This mechanical clock looks like it was originally constructed by the Goblins before the corruption spreaded throughout Mareth.");
 	if (flags[kFLAGS.BENOIT_PISTOL_BOUGHT] < 2 && flags[kFLAGS.BENOIT_AFFECTION] == 100) addButton(7, "Zweihander", buyZweihander);
 	addButton(14, "Back", benoitIntro);
 }
 
-private function benoitSellMenu():void {
+private function benoitSellMenu(page:int = 1):void {
+	var slot:int;
 	clearOutput();
 	if (flags[kFLAGS.BENOIT_EXPLAINED_SHOP] == 0)
 		buyOrSellExplanationFirstTime();
@@ -356,12 +357,25 @@ private function benoitSellMenu():void {
 	outputText("\n\n<b><u>Benoit" + benoitMF("", "e") + "'s Estimates</u></b>");
 	menu();
 	var totalItems:int = 0;
-	for (var slot:int = 0; slot < 10; slot++) {
-		if (player.itemSlots[slot].quantity > 0 && int(player.itemSlots[slot].itype.value / sellMod) >= 1) {
-			outputText("\n" + int(player.itemSlots[slot].itype.value / sellMod) + " gems for " + player.itemSlots[slot].itype.longName + ".");
-			addButton(slot, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), createCallBackFunction2(benoitSellTransact, slot, sellMod));
-			totalItems += player.itemSlots[slot].quantity;
+	if (page == 1) {
+		for (slot = 0; slot < 10; slot++) {
+			if (player.itemSlots[slot].quantity > 0 && int(player.itemSlots[slot].itype.value / sellMod) >= 1) {
+				outputText("\n" + int(player.itemSlots[slot].itype.value / sellMod) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+				addButton(slot, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), createCallBackFunction2(benoitSellTransact, slot, sellMod));
+				totalItems += player.itemSlots[slot].quantity;
+			}
 		}
+		if (inventory.getMaxSlots() > 10) addButton(13, "Next", benoitSellMenu, page + 1);
+	}
+	if (page == 2) {
+		for (slot = 10; slot < 20; slot++) {
+			if (player.itemSlots[slot].quantity > 0 && int(player.itemSlots[slot].itype.value / sellMod) >= 1) {
+				outputText("\n" + int(player.itemSlots[slot].itype.value / sellMod) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+				addButton(slot-10, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), createCallBackFunction2(benoitSellTransact, slot, sellMod));
+				totalItems += player.itemSlots[slot].quantity;
+			}
+		}
+		addButton(13, "Prev", benoitSellMenu, page - 1);
 	}
 	if (totalItems > 1) addButton(12, "Sell All", createCallBackFunction2(benoitSellAllTransact, totalItems, sellMod));
 	addButton(14, "Back", benoitIntro);
@@ -416,7 +430,7 @@ private function benoitSellTransact(slot:int, sellMod:int):void {
 private function benoitSellAllTransact(totalItems:int, sellMod:int):void {
 	clearOutput();
 	var itemValue:int = 0;
-	for (var slot:int = 0; slot < 10; slot++) {
+	for (var slot:int = 0; slot < 20; slot++) {
 		if (player.itemSlots[slot].quantity > 0 && int(player.itemSlots[slot].itype.value / sellMod) >= 1) {
 			itemValue += player.itemSlots[slot].quantity * int(player.itemSlots[slot].itype.value / sellMod);
 			player.itemSlots[slot].quantity = 0;
@@ -622,16 +636,22 @@ private function buyBackpack():void {
 	outputText("You ask " + benoitMF("Benoit", "Benoite") + " if " + benoitMF("he", "she") + " has a backpack to spare.");
 	outputText("\n\n\"<i>Yes. Zese come in three sizes. What will you pick?</i>\" " + benoitMF("he", "she") + " asks.");
 	outputText("\n\n<b><u>Backpack Size and Pricings</u></b>");
-	outputText("\nSmall: 200 gems, +1 inventory slot");
-	outputText("\nMedium: 600 gems, +3 inventory slots");
-	outputText("\nLarge: 1000 gems, +5 inventory slots");
+	outputText("\nSmall: 400 gems, +2 inventory slot");
+	outputText("\nMedium: 800 gems, +4 inventory slots");
+	outputText("\nLarge: 1200 gems, +6 inventory slots");
+	outputText("\nExtra Large: 1600 gems, +8 inventory slots");
+	outputText("\nDouble Extra Large: 2000 gems, +10 inventory slots");
+	outputText("\nTriple Extra Large: 2400 gems, +12 inventory slots");
 	menu();
-	if (player.keyItemv1("Backpack") < 1) addButton(0, "Small", buyBackpackConfirmation, 1, "Small", 200, "Grants additional one slot. \n\nCost: 200 gems");
-	if (player.keyItemv1("Backpack") < 3) addButton(1, "Medium", buyBackpackConfirmation, 3, "Medium", 600, "Grants additional three slots. \n\nCost: 600 gems");
-	if (player.keyItemv1("Backpack") < 5) addButton(2, "Large", buyBackpackConfirmation, 5, "Large", 1000, "Grants additional five slots. \n\nCost: 1000 gems");
-	addButton(4, "Nevermind", benoitsBuyMenu);
+	if (player.keyItemv1("Backpack") < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 400, "Grants additional two slot. \n\nCost: 400 gems");
+	if (player.keyItemv1("Backpack") < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 600, "Grants additional four slots. \n\nCost: 800 gems");
+	if (player.keyItemv1("Backpack") < 6) addButton(2, "Large", buyBackpackConfirmation, 6, "Large", 1200, "Grants additional six slots. \n\nCost: 1200 gems");
+	if (player.keyItemv1("Backpack") < 8) addButton(3, "X Large", buyBackpackConfirmation, 8, "X Large", 1600, "Grants additional eight slots. \n\nCost: 1600 gems");
+	if (player.keyItemv1("Backpack") < 10) addButton(4, "XX Large", buyBackpackConfirmation, 10, "XX Large", 2000, "Grants additional ten slots. \n\nCost: 2000 gems");
+	if (player.keyItemv1("Backpack") < 12) addButton(5, "XXX Large", buyBackpackConfirmation, 12, "XXX Large", 2400, "Grants additional twelve slots. \n\nCost: 2000 gems");
+	addButton(14, "Nevermind", benoitsBuyMenu);
 }
-private function buyBackpackConfirmation(size:int = 1, sizeDesc:String = "Small", price:int = 200):void {
+private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 400):void {
 	clearOutput();
 	if (player.gems < price) {
 		outputText("You count out your gems and realize it's beyond your price range.");
@@ -1829,3 +1849,4 @@ public function femoitSexIntro():void
 }
 }
 
+

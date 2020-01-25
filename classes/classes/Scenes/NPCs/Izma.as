@@ -178,6 +178,7 @@ import classes.Scenes.SceneLib;
 			this.gems = rand(15) + 10;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

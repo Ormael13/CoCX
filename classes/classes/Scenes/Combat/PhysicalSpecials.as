@@ -4539,9 +4539,25 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		if (player.hasKeyItem("Omni Missile") >= 0) outputText("You deploy the omni Missile and rain death on " + monster.a + monster.short + ", covering the entire area with explosions for ");
 		else outputText("You deploy the missile launcher and aim at " + monster.a + monster.short + ", for a big explosion. ");
-		var damage:Number = 0;
-		damage += 300 + rand(121);
+		var damage:Number = 300 + rand(121);
+		//damage += player.weaponRangeAttack * 20;
+		//if (player.hasPerk(PerkLib.JobGunslinger)) damage += player.weaponRangeAttack;
+		//if (player.findPerk(PerkLib.DeadlyAim) < 0) damage *= (monster.damageRangePercent() / 100);//jak ten perk o ignorowaniu armora bedzie czy coś to tu dać jak nie ma tego perku to sie dolicza
+		//if (player.hasPerk(PerkLib.AlchemicalCartridge)) damage += scalingBonusIntelligence() * 0.12;
+		//if (player.hasPerk(PerkLib.ChurchOfTheGun)) damage += scalingBonusWisdom() * 0.18;
+		//Weapon addition!
+		//if (player.weaponRangeAttack < 51) damage *= (1 + (player.weaponRangeAttack * 0.03));
+		//else if (player.weaponRangeAttack >= 51 && player.weaponRangeAttack < 101) damage *= (2.5 + ((player.weaponRangeAttack - 50) * 0.025));
+		//else if (player.weaponRangeAttack >= 101 && player.weaponRangeAttack < 151) damage *= (3.75 + ((player.weaponRangeAttack - 100) * 0.02));
+		//else if (player.weaponRangeAttack >= 151 && player.weaponRangeAttack < 201) damage *= (4.75 + ((player.weaponRangeAttack - 150) * 0.015));
+		//else if (player.weaponRangeAttack >= 201 && player.weaponRangeAttack < 251) damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
+		//else damage *= (6 + ((player.weaponRangeAttack - 250) * 0.005));
+		//if (player.hasKeyItem("Gun Scope") >= 0) damage *= 1.2;
+		//if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) damage *= 1.4;
+		//if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) damage *= 1.6;
+		//if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.5;
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyGigantType)) {
+			//if (player.hasPerk(PerkLib.ExplosiveCartridge)) damage *= 2;
 			if (player.hasKeyItem("Omni Missile") >= 0) damage *= 10;
 			else damage *= 5;
 		}

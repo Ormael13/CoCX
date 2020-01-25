@@ -45,16 +45,9 @@ public class MainViewManager extends BaseContent {
 		var i:int = 0; //Will be used for array.
 
 		//Set background
-		mainView.background.bitmapClass = MainView.Backgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
-		var sidebarBg:Class         = StatsView.SidebarBackgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
-		mainView.statsView.setBackground(sidebarBg);
-		mainView.monsterStatsView.setBackground(sidebarBg);
-		//Set font
+		var style:int                      = flags[kFLAGS.BACKGROUND_STYLE];
 		var font:String      = (flags[kFLAGS.USE_OLD_FONT] > 0) ? StatsView.ValueFontOld : StatsView.ValueFont;
-		var textColor:*      = textColorArray[flags[kFLAGS.BACKGROUND_STYLE]];
-		var barAlpha:* = barAlphaArray[flags[kFLAGS.BACKGROUND_STYLE]];
-		mainView.statsView.setTheme(font, textColor, barAlpha);
-		mainView.monsterStatsView.setTheme(font, textColor, barAlpha);
+		mainView.setTheme(style, font);
 	}
 
 	public function hideSprite():void {
@@ -62,18 +55,7 @@ public class MainViewManager extends BaseContent {
 		mainView.sprite.visible = false;
 	}
 	public function showSpriteBitmap(bmp:BitmapData):void {
-		if (!bmp) return;
-		var element:BitmapDataSprite = mainView.sprite;
-		element.visible              = true;
-		var scale:Number             = 80 / bmp.height;
-		element.scaleX               = scale;
-		element.scaleY               = scale;
-		element.graphics.clear();
-		element.graphics.beginBitmapFill(bmp, null, false, false);
-		element.graphics.drawRect(0, 0, bmp.width, bmp.height);
-		element.graphics.endFill();
-		element.x = mainView.width - MainView.GAP - element.width;
-		element.y = mainView.height - MainView.GAP  - element.height;
+		mainView.showSpriteBitmap(bmp);
 	}
 	//------------
 	// REFRESH
@@ -89,7 +71,7 @@ public class MainViewManager extends BaseContent {
         mainView.statsView.refreshStats(CoC.instance);
     }
 	public function showPlayerDoll(reload:Boolean=false):void {
-			tweenOutStats();
+		//tweenOutStats();
 		if (reload) mainView.charView.reload("external");
 		mainView.charView.setCharacter(player);
 		mainView.charView.redraw();
@@ -100,8 +82,7 @@ public class MainViewManager extends BaseContent {
 			BoundClip.nextContent = mainView.charView;
 			outputText("<img src='coc.view::BoundClip' align='left' id='charview'/>");
 		} else {
-			mainView.charView.x = 208 + 796 + 4; //TEXTZONE_X + TEXTZONE_W + GAP
-			mainView.charView.y = 52; // TEXTZONE_Y;
+			mainView.placeCharviewAtRight();
 			mainView.addElement(mainView.charView);
 		}
 	}
@@ -115,12 +96,13 @@ public class MainViewManager extends BaseContent {
 		var t:Timer = new Timer(20, 21);
 		if (!statsHidden) return;
 		statsHidden = false;
+		mainView.cornerStatsView.visible = true;
 		t.addEventListener(TimerEvent.TIMER, function ():void {
 			mainView.statsView.x += 10;
 			mainView.statsView.alpha += 0.05;
 		});
 		t.addEventListener(TimerEvent.TIMER_COMPLETE, function ():void {
-			mainView.statsView.x     = 0;
+			mainView.statsView.x     = MainView.STATBAR_X;
 			mainView.statsView.alpha = 1;
 		});
 		t.start();
@@ -129,13 +111,14 @@ public class MainViewManager extends BaseContent {
 		var t:Timer = new Timer(20, 21);
 		if (statsHidden) return;
 		statsHidden = true;
+		mainView.cornerStatsView.visible = false;
 		t.addEventListener(TimerEvent.TIMER, function ():void {
 			mainView.statsView.x -= 10;
 			mainView.statsView.alpha -= 0.05;
 			if (mainView.statsView.alpha < 0) mainView.statsView.alpha = 0;
 		});
 		t.addEventListener(TimerEvent.TIMER_COMPLETE, function ():void {
-			mainView.statsView.x     = -200;
+			mainView.statsView.x     = -1000;
 			mainView.statsView.alpha = 0;
 		});
 		t.start();

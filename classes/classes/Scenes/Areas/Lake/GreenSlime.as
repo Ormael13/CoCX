@@ -18,7 +18,7 @@ public class GreenSlime extends Monster
 		override public function defeated(hpVictory:Boolean):void
 		{
 			outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.");
-			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) SceneLib.combat.cleanupAfterCombatImpl();
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) SceneLib.combat.cleanupAfterCombatImpl();//doNext(SceneLib.combat.cleanupAfterCombatImpl)
 			else {
 				var temp3:Function = null;
 				if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
@@ -40,7 +40,7 @@ public class GreenSlime extends Monster
 					outputText("  Sadly you realize your own needs have not been met.  Of course, you could always play with the poor thing... Do you rape it?");
 					EngineCore.simpleChoices("Rape",SceneLib.lake.greenSlimeScene.slimeVictoryRape,"",null,"",null,"U. Sex Scenes",temp3,"Leave",SceneLib.combat.cleanupAfterCombatImpl);
 				}
-				else SceneLib.combat.cleanupAfterCombatImpl();
+				else SceneLib.combat.cleanupAfterCombatImpl();//doNext(SceneLib.combat.cleanupAfterCombatImpl)
 			}
 		}
 

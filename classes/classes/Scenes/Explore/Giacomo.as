@@ -432,7 +432,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			}
 			else {
 				outputText("\n\nYou decided to buy the seed. It’s actually fairly large and light brown in color. Other than that it just looks like an ordinary seed. Maybe you'll plant it later to see what it'll grow into. <b>You acquired the Mysterious Seed.</b>");
-				player.gems -= 100;
+				player.gems -= 30;
 				statScreenRefresh();
 				flags[kFLAGS.CHRISTMAS_TREE_LEVEL] = 1;
 				player.createKeyItem("Mysterious Seed", 0, 0, 0, 0);

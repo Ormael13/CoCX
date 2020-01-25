@@ -72,7 +72,8 @@ import classes.internals.Utils;
 			addButton(6, undergarments.F_PANTY.shortName, buyItem, 6).hint("Fur panty");
 			addButton(7, undergarments.F_LOIN_.shortName, buyItem, 7).hint("Fur loincloth");
 			addButton(8, weapons.NORTHIP.shortName, buyItem, 8).hint("Northerner ice picks");
-			addButton(13, consumables.WHITEIS.shortName, buyItem, 13).hint("White Ice Shard");
+			addButton(10, armors.BLIZZ_K.shortName, buyItem, 10).hint("Blizzard Kimono");
+			addButton(11, headjewelries.SNOWFH.shortName, buyItem, 11).hint("Snowflake hairpin");
 			addButton(14, "Back", YuMenuMain2);
 		}		
 		private function buyItem(item:Number = 0):void
@@ -86,7 +87,8 @@ import classes.internals.Utils;
 			if (item == 6) yetiBuy(undergarments.F_PANTY);
 			if (item == 7) yetiBuy(undergarments.F_LOIN_);
 			if (item == 8) yetiBuy(weapons.NORTHIP);
-			if (item == 13) yetiBuy(consumables.WHITEIS);
+			if (item == 10) yetiBuy(armors.BLIZZ_K);
+			if (item == 11) yetiBuy(headjewelries.SNOWFH);
 		}
 		public function yetiBuy(itype:ItemType):void {
 			clearOutput();

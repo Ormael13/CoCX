@@ -471,7 +471,7 @@ public class PerkMenu extends BaseContent {
 		clearOutput();
 		menu();
 		outputText("You can choose how your will-o'-the-wisp will behave during each fight.\n\n");
-		outputText("\n<b>Will-o'-the-wisp behavious:</b>\n");
+		outputText("\n<b>Will-o'-the-wisp behaviour:</b>\n");
 		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) outputText("Commanding other pets or minions (other minions will get boost to dmg).");
 		if (flags[kFLAGS.WILL_O_THE_WISP] < 1) outputText("Attacking at the begining of each turn.");
 		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) addButton(10, "Attacking", WOTWAttacking,false);

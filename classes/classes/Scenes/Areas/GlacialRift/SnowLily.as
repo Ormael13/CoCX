@@ -8,10 +8,21 @@ import classes.*;
 import classes.GlobalFlags.*;
 import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Holidays;
+import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
+import classes.display.SpriteDb;
 
 public class SnowLily extends Alraune
 	{
+		override public function defeated(hpVictory:Boolean):void
+		{
+			SceneLib.forest.alrauneScene.alrauneDeepwoodsWon();
+		}
+
+		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
+		{
+			SceneLib.forest.alrauneScene.alrauneDeepwoodsLost();
+		}
 		
 		public function SnowLily() 
 		{

@@ -1484,6 +1484,50 @@ internal function loseToMinerva():void {
 internal function beatUpDatSharpie():void {
 	clearOutput();
 	minervaSprite();
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.MINERVA_DEFEATS_COUNTER]++;
+		else flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 1;
+		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 1 && flags[kFLAGS.MINERVA_LVL_UP] < 1) {
+			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.MINERVA_LVL_UP] = 1;
+		}
+		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 2 && flags[kFLAGS.MINERVA_LVL_UP] == 1) {
+			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.MINERVA_LVL_UP] = 2;
+		}
+		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 3 && flags[kFLAGS.MINERVA_LVL_UP] == 2) {
+			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.MINERVA_LVL_UP] = 3;
+		}
+		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.MINERVA_LVL_UP] == 3) {
+			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.MINERVA_LVL_UP] = 4;
+		}
+		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.MINERVA_LVL_UP] == 4) {
+			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.MINERVA_LVL_UP] = 5;
+		}
+		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.MINERVA_LVL_UP] == 5) {
+			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.MINERVA_LVL_UP] = 6;
+		}
+		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 7 && flags[kFLAGS.MINERVA_LVL_UP] == 6) {
+			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.MINERVA_LVL_UP] = 7;
+		}
+		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.MINERVA_LVL_UP] == 7) {
+			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.MINERVA_LVL_UP] = 8;
+		}
+		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.MINERVA_LVL_UP] == 8) {
+			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.MINERVA_LVL_UP] = 9;
+		}
+		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.MINERVA_LVL_UP] == 9) {
+			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.MINERVA_LVL_UP] = 10;
+		}
+	}
 	//Win by damage
 	if(monster.HP < 1) {
 		outputText("With your final blow against the siren, you send her silver halberd flying from her hands.  The metal weapon skitters across the ground as Minerva herself falls to the soft moss, her sharky skin covered in sweat and bruises as she sits her butt down, letting out a sigh.  \"<i>Wow... you sure are something, aren't you...  I'm glad this was just a friendly spar and not a real fight,</i>\" she says with a content smile on her face as she looks up at you.  You could swear that she is even blushing a little.  \"<i>Such a big strong warrior you are.</i>\"");
