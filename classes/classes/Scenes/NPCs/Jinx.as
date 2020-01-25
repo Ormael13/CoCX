@@ -40,12 +40,12 @@ use namespace CoC;
 			}
 			else {
 				this.weaponRangeName = "ayotech canon";
-				this.weaponRangeAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponRangeAttack *= 3;
 				var damage:Number = 0;
 				damage += this.weaponRangeAttack * 20;
 				player.takePhysDamage(damage, true);
 				this.weaponRangeName = "ayotech pistol";
-				this.weaponRangeAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponRangeAttack /= 3;
 			}
 			outputText("\n\n");
 		}

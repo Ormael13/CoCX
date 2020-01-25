@@ -19,6 +19,7 @@ import classes.VaginaClass;
 	public class RNGod extends Monster
 	{
 		
+		
 		public function RNGod() 
 		{
 			this.a = " ";

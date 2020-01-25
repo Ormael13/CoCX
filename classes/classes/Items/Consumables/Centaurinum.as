@@ -280,16 +280,13 @@ public class Centaurinum extends Consumable{
 				if (player.lowerBody == LowerBody.SCYLLA) {
 					outputText("\n\nYou collapse as your tentacle legs starts to merge in pairs, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
 				}
-				mutations.setLowerBody(LowerBody.HOOFED);
 			}
 			//Catch-all
-			else {
-				if (player.lowerBody == LowerBody.HUMAN) mutations.setLowerBody(LowerBody.HOOFED);
-				outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a feral beast!</b>");
-			}
+			else outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a feral beast!</b>");
 			if (player.gender > 0) outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the hind legs of your body.");
 			dynStats("spe", 3);
 			//outputText("  A coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have hooves in place of your feet!</b>");
+			mutations.setLowerBody(LowerBody.HOOFED);
 			player.legCount = 4;
 			//dynStats("cor", 0);
 			changes++;

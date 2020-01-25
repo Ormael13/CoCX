@@ -13,7 +13,7 @@ package classes.Items.Weapons
 		
 		public function BFTHSword() 
 		{
-			super("BFTHSword", "BFTHSword", "big fucking two-handed sword", "a big fucking two-handed sword", "slash", 100, 4000, "Big Fucking Two-Handed Sword - if the best solution for a tiny e-pen complex at this side of the Mareth not work take this one!  This 2H 4 meters long sword requires 250 strength to fully unleash it power.", "Massive");
+			super("BFTHSword", "BFTHSword", "big fucking two-handed sword", "a big fucking two-handed sword", "slash", 100, 4000, "Big Fucking Two-Handed Sword - if the best solution for a tiny e-pen complex at this side of the Mareth not work take this one! This 2H 4 meters long sword requires 250 strength to fully unleash it power.", "Massive");
 		}
 		
 		override public function get attack():Number {

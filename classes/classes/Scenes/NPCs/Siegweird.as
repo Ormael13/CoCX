@@ -120,6 +120,7 @@ import classes.internals.*;
 			this.level = 64;
 			this.gems = rand(25) + 138;
 			this.drop = NO_DROP;
+			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

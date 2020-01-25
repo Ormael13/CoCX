@@ -12,7 +12,7 @@ package classes.Items.Consumables
 	public final class MiniBangBall extends Consumable {
 		
 		public function MiniBangBall() {
-			super("BangB.", "MiniBangB", "a mini bang ball", 10, "A mini ball-shaped throwing weapon.  Though good for only a single use, it's guaranteed to do super low to very low damage to solo or weak group of enemies if it hits.  Inflicts 60 to 80 base damage.");
+			super("BangB.", "MiniBangB", "a mini bang ball", 10, "A mini ball-shaped throwing weapon.  Though good for only a single use, it's guaranteed to do super low to very low damage to solo or weak group of enemies if it hits.  Inflicts 120 to 160 base damage.");
 		}
 		
 		override public function canUse():Boolean {
@@ -32,11 +32,11 @@ package classes.Items.Consumables
 				outputText(" incredible speed allows " + game.monster.pronoun2 + " to avoid the ball!  The deadly sphere shatters when it impacts something in the distance.");
 			}
 			else { //Not dodged
-				var damage:Number = 60 + Utils.rand(21);
+				var damage:Number = 120 + Utils.rand(41);
 				if (game.monster.findPerk(PerkLib.EnemyGroupType) >= 0) damage *= 5;
 				outputText(game.monster.capitalA + game.monster.short + " is hit with the mini bangball!  It breaks apart as it lacerates " + game.monster.pronoun2 + ". <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 				game.monster.HP -= damage;
-				if (game.monster.HP < 0) game.monster.HP = 0;
+				if (game.monster.HP < game.monster.minHP()) game.monster.HP = game.monster.minHP() - 1;
 			}
 			return(false);
 		}

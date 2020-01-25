@@ -25,6 +25,7 @@ import classes.Scenes.NPCs.ChiChiFollower;
 import classes.Scenes.NPCs.Jinx;
 import classes.Scenes.NPCs.Syth;
 import classes.Scenes.NPCs.Rangiku;
+import classes.Scenes.NPCs.Veronika;
 //import classes.Scenes.Places.HeXinDao.*;
 //import classes.Items.Armor;
 //import classes.Scenes.Dungeons.DeepCave.ValaScene;
@@ -787,23 +788,25 @@ public function soularena():void {
 				if (player.statusEffectv2(StatusEffects.SoulArenaGaunlets1) > 1) addButtonDisabled(1, "Gaunlet 2", "You already won this gaunlet today. Come back tomorrow.");
 				else addButton(1, "Gaunlet 2", gaunletchallange2fight1).hint("Fight 4 diff enemies one after another.");
 			}
+			else addButtonDisabled(1, "Gaunlet 2", "You need to finish Gaunlet 1 first.");
 			//addButton(2, "Gaunlet 3", gaunletchallange3).hint("Fight 5 diff enemies one after another.");
 			//addButton(3, "Gaunlet 4", gaunletchallange4).hint("Fight 6 diff enemies one after another.");
 			//addButton(4, "Gaunlet 5", gaunletchallange5).hint("Fight 7 diff enemies one after another.");
-			//addButton(5, "Gaunlet 6", gaunletchallange6).hint("Fight 8 diff enemies one after another.");gdzieś tam tu dodać grupowe tylko walki dające na pierszej walce oblokowanie perków do powiekszania drużyny
+			//addButton(5, "Gaunlet 6", gaunletchallange6).hint("Fight 8 diff enemies one after another.");gdzieś tam tu dodać grupowe tylko walki dające na pierwszej walce oblokowanie perków do powiekszania drużyny
 			addButton(9, "LvL 24 Gargoyle", arenaSelection,GargoyleBasic);
 			addButton(10, "LvL 33 Golems", arenaSelection,GolemsBasic);
 			addButton(11, "LvL 42 Golems", arenaSelection,GolemsImproved);
 			addButton(12, "LvL 51 Golems", arenaSelection, GolemsAdvanced);
-			addButton(13, "-2-", soularenaChallengeSubpages, page + 1);
+			//addButton(13, "-2-", soularenaChallengeSubpages, page + 1);
 			addButton(14, "Back", soularena);
 		}
 		if (page == 2) {
-			addButton(5, "Golemancer", arenaSelection,Jeniffer);
-			addButton(6, "AyotechManiac", arenaSelection,Jinx);
-			addButton(7, "MachoSalamander", arenaSelection,Syth);
-			addButton(8, "MissSalamander", arenaSelection,Asuka);
-			addButton(9, "MissOni", arenaSelection,Rangiku);
+			addButton(0, "Kitty", arenaSelection,Veronika);
+			addButton(1, "Golemancer", arenaSelection,Jeniffer);
+			addButton(2, "AyotechManiac", arenaSelection,Jinx);
+			addButton(5, "Macho Mander", arenaSelection,Syth);
+			addButton(6, "Miss Mander", arenaSelection,Asuka);
+			addButton(7, "Miss Oni", arenaSelection,Rangiku);
 			addButton(13, "-1-", soularenaChallengeSubpages, page - 1);
 			addButton(14, "Back", soularena);
 		}

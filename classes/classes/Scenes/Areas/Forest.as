@@ -165,7 +165,7 @@ use namespace CoC;
 					},{
 						name  : "beegirl",
 						call  : beeGirlScene.beeEncounter,
-						chance: 0.40
+						chance: 0.50
 					}, {
 						name  : "truffle",
 						call  : findTruffle,

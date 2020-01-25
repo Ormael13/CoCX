@@ -63,6 +63,8 @@ public var urtaQItems15:ItemSlotClass = new ItemSlotClass();
 public var urtaQItems16:ItemSlotClass = new ItemSlotClass();
 public var urtaQItems17:ItemSlotClass = new ItemSlotClass();
 public var urtaQItems18:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems19:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems20:ItemSlotClass = new ItemSlotClass();
 
 public function urtaBusy():Boolean {
 	return (telAdre.edryn.pregnancy.type == PregnancyStore.PREGNANCY_TAOTH || flags[kFLAGS.URTA_QUEST_STATUS] == -1);
@@ -197,6 +199,8 @@ private function resetToPC():void {
 	player.itemSlot16 = urtaQItems16;
 	player.itemSlot17 = urtaQItems17;
 	player.itemSlot18 = urtaQItems18;
+	player.itemSlot19 = urtaQItems19;
+	player.itemSlot20 = urtaQItems20;
 	model.player = player;
 
 	// See called method comment.
@@ -228,6 +232,8 @@ public function startUrtaQuest():void {
 	urtaQItems16 = player.itemSlot16;
 	urtaQItems17 = player.itemSlot17;
 	urtaQItems18 = player.itemSlot18;
+	urtaQItems19 = player.itemSlot19;
+	urtaQItems20 = player.itemSlot20;
 	player.itemSlot1 = new ItemSlotClass();
 	player.itemSlot2 = new ItemSlotClass();
 	player.itemSlot3 = new ItemSlotClass();
@@ -246,6 +252,8 @@ public function startUrtaQuest():void {
 	player.itemSlot16 = new ItemSlotClass();
 	player.itemSlot17 = new ItemSlotClass();
 	player.itemSlot18 = new ItemSlotClass();
+	player.itemSlot19 = new ItemSlotClass();
+	player.itemSlot20 = new ItemSlotClass();
 	player2 = player;
 
 	player = new Player();

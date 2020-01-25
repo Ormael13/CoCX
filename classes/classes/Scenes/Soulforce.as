@@ -22,6 +22,7 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Forest.Alraune;
+import classes.Scenes.Areas.Forest.Nightmare;
 import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
 import classes.Scenes.Areas.Forest.TamaniScene;
 import classes.Scenes.Areas.Forest.TentacleBeastRaging;
@@ -31,6 +32,7 @@ import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
+import classes.Scenes.Explore.Pierce;
 import classes.Scenes.Monsters.DarkElfRanger;
 import classes.Scenes.Monsters.DarkElfScout;
 import classes.Scenes.Monsters.DarkElfSlaver;
@@ -47,7 +49,6 @@ import classes.Scenes.NPCs.Neisa;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
 import classes.Scenes.Places.Boat.Marae;
-import classes.Scenes.Areas.Forest.Nightmare;
 import classes.Player;
 import classes.Items.*;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
@@ -203,7 +204,7 @@ use namespace CoC;
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 			if (player.findPerk(PerkLib.Metamorph) >= 0) addButton(6, "Metamorf", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");//używanie metamorfowania z użyciem soulforce
 			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
-			addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
+			//addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul king to soul ancestor w momencie robienia release version
 		public function SoulforceCheats():void {
@@ -238,7 +239,7 @@ use namespace CoC;
 		public function AddMaxBackpack():void {
 			outputText("\n\n<b>(Max sized Backpack! Go! Go! Go!)</b>\n\n");
 			if (player.hasKeyItem("Backpack") >= 0) player.removeKeyItem("Backpack");
-			player.createKeyItem("Backpack", 10, 0, 0, 0);
+			player.createKeyItem("Backpack", 12, 0, 0, 0);
 			doNext(SoulforceCheats);
 		}
 public function FightAria():void {
@@ -1547,30 +1548,42 @@ public function FightHellfireSnail():void {
 			addButton(13, "EnergyCore", AddEnergyCore).hint("Add 1 Energy Core.");
 			addButton(14, "Back", SoulforceCheats);
 		}
-		public function EnemiesMenu():void {
+		public function EnemiesMenu(page:int = 1):void {
 			menu();
-			addButton(0, "FightForPearl", FightForPearl).hint("Test fight to get Sky Poison Pearl legally (aside we cheat to start fight)");
-			addButton(1, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
-			//addButton(2, "Sonya", FightSonya).hint("Test fight with Sonya.");
-			//addButton(3, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
-			//addButton(4, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
-			addButton(2, "Alvina", FightAlvina).hint("Test fight with Alvina.");
-			addButton(3, "Neisa", FightNeisa).hint("Test fight with Neisa.");
-			addButton(4, "Lethice", FightLethice).hint("Test fight with Lethice.");
-			addButton(5, "DarkSlimeEmpress", FightDarkSlimeEmpress).hint("Test fight with Dark Slime Empress.");
-			addButton(6, "Hydra", FightHydra).hint("Test fight with Hydra.");
-			addButton(7, "HellfireSnail", FightHellfireSnail).hint("Test fight with Hellfire Snail.");
-			//addButton(5, "DE Ranger", FightDarkElfRanger).hint("Test fight with Dark Elf Ranger. (lvl 39)");
-			//addButton(6, "DE Sniper", FightDarkElfSniper).hint("Test fight with Dark Elf Sniper. (lvl 51)");
-			//addButton(6, "SomeMalicore", FightRandomnManticore).hint("Test fight with some malicore.");
-			//addButton(7, "Electra", FightElectra).hint("Test fight with Electra.");
-			addButton(8, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
-			addButton(9, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
-			addButton(10, "ChaosChimera", FightChaosChimera).hint("Test fight with Chaos Chimera.");
-			addButton(11, "LvLUP Aurora", LvLUPAurora).hint("LvL UP forcefully Aurora for testing purpose up to the limit.");
-			addButton(12, "DELvL Aurora", DELvLAurora).hint("DE LvL forcefully Aurora for testing purpose down toward the lvl 1.");
-			addButton(13, "FeralT.Beast", FightFeralImp).hint("Test fight with feral tentacle beast.");
-			addButton(14, "Back", SoulforceCheats);
+			if (page == 1) {
+				addButton(0, "FightForPearl", FightForPearl).hint("Test fight to get Sky Poison Pearl legally (aside we cheat to start fight)");
+				addButton(1, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
+				addButton(2, "Pierce", FightPierce).hint("Test fight with Pierce.");
+				//addButton(3, "", ).hint("Test fight with .");
+				//addButton(4, "", ).hint("Test fight with .");
+				//addButton(5, "", ).hint("Test fight with .");
+				//addButton(6, "", ).hint("Test fight with .");
+				//addButton(7, "", ).hint("Test fight with .");
+				addButton(8, "Sonya", FightSonya).hint("Test fight with Sonya.");
+				addButton(9, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
+				addButton(10, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
+				addButton(11, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
+				addButton(12, "FeralT.Beast", FightFeralBeast).hint("Test fight with feral tentacle beast.");
+				addButton(13, "-2-", EnemiesMenu, page + 1);
+				addButton(14, "Back", SoulforceCheats);
+			}
+			if (page == 2)  {
+				addButton(0, "DarkSlimeEmpress", FightDarkSlimeEmpress).hint("Test fight with Dark Slime Empress.");
+				addButton(1, "Hydra", FightHydra).hint("Test fight with Hydra.");
+				addButton(2, "HellfireSnail", FightHellfireSnail).hint("Test fight with Hellfire Snail.");
+				addButton(3, "ChaosChimera", FightChaosChimera).hint("Test fight with Chaos Chimera.");
+				//addButton(4, "", ).hint("Test fight with .");
+				//addButton(5, "", ).hint("Test fight with .");
+				addButton(6, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
+				addButton(7, "Neisa", FightNeisa).hint("Test fight with Neisa.");
+				addButton(8, "SomeMalikore", FightRandomnMalikore).hint("Test fight with some malikore.");
+				addButton(9, "Lethice", FightLethice).hint("Test fight with Lethice.");
+				addButton(10, "LvLUP Aurora", LvLUPAurora).hint("LvL UP forcefully Aurora for testing purpose up to the limit.");
+				addButton(11, "DELvL Aurora", DELvLAurora).hint("DE LvL forcefully Aurora for testing purpose down toward the lvl 1.");
+				addButton(12, "Alvina", FightAlvina).hint("Test fight with Alvina.");
+				addButton(13, "-1-", EnemiesMenu, page - 1);
+				addButton(14, "Back", SoulforceCheats);
+			}
 		}
 		
 		public function AddEnergyCore():void {
@@ -2389,6 +2402,11 @@ public function FightHellfireSnail():void {
 			outputText("Entering battle with Marae Boss! Enjoy ^^");
 			startCombat(new Marae());
 		}
+		public function FightPierce():void {
+			clearOutput();
+			outputText("Entering battle with Pierce! Enjoy ^^");
+			startCombat(new Pierce());
+		}
 		public function FightSonya():void {
 			clearOutput();
 			outputText("Entering battle with Sonya! Enjoy ^^");
@@ -2399,47 +2417,32 @@ public function FightHellfireSnail():void {
 			outputText("Entering battle with RyuBi! Enjoy ^^");
 			startCombat(new RyuBiDragon());
 		}
-		public function FightDarkElfRanger():void {
+		public function FightRandomnMalikore():void {
 			clearOutput();
-			outputText("Entering battle with Dark Elf Ranger! Enjoy ^^");
-			startCombat(new DarkElfRanger());
-		}
-		public function FightDarkElfSniper():void {
-			clearOutput();
-			outputText("Entering battle with Dark Elf Sniper! Enjoy ^^");
-			startCombat(new DarkElfSniper());
-		}
-		public function FightRandomnManticore():void {
-			clearOutput();
-			outputText("Entering battle with some malicore! Enjoy ^^");
+			outputText("Entering battle with some malikore! Enjoy ^^");
 			startCombat(new Malikore());
-		}
-		public function FightElectra():void {
-			clearOutput();
-			outputText("Entering battle with Electra! Enjoy ^^");
-			startCombat(new Electra());
 		}
 		public function LvLUPAurora():void {
 			outputText("\n\n<b>Aurora get stronger! (cheat stop working when she reach max possible lvl for now (atm it's lvl 73))</b>");
 			if (flags[kFLAGS.AURORA_LVL] < 13) flags[kFLAGS.AURORA_LVL]++;
-			doNext(EnemiesMenu);
+			EnemiesMenu(2);
 		}
 		public function DELvLAurora():void {
 			outputText("\n\n<b>Aurora get weaker! (cheat stop working when she reach lvl 1)</b>");
 			if (flags[kFLAGS.AURORA_LVL] > 1) flags[kFLAGS.AURORA_LVL]--;
-			doNext(EnemiesMenu);
+			EnemiesMenu(2);;
 		}
 		public function LvLUPEva():void {
 			outputText("\n\n<b>Evangeline get stronger! (cheat stop working when she reach max possible lvl for now (atm it's lvl 42))</b>");
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] < 17) flags[kFLAGS.EVANGELINE_LVL_UP]++;
-			doNext(EnemiesMenu);
+			EnemiesMenu(1);
 		}
 		public function DELvLEva():void {
 			outputText("\n\n<b>Evangeline get weaker! (cheat stop working when she reach lvl 12)</b>");
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 6) flags[kFLAGS.EVANGELINE_LVL_UP]--;
-			doNext(EnemiesMenu);
+			EnemiesMenu(1);
 		}
-		public function FightFeralImp():void {
+		public function FightFeralBeast():void {
 			clearOutput();
 			outputText("Entering battle with feral tentacle beast! Enjoy ^^");
 			startCombat(new TentacleBeastRaging());
@@ -3535,4 +3538,4 @@ public function FightHellfireSnail():void {
 			}
 		}
 	}
-}
+}

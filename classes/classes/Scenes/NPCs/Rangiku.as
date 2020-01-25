@@ -46,28 +46,32 @@ public class Rangiku extends Monster
 			
 		}
 		*/
-		private function rangikuBerserk():void {
-			wrath -= 50;
-			outputText("Salamander roar and unleash her lustful fury in order to destroy you!\n\n");//Oni
-			this.weaponAttack += (40 + (40 * (1 + player.newGamePlusMod)));
-			createStatusEffect(StatusEffects.Lustzerking,10,0,0,0);
+		private function rangikuRampage():void {
+			if (hasStatusEffect(StatusEffects.AbilityChanneled)) {
+				removeStatusEffect(StatusEffects.AbilityChanneled);
+				if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FreezingBreathStun) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Fear) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce)) {
+					outputText(capitalA + short + " reels in frustration as her concentration breaks under your assaults.\n\n");
+				}
+				else {
+					outputText("A terrifying red aura of power shroud her body as she shout a loud thundering war cry and enter a murderous rampage.\n\n");
+					createStatusEffect(StatusEffects.OniRampage,12,0,0,0);
+				}
+			}
+			else {
+				fatigue += 50;
+				outputText("She crouch and lift a leg then another in alternance, stomping the ground as she focus her anger.");
+				createStatusEffect(StatusEffects.AbilityChanneled, 0, 0, 0, 0);
+			}
 		}
 		
 		override protected function performCombatAction():void
 		{
 			wrath += 5;
-			if (hasStatusEffect(StatusEffects.Lustzerking)) {
-				wrath += 5;
-				if (statusEffectv1(StatusEffects.Lustzerking) > 1) addStatusValue(StatusEffects.Lustzerking, 1, -1);
-				else {
-					this.weaponAttack -= (40 + (40 * (1 + player.newGamePlusMod)));
-					removeStatusEffect(StatusEffects.Lustzerking);
-				}
-			}
-			if (flags[kFLAGS.RANGIKU_LVL_UP] < 1) {
+			if (hasStatusEffect(StatusEffects.AbilityChanneled)) rangikuRampage();
+			else if (flags[kFLAGS.RANGIKU_LVL_UP] < 1) {
 				var choice1:Number = rand(4);
 				if (choice1 == 0) {
-					if (!hasStatusEffect(StatusEffects.Lustzerking) && wrath >= 50) rangikuBerserk();
+					if (!hasStatusEffect(StatusEffects.OniRampage) && fatigue + 50 <= maxFatigue()) rangikuRampage();
 					else eAttack();
 				}
 				if (choice1 == 1) {
@@ -81,10 +85,10 @@ public class Rangiku extends Monster
 		override public function get long():String
 		{
 			var str:String = "";
-			str += "You are fighting an oni – a little over seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her strawberry blonde hair accents her sapphire eyes, while her body covers black robe.  Her dual large axes are raised to her side, looking for any hole in your guard.";
-			if (hasStatusEffect(StatusEffects.Lustzerking))
+			str += "You are fighting an oni – a little over seven foot tall woman with pale skin.  Her strawberry blonde hair accents her sapphire eyes, while her body covers black robe.  Her dual large axes are raised to her side, looking for any hole in your guard.";
+			if (hasStatusEffect(StatusEffects.Hypermode))
 			{
-				str += "\n\n<b>Looking at her posture and gaze indicates that she's currently under effect of some sort of berserking state.</b>";
+				str += "\n\n<b>Looking at her posture and gaze indicates that she's currently under effect of some sort of rampage state.</b>";
 			}
 			return str;
 		}
@@ -103,7 +107,7 @@ public class Rangiku extends Monster
 			this.tallness = 92;
 			this.hips.type = Hips.RATING_CURVY + 4;
 			this.butt.type = Butt.RATING_JIGGLY + 1;
-			this.skinTone = "light";
+			this.skinTone = "pale";
 			this.hairColor = "strawberry blonde";
 			this.hairLength = 39;
 			if (flags[kFLAGS.RANGIKU_LVL_UP] < 1) {

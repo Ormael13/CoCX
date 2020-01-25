@@ -792,13 +792,19 @@ public class Exploration extends BaseContent
 		//Temporaly place of finding enemies for lvl between 31 and 49
 		public function tryDiscoverLL():void {
 			clearOutput();
-			if (rand(2) == 0) {
+			if (rand(3) == 0) {
 				outputText("You're walking in the woods\n\n");
 				outputText("There's no one around\n\n");
 				outputText("And your phone is dead\n\n");
 				outputText("Out of the corner of your eye you spot her\n\n");
 				outputText("<b>A Wasp Girl...</b>");
 				startCombat(new WaspGirl());//lvl 33
+				return;
+			}
+			else if (rand(2) == 0) {
+				outputText("Traversing Mareth vast areas you're stopped by the arrow to the <u>kne</u> 'place between ground and your waist'.");
+				outputText("\n\n<b>A wild Dark Elf Ranger Appears.</b>");
+				startCombat(new DarkElfRanger());//lvl 39
 				return;
 			}
 			else {

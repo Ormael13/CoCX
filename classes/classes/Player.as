@@ -72,7 +72,9 @@ use namespace CoC;
 			itemSlot16 = new ItemSlotClass();
 			itemSlot17 = new ItemSlotClass();
 			itemSlot18 = new ItemSlotClass();
-			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5, itemSlot6, itemSlot7, itemSlot8, itemSlot9, itemSlot10, itemSlot11, itemSlot12, itemSlot13, itemSlot14, itemSlot15, itemSlot16, itemSlot17, itemSlot18];
+			itemSlot19 = new ItemSlotClass();
+			itemSlot20 = new ItemSlotClass();
+			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5, itemSlot6, itemSlot7, itemSlot8, itemSlot9, itemSlot10, itemSlot11, itemSlot12, itemSlot13, itemSlot14, itemSlot15, itemSlot16, itemSlot17, itemSlot18, itemSlot19, itemSlot20];
 		}
 		
 		protected final function outputText(text:String, clear:Boolean = false):void
@@ -147,6 +149,8 @@ use namespace CoC;
 		public var itemSlot16:ItemSlotClass;
 		public var itemSlot17:ItemSlotClass;
 		public var itemSlot18:ItemSlotClass;
+		public var itemSlot19:ItemSlotClass;
+		public var itemSlot20:ItemSlotClass;
 		public var itemSlots:Array;
 		
 		public var prisonItemSlots:Array = [];
@@ -2782,12 +2786,12 @@ use namespace CoC;
 				else
 					race = "wolf-" + mf("boy", "girl");
 			}
-			if (werewolfScore() >= 6)
+			if (werewolfScore() >= 12)
 			{
-				if (werewolfScore() >= 12)
+				//if (werewolfScore() >= 12)
+				//	race = "Werewolf";
+				//else
 					race = "Werewolf";
-				else
-					race = "half werewolf";
 			}
 			if (foxScore() >= 4)
 			{
@@ -4946,6 +4950,8 @@ use namespace CoC;
 				goblinCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && goblinCounter >= 8)
 				goblinCounter += 1;
+			if (findPerk(PerkLib.GoblinsDescendant) >= 0 || findPerk(PerkLib.BloodlineKitsune) >= 0)
+				goblinCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				goblinCounter += 50;
 			if (isGargoyle()) goblinCounter = 0;
@@ -5849,6 +5855,8 @@ use namespace CoC;
 				raijuCounter++;
 			if (hairColor == "purple" || hairColor == "light blue" || hairColor == "yellow" || hairColor == "white" || hairColor == "lilac" || hairColor == "green")
 				raijuCounter++;
+			if (findPerk(PerkLib.RaijusDescendant) >= 0 || findPerk(PerkLib.BloodlineRaiju) >= 0)
+				raijuCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				raijuCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && raijuCounter >= 4)
@@ -8378,19 +8386,19 @@ use namespace CoC;
 					maxInt -= (10 * newGamePlusMod);
 				}
 			}//+15(60)((70))(((140))) / 10 - 20(50 - 60)((70 - 80))(((130 - 140)))
-			if (werewolfScore() >= 6) {
-				if (werewolfScore() >= 12) {
+			if (werewolfScore() >= 12) {
+				/*if (werewolfScore() >= 12) {
 					maxStr += (100 * newGamePlusMod);
 					maxTou += (40 * newGamePlusMod);
 					maxSpe += (60 * newGamePlusMod);
 					maxInt -= (20 * newGamePlusMod);
 				}
-				else {
-					maxStr += (50 * newGamePlusMod);
-					maxTou += (20 * newGamePlusMod);
-					maxSpe += (30 * newGamePlusMod);
-					maxInt -= (10 * newGamePlusMod);
-				}
+				else {*/
+					maxStr += (100 * newGamePlusMod);
+					maxTou += (40 * newGamePlusMod);
+					maxSpe += (60 * newGamePlusMod);
+					maxInt -= (20 * newGamePlusMod);
+				//}
 			}
 			if (foxScore() >= 4) {
 				if (foxScore() >= 7) {

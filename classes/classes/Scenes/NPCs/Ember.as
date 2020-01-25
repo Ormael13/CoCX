@@ -186,6 +186,7 @@ public class Ember extends Monster
 				this.ballSize = 4;
 				this.cumMultiplier = 3;
 				// this.hoursSinceCum = 0;
+				this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			}
 			if(gender >= 2) {
 				this.createVagina(game.flags[kFLAGS.EMBER_PUSSY_FUCK_COUNT] == 0, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_LOOSE);

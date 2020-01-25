@@ -140,6 +140,7 @@ public class IgnisArenaSeer extends Monster
 					add(consumables.FOXJEWL, 4);
 			}
 			this.tailType = Tail.FOX;
+			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

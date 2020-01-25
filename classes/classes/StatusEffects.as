@@ -907,6 +907,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownFlamesOfLove:StatusEffectType        		= mkCombat("Cooldown Flames of Love");
 		public static const CooldownFreezingBreath:StatusEffectType      		= mkCombat("Cooldown Freezing Breath (F)");
 		public static const CooldownFreezingBreathYeti:StatusEffectType  		= mkCombat("Cooldown Freezing Breath (Y)");
+		public static const CooldownFrozenKiss:StatusEffectType           		= mkCombat("Cooldown Frozen Kiss");
 		public static const CooldownGrandioseHailOfBlades:StatusEffectType      = mkCombat("Cooldown Grandiose Hail of Blades");
 		public static const CooldownGrandioseHailOfMoonBlades:StatusEffectType  = mkCombat("Cooldown Grandiose Hail of Moon Blades");
 		public static const CooldownGravityShots:StatusEffectType   			= mkCombat("Cooldown Gravity shots");

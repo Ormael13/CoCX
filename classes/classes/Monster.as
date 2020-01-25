@@ -833,6 +833,7 @@ import flash.utils.getQualifiedClassName;
 			else if (weaponAttack >= 151 && weaponAttack < 201) damage *= (4.75 + ((weaponAttack - 150) * 0.015));
 			else damage *= (5.5 + ((weaponAttack - 200) * 0.01));
 			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
+			if (hasStatusEffect(StatusEffects.OniRampage)) damage *= 2;
 			if (hasStatusEffect(StatusEffects.Hypermode)) damage *= 10;
 			//monster exclusive perks bonus
 			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;

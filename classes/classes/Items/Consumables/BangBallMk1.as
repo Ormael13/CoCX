@@ -12,7 +12,7 @@ package classes.Items.Consumables
 	public final class BangBallMk1 extends Consumable {
 		
 		public function BangBallMk1() {
-			super("BangBM1", "BangBallMk1", "a bangball mark 1", 21, "A ball-shaped throwing weapon.  Though good for only a single use, it's guaranteed to do very low to low damage to solo or weak group of enemies if it hits.  Inflicts 70 to 210 base damage.");
+			super("BangBM1", "BangBallMk1", "a bangball mark 1", 21, "A ball-shaped throwing weapon.  Though good for only a single use, it's guaranteed to do very low to low damage to solo or weak group of enemies if it hits.  Inflicts 280 to 840 base damage.");
 		}
 		
 		override public function canUse():Boolean {
@@ -32,12 +32,12 @@ package classes.Items.Consumables
 				outputText(" incredible speed allows " + game.monster.pronoun2 + " to avoid the ball!  The deadly sphere shatters when it impacts something in the distance.");
 			}
 			else { //Not dodged
-				var damage:Number = 70 + Utils.rand(36);
+				var damage:Number = 280 + Utils.rand(141);
 				if (game.player.level >= 6) damage *= 2;
 				if (game.monster.findPerk(PerkLib.EnemyGroupType) >= 0) damage *= 5;
 				outputText(game.monster.capitalA + game.monster.short + " is hit with the bangball!  It breaks apart as it lacerates " + game.monster.pronoun2 + ". <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 				game.monster.HP -= damage;
-				if (game.monster.HP < 0) game.monster.HP = 0;
+				if (game.monster.HP < game.monster.minHP()) game.monster.HP = game.monster.minHP() - 1;
 			}
 			return(false);
 		}

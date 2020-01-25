@@ -64,13 +64,13 @@ public class Questlog extends BaseContent
 				if (player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) outputText("Completed (Reward taken)");
 				else outputText("Completed");
 			}
-			else outputText("Not Started/In Progress");
+			else outputText("Not Started/In Progress");/*
 			outputText("\n<b>2nd Floor:</b> ");
 			if (SceneLib.dungeons.checkRiverDungeon2ndFloorClear()) {
 				if (player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) > 1) outputText("Completed (Reward taken)");
 				else outputText("Completed");
 			}
-			else outputText("Not Started/In Progress");/*
+			else outputText("Not Started/In Progress");
 			outputText("\n<i><b>3rd Floor:</b> Soon</i>");*/
 			outputText("\n\n<u><b>Adventure Guild Quests</b></u>");
 			outputText("\n<b>Imps Hunt:</b> ");

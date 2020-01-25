@@ -11,6 +11,7 @@ public class ParalyzeVenomDebuff extends CombatBuff {
 
 
 	override public function onRemove():void {
+		super.onRemove();
 		if (playerHost) {
 			EngineCore.outputText("<b>You feel quicker and stronger as the paralyzation venom in your veins wears off.</b>\n\n");
 		}

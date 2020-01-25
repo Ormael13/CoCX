@@ -258,6 +258,10 @@ import coc.view.MainView;
 			player.itemSlot17.emptySlot();
 			player.itemSlot18.unlocked = false;
 			player.itemSlot18.emptySlot();
+			player.itemSlot19.unlocked = false;
+			player.itemSlot19.emptySlot();
+			player.itemSlot20.unlocked = false;
+			player.itemSlot20.emptySlot();
             //PIERCINGS
             player.nipplesPierced = 0;
             player.nipplesPShort = "";
@@ -1311,7 +1315,7 @@ import coc.view.MainView;
 		//-- BLOODLINE PERKS
 		//-----------------
 		public function chooseBloodlineorNot():void {
-			if (player.findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) chooseBloodline();
+			if (player.findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) chooseBloodline();
 			else chooseHistory();
 		}
 		public function chooseBloodline():void {
@@ -1322,8 +1326,12 @@ import coc.view.MainView;
 			else addButtonDisabled(0, "Dragon", "You already have this bloodline!");
 			if (player.findPerk(PerkLib.BloodlineElf) < 0) addButton(1, "Elf", confirmBloodline, PerkLib.ElfsDescendant);
 			else addButtonDisabled(1, "Elf", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineKitsune) < 0) addButton(2, "Kitsune", confirmBloodline, PerkLib.KitsunesDescendant);
-			else addButtonDisabled(2, "Kitsune", "You already have this bloodline!");
+			if (player.findPerk(PerkLib.BloodlineGoblin) < 0) addButton(2, "Goblin", confirmBloodline, PerkLib.GoblinsDescendant);
+			else addButtonDisabled(2, "Goblin", "You already have this bloodline!");
+			if (player.findPerk(PerkLib.BloodlineKitsune) < 0) addButton(3, "Kitsune", confirmBloodline, PerkLib.KitsunesDescendant);
+			else addButtonDisabled(3, "Kitsune", "You already have this bloodline!");
+			if (player.findPerk(PerkLib.BloodlineRaiju) < 0) addButton(4, "Raiju", confirmBloodline, PerkLib.RaijusDescendant);
+			else addButtonDisabled(4, "Raiju", "You already have this bloodline!");
 			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either not have any non-human blood in you or can't pick any new one.It mean you only will get some bonus perk points for start instead new bloodline.");
 		}
 		
@@ -1336,8 +1344,14 @@ import coc.view.MainView;
 				case PerkLib.ElfsDescendant:
 					outputText("Your ancestor was an elf?");
 					break;
+				case PerkLib.GoblinsDescendant:
+					outputText("Your ancestor was a goblin");
+					break;
 				case PerkLib.KitsunesDescendant:
 					outputText("Your ancestor was a kitsune");
+					break;
+				case PerkLib.RaijusDescendant:
+					outputText("Your ancestor was a raiju");
 					break;
 				default:
 					outputText("Your ancestor was a dragon?");
@@ -1735,7 +1749,7 @@ import coc.view.MainView;
 			else addButtonDisabled(6, "Perm G.M.", "You not have Ascension: Transcendental Genetic Memory (Stage 1) perk to use this option.");
 			if (player.ascensionPerkPoints >= 5) addButton(7, "Past Life", historyTopastlife).hint("Spend Ascension Points to change current possesed History perk into Past Life perk (5 per perk).", "Perk Selection");
 			else addButtonDisabled(7, "Past Life", "You not have enough Ascension Perk Points to use this option.");
-			if (player.findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) {
+			if (player.findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) {
 				if (player.ascensionPerkPoints >= 10) addButton(8, "Bloodline", bloodlineACQ).hint("Spend Ascension Points to change current possesed Descendante perk into Bloodline perk (10 per perk).", "Perk Selection");
 				else addButtonDisabled(8, "Bloodline", "You not have enough Ascension Perk Points to use this option.");
 			}
@@ -2236,9 +2250,19 @@ import coc.view.MainView;
 				player.createPerk(PerkLib.BloodlineElf,0,0,0,1);
 				bloodlineACQ2();
 			}
+			else if (player.findPerk(PerkLib.GoblinsDescendant) >= 0) {
+				player.removePerk(PerkLib.GoblinsDescendant);
+				player.createPerk(PerkLib.BloodlineGoblin,0,0,0,1);
+				bloodlineACQ2();
+			}
 			else if (player.findPerk(PerkLib.KitsunesDescendant) >= 0) {
 				player.removePerk(PerkLib.KitsunesDescendant);
 				player.createPerk(PerkLib.BloodlineKitsune,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.findPerk(PerkLib.RaijusDescendant) >= 0) {
+				player.removePerk(PerkLib.RaijusDescendant);
+				player.createPerk(PerkLib.BloodlineRaiju,0,0,0,1);
 				bloodlineACQ2();
 			}
 			else {
@@ -3470,3 +3494,4 @@ import coc.view.MainView;
 		}	//ale potem zamienić to na specialne soulskills z każdego z klanów
 	}
 }
+

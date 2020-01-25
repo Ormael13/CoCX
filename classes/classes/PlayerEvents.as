@@ -58,6 +58,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			player.itemSlot16.unlocked = maxSlots >= 16;
 			player.itemSlot17.unlocked = maxSlots >= 17;
 			player.itemSlot18.unlocked = maxSlots >= 18;
+			player.itemSlot19.unlocked = maxSlots >= 19;
+			player.itemSlot20.unlocked = maxSlots >= 20;
 			if (flags[kFLAGS.SOCK_COUNTER] > 0) {
 				flags[kFLAGS.SOCK_COUNTER]--;
 				if (flags[kFLAGS.SOCK_COUNTER] < 0) flags[kFLAGS.SOCK_COUNTER] = 0;

@@ -306,17 +306,31 @@ private function buyCarrotFromOswald():void {
 	addButton(0,"Next",oswaldPawn);
 }
 
-private function oswaldPawnMenu():void { //Moved here from Inventory.as
+private function oswaldPawnMenu(page:int = 1):void { //Moved here from Inventory.as
+	var slot:int;
 	spriteSelect(47);
 	outputText("\n\n<b><u>Oswald's Estimates</u></b>");
 	menu();
 	var totalItems:int = 0;
-	for (var slot:int = 0; slot < 10; slot++) {
-		if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
-			outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
-			addButton(slot, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot);
-			totalItems += player.itemSlots[slot].quantity;
+	if (page == 1) {
+		for (slot = 0; slot < 10; slot++) {
+			if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
+				outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+				addButton(slot, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot);
+				totalItems += player.itemSlots[slot].quantity;
+			}
 		}
+		if (inventory.getMaxSlots() > 10) addButton(13, "Next", oswaldPawnMenu, page + 1);
+	}
+	if (page == 2) {
+		for (slot = 10; slot < 20; slot++) {
+			if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
+				outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+				addButton(slot-10, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot);
+				totalItems += player.itemSlots[slot].quantity;
+			}
+		}
+		addButton(13, "Prev", oswaldPawnMenu, page - 1);
 	}
 	if (totalItems > 1) addButton(12, "Sell All", oswaldPawnSellAll);
 	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
@@ -356,7 +370,7 @@ private function oswaldPawnSellAll():void {
 	spriteSelect(47);
 	var itemValue:int = 0;
 	clearOutput();
-	for (var slot:int = 0; slot < 10; slot++) {
+	for (var slot:int = 0; slot < 20; slot++) {
 		if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
 			itemValue += player.itemSlots[slot].quantity * int(player.itemSlots[slot].itype.value / 2);
 			player.itemSlots[slot].quantity = 0;

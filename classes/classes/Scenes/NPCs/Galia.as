@@ -161,7 +161,7 @@ import classes.internals.*;
 			}
 			if (flags[kFLAGS.GALIA_LVL_UP] < 5) {
 				this.imageName = "imp";
-				this.long = "Galia is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from her head, parted by two short curved horns.  Her eyes are solid black, save for tiny red irises.  Her skin is bright red unencumbered by clothing or armor, save for a small loincloth at his belt and wrap around her flat chest. She's extremely well-muscled, her feet are covered by tiny wooden sandals, and her hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from her back.";
+				this.long = "Galia is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from her head, parted by two short curved horns.  Her eyes are solid black, save for tiny red irises.  Her skin is bright red unencumbered by clothing or armor, save for a small loincloth at her belt and wrap around her flat chest. She's extremely well-muscled, her feet are covered by tiny wooden sandals, and her hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from her back.";
 				createBreastRow(0);
 				this.hips.type = Hips.RATING_BOYISH;
 				this.butt.type = Butt.RATING_TIGHT;
@@ -176,7 +176,7 @@ import classes.internals.*;
 			}
 			if (flags[kFLAGS.GALIA_LVL_UP] >= 5 && flags[kFLAGS.GALIA_LVL_UP] < 7) {
 				this.imageName = "imp";
-				this.long = "Galia is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from her head, parted by two short curved horns.  Her eyes are solid black, save for tiny red irises.  Her skin is bright red unencumbered by clothing or armor, save for a small loincloth at his belt and wrap around her flat chest. She's extremely well-muscled, her feet are covered by tiny wooden sandals, and her hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from her back.";
+				this.long = "Galia is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from her head, parted by two short curved horns.  Her eyes are solid black, save for tiny red irises.  Her skin is bright red unencumbered by clothing or armor, save for a small loincloth at her belt and wrap around her flat chest. She's extremely well-muscled, her feet are covered by tiny wooden sandals, and her hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from her back.";
 				createBreastRow(Appearance.breastCupInverse("A"));
 				this.hips.type = Hips.RATING_AMPLE + 2;//zmniejszyć
 				this.butt.type = Butt.RATING_LARGE;//zmniejszyć
@@ -192,7 +192,7 @@ import classes.internals.*;
 			}
 			if (flags[kFLAGS.GALIA_LVL_UP] >= 7 && flags[kFLAGS.GALIA_LVL_UP] < 9) {
 				this.imageName = "imp";
-				this.long = "Galia is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from her head, parted by two short curved horns.  Her eyes are solid black, save for tiny red irises.  Her skin is bright red unencumbered by clothing or armor, save for a small loincloth at his belt and wrap around her flat chest. She's extremely well-muscled, her feet are covered by tiny wooden sandals, and her hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from her back.";
+				this.long = "Galia is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from her head, parted by two short curved horns.  Her eyes are solid black, save for tiny red irises.  Her skin is bright red unencumbered by clothing or armor, save for a small loincloth at her belt and wrap around her flat chest. She's extremely well-muscled, her feet are covered by tiny wooden sandals, and her hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from her back.";
 				createBreastRow(Appearance.breastCupInverse("B"));//zwiekszyć?
 				this.hips.type = Hips.RATING_AMPLE + 2;//zmniejszyć?
 				this.butt.type = Butt.RATING_LARGE;//zmniejszyć?
@@ -208,7 +208,7 @@ import classes.internals.*;
 			}
 			if (flags[kFLAGS.GALIA_LVL_UP] >= 9) {
 				this.imageName = "imp";
-				this.long = "Galia is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from her head, parted by two short curved horns.  Her eyes are solid black, save for tiny red irises.  Her skin is bright red unencumbered by clothing or armor, save for a small loincloth at his belt and wrap around her flat chest. She's extremely well-muscled, her feet are covered by tiny wooden sandals, and her hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from her back.";
+				this.long = "Galia is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from her head, parted by two short curved horns.  Her eyes are solid black, save for tiny red irises.  Her skin is bright red unencumbered by clothing or armor, save for a small loincloth at her belt and wrap around her flat chest. She's extremely well-muscled, her feet are covered by tiny wooden sandals, and her hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from her back.";
 				createBreastRow(Appearance.breastCupInverse("C"));//zwiekszyć?
 				this.hips.type = Hips.RATING_AMPLE + 2;//zmniejszyć?
 				this.butt.type = Butt.RATING_LARGE;//zmniejszyć?

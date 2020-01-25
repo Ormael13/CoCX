@@ -1222,6 +1222,16 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.itemSlot18.quantity = player.itemSlot18.quantity;
 		saveFile.data.itemSlot18.id = player.itemSlot18.itype.id;
 		saveFile.data.itemSlot18.unlocked = player.itemSlot18.unlocked;
+		
+		saveFile.data.itemSlot19 = [];
+		saveFile.data.itemSlot19.quantity = player.itemSlot19.quantity;
+		saveFile.data.itemSlot19.id = player.itemSlot19.itype.id;
+		saveFile.data.itemSlot19.unlocked = player.itemSlot19.unlocked;
+		
+		saveFile.data.itemSlot20 = [];
+		saveFile.data.itemSlot20.quantity = player.itemSlot20.quantity;
+		saveFile.data.itemSlot20.id = player.itemSlot20.itype.id;
+		saveFile.data.itemSlot20.unlocked = player.itemSlot20.unlocked;
 
 		
 		// Keybinds
@@ -2425,8 +2435,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				saveFile.data.itemSlot5.id || saveFile.data.itemSlot5.shortName),
 				saveFile.data.itemSlot5.quantity);
 		//Extra slots from the mod.
-		if (saveFile.data.itemSlot6 != undefined && saveFile.data.itemSlot7 != undefined && saveFile.data.itemSlot8 != undefined && saveFile.data.itemSlot9 != undefined && saveFile.data.itemSlot10 != undefined
-			 && saveFile.data.itemSlot11 != undefined && saveFile.data.itemSlot12 != undefined && saveFile.data.itemSlot13 != undefined && saveFile.data.itemSlot14 != undefined && saveFile.data.itemSlot15 != undefined && saveFile.data.itemSlot16 != undefined && saveFile.data.itemSlot17 != undefined && saveFile.data.itemSlot18 != undefined) {
+		if (saveFile.data.itemSlot6 != undefined && saveFile.data.itemSlot7 != undefined && saveFile.data.itemSlot8 != undefined && saveFile.data.itemSlot9 != undefined && saveFile.data.itemSlot10 != undefined && saveFile.data.itemSlot11 != undefined && saveFile.data.itemSlot12 != undefined
+			 && saveFile.data.itemSlot13 != undefined && saveFile.data.itemSlot14 != undefined && saveFile.data.itemSlot15 != undefined && saveFile.data.itemSlot16 != undefined && saveFile.data.itemSlot17 != undefined && saveFile.data.itemSlot18 != undefined && saveFile.data.itemSlot19 != undefined && saveFile.data.itemSlot20 != undefined) {
 		player.itemSlot6.unlocked = saveFile.data.itemSlot6.unlocked;
 		player.itemSlot6.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot6.id || saveFile.data.itemSlot6.shortName),
@@ -2479,6 +2489,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.itemSlot18.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot18.id || saveFile.data.itemSlot18.shortName),
 				saveFile.data.itemSlot18.quantity);
+		player.itemSlot19.unlocked = saveFile.data.itemSlot19.unlocked;
+		player.itemSlot19.setItemAndQty(ItemType.lookupItem(
+				saveFile.data.itemSlot19.id || saveFile.data.itemSlot19.shortName),
+				saveFile.data.itemSlot19.quantity);
+		player.itemSlot20.unlocked = saveFile.data.itemSlot20.unlocked;
+		player.itemSlot20.setItemAndQty(ItemType.lookupItem(
+				saveFile.data.itemSlot20.id || saveFile.data.itemSlot20.shortName),
+				saveFile.data.itemSlot20.quantity);
 		}
 
 		loadAllAwareClasses(CoC.instance); //Informs each saveAwareClass that it must load its values from the flags array

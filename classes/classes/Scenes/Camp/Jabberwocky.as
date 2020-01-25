@@ -128,6 +128,7 @@ package classes.Scenes.Camp
 			this.createPerk(PerkLib.FireNature, 0, 0, 0, 0);
 			this.createPerk(PerkLib.PeerlessSelfControl, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			checkMonster();
 		}	
 	}

@@ -2600,7 +2600,9 @@ public function throwWeapon():void {
 		}
 		if (player.ammo == 0) outputText("\n\n<b>You're out of weapons to throw in this fight.</b>\n\n");
 		enemyAI();
-	}	
+	}
+	if(monster.HP <= monster.minHP()){ doNext(endHpVictory); return;}
+	if(monster.lust >= monster.maxLust()){ doNext(endLustVictory); return;}
 	else if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) {
 		flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
 		flags[kFLAGS.ARROWS_ACCURACY] += 15;
@@ -2838,6 +2840,8 @@ public function shootWeapon():void {
 		if (monster.plural) outputText("s");
 		outputText(".\n\n");
 	}
+	if(monster.HP <= monster.minHP()){ doNext(endHpVictory); return;}
+	if(monster.lust >= monster.maxLust()){ doNext(endLustVictory); return;}
 	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) {
 		if (player.ammo > 0) {
 			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
@@ -5041,6 +5045,7 @@ public function awardPlayer(nextFunc:Function = null):void
 		if (player.hasPerk(PerkLib.Hoarder)) bonusGems2 += monster.gems * 0.15;
 		if (player.hasPerk(PerkLib.BlessedByLadyGodiva)) bonusGems2 += monster.gems * 0.15;
 		if (player.hasPerk(PerkLib.LadyGodivasFavoriteChild)) bonusGems2 += monster.gems * 0.15;
+		bonusGems2 = Math.round(bonusGems2);
 		monster.gems += bonusGems2;
 	}
 	if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) {
@@ -6103,6 +6108,15 @@ private function combatStatusesUpdate():void {
 		}
 		else {
 			player.addStatusValue(StatusEffects.CooldownHungeringCold,1,-1);
+		}
+	}
+	//Frozen kiss
+	if (player.hasStatusEffect(StatusEffects.CooldownFrozenKiss)) {
+		if (player.statusEffectv1(StatusEffects.CooldownFrozenKiss) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownFrozenKiss);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownFrozenKiss,1,-1);
 		}
 	}
 	//Illusion

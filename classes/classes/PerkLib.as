@@ -138,21 +138,33 @@ public class PerkLib
 
 		// Bloodline perks
 		public static const DragonsDescendant:PerkType = mk("Dragon's descendant", "Dragon's descendant",
-				"You are a descendant of your ancestor, who was the child of a human and a Dragon.");
+				"You are a descendant of your ancestor, who was the child of a human and a Dragon. (+2 to dragon score)");
 		public static const BloodlineDragon:PerkType = mk("Bloodline: Dragon", "Bloodline: Dragon",
-				"Your Dragon bloodline appears strongly within you.", null, true);
+				"Your Dragon bloodline appears strongly within you. (+2 to dragon score)", null, true);
 		public static const ElfsDescendant:PerkType = mk("Elf's descendant", "Elf's descendant",
-				"You are a descendant of your ancestor, who was the child of a human and an Elf.");
+				"You are a descendant of your ancestor, who was the child of a human and an Elf. (+2 to elf score)");
 		public static const BloodlineElf:PerkType = mk("Bloodline: Elf", "Bloodline: Elf",
-				"Your Elf bloodline appears strongly within you.", null, true);
+				"Your Elf bloodline appears strongly within you. (+2 to elf score)", null, true);
+		public static const GoblinsDescendant:PerkType = mk("Race's descendant", "Race's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and a Goblin. (+2 to goblin score)");
+		public static const BloodlineGoblin:PerkType = mk("Bloodline: Goblin", "Bloodline: Goblin",
+				"Your Goblin bloodline appears strongly within you. (+2 to goblin score)", null, true);
 		public static const KitsunesDescendant:PerkType = mk("Kitsune's descendant", "Kitsune's descendant",
-				"You are a descendant of your ancestor, who was the child of a human and a Kitsune.");
+				"You are a descendant of your ancestor, who was the child of a human and a Kitsune. (+2 to kitsune score)");
 		public static const BloodlineKitsune:PerkType = mk("Bloodline: Kitsune", "Bloodline: Kitsune",
-				"Your Kitsune bloodline appears strongly within you.", null, true);
+				"Your Kitsune bloodline appears strongly within you. (+2 to kitsune score)", null, true);
+		public static const RaijusDescendant:PerkType = mk("Raiju's descendant", "Raiju's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and a Raiju. (+2 to raiju score)");
+		public static const BloodlineRaiju:PerkType = mk("Bloodline: Raiju", "Bloodline: Raiju",
+				"Your Raiju bloodline appears strongly within you. (+2 to raiju score)", null, true);
 		public static const sDescendant:PerkType = mk("Race's descendant", "Race's descendant",
-				"You are a descendant of your ancestor, who was the child of a human and a (Race).");
+				"You are a descendant of your ancestor, who was the child of a human and a (Race). (+2 to  score)");
 		public static const Bloodline:PerkType = mk("Bloodline: Demon", "Bloodline: Demon",
-				"Your Demonic bloodline appears strongly within you.", null, true);
+				"Your Demonic bloodline appears strongly within you. (+2 to  score)", null, true);
+	//	public static const sDescendant:PerkType = mk("Race's descendant", "Race's descendant",
+	//			"You are a descendant of your ancestor, who was the child of a human and a (Race). (+2 to  score)");
+	//	public static const Bloodline:PerkType = mk("Bloodline: Demon", "Bloodline: Demon",
+	//			"Your Demonic bloodline appears strongly within you. (+2 to  score)", null, true);
 
 		// History perks
 		public static const HistoryAlchemist:PerkType = mk("History: Alchemist", "History: Alchemist",
@@ -3177,6 +3189,7 @@ public class PerkLib
 		public static const Sentience:PerkType = mk("Sentience", "Sentience", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
+		public static const UniqueNPC:PerkType = mk("Unique npc", "Unique npc", "");
 		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");
 		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");undead?
 		//public static const :PerkType = mk("", "", ""); na poźniej dopisane perki wzór

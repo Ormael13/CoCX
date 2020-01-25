@@ -14,6 +14,13 @@ import classes.internals.*;
 
 public class Syth extends Monster
 	{
+		private function sythBerserk():void {
+			wrath -= 50;
+			outputText("Salamander roar and unleash his lustful fury in order to destroy you!\n\n");
+			this.weaponAttack += (40 + (40 * (1 + player.newGamePlusMod)));
+			createStatusEffect(StatusEffects.Lustzerking,10,0,0,0);
+		}
+		
 		private function sythBaseAttack():void {
 			if (hasStatusEffect(StatusEffects.Lustzerking) && wrath >= 20) {
 				wrath -= 20;
@@ -31,7 +38,7 @@ public class Syth extends Monster
 			var damage:Number = 0;
 			damage += eBaseStrengthDamage();
 			damage *= 2;
-			outputText(capitalA + short + " lift it weapon with all his strenght and smash it on your head. ");
+			outputText(capitalA + short + " lift it weapons with all his strenght and smash them on your head. ");
 			if(damage > 0) damage = player.takePhysDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n");
@@ -89,22 +96,25 @@ public class Syth extends Monster
 			outputText("\n");
 		}
 		
-		private function sythAttack3():void{
+		private function sythAttack3():void {
 			outputText("Salamander start drawing symbols in the air toward you.");
-			var lustDmg:Number = this.lust / 10 + this.lib / 10 + this.inte / 10;
+			var lustDmg:Number = this.lust / 10 + this.lib / 10 + this.inte / 10 + this.wis / 10 + this.sens / 10;
 			lustDmg = Math.round(lustDmg);
 			player.dynStats("lus", lustDmg, "scale", false);
 			outputText(" <b>(<font color=\"#ff00ff\">" + lustDmg + "</font>)</b>");
 		}
 		
-		private function sythBerserk():void {
-			wrath -= 50;
-			outputText("Salamander roar and unleash his lustful fury in order to destroy you!\n\n");
-			this.weaponAttack += (40 + (40 * (1 + player.newGamePlusMod)));
-			createStatusEffect(StatusEffects.Lustzerking,10,0,0,0);
+		/*private function sythAttack4():void {
+			outputText("Salamander ... WIP TEXT !\n\n");
+			2nd demonic type attack (cum cannon?)
 		}
 		
-		/*private function sythUltimateAttack():void {
+		private function sythAttack5():void {
+			outputText("Salamander ... WIP TEXT !\n\n");
+			3rd demonic type attack
+		}
+		
+		private function sythUltimateAttack():void {
 			outputText("Salamander ... WIP TEXT !\n\n");
 			flames of love covering whole body while Sythril slam into PC? lowers lust if Sythril had any, put cooldown for few turns before he can use it again
 		}*/
@@ -120,25 +130,47 @@ public class Syth extends Monster
 					removeStatusEffect(StatusEffects.Lustzerking);
 				}
 			}
-			var choice:Number = rand(6);
-			if (choice == 0) {
+			/*var choice2:Number = rand(6);
+			if (choice2 == 0) {
 				if (!hasStatusEffect(StatusEffects.Lustzerking) && wrath >= 50) sythBerserk();
-				else sythBaseAttack();
+				else {
+					if (wrath >= 30) sythAttack1();
+					else sythBaseAttack();
+				}
 			}
-			if (choice == 1) {
+			if (choice2 == 1) {
+				if (rand(2) == 0) sythAttack2();			na późniejsze etapy lvl-nia dla niego ^^
+				else sythAttack3();
+			}
+			if (choice2 >= 2) sythBaseAttack();*/
+			var choice1:Number = rand(6);
+			if (choice1 == 0) {
+				if (!hasStatusEffect(StatusEffects.Lustzerking) && wrath >= 50) sythBerserk();
+				else {
+					/*if (rand(2) == 0) sythAttack4();
+					else */sythBaseAttack();
+				}
+			}
+			if (choice1 == 1) {
 				if (wrath >= 30) sythAttack1();
 				else sythBaseAttack();
 			}
-			if (choice == 2) sythAttack2();
-			if (choice == 3) sythAttack3();
-			//if (choice == 4) sythUltimateAttack();//some super cool channeled or not super attack that will be his ace - smth to mix salamanders and demons style xD
-			if (choice >= 4) sythBaseAttack();
+			if (choice1 == 2) {
+				if (rand(2) == 0) sythAttack2();
+				else sythAttack3();
+			}/*
+			if (choice1 == 3) {
+				if (rand(2) == 0) sythAttack4();//some penultimate skill or demon like attack here
+				else sythAttack5();
+			}*/
+			//if (choice1 == 4) sythUltimateAttack();//some super cool channeled or not super attack that will be his ace - smth to mix salamanders and demons style xD
+			if (choice1 >= 3) sythBaseAttack();
 		}
 		
 		override public function get long():String
 		{
 			var str:String = "";
-			str += "You are fighting an eight foot tall corrupted salamander with crimson scales covering his legs, back, and forearms, with a tail swishing menacingly behind him, ablaze with a red-hot fire.  His white hair accents his amber eyes, while his body covers leather armor and two pairs of large bat-like demon-wings fold behind his shoulders.  His dual BF Swords are raised to his side, looking for any hole in your guard.";
+			str += "You are fighting an eight foot tall corrupted salamander with crimson scales covering his legs, back, and forearms, with a tail swishing menacingly behind him, ablaze with a red-hot fire.  His white hair accents his amber eyes, while his body covers leather armor and pair of large bat-like demon-wings fold behind his shoulders.  His dual BF Swords are raised to his side, looking for any hole in your guard.";
 			if (hasStatusEffect(StatusEffects.Lustzerking))
 			{
 				str += "\n\n<b>Looking at his posture and gaze indicates that he's currently under effect of some sort of berserking state.</b>";
@@ -197,6 +229,7 @@ public class Syth extends Monster
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Berzerker, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
+			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

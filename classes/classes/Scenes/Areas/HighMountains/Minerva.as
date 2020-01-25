@@ -358,6 +358,7 @@ public class Minerva extends Monster
 			this.drop = new WeightedDrop(consumables.PURPEAC, 1);
 			this.wings.type = Wings.HARPY;
 			this.wings.desc = "fluffy feathery";
+			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			if (flags[kFLAGS.MINERVA_LVL_UP] >= 1) this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
 			if (flags[kFLAGS.MINERVA_LVL_UP] >= 2) this.createPerk(PerkLib.JobBrawler, 0, 0, 0, 0);
 			if (flags[kFLAGS.MINERVA_LVL_UP] >= 3) this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);

@@ -91,6 +91,7 @@ public class Behemoth extends Monster
 			this.special1 = tailWhip;
 			this.special2 = tease;
 			//this.special3 = aerialRave;
+			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

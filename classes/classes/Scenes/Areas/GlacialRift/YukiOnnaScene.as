@@ -6,6 +6,7 @@ package classes.Scenes.Areas.GlacialRift
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Items.WeaponLib;
 	import classes.CoC;
 	import classes.BodyParts.*;
 	
@@ -52,7 +53,14 @@ package classes.Scenes.Areas.GlacialRift
 		public function encounterYukiOnna2():void {
 			outputText("Of course you will follow her if only to make sure the local wildlife doesn't tear her to shreds on her way back home. You finally spot a cozy house with a fireplace in the distance. ");
 			outputText("She heads through the front door and you follow her in. It's not that much warmer inside but you put the fault on having been in the blizzard too long which is why you can't seem to get receptive to the heat. She sits you down in a chair next to the not so warm fireplace and gets to pouring you a cup of tea. To your absolute disappointment the tea has obviously ran cold like everything else in this house. The girl apologizes right away and the two of you begin to talk.\n\n");
-			outputText("After a while you don't know exactly how or when you did move but you are now laying down on a silky white couch" + (player.wis < 100 ? " half stripped out of your gear":"") + " with her against you ready for a kiss.\n\n");//(player starts with no weapon as if fighting the demon horde in owca)
+			outputText("After a while you don't know exactly how or when you did move but you are now laying down on a silky white couch");
+			if (player.wis < 100) {
+				player.createStatusEffect(StatusEffects.Disarmed, 50, 0, 0, 0);
+				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
+				player.setWeapon(WeaponLib.FISTS);
+				outputText(" half stripped out of your gear");
+			}
+			outputText(" with her against you ready for a kiss.\n\n");
 			if (player.wis > 30 ) {
 				outputText(" Do you let her?");
 				menu();
