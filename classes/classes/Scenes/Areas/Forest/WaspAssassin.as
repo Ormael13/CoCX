@@ -8,15 +8,28 @@ import classes.*;
 import classes.GlobalFlags.*;
 import classes.internals.ChainedDrop;
 import classes.Scenes.Areas.Forest.WaspGirl;
+import classes.StatusEffects.Combat.ParalyzeVenomDebuff;
 
 	public class WaspAssassin extends WaspGirl {
+		
+		public function waspBottleThrow():void {
+			outputText("The wasp assassin dances away from you, just out of reach before grabbing one of the bottles off her belt and throwing it at the ground in front of you!\n\n");
+			if (player.spe > (this.spe + rand(15))) {
+				outputText(" You leap out of the way, rolling to the side as a yellow haze envelopes the ground where you were standing a moment before. Though even at this distance, your skin tingles sensually...");
+				player.dynStats("lus", 5);
+			}
+			else {
+				outputText(" You cry out as the bottle shatters, exploding in a yellow cloud that blows over you. You gag and cough and suddenly your hands are reaching to your crotch as if on their own. You yank back, but feel a hot haze washing across your exposed body.");
+				player.dynStats("lus", (25 + player.lib/20 + player.sens/5));
+			}
+		}
 		
 		override protected function performCombatAction():void
 		{
 			var choice:Number = rand(5);
 			if (choice == 0) waspStingAttack();
 			if (choice == 1) waspSpearAttack();
-			if (choice == 2) eAttack();//special dla niej tylko
+			if (choice == 2) waspBottleThrow();
 			if (choice >= 3) eAttack();
 		}
 		

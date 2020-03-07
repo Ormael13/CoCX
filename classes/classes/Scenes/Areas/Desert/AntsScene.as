@@ -2668,9 +2668,10 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			if (flags[kFLAGS.ANT_KIDS] > 3000) kidsMod2++;
 			if (flags[kFLAGS.ANT_KIDS] > 3500) kidsMod2++;
 			if (flags[kFLAGS.ANT_KIDS] > 4000) kidsMod2++;
-			var stones:int = 4 + rand(8) + (kidsMod2 * 2);
+			var stones:int = 2 + rand(8) + (kidsMod2 * 4);
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] += stones;
 			if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] >= 200) awardAchievement("AntWorks", kACHIEVEMENTS.GENERAL_ANTWORKS);
+			if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] >= 5000) awardAchievement("Ant-Kids and Phylla", kACHIEVEMENTS.GENERAL_ANT_KIDS_AND_PHYLLA);
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stones;
 			statScreenRefresh();
 			//If Phylla IS NOT Laying Eggs

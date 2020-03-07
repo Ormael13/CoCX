@@ -2084,8 +2084,8 @@ import classes.lists.Gender;
 			//Sexual changes
 			if (rand(3) == 0 && changes < changeLimit && player.hasCock() && player.cumMultiplier < 25) {
 				var mult:Number = 1 + rand(4);
-				//Lots of cum raises cum multiplier cap to 2 instead of 1.5
-				if (player.findPerk(PerkLib.MessyOrgasms) >= 0) mult += rand(10);
+				//Lots of cum raises cum multiplier cap to 3 instead of 1.5
+				if (player.findPerk(PerkLib.MessyOrgasms) >= 0) mult += rand(20);
 				mult *= 0.1;
 				player.cumMultiplier += mult;
 				//Flavor text

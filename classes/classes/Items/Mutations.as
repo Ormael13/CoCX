@@ -2021,8 +2021,8 @@ public final class Mutations extends MutationsHelper
 				//Cum Multiplier Xform
 				if (player.cumMultiplier < 2 && rand(2) == 0 && changes < changeLimit && type != 6) {
 					choice = 1.5;
-					//Lots of cum raises cum multiplier cap to 2 instead of 1.5
-					if (player.findPerk(PerkLib.MessyOrgasms) >= 0) choice = 2;
+					//Lots of cum raises cum multiplier cap to 3 instead of 1.5
+					if (player.findPerk(PerkLib.MessyOrgasms) >= 0) choice = 3;
 					if (choice < player.cumMultiplier + .05 * crit) {
 						changes--;
 					}
@@ -3966,13 +3966,13 @@ public final class Mutations extends MutationsHelper
 				player.antennae.type = Antennae.NONE;
 			}
 			var goblin_eyes_color:Array = ["red", "yellow", "purple"];
-			if (player.eyes.type == Eyes.HUMAN && (player.eyes.colour != "red" || player.eyes.colour != "yellow" || player.eyes.colour != "purple") && changes < changeLimit && rand(3) == 0) {
+			if (player.eyes.type == Eyes.HUMAN && player.eyes.colour != "red" && player.eyes.colour != "yellow" && player.eyes.colour != "purple" && changes < changeLimit && rand(3) == 0) {
 				player.eyes.colour = randomChoice(goblin_eyes_color);
 				outputText("\n\nBright lights flash into your vision as your eyes glow with light. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment, but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>[eyecolor] human eyes staring back at you.</b>");
 				changes++;
 			}
 			var goblin_hair_color:Array = ["red", "purple", "green", "blue", "pink"];
-			if ((player.hairColor != "red" || player.hairColor != "purple" || player.hairColor != "green" || player.hairColor != "blue" || player.hairColor != "pink") && (player.hairColor.indexOf("rubbery") != -1 || player.hairColor.indexOf("latex-textured") != -1) && changes < changeLimit && rand(3) == 0) {
+			if (player.hairColor != "red" && player.hairColor != "purple" && player.hairColor != "green" && player.hairColor != "blue" && player.hairColor != "pink" && (player.hairColor.indexOf("rubbery") != -1 || player.hairColor.indexOf("latex-textured") != -1) && changes < changeLimit && rand(3) == 0) {
 				player.hairColor = randomChoice(goblin_hair_color);
 				outputText("\n\nYour scalp tingles and when you check yourself in nearby steam it seems your <b>[hair] become " + player.hairColor + ".</b>");
 				changes++;
@@ -4949,7 +4949,7 @@ public final class Mutations extends MutationsHelper
 			clearOutput();
 			if (debug) {
 				outputText("You're about to eat the humus when you see it has bugs in it. Not wanting to eat bugged humus or try to debug it you throw it into the portal and find something else to eat.");
-				player.destroyItems(consumables.HUMMUS_, 1);
+				player.destroyItems(consumables.HUMMUS2, 1);
 				return;
 			}
 			outputText("You shovel the stuff into your face, not sure WHY you're eating it, but once you start, you just can't stop.  It tastes incredibly bland, and with a slight hint of cheese.");
@@ -9602,6 +9602,19 @@ public final class Mutations extends MutationsHelper
 			player.refillHunger(20);
 		}
 
+		public function excelliaMilk(player:Player):void
+		{
+			player.slimeFeed();
+			clearOutput();
+			outputText("You swallow down the bottle of Excellia's milk.");
+			if (player.fatigue > 0) outputText("  You feel much less tired! (-50 fatigue)");
+			outputText("\n\nInhuman vitality spreads through your body, invigorating you! ");
+			HPChange((((player.level * 5) + 10) * (1 + player.newGamePlusMod())), true);
+			dynStats("lus", 5);
+			fatigue(-50);
+			player.refillHunger(25);
+		}
+
 
 //TF item - Shriveled Tentacle
 //tooltip:
@@ -9848,8 +9861,8 @@ public final class Mutations extends MutationsHelper
 			//Cum Multiplier Xform
 			if (player.cumQ() < 5000 && rand(3) == 0 && changes < changeLimit && player.hasCock()) {
 				var mult:int = 2 + rand(4);
-				//Lots of cum raises cum multiplier cap to 2 instead of 1.5
-				if (player.findPerk(PerkLib.MessyOrgasms) >= 0) mult += rand(10);
+				//Lots of cum raises cum multiplier cap to 3 instead of 1.5
+				if (player.findPerk(PerkLib.MessyOrgasms) >= 0) mult += rand(20);
 				player.cumMultiplier += mult;
 				//Flavor text
 				if (player.balls == 0) outputText("\n\nYou feel a churning inside your gut as something inside you changes.");
@@ -13113,8 +13126,12 @@ public final class Mutations extends MutationsHelper
 				setRearBody(RearBody.GLACIAL_AURA);
 				changes++;
 			}
-			if (player.hasPlainSkinOnly() && !player.isGargoyle() && player.skinTone != "snow white" && player.skinAdj != "cold" && changes < changeLimit && rand(3) == 0) {
-				player.skinTone = "snow white";
+			if (player.hasPlainSkinOnly() && !player.isGargoyle() && player.skinTone != "glacial white" && player.skinTone != "pale blue" && player.skinTone != "snow white" && player.skinAdj != "cold" && changes < changeLimit && rand(3) == 0) {
+				if (rand(3) == 0) player.skinTone = "glacial white";
+				else {
+					if (rand(2) == 0) player.skinTone = "pale blue";
+					else player.skinTone = "snow white";
+				}
 				player.skinAdj = "cold";
 				outputText("\n\nYou feel a rush of goosebumps spreading over your body. When you look down at yourself you see that your skin has been bleached of all color, not unlike someone who froze to death. <b>You now have snow white skin.</b>");
 				changes++;

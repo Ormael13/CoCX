@@ -2349,4 +2349,3 @@ use namespace CoC;
 		}
 	}
 }
-

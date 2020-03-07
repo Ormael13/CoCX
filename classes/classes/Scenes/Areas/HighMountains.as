@@ -71,7 +71,7 @@ use namespace CoC;
 				}
 			}
 			//Etna
-			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(3) == 0) {
+			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(3) == 0 && (player.level >= 20)) {
 				if (flags[kFLAGS.ETNA_AFFECTION] < 5) SceneLib.etnaScene.firstEnc();
 				else SceneLib.etnaScene.repeatEnc();
 				return;

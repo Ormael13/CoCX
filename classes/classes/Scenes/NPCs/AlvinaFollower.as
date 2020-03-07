@@ -128,6 +128,10 @@ public function alvinaThirdEncounterYes():void
 	outputText("The demons came very close to harnessing true power but ultimately failed, turning into insatiable creatures unable to satisfy their endless thirst for souls and sex, in the end, they lack a soul entirely. To achieve perfection and immortality one needs their soul to be attached to its body so to… Regardless, this is nothing you should concern yourself with yet.</i>\"\n\n");
 	outputText("Ok so why does it matter? It’s not like you have anything to do with this right?\n\n");
 	outputText("\"<i>On the contrary, you coming here is no hazard. You seek forbidden knowledge and I, Alvina Shadowmantle, founder of what is today black magic seek someone to impart it… For a price. So how about joining me and becoming my apprentice? You have proven way more than a mere pawn, so surely you are worthy of my time.</i>\"\n\n");
+	if (flags[kFLAGS.CODEX_ENTRY_DEVIL] <= 0) {
+		flags[kFLAGS.CODEX_ENTRY_DEVIL] = 1;
+		outputText("\n\n<b>New codex entry unlocked: Devil!</b>");
+	}
 	menu();
 	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] >= 4) addButtonDisabled(0, "Sure", "There's no way you would be able to have HER in your camp at the same time as Siegweird. He'd kill her or she'd kill him.");
 	else addButton(0, "Sure", alvinaThirdEncounterYesSure);

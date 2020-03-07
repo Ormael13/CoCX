@@ -869,18 +869,16 @@ public function nagaFUCKSJOOOOOO():void {
 
 //internal function nagaRapeChoice():void {
 public function nagaRapeChoice():void {
-	if (monster.HP < 1) {
-        outputText("You've defeated the " + gorgonOrNaga);
-		outputText("!  ");
-	}
-	else {
-        outputText("The " + gorgonOrNaga);
-		outputText(" writhes in the sand, masturbating feverishly!  She's completely forgotten about fighting you.  ");
+	if (monster.HP < 1) outputText("You've defeated the " + gorgonOrNaga + "!  ");
+	else outputText("The " + gorgonOrNaga + " writhes in the sand, masturbating feverishly!  She's completely forgotten about fighting you.  ");
+	if (flags[kFLAGS.SFW_MODE] > 0) {
+		cleanupAfterCombat();
+		return;
 	}
 	var eggs:Function = null;
 	if (player.canOvipositSpider()) eggs = eggUpANagaSpiderLike;
 	if (player.canOvipositBee() && player.gender > 0) eggs = beePositANagaPlease;
-	if(player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+	if (player.lust >= 33) {
 		outputText("Your body aches for further satisfaction - do you rape the snake woman?");
 		menu();
 		if (player.gender == 0) addButton(0, "Yes", nagaVictoryGenderless);
@@ -895,12 +893,11 @@ public function nagaRapeChoice():void {
 		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 		addButton(14, "Leave", cleanupAfterCombat);
 	}
-	if(player.lust < 33) {
+	if (player.lust < 33) {
 		outputText("You aren't aroused enough to fuck her.");
 		menu();
-		addButton(4, "Leave", cleanupAfterCombat);
+		addButton(14, "Leave", cleanupAfterCombat);
 	}
-	cleanupAfterCombat();
 }
 public function nagaRapeChoice2():void {
 	if (monster.HP < 1) outputText("You've defeated the naga!  ");

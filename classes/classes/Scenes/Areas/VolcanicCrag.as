@@ -46,19 +46,19 @@ public class VolcanicCrag extends BaseContent
                 Holidays.DLCPrompt("Extreme Zones DLC", "Get the Extreme Zones DLC to be able to visit Glacial Rift and Volcanic Crag and discover the realms within!", "$4.99");
                 return;
 			}
+			//Tripxi Fatbilly
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1 && rand(2) == 0) {
+				partsofTripxiFatbilly();
+				return;
+			}
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
 				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
 			//Etna
-			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0) {
+			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0 && (player.level >= 20)) {
 				SceneLib.etnaScene.repeatYandereEnc();
-				return;
-			}
-			//Tripxi Fatbilly
-			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1 && rand(2) == 0) {
-				partsofTripxiFatbilly();
 				return;
 			}
 			select = choice[rand(choice.length)];
@@ -105,7 +105,7 @@ public class VolcanicCrag extends BaseContent
 		
 		public function partsofTripxiFatbilly():void {
 			clearOutput();
-			outputText("As you explore the beach you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
+			outputText("As you explore the vu;lcanic crag you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
 			outputText("You carefully put the pieces of the Tripxi Fatbilly in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 1, 1);
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);

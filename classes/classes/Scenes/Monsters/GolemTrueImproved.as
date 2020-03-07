@@ -9,9 +9,13 @@ package classes.Scenes.Monsters
 	import classes.internals.*;
 	import classes.CoC;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Camp.CampMakeWinions;
+	import classes.Scenes.SceneLib;
 	
 	public class GolemTrueImproved extends AbstractGolem
 	{
+		public var campMake:CampMakeWinions = new CampMakeWinions();
+		
 		public function backhand():void {
 			outputText("The golem's visage twists into a grimace of irritation, and it swings its hand at you in a vicious backhand.");
 			var damage:Number = int ((str + weaponAttack) - rand(player.tou) - player.armorDef);
@@ -52,6 +56,12 @@ package classes.Scenes.Monsters
 			else eAttack();
 		}
 		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if (player.hasStatusEffect(StatusEffects.SoulArena)) SceneLib.combat.finishCombat();
+			else campMake.postFightGolemOptions3();
+		}
+		
 		public function GolemTrueImproved() 
 		{
 			super(false);
@@ -62,8 +72,7 @@ package classes.Scenes.Monsters
 			initStrTouSpeInte(200, 160, 120, 10);
 			initWisLibSensCor(10, 10, 10, 50);
 			this.tallness = 90;
-			this.drop = new ChainedDrop()
-					.add(useables.GOLCORE, 1/4);
+			this.drop = NO_DROP;
 			this.level = 42;
 			this.bonusHP = 500;
 			this.additionalXP = 500;

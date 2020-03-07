@@ -88,7 +88,7 @@ public class HellHound extends Monster
 						outputText("  You find yourself musing that you could probably take advantage of the poor 'doggy'.  Do you fuck it?");
 						SceneLib.mountain.hellHoundScene.hellHoundPostFightSexScenes();
 					} else {
-						SceneLib.combat.cleanupAfterCombatImpl();
+						SceneLib.mountain.hellHoundScene.hellHoundPostFightOptions();
 					}
 				} else {
 					outputText("Unable to bear hurting you anymore, the hellhound's flames dim as he stops his attack. The two heads look at you, whining plaintively.  The hellhound slowly pads over to you and nudges its noses at your crotch.  It seems he wishes to pleasure you.\n\n", true);
@@ -104,7 +104,7 @@ public class HellHound extends Monster
 					}
 					else {
 						outputText("You turn away, not really turned on enough to be interested in such an offer.");
-						SceneLib.combat.cleanupAfterCombatImpl();
+						SceneLib.mountain.hellHoundScene.hellHoundPostFightOptions();
 					}
 				}
 			}

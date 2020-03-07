@@ -571,7 +571,7 @@ public function chichiSex():void {
 		menu();
 		if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] > 0) addButton(1, "Weeding", chichiSex1);
 		else if (flags[kFLAGS.MARRIAGE_FLAG] != 0 && flags[kFLAGS.MARRIAGE_FLAG] != 1) addButtonDisabled(1, "Weeding", "You already married someone else.");
-		else addButtonDisabled(1, "Weeding", "Need to beat some oni.");
+		else addButtonDisabled(1, "Weeding", "Need to beat some oni. (Yo lazy asses if you try make the oni beating count without train mode for npc's you can try... for years ingame and get no progress here!!! (You need to turn on camp training under camp actions with a sparring ring built for it to count.))");
 		addButton(3, "Later", chichiSex0);
 	}
 	else {
@@ -648,13 +648,12 @@ public function chichiSex4():void {
 }
 public function chichiSex5():void {
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 5;
+	clearOutput();
 	if (player.hasCock()) {
-		clearOutput();
 		outputText("You scream in rage as the monster grabs a terrified Chi Chi and makes his escape. More than disheartened by the failure of your marriage, you realize the man has stolen Chi Chi from you forever as he takes her to some unknown location. You leave, returning to camp heartbroken.\n\n");
 		doNext(cleanupAfterCombat);
 	}
 	else {
-		clearOutput();
 		outputText("Chon looks down at your defeated form, smirking with perverse intent as he admires your shape.\n\n");
 		outputText("\"<i>Know what, sensei? I thought about it and this slut right here is as sexy as you are, so I think I'll bring you both back home as part of my harem. There's enough cum in these balls for the both of you.</i>\"\n\n");
 		outputText("<b>Several months later</b>\n\n");

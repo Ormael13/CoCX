@@ -4373,7 +4373,7 @@ private function clitSwellingDemonSheilaClitSoundingAnal():void {
 		player.slimeFeed();
 	}
 	player.clitLength++;
-	if(player.findPerk(PerkLib.BigClit) >= 0) player.clitLength += .5;
+	if(player.findPerk(PerkLib.BigClit) >= 0) player.clitLength += 1;
 	if(player.cor < 50) {
 		dynStats("cor", 10);
 		sheilaCorruption(-10);

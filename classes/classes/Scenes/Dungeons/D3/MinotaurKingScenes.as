@@ -67,7 +67,7 @@ public class MinotaurKingScenes extends BaseContent
 				addButton(4, "SloppySeconds", sloppySeconds);
 			}
 			if (player.hasVagina()) addButton(5, "Ride Him", mechanicalbullhue);
-			//addButton(14, "TouchCow", touchTheCowDoItNow).hint("Touch the Cow. Do it Now. (Or maybe it was to keep her after you deal with the Lethice? Who cares?)");
+			addButton(14, "TouchCow", touchTheCowDoItNow).hint("Touch the Cow. Do it Now. (Or maybe it was to keep her after you deal with the Lethice? Who cares?)");
 		}
 
 		private function touchTheCowDoItNow():void

@@ -40,7 +40,7 @@ import classes.BodyParts.Wings;
 			else /*if (player.isBiped()) */outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>");
 			if (player.hasStatusEffect(StatusEffects.HydraTailsPlayer)) player.removeStatusEffect(StatusEffects.HydraTailsPlayer);
 			setLowerBody(LowerBody.HUMAN);
-			player.legCount  = 2;
+			player.legCount = 2;
 			changes++;
 		}
 

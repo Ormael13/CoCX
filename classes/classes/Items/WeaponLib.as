@@ -30,8 +30,8 @@ package classes.Items
 		public const B_SCARB:Weapon = new Weapon("B.ScarB", "B.ScarBlade", "broken scarred blade", "a broken scarred blade", "slash", 12, 480, "This saber, made from lethicite-imbued metal, seems to no longer seek flesh; whatever demonic properties in this weapon is gone now but it's still an effective weapon.");
 		public const BLETTER:BloodLetter = new BloodLetter();
 		public const B_WIDOW:BlackWidow = new BlackWidow();
-		public const CLAWS  :Weapon = new Weapon("Claws","Claws","gauntlet with claws","a gauntlet with claws","rend",0,100,"This metal gauntlets have tips of the fingers shaped like sharp natural claws.  Though it lacks the damaging potential of other weapons, it has a chance to leave bleeding wounds.");
-		public const L_CLAWS:Weapon = new Weapon("L.Claws","LustyClaws","gauntlet with an aphrodisiac-coated claws","a gauntlet with an aphrodisiac-coated claws","rend",0,200,"This metal gauntlets have tips of the fingers shaped like natural claws.  They seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.");
+		public const CLAWS  :Weapon = new Weapon("Claws","Claws","gauntlet with claws","a gauntlet with claws","rend",0,100,"Those metal gauntlets have tips of the fingers shaped like sharp natural claws.  Though they lacks the damaging potential of other weapons, they have a chance to leave bleeding wounds.");
+		public const L_CLAWS:Weapon = new Weapon("L.Claws","LustyClaws","gauntlet with an aphrodisiac-coated claws","a gauntlet with an aphrodisiac-coated claws","rend",0,200,"Those metal gauntlets have tips of the fingers shaped like natural claws.  They seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.");
 		public const CLAYMOR:Weapon = new LargeClaymore();
 		public const CNTWHIP:CatONineTailWhip = new CatONineTailWhip();
 		public const DWARWA :DwarvenWaraxe = new DwarvenWaraxe();
@@ -57,6 +57,7 @@ package classes.Items
 		public const FLYWHIS:FlyWhisk = new FlyWhisk();
 		public const FRTAXE :Weapon = new Weapon("Fr.T.Axe","Fr.T.Axe", "Francisca throwing axe", "a Francisca throwing axe", "cleave", 25, 2000, "A foreign axe, made in polished steel and decorated with hunting reliefs in gold and silver. It’s unusually light for its size, so you may be able to manage it with a single hand. Some runes engraved on the handle assure that it will return to you once it has hit your opponent.", "Large");
 		public const CHAKRAM:Weapon = new Weapon("chakram","chakram", "chakram", "a chakram", "slash", 12, 960, "The chakram is a simple, elegant, and highly portable thrown weapon. It is a flat, open-centered metal discus with a sharpened edge.");
+		public const G_ROD  :Weapon = new Weapon("G. Rod", "G. Rod", "Golemancer Rod", "a Golemancer Rod", "smack", 0, 100, "This metal rod seems to empower golems through energy influx.", "Wand");
 		public const GUANDAO:GuanDao = new GuanDao();
 		public const H_GAUNT:Weapon = new Weapon("H.Gaunt", "H.Gaunt", "hooked gauntlets", "a set of hooked gauntlets", "clawing punch", 0, 400, "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.");
 		public const HALBERD:Halberd = new Halberd();

@@ -480,6 +480,13 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Mana Regeneration:</b> " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier()) + " / turn, " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier()) * 2 + " / hour\n";
 		combatStats += "<b>Soulforce Regeneration:</b> " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) + " / turn, " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) * 2 + " / hour\n";
 
+		combatStats += "\n";
+		combatStats += "<b>Base evasion:</b> " + player.getEvasionChance() + " %\n";
+		combatStats += "<b>Base block chance:</b> " + combat.combatBlock2() + " %\n";
+		combatStats += "<b>Base parry chance:</b> " + combat.combatParry2() + " %\n";
+		combatStats += "<b>Base physical attacks critical chance:</b> " + combat.combatPhysicalCritical() + " %\n";
+		combatStats += "<b>Base magical attacks critical chance:</b> " + combat.combatMagicalCritical() + " %\n";
+
 		if (combatStats != "")
 			outputText("\n<b><u>Combat Stats</u></b>\n" + combatStats);
 		// End Combat Stats
@@ -774,6 +781,9 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.TED_WRATH] > 5) {
 			if (flags[kFLAGS.TED_LVL_UP] >= 3) interpersonStats += "<b>Ted Wrath:</b> " + Math.round(flags[kFLAGS.TED_WRATH]) + "%\n";
 			else interpersonStats += "<b>Dragon-boy Wrath:</b> " + Math.round(flags[kFLAGS.TED_WRATH]) + "%\n";
+			if (flags[kFLAGS.TED_LVL_UP] == 6) interpersonStats += "<b>Ted lvl:</b> 45\n";
+			if (flags[kFLAGS.TED_LVL_UP] == 5) interpersonStats += "<b>Ted lvl:</b> 39\n";
+			if (flags[kFLAGS.TED_LVL_UP] == 4) interpersonStats += "<b>Ted lvl:</b> 33\n";
 			if (flags[kFLAGS.TED_LVL_UP] == 3) interpersonStats += "<b>Ted lvl:</b> 27\n";
 			if (flags[kFLAGS.TED_LVL_UP] == 2) interpersonStats += "<b>Dragon-boy lvl:</b> 21\n";
 			if (flags[kFLAGS.TED_LVL_UP] == 1) interpersonStats += "<b>Dragon-boy lvl:</b> 15\n";
@@ -953,6 +963,17 @@ public class PlayerInfo extends BaseContent {
             childStats += "<b>Total Children With Ember:</b> " + (SceneLib.emberScene.emberChildren()) + "\n";
         if (flags[kFLAGS.EMBER_EGGS] > 0)
 			childStats += "<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n";
+			
+        if (flags[kFLAGS.EXCELLIA_MALE_KIDS] > 0)
+			childStats += "<b>Excellia Offspring (Human Males):</b> " + flags[kFLAGS.EXCELLIA_MALE_KIDS] + "\n";
+		if (flags[kFLAGS.EXCELLIA_FEMALE_KIDS] > 0)
+			childStats += "<b>Excellia Offspring (Human Females):</b> " + flags[kFLAGS.EXCELLIA_FEMALE_KIDS] + "\n";
+        if (flags[kFLAGS.EXCELLIA_MALE_COW_KIDS] > 0)
+			childStats += "<b>Excellia Offspring (Cow-morph Males):</b> " + flags[kFLAGS.EXCELLIA_MALE_COW_KIDS] + "\n";
+		if (flags[kFLAGS.EXCELLIA_FEMALE_COW_KIDS] > 0)
+			childStats += "<b>Excellia Offspring (Cow-morph Females):</b> " + flags[kFLAGS.EXCELLIA_FEMALE_COW_KIDS] + "\n";
+        if (SceneLib.excelliaFollower.totalExcelliaChildren() > 0)
+            childStats += "<b>Total Children With Excellia:</b> " + SceneLib.excelliaFollower.totalExcelliaChildren() + "\n";
 
         if (SceneLib.isabellaScene.totalIsabellaChildren() > 0) {
             if (SceneLib.isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) > 0)
@@ -1001,6 +1022,9 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.MINERVA_CHILDREN] > 0)
 			childStats += "<b>Children With Minerva:</b> " + flags[kFLAGS.MINERVA_CHILDREN] + "\n";
+
+		if (flags[kFLAGS.MITZI_DAUGHTERS] > 0)
+			childStats += "<b>Mitzi Children:</b> " + flags[kFLAGS.MITZI_DAUGHTERS] + "\n";
 
 		if (flags[kFLAGS.ANT_KIDS] > 0)
 			childStats += "<b>Ant Children With Phylla:</b> " + flags[kFLAGS.ANT_KIDS] + "\n";

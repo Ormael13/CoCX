@@ -703,7 +703,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					else flags[kFLAGS.CHI_CHI_LVL_UP]++;
 				}
 				//Excellia fixing counter
-				if (flags[kFLAGS.EXCELLIA_RECRUITED] > 2 && flags[kFLAGS.EXCELLIA_RECRUITED] < 33) flags[kFLAGS.EXCELLIA_RECRUITED]++;
+				if (flags[kFLAGS.EXCELLIA_RECRUITED] > 2 && flags[kFLAGS.EXCELLIA_RECRUITED] < 30) flags[kFLAGS.EXCELLIA_RECRUITED]++;
 				//Alvina timer
 				if (SceneLib.dungeons.checkFactoryClear() && flags[kFLAGS.ALVINA_FOLLOWER] < 8) flags[kFLAGS.ALVINA_FOLLOWER]++;
 				//Siegweird
@@ -765,6 +765,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 					needNext = true;
 				}
+				if (player.hasStatusEffect(StatusEffects.MitziIzmaDaughters)) player.removeStatusEffect(StatusEffects.MitziIzmaDaughters);
 				if (flags[kFLAGS.SAMIRAH_HYPNOSIS] == 4 || flags[kFLAGS.SAMIRAH_HYPNOSIS] == 2) flags[kFLAGS.SAMIRAH_HYPNOSIS]++;
 				//Soul Arena Gaunlet reset
 				if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlets1)) {
@@ -2138,4 +2139,3 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//End of Interface Implementation
 	}
 }
-

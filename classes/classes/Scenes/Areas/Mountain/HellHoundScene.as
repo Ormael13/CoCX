@@ -92,11 +92,21 @@ public class HellHoundScene extends BaseContent
 			cleanupAfterCombat();
 		}
 
+		public function hellHoundPostFightOptions():void
+		{
+			if (monster.HP < 1) {
+				menu();
+				addButton(12, "Slay", killHellhound);
+				addButton(14, "Leave", cleanupAfterCombat);
+			}
+			else doNext(cleanupAfterCombat);
+		}
 		public function hellHoundPostFightSexScenes():void
 		{
 			menu();
 			addButton(0, "Lick it", hellHoundGetsRaped);
 			if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) addButton(1, "Fuck", hellHoundPropahRape);
+			if (monster.HP < 1) addButton (12, "Slay", killHellhound);
 			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 			addButton(14, "Leave", cleanupAfterCombat);
 		}
@@ -398,6 +408,14 @@ public class HellHoundScene extends BaseContent
 				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			}
 			cleanupAfterCombat();
+		}
+		
+		private function killHellhound():void {
+			clearOutput();
+			flags[kFLAGS.HELLHOUNDS_KILLED]++;
+			outputText("You finish off the hellhound and claim his two tongues as your prize. ");
+			if (player.cor < 25) dynStats("cor", -0.5);
+			inventory.takeItem(useables.THHTONG, cleanupAfterCombat);
 		}
 	}
 }

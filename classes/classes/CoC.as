@@ -253,8 +253,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8n7";
-			version = ver + " (<b>Larger Inventory, Yuki Onna encounter, Bloodlines, minor bugfixes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8n8";
+			version = ver + " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

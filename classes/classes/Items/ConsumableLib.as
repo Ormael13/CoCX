@@ -89,6 +89,7 @@ public final class ConsumableLib extends BaseContent
         }));
         public const C_BREAD:CumBread         = new CumBread();
 		public const CCUPCAK:SimpleConsumable = mk("CCupcak", "CCupcak", "a gigantic, chocolate cupcake", 250, "A gigantic, chocolate cupcake. You could easily get full from eating this!", m.giantChocolateCupcake);
+		public const EXCMILK:SimpleConsumable = mk("ExcMilk", "ExcMilk", "a bottle of Excellia's milk", 10, "It's a bottle of Excellia's milk. It's guaranteed to restore your body and energy.", m.excelliaMilk);
 		public const FISHFIL:SimpleConsumable = mk("FishFil", "FishFil", "a fish fillet", 10, "A perfectly cooked piece of fish.  You're not sure what type of fish is, since you're fairly certain \"delicious\" is not a valid species.", m.fishFillet);
 		public const FREFISH:SimpleConsumable = mk("FreFish", "FreshFish", "a fresh fish", 6, "A fish freshly caugh from the waters of mareth.", m.freshFish);
 		public const FR_BEER:SimpleConsumable = mk("Fr Beer", "Fr Beer", "a mug of frothy beer", 6, "A bottle of beer from The Black Cock.", m.frothyBeer);

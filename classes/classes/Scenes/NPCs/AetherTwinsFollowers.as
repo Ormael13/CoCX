@@ -17,7 +17,7 @@ import classes.Items.Weapon;
 
 public function aethertwinsFollowers():void {
 	clearOutput();
-	outputText("You walk over to Aether Twins resting place.  Seeing you approach, the sentient weapons turns the golem they used as temporal host in your direction.\n\n");
+	outputText("You walk over to Aether Twins resting place.  Seeing you approach, the sentient weapon"+(flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2 || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2 ? "":"s")+" turns the golem "+(flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2 || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2 ? "it":"they")+" used as temporal host in your direction.\n\n");
 	outputText("\"<i>Hey there, [name]! Need anything while we're safe at camp?</i>\"\n\n");
 	menu();
 	//if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(1, "Spar", valeriaSpar).hint("Do a quick battle with Valeria!");

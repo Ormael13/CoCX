@@ -489,5 +489,147 @@ import classes.StatusEffects;
 			if (monster.hasStatusEffect(StatusEffects.LustDoTH)) monster.addStatusValue(StatusEffects.LustDoTH,1,1);
 			else monster.createStatusEffect(StatusEffects.LustDoTH,4,0.02,0,0);
 		}
+		
+		public function excelliaCombatActions():void {
+			clearOutput();
+			if (player.statusEffectv4(StatusEffects.CombatFollowerExcellia) > 0) {
+				var choice10:Number = rand(20);
+				if (player.hasPerk(PerkLib.MotivationSu)) {
+					if (choice10 == 0) excelliaCombatActions0();
+					if (choice10 >= 1 && choice10 < 10) mitziCombatActions1();
+					if (choice10 >= 10 && choice10 < 14) mitziCombatActions2();
+					if (choice10 >= 14 && choice10 < 17) mitziCombatActions3();
+					if (choice10 >= 17) mitziCombatActions4();
+				}
+				else if (player.hasPerk(PerkLib.MotivationEx)) {
+					if (choice10 < 4) excelliaCombatActions0();
+					if (choice10 >= 4 && choice10 < 12) mitziCombatActions1();
+					if (choice10 >= 12 && choice10 < 15) mitziCombatActions2();
+					if (choice10 >= 15 && choice10 < 18) mitziCombatActions3();
+					if (choice10 == 18 || choice10 == 19) mitziCombatActions4();
+				}
+				else if (player.hasPerk(PerkLib.Motivation)) {
+					if (choice10 < 7) excelliaCombatActions0();
+					if (choice10 >= 7 && choice10 < 13) mitziCombatActions1();
+					if (choice10 >= 13 && choice10 < 16) mitziCombatActions2();
+					if (choice10 == 16 || choice10 == 17) mitziCombatActions3();
+					if (choice10 == 18 || choice10 == 19) mitziCombatActions4();
+				}
+				else {
+					if (choice10 < 10) excelliaCombatActions0();
+					if (choice10 >= 10 && choice10 < 14) mitziCombatActions1();
+					if (choice10 == 14 || choice10 == 15) mitziCombatActions2();
+					if (choice10 == 16 || choice10 == 17) mitziCombatActions3();
+					if (choice10 == 18 || choice10 == 19) mitziCombatActions4();
+				}
+			}
+			else {
+				outputText("Mitzi grabs a couple needles off her belt along with her daughters and adopts a fighting stance.\n\n");
+				player.addStatusValue(StatusEffects.CombatFollowerExcellia, 4, 1);
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Mitzi" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Mitzi" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			else {
+				menu();
+				addButton(0, "Next", combatMenu, false);
+			}
+		}
+		public function excelliaCombatActions0():void {
+			outputText("Mitzi and her daughters stand by, waiting for an opportunity to attack.\n\n");
+		}
+		
+		public function amilyCombatActions():void {
+			clearOutput();
+			if (player.statusEffectv4(StatusEffects.CombatFollowerAmily) > 0) {
+				var choice11:Number = rand(20);
+				if (player.hasPerk(PerkLib.MotivationSu)) {
+					if (choice11 == 0) amilyCombatActions0();
+					if (choice11 >= 1 && choice11 < 10) amilyCombatActions1();
+					if (choice11 >= 10 && choice11 < 14) amilyCombatActions2();
+					if (choice11 >= 14 && choice11 < 17) amilyCombatActions3();
+					if (choice11 >= 17) amilyCombatActions4();
+				}
+				else if (player.hasPerk(PerkLib.MotivationEx)) {
+					if (choice11 < 4) amilyCombatActions0();
+					if (choice11 >= 4 && choice11 < 12) amilyCombatActions1();
+					if (choice11 >= 12 && choice11 < 15) amilyCombatActions2();
+					if (choice11 >= 15 && choice11 < 18) amilyCombatActions3();
+					if (choice11 == 18 || choice11 == 19) amilyCombatActions4();
+				}
+				else if (player.hasPerk(PerkLib.Motivation)) {
+					if (choice11 < 7) amilyCombatActions0();
+					if (choice11 >= 7 && choice11 < 13) amilyCombatActions1();
+					if (choice11 >= 13 && choice11 < 16) amilyCombatActions2();
+					if (choice11 == 16 || choice11 == 17) amilyCombatActions3();
+					if (choice11 == 18 || choice11 == 19) amilyCombatActions4();
+				}
+				else {
+					if (choice11 < 10) amilyCombatActions0();
+					if (choice11 >= 10 && choice11 < 14) amilyCombatActions1();
+					if (choice11 == 14 || choice11 == 15) amilyCombatActions2();
+					if (choice11 == 16 || choice11 == 17) amilyCombatActions3();
+					if (choice11 == 18 || choice11 == 19) amilyCombatActions4();
+				}
+			}
+			else {
+				outputText("Amily takes cover, ready to bombard " + monster.a + monster.short + " with blow darts and blades while hidden from view.\n\n");
+				player.addStatusValue(StatusEffects.CombatFollowerAmily, 4, 1);
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Amily" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Amily" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			else {
+				menu();
+				addButton(0, "Next", combatMenu, false);
+			}
+		}
+		public function amilyCombatActions0():void {
+			outputText("Amily remains hidden, making sure she has escaped from sight.\n\n");
+		}
+		public function amilyCombatActions1():void {
+			var dmg5:Number = player.statusEffectv1(StatusEffects.CombatFollowerAmily);
+			dmg5 += scalingBonusStrengthCompanion() * 0.25;
+			dmg5 = Math.round(dmg5);
+			doDamage(dmg5);
+			outputText("Amily peeks out from her cover before shooting a blowdart at " + monster.a + monster.short + ". <b>(<font color=\"#800000\">" + String(dmg5) + "</font>)</b>\n\n");
+		}
+		public function amilyCombatActions2():void {
+			outputText("Amily peeks out from her cover, taking careful aim as she shoots a blow dart at [opponent]’s eyes. ");
+			monster.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
+			if (rand(3) == 0 || monster.hasPerk(PerkLib.Resolute)) outputText("" + monster.capitalA + monster.short + " shakes off the blow, but they’re still blinded from the impact.\n\n");
+			else {
+				outputText("" + monster.capitalA + monster.short + " recoils as they’re momentarily disoriented.");
+				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			}
+		}
+		public function amilyCombatActions3():void {
+			outputText("Amily peeks out from her cover, shooting a poisoned dart, debilitating the enemy.\n\n");
+		}
+		public function amilyCombatActions4():void {
+			var dmg6:Number = player.statusEffectv1(StatusEffects.CombatFollowerAmily);
+			dmg6 += scalingBonusStrengthCompanion();
+			dmg6 = Math.round(dmg6);
+			doDamage(dmg6);
+			outputText("Amily rushes out with her dagger. Blitzing through, she slices through them with a flurry of swift cuts before leaping off of them, away from view. <b>(<font color=\"#800000\">" + String(dmg6) + "</font>)</b>\n\n");
+		}
+		
+		public function siegweirdCombatActions():void {
+			clearOutput();
+			if (player.statusEffectv4(StatusEffects.CombatFollowerSiegweird) > 0) {
+				var choice7:Number = rand(20);
+				if (choice7 < 10) outputText("\n\n");
+				if (choice7 >= 10 && choice7 < 14) outputText("\n\n");
+				if (choice7 >= 14 && choice7 < 17) outputText("\n\n");
+				if (choice7 == 17 || choice7 == 18) outputText("\n\n");
+				if (choice7 == 19) outputText("\n\n");
+			}
+			else {
+				outputText("\n\n");
+				player.createStatusEffect(StatusEffects.CombatFollowerSiegweird, 0, 0, 0, 0);
+			}
+		}
 	}
 }

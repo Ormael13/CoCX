@@ -32,6 +32,10 @@ public class AlrauneScene extends BaseContent
 			outputText("\"<i>Mmmmmm such a nice catch... Come closer into my pitcher.</i>\"\n\n");
 			outputText("There's no way you will let this thing pull you in!\n\n");
 		}
+		if (flags[kFLAGS.CODEX_ENTRY_ALRAUNE] <= 0) {
+			flags[kFLAGS.CODEX_ENTRY_ALRAUNE] = 1;
+			outputText("\n\n<b>New codex entry unlocked: Alraune!</b>");
+		}
 		startCombat(new Alraune());
 	}
 	

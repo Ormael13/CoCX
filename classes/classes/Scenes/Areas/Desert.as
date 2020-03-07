@@ -112,7 +112,7 @@ use namespace CoC;
 						when: function ():Boolean {
 							return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1;
 						},
-						chance: 3,
+						chance: 30,
 						call: partsofDesertEagle
 					}, {
 						name: "nails",
@@ -154,7 +154,7 @@ use namespace CoC;
 						chance: 0.2,
 						when: function ():Boolean
 						{
-							return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff));
+							return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff)&& (player.level >= 20));
 						},
 						call: SceneLib.etnaScene.repeatYandereEnc
 					}, {

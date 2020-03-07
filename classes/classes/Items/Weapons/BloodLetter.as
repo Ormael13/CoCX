@@ -16,8 +16,8 @@ package classes.Items.Weapons
 		}
 		override public function get attack():Number {
 			var boost:int = 0;
-			boost += (3 * (game.player.cor - 80 / 3));
-			return (24 + boost); 
+			boost += Math.round(game.player.cor / 10);
+			return (12 + (3 * boost)); 
 		}
 		
 	}

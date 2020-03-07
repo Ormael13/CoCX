@@ -25,17 +25,16 @@ use namespace CoC;
 			flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE]++;
 			if (player.cor < 66) dynStats("cor", 1);
 			
-			var choice:Array = [];
-			var select:int;
-			
-			//Build choice list!
-			choice[choice.length] = 0; //Imp enemies
-			choice[choice.length] = 1; //Succubi/Incubu/Omnicubi enemies
-			choice[choice.length] = 2; //Imp Food
-			//choice[choice.length] = 3; //
-			//if (rand(3) == 0) choice[choice.length] = 2; //Find Imp's Food ^^
-			if (rand(4) == 0) choice[choice.length] = 3; //Find nothing! The rand will be removed from this once the Blight Ridge is populated with more encounters.
-			
+			//Dart pistol
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1 && rand(2) == 0) {
+				partsofDartPistol();
+				return;
+			}
+			//Twin Dart pistol
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1 && rand(2) == 0) {
+				partsofTwinDartPistol();
+				return;
+			}
 			//Ignis intro
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && flags[kFLAGS.IGNIS_ARENA_SEER] < 1 && rand(5) == 0) {
 				clearOutput();
@@ -91,6 +90,17 @@ use namespace CoC;
 				return;
 			}
 			
+			var choice:Array = [];
+			var select:int;
+			
+			//Build choice list!
+			choice[choice.length] = 0; //Imp enemies
+			choice[choice.length] = 1; //Succubi/Incubu/Omnicubi enemies
+			choice[choice.length] = 2; //Imp Food
+			//choice[choice.length] = 3; //
+			//if (rand(3) == 0) choice[choice.length] = 2; //Find Imp's Food ^^
+			if (rand(4) == 0) choice[choice.length] = 3; //Find nothing! The rand will be removed from this once the Blight Ridge is populated with more encounters.
+			
 			select = choice[rand(choice.length)];
 			switch(select) {
 				case 0:
@@ -110,6 +120,26 @@ use namespace CoC;
 					dynStats("lib", .5);
 					doNext(camp.returnToCampUseOneHour);
 			}
+		}
+		
+		public function partsofDartPistol():void {
+			clearOutput();
+			outputText("As you explore the blight ridge you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
+			outputText("You carefully put the pieces of the Dart pistol in your back and head back to your camp.\n\n");
+			player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 2, 1);
+			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
+			player.createKeyItem("Dart pistol", 0, 0, 0, 0);
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		public function partsofTwinDartPistol():void {
+			clearOutput();
+			outputText("As you explore the blight ridge you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
+			outputText("You carefully put the pieces of the Twin Dart pistol in your back and head back to your camp.\n\n");
+			player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 2, 1);
+			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
+			player.createKeyItem("Twin Dart pistol", 0, 0, 0, 0);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

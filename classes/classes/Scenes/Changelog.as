@@ -47,7 +47,7 @@ package classes.Scenes
 			outputText("-New TF item: White Ice Shard. Currently found in Yu shop (will later be moved to be only drop form specific enemy). Allow to change into Yuki Onna race with race bonuses at 14+: +70 to max Spe (scal), +140 to max Int (scal), +70 to max Wis (scal), +50 to max Lib (scal).\n");
 			outputText("-Increased max caps on HP, Lust, Wrath, Fatigue, Mana and Soulforce acording to increased lvl cap and recently added perks. Sorry OPK it's still too low cap for your PC i know but noone is close to your over 9000 power level :(\n");
 			outputText("-Fixed bugs: Derpy forgetting to actualy rise lvl cap up to 185 from inbetween value during work on test builds, Mitzi pregnancy chance been always 100%\n\n");
-			outputText("<b>Version 0.8n7:</b>\n\n");
+			outputText("<b>Version 0.8n7 (Larger Inventory, Yuki Onna encounter, Bloodlines, minor bugfixes):</b>\n\n");
 			outputText("-New tier 0 strength lvl-up perk: Strong Back 3: Strong Hardest. Req. Strong Back 2: Strong Harder perk, 60+ str and lvl 4+. Effect: Unlocks eighth inventory slot.\n");
 			outputText("-New enemy perk: Unique npc. It will tag npc's or enemies even in special cases that shouldn't be killed after fight. Mostly due to most recent unique sex scene leading to death of enemy.\n");
 			outputText("-Added new starting History: Tactician perk (will give Job: Leader perk at start and would boost pets/minions dmg by 10%)\n");
@@ -77,22 +77,89 @@ package classes.Scenes
 			outputText("-Added general estimation of how much soulforce is needed to find encounters/npc's in Soul Sense menu.\n");
 			outputText("-Priscilla has been added as possible Soul Sense encounter (but that won't remove her from general pool of encounter for goblins enemies so RNG GOD can still pick her instead of any other weaker goblin to throw at PC)\n");
 			outputText("-Michiko got few more talk options including those about few areas ingame.\n");
-			outputText("-Cruel Chimera's Thesis ascension perk was moved form 3rd to 2nd ascension. After having this perk and ascensing 3rd time when pc starts 4th game with the same PC would be have new selection during creation of the character to pick non-human ancestor resulting in +2 bonus to race scroe for this race. ");
+			outputText("-Cruel Chimera's Thesis ascension perk was moved from 3rd to 2nd ascension. After having this perk and ascensing 3rd time when pc starts 4th game with the same PC would be have new selection during creation of the character to pick non-human ancestor resulting in +2 bonus to race score for this race. ");
 			outputText("Possible to pick races: Dragon, Elf, Goblin, Kitsune, Raiju. This option can be permed like History perk at next ascension and in case PC got all avialable options could choose None option that will instead give 12 bonus perk points at start.\n");
 			outputText("-Unequip and Misc tabs was merged into one menu. Additionaly unequip section have two pages. Moved Key Items list in inventory page below text showing how much capacity of inventory is used for better clarity how close to limit of full inventory PC is atm.\n");
 			outputText("-Mini Bangball and bangball mk 1 to mk 3 got boosted dmg. Mini by 2x, mk 1 by 4x, mk 2 by 8x and mk 3 by 16x. Now you all explosions fans can make bigger explooooooosions!!! All thos hidden and crouched fans of Megumim can get now 100% more fun.\n");
 			outputText("-Possible to find Ebonbloom during exploration of caves. It even have silly mode version (it's good so give it a chance to see that sillyness).\n");
 			outputText("-During exploration of Mountains is possible to find quarry. Picking old pickaxe there allow to mine getting few stoens and if PC is lucky few gems too.\n");
-			outputText("-Fixed bugs: Giacomo taking much more gems than he meantioned for Mysterious Seed, missing req. for Job: All-Rounder, Tamani daughters replacing Tamani encounters after there is 16+ of them, missing 3 newest elemental types from menu for picking elemental to attack in combat, Misc. submenu not showing in Invenotry with only Mysterious Seed bought, Thunderbird TF having ");
-			outputText("wrong req. to get eyes tf, Izma appearaing at lake before PC reach lvl 3, repeating some texts in scenes, Named Bullet perk adding bonus dmg to wrong type of enemies, Adventure Guild promotion to higher tier not taking any Spirit Stones, Bee venom pernamently lowering stats, still lingering half werewolf stat bonuses, Centaurium sometimes not giving hooved legs\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Giacomo taking much more gems than he meantioned for Mysterious Seed, missing req. for Job: All-Rounder, Tamani daughters replacing Tamani encounters after there is 16+ of them, missing 3 newest elemental types from menu for picking elemental to attack in combat, Thunderbird TF having wrong req. to get eyes tf, Izma appearaing at lake before PC reach lvl 3, ");
+			outputText("repeating some texts in scenes, Named Bullet perk adding bonus dmg to wrong type of enemies, Adventure Guild promotion to higher tier not taking any Spirit Stones, Bee venom pernamently lowering stats, still lingering half werewolf stat bonuses, Centaurium sometimes not giving hooved legs\n\n");
+			outputText("<b>Version 0.8n8:</b>\n\n");
+			outputText("-New tier 0 misc lvl-up perk: Twin Heart. Req. Free heart mutation slot and 4+ in centaur score. Effect: +40% base fatigue recovery and +5 to max tou/spe (scalable). +100% base fatigue recovery and reduce charge fatigue cost by 10% as well as its cooldown by 1 round so long as your body is tauric(drider). (Also raise all Taur race score by 1, by 2 as long pc is tauric/drider).\n");
+			outputText("-New tier 0 speed lvl-up perk: Power Shot. Req. Job: Ranger perk. Effect: Enable Power Shoot p. special. Add some of your strength (~40% of str scaling value) to bow damage.\n");
+			outputText("-New tier 1 misc lvl-up perk: Twin Heart (Evolved). Req. Twin Heart perk and 8+ in centaur score. Effect: +40% fatigue recovery and +10 to max tou/spe (scalable). +100% fatigue recovery, reduce Charge fatigue cost by 10%, increase damage by 20%, its cooldown by 1 round so long as your body is tauric/drider. (Also raise all Taur race score by 1, by 2 as long pc is tauric/drider).\n");
+			outputText("-New tier 2 speed lvl-up perk: Devastating charge. Req. Natural jouster perk and 90+ spe. Effect: When using the charge action you have a 20% chance to stun the opponent for a round. Charge is 50% more powerful..\n");
+			outputText("-New tier 2 speed lvl-up perk: Marked for death. Req. Job: Hunter or Job: Gunslinger. Effect: You can now use sneak attack with ranged weapon. (bows and snipper firearms)\n");
+			outputText("-New tier 4 misc lvl-up perk: Twin Heart (Final Form). Req. Twin Heart (Evolved) perk and 12+ in centuar score. Effect: +40% fatigue recovery and +30 to max tou/spe (scalable). +100% fatigue recovery, reduce Charge fatigue cost by 10%, increase damage by 60%, its cooldown by 1 round so long as your body is tauric/drider. (Also raise all Taur race score by 1, by 2 as long pc is tauric/drider).\n");
+			outputText("-New tier 6 misc lvl-up perk: Temporal Golems Restructuration. Req. Master Golem Maker perk, 120+ inte, 120+ wis. Effect: Allow to use option of send all temporal golems to attack in one turn. Adding option to make 5 temporal golems at once and shorte a bit time to make 1 temporal golem.\n");
+			outputText("-New rare ascension perk -> Ascension: Additional Organ Mutation (3rd Stage). Req. Ascension: Additional Organ Mutation (2nd Stage) perk, 30+ in internal chimera score and be at sixth ascension. It costs 60 asc points and will give 1 more slot for organ mutations. Like heart, muscles or mouth related racial mutation perks.\n");
+			outputText("-New P. Special: Charge. It can be used by any pc and have 6 turn cooldown. Due to this all natural jouster bonuses form other melee attacks or specials was removed and will only stay on this one special. Having bovine or unicorn type horns will add bonus damage and chance to leave bleed debuff. Also having spear-like weapon with taur or drider lower body will add 2x multiplier to damage.\n");
+			outputText("-New P. Special: Power Shoot. range equivalent of Power Attack. Req. using either Bow or Throwing type weapon.\n");
+			outputText("-New meele weapon (by Liadri): Golemancer Rod - buyable at golemancer shop in He'Xin'Dao. Cost 100 gems. Raise golems power by 75%.\n");
+			outputText("-New range weapon (by Liadri): Snippler - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Deepwoods area. Cost 1030 gems. Base atk is 50 and ammo clip size 1. Cannot multishot deals +300% base damage on sneak attack. It's 2H Firearm type range weapon.\n");
+			outputText("-New range weapon (by Liadri): Touhouna M3 - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Caves area. Cost 430 gems. Base atk is 20 and ammo clip size 1. Each perk for mutli attacks per turn increase times it deal dmg by 2. And base ration of shooting per turn is 2 bullets. Lowering range accuracy by 10%. It's 2H Firearm type range weapon. Can be used in goblin mech.\n");
+			outputText("-New range weapon (by Liadri): Derpnade Launcher - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Mountain area. Cost 2030 gems. Base atk is 100 and ammo clip size 1. deal AoE dmg and have 10% chance to deal 20% of it dmg to PC. It's 2H Firearm type range weapon.\n");
+			outputText("-New shield (by Liadri): Yogi Uh Panel - buyable at golemancer shop in He'Xin'Dao. Cost 200 gems. Raise Summon and Golem damage by 25%.\n");
+			outputText("-New armor (by Liadri): Goblin Technomancer clothes - buyable at Lumi Workshop. Cost 400 gems, 0 armor / resistance, Slutty Seduction 10, Increases Firearms damage by 20%, Technology damage and lust damage by +50%, reduces electric damage taken by 25%. Can only be used by someone smaller than 4 feet tall.\n");
+			outputText("-New underwear (upper) (by Liadri): Technomancer bra - buyable at Lumi Workshop. Cost 600 gems, Technology damage +5% Tease +5%, reduces electric damage taken by 15%\n");
+			outputText("-New underwear (bottom) (by Liadri): Technomancer panties - buyable at Lumi Workshop. Cost 600 gems, Technology damage +5% Tease +5%, reduces electric damage taken by 15%\n");
+			outputText("-New Special names: Grigori (dragon), Teekna (goblin). Each of them will start with matching bloodline perk to match their ancestor race.\n");
+			outputText("-New possible to pick races when choosing non-human ancestor of PC: Minotaur, Oni, Orc\n");
+			outputText("-New shop in HXD that is run by goblin golemancer. She's selling various golemancer oriented items or supplies.\n");
+			outputText("-7 new codex entries added to game: Alraune, Cheshire Cat, Chimera, Devil, Displacer Beast, Hellcat, Hydra\n");
+			outputText("-7 new achievments. (2 shadow ones)\n");
+			outputText("-Legendary Golem Maker was renamed to Epic Golem Maker (2nd Circle) and Mythical Golem Maker was renamed to Epic Golem Maker (3rd Circle).\n");
+			outputText("-Titan Grip perk was renamed into Gigant's Grip.\n");
+			outputText("-Dwarf Rage was renamed to Warrior's Rage.\n");
+			outputText("-Kaiba items shop items got extended tooltips desc their effects.\n");
+			outputText("-Beginner/Apprentice/Expert/Master Golem Maker perks will have changed values of lowering shatter chance for golem cores of temporal golems to respectively 2/2/3/3%. Default chance to shartter core would be lowered from 20% to 10%\n");
+			outputText("-Limit for temporaly golems was increased 2x for all perks aside Job: Golemancer that will rise limit by 5 instead of 3. Also golem core bags to carry cores for later use capacity was increased by 50%.\n");
+			outputText("-Chance to find tree cutting location in forest/deepwoods and quarry site in mountains was increased by large margin to make them easier to encounter. After finding place to cut wood 15 times or mine stones 5 times they will be moved to Places menu (page 3).\n");
+			outputText("-Raiju and Maticore encounter was limited to been lvl 20+ before both show up first time in any area.\n");
+			outputText("-She also can give player that is golemancer 15 golem cores... as long player agree to 'return a favor' to her at undetermined yet point in the future.\n");
+			outputText("-Postfight with golems now have option to leave or to try scavenge them for materials like golem core and possibly other loot too. Having Golemancer job OR last attempt with group of golems will increase chance of succesfull scavenging to 100%. Higher level golems would also give few stones depending if core was succesfull scavenged, with failure giving more stones. (texts atm placeholders)\n");
+			outputText("-Making temporaly golem was shortened from 15 to 10 min and pernament golem making was given 20 min (as it was before without any time used for making it).\n");
+			outputText("-Most of the gifts at character selection get their effect enhanced. All gifts to get starting small stats bonus got their effects shifted to be giving max cap for that stat by 50 * NG tier. Also increase of this stat isn't 25% faster but 100% faster.\n");
+			outputText("-It's possible to slay hellhounds and take their tongues as proof. Also that would allow to get achiev for killing hellhounds.\n");
+			outputText("-Added new statistics to Combat subpage of Stats: Base evasion / Base block / Base parry / Base physical attacks critical / Base magical attacks critical % chances. All of them are out of combat chances or % and may be a bit different when in combat due to combat buffs/defuffs.\n");
+			outputText("-Speed Demon and Quick Strike perks effects will be applied when using Power Attack. And both desc got adjusted to avoid confusion with effects after readfing perk descriptions.\n");
+			outputText("-Epic Golem Maker (3rd Circle) perk now allow to make and store in golem bag 1 improved stone golem. They cost much more in all materials or mana to create that normal stone goelm but they got higher base damage and will attack twice.\n");
+			outputText("-Humanity based bonus to gained EXP was lowered but in exchange it will even apply when PC is over 9 lvl above enemy. Still this bonus will be halfed when fighting on Soul Arena.\n");
+			outputText("-Some minor changes or edits to texts on starting screen after opening game.\n");
+			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
+			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
+			//outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");
+			//outputText("-After beating Minotaur King PC could in vanilla take Excellia as npc back to camp. Just that in mods it was never followed thing. Not anymore and now we all can enjoy cow slut in camp same as we already enjoy Mitzi. But there will be choice to make: break Excellia even more and make her camp Slave or start helping her restore her clear mins and keep as Follower?\n");
+			//outputText("-Each of Excellia versions will have few interactions (including pregnancy). Fixing excellia will take ~30 ingame days and will req. to use at the end one De-Bimbo potion. Each interaction before she's fixed will be worth of one day of natural recovery. And each Debimbo potion is worth of 10 days (so yeah those rich PC's can just feed her 3 potions to instant fix her).\n");
+			//outputText("-Fixed Excellia will move to Lovers tab and add option to sleep with her, show up at hot springs or assist in fights as henchman.\n");
+			//outputText("-Added Mitzi and Excellia kids counter tracker to Stats page under Children subpage.\n");
+			outputText("-New tier 4 strength lvl-up perk: Gigant's Grip (Ex). Req. Gigant's Grip perk and 120+ str. Effect: Allow to apply all perks boosting Large weapon performance (increased atk and etc.) to Massive weapons. Exception is perks that allow for multi attacks of large weapons.\n");
+			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
+			outputText("-Golem Army General perk allows additionaly to store 1 more improved pernament stone golem.\n");
+			outputText("-Perk Faint req. now either perk Sneaky Attack or Marked for death.\n");
+			outputText("-M1 Cerberus cost reduced from 1080 to 930 gems. Also if can be used for range sneak attack dealing +200% base damage.\n");
+			outputText("-Liadri additions/changes to character viewer.\n");
+			outputText("-New tier 1 wisdom lvl-up perk: Dual Wield (Firearms). Req. Job: Gunslinger, 25+ wis, 20+ tou and 15+ spe. Effect: Allows PC to wield two firearms (non 2H ones).\n");
+			outputText("-New range weapon (by Liadri): Twin Grakaturd - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Battlefield area. Cost 860 gems. Base atk is 25 and ammo clip size 12. It's Dual Firearm type range weapon. Can be used in goblin mech.\n");
+			outputText("-New range weapon (by Liadri): Dart pistol - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Blight Ridge area. Cost 120 gems. Base atk is 1 and ammo clip size 3. Function as the succubus whip minus the corruption & self lust. Can be used in goblin mech.\n");
+			outputText("-New range weapon (by Liadri): Twin Dart pistol - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Blight Ridge area. Cost 240 gems. Base atk is 1 and ammo clip size 6. Function as the succubus whip minus the corruption & self lust. It's Dual Firearm type range weapon. Can be used in goblin mech.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			//outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");
+			outputText("-Fixed bugs: Missing Next button causing to skip first half of Yuki Onna encounter scene for too low wisdom PC's, picking Bloodline perk at chara creation causing to skip to end of chara creation, going into combat options and back to get free Wisp/Elemental action(s), Mitzi & Izma daugters camp scene loop, desert naga sex scenes not showing with 33+ lust, Nieve camp lover been ");
+			outputText("too early taken away (gee Fen don't put notes on Nieve lasting 3 months just 6 code lines below line of code saying it's just 2 months), shooting any type of projectle (even bullets) from bow, alraune struggle showing wrong sprite, Dual Small wepaons having 2x more attacks per turn than intended, some of enemy specific actions showing wehn elemntal conjuer or golemancer PC would ");
+			outputText("be choosing elemental / amount of golems to attack, Beautiful Shield, Staff and Bow been impossible to find after taking Beautiful Sword, fatal error for some of newest 4 firearms in combat code, 2H Firearms not usable outside mech, small text typos here and there, exploring Deepwoods not increasing exploration counter for that area\n");/*ostatni punkt changelogu
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
@@ -105,11 +172,6 @@ package classes.Scenes
 			//outputText("\n");cel na 0.8: dodać siren TF
 			//outputText("-New TF item: . Gained by bringing Orc Mead to Lumi for enhancing. Using this item will turn PC into high orc. High Orc (scalable): +130 to max Str, +30 to max Tou, +10 to max Spe, -30 to max Int, +25 to max Lib, +20% to max Wrath.\n");
 			//outputText("-New TF item: . Gained by bringing Elf Ear to Lumi for enhancing. Using this item will turn PC into high elf. High Elf (scalable): -10 to max Str, -15 to max Tou, +80 to max Spe, +80 to max Int, +60 to max Wis, +30 max/min Sens, +20% to max Mana.\n");
-			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
-			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
-			//outputText("-New armor (by Liadri): Goblin Technomancer clothes - gained after becoming Jiangshi. Cost 160 gems, 0 armor, 0 magic resistance, Slutty Seduction 10, +40% to soulskills power.\n");
-			//outputText("-New underwear (upper) (by Liadri): \n");
-			//outputText("-New underwear (bottom) (by Liadri): \n");
 			outputText("-New necklace (by Ormael):  - obtained by . Cost xx0 gems. \n");
 			outputText("-New head accesory (by Ormael):  - obtained by . Cost xx0 gems. \n");
 			outputText("-New ring (by Ormael):  - obtained by . Cost xx0 gems. \n");
@@ -140,6 +202,19 @@ package classes.Scenes
 			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
 			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
+			outputText("-New tier 1 misc lvl-up perk: . Req. History: Tactician or Past Life: Tactician perk. Effect: +10% minions/pets damage.\n");.
+			outputText("-New tier 4 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 7 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 12 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -148,6 +223,11 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -184,6 +264,23 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -593,7 +690,7 @@ package classes.Scenes
 			outputText("-New head jewelery/accesory/misc (by Ormael): crown of lust protection - buyable at Jewel shop in Tel'Adre. Cost 4800 gems. Increase lust resistance by 20%.\n");
 			outputText("-New head jewelery/accesory/misc (by Ormael): Crown of the Undefeated King - buyable at Kaiba shop in Tel'Adre. Cost 6000 gems. You can't loose by HP until reaching droping into negative health larger than 5% of max HP + 500(scalable). When below 0 HP PC wouldn gain additional 1% of max HP per turn regeneration effect.\n");
 			outputText("-New necklace (by Liadri): Magic coral and pearl necklace - buyable at Pinchou shop. Cost 800 gems, grants water breathing to races without gills and a small amount of regeneration (1%) to aquatic races when near sources of water or underwater. Also increases speed by 10 while underwater stacking with similar bonuses such as those granted by swimwear and Aquatic Affinity.\n");
-			outputText("-New necklace (by Ormael): Crinos Shape necklace - buyable at Kaiba shop. Cost 4000 gems. Would allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior. In case PC got this perk or pick it in future will boost Crinos Shape transformation by 20% and drain additional 5 wrath per turn on top of current Crinos Shape stats boost and wraith drain. ");
+			outputText("-New necklace (by Ormael): Crinos Shape necklace - buyable at Kaiba shop. Cost 4000 gems. Would allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior. In case PC got this perk or pick it in future will boost Crinos Shape transformation by 20% and drain additional 5 wrath per turn on top of current Crinos Shape stats boost and wraith drain.");
 			outputText("-New necklace (by Ormael): necklace of of fire protection - buyable at Jewel shop in Tel'Adre. Cost 4000 gems. Increase fire resistance by 25%.\n");
 			outputText("-New necklace (by Ormael): necklace of ice protection - buyable at Jewel shop in Tel'Adre. Cost 4000 gems. Increase ice resistance by 25%.\n");
 			outputText("-New necklace (by Ormael): necklace of lightning protection - buyable at Jewel shop in Tel'Adre. Cost 4000 gems. Increase lightning resistance by 25%.\n");
@@ -2377,7 +2474,7 @@ package classes.Scenes
 			outputText("-New possible body part to gain: Shark Arms (removable by any TF that chaning arms to human type).\n");
 			outputText("-Phoenix arms can be changed by the same items that change harpy arms to normal human arms.\n");
 			outputText("-Cultivating while wearing any of those 3 items: Training Soul Axe/Bucker/Armor allow gain +1 for each of them used (s0 with all 3 it will be +3) to max soulforce up to limit of 260 bonus soulforce points. Depending how many of those items PC wear max limit to rise can vary (only with all three limit is at 260). Only wearing those items when cultivating is req. for gaining this bonus points to soulforce.\n");
-			outputText("-Added new lvl-up perk: Dantain. For PC that have perk Job: Soul Cultivator or any of Soul ... perks increase max soulforce by 10%.\n");
+			outputText("-Added new lvl-up perk: Dantian. For PC that have perk Job: Soul Cultivator or any of Soul ... perks increase max soulforce by 10%.\n");
 			outputText("-Added two new places in He'Xin'Dao: Equipment Shop run by female siren and Arena run by male nekomanta.\n");
 			outputText("-Moved Wing Stick, Katana and Wizard Staff from Tel'Adre weapon shop to He'Xin'Dao equipment shop. Lowered price of wind stick to 10 from 16 gems (due to all items in new shop been priced as 10x multiplier depending on item price in gems)\n");
 			outputText("-New weapons added (buyable in new shop): Nodachi - atk:17, large type weapon (allow use of Whirlwind special), Ribbon - atk:5, aoe type wepon (allow of use Whipping special)\n");

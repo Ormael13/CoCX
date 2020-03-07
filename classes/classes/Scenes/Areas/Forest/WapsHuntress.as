@@ -8,15 +8,34 @@ import classes.*;
 import classes.GlobalFlags.*;
 import classes.internals.ChainedDrop;
 import classes.Scenes.Areas.Forest.WaspGirl;
+import classes.StatusEffects.Combat.ParalyzeVenomDebuff;
 
 	public class WapsHuntress extends WaspGirl {
+		
+		public function waspBarrageOfDarts():void {
+			outputText("The wasp huntress launches a barrage of darts in your direction! ");
+			var paralyze:ParalyzeVenomDebuff = player.statusEffectByType(StatusEffects.ParalyzeVenom) as ParalyzeVenomDebuff;
+			if (paralyze) {
+					outputText("It's getting much harder to move, you're not sure how many more darts like that you can take! ");
+				} else {
+					paralyze = new ParalyzeVenomDebuff();
+					player.addStatusEffect(paralyze);
+					outputText("You've fallen prey to paralyzation venom!  Better end this quick! ");
+				}
+			var damage:int = 0;
+			damage += ((str * 1) + rand(20));
+			player.takePhysDamage(damage, true);
+			player.takePhysDamage(damage, true);
+			player.takePhysDamage(damage, true);
+			paralyze.increaseWasp1();
+		}
 		
 		override protected function performCombatAction():void
 		{
 			var choice:Number = rand(5);
 			if (choice == 0) waspStingAttack();
 			if (choice == 1) waspSpearAttack();
-			if (choice == 2) eAttack();//special dla niej tylko
+			if (choice == 2) waspBarrageOfDarts();
 			if (choice >= 3) eAttack();
 		}
 		

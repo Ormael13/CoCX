@@ -57,14 +57,15 @@ use namespace CoC;
 				when: function ():Boolean {
 					return flags[kFLAGS.ETNA_FOLLOWER] < 1
 						   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
-						   && !player.hasStatusEffect(StatusEffects.EtnaOff);
+						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
+						   && (player.level >= 20);
 				},
 				chance: 0.5,
 				call: SceneLib.etnaScene.repeatYandereEnc
 			}, {
 				name: "electra",
 				when: function():Boolean {
-					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && !player.hasStatusEffect(StatusEffects.ElectraOff);
+					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && !player.hasStatusEffect(StatusEffects.ElectraOff) && (player.level >= 20);
 				},
 				chance: 0.5,
 				call: function ():void {

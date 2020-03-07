@@ -52,7 +52,8 @@ public class Mountain extends BaseContent
 						when  : function():Boolean {
 							return flags[kFLAGS.ETNA_FOLLOWER] < 1
 								   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
-								   && !player.hasStatusEffect(StatusEffects.EtnaOff);
+								   && !player.hasStatusEffect(StatusEffects.EtnaOff)
+								   && (player.level >= 20);
 						},
 						chance: 0.5,
 						call  : SceneLib.etnaScene.repeatYandereEnc
@@ -183,7 +184,7 @@ public class Mountain extends BaseContent
 					}, {
 						name: "electra",
 						when: function ():Boolean {
-							return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ElectraOff);
+							return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ElectraOff) && (player.level >= 20);
 						},
 						chance:0.5,
 						call: function ():void {
@@ -204,11 +205,22 @@ public class Mountain extends BaseContent
 						call: DivaScene.encounter
 					},{
 						name: "quarry",
-						call: quarrySite
+						when: function():Boolean {
+							return player.statusEffectv2(StatusEffects.ResourceNode1) < 5;
+						},
+						chance: 4,
+						call: camp.cabinProgress.quarrySite
 					},{
 						name: "darkelf",
 						call: darkelfScene.introDarkELfScout
 					},{
+						name: "derpnade launcher",
+						when: function ():Boolean {
+							return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1;
+						},
+						chance: 30,
+						call: partsofDerpnadeLauncher
+					}, {
 						name: "ted",
 						when: function():Boolean {
 							return flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1;
@@ -343,6 +355,15 @@ public class Mountain extends BaseContent
 				minotaurScene.getRapedByMinotaur(true);
 				spriteSelect(44);
 			}
+		}
+		public function partsofDerpnadeLauncher():void {
+			clearOutput();
+			outputText("As you explore the mountains you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
+			outputText("You carefully put the pieces of the Derpnade Launcher in your back and head back to your camp.\n\n");
+			player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 2, 1);
+			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
+			player.createKeyItem("Derpnade Launcher", 0, 0, 0, 0);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		private function hike():void {
 			clearOutput();
@@ -527,52 +548,6 @@ public class Mountain extends BaseContent
 			//Lust!
 			dynStats("lus", 5 + player.lib / 20 + player.minotaurScore() + player.cowScore());
 			doNext(camp.returnToCampUseOneHour);
-		}
-		
-		private function quarrySite():void {
-			clearOutput();
-			outputText("As you explore the mountain area you run into what appears to be a very good mineral formation.");
-			if (player.hasKeyItem("Old Pickaxe") < 0) outputText(" Next to it is an old pickaxe left by a native who likely met an unfortunate end.");
-			menu();
-			if (player.hasKeyItem("Old Pickaxe") < 0) {
-				addButtonDisabled(0, "Mine", "You would need a pickaxe in order to retrieve the stone.");
-				addButton(1, "Pickaxe", quarrySitePickaxe);
-			}
-			else addButton(0, "Mine", quarrySiteMine);
-		}
-		private function quarrySitePickaxe():void {
-			outputText("\n\nYou pick up the old mining tool. This should prove useful when digging up gems or stone from the landscape.");
-			player.createKeyItem("Old Pickaxe", 0, 0, 0, 0);
-			doNext(quarrySite);
-		}
-		private function quarrySiteMine():void {
-			if (player.fatigue > player.maxFatigue() - 50) {
-				outputText("\n\n<b>You are too tired to consider mining the stones. Perhaps some rest will suffice?</b>");
-				doNext(camp.returnToCampUseOneHour);
-				return;
-			}
-			var minedstones:Number = (13 + Math.floor(player.str / 7));
-			var maxSupply:Number = 300;
-			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) maxSupply += 600;
-			outputText("\n\nYou begin slamming your pickaxe against the stone, spending the better part of the next few hours mining. This done, you bring back your prize to camp. <b>(+" + minedstones + " stone!");
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += minedstones;
-			if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= maxSupply) {
-				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = maxSupply;
-				outputText(" Your stone capacity is full.")
-			}
-			outputText(")</b>");
-			if (rand (10) == 0) {
-				var gemsMined:Number = 1 + rand(4);
-				outputText(" Along with the stone you managed to dig up " + gemsMined + " gems!");
-				player.gems += gemsMined;
-			}
-			flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] += minedstones;
-			fatigue(50, USEFATG_PHYSICAL);
-			doNext(camp.returnToCampUseTwoHours);
-		}
-		
-		private function findOre():void { //Not used, will be in 1.1
-			var ore:int = rand(3); //0 = copper, 1 = tin, 2 = iron
 		}
 	}
 }

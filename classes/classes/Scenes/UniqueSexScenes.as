@@ -52,6 +52,7 @@ public function pcUniqueSexScenesChoiceMenu():void {
 	else */addButtonDisabled(6, "Heat transfer", "Req. to have Hinezumi Coat, over 50% of max lust, enemy must be humanoid and not giant. (not yet added scene)");
 	addButtonDisabled(7, "Cooldown", "Req. to have (Winter wolf/other cold cum creatures, pc must be female salamander or hinezumi). (not yet added scene)");
 	if (player.yukiOnnaScore() >= 14 && monster.hasCock() && !monster.hasPerk(PerkLib.UniqueNPC) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) addButton(8, "Steal warmth", yukionnaStealWarmthScene);
+	else addButtonDisabled(8, "Steal warmth", "Req. to be Yuki Onna and enemy must be: non-gigant, humanoid, with cock, non-unique npc.");
 	if (player.isInGoblinMech() && player.hasKeyItem("Cum Reservoir") >= 0 && monster.hasCock()) {
 		if (player.keyItemv1("Cum Reservoir") == 4) addButtonDisabled(13, "Fill the reservoir", "Reservoir is already full. You need to use all this stored cum before you harvest new one.");
 		else addButton(13, "Fill the reservoir", gobomechFillTheReservoir);

@@ -36,6 +36,8 @@ import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
 import classes.Items.WeaponRangeLib;
+import classes.Items.Undergarment;
+import classes.Items.UndergarmentLib;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Pregnancy;
@@ -843,9 +845,8 @@ use namespace CoC;
 		//Weapons for Whirlwind
 		public function isWeaponForWhirlwind():Boolean
 		{
-			return weapon == game.weapons.BFSWORD || weapon == game.weapons.NPHBLDE || weapon == game.weapons.EBNYBLD || weapon == game.weapons.CLAYMOR || weapon == game.weapons.URTAHLB || weapon == game.weapons.KIHAAXE || weapon == game.weapons.L__AXE || weapon == game.weapons.L_HAMMR || weapon == game.weapons.TRASAXE || weapon == game.weapons.WARHAMR
-			 || weapon == game.weapons.OTETSU || weapon == game.weapons.POCDEST || weapon == game.weapons.DOCDEST || weapon == game.weapons.NODACHI || weapon == game.weapons.WGSWORD || weapon == game.weapons.DBFSWO || weapon == game.weapons.D_WHAM_ || weapon == game.weapons.DL_AXE_ || weapon == game.weapons.DSWORD_ || weapon == game.weapons.HALBERD
-			 || weapon == game.weapons.GUANDAO || weapon == game.weapons.PRURUMI || weapon == game.weapons.ZWNDER || weapon == game.weapons.UDKDEST || weapon == game.weapons.BFTHSWORD || weapon == game.weapons.DEMSCYT;// || weapon == game.weapons.
+			return isSwordTypeWeapon() || isAxeTypeWeapon() || weapon == game.weapons.URTAHLB || weapon == game.weapons.L_HAMMR || weapon == game.weapons.WARHAMR || weapon == game.weapons.OTETSU || weapon == game.weapons.POCDEST || weapon == game.weapons.DOCDEST || weapon == game.weapons.D_WHAM_ || weapon == game.weapons.HALBERD
+			 || weapon == game.weapons.GUANDAO || weapon == game.weapons.UDKDEST || weapon == game.weapons.DEMSCYT;// || weapon == game.weapons.
 		}
 		//Weapons for Whipping
 		public function isWeaponsForWhipping():Boolean
@@ -897,9 +898,9 @@ use namespace CoC;
 		}
 		//Sword-type weapons
 		public function isSwordTypeWeapon():Boolean {
-			return weapon == game.weapons.ACLAYMO || weapon == game.weapons.B_SCARB || weapon == game.weapons.B_SWORD || weapon == game.weapons.BFSWORD || weapon == game.weapons.CLAYMOR || weapon == game.weapons.DBFSWO || weapon == game.weapons.DSWORD_ || weapon == game.weapons.EBNYBLD || weapon == game.weapons.EXCALIB || weapon == game.weapons.HSWORDS
-			 || weapon == game.weapons.NODACHI || weapon == game.weapons.NPHBLDE || weapon == game.weapons.PRURUMI || weapon == game.weapons.RCLAYMO || weapon == game.weapons.S_BLADE || weapon == game.weapons.SCARBLD || weapon == game.weapons.SCIMITR || weapon == game.weapons.SCLAYMO || weapon == game.weapons.SNAKESW || weapon == game.weapons.TCLAYMO
-			 || weapon == game.weapons.TRSTSWO || weapon == game.weapons.VBLADE || weapon == game.weapons.WDBLADE || weapon == game.weapons.WGSWORD || weapon == game.weapons.ZWNDER;
+			return weapon == game.weapons.ACLAYMO || weapon == game.weapons.B_SCARB || weapon == game.weapons.B_SWORD || weapon == game.weapons.BFSWORD || weapon == game.weapons.BFTHSWORD || weapon == game.weapons.CLAYMOR || weapon == game.weapons.DBFSWO || weapon == game.weapons.DSWORD_ || weapon == game.weapons.EBNYBLD || weapon == game.weapons.EXCALIB
+			 || weapon == game.weapons.HSWORDS || weapon == game.weapons.NODACHI || weapon == game.weapons.NPHBLDE || weapon == game.weapons.PRURUMI || weapon == game.weapons.RCLAYMO || weapon == game.weapons.S_BLADE || weapon == game.weapons.SCARBLD || weapon == game.weapons.SCIMITR || weapon == game.weapons.SCLAYMO || weapon == game.weapons.SNAKESW
+			 || weapon == game.weapons.TCLAYMO || weapon == game.weapons.TRSTSWO || weapon == game.weapons.VBLADE || weapon == game.weapons.WDBLADE || weapon == game.weapons.WGSWORD || weapon == game.weapons.ZWNDER;
 		}
 		//Axe-type weapons
 		public function isAxeTypeWeapon():Boolean {
@@ -924,10 +925,14 @@ use namespace CoC;
 		}
 		//Ribbon ERIBBON RIBBON
 		//bronie co nie jestem pewien co do klasyfikacji obecnie: FLYWHIS (dla Sword Immortal gra musi sprawdzić czy używa Sword type lub Dueling sword type weapons bo tak)
-		//Weapons for Sneak Attack
+		//Weapons for Sneak Attack (Meele and Range)
 		public function haveWeaponForSneakAttack():Boolean
 		{
 			return weaponPerk == "Small" || weaponPerk == "Dual Small";
+		}
+		public function haveWeaponForSneakAttackRange():Boolean
+		{
+			return weaponRangePerk == "Bow" || weaponRange == game.weaponsrange.M1CERBE || weaponRange == game.weaponsrange.SNIPPLE;
 		}
 		//Throwable melee weapons
 		public function haveThrowableMeleeWeapon():Boolean
@@ -953,7 +958,7 @@ use namespace CoC;
 		public function isUsingGoblinMechFriendlyFirearms():Boolean
 		{
 			return weaponRange == game.weaponsrange.ADBSCAT || weaponRange == game.weaponsrange.ADBSHOT || weaponRange == game.weaponsrange.BLUNDER || weaponRange == game.weaponsrange.DESEAGL || weaponRange == game.weaponsrange.DUEL_P_ || weaponRange == game.weaponsrange.FLINTLK || weaponRange == game.weaponsrange.HARPGUN || weaponRange == game.weaponsrange.IVIARG_
-			 || weaponRange == game.weaponsrange.M1CERBE;
+			 || weaponRange == game.weaponsrange.M1CERBE || weaponRange == game.weaponsrange.TOUHOM3 || weaponRange == game.weaponsrange.TWINGRA || weaponRange == game.weaponsrange.TDPISTO || weaponRange == game.weaponsrange.DPISTOL;
 		}
 		//Is in ... mech (med sized races mech)(have upgrade option to allow smaller than medium races pilot it)
 		//Is in ... mech (large sized races mech)(have upgrade option to allow smaller than large races pilot it)
@@ -992,13 +997,20 @@ use namespace CoC;
 			if (findPerk(PerkLib.WeaponGrandMastery) >= 0 && weaponPerk == "Dual Large" && str >= 140) {
 				attack *= 2;
 			}
-			if (findPerk(PerkLib.HiddenMomentum) >= 0 && weaponPerk == "Large" && str >= 75 && spe >= 50) {
+			if (findPerk(PerkLib.GigantGripEx) >= 0 && weaponPerk == "Massive") {
+				if (findPerk(PerkLib.WeaponMastery) >= 0 && str >= 100) {
+					if (findPerk(PerkLib.WeaponGrandMastery) >= 0 && str >= 140) attack *= 2;
+					else attack *= 1.5;
+				}
+				else attack *= 1.25;
+			}
+			if (findPerk(PerkLib.HiddenMomentum) >= 0 && (weaponPerk == "Large" || (findPerk(PerkLib.GigantGripEx) >= 0 && weaponPerk == "Massive")) && str >= 75 && spe >= 50) {
 				attack += (((str + spe) - 100) * 0.2);
 			}//30-70-110
 			if (findPerk(PerkLib.HiddenDualMomentum) >= 0 && weaponPerk == "Dual Large" && str >= 150 && spe >= 100) {
 				attack += (((str + spe) - 200) * 0.2);
 			}//20-60-100
-			if (findPerk(PerkLib.LightningStrikes) >= 0 && spe >= 60 && (weaponPerk != "Large" || weaponPerk != "Dual Large" || weaponPerk != "Small" || weaponPerk != "Dual Small" || !isFistOrFistWeapon())) {
+			if (findPerk(PerkLib.LightningStrikes) >= 0 && spe >= 60 && (weaponPerk != "Massive" || weaponPerk != "Large" || weaponPerk != "Dual Large" || weaponPerk != "Small" || weaponPerk != "Dual Small" || !isFistOrFistWeapon())) {
 				attack += ((spe - 50) * 0.3);
 			}//45-105-165
 			if (findPerk(PerkLib.StarlightStrikes) >= 0 && spe >= 60 && (weaponPerk == "Small" || weaponPerk == "Dual Small")) {
@@ -1058,8 +1070,8 @@ use namespace CoC;
 				attack += zerkersboost;
 			}
 			if (hasStatusEffect(StatusEffects.ChargeWeapon)) {
-				if (((weaponName == "fists" && findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons) >= 0) || weaponName != "fists") && weaponPerk != "Large" && weaponPerk != "Dual Large") attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
-				if (weaponPerk == "Large" || weaponPerk == "Dual Large") attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
+				if (weaponName == "fists" && findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons) < 0) attack += 0;
+				else attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
 			}
 			attack = Math.round(attack);
 			return attack;
@@ -1087,6 +1099,11 @@ use namespace CoC;
 		public function isUsingStaff():Boolean
 		{
 			return weaponPerk == "Staff" || weaponName == "demonic scythe";
+		}
+		//Using Wand
+		public function isUsingWand():Boolean
+		{
+			return weaponPerk == "Wand";
 		}
 		//override public function get weapons
 		override public function get weaponRangeName():String {
@@ -2199,6 +2216,9 @@ use namespace CoC;
 
 		public override function damageLightningPercent():Number {
 			var mult:Number = damageMagicalPercent();
+			if (armorName == "Goblin Technomancer clothes") mult -= 25;
+			if (upperGarmentName == "Technomancer bra") mult -= 15;
+			if (lowerGarmentName == "Technomancer panties") mult -= 15;
 			if (jewelryEffectId == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude3;
@@ -4019,6 +4039,8 @@ use namespace CoC;
 				cowCounter++;
 			if (findPerk(PerkLib.LactaBovinaOvariesEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
 				cowCounter++;
+			if (findPerk(PerkLib.MinotaursDescendant) >= 0 || findPerk(PerkLib.BloodlineMinotaur) >= 0)
+				cowCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				cowCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && cowCounter >= 4)
@@ -4070,6 +4092,8 @@ use namespace CoC;
 				minoCounter++;
 			if (findPerk(PerkLib.MinotaurTesticlesEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
 				minoCounter++;
+			if (findPerk(PerkLib.MinotaursDescendant) >= 0 || findPerk(PerkLib.BloodlineMinotaur) >= 0)
+				minoCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				minoCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && minoCounter >= 4)
@@ -4222,7 +4246,7 @@ use namespace CoC;
 					mouseCounter++;
 				if (tallness < 48)
 					mouseCounter++;
-				}
+			}
 			if (findPerk(PerkLib.HinezumiBurningBlood) >= 0)
 				mouseCounter++;
 			if (findPerk(PerkLib.HinezumiBurningBloodEvolved) >= 0)
@@ -5694,6 +5718,8 @@ use namespace CoC;
 				oniCounter++;
 			if (findPerk(PerkLib.OniMusculatureEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
 				oniCounter++;
+			if (findPerk(PerkLib.OnisDescendant) >= 0 || findPerk(PerkLib.BloodlineOni) >= 0)
+				oniCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				oniCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && oniCounter >= 4)
@@ -5818,6 +5844,8 @@ use namespace CoC;
 				if (tailType == Tail.)
 					orcCounter++;
 			}*/
+			if (findPerk(PerkLib.OrcsDescendant) >= 0 || findPerk(PerkLib.BloodlineOrc) >= 0)
+				orcCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				orcCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && orcCounter >= 4)
@@ -6148,7 +6176,7 @@ use namespace CoC;
 		public function yukiOnnaScore():Number {
 			Begin("Player","racialScore","yuki onna");
 			var yukiOnnaCounter:Number = 0;
-			if (skinTone == "snow white" || skinTone == "pale blue")
+			if (skinTone == "snow white" || skinTone == "pale blue" || skinTone == "glacial white")
 				yukiOnnaCounter++;
 			if (skinAdj == "cold")
 				yukiOnnaCounter++;
@@ -6206,6 +6234,12 @@ use namespace CoC;
 					centaurCounter++;
 				if (faceType == Face.HUMAN)
 					centaurCounter++;
+				if (findPerk(PerkLib.TwinHeart) >= 0)
+					centaurCounter++;
+				if (findPerk(PerkLib.TwinHeartEvolved) >= 0)
+					centaurCounter++;
+				if (findPerk(PerkLib.TwinHeartFinalForm) >= 0)
+					centaurCounter++;
 			}
 			if (lowerBody == LowerBody.HOOFED || lowerBody == LowerBody.CLOVEN_HOOFED)
 				centaurCounter++;
@@ -6219,6 +6253,16 @@ use namespace CoC;
 				centaurCounter++;
 			if (wings.type != Wings.NONE)
 				centaurCounter -= 3;
+			if (findPerk(PerkLib.TwinHeart) >= 0)
+				centaurCounter++;
+			if (findPerk(PerkLib.TwinHeartEvolved) >= 0)
+				centaurCounter++;
+			if (findPerk(PerkLib.TwinHeartFinalForm) >= 0)
+				centaurCounter++;
+			if (findPerk(PerkLib.TwinHeart) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
+				centaurCounter++;
+			if (findPerk(PerkLib.TwinHeartEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
+				centaurCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				centaurCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && centaurCounter >= 4)
@@ -7376,9 +7420,13 @@ use namespace CoC;
 				heartMutations--;
 			if (findPerk(PerkLib.ObsidianHeart) >= 0)
 				heartMutations--;
+			//if (findPerk(PerkLib.) >= 0) - unicorn/bicorn
+			//	heartMutations--;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
 				heartMutations++;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
+				heartMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
 				heartMutations++;
 			return heartMutations;
 		}
@@ -7392,6 +7440,8 @@ use namespace CoC;
 				musclesMutations++;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
 				musclesMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
+				musclesMutations++;
 			return musclesMutations;
 		}
 		public function maxMouthMutations():Number {
@@ -7403,6 +7453,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
 				mouthMutations++;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
+				mouthMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
 				mouthMutations++;
 			return mouthMutations;
 		}
@@ -7416,6 +7468,8 @@ use namespace CoC;
 				adrenalglandsMutations++;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
 				adrenalglandsMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
+				adrenalglandsMutations++;
 			return adrenalglandsMutations;
 		}
 		public function maxBloodsteamMutations():Number {
@@ -7428,6 +7482,8 @@ use namespace CoC;
 				bloodsteamMutations++;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
 				bloodsteamMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
+				bloodsteamMutations++;
 			return bloodsteamMutations;
 		}
 		public function maxFatTissueMutations():Number {
@@ -7439,6 +7495,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
 				fattissueMutations++;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
+				fattissueMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
 				fattissueMutations++;
 			return fattissueMutations;
 		}
@@ -8197,6 +8255,13 @@ use namespace CoC;
 				maxLib -= (5 * (12 - level));
 				maxSen -= (5 * (12 - level));
 			}
+			if (findPerk(PerkLib.Strong) > 0) maxStr += (50 * newGamePlusMod);
+			if (findPerk(PerkLib.Tough) > 0) maxTou += (50 * newGamePlusMod);
+			if (findPerk(PerkLib.Fast) > 0) maxSpe += (50 * newGamePlusMod);
+			if (findPerk(PerkLib.Smart) > 0) maxInt += (50 * newGamePlusMod);
+			if (findPerk(PerkLib.Wise) > 0) maxWis += (50 * newGamePlusMod);
+			if (findPerk(PerkLib.Lusty) > 0) maxLib += (50 * newGamePlusMod);
+			if (findPerk(PerkLib.Sensitive) > 0) maxSen += (50 * newGamePlusMod);
 			
 			//Alter max speed if you have oversized parts. (Realistic mode)
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
@@ -9327,6 +9392,18 @@ use namespace CoC;
 			if (findPerk(PerkLib.ScyllaInkGlands) >= 0) maxStr += (10 * newGamePlusMod);
 			if (findPerk(PerkLib.TrachealSystemEvolved) >= 0) maxStr += (5 * newGamePlusMod);
 			if (findPerk(PerkLib.TrachealSystemFinalForm) >= 0) maxSpe += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.TwinHeart) >= 0) {
+				maxSpe += (5 * newGamePlusMod);
+				maxTou += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.TwinHeartEvolved) >= 0) {
+				maxSpe += (10 * newGamePlusMod);
+				maxTou += (10 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.TwinHeartFinalForm) >= 0) {
+				maxSpe += (30 * newGamePlusMod);
+				maxTou += (30 * newGamePlusMod);
+			}
 			if (findPerk(PerkLib.VenomGlandsFinalForm) >= 0) maxTou += (10 * newGamePlusMod);
 			if (findPerk(PerkLib.EzekielBlessing) >= 0) {
 				maxStr += (5 * newGamePlusMod);
@@ -9564,15 +9641,35 @@ use namespace CoC;
 			if (findPerk(PerkLib.SoulKing) >= 0) maxWis += 5;
 			if (findPerk(PerkLib.SoulEmperor) >= 0) maxWis += 5;
 			if (findPerk(PerkLib.SoulAncestor) >= 0) maxWis += 5;
+			if (findPerk(PerkLib.GigantGrip) >= 0) maxStr += 5;
+			if (findPerk(PerkLib.GigantGripEx) >= 0) {
+				maxStr += 5;
+				maxTou += 5;
+			}
+			if (findPerk(PerkLib.GigantGripSu) >= 0) {
+				maxStr += 5;
+				maxTou += 5;
+				maxSpe += 5;
+			}
+			if (findPerk(PerkLib.TitanGrip) >= 0) maxStr += 5;
+			if (findPerk(PerkLib.TitanGripEx) >= 0) {
+				maxStr += 5;
+				maxTou += 5;
+			}
+			if (findPerk(PerkLib.TitanGripSu) >= 0) {
+				maxStr += 5;
+				maxTou += 5;
+				maxSpe += 5;
+			}
 			if (findPerk(PerkLib.EpicGolemMaker) >= 0) {
 				maxInt += 10;
 				maxWis += 10;
 			}
-			if (findPerk(PerkLib.LegendaryGolemMaker) >= 0) {
+			if (findPerk(PerkLib.EpicGolemMaker2ndCircle) >= 0) {
 				maxInt += 20;
 				maxWis += 20;
 			}
-			if (findPerk(PerkLib.MythicalGolemMaker) >= 0) {
+			if (findPerk(PerkLib.EpicGolemMaker3rdCircle) >= 0) {
 				maxInt += 30;
 				maxWis += 30;
 			}
@@ -9622,10 +9719,10 @@ use namespace CoC;
 				maxSpe += statusEffectv1(StatusEffects.Blink);
 			}
 			//Dwarf Rage
-			if (hasStatusEffect(StatusEffects.DwarfRage)) {
-				maxStr += statusEffectv1(StatusEffects.DwarfRage);
-				maxTou += statusEffectv2(StatusEffects.DwarfRage);
-				maxSpe += statusEffectv2(StatusEffects.DwarfRage);
+			if (hasStatusEffect(StatusEffects.WarriorsRage)) {
+				maxStr += statusEffectv1(StatusEffects.WarriorsRage);
+				maxTou += statusEffectv2(StatusEffects.WarriorsRage);
+				maxSpe += statusEffectv2(StatusEffects.WarriorsRage);
 			}
 			//Drunken Power
 			if (hasStatusEffect(StatusEffects.DrunkenPower)) {
@@ -9812,9 +9909,9 @@ use namespace CoC;
 				CoC.instance.mainView.statsView.showStatUp('str');
 			}
 			if(CoC.instance.monster.hasStatusEffect(StatusEffects.Sandstorm)) CoC.instance.monster.removeStatusEffect(StatusEffects.Sandstorm);
-			if(hasStatusEffect(StatusEffects.DwarfRage)) {
-				dynStats("str", -statusEffectv1(StatusEffects.DwarfRage),"tou", -statusEffectv2(StatusEffects.DwarfRage),"spe", -statusEffectv2(StatusEffects.DwarfRage), "scale", false);
-				removeStatusEffect(StatusEffects.DwarfRage);
+			if(hasStatusEffect(StatusEffects.WarriorsRage)) {
+				dynStats("str", -statusEffectv1(StatusEffects.WarriorsRage),"tou", -statusEffectv2(StatusEffects.WarriorsRage),"spe", -statusEffectv2(StatusEffects.WarriorsRage), "scale", false);
+				removeStatusEffect(StatusEffects.WarriorsRage);
 			}
 			if(hasStatusEffect(StatusEffects.Berzerking)) {
 				removeStatusEffect(StatusEffects.Berzerking);
@@ -9937,13 +10034,16 @@ use namespace CoC;
 				removeStatusEffect(StatusEffects.DriderIncubusVenom);
 			}
 			if(statusEffectv4(StatusEffects.CombatFollowerAlvina) > 0) addStatusValue(StatusEffects.CombatFollowerAlvina, 4, -1);
+			if(statusEffectv4(StatusEffects.CombatFollowerAmily) > 0) addStatusValue(StatusEffects.CombatFollowerAmily, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerAurora) > 0) addStatusValue(StatusEffects.CombatFollowerAurora, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerAyane) > 0) addStatusValue(StatusEffects.CombatFollowerAyane, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerEtna) > 0) addStatusValue(StatusEffects.CombatFollowerEtna, 4, -1);
+			if(statusEffectv4(StatusEffects.CombatFollowerExcellia) > 0) addStatusValue(StatusEffects.CombatFollowerExcellia, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerDiana) > 0) addStatusValue(StatusEffects.CombatFollowerDiana, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerDiva) > 0) addStatusValue(StatusEffects.CombatFollowerDiva, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerMitzi) > 0) addStatusValue(StatusEffects.CombatFollowerMitzi, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerNeisa) > 0) addStatusValue(StatusEffects.CombatFollowerNeisa, 4, -1);
+			if(statusEffectv4(StatusEffects.CombatFollowerSiegweird) > 0) addStatusValue(StatusEffects.CombatFollowerSiegweird, 4, -1);
 			
 			// All CombatStatusEffects are removed here
 			for (var a:/*StatusEffectClass*/Array=statusEffects.slice(),n:int=a.length,i:int=0;i<n;i++) {
@@ -10232,14 +10332,14 @@ use namespace CoC;
 				trace("and increasing");
 				if (findPerk(PerkLib.MessyOrgasms) >= 0) {
 					trace("and MessyOrgasms found");
-					delta *= 1.5
+					delta *= 2
 				}
 			}
 			else if (delta < 0) {
 				trace("and decreasing");
 				if (findPerk(PerkLib.MessyOrgasms) >= 0) {
 					trace("and MessyOrgasms found");
-					delta *= 0.5
+					delta *= 1
 				}
 			}
 
@@ -10596,4 +10696,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}

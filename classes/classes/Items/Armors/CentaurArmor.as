@@ -15,7 +15,7 @@ package classes.Items.Armors
 		}
 		override public function canUse():Boolean{
 			if (game.player.isTaur()){return true}
-			outputText("The paladin armor is designed for centaurs, so it doesn't really fit you. You place the armor back in your inventory");
+			outputText("The paladin armor is designed for centaurs, so it doesn't really fit you. You place the armor back in your inventory.");
 			return false;
 		}
 		

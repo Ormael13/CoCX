@@ -91,18 +91,21 @@ public function campMichikoTalkRegion():void {
 	addButton(2, "Deepwood", campMichikoTalkRegionDeepwood);
 	addButton(3, "Lake", campMichikoTalkRegionLake);
 	addButton(4, "Desert", campMichikoTalkRegionDesert);
-	//5 Mountains
-	//6 High Mountains
-	//7 Battlefield
-	//8 Plains
-	//9 Swamp
+	addButton(5, "Mountains", campMichikoTalkRegionMountains);
+	addButton(6, "High Mountains", campMichikoTalkRegionHighMountains);
+	//7 Outer Battlefield
+	addButton(8, "Plains", campMichikoTalkRegionPlains);
+	addButton(9, "Swamp", campMichikoTalkRegionSwamp);
 	//10 Bogs
 	//11 Blight Ridge
 	//12 Beach
 	//13 Ocean
 	//14 Deep Sea
-	//15 Glacial Rift
-	//16 Vulcanic Crag
+	//15 Caves
+	//16 Tundra
+	//17 Glacial Rift
+	//18 Ashlands
+	//19 Vulcanic Crag
 	addButton(14, "Back", campMichikoTalkMM);
 }
 public function campMichikoTalkRegionWasteland():void {
@@ -123,8 +126,8 @@ public function campMichikoTalkRegionForest():void {
 public function campMichikoTalkRegionDeepwood():void {
 	clearOutput();
 	outputText("You ask Michiko if she got anything on the deep woods.\n\n");
-	outputText("\"<i>Yea I kind of do, the place is nasty as it's pretty much the source of all the corruption in the forest. At first you would think it’s just that sealed demon Akhbal but truth be told it goes way deeper than that, it's like the deepwoods became a refuge for fiends ranging from the infamous Erlking’s Wyld hunt to the dark mistress of the twilight grove. Amidst all this corruption the kitsunes somehow still manage to thrive in secrecy ");
-	outputText("while the fairies flutter around. Be wary of who you trust in those woods.</i>\"\n\n");
+	outputText("\"<i>Yea I kind of do, the place is nasty as it's pretty much the source of all the corruption in the forest. At first you would think it’s just that sealed demon Akhbal but truth be told it goes way deeper than that, it's like the deepwoods became a refuge for fiends ranging from the infamous Erlking’s Wyld hunt to the dark mistress of the twilight grove. Speaking of grove watch out for tentacle beast and more then anything watch out for alraunes, ");
+	outputText("they just seem to grow all over the place. Amidst all this corruption the kitsunes somehow still manage to thrive in secrecy while the fairies flutter around. Be wary of who you trust in those woods.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
 	cheatTime2(15);
 }
@@ -143,6 +146,22 @@ public function campMichikoTalkRegionDesert():void {
 	outputText("I recommend you keep watch for traps and most of all sand traps when wandering around there, these bugs live for a chance to stick their eggs down someone’s butt. Demons like almost everywhere else also have been spotted partying in the desert.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
 	cheatTime2(15);
+}
+public function campMichikoTalkRegionMountains():void {
+	clearOutput();
+	outputText("You ask Michiko if she got anything on the mountains.\n\n");
+	outputText("\"<i>It’s minotaur territory, if you plan on heading there avoid them best you can. The demons also have a strong presence there due to a local factory, expect to run into one or two. I heard there's an old castle somewhere around there, an old ruin of the old days though I don't know if anyone lives there. Last but not least avoid entering caves and watch out for anything that sounds like thunder, ");
+	outputText("raiju's tend to live in area closer to the clouds and they will jump on whatever can sate their uncontrollable need to discharge.</i>\"\n\n");
+	doNext(campMichikoTalkRegion);
+	cheatTime2(15);
+}
+public function campMichikoTalkRegionHighMountains():void {
+	clearOutput();
+	outputText("So what does she knows on the high mountains regions?\n\n");
+	outputText("\"<i>Well for one the minotaurs don't thread there, thank Marae for that. This said the harpies who nest up there are not really that fond of strangers and the basilisks that constantly steal their eggs only makes them more prone to attack anything that closes in on them. Aside from that, There’s an oni who apparently took residence up there, you also have good odds of finding what remains of the old temple of the divine ");
+	outputText("that used to once be Mareth’s greatest holy site until the demons damaged it. If the demons do have a fortress it’s likely located somewhere up there.</i>\"\n\n");
+	doNext(campMichikoTalkRegion);
+	cheatTime2(15);
 }/*
 public function campMichikoTalkRegion():void {
 	clearOutput();
@@ -151,15 +170,23 @@ public function campMichikoTalkRegion():void {
 	outputText("</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
 	cheatTime2(15);
-}
-public function campMichikoTalkRegion():void {
+}*/
+public function campMichikoTalkRegionPlains():void {
 	clearOutput();
-	outputText("\n\n");
-	outputText("\"<i>");
-	outputText("</i>\"\n\n");
+	outputText("What does she knows about the plains of Mareth?\n\n");
+	outputText("The plains of Mareth are home to many tribes both good and bad. I know there's at least one remaining village of sheep morphs and several kangaroo morphs hunting there though odds are good, you will never find their burrows as they hide underground at night. Of all the tribes though avoid the gnolls, they are highly territorial and enjoy dominating males above anything else. \"<i>");
+	outputText("Finally there's also a demonic camp somewhere which acts as a trade hub for people of questionable morality.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
 	cheatTime2(15);
 }
+public function campMichikoTalkRegionSwamp():void {
+	clearOutput();
+	outputText("What does she have on the local swamps?\n\n");
+	outputText("\"<i>The swamps of Mareth are old [name]. The dragon tribes used to reside there until they became extinct or so I think. No one has seen a dragon in years but if an artefact of the dragon does exist it’s likely hidden somewhere in the swamp away from the gaze of the lesser races. The spider morphs and driders are the local nuisances there and they are as random as a coin. ");
+	outputText("Either they attack you or they talk to you. I generally prefer to flee rather then find out.</i>\"\n\n");
+	doNext(campMichikoTalkRegion);
+	cheatTime2(15);
+}/*
 public function campMichikoTalkRegion():void {
 	clearOutput();
 	outputText("\n\n");

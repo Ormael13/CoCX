@@ -1182,12 +1182,14 @@ import flash.utils.getQualifiedClassName;
 			if (diff2 == -10) difference -= 0.9;
 			if (diff2 < -10) {
 				var minXP:Number = 1;
+				if (findPerk(PerkLib.ShieldWielder) >= 0) minXP *= 1.5;
 				if (findPerk(PerkLib.EnemyBossType) >= 0) minXP *= 2;
 				if (findPerk(PerkLib.EnemyGigantType) >= 0) minXP *= 3;
 				if (findPerk(PerkLib.EnemyGroupType) >= 0) minXP *= 5;
-				return minXP;
+				if (this.humanityBoostExpValue() > 0) minXP += this.humanityBoostExpValue();
+				return Math.round(minXP);
 			}
-			return Math.round(((this.additionalXP + this.baseXP()) * this.bonusXP() * difference * multiplier) + this.humanity());
+			return Math.round(((this.additionalXP + this.baseXP()) * this.bonusXP() * difference * multiplier) + this.humanityBoostExpValue());
 		}
 		protected function baseXP():Number
 		{
@@ -1211,17 +1213,30 @@ import flash.utils.getQualifiedClassName;
 		}
 		protected function humanity():Number
 		{
+			var baseHumBoost1:Number = 1;
+			if (game.player.level >= 6) baseHumBoost1 += 1;
+			if (game.player.level >= 24) baseHumBoost1 += 1;
+			if (game.player.level >= 42) baseHumBoost1 += 1;
+			if (game.player.level >= 72) baseHumBoost1 += 1;
+			if (game.player.level >= 102) baseHumBoost1 += 1;
+			if (game.player.level >= 141) baseHumBoost1 += 1;
+			if (game.player.level >= 180) baseHumBoost1 += 1;
+			//if (level >= 274) 
+			return baseHumBoost1;
+		}
+		public function humanityBoostExpValue():Number
+		{
 			var baseHumBoost:Number = 0;
-			if (game.player.humanScore() == game.player.humanMaxScore()) baseHumBoost += (game.player.level + 1) * 10;
-			if (game.player.humanScore() == game.player.humanMaxScore() - 1) baseHumBoost += (game.player.level + 1) * 9;
-			if (game.player.humanScore() == game.player.humanMaxScore() - 2) baseHumBoost += (game.player.level + 1) * 8;
-			if (game.player.humanScore() == game.player.humanMaxScore() - 3) baseHumBoost += (game.player.level + 1) * 7;
-			if (game.player.humanScore() == game.player.humanMaxScore() - 4) baseHumBoost += (game.player.level + 1) * 6;
-			if (game.player.humanScore() == game.player.humanMaxScore() - 5) baseHumBoost += (game.player.level + 1) * 5;
-			if (game.player.humanScore() == game.player.humanMaxScore() - 6) baseHumBoost += (game.player.level + 1) * 4;
-			if (game.player.humanScore() == game.player.humanMaxScore() - 7) baseHumBoost += (game.player.level + 1) * 3;
-			if (game.player.humanScore() == game.player.humanMaxScore() - 8) baseHumBoost += (game.player.level + 1) * 2;
-			if (game.player.humanScore() == game.player.humanMaxScore() - 9) baseHumBoost += (game.player.level + 1) * 1;
+			if (game.player.humanScore() == game.player.humanMaxScore()) baseHumBoost += this.humanity() * 10;
+			if (game.player.humanScore() == game.player.humanMaxScore() - 1) baseHumBoost += this.humanity() * 9;
+			if (game.player.humanScore() == game.player.humanMaxScore() - 2) baseHumBoost += this.humanity() * 8;
+			if (game.player.humanScore() == game.player.humanMaxScore() - 3) baseHumBoost += this.humanity() * 7;
+			if (game.player.humanScore() == game.player.humanMaxScore() - 4) baseHumBoost += this.humanity() * 6;
+			if (game.player.humanScore() == game.player.humanMaxScore() - 5) baseHumBoost += this.humanity() * 5;
+			if (game.player.humanScore() == game.player.humanMaxScore() - 6) baseHumBoost += this.humanity() * 4;
+			if (game.player.humanScore() == game.player.humanMaxScore() - 7) baseHumBoost += this.humanity() * 3;
+			if (game.player.humanScore() == game.player.humanMaxScore() - 8) baseHumBoost += this.humanity() * 2;
+			if (game.player.humanScore() == game.player.humanMaxScore() - 9) baseHumBoost += this.humanity() * 1;
 			return baseHumBoost;
 		}
 

@@ -17,7 +17,10 @@ import classes.Scenes.SceneLib;
 			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) return 900;
 			return 300;
 		}
-		public var maxStoneSupply:int = 900;
+		public function get maxStoneSupply():int {
+			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) return 900;
+			return 300;
+		}
 		
 		public function CabinProgress() {
 			
@@ -132,12 +135,17 @@ import classes.Scenes.SceneLib;
 		}
 
 		public function canGatherWoods():Boolean {
-			return (player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.weapon == weapons.L__AXE || player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2 || player.isInGoblinMech()) && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < maxWoodSupply;
+			return (player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.weapon == weapons.L__AXE || player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2 || player.isInGoblinMech()) && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < maxWoodSupply && player.statusEffectv1(StatusEffects.ResourceNode1) < 15;
 		}
 		//STAGE 4 - Gather woods, explore forest to encounter.
 		public function gatherWoods():void {
-			cleanupAfterCombat();
-			outputText("While exploring the forest, you survey the trees. The trees are at the right thickness. You could cut down the trees. \n\n");
+			clearOutput();
+			outputText("While exploring the forest, you survey the trees. The trees are at the right thickness. You could cut down the trees.\n\n");
+			if (!player.hasStatusEffect(StatusEffects.ResourceNode1)) player.createStatusEffect(StatusEffects.ResourceNode1, 0, 0, 0, 0);
+			if (player.statusEffectv1(StatusEffects.ResourceNode1) < 15) {
+				if (player.statusEffectv1(StatusEffects.ResourceNode1) == 14) outputText("You have found this type of logging area enough times to be able to find them in the future without trouble. ('Woodcutting' option has been unlocked in Places menu)\n\n");
+				player.addStatusValue(StatusEffects.ResourceNode1, 1, 1);
+			}
 			menu();
 			if (player.fatigue > player.maxFatigue() - 30) {
 				outputText("<b>You are too tired to consider cutting down the trees. Perhaps some rest will suffice?</b>");
@@ -157,15 +165,15 @@ import classes.Scenes.SceneLib;
 			if (player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2) 
 			{
 				if (player.weapon == weapons.RIPPER2) {
-					outputText("You are carrying a Ripper 2.0 with you.");
+					outputText("You are carrying a Ripper 2.0 with you.\n");
 					addButton(1, "Ripper 2.0", cutTreeMechTIMBER);
 				}
 				else if (player.weapon == weapons.RIPPER1) {
-					outputText("You are carrying a Ripper 1.0 with you.");
+					outputText("You are carrying a Ripper 1.0 with you.\n");
 					addButton(1, "Ripper 1.0", cutTreeMechTIMBER);
 				}
 				else {
-					outputText("You are carrying a Machined greatsword with you.");
+					outputText("You are carrying a Machined greatsword with you.\n");
 					addButton(1, "Mach.Greatsword", cutTreeMechTIMBER);
 				}
 			}
@@ -244,6 +252,49 @@ import classes.Scenes.SceneLib;
 				doNext(camp.returnToCampUseTwoHours);
 			}
 		}
+		
+		public function quarrySite():void {
+			clearOutput();
+			outputText("As you explore the mountain area you run into what appears to be a very good mineral formation.");
+			if (player.hasKeyItem("Old Pickaxe") < 0) outputText(" Next to it is an old pickaxe left by a native who likely met an unfortunate end.");
+			if (!player.hasStatusEffect(StatusEffects.ResourceNode1)) player.createStatusEffect(StatusEffects.ResourceNode1, 0, 0, 0, 0);
+			if (player.statusEffectv2(StatusEffects.ResourceNode1) < 5) {
+				if (player.statusEffectv2(StatusEffects.ResourceNode1) == 4) outputText("You have found this quarry enough times to be able to find it in the future without trouble. ('Quarry' option has been unlocked in Places menu)\n\n");
+				player.addStatusValue(StatusEffects.ResourceNode1, 2, 1);
+			}
+			menu();
+			if (player.hasKeyItem("Old Pickaxe") < 0) {
+				addButtonDisabled(0, "Mine", "You would need a pickaxe in order to retrieve the stone.");
+				addButton(1, "Pickaxe", quarrySitePickaxe);
+			}
+			else addButton(0, "Mine", quarrySiteMine);
+		}
+		private function quarrySitePickaxe():void {
+			outputText("\n\nYou pick up the old mining tool. This should prove useful when digging up gems or stone from the landscape.");
+			player.createKeyItem("Old Pickaxe", 0, 0, 0, 0);
+			doNext(quarrySite);
+		}
+		private function quarrySiteMine():void {
+			if (player.fatigue > player.maxFatigue() - 50) {
+				outputText("\n\n<b>You are too tired to consider mining the stones. Perhaps some rest will suffice?</b>");
+				doNext(camp.returnToCampUseOneHour);
+				return;
+			}
+			outputText("\n\nYou begin slamming your pickaxe against the stone, spending the better part of the next few hours mining. This done, you bring back your prize to camp. ");
+			incrementStoneSupply(13 + Math.floor(player.str / 7));
+			if (rand (10) == 0) {
+				var gemsMined:Number = 1 + rand(4);
+				outputText(" Along with the stone you managed to dig up " + gemsMined + " gems!");
+				player.gems += gemsMined;
+			}
+			flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] += (13 + Math.floor(player.str / 7));
+			fatigue(50, USEFATG_PHYSICAL);
+			doNext(camp.returnToCampUseTwoHours);
+		}
+		
+		private function findOre():void { //Not used, will be in 1.1
+			var ore:int = rand(3); //0 = copper, 1 = tin, 2 = iron
+		}
 
 		private function checkToolbox():void {
 			if (player.hasKeyItem("Carpenter's Toolbox") >= 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] == 4)
@@ -288,6 +339,16 @@ import classes.Scenes.SceneLib;
 			if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= maxWoodSupply) {
 				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = maxWoodSupply;
 				outputText(" Your wood capacity is full.")
+			}
+			outputText(")</b>");
+		}
+		
+		public function incrementStoneSupply(amount:int):void {
+			outputText("<b>(+" + amount + " stone!");
+			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += amount;
+			if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= maxStoneSupply) {
+				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = maxStoneSupply;
+				outputText(" Your stone capacity is full.")
 			}
 			outputText(")</b>");
 		}

@@ -29,6 +29,7 @@ package classes.Items
 		public const SANCTYN:Shield = new Shield ("SanctN", "Sanctuary", "Sanctuary", "a Sanctuary", 20, 1500, "The legendary shield");
 		public const SANCTYL:Sanctuary = new Sanctuary();
 		public const SANCTYD:DarkAegis = new DarkAegis();
+		public const Y_U_PAN:Shield = new Shield("Y.U.Pan", "Y.U.Panel", "Yogi Uh Panel", "an Yogi Uh Panel", 0, 200, "This strange shield helps Summoners and Golemancers store their pets inside an extra dimensional space when out of battle. The shield can then release them through a system of Calling Cards. Apparently it was a widely used tool for summoner battles back in the days which they called duels.");
 		
 		/*private static function mk(id:String,shortName:String,name:String,longName:String,effectId:Number,effectMagnitude:Number,value:Number,description:String,type:String,perk:String=""):Jewelry {
 			return new Shield(id,shortName,name,longName,effectId,effectMagnitude,value,description,type,perk);

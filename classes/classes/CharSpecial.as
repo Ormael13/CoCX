@@ -42,6 +42,19 @@ import classes.Items.*;
 			[ "Rope", customRope, false, "Despite outward appearances, you're actually something of a neuter, with shark-like teeth, an androgynous face, and a complete lack of genitalia." ],
 			[ "Sora", customSora, false, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic..." ],
 			
+			[ "With a bloodline history:", null, false, "" ],
+			[ "Grigori", customGrigori, true, "You are a normal villager if not for that dragon cock and the ability to use an ice dragon's breath. That damn ancestor of yours had to go and fuck some dragoness, didn't he?" ],
+			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],kitsune start
+			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],cow/mino start
+			//[ "Veseshe", customVeseshe, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic..." ],
+			[ "Teekna", customTeekna, true, "You were a pretty normal villager, the only oddity other people noticed was your dyed pink hair and yellow eyes. Your ancestor just couldn't keep it in his pants apparently. At least they left some goodies behind for you!" ],
+			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],raiju start
+			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],oni start
+			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],orc start
+			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],chimera start (Layla - based on FoE companion - female herm pc)
+			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],race 1 start
+			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],race 2 start
+			
 			[ "With pre-defined history:", null, false, "" ],
 			[ "Annetta", customAnnetta, true, "You're a rather well-endowed hermaphrodite that sports a thick, dog-knotted cock, an unused pussy, and a nice, stretchy butt-hole.  You've also got horns and demonic high-heels on your feet.  It makes you wonder why you would ever get chosen to be champion!" ],
 			[ "Ceveo", customCeveo, true, "As a wandering mage you had found your way into no small amount of trouble in the search for knowledge." ],
@@ -109,8 +122,8 @@ import classes.Items.*;
 			player.setWeapon(weapons.S_GAUNT);
 			//Perks: Fighter and Lotsa Jizz"	Annetta
 			if (!player.hasPerk(PerkLib.PastLifeFighter)) player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
-			player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
-			player.cumMultiplier = 20;
+			player.createPerk(PerkLib.MessyOrgasms, 1.5, 0, 0, 0);
+			player.cumMultiplier = 40;
 		}
 		
 		private function customAria():void {
@@ -216,7 +229,7 @@ import classes.Items.*;
 			player.setWeapon(weapons.W_STAFF);
 	
 			player.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
-			player.createPerk(PerkLib.Smart, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Smart, 1, 0, 0, 0);
 			player.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Mage, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeHealer)) player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);
@@ -448,7 +461,7 @@ import classes.Items.*;
 			//- gift: fast
 			player.spe += 5;
 			player.tone += 10;
-			player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
+			player.createPerk(PerkLib.Fast, 1, 0, 0, 0);
 			//- history: religion 
 			if (!player.hasPerk(PerkLib.PastLifeReligious)) player.createPerk(PerkLib.HistoryReligious,0,0,0,0);
 			//(and if possible)
@@ -548,6 +561,7 @@ import classes.Items.*;
 			player.tou = 15;
 			player.spe = 18;
 			player.inte = 17;
+			player.wis = 17;
 			player.sens = 15;
 			player.lib = 15;
 			player.cor = 0;
@@ -622,12 +636,13 @@ import classes.Items.*;
 			player.femininity = 30;
 			player.createCock();
 			player.balls = 4;
-			player.cumMultiplier = 4;
+			player.cumMultiplier = 8;
 			player.ballSize = 2;
 			player.str = 18;
 			player.tou = 17;
 			player.spe = 15;
 			player.inte = 15;
+			player.wis = 15;
 			player.sens = 15;
 			player.lib = 15;
 			player.cor = 0;
@@ -664,7 +679,7 @@ import classes.Items.*;
 			player.tongue.type = Tongue.DRACONIC;
 			//gel plate armor, warhammer, 88 body tone, 1 breast row, flat manly breasts, 0.2 inch nipples, 1 on each breast, draconic tongue, short hair-blue, light skin."	Lukaz
 			if (!player.hasPerk(PerkLib.PastLifeFighter)) player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
-			player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
+			player.createPerk(PerkLib.MessyOrgasms, 1.5, 0, 0, 0);
 		}
 		
 		private function customMara():void {
@@ -727,7 +742,7 @@ import classes.Items.*;
 			player.ears.type = Ears.CAT;
 			player.faceType = Face.CAT;
 			player.femininity = 100;
-			player.fertility = 85;
+			player.fertility = 100;
 			player.hairColor = "blonde";
 			player.hairLength = 24;
 			player.hips.type = 6;
@@ -737,7 +752,7 @@ import classes.Items.*;
 			player.createPerk(PerkLib.Agility, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Evade, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Runner, 0, 0, 0, 0);
-			player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
+			player.createPerk(PerkLib.Fast, 1, 0, 0, 0);
 			player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
 			player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeScholar)) player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
@@ -811,8 +826,8 @@ import classes.Items.*;
 			player.setArmor(armors.W_ROBES);
 			//Herm, lots of jizz.
 			player.femininity -= 2;
-			player.cumMultiplier = 5.5;
-			player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
+			player.cumMultiplier = 11;
+			player.createPerk(PerkLib.MessyOrgasms, 1.5, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeWhore)) player.createPerk(PerkLib.HistoryWhore,0,0,0,0);
 		}
 		
@@ -858,7 +873,7 @@ import classes.Items.*;
 	
 			player.setWeapon(weapons.W_STAFF);
 			//Gift Perk- Smarts
-			player.createPerk(PerkLib.Smart,0,0,0,0);
+			player.createPerk(PerkLib.Smart,1,0,0,0);
 			//History- Schooling
 			if (!player.hasPerk(PerkLib.PastLifeScholar)) player.createPerk(PerkLib.HistoryScholar,0,0,0,0);
 			player.itemSlot1.setItemAndQty(consumables.W__BOOK,1);
@@ -880,7 +895,7 @@ import classes.Items.*;
 			outputText("There's been something special about you since day one, whether it's your numerous sexual endowments or your supernatural abilities.  You're a natural pick for champion.");
 			//Character Creation	"Herm same number and types of cocks from email sent earlier. 
 			//Special abilities: Fire breath, fox fire?
-			player.createPerk(PerkLib.DragonFireBreath, 0, 0, 0, 0);
+			player.createPerk(PerkLib.DragonFireBreath,0,0,0,0);
 			player.createPerk(PerkLib.DragonIceBreath,0,0,0,0);
 			//equipment: Large claymore, and platemail
 			//-Chainmail armor
@@ -973,7 +988,7 @@ import classes.Items.*;
 		private function customNixi():void {
 			//-Perks
 			//fertility AND messy orgasm (hope that's not pushing it)
-			player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
+			player.createPerk(PerkLib.MessyOrgasms, 1.5, 0, 0, 0);
 			player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
 			//fighting history
 			if (!player.hasPerk(PerkLib.PastLifeFighter)) player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
@@ -1004,7 +1019,7 @@ import classes.Items.*;
 			player.breastRows[0].breastRating = 5;
 			player.nippleLength = 0.5;
 			player.clitLength = .5;
-			player.fertility = 30;
+			player.fertility = 45;
 			player.hips.type = 6;
 			player.butt.type = 6;
 			player.str = 15;
@@ -1033,7 +1048,7 @@ import classes.Items.*;
 			//shoulder length silver hair
 	
 			player.balls = 0;
-			player.cumMultiplier = 1;
+			player.cumMultiplier = 2;
 			player.ballSize = 0;
 			player.hoursSinceCum = 0;
 			player.clitLength = 0;
@@ -1070,7 +1085,7 @@ import classes.Items.*;
 			player.spe += 20;
 			outputText("You're more of a scout than a fighter, but you still feel confident you can handle your responsibilities as champion.  After all, what's to worry about when you can outrun everything you encounter?  You have olive skin, deep red hair, and a demonic tail and wings to blend in with the locals.");
 			//Perk is speed, she was a scout, and it'd be neat (if possible) to give her something akin to the Runner perk. She might not start out very strong or tough, but at least she's fast.
-			player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
+			player.createPerk(PerkLib.Fast, 1, 0, 0, 0);
 			player.createPerk(PerkLib.Runner, 0, 0, 0, 0);
 			//In the human world, Prismere began as a scout, helping patrol areas with portals to make sure demonspawn and corruption didn't reach the human homeland. She's gotten herself into a few tight spots because of it, but she's hard to keep pinned down. She has a fiance back in her village whom she fully intends to get back to, so her libido isn't especially high. 
 			//As of the time the PC takes her on, she has some signs of demonic taint, so Corruption might start at 5 to 10 points."	"Breasts at E, height at 5'0, a curvy build with a more narrow waist and substantial hips and butt. Skin is olive, like a mocha, hair is long and wildly wavy, a deep red, and eyes are a stormy blue. Muscles are barely visible; what muscle she has is the lean build of a runner, not a fighter. Nipples aren't especially long, but more soft. 
@@ -1158,9 +1173,9 @@ import classes.Items.*;
 			//Hair: very long white
 			//Gift: Lotz of Jizz
 			//History: Schooling
-			player.cumMultiplier = 5.5;
+			player.cumMultiplier = 11;
 	
-			player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
+			player.createPerk(PerkLib.MessyOrgasms, 1.5, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeScholar)) player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
 			//Apperance: Cat Ears, Large Bat Like Wings, 3 Rows of breasts (C cub, 0,2 nipples)
 			player.ears.type = Ears.CAT;
@@ -1229,6 +1244,115 @@ import classes.Items.*;
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
 		}
 		
+		private function customGrigori():void {
+			//Character Creation	Male	A human with dragon bloodline	Grigori
+			player.createPerk(PerkLib.DragonIceBreath,0,0,0,0);
+			player.createPerk(PerkLib.BloodlineDragon,0,0,0,0);
+			player.balls = 2;
+			player.ballSize = 1;
+			player.clitLength = 0;
+			player.createCock();
+			player.cocks[0].cockLength = 8;
+			player.cocks[0].cockThickness = 1.5;
+			player.cocks[0].cockType = CockTypesEnum.DRAGON;
+			player.cocks[0].knotMultiplier = 1.3;
+			player.createBreastRow();
+			player.str = 20;
+			player.tou = 30;
+			player.spe = 40;
+			player.gems += 300;
+			player.tone = 60;
+			player.femininity = 30;
+			player.createPerk(PerkLib.BigCock, 1.25, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PastLifeFighter)) player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
+			if (!player.hasPerk(PerkLib.PastLifeFortune)) player.createPerk(PerkLib.HistoryFortune,0,0,0,0);
+			outputText("You are a normal villager if not for that dragon cock and the ability to use an ice dragon's breath. That damn ancestor of yours had to go and fuck some dragoness, didn't he?");
+		}
+		
+		private function customSora2():void {
+			//Character Creation	Female,virgin	A human with kitsune bloodline	Sora
+			player.createPerk(PerkLib.BloodlineKitsune,0,0,0,0);
+			if (player.hasVagina()) player.vaginas[0].virgin = true;
+			if (!player.hasPerk(PerkLib.PastLifeAlchemist)) player.createPerk(PerkLib.HistoryAlchemist,0,0,0,0);
+			player.inte = 30;
+			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
+		}
+		
+		private function customSora3():void {
+			//Character Creation	Female,virgin	A human with cow/mintaur bloodline	Sora
+			player.createPerk(PerkLib.BloodlineMinotaur,0,0,0,0);
+			if (player.hasVagina()) player.vaginas[0].virgin = true;
+			if (!player.hasPerk(PerkLib.PastLifeAlchemist)) player.createPerk(PerkLib.HistoryAlchemist,0,0,0,0);
+			player.inte = 30;
+			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
+		}
+		
+		private function customVeseshe():void {
+			//Character Creation	Female	A human with elf bloodline	Veseshe
+			player.createPerk(PerkLib.BloodlineElf,0,0,0,0);
+			player.createBreastRow();
+			player.breastRows[0].breastRating = 2;
+			player.balls = 2;
+			player.ballSize = 1;
+			player.createVagina();
+			player.vaginas[0].virgin = false;
+			player.createCock();
+			player.cocks[0].cockLength = 8;
+			player.cocks[0].cockThickness = 1.5;
+			player.cocks[0].cockType = CockTypesEnum.HUMAN;
+			player.butt.type = 9;
+			player.hips.type = 6;
+			player.createPerk(PerkLib.WetPussy, 2, 0, 0, 0);
+			player.createPerk(PerkLib.BigCock, 1.25, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PastLifeSlut)) player.createPerk(PerkLib.HistorySlut,0,0,0,0);
+			if (!player.hasPerk(PerkLib.PastLifeWhore)) player.createPerk(PerkLib.HistoryScout,0,0,0,0);
+			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
+		}
+		
+		private function customTeekna():void {
+			//Character Creation	Female,virgin	A human with goblin bloodline	Teekna
+			player.createPerk(PerkLib.BloodlineGoblin,0,0,0,0);
+			player.createBreastRow();
+			player.breastRows[0].breastRating = 4;
+			player.butt.type = 9;
+			player.hips.type = 6;
+			player.createVagina();
+			player.vaginas[0].virgin = true;
+			player.inte = 40;
+			player.wis = 40;
+			player.gems += 250;
+			player.tallness = 45;
+			player.tone = 30;
+			player.femininity = 70;
+			player.hairColor = "pink";
+			player.eyes.colour = "yellow";
+			player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PastLifeScholar)) player.createPerk(PerkLib.HistoryScholar,0,0,0,0);
+			if (!player.hasPerk(PerkLib.PastLifeAlchemist)) player.createPerk(PerkLib.HistoryAlchemist,0,0,0,0);
+			player.createKeyItem("Mechanic's Wrench", 0, 0, 0, 0);
+			player.createKeyItem("Engineer's Toolbox", 0, 0, 0, 0);
+			player.createKeyItem("Toolbelt", 0, 0, 0, 0);
+			player.createKeyItem("Blueprint - Energy Core", 0, 0, 0, 0);
+			player.createKeyItem("Blueprint - Mechanism", 0, 0, 0, 0);
+			if(!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity,0,0,0,0);
+			else player.addStatusValue(StatusEffects.BonusVCapacity,1, 5 + rand(10));
+			outputText("You were a pretty normal villager, the only oddity other people noticed was your dyed pink hair and yellow eyes. Your ancestor just couldn't keep it in his pants apparently. At least they left some goodies behind for you!");
+		}
+		
+		private function customSora6():void {
+			//Character Creation	Female,virgin	A human with raiju bloodline	Sora
+			if(player.hasVagina()) player.vaginas[0].virgin = true;
+			player.inte = 30;
+			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
+		}
+		
+		private function customSora7():void {
+			//Character Creation	Female,virgin	A human with oni bloodline	Sora(tone at 100, fighter past story + second for fight too? oni beard necklace?)
+			if(player.hasVagina()) player.vaginas[0].virgin = true;
+			player.inte = 30;
+			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
+		}
+		
 		private function customTestChar():void {
 			player.XP = 500000;
 			player.level = 20;
@@ -1285,7 +1409,6 @@ import classes.Items.*;
 			player.hairType = 4;
 			//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
 			player.createStatusEffect(StatusEffects.Kelt,100,0,0,0);
-			player.createKeyItem("Bow", 0, 0, 0, 0);
 			
 			player.createKeyItem("Zetaz's Map", 0, 0, 0, 0);
 			
@@ -1331,8 +1454,9 @@ import classes.Items.*;
 			player.gems += 30000;
 			outputText("You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal.");
 			
-			player.itemSlot4.unlocked = true;
-			player.itemSlot5.unlocked = true;
+			player.itemSlot6.unlocked = true;
+			player.itemSlot7.unlocked = true;
+			player.itemSlot8.unlocked = true;
 			player.itemSlot1.setItemAndQty(consumables.P_LBOVA, 5);
 			player.itemSlot2.setItemAndQty(consumables.L_PNKEG, 1);
 			player.itemSlot3.setItemAndQty(consumables.OVIELIX, 1);
@@ -1405,7 +1529,7 @@ import classes.Items.*;
 			player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_DROOLING;
 			player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_LEVEL_CLOWN_CAR;
 			player.vaginas[0].virgin = false;
-			player.fertility = 50;
+			player.fertility = 65;
 			//Butt: Just as loose
 			player.ass.analLooseness = 5;
 			//"Skin: Tanned
@@ -1448,7 +1572,7 @@ import classes.Items.*;
 			player.createVagina();
 			player.breastRows[0].breastRating = 3;
 			player.clitLength = .5;
-			player.fertility = 10;
+			player.fertility = 25;
 			player.hips.type = 6;
 			player.butt.type = 6;
 			player.str = 15;
@@ -1536,10 +1660,10 @@ import classes.Items.*;
 			player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
 			player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_WET;
 			player.createPerk(PerkLib.WetPussy,2,0,0,0);
-			player.createPerk(PerkLib.Tough, 0.25, 0, 0, 0);
-			player.createPerk(PerkLib.Strong, 0.25, 0, 0, 0);
-			player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
-			player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0);
+			player.createPerk(PerkLib.Tough, 1, 0, 0, 0);
+			player.createPerk(PerkLib.Strong, 1, 0, 0, 0);
+			player.createPerk(PerkLib.Fast, 1, 0, 0, 0);
+			player.createPerk(PerkLib.Smart, 1, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeScholar)) player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
 			player.createPerk(PerkLib.StrongBack,0,0,0,0);
 			player.createPerk(PerkLib.StrongBack2,0,0,0,0);
@@ -1704,9 +1828,9 @@ import classes.Items.*;
 			if (player.findPerk(PerkLib.Medicine) < 0) player.createPerk(PerkLib.Medicine, 0, 0, 0, 0); // able to treat wounds and poisoning alike
 			if (player.findPerk(PerkLib.AscensionMoralShifter) < 0) player.createPerk(PerkLib.AscensionMoralShifter, 5, 0, 0, 0); // your kitsune's trickster nature makes you susceptable to corruption
 			if (player.findPerk(PerkLib.AscensionTolerance) < 0) player.createPerk(PerkLib.AscensionTolerance, 10, 0, 0, 0); // but in the same time your enlightment keeps you from really turning to demon, so corruption level does not really affect you much
-			if (player.findPerk(PerkLib.Fast) < 0) player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0); // gaining speed is pain in ass... this one is not for history flavor
-			if (player.findPerk(PerkLib.Smart) < 0) player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0); // int is easy to get, just for history flavor
-			if (player.findPerk(PerkLib.Lusty) < 0) player.createPerk(PerkLib.Lusty, 0.25, 0, 0, 0); // have a lust problem
+			if (player.findPerk(PerkLib.Fast) < 0) player.createPerk(PerkLib.Fast, 1, 0, 0, 0); // gaining speed is pain in ass... this one is not for history flavor
+			if (player.findPerk(PerkLib.Smart) < 0) player.createPerk(PerkLib.Smart, 1, 0, 0, 0); // int is easy to get, just for history flavor
+			if (player.findPerk(PerkLib.Lusty) < 0) player.createPerk(PerkLib.Lusty, 1, 0, 0, 0); // have a lust problem
 			if (player.findPerk(PerkLib.HotBlooded) < 0) player.createPerk(PerkLib.HotBlooded, 20, 0, 0, 0); // even with your willpower and religious training you sometimes struggling to restrain your impulse
 			if (player.findPerk(PerkLib.Pervert) < 0) player.createPerk(PerkLib.Pervert, 0.25, 0, 0, 0); // you always ready for something VERY lewd
 			if (player.findPerk(PerkLib.Masochist) < 0) player.createPerk(PerkLib.Masochist, 0, 0, 0, 0); // with your knowlege of healing and innatural body it is easy for you to enjoy things which would be really painful for others
@@ -1974,7 +2098,7 @@ import classes.Items.*;
 			player.setArmor(armors.M_ROBES);
 			
 			// have some perks from past
-			player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0);
+			player.createPerk(PerkLib.Smart, 1, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeScholar)) player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeAlchemist)) player.createPerk(PerkLib.HistoryAlchemist, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
@@ -1997,4 +2121,4 @@ import classes.Items.*;
 		
 	}
 
-}
+}

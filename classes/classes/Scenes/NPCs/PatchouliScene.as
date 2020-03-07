@@ -71,6 +71,10 @@ public class PatchouliScene extends NPCAwareContent {
 			} else {
 				outputText(", you could use a guide across Mareth.");
 			}
+			if (flags[kFLAGS.CODEX_ENTRY_CHESHIRE_CAT] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_CHESHIRE_CAT] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Cheshire Cat!</b>");
+			}
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = MET;
 			menu();
 			addButton(0, "Accept", patchouliExploreLuckyWheel).hint("Let him lead you to new places.");

@@ -194,6 +194,45 @@ use namespace CoC;
 			else
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
 		*/	outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
+				outputText("<b>TelAdre Tripxi Guns general timer:</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxi) + "\n");
+				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) {
+					outputText("<b>TelAdre Tripxi Guns 1 (v1):</b> " + player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) + " (Desert Eagle)\n");
+					outputText("<b>TelAdre Tripxi Guns 1 (v2):</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) + " (Dart pistol)\n");
+					outputText("<b>TelAdre Tripxi Guns 1 (v3):</b> " + player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) + "\n");
+					outputText("<b>TelAdre Tripxi Guns 1 (v4):</b> " + player.statusEffectv4(StatusEffects.TelAdreTripxiGuns1) + "\n");
+				}
+				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) {
+					outputText("<b>TelAdre Tripxi Guns 2 (v1):</b> " + player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) + " (M1 Cerberus)\n");
+					outputText("<b>TelAdre Tripxi Guns 2 (v2):</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) + " (Twin Dart pistol)\n");
+					outputText("<b>TelAdre Tripxi Guns 2 (v3):</b> " + player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) + "\n");
+					outputText("<b>TelAdre Tripxi Guns 2 (v4):</b> " + player.statusEffectv4(StatusEffects.TelAdreTripxiGuns2) + "\n");
+				}
+				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) {
+					outputText("<b>TelAdre Tripxi Guns 3 (v1):</b> " + player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) + " (Tripxi Fatbilly)\n");
+					outputText("<b>TelAdre Tripxi Guns 3 (v2):</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) + " (Harpoon Gun)\n");
+					outputText("<b>TelAdre Tripxi Guns 3 (v3):</b> " + player.statusEffectv3(StatusEffects.TelAdreTripxiGuns3) + "\n");
+					outputText("<b>TelAdre Tripxi Guns 3 (v4):</b> " + player.statusEffectv4(StatusEffects.TelAdreTripxiGuns3) + "\n");
+				}
+				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns4)) {
+					outputText("<b>TelAdre Tripxi Guns 4 (v1):</b> " + player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) + " (Snippler)\n");
+					outputText("<b>TelAdre Tripxi Guns 4 (v2):</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxiGuns4) + "\n");
+					outputText("<b>TelAdre Tripxi Guns 4 (v3):</b> " + player.statusEffectv3(StatusEffects.TelAdreTripxiGuns4) + "\n");
+					outputText("<b>TelAdre Tripxi Guns 4 (v4):</b> " + player.statusEffectv4(StatusEffects.TelAdreTripxiGuns4) + "\n");
+				}
+				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) {
+					outputText("<b>TelAdre Tripxi Guns 5 (v1):</b> " + player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) + " (Touhouna M3)\n");
+					outputText("<b>TelAdre Tripxi Guns 5 (v2):</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) + " (Derpnade Launcher)\n");
+					outputText("<b>TelAdre Tripxi Guns 5 (v3):</b> " + player.statusEffectv3(StatusEffects.TelAdreTripxiGuns5) + "\n");
+					outputText("<b>TelAdre Tripxi Guns 5 (v4):</b> " + player.statusEffectv4(StatusEffects.TelAdreTripxiGuns5) + "\n");
+				}
+				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6)) {
+					outputText("<b>TelAdre Tripxi Guns 6 (v1):</b> " + player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) + " (Twin Grakaturd)\n");
+					outputText("<b>TelAdre Tripxi Guns 6 (v2):</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxiGuns6) + "\n");
+					outputText("<b>TelAdre Tripxi Guns 6 (v3):</b> " + player.statusEffectv3(StatusEffects.TelAdreTripxiGuns6) + "\n");
+					outputText("<b>TelAdre Tripxi Guns 6 (v4):</b> " + player.statusEffectv4(StatusEffects.TelAdreTripxiGuns6) + "\n");
+				}
+			}
 			menu();
 			if (player.hasPerk(PerkLib.EnergyDependent)) addButtonDisabled(0, "Cultivate", "You're unable to recover soulforce by cultivating.");
 			else addButton(0, "Cultivate", SoulforceRegeneration).hint("Spend some time on restoring some of the used soulforce.");
@@ -204,7 +243,7 @@ use namespace CoC;
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 			if (player.findPerk(PerkLib.Metamorph) >= 0) addButton(6, "Metamorf", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");//używanie metamorfowania z użyciem soulforce
 			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
-			//addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
+			addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul king to soul ancestor w momencie robienia release version
 		public function SoulforceCheats():void {
@@ -224,22 +263,22 @@ use namespace CoC;
 			//if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
 			if (player.hasPerk(PerkLib.Metamorph)) addButton(9, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Metamorph all options unlock.");
 			//addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
-			//addButton(10, "WhiteIceS.", AddProtoplasm).hint("White Ice Shard");
-			addButton(10, "M.S.B.", AddMaxBackpack).hint("Max sized Backpack!");
+			if ((player.hasPerk(PerkLib.TitanGripEx) && !player.hasPerk(PerkLib.GigantGripEx)) || player.hasPerk(PerkLib.LegendaryGolemMaker)) addButton(10, "PerkFixes", AddMaxBackpack).hint("Fix testers saves perks for Giant's Grip (Ex) and above Epic Golem maker");
 			//addButton(10, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
 			addButton(11, "PerkGalore1", PerkGalore1);
 			addButton(12, "PerkGalore2", PerkGalore2);
 			addButton(13, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
-		public function AddProtoplasm():void {
-			outputText("\n\n<b>(Gained 1 White Ice Shard!)</b>\n\n");
-			inventory.takeItem(consumables.WHITEIS, SoulforceCheats);
-		}
 		public function AddMaxBackpack():void {
-			outputText("\n\n<b>(Max sized Backpack! Go! Go! Go!)</b>\n\n");
-			if (player.hasKeyItem("Backpack") >= 0) player.removeKeyItem("Backpack");
-			player.createKeyItem("Backpack", 12, 0, 0, 0);
+			if (player.hasPerk(PerkLib.TitanGripEx)) {
+				player.removePerk(PerkLib.TitanGripEx);
+				player.createPerk(PerkLib.GigantGripEx, 0, 0, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.LegendaryGolemMaker)) {
+				player.removePerk(PerkLib.LegendaryGolemMaker);
+				player.createPerk(PerkLib.EpicGolemMaker2ndCircle, 0, 0, 0, 0);
+			}
 			doNext(SoulforceCheats);
 		}
 public function FightAria():void {
@@ -1507,46 +1546,79 @@ public function FightHellfireSnail():void {
 			addButton(13, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
 			addButton(14, "Back", SoulforceCheats);
 		}
-		public function NonEquipmentMenu():void {
+		public function NonEquipmentMenu(page:int = 1):void {
 			menu();
-			addButton(0, "Fox Jewel", AddFoxJewel).hint("Add 1 Fox Jewel.");
-			addButton(1, "F.Fish", AddFreshFish).hint("Add 1 Fresh Fish.");
-			addButton(2, "BehemothCum", AddBehemothCum).hint("Add 1 bottle of Behemoth Cum.");
-			addButton(3, "Naga Oils", AddGorgonOil).hint("Add 1 vial of Gorgon, Vouivre and Couatl Oil.");
-			addButton(4, "SkybornSeed", AddSkybornSeed).hint("Add 1 Skyborn Seed.");
-			//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
-			addButton(5, "Enigmanium", AddEnigmanium).hint("Add 1 vial of Enigmanium.");
-			addButton(6, "VT RV WF", AddVoltageTopaz).hint("Add 1 Voltage Topaz, 1 vial of Red Blood (Bat TF) and 1 Wonder Fruit.");
-			addButton(7, "DSJ HS FSS", AddDarkSlimeJelly).hint("Add 1 Dark Slime Jelly, 1 Hydra Scale and 1 Fire Snail Saliva.");
-			//addButton(7, "Skelp", AddSkelp).hint("Add 1 Skelp (WIP Melkie TF).");
-			//addButton(7, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
-			//addButton(8, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
-			//addButton(9, "A.R.CON", AddArcaneRegenConcotion).hint("Add 1 Arcane Regen Concotion.");
-			addButton(8, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
-			addButton(9, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
-			addButton(10, "White B.", AddWhiteBook).hint("Add 1 White Book.");
-			addButton(11, "Black B.", AddBlackBook).hint("Add 1 Black Book.");
-			addButton(12, "Grey B.", AddGreyBook).hint("Add 1 Grey Book.");
-			if (player.findPerk(PerkLib.ElementalConjurerMindAndBodySacrifice) < 0) addButton(13, "E.Pearls", AddThePearls).hint("Add all three Elemental Pearls.");
-			addButton(14, "Back", SoulforceCheats);
+			if (page == 1) {
+				addButton(0, "Fox Jewel", AddFoxJewel).hint("Add 1 Fox Jewel.");
+				//addButton(1, "", ).hint("Add 1 .");
+				//addButton(2, "", ).hint("Add 1 .");
+				//addButton(3, "", ).hint("Add 1 .");
+				//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
+				addButton(5, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
+				addButton(6, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
+				addButton(7, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
+				addButton(8, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
+				addButton(9, "A.R.CON", AddArcaneRegenConcotion).hint("Add 1 Arcane Regen Concotion.");
+				addButton(10, "White B.", AddWhiteBook).hint("Add 1 White Book.");
+				addButton(11, "Black B.", AddBlackBook).hint("Add 1 Black Book.");
+				addButton(12, "Grey B.", AddGreyBook).hint("Add 1 Grey Book.");
+				addButton(13, "-2-", NonEquipmentMenu, page + 1);
+				addButton(14, "Back", SoulforceCheats);
+			}
+			if (page == 2) {
+				addButton(0, "SkybornSeed", AddSkybornSeed).hint("Add 1 Skyborn Seed.");
+				addButton(1, "F.Fish", AddFreshFish).hint("Add 1 Fresh Fish.");
+				addButton(2, "BehemothCum", AddBehemothCum).hint("Add 1 bottle of Behemoth Cum.");
+				//addButton(3, "", ).hint("Add 1 .");
+				addButton(4, "WhiteIceS.", AddWhiteIceShard).hint("White Ice Shard");
+				addButton(5, "Enigmanium", AddEnigmanium).hint("Add 1 vial of Enigmanium.");
+				addButton(6, "Skelp", AddSkelp).hint("Add 1 Skelp (WIP Melkie TF).");
+				addButton(7, "Naga Oils", AddGorgonOil).hint("Add 1 vial of Gorgon, Vouivre and Couatl Oil.");
+				addButton(8, "VT RV WF", AddVoltageTopaz).hint("Add 1 Voltage Topaz, 1 vial of Red Blood (Bat TF) and 1 Wonder Fruit.");
+				addButton(9, "DSJ HS FSS", AddDarkSlimeJelly).hint("Add 1 Dark Slime Jelly, 1 Hydra Scale and 1 Fire Snail Saliva.");
+				//addButton(10, "", ).hint("Add 1 .");
+				//addButton(11, "", ).hint("Add 1 .");
+				if (player.findPerk(PerkLib.ElementalConjurerMindAndBodySacrifice) < 0) addButton(12, "E.Pearls", AddThePearls).hint("Add all three Elemental Pearls.");
+				addButton(13, "-1-", NonEquipmentMenu, page - 1);
+				addButton(14, "Back", SoulforceCheats);
+			}
 		}
-		public function MaterialMenu():void {
+		public function MaterialMenu(page:int = 1):void {
 			menu();
-			addButton(0, "Wood", AddWood).hint("Add 100 Wood (game not check for limits so not go overboard with using this cheat).");
-			addButton(1, "Nails", AddNail).hint("Add 50 Nails (game not check for limits so not go overboard with using this cheat).");
-			addButton(2, "Stone", AddStone).hint("Add 100 Stone (game not check for limits so not go overboard with using this cheat).");
-			addButton(3, "SpiderSilk", AddSpiderSilk).hint("Add 1 Spider Silk.");
-			addButton(4, "Ebonbloom", AddEbonbloom).hint("Add 1 Ebonbloom.");
-			addButton(5, "WorldTreeB.", AddWorldTreeBranch).hint("Add 1 World Tree Branch.");
-			addButton(6, "ChitinShard", AddBeeChitin).hint("Add 1 Chitin shard.");
-			addButton(7, "GreenGel", AddGreenGel).hint("Add 1 Green Gel.");
-			addButton(8, "DragonScale", AddDragonscale).hint("Add 1 Dragonscale.");
-			addButton(9, "F.Imp S.", AddFeralImpSkull).hint("Add 1 Feral Imp Skull.");
-			addButton(10, "PolMidScr", AddPolarMidnightScroll).hint("Add 1 Polar Midnight scroll.");
-			addButton(11, "MetalPieces", AddMetalPieces).hint("Add 50 Metal Pieces (game not check for limits so not go overboard with using this cheat).");
-			addButton(12, "Mechanism", AddMechanism).hint("Add 1 Mechanism.");
-			addButton(13, "EnergyCore", AddEnergyCore).hint("Add 1 Energy Core.");
-			addButton(14, "Back", SoulforceCheats);
+			if (page == 1) {
+				addButton(0, "Wood", AddWood).hint("Add 100 Wood (game not check for limits so not go overboard with using this cheat).");
+				addButton(1, "Nails", AddNail).hint("Add 50 Nails (game not check for limits so not go overboard with using this cheat).");
+				addButton(2, "Stone", AddStone).hint("Add 100 Stone (game not check for limits so not go overboard with using this cheat).");
+				addButton(3, "MetalPieces", AddMetalPieces).hint("Add 50 Metal Pieces (game not check for limits so not go overboard with using this cheat).");
+				addButton(4, "SpiderSilk", AddSpiderSilk).hint("Add 1 Spider Silk.");
+				addButton(5, "Ebonbloom", AddEbonbloom).hint("Add 1 Ebonbloom.");
+				addButton(6, "WorldTreeB.", AddWorldTreeBranch).hint("Add 1 World Tree Branch.");
+				addButton(7, "ChitinShard", AddBeeChitin).hint("Add 1 Chitin shard.");
+				addButton(8, "GreenGel", AddGreenGel).hint("Add 1 Green Gel.");
+				addButton(9, "DragonScale", AddDragonscale).hint("Add 1 Dragonscale.");
+				//addButton(10, "", ).hint("Add 1 .");
+				//addButton(11, "", ).hint("Add 1 .");
+				//addButton(12, "", ).hint("Add 1 .");
+				addButton(13, "-2-", MaterialMenu, page + 1);
+				addButton(14, "Back", SoulforceCheats);
+			}
+			if (page == 2) {
+				//addButton(0, "", ).hint("Add 1 .");
+				//addButton(1, "", ).hint("Add 1 .");
+				//addButton(2, "", ).hint("Add 1 .");
+				//addButton(3, "", ).hint("Add 1 .");
+				//addButton(4, "", ).hint("Add 1 .");
+				addButton(5, "Mechanism", AddMechanism).hint("Add 1 Mechanism.");
+				//addButton(6, "", ).hint("Add 1 .");
+				//addButton(7, "", ).hint("Add 1 .");
+				//addButton(8, "", ).hint("Add 1 .");
+				addButton(9, "F.Imp S.", AddFeralImpSkull).hint("Add 1 Feral Imp Skull.");
+				addButton(10, "EnergyCore", AddEnergyCore).hint("Add 1 Energy Core.");
+				addButton(11, "MetShoTom", AddMeteorShowerTome).hint("Add 1 Meteor Shower tome.");
+				addButton(12, "PolMidScr", AddPolarMidnightScroll).hint("Add 1 Polar Midnight scroll.");
+				addButton(13, "-1-", MaterialMenu, page - 1);
+				addButton(14, "Back", SoulforceCheats);
+			}
 		}
 		public function EnemiesMenu(page:int = 1):void {
 			menu();
@@ -1588,49 +1660,53 @@ public function FightHellfireSnail():void {
 		
 		public function AddEnergyCore():void {
 			outputText("\n\n<b>(Gained 1 Energy Core!)</b>\n\n");
-			inventory.takeItem(useables.ENECORE, MaterialMenu);
+			inventory.takeItem(useables.ENECORE, curry(MaterialMenu, 2));
 		}
 		public function AddMechanism():void {
 			outputText("\n\n<b>(Gained 1 Mechanism!)</b>\n\n");
-			inventory.takeItem(useables.MECHANI, MaterialMenu);
+			inventory.takeItem(useables.MECHANI, curry(MaterialMenu, 2));
 		}
 		public function AddMetalPieces():void {
 			outputText("\n\n<b>(Gained 50 Metal Pieces!)</b>\n\n");
 			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += 50;
 			statScreenRefresh();
-			MaterialMenu();
+			curry(MaterialMenu, 1);
 		}
 		public function AddPolarMidnightScroll():void {
 			outputText("\n\n<b>(Gained 1 Polar Midnight scroll!)</b>\n\n");
-			inventory.takeItem(consumables.POL_MID, MaterialMenu);
+			inventory.takeItem(consumables.POL_MID, curry(MaterialMenu, 2));
+		}
+		public function AddMeteorShowerTome():void {
+			outputText("\n\n<b>(Gained 1 Meteor Shower tome!)</b>\n\n");
+			inventory.takeItem(consumables.MET_SHO, curry(MaterialMenu, 2));
 		}
 		public function AddFeralImpSkull():void {
 			outputText("\n\n<b>(Gained 1 Feral Imp Skull!)</b>\n\n");
-			inventory.takeItem(useables.FIMPSKL, MaterialMenu);
+			inventory.takeItem(useables.FIMPSKL, curry(MaterialMenu, 2));
 		}
 		public function AddSpiderSilk():void {
 			outputText("\n\n<b>(Gained 1 Spider Silk!)</b>\n\n");
-			inventory.takeItem(useables.T_SSILK, MaterialMenu);
+			inventory.takeItem(useables.T_SSILK, curry(MaterialMenu, 1));
 		}
 		public function AddBeeChitin():void {
 			outputText("\n\n<b>(Gained 1 Chitin Shard!)</b>\n\n");
-			inventory.takeItem(useables.B_CHITN, MaterialMenu);
+			inventory.takeItem(useables.B_CHITN, curry(MaterialMenu, 1));
 		}
 		public function AddGreenGel():void {
 			outputText("\n\n<b>(Gained 1 Green Gel!)</b>\n\n");
-			inventory.takeItem(useables.GREENGL, MaterialMenu);
+			inventory.takeItem(useables.GREENGL, curry(MaterialMenu, 1));
 		}
 		public function AddDragonscale():void {
 			outputText("\n\n<b>(Gained 1 Dragonscale!)</b>\n\n");
-			inventory.takeItem(useables.D_SCALE, MaterialMenu);
+			inventory.takeItem(useables.D_SCALE, curry(MaterialMenu, 1));
 		}
 		public function AddFreshFish():void {
 			outputText("\n\n<b>(Gained 1 Fresh Fish!)</b>\n\n");
-			inventory.takeItem(consumables.FREFISH, NonEquipmentMenu);
+			inventory.takeItem(consumables.FREFISH, curry(NonEquipmentMenu, 2));
 		}
 		public function AddFoxJewel():void {
 			outputText("\n\n<b>(Gained 1 Fox Jewel!)</b>\n\n");
-			inventory.takeItem(consumables.FOXJEWL, NonEquipmentMenu);
+			inventory.takeItem(consumables.FOXJEWL, curry(NonEquipmentMenu, 1));
 		}
 		public function AddVoltageTopaz():void {
 			outputText("\n\n<b>(Gained 1 Voltage Topaz!)</b>\n\n");
@@ -1642,7 +1718,7 @@ public function FightHellfireSnail():void {
 		}
 		public function AddWonderFruit():void {
 			outputText("\n\n<b>(Gained 1 Wonder Fruit!)</b>\n\n");
-			inventory.takeItem(consumables.WOFRUIT, NonEquipmentMenu);
+			inventory.takeItem(consumables.WOFRUIT, curry(NonEquipmentMenu, 2));
 		}
 		public function AddDarkSlimeJelly():void {
 			outputText("\n\n<b>(Gained 1 Dark Slime Jelly!)</b>\n\n");
@@ -1654,7 +1730,7 @@ public function FightHellfireSnail():void {
 		}
 		public function AddFireSnailSaliva():void {
 			outputText("\n\n<b>(Gained 1 Fire Snail Saliva!)</b>\n\n");
-			inventory.takeItem(consumables.FSNAILS, NonEquipmentMenu);
+			inventory.takeItem(consumables.FSNAILS, curry(NonEquipmentMenu, 2));
 		}
 		public function AddGorgonOil():void {
 			outputText("\n\n<b>(Gained 1 vial of Gorgon Oil!)</b>\n\n");
@@ -1666,51 +1742,55 @@ public function FightHellfireSnail():void {
 		}
 		public function AddCouatlOil():void {
 			outputText("\n\n<b>(Gained 1 vial of Couatl Oil!)</b>\n\n");
-			inventory.takeItem(consumables.COUAOIL, NonEquipmentMenu);
+			inventory.takeItem(consumables.COUAOIL, curry(NonEquipmentMenu, 2));
 		}
 		public function AddEnigmanium():void {
 			outputText("\n\n<b>(Gained 1 vial of Enigmanium!)</b>\n\n");
-			inventory.takeItem(consumables.ENIGMANIUM, NonEquipmentMenu);
+			inventory.takeItem(consumables.ENIGMANIUM, curry(NonEquipmentMenu, 2));
 		}
 		public function AddSkelp():void {
 			outputText("\n\n<b>(Gained 1 Skelp!)</b>\n\n");
-			inventory.takeItem(consumables.SKELP__, NonEquipmentMenu);
+			inventory.takeItem(consumables.SKELP__, curry(NonEquipmentMenu, 2));
+		}
+		public function AddWhiteIceShard():void {
+			outputText("\n\n<b>(Gained 1 White Ice Shard!)</b>\n\n");
+			inventory.takeItem(consumables.WHITEIS, SoulforceCheats);
 		}
 		public function AddVeryDilutedArcaneRegenConcotion():void {
 			outputText("\n\n<b>(Gained 1 very diluted Arcane Regen Concotion!)</b>\n\n");
-			inventory.takeItem(consumables.VDARCON, NonEquipmentMenu);
+			inventory.takeItem(consumables.VDARCON, curry(NonEquipmentMenu, 1));
 		}
 		public function AddDilutedArcaneRegenConcotion():void {
 			outputText("\n\n<b>(Gained 1 diluted Arcane Regen Concotion!)</b>\n\n");
-			inventory.takeItem(consumables.D_ARCON, NonEquipmentMenu);
+			inventory.takeItem(consumables.D_ARCON, curry(NonEquipmentMenu, 1));
 		}
 		public function AddArcaneRegenConcotion():void {
 			outputText("\n\n<b>(Gained 1 Arcane Regen Concotion!)</b>\n\n");
-			inventory.takeItem(consumables.AREGCON, NonEquipmentMenu);
+			inventory.takeItem(consumables.AREGCON, curry(NonEquipmentMenu, 1));
 		}
 		public function AddSoulBlastManual():void {
 			outputText("\n\n<b>(Gained 1 Soul Blast Manual!)</b>\n\n");
-			inventory.takeItem(consumables.SOBLMAN, NonEquipmentMenu);
+			inventory.takeItem(consumables.SOBLMAN, curry(NonEquipmentMenu, 1));
 		}
 		public function AddDisplacerFruit():void {
 			outputText("\n\n<b>(Gained 1 Displacer Fruit!)</b>\n\n");
-			inventory.takeItem(consumables.D_FRUIT, NonEquipmentMenu);
+			inventory.takeItem(consumables.D_FRUIT, curry(NonEquipmentMenu, 1));
 		}
 		public function AddSkybornSeed():void {
 			outputText("\n\n<b>(Gained 1 Skyborn Seed!)</b>\n\n");
-			inventory.takeItem(consumables.SKYSEED, NonEquipmentMenu);
+			inventory.takeItem(consumables.SKYSEED, curry(NonEquipmentMenu, 2));
 		}
 		public function AddBehemothCum():void {
 			outputText("\n\n<b>(Gained 1 vial of Behemoth Cum!)</b>\n\n");
-			inventory.takeItem(consumables.BHMTCUM, NonEquipmentMenu);
+			inventory.takeItem(consumables.BHMTCUM, curry(NonEquipmentMenu, 2));
 		}
 		public function AddEbonbloom():void {
 			outputText("\n\n<b>(Gained 1 Ebonbloom!)</b>\n\n");
-			inventory.takeItem(useables.EBONBLO, MaterialMenu);
+			inventory.takeItem(useables.EBONBLO, curry(MaterialMenu, 1));
 		}
 		public function AddWorldTreeBranch():void {
 			outputText("\n\n<b>(Gained 1 Wold Tree branch!)</b>\n\n");
-			inventory.takeItem(useables.WT_BRAN, MaterialMenu);
+			inventory.takeItem(useables.WT_BRAN, curry(MaterialMenu, 1));
 		}
 		public function AddTheStaffs():void {
 			outputText("\n\n<b>(Gained set of items to make Ascensus!)</b>\n\n");
@@ -2352,15 +2432,15 @@ public function FightHellfireSnail():void {
 		}
 		public function AddWhiteBook():void {
 			outputText("\n\n<b>(Gained 1 White Book!)</b>\n\n");
-			inventory.takeItem(consumables.W__BOOK, NonEquipmentMenu);
+			inventory.takeItem(consumables.W__BOOK, curry(NonEquipmentMenu, 1));
 		}
 		public function AddBlackBook():void {
 			outputText("\n\n<b>(Gained 1 Black Book!)</b>\n\n");
-			inventory.takeItem(consumables.B__BOOK, NonEquipmentMenu);
+			inventory.takeItem(consumables.B__BOOK, curry(NonEquipmentMenu, 1));
 		}
 		public function AddGreyBook():void {
 			outputText("\n\n<b>(Gained 1 Grey Book!)</b>\n\n");
-			inventory.takeItem(consumables.G__BOOK, NonEquipmentMenu);
+			inventory.takeItem(consumables.G__BOOK, curry(NonEquipmentMenu, 1));
 		}
 		public function AddThePearls():void {
 			outputText("\n\n<b>(Gained set of items to get all perks countering Elemental Conjuer perks negative effects on stat caps!)</b>\n\n");
@@ -2372,25 +2452,25 @@ public function FightHellfireSnail():void {
 		}
 		public function AddThePearls2():void {
 			outputText("\n\n");
-			inventory.takeItem(consumables.E7PEARL, NonEquipmentMenu);
+			inventory.takeItem(consumables.E7PEARL, curry(NonEquipmentMenu, 2));
 		}
 		public function AddWood():void {
 			outputText("\n\n<b>(Gained 100 Wood!)</b>");
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 100;
 			statScreenRefresh();
-			MaterialMenu();
+			curry(MaterialMenu, 1);
 		}
 		public function AddNail():void {
 			outputText("\n\n<b>(Gained 50 Nails!)</b>");
 			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += 50;
 			statScreenRefresh();
-			MaterialMenu();
+			curry(MaterialMenu, 1);
 		}
 		public function AddStone():void {
 			outputText("\n\n<b>(Gained 100 Stones!)</b>");
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += 100;
 			statScreenRefresh();
-			MaterialMenu();
+			curry(MaterialMenu, 1);
 		}
 		public function FightForPearl():void {
 			clearOutput();

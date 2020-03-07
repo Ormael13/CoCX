@@ -82,19 +82,19 @@ public class GameSettings extends BaseContent {
 
 		outputText("\n\n");
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 0) {
-			outputText("Difficulty: <font color=\"#808000\"><b>Normal</b></font>\n No opponent secondary stats modifiers.");
+			outputText("Secondary Stats Modifier: <font color=\"#808000\"><b>Normal</b></font>\n No opponent secondary stats modifiers.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
-			outputText("Difficulty: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			outputText("Secondary Stats Modifier: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) {
-			outputText("Difficulty: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 10x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			outputText("Secondary Stats Modifier: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 10x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) {
-			outputText("Difficulty: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 25x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			outputText("Secondary Stats Modifier: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 25x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) {
-			outputText("Difficulty: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 100x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			outputText("Secondary Stats Modifier: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 100x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 
 		/*if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG])

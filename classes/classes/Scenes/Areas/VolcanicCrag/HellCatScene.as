@@ -27,6 +27,10 @@ public function HellCatIntro():void {
 	clearOutput();
 	outputText("As you explore the crag you run into a strange sight. You spot a hooded figure with a cape walking silently toward you. Only when it's finally up close does it throw its cape open revealing the ashen naked skin of a human woman inside or what could have been a human if not for the swishing tail of fire, black furry cat legs and pawed hands with sharp claws. The hood now pulled back reveals a somewhat human face with eyes and hair ");
 	outputText("of literal fire and feline ears to top it off. Well, guess you have seen everything now including pyrocatgirls. Speaking of pyro, the intent of the cat girl manifest as a large fireball which she proceeds to throw at you. Barely dodging this surprise assault you steady yourself just in time to see her grin wide as a 10 inch spiked cat cock slides out of the sheath just above her drooling pussy. You ready your [weapon] for a fight!");
+	if (flags[kFLAGS.CODEX_ENTRY_HELLCATS] <= 0) {
+		flags[kFLAGS.CODEX_ENTRY_HELLCATS] = 1;
+		outputText("\n\n<b>New codex entry unlocked: Hellcats!</b>");
+	}
 	if (flags[kFLAGS.WITCHES_SABBATH] < 1) flags[kFLAGS.WITCHES_SABBATH] = 1;
 	startCombat(new HellCat());
 }

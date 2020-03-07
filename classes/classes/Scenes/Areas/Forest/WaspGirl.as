@@ -46,11 +46,11 @@ import classes.internals.ChainedDrop;
 				outputText("but she follows through with a spear strike, tearing into your " + (player.armor.name == "nothing" ? "" : "[armorName] and the underlying") + " flesh. ");
 				var paralyze:ParalyzeVenomDebuff = player.statusEffectByType(StatusEffects.ParalyzeVenom) as ParalyzeVenomDebuff;
 				if (paralyze) {
-					outputText("  It's getting much harder to move, you're not sure how many more stings like that you can take!");
+					outputText("It's getting much harder to move, you're not sure how many more stings like that you can take! ");
 				} else {
 					paralyze = new ParalyzeVenomDebuff();
 					player.addStatusEffect(paralyze);
-					outputText("  You've fallen prey to paralyzation venom!  Better end this quick!");
+					outputText("You've fallen prey to paralyzation venom!  Better end this quick! ");
 				}
 				var damage:int = 0;
 				damage += ((str * 1.25) + rand(50));
@@ -108,8 +108,7 @@ import classes.internals.ChainedDrop;
 				}
 				paralyze.increaseWasp1();
 			}
-			if (player.lust >= player.maxLust())
-				doNext(SceneLib.combat.endLustLoss);
+			if (player.lust >= player.maxLust()) doNext(SceneLib.combat.endLustLoss);
 			else doNext(EventParser.playerMenu);
 		}
 		

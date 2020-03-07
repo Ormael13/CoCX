@@ -324,7 +324,6 @@ private function MitziPoopsBabies():void {
 	outputText("You shake your head, laughing and telling her that you'll worry about that later. For now taking care of the youngest ones are top priority. She gives you a warm smile before turning her attention back to her nursing daughters who are already starting to grow bigger. You make sure the goblin and her daughters are alright then give her a kiss before heading off.\n\n");
 	player.removeStatusEffect(StatusEffects.MitziPregnant);
 	flags[kFLAGS.MITZI_DAUGHTERS] += 4;
-	doNext(camp.returnToCampUseOneHour);
 }
 
 public function MitziDaughtersCampMainMenu(first:Boolean = true):void {
@@ -400,6 +399,7 @@ public function MitziDaughtersIzmaDaughters():void {
 	outputText("Izma laughs shaking her head.\n\n");
 	outputText("\"<i>Maybe for today but next time I'll definitely lay it on you.</i>\"\n\n");
 	outputText("You chuckle to yourself, having witnessed the scene in its entirety. Maybe Rathazul was right. You do keep weird company… You have to admit it's pretty entertaining though.\n\n");
+	player.createStatusEffect(StatusEffects.MitziIzmaDaughters, 0, 0, 0, 0);
 	doNext(playerMenu);
 }
 

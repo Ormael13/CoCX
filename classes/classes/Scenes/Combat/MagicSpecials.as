@@ -315,11 +315,6 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.CooldownHungeringCold)) {
 				bd.disable("You need more time before you can use Hungering Cold again.");
 			}
-			bd = buttons.add("Frozen Kiss", frozenKiss).hint("Inflict damage, drain health, stun for 2 rounds and lust out the opponent. Usable only if the victim is humanoid and non giant.", "Frozen Kiss");
-			bd.requireFatigue(spellCost(60));
-			if (player.hasStatusEffect(StatusEffects.CooldownFrozenKiss)) {
-				bd.disable("You need more time before you can use Frozen Kiss again.");
-			}
 		}
 		if (player.yukiOnnaScore() >= 14 && player.hasPerk(PerkLib.ColdAffinity)) {
 			bd = buttons.add("Frozen Kiss", frozenKiss).hint("Inflict damage, drain health, stun for 2 rounds and lust out the opponent. Usable only if the victim is humanoid and non giant.", "Frozen Kiss");
@@ -372,9 +367,9 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.hasPerk(PerkLib.JobWarrior)) {
-			bd = buttons.add("DwarfRage", dwarfrage).hint("Throw yourself into a dwarf rage!  Greatly increases your strength, speed and fortitude! \n", "Dwarf Rage");
+			bd = buttons.add("WarriorRage", warriorsrage).hint("Throw yourself into a warrior's rage!  Greatly increases your strength, speed and fortitude! \n", "Warrior's Rage");
 			bd.requireWrath(50);
-			if(player.hasStatusEffect(StatusEffects.DwarfRage)) {
+			if(player.hasStatusEffect(StatusEffects.WarriorsRage)) {
 				bd.disable("You already raging!");
 			}
 		}
@@ -1293,7 +1288,13 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
-		statScreenRefresh();
+		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+		{
+			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			enemyAI();
+		}
+		else combatRoundOver();
 	}
 
 	public function hungeringCold():void {
@@ -1353,7 +1354,13 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
-		statScreenRefresh();
+		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+		{
+			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			enemyAI();
+		}
+		else combatRoundOver();
 	}
 
 	public function frozenKiss():void {
@@ -1408,7 +1415,6 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		else if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
-		return;
 	}
 
 	public function acidSpit():void {
@@ -2385,33 +2391,33 @@ public class MagicSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 	
-	public function dwarfrage():void {
+	public function warriorsrage():void {
 		clearOutput();
 		player.wrath -= 50;
 		var temp:Number = 0;
 		var tempStr:Number = 0;
 		var tempTouSpe:Number = 0;
-		var dwarfrageDuration:Number = 10;
-		var DwarfRageBoost:Number = 10;
-		if (player.hasPerk(PerkLib.JobSwordsman)) DwarfRageBoost += 5;
-		if (player.hasPerk(PerkLib.JobBrawler)) DwarfRageBoost += 5;
-		if (player.hasPerk(PerkLib.Berzerker)) DwarfRageBoost += 5;
-		if (player.hasPerk(PerkLib.Lustzerker)) DwarfRageBoost += 5;
-	//	DwarfRageBoost += player.tou / 10;player.tou * 0.1 - im wytrzymalesze ciało tym wiekszy bonus może udźwignąć
+		var warriorsrageDuration:Number = 10;
+		var WarriorsRageBoost:Number = 10;
+		if (player.hasPerk(PerkLib.JobSwordsman)) WarriorsRageBoost += 5;
+		if (player.hasPerk(PerkLib.JobBrawler)) WarriorsRageBoost += 5;
+		if (player.hasPerk(PerkLib.Berzerker)) WarriorsRageBoost += 5;
+		if (player.hasPerk(PerkLib.Lustzerker)) WarriorsRageBoost += 5;
+	//	WarriorsRageBoost += player.tou / 10;player.tou * 0.1 - im wytrzymalesze ciało tym wiekszy bonus może udźwignąć
 		outputText("You roar and unleash your dwarf rage in order to destroy your foe!\n\n");
 		var oldHPratio:Number = player.hp100/100;
-		player.createStatusEffect(StatusEffects.DwarfRage, 0, 0, dwarfrageDuration, 0);
-		temp = DwarfRageBoost;
+		player.createStatusEffect(StatusEffects.WarriorsRage, 0, 0, warriorsrageDuration, 0);
+		temp = WarriorsRageBoost;
 		tempStr = temp * 2;
 		tempTouSpe = temp;
-		player.changeStatusValue(StatusEffects.DwarfRage,1,tempStr);
-		player.changeStatusValue(StatusEffects.DwarfRage,2,tempTouSpe);
+		player.changeStatusValue(StatusEffects.WarriorsRage,1,tempStr);
+		player.changeStatusValue(StatusEffects.WarriorsRage,2,tempTouSpe);
 		mainView.statsView.showStatUp('str');
 		mainView.statsView.showStatUp('tou');
 		mainView.statsView.showStatUp('spe');
-		player.str += player.statusEffectv1(StatusEffects.DwarfRage);
-		player.tou += player.statusEffectv2(StatusEffects.DwarfRage);
-		player.spe += player.statusEffectv2(StatusEffects.DwarfRage);
+		player.str += player.statusEffectv1(StatusEffects.WarriorsRage);
+		player.tou += player.statusEffectv2(StatusEffects.WarriorsRage);
+		player.spe += player.statusEffectv2(StatusEffects.WarriorsRage);
 		player.HP = oldHPratio*player.maxHP();
 		statScreenRefresh();
 		enemyAI();

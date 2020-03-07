@@ -275,6 +275,10 @@ import classes.StatusEffects;
 		private function encountersRuletteBossesEL1():void {
 			player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 			if (flags[kFLAGS.ALVINA_FOLLOWER] == 17) {
+				if (flags[kFLAGS.CODEX_ENTRY_CHIMERA] <= 0) {
+					flags[kFLAGS.CODEX_ENTRY_CHIMERA] = 1;
+					outputText("\n\n<b>New codex entry unlocked: Chimera!</b>");
+				}
 				outputText("You finally find the center of the labyrinth, somewhat exhausted. You can see the rose from here in all its dark beauty. As you are about to approach it, a monstrous creature lands right in front of you. This beast has no less than four heads! A dragon on the left, a lion on the center, a goat on ");
 				outputText("the right and, at the tip of its tail, the head of a snake! All four heads roar a warning at you as the beast stands up on its leonine legs, easily twelve feet tall, its massive wings opening in a threatening display revealing nothing short of four erect thirty inches cock already drooling precum!\n\n");
 				outputText("\"<i>Foolish intruder, you walked to your death! No one but me will ever touch the rose for it is mine and no one else's! I will rape you and then devour you alive!</i>\"\n\n");
@@ -370,6 +374,10 @@ import classes.StatusEffects;
 		}
 		
 		public function encountersRuletteBossesEL1Hydra():void {
+			if (flags[kFLAGS.CODEX_ENTRY_HYDRA] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_HYDRA] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Hydra!</b>");
+			}
 			outputText("The first telltale that something might have gone really wrong is the hissing which seems to come from all around the room. The only warning you get of the impending attack is a sudden move of the shadows as a massive snake head bites the air mere inches from your face. You ready for battle as several huge snakes comes out of the shadow, each connected to a single junction to what appears to be the body of a very tall woman.\n\n");
 			if (player.isNaga()) {
 				outputText("\"<i>Why, would you look at that, how did you little grass snake make it all the way here. Are you perhaps lost?</i>\"\n\n");
@@ -457,6 +465,10 @@ import classes.StatusEffects;
 				var choice:Number = rand(8);
 				if (choice == 0) {
 					outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.");
+					if (flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] <= 0) {
+						flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] = 1;
+						outputText("<b>New codex entry unlocked: Displacer beast!</b>\n\n")
+					}
 					startCombat(new DisplacerBeast(), true);
 				}
 				if (choice == 1) {
@@ -506,18 +518,29 @@ import classes.StatusEffects;
 				if (choice == 7) {
 					clearOutput();
 					outputText("Just as you turn the corner, you come face to face with a towering minotaur armed with a pair of huge battle axes and equipped with a full plate armor. The beast smirks as his cock hardens in anticipation. It must’ve been months since he last fucked something!");
-					startCombat(new Minotaur(), true);
+					startCombat(new Minotaur(), true);//Mindbreaker
 				}
-				//Dark Slime, Mindbreaker
 				doNext(playerMenu);
 			}
 			else player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 		}
 		private function nightAmbushRuletteEL():void {
 			var choice:Number = rand(8);
-			if (choice == 0) startCombat(new DisplacerBeast(), true);
+			if (choice == 0) {
+				if (flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] <= 0) {
+					flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] = 1;
+					outputText("<b>New codex entry unlocked: Displacer beast!</b>\n\n")
+				}
+				startCombat(new DisplacerBeast(), true);
+			}
 			if (choice == 1) startCombat(new DarkSlime(), true);
-			if (choice == 2) startCombat(new Succubus(), true);
+			if (choice == 2) {
+				if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
+					flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
+					outputText("\n\n<b>New codex entry unlocked: Succubus!</b>")
+				}
+				startCombat(new Succubus(), true);
+			}
 			if (choice == 3) startCombat(new Incubus(), true);
 			if (choice == 4) startCombat(new Omnibus(), true);
 			if (choice == 5) startCombat(new TentacleBeast(), true);

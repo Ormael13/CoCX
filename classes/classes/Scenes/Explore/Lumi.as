@@ -135,14 +135,14 @@ public class Lumi extends BaseContent {
         //Set item handling to lumi shop
         clearOutput();
         outputText("You ask Lumi if you can see her potions.  She smiles at you and pulls out several bottles from her desk and shows them to you.\n\n\"<i>Gawantied qwality, made by Lumi herself,</i>\" she says proudly.\n\n");
-        outputText("Lust Draft - 15 gems\nGoblin Ale - 20 gems\nOviposition Elixir - 45 gems\n");
+        outputText("Lust Draft - 15 gems\nGoblin Ale - 20 gems\nOviposition Elixir - 45 gems\nGoblin Technomancer clothes - 400 gems\nTechnomancer bra - 600 gems\nTechnomancer panties - 600 gems\n");
 		menu();
 		addButton(0, "Lust Draft", lumiLustDraftPitch);
 		addButton(1, "Goblin Ale", lumiPitchGobboAle);
 		addButton(2, "Ovi Elixir", lumiPitchOviElixer);
-		//addButton(5, "", lumiPitchGoblinTechnomancerClothes);
-		//addButton(6, "", lumiPitchTechnomancerBra);
-		//addButton(7, "", lumiPitchTechnomancerPanties);
+		addButton(5, "G.Tech.C.", lumiPitchGoblinTechnomancerClothes).hint("Goblin Technomancer Clothes");
+		addButton(6, "Tech.Bra", lumiPitchTechnomancerBra).hint("Technomancer bra");
+		addButton(7, "Tech.Pan", lumiPitchTechnomancerPanties).hint("Technomancer panties");
 		addButton(14, "Leave", lumiLabChoices);
     }
 //Lust Draft
@@ -173,25 +173,25 @@ public class Lumi extends BaseContent {
     private function lumiPitchGoblinTechnomancerClothes():void {
         spriteSelect(37);
         clearOutput();
-        outputText("You point at the curious hexagonal bottle. \"<i>De Oviposar Elixir? Made baithsed on da giant bee's special stuff dey give deir queen. It will help make de burfing go faster, an if you dwink it while you awen pweggy, iw will give you some eggs to burf later. More dwinks, eqwals more and biggar eggs. Lumi charges 45 gems for each dose.</i>\"\n\n");
-        outputText("Will you buy the Ovi Elixir?");
-        doYesNo(curry(lumiPurchase, consumables.OVIELIX), lumiShop);
+        outputText("Lumi nods at your pick. \"<i>Buyin dese? Smart move. Nevar ouant ta work ouit stuff dats gunna gat ruined if some oil drips on it. Dese are true mechanist clothes. Sturdy, durable and best ov all, adaptable ta any gadget ya may plug ta dem.</i>\"\n\n");
+        outputText("Will you buy the Goblin Technomancer clothes? (for 400 gems)");
+        doYesNo(curry(lumiPurchase, armors.GTECHC_), lumiShop);
     }
 //Technomancer bra
     private function lumiPitchTechnomancerBra():void {
         spriteSelect(37);
         clearOutput();
-        outputText("You point at the curious hexagonal bottle. \"<i>De Oviposar Elixir? Made baithsed on da giant bee's special stuff dey give deir queen. It will help make de burfing go faster, an if you dwink it while you awen pweggy, iw will give you some eggs to burf later. More dwinks, eqwals more and biggar eggs. Lumi charges 45 gems for each dose.</i>\"\n\n");
-        outputText("Will you buy the Ovi Elixir?");
-        doYesNo(curry(lumiPurchase, consumables.OVIELIX), lumiShop);
+        outputText("Lumi nods at your pick. \"<i>Buyin dese? Smart move. Nevar ouant ta work ouit stuff dats gunna gat ruined if some oil drips on it. Dese are true mechanist clothes. Sturdy, durable and best ov all, adaptable ta any gadget ya may plug ta dem.</i>\"\n\n");
+        outputText("Will you buy the Technomancer bra? (for 600 gems)");
+        doYesNo(curry(lumiPurchase, undergarments.TECHBRA), lumiShop);
     }
 //Technomancer panties
     private function lumiPitchTechnomancerPanties():void {
         spriteSelect(37);
         clearOutput();
-        outputText("You point at the curious hexagonal bottle. \"<i>De Oviposar Elixir? Made baithsed on da giant bee's special stuff dey give deir queen. It will help make de burfing go faster, an if you dwink it while you awen pweggy, iw will give you some eggs to burf later. More dwinks, eqwals more and biggar eggs. Lumi charges 45 gems for each dose.</i>\"\n\n");
-        outputText("Will you buy the Ovi Elixir?");
-        doYesNo(curry(lumiPurchase, consumables.OVIELIX), lumiShop);
+        outputText("Lumi nods at your pick. \"<i>Buyin dese? Smart move. Nevar ouant ta work ouit stuff dats gunna gat ruined if some oil drips on it. Dese are true mechanist clothes. Sturdy, durable and best ov all, adaptable ta any gadget ya may plug ta dem.</i>\"\n\n");
+        outputText("Will you buy the Technomancer panties? (for 600 gems)");
+        doYesNo(curry(lumiPurchase, undergarments.T_PANTY), lumiShop);
     }
     private function lumiPurchase(itype:ItemType):void {
         spriteSelect(37);
@@ -204,6 +204,12 @@ public class Lumi extends BaseContent {
             cost = 20;
         if (itype == consumables.L_DRAFT)
             cost = 15;
+        if (itype == armors.GTECHC_)
+            cost = 400;
+        if (itype == undergarments.TECHBRA)
+            cost = 600;
+        if (itype == undergarments.T_PANTY)
+            cost = 600;
         if (player.gems >= cost) {
             outputText("You pay Lumi the gems, and she hands you " + itype.longName + " saying, \"<i>Here ya go!</i>\"\n\n");
             player.gems -= cost;
@@ -1022,7 +1028,7 @@ public class Lumi extends BaseContent {
 		clearOutput();
 		player.gems -= 50;
 		outputText("Lumi shrugs.\n\n");
-		outputText("\"<i>I'm surprised ya don'f gat one of dese already. Its used in next to everything in everyday goblin life.Y'all need one to craft anything of note.</i>\"\n\n");
+		outputText("\"<i>I'm surprised ya don'f gat one of dese already. Its used in next to everything in everyday goblin life. Y'all need one to craft anything of note.</i>\"\n\n");
 		outputText("<b>Gained Key Item: Mechanic's Wrench!</b>");
 		player.createKeyItem("Mechanic's Wrench", 0, 0, 0, 0);
 		statScreenRefresh();

@@ -1073,20 +1073,20 @@ public function kaibaShopMainMenu():void {
 
 public function kaibaShopMainMenu2():void {
 	menu();
-	addButton(0, "FlameLizR", buyItem, jewelries.FLLIRNG).hint("Flame Lizard ring");
-	addButton(1, "InferMouseR", buyItem, jewelries.INMORNG).hint("Infernal Mouse ring");
-	addButton(2, "UnDefKingS", buyItem, jewelries.UNDKINS).hint("Undefeated King's Signet");
+	addButton(0, "FlameLizR", buyItem, jewelries.FLLIRNG).hint("Flame Lizard ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
+	addButton(1, "InferMouseR", buyItem, jewelries.INMORNG).hint("Infernal Mouse ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Blazing battle spirit.");
+	addButton(2, "UnDefKingS", buyItem, jewelries.UNDKINS).hint("Undefeated King's Signet - Increase max wrath by 100. When worn on right hand (slot 1 and 3 for rings) would have additional effects: increase max wrath by another 100 (with base bonus it's +200), generate 6/3 wrath per turn/hour, increase multiplied on Power Attack damage by 1.");
 	//addButton(3, "Necklace", buyItem, necklaces.CSNECK);
 	//addButton(4, "Necklace", buyItem, necklaces.CSNECK);
-	addButton(5, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim");
-	addButton(6, "R.Ambidexty", buyItem, jewelries.RNGAMBI).hint("Ring of Ambidexty");
-	addButton(7, "CroUndefKing", buyItem, headjewelries.CUNDKIN).hint("Crown of the Undefeated King");
+	addButton(5, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Remove range accuracy penalty when flying and increase range accuracy by 20%.");
+	addButton(6, "R.Ambidexty", buyItem, jewelries.RNGAMBI).hint("Ring of Ambidexty - Remove melee accuracy penalty when flying and increase melee accuracy by 15%.");
+	addButton(7, "CroUndefKing", buyItem, headjewelries.CUNDKIN).hint("Crown of the Undefeated King - You can't loose by HP until reaching droping into negative health larger than 5% of max HP + 500(scalable). When below 0 HP PC wouldn gain additional 1% of max HP per turn regeneration effect.");
 	//addButton(8, "Necklace", buyItem, necklaces.CSNECK);
-	addButton(9, "C.S.Necklace", buyItem, necklaces.CSNECK).hint("Crinos Shape necklace");
-	addButton(10, "UnDefKingDest", buyItem, weapons.UDKDEST).hint("Undefeated King's Destroyer");
-    addButton(11, "Soul Drill", buyItem, weapons.SDRILL);
-	addButton(12, "Hodr's bow", buyItem, weaponsrange.BOWHODR);
-	addButton(13, "Avelynn", buyItem, weaponsrange.AVELYNN);
+	addButton(9, "C.S.Necklace", buyItem, necklaces.CSNECK).hint("Crinos Shape necklace - Allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior.");
+	addButton(10, "UnDefKingDest", buyItem, weapons.UDKDEST).hint("Undefeated King's Destroyer - Massive mace weapon that will increase PC parry chance by 20%. Have 20% base chance for stun (3 rounds).");
+    addButton(11, "Soul Drill", buyItem, weapons.SDRILL).hint("Soul Drill - 1H large weapon that can deal more damage the more soulforce is feed to it each turn.");
+	addButton(12, "Hodr's bow", buyItem, weaponsrange.BOWHODR).hint("Hodr's bow - Bow that would apply blindess status or deal increased damage to blinded targets.");
+	addButton(13, "Avelynn", buyItem, weaponsrange.AVELYNN).hint("Avelynn - Crossbow that will shoot two additional belts each time.");
 	addButton(14, "Leave", telAdreMenu);
 }
 
@@ -1145,9 +1145,33 @@ public function tripxiShopMainMenu():void {
 			player.removeKeyItem("Tripxi Fatbilly");
 			player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 1, 1);
 		}
+		if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) == 1) {
+			player.removeKeyItem("Snippler");
+			player.addStatusValue(StatusEffects.TelAdreTripxiGuns4, 1, 1);
+		}
+		if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) == 1) {
+			player.removeKeyItem("Touhouna M3");
+			player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 1, 1);
+		}
+		if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) == 1) {
+			player.removeKeyItem("Twin Grakaturd");
+			player.addStatusValue(StatusEffects.TelAdreTripxiGuns6, 1, 1);
+		}
+		if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) == 1) {
+			player.removeKeyItem("Dart pistol");
+			player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 2, 1);
+		}
+		if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) == 1) {
+			player.removeKeyItem("Twin Dart pistol");
+			player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 2, 1);
+		}
 		if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) == 1) {
 			player.removeKeyItem("Harpoon gun");
 			player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 2, 1);
+		}
+		if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) == 1) {
+			player.removeKeyItem("Derpnade Launcher");
+			player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 2, 1);
 		}
 	}
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
@@ -1185,10 +1209,9 @@ public function tripxiShopMainMenu2a():void {
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) > 2) addButton(8, weaponsrange.TRFATBI.shortName, buyItemT1, weaponsrange.TRFATBI);
 	else if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) == 2) addButtonDisabled(8, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(8, "???", "Search the Vulcanic Crag.");
-	//addButton(9, weaponsrange.FLINTLK.shortName, buyItemT1, weaponsrange.);
-	//addButton(10, weaponsrange.FLINTLK.shortName, buyItemT1, weaponsrange.);
-	//addButton(11, weaponsrange.FLINTLK.shortName, buyItemT1, weaponsrange.);
-	//addButton(13, weaponsrange.FLINTLK.shortName, buyItemT1, weaponsrange.);
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) > 2) addButton(9, weaponsrange.SNIPPLE.shortName, buyItemT1, weaponsrange.SNIPPLE);
+	else if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) == 2) addButtonDisabled(9, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns4)) addButtonDisabled(9, "???", "Search the Deepwoods.");
 	addButtonDisabled(10, "-1-", "Shelf 1");
 	addButton(11, "-2-", tripxiShopMainMenu2b);
 	//addButton(12, "-3-", tripxiShopMainMenu2c);
@@ -1197,9 +1220,24 @@ public function tripxiShopMainMenu2a():void {
 }
 public function tripxiShopMainMenu2b():void {
 	menu();
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) > 2) addButton(0, weaponsrange.TOUHOM3.shortName, buyItemT2, weaponsrange.TOUHOM3);
+	else if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) == 2) addButtonDisabled(0, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(0, "???", "Search the Caves.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) > 2) addButton(1, weaponsrange.TWINGRA.shortName, buyItemT2, weaponsrange.TWINGRA);
+	else if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) == 2) addButtonDisabled(1, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6)) addButtonDisabled(1, "???", "Search the Battlefield(O).");
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) > 2) addButton(2, weaponsrange.DPISTOL.shortName, buyItemT2, weaponsrange.DPISTOL);
+	else if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) == 2) addButtonDisabled(2, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(2, "???", "Search the Blight Ridge.");
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) > 2) addButton(3, weaponsrange.TDPISTO.shortName, buyItemT2, weaponsrange.TDPISTO);
+	else if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) == 2) addButtonDisabled(3, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(3, "???", "Search the Blight Ridge.");
 	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) > 2) addButton(5, weaponsrange.HARPGUN.shortName, buyItemT2, weaponsrange.HARPGUN);
 	else if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) == 2) addButtonDisabled(5, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(5, "???", "Search the Beach.");
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) > 2) addButton(6, weaponsrange.DERPLAU.shortName, buyItemT2, weaponsrange.DERPLAU);
+	else if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) == 2) addButtonDisabled(6, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(6, "???", "Search the Mountains.");
 	addButton(10, "-1-", tripxiShopMainMenu2a);
 	addButtonDisabled(11, "-2-", "Shelf 2");
 	//addButton(12, "-2-", tripxiShopMainMenu2c);
@@ -1207,6 +1245,8 @@ public function tripxiShopMainMenu2b():void {
 }
 public function tripxiShopMainMenu2c():void {
 	menu();
+	//addButton(0, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
+	//addButton(1, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
 	
 	addButton(10, "-1-", tripxiShopMainMenu2a);
 	addButton(11, "-2-", tripxiShopMainMenu2b);
@@ -1628,3 +1668,4 @@ public function meetingLunaCamp():void {
 }
 }
 }
+

@@ -50,6 +50,10 @@ import classes.internals.Utils;
 			outputText("They smile happily back at you, showing for the first time a tiny bit of skin. The wide smile is somewhat disturbing under their hood, and they begin packing up their equipment.  They mutter over their shoulder, \"<i>This will be so much fun. I could just feel the excitement in my tails. You can head on back and I'll see you within the hour, maybe a bit sooner or a bit later.  Oh my, yeah.</i>\" ");
 			outputText(" They stop for a moment as if recalling something and then they pull off their hood, revealing a head covered with fiery black and purple hair parted by cat ears, and  two pairs of small horns. Looking at you, with her literally burning eyes, she only utters one word, with a clearly female voice now, before disapearing, \"<i>Dinah.</i>\"");
 			outputText("\n\n(<b>Dinah has been added to the Followers menu!</b>)\n\n");
+			if (flags[kFLAGS.CODEX_ENTRY_CHIMERA] <= 0) {
+					flags[kFLAGS.CODEX_ENTRY_CHIMERA] = 1;
+					outputText("<b>New codex entry unlocked: Chimera!</b>\n\n");
+				}
 			flags[kFLAGS.DINAH_LVL_UP] = 1;
 			flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.DINAH_AFFECTION] = 0;

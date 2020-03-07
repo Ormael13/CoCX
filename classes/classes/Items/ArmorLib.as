@@ -52,6 +52,7 @@ package classes.Items
 		public const G_CHANG:Armor = new Armor("G.Chang","GreenChangshan","Green Lunar new year dress (m)","a Green Lunar new year dress (m)",0,0,100,"A simple yet elegant green changshan with dragon motif. This clothing is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const G_QIPAO:Armor = new Armor("G.Qipao","GreenQipao","Green Lunar new year dress (f)","a Green Lunar new year dress (f)",0,0,100,"A simple yet elegant green qipao with floral motif. This dress is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const GELARMR:Armor = new Armor("GelArmr","GelArmr","glistening gel-armor plates","a suit of gel armor",10,0,600,"This suit of interlocking plates is made from a strange green material.  It feels spongy to the touch but is amazingly resiliant.","Heavy");
+		public const GTECHC_:GoblinTechnomancerClothes = new GoblinTechnomancerClothes();
 		public const GOOARMR:GooArmor = new GooArmor();
 		public const H_GARB_:HereticsGarb = new HereticsGarb();
 		public const HBA_ARM:HBAspArmor = new HBAspArmor();
