@@ -141,7 +141,7 @@ internal function sandwitchRape():void {
 			doNext(sandWitchBadEnd);
 			return;
 		}
-		player.orgasm();
+		player.sexReward("Default","Default",true,false);
 		outputText("Your wobbly legs give out underneath you as your body's will to fight evaporates.\n\n");
 		if(player.hairColor.indexOf("sandy blonde") != -1) {
 			outputText("The Sand Witch smiles wickedly and intones, \"<i>Tresed eht retaw llahs klim ruoy.</i>\"\n\n");
@@ -278,12 +278,12 @@ private function sandwitchRaped():void {
 					outputText("With a bestial cry of lust, you shove your shaft deep within one of her vaginas, past her cervix and into her womb where you blast your potent, corrupted, demon-tainted seed.  ");
 					outputText("\n\nThe sand witch screams in savage denial as you plant your seed deep within her body, your corruption no doubt making it extra potent. You gaze into her eyes, reveling in her expression of horror. Without uttering a word, you continue to fuck her, making sure your seed is well-entrenched within her womb, feeling it splatter and bubble around your [cock].  You wonder if she will remember the pleasure her body felt today, and if she will be more likely to drop to her knees before you than to fight... ");
 					outputText("Finally finished, you pull your [cock] from one of her well-used slits, your [cock] drooling cum even now. With a grin, you walk away, happy with your little encounter.  ");
-					player.orgasm();
+					player.sexReward("Default","Default",true,false);
 				}
 			}
 			//Multiprick
 			if(player.cockTotal() > 1) {
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 				if(rand(2) == 0) {
 					rapeSandwitchMultis();
 					return;
@@ -336,7 +336,7 @@ private function sandwitchSex():void {
 	outputText(cockDescript(0) + " throbs with need, even as you empty your lust into the defeated sand witch.");
 	outputText("\n\nWith a satisfied smirk, you lay atop your prize, your [cock] still twitching within her depths. One of the sand witch's hands rubs at your head, teasing your [skin.type]. Like a fresh youth, you fall asleep, [cock] buried deep in the sand witch.  ");
 	outputText("With a start you wake up, only to find the sand witch still passed out beside you.  Almost thinking it was a dream, you touch your groin tenderly and rub softly. There's a faint trace of soreness, and you remember the ferocity with which you mashed your pelvises together.  You get up and get ready.  ");
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	cleanupAfterCombat();
 }
 /*
@@ -344,7 +344,7 @@ Event: Centaur-SWitch: Player Raping
 Definition: Tentacle Cock: very long (smallest 2+ feet) */
 private function sandwitchCentaurBoning():void {
 	spriteSelect(50);
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	outputText("The Sand Witch is panting before you, her clothes in disarray ");
 	//[win via HP]
 	if(monster.HP < 1) outputText("and torn in many places. ");
@@ -426,7 +426,7 @@ private function SWCentaurMore(argument:Number):Boolean {
 		outputText("You realize too late that she has been casting a spell for the past few minutes. Before you can react, everything grows dark.");
 		//[Whatever effect the witch has if the player wins, rapes her, and she gets to cast a spell] [end]
 		//1 change
-		player.orgasm();
+		player.sexReward("Default","Default",true,false);
 		//Grow tits
 		if(player.biggestTitSize() == 0) {
 			outputText("\n\n(You grow a perfectly rounded pair of C-cup breasts!)");
@@ -603,7 +603,7 @@ private function knotSandwitch():void {
    if(player.cumQ() >= 25 && player.cumQ() < 100) outputText("Your cum expands her pussy, stretching her out and leaving your [cock] swimming in your spunk, trapped within her tight-stretched walls by your massive knot.");
    if(player.cumQ() >= 100 && player.cumQ() < 500) outputText("Your cum begins to pump into her corked body, filling her hole to the brim.  Surely the pressure is piling the jizz deep into her womb, and after what feels like forever, the overfull spunk shoves back on your knot, a little dribbling out around the edges of her taut feminine folds as her pussy reaches its limit.");
    if(player.cumQ() >= 500) outputText("Your cum spurts into her in rapid jets, coating the inside of her walls briefly white as more continues to pour into her. Her cunt begins to fill, and as she strugles to relieve the pressure that continues to pump into her, she only succeeds in spurring your orgasm to a new height.  You continue to blast within her, your knot holding her fast as she squirms, each shot of cum from your prick managing to squirt a tiny bit of jizz from your locked genitals.");
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 }
 
 //Sandwitch multi-cock corrupt rape
@@ -612,7 +612,7 @@ private function rapeSandwitchMultis():void {
 	clearOutput();
 	outputText("With the corruption of this realm comfortably throbbing in your shameless veins, you feel your mind opening to new possibilities.  Despite the slickly perfect fit of the sand witch's multiple pussies as you pound into her, and the way she moans with each thrust of your titanic members, you feel there are still some further alleys of pleasure within her left to explore.  Long inured to carnal pleasure that would have rendered your earlier, purer self unconscious,  your mind wanders back to the witch's weapon of lust, the vibrating stone of pleasure.  You feel it's time to give her a dose of her own medicine.\n\n");
 	outputText("You grin wickedly at the humiliated and whimpering witch as you rape her.  Between involuntary gasps of pleasure as you steadily pound into her sopping snatches, she looks afraid, not knowing the source of your mirth.  It soon becomes clear enough. She struggles a little once she hears the low buzzing of her own corrupted pleasure stone and bucks and thrashes as you push the persistent little charm into her tight, but well-cum-lubed ass.  The feel of the stone vibrating within her spreads through to your cocks, enhancing the pleasure as she clenches and spasmes while being violated multiple ways.  All too soon, it brings you to a gushing orgasm.  As you finally withdraw from the troublesome sand witch, you spit on her milk-oozing form and take your leave.");
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	cleanupAfterCombat();
 }
 
@@ -739,7 +739,7 @@ private function missingoSex5():void {
 //{Next Page}
 private function missingoSex6():void {
 	spriteSelect(50);
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	cleanupAfterCombat();
 	hideUpDown();
 	statScreenRefresh();
@@ -903,7 +903,7 @@ private function laySomeEggsInThatWitchFinally():void {
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, 192);
 	}
 	player.dumpEggs();
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	cleanupAfterCombat();
 }
 
@@ -1051,7 +1051,7 @@ private function sandwitchSpanking():void {
 	player.lust = player.maxLust();
 	flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 	cleanupAfterCombat();
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	dynStats("sen", 5);
 }
 	}

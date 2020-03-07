@@ -410,7 +410,7 @@ public function nagaDefaultSexScene():void {
 			outputText("\n\nThe two of you lay there for a moment, basking in the warm glow of orgasm. Eventually Samirah slowly unwraps her tail from your own and gives you a kiss on the forehead. \"<i>I look forward to our next encounter,</i>\" she whispers softly into your ear before slithering off"+(flags[kFLAGS.SAMIRAH_FOLLOWER] < 10 ? " into the desert.  You watch as she leaves and wave her a kiss goodbye before she disappears from your sight" : "")+".\n\n");
 		}
 		samirahAffection(20);
-		player.orgasm();
+		player.sexReward("vaginalFluids");
 		doNext(camp.returnToCampUseOneHour);
 	}
 	else if (player.hasVagina()) {
@@ -434,7 +434,7 @@ public function nagaDefaultSexScene():void {
 		outputText("Then, you leave her to her well-deserved rest, and slowly meander back to your camp, your brain still intoxicated with passion.\n\n");
 		player.cuntChange(30,true,false,true);
 		samirahAffection(20);
-		player.orgasm();
+		player.sexReward("Default","Default",true,false);
 		doNext(camp.returnToCampUseFourHours);
 	}
 	else {
@@ -459,7 +459,7 @@ public function samirahFuckHer():void {
 	outputText("and her scaly body rubbing on your skin only encourages you to go further as you rock back and forth in her embrace. You gradually increase your pace, hearing her moans become louder as she moves her hips in time with yours. Your fingers dig into her smooth backside as you continue thrusting into her, pleasure building for what seems like a wonderful eternity. You finally reach your limit, thrusting frantically until you climax, shooting thick ropes of sperm deep inside her as the both of you wail with excitement.\n\n");
 	outputText("You slowly untangle yourself from the panting naga and leave her to rest, basking in the warmth of sex and sun.\n\n");
 	samirahAffection(20);
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	doNext(camp.returnToCampUseOneHour);
 }
 public function samirahFuckHerWild():void {
@@ -474,7 +474,7 @@ public function samirahFuckHerWild():void {
 	outputText("The two of you lay there for a moment, basking in the warm glow of orgasm. Eventually Samirah slowly unwraps her tail from your own and gives you a kiss.\n\n");
 	outputText("\"<i>That was wonderful [name], let’s do this more often.</i>\"\n\n");
 	samirahAffection(20);
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	doNext(camp.returnToCampUseOneHour);
 }
 public function samirahTongueJob():void {
@@ -486,8 +486,8 @@ public function samirahTongueJob():void {
 	outputText("You moan in pleasure as the naga takes the tip of your member into her mouth and starts to suck. You can feel her deft tongue licking every inch of your cock head.\n\n");
 	outputText("At your limit, you let out a yell as you cum into her mouth. You collapse onto the dirt and lay there, basking in the warm glow of your orgasm. The naga slides onto your chest and gives you a kiss. \"<i>I rather enjoyed that,</i>\" she hisses into your ear, \"<i>We should do this more often.</i>\"\n\n");
 	samirahAffection(20);
-	player.orgasm();
-	doNext(camp.returnToCampUseOneHour);[cock]
+	player.sexReward("saliva");
+	doNext(camp.returnToCampUseOneHour);
 }
 public function samirahTailPenetration():void {
 	if (flags[kFLAGS.SAMIRAH_FOLLOWER] >= 10) clearOutput();
@@ -498,7 +498,7 @@ public function samirahTailPenetration():void {
 	outputText("\"<i>I hope you liked it.</i>\"\n\n");
 	outputText("That, you sure did!\n\n");
 	samirahAffection(20);
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	doNext(camp.returnToCampUseOneHour);
 }
 public function samirahTwinTailFuck():void {
@@ -523,7 +523,7 @@ public function samirahTwinTailFuck():void {
 	outputText("Your tails are still buried within one another, testament to the intensity of your lovemaking. You had sex until the both of you collapsed, side by side, juices dripping out into the ground. You slowly remove your tail from inside her body, and simultaneously pull hers from your [vagina]. You kiss her on the cheek, and are just close enough to hear her whisper. \"<i>No matter how many times we do this it’s always a wonderful experience.</i>\"\n\n");
 	outputText("You simply entwine your tail with hers and lay against her for a while, your brain still intoxicated with passion. You wake up an hour later ready to resume adventuring and highly satisfied.\n\n");
 	samirahAffection(20);
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	doNext(camp.returnToCampUseFourHours);
 }
 

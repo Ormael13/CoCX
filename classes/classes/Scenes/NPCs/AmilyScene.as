@@ -2066,7 +2066,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("Only when you are sure that the last of your climax is over do you pull out, carelessly striding over to retrieve your clothing and start getting dressed. Amily stares at you, her eyes hard and sharp as flints. \"<i>Was it good for you?</i>\" She spits. \"<i>Let's hope we've both gotten what we want out of this.</i>\"\n\n");
 
 			outputText("\"<i>I'll be happy to come back and do it again if you need.</i>\" You jeer back, finishing dressing yourself and leaving her without so much as a backwards glance.\n\n");
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			//Affection downer
 			flags[kFLAGS.AMILY_AFFECTION] -= 5;
 			amilyPreggoChance();
@@ -2090,7 +2090,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("Seeing as how she clearly has no further need for you, you quietly excuse yourself, get dressed and leave.");
 			flags[kFLAGS.AMILY_AFFECTION] -= 2;
 			amilyPreggoChance();
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//[=Kiss Her=]
@@ -2120,7 +2120,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("  Excusing yourself, you get dressed, receiving a lazy wave goodbye and a happy smile as you head out of the door and head for the main street, from there finding the way back to your camp.\n\n");
 			//Affection boost?
 			flags[kFLAGS.AMILY_AFFECTION] += 3;
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			doNext(camp.returnToCampUseOneHour);
 			amilyPreggoChance();
 		}
@@ -2272,7 +2272,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			amilyPreggoChance();
 			//Slight affection gain?
 			flags[kFLAGS.AMILY_AFFECTION] += 1 + rand(2);
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			dynStats("sen", -1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2335,7 +2335,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			amilySprite();
 			outputText(images.showImage("amily-forest-reverse-cowgirl"));
 			outputText("You decide to let her take the dominant position, relax (as much as you can with a beautiful, hot and very wet little mouse-girl sitting on you and fondling you) and simply enjoy her attentions. Amily obviously knows what she is doing - though you have no idea HOW she knows - and manages to bring you nearly to the climax before drawing back a little and letting you calm down.  She repeats this several times until you're nearly going crazy.  Just when you think you can't stand it anymore, she removes her tail from your cock and instead uses it to lightly bind your hands. You could easily move your hands, but decide not to. Grinning at you, she hovers a moment over your cock before slowly sinking down. You somehow manage to avoid cumming as soon as you enter her, but it's really, really hard. Amily's tail draws your 'bound' hands onto her breasts, while hers start caressing yours as she begins slowly riding you. Soon, the speed increases, and it isn't long before you both orgasm.\n\n");
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			dynStats("sen", -1);
 			AmilyMiddleGradeSexOver();
 		}
@@ -2345,7 +2345,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			clearOutput();
 			amilySprite();
 			outputText("You decide to take a more active role and start caressing her, kneading her breasts and making sure she enjoys it just as much as you do. Soon, Amily can't hold herself back and sinks down on you, beginning to ride you for all she's worth. It doesn't take you two long to reach the climax.\n\n");
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			dynStats("sen", -1);
 			AmilyMiddleGradeSexOver();
 		}
@@ -2472,7 +2472,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//boost affection
 			flags[kFLAGS.AMILY_AFFECTION] += 2 + rand(4);
 			flags[kFLAGS.AMILY_FUCK_COUNTER]++;
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			dynStats("sen", -1);
 			doNext(camp.returnToCampUseOneHour);
 			//preggo chance
@@ -2516,7 +2516,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//boost affection
 			flags[kFLAGS.AMILY_AFFECTION] += 2 + rand(4);
 			flags[kFLAGS.AMILY_FUCK_COUNTER]++;
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			dynStats("sen", -1);
 			doNext(camp.returnToCampUseOneHour);
 			//preggo chance
@@ -2991,7 +2991,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("Grinning at each other with obvious satisfaction in your eyes, you slowly relax and cuddle in the afterglow for some time, before you decide that you'll definitely repeat this soon.");
 			amilyPreggoChance();
 			doNext(camp.returnToCampUseOneHour);
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			dynStats("sen", -1);
 		}
 		//Take Charge 2: Mousemilk
@@ -3022,7 +3022,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			var refillAmount:int = (10 + (flags[kFLAGS.AMILY_CUP_SIZE] * 2)) * flags[kFLAGS.AMILY_LACTATION_RATE];
 			if (refillAmount > 100) refillAmount = 100;
-			player.refillHunger(refillAmount, false);
+			player.sexReward("milk");
 			fatigue(-refillAmount / 2);
 			doNext(camp.returnToCampUseOneHour);
 			dynStats("spe", .3, "lus", 10, "cor", -.5);
@@ -3056,6 +3056,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText(".\n\n");
 
 			outputText("She lies there, gasping for breath, even as you pick yourself up and start to clean yourself off. \"<i>Not my favorite...</i>\" She squeaks. \"<i>But definitely can't argue with the results.</i>\" You smile, and leave her in her nest to get her strength back.\n\n");
+			player.sexReward("vaginalFluids");
 			doNext(camp.returnToCampUseOneHour);
 			dynStats("int", .25, "lus", 10);
 		}
@@ -3087,7 +3088,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//(If Amily is herm:
 			if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("She turns halfway back to you as she goes. \"<i>I hope you'll remember this and return the favor someday,</i>\" she calls out to you. She then resumes walking off.");
 			doNext(camp.returnToCampUseOneHour);
-			player.orgasm();
+			player.sexReward("saliva");
 			dynStats("sen", -1);
 		}
 		//Take charge 5: scissor me timbers!
@@ -3104,7 +3105,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("Smiling in defeat, you kiss her again and switch your position so that you and the mousegirl are scissoring - or rather, you will be as soon as she realizes what you're up to and you both start moving. Sure enough, Amily soon grins at you again and tentatively pushes her vagina against your " + vaginaDescript() + ". You return the 'favor', and a few moments later, you two are grinding your vaginas against each other. Moans escaping from both your lips, it doesn't take long for the mousegirl and you to orgasm almost at the same time.\n\n");
 
 			outputText("With a contented sigh and a broad, satisfied smile, Amily murmurs, \"<i>That felt great...</i>\" She switches her position again so that her head is again next to yours, puts her arms around you and nuzzles you a bit. You embrace her too, and enjoy the afterglow with her for some time, before you both go back to work.\n\n");
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -3156,7 +3157,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				else player.knockUp(PregnancyStore.PREGNANCY_AMILY, PregnancyStore.INCUBATION_MOUSE);
 			}
 			doNext(camp.returnToCampUseOneHour);
-			player.orgasm();
+			player.sexReward("cum");
 			dynStats("sen", -1);
 		}
 
@@ -3199,7 +3200,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 				outputText("Naturally, you tell her that you enjoyed it very much, and with a smile, Amily helps you clean up. \"<i>If you liked it that much...</i>\" she says over her shoulder and winks at you as she goes to take care of something else.\n\n");
 				doNext(camp.returnToCampUseOneHour);
-				player.orgasm();
+				player.sexReward("Default","Default", true, false);
 				dynStats("sen", -1);
 				return;
 			}
@@ -3213,7 +3214,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 				outputText("With a satisfied smile, you turn to other things.");
 				doNext(camp.returnToCampUseOneHour);
-				player.orgasm();
+				player.sexReward("Default","Default", true, false);
 				dynStats("sen", -1);
 				return;
 			}
@@ -3240,6 +3241,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				//(if Amily is herm:
 				if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("and limp cock ");
 				outputText("across your chest as she repositions herself so that she is looking you in the eyes, laying atop you. \"<i>You always know how to make a girl feel special, don't you?</i>\" she says, softly. Then she kisses you, probing her tongue deep into your mouth to get a good taste of her juices, before wriggling off of you, grabbing her pants and running merrily away. You watch her go, then clean yourself off.\n\n");
+				player.sexReward("saliva");
 				doNext(camp.returnToCampUseOneHour);
 				dynStats("int", .25, "lus", 10);
 				return;
@@ -3265,7 +3267,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("Exhausted, you feel a quick nap is in order yourself. When you wake up, you're alone in the nest but Amily is nearby; she hands you some food and then points you in the direction of the stream to wash up.\n\n");
 				amilyPreggoChance();
 				doNext(camp.returnToCampUseOneHour);
-				player.orgasm();
+				player.sexReward("vaginalFluid");
 				dynStats("sen", -1);
 				return;
 			}
@@ -3284,6 +3286,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				else outputText("For a guy?</i>\"\n\n");
 
 				outputText("You shrug, uncertain. Slowly, Amily sits up and gets off of you. \"<i>I... um... thank you.</i>\" She says, then quickly steals a kiss from you before running off. She's in such a hurry that she's clear over on the other side of the camp before you can tell her that she left her pants behind.");
+				player.sexReward("cum");
 				doNext(camp.returnToCampUseOneHour);
 				dynStats("int", .25, "lus", 10);
 				return;
@@ -3325,7 +3328,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 					else player.knockUp(PregnancyStore.PREGNANCY_AMILY, PregnancyStore.INCUBATION_MOUSE);
 				}
-				player.orgasm();
+				player.sexReward("cum");
 				dynStats("sen", -1);
 			}
 			doNext(camp.returnToCampUseOneHour);
@@ -4531,7 +4534,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//[(if PC has big cum amount)
 			if(player.cumQ() >= 1000) outputText("  Her belly distends and doesn't stop distending, nor does the flow of your cum ebb. For Amily, this is her purpose in life, to serve as a receptacle for your lusts, to serve you like a good cumbucket and take every little drop you pour into her. That thought only makes you cum harder.");
 			outputText(" Finally, the flow of cum ebbs; Amily rubs her distended belly and inhales sharply, pulling back slightly. With a brutal thrust, she blows on your cock; sending a shock of pleasure running through you and milking a few more spurts of cum. Now completely spent, you pull back; Amily tries to keep your cock inside her mouth by sucking on it with all her might, but it's useless. With a <b>POP</b> you pull your [cock] free of Amily's hungry jaws; it is clean, without a single trace of cum and barely any spit on it. You look at Amily and she looks back, smiling happily and licking her lips. \"<i>Thank you for the meal, " + player.mf("master","mistress") + ",</i>\" she says before a small burp escapes her. You pat her on the head, get dressed, and leave Amily, satisfied with her good work.");
-			player.orgasm();
+			player.sexReward("saliva");
 			dynStats("sen", 1, "cor", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -4606,7 +4609,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("Amily coughs, but gathers as much of your spilled juice as she can and licks if off her hands.  When she's settled down, you look at her, as if waiting for something.  \"<i>Oh! Of course, forgive me mistress,</i>\" Amily says, quickly scrambling up onto her knees to begin licking your pussy and thighs clean. Once you're satisfied, you get dressed and walk away.  \"<i>Mistress!</i>\" Amily calls out to you; you turn to see the smiling corrupt mousette rubbing her belly and licking her lips.  \"<i>Thank you for the wonderful meal.</i>\"\n\n");
 
 			outputText("You chuckle and dismiss her with a wave.");
-			player.orgasm();
+			player.sexReward("saliva");
 			dynStats("sen", -1, "cor", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -4685,7 +4688,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("Amily goes limp while your juices continue dripping on her.  She pants as she looks at you with mixed desire and adoration, moving into a kneeling position to say, \"<i>Thank you for letting this worthless cumslut pleasure you.</i>\" You just smirk at her before reaching down to scoop up some of the pooled sexual fluids.  You plaster it in a crude pattern onto the "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"mouse":"succubi")+"'s "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"muzzle":"face")+". \"<i>Never forget; you belong to me, my little toy,</i>\" you tell her. Then, feeling generous, you decide to give her the honor of your kiss, tongue fiercely probing to help emphasize that Amily is yours. Then, standing up, you see the state you are in and frown. \"<i>Clean me off, slut; I don't need to be reeking of juices all day,</i>\" you order her imperiously.\n\n");
 
 			outputText("Amily beams with happiness, \"<i>Yes mistress!</i>\" then proceeds to clean you up, licking every single drop she can out of your body.  To finish it all up, she licks your [feet] clean of whatever juices remained on them. Satisfied, you dismiss Amily with a wave, heading back to the camp, while Amily rubs the results of your coupling on her body.");
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			dynStats("sen", -1, "cor", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -4780,7 +4783,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if(player.hasVagina()) outputText("  Once she's done with your cock she begins licking your thighs; ensuring none of your precious juices go to waste.");
 			outputText("  Amily licks her lips after her task and looks up at you lovingly. You pat her head and dress up, before leaving the mousette to her own devices.");
 			amilyPreggoChance();
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			dynStats("sen", -2, "cor", 2);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -4851,7 +4854,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//Preg chanceeee
 			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
             else player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE);
-			player.orgasm();
+			player.sexReward("cum");
 			dynStats("sen", -2, "cor", 2);
 
 			doNext(camp.returnToCampUseOneHour);
@@ -4904,7 +4907,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//[(if PC has balls)
 			if(player.balls > 0) outputText(" and her spilled juices from your balls");
 			outputText("; stopping only when you're completely clean. You pat her head and praise her, \"<i>That's a good cumdumpster.</i>\" She responds by smiling tiredly, still panting a bit, and swaying her tail in happiness. You wipe the remaining saliva off your dick on her face and dress yourself. \"<i>Don't waste a single drop, cunt,</i>\" you tell her.  You leave the tired mouse alone to recompose herself.");
-			player.orgasm();
+			player.sexReward("default","default", true, false);
 			dynStats("sen", -2, "cor", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -5021,7 +5024,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			else outputText("\"<i>...Does it make me a lesbian, that I love this so much? Or am I just so lonely for company that even another woman is good?</i>\" Amily asks. Then she musters the energy to shake her head. \"<i>It doesn't matter. I love you.</i>\"\n\n");
 
 			outputText("Your own strength returning to you, you sit up and smile at your mousey lover before giving her a deep kiss, tasting your juices and letting her get a taste of her own. Then you redress yourself and return to your camp.");
-			player.orgasm();
+			player.sexReward("cum");
 			flags[kFLAGS.AMILY_TIMES_FUCKED_FEMPC]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -5076,7 +5079,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			outputText("</i>\"  Chuckling softly, you lay there and embrace your lover for a time and then, reluctantly, you get dressed and leave.");
-			player.orgasm();
+			player.sexReward("cum");
 			flags[kFLAGS.AMILY_HERM_TIMES_FUCKED_BY_FEMPC]++;
 			flags[kFLAGS.AMILY_FUCK_COUNTER]++;
 			doNext(camp.returnToCampUseOneHour);
@@ -6382,7 +6385,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("You keep feeding her more and more cum, your orgasm lasting much longer than usual. Amily's belly even distends a bit from the quantity, her pussy leaks juice like an open tap; it seems servicing you was enough to drive her over the edge several times.\n\n");
 
 			outputText("Finally done, you let go of her and get up; she proceeds to slump down and give a small burp of satisfaction, then drift off into sleep. You untie her and proceed to get dressed; you give her a light pat on the thigh and return to your camp. You'll have to do this again sometime later...");
-			player.orgasm();
+			player.sexReward("saliva");
 			dynStats("lib", -2, "cor", 5);
             if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
@@ -6685,7 +6688,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("You try to summon more strength to continue fucking the mouse's wonderful throat, but for the moment you're spent. \"<i>Go and keep practicing, I'll come to feed you later.</i>\" Amily smiles, licks her lips and gives your cock a parting kiss before running away to one of her hideouts.\n\n");
 
 				outputText("You return to the camp.");
-				player.orgasm();
+				player.sexReward("saliva");
 				dynStats("cor", 3);
 				doNext(camp.returnToCampUseOneHour);
 				return;
@@ -7371,7 +7374,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\"<i>Mmm,</i>\" she purrs, giving your cheek a last stroke with her thumb.  \"<i>We gotta do this again sometime.</i>\"\n\n");
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-			player.orgasm();
+			player.sexReward("cum");
 			dynStats("sen", -2);
 			outputText("You couldn't agree more.");
 
@@ -7476,7 +7479,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			outputText("\"<i>Mm... you know... maybe we should do this again sometime,</i>\" she says with a devious smirk, kissing your cheek.");
 			flags[kFLAGS.AMILY_TIMES_BUTTFUCKED_PC]++;
-			player.orgasm();
+			player.sexReward("cum");
 			dynStats("sen", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -7553,7 +7556,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("You very carefully pull back, Amily drawing a sharp intake of breath when you are fully freed from the grips of her pucker.  Gently sliding down alongside her, you draw her into a warm embrace, cuddling with her for a long while afterward");
 			if(player.cumQ() > 500) outputText(" and gently stroking along the curves of her belly with a smile");
 			outputText(".");
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			dynStats("sen", -2);
 			flags[kFLAGS.TIMES_FUCKED_AMILYBUTT]++;
 			doNext(camp.returnToCampUseOneHour);
@@ -7645,7 +7648,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\n\nIt isn't until you try to stand that you realize how thoroughly worn-out you are, and as you roll onto your side, you close your eyes and doze, watching cum squirt out of Amily's pussy from around your daughter's knot.");
 			}
 			amilyPreggoChance();
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			dynStats("lib", -1, "sen", -1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -7776,7 +7779,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if(player.hasCock()) outputText("another ");
 			outputText("penis, a rush of eggs engorges your shaft, leaving your abdomen feeling as light as air.  Amily moans as egg after egg pushes past her ring, still playing with her rear whilst you finish filling her with your clutch, her stomach pressing gently against yours as it bulges with her new load.  Before long the last egg slips out of the tip of your ovipositor and it begins to withdraw reflexively, slipping from its tight confines far more easily that it entered due to the impossible amount of slime that lines Amily's passage.  It cascades from her once you fully withdraw, covering you with a thick layer of the stuff as you both lie there, slowly drifting off to sleep.");
 			//[Next]
-			player.orgasm();
+			player.sexReward("DEFAULT","DEFAULT", true, false);
 			if (player.fertilizedEggs() > 0) {
 				if (player.canOvipositSpider()) {
 					pregnancy.buttKnockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER - 304); //(96)
@@ -7915,7 +7918,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			outputText(".\n\n");
 			outputText("Once finished, gently set the moaning girl down and tug her bikini bottom back in place to hold in the cream filling.  Amily moans, \"<i>Pervert,</i>\" but she doesn't stop you.  She even helps you get dressed again, and the two of you walk back to camp, hand and hand, clean and dirty at the same time.");
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			dynStats("sen", -1);
 			amilyPreggoChance();
 			doNext(camp.returnToCampUseOneHour);
@@ -8183,7 +8186,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 		private function izmaAmilyDrugThreeWaySex3():void {
 			clearOutput();
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			dynStats("sen", -3);
 			outputText("<b>Some time later...</b>\n");
 			outputText("You come to in a daze.  You're soaked in sexual juices of all kinds from the waist down, though for once, [eachCock] has gone soft.  Izma is snuggled up under your left arm and Amily under your right.  They're still asleep, but they're even more soaked than you, and hugging each other across your body.  The potion may have worked a little differently than Amily designed it to, but you can't really complain about the results.");
@@ -8340,7 +8343,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("\n\nAmily tips her head to the side, smiling in post-coital bliss as she clenches her thighs together to hold in your cum.  \"<i>We had better schedule an appointment for your next visit then, hadn't we?</i>\"");
 			if(!repeat) outputText("\n\n(<b>Nurse RP sex option unlocked for Amily!</b>)");
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			dynStats("sen", -2);
 			amilyPreggoChance();
 			doNext(camp.returnToCampUseOneHour);

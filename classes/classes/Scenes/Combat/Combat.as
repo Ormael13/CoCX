@@ -100,10 +100,10 @@ public class Combat extends BaseContent {
 		return mod;
 	}
 	public function maxTeaseLevel():Number {
-		return teases.maxTeaseLevel();
+		return player.maxTeaseLevel();
 	}
 	public function teaseExpToLevelUp():Number {
-		return teases.teaseExpToLevelUp();
+		return player.teaseExpToLevelUp();
 	}
 	public function bonusExpAfterSuccesfullTease():Number {
 		return teases.bonusExpAfterSuccesfullTease();
@@ -7417,7 +7417,7 @@ public function tease(justText:Boolean = false):void {
 }
 
 public function teaseXP(XP:Number = 0):void {
-	teases.teaseXP(XP);
+	player.SexXP(XP);
 }
 
 //VICTORY OR DEATH?

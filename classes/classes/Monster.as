@@ -3425,4 +3425,4 @@ import flash.utils.getQualifiedClassName;
 			armorMDef += ((int)(1 + armorMDef / 10)) * newGamePlusMod();
 		}
 	}
-}
+}

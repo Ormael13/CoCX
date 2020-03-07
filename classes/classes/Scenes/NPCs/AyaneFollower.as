@@ -204,7 +204,7 @@ public function ayaneWorship():void
 	}
 	outputText("\"<i>Is " + player.mf("milord", "milady") + " satisfied?</i>\"\n\n");
 	outputText("You reply that Ayane is doing a wonderful job and that you are indeed quite satisfied by her worship. A few minutes later the both of you start redressing, ready to continue on your journey.");
-	player.orgasm();
+	player.sexReward("saliva");
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -220,7 +220,7 @@ public function ayaneAnal():void
 	outputText("You sure feel like obliging her, increasing the pace as Ayane wails in pleasure. Your cock suddenly throbs and explodes in her ass with a creamy deluge. You slowly remove your cock from the abused kitsune's ass, cum drooling slowly from her hole.\n\n");
 	outputText("\"<i>Ahh... So wonderful... To be filled with your seed is a blessing...</i>\"\n\n");
 	outputText("You clean your cock on one of her silky white tails, making her gasp, as the both of you slowly proceed to redress.");
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	doNext(camp.returnToCampUseOneHour);
 }
 

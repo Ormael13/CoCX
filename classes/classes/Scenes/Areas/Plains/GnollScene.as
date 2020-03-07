@@ -97,9 +97,7 @@ package classes.Scenes.Areas.Plains
 			}
 			outputText("The hyena girl slumps against your body, but only for a moment.  Then she's suddenly up again, sliding her bizarre member out of you with an obscene slurp.  She leans down to pat your cheek and giggles, \"<i>Thanks, lover.</i>\"   Then she sprints off towards the horizon.");
 			outputText("  A whimper bubbles up your throat and comes out as a half-giggle as you slump down unconscious.");
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			cleanupAfterCombat();
 		}
 
@@ -153,7 +151,7 @@ package classes.Scenes.Areas.Plains
 			//(if cumQ()>500)
 			else outputText("Your " + cockDescript(x) + " convulses, pouring cum into her.  Her clitoris bulges even more as the jism backs up, the skin pulling tight and shiny as the pressure builds.  Finally gouts of cum begin spurting back out the tip of her clitoris, splashing against your crotch.");
 			outputText("  With a lusty groan, you pull out with a long, slippery sound, and leave the gnoll panting on the dusty ground.");
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
 
@@ -229,7 +227,7 @@ package classes.Scenes.Areas.Plains
 				}
 				outputText("Satisfied, you leave the gnoll to her pleasures, gather your [armor], and head back to camp.");
 			}
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
 
@@ -258,7 +256,7 @@ package classes.Scenes.Areas.Plains
 			outputText("\"<i>Hey!</i>\" you shout, and reach forward to slap the gnoll across the face.  Abruptly the clit-dick hardens inside you, even as the girl's face registers little response.  With a smirk, you try it again.  A second hard slap brings the hyena's pseudocock ramrod straight up inside you, and you roll your hips atop her appreciatively.\n\n");
 			outputText("Every few strokes, the fake dick starts to fail you and you reach forward to slap her again.  Pump pump slap.  Thrust thrust smack.  Grunt grunt slap.  By the time your body rises up to the quivering summit of orgasm, the gnoll's face is purple with bruises.  You scream your orgasm to the sky, bearing down hard on her hollow clitoris, and come hard enough that you see stars.\n\n");
 			outputText("When you can get your feet under yourself again, you stand up, letting the now-shrunken clitoris fall out of your " + vaginaDescript(0) + " with a wet plop.  You leave her there on the sun-caked ground and head back to camp.");
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
 
@@ -311,7 +309,7 @@ package classes.Scenes.Areas.Plains
 			clearOutput();
 			outputText("Finally, you feel the gnoll's clit slide out of your anus as the overly-endowed girl collapses at your side.  Broken utterly, she pants with depraved exhaustion, no strength left to continue pounding your body into the dirt.  Even now, she strokes her massive clit with one spotted paw as the other helplessly massages the basketball-sized testicles that audibly churn with gallons of the girl's jizz.  Finding a reserve of strength you didn't know you had, you rise tenderly and gather your belongings, creeping away before the hyena-girl can get her second wind.");
 			//[24 hours pass, player asshole size increased, sensitivity significantly lowered, toughness lowered temporarily, fatigue maxed, remove one succubi's dream]
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			dynStats("lib", 2, "sen", -10);
 			cleanupAfterCombat();
 		}

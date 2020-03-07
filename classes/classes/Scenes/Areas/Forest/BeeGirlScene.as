@@ -208,7 +208,7 @@ public class BeeGirlScene extends BaseContent
 				outputText("You shiver as this unearthly woman starts to probe your most private hole, running her tongue around the edge and up the crack.  The whole time she is giggling at the sensation of having her tongue on your ass.  <i>“You tazzzte really good, I wonder what the inzzzide izzz like....”</i>  You barely have time to register what she just said before inhaling sharply at the sensation of her tongue plunging into the entrance of your " + buttDescript() + ".  You fall forward onto your hands, and your mind starts to go on a rollercoaster ride from what you are now enduring.  The next few minutes pass in a blur to you as her tongue probes the recesses of your bowels, overwhelmed by the sensations, and the feeling of the honey that she is spreading into the insides with her tongue.\n\n");
 				outputText("You aren’t able to regain your wits until she has pulled back out of you and sent you on your way back to camp.  The whole situation was very vivid now that you’ve had a chance to think about it.  You know you came at least 3 times from her tongue, that she told you to come back soon for the full experience next time, and that you actually feel better than you have in a long time!\n\n");
 			}
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -259,8 +259,7 @@ public class BeeGirlScene extends BaseContent
 			outputText("The two of you remain connected to one another for the better part of an hour.  Despite all the other sources of pleasure available to you here, you find yourself focusing the most on the organ inserted into your rear end.  The handmaiden seems to catch onto this, and start to pull her organ in and out of your back entrance.  Each time the lowest knot on her passes through your hole, both of you let out great moans of pleasure.\n\n");
 			outputText("Eventually, her supply of eggs runs out, and she thanks you for the time that you spent together.  With the amount of pleasure you experienced, there is no question in your mind that it was quite worth it.  She does hand you a gift as a final thank you for your service before flying off.\n\n");
 			if (!player.isButtPregnant()) player.buttKnockUpForce(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE);
-			player.orgasm();
-			player.slimeFeed();
+			player.sexReward("vaginalFluids");
 			switch (rand(10)) {
 				case  0: inventory.takeItem(consumables.W__BOOK, camp.returnToCampUseOneHour); break;
 				case  1:
@@ -375,9 +374,8 @@ public class BeeGirlScene extends BaseContent
 				outputText("You have no idea for how long it goes on for, or how many times the bee girl managed to get you to orgasm despite your lack of endowments, but the whole time, you felt nothing but bliss and release.\n\n");
 			}
 			outputText("Once the last of the eggs are pushed deep inside your bowels, the bee girl sighs and slowly removes the knotted implement that was filling your [ass].  She sets you back down on the flower and gives you a full mouth kiss before saying <i>“Zzzee you next time...”</i>  In a few moments, you drift off to sleep.  You wake up several hours later, feeling giddy, and you notice that something wet is leaking from your anus.\n\n");
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			dynStats("int", -.5);
-			player.slimeFeed();
 			if (rand(2) == 0) player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1); //Anal bee pregnancy!
 			player.buttChange(25, true);
 			doNext(camp.returnToCampUseFourHours);
@@ -604,9 +602,8 @@ public class BeeGirlScene extends BaseContent
 					outputText("After hours of her forcefully filling your hole, her stinger pumping what feels like gallons of her bee-seed into your bowels while awkwardly dealing with your needs; she finally pulls out. She smiles and lies down on your back and your legs finally give out from exhaustion.\n\n");
 					outputText("When you awaken, you're covered in honey and what you can only assume is the lubrication from her ovipositor. You stand with a bit of a struggle and notice that in your wild state you seem to have devastated the little clearing, as it's covered with broken trees and trampled plants. A thin trail of honey leads away from the devastation into the undergrowth.");
 				}
-				player.orgasm();
+				player.sexReward("vaginalFluids");
 				dynStats("int", -.5);
-				player.slimeFeed();
 				//Anal bee pregnancy!
 				if (rand(3) == 0) player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
 				player.buttChange(25, true);
@@ -627,7 +624,7 @@ public class BeeGirlScene extends BaseContent
 				//epilogue
 				outputText("You awaken, your nose full of a honey like scent, some strange fluid on your back, and the feeling of something leaking from you.");
 				player.buttChange(25, true);
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 				dynStats("int", -.5);
 				//Anal bee pregnancy!
 				if (rand(3) == 0) player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
@@ -675,9 +672,8 @@ public class BeeGirlScene extends BaseContent
 				outputText("you drive yourself to orgasm after orgasm.  For hours you lie there, licking, masturbating, and allowing your backside to be slowly filled with sweet fluid and the occasional bump of what you can only assume is an egg.\n\n");
 				//Recovery
 				outputText("Eventually you realize she is no longer feeding you honey, and the bee-girl pulls her shriveled organ from your rectum.  She pats you on the head and begins to stagger away, honey dripping from between her thighs and her once bloated rear-abdomen now looking more appropriate for her thin frame.");
-				player.orgasm();
+				player.sexReward("vaginalFluids");
 				dynStats("int", -.5);
-				player.slimeFeed();
 				//Anal bee pregnancy!
 				if (rand(3) == 0) player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
 				player.buttChange(25, true);
@@ -718,7 +714,7 @@ public class BeeGirlScene extends BaseContent
 					outputText("Starting with your [cock], the bee girl starts stroking your shaft with one hand, while her other hand runs in circles around the tip.  She doesn’t limit her attention to just your leading member though, she is quick eager to lavish the same treatment onto your " + player.cockDescript(1) + " too.  <i>“Hmm, it’zzz hard to get all of you when you’re like thizzz.  It’ll be zzzo much better when you juzzzt have one.”</i>  " + (player.cocks.length > 2 ? "This doesn’t stop her from performing the same treatment on the whole of your " + player.multiCockDescript() + ", alternating between each of your manhoods.  " : "") + "Her hands start to increase the rate of their stimulations, quickly pushing you to your limit.\n\n");
 				}
 				outputText("In moments, her hands are covered with your usual level of cum, though this gets not much more than a nod of approval from the giver of your pleasure.  She gently sets you to the side of her and pulls the bottle from her lower lips and puts a cork on the bottle before setting it down on your stomach.  <i>“Take thizzz after it hazzz had an hour to zzzet.”</i> she tells you before picking up her bag and flying away.  Thanks to the after effects of her scent, you don’t really have a chance to react before you drift off to sleep for several hours.\n\n");
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 				dynStats("lib", 3, "cor", -2);
 				inventory.takeItem(consumables.SPHONEY, camp.returnToCampUseFourHours);
 			}
@@ -755,7 +751,7 @@ public class BeeGirlScene extends BaseContent
 				outputText("If you take lot’zzz of this zzzpecail honey, you’ll be able to become a real man!");
 			}
 			outputText("”</i> she says handing you the bottle with a wink.  Then she wipes off some of the dried cum from her face, takes her bag, and flies off.  Just before she is out of sight she calls back to you, <i>“I look forward to zzzeeing you again zzzoon!”</i>  After cumming so many times it's no surprise that you wake up hours later, having drifted off to sleep.\n\n");
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			dynStats("lib", 2, "sen", 2, "cor", -3);
 			inventory.takeItem(consumables.SPHONEY, camp.returnToCampUseFourHours);
 		}
@@ -947,7 +943,7 @@ public class BeeGirlScene extends BaseContent
 				outputText("Just having her chitin covered fingers playing around with your " + buttDescript() + " feels great, and it’s worth just staying there for a few moments.  Still, best to get to the main course you figure, and move your finger to the edge of her rear entrance.  You gently poke at the entrance to for a moment to help her get ready for your invasive activities.  Your insectoid lover gives no such time to prepare, and simply shoves her wet digit as deep as she can into your " + assholeDescript() + ".\n\n");
 				outputText("The sudden stimulation is rather jarring, and makes you jam your finger inside her as well, eliciting a rather happy sound from your partner that is something between a buzz and a moan while you feel a spray of honey fly onto your bare crotch.  Fortunately you won’t be left disappointed in this love making session.  Her orgasm brings an odd buzz to her whole body and the feel of her vibrating finger in your depths pushes you well over the edge as well.");
 			}
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			doNext(beeMaidenConversation);
 		}
 		
@@ -1078,8 +1074,7 @@ public class BeeGirlScene extends BaseContent
 				//outputText("Each of your thrusts is coupled with pushing your hips down as you draw back, your pussy eagerly accepting the eggs as the bee-girl forces them inside you.  Your womb bulges from your stomach with the sheer number.  ");
 				outputText("You can feel a pressure rising from the base of your cock. Thrusting deeply, you let out a howl as you cum, your cock spilling forth its sticky load into her, filling her pussy to the brim with your fluid.  ");
 				outputText("Panting, you collapse onto her, as your cock finally stops twitching. Kissing you again, the bee-girl slides from beneath you and stands. She holds her stomach while a large smile plays on her face. You smile back at her as a feeling of contentment washes over you. You have no regrets as you part.");
-				player.slimeFeed();
-				player.orgasm();
+				player.sexReward("vaginalFluids");
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1127,7 +1122,7 @@ public class BeeGirlScene extends BaseContent
 							outputText("You awake in a puddle of cum, the scent wafting up to you and making your stomach churn. You manage to settle it and stagger to your hooves, wobbly walking away using trees to steady yourself.\n\n");
 							outputText("Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.");
 						}
-						player.orgasm();
+						player.sexReward("Default","Default",true,false);
 						dynStats("int", -.5);
 					}
 					//[Male without testicles:
@@ -1299,7 +1294,7 @@ public class BeeGirlScene extends BaseContent
 					cleanupAfterCombat();
 					outputText("\n\nSeveral hours later you wake up free of pain - if anything you feel great, a warm tingling sensation rippling through your whole body every time you move as you sit upright. As you look down you see you are still naked and covered in your own seed. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.");
 					sexed = true;
-					player.orgasm();
+					player.sexReward("Default","Default",true,false);
 					return;
 				}
 				//Generic male bee-rape
@@ -1315,8 +1310,7 @@ public class BeeGirlScene extends BaseContent
 					outputText("After hours of her forcefully filling your hole, her stinger pumping almost gallons of her bee-seed into your very bowels, hours of you stroking yourself to ejaculation, she finally pulls out. With her stinger still dripping seed onto your back, she smiles, watching you blow your last load into a pool of semen underneath you, and collapse exhausted.\n\n");
 					//epilogue
 					outputText("You awaken, your nose full of a honey like scent, some strange fluid on your back, and the feeling of something leaking from you.");
-					player.slimeFeed();
-					player.orgasm();
+					player.sexReward("vaginalFluids");
 					dynStats("int", -.5);
 					//Anal bee pregnancy!
 					if (rand(3) == 0) player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
@@ -1349,8 +1343,7 @@ public class BeeGirlScene extends BaseContent
 					if (player.isTaur()) outputText("Suddenly, you feel a sharp pain right into your clit, followed by a sexual warmth so intense this time, that it engulfs you and turns you into a sex-craving slut.  Anticipating the effect, she repositions her honeyed pussy over your face.  You begin to lick, suck and kiss it frenetically, burying your tongue into her deepest recesses.  She giggles at first, but soon the only noises you hear from her are moans becoming more and more intense. As her arousal shoots through the roof, you feel her legs twitching, and she suddenly grabs your head and forces your face into her crotch. You continue eating her out voraciously, oblivious to secondary things like breathing.\n\n");
 					else outputText("Your moans are muffled by the honeyed pussy on your face, and you hear her starting to squeal loudly. Her thighs clamp tightly around your ears, grinding harder into your face as her stinger picks up the pace.  ");
 					outputText("It gets harder and harder to breathe, the thick flow of honey threatening to suffocate you as the bee-girl reaches her climax.  You feel your body finally succumbing to the pleasure and oxygen deprivation and cum HARD, the world going comfortably dark as you lose your grip on consciousness.");
-					player.slimeFeed();
-					player.orgasm();
+					player.sexReward("vaginalFluids");
 					dynStats("int", -.5);
 					cleanupAfterCombat();
 					return;
@@ -1432,7 +1425,7 @@ public class BeeGirlScene extends BaseContent
 				outputText("Letting go of her arms, you grip the base of her abdomen for leverage and let her arms and legs slide around you as your pace increases.  You show her how to press her breasts together against your [cock], and she obliges, rubbing them back and forth as you fuck her.  With your jiggling breasts added to the mix, it becomes even more enjoyable, your " + breastDescript(0) + " mashing against hers.  The milk leaking out of your immense jugs runs down your bodies and adds further to the ocean of fluids forming between your hips.\n\n");
 				outputText("The heads of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " rub back and forth against the bee-girl's lips and face, and finally curiosity leads her to begin tasting, her surprisingly long tongue lassoing and swirling around every tip she can reach in turn, darting from one to another as if tasting flowers to provide an experience almost as unique as her pussy.\n\n");
 				outputText("You feel her abdomen pressing against your rear as you drive into her, the pressure in your groin building as her pussy and ass tighten around you. With a groan you cum, your hot seed gushing in alternating spurts out of each of your shafts into her eager little holes while your tight cunt juices itself with your own brand of honey. She clenches you tightly, her belly distending slightly as you empty your load into her pussy and ass while she squeals again at getting her face covered in seed.  Exhausted from the battle and the fuck, she relaxes and collapses on the ground, panting heavily and half-conscious.");
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 				cleanupAfterCombat();
 				return;
 			}
@@ -1443,7 +1436,7 @@ public class BeeGirlScene extends BaseContent
 				outputText("You decide that it's time to bring your other gift into play. Atop the bee-girl you fire in one more stroke of your [cock] and then you run your free hand from her black lips across her breast and across her abdomen before you rest it on her clit. You tweak her sensitive spot along with the strokes from your intruding member and then when the rush of nectar and cum juices from her pussy seem up to the task you grab hold of your other " + cockDescript(1) + " and forcefully ram it into her pussy right below your first entry.\n\n");
 				outputText("At this the bee-girl shrieks in utter bliss as her eyes roll back and she can't fight back the tingles coursing through her as you stretch her pussy lips.  You let go of her hands and watch with a satisfied grin as she tosses, turns, and clings to the dirt with a rich mix of pain and pleasure from the rough double-penetration. Suddenly you're caught off guard slightly as she pushes forward, almost tackling you. For an instant you're prepared to finish off the bee-girl, but the lust in her eyes is easy enough to read and she looks down, begging to be fucked and filled.  Grabbing onto her arms to brace against and suckling at her ample breast, you force your twin rods into her again and again while a pool of her sexual juices and sweet nectar form at your crotch from each slip in to her moist wetness. The bee-slut moans as you push your rock-hard cocks into her slick pussy, and you can just see the detectable bump of your cock head edging along her stomach, but strong as you are the tightness is overwhelming as her pussy muscles clench about your cocks.\n\n");
 				outputText("Letting go of your hands the bee-girl leans back and her mouth opens in a powerful scream of ecstasy that you're sure will scatter any wild-life or imps who hear the noise. As she flings herself back, your body clenches and a torrential storm of white, warm cum soars from the tip of your members into her innermost spaces. Unable to cope with the feelings coursing through her, the bee-girl nearly faints as she comes to a rest on your chest.  You catch your breath and the last couple of cum shots is milked by her still clenching pussy. Rolling over, you free both of your cocks from her fuck-hole and watch with more than a bit of satisfaction.  The dam breaks and a sea of white escapes her stretched, well-lubricated pussy. Pleased with your latest jaunt through the forest, you collect your gear and settle off, leaving the cum-drenched bee-girl covered in your seed.");
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 				cleanupAfterCombat();
 				return;
 			}
@@ -1565,7 +1558,7 @@ public class BeeGirlScene extends BaseContent
 					if (player.cumQ() >= 750) outputText(" and watching as her lower body sinks into your spunk like a thick white bath");
 					outputText(". Once she looks comfortable you make your way back to camp, thoroughly satisfied.");
 				}
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 				cleanupAfterCombat();
 			}
 			else if (rand(2) == 0) {
@@ -1591,7 +1584,7 @@ public class BeeGirlScene extends BaseContent
 				if (player.cumQ() >= 250 && player.cumQ() < 500) outputText("You smile proudly at the steady stream of your cum that pours from her abused cunt, pooling underneath her.   Her abdomen even looks bloated with your seed.");
 				if (player.cumQ() >= 500 && player.cumQ() < 1000) outputText("You smile proudly at your handy-work, noting how bloated and distended the bee's abdomen is.  It bulges obscenely, nearly double its previous size.  A sizable river of your spunk drools from between your legs, but amazingly she seems able to keep most of your over-sized orgasm in.");
 				if (player.cumQ() >= 1000) outputText("You giggle at your poor victim's state.  She really is a mess.  Her abdomen and belly are both swollen, making her look pregnant in both her bee AND human halves.   A practical river of spunk drools from her glossy pussy-lips, pooling below her.  Even her ovipositor dangles down, dripping with your seed, forced out from her abdomen by the sheer amount of spunk she's carrying.  It twitches, bulges moving along its length, eventually dropping egg after egg on the ground, unable to keep in its cargo.");
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 				cleanupAfterCombat();
 			}
 			//Male 2
@@ -1600,7 +1593,7 @@ public class BeeGirlScene extends BaseContent
 				outputText("You begin to push forward, sliding your " + cockDescript(x) + " against the soft folds of her pussy, her whimpers shifting gently into moans. Your grin widens as you penetrate her roughly in one strong stroke, the bee-girl's body tensing underneath you as a squeal leaves her lips. Looking into her eyes, you see a faint glimmer of defiance, and under your body you feel her shifting slightly, muscles growing firm and tense. The realization hits you, and you manage to shift before her stinger comes into contact with you. Moving your knee, you pin her thick abdomen down and remove the threat.\n\n");
 				outputText("Unhindered, you start to fuck her. Her pussy tightens and convulses around your cock, becoming slick with her juices and your pre-cum. You can smell the sickly combination of nectar, sweat and love juices hanging thickly in the air. Your breathing becomes heavy while her moans get deeper and lust-filled. Her reluctance evaporates, her struggling shifts into more receptive movements against your body, her hips rocking against yours with each thrust, forcing your " + cockDescript(x) + " deeper into her tight honeypot.\n\n");
 				outputText("Letting go of her arms, you grip the base of her abdomen for leverage and let her arms and legs slide around you as your pace increases. You feel her abdomen pressing against your rear as you drive into her, the pressure in your [balls] building as her pussy tightens around you. With a groan you cum, your hot seed gushing inside of her. She clenches you tightly, her pussy milking your " + cockDescript(x) + " for every ounce, until the sticky white fluid is pouring from around your " + cockDescript(x) + ". Exhausted from the battle and the fuck, she relaxes and collapses on the ground, panting heavily and half-conscious.");
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 				cleanupAfterCombat();
 			}
 		}
@@ -1672,7 +1665,7 @@ public class BeeGirlScene extends BaseContent
 				if (player.isTaur()) outputText("You orgasm in no time, coating her face with girl-cum the process.  You return the favor and dive into her muff, planting kisses and licks down as a reward for your victim's rather skilled efforts.  The taste is sweet and sexy all at once, and you quickly lose track of your reward scheme, simply licking and slurping to get as much of her nectar as possible until she is satisfied as well.");
 				else outputText("In no time you both orgasm, sweet girl-cum coating both your faces as you work each other's cunt with desperation born of desire.  ");
 			}
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
 
@@ -1750,7 +1743,7 @@ public class BeeGirlScene extends BaseContent
 				else outputText("Your body's cum supply eventually empties");
 				outputText(", and you turn your back on your soaked, cum-bloated conquest and the puddle of spooge that's rapidly wicking into the ground.");
 			}
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
 
@@ -1788,7 +1781,7 @@ public class BeeGirlScene extends BaseContent
 				if (player.hasCock()) outputText(", spraying the fuzzy side of the bee's abdomen with your sticky come,");
 				outputText(" before you get enough.  Ahh, who knew that stuff would be this much better when it was still fresh in the bee?  You feel a strong urge to take the girl home with you and make her your 'pantry', but you groggily realize that she has to be fertilized with eggs by the queen bee before she produces your treat.  Shaking your head to clear the sugary haze, you take a firm grip on the bee's knob and decide to enact your original plan now; maybe you can capture the queen later.\n\n");
 				//(gain 2 libido and 2 sensitivity)
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 				dynStats("lib", 2, "sen", 2);
 			}
 			//(if penis)
@@ -1820,7 +1813,7 @@ public class BeeGirlScene extends BaseContent
 			outputText("Damn, that probably did some ear damage but was it ever worth it!  The bee-girl, having finally redirected every egg she had into her own swollen butthole and ceased climaxing, passes out.  You gather your things and leave her contorted and soaked body behind you as you head back to camp.");
 			//(gain 20 fatigue if spd<50)
 			if (player.spe < 50) fatigue(20);
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
 
@@ -1888,7 +1881,7 @@ public class BeeGirlScene extends BaseContent
 				else outputText("your glorious but spent [cocks] dangling under your belly,");
 				outputText(" and leave the completely exhausted and drenched woman on the forest floor, wings and legs still twitching slightly, sending a fine mist of cum across the ground around her.");
 			}
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 			cleanupAfterCombat();
 		}
@@ -2021,7 +2014,7 @@ public class BeeGirlScene extends BaseContent
 				outputText("You pull your hand out and futilely try to wipe away the gunk on a nearby bush. The handmaiden is collapsed in a heap, excreting eggs from her dilated organ, mumbling blissfully delirious nonsense.  Gathering your things, you slither away.");
 			}
 			if (player.gender > 0){
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 			}
 			doNext(camp.returnToCampUseOneHour);
 			cleanupAfterCombat();
@@ -2122,7 +2115,7 @@ public class BeeGirlScene extends BaseContent
 
 			outputText("\n\nYou pull yourself free on unsteady legs, her gaping hole gushing emerald lube while her chitinous abdomen flops listlessly over her egg-filled ass.  You cut her free from your sticky webbing and gather up your [armor], shuffling back to camp as she collapses exhausted on her side, both hands wrapped around her tremendously swollen midsection.");
 			player.dumpEggs();
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
 	}

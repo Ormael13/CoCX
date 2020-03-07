@@ -74,7 +74,7 @@ public class FetishCultistScene extends AbstractLakeContent
 							if (player.armor == armors.C_CLOTH) outputText("You find your [armor] back on your body with no sign of the strange clothes you were wearing before.  ");
 							else outputText("You are still wearing the [armor] that she gave you, and there is no sign of your old clothes.  ");
 							outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.");
-							player.orgasm();
+							player.sexReward("Default","Default",true,false);
 							dynStats("int", -2);
 							dynStats("lus", 10);
 							cleanupAfterCombat();
@@ -126,7 +126,7 @@ public class FetishCultistScene extends AbstractLakeContent
 						if (player.armor != armors.C_CLOTH) outputText("You find your [armor] back on your body with no sign of the strange clothes you were wearing before.  ");
 						else outputText("You are still wearing the [armor] that she gave you, and there is no sign of your old clothes.  ");
 						outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.");
-						player.orgasm();
+						player.sexReward("Default","Default",true,false);
 						dynStats("int", -2);
 						dynStats("lus", 10);
 						cleanupAfterCombat();
@@ -182,7 +182,7 @@ public class FetishCultistScene extends AbstractLakeContent
 						if (player.armor != armors.C_CLOTH) outputText("You find your [armor] back on your body with no sign of the strange clothes you were wearing before.  ");
 						else outputText("You are still wearing the [armor] that she gave you, and there is no sign of your old clothes.  ");
 						outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.");
-						player.orgasm();
+						player.sexReward("Default","Default",true,false);
 						dynStats("int", -2);
 						dynStats("lus", 10);
 						cleanupAfterCombat();
@@ -286,7 +286,7 @@ public class FetishCultistScene extends AbstractLakeContent
 					}
 					else outputText("You are still wearing the [armor] that she gave you, and there is no sign of your old clothes.  ");
 					outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.  ");
-					player.orgasm();
+					player.sexReward("Default","Default",true,false);
 					dynStats("int", -2);
 					dynStats("lus", 10);
 					cleanupAfterCombat();
@@ -380,7 +380,7 @@ public class FetishCultistScene extends AbstractLakeContent
 					if (player.armor != armors.C_CLOTH) outputText("You find your [armor] back on your body with no sign of the strange clothes you were wearing before.  ");
 					else outputText("You are still wearing the [armor] that she gave you, and there is no sign of your old clothes.  ");
 					outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.");
-					player.orgasm();
+					player.sexReward("Default","Default",true,false);
 					dynStats("int", -2);
 					dynStats("lus", 10);
 					cleanupAfterCombat();
@@ -435,7 +435,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				//(after either)
 				outputText("You get dressed and notice that the cultist is still lying on the ground in the perverted nun outfit, with a look of utter bliss on her face.  ");
 				outputText("Satisfied, you continue on your way.");
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 			}
 			else if (monster.armorName == "swimsuit") {
 				//(scene requires that the PC not be genderless)
@@ -486,7 +486,7 @@ public class FetishCultistScene extends AbstractLakeContent
 					if (player.cor < 40) outputText("Feeling uncomfortable at this, you start to pull away, but her expression turns instantly into a look of pure horror and her body becomes completely tense.  As you move back to her, her body relaxes and her expression returns to the tear-stricken face.  Obviously this is an act and she would be far more bothered by you if you left her without finishing the job.  ");
 					outputText("Filled with new determination, you push your [cock] into her love hole and start to rape her roughly.  Despite the tears, she starts moaning, clearly enjoying the rough treatment.  A little while into the rape, she starts to move against you, almost lovingly.  It is quite clear that she has a lot of experience, but is giving you free reign to do whatever you want.   Feeling in complete control, you decide that this game isn't too bad.  Before long you reach your orgasm and you blow your load deep inside her.");
 					outputText("\n\nYou get dressed and notice that the cultist is still lying on the ground with her farm hand outfit torn from her, with a look of utter bliss on her face.  Satisfied, you continue on your way.");
-					player.orgasm();
+					player.sexReward("Default","Default",true,false);
 				}
 				//(if player has a vagina)
 				else if (player.vaginas.length > 0) {
@@ -495,7 +495,7 @@ public class FetishCultistScene extends AbstractLakeContent
 					if (player.cor < 40) outputText("Feeling uncomfortable at this, you start to pull away, but her expression turns instantly into a look of pure horror and her body becomes completely tense.  As you move back to her, her body relaxes and her expression returns to the tear stricken face.  Obviously this is an act and she would be far more bothered by you if you left her without finishing the job.  ");
 					outputText("With new determination, you yell at her to lick harder, and to push in as much as she can, or her mother will die.  This time when she starts licking you, she does it almost lovingly.  It is quite clear that she has a lot of experience and, regardless of her words, she obviously wants this.  Feeling in complete control, you think that this game isn't too bad.  Under her expert flicks, you quickly reach a climax.  You pull her head back and tell her that now she has to clean you up.  You specify that she can't just lick this time, she has to drink your excretions.\n\n");
 					outputText("A few minutes later, you close your [armor] back up, and look back at the cultist.  She is lying on the ground in her farm hand outfit with a look of utter bliss on her face.  Satisfied, you continue on your way.");
-					player.orgasm();
+					player.sexReward("Default","Default",true,false);
 				}
 				if (player.gender == 0) {
 					outputText("You make her rub your body down, but you don't really have a means to rape her.  Afterwards you do feel better, but didn't get any real release.  Disappointed, you continue on your way.");
@@ -534,7 +534,7 @@ public class FetishCultistScene extends AbstractLakeContent
 
 			outputText("You stand up and clean yourself off, thoroughly satisfied with the encounter.  The cultist, on the other hand, collapses in a quivering pile of pleasure on the ground.");
 			//set PC's lust to minimum
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
 
@@ -562,7 +562,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				}
 				outputText("For hours you're left on the ground writhing in pain and pleasure from the cultist roughly forcing the false cock in and out of you while she moans with pleasure around the quivering shaft inside her.  The sensations are too much for you, and you can do nothing but just lie there and take it.  The cultist brings you to multiple orgasms before you finally pass out from the pain and overstimulation.");
 				//increase libido, decrease sensitivity
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 				dynStats("lib", 1, "sen", -3);
 				//victory becomes a defeat, even event
 				hideUpDown();
@@ -571,7 +571,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				player.lust = player.maxLust();
 				flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 				cleanupAfterCombat();
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 				dynStats("lib", 1, "sen", -3);
 			}
 			//It fits!
@@ -593,7 +593,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				else outputText("a torrent");
 				outputText(" of your lady juices.  You shudder for a moment and look down at it on the ground.  It seems to have, deflated a bit?  There is a clear fluid flowing out of the top of the toy.  A thump sound brings the cultist back to your attention, but only briefly as you see she is writhing on the ground in pleasure from the toy still inside her.  You shake your head and get dressed again.");
 				//end scene
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 				dynStats("lib", 1, "sen", -3);
 				cleanupAfterCombat();
 			}
@@ -673,7 +673,7 @@ public class FetishCultistScene extends AbstractLakeContent
 			//[You have found 1xBee Honey]
 			flags[kFLAGS.FORCE_BEE_TO_PRODUCE_HONEY] = 1;
 			//set lust to 0, increase sensitivity slightly
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			dynStats("lib", .2);
 			//You've now been milked, reset the timer for that
 			player.addStatusValue(StatusEffects.Feeder, 1, 1);

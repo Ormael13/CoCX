@@ -241,9 +241,8 @@ internal function loseToSatyr():void {
 	else outputText("shamelessly ");
 	outputText(" gather and re-dress in your garments and head back to camp, cum still dribbling from you as you go.");
 	//reduce lust, slimefeed, pregnatize me cap'n
-	player.slimeFeed();
 	satyrPreggo();
-	player.orgasm();
+	player.sexReward("cum");
 	dynStats("sen", 3);
 	if(player.cor < 50) dynStats("cor", 1);
 	cleanupAfterCombat();
@@ -310,7 +309,7 @@ private function femaleTakesAdvantageOfSatyr():void {
 	
 	outputText("\n\nYou grind your pussy into his face one last time, then, with regal delicacy, you remove yourself from the unconscious, sex-splattered satyr.  Picking up your clothes, you redress yourself.  Once you're decent, you leave the unconscious goatman as prey for whatever creature comes to investigate the stink of cum spattered about in such copious quantities.");
 	//reduce lust
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	cleanupAfterCombat();
 }
 	
@@ -346,7 +345,7 @@ private function malesTakeAdvantageOfSatyrs():void {
 	
 	outputText("\n\nSated for the moment, your gaze drifts towards the satyr.  He makes no sound; indeed, when you take a better look at him, you realize he's fallen asleep, still idly shaking his ass back and forth and jerking his cum-dribbling cock.  You don't even spare him a contemptuous look as you pull your bottoms up and head back.");
 	//reduce lust
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	cleanupAfterCombat();
 }
 
@@ -423,8 +422,7 @@ private function willinglyBoneSatyr():void {
 	outputText("\n\nThe satyr gets up on unsteady hooves, visibly shaken after this session with you.  \"<i>Well, sorry for not sticking around.  But I have places to get and people to fuck, so I guess we'll bump into each other some other time.</i>\"  The goat-man gives your [butt] a friendly pat and begins packing away whatever leftovers he manages to find; then turns to blow you a kiss and dashes off.");
 	outputText("\n\nYou watch him as he goes, then manage to force yourself back to your feet and stagger off, lest something far less hospitable find you here.");
 	//slimefeed, reduce lust, impregnational geographic
-	player.slimeFeed();
-	player.orgasm();
+	player.sexReward("cum");
 	satyrPreggo();
 	doNext(camp.returnToCampUseOneHour);
 }

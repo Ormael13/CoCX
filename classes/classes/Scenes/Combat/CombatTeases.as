@@ -1521,11 +1521,11 @@ public class CombatTeases extends BaseCombatContent {
 				if (!justText) dynStats("lus", 2 + rand(3));
 			}
 			// Similar to fetish check, only add XP if the player IS the player...
-			if (!justText && !SceneLib.urtaQuest.isUrta()) teaseXP(1 + bonusExpAfterSuccesfullTease());
+			if (!justText && !SceneLib.urtaQuest.isUrta()) player.SexXP(1 + bonusExpAfterSuccesfullTease());
 		}
 		//Nuttin honey
 		else {
-			if (!justText && !SceneLib.urtaQuest.isUrta()) teaseXP(1);
+			if (!justText && !SceneLib.urtaQuest.isUrta()) player.SexXP(1);
 			if (monster is JeanClaude) (monster as JeanClaude).handleTease(0, false);
 			else if (monster is Doppleganger) (monster as Doppleganger).mirrorTease(0, false);
 			else if (!justText) outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.");
@@ -1533,57 +1533,11 @@ public class CombatTeases extends BaseCombatContent {
 		outputText("\n\n");
 	}
 
-	public function teaseXP(XP:Number = 0):void {
-		while (XP > 0) {
-			if (XP == 1) {
-				player.teaseXP++;
-				XP--;
-			}
-			else {
-				player.teaseXP += XP;
-				XP -= XP;
-			}
-			//Level dat shit up!
-			if (player.teaseLevel < maxTeaseLevel() && player.teaseXP >= teaseExpToLevelUp()) {
-				outputText("\n<b>Tease skill leveled up to " + (player.teaseLevel + 1) + "!</b>");
-				player.teaseLevel++;
-				player.teaseXP = 0;
-			}
-		}
-	}
 	public function bonusExpAfterSuccesfullTease():Number {
 		var sucessBonusTeaseExp:Number = 1;
 		if (player.hasPerk(PerkLib.SuperSensual)) sucessBonusTeaseExp += 2;
 		if (player.hasPerk(PerkLib.Sensual)) sucessBonusTeaseExp += 1;
 		return sucessBonusTeaseExp;
-	}
-	public function maxTeaseLevel():Number {
-		var maxLevel:Number = 2;
-		if (player.hasPerk(PerkLib.SuperSensual)) {
-			if (player.level < 48) maxLevel += player.level;
-			else maxLevel += 48;
-		}
-		else {
-			if (player.level < 23) maxLevel += player.level;
-			else maxLevel += 23;
-		}
-		return maxLevel;
-	}
-	public function teaseExpToLevelUp():Number {
-		var expToLevelUp:Number = 10;
-		var expToLevelUp00:Number = player.teaseLevel + 1;
-		var expToLevelUp01:Number = 5;
-		var expToLevelUp02:Number = player.teaseLevel + 1;
-		if (player.hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
-		//-2;//4th
-		//-3;//6th
-		if (player.hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
-		if (player.hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
-		if (player.hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
-		if (player.hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
-		//-3;//5th
-		expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-		return expToLevelUp;
 	}
 
 

@@ -7702,6 +7702,7 @@ use namespace CoC;
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 1;
 			}
 			if (isGargoyle() && hasPerk(PerkLib.GargoyleCorrupted)) refillGargoyleHunger(30);
+			if (jiangshiScore() >= 20 && statusEffectv1(StatusEffects.EnergyDependent) < 45) EnergyDependentRestore();
 		}
 
 		public function minoCumAddiction(raw:Number = 10):void {
@@ -10443,6 +10444,119 @@ use namespace CoC;
 			
 			return true;
 		}
+
+		public function maxTeaseLevel():Number {
+			var maxLevel:Number = 2;
+			if (hasPerk(PerkLib.SuperSensual)) {
+				if (level < 48) maxLevel += level;
+				else maxLevel += 48;
+			}
+			else {
+				if (level < 23) maxLevel += level;
+				else maxLevel += 23;
+			}
+			return maxLevel;
+		}
+		public function teaseExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = teaseLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = teaseLevel + 1;
+			if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+
+		public function SexXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					teaseXP++;
+					XP--;
+				}
+				else {
+					teaseXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (teaseLevel < maxTeaseLevel() && teaseXP >= teaseExpToLevelUp()) {
+					outputText("\n<b>Tease skill leveled up to " + (teaseLevel + 1) + "!</b>");
+					teaseLevel++;
+					teaseXP = 0;
+				}
+			}
+		}
+
+		public function cumOmeter(changes:Number = 0):Number {
+			flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] += changes;
+			if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 100) flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] = 100;
+			return flags[kFLAGS.SEXUAL_FLUIDS_LEVEL];
+		}
+
+		public function manticoreFeed():void
+		{
+			if (findPerk(PerkLib.ManticoreMetabolism) >= 0) {
+				if (hasStatusEffect(StatusEffects.FeedingEuphoria)) {
+					if (findPerk(PerkLib.ManticoreMetabolismEvolved) >= 0) {
+						if (statusEffectv2(StatusEffects.FeedingEuphoria) < (30 + (10 * (1 + newGamePlusMod())))) {
+							addStatusValue(StatusEffects.FeedingEuphoria, 2, 10);
+							dynStats("spe", 10);
+						}
+						changeStatusValue(StatusEffects.FeedingEuphoria, 1, 15);
+					}
+					else {
+						if (statusEffectv2(StatusEffects.FeedingEuphoria) < 30) {
+							addStatusValue(StatusEffects.FeedingEuphoria, 2, 10);
+							dynStats("spe", 10);
+						}
+						changeStatusValue(StatusEffects.FeedingEuphoria, 1, 10);
+					}
+				}
+				else {
+					if (findPerk(PerkLib.ManticoreMetabolismEvolved) >= 0) createStatusEffect(StatusEffects.FeedingEuphoria, 15, 10, 0, 0);
+					else createStatusEffect(StatusEffects.FeedingEuphoria, 10, 10, 0, 0);
+					dynStats("spe", 10);
+				}
+			}
+			EngineCore.HPChange(Math.round(maxHP() * .2), true);
+			cumOmeter(40);
+			cor += 2;
+			refillHunger(100);
+		}
+
+		public function sexReward(fluidtype:String = 'Default', type:String = 'Default', real:Boolean = true, Wasfluidinvolved:Boolean = true):void
+		{
+			if(Wasfluidinvolved)
+			{
+				switch (fluidtype)
+				{
+						// Start with that, whats easy
+					case 'cum': //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_VAGINAL] < 10) flags[kFLAGS.TIMES_ORGASM_VAGINAL]++;
+						if (hasPerk(PerkLib.ManticoreCumAddict))
+						{
+							manticoreFeed();
+						}
+						break;
+					case 'vaginalFluids':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_ANAL]    < 10) flags[kFLAGS.TIMES_ORGASM_ANAL]++;
+						break;
+					case 'saliva':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_ANAL]    < 10) flags[kFLAGS.TIMES_ORGASM_ANAL]++;
+						break;
+					case 'milk':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_ANAL]    < 10) flags[kFLAGS.TIMES_ORGASM_ANAL]++;
+						refillHunger(10, false);
+						break;
+						slimeFeed();
+				}
+			}
+			SexXP(5+level);
+			orgasm(type,real);
+		}
+
 		public function orgasmReal():void
 		{
 			dynStats("lus=", 0, "sca", false);
@@ -10456,6 +10570,7 @@ use namespace CoC;
 				gems += bonusGems;
 			}
 		}
+
 		public function orgasm(type:String = 'Default', real:Boolean = true):void
 		{
 			switch (type) {
@@ -10696,4 +10811,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}

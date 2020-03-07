@@ -178,7 +178,7 @@ public class AkbalScene extends BaseContent
 				outputText("Akbal snarls as you leave, the creatures that once feared him using his aroused state to get revenge on the 'god' of the terrestrial fire.  Even after you've reached the edge of the forest, the jaguar demon's pained howls can still be heard – though, just barely over the high-pitched laughter of the demon imps and the cackling of the goblin females.");
 			}
 			//END CENTAUR STUFF
-			player.orgasm();
+			player.sexReward("saliva");
 			dynStats("cor+",1);
 			cleanupAfterCombat();
 		}
@@ -260,7 +260,7 @@ public class AkbalScene extends BaseContent
 
 					outputText("As you leave Akbal snarls as the creatures that once feared him use his overtly aroused state to get revenge on the \"god\" of the terrestrial fire.  Even after you've reached the edge of the forest the wails of the jaguar demon can still be heard but just barely over the high pitched laughter of the demon imps and goblin females.");
 				}
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 				dynStats("cor", 1);
 				cleanupAfterCombat();
 					//END NAGA STUFF
@@ -348,7 +348,7 @@ public class AkbalScene extends BaseContent
 
 					outputText("As you leave Akbal snarls as the creatures that once feared him use his overtly aroused state to get revenge on the \"god\" of the terrestrial fire.  Even after you've reached the edge of the forest the wails of the jaguar demon can still be heard but just barely over the high pitched laughter of the demon imps and goblin females.");
 				}
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 				dynStats("cor", 1);
 				cleanupAfterCombat();
 				return;
@@ -407,7 +407,7 @@ public class AkbalScene extends BaseContent
 				outputText("With a sadistic laugh you ride out your orgasm until you're reduced to a shuddering heap on the floor.  After you've recovered, you stand and gather your [armor], leaving Akbal in a groaning mess behind you.  He howls as he claws the ground, his barbed cock still rock hard beneath him.  As you walk away, you notice a group of imps watching you and the jaguar demon with their cocks out and leaking, their jagged teeth spread into feral grins.  You even spy a few goblins mixed in the crowd, and each is twirling a bottle of liquid while playing with their snatches.\n\n");
 				outputText("Akbal snarls as you leave, the creatures that once feared him using his aroused state to get revenge on the 'god' of the terrestrial fire.  Even after you've reached the edge of the forest, the jaguar demon's pained howls can still be heard – though, just barely over the high-pitched laughter of the demon imps and the cackling of the goblin females.");
 			}
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			dynStats("cor", 1);
 			cleanupAfterCombat();
 		}
@@ -540,10 +540,8 @@ public class AkbalScene extends BaseContent
 				//Imp pregnancy
 				//Preggers chance!
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
-				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 				player.cuntChange(monster.cockArea(0), true, true, false);
-				player.orgasm();
+				player.sexReward("cum");
 				dynStats("cor", 1);
 			}
 			//TOIGHT
@@ -586,7 +584,7 @@ public class AkbalScene extends BaseContent
 					outputText("He sits, dazed as your cum covers his groin, his meat still shiny from the torrent you dropped down upon it. Nevertheless, his face is twisted into a purr");
 				outputText(" as he sags against the tree trunk, overwhelmed by the pleasure. With a satisfied grin of your own, you pick up your [armor] and head out. Perhaps you should look out for the \"<i>God of Terrestrial fire</i>\" again sometime...");
 				//{No Penetration or fluids exchanged = No corruption increase? Poss. Sensitivity increase/decrease due to fur and/or saliva}
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 			}
 			//= = = =
 			//Loose
@@ -633,13 +631,11 @@ public class AkbalScene extends BaseContent
 				outputText(", his face twisted into a snarl of pleasure and satisfaction.\n\n");
 
 				outputText("You slowly come down from your orgasmic high, struggling to remove yourself from the demon's lap and heading unsteadily towards your [armor] as fresh feline seed pours down your body, wincing at the slight bruising to your womanhood. Rubbing a hand over your stomach, you start to wonder if perhaps it was a touch risky to allow a demon to shoot his seed into your womb. However, despite the mild throbbing, you feel refreshed and oddly strengthened by Akbal's potent seed, glancing over your shoulder to see the once proud god reveling in his own release. Perhaps it wouldn't be a bad idea to seek him out some other time...");
-				player.orgasm();
+				player.sexReward("cum");
 				dynStats("cor", 1);
 				//Imp pregnancy
 				//Preggers chance!
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
-				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			}
 			cleanupAfterCombat();
 		}
@@ -910,9 +906,7 @@ public class AkbalScene extends BaseContent
 				dynStats("cor", 4 + rand(8));
 				//[+ 1-2 Speed]
 				dynStats("spe", 1 + rand(2));
-				player.orgasm();
-				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+				player.sexReward("cum");
 				//[Chance of butt growth]
 				if (player.butt.type < 8)
 				{
@@ -990,9 +984,7 @@ public class AkbalScene extends BaseContent
 				dynStats("cor", 4 + rand(8));
 				//[+ 1-2 Speed]
 				dynStats("spe", 1 + rand(2));
-				player.orgasm();
-				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+				player.sexReward("cum");
 				//[Chance of butt growth]
 				if (player.butt.type < 8)
 				{
@@ -1072,9 +1064,7 @@ public class AkbalScene extends BaseContent
 			dynStats("cor", 4 + rand(8));
 			//[+ 1-2 Speed]
 			dynStats("spe", 1 + rand(2));
-			player.orgasm();
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("cum");
 			//[Chance of butt growth]
 			if (player.butt.type < 8)
 			{
@@ -1217,9 +1207,8 @@ public class AkbalScene extends BaseContent
 				outputText("  Tingling in your sleep, your [butt] jiggles slightly as it softens along with the rest of your body, changed by Akbal's saliva to be a softer, more pleasant fuck.");
 				player.modTone(30, 5);
 			}
-			player.orgasm();
+			player.sexReward("cum");
 			dynStats("cor", 5);
-			player.slimeFeed();
 			player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
 			doNext(camp.returnToCampUseEightHours);
 		}
@@ -1392,7 +1381,7 @@ public class AkbalScene extends BaseContent
 
 			outputText("\n\nYou look back at your new bitch with a grin while he regains his senses.  As you leave the forest you hear a promise from Akbal’s chorus of voices, \"<i>You will regret this... Champion.</i>\"");
 
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			dynStats("cor", 3);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1457,10 +1446,8 @@ public class AkbalScene extends BaseContent
 				outputText("\n\nEvery nerve ending in your body explodes as you convulse atop the jaguar.  With a hoarse groan, your [vagOrAss] begins to spasm around the embedded pleasure rod as it gushes more fluid than you thought possible.  Soon the Jaguar is soaked from waist to thigh.");
 
 			outputText("\n\nYou look back at your new bitch with a grin while he regains his senses.  As you leave the forest, you hear a promise from Akbal’s chorus of voices, \"<i>You will regret this... Champion.</i>\"");
-			player.orgasm();
+			player.sexReward("cum");
 			dynStats("cor", 3);
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			if (player.hasVagina()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1531,7 +1518,7 @@ public class AkbalScene extends BaseContent
 				//{corruption > 90}
 				else
 					outputText("\n\nYou stand and Akbal’s legs flop from where you had them pinned to his chest.  You gather your [armor] and dress before aiming a wicked slap at Akbal’s tender cheeks and leaving him tied up for the imps and goblins you spy watching the two of you from the trees.\n\nYou tell him he is all theirs and share a conspiratorial grin as you head back to camp.");
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 				dynStats("cor", 3);
 				doNext(camp.returnToCampUseOneHour);
 			}
@@ -1581,10 +1568,8 @@ public class AkbalScene extends BaseContent
 				if (player.hasCock())
 					outputText("  [EachCock] swells and explodes, shooting cream all over Akbal’s thighs, chest and face as you unload thick white rope after rope.");
 
-				player.orgasm();
+				player.sexReward("cum");
 				dynStats("cor", 3);
-				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 				if (player.hasVagina()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
 				doNext(camp.returnToCampUseOneHour);
 			}
@@ -1682,10 +1667,8 @@ public class AkbalScene extends BaseContent
 					outputText("\n\nYour body begins to convulse as you call out. Your [ass] feels as though the demon’s dick is a lightning rod expelling a constant torrent of elation.");
 				outputText("\n\nYour [vagOrAss] is blissfully sore and crazy sensitive as you ease yourself off the demon’s wonderful dick.  With a smile on your [face] you gather your [armor] and turn to leave the forest.  Lost in giddy elation you walk, each movement sending an almost painful jolt of post orgasm pleasure through your [vagOrAss].  It isn’t until you hear the cackling of imps and goblins that you remember that you left Akbal bound and vulnerable... oops.");
 				if (player.hasVagina()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
-				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			}
-			player.orgasm();
+			player.sexReward("cum");
 			dynStats("cor", 3);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1834,12 +1817,10 @@ public class AkbalScene extends BaseContent
 				outputText("  As your orgasm subsides you allow the demon to grind his still erect dick around inside you for a moment. Without needing to threaten him again you rise, sending a cascade of spooge down your legs and onto Akbal’s lap.");
 
 				outputText("\n\nWithout a backwards glance, you gather your [armor] and leave the forest with a big smile on your [face].");
-				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			}
 			if (player.hasVagina())
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
-			player.orgasm();
+			player.sexReward("cum");
 			dynStats("cor", 3);
 			doNext(camp.returnToCampUseOneHour);
 		}

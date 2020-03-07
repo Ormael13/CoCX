@@ -149,10 +149,10 @@ package classes.Scenes.Areas.Forest
 					default:
 						player.skinTone = "blue";
 				}
-				player.horns.type = Horns.BICORN;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedBicornHorns)) player.createStatusEffect(StatusEffects.UnlockedBicornHorns, 0, 0, 0, 0);
-				player.wings.type = Wings.NIGHTMARE;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedNightmareWings)) player.createStatusEffect(StatusEffects.UnlockedNightmareWings, 0, 0, 0, 0);
+				player.horns.type = Horns.DEMON;
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedDemonHorns)) player.createStatusEffect(StatusEffects.UnlockedDemonHorns, 0, 0, 0, 0);
+				player.wings.type = Wings.BAT_LIKE_LARGE;
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedDemonLargeBatWings)) player.createStatusEffect(StatusEffects.UnlockedDemonLargeBatWings, 0, 0, 0, 0);
 				outputText(" You try to meekly crawl away but the centauress is too fast for you. She has you easily pinned to the ground by her hoof as she lowers herself on your prone body aligning her meat with your hole. You try to scream for help but she cuts the air out with a swift blow now squeezing you between her horse body and the grass. You can only beg her as you feel her flare prod for the entrance of your cunt, smearing pre on your slit, she's clearly going to break you. ");
 				outputText("You ready a scream as her cock forces your lips apart but to your complete surprise her massive monster seamlessly slide in without further resistance. She begins to buck in and out filling you way past the cervix and, to your dismay, you actually realise you’re enjoying this.\n\n");
 				outputText("\"<i>My horn can penetrate anything, from the tightest pussy to the loosest hole. Leave it to me and I will turn you into a mess of pleasure.</i>\"\n\n");
@@ -171,8 +171,7 @@ package classes.Scenes.Areas.Forest
 			}
 			player.createPerk(PerkLib.BicornBlessing, 0, 0, 0, 0);
 			player.cor = 100;
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("cum");
 			player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
 			player.addStatusValue(StatusEffects.CanMeetNightmare, 1, 1);
 			CelessScene.instance.nightmareDefeated();

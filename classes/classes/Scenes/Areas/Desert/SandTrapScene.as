@@ -234,9 +234,8 @@ private function dickwieldersLoseToSandTarps():void {
 	outputText("\n\nYou awaken a while later, wearily getting to your feet and looking around.  You are standing in a featureless stretch of desert... there is no suggestion of the sandtrap, or indeed that you are in the same place where it caught you.  A fair amount of time has passed though, judging by the sky above you.  Perhaps it was all a particularly lucid mirage?  A sensation of... fullness in your abdomen suggests otherwise.  Clutching your bowels uneasily, you make your way back to camp.");
 	monster.createStatusEffect(StatusEffects.Fertilized,0,0,0,0);
 	sandTrapPregChance();
-	player.orgasm();
+	player.sexReward("cum");
 	dynStats("lib", 1);
-	player.slimeFeed();
 	//reduce lust, increase lib, slimefeed, reset hours since cum
 	cleanupAfterCombat();
 }
@@ -268,9 +267,8 @@ private function chicksLoseToSandTarp():void {
 	outputText("\n\nYou awaken a while later, staggering to your feet and looking around.  You are standing in a featureless stretch of the desert... there is no suggestion of the sandtrap, or indeed that you are in the same place where it caught you.  A fair amount of time has passed though, judging by the sky above you.  Perhaps it was all a particularly lucid mirage?  A sensation of... fullness in your abdomen suggests otherwise.  Clutching your bowels uneasily, you make your way back to camp.");
 	//buttpreg only if RNG decided trap was fertilized, reduce lust, increase lib, simefeed
 	if(monster.hasStatusEffect(StatusEffects.Fertilized)) sandTrapPregChance();
-	player.orgasm();
+	player.sexReward("cum");
 	dynStats("lib", 1);
-	player.slimeFeed();
 	//reduce lust, increase lib, slimefeed, reset hours since cum
 	cleanupAfterCombat();
 }
@@ -302,10 +300,9 @@ private function genderlessLoss():void {
 	outputText("\n\nYou awaken a while later, wearily staggering to your feet and looking around.  You are standing in a featureless stretch of desert... there is no suggestion of the sandtrap, or indeed that you are in the same place where it caught you.  A fair amount of time has passed though, judging by the sky above you.  Perhaps it was all a particularly lucid mirage?  A sensation of... fullness in your abdomen suggests otherwise.  Clutching your bowels uneasily, you make your way back to camp.");
 	//butteggpreg only if RNG has trap with fertilized eggs, reduce lust, increase lib, slimefeed
 	sandTrapPregChance();
-	
-	player.orgasm();
+
+	player.sexReward("cum");
 	dynStats("lib", 1);
-	player.slimeFeed();
 	//reduce lust, increase lib, slimefeed, reset hours since cum
 	cleanupAfterCombat();
 }
@@ -351,7 +348,7 @@ public function birfSandTarps():void {
 	else outputText("\n\nYou smile lazily, then lie back and glory in the sensual haze the oil has left you in.  After you have spent many minutes lying listening to the happy twittering of your flytrap children above you, you reluctantly get up.  You only hope that you get to experience the unearthly wonder of birthing these strange creatures again, and again, and again.");
 	player.buttChange(25,true,true,false);
 	outputText("\n");
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	dynStats("lib", 1, "sen", 4);
 }
 
@@ -465,7 +462,7 @@ private function useSandTarpsHands():void {
 	outputText("\n\nYou sigh with immense satisfaction and step back from the sandtrap.  Taking into account what an excellent job it did you opt not to rub its face in what you have made it do, particularly as you have managed to get quite a bit of your fluids on it anyway.  It watches you, still flushed and mouth slightly ajar, as you leisurely pull your [armor] back on.");
 	outputText("\n\n\"<i>Please, lion,</i>\" it manages eventually.  You look at the strange, half-buried creature and notice that spots of fluid are darkening the sand around it; it is evidently perversely turned on by your domineering actions, and you have left it in no way satiated.  You curl your lip into an evil smirk.");
 	outputText("\n\n\"<i>Not today, I think,</i>\" you say over your shoulder, as you clamber out of its pit.  \"<i>I think you'll have to try a bit harder if you want to get what you want from this lion.</i>\"  Your smile broadens as a deeply frustrated moan reaches your ears from behind you...");
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	dynStats("sen", -1);
 	cleanupAfterCombat();
 }

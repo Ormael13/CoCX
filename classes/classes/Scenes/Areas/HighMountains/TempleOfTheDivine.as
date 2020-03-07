@@ -561,7 +561,7 @@ use namespace CoC;
 			outputText("You fuck each other passionately, drawing closer then moving apart, making the both of you moan in delight at this intense mutual penetration. This is like fucking and getting fucked at the same time… simply perfect. By all means you don’t know anymore whether you will cum from your tail or from your pussy.\n\n");
 			outputText("After a fair hour of constant sex, the pair of you finally orgasm and you both fall on the ground tails still tangled up and petrified in pleasure. You wake up a few minutes later tail still in each other pussy and completely satisfied. You get back your gear and wave a goodbye to Sapphire as you head back to camp.\n\n");
 			sapphireAffection(5);
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function SapphireTripleTailOuroboros():void {
@@ -618,13 +618,13 @@ use namespace CoC;
 			if (player.isGargoyle()) {
 				outputText("The three of you come to way later, somewhat aware of having frozen for several hours. You proceed to break out from the other two as they do the same, still smiling after this incident. Sapphire and " + flags[kFLAGS.ONYX_NAME] + " nod as you propose that you should have that kind of bonding more often.\n\n");
 				sapphireAffection(5);
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 				doNext(camp.returnToCampUseFourHours);
 			}
 			else {
 				outputText("You proceed to break out from the other two still locked in their stone form. Sapphire and " + flags[kFLAGS.ONYX_NAME] + " are still frozen in time but you guess from their looks that they will want to do this again.\n\n");
 				sapphireAffection(5);
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
@@ -651,7 +651,7 @@ use namespace CoC;
 			outputText(" unfreeze and break the embrace as she remove her stony tail from your private.\n\n");
 			outputText("You smile, leaving her embrace as you promise to come back and visit.\n\n");
 			sapphireAffection(5);
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function SapphireFuckHer():void {
@@ -676,7 +676,7 @@ use namespace CoC;
 				outputText("You nod absentmindedly and gear up as you head back to camp.\n\n");
 			}
 			sapphireAffection(5);
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -844,7 +844,7 @@ use namespace CoC;
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
 			else outputText("him");
 			outputText(" in a scene of lovemaking fit for a master artist to paint in a fresco.\n\nYou wake up a while later and redress, heading back to camp.\n\n");
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function KrystalTribadism():void {
@@ -854,7 +854,7 @@ use namespace CoC;
 			outputText("Soon you climax ");
 			if (player.isGargoyle()) outputText("and petrify along with Krystal, both of your bodies frozen in place for some time. You regain consciousness a while later and give her still frozen form a parting kiss as you head back to camp.\n\n");
 			else outputText("and cover Krystal's stone pussy with your girl cum. Krystal petrifies from the orgasm, frozen with an expression of extreme pleasure as you doze off on your statuesque lover. When you wake up, you give her still frozen form a parting kiss as you head back to camp.\n\n");
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function KrystalOnyx69():void {
@@ -901,7 +901,7 @@ use namespace CoC;
 			}
 			outputText(" You doze off tired and wake up an hour later, your mouth still where you left it. You resolve to pull it off " + flags[kFLAGS.ONYX_NAME] + " who, still petrified in pleasure, will likely come to later.\n\n");
 			outputText("For now you proceed to redress and head back to camp.\n\n");
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function KrystalOnyxGetFucked():void {
@@ -985,7 +985,7 @@ use namespace CoC;
 				outputText(" dick.\n\n");
 				outputText("You head back to camp, giving the unconscious gargoyle a parting kiss.\n\n");
 			}
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function KrystalFuckHer():void {
@@ -1011,7 +1011,7 @@ use namespace CoC;
 				outputText("Eventually, an hour later you manage to slide out, a massive trail of cum following suit as you kept fucking her in your attempt to get free from her stony snatch.\n\n");
 				outputText("You proceed to redress and head back to camp.\n\n");
 			}
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		

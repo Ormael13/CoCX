@@ -202,6 +202,7 @@ public class MaraFruit extends Consumable{
 				changes++;
 			}
 		}
+
 		//Skin
 		if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.faceType == Face.HUMAN) {
 			mutations.humanizeSkin();
@@ -267,7 +268,7 @@ public class MaraFruit extends Consumable{
 			mutations.setEarType(Ears.ELFIN);
 		}
 		//Face
-		if (player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0 && player.ears.type == Ears.ELFIN) {
+		if (player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {
 			changes++;
 			mutations.setFaceType(Face.HUMAN);
 			outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look.  <b>You have a human looking face again!</b>");

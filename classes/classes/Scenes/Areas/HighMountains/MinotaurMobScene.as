@@ -395,9 +395,8 @@ private function nonAddictMinotaurGangBang():void {
 	//Preggers chance!
 	if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
     else player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR, 75);
-	player.orgasm();
+	player.sexReward("cum");
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", -.5, "cor", 1);
-	player.slimeFeed();
 	player.minoCumAddiction(20);
     if (CoC.instance.inCombat) cleanupAfterCombat();
     else {
@@ -490,9 +489,8 @@ private function loseToMinoMobVeryPregnant():void {
 		else outputText("we wouldn't want to ruin our favorite toy would we?");
 		outputText("  Look at her, she's smiling with a dick in her mouth while she passes out.  Mom's the best.</i>\"");
 	}
-	player.orgasm();
+	player.sexReward("cum");
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "cor", 1);
-	player.slimeFeed();
 	player.minoCumAddiction(15);
     if (CoC.instance.inCombat) cleanupAfterCombat();
     else doNext(camp.returnToCampUseEightHours);
@@ -594,9 +592,8 @@ private function analSpearSemiPregMinotaurGangbang():void {
 	outputText(".  Hands gently lower you to the ground");
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 5) outputText(", but you're positioned with your ass in the air.  A voice calls out, \"<i>Okay, Mom's pretty out of it.  One at a time and don't damage her, okay?</i>\"\n\nGiggling dreamily, you're fucked repeatedly, spunk squirting from your anus with every thrust.  You pass out like that, feeling quite satisfied.");
 	else outputText(".  They step back and admire their handiwork while you float through your narcotic-infused haze.");
-	player.orgasm();
+	player.sexReward("cum");
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "cor", 1);
-	player.slimeFeed();
 	player.minoCumAddiction(15);
     if (CoC.instance.inCombat) cleanupAfterCombat();
     else doNext(camp.returnToCampUseEightHours);
@@ -725,9 +722,8 @@ private function victoryMinotaurGangTitFuck():void {
 	}
 	//Force cum bottle loot!
 	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.MINOCUM.id;
-	player.orgasm();
+	player.sexReward("cum");
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "cor", .5);
-	player.slimeFeed();
 	player.minoCumAddiction(15);
     if (CoC.instance.inCombat) cleanupAfterCombat();
     else {
@@ -823,9 +819,8 @@ private function victoryAllThePenetrationsMinotaurGangBang():void {
 	//Preggers chance!
 	if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
     else player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR, 75);
-	player.orgasm();
+	player.sexReward("cum");
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", -.5, "cor", 1);
-	player.slimeFeed();
 	player.minoCumAddiction(20);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
@@ -941,7 +936,7 @@ private function forceMinitaurToGiveOral(choice:Number = 0):void {
 	}
 	
 	outputText("Finished with him, you push him back to let him fall on the ground, his face wet with your cum.  The poor minitaur is harder than ever, and though his cock looks tempting, you're already satisfied.  You get dressed and blow a kiss to the poor boy.  \"<i>Be good for Momma, okay?</i>\"  He nods dumbly as you saunter away.");
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	dynStats("sen", -1);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
@@ -1007,10 +1002,9 @@ private function victoryBJNippleFuckMinotaurGang():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] < 5) outputText("relax and fan themselves while giving you lusty looks");
 	else outputText("stare gloomily at the lucky three before turning to regard your form again with unrepentant lust");
 	outputText(".  You re-dress sensually, giving them as much of a show as you dare, not even bothering to wipe the cum-coating from your " + player.skinFurScales() + " before you finish slipping into your [armor] and depart.");
-	player.orgasm();
+	player.sexReward("cum");
 	dynStats("spe", -.5, "int", -.5, "sen", -1, "cor", 1);
 	player.minoCumAddiction(10);
-	player.slimeFeed();
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
@@ -1060,7 +1054,7 @@ private function minotaurGangBadEnd():void {
 	outputText(", releasing so much that a squirt of it escapes to run down your [leg].  That was just the first spurt!  The second burst of semen fills every nook and cranny of your " + vaginaDescript() + ", your entrance turning to a frothy mess of white goo and slippery lady-spunk.  The pent-up pecker keeps flexing in orgasm, firing jet after jet of narcotic cream into your semen-spurting box, the pillows under you quickly soaking up the excess, addictive jizz.\n\n");
 	
 	outputText("Your son sighs and slumps down, his cock slowly slipping from your abused vulva, escaping with a wet 'pop'.  A river of white rolls out of your body to further stain the room's furnishings.  You shudder from the sensation as a it triggers a series of tiny, miniature climaxes.  While you're lost to the pleasure, the minitaur departs with noticeably less bulge in his loincloth.  At the same time, the other girls crowd around you, scooping up what they can save of your boy's liquid love and shoveling it into their greedy, whorish maws.  The cow-girl industriously sets to work, using her massive tongue on your " + vaginaDescript() + " to scoop out every drop she can get.  You cum on her face, splattering her with spooge and your feminine moisture.  She smiles and kisses your still-sensitive clit, throwing you into a black-out inducing orgasm.");
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	dynStats("int", -10, "lib", 10, "sen", 10);
 	doNext(minotaurGangBadEnd2);
 }
@@ -1093,7 +1087,7 @@ private function minotaurGangBadEnd2():void {
 	outputText("You're cut back off by an even bigger member just as the cunt-ravaging horse-cock stuffing your box explodes.  There's an immediate and familiar rush of euphoria, arousal, and fuzzy-headedness sweeping through you, making you giggle into the lip-stretching dick now gaping your mouth.  Your womb floods, your " + vaginaDescript() + " squirts, and your [legs] flop about lamely, as your body tries to cope with the onslaught of narcotic, orgasmic pleasure.  Pregnancy seems certain from that single stud's deposit.\n\n");
 	
 	outputText("He's pulled back and replaced, and you wonder which of your boys is getting sloppy seconds.  Who cares, as long as you get to feel him cum in you until you go dizzy!");
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	dynStats("lib", 100, "sen", 100);
 	EventParser.gameOver();
 }
@@ -1128,7 +1122,7 @@ private function disciplineEldestMinotaurSon():void {
 	outputText("Everything else is a foggy haze to your son.  You can see he has given himself up to pleasure you and nothing more.  His eyes are glazed over with lust, losing himself with each lick.  When you glance between your thighs, you can see his balls have swelled up to the size of beach balls!  His aching member throbs as pre-cum oozes from his exposed urethra. If you wanted, you could plunge your cunt down and relieve him, but that would defeat the purpose of the punishment.  Despite the cluelessness of his foreplay, his tongue against your shining lips feels fucking good!  With a smile, you caress your son, encouraging him to continue.  A sudden increase in his slurping is all that it takes for you to reach your peak.  Your " + vaginaDescript(0) + " spasms, drenching his mouth in your girl cum.  With increased zeal, he laps up as much of your sweet juices as he can.  Your running girl-cum eventually drips down to his aching member.  A cruel, cruel torture, your son whimpers as he's denied release.\n\n");
 
 	outputText("Finished with your son, you push him on his back.  You have had enough of him, for now... If he dares to ambush you again, then you will be more than happy to discipline him again.  After getting dressed, you proceed to walk away.  Your last image of your son is the image of him futilely masturbating, but his cock is too thick and too numb for him to truly get off.  Profoundly amused, you leave the mountains and return to camp.");
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	doNext(cleanupAfterCombat);
 }
 }

@@ -93,7 +93,7 @@ public class Naga extends Monster
 			else {
 				if(pcCameWorms){
 					outputText("\n\nThe naga's eyes go wide and she turns to leave, no longer interested in you.");
-					player.orgasm();
+					player.sexReward("Default","Default",true,false);
 					doNext(cleanupAfterCombat);
 				} else {
 					SceneLib.desert.nagaScene.nagaFUCKSJOOOOOO();
