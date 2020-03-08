@@ -4672,6 +4672,12 @@ public final class Mutations extends MutationsHelper
 				player.skin.growCoat(Skin.SCALES,{color:color},Skin.COVERAGE_LOW);
 				changes++;
 			}
+			//Snake eyes for hydra
+			if (player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKE && player.lowerBody == LowerBody.HYDRA && rand(4) == 0 && changes < changeLimit) {
+				setEyeType(Eyes.SNAKE);
+				outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake.  <b>You now have snake eyes!</b>.");
+				changes++;
+			}
 			//Snake eyes
 			if (player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKE && player.eyes.type != Eyes.GORGON && rand(4) == 0 && changes < changeLimit) {
 				setEyeType(Eyes.SNAKE);
@@ -14598,4 +14604,4 @@ public final class Mutations extends MutationsHelper
 			HPChange(Math.round(player.maxHP() * 0.1), true);
 		}
 	}
-}
+}
