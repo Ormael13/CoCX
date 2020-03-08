@@ -123,7 +123,7 @@ public function WonSecondFightYes():void {
 	flags[kFLAGS.CHI_CHI_SAM_TRAINING] = 3;
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 3;
 	flags[kFLAGS.CHI_CHI_LVL_UP] = 1;
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	inventory.takeItem(weapons.MASTGLO, WonSecondFightYes2);
 }
 public function WonSecondFightYes2():void {
@@ -686,7 +686,7 @@ public function chichiSex6():void {
 	outputText("Waking up in the morning, you realize that to make this wicked world perfect for her and you, you will need to act. Therefore you decide, despite your wish to remain next to her, to resume your duties as champion. Chi Chi, however, stops you from leaving too early.\n\n");
 	outputText("\"<i>I have a gift for you. My mother used to twirl it for me when I was a kid. I planned to give it to the love of my life, and I cannot think of anyone more deserving of that title than you. Don’t you ever die on me okay?</i>\"\n\n");
 	outputText("She pulls the necklace from her neck and offers it to you. You accept her gift and thank her as you set out to resume your adventure.\n\n");
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	model.time.days++;
 	model.time.hours = 6;
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 6;
@@ -719,7 +719,7 @@ public function chichiSexUntilDawn():void {
 	}
 	outputText("The two of you bask in the afterglow of your orgasms for a good moment as you stay locked with Chi Chi kissing and whispering sweet nothings for several minutes. You make love to Chi Chi like this until dawn, the both of you finally falling asleep from exhaustion.\n\n");
 	outputText("Waking up in the morning you give Chi Chi a parting kiss and head out to resume your champion duties.\n\n");
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	model.time.days++;
 	model.time.hours = 6;
 	doNext(camp.returnToCampUseOneHour);
@@ -734,7 +734,7 @@ public function chichiSexGentleFuck():void {
 	outputText("You wake up later and prepare to re-equip your gear. Chi Chi is still against you, but you almost regretfully break the embrace as she lifts to dress back up.\n\n");
 	outputText("\"<i>Go save the world, [name]. I will be keeping that bed warm for you when you come back.</i>\"\n\n");
 	outputText("She gives you a playful wink as she heads back to her training ground, her tail still swishing in happiness. She’s right, you didn’t get this far in life just to let the demons destroy it. You finish redressing then head back to the fight.\n\n");
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	doNext(camp.returnToCampUseOneHour);
 }
 public function chichiSexHinezumiYuri():void {
@@ -750,7 +750,7 @@ public function chichiSexHinezumiYuri():void {
 	outputText("\"<i>Ahhhh fuuuck yes gosh you taste so good [name]!</i>\"\n\n");
 	outputText("You can barely hold it anymore and your twat starts to pulse in anticipation of the oncoming orgasm. Chi Chi"+(player.mouseScore() >= 8 ? " and you":"")+" make a loud squeak as the both of you are painted with each other juices still cross-eyed from the pleasure and taste of each other. You giggle at the reaction, Chi Chi not taking offense to it.\n\n");
 	outputText("Eventually, the both of you break the pose, clean up, re-dress and head back to your daily activities.\n\n");
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	doNext(camp.returnToCampUseOneHour);
 }
 

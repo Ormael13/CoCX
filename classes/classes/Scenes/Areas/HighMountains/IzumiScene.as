@@ -651,7 +651,7 @@ import classes.Scenes.UniqueSexScenes;
 
 			outputText("“<i>Well, that was fun.</i>”  Izumi says, sitting up and dusting off her palms, dismissively.  “<i>I’m assuming you’re not up to a rematch just yet from the way you’re shaking.</i>”  She picks up her pipe and takes a drag, shooting you a knowing grin.  “<i>Feel free to drop by again, though.  You know, in case you wanted to tell me off... or maybe if you just want me to bully you some more.</i>” \n\n");
 
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);
@@ -721,7 +721,7 @@ import classes.Scenes.UniqueSexScenes;
 			else outputText(" puddle of your own");
 			outputText(" cum, staring at the cavern roof and panting madly for a good few minutes afterwards.  Once you regain the use of your legs, you retrieve your clothes and wander back to camp in a daze.\n\n");
 
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);
@@ -755,7 +755,7 @@ import classes.Scenes.UniqueSexScenes;
 
 			outputText("“<i>So, you learned something today, right?  Next time, just do what I say, and the results are much more... fun.</i>” She smiles, then turns away.  Retrieving your clothes, you drag yourself back to camp, feeling decidedly shaky.\n\n");
 
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);
@@ -807,7 +807,7 @@ import classes.Scenes.UniqueSexScenes;
 			 
 			outputText("Izumi returns to her tent and lights up her pipe, unceremoniously abandoning you there on the cave floor, apparently done with you for now.  Still, it’s some time before you are able to drag yourself to your feet and stumble home to your camp, wondering how long it’ll be before you can see straight again...\n\n");
 
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);
@@ -1049,7 +1049,7 @@ import classes.Scenes.UniqueSexScenes;
 				outputText("Izumi releases you, a trail of saliva hanging between your exhausted mouths for a moment before she gives you an indulgent pat on the behind and rises to her feet, licking suggestively at her fingers.  You shakily pull your clothes towards you and redress, while Izumi settles back down to take a long drag from her pipe, eyeing you with clear amusement as you attempt to cover yourself.  You decide to make your escape before the big woman decides to rope you into another, more strenuous round of sexual wrestling...\n\n");
 			}
 
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);
@@ -1111,7 +1111,7 @@ import classes.Scenes.UniqueSexScenes;
 
 			outputText("You jerk upright with a start, warm bedding falling away from your body, the last few hours slowly beginning to filter through the sleepy haze clouding your thoughts.  Izumi seems to have worn herself out too, splayed out across the floor beside you.  You look around, gathering your bearings before deciding a sneaky exit from the Oni’s home is your best course of action...\n\n");
 
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);
@@ -1290,7 +1290,7 @@ import classes.Scenes.UniqueSexScenes;
 
 			outputText("“<i>Well, I gotta admit, that wasn’t exactly how I was expecting the fight to end,</i>” she says, scratching the back of her neck in a manner that seems almost coquettish. “<i>But it was pretty fun all the same. Next time you’re in the neighborhood, let me know if you’re up for a rematch, or... whatever.  Okay?</i>” She asks, retaking her seat by the fire and retrieving her pipe.  You nod, absently, still kind of dazed after the abortive end to the fight, and wander off to find somewhere to wash the increasingly unpleasant feeling contents of your underclothing away.\n\n");
 
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
 
@@ -1357,7 +1357,7 @@ import classes.Scenes.UniqueSexScenes;
 
 			outputText("Either way, after assuring Izumi that you’ll survive, you stagger out of the cave and begin to make your decidedly wobbly way back to camp.  Hopefully, your bruises won’t keep you awake....\n\n");
 
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
 
@@ -1393,7 +1393,7 @@ import classes.Scenes.UniqueSexScenes;
 
 			outputText("You nod, pulling yourself to your feet and after exchanging a hasty goodbye with Izumi, you stumble towards the exit.  You’re not quite sure about ‘next time’, but you have to admit that really could have gone worse....\n\n");
 
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
 
@@ -1466,7 +1466,7 @@ import classes.Scenes.UniqueSexScenes;
 
 			outputText("Izumi is gracious or wracked by her guilty conscious enough to let you rest up quietly in her cave without further molestation until the pounding in your head fades away.  As you carefully pick your way back down the mountain, you muster up a half-hearted wave of goodbye back to the cheerfully waving giantess.  While you’re not sure if you’d exactly describe what you just experienced as fun... at the very least, you’re glad she didn’t <i>actually</i> try to eat you.  Deep down though, part of you can’t help wondering if she really would...\n\n");
 
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
 
@@ -1746,7 +1746,7 @@ import classes.Scenes.UniqueSexScenes;
 
 			outputText("“<i>It’s just a little thank you gift. You know, for uh...</i>”  She winks, provocatively.  “<i>Services rendered?</i>”  Smiling, you make your way back to camp, feeling decidedly good about yourself.\n\n");
 
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
 
@@ -1928,8 +1928,8 @@ import classes.Scenes.UniqueSexScenes;
 
 				outputText("You turn to say something to Izumi, but to your surprise you discover she’s actually fallen asleep.  Shaking your head in amusement at the Oni girl’s inferior stamina, you make your way out of the cave and back to camp, counting the gems as you go. \n\n");
 			}
-			
-			player.orgasm();
+
+			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
 
@@ -1973,7 +1973,7 @@ import classes.Scenes.UniqueSexScenes;
 
 			outputText("Amidst some miscellaneous junk that you cannot for the life of you figure out, you find a small pile of gems.  You help yourself to them as payment for the good time you just showed the uppity Oni, stow them safely away and wander back to camp, whistling happily to yourself.\n\n");
 
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
 
@@ -2040,7 +2040,7 @@ import classes.Scenes.UniqueSexScenes;
 
 			outputText("On the way out, you notice a small leather bag just laying out in the open.  Inspecting it, you discover it to be filled with a small fortune in gems!  You decide to take it with you - after all, it’s not like Izumi seems to need the money, plus she <i>did</i> try to rape you, so it’s technically a trophy.  Feeling decidedly more light hearted about your situation, you leave the cave and make your way back to camp, happily inspecting the gems as you go.\n\n");
 
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
 
@@ -2095,7 +2095,7 @@ import classes.Scenes.UniqueSexScenes;
 
 			outputText("By the time you get back to camp, you’re almost feeling good enough to whistle.");
 
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}
 	}

@@ -22,3 +22,6 @@ node_modules
 CoC-AIR-app.xml
 CoC-AIR.airi
 .DS_Store
+/.idea/codeStyles/Project.xml
+/.idea/codeStyles/codeStyleConfig.xml
+/.idea/.gitignore

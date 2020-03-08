@@ -77,7 +77,7 @@ public function beatingDarkSlimeUseHerFillMyAssWithGoo():void {
 public function beatingDarkSlimeUseHer2():void {
 	outputText("Regardless of the number of tendrils massaging you in every right way, your having one hell of a great session. The slime is pleasing you in a rhythmic tempo not unlike that of your heartbeat its body pulsing with every small drop of fluid you produce. At this rate, you won’t be able to hold off any further and the slime knowing it speeds up its pace eager for the reward.\n\n");
 	outputText("You cum magnificently your fluids mixing and flooding in the slime’s body mass. You almost doze off to sleep too but the mass of the slime moving off from you jar you awake, guess she does not double up as a real bed for resting purposes. She waves off goodbye as she takes her departure leaving you there to ponder who truly raped who.\n\n");
-	player.orgasm();
+	player.sexReward("Default", "Default",true,false);
 	cleanupAfterCombat();
 }
 

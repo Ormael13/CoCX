@@ -271,7 +271,7 @@ private function serviceLowCorruptionHighLust():void
 			outputText("You barely notice as the creature's erection recedes and it slides out from under you, leaving you utterly satisfied.  When you do finally recover your senses you find no other traces of its presence.");
 		}
 	}
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	dynStats("sen", 3);
 }
 
@@ -367,7 +367,7 @@ private function maleRapesOoze():void {
 
 		outputText("  The thing seems to clamp down on you even tighter as you pull out, and you relish the sensation.  Its tight ass leaves your [cock] almost perfectly clean afterward, a glob of white still stuck inside the creature as it changes back into its original, amorphous state.  The cloud disperses as the slime slinks off.");
 	}
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	dynStats("sen", 3);
 }
 
@@ -464,9 +464,7 @@ private function femaleRapesOoze():void {
 		outputText("not as thick as semen, ");
 	}
 	outputText("filling you past full and flowing out along the creature's cock, leaving you with a slight bulge at your belly and a pool of green fluids on the ground beneath you.  You gasp and hold your breath as you lay on the creature, its grip slowly loosening.  Its cock slides out of you and a flood of liquid pours out of your " + vaginaDescript(0) + " as it begins to leak out from under you, gently letting you onto the ground.  You tremble on the ground for a few moments as you recover your wits, and once you do you realize that the creature has left.  You find no trace of the creature's presence afterward except a thin trail of green fluid leading to the nearby waters.");
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	dynStats("sen", 3);
 }
 
@@ -528,9 +526,7 @@ private function oozeButtRapesYou():void
 	//mangasm
 	else if(player.cockTotal() > 0) outputText("The additional pressure against your prostate finally pushes you over the edge and you come hard, spraying your load against the ground.  Thick ropes of jizm spray onto the ground as the feeling wracks your body.  ");
  	outputText("You shudder beneath the creature as it slowly begins to pull out of you, which brings another moan to your lips.  When it finally pops free of your body you feel a deluge of fluid rush from your ass and onto the ground.  You recover yourself as the creature retreats back into the waters, leaving nothing but a trail of slime leading to the water's edge.");
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	dynStats("sen", 4);
 }
 
@@ -562,11 +558,10 @@ private function oozeRapesYouOrally():void
 		outputText("With a final strong thrust the thing rams your face against its hips and you feel a surge of fluid flow down its member and explode into your stomach.  It releases several spurts of fluid into your gullet before it begins to draw out, dribbling fluid into your throat.  It pauses as it pulls its cock head into your mouth and releases a final blast of fluid, which you quickly swallow as it pulls out.  It releases a few final spurts onto your face as it begins to withdraw, and you lick your lips and begin to rub the fluid into your skin.  ");
 		if(player.lust > 40) {
 			outputText("The creature withdraws as you begin to masturbate, furiously working yourself to a quick, but powerful, orgasm.  By the time you recover, it is long gone.");
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 		}
 		else outputText("The creature withdraws while you're distracted, leaving no traces of its presence save for what it left on your body.");
-		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(35);
-		if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+		player.sexReward("vaginalFluids");
 		player.refillHunger(35);
 	}
 	//standard
@@ -641,7 +636,7 @@ private function oozeRapesYouVaginally():void
 			//Single
 			else outputText("Your member climaxes as well, and you pull a hand to cover your eyes and face as your jism explodes onto yourself.  Your other hand slides to the base of your [cock] and squeezes as you coat your chest in semen.");
 		}
-		player.orgasm();
+		player.sexReward("vaginalFluids");
 		dynStats("sen", 4);
 	}
 	//standard result
@@ -696,7 +691,7 @@ private function oozeRapesYouVaginally():void
 			else outputText("Your own member finally reaches its climax as well, and you open your mouth as jism explodes onto your face and chest.  Your hands slide to the base of your [cock] and squeeze as you release thick ropes of ejaculate onto yourself, coating your face and chest as you relish its salty taste.  ");
 		}
 		outputText("You pant as the creature holds perfectly still for a minute, then slowly lets you down as its erection slides out of you.  When the last of its dick finally pops out, a rush of its green slime flows out of you and onto the ground.  The creature leaves you to recover your strength, retreating into the nearby water.");
-		player.orgasm();
+		player.sexReward("vaginalFluids");
 		dynStats("sen", 4);
 	}
 	
@@ -775,7 +770,7 @@ internal function rapeOozeWithMilk():void {
 	outputText("Now empty, you leave the ooze in the pile it's in and walk away, feeling somewhat disappointed by the lackluster ending of it all, but overall satisfied with the fact that you've nursed.\n\n");
 	
 	//set lust to 0, increase sensitivity slightly
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	dynStats("lib", .2);
 	//You've now been milked, reset the timer for that
 	player.addStatusValue(StatusEffects.Feeder,1,1);

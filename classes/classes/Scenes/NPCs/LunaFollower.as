@@ -644,7 +644,7 @@ package classes.Scenes.NPCs
 			outputText("You re-equip your [armor], turning to thank Luna once more, before you continue on with your day.\n\n");
 			lunaJealousy(-100);
 			lunaAffection(2);
-			player.orgasm();
+			player.sexReward("saliva");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function sexMenuBoobjob():void {
@@ -660,7 +660,7 @@ package classes.Scenes.NPCs
 			outputText("Taking in a deep breath, you thank Luna for her work, patting her on the head, before re-dressing and moving on with your day.\n\n");
 			lunaJealousy(-100);
 			lunaAffection(2);
-			player.orgasm();
+			player.sexReward("Default", "Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function sexMenuDoggyTreats():void {
@@ -677,7 +677,7 @@ package classes.Scenes.NPCs
 			outputText("You rest like this for a moment before lifting back up and resuming your duties. Luna has regained her human form since then and is already starting to put back on her maid uniform.\n\n");
 			lunaJealousy(-100);
 			lunaAffection(2);
-			player.orgasm();
+			player.sexReward("Default", "Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function sexMenuSandwichWithAyane():void {
@@ -702,7 +702,7 @@ package classes.Scenes.NPCs
 			outputText("You decide to take a nap to recover some energy. A few hour later, you wake up ready to resume adventuring.\n\n");
 			lunaJealousy(-100);
 			lunaAffection(2);
-			player.orgasm();
+			player.sexReward("Default", "Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		

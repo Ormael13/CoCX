@@ -1026,7 +1026,7 @@ public class MarblePurification extends NPCAwareContent{
 		 	outputText("\n\nIt's around the same time that the girl under you cries out a long loud moo through Marble's womanhood, signalling her surrender to your lips.  You pull back and see your mate regard her sister with disappointment, you poke the bad bound girl in the belly and tell her to finish the job.  She gasps and returns to licking cow-girl snatch enough to bring out a nice low moan and moo from your mate's body.");
 		 	outputText("\n\nYour hot and sweaty bodies separate from one another, each face bearing the fluids of one another's orgasms.  Clara is coughing and sputtering, \"<i>Gah, sis, does your milk taste as bad as your pussy juices?  No woonder [name] didn't want you!</i>\"  Another shock of anger shoots through Marble's features.  Is she going to try and inflict more punishment on her sister?");
 		}
-		player.orgasm();
+		player.sexReward("Default", "Default",true,false);
 		//proceed to calm Marble down
 		menu();
 		addButton(0,"Next",calmMurblesFatAssDown);
@@ -1065,7 +1065,7 @@ public class MarblePurification extends NPCAwareContent{
 	 	outputText("\n\nRough sex has a tendency to be rather short but eventful.  In this aspect, this particular escapade is no different.  What sets it apart is an incessant chorus of furious shouting and insults from an extremely jealous cow-girl.  It barely takes a minute before a sharp orgasm passes through your bodies, and in almost an instant, it is over.  Your sweaty bodies separate, and you get a chance to see Marble's face once more.  She's crying.");
 	 	outputText("\n\nThe cause of this sadness is rather likely to be from the extreme verbal abuse that a woman red with rage has been heaping at her.  \"<i>What the fuck is wroong with you!?  Having sex like that with my mate right in froont of me while I'm tied up!  You deserve to be locked away, </i>sister<i>.</i>\"  That last word is essentially spat out.  Evidently Clara didn't enjoy the display, nor did Marble particularly care for her response.  The elder sister rises up, and steps towards her sister, fists clenched in furry.");
 		//set lust to 0
-		player.orgasm();
+		player.sexReward("Default", "Default",true,false);
 		//Proceed to calm Marble down
 		menu();
 		addButton(0,"Next",calmMurblesFatAssDown);

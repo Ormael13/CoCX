@@ -407,8 +407,7 @@ public class ErlKingScene extends BaseContent
 			inventory.takeItem(consumables.CANINEP, camp.returnToCampUseOneHour);
 			dynStats("sen-", 2, "lib+", 2, "cor+", 1, "lus=", 0);
 			fatigue(10);
-			player.orgasm();
-			player.slimeFeed();
+			player.sexReward("cum");
 		}
 
 		protected function repeatWildHuntAWinnerIsYou():void
@@ -690,8 +689,7 @@ public class ErlKingScene extends BaseContent
 			//[+10 Fatigue, +1 Toughness / +1 Strength, 100 hp healed]			
 			if (player.tou < player.str) dynStats("toughness+", 1, "fatigue+", 10, "health+", 100, "lust=", 0);
 			else (dynStats("strength+", 1, "fatigue+", 10, "health+", 100, "lust=", 0));
-			player.orgasm();
-			player.slimeFeed();
+			player.sexReward("cum");
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);
@@ -772,7 +770,7 @@ public class ErlKingScene extends BaseContent
 			}
 
 			player.createKeyItem("Golden Antlers", 0, 0, 0, 0);
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			dynStats("lust=", 0);
 			if (flags[kFLAGS.ERLKING_CANE_OBTAINED] == 0) {
 				inventory.takeItem(weapons.HNTCANE, camp.returnToCampUseOneHour);
@@ -853,7 +851,7 @@ public class ErlKingScene extends BaseContent
 
 			//[Libido + 2]
 			dynStats("lib+", 2, "lus=", 0);
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);
@@ -879,7 +877,7 @@ public class ErlKingScene extends BaseContent
 
 			//[Sensitivity -2]
 			dynStats("sen-", 2, "lus=", 0);
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);
@@ -905,7 +903,7 @@ public class ErlKingScene extends BaseContent
 
 			//[Sensitivity -2, Libido +2]
 			dynStats("sen-", 2, "lib+", 2, "lus=", 0);
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);

@@ -30,7 +30,7 @@ package classes.Scenes.Areas.GlacialRift
 					outputText("The experience is delightful but why stop there? You snap your fingers and use your snow control power to craft a well sized double ended dildo out of slippery ice. Satisfied with the shape you slide it between your two holes, enjoying the penetration as your pussy smacks against hers. You cry out in delight as the hastily crafted sex toy slides from your pussy depths to hers. ");
 					outputText("After a few minutes of this delicious experience, your paired orgasm now imminent, the both of you let out a banshee like scream as your cunts drenches the snowy mat below.\n\n");
 					outputText("Highly satisfied you depose a loving kiss on your partner's lips before dressing up and heading back to camp.\n\n");
-					player.orgasm();
+					player.sexReward("Default","Default",true,false);
 					doNext(camp.returnToCampUseOneHour);
 				}
 				else {
