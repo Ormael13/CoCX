@@ -34,6 +34,7 @@ public class Wings extends BodyPart {
 	public static const ETHEREAL_WINGS:int    	 = 30;
 	public static const THUNDEROUS_AURA:int    	 = 31;
 	public static const LEVITATION:int    		 = 32;
+	public static const DEVILFEATHER:int       	 = 33;
 	// Don't forget to add new types in DebugMenu.as list WING_TYPE_CONSTANTS
 	
 	public var desc:String = "non-existant";
