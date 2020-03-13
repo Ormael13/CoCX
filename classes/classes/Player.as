@@ -3981,17 +3981,17 @@ use namespace CoC;
 				devilkinCounter++;
 			if (tailType == Tail.GOAT || tailType == Tail.DEMONIC)
 				devilkinCounter++;
-			if (wings.type == Wings.BAT_LIKE_TINY || wings.type == Wings.BAT_LIKE_LARGE)
+			if (wings.type == Wings.BAT_LIKE_TINY || wings.type == Wings.BAT_LIKE_LARGE || wings.type == Wings.DEVILFEATHER)
 				devilkinCounter += 4;
 			if (arms.type == Arms.DEVIL)
 				devilkinCounter++;
-			if (horns.type == Horns.GOAT)
+			if (horns.type == Horns.GOAT || horns.type == Horns.GOATQUAD)
 				devilkinCounter++;
 			if (ears.type == Ears.GOAT)
 				devilkinCounter++;
 			if (faceType == Face.DEVIL_FANGS)
 				devilkinCounter++;
-			if (eyes.type == Eyes.DEVIL)
+			if (eyes.type == Eyes.DEVIL || eyes.type == Eyes.GOAT)
 				devilkinCounter++;
 			if (tallness < 48)
 				devilkinCounter++;
@@ -10555,23 +10555,23 @@ use namespace CoC;
 		{
 			if(Wasfluidinvolved)
 			{
+				slimeFeed();
 				switch (fluidtype)
 				{
-						// Start with that, whats easy
-					case 'cum': //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_VAGINAL] < 10) flags[kFLAGS.TIMES_ORGASM_VAGINAL]++;
+					// Start with that, whats easy
+					case 'cum':
 						if (hasPerk(PerkLib.ManticoreCumAddict))
 						{
 							manticoreFeed();
 						}
 						break;
-					case 'vaginalFluids':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_ANAL]    < 10) flags[kFLAGS.TIMES_ORGASM_ANAL]++;
+					case 'vaginalFluids':
 						break;
-					case 'saliva':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_ANAL]    < 10) flags[kFLAGS.TIMES_ORGASM_ANAL]++;
+					case 'saliva':
 						break;
-					case 'milk':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_ANAL]    < 10) flags[kFLAGS.TIMES_ORGASM_ANAL]++;
+					case 'milk':
 						refillHunger(10, false);
 						break;
-						slimeFeed();
 				}
 			}
 			SexXP(5+level);

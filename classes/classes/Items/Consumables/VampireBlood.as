@@ -66,7 +66,13 @@ public class VampireBlood extends Consumable {
             }, {
                 BodyPart: 'eyes.type',
                 ChangeTo: Eyes.VAMPIRE,
-                Metamorph: StatusEffects.UnlockedVampireEyes
+                Metamorph: StatusEffects.UnlockedVampireEyes,
+                Addition: {
+                    Eyes:{
+                        BodyPart: 'eyes.colour',
+                        ChangeTo: "blood red"
+                    }
+                }
             }, {
                 BodyPart: 'faceType',
                 ChangeTo: Face.VAMPIRE,

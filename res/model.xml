@@ -124,6 +124,7 @@
             <color name="ashen grayish-blue">#93b6c8</color>
             <color name="creamy-white">#f2ebde</color>
             <color name="crimson platinum">#d56c6c</color>
+			<color name="blood-red">#d56c6c</color>
             <color name="dark blue">#3d529e</color>
             <color name="dark gray">#534f59</color>
             <color name="dark green">#36582d</color>
@@ -2584,7 +2585,7 @@
             </default>
         </switch>
 
-		<!-- HIDING INVALID ARM PATTERN AREA <if test="(arms.type == Arms.HUMAN || arms.type == Arms.ELF || arms.type == Arms.KITSUNE) && (lowerBody == LowerBody.HUMAN || lowerBody == LowerBody.ELF || lowerBody == LowerBody.KITSUNE) && cor &gt;=50 && skin.coverage==Skin.COVERAGE_NONE">-->
+		<!-- HIDING INVALID ARM PATTERN AREA <if test="(arms.type == Arms.HUMAN || arms.type == Arms.ELF || arms.type == Arms.KITSUNE) F (lowerBody == LowerBody.HUMAN || lowerBody == LowerBody.ELF || lowerBody == LowerBody.KITSUNE) && cor &gt;=50 && skin.coverage==Skin.COVERAGE_NONE">-->
 		<if test="arms.type == Arms.DISPLACER">
 			<hide part="arms_pattern/*"/>
 			<hide part="arms_bg_pattern/*"/>
@@ -2636,17 +2637,17 @@
 		<if test="lowerBody == LowerBody.SCYLLA">
 			<hide part="legs_pattern/*"/>
 		</if>
-		<if test="lowerBody == LowerBody.WOLF && arms.type == Arms.WOLF">
+		<if test="lowerBody == LowerBody.WOLF and arms.type == Arms.WOLF">
 			<hide part="arms_bg_pattern/*"/>
 			<hide part="arms_pattern/*"/>
 			<hide part="legs_pattern/*"/>
 		</if>
-		<if test="lowerBody == LowerBody.LION && arms.type == Arms.LION">
+		<if test="lowerBody == LowerBody.LION and arms.type == Arms.LION">
 			<hide part="arms_bg_pattern/*"/>
 			<hide part="arms_pattern/*"/>
 			<hide part="legs_pattern/*"/>
 		</if>
-		<if test="lowerBody == LowerBody.LION && arms.type == Arms.LION">
+		<if test="lowerBody == LowerBody.LION and arms.type == Arms.LION">
 			<hide part="arms_bg_pattern/*"/>
 			<hide part="arms_pattern/*"/>
 			<hide part="legs_pattern/*"/>
@@ -2716,6 +2717,7 @@
 				</else>
 			</if>
 		</if>
+		
 		<if test="scarf">
 			<show part="clothe/scarf"/>	
 		</if>
@@ -2752,7 +2754,7 @@
                     <show part="hair_bg/yukionna"/>
                 </default>
             </switch>
-			</if>
+		</if>
 		
     </logic>
 </model>

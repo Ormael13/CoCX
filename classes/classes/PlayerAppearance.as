@@ -1526,6 +1526,10 @@ public class PlayerAppearance extends BaseContent {
 			else
 				outputText("  A pair of tall-standing goat horns sprout from the sides of your head.  They are curved and patterned with ridges.");
 		}
+		if (player.horns.type == Horns.GOATQUAD) {
+			if (player.horns.count == 1)
+				outputText("  Four tall-standing goat horns sprout from the sides of your head denouncing your fiendish nature. They are curved and patterned with ridges.\n");
+		}
 		if (player.horns.type == Horns.RHINO) {
 			if (player.horns.count >= 2) {
 				if (player.faceType == Face.RHINO)
@@ -1659,7 +1663,7 @@ public class PlayerAppearance extends BaseContent {
 		else if(eyeType == Eyes.RAIJU)
 			outputText("  Your eyes are of an electric [eyecolor] hue that constantly glows with voltage power. They have slitted pupils like those of a beast.");
 		else if(eyeType == Eyes.VAMPIRE){
-			outputText("  Your eyes looks somewhat normal, but their blood-red irises seem to have the tendency of drawing in people’s gaze, like moths to a flame.");
+			outputText("  Your eyes looks somewhat normal, but their [eyecolor] irises seem to have the tendency of drawing in people’s gaze, like moths to a flame.");
 		}
 		else if(eyeType == Eyes.GEMSTONES){
 			outputText("  Instead of regular eyes you see through a pair of gemstones that change hue based on your mood.");
@@ -1671,6 +1675,9 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your gifted eyes have a bird-like appearance, having an [eyecolor] sclera and a large, black iris. A thin ring of black separates your sclera from your outer iris.");
 		}
 		else if(eyeType == Eyes.INFERNAL){
+			outputText("  Your eyes are like those of a goat with horizontal slit pupils at the center of their [eyecolor] iris.");
+		}
+		else if(eyeType == Eyes.GOAT){
 			outputText("  Your eyes look fiendish, with their black sclera and glowing [eyecolor] iris. What's more, a small trail of fire blazes on the corners making them all the more intimidating.");
 		}
 		else if(eyeType == Eyes.ORC){
@@ -1683,7 +1690,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your eyes are human-like. However, their [eyecolor] irises are clearly those of an Hinezumi.");
 		}
 		else if(eyeType == Eyes.BEAR){
-			outputText("  Your eyes are human save for your golden pupils closer to those of a bear.");
+			outputText("  Your eyes are human save for your [eyecolor] pupils closer to those of a bear.");
 		}
 		else if(eyeType == Eyes.DISPLACER){
 			outputText("  Your eyes are similar to those of a cat, with slit pupils. However, their black sclera dismiss any links to the regular felines clearly identifying you to something else.");

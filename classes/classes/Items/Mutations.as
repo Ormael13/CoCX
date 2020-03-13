@@ -4672,6 +4672,12 @@ public final class Mutations extends MutationsHelper
 				player.skin.growCoat(Skin.SCALES,{color:color},Skin.COVERAGE_LOW);
 				changes++;
 			}
+			//Snake eyes for hydra
+			if (player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKE && player.lowerBody == LowerBody.HYDRA && rand(4) == 0 && changes < changeLimit) {
+				setEyeType(Eyes.SNAKE);
+				outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake.  <b>You now have snake eyes!</b>.");
+				changes++;
+			}
 			//Snake eyes
 			if (player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKE && player.eyes.type != Eyes.GORGON && rand(4) == 0 && changes < changeLimit) {
 				setEyeType(Eyes.SNAKE);
@@ -9273,11 +9279,11 @@ public final class Mutations extends MutationsHelper
 		public function voltageTopaz(itemused:Boolean,player:Player):void
 		{
 			player.slimeFeed();
-			if (itemused == true) clearOutput();
+			if (itemused) clearOutput();
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
 			var temp2:Number = 0;
-			if (itemused == true) {
+			if (itemused) {
 				if (rand(2) == 0) changeLimit++;
 				if (rand(3) == 0) changeLimit++;
 				changeLimit += additionalTransformationChances();
@@ -13723,6 +13729,33 @@ public final class Mutations extends MutationsHelper
 				}
 				changes++;
 			}
+
+			//wings 2
+			if (rand(3) == 0 && changes < changeLimit && !InCollection(player.wings.type, Wings.DEVILFEATHER) && (player.tailType == Tail.GOAT || player.tailType == Tail.DEMONIC)) {
+				//grow smalls to large
+				if ((player.wings.type == Wings.BAT_LIKE_LARGE) && player.cor >= 75) {
+					outputText("\n\n");
+					outputText("Your wing shrivels before suddenly changing and covering themselves with black feathers. They still look demonic in a sense, albeit they are feathered now. <b>You now have black, feathered wings!</b>");
+					setWingType(Wings.DEVILFEATHER, "black, feathered");
+				}
+				else if (player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE) {
+					outputText("\n\n");
+					outputText("The muscles around your shoulders bunch up uncomfortably, changing to support your wings as you feel their weight increasing.  You twist your head as far as you can for a look and realize they've changed into <b>black, feathered wings!</b>");
+					setWingType(Wings.DEVILFEATHER, "black, feathered");
+				}
+				else {
+					outputText("\n\nA sensation of numbness suddenly fills your wings.  When it dies away, they feel... different.  Looking back, you realize that they have been replaced by <b>black, feathered wings!</b>");
+					setWingType(Wings.DEVILFEATHER, "black, feathered");
+				}
+				//No wings
+				if (player.wings.type == Wings.NONE) {
+					outputText("\n\n");
+					outputText("A knot of pain forms in your shoulders as they tense up.  With a surprising force, a pair of black feathered wings sprout from your back, ripping a pair of holes in the back of your [armor].  <b>You now have black, feathered wings!</b>");
+					setWingType(Wings.DEVILFEATHER, "black, feathered");
+				}
+				changes++;
+			}
+
 			//arms
 			if (rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.DEVIL && (player.wings.type == Wings.BAT_LIKE_TINY || player.wings.type == Wings.BAT_LIKE_LARGE)) {
 				outputText("\n\nYour hands shapeshift as they cover in fur and morph into the clawed hands of some unknown beast. They retain their dexterity despite their weird shape and paw pads. At least this won't hinder spellcasting. <b>You now have bestial clawed hands!</b>");
@@ -13730,12 +13763,27 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Horns
-			if (rand(3) == 0 && changes < changeLimit && player.horns.type != Horns.GOAT && player.arms.type == Arms.DEVIL) {
-				if (player.horns.type == Horns.NONE) outputText("You begin to feel a prickling sensation at the top of your head. Reaching up to inspect it, you find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
-				else outputText("You begin to feel an odd itching sensation as you feel your horns repositioning. Once it's over, you reach up and find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
-				setHornType(Horns.GOAT, 1);
+			if (rand(3) == 0 && changes < changeLimit && player.arms.type == Arms.DEVIL) {
+				if (player.horns.type == Horns.NONE) {
+					outputText("You begin to feel a prickling sensation at the top of your head. Reaching up to inspect it, you find a pair of tall-standing goat horns. <b>You now have a pair of goat horns.</b>");
+				}
+				else if (player.horns.type == Horns.GOAT) {
+					outputText("\n\n");
+					outputText("You groan in pleasure mixed pains as your horns begins to split into a second pair ornating the side of your head. If the original pair made you look fiendish your four horns now definitively denounce your demonic nature. <b> You now have four devil horns curving backward behind your head.</b>");
+					setHornType(Horns.GOATQUAD, 1);
+				}
+				else if (player.horns.type == Horns.GOATQUAD) {
+					outputText("\n\n");
+					outputText("You begin to feel an odd itching sensation as you feel your horns repositioning and merging back togueter. Once it's over, you reach up and find a pair of tall-standing goat horns where your four horns used to be. <b>You now have a pair of goat horns.</b>");
+					setHornType(Horns.GOAT, 2);
+				}
+				else {
+					outputText("You begin to feel an odd itching sensation as you feel your horns repositioning. Once it's over, you reach up and find a pair of tall-standing goat horns. <b>You now have a pair of goat horns.</b>");
+					setHornType(Horns.GOAT, 2);
+				}
 				changes++;
 			}
+
 			//Ears
 			if (rand(3) == 0 && changes < changeLimit && player.ears.type != Ears.GOAT && player.horns.type == Horns.GOAT) {
 				outputText("\n\nYour ears elongate and flatten on your head. You flap them a little and discover they have turned into something similar to the ears of a goat. <b>You now have goat ears!</b>");
@@ -13750,12 +13798,24 @@ public final class Mutations extends MutationsHelper
 			}
 			//Eyes
 			if (rand(3) == 0 && changes < changeLimit && player.eyes.type != Eyes.DEVIL && player.faceType == Face.DEVIL_FANGS) {
+				if (player.eyes.type == Eyes.GOAT) {
+					outputText("\n\nYour eyes feel like they are burning. You try to soothe them, but to no avail. You endure the agony for a few minutes before it finally fades. You look at yourself in the nearest reflective surface and notice your eyes have taken on a demonic appearance. ");
+					outputText("The sclera is black with a glowing embery iris. Furthermore, they seem to glow with a faint inner light. <b>You now have fiendish eyes!</b>");
+					setEyeTypeAndColor(Eyes.DEVIL,"golden");
+				}
+				else if (player.eyes.type == Eyes.DEVIL) {
+					outputText("\n\nYour eyes feel like they are burning. You try to soothe them, but to no avail. You endure the agony for a few minutes before it finally fades. You look at yourself in the nearest reflective surface and notice your eyes have taken on a goat like appearance with horizontal pupils in the middle, the schlera turning back to white. ");
+					outputText("<b>You now have eyes with horizontal pupils just like those of a goat!</b>");
+					setEyeTypeAndColor(Eyes.GOAT,"golden");
+				}
+				else {
 				outputText("\n\nYour eyes feel like they are burning. You try to soothe them, but to no avail. You endure the agony for a few minutes before it finally fades. You look at yourself in the nearest reflective surface and notice your eyes have taken on a demonic appearance. ");
-				outputText("The sclera is black with a glowing ember iris. Furthermore, they seem to glow with a faint inner light. <b>You now have fiendish eyes!</b>");
-				setEyeTypeAndColor(Eyes.DEVIL,"ember");
+				outputText("The sclera is black with a glowing embery iris. Furthermore, they seem to glow with a faint inner light. <b>You now have fiendish eyes!</b>");
+				setEyeTypeAndColor(Eyes.DEVIL,"golden");
+				}
 				changes++;
 			}
-			//Shrinkage!
+			//Shrinkage!7
 			if (rand(2) == 0 && player.tallness > 42) {
 				outputText("\n\nYou see the ground grow closer. Upon examining yourself, you discover you are shorter than before.");
 				player.tallness -= 1 + rand(3);
@@ -14604,4 +14664,4 @@ public final class Mutations extends MutationsHelper
 			HPChange(Math.round(player.maxHP() * 0.1), true);
 		}
 	}
-}
+}
