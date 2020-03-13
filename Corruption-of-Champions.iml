@@ -17,6 +17,7 @@
             <entry key="compiler.keep-generated-actionscript" value="true" />
           </map>
           <option name="resourceFilesMode" value="None" />
+          <option name="additionalOptions" value="-use-network=false -keep-as3-metadata Embed" />
         </compiler-options>
         <packaging-air-desktop />
         <packaging-android />

@@ -124,6 +124,7 @@
             <color name="ashen grayish-blue">#93b6c8</color>
             <color name="creamy-white">#f2ebde</color>
             <color name="crimson platinum">#d56c6c</color>
+			<color name="blood-red">#d56c6c</color>
             <color name="dark blue">#3d529e</color>
             <color name="dark gray">#534f59</color>
             <color name="dark green">#36582d</color>
@@ -259,7 +260,7 @@
 
 
 	<!-- LOCATION IN SCREEN AREA -->
-        <spritemap file="body.png">
+    <spritemap file="body.png">
         <cell rect="1,90,49,59" name="torso/human" dx="69" dy="64"/>
         <cell rect="51,90,49,59" name="torso/fur" dx="69" dy="64"/>
         <cell rect="101,90,49,59" name="torso/chitin" dx="69" dy="64"/>
@@ -805,11 +806,14 @@
         <cell rect="339,350,168,139" name="wings/wraith" dx="17" dy="39"/>
         <cell rect="508,350,168,139" name="wings/ghost" dx="11" dy="27"/>
         <cell rect="170,350,168,139" name="rearbody/displacertentacle" dx="14" dy="20"/>
+        <cell rect="1,630,168,139" name="wings/vampire_bg" dx="10" dy="28"/>
+        <cell rect="170,630,168,139" name="overclothe/vampire" dx="10" dy="28"/>
     </spritemap>
 
 	<!-- LAYER AREA -->
     <layers>
 		<layer name="fullbody"/>
+		<layer name="overclothe"/>
 		<layer name="clothe"/>
 		<layer name="hands_fg"/>
 		<layer name="arms_fg"/>
@@ -2129,7 +2133,7 @@
                 <show part="wings_bg/feather_large"/>
 				<show part="wings_front/feather_large"/>
             </case>
-            <case values="Wings.IMP,Wings.BAT_LIKE_TINY,Wings.BAT_LIKE_LARGE,Wings.BAT_LIKE_LARGE_2,Wings.VAMPIRE,Wings.NIGHTMARE,Wings.GARGOYLE_LIKE_LARGE"><!--TODO sizes -->
+            <case values="Wings.IMP,Wings.BAT_LIKE_TINY,Wings.BAT_LIKE_LARGE,Wings.BAT_LIKE_LARGE_2,Wings.NIGHTMARE,Wings.GARGOYLE_LIKE_LARGE"><!--TODO sizes -->
                 <show part="wings/demon"/>
                 <show part="wings_bg/demon"/>
 				<show part="wings_front/demon"/>
@@ -2142,7 +2146,7 @@
             <case values="Wings.GIANT_DRAGONFLY,Wings.MANTIS_LIKE_SMALL,Wings.MANTIS_LIKE_LARGE,Wings.MANTIS_LIKE_LARGE2"><!--TODO -->
                 <show part="wings/bee"/>
             </case>
-            <!--TODO Wings.PLANT, Wings.BAT_ARM, Wings.VAMPIRE-->
+            <!--TODO Wings.PLANT, Wings.BAT_ARM, -->
             <case values="Wings.MANTICORE_LIKE_SMALL,Wings.MANTICORE_LIKE_LARGE">
                 <show part="wings/mantibig"/>
                 <show part="wings_bg/mantibig"/>
@@ -2161,6 +2165,10 @@
             </case>
 			<case values="Wings.THUNDEROUS_AURA">
                 <show part="aura/thunderaura"/>
+            </case>
+			<case values="Wings.VAMPIRE">
+                <show part="overclothe/vampire"/>
+				<show part="wings/vampire_bg"/>
             </case>
             <default>
             </default>
@@ -2577,7 +2585,7 @@
             </default>
         </switch>
 
-		<!-- HIDING INVALID ARM PATTERN AREA <if test="(arms.type == Arms.HUMAN || arms.type == Arms.ELF || arms.type == Arms.KITSUNE) && (lowerBody == LowerBody.HUMAN || lowerBody == LowerBody.ELF || lowerBody == LowerBody.KITSUNE) && cor &gt;=50 && skin.coverage==Skin.COVERAGE_NONE">-->
+		<!-- HIDING INVALID ARM PATTERN AREA <if test="(arms.type == Arms.HUMAN || arms.type == Arms.ELF || arms.type == Arms.KITSUNE) F (lowerBody == LowerBody.HUMAN || lowerBody == LowerBody.ELF || lowerBody == LowerBody.KITSUNE) && cor &gt;=50 && skin.coverage==Skin.COVERAGE_NONE">-->
 		<if test="arms.type == Arms.DISPLACER">
 			<hide part="arms_pattern/*"/>
 			<hide part="arms_bg_pattern/*"/>
@@ -2624,6 +2632,24 @@
 			<hide part="legs_pattern/*"/>
 		</if>
 		<if test="lowerBody == LowerBody.DRIDER">
+			<hide part="legs_pattern/*"/>
+		</if>
+		<if test="lowerBody == LowerBody.SCYLLA">
+			<hide part="legs_pattern/*"/>
+		</if>
+		<if test="lowerBody == LowerBody.WOLF and arms.type == Arms.WOLF">
+			<hide part="arms_bg_pattern/*"/>
+			<hide part="arms_pattern/*"/>
+			<hide part="legs_pattern/*"/>
+		</if>
+		<if test="lowerBody == LowerBody.LION and arms.type == Arms.LION">
+			<hide part="arms_bg_pattern/*"/>
+			<hide part="arms_pattern/*"/>
+			<hide part="legs_pattern/*"/>
+		</if>
+		<if test="lowerBody == LowerBody.LION and arms.type == Arms.LION">
+			<hide part="arms_bg_pattern/*"/>
+			<hide part="arms_pattern/*"/>
 			<hide part="legs_pattern/*"/>
 		</if>
 		<if test="isTaur()">
@@ -2691,6 +2717,7 @@
 				</else>
 			</if>
 		</if>
+		
 		<if test="scarf">
 			<show part="clothe/scarf"/>	
 		</if>
@@ -2727,7 +2754,7 @@
                     <show part="hair_bg/yukionna"/>
                 </default>
             </switch>
-			</if>
+		</if>
 		
     </logic>
 </model>
