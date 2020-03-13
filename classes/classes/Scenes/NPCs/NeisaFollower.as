@@ -146,7 +146,7 @@ public function neisaSparLost():void {
 public function neisaHenchmanOption():void {
 	clearOutput();
 	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
-		outputText("\"<i>As you command Boss.</i>\"\n\n");
+		outputText("\"<i>Yeah sure, I will join, just make sure to share the loot.</i>\"\n\n");
 		outputText("Neisa is now following you around.\n\n");
 		var strNeisa:Number = 100;
 		var meleeAtkNeisa:Number = 12;

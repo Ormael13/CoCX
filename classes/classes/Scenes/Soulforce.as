@@ -1603,7 +1603,7 @@ public function FightHellfireSnail():void {
 				addButton(14, "Back", SoulforceCheats);
 			}
 			if (page == 2) {
-				//addButton(0, "", ).hint("Add 1 .");
+				addButton(0, "GolemCore", AddGolemCore).hint("Add 1 Golem Core.");
 				//addButton(1, "", ).hint("Add 1 .");
 				//addButton(2, "", ).hint("Add 1 .");
 				//addButton(3, "", ).hint("Add 1 .");
@@ -1671,6 +1671,10 @@ public function FightHellfireSnail():void {
 			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += 50;
 			statScreenRefresh();
 			curry(MaterialMenu, 1);
+		}
+		public function AddGolemCore():void {
+			outputText("\n\n<b>(Gained 1 Golem Core!)</b>\n\n");
+			inventory.takeItem(useables.GOLCORE, curry(MaterialMenu, 2));
 		}
 		public function AddPolarMidnightScroll():void {
 			outputText("\n\n<b>(Gained 1 Polar Midnight scroll!)</b>\n\n");

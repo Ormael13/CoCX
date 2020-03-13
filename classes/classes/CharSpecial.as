@@ -46,8 +46,8 @@ import classes.Items.*;
 			[ "Grigori", customGrigori, true, "You are a normal villager if not for that dragon cock and the ability to use an ice dragon's breath. That damn ancestor of yours had to go and fuck some dragoness, didn't he?" ],
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],kitsune start
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],cow/mino start
-			//[ "Veseshe", customVeseshe, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic..." ],
 			[ "Teekna", customTeekna, true, "You were a pretty normal villager, the only oddity other people noticed was your dyed pink hair and yellow eyes. Your ancestor just couldn't keep it in his pants apparently. At least they left some goodies behind for you!" ],
+			[ "Veseshe", customVeseshe, true, "The village sure liked to pierce their arrows into you. But with your natural agility and a bit of elven blood flowing in your veins they sure were trying..." ],
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],raiju start
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],oni start
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],orc start
@@ -1288,7 +1288,7 @@ import classes.Items.*;
 		}
 		
 		private function customVeseshe():void {
-			//Character Creation	Female	A human with elf bloodline	Veseshe
+			//Character Creation	Herm	A human with elf bloodline	Veseshe
 			player.createPerk(PerkLib.BloodlineElf,0,0,0,0);
 			player.createBreastRow();
 			player.breastRows[0].breastRating = 2;
@@ -1304,9 +1304,10 @@ import classes.Items.*;
 			player.hips.type = 6;
 			player.createPerk(PerkLib.WetPussy, 2, 0, 0, 0);
 			player.createPerk(PerkLib.BigCock, 1.25, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.Kelt, 100, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeSlut)) player.createPerk(PerkLib.HistorySlut,0,0,0,0);
 			if (!player.hasPerk(PerkLib.PastLifeWhore)) player.createPerk(PerkLib.HistoryScout,0,0,0,0);
-			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
+			outputText("The village sure liked to pierce their arrows into you. But with your natural agility and a bit of elven blood flowing in your veins they sure were trying...");
 		}
 		
 		private function customTeekna():void {
@@ -1347,7 +1348,7 @@ import classes.Items.*;
 		}
 		
 		private function customSora7():void {
-			//Character Creation	Female,virgin	A human with oni bloodline	Sora(tone at 100, fighter past story + second for fight too? oni beard necklace?)
+			//Character Creation	Female,virgin	A human with oni bloodline	Sora(tone at 100, fighter past story + second for fight too? oni beard necklace?)keeping titanic strength perk at any race score? start with this event perk?
 			if(player.hasVagina()) player.vaginas[0].virgin = true;
 			player.inte = 30;
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");

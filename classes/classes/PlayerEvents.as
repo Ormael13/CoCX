@@ -1283,7 +1283,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removeStatusEffect(StatusEffects.HinezumiCoat);
 				needNext = true;
 			}
-			//Goblinoid blood &7 Bouncy body
+			//Goblinoid blood & Bouncy body & goblin mechs periodical check up
 			if (player.goblinScore() >= 10 && player.findPerk(PerkLib.GoblinoidBlood) < 0) {
 				outputText("\nAs you become a goblinoid again you can feel the chemicals pumped in by your gadgets resume working.\n");
 				outputText("\n(<b>Gained Perk: Goblinoid blood</b>)\n");
@@ -1307,6 +1307,50 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\n<b>(Lost Perk: Bouncy body)</b>\n");
 				player.removePerk(PerkLib.BouncyBody);
 				needNext = true;
+			}
+			if (player.vehiclesName == "Goblin Mech Alpha") {
+				if (player.elfScore() >= 11) { //Elf
+					outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+					if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.2;
+					if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.35;
+					if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) player.HP /= 1.5;
+					player.HP = Math.round(player.HP);
+					player.setVehicle(VehiclesLib.NOTHING);
+					inventory.takeItem(vehicles.GOBMALP, null);
+					needNext = true;
+				}
+				if (player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE) { //Taller than 4 ft or having wings/tail
+					outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
+					if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.2;
+					if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.35;
+					if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) player.HP /= 1.5;
+					player.HP = Math.round(player.HP);
+					player.setVehicle(VehiclesLib.NOTHING);
+					inventory.takeItem(vehicles.GOBMALP, null);
+					needNext = true;
+				}
+			}
+			if (player.vehiclesName == "Goblin Mech Prime") {
+				if (player.elfScore() >= 11) { //Elf
+					outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+					if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.4;
+					if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.7;
+					if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) player.HP /= 2;
+					player.HP = Math.round(player.HP);
+					player.setVehicle(VehiclesLib.NOTHING);
+					inventory.takeItem(vehicles.GOBMPRI, null);
+					needNext = true;
+				}
+				if (player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE) { //Taller than 4 ft or having wings/tail
+					outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
+					if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.4;
+					if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.7;
+					if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) player.HP /= 2;
+					player.HP = Math.round(player.HP);
+					player.setVehicle(VehiclesLib.NOTHING);
+					inventory.takeItem(vehicles.GOBMPRI, null);
+					needNext = true;
+				}
 			}
 			//H class Heaven Tribulation
 			//		if (player.level >= 24 && player.findPerk(PerkLib.SoulApprentice) >= 0 && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) < 0) {

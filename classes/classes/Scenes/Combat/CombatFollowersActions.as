@@ -48,7 +48,7 @@ import classes.StatusEffects;
 				}
 			}
 			else {
-				outputText("Neisa step forward shield at the ready in order to defend you.\n\n");
+				outputText("Neisa steps forward, shield at the ready in order to defend you.\n\n");
 				player.addStatusValue(StatusEffects.CombatFollowerNeisa, 4, 1);
 			}
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
@@ -61,7 +61,7 @@ import classes.StatusEffects;
 			}
 		}
 		public function neisaCombatActions0():void {
-			outputText("Neisa look for an opening in the battle.\n\n");
+			outputText("Neisa looks for an opening in the battle.\n\n");
 		}
 		public function neisaCombatActions1():void {
 			var dmg1:Number = player.statusEffectv1(StatusEffects.CombatFollowerNeisa);
@@ -74,18 +74,18 @@ import classes.StatusEffects;
 			else dmg1 *= (5.5 + ((weaponNeisa - 200) * 0.01));
 			dmg1 = Math.round(dmg1);
 			doDamage(dmg1);
-			outputText("Neisa slash at " + monster.a + monster.short + " with her sword. <b>(<font color=\"#800000\">" + String(dmg1) + "</font>)</b>\n\n");
+			outputText("Neisa slashes at " + monster.a + monster.short + " with her sword. <b>(<font color=\"#800000\">" + String(dmg1) + "</font>)</b>\n\n");
 		}
 		public function neisaCombatActions2():void {
-			outputText("Neisa move in front of you deflecting the opponent attacks with her shield in order to assist your own defence.\n\n");
+			outputText("Neisa moves in front of you, deflecting the opponent’s attacks with her shield in order to assist your own defence.\n\n");
 			player.createStatusEffect(StatusEffects.CompBoostingPCArmorValue, 0, 0, 0, 0);
 		}
 		public function neisaCombatActions3():void {
-			outputText("Neisa smash her shield on " + monster.a + monster.short + " head stunning it.\n\n");
+			outputText("Neisa smashes her shield on " + monster.a + monster.short + "’s head, stunning it.\n\n");
 			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		}
 		public function neisaCombatActions4():void {
-			outputText("Neisa viciously ram her shield on " + monster.a + monster.short + " dazing it.\n\n");
+			outputText("Neisa viciously ram her shield on " + monster.a + monster.short + ", dazing it.\n\n");
 			monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		}
 		
@@ -137,7 +137,7 @@ import classes.StatusEffects;
 				}
 			}
 			else {
-				outputText("Etna take flight her tail taking aim at " + monster.a + monster.short + " ready for aerial bombardment.\n\n");
+				outputText("Etna takes flight, her tail taking aim at " + monster.a + monster.short + ", ready for aerial bombardment.\n\n");
 				player.addStatusValue(StatusEffects.CombatFollowerEtna, 4, 1);
 			}
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
@@ -150,11 +150,11 @@ import classes.StatusEffects;
 			}
 		}
 		public function etnaCombatActions0():void {
-			outputText("Etna fly around looking for an opportunity to strike.\n\n");
+			outputText("Etna flies around, looking for an opportunity to strike.\n\n");
 		}
 		public function etnaCombatActions1():void {
 			var lustDmg:Number = Math.round(player.statusEffectv2(StatusEffects.CombatFollowerEtna) / 6);
-			outputText("Etna shoot a spike at " + monster.a + monster.short + " you can see the telltale sign of arousal in " + monster.pronoun3 + " movement. ");
+			outputText("Etna shoots a spike at " + monster.a + monster.short + ", you can see the telltale sign of arousal in " + monster.pronoun3 + " movement. ");
 			monster.teased(lustDmg);
 			outputText("\n\n");
 		}
@@ -163,10 +163,10 @@ import classes.StatusEffects;
 			dmg2 += scalingBonusStrengthCompanion() * 0.25;
 			dmg2 = Math.round(dmg2);
 			doDamage(dmg2);
-			outputText("Etna dive at " + monster.a + monster.short + " mauling " + monster.pronoun3 + " viciously with her claws before taking flight again. <b><font color=\"#800000\">" + String(dmg2) + "</font></b> damage!\n\n");
+			outputText("Etna dives at " + monster.a + monster.short + ", mauling " + monster.pronoun3 + " viciously with her claws before taking flight again. <b><font color=\"#800000\">" + String(dmg2) + "</font></b> damage!\n\n");
 		}
 		public function etnaCombatActions3():void {
-			outputText("Etna dive at " + monster.a + monster.short + " and crash boob first in " + monster.pronoun3 + " face staggering it before taking flight again.\n\n");
+			outputText("Etna dives at " + monster.a + monster.short + " and crashes boob first into " + monster.pronoun3 + " face, staggering it before taking flight again.\n\n");
 			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		}
 		
@@ -341,7 +341,7 @@ import classes.StatusEffects;
 				}
 			}
 			else {
-				outputText("Alvina nonchalantly grab her scythe smirking sadistically as she opens her spellbook.\n\n");
+				outputText("Alvina nonchalantly grabs her scythe, smirking sadistically as she opens her spellbook.\n\n");
 				outputText("\"<i>I’m amused you would have me fight with you against such a lowly opponent [name]. This is a task unworthy of my time but regardless I will take great pleasure in destroying ");
 				if (monster.plural) outputText("these");
 				else outputText("this");
@@ -365,14 +365,14 @@ import classes.StatusEffects;
 			damage1 += scalingBonusIntelligenceCompanion() * 2;
 			damage1 = Math.round(damage1);
 			doIceDamage(damage1);
-			outputText("Alvina incant a spell and freeze the enemy solid, now's your chance! (<b><font color=\"#800000\">" + String(damage1) + "</font></b>)\n\n");
+			outputText("Alvina incants a spell and freezes the enemy solid, now's your chance! (<b><font color=\"#800000\">" + String(damage1) + "</font></b>)\n\n");
 			monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		}
 		public function alvinaCombatActions2():void {
 			var lustDmg:Number = Math.round(player.statusEffectv2(StatusEffects.CombatFollowerAlvina) / 3);
 			lustDmg + (rand(player.statusEffectv3(StatusEffects.CombatFollowerAlvina) - player.statusEffectv2(StatusEffects.CombatFollowerAlvina) * 2 + monster.cor) / 3);
 			lustDmg = Math.round(lustDmg);
-			outputText("Alvina incant a spell and a powerful wave of lust hit " + monster.a + monster.short + " leaving it more then aroused! ");
+			outputText("Alvina incants a spell and a powerful wave of lust hits " + monster.a + monster.short + ", leaving it more than aroused! ");
 			monster.teased(lustDmg);
 			outputText("\n\n");
 		}
@@ -387,7 +387,7 @@ import classes.StatusEffects;
 			else dmg1 *= (5.5 + ((weaponAlvina - 200) * 0.01));
 			dmg1 = Math.round(dmg1);
 			doDamage(dmg1);
-			outputText("Alvina slice at " + monster.a + monster.short + " with her scythe leaving deep wounds. (<b><font color=\"#800000\">" + String(dmg1) + "</font></b>)\n\n");
+			outputText("Alvina slices at " + monster.a + monster.short + " with her scythe, leaving deep wounds. (<b><font color=\"#800000\">" + String(dmg1) + "</font></b>)\n\n");
 			monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
 		}
 		public function alvinaCombatActions4():void {
@@ -396,10 +396,7 @@ import classes.StatusEffects;
 			damage2 = Math.round(damage2);
 			if (monster.plural) damage2 *= 5;
 			doFireDamage(damage2);
-			outputText("Alvina sigh in annoyance and toss a fireball which explode on impact setting ");
-			if (monster.plural) outputText("all enemies");
-			else outputText("the enemy");
-			outputText(" on fire! (<b><font color=\"#800000\">" + String(damage2) + "</font></b>)\n\n");
+			outputText("Alvina sighs in annoyance and tosses a fireball which explodes on impact, setting "+(monster.plural ? "all ":"")+"the enem"+(monster.plural ? "ies ":"y")+" on fire! (<b><font color=\"#800000\">" + String(damage2) + "</font></b>)\n\n");
 			monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		}
 		public function alvinaCombatActions5():void {
@@ -409,8 +406,8 @@ import classes.StatusEffects;
 			doDamage(dmg);
 			outputText("Alvina is looking terribly bored.\n\n");
 			outputText("\"<i>[name] I am seriously going to fall asleep at this rate so if you would let me handle this...</i>\"\n\n");
-			outputText("Without warning she open both hands, her scythe floating by her side, as she get to work, tracing a pattern in the air as the very reality in front of you collapse! You watch in horror and awe as a swirling hole of empty blackness pulls your opponent into what looks to be a null space between dimensions. ");
-			outputText(monster.capitalA + monster.short + " appear back a few seconds later with gashes and wounds all over as the black hole, for what else could it be, collapse on itself and explode in a deflagration of black magic so strong you are pushed back a few meters. (<b><font color=\"#800000\">" + String(dmg) + "</font></b>)\n\n");
+			outputText("Without any warning she opens both hands, her scythe floating by her side as she gets to work, tracing a pattern in the air as the very reality in front of you collapses! You watch in horror and awe as a swirling hole of empty blackness pulls your opponent into what looks to be a null space between dimensions. ");
+			outputText(monster.capitalA + monster.short + " reappears a few seconds later with gashes and wounds all over as the black hole, for what else could it be, collapses on itself and explodes in a deflagration of black magic so strong you are pushed back a few meters. (<b><font color=\"#800000\">" + String(dmg) + "</font></b>)\n\n");
 		}
 		
 		public function mitziCombatActions():void {
@@ -527,9 +524,9 @@ import classes.StatusEffects;
 				outputText("Mitzi grabs a couple needles off her belt along with her daughters and adopts a fighting stance.\n\n");
 				player.addStatusValue(StatusEffects.CombatFollowerExcellia, 4, 1);
 			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
-			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Mitzi" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
-			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Mitzi" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Excellia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Excellia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
 			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
 			else {
 				menu();
@@ -607,13 +604,20 @@ import classes.StatusEffects;
 		}
 		public function amilyCombatActions3():void {
 			outputText("Amily peeks out from her cover, shooting a poisoned dart, debilitating the enemy.\n\n");
+			if (monster.hasStatusEffect(StatusEffects.EnemyLoweredDamageH)) monster.addStatusValue(StatusEffects.EnemyLoweredDamageH,1,1);
+			else monster.createStatusEffect(StatusEffects.EnemyLoweredDamageH,3,40,0,0);
 		}
 		public function amilyCombatActions4():void {
 			var dmg6:Number = player.statusEffectv1(StatusEffects.CombatFollowerAmily);
 			dmg6 += scalingBonusStrengthCompanion();
 			dmg6 = Math.round(dmg6);
 			doDamage(dmg6);
-			outputText("Amily rushes out with her dagger. Blitzing through, she slices through them with a flurry of swift cuts before leaping off of them, away from view. <b>(<font color=\"#800000\">" + String(dmg6) + "</font>)</b>\n\n");
+			outputText("Amily rushes out with her dagger. Blitzing through, she slices through them with a flurry of swift cuts before leaping off of them, away from view. <b>(<font color=\"#800000\">" + String(dmg6) + "</font>)</b> ");
+			doPoisonDamage(((player.statusEffectv2(StatusEffects.CombatFollowerAmily)/4)+20), true, true);
+			outputText("\n\n");
+			monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+			if (monster.hasStatusEffect(StatusEffects.PoisonDoTH)) monster.addStatusValue(StatusEffects.PoisonDoTH,1,1);
+			else monster.createStatusEffect(StatusEffects.PoisonDoTH,4,0.02,0,0);
 		}
 		
 		public function siegweirdCombatActions():void {

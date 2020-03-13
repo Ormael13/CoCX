@@ -104,7 +104,7 @@ package classes.Scenes
 			outputText("-New armor (by Liadri): Goblin Technomancer clothes - buyable at Lumi Workshop. Cost 400 gems, 0 armor / resistance, Slutty Seduction 10, Increases Firearms damage by 20%, Technology damage and lust damage by +50%, reduces electric damage taken by 25%. Can only be used by someone smaller than 4 feet tall.\n");
 			outputText("-New underwear (upper) (by Liadri): Technomancer bra - buyable at Lumi Workshop. Cost 600 gems, Technology damage +5% Tease +5%, reduces electric damage taken by 15%\n");
 			outputText("-New underwear (bottom) (by Liadri): Technomancer panties - buyable at Lumi Workshop. Cost 600 gems, Technology damage +5% Tease +5%, reduces electric damage taken by 15%\n");
-			outputText("-New Special names: Grigori (dragon), Teekna (goblin). Each of them will start with matching bloodline perk to match their ancestor race.\n");
+			outputText("-New Special names: Grigori (dragon), Teekna (goblin), Veseshe (elf). Each of them will start with matching bloodline perk to match their ancestor race.\n");
 			outputText("-New possible to pick races when choosing non-human ancestor of PC: Minotaur, Oni, Orc\n");
 			outputText("-New shop in HXD that is run by goblin golemancer. She's selling various golemancer oriented items or supplies.\n");
 			outputText("-7 new codex entries added to game: Alraune, Cheshire Cat, Chimera, Devil, Displacer Beast, Hellcat, Hydra\n");
@@ -144,11 +144,11 @@ package classes.Scenes
 			outputText("-New range weapon (by Liadri): Twin Grakaturd - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Battlefield area. Cost 860 gems. Base atk is 25 and ammo clip size 12. It's Dual Firearm type range weapon. Can be used in goblin mech.\n");
 			outputText("-New range weapon (by Liadri): Dart pistol - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Blight Ridge area. Cost 120 gems. Base atk is 1 and ammo clip size 3. Function as the succubus whip minus the corruption & self lust. Can be used in goblin mech.\n");
 			outputText("-New range weapon (by Liadri): Twin Dart pistol - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Blight Ridge area. Cost 240 gems. Base atk is 1 and ammo clip size 6. Function as the succubus whip minus the corruption & self lust. It's Dual Firearm type range weapon. Can be used in goblin mech.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Urta get few tips how to be better fighter (no seriously she was so lousy our xinainxia teachers beaten... taugh her proper fight techniques or eleminated more harmfull side effects of those she knew and wasn;t replacable). All praise our bastar... glorious teachers to lend a helping hand to Urta.\n");
+			outputText("-Liadri changes to sex/tease exp gains that would allow to get it form sex scenes. Also gargoyle/jiangshi feeding from sex fluids been handled at the same time.\n");
+			outputText("-Amily got henchman option (both normla and slave variant). Enjoy your lil mouse assasin ^^\n");
+			outputText("-Friendly interaction with Hydra will also now unlock hydra tf in Dinah shop. Additionaly hydra tf will be able to change gorogn eyes to just snake eyes.\n");
+			outputText("-New head accesory (by Liadri): Sphinx accessory set - obtained by beating Sanurah riddles and then entering dungeon right away without sexing her out. Can be gained only once per gameplay. (sorry any other way was way to many needless lines of code to add) Cost 400 gems. Increase of Cursed Riddle damage and Spellpower by 50%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -159,7 +159,8 @@ package classes.Scenes
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-Fixed bugs: Missing Next button causing to skip first half of Yuki Onna encounter scene for too low wisdom PC's, picking Bloodline perk at chara creation causing to skip to end of chara creation, going into combat options and back to get free Wisp/Elemental action(s), Mitzi & Izma daugters camp scene loop, desert naga sex scenes not showing with 33+ lust, Nieve camp lover been ");
 			outputText("too early taken away (gee Fen don't put notes on Nieve lasting 3 months just 6 code lines below line of code saying it's just 2 months), shooting any type of projectle (even bullets) from bow, alraune struggle showing wrong sprite, Dual Small wepaons having 2x more attacks per turn than intended, some of enemy specific actions showing wehn elemntal conjuer or golemancer PC would ");
-			outputText("be choosing elemental / amount of golems to attack, Beautiful Shield, Staff and Bow been impossible to find after taking Beautiful Sword, fatal error for some of newest 4 firearms in combat code, 2H Firearms not usable outside mech, small text typos here and there, exploring Deepwoods not increasing exploration counter for that area\n");/*ostatni punkt changelogu
+			outputText("be choosing elemental / amount of golems to attack, Beautiful Shield, Staff and Bow been impossible to find after taking Beautiful Sword, fatal error for some of newest 4 firearms in combat code, 2H Firearms not usable outside mech, exploring Deepwoods not increasing exploration counter for that area, tease max level cap on info page stuck at 25, not been able buy jabberwocky tf ");
+			outputText("at Dinah shop after meeting him, Plasma Blast not using it own cooldown, Swift Casting not opening melee options menu, resistance related head accessories and necklaces not adding resistance, small text typos here and there\n");/*ostatni punkt changelogu
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");

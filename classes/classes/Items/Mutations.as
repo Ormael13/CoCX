@@ -4702,6 +4702,12 @@ public final class Mutations extends MutationsHelper
 				outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady and open your eyes, all seems to be fine until at least it seems so. But when moment later, when you casualy look at your hands pondering if there is drinking this vial of oil maybe have some other effect the numbing sensation starts to spread starting from your hands fingers. Worried you focus your gaze at them to notice, that they typical texture becoming grey colored much similar to that of... stone? And slowy you realize the more you look at them, the faster change. Panicked for a moment you look away and then this numbing feeling starting to slowly receed. But looking back at them causing it to return. After moment, and closing eyelids, you conclude that your eyes must have gained an useful ability.  <b>Your eyes has turned into gorgon eyes.</b>");
 				changes++;
 			}
+			//Snake eyes for hydra
+            if (type == 3 && player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKE && player.lowerBody == LowerBody.HYDRA && rand(4) == 0 && changes < changeLimit) {
+                setEyeType(Eyes.SNAKE);
+                outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake.  <b>You now have snake eyes!</b>.");
+                changes++;
+            }
 			//-Existing horns become draconic, max of 4, max length of 1'
 			if (type == 1 && player.horns.type != Horns.DRACONIC_X4_12_INCH_LONG && player.eyes.type == Eyes.SNAKE && changes < changeLimit && rand(5) == 0) {
 				//No dragon horns yet.

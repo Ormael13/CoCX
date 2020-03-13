@@ -122,7 +122,7 @@ package classes.Items
 		public const TRSTSWO:Weapon = new Weapon("TrStSwo","TruestrikeSword", "Truestrike sword", "a Truestrike sword", "slash", 5, 400, "Lia will write desc of it...soon.");
 		public const U_STAFF:UnicornStaff = new UnicornStaff();
 		public const UDKDEST:UndefeatedKingDestroyer = new UndefeatedKingDestroyer();
-		public const URTAHLB:Weapon = new Weapon("UrtaHlb","UrtaHlb","halberd","a halberd","slash",30,1200,"Urta's halberd. How did you manage to get this?","Large");
+		public const URTAHLB:Weapon = new Weapon("UrtaHlb","UrtaHlb","halberd","a halberd","slash",50,2000,"Urta's halberd. How did you manage to get this?","Large");
 		public const VBLADE :Weapon = new Weapon("V.Blade","V.Blade", "V.Blade", "a V.Blade", "slash", 28, 2240, "A peculiar sword. The letter V is engraved into the blade perhaps its former owner name.");
 		public const W_STAFF:WizardsStaff = new WizardsStaff();
 		public const WARHAMR:HugeWarhammer = new HugeWarhammer();

@@ -81,7 +81,11 @@ public class DesertCave extends DungeonAbstractContent
 			else {
 				outputText("Just ahead is the familiar sight of the sand witches' coven.  It's hewn from a sandstone archway buried in the side of a dune.  Pearl-inlays of big-breasted, lactating witches decorate the way inside, making it clear what you can expect to find inside.");
 			}
-			doNext(roomCaveCommons);
+			if (player.hasStatusEffect(StatusEffects.SAS)) doNext(roomCaveCommons);
+			else {
+				player.createStatusEffect(StatusEffects.SAS, 0, 0, 0, 0);
+				inventory.takeItem(headjewelries.SPHINXAS, roomCaveCommons);
+			}
 		}
 
 		public function exitDungeon():void {
@@ -1772,7 +1776,6 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 				addButton(0,"Next",riddlePicker);
 			}
 			else {
-				
 				//BEAT THE SPHINX AT HER OWN GAME (First Time)
 				if(flags[kFLAGS.BEATEN_SANURA_COUNT] == 0) {
 					outputText("\"<i>W-what!?</i>\"  the sphinx gasps as you correctly answer the last of her riddles.   \"<i>I-I don't... but how?  No one's ever had the wits to answer all three riddles!</i>\"");
@@ -4095,7 +4098,6 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 				else {
 					outputText("The sphinx, Sanura, is padding around the stone doorframe.  Occasionally she beats her leonine wings or gives a mighty yawn, obviously bored by a present lack of stimulation.  Seeing you standing about, however, Sanura gives you a sultry come-hither look and a seductive wink.  You're not sure if she wants to tempt your mind or your body.");
 					addButton(0, "Riddle Game", riddleGameGo).hint("Start the riddle game.");
-					
 					if(flags[kFLAGS.BEATEN_SANURA_COUNT] > 0) {
 						addButton(1, "Fuck", fuckDatSphinx).hint("Use Sanura to get off.");
 					}

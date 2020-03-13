@@ -187,7 +187,7 @@ import classes.StatusEffects;
 		public function defeatDarkSlimeEmpress():void {
 			clearOutput();
 			outputText("The empress’s purple legion falter for an instant, the slime blocking the exit falling off. You don't wait for the sovereign to recover her composure and rush for the exit, the empress screaming orders as you leave. Thankfully slimes are not overly fast and you manage to make it back to the corridor junction you came from.\n\n");
-			if (player.hasStatusEffect(StatusEffects.TFDealer1)) player.addStatusValue(StatusEffects.TFDealer1, 1, 1);
+			if (player.hasStatusEffect(StatusEffects.TFDealer1) && player.statusEffectv1(StatusEffects.TFDealer1) < 1) player.addStatusValue(StatusEffects.TFDealer1, 1, 1);
 			else player.createStatusEffect(StatusEffects.TFDealer1, 1, 0, 0, 0);
 			cleanupAfterCombat();
 		}
@@ -201,7 +201,7 @@ import classes.StatusEffects;
 		public function defeatHydra():void {
 			clearOutput();
 			outputText("You thought you had won but, to your frustration, the hydra just keeps on regenerating its wounds. It’s incapacitated for now but it could get back up ready to attack at anytime. You grab a token of her defeat and run for the room exit, back to the previous junction.\n\n");
-			if (player.hasStatusEffect(StatusEffects.TFDealer1)) player.addStatusValue(StatusEffects.TFDealer1, 2, 1);
+			if (player.hasStatusEffect(StatusEffects.TFDealer1) && player.statusEffectv2(StatusEffects.TFDealer1) < 1) player.addStatusValue(StatusEffects.TFDealer1, 2, 1);
 			else player.createStatusEffect(StatusEffects.TFDealer1, 0, 1, 0, 0);
 			cleanupAfterCombat();
 		}
@@ -224,7 +224,7 @@ import classes.StatusEffects;
 		public function defeatHellfireSnail():void {
 			clearOutput();
 			outputText("You beat up the snail girl so hard her shell end upside down! She desperately tries to get back on her belly but is stuck swinging from side to side, you get the opportunity to run past her.\n\n");
-			if (player.hasStatusEffect(StatusEffects.TFDealer1)) player.addStatusValue(StatusEffects.TFDealer1, 3, 1);
+			if (player.hasStatusEffect(StatusEffects.TFDealer1) && player.statusEffectv3(StatusEffects.TFDealer1) < 1) player.addStatusValue(StatusEffects.TFDealer1, 3, 1);
 			else player.createStatusEffect(StatusEffects.TFDealer1, 0, 0, 1, 0);
 			cleanupAfterCombat();
 		}
@@ -383,6 +383,8 @@ import classes.StatusEffects;
 				outputText("\"<i>Why, would you look at that, how did you little grass snake make it all the way here. Are you perhaps lost?</i>\"\n\n");
 				outputText("Sometimes you forget that as a naga your body language allows you to understand snakes of all kinds. You reply to the hydra that you're exploring the labyrinth in search of power and treasures.\n\n");
 				outputText("\"<i>Um well there's no treasure I know of in this room but perhaps if you can help me with my arousal problem I’d be willing to give you something close to the first. A hydra scale, nothing short, nothing less. That is of course if becoming like me is of any interest to poor puny you. So how about it?</i>\"\n\n");
+				if (player.hasStatusEffect(StatusEffects.TFDealer1) && player.statusEffectv2(StatusEffects.TFDealer1) < 1) player.addStatusValue(StatusEffects.TFDealer1, 2, 1);
+				else player.createStatusEffect(StatusEffects.TFDealer1, 0, 1, 0, 0);
 				_cuteScene = 2;
 				menu();
 				addButton(1, "Sex", encountersRuletteBossesEL1HydraSex);

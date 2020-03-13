@@ -7190,16 +7190,16 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("Amily nods her head, \"<i>Sure, I have my darts ready, I can lend a hand</i>\"\n\n");
 				outputText("Amily is now following you around.\n\n");
 				var strAmily:Number = 40;
-				var libEtna:Number = 170;/*
+				var libAmily:Number = 44;/*
 				if (flags[kFLAGS.ETNA_LVL_UP] >= 1) {
 					strAmily += 10 * flags[kFLAGS.ETNA_LVL_UP];
 					libEtna += 20 * flags[kFLAGS.ETNA_LVL_UP];
 				}*/
 				strAmily *= (1 + (0.2 * player.newGamePlusMod()));
 				strAmily = Math.round(strAmily);
-				libEtna *= (1 + (0.2 * player.newGamePlusMod()));
-				libEtna = Math.round(libEtna);
-				player.createStatusEffect(StatusEffects.CombatFollowerAmily, strAmily, libEtna, 0, 0);
+				libAmily *= (1 + (0.2 * player.newGamePlusMod()));
+				libAmily = Math.round(libAmily);
+				player.createStatusEffect(StatusEffects.CombatFollowerAmily, strAmily, libAmily, 0, 0);
 				flags[kFLAGS.PLAYER_COMPANION_1] = "Amily";
 			}
 			else {
