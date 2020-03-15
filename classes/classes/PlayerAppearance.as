@@ -23,8 +23,8 @@ public class PlayerAppearance extends BaseContent {
 		var temp:Number  = 0;
 		var rando:Number = 0;
 		//Determine race type:
-
 		clearOutput();
+		mainView.hideComboBox()
 		outputText("<font size=\"36\" face=\"Georgia\"><u>Appearance</u></font>\n");
 		if (CoC.instance.gameSettings.charviewEnabled) {
 			mainViewManager.showPlayerDoll(debug);
@@ -786,10 +786,44 @@ public class PlayerAppearance extends BaseContent {
 		outputText("\n\n<b>You have " + addComma(Math.floor(player.gems)) + " shining gem, collected in your travels.</b>");
 	menu();
 	addButton(0, "Next", playerMenu);
+	if(player.hasPerk(PerkLib.RacialParagon)){addButton(1, "Set Race.", ApexRaceSetting);}
 	addButton(11, "Gender Set.", GenderForcedSetting);
 	addButton(10, "RacialScores", RacialScores);
 	flushOutputTextToGUI();
 }
+	public function ApexRaceSetting():void {
+		clearOutput();
+		ApexRaceDisplayTextUpdate();
+		// Display selected race
+		var races:Array = [];
+		for (var i:int = 0; i < Race.ALL_RACES.length; i++) {
+			var x:Race = Race.ALL_RACES[i];
+			if (!x) continue; // Skip non-existing races
+			races.push( { label: x.name, race: x} );
+		}
+		// fill the races
+		CoC.instance.showComboBox(races,"Select race",function(item:Object):void {
+			// item is selected
+			flags[kFLAGS.APEX_SELECTED_RACE] = item.race.id;
+			clearOutput();
+			ApexRaceDisplayTextUpdate();
+		});
+		menu();
+		addButton(0, "Finish", appearance);
+	}
+
+	public function ApexRaceDisplayTextUpdate():void {
+		outputText("Select your racial paragon race: ")
+		var selectedracetext:String;
+		if (player.racialParagonSelectedRace() == null)
+		{
+			selectedracetext = "None";
+		}
+		else{selectedracetext = player.racialParagonSelectedRace().name}
+		outputText("\n\nCurrently selected: <b>" + selectedracetext + "</b>")
+		flushOutputTextToGUI()
+	}
+
 	public function describeBodyShape():void {
 		outputText("You have a humanoid shape with the usual body");
 		if (player.skin.coverage == Skin.COVERAGE_LOW) {
@@ -801,6 +835,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.skin.base.pattern == Skin.PATTERN_ORCA_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
 		if (player.skin.base.pattern == Skin.PATTERN_RED_PANDA_UNDERBODY) outputText(" Your body is covered from head to toe in [skin color] with a [skin color2] underbelly, giving to your nimble frame a red-panda appearance.");
 	}
+
 	public function describeGear():void {
 		// story.display("gear");
 		outputText("  <b>You are currently " + (player.armorDescript() != "gear" ? "wearing your " + player.armorDescript() : "naked") + "" + ". Using [weapon] as a melee weapon");
