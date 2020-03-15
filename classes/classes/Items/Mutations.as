@@ -13791,7 +13791,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Eyes
-			if (rand(3) == 0 && changes < changeLimit && player.eyes.type != Eyes.DEVIL && player.faceType == Face.DEVIL_FANGS) {
+			if (rand(3) == 0 && changes < changeLimit && player.faceType == Face.DEVIL_FANGS) {
 				if (player.eyes.type == Eyes.GOAT) {
 					outputText("\n\nYour eyes feel like they are burning. You try to soothe them, but to no avail. You endure the agony for a few minutes before it finally fades. You look at yourself in the nearest reflective surface and notice your eyes have taken on a demonic appearance. ");
 					outputText("The sclera is black with a glowing embery iris. Furthermore, they seem to glow with a faint inner light. <b>You now have fiendish eyes!</b>");
