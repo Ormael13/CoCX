@@ -9305,31 +9305,31 @@ use namespace CoC;
 				maxSen += (5 * internalChimeraScore() * newGamePlusMod);
 			}
 			if (hasPerk(PerkLib.RacialParagon)) {
-				maxStr += (10 * level * newGamePlusMod);
-				maxTou += (10 * level * newGamePlusMod);
-				maxSpe += (10 * level * newGamePlusMod);
-				maxInt += (10 * level * newGamePlusMod);
-				maxWis += (10 * level * newGamePlusMod);
-				maxLib += (10 * level * newGamePlusMod);
-				maxSen += (10 * level * newGamePlusMod);
+				maxStr += (1 * level * newGamePlusMod);
+				maxTou += (1 * level * newGamePlusMod);
+				maxSpe += (1 * level * newGamePlusMod);
+				maxInt += (1 * level * newGamePlusMod);
+				maxWis += (1 * level * newGamePlusMod);
+				maxLib += (1 * level * newGamePlusMod);
+				maxSen += (1 * level * newGamePlusMod);
 			}
 			if (hasPerk(PerkLib.Apex)) {
-				maxStr += (10 * level * newGamePlusMod);
-				maxTou += (10 * level * newGamePlusMod);
-				maxSpe += (10 * level * newGamePlusMod);
-				maxInt += (10 * level * newGamePlusMod);
-				maxWis += (10 * level * newGamePlusMod);
-				maxLib += (10 * level * newGamePlusMod);
-				maxSen += (10 * level * newGamePlusMod);
+				maxStr += (2 * level * newGamePlusMod);
+				maxTou += (2 * level * newGamePlusMod);
+				maxSpe += (2 * level * newGamePlusMod);
+				maxInt += (2 * level * newGamePlusMod);
+				maxWis += (2 * level * newGamePlusMod);
+				maxLib += (2 * level * newGamePlusMod);
+				maxSen += (2 * level * newGamePlusMod);
 			}
 			if (hasPerk(PerkLib.AlphaAndOmega)) {
-				maxStr += (10 * level * newGamePlusMod);
-				maxTou += (10 * level * newGamePlusMod);
-				maxSpe += (10 * level * newGamePlusMod);
-				maxInt += (10 * level * newGamePlusMod);
-				maxWis += (10 * level * newGamePlusMod);
-				maxLib += (10 * level * newGamePlusMod);
-				maxSen += (10 * level * newGamePlusMod);
+				maxStr += (2 * level * newGamePlusMod);
+				maxTou += (2 * level * newGamePlusMod);
+				maxSpe += (2 * level * newGamePlusMod);
+				maxInt += (2 * level * newGamePlusMod);
+				maxWis += (2 * level * newGamePlusMod);
+				maxLib += (2 * level * newGamePlusMod);
+				maxSen += (2 * level * newGamePlusMod);
 			}
 			if (jiangshiScore() >= 20) {
 				maxStr += (140 * newGamePlusMod);
