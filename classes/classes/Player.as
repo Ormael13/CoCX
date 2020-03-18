@@ -4270,7 +4270,7 @@ use namespace CoC;
 				mouseCounter++;
 				if (tallness < 60)
 					mouseCounter++;
-				if (tallness < 48)
+				if (tallness < 52)
 					mouseCounter++;
 			}
 			if (findPerk(PerkLib.HinezumiBurningBlood) >= 0)

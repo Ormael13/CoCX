@@ -41,7 +41,7 @@ public class Race {
     public static const HARPY:Race = new Race("Harpy",37);
     public static const SPIDER:Race = new Race("Spider",38);
     public static const KANGAROO:Race = new Race("Kangaroo",39);
-    public static const MOUSE:Race = new Race("Mouse",40);
+    public static const MOUSE:Race = new Race("Mouse and hinezumi",40);
     public static const SCORPION:Race = new Race("Scorpion",41);
     public static const MANTIS:Race = new Race("Mantis",42);
     public static const SALAMANDER:Race = new Race("Salamander",43);
