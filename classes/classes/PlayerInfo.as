@@ -1428,6 +1428,6 @@ public class PlayerInfo extends BaseContent {
 			doNext(playerMenu);
 		}
 	}
-}
 
+}
 }

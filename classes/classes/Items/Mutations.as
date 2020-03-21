@@ -11486,6 +11486,7 @@ public final class Mutations extends MutationsHelper
 				else outputText("\n\nYou trot idly in place as you eat, moving quicker and quicker as you become increasingly bored; on one step, the ground sneaks up on you and you hit it sharply, expecting a few more inches before contact!  Looking down, you notice better resolution than before - you can make out the dirt a bit more clearly.  It looks like you just shed some height, but... you're feeling too jittery to care.  You just want to run around.");
 				dynStats("spe", 1);
 				player.tallness--;
+				player.tallness--;
 				if (player.tallness > 50) player.tallness--;
 				if (player.tallness > 60) player.tallness--;
 				if (player.tallness > 70) player.tallness -= 2;
@@ -13797,7 +13798,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Eyes
-			if (rand(3) == 0 && changes < changeLimit && player.eyes.type != Eyes.DEVIL && player.faceType == Face.DEVIL_FANGS) {
+			if (rand(3) == 0 && changes < changeLimit && player.faceType == Face.DEVIL_FANGS) {
 				if (player.eyes.type == Eyes.GOAT) {
 					outputText("\n\nYour eyes feel like they are burning. You try to soothe them, but to no avail. You endure the agony for a few minutes before it finally fades. You look at yourself in the nearest reflective surface and notice your eyes have taken on a demonic appearance. ");
 					outputText("The sclera is black with a glowing embery iris. Furthermore, they seem to glow with a faint inner light. <b>You now have fiendish eyes!</b>");

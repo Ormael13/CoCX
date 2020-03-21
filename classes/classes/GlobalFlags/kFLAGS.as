@@ -2709,11 +2709,11 @@ public static const PC_GOBLIN_DAUGHTERS:int                                     
 public static const WILL_O_THE_WISP:int                                   			= 2701;
 public static const IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED:int                   = 2702;
 public static const MICHIKO_FOLLOWER:int                                   			= 2703;
-public static const MICHIKO_02704:int                                   = 2704;				//Not Yet Used Flag
-public static const MICHIKO_02705:int                                   = 2705;				//Not Yet Used Flag
-public static const MICHIKO_02706:int                                   = 2706;				//Not Yet Used Flag
-public static const MICHIKO_02707:int                                   = 2707;				//Not Yet Used Flag
-public static const MICHIKO_02708:int                                   = 2708;				//Not Yet Used Flag
+public static const MICHIKO_02704:int                                   			= 2704;				//Not Yet Used Flag
+public static const MICHIKO_02705:int                                   			= 2705;				//Not Yet Used Flag
+public static const MICHIKO_02706:int                                   			= 2706;				//Not Yet Used Flag
+public static const MICHIKO_02707:int                                   			= 2707;				//Not Yet Used Flag
+public static const MICHIKO_02708:int                                   			= 2708;				//Not Yet Used Flag
 public static const MARRIAGE_FLAG:int                                   			= 2709;
 public static const CHRISTMAS_TREE_LEVEL:int                                   		= 2710;
 public static const CHRISTMAS_TREE_GROWTH_COUNTER:int                               = 2711;
@@ -2729,13 +2729,13 @@ public static const CODEX_ENTRY_ALRAUNE:int                                     
 public static const CODEX_ENTRY_VAMPIRE:int                                         = 2721;
 public static const CODEX_ENTRY_CHIMERA:int                                         = 2722;
 public static const CODEX_ENTRY_HYDRA:int                                           = 2723;
-public static const CODEX_ENTRY_1:int                                   = 2724;//unicron
-public static const CODEX_ENTRY_2:int                                   = 2725;//bicorn
-public static const CODEX_ENTRY_3:int                                   = 2726;//squirrel
-public static const CODEX_ENTRY_4:int                                   = 2727;//cave wyrm
-public static const CODEX_ENTRY_02728:int                                   = 2728;
-public static const CODEX_ENTRY_02729:int                                   = 2729;
-public static const CODEX_ENTRY_02730:int                                   = 2730;
+public static const CODEX_ENTRY_1:int                                   			= 2724;//unicron
+public static const CODEX_ENTRY_2:int                                   			= 2725;//bicorn
+public static const CODEX_ENTRY_3:int                                  			 	= 2726;//squirrel
+public static const CODEX_ENTRY_4:int                                   			= 2727;//cave wyrm
+public static const CODEX_ENTRY_02728:int                                   		= 2728;
+public static const CODEX_ENTRY_02729:int                                   		= 2729;
+public static const CODEX_ENTRY_02730:int                                   		= 2730;
 public static const UNKNOWN_FLAG_NUMBER_02731:int                                   = 2731;
 public static const UNKNOWN_FLAG_NUMBER_02732:int                                   = 2732;
 public static const UNKNOWN_FLAG_NUMBER_02733:int                                   = 2733;
@@ -2965,13 +2965,13 @@ public static const UNKNOWN_FLAG_NUMBER_02956:int                               
 public static const UNKNOWN_FLAG_NUMBER_02957:int                                   = 2957;
 public static const UNKNOWN_FLAG_NUMBER_02958:int                                   = 2958;
 public static const UNKNOWN_FLAG_NUMBER_02959:int                                   = 2959;
-public static const UNKNOWN_FLAG_NUMBER_02960:int                                   = 2960;
+public static const APEX_SELECTED_RACE:int                                   		= 2960;
 public static const UNKNOWN_FLAG_NUMBER_02961:int                                   = 2961;
 public static const UNKNOWN_FLAG_NUMBER_02962:int                                   = 2962;
 public static const UNKNOWN_FLAG_NUMBER_02963:int                                   = 2963;
 public static const UNKNOWN_FLAG_NUMBER_02964:int                                   = 2964;
 public static const SECONDARY_STATS_SCALING:int                                     = 2965;
-public static const MELEE_DAMAGE_OVERHAUL    :int                                   = 2966;
+public static const MELEE_DAMAGE_OVERHAUL:int                                   	= 2966;
 public static const UNKNOWN_FLAG_NUMBER_02967:int                                   = 2967;
 public static const SPEED_SCALLING:int                                   			= 2968;
 public static const STRENGTH_SCALLING:int                                   		= 2969;
@@ -3006,4 +3006,4 @@ public static const LOW_STANDARDS_FOR_ALL:int                                   
 public static const HYPER_HAPPY:int                                                 = 2998;
 public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999; // ------------------------- Jojo Debug Flag?
 	}    
-}
+}

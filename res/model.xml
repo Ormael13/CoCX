@@ -990,7 +990,7 @@
 				<show part="horns/2oni"/>
 			</case>
 			<case values="Horns.GOATQUAD">
-				<show part="horns/devilquad"/>
+				<show part="horns_bg/devilquad"/>
 			</case>
 			<case values="Horns.GHOSTLY_WISPS">
 				<show part="horns_bg/ghost"/>
