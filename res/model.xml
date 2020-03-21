@@ -471,10 +471,11 @@
         <cell rect="470,641,173,156" name="aura/ghostlyaura" dx="11" dy="28"/>
         <cell rect="644,641,173,156" name="aura/wraithaura" dx="11" dy="28"/>
         <cell rect="818,641,173,156" name="aura/thunderaura" dx="11" dy="28"/>
+        <cell rect="607,12,40,28" name="clotheHead/goldenNagaHairpin" dx="73" dy="32"/>
         <cell rect="67,26,80,28" name="clotheScarf/scarfBlue" dx="84" dy="64"/>
-		<cell rect="524,12,80,28" name="clotheScarf/scarfGreen" dx="84" dy="64"/>
-		<cell rect="524,41,80,28" name="clotheScarf/scarfYellow" dx="84" dy="64"/>
-		<cell rect="524,70,80,28" name="clotheScarf/scarfPurple" dx="84" dy="64"/>
+        <cell rect="524,12,80,28" name="clotheScarf/scarfGreen" dx="84" dy="64"/>
+        <cell rect="524,41,80,28" name="clotheScarf/scarfYellow" dx="84" dy="64"/>
+        <cell rect="524,70,80,28" name="clotheScarf/scarfPurple" dx="84" dy="64"/>
         <cell rect="650,12,75,88" name="clotheUnderAmulet/sphinxregalia" dx="47" dy="26"/>
         <cell rect="751,101,40,50" name="clothe/blizzardTop" dx="73" dy="72"/>
         <cell rect="797,101,40,50" name="clothe/whiteKimonoTop" dx="73" dy="72"/>
@@ -847,6 +848,7 @@
 		<layer name="armorLeftArm"/>
 		<layer name="armorLegs"/>
 		
+		<layer name="clotheHead"/>
 		<layer name="clotheAmulet"/>
 		<layer name="clotheUnderAmulet"/>
 		<layer name="clothe"/>
@@ -2763,6 +2765,16 @@
 					<show part="fullbody/femalejiangshi"/>	
 				</else>
 			</if>
+		</if>
+		
+		<!-- Naga Jewelry -->
+		<if test="goldenNagaHairpin">
+			<show part="clotheHead/goldenNagaHairpin"/>	
+		</if>
+		
+		<!-- Stat Amulet -->
+		<if test="GoldStatAmulet">
+			<show part="clotheHead/GoldStatAmulet"/>	
 		</if>
 		
 		<!-- Winter Scarves -->

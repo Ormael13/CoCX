@@ -97,7 +97,10 @@ public class CharViewContext extends ExecContext {
 				SATechGoggle: player.headJewelry == game.headjewelries.SATGOG,
 				ScannerGoggle: player.headJewelry == game.headjewelries.SCANGOG,
 				//sphinxRegalia: player.headJewelry == game.headjewelries.SphinxAS
-				YukiHairpin: player.headJewelry == game.headjewelries.SNOWFH
+				YukiHairpin: player.headJewelry == game.headjewelries.SNOWFH,
+
+				// Viewable amulet Accessory lists
+				GoldStatAmulet: player.necklace == game.necklaces.NECKINT || game.necklaces.NECKLIB || game.necklaces.NECKSEN || game.necklaces.NECKSPE || game.necklaces.NECKSTR || game.necklaces.NECKTOU || game.necklaces.NECKWIS
 			}
 		]);
 		this.charview = charview;
