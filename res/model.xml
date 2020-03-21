@@ -472,6 +472,7 @@
         <cell rect="644,641,173,156" name="aura/wraithaura" dx="11" dy="28"/>
         <cell rect="818,641,173,156" name="aura/thunderaura" dx="11" dy="28"/>
         <cell rect="607,12,40,28" name="clotheHead/goldenNagaHairpin" dx="73" dy="32"/>
+        <cell rect="607,41,15,13" name="clotheAmulet/GoldStatAmulet" dx="87" dy="65"/>
         <cell rect="67,26,80,28" name="clotheScarf/scarfBlue" dx="84" dy="64"/>
         <cell rect="524,12,80,28" name="clotheScarf/scarfGreen" dx="84" dy="64"/>
         <cell rect="524,41,80,28" name="clotheScarf/scarfYellow" dx="84" dy="64"/>
@@ -2774,7 +2775,7 @@
 		
 		<!-- Stat Amulet -->
 		<if test="GoldStatAmulet">
-			<show part="clotheHead/GoldStatAmulet"/>	
+			<show part="clotheAmulet/GoldStatAmulet"/>	
 		</if>
 		
 		<!-- Winter Scarves -->
