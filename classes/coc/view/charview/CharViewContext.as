@@ -100,7 +100,7 @@ public class CharViewContext extends ExecContext {
 				YukiHairpin: player.headJewelry == game.headjewelries.SNOWFH,
 
 				// Viewable amulet Accessory lists
-				GoldStatAmulet: player.necklace == game.necklaces.NECKINT || game.necklaces.NECKLIB || game.necklaces.NECKSEN || game.necklaces.NECKSPE || game.necklaces.NECKSTR || game.necklaces.NECKTOU || game.necklaces.NECKWIS
+				GoldStatAmulet: player.necklace == game.necklaces.NECKINT || player.necklace == game.necklaces.NECKLIB || player.necklace == game.necklaces.NECKSEN || player.necklace == game.necklaces.NECKSPE || player.necklace == game.necklaces.NECKSTR || player.necklace == game.necklaces.NECKTOU || player.necklace == game.necklaces.NECKWIS
 			}
 		]);
 		this.charview = charview;
