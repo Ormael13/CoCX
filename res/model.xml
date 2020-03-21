@@ -473,8 +473,24 @@
         <cell rect="818,641,173,156" name="aura/thunderaura" dx="11" dy="28"/>
         <cell rect="525,12,115,88" name="clotheScarf/scarf" dx="64" dy="32"/>
         <cell rect="650,12,115,88" name="clotheUnderAmulet/sphinxregalia" dx="47" dy="26"/>
-        <cell rect="751,101,125,105" name="clothe/blizzardtop" dx="39" dy="72"/>
-        <cell rect="882,101,125,105" name="clothe/blizzardbottom" dx="39" dy="72"/>
+        <cell rect="751,101,125,54" name="clothe/blizzardTop" dx="39" dy="72"/>
+        <cell rect="882,101,125,105" name="clothe/whiteKimonoBottom" dx="39" dy="72"/>
+		<cell rect="882,101,125,105" name="clothe/blackKimonoBottom" dx="39" dy="72"/>
+		<cell rect="751,101,125,105" name="clothe/whiteKimonoTop" dx="39" dy="72"/>    
+		<cell rect="751,101,125,105" name="clothe/blueKimonoTop" dx="39" dy="72"/>
+		<cell rect="751,101,125,105" name="clothe/redKimonoTop" dx="39" dy="72"/>
+		<cell rect="751,101,125,105" name="clothe/purpleKimonoTop" dx="39" dy="72"/>
+		<cell rect="751,101,125,105" name="clothe/blackKimonoTop" dx="39" dy="72"/>
+		<cell rect="751,101,125,105" name="clothe/whiteKimonoSleeves" dx="39" dy="72"/>    
+		<cell rect="751,101,125,105" name="clothe/blueKimonoSleeves" dx="39" dy="72"/>
+		<cell rect="751,101,125,105" name="clothe/redKimonoSleeves" dx="39" dy="72"/>
+		<cell rect="751,101,125,105" name="clothe/purpleKimonoSleeves" dx="39" dy="72"/>
+		<cell rect="751,101,125,105" name="clothe/blackKimonoSleeves" dx="39" dy="72"/>
+        <cell rect="776,12,45,25" name="armorNeck/fullplatetop" dx="70" dy="63"/>
+        <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="72" dy="75"/>
+        <cell rect="882,12,125,75" name="armorLegs/taurarmorbottom" dx="63" dy="97"/>
+        <cell rect="776,42,25,55" name="armorLeftArm/fullplateleftarm" dx="68" dy="66"/>
+        <cell rect="804,42,25,55" name="armorRightArm/fullplaterightarm" dx="92" dy="66"/>
     </spritemap>
     <spritemap file="hair.png">
         <cell rect="1,70,59,65" name="hair/0" dx="65" dy="21"/>
@@ -816,10 +832,18 @@
     </spritemap>
 
 	<!-- LAYER AREA -->
-    <layers>
+    <layers>	
 		<layer name="fullbody"/>
 		<layer name="overclothe"/>
 		<layer name="clotheScarf"/>
+		
+		<layer name="wings_front"/>
+		<layer name="armorNeck"/>
+		<layer name="armorRightArm"/>
+		<layer name="armorChest"/>
+		<layer name="armorLeftArm"/>
+		<layer name="armorLegs"/>
+		
 		<layer name="clotheAmulet"/>
 		<layer name="clotheUnderAmulet"/>
 		<layer name="clothe"/>
@@ -849,7 +873,6 @@
 		<layer name="arms_bg_pattern"/>
         <layer name="arms_bg"/>
 		
-		<layer name="wings_front"/>
 		<layer name="tail_front"/>
         <layer name="legs_fg"/>
 		<layer name="penis"/>
@@ -934,6 +957,11 @@
 		<set var="yukiDress" value="hasStatusEffect(StatusEffects.YukiOnnaKimono)"/>
 		<set var="SuccubusDress" value="hasStatusEffect(StatusEffects.PLACEHOLDER)"/>
 		<set var="yukiHairpin" value="hasStatusEffect(StatusEffects.YukiOnnaHairpin)"/>
+		<set var="whiteKimono" value="hasStatusEffect(StatusEffects.YukiOnnaKimono)"/>
+		<set var="blueKimono" value="hasStatusEffect(StatusEffects.YukiOnnaKimono)"/>
+		<set var="redKimono" value="hasStatusEffect(StatusEffects.YukiOnnaKimono)"/>
+		<set var="purpleKimono" value="hasStatusEffect(StatusEffects.YukiOnnaKimono)"/>
+		<set var="blackKimono" value="hasStatusEffect(StatusEffects.YukiOnnaKimono)"/>
 		<set var="PlayerHasViewableOutfit" value="hasStatusEffect(StatusEffects.PlayerHasViewableOutfit)"/>
 		<set var="big" value="(cocks[0].cockLength gt 12) ? 'big' : ''"/>
 		
@@ -2750,16 +2778,17 @@
 		
 		<!-- Yuki Onna Dress -->
 		<if test="yukiDress">
+			<show part="clothe/blizzardTop"/>
 			<switch value="arms.type">
-				<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.ONI,Arms.YUKI_ONNA">
-					<show part="clothe/blizzardtop"/>
-					<switch value="lowerBody.type">
-						<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.KITSUNE,LowerBody.DEMONIC_HIGH_HEELS,LowerBody.ONI,LowerBody.YUKI_ONNA">
-							<show part="clothe/blizzardbottom"/>	
-						</case>
-						<default>
-						</default>
-					</switch>
+				<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.ONI,Arms.YUKI_ONNA,Arms.RAIJU">
+					<show part="clothe/blizzardTopSleeves"/>
+				</case>
+				<default>
+				</default>
+			</switch>
+			<switch value="lowerBody.type">
+				<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.KITSUNE,LowerBody.DEMONIC_HIGH_HEELS,LowerBody.ONI,LowerBody.YUKI_ONNA">
+					<show part="clothe/whiteKimonoBottom"/>	
 				</case>
 				<default>
 				</default>
@@ -2780,6 +2809,101 @@
                     <show part="hair_bg/yukionna"/>
                 </default>
             </switch>
+		</if>
+		
+		<!-- Kimono White -->
+		<if test="whiteKimono">
+			<show part="clothe/whiteKimonotop"/>
+			<switch value="arms.type">
+				<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.ONI,Arms.YUKI_ONNA,Arms.RAIJU,Arms.RAIJU_2">
+					<show part="clothe/whiteKimonoSleeves"/>
+				</case>
+				<default>
+				</default>
+			</switch>
+			<switch value="lowerBody.type">
+				<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.KITSUNE,LowerBody.DEMONIC_HIGH_HEELS,LowerBody.ONI,LowerBody.YUKI_ONNA">
+					<show part="clothe/whiteKimonoBottom"/>	
+				</case>
+				<default>
+				</default>
+			</switch>
+		</if>
+		
+		<!-- Kimono Blue -->
+		<if test="blueKimono">
+			<show part="clothe/blueKimonotop"/>
+			<switch value="arms.type">
+				<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.ONI,Arms.YUKI_ONNA,Arms.RAIJU,Arms.RAIJU_2">
+					<show part="clothe/blueKimonoSleeves"/>
+				</case>
+				<default>
+				</default>
+			</switch>
+			<switch value="lowerBody.type">
+				<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.KITSUNE,LowerBody.DEMONIC_HIGH_HEELS,LowerBody.ONI,LowerBody.YUKI_ONNA">
+					<show part="clothe/whiteKimonoBottom"/>	
+				</case>
+				<default>
+				</default>
+			</switch>
+		</if>
+		
+		<!-- Kimono Red -->
+		<if test="redKimono">
+			<show part="clothe/redKimonotop"/>
+			<switch value="arms.type">
+				<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.ONI,Arms.YUKI_ONNA,Arms.RAIJU,Arms.RAIJU_2">
+					<show part="clothe/redKimonoSleeves"/>
+				</case>
+				<default>
+				</default>
+			</switch>
+			<switch value="lowerBody.type">
+				<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.KITSUNE,LowerBody.DEMONIC_HIGH_HEELS,LowerBody.ONI,LowerBody.YUKI_ONNA">
+					<show part="clothe/blackKimonoBottom"/>	
+				</case>
+				<default>
+				</default>
+			</switch>
+		</if>
+		
+		<!-- Kimono Purple -->
+		<if test="purpleKimono">
+			<show part="clothe/purpleKimonotop"/>
+			<switch value="arms.type">
+				<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.ONI,Arms.YUKI_ONNA,Arms.RAIJU,Arms.RAIJU_2">
+					<show part="clothe/purpleKimonoSleeves"/>
+				</case>
+				<default>
+				</default>
+			</switch>
+			<switch value="lowerBody.type">
+				<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.KITSUNE,LowerBody.DEMONIC_HIGH_HEELS,LowerBody.ONI,LowerBody.YUKI_ONNA">
+					<show part="clothe/blackKimonoBottom"/>	
+				</case>
+				<default>
+				</default>
+			</switch>
+		</if>
+		
+		<!-- Kimono Black -->
+		<if test="blackKimono">
+			<show part="clothe/blackKimonotop"/>
+			<switch value="arms.type">
+				<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.ONI,Arms.YUKI_ONNA,Arms.RAIJU,Arms.RAIJU_2">
+					<show part="clothe/blackKimonoSleeves"/>
+				</case>
+				<default>
+				</default>
+			</switch>
+			<switch value="lowerBody.type">
+				<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.KITSUNE,LowerBody.DEMONIC_HIGH_HEELS,LowerBody.ONI,LowerBody.YUKI_ONNA">
+					<show part="clothe/blackKimonoBottom"/>	
+				</case>
+				<default>
+				</default>
+			</switch>
 		</if>
 		
     </logic>
