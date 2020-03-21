@@ -1896,10 +1896,32 @@ private function campWinionsArmySim():void {
 
 private function campActionsReflect():void {
 	clearOutput();
-	outputText("Placeholder text for now...");
-	var strStat:Number = player.str100;
+	outputText("Placeholder text for now... till any of our writers decide to grace us with any text to be used here...");
+	var oldmaxes:Object = player.getAllMaxStats();
+	var strStat:Number = player.str/oldmaxes.str;
+	var touStat:Number = player.tou/oldmaxes.tou;
+	var speStat:Number = player.spe/oldmaxes.spe;
+	var inteStat:Number = player.inte/oldmaxes.inte;
+	var wisStat:Number = player.wis/oldmaxes.wis;
+	var libStat:Number = player.lib/oldmaxes.lib;
+	var sensStat:Number = player.sens/oldmaxes.sens;
+	var strStat1:Number = oldmaxes.str;
+	var touStat1:Number = oldmaxes.tou;
+	var speStat1:Number = oldmaxes.spe;
+	var inteStat1:Number = oldmaxes.inte;
+	var wisStat1:Number = oldmaxes.wis;
+	var libStat1:Number = oldmaxes.lib;
+	var sensStat1:Number = oldmaxes.sens;
 	player.strtouspeintwislibsenCalculation2();
-	player.str = player.str * (strStat / 100);
+	var newmaxes:Object = player.getAllMaxStats();
+	if (newmaxes.str != strStat1) player.str = Math.round(player.str * strStat);
+	if (newmaxes.tou != touStat1) player.tou = Math.round(player.tou * touStat);
+	if (newmaxes.spe != speStat1) player.spe = Math.round(player.spe * speStat);
+	if (newmaxes.inte != inteStat1) player.inte = Math.round(player.inte * inteStat);
+	if (newmaxes.wis != wisStat1) player.wis = Math.round(player.wis * wisStat);
+	if (newmaxes.lib != libStat1) player.lib = Math.round(player.lib * libStat);
+	if (newmaxes.sens != sensStat1) player.sens = Math.round(player.sens * sensStat);
+	doNext(campActions);
 }
 
 private function MagicWardMenu():void {

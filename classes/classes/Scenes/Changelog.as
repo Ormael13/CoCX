@@ -149,7 +149,10 @@ package classes.Scenes
 			outputText("-Amily got henchman option (both normla and slave variant). Enjoy your lil mouse assasin ^^\n");
 			outputText("-Friendly interaction with Hydra will also now unlock hydra tf in Dinah shop. Additionaly hydra tf will be able to change gorogn eyes to just snake eyes.\n");
 			outputText("-New head accesory (by Liadri): Sphinx accessory set - obtained by beating Sanurah riddles and then entering dungeon right away without sexing her out. Can be gained only once per gameplay. (sorry any other way was way to many needless lines of code to add) Cost 400 gems. Increase of Cursed Riddle damage and Spellpower by 50%.\n");
-			outputText("-\n");
+			outputText("-New tier 1 misc lvl-up perk: Racial Paragon. Req. Job: Beast Warrior perk. Effect: Add 1 to each stat per level and increase racial skill power by 50% but remove all chimerical disposition stat gains and degeneration as well lock you into a single race.\n");
+			outputText("-New tier 2 misc lvl-up perk: Apex. Req. Racial Paragon perk. Effect: Add 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Racial Paragon.\n");
+			outputText("-New tier 3 misc lvl-up perk: Alpha and Omega. Req. Apex perk. Effect: Add 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Apex.\n");
+			outputText("-Liadri added option to pick race enhanced by Racial paragon perk (similar menu as with picking perks).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -265,9 +268,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
