@@ -173,7 +173,7 @@ import classes.internals.Utils;
 			addButton(7, consumables.REDVIAL.shortName, buyItem3, 7).hint("Buy a vial of ominous red liquid.");
 			addButton(8, consumables.STRASCA.shortName, buyItem2, 8).hint("Buy a Strawberry shortcake.");
 			addButton(9, consumables.BCHCAKE.shortName, buyItem2, 9).hint("Buy a Big chocolate cake.");
-			if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] >= 1) addButton(10, consumables.JABBERS.shortName, buyItem3, 11).hint("Buy a Jabberwocky scale.");
+			if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] >= 1) addButton(10, consumables.JABBERS.shortName, buyItem3, 13).hint("Buy a Jabberwocky scale.");
 			else addButtonDisabled(10, "???", "Req. to beat one of bosses in Wonderland to have access to this TF item.");
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 1) {
 				if (player.statusEffectv2(StatusEffects.TFDealer1) > 0) addButton(11, consumables.HYDRASC.shortName, buyItem3, 11).hint("Buy a hydra scale.");
@@ -203,6 +203,7 @@ import classes.internals.Utils;
 			if (item == 10) catChimeraBuy2(consumables.DSLIMEJ);
 			if (item == 11) catChimeraBuy2(consumables.HYDRASC);
 			if (item == 12) catChimeraBuy2(consumables.FSNAILS);
+			if (item == 13) catChimeraBuy2(consumables.JABBERS);
 		}
 		public function catChimeraBuy1(itype:ItemType):void {
 			clearOutput();

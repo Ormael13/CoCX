@@ -293,6 +293,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.shield == shields.MABRACE) mod += .5;
 		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
+		if (player.headJewelry == headjewelries.SPHINXAS) mod += .5;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) {
 			if (player.hasPerk(PerkLib.ObsidianHeartEvolved)) {
 				if (player.hasPerk(PerkLib.ObsidianHeartFinalForm)) mod += 2.5;
@@ -413,6 +414,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.shield == shields.MABRACE) mod += .5;
 		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
+		if (player.headJewelry == headjewelries.SPHINXAS) mod += .5;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) {
 			if (player.hasPerk(PerkLib.ObsidianHeartEvolved)) {
 				if (player.hasPerk(PerkLib.ObsidianHeartFinalForm)) mod += 2.5;
@@ -531,6 +533,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.shield == shields.MABRACE) mod += .5;
 		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
+		if (player.headJewelry == headjewelries.SPHINXAS) mod += .5;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) {
 			if (player.hasPerk(PerkLib.ObsidianHeartEvolved)) {
 				if (player.hasPerk(PerkLib.ObsidianHeartFinalForm)) mod += 2.5;

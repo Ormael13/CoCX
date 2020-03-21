@@ -235,6 +235,13 @@ import classes.StatusEffects.VampireThirstEffect;
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 
+		public static const StrTouSpeCounter1:StatusEffectType              = mk("Str Tou Spe Counter 1");
+		public static const StrTouSpeCounter2:StatusEffectType              = mk("Str Tou Spe Counter 2");
+		public static const IntWisCounter1:StatusEffectType                 = mk("Int Wis Counter 1");
+		public static const IntWisCounter2:StatusEffectType                 = mk("Int Wis Counter 2");
+		public static const LibSensCounter1:StatusEffectType                = mk("Lib Sens Counter 1");
+		public static const LibSensCounter2:StatusEffectType                = mk("Lib Sens Counter 2");
+	
 		// Non-combat player perks
 		public static const AchievementsNormalShadowTotal:StatusEffectType  = mk("Achievements (Normal / Shadow / Total)");
 		public static const AdvancingCamp:StatusEffectType                 	= mk("AdvancingCamp");
@@ -548,6 +555,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const SoulArenaGaunlets3:StatusEffectType          	= mk("Soul Arena Gaunlets 3");
 		public static const SoulDrill1:StatusEffectType                   	= mk("Soul Drill 1");
 		public static const SoulGemCrafting:StatusEffectType                = mk("SoulGemCrafting");
+		public static const SAS:StatusEffectType             				= mk("SAS");
+		public static const SphinxAS:StatusEffectType             			= mk("SphinxAS");
 		public static const SuccubiFirst:StatusEffectType                   = mk("SuccubiFirst");
 		public static const SuccubiNight:StatusEffectType                   = mk("succubiNight");
 		public static const SummonedElementals:StatusEffectType             = mk("Summoned Elementals");
@@ -791,9 +800,11 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const DemonSeed:StatusEffectType                 = mkCombat("DemonSeed");
 		public static const Disarmed:StatusEffectType                  = mkCombat("Disarmed");
 		public static const Distracted:StatusEffectType                = mkCombat("Distracted");
+		public static const DistractedEnemySupporter:StatusEffectType  = mkCombat("Distracted Enemy Supporter");
 		public static const DriderKiss:StatusEffectType                = mkCombat("Drider Kiss");
 		public static const WarriorsRage:StatusEffectType              = mkCombat("Warrior's Rage");
 		public static const EarthStance:StatusEffectType	           = mkCombat("Earth Stance");
+		public static const EnemyLoweredDamageH:StatusEffectType       = mkCombat("Enemy Lowered Damage (H)");
 		public static const EverywhereAndNowhere:StatusEffectType      = mkCombat("Everywhere and nowhere");
 		public static const EzekielCurse:StatusEffectType              = mkCombat("Ezekiel Curse");
 		public static const FirePunchBurnDoT:StatusEffectType          = mkCombat("Fire Punch Burn DoT");

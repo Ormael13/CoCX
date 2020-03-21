@@ -72,7 +72,7 @@ public class MagicSpecials extends BaseCombatContent {
 			bd = buttons.add("Pleasure bolt", PleasureBolt, "Release a discharge of your lust inducing electricity. It will rise your lust by 2% of max lust after each use.", "Pleasure bolt");
 			if ((player.hasVagina() && (player.cowScore() >= 9 || player.hasPerk(PerkLib.LactaBovinaOvaries))) || (player.hasCock() && (player.minotaurScore() >= 9 || player.hasPerk(PerkLib.MinotaurTesticles)))) {
 				bd = buttons.add("Plasma blast", PlasmaBlast, "Masturbate to unleash a massive discharge of milk/cum mized with plasma.", "Plasma blast");
-				if (player.hasStatusEffect(StatusEffects.CooldownMilkBlast) || player.hasStatusEffect(StatusEffects.CooldownCumCannon)) {
+				if (player.hasStatusEffect(StatusEffects.CooldownPlasmaBlast)) {
 					if (player.hasPerk(PerkLib.LactaBovinaOvariesFinalForm) || player.hasPerk(PerkLib.MinotaurTesticlesFinalForm)) bd.disable("\n<b>You need more time before you can do it again.</b>");
 					else bd.disable("You can't use it more than once during fight.");
 				}
@@ -3632,6 +3632,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("\n\n" + monster.a + monster.short + " hazard an answer and your smirk as you respond, “Sadly incorrect!” Your curse smiting your foe for its mistake, leaving it stunned by pain and pleasure.");
 			//damage dealth
 			var damage:Number = ((scalingBonusWisdom() * 0.5) + scalingBonusIntelligence()) * spellMod();
+			if (player.headJewelry == headjewelries.SPHINXAS) damage *= 1.5;
 			//Determine if critical hit!
 			var crit:Boolean = false;
 			var critChance:int = 5;

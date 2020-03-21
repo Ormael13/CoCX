@@ -2256,6 +2256,10 @@ import flash.utils.getQualifiedClassName;
 			if(hasStatusEffect(StatusEffects.MilkyUrta)) {
 				SceneLib.urtaQuest.milkyUrtaTic();
 			}
+			if(hasStatusEffect(StatusEffects.UrtaSecondWinded)) {
+				addStatusValue(StatusEffects.UrtaSecondWinded,1,-1);
+				if(statusEffectv1(StatusEffects.UrtaSecondWinded) <= 0) removeStatusEffect(StatusEffects.UrtaSecondWinded);
+			}
 			//Countdown
 			var sac:StatusEffectClass = statusEffectByType(StatusEffects.TentacleCoolDown);
 			if(sac) {
@@ -2852,6 +2856,11 @@ import flash.utils.getQualifiedClassName;
 					hemorrhage3 = SceneLib.combat.doDamage(hemorrhage3);
 					outputText("<b>(<font color=\"#800000\">" + hemorrhage3 + "</font>)</b>\n\n");
 				}
+			}
+			//lowered damage done by enemy attacks debuff
+			if (hasStatusEffect(StatusEffects.EnemyLoweredDamageH)) {
+				if (statusEffectv1(StatusEffects.EnemyLoweredDamageH) <= 0) removeStatusEffect(StatusEffects.EnemyLoweredDamageH);
+				else addStatusValue(StatusEffects.EnemyLoweredDamageH,1,-1);
 			}
 			//regeneration perks for monsters
 			if (((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0 || findPerk(PerkLib.ImprovedLifeline) >= 0 
