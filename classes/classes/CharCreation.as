@@ -294,12 +294,10 @@ import coc.view.MainView;
                 vagina.clitPShort = "";
 				vagina.clitPLong = "";
 			}
-
-
 			//PLOTZ
 			JojoScene.monk                               = 0;
 			SandWitchScene.rapedBefore = false;
-		//Replaced by flag	CoC.instance.beeProgress = 0;
+			//Replaced by flag	CoC.instance.beeProgress = 0;
 			SceneLib.isabellaScene.isabellaOffspringData = []; //CLEAR!
 			//Lets get this bitch started
 			CoC.instance.inCombat = false;
@@ -362,7 +360,6 @@ import coc.view.MainView;
 			//	if (!(oldPlayer.armor is GooArmor))
 			//	player.setArmor(armors.C_CLOTH);
 			}
-			
 			//Clear Statuses
 			var statusTemp:Array = [];
 			for (var i:int = 0; i < player.statusEffects.length; i++) {
@@ -418,7 +415,6 @@ import coc.view.MainView;
 			model.time.days = 0;
 			model.time.hours = 0;
 			model.time.minutes = 0;
-
 		}
 		
 		private function chooseName():void {
@@ -1719,9 +1715,13 @@ import coc.view.MainView;
 			player.perkPoints += 1;
 			clearOutput();
 			statScreenRefresh();
-			outputText("Would you like to play through the " + (1 * (1 + player.newGamePlusMod())) + "-day");
-			if (player.newGamePlusMod() > 0) outputText("s");
-			outputText(" prologue in Ingnam or just skip?");
+			outputText("Would you like to play through the " + (1 * (1 + player.newGamePlusMod())) + "-day"+(player.newGamePlusMod() > 0 ? "s":"")+" prologue in Ingnam or just skip?");
+			player.createStatusEffect(StatusEffects.StrTouSpeCounter1,0,0,0,0);
+			player.createStatusEffect(StatusEffects.StrTouSpeCounter2,0,0,0,0);
+			player.createStatusEffect(StatusEffects.IntWisCounter1,0,0,0,0);
+			player.createStatusEffect(StatusEffects.IntWisCounter2,0,0,0,0);
+			player.createStatusEffect(StatusEffects.LibSensCounter1,0,0,0,0);
+			player.createStatusEffect(StatusEffects.LibSensCounter2,0,0,0,0);
 			player.HP = player.maxHP();
 			doYesNo(goToIngnam, arrival);
 		}
@@ -3521,7 +3521,7 @@ import coc.view.MainView;
 		}
 		
 		private function isAscensionPerk(perk:PerkClass, respec:Boolean = false):Boolean {
-			return perk.ptype.keepOnAscension(respec) || (perk.value4 > 0 && !player.hasPerk(PerkLib.ProductivityDrugs));
+			return perk.ptype.keepOnAscension(respec) || (perk.value4 > 0);
 		}
 
 		private function isSpecialKeyItem(keyName:* = null):Boolean {//tylko sky poinson pearl zostawić tutaj

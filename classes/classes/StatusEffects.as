@@ -235,6 +235,13 @@ import classes.StatusEffects.VampireThirstEffect;
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 
+		public static const StrTouSpeCounter1:StatusEffectType              = mk("Str Tou Spe Counter 1");
+		public static const StrTouSpeCounter2:StatusEffectType              = mk("Str Tou Spe Counter 2");
+		public static const IntWisCounter1:StatusEffectType                 = mk("Int Wis Counter 1");
+		public static const IntWisCounter2:StatusEffectType                 = mk("Int Wis Counter 2");
+		public static const LibSensCounter1:StatusEffectType                = mk("Lib Sens Counter 1");
+		public static const LibSensCounter2:StatusEffectType                = mk("Lib Sens Counter 2");
+	
 		// Non-combat player perks
 		public static const AchievementsNormalShadowTotal:StatusEffectType  = mk("Achievements (Normal / Shadow / Total)");
 		public static const AdvancingCamp:StatusEffectType                 	= mk("AdvancingCamp");

@@ -194,6 +194,7 @@ use namespace CoC;
 			else
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
 		*/	outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
+			outputText("<b>PC Speed %:</b> " + player.getMaxStats("spe") + "\n");
 			if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
 				outputText("<b>TelAdre Tripxi Guns general timer:</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxi) + "\n");
 				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) {
@@ -259,16 +260,22 @@ use namespace CoC;
 			addButton(5, "Enemies", EnemiesMenu).hint("For spawning various enemies to test fight them.");
 			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(7, "Body State", BodyStateMenu).hint("For more precise adjusting of few other body values or parts than Stats Adj option.");
-			addButton(8, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
-			//if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
-			if (player.hasPerk(PerkLib.Metamorph)) addButton(9, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Metamorph all options unlock.");
-			//addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
-			if ((player.hasPerk(PerkLib.TitanGripEx) && !player.hasPerk(PerkLib.GigantGripEx)) || player.hasPerk(PerkLib.LegendaryGolemMaker)) addButton(10, "PerkFixes", AddMaxBackpack).hint("Fix testers saves perks for Giant's Grip (Ex) and above Epic Golem maker");
-			//addButton(10, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
+			if (player.hasPerk(PerkLib.Metamorph)) addButton(8, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Metamorph all options unlock.");
+			addButton(9, "ClickItOnce", AddMaxBackpack2).hint("setup change for lessen engine load on max stat calculations. Will work only once so not need to click it twice (no it won't bug if you click so unless you like clicking really not click it more than once...");
+			addButton(10, "-2-", submenucuzwhynot).hint("Other test option that not fit anywhere else and etc.");
 			addButton(11, "PerkGalore1", PerkGalore1);
 			addButton(12, "PerkGalore2", PerkGalore2);
 			addButton(13, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			addButton(14, "Back", accessSoulforceMenu);
+		}
+		public function submenucuzwhynot():void {
+			menu();
+			addButton(6, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
+			addButton(7, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
+			addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
+			if ((player.hasPerk(PerkLib.TitanGripEx) && !player.hasPerk(PerkLib.GigantGripEx)) || player.hasPerk(PerkLib.LegendaryGolemMaker)) addButton(10, "PerkFixes", AddMaxBackpack).hint("Fix testers saves perks for Giant's Grip (Ex) and above Epic Golem maker");
+			addButton(14, "Back", SoulforceCheats);
 		}
 		public function AddMaxBackpack():void {
 			if (player.hasPerk(PerkLib.TitanGripEx)) {
@@ -278,6 +285,19 @@ use namespace CoC;
 			if (player.hasPerk(PerkLib.LegendaryGolemMaker)) {
 				player.removePerk(PerkLib.LegendaryGolemMaker);
 				player.createPerk(PerkLib.EpicGolemMaker2ndCircle, 0, 0, 0, 0);
+			}
+			doNext(submenucuzwhynot);
+		}
+		public function AddMaxBackpack2():void {
+			if (!player.hasStatusEffect(StatusEffects.StrTouSpeCounter1)) {
+				player.createStatusEffect(StatusEffects.StrTouSpeCounter1, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.StrTouSpeCounter2, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.IntWisCounter1, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.IntWisCounter2, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.LibSensCounter1, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.LibSensCounter2, 0, 0, 0, 0);
+				player.strtouspeintwislibsenCalculation1();
+				player.strtouspeintwislibsenCalculation2();
 			}
 			doNext(SoulforceCheats);
 		}
@@ -2540,7 +2560,7 @@ public function FightHellfireSnail():void {
 			addButton(0, "Human", BackToHumanForm).hint("Return to been fully human from gargoyle form test.");
 			addButton(1, "Marble", MarbleGargoyleForm).hint("Turn into marble gargoyle form for tests.");
 			addButton(2, "Alabaster", AlabasterGargoyleForm).hint("Turn into alabaster gargoyle form for tests.");
-			addButton(14, "Back", SoulforceCheats);
+			addButton(14, "Back", submenucuzwhynot);
 		}
 		public function BackToHumanForm():void {
 			flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 0;
@@ -2563,8 +2583,8 @@ public function FightHellfireSnail():void {
 			player.gills.type = Gills.NONE;
 			player.rearBody.type = RearBody.NONE;
 			player.skin.restore();
-			if (player.(PerkLib.GargoylePure)) player.removePerk(PerkLib.GargoylePure);
-			if (player.(PerkLib.GargoyleCorrupted)) player.removePerk(PerkLib.GargoyleCorrupted);
+			if (player.hasPerk(PerkLib.GargoylePure)) player.removePerk(PerkLib.GargoylePure);
+			if (player.hasPerk(PerkLib.GargoyleCorrupted)) player.removePerk(PerkLib.GargoyleCorrupted);
 			player.removePerk(PerkLib.TransformationImmunity);
 			clearOutput();
 			outputText("You have become fully human again.");

@@ -8277,13 +8277,6 @@ use namespace CoC;
 				maxLib -= (5 * (12 - level));
 				maxSen -= (5 * (12 - level));
 			}
-			if (findPerk(PerkLib.Strong) > 0) maxStr += (50 * newGamePlusMod);
-			if (findPerk(PerkLib.Tough) > 0) maxTou += (50 * newGamePlusMod);
-			if (findPerk(PerkLib.Fast) > 0) maxSpe += (50 * newGamePlusMod);
-			if (findPerk(PerkLib.Smart) > 0) maxInt += (50 * newGamePlusMod);
-			if (findPerk(PerkLib.Wise) > 0) maxWis += (50 * newGamePlusMod);
-			if (findPerk(PerkLib.Lusty) > 0) maxLib += (50 * newGamePlusMod);
-			if (findPerk(PerkLib.Sensitive) > 0) maxSen += (50 * newGamePlusMod);
 			
 			//Alter max speed if you have oversized parts. (Realistic mode)
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
@@ -9245,6 +9238,13 @@ use namespace CoC;
 					maxLib += (80 * newGamePlusMod);
 				}
 			}
+			maxStr += statusEffectv1(StatusEffects.StrTouSpeCounter2);
+			maxTou += statusEffectv2(StatusEffects.StrTouSpeCounter2);
+			maxSpe += statusEffectv3(StatusEffects.StrTouSpeCounter2);
+			maxInt += statusEffectv1(StatusEffects.IntWisCounter2);
+			maxWis += statusEffectv2(StatusEffects.IntWisCounter2);
+			maxLib += statusEffectv1(StatusEffects.LibSensCounter2);
+			maxSen += statusEffectv2(StatusEffects.LibSensCounter2);
 			if (maxStr < 25) maxStr = 25;
 			if (maxTou < 25) maxTou = 25;
 			if (maxSpe < 25) maxSpe = 25;
@@ -9254,113 +9254,6 @@ use namespace CoC;
 			if (maxSen < 25) maxSen = 25;
 			End("Player","getAllMaxStats.racial");
 			Begin("Player","getAllMaxStats.perks2");
-			if (findPerk(PerkLib.ChimericalBodyInitialStage) >= 0) {
-				maxTou += (5 * newGamePlusMod);
-				maxLib += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.ChimericalBodySemiBasicStage) >= 0) {
-				maxStr += (5 * newGamePlusMod);
-				maxSpe += (5 * newGamePlusMod);
-				maxInt += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.ChimericalBodyBasicStage) >= 0) {
-				maxStr += (5 * newGamePlusMod);
-				maxTou += (5 * newGamePlusMod);
-				maxSpe += (5 * newGamePlusMod);
-				maxWis += (5 * newGamePlusMod);
-				maxSen += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0) {
-				maxStr += (5 * newGamePlusMod);
-				maxTou += (5 * newGamePlusMod);
-				maxInt += (5 * newGamePlusMod);
-				maxWis += (5 * newGamePlusMod);
-				maxLib += (5 * newGamePlusMod);
-				maxSen += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0) {
-				maxStr += (5 * newGamePlusMod);
-				maxTou += (5 * newGamePlusMod);
-				maxSpe += (5 * newGamePlusMod);
-				maxInt += (5 * newGamePlusMod);
-				maxWis += (5 * newGamePlusMod);
-				maxLib += (5 * newGamePlusMod);
-				maxSen += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.ChimericalBodySuperiorStage) >= 0) {
-				maxStr += (5 * newGamePlusMod);
-				maxTou += (5 * newGamePlusMod);
-				maxSpe += (10 * newGamePlusMod);
-				maxInt += (5 * newGamePlusMod);
-				maxWis += (5 * newGamePlusMod);
-				maxLib += (5 * newGamePlusMod);
-				maxSen += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.ChimericalBodyPeerlessStage) >= 0) {
-				maxStr += (10 * newGamePlusMod);
-				maxTou += (10 * newGamePlusMod);
-				maxSpe += (10 * newGamePlusMod);
-				maxInt += (5 * newGamePlusMod);
-				maxWis += (5 * newGamePlusMod);
-				maxLib += (5 * newGamePlusMod);
-				maxSen += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0) {
-				maxStr += (5 * newGamePlusMod);
-				maxTou += (5 * newGamePlusMod);
-				maxSpe += (5 * newGamePlusMod);
-				maxInt += (10 * newGamePlusMod);
-				maxWis += (10 * newGamePlusMod);
-				maxLib += (10 * newGamePlusMod);
-				maxSen += (10 * newGamePlusMod);// 8/8/8/7/7/7/7
-			}
-			if (findPerk(PerkLib.ChimericalBodyEpicStage) >= 0) {
-				maxStr += (10 * newGamePlusMod);
-				maxTou += (10 * newGamePlusMod);
-				maxSpe += (10 * newGamePlusMod);
-				maxInt += (10 * newGamePlusMod);
-				maxWis += (10 * newGamePlusMod);
-				maxLib += (5 * newGamePlusMod);
-				maxSen += (5 * newGamePlusMod);// 10/10/10/7/7/6/6
-			}
-			if (findPerk(PerkLib.BlackHeartFinalForm) >= 0) {
-				maxWis += (5 * newGamePlusMod);
-				maxLib += (10 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0) maxSpe += (10 * newGamePlusMod);
-			if (findPerk(PerkLib.DraconicLungs) >= 0) maxSpe += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0) {
-				maxTou += (5 * newGamePlusMod);
-				maxSpe += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.DraconicLungsFinalForm) >= 0) {
-				maxStr += (5 * newGamePlusMod);
-				maxTou += (5 * newGamePlusMod);
-				maxSpe += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.ElvishPeripheralNervSysEvolved) >= 0) maxSpe += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.ElvishPeripheralNervSysFinalForm) >= 0) maxSpe += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.GorgonsEyesEvolved) >= 0) {
-				maxSpe += (5 * newGamePlusMod);
-				maxSen += (10 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.HinezumiBurningBloodFinalForm) >= 0) maxTou += (10 * newGamePlusMod);
-			if (findPerk(PerkLib.KitsuneThyroidGland) >= 0) maxSpe += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0) {
-				maxSpe += (5 * newGamePlusMod);
-				maxWis += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0) {
-				maxSpe += (5 * newGamePlusMod);
-				maxInt += (5 * newGamePlusMod);
-				maxWis += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.LactaBovinaOvariesEvolved) >= 0) maxLib += (10 * newGamePlusMod);
-			if (findPerk(PerkLib.LactaBovinaOvariesFinalForm) >= 0) {
-				maxStr += (10 * newGamePlusMod);
-				maxTou += (5 * newGamePlusMod);
-				maxLib += (10 * newGamePlusMod);
-			}
 			if (findPerk(PerkLib.MantislikeAgility) >= 0) {
 				if (hasCoatOfType(Skin.CHITIN) && findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (20 * newGamePlusMod);
 				if ((skinType == Skin.SCALES && findPerk(PerkLib.ThickSkin) >= 0) || hasCoatOfType(Skin.CHITIN)) maxSpe += (15 * newGamePlusMod);
@@ -9372,183 +9265,6 @@ use namespace CoC;
 				if ((skinType == Skin.SCALES && findPerk(PerkLib.ThickSkin) >= 0) || hasCoatOfType(Skin.CHITIN)) maxSpe += (20 * newGamePlusMod);
 				if (skinType == Skin.SCALES) maxSpe += (15 * newGamePlusMod);
 				if (findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (10 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.MinotaurTesticlesEvolved) >= 0) maxLib += (10 * newGamePlusMod);
-			if (findPerk(PerkLib.MinotaurTesticlesFinalForm) >= 0) {
-				maxStr += (10 * newGamePlusMod);
-				maxTou += (5 * newGamePlusMod);
-				maxLib += (10 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.NaturalPunchingBag) >= 0) maxTou += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.NaturalPunchingBagEvolved) >= 0) maxTou += (10 * newGamePlusMod);
-			if (findPerk(PerkLib.NaturalPunchingBagFinalForm) >= 0) maxTou += (20 * newGamePlusMod);
-			if (findPerk(PerkLib.ObsidianHeartFinalForm) >= 0) {
-				maxStr += (5 * newGamePlusMod);
-				maxTou += (5 * newGamePlusMod);
-				maxSpe += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.OniMusculature) >= 0) maxStr += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.OniMusculatureEvolved) >= 0) maxStr += (10 * newGamePlusMod);
-			if (findPerk(PerkLib.OniMusculatureFinalForm) >= 0) maxStr += (15 * newGamePlusMod);
-			if (findPerk(PerkLib.OrcAdrenalGlandsEvolved) >= 0) maxStr += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.OrcAdrenalGlandsFinalForm) >= 0) maxStr += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.PigBoarFat) >= 0) maxTou += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.PigBoarFatEvolved) >= 0) maxTou += (10 * newGamePlusMod);
-			if (findPerk(PerkLib.PigBoarFatFinalForm) >= 0) maxTou += (15 * newGamePlusMod);
-			if (findPerk(PerkLib.SalamanderAdrenalGlands) >= 0) {
-				maxTou += (5 * newGamePlusMod);
-				maxLib += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.SalamanderAdrenalGlandsEvolved) >= 0) {
-				maxStr += (5 * newGamePlusMod);
-				maxTou += (5 * newGamePlusMod);
-				maxSpe += (5 * newGamePlusMod);
-				maxLib += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.SalamanderAdrenalGlandsFinalForm) >= 0) {
-				maxStr += (15 * newGamePlusMod);
-				maxTou += (5 * newGamePlusMod);
-				maxSpe += (15 * newGamePlusMod);
-				maxLib += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.ScyllaInkGlands) >= 0) maxStr += (10 * newGamePlusMod);
-			if (findPerk(PerkLib.TrachealSystemEvolved) >= 0) maxStr += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.TrachealSystemFinalForm) >= 0) maxSpe += (10 * newGamePlusMod);
-			if (findPerk(PerkLib.TwinHeart) >= 0) {
-				maxSpe += (5 * newGamePlusMod);
-				maxTou += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.TwinHeartEvolved) >= 0) {
-				maxSpe += (10 * newGamePlusMod);
-				maxTou += (10 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.TwinHeartFinalForm) >= 0) {
-				maxSpe += (30 * newGamePlusMod);
-				maxTou += (30 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.VenomGlandsFinalForm) >= 0) maxTou += (10 * newGamePlusMod);
-			if (findPerk(PerkLib.EzekielBlessing) >= 0) {
-				maxStr += (5 * newGamePlusMod);
-				maxTou += (5 * newGamePlusMod);
-				maxSpe += (5 * newGamePlusMod);
-				maxInt += (5 * newGamePlusMod);
-				maxWis += (5 * newGamePlusMod);
-				maxLib += (5 * newGamePlusMod);
-				maxSen += (5 * newGamePlusMod);
-			}
-			//Perks
-			if (findPerk(PerkLib.JobAllRounder) >= 0) {
-				maxStr += (5 * newGamePlusMod);
-				maxTou += (5 * newGamePlusMod);
-				maxSpe += (5 * newGamePlusMod);
-				maxInt += (5 * newGamePlusMod);
-				maxWis += (5 * newGamePlusMod);
-				maxLib += (5 * newGamePlusMod);
-				maxSen += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.JobBeastWarrior) >= 0) {
-				maxStr += (5 * newGamePlusMod);
-				maxTou += (5 * newGamePlusMod);
-				maxSpe += (5 * newGamePlusMod);
-				if (findPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator) >= 0) {
-					maxInt += (5 * newGamePlusMod);
-					maxWis += (5 * newGamePlusMod);
-				}
-				else {
-					maxInt -= (5 * newGamePlusMod);
-					maxWis -= (5 * newGamePlusMod);
-				}
-			}
-			if (findPerk(PerkLib.JobBrawler) >= 0) maxStr += (10 * newGamePlusMod);
-			if (findPerk(PerkLib.JobCourtesan) >= 0) maxLib += (15 * newGamePlusMod);
-			if (findPerk(PerkLib.JobDefender) >= 0) maxTou += (15 * newGamePlusMod);
-			if (findPerk(PerkLib.JobDervish) >= 0) maxSpe += (10 * newGamePlusMod);
-			if (findPerk(PerkLib.JobElementalConjurer) >= 0) maxWis += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.JobEnchanter) >= 0) maxInt += (15 * newGamePlusMod);
-			if (findPerk(PerkLib.JobEromancer) >= 0) {
-				maxInt += (5 * newGamePlusMod);
-				maxLib += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.JobGolemancer) >= 0) {
-				maxInt += (5 * newGamePlusMod);
-				maxWis += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.JobGuardian) >= 0) maxTou += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.JobGunslinger) >= 0) maxWis += (10 * newGamePlusMod);
-			if (findPerk(PerkLib.JobHealer) >= 0) {
-				maxInt += (5 * newGamePlusMod);
-				maxWis += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.JobHunter) >= 0) {
-				maxSpe += (10 * newGamePlusMod);
-				maxInt += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.JobKnight) >= 0) maxTou += (10 * newGamePlusMod);
-			if (findPerk(PerkLib.JobLeader) >= 0) {
-				maxInt += (5 * newGamePlusMod);
-				maxWis += (5 * newGamePlusMod);
-				if (findPerk(PerkLib.ShootTheLoadAndHitTheRoad) >= 0) maxSpe += (5 * newGamePlusMod);
-				if (findPerk(PerkLib.ShootTheLoadAndHitTheRoad) < 0) maxLib -= (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.JobMonk) >= 0) maxWis += (15 * newGamePlusMod);
-			if (findPerk(PerkLib.JobRanger) >= 0) maxSpe += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.JobRogue) >= 0) {
-				maxStr += (5 * newGamePlusMod);
-				maxSpe += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.JobSeducer) >= 0) maxLib += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.JobSorcerer) >= 0) maxInt += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.JobSoulCultivator) >= 0) maxWis += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.JobSwordsman) >= 0) maxStr += (10 * newGamePlusMod);
-			if (findPerk(PerkLib.JobWarlord) >= 0) maxTou += (20 * newGamePlusMod);
-			if (findPerk(PerkLib.JobWarrior) >= 0) maxStr += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) {
-				maxSpe += (40 * newGamePlusMod);
-				maxInt += (40 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0) {
-				maxStr += (60 * newGamePlusMod);
-				maxTou += (20 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.PrestigeJobGreySage) >= 0) {
-				maxInt += (80 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.PrestigeJobSeer) >= 0) {
-				maxInt += (60 * newGamePlusMod);
-				maxWis += (20 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.PrestigeJobSentinel) >= 0) {
-				maxStr += (20 * newGamePlusMod);
-				maxTou += (60 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) {
-				maxSpe += (40 * newGamePlusMod);
-				maxWis += (40 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.PrestigeJobSoulArtMaster) >= 0) {
-				maxStr += (40 * newGamePlusMod);
-				maxWis += (40 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.PrestigeJobSpellKnight) >= 0) {
-				maxStr += (40 * newGamePlusMod);
-				maxInt += (40 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.PrestigeJobTempest) >= 0) {
-				maxStr += (40 * newGamePlusMod);
-				maxSpe += (40 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.PrestigeJobWarlock) >= 0) {
-				maxInt += (60 * newGamePlusMod);
-				maxLib += (20 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) {
-				maxStr += (25 * newGamePlusMod);
-				maxTou += (25 * newGamePlusMod);
-				maxSpe += (25 * newGamePlusMod);
-				maxInt += (25 * newGamePlusMod);
-				maxWis += (25 * newGamePlusMod);
-				maxLib += (15 * newGamePlusMod);
-				maxSen += (15 * newGamePlusMod);
 			}
 			if (hasPerk(PerkLib.Lycanthropy)) {
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) {
@@ -9572,164 +9288,18 @@ use namespace CoC;
 					maxSpe += (40 * newGamePlusMod);
 				}
 			}
-			if (findPerk(PerkLib.CarefulButRecklessAimAndShooting) >= 0 && findPerk(PerkLib.ColdAim) < 0) maxTou -= (15 * newGamePlusMod);
-			if (findPerk(PerkLib.WeaponMastery) >= 0) maxStr += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.WeaponGrandMastery) >= 0) maxStr += (10 * newGamePlusMod);
-			if (findPerk(PerkLib.ElementalConjurerResolve) >= 0) {
-				if (findPerk(PerkLib.ElementalConjurerMindAndBodyResolve) < 0) {
-					maxStr -= (15 * newGamePlusMod);
-					maxTou -= (15 * newGamePlusMod);
-					maxSpe -= (15 * newGamePlusMod);
-				}
-				maxInt += (20 * newGamePlusMod);
-				maxWis += (30 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.ElementalConjurerDedication) >= 0) {
-				if (findPerk(PerkLib.ElementalConjurerMindAndBodyDedication) < 0) {
-					maxStr -= (30 * newGamePlusMod);
-					maxTou -= (30 * newGamePlusMod);
-					maxSpe -= (30 * newGamePlusMod);
-				}
-				maxInt += (40 * newGamePlusMod);
-				maxWis += (60 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.ElementalConjurerSacrifice) >= 0) {
-				if (findPerk(PerkLib.ElementalConjurerMindAndBodySacrifice) < 0) {
-					maxStr -= (45 * newGamePlusMod);
-					maxTou -= (45 * newGamePlusMod);
-					maxSpe -= (45 * newGamePlusMod);
-				}
-				maxInt += (60 * newGamePlusMod);
-				maxWis += (90 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) {
-				maxStr += (10 * newGamePlusMod);
-				maxTou += (10 * newGamePlusMod);
-				maxSpe += (10 * newGamePlusMod);
-				maxInt += (10 * newGamePlusMod);
-				maxWis += (10 * newGamePlusMod);
-				maxLib += (10 * newGamePlusMod);
-				maxSen += (10 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) {
-				maxStr += (15 * newGamePlusMod);
-				maxTou += (15 * newGamePlusMod);
-				maxSpe += (15 * newGamePlusMod);
-				maxInt += (15 * newGamePlusMod);
-				maxWis += (15 * newGamePlusMod);
-				maxLib += (15 * newGamePlusMod);
-				maxSen += (15 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) {
-				maxStr += (20 * newGamePlusMod);
-				maxTou += (20 * newGamePlusMod);
-				maxSpe += (20 * newGamePlusMod);
-				maxInt += (20 * newGamePlusMod);
-				maxWis += (20 * newGamePlusMod);
-				maxLib += (20 * newGamePlusMod);
-				maxSen += (20 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.EpicStrength) >= 0) maxStr += (35 + (5 * newGamePlusMod));
-			if (findPerk(PerkLib.LegendaryStrength) >= 0) maxStr += (50 + (10 * newGamePlusMod));
-			if (findPerk(PerkLib.MythicalStrength) >= 0) maxStr += (65 + (15 * newGamePlusMod));
-			if (findPerk(PerkLib.EpicToughness) >= 0) maxTou += (35 + (5 * newGamePlusMod));
-			if (findPerk(PerkLib.LegendaryToughness) >= 0) maxTou += (50 + (10 * newGamePlusMod));
-			if (findPerk(PerkLib.MythicalToughness) >= 0) maxTou += (65 + (15 * newGamePlusMod));
-			if (findPerk(PerkLib.EpicSpeed) >= 0) maxSpe += (35 + (5 * newGamePlusMod));
-			if (findPerk(PerkLib.LegendarySpeed) >= 0) maxSpe += (50 + (10 * newGamePlusMod));
-			if (findPerk(PerkLib.MythicalSpeed) >= 0) maxSpe += (65 + (15 * newGamePlusMod));
-			if (findPerk(PerkLib.EpicIntelligence) >= 0) maxInt += (35 + (5 * newGamePlusMod));
-			if (findPerk(PerkLib.LegendaryIntelligence) >= 0) maxInt += (50 + (10 * newGamePlusMod));
-			if (findPerk(PerkLib.MythicalIntelligence) >= 0) maxInt += (65 + (15 * newGamePlusMod));
-			if (findPerk(PerkLib.EpicWisdom) >= 0) maxWis += (35 + (5 * newGamePlusMod));
-			if (findPerk(PerkLib.LegendaryWisdom) >= 0) maxWis += (50 + (10 * newGamePlusMod));
-			if (findPerk(PerkLib.MythicalWisdom) >= 0) maxWis += (65 + (15 * newGamePlusMod));
-			if (findPerk(PerkLib.EpicLibido) >= 0) maxLib += (35 + (5 * newGamePlusMod));
-			if (findPerk(PerkLib.LegendaryLibido) >= 0) maxLib += (50 + (10 * newGamePlusMod));
-			if (findPerk(PerkLib.MythicalLibido) >= 0) maxLib += (65 + (15 * newGamePlusMod));
-			if (findPerk(PerkLib.EpicSensitivity) >= 0) maxSen += (35 + (5 * newGamePlusMod));
-			if (findPerk(PerkLib.LegendarySensitivity) >= 0) maxSen += (50 + (10 * newGamePlusMod));
-			if (findPerk(PerkLib.MythicalSensitivity) >= 0) maxSen += (65 + (15 * newGamePlusMod));
-			if (findPerk(PerkLib.IronStomachSu) >= 0) maxTou += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.SoulApprentice) >= 0) maxWis += 5;
-			if (findPerk(PerkLib.SoulPersonage) >= 0) maxWis += 5;
-			if (findPerk(PerkLib.SoulWarrior) >= 0) maxWis += 5;
-			if (findPerk(PerkLib.SoulSprite) >= 0) maxWis += 5;
-			if (findPerk(PerkLib.SoulScholar) >= 0) maxWis += 5;
-			if (findPerk(PerkLib.SoulElder) >= 0) maxWis += 5;
-			if (findPerk(PerkLib.SoulExalt) >= 0) maxWis += 5;
-			if (findPerk(PerkLib.SoulOverlord) >= 0) maxWis += 5;
-			if (findPerk(PerkLib.SoulTyrant) >= 0) maxWis += 5;
-			if (findPerk(PerkLib.SoulKing) >= 0) maxWis += 5;
-			if (findPerk(PerkLib.SoulEmperor) >= 0) maxWis += 5;
-			if (findPerk(PerkLib.SoulAncestor) >= 0) maxWis += 5;
-			if (findPerk(PerkLib.GigantGrip) >= 0) maxStr += 5;
-			if (findPerk(PerkLib.GigantGripEx) >= 0) {
-				maxStr += 5;
-				maxTou += 5;
-			}
-			if (findPerk(PerkLib.GigantGripSu) >= 0) {
-				maxStr += 5;
-				maxTou += 5;
-				maxSpe += 5;
-			}
-			if (findPerk(PerkLib.TitanGrip) >= 0) maxStr += 5;
-			if (findPerk(PerkLib.TitanGripEx) >= 0) {
-				maxStr += 5;
-				maxTou += 5;
-			}
-			if (findPerk(PerkLib.TitanGripSu) >= 0) {
-				maxStr += 5;
-				maxTou += 5;
-				maxSpe += 5;
-			}
-			if (findPerk(PerkLib.EpicGolemMaker) >= 0) {
-				maxInt += 10;
-				maxWis += 10;
-			}
-			if (findPerk(PerkLib.EpicGolemMaker2ndCircle) >= 0) {
-				maxInt += 20;
-				maxWis += 20;
-			}
-			if (findPerk(PerkLib.EpicGolemMaker3rdCircle) >= 0) {
-				maxInt += 30;
-				maxWis += 30;
-			}
-			if (findPerk(PerkLib.LimitBreakerFlesh1stStage) >= 0) {
-				maxStr += (10 * newGamePlusMod);
-				maxTou += (10 * newGamePlusMod);
-				maxSpe += (10 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.LimitBreakerFlesh2ndStage) >= 0) {
-				maxInt += (10 * newGamePlusMod);
-				maxWis += (10 * newGamePlusMod);
-				maxLib += (10 * newGamePlusMod);
-				maxSen += (10 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.LimitBreakerPsyche1stStage) >= 0) {
-				maxStr += (20 * newGamePlusMod);
-				maxTou += (20 * newGamePlusMod);
-				maxSpe += (20 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.LimitBreakerPsyche2ndStage) >= 0) {
-				maxInt += (20 * newGamePlusMod);
-				maxWis += (20 * newGamePlusMod);
-				maxLib += (20 * newGamePlusMod);
-				maxSen += (20 * newGamePlusMod);
-			}
 			if (hasPerk(PerkLib.ProductivityDrugs)) maxLib += perkv1(PerkLib.ProductivityDrugs);
 			if (hasPerk(PerkLib.TitanicStrength)) maxStr += Math.round(maxStr * 0.01 * Math.round(tallness / 3) * newGamePlusMod);
+			maxStr += statusEffectv1(StatusEffects.StrTouSpeCounter1);
+			maxTou += statusEffectv2(StatusEffects.StrTouSpeCounter1);
+			maxSpe += statusEffectv3(StatusEffects.StrTouSpeCounter1);
+			maxInt += statusEffectv1(StatusEffects.IntWisCounter1);
+			maxWis += statusEffectv2(StatusEffects.IntWisCounter1);
+			maxLib += statusEffectv1(StatusEffects.LibSensCounter1);
+			maxSen += statusEffectv2(StatusEffects.LibSensCounter1);
 			if (hasPerk(PerkLib.IcyFlesh)) maxTou = 1;
 			End("Player","getAllMaxStats.perks2");
 			Begin("Player","getAllMaxStats.effects");
-			//Apply New Game+
-			maxStr += 5 * perkv1(PerkLib.AscensionTranshumanism);
-			maxTou += 5 * perkv1(PerkLib.AscensionTranshumanism);
-			maxSpe += 5 * perkv1(PerkLib.AscensionTranshumanism);
-			maxInt += 5 * perkv1(PerkLib.AscensionTranshumanism);
-			maxWis += 5 * perkv1(PerkLib.AscensionTranshumanism);
-			maxLib += 5 * perkv1(PerkLib.AscensionTranshumanism);
-			maxSen += 5 * perkv1(PerkLib.AscensionTranshumanism);
 			//Might
 			if (hasStatusEffect(StatusEffects.Might)) {
 				if (hasStatusEffect(StatusEffects.FortressOfIntellect)) maxInt += statusEffectv1(StatusEffects.Might);
@@ -9902,6 +9472,499 @@ use namespace CoC;
 				sens:maxSen,
 				cor:maxCor
 			};
+		}
+		
+		public function strtouspeintwislibsenCalculation1():void {
+			removeStatusEffect(StatusEffects.StrTouSpeCounter1);
+			createStatusEffect(StatusEffects.StrTouSpeCounter1,0,0,0,0);
+			removeStatusEffect(StatusEffects.IntWisCounter1);
+			createStatusEffect(StatusEffects.IntWisCounter1,0,0,0,0);
+			removeStatusEffect(StatusEffects.LibSensCounter1);
+			createStatusEffect(StatusEffects.LibSensCounter1, 0, 0, 0, 0);
+			var newGamePlusMod:int = this.newGamePlusMod() + 1;
+			var maxStrCap1:Number = 0;
+			var maxTouCap1:Number = 0;
+			var maxSpeCap1:Number = 0;
+			var maxIntCap1:Number = 0;
+			var maxWisCap1:Number = 0;
+			var maxLibCap1:Number = 0;
+			var maxSenCap1:Number = 0;
+			if (findPerk(PerkLib.Strong) > 0) maxStrCap1 += (50 * newGamePlusMod);
+			if (findPerk(PerkLib.Tough) > 0) maxTouCap1 += (50 * newGamePlusMod);
+			if (findPerk(PerkLib.Fast) > 0) maxSpeCap1 += (50 * newGamePlusMod);
+			if (findPerk(PerkLib.Smart) > 0) maxIntCap1 += (50 * newGamePlusMod);
+			if (findPerk(PerkLib.Wise) > 0) maxWisCap1 += (50 * newGamePlusMod);
+			if (findPerk(PerkLib.Lusty) > 0) maxLibCap1 += (50 * newGamePlusMod);
+			if (findPerk(PerkLib.Sensitive) > 0) maxSenCap1 += (50 * newGamePlusMod);
+			if (findPerk(PerkLib.ChimericalBodyInitialStage) >= 0) {
+				maxTouCap1 += (5 * newGamePlusMod);
+				maxLibCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.ChimericalBodySemiBasicStage) >= 0) {
+				maxStrCap1 += (5 * newGamePlusMod);
+				maxSpeCap1 += (5 * newGamePlusMod);
+				maxIntCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.ChimericalBodyBasicStage) >= 0) {
+				maxStrCap1 += (5 * newGamePlusMod);
+				maxTouCap1 += (5 * newGamePlusMod);
+				maxSpeCap1 += (5 * newGamePlusMod);
+				maxWisCap1 += (5 * newGamePlusMod);
+				maxSenCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0) {
+				maxStrCap1 += (5 * newGamePlusMod);
+				maxTouCap1 += (5 * newGamePlusMod);
+				maxIntCap1 += (5 * newGamePlusMod);
+				maxWisCap1 += (5 * newGamePlusMod);
+				maxLibCap1 += (5 * newGamePlusMod);
+				maxSenCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0) {
+				maxStrCap1 += (5 * newGamePlusMod);
+				maxTouCap1 += (5 * newGamePlusMod);
+				maxSpeCap1 += (5 * newGamePlusMod);
+				maxIntCap1 += (5 * newGamePlusMod);
+				maxWisCap1 += (5 * newGamePlusMod);
+				maxLibCap1 += (5 * newGamePlusMod);
+				maxSenCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.ChimericalBodySuperiorStage) >= 0) {
+				maxStrCap1 += (5 * newGamePlusMod);
+				maxTouCap1 += (5 * newGamePlusMod);
+				maxSpeCap1 += (10 * newGamePlusMod);
+				maxIntCap1 += (5 * newGamePlusMod);
+				maxWisCap1 += (5 * newGamePlusMod);
+				maxLibCap1 += (5 * newGamePlusMod);
+				maxSenCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.ChimericalBodyPeerlessStage) >= 0) {
+				maxStrCap1 += (10 * newGamePlusMod);
+				maxTouCap1 += (10 * newGamePlusMod);
+				maxSpeCap1 += (10 * newGamePlusMod);
+				maxIntCap1 += (5 * newGamePlusMod);
+				maxWisCap1 += (5 * newGamePlusMod);
+				maxLibCap1 += (5 * newGamePlusMod);
+				maxSenCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0) {
+				maxStrCap1 += (5 * newGamePlusMod);
+				maxTouCap1 += (5 * newGamePlusMod);
+				maxSpeCap1 += (5 * newGamePlusMod);
+				maxIntCap1 += (10 * newGamePlusMod);
+				maxWisCap1 += (10 * newGamePlusMod);
+				maxLibCap1 += (10 * newGamePlusMod);
+				maxSenCap1 += (10 * newGamePlusMod);// 8/8/8/7/7/7/7
+			}
+			if (findPerk(PerkLib.ChimericalBodyEpicStage) >= 0) {
+				maxStrCap1 += (10 * newGamePlusMod);
+				maxTouCap1 += (10 * newGamePlusMod);
+				maxSpeCap1 += (10 * newGamePlusMod);
+				maxIntCap1 += (10 * newGamePlusMod);
+				maxWisCap1 += (10 * newGamePlusMod);
+				maxLibCap1 += (5 * newGamePlusMod);
+				maxSenCap1 += (5 * newGamePlusMod);// 10/10/10/7/7/6/6
+			}
+			if (findPerk(PerkLib.BlackHeartFinalForm) >= 0) {
+				maxWisCap1 += (5 * newGamePlusMod);
+				maxLibCap1 += (10 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0) maxSpeCap1 += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.DraconicLungs) >= 0) maxSpeCap1 += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0) {
+				maxTouCap1 += (5 * newGamePlusMod);
+				maxSpeCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.DraconicLungsFinalForm) >= 0) {
+				maxStrCap1 += (5 * newGamePlusMod);
+				maxTouCap1 += (5 * newGamePlusMod);
+				maxSpeCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.ElvishPeripheralNervSysEvolved) >= 0) maxSpeCap1 += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.ElvishPeripheralNervSysFinalForm) >= 0) maxSpeCap1 += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.GorgonsEyesEvolved) >= 0) {
+				maxSpeCap1 += (5 * newGamePlusMod);
+				maxSenCap1 += (10 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.HinezumiBurningBloodFinalForm) >= 0) maxTouCap1 += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.KitsuneThyroidGland) >= 0) maxSpeCap1 += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0) {
+				maxSpeCap1 += (5 * newGamePlusMod);
+				maxWisCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0) {
+				maxSpeCap1 += (5 * newGamePlusMod);
+				maxIntCap1 += (5 * newGamePlusMod);
+				maxWisCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.LactaBovinaOvariesEvolved) >= 0) maxLibCap1 += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.LactaBovinaOvariesFinalForm) >= 0) {
+				maxStrCap1 += (10 * newGamePlusMod);
+				maxTouCap1 += (5 * newGamePlusMod);
+				maxLibCap1 += (10 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.MinotaurTesticlesEvolved) >= 0) maxLibCap1 += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.MinotaurTesticlesFinalForm) >= 0) {
+				maxStrCap1 += (10 * newGamePlusMod);
+				maxTouCap1 += (5 * newGamePlusMod);
+				maxLibCap1 += (10 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.NaturalPunchingBag) >= 0) maxTouCap1 += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.NaturalPunchingBagEvolved) >= 0) maxTouCap1 += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.NaturalPunchingBagFinalForm) >= 0) maxTouCap1 += (20 * newGamePlusMod);
+			if (findPerk(PerkLib.ObsidianHeartFinalForm) >= 0) {
+				maxStrCap1 += (5 * newGamePlusMod);
+				maxTouCap1 += (5 * newGamePlusMod);
+				maxSpeCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.OniMusculature) >= 0) maxStrCap1 += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.OniMusculatureEvolved) >= 0) maxStrCap1 += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.OniMusculatureFinalForm) >= 0) maxStrCap1 += (15 * newGamePlusMod);
+			if (findPerk(PerkLib.OrcAdrenalGlandsEvolved) >= 0) maxStrCap1 += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.OrcAdrenalGlandsFinalForm) >= 0) maxStrCap1 += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.PigBoarFat) >= 0) maxTouCap1 += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.PigBoarFatEvolved) >= 0) maxTouCap1 += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.PigBoarFatFinalForm) >= 0) maxTouCap1 += (15 * newGamePlusMod);
+			if (findPerk(PerkLib.SalamanderAdrenalGlands) >= 0) {
+				maxTouCap1 += (5 * newGamePlusMod);
+				maxLibCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.SalamanderAdrenalGlandsEvolved) >= 0) {
+				maxStrCap1 += (5 * newGamePlusMod);
+				maxTouCap1 += (5 * newGamePlusMod);
+				maxSpeCap1 += (5 * newGamePlusMod);
+				maxLibCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.SalamanderAdrenalGlandsFinalForm) >= 0) {
+				maxStrCap1 += (15 * newGamePlusMod);
+				maxTouCap1 += (5 * newGamePlusMod);
+				maxSpeCap1 += (15 * newGamePlusMod);
+				maxLibCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.ScyllaInkGlands) >= 0) maxStrCap1 += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.TrachealSystemEvolved) >= 0) maxStrCap1 += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.TrachealSystemFinalForm) >= 0) maxSpeCap1 += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.TwinHeart) >= 0) {
+				maxSpeCap1 += (5 * newGamePlusMod);
+				maxTouCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.TwinHeartEvolved) >= 0) {
+				maxSpeCap1 += (10 * newGamePlusMod);
+				maxTouCap1 += (10 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.TwinHeartFinalForm) >= 0) {
+				maxSpeCap1 += (30 * newGamePlusMod);
+				maxTouCap1 += (30 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.VenomGlandsFinalForm) >= 0) maxTouCap1 += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.EzekielBlessing) >= 0) {
+				maxStrCap1 += (5 * newGamePlusMod);
+				maxTouCap1 += (5 * newGamePlusMod);
+				maxSpeCap1 += (5 * newGamePlusMod);
+				maxIntCap1 += (5 * newGamePlusMod);
+				maxWisCap1 += (5 * newGamePlusMod);
+				maxLibCap1 += (5 * newGamePlusMod);
+				maxSenCap1 += (5 * newGamePlusMod);
+			}
+			//Perks
+			if (findPerk(PerkLib.JobAllRounder) >= 0) {
+				maxStrCap1 += (5 * newGamePlusMod);
+				maxTouCap1 += (5 * newGamePlusMod);
+				maxSpeCap1 += (5 * newGamePlusMod);
+				maxIntCap1 += (5 * newGamePlusMod);
+				maxWisCap1 += (5 * newGamePlusMod);
+				maxLibCap1 += (5 * newGamePlusMod);
+				maxSenCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.JobBeastWarrior) >= 0) {
+				maxStrCap1 += (5 * newGamePlusMod);
+				maxTouCap1 += (5 * newGamePlusMod);
+				maxSpeCap1 += (5 * newGamePlusMod);
+				if (findPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator) >= 0) {
+					maxIntCap1 += (5 * newGamePlusMod);
+					maxWisCap1 += (5 * newGamePlusMod);
+				}
+				else {
+					maxIntCap1 -= (5 * newGamePlusMod);
+					maxWisCap1 -= (5 * newGamePlusMod);
+				}
+			}
+			if (findPerk(PerkLib.JobBrawler) >= 0) maxStrCap1 += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.JobCourtesan) >= 0) maxLibCap1 += (15 * newGamePlusMod);
+			if (findPerk(PerkLib.JobDefender) >= 0) maxTouCap1 += (15 * newGamePlusMod);
+			if (findPerk(PerkLib.JobDervish) >= 0) maxSpeCap1 += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.JobElementalConjurer) >= 0) maxWisCap1 += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.JobEnchanter) >= 0) maxIntCap1 += (15 * newGamePlusMod);
+			if (findPerk(PerkLib.JobEromancer) >= 0) {
+				maxIntCap1 += (5 * newGamePlusMod);
+				maxLibCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.JobGolemancer) >= 0) {
+				maxIntCap1 += (5 * newGamePlusMod);
+				maxWisCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.JobGuardian) >= 0) maxTouCap1 += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.JobGunslinger) >= 0) maxWisCap1 += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.JobHealer) >= 0) {
+				maxIntCap1 += (5 * newGamePlusMod);
+				maxWisCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.JobHunter) >= 0) {
+				maxSpeCap1 += (10 * newGamePlusMod);
+				maxIntCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.JobKnight) >= 0) maxTouCap1 += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.JobLeader) >= 0) {
+				maxIntCap1 += (5 * newGamePlusMod);
+				maxWisCap1 += (5 * newGamePlusMod);
+				if (findPerk(PerkLib.ShootTheLoadAndHitTheRoad) >= 0) maxSpeCap1 += (5 * newGamePlusMod);
+				if (findPerk(PerkLib.ShootTheLoadAndHitTheRoad) < 0) maxLibCap1 -= (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.JobMonk) >= 0) maxWisCap1 += (15 * newGamePlusMod);
+			if (findPerk(PerkLib.JobRanger) >= 0) maxSpeCap1 += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.JobRogue) >= 0) {
+				maxStrCap1 += (5 * newGamePlusMod);
+				maxSpeCap1 += (5 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.JobSeducer) >= 0) maxLibCap1 += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.JobSorcerer) >= 0) maxIntCap1 += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.JobSoulCultivator) >= 0) maxWisCap1 += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.JobSwordsman) >= 0) maxStrCap1 += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.JobWarlord) >= 0) maxTouCap1 += (20 * newGamePlusMod);
+			if (findPerk(PerkLib.JobWarrior) >= 0) maxStrCap1 += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) {
+				maxSpeCap1 += (40 * newGamePlusMod);
+				maxIntCap1 += (40 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0) {
+				maxStrCap1 += (60 * newGamePlusMod);
+				maxTouCap1 += (20 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.PrestigeJobGreySage) >= 0) {
+				maxIntCap1 += (80 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.PrestigeJobSeer) >= 0) {
+				maxIntCap1 += (60 * newGamePlusMod);
+				maxWisCap1 += (20 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.PrestigeJobSentinel) >= 0) {
+				maxStrCap1 += (20 * newGamePlusMod);
+				maxTouCap1 += (60 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) {
+				maxSpeCap1 += (40 * newGamePlusMod);
+				maxWisCap1 += (40 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.PrestigeJobSoulArtMaster) >= 0) {
+				maxStrCap1 += (40 * newGamePlusMod);
+				maxWisCap1 += (40 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.PrestigeJobSpellKnight) >= 0) {
+				maxStrCap1 += (40 * newGamePlusMod);
+				maxIntCap1 += (40 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.PrestigeJobTempest) >= 0) {
+				maxStrCap1 += (40 * newGamePlusMod);
+				maxSpeCap1 += (40 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.PrestigeJobWarlock) >= 0) {
+				maxIntCap1 += (60 * newGamePlusMod);
+				maxLibCap1 += (20 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) {
+				maxStrCap1 += (25 * newGamePlusMod);
+				maxTouCap1 += (25 * newGamePlusMod);
+				maxSpeCap1 += (25 * newGamePlusMod);
+				maxIntCap1 += (25 * newGamePlusMod);
+				maxWisCap1 += (25 * newGamePlusMod);
+				maxLibCap1 += (15 * newGamePlusMod);
+				maxSenCap1 += (15 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.CarefulButRecklessAimAndShooting) >= 0 && findPerk(PerkLib.ColdAim) < 0) maxTouCap1 -= (15 * newGamePlusMod);
+			if (findPerk(PerkLib.WeaponMastery) >= 0) maxStrCap1 += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.WeaponGrandMastery) >= 0) maxStrCap1 += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.ElementalConjurerResolve) >= 0) {
+				if (findPerk(PerkLib.ElementalConjurerMindAndBodyResolve) < 0) {
+					maxStrCap1 -= (15 * newGamePlusMod);
+					maxTouCap1 -= (15 * newGamePlusMod);
+					maxSpeCap1 -= (15 * newGamePlusMod);
+				}
+				maxIntCap1 += (20 * newGamePlusMod);
+				maxWisCap1 += (30 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.ElementalConjurerDedication) >= 0) {
+				if (findPerk(PerkLib.ElementalConjurerMindAndBodyDedication) < 0) {
+					maxStrCap1 -= (30 * newGamePlusMod);
+					maxTouCap1 -= (30 * newGamePlusMod);
+					maxSpeCap1 -= (30 * newGamePlusMod);
+				}
+				maxIntCap1 += (40 * newGamePlusMod);
+				maxWisCap1 += (60 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.ElementalConjurerSacrifice) >= 0) {
+				if (findPerk(PerkLib.ElementalConjurerMindAndBodySacrifice) < 0) {
+					maxStrCap1 -= (45 * newGamePlusMod);
+					maxTouCap1 -= (45 * newGamePlusMod);
+					maxSpeCap1 -= (45 * newGamePlusMod);
+				}
+				maxIntCap1 += (60 * newGamePlusMod);
+				maxWisCap1 += (90 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) {
+				maxStrCap1 += (10 * newGamePlusMod);
+				maxTouCap1 += (10 * newGamePlusMod);
+				maxSpeCap1 += (10 * newGamePlusMod);
+				maxIntCap1 += (10 * newGamePlusMod);
+				maxWisCap1 += (10 * newGamePlusMod);
+				maxLibCap1 += (10 * newGamePlusMod);
+				maxSenCap1 += (10 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) {
+				maxStrCap1 += (15 * newGamePlusMod);
+				maxTouCap1 += (15 * newGamePlusMod);
+				maxSpeCap1 += (15 * newGamePlusMod);
+				maxIntCap1 += (15 * newGamePlusMod);
+				maxWisCap1 += (15 * newGamePlusMod);
+				maxLibCap1 += (15 * newGamePlusMod);
+				maxSenCap1 += (15 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) {
+				maxStrCap1 += (20 * newGamePlusMod);
+				maxTouCap1 += (20 * newGamePlusMod);
+				maxSpeCap1 += (20 * newGamePlusMod);
+				maxIntCap1 += (20 * newGamePlusMod);
+				maxWisCap1 += (20 * newGamePlusMod);
+				maxLibCap1 += (20 * newGamePlusMod);
+				maxSenCap1 += (20 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.EpicStrength) >= 0) maxStrCap1 += (35 + (5 * newGamePlusMod));
+			if (findPerk(PerkLib.LegendaryStrength) >= 0) maxStrCap1 += (50 + (10 * newGamePlusMod));
+			if (findPerk(PerkLib.MythicalStrength) >= 0) maxStrCap1 += (65 + (15 * newGamePlusMod));
+			if (findPerk(PerkLib.EpicToughness) >= 0) maxTouCap1 += (35 + (5 * newGamePlusMod));
+			if (findPerk(PerkLib.LegendaryToughness) >= 0) maxTouCap1 += (50 + (10 * newGamePlusMod));
+			if (findPerk(PerkLib.MythicalToughness) >= 0) maxTouCap1 += (65 + (15 * newGamePlusMod));
+			if (findPerk(PerkLib.EpicSpeed) >= 0) maxSpeCap1 += (35 + (5 * newGamePlusMod));
+			if (findPerk(PerkLib.LegendarySpeed) >= 0) maxSpeCap1 += (50 + (10 * newGamePlusMod));
+			if (findPerk(PerkLib.MythicalSpeed) >= 0) maxSpeCap1 += (65 + (15 * newGamePlusMod));
+			if (findPerk(PerkLib.EpicIntelligence) >= 0) maxIntCap1 += (35 + (5 * newGamePlusMod));
+			if (findPerk(PerkLib.LegendaryIntelligence) >= 0) maxIntCap1 += (50 + (10 * newGamePlusMod));
+			if (findPerk(PerkLib.MythicalIntelligence) >= 0) maxIntCap1 += (65 + (15 * newGamePlusMod));
+			if (findPerk(PerkLib.EpicWisdom) >= 0) maxWisCap1 += (35 + (5 * newGamePlusMod));
+			if (findPerk(PerkLib.LegendaryWisdom) >= 0) maxWisCap1 += (50 + (10 * newGamePlusMod));
+			if (findPerk(PerkLib.MythicalWisdom) >= 0) maxWisCap1 += (65 + (15 * newGamePlusMod));
+			if (findPerk(PerkLib.EpicLibido) >= 0) maxLibCap1 += (35 + (5 * newGamePlusMod));
+			if (findPerk(PerkLib.LegendaryLibido) >= 0) maxLibCap1 += (50 + (10 * newGamePlusMod));
+			if (findPerk(PerkLib.MythicalLibido) >= 0) maxLibCap1 += (65 + (15 * newGamePlusMod));
+			if (findPerk(PerkLib.EpicSensitivity) >= 0) maxSenCap1 += (35 + (5 * newGamePlusMod));
+			if (findPerk(PerkLib.LegendarySensitivity) >= 0) maxSenCap1 += (50 + (10 * newGamePlusMod));
+			if (findPerk(PerkLib.MythicalSensitivity) >= 0) maxSenCap1 += (65 + (15 * newGamePlusMod));
+			if (findPerk(PerkLib.IronStomachSu) >= 0) maxTouCap1 += (5 * newGamePlusMod);
+			if (findPerk(PerkLib.SoulApprentice) >= 0) maxWisCap1 += 5;
+			if (findPerk(PerkLib.SoulPersonage) >= 0) maxWisCap1 += 5;
+			if (findPerk(PerkLib.SoulWarrior) >= 0) maxWisCap1 += 5;
+			if (findPerk(PerkLib.SoulSprite) >= 0) maxWisCap1 += 5;
+			if (findPerk(PerkLib.SoulScholar) >= 0) maxWisCap1 += 5;
+			if (findPerk(PerkLib.SoulElder) >= 0) maxWisCap1 += 5;
+			if (findPerk(PerkLib.SoulExalt) >= 0) maxWisCap1 += 5;
+			if (findPerk(PerkLib.SoulOverlord) >= 0) maxWisCap1 += 5;
+			if (findPerk(PerkLib.SoulTyrant) >= 0) maxWisCap1 += 5;
+			if (findPerk(PerkLib.SoulKing) >= 0) maxWisCap1 += 5;
+			if (findPerk(PerkLib.SoulEmperor) >= 0) maxWisCap1 += 5;
+			if (findPerk(PerkLib.SoulAncestor) >= 0) maxWisCap1 += 5;
+			if (findPerk(PerkLib.GigantGrip) >= 0) maxStrCap1 += 5;
+			if (findPerk(PerkLib.GigantGripEx) >= 0) {
+				maxStrCap1 += 5;
+				maxTouCap1 += 5;
+			}
+			if (findPerk(PerkLib.GigantGripSu) >= 0) {
+				maxStrCap1 += 5;
+				maxTouCap1 += 5;
+				maxSpeCap1 += 5;
+			}
+			if (findPerk(PerkLib.TitanGrip) >= 0) maxStrCap1 += 5;
+			if (findPerk(PerkLib.TitanGripEx) >= 0) {
+				maxStrCap1 += 5;
+				maxTouCap1 += 5;
+			}
+			if (findPerk(PerkLib.TitanGripSu) >= 0) {
+				maxStrCap1 += 5;
+				maxTouCap1 += 5;
+				maxSpeCap1 += 5;
+			}
+			if (findPerk(PerkLib.EpicGolemMaker) >= 0) {
+				maxIntCap1 += 10;
+				maxWisCap1 += 10;
+			}
+			if (findPerk(PerkLib.EpicGolemMaker2ndCircle) >= 0) {
+				maxIntCap1 += 20;
+				maxWisCap1 += 20;
+			}
+			if (findPerk(PerkLib.EpicGolemMaker3rdCircle) >= 0) {
+				maxIntCap1 += 30;
+				maxWisCap1 += 30;
+			}
+			if (findPerk(PerkLib.LimitBreakerFlesh1stStage) >= 0) {
+				maxStrCap1 += (10 * newGamePlusMod);
+				maxTouCap1 += (10 * newGamePlusMod);
+				maxSpeCap1 += (10 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.LimitBreakerFlesh2ndStage) >= 0) {
+				maxIntCap1 += (10 * newGamePlusMod);
+				maxWisCap1 += (10 * newGamePlusMod);
+				maxLibCap1 += (10 * newGamePlusMod);
+				maxSenCap1 += (10 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.LimitBreakerPsyche1stStage) >= 0) {
+				maxStrCap1 += (20 * newGamePlusMod);
+				maxTouCap1 += (20 * newGamePlusMod);
+				maxSpeCap1 += (20 * newGamePlusMod);
+			}
+			if (findPerk(PerkLib.LimitBreakerPsyche2ndStage) >= 0) {
+				maxIntCap1 += (20 * newGamePlusMod);
+				maxWisCap1 += (20 * newGamePlusMod);
+				maxLibCap1 += (20 * newGamePlusMod);
+				maxSenCap1 += (20 * newGamePlusMod);
+			}
+			//Apply New Game+
+			maxStrCap1 += 5 * perkv1(PerkLib.AscensionTranshumanism);
+			maxTouCap1 += 5 * perkv1(PerkLib.AscensionTranshumanism);
+			maxSpeCap1 += 5 * perkv1(PerkLib.AscensionTranshumanism);
+			maxIntCap1 += 5 * perkv1(PerkLib.AscensionTranshumanism);
+			maxWisCap1 += 5 * perkv1(PerkLib.AscensionTranshumanism);
+			maxLibCap1 += 5 * perkv1(PerkLib.AscensionTranshumanism);
+			maxSenCap1 += 5 * perkv1(PerkLib.AscensionTranshumanism);
+			addStatusValue(StatusEffects.StrTouSpeCounter1, 1, maxStrCap1);
+			addStatusValue(StatusEffects.StrTouSpeCounter1, 2, maxTouCap1);
+			addStatusValue(StatusEffects.StrTouSpeCounter1, 3, maxSpeCap1);
+			addStatusValue(StatusEffects.IntWisCounter1, 1, maxIntCap1);
+			addStatusValue(StatusEffects.IntWisCounter1, 2, maxWisCap1);
+			addStatusValue(StatusEffects.LibSensCounter1, 1, maxLibCap1);
+			addStatusValue(StatusEffects.LibSensCounter1, 2, maxSenCap1);
+		}
+		
+		public function strtouspeintwislibsenCalculation2():void {
+			removeStatusEffect(StatusEffects.StrTouSpeCounter2);
+			createStatusEffect(StatusEffects.StrTouSpeCounter2,0,0,0,0);
+			removeStatusEffect(StatusEffects.IntWisCounter2);
+			createStatusEffect(StatusEffects.IntWisCounter2,0,0,0,0);
+			removeStatusEffect(StatusEffects.LibSensCounter2);
+			createStatusEffect(StatusEffects.LibSensCounter2, 0, 0, 0, 0);
+			var newGamePlusMod:int = this.newGamePlusMod()+1;
+			var maxStrCap2:Number = 0;
+			var maxTouCap2:Number = 0;
+			var maxSpeCap2:Number = 0;
+			var maxIntCap2:Number = 0;
+			var maxWisCap2:Number = 0;
+			var maxLibCap2:Number = 0;
+			var maxSenCap2:Number = 0;
+			
+			addStatusValue(StatusEffects.StrTouSpeCounter2, 1, maxStrCap2);
+			addStatusValue(StatusEffects.StrTouSpeCounter2, 2, maxTouCap2);
+			addStatusValue(StatusEffects.StrTouSpeCounter2, 3, maxSpeCap2);
+			addStatusValue(StatusEffects.IntWisCounter2, 1, maxIntCap2);
+			addStatusValue(StatusEffects.IntWisCounter2, 2, maxWisCap2);
+			addStatusValue(StatusEffects.LibSensCounter2, 1, maxLibCap2);
+			addStatusValue(StatusEffects.LibSensCounter2, 2, maxSenCap2);
 		}
 		
 		public function requiredXP():int {

@@ -1830,6 +1830,7 @@ private function campActions():void {
 	//addButton(5, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 	if (player.hasPerk(PerkLib.JobElementalConjurer) || player.hasPerk(PerkLib.JobGolemancer)) addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
 	else addButtonDisabled(6, "Winions", "You need to be able to make some minions that fight for you to use this option like elementals or golems...");
+	addButton(7, "Reflect", campActionsReflect).hint("Reflect on your current state and future plans. (Also would make your body fully adjust to any sudden changes to natural limits of your attributes after eating any odd things and etc.)");
 	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(8, "Fishery", VisitFishery).hint("Visit Fishery.");
 	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(9, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around [camp].");
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(10, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at [camp] Kitsune Shrine.");
@@ -1891,6 +1892,14 @@ private function campWinionsArmySim():void {
 	if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) addButton(1, "Summon", campMake.accessSummonElementalsMainMenu).hint("Check your options for managing your elemental summons.");
 	else addButtonDisabled(1, "Summon", "You should first build Arcane Circle. Without some tools from the carpenter's toolbox it would be near impossible to do this.");
 	addButton(14, "Back", campActions);
+}
+
+private function campActionsReflect():void {
+	clearOutput();
+	outputText("Placeholder text for now...");
+	var strStat:Number = player.str100;
+	player.strtouspeintwislibsenCalculation2();
+	player.str = player.str * (strStat / 100);
 }
 
 private function MagicWardMenu():void {
@@ -2651,6 +2660,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 		if(timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n");
 		else outputText("You lie down to resume sleeping for the remaining hour.\n");
 	}
+	player.strtouspeintwislibsenCalculation1();
 	goNext(timeQ, true);
 }
 //For shit that breaks normal sleep processing.
