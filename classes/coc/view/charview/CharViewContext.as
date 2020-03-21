@@ -44,6 +44,7 @@ public class CharViewContext extends ExecContext {
 				showClothing: [LowerBody.LION,LowerBody.GARGOYLE,LowerBody.GARGOYLE_2].indexOf(player.lowerBody) <= 0,
 				showArmClothing: [Arms.LION,Arms.DISPLACER,Arms.GARGOYLE,Arms.GARGOYLE_2,Arms.YETI,Arms.HINEZUMI].indexOf(player.arms.type) <= 0,
 				showLegClothing: [LowerBody.YETI,LowerBody.HOOFED,LowerBody.HARPY,LowerBody.GOO,LowerBody.NAGA,LowerBody.DRIDER,LowerBody.HINEZUMI].indexOf(player.lowerBody) <= 0,
+				PlayerHasViewableOutfit: player.isWearingArmor(),
 
 				Antennae     : Antennae,
 				Arms         : Arms,
@@ -74,27 +75,28 @@ public class CharViewContext extends ExecContext {
 
 				// Viewable Clothing lists
 				yukiDress: player.armor == game.armors.BLIZZ_K,
-				SakuraPetalKimono: player.armor == game.armors.SPKIMO,
+				sakuraPetalKimono: player.armor == game.armors.SPKIMO,
 				whiteKimono: player.armor == game.armors.WKIMONO,
 				blueKimono: player.armor == game.armors.BKIMONO,
 				redKimono: player.armor == game.armors.RKIMONO,
 				purpleKimono: player.armor == game.armors.PKIMONO,
 				blackKimono: player.armor == game.armors.BLKIMONO,
-				CentaurBlackguardArmor: player.armor == game.armors.CTPALAD,
-				CentaurPaladinArmor: player.armor == game.armors.CTPALAD,
+				centaurBlackguardArmor: player.armor == game.armors.CTPALAD,
+				centaurPaladinArmor: player.armor == game.armors.CTPALAD,
 
-				// neck Accessory lists
+				// Viewable neck Accessory lists
 				blueScarf: player.necklace == game.necklaces.BWSCARF,
 				greenScarf: player.necklace == game.necklaces.GWSCARF,
 				purpleScarf: player.necklace == game.necklaces.PWSCARF,
 				yellowScarf: player.necklace == game.necklaces.YWSCARF,
 
-				// head Accessory lists
+				// Viewable head Accessory lists
 				foxHairpin: player.headJewelry == game.headjewelries.FOXHAIR,
 				goldenNagaHairpin: player.headJewelry == game.headjewelries.GNHAIR,
 				MachinistGoggles: player.headJewelry == game.headjewelries.MACHGOG,
 				SATechGoggle: player.headJewelry == game.headjewelries.SATGOG,
 				ScannerGoggle: player.headJewelry == game.headjewelries.SCANGOG,
+				//sphinxRegalia: player.headJewelry == game.headjewelries.SphinxAS
 				YukiHairpin: player.headJewelry == game.headjewelries.SNOWFH
 			}
 		]);
