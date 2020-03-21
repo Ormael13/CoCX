@@ -473,19 +473,19 @@
         <cell rect="818,641,173,156" name="aura/thunderaura" dx="11" dy="28"/>
         <cell rect="525,12,115,88" name="clotheScarf/scarf" dx="64" dy="32"/>
         <cell rect="650,12,115,88" name="clotheUnderAmulet/sphinxregalia" dx="47" dy="26"/>
-        <cell rect="751,101,125,54" name="clothe/blizzardTop" dx="39" dy="72"/>
-        <cell rect="882,101,125,105" name="clothe/whiteKimonoBottom" dx="39" dy="72"/>
-		<cell rect="882,101,125,105" name="clothe/blackKimonoBottom" dx="39" dy="72"/>
-		<cell rect="751,101,125,105" name="clothe/whiteKimonoTop" dx="39" dy="72"/>    
-		<cell rect="751,101,125,105" name="clothe/blueKimonoTop" dx="39" dy="72"/>
-		<cell rect="751,101,125,105" name="clothe/redKimonoTop" dx="39" dy="72"/>
-		<cell rect="751,101,125,105" name="clothe/purpleKimonoTop" dx="39" dy="72"/>
-		<cell rect="751,101,125,105" name="clothe/blackKimonoTop" dx="39" dy="72"/>
-		<cell rect="751,101,125,105" name="clothe/whiteKimonoSleeves" dx="39" dy="72"/>    
-		<cell rect="751,101,125,105" name="clothe/blueKimonoSleeves" dx="39" dy="72"/>
-		<cell rect="751,101,125,105" name="clothe/redKimonoSleeves" dx="39" dy="72"/>
-		<cell rect="751,101,125,105" name="clothe/purpleKimonoSleeves" dx="39" dy="72"/>
-		<cell rect="751,101,125,105" name="clothe/blackKimonoSleeves" dx="39" dy="72"/>
+        <cell rect="751,101,40,50" name="clothe/blizzardTop" dx="73" dy="72"/>
+        <cell rect="797,101,40,50" name="clothe/whiteKimonoTop" dx="73" dy="72"/>
+        <cell rect="843,101,40,50" name="clothe/blueKimonoTop" dx="73" dy="72"/>
+        <cell rect="889,101,40,50" name="clothe/redKimonoTop" dx="73" dy="72"/>
+        <cell rect="935,101,40,50" name="clothe/purpleKimonoTop" dx="73" dy="72"/>
+        <cell rect="981,101,40,50" name="clothe/blackKimonoTop" dx="73" dy="72"/>
+        <cell rect="853,216,80,105" name="clothe/whiteKimonoSleeves" dx="54" dy="72"/>
+        <cell rect="935,216,80,105" name="clothe/blueKimonoSleeves" dx="54" dy="72"/>
+        <cell rect="1017,216,80,105" name="clothe/redKimonoSleeves" dx="54" dy="72"/>
+        <cell rect="1099,216,80,105" name="clothe/purpleKimonoSleeves" dx="54" dy="72"/>
+        <cell rect="853,325,80,105" name="clothe/blackKimonoSleeves" dx="54" dy="72"/>
+        <cell rect="751,158,40,54" name="clothe/whiteKimonoBottom" dx="75" dy="121"/>
+        <cell rect="919,158,40,54" name="clothe/blackKimonoBottom" dx="75" dy="121"/>
         <cell rect="776,12,45,25" name="armorNeck/fullplatetop" dx="70" dy="63"/>
         <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="72" dy="75"/>
         <cell rect="882,12,125,75" name="armorLegs/taurarmorbottom" dx="63" dy="97"/>
@@ -951,19 +951,24 @@
             </else>
         </if>
 		
+		<!-- VARIABLES AREA -->
 		<set var="hydraTails" value="statusEffectv1(StatusEffects.HydraTailsPlayer)"/>
+		<set var="big" value="(cocks[0].cockLength gt 12) ? 'big' : ''"/>
+		
+		<!-- CLOTHING VARIABLES AREA -->
+		<set var="PlayerHasViewableOutfit" value="hasStatusEffect(StatusEffects.PlayerHasViewableOutfit)"/>
 		<set var="scarf" value="hasStatusEffect(StatusEffects.YetiScarf)"/>
 		<set var="sphinxRegalia" value="hasStatusEffect(StatusEffects.SphinxAS)"/>
 		<set var="yukiDress" value="hasStatusEffect(StatusEffects.YukiOnnaKimono)"/>
 		<set var="SuccubusDress" value="hasStatusEffect(StatusEffects.PLACEHOLDER)"/>
 		<set var="yukiHairpin" value="hasStatusEffect(StatusEffects.YukiOnnaHairpin)"/>
-		<set var="whiteKimono" value="hasStatusEffect(StatusEffects.YukiOnnaKimono)"/>
-		<set var="blueKimono" value="hasStatusEffect(StatusEffects.YukiOnnaKimono)"/>
-		<set var="redKimono" value="hasStatusEffect(StatusEffects.YukiOnnaKimono)"/>
-		<set var="purpleKimono" value="hasStatusEffect(StatusEffects.YukiOnnaKimono)"/>
-		<set var="blackKimono" value="hasStatusEffect(StatusEffects.YukiOnnaKimono)"/>
-		<set var="PlayerHasViewableOutfit" value="hasStatusEffect(StatusEffects.PlayerHasViewableOutfit)"/>
-		<set var="big" value="(cocks[0].cockLength gt 12) ? 'big' : ''"/>
+		<set var="sakuraPetalKimono" value="hasStatusEffect(StatusEffects.SakuraPetalKimono)"/>
+		<set var="whiteKimono" value="hasStatusEffect(StatusEffects.PLACEHOLDER)"/>
+		<set var="blueKimono" value="hasStatusEffect(StatusEffects.PLACEHOLDER)"/>
+		<set var="redKimono" value="hasStatusEffect(StatusEffects.PLACEHOLDER)"/>
+		<set var="purpleKimono" value="hasStatusEffect(StatusEffects.PLACEHOLDER)"/>
+		<set var="blackKimono" value="hasStatusEffect(StatusEffects.PLACEHOLDER)"/>
+		<set var="taurPaladinArmor" value="hasStatusEffect(StatusEffects.PLACEHOLDER)"/>
 		
 		<!-- ANTENNAE AREA -->
         <switch value="antennae.type">
@@ -2778,21 +2783,15 @@
 		
 		<!-- Yuki Onna Dress -->
 		<if test="yukiDress">
-			<show part="clothe/blizzardTop"/>
-			<switch value="arms.type">
-				<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.ONI,Arms.YUKI_ONNA,Arms.RAIJU">
-					<show part="clothe/blizzardTopSleeves"/>
-				</case>
-				<default>
-				</default>
-			</switch>
-			<switch value="lowerBody.type">
-				<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.KITSUNE,LowerBody.DEMONIC_HIGH_HEELS,LowerBody.ONI,LowerBody.YUKI_ONNA">
-					<show part="clothe/whiteKimonoBottom"/>	
-				</case>
-				<default>
-				</default>
-			</switch>
+			<if test="showClothing">
+				<show part="clothe/blizzardTop"/>
+				<if test="(legCount!=4) and (showLegClothing)">
+					<show part="clothe/whiteKimonoBottom"/>
+				</if>
+				<if test="showArmClothing">
+					<show part="clothe/whiteKimonoSleeves"/>
+				</if>
+			</if>
 		</if>
 		
 		<if test="yukiHairpin">
@@ -2811,99 +2810,95 @@
             </switch>
 		</if>
 		
+		<!-- Sakura petal Kimono -->
+		<if test="sakuraPetalKimono">
+			<if test="showClothing">
+				<show part="clothe/redKimonoTop"/>
+				<if test="(legCount!=4) and (showLegClothing)">
+					<show part="clothe/redKimonoBottom"/>
+				</if>
+				<if test="showArmClothing">
+					<show part="clothe/blackKimonoBottom"/>
+				</if>
+			</if>
+		</if>
+		
 		<!-- Kimono White -->
 		<if test="whiteKimono">
-			<show part="clothe/whiteKimonotop"/>
-			<switch value="arms.type">
-				<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.ONI,Arms.YUKI_ONNA,Arms.RAIJU,Arms.RAIJU_2">
+			<if test="showClothing">
+				<show part="clothe/whiteKimonoTop"/>
+				<if test="(legCount!=4) and (showLegClothing)">
+					<show part="clothe/whiteKimonoBottom"/>
+				</if>
+				<if test="showArmClothing">
 					<show part="clothe/whiteKimonoSleeves"/>
-				</case>
-				<default>
-				</default>
-			</switch>
-			<switch value="lowerBody.type">
-				<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.KITSUNE,LowerBody.DEMONIC_HIGH_HEELS,LowerBody.ONI,LowerBody.YUKI_ONNA">
-					<show part="clothe/whiteKimonoBottom"/>	
-				</case>
-				<default>
-				</default>
-			</switch>
+				</if>
+			</if>
 		</if>
 		
 		<!-- Kimono Blue -->
 		<if test="blueKimono">
-			<show part="clothe/blueKimonotop"/>
-			<switch value="arms.type">
-				<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.ONI,Arms.YUKI_ONNA,Arms.RAIJU,Arms.RAIJU_2">
-					<show part="clothe/blueKimonoSleeves"/>
-				</case>
-				<default>
-				</default>
-			</switch>
-			<switch value="lowerBody.type">
-				<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.KITSUNE,LowerBody.DEMONIC_HIGH_HEELS,LowerBody.ONI,LowerBody.YUKI_ONNA">
-					<show part="clothe/whiteKimonoBottom"/>	
-				</case>
-				<default>
-				</default>
-			</switch>
+			<if test="showClothing">
+				<show part="clothe/whiteKimonoTop"/>
+				<if test="(legCount!=4) and (showLegClothing)">
+					<show part="clothe/whiteKimonoBottom"/>
+				</if>
+				<if test="showArmClothing">
+					<show part="clothe/whiteKimonoSleeves"/>
+				</if>
+			</if>
 		</if>
 		
 		<!-- Kimono Red -->
 		<if test="redKimono">
-			<show part="clothe/redKimonotop"/>
-			<switch value="arms.type">
-				<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.ONI,Arms.YUKI_ONNA,Arms.RAIJU,Arms.RAIJU_2">
+			<if test="showClothing">
+				<show part="clothe/redKimonoTop"/>
+				<if test="(legCount!=4) and (showLegClothing)">
+					<show part="clothe/blackKimonoBottom"/>
+				</if>
+				<if test="showArmClothing">
 					<show part="clothe/redKimonoSleeves"/>
-				</case>
-				<default>
-				</default>
-			</switch>
-			<switch value="lowerBody.type">
-				<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.KITSUNE,LowerBody.DEMONIC_HIGH_HEELS,LowerBody.ONI,LowerBody.YUKI_ONNA">
-					<show part="clothe/blackKimonoBottom"/>	
-				</case>
-				<default>
-				</default>
-			</switch>
+				</if>
+			</if>
 		</if>
 		
 		<!-- Kimono Purple -->
 		<if test="purpleKimono">
-			<show part="clothe/purpleKimonotop"/>
-			<switch value="arms.type">
-				<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.ONI,Arms.YUKI_ONNA,Arms.RAIJU,Arms.RAIJU_2">
+			<if test="showClothing">
+				<show part="clothe/purpleKimonoTop"/>
+				<if test="(legCount!=4) and (showLegClothing)">
+					<show part="clothe/blackKimonoBottom"/>
+				</if>
+				<if test="showArmClothing">
 					<show part="clothe/purpleKimonoSleeves"/>
-				</case>
-				<default>
-				</default>
-			</switch>
-			<switch value="lowerBody.type">
-				<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.KITSUNE,LowerBody.DEMONIC_HIGH_HEELS,LowerBody.ONI,LowerBody.YUKI_ONNA">
-					<show part="clothe/blackKimonoBottom"/>	
-				</case>
-				<default>
-				</default>
-			</switch>
+				</if>
+			</if>
 		</if>
 		
 		<!-- Kimono Black -->
 		<if test="blackKimono">
-			<show part="clothe/blackKimonotop"/>
-			<switch value="arms.type">
-				<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.ONI,Arms.YUKI_ONNA,Arms.RAIJU,Arms.RAIJU_2">
+			<if test="showClothing">
+				<show part="clothe/blackKimonoTop"/>
+				<if test="(legCount!=4) and (showLegClothing)">
+					<show part="clothe/blackKimonoBottom"/>
+				</if>
+				<if test="showLegClothing">
 					<show part="clothe/blackKimonoSleeves"/>
-				</case>
-				<default>
-				</default>
-			</switch>
-			<switch value="lowerBody.type">
-				<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.KITSUNE,LowerBody.DEMONIC_HIGH_HEELS,LowerBody.ONI,LowerBody.YUKI_ONNA">
-					<show part="clothe/blackKimonoBottom"/>	
-				</case>
-				<default>
-				</default>
-			</switch>
+				</if>
+			</if>
+		</if>
+		
+		<!--Taur armor -->
+		<if test="TaurPaladinArmor">
+			<show part="armorNeck/fullplatetop"/>
+			<show part="armorChest/fullplatebottom"/>
+			<if test="showArmClothing">
+				<show part="armorLeftArm/fullplateleftarm"/>
+				<show part="armorRightArm/fullplaterightarm"/>
+			</if>
+			<if test="legCount==4">
+				<show part="armorLegs/taurarmorbottom"/>	
+			</if>
 		</if>
 		
     </logic>

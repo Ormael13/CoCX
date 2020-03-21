@@ -21,6 +21,9 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
+import classes.CoC;
+import classes.Items.ArmorLib;
+import classes.Player;
 import classes.StatusEffects;
 import classes.CockTypesEnum;
 import classes.lists.BreastCup;
@@ -32,10 +35,16 @@ import coc.xlogic.ExecContext;
 public class CharViewContext extends ExecContext {
 	private var charview:CharView;
 	public function CharViewContext(charview:CharView, character:*) {
+		var player:Player = character as Player;
+		var game:CoC = CoC.instance;
 		super([
 			{}, // local variables
 			character,
 			{
+				showClothing: [LowerBody.LION,LowerBody.GARGOYLE,LowerBody.GARGOYLE_2].indexOf(player.lowerBody) <= 0,
+				showArmClothing: [Arms.LION,Arms.DISPLACER,Arms.GARGOYLE,Arms.GARGOYLE_2,Arms.YETI,Arms.HINEZUMI].indexOf(player.arms.type) <= 0,
+				showLegClothing: [LowerBody.YETI,LowerBody.HOOFED,LowerBody.HARPY,LowerBody.GOO,LowerBody.NAGA,LowerBody.DRIDER,LowerBody.HINEZUMI].indexOf(player.lowerBody) <= 0,
+
 				Antennae     : Antennae,
 				Arms         : Arms,
 				Beard        : Beard,
@@ -61,7 +70,32 @@ public class CharViewContext extends ExecContext {
 				Tongue       : Tongue,
 				UnderBody    : UnderBody,
 				Wings        : Wings,
-				StatusEffects: StatusEffects
+				StatusEffects: StatusEffects,
+
+				// Viewable Clothing lists
+				yukiDress: player.armor == game.armors.BLIZZ_K,
+				SakuraPetalKimono: player.armor == game.armors.SPKIMO,
+				whiteKimono: player.armor == game.armors.WKIMONO,
+				blueKimono: player.armor == game.armors.BKIMONO,
+				redKimono: player.armor == game.armors.RKIMONO,
+				purpleKimono: player.armor == game.armors.PKIMONO,
+				blackKimono: player.armor == game.armors.BLKIMONO,
+				CentaurBlackguardArmor: player.armor == game.armors.CTPALAD,
+				CentaurPaladinArmor: player.armor == game.armors.CTPALAD,
+
+				// neck Accessory lists
+				blueScarf: player.necklace == game.necklaces.BWSCARF,
+				greenScarf: player.necklace == game.necklaces.GWSCARF,
+				purpleScarf: player.necklace == game.necklaces.PWSCARF,
+				yellowScarf: player.necklace == game.necklaces.YWSCARF,
+
+				// head Accessory lists
+				foxHairpin: player.headJewelry == game.headjewelries.FOXHAIR,
+				goldenNagaHairpin: player.headJewelry == game.headjewelries.GNHAIR,
+				MachinistGoggles: player.headJewelry == game.headjewelries.MACHGOG,
+				SATechGoggle: player.headJewelry == game.headjewelries.SATGOG,
+				ScannerGoggle: player.headJewelry == game.headjewelries.SCANGOG,
+				YukiHairpin: player.headJewelry == game.headjewelries.SNOWFH
 			}
 		]);
 		this.charview = charview;
