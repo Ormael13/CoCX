@@ -83,6 +83,13 @@ public class CharViewContext extends ExecContext {
 				blackKimono: player.armor == game.armors.BLKIMONO,
 				centaurBlackguardArmor: player.armor == game.armors.CTPALAD,
 				centaurPaladinArmor: player.armor == game.armors.CTPALAD,
+				goblinTechnomancerClothe: player.armor == game.armors.GTECHC_,
+
+				//viewable bra list
+				goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,
+
+				//viewable panty list
+				goblinTechnomancerPanty: player.lowerGarment == game.undergarments.T_PANTY,
 
 				// Viewable neck Accessory lists
 				blueScarf: player.necklace == game.necklaces.BWSCARF,
@@ -93,11 +100,9 @@ public class CharViewContext extends ExecContext {
 				// Viewable head Accessory lists
 				foxHairpin: player.headJewelry == game.headjewelries.FOXHAIR,
 				goldenNagaHairpin: player.headJewelry == game.headjewelries.GNHAIR,
-				MachinistGoggles: player.headJewelry == game.headjewelries.MACHGOG,
-				SATechGoggle: player.headJewelry == game.headjewelries.SATGOG,
-				ScannerGoggle: player.headJewelry == game.headjewelries.SCANGOG,
+				machinistGoggles: player.headJewelry == game.headjewelries.MACHGOG || player.headJewelry == game.headjewelries.SATGOG || player.headJewelry == game.headjewelries.SCANGOG,
 				//sphinxRegalia: player.headJewelry == game.headjewelries.SphinxAS
-				YukiHairpin: player.headJewelry == game.headjewelries.SNOWFH,
+				yukiHairpin: player.headJewelry == game.headjewelries.SNOWFH,
 
 				// Viewable amulet Accessory lists
 				GoldStatAmulet: player.necklace == game.necklaces.NECKINT || player.necklace == game.necklaces.NECKLIB || player.necklace == game.necklaces.NECKSEN ||
