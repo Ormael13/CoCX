@@ -472,6 +472,8 @@
         <cell rect="644,641,173,156" name="aura/wraithaura" dx="11" dy="28"/>
         <cell rect="818,641,173,156" name="aura/thunderaura" dx="11" dy="28"/>
         <cell rect="607,12,40,28" name="clotheHead/goldenNagaHairpin" dx="73" dy="32"/>
+        <cell rect="607,70,40,28" name="clotheHead/machinistGoggles" dx="74" dy="32"/>
+        <cell rect="607,41,15,13" name="clotheAmulet/GoldStatAmulet" dx="87" dy="65"/>
         <cell rect="67,26,80,28" name="clotheScarf/scarfBlue" dx="84" dy="64"/>
         <cell rect="524,12,80,28" name="clotheScarf/scarfGreen" dx="84" dy="64"/>
         <cell rect="524,41,80,28" name="clotheScarf/scarfYellow" dx="84" dy="64"/>
@@ -483,13 +485,16 @@
         <cell rect="889,101,40,50" name="clothe/redKimonoTop" dx="73" dy="72"/>
         <cell rect="935,101,40,50" name="clothe/purpleKimonoTop" dx="73" dy="72"/>
         <cell rect="981,101,40,50" name="clothe/blackKimonoTop" dx="73" dy="72"/>
+        <cell rect="1017,325,80,104" name="clothe/goblinTechnomancerClothe" dx="54" dy="55"/>
         <cell rect="853,216,80,105" name="clothe/whiteKimonoSleeves" dx="54" dy="72"/>
         <cell rect="935,216,80,105" name="clothe/blueKimonoSleeves" dx="54" dy="72"/>
         <cell rect="1017,216,80,105" name="clothe/redKimonoSleeves" dx="54" dy="72"/>
         <cell rect="1099,216,80,105" name="clothe/purpleKimonoSleeves" dx="54" dy="72"/>
         <cell rect="853,325,80,105" name="clothe/blackKimonoSleeves" dx="54" dy="72"/>
+        <cell rect="935,325,80,104" name="clothe/goblinTechnomancerClotheArms" dx="54" dy="72"/>
         <cell rect="751,158,40,54" name="clothe/whiteKimonoBottom" dx="75" dy="121"/>
         <cell rect="919,158,40,54" name="clothe/blackKimonoBottom" dx="75" dy="121"/>
+        <cell rect="1099,325,80,104" name="clothe/goblinTechnomancerClotheBoots" dx="72" dy="67"/>
         <cell rect="776,12,45,25" name="armorNeck/fullplatetop" dx="70" dy="63"/>
         <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="72" dy="75"/>
         <cell rect="882,12,125,75" name="armorLegs/taurarmorbottom" dx="63" dy="97"/>
@@ -737,6 +742,10 @@
         <cell rect="561,140,49,29" name="overskin/Byeti" dx="69" dy="68"/>
         <cell rect="561,170,49,29" name="overskin/Blyeti" dx="69" dy="68"/>
         <cell rect="261,200,49,29" name="overskinpanty/yetipanty" dx="70" dy="99"/>
+        <cell rect="11,410,49,29" name="bra/goblinTechnomancerBraSmall" dx="69" dy="68"/>
+        <cell rect="11,440,49,29" name="bra/goblinTechnomancerBraMedium" dx="69" dy="68"/>
+        <cell rect="11,410,49,29" name="bra/goblinTechnomancerBraLarge" dx="69" dy="68"/>
+        <cell rect="11,500,49,29" name="panty/goblinTechnomancerPanty" dx="70" dy="99"/>
     </spritemap>
     <spritemap file="tails.png">
         <cell rect="1,71,168,139" name="tail/manticore" dx="10" dy="40"/>
@@ -834,7 +843,6 @@
         <cell rect="1,630,168,139" name="wings/vampire_bg" dx="10" dy="28"/>
         <cell rect="170,630,168,139" name="overclothe/vampire" dx="10" dy="28"/>
     </spritemap>
-
 	<!-- LAYER AREA -->
     <layers>	
 		<layer name="fullbody"/>
@@ -852,6 +860,9 @@
 		<layer name="clotheAmulet"/>
 		<layer name="clotheUnderAmulet"/>
 		<layer name="clothe"/>
+		<layer name="bra"/>
+		<layer name="panty"/>
+		
 		<layer name="hands_fg"/>
 		<layer name="arms_fg"/>
         <layer name="antennae"/>
@@ -2772,6 +2783,16 @@
 			<show part="clotheHead/goldenNagaHairpin"/>	
 		</if>
 		
+		<!-- Head goggles -->
+		<if test="machinistGoggles">
+			<show part="clotheHead/machinistGoggles"/>	
+		</if>
+		
+		<!-- Stat Amulet -->
+		<if test="GoldStatAmulet">
+			<show part="clotheAmulet/GoldStatAmulet"/>	
+		</if>
+		
 		<!-- Winter Scarves -->
 		<if test="scarfBlue">
 			<show part="clotheScarf/scarfBlue"/>	
@@ -2908,6 +2929,44 @@
 			<if test="legCount==4">
 				<show part="armorLegs/taurarmorbottom"/>	
 			</if>
+		</if>
+		
+				<!--Goblinmancer set -->
+		<if test="goblinTechnomancerClothe">
+			<show part="clothe/goblinTechnomancerClothe"/>
+			<if test="(legCount!=4) and (showLegClothing)">
+				<show part="clothe/goblinTechnomancerClotheArms"/>
+			</if>
+			<if test="showLegClothing">					
+				<show part="clothe/goblinTechnomancerClotheBoots"/>
+			</if>
+		</if>
+		<if test="goblinTechnomancerBra">
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="bra/goblinTechnomancerBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra/goblinTechnomancerBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra/goblinTechnomancerBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra/goblinTechnomancerBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra/goblinTechnomancerBraLarge"/>
+					</case>
+					<default>
+						<show part="bra/goblinTechnomancerBraLarge"/>
+					</default>
+				</switch>	
+			</if>
+		</if>
+		<if test="goblinTechnomancerPanty">
+			<show part="panty/goblinTechnomancerPanty"/>	
 		</if>
 		
     </logic>

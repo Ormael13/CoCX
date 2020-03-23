@@ -2,6 +2,10 @@ package classes.Items.Armors
 {
 	import classes.Items.Armor;
 	import classes.Scenes.NPCs.CelessScene;
+	import classes.Player;
+	import classes.PerkLib;
+	import classes.Player;
+	import classes.StatusEffects;
 	/**
 	 * ...
 	 * @author 
