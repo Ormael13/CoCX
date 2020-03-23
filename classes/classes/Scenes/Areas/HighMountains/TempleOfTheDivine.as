@@ -2065,6 +2065,12 @@ use namespace CoC;
 				player.lust = player.maxLust();
 			}
 			if (flags[kFLAGS.HUNGER_ENABLED] == 0) flags[kFLAGS.HUNGER_ENABLED] = 0.5;
+			if (player.hasPerk(PerkLib.BimboBody)) player.removePerk(PerkLib.BimboBody);
+			if (player.hasPerk(PerkLib.BimboBrains)) player.removePerk(PerkLib.BimboBrains);
+			if (player.hasPerk(PerkLib.BroBody)) player.removePerk(PerkLib.BroBody);
+			if (player.hasPerk(PerkLib.BroBrains)) player.removePerk(PerkLib.BroBrains);
+			if (player.hasPerk(PerkLib.FutaForm)) player.removePerk(PerkLib.FutaForm);
+			if (player.hasPerk(PerkLib.FutaFaculties)) player.removePerk(PerkLib.FutaFaculties);
 			player.createPerk(PerkLib.TransformationImmunity, 0, 0, 0, 0);
 			player.destroyItems(useables.SOULGEM, 1);
 			outputText("After the weird feelings subside, you pick up what is your actual pedestal and move it to your camp.\n\n");
