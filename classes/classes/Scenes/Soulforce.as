@@ -2549,7 +2549,7 @@ public function FightHellfireSnail():void {
 		public function DELvLAurora():void {
 			outputText("\n\n<b>Aurora get weaker! (cheat stop working when she reach lvl 1)</b>");
 			if (flags[kFLAGS.AURORA_LVL] > 1) flags[kFLAGS.AURORA_LVL]--;
-			EnemiesMenu(2);;
+			EnemiesMenu(2);
 		}
 		public function LvLUPEva():void {
 			outputText("\n\n<b>Evangeline get stronger! (cheat stop working when she reach max possible lvl for now (atm it's lvl 42))</b>");
@@ -3657,4 +3657,4 @@ public function FightHellfireSnail():void {
 			}
 		}
 	}
-}
+}
