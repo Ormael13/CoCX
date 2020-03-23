@@ -14816,7 +14816,7 @@ public final class Mutations extends MutationsHelper
 				}
 
 				//Arms
-				if (changes < changeLimit && rand(4) == 0 && player.arms.type != Arms.HUMAN && player.arms.type != Arms.HUMAN) {
+				if (changes < changeLimit && rand(4) == 0 && player.arms.type != Arms.HUMAN && player.arms.type != Arms.MELKIE) {
 					humanizeArms();
 				}
                 if (changes < changeLimit && rand(4) == 0 && player.arms.type == Arms.HUMAN && player.arms.type != Arms.MELKIE && player.hasPartialCoat(Skin.FUR) && player.lowerBody == LowerBody.MELKIE) {
