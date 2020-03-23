@@ -8599,6 +8599,11 @@ public final class Mutations extends MutationsHelper
 		{
 			player.slimeFeed();
 			clearOutput();
+			if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) {
+				outputText("\n\n<b>You won't get anything from drinking this... aside getting drunk.</b>");
+				if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
+				return;
+			}
 			//no drink for bimbos!
 			if (player.findPerk(PerkLib.BimboBody) >= 0) {
 				outputText("The stuff hits you like a giant cube, nearly staggering you as it begins to settle.");

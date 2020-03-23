@@ -1923,7 +1923,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				else player.addStatusValue(StatusEffects.KonstantinWeaponSharpening, 1, -1);
 			}
 			if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) player.removeStatusEffect(StatusEffects.AlchemicalThunderBuff);
-			if (player.findPerk(PerkLib.FutaForm) >= 0) { //Futa checks
+			if (player.hasPerk(PerkLib.FutaForm)) { //Futa checks
 				if (!player.hasCock()) { //(Dick regrowth)
 					player.createCock();
 					player.cocks[0].cockLength = 10;
@@ -1967,7 +1967,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			if (player.findPerk(PerkLib.BimboBody) >= 0 || player.hasStatusEffect(StatusEffects.BimboChampagne)) { //Bimbo checks
+			if (player.hasPerk(PerkLib.BimboBody) || player.hasStatusEffect(StatusEffects.BimboChampagne)) { //Bimbo checks
 				if (player.breastRows[0].breastRating < 5) { //Tits!
 					player.breastRows[0].breastRating = 5;
 					if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.hasStatusEffect(StatusEffects.BimboChampagne))
@@ -2000,7 +2000,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			if (player.findPerk(PerkLib.BroBody) >= 0) { //Bro checks
+			if (player.hasPerk(PerkLib.BroBody)) { //Bro checks
 				player.removeStatusEffect(StatusEffects.Feeder);
 				player.removePerk(PerkLib.Feeder);
 				if (!player.hasCock()) { //(Dick regrowth)

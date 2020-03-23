@@ -330,6 +330,16 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
+		public function requireLungsMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxLungsMutations() > 0;
+				},
+				text: "Free Lungs Mutation Slot",
+				type: "lungsmutation"
+			});
+			return this;
+		}
 		public function requireHungerEnabled():PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {

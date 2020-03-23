@@ -1342,6 +1342,7 @@ import classes.Items.*;
 		
 		private function customSora6():void {
 			//Character Creation	Female,virgin	A human with raiju bloodline	Sora
+			player.createPerk(PerkLib.BloodlineRaiju,0,0,0,0);
 			if(player.hasVagina()) player.vaginas[0].virgin = true;
 			player.inte = 30;
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
@@ -1349,6 +1350,7 @@ import classes.Items.*;
 		
 		private function customSora7():void {
 			//Character Creation	Female,virgin	A human with oni bloodline	Sora(tone at 100, fighter past story + second for fight too? oni beard necklace?)keeping titanic strength perk at any race score? start with this event perk?
+			player.createPerk(PerkLib.BloodlineOni,0,0,0,0);
 			if(player.hasVagina()) player.vaginas[0].virgin = true;
 			player.inte = 30;
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");

@@ -419,9 +419,9 @@ package classes.GlobalFlags
 		public static const GENERAL_SCHOLAR_2:int					= 372;
 		public static const GENERAL_SCHOLAR_3:int					= 373;
 		public static const GENERAL_ANT_KIDS_AND_PHYLLA:int			= 374;
-		public static const UNKNOWN_ACHIEVEMENT_375:int				= 375;
-		public static const UNKNOWN_ACHIEVEMENT_376:int				= 376;
-		public static const UNKNOWN_ACHIEVEMENT_377:int				= 377;
+		public static const REALISTIC_CHAMPION_NEEDS_FOOD_2:int		= 375;
+		public static const REALISTIC_CHAMPION_NEEDS_FOOD_3:int		= 376;
+		public static const REALISTIC_CHAMPION_NEEDS_FOOD_4:int		= 377;
 		public static const UNKNOWN_ACHIEVEMENT_378:int				= 378;
 		public static const UNKNOWN_ACHIEVEMENT_379:int				= 379;
 		public static const UNKNOWN_ACHIEVEMENT_380:int				= 380;
