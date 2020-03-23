@@ -14713,7 +14713,7 @@ public final class Mutations extends MutationsHelper
 					}
 				}
 				//Remove weird hairs
-				if (changes < changeLimit && rand(4) == 0 && player.hairType == Hair.NORMAL) {
+				if (changes < changeLimit && rand(4) == 0 && player.hairType != Hair.NORMAL) {
 					humanizeHairs();
 				}
 				//Change hair color
@@ -14778,12 +14778,13 @@ public final class Mutations extends MutationsHelper
 					changes++;
 				}
 
-				if (player.hasFur() && !player.hasPartialCoat(Skin.FUR)) {
-					//set new skinTone
-					outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] fur.  Panicked, you look down and realize that your chitin is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. To your surprise you are back to being furless just like your old human self.");
-					player.skin.growCoat(Skin.COVERAGE_NONE);
-					changes++;
-				}
+                //Reset fur if fully coated
+                if (player.hasFullCoatOfType(Skin.FUR) && !player.hasPartialCoat(Skin.FUR)) {
+
+                    outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] fur.  Panicked, you look down and realize that your chitin is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. To your surprise you are back to being furless just like your old human self.");
+                    player.skin.growCoat(Skin.COVERAGE_NONE);
+                    changes++;
+                }
 
 				//Partial fur
                 var color:String;
@@ -14818,13 +14819,13 @@ public final class Mutations extends MutationsHelper
 				if (changes < changeLimit && rand(4) == 0 && player.arms.type != Arms.HUMAN && player.arms.type != Arms.HUMAN) {
 					humanizeArms();
 				}
-				if (changes < changeLimit && rand(4) == 0 && player.arms.type == Arms.HUMAN && player.arms.type != Arms.MELKIE &&  player.hasPartialCoat(Skin.FUR) && player.lowerBody != LowerBody.MELKIE) {
-					outputText("\n\nSimilar to when your legs merged in your tail your forearm begin to change, turning into a pair of glove like seal arms armed with claws. " +
-							"What's more, you have a pair of fins on your elbow similar to a Melkie." +
-							"<b>Well it'll take some time to get used to your new seal forearms with fins.</b>");
-					setArmType(Arms.MELKIE);
-					changes++;
-				}
+                if (changes < changeLimit && rand(4) == 0 && player.arms.type == Arms.HUMAN && player.arms.type != Arms.MELKIE && player.hasPartialCoat(Skin.FUR) && player.lowerBody == LowerBody.MELKIE) {
+                    outputText("\n\nSimilar to when your legs merged in your tail your forearm begin to change, turning into a pair of glove like seal arms armed with claws. " +
+                            "What's more, you have a pair of fins on your elbow similar to a Melkie." +
+                            "<b>Well it'll take some time to get used to your new seal forearms with fins.</b>");
+                    setArmType(Arms.MELKIE);
+                    changes++;
+                }
 				if (changes < changeLimit && rand(4) == 0) outputText(player.modFem(100, 3));
 				player.refillHunger(20);
 				flags[kFLAGS.TIMES_TRANSFORMED] += changes;
