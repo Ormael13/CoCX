@@ -20,6 +20,5 @@ package classes.Items.Armors
 			outputText("You aren't tall enough to wear this kimono!  ");
 			return false;
 		}
-		
 	}
 }

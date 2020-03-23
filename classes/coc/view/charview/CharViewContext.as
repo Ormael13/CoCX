@@ -21,6 +21,9 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
+import classes.CoC;
+import classes.Items.ArmorLib;
+import classes.Player;
 import classes.StatusEffects;
 import classes.CockTypesEnum;
 import classes.lists.BreastCup;
@@ -32,10 +35,17 @@ import coc.xlogic.ExecContext;
 public class CharViewContext extends ExecContext {
 	private var charview:CharView;
 	public function CharViewContext(charview:CharView, character:*) {
+		var player:Player = character as Player;
+		var game:CoC = CoC.instance;
 		super([
 			{}, // local variables
 			character,
 			{
+				showClothing: [LowerBody.LION,LowerBody.GARGOYLE,LowerBody.GARGOYLE_2].indexOf(player.lowerBody) <= 0,
+				showArmClothing: [Arms.LION,Arms.DISPLACER,Arms.GARGOYLE,Arms.GARGOYLE_2,Arms.YETI,Arms.HINEZUMI].indexOf(player.arms.type) <= 0,
+				showLegClothing: [LowerBody.YETI,LowerBody.HOOFED,LowerBody.HARPY,LowerBody.GOO,LowerBody.NAGA,LowerBody.DRIDER,LowerBody.HINEZUMI].indexOf(player.lowerBody) <= 0,
+				PlayerHasViewableOutfit: player.isWearingArmor(),
+
 				Antennae     : Antennae,
 				Arms         : Arms,
 				Beard        : Beard,
@@ -61,7 +71,45 @@ public class CharViewContext extends ExecContext {
 				Tongue       : Tongue,
 				UnderBody    : UnderBody,
 				Wings        : Wings,
-				StatusEffects: StatusEffects
+				StatusEffects: StatusEffects,
+
+				// Viewable Clothing lists
+				yukiDress: player.armor == game.armors.BLIZZ_K,
+				sakuraPetalKimono: player.armor == game.armors.SPKIMO,
+				whiteKimono: player.armor == game.armors.WKIMONO,
+				blueKimono: player.armor == game.armors.BKIMONO,
+				redKimono: player.armor == game.armors.RKIMONO,
+				purpleKimono: player.armor == game.armors.PKIMONO,
+				blackKimono: player.armor == game.armors.BLKIMONO,
+				centaurBlackguardArmor: player.armor == game.armors.CTPALAD,
+				centaurPaladinArmor: player.armor == game.armors.CTPALAD,
+				goblinTechnomancerClothe: player.armor == game.armors.GTECHC_,
+
+				//viewable bra list
+				goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,
+
+				//viewable panty list
+				goblinTechnomancerPanty: player.lowerGarment == game.undergarments.T_PANTY,
+
+				// Viewable neck Accessory lists
+				blueScarf: player.necklace == game.necklaces.BWSCARF,
+				greenScarf: player.necklace == game.necklaces.GWSCARF,
+				purpleScarf: player.necklace == game.necklaces.PWSCARF,
+				yellowScarf: player.necklace == game.necklaces.YWSCARF,
+
+				// Viewable head Accessory lists
+				foxHairpin: player.headJewelry == game.headjewelries.FOXHAIR,
+				goldenNagaHairpin: player.headJewelry == game.headjewelries.GNHAIR,
+				machinistGoggles: player.headJewelry == game.headjewelries.MACHGOG || player.headJewelry == game.headjewelries.SATGOG || player.headJewelry == game.headjewelries.SCANGOG,
+				//sphinxRegalia: player.headJewelry == game.headjewelries.SphinxAS
+				yukiHairpin: player.headJewelry == game.headjewelries.SNOWFH,
+
+				// Viewable amulet Accessory lists
+				GoldStatAmulet: player.necklace == game.necklaces.NECKINT || player.necklace == game.necklaces.NECKLIB || player.necklace == game.necklaces.NECKSEN ||
+						player.necklace == game.necklaces.NECKSPE || player.necklace == game.necklaces.NECKSTR || player.necklace == game.necklaces.NECKTOU ||
+						player.necklace == game.necklaces.NECKWIS || player.necklace == game.necklaces.FIRENEC || player.necklace == game.necklaces.ICENECK ||
+						player.necklace == game.necklaces.LIGHNEC || player.necklace == game.necklaces.DARKNEC || player.necklace == game.necklaces.POISNEC ||
+						player.necklace == game.necklaces.LUSTNEC
 			}
 		]);
 		this.charview = charview;
