@@ -7632,6 +7632,20 @@ use namespace CoC;
 				fattissueMutations++;
 			return fattissueMutations;
 		}
+		public function maxLungsMutations():Number {
+			var lungsMutations:Number = 1;
+			if (findPerk(PerkLib.DraconicLungs) >= 0)
+				lungsMutations--;
+			if (findPerk(PerkLib.CaveWyrmLungs) >= 0)
+				lungsMutations--;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
+				lungsMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
+				lungsMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
+				lungsMutations++;
+			return lungsMutations;
+		}
 
 		public function lactationQ():Number
 		{

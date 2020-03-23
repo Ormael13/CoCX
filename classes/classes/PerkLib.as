@@ -200,9 +200,9 @@ public class PerkLib
 		public static const PastLifeReligious:PerkType = mk("Past Life: Religious", "Past Life: Religious",
 				"Replaces masturbate with meditate when corruption less than or equal to 66. Reduces minimum libido slightly.", null, true);
 		public static const HistoryScholar:PerkType = mk("History: Scholar", "History: Scholar",
-				"Time spent focusing your mind makes spellcasting use 20% less mana.");
+				"Time spent focusing your mind makes your max mana increase by 10%.");
 		public static const PastLifeScholar:PerkType = mk("Past Life: Scholar", "Past Life: Scholar",
-				"Time spent focusing your mind makes spellcasting use 20% less mana.", null, true);
+				"Time spent focusing your mind makes your max mana increase by 10%.", null, true);
 		public static const HistoryScout:PerkType = mk("History: Scout", "History: Scout",
 				"A past full of archery training increases physical range damage dealt by 10% and acc by 20%.");
 		public static const PastLifeScout:PerkType = mk("Past Life: Scout", "Past Life: Scout",
@@ -5256,7 +5256,7 @@ public class PerkLib
             CatlikeNimbleness.requirePerk(Flexibility).requireCustomFunction(function (player:Player):Boolean {
                 return player.catScore() >= 4 || player.nekomataScore() >= 4 || player.displacerbeastScore() >= 4 || player.hellcatScore() >= 4 || player.cheshireScore() >= 4;
             }, "Any cat race");
-            DraconicLungs.requirePerk(DragonFireBreath)
+            DraconicLungs.requireLungsMutationSlot().requirePerk(DragonFireBreath)
                 .requirePerk(DragonIceBreath)
                 .requirePerk(DragonLightningBreath)
                 .requirePerk(DragonDarknessBreath).requireCustomFunction(function (player:Player):Boolean {
