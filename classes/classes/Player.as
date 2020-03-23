@@ -1917,6 +1917,15 @@ use namespace CoC;
 			if (statusEffectv1(StatusEffects.OniRampage) > 0) {
 				mult -= 20;
 			}
+			if (hasPerk(PerkLib.MelkieLung)) {
+				mult -= 10;
+			}
+			if (hasPerk(PerkLib.MelkieLungEvolved)) {
+				mult -= 10;
+			}
+			if (hasPerk(PerkLib.MelkieLungFinalForm)) {
+				mult -= 10;
+			}
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
@@ -6320,6 +6329,60 @@ use namespace CoC;
 			yukiOnnaCounter = finalRacialScore(yukiOnnaCounter, Race.YUKIONNA);
 			End("Player","racialScore");
 			return yukiOnnaCounter;
+		}
+
+		//Melkie score
+		public function melkieScore():Number {
+			Begin("Player","racialScore","melkie");
+			var melkieCounter:Number = 0;
+			if (skinTone == "light" || skinTone == "fair" || skinTone == "pale")
+				melkieCounter++;
+			if (coatColor == "grey" || coatColor == "silver" || coatColor == "white" || coatColor == "glacial white" || coatColor == "light grey")
+				melkieCounter++;
+			if (hairType == Hair.NORMAL)
+				melkieCounter++;
+			if (hairColor == "blonde" || hairColor == "platinum blonde")
+				melkieCounter++;
+			if (eyes.type == Eyes.HUMAN)
+				melkieCounter++;
+			if (eyes.colour == "blue")
+				melkieCounter++;
+			if (faceType == Face.ANIMAL_TOOTHS)
+				melkieCounter++;
+			if (ears.type == Ears.MELKIE)
+				melkieCounter++;
+			if (tongue.type == Tongue.MELKIE)
+				melkieCounter++;
+			if (lowerBody == LowerBody.MELKIE)
+				melkieCounter += 3;
+			if (arms.type == Arms.MELKIE)
+				melkieCounter++;
+			if (femininity > 80)
+				melkieCounter++;
+			if (hasVagina())
+				melkieCounter++;
+			if (hasPartialCoat(Skin.FUR))
+				melkieCounter++;
+			if (biggestTitSize() > 3)
+				melkieCounter++;
+			if (tallness >= 73)
+				melkieCounter++;
+			if (findPerk(PerkLib.MelkieLung) >= 0)
+				melkieCounter++;
+			if (findPerk(PerkLib.MelkieLungEvolved) >= 0)
+				melkieCounter++;
+			if (findPerk(PerkLib.MelkieLungFinalForm) >= 0)
+				melkieCounter++;
+			if (findPerk(PerkLib.MelkieLung) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
+				melkieCounter++;
+			if (findPerk(PerkLib.MelkieLungEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
+				melkieCounter++;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				melkieCounter += 50;
+			if (isGargoyle()) melkieCounter = 0;
+			melkieCounter = finalRacialScore(melkieCounter, Race.MELKIE);
+			End("Player","racialScore");
+			return melkieCounter;
 		}
 
 		//Centaur score

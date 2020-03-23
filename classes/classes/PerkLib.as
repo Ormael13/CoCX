@@ -1928,6 +1928,17 @@ public class PerkLib
 		public static const Medicine:PerkType = mk("Medicine", "Medicine",
 				"Grants 15% chance per round of cleansing poisons/drugs from your body. Increases HP restoration on rest.",
 				"You choose the 'Medicine' perk, giving you a chance to remove debilitating poisons automatically! Also, increases HP restoration on rest.");
+		public static const MelkieLung:PerkType = mk("Melkie Lung", "Melkie lung",
+				"Increase damage reduction against spells by 10% and increase the power of compelling aria by 25%, Compelling Aria is kept at all time.",
+				"You choose the 'Melkie Lung, Greater' perk, gaining increased magic resistances and the power to sing regardless of being a Melkie.");
+		public static const MelkieLungEvolved:PerkType = mk("Melkie Lung, Evolved", "Melkie lung, Evolved",
+				"Increase damage reduction against spells by 10% and increase the power of compelling aria by 25%. Compelling Aria now has an Intelligence scaling.",
+				"You choose the 'Melkie Lung, Evolved' perk, gaining increased magic resistances and improving the power of your song based on your inteligence.");
+		public static const MelkieLungFinalForm:PerkType = mk("Melkie Lung, Final Form", "Melkie lung, Final Form",
+				"Increase damage reduction against spells by 10% and increase the power of compelling aria by 25%. Compelling Aria intelligence scaling is doubled.",
+				"You choose the 'Melkie Lung, Final Form' perk, gaining increased magic resistances and further improving the power of your song.");
+		public static const MelkieSong:PerkType = mk("Melkie Song", "Melkie Song",
+				"Your voice is supernaturaly enhanced and may be used during battle to arouse foes.");
 		public static const Metamorph:MetamorphPerk = new MetamorphPerk();
 		public static const MetamorphEx:PerkType = mk("Metamorph (Ex)", "Metamorph (Ex)",
 				"Mold your own body even further than before using genetic memory and soulforce.",
@@ -2427,6 +2438,8 @@ public class PerkLib
 		public static const ShitYouTouchedSasha:PerkType = mk("SHIT YOU TOUCHED SASHA!!!", "SHIT YOU TOUCHED SASHA!!!",
 				"DIE!!! (You're fucked... not even this final +10% ranged damage buff will save your sorry ass...)",
 				"You choose the 'SHIT YOU TOUCHED SASHA!!!' perk, gaining +10% range phys dmg.");
+		public static const HarpySong:PerkType = mk("Harpy Song", "Harpy Song",
+				"Your voice is supernaturaly enhanced and may be used during battle to arouse foes.");
 		public static const SkippingWork:PerkType = mk("Skipping Work", "Skipping Work",
 				"Sample Text Here/+20% fatigue recovery rate",
 				"You choose the 'Skipping Work' perk, gaining +20% fatigue recovery rate.");
@@ -5314,6 +5327,9 @@ public class PerkLib
             MantislikeAgility.requireMusclesMutationSlot().requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
                 return player.mantisScore() >= 5;
             }, "Mantis race");
+			MelkieLung.requireCustomFunction(function (player:Player):Boolean {
+				return player.melkieScore() >= 8;
+			}, "Melkie race");
             MinotaurTesticles.requireCustomFunction(function (player:Player):Boolean {
                 return player.hasCock();
 				}, "is Male")
@@ -5629,6 +5645,9 @@ public class PerkLib
             MantislikeAgilityEvolved.requireLevel(12).requirePerk(MantislikeAgility).requireCustomFunction(function (player:Player):Boolean {
                 return player.mantisScore() >= 10
             }, "Mantis race");
+			MelkieLungEvolved.requirePerk(MelkieLung).requireCustomFunction(function (player:Player):Boolean {
+				return player.melkieScore() >= 9;
+			}, "Melkie race");
             NaturalPunchingBagEvolved.requireLevel(12).requirePerk(NaturalPunchingBag).requireCustomFunction(function (player:Player):Boolean {
                 return player.goblinScore() >= 8
             }, "Goblin race");
@@ -6083,6 +6102,9 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
 					return player.cowScore() >= 12;
             }, "Lacta Bovine race");
+			MelkieLungFinalForm.requirePerk(MelkieLungEvolved).requireCustomFunction(function (player:Player):Boolean {
+				return player.melkieScore() >= 10;
+			}, "Melkie race");
             MinotaurTesticlesFinalForm.requireLevel(36)
 				.requirePerk(MinotaurTesticlesEvolved)
 				.requireCustomFunction(function (player:Player):Boolean {
