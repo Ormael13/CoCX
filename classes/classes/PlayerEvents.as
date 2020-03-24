@@ -1621,6 +1621,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
+			if (player.lowerBody == LowerBody.MELKIE) {
+				if (player.tailType > Tail.NONE) {
+					outputText("\nYour tail squirms, wriggling against your larger melkie tail as the fur part around it, absorbing it.  <b>Your form is completely furry and smooth from the waist down.</b>\n");
+					player.tailType = Tail.NONE;
+					needNext = true;
+				}
+			}
 			if (player.findPerk(PerkLib.WetPussy) >= 0 && player.hasVagina()) {
 				if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_WET) {
 					outputText("\n<b>Your " + player.vaginaDescript(0) + " returns to its normal, wet state.</b>\n");

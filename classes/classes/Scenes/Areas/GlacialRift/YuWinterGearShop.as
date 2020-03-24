@@ -90,7 +90,7 @@ import classes.internals.Utils;
 			if (item == 8) yetiBuy(weapons.NORTHIP);
 			if (item == 10) yetiBuy(armors.BLIZZ_K);
 			if (item == 11) yetiBuy(headjewelries.SNOWFH);
-			if (item == 11) yetiBuy(consumables.SKELP__);
+			if (item == 12) yetiBuy(consumables.SKELP__);
 		}
 		public function yetiBuy(itype:ItemType):void {
 			clearOutput();
