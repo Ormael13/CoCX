@@ -5049,7 +5049,7 @@ use namespace CoC;
 				goblinCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && goblinCounter >= 8)
 				goblinCounter += 1;
-			if (findPerk(PerkLib.GoblinsDescendant) >= 0 || findPerk(PerkLib.BloodlineKitsune) >= 0)
+			if (findPerk(PerkLib.GoblinsDescendant) >= 0 || findPerk(PerkLib.BloodlineGoblin) >= 0)
 				goblinCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				goblinCounter += 50;
@@ -6379,6 +6379,12 @@ use namespace CoC;
 				melkieCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				melkieCounter += 50;
+			if (findPerk(PerkLib.MelkiesDescendant) >= 0 || findPerk(PerkLib.BloodlineMelkie) >= 0)
+				melkieCounter += 2;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && melkieCounter >= 4)
+				melkieCounter += 1;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && melkieCounter >= 8)
+				melkieCounter += 1;
 			if (isGargoyle()) melkieCounter = 0;
 			melkieCounter = finalRacialScore(melkieCounter, Race.MELKIE);
 			End("Player","racialScore");
