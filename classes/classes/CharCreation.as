@@ -2304,6 +2304,12 @@ import coc.view.MainView;
 				player.createPerk(PerkLib.BloodlineOrc,0,0,0,1);
 				bloodlineACQ2();
 			}
+			else if (player.findPerk(PerkLib.MelkiesDescendant) >= 0) {
+				player.removePerk(PerkLib.MelkiesDescendant);
+				player.createPerk(PerkLib.BloodlineMelkie,0,0,0,1);
+				bloodlineACQ2();
+			}
+
 			else {
 				clearOutput();
 				outputText("You not have any Descendant perk to change into Bloodline perk.");

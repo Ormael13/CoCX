@@ -494,7 +494,7 @@
         <cell rect="935,325,80,104" name="clothe/goblinTechnomancerClotheArms" dx="54" dy="72"/>
         <cell rect="751,158,40,54" name="clothe/whiteKimonoBottom" dx="75" dy="121"/>
         <cell rect="919,158,40,54" name="clothe/blackKimonoBottom" dx="75" dy="121"/>
-        <cell rect="1099,325,80,104" name="clothe/goblinTechnomancerClotheBoots" dx="72" dy="67"/>
+        <cell rect="1099,325,80,104" name="clothe/goblinTechnomancerClotheBoots" dx="54" dy="72"/>
         <cell rect="776,12,45,25" name="armorNeck/fullplatetop" dx="70" dy="63"/>
         <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="72" dy="75"/>
         <cell rect="882,12,125,75" name="armorLegs/taurarmorbottom" dx="63" dy="97"/>
@@ -745,7 +745,7 @@
         <cell rect="11,410,49,29" name="bra/goblinTechnomancerBraSmall" dx="69" dy="68"/>
         <cell rect="11,440,49,29" name="bra/goblinTechnomancerBraMedium" dx="69" dy="68"/>
         <cell rect="11,410,49,29" name="bra/goblinTechnomancerBraLarge" dx="69" dy="68"/>
-        <cell rect="11,500,49,29" name="panty/goblinTechnomancerPanty" dx="70" dy="99"/>
+        <cell rect="11,500,49,29" name="panty/goblinTechnomancerPanty" dx="69" dy="99"/>
     </spritemap>
     <spritemap file="tails.png">
         <cell rect="1,71,168,139" name="tail/manticore" dx="10" dy="40"/>
@@ -843,6 +843,7 @@
         <cell rect="1,630,168,139" name="wings/vampire_bg" dx="10" dy="28"/>
         <cell rect="170,630,168,139" name="overclothe/vampire" dx="10" dy="28"/>
     </spritemap>
+	
 	<!-- LAYER AREA -->
     <layers>	
 		<layer name="fullbody"/>

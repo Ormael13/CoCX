@@ -10,6 +10,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.*;
 import classes.Items.*;
@@ -1112,10 +1113,35 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.FreezingBreathYeti, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.yetiScore() < 6 && player.yukiOnnaScore() < 14 && player.findPerk(PerkLib.ColdAffinity) >= 0) {
-				outputText("\nYou suddenly feel a chill in the air. You guess you somehow no longer resist the cold.\n\n<b>(Lost Perks: Cold Affinity and Freezing Breath Yeti)</b>\n");
+			if (player.melkieScore() >= 8 && player.findPerk(PerkLib.ColdAffinity) < 0) {
+				outputText("\nYou suddenly no longer feel the cold so you guess you finally got acclimated to the icy winds of the glacial rift. You feel at one with the cold. So well that you actually developed icy power of your own.\n\n(<b>Gained Perks: Cold Affinity</b>)\n");
+				player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
+				needNext = true;
+			}
+			else if (player.yetiScore() < 6 && player.yukiOnnaScore() < 14 && player.melkieScore() < 8 && player.findPerk(PerkLib.ColdAffinity) >= 0) {
+				outputText("\nYou suddenly feel a chill in the air. You guess you somehow no longer resist the cold.\n\n<b>(Lost Perks: Cold Affinity</b>");
 				player.removePerk(PerkLib.ColdAffinity);
+				if (player.yetiScore() < 6){
+					outputText("<b>and and Freezing Breath Yeti</b>");
+				}
+				outputText("<b>)</b>\n");
 				player.removePerk(PerkLib.FreezingBreathYeti);
+				needNext = true;
+			}
+			if (player.sirenScore() >=  10 || player.harpyScore() >=  8 && !player.hasPerk(PerkLib.HarpySong)) {
+				outputText("\n Your voice sound like magicaly entrancing music to your ears now, it would seem you have gained the infamous magicaly compeling voices common to harpies. <b>Gained Perks: Harpy Song</b>)\n");
+				player.createPerk(PerkLib.HarpySong, 0, 0, 0, 0);
+				needNext = true;
+			}
+			//Compelling Aria
+			if (player.tongue.type != Tongue.MELKIE && player.hasPerk(PerkLib.MelkieSong) && !player.hasPerk(PerkLib.MelkieLung)) {
+				outputText("\n Your voice no longuer carries the magical power it used to and thus you are no longuer able to use your compelling aria. <b>Lost Perks: Melkie Song</b>)\n");
+				player.removePerk(PerkLib.MelkieSong);
+				needNext = true;
+			}
+			if (player.sirenScore() < 10 && player.harpyScore() < 8 && player.hasPerk(PerkLib.HarpySong) && !player.hasPerk(PerkLib.MelkieLung)) {
+				outputText("\n Your voice no longuer carries the magical power it used to and thus you are no longuer able to use your compelling aria. <b>Lost Perks: Harpy Song</b>)\n");
+				player.removePerk(PerkLib.HarpySong);
 				needNext = true;
 			}
 			//Icy flesh
