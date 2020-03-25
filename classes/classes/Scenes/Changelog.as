@@ -107,8 +107,8 @@ package classes.Scenes
 			outputText("-New Special names: Grigori (dragon), Teekna (goblin), Veseshe (elf). Each of them will start with matching bloodline perk to match their ancestor race.\n");
 			outputText("-New possible to pick races when choosing non-human ancestor of PC: Minotaur, Oni, Orc\n");
 			outputText("-New shop in HXD that is run by goblin golemancer. She's selling various golemancer oriented items or supplies.\n");
+			outputText("-10 new achievments. (2 shadow ones)\n");
 			outputText("-7 new codex entries added to game: Alraune, Cheshire Cat, Chimera, Devil, Displacer Beast, Hellcat, Hydra\n");
-			outputText("-7 new achievments. (2 shadow ones)\n");
 			outputText("-Legendary Golem Maker was renamed to Epic Golem Maker (2nd Circle) and Mythical Golem Maker was renamed to Epic Golem Maker (3rd Circle).\n");
 			outputText("-Titan Grip perk was renamed into Gigant's Grip.\n");
 			outputText("-Dwarf Rage was renamed to Warrior's Rage.\n");
@@ -153,6 +153,9 @@ package classes.Scenes
 			outputText("-New tier 2 misc lvl-up perk: Apex. Req. Racial Paragon perk. Effect: Add 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Racial Paragon.\n");
 			outputText("-New tier 3 misc lvl-up perk: Alpha and Omega. Req. Apex perk. Effect: Add 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Apex.\n");
 			outputText("-Liadri added option to pick race enhanced by Racial paragon perk (similar menu as with picking perks).\n");
+			outputText("-Becoming Gargoyle or Jiangshi will properly now cut off PC from accessing Metamorph menu (even if PC had it openend before).\n");
+			outputText("-Drinking Bimbo Liquer or Bro Brew will not trigger gaining respecitve body & mind perks on PC. Could only trigger effect of drinking alcohol for oni specials. Similary becoming gargoyle/jiangshi will remove any bimbo/bro/futa perks.\n");
+			outputText("-Liadri updates for character viewer including clothes for specific items.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -268,9 +271,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

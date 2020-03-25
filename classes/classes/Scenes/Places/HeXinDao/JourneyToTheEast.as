@@ -991,6 +991,12 @@ package classes.Scenes.Places.HeXinDao
 				flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] = player.upperGarment.id;
 				player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR);
 			}
+			if (player.hasPerk(PerkLib.BimboBody)) player.removePerk(PerkLib.BimboBody);
+			if (player.hasPerk(PerkLib.BimboBrains)) player.removePerk(PerkLib.BimboBrains);
+			if (player.hasPerk(PerkLib.BroBody)) player.removePerk(PerkLib.BroBody);
+			if (player.hasPerk(PerkLib.BroBrains)) player.removePerk(PerkLib.BroBrains);
+			if (player.hasPerk(PerkLib.FutaForm)) player.removePerk(PerkLib.FutaForm);
+			if (player.hasPerk(PerkLib.FutaFaculties)) player.removePerk(PerkLib.FutaFaculties);
 			awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
 			doNext(camp.returnToCampUseFourHours);
 		}

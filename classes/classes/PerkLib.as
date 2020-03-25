@@ -200,9 +200,9 @@ public class PerkLib
 		public static const PastLifeReligious:PerkType = mk("Past Life: Religious", "Past Life: Religious",
 				"Replaces masturbate with meditate when corruption less than or equal to 66. Reduces minimum libido slightly.", null, true);
 		public static const HistoryScholar:PerkType = mk("History: Scholar", "History: Scholar",
-				"Time spent focusing your mind makes spellcasting use 20% less mana.");
+				"Time spent focusing your mind makes your max mana increase by 10%.");
 		public static const PastLifeScholar:PerkType = mk("Past Life: Scholar", "Past Life: Scholar",
-				"Time spent focusing your mind makes spellcasting use 20% less mana.", null, true);
+				"Time spent focusing your mind makes your max mana increase by 10%.", null, true);
 		public static const HistoryScout:PerkType = mk("History: Scout", "History: Scout",
 				"A past full of archery training increases physical range damage dealt by 10% and acc by 20%.");
 		public static const PastLifeScout:PerkType = mk("Past Life: Scout", "Past Life: Scout",
@@ -230,10 +230,10 @@ public class PerkLib
 		
 		// Ordinary (levelup) perks
 		public static const Apex:PerkType = mk("Apex", "Apex",
-				"Add up to 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Racial Paragon.",
+				"Add 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Racial Paragon.",
 				"You choose the 'Apex' perk, Further increasing your specialisation into a unique race and increasing racial skill power by 50%.");
 		public static const AlphaAndOmega:PerkType = mk("Alpha and Omega", "Alpha and Omega",
-				"Add up to 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Apex.",
+				"Add 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Apex.",
 				"You choose the 'Alpha and Omega' perk, Further increasing your specialisation into a unique race and increasing racial skill power by an addtionnal 50%.");
 		public static const DevastatingCharge:PerkType = mk("Devastating charge", "Devastating charge",
 				"When using the charge action you have a 20% chance to stun the opponent for a round. Charge is 50% more powerful.",
@@ -2279,7 +2279,7 @@ public class PerkLib
 				"Allow to reload in middle of shooting as long PC have enough fatigue for that without ending turn.",
 				"You choose the 'Lightning Reload' perk, lowering even more time needed to reload with ammo range weapons like pistols.");
 		public static const RacialParagon:PerkType = mk("Racial Paragon", "Racial Paragon",
-				"Add up to 1 to each stat per level and increase racial skill power by 50% but remove all chimerical disposition stat gains and degeneration as well lock you into a single race.",
+				"Add 1 to each stat per level and increase racial skill power by 50% but remove all chimerical disposition stat gains and degeneration as well lock you into a single race.",
 				"You choose the 'Racial Paragon' perk, chosing to specialise into a specific race and increasing racial skill power by 50%.");
 		public static const RagingInferno:PerkType = mk("Raging Inferno", "Raging Inferno",
 				"Cumulative 20% damage increase for every subsequent fire spell without interruption.",
@@ -5256,7 +5256,7 @@ public class PerkLib
             CatlikeNimbleness.requirePerk(Flexibility).requireCustomFunction(function (player:Player):Boolean {
                 return player.catScore() >= 4 || player.nekomataScore() >= 4 || player.displacerbeastScore() >= 4 || player.hellcatScore() >= 4 || player.cheshireScore() >= 4;
             }, "Any cat race");
-            DraconicLungs.requirePerk(DragonFireBreath)
+            DraconicLungs.requireLungsMutationSlot().requirePerk(DragonFireBreath)
                 .requirePerk(DragonIceBreath)
                 .requirePerk(DragonLightningBreath)
                 .requirePerk(DragonDarknessBreath).requireCustomFunction(function (player:Player):Boolean {
@@ -5475,9 +5475,8 @@ public class PerkLib
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 2;
                     }, "Two racial perks");
-			RacialParagon.requireLevel(6).requirePerk(JobBeastWarrior);
-			Apex.requireLevel(12).requirePerk(JobBeastWarrior).requirePerk(RacialParagon);
-			AlphaAndOmega.requireLevel(18).requirePerk(JobBeastWarrior).requirePerk(Apex);
+			RacialParagon.requireLevel(6)
+				.requirePerk(JobBeastWarrior);
             //Speedy Recovery - Regain Fatigue 50% faster.
             SpeedyRecovery.requireLevel(6);
             ResistanceI.requireLevel(6);
@@ -5664,6 +5663,8 @@ public class PerkLib
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 4;
                     }, "Four racial perks");
+			Apex.requireLevel(12)
+					.requirePerk(RacialParagon);
             Survivalist2.requireLevel(12)
                     .requireHungerEnabled()
                     .requirePerk(Survivalist);
@@ -5788,6 +5789,8 @@ public class PerkLib
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 8;
                     }, "Eight racial perks");
+			AlphaAndOmega.requireLevel(18)
+					.requirePerk(Apex);
             JobWarlord.requireAdvancedJobSlot()
 					.requireAnyPerk(Whirlwind, Whipping, WhirlwindFeral)
                     .requireLevel(18);
