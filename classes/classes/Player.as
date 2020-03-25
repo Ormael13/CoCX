@@ -1918,13 +1918,13 @@ use namespace CoC;
 				mult -= 20;
 			}
 			if (hasPerk(PerkLib.MelkieLung)) {
-				mult -= 10;
+				mult -= 5;
 			}
 			if (hasPerk(PerkLib.MelkieLungEvolved)) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.MelkieLungFinalForm)) {
-				mult -= 10;
+				mult -= 15;
 			}
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
@@ -3170,6 +3170,13 @@ use namespace CoC;
 			{
 				race = "Yuki Onna";
 			}
+			if (melkieScore() >= 18) {
+				if (melkieScore() >= 21) race = "elder melkie";
+				else {
+					if (melkieScore() >= 18) race = "melkie";
+					else race = "half melkie";
+				}
+			}
 			if (couatlScore() >= 11)
 			{
 				if (isTaur()) race = "couatl-taur";
@@ -3824,6 +3831,8 @@ use namespace CoC;
 				chimeraCounter++;
 			if (yukiOnnaScore() >= 14)
 				chimeraCounter++;
+			if (melkieScore() >= 18)
+				chimeraCounter++;
 			if (batScore() >= 10)
 				chimeraCounter++;
 			if (vampireScore() >= 10)
@@ -3884,6 +3893,8 @@ use namespace CoC;
 //			if (scyllaScore() >= 7)
 //				grandchimeraCounter++;
 			if (pigScore() >= 15)
+				grandchimeraCounter++;
+			if (melkieScore() >= 21)
 				grandchimeraCounter++;
 			if (gooScore() >= 15)
 				grandchimeraCounter++;
@@ -8290,6 +8301,9 @@ use namespace CoC;
 			if (this.raijuScore() >= 10) minSen += (25 * newGamePlusMod);
 			if (this.hellcatScore() >= 10) minSen += (25 * newGamePlusMod);
 			if (this.firesnailScore() >= 15) minSen += (50 * newGamePlusMod);
+			if (this.melkieScore() >= 8) minSen += (25 * newGamePlusMod);
+			if (this.melkieScore() >= 18) minSen += (25 * newGamePlusMod);
+			if (this.melkieScore() >= 21) minSen += (25 * newGamePlusMod);
 			//Rings
 			if (this.jewelryName == "Ring of Intelligence") minInt += 5;
 			if (this.jewelryName == "Ring of Libido") minLib += 5;
@@ -9956,6 +9970,26 @@ use namespace CoC;
 				maxWisCap2 += (70 * newGamePlusMod);
 				maxLibCap2 += (50 * newGamePlusMod);
 			}
+			if (melkieScore() >= 8) {
+				if (melkieScore() >= 21) {
+					maxSpeCap2 += (110 * newGamePlusMod);
+					maxIntCap2 += (110 * newGamePlusMod);
+					maxLibCap2 += (95 * newGamePlusMod);
+					maxSenCap2 += (75 * newGamePlusMod);
+				}
+				if (melkieScore() >= 18) {
+					maxSpeCap2 += (95 * newGamePlusMod);
+					maxIntCap2 += (95 * newGamePlusMod);
+					maxLibCap2 += (80 * newGamePlusMod);
+					maxSenCap2 += (50 * newGamePlusMod);
+				}
+				else {
+					maxSpeCap2 += (40 * newGamePlusMod);
+					maxIntCap2 += (40 * newGamePlusMod);
+					maxLibCap2 += (35 * newGamePlusMod);
+					maxSenCap2 += (25 * newGamePlusMod);
+				}
+			}
 			if (poltergeistScore() >= 6) {
 				if (poltergeistScore() >= 18) {
 					maxStrCap2 -= (45 * newGamePlusMod);
@@ -11092,4 +11126,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}

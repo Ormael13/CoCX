@@ -157,7 +157,7 @@ package classes.Scenes
 			outputText("-Drinking Bimbo Liquer or Bro Brew will not trigger gaining respecitve body & mind perks on PC. Could only trigger effect of drinking alcohol for oni specials. Similary becoming gargoyle/jiangshi will remove any bimbo/bro/futa perks.\n");
 			outputText("-Liadri updates for character viewer including clothes for specific items.\n");
 			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//MelkieLungEvolved
 			outputText("-\n");
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison

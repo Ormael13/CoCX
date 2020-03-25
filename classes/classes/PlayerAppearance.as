@@ -2888,6 +2888,12 @@ public function RacialScores():void {
 	}
 	else if (player.mantisScore() >= 1 && player.mantisScore() < 6) outputText("\n<font color=\"#008000\">Half Mantis-morph: " + player.mantisScore() + "</font>");
 	else if (player.mantisScore() < 1) outputText("\n<font color=\"#ff0000\">Half Mantis-morph: 0</font>");
+	//Melkie
+	if (player.melkieScore() >= 21) outputText("\n<font color=\"#0000a0\">Elder Melkie: " + player.melkieScore() + " (+" + (110 * (1 + player.newGamePlusMod())) + " max Spe, +" + (110 * (1 + player.newGamePlusMod())) + " max Int, +" + (95 * (1 + player.newGamePlusMod())) + " max Lib, +" + (75 * (1 + player.newGamePlusMod())) + " max Sens, +" + (75 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
+	else if (player.melkieScore() >= 18 && player.melkieScore() < 21) outputText("\n<font color=\"#0000a0\">Melkie: " + player.melkieScore() + " (+" + (95 * (1 + player.newGamePlusMod())) + " max Spe, +" + (95 * (1 + player.newGamePlusMod())) + " max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " max Sens, +" + (50 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
+	else if (player.melkieScore() >= 8 && player.melkieScore() < 18) outputText("\n<font color=\"#0000a0\">Half Melkie: " + player.melkieScore() + " (+" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, +" + (35 * (1 + player.newGamePlusMod())) + " max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Sens, +" + (25 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
+	else if (player.melkieScore() >= 1 && player.melkieScore() < 8) outputText("\n<font color=\"#008000\">Half Melkie: " + player.melkieScore() + "</font>");
+	else if (player.melkieScore() < 1) outputText("\n<font color=\"#ff0000\">Half Melkie: 0</font>");
 	//Minotaur
 	if (player.minotaurScore() >= 9) {
 		outputText("\n<font color=\"#0000a0\">Minotaur: " + player.minotaurScore() + " (+" + (120 * (1 + player.newGamePlusMod())) + " max Str, +" + (45 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Spe, -" + (40 * (1 + player.newGamePlusMod())) + " max Int");
@@ -3127,12 +3133,6 @@ public function RacialScores():void {
 	if (player.yukiOnnaScore() >= 14) outputText("\n<font color=\"#0000a0\">Yuki Onna: " + player.yukiOnnaScore() + " (+" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (140 * (1 + player.newGamePlusMod())) + " max Int, +" + (70 * (1 + player.newGamePlusMod())) + " max Wis, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib"+(player.hasPerk(PerkLib.IcyFlesh) ? ", max Tou fixed at 1":"")+")</font>");
 	else if (player.yukiOnnaScore() >= 1 && player.yukiOnnaScore() < 14) outputText("\n<font color=\"#008000\">Yuki Onna: " + player.yukiOnnaScore() + "</font>");
 	else if (player.yukiOnnaScore() < 1) outputText("\n<font color=\"#ff0000\">Yuki Onna: 0</font>");
-	//Melkie
-	if (player.melkieScore() >= 21) outputText("\n<font color=\"#0000a0\">Elder Melkie: " + player.melkieScore() + " (+" + (140 * (1 + player.newGamePlusMod())) + " max Spe, +" + (140 * (1 + player.newGamePlusMod())) + " max Int, +" + (120 * (1 + player.newGamePlusMod())) + " max Lib, +" + (75 * (1 + player.newGamePlusMod())) + " max Sens, +" + (75 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
-	if (player.melkieScore() >= 18) outputText("\n<font color=\"#0000a0\">Melkie: " + player.melkieScore() + " (+" + (120 * (1 + player.newGamePlusMod())) + " max Spe, +" + (120 * (1 + player.newGamePlusMod())) + " max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " max Sens, +" + (50 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
-	if (player.melkieScore() >= 8) outputText("\n<font color=\"#0000a0\">half Melkie: " + player.melkieScore() + " (+" + (45 * (1 + player.newGamePlusMod())) + " max Spe, +" + (60 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Sens, +" + (25 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
-	else if (player.melkieScore() >= 1 && player.melkieScore() < 8) outputText("\n<font color=\"#008000\">Melkie: " + player.melkieScore() + "</font>");
-	else if (player.melkieScore() < 1) outputText("\n<font color=\"#ff0000\">Melkie: 0</font>");
 	menu();
 	addButton(0, "Next", playerMenu);
 }
