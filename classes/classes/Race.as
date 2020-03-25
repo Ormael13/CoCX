@@ -68,7 +68,6 @@ public class Race {
     public static const SIREN:Race = new Race("Siren",64);
     public static const YETI:Race = new Race("Yeti",65);
     public static const YUKIONNA:Race = new Race("Yuki Onna",66);
-    public static const MELKIE:Race = new Race("Yuki Onna",66);
     public static const BAT:Race = new Race("Bat",67);
     public static const VAMPIRE:Race = new Race("Vampire",68);
     public static const JABBERWOCKY:Race = new Race("Jabberwocky",69);
@@ -80,7 +79,7 @@ public class Race {
     public static const JIANGSHI:Race = new Race("Jiangshi",75);
     public static const POLTERGEIST:Race = new Race("Poltergeist",76);
     public static const BANSHEE:Race = new Race("Banshee",77);
-    public static const SELKIE:Race = new Race("Selkie",78);
+    public static const MELKIE:Race = new Race("Yuki Onna",78);
 
     public var name:String;
     public var id:int;

@@ -1128,7 +1128,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.FreezingBreathYeti);
 				needNext = true;
 			}
-			if (player.sirenScore() >=  10 || player.harpyScore() >=  8 && !player.hasPerk(PerkLib.HarpySong)) {
+			if ((player.sirenScore() >=  10 || player.harpyScore() >=  8) && !player.hasPerk(PerkLib.HarpySong)) {
 				outputText("\n Your voice sound like magicaly entrancing music to your ears now, it would seem you have gained the infamous magicaly compeling voices common to harpies. <b>Gained Perks: Harpy Song</b>)\n");
 				player.createPerk(PerkLib.HarpySong, 0, 0, 0, 0);
 				needNext = true;
@@ -1617,6 +1617,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.lowerBody == LowerBody.NAGA) {
 				if (player.tailType > Tail.NONE) {
 					outputText("\nYour tail squirms, wriggling against your larger naga tail as the scales part around it, absorbing it.  <b>Your form is completely scaly and smooth from the waist down.</b>\n");
+					player.tailType = Tail.NONE;
+					needNext = true;
+				}
+			}
+			if (player.lowerBody == LowerBody.MELKIE) {
+				if (player.tailType > Tail.NONE) {
+					outputText("\nYour tail squirms, wriggling against your larger melkie tail as the fur part around it, absorbing it.  <b>Your form is completely furry and smooth from the waist down.</b>\n");
 					player.tailType = Tail.NONE;
 					needNext = true;
 				}

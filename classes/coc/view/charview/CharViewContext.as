@@ -43,7 +43,7 @@ public class CharViewContext extends ExecContext {
 			{
 				showClothing: [LowerBody.LION,LowerBody.GARGOYLE,LowerBody.GARGOYLE_2].indexOf(player.lowerBody) <= 0,
 				showArmClothing: [Arms.LION,Arms.DISPLACER,Arms.GARGOYLE,Arms.GARGOYLE_2,Arms.YETI,Arms.HINEZUMI].indexOf(player.arms.type) <= 0,
-				showLegClothing: [LowerBody.YETI,LowerBody.HOOFED,LowerBody.HARPY,LowerBody.GOO,LowerBody.NAGA,LowerBody.DRIDER,LowerBody.HINEZUMI].indexOf(player.lowerBody) <= 0,
+				showLegClothing: [LowerBody.YETI,LowerBody.HOOFED,LowerBody.HARPY,LowerBody.GOO,LowerBody.NAGA,LowerBody.DRIDER,LowerBody.HINEZUMI,LowerBody.MELKIE].indexOf(player.lowerBody) <= 0,
 				PlayerHasViewableOutfit: player.isWearingArmor(),
 
 				Antennae     : Antennae,

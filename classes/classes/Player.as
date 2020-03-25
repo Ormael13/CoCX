@@ -7246,32 +7246,6 @@ use namespace CoC;
 			return manticoreCounter;
 		}
 		
-		//Selkie
-		public function selkieScore():Number {
-			Begin("Player","racialScore","selkie");
-			var selkieCounter:Number = 0;
-			//uszy
-			/*if (faceType == Face.HUMAN || faceType == Face.COW_MINOTAUR)
-				selkieCounter++;*/
-			if (selkieCounter >= 4) {//potem wstawić wymaganie posiadania Singing Voice aby wszystkie poniżej opcje dawały punkty
-				/*selkieCounter++;
-				if (faceType == Face.HUMAN || faceType == Face.COW_MINOTAUR)
-					selkieCounter++;//oczy
-				if (arms.type == Arms.HUMAN)
-					selkieCounter++;//włosy
-				if (hasFur() || hasPartialCoat(Skin.FUR))
-					selkieCounter++;*/
-				if (biggestTitSize() > 3)
-					selkieCounter++;
-				if (vaginas.length > 0)
-					selkieCounter++;
-			}
-			if (isGargoyle()) selkieCounter = 0;
-			selkieCounter = finalRacialScore(selkieCounter, Race.SELKIE);
-			End("Player","racialScore");
-			return selkieCounter;
-		}
-		
 		//Red Panda
 		public function redpandaScore():Number {
 			Begin("Player","racialScore","redpanda");
