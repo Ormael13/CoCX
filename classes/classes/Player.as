@@ -7692,6 +7692,8 @@ use namespace CoC;
 				lungsMutations--;
 			if (findPerk(PerkLib.CaveWyrmLungs) >= 0)
 				lungsMutations--;
+			if (findPerk(PerkLib.MelkieLung) >= 0)
+				lungsMutations--;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
 				lungsMutations++;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
