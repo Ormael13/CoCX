@@ -79,7 +79,7 @@ public class Race {
     public static const JIANGSHI:Race = new Race("Jiangshi",75);
     public static const POLTERGEIST:Race = new Race("Poltergeist",76);
     public static const BANSHEE:Race = new Race("Banshee",77);
-    public static const SELKIE:Race = new Race("Selkie",78);
+    public static const MELKIE:Race = new Race("Yuki Onna",78);
 
     public var name:String;
     public var id:int;

@@ -302,7 +302,7 @@ public final class ConsumableLib extends BaseContent
 		public const SATYR_W:SatyrWine        = new SatyrWine();
 		public const SCORICO:Scorpinum = new Scorpinum();
 		public const SHARK_T:SimpleConsumable = mk("Shark.T", "Shark.T", "a sharp shark tooth", 6, "A glinting white tooth, very sharp and intimidating.", curry(m.sharkTooth, 0));
-		public const SKELP__:SimpleConsumable = mk("Skelp  ", "Skelp", "a skelp", 6, "A form of Kelp used by the Melkie as seasoning for their food. Very tasty but can result in transformation if used uncooked.", m.skelp);
+		public const SKELP__:SimpleConsumable = mk("Skelp  ", "Skelp", "a skelp", 15, "A form of Kelp used by the Melkie as seasoning for their food. Very tasty but can result in transformation if used uncooked.", m.skelp);
 		public const SKYSEED:SimpleConsumable = mk("SkySeed", "SkybornSeed", "a skyborn seed", 10, "A smallish, ovular nut-like fruit, with a hard greenish-blue shell that gives off a pleasant aroma.", curry(m.skybornSeed, 0));
 		public const SNAKOIL:SimpleConsumable = mk("SnakOil", "SnakeOil", "a vial of snake oil", 6, "A vial the size of your fist made of dark brown glass. It contains what appears to be an oily, yellowish liquid. The odor is abominable.", m.snakeOil);
 		public const SPHONEY:Consumable		  = new BeeHoney(false, true);

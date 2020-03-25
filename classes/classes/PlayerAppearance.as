@@ -268,6 +268,10 @@ public class PlayerAppearance extends BaseContent {
 			outputText("concealed between your front octopus tentacle legs dangling freely. Other set is concealed underneath your octopus tentacle legs when not in use, though when the need arises, you can rise some of the tentacles and reveal it.\n");
 		}
 	}
+	if(player.lowerBody == LowerBody.MELKIE)
+	{
+		outputText("\nYou have a outer set of vaginal lips at the junction between your human body and seal tail in wich your internal sex and human legs and are hidden when not in uses.\n");
+	}
 	//Cock stuff!
 /*	temp       = 0;
 	var cock:* = player.cocks[temp];
@@ -647,7 +651,10 @@ public class PlayerAppearance extends BaseContent {
 		if(player.gender == 2 && player.isScylla())
 			outputText("\nYour womanly parts have shifted to lie underneath your tentacle legs.");
 		outputText("\n");
-		if (player.vaginas.length == 1){
+		if (player.vaginas.length == 1 && player.lowerBody == LowerBody.MELKIE){
+			outputText("You have two set of vaginal lips one twice as bigger then the other and hidding the smaller within it folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+		}
+		if (player.vaginas.length == 1 && player.lowerBody != LowerBody.MELKIE){
             outputText("You have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
 		}
 		if(player.vaginas[0].virgin)
@@ -885,6 +892,8 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  Where your legs would normally start you have grown the body of an octopus, with " + num2Text(player.legCount) + " tentacle legs that sprout from your [hips].");
 			else if (player.lowerBody == LowerBody.PLANT_FLOWER)
 				outputText("  Around your waist, the petals of a large pink orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the centre, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud.  While you don't technically have legs anymore, you can still move around on your " + num2Text(player.legCount) + " vine-like stamens.");
+			else if (player.lowerBody == LowerBody.MELKIE)
+				outputText("  Beneath your waist your body ends in the tail of a leopard seal. It allows you to swim gracefully in arctic waters. However, when the time to move on land arises, you can part the fur at your waist in order to let your two human legs out and walk on solid ground as the land dwellers do.");
 			else
 				outputText("  Where your legs would normally start you have grown the body of a feral animal, with all " + num2Text(player.legCount) + " legs.");
 		}
@@ -1401,6 +1410,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your arms and hands are human in appearance but your blue nailed hands touch is void of warmth and colder than death.");
 		else if (player.wings.type == Wings.BAT_ARM)
 			outputText("  The bones in your arms are thin and light, as if made of only cartilage, granting you the ability to take flight. Instead of the five fingers you started out with, you now have three that are both larger and stronger. They allow you to hold various items even with your abnormal hands, albeit at the cost of preventing flight while doing so and making some things a little more awkward to grip.");
+		else if (armType == Arms.MELKIE)
+			outputText("  Your arms and hands are human in appearance but your blue nailed hands touch is void of warmth and colder than death.");
 	}
 	public function describeRearBody():void {
 		if (player.rearBody.type == RearBody.FENRIR_ICE_SPIKES) {
@@ -1645,6 +1656,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your tongue is rough like that of a cat. You sometimes groom yourself with it.");
 		else if (player.tongue.type == Tongue.ELF)
 			outputText("  One could mistake you for a human but your voice is unnaturally beautiful and melodious giving you away as something else.");
+		else if (player.tongue.type == Tongue.MELKIE)
+			outputText("  One could mistake you for a human but your voice is unnaturally beautiful and melodious giving you away as something else. Your mermaid-like song is capable of captivating the minds of those who listens to it.");
 		else if (player.tongue.type == Tongue.DOG)
 			outputText("  You sometime let your panting canine tongue out to vent heat.");
 		else if (player.tongue.type == Tongue.CAVE_WYRM)
@@ -1837,6 +1850,9 @@ public class PlayerAppearance extends BaseContent {
 			}
 			if (earType == Ears.DISPLACER){
 				outputText("  A large long furry ears atop your head, always perked up to catch any stray sound.");
+			}
+			if (earType == Ears.MELKIE){
+				outputText("  Your furry Melkie ears are long and flat, reaching all the way down to your waist.");
 			}
 			//</mod>
 			if (player.gills.type == Gills.FISH)
@@ -3107,10 +3123,16 @@ public function RacialScores():void {
 	if (player.yggdrasilScore() >= 10) outputText("\n<font color=\"#0000a0\">Yggdrasil: " + player.yggdrasilScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Wis, -" + (50 * (1 + player.newGamePlusMod())) + " max Lib, +" + (10 * (1 + player.newGamePlusMod())) + " Armor)</font>");
 	else if (player.yggdrasilScore() >= 1 && player.yggdrasilScore() < 10) outputText("\n<font color=\"#008000\">Yggdrasil: " + player.yggdrasilScore() + "</font>");
 	else if (player.yggdrasilScore() < 1) outputText("\n<font color=\"#ff0000\">Yggdrasil: 0</font>");
-	//Yeti
+	//Yuki Onna
 	if (player.yukiOnnaScore() >= 14) outputText("\n<font color=\"#0000a0\">Yuki Onna: " + player.yukiOnnaScore() + " (+" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (140 * (1 + player.newGamePlusMod())) + " max Int, +" + (70 * (1 + player.newGamePlusMod())) + " max Wis, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib"+(player.hasPerk(PerkLib.IcyFlesh) ? ", max Tou fixed at 1":"")+")</font>");
 	else if (player.yukiOnnaScore() >= 1 && player.yukiOnnaScore() < 14) outputText("\n<font color=\"#008000\">Yuki Onna: " + player.yukiOnnaScore() + "</font>");
 	else if (player.yukiOnnaScore() < 1) outputText("\n<font color=\"#ff0000\">Yuki Onna: 0</font>");
+	//Melkie
+	if (player.melkieScore() >= 21) outputText("\n<font color=\"#0000a0\">Elder Melkie: " + player.melkieScore() + " (+" + (140 * (1 + player.newGamePlusMod())) + " max Spe, +" + (140 * (1 + player.newGamePlusMod())) + " max Int, +" + (120 * (1 + player.newGamePlusMod())) + " max Lib, +" + (75 * (1 + player.newGamePlusMod())) + " max Sens, +" + (75 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
+	if (player.melkieScore() >= 18) outputText("\n<font color=\"#0000a0\">Melkie: " + player.melkieScore() + " (+" + (120 * (1 + player.newGamePlusMod())) + " max Spe, +" + (120 * (1 + player.newGamePlusMod())) + " max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " max Sens, +" + (50 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
+	if (player.melkieScore() >= 8) outputText("\n<font color=\"#0000a0\">half Melkie: " + player.melkieScore() + " (+" + (45 * (1 + player.newGamePlusMod())) + " max Spe, +" + (60 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Sens, +" + (25 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
+	else if (player.melkieScore() >= 1 && player.melkieScore() < 8) outputText("\n<font color=\"#008000\">Melkie: " + player.melkieScore() + "</font>");
+	else if (player.melkieScore() < 1) outputText("\n<font color=\"#ff0000\">Melkie: 0</font>");
 	menu();
 	addButton(0, "Next", playerMenu);
 }
