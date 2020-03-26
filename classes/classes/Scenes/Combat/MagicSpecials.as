@@ -782,12 +782,13 @@ public class MagicSpecials extends BaseCombatContent {
 	public function singCompellingAria():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		var IntligenceModifier:Number = player.inte;
+		var IntligenceModifier:Number = 0;
+		if (player.hasPerk(PerkLib.MelkieLungEvolved)) IntligenceModifier += scalingBonusIntelligence();
+		if (player.hasPerk(PerkLib.MelkieLungFinalForm)) IntligenceModifier += scalingBonusIntelligence();
 		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
 			outputText("You end your theme with a powerful finale compelling everyone around to adore and love you.");
-			if (player.hasPerk(PerkLib.MelkieLungEvolved)) IntligenceModifier = IntligenceModifier*2;
-			if (player.hasPerk(PerkLib.MelkieLungFinalForm)) IntligenceModifier = IntligenceModifier*2;
-			var lustDmgF:Number = monster.lustVuln * 3 * (IntligenceModifier / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+			var lustDmgF:Number = monster.lustVuln * 3 * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+			lustDmg += IntligenceModifier;
 			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmgF *= 1.5;
 			if (monster.hasPerk(PerkLib.EnemyGroupType)) {
 				if (player.hasPerk(PerkLib.ArouseTheAudience)) lustDmgF *= 7.5;
@@ -796,9 +797,9 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
 			if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
-			if (player.hasPerk(PerkLib.MelkieLung)) lustDmgF *= 1.25;
-			if (player.hasPerk(PerkLib.MelkieLungEvolved)) lustDmgF *= 1.25;
-			if (player.hasPerk(PerkLib.MelkieLungFinalForm)) lustDmgF *= 1.25;
+			if (player.hasPerk(PerkLib.MelkieLung)) lustDmgF *= 1.2;
+			if (player.hasPerk(PerkLib.MelkieLungEvolved)) lustDmgF *= 1.3;
+			if (player.hasPerk(PerkLib.MelkieLungFinalForm)) lustDmgF *= 1.4;
 			lustDmgF = Math.round(lustDmgF);
 			monster.teased(lustDmgF);
 			if(!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,4,0,0,0);
@@ -819,16 +820,15 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You are still singing. Your compelling aria reaches far up to your opponent");
 			if(monster.plural) outputText("s");
 			outputText(" ears.");
-			if (player.hasPerk(PerkLib.MelkieLungEvolved)) IntligenceModifier = IntligenceModifier*2;
-			if (player.hasPerk(PerkLib.MelkieLungFinalForm)) IntligenceModifier = IntligenceModifier*2;
-			var lustDmg2:Number = monster.lustVuln * (IntligenceModifier / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+			var lustDmg2:Number = monster.lustVuln * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+			lustDmg += IntligenceModifier * 0.5;
 			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg2 *= 1.5;
 			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
 			if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
-			if (player.hasPerk(PerkLib.MelkieLung)) lustDmgF *= 1.25;
-			if (player.hasPerk(PerkLib.MelkieLungEvolved)) lustDmgF *= 1.25;
-			if (player.hasPerk(PerkLib.MelkieLungFinalForm)) lustDmgF *= 1.25;
+			if (player.hasPerk(PerkLib.MelkieLung)) lustDmgF *= 1.2;
+			if (player.hasPerk(PerkLib.MelkieLungEvolved)) lustDmgF *= 1.3;
+			if (player.hasPerk(PerkLib.MelkieLungFinalForm)) lustDmgF *= 1.4;
 			lustDmg2 = Math.round(lustDmg2);
 			monster.teased(lustDmg2);
 			player.addStatusValue(StatusEffects.ChanneledAttack, 1, 1);
@@ -839,16 +839,15 @@ public class MagicSpecials extends BaseCombatContent {
 			fatigue(50, USEFATG_MAGIC_NOBM);
 			clearOutput();
 			outputText("You start singing a enrapturing song.");
-			if (player.hasPerk(PerkLib.MelkieLungEvolved)) IntligenceModifier = IntligenceModifier*2;
-			if (player.hasPerk(PerkLib.MelkieLungFinalForm)) IntligenceModifier = IntligenceModifier*2;
-			var lustDmg:Number = monster.lustVuln * 0.5 * (IntligenceModifier / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+			var lustDmg:Number = monster.lustVuln * 0.5 * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+			lustDmg += IntligenceModifier * 0.25;
 			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
 			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
 			if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
-			if (player.hasPerk(PerkLib.MelkieLung)) lustDmgF *= 1.25;
-			if (player.hasPerk(PerkLib.MelkieLungEvolved)) lustDmgF *= 1.25;
-			if (player.hasPerk(PerkLib.MelkieLungFinalForm)) lustDmgF *= 1.25;
+			if (player.hasPerk(PerkLib.MelkieLung)) lustDmgF *= 1.2;
+			if (player.hasPerk(PerkLib.MelkieLungEvolved)) lustDmgF *= 1.3;
+			if (player.hasPerk(PerkLib.MelkieLungFinalForm)) lustDmgF *= 1.4;
 			lustDmg = Math.round(lustDmg);
 			monster.teased(lustDmg);
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);

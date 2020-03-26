@@ -157,6 +157,10 @@ public class PerkLib
 				"You are a descendant of your ancestor, who was the child of a human and a Raiju. (+2 to raiju score)");
 		public static const BloodlineRaiju:PerkType = mk("Bloodline: Raiju", "Bloodline: Raiju",
 				"Your Raiju bloodline appears strongly within you. (+2 to raiju score)", null, true);
+		public static const MelkiesDescendant:PerkType = mk("Melkie's descendant", "Melkie's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and an Melkie. (+2 to melkie score)");
+		public static const BloodlineMelkie:PerkType = mk("Bloodline: Melkie", "Bloodline: Melkie",
+				"Your Melkie bloodline appears strongly within you. (+2 to melkie score)", null, true);
 		public static const MinotaursDescendant:PerkType = mk("Minotaur's descendant", "Minotaur's descendant",
 				"You are a descendant of your ancestor, who was the child of a human and a Minotaur. (+2 to minotaur/cow score)");
 		public static const BloodlineMinotaur:PerkType = mk("Bloodline: Minotaur", "Bloodline: Minotaur",
@@ -169,10 +173,6 @@ public class PerkLib
 				"You are a descendant of your ancestor, who was the child of a human and an Orc. (+2 to orc score)");
 		public static const BloodlineOrc:PerkType = mk("Bloodline: Orc", "Bloodline: Orc",
 				"Your Orc bloodline appears strongly within you. (+2 to orc score)", null, true);
-		public static const MelkiesDescendant:PerkType = mk("Melkie's descendant", "Melkie's descendant",
-				"You are a descendant of your ancestor, who was the child of a human and an Melkie. (+2 to melkie score)");
-		public static const BloodlineMelkie:PerkType = mk("Bloodline: Melkie", "Bloodline: Melkie",
-				"Your Melkie bloodline appears strongly within you. (+2 to melkie score)", null, true);
 	//	public static const sDescendant:PerkType = mk("Race's descendant", "Race's descendant",
 	//			"You are a descendant of your ancestor, who was the child of a human and a (Race). (+2 to  score)");
 	//	public static const Bloodline:PerkType = mk("Bloodline: Demon", "Bloodline: Demon",
@@ -204,9 +204,9 @@ public class PerkLib
 		public static const PastLifeReligious:PerkType = mk("Past Life: Religious", "Past Life: Religious",
 				"Replaces masturbate with meditate when corruption less than or equal to 66. Reduces minimum libido slightly.", null, true);
 		public static const HistoryScholar:PerkType = mk("History: Scholar", "History: Scholar",
-				"Time spent focusing your mind makes spellcasting use 20% less mana.");
+				"Time spent focusing your mind makes your max mana increase by 10%.");
 		public static const PastLifeScholar:PerkType = mk("Past Life: Scholar", "Past Life: Scholar",
-				"Time spent focusing your mind makes spellcasting use 20% less mana.", null, true);
+				"Time spent focusing your mind makes your max mana increase by 10%.", null, true);
 		public static const HistoryScout:PerkType = mk("History: Scout", "History: Scout",
 				"A past full of archery training increases physical range damage dealt by 10% and acc by 20%.");
 		public static const PastLifeScout:PerkType = mk("Past Life: Scout", "Past Life: Scout",
@@ -234,11 +234,11 @@ public class PerkLib
 		
 		// Ordinary (levelup) perks
 		public static const Apex:PerkType = mk("Apex", "Apex",
-				"Add 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Racial Paragon.",
-				"You choose the 'Apex' perk, Further increasing your specialisation into a unique race and increasing racial skill power by 50%.");
+				"Add up to 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Racial Paragon.",
+				"You choose the 'Apex' perk. Further increasing your specialisation into a unique race and increasing racial skill power by 50%.");
 		public static const AlphaAndOmega:PerkType = mk("Alpha and Omega", "Alpha and Omega",
-				"Add 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Apex.",
-				"You choose the 'Alpha and Omega' perk, Further increasing your specialisation into a unique race and increasing racial skill power by an addtionnal 50%.");
+				"Add up to 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Apex.",
+				"You choose the 'Alpha and Omega' perk. Further increasing your specialisation into a unique race and increasing racial skill power by an addtionnal 50%.");
 		public static const DevastatingCharge:PerkType = mk("Devastating charge", "Devastating charge",
 				"When using the charge action you have a 20% chance to stun the opponent for a round. Charge is 50% more powerful.",
 				"You choose the 'Devastating charge' perk, when using the charge action you have a 20% chance to stun the opponent for a round. Charge is 50% more powerful.");
@@ -1933,13 +1933,13 @@ public class PerkLib
 				"Grants 15% chance per round of cleansing poisons/drugs from your body. Increases HP restoration on rest.",
 				"You choose the 'Medicine' perk, giving you a chance to remove debilitating poisons automatically! Also, increases HP restoration on rest.");
 		public static const MelkieLung:PerkType = mk("Melkie Lung", "Melkie lung",
-				"Increase damage reduction against spells by 10% and increase the power of compelling aria by 25%, Compelling Aria is kept at all time.",
+				"Increase damage reduction against spells by 5% and increase the power of compelling aria by 20%, Compelling Aria is kept at all time.",
 				"You choose the 'Melkie Lung, Greater' perk, gaining increased magic resistances and the power to sing regardless of being a Melkie.");
 		public static const MelkieLungEvolved:PerkType = mk("Melkie Lung, Evolved", "Melkie lung, Evolved",
-				"Increase damage reduction against spells by 10% and increase the power of compelling aria by 25%. Compelling Aria now has an Intelligence scaling.",
+				"Increase damage reduction against spells by 10% and increase the power of compelling aria by 30%. Compelling Aria now has an Intelligence scaling.",
 				"You choose the 'Melkie Lung, Evolved' perk, gaining increased magic resistances and improving the power of your song based on your inteligence.");
 		public static const MelkieLungFinalForm:PerkType = mk("Melkie Lung, Final Form", "Melkie lung, Final Form",
-				"Increase damage reduction against spells by 10% and increase the power of compelling aria by 25%. Compelling Aria intelligence scaling is doubled.",
+				"Increase damage reduction against spells by 15% and increase the power of compelling aria by 40%. Compelling Aria intelligence scaling is doubled.",
 				"You choose the 'Melkie Lung, Final Form' perk, gaining increased magic resistances and further improving the power of your song.");
 		public static const MelkieSong:PerkType = mk("Melkie Song", "Melkie Song",
 				"Your voice is supernaturaly enhanced and may be used during battle to arouse foes.");
@@ -2294,7 +2294,7 @@ public class PerkLib
 				"Allow to reload in middle of shooting as long PC have enough fatigue for that without ending turn.",
 				"You choose the 'Lightning Reload' perk, lowering even more time needed to reload with ammo range weapons like pistols.");
 		public static const RacialParagon:PerkType = mk("Racial Paragon", "Racial Paragon",
-				"Add 1 to each stat per level and increase racial skill power by 50% but remove all chimerical disposition stat gains and degeneration as well lock you into a single race.",
+				"Add up to 1 to each stat per level and increase racial skill power by 50% but remove all chimerical disposition stat gains and degeneration as well lock you into a single race.",
 				"You choose the 'Racial Paragon' perk, chosing to specialise into a specific race and increasing racial skill power by 50%.");
 		public static const RagingInferno:PerkType = mk("Raging Inferno", "Raging Inferno",
 				"Cumulative 20% damage increase for every subsequent fire spell without interruption.",
@@ -5273,7 +5273,8 @@ public class PerkLib
             CatlikeNimbleness.requirePerk(Flexibility).requireCustomFunction(function (player:Player):Boolean {
                 return player.catScore() >= 4 || player.nekomataScore() >= 4 || player.displacerbeastScore() >= 4 || player.hellcatScore() >= 4 || player.cheshireScore() >= 4;
             }, "Any cat race");
-            DraconicLungs.requirePerk(DragonFireBreath)
+            DraconicLungs.requireLungsMutationSlot()
+				.requirePerk(DragonFireBreath)
                 .requirePerk(DragonIceBreath)
                 .requirePerk(DragonLightningBreath)
                 .requirePerk(DragonDarknessBreath).requireCustomFunction(function (player:Player):Boolean {
@@ -5331,8 +5332,8 @@ public class PerkLib
             MantislikeAgility.requireMusclesMutationSlot().requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
                 return player.mantisScore() >= 5;
             }, "Mantis race");
-			MelkieLung.requireCustomFunction(function (player:Player):Boolean {
-				return player.melkieScore() >= 8;
+			MelkieLung.requireLungsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+				return player.melkieScore() >= 6;
 			}, "Melkie race");
             MinotaurTesticles.requireCustomFunction(function (player:Player):Boolean {
                 return player.hasCock();
@@ -5496,7 +5497,7 @@ public class PerkLib
                         return player.internalChimeraScore() >= 2;
                     }, "Two racial perks");
 			RacialParagon.requireLevel(6)
-				.requirePerk(JobBeastWarrior);
+					.requirePerk(JobBeastWarrior);
             //Speedy Recovery - Regain Fatigue 50% faster.
             SpeedyRecovery.requireLevel(6);
             ResistanceI.requireLevel(6);
@@ -5649,7 +5650,7 @@ public class PerkLib
                 return player.mantisScore() >= 10
             }, "Mantis race");
 			MelkieLungEvolved.requirePerk(MelkieLung).requireCustomFunction(function (player:Player):Boolean {
-				return player.melkieScore() >= 9;
+				return player.melkieScore() >= 8;
 			}, "Melkie race");
             NaturalPunchingBagEvolved.requireLevel(12).requirePerk(NaturalPunchingBag).requireCustomFunction(function (player:Player):Boolean {
                 return player.goblinScore() >= 8
