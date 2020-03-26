@@ -11642,13 +11642,11 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Hair
+            var color:String;
+            var Hinezumi_HairColor:Array = ["red", "orange", "platinum crimson", "pinkish orange"];
 			if ((player.faceType == Face.BUCKTEETH || player.faceType == Face.MOUSE) && player.hairType != Hair.BURNING && changes < changeLimit && rand(3) == 0 && type == 1) {
-				if (rand(3) == 0) {
-					player.hairColor = "red";
-				} else {
-					if (rand (2) == 0) player.hairColor = "orange";
-					else player.hairColor = "pinkish orange";
-				}
+                color = randomChoice(Hinezumi_HairColor);
+                player.hairColor = color;
 				outputText("\n\nSomething weird happen in your hairs. The strands coloration slowly shift to a [haircolor] hue and to your absolute surprise the tips turns incandescent like embers. There's no doubt to the heat your hairs now produce as if the tips were on fire. <b>Better keep watch not to set anything on fire with your fiery hairs now.</b>");
 				setHairType(Hair.BURNING);
 				changes++;

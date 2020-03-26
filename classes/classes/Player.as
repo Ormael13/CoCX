@@ -4305,7 +4305,7 @@ use namespace CoC;
 				mouseCounter++;
 			if (hairType == Hair.BURNING)
 				mouseCounter++;
-			if (hairColor == "red" || hairColor == "orange" || hairColor == "pinkish orange")
+			if (hairColor == "red" || hairColor == "orange" || hairColor == "pinkish orange" || hairColor == "platinum crimson")
 				mouseCounter++;
 			if (hasFur() || hasPartialCoat(Skin.FUR)) {
 				mouseCounter++;
@@ -11128,4 +11128,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}
