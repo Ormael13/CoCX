@@ -511,7 +511,7 @@
         <cell rect="833,12,45,25" name="armorNeck/fullplatetopMale" dx="70" dy="63"/>
         <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="72" dy="75"/>
         <cell rect="728,42,45,58" name="armorLegs/fullplateLegs" dx="72" dy="115"/>
-        <cell rect="882,12,125,75" name="armorLegs/taurarmorbottom" dx="63" dy="97"/>
+        <cell rect="882,12,125,75" name="armorLegs_fg/taurarmorbottom" dx="62" dy="96"/>
         <cell rect="776,42,25,55" name="armorLeftArm/fullplateleftarm" dx="68" dy="66"/>
         <cell rect="804,42,25,55" name="armorRightArm/fullplaterightarm" dx="92" dy="66"/>
     </spritemap>
@@ -880,15 +880,23 @@
 		<layer name="armorNeck"/>
 		<layer name="armorRightArm"/>
 		<layer name="armorChest"/>
-		<layer name="armorLeftArm"/>
-		<layer name="armorLegs"/>
-		
+		<layer name="tail_front"/>
 		<layer name="clotheHead"/>
 		<layer name="clotheAmulet"/>
 		<layer name="clotheUnderAmulet"/>
 		<layer name="bra_fg"/>
 		<layer name="clothe"/>
 		<layer name="bra"/>
+		<layer name="armorLegs_fg"/>
+        <layer name="legs_fg"/>
+		
+		<layer name="penis"/>
+		<layer name="balls"/>
+		
+		<layer name="armorLeftArm"/>
+		<layer name="clotheLegs"/>
+		<layer name="armorLegs"/>
+		
 		<layer name="panty"/>
 		
 		<layer name="hands_fg"/>
@@ -917,10 +925,6 @@
 		<layer name="arms_bg_pattern"/>
         <layer name="arms_bg"/>
 		
-		<layer name="tail_front"/>
-        <layer name="legs_fg"/>
-		<layer name="penis"/>
-		<layer name="balls"/>
 		<layer name="overskinpanty"/>
 		
 		<layer name="overfeet"/>
@@ -2844,7 +2848,7 @@
 			<if test="showClothing">
 				<show part="clothe/blizzardTop"/>
 				<if test="(legCount!=4) and (showLegClothing)">
-					<show part="clothe/whiteKimonoBottom"/>
+					<show part="clotheLegs/whiteKimonoBottom"/>
 				</if>
 				<if test="showArmClothing">
 					<show part="clothe/whiteKimonoSleeves"/>
@@ -2873,7 +2877,7 @@
 			<if test="showClothing">
 				<show part="clothe/redKimonoTop"/>
 				<if test="(legCount!=4) and (showLegClothing)">
-					<show part="clothe/redKimonoBottom"/>
+					<show part="clotheLegs/redKimonoBottom"/>
 				</if>
 				<if test="showArmClothing">
 					<show part="clothe/blackKimonoBottom"/>
@@ -2886,7 +2890,7 @@
 			<if test="showClothing">
 				<show part="clothe/whiteKimonoTop"/>
 				<if test="(legCount!=4) and (showLegClothing)">
-					<show part="clothe/whiteKimonoBottom"/>
+					<show part="clotheLegs/whiteKimonoBottom"/>
 				</if>
 				<if test="showArmClothing">
 					<show part="clothe/whiteKimonoSleeves"/>
@@ -2899,7 +2903,7 @@
 			<if test="showClothing">
 				<show part="clothe/whiteKimonoTop"/>
 				<if test="(legCount!=4) and (showLegClothing)">
-					<show part="clothe/whiteKimonoBottom"/>
+					<show part="clotheLegs/whiteKimonoBottom"/>
 				</if>
 				<if test="showArmClothing">
 					<show part="clothe/whiteKimonoSleeves"/>
@@ -2912,7 +2916,7 @@
 			<if test="showClothing">
 				<show part="clothe/redKimonoTop"/>
 				<if test="(legCount!=4) and (showLegClothing)">
-					<show part="clothe/blackKimonoBottom"/>
+					<show part="clotheLegs/blackKimonoBottom"/>
 				</if>
 				<if test="showArmClothing">
 					<show part="clothe/redKimonoSleeves"/>
@@ -2925,7 +2929,7 @@
 			<if test="showClothing">
 				<show part="clothe/purpleKimonoTop"/>
 				<if test="(legCount!=4) and (showLegClothing)">
-					<show part="clothe/blackKimonoBottom"/>
+					<show part="clotheLegs/blackKimonoBottom"/>
 				</if>
 				<if test="showArmClothing">
 					<show part="clothe/purpleKimonoSleeves"/>
@@ -2938,7 +2942,7 @@
 			<if test="showClothing">
 				<show part="clothe/blackKimonoTop"/>
 				<if test="(legCount!=4) and (showLegClothing)">
-					<show part="clothe/blackKimonoBottom"/>
+					<show part="clotheLegs/blackKimonoBottom"/>
 				</if>
 				<if test="showLegClothing">
 					<show part="clothe/blackKimonoSleeves"/>
@@ -2987,7 +2991,7 @@
 				<show part="armorRightArm/fullplaterightarm"/>
 			</if>
 			<if test="legCount==4">
-				<show part="armorLegs/taurarmorbottom"/>	
+				<show part="armorLegs_fg/taurarmorbottom"/>	
 			</if>
 		</if>
 		
@@ -2998,7 +3002,7 @@
 				<show part="clothe/goblinTechnomancerClotheArms"/>
 			</if>
 			<if test="showLegClothing">					
-				<show part="clothe/goblinTechnomancerClotheBoots"/>
+				<show part="clotheLegs/goblinTechnomancerClotheBoots"/>
 			</if>
 		</if>
 		<if test="goblinTechnomancerBra">
@@ -3027,6 +3031,8 @@
 		</if>
 		<if test="goblinTechnomancerPanty">
 			<show part="panty/goblinTechnomancerPanty"/>	
+			<hide part="penis/*"/>
+			<hide part="balls/*"/>
 		</if>
 		
 		<!--Quipao set -->
