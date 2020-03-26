@@ -890,13 +890,12 @@
 		<layer name="armorLegs_fg"/>
         <layer name="legs_fg"/>
 		
-		<layer name="penis"/>
-		<layer name="balls"/>
+		<layer name="penis"/> <!-- should never show if pc wears a panty -->
+		<layer name="balls"/> <!-- should never show if pc wears a panty -->
 		
 		<layer name="armorLeftArm"/>
 		<layer name="clotheLegs"/>
 		<layer name="armorLegs"/>
-		
 		<layer name="panty"/>
 		
 		<layer name="hands_fg"/>
