@@ -494,11 +494,10 @@
         <cell rect="935,101,40,50" name="clothe/purpleKimonoTop" dx="73" dy="72"/>
         <cell rect="981,101,40,50" name="clothe/blackKimonoTop" dx="73" dy="72"/>
         <cell rect="1017,325,80,104" name="clothe/goblinTechnomancerClothe" dx="54" dy="55"/>
-		<cell rect="853,434,80,104" name="clothe/qipaoRedClothe" dx="54" dy="55"/>
-		<cell rect="937,434,80,104" name="clothe/qipaoPurpleClothe" dx="54" dy="55"/>
-		<cell rect="1019,434,80,104" name="clothe/qipaoGreenClothe" dx="54" dy="55"/>
-		<cell rect="1101,434,80,104" name="clothe/qipaoBlueClothe" dx="54" dy="55"/>
-		<cell rect="853,434,80,104" name="clothe/qipaoRedClothe" dx="54" dy="55"/>
+        <cell rect="853,434,80,104" name="clothe/qipaoRedClothe" dx="54" dy="55"/>
+        <cell rect="935,434,80,104" name="clothe/qipaoPurpleClothe" dx="54" dy="55"/>
+        <cell rect="1017,434,80,104" name="clothe/qipaoGreenClothe" dx="54" dy="55"/>
+        <cell rect="1099,434,80,104" name="clothe/qipaoBlueClothe" dx="54" dy="55"/>
         <cell rect="853,216,80,105" name="clothe/whiteKimonoSleeves" dx="54" dy="72"/>
         <cell rect="935,216,80,105" name="clothe/blueKimonoSleeves" dx="54" dy="72"/>
         <cell rect="1017,216,80,105" name="clothe/redKimonoSleeves" dx="54" dy="72"/>
@@ -508,8 +507,10 @@
         <cell rect="751,158,40,54" name="clothe/whiteKimonoBottom" dx="75" dy="121"/>
         <cell rect="919,158,40,54" name="clothe/blackKimonoBottom" dx="75" dy="121"/>
         <cell rect="1099,325,80,104" name="clothe/goblinTechnomancerClotheBoots" dx="54" dy="72"/>
-        <cell rect="776,12,45,25" name="armorNeck/fullplatetop" dx="70" dy="63"/>
+        <cell rect="776,12,45,25" name="armorNeck/fullplatetopFemale" dx="70" dy="63"/>
+        <cell rect="833,12,45,25" name="armorNeck/fullplatetopMale" dx="70" dy="63"/>
         <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="72" dy="75"/>
+        <cell rect="728,42,45,58" name="armorLegs/fullplateLegs" dx="72" dy="115"/>
         <cell rect="882,12,125,75" name="armorLegs/taurarmorbottom" dx="63" dy="97"/>
         <cell rect="776,42,25,55" name="armorLeftArm/fullplateleftarm" dx="68" dy="66"/>
         <cell rect="804,42,25,55" name="armorRightArm/fullplaterightarm" dx="92" dy="66"/>
@@ -755,21 +756,21 @@
         <cell rect="561,140,49,29" name="overskin/Byeti" dx="69" dy="68"/>
         <cell rect="561,170,49,29" name="overskin/Blyeti" dx="69" dy="68"/>
         <cell rect="261,200,49,29" name="overskinpanty/yetipanty" dx="70" dy="99"/>
-		<cell rect="61,410,49,29" name="bra_fg/qipaoRedBraSmall" dx="69" dy="68"/>
+        <cell rect="61,410,49,29" name="bra_fg/qipaoRedBraSmall" dx="69" dy="68"/>
         <cell rect="61,440,49,29" name="bra_fg/qipaoRedBraMedium" dx="69" dy="68"/>
-		<cell rect="61,470,49,29" name="bra_fg/qipaoRedBraLarge" dx="69" dy="68"/>
-		<cell rect="111,410,49,29" name="bra_fg/qipaoPurpleBraSmall" dx="69" dy="68"/>
+        <cell rect="61,470,49,29" name="bra_fg/qipaoRedBraLarge" dx="69" dy="68"/>
+        <cell rect="111,410,49,29" name="bra_fg/qipaoPurpleBraSmall" dx="69" dy="68"/>
         <cell rect="111,440,49,29" name="bra_fg/qipaoPurpleBraMedium" dx="69" dy="68"/>
-		<cell rect="111,470,49,29" name="bra_fg/qipaoPurpleBraLarge" dx="69" dy="68"/>
-		<cell rect="161,410,49,29" name="bra_fg/qipaoGreenBraSmall" dx="69" dy="68"/>
+        <cell rect="111,470,49,29" name="bra_fg/qipaoPurpleBraLarge" dx="69" dy="68"/>
+        <cell rect="161,410,49,29" name="bra_fg/qipaoGreenBraSmall" dx="69" dy="68"/>
         <cell rect="161,440,49,29" name="bra_fg/qipaoGreenBraMedium" dx="69" dy="68"/>
-		<cell rect="161,470,49,29" name="bra_fg/qipaoGreenBraLarge" dx="69" dy="68"/>
-		<cell rect="211,410,49,29" name="bra_fg/qipaoBlueBraSmall" dx="69" dy="68"/>
+        <cell rect="161,470,49,29" name="bra_fg/qipaoGreenBraLarge" dx="69" dy="68"/>
+        <cell rect="211,410,49,29" name="bra_fg/qipaoBlueBraSmall" dx="69" dy="68"/>
         <cell rect="211,440,49,29" name="bra_fg/qipaoBlueBraMedium" dx="69" dy="68"/>
-		<cell rect="211,470,49,29" name="bra_fg/qipaoBlueBraLarge" dx="69" dy="68"/>
+        <cell rect="211,470,49,29" name="bra_fg/qipaoBlueBraLarge" dx="69" dy="68"/>
         <cell rect="11,410,49,29" name="bra/goblinTechnomancerBraSmall" dx="69" dy="68"/>
         <cell rect="11,440,49,29" name="bra/goblinTechnomancerBraMedium" dx="69" dy="68"/>
-		<cell rect="11,470,49,29" name="bra/goblinTechnomancerBraLarge" dx="69" dy="68"/>
+        <cell rect="11,470,49,29" name="bra/goblinTechnomancerBraLarge" dx="69" dy="68"/>
         <cell rect="11,500,49,29" name="panty/goblinTechnomancerPanty" dx="69" dy="99"/>
     </spritemap>
     <spritemap file="tails.png">
@@ -2945,9 +2946,41 @@
 			</if>
 		</if>
 		
+		<!-- Platemail, Marae armor and Ebonweave platemail -->
+		<if test="platemail">
+			<if test="showClothing">
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="armorNeck/fullplatetopMale"/>
+						</case>
+						<default>
+							<show part="armorNeck/fullplatetopFemale"/>
+						</default>
+					</switch>	
+				</if>
+				<if test="(legCount!=4) and (showLegClothing)">
+					<show part="armorLegs/fullplateLegs"/>
+				</if>
+				<if test="showLegClothing">
+					<show part="armorLeftArm/fullplateleftarm"/>
+					<show part="armorRightArm/fullplaterightarm"/>
+				</if>
+			</if>
+		</if>
+		
 		<!--Taur armor -->
 		<if test="centaurPaladinArmor">
-			<show part="armorNeck/fullplatetop"/>
+			<if test="breastRows.length gt 0">
+			<switch>
+				<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+					<show part="armorNeck/fullplatetopMale"/>
+				</case>
+				<default>
+					<show part="armorNeck/fullplatetopFemale"/>
+				</default>
+			</switch>	
+			</if>
 			<show part="armorChest/fullplatebottom"/>
 			<if test="showArmClothing">
 				<show part="armorLeftArm/fullplateleftarm"/>
@@ -3076,25 +3109,25 @@
 			<show part="clothe/qipaoBlueClothe"/>
 			<if test="breastRows.length gt 0">
 			<switch>
-					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-						<show part="bra/qipaoBlueBraSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="bra/qipaoBlueBraSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-						<show part="bra/qipaoBlueBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-						<show part="bra/qipaoBlueBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-						<show part="bra/qipaoBlueBraLarge"/>
-					</case>
-					<default>
-						<show part="bra/qipaoBlueBraLarge"/>
-					</default>
-				</switch>	
+				<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+					<show part="bra/qipaoBlueBraSmall"/>
+				</case>
+				<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+					<show part="bra/qipaoBlueBraSmall"/>
+				</case>
+				<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+					<show part="bra/qipaoBlueBraMedium"/>
+				</case>
+				<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+					<show part="bra/qipaoBlueBraMedium"/>
+				</case>
+				<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+					<show part="bra/qipaoBlueBraLarge"/>
+				</case>
+				<default>
+					<show part="bra/qipaoBlueBraLarge"/>
+				</default>
+			</switch>	
 			</if>
 		</if>
 		

@@ -88,6 +88,7 @@ public class CharViewContext extends ExecContext {
 				centaurBlackguardArmor: player.armor == game.armors.CTPALAD,
 				centaurPaladinArmor: player.armor == game.armors.CTPALAD,
 				goblinTechnomancerClothe: player.armor == game.armors.GTECHC_,
+				platemail: player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 
 				//viewable bra list
 				goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,
