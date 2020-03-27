@@ -128,7 +128,7 @@ public function etnaRapesPlayer2():void
 		if (player.cumQ() < 10000) player.cumMultiplier += 2;
 		if (player.cor < 75) dynStats("cor", 25);
 		if (player.hasStatusEffect(StatusEffects.WildManticore)) player.removeStatusEffect(StatusEffects.WildManticore);
-		player.sexReward("vaginalFluids");
+		player.sexReward("vaginalFluids","Dick");
 		cleanupAfterCombat();
 		return;
 	}
@@ -221,7 +221,7 @@ public function etnaRapeYesM():void
 	if (player.cumQ() < 10000) player.cumMultiplier += 2;
 	if (player.hasStatusEffect(StatusEffects.WildManticore)) player.removeStatusEffect(StatusEffects.WildManticore);
 	etnaAffection(10);
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	cleanupAfterCombat();
 }
 
@@ -389,6 +389,7 @@ public function etnaRapeYandere():void
 	etnaRapesPlayer();
 	if (player.tou >= 30) {
 		outputText("Thankfully, you wake up before Etna does and use the spike left on the ground to unbind yourself. Once done, you proceed to exit the place through a trap door and head back to camp before the love-crazed manticore notices you’ve escaped.\n\n");
+		if (player.hasCock()) player.sexReward("vaginalFluids","Dick",true,false);
 		player.sexReward("vaginalFluids");
 		cleanupAfterCombat();
 		return;
@@ -638,7 +639,7 @@ public function etnaPussyOpera():void
 	if (player.cumQ() < 500) player.cumMultiplier += 6;
 	if (player.cumQ() < 2000) player.cumMultiplier += 4;
 	if (player.cumQ() < 10000) player.cumMultiplier += 2;
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] < 3) flags[kFLAGS.ETNA_TALKED_ABOUT_HER] = 3;
 	doNext(camp.returnToCampUseOneHour);
 }

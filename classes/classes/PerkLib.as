@@ -888,6 +888,18 @@ public class PerkLib
 		public static const DualWieldSmall:PerkType = mk("Dual Wield (Small)", "Dual Wield (Small)",
 				"Allows you to wield two small sized melee weapons.",
 				"You choose the 'Dual Wield (Small)' perk, training skill of using two small melee weapons.");
+		public static const EasterBunnyBalls:PerkType = mk("Easter bunny balls", "Easter bunny balls",
+				"Your balls constantly grows until emptied through your cock, producing eggs.",
+				"Your balls constantly grows until emptied through your cock, producing eggs.");
+		public static const EasterBunnyEggBag:PerkType = mk("Easter Bunny egg bag", "Easter bunny balls",
+				"Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one eggs per round. Double cum production.",
+				"Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one eggs per round. Double cum production.");
+		public static const EasterBunnyEggBagEvolved:PerkType = mk("Easter bunny balls, evolved", "Easter bunny balls, evolved",
+				"Raise libido by a percentage based on current ball size. Triple cum production.",
+				"Raise libido by a percentage based on current ball size. Triple cum production.");
+		public static const EasterBunnyEggBagFinalForm:PerkType = mk("Easter bunny balls, final form", "Easter bunny balls, final form",
+				"Further raise libido by a percentage based on current ball size. Double ball growth rates. Double cum production again.\n",
+				"Further raise libido by a percentage based on current ball size. Double ball growth rates. Double cum production again.");
 		public static const EagleEye:PerkType = mk("Eagle eye", "Eagle eye",
 				"Increase traditional range weapons (like bows) base attack by another 50%.",
 				"You choose the 'Eagle eye' perk, increasing traditional range weapons base attack.");

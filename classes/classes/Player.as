@@ -10872,6 +10872,10 @@ use namespace CoC;
 			}
 			SexXP(5+level);
 			orgasm(type,real);
+			if (type = "Dick")
+			{
+
+			}
 		}
 
 		public function orgasmReal():void

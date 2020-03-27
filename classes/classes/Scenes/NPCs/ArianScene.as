@@ -1979,7 +1979,7 @@ private function penetrateArian():void {
 	outputText("\n\nYou take [Arian eir] free hand in your own and tell [Arian em] that, if [Arian ey] wants you to, you can stay for at least a little while longer.  \"<i>I'd like that... just a while.</i>\"  Arian does [Arian em] best to nuzzle you.  With no compelling reason not to, you nuzzle [Arian em] back and content yourself with laying there, enjoying the mutual afterglow.");
 	
 	outputText("\n\nEventually, though, you announce that you should probably get going.  As nice as it is to stay here with [Arian em], you have duties to attend to.  Arian smiles at you, and gives you a little peck on the lips.  \"<i>I understand, but come see me again soon, please.</i>\"  You promise [Arian em] you will and extract yourself from the affectionate lizan's embrace.  You quickly find your clothes and get dressed, then leave.");
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2139,7 +2139,7 @@ private function getButtWreckedByArian():void {
 	}
 	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-	player.sexReward("cum");
+	player.sexReward("cum", "Anal");
 	dynStats("sen", 2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2530,7 +2530,7 @@ private function doublePenetrateArian():void {
 		else outputText("tent");
 		outputText(".");
 	}
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2633,7 +2633,7 @@ private function arianDocking():void {
 	outputText("\n\nYou tell [Arian em] the sex is nice, but there's other things in [Arian eir] favor too.  Then, you kiss [Arian em] again before [Arian ey] can ask what those are.  While [Arian ey]'s left reeling, blissed out and goofy from the sexual overwhelm, you quietly slip out of [Arian eir] bed, pull your clothes back on and slip away, blowing [Arian em] a kiss before you depart.");
 	
 	//Player returns to camp
-	player.sexReward("Default","Default",true,false);
+	player.sexReward("Default","Dick",true,false);
 	dynStats("sen", 1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -3876,7 +3876,7 @@ public function wakeUpAfterArianSleep():void {
 			outputText("\n\n\"<i>Hmm... please do...</i>\"  Arian's mouth opens in a wide yawn.  \"<i>Still a bit sleepy.  I think I'll take a nap now, if you'll excuse me.</i>\"");
 			outputText("\n\nYou chuckle and tell Arian [Arian ey]'s such a lazy little lizard, stroking [Arian eir] head affectionately before getting dressed and leaving to start your day.");
 		}
-		player.sexReward("Default","Default",true,false);
+		player.sexReward("Default","Dick",true,false);
 	}
 	else { //PC has no cock
 		//These do not link to a sex scene. No cocks, no sex in the morning, sorry girls/genderless.

@@ -298,7 +298,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 				if (flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] == 2) outputText("ocean");
 				outputText("water.  You gather your gear while the anemone holds her belly and smiles placidly, staring into the sky.");
 				//(pass 1 hour, reset lust to min or min+10 if big or greater skeet)
-				player.sexReward("vaginalfluids");
+				player.sexReward("vaginalfluids","Dick");
 				cleanupAfterCombat();
 			}
 			//Too-big male: -requires cockarea > 36
@@ -342,7 +342,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 				//[(mega skeet)
 				else outputText("she continues to sputter and cough up bubbles of your spunk.");
 				//(pass 1 hour, reset lust to min or min+10 if big or greater skeet)
-				player.sexReward("saliva");
+				player.sexReward("saliva","Dick");
 				cleanupAfterCombat();
 			}
 		}

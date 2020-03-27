@@ -420,7 +420,7 @@ private function bunbunGetsFucked():void {
 	
 	outputText("You shrug and pick up one of her eggs, noticing that it's turned neon pink in color.  The bunny mumbles, \"<i>Have it, iz good for youuuu...</i>\" before she starts to snore and murmur out a sexual dream.\n\n");
 
-	player.sexReward("Default","Default",true,false);
+	player.sexReward("Default","Dick",true,false);
 
 	dynStats("lib", 1, "sen", 1);
 	inventory.takeItem(consumables.NPNKEGG, camp.returnToCampUseOneHour);
@@ -444,7 +444,6 @@ private function bunbun69():void {
 			outputText("Before you can return with a witty remark, the bunny has hopped off, leaving you alone in the field with your face in your palm.\n\n");
 			//- Intelligence
 			//+ Lust
-			player.sexReward("Default","Default",true,false);
 			dynStats("int", -2);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -461,7 +460,6 @@ private function bunbun69():void {
 
 			outputText("You wipe off what you can of the sticky goop and trot off with a scowl, leaving the hysterical rabbit to calm herself down.\n\n");
 			//- Intelligence
-			player.sexReward("Default","Default",true,false);
 			dynStats("int", -2);
 			//+ Lust
 			//+ Pink Egg 
@@ -522,7 +520,7 @@ private function bunbun69():void {
 			player.tailType = Tail.RABBIT;
 			player.ears.type = Ears.BUNNY;
 			doNext(camp.returnToCampUseOneHour);
-			player.sexReward("Default","Default",true,false);
+			player.sexReward("cum");
 			dynStats("lib", 1, "sen", 1);
 		}
 		//REGULAR SHOW
@@ -578,7 +576,7 @@ private function bunbun69():void {
 			player.tailType = Tail.RABBIT;
 			player.ears.type = Ears.BUNNY;
 			doNext(camp.returnToCampUseOneHour);
-			player.sexReward("Default","Default",true,false);
+			player.sexReward("cum");
 			dynStats("lib", 1, "sen", 1);
 		}
 	}
@@ -618,7 +616,7 @@ private function bunbun69():void {
 		player.tailType = Tail.RABBIT;
 		player.ears.type = Ears.BUNNY;
 		doNext(camp.returnToCampUseOneHour);
-		player.sexReward("Default","Default",true,false);
+		player.sexReward("cum");
 		dynStats("lib", 1, "sen", 1);
 	}
 }
@@ -862,7 +860,7 @@ private function fuckTheEggBoundBun():void {
 	else outputText("growing larger and larger as cum splatters in thick streams from her saturated pussy. Your seemingly endless gallons of flooding cum wash the remnants of her previous partners away, immersing the caramel woman in the fluid wealth of your liquid possession.");
 	outputText("  No sooner has your spunk taken root inside her, than the bunny's already colossal testes tremble anew.  Before your eyes, they balloon even larger, fattening with the profit of your claim.  You remain inside her a moment longer to marvel at the impossible bulk of her egg-stuffed body, before withdrawing and stepping back to clean yourself off.  Bulbous dollops of spunk bubble from her cunny as she impotently grinds her shaft against the mammoth bulk of her stoppered balls.  Satisfied, you head back to camp, leaving the bunny to the mercies of the next rescuer.");
 	//[End Encounter, corruption up]
-	player.sexReward("Default","Default",true,false);
+	player.sexReward("Default","Dick",true,false);
 	dynStats("cor", 2);
 	doNext(camp.returnToCampUseOneHour);
 }

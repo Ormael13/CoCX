@@ -195,7 +195,7 @@ public class CeraphScene extends NPCAwareContent
 
 				outputText("As you leave, you don't bother to spare a glance at the confused omnibus; she isn't worth your time.");
 			}
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", 3, "sen", 3, "cor", 1);
             if (CoC.instance.inCombat)
                 cleanupAfterCombat();
@@ -826,7 +826,7 @@ public class CeraphScene extends NPCAwareContent
 			outputText("(Do you accept Ceraph's Offer?)");
 			//Y/N – remove 1 fetish level or +10 gems
 			doYesNo(ceraphsNiceOffer, cleanupAfterCombat);
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", 3, "sen", 3, "cor", 1);
 		}
 

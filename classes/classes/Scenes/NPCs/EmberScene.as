@@ -2997,7 +2997,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			if (player.cor >= 66) {
 				outputText("\n\n\"<i>Nor you, me,</i>\" you say, folding your arms.  \"<i>You were the one in charge, so the failure is all yours... luckily, my stamina was enough to finish, even though you became useless halfway through.</i>\"  Picking up your gear, you leave the dragon behind you; she hurls breathless insults at you, but you only answer with a negligent wave.");
 				//end scene, reset hours since cum, Ember preg check, minus some fuckin Ember affection
-				player.sexReward("vaginalFluids");
+				player.sexReward("vaginalFluids","Dick");
 				dynStats("sen", -2);
 				emberAffection(-5);
 				doNext(camp.returnToCampUseOneHour);
@@ -3029,7 +3029,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("\n\n\"<i>Yes... let's go again...</i>\" she responds tiredly, before slumping down for a quick nap.  Beyond satisfied yourself, you settle on top of her with a sigh and a groan, repositioning yourself for greater comfort as you join her in sleep.");
 
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", .5, "sen", -2);
 			doNext(penetrateEmbrahPartII);
 		}
@@ -3489,7 +3489,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			pregnancy.knockUp(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_EMBER);
 			player.createStatusEffect(StatusEffects.EmberFuckCooldown, 36, 0, 0, 0);
 			player.removeStatusEffect(StatusEffects.Rut);
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("sen", -2);
 			doNext(createCallBackFunction(emberBreedingAfterMathWatchOutForRadioactiveFallout,true));
 		}
@@ -4371,7 +4371,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			if (flags[kFLAGS.EMBER_GENDER] == 3) outputText("  Her draconic cock throbs all the way through your orgasm, shooting blanks a few times before spurting a couple ropes of pre onto her belly.");
 
 			outputText("\n\nThe two of you collapse into each other's arms.  You move to pull out, but Ember stops you by holding your hips in place.  \"<i>Leave it inside... that's where it belongs.</i>\"  She smiles at you, panting a bit.  Too tired and happy to argue, you simply nod your head, rest against her, and allow sleep to claim you. You're dimly aware of Ember doing the same thing before you fade.");
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			//doNext(14);
 			menu();
 			addButton(0, "Next", emberJizzbangbangEnding);

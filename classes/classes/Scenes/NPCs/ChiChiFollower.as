@@ -123,6 +123,7 @@ public function WonSecondFightYes():void {
 	flags[kFLAGS.CHI_CHI_SAM_TRAINING] = 3;
 	flags[kFLAGS.CHI_CHI_FOLLOWER] = 3;
 	flags[kFLAGS.CHI_CHI_LVL_UP] = 1;
+	if (player.hasCock()) player.sexReward("vaginalFluids","Dick");
 	player.sexReward("vaginalFluids");
 	inventory.takeItem(weapons.MASTGLO, WonSecondFightYes2);
 }
@@ -734,7 +735,7 @@ public function chichiSexGentleFuck():void {
 	outputText("You wake up later and prepare to re-equip your gear. Chi Chi is still against you, but you almost regretfully break the embrace as she lifts to dress back up.\n\n");
 	outputText("\"<i>Go save the world, [name]. I will be keeping that bed warm for you when you come back.</i>\"\n\n");
 	outputText("She gives you a playful wink as she heads back to her training ground, her tail still swishing in happiness. She’s right, you didn’t get this far in life just to let the demons destroy it. You finish redressing then head back to the fight.\n\n");
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
 public function chichiSexHinezumiYuri():void {

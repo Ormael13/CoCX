@@ -65,7 +65,7 @@ public function DefeatedHellCatCatcock():void {
 	outputText("You are do distracted by the overload of sensations that you forget your partner who reaching her own orgasm flood your burning pussy with a welcome load of catjizz. You thought this would end the heat but it only makes it worse, the hot cum bubbling in your pussy only seems to make the heat in your brain more intense. You need to fuck, you desperately need to fuck!\n\n");
 	outputText("The catgirl does not seem to mind as you repetitively ravish her cock. Only when she pass out from exhaustion do you realise her cum is only intensifying the heat. You kick her in frustration as you head back to camp. <b>It would seem you have gone into heat!</b>");
 	player.goIntoHeat(false);
-	player.sexReward("cum");
+	player.sexReward("cum","Vaginal");
 	cleanupAfterCombat();
 }
 public function DefeatedByHellCat():void {
@@ -101,7 +101,7 @@ public function DefeatedByHellCat():void {
 			player.goIntoRut(false);
 			player.goIntoHeat(false);
 		}
-		player.sexReward("vaginalFluids");
+		player.sexReward("vaginalFluids","Dick");
 		cleanupAfterCombat();
 	}
 }

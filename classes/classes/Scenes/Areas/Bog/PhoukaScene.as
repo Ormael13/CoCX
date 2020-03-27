@@ -868,7 +868,7 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 		
 		protected function phoukaSexPregnateEnd(postCombat:Boolean):void
 		{ //Everything after the sex. Handles awards, gem loss and text for player leaving the bog
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
 			dynStats("cor", rand(1) + (postCombat && (phoukaForm != PHOUKA_FORM_FAERIE) ? 1 : 3)); //Extra two corruption for being enough of a pervert to want to fuck the phouka
 			if (phoukaForm == PHOUKA_FORM_FAERIE) { //In this case postCombat means you need an award because you must have won to get faerie sex
 					outputText("\n\nSatisfied for now you begin to put your clothes back on.  Maybe that " + phoukaName() + " will learn, maybe not.");

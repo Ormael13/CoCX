@@ -149,7 +149,7 @@ package classes.Scenes.Areas.Bog
 			outputText("\n\nYour softening member slides out of her and she hops down, legs nearly giving out as she lands.  She takes a moment to recuperate before jerking your still-bound wrists towards the ground.  You collapse, unable to stand any longer anyways.  The chameleon girl mutters, \"<i>Oh my gods, that felt so-</i>\"");
 
 			outputText("\n\nShe catches herself, and looks back down at you and sneers.  \"<i>Y-yeah, and you better not come back around my bog again,</i>\" she says between tired breaths as she takes the silk from your wrists and dresses herself again.  She splashes off through the water, leaving you in silence.  You take a while to recover from the experience before managing to work up the energy to get out of the mud and back to your camp.");
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			cleanupAfterCombat();
 			//send player back to camp, reset hours since cum, remove gems and add time
 		}
@@ -226,7 +226,7 @@ package classes.Scenes.Areas.Bog
 			outputText("\n\nThe two of you slow down and eventually fall still, basking in the afterglow.  When you look back to the chameleon girl, you can see that she's fallen asleep cuddling against you, her arm still draped over your naked thigh and her tail lying limp against you.  The head pressed against your shoulder wears a content smile; you gently ");
 			if (player.cor < 50) outputText("and guiltily ");
 			outputText("roll her onto her back and get up to collect your things, rinsing yourself with the water and shaking the mud out before putting your [armor] back on and heading back to camp.");
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			cleanupAfterCombat();
 		}
 
@@ -255,7 +255,7 @@ package classes.Scenes.Areas.Bog
 			if (player.cumQ() > 750) outputText("  Even the murky water around her is turned white as the pools of your cum on her body run off into it.");
 			outputText("  Satisfied, you put your [armor] back on and head back to camp.");
 			//send player back to camp, reset hours since cum, add gems and time
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			cleanupAfterCombat();
 		}
 

@@ -219,7 +219,12 @@ private function plantsForMe2(BE:int = 0):void {
 	if (player.hasBreasts() && player.isLactating()) {
         player.milked();
         player.boostLactation(0.01);
+		player.sexReward("Default", "Nipples",true,false);
+		player.sexReward("Default", "Tits",true,false);
     }
+	if(player.hasCock()) {
+		player.sexReward("Default", "Dick",true,false);
+	}
 	player.sexReward("milk");
 	dynStats("lib", 1);
 	//Slimefeed!
@@ -302,6 +307,7 @@ private function hasCockFeedEssy(newPage:Boolean = true):void {
 	
 	outputText("\n\nExhausted anew, Essy reclines in her pot, already dozing with an expression of happy contentment.  Though she's still imprisoned, you've at least set her at ease.  While you might like to move her somewhere more private, the sheer weight of her pot is more than enough to frustrate any attempt you might make.  Best to just leave her and check in later.");
 	player.sexReward("milk");
+	player.sexReward("Default", "Dick", true,false);
 	doNext(playerMenu);
 }
 
@@ -322,6 +328,7 @@ private function hasPussyFeedEssy(newPage:Boolean = true):void {
 	
 	outputText("\n\nIt takes you a while, but you extricate yourself and clean off the best you can, leaving her with a friendly kiss on the cheek before you head on your way once more.  With visitors like you, she hardly seems like she'll mind being trapped in the enchanted flower pot.");
 	player.sexReward("milk");
+	player.sexReward("cum", "Vaginal");
 	if(player.fertility < 50) player.fertility++;
 	doNext(playerMenu);
 }

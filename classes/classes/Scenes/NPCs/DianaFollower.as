@@ -670,7 +670,7 @@ public function breakingInYourMare():void {
 	outputText("\"<i>Don’t think it’s over my mare,</i>\" you say, your cock" + (player.cocks.length == 1 ? "" : "s") + " still hard inside her, \"<i>I’m not finished yet...</i>\"\n\n");
 	outputText("Diana smiles at you, planting a quick kiss on your mouth, \"<i>I can’t wait...</i>\"\n\n");
 	outputText("Smirking, you get back to making love to her. Eventually you’re finally satisfied, and the two of you are laying on the ground together, catching your breath, Diana’s head laying on your chest, while also catching her breath" + (player.cumQ() >= 2000 ? "and letting all the cum drain out of her cum stuffed hole" : "") + "" + (player.cocks.length == 1 ? "" : "s") + ".\n\n");
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	cleanupAfterCombat();
 	doNext(breakingInYourMare2);
 }
@@ -733,7 +733,7 @@ public function SexMenuBreeding():void {
 	clearOutput();
 	outputText("When it will be ready.\n\n");
 	outputText("\"<i>Please hurry, I can’t wait!</i>\" Diana begs you, still hugging your head.\n\n");
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
 public function SexMenuVaginal():void {
@@ -756,7 +756,7 @@ public function SexMenuVaginal():void {
 		outputText("\"<i>Only if you're a good mare next time,</i>\" you say with a smirk on your face.\n\n");
 		outputText("Diana pouts a bit before you both say your goodbyes, you heading off.\n\n");
 	//}
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
 public function SexMenuAnal():void {
@@ -794,7 +794,7 @@ public function SexMenuAnal():void {
 			outputText("After promising you will later, you head back to your adventure, while Diana rests for awhile.\n\n");
 		}
 	//}
-	player.sexReward("Default","Default", true,false);
+	player.sexReward("Default","Dick", true,false);
 	doNext(camp.returnToCampUseOneHour);
 }
 public function SexMenuTitsfuck():void {
@@ -864,7 +864,7 @@ public function SexMenuTitsfuck():void {
 			}
 		}
 	//}
-	player.sexReward("Default","Default", true,false);
+	player.sexReward("Default","Dick", true,false);
 	doNext(camp.returnToCampUseOneHour);
 }
 	}

@@ -170,7 +170,7 @@ public class BasiliskScene extends BaseContent
 				outputText("  You continue to fuck the creature as you ejaculate, forcing your tainted jizz deep inside it, glorying in how the spurting lubricant allows you to fuck its hole even better.  Eventually, after a series of orgasms which feel like the sky is falling, you finally pull out of the basilisk's ravaged anus with a deeply satisfied sigh.  Your cum dribbles out of the creature's gaping butt; the only regret you feel in your deep haze is that there is nothing at hand to plug it in with.  You sit back and allow yourself to bask in the afterglow, safe in the knowledge that there will be no retaliation forthcoming from your partner.\n\n");
 			}
 			outputText("You are shaken out of it by an urgent, rasping moan from the basilisk. You sense movement overhead and look up. The lizard has seen in the water's reflection what you can take in with your own eyes; several harpies circling overhead like vultures, waiting patiently for you to leave.  The smiles which plaster their faces are possibly the least kindly you have ever seen.  The basilisk whines again, this time with a desperate pleading edge.  You kneel down and comfortingly stroke your victim's scaled head, glorying in the moment of false hope you give it.  \"<i>Get hard,</i>\" you whisper.  The creature clenches as its no doubt aching cock strains to attention again.  \"<i>Don't worry,</i>\" you murmur into its ear. \"<i>I'm sure the nice birdies will shake you out of it.  Eventually.</i>\"  You get up, dress yourself, and leave.  A pitiless grin slowly spreads across your face as behind you, the opening strains of what promises to be a very long, violent, and feathery rape reach your ears...");
-			player.sexReward("Default","Default",true,false);
+			player.sexReward("Default","Dick",true,false);
 			dynStats("cor", 1);
 			cleanupAfterCombat();
 		}
@@ -278,7 +278,7 @@ public class BasiliskScene extends BaseContent
 			}
 			//Eggs fertilised (Ovi Potion/Oviposition only. Eggs take a few days 
 			//longer to be laid than usual): 
-			player.sexReward("cum");
+			player.sexReward("cum", "Vaginal");
 			dynStats("sen", 1);
 			cleanupAfterCombat();
 		}
@@ -501,7 +501,7 @@ public class BasiliskScene extends BaseContent
 				outputText("\"<i>That was good for a first effort, stud,</i>\" the goblin's giggling voice reaches your ears.  \"<i>But you've got lots more man sauce locked up inside of you, don't you?  Yes you do.  And you're going to give me it all.</i>\"  As the insatiable little green monster picks up the pace, her juices mingling with yours as they trickle onto the ground beneath you, you feel the erotic mental backwash build again, and you go comatose under the overwhelming, uncontrolled rush of sexual sensation...\n\n");
 		
 				outputText("Eventually, after what seems like hours of forcible ejaculation, you notice that your dick is no longer trapped in sucking wet.  You come out of your daze you find that the goblin has left, leaving your petrified form in a mingled pool of her juices and your own jizz. After another ten or twenty minutes of being forced to lie there and marinate in your own shameful memories, you find with great relief you can begin to move your fingers again.  Eventually with some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you pick yourself up and redress before anything else finds you and woozily begin to make your way back down the mountain.  The smell of horny goblin on you is a lingering reminder of what just happened to you.");
-				player.sexReward("Default","Default",true,false);
+				player.sexReward("Default","Dick",true,false);
 			}
 			//Unsexed: 
 			else if(!player.hasVagina()) {

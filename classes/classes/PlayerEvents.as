@@ -621,15 +621,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.ALRAUNE_GROWING] > 0 && flags[kFLAGS.ALRAUNE_GROWING] < 15) flags[kFLAGS.ALRAUNE_GROWING]++;
 				//Reset SelfSustain & RepresLust daily counter
 				if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] > 0) flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] = 0;
-				//Reset Electra Strom Jewel daiy limit
+				//Reset Electra Storm Jewel daily limit
 				if (flags[kFLAGS.ELECTRA_DAILY_STORM_JEWEL] > 0) flags[kFLAGS.ELECTRA_DAILY_STORM_JEWEL] = 0;
-				//Reset Etna Venom Vial daiy limit
+				//Reset Etna Venom Vial daily limit
 				if (flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] > 0) flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] = 0;
-				//Reset Ceani Training daiy limit
+				//Reset Ceani Training daily limit
 				if (flags[kFLAGS.CEANI_DAILY_TRAINING] > 0) flags[kFLAGS.CEANI_DAILY_TRAINING] = 0;
-				//Reset Kindra Training daiy limit
+				//Reset Kindra Training daily limit
 				if (flags[kFLAGS.KINDRA_DAILY_TRAINING] > 0) flags[kFLAGS.KINDRA_DAILY_TRAINING] = 0;
-				//Reset Chi Chi Training daiy limit
+				//Reset Chi Chi Training daily limit
 				if (flags[kFLAGS.CHI_CHI_DAILY_TRAINING] > 0) flags[kFLAGS.CHI_CHI_DAILY_TRAINING] = 0;
 				//Reset Luna Meal CD
 				if (flags[kFLAGS.LUNA_MEAL] > 0) flags[kFLAGS.LUNA_MEAL] = 0;
@@ -792,7 +792,21 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) > 6) player.addStatusValue(StatusEffects.AdventureGuildQuests3, 2, -3);
 				}
 				if (flags[kFLAGS.AURORA_LVL] > 0.3 && flags[kFLAGS.AURORA_LVL] < 0.7) flags[kFLAGS.AURORA_LVL] += 0.05;
+
+
+				//Racial perk daily effect Area
+				if (player.hasPerk(PerkLib.EasterBunnyBalls)) {
+					outputText("\n<b>Your balls grow as your eggs increase in size.</b>\n");
+					player.ballSize++;
+					if (player.hasPerk(PerkLib.EasterBunnyEggBagFinalForm)) {
+						player.ballSize++;
+					}
+					if (player.ballSize < 3) {
+						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head, as the size of your growing balls remind you that you need to expel those eggs one way or another before they become too big.");
+					}
+				}
 			}
+
 			if (CoC.instance.model.time.hours == 6) {
 				var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 				if (vthirst != null) {
@@ -1614,6 +1628,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Diapause);
 				needNext = true;
 			}
+			//tail absorb section
 			if (player.lowerBody == LowerBody.NAGA) {
 				if (player.tailType > Tail.NONE) {
 					outputText("\nYour tail squirms, wriggling against your larger naga tail as the scales part around it, absorbing it.  <b>Your form is completely scaly and smooth from the waist down.</b>\n");
