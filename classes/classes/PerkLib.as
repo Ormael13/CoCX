@@ -891,7 +891,7 @@ public class PerkLib
 		public static const EasterBunnyBalls:PerkType = mk("Easter bunny balls", "Easter bunny balls",
 				"Your balls constantly grows until emptied through your cock, producing eggs.",
 				"Your balls constantly grows until emptied through your cock, producing eggs.");
-		public static const EasterBunnyEggBag:PerkType = mk("Easter Bunny egg bag", "Easter bunny balls",
+		public static const EasterBunnyEggBag:PerkType = mk("Easter Bunny egg bag", "Easter Bunny egg bag",
 				"Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one eggs per round. Double cum production.",
 				"Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one eggs per round. Double cum production.");
 		public static const EasterBunnyEggBagEvolved:PerkType = mk("Easter bunny balls, evolved", "Easter bunny balls, evolved",
