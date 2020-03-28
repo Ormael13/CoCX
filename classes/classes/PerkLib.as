@@ -319,7 +319,7 @@ public class PerkLib
 				"You choose the 'Hellcat Parathyroid Glands' perk, .");
 		public static const HellcatParathyroidGlandsEvolved:PerkType = mk("Hellcat Parathyroid Glands (Evolved)", "Hellcat Parathyroid Glands (Evolved)",
 				".",
-				"You choose the 'Hellcat Parathyroid Glands (Evolved)' perk, .");
+				"You choose the 'Hellcat Parathyroid Glands (EvFolved)' perk, .");
 		public static const HellcatParathyroidGlandsFinalForm:PerkType = mk("Hellcat Parathyroid Glands (Final Form)", "Hellcat Parathyroid Glands (Final Form)",
 				".",
 				"You choose the 'Hellcat Parathyroid Glands (Final Form)' perk, .");
@@ -5292,6 +5292,9 @@ public class PerkLib
                 .requirePerk(DragonDarknessBreath).requireCustomFunction(function (player:Player):Boolean {
                 return player.dragonScore() >= 4;
             }, "Dragon race");
+			EasterBunnyEggBag.requirePerk(EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
+				return player.easterbunnyScore() >= 12;
+			}, "Easter Bunny race");
             ElvishPeripheralNervSys.requirePerk(ElvenSense).requireCustomFunction(function (player:Player):Boolean {
                 return player.elfScore() >= 4;
             }, "Elf race");
@@ -5643,6 +5646,9 @@ public class PerkLib
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.dragonScore() >= 10;
                     }, "Dragon race");
+			EasterBunnyEggBagEvolved.requireLevel(12).requirePerk(EasterBunnyEggBag).requireCustomFunction(function (player:Player):Boolean {
+				return player.easterbunnyScore() >= 12;
+			}, "Easter bunny race");
             ElvishPeripheralNervSysEvolved.requireLevel(12).requirePerk(ElvishPeripheralNervSys).requireCustomFunction(function (player:Player):Boolean {
                 return player.elfScore() >= 8;
             }, "Elf race");
@@ -6011,6 +6017,9 @@ public class PerkLib
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.dragonScore() >= 16;
                     }, "Dragon race");
+			EasterBunnyEggBagFinalForm.requireLevel(30).requirePerk(EasterBunnyEggBagFinalForm).requireCustomFunction(function (player:Player):Boolean {
+				return player.easterbunnyScore() >= 12;
+			}, "Easter Bunny race");
             ElvishPeripheralNervSysFinalForm.requireLevel(30).requirePerk(ElvishPeripheralNervSysEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.elfScore() >= 12;
             }, "Elf race");

@@ -800,15 +800,18 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.balls >=2) {
 					outputText("\n<b>Your balls grow as your eggs increase in size.</b>\n");
 					player.ballSize++;
-					if (player.hasPerk(PerkLib.EasterBunnyEggBagFinalForm)) {
-						player.ballSize++;
+					if (player.hasPerk(PerkLib.EasterBunnyEggBagEvolved)) {
 						var changeLib:Number = player.lib*((player.ballSize*5/100)+1); //Exemple (1*5/100)+1= 1.05 wich is the modifier to libido
+						if (player.hasPerk(PerkLib.EasterBunnyEggBagFinalForm)){
+							changeLib:Number = player.lib*((player.ballSize*10/100)+1);
+							player.ballSize++;
+						}
 						player.dynStats("lib", changeLib);
 					}
-					if (player.ballSize < 3) {
+					if (player.ballSize > 3 && player.ballSize < 4) {
 						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head. Your balls have increased enought that you are ready to lay your eggs.");
 					}
-					if (player.ballSize < 4) {
+					if (player.ballSize > 4) {
 						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head, as the size of your increasingly growing balls remind you that you need to expel those eggs one way or another before they become too big.");
 					}
 				}
@@ -820,6 +823,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.EasterBunnyBalls)
 			}
 
+			//Easter bunny egg balls Cumming the eggs out
 			if (player.hasStatusEffect(StatusEffects.EasterBunnyCame)) { //Easter bunny cumming its eggs out
 				if (player.balls == 2)outputText("\nYou sigh in relief as your balls now empty of their eggs dangle under your cock two new way smaller eggs sliding " +
 						"inside to fill the void in them. Of course you also collected those that you shot out, never know when these can come in handy.\n");
