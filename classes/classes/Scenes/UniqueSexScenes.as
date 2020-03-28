@@ -202,7 +202,7 @@ public function EasterBunnyLayEggsRape():void {
 	outputText("Your [cock] still hard, you keep bucking inside -opponent- name relentlessly until you cum not once not twice but three times, tongues out, caring little for the destroyed hole of your partner. Only caring for your own satisfaction you stop fucking only once " + monster.a + monster.short + " faint from exhaustion. " +
 			"Well you still got plenty of energy left but might as well fuck something that's awake. You unplug your still hard cock from " + monster.pronoun3 + " asshole gasping as your cock sensitive flesh is exposed to the air again." +
 			" Without anything to plug it the excessive load of cum stashed in your victim's stomach surges out and dye the ground beneath " + monster.pronoun3 + " white. For good measure you clean your dripping penis on " + monster.a + monster.short + " ass and hops off back to camp.\n\n");
-	player.sexReward("Default", "Default", true, false)
+	player.sexReward("Default", "Dick", true, false)
 	cleanupAfterCombat();
 	return;
 }

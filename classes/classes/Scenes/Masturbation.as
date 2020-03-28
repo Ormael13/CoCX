@@ -2335,15 +2335,7 @@ public class Masturbation extends BaseContent {
 		outputText("You begin by stroking your pulsating prick teasingly, pre-cum running down your length from your constant state of arousal. You stroke quickly, pleasuring your sensitive dick, darting a finger down to fondle beneath the base of your egg lidden balls.\n\n");
 		outputText("The sensations prove too much for you, and you feel the tightness building in your twitching manhood, growing rapidly. You stroke furiously, feeling the pressure in your balls as you close in on your release. Pleasurable spasms overwhelm you as your pair of heavy eggs slides out from their bags and run through your -cock descript-. Your eyes cross as your hips jerk in the air in time with the eggs sliding out through your stretched urethra, a powerful burst of cum following through.\n\n");
 		outputText("You gasp in relief, your rigid prick pulsing and throbbing with continual lust as the two eggs finally land safely on the ground before you. Unsure about what to do with those you decide to keep them in case off.\n\n");
-		if (player.balls == 2)
-		{
-			outputText("<b>You gained two Easter bunny eggs!</b>\n\n");
-			flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=2;
-		}
-		if (player.balls == 4){
-			outputText("<b>You gained four Easter bunny eggs!</b>\n\n");
-			flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=4;
-		}
+		player.createStatusEffect(StatusEffects.EasterBunnyCame,0,0,0,0);
 		//Stats & next event
 		//DONE!
 		flags[kFLAGS.TIMES_MASTURBATED]++;
@@ -2352,6 +2344,7 @@ public class Masturbation extends BaseContent {
 			dynStats("sen", 0.5);
 		}
 		else {
+
 			player.orgasm();
 			dynStats("sen", -0.5);
 		}
