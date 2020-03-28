@@ -794,6 +794,7 @@ public class PlayerAppearance extends BaseContent {
 	menu();
 	addButton(0, "Next", playerMenu);
 	if(player.hasPerk(PerkLib.RacialParagon)){addButton(1, "Set Race.", ApexRaceSetting);}
+	addButton(7, "Reflect", campActionsReflect).hint("Reflect on your current state and future plans. (Also would make your body fully adjust to any sudden changes to natural limits of your attributes after eating any odd things and etc.)");
 	addButton(11, "Gender Set.", GenderForcedSetting);
 	addButton(10, "RacialScores", RacialScores);
 	flushOutputTextToGUI();
@@ -2889,9 +2890,9 @@ public function RacialScores():void {
 	else if (player.mantisScore() >= 1 && player.mantisScore() < 6) outputText("\n<font color=\"#008000\">Half Mantis-morph: " + player.mantisScore() + "</font>");
 	else if (player.mantisScore() < 1) outputText("\n<font color=\"#ff0000\">Half Mantis-morph: 0</font>");
 	//Melkie
-	if (player.melkieScore() >= 21) outputText("\n<font color=\"#0000a0\">Elder Melkie: " + player.melkieScore() + " (+" + (140 * (1 + player.newGamePlusMod())) + " max Spe, +" + (140 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib, +" + (65 * (1 + player.newGamePlusMod())) + " max Sens, +" + (65 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
-	else if (player.melkieScore() >= 18 && player.melkieScore() < 21) outputText("\n<font color=\"#0000a0\">Melkie: " + player.melkieScore() + " (+" + (105 * (1 + player.newGamePlusMod())) + " max Spe, +" + (120 * (1 + player.newGamePlusMod())) + " max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " max Sens, +" + (50 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
-	else if (player.melkieScore() >= 8 && player.melkieScore() < 18) outputText("\n<font color=\"#0000a0\">Half Melkie: " + player.melkieScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Spe, +" + (45 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Sens, +" + (25 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
+	if (player.melkieScore() >= 21) outputText("\n<font color=\"#0000a0\">Elder Melkie: " + player.melkieScore() + " (+" + (140 * (1 + player.newGamePlusMod())) + " max Spe, +" + (140 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib, +" + (65 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
+	else if (player.melkieScore() >= 18 && player.melkieScore() < 21) outputText("\n<font color=\"#0000a0\">Melkie: " + player.melkieScore() + " (+" + (120 * (1 + player.newGamePlusMod())) + " max Spe, +" + (120 * (1 + player.newGamePlusMod())) + " max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
+	else if (player.melkieScore() >= 8 && player.melkieScore() < 18) outputText("\n<font color=\"#0000a0\">Half Melkie: " + player.melkieScore() + " (+" + (55 * (1 + player.newGamePlusMod())) + " max Spe, +" + (55 * (1 + player.newGamePlusMod())) + " max Int, +" + (35 * (1 + player.newGamePlusMod())) + " max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
 	else if (player.melkieScore() >= 1 && player.melkieScore() < 8) outputText("\n<font color=\"#008000\">Half Melkie: " + player.melkieScore() + "</font>");
 	else if (player.melkieScore() < 1) outputText("\n<font color=\"#ff0000\">Half Melkie: 0</font>");
 	//Minotaur
@@ -3163,6 +3164,36 @@ public function GenderForcedSettingMale():void {
 public function GenderForcedSettingFemale():void {
 	flags[kFLAGS.MALE_OR_FEMALE] = 2;
 	doNext(GenderForcedSetting);
+}
+
+private function campActionsReflect():void {
+	clearOutput();
+	outputText("Placeholder text for now... till any of our writers decide to grace us with any text to be used here...");
+	var oldmaxes:Object = player.getAllMaxStats();
+	var strStat:Number = player.str/oldmaxes.str;
+	var touStat:Number = player.tou/oldmaxes.tou;
+	var speStat:Number = player.spe/oldmaxes.spe;
+	var inteStat:Number = player.inte/oldmaxes.inte;
+	var wisStat:Number = player.wis/oldmaxes.wis;
+	var libStat:Number = player.lib/oldmaxes.lib;
+	var sensStat:Number = player.sens/oldmaxes.sens;
+	var strStat1:Number = oldmaxes.str;
+	var touStat1:Number = oldmaxes.tou;
+	var speStat1:Number = oldmaxes.spe;
+	var inteStat1:Number = oldmaxes.inte;
+	var wisStat1:Number = oldmaxes.wis;
+	var libStat1:Number = oldmaxes.lib;
+	var sensStat1:Number = oldmaxes.sens;
+	player.strtouspeintwislibsenCalculation2();
+	var newmaxes:Object = player.getAllMaxStats();
+	if (newmaxes.str != strStat1) player.str = Math.round(player.str * strStat);
+	if (newmaxes.tou != touStat1) player.tou = Math.round(player.tou * touStat);
+	if (newmaxes.spe != speStat1) player.spe = Math.round(player.spe * speStat);
+	if (newmaxes.inte != inteStat1) player.inte = Math.round(player.inte * inteStat);
+	if (newmaxes.wis != wisStat1) player.wis = Math.round(player.wis * wisStat);
+	if (newmaxes.lib != libStat1) player.lib = Math.round(player.lib * libStat);
+	if (newmaxes.sens != sensStat1) player.sens = Math.round(player.sens * sensStat);
+	doNext(playerMenu);
 }
 
 	public function sockDescript(index:int):void {

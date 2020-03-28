@@ -997,6 +997,7 @@ package classes.Scenes.Places.HeXinDao
 			if (player.hasPerk(PerkLib.BroBrains)) player.removePerk(PerkLib.BroBrains);
 			if (player.hasPerk(PerkLib.FutaForm)) player.removePerk(PerkLib.FutaForm);
 			if (player.hasPerk(PerkLib.FutaFaculties)) player.removePerk(PerkLib.FutaFaculties);
+			player.strtouspeintwislibsenCalculation2();
 			awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
 			doNext(camp.returnToCampUseFourHours);
 		}

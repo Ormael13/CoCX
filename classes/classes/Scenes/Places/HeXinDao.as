@@ -975,14 +975,14 @@ public function soularena():void {
 		clearOutput();
 		outputText("You would like to buy a 'Golems, Animations and You' manual from her if she got one.\n\n");
 		outputText("\"<i>As it happens yes I do have one though it does not come cheap. ");
-		if (player.statusEffectv1(StatusEffects.GolemancerShop) == 1) outputText("3000 gems and it's yours hows that for a price?</i>\"");
-		if (player.statusEffectv1(StatusEffects.GolemancerShop) == 0) outputText("Come to think of it you have been a very faithful customer so I will make you a one time deal by cuting the price down by two third of the total. 500 gems and it's yours.</i>\"");
 		menu();
 		if (player.statusEffectv1(StatusEffects.GolemancerShop) == 1) {
+			outputText("3000 gems and it's yours hows that for a price?</i>\"");
 			if (player.gems > 2999) addButtonDisabled(1, "Buy", "You not have enough gems to buy this.");
 			else addButton(1, "Buy", golemancershopPermGolemsUpgradesGuideYes);
 		}
 		if (player.statusEffectv1(StatusEffects.GolemancerShop) == 0) {
+			outputText("Come to think of it you have been a very faithful customer so I will make you a one time deal by cuting the price down by two third of the total. 500 gems and it's yours.</i>\"");
 			if (player.gems > 499) addButtonDisabled(1, "Buy", "You not have enough gems to buy this.");
 			else addButton(1, "Buy", golemancershopPermGolemsUpgradesGuideYes);
 		}

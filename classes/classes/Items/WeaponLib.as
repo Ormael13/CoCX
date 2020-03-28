@@ -31,7 +31,6 @@ package classes.Items
 		public const BLETTER:BloodLetter = new BloodLetter();
 		public const B_WIDOW:BlackWidow = new BlackWidow();
 		public const CLAWS  :Weapon = new Weapon("Claws","Claws","gauntlet with claws","a gauntlet with claws","rend",0,100,"Those metal gauntlets have tips of the fingers shaped like sharp natural claws.  Though they lacks the damaging potential of other weapons, they have a chance to leave bleeding wounds.");
-		public const L_CLAWS:Weapon = new Weapon("L.Claws","LustyClaws","gauntlet with an aphrodisiac-coated claws","a gauntlet with an aphrodisiac-coated claws","rend",0,200,"Those metal gauntlets have tips of the fingers shaped like natural claws.  They seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.");
 		public const CLAYMOR:Weapon = new LargeClaymore();
 		public const CNTWHIP:CatONineTailWhip = new CatONineTailWhip();
 		public const DWARWA :DwarvenWaraxe = new DwarvenWaraxe();
@@ -68,12 +67,13 @@ package classes.Items
 		public const KATANA :Weapon = new Weapon("Katana ","Katana","katana","a katana","keen cut",17,680,"A curved bladed weapon that cuts through flesh with the greatest of ease.", "Large");
 		public const KIHAAXE:Weapon = new Weapon("KihaAxe","Greataxe","fiery double-bladed axe","a fiery double-bladed axe","fiery cleave",22,880,"This large, double-bladed axe matches Kiha's axe. It's constantly flaming.", "Large");
 		public const L__AXE :LargeAxe = new LargeAxe();
+		public const L_CLAWS:Weapon = new Weapon("L.Claws","LustyClaws","gauntlet with an aphrodisiac-coated claws","a gauntlet with an aphrodisiac-coated claws","rend",0,200,"Those metal gauntlets have tips of the fingers shaped like natural claws.  They seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.");
 		public const L_DAGGR:Weapon = new Weapon("L.Daggr","L.Daggr","lust-enchanted dagger","an aphrodisiac-coated dagger","stab",3,240,"A dagger with a short blade in a wavy pattern.  Its edge seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.", "Small");
 		public const L_HAMMR:LargeHammer = new LargeHammer();
-		public const LHSCYTH:LifehuntScythe = new LifehuntScythe();
 		public const L_STAFF:LethiciteStaff = new LethiciteStaff();
 		public const L_WHIP :LethiciteWhip = new LethiciteWhip();
 		public const LANCE  :Lance = new Lance();
+		public const LHSCYTH:LifehuntScythe = new LifehuntScythe();
 		public const LRAPIER:LustRapier = new LustRapier();
 		public const MACE   :Weapon = new Weapon("Mace   ", "Mace", "mace", "a mace", "smash", 9, 360, "This is a mace, designed to be able to crush against various defenses.");
 		public const MACGRSW:Weapon = new Weapon("Macgrsw","Mach.greatsword","Machine Greatsword","a Machine Greatsword","slash",19,4415,"This greatsword is half invention and half weapon. Instead of a sharp straight blade, the weapon’s sides are a set of metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. Very good for cutting down trees too.", "Large");

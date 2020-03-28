@@ -8305,7 +8305,7 @@ use namespace CoC;
 			if (this.firesnailScore() >= 15) minSen += (50 * newGamePlusMod);
 			if (this.melkieScore() >= 8) minSen += (25 * newGamePlusMod);
 			if (this.melkieScore() >= 18) minSen += (25 * newGamePlusMod);
-			if (this.melkieScore() >= 21) minSen += (25 * newGamePlusMod);
+			if (this.melkieScore() >= 21) minSen += (15 * newGamePlusMod);
 			//Rings
 			if (this.jewelryName == "Ring of Intelligence") minInt += 5;
 			if (this.jewelryName == "Ring of Libido") minLib += 5;
@@ -9974,22 +9974,19 @@ use namespace CoC;
 			}
 			if (melkieScore() >= 8) {
 				if (melkieScore() >= 21) {
-					maxSpeCap2 += (110 * newGamePlusMod);
-					maxIntCap2 += (110 * newGamePlusMod);
-					maxLibCap2 += (95 * newGamePlusMod);
-					maxSenCap2 += (75 * newGamePlusMod);
+					maxSpeCap2 += (140 * newGamePlusMod);
+					maxIntCap2 += (140 * newGamePlusMod);
+					maxLibCap2 += (100 * newGamePlusMod);
 				}
 				if (melkieScore() >= 18) {
-					maxSpeCap2 += (95 * newGamePlusMod);
-					maxIntCap2 += (95 * newGamePlusMod);
+					maxSpeCap2 += (120 * newGamePlusMod);
+					maxIntCap2 += (120 * newGamePlusMod);
 					maxLibCap2 += (80 * newGamePlusMod);
-					maxSenCap2 += (50 * newGamePlusMod);
 				}
 				else {
-					maxSpeCap2 += (40 * newGamePlusMod);
-					maxIntCap2 += (40 * newGamePlusMod);
+					maxSpeCap2 += (55 * newGamePlusMod);
+					maxIntCap2 += (55 * newGamePlusMod);
 					maxLibCap2 += (35 * newGamePlusMod);
-					maxSenCap2 += (25 * newGamePlusMod);
 				}
 			}
 			if (poltergeistScore() >= 6) {

@@ -146,18 +146,29 @@ package classes.Scenes
 			outputText("-New range weapon (by Liadri): Twin Dart pistol - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Blight Ridge area. Cost 240 gems. Base atk is 1 and ammo clip size 6. Function as the succubus whip minus the corruption & self lust. It's Dual Firearm type range weapon. Can be used in goblin mech.\n");
 			outputText("-Urta get few tips how to be better fighter (no seriously she was so lousy our xinainxia teachers beaten... taugh her proper fight techniques or eliminated more harmfull side effects of those she knew and wasn't replacable). All praise our bastar... glorious teachers to lend a helping hand to Urta.\n");
 			outputText("-Liadri changes to sex/tease exp gains that would allow to get it form sex scenes. Also gargoyle/jiangshi feeding from sex fluids been handled at the same time.\n");
-			outputText("-Amily got henchman option (both normla and slave variant). Enjoy your lil mouse assasin ^^\n");
+			outputText("-Amily got henchman option (both normal and slave variant). Enjoy your lil mouse assasin ^^\n");
 			outputText("-Friendly interaction with Hydra will also now unlock hydra tf in Dinah shop. Additionaly hydra tf will be able to change gorogn eyes to just snake eyes.\n");
 			outputText("-New head accesory (by Liadri): Sphinx accessory set - obtained by beating Sanurah riddles and then entering dungeon right away without sexing her out. Can be gained only once per gameplay. (sorry any other way was way to many needless lines of code to add) Cost 400 gems. Increase of Cursed Riddle damage and Spellpower by 50%.\n");
 			outputText("-New tier 1 misc lvl-up perk: Racial Paragon. Req. Job: Beast Warrior perk. Effect: Add 1 to each stat per level and increase racial skill power by 50% but remove all chimerical disposition stat gains and degeneration as well lock you into a single race.\n");
 			outputText("-New tier 2 misc lvl-up perk: Apex. Req. Racial Paragon perk. Effect: Add 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Racial Paragon.\n");
 			outputText("-New tier 3 misc lvl-up perk: Alpha and Omega. Req. Apex perk. Effect: Add 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Apex.\n");
 			outputText("-Liadri added option to pick race enhanced by Racial paragon perk (similar menu as with picking perks).\n");
-			outputText("-Becoming Gargoyle or Jiangshi will properly now cut off PC from accessing Metamorph menu (even if PC had it openend before).\n");
+			outputText("-Becoming Gargoyle or Jiangshi will now properly cut off PC from accessing Metamorph menu (even if PC had it openend before).\n");
 			outputText("-Drinking Bimbo Liquer or Bro Brew will not trigger gaining respecitve body & mind perks on PC. Could only trigger effect of drinking alcohol for oni specials. Similary becoming gargoyle/jiangshi will remove any bimbo/bro/futa perks.\n");
 			outputText("-Liadri updates for character viewer including clothes for specific items.\n");
+			outputText("-Some of under the hood changes to lessed ocasisonal lags due to max stat cap calculations there was added button 'Reflect' to Appearance screen that would allow recount race related part of max stat bonuses. So now it won;t update automaticaly after using tf item but will require to manualy make caps update due to possible race score changes.\n");
 			outputText("-\n");
 			outputText("-\n");//MelkieLungEvolved
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
@@ -216,17 +227,6 @@ package classes.Scenes
 			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
