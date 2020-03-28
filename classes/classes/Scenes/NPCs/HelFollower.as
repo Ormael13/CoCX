@@ -1215,7 +1215,7 @@ private function inCampHelNagaLuv():void {
 	
 	outputText("\n\nBefore you know it, you're drifting off to sleep in your lover's embrace...  The last thing you hear is her quiet whisper: \"<i>Nagas really do give the best hugs...</i>\"");
 
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("sen", -1);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
@@ -1289,7 +1289,7 @@ private function centaurMountsCampHel():void {
 	
 	outputText("\n\n\"<i>Holy shit,</i>\" she gasps, breathing hard, You look down from your loft position on centaur-back as Hel rolls over, idly fingering out thick globs of seed still leaking from her well-abused hole.  \"<i>Thanks for the ride, lover mine.</i>\"");
 
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("sen", -1);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
@@ -1349,7 +1349,7 @@ private function heliaFollowerTentafuck():void {
 	outputText("\n\nWith a contented sigh, you yank your wilting pricks out of your fiery lover, letting her flop to the ground in a puddle of sticky spunk.  She groans loudly, rolling over and blinking hard.  \"<i>You're just a miniature tentacle monster, you know that?  And I love it!  You gotta do that again some time... just like a walking gang bang.</i>\"");
 	
 	outputText("\n\nYou roll your eyes and go to get cleaned up.");
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("sen", -1);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
@@ -1472,7 +1472,7 @@ private function muddyLizardFeet():void {
 	
 	outputText("\n\nYou brush her hair and nod, happy to enjoy the loving embrace of your lover.");
 
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }

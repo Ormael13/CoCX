@@ -149,7 +149,6 @@ internal function tentacleVictoryRape():void {
 	}
 	//Female:
 	else {
-		player.slimeFeed();
 		//High Corruption
 		if(player.cor >= 66) {
 			outputText("Seizing the opportunity, you rush the monster while it is stopped. You grab the fattest phallic tentacle you can find and summarily shit-kick the beast onto the ground. Holding the creature down with one foot, you take the tentacle-cock and poise it in front of your dripping cunt.\n\n");

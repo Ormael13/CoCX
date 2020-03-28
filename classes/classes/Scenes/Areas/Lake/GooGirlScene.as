@@ -186,8 +186,8 @@ public class GooGirlScene extends AbstractLakeContent
 			if (player.cumQ() <= 500) outputText("A ball of pearl fluid builds up in the girl's head, turning her curious eyes white for a moment before she makes an exaggerated swallowing motion and the huge lump rolls down her throat, neck bulging outward as it drops into her belly, surrounding the gleaming ruby heart in a halo of ivory sperm.");
 			else outputText("The girl's expression goes from pleased triumph to mild panic when your orgasm shows no sign of flagging, load after load racing into her body. She quickly snakes her tongue out of your urethra and tries to pull off of your " + cockDescript(x) + ", but her arm is too deep in your ass and she finds herself stuck! You rest your hands on the " + gooColor4() + " sludge of her goopy hair, fingers sinking into her slime as she tries to make room for your gushing, ivory torrent.  You clench your eyes in pleasure and surrender yourself to the feeling, your groin a font of creamy seed.  When you finally slow and open your eyes, you're a little surprised to find that the girl has become almost entirely white!  Her translucent skin retains a bit of the lake's " + monster.skinTone + " hue, but top to bottom, the goo-girl's body swirls with your cum, leaving her with the fattened appearance of pale pregnancy.");
 			outputText("  Her arm slides out of your rump and the goo-girl practically rolls into the lake, splashing into the depths lazily. It sure didn't feel like you lost that fight, you reflect while taking delicious swallows of cold air.");
-			player.sexReward("vaginalFluids");
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("sen", 4);
 			cleanupAfterCombat();
 		}
@@ -208,7 +208,7 @@ public class GooGirlScene extends AbstractLakeContent
 			outputText("  Your spurting ecstasy floods the girl's jelly body, coloring her " + gooColor3() + " body white as she drinks deeply, coaxing a few seconds of gasping spasms into long, seed-spewing minutes of climaxing euphoria.");
 
 			outputText("When you finally run dry, every muscle in your body aches with exhaustion and it feels like you haven't had anything to drink in months.  The slime slowly disentangles herself from your twitching form, ejecting you from the womb-like ardor of her squishy interior.  When she reforms her slender body, the goo-girl's belly bulges with your creamy load.  She gives you a beaming smile and pats her belly, sending ripples through her body with each wobbling slap.  The girl waves goodbye and slides back into the lake, giving you enough time to catch your breath and let your body recover.");
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("sen", 4);
 			cleanupAfterCombat();
 		}
@@ -415,7 +415,7 @@ public class GooGirlScene extends AbstractLakeContent
 				outputText("If only all of Mareth's denizens were so accommodating, you muse, as you gather your things and depart.");
 				coreDropChance();
 			}
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			cleanupAfterCombat();
 		}
 
@@ -440,7 +440,7 @@ public class GooGirlScene extends AbstractLakeContent
 			//Corrupt victory ooze – (After specific sex scenes while the player has a 70+ corruption score)
 			if (player.cor >= 85 && rand(2) == 0) outputText("\n\nAs you're leaving, you happen to glance back at the lake and notice something strange; the sludge left by the melting shell of the goo-girl is quivering with renewed life! The swirling opalescence of your corrupt seed is clearly visible through her membrane, her " + gooColor11() + " slowly bleeding into a pale emerald hue. Your eyes widen as the muck regains solidity, first a head and then shoulders slowly rising from the puddle. The empty girl regains her shape, but the rippling within her does not stop. Gradually, her breasts shrink, flattening against her chest while a viridian phallus rises from between her legs.  Your cum floats down her torso and inflates a pair of jiggling, slimy balls.  The potency of your semen has reanimated the goo-girl, it seems, but has transformed her into an instinctual, mindless ooze. She- now a he- stares vacantly at you, the slick, green cock at his base stiffening, before he plunges into the lake. You'll have to check on your new son one of these days.");
 			coreDropChance();
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			cleanupAfterCombat();
 		}
 

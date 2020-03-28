@@ -428,7 +428,7 @@ public function underwaterDateMaleVer():void
 	}
 	if (player.cocks[x].cockLength < 22) outputText(" Still something tells you if your cock was bigger Ceani might like it more. Your dick felt like a small key trying to fit an oversized lock.");
 	outputText("\n\n");
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	doNext(camp.returnToCampUseTwoHours);
 }
 
@@ -541,7 +541,7 @@ public function beachDateMaleVer():void {
 	}
 	if (player.cocks[x].cockLength < 22) outputText(" Still something tells you if your cock was bigger Ceani might like it more. Your dick felt like a small key trying to fit an oversized lock.");
 	outputText("\n\n");
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	doNext(camp.returnToCampUseTwoHours);
 }
 

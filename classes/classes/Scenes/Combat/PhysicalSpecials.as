@@ -347,6 +347,19 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You need more time before you can perform Wing Buffet again.</b>\n\n");
 				}
 			}
+			if (player.hasPerk(PerkLib.EasterBunnyBalls)) {
+				if (!player.hasPerk(PerkLib.EasterBunnyEggBag) || (player.hasPerk(PerkLib.EasterBunnyEggBag) && flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] == 1)) {
+					bd = buttons.add("Egg throw", EggthrowAttack).hint("Throw one of your many stashed bunny eggs blinding and arousing the opponent. These attacks benefit from skills that improve thrown weapons \n\n"+flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+" egg remaining.");
+					bd.requireFatigue(physicalCost(30));
+					if (flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] == 0) {
+						bd.disable("<b>You need eggs to use this ability.</b>\n\n");
+					}
+				}
+				if (player.hasPerk(PerkLib.EasterBunnyEggBag) && flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] > 1) {
+					bd = buttons.add("Omni Egg throw", OmniEggthrowAttack).hint("Throw one or more of your many stashed bunny eggs blinding and arousing the opponent. These attacks benefit from skills that improve thrown weapons. \n\n"+flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+" egg remaining.");
+					bd.requireFatigue(physicalCost(30));
+				}
+			}
 		}
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Dynapunch Glove") >= 0) {
@@ -2664,10 +2677,130 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else enemyAI();
 	}
 
+	public function EggThrowLustDamageRepeat():void {
+		if(rand(player.spe/2 + 40) + 20 > monster.spe/1.5) {
+			var lustDmgF:Number = 20 + rand(6);
+			var lustBoostToLustDmg:Number = 0;
+			var bimbo:Boolean   = false;
+			var bro:Boolean     = false;
+			var futa:Boolean    = false;
+			if (player.hasPerk(PerkLib.DeadlyThrow)) lustDmgF += (player.spe/100);
+			if (player.findPerk(PerkLib.SensualLover) >= 0) lustDmgF += 2;
+			if (player.findPerk(PerkLib.Seduction) >= 0) lustDmgF += 5;
+			if (player.findPerk(PerkLib.SluttySeduction) >= 0) lustDmgF += player.perkv1(PerkLib.SluttySeduction);
+			if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) lustDmgF += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+			if (bimbo || bro || futa) lustDmgF += 5;
+			if (player.findPerk(PerkLib.FlawlessBody) >= 0) lustDmgF += 10;
+			lustDmgF += scalingBonusLibido() * 0.1;
+			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmgF *= 1.5;
+			if (player.findPerk(PerkLib.JobSeducer) >= 0) lustDmgF += player.teaseLevel * 3;
+			else lustDmgF += player.teaseLevel * 2;
+			if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) lustDmgF *= 1.2;
+			switch (player.coatType()) {
+				case Skin.FUR:
+					lustDmgF += (1 + player.newGamePlusMod());
+					break;
+				case Skin.SCALES:
+					lustDmgF += (2 * (1 + player.newGamePlusMod()));
+					break;
+				case Skin.CHITIN:
+					lustDmgF += (3 * (1 + player.newGamePlusMod()));
+					break;
+				case Skin.BARK:
+					lustDmgF += (4 * (1 + player.newGamePlusMod()));
+					break;
+			}
+			if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") lustDmgF *= (1 + ((10 + rand(11)) / 100));
+			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) lustDmgF *= (1 + (player.lust100 * 0.01));
+			if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) lustDmgF *= (1 + combat.historyWhoreBonus());
+			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
+			if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
+			if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
+			lustBoostToLustDmg += lustDmgF * 0.01;
+			lustDmgF *= 0.2;
+			if (player.lust100 * 0.01 >= 0.9) lustDmgF += (lustBoostToLustDmg * 140);
+			else if (player.lust100 * 0.01 < 0.2) lustDmgF += (lustBoostToLustDmg * 140);
+			else lustDmgF += (lustBoostToLustDmg * 2 * (20 - (player.lust100 * 0.01)));
+			//Determine if critical tease!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			if (player.findPerk(PerkLib.CriticalPerformance) >= 0) {
+				if (player.lib <= 100) critChance += player.lib / 5;
+				if (player.lib > 100) critChance += 20;
+				if (player.hasPerk(PerkLib.AnatomyExpert)) critChance += 10;
+			}
+			if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+			if (rand(100) < critChance) {
+			crit = true;
+				if (!player.hasPerk(PerkLib.AnatomyExpert)) lustDmgF *= 1.75;
+				if (player.hasPerk(PerkLib.AnatomyExpert)) lustDmgF *= 2.50;
+			}
+			if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
+			if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) lustDmgF *= 1.5;
+			lustDmgF = lustDmgF * monster.lustVuln;
+			lustDmgF = Math.round(lustDmgF);
+			monster.teased(lustDmgF,false);
+			if (crit == true) outputText(" <b>Critical!</b>");
+			combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+			if (monster.lustVuln > 0) {
+				monster.lustVuln += 0.05;
+				if (monster.lustVuln > 1) monster.lustVuln = 1;
+			}
+		}
+		else {
+			outputText("<b>(<font color=\"#000080\">Miss!</font>)</b>");
+		}
+		flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]--;
+	}
+
+	public function EggthrowAttack():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		//(if monster = demons)
+		if(!monster.plural) outputText("You throw one of your stashed bunny eggs at " + monster.a + monster.short + " face! It explodes in a lewd mix of fluids covering " + monster.pronoun3 + " eyes and body with your unfertilised egg content.");
+		else outputText("You throw one of your stashed bunny eggs up at one of " + monster.a + monster.short + "! It explodes in a lewd mix of fluids covering " + monster.pronoun3 + " eyes and body with your unfertilised egg content.");
+		//React
+		if(monster.lustVuln == 0) outputText("  Your opponent does not seem to be affected by it however.");
+		else {
+			if(monster.plural) outputText("  The one you hit flushes hotly, though the entire group seems to become more aroused in sympathy to their now-lusty compatriot.");
+			else outputText("  " + monster.mf("He","She") + " flushes hotly and " + monster.mf("touches his suddenly-stiff member, moaning lewdly for a moment.","touches a suddenly stiff nipple, moaning lewdly.  You can smell her arousal in the air."));
+			EggThrowLustDamageRepeat();
+		}
+		outputText("\n\n");
+		if (!combatIsOver()) enemyAI();
+	}
+
+	public function OmniEggthrowAttack():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		//(if monster = demons)
+		if(!monster.plural) outputText("You begin throwing a barrage of your stashed bunny eggs at " + monster.a + monster.short + " face! They explodes in a lewd mix of fluids covering " + monster.pronoun3 + " eyes and body with your unfertilised egg content.");
+		else outputText("You begin throwing a barrage of your stashed bunny eggs up at one of " + monster.a + monster.short + "! They explodes in a lewd mix of fluids covering " + monster.pronoun3 + " eyes and body with your unfertilised egg content.");
+		//React
+		if(monster.lustVuln == 0) outputText("  Your aphrodisiac toxin has no effect!");
+		else {
+			if(monster.plural) outputText("  The one you bit flushes hotly, though the entire group seems to become more aroused in sympathy to their now-lusty compatriot.");
+			else outputText("  " + monster.mf("He","She") + " flushes hotly and " + monster.mf("touches his suddenly-stiff member, moaning lewdly for a moment.","touches a suddenly stiff nipple, moaning lewdly.  You can smell her arousal in the air."));
+			EggThrowLustDamageRepeat();
+			if (flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] > 1) EggThrowLustDamageRepeat();
+			if (player.hasPerk(PerkLib.DoubleStrike) && flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] > 1){
+				EggThrowLustDamageRepeat();
+				if (flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] > 1) EggThrowLustDamageRepeat();
+			}
+			if (player.hasPerk(PerkLib.TripleStrike) && flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] > 1){
+				EggThrowLustDamageRepeat();
+				if (flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] > 1) EggThrowLustDamageRepeat();
+			}
+		}
+		outputText("\n\n");
+		if (!combatIsOver()) enemyAI();
+	}
+
+
 	public function StoneClawAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+		//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(120, USEFATG_PHYSICAL);
 		else fatigue(60, USEFATG_PHYSICAL);
 		player.createStatusEffect(StatusEffects.CooldownStoneClaw,3,0,0,0);
@@ -2741,7 +2874,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function StoneFistAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+		//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(120, USEFATG_PHYSICAL);
 		else fatigue(60, USEFATG_PHYSICAL);
 		player.createStatusEffect(StatusEffects.CooldownStoneFist,3,0,0,0);
@@ -2965,7 +3098,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function WingBuffetAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+		//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(60, USEFATG_PHYSICAL);
 		else fatigue(30, USEFATG_PHYSICAL);
 		player.createStatusEffect(StatusEffects.CooldownWingBuffet,6,0,0,0);

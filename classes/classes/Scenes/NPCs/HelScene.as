@@ -468,7 +468,7 @@ internal function beatUpHelAndStealHerWalletFromHerVagina():void {
 	outputText(".  You run your hands through her hair as you shoot strings of jism again and again into her mouth until her cheeks start to bulge.  When you're through, she makes a loud gulp and licks her lips, grinning at you wide enough that a tiny amount of your cum leaks from her cheeks.\n\n");
 
 	outputText("Exhausted, you can't help but collapse into her cleavage, your cheek coming to rest between her soft breasts.  You smile at her, and cup one of them even as she begins to stroke your cheek, smiling.  Your eyes feel heavy, and exhaustion begins to overtake you.  Slowly, you drift off into a peaceful sleep in the embrace of your lover.");
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
@@ -569,7 +569,7 @@ internal function dpHel():void {
 
 	outputText("\"<i>Hot damn,</i>\" the salamander finally says, grinning from ear to ear as she begins to stroke your cheeks.  \"<i>Oh, damn, two cocks are the fucking BEST.</i>\"  She laughs to herself as you nestle your cheek on her soft breasts, slowly drifting off to a pleasant, peaceful sleep.");
 	//(reduce lust, increment Helgate flag by 1)
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;
 	flags[kFLAGS.TIMES_HELIA_DOUBLE_DONGED]++;
@@ -712,7 +712,7 @@ private function nagaCoilsUpHel():void {
 	if(flags[kFLAGS.HEL_FUCKBUDDY] == 0) outputText("battle and ");
 	outputText("massive orgasm, you collapse onto your back and release your salamander lover from your grasp.  She crawls up to you and nuzzles into your " + chestDesc() + ", wrapping her own tail around you in return.  Soon, you drift off into a calm, peaceful sleep.");
 	//(reduce lust, increment Helgate flag by 1)
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
@@ -794,7 +794,7 @@ private function mountHel():void {
 	
 	outputText("Chuckling, you assure her you'll be back when you can, and soon, you've both drifted off into a contented, restful sleep beneath the lone tree amidst the plains.");
 	//(reduce lust, increment Helgate flag by 1)
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
@@ -847,7 +847,8 @@ private function helVaginaTaur69():void {
 
 	outputText("It takes a minute for your body to calm down; when it has, your salamander lover slips out from her harness and collapses on the ground, soaked in a mixture of your cum and hers.  Exhausted beyond the efforts of willpower, you drop to the ground beside her and drift off to a restive, bruised sleep.\n\n");
 	//(reduce lust, reduce HP?, increment Helgate flag by 1)
-	player.sexReward("vaginalFluids");
+	player.sexReward("Default","Default",true,false);
+	if(player.hasCock()) player.sexReward("vaginalFluids","Dick");
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
@@ -943,7 +944,7 @@ private function rapingHelsAssMeansYourCorruptCauseAnalIsEvil():void {
 
 	outputText("You yank yourself out of her in one quick pull; she collapses onto her side without you to support her, and shudders when another wave of her protracted orgasm hits her as she absently fingers herself.  The sight turns you on a bit, but you decide to leave her there and head back to camp, though you're sure to snatch her coinpurse before you go.");
 	//(reduce lust, decrement Helgate flag by 1 to a minimum of 0)
-	player.sexReward("Default", "Default", true,false);
+	player.sexReward("Default", "Dick", true,false);
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]--;
 	//Bump down follower tracking affection too
@@ -1044,7 +1045,7 @@ private function fuckHerAss():void {
 
 	outputText("She bursts out laughing at the sight of the 'taur wandering off with a fistful of his own jism coating his fur.  \"<i>Oh, poor guy,</i>\" she laughs, \"<i>wandered a bit too far from home and ran into me.  Just like someone else I know.</i>\"  To your surprise, she rolls over atop you and plants a long kiss on your lips, eyes closed and tail wagging softly behind her.");
 	//(reduce PC lust)
-	player.sexReward("Default", "Default", true,false);
+	player.sexReward("Default", "Dick", true,false);
 	dynStats("sen", -2);
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
@@ -1638,7 +1639,7 @@ private function stuffIzzyAndSalamanderWithDicks():void {
 
 		outputText("Unfortunately, fucking with four cocks at once soon drives you over the edge.  Screaming so loud the ground seems to shake, you unload into them, filling their cunts and asses so full of cum it begins to leak out around your pricks.  Utterly satisfied, you collapse onto your back, panting heavily.");
 	}
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("sen", -3);
 	//(Scene End)
 	//Bump up follower tracking affection too
@@ -1697,6 +1698,7 @@ private function izzySallyThreeSomeVagoozlaz():void {
 
 	outputText("\"<i>Yeah.  Resting is... resting is good,</i>\" Hel says, trying and failing to suppress a yawn of her own.  Smiling, you wrap your arms around your two beautiful, busty redheads and let sleep overcome you.");
 	//(Either return PC to camp or advance to the next day, if in plains or camp, respectively)
+	if(player.hasCock()) player.sexReward("vaginalFluids","Dick");
 	player.sexReward("vaginalFluids");
 	dynStats("sen", -3);
 	//Bump up follower tracking affection too
@@ -1779,7 +1781,7 @@ internal function foxyFluffsFoursomeAsMale():void {
 	outputText("The twins cum as one, both letting out a wail of pleasure as their knots expand dramatically for an instant.  Foxcream sprays everywhere, filling Hel and Miko's wombs before spurting back out of their cunts and coating the sisters with their own spunk.  With the sudden knotting inside her, Hel throws her head back and screams, riding out her own orgasm.  You manage a few last, desperate thrusts into Mai's spasming channel before you, too, blow your load, dumping thick, hot ropes of jizz into the fox-girl's waiting womb.\n\n");
 
 	outputText("You can only shudder and gasp as pleasure overtakes you.  You bury your face into Mai's neck, biting her as the last of your cum explodes deep inside her.  Mai bucks her hips back at you and squeezes your cock, milking you of every last drop until your shaft is utterly spent.  Moaning, you withdraw from inside her, dragging a waterfall of hot white cum out of her as you do so.");
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("sen", -1);
 	doNext(foxyFluffOutro);
 }
@@ -1811,9 +1813,7 @@ internal function foxyFluffGirlsFuckSex():void {
 
 	outputText("Not wanting to be left behind, you grab Mai and throw her onto the bed, putting you on top with her knot buried all the way inside you.  You grab her soft, firm breasts for support as you start to grind your hips against hers, making the girl moan like a whore as you assault her thick prick.  Mai can only lean over and grab her sister's hand, much as you had taken Hel's.  The twins hold on to each other as you and Hel ride them raw, soon turning the fox-girls into a pair of panting, squirming animals that buck their hips wildly into you, slamming more doggy cock inside you than you ever thought possible.  Grinning at you, Hel slips her tail around your waist, hugging you tightly as the girls come ever closer to orgasm -- and so do you.\n\n");
 	outputText("Suddenly, Miko lets out a sharp cry and slams her hips into Hel's.  You can only see the looks on both her face and Hel's as they cum in unison, white fox-spunk dribbling out of the slamander's hot snatch.  \"<i>Gonna... Gonna cum...</i>\" Mai whimpers, giving you only a moment to prepare before she grabs your arms and pulls you down onto her chest, burying your face between her heavy tits.  She jackhammers your now-exposed cunt.  ramming her knot in and out of you until you can't think straight.  You cum, your " + vaginaDescript() + " clamping down on her doggy cock.  Waves of explosive pleasure shoot through you, making you spasm in the fox-herm's arms, only barely aware of her shooting her load deep inside you, coating your walls with thick, hot spunk.  You ride out the orgasm buried in Mai's chest, shuddering and gasping as she kisses you over and over, letting her thick knot deflate inside you until her own cum leaks out, staining her smooth thighs and legs.");
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-	player.sexReward("vaginalFluids");
+	player.sexReward("cum");
 	dynStats("sen", -1);
 	doNext(foxyFluffOutro);
 }

@@ -80,6 +80,7 @@ public class Race {
     public static const POLTERGEIST:Race = new Race("Poltergeist",76);
     public static const BANSHEE:Race = new Race("Banshee",77);
     public static const MELKIE:Race = new Race("Yuki Onna",78);
+    public static const EASTERBUNNY:Race = new Race("Easter Bunny",79);
 
     public var name:String;
     public var id:int;

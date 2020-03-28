@@ -651,7 +651,7 @@ import classes.Scenes.UniqueSexScenes;
 
 			outputText("“<i>Well, that was fun.</i>”  Izumi says, sitting up and dusting off her palms, dismissively.  “<i>I’m assuming you’re not up to a rematch just yet from the way you’re shaking.</i>”  She picks up her pipe and takes a drag, shooting you a knowing grin.  “<i>Feel free to drop by again, though.  You know, in case you wanted to tell me off... or maybe if you just want me to bully you some more.</i>” \n\n");
 
-			player.sexReward("Default","Default",true,false);
+			player.sexReward("Default","Dick",true,false);
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);
@@ -721,7 +721,7 @@ import classes.Scenes.UniqueSexScenes;
 			else outputText(" puddle of your own");
 			outputText(" cum, staring at the cavern roof and panting madly for a good few minutes afterwards.  Once you regain the use of your legs, you retrieve your clothes and wander back to camp in a daze.\n\n");
 
-			player.sexReward("Default","Default",true,false);
+			player.sexReward("Default","Dick",true,false);
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);
@@ -755,7 +755,7 @@ import classes.Scenes.UniqueSexScenes;
 
 			outputText("“<i>So, you learned something today, right?  Next time, just do what I say, and the results are much more... fun.</i>” She smiles, then turns away.  Retrieving your clothes, you drag yourself back to camp, feeling decidedly shaky.\n\n");
 
-			player.sexReward("Default","Default",true,false);
+			player.sexReward("Default","Dick",true,false);
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);
@@ -807,7 +807,7 @@ import classes.Scenes.UniqueSexScenes;
 			 
 			outputText("Izumi returns to her tent and lights up her pipe, unceremoniously abandoning you there on the cave floor, apparently done with you for now.  Still, it’s some time before you are able to drag yourself to your feet and stumble home to your camp, wondering how long it’ll be before you can see straight again...\n\n");
 
-			player.sexReward("Default","Default",true,false);
+			player.sexReward("Default","Dick",true,false);
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);
@@ -1357,7 +1357,7 @@ import classes.Scenes.UniqueSexScenes;
 
 			outputText("Either way, after assuring Izumi that you’ll survive, you stagger out of the cave and begin to make your decidedly wobbly way back to camp.  Hopefully, your bruises won’t keep you awake....\n\n");
 
-			player.sexReward("Default","Default",true,false);
+			player.sexReward("Default","Dick",true,false);
 			cleanupAfterCombat();
 		}
 
@@ -1393,7 +1393,7 @@ import classes.Scenes.UniqueSexScenes;
 
 			outputText("You nod, pulling yourself to your feet and after exchanging a hasty goodbye with Izumi, you stumble towards the exit.  You’re not quite sure about ‘next time’, but you have to admit that really could have gone worse....\n\n");
 
-			player.sexReward("Default","Default",true,false);
+			player.sexReward("Default","Dick",true,false);
 			cleanupAfterCombat();
 		}
 

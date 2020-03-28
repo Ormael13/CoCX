@@ -621,15 +621,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.ALRAUNE_GROWING] > 0 && flags[kFLAGS.ALRAUNE_GROWING] < 15) flags[kFLAGS.ALRAUNE_GROWING]++;
 				//Reset SelfSustain & RepresLust daily counter
 				if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] > 0) flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] = 0;
-				//Reset Electra Strom Jewel daiy limit
+				//Reset Electra Storm Jewel daily limit
 				if (flags[kFLAGS.ELECTRA_DAILY_STORM_JEWEL] > 0) flags[kFLAGS.ELECTRA_DAILY_STORM_JEWEL] = 0;
-				//Reset Etna Venom Vial daiy limit
+				//Reset Etna Venom Vial daily limit
 				if (flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] > 0) flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] = 0;
-				//Reset Ceani Training daiy limit
+				//Reset Ceani Training daily limit
 				if (flags[kFLAGS.CEANI_DAILY_TRAINING] > 0) flags[kFLAGS.CEANI_DAILY_TRAINING] = 0;
-				//Reset Kindra Training daiy limit
+				//Reset Kindra Training daily limit
 				if (flags[kFLAGS.KINDRA_DAILY_TRAINING] > 0) flags[kFLAGS.KINDRA_DAILY_TRAINING] = 0;
-				//Reset Chi Chi Training daiy limit
+				//Reset Chi Chi Training daily limit
 				if (flags[kFLAGS.CHI_CHI_DAILY_TRAINING] > 0) flags[kFLAGS.CHI_CHI_DAILY_TRAINING] = 0;
 				//Reset Luna Meal CD
 				if (flags[kFLAGS.LUNA_MEAL] > 0) flags[kFLAGS.LUNA_MEAL] = 0;
@@ -792,7 +792,53 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) > 6) player.addStatusValue(StatusEffects.AdventureGuildQuests3, 2, -3);
 				}
 				if (flags[kFLAGS.AURORA_LVL] > 0.3 && flags[kFLAGS.AURORA_LVL] < 0.7) flags[kFLAGS.AURORA_LVL] += 0.05;
+
+
+				//Racial perk daily effect Area
+
+				//Easter bunny egg balls
+				if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.balls >=2) {
+					outputText("\n<b>Your balls grow as your eggs increase in size.</b>\n");
+					player.ballSize++;
+					if (player.hasPerk(PerkLib.EasterBunnyEggBagEvolved)) {
+						var changeLib:Number = player.lib*((player.ballSize*5/100)+1); //Exemple (1*5/100)+1= 1.05 wich is the modifier to libido
+						if (player.hasPerk(PerkLib.EasterBunnyEggBagFinalForm)){
+							changeLib = player.lib*((player.ballSize*10/100)+1);
+							player.ballSize++;
+						}
+						player.dynStats("lib", changeLib);
+					}
+					if (player.ballSize > 3 && player.ballSize < 4) {
+						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head. Your balls have increased enought that you are ready to lay your eggs.");
+					}
+					if (player.ballSize > 4) {
+						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head, as the size of your increasingly growing balls remind you that you need to expel those eggs one way or another before they become too big.");
+					}
+				}
 			}
+
+			//Easter bunny egg balls Loosing
+			if (player.easterbunnyScore() < 10 && player.hasPerk(PerkLib.EasterBunnyBalls) && !player.hasPerk(PerkLib.EasterBunnyEggBag)) {
+				outputText("\nSomething changes in your balls you can feel them as if they stopped growing. Guess you're no longer enough of a easter bunny to produce eggs.\n\n");
+				player.removePerk(PerkLib.EasterBunnyBalls)
+			}
+
+			//Easter bunny egg balls Cumming the eggs out
+			if (player.hasStatusEffect(StatusEffects.EasterBunnyCame)) { //Easter bunny cumming its eggs out
+				if (player.balls == 2)outputText("\nYou sigh in relief as your balls now empty of their eggs dangle under your cock two new way smaller eggs sliding " +
+						"inside to fill the void in them. Of course you also collected those that you shot out, never know when these can come in handy.\n");
+				if (player.balls == 4)outputText("\nYou sigh in relief as your balls now empty of their eggs dangle under your cock four new way smaller eggs sliding " +
+						"inside to fill the void in them. Of course you also collected those that you shot out, never know when these can come in handy.\n");
+				player.ballSize = 1;
+				var changeLib:Number = player.lib*((player.ballSize*5/100)+1); //Exemple (1*5/100)+1= 1.05 wich is the modifier to libido
+				player.dynStats("lib", changeLib);
+				player.removeStatusEffect(StatusEffects.EasterBunnyCame); //Remove cumming status
+				flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=2;
+				if (player.balls == 4)flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=2;
+				outputText("\n\n<b>You currently have "+flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+" eggs stored</b>\n");
+				needNext = true;
+			}
+
 			if (CoC.instance.model.time.hours == 6) {
 				var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 				if (vthirst != null) {
@@ -1614,6 +1660,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Diapause);
 				needNext = true;
 			}
+			//tail absorb section
 			if (player.lowerBody == LowerBody.NAGA) {
 				if (player.tailType > Tail.NONE) {
 					outputText("\nYour tail squirms, wriggling against your larger naga tail as the scales part around it, absorbing it.  <b>Your form is completely scaly and smooth from the waist down.</b>\n");
