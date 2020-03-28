@@ -2784,31 +2784,43 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else outputText("  " + monster.mf("He","She") + " flushes hotly and " + monster.mf("touches his suddenly-stiff member, moaning lewdly for a moment.","touches a suddenly stiff nipple, moaning lewdly.  You can smell her arousal in the air."));
 					EggThrowLustDamageRepeat();
 					EggThrowLustDamageRepeat();
+					flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]--;
+					flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]--;
 				if (player.hasPerk(PerkLib.DoubleStrike)){
 					EggThrowLustDamageRepeat();
 					EggThrowLustDamageRepeat();
+					flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]--;
+					flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]--;
 				}
 				if (player.hasPerk(PerkLib.TripleStrike)){
 					EggThrowLustDamageRepeat();
 					EggThrowLustDamageRepeat();
+					flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]--;
+					flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]--;
 				}
 			}
 		}
 		else {
 			outputText("You begin throwing a barrage of your stashed bunny eggs up " + monster.a + monster.short + ". Sadly your aim was off and the egg go crash and break a few distance away.");
+			flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]--;
+			flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]--;
+			if (player.hasPerk(PerkLib.DoubleStrike)){
+				flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]--;
+				flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]--;
+			}
+			if (player.hasPerk(PerkLib.TripleStrike)){
+				flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]--;
+				flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]--;
 		}
 		outputText("\n\n");
-		flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]--;
 		if (!combatIsOver()) enemyAI();
+		}
 	}
-
-
-
 
 	public function StoneClawAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+		//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(120, USEFATG_PHYSICAL);
 		else fatigue(60, USEFATG_PHYSICAL);
 		player.createStatusEffect(StatusEffects.CooldownStoneClaw,3,0,0,0);
@@ -2882,7 +2894,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function StoneFistAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+		//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(120, USEFATG_PHYSICAL);
 		else fatigue(60, USEFATG_PHYSICAL);
 		player.createStatusEffect(StatusEffects.CooldownStoneFist,3,0,0,0);

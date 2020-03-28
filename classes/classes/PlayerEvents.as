@@ -818,7 +818,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 
 			//Easter bunny egg balls Loosing
-			if (player.bunnyScore() < 10 && player.hasPerk(PerkLib.EasterBunnyBalls) && !player.hasPerk(PerkLib.EasterBunnyEggBag)) {
+			if (player.easterbunnyScore() < 10 && player.hasPerk(PerkLib.EasterBunnyBalls) && !player.hasPerk(PerkLib.EasterBunnyEggBag)) {
 				outputText("\nSomething changes in your balls you can feel them as if they stopped growing. Guess you're no longer enough of a easter bunny to produce eggs.\n\n");
 				player.removePerk(PerkLib.EasterBunnyBalls)
 			}
@@ -829,13 +829,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						"inside to fill the void in them. Of course you also collected those that you shot out, never know when these can come in handy.\n");
 				if (player.balls == 4)outputText("\nYou sigh in relief as your balls now empty of their eggs dangle under your cock four new way smaller eggs sliding " +
 						"inside to fill the void in them. Of course you also collected those that you shot out, never know when these can come in handy.\n");
-				outputText("\n\n<b>You currently have "+flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+" eggs stored</b>n\n");
 				player.ballSize = 1;
 				var changeLib:Number = player.lib*((player.ballSize*5/100)+1); //Exemple (1*5/100)+1= 1.05 wich is the modifier to libido
 				player.dynStats("lib", changeLib);
 				player.removeStatusEffect(StatusEffects.EasterBunnyCame); //Remove cumming status
 				flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=2;
 				if (player.balls == 4)flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=2;
+				outputText("\n\n<b>You currently have "+flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+" eggs stored</b>\n");
 				needNext = true;
 			}
 

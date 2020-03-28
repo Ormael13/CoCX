@@ -61,7 +61,7 @@ public function pcUniqueSexScenesChoiceMenu():void {
 	}
 	else addButtonDisabled(13, "Fill the reservoir", "Req. to be in goblin mech, having Cum Reservoir upgrade instaled on it and enemy with cock.");
 	addButton (14, "Leave", cleanupAfterCombat);
-	if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.hasCock() && player.balls >= 2)addButton(9, "EGGS!!", EasterBunnyLayEggsRape);
+	if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.hasCock() && player.ballSize > 3)addButton(9, "EGGS!!", EasterBunnyLayEggsRape);
 	else addButtonDisabled(9, "EGGS!!", "Req. to be a Easter Bunny.");
 }
 
@@ -74,7 +74,6 @@ public function manticoreTailRapeScene():void {
 	outputText("\"<i>Lick me clean you worm! Don’t you see how wet I am?!</i>\"\n\nBoth too terrified and supremely horny to refuse your command, your defeated foe begins to use its tongue to give your sensitive pussy a proper licking. Delighted by the sensations from both of your pussies, you feel like singing your pleasure and to your surprise a series of moans that sound like a song come out from your mouth as you ride orgasm after orgasm, splattering " + monster.pronoun3 + " crotch and face with your girl juice.\n\n");
 	outputText("Only once " + monster.pronoun3 + " " + monster.ballsDescriptLight() + " have shrunk to the point they look like a pair of raisins do you let go of what's left of " + monster.pronoun2 + ".\n\nYou lick your lips feeling like you just had a five course meal fit for a queen as you leave the body of your passed out opponent on the ground at the mercy of other potential sexual predators.");
 	player.sexReward("cum");
-	player.orgasm();
 	statScreenRefresh();
 	cleanupAfterCombat();
 	return;

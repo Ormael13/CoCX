@@ -5654,7 +5654,7 @@ use namespace CoC;
 				bunnyCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && bunnyCounter >= 8)
 				bunnyCounter += 1;
-			if (hasPerk(PerkLib.EasterBunnyBalls) && balls > 0)
+			if (hasPerk(PerkLib.EasterBunnyBalls) && balls >= 2)
 				bunnyCounter = 0;
 			if (isGargoyle()) bunnyCounter = 0;
 			bunnyCounter = finalRacialScore(bunnyCounter, Race.BUNNY);
@@ -5692,11 +5692,11 @@ use namespace CoC;
 				EbunnyCounter++;
 			if (balls > 2)
 				EbunnyCounter++;
-			if (hasPerk(PerkLib.EasterBunnyEggBag) && balls > 0)
+			if (hasPerk(PerkLib.EasterBunnyEggBag) && balls >= 2)
 				EbunnyCounter++;
-			if (hasPerk(PerkLib.EasterBunnyEggBagEvolved) && balls > 0)
+			if (hasPerk(PerkLib.EasterBunnyEggBagEvolved) && balls >= 2)
 				EbunnyCounter++;
-			if (hasPerk(PerkLib.EasterBunnyEggBagFinalForm) && balls > 0)
+			if (hasPerk(PerkLib.EasterBunnyEggBagFinalForm) && balls >= 2)
 				EbunnyCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				EbunnyCounter += 50;

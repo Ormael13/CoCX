@@ -5348,7 +5348,7 @@ public class PerkLib
                 return player.mantisScore() >= 5;
             }, "Mantis race");
 			MelkieLung.requireLungsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-				return player.melkieScore() >= 6;
+				return player.melkieScore() >= 12;
 			}, "Melkie race");
             MinotaurTesticles.requireCustomFunction(function (player:Player):Boolean {
                 return player.hasCock();
@@ -5668,7 +5668,7 @@ public class PerkLib
                 return player.mantisScore() >= 10
             }, "Mantis race");
 			MelkieLungEvolved.requirePerk(MelkieLung).requireCustomFunction(function (player:Player):Boolean {
-				return player.melkieScore() >= 8;
+				return player.melkieScore() >= 12;
 			}, "Melkie race");
             NaturalPunchingBagEvolved.requireLevel(12).requirePerk(NaturalPunchingBag).requireCustomFunction(function (player:Player):Boolean {
                 return player.goblinScore() >= 8
@@ -6132,7 +6132,7 @@ public class PerkLib
 					return player.cowScore() >= 12;
             }, "Lacta Bovine race");
 			MelkieLungFinalForm.requirePerk(MelkieLungEvolved).requireCustomFunction(function (player:Player):Boolean {
-				return player.melkieScore() >= 10;
+				return player.melkieScore() >= 12;
 			}, "Melkie race");
             MinotaurTesticlesFinalForm.requireLevel(36)
 				.requirePerk(MinotaurTesticlesEvolved)
