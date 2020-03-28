@@ -21,7 +21,7 @@ public class DemonPackBeach extends Monster
 			else special2();
 		}
 		
-		override public function teased(lustDelta:Number):void
+		override public function teased(lustDelta:Number, isNotSilent:Boolean = true):void
 		{
 			outputText("\n");
 			if(lustDelta == 0) outputText("\n" + capitalA + short + " seems unimpressed.");

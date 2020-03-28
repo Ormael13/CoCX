@@ -42,7 +42,7 @@ public class LustyDemons extends Monster
 			}
 		}
 
-		override public function teased(lustDelta:Number):void
+		override public function teased(lustDelta:Number, isNotSilent:Boolean = true):void
 		{
 			if(lustDelta > 0 && lustDelta < 5) outputText("  The demons lessen somewhat in the intensity of their attack, and some even eye up your assets as they strike at you. Vapula has trouble giving her orders.");
 			if(lustDelta >= 5 && lustDelta < 10) outputText("  The demons are obviously avoiding damaging anything you might use to fuck and they're starting to leave their hands on you just a little longer after each blow.  Some are copping quick feels and you can smell the demonic lust on the air.  Vapula is starting to get frustrated as her minions are more and more reluctant to attack you, preferring to caress each other instead.");

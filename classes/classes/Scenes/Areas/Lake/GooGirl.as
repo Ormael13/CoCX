@@ -133,7 +133,7 @@ public class GooGirl extends Monster
 			}
 		}
 
-		override public function teased(lustDelta:Number):void
+		override public function teased(lustDelta:Number, isNotSilent:Boolean = true):void
 		{
 			if (lust <= maxLust() * 0.99) {
 				if (lustDelta <= 0) outputText("\nThe goo-girl looks confused by your actions, as if she's trying to understand what you're doing.");

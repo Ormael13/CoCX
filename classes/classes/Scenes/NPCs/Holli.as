@@ -216,7 +216,7 @@ public class Holli extends Monster
 		}
 
 
-		override public function teased(lustDelta:Number):void
+		override public function teased(lustDelta:Number, isNotSilent:Boolean = true):void
 		{
 			if (hasStatusEffect(StatusEffects.HolliBurning)) {
 				outputText("Holli doesn't even seem to notice, so concerned is she with defeating you before the mounting bonfire causes her any more pain.");

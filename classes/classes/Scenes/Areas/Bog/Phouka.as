@@ -134,7 +134,7 @@ public class Phouka extends Monster
 			}
 		}
 
-		override public function teased(lustDelta:Number):void
+		override public function teased(lustDelta:Number, isNotSilent:Boolean = true):void
 		{
 			if (lustDelta >= 10)
 				outputText("\n\nThe " + this.short + " breaks off its attack in the face of your teasing.  Its drooling member leaves a trail of precum along the ground and you get the feeling it needs to end this fight quickly.");
