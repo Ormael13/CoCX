@@ -55,14 +55,14 @@ public function pcUniqueSexScenesChoiceMenu():void {
 	addButtonDisabled(7, "Cooldown", "Req. to have (Winter wolf/other cold cum creatures, pc must be female salamander or hinezumi). (not yet added scene)");
 	if (player.yukiOnnaScore() >= 14 && monster.hasCock() && !monster.hasPerk(PerkLib.UniqueNPC) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) addButton(8, "Steal warmth", yukionnaStealWarmthScene);
 	else addButtonDisabled(8, "Steal warmth", "Req. to be Yuki Onna and enemy must be: non-gigant, humanoid, with cock, non-unique npc.");
+	if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.hasCock() && player.ballSize > 3)addButton(9, "EGGS!!", EasterBunnyLayEggsRape);
+	else addButtonDisabled(9, "EGGS!!", "Req. to be a Easter Bunny.");
 	if (player.isInGoblinMech() && player.hasKeyItem("Cum Reservoir") >= 0 && monster.hasCock()) {
 		if (player.keyItemv1("Cum Reservoir") == 4) addButtonDisabled(13, "Fill the reservoir", "Reservoir is already full. You need to use all this stored cum before you harvest new one.");
 		else addButton(13, "Fill the reservoir", gobomechFillTheReservoir);
 	}
 	else addButtonDisabled(13, "Fill the reservoir", "Req. to be in goblin mech, having Cum Reservoir upgrade instaled on it and enemy with cock.");
 	addButton (14, "Leave", cleanupAfterCombat);
-	if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.hasCock() && player.ballSize > 3)addButton(9, "EGGS!!", EasterBunnyLayEggsRape);
-	else addButtonDisabled(9, "EGGS!!", "Req. to be a Easter Bunny.");
 }
 
 public function manticoreTailRapeScene():void {
