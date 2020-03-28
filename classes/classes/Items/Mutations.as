@@ -7385,16 +7385,39 @@ public final class Mutations extends MutationsHelper
 				}
 				changes++;
 			}
+            if (rand(3) == 0 && changes < changeLimit && player.hasCoatOfType(Skin.FUR)) {
+                humanizeSkin();
+                if (player.coatColor == "") player.coatColor = player.hairColor;
+                player.skin.growCoat(Skin.FUR,{color:player.skin.coat.color},Skin.COVERAGE_LOW);
+                outputText("\n\nYou feel your skin tickle as fur grow in various place over your body. It doesn’t cover your skin entirely but sure feels nice and silky to the touch wherever it has grown. Funnily the fur patterns looks nice on you and only helps your animalistic charm. <b>Some area of your body are now partially covered with fur!</b>");
+                if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+                    outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
+                    player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+                }
+                changes++;
+            }
+            if (rand(3) == 0 && changes < changeLimit && player.hasPartialCoat(Skin.FUR)) {
+                humanizeSkin();
+                if (player.coatColor == "") player.coatColor = player.hairColor;
+                outputText("\n\nYour [skin.type] begins to tingle, then itch. ");
+                player.skin.growCoat(Skin.FUR,{color:player.skin.coat.color},Skin.COVERAGE_COMPLETE);
+                outputText("You reach down to scratch your arm absent-mindedly and pull your fingers away to find strands of [skin coat.color] fur. Wait, fur?  What just happened?! You spend a moment examining yourself and discover that <b>you are now covered in glossy, soft fur.</b>");
+                if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+                    outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
+                    player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+                }
+                changes++;
+            }
 			//-Human arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(3) == 0) {
-				humanizeArms();
-				changes++;
-			}
+            if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(3) == 0) {
+                humanizeArms();
+                changes++;
+            }
 			//-Human face
-			if (player.faceType != Face.HUMAN && changes < changeLimit && rand(3) == 0) {
-				humanizeFace();
-				changes++;
-			}
+            if (player.faceType != Face.HUMAN && changes < changeLimit && rand(3) == 0) {
+                humanizeFace();
+                changes++;
+            }
 			//Remove odd eyes
 			if (changes < changeLimit && rand(3) == 0 && player.eyes.type > Eyes.HUMAN) {
 				humanizeEyes();

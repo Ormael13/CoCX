@@ -2622,9 +2622,9 @@ public function RacialScores():void {
 	//Dragonne
 	outputText("\nDragonne: " + player.dragonneScore());
 	//Easter Bunny
-	if (player.easterbunnyScore() >= 15 && player.hasPerk(PerkLib.EasterBunnyBalls)) outputText("\n<font color=\"#0000a0\">Easter Bunny: " + player.easterbunnyScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (105 * (1 + player.newGamePlusMod())) + " max Spe, +" + (150 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.easterbunnyScore() >= 12 && player.hasPerk(PerkLib.EasterBunnyBalls) && player.easterbunnyScore() < 15) outputText("\n<font color=\"#008000\">Easter Bunny: " + player.easterbunnyScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (120 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.easterbunnyScore() >= 1 && player.hasPerk(PerkLib.EasterBunnyBalls) && player.easterbunnyScore() < 12) outputText("\n<font color=\"#008000\">Easter Bunny: " + player.easterbunnyScore() + "</font>");
+	if (player.easterbunnyScore() >= 15 && player.hasPerk(PerkLib.EasterBunnyBalls)) outputText("\n<font color=\"#0000a0\">True Easter Bunny: " + player.easterbunnyScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (105 * (1 + player.newGamePlusMod())) + " max Spe, +" + (150 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+	else if (player.easterbunnyScore() >= 12 && player.easterbunnyScore() < 15 && player.hasPerk(PerkLib.EasterBunnyBalls)) outputText("\n<font color=\"#0000a0\">Easter Bunny: " + player.easterbunnyScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (120 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+	else if (player.easterbunnyScore() >= 1 && player.easterbunnyScore() < 12 && player.hasPerk(PerkLib.EasterBunnyBalls)) outputText("\n<font color=\"#008000\">Easter Bunny: " + player.easterbunnyScore() + "</font>");
 	else if (player.easterbunnyScore() < 1) outputText("\n<font color=\"#ff0000\">Easter Bunny (Require Easter bunny balls): 0</font>");
 	//Echidna
 	outputText("\nEchidna: " + player.echidnaScore());
