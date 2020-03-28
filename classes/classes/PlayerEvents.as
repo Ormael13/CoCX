@@ -795,16 +795,44 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 
 				//Racial perk daily effect Area
-				if (player.hasPerk(PerkLib.EasterBunnyBalls)) {
+
+				//Easter bunny egg balls
+				if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.balls >=2) {
 					outputText("\n<b>Your balls grow as your eggs increase in size.</b>\n");
 					player.ballSize++;
 					if (player.hasPerk(PerkLib.EasterBunnyEggBagFinalForm)) {
 						player.ballSize++;
+						var changeLib:Number = player.lib*((player.ballSize*5/100)+1); //Exemple (1*5/100)+1= 1.05 wich is the modifier to libido
+						player.dynStats("lib", changeLib);
 					}
 					if (player.ballSize < 3) {
-						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head, as the size of your growing balls remind you that you need to expel those eggs one way or another before they become too big.");
+						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head. Your balls have increased enought that you are ready to lay your eggs.");
+					}
+					if (player.ballSize < 4) {
+						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head, as the size of your increasingly growing balls remind you that you need to expel those eggs one way or another before they become too big.");
 					}
 				}
+			}
+
+			//Easter bunny egg balls Loosing
+			if (player.bunnyScore() < 10 && player.hasPerk(PerkLib.EasterBunnyBalls) && !player.hasPerk(PerkLib.EasterBunnyEggBag)) {
+				outputText("\nSomething changes in your balls you can feel them as if they stopped growing. Guess you're no longer enough of a easter bunny to produce eggs.\n\n");
+				player.removePerk(PerkLib.EasterBunnyBalls)
+			}
+
+			if (player.hasStatusEffect(StatusEffects.EasterBunnyCame)) { //Easter bunny cumming its eggs out
+				if (player.balls == 2)outputText("\nYou sigh in relief as your balls now empty of their eggs dangle under your cock two new way smaller eggs sliding " +
+						"inside to fill the void in them. Of course you also collected those that you shot out, never know when these can come in handy.\n");
+				if (player.balls == 4)outputText("\nYou sigh in relief as your balls now empty of their eggs dangle under your cock four new way smaller eggs sliding " +
+						"inside to fill the void in them. Of course you also collected those that you shot out, never know when these can come in handy.\n");
+				outputText("\n\n<b>You currently have "+flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+" eggs stored</b>n\n");
+				player.ballSize = 1;
+				var changeLib:Number = player.lib*((player.ballSize*5/100)+1); //Exemple (1*5/100)+1= 1.05 wich is the modifier to libido
+				player.dynStats("lib", changeLib);
+				player.removeStatusEffect(StatusEffects.EasterBunnyCame); //Remove cumming status
+				flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=2;
+				if (player.balls == 4)flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=2;
+				needNext = true;
 			}
 
 			if (CoC.instance.model.time.hours == 6) {

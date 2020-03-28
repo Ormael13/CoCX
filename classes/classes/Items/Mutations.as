@@ -7226,8 +7226,8 @@ public final class Mutations extends MutationsHelper
 				player.createPerk(PerkLib.BunnyEggs, 0, 0, 0, 0);
 				changes++;
 			}
-			//Shrink Balls!
-			if (player.balls > 0 && player.ballSize > 5 && rand(3) == 0 && changes < changeLimit) {
+			//Shrink Balls if pc IS NOT an Easter Bunny yet
+			if (player.balls > 0 && player.ballSize > 5 && rand(3) == 0 && changes < changeLimit && !player.hasPerk(PerkLib.EasterBunnyBalls)) {
 				if (player.ballSize < 10) {
 					outputText("\n\nRelief washes through your groin as your " + ballsDescript() + " lose about an inch of their diameter.");
 					player.ballSize--;
@@ -7243,11 +7243,26 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Get rid of extra balls
-			if (player.balls > 2 && changes < changeLimit && rand(3) == 0) {
+			if (player.balls > 2 && changes < changeLimit && !player.hasPerk(PerkLib.EasterBunnyBalls) && rand(3) == 0) {
 				changes++;
 				outputText("\n\nThere's a tightening in your [sack] that only gets higher and higher until you're doubled over and wheezing.  When it passes, you reach down and discover that <b>two of your testicles are gone.</b>");
 				player.balls -= 2;
 			}
+            //Make PC an Easter bunny
+            if (!player.hasPerk(PerkLib.EasterBunnyBalls) && player.hasCock() && player.balls <= 4 && rand(3) == 0) {
+                outputText("\n\nYou gasp as ");
+                if(player.balls >= 2) outputText("something fundamental change in your balls.");
+                if(player.balls == 0) outputText("a heavy flesh bag not unlike a pair of ball form beneath your cock. " +
+                        "At first you think this is a standard set of balls but no this is something else altogether.");
+                outputText("You are proven right a few second later when they begin to inflate, " +
+                        "gaining in weight. Overcome by lust you begin jerking your cock, something large and pleasurable sliding out of your nuts and running down the length of your -cock descript-. " +
+                        "As two eggs shoot out of your urethra you gasp and inspect your sacks, now empty. It would seem you acquired the easter bunnies ability to produce and cum eggs. " +
+                        "Your balls and lust will now regularly increase in size until you shoot those damn eggs out, heck you can already feel two new smaller eggs in your sacks replacing those you " +
+                        "ejaculated.");
+                player.createPerk(PerkLib.EasterBunnyBalls, 0, 0, 0, 0);
+                flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] += 2;
+            }
+
 			//Boost cum production
 			if ((player.balls > 0 || player.hasCock()) && player.cumQ() < 3000 && rand(3) == 0 && changeLimit > 1) {
 				changes++;
@@ -7313,15 +7328,25 @@ public final class Mutations extends MutationsHelper
 				setLowerBody(LowerBody.BUNNY);
 				player.legCount = 2;
 			}
-			//BUN FACE!  REQUIREZ EARZ
-			if (player.ears.type == Ears.BUNNY && player.faceType != Face.BUNNY && rand(3) == 0 && changes < changeLimit) {
+            //get teeth - from human, bunny, coonmask, or other humanoid teeth faces
+            if (player.ears.type == Ears.BUNNY && player.faceType != Face.BUCKTEETH && rand(3) == 0 && changes < changeLimit) {
+                outputText("\n\n");
+                changes++;
+                //Human(ish) face
+                if (player.faceType == Face.HUMAN || player.faceType == Face.SHARK_TEETH) outputText("You catch your nose twitching on its own at the bottom of your vision, but as soon as you focus on it, it stops.  A moment later, some of your teeth tingle and brush past your lips, exposing a white pair of buckteeth! <b>Your mouth has taken on some rabbit-like characteristics!</b>");
+                //Crazy furry TF shit
+                outputText("\n\nYour teeth grind on their own, and you feel a strange, insistent pressure just under your nose.  As you open your mouth and run your tongue along them, you can feel ");
+                if (player.faceType != Face.HUMAN) outputText("the sharp teeth receding and ");
+                outputText("your incisors lengthening.  It's not long before they're twice as long as their neighbors and the obvious growth stops, but the pressure doesn't go away completely. Well, you now have mouse incisors and your face aches a tiny bit - wonder if they're going to keep growing? <b>Your mouth has taken on some rabbit-like characteristics!</b>");
+                setFaceType(Face.BUCKTEETH);
+                changes++;
+            }
+			//FULL BUN FACE!  REQUIREZ EARZ
+			if (player.ears.type == Ears.BUNNY && player.faceType == Face.BUCKTEETH && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\n");
-				changes++;
-				//Human(ish) face
-				if (player.faceType == Face.HUMAN || player.faceType == Face.SHARK_TEETH) outputText("You catch your nose twitching on its own at the bottom of your vision, but as soon as you focus on it, it stops.  A moment later, some of your teeth tingle and brush past your lips, exposing a white pair of buckteeth!  <b>Your face has taken on some rabbit-like characteristics!</b>");
-				//Crazy furry TF shit
-				else outputText("You grunt as your [face] twists and reforms.  Even your teeth ache as their positions are rearranged to match some new, undetermined order.  When the process finishes, <b>you're left with a perfectly human looking face, save for your constantly twitching nose and prominent buck-teeth.</b>");
+				outputText("You grunt as your [face] twists and reforms.  Even your teeth ache as their positions are rearranged to match some new, undetermined order. When the process finishes, <b>you're left with a bunny face complete with a constantly twitching nose and prominent buck-teeth.</b>");
 				setFaceType(Face.BUNNY);
+                changes++;
 			}
 			//DAH BUNBUN EARZ - requires poofbutt!
 			if (player.ears.type != Ears.BUNNY && changes < changeLimit && rand(3) == 0 && player.tailType == Tail.RABBIT) {
