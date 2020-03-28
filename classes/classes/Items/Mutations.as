@@ -7251,15 +7251,20 @@ public final class Mutations extends MutationsHelper
             //Make PC an Easter bunny
             if (!player.hasPerk(PerkLib.EasterBunnyBalls) && player.hasCock() && player.balls <= 4 && rand(3) == 0) {
                 outputText("\n\nYou gasp as ");
-                if(player.balls >= 2) outputText("something fundamental change in your balls.");
-                if(player.balls == 0) outputText("a heavy flesh bag not unlike a pair of ball form beneath your cock. " +
-                        "At first you think this is a standard set of balls but no this is something else altogether.");
+                if(player.balls >= 2) outputText("something fundamental change in your balls. ");
+                if(player.balls == 0) {
+                    outputText("a heavy flesh bag not unlike a pair of ball form beneath your cock. " +
+                        "At first you think this is a standard set of balls but no this is something else altogether. ");
+                    player.balls = 2;
+                }
                 outputText("You are proven right a few second later when they begin to inflate, " +
-                        "gaining in weight. Overcome by lust you begin jerking your cock, something large and pleasurable sliding out of your nuts and running down the length of your -cock descript-. " +
+                        "gaining in weight. Overcome by lust you begin jerking your cock, something large and pleasurable sliding out of your nuts and running down the length of your [cock]. " +
                         "As two eggs shoot out of your urethra you gasp and inspect your sacks, now empty. It would seem you acquired the easter bunnies ability to produce and cum eggs. " +
                         "Your balls and lust will now regularly increase in size until you shoot those damn eggs out, heck you can already feel two new smaller eggs in your sacks replacing those you " +
-                        "ejaculated.");
+                        "ejaculated. <b>You now have Easter Bunny balls!</b>");
                 player.createPerk(PerkLib.EasterBunnyBalls, 0, 0, 0, 0);
+                player.ballSize = 1;
+
                 flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] += 2;
             }
 

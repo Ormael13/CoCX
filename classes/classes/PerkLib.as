@@ -6017,7 +6017,7 @@ public class PerkLib
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.dragonScore() >= 16;
                     }, "Dragon race");
-			EasterBunnyEggBagFinalForm.requireLevel(30).requirePerk(EasterBunnyEggBagFinalForm).requireCustomFunction(function (player:Player):Boolean {
+			EasterBunnyEggBagFinalForm.requireLevel(30).requirePerk(EasterBunnyEggBagEvolved).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
 			}, "Easter Bunny race");
             ElvishPeripheralNervSysFinalForm.requireLevel(30).requirePerk(ElvishPeripheralNervSysEvolved).requireCustomFunction(function (player:Player):Boolean {
