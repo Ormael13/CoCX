@@ -10930,7 +10930,7 @@ use namespace CoC;
 			}
 			SexXP(5+level);
 			orgasm(type,real);
-			if (type = "Dick")
+			if (type == "Dick")
 			{
 				if (hasPerk(PerkLib.EasterBunnyBalls))
 				{
