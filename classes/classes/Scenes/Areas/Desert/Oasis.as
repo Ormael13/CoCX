@@ -112,6 +112,7 @@ internal function oasisSexing():void {
 			else outputText("cocks are");
 			outputText(" taken by other hands and other eager pussies ranging from painfully, childishly tight to freakishly huge!");
 		}
+		player.sexReward("Default", "Dick", true, false)
 		//IZ OVER FOR MENZ
 		outputText("\n\n");
 	}

@@ -2078,9 +2078,12 @@ import flash.utils.getQualifiedClassName;
 		 * Display tease reaction message. Then call applyTease() to increase lust.
 		 * @param lustDelta value to be added to lust (already modified by lustVuln etc)
 		 */
-		public function teased(lustDelta:Number):void
+		public function teased(lustDelta:Number, isNotSilent:Boolean = true):void
 		{
-			outputDefaultTeaseReaction(lustDelta);
+			if(isNotSilent)
+			{
+				outputDefaultTeaseReaction(lustDelta);
+			}
 			if (lustDelta > 0) {
 				//Imp mob uber interrupt!
 			  	if(hasStatusEffect(StatusEffects.ImpUber)) { // TODO move to proper class

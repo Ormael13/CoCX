@@ -1298,7 +1298,7 @@ public static const EXCELLIA_FEMALE_COW_KIDS:int                                
 public static const EXCELLIA_MALE_COW_KIDS:int                                   	= 1290;
 public static const EXCELLIA_FEMALE_KIDS:int                                   		= 1291;
 public static const EXCELLIA_MALE_KIDS:int                                   		= 1292;
-public static const UNKNOWN_FLAG_NUMBER_01293:int                                   = 1293;
+public static const EASTER_BUNNY_EGGS_STORED:int                                   	= 1293;
 public static const UNKNOWN_FLAG_NUMBER_01294:int                                   = 1294;
 public static const UNKNOWN_FLAG_NUMBER_01295:int                                   = 1295;
 public static const UNKNOWN_FLAG_NUMBER_01296:int                                   = 1296;

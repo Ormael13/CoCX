@@ -42,7 +42,6 @@ private function serviceLowCorruption():void
 }
 private function serviceLowCorruptionHighLust():void
 {
-	player.slimeFeed();
 	clearOutput();
 	outputText("You find yourself unable to tear your eyes away from the creature as it undulates almost hypnotically in front of you, the heat in your crotch rising.  The rigid protrusion at its middle visibly pulses and throbs, and with a small grin you step closer to the ooze and strip off your clothing.\n\n");
 	outputText("You straddle the creature's chest and playfully run a hand over the tip of its featureless member, which is moist and soft to the touch.");
@@ -367,7 +366,7 @@ private function maleRapesOoze():void {
 
 		outputText("  The thing seems to clamp down on you even tighter as you pull out, and you relish the sensation.  Its tight ass leaves your [cock] almost perfectly clean afterward, a glob of white still stuck inside the creature as it changes back into its original, amorphous state.  The cloud disperses as the slime slinks off.");
 	}
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("sen", 3);
 }
 
@@ -464,7 +463,7 @@ private function femaleRapesOoze():void {
 		outputText("not as thick as semen, ");
 	}
 	outputText("filling you past full and flowing out along the creature's cock, leaving you with a slight bulge at your belly and a pool of green fluids on the ground beneath you.  You gasp and hold your breath as you lay on the creature, its grip slowly loosening.  Its cock slides out of you and a flood of liquid pours out of your " + vaginaDescript(0) + " as it begins to leak out from under you, gently letting you onto the ground.  You tremble on the ground for a few moments as you recover your wits, and once you do you realize that the creature has left.  You find no trace of the creature's presence afterward except a thin trail of green fluid leading to the nearby waters.");
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Vaginal");
 	dynStats("sen", 3);
 }
 
@@ -636,7 +635,7 @@ private function oozeRapesYouVaginally():void
 			//Single
 			else outputText("Your member climaxes as well, and you pull a hand to cover your eyes and face as your jism explodes onto yourself.  Your other hand slides to the base of your [cock] and squeezes as you coat your chest in semen.");
 		}
-		player.sexReward("vaginalFluids");
+		player.sexReward("vaginalFluids","Vaginal");
 		dynStats("sen", 4);
 	}
 	//standard result

@@ -400,7 +400,7 @@ private function kihaRapesMen():void {
 	outputText("\"<i>Fill my ass with that cum,</i>\" she purrs, forgetting her hostile attitude for a moment.  \"<i>I want to feel it in my belly.</i>\"  You can't help but comply, your suffocation-induced panic lending strength to your orgasm until her abdomen distends under the weight of your seed.  Before you black out, you can see her hooking four long, clawed fingers up into her pussy, while her thumb frantically jills her dusky clit.  Then, only darkness.\n\n");
 	
 	outputText("When you come to, your throat feels raw, the taste of her pussy still on your lips.  Surprisingly, your groin is wet, but not sticky, without a trace of semen anywhere.  She must've licked " + sMultiCockDesc() + " clean after you passed out.  Your " + hipDescript() + " are still sore from the wild woman's ride, so it takes you longer than usual to limp your way back to camp.");
-	player.sexReward("Default", "Default",true,false);
+	player.sexReward("Default", "Dick",true,false);
 	cleanupAfterCombat();
 }
 //*Herm - Adj
@@ -436,7 +436,8 @@ private function kihaRapesHerms():void {
 	
  	//[Incubus Draft end: 
 	if(dicked) outputText("\n\nAs she steps back into the mire, the sound of her muttering carries back to you. \"<i>Much as I'd like to keep it, better to be done with this,</i>\" she sighs, glancing down at her turgid, draconic shaft.  \"<i>Just as well I held onto all those pink eggs after that crystal vial knocked me up.</i>\"  The rest of that story is lost to you, however, as her lean, swaying torso is swallowed back into the swamp's embrace.");
-	player.sexReward("Default", "Default",true,false);
+	player.sexReward("Default", "Dick",true,false);
+	player.sexReward("Default", "Vaginal",true,false);
 	dynStats("lib", 1, "sen", 3);
 	cleanupAfterCombat();
 }
@@ -491,6 +492,7 @@ private function tsundereMasturbationChristmasCarol():void {
 	outputText(".  The girl sighs in relief, tuckered out more from the sensual experience than the battle itself.  You slowly remove yourself, leaving the tired girl underneath the tree to rest.\n\n");
 	
 	outputText("\"<i>I... hate you... </i>\" she whispers, before turning in for a deep slumber.  You watch her soft face as she snores, graceful as a pig, before walking back to camp.");
+	player.sexReward("Default", "Default",true,false);
 	if(!player.hasCock()) dynStats("lus", 120);
 	cleanupAfterCombat();
 }
@@ -642,7 +644,7 @@ private function victoryDickKiha():void {
 		else outputText(", smear your dribbling cock all over her face, make her lick it clean, and then, get dressed.  Maybe the bitch will consider a little humility when addressing the real owner of this territory - you.");
 		outputText("  Somehow, you doubt she'll learn anything from the encounter.");
 	}
-	player.sexReward("Default", "Default",true,false);
+	player.sexReward("Default", "Dick",true,false);
 	cleanupAfterCombat();
 }
 
@@ -809,7 +811,7 @@ private function analRapuzulaKiha():void {
 
 		outputText("Deciding that you are done here, you retrieve your [armor] and leave the girl. Perhaps now she'll treat you with a little more respect. You return to camp.");
 	}
-	player.sexReward("Default", "Default",true,false);
+	player.sexReward("Default", "Dick",true,false);
 	cleanupAfterCombat();
 }
 

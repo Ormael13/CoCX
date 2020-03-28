@@ -1001,7 +1001,7 @@ private function shielaXPThreeSexyTimePostSexStayII():void {
 		if(player.cumQ() >= 1000) outputText("  It rolls out of you in waves, packing Sheila's cunt until she fills to capacity and the excess is forced out, sliming your own crotch.");
 		
 		//reduce lust/lib and reset hours since cum; if sheila corruption >= 90 and pc corruption >= 90, redirect to demonization; else continue
-		player.sexReward("vaginalFluids");
+		player.sexReward("vaginalFluids","Dick");
 		dynStats("lib", -2);
 		if(player.cor >= 90 && sheilaCorruption() >= 90) {
 			menu();
@@ -1207,7 +1207,7 @@ private function shielaXPThreeSexyTimePostSexStayII():void {
 		//reset hours since cum and reduce lust/lib since cum if cock, else add mild lib-based lust damage if no cock; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption
 		if(player.hasCock())
 		{
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", -2);
 		}
 		else dynStats("lus", player.lib/4);
@@ -2068,7 +2068,7 @@ private function consentacleVagSexForKangarooSlutBitches():void {
 	if(player.hasKnot(x)) outputText(" and you finally manage to pull out of her");
 	outputText("; the two of you lie there breathing raggedly for several minutes.  Sheila breaks the silence first.");
 
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("lib", -0.5);
 	
 	//if sheila corruption >= 90 and pc corr >= 90, go to demonization, else continue

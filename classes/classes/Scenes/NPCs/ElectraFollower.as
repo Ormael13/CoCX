@@ -367,7 +367,7 @@ public function ElectraSeXYesM():void {
 		if (player.raijuScore() >= 10) outputText("Welp your own energy management isn't getting any better, seems you will have to expel that on someone else.\n\n");
 		else {
 			outputText("As for you, your entire body feels sensitive and aches for touch from the slowly receding voltage. Something however tells you that indulging yourself would be a bad idea.\n\n");
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
 				player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
@@ -380,7 +380,7 @@ public function ElectraSeXYesM():void {
 		outputText("\"<i>You have no idea how satisfying that was [name] thanks again for helping me get relief.</i>\"");
 		outputText("Well you're in no better than she was earlier but your glad you could be of some help. You redress and ready back for your adventures. Ugh where are those goblin sluts when you need one.\n\n");
 		if (player.raijuScore() < 10) {
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
 				player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);

@@ -182,7 +182,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 				outputText("\n\nYour body satisfied, you drift off.  When you awaken much later, the demons and the ant seem to have moved on, thankfully without noticing you.  You put your armor back on and return to camp.");
 				//[End of Event]
 				//maybe lower libido and raise corruption, huh
-				player.sexReward("Default","Default",true,false);
+				player.sexReward("Default","Dick",true,false);
 				dynStats("sen", -1,  "cor", 3);
 			}
 			//►If Over 41 - Female
@@ -688,7 +688,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			//PC has other waifus:
 			if (camp.loversCount() > 1) outputText("\n\nSo this is what your other lovers must feel.");
 			outputText("\n\nYou drift off to sleep not long after, while Phylla demonstrates her appreciation for the intimacy you two just shared, kissing your body and rubbing you sensually as you doze off.");
-			player.sexReward("Default","Default",true,false);
+			player.sexReward("Default","Dick",true,false);
 			menu();
 			addButton(0, "Next", waifuQuestOver);
 		}
@@ -747,7 +747,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			if (silly()) outputText("\n\nYou remember an old saying: \"<i>Those who fuck monsters are doomed to fuck monsters</i>\".  No, that's not right.  \"<i>Those who are monsters are doomed to fuck monsters?</i>\"  No, that's not it either.  Oh well.  You're sure it has something to do with something fucking something else.  A good analogy for your time here in Mareth.");
 			//Corruption is greater than 80:
 			outputText("\n\nPerhaps corrupting her is the best route; look how you turned out! You could live with that...!  Giggling, you smirk at the thought of Phylla's mother; how she was right about you the whole time.  The thought of what kinds of corruption you can inflict on Phylla fill your mind until you finally drift off, holding your unsuspecting victim in your arms.");
-			player.sexReward("Default","Default",true,false);
+			player.sexReward("Default","Dick",true,false);
 			dynStats("cor", 1);
 			menu();
 			addButton(0, "Next", waifuQuestOver);
@@ -1592,7 +1592,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			else outputText(" and congratulate her on her first time.");
 
 			outputText("\n\nShe smiles, but you notice that her cheeks are puffed up; turning your head quizzically, you ask Phylla what's she doing.  Embarrassed, she blushes and opens her mouth.  All of your deposit clings to her tongue and teeth. She can't talk but you can tell that she's looking for direction.");
-			player.sexReward("Default","Default",true,false);
+			player.sexReward("Default","Dick",true,false);
 			//[Swallow it up]   [Spit it out]
 			menu();
 			addButton(0, "Swallow It", swallowDatJismPhylla);
@@ -1678,7 +1678,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			}
 			//***Both mode endings converge here***
 			outputText("\n\n...Can you? You muse again, thinking about it.  After a few moments of helping Phylla to the pile of, now very wet, cushions she calls a bed, you finish donning your [armor] and head back to the surface.");
-			player.sexReward("Default","Default",true,false);
+			player.sexReward("Default","Dick",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1797,7 +1797,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nYou both collapse in a hot, sweaty... and sticky heap, dozing off for quite some time only to wake after an hour of uninterrupted sleep, a bit hung over from the mind sharing and physically fatigued from the romp.");
 
 			outputText("\n\nPhylla stirs next to you, and groggily says, \"<i>You should come down more often.  I mean...  I miss you sometimes...</i>\"  Her shyness returns as she slowly recovers from the small sex-coma you placed each other in.  You say you'll think about it and wink at her as you get dressed and head back to camp, leaving her to eagerly await the next time you come to take her once again.");
-			player.sexReward("Default","Default",true,false);
+			player.sexReward("Default","Dick",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1937,7 +1937,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 				outputText("\n\n\"<i>Come on, march!</i>\"  You command her.  \"<i>Over here, Phylla, one foot over the other; yes, that's a good breeding slut.</i>\"");
 				outputText("\n\nAfter a moment of staggered walking you allow Phylla the courtesy to flop down onto the hard surface of the bed, pausing only for a moment to look over your pregnant little whore.  After a quick remark to her on how she'd better be ready for another round soon, you leave her to the mess you have made as you head back to camp.");
 			}
-			player.sexReward("Default","Default",true,false);
+			player.sexReward("Default","Dick",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -2113,7 +2113,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 				outputText("\n\n\"<i>I-I thought... you were...</i>\"  Phylla starts to say, but you cut her off with a look that shows you're in no mood to listen to her.");
 				outputText("\n\nNow that Phylla's quieted down, you tell her you're going to get some sleep; if she's to have another child, she'll need to either keep quiet or leave to another room.  She nods dejectedly as you settle in for your nap.  You swear you hear her go into labor again right before drifting off.");
 			}
-			player.sexReward("Default","Default",true,false);
+			player.sexReward("Default","Dick",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -2237,7 +2237,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 
 			outputText("\n\n\"<i>It's okay... they'll... lick me... clean...</i>\"  You hear Phylla's weak voice in your mind, although she still doesn't look conscious.");
 			outputText("\n\nYou might want to stay and watch that, but you've spent too long down here already.  You collect your things, trying your best not to step on the twenty or so passed out ants on the floor as you head back to camp.");
-			player.sexReward("Default","Default",true,false);
+			player.sexReward("Default","Dick",true,false);
 			dynStats("sen", -2);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2358,7 +2358,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nYou wake up some time later, your body aching from exhaustion.  You look over at Phylla to see how she's fairing after the orgy.  She's sprawled out on her cushions with pleased warriors surrounding her.  Her skin and chitinous armor is covered in a thick coat of semen.  You wonder to yourself if you should invite her to wash off.");
 			outputText("\n\n\"<i>It's okay... they'll... lick me... clean... oh, don't worry about getting pregnant; they're all sterile unless I say otherwise.</i>\"  You hear Phylla's weak voice in your mind, although she still doesn't look conscious.");
 			outputText("\n\nYou might want to stay and watch that, but you've spent too long down here already.  You collect your things, trying your best not to step on the twenty or so passed out ants on the floor as you head back to camp.");
-			player.sexReward("cum");
+			player.sexReward("cum", "Dick");
 			dynStats("sen", -1);
 			doNext(camp.returnToCampUseOneHour);
 		}

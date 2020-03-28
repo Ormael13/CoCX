@@ -3058,6 +3058,13 @@ use namespace CoC;
 				if (bunnyScore() >= 10) race = "bunny-" + mf("boy", "girl");
 				else race = "half bunny-" + mf("boy", "girl");
 			}
+
+			if (easterbunnyScore() >= 12)
+			{
+				if (easterbunnyScore() >= 12 && easterbunnyScore() < 15) race = "easter bunny-" + mf("boy", "girl");
+				if (easterbunnyScore() >= 15) race = "true easter bunny-" + mf("boy", "girl");
+			}
+
 			if (harpyScore() >= 4)
 			{
 				if (harpyScore() >= 8) {
@@ -5621,6 +5628,8 @@ use namespace CoC;
 				bunnyCounter++;
 			if (lowerBody == LowerBody.BUNNY)
 				bunnyCounter++;
+			if (hasPartialCoat(Skin.FUR) || hasFullCoatOfType(Skin.FUR))
+				bunnyCounter++;
 			if (tailType == Tail.RABBIT)
 				bunnyCounter++;
 			if (hasFur() || hasPartialCoat(Skin.FUR))
@@ -5645,10 +5654,60 @@ use namespace CoC;
 				bunnyCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && bunnyCounter >= 8)
 				bunnyCounter += 1;
+			if (hasPerk(PerkLib.EasterBunnyBalls) && balls >= 2)
+				bunnyCounter = 0;
 			if (isGargoyle()) bunnyCounter = 0;
 			bunnyCounter = finalRacialScore(bunnyCounter, Race.BUNNY);
 			End("Player","racialScore");
 			return bunnyCounter;
+		}
+
+		//Bunny score
+		public function easterbunnyScore():Number {
+			Begin("Player","racialScore","bunny");
+			var EbunnyCounter:Number = 0;
+			if (faceType == Face.BUNNY || faceType == Face.BUCKTEETH)
+				EbunnyCounter++;
+			if (ears.type == Ears.BUNNY)
+				EbunnyCounter++;
+			if (lowerBody == LowerBody.BUNNY)
+				EbunnyCounter++;
+			if (hasPartialCoat(Skin.FUR) || hasFullCoatOfType(Skin.FUR))
+				EbunnyCounter++;
+			if (tailType == Tail.RABBIT)
+				EbunnyCounter++;
+			if (hasFur() || hasPartialCoat(Skin.FUR))
+				EbunnyCounter++;
+			if (eyes.type == Eyes.HUMAN)
+				EbunnyCounter++;
+			if (arms.type == Arms.HUMAN)
+				EbunnyCounter++;
+			if (antennae.type == 0)
+				EbunnyCounter++;
+			if (wings.type == Wings.NONE)
+				EbunnyCounter++;
+			if (tallness < 72)
+				EbunnyCounter++;
+			if (hasCock() && normalCocks())
+				EbunnyCounter++;
+			if (balls > 2)
+				EbunnyCounter++;
+			if (hasPerk(PerkLib.EasterBunnyEggBag) && balls >= 2)
+				EbunnyCounter++;
+			if (hasPerk(PerkLib.EasterBunnyEggBagEvolved) && balls >= 2)
+				EbunnyCounter++;
+			if (hasPerk(PerkLib.EasterBunnyEggBagFinalForm) && balls >= 2)
+				EbunnyCounter++;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				EbunnyCounter += 50;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && EbunnyCounter >= 4)
+				EbunnyCounter += 1;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && EbunnyCounter >= 8)
+				EbunnyCounter += 1;
+			if (isGargoyle()) EbunnyCounter = 0;
+			EbunnyCounter = finalRacialScore(EbunnyCounter, Race.EASTERBUNNY);
+			End("Player","racialScore");
+			return EbunnyCounter;
 		}
 
 		//Harpy score
@@ -8355,6 +8414,8 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.BimboChampagne) || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) min += 40;
 			//Omnibus' Gift
 			if (findPerk(PerkLib.OmnibusGift) >= 0) min += 35;
+			//Easter bunny eggballs
+			if (findPerk(PerkLib.EasterBunnyBalls) >= 0) min += 10*ballSize;
 			//Fera Blessing
 			if (hasStatusEffect(StatusEffects.BlessingOfDivineFera)) min += 15;
 			//Nymph perk raises to 30
@@ -9451,26 +9512,30 @@ use namespace CoC;
 				maxWisCap2 -= (20 * newGamePlusMod);
 				maxLibCap2 += (60 * newGamePlusMod);
 			}
-			if (bunnyScore() >= 5) {/*
-				if (bunnyScore() >= 10) {
+			if (bunnyScore() >= 10) {
 					maxStrCap2 -= (20 * newGamePlusMod);
 					maxTouCap2 -= (10 * newGamePlusMod);
 					maxSpeCap2 += (90 * newGamePlusMod);
 					maxLibCap2 += (90 * newGamePlusMod);
-				}*/
-				if (bunnyScore() >= 10) {
-					maxStrCap2 -= (20 * newGamePlusMod);
-					maxTouCap2 -= (10 * newGamePlusMod);
-					maxSpeCap2 += (90 * newGamePlusMod);
-					maxLibCap2 += (90 * newGamePlusMod);
-				}
-				else {
-					maxStrCap2 -= (10 * newGamePlusMod);
-					maxTouCap2 -= (5 * newGamePlusMod);
-					maxSpeCap2 += (55 * newGamePlusMod);
-					maxLibCap2 += (35 * newGamePlusMod);
-				}
-			}//+10/10-20
+			}
+			if (bunnyScore() >= 5 && bunnyScore() < 10){
+				maxStrCap2 -= (10 * newGamePlusMod);
+				maxTouCap2 -= (5 * newGamePlusMod);
+				maxSpeCap2 += (55 * newGamePlusMod);
+				maxLibCap2 += (35 * newGamePlusMod);
+			}
+			if (easterbunnyScore() >= 12 && easterbunnyScore() < 15) {
+				maxStrCap2 -= (20 * newGamePlusMod);
+				maxTouCap2 -= (10 * newGamePlusMod);
+				maxSpeCap2 += (105 * newGamePlusMod);
+				maxLibCap2 += (120 * newGamePlusMod);
+			}
+			if (easterbunnyScore() >= 15) {
+				maxStrCap2 -= (20 * newGamePlusMod);
+				maxTouCap2 -= (10 * newGamePlusMod);
+				maxSpeCap2 += (120 * newGamePlusMod);
+				maxLibCap2 += (150 * newGamePlusMod);
+			}//-20/-10+105+150
 			if (raccoonScore() >= 4) {
 				maxSpeCap2 += (15 * newGamePlusMod);
 			}//+15/10-20
@@ -9701,7 +9766,7 @@ use namespace CoC;
 					maxTouCap2 += (30 * newGamePlusMod);
 					maxSpeCap2 += (10 * newGamePlusMod);
 					maxIntCap2 -= (30 * newGamePlusMod);
-					maxLibCap2 += (25 * newGamePlusMod); 
+					maxLibCap2 += (25 * newGamePlusMod);
 				}
 				else */if (orcScore() >= 11) {
 					maxStrCap2 += (130 * newGamePlusMod);
@@ -10016,7 +10081,7 @@ use namespace CoC;
 				}
 			}
 			if (bansheeScore() >= 4) {
-				
+
 			}
 			if (firesnailScore() >= 15) {
 				maxStrCap2 += (65 * newGamePlusMod);
@@ -10111,14 +10176,14 @@ use namespace CoC;
 				maxLibCap2 += (15 * newGamePlusMod);
 			}
 			if (batScore() >= 6){
-                var mod:int = batScore() >= 10 ? 35:20;
-                maxStrCap2 += mod * newGamePlusMod;
-                maxSpeCap2 += mod * newGamePlusMod;
-                maxIntCap2 += mod * newGamePlusMod;
-                maxLibCap2 += (10+mod) * newGamePlusMod;
+				var mod:int = batScore() >= 10 ? 35:20;
+				maxStrCap2 += mod * newGamePlusMod;
+				maxSpeCap2 += mod * newGamePlusMod;
+				maxIntCap2 += mod * newGamePlusMod;
+				maxLibCap2 += (10+mod) * newGamePlusMod;
 			}
 			if (vampireScore() >= 6){
-                mod = vampireScore() >= 10 ? 35:20;
+				mod = vampireScore() >= 10 ? 35:20;
 				maxStrCap2 += mod * newGamePlusMod;
 				maxSpeCap2 += mod * newGamePlusMod;
 				maxIntCap2 += mod * newGamePlusMod;
@@ -10199,18 +10264,18 @@ use namespace CoC;
 			addStatusValue(StatusEffects.LibSensCounter2, 1, maxLibCap2);
 			addStatusValue(StatusEffects.LibSensCounter2, 2, maxSenCap2);
 		}
-		
+
 		public function requiredXP():int {
 			var xpm:Number = 100;
 			if (level >= 42) xpm += 100;
 			if (level >= 102) xpm += 100;
 			if (level >= 180) xpm += 100;
-			//if (level >= 274) 
+			//if (level >= 274)
 			var temp:int = (level + 1) * xpm;
 			if (temp > 74000) temp = 74000;//(max lvl)185 * 400(exp multi)
 			return temp;
 		}
-		
+
 		public function minotaurAddicted():Boolean {
 			return findPerk(PerkLib.MinotaurCumResistance) < 0 && findPerk(PerkLib.ManticoreCumAddict) < 0 && (findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1);
 		}
@@ -10362,7 +10427,7 @@ use namespace CoC;
 			if(statusEffectv4(StatusEffects.CombatFollowerMitzi) > 0) addStatusValue(StatusEffects.CombatFollowerMitzi, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerNeisa) > 0) addStatusValue(StatusEffects.CombatFollowerNeisa, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerSiegweird) > 0) addStatusValue(StatusEffects.CombatFollowerSiegweird, 4, -1);
-			
+
 			// All CombatStatusEffects are removed here
 			for (var a:/*StatusEffectClass*/Array=statusEffects.slice(),n:int=a.length,i:int=0;i<n;i++) {
 				// Using a copy of array in case effects are removed/added in handler
@@ -10872,6 +10937,16 @@ use namespace CoC;
 			}
 			SexXP(5+level);
 			orgasm(type,real);
+			if (type == "Dick")
+			{
+				if (hasPerk(PerkLib.EasterBunnyBalls))
+				{
+					if(ballSize > 3)
+					{
+						createStatusEffect(StatusEffects.EasterBunnyCame, 0, 0, 0, 0);
+					}
+				}
+			}
 		}
 
 		public function orgasmReal():void

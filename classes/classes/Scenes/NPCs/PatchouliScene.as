@@ -482,7 +482,7 @@ public class PatchouliScene extends NPCAwareContent {
 			outputText("\"<i>Nyaaaa... Know what, [name]? As of today let’s be mates, nya. Come over to me whenever you're in the mood or in heat, I’ll always be ready for you waiting up that branch.</i>\"\n\n");
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = MATE;
 		}
-		player.sexReward("vaginalFluids");
+		player.sexReward("vaginalFluids","Dick");
 		doNext(camp.returnToCampUseOneHour);
 	}
 
@@ -521,7 +521,7 @@ public class PatchouliScene extends NPCAwareContent {
 			outputText("\"<i>Nyaaaa... Know what, [name]? As of today let’s be mates, nya. Come over to me whenever you're in the mood or in heat, I’ll always be ready for you waiting up that branch.</i>\"\n\n");
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = MATE;
 		}
-		player.sexReward("vaginalFluids");
+		player.sexReward("vaginalFluids","Dick");
 		doNext(camp.returnToCampUseOneHour);
 	}
 
@@ -544,7 +544,7 @@ public class PatchouliScene extends NPCAwareContent {
 		outputText("\n\n\"<i>Please.. Nyaaaaa!!! Rougher... Faster!</i>\"\n\n");
 		outputText("She's obviously liking it, which only bolsters your lust. Soon, you find yourself on the verge of orgasm. Patchoulie finally loses control of her cock as it twitches, filling you with kitty jizz and causing your own orgasm shortly after.\n\n");
 		outputText("Unsated, you keep milking the prankster for a few hours until you both pass out.\n\n");
-		player.sexReward("cum");
+		player.sexReward("cum","Vaginal");
 		doNext(camp.returnToCampUseOneHour);
 	}
 
@@ -570,7 +570,7 @@ public class PatchouliScene extends NPCAwareContent {
 		}
 		outputText(". However I don’t mind it, It's exactly how I want my mate to be, completely perverted.</i>\"\n\n");
 		outputText("Well considering the cum still dripping from her cunt you guess the word mate applies as no matter how you sex her, she manages to get your dick in the right spot anyway.\n\n");
-		player.sexReward("Default","Default",true,false);
+		player.sexReward("Default","Dick",true,false);
 		doNext(camp.returnToCampUseOneHour);
 	}
 

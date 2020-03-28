@@ -848,6 +848,7 @@ private function drinkMarbleMilk():void {
 	//[if addiction is under 50] 
 	if(player.statusEffectv2(StatusEffects.Marble) < 50)
 	outputText("After drinking Marble's milk, a feeling of euphoria spreads through you as you leave the farm in high spirits.");
+	player.slimeFeed()
 	applyMarblesMilk();
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1133,6 +1134,7 @@ private function playerAgreesToDrinkMarbleMilkBottled():void {
 		player.addStatusValue(StatusEffects.BottledMilk,1,(3 + rand(6)));
 	}
 	else player.createStatusEffect(StatusEffects.BottledMilk,8,0,0,0);
+	player.slimeFeed()
 	doNext(camp.returnToCampUseOneHour);
 }
 //(player chose no to drinking bottled milk)
@@ -1172,6 +1174,7 @@ private function playerDrinksMarbleMilk():void {
 	}
 	outputText("\n\nMarble gives you a kiss on the forehead before sending you on your way.");
 	//(apply Marble's Milk effect)
+	player.slimeFeed()
 	applyMarblesMilk();
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1759,7 +1762,7 @@ public function marbleSex2Continued(genders:int):void {
 	else {
 		outputText("Marble sighs and gives you a big smile. \"<i>Sweetie, you're just as wonderful to be with as ever.  I'm always looking forward to our times together,</i>\" she tells you.  You would be inclined to agree with her.");
 	}
-	player.sexReward("Default", "Default",true,false);
+	player.sexReward("Default", "Dick",true,false);
 	//– return to trigger
 }
 

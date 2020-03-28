@@ -319,7 +319,7 @@ public class PerkLib
 				"You choose the 'Hellcat Parathyroid Glands' perk, .");
 		public static const HellcatParathyroidGlandsEvolved:PerkType = mk("Hellcat Parathyroid Glands (Evolved)", "Hellcat Parathyroid Glands (Evolved)",
 				".",
-				"You choose the 'Hellcat Parathyroid Glands (Evolved)' perk, .");
+				"You choose the 'Hellcat Parathyroid Glands (EvFolved)' perk, .");
 		public static const HellcatParathyroidGlandsFinalForm:PerkType = mk("Hellcat Parathyroid Glands (Final Form)", "Hellcat Parathyroid Glands (Final Form)",
 				".",
 				"You choose the 'Hellcat Parathyroid Glands (Final Form)' perk, .");
@@ -888,6 +888,18 @@ public class PerkLib
 		public static const DualWieldSmall:PerkType = mk("Dual Wield (Small)", "Dual Wield (Small)",
 				"Allows you to wield two small sized melee weapons.",
 				"You choose the 'Dual Wield (Small)' perk, training skill of using two small melee weapons.");
+		public static const EasterBunnyBalls:PerkType = mk("Easter bunny balls", "Easter bunny balls",
+				"Your balls constantly grows until emptied through your cock, producing eggs.",
+				"Your balls constantly grows until emptied through your cock, producing eggs.");
+		public static const EasterBunnyEggBag:PerkType = mk("Easter Bunny egg bag", "Easter Bunny egg bag",
+				"Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one eggs per round. Double cum production.",
+				"Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one eggs per round. Double cum production.");
+		public static const EasterBunnyEggBagEvolved:PerkType = mk("Easter bunny balls, evolved", "Easter bunny balls, evolved",
+				"Raise libido by a percentage based on current ball size. Triple cum production.",
+				"Raise libido by a percentage based on current ball size. Triple cum production.");
+		public static const EasterBunnyEggBagFinalForm:PerkType = mk("Easter bunny balls, final form", "Easter bunny balls, final form",
+				"Further raise libido by a percentage based on current ball size. Double ball growth rates. Double cum production again.\n",
+				"Further raise libido by a percentage based on current ball size. Double ball growth rates. Double cum production again.");
 		public static const EagleEye:PerkType = mk("Eagle eye", "Eagle eye",
 				"Increase traditional range weapons (like bows) base attack by another 50%.",
 				"You choose the 'Eagle eye' perk, increasing traditional range weapons base attack.");
@@ -5280,6 +5292,9 @@ public class PerkLib
                 .requirePerk(DragonDarknessBreath).requireCustomFunction(function (player:Player):Boolean {
                 return player.dragonScore() >= 4;
             }, "Dragon race");
+			EasterBunnyEggBag.requirePerk(EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
+				return player.easterbunnyScore() >= 12;
+			}, "Easter Bunny race");
             ElvishPeripheralNervSys.requirePerk(ElvenSense).requireCustomFunction(function (player:Player):Boolean {
                 return player.elfScore() >= 4;
             }, "Elf race");
@@ -5333,7 +5348,7 @@ public class PerkLib
                 return player.mantisScore() >= 5;
             }, "Mantis race");
 			MelkieLung.requireLungsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-				return player.melkieScore() >= 6;
+				return player.melkieScore() >= 12;
 			}, "Melkie race");
             MinotaurTesticles.requireCustomFunction(function (player:Player):Boolean {
                 return player.hasCock();
@@ -5631,6 +5646,9 @@ public class PerkLib
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.dragonScore() >= 10;
                     }, "Dragon race");
+			EasterBunnyEggBagEvolved.requireLevel(12).requirePerk(EasterBunnyEggBag).requireCustomFunction(function (player:Player):Boolean {
+				return player.easterbunnyScore() >= 12;
+			}, "Easter bunny race");
             ElvishPeripheralNervSysEvolved.requireLevel(12).requirePerk(ElvishPeripheralNervSys).requireCustomFunction(function (player:Player):Boolean {
                 return player.elfScore() >= 8;
             }, "Elf race");
@@ -5650,7 +5668,7 @@ public class PerkLib
                 return player.mantisScore() >= 10
             }, "Mantis race");
 			MelkieLungEvolved.requirePerk(MelkieLung).requireCustomFunction(function (player:Player):Boolean {
-				return player.melkieScore() >= 8;
+				return player.melkieScore() >= 12;
 			}, "Melkie race");
             NaturalPunchingBagEvolved.requireLevel(12).requirePerk(NaturalPunchingBag).requireCustomFunction(function (player:Player):Boolean {
                 return player.goblinScore() >= 8
@@ -5999,6 +6017,9 @@ public class PerkLib
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.dragonScore() >= 16;
                     }, "Dragon race");
+			EasterBunnyEggBagFinalForm.requireLevel(30).requirePerk(EasterBunnyEggBagEvolved).requireCustomFunction(function (player:Player):Boolean {
+				return player.easterbunnyScore() >= 12;
+			}, "Easter Bunny race");
             ElvishPeripheralNervSysFinalForm.requireLevel(30).requirePerk(ElvishPeripheralNervSysEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.elfScore() >= 12;
             }, "Elf race");
@@ -6111,7 +6132,7 @@ public class PerkLib
 					return player.cowScore() >= 12;
             }, "Lacta Bovine race");
 			MelkieLungFinalForm.requirePerk(MelkieLungEvolved).requireCustomFunction(function (player:Player):Boolean {
-				return player.melkieScore() >= 10;
+				return player.melkieScore() >= 12;
 			}, "Melkie race");
             MinotaurTesticlesFinalForm.requireLevel(36)
 				.requirePerk(MinotaurTesticlesEvolved)

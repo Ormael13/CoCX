@@ -504,9 +504,9 @@
         <cell rect="1099,216,80,105" name="clothe/purpleKimonoSleeves" dx="54" dy="72"/>
         <cell rect="853,325,80,105" name="clothe/blackKimonoSleeves" dx="54" dy="72"/>
         <cell rect="935,325,80,104" name="clothe/goblinTechnomancerClotheArms" dx="54" dy="72"/>
-        <cell rect="751,158,40,54" name="clothe/whiteKimonoBottom" dx="75" dy="121"/>
-        <cell rect="919,158,40,54" name="clothe/blackKimonoBottom" dx="75" dy="121"/>
-        <cell rect="1099,325,80,104" name="clothe/goblinTechnomancerClotheBoots" dx="54" dy="72"/>
+        <cell rect="751,158,40,54" name="clotheLegs/whiteKimonoBottom" dx="75" dy="121"/>
+        <cell rect="919,158,40,54" name="clotheLegs/blackKimonoBottom" dx="75" dy="121"/>
+        <cell rect="1099,325,80,104" name="clotheLegs/goblinTechnomancerClotheBoots" dx="54" dy="72"/>
         <cell rect="776,12,45,25" name="armorNeck/fullplatetopFemale" dx="70" dy="63"/>
         <cell rect="833,12,45,25" name="armorNeck/fullplatetopMale" dx="70" dy="63"/>
         <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="72" dy="75"/>

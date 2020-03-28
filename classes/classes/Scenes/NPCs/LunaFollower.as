@@ -728,7 +728,7 @@ package classes.Scenes.NPCs
 				outputText("Finally you reach your climax " + ((player.dogScore() > 5 || player.wolfScore() > 5) ? "howling in tandem with her" : "roaring in tandem with her howl") + " as you paint her cunt white like the moon with your hot seed. She sighs in relief, turning over without unplugging you from her cunt to embrace you.\n\n");
 				lunaJealousy(-100);
 				lunaAffection(2);
-				player.orgasm();
+				player.sexReward("vaginalFluids","Dick");
 				if (flags[kFLAGS.LUNA_MOONING] == 1) {
 					outputText("You rest a moment in her arms before breaking the hug. As much as your savage lover would like you to dom her all day you’ve got other things to do. The both of you redress before resuming normal activities.\n\n");
 					doNext(camp.returnToCampUseOneHour);
@@ -757,7 +757,7 @@ package classes.Scenes.NPCs
 				outputText(". The waters flooding your fingers a few seconds later are the only telltale sign your beta finally reached her climax, but you think it’s more than enough of a reward for her.\n\n");
 				lunaJealousy(-100);
 				lunaAffection(2);
-				player.orgasm();
+				player.sexReward("saliva");
 				if (flags[kFLAGS.LUNA_MOONING] == 1) {
 					outputText("Satisfied, you rest a moment in her arms before breaking up. As much as your savage lover would like you to dom her all day you got other things to do. The both of you redress before resuming activity.\n\n");
 					doNext(camp.returnToCampUseOneHour);

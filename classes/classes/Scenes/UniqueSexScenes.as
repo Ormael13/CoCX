@@ -55,6 +55,8 @@ public function pcUniqueSexScenesChoiceMenu():void {
 	addButtonDisabled(7, "Cooldown", "Req. to have (Winter wolf/other cold cum creatures, pc must be female salamander or hinezumi). (not yet added scene)");
 	if (player.yukiOnnaScore() >= 14 && monster.hasCock() && !monster.hasPerk(PerkLib.UniqueNPC) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) addButton(8, "Steal warmth", yukionnaStealWarmthScene);
 	else addButtonDisabled(8, "Steal warmth", "Req. to be Yuki Onna and enemy must be: non-gigant, humanoid, with cock, non-unique npc.");
+	if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.hasCock() && player.ballSize > 3)addButton(9, "EGGS!!", EasterBunnyLayEggsRape);
+	else addButtonDisabled(9, "EGGS!!", "Req. to be a Easter Bunny.");
 	if (player.isInGoblinMech() && player.hasKeyItem("Cum Reservoir") >= 0 && monster.hasCock()) {
 		if (player.keyItemv1("Cum Reservoir") == 4) addButtonDisabled(13, "Fill the reservoir", "Reservoir is already full. You need to use all this stored cum before you harvest new one.");
 		else addButton(13, "Fill the reservoir", gobomechFillTheReservoir);
@@ -72,7 +74,6 @@ public function manticoreTailRapeScene():void {
 	outputText("\"<i>Lick me clean you worm! Don’t you see how wet I am?!</i>\"\n\nBoth too terrified and supremely horny to refuse your command, your defeated foe begins to use its tongue to give your sensitive pussy a proper licking. Delighted by the sensations from both of your pussies, you feel like singing your pleasure and to your surprise a series of moans that sound like a song come out from your mouth as you ride orgasm after orgasm, splattering " + monster.pronoun3 + " crotch and face with your girl juice.\n\n");
 	outputText("Only once " + monster.pronoun3 + " " + monster.ballsDescriptLight() + " have shrunk to the point they look like a pair of raisins do you let go of what's left of " + monster.pronoun2 + ".\n\nYou lick your lips feeling like you just had a five course meal fit for a queen as you leave the body of your passed out opponent on the ground at the mercy of other potential sexual predators.");
 	player.sexReward("cum");
-	player.orgasm();
 	statScreenRefresh();
 	cleanupAfterCombat();
 	return;
@@ -186,6 +187,21 @@ public function hinezumiHeatTransferScene():void {
 	outputText("You feel like some payback is in order, however, this time around you have something different in mind than your regular antics.\n\n");
 	outputText("You feel like some payback is in order, however, this time around you have something different in mind than your regular antics.\n\n");
 	player.sexReward("Default", "Default", true, false)
+	cleanupAfterCombat();
+	return;
+}
+public function EasterBunnyLayEggsRape():void {
+	clearOutput();
+	outputText("Oh gawsh your balls feels like they will explode anytime soon if you don’t shoot those eggs out already! Again the welcoming piece of ass your defeated foe present you looks like the perfect place to lay and this is not the kind of opportunity you would pass on.\n\n");
+	outputText("With a soulless stare and a manic smile completing your lust crazed expression that would scare the shit out of the most pent up of demon, you ready for breeding revealing your hardening [cock] as you prepare to go to town on " + monster.a + monster.short + " welcoming ass. " +
+			"" + monster.pronoun1 + " eyes widen in terror as " + monster.pronoun1 + " realizes that from predator " + monster.pronoun1 + " became the prey. You grab that ass and smack it a few times for good measure forcing a moan or two out of your partner before grabbing your victims tight as you prepare for the mating." +
+			" " + monster.a + monster.short + " eyes are almost begging for mercy by now but you’re too far gone in your lust to care.\n\n");
+	outputText("You gasp in delight as your bunny cock slides into that sweet hole the walls tighten around you. Using your powerful bunny legs you begin to jump in and out of this rabbit hole your unwilling partner groaning as you use his/her/its backside to sate your bottomless lust.\n\n");
+	outputText("<i>”Eggs…!!!! EGGS!!!”</i> You finally scream, eye crossed in delight as your two/four heavy eggs finally slide out of your balls, moving through your urethra and into your victim's spacious bowels.\n\n");
+	outputText("Your [cock] still hard, you keep bucking inside -opponent- name relentlessly until you cum not once not twice but three times, tongues out, caring little for the destroyed hole of your partner. Only caring for your own satisfaction you stop fucking only once " + monster.a + monster.short + " faint from exhaustion. " +
+			"Well you still got plenty of energy left but might as well fuck something that's awake. You unplug your still hard cock from " + monster.pronoun3 + " asshole gasping as your cock sensitive flesh is exposed to the air again." +
+			" Without anything to plug it the excessive load of cum stashed in your victim's stomach surges out and dye the ground beneath " + monster.pronoun3 + " white. For good measure you clean your dripping penis on " + monster.a + monster.short + " ass and hops off back to camp.\n\n");
+	player.sexReward("Default", "Dick", true, false)
 	cleanupAfterCombat();
 	return;
 }

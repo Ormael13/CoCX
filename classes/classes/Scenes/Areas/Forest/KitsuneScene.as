@@ -386,6 +386,7 @@ public class KitsuneScene extends BaseContent
 			outputText("Her warm " + ((player.biggestCockArea() > 80) ? "cunt" : "asshole") + " still grips your cock tightly, dragging you down with her.  You collapse on top of her, sliding off of the redhead's cock as you tumble into the golden curls of the blonde's hair.");
 			if (player.gender >= 2) outputText("  A flood of seed begins to spill from your abused pussy, gushing over the redhead's groin and spreading into the water.  The flow is soon stemmed by the introduction of the black-haired girl's tongue, plush lips pressed against your cunt as she hungrily sucks down the outpouring of semen.  She gulps loudly and gluttonously, spreading your lips with her thumbs and swallowing every last delicious salty morsel, her stomach swelling and quivering as your own overfull abdomen begins to deflate in equal measure.");
 			outputText("  As your twitching cock relieves itself of the last of your seed inside the blonde's " + ((player.biggestCockArea() > 80) ? "pussy" : "ass") + ", you feel your strength slipping away from you with each spasm, your eyelids growing heavy with an uncommon weariness.\n\n");
+			player.sexReward("vaginalFluids", "Dick", true, false);
 			player.sexReward("cum");
 			doNext(kitsuneStillHungryMansion);
 		} //End letHer() 	
@@ -456,6 +457,7 @@ public class KitsuneScene extends BaseContent
 				outputText("The slithering tongue coils around the base of the redhead's softening member, pulling it from your " + vaginaDescript() + " with a 'plop!'  A flood of seed begins to spill from your abused pussy, gushing over the redhead's groin and spreading into the water.  The flow is soon stemmed by the introduction of the black-haired girl's tongue, plush lips pressed against your cunt as she hungrily sucks down the outpouring of semen.  She gulps loudly and gluttonously, spreading your lips with her thumbs and swallowing every last delicious salty morsel, her stomach swelling and quivering as your own overfull abdomen begins to deflate in equal measure.\n\n");
 				outputText("As your twitching cock relieves itself of the last of your seed inside the blonde's pussy, you feel your strength slipping away from you with each spasm, your eyelids growing heavy with an uncommon weariness.\n\n");
 			}
+			player.sexReward("vaginalFluids", "Dick");
 			player.sexReward("cum");
 			doNext(kitsuneStillHungryMansion);
 		} // End shoveHer()
@@ -488,6 +490,7 @@ public class KitsuneScene extends BaseContent
 			outputText("A viscous stream of femcum crashes against your face, dribbling down your chin as the blonde achieves climax shortly after you do, and altogether the four of you ride the waves of pleasure for what feels like ages.  Each passing second finds you more and more fatigued, and your eyelids grow heavier and heavier, muscles growing weak.\n\n");
 			outputText("Exhausted by the ordeal, you relax into a blissful stupor, only vaguely aware of the feeling of being dragged onto the deck.  The last thing you recall before slipping into unconsciousness is the three sisters crawling up alongside you, coaxing your twice-spent member back to life yet again with their magic, eyes glinting hungrily.");
 			//Increase PC cum production slightly due to residual effects from the kitsunes' magic.
+			player.sexReward("vaginalFluids", "Dick");
 			player.sexReward("cum");
 			outro();
 		} //end stillHungry();
@@ -565,6 +568,8 @@ public class KitsuneScene extends BaseContent
 				outputText("\n\nThe four of you ride out the waves of pleasure for what seems like an eternity, groaning and grinding against each other in ecstasy.  Cooling flames crackle across your bare body as you are tossed to and fro in a sea of tails and flesh, the air filling with the sounds and smells of climactic release.  Finally, at long last, the pleasure begins to ebb, and you collapse along with the three girls, slumping forward onto the blonde's chest in exhaustion.\n\n");
 				outputText("Each residual twitch and spasm of your muscles leaves you feeling more fatigued than ever, strength slipping away from you with each spasm and your eyelids growing heavy with an uncommon weariness.\n\n");
 			}
+			player.sexReward("vaginalFluids", "Dick");
+			player.sexReward("cum");
 			doNext(createCallBackFunction(genderlessKitsuneStillHungry, willing));
 		} // end shoveHer()
 
@@ -634,7 +639,8 @@ public class KitsuneScene extends BaseContent
 			}
 			outputText("\n\nEvery twitch and spasm of your loins finds you feeling a little more fatigued, your eyelids growing heavy with drowsiness as you can feel the life being drained from you.  Panting desperately, the three sisters gradually regain their senses as your flagging tentacles slowly lower them down into the water" + ((player.cumQ() > 1000) ? ", their arms wrapped protectively around their cum-bloated bellies" : "" ) + ".  Exhausted from your ordeal, you let yourself relax into a blissful stupor, only vaguely aware of the feeling of being dragged up onto the deck.  The last thing you see before going unconscious is the three sisters crawling up around you, coaxing your spent tentacles back to life, their eyes glinting hungrily.");
 			outro();
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids", "Dick");
+			player.sexReward("cum");
 		}
 
 		private function outro(tentacles:Boolean = false):void
@@ -833,7 +839,8 @@ public class KitsuneScene extends BaseContent
 			}
 			outputText("\n\nSighing deeply in utter satisfaction" + ((player.cumQ() > 350) ? " with one hand resting on her stomach" : "" ) + ", she leans back, swiveling her hips a little to tease your spent cock.  Drenched in her " + ((monster.hairColor == "red") ? "musky futa-cum" : "feminine juices") + ", you twitch lightly as bliss and fatigue spread through your body in equal measure.  She leans forward again, dropping her lips to your ear, and whispers a short incantation while stroking the side of your face.\n\n");
 			outputText("The last thing you see before blacking out is a pair of delightfully plump, round cheeks jiggling happily as the kitsune gathers her robes.");
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids", "Dick");
+			player.sexReward("cum");
 			dynStats("lib", 1, "sen", 1);
 			cleanupAfterCombat();
 		}
@@ -925,7 +932,7 @@ public class KitsuneScene extends BaseContent
 			outputText("Your last sight before blacking out from the kitsune's spell is a span of creamy white flesh jiggling seductively, quivering gently beneath a cluster of tails.");
 			//<b>You'll probably come to your senses in 8 hours or so, missing X gems</b>" );
 			// Advance time 8hrs, lose X gems, return to camp. +Sensitivity +Libido
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids", "Dick");
 			dynStats("lib", 1, "sen", 1);
 			cleanupAfterCombat();
 		}
@@ -954,7 +961,7 @@ public class KitsuneScene extends BaseContent
 			outputText("She whispers an incantation in a strange language, and you can slowly feel your already pleasure-worn consciousness leaving you, replaced with a warm, comforting darkness.  Your dreams are haunted by visions of yourself being turned into a human dairy cow, forced to live out the rest of your days as a living milk factory for your hungry kitsune mistress.");
 			//<b>You'll probably come to your senses in 8 hours or so, missing X gems.</b>" );
 			//Advance time 8 hours, lose X gems, return to camp. +Sensitivity, +Libido, +Lactation Amount
-			player.sexReward("vaginalFluids");
+			player.sexReward("Default", "Default", true, false);
 			dynStats("lib", 1, "sen", 1);
 			player.boostLactation(1.5);
 			if (player.findPerk(PerkLib.Feeder) >= 0) {
@@ -1001,7 +1008,7 @@ public class KitsuneScene extends BaseContent
 			outputText("As your [cock biggest] begins to flag, your magically enhanced balls slowly return to their normal size.  Fatigue fills your muscles, and you find it hard to keep your eyes open.  The last thing you see before passing out is a quivering tattooed ass rising off your chest, two hands lovingly cradling a pregnant-looking stomach as it jiggles softly.");
 			//outputText("<b>You'll probably come to your senses in 8 hours or so, missing X gems.</b>" );
 			//Advance time 8 hours, lose X gems, return to camp. +Sensitivity, +Libido, +Cum Production
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids", "Dick");
 			dynStats("lib", 1, "sen", 1);
 			if (player.cumQ() < 30000) player.cumMultiplier += 5;
 			cleanupAfterCombat();
@@ -1242,7 +1249,7 @@ public class KitsuneScene extends BaseContent
 
 			outputText("Finally, you turn to gather up your things, cleaning yourself off a little and pulling your [armor] back on.  When you turn around again to check up on the insensate kitsune, you are left scratching your head, staring at the spot where she was mere moments ago.  All that remains of her is a puddle of mixed fluids, already mostly absorbed by the ground, and the faint sound of mischievous laughter filtering through the trees.");
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids", "Dick");
 			dynStats("lib", 1, "sen", 1);
 			cleanupAfterCombat();
 		}
@@ -1311,7 +1318,7 @@ public class KitsuneScene extends BaseContent
 
 			outputText("You take a moment to recuperate, and then begin to gather your things, but when you turn your attention back to the kitsune, there's no sign of her save for the sound of a feminine giggle drifting through the leaves.");
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", 1, "sen", 1);
 			cleanupAfterCombat();
 		}
@@ -1395,7 +1402,7 @@ public class KitsuneScene extends BaseContent
 
 			outputText("\"<i>Come look me up anytime, dear!</i>\"  she calls back when she is safely out of sight.  You briefly consider giving chase, but decide it is not worth the effort, gathering your [armor] and turning back toward camp.");
 			//Advance time 1hr and return to camp.  +Sensitivity
-			player.sexReward("vaginalFluids");
+			player.sexReward("Default","Dick",true,false);
 			dynStats("sen", 5);
 			cleanupAfterCombat();
 		}
@@ -1467,7 +1474,7 @@ public class KitsuneScene extends BaseContent
 
 			outputText("\"<i>Tentacles...</i>\" she repeats, shuddering from head to toe.");
 			//Advance time 1hr and return to camp.  +Sensitivity, +Libido
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", 1, "sen", 1);
 			cleanupAfterCombat();
 		}
@@ -1573,7 +1580,7 @@ public class KitsuneScene extends BaseContent
 
 			outputText("You can't be certain how long you were asleep, but when you come to your senses, you are alone.  A musky trail of fluids leads into the underbrush, and though you doubt that she could have gotten far in her condition, you need to return to check on your camp.  As you gather your things, you pause briefly and smirk, certain you can hear the sound of moaning filtering through the trees.");
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", 1, "sen", 1);
 			player.consumeItem(consumables.F_DRAFT);
 			cleanupAfterCombat();
@@ -1650,7 +1657,7 @@ public class KitsuneScene extends BaseContent
 			//{replace normal kitsune loot tables with randomly colored eggs}
 			flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = itype.id;
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", 1, "sen", 1);
 			cleanupAfterCombat();
 		}
@@ -1709,7 +1716,7 @@ public class KitsuneScene extends BaseContent
 
 			outputText("\n\nShe groans deeply as an unexpected climax shudders through her chest, fresh fountains of milk spurting everywhere like a warm, creamy sprinkler and raining down around you.  Even after you lie back in satisfaction to catch your breath, the kitsune's breasts continue to leak milk, rivulets of creamy white slowly flowing down the massive curvature of her chest.  When you stand up to clean yourself off at last, you look back to see the horny fox-woman hefting one of her engorged jugs to her lips, suckling deeply.");
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", 1, "sen", 1);
 			//consume lactaid
 			player.consumeItem(consumables.LACTAID);
@@ -1782,7 +1789,7 @@ public class KitsuneScene extends BaseContent
 			}
 			outputText("\n\nShe rolls onto her side, curling up in a puddle of sweat and sex, resting her hands on her " + ((player.cumQ() > 1000) ? "inflated" : "pudgy" ) + " stomach and sighing contentedly, the tips of her tails gently twitching with residual pleasure.  You take a moment to recuperate, then gather your things and turn toward camp, leaving the insensate kitsune to recover on her own.");
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
-			player.sexReward("vaginalFluids");
+			player.sexReward("Default","Dick", true,false);
 			dynStats("lib", 1, "sen", 1);
 			cleanupAfterCombat();
 		}
@@ -1931,7 +1938,7 @@ public class KitsuneScene extends BaseContent
 			}
 			outputText("\n\nSighing in satisfaction, you step back from the tree to catch your breath." + ((player.cumQ() > 1000) ? "  The kitsune leans back, cradling her full stomach with a blissful smile on her face and a few strings of cum-laced spittle dripping down her chin, a small puddle of juices spreading between her knees.  How she can look so happy after a brutal facefucking like the one you just gave her is beyond you, but by the look of things she's quite content with the results." : "  The kitsune leans back, laying a hand on her stomach and rubbing it lightly.  An audible gurgle reaches your ears, and she sighs bemusedly, shaking her head.") + "  Either way, it doesn't look like the exhausted girl is going to be getting up soon, so you gather your things and head back to camp.");
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
-			player.sexReward("vaginalFluids");
+			player.sexReward("saliva","Dick");
 			dynStats("lib", 1, "sen", 1);
 			cleanupAfterCombat();
 		}
@@ -2174,7 +2181,7 @@ public class KitsuneScene extends BaseContent
 
 			outputText("Finally, she shuts her eyes and rests her head against your shoulder, too insensate to react to your continued stroking with more than a gentle shiver.  It's almost a shame that you need to return to camp, as you have little doubt that she would probably curl up to sleep in your lap if you gave her the chance.  You set her aside in the grass, then clean yourself off before heading back.");
 			//Return to camp, advance time 1hr, +Sensitivity
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("sen", 3);
 			cleanupAfterCombat();
 		}
@@ -2225,7 +2232,7 @@ public class KitsuneScene extends BaseContent
 			}
 			outputText("\n\nShe moans in insensate bliss as she sways back and forth, dripping with your steamy seed.  Her eyes are the merest sliver of jade beneath heavy lids, her tongue hanging out lazily as she hangs in helpless pleasure from her bonds.  " + ((player.cor > 50) ? "Smirking lightly, you give the dazed kitsune a patronizing slap on the ass, eliciting a delirious groan.  She remains dangling from the lofty bough as you gather your things, turning back toward camp." : "Carefully, you pull her down from the tree, laying her on her side at its base.  You spread her robe over her naked body like a blanket, patting her on the head gently as she drifts to sleep, then turn to make your way back to camp." ));
 			//advance time 1hr and return to camp, +Sensitivity, +Libido
-			player.sexReward("vaginalFluids");
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", 1, "sen", 1);
 			cleanupAfterCombat();
 		}

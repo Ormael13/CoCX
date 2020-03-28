@@ -359,7 +359,7 @@ public function nomOnMommaIzzysTits():void {
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00261] == 0) outputText("  S-she fucked you in your sleep?  That explains how good your dreams were.  On one hand you feel a little violated, but on the other you have to wonder how long this woman has held her camp against the demons with nothing to please her.");
 			else outputText("  It looks like she fucked you in your sleep again.  You wish you wouldn't fall asleep so soundly after drinking her milk so that you could contribute to the sex, but you wake so COMPLETELY SATED in every way that you know it's going to be hard to ever turn her down.");
 			//(no lust!, minus 50 fatigue)
-			player.sexReward("vaginalFluids");
+			player.sexReward("milk");
 			fatigue(-50);
 			//increment sleep rape counter
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00261]++;

@@ -141,7 +141,6 @@ internal function sandwitchRape():void {
 			doNext(sandWitchBadEnd);
 			return;
 		}
-		player.sexReward("Default","Default",true,false);
 		outputText("Your wobbly legs give out underneath you as your body's will to fight evaporates.\n\n");
 		if(player.hairColor.indexOf("sandy blonde") != -1) {
 			outputText("The Sand Witch smiles wickedly and intones, \"<i>Tresed eht retaw llahs klim ruoy.</i>\"\n\n");
@@ -196,7 +195,7 @@ internal function sandwitchRape():void {
 		}
 		//RAEP
 		outputText("  You hear the soft impact of her robe upon the sands and cannot resist a peek at your captor.  You turn to behold a curvy, dark-skinned beauty, whose form is dominated by a quartet of lactating breasts.  Somewhere in your lust fogged mind you register the top two as something close to double-D's, and her lower pair to be about C's.  She smiles and leans over you, pushing you to the ground violently.\n\nShe turns over you and drops down, planting her slick honey-pot firmly against your mouth.  Her scent is strong, overpowering in its intensity.  Your tongue darts out for a taste and finds a treasure trove of sticky sweetness.  Instinctively you tongue-fuck her, greedily devouring her cunny-juice, shoving your tongue in as far as possible before suckling at her clit.  Dimly you feel the milk spattering over you, splashing off you and into the warm desert sands.  Everywhere the milk touches feels silky smooth and sensitive, and your hands begin stroking your body, rubbing it in as the witch sprays more and more of it.  You lose track of time, orgasming many times, slick and sticky with sexual fluids.");
-		player.slimeFeed();
+		player.sexReward("milk");
 		dynStats("lib", 1, "sen", 5);
 		rapedBefore = true;
 		cleanupAfterCombat();
@@ -315,7 +314,7 @@ private function sandwitchBewbs():void {
 	outputText("You burp, and flush scarlet, but the sand witch lays a hand against your face, leans close, and kisses your lips sweetly. Her tongue snakes out and dives into your mouth. She pulls your face against hers, grinding her breasts against your chest. You can feel fresh milk dribbling against your [skin.type] and the scents are driving you wild with lust.  ");
 	outputText("She breaks the kiss and smiles at you, whispering. Your eyes slowly close as you grow drowsy; you realize too late that she's casting a spell. You fall asleep, the sand witch's milk in your stomach churning, gurgling.  ");
 	outputText("You wake up in the desert, immediately grabbing at your body to see if anything's changed...");
-	player.slimeFeed();
+	player.sexReward("milk");
 	player.refillHunger(35);
 	dynStats("lus", 25);
 	cleanupAfterCombat();
@@ -336,7 +335,7 @@ private function sandwitchSex():void {
 	outputText(cockDescript(0) + " throbs with need, even as you empty your lust into the defeated sand witch.");
 	outputText("\n\nWith a satisfied smirk, you lay atop your prize, your [cock] still twitching within her depths. One of the sand witch's hands rubs at your head, teasing your [skin.type]. Like a fresh youth, you fall asleep, [cock] buried deep in the sand witch.  ");
 	outputText("With a start you wake up, only to find the sand witch still passed out beside you.  Almost thinking it was a dream, you touch your groin tenderly and rub softly. There's a faint trace of soreness, and you remember the ferocity with which you mashed your pelvises together.  You get up and get ready.  ");
-	player.sexReward("Default","Default",true,false);
+	player.sexReward("vaginalFluids","Dick");
 	cleanupAfterCombat();
 }
 /*
@@ -344,7 +343,7 @@ Event: Centaur-SWitch: Player Raping
 Definition: Tentacle Cock: very long (smallest 2+ feet) */
 private function sandwitchCentaurBoning():void {
 	spriteSelect(50);
-	player.sexReward("Default","Default",true,false);
+	player.sexReward("vaginalFluids","Dick");
 	outputText("The Sand Witch is panting before you, her clothes in disarray ");
 	//[win via HP]
 	if(monster.HP < 1) outputText("and torn in many places. ");
