@@ -803,7 +803,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.hasPerk(PerkLib.EasterBunnyEggBagEvolved)) {
 						var changeLib:Number = player.lib*((player.ballSize*5/100)+1); //Exemple (1*5/100)+1= 1.05 wich is the modifier to libido
 						if (player.hasPerk(PerkLib.EasterBunnyEggBagFinalForm)){
-							changeLib:Number = player.lib*((player.ballSize*10/100)+1);
+							changeLib = player.lib*((player.ballSize*10/100)+1);
 							player.ballSize++;
 						}
 						player.dynStats("lib", changeLib);
