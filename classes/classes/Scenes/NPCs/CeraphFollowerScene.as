@@ -579,7 +579,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText(" and mouths, \"<i>Thank you.</i>\"\n\n");
 
 			outputText("Nodding, you give her ass a slap and send her off, noting Ceraph has freed her hands at some point and returned them to their normal position.  She hasn't done anything about the sexual filth coating her body, but knowing her, she probably doesn't want to.");
-			player.orgasm();
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("sen", -2, "cor", .25);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -630,7 +630,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 
 			outputText("You pull her back to your " + vaginaDescript() + " to lick the last of your lady-spunk from your nethers, then send her on her way with a smile on your face.  Your expression widens when you see Ceraph stagger, still a bit shaky from her own orgasm.");
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00289]++;
-			player.orgasm();
+			player.sexReward("saliva");
 			dynStats("sen", -2 ,"cor", .25);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -679,9 +679,8 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText(" down your cum as it erupts from your [cocks].  As it swallows every drop, you hazily wonder what she'll do with it all, but then the still-fucking tentacles move faster, spraying their cum out from your too-packed orifices to rain over both of you.  Your " + vaginaDescript() + " and " + assholeDescript() + " flutter and contract, involuntarily squeezing the purple-skinned invaders for even greater levels of sensations.  It's too much and too hard.  You black out with a moan of satiated pleasure.\n\n");
 
 			outputText("You come to in a puddle of cum, both yours and Ceraph's.  The demoness is sitting down across from you, her appearance returned to normal.  She brightens when she wakes and kneels, saying, \"<i>Thank you for allowing me to serve you so... completely, " + player.mf("Master", "Mistress") + ".  It was... thrilling.</i>\"\n\n");
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-			player.orgasm();
+			player.sexReward("cum");
+			player.sexReward("vaginalFluids","Dick");
 
 			dynStats("sen", -2, "cor", .25);
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
@@ -771,7 +770,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText(" thank you for the 'cream'.  You nod weakly and they jump to their feet and swish their tails at you, then depart.\n\n");
 
 			//lust to 0, corruption +0.5
-			player.orgasm();
+			player.sexReward("Default","Dick",true,false);
 			dynStats("lib", -1);
 			//end scene
 			doNext(camp.returnToCampUseOneHour);
@@ -837,9 +836,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			if (player.hasCock()) outputText("  " + SMultiCockDesc() + " releases its own glut in a sympathetic climax that turns the dirt under your body into sticky mud as your inflating gut spreads out from either side of your belly. Still cumming, Urta presses her lips to the back of your neck, kissing you softly in a gesture that almost seems to convey a sense of ownership as much as tenderness.  When she finally withdraws from your over-filled pussy, the glut of her semen bubbles out of your body in rolling waves of alabaster cream.  She rises, unsteadily, to stand over you, her cock finally drooping, thick strands of spunk still dripping between her engorged urethra and your spasming cunt.  \"<i>Hey, I can finally take a shower without smelling like a wet dog afterwards,</i>\" she realizes, happily. She reaches a hand down to help you up, her expression one of blissful satisfaction, but the experience was too much for you and you pass out. The last thing you see is the warm halo of her caramel face and the caring sparkle of her leafy eyes.");
 			outputText("\n\n");
 			outputText("You wake up before long and find yourself cleaned, though still a little sticky, as if someone had used their tongue to wash the cum from your " + player.skinFurScales() + ".");
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-			player.orgasm();
+			player.sexReward("cum");
 			dynStats("lib", -1, "sen", -2, "cor", 2);
 			//Preggers chance!
 			if (player.hasVagina() && player.totalFertility() >= rand(45) && player.pregnancyIncubation == 0) {
@@ -881,7 +878,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("When the two of you reach the crest of your climax this time, neither of you has the strength to hold back, triumphantly surging toward your simultaneous orgasms. Urta squeezes your hand so tightly your knuckles crack in her hands while her legs pull your " + hipDescript() + " into an iron embrace. Your " + cockDescript(player.biggestCockIndex()) + " releases its fertile load into the girl's depths, liquid weight flooding her ravished canal with the creamy testament of your love.  She holds you inside her desperately, her pliant, sable lips murmuring her devotion to you with shuddering whispers.  When you finally finish, she keeps you within her a minute longer, savoring the sensation of your shaft surrounded by the rapturous warmth of your seed, before finally releasing her grip, allowing you to withdraw.  Sighing happily, she rubs her pussy lips as you slip out, a pearl bead of your jizz bubbling from her stuffed uterus. She runs her fingertips through the spunk, massaging the cum against the folds of her glistening labia. \"<i>You know,</i>\" she playfully murmurs, \"<i>now that my curse is broken, I'm not barren anymore.</i>\" She closes her eyes and takes a deep breath, cooing about the feeling of your silken sperm pressing against her waiting womb. You smile, despite yourself.\n\n");
 
 			outputText("Retrieving your [armor], when you turn around again, Urta is gone, the moment vanishing like a drop of water in an endless sea. \"<i>Thank you, " + player.mf("Master", "Mistress") + ",</i>\" Ceraph's voice demurely whispers, gratitude floating on the wind.");
-			player.orgasm();
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", -1, "sen", -2, "cor", 2);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1005,7 +1002,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("She smiles at you seductively, licking her lips.  A slapping sound along with multiple pants and gasps catches your attention; both you and the succubus look around for its source.  The imps that brought the succubus for you are still masturbating furiously.  She looks at you with an eyebrow raised and says, \"<i>There is only one more thing you have to do to completely subdue me.  Order me to pleasure those lowly imps.</i>\"\n\n");
 
 			outputText("Do you?");
-			player.orgasm();
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", -3, "cor", 5);
 			//[Yes][No][Never Again]
 			simpleChoices("Yes", acceptMoreCeraphFauxCorruption, "No", declineCeraphFauxCorruption, "", null, "", null, "Never Again", iQuitCeraphCorruptionDemons);
@@ -1169,7 +1166,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 
 			outputText("Her grip fades, and you turn around to see... nothing.  She's simply gone, vanished without a trace.  No... not without a trace, you realize.  Right near where the milker used to lie sits a lone cowbell, lying in a pool of what you can only assume to be cum.  You reach for it, but it disappears as well, turned into a small puff of smoke and dispersing with the wind.  \"<i>Bye, sweetie,</i>\" the disembodied voice of your demonic slave whispers into your ear, mocking tones interspersed with a promise of further pleasure.");
 			//end (stat changes?)
-			player.orgasm();
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", 1, "sen", -5, "cor", 3);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1285,7 +1282,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 
 				outputText("\"<i>That said,</i>\" she whispers in your ear, \"<i>If you get a chance to do that to that cunt, do invite me.</i>\"");
 			}
-			player.orgasm();
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("sen", -2, "cor", 2);
 			flags[kFLAGS.CERAPH_ROLEPLAY_AS_DOMINIKA_COUNT]++;
 			doNext(camp.returnToCampUseOneHour);
@@ -1392,7 +1389,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("Her pussy continues to suck on you gently as you pull out, and when your " + cockDescript(x) + " finally comes free of her bizarre lovehole, her tongue gently swirls around the lips before retracting itself inside.  You back up, wondering if you should help the bound kitsune to her feet, but as you are considering this, she flashes you a crazed grin and is suddenly bathed in purple flames, disappearing before your eyes.\n\n");
 
 			outputText("\"<i>Zetsuko hopes to taste " + player.mf("Master", "Mistress") + " again sometime...</i>\"");
-			player.orgasm();
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", .25, "sen", -5, "cor", 2);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1447,7 +1444,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("Fully spent, you pull yourself back, grasping Zetsuko's still-writhing tongue in your hand and sliding it out of you, letting her lower body thump to the ground.  You watch as her tongue gently swirls around the lips and then retracts within the bizarre orifice, looking for all the world to be an ordinary — if slightly overstretched — pussy.  You wonder if you should help her up for a moment, but as you are considering reaching down to bring her to her feet, she is suddenly bathed in corrupted flames, disappearing before your eyes.\n\n");
 
 			outputText("\"<i>Zetsuko hopes to taste " + player.mf("Master", "Mistress") + " again sometime...</i>\"");
-			player.orgasm();
+			player.sexReward("saliva");
 			dynStats("lib", .25, "sen", -5, "cor", 2);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1666,9 +1663,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("  Her hands run through your [hair] and pull your [face] into her shoulder.  She holds you tightly, clingingly even.  If you weren't so enraptured by the sensation of your sperm-filled nipples, you might actually care.");
 			outputText("\n\nThe two of you slowly relax, dueling climaxes winding down to return some level of sanity at last.  As soon as the demoness' eyes uncross, she stands up, " + num2Text(player.totalNipples()) + " dicks sliding free of clutching, spunk-stuffed twats at once.  You gasp and shudder, the sensitive flesh nearly setting you off again.  As she stretches, Ceraph's new appendages shrink, losing their masculinity and even faster their size.  You rise while trying to ignore the runnels of demon-spunk that spout from your well-fucked chest, your [chest] wobbling fantastically with the extra fluid weight.  Ceraph leans over to suck a [nipple] into her mouth, and after a few quick swallows, she sighs contently.");
 			outputText("\n\n\"<i>Delicious, my [Master],</i>\" the demoness coos as her wings unfurl, \"<i>Please, let's do this again.</i>\"  She leaps into the sky and flies off, no doubt to tend to her own pets.");
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-			player.orgasm();
+			player.sexReward("cum");
 			dynStats("sen", 2, "cor", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1708,7 +1703,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("\n\nThere's no stopping the surging passion as it races through you, and with a throaty sigh, you release your seed.  It's amazing, from this vantage you can do more than just experience your orgasm, you can watch it happen.  You can see the underside of your disembodied cock bulging with each urethra-stretching load.[if (cumQuantity > 500)   Jizz foams at her lips as her belly rounds, and you're treated to the sight of Ceraph's bellybutton suddenly becoming an outtie.][if (cumQuantity > 1000)   A moment later, her stomach rounds further, taking on a positively pregnant appearance.][if (cumQuantity > 1500)   Spunky rivers pump from the demon's overfull womb as it loses its ability to stretch any further.]  You sigh and idly move the portal up and down, fucking through the sloshing, sperm-filled mess that the demon's cunt has turned into.  Delightful.");
 			if (flags[kFLAGS.CERAPH_HIDING_DICK] == 0) outputText("\n\nCeraph gurgles happily for a second, then her cheeks bulge.  Her throat begins working, and you realize she's cumming into her own mouth.  By the look of how squirrel-like her visage has become, she can barely manage to swallow a mouthful before the next is stuffing her full, dribbles of pearly cream running freely from the corners of her mouth.  Ceraph quietly gulps and swallows over and over until her dick finally begins to soften, spent at last.");
 			outputText("\n\nYou stand up and stretch, your cock still lodged tight in Ceraph's cooch.  Alas, all good things must come to an end, and with one slow tug, you remove the ring from your [cock " + y + "] (and your maleness from her cunt).  You toss the borrowed item back to her, letting it fall on your slave's heaving bosom as she tries to recover, a fucked-out mess in the dirt.  You turn to get dressed, and when you glance back, Ceraph is gone, until the next time you call for her.");
-			player.orgasm();
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("cor", 1);
 			awardAchievement("Now You're Fucking With Portals", kACHIEVEMENTS.GENERAL_FUCK_WITH_PORTALS, true, true);
 			flags[kFLAGS.TIMES_CERAPH_PORTAL_FUCKED]++;
@@ -1760,7 +1755,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 
 			outputText("\n\nHumming a happy tune to yourself as you walk around Ceraph's twitching form, you grab a handful of her hair and pull her up off the ground.  Her face is crusted with dirt and her sparkling, gem-like eyes stare senselessly at you.  You rub your ovipositor over her head, carefully wiping your mingled lubes off on her hair before retracting the organ back into its holding sleeve.  \"<i>That will be all,</i>\" you tell her, and she smiles dreamily at you.  You turn around to gather your things, and don't bother to look back.");
 			player.dumpEggs();
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1957,8 +1952,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText(" for you to gobble down, and she pats you on the head as you gratefully accept your reward.");
 			outputText("\n\n\"<i>Good, " + player.mf("boy", "girl") + ".</i>\" her voice says, slowly fading into the wind.");
 			//Increase corruption, reset lust, increase sensitivity.
-			player.slimeFeed();
-			player.orgasm();
+			player.sexReward("cum")
 			dynStats("sen", 2, "cor", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}

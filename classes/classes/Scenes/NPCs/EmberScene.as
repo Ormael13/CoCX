@@ -2315,9 +2315,8 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\nEmber makes the best face of disgust " + emberMF("he", "she") + " can manage.  \"<i>Argh!  I need a bath!  Now!</i>\"  And with a quick spin, " + emberMF("he", "she") + " dashes off to find a stream.  You watch " + emberMF("him", "her") + " go and smile bitterly; you've grown used to how the dragon behaves and you know " + emberMF("he", "she") + " really did enjoy " + emberMF("him", "her") + "self, but the act might be getting a bit tiresome.  Grabbing a handful of dried grass, you wipe the worst smears of sexual fluids from your body, redress yourself, and head lazily back to the camp.");
 			//(+Affection, minus lust, reset hours since cum, slimefeed)
 			emberAffection(6);
-			player.orgasm();
+			player.sexReward("cum");
 			dynStats("sen", 3);
-			player.slimeFeed();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -2419,7 +2418,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			else outputText("increasingly leery of " + emberMF("his", "her") + " batty behavior");
 			outputText(", then pick yourself up to head back to the camp.");
 			//(+Affection, lust, reset hours since cum, slimefeed)
-			player.slimeFeed();
+			player.sexReward("cum");
 			emberAffection(6);
 			dynStats("lus", 10 + player.lib / 10);
 			doNext(camp.returnToCampUseOneHour);
@@ -2533,7 +2532,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			else outputText(", folding your arms; " + emberMF("his", "her") + " dementia is getting worse...");
 
 			//lose lust, reset hours since cum
-			player.orgasm();
+			player.sexReward("saliva");
 			dynStats("sen", -1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2689,7 +2688,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 
 				outputText("\n\nEmber shudders as you finish talking and blows a puff of smoke, then turns around and hurries away to the nearest stream. You just watch " + emberMF("him", "her") + " go, plugging " + emberMF("his", "her") + " used rosebud with a finger, you make note of " + emberMF("his", "her") + " awkward stride, somehow... " + emberMF("he", "she") + " didn't seem that angry as " + emberMF("he", "she") + " left...");
 			}
-			player.orgasm();
+			player.sexReward("Default", "Default", true, false);
 			dynStats("sen", -2);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2769,7 +2768,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			outputText(" in sympathy, you head back to camp.");
 
 			//Moderate lust gain and slimefeed, ala blowing Urta or drinking Lover Urta's fluids at Tel'Adre*/
-			player.slimeFeed();
+			player.sexReward("vaginalFluids");
 			emberAffection(6);
 			dynStats("lus", 10 + player.lib / 10);
 			doNext(camp.returnToCampUseOneHour);
@@ -2839,7 +2838,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("\n\nYou smile, hating to see " + emberMF("him", "her") + " go, but so loving to watch " + emberMF("him", "her") + " leave.  Shaking off your pleasurable fantasies, you manage to pull yourself back upright, redress yourself, and return to camp.");
 			//minus some fukkin' lust, reset hours since cum
-			player.orgasm();
+			player.sexReward("saliva");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -2998,7 +2997,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			if (player.cor >= 66) {
 				outputText("\n\n\"<i>Nor you, me,</i>\" you say, folding your arms.  \"<i>You were the one in charge, so the failure is all yours... luckily, my stamina was enough to finish, even though you became useless halfway through.</i>\"  Picking up your gear, you leave the dragon behind you; she hurls breathless insults at you, but you only answer with a negligent wave.");
 				//end scene, reset hours since cum, Ember preg check, minus some fuckin Ember affection
-				player.orgasm();
+				player.sexReward("vaginalFluids","Dick");
 				dynStats("sen", -2);
 				emberAffection(-5);
 				doNext(camp.returnToCampUseOneHour);
@@ -3030,7 +3029,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("\n\n\"<i>Yes... let's go again...</i>\" she responds tiredly, before slumping down for a quick nap.  Beyond satisfied yourself, you settle on top of her with a sigh and a groan, repositioning yourself for greater comfort as you join her in sleep.");
 
-			player.orgasm();
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", .5, "sen", -2);
 			doNext(penetrateEmbrahPartII);
 		}
@@ -3165,7 +3164,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("  Mmm... you can feel your own second orgasm coming in hot.  Maybe after another 4 or 5, you'll let the dragon go...");
 
 			outputText("\n\nEventually, exhausted, belly stuffed with dragon-spunk to the point you look ready to birth a pair of dragon toddlers, and feeling incredibly well-sated, you lay on Ember's chest, cuddling your limp, utterly drained lover.  The dragon is fast asleep, having passed out from exhaustion, and you amuse yourself by listening to " + emberMF("his", "her") + " heart beating as " + emberMF("he", "she") + " inhales and exhales softly in " + emberMF("his", "her") + " sleep.  To be honest, you could use a nap too, and you pass out atop " + emberMF("him", "her") + ".");
-			player.orgasm();
+			player.sexReward("cum");
 			dynStats("sen", -2);
 			if (player.lib > 50) dynStats("lib", -3);
 			player.slimeFeed();
@@ -3378,7 +3377,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			if (flags[kFLAGS.EMBER_OVIPOSITION] == 0) outputText("baby dragon");
 			else outputText("dragon egg");
 			outputText(".  Yawning, you curl up to the dragon for a quick nap of your own.");
-			player.orgasm();
+			player.sexReward("cum");
 			dynStats("sen", -2);
 			//Preg shit goez hurdur
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
@@ -3490,7 +3489,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			pregnancy.knockUp(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_EMBER);
 			player.createStatusEffect(StatusEffects.EmberFuckCooldown, 36, 0, 0, 0);
 			player.removeStatusEffect(StatusEffects.Rut);
-			player.orgasm();
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("sen", -2);
 			doNext(createCallBackFunction(emberBreedingAfterMathWatchOutForRadioactiveFallout,true));
 		}
@@ -4184,7 +4183,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			outputText(" out of " + emberMF("his", "her") + " with a wet slurp, allowing your deposit to leak its way under your prone forms.");
 			
 			outputText("\n\nYou both take a few moments to catch your breath, before Ember rolls over to look at you.  " + emberMF("He", "She") + " extends a clawed hand to lightly brush your cheek.  \"<i>[name]... you really know how to make a dragon feel loved...</i>\"  You return the gesture, telling " + emberMF("him", "her") + " it's easy when a dragon seems to love you just as much.  Ember smiles adoringly at you.  \"<i>Hey, can I ask you something, [name]?</i>\"  You indicate that it's okay.  \"<i>I want to be with you... hold you for a little while... is it okay if we do that?</i>\"");
-			player.orgasm();
+			player.sexReward("vaginalFluids");
 			dynStats("sen", -5);
 			//[Yes] [No]
 			menu();
@@ -4307,7 +4306,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			else if (flags[kFLAGS.EMBER_HAIR] == 2) outputText(" mane");
 			else outputText(" hair");
 			outputText(" before allowing yourself to also fall asleep.");
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			//doNext(14);
 			menu();
 			addButton(0, "Next", emberJizzbangbangEnding);
@@ -4372,7 +4371,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			if (flags[kFLAGS.EMBER_GENDER] == 3) outputText("  Her draconic cock throbs all the way through your orgasm, shooting blanks a few times before spurting a couple ropes of pre onto her belly.");
 
 			outputText("\n\nThe two of you collapse into each other's arms.  You move to pull out, but Ember stops you by holding your hips in place.  \"<i>Leave it inside... that's where it belongs.</i>\"  She smiles at you, panting a bit.  Too tired and happy to argue, you simply nod your head, rest against her, and allow sleep to claim you. You're dimly aware of Ember doing the same thing before you fade.");
-			player.orgasm();
+			player.sexReward("vaginalFluids","Dick");
 			//doNext(14);
 			menu();
 			addButton(0, "Next", emberJizzbangbangEnding);
@@ -4535,7 +4534,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 						if (player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonIceBreathCooldown);
 						if (player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
 					}
-					player.slimeFeed();
+					player.sexReward("milk");
 					fatigue(-40);
 				}
 				else if (chooser == 1 && ((player.lib + (player.cor/2)) >= 50 || player.lust >= 70) && flags[kFLAGS.TIMES_SLEPT_WITH_EMBER] > 0) { //Lusty tease

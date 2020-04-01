@@ -47,6 +47,7 @@ package classes.Scenes
 		
 		private const PAGE_RACES_1:int    =  0;
 		private const PAGE_RACES_2:int    =  1;
+		private const PAGE_RACES_3:int    =  2;
 		private const PAGE_FACTIONS_1:int = 10;
 		private const PAGE_OTHERS_1:int   = 20;
 		
@@ -80,10 +81,28 @@ package classes.Scenes
 		public function checkUnlocked():Number {
 			var num:Number = 0;
 			//Races
+			if (flags[kFLAGS.CODEX_ENTRY_ALRAUNE] > 0) {
+				num++;
+			}
 			if (flags[kFLAGS.CODEX_ENTRY_ANEMONES] > 0) {
 				num++;
 			}
 			if (flags[kFLAGS.CODEX_ENTRY_ARACHNES] > 0) {
+				num++;
+			}
+			if (flags[kFLAGS.CODEX_ENTRY_BEHEMOTH] > 0) {
+				num++;
+			}
+			if (flags[kFLAGS.CODEX_ENTRY_CHESHIRE_CAT] > 0) {
+				num++;
+			}
+			if (flags[kFLAGS.CODEX_ENTRY_CHIMERA] > 0) {
+				num++;
+			}
+			if (flags[kFLAGS.CODEX_ENTRY_DEVIL] > 0) {
+				num++;
+			}
+			if (flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] > 0) {
 				num++;
 			}
 			if (flags[kFLAGS.CODEX_ENTRY_ECHIDNAS] > 0) {
@@ -101,7 +120,13 @@ package classes.Scenes
 			if (flags[kFLAGS.CODEX_ENTRY_HARPIES] > 0) {
 				num++;
 			}
+			if (flags[kFLAGS.CODEX_ENTRY_HELLCATS] > 0) {
+				num++;
+			}
 			if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] > 0) {
+				num++;
+			}
+			if (flags[kFLAGS.CODEX_ENTRY_HYDRA] > 0) {
 				num++;
 			}
 			if (flags[kFLAGS.CODEX_ENTRY_IMPS] > 0) {
@@ -143,7 +168,7 @@ package classes.Scenes
 			if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] > 0) {
 				num++;
 			}
-			if (flags[kFLAGS.CODEX_ENTRY_BEHEMOTH] > 0) {
+			if (flags[kFLAGS.CODEX_ENTRY_VAMPIRE] > 0) {
 				num++;
 			}
 			if (flags[kFLAGS.CODEX_ENTRY_ZEBRAS] > 0) {
@@ -163,7 +188,9 @@ package classes.Scenes
 			if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] > 0) {
 				num++;
 			}
-			if (num >= 27) awardAchievement("Scholar", kACHIEVEMENTS.GENERAL_SCHOLAR);
+			if (num >= 20) awardAchievement("Scholar (1)", kACHIEVEMENTS.GENERAL_SCHOLAR);
+			if (num >= 30) awardAchievement("Scholar (2)", kACHIEVEMENTS.GENERAL_SCHOLAR_2);//aktualnie 34 codex entries exist ingame
+			//if (num >= 40) awardAchievement("Scholar (3)", kACHIEVEMENTS.GENERAL_SCHOLAR_3);
 			return num;
 		}
 		
@@ -174,7 +201,7 @@ package classes.Scenes
 			menu();
 			flags[kFLAGS.CODEX_CURRENT_ENTRY] = 0;
 			outputText("You open your codex. Which topic would you like to read?\n\n");
-			outputText("Codex entries unlocked: " + checkUnlocked() + "/27");
+			outputText("Codex entries unlocked: " + checkUnlocked() + "/34");
 			addButton(0, "Races", menuRaces);
 			addButton(1, "Cults", menuFactions);
 			addButton(2, "Others", menuItems);
@@ -184,6 +211,7 @@ package classes.Scenes
 		private function setCodexMenusAfterDisplay():void {
 			if (flags[kFLAGS.CODEX_CURRENT_PAGE] == PAGE_RACES_1) menuRaces();
 			if (flags[kFLAGS.CODEX_CURRENT_PAGE] == PAGE_RACES_2) menuRacesII();
+			if (flags[kFLAGS.CODEX_CURRENT_PAGE] == PAGE_RACES_3) menuRacesIII();
 			if (flags[kFLAGS.CODEX_CURRENT_PAGE] == PAGE_FACTIONS_1) menuFactions();
 			if (flags[kFLAGS.CODEX_CURRENT_PAGE] == PAGE_OTHERS_1) menuItems();
 		}
@@ -205,49 +233,68 @@ package classes.Scenes
 			menu();
 			flags[kFLAGS.CODEX_CURRENT_PAGE] = PAGE_RACES_1;
 			//1st row
+			addCodexButton("Alraunes", "Alraune", codexEntryAlraune, kFLAGS.CODEX_ENTRY_ALRAUNE);
 			addCodexButton("Anemones", "Anemone", codexEntryAnemone, kFLAGS.CODEX_ENTRY_ANEMONES);
 			addCodexButton("Arachnes", "Arachne", codexEntrySpiders, kFLAGS.CODEX_ENTRY_ARACHNES);
 			addCodexButton("Behemoth", "Behemoth", codexEntryBehemoth, kFLAGS.CODEX_ENTRY_BEHEMOTH);
-			addCodexButton("Echidnas", "Echidnas", codexEntryEchidnas, kFLAGS.CODEX_ENTRY_ECHIDNAS);
 			
 			//2nd row
-			addCodexButton("Giant Bees", "GiantBees", codexEntryBees, kFLAGS.CODEX_ENTRY_GIANTBEES);
-			addCodexButton("Goblins", "Goblins", codexEntryGoblins, kFLAGS.CODEX_ENTRY_GOBLINS);
-			addCodexButton("Goo Girls", "GooGirls", codexEntryGooGirls, kFLAGS.CODEX_ENTRY_GOOGIRLS);
-			addCodexButton("Harpies", "Harpies", codexEntryHarpies, kFLAGS.CODEX_ENTRY_HARPIES);
+			addCodexButton("Cheshire Cat", "CheshireCat", codexEntryCheshireCat, kFLAGS.CODEX_ENTRY_CHESHIRE_CAT);
+			addCodexButton("Chimera", "Chimera", codexEntryChimera, kFLAGS.CODEX_ENTRY_CHIMERA);
+			addCodexButton("Devil", "Devil", codexEntryDevil, kFLAGS.CODEX_ENTRY_DEVIL);
+			addCodexButton("Displacer Beast", "DisplacerBeast", codexEntryDisplacerBeast, kFLAGS.CODEX_ENTRY_DISPLACER_BEAST);
 			
 			//3rd row
-			addCodexButton("Hellhounds", "Hellhounds", codexEntryHellhounds, kFLAGS.CODEX_ENTRY_HELLHOUNDS);
-			addCodexButton("Imps", "Imps", codexEntryImps, kFLAGS.CODEX_ENTRY_IMPS);
-			addCodexButton("LaBovines", "Labovines", codexEntryLaBovines, kFLAGS.CODEX_ENTRY_LABOVINES);
-			addCodexButton("Lizans", "Lizans", codexEntryLizans, kFLAGS.CODEX_ENTRY_LIZANS);
+			addCodexButton("Goo Girls", "GooGirls", codexEntryGooGirls, kFLAGS.CODEX_ENTRY_GOOGIRLS);
+			addCodexButton("Echidnas", "Echidnas", codexEntryEchidnas, kFLAGS.CODEX_ENTRY_ECHIDNAS);
+			addCodexButton("Giant Bees", "GiantBees", codexEntryBees, kFLAGS.CODEX_ENTRY_GIANTBEES);
+			addCodexButton("Goblins", "Goblins", codexEntryGoblins, kFLAGS.CODEX_ENTRY_GOBLINS);
 			
 			addButton(4, "Next", menuRacesII);
-			//addButton(9, "Previous", menuRaces);
 			addButton(14, "Back", accessCodexMenu);
 		}
 		private function menuRacesII():void {
 			menu();
 			flags[kFLAGS.CODEX_CURRENT_PAGE] = PAGE_RACES_2;
 			//1st row
+			addCodexButton("Harpies", "Harpies", codexEntryHarpies, kFLAGS.CODEX_ENTRY_HARPIES);
+			addCodexButton("Hellcats", "Hellcats", codexEntryHellcats, kFLAGS.CODEX_ENTRY_HELLCATS);
+			addCodexButton("Hellhounds", "Hellhounds", codexEntryHellhounds, kFLAGS.CODEX_ENTRY_HELLHOUNDS);
+			addCodexButton("Hydra", "Hydra", codexEntryHydra, kFLAGS.CODEX_ENTRY_HYDRA);
+			
+			//2nd row
+			addCodexButton("Imps", "Imps", codexEntryImps, kFLAGS.CODEX_ENTRY_IMPS);
+			addCodexButton("LaBovines", "Labovines", codexEntryLaBovines, kFLAGS.CODEX_ENTRY_LABOVINES);
+			addCodexButton("Lizans", "Lizans", codexEntryLizans, kFLAGS.CODEX_ENTRY_LIZANS);
 			addCodexButton("Manticores", "Manticores", codexEntryManticores, kFLAGS.CODEX_ENTRY_MANTICORES);
+			
+			//3rd row
 			addCodexButton("Minotaurs", "Minotaurs", codexEntryMinotaurs, kFLAGS.CODEX_ENTRY_MINOTAURS);
 			addCodexButton("Nagas", "Nagas", codexEntryNagas, kFLAGS.CODEX_ENTRY_NAGAS);
 			addCodexButton("Orcs", "Orcs", codexEntryOrcs, kFLAGS.CODEX_ENTRY_ORCS);
-			
-			//2nd row
 			addCodexButton("Raijus", "Raiju", codexEntryRaijus, kFLAGS.CODEX_ENTRY_RAIJU);
+			
+			addButton(4, "Next", menuRacesIII);
+			addButton(9, "Previous", menuRaces);
+			addButton(14, "Back", accessCodexMenu);
+		}
+		private function menuRacesIII():void {
+			menu();
+			flags[kFLAGS.CODEX_CURRENT_PAGE] = PAGE_RACES_3;
+			//1st row
 			addCodexButton("Rhinoceros", "Rhinos", codexEntryRhinos, kFLAGS.CODEX_ENTRY_RHINOS);
 			addCodexButton("Salamanders", "Salamanders", codexEntrySalamanders, kFLAGS.CODEX_ENTRY_SALAMANDERS);
 			addCodexButton("Satyrs", "Satyrs", codexEntrySatyrs, kFLAGS.CODEX_ENTRY_SATYRS);
-			
-			//3rd row
 			addCodexButton("Succubus", "Succubus", codexEntrySuccubus, kFLAGS.CODEX_ENTRY_SUCCUBUS);
+			
+			//2nd row
 			addCodexButton("Shark Girls", "SharkGirls", codexEntrySharkGirls, kFLAGS.CODEX_ENTRY_SHARKGIRLS);
 			addCodexButton("Zebras", "Zebras", codexEntryZebras, kFLAGS.CODEX_ENTRY_ZEBRAS);
 			
-			//addButton(4, "Next", menuRacesIII);
-			addButton(9, "Previous", menuRaces);
+			//3rd row
+			
+			//addButton(4, "Next", menuRacesIV);
+			addButton(9, "Previous", menuRacesII);
 			addButton(14, "Back", accessCodexMenu);
 		}
 		
@@ -269,6 +316,111 @@ package classes.Scenes
 		}
 		
 		//CODEX ENTRIES
+		/*private function codexEntry():void {
+			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Manticores";
+			clearOutput();
+			headerMain("Manticores");
+			outputText("<b>Genders:</b> Exclusively female\n");
+			outputText("<b>Height:</b> 5 to 6 feet tall.\n");
+			outputText("<b>Body type:</b> Slender to Average\n");
+			outputText("<b>Skin tone:</b> Light\n");
+			outputText("<b>Fur/hair color:</b> Fur between midnight black and blue black.\n");
+			outputText("<b>Eye color:</b> Red\n");
+			outputText("<b>Notable feature:</b> Tailpussy\n");
+			headerSub("Appearance");
+			outputText("");
+			headerSub("Behavior");
+			outputText("");
+			headerSub("History");
+			outputText("");			
+			outputText("\n\n(Written By: Liadri)");
+			setCodexMenusAfterDisplay();
+		}
+		
+		private function codexEntry():void {
+			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Manticores";
+			clearOutput();
+			headerMain("Manticores");
+			outputText("<b>Genders:</b> Exclusively female\n");
+			outputText("<b>Height:</b> 5 to 6 feet tall.\n");
+			outputText("<b>Body type:</b> Slender to Average\n");
+			outputText("<b>Skin tone:</b> Light\n");
+			outputText("<b>Fur/hair color:</b> Fur between midnight black and blue black.\n");
+			outputText("<b>Eye color:</b> Red\n");
+			outputText("<b>Notable feature:</b> Tailpussy\n");
+			headerSub("Appearance");
+			outputText("");
+			headerSub("Behavior");
+			outputText("");
+			headerSub("History");
+			outputText("");			
+			outputText("\n\n(Written By: Liadri)");
+			setCodexMenusAfterDisplay();
+		}
+		
+		private function codexEntry():void {
+			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Manticores";
+			clearOutput();
+			headerMain("Manticores");
+			outputText("<b>Genders:</b> Exclusively female\n");
+			outputText("<b>Height:</b> 5 to 6 feet tall.\n");
+			outputText("<b>Body type:</b> Slender to Average\n");
+			outputText("<b>Skin tone:</b> Light\n");
+			outputText("<b>Fur/hair color:</b> Fur between midnight black and blue black.\n");
+			outputText("<b>Eye color:</b> Red\n");
+			outputText("<b>Notable feature:</b> Tailpussy\n");
+			headerSub("Appearance");
+			outputText("");
+			headerSub("Behavior");
+			outputText("");
+			headerSub("History");
+			outputText("");			
+			outputText("\n\n(Written By: Liadri)");
+			setCodexMenusAfterDisplay();
+		}
+		
+		private function codexEntry():void {
+			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Manticores";
+			clearOutput();
+			headerMain("Manticores");
+			outputText("<b>Genders:</b> Exclusively female\n");
+			outputText("<b>Height:</b> 5 to 6 feet tall.\n");
+			outputText("<b>Body type:</b> Slender to Average\n");
+			outputText("<b>Skin tone:</b> Light\n");
+			outputText("<b>Fur/hair color:</b> Fur between midnight black and blue black.\n");
+			outputText("<b>Eye color:</b> Red\n");
+			outputText("<b>Notable feature:</b> Tailpussy\n");
+			headerSub("Appearance");
+			outputText("");
+			headerSub("Behavior");
+			outputText("");
+			headerSub("History");
+			outputText("");			
+			outputText("\n\n(Written By: Liadri)");
+			setCodexMenusAfterDisplay();
+		}*/
+		
+		private function codexEntryAlraune():void {
+			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Alraune";
+			clearOutput();
+			headerMain("Alraunes");
+			outputText("<b>Genders:</b> Female but as plants they are hermaphrodites\n");
+			outputText("<b>Height:</b> 6 to 7 feet tall due to the pitcher size.\n");
+			outputText("<b>Body type:</b> Idealised woman\n");
+			outputText("<b>Skin tone:</b> In all variants of greens\n");
+			outputText("<b>Fur/hair color:</b> Vary between green and pinks.\n");
+			outputText("<b>Eye color:</b> Green or purple\n");
+			outputText("<b>Notable feature:</b> Floral bath like pitcher\n");
+			headerSub("Appearance");
+			outputText("Alraunes resemble beautiful women from the waist up, their legs vanishing below the waist in their nectar pool and connecting to the large flower pitcher beneath at the feet level. Their true body no matter the appearance however is the flower pitcher itself. While their pistil is female in appearance and capable of intercourse, the twelve vines mounted with floral stamens hidden beneath the pitcher allows them locomotion.");
+			headerSub("Behavior");
+			outputText("Alraunes while not aggressive in the normal sense are about as likely to strike casual conversation as to force the 'teachings' of their patron deity on others. They see themselves as evangelists of Marae and are willing to pull their would be target all the way to their pitcher by force in order to 'spread the love' of their goddess.");
+			headerSub("History");
+			outputText("The gods each have a creature whom they favor amongst their creations. Amongst plants morphs and dryads none embody Marae teachings as much as the infamous Alraunes. Fertility incarnates, alraunes embody it down to the floral haze of lust that herald their presence. Alraunes only wish to spread the faith of their god the way they do best, by spreading their seed and getting seeded themselves.");			
+			outputText("\n\n(Written By: Liadri)");
+			setCodexMenusAfterDisplay();
+		}
+		
 		private function codexEntryAnemone():void {
 			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Anemone";
 			clearOutput();
@@ -320,6 +472,90 @@ package classes.Scenes
 			outputText("Unfortunately, the rising tide of corruption in the land has affected the ways that spider-kin copulate in more nefarious ways. Those females who have been exposed to high levels of corruption quickly grow large ovipositors from the bottoms of their abdomens, and are capable of laying their corrupted offspring inside the vaginal canals or anuses of their victims. These corrupt spider-kin often drip venom when agitated or aroused, and can poison or arouse with just a kiss. Eggs laid from their tainted ovipositors do absorb personally traits and some modest physical changes from the host-mother, but still hatch entirely as spiders, regardless of the mother’s race. Thankfully, the eggs will induce labor and force themselves from the host mother’s body moments before they are due to hatch. Once laid, the spider-kin young-lings will emerge and skitter off in search of their first meal. \nThough corrupted, these spider-kin aren’t necessarily in league with demons or monstrous in their desires. Simply being exposed to corrupt fluids a few times in short order can have this affect, leaving a mostly pure-hearted spider-girl with a distended, egg-filled ovipositor and the desire to use it. Succubi drafts have also been known to cause this effect in spider-kin, even males.");
 			headerSub("Other notes");
 			outputText("Spider-kin venom is believed to be a crucial ingredient in the lust drafts and poisons used by the goblins of Mareth, but those weak toxins lose most of their potency after a short time. When injected fresh, it is a great deal more powerful and dangerous than those weak drugs. ");
+			setCodexMenusAfterDisplay();
+		}
+		
+		private function codexEntryCheshireCat():void {
+			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "CheshireCat";
+			clearOutput();
+			headerMain("Cheshire Cats");
+			outputText("<b>Genders:</b> Variable\n");
+			outputText("<b>Height:</b> 5 to 6 feet tall.\n");
+			outputText("<b>Body type:</b> Slender to Average\n");
+			outputText("<b>Skin tone:</b> Variable\n");
+			outputText("<b>Fur/hair color:</b> Fur and hair color can be of any matchup so long as it's weird and striped.\n");
+			outputText("<b>Eye color:</b> The same as most cat morphs\n");
+			outputText("<b>Notable feature:</b> A most aggravating grin that never goes out and madness.\n");
+			headerSub("Appearance");
+			outputText("The cheshire cat is notable for its striped fur ranging from purple to blue and wide grin. It otherwise resembles and can be mistaken for a normal cat morph by the uneducated observer, an error that can cost you dearly. All cheshire cats are living paradoxes in that they exist and do not at the same time, a power that let them be everywhere and nowhere. This ability amongst many things allow them to teleport along with others to different locations on a whim and even deny their own demise. Killing a cheshire cat is thus said to be impossible as the only way it would ever die is if it allowed itself to do so on purpose. Despite all of their powers, cheshire cats are not almighty. They follow a strict code only known to them and to the denizens of wonderland, their world of origin.");
+			headerSub("Behavior");
+			outputText("Cheshire cats favors forested area where there are plenty of trees to perch themselves up and prey on the gullible. Cheshire cats while not corrupt or innately evil in nature are notorious as pranksters and thus are untrustworthy and hazardous to be around. Their pranks range from stealing items to getting their traveling partners straight into ambushes with the local wildlife.");
+			headerSub("History");
+			outputText("Not native to Mareth, cheshires have first been reported after portals began appearing across the plane. It is likely the curious cats simply ventured out into Mareth seeking new gullible victims to entertain themselves with and with them various otherworldly products made their way to the markets including the infamous wonderland cakes.");			
+			outputText("\n\n(Written By: Liadri)");
+			setCodexMenusAfterDisplay();
+		}
+		
+		private function codexEntryChimera():void {
+			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Chimera";
+			clearOutput();
+			headerMain("Chimeras");
+			outputText("<b>Genders:</b> Variable\n");
+			outputText("<b>Height:</b> Variable\n");
+			outputText("<b>Body type:</b> Variable\n");
+			outputText("<b>Skin tone:</b> Variable\n");
+			outputText("<b>Fur/hair color:</b> Variable\n");
+			outputText("<b>Eye color:</b> Variable\n");
+			outputText("<b>Notable feature:</b> No two chimera are the same but all of them are amalgams of multiple creatures.\n");
+			headerSub("Appearance");
+			outputText("With how common transformative items are on Mareth, it was only a matter of time before some unlucky person began transforming into so many things at the same time, the unnatural result would be a super monster. Chimera are the god Ezekiel's favored beast and the greater one almost always exhibit some traits of the now long extincts dragons.");
+			headerSub("Behavior");
+			outputText("True chimera bodily instability makes them highly unpredictable as they tend to combine the traits of both prey and predators. A consensus is that if any of the chimera parts belong to a predator it is likely to attack, kill or violently rape its victim. Chimeric body instability has a tendency to drive the monster deeper and deeper into its basest instinct, making most true chimera deadlier and hornier than demons.");
+			headerSub("History");
+			outputText("Ever since transformatives appeared on Mareth, chimeric abominations roamed the land. It only became even worse when the demons started experimenting and creating even deadlier beasts. True chimera almost always loses to their many conflicting instincts, turning savage and aggressive before long, something demonic corruption only makes worse.");			
+			outputText("\n\n(Written By: Liadri)");
+			setCodexMenusAfterDisplay();
+		}
+		
+		private function codexEntryDevil():void {
+			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Devil";
+			clearOutput();
+			headerMain("Devils");
+			outputText("<b>Genders:</b> Variable\n");
+			outputText("<b>Height:</b> 3 to 4 feet tall.\n");
+			outputText("<b>Body type:</b> Small and petite in proportion\n");
+			outputText("<b>Skin tone:</b> Same as humans and demons\n");
+			outputText("<b>Fur/hair color:</b> Fur and hair color ranges from brown, black and white to all shades of red.\n");
+			outputText("<b>Eye color:</b> Ember with black sclera or ember with horizontal pupils\n");
+			outputText("<b>Notable feature:</b> Unlike most demons their horns are those of a goat. They always have hooves. Their hands no matter their shape are adept and capable at spellcasting.\n");
+			headerSub("Appearance");
+			outputText("Devils take on the form of the malignant great old one known as Baphomet, almost always sporting goat-like features. Most devil willingly chose to assume a petite compact form which allows them better energy management. Unlike lesser demons, their wings and tails can vary a lot between feathered to bat wings. It is not unheard of for devils to sport a goat tail instead of the more standard spaded tail of demons.");
+			headerSub("Behavior");
+			outputText("Powerful and composed, devils would epitomise the principles of power and control as well as the pinnacle of demonkind ideals. Unlike normal demons the ideal devil would be capable of rational behavior, ever keeping its lust in check so that it does not interfere with its decision. Though wiser and more rational than demons, a devils is nonetheless corrupt and lack the concept of morality, manipulating and putting down its pawns without a second thoughts once it tires of them. It is important to note that most devils are the results of failed demonic experiments and thus will rarely exhibit all of those traits together, coming up with quirks like body deformity, madness, or uncontrollable lust which is the utter opposite of the devil project goals and thus deemed a failure. Should a perfect devil turn up it would easily rival and perhaps even outstrip the mareth gods in terms of power.");
+			headerSub("History");
+			outputText("The first devils were created as an attempt to improve and control the state of demonhood into a better spellcaster variant. Most of those experiments turned up flawed in one way or another, always close to the goal but never perfect with deformed bodies or warped minds destroyed by their own lust and black magic. There are no records of a perfect devil ever created and should one do exist surely it would have revealed itself by now and ensnared Mareth beneath its unholy rulership. Unless of course it lost interest in enslaving other lesser life forms and gave in to its intended original desire for the accumulation of magical powers.");			
+			outputText("\n\n(Written By: Liadri)");
+			setCodexMenusAfterDisplay();
+		}
+		
+		private function codexEntryDisplacerBeast():void {
+			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "DisplacerBeast";
+			clearOutput();
+			headerMain("Displacer Beasts");
+			outputText("<b>Genders:</b> Variable\n");
+			outputText("<b>Height:</b> 6 to 7 feet tall.\n");
+			outputText("<b>Body type:</b> Slim, muscled and athletic\n");
+			outputText("<b>Skin tone:</b> Ashen or greyish\n");
+			outputText("<b>Fur/hair color:</b> Ash.\n");
+			outputText("<b>Eye color:</b> Yellow\n");
+			outputText("<b>Notable feature:</b> Four arms and two tentacles with milk suckers.\n");
+			headerSub("Appearance");
+			outputText("The displacer beast look similar to a cat morph albeit its pointy bat like ears, four arms and twin tentacles equipped with suckers and venom injectors. It is typically ashen black with yellow eyes. Its powerful limbs are covered with fur up to the thigh and elbow and can tear anything to shreds within seconds. ");
+			headerSub("Behavior");
+			outputText("The displacer beast is a highly aggressive predator who hunts for a very specific source of food, breast milk. Once its victim is unable to defend itself it will latch on its prey’s chest with two tentacles and inject it with its natural drugs akin to lactaid to force milk production. This done, it will feed on its victim’s milk until it runs dry. Displacer beast got their name from their ability to displace themselves. When attacked they can reflexively teleport out of the attack range or direction in order to viciously assault their prey from about any angle or range. Due to their sensitive vision they prefer hanging in dark caves, roaming mareth only at night. It is said when fed willingly displacer beasts tend to act very much and be about as tame as an overgrown pet cat. For this reason Lacta bovines in need of relief actively seek them out.");
+			headerSub("History");
+			outputText("The displacer beast origins are pretty much unknown. No god made the claim on their creation through many scholars suspect only the god of transformation and change, Ezekiel, would ever create such a chimeric monster.");			
+			outputText("\n\n(Written By: Liadri)");
 			setCodexMenusAfterDisplay();
 		}
 		
@@ -483,6 +719,27 @@ package classes.Scenes
 			setCodexMenusAfterDisplay();
 		}
 		
+		private function codexEntryHellcats():void {
+			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Hellcats";
+			clearOutput();
+			headerMain("Hellcats");
+			outputText("<b>Genders:</b> Always hermaphrodite\n");
+			outputText("<b>Height:</b> 5 to 6 feet tall.\n");
+			outputText("<b>Body type:</b> Slender to Average\n");
+			outputText("<b>Skin tone:</b> Ashen\n");
+			outputText("<b>Fur/hair color:</b> Fur and hair color is always midnight black, their fur is constantly ablaze.\n");
+			outputText("<b>Eye color:</b> Black sclera with yellow pupils\n");
+			outputText("<b>Notable feature:</b> Their tails and hairs are on fire, always burning. Two flames run on the outer corner of their eyes\n");
+			headerSub("Appearance");
+			outputText("Hellcat witches looks similar to ordinary cat morphs at a first glance but their black fur and hair is literally ablaze. They favor using black robes to coat their bodies when traveling to not alarm their prey too soon.");
+			headerSub("Behavior");
+			outputText("Hellcats are highly aggressive and will attempt to attack and rape anyone or anything that crosses their paths save for cat morphs which they hunt, capture and sacrifice to their dark god in order to create more of their malevolent kinds. Hellcats are always in heat and rut, thus seek to soothe their burning urges by any means necessary which almost always transfers the condition to others.");
+			headerSub("History");
+			outputText("Hellcat witches are the faithful zealots of Abraxas, a former fire god of Mareth who became corrupted by the demons becoming a demon himself. Abraxas rewards his followers with dominion over fire and burning urges that never dies out. Since hellcats do not reproduce naturally they have to capture pure cat morphs to corrupt and sacrifice to their fire god which converts them, body and mind into new members of their unholy kind. All hellcats are female hermaphrodites as becomes any cat morph who is sacrificed to Abraxas.");			
+			outputText("\n\n(Written By: Liadri)");
+			setCodexMenusAfterDisplay();
+		}
+		
 		private function codexEntryHellhounds():void {
 			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Hellhounds";
 			clearOutput();
@@ -504,6 +761,27 @@ package classes.Scenes
 			headerSub("Social structure");
 			outputText("Feral Hellhounds (those without masters) often gather in packs, but they generally hunt on their own. When interacting with other Hellhounds, competitions for dominance are common. These competitions typically revolve around a test of seduction, with the loser submitting themselves by going down on four legs, and using its two heads to pleasure the dicks of the one that it submitted too. This is one of only two times that the Hellhound will go down on all fours, the other time being when they are out hunting.");
 			outputText("\n\n(Written by: TheDarkMaster) ");
+			setCodexMenusAfterDisplay();
+		}
+		
+		private function codexEntryHydra():void {
+			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Hydra";
+			clearOutput();
+			headerMain("Hydra");
+			outputText("<b>Genders:</b> Variable\n");
+			outputText("<b>Height:</b> Variable\n");
+			outputText("<b>Body type:</b> Comely man and woman mounted on the splitting body of a snake divided into multiple head segments.\n");
+			outputText("<b>Skin tone:</b> Variable\n");
+			outputText("<b>Fur/hair color:</b> Variable\n");
+			outputText("<b>Eye color:</b> Variable\n");
+			outputText("<b>Notable feature:</b> Hydras have multiple heads which regrow when cut.\n");
+			headerSub("Appearance");
+			outputText("Hydras resemble Nagas albeit the fact their tails splits apart in segments, each ending with a snake head. Hydras regenerate naturally and can recover from any wounds, making them near impossible to kill. Hydras all invariably got between two to twelve heads and can if needed in the heat of combat cut their own tail in order to sprout new ones.");
+			headerSub("Behavior");
+			outputText("Hydras are generally non aggressive beings content with eating vermin such as mice and rats, though due to their massive size ranging from nine to thirty six feet long and the general lusty state of Mareth, Hydras can become hazardous when horny and even deadly for smaller sentient species to encounter.");
+			headerSub("History");
+			outputText("Hydras began appearing on Mareth around the same time as Nagas though the firsts Hydras were likely Naga who underwent many changes from transformatives. Nowadays the Hydra is a rare albeit deadly predator to stumble upon.");			
+			outputText("\n\n(Written By: Liadri)");
 			setCodexMenusAfterDisplay();
 		}
 		

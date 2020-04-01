@@ -31,20 +31,20 @@ import classes.Scenes.SceneLib;
 		public function exploreBeach():void {
 			flags[kFLAGS.DISCOVERED_BEACH]++;
 			
+			//Harpoon gun
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1 && rand(2) == 0) {
+				partsofHarpoonGun();
+				return;
+			}
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
 				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
 			//Etna
-			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
+			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0 && (player.level >= 20)) {
 				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 				SceneLib.etnaScene.repeatYandereEnc();
-				return;
-			}
-			//Harpoon gun
-			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1 && rand(2) == 0) {
-				partsofHarpoonGun();
 				return;
 			}
 			

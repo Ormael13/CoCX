@@ -56,9 +56,7 @@ public class YetiScene extends BaseContent
 			outputText("With a low snarl the yeti rams into you hard enough to make your ice bindings crack: hilted in you as much as he can manage, he begins to pump you full of his cold resistant spunk. It warms your gut and lower body in ways that make you groan, his baseball sized balls filling you well past your limits as it flood your inner confines, spilling out to drenching your taint and groin. Soon there is a large heated pool on the floor under you. With a wet pop the yeti pulls his spent cock from your over stuffed hole, more spunk spilling out to splash onto the floor. Without any further ceremony the beast’s prick returns to it’s sheath and the yeti leaves out the way he came in, leaving you a trapped, helpless fuckhole to be used later.\n\n");
 			outputText("You struggle against the ice binding your limbs, one of them cracked from the earlier rutting, and with some effort you manage to break free. ");
 			outputText("Collecting your things, you notice you lost some gems during the struggle, but you ignore them since you are eager to leave the cavern. Taking the exit the yeti had used to wander back out into the rift, you begin your long walk to camp.. but as you trek through the frigid fields of the glacial rift, you notice your ass stays hot despite the cold. Perhaps it’s a special quality of the yeti’s cum?");
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-			player.orgasm();
+			player.sexReward("cum","Anal");
 			cleanupAfterCombat();
 		}
 		//Not used as it's not written and may or may not be added.
@@ -101,7 +99,7 @@ public class YetiScene extends BaseContent
 			if (player.balls > 0) outputText("Your [balls] clench as your body readies to fire. You pump the yeti’s ass full of your spunk, firing out countless ropes of your seed, coating the beasts wall in your musky cum. \n\n");
 			if (player.cocks.length > 1) outputText("Your other cocks unload and coat his furred rear, drenching his rump in your spunk and messing his white fur with your sticky cream. With a satisfied huff you pull out, trails of your seed following your cock and leaking out across his abused rear. The beast groans as he unloads over his chest, his giant globs of thick spunk matting his fur. \n\n");
 			outputText("Without any delay you tuck your [cocks] into your [armor] and make your way out of the cavern through the passageway the yeti came in through, leaving the fearsome yeti looking like a well used whore and collecting a few spoils along the way.");
-			player.orgasm();
+			player.sexReward("Default","Dick",true,false);
 			cleanupAfterCombat();
 		}
 		
@@ -120,9 +118,7 @@ public class YetiScene extends BaseContent
 			outputText("You continue to bounce on the yeti’s cock, grinding your hips against him and squeezing your vaginal muscles to milk him. Holding you tight against him, the yeti shifts one of his big hands from your back to your [chest], giving you gentle squeezes and pinches through your [armor] and forcing a little gasp from you. Letting out a deep, throaty laugh at your reaction, the yeti starts to move his own hips in tandem with yours, stuffing you with even more of his cock than ever before. You grit your teeth and moan as the narrow head of his prick slides through your cervix, poking at the entrance to your womb. \n\n");
 			outputText("You give out a final, whimpered moan as you climax, humping on the yeti’s prick as fast as you can while his arms restrain you. Shocks of pleasure shoot through you, making your whole body spasm in the beasts embrace. As your [vagina] squeezes down on him, the yeti throws his head back and, with a final mighty thrust into your depths, cums as well, hilting in you as much as he can manage as you pumps you full of his thick, hot spunk. Pouring into you, the yeti’s cum warms your gut and lower body in ways that make you groan and gasp with pleasure. His baseball-sized balls fill you well past your limits as spunk floods your innermost depths, spilling out to drench your thighs and groin, squelching wetly between your entwined bodies. \n\n");
 			outputText("With a wet pop, the yeti’s cock slides from your over-stuffed hole and back into its sheathe, letting more spunk spill out to stain his fur. Still gasping from your recent orgasm, you spend the next few minutes snuggled up to the warm, damp yeti, clinging to his soft fur until you feel it’s time to go. You look up to the yeti to say goodbye, but find him snoring quietly, his chest hefting your entire body with every breath. With a little smirk, you give him a kiss on the cheek and, securing your equipment, head back to camp.");
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-			player.orgasm();
+			player.sexReward("cum","Vaginal");
 			cleanupAfterCombat();
 		}
 		

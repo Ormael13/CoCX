@@ -266,7 +266,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 
 			outputText("During your dreamless sleep, your body registers the feeling of your restraints being removed, but you slumber on, completely unaware.");
 			//[end]
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			dynStats("lib", 2, "sen", 1);
             if (!CoC.instance.inCombat)
                 doNext(camp.returnToCampUseOneHour);
@@ -373,7 +373,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 
 			outputText("Finally at peace, you go limp in the bonds, slipping into a deep slumber.  During your dreamless sleep, your body registers the feeling of your restraints being severed.");
 
-			player.orgasm();
+			player.sexReward("Default","Dick",true,false);
 			dynStats("lib", 2, "sen", 1);
             if (!CoC.instance.inCombat)
                 doNext(camp.returnToCampUseOneHour);
@@ -449,7 +449,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 				if (player.cumQ() >= 4000) outputText("  It pops, too weak to contain all that liquid pressure, soaking the both of you with your spunk!");
 			}
 			outputText("  You sigh and fall into a fitful slumber, barely registering the spider-girl cutting your restraints.");
-			player.orgasm();
+			player.sexReward("Default","Dick",true,false);
 			dynStats("lib", 2, "sen", 1);
             if (!CoC.instance.inCombat)
                 doNext(camp.returnToCampUseOneHour);
@@ -556,7 +556,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			if (player.cor < 33) outputText("In a moment of pity, you work to free her from the restraints before you leave.");
 			else if (player.cor < 66) outputText("You feel a little guilty, and before you go, you untie the bindings around her hands so that she'll be able to free herself.");
 			else outputText("You leave her there with her hands and feet completely restrained.  Sucks to be her.");
-			player.orgasm();
+			player.sexReward("Default","Dick",true,false);
             if (!CoC.instance.inCombat)
                 doNext(camp.returnToCampUseOneHour);
 			else cleanupAfterCombat();
@@ -622,7 +622,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			else outputText("you slap her across the face and tell her to toughen up.  She starts to bawl at that, curling into a tight little ball and openly weeping.");
 			outputText("  You get dressed and head back to camp.");
 
-			player.orgasm();
+			player.sexReward("Default","Dick",true,false);
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SPIDER - 200); //Spiders carry for half as long as the player does for some reason
             if (!CoC.instance.inCombat)
                 doNext(camp.returnToCampUseOneHour);
@@ -692,7 +692,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			else outputText("river");
 			outputText(" of seed rushes out of her gaped anus, pooling on the swamp floor as she slowly loses consciousness.  You give her ass an affectionate slap and get dressed, feeling sated and ready to resume your adventures.");
 			if (y != 1) pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SPIDER - 200); //Spiders carry for half as long as the player does for some reason
-			player.orgasm();
+			player.sexReward("Default","Dick",true,false);
             if (!CoC.instance.inCombat)
                 doNext(camp.returnToCampUseOneHour);
 			else cleanupAfterCombat();

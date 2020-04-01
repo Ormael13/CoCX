@@ -60,7 +60,7 @@ private function followDatFrog():void {
 	outputText("\n\nYou giggle drunkenly to yourself as a frog egg the size of an apple squeezes inside you.  If you weren’t so lost in mind-bending pleasure, you might be concerned at the pressure.  Instead, you just feel more dizzy - those eggs must be lubed with the frog girl’s slime - and with one inside you, the world begins to spin.");
 	outputText("\n\n\"<i>One down...</i>\" the frog girl hisses through gritted teeth.  But you can’t find the wherewithal to even raise an eyebrow at her words.  Pressure builds again against your asshole, and the frog girl pushes another massive, squishy egg into you.  \"<i>Unff!</i>\" she grunts, shaking with the effort of forcing her eggs into your body.");
 	outputText("\n\nYou giggle again, loving the way the world spins with every egg fed into you.  She lays egg after egg into you.  It’s finally too much for you and your mind collapses.  The world completely dissolves into a swirling collage of color, sensation, and sound.");
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	dynStats("sen", 1);
 	menu();
 	addButton(0,"Next",getFrogButtFilled);
@@ -150,7 +150,7 @@ private function carryBeeGirlsEggsVoluntarilyYouButtSlut():void {
 	outputText("\n\nYou giggle drunkenly to yourself as a frog egg the size of an apple squeezes inside you.  If you weren’t so lost in mind-bending pleasure, you might be concerned at the pressure.  Instead, you just feel more dizzy - those eggs must be lubed with the frog girl’s slime - and with one inside you, the world begins to spin.");
 	outputText("\n\n\"<i>One down...</i>\" the frog girl hisses through gritted teeth.  But you can’t find the wherewithal to even raise an eyebrow at her words.  Pressure builds again against your asshole, and the frog girl pushes another massive, squishy egg into you.  \"<i>Unff!</i>\" she grunts, shaking with the effort of forcing her eggs into your body.");
 	outputText("\n\nYou giggle again, loving the way the world spins with every egg fed into you.  She lays egg after egg into you.  It’s finally too much for you and your mind collapses.  The world completely dissolves into a swirling collage of color, sensation, and sound.");
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	dynStats("sen", 1);
 	menu();
 	addButton(0,"Next",voluntarilyGetEggedEpilogue);
@@ -205,7 +205,7 @@ public function birthFrogEggsAnal():void {
 	player.hips.type++;
 	player.ass.analWetness += 1;
 	if(player.ass.analWetness > 5) player.ass.analWetness = 5;
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	dynStats("sen", 1);
 }
 //Superbonus Vaginal Eggs!
@@ -228,7 +228,7 @@ private function superBonusFrogEggsInYerCooch():void {
 	outputText("\n\nYou’re not sure when the frog girl finishes.  By the time the trees stop dancing and the sky stops rippling, you’re floating face-up in the pool, watching the curve of your now-swollen belly as you bob gently in the water.");
 	outputText("\n\nAs awareness slowly starts to trickle in to your head, you blink, groaning slightly as you sit up, clutching your massive, pregnant belly, feeling the jelly-eggs inside shifting when you step up out of the water.  You pause as a tiny trickle of slime oozes out from your vagina, sending a brief rainbow flash across your vision and the echo of an orgasm through your system, before you put your [armor] back on and stagger back toward camp.");
 	//[Vaginal wetness +1, Sensitivity +1]
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	dynStats("sen", 1);
 	player.knockUp(PregnancyStore.PREGNANCY_FROG_GIRL, PregnancyStore.INCUBATION_FROG_GIRL, 1, 1);
 	doNext(camp.returnToCampUseOneHour);
@@ -276,7 +276,7 @@ public function layFrogEggs():void {
 		player.hips.type++;
 		outputText("  There's an extra thickness to your [hips] as well.");
 	}
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	dynStats("sen", 1);
 	doNext(camp.returnToCampUseOneHour);
 }

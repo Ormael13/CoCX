@@ -1016,7 +1016,7 @@ public class MinervaPurification extends BaseContent
 			}
 			//PC returns to main camp menu
 			flags[kFLAGS.TIMES_BUTTFUCKED_MINERVA]++;
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			dynStats("sen", -1);
             if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
@@ -1058,7 +1058,7 @@ public class MinervaPurification extends BaseContent
 			outputText("\n\nMinerva lets out a disappointed sigh. \"<i>I know, you have an important job to do. I'll miss you though, please come back to visit soon. ");
 			if (flags[kFLAGS.MINERVA_CHILDREN] > 0) outputText("I know the girls would love to see you again. ");
 			outputText("You can be sure that I'll be eagerly looking forward to your next visit my love.</i>\" You give her a last-minute hug, promising that you'll be back as soon as time permits.");
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			SceneLib.highMountains.minervaScene.tryToImpregnateMinerva();
 			dynStats("lus", 20);
 			doNext(camp.returnToCampUseOneHour);			
@@ -1125,7 +1125,7 @@ public class MinervaPurification extends BaseContent
 			outputText("\n\nWith an amused grin, you give the sharky herm a pat on the rump before heading out, your hand sliding along that sexy tail of hers as you let the well-fucked woman rest.");
 			//PC returns to camp
 			dynStats("sen", -1);
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			SceneLib.highMountains.minervaScene.tryToImpregnateMinerva();
 			dynStats("lus", 20);
             if (CoC.instance.inCombat) cleanupAfterCombat();
@@ -1227,9 +1227,8 @@ public class MinervaPurification extends BaseContent
 			if (rand(100) <= player.totalFertility()) {
 				player.knockUpForce(PregnancyStore.PREGNANCY_MINERVA, PregnancyStore.INCUBATION_MINERVA);
 			}
-			player.slimeFeed();
 			flags[kFLAGS.TIMES_MINERVA_LAPSEXED]++;
-			player.orgasm();
+			player.sexReward("cum");
 			dynStats("sen", -1);
             if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
@@ -1320,9 +1319,8 @@ public class MinervaPurification extends BaseContent
 			}
 			//Romanced:
 			else outputText("\n\nThe lovestruck siren sighs and sits up, looking up at you with affection clearly written on her face. \"<i>I hope you'll come back soon, I always feel so much happier when you're around,</i>\" she says as she brings a hand to her chest, holding it over her heart.");
-			player.slimeFeed();
 			flags[kFLAGS.TIMES_MINERVA_LAPSEXED]++;
-			player.orgasm();
+			player.sexReward("cum");
 			dynStats("sen", -1);
             if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
@@ -1474,7 +1472,7 @@ public class MinervaPurification extends BaseContent
 			
 			outputText("\n\nDeciding to relax for a while after your sexual exertion, you curl up on the soft moss with Minerva, both of you just basking in the warmth that the spring gives off, and the softness of the moss, content with each other's presence. Unfortunately, you know you have to go; the call of your duty to this land is too great, and despite the comfort of this place, you must go. Pulling away from the siren you promise to return and visit her soon.");
 			//PC returns to camp.
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 
 if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
@@ -1589,7 +1587,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 				outputText(" As soon as she feels the seed filling her again Minerva bursts into a seconds orgasm, her wings flaring out as she rams her hips down against your own, her feet sliding underneath you as she clenches her hips and thighs, crushing herself against you as her body squeezes and milks your swollen pulsating prick for every drop you can give. The new found pressure keeping much of your second load contained within the tight hungry confines of her womb. \"<i>Yes! Yesss! Fill me! Fill me so much! Give our babies all the cream they want! Make them swim in it!</i>\" the wanton herm screams as she cums so hard above you, demanding that you fill her up with everything you can muster.");
 				outputText("\n\nThough her womb swells with the immense load Minerva can only hold so much inside, the remainder of your pressurized load gushing out in great spurts from between your fleshy connection, a small pool soaking your hips and thighs as you finally finish your orgasm. Despite how much you have done already neither of you are even close to being done, Minerva's hormone flooded body craving more pleasure, more sex to feed her insatiable craving for your fertile cock cream, your own body still roiling with incredible lust thanks to all the siren venom inside you, your need to rut and breed not allowing you rest.");
 				outputText("\n\nAs if to emphasize how much she wants you Minerva lifts off you with a wet sloppy pop, a rush of thick jizz flows like a waterfall from her soaking cunt as she gets down onto her hands and knees, chest resting on her big milky tits with her arms cradling the massive bulge of her belly. With her round juicy ass presented so wonderfully to you, the taut round peach of gold and cream flesh swaying back and forth as her tail rises and legs spread. \"<i>More lover! Fuck your siren, let out all your lust, breed my hungry golden pussy!</i>\" her words are the last straw that breaks your restrains, grabbing hold of her hips you get up from your position and ram yourself back inside with a wet squish of combined sexual juices as you continue the ravenous rut, the overpowered need to mate and breed could keep you both like this for hours.");
-				player.orgasm();
+				player.sexReward("Default","Default",true,false);
 				doNext(postPregnancyStage3Sex);
 				return;
 			}
@@ -1602,7 +1600,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			outputText("\n\nLooking over to you Minerva smiled, a bright blush on her now clean face, reaching out for you she pulls you over to her, helping you by resting you against the tree. \"<i>I guess we went a bit too far huh? I've never felt so satisfied in my life! Here let me help you, I'll clean you up and then, how about we rest, you can stay the night even! Rest up and relax a little?</i>\" she asks with a smile and a hopeful glitter in her golden-amber eyes. Letting out a sigh you nod your head, too tired from the crazy sex-a-thon you and Minerva just went through to fight, perhaps a good sleep will fix you right up.");
 			outputText("\n\nGrinning ear to ear, Minerva seems to be somewhat revitalized by your acceptance, pulling you closer the siren broodmother gets to work on you, her tongue happily licking up the cum caked mess that is your body. It's a big job but before long you're mostly cleaned, if a little damp from the licking. Letting out a deep sigh your lover relaxes next to you, her arms cradling her massive belly, swollen by not only your soon to be birthed offspring but what you can only guess has to be perhaps a dozen liters of thick sticky baby cream. As if sensing your thoughts Minerva pats her belly gently. \"<i>So warm, I've never felt so full before in my life. You know, as perverted as it is, I'm sure the little ones appreciate the warmth, even if they are swimming in their daddy's sperm...</i>\" she says before shaking her head. \"<i>Well no matter. Let's just...rest for a while...</i>\" The tired siren says before cuddling up against her, her freshly cleaned body still so swollen with your fresh sperm injections, it will be some time before she absorbs it all. For now though all you can think of is resisting, the urge to sleep soon overcoming you as your head rests against Minerva's shoulder.");
 			cheatTime(1); //Ensure that the clock is not at 6am to prevent weirdness.
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			fatigue(30);
 			doNext(postPregnancyStage3Sleep);
 		}

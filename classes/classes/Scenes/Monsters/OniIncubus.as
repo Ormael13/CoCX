@@ -90,6 +90,10 @@ import classes.internals.*;
 		public function OniIncubus() 
 		{
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 4) {
+				this.a = "";
+				this.short = "Chon Lao";
+				this.imageName = "chonlao";
+				this.long = "If you thought Oni were immune to demonic corruption, Chon Lao the Ushi Oni is the proof that they are not. The man is easily 10 feet tall and just as strong, if not stronger than, Izumi. Massive horns dot his forehead, with 2 larger ones crowning the side like the head of a bull, and the massive 36 inches of man meat pulsing under his pants would scare the hell out of any normal woman. He glares at you, as if preparing to squash a bug.";
 				initStrTouSpeInte(385, 275, 205, 170);
 				initWisLibSensCor(170, 90, 55, 15);
 				this.weaponAttack = 80;
@@ -98,12 +102,7 @@ import classes.internals.*;
 				this.bonusHP = 2000;
 				this.level = 65;
 				this.additionalXP = 300;
-			}
-			this.a = "";
-			this.short = "Chon Lao";
-			this.imageName = "chonlao";
-			this.long = "If you thought Oni were immune to demonic corruption, Chon Lao the Ushi Oni is the proof that they are not. The man is easily 10 feet tall and just as strong, if not stronger than, Izumi. Massive horns dot his forehead, with 2 larger ones crowning the side like the head of a bull, and the massive 36 inches of man meat pulsing under his pants would scare the hell out of any normal woman. He glares at you, as if preparing to squash a bug.";
-			// this.plural = false;
+			}// this.plural = false;
 			this.createCock(36,7);
 			this.balls = 2;
 			this.ballSize = 5;

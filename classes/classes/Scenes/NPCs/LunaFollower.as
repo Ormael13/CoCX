@@ -644,7 +644,7 @@ package classes.Scenes.NPCs
 			outputText("You re-equip your [armor], turning to thank Luna once more, before you continue on with your day.\n\n");
 			lunaJealousy(-100);
 			lunaAffection(2);
-			player.orgasm();
+			player.sexReward("saliva");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function sexMenuBoobjob():void {
@@ -660,7 +660,7 @@ package classes.Scenes.NPCs
 			outputText("Taking in a deep breath, you thank Luna for her work, patting her on the head, before re-dressing and moving on with your day.\n\n");
 			lunaJealousy(-100);
 			lunaAffection(2);
-			player.orgasm();
+			player.sexReward("Default", "Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function sexMenuDoggyTreats():void {
@@ -677,7 +677,7 @@ package classes.Scenes.NPCs
 			outputText("You rest like this for a moment before lifting back up and resuming your duties. Luna has regained her human form since then and is already starting to put back on her maid uniform.\n\n");
 			lunaJealousy(-100);
 			lunaAffection(2);
-			player.orgasm();
+			player.sexReward("Default", "Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function sexMenuSandwichWithAyane():void {
@@ -702,7 +702,7 @@ package classes.Scenes.NPCs
 			outputText("You decide to take a nap to recover some energy. A few hour later, you wake up ready to resume adventuring.\n\n");
 			lunaJealousy(-100);
 			lunaAffection(2);
-			player.orgasm();
+			player.sexReward("Default", "Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -728,7 +728,7 @@ package classes.Scenes.NPCs
 				outputText("Finally you reach your climax " + ((player.dogScore() > 5 || player.wolfScore() > 5) ? "howling in tandem with her" : "roaring in tandem with her howl") + " as you paint her cunt white like the moon with your hot seed. She sighs in relief, turning over without unplugging you from her cunt to embrace you.\n\n");
 				lunaJealousy(-100);
 				lunaAffection(2);
-				player.orgasm();
+				player.sexReward("vaginalFluids","Dick");
 				if (flags[kFLAGS.LUNA_MOONING] == 1) {
 					outputText("You rest a moment in her arms before breaking the hug. As much as your savage lover would like you to dom her all day you’ve got other things to do. The both of you redress before resuming normal activities.\n\n");
 					doNext(camp.returnToCampUseOneHour);
@@ -757,7 +757,7 @@ package classes.Scenes.NPCs
 				outputText(". The waters flooding your fingers a few seconds later are the only telltale sign your beta finally reached her climax, but you think it’s more than enough of a reward for her.\n\n");
 				lunaJealousy(-100);
 				lunaAffection(2);
-				player.orgasm();
+				player.sexReward("saliva");
 				if (flags[kFLAGS.LUNA_MOONING] == 1) {
 					outputText("Satisfied, you rest a moment in her arms before breaking up. As much as your savage lover would like you to dom her all day you got other things to do. The both of you redress before resuming activity.\n\n");
 					doNext(camp.returnToCampUseOneHour);

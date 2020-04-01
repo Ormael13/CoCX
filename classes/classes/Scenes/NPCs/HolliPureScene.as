@@ -288,7 +288,7 @@ private function holliGetsDickDommed():void {
 	outputText("  Holli's tentacles cum with her, spraying her seed through her canopy in aimless ropes.  Most of it sticks to her branches and leaves, but small amounts of it trickle down to spatter the ground.  One of them lands on the back of your hand.  You frown and push it up against the tree-woman's mouth.  She licks you clean without question, still dazed from her orgasm.");
 	outputText("\n\nRemoving yourself from the gaping flowerpot, you admire the fruits of your labors.  Holli breathily says, \"<i>Th-thank you, [name]...  So good...</i>\"");
 	outputText("\n\nYou crook a finger and point down at the slop of sperm and nectar glazing your [cock biggest].  Getting the idea, she leans back out and opens wide.  You get a thorough cock polishing from the much meeker plant-woman.  She swallows it all and withdraws, offering, \"<i>If you ever want another round... my flower is yours.</i>\"");
-	player.orgasm();
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("sen", -2, "cor", 1);
 	fertilizeHolli();
 	doNext(camp.returnToCampUseOneHour);
@@ -317,7 +317,7 @@ private function fullOnTentacleTasticGangBangForHolli():void {
 	outputText("\n\nHolli climaxes again when your load passes into her vagina, deforming the petals slightly as it goes.  Her cunt-tentacles are similarly stretched by the force of your orgasm, distended by spermy knots that erupt inside them.  Jizz and girl-cum drip from the numerous twats, all five of them.  Those pussies aren't simply idly filled either.  They hungrily massage you throughout their own moments of bliss, actually providing a modicum of suction to draw even more spunk from your [balls].  You roar in triumph and thrust all ten at once, pushing them as deep into their chosen locations as you ride out of the ecstasy, spurting and shaking.");
 	outputText("\n\nYou come to a little while later.  Your myriad tentacles have retracted back to your groin, though a goodly number of them have a distinctly feminine odor clinging to them.  Holli is sagging back in her tree, covered in a pearly shine that can only be your fertile batter.  She's panting while the cum runs out and over her unimpeded, dripping from the canopy as well.");
 	outputText("\n\nStretching the kinks from your shoulders, you walk up to the confused cum-dump and say, \"<i>That's how you sow seed, little flower.</i>\"  Holli shudders, releasing a squirt of your goo from her twat.  You laugh and get dressed before departing, feeling blessedly sated.");
-	player.orgasm();
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("lib", .4, "sen", -3, "cor", 1);
 	fertilizeHolli();
 	fertilizeHolli();
@@ -363,8 +363,7 @@ private function vaginalDomHollisTentacruels():void {
 	outputText(".  The second time, you make it up.  Holli is a mess.  Everything from the shoulders up is glazed white, while the rest of her body has strings of seed dangling like obscene Christmas ornaments.  Around you, there's small puddles of seed rapidly vanishing into the wasted earth - each of the other tentacles erupted with its brothers, spurting uselessly as you ignored it.");
 	outputText("\n\nYou give Holli a peck on her cheek, savoring the flavor and say, \"<i>Good girl.</i>\"  Then, you get dressed, trying to ignore the squishing wetness between your thighs.");
 	fertilizeHolli(false);
-	player.slimeFeed();
-	player.orgasm();
+	player.sexReward("cum");
 	dynStats("sen", -2, "cor", 1);
 	doNext(camp.returnToCampUseOneHour);
 }

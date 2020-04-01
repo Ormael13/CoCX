@@ -25,7 +25,7 @@ package classes.Items.Weapons
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.findPerk(PerkLib.TitanGrip) >= 0) return true;
+			if (game.player.findPerk(PerkLib.GigantGrip) >= 0) return true;
 			outputText("You aren't skilled in handling massive weapons, even when using both hands to use this mace. Just face that truth you not even close to Undefeated King level yet...  ");
 			return false;
 		}

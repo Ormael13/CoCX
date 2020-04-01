@@ -128,7 +128,7 @@ public function etnaRapesPlayer2():void
 		if (player.cumQ() < 10000) player.cumMultiplier += 2;
 		if (player.cor < 75) dynStats("cor", 25);
 		if (player.hasStatusEffect(StatusEffects.WildManticore)) player.removeStatusEffect(StatusEffects.WildManticore);
-		player.orgasm();
+		player.sexReward("vaginalFluids","Dick");
 		cleanupAfterCombat();
 		return;
 	}
@@ -176,7 +176,7 @@ public function etnaRapesPlayer2():void
 		if (flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] < 1) flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] = 2;
 		if (flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] == 1) flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] = 3;
 		if (player.hasStatusEffect(StatusEffects.WildManticore)) player.removeStatusEffect(StatusEffects.WildManticore);
-		player.orgasm();
+		player.sexReward("vaginalFluids");
 		cleanupAfterCombat();
 		return;
 	}
@@ -221,7 +221,7 @@ public function etnaRapeYesM():void
 	if (player.cumQ() < 10000) player.cumMultiplier += 2;
 	if (player.hasStatusEffect(StatusEffects.WildManticore)) player.removeStatusEffect(StatusEffects.WildManticore);
 	etnaAffection(10);
-	player.orgasm();
+	player.sexReward("vaginalFluids","Dick");
 	cleanupAfterCombat();
 }
 
@@ -264,7 +264,7 @@ public function etnaRapeYesF2():void
 	if (flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] == 2) flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] = 3;
 	if (player.hasStatusEffect(StatusEffects.WildManticore)) player.removeStatusEffect(StatusEffects.WildManticore);
 	etnaAffection(10);
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	cleanupAfterCombat();
 }
 
@@ -324,7 +324,7 @@ private function etnaRapesYesCome2Camp():void
 		if (flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] < 1) flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] ++;
 	}
 	etnaAffection(30);
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	cleanupAfterCombat();
 	doNext(etnaCome2Camp);
 }
@@ -389,7 +389,8 @@ public function etnaRapeYandere():void
 	etnaRapesPlayer();
 	if (player.tou >= 30) {
 		outputText("Thankfully, you wake up before Etna does and use the spike left on the ground to unbind yourself. Once done, you proceed to exit the place through a trap door and head back to camp before the love-crazed manticore notices you’ve escaped.\n\n");
-		player.orgasm();
+		if (player.hasCock()) player.sexReward("vaginalFluids","Dick",true,false);
+		player.sexReward("vaginalFluids");
 		cleanupAfterCombat();
 		return;
 	}
@@ -638,7 +639,7 @@ public function etnaPussyOpera():void
 	if (player.cumQ() < 500) player.cumMultiplier += 6;
 	if (player.cumQ() < 2000) player.cumMultiplier += 4;
 	if (player.cumQ() < 10000) player.cumMultiplier += 2;
-	player.orgasm();
+	player.sexReward("vaginalFluids","Dick");
 	if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] < 3) flags[kFLAGS.ETNA_TALKED_ABOUT_HER] = 3;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -656,6 +657,7 @@ public function etnaShareDrink():void
 	if (player.hasVagina()) outputText(" the [pussy] between your legs wets the ground as a new cargo of cum fills your tail cavity");
 	outputText(".\n\nAfter several minutes, the both of you are done and there's no cum left. You lay down next to Etna for a moment, enjoying the afterglow of your shared dinner. That was quite a good meal and seeing as she has several barrels of this which she seems to replenish daily you like the idea of doing this again. You head back to your tent most satisfied.");
 	doNext(camp.returnToCampUseOneHour);
+	player.sexReward("cum");
 }
 
 public function etnaDailyVenomVial():void

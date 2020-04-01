@@ -676,7 +676,7 @@ private function bimboSophieLicksRugs():void {
 	outputText(".  Come over here and sixty-nine me, baby!</i>\" cheers Sophie with a wiggle of her considerable hips.  Damn, her lips are sooo plump and sexy, and that ass - gods she's getting you wet ");
 	if(player.hasCock()) outputText("and hard ");
 	outputText("again!  You want to tackle her onto the ground and smash your crotch into her face!  Fuck, is she trying to use her compulsion on you? It's working!\n\n");
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	dynStats("sen", -1);
 	sophieScene.luststickApplication(4);
 	if(player.inte * 2 < player.cor + player.lib) {
@@ -720,7 +720,7 @@ private function bimboSophieSixtyNineAfterCunnilingus():void {
 		
 		outputText("Sophie struts off, touching a finger to her cunt before licking it, tasting the remnants of your saliva.");
 		sophieScene.luststickApplication(5);
-		player.orgasm();
+		player.sexReward("vaginalFluids");
 		dynStats("sen", -1);
 	}
 	//SixtyNine Continuation - DUDES
@@ -759,7 +759,7 @@ private function bimboSophieSixtyNineAfterCunnilingus():void {
 		outputText("The blond bombshell titters, \"<i>Like, you don't need to lick my cunny any more, babe. You were totally awesome and got me off super hard.  And you did such a good job cumming for me too!  Just relax there a moment, I'm gonna get a drink or something.  Let's do this again soon!</i>\"\n\n");
 		
 		outputText("Sophie leans down to kiss you on the lips, smearing more of her lust-enhancing lipstick over your mouth.  " + SMultiCockDesc() + " stays hard as a rock, but the need to service her pussy with your tongue slowly fades.  You feel oddly sated in spite of your erection, yet you know that a peek at your vapid harpy mistress will likely throw you into a rutting frenzy all over again thanks to the properties of her lipstick.");
-		player.orgasm();
+		player.sexReward("vaginalFluids");
 		dynStats("lib", 1, "sen", -1);
 		sophieScene.luststickApplication(5);
 	}
@@ -815,7 +815,7 @@ private function buttFuckBimboSophie():void {
 		outputText("Sophie giggles again, rubbing her already well-filled belly and winking at you, like you're sharing in some absurd joke.  You roll your eyes - bimbos!");
 	}
 	if(sophieIsInSeason()) sophiePregChance();
-	player.orgasm();
+	player.sexReward("Default","Dick",true,false);
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -858,7 +858,7 @@ private function fuckBimboSophiesTits():void {
 	if (pregnancy.event >= 2) outputText("her swollen midriff is glazed, ");
 	outputText("and her eyes are closed, held shut by a thick layer of your sperm.  She's been well and truly bukkaked, drenched in ejaculate, and judging by how furiously she's schlicking away at her pussy, she couldn't be happier.  As for you, " + sMultiCockDesc() + " is still erect, even though you feel like you don't have a drop left in you.  Of course, the drugs soaking into your gold-tinted cock will probably keep you hard and ready to breed for hours.\n\n");
 	sophieScene.luststickApplication(5);
-	player.orgasm();
+	player.sexReward("Default","Dick",true,false);
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -906,8 +906,8 @@ private function beBimboSophiesSugarDaddy():void {
 	outputText("As you pull out - sticky strands of pearlescent spunk still connecting you to her quivering cunt - her back arches in orgasmic bliss, her stomach lurching in the spasms of birth. Muttering aimlessly to herself, Sophie bites down on her lipstick-slathered lips and digs her talons into the ground as the contractions accelerate. You push her knees apart and brace your fingers against her puffy vulva just as the featureless surface of an egg pushes past her lips, the oval seemingly growing larger and larger until it finally pops free, an uneven sphere as large as a grapefruit tumbling into your hands. Hot on its heels, more eggs push their way into freedom as Sophie shrieks in surprisingly melodic throes of bliss. As one pile becomes two, then three, you realize there must've been dozens of egg growing inside her womb, perhaps her body reacting to the Ovi Elixir by giving it all she's got. With the small eggs out of the way, her belly finally settles down to a more reasonable thickness, though it's clear she's not done just yet. Puffing breaths as hard as she can, Sophie gives a monumental groan of effort and spreads her legs as far apart as possible. Slowly, with agonizing euphoria, she pushes out an egg as large as a watermelon, hyperventilating before clenching every muscle in her body to pass a second hot on the heels of the first. Her pussy gushes with the honey of her climax, a third monumental egg popping free before, finally, it seems as though she's empty. If she didn't have such wide, breeder's hips and an entire youth of birthing, you're not sure she'd be able to pass the jumbo-sized eggs. Even after all that, her pussy seems to have settled back to its normal size, without any lasting ill effects from the absurdly huge eggs. No wonder Sophie's so proud of being a mommy - a clutch of eggs like that would've ruined a lesser woman.\n\n");
 
 	outputText("Basking in the afterglow for a moment longer, she begins preening herself, pride plastered on her face thicker than her golden makeup. \"<i>Momma Sophie's so good at birthing eggs,</i>\" she brags, wrapping her arms around your shoulders. \"<i>But you were so great too, Daddy,</i>\" the older woman remarks, affectionately slathering your face with kisses.  Some birds cannot change.  You sigh as the aphrodisiac sinks into your skin and " + sMultiCockDesc() + " hardens to tender stiffness again.  For the rest of the hour, the two of you fuck like newlyweds, only bothering to take stock of the inert eggs once you're both sore and exhausted.\n\n");
-	
-	player.orgasm();
+
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("sen", -1);
 	sophieScene.luststickApplication(2);
 	//[player gains random large egg]
@@ -931,7 +931,7 @@ private function beBimboSophiesSugarMommy():void {
 	outputText("You come to before long, your whole body raw from the experience. Sophie is between your thighs, lapping at your " + vaginaDescript(0) + " with her narrow tongue and sucking at your " + clitDescript() + " with her plump, golden lips. You're about to push her away until you realize that her tender ministrations are taking the lingering tenderness of the birth from your abused pussy. Gingerly, you check your oozing sex, relieved to find that your body isn't nearly as stretched out as you assumed the ruinous egg would leave you. \"<i>Silly girl,</i>\" Sophie chides, \"<i>lipstick is good on both sets of lips! How do you think we can still please our mates?</i>\" She gestures at the piles of eggs the two of you have laid and you gasp. There are easily three dozen eggs, the smallest of which is apple-sized.  You find yourself a bit intimidated to see the sheer bulk of the fruits of your womb. \"<i>Girl, you've got to find us some studs one of these days! It's SO MUCH BETTER when the eggs are fertilized.</i>\" She leans in close, conspiratorially. \"<i>They get even bigger,</i>\" she giggles. You'd like to tell her to go to hell with the thought of larger eggs, but Marae help you, you just can't change. Shaking your head, you push the harpy bimbo's puckered mouth down to kiss your pussy a little bit better before cleaning up and taking stock of all the eggs.\n\n");
 	
 	//[player gains random large egg]
-	player.orgasm();
+	player.sexReward("saliva");
 	dynStats("sen", -1);
 	//[player gains random large egg]
 	sophieScene.luststickApplication(2);
@@ -1092,7 +1092,7 @@ private function rideDatSophieVag(nice:Boolean = false):void {
 	if (pregnancy.event >= 2) outputText("resting your head on her gravid tummy and smiling to yourself.");
 	else outputText("hugging her tight as she tries her best to show her appreciation.");
 	if(sophieIsInSeason()) sophiePregChance();
-	player.orgasm();
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("lib", .5, "sen", -4);
 	if(!nice && player.cor < 50) dynStats("cor", 1);
 	sophieScene.luststickApplication(5);
@@ -1276,7 +1276,7 @@ private function sophieImpregnationSex():void {
 	
 	outputText("\n\nYou fall back, eyes rolling wildly, moaning uncontrollably.  Consciousness for you becomes little more than the feelings tingling through your " + cockDescript(x) + " and the ensuing orgasms.  At some point, you lose track of time and pass out.");
 	sophiePregChance();
-	player.orgasm();
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("lib", 1);
 	if(player.cumQ() < 5000) player.cumMultiplier += 3;
 	sophieScene.luststickApplication(8);
@@ -1320,8 +1320,8 @@ private function giantCocksImpregnateSophie():void {
 	
 	outputText("\n\n\"<i>Ready for round two?</i>\" she asks, already feeling fresh lust surging through your length.  Of course you are...");
 	sophiePregChance();
-	
-	player.orgasm();
+
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("lib", 1);
 	if(player.cumQ() < 5000) player.cumMultiplier += 3;
 	sophieScene.luststickApplication(8);
@@ -1443,7 +1443,7 @@ public function sophieFenCraftedSex(morning:Boolean = false):void {
     //REGULAR
 	else outputText("\n\nYou gather up your [armor], trying to ignore how it sticks to you after that messy fuck.");
 	if(sophieIsInSeason()) sophiePregChance();
-	player.orgasm();
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("sen", -2);
 	if(morning) doNext(playerMenu);
 	else doNext(camp.returnToCampUseOneHour);
@@ -1512,7 +1512,7 @@ public function fuckYoPregnantHarpyWaifu(morning:Boolean = false):void {
 	outputText(", swaying her hips sensually as seed runs from her cunt in thick little rivers.  You're wet, sticky, and sated");
 	if(morning) outputText(" when you go wash up to get dressed.  It's going to be a good day.");
 	else outputText(" when you go to get dressed.  You'll have to make sure to wash clean at some point, but for now you enjoy the sweet scent of your pet bimbo's cum.");
-	player.orgasm();
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("sen", -2);
 	if(morning) doNext(playerMenu);
 	else doNext(camp.returnToCampUseOneHour);
@@ -1596,7 +1596,7 @@ private function goHogWildOnSophieBewbs():void {
 	
 	outputText("\n\nYou step away with a smile, getting dressed while the bimbo helplessly begins to frig herself.  Your gold rod quickly disappears into your [armor], but the lingering effects of her lipsticks will keep you thinking of her for some time...");
 	outputText("\n\n\"<i>Ooooh, like, thank you!</i>\" she calls after you, \"<i>Give my pussy some next time, okay?  It totally misses you!</i>\"");
-	player.orgasm();
+	player.sexReward("Default","Dick",true,false);
 	dynStats("lib", 1, "sen", -2);
 	sophieScene.luststickApplication(8);
 	doNext(camp.returnToCampUseOneHour);
@@ -1662,7 +1662,7 @@ private function letSophieMilkYoDick():void {
 		outputText("  She gathers up some of your spunk and rubs it over her breasts and belly as you slump back, reveling in the feel on her skin and how wonderful her big, pregnant boobs are feeling.");
 		outputText("\n\nSophie grabs you and pulls you against her cum-slick belly, rubbing her hands up and down that smooth, egg-bound sphere.  She coos, \"<i>You're like, so good to Momma Sophie.  Just be sure and cum for my twat again soon, okay?  It misses you.</i>\"");
 	}
-	player.orgasm();
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("lib", 1, "sen", -2);
 	sophieScene.luststickApplication(8);
 	doNext(camp.returnToCampUseOneHour);
@@ -1994,8 +1994,9 @@ private function watchIzmaSophie():void {
 	outputText(".  Izma keeps futilely pumping a bit longer, and you see Sophie's belly curve slightly with the hefty seed-deposit.");
 	
 	outputText("\n\nIzma pants and withdraws from her home-made cream pie with a self-satisfied sigh, but her cock is still just as hard as before, even though her sack looks a little bit smaller.  She groans out loud as she staggers away, muttering something about coming back to 'check on' the harpy in a few minutes.  Her hand takes a few experimental pumps as she goes, and with all the lipstick she was exposed to, you're sure she'll be back before long.  As soon as she's out of sight, Sophie flexes her wings, easily breaking through the knots.  She gets loose and drops to the ground, then sticks a digit in her still-drooling cunt before sucking it into her mouth to taste.  \"<i>Hehe, silly sharks!</i>\" she chants before flouncing away.  \"<i>I gotta remember to be back before she is... this is totally fun!</i>\"");
-	
-	player.orgasm();
+
+	if(player.hasCock())player.sexReward("vaginalFluids","Dick");
+	player.sexReward("vaginalFluids");
 	dynStats("sen", -1);
 	doNext(playerMenu);
 }

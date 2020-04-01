@@ -10,7 +10,7 @@ package classes.Items.Armors
 	public class LeatherArmorSegments extends Armor {
 		
 		public function LeatherArmorSegments() {
-			super("UrtaLta", "UrtaLta", "leather armor segments", "leather armor segments", 10, 0, 250, null, "Light", true);
+			super("UrtaLta", "UrtaLta", "leather armor segments", "leather armor segments", 18, 2, 500, null, "Light", true);
 		}
 		override public function removeText():void {
 			outputText("You have your old set of " + game.armors.LEATHRA.longName + " left over.  ");

@@ -429,14 +429,12 @@ private function soberUrtaSatingPCHeat():void {
 	urtaLove(1);
 	outputText("\n\nSatisfied, the two of you part ways here, Urta apparently searching for something after waving at you when you leave. Your heat somewhat calmer now, you find yourself on your way back to camp, sticky jism running in a thin trail down your [legs] while your [vagina] desperately clenches to hold it all in.");
 	//Usual one hour passes//
-	player.orgasm();
+	player.sexReward("cum");
 	dynStats("lib",1,"sen-",2);
 	dynStats("lust=",0);
 	dynStats("lust=",0);
 	dynStats("lust=",0);
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 6;
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -884,12 +882,12 @@ private function drunkUrtaRidesARutPCsCock():void {
 
 	//player returns to camp and loses 4 hours//
 	dynStats("lib",2,"sen-",10,"lust=",0);
-	player.orgasm();
-	player.orgasm();
-	player.orgasm();
-	player.orgasm();
-	player.orgasm();
-	player.orgasm();
+	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids");
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	urtaLove(1);
 	flags[kFLAGS.TIMES_RUT_FUCKED_URTAS_CUNT]++;

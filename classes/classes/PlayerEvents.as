@@ -10,6 +10,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.*;
 import classes.Items.*;
@@ -620,15 +621,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.ALRAUNE_GROWING] > 0 && flags[kFLAGS.ALRAUNE_GROWING] < 15) flags[kFLAGS.ALRAUNE_GROWING]++;
 				//Reset SelfSustain & RepresLust daily counter
 				if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] > 0) flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] = 0;
-				//Reset Electra Strom Jewel daiy limit
+				//Reset Electra Storm Jewel daily limit
 				if (flags[kFLAGS.ELECTRA_DAILY_STORM_JEWEL] > 0) flags[kFLAGS.ELECTRA_DAILY_STORM_JEWEL] = 0;
-				//Reset Etna Venom Vial daiy limit
+				//Reset Etna Venom Vial daily limit
 				if (flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] > 0) flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] = 0;
-				//Reset Ceani Training daiy limit
+				//Reset Ceani Training daily limit
 				if (flags[kFLAGS.CEANI_DAILY_TRAINING] > 0) flags[kFLAGS.CEANI_DAILY_TRAINING] = 0;
-				//Reset Kindra Training daiy limit
+				//Reset Kindra Training daily limit
 				if (flags[kFLAGS.KINDRA_DAILY_TRAINING] > 0) flags[kFLAGS.KINDRA_DAILY_TRAINING] = 0;
-				//Reset Chi Chi Training daiy limit
+				//Reset Chi Chi Training daily limit
 				if (flags[kFLAGS.CHI_CHI_DAILY_TRAINING] > 0) flags[kFLAGS.CHI_CHI_DAILY_TRAINING] = 0;
 				//Reset Luna Meal CD
 				if (flags[kFLAGS.LUNA_MEAL] > 0) flags[kFLAGS.LUNA_MEAL] = 0;
@@ -703,7 +704,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					else flags[kFLAGS.CHI_CHI_LVL_UP]++;
 				}
 				//Excellia fixing counter
-				if (flags[kFLAGS.EXCELLIA_RECRUITED] > 2 && flags[kFLAGS.EXCELLIA_RECRUITED] < 33) flags[kFLAGS.EXCELLIA_RECRUITED]++;
+				if (flags[kFLAGS.EXCELLIA_RECRUITED] > 2 && flags[kFLAGS.EXCELLIA_RECRUITED] < 30) flags[kFLAGS.EXCELLIA_RECRUITED]++;
 				//Alvina timer
 				if (SceneLib.dungeons.checkFactoryClear() && flags[kFLAGS.ALVINA_FOLLOWER] < 8) flags[kFLAGS.ALVINA_FOLLOWER]++;
 				//Siegweird
@@ -765,6 +766,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 					needNext = true;
 				}
+				if (player.hasStatusEffect(StatusEffects.MitziIzmaDaughters)) player.removeStatusEffect(StatusEffects.MitziIzmaDaughters);
 				if (flags[kFLAGS.SAMIRAH_HYPNOSIS] == 4 || flags[kFLAGS.SAMIRAH_HYPNOSIS] == 2) flags[kFLAGS.SAMIRAH_HYPNOSIS]++;
 				//Soul Arena Gaunlet reset
 				if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlets1)) {
@@ -790,7 +792,53 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) > 6) player.addStatusValue(StatusEffects.AdventureGuildQuests3, 2, -3);
 				}
 				if (flags[kFLAGS.AURORA_LVL] > 0.3 && flags[kFLAGS.AURORA_LVL] < 0.7) flags[kFLAGS.AURORA_LVL] += 0.05;
+
+
+				//Racial perk daily effect Area
+
+				//Easter bunny egg balls
+				if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.balls >=2) {
+					outputText("\n<b>Your balls grow as your eggs increase in size.</b>\n");
+					player.ballSize++;
+					if (player.hasPerk(PerkLib.EasterBunnyEggBagEvolved)) {
+						var changeLib:Number = player.lib*((player.ballSize*5/100)+1); //Exemple (1*5/100)+1= 1.05 wich is the modifier to libido
+						if (player.hasPerk(PerkLib.EasterBunnyEggBagFinalForm)){
+							changeLib = player.lib*((player.ballSize*10/100)+1);
+							player.ballSize++;
+						}
+						player.dynStats("lib", changeLib);
+					}
+					if (player.ballSize > 3 && player.ballSize < 4) {
+						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head. Your balls have increased enought that you are ready to lay your eggs.");
+					}
+					if (player.ballSize > 4) {
+						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head, as the size of your increasingly growing balls remind you that you need to expel those eggs one way or another before they become too big.");
+					}
+				}
 			}
+
+			//Easter bunny egg balls Loosing
+			if (player.easterbunnyScore() < 10 && player.hasPerk(PerkLib.EasterBunnyBalls) && !player.hasPerk(PerkLib.EasterBunnyEggBag)) {
+				outputText("\nSomething changes in your balls you can feel them as if they stopped growing. Guess you're no longer enough of a easter bunny to produce eggs.\n\n");
+				player.removePerk(PerkLib.EasterBunnyBalls)
+			}
+
+			//Easter bunny egg balls Cumming the eggs out
+			if (player.hasStatusEffect(StatusEffects.EasterBunnyCame)) { //Easter bunny cumming its eggs out
+				if (player.balls == 2)outputText("\nYou sigh in relief as your balls now empty of their eggs dangle under your cock two new way smaller eggs sliding " +
+						"inside to fill the void in them. Of course you also collected those that you shot out, never know when these can come in handy.\n");
+				if (player.balls == 4)outputText("\nYou sigh in relief as your balls now empty of their eggs dangle under your cock four new way smaller eggs sliding " +
+						"inside to fill the void in them. Of course you also collected those that you shot out, never know when these can come in handy.\n");
+				player.ballSize = 1;
+				var changeLib1:Number = player.lib*((player.ballSize*5/100)+1); //Exemple (1*5/100)+1= 1.05 wich is the modifier to libido
+				player.dynStats("lib", changeLib1);
+				player.removeStatusEffect(StatusEffects.EasterBunnyCame); //Remove cumming status
+				flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=2;
+				if (player.balls == 4)flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=2;
+				outputText("\n\n<b>You currently have "+flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+" eggs stored</b>\n");
+				needNext = true;
+			}
+
 			if (CoC.instance.model.time.hours == 6) {
 				var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 				if (vthirst != null) {
@@ -1111,10 +1159,35 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.FreezingBreathYeti, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.yetiScore() < 6 && player.yukiOnnaScore() < 14 && player.findPerk(PerkLib.ColdAffinity) >= 0) {
-				outputText("\nYou suddenly feel a chill in the air. You guess you somehow no longer resist the cold.\n\n<b>(Lost Perks: Cold Affinity and Freezing Breath Yeti)</b>\n");
+			if (player.melkieScore() >= 8 && player.findPerk(PerkLib.ColdAffinity) < 0) {
+				outputText("\nYou suddenly no longer feel the cold so you guess you finally got acclimated to the icy winds of the glacial rift. You feel at one with the cold. So well that you actually developed icy power of your own.\n\n(<b>Gained Perks: Cold Affinity</b>)\n");
+				player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
+				needNext = true;
+			}
+			else if (player.yetiScore() < 6 && player.yukiOnnaScore() < 14 && player.melkieScore() < 8 && player.findPerk(PerkLib.ColdAffinity) >= 0) {
+				outputText("\nYou suddenly feel a chill in the air. You guess you somehow no longer resist the cold.\n\n<b>(Lost Perks: Cold Affinity");
 				player.removePerk(PerkLib.ColdAffinity);
-				player.removePerk(PerkLib.FreezingBreathYeti);
+				if (player.yetiScore() < 6){
+					outputText(" and and Freezing Breath Yeti");
+					player.removePerk(PerkLib.FreezingBreathYeti);
+				}
+				outputText(")</b>\n");
+				needNext = true;
+			}
+			if ((player.sirenScore() >=  10 || player.harpyScore() >=  8) && !player.hasPerk(PerkLib.HarpySong)) {
+				outputText("\n Your voice sound like magicaly entrancing music to your ears now, it would seem you have gained the infamous magicaly compeling voices common to harpies. <b>Gained Perks: Harpy Song</b>)\n");
+				player.createPerk(PerkLib.HarpySong, 0, 0, 0, 0);
+				needNext = true;
+			}
+			//Compelling Aria
+			if (player.tongue.type != Tongue.MELKIE && player.hasPerk(PerkLib.MelkieSong) && !player.hasPerk(PerkLib.MelkieLung)) {
+				outputText("\n Your voice no longuer carries the magical power it used to and thus you are no longuer able to use your compelling aria. <b>Lost Perks: Melkie Song</b>)\n");
+				player.removePerk(PerkLib.MelkieSong);
+				needNext = true;
+			}
+			if (player.sirenScore() < 10 && player.harpyScore() < 8 && player.hasPerk(PerkLib.HarpySong) && !player.hasPerk(PerkLib.MelkieLung)) {
+				outputText("\n Your voice no longuer carries the magical power it used to and thus you are no longuer able to use your compelling aria. <b>Lost Perks: Harpy Song</b>)\n");
+				player.removePerk(PerkLib.HarpySong);
 				needNext = true;
 			}
 			//Icy flesh
@@ -1157,10 +1230,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nYou suddenly feel a rush of electricity run across your skin as your arousal builds up and begin to masturbate in order to get rid of your creeping desire. However even after achieving orgasm not only are you still aroused but you are even hornier than before! You realise deep down that the only way for you to be freed from this jolting pleasure is to have sex with a partner!\n");
 				outputText("\n(<b>Gained the lightning affinity perk, electrified desire perk, Lightning claw perk, Pleasure bolt ability and Orgasmic lightning strike ability!</b>)\n");
 				if (player.thunderbirdScore() >= 12) player.createStatusEffect(StatusEffects.IsThunderbird,0,0,0,0);
-				if (player.raijuScore() >= 7) player.createStatusEffect(StatusEffects.IsRaiju,0,0,0,0);
+				if (player.raijuScore() >= 7) {
+					player.createStatusEffect(StatusEffects.IsRaiju,0,0,0,0);
+					player.createPerk(PerkLib.LightningClaw,0,0,0,0);
+				}
 				player.createPerk(PerkLib.LightningAffinity, 0, 0, 0, 0);
 				player.createPerk(PerkLib.ElectrifiedDesire, 0, 0, 0, 0);
-				player.createPerk(PerkLib.LightningClaw, 0, 0, 0, 0);
 				needNext = true;
 			}
 			else if (player.raijuScore() < 7 && player.findPerk(PerkLib.LightningAffinity) >= 0 && player.hasStatusEffect(StatusEffects.IsRaiju) && !player.hasStatusEffect(StatusEffects.IsThunderbird)) {
@@ -1168,6 +1243,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removeStatusEffect(StatusEffects.IsRaiju);
 				player.removePerk(PerkLib.LightningAffinity);
 				player.removePerk(PerkLib.ElectrifiedDesire);
+				player.removePerk(PerkLib.LightningClaw);
 				needNext = true;
 			}
 			else if (player.thunderbirdScore() < 12 && player.findPerk(PerkLib.LightningAffinity) >= 0 && player.hasStatusEffect(StatusEffects.IsThunderbird) && !player.hasStatusEffect(StatusEffects.IsRaiju)) {
@@ -1282,7 +1358,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removeStatusEffect(StatusEffects.HinezumiCoat);
 				needNext = true;
 			}
-			//Goblinoid blood &7 Bouncy body
+			//Goblinoid blood & Bouncy body & goblin mechs periodical check up
 			if (player.goblinScore() >= 10 && player.findPerk(PerkLib.GoblinoidBlood) < 0) {
 				outputText("\nAs you become a goblinoid again you can feel the chemicals pumped in by your gadgets resume working.\n");
 				outputText("\n(<b>Gained Perk: Goblinoid blood</b>)\n");
@@ -1306,6 +1382,50 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\n<b>(Lost Perk: Bouncy body)</b>\n");
 				player.removePerk(PerkLib.BouncyBody);
 				needNext = true;
+			}
+			if (player.vehiclesName == "Goblin Mech Alpha") {
+				if (player.elfScore() >= 11) { //Elf
+					outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+					if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.2;
+					if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.35;
+					if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) player.HP /= 1.5;
+					player.HP = Math.round(player.HP);
+					player.setVehicle(VehiclesLib.NOTHING);
+					inventory.takeItem(vehicles.GOBMALP, null);
+					needNext = true;
+				}
+				if (player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE) { //Taller than 4 ft or having wings/tail
+					outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
+					if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.2;
+					if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.35;
+					if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) player.HP /= 1.5;
+					player.HP = Math.round(player.HP);
+					player.setVehicle(VehiclesLib.NOTHING);
+					inventory.takeItem(vehicles.GOBMALP, null);
+					needNext = true;
+				}
+			}
+			if (player.vehiclesName == "Goblin Mech Prime") {
+				if (player.elfScore() >= 11) { //Elf
+					outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+					if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.4;
+					if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.7;
+					if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) player.HP /= 2;
+					player.HP = Math.round(player.HP);
+					player.setVehicle(VehiclesLib.NOTHING);
+					inventory.takeItem(vehicles.GOBMPRI, null);
+					needNext = true;
+				}
+				if (player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE) { //Taller than 4 ft or having wings/tail
+					outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
+					if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.4;
+					if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.7;
+					if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) player.HP /= 2;
+					player.HP = Math.round(player.HP);
+					player.setVehicle(VehiclesLib.NOTHING);
+					inventory.takeItem(vehicles.GOBMPRI, null);
+					needNext = true;
+				}
 			}
 			//H class Heaven Tribulation
 			//		if (player.level >= 24 && player.findPerk(PerkLib.SoulApprentice) >= 0 && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) < 0) {
@@ -1543,9 +1663,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Diapause);
 				needNext = true;
 			}
+			//tail absorb section
 			if (player.lowerBody == LowerBody.NAGA) {
 				if (player.tailType > Tail.NONE) {
 					outputText("\nYour tail squirms, wriggling against your larger naga tail as the scales part around it, absorbing it.  <b>Your form is completely scaly and smooth from the waist down.</b>\n");
+					player.tailType = Tail.NONE;
+					needNext = true;
+				}
+			}
+			if (player.lowerBody == LowerBody.MELKIE) {
+				if (player.tailType > Tail.NONE) {
+					outputText("\nYour tail squirms, wriggling against your larger melkie tail as the fur part around it, absorbing it.  <b>Your form is completely furry and smooth from the waist down.</b>\n");
 					player.tailType = Tail.NONE;
 					needNext = true;
 				}
@@ -1878,7 +2006,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				else player.addStatusValue(StatusEffects.KonstantinWeaponSharpening, 1, -1);
 			}
 			if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) player.removeStatusEffect(StatusEffects.AlchemicalThunderBuff);
-			if (player.findPerk(PerkLib.FutaForm) >= 0) { //Futa checks
+			if (player.hasPerk(PerkLib.FutaForm)) { //Futa checks
 				if (!player.hasCock()) { //(Dick regrowth)
 					player.createCock();
 					player.cocks[0].cockLength = 10;
@@ -1922,7 +2050,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			if (player.findPerk(PerkLib.BimboBody) >= 0 || player.hasStatusEffect(StatusEffects.BimboChampagne)) { //Bimbo checks
+			if (player.hasPerk(PerkLib.BimboBody) || player.hasStatusEffect(StatusEffects.BimboChampagne)) { //Bimbo checks
 				if (player.breastRows[0].breastRating < 5) { //Tits!
 					player.breastRows[0].breastRating = 5;
 					if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.hasStatusEffect(StatusEffects.BimboChampagne))
@@ -1955,7 +2083,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			if (player.findPerk(PerkLib.BroBody) >= 0) { //Bro checks
+			if (player.hasPerk(PerkLib.BroBody)) { //Bro checks
 				player.removeStatusEffect(StatusEffects.Feeder);
 				player.removePerk(PerkLib.Feeder);
 				if (!player.hasCock()) { //(Dick regrowth)
@@ -2138,4 +2266,3 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//End of Interface Implementation
 	}
 }
-

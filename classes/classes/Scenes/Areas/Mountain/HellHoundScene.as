@@ -81,10 +81,8 @@ public class HellHoundScene extends BaseContent
 			player.slimeFeed();
 			//(after either of them)
 			//(Lose player anal virginity; if player has vagina, lose vaginal virginity)
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.buttChange(monster.cockArea(0), true);
-			player.orgasm();
+			player.sexReward("cum","Vaginal");
 			//[if not corrupt]
 			if (player.cor < 40) dynStats("tou", -2, "cor", 1);
 			//[if corrupt]
@@ -92,11 +90,21 @@ public class HellHoundScene extends BaseContent
 			cleanupAfterCombat();
 		}
 
+		public function hellHoundPostFightOptions():void
+		{
+			if (monster.HP < 1) {
+				menu();
+				addButton(12, "Slay", killHellhound);
+				addButton(14, "Leave", cleanupAfterCombat);
+			}
+			else doNext(cleanupAfterCombat);
+		}
 		public function hellHoundPostFightSexScenes():void
 		{
 			menu();
 			addButton(0, "Lick it", hellHoundGetsRaped);
 			if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) addButton(1, "Fuck", hellHoundPropahRape);
+			if (monster.HP < 1) addButton (12, "Slay", killHellhound);
 			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 			addButton(14, "Leave", cleanupAfterCombat);
 		}
@@ -114,7 +122,7 @@ public class HellHoundScene extends BaseContent
 			if (player.cocks.length > 1) outputText("One of the heads eagerly starts licking your [cock] while the other starts to work on your " + cockDescript(1) + ". The large, flat tongues give you a rather unusual feeling, but it is definitely effective.   As you approach your peak, the heads quickly take your [cock] and " + cockDescript(1) + " into their mouths. The pleasure from this new arrangement quickly overwhelms you, leaving you dazed.  When your senses return to you, you look up to see the hellhound's tongues running all over their mouths, clearly very happy.  With a pair of happy barks, the hellhound turns and runs away.");
 			//[if player has no endowments] 
 			if (player.gender == 0) outputText("The two heads stare at your lack of sexual endowments for a few seconds before looking up at you sadly.  With a whine, the hellhound wanders off.  Feeling rather unsatisfied, you think that you should probably fix your lack of sexual 'parts'...");
-			else player.orgasm();
+			player.sexReward("Default","Dick",true,false);
 			cleanupAfterCombat();
 		}
 
@@ -312,7 +320,7 @@ public class HellHoundScene extends BaseContent
 			outputText("You feel inclined to agree at the wonderful feeling of your new body, and the incredible amount of power you feel rushing through you.  You move one of your hands so that you can play with both your dicks and your cunts, relishing in the feeling of them and the flames that lie within.  You gasp for a moment, and open your mouth as a rush of heat rises up from your chest and a burst of flame emerges from your mouth.\n\n");
 
 			outputText("A powerful demon steps out in front of you, and picks up the crystal.  You can feel a strong connection with him, and you know this is your master.  \"<i>Well now, I think you need a new name now in commemoration of being the first three headed hellhound, and for being the one who will give me the world.</i>\"  He unceremoniously puts the crystal in his mouth and swallows it.  \"<i>Your new name is Cerberus, and you're my greatest pet.</i>\"  He steps closer and looks into your center head's eyes for a moment.  \"<i>That's much better than being a champion ever was, isn't it?</i>\"  You can't help but eagerly nod in agreement.");
-			player.orgasm();
+			player.sexReward("Cum","Default",true,false);
 			dynStats("lib", 50, "cor", 100);
 			EventParser.gameOver();
 
@@ -386,7 +394,7 @@ public class HellHoundScene extends BaseContent
 
 				outputText("Finally having finished, you relax your anal sphincter and allow his member to leave your anus. His members rise from the feel of the incredible amount of cum his quadruple balls pumped into your holes squirting back out to wash over them. The hellhound curls up, spent, his tail covering his privates. His rods look a little red from the intense fuck, and you're sure that in spite of his fiery nature he is experiencing a little more than a burning sensation.");
 				//--> increases corruption, usual post coital procedure
-				player.orgasm();
+				player.sexReward("cum","Vaginal");
 				//[if not corrupt]
 				if (player.cor < 40) dynStats("tou", -2, "cor", 1);
 				//[if corrupt]
@@ -394,10 +402,16 @@ public class HellHoundScene extends BaseContent
 				//Preggers chance!
 				if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 				else player.knockUp(PregnancyStore.PREGNANCY_HELL_HOUND, PregnancyStore.INCUBATION_HELL_HOUND, 101);
-				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			}
 			cleanupAfterCombat();
+		}
+		
+		private function killHellhound():void {
+			clearOutput();
+			flags[kFLAGS.HELLHOUNDS_KILLED]++;
+			outputText("You finish off the hellhound and claim his two tongues as your prize. ");
+			if (player.cor < 25) dynStats("cor", -0.5);
+			inventory.takeItem(useables.THHTONG, cleanupAfterCombat);
 		}
 	}
 }

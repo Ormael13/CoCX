@@ -15,8 +15,8 @@ public class Masamune extends Weapon
 		}
 		override public function get attack():Number {
 			var boost:int = 0;
-			boost += (2 * (20 - game.player.cor / 3));
-			return (20 + boost); 
+			boost += Math.round((100-game.player.cor) / 10);
+			return (12 + (2 * boost)); 
 		}
 	}
 

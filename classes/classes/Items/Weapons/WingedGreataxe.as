@@ -18,7 +18,8 @@ package classes.Items.Weapons
 		override public function get attack():Number{
 			var boost:int = 0;
 			if (game.player.str >= 100) boost += 9;
-			return (18 + boost + ((100-game.player.cor) / 10));
+			boost += Math.round((100-game.player.cor) / 10);
+			return (9 + boost);
 		}
 	}
 }

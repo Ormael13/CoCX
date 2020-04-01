@@ -189,7 +189,7 @@ private function tamaniFirstTimeConsentual():void {
 		//([CORRUPT]
 		if(player.cor > 66) outputText("  Your [cock] twitches at the thought, ready and wanting more.");
 	}
-	player.orgasm();
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("lib", .5, "sen", -1, "cor", .5);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -347,11 +347,11 @@ internal function tamaniSexLetHer():void {
         if (CoC.instance.inCombat) {
             outputText("  After the stress and strain of a lost fight and the stress of having your seed so expertly stolen, you lie down on your flank and go to sleep.");
 			cleanupAfterCombat();
-			player.orgasm();
+			player.sexReward("vaginalFluids","Dick");
 		}
 		//(Noncombat end: 
 		else {
-			player.orgasm();
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lus", +10);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -391,12 +391,12 @@ internal function tamaniSexLetHer():void {
             if (CoC.instance.inCombat) {
                 outputText("You black out, exhausted from the ordeal.");
 				cleanupAfterCombat();
-				player.orgasm();
+				player.sexReward("vaginalFluids","Dick");
 			}
 			//(Noncombat end: 
 			else {
 				outputText("You lie there, recovering from the intense sex.  After a little while you manage to get up and redress, but the scent of horny goblin stays with you for hours.");
-				player.orgasm();
+				player.sexReward("vaginalFluids","Dick");
 				dynStats("lus", +10);
 				doNext(camp.returnToCampUseOneHour);
 			}
@@ -444,12 +444,12 @@ internal function tamaniSexLetHer():void {
             if (CoC.instance.inCombat) {
                 outputText("You black out, exhausted from the ordeal.");
 				cleanupAfterCombat();
-				player.orgasm();
+				player.sexReward("vaginalFluids","Dick");
 			}
 			//(Noncombat end: 
 			else {
 				outputText("You lie there, recovering from the intense sex.  After a little while you manage to get up and redress, but the scent of horny goblin stays with you for hours.");
-				player.orgasm();
+				player.sexReward("vaginalFluids","Dick");
 				dynStats("lus", +10);
 				doNext(camp.returnToCampUseOneHour);
 			}
@@ -496,7 +496,7 @@ internal function tamaniSexLost():void {
 	outputText("\n\n");
 	
 	outputText("Tamani removes the ring once you have finished.  She seals the bottle and places it in her pouch as you drop to the ground, exhausted.  All you can do is watch as she walks away, her ass swaying confidently from side to side.  Your last thought before you pass out is how much easier it would've been to just fuck her.");
-	player.orgasm();
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("lib", .5, "sen", -1, "cor", .5);
 	cleanupAfterCombat();
 }
@@ -543,7 +543,7 @@ internal function tamaniSexWon():void {
 		else outputText("sweet cock has ");
 		outputText("any more cream to give to me?</i>\"\n\n");
 		outputText("She doesn't give you a chance to answer as she wobbles off, jiggling pleasantly in all the right places, \"<i>Of course you do.  I'll be back for the rest later!</i>\"\n\n");
-		player.orgasm();
+		player.sexReward("vaginalFluids","Dick");
         if (CoC.instance.inCombat) cleanupAfterCombat();
         else doNext(camp.returnToCampUseOneHour);
 	}
@@ -570,7 +570,7 @@ internal function tamaniSexWon():void {
 		outputText("She doesn't give you a chance to answer as she staggers up and strikes a sexy pose, \"<i>Of course you do.  I'll be back for the rest later!</i>\"\n\n");
 		
 		outputText("Tamani wiggles in the sexiest way as she leaves, arousing your body all over again...");
-		player.orgasm();
+		player.sexReward("vaginalFluids","Dick");
 		dynStats("lus", 35);
         if (CoC.instance.inCombat) cleanupAfterCombat();
         else doNext(camp.returnToCampUseOneHour);
@@ -622,7 +622,7 @@ private function tamaniPregnantFuck():void {
 		outputText("For her part, Tamani staggers to her feet, letting you flop free as a river of your cum pours between her legs, soaking your lower body.  She staggers over to your face, pleasure-drunk, and leans down to give you another sloppy kiss.\n\n");
 		
 		outputText("\"<i>Thanks for the good fuck, " + player.mf("stud","lover") + ",</i>\" she says, smiling cruelly as you find yourself getting hard again from her drug-laced kisses.  Tamani doesn't hang around to help though; she waddles off, cradling her belly and smiling.\n\n");
-		player.orgasm();
+		player.sexReward("vaginalFluids","Dick");
 		dynStats("lus", 25);
 	}
 	//(Doesn't Fit)
@@ -638,7 +638,7 @@ private function tamaniPregnantFuck():void {
 		flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] += 3;
 
 		outputText("Tamani comes over to you and gives you a sloppy goodbye kiss, sending an immediate surge of hardness and desire to your groin.  She looks back and giggles, then waddles off, patting her pouches and dripping with your spooge.");
-		player.orgasm();
+		player.sexReward("vaginalFluids","Dick");
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -791,7 +791,7 @@ internal function getRapedByTamaniYouHypnoSlut():void {
 		
 		outputText("A surge of pride spreads through you at her praise, and you lean down to give your wife a long french kiss before heading back to camp.  On the way back your head slowly clears, and you wonder what came over you back there?!");
 		tamaniKnockUp();
-		player.orgasm();
+		player.sexReward("vaginalFluids","Dick");
 		dynStats("int", -.5, "sen", -1);
 	}
 	//[DOESNT FIT]
@@ -840,7 +840,7 @@ internal function getRapedByTamaniYouHypnoSlut():void {
 		
 		outputText("A surge of pride spreads through you at her praise, and you get up to give your wife a long french kiss before heading back to camp.  On the way back your head slowly clears, and you wonder what came over you back there?!");
 		tamaniKnockUp();
-		player.orgasm();
+		player.sexReward("vaginalFluids","Dick");
 		dynStats("int", -.5, "sen", -1);
 	}
     if (CoC.instance.inCombat) cleanupAfterCombat();
@@ -862,8 +862,8 @@ internal function tamaniAnalShits():void {
 	outputText("The slutty creature's moans turn to shouts as the sensation overwhelms her, and she bucks wildly back against you, face still in the dirt and tongue lolling out of her mouth.  \"<i>Oh, fuck yes, harder, HARDER!</i>\" she bursts forth wildly.  You oblige and pick up the intensity, absolutely ravaging her tight ass now with the motions of your " + cockDescript(x) + ".  She squeals somewhere down below you as her face is ground against the mud.  You rock her whole body back and forth as you slam into her, reveling in the feeling of her tight ass squeezing your cock as you slide inches in and out of her.\n\n");
 
 	outputText("You can feel the cum building up inside you, and you know that you won't be able to hold out much longer.  Looking down, you can see that Tamani isn't far from orgasm, either.  Her fingers slip rapidly in and out of her cunt, and the look on her face is one of thoughtless bliss.  She shudders and goes limp in your grasp just as you cum, painting the insides of her ass with your semen.  Her eyes are still rolled up into the back of her head as you pull your softening prick out of her ass.  You drop her, letting her legs fall back to the ground with a dull thud.  She turns over onto her side, looking up at you.  Between exhausted pants, she manages to say, \"<i>Don't... think that I... enjoyed that... or anything... I'll be back for you, and you better not...</i>\" before she passes out.  You shake your head and laugh at the stubborn little slut as you tuck " + sMultiCockDesc() + " back into your [armor] and head back to your camp.");
-	
-	player.orgasm();
+
+	player.sexReward("vaginalFluids","Dick");
 	cleanupAfterCombat();
 }
 
@@ -898,7 +898,7 @@ internal function tamaniBeaten():void {
 	//Don't encounter Tamani for 3 days if fertilized
 	if(player.fertilizedEggs() == 0) pregnancy.knockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, 72);
 	player.dumpEggs();
-	player.orgasm();
+	player.sexReward("Default","Default",true,false);
 	cleanupAfterCombat();
 }
 	

@@ -406,15 +406,34 @@ package classes.GlobalFlags
 		public static const EPIC_LETS_GO_FISHING:int				= 359;
 		public static const FASHION_SUIT_UP:int						= 360;
 		public static const FASHION_ROLLIN_ROLLIN:int				= 361;
-		public static const UNKNOWN_ACHIEVEMENT_362:int				= 362;
-		public static const UNKNOWN_ACHIEVEMENT_363:int				= 363;
-		public static const UNKNOWN_ACHIEVEMENT_364:int				= 364;
-		public static const UNKNOWN_ACHIEVEMENT_365:int				= 365;
-		public static const UNKNOWN_ACHIEVEMENT_366:int				= 366;
-		public static const UNKNOWN_ACHIEVEMENT_367:int				= 367;
-		public static const UNKNOWN_ACHIEVEMENT_368:int				= 368;
-		public static const UNKNOWN_ACHIEVEMENT_369:int				= 369;
-		public static const UNKNOWN_ACHIEVEMENT_370:int				= 370;
+		public static const GENERAL_GOTTA_LOVE_THEM_ALL_2:int		= 362;
+		public static const GENERAL_FOLLOW_THE_LEADER_2:int			= 363;
+		public static const GENERAL_MEET_YOUR_MASTER_2:int			= 364;
+		public static const GENERAL_MEET_YOUR_MASTER_TRUE_2:int		= 365;
+		public static const GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME_2:int	= 366;
+		public static const GENERAL_GOTTA_LOVE_THEM_ALL_3:int		= 367;
+		public static const GENERAL_FOLLOW_THE_LEADER_3:int			= 368;
+		public static const GENERAL_MEET_YOUR_MASTER_3:int			= 369;
+		public static const GENERAL_MEET_YOUR_MASTER_TRUE_3:int		= 370;
+		public static const GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME_3:int	= 371;
+		public static const GENERAL_SCHOLAR_2:int					= 372;
+		public static const GENERAL_SCHOLAR_3:int					= 373;
+		public static const GENERAL_ANT_KIDS_AND_PHYLLA:int			= 374;
+		public static const REALISTIC_CHAMPION_NEEDS_FOOD_2:int		= 375;
+		public static const REALISTIC_CHAMPION_NEEDS_FOOD_3:int		= 376;
+		public static const REALISTIC_CHAMPION_NEEDS_FOOD_4:int		= 377;
+		public static const UNKNOWN_ACHIEVEMENT_378:int				= 378;
+		public static const UNKNOWN_ACHIEVEMENT_379:int				= 379;
+		public static const UNKNOWN_ACHIEVEMENT_380:int				= 380;
+		public static const UNKNOWN_ACHIEVEMENT_381:int				= 381;
+		public static const UNKNOWN_ACHIEVEMENT_382:int				= 382;
+		public static const UNKNOWN_ACHIEVEMENT_383:int				= 383;
+		public static const UNKNOWN_ACHIEVEMENT_384:int				= 384;
+		public static const UNKNOWN_ACHIEVEMENT_385:int				= 385;
+		public static const UNKNOWN_ACHIEVEMENT_386:int				= 386;
+		public static const UNKNOWN_ACHIEVEMENT_387:int				= 387;
+		public static const UNKNOWN_ACHIEVEMENT_388:int				= 388;
+		public static const UNKNOWN_ACHIEVEMENT_389:int				= 389;
 		
 	}
 

@@ -40,7 +40,7 @@ import classes.BodyParts.Wings;
 			else /*if (player.isBiped()) */outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>");
 			if (player.hasStatusEffect(StatusEffects.HydraTailsPlayer)) player.removeStatusEffect(StatusEffects.HydraTailsPlayer);
 			setLowerBody(LowerBody.HUMAN);
-			player.legCount  = 2;
+			player.legCount = 2;
 			changes++;
 		}
 
@@ -96,6 +96,23 @@ import classes.BodyParts.Wings;
 				outputText("  <b>You have normal, humanoid eyes again.</b>");
 			}
 			setEyeType(Eyes.HUMAN);
+			changes++;
+		}
+
+		public function humaniseTongue():void {
+			outputText("\n\nYour tongue suddenly begins to feel weird. When you pull it out to check what is going on you discover to your surprise it returned to its human state just like before you entered the portal.");
+			setTongueType(Tongue.HUMAN);
+			changes++;
+		}
+
+		public function humanizeHairs():void {
+			var word1:String;
+			if (player.hairType == Hair.FEATHER) word1 = "feather";
+			else word1 = "quill";
+			if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft " + word1 + "-hair droops over your eye.  Before you can blow the offending down away, you realize the " + word1 + " is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
+			else outputText("\n\nYou run your fingers through your downy-soft " + word1 + "-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your " + word1 + "s.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
+			changes++;
+			setHairType(Hair.NORMAL);
 			changes++;
 		}
 

@@ -205,7 +205,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 
 		//(if PC uses tease/seduce after this)
 		//Deals big lust increase, despite her resistance.
-		override public function teased(lustDelta:Number):void
+		override public function teased(lustDelta:Number, isNotSilent:Boolean = false):void
 		{
 			if(hasStatusEffect(StatusEffects.Concentration)) {
 				outputText("Amily flushes hotly; her concentration only makes her pay more attention to your parts!");

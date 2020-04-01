@@ -7,20 +7,15 @@ package classes.Scenes.Monsters
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Places.HeXinDao;
-import classes.Scenes.SceneLib;
+import classes.CoC;
 import classes.internals.*;
+import classes.Scenes.Camp.CampMakeWinions;
+import classes.Scenes.SceneLib;
 
 public class GolemsDummy extends AbstractGolem
 	{
 		public var golems:HeXinDao = new HeXinDao();
-		
-		override public function defeated(hpVictory:Boolean):void
-		{
-			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) {
-				golems.gaunletchallange1fight2();
-			}
-			else SceneLib.combat.finishCombat();
-		}
+		public var campMake:CampMakeWinions = new CampMakeWinions();
 		
 		public function backhand():void {
 			outputText("The golems visage twists into a grimace of irritation, and few of them swings their hands at you in a vicious backhand.");
@@ -44,6 +39,15 @@ public class GolemsDummy extends AbstractGolem
 			else eAttack();
 		}
 		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) golems.gaunletchallange1fight2();
+			else {
+				if (player.hasStatusEffect(StatusEffects.SoulArena)) SceneLib.combat.finishCombat();
+				else campMake.postFightGolemOptions2();
+			}
+		}
+		
 		public function GolemsDummy() 
 		{
 			super(true);
@@ -54,8 +58,7 @@ public class GolemsDummy extends AbstractGolem
 			initStrTouSpeInte(20, 20, 10, 10);
 			initWisLibSensCor(10, 10, 10, 50);
 			this.tallness = 72;
-			this.drop = new ChainedDrop()
-					.add(useables.GOLCORE, 1);
+			this.drop = NO_DROP;
 			this.level = 6;
 			this.bonusHP = 50;
 			this.additionalXP = 50;

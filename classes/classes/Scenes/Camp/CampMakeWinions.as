@@ -10,74 +10,110 @@ package classes.Scenes.Camp
 	
 	public class CampMakeWinions extends BaseContent
 	{
-		
 		public function CampMakeWinions() 
 		{}
+		
+		//-----------
+		//
+		//  GOLEMS
+		//
+		//-----------
 		
 		//TEMPORAL_GOLEMS_BAG and PERNAMENT_GOLEMS_BAG - pretty easy to quess: amount of temp or perm golems PC have in "golem bag"
 		
 		public function maxTemporalGolemsBagSize():Number {
 			var maxTemporalGolemsBagSizeCounter:Number = 0;
-			if (player.findPerk(PerkLib.JobGolemancer) >= 0) maxTemporalGolemsBagSizeCounter += 3;
-			if (player.findPerk(PerkLib.BeginnerGolemMaker) >= 0) maxTemporalGolemsBagSizeCounter += 1;
-			if (player.findPerk(PerkLib.ApprenticeGolemMaker) >= 0) maxTemporalGolemsBagSizeCounter += 1;
-			if (player.findPerk(PerkLib.ExpertGolemMaker) >= 0) maxTemporalGolemsBagSizeCounter += 1;
-			if (player.findPerk(PerkLib.GolemArmyLieutenant) >= 0) maxTemporalGolemsBagSizeCounter += 1;
-			if (player.findPerk(PerkLib.GolemArmyCaptain) >= 0) maxTemporalGolemsBagSizeCounter += 2;
-			if (player.findPerk(PerkLib.GolemArmyMajor) >= 0) maxTemporalGolemsBagSizeCounter += 3;
-			if (player.findPerk(PerkLib.GolemArmyColonel) >= 0) maxTemporalGolemsBagSizeCounter += 4;
-			if (player.findPerk(PerkLib.GolemArmyGeneral) >= 0) maxTemporalGolemsBagSizeCounter += 5;
-			if (player.findPerk(PerkLib.BiggerGolemBag1) >= 0) maxTemporalGolemsBagSizeCounter += 2;
-			if (player.findPerk(PerkLib.BiggerGolemBag2) >= 0) maxTemporalGolemsBagSizeCounter += 2;
-			if (player.findPerk(PerkLib.BiggerGolemBag3) >= 0) maxTemporalGolemsBagSizeCounter += 2;
-			if (player.findPerk(PerkLib.BiggerGolemBag4) >= 0) maxTemporalGolemsBagSizeCounter += 2;
-			if (player.findPerk(PerkLib.BiggerGolemBag5) >= 0) maxTemporalGolemsBagSizeCounter += 2;
-			if (player.findPerk(PerkLib.BiggerGolemBag6) >= 0) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.JobGolemancer)) maxTemporalGolemsBagSizeCounter += 5;
+			if (player.hasPerk(PerkLib.BeginnerGolemMaker)) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.ExpertGolemMaker)) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.GolemArmyLieutenant)) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.GolemArmyCaptain)) maxTemporalGolemsBagSizeCounter += 4;
+			if (player.hasPerk(PerkLib.GolemArmyMajor)) maxTemporalGolemsBagSizeCounter += 6;
+			if (player.hasPerk(PerkLib.GolemArmyColonel)) maxTemporalGolemsBagSizeCounter += 8;
+			if (player.hasPerk(PerkLib.GolemArmyGeneral)) maxTemporalGolemsBagSizeCounter += 10;
+			if (player.hasPerk(PerkLib.BiggerGolemBag1)) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.BiggerGolemBag2)) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.BiggerGolemBag3)) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.BiggerGolemBag4)) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.BiggerGolemBag5)) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.BiggerGolemBag6)) maxTemporalGolemsBagSizeCounter += 2;
 			return maxTemporalGolemsBagSizeCounter;
 		}
-		public function maxPernamentGolemsBagSize():Number {
-			var maxPernamentGolemsBagSizeCounter:Number = 0;
-			if (player.findPerk(PerkLib.MasterGolemMaker) >= 0) maxPernamentGolemsBagSizeCounter += 1;
-			if (player.findPerk(PerkLib.GrandMasterGolemMaker) >= 0) maxPernamentGolemsBagSizeCounter += 1;
-			if (player.findPerk(PerkLib.EpicGolemMaker) >= 0) maxPernamentGolemsBagSizeCounter += 1;
-			if (player.findPerk(PerkLib.LegendaryGolemMaker) >= 0) maxPernamentGolemsBagSizeCounter += 1;
-			if (player.findPerk(PerkLib.MythicalGolemMaker) >= 0) maxPernamentGolemsBagSizeCounter += 1;
-			if (player.findPerk(PerkLib.GolemArmyLieutenant) >= 0) maxPernamentGolemsBagSizeCounter += 1;
-			if (player.findPerk(PerkLib.GolemArmyCaptain) >= 0) maxPernamentGolemsBagSizeCounter += 2;
-			if (player.findPerk(PerkLib.GolemArmyMajor) >= 0) maxPernamentGolemsBagSizeCounter += 3;
-			if (player.findPerk(PerkLib.GolemArmyColonel) >= 0) maxPernamentGolemsBagSizeCounter += 4;
-			if (player.findPerk(PerkLib.GolemArmyGeneral) >= 0) maxPernamentGolemsBagSizeCounter += 5;
-			if (player.findPerk(PerkLib.MasterGolemMaker) >= 0) {
-				if (player.findPerk(PerkLib.BiggerGolemBag1) >= 0) maxPernamentGolemsBagSizeCounter += 1;
-				if (player.findPerk(PerkLib.BiggerGolemBag2) >= 0) maxPernamentGolemsBagSizeCounter += 1;
-				if (player.findPerk(PerkLib.BiggerGolemBag3) >= 0) maxPernamentGolemsBagSizeCounter += 1;
-				if (player.findPerk(PerkLib.BiggerGolemBag4) >= 0) maxPernamentGolemsBagSizeCounter += 1;
-				if (player.findPerk(PerkLib.BiggerGolemBag5) >= 0) maxPernamentGolemsBagSizeCounter += 1;
-				if (player.findPerk(PerkLib.BiggerGolemBag6) >= 0) maxPernamentGolemsBagSizeCounter += 1;
+		public function maxPernamentStoneGolemsBagSize():Number {
+			var maxPernamentStoneGolemsBagSizeCounter:Number = 0;
+			if (player.hasPerk(PerkLib.MasterGolemMaker)) maxPernamentStoneGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) maxPernamentStoneGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.EpicGolemMaker)) maxPernamentStoneGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) maxPernamentStoneGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) maxPernamentStoneGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.GolemArmyLieutenant)) maxPernamentStoneGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.GolemArmyCaptain)) maxPernamentStoneGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.GolemArmyMajor)) maxPernamentStoneGolemsBagSizeCounter += 3;
+			if (player.hasPerk(PerkLib.GolemArmyColonel)) maxPernamentStoneGolemsBagSizeCounter += 4;
+			if (player.hasPerk(PerkLib.GolemArmyGeneral)) maxPernamentStoneGolemsBagSizeCounter += 5;
+			if (player.hasPerk(PerkLib.MasterGolemMaker)) {
+				if (player.hasPerk(PerkLib.BiggerGolemBag1)) maxPernamentStoneGolemsBagSizeCounter += 1;
+				if (player.hasPerk(PerkLib.BiggerGolemBag2)) maxPernamentStoneGolemsBagSizeCounter += 1;
+				if (player.hasPerk(PerkLib.BiggerGolemBag3)) maxPernamentStoneGolemsBagSizeCounter += 1;
+				if (player.hasPerk(PerkLib.BiggerGolemBag4)) maxPernamentStoneGolemsBagSizeCounter += 1;
+				if (player.hasPerk(PerkLib.BiggerGolemBag5)) maxPernamentStoneGolemsBagSizeCounter += 1;
+				if (player.hasPerk(PerkLib.BiggerGolemBag6)) maxPernamentStoneGolemsBagSizeCounter += 1;
 			}
-			return maxPernamentGolemsBagSizeCounter;
+			return maxPernamentStoneGolemsBagSizeCounter;
+		}
+		public function maxPernamentImprovedStoneGolemsBagSize():Number {
+			var maxPernamentImprovedStoneGolemsBagSizeCounter:Number = 0;
+			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) maxPernamentImprovedStoneGolemsBagSizeCounter += 1;
+			if (player.hasPerk(PerkLib.GolemArmyGeneral)) maxPernamentImprovedStoneGolemsBagSizeCounter += 1;
+			return maxPernamentImprovedStoneGolemsBagSizeCounter;
+		}
+		public function maxPernamentSteelGolemsBagSize():Number {
+			var maxPernamentSteelGolemsBagSizeCounter:Number = 0;
+			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) maxPernamentSteelGolemsBagSizeCounter += 1;
+			return maxPernamentSteelGolemsBagSizeCounter;
+		}
+		public function maxPernamentImprovedSteelGolemsBagSize():Number {
+			var maxPernamentImprovedSteelGolemsBagSizeCounter:Number = 0;
+			
+			return maxPernamentImprovedSteelGolemsBagSizeCounter;
 		}
 		public function maxReusableGolemCoresBagSize():Number {
 			var maxReusableGolemCoresBagSizeCounter:Number = 0;
 			if (maxTemporalGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxTemporalGolemsBagSize();
-			if (maxPernamentGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxPernamentGolemsBagSize();
+			if (maxPernamentStoneGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxPernamentStoneGolemsBagSize();
+			if (maxPernamentImprovedStoneGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxPernamentImprovedStoneGolemsBagSize();
+			if (maxPernamentSteelGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxPernamentSteelGolemsBagSize();
+			if (maxPernamentImprovedSteelGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxPernamentImprovedSteelGolemsBagSize();
 			if (player.findPerk(PerkLib.BeginnerGolemMaker) >= 0) maxReusableGolemCoresBagSizeCounter += 2;
-			maxReusableGolemCoresBagSizeCounter *= 2;
+			maxReusableGolemCoresBagSizeCounter *= 3;
 			return maxReusableGolemCoresBagSizeCounter;
 		}
 		public function temporalGolemMakingCost():Number {
 			var tempGolemCost:Number = 50;
-			if (player.findPerk(PerkLib.ApprenticeGolemMaker) >= 0) tempGolemCost -= 10;
-			if (player.findPerk(PerkLib.ChargedCore) >= 0) tempGolemCost += 20;
-			if (player.findPerk(PerkLib.SuperChargedCore) >= 0) tempGolemCost += 20;
+			if (player.hasPerk(PerkLib.ApprenticeGolemMaker)) tempGolemCost -= 10;
+			if (player.hasPerk(PerkLib.ChargedCore)) tempGolemCost += 20;
+			if (player.hasPerk(PerkLib.SuperChargedCore)) tempGolemCost += 20;
 			return tempGolemCost;
 		}
-		public function pernamentGolemMakingCost():Number {
+		public function pernamentStoneGolemMakingCost():Number {
 			var permGolemCost:Number = 90;
-			if (player.findPerk(PerkLib.GrandMasterGolemMaker) >= 0) permGolemCost += 10;
-			if (player.findPerk(PerkLib.EpicGolemMaker) >= 0) permGolemCost += 50;
-			if (player.findPerk(PerkLib.LegendaryGolemMaker) >= 0) permGolemCost += 150;
-			if (player.findPerk(PerkLib.MythicalGolemMaker) >= 0) permGolemCost += 400;
+			if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) permGolemCost += 10;
+			if (player.hasPerk(PerkLib.EpicGolemMaker)) permGolemCost += 50;
+			if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) permGolemCost += 150;
+			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) permGolemCost += 400;
+			return permGolemCost;
+		}
+		public function pernamentImprovedStoneGolemMakingCost():Number {
+			var permGolemCost:Number = 900;
+			return permGolemCost;
+		}
+		public function pernamentSteelGolemMakingCost():Number {
+			var permGolemCost:Number = 200;
+			return permGolemCost;
+		}
+		public function pernamentImprovedSteelGolemMakingCost():Number {
+			var permGolemCost:Number = 2000;
 			return permGolemCost;
 		}
 
@@ -85,11 +121,17 @@ package classes.Scenes.Camp
 			clearOutput();
 			outputText("What helper would you like to make?\n\n");
 			outputText("Stored golem cores for future reuse when making new golems: " + flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] + " / " + maxReusableGolemCoresBagSize() + "\n");
-			if (player.findPerk(PerkLib.JobGolemancer) >= 0) outputText("Temporal Golems Bag: " + flags[kFLAGS.TEMPORAL_GOLEMS_BAG] + " / " + maxTemporalGolemsBagSize() + " golems\n");
-			if (player.findPerk(PerkLib.MasterGolemMaker) >= 0) outputText("Permanent Golems Bag: " + flags[kFLAGS.PERNAMENT_GOLEMS_BAG] + " / " + maxPernamentGolemsBagSize() + " golems\n");
+			if (player.hasPerk(PerkLib.JobGolemancer)) outputText("Temporal Golems Bag: " + flags[kFLAGS.TEMPORAL_GOLEMS_BAG] + " / " + maxTemporalGolemsBagSize() + " golems\n");
+			if (player.hasPerk(PerkLib.MasterGolemMaker)) outputText("Stone Golems Bag: " + flags[kFLAGS.PERNAMENT_GOLEMS_BAG] + " / " + maxPernamentStoneGolemsBagSize() + " golems\n");
+			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) outputText("Improved Stone Golems Bag: " + flags[kFLAGS.IMPROVED_PERNAMENT_GOLEMS_BAG] + " / " + maxPernamentImprovedStoneGolemsBagSize() + " golems\n");
 			menu();
-			if (player.findPerk(PerkLib.JobGolemancer) >= 0) addButton(0, "T.S.Golem", makeTemporalStoneGolem).hint("Make most simply golem made of pile of stones.  <b>It will cruble after one attack!</b>\n\nCost: 1 Golem Core, " + temporalGolemMakingCost() + " Mana");
-			if (player.findPerk(PerkLib.MasterGolemMaker) >= 0) addButton(1, "P.S.Golem", makePernamentStoneGolem).hint("Make simply stone golem.</b>\n\nCost: 1 Golem Core, 10 Stones, " + pernamentGolemMakingCost() + " Mana");
+			if (player.hasPerk(PerkLib.JobGolemancer)) addButton(0, "T.S.Golem", makeTemporalStoneGolem).hint("Make the most simple golem out of a pile of stones.  <b>It will crumble after one attack!</b>\n\nCost: 1 Golem Core, " + temporalGolemMakingCost() + " Mana");
+			if (player.hasPerk(PerkLib.MasterGolemMaker)) addButton(1, "P.S.Golem", makePernamentStoneGolem).hint("Make stone golem.\n\nCost: 1 Golem Core, 10 Stones, " + pernamentStoneGolemMakingCost() + " Mana");
+			/*if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) */addButtonDisabled(2, "M.S.Golem", "Make metal golem.\n\nSoon");//Cost: 2 Golem Plasma Cores, 10 Stones, 10 Metal Plates, 10 Mechanisms, i coś jeszcze innego? " + pernamentSteelGolemMakingCost() + " Mana
+			if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) addButton(5, "T.S.Golem(5x)", makeTemporalStoneGolems).hint("Make five of most simple golems.  <b>They will crumble after one attack!</b>\n\nCost: 5 Golem Core, " + temporalGolemMakingCost() * 5 + " Mana");
+			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) addButton(6, "I.P.S.Golem", makePernamentImprovedStoneGolem).hint("Make improved stone golem.\n\nCost: 3 Golem Cores, 100 Stones, " + pernamentImprovedStoneGolemMakingCost() + " Mana");
+			addButtonDisabled(7, "I.M.S.Golem", "Make improved metal golem.\n\nSoon");//Cost: 2 Golem ?Plasma? Cores, 10 Stones, 10 Metal Plates, 10 Metal Plates, " + pernamentImprovedSteelGolemMakingCost() + " Mana
+			addButtonDisabled(12, "Upgrades", "Options to upgrade pernament golems.");
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) addButton(13, "TakeOutCore", takeOutGolemCoreFromGolemBag).hint("Take out one golem core from 'golem bag'.");
 			addButton(14, "Back", playerMenu);
 		}
@@ -101,8 +143,8 @@ package classes.Scenes.Camp
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (!player.hasItem(useables.GOLCORE, 1)) {
-				outputText("You lack golem core to finish golem creation.");
+			else if (!player.hasItem(useables.GOLCORE, 1) && flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] == 0) {
+				outputText("You lack a golem core to finish the creation of a golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -119,17 +161,44 @@ package classes.Scenes.Camp
 			if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] < 1) flags[kFLAGS.TEMPORAL_GOLEMS_BAG] = 1;
 			else flags[kFLAGS.TEMPORAL_GOLEMS_BAG]++;
 			doNext(accessMakeWinionsMainMenu);
-			cheatTime(1/4);
+			if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) cheatTime2(5);
+			else cheatTime2(10);
+		}
+		public function makeTemporalStoneGolems():void {
+			clearOutput();
+			if (player.mana < (temporalGolemMakingCost() * 5)) {
+				outputText("Your mana is too low to finish golems creation.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (!player.hasItem(useables.GOLCORE, 5) && flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < 5) {
+				outputText("You lack golem cores to finish the creation of the golems.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > (maxTemporalGolemsBagSize() - 5)) {
+				outputText("You not having enough space to store all five.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 4) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] -= 5;
+			else player.destroyItems(useables.GOLCORE, 5);
+			useMana(temporalGolemMakingCost());
+			statScreenRefresh();
+			outputText("You draw a complex seal on the ground with 5 node points at which you put piles of stones that will soon be your servants. Once done you put a golem core in each pile, stand back and begin to seep your mana inside of the seal till each pile becomes a 6 feet tall golem. Finishing the work on your creations, you store them in your 'golem bag'.");
+			flags[kFLAGS.TEMPORAL_GOLEMS_BAG] += 5;
+			doNext(accessMakeWinionsMainMenu);
+			cheatTime2(20);
 		}
 		public function makePernamentStoneGolem():void {
 			clearOutput();
-			if (player.mana < pernamentGolemMakingCost()) {
+			if (player.mana < pernamentStoneGolemMakingCost()) {
 				outputText("Your mana is too low to finish golem creation.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (!player.hasItem(useables.GOLCORE, 1)) {
-				outputText("You lack golem core to finish golem creation.");
+				outputText("You lack a golem core to finish the creation of a golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -138,7 +207,7 @@ package classes.Scenes.Camp
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] == maxPernamentGolemsBagSize()) {
+			else if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] == maxPernamentStoneGolemsBagSize()) {
 				outputText("You not having enough space to store another one.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
@@ -146,12 +215,47 @@ package classes.Scenes.Camp
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]--;
 			else player.destroyItems(useables.GOLCORE, 1);
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 10;
-			useMana(pernamentGolemMakingCost());
+			useMana(pernamentStoneGolemMakingCost());
 			statScreenRefresh();
 			outputText("You draw a seal in the ground around the pile of high quality stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
 			if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] < 1) flags[kFLAGS.PERNAMENT_GOLEMS_BAG] = 1;
 			else flags[kFLAGS.PERNAMENT_GOLEMS_BAG]++;
 			doNext(accessMakeWinionsMainMenu);
+			cheatTime2(20);
+		}
+		public function makePernamentImprovedStoneGolem():void {
+			clearOutput();
+			if (player.mana < pernamentImprovedStoneGolemMakingCost()) {
+				outputText("Your mana is too low to finish golem creation.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (!player.hasItem(useables.GOLCORE, 3)) {
+				outputText("You lack golem cores to finish golem creation.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] < 100) {
+				outputText("You lack high quality stones to use as body for your new golem.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			else if (flags[kFLAGS.IMPROVED_PERNAMENT_GOLEMS_BAG] == maxPernamentImprovedStoneGolemsBagSize()) {
+				outputText("You not having enough space to store another one.");
+				doNext(accessMakeWinionsMainMenu);
+				return;
+			}
+			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 3) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] -= 3;
+			else player.destroyItems(useables.GOLCORE, 3);
+			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 100;
+			useMana(pernamentImprovedStoneGolemMakingCost());
+			statScreenRefresh();
+			outputText("You draw a seal in the ground around the pile of high quality stones, which were arranged in the form of a gigantic four armed shape. Once done you put the golem cores in a pile at the golem's future chest in a triangle formation. You stand back and begin to seep your mana toward the laying stones. ");
+			outputText("Slowly all the stones and cores connect with threads of magic, forming a 16 feet tall shape. Finishing the work by making some last adjustments to cores you store it in your 'golem bag'.");
+			if (flags[kFLAGS.IMPROVED_PERNAMENT_GOLEMS_BAG] < 1) flags[kFLAGS.IMPROVED_PERNAMENT_GOLEMS_BAG] = 1;
+			else flags[kFLAGS.IMPROVED_PERNAMENT_GOLEMS_BAG]++;
+			doNext(accessMakeWinionsMainMenu);
+			cheatTime2(60);
 		}
 
 		public function takeOutGolemCoreFromGolemBag():void {
@@ -160,6 +264,109 @@ package classes.Scenes.Camp
 			flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]--;
 			inventory.takeItem(useables.GOLCORE, accessMakeWinionsMainMenu);
 		}
+		
+		public function postFightGolemOptions1():void {
+			clearOutput();
+			outputText("Placeholder text 1.");
+			menu();
+			addButton(1, "Leave", cleanupAfterCombat);
+			addButton(3, "Scavenge", golemScavenge1);
+		}
+		public function postFightGolemOptions2():void {
+			clearOutput();
+			if (!player.hasStatusEffect(StatusEffects.GolemScavenge)) player.createStatusEffect(StatusEffects.GolemScavenge,2 + rand(2),0,0,0);
+			outputText("Placeholder text 1. Amount of golems you can scavenge: "+player.statusEffectv1(StatusEffects.GolemScavenge)+"");
+			menu();
+			addButton(1, "Leave", cleanupAfterCombat);
+			addButton(3, "Scavenge", golemScavenge2);
+		}
+		public function postFightGolemOptions3():void {
+			clearOutput();
+			outputText("Placeholder text 1.");
+			menu();
+			addButton(1, "Leave", cleanupAfterCombat);
+			addButton(3, "Scavenge", golemScavenge3);
+		}
+		public function postFightGolemOptions4():void {
+			clearOutput();
+			if (!player.hasStatusEffect(StatusEffects.GolemScavenge)) player.createStatusEffect(StatusEffects.GolemScavenge,2 + rand(2),1,0,0);
+			outputText("Placeholder text 1. Amount of golems you can scavenge: "+player.statusEffectv1(StatusEffects.GolemScavenge)+"");
+			menu();
+			addButton(1, "Leave", cleanupAfterCombat);
+			addButton(3, "Scavenge", golemScavenge4);
+		}
+		private function golemScavenge1():void {
+			clearOutput();
+			outputText("Placeholder text 2. ");
+			if (rand(4) == 0 || player.hasPerk(PerkLib.JobGolemancer)) {
+				outputText("Placeholder text. On success.");
+				doNext(takeCore);
+			}
+			else {
+				outputText("Placeholder text. On failure.");
+				doNext(cleanupAfterCombat);
+			}
+		}
+		private function golemScavenge2():void {
+			clearOutput();
+			outputText("Placeholder text 2. ");
+			player.addStatusValue(StatusEffects.GolemScavenge, 1, -1);
+			if (rand(4) == 0 || player.statusEffectv1(StatusEffects.GolemScavenge) == 0 || player.hasPerk(PerkLib.JobGolemancer)) {
+				outputText("Placeholder text. On success.");
+				doNext(takeCore);
+			}
+			else {
+				outputText("Placeholder text. On failure.");
+				if (player.hasStatusEffect(StatusEffects.GolemScavenge)) doNext(golemScavenge2);
+				else doNext(cleanupAfterCombat);
+			}
+		}
+		private function golemScavenge3():void {
+			clearOutput();
+			outputText("Placeholder text 2. ");
+			if (rand(4) == 0 || player.hasPerk(PerkLib.JobGolemancer)) {
+				outputText("Placeholder text. +2 stones. On success.");
+				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += 2;
+				doNext(takeCore);
+			}
+			else {
+				outputText("Placeholder text. +5 stones. On failure.");
+				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += 5;
+				doNext(cleanupAfterCombat);
+			}
+		}
+		private function golemScavenge4():void {
+			clearOutput();
+			outputText("Placeholder text 2. ");
+			player.addStatusValue(StatusEffects.GolemScavenge, 1, -1);
+			if (rand(4) == 0 || player.statusEffectv1(StatusEffects.GolemScavenge) == 0 || player.hasPerk(PerkLib.JobGolemancer)) {
+				outputText("Placeholder text. +2 stones. On success.");
+				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += 2;
+				doNext(takeCore);
+			}
+			else {
+				outputText("Placeholder text. +5 stones. On failure.");
+				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += 5;
+				if (player.hasStatusEffect(StatusEffects.GolemScavenge)) doNext(golemScavenge4);
+				else doNext(cleanupAfterCombat);
+			}
+		}
+		private function takeCore():void {
+			if (player.statusEffectv1(StatusEffects.GolemScavenge) > 0) {
+				if (player.statusEffectv2(StatusEffects.GolemScavenge) > 0) inventory.takeItem(useables.GOLCORE, golemScavenge4);
+				else inventory.takeItem(useables.GOLCORE, golemScavenge2);
+			}
+			else {
+				player.removeStatusEffect(StatusEffects.GolemScavenge);
+				inventory.takeItem(useables.GOLCORE, cleanupAfterCombat);
+			}
+		}
+		
+		//---------------
+		//
+		//  ELEMENTALS
+		//
+		//---------------
 		
 		public function maxSizeOfElementalsArmy():Number {
 			var maxSizeOfElementalsArmyCounter:Number = 0;
@@ -973,7 +1180,7 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 10) addButton(11, "Purity", rankUpElementalPurity).hint("1000 mana, 500 fatigue");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 10) addButton(12, "Corruption", rankUpElementalCorruption).hint("1000 mana, 500 fatigue");
 			}
-			addButton(14, "Back", accessSummonElementalsMainMenu2);
+			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu11th():void {
 			outputText("\n\nIf you not have enough mana (1100+) and fatigue (550+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
@@ -993,7 +1200,7 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 11) addButton(11, "Purity", rankUpElementalPurity).hint("1100 mana, 550 fatigue");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 11) addButton(12, "Corruption", rankUpElementalCorruption).hint("1100 mana, 550 fatigue");
 			}
-			addButton(14, "Back", accessSummonElementalsMainMenu2);
+			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu12th():void {
 			outputText("\n\nIf you not have enough mana (1200+) and fatigue (600+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
@@ -1013,7 +1220,7 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 12) addButton(11, "Purity", rankUpElementalPurity).hint("1200 mana, 600 fatigue");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 12) addButton(12, "Corruption", rankUpElementalCorruption).hint("1200 mana, 600 fatigue");
 			}
-			addButton(14, "Back", accessSummonElementalsMainMenu2);
+			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu13th():void {
 			outputText("\n\nIf you not have enough mana (1300+) and fatigue (650+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
@@ -1033,7 +1240,7 @@ package classes.Scenes.Camp
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) == 13) addButton(11, "Purity", rankUpElementalPurity).hint("1300 mana, 650 fatigue");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) == 13) addButton(12, "Corruption", rankUpElementalCorruption).hint("1300 mana, 650 fatigue");
 			}
-			addButton(14, "Back", accessSummonElementalsMainMenu2);
+			addButton(14, "Back", accessSummonElementalsMainMenu1);
 		}
 		private function rankUpSubmenu14th():void {
 			outputText("\n\nIf you not have enough mana (1400+) and fatigue (700+) it will be impossible to rank up any of your elementals. And even if you got it whole process can end in failure.\n\n");
@@ -1403,11 +1610,8 @@ package classes.Scenes.Camp
 			statScreenRefresh();
 			outputText("As it will be your first time summoning an air elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The air elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
 			outputText("The binding circle holds however acting as a mighty barrier the creature cannot breach. As the restraint rune takes hold it slowly shrink in size to something you can properly control. Their duty fulfilled the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is finally complete congratulation is in order as you bound your very own air elemental!</b>\"");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
-			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsAir, 1, 1, 0, 0);
-			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			finishingSummoningElemental();
 		}
 		private function summonElementalEarth():void {
 			clearOutput();
@@ -1416,11 +1620,8 @@ package classes.Scenes.Camp
 			statScreenRefresh();
 			outputText("As it will be your first time summoning an earth elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The earth elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
 			outputText("The binding circle holds however acting as a mighty barrier the creature cannot breach. As the restraint rune takes hold it slowly shrink in size to something you can properly control. Their duty fulfilled the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is finally complete congratulation is in order as you bound your very own earth elemental!</b>\"");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
-			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsEarth, 1, 1, 0, 0);
-			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			finishingSummoningElemental();
 		}
 		private function summonElementalFire():void {
 			clearOutput();
@@ -1429,11 +1630,8 @@ package classes.Scenes.Camp
 			statScreenRefresh();
 			outputText("As it will be your first time summoning a fire elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The fire elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
 			outputText("The binding circle holds however acting as a mighty barrier the creature cannot breach. As the restraint rune takes hold it slowly shrink in size to something you can properly control. Their duty fulfilled the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is finally complete congratulation is in order as you bound your very own fire elemental!</b>\"");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
-			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsFire, 1, 1, 0, 0);
-			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			finishingSummoningElemental();
 		}
 		private function summonElementalWater():void {
 			clearOutput();
@@ -1442,11 +1640,8 @@ package classes.Scenes.Camp
 			statScreenRefresh();
 			outputText("As it will be your first time summoning a water elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The water elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
 			outputText("The binding circle holds however acting as a mighty barrier the creature cannot breach. As the restraint rune takes hold it slowly shrink in size to something you can properly control. Their duty fulfilled the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is finally complete congratulation is in order as you bound your very own water elemental!</b>\"");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
-			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsWater, 1, 1, 0, 0);
-			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			finishingSummoningElemental();
 		}
 		private function summonElementalIce():void {
 			clearOutput();
@@ -1455,11 +1650,8 @@ package classes.Scenes.Camp
 			statScreenRefresh();
 			outputText("As it will be your first time summoning an ice elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The ice elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
 			outputText("The binding circle holds however acting as a mighty barrier the creature cannot breach. As the restraint rune takes hold it slowly shrink in size to something you can properly control. Their duty fulfilled the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is finally complete congratulation is in order as you bound your very own ice elemental!</b>\"");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
-			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsIce, 1, 1, 0, 0);
-			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			finishingSummoningElemental();
 		}
 		private function summonElementalLightning():void {
 			clearOutput();
@@ -1468,11 +1660,8 @@ package classes.Scenes.Camp
 			statScreenRefresh();
 			outputText("As it will be your first time summoning a lightning elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The lightning elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
 			outputText("The binding circle holds however acting as a mighty barrier the creature cannot breach. As the restraint rune takes hold it slowly shrink in size to something you can properly control. Their duty fulfilled the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is finally complete congratulation is in order as you bound your very own lightning elemental!</b>\"");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
-			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsLightning, 1, 1, 0, 0);
-			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			finishingSummoningElemental();
 		}
 		private function summonElementalDarkness():void {
 			clearOutput();
@@ -1481,11 +1670,8 @@ package classes.Scenes.Camp
 			statScreenRefresh();
 			outputText("As it will be your first time summoning a darkness elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The darkness elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
 			outputText("The binding circle holds however acting as a mighty barrier the creature cannot breach. As the restraint rune takes hold it slowly shrink in size to something you can properly control. Their duty fulfilled the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is finally complete congratulation is in order as you bound your very own darkness elemental!</b>\"");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
-			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsDarkness, 1, 1, 0, 0);
-			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			finishingSummoningElemental();;
 		}
 		private function summonElementalWood():void {
 			clearOutput();
@@ -1494,11 +1680,8 @@ package classes.Scenes.Camp
 			statScreenRefresh();
 			outputText("As it will be your first time summoning a wood elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The wood elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
 			outputText("The binding circle holds however acting as a mighty barrier the creature cannot breach. As the restraint rune takes hold it slowly shrink in size to something you can properly control. Their duty fulfilled the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is finally complete congratulation is in order as you bound your very own wood elemental!</b>\"");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
-			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsWood, 1, 1, 0, 0);
-			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			finishingSummoningElemental();
 		}
 		private function summonElementalMetal():void {
 			clearOutput();
@@ -1507,11 +1690,8 @@ package classes.Scenes.Camp
 			statScreenRefresh();
 			outputText("As it will be your first time summoning a metal elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The metal elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
 			outputText("The binding circle holds however acting as a mighty barrier the creature cannot breach. As the restraint rune takes hold it slowly shrink in size to something you can properly control. Their duty fulfilled the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is finally complete congratulation is in order as you bound your very own metal elemental!</b>\"");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
-			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsMetal, 1, 1, 0, 0);
-			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			finishingSummoningElemental();;
 		}
 		private function summonElementalEther():void {
 			clearOutput();
@@ -1520,11 +1700,8 @@ package classes.Scenes.Camp
 			statScreenRefresh();
 			outputText("As it will be your first time summoning an ether elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The ether elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
 			outputText("The binding circle holds however acting as a mighty barrier the creature cannot breach. As the restraint rune takes hold it slowly shrink in size to something you can properly control. Their duty fulfilled the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is finally complete congratulation is in order as you bound your very own ether elemental!</b>\"");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
-			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsEther, 1, 1, 0, 0);
-			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			finishingSummoningElemental();
 		}
 		private function summonElementalPoison():void {
 			clearOutput();
@@ -1533,11 +1710,8 @@ package classes.Scenes.Camp
 			statScreenRefresh();
 			outputText("As it will be your first time summoning a poison elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The poison elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
 			outputText("The binding circle holds however acting as a mighty barrier the creature cannot breach. As the restraint rune takes hold it slowly shrink in size to something you can properly control. Their duty fulfilled the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is finally complete congratulation is in order as you bound your very own poison elemental!</b>\"");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
-			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsPoison, 1, 1, 0, 0);
-			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			finishingSummoningElemental();
 		}
 		private function summonElementalPurity():void {
 			clearOutput();
@@ -1546,11 +1720,8 @@ package classes.Scenes.Camp
 			statScreenRefresh();
 			outputText("As it will be your first time summoning a purity elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The purity elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
 			outputText("The binding circle holds however acting as a mighty barrier the creature cannot breach. As the restraint rune takes hold it slowly shrink in size to something you can properly control. Their duty fulfilled the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is finally complete congratulation is in order as you bound your very own purity elemental!</b>\"");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
-			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.SummonedElementalsPurity, 1, 1, 0, 0);
-			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			finishingSummoningElemental();
 		}
 		private function summonElementalCorruption():void {
 			clearOutput();
@@ -1559,11 +1730,14 @@ package classes.Scenes.Camp
 			statScreenRefresh();
 			outputText("As it will be your first time summoning a corruption elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The corruption elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
 			outputText("The binding circle holds however acting as a mighty barrier the creature cannot breach. As the restraint rune takes hold it slowly shrink in size to something you can properly control. Their duty fulfilled the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is finally complete congratulation is in order as you bound your very own corruption elemental!</b>\"");
+			player.createStatusEffect(StatusEffects.SummonedElementalsCorruption, 1, 1, 0, 0);
+			finishingSummoningElemental();
+		}
+		private function finishingSummoningElemental():void {
 			if (player.hasStatusEffect(StatusEffects.SummonedElementals)) player.addStatusValue(StatusEffects.SummonedElementals, 1, 1);
 			else player.createStatusEffect(StatusEffects.SummonedElementals, 1, 0, 0, 0);
-			player.createStatusEffect(StatusEffects.SummonedElementalsCorruption, 1, 1, 0, 0);
 			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			cheatTime2(30);
 		}
 		
 		private function rankUpElementalAir():void {
@@ -1581,7 +1755,7 @@ package classes.Scenes.Camp
 			}
 			else failToRankUpElemental();
 			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			cheatTime2(30);
 		}
 		private function rankUpElementalEarth():void {
 			clearOutput();
@@ -1598,7 +1772,7 @@ package classes.Scenes.Camp
 			}
 			else failToRankUpElemental();
 			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			cheatTime2(30);
 		}
 		private function rankUpElementalFire():void {
 			clearOutput();
@@ -1615,7 +1789,7 @@ package classes.Scenes.Camp
 			}
 			else failToRankUpElemental();
 			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			cheatTime2(30);
 		}
 		private function rankUpElementalWater():void {
 			clearOutput();
@@ -1632,7 +1806,7 @@ package classes.Scenes.Camp
 			}
 			else failToRankUpElemental();
 			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			cheatTime2(30);
 		}
 		private function rankUpElementalIce():void {
 			clearOutput();
@@ -1649,7 +1823,7 @@ package classes.Scenes.Camp
 			}
 			else failToRankUpElemental();
 			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			cheatTime2(30);
 		}
 		private function rankUpElementalLightning():void {
 			clearOutput();
@@ -1666,7 +1840,7 @@ package classes.Scenes.Camp
 			}
 			else failToRankUpElemental();
 			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			cheatTime2(30);
 		}
 		private function rankUpElementalDarkness():void {
 			clearOutput();
@@ -1683,7 +1857,7 @@ package classes.Scenes.Camp
 			}
 			else failToRankUpElemental();
 			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			cheatTime2(30);
 		}
 		private function rankUpElementalWood():void {
 			clearOutput();
@@ -1700,7 +1874,7 @@ package classes.Scenes.Camp
 			}
 			else failToRankUpElemental();
 			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			cheatTime2(30);
 		}
 		private function rankUpElementalMetal():void {
 			clearOutput();
@@ -1717,7 +1891,7 @@ package classes.Scenes.Camp
 			}
 			else failToRankUpElemental();
 			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			cheatTime2(30);
 		}
 		private function rankUpElementalEther():void {
 			clearOutput();
@@ -1734,7 +1908,7 @@ package classes.Scenes.Camp
 			}
 			else failToRankUpElemental();
 			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			cheatTime2(30);
 		}
 		private function rankUpElementalPoison():void {
 			clearOutput();
@@ -1751,7 +1925,7 @@ package classes.Scenes.Camp
 			}
 			else failToRankUpElemental();
 			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			cheatTime2(30);
 		}
 		private function rankUpElementalPurity():void {
 			clearOutput();
@@ -1768,7 +1942,7 @@ package classes.Scenes.Camp
 			}
 			else failToRankUpElemental();
 			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			cheatTime2(30);
 		}
 		private function rankUpElementalCorruption():void {
 			clearOutput();
@@ -1785,7 +1959,7 @@ package classes.Scenes.Camp
 			}
 			else failToRankUpElemental();
 			doNext(accessSummonElementalsMainMenu);
-			cheatTime(1/2);
+			cheatTime2(30);
 		}
 		private function rankUpElementalPart1():void {
 			outputText("It has been a while and your mastery of summoning has increased as a consequence. Now confident that you can contain it you head to the arcane circle and set up the ritual to release some of your servant restraints. You order your pet to stand still as you release the binding rune containing it. ");
@@ -1805,4 +1979,4 @@ package classes.Scenes.Camp
 		}
 	}
 
-}
+}

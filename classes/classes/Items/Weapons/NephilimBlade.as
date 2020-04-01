@@ -14,10 +14,12 @@ public class NephilimBlade extends Weapon
 			);
 		}
 		override public function get attack():Number {
-			var strMod:int = Math.floor(Math.min(game.player.str, 150))/50;
-			var boost:int = (6 * strMod) + 5;
-			boost += (20 - game.player.cor / 3);
-			return (5 + boost);
+			var boost:int = 0;
+			if (game.player.str >= 150) boost += 20;
+			if (game.player.str >= 100) boost += 15;
+			if (game.player.str >= 50) boost += 10;
+			boost += Math.round((100-game.player.cor) / 10);
+			return (7 + boost);
 		}
 	}
 

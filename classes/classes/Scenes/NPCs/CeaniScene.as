@@ -428,7 +428,7 @@ public function underwaterDateMaleVer():void
 	}
 	if (player.cocks[x].cockLength < 22) outputText(" Still something tells you if your cock was bigger Ceani might like it more. Your dick felt like a small key trying to fit an oversized lock.");
 	outputText("\n\n");
-	player.orgasm();
+	player.sexReward("vaginalFluids","Dick");
 	doNext(camp.returnToCampUseTwoHours);
 }
 
@@ -445,12 +445,12 @@ public function underwaterDateFemaleVer():void
 	outputText("When you wake up Ceani is by your side and you are back on the beach. You can only guess the orca brought you out of the water.");
 	if (flags[kFLAGS.CEANI_FOLLOWER] == 1) {
 		outputText("Having had a great time the two of you head back to camp hand in hand.\n\n");
-		player.orgasm();
+		player.sexReward("vaginalFluids");
 	}
 	else {
 		outputText(" You think you could prolong your session of earlier but you are interrupted by Ceani’s stomach rumble.\n\n\"<i>Well I guess it’s time that I go back to fishing. Come back anytime [name]!</i>\"\n\n");
 		outputText("On these words, she put back her bikini and heads to the water and dive, disappearing under the waves. You dress up and head back to camp thinking that you should visit more often.\n\n");
-		player.orgasm();
+		player.sexReward("vaginalFluids");
 		ceaniAffection(6);
 	}
 	doNext(camp.returnToCampUseTwoHours);
@@ -541,7 +541,7 @@ public function beachDateMaleVer():void {
 	}
 	if (player.cocks[x].cockLength < 22) outputText(" Still something tells you if your cock was bigger Ceani might like it more. Your dick felt like a small key trying to fit an oversized lock.");
 	outputText("\n\n");
-	player.orgasm();
+	player.sexReward("vaginalFluids","Dick");
 	doNext(camp.returnToCampUseTwoHours);
 }
 
@@ -561,14 +561,14 @@ public function beachDateFemaleVer():void {
 	if (flags[kFLAGS.CEANI_FOLLOWER] == 1) {
 		outputText("\"<i>Well I guess it’s time to go back.</i>\"\n\n");
 		outputText("Having had a great time the two of you head back to camp hand in hand.\n\n");
-		player.orgasm();
+		player.sexReward("vaginalFluids");
 	}
 	else {
 		outputText("\"<i>Well I guess it’s time that I go back to fishing. Come back anytime [name]!</i>\"\n\n");
 		outputText("On these words she puts her bikini on and head to the water and dives, disappearing under the waves. You dress up and head back to camp thinking that you should visit more often.\n\n");
 		ceaniAffection(6);
 	}
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	doNext(camp.returnToCampUseTwoHours);
 }
 

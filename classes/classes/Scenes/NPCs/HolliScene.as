@@ -148,7 +148,11 @@ public function treeMenu(output:Boolean = true):void {
 		} else {
 			addButtonDisabled(2, "TentacleBone");
 		}
-		addButton(3, "TentacleDuel", uniquuuesexscene.alrauneExtraSceneWithHollicyntiaTentacleDuel);
+		if(player.countCocksOfType(CockTypesEnum.STAMEN)>4){
+			addButton(3, "TentacleDuel", uniquuuesexscene.alrauneExtraSceneWithHollicyntiaTentacleDuel);
+		} else {
+			addButtonDisabled(2, "TentacleDuel", "Requires <i>a lot</i> of tentacle (or stamen) cocks");
+		}
 		addButton(5,"Drink Sap", haveAMapleSyrupSnack);
 		if(flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(6,"Eat A Fruit", eatHolliFruit);
 		else addButtonDisabled(6,"Eat A Fruit");
@@ -993,7 +997,7 @@ private function fullOnTentacleTasticGangBangForHolli():void {
 	outputText("\n\nHolli climaxes again when your load passes into her vagina, deforming the petals slightly as it goes.  Her cunt-tentacles are similarly stretched by the force of your orgasm, distended by spermy knots that erupt inside them.  Jizz and girl-cum drip from the numerous twats, all five of them.  Those pussies aren't simply idly filled either.  They hungrily massage you throughout their own moments of bliss, actually providing a modicum of suction to draw even more spunk from your [balls].  You roar in triumph and thrust all ten at once, pushing them as deep into their chosen locations as you ride out of the ecstasy, spurting and shaking.");
 	outputText("\n\nYou come to a little while later.  Your myriad tentacles have retracted back to your groin, though a goodly number of them have a distinctly feminine odor clinging to them.  Holli is sagging back in her tree, covered in a pearly shine that can only be your fertile batter.  She's panting while the cum runs out and over her unimpeded, dripping from the canopy as well.");
 	outputText("\n\nStretching the kinks from your shoulders, you walk up to the confused cum-dump and say, \"<i>That's how you sow seed, little flower.</i>\"  Holli shudders, releasing a squirt of your goo from her twat.  You laugh and get dressed before departing, feeling blessedly sated.");
-	player.orgasm();
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("lib", .4, "sen", -3, "cor", 1);
 	flags[kFLAGS.TIMES_FUCKED_FLOWER]++;
 	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
@@ -1045,8 +1049,7 @@ private function vaginalDomHollisTentacruels():void {
 	flags[kFLAGS.TIMES_RIDDEN_FLOWER]++;
 	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
 	fertilizeHolli(false);
-	player.slimeFeed();
-	player.orgasm();
+	player.sexReward("cum","Vaginal");
 	dynStats("sen", -2, "cor", 1);
 	doNext(camp.returnToCampUseOneHour);
 }

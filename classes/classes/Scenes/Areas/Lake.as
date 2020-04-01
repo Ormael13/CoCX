@@ -52,13 +52,30 @@ use namespace CoC;
 				return;
 			}
 			//Etna
-			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0) {
+			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0 && (player.level >= 20)) {
 				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
 			if (player.exploredLake % 20 == 0) {
 				calluScene.ottahGirl();
+				return;
+			}
+			//Sword/Bow/Staff/Shield Discovery
+			if (!player.hasStatusEffect(StatusEffects.TookBlessedSword) && !player.hasStatusEffect(StatusEffects.BSwordBroken) && rand(5) == 0) {
+				swordInStone.findSwordInStone();
+				return;
+			}
+			if (!player.hasStatusEffect(StatusEffects.TookBlessedBow) && !player.hasStatusEffect(StatusEffects.BBowBroken) && rand(5) == 0) {
+				swordInStone.findBowInStone();
+				return;
+			}
+			if (!player.hasStatusEffect(StatusEffects.TookBlessedStaff) && !player.hasStatusEffect(StatusEffects.BStaffBroken) && rand(5) == 0) {
+				swordInStone.findStaffInStone();
+				return;
+			}
+			if (!player.hasStatusEffect(StatusEffects.TookBlessedShield) && !player.hasStatusEffect(StatusEffects.BShieldBroken) && rand(5) == 0) {
+				swordInStone.findShieldInStone();
 				return;
 			}
 			//Egg chooser
@@ -109,19 +126,15 @@ use namespace CoC;
 
 			//Encounter golems, goblins and imps in NG+
 			if (player.level >= 3 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0)
-				choice[choice.length] = 10;
+				choice[choice.length] = 9;
 				
 			//ONE TIME EVENTS
 			//Amily Village discovery
 			if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] == 0)
 				choice[choice.length] = 7;
-			//Sword/Bow/Staff/Shield Discovery
-			if (!player.hasStatusEffect(StatusEffects.TookBlessedBow) && !player.hasStatusEffect(StatusEffects.BBowBroken) && !player.hasStatusEffect(StatusEffects.TookBlessedShield) && !player.hasStatusEffect(StatusEffects.BShieldBroken)
-			&& !player.hasStatusEffect(StatusEffects.TookBlessedStaff) && !player.hasStatusEffect(StatusEffects.BStaffBroken) && !player.hasStatusEffect(StatusEffects.TookBlessedSword) && !player.hasStatusEffect(StatusEffects.BSwordBroken))
-				choice[choice.length] = 8;
 			//Pre-emptive chance of finding the boat
 			if (!player.hasStatusEffect(StatusEffects.BoatDiscovery))
-				choice[choice.length] = 9;
+				choice[choice.length] = 8;
 				
 			//CHOOSE YOUR POISON!
 			select = choice[rand(choice.length)];
@@ -133,19 +146,8 @@ use namespace CoC;
 			if (select == 7) {
 				SceneLib.amilyScene.discoverAmilyVillage();
 			}
-			//Pre-emptive chance of discovering the Beautiful Sword
-			else if (select == 8) {
-				if (player.hasStatusEffect(StatusEffects.TookBlessedSword)) {
-					if (player.hasStatusEffect(StatusEffects.TookBlessedBow)) {
-						if (player.hasStatusEffect(StatusEffects.TookBlessedStaff)) swordInStone.findShieldInStone();
-						else swordInStone.findStaffInStone();
-					}
-					else swordInStone.findBowInStone();
-				}
-				else swordInStone.findSwordInStone();
-			}
 			//Pre-emptive chance of finding the boat
-			else if (select == 9) {
+			else if (select == 8) {
 				SceneLib.boat.discoverBoat();
 			}
 			else if (select == 4) {
@@ -289,7 +291,7 @@ use namespace CoC;
 			else if (select == 6) {
 				SceneLib.rathazul.encounterRathazul();
 			}
-			else if (select == 10) {
+			else if (select == 9) {
 				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 				SceneLib.exploration.genericGolGobImpEncounters();
 			}

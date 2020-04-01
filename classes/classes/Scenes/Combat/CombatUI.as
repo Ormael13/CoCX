@@ -118,6 +118,7 @@ public class CombatUI extends BaseCombatContent {
 				break;
 			case "Pistol":
 			case "Rifle":
+			case "2H Firearm":
                 if (player.ammo <= 0)
                     btnRanged.show("Reload", combat.reloadWeapon1, "Your " + player.weaponRangeName + " is out of ammo.  You'll have to reload it before attack.");
                 else btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
@@ -128,7 +129,7 @@ public class CombatUI extends BaseCombatContent {
 		if (player.isFlying() && player.wings.type == Wings.BAT_ARM){btnRanged.disable("It would be rather difficult to aim while flapping your arms."); }
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) {
-				if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm") {
+				if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") {
 					if (player.isUsingGoblinMechFriendlyFirearms()) btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
 					else btnRanged.disable("Your firearms is not compatibile to be used with current piloted mech.");
 				}
@@ -328,45 +329,63 @@ public class CombatUI extends BaseCombatContent {
 			}
 		} else if (flags[kFLAGS.PLAYER_COMPANION_1] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) {
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") combat.comfoll.alvinaCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") combat.comfoll.amilyCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") combat.comfoll.auroraCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") combat.comfoll.etnaCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia") combat.comfoll.excelliaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") combat.comfoll.mitziCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") combat.comfoll.neisaCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Siegweird") combat.comfoll.siegweirdCombatActions();
 		} else if (flags[kFLAGS.PLAYER_COMPANION_2] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) {
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina") combat.comfoll.alvinaCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Amily") combat.comfoll.amilyCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Aurora") combat.comfoll.auroraCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Etna") combat.comfoll.etnaCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Excellia") combat.comfoll.excelliaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Mitzi") combat.comfoll.mitziCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") combat.comfoll.neisaCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Siegweird") combat.comfoll.siegweirdCombatActions();
 		} else if (flags[kFLAGS.PLAYER_COMPANION_3] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) {
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina") combat.comfoll.alvinaCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Amily") combat.comfoll.amilyCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Aurora") combat.comfoll.auroraCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Etna") combat.comfoll.etnaCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Excellia") combat.comfoll.excelliaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Mitzi") combat.comfoll.mitziCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Neisa") combat.comfoll.neisaCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Siegweird") combat.comfoll.siegweirdCombatActions();
 		}
 		
 		// Modifications - monster-special actions
-		if (monster is SandTrap) {
-			btnSpecial1.show("Climb", combat.wait2, "Climb the sand to move away from the sand trap.");
-		} else if (monster is Alraune) {
-			if (player.fatigueLeft() < 50) btnSpecial1.disable("You're too tired to struggle.");
-			else btnSpecial1.show("Struggle", combat.wait2, "Struggle to forcefully pull yourself a good distance away from plant woman.");
-		} else if (monster is DriderIncubus) {
-			var drider:DriderIncubus = monster as DriderIncubus;
-			if (!drider.goblinFree) btnSpecial1.show("Free Goblin", drider.freeGoblin);
-		} else if (monster is Lethice) {
-			var lethice:Lethice = monster as Lethice;
-			if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles)) {
-				if (player.lust < combat.magic.getWhiteMagicLustCap()
-					&& player.hasStatusEffect(StatusEffects.KnowsWhitefire)
-					&& !player.hasPerk(PerkLib.BloodMage)
-					&& player.mana >= 30) {
-					btnSpecial1.show("Dispell", lethice.dispellRapetacles);
+		if (!isPlayerPlayingWithElementalsOrGolems()) {
+			if (monster is SandTrap) {
+				btnSpecial1.show("Climb", combat.wait2, "Climb the sand to move away from the sand trap.");
+			} else if (monster is Alraune) {
+				if (player.fatigueLeft() < 50) btnSpecial1.disable("You're too tired to struggle.");
+				else btnSpecial1.show("Struggle", combat.wait2, "Struggle to forcefully pull yourself a good distance away from plant woman.");
+			} else if (monster is DriderIncubus) {
+				var drider:DriderIncubus = monster as DriderIncubus;
+				if (!drider.goblinFree) btnSpecial1.show("Free Goblin", drider.freeGoblin);
+			} else if (monster is Lethice) {
+				var lethice:Lethice = monster as Lethice;
+				if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles)) {
+					if (player.lust < combat.magic.getWhiteMagicLustCap()
+						&& player.hasStatusEffect(StatusEffects.KnowsWhitefire)
+						&& !player.hasPerk(PerkLib.BloodMage)
+						&& player.mana >= 30) {
+						btnSpecial1.show("Dispell", lethice.dispellRapetacles);
+					}
 				}
 			}
 		}
 	}
+	
+	private function isPlayerPlayingWithElementalsOrGolems():Boolean {
+	var dancingwithminions:Boolean = false;
+	if (player.hasPerk(PerkLib.FirstAttackElementals) && flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] != 1) dancingwithminions = true;
+	if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.pernamentgolemsendcost()) dancingwithminions = true;
+	return dancingwithminions;
+}
 	
 	internal function mainMenuWhenBound():void {
 		menu();

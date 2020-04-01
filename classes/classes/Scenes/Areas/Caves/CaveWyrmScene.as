@@ -73,7 +73,7 @@ public function winningOverCaveWyrmDMelting():void {
 		if (player.cocks.length > 1) player.removeCock(0, 1);
 		else player.killCocks(1);
 	}
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	cleanupAfterCombat();
 }
 public function loosingToCaveWyrm():void {
@@ -116,9 +116,7 @@ public function loosingToHermCaveWyrm():void {
 		outputText("The lizard herm begin to pant in delight as she forcefully pull in and out of you, slapping your [ass] at about every five thrusts. By the time she finally reach her orgasm, filling your abused hole full of glowing blue seed, your butt cheeks are imprinted red with her hand shape. Thankfully, you lose consciousness just as she ready for round two.\n\n");
 		outputText("When you wake up, she is already gone and your ass is still leaking with bluish fluorescent cum but at least she left your equipment in a tidy pile next to you.");
 	}
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-	player.orgasm();
+	player.sexReward("cum");
 	cleanupAfterCombat();
 }
 public function loosingToCaveWyrmDMelting():void {
@@ -150,7 +148,7 @@ public function loosingToCaveWyrmDMelting():void {
 		if (player.cocks.length > 1) player.removeCock(0, 1);
 		else player.killCocks(1);
 	}
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	cleanupAfterCombat();
 }
 		

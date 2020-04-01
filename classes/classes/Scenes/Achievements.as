@@ -242,9 +242,14 @@ public class Achievements extends BaseContent
 			addAchievement("The Lovable Snowman", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_III, "Have Nieve as lover (Christmas/Winter)", "", true);
 			addAchievement("Will You Be My Valentine?", kACHIEVEMENTS.HOLIDAY_VALENTINE, "Visit the Wet Bitch during Valentine's day. (Valentine)", "", true);
 			
-			titleAchievementSection("Survival/Realistic Mode"); //12 achievements
+			titleAchievementSection("Survival/Realistic Mode"); //15 achievements
 			addAchievement("Tastes Like Chicken", kACHIEVEMENTS.REALISTIC_TASTES_LIKE_CHICKEN, "Refill your hunger for the first time.");
-			addAchievement("Champion Needs Food Badly", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD, "Instantly refill your hunger from 0 to 100 in one go.");
+			addAchievement("Champion Needs Food Badly (1)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD, "Instantly refill your hunger from 0 to 100 in one go.");
+			addAchievement("Champion Needs Food Badly (2)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD_2, "Instantly refill your hunger from 0 to 250 in one go.");
+			addAchievement("Champion Needs Food Badly (3)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD_3, "Instantly refill your hunger from 0 to 500 in one go.");
+			addAchievement("Champion Needs Food Badly (4)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD_4, "Instantly refill your hunger from 0 to 1000 in one go.");
+			//addAchievement("Champion Needs Food Badly (5)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD, "Instantly refill your hunger from 0 to 2500 in one go.");
+			//addAchievement("Champion Needs Food Badly (6)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD, "Instantly refill your hunger from 0 to 5000 in one go.");
 			//addAchievement("Gourmand", kACHIEVEMENTS.REALISTIC_GOURMAND, "Refill hunger from 5 different sources.");
 			addAchievement("Glutton", kACHIEVEMENTS.REALISTIC_GLUTTON, "Eat while hunger is above 90.");
 			addAchievement("Epic Glutton", kACHIEVEMENTS.REALISTIC_EPIC_GLUTTON, "Eat while hunger is above 240.");
@@ -358,13 +363,22 @@ public class Achievements extends BaseContent
 			addAchievement("Goo Armor", kACHIEVEMENTS.GENERAL_GOO_ARMOR, "Wear the goo armor.");
 			addAchievement("Urta's True Lover", kACHIEVEMENTS.GENERAL_URTA_TRUE_LOVER, "Complete Urta's infertility quest then have her give birth to a baby fox.");
 			addAchievement("Dress-tacular", kACHIEVEMENTS.GENERAL_DRESSTACULAR, "Give Rubi every outfit available.");
-			addAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER, "Defeat corrupted Marae.", "", true);
-			addAchievement("Follow the Leader (1)", kACHIEVEMENTS.GENERAL_FOLLOW_THE_LEADER, "Get seven followers in the game.");//Get every follower in the game.
-			addAchievement("Gotta Love 'Em All (1)", kACHIEVEMENTS.GENERAL_GOTTA_LOVE_THEM_ALL, "Get eight lovers in the game.");//Get every lover in the game. (Nieve optional)
-			addAchievement("Meet Your " + player.mf("Master", "Mistress") + " (1)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER, "Get four slaves in the game. (Corrupt Jojo & Amily, and Bimbo Sophie optional.)");//Get every slave in the game.
-			addAchievement("Slaver", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE, "Get every slave in the game, including corrupt Jojo and Amily, and Bimbo Sophie.", "", true);
-			addAchievement("All Your People are Belong to Me (1)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME, "Obtain in total nineteen followers, lovers, and slaves. (Excluding mutual exclusivity)");//Obtain every follower, lover, and slave.
-			addAchievement("Scholar", kACHIEVEMENTS.GENERAL_SCHOLAR, "Fill out all codex entries available in the game.");
+			addAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER, "Defeat Marae.", "", true);
+			addAchievement("Follow the Leader (1)", kACHIEVEMENTS.GENERAL_FOLLOW_THE_LEADER, "Get seven followers in the game.");
+			addAchievement("Follow the Leader (2)", kACHIEVEMENTS.GENERAL_FOLLOW_THE_LEADER_2, "Get fourteen followers in the game.");
+			addAchievement("Follow the Leader (3)", kACHIEVEMENTS.GENERAL_FOLLOW_THE_LEADER_3, "Get twenty one followers in the game.");//Get every follower in the game.
+			addAchievement("Gotta Love 'Em All (1)", kACHIEVEMENTS.GENERAL_GOTTA_LOVE_THEM_ALL, "Get eight lovers in the game.");
+			addAchievement("Gotta Love 'Em All (2)", kACHIEVEMENTS.GENERAL_GOTTA_LOVE_THEM_ALL_2, "Get sixteen lovers in the game.");//Get every lover in the game. (Nieve optional)
+			addAchievement("Meet Your " + player.mf("Master", "Mistress") + " (1)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER, "Get four slaves in the game. (Corrupt Jojo & Amily, and Bimbo Sophie optional.)");
+			addAchievement("Meet Your " + player.mf("Master", "Mistress") + " (2)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_2, "Get eight slaves in the game. (Corrupt Jojo & Amily, and Bimbo Sophie optional.)");
+			//addAchievement("Meet Your " + player.mf("Master", "Mistress") + " (3)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_3, "Get twelve slaves in the game. (Corrupt Jojo & Amily, and Bimbo Sophie optional.)");//Get every slave in the game.
+			addAchievement("Slaver (1)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE, "Get six slaves in the game, including two optional.", "", true);
+			//addAchievement("Slaver (2)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE_2, "Get twelve slaves in the game, including four optional.", "", true);//Get every slave in the game, including corrupt Jojo and Amily, and Bimbo Sophie.
+			addAchievement("All Your People are Belong to Me (1)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME, "Obtain in total nineteen followers, lovers, and slaves. (Excluding mutual exclusivity)");
+			addAchievement("All Your People are Belong to Me (2)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME_2, "Obtain in total thirty eight followers, lovers, and slaves. (Excluding mutual exclusivity)");//Obtain every follower, lover, and slave.
+			addAchievement("Scholar (1)", kACHIEVEMENTS.GENERAL_SCHOLAR, "Fill out twenty codex entries available in the game.");
+			addAchievement("Scholar (2)", kACHIEVEMENTS.GENERAL_SCHOLAR_2, "Fill out thirty codex entries available in the game.");
+			//addAchievement("Scholar (3)", kACHIEVEMENTS.GENERAL_SCHOLAR_3, "Fill out fourty codex entries available in the game.");//Fill out all codex entries available in the game.
 			addAchievement("Freeloader", kACHIEVEMENTS.GENERAL_FREELOADER, "Visit the Kitsune's mansion 3 times.");
 			addAchievement("Schizophrenic", kACHIEVEMENTS.GENERAL_SCHIZO, "Go between pure and corrupt 4 times. (Threshold of 20 and 80 corruption)");
 			addAchievement("Clean Slate", kACHIEVEMENTS.GENERAL_CLEAN_SLATE, "Go from 100 corruption to zero for the first time.");
@@ -398,6 +412,7 @@ public class Achievements extends BaseContent
 			addAchievement("Deforester", kACHIEVEMENTS.GENERAL_DEFORESTER, "Cut down 100 wood pieces.");
 			addAchievement("Yabba Dabba Doo", kACHIEVEMENTS.GENERAL_YABBA_DABBA_DOO, "Buy a total of 100 stones.");
 			addAchievement("AntWorks", kACHIEVEMENTS.GENERAL_ANTWORKS, "Gather a total of 200 stones with Phylla help.");
+			addAchievement("Ant-Kids and Phylla", kACHIEVEMENTS.GENERAL_ANT_KIDS_AND_PHYLLA, "Gather a total of 5000 stones with Phylla help.", "", true);
 			addAchievement("Home Sweet Home", kACHIEVEMENTS.GENERAL_HOME_SWEET_HOME, "Finish the cabin and complete it with furnishings.");
 			addAchievement("Getaway", kACHIEVEMENTS.GENERAL_GETAWAY, "Spend the night outside your camp.");
 			addAchievement("My Tent's (not) Better Than Yours", kACHIEVEMENTS.GENERAL_MY_TENT_NOT_BETTER, "Sleep in Arian's tent.");

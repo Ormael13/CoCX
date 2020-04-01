@@ -90,7 +90,7 @@ use namespace CoC;
 			"A complex set of gears and gyros.",
 			"You look at Mechanism.  It's component used to make goblin tech.");
 		public const MINOHOR:SimpleUseable = new SimpleUseable("MinoHor", "MinoHorns", "a minotaur horns", 35, 
-			"A horns taken from a slain minotaur.",
+			"A pair of horns from a minotaur.",
 			"You look at the pair of minotaur horns.  You admire the overall frame of the horns yet you find no obvious uses for them.");
 		public const SEVTENT:SimpleUseable = new SimpleUseable("SevTent", "SevTent", "a severed tentacle", 50, 
 			"A severed tentacle taken from a slain tentacle beast.",
@@ -101,6 +101,9 @@ use namespace CoC;
 		public const STAFISH:SimpleUseable = new SimpleUseable("StaFish", "StackFish", "a stack of fishes", 60, 
 			"A stack of fresh fish. It’s smelly but it can be sold at the pawn shop for gems.",
 			"You look at stack of fresh fish.  Too many to eat them all at once you can sold them at the pawn shop for gems.");
+		public const THHTONG:SimpleUseable = new SimpleUseable("THHTong", "TwoHellhoundTongues", "two hellhound tongues", 35, 
+			"Two tongues taken from a slain hellhound.",
+			"You look at the two hellhound tongues.  They look disgusting but at least it proves you killed another of those wretched beasts.");
 		public const VIALCLE:SimpleUseable = new SimpleUseable("VialCle", "V.Clear", "a clear vial", 1, 
 			"A clear vial used to dye scales.",
 			"You look at clear vial.  It would help Arian change scales color.");

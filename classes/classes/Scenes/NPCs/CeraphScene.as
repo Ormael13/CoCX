@@ -195,7 +195,7 @@ public class CeraphScene extends NPCAwareContent
 
 				outputText("As you leave, you don't bother to spare a glance at the confused omnibus; she isn't worth your time.");
 			}
-			player.orgasm();
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", 3, "sen", 3, "cor", 1);
             if (CoC.instance.inCombat)
                 cleanupAfterCombat();
@@ -251,7 +251,7 @@ public class CeraphScene extends NPCAwareContent
 			else outputText("You bend over and rub your belly while whispering in her ear, \"<i>Like mother, like child.</i>\"\n\n");
 			outputText("As you leave, you don't bother to spare a glance at the confused omnibus; she isn't worth your time.\n\n");
 			player.cuntChange(monster.cockArea(0), true);
-			player.orgasm();
+			player.sexReward("cum");
 			dynStats("lib", 3, "sen", 3, "cor", 1);
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
@@ -826,7 +826,7 @@ public class CeraphScene extends NPCAwareContent
 			outputText("(Do you accept Ceraph's Offer?)");
 			//Y/N – remove 1 fetish level or +10 gems
 			doYesNo(ceraphsNiceOffer, cleanupAfterCombat);
-			player.orgasm();
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", 3, "sen", 3, "cor", 1);
 		}
 
@@ -1447,7 +1447,7 @@ public class CeraphScene extends NPCAwareContent
 			outputText(" asshole leaks spunk everywhere. Disgusted with her");
 			if (player.cor < 33) outputText(" and a little bit by yourself");
 			outputText(", you drop her like a discarded rag.  She moans and begins masturbating, half-insensate from the rough treatment.  You ignore her, get dressed, and get out of there before the mountain's beasts show up.  Ceraph is in for a wild night!");
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
             if (CoC.instance.inCombat)
                 cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);

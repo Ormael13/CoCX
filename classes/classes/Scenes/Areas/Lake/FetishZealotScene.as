@@ -222,7 +222,7 @@ public class FetishZealotScene extends AbstractLakeContent
 			}
 			//After any zealot rape
 			//Reduce intelligence, set lust to zero, then add some lust based on libido and corruption
-			player.orgasm();
+			player.sexReward("Default","Default",true,false);
 			dynStats("int", -1, "cor", 2);
 			//Trigger bad end if player's intelligence is less than 10 after being drained.
 			if (player.inte < 10 && rand(2) == 0) {
@@ -297,10 +297,8 @@ public class FetishZealotScene extends AbstractLakeContent
 				outputText(" you are, he still seems to fit you like a glove.  With no need to adjust to his presence inside you, you immediately start to roughly fuck him.  To make sure he doesn't enjoy himself too much, you start to twist and pull at his nipples.  Between his gasps of pleasure and pain, he continues his prayer: \"<i>Gah, oh woe is me, ah-gha, my punishment is my pleas- agh!  My eternal torment will be –ugha, never being able to –hah, enjoy this forever.  Ugha!</i>\"  Finally tired of his antics, you punch him in the stomach, as his amazing rod pumping within your " + vaginaDescript(0) + " pushes you over the edge of an orgasm.\n\n");
 				outputText("Your lusts sated for now, you rise up off of him and put your [armor] back on.  You decide to leave him lying there, still coughing from the blow to his stomach.  ");
 				player.cuntChange(monster.cockArea(0), true);
-				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			}
-			player.orgasm();
+			player.sexReward("cum");
 			cleanupAfterCombat();
 		}
 	}

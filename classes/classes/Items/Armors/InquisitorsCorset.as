@@ -42,7 +42,8 @@ package classes.Items.Armors
 			}
 			else desc += "Clothing ";
 			//Defense
-			if (def > 0) desc += "\nDefense: " + String(def);
+			if (def > 0) desc += "\nDefense (P): " + String(def);
+			if (mdef > 0) desc += "\nDefense (M): " + String(mdef);
 			//Value
 			if (value != 0) desc += "\nBase value: " + String(value);
 			//Perk

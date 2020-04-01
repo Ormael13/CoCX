@@ -42,8 +42,8 @@ public class WeaponRange extends Useable //Equipable
 			else if (perk == "Pistol") desc += "(Pistol)";
 			else if (perk == "Rifle") desc += "(Rifle)";
 			else if (perk == "2H Firearm") desc += "(2H Firearm)";
+			else if (verb == "Dual Firearms") desc += "(Dual Firearms)";
 			else if (perk == "Throwing") desc += "(Throwing)";
-		//	else if (verb == "smash") desc += "(Blunt)";
 		//	else if (verb == "slash" || verb == "keen cut") desc += "(Sword)";
 		//	else if (name.indexOf("staff") >= 0) desc += "(Staff)";
 			//Attack
@@ -55,9 +55,12 @@ public class WeaponRange extends Useable //Equipable
 		
 		override public function useText():void {
 			outputText("You equip " + longName + ".  ");
-		//	if (perk == "Large" && game.player.shield != ShieldLib.NOTHING) {
-		//		outputText("Because the weapon requires the use of two hands, you have unequipped your shield. ");
-		//	}
+			if (perk == "2H Firearm") {
+				outputText("Because this weapon requires the use of two hands, you have unequipped your shield. ");
+			}
+			if (perk == "Dual Firearms") {
+				outputText("Because those weapons requires the use of two hands, you have unequipped your shield. ");
+			}
 		}
 		
 		override public function canUse():Boolean {
@@ -69,7 +72,8 @@ public class WeaponRange extends Useable //Equipable
 		}
 		
 		public function playerEquip():WeaponRange { //This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
-			if (perk == "2H Firearm" && game.player.shield != ShieldLib.NOTHING) {
+			if (perk == "2H Firearm" && game.player.shield != ShieldLib.NOTHING
+			|| (perk == "Dual Firearms" && game.player.shield != ShieldLib.NOTHING)) {
 				SceneLib.inventory.unequipShield();
 			}
 			return this;

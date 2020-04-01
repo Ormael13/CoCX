@@ -1173,8 +1173,8 @@ private function possessIzma():void {
 	outputText("\n\n\"<i>A-Alpha!</i>\" she gasps, aghast.");
 	
 	outputText("\n\n\"<i>That's what you get for submitting to other people without my permission,</i>\" you say, pushing Hel's tail-cockring off of Izma's cock.  \"<i>Now be a good girl and do something about... that...</i>\"");
-	
-	player.orgasm();
+
+	player.sexReward("vaginalFluids");
 	dynStats("sen", -1);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
@@ -1214,8 +1214,8 @@ private function inCampHelNagaLuv():void {
 	outputText("\n\nHaving cum, you stroke Hel's cheek and kiss her again, this time a short, sweet peck on the lips that leaves her smiling lovingly at you.  Hel nuzzles against your [chest], content to snuggle in your reptilian hug; you run your fingers through her thick, rich red hair, and yawn as her comforting body heat flows through you.");
 	
 	outputText("\n\nBefore you know it, you're drifting off to sleep in your lover's embrace...  The last thing you hear is her quiet whisper: \"<i>Nagas really do give the best hugs...</i>\"");
-	
-	player.orgasm();
+
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("sen", -1);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
@@ -1245,8 +1245,8 @@ private function nagaCoilForHelCampWithGirls():void {
 	outputText("\n\nBy the time your body has settled down, Hel is cuddled up against you, clinging tightly to you as your tails slowly withdraw from each other's bodies.  Still, you keep her wrapped in your tight naga hug, stroking Hel's cheek and kiss her again, this time a short, sweet peck on the lips that leaves her smiling lovingly at you.  The feisty salamander nuzzles against your [chest], content to snuggle; you run your fingers through her thick, rich red hair, and yawn as her comforting body heat flows through you.");
 	
 	outputText("\n\nBefore you know it, you're drifting off to sleep in your lover's embrace.... The last thing you hear is her quiet whisper:  \"<i>Nagas really do give the best hugs...</i>\"");
-	
-	player.orgasm();
+
+	player.sexReward("vaginalFluids");
 	dynStats("sen", -1);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
@@ -1288,8 +1288,8 @@ private function centaurMountsCampHel():void {
 	outputText("\n\nAs Hel lets out another high-pitched shriek of pleasure, you finally feel yourself hurtling over the edge of bliss. You rear yourself up as you cum, staggering on your hind legs as the first searing spurt of spooge squirts into the screaming salamander.  A huge spurt of cum jets out of your " + cockDescript(x) + ", smearing Hel's spasming walls white with your potent seed.  As your prick fires off again and again, you slowly bring yourself to a halt, your prick still twitching inside Hel's cum-soaked box.  When you've brought yourself to a complete stop, you feel a sudden lightness as Hel flops out of her harness, quickly surrounded by a small pool of jizz leaking out of her.");
 	
 	outputText("\n\n\"<i>Holy shit,</i>\" she gasps, breathing hard, You look down from your loft position on centaur-back as Hel rolls over, idly fingering out thick globs of seed still leaking from her well-abused hole.  \"<i>Thanks for the ride, lover mine.</i>\"");
-	
-	player.orgasm();
+
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("sen", -1);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
@@ -1323,7 +1323,7 @@ private function femtaurPlusCampHel():void {
 	outputText("\n\n\"<i>I have got... to get... one of those,</i>\" Hel pants, her eyes still rolled up in her head.");
 	
 	outputText("\n\nBreathing heavily, you pat her on the cheek and stumble off to get cleaned up.");
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	dynStats("sen", -1);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
@@ -1349,7 +1349,7 @@ private function heliaFollowerTentafuck():void {
 	outputText("\n\nWith a contented sigh, you yank your wilting pricks out of your fiery lover, letting her flop to the ground in a puddle of sticky spunk.  She groans loudly, rolling over and blinking hard.  \"<i>You're just a miniature tentacle monster, you know that?  And I love it!  You gotta do that again some time... just like a walking gang bang.</i>\"");
 	
 	outputText("\n\nYou roll your eyes and go to get cleaned up.");
-	player.orgasm();
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("sen", -1);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
@@ -1471,8 +1471,8 @@ private function muddyLizardFeet():void {
 	outputText("\n\nShe gives you a gentle, quick kiss before nestling her head on your [chest], eyes closed and breath calm.  \"<i>Can we just stay like this... just for... just for a few minutes?</i>\"");
 	
 	outputText("\n\nYou brush her hair and nod, happy to enjoy the loving embrace of your lover.");
-	
-	player.orgasm();
+
+	player.sexReward("vaginalFluids","Dick");
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1683,7 +1683,7 @@ private function heliaAndVapula():void {
 	
 		outputText("\n\n\"<i>Don't worry, I can take care of myself.  And if I get stuck in your camp, who cares?  If we did this every time I stumbled upon your place I would get lost more often!</i>\" she says with a cute little wink; she's still limping and giggling as she heads toward the plains.  Meanwhile, Vapula is a sorry mess.  Still digesting her copious cum-meal, she doesn't seem to mind the sexual filth coating her face.  You shrug and leave your pet to her digestion.");
 	}
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	dynStats("sen", -2, "cor", 1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1748,7 +1748,7 @@ private function girlsThreesomeHelAndKiha():void {
 	outputText("\n\nYou grab Kiha's horns to steady yourself as your cunt and ass spasm around the thick tail-cocks crammed inside you, your [legs] wobbling weakly after the double-penetration.  Even as you recover, though, the dragoness mashes Hel's face into her belly, commanding, \"<i>Come on, firebutt, clean it off!</i>\"");
 	
 	outputText("\n\nWith the two lizard-girls distracted, you languidly pull their limp tails out of your holes, relishing the blessedly empty feeling left before you collapse into a pool of your own juices... just to catch your breath, you insist.");
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1788,7 +1788,7 @@ private function dudeHeliaAndKihaThreeSome():void {
 	outputText("\n\n\"<i>I'm not.  A Lizard,</i>\" Kiha growls.  Rather than answer, Hel hooks her leg around and gives Kiha a foot-full of cum on the face before bounding away, laughing madly.");
 
 	outputText("\n\n\"<i>FIREBUUUUUUUTTT!!!</i>\"");
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1852,7 +1852,7 @@ private function helXValeriaFemalePC():void {
 	outputText("\n\n\"<i>Oh, for fuck's sake!</i>\" Hel snaps, trying to pull out again and again, tearing at the goo covering her body, only for it to reform a moment later.");
 	
 	outputText("\n\nHanging her head, Hel moves with you so that you can both get on all fours. Hel swings a leg over your ass, making it so that you're sitting butt-to-butt, the knots in both your asses slowly deflating - a bit too realistically for comfort...");
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	dynStats("sen", -3);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1943,7 +1943,7 @@ private function giveHeliaAnalTraining():void {
 	outputText("</i>”");
 	
 	player.consumeItem(consumables.GOB_ALE,1);
-	player.orgasm();
+	player.sexReward("Default", "Default",true,false);
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);	
 }
@@ -2002,7 +2002,7 @@ private function yesMakeHeliaAGapeSlut():void {
 	else outputText("allows you to hose her down with your ongoing waves of salty jism, soaking her in your sexual scent.");
 	outputText(" Helia burps. “<i>Fuck me that was awesome! Whoah, don’t mind me, but I, uh... I think I’m gonna stay here for a little while, maybe just rock up and down till I come down off this buzz. She blushes and begins to finger her snatch again. Just let me... just let me get used to.</i>” She shoos you away and goes back to toying with herself, getting used to her new “flexibility”.");
 	outputText("\n\n“<i>You’re gonna fall in love with my asshole, lover mine,</i>” Helia calls after you.");
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -2339,7 +2339,7 @@ private function helAndSluttyHarpyMale():void
 
 	outputText("\n\n<i>“Don’t think I’ll just do this whenever you want”</i> She says when the kiss is broken, but she’s smiling as she says it, so you smile back and retrieve your armor. Sophie has fallen asleep on top of Helia, who seems to also have resigned to take a nap.");
 
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	menu();
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2402,7 +2402,7 @@ private function helAndSluttyHarpyFemale():void
 
 	outputText("\n\n<i>“But don't think this means I want to do it again,”</i> she says before shakily sauntering off to find somewhere to collapse. Sophie simply giggles and curls up to sleep in the puddle of juices the three of you made. You massage your aching muscles and get back to your champion duties.");
 
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	menu();
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2427,7 +2427,7 @@ outputText("\n\nHer body doesn’t know how to react to the sunshine-stained che
 
 outputText("\n\nYour hand slides across Sophie’s stomach to squeeze one of her massive mammaries. The busty harpy responds by doing the same to Hel, squeezing one of her sizeable tits. You double your efforts on Helia and she practically melts despite her natural body heat. The steamy salamander crumples, falling to the side and pulling Sophie with her. You lean over and kiss both girls on the forehead before leaving them to rest, and hopefully feel more open about each other.");
 
-	player.orgasm();
+	player.sexReward("vaginalFluids");
 	menu();
 	doNext(camp.returnToCampUseOneHour);
 }

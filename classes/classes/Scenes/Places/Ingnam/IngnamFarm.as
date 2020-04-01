@@ -43,28 +43,12 @@ public class IngnamFarm extends BaseContent
 				outputText("\n\n\"<i>Great! The stable needs cleaning. I understand it's not for the faint of the heart but I promise you'll be rewarded,</i>\" the farmer says. She guides you to the stables and hands you the shovel for cleaning" + (silly() ? " and a clothespin to clip your nose shut": "") + ".");
 				outputText("\n\nYou spend half an hour cleaning the muck out of the stable. When you're finished cleaning the muck, the farmer comes back at you and instructs you to change the straw pile. You do as she instructs, sweeping all the old straw piles into one large pile. Finally, you spend the rest of the hour laying a new layer of straw for the horses to lay on.");
 				outputText("\n\n\"<i>I'll take care of these from there. Thank you for helping me. You've taken some of the load off my burden. Here's your payment,</i>\" she says. She hands you five gems.");
-				if (player.str < (25 + (5 * player.newGamePlusMod())) && rand(2) == 0) {
-					outputText("\n\nYou feel a bit stronger from all the hard work you've done.");
-					dynStats("str", 1);
-				}
-				if (player.tou < (25 + (5 * player.newGamePlusMod())) && rand(2) == 0) {
-					outputText("\n\nYour efforts have helped to improve your stamina.");
-					dynStats("tou", 1);
-				}
 				fatigue(15);
 			}
 			else if (chooser == 1) {
 				outputText("\n\n\"<i>Great! I could use a hand harvesting crops,</i>\" she says, \"<i>We need five full baskets of crops.</i>\"");
 				outputText("\n\nShe escorts you to the field where the crops grow. She hands you the basket so you can collect the crops. \"<i>We'll harvest the crops. You only need to fill five, I'll take care of the rest,</i>\" she says.");
 				outputText("\n\nYou pick the corn from the plant one by one and put them into basket. This continues until the basket gets full after which you switch to another empty basket. You get back to harvesting and repeat until all the baskets are full. The farmer comes to see that you've filled all the baskets. \"<i>Good work! I'll take care of things from there. Here's your payment,</i>\" she says. She hands you the five gems.");
-				if (player.str < (25 + (5 * player.newGamePlusMod())) && rand(2) == 0) {
-					outputText("\n\nYou feel a bit stronger from all the hard work you've done.");
-					dynStats("str", 1);
-				}
-				if (player.tou < (25 + (5 * player.newGamePlusMod())) && rand(2) == 0) {
-					outputText("\n\nYour efforts have helped to improve your stamina.");
-					dynStats("tou", 1);
-				}
 				fatigue(15);
 			}
 			else {
@@ -73,17 +57,15 @@ public class IngnamFarm extends BaseContent
 				outputText("\n\nBy the time you've finished milking all the cows, you are left with ten full buckets of milk. The farmer comes back and says, \"<i>Did you milk all these cows?</i>\" You give her a nod and show her the full buckets of milk. \"<i>Thank you. You know what? You've deserved some free milk! Now would be a good time for some break,</i>\" She says happily. She fills a cup with milk and gives it to you. You promptly drink the milk. Wow, this stuff is delicious when it's freshly milked! After a good drink, you strike up some conversation with her.");
 				player.refillHunger(20);
 				player.HP += 50;
-				fatigue(-10);
 				outputText("\n\nAfter a few minutes of chatting, the break is over and you help her with hauling the buckets to her farmhouse, four at a time. After three trips, she gives you a final task of filling the milk bottles. You carefully pour the milk through a funnel into the bottle and when you manage to fill it, you move on to the next bottle. You repeat the process until the buckets are empty. \"<i>Good work! You have finished your work! Here's your payment,</i>\" she says as she hands you the five gems you deserve.");
-				if (player.str < (25 + (5 * player.newGamePlusMod())) && rand(2) == 0) {
-					outputText("\n\nYou feel a bit stronger from all the hard work you've done.");
-					dynStats("str", 1);
-				}
-				if (player.tou < (25 + (5 * player.newGamePlusMod())) && rand(2) == 0) {
-					outputText("\n\nYour efforts have helped to improve your stamina.");
-					dynStats("tou", 1);
-				}
-				fatigue(10);
+			}
+			if (player.str < (40 + (5 * player.newGamePlusMod())) && rand(2) == 0) {
+				outputText("\n\nYou feel a bit stronger from all the hard work you've done.");
+				dynStats("str", 1);
+			}
+			if (player.tou < (40 + (5 * player.newGamePlusMod())) && rand(2) == 0) {
+				outputText("\n\nYour efforts have helped to improve your stamina.");
+				dynStats("tou", 1);
 			}
 			if (player.findPerk(PerkLib.HistorySlacker) >= 0 || player.findPerk(PerkLib.PastLifeSlacker) >= 0) fatigue(-5);
 			outputText("\n\nYou walk back to Ingnam.");

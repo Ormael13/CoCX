@@ -187,7 +187,7 @@ import classes.StatusEffects;
 		public function defeatDarkSlimeEmpress():void {
 			clearOutput();
 			outputText("The empress’s purple legion falter for an instant, the slime blocking the exit falling off. You don't wait for the sovereign to recover her composure and rush for the exit, the empress screaming orders as you leave. Thankfully slimes are not overly fast and you manage to make it back to the corridor junction you came from.\n\n");
-			if (player.hasStatusEffect(StatusEffects.TFDealer1)) player.addStatusValue(StatusEffects.TFDealer1, 1, 1);
+			if (player.hasStatusEffect(StatusEffects.TFDealer1) && player.statusEffectv1(StatusEffects.TFDealer1) < 1) player.addStatusValue(StatusEffects.TFDealer1, 1, 1);
 			else player.createStatusEffect(StatusEffects.TFDealer1, 1, 0, 0, 0);
 			cleanupAfterCombat();
 		}
@@ -201,7 +201,7 @@ import classes.StatusEffects;
 		public function defeatHydra():void {
 			clearOutput();
 			outputText("You thought you had won but, to your frustration, the hydra just keeps on regenerating its wounds. It’s incapacitated for now but it could get back up ready to attack at anytime. You grab a token of her defeat and run for the room exit, back to the previous junction.\n\n");
-			if (player.hasStatusEffect(StatusEffects.TFDealer1)) player.addStatusValue(StatusEffects.TFDealer1, 2, 1);
+			if (player.hasStatusEffect(StatusEffects.TFDealer1) && player.statusEffectv2(StatusEffects.TFDealer1) < 1) player.addStatusValue(StatusEffects.TFDealer1, 2, 1);
 			else player.createStatusEffect(StatusEffects.TFDealer1, 0, 1, 0, 0);
 			cleanupAfterCombat();
 		}
@@ -224,7 +224,7 @@ import classes.StatusEffects;
 		public function defeatHellfireSnail():void {
 			clearOutput();
 			outputText("You beat up the snail girl so hard her shell end upside down! She desperately tries to get back on her belly but is stuck swinging from side to side, you get the opportunity to run past her.\n\n");
-			if (player.hasStatusEffect(StatusEffects.TFDealer1)) player.addStatusValue(StatusEffects.TFDealer1, 3, 1);
+			if (player.hasStatusEffect(StatusEffects.TFDealer1) && player.statusEffectv3(StatusEffects.TFDealer1) < 1) player.addStatusValue(StatusEffects.TFDealer1, 3, 1);
 			else player.createStatusEffect(StatusEffects.TFDealer1, 0, 0, 1, 0);
 			cleanupAfterCombat();
 		}
@@ -262,6 +262,11 @@ import classes.StatusEffects;
 			cleanupAfterCombat();
 		}
 		
+		private function encountersFountainOfPurity():void {
+			player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
+			player.addStatusValue(StatusEffects.RathazulAprilFool, 3, 1);
+			outputText("As you explore the labyrinth you stumble upon what appears to be a room with fountain of purity.\n\nYou collected a vial of the fountain of purity. It's time to bring it back to Rathazul.\n\n");
+		}
 		private function encountersLootChest():void {
 			player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 			var EXP:Number = 10 * (player.level + 1) * (1 + rand(5));
@@ -275,6 +280,10 @@ import classes.StatusEffects;
 		private function encountersRuletteBossesEL1():void {
 			player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 			if (flags[kFLAGS.ALVINA_FOLLOWER] == 17) {
+				if (flags[kFLAGS.CODEX_ENTRY_CHIMERA] <= 0) {
+					flags[kFLAGS.CODEX_ENTRY_CHIMERA] = 1;
+					outputText("\n\n<b>New codex entry unlocked: Chimera!</b>");
+				}
 				outputText("You finally find the center of the labyrinth, somewhat exhausted. You can see the rose from here in all its dark beauty. As you are about to approach it, a monstrous creature lands right in front of you. This beast has no less than four heads! A dragon on the left, a lion on the center, a goat on ");
 				outputText("the right and, at the tip of its tail, the head of a snake! All four heads roar a warning at you as the beast stands up on its leonine legs, easily twelve feet tall, its massive wings opening in a threatening display revealing nothing short of four erect thirty inches cock already drooling precum!\n\n");
 				outputText("\"<i>Foolish intruder, you walked to your death! No one but me will ever touch the rose for it is mine and no one else's! I will rape you and then devour you alive!</i>\"\n\n");
@@ -370,11 +379,17 @@ import classes.StatusEffects;
 		}
 		
 		public function encountersRuletteBossesEL1Hydra():void {
+			if (flags[kFLAGS.CODEX_ENTRY_HYDRA] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_HYDRA] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Hydra!</b>");
+			}
 			outputText("The first telltale that something might have gone really wrong is the hissing which seems to come from all around the room. The only warning you get of the impending attack is a sudden move of the shadows as a massive snake head bites the air mere inches from your face. You ready for battle as several huge snakes comes out of the shadow, each connected to a single junction to what appears to be the body of a very tall woman.\n\n");
 			if (player.isNaga()) {
 				outputText("\"<i>Why, would you look at that, how did you little grass snake make it all the way here. Are you perhaps lost?</i>\"\n\n");
 				outputText("Sometimes you forget that as a naga your body language allows you to understand snakes of all kinds. You reply to the hydra that you're exploring the labyrinth in search of power and treasures.\n\n");
 				outputText("\"<i>Um well there's no treasure I know of in this room but perhaps if you can help me with my arousal problem I’d be willing to give you something close to the first. A hydra scale, nothing short, nothing less. That is of course if becoming like me is of any interest to poor puny you. So how about it?</i>\"\n\n");
+				if (player.hasStatusEffect(StatusEffects.TFDealer1) && player.statusEffectv2(StatusEffects.TFDealer1) < 1) player.addStatusValue(StatusEffects.TFDealer1, 2, 1);
+				else player.createStatusEffect(StatusEffects.TFDealer1, 0, 1, 0, 0);
 				_cuteScene = 2;
 				menu();
 				addButton(1, "Sex", encountersRuletteBossesEL1HydraSex);
@@ -457,6 +472,10 @@ import classes.StatusEffects;
 				var choice:Number = rand(8);
 				if (choice == 0) {
 					outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.");
+					if (flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] <= 0) {
+						flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] = 1;
+						outputText("<b>New codex entry unlocked: Displacer beast!</b>\n\n")
+					}
 					startCombat(new DisplacerBeast(), true);
 				}
 				if (choice == 1) {
@@ -506,18 +525,29 @@ import classes.StatusEffects;
 				if (choice == 7) {
 					clearOutput();
 					outputText("Just as you turn the corner, you come face to face with a towering minotaur armed with a pair of huge battle axes and equipped with a full plate armor. The beast smirks as his cock hardens in anticipation. It must’ve been months since he last fucked something!");
-					startCombat(new Minotaur(), true);
+					startCombat(new Minotaur(), true);//Mindbreaker
 				}
-				//Dark Slime, Mindbreaker
 				doNext(playerMenu);
 			}
 			else player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 		}
 		private function nightAmbushRuletteEL():void {
 			var choice:Number = rand(8);
-			if (choice == 0) startCombat(new DisplacerBeast(), true);
+			if (choice == 0) {
+				if (flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] <= 0) {
+					flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] = 1;
+					outputText("<b>New codex entry unlocked: Displacer beast!</b>\n\n")
+				}
+				startCombat(new DisplacerBeast(), true);
+			}
 			if (choice == 1) startCombat(new DarkSlime(), true);
-			if (choice == 2) startCombat(new Succubus(), true);
+			if (choice == 2) {
+				if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
+					flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
+					outputText("\n\n<b>New codex entry unlocked: Succubus!</b>")
+				}
+				startCombat(new Succubus(), true);
+			}
 			if (choice == 3) startCombat(new Incubus(), true);
 			if (choice == 4) startCombat(new Omnibus(), true);
 			if (choice == 5) startCombat(new TentacleBeast(), true);
@@ -678,6 +708,10 @@ import classes.StatusEffects;
 				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 				encountersRuletteBossesEL2();
 			}*/
+			else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 295 && player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv1(StatusEffects.RathazulAprilFool) == 0 && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
+				encountersFountainOfPurity();
+			}
 			else encountersRuletteEL();
 		}
 		public function checkingELAchievs():void {

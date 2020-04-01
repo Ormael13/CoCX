@@ -71,6 +71,10 @@ public class PatchouliScene extends NPCAwareContent {
 			} else {
 				outputText(", you could use a guide across Mareth.");
 			}
+			if (flags[kFLAGS.CODEX_ENTRY_CHESHIRE_CAT] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_CHESHIRE_CAT] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Cheshire Cat!</b>");
+			}
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = MET;
 			menu();
 			addButton(0, "Accept", patchouliExploreLuckyWheel).hint("Let him lead you to new places.");
@@ -126,8 +130,7 @@ public class PatchouliScene extends NPCAwareContent {
 				outputText("\"<i>Please.. not so rough, my cock hurts!</i>\"\n\n");
 				outputText("He could at least pretend he likes it, you’re already are very kind, granting him the right to even get raped in the first place instead of straight out killing him. Soon, you find yourself on the verge of orgasm. Patchouli finally loses control of his cat cock as it twitches, filling you with kitty jizz and causing your orgasm shortly after.\n\n");
 				outputText("You keep milking the prankster for a few hours until he is passed out. Then bring him back to your camp and tie him to a tree.\n\n");
-				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+				player.sexReward("cum");
 			} else {
 				var x:int = player.cockThatFits(36, "length");
 				outputText("You force the catboy on his back and yank his shorts away, revealing his girly ass and his cute pucker. Patchouli gulps as your [cock] hardens, already aware of what is about to happen.\n\n");
@@ -140,13 +143,13 @@ public class PatchouliScene extends NPCAwareContent {
 				outputText("You begin to fuck his butt thoroughly in order to teach the little boyslut a lesson his ass won’t forget. His anus begins to contract and pulse around your dick like a vagina and who knows, maybe he somehow connected it to a cunt somewhere across the multiverse. Before long the sensation of Patchouli’s asscunt proves too much for you and you fill it full of your jizz. Patchouli seems to get off from his tormented ass, his cat cock pulsing as he reaches orgasm, splattering the grass below him with cum. He sighs in relief as you pull your [cock] out of his ass, then teases you.\n\n");
 				outputText("\"<i>Some poor girl in that village must be pregnant by now, you should be ashamed, you know?</i>\"\n\n");
 				outputText("This little asshole has pranked you long enough. You knock him unconscious and bring him back to camp, making sure to tie him to a nearby tree");
+				player.sexReward("Default","Default",true,false);
 				if (camp.getCampPopulation() >=
 				    2) {
 					outputText(". Leaving one of your friends to watch over him at all time");
 				}
 				outputText(".\n\n");
 			}
-			player.orgasm();
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = TIEDINCAMP;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -479,7 +482,7 @@ public class PatchouliScene extends NPCAwareContent {
 			outputText("\"<i>Nyaaaa... Know what, [name]? As of today let’s be mates, nya. Come over to me whenever you're in the mood or in heat, I’ll always be ready for you waiting up that branch.</i>\"\n\n");
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = MATE;
 		}
-		player.orgasm();
+		player.sexReward("vaginalFluids","Dick");
 		doNext(camp.returnToCampUseOneHour);
 	}
 
@@ -518,7 +521,7 @@ public class PatchouliScene extends NPCAwareContent {
 			outputText("\"<i>Nyaaaa... Know what, [name]? As of today let’s be mates, nya. Come over to me whenever you're in the mood or in heat, I’ll always be ready for you waiting up that branch.</i>\"\n\n");
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = MATE;
 		}
-		player.orgasm();
+		player.sexReward("vaginalFluids","Dick");
 		doNext(camp.returnToCampUseOneHour);
 	}
 
@@ -541,9 +544,7 @@ public class PatchouliScene extends NPCAwareContent {
 		outputText("\n\n\"<i>Please.. Nyaaaaa!!! Rougher... Faster!</i>\"\n\n");
 		outputText("She's obviously liking it, which only bolsters your lust. Soon, you find yourself on the verge of orgasm. Patchoulie finally loses control of her cock as it twitches, filling you with kitty jizz and causing your own orgasm shortly after.\n\n");
 		outputText("Unsated, you keep milking the prankster for a few hours until you both pass out.\n\n");
-		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-		if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-		player.orgasm();
+		player.sexReward("cum","Vaginal");
 		doNext(camp.returnToCampUseOneHour);
 	}
 
@@ -569,7 +570,7 @@ public class PatchouliScene extends NPCAwareContent {
 		}
 		outputText(". However I don’t mind it, It's exactly how I want my mate to be, completely perverted.</i>\"\n\n");
 		outputText("Well considering the cum still dripping from her cunt you guess the word mate applies as no matter how you sex her, she manages to get your dick in the right spot anyway.\n\n");
-		player.orgasm();
+		player.sexReward("Default","Dick",true,false);
 		doNext(camp.returnToCampUseOneHour);
 	}
 

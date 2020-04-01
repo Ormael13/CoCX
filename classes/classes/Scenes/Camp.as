@@ -516,9 +516,21 @@ CoC.instance.saves.saveGame(player.slotName);
 		return;
 	}
 	//Mitzi Daughters + Izma Daughters
-	if(flags[kFLAGS.MITZI_DAUGHTERS] >= 4 && izmaScene.totalIzmaChildren() >= 2) {
+	if(flags[kFLAGS.MITZI_DAUGHTERS] >= 4 && izmaScene.totalIzmaChildren() >= 2 && !player.hasStatusEffect(StatusEffects.MitziIzmaDaughters) && rand(5) == 0) {
 		SceneLib.mitziFollower.MitziDaughtersIzmaDaughters();
 		return;
+	}
+	//Rathazul april fool
+	if(isAprilFools() && player.hasStatusEffect(StatusEffects.CampRathazul) && rand(5) == 0) {
+		if (player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv2(StatusEffects.RathazulAprilFool) < 5) {
+			if (player.statusEffectv3(StatusEffects.RathazulAprilFool) == 1) SceneLib.rathazul.rathazulAprilFoolPart3();
+			if (date.fullYear > player.statusEffectv1(StatusEffects.RathazulAprilFool)) SceneLib.rathazul.rathazulAprilFool();
+			return;
+		}
+		else if (!player.hasStatusEffect(StatusEffects.RathazulAprilFool)) {
+			SceneLib.rathazul.rathazulAprilFool();
+			return;
+		}
 	}
 	//Cotton preg freakout
 	if (player.pregnancyIncubation <= 280 && player.pregnancyType == PregnancyStore.PREGNANCY_COTTON &&
@@ -1019,7 +1031,7 @@ public function followersCount():Number {
 	if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) counter++;
 	if (flags[kFLAGS.NEISA_FOLLOWER] >= 7) counter++;
 	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
-	if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 3) counter++;
+	if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 3 && flags[kFLAGS.EXCELLIA_RECRUITED] < 33) counter++;
 	if (flags[kFLAGS.MITZI_RECRUITED] >= 4) counter++;
 	if (flags[kFLAGS.MITZI_DAUGHTERS] >= 4) counter++;
 	if (helspawnFollower()) counter++;
@@ -1053,6 +1065,13 @@ public function slavesCount():Number {
     }
 	return counter;
 }
+public function slavesOptionalCount():Number {
+	var counter:Number = 0;
+	if (campCorruptJojo() && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) counter++;
+	if (amilyScene.amilyFollower() && amilyScene.amilyCorrupt() && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) counter++;
+	if (bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;//Bimbo sophie
+	return counter;
+}
 
 public function loversCount():Number {
 	var counter:Number = 0;
@@ -1063,6 +1082,7 @@ public function loversCount():Number {
 	if (flags[kFLAGS.DIANA_FOLLOWER] > 5 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
 	if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1 && !player.hasStatusEffect(StatusEffects.ElectraOff)) counter++;
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
+	if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) counter++;
 	if (followerHel()) counter++;
 	//Izma!
 	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
@@ -1232,6 +1252,11 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
 		if (player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0) buttons.add( "Etna", SceneLib.etnaScene.etnaCampMenu2).disableIf(player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0,"Sleeping.");
 		else buttons.add( "Etna", SceneLib.etnaScene.etnaCampMenu2).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers1) > 0,"Training.");
+	}
+	//Excellia Lover
+	if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) {
+		outputText("Excellia seems to be working on her combat skills against a training dummy. "+(SceneLib.excelliaFollower.totalExcelliaChildren() > 1 ? "She shows her children a few fighting techniques as they watch her attentively. Some even practice them with friendly spars between one another. ":"")+"When she notices you, she gives a friendly nod before going back to pummeling the dummy.\n\n");
+		buttons.add( "Excellia", SceneLib.excelliaFollower.ExcelliaCampMainMenuFixHer).hint("Visit Excellia.");
 	}
 	//Helia
 	if(SceneLib.helScene.followerHel()) {
@@ -1525,7 +1550,7 @@ public function campSlavesMenu(descOnly:Boolean = false):void {
 	}
 	//Excellia Slave
 	if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2) {
-		outputText("Excellia sits near your "+(flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "cabin":"tent")+". She moos faintly as she idly caresses her own full breasts and wet snatch. When she notices you, she spreads her legs a bit and her tail eagerly swishes back and forth, hoping you'll come over.\n\n");
+		outputText("Excellia sits near your "+(flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "cabin":"tent")+". "+(SceneLib.excelliaFollower.totalExcelliaChildren() > 1 ? "Her children clamor around, groping, suckling, and licking at her supple flesh. She moos loudly as they have their way with her. When she finally notices you, she beckons for you to join too.":"She moos faintly as she idly caresses her own full breasts and wet snatch. When she notices you, she spreads her legs a bit and her tail eagerly swishes back and forth, hoping you'll come over.")+"\n\n");
 		buttons.add( "Excellia", SceneLib.excelliaFollower.ExcelliaCampMainMenuMakeSlave).hint("Visit Excellia.");
 	}
 	//Patchouli
@@ -1722,9 +1747,8 @@ public function campFollowers(descOnly:Boolean = false):void {
 		}
 	}
 	//Excellia Follower
-	if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 3) {
-		if (flags[kFLAGS.EXCELLIA_RECRUITED] < 33) outputText("Excellia sits just outside her tent looking a bit lost and confused. When she sees you, she immediately perks up, swishing her tail back and forth in the hopes that you come over to her.\n\n");
-		else outputText("Excellia seems to be working on her combat skills against a training dummy. When she notices you, she gives a friendly nod before going back to pummeling the dummy.\n\n");
+	if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 3 && flags[kFLAGS.EXCELLIA_RECRUITED] < 33) {
+		outputText("Excellia sits just outside her tent looking a bit lost and confused. When she sees you, she immediately perks up, swishing her tail back and forth in the hopes that you come over to her.\n\n");
 		buttons.add( "Excellia", SceneLib.excelliaFollower.ExcelliaCampMainMenuFixHer).hint("Visit Excellia.");
 	}
 	//Mitzi + brood
@@ -1818,6 +1842,7 @@ private function campActions():void {
 	//addButton(5, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 	if (player.hasPerk(PerkLib.JobElementalConjurer) || player.hasPerk(PerkLib.JobGolemancer)) addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
 	else addButtonDisabled(6, "Winions", "You need to be able to make some minions that fight for you to use this option like elementals or golems...");
+	//button 7 (empty)
 	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(8, "Fishery", VisitFishery).hint("Visit Fishery.");
 	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(9, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around [camp].");
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(10, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at [camp] Kitsune Shrine.");
@@ -1937,6 +1962,7 @@ private function SparrableNPCsMenu():void {
 	if (player.hasStatusEffect(StatusEffects.ElectraOff)) outputText("\nElectra: <font color=\"#800000\"><b>Disabled</b></font>");
 	if (player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("\nEtna: <font color=\"#800000\"><b>Disabled</b></font>");
 	if (player.hasStatusEffect(StatusEffects.LunaOff)) outputText("\nLuna: <font color=\"#800000\"><b>Disabled</b></font>");
+	if (player.hasStatusEffect(StatusEffects.TedOff)) outputText("\nDragon Boi: <font color=\"#800000\"><b>Disabled</b></font>");
 	menu();
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 		if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(10, "Train", NPCsTrain);
@@ -1947,6 +1973,7 @@ private function SparrableNPCsMenu():void {
 	addButton(2, "Electra", toggleElectraMenu).hint("Enable or Disable Electra. This will remove her from enc table and if already in [camp] disable access to her.");
 	addButton(3, "Etna", toggleEtnaMenu).hint("Enable or Disable Etna. This will remove her from enc table and if already in [camp] disable access to her.");
 	addButton(5, "Luna", toggleLunaMenu).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
+	addButton(6, "DragonBoi", toggleTedMenu).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
 	addButton(14, "Back", campActions);
 }
 private function NPCsTrain():void {
@@ -1986,6 +2013,11 @@ private function toggleLunaMenu():void {
 		player.createStatusEffect(StatusEffects.LunaOff, 0, 0, 0, 0);
 		flags[kFLAGS.SLEEP_WITH] == "";
 	}
+	SparrableNPCsMenu();
+}
+private function toggleTedMenu():void {
+	if (player.hasStatusEffect(StatusEffects.TedOff)) player.removeStatusEffect(StatusEffects.TedOff);
+	else player.createStatusEffect(StatusEffects.TedOff, 0, 0, 0, 0);
 	SparrableNPCsMenu();
 }
 
@@ -2565,6 +2597,10 @@ public function doSleep(clrScreen:Boolean = true):void {
 			arianScene.sleepWithArian();
 			return;
 		}
+		else if(flags[kFLAGS.SLEEP_WITH] == "Excellia" && flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) {
+			outputText("When you head to bed for the night, Excellia is already there waiting. You lay down next to her and get comfortable. She wraps her arms around you and pulls you into her warm embrace nuzzling your neck.");
+			outputText("\n\n\"<i>See you in the morning [name]...</i>\"\n");
+		}
 		else if(flags[kFLAGS.SLEEP_WITH] == "Luna" && flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
 			outputText("You head to bed, Luna following you. ");
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && flags[kFLAGS.LUNA_FOLLOWER] >= 9) {
@@ -2635,6 +2671,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 		if(timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n");
 		else outputText("You lie down to resume sleeping for the remaining hour.\n");
 	}
+	player.strtouspeintwislibsenCalculation1();
 	goNext(timeQ, true);
 }
 //For shit that breaks normal sleep processing.
@@ -2869,6 +2906,10 @@ public function placesCount():int {
 	if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) places++;
 	if (flags[kFLAGS.YU_SHOP] == 2) places++;
 	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) places++;
+	if (player.hasStatusEffect(StatusEffects.ResourceNode1)) {
+		if (player.statusEffectv1(StatusEffects.ResourceNode1) >= 5) places++;
+		if (player.statusEffectv2(StatusEffects.ResourceNode1) >= 5) places++;
+	}
 	return places;
 }
 
@@ -2877,10 +2918,8 @@ public function places():Boolean {
 	hideMenus();
 	clearOutput();
 	outputText("Which place would you like to visit?");
-	if(flags[kFLAGS.PLACES_PAGE] == 1)
-	{
-		placesPage2();
-	}
+	if (flags[kFLAGS.PLACES_PAGE] == 1) placesPage2();
+	if (flags[kFLAGS.PLACES_PAGE] == 2) placesPage3();
 	//Build menu
 	menu();
 	if (dungeonFound()) addButton(0, "Dungeons", dungeons).hint("Delve into dungeons.");
@@ -2894,12 +2933,10 @@ public function places():Boolean {
 	addButton(14, "Back", playerMenu);
 	return true;
 }
-
 private function placesPage2():void {
 	menu();
 	flags[kFLAGS.PLACES_PAGE] = 1;
-	if (flags[kFLAGS.FOUND_CATHEDRAL] > 0) 
-	{
+	if (flags[kFLAGS.FOUND_CATHEDRAL] > 0) {
 		if (flags[kFLAGS.GAR_NAME] == 0) addButton(0, "Cathedral", SceneLib.gargoyle.gargoylesTheShowNowOnWBNetwork).hint("Visit the ruined cathedral you've recently discovered.");
 		else addButton(0, "Cathedral", SceneLib.gargoyle.returnToCathedral).hint("Visit the ruined cathedral where " + flags[kFLAGS.GAR_NAME] + " resides.");
 	}
@@ -2915,12 +2952,29 @@ private function placesPage2():void {
 	if (flags[kFLAGS.AIKO_TIMES_MET] > 3) addButton(10, "Great Tree", SceneLib.aikoScene.encounterAiko).hint("Visit the Great Tree in the Deep Woods where Aiko lives.");
 //	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) addButton(12, "Prison", CoC.instance.prison.prisonIntro, false, null, null, "Return to the prison and continue your life as Elly's slave.");
 	if (debug) addButton(13, "Ingnam", SceneLib.ingnam.returnToIngnam).hint("Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
-	addButton(4, "Previous", placesToPage1);
+	addButton(4, "Next", placesPage3);
+	addButton(9, "Previous", placesToPage1);
 	addButton(14, "Back", playerMenu);
 }
-
+private function placesPage3():void {
+	menu();
+	flags[kFLAGS.PLACES_PAGE] = 2;
+	if (player.hasStatusEffect(StatusEffects.ResourceNode1)) {
+		if (player.statusEffectv1(StatusEffects.ResourceNode1) < 5) addButtonDisabled(0, "???", "You need to explore Forest more to unlock this place.");
+		else addButton(0, "Woodcutting", camp.cabinProgress.gatherWoods);
+		if (player.statusEffectv2(StatusEffects.ResourceNode1) < 5) addButtonDisabled(1, "???", "You need to explore Mountains more to unlock this place.");
+		else addButton(1, "Quarry", camp.cabinProgress.quarrySite);
+	}
+	
+	addButton(9, "Previous", placesToPage2);
+	addButton(14, "Back", playerMenu);
+}
 private function placesToPage1():void {
 	flags[kFLAGS.PLACES_PAGE] = 0;
+	places();
+}
+private function placesToPage2():void {
+	flags[kFLAGS.PLACES_PAGE] = 1;
 	places();
 }
 
@@ -3346,11 +3400,12 @@ public function possibleToGainAscensionPoints():Number {
 	//Children
 	var childPerformance:int = 0;
 	childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + izmaScene.totalIzmaChildren() + isabellaScene.totalIsabellaChildren() + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren());
-	childPerformance += (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + flags[kFLAGS.KELLY_KIDS] + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] + flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] + joyScene.getTotalLitters());
+	childPerformance += (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + flags[kFLAGS.KELLY_KIDS] + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] + flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] + joyScene.getTotalLitters() + SceneLib.excelliaFollower.totalExcelliaChildren());
 	childPerformance += ((flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4) + (flags[kFLAGS.LYNNETTE_BABY_COUNT] / 4) + (flags[kFLAGS.ANT_KIDS] / 100) + (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] / 4) + (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] / 4) + (flags[kFLAGS.MITZI_DAUGHTERS] / 4));
 	performancePointsPrediction += Math.sqrt(childPerformance);
 	//Level
 	performancePointsPrediction += player.level;
+	performancePointsPrediction = Math.round(performancePointsPrediction);
 	return performancePointsPrediction;
 }
 
@@ -4062,14 +4117,44 @@ private function promptSaveUpdate():void {
 		doNext(doCamp);
 		return;
 	}
-/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 27) {
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 27) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 28;
 		clearOutput();
-		outputText("Text.");
+		outputText("Titan's into Gigant's, Legends and Myths into Epics and short holidays for game engine ^^");
+		if (player.hasPerk(PerkLib.TitanGrip)) {
+			player.removePerk(PerkLib.TitanGrip);
+			player.createPerk(PerkLib.GigantGrip, 0, 0, 0, 0);
+		}
+		if (player.hasPerk(PerkLib.LegendaryGolemMaker)) {
+			player.removePerk(PerkLib.LegendaryGolemMaker);
+			player.createPerk(PerkLib.EpicGolemMaker2ndCircle, 0, 0, 0, 0);
+		}
+		if (player.hasPerk(PerkLib.MythicalGolemMaker)) {
+			player.removePerk(PerkLib.MythicalGolemMaker);
+			player.createPerk(PerkLib.EpicGolemMaker3rdCircle, 0, 0, 0, 0);
+		}
+		if (!player.hasStatusEffect(StatusEffects.StrTouSpeCounter1)) {
+			player.createStatusEffect(StatusEffects.StrTouSpeCounter1, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.StrTouSpeCounter2, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.IntWisCounter1, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.IntWisCounter2, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.LibSensCounter1, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.LibSensCounter2, 0, 0, 0, 0);
+			player.strtouspeintwislibsenCalculation1();
+			player.strtouspeintwislibsenCalculation2();
+		}
+		if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) {
+			if (player.hasPerk(PerkLib.BimboBody)) player.removePerk(PerkLib.BimboBody);
+			if (player.hasPerk(PerkLib.BimboBrains)) player.removePerk(PerkLib.BimboBrains);
+			if (player.hasPerk(PerkLib.BroBody)) player.removePerk(PerkLib.BroBody);
+			if (player.hasPerk(PerkLib.BroBrains)) player.removePerk(PerkLib.BroBrains);
+			if (player.hasPerk(PerkLib.FutaForm)) player.removePerk(PerkLib.FutaForm);
+			if (player.hasPerk(PerkLib.FutaFaculties)) player.removePerk(PerkLib.FutaFaculties);
+		}
 		doNext(doCamp);
 		return;
 	}
-	if (flags[kFLAGS.MOD_SAVE_VERSION] == 28) {
+/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 28) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 29;
 		clearOutput();
 		outputText("Text.");
@@ -4469,13 +4554,20 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.URTA_KIDS_MALES] + flags[kFLAGS.URTA_KIDS_FEMALES] + flags[kFLAGS.URTA_KIDS_HERMS] > 0) awardAchievement("Urta's True Lover", kACHIEVEMENTS.GENERAL_URTA_TRUE_LOVER);
 	if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER);
 	if (followersCount() >= 7) awardAchievement("Follow the Leader (1)", kACHIEVEMENTS.GENERAL_FOLLOW_THE_LEADER);//ponownie przeliczyć followers, lovers, slaves counter
-	//if (followersCount() >= 14) awardAchievement("Follow the Leader (2)", kACHIEVEMENTS.GENERAL_FOLLOW_THE_LEADER);
+	if (followersCount() >= 14) awardAchievement("Follow the Leader (2)", kACHIEVEMENTS.GENERAL_FOLLOW_THE_LEADER_2);
+	if (followersCount() >= 21) awardAchievement("Follow the Leader (3)", kACHIEVEMENTS.GENERAL_FOLLOW_THE_LEADER_3);
 	if (loversCount() >= 8) awardAchievement("Gotta Love 'Em All (1)", kACHIEVEMENTS.GENERAL_GOTTA_LOVE_THEM_ALL);
-	//if (loversCount() >= 16) awardAchievement("Gotta Love 'Em All (2)", kACHIEVEMENTS.GENERAL_GOTTA_LOVE_THEM_ALL); na razie 15 lovers :(
+	if (loversCount() >= 16) awardAchievement("Gotta Love 'Em All (2)", kACHIEVEMENTS.GENERAL_GOTTA_LOVE_THEM_ALL_2);
+	//if (loversCount() >= 24) awardAchievement("Gotta Love 'Em All (3)", kACHIEVEMENTS.GENERAL_GOTTA_LOVE_THEM_ALL_3);
 	if (slavesCount() >= 4) awardAchievement("Meet Your " + player.mf("Master", "Mistress") + " (1)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER);
-	//if (slavesCount() >= 8) awardAchievement("Meet Your " + player.mf("Master", "Mistress") + " (2)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER);
+	if (slavesCount() >= 8) awardAchievement("Meet Your " + player.mf("Master", "Mistress") + " (2)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_2);
+	//if (slavesCount() >= 12) awardAchievement("Meet Your " + player.mf("Master", "Mistress") + " (3)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_3);
+	if (slavesCount() >= 6 && slavesOptionalCount() >= 2) awardAchievement("Slaver (1)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE);
+	//if (slavesCount() >= 12 && slavesOptionalCount() >= 4) awardAchievement("Slaver (2)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE_2);
+	//if (slavesCount() >= 18 && slavesOptionalCount() >= 6) awardAchievement("Slaver (3)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE_3);//dodać dodatkowych opcjonalnych Slaves tutaj i dać licznik opcjonalnych z każdym achiev wymagającym wicej np. 2-4-6?
 	if (followersCount() + loversCount() + slavesCount() >= 19) awardAchievement("All Your People are Belong to Me (1)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME);
-	//if (followersCount() + loversCount() + slavesCount() >= 38) awardAchievement("All Your People are Belong to Me (2)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME);
+	if (followersCount() + loversCount() + slavesCount() >= 38) awardAchievement("All Your People are Belong to Me (2)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME_2);
+	//if (followersCount() + loversCount() + slavesCount() >= 57) awardAchievement("All Your People are Belong to Me (3)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME_3);
 	if (flags[kFLAGS.MANSION_VISITED] >= 3) awardAchievement("Freeloader", kACHIEVEMENTS.GENERAL_FREELOADER);
 	if (player.perks.length >= 25) awardAchievement("Perky", kACHIEVEMENTS.GENERAL_PERKY);
 	if (player.perks.length >= 50) awardAchievement("Super Perky", kACHIEVEMENTS.GENERAL_SUPER_PERKY);
@@ -4534,7 +4626,7 @@ private function updateAchievements():void {
 	if (player.newGamePlusMod() >= 5) awardAchievement("xXx 6: Rise of the Demons", kACHIEVEMENTS.EPIC_XXX6_RISE_OF_THE_DEMONS);/*
 	if (player.newGamePlusMod() >= 6) awardAchievement("xXx 7: Salvation", kACHIEVEMENTS.EPIC_XXX7_SALVATION);
 	if (player.newGamePlusMod() >= 7) awardAchievement("xXx 8: Genisys", kACHIEVEMENTS.EPIC_XXX8_GENISYS);
-	if (player.newGamePlusMod() >= 8) awardAchievement("xXx 8: Dark Fate", kACHIEVEMENTS.EPIC_XXX9_DARK_FATE);*/
+	if (player.newGamePlusMod() >= 8) awardAchievement("xXx 9: Dark Fate", kACHIEVEMENTS.EPIC_XXX9_DARK_FATE);*/
 	
 	if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] > 0 || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] > 0) awardAchievement("My own Demon Weapon", kACHIEVEMENTS.EPIC_MY_OWN_DEMON_WEAPON);
 	var EvolvingItems:int = 0;
@@ -4576,4 +4668,4 @@ private function fixHistory():void {
 }
 */
 }
-}
+}

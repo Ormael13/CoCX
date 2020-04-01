@@ -173,7 +173,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			else if (player.cumQ() < 1000) outputText("streams");
 			else outputText("rivers");
 			outputText(" of semen sliding out of the abused opening.  He rolls onto his side and pants, still leaking his thick goo from the limp, weak little cock between his legs.  You bend down and wipe your dick off on his face, letting him lick at it like a trained puppy.  Once cleaned, you get dressed and wander back to camp, leaving the spider to recover from the ordeal.");
-			player.orgasm();
+			player.sexReward("Default","Dick",true,false);
 			cleanupAfterCombat();
 		}
 
@@ -212,7 +212,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			outputText("\n\n");
 
 			outputText("You stretch and sigh with contentment, looking over your cum-covered conquest while he tries to clean himself off.  Absolutely perfect.");
-			player.orgasm();
+			player.sexReward("Default","Dick",true,false);
 			cleanupAfterCombat();
 		}
 
@@ -263,7 +263,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			//Pregnancy Goes Here
 			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
             else player.knockUp(PregnancyStore.PREGNANCY_SPIDER, PregnancyStore.INCUBATION_SPIDER, 151);
-			player.orgasm();
+			player.sexReward("cum","Vaginal");
 			cleanupAfterCombat();
 		}
 
@@ -340,8 +340,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			if (player.cumQ() < 500) outputText(SMultiCockDesc() + " bounces on your belly, leaking one last drop from its tip, utterly draining every drop from your [balls].");
 			else outputText(SMultiCockDesc() + " explodes again, dumping every remaining drop from your [balls] directly onto your " + chestDesc() + " and belly.");
 			outputText("  Your eyelids flutter and droop, your tongue lolls out of your mouth, and you start drooling all over yourself.  Zombie-like, your body keeps shaking, locked in orgasm, even after the spider dumps you in the dirt and walks away.");
-			player.slimeFeed();
-			player.orgasm();
+			player.sexReward("cum","Anal");
 			cleanupAfterCombat();
 		}
 
@@ -405,8 +404,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			outputText("At long last, the twin needles withdraw from your neck, dripping out the last of the spider's venom while he throws his head back, closes his eyes, and mewls quietly.  You throw your hips into him desperately, eager to catch every drop of his seed with your womb.  His cum squirts out, and blossoms of slippery warmth squirt through your cunt.  Your " + vaginaDescript() + " squeezes and begins to ripple, sending spasms of pleasure up your spine until you're screaming out loud, moaning and grunting in complete, utter bliss.  Absolute happiness washes through you, the pleasure that can only come from giving into your body's demands and letting this male fill you with his spunk.\n\n");
 
 			outputText("You sigh and close your eyes, slowly slumping down while your hips keep twitching.  You've been sated, and though your body keeps hungering for more, you slip into unconsciousness.");
-			player.slimeFeed();
-			player.orgasm();
+			player.sexReward("cum","Vaginal");
 			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
             else player.knockUp(PregnancyStore.PREGNANCY_SPIDER, PregnancyStore.INCUBATION_SPIDER);
 			cleanupAfterCombat();
@@ -431,7 +429,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			outputText("You awaken later on, a sticky feeling between your legs to go with your wet pussy");
 			if (player.hasCock()) outputText(" and raging hard on");
 			outputText(". Looking around, you notice the slimy pool appears to have dried up, but the broken eggshells show that you weren't just dreaming. Tiny dots in the dirt form a trail leading to the swamp, and you can only guess where your offspring went.\n");
-			player.orgasm();
+			player.sexReward("Default","Vaginal",true,false);
 		}
 	}
 }

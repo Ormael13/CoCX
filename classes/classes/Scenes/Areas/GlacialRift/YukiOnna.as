@@ -18,7 +18,7 @@ public class YukiOnna extends Monster
 			player.createStatusEffect(StatusEffects.FrozenLung, 2, 0.03, 0, 0);
 			var kissdmg:Number = this.inte + this.wis + this.lib;
 			player.takeIceDamage(kissdmg, true);
-			var kisslust:Number = ((inte / 5) + rand(10)) * player.lustPercent();
+			var kisslust:Number = (inte / 5) + rand(10);
 			kisslust = Math.round(kisslust);
 			player.dynStats("lus", kisslust, "scale", false);
 		}

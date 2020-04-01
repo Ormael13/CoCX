@@ -633,9 +633,7 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 			else
 				outputText("Realizing that you haven't yet cum, the goat morph continues to rock in and out of your ass.  The air fills with the sucking and slurping noises of the goat's seed alternately being sucked deeper or forced out of your ass.  Finally you reach your limit and cum[if (hasCock = true), your own cock turning the mud white beneath you].");
 			dynStats("cor", rand(1) + (postCombat ? 1 : 3)); //Extra two corruption for being enough of a pervert to want to fuck the phouka
-			player.orgasm();
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("cum");
 			if (postCombat) outputText("  While you're recovering the goat-morph reaches into your gem pouch and takes a handful.");
 			outputText("\n\nThe goat morph begins to dissolve and reform.  Soon you're looking at a tiny faerie that buzzes up in front of your face.  He says <i>“[if (hasVagina = true)Well I enjoyed that, and it looks like you did too.  Next time I catch ya I really want te try yer cunt.  Can’t wait te see yer belly all swollen up with my seed.][if (hasVagina = false)Do us both a favor - eat some eggs or drink some milk before ye come back.  Since you like being my bitch so much ye might as well have the right parts for it.]”</i> With that the " + phoukaName() + " buzzes up into the canopy and out of sight.");
 			if (postCombat) {
@@ -870,9 +868,7 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 		
 		protected function phoukaSexPregnateEnd(postCombat:Boolean):void
 		{ //Everything after the sex. Handles awards, gem loss and text for player leaving the bog
-			player.orgasm();
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("cum","Vaginal");
 			dynStats("cor", rand(1) + (postCombat && (phoukaForm != PHOUKA_FORM_FAERIE) ? 1 : 3)); //Extra two corruption for being enough of a pervert to want to fuck the phouka
 			if (phoukaForm == PHOUKA_FORM_FAERIE) { //In this case postCombat means you need an award because you must have won to get faerie sex
 					outputText("\n\nSatisfied for now you begin to put your clothes back on.  Maybe that " + phoukaName() + " will learn, maybe not.");

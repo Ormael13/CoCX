@@ -32,6 +32,7 @@ package classes.Items
 		public const SS_BRA :Undergarment = new Undergarment("SS. Bra", "S.Silk Bra", "spider-silk bra", "a pair of spider-silk bra", TYPE_UPPERWEAR, 1000, "This bra looks incredibly comfortable. It's as white as snow and finely woven with hundreds of strands of spider silk. \n\nType: Undergarment (Upper)");
 		public const SSSHIRT:Undergarment = new Undergarment("SSShirt", "S.Silk Shirt", "spider-silk shirt", "a spider-silk shirt", TYPE_UPPERWEAR, 1000, "A comfortable undershirt.  It's as white as snow and woven with hundreds of strands of fine spider silk. \n\nType: Undergarment (Upper)");
 		public const STSHIRT:Undergarment = new Undergarment("STShirt", "S.T.Shirt", "soul training shirt", "a soul training shirt", TYPE_UPPERWEAR, 200, "A shirt made from fabric capable to help train soulforce. \n\nType: Undergarment (Upper)");
+		public const TECHBRA:TechnomancerBra = new TechnomancerBra();
 		
 		//Lower
 		public const C_LOIN :Undergarment = new Undergarment("C. Loin", "C. Loin", "comfortable loincloth", "a pair of comfortable loincloth", TYPE_LOWERWEAR, DEFAULT_VALUE, "A generic pair of loincloth. \n\nType: Undergarment (Lower)", "NagaWearable");
@@ -51,6 +52,7 @@ package classes.Items
 		public const SS_LOIN:Undergarment = new Undergarment("SS.Loin", "S.Silk Loin", "spider-silk loincloth", "a spider-silk loincloth", TYPE_LOWERWEAR, 1000, "This loincloth looks incredibly comfortable. It's as white as snow and finely woven with hundreds of strands of spider silk.  \n\nType: Undergarment (Lower)", "NagaWearable");
 		public const SSPANTY:Undergarment = new Undergarment("SSPanty", "S.Silk Panty", "spider-silk panties", "a pair of spider-silk panties", TYPE_LOWERWEAR, 1000, "These panties look incredibly comfortable. It's as white as snow and finely woven with hundreds of strands of spider silk. \n\nType: Undergarment (Lower)");
 		public const STPANTY:Undergarment = new Undergarment("STPanty", "S.T.Panties", "soul training panties", "a pair of soul training panties", TYPE_LOWERWEAR, 200, "A pair of panties made from fabric capable to help train soulforce. \n\nType: Undergarment (Lower)");
+		public const T_PANTY:TechnomancerPanties = new TechnomancerPanties();
 		
 		public function UndergarmentLib() 
 		{

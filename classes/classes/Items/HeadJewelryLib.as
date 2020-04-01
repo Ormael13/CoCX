@@ -38,6 +38,7 @@ package classes.Items
 		public const SCANGOG:ScannerGoggle = new ScannerGoggle();
 		public const SEERPIN:SeersHairpin = new SeersHairpin();
 		public const SNOWFH:SnowflakeHairpin = new SnowflakeHairpin();
+		public const SPHINXAS:SphinxAccessorySet = new SphinxAccessorySet();
 		public const TSHAIR :HeadJewelry = new HeadJewelry("TSHair", "T.S.Hairpin", "training soul hairpin", "training soul hairpin", 0, 0, 200, "This hairpin, made from soulmetal helps to train soulforce to the uttermost limit for novice soul cultivator. \n\nType: Jewelry (Hairpin) \nBase value: 200","Hairpin");
 		public const FIRECRO:HeadJewelry = new HeadJewelry("FireCro", "Fire Crown", "crown of fire protection", "an enchanted crown of fire protection", MODIFIER_FIRE_R, 20, 3200, "This crown is topped with ruby gemstones. It is said that this will make you protected from fire. \n\nType: Jewelry (Crown) \nBase value: 3,200 \nSpecial: Increases fire resistance by 20%.","Crown");
 		public const ICECROW:HeadJewelry = new HeadJewelry("IceCrow", "Ice Crown", "crown of ice protection", "an enchanted crown of ice protection", MODIFIER_ICE_R, 20, 3200, "This crown is topped with sapphire gemstones. It is said that this will make you protected from ice. \n\nType: Jewelry (Crown) \nBase value: 3,200 \nSpecial: Increases ice resistance by 20%.","Crown");

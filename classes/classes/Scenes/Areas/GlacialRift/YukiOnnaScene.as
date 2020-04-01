@@ -30,7 +30,7 @@ package classes.Scenes.Areas.GlacialRift
 					outputText("The experience is delightful but why stop there? You snap your fingers and use your snow control power to craft a well sized double ended dildo out of slippery ice. Satisfied with the shape you slide it between your two holes, enjoying the penetration as your pussy smacks against hers. You cry out in delight as the hastily crafted sex toy slides from your pussy depths to hers. ");
 					outputText("After a few minutes of this delicious experience, your paired orgasm now imminent, the both of you let out a banshee like scream as your cunts drenches the snowy mat below.\n\n");
 					outputText("Highly satisfied you depose a loving kiss on your partner's lips before dressing up and heading back to camp.\n\n");
-					player.orgasm();
+					player.sexReward("Default","Default",true,false);
 					doNext(camp.returnToCampUseOneHour);
 				}
 				else {
@@ -61,13 +61,13 @@ package classes.Scenes.Areas.GlacialRift
 				outputText(" half stripped out of your gear");
 			}
 			outputText(" with her against you ready for a kiss.\n\n");
-			if (player.wis > 30 ) {
+			if (player.wis > 30) {
 				outputText(" Do you let her?");
 				menu();
 				addButton(1, "Yes", encounterYukiOnnaYes);
 				addButton(3, "No", encounterYukiOnnaNo);
 			}
-			else encounterYukiOnnaYes();
+			else doNext(encounterYukiOnnaYes);
 		}
 		public function encounterYukiOnnaYes():void {
 			clearOutput();
@@ -85,8 +85,11 @@ package classes.Scenes.Areas.GlacialRift
 				else player.tou = 1;
 			}
 			else {
-				if (rand(2) == 0) player.skinTone = "snow white";
-				else player.skinTone = "pale blue";
+				if (rand(3) == 0) player.skinTone = "snow white";
+				else {
+					if (rand(2) == 0) player.skinTone = "pale blue";
+					else player.skinTone == "glacial white";
+				}
 				player.skinAdj = "cold";
 				outputText("At first it felt horribly cold like you were dying, then the sensation began to fade as you finally felt yourself getting warmer. Or is it truly that you are getting warmer in the first place? Seeking to feel more you pull her closer and she rewards you by gently sliding a finger into your folds. You gasp in her mouth, taking a deep breath of fresh cold air. Cold? Hot? You no longer really care as you are too lost in this smooth little world just between you and her. Her pale white skin touching yours, making you shiver exquisitely. ");
 				outputText("You help her out, sliding your own hand in her ice cold pussy, barely feeling yourself anymore. Her mouth part ways with yours, a crystal clear strand of saliva breaking between you as she heads down to one of your cold hardened nipples and starts to suckle it out, her tongue flicking the tip and giving your chest some well needed attention. The contrast between cold and hot slowly dies out, eventually replaced by chilling pleasure, one of her cold delicate hands cupping your chest as you begin grinding your pussy against hers, ");

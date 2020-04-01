@@ -64,8 +64,8 @@ package classes.Scenes.Areas.GlacialRift
 				outputText("After some time passes, you wake up to find the ice inside you has thankfully faded away. You’re able to stand up again, but the damage is done and the creature’s seed has left you feeling rather weak.");
 				player.buttChange(monster.cockArea(0), true);
 			}
-			player.slimeFeed();
-			player.orgasm();
+			if (player.hasVagina())player.sexReward("cum","Vaginal");
+			if (!player.hasVagina())player.sexReward("cum","Anal");
 			cleanupAfterCombat();
 		}
 		
@@ -82,8 +82,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("\n\nSlowly but steadily you bring yourself to the verge of orgasm. The wolf under you squirms and tries to get free, his hind legs flailing through the air behind your back. You keep riding his magnificent member, grinding it up and down in your moist cave. Finally you feel the familiar rippling of your vaginal walls, milking his cock and intensifying your pleasant sensations. Clamping down on his member, you keep moving your hips in a circling motion, working your clit and vagina. The sensations eventually grant you an intense orgasm while the wolf’s still-distended member apply the perfect pressure to all of your sensitive spots and prolong your bliss.");
 			outputText("\n\nBusy with your own orgasm, you barely notice the twitching of his prick buried inside you. The wolf launches into another orgasm or two, his dong aching for peace and wanting to go soft, but forced to orgasm by your body. You clench your muscles, locking the blood in the throbbing member, trying to preserve the sensations forever.");
 			outputText("\n\nFinally having finished the wolf curls up, spent, his tail covering his privates. His rod look a little red from the intense fuck.");
-			player.slimeFeed();
-			player.orgasm();
+			player.sexReward("cum","Vaginal");
 			cleanupAfterCombat();
 		}
 	}

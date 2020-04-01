@@ -294,12 +294,10 @@ import coc.view.MainView;
                 vagina.clitPShort = "";
 				vagina.clitPLong = "";
 			}
-
-
 			//PLOTZ
 			JojoScene.monk                               = 0;
 			SandWitchScene.rapedBefore = false;
-		//Replaced by flag	CoC.instance.beeProgress = 0;
+			//Replaced by flag	CoC.instance.beeProgress = 0;
 			SceneLib.isabellaScene.isabellaOffspringData = []; //CLEAR!
 			//Lets get this bitch started
 			CoC.instance.inCombat = false;
@@ -362,7 +360,6 @@ import coc.view.MainView;
 			//	if (!(oldPlayer.armor is GooArmor))
 			//	player.setArmor(armors.C_CLOTH);
 			}
-			
 			//Clear Statuses
 			var statusTemp:Array = [];
 			for (var i:int = 0; i < player.statusEffects.length; i++) {
@@ -418,7 +415,6 @@ import coc.view.MainView;
 			model.time.days = 0;
 			model.time.hours = 0;
 			model.time.minutes = 0;
-
 		}
 		
 		private function chooseName():void {
@@ -1099,7 +1095,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentStrength():void {
 			clearOutput();
-			outputText("Are you stronger than normal? (+5 Strength)\n\nStrength increases your combat damage, and your ability to hold on to an enemy or pull yourself away.");
+			outputText("Are you stronger than normal? (+"+(50 * player.newGamePlusMod())+" max Strength)\n\nStrength increases your combat damage, and your ability to hold on to an enemy or pull yourself away.");
 			menu();
 			addButton(0, "Yes", setEndowmentStrength);
 			addButton(1, "No", chooseEndowment, true);
@@ -1107,7 +1103,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentThoughness():void {
 			clearOutput();
-			outputText("Are you unusually tough? (+5 Toughness)\n\nToughness gives you more HP and increases the chances an attack against you will fail to wound you.");
+			outputText("Are you unusually tough? (+"+(50 * player.newGamePlusMod())+" max Toughness)\n\nToughness gives you more HP and increases the chances an attack against you will fail to wound you.");
 			menu();
 			addButton(0, "Yes", setEndowmentToughness);
 			addButton(1, "No", chooseEndowment, true);
@@ -1115,7 +1111,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentSpeed():void {
 			clearOutput();
-			outputText("Are you very quick?  (+5 Speed)\n\nSpeed makes it easier to escape combat and grapples.  It also boosts your chances of evading an enemy attack and successfully catching up to enemies who try to run.");
+			outputText("Are you very quick?  (+"+(50 * player.newGamePlusMod())+" max Speed)\n\nSpeed makes it easier to escape combat and grapples.  It also boosts your chances of evading an enemy attack and successfully catching up to enemies who try to run.");
 			menu();
 			addButton(0, "Yes", setEndowmentSpeed);
 			addButton(1, "No", chooseEndowment, true);
@@ -1123,7 +1119,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentSmarts():void {
 			clearOutput();
-			outputText("Are you a quick learner?  (+5 Intellect)\n\nIntellect can help you avoid dangerous monsters or work with machinery.  It will also boost the power of any spells you may learn in your travels.");
+			outputText("Are you a quick learner?  (+"+(50 * player.newGamePlusMod())+" max Intellect)\n\nIntellect can help you avoid dangerous monsters or work with machinery.  It will also boost the power of any spells you may learn in your travels.");
 			menu();
 			addButton(0, "Yes", setEndowmentSmarts);
 			addButton(1, "No", chooseEndowment, true);
@@ -1131,7 +1127,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentWise():void {
 			clearOutput();
-			outputText("Are you a wise person?  (+5 Wisdom)\n\nWisdom can help you understand mysteries objects or work with soulforce.  It will also boost the power of any soulskills you may learn in your travels.");
+			outputText("Are you a wise person?  (+"+(50 * player.newGamePlusMod())+" max Wisdom)\n\nWisdom can help you understand mysteries objects or work with soulforce.  It will also boost the power of any soulskills you may learn in your travels.");
 			menu();
 			addButton(0, "Yes", setEndowmentWise);
 			addButton(1, "No", chooseEndowment, true);
@@ -1139,7 +1135,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentLibido():void {
 			clearOutput();
-			outputText("Do you have an unusually high sex-drive?  (+5 Libido)\n\nLibido affects how quickly your lust builds over time.  You may find a high libido to be more trouble than it's worth...");
+			outputText("Do you have an unusually high sex-drive?  (+"+(50 * player.newGamePlusMod())+" max Libido)\n\nLibido affects how quickly your lust builds over time.  You may find a high libido to be more trouble than it's worth...");
 			menu();
 			addButton(0, "Yes", setEndowmentLibido);
 			addButton(1, "No", chooseEndowment, true);
@@ -1147,7 +1143,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentTouch():void {
 			clearOutput();
-			outputText("Is your skin unusually sensitive?  (+5 Sensitivity)\n\nSensitivity affects how easily touches and certain magics will raise your lust.  Very low sensitivity will make it difficult to orgasm.");
+			outputText("Is your skin unusually sensitive?  (+"+(50 * player.newGamePlusMod())+" max Sensitivity)\n\nSensitivity affects how easily touches and certain magics will raise your lust.  Very low sensitivity will make it difficult to orgasm.");
 			menu();
 			addButton(0, "Yes", setEndowmentTouch);
 			addButton(1, "No", chooseEndowment, true);
@@ -1172,7 +1168,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentMessyOrgasms():void {
 			clearOutput();
-			outputText("Are your orgasms particularly messy?  (+50% Cum Multiplier)\n\nA higher cum multiplier will cause your orgasms to be messier.");
+			outputText("Are your orgasms particularly messy?  (+100% Cum Multiplier)\n\nA higher cum multiplier will cause your orgasms to be messier.");
 			menu();
 			addButton(0, "Yes", setEndowmentMessyOrgasms);
 			addButton(1, "No", chooseEndowment, true);
@@ -1196,7 +1192,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentFertile():void {
 			clearOutput();
-			outputText("Is your family particularly fertile?  (+15% Fertility)\n\nA high fertility will cause you to become pregnant much more easily.  Pregnancy may result in: Strange children, larger bust, larger hips, a bigger ass, and other weirdness.");
+			outputText("Is your family particularly fertile?  (+30% Fertility)\n\nA high fertility will cause you to become pregnant much more easily.  Pregnancy may result in: Strange children, larger bust, larger hips, a bigger ass, and other weirdness.");
 			menu();
 			addButton(0, "Yes", setEndowmentFertile);
 			addButton(1, "No", chooseEndowment, true);
@@ -1211,63 +1207,57 @@ import coc.view.MainView;
 		}
 
 		private function setEndowmentStrength():void {
-			player.str += 5;
 			player.tone += 7;
 			player.thickness += 3;
-			//Add bonus +25% strength gain
-			if (player.findPerk(PerkLib.Strong) < 0) player.createPerk(PerkLib.Strong, 0.25, 0, 0, 0);
+			//Add bonus +100% strength gain
+			if (player.findPerk(PerkLib.Strong) < 0) player.createPerk(PerkLib.Strong, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentToughness():void {
-			player.tou += 5;
 			player.tone += 5;
 			player.thickness += 5;
-			if (player.findPerk(PerkLib.Tough) < 0) player.createPerk(PerkLib.Tough, 0.25, 0, 0, 0);
+			if (player.findPerk(PerkLib.Tough) < 0) player.createPerk(PerkLib.Tough, 1, 0, 0, 0);
 			player.HP = EngineCore.maxHP();
 			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentSpeed():void {
-			player.spe += 5;
 			player.tone += 10;
-			if (player.findPerk(PerkLib.Fast) < 0) player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
+			if (player.findPerk(PerkLib.Fast) < 0) player.createPerk(PerkLib.Fast, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentSmarts():void {
-			player.inte += 5;
 			player.thickness -= 5;
-			if (player.findPerk(PerkLib.Smart) < 0) player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0);
+			if (player.findPerk(PerkLib.Smart) < 0) player.createPerk(PerkLib.Smart, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentWise():void {
-			player.wis += 5;
-			if (player.findPerk(PerkLib.Wise) < 0) player.createPerk(PerkLib.Wise, 0.25, 0, 0, 0);
+			player.thickness -= 5;
+			if (player.findPerk(PerkLib.Wise) < 0) player.createPerk(PerkLib.Wise, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentLibido():void {
-			player.lib += 5;
-			if (player.findPerk(PerkLib.Lusty) < 0) player.createPerk(PerkLib.Lusty, 0.25, 0, 0, 0);
+			if (player.findPerk(PerkLib.Lusty) < 0) player.createPerk(PerkLib.Lusty, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentTouch():void {
-			player.sens += 5;
-			if (player.findPerk(PerkLib.Sensitive) < 0) player.createPerk(PerkLib.Sensitive, 0.25, 0, 0, 0);
+			if (player.findPerk(PerkLib.Sensitive) < 0) player.createPerk(PerkLib.Sensitive, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentPerversion():void {
 			player.cor += 5;
-			if (player.findPerk(PerkLib.Pervert) < 0) player.createPerk(PerkLib.Pervert, 0.25, 0, 0, 0);
+			if (player.findPerk(PerkLib.Pervert) < 0) player.createPerk(PerkLib.Pervert, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentBigCock():void {
-			player.femininity -= 5;
+			player.femininity -= 10;
 			player.cocks[0].cockLength = 8;
 			player.cocks[0].cockThickness = 1.5;
 			trace("Creation - cock modded to 8inches");
@@ -1276,36 +1266,36 @@ import coc.view.MainView;
 		}
 		
 		private function setEndowmentMessyOrgasms():void {
-			player.femininity -= 2;
-			player.cumMultiplier = 1.5;
-			if (player.findPerk(PerkLib.MessyOrgasms) < 0) player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
+			player.femininity -= 5;
+			player.cumMultiplier = 2;
+			if (player.findPerk(PerkLib.MessyOrgasms) < 0) player.createPerk(PerkLib.MessyOrgasms, 1.5, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentBigBreasts():void {
-			player.femininity += 5;
+			player.femininity += 10;
 			player.breastRows[0].breastRating += 2;
 			if (player.findPerk(PerkLib.BigTits) < 0) player.createPerk(PerkLib.BigTits, 1.5, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentBigClit():void {
-			player.femininity -= 5;
+			player.femininity -= 10;
 			player.clitLength = 1;
 			if (player.findPerk(PerkLib.BigClit) < 0) player.createPerk(PerkLib.BigClit, 1.25, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentFertile():void {
-			player.femininity += 5;
-			player.fertility += 25;
-			player.hips.type += 2;
+			player.femininity += 10;
+			player.fertility += 50;
+			player.hips.type += 3;
 			if (player.findPerk(PerkLib.Fertile) < 0) player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
 		
 		private function setEndowmentWetVagina():void {
-			player.femininity += 7;
+			player.femininity += 15;
 			player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_WET;
 			if (player.findPerk(PerkLib.WetPussy) < 0) player.createPerk(PerkLib.WetPussy, 2, 0, 0, 0);
 			chooseBloodlineorNot();
@@ -1332,6 +1322,12 @@ import coc.view.MainView;
 			else addButtonDisabled(3, "Kitsune", "You already have this bloodline!");
 			if (player.findPerk(PerkLib.BloodlineRaiju) < 0) addButton(4, "Raiju", confirmBloodline, PerkLib.RaijusDescendant);
 			else addButtonDisabled(4, "Raiju", "You already have this bloodline!");
+			if (player.findPerk(PerkLib.BloodlineMinotaur) < 0) addButton(5, "Minotaur", confirmBloodline, PerkLib.MinotaursDescendant);
+			else addButtonDisabled(5, "Minotaur", "You already have this bloodline!");
+			if (player.findPerk(PerkLib.BloodlineOni) < 0) addButton(6, "Oni", confirmBloodline, PerkLib.OnisDescendant);
+			else addButtonDisabled(6, "Oni", "You already have this bloodline!");
+			if (player.findPerk(PerkLib.BloodlineOrc) < 0) addButton(7, "Orc", confirmBloodline, PerkLib.OrcsDescendant);
+			else addButtonDisabled(7, "Orc", "You already have this bloodline!");
 			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either not have any non-human blood in you or can't pick any new one.It mean you only will get some bonus perk points for start instead new bloodline.");
 		}
 		
@@ -1353,6 +1349,15 @@ import coc.view.MainView;
 				case PerkLib.RaijusDescendant:
 					outputText("Your ancestor was a raiju");
 					break;
+				case PerkLib.MinotaursDescendant:
+					outputText("Your ancestor was a minotaur");
+					break;
+				case PerkLib.OnisDescendant:
+					outputText("Your ancestor was an oni");
+					break;
+				case PerkLib.OrcsDescendant:
+					outputText("Your ancestor was an orc");
+					break;
 				default:
 					outputText("Your ancestor was a dragon?");
 			}
@@ -1363,7 +1368,7 @@ import coc.view.MainView;
 		
 		private function setBloodline(choice:PerkType):void {
 			player.createPerk(choice, 0, 0, 0, 0);
-			completeCharacterCreation();
+			chooseHistory();
 		}
 		private function noBloodlineAtAllCuzYouAscendedTooManyTimesAlready():void {
 			player.perkPoints += 12;
@@ -1710,9 +1715,13 @@ import coc.view.MainView;
 			player.perkPoints += 1;
 			clearOutput();
 			statScreenRefresh();
-			outputText("Would you like to play through the " + (1 * (1 + player.newGamePlusMod())) + "-day");
-			if (player.newGamePlusMod() > 0) outputText("s");
-			outputText(" prologue in Ingnam or just skip?");
+			outputText("Would you like to play through the " + (1 * (1 + player.newGamePlusMod())) + "-day"+(player.newGamePlusMod() > 0 ? "s":"")+" prologue in Ingnam or just skip?");
+			player.createStatusEffect(StatusEffects.StrTouSpeCounter1,0,0,0,0);
+			player.createStatusEffect(StatusEffects.StrTouSpeCounter2,0,0,0,0);
+			player.createStatusEffect(StatusEffects.IntWisCounter1,0,0,0,0);
+			player.createStatusEffect(StatusEffects.IntWisCounter2,0,0,0,0);
+			player.createStatusEffect(StatusEffects.LibSensCounter1,0,0,0,0);
+			player.createStatusEffect(StatusEffects.LibSensCounter2,0,0,0,0);
 			player.HP = player.maxHP();
 			doYesNo(goToIngnam, arrival);
 		}
@@ -1873,6 +1882,14 @@ import coc.view.MainView;
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.internalChimeraScore() >= 20 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation01) < 0) addButtonDisabled(btn, "A.O.M.(2nd)", "You need to buy Additional Organ Mutation (1st Stage) perk first.");
 			else addButtonDisabled(btn, "A.O.M.(2nd)", "You need ascend more times and have 20+ in internal mutation score to buy this perk.");
 			btn++;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.internalChimeraScore() >= 30 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0) {
+				if (player.ascensionPerkPoints >= 60 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation03) < 0) addButton(btn, "A.O.M.(3rd)", perkAdditionalOrganMutation03).hint("Perk allowing to get one more slot for the same iternal organ mutations. (As an example: 4 slots instead 3 for heart related mutations)\n\nCost: 60 points");
+				else if (player.ascensionPerkPoints < 60) addButtonDisabled(btn, "A.O.M.(3rd)", "You not have enough ascension perk points!");
+				else addButtonDisabled(btn, "A.O.M.(3rd)", "You already bought Additional Organ Mutation (3rd Stage) perk.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.internalChimeraScore() >= 30 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation02) < 0) addButtonDisabled(btn, "A.O.M.(3rd)", "You need to buy Additional Organ Mutation (2nd Stage) perk first.");
+			else addButtonDisabled(btn, "A.O.M.(3rd)", "You need ascend more times and have 30+ in internal mutation score to buy this perk.");
+			btn++;
 			if (player.ascensionPerkPoints >= 5 && player.findPerk(PerkLib.AscensionBuildingPrestige01) < 0) addButton(btn, "B.Prestige(1st)", perkBuildingPrestige01).hint("Perk allowing to get one more slot for prestige job perks.\n\nCost: 5 points");
 			else if (player.ascensionPerkPoints < 5) addButtonDisabled(btn, "B.Prestige(1st)", "You not have enough ascension perk points!");
 			else addButtonDisabled(btn, "B.Prestige(1st)", "You already bought Building Prestige (1st Stage) perk.");
@@ -1950,6 +1967,13 @@ import coc.view.MainView;
 			player.createPerk(PerkLib.AscensionAdditionalOrganMutation02,0,0,0,1);
 			clearOutput();
 			outputText("Your gained Additional Organ Mutation (2nd Stage) perk.");
+			doNext(rarePerks1);
+		}
+		private function perkAdditionalOrganMutation03():void {
+			player.ascensionPerkPoints -= 60;
+			player.createPerk(PerkLib.AscensionAdditionalOrganMutation03,0,0,0,1);
+			clearOutput();
+			outputText("Your gained Additional Organ Mutation (3rd Stage) perk.");
 			doNext(rarePerks1);
 		}
 		private function perkBuildingPrestige01():void {
@@ -2265,6 +2289,27 @@ import coc.view.MainView;
 				player.createPerk(PerkLib.BloodlineRaiju,0,0,0,1);
 				bloodlineACQ2();
 			}
+			else if (player.findPerk(PerkLib.MinotaursDescendant) >= 0) {
+				player.removePerk(PerkLib.MinotaursDescendant);
+				player.createPerk(PerkLib.BloodlineMinotaur,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.findPerk(PerkLib.OnisDescendant) >= 0) {
+				player.removePerk(PerkLib.OnisDescendant);
+				player.createPerk(PerkLib.BloodlineOni,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.findPerk(PerkLib.OrcsDescendant) >= 0) {
+				player.removePerk(PerkLib.OrcsDescendant);
+				player.createPerk(PerkLib.BloodlineOrc,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.findPerk(PerkLib.MelkiesDescendant) >= 0) {
+				player.removePerk(PerkLib.MelkiesDescendant);
+				player.createPerk(PerkLib.BloodlineMelkie,0,0,0,1);
+				bloodlineACQ2();
+			}
+
 			else {
 				clearOutput();
 				outputText("You not have any Descendant perk to change into Bloodline perk.");
@@ -3482,7 +3527,7 @@ import coc.view.MainView;
 		}
 		
 		private function isAscensionPerk(perk:PerkClass, respec:Boolean = false):Boolean {
-			return perk.ptype.keepOnAscension(respec) || (perk.value4 > 0 && !player.hasPerk(PerkLib.ProductivityDrugs));
+			return perk.ptype.keepOnAscension(respec) || (perk.value4 > 0);
 		}
 
 		private function isSpecialKeyItem(keyName:* = null):Boolean {//tylko sky poinson pearl zostawić tutaj
@@ -3494,4 +3539,3 @@ import coc.view.MainView;
 		}	//ale potem zamienić to na specialne soulskills z każdego z klanów
 	}
 }
-

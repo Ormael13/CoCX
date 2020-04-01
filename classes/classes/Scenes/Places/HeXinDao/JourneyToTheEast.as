@@ -46,7 +46,7 @@ package classes.Scenes.Places.HeXinDao
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 2) addButton(11, "Neisa", meetingNeisaAfterDecline);
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 4 || flags[kFLAGS.NEISA_FOLLOWER] == 5) addButton(11, "Neisa", meetingNeisaPostDungeonExploration).hint("Neisa is sitting at a table enjoying one of the local drinks.");
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 6) addButton(11, "Neisa", meetingNeisaPostDungeonExploration2).hint("Neisa is sitting at a table enjoying one of the local drinks.");
-			addButtonDisabled(12, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
+			//addButtonDisabled(12, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
 			if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 2 && (player.humanScore() >= (player.humanMaxScore() - player.internalChimeraScore()))) {
 				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 1) addButton(13, "???", firstTimeMeetingNekomataBoy).hint("A strange cat morph with two tails is sitting at one of the tables muttering to himself.");
 				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 1) addButton(13, "???", firstTimeMeetingNekomataBoy).hint("A strange cat morph with two tails is sitting at one of the tables muttering to himself.");
@@ -991,6 +991,13 @@ package classes.Scenes.Places.HeXinDao
 				flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] = player.upperGarment.id;
 				player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR);
 			}
+			if (player.hasPerk(PerkLib.BimboBody)) player.removePerk(PerkLib.BimboBody);
+			if (player.hasPerk(PerkLib.BimboBrains)) player.removePerk(PerkLib.BimboBrains);
+			if (player.hasPerk(PerkLib.BroBody)) player.removePerk(PerkLib.BroBody);
+			if (player.hasPerk(PerkLib.BroBrains)) player.removePerk(PerkLib.BroBrains);
+			if (player.hasPerk(PerkLib.FutaForm)) player.removePerk(PerkLib.FutaForm);
+			if (player.hasPerk(PerkLib.FutaFaculties)) player.removePerk(PerkLib.FutaFaculties);
+			player.strtouspeintwislibsenCalculation2();
 			awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
 			doNext(camp.returnToCampUseFourHours);
 		}

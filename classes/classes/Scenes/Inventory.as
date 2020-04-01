@@ -182,7 +182,7 @@ use namespace CoC;
 			if (inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
 				var miscNieve:Boolean = Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
                 var miscHolli:Boolean = flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 || flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4);
-				if (miscNieve || miscHolli || player.hasKeyItem("Dragon Egg") >= 0 || player.hasKeyItem("Gryphon Statuette") >= 0 || player.hasKeyItem("Peacock Statuette") >= 0
+				if (miscNieve || miscHolli || player.hasKeyItem("Dragon Egg") >= 0 || player.hasKeyItem("Gryphon Statuette") >= 0 || player.hasKeyItem("Peacock Statuette") >= 0 || (player.hasKeyItem("Rathazul's Purity Elixir") >= 0 && player.perkv1(PerkLib.PurityElixir) < 5)
 					|| flags[kFLAGS.ANEMONE_KID] > 0 || flags[kFLAGS.ALRAUNE_SEEDS] > 0 || (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 1 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8)) {
 					if (miscNieve) {
 						if (flags[kFLAGS.NIEVE_STAGE] == 1)
@@ -191,9 +191,11 @@ use namespace CoC;
                     }
 					if (player.hasKeyItem("Dragon Egg") >= 0) {
                         SceneLib.emberScene.emberCampDesc();
+						addButton(3, "Egg", SceneLib.emberScene.emberEggInteraction);
 					}
 					if (flags[kFLAGS.ANEMONE_KID] > 0) {
 						SceneLib.anemoneScene.anemoneBarrelDescription();
+						if (model.time.hours >= 6) addButton(4, "Anemone", SceneLib.anemoneScene.approachAnemoneBarrel);
 					}
 					if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
 						outputText("\nYou have " + flags[kFLAGS.ALRAUNE_SEEDS] + " alraune seeds planted in your garden.");
@@ -210,18 +212,22 @@ use namespace CoC;
 					}
 					if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4) addButton(2, (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), SceneLib.holliScene.treeMenu);
 					if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4) addButton(2, (flags[kFLAGS.FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), HolliPure.treeMenu);
-					if (player.hasKeyItem("Dragon Egg") >= 0) addButton(3, "Egg", SceneLib.emberScene.emberEggInteraction);
-					if (flags[kFLAGS.ANEMONE_KID] > 0) {
-						//CoC.instance.anemoneScene.anemoneBarrelDescription();
-						if (model.time.hours >= 6) addButton(4, "Anemone", SceneLib.anemoneScene.approachAnemoneBarrel);
-					}
 					if (flags[kFLAGS.ALRAUNE_SEEDS] > 0 && model.time.hours >= 6) addButton(0, "Garden", Gardening.manageyourgarden).hint("Visit your plant offspring");
 					if (player.hasKeyItem("Gryphon Statuette") >= 0) addButton(6, "Gryphon", CoC.instance.mutations.skybornSeed, 1);
 					if (player.hasKeyItem("Peacock Statuette") >= 0) addButton(6, "Peacock", CoC.instance.mutations.skybornSeed, 2);
+					if (player.hasKeyItem("Rathazul's Purity Elixir") >= 0 && player.perkv1(PerkLib.PurityElixir) < 5) addButton(9, "PurityElixir", PurityElixir);
 				}
 			}
 			addButton(10, "Unequip", manageEquipment);
 			addButton(14, "Back", inventoryMenu);
+		}
+		
+		private function PurityElixir():void {
+			outputText("You feel something unlock within you as you drink the elixir, some of the veil of corruption being washed out of you as the liquid undo and counteract some of the vile demonic changes your body was afflicted with.");
+			if (player.hasPerk(PerkLib.PurityElixir)) player.addPerkValue(PerkLib.PurityElixir, 1, 1);
+			else player.createPerk(PerkLib.PurityElixir, 1, 0, 0, 0);
+			player.removeKeyItem("Rathazul's Purity Elixir");
+			doNext(inventoryMenu);
 		}
 		/*
 		public function miscitemsMenu():void {

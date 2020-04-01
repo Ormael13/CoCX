@@ -181,7 +181,7 @@ public class LizanRogueScene extends BaseContent
 			else outputText("Your [face] twists into a titanic roar as [eachCock] explodes with enough force to blast out of the lizan's rectal embrace. Torrents of creamy white fluid blast from [eachCock]. Soon the lizan's upturned ass and the base of his tail is covered but you're still going. By the time you're finished the lizan is grinning from ear to ear amidst a small lake of cum.");
 			outputText("\n\nSpent and breathing hard you collapse. For a second you just lie there [fullChest] against his abs and his legs wrapped around your [hips] while lying in the hot glorious mess of his lizan spunk. Both of you are panting, both of you have been satisfied. Then you push yourself off of him and go to collect your [armor]. He takes it upon himself to clean your [fullChest] with his tongue and as soon as he is done, " + player.clothedOrNaked("you pull on your [armor]", "you recollect whatever you had") + ". Before you leave, you reward him with a deep kiss, snaking your [tongue] into his mouth before heading back to camp.");
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
-			player.orgasm();
+			player.sexReward("Default","Dick",true,false);
 			doNext(camp.returnToCampUseOneHour);
             if (CoC.instance.inCombat) cleanupAfterCombat();
         }
@@ -235,9 +235,7 @@ public class LizanRogueScene extends BaseContent
 			player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS);
 			player.createStatusEffect(StatusEffects.Eggs, rand(6), 0, rand(3) + 5, 0);
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
-			player.orgasm();
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("cum","Vaginal");
 			doNext(camp.returnToCampUseOneHour);
             if (CoC.instance.inCombat) cleanupAfterCombat();
         }
@@ -287,9 +285,7 @@ public class LizanRogueScene extends BaseContent
 			outputText("\n\nYour orgasm seems to spur the lizan on. His thrusts become irregular before he tightens his grip on your waist. He shoves in to the hilt and, yelling like a madman, explodes. You feel his cum surging into your [asshole] as a hot warmth swells " + (player.hasVagina() ? "and dribbles out of your [vagina] and " : "") + "down your [legs] in a sticky stream of lizan dick juice.");
 			outputText("\n\nYou spend some time cuddling, the lizan's still on your back with his warm cock in your [asshole]. Eventually, you get up and give him a deep kiss before you return to your camp.");
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
-			player.orgasm();
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("cum","Anal");
 			doNext(camp.returnToCampUseOneHour);
             if (CoC.instance.inCombat) cleanupAfterCombat();
         }
@@ -350,9 +346,7 @@ public class LizanRogueScene extends BaseContent
 			player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS);
 			player.createStatusEffect(StatusEffects.Eggs, rand(6), 0, rand(3) + 5, 0);
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
-			player.orgasm();
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(60);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("cum");
 			doNext(camp.returnToCampUseOneHour);
             if (CoC.instance.inCombat) cleanupAfterCombat();
         }
@@ -424,7 +418,7 @@ public class LizanRogueScene extends BaseContent
 				else if (player.cumQ() >= 2500) outputText("\n\nYou listen to the lizan squeal as your spasming dick pumps him full and overflowing. By the time you’re done cumming he is not only lying in a small lake of hot cum but looking pregnant from the seed sloshing around in his stomach.");
 			}
 			outputText("\n\nYou leave the passed out lizan where he lies, his newly abused little hole dripping your cream. You raid his pack and leave.");
-			player.orgasm();
+			player.sexReward("Default","Dick",true,false);
 			cleanupAfterCombat();
 		}
 		
@@ -452,9 +446,7 @@ public class LizanRogueScene extends BaseContent
 			outputText("\n\nYou leave the passed out lizan where he lies, covered in your combined sexual fluids. You raid his pack and leave.");
 			player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS);
 			player.createStatusEffect(StatusEffects.Eggs, rand(6), 0, rand(3) + 5, 0);
-			player.orgasm();
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("cum","Vaginal");
 			cleanupAfterCombat();
 		}
 	}

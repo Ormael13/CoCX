@@ -22,13 +22,18 @@ use namespace CoC;
 		
 		public function exploreOuterBattlefield():void {
 			flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD]++;
+			//Twin Grakaturd
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1 && rand(2) == 0) {
+				partsofTwinGrakaturd();
+				return;
+			}
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel()) {
 				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
 			//Etna
-			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0) {
+			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0 && (player.level >= 20)) {
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
@@ -38,7 +43,7 @@ use namespace CoC;
 				return;
 			}
 			//Ted
-			if (flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1 && rand(10) == 0) {
+			if (flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1 && rand(10) == 0) {
 				SceneLib.tedScene.introPostHiddenCave();
 				return;
 			}
@@ -103,6 +108,16 @@ use namespace CoC;
 					dynStats("wis", .5);
 					doNext(camp.returnToCampUseOneHour);
 			}
+		}
+		
+		public function partsofTwinGrakaturd():void {
+			clearOutput();
+			outputText("As you explore the (outer) battlefield you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
+			outputText("You carefully put the pieces of the Twin Grakaturd in your back and head back to your camp.\n\n");
+			player.addStatusValue(StatusEffects.TelAdreTripxiGuns6, 1, 1);
+			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
+			player.createKeyItem("Twin Grakaturd", 0, 0, 0, 0);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

@@ -219,11 +219,15 @@ private function plantsForMe2(BE:int = 0):void {
 	if (player.hasBreasts() && player.isLactating()) {
         player.milked();
         player.boostLactation(0.01);
+		player.sexReward("Default", "Nipples",true,false);
+		player.sexReward("Default", "Tits",true,false);
     }
-	player.orgasm();
+	if(player.hasCock()) {
+		player.sexReward("Default", "Dick",true,false);
+	}
+	player.sexReward("milk");
 	dynStats("lib", 1);
 	//Slimefeed!
-	player.slimeFeed();
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -302,7 +306,8 @@ private function hasCockFeedEssy(newPage:Boolean = true):void {
 	outputText("\n\nIt doesn't take long before the gushing, milky embrace of Essy's flowering breasts coaxes you to paint the green girl's emerald flesh white with your ivory seed.  As you cum, her shuddering udders seem to experience their own release, massive teats bulging between your fingers as they swell with a tremendous, liquid weight.  Then, in a strangely synchronized discharge, surging gouts of milky sap shower out in pressured geysers that rain down around the two of you in a sticky deluge of rich passion.  The floor teems with sprouting undergrowth while the plant girl's shapely ass jiggles with orgasmic delight as the soil she's planted in turns a deep black, instantly enriched by her fertile cream.");
 	
 	outputText("\n\nExhausted anew, Essy reclines in her pot, already dozing with an expression of happy contentment.  Though she's still imprisoned, you've at least set her at ease.  While you might like to move her somewhere more private, the sheer weight of her pot is more than enough to frustrate any attempt you might make.  Best to just leave her and check in later.");
-	player.orgasm();
+	player.sexReward("milk");
+	player.sexReward("Default", "Dick", true,false);
 	doNext(playerMenu);
 }
 
@@ -322,9 +327,8 @@ private function hasPussyFeedEssy(newPage:Boolean = true):void {
 	outputText("\n\nYour lewd, tit-humping labor swells to a fever pitch as her over-stimulated udder plumps inside you, fattening with her blossoming lust.  The cock-like knob inside you becomes swollen with milk, ballooning longer and thicker until your suckling inner walls strain to bear the girl's bloated nipple.  Feeling the trembling clench of your orgasm building, you tighten your grip and thrust yourself as deeply as you can on the cunny-stuffing mammary.  Her breast, unable to resist your peaking squeeze, gushes with pressurized jets of fertile sap, flooding your pussy with a warmth a bit too fluid to be cum, but still thick enough to send a shiver of fulfillment down your spine.  You watch your tummy grow pudgy, then plump, and finally obese as your womb is flooded with her tingling, fertile milk.  The two of you cry out in orgasmic bliss and, positively swollen with the plant-girl's bounty, you collapsing into her very soaked cleavage, still gripping her lactating nipples.  You lay there, panting softly with her for a time, just soaking in the stimulating thrill of your ponderous belly, giving Essy's tits a tender squeeze now and then just to hear her moo with delight.");
 	
 	outputText("\n\nIt takes you a while, but you extricate yourself and clean off the best you can, leaving her with a friendly kiss on the cheek before you head on your way once more.  With visitors like you, she hardly seems like she'll mind being trapped in the enchanted flower pot.");
-	player.orgasm();
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+	player.sexReward("milk");
+	player.sexReward("cum", "Vaginal");
 	if(player.fertility < 50) player.fertility++;
 	doNext(playerMenu);
 }

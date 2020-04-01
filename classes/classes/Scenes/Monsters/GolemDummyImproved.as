@@ -11,10 +11,12 @@ package classes.Scenes.Monsters
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Dungeons.RiverDungeon;
 	import classes.Scenes.SceneLib;
+	import classes.Scenes.Camp.CampMakeWinions;
 	
 	public class GolemDummyImproved extends AbstractGolem
 	{
 		public var floor1:RiverDungeon = new RiverDungeon();
+		public var campMake:CampMakeWinions = new CampMakeWinions();
 		
 		public function backhand():void {
 			outputText("The golem's visage twists into a grimace of irritation, and it swings its hand at you in a vicious backhand.");
@@ -46,7 +48,10 @@ package classes.Scenes.Monsters
 				if (flags[kFLAGS.AETHER_SINISTER_EVO] == 0.5) SceneLib.dungeons.riverdungeon.takeAetherSister2();
 				else SceneLib.dungeons.riverdungeon.takeAetherSister1();
 			}
-			else SceneLib.combat.cleanupAfterCombatImpl();
+			else {
+				if (player.hasStatusEffect(StatusEffects.SoulArena)) SceneLib.combat.finishCombat();
+				else campMake.postFightGolemOptions1();
+			}
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -72,7 +77,6 @@ package classes.Scenes.Monsters
 				this.weaponAttack = 20;
 				this.armorDef = 30;
 				this.armorMDef = 9;
-				this.drop = NO_DROP;
 				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			}
 			else {
@@ -88,13 +92,12 @@ package classes.Scenes.Monsters
 				this.weaponAttack = 15;
 				this.armorDef = 15;
 				this.armorMDef = 3;
-				this.drop = new ChainedDrop()
-						.add(useables.GOLCORE, 1/4);
 			}
 			this.imageName = "dummy golem";
 			this.tallness = 78;
 			this.weaponVerb = "smash";
 			this.armorName = "cracked stone";
+			this.drop = NO_DROP;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);

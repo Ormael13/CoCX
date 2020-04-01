@@ -30,8 +30,7 @@ package classes.Items
 		public const B_SCARB:Weapon = new Weapon("B.ScarB", "B.ScarBlade", "broken scarred blade", "a broken scarred blade", "slash", 12, 480, "This saber, made from lethicite-imbued metal, seems to no longer seek flesh; whatever demonic properties in this weapon is gone now but it's still an effective weapon.");
 		public const BLETTER:BloodLetter = new BloodLetter();
 		public const B_WIDOW:BlackWidow = new BlackWidow();
-		public const CLAWS  :Weapon = new Weapon("Claws","Claws","gauntlet with claws","a gauntlet with claws","rend",0,100,"This metal gauntlets have tips of the fingers shaped like sharp natural claws.  Though it lacks the damaging potential of other weapons, it has a chance to leave bleeding wounds.");
-		public const L_CLAWS:Weapon = new Weapon("L.Claws","LustyClaws","gauntlet with an aphrodisiac-coated claws","a gauntlet with an aphrodisiac-coated claws","rend",0,200,"This metal gauntlets have tips of the fingers shaped like natural claws.  They seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.");
+		public const CLAWS  :Weapon = new Weapon("Claws","Claws","gauntlet with claws","a gauntlet with claws","rend",0,100,"Those metal gauntlets have tips of the fingers shaped like sharp natural claws.  Though they lacks the damaging potential of other weapons, they have a chance to leave bleeding wounds.");
 		public const CLAYMOR:Weapon = new LargeClaymore();
 		public const CNTWHIP:CatONineTailWhip = new CatONineTailWhip();
 		public const DWARWA :DwarvenWaraxe = new DwarvenWaraxe();
@@ -57,6 +56,7 @@ package classes.Items
 		public const FLYWHIS:FlyWhisk = new FlyWhisk();
 		public const FRTAXE :Weapon = new Weapon("Fr.T.Axe","Fr.T.Axe", "Francisca throwing axe", "a Francisca throwing axe", "cleave", 25, 2000, "A foreign axe, made in polished steel and decorated with hunting reliefs in gold and silver. It’s unusually light for its size, so you may be able to manage it with a single hand. Some runes engraved on the handle assure that it will return to you once it has hit your opponent.", "Large");
 		public const CHAKRAM:Weapon = new Weapon("chakram","chakram", "chakram", "a chakram", "slash", 12, 960, "The chakram is a simple, elegant, and highly portable thrown weapon. It is a flat, open-centered metal discus with a sharpened edge.");
+		public const G_ROD  :Weapon = new Weapon("G. Rod", "G. Rod", "Golemancer Rod", "a Golemancer Rod", "smack", 0, 100, "This metal rod seems to empower golems through energy influx.", "Wand");
 		public const GUANDAO:GuanDao = new GuanDao();
 		public const H_GAUNT:Weapon = new Weapon("H.Gaunt", "H.Gaunt", "hooked gauntlets", "a set of hooked gauntlets", "clawing punch", 0, 400, "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.");
 		public const HALBERD:Halberd = new Halberd();
@@ -67,12 +67,13 @@ package classes.Items
 		public const KATANA :Weapon = new Weapon("Katana ","Katana","katana","a katana","keen cut",17,680,"A curved bladed weapon that cuts through flesh with the greatest of ease.", "Large");
 		public const KIHAAXE:Weapon = new Weapon("KihaAxe","Greataxe","fiery double-bladed axe","a fiery double-bladed axe","fiery cleave",22,880,"This large, double-bladed axe matches Kiha's axe. It's constantly flaming.", "Large");
 		public const L__AXE :LargeAxe = new LargeAxe();
+		public const L_CLAWS:Weapon = new Weapon("L.Claws","LustyClaws","gauntlet with an aphrodisiac-coated claws","a gauntlet with an aphrodisiac-coated claws","rend",0,200,"Those metal gauntlets have tips of the fingers shaped like natural claws.  They seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.");
 		public const L_DAGGR:Weapon = new Weapon("L.Daggr","L.Daggr","lust-enchanted dagger","an aphrodisiac-coated dagger","stab",3,240,"A dagger with a short blade in a wavy pattern.  Its edge seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.", "Small");
 		public const L_HAMMR:LargeHammer = new LargeHammer();
-		public const LHSCYTH:LifehuntScythe = new LifehuntScythe();
 		public const L_STAFF:LethiciteStaff = new LethiciteStaff();
 		public const L_WHIP :LethiciteWhip = new LethiciteWhip();
 		public const LANCE  :Lance = new Lance();
+		public const LHSCYTH:LifehuntScythe = new LifehuntScythe();
 		public const LRAPIER:LustRapier = new LustRapier();
 		public const MACE   :Weapon = new Weapon("Mace   ", "Mace", "mace", "a mace", "smash", 9, 360, "This is a mace, designed to be able to crush against various defenses.");
 		public const MACGRSW:Weapon = new Weapon("Macgrsw","Mach.greatsword","Machine Greatsword","a Machine Greatsword","slash",19,4415,"This greatsword is half invention and half weapon. Instead of a sharp straight blade, the weapon’s sides are a set of metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. Very good for cutting down trees too.", "Large");
@@ -121,7 +122,7 @@ package classes.Items
 		public const TRSTSWO:Weapon = new Weapon("TrStSwo","TruestrikeSword", "Truestrike sword", "a Truestrike sword", "slash", 5, 400, "Lia will write desc of it...soon.");
 		public const U_STAFF:UnicornStaff = new UnicornStaff();
 		public const UDKDEST:UndefeatedKingDestroyer = new UndefeatedKingDestroyer();
-		public const URTAHLB:Weapon = new Weapon("UrtaHlb","UrtaHlb","halberd","a halberd","slash",30,1200,"Urta's halberd. How did you manage to get this?","Large");
+		public const URTAHLB:Weapon = new Weapon("UrtaHlb","UrtaHlb","halberd","a halberd","slash",50,2000,"Urta's halberd. How did you manage to get this?","Large");
 		public const VBLADE :Weapon = new Weapon("V.Blade","V.Blade", "V.Blade", "a V.Blade", "slash", 28, 2240, "A peculiar sword. The letter V is engraved into the blade perhaps its former owner name.");
 		public const W_STAFF:WizardsStaff = new WizardsStaff();
 		public const WARHAMR:HugeWarhammer = new HugeWarhammer();

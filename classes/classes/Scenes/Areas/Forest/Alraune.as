@@ -27,7 +27,9 @@ public class Alraune extends Monster
 		
 		public function alrauneStruggle():void {
 			clearOutput();
-			game.spriteSelect(SpriteDb.s_alraune);
+			if (this.short == "snow lily alraune") game.spriteSelect(SpriteDb.s_snow_lily);
+			else if (this.short == "cinderbloom alraune") game.spriteSelect(SpriteDb.s_cinderbloom);
+			else game.spriteSelect(SpriteDb.s_alraune);
 			outputText("You struggle against ");
 			if (Holidays.isHalloween()) outputText("Jack-O-Raune");
 			else outputText("the " + this.short + "");

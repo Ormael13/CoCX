@@ -17,8 +17,9 @@ public class BimboLiqueur extends Consumable {
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.findPerk(PerkLib.FutaForm) < 0) return true;
+			if (game.player.findPerk(PerkLib.FutaForm) < 0 && game.player.findPerk(PerkLib.TransformationImmunity) < 0 && game.player.findPerk(PerkLib.Undeath) < 0) return true;
 			outputText("Ugh.  This stuff is so, like... last year.  Maybe you can find someone else to feed it to?\n\n");
+			if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= mutations.DrunkenPowerEmpowerOni() && (game.player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath))) mutations.DrunkenPowerEmpower();
 			return false;
 		}
 

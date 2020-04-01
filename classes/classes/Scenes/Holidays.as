@@ -3657,7 +3657,7 @@ public class Holidays {
     }
 
     public static function nieveHoliday():Boolean {
-        return date.month == 11 || date.month == 0;
+        return date.month == 11 || date.month == 0 || date.month == 1;
     }
 
     public static function snowLadyActive():void {

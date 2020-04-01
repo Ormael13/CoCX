@@ -30,19 +30,11 @@ use namespace CoC;
 		public function exploreCaves():void {
 			flags[kFLAGS.DISCOVERED_CAVES]++;
 			
-			var choice:Array = [];
-			var select:int;
-			
-			//Build choice list!
-			choice[choice.length] = 0; //Cave Wyrm (lvl 35)
-			//choice[choice.length] = 1; //Ant worker (lvl 41)
-			choice[choice.length] = 1; //2Dark Elf Ranger (underground ver lvl 48)
-			choice[choice.length] = 2; //3Dark Slime (lvl 54 lub 55)
-			choice[choice.length] = 3; //4Displacer Beast (lvl 60)
-			choice[choice.length] = 4; //5Ebonbloom
-			choice[choice.length] = 5; //6Methir Crystal
-			if (rand(4) == 0) choice[choice.length] = 6; //7Find nothing!
-			
+			//Harpoon gun
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1 && rand(2) == 0) {
+				partsofTouhounaM3();
+				return;
+			}
 			//Wild manticore/malicore
 			if (flags[kFLAGS.ETNA_AFFECTION] >= 5 && rand(4) == 0) {
 				player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
@@ -61,6 +53,20 @@ use namespace CoC;
 				dungeonEL.ebonlabyrinthdiscovery();
 				return;
 			}
+			
+			var choice:Array = [];
+			var select:int;
+			
+			//Build choice list!
+			choice[choice.length] = 0; //Cave Wyrm (lvl 35)
+			//choice[choice.length] = 1; //Ant worker (lvl 41)
+			choice[choice.length] = 1; //2Dark Elf Ranger (underground ver lvl 48)
+			choice[choice.length] = 2; //3Dark Slime (lvl 54 lub 55)
+			choice[choice.length] = 3; //4Displacer Beast (lvl 60)
+			choice[choice.length] = 4; //5Ebonbloom
+			choice[choice.length] = 5; //6Methir Crystal
+			if (rand(4) == 0) choice[choice.length] = 6; //7Find nothing!
+			
 			select = choice[rand(choice.length)];
 			switch(select) {
 				case 0:
@@ -112,6 +118,16 @@ use namespace CoC;
 					dynStats("tou", .5);
 					doNext(camp.returnToCampUseOneHour);
 			}
+		}
+		
+		public function partsofTouhounaM3():void {
+			clearOutput();
+			outputText("As you explore the caves you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
+			outputText("You carefully put the pieces of the Touhouna M3 in your back and head back to your camp.\n\n");
+			player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 1, 1);
+			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
+			player.createKeyItem("Touhouna M3", 0, 0, 0, 0);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

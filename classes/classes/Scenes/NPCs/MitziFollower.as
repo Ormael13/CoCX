@@ -211,7 +211,7 @@ public function mitziSexBigDickSex():void {
 	outputText("\"<i>Mmm… Maybe this will give me a big batch of daughters. What do you think [name]? Wanna see me big and round with milk filled jugs to play with?</i>\"\n\n");
 	outputText("She giggles at seeing your flustered expression before helping you clean up. You put your gear on then lean down to exchange a passionate tongue filled kiss with the goblin woman before heading off to continue your business.\n\n");
 	mitziPreg();
-	player.orgasm();
+	player.sexReward("vaginalFluids","Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
 public function mitziSexJogFuck():void {
@@ -231,7 +231,7 @@ public function mitziSexJogFuck():void {
 	outputText("\"<i>Now that was certainly a fun ride. We should definitely do this again! Perhaps everyday...</i>\"\n\n");
 	outputText("You wouldn't mind honestly. For now you could relax a bit before heading back. You let the goblin lay in your lap to rest for a while until you're both ready to head back to camp.\n\n");
 	mitziPreg();
-	player.orgasm();
+	player.sexReward("vaginalFluids","Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
 public function mitziSexTitJob():void {
@@ -258,7 +258,7 @@ public function mitziSexTitJob():void {
 	outputText("Dribbles of femcum stream down her legs. The mere feeling of hot seed on her skin pushes her into an orgasm.\n\nOnce you calm down, you pull away from Mitzi. Most of her face and breast are coated in a thick layer of cum. She scoops it out of her eyes then happily slurps it up from fingers.\n\n");
 	outputText("\"<i>Mmm… Now that was a tasty treat. I would gladly wallow in a bathtub full of your cum if a could… Hmm, maybe I should try and make it happen.</i>\"\n\n");
 	outputText("A crazy idea for sure but knowing her you wouldn't put it past her to try something like that. You offer to help her get cleaned up but she declines, preferring to rub your seed all over her body. You shake your head, laughing and leaving her to it.\n\n");
-	player.orgasm();
+	player.sexReward("Default","Dick",true,false);
 	doNext(camp.returnToCampUseOneHour);
 }
 public function mitziSexFuckHer():void {
@@ -277,7 +277,7 @@ public function mitziSexFuckHer():void {
 	outputText("After such an intense steamy session with the goblin woman, you help get her cleaned up. She sighs in relief, leaning against the rock.\n\n");
 	outputText("\"<i>Now that was fun. I really needed you know. A daily dose of meat is just what I need to stay healthy after all.</i>\"\n\n");
 	outputText("She gives you a wide sharp toothed grin and you playfully push her away before getting ready to head off.\n\n");
-	player.orgasm();
+	player.sexReward("vaginalFluids","Dick");
 	mitziPreg();
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -297,7 +297,7 @@ public function mitziSexEatenOut():void {
 	outputText("She gives you a sultry look then licks her lips. That tongue of hers is truly something. The goblin hops off you as you sit up and stretch, letting out a satisfied sigh.\n\n");
 	outputText("\"<i>Well that was definitely fun… Maybe can do this again soon, right?</i>\"\n\n");
 	outputText("You might just consider it. For now it's back to your daily routine. You gather your gear then say your goodbyes to Mitzi before heading off.\n\n");
-	player.orgasm();
+	player.sexReward("saliva");
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -324,7 +324,6 @@ private function MitziPoopsBabies():void {
 	outputText("You shake your head, laughing and telling her that you'll worry about that later. For now taking care of the youngest ones are top priority. She gives you a warm smile before turning her attention back to her nursing daughters who are already starting to grow bigger. You make sure the goblin and her daughters are alright then give her a kiss before heading off.\n\n");
 	player.removeStatusEffect(StatusEffects.MitziPregnant);
 	flags[kFLAGS.MITZI_DAUGHTERS] += 4;
-	doNext(camp.returnToCampUseOneHour);
 }
 
 public function MitziDaughtersCampMainMenu(first:Boolean = true):void {
@@ -400,6 +399,7 @@ public function MitziDaughtersIzmaDaughters():void {
 	outputText("Izma laughs shaking her head.\n\n");
 	outputText("\"<i>Maybe for today but next time I'll definitely lay it on you.</i>\"\n\n");
 	outputText("You chuckle to yourself, having witnessed the scene in its entirety. Maybe Rathazul was right. You do keep weird company… You have to admit it's pretty entertaining though.\n\n");
+	player.createStatusEffect(StatusEffects.MitziIzmaDaughters, 0, 0, 0, 0);
 	doNext(playerMenu);
 }
 
