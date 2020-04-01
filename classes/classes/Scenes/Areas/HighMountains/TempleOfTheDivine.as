@@ -1764,6 +1764,18 @@ use namespace CoC;
 				player.removePerk(PerkLib.ElvishPeripheralNervSysFinalForm);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.EasterBunnyEggBag)) {
+				player.removePerk(PerkLib.EasterBunnyEggBag);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.EasterBunnyEggBagEvolved)) {
+				player.removePerk(PerkLib.EasterBunnyEggBagEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.EasterBunnyEggBagFinalForm)) {
+				player.removePerk(PerkLib.EasterBunnyEggBagFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.FrozenHeart)) {
 				player.removePerk(PerkLib.FrozenHeart);
 				player.perkPoints += 1;
@@ -1866,6 +1878,18 @@ use namespace CoC;
 			}
 			if (player.hasPerk(PerkLib.MantislikeAgilityEvolved)) {
 				player.removePerk(PerkLib.MantislikeAgilityEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.MelkieLung)) {
+				player.removePerk(PerkLib.MelkieLung);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.MelkieLungEvolved)) {
+				player.removePerk(PerkLib.MelkieLungEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.MelkieLungFinalForm)) {
+				player.removePerk(PerkLib.MelkieLungFinalForm);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.MinotaurTesticles)) {

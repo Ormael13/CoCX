@@ -950,11 +950,11 @@ public function soularena():void {
 	private function golemancershop1():void {
 		menu();
 		addButton(5, "G.Rod", buyItem, weapons.G_ROD).hint("Golemancer Rod");
-		addButton(6, "Y.U.Panel", buyItem, shields.Y_U_PAN).hint("Yogi Uh Panel");
+		addButton(6, "Y.U.Panel", buyItem, shields.Y_U_PAN).hint("Yogi Uh Panel");/*
 		if (player.hasPerk(PerkLib.MasterGolemMaker)) {
 			if (player.hasKeyItem("Golems, Animations and You") >= 0) addButtonDisabled(12, "G,A&Y Man.", "You already bought 'Golems, Animations and You' manual.");
 			else addButton(12, "G,A&Y Man.", golemancershopPermGolemsUpgradesGuide).hint("Buy 'Golems, Animations and You' manual to make golems great again.");
-		}
+		}*/
 		if (player.hasPerk(PerkLib.JobGolemancer)) {
 			if (player.statusEffectv1(StatusEffects.GolemancerShop) == 0) addButton(13, "'Free Cores?'", golemancershopNotSoFreeCores).hint("A dark side of you wispers: 'Dew it!!! Press this button!!! Dew it now!!!'");
 			else if (player.statusEffectv1(StatusEffects.GolemancerShop) == 0) addButtonDisabled(13, "'Free Cores?'", "You already 'Dew It and pressed the button'. No more freebies for ya...")

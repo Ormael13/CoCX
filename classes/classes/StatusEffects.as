@@ -301,6 +301,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CampSparingNpcsTimers6:StatusEffectType			= mk("Camp Sparing Npc's Timers 6");//x / x / x / x
 		public static const ClaraCombatRounds:StatusEffectType              = mk("Clara Combat Rounds");
 		public static const ClaraFoughtInCamp:StatusEffectType              = mk("Clara Fought In Camp");
+		public static const ChiChiWeddingS:StatusEffectType                 = mk("Chi Chi Wedding S");
 		public static const CockPumped:StatusEffectType                     = mk("Cock Pumped");
 		public static const CombatFollowerAlvina:StatusEffectType			= mk("Combat Follower: Alvina");
 		public static const CombatFollowerAmily:StatusEffectType			= mk("Combat Follower: Amily");
@@ -493,6 +494,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const PostAnemoneBeatdown:StatusEffectType            = mk("Post Anemone Beatdown");
 		public static const PureCampJojo:StatusEffectType                   = mk("PureCampJojo");
 		public static const RaijuLightningStatus:StatusEffectType           = mk("Raiju lightning status");
+		public static const RathazulAprilFool:StatusEffectType              = mk("RathazulAprilFool");
 		public static const RathazulArmor:StatusEffectType                  = mk("RathazulArmor");
 		public static const RepeatSuccubi:StatusEffectType                  = mk("repeatSuccubi");
 		public static const ResourceNode1:StatusEffectType                  = mk("Resource Node 1");

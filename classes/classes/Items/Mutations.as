@@ -7247,7 +7247,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 				outputText("\n\nThere's a tightening in your [sack] that only gets higher and higher until you're doubled over and wheezing.  When it passes, you reach down and discover that <b>two of your testicles are gone.</b>");
 				player.balls -= 2;
-			}
+			}/*
             //Make PC an Easter bunny
             if (!player.hasPerk(PerkLib.EasterBunnyBalls) && player.hasCock() && player.balls <= 4 && rand(3) == 0) {
                 outputText("\n\nYou gasp as ");
@@ -7264,10 +7264,8 @@ public final class Mutations extends MutationsHelper
                         "ejaculated. <b>You now have Easter Bunny balls!</b>");
                 player.createPerk(PerkLib.EasterBunnyBalls, 0, 0, 0, 0);
                 player.ballSize = 1;
-
                 flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] += 2;
-            }
-
+            }*/
 			//Boost cum production
 			if ((player.balls > 0 || player.hasCock()) && player.cumQ() < 3000 && rand(3) == 0 && changeLimit > 1) {
 				changes++;

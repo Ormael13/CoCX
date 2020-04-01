@@ -262,6 +262,11 @@ import classes.StatusEffects;
 			cleanupAfterCombat();
 		}
 		
+		private function encountersFountainOfPurity():void {
+			player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
+			player.addStatusValue(StatusEffects.RathazulAprilFool, 3, 1);
+			outputText("As you explore the labyrinth you stumble upon what appears to be a room with fountain of purity.\n\nYou collected a vial of the fountain of purity. It's time to bring it back to Rathazul.\n\n");
+		}
 		private function encountersLootChest():void {
 			player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 			var EXP:Number = 10 * (player.level + 1) * (1 + rand(5));
@@ -703,6 +708,10 @@ import classes.StatusEffects;
 				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 				encountersRuletteBossesEL2();
 			}*/
+			else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 295 && player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv1(StatusEffects.RathazulAprilFool) == 0 && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
+				encountersFountainOfPurity();
+			}
 			else encountersRuletteEL();
 		}
 		public function checkingELAchievs():void {

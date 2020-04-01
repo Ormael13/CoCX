@@ -520,6 +520,18 @@ CoC.instance.saves.saveGame(player.slotName);
 		SceneLib.mitziFollower.MitziDaughtersIzmaDaughters();
 		return;
 	}
+	//Rathazul april fool
+	if(isAprilFools() && player.hasStatusEffect(StatusEffects.CampRathazul) && rand(5) == 0) {
+		if (player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv2(StatusEffects.RathazulAprilFool) < 5) {
+			if (player.statusEffectv3(StatusEffects.RathazulAprilFool) == 1) SceneLib.rathazul.rathazulAprilFoolPart3();
+			if (date.fullYear > player.statusEffectv1(StatusEffects.RathazulAprilFool)) SceneLib.rathazul.rathazulAprilFool();
+			return;
+		}
+		else if (!player.hasStatusEffect(StatusEffects.RathazulAprilFool)) {
+			SceneLib.rathazul.rathazulAprilFool();
+			return;
+		}
+	}
 	//Cotton preg freakout
 	if (player.pregnancyIncubation <= 280 && player.pregnancyType == PregnancyStore.PREGNANCY_COTTON &&
 	   	flags[kFLAGS.COTTON_KNOCKED_UP_PC_AND_TALK_HAPPENED] == 0 && (model.time.hours == 6 || model.time.hours == 7)) {
@@ -4105,10 +4117,10 @@ private function promptSaveUpdate():void {
 		doNext(doCamp);
 		return;
 	}
-/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 27) {
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 27) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 28;
 		clearOutput();
-		outputText("Text.");
+		outputText("Titan's into Gigant's, Legends and Myths into Epics and short holidays for game engine ^^");
 		if (player.hasPerk(PerkLib.TitanGrip)) {
 			player.removePerk(PerkLib.TitanGrip);
 			player.createPerk(PerkLib.GigantGrip, 0, 0, 0, 0);
@@ -4142,7 +4154,7 @@ private function promptSaveUpdate():void {
 		doNext(doCamp);
 		return;
 	}
-	if (flags[kFLAGS.MOD_SAVE_VERSION] == 28) {
+/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 28) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 29;
 		clearOutput();
 		outputText("Text.");
@@ -4614,7 +4626,7 @@ private function updateAchievements():void {
 	if (player.newGamePlusMod() >= 5) awardAchievement("xXx 6: Rise of the Demons", kACHIEVEMENTS.EPIC_XXX6_RISE_OF_THE_DEMONS);/*
 	if (player.newGamePlusMod() >= 6) awardAchievement("xXx 7: Salvation", kACHIEVEMENTS.EPIC_XXX7_SALVATION);
 	if (player.newGamePlusMod() >= 7) awardAchievement("xXx 8: Genisys", kACHIEVEMENTS.EPIC_XXX8_GENISYS);
-	if (player.newGamePlusMod() >= 8) awardAchievement("xXx 8: Dark Fate", kACHIEVEMENTS.EPIC_XXX9_DARK_FATE);*/
+	if (player.newGamePlusMod() >= 8) awardAchievement("xXx 9: Dark Fate", kACHIEVEMENTS.EPIC_XXX9_DARK_FATE);*/
 	
 	if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] > 0 || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] > 0) awardAchievement("My own Demon Weapon", kACHIEVEMENTS.EPIC_MY_OWN_DEMON_WEAPON);
 	var EvolvingItems:int = 0;
