@@ -1023,6 +1023,9 @@
             <case values="Antennae.BEE">
                 <show part="antennae/bee"/>
             </case>
+            <case values="Antennae.CENTIPEDE">
+                <show part="antennae/bee"/> <!-- Temporary -->
+            </case>
             <default>
                 <show part="antennae/bee"/>
             </default>
@@ -1237,6 +1240,9 @@
 						</default>
 					</switch>
 				</if>
+            </case>
+            <case values="RearBody.CENTIPEDE">
+                <show part="neck/Centipede"/>
             </case>
             <default>
             </default>
@@ -2202,6 +2208,10 @@
 			<case values="LowerBody.PLANT_HIGH_HEELS">
                 <show part="feet/alraune"/>
             </case>
+            <case values="LowerBody.CENTIPEDE">
+                <show part="legs/Centipede"/>
+                <show part="legs_bg/Centipede"/>
+            </case>
             <!--<case values="LowerBody.YGG_ROOT_CLAWS">TODO </case>-->
             <case values="'never'"><!--TODO liliraune-->
                 <hide part="legs/*"/>
@@ -2672,6 +2682,11 @@
 				<show part="arms_bg_pattern/Bstripe"/>
 				<show part="legs_pattern/Bstripe"/>	
             </case>
+            <case values="Skin.PATTERN_VENOMOUS_MARKINGS">
+                <show part="torso_pattern/Bvenom"/>
+                <show part="arms_pattern/Bvenom"/>
+                <show part="arms_bg_pattern/Bvenom"/>
+            </case>
             <default>
                 <hide part="breasts_pattern/*"/>
 				<hide part="torso_pattern/*"/>
@@ -2761,6 +2776,9 @@
 			<hide part="legs_pattern/*"/>
 		</if>
 		<if test="lowerBody == LowerBody.GHOST_2">
+			<hide part="legs_pattern/*"/>
+		</if>
+		<if test="lowerBody == LowerBody.CENTIPEDE">
 			<hide part="legs_pattern/*"/>
 		</if>
 		
