@@ -1198,6 +1198,9 @@
 			<case values="Eyes.GOAT">
                 <show part="eyes/goat"/>
             </case>
+            <case values="Eyes.CENTIPEDE">
+                <show part="eyes/centipede"/>
+            </case>
             <default>
                 <show part="eyes/human"/>
             </default>
@@ -1508,7 +1511,7 @@
 
 		<!-- ARMS AREA -->
         <switch value="arms.type">
-            <case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU">
+            <case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
 				<if test="PlayerHasViewableOutfit">
 					<if test="SuccubusDress"> <!--For future addons-->
 						<!--see switch[value=skin.coverage]-->
