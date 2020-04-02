@@ -569,6 +569,7 @@
         <cell rect="481,110,29,32" name="face/bovine" dx="80" dy="37"/>
         <cell rect="511,110,29,32" name="face/demonlewd" dx="80" dy="37"/>
         <cell rect="541,110,29,32" name="face/ghost" dx="81" dy="38"/>
+        <cell rect="571,110,29,32" name="face/melancholic" dx="81" dy="38"/>
         <cell rect="1,150,29,32" name="eyes/human" dx="80" dy="37"/>
         <cell rect="31,150,29,32" name="eyes/devil" dx="80" dy="37"/>
         <cell rect="61,150,29,32" name="eyes/cat" dx="80" dy="37"/>
@@ -1245,7 +1246,7 @@
 				</if>
             </case>
             <case values="RearBody.CENTIPEDE">
-                <show part="neck/Centipede"/>
+                <show part="neck/centipede"/>
             </case>
             <default>
             </default>
@@ -1455,6 +1456,10 @@
             </case>
             <case values="Face.SALAMANDER_FANGS,Face.SHARPTEETH,Face.VAMPIRE,Face.YETI_FANGS,Face.ONI_TEETH,Face.DRAGON_FANGS,Face.RAIJU_FANGS,Face.DEVIL_FANGS,Face.ANIMAL_TOOTHS,Face.WOLF_FANGS,Face.SNAKE_FANGS,Face.CAT_CANINES,Face.MANTICORE">
                 <show part="face/human_fang"/>
+                <if test="eyes.type= Eyes.CENTIPEDE">
+                    <hide part="face/human_fang"/>
+					<show part="face/melancholic"/>
+				</if>
             </case>
             <case values="Face.ORCA">
                 <show part="face/orca"/>
@@ -2212,8 +2217,9 @@
                 <show part="feet/alraune"/>
             </case>
             <case values="LowerBody.CENTIPEDE">
-                <show part="legs/Centipede"/>
-                <show part="legs_bg/Centipede"/>
+                <hide part="legs/human"/>
+                <show part="legs/centipede"/>
+                <show part="legs_bg/centipede"/>
             </case>
             <!--<case values="LowerBody.YGG_ROOT_CLAWS">TODO </case>-->
             <case values="'never'"><!--TODO liliraune-->

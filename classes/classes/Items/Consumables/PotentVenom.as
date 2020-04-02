@@ -101,7 +101,7 @@ public class PotentVenom extends Consumable {
 		//Antenna
 		if (player.antennae.type != Antennae.CENTIPEDE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYour head itches momentarily as two long antennae sprout from atop your forehead. You can move both independently as if they're an extension of you.");
-			mutations.setEarType(Antennae.CENTIPEDE);
+			mutations.setAntennae(Antennae.CENTIPEDE);
 			changes++;
 		}
 		//Ears
