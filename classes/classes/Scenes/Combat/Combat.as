@@ -3786,6 +3786,12 @@ public function meleeDamageAcc():void {
 					else if (player.level < 20) damage += 50 + (player.level - 10) * 2;
 					else if (player.level < 30) damage += 70 + (player.level - 20) * 1;
 					else damage += 80;
+					if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+					if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+					if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+					if (player.hasPerk(PerkLib.RacialParagon)) lustdamage *= 1.50;
+					if (player.hasPerk(PerkLib.Apex)) lustdamage *= 1.50;
+					if (player.hasPerk(PerkLib.AlphaAndOmega)) lustdamage *= 1.50;
 					lustdamage *= 0.14;
 					monster.teased(monster.lustVuln * lustdamage);
 					monster.tou -= 2;
@@ -7488,6 +7494,9 @@ public function ScyllaSqueeze():void {
 	var damage:int = monster.maxHP() * (.10 + rand(15) / 100) * 1.5;
 	if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
 	if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+	if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+	if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+	if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 	if (monster.plural == true) damage *= 5;
 	//Squeeze -
 	outputText("You start squeezing your");
@@ -7651,6 +7660,9 @@ public function ScyllaTease():void {
 			if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += historyWhoreBonus();
 			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
 			if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.01 * (chance - 100));
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 			if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 			damage *= damagemultiplier;
 			//Determine if critical tease!
@@ -7816,6 +7828,9 @@ public function GooTease():void {
 			if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += historyWhoreBonus();
 			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
 			if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.01 * (chance - 100));
+			if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= 1.50;
+			if (player.hasPerk(PerkLib.Apex)) damagemultiplier *= 1.50;
+			if (player.hasPerk(PerkLib.AlphaAndOmega)) damagemultiplier *= 1.50;
 			if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 			damage *= damagemultiplier;
 			//Determine if critical tease!
@@ -7875,6 +7890,9 @@ public function VampiricBite():void {
 	var damage:int = player.maxHP() * 0.05;
 	if (player.hasPerk(PerkLib.HollowFangsEvolved)) damage += player.maxHP() * 0.02;
 	if (player.hasPerk(PerkLib.HollowFangsFinalForm)) damage += player.maxHP() * 0.08;
+	if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+	if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+	if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 	damage = Math.round(damage);
 	doDamage(damage, true, true);
 	player.HP += damage;
@@ -7886,6 +7904,9 @@ public function VampiricBite():void {
 	if (monster.gender != 0 && monster.lustVuln != 0) {
 		var lustDmg:int = (10 + (player.lib * 0.1)) * monster.lustVuln;
 		if (player.hasPerk(PerkLib.HollowFangsFinalForm)) lustDmg *= 1.5;
+		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
 		lustDmg = Math.round(lustDmg);
 		outputText(" [monster he] can’t help but moan, aroused from the aphrodisiac in your saliva for ");
 		monster.teased(lustDmg);
@@ -7913,15 +7934,45 @@ public function VampireLeggoMyEggo():void {
 }
 
 //Claws Rend
+public function clawsRendDamage(): void {
+	var damage:int;
+	damage = unarmedAttack();
+	damage += scalingBonusStrength() * 0.5;
+	if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+	if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+	if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+	//Determine if critical!
+	var crit:Boolean = false;
+	var critChance:int;
+	critChance = combatPhysicalCritical();
+	if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+	if (rand(100) < critChance) {
+		crit = true;
+		damage *= 1.75;
+	}
+	damage = Math.round(damage);
+	doDamage(damage, true, true);
+	if (crit) outputText(" <b>Critical!</b>");
+	if (player.hasPerk(PerkLib.PhantomStrike)) doDamage(damage, true, true);
+}
+
 public function clawsRend():void {
 	if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(40, USEFATG_PHYSICAL);
 	else fatigue(20, USEFATG_PHYSICAL);
-	outputText("You rend [monster a] [monster name] with your claws. ");
-	var damage:int = player.str;
-	damage += scalingBonusStrength() * 0.5;
-	damage = Math.round(damage);
-	doDamage(damage, true, true);
-	if (player.hasPerk(PerkLib.PhantomStrike)) doDamage(damage, true, true);
+	outputText("You begin to rend [monster a] [monster name] with your claws. ");
+	clawsRendDamage();
+	if(player.hasPerk(PerkLib.ClawTraining)){
+		clawsRendDamage();
+	}
+	if(player.hasPerk(PerkLib.ExtraClawAttack)){
+		clawsRendDamage();
+	}
+	if(player.hasPerk(PerkLib.MultiClawAttack)){
+		clawsRendDamage();
+	}
+	if(player.hasPerk(PerkLib.ClawingFlurry)){
+		clawsRendDamage();
+	}
 	if(monster.HP <= monster.minHP()) {
 		doNext(combat.endHpVictory);
 		return;
@@ -7929,6 +7980,7 @@ public function clawsRend():void {
 	outputText("\n\n");
 	enemyAI();
 }
+
 public function PussyLeggoMyEggo():void {
 	clearOutput();
 	outputText("You let your opponent free ending your grapple.\n\n");
@@ -7996,6 +8048,9 @@ public function bearHug():void {
 	}
 	damage += player.tou;
 	damage += scalingBonusToughness() * 0.5;
+	if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+	if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+	if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 	damage = Math.round(damage);
 	doDamage(damage, true, true);
 	if(monster.HP <= monster.minHP()) {

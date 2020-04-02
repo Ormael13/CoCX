@@ -190,12 +190,23 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 			}
 			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
-				bd = buttons.add("Tail Spike", playerTailSpike).hint("Shoot an envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-				if (player.tailVenom < 50 && player.hasPerk(PerkLib.ManticoreMetabolism)) {
-					bd.disable("You do not have enough venom to shoot spikes right now!");
+				if (!player.hasPerk(PerkLib.ManticoreMetabolism)) {
+					bd = buttons.add("Tail Spike", playerTailSpike).hint("Shoot an envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+					if (player.tailVenom < 50 && player.hasPerk(PerkLib.ManticoreMetabolism)) {
+						bd.disable("You do not have enough venom to shoot spikes right now!");
+					}
+					else if (player.tailVenom < 25) {
+						bd.disable("You do not have enough venom to shoot spike right now!");
+					}
 				}
-				else if (player.tailVenom < 25) {
-					bd.disable("You do not have enough venom to shoot spike right now!");
+				if (player.hasPerk(PerkLib.ManticoreMetabolism)) {
+					bd = buttons.add("Tail Spike", playerOmniTailSpike).hint("Shoot a volley of envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+					if (player.tailVenom < 50 && player.hasPerk(PerkLib.ManticoreMetabolism)) {
+						bd.disable("You do not have enough venom to shoot spikes right now!");
+					}
+					else if (player.tailVenom < 25) {
+						bd.disable("You do not have enough venom to shoot spike right now!");
+					}
 				}
 			}
 			if (player.tailType == Tail.SPIDER_ADBOMEN) {
@@ -4370,13 +4381,81 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else doNext(endLustVictory);
 	}
 //Player tail spike attack
+
+	public function tailspikedamage():void{
+		var bimbo:Boolean   = false;
+		var bro:Boolean     = false;
+		var futa:Boolean    = false;
+		//Phys dmg!
+		var damage:Number = unarmedAttack();
+		damage += player.str;
+		damage += scalingBonusSpeed() * 0.2;
+		if (damage < 10) damage = 10;
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
+		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		var lustdamage:Number = 35 + rand(player.lib / 10);
+		if (player.level < 10) damage += 20 + (player.level * 3);
+		else if (player.level < 20) damage += 50 + (player.level - 10) * 2;
+		else if (player.level < 30) damage += 70 + (player.level - 20) * 1;
+		else damage += 80;
+		//Lust damage!
+		lustdamage *= 0.7;
+		if (player.findPerk(PerkLib.SensualLover) >= 0) lustdamage += 2;
+		if (player.findPerk(PerkLib.Seduction) >= 0) lustdamage += 5;
+		if (player.findPerk(PerkLib.SluttySeduction) >= 0) lustdamage += player.perkv1(PerkLib.SluttySeduction);
+		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) lustdamage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+		if (bimbo || bro || futa) lustdamage += 5;
+		if (player.findPerk(PerkLib.FlawlessBody) >= 0) lustdamage += 10;
+		lustdamage += scalingBonusLibido() * 0.1;
+		if (player.hasPerk(PerkLib.EromancyExpert)) lustdamage *= 1.5;
+		if (player.findPerk(PerkLib.JobSeducer) >= 0) lustdamage += player.teaseLevel * 3;
+		if (player.hasPerk(PerkLib.RacialParagon)) lustdamage *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) lustdamage *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustdamage *= 1.50;
+		//Determine if critical!
+		var crit:Boolean = false;
+		var critChance:Number;
+		critChance = combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			lustdamage *= 1.75;
+			damage *= 1.75;
+		}
+		//Do all damage
+		damage = Math.round(damage);
+		damage = doDamage(damage);
+		outputText(""+ damage + "");
+		monster.teased(monster.lustVuln * lustdamage, false);
+		if (crit) outputText(" <b>Critical!</b>");
+		monster.spe -= 10;
+		if(monster.spe < 1) monster.spe = 1;
+		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
+		{
+			monster.addStatusValue(StatusEffects.NagaVenom,3,5);
+		}
+		else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 5, 0);
+		//if (!monster.hasStatusEffect(StatusEffects.lustvenom)) monster.createStatusEffect(StatusEffects.lustvenom, 0, 0, 0, 0);
+		//New line before monster attack
+		outputText("\n\n");
+		monster.spe -= (2+rand(3));
+		if(monster.spe < 1) monster.spe = 1;
+		//Use tail mp
+		player.tailVenom -= 5;
+		flags[kFLAGS.VENOM_TIMES_USED] += 1;
+		combat.heroBaneProc(damage);
+	}
+
 	public function playerTailSpike():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		
 		//Worms are immune!
 		if (monster.short == "worms") {
-			outputText("Taking advantage of your new natural weapons, you quickly shooting an envenomed spike at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your spike impale the ground behind.\n\n");
+			outputText("Taking advantage of your new natural weapons, you quickly shoot an envenomed spike at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your spike impale the ground behind.\n\n");
 			enemyAI();
 			return;
 		}
@@ -4402,51 +4481,61 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//Sting successful!
 		outputText("You drop on all fours, flinging your tail forward and shooting an envenomed spike at " + monster.a + monster.short + ".");
-		//Phys dmg!
-		var damage:Number = unarmedAttack();
-		damage += player.spe;
-		damage += scalingBonusSpeed() * 0.2;
-		if (damage < 10) damage = 10;
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
-		damage = Math.round(damage);
-		damage = doDamage(damage);
-		outputText(" This deal " + damage + " damage as your victim grows increasingly flushed by your potent aphrodisiac.");
-		//Lust damage!
-		var lustdamage:Number = 35 + rand(player.lib / 10);
-		if (player.level < 10) damage += 20 + (player.level * 3);
-		else if (player.level < 20) damage += 50 + (player.level - 10) * 2;
-		else if (player.level < 30) damage += 70 + (player.level - 20) * 1;
-		else damage += 80;
-		lustdamage *= 0.7;
-		if (player.hasPerk(PerkLib.RacialParagon)) lustdamage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) lustdamage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustdamage *= 1.50;
-		monster.teased(monster.lustVuln * lustdamage);
-		monster.spe -= 10;
-		if(monster.spe < 1) monster.spe = 1;
-		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
-		{
-			monster.addStatusValue(StatusEffects.NagaVenom,3,5);
+		tailspikedamage();
+		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		else doNext(endLustVictory);
+	}
+
+	//Player Omni tail spike attack
+	public function playerOmniTailSpike():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if (monster.short == "worms") {
+			outputText("Taking advantage of your new natural weapons, you quickly shoot a flurry of envenomed spike at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your spike impale the ground behind.\n\n");
+			enemyAI();
+			return;
 		}
-		else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 5, 0);
-		//if (!monster.hasStatusEffect(StatusEffects.lustvenom)) monster.createStatusEffect(StatusEffects.lustvenom, 0, 0, 0, 0);
-		//New line before monster attack
-		outputText("\n\n");
-		monster.spe -= (2+rand(3));
-		if(monster.spe < 1) monster.spe = 1;
-		//Use tail mp
-		player.tailVenom -= 25;
-		flags[kFLAGS.VENOM_TIMES_USED] += 1;
-		combat.heroBaneProc(damage);
-		//Kick back to main if no damage occured!
-		if(player.hasStatusEffect(StatusEffects.FirstAttack)) player.removeStatusEffect(StatusEffects.FirstAttack);
-		else {
-			if (player.hasPerk(PerkLib.ManticoreMetabolism)) player.createStatusEffect(StatusEffects.FirstAttack,0,0,0,0);
-			playerTailSpike();
+		//Determine if dodged!
+		//Amily!
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
+			outputText("Amily easily glides around your attacks thanks to her complete concentration on your movements.\n\n");
+			enemyAI();
+			return;
+		}
+		if(monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80) {
+			if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your spike!\n\n");
+			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your spike with superior quickness!\n\n");
+			if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attempts to hit with a spike " + monster.pronoun2 + ".\n\n");
+			enemyAI();
+			return;
+		}
+		//determine if avoided with armor.
+		if(monster.armorDef - player.level >= 10 && rand(4) > 0) {
+			outputText("Despite your best efforts, your spikes can't penetrate " +  monster.a + monster.short + "'s defenses.\n\n");
+			enemyAI();
+			return;
+		}
+		//Sting successful!
+		outputText("You drop on all fours, flinging your tail forward and shooting a volley of envenomed spike at " + monster.a + monster.short + ".");
+
+		//deal damage repeatedly
+		tailspikedamage();
+		tailspikedamage();
+		if(player.hasPerk(PerkLib.ClawTraining)){
+			tailspikedamage();
+			tailspikedamage();
+		}
+		if(player.hasPerk(PerkLib.ExtraClawAttack)){
+			tailspikedamage();
+			tailspikedamage();
+		}
+		if(player.hasPerk(PerkLib.MultiClawAttack)){
+			tailspikedamage();
+			tailspikedamage();
+		}
+		if(player.hasPerk(PerkLib.ClawingFlurry)){
+			tailspikedamage();
+			tailspikedamage();
 		}
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else doNext(endLustVictory);

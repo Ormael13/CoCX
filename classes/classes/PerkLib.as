@@ -700,11 +700,11 @@ public class PerkLib
 				"Add your wisdom to gun damage as a modifier.",
 				"You choose the 'Church of the gun' perk, adding wisdom scaling to firearms damage.");
 		public static const ClawingFlurry:PerkType = mk("Clawing flurry", "Clawing flurry",
-				"When attacking with your claws, add an additional attack striking up to 5 times.",
-				"You choose the 'Clawing flurry' perk, gaining an additional attack with your claws!");
+				"When attacking with your natural weapons, add an additional attack striking up to 5 times.",
+				"You choose the 'Clawing flurry' perk, gaining an additional attack with your natural weapons!");
 		public static const ClawTraining:PerkType = mk("Claw training", "Claw training",
-				"Gain 1 extra natural attack with your claws.",
-				"You choose the 'Claw training' perk, gain 1 extra natural attack with your claws!");
+				"Gain 1 extra natural attack with your natural weapons.",
+				"You choose the 'Claw training' perk, gain 1 extra natural attack with your natural weapons!");
 		public static const CloseToDeath:PerkType = mk("Close to death", "Close to death",
 				"Increasing healing spells effect by 50% when below 25% max HP.",
 				"You choose the 'Close to death' perk, increasing healing spells effect when below 25% max HP.");
@@ -1141,8 +1141,8 @@ public class PerkLib
 				"Gunshots deals double damage against groups and large enemies.",
 				"You choose the 'Explosive cartridge' perk, allowing for your gunshots dealing extra damage to group or large enemies.");
 		public static const ExtraClawAttack:PerkType = mk("Extra claw attack", "Extra claw attack",
-				"When attacking with your claws, add an additional attack striking up to 3 times.",
-				"You choose the 'Extra claw attack' perk, gaining an additional attack with your claws!");
+				"When attacking with your natural weapons, add an additional attack striking up to 3 times.",
+				"You choose the 'Extra claw attack' perk, gaining an additional attack with your natural weapons!");
 		public static const ExtremelyLucky:PerkType = mk("Extremely Lucky", "Extremely Lucky",
 				"You're banned from casinos with that luck of yours, but you still find stuff lying around after battles, increasing your gain upon victory. (15% more gems from victories)",
 				"You choose the 'Extremely Lucky' perk, increasing gem gains from victories by 15%.");
@@ -1996,8 +1996,8 @@ public class PerkLib
 				"Some people get all the luck it seems... Shut up and take our money is what all enemies scream at you upon defeat, increasing your gains on victory. (15% more gems from victories)",
 				"You choose the 'Money Finder' perk, increasing gem gains from victories by 15%.");
 		public static const MultiClawAttack:PerkType = mk("Multi Claw Attack", "Multi Claw Attack",
-				"When attacking with your claws, add an additional attack striking up to 4 times.",
-				"You choose the 'Multi Claw Attack' perk, gaining an additional attack with your claws!");
+				"When attacking with your natural weapons, add an additional attack striking up to 4 times.",
+				"You choose the 'Multi Claw Attack' perk, gaining an additional attack with your natural weapons!");
 		public static const Multishot:PerkType = mk("Multishot", "Multishot",
 				"Allows you to perform additional range attack per round.",
 				"You choose the 'Multishot' perk, This allows you to make additional range attack.");
