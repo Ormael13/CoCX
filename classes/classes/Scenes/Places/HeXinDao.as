@@ -450,6 +450,7 @@ public class HeXinDao extends BaseContent
             addButton(0, "SpHoney", buyItem,consumables.SPHONEY,sayLine(consumables.SPHONEY,"bee"),onBuyString).hint("Buy a bottle of special bee honey.");
             addButton(1, "SatyrWine", buyItem,consumables.SATYR_W,sayLine(consumables.SATYR_W,"satyr"),onBuyString).hint("Buy a bottle of satyr wine.");
             addButton(2, "DrakeHeart", buyItem,consumables.DRAKHRT,sayLine(consumables.DRAKHRT,"dragon"),onBuyString).hint("Buy a drake's heart's flower.");
+            addButton(3, "C.Venom", buyItem,consumables.C_VEMOM,sayLine(consumables.C_VEMOM,"Centipede"),onBuyString).hint("Buy a bottle of Centipede venom.");
             addButton(4, "Hummus", buyItem,consumables.HUMMUS_,sayLine(consumables.HUMMUS_,"humanity"),onBuyString).hint("Buy a blob of cheesy-looking hummus.");
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();

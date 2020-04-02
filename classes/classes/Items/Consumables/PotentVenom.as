@@ -23,7 +23,7 @@ import classes.VaginaClass;
 
 public class PotentVenom extends Consumable {
 	public function PotentVenom() {
-		super("PotentV", "PotentVen", "a vial of potent venom", 50, "A small vial filled with a bubbling, dark purple liquid. Even though it's corked, you can still smell the sweet scent wafting from it and it feels unnaturally warm to the touch.");
+		super("P.Venom", "P.Venom", "a vial of potent venom", 50, "A small vial filled with a bubbling, dark purple liquid. Even though it's corked, you can still smell the sweet scent wafting from it and it feels unnaturally warm to the touch.");
 	}
 
 	override public function useItem():Boolean {
@@ -47,25 +47,25 @@ public class PotentVenom extends Consumable {
 
 		//Transformation effect list
 		if (changeLimit && rand(2) == 0) {
-			outputText("\n\nUnder development.");
+			outputText("\n\nYou shudder as a strange warmth briefly spreads through you. The venom lingers on your tastebuds leaving behind a tingling sensation and lingering pleasure.");
 			dynStats("lus", (10+player.lib/10), "scale", false);
 			changes++;
 		}
 
-		if (player.spe < 80 && changes < changeLimit && rand(2) == 0) {
-			outputText("\n\nUnder development.");
+		if (player.spe < 80 && changes < changeLimit && rand(3) == 0) {
+			outputText("\n\nYou suddenly jerk forward, feeling somewhat twitchy. Surprised, you didn't know you could react so quickly.");
 			dynStats("spe", 1);
 			changes++;
 		}
 
-		if (player.tou < 80 && changes < changeLimit && rand(2) == 0) {
-			outputText("\n\nUnder development.");
+		if (player.tou < 80 && changes < changeLimit && rand(3) == 0) {
+			outputText("\n\nYou feel oddly revitalized. You're so pumped that you feel that you can take on the strongest of enemies and even they would fail to even leave a scratch on you.");
 			dynStats("tou", 5);
 			changes++;
 		}
 
-		if (player.wis > 20 && changes < changeLimit && rand(2) == 0) {
-			outputText("\n\nUnder development.");
+		if (player.wis > 20 && changes < changeLimit && rand(3) == 0) {
+			outputText("\n\nSomehow everything around seems so much duller. The world around you just seems so much more bland and uneventful.\n");
 			dynStats("wis", -5);
 			changes++;
 		}
@@ -74,7 +74,7 @@ public class PotentVenom extends Consumable {
 
 		//Physical changes
 		//Legs
-		if (player.lowerBody != LowerBody.CENTIPEDE && changes < changeLimit && rand(2) == 0) {
+		if (player.lowerBody != LowerBody.CENTIPEDE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			if (player.lowerBody != LowerBody.HUMAN) outputText("You watch, spellbound, while your legs gradually change its entire outer structure back into a plain human-like form. ");
 			outputText("Pain shoots through your legs as you stumble to the ground. You can feel the bones in your legs fuse and reshape themselves as they become longer. " +
@@ -89,29 +89,29 @@ public class PotentVenom extends Consumable {
 			changes++;
 		}
 		//Arms
-		if (player.arms.type != Arms.HUMAN && player.arms.type != Arms.CENTIPEDE && changes < changeLimit && rand(2) == 0) {
+		if (player.arms.type != Arms.HUMAN && player.arms.type != Arms.CENTIPEDE && changes < changeLimit && rand(3) == 0) {
 			mutations.humanizeArms();
 			changes++;
 		}
-		if (player.arms.type != Arms.CENTIPEDE && player.arms.type == Arms.HUMAN && changes < changeLimit && rand(2) == 0) {
+		if (player.arms.type != Arms.CENTIPEDE && player.arms.type == Arms.HUMAN && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYour arms feel strangely warm. You look down at them, noticing purple markings being etched into your skin. Your nails sharpen and take on the same purple hue. <b>You could do some serious damage with your sharp nails.</b>");
 			mutations.setArmType(Arms.CENTIPEDE);
 			changes++;
 		}
 		//Antenna
-		if (player.antennae.type != Antennae.CENTIPEDE && changes < changeLimit && rand(2) == 0) {
+		if (player.antennae.type != Antennae.CENTIPEDE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYour head itches momentarily as two long antennae sprout from atop your forehead. You can move both independently as if they're an extension of you.");
 			mutations.setEarType(Antennae.CENTIPEDE);
 			changes++;
 		}
 		//Ears
-		if (player.ears.type != Ears.ELFIN && changes < changeLimit && rand(2) == 0) {
+		if (player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!");
 			mutations.setEarType(Ears.ELFIN);
 			changes++;
 		}
 		//Face
-		if ((player.faceType != Face.ANIMAL_TOOTHS) && changes < changeLimit && rand(2) == 0) {
+		if ((player.faceType != Face.ANIMAL_TOOTHS) && changes < changeLimit && rand(3) == 0) {
 			if (player.faceType != Face.HUMAN) {
 				mutations.humanizeFace();
 			}
@@ -121,7 +121,7 @@ public class PotentVenom extends Consumable {
 			changes++;
 		}
 		//NeckMaxilipeds
-		if (player.lowerBody == LowerBody.CENTIPEDE && player.rearBody.type != RearBody.CENTIPEDE && changes < changeLimit && rand(2) == 0) {
+		if (player.lowerBody == LowerBody.CENTIPEDE && player.rearBody.type != RearBody.CENTIPEDE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYour neck tingles and begins to itch all of a sudden. You reach up to scratch when your fingers brush up against something hard. " +
 					"You look down to find a pair of grasping pincer like stingers around your neck. They open and close at will and tuck away easily when not in use. " +
 					"<b>It will be easier to hold onto and bite enemies with your new maxillipeds.</b>");
@@ -129,7 +129,7 @@ public class PotentVenom extends Consumable {
 			changes++;
 		}
 		//Eyes
-		if (player.faceType == Face.ANIMAL_TOOTHS && player.eyes.type != Eyes.CENTIPEDE && changes < changeLimit && rand(2) == 0) {
+		if (player.faceType == Face.ANIMAL_TOOTHS && player.eyes.type != Eyes.CENTIPEDE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYou feel a sudden wave of sadness come over you. You sulk, wanting to find some dank dark place to curl up and hide in. " +
 					"If anyone saw you now they would wonder why you appear so downtrodden." +
 					//"" + (EngineCore.silly() ? "You could really use a hug and a tub of ice cream right now.": "You could really use a hug and a tub of ice cream right now.") + "" +
@@ -140,7 +140,7 @@ public class PotentVenom extends Consumable {
 			changes++;
 		}
 		//Tatoo
-		if (player.eyes.type == Eyes.CENTIPEDE && !player.skin.hasVenomousMarking() && changes < changeLimit && rand(2) == 0) {
+		if (player.eyes.type == Eyes.CENTIPEDE && !player.skin.hasVenomousMarking() && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYou feel an unusual warmth in your chest. You look down to see a purple blot form on your chest and then begin to spread out across your skin like brushstrokes. " +
 					"It doesn't stop until your skin is covered in intricate purple designs. You can feel your venom pumping through them. " +
 					"<b>Your skin is covered in venomous body markings.</b>");
@@ -149,7 +149,7 @@ public class PotentVenom extends Consumable {
 			changes++;
 		}
 		//Tatoo
-		if (player.eyes.type == Eyes.CENTIPEDE && !player.skin.hasVenomousMarking() && changes < changeLimit && rand(2) == 0) {
+		if (player.eyes.type == Eyes.CENTIPEDE && !player.skin.hasVenomousMarking() && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYou feel an unusual warmth in your chest. You look down to see a purple blot form on your chest and then begin to spread out across your skin like brushstrokes. " +
 					"It doesn't stop until your skin is covered in intricate purple designs. You can feel your venom pumping through them. " +
 					"<b>Your skin is covered in venomous body markings.</b>");
@@ -159,19 +159,19 @@ public class PotentVenom extends Consumable {
 		}
 
 		//Genitals changes
-		if (player.skin.hasVenomousMarking() && changes < changeLimit && rand(2) == 0) {
+		if (player.skin.hasVenomousMarking() && changes < changeLimit && rand(3) == 0) {
 			var playerhadmorethenonecock:Boolean = false;
 			var playerhadabnormalVagina:Boolean = false;
 			var playerhadasheath:Boolean = false;
 			outputText("\n\nYou double over as an overwhelming heat pools in your groin ");
-			if (player.hasVagina() && player.vaginas[0].type != 7 && player.vaginas[0].type != 0 && changes < changeLimit && rand(2) == 0){
+			if (player.hasVagina() && player.vaginaType() != VaginaClass.VENOM_DRIPPING && player.vaginaType() != VaginaClass.HUMAN){
 				outputText("as your vagina returns back to a human one, at least in appearance.");
 				playerhadabnormalVagina = true;
 			}
 			//Female area
 			if (player.hasVagina() && !player.hasCock())
 			{
-				if (player.vaginas[0].type == 7)
+				if (player.vaginaType() == VaginaClass.VENOM_DRIPPING)
 				{
 					if (playerhadabnormalVagina) outputText("You ");
 					else outputText("and ");
@@ -202,38 +202,38 @@ public class PotentVenom extends Consumable {
 			if (!player.hasVagina() && player.hasCock())
 			{
 				if (!playerhadmorethenonecock && !playerhadasheath)outputText("while ");
-				if (player.cocks.cockType == CockTypesEnum.OOMUKADE)
+				if (player.cocks[0].cockType == CockTypesEnum.OOMUKADE)
 				{
 					if (playerhadasheath || playerhadmorethenonecock) outputText("You ");
 					else outputText("and ");
 					outputText("moan out, feeling your cock harden and tingle as it dribbles venoms. ");
 				}
-				if (player.cocks.cockType != CockTypesEnum.OOMUKADE)
+				if (player.cocks[0].cockType != CockTypesEnum.OOMUKADE)
 				{
 					if (playerhadasheath || playerhadmorethenonecock) outputText("You ");
 					else outputText("and ");
 					outputText("moan out, feeling your cock harden and tingle as it dribbles a strange dark purple liquid. ");
-					player.cocks.cockType = CockTypesEnum.OOMUKADE;
+					player.cocks[0].cockType = CockTypesEnum.OOMUKADE;
 				}
 			}
 			if (player.hasVagina() && player.hasCock())
 			{
 				if (!playerhadmorethenonecock)outputText("while ");
-				if (player.cocks.cockType == CockTypesEnum.OOMUKADE)
+				if (player.cocks[0].cockType == CockTypesEnum.OOMUKADE)
 				{
 					if (playerhadasheath || playerhadmorethenonecock || playerhadabnormalVagina) outputText("You ");
 					else outputText("and ");
 					outputText("moan out, feeling your cock harden and tingle as it dribbles venoms. ");
 				}
-				if (player.cocks.cockType == CockTypesEnum.OOMUKADE && player.vaginas[0].type == 7)
+				if (player.cocks[0].cockType == CockTypesEnum.OOMUKADE && player.vaginaType() == VaginaClass.VENOM_DRIPPING)
 				{
 					if (playerhadasheath || playerhadmorethenonecock || playerhadabnormalVagina) outputText("You ");
 					else outputText("and ");
 					outputText("moan out feeling your cock harden and pussy clenching tightly as venoms drools from them. ");
 				}
-				else if (player.cocks.cockType != CockTypesEnum.OOMUKADE || player.vaginas[0].type != 7)
+				else if (player.cocks[0].cockType != CockTypesEnum.OOMUKADE || player.vaginaType() != VaginaClass.VENOM_DRIPPING)
 				{
-					if (player.cocks.cockType != CockTypesEnum.OOMUKADE && player.vaginas[0].type != 7)
+					if (player.cocks[0].cockType != CockTypesEnum.OOMUKADE && player.vaginaType() != VaginaClass.VENOM_DRIPPING)
 					{
 						if (playerhadasheath || playerhadmorethenonecock || playerhadabnormalVagina) outputText("You ");
 						else outputText("and ");
@@ -249,7 +249,7 @@ public class PotentVenom extends Consumable {
 					}
 				}
 				if (player.vaginaType() != VaginaClass.VENOM_DRIPPING) player.vaginaType(VaginaClass.VENOM_DRIPPING);
-				if (player.cocks.cockType != CockTypesEnum.OOMUKADE) player.cocks.cockType = CockTypesEnum.OOMUKADE;
+				if (player.cocks[0].cockType != CockTypesEnum.OOMUKADE) player.cocks[0].cockType = CockTypesEnum.OOMUKADE;
 			}
 			dynStats("lib", 3, "lus", 10);
 			changes++;

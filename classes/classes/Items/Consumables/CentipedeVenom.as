@@ -21,7 +21,7 @@ import classes.PerkLib;
 
 public class CentipedeVenom extends Consumable {
 	public function CentipedeVenom() {
-		super("PotentV", "PotentVen", "a vial of potent venom", 50, "A small vial filled with a bubbling, dark purple liquid. Even though it's corked, you can still smell the sweet scent wafting from it and it feels unnaturally warm to the touch.");
+		super("C.Venom", "C.Venom", "a vial of centipede venom", 50, "A small thin vial filled with a clear liquid produced by centipedes. If consumed, it may have a strange effect on you.");
 	}
 
 	override public function useItem():Boolean {
@@ -43,27 +43,15 @@ public class CentipedeVenom extends Consumable {
 		outputText("You pop the cork on the vial and quickly chug the clear liquid. It tastes somewhat sweet, leaving your body feeling warm all over.");
 
 		//Transformation effect list
-		if (changeLimit && rand(2) == 0) {
-			outputText("\n\nUnder development.");
+		if (changeLimit && rand(3) == 0) {
+			outputText("\n\nYou shudder as a strange warmth briefly spreads through you. The venom lingers on your tastebuds leaving behind a tingling sensation and lingering pleasure.");
 			dynStats("lus", (10+player.lib/10), "scale", false);
 			changes++;
 		}
 
-		if (player.spe < 80 && changes < changeLimit && rand(2) == 0) {
-			outputText("\n\nUnder development.");
+		if (player.spe < 80 && changes < changeLimit && rand(3) == 0) {
+			outputText("\n\nYou suddenly jerk forward, feeling somewhat twitchy. Surprised, you didn't know you could react so quickly.");
 			dynStats("spe", 1);
-			changes++;
-		}
-
-		if (player.tou < 80 && changes < changeLimit && rand(2) == 0) {
-			outputText("\n\nUnder development.");
-			dynStats("tou", 5);
-			changes++;
-		}
-
-		if (player.wis > 20 && changes < changeLimit && rand(2) == 0) {
-			outputText("\n\nUnder development.");
-			dynStats("wis", -5);
 			changes++;
 		}
 		//end of stat change list and starts of body changes
@@ -71,7 +59,7 @@ public class CentipedeVenom extends Consumable {
 
 		//Physical changes
 		//Legs
-		if (player.lowerBody != LowerBody.CENTIPEDE && changes < changeLimit && rand(2) == 0) {
+		if (player.lowerBody != LowerBody.CENTIPEDE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			if (player.lowerBody != LowerBody.HUMAN) outputText("You watch, spellbound, while your legs gradually change its entire outer structure back into a plain human-like form. ");
 			outputText("Pain shoots through your legs as you stumble to the ground. You can feel the bones in your legs fuse and reshape themselves as they become longer. " +
@@ -86,24 +74,24 @@ public class CentipedeVenom extends Consumable {
 			changes++;
 		}
 		//Arms
-		if (player.arms.type != Arms.HUMAN && changes < changeLimit && rand(2) == 0) {
+		if (player.arms.type != Arms.HUMAN && changes < changeLimit && rand(3) == 0) {
 			mutations.humanizeArms();
 			changes++;
 		}
 		//Antenna
-		if (player.antennae.type != Antennae.CENTIPEDE && changes < changeLimit && rand(2) == 0) {
+		if (player.antennae.type != Antennae.CENTIPEDE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYour head itches momentarily as two long antennae sprout from atop your forehead. You can move both independently as if they're an extension of you.");
 			mutations.setEarType(Antennae.CENTIPEDE);
 			changes++;
 		}
 		//Ears
-		if (player.ears.type != Ears.ELFIN && changes < changeLimit && rand(2) == 0) {
+		if (player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!");
 			mutations.setEarType(Ears.ELFIN);
 			changes++;
 		}
 		//Face
-		if ((player.faceType != Face.ANIMAL_TOOTHS) && changes < changeLimit && rand(2) == 0) {
+		if ((player.faceType != Face.ANIMAL_TOOTHS) && changes < changeLimit && rand(3) == 0) {
 			if (player.faceType != Face.HUMAN) {
 				mutations.humanizeFace();
 			}
@@ -113,7 +101,7 @@ public class CentipedeVenom extends Consumable {
 			changes++;
 		}
 		//NeckMaxilipeds
-		if (player.lowerBody == LowerBody.CENTIPEDE && player.rearBody.type != RearBody.CENTIPEDE && changes < changeLimit && rand(2) == 0) {
+		if (player.lowerBody == LowerBody.CENTIPEDE && player.rearBody.type != RearBody.CENTIPEDE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYour neck tingles and begins to itch all of a sudden. You reach up to scratch when your fingers brush up against something hard. " +
 					"You look down to find a pair of grasping pincer like stingers around your neck. They open and close at will and tuck away easily when not in use. " +
 					"<b>It will be easier to hold onto and bite enemies with your new maxillipeds.</b>");
