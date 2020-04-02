@@ -63,9 +63,9 @@ public class LowerBody extends SaveableBodyPart {
 	public static const GHOST:int			      = 53;
 	public static const GHOST_2:int			      = 54;
 	public static const JIANGSHI:int			  = 55;
-	public static const YUKI_ONNA:int			  = 56;
+	public static const YUKI_ONNA:int			  = 56;//button 0 on 5th page of metamorph
 	public static const MELKIE:int			  	  = 57;
-	//public static const YUKI_ONNA:int			  = 58;//button 0 on 5th page of metamorph
+	public static const CENTIPEDE:int			  = 58;
 	// Don't forget to add new types in DebugMenu.as list LOWER_TYPE_CONSTANTS
 	
 	override public function set type(value:int):void {

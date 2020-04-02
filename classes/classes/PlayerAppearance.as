@@ -569,6 +569,7 @@ public class PlayerAppearance extends BaseContent {
 				case CockTypesEnum.RHINO:     outputText("  It's a smooth, tough pink colored and takes on a long and narrow shape with an oval shaped bulge along the center."); break;
 				case CockTypesEnum.ECHIDNA:   outputText("  It is quite a sight to behold, coming well-equipped with four heads."); break;
 				case CockTypesEnum.RED_PANDA: outputText("  It lies protected in a soft, fuzzy sheath."); break;
+				case CockTypesEnum.OOMUKADE:  outputText("  It constantly drips with venom."); break;
 				default: //Nothing here, move along!
 			}
 			// Knot?
@@ -613,6 +614,8 @@ public class PlayerAppearance extends BaseContent {
 				sdesc = " covered with a few glowing lightning tattoos";
 			} else if (player.skin.hasScarShapedTattoo()) {
 				sdesc = " covered by scar tattoos";
+			} else if (player.skin.hasVenomousMarking()) {
+				sdesc = " covered by venomous marking";
 			} else if (player.skin.hasWhiteBlackVeins()) {
 				sdesc = " covered by [base.color2] veins";
 			} else {
@@ -662,6 +665,9 @@ public class PlayerAppearance extends BaseContent {
 		outputText(".  ");
 		if (player.vaginas.length > 1){
             outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clits each.  ");
+		}
+		if (player.vaginas[0].type == 7){
+			outputText("It constantly drools with aphrodisiac venom.");
 		}
 		if(player.lib < 50 && player.lust < 50) //not particularly horny
 
@@ -882,7 +888,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText(" tall [malefemaleherm] [race], with [bodytype].");
 	}
 	public function describeLowerBody():void {
-		if (player.isTaur() || player.lowerBody == LowerBody.DRIDER || player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.PLANT_FLOWER) {
+		if (player.isTaur() || player.lowerBody == LowerBody.DRIDER || player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.MELKIE || player.lowerBody == LowerBody.CENTIPEDE || player.lowerBody == LowerBody.PLANT_FLOWER) {
 			if (player.lowerBody == LowerBody.HOOFED)
 				outputText("  From the waist down you have the body of a horse, with all " + num2Text(player.legCount) + " legs capped by hooves.");
 			else if (player.lowerBody == LowerBody.PONY)
@@ -895,6 +901,8 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  Around your waist, the petals of a large pink orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the centre, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud.  While you don't technically have legs anymore, you can still move around on your " + num2Text(player.legCount) + " vine-like stamens.");
 			else if (player.lowerBody == LowerBody.MELKIE)
 				outputText("  Beneath your waist your body ends in the tail of a leopard seal. It allows you to swim gracefully in arctic waters. However, when the time to move on land arises, you can part the fur at your waist in order to let your two human legs out and walk on solid ground as the land dwellers do.");
+			else if (player.lowerBody == LowerBody.CENTIPEDE)
+				outputText("  In place of legs you have the body of a giant centipede. Your long segmented insectoid body has over a dozen pairs of spindly legs and is tipped with a pair of stingers that can pierce even the strongest armor.");
 			else
 				outputText("  Where your legs would normally start you have grown the body of a feral animal, with all " + num2Text(player.legCount) + " legs.");
 		}
@@ -1413,6 +1421,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  The bones in your arms are thin and light, as if made of only cartilage, granting you the ability to take flight. Instead of the five fingers you started out with, you now have three that are both larger and stronger. They allow you to hold various items even with your abnormal hands, albeit at the cost of preventing flight while doing so and making some things a little more awkward to grip.");
 		else if (armType == Arms.MELKIE)
 			outputText("  Your arms and hands are human in appearance but your blue nailed hands touch is void of warmth and colder than death.");
+		else if (armType == Arms.CENTIPEDE)
+			outputText("  Your arms and hands are mostly human in shape tipped with sharp purple nails. Intricate flowing purple markings stretch from your hands to your shoulders.");
 	}
 	public function describeRearBody():void {
 		if (player.rearBody.type == RearBody.FENRIR_ICE_SPIKES) {
@@ -1453,6 +1463,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (player.rearBody.type == RearBody.GLACIAL_AURA) {
 			outputText("  The air temperature around you naturally drops to water freezing levels, causing snow flurries to appear around you every now and then as moisture enters your personal space.");
+		}
+		if (player.rearBody.type == RearBody.CENTIPEDE) {
+			outputText("  Around your neck sits a set of pincer like maxillipeds. You can use them to sting and hold onto your prey.");
 		}
 	}
 	public function describeWings():void {
@@ -1870,6 +1883,8 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  Two horn like antennae also grow from just behind your hairline, feeling the air around and feeding you sensory information.");
 			if(player.antennae.type == Antennae.MOTH)
 				outputText("  Floppy antennae also appear on your skull, bouncing and swaying in the breeze.");
+			if(player.antennae.type == Antennae.CENTIPEDE)
+				outputText("  A pair of long antennae have grown just behind your hairline. They occasionally curl and twitch at the slightest of movements.");
 		}
 		//not bald
 		else
@@ -2044,6 +2059,9 @@ public class PlayerAppearance extends BaseContent {
 					odd++;
 				}
 			outputText(".");
+			if(player.skin.hasVenomousMarking()) {
+				outputText(" Beneath your shoulder all the way down to your waist your skin is covered with purple venomous marking");
+			}
 
 			if (faceType == Face.SHARK_TEETH)
 				outputText("  A set of razor-sharp, retractable shark-teeth fill your mouth and gives your visage a slightly angular appearance.");
@@ -2092,6 +2110,7 @@ public class PlayerAppearance extends BaseContent {
 				else if(skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo, though it is decorated with a sly-looking raccoon mask over your eyes.");
 				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos, though it is decorated with a sly-looking raccoon mask over your eyes.");
 				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos, though it is decorated with a sly-looking raccoon mask over your eyes.");
+				else if(skin.hasVenomousMarking()) outputText(" though it is decorated with a sly-looking raccoon mask over your eyes. Everything beneath your shoulder is covered with purple venomous marking");
 				else if (player.skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins, though it is decorated with a sly-looking raccoon mask over your eyes.");
 				else outputText(", though it is decorated with a sly-looking raccoon mask over your eyes.");
 			} else { //appearance furscales
@@ -2107,6 +2126,9 @@ public class PlayerAppearance extends BaseContent {
 			//(if skin)
 			if (player.hasPlainSkinOnly()) {
 				outputText("  It looks a bit strange with only the skin and no fur.");
+				if (player.skin.hasVenomousMarking()) {
+					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
+				}
 			} else if (skin.hasMagicalTattoo()) {
 				outputText("  It looks a bit strange with only the skin covered with [skin color2] magical tattoo and no fur.");
 			} else if (skin.hasBattleTattoo()) {
@@ -2119,14 +2141,23 @@ public class PlayerAppearance extends BaseContent {
 				outputText(" It looks a bit strange with only the skin covered by [skin color2] veins and no fur.");
 			} else if (player.hasScales()) {
 				outputText("  The presence of said scales gives your visage an eerie look, more reptile than mammal.");
+				if (player.skin.hasVenomousMarking()) {
+					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
+				}
 			} else if (skin.hasChitin()) {
 				outputText("  The presence of said chitin gives your visage an eerie look, more insect than mammal.");
+				if (player.skin.hasVenomousMarking()) {
+					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
+				}
 			}
 		}
 		else if (faceType == Face.FOX) {
 			outputText("  You have a tapered, shrewd-looking vulpine face with a speckling of downward-curved whiskers just behind the nose.");
 			if (!player.hasCoat()) {
 				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat].");
+				if (player.skin.hasVenomousMarking()) {
+					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
+				}
 			} else if (skin.hasMagicalTattoo()) {
 				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat] covered with [skin color2] magical tattoo.");
 			} else if (skin.hasBattleTattoo()) {
@@ -2143,6 +2174,9 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  Strangely, [skin coat] adorn your animalistic visage.");
 			} else {
 				outputText("  Strangely, [skin coat] adorn every inch of your animalistic visage.");
+				if (player.skin.hasVenomousMarking()) {
+					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
+				}
 			}
 		}
 		else if (faceType == Face.MOUSE) {
@@ -2165,25 +2199,60 @@ public class PlayerAppearance extends BaseContent {
 			} else {
 				outputText("  Your face looks human save for your sharp canines, but overlaid with glittering patches of [skin coat].");
 			}
+			if (player.skin.hasVenomousMarking()) {
+				outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
+			}
+			if (player.eyes.type == Eyes.CENTIPEDE){
+				outputText(" You wear a constant expression of sadness, barely drawing attention away from your mouth.\n");
+			}
 		}
 		//horse-face
 		if (faceType == Face.HORSE) {
 			if (!player.hasCoat()) {
-				outputText("  Your face is equine in shape and structure.  The odd visage is hairless and covered with [skin base].");
+				outputText("  Your face");
+				if (skin.hasMagicalTattoo()) outputText(", covered with [skin color2] magical tattoo,");
+				else if(skin.hasBattleTattoo()) outputText(", covered with [skin color2] battle tattoo,");
+				else if(skin.hasLightningShapedTattoo()) outputText(", covered with a few glowing lightning tattoos,");
+				else if(skin.hasScarShapedTattoo()) outputText(", covered with a few [skin color2] scar tattoos,");
+				else if(skin.hasWhiteBlackVeins()) outputText(", covered by [skin color2] veins,");
+				outputText("  is equine in shape and structure.  The odd visage is hairless and covered with [skin base]");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
-				outputText("  Your face is almost entirely equine in appearance, even having [skin coat].  Underneath the fur, you believe you have [skin base].");
+				outputText("  Your face");
+				outputText(" is almost entirely equine in appearance, even having [skin coat].  Underneath the fur, you believe you have [skin base].");
+				if (player.skin.hasVenomousMarking()) {
+					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
+				}
 			} else {
-				outputText("  You have the face and head structure of a horse, overlaid with glittering [skin coat].");
+				outputText("  You have the face and head structure of a horse,");
+				outputText(" overlaid with glittering [skin coat].");
+				if (player.skin.hasVenomousMarking()) {
+					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
+				}
 			}
 		}
 		//dog-face
 		if (faceType == Face.DOG) {
 			if (!player.hasCoat()) {
-				outputText("  You have a dog-like face, complete with a wet nose.  The odd visage is hairless and covered with [skin base].");
+				outputText("  You have a dog-like face");
+				if (skin.hasMagicalTattoo()) outputText(" covered with [skin color2] magical tattoo");
+				else if(skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo");
+				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
+				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos");
+				else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+				outputText("  , complete with a wet nose.  The odd visage is hairless and covered with [skin base].");
+				if (player.skin.hasVenomousMarking()) {
+					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
+				}
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a dog's face, complete with wet nose and panting tongue.  You've got [skin coat], hiding your [skin base] underneath your furry visage.");
+				if (player.skin.hasVenomousMarking()) {
+					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
+				}
 			} else {
 				outputText("  You have the facial structure of a dog, wet nose and all, but overlaid with glittering patches of [skin coat]");
+				if (player.skin.hasVenomousMarking()) {
+					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
+				}
 			}
 		}
 		//wolf-face
@@ -2198,6 +2267,9 @@ public class PlayerAppearance extends BaseContent {
 				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos");
 				else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
 				outputText(".");
+				if (player.skin.hasVenomousMarking()) {
+					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
+				}
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a wolf’s face, complete with wet nose a panting tongue and threatening teeth.  ");
 				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ");
@@ -2216,8 +2288,14 @@ public class PlayerAppearance extends BaseContent {
 				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos");
 				else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
 				outputText(". Your mouth is somewhat human save for your wolf-like canines.");
+				if (player.skin.hasVenomousMarking()) {
+					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
+				}
 			} else if (player.hasPartialCoat(Skin.FUR)) {
 				outputText("  Your face looks human save for your wolf-like canines.  You've got [skin coat], hiding your [skin noadj] underneath your furry visage.");
+				if (player.skin.hasVenomousMarking()) {
+					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
+				}
 			} else {
 				outputText("  Your face looks human save for your wolf-like canines, but overlaid with glittering patches of [skin coat].");
 			}
@@ -2232,6 +2310,9 @@ public class PlayerAppearance extends BaseContent {
 				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
 				else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
 				outputText(".");
+				if (player.skin.hasVenomousMarking()) {
+					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
+				}
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your [skin coat.nocolor] is [skin coat.color], hiding your [skin base] underneath.");
 			} else {
@@ -2299,6 +2380,9 @@ public class PlayerAppearance extends BaseContent {
 			else if(skin.hasScarShapedTattoo()) outputText("covered in scar-like tattoos");
 			else if(skin.hasWhiteBlackVeins()) outputText("covered by [skin color2] veins");
 			outputText(". Your mouth could pass for human if it were not for your two lower canines resembling boar tusks poking out of your mouth.");
+			if (player.skin.hasVenomousMarking()) {
+				outputText(" Beneath your shoulder all the way down to your waist your skin is covered with purple venomous marking");
+			}
 		}
 		if (faceType == Face.ORCA) {
 			if (skin.hasPlainSkinOnly() && player.skinAdj == "glossy" && player.skinTone == "white and black")
@@ -2381,6 +2465,9 @@ public class PlayerAppearance extends BaseContent {
 				else if (skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
 				else if (skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
 				outputText(" that is revealed by your lack of fur looks quite unusual.");
+				if (player.skin.hasVenomousMarking()) {
+					outputText(" Beneath your shoulder all the way down to your waist your skin is covered with purple venomous marking");
+				}
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  It's covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
 			} else {
@@ -2410,6 +2497,9 @@ public class PlayerAppearance extends BaseContent {
 			else if (skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
 			else if (skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
 			outputText(" but your mouth is drooling from constant arousal.");
+			if (player.skin.hasVenomousMarking()) {
+				outputText(" Beneath your shoulder all the way down to your waist your skin is covered with purple venomous marking");
+			}
 		}
 		if (faceType == Face.GHOST) {
 			outputText("  Your face is in human shape and structure");
@@ -2419,6 +2509,9 @@ public class PlayerAppearance extends BaseContent {
 			else if (skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
 			else if (skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
 			outputText(". The only thing out of place is the ever present wide smile on your face. Your unsettling smile often hides your true emotions much to the dismay of others.");
+			if (player.skin.hasVenomousMarking()) {
+				outputText(" Beneath your shoulder all the way down to your waist your skin is covered with purple venomous marking");
+			}
 		}
 		if (faceType == Face.JIANGSHI) {
 			outputText("  Your face is human in form and shape but your expression is kind of zombie like.");
@@ -2431,6 +2524,9 @@ public class PlayerAppearance extends BaseContent {
 			else if (skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
 			else if (skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
 			outputText(" in appearance although your lips are dyed blue by the cold.");
+			if (player.skin.hasVenomousMarking()) {
+				outputText(" Beneath your shoulder all the way down to your waist your skin is covered with purple venomous marking");
+			}
 		}
 		//</mod>
 	}
@@ -2502,6 +2598,11 @@ public function RacialScores():void {
 	if (player.centaurScore() >= 8) outputText("\n<font color=\"#0000a0\">Centaur: " + player.centaurScore() + " (+" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 	else if (player.centaurScore() >= 1 && player.centaurScore() < 8) outputText("\n<font color=\"#008000\">Centaur: " + player.centaurScore() + "</font>");
 	else if (player.centaurScore() < 1) outputText("\n<font color=\"#ff0000\">Centaur: 0</font>");
+	//Centipede
+	if (player.centipedeScore() >= 8) outputText("\n<font color=\"#0000a0\">Centipede: " + player.centipedeScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
+	if (player.centipedeScore() >= 4 && player.centipedeScore() < 8) outputText("\n<font color=\"#0000a0\">Half Centipede:" + player.centipedeScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
+	else if (player.centipedeScore() >= 1 && player.centipedeScore() < 4) outputText("\n<font color=\"#008000\">Centipede: " + player.centipedeScore() + "</font>");
+	else if (player.centipedeScore() < 1) outputText("\n<font color=\"#ff0000\">Centipede: 0</font>");
 	//Cheshire cat
 	if (player.cheshireScore() >= 11) {
 		outputText("\n<font color=\"#0000a0\">Cheshire cat: " + player.cheshireScore() + " (");
@@ -2961,6 +3062,9 @@ public function RacialScores():void {
 	else if (player.oniScore() >= 6 && player.oniScore() < 12) outputText("\n<font color=\"#0000a0\">Half Oni: " + player.oniScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, -" + (10 * (1 + player.newGamePlusMod())) + " max Int, +" + (20 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
 	else if (player.oniScore() >= 1 && player.oniScore() < 6) outputText("\n<font color=\"#008000\">Half Oni: " + player.oniScore() + "</font>");
 	else if (player.oniScore() < 1) outputText("\n<font color=\"#ff0000\">Half Oni: 0</font>");
+	if (player.oomukadeScore() >= 8) outputText("\n<font color=\"#0000a0\">Oomukade: " + player.oomukadeScore() + " (+" + (75 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (110 * (1 + player.newGamePlusMod())) + " max Lib, -" + (50 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+	else if (player.oomukadeScore() >= 1 && player.oomukadeScore() < 4) outputText("\n<font color=\"#008000\">Oomukade: " + player.oomukadeScore() + "</font>");
+	else if (player.oomukadeScore() < 1) outputText("\n<font color=\"#ff0000\">Oomukade: 0</font>");
 	//Orc
 	/*if (player.orcScore() >= 11) outputText("\n<font color=\"#0000a0\">High Orc: " + player.orcScore() + " (+" + (130 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (10 * (1 + player.newGamePlusMod())) + " max Spe, -" + (30 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib, +20% max Wrath)</font>");
 	else */if (player.orcScore() >= 11) outputText("\n<font color=\"#0000a0\">Orc: " + player.orcScore() + " (+" + (130 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (10 * (1 + player.newGamePlusMod())) + " max Spe, -" + (30 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib, +20% max Wrath)</font>");

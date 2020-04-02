@@ -5676,7 +5676,39 @@ use namespace CoC;
 			return bunnyCounter;
 		}
 
-		//Bunny score
+		//Centipede score
+		public function centipedeScore():Number {
+			Begin("Player","racialScore","centipede");
+			var centipedeCounter:Number = 0;
+			if (faceType == Face.ANIMAL_TOOTHS)
+				centipedeCounter++;
+			if (lowerBody == LowerBody.CENTIPEDE)
+				centipedeCounter += 2;
+			if (hasCoatOfType(Skin.COVERAGE_NONE))
+				centipedeCounter++;
+			if (arms.type == Arms.HUMAN)
+				centipedeCounter++;
+			if (antennae.type == Antennae.CENTIPEDE)
+				centipedeCounter++;
+			if (rearBody.type == RearBody.CENTIPEDE)
+				centipedeCounter++;
+			if (ears.type == Ears.ELFIN)
+				centipedeCounter++;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				centipedeCounter += 50;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && centipedeCounter >= 4)
+				centipedeCounter += 1;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && centipedeCounter >= 8)
+				centipedeCounter += 1;
+			if (hasPerk(PerkLib.EasterBunnyBalls) && balls >= 2)
+				centipedeCounter = 0;
+			if (isGargoyle()) centipedeCounter = 0;
+			centipedeCounter = finalRacialScore(centipedeCounter, Race.CENTIPEDE);
+			End("Player","racialScore");
+			return centipedeCounter;
+		}
+
+		//Easter Bunny score
 		public function easterbunnyScore():Number {
 			Begin("Player","racialScore","bunny");
 			var EbunnyCounter:Number = 0;
@@ -5918,6 +5950,44 @@ use namespace CoC;
 			oniCounter = finalRacialScore(oniCounter, Race.ONI);
 			End("Player","racialScore");
 			return oniCounter;
+		}
+
+		//Oomukade  score
+		public function oomukadeScore():Number {
+			Begin("Player","racialScore","oomukade");
+			var oomukadeCounter:Number = 0;
+			if (faceType == Face.ANIMAL_TOOTHS)
+				oomukadeCounter++;
+			if (eyes.type == Eyes.CENTIPEDE)
+				oomukadeCounter++;
+			if (lowerBody == LowerBody.CENTIPEDE)
+				oomukadeCounter++;
+			if (hasCoatOfType(Skin.COVERAGE_NONE))
+				oomukadeCounter++;
+			if (arms.type == Arms.CENTIPEDE)
+				oomukadeCounter++;
+			if (antennae.type == Antennae.CENTIPEDE)
+				oomukadeCounter++;
+			if (rearBody.type == RearBody.CENTIPEDE)
+				oomukadeCounter += 2;
+			if (ears.type == Ears.ELFIN)
+				oomukadeCounter++;
+			if (skin.hasVenomousMarking())
+				oomukadeCounter += 2;
+			if (cocks[0].cockType == CockTypesEnum.OOMUKADE || vaginaType() == VaginaClass.VENOM_DRIPPING)
+				oomukadeCounter += 2;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				oomukadeCounter += 50;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && oomukadeCounter >= 4)
+				oomukadeCounter += 1;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && oomukadeCounter >= 8)
+				oomukadeCounter += 1;
+			if (hasPerk(PerkLib.EasterBunnyBalls) && balls >= 2)
+				oomukadeCounter = 0;
+			if (isGargoyle()) oomukadeCounter = 0;
+			oomukadeCounter = finalRacialScore(oomukadeCounter, Race.CENTIPEDE);
+			End("Player","racialScore");
+			return oomukadeCounter;
 		}
 		
 		//Elf score
@@ -10076,6 +10146,7 @@ use namespace CoC;
 					maxLibCap2 += (35 * newGamePlusMod);
 				}
 			}
+
 			if (poltergeistScore() >= 6) {
 				if (poltergeistScore() >= 18) {
 					maxStrCap2 -= (45 * newGamePlusMod);
@@ -10164,6 +10235,23 @@ use namespace CoC;
 				maxTouCap2 += (80 * newGamePlusMod);
 				maxSpeCap2 += (40 * newGamePlusMod);
 			}//+40/30-40
+			if (centipedeScore() >= 4) {
+				if (centipedeScore() >= 8) {
+					maxStrCap2 += (60 * newGamePlusMod);
+					maxSpeCap2 += (80 * newGamePlusMod);
+				}
+				else {
+					maxStrCap2 += (30 * newGamePlusMod);
+					maxSpeCap2 += (40 * newGamePlusMod);
+				}
+			}
+			if (oomukadeScore() >= 11) {
+				maxStrCap2 += (75 * newGamePlusMod);
+				maxTouCap2 += (80 * newGamePlusMod);
+				maxSpeCap2 += (90 * newGamePlusMod);
+				maxLibCap2 += (110 * newGamePlusMod);
+				maxWisCap2 -= (50 * newGamePlusMod);
+			}
 			if (avianScore() >= 4) {
 				if (avianScore() >= 9) {
 					maxStrCap2 += (30 * newGamePlusMod);
