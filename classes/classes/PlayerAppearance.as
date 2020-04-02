@@ -2597,6 +2597,11 @@ public function RacialScores():void {
 	if (player.centaurScore() >= 8) outputText("\n<font color=\"#0000a0\">Centaur: " + player.centaurScore() + " (+" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 	else if (player.centaurScore() >= 1 && player.centaurScore() < 8) outputText("\n<font color=\"#008000\">Centaur: " + player.centaurScore() + "</font>");
 	else if (player.centaurScore() < 1) outputText("\n<font color=\"#ff0000\">Centaur: 0</font>");
+	//Centipede
+	if (player.centipedeScore() >= 8) outputText("\n<font color=\"#0000a0\">Centipede: " + player.centipedeScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
+	if (player.centipedeScore() >= 4 && player.centipedeScore() < 8) outputText("\n<font color=\"#0000a0\">Half Centipede:" + player.centipedeScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
+	else if (player.centipedeScore() >= 1 && player.centipedeScore() < 4) outputText("\n<font color=\"#008000\">Centipede: " + player.centipedeScore() + "</font>");
+	else if (player.centipedeScore() < 1) outputText("\n<font color=\"#ff0000\">Centipede: 0</font>");
 	//Cheshire cat
 	if (player.cheshireScore() >= 11) {
 		outputText("\n<font color=\"#0000a0\">Cheshire cat: " + player.cheshireScore() + " (");
@@ -3051,6 +3056,9 @@ public function RacialScores():void {
 	else if (player.oniScore() >= 6 && player.oniScore() < 12) outputText("\n<font color=\"#0000a0\">Half Oni: " + player.oniScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, -" + (10 * (1 + player.newGamePlusMod())) + " max Int, +" + (20 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
 	else if (player.oniScore() >= 1 && player.oniScore() < 6) outputText("\n<font color=\"#008000\">Half Oni: " + player.oniScore() + "</font>");
 	else if (player.oniScore() < 1) outputText("\n<font color=\"#ff0000\">Half Oni: 0</font>");
+	if (player.oomukadeScore() >= 8) outputText("\n<font color=\"#0000a0\">Oomukade: " + player.oomukadeScore() + " (+" + (75 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (110 * (1 + player.newGamePlusMod())) + " max Lib, -" + (50 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+	else if (player.oomukadeScore() >= 1 && player.oomukadeScore() < 4) outputText("\n<font color=\"#008000\">Oomukade: " + player.oomukadeScore() + "</font>");
+	else if (player.oomukadeScore() < 1) outputText("\n<font color=\"#ff0000\">Oomukade: 0</font>");
 	//Orc
 	/*if (player.orcScore() >= 11) outputText("\n<font color=\"#0000a0\">High Orc: " + player.orcScore() + " (+" + (130 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (10 * (1 + player.newGamePlusMod())) + " max Spe, -" + (30 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib, +20% max Wrath)</font>");
 	else */if (player.orcScore() >= 11) outputText("\n<font color=\"#0000a0\">Orc: " + player.orcScore() + " (+" + (130 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (10 * (1 + player.newGamePlusMod())) + " max Spe, -" + (30 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib, +20% max Wrath)</font>");
