@@ -2639,6 +2639,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		EntangleSpeNerf = Math.round(monster.spe * .5);
 		monster.str -= EntangleStrNerf;
 		monster.spe -= EntangleSpeNerf;
+		if (player.hasPerk(PerkLib.RacialParagon)) EntangleSpeNerf *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) EntangleSpeNerf *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) EntangleSpeNerf *= 1.50;
 		if(monster.str < 1) monster.str = 1;
 		if(monster.spe < 1) monster.spe = 1;
 		player.createStatusEffect(StatusEffects.AlrauneEntangle,EntangleStrNerf,EntangleSpeNerf,0,0);
