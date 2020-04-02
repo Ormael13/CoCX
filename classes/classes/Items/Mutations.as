@@ -6594,7 +6594,7 @@ public final class Mutations extends MutationsHelper
 				//(REMOVE SHEATH IF NECESSARY)
 				if (player.hasSheath()) {
 					player.cocks[temp2].cockType = CockTypesEnum.CAVE_WYRM;
-					if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
+					outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
 				}
 				else player.cocks[temp2].cockType = CockTypesEnum.CAVE_WYRM;
 				changes++;

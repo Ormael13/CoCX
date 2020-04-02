@@ -569,6 +569,7 @@ public class PlayerAppearance extends BaseContent {
 				case CockTypesEnum.RHINO:     outputText("  It's a smooth, tough pink colored and takes on a long and narrow shape with an oval shaped bulge along the center."); break;
 				case CockTypesEnum.ECHIDNA:   outputText("  It is quite a sight to behold, coming well-equipped with four heads."); break;
 				case CockTypesEnum.RED_PANDA: outputText("  It lies protected in a soft, fuzzy sheath."); break;
+				case CockTypesEnum.OOMUKADE:  outputText("  It constantly drips with venom."); break;
 				default: //Nothing here, move along!
 			}
 			// Knot?
@@ -662,6 +663,9 @@ public class PlayerAppearance extends BaseContent {
 		outputText(".  ");
 		if (player.vaginas.length > 1){
             outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clits each.  ");
+		}
+		if (player.vaginas[0].type == 7){
+			outputText("It constantly drools with aphrodisiac venom.");
 		}
 		if(player.lib < 50 && player.lust < 50) //not particularly horny
 
@@ -881,7 +885,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText(" tall [malefemaleherm] [race], with [bodytype].");
 	}
 	public function describeLowerBody():void {
-		if (player.isTaur() || player.lowerBody == LowerBody.DRIDER || player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.PLANT_FLOWER) {
+		if (player.isTaur() || player.lowerBody == LowerBody.DRIDER || player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.MELKIE || player.lowerBody == LowerBody.CENTIPEDE || player.lowerBody == LowerBody.PLANT_FLOWER) {
 			if (player.lowerBody == LowerBody.HOOFED)
 				outputText("  From the waist down you have the body of a horse, with all " + num2Text(player.legCount) + " legs capped by hooves.");
 			else if (player.lowerBody == LowerBody.PONY)
@@ -894,6 +898,8 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  Around your waist, the petals of a large pink orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the centre, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud.  While you don't technically have legs anymore, you can still move around on your " + num2Text(player.legCount) + " vine-like stamens.");
 			else if (player.lowerBody == LowerBody.MELKIE)
 				outputText("  Beneath your waist your body ends in the tail of a leopard seal. It allows you to swim gracefully in arctic waters. However, when the time to move on land arises, you can part the fur at your waist in order to let your two human legs out and walk on solid ground as the land dwellers do.");
+			else if (player.lowerBody == LowerBody.CENTIPEDE)
+				outputText("  In place of legs you have the body of a giant centipede. Your long segmented insectoid body has over a dozen pairs of spindly legs and is tipped with a pair of stingers that can pierce even the strongest armor.");
 			else
 				outputText("  Where your legs would normally start you have grown the body of a feral animal, with all " + num2Text(player.legCount) + " legs.");
 		}
@@ -1412,6 +1418,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  The bones in your arms are thin and light, as if made of only cartilage, granting you the ability to take flight. Instead of the five fingers you started out with, you now have three that are both larger and stronger. They allow you to hold various items even with your abnormal hands, albeit at the cost of preventing flight while doing so and making some things a little more awkward to grip.");
 		else if (armType == Arms.MELKIE)
 			outputText("  Your arms and hands are human in appearance but your blue nailed hands touch is void of warmth and colder than death.");
+		else if (armType == Arms.CENTIPEDE)
+			outputText("  Your arms and hands are mostly human in shape tipped with sharp purple nails. Intricate flowing purple markings stretch from your hands to your shoulders.");
 	}
 	public function describeRearBody():void {
 		if (player.rearBody.type == RearBody.FENRIR_ICE_SPIKES) {
@@ -1452,6 +1460,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (player.rearBody.type == RearBody.GLACIAL_AURA) {
 			outputText("  The air temperature around you naturally drops to water freezing levels, causing snow flurries to appear around you every now and then as moisture enters your personal space.");
+		}
+		if (player.rearBody.type == RearBody.CENTIPEDE) {
+			outputText("  Around your neck sits a set of pincer like maxillipeds. You can use them to sting and hold onto your prey.");
 		}
 	}
 	public function describeWings():void {
