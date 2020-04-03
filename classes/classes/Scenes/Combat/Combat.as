@@ -5506,8 +5506,6 @@ private function combatStatusesUpdate():void {
 		if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
 		else monster.lust += monster.lustVuln * (2 + rand(4));
 	}
-
-
 	//Unicorn and Bicorn aura
 	//Unicorn
 	if(player.hasPerk(PerkLib.AuraOfPurity)) {
@@ -5542,6 +5540,8 @@ private function combatStatusesUpdate():void {
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.EclipticMindEvolved) && monster.cor > player.cor/2) damage = Math.round(damage * 2);
+			else if (player.hasPerk(PerkLib.EclipticMindFinalForm) && monster.cor > player.cor/2) damage = Math.round(damage * 3);
 			damage = Math.round(damage);
 			outputText("Your aura of purity burns [monster a] [monster name] with holy fire for ");
 			doFireDamage(damage, true, true);
@@ -5580,6 +5580,8 @@ private function combatStatusesUpdate():void {
 		if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
 		if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
+		if (player.hasPerk(PerkLib.EclipticMindEvolved) && monster.cor > player.cor/2) lustDmg = Math.round(lustDmg * 2);
+		else if (player.hasPerk(PerkLib.EclipticMindFinalForm) && monster.cor > player.cor/2) lustDmg = Math.round(lustDmg * 3);
 
 		outputText("[monster a] [monster name] slowly succumbs to [monster c] basest desires as your aura of corruption seeps through [monster him].");
 		if (monster.cor < 100) outputText("Your victims purity is slowly becoming increasingly eroded by your seeping corruption.");
@@ -6819,6 +6821,7 @@ public function PercentBasedRegeneration():Number {
 	}
 	if (player.weapon == weapons.SESPEAR) maxPercentRegen += 2;
 	if (player.hasPerk(PerkLib.LustyRegeneration)) maxPercentRegen += 0.5;
+	if (player.hasPerk(PerkLib.EclipticMindFinalForm)) maxPercentRegen += 1.5;
 	if (player.hasPerk(PerkLib.LizanRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1.5;
 	if (player.hasPerk(PerkLib.LizanMarrow) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 0.5;
 	if (player.hasPerk(PerkLib.LizanMarrowEvolved) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1;
