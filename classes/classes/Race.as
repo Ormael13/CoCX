@@ -83,6 +83,8 @@ public class Race {
     public static const EASTERBUNNY:Race = new Race("Easter Bunny",79);
     public static const CENTIPEDE:Race = new Race("Centipede",80);
     public static const OOMUKADE:Race = new Race("Oomukade",81);
+    public static const UNICORNKIN:Race = new Race("Unicorn",82);
+    public static const ALICORNKIN:Race = new Race("Alicorn",83);
 
     public var name:String;
     public var id:int;

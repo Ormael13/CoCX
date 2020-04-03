@@ -5506,23 +5506,127 @@ private function combatStatusesUpdate():void {
 		if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
 		else monster.lust += monster.lustVuln * (2 + rand(4));
 	}
-	if(player.hasStatusEffect(StatusEffects.AlraunePollen) && monster.lustVuln > 0) {
-		if(monster.lust < (monster.maxLust() * 0.5)) outputText(monster.capitalA + monster.short + " breaths in your pollen but does not have any visible effects just yet.\n\n");
-		else if(monster.lust < (monster.maxLust() * 0.6)) {
-			if(!monster.plural) outputText(monster.capitalA + monster.short + " starts to squirm a little from your pollen.\n\n");
-			else outputText(monster.capitalA + monster.short + " start to squirm a little from your pollen.\n\n");
+
+
+	//Unicorn and Bicorn aura
+	//Unicorn
+	if(player.hasPerk(PerkLib.AuraOfPurity)) {
+
+		if (monster.cor > 20) {
+			var damage:Number = (scalingBonusIntelligence() * 0.5);
+			//Determine if critical hit!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			critChance += combatMagicalCritical();
+			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+			if (rand(100) < critChance) {
+				crit = true;
+				damage *= 1.75;
+			}
+			damage = magic.calcInfernoModImpl(damage);
+			damage *= 0.5;
+			var SpellMultiplier:Number = 1;
+			SpellMultiplier += spellMod() - 1;
+			damage *= SpellMultiplier;
+			if (monster.cor < 33) damage = Math.round(damage * 1.0);
+			else if (monster.cor < 50) damage = Math.round(damage * 1.1);
+			else if (monster.cor < 75) damage = Math.round(damage * 1.2);
+			else if (monster.cor < 90) damage = Math.round(damage * 1.3);
+			else damage = Math.round(damage * 1.4); //30% more damage against very high corruption.
+			var corruptionModifier:Number = ((100 - player.cor)/50);
+			if (corruptionModifier < 1) corruptionModifier = 1;
+			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+			if (player.hasPerk(PerkLib.EclipticMind)) damage *= corruptionModifier;
+			if (player.hasPerk(PerkLib.EclipticMindEvolved)) damage *= corruptionModifier;
+			if (player.hasPerk(PerkLib.EclipticMindFinalForm)) damage *= corruptionModifier;
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+			damage = Math.round(damage);
+			outputText("Your aura of purity burns [monster a] [monster name] with holy fire for ");
+			doFireDamage(damage, true, true);
+			outputText(" damage!");
+			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+			outputText("\n\n");
 		}
-		else if(monster.lust < (monster.maxLust() * 0.75)) outputText("Your pollen seems to be visibly affecting [monster a] [monster name], making [monster him] squirm uncomfortably.\n\n");
+		else{
+			outputText("Your opponent seems not to be affected by the cleansing flames of your aura of purity. Probably because [monster he] has no corruption within [monster his] body.");
+		}
+	}
+
+	//Bicorn
+	if(player.hasPerk(PerkLib.AuraOfCorruption) && monster.lustVuln > 0) {
+		var bimbo:Boolean   = false;
+		var bro:Boolean     = false;
+		var futa:Boolean    = false;
+		var lustDmg:Number = ((scalingBonusIntelligence() * 0.5) + (scalingBonusLibido() * 0.5));
+		if (player.findPerk(PerkLib.SensualLover) >= 0) lustDmg += 2;
+		if (player.findPerk(PerkLib.Seduction) >= 0) lustDmg += 5;
+		if (player.findPerk(PerkLib.SluttySeduction) >= 0) lustDmg += player.perkv1(PerkLib.SluttySeduction);
+		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) lustDmg += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+		if (bimbo || bro || futa) lustDmg += 5;
+		if (player.findPerk(PerkLib.FlawlessBody) >= 0) lustDmg += 10;
+		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
+		if (player.findPerk(PerkLib.JobSeducer) >= 0) lustDmg += player.teaseLevel * 3;
+		else lustDmg += player.teaseLevel * 2;
+		if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) lustDmg *= 1.2;
+		if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") lustDmg *= (1 + ((10 + rand(11)) / 100));
+		if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) lustDmg *= (1 + (player.lust100 * 0.01));
+		if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) lustDmg *= (1 + combat.historyWhoreBonus());
+		if (player.hasPerk(PerkLib.EclipticMind)) lustDmg *= (player.cor/50);
+		if (player.hasPerk(PerkLib.EclipticMindEvolved)) lustDmg *= (player.cor/50);
+		if (player.hasPerk(PerkLib.EclipticMindFinalForm)) lustDmg *= (player.cor/50);
+		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+		if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
+
+		outputText("[monster a] [monster name] slowly succumbs to [monster c] basest desires as your aura of corruption seeps through [monster him].");
+		if (monster.cor < 100) outputText("Your victims purity is slowly becoming increasingly eroded by your seeping corruption.");
+		lustDmg = Math.round(lustDmg);
+		monster.teased(lustDmg, false);
+		outputText("\n\n");
+	}
+	//Alraune Pollen
+	if(player.hasStatusEffect(StatusEffects.AlraunePollen) && monster.lustVuln > 0) {
+		var bimbo:Boolean   = false;
+		var bro:Boolean     = false;
+		var futa:Boolean    = false;
+		var lustDmg:Number = (scalingBonusLibido() * 0.5);
+		if (player.findPerk(PerkLib.SensualLover) >= 0) lustDmg += 2;
+		if (player.findPerk(PerkLib.Seduction) >= 0) lustDmg += 5;
+		if (player.findPerk(PerkLib.SluttySeduction) >= 0) lustDmg += player.perkv1(PerkLib.SluttySeduction);
+		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) lustDmg += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+		if (bimbo || bro || futa) lustDmg += 5;
+		if (player.findPerk(PerkLib.FlawlessBody) >= 0) lustDmg += 10;
+		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
+		if (player.findPerk(PerkLib.JobSeducer) >= 0) lustDmg += player.teaseLevel * 3;
+		else lustDmg += player.teaseLevel * 2;
+		if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) lustDmg *= 1.2;
+		if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") lustDmg *= (1 + ((10 + rand(11)) / 100));
+		if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) lustDmg *= (1 + (player.lust100 * 0.01));
+		if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) lustDmg *= (1 + combat.historyWhoreBonus());
+		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+		if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
+		if(monster.lust < (monster.maxLust() * 0.5)) outputText(monster.capitalA + monster.short + " breaths in your pollen but does not have any visible effects just yet.");
+		else if(monster.lust < (monster.maxLust() * 0.6)) {
+			if(!monster.plural) outputText(monster.capitalA + monster.short + " starts to squirm a little from your pollen.");
+			else outputText(monster.capitalA + monster.short + " start to squirm a little from your pollen.");
+		}
+		else if(monster.lust < (monster.maxLust() * 0.75)) outputText("Your pollen seems to be visibly affecting [monster a] [monster name], making [monster him] squirm uncomfortably.");
 		else if(monster.lust < (monster.maxLust() * 0.85)) {
-			if(!monster.plural) outputText(monster.capitalA + monster.short + "'s skin colors red as [monster he] inadvertently breths in your pollen.\n\n");
-			else outputText(monster.capitalA + monster.short + "' skin colors red as [monster he] inadvertently breths in your pollen.\n\n");
+			if(!monster.plural) outputText(monster.capitalA + monster.short + "'s skin colors red as [monster he] inadvertently breths in your pollen.");
+			else outputText(monster.capitalA + monster.short + "' skin colors red as [monster he] inadvertently breths in your pollen.");
 		}
 		else {
-			if(!monster.plural) outputText("The effects of your pollen are quite pronounced on [monster a] [monster name] as [monster he] begins to shake and steal glances at your body.\n\n");
-			else outputText("The effects of your pollen are quite pronounced on [monster a] [monster name] as [monster he] begin to shake and steal glances at your body.\n\n");
+			if(!monster.plural) outputText("The effects of your pollen are quite pronounced on [monster a] [monster name] as [monster he] begins to shake and steal glances at your body.");
+			else outputText("The effects of your pollen are quite pronounced on [monster a] [monster name] as [monster he] begin to shake and steal glances at your body.");
 		}
-		if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
-		else monster.lust += monster.lustVuln * (2 + rand(4));
+		lustDmg = Math.round(lustDmg);
+		monster.teased(lustDmg, false);
+		outputText("\n\n");
 	}
 	if(player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
 		outputText("The feel of tight leather completely immobilizing you turns you on more and more.  Would it be so bad to just wait and let her play with you like this?\n\n");

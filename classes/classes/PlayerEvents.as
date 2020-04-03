@@ -1564,6 +1564,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText(". Mighty magical power start to swell in the twin horns on your forehead, washing away whats left of any purity you may have, and you will gladly use them to despoil and tarnish anything pure or innocent left on mareth.</b>\n");
 				if (player.findPerk(PerkLib.AvatorOfPurity) >= 0) player.removePerk(PerkLib.AvatorOfPurity);
 				player.createPerk(PerkLib.AvatorOfCorruption, 0, 0, 0, 0);
+				player.createPerk(PerkLib.AuraOfCorruption, 0, 0, 0, 0);
+				if(player.hasPerk(PerkLib.AuraOfPurity)) player.removePerk(PerkLib.AuraOfPurity);
 				player.cor = 100;
 				needNext = true;
 			}
@@ -1579,8 +1581,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.findPerk(PerkLib.AvatorOfCorruption) >= 0 && player.cor > 10 && player.horns.type != Horns.BICORN) {
 				outputText("\n<b>Without your horns, the magic power they once granted withers and dies, vanishing completely.</b>\n");
 				player.removePerk(PerkLib.AvatorOfCorruption);
+				if (!player.hasPerk(PerkLib.EclipticMind))
+				{
+					player.removePerk(PerkLib.AuraOfPurity);
+				}
 				needNext = true;
 			}
+			//Turn to unicorn
 			if ((player.horns.type == Horns.BICORN || player.horns.type == Horns.UNICORN) && player.cor < 11 && player.findPerk(PerkLib.AvatorOfPurity) < 0) {
 				outputText("\nA sudden wave of serenity pass over you as you realise how pure you have become.");
 				if (player.horns.type == Horns.BICORN) {
@@ -1613,6 +1620,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText(" now. Mighty magical power start to swell in the horn on your forehead, cleansing whats left of any corruption you may have, and you will gladly use them to fight off the corruption that plagues mareth.</b>\n");
 				if (player.findPerk(PerkLib.AvatorOfCorruption) >= 0) player.removePerk(PerkLib.AvatorOfCorruption);
 				player.createPerk(PerkLib.AvatorOfPurity, 0, 0, 0, 0);
+				player.createPerk(PerkLib.AuraOfPurity, 0, 0, 0, 0);
+				if(player.hasPerk(PerkLib.AuraOfCorruption)) player.removePerk(PerkLib.AuraOfCorruption);
 				player.cor = 0;
 				needNext = true;
 			}
@@ -1628,8 +1637,26 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.findPerk(PerkLib.AvatorOfPurity) >= 0 && player.cor < 90 && player.horns.type != Horns.UNICORN) {
 				outputText("\n<b>Without your horn, the magic power it once granted withers and dies, vanishing completely.</b>\n");
 				player.removePerk(PerkLib.AvatorOfPurity);
+				if (!player.hasPerk(PerkLib.EclipticMind))
+				{
+					player.removePerk(PerkLib.AuraOfPurity);
+				}
 				needNext = true;
 			}
+			//Switch Aura Based On Alignment
+			if ((player.horns.type != Horns.BICORN || player.horns.type != Horns.UNICORN) && player.cor > 89 && player.hasPerk(PerkLib.AuraOfPurity) && player.hasPerk(PerkLib.EclipticMind)) {
+				outputText("\nA dramatic change in your alignment has altered your formerly pure aura into one of corruption\n");
+				player.removePerk(PerkLib.AuraOfPurity);
+				player.createPerk(PerkLib.AuraOfCorruption, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if ((player.horns.type != Horns.BICORN || player.horns.type != Horns.UNICORN) && player.cor < 20 && player.hasPerk(PerkLib.AuraOfCorruption) && player.hasPerk(PerkLib.EclipticMind)) {
+				outputText("\nA dramatic change in your alignment has altered your formerly corrupt aura into one of purity\n");
+				player.removePerk(PerkLib.AuraOfCorruption);
+				player.createPerk(PerkLib.AuraOfPurity, 0, 0, 0, 0);
+				needNext = true;
+			}
+			//Harpy
 			if (player.lowerBody == LowerBody.HARPY && player.tailType == Tail.HARPY && player.findPerk(PerkLib.HarpyWomb) >= 0) { //Make eggs big if harpied!
 				if (player.hasStatusEffect(StatusEffects.Eggs) && player.statusEffectv2(StatusEffects.Eggs) == 0) {
 					player.changeStatusValue(StatusEffects.Eggs, 2, 1);
