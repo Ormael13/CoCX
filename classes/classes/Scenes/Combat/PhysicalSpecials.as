@@ -4431,7 +4431,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Do all damage
 		damage = Math.round(damage);
 		damage = doDamage(damage);
-		outputText(""+ damage + "");
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
 		monster.teased(monster.lustVuln * lustdamage, false);
 		if (crit) outputText(" <b>Critical!</b>");
 		monster.spe -= 10;
@@ -4443,7 +4443,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 5, 0);
 		//if (!monster.hasStatusEffect(StatusEffects.lustvenom)) monster.createStatusEffect(StatusEffects.lustvenom, 0, 0, 0, 0);
 		//New line before monster attack
-		outputText("\n\n");
 		monster.spe -= (2+rand(3));
 		if(monster.spe < 1) monster.spe = 1;
 		//Use tail mp
@@ -4485,6 +4484,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Sting successful!
 		outputText("You drop on all fours, flinging your tail forward and shooting an envenomed spike at " + monster.a + monster.short + ".");
 		tailspikedamage();
+		outputText("\n\n");
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else doNext(endLustVictory);
 	}
@@ -4540,6 +4540,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			tailspikedamage();
 			tailspikedamage();
 		}
+		outputText("\n\n");
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else doNext(endLustVictory);
 	}

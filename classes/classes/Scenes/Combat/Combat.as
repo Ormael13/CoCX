@@ -7951,12 +7951,14 @@ public function clawsRendDamage(): void {
 		damage *= 1.75;
 	}
 	damage = Math.round(damage);
-	doDamage(damage, true, true);
+	damage = doDamage(damage);
+	outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
 	if (crit) outputText(" <b>Critical!</b>");
 	if (player.hasPerk(PerkLib.PhantomStrike)) doDamage(damage, true, true);
 }
 
 public function clawsRend():void {
+	clearOutput();
 	if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(40, USEFATG_PHYSICAL);
 	else fatigue(20, USEFATG_PHYSICAL);
 	outputText("You begin to rend [monster a] [monster name] with your claws. ");
