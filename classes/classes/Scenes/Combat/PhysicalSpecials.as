@@ -2765,6 +2765,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			outputText("<b>(<font color=\"#000080\">Miss!</font>)</b>");
 		}
 		flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]--;
+		combat.bonusExpAfterSuccesfullTease();
 	}
 
 	public function EggthrowAttack():void {

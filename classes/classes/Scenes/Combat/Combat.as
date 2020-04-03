@@ -5588,6 +5588,7 @@ private function combatStatusesUpdate():void {
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg, false);
 		outputText("\n\n");
+		bonusExpAfterSuccesfullTease();
 	}
 	//Alraune Pollen
 	if(player.hasStatusEffect(StatusEffects.AlraunePollen) && monster.lustVuln > 0) {
@@ -5629,6 +5630,7 @@ private function combatStatusesUpdate():void {
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg, false);
 		outputText("\n\n");
+		bonusExpAfterSuccesfullTease();
 	}
 	if(player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
 		outputText("The feel of tight leather completely immobilizing you turns you on more and more.  Would it be so bad to just wait and let her play with you like this?\n\n");
