@@ -5956,7 +5956,7 @@ use namespace CoC;
 				oomukadeCounter++;
 			if (skin.hasVenomousMarking())
 				oomukadeCounter += 2;
-			if (cocks[0].cockType == CockTypesEnum.OOMUKADE || vaginaType() == VaginaClass.VENOM_DRIPPING)
+			if (hasCock() && countCocksOfType(CockTypesEnum.OOMUKADE) > 0 || hasVagina() && vaginaType() == VaginaClass.VENOM_DRIPPING)
 				oomukadeCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				oomukadeCounter += 50;

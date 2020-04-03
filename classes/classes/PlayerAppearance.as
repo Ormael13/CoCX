@@ -24,7 +24,7 @@ public class PlayerAppearance extends BaseContent {
 		var rando:Number = 0;
 		//Determine race type:
 		clearOutput();
-		mainView.hideComboBox()
+		mainView.hideComboBox();
 		outputText("<font size=\"36\" face=\"Georgia\"><u>Appearance</u></font>\n");
 		if (CoC.instance.gameSettings.charviewEnabled) {
 			mainViewManager.showPlayerDoll(debug);
@@ -826,14 +826,14 @@ public class PlayerAppearance extends BaseContent {
 	}
 
 	public function ApexRaceDisplayTextUpdate():void {
-		outputText("Select your racial paragon race: ")
+		outputText("Select your racial paragon race: ");
 		var selectedracetext:String;
 		if (player.racialParagonSelectedRace() == null)
 		{
 			selectedracetext = "None";
 		}
 		else{selectedracetext = player.racialParagonSelectedRace().name}
-		outputText("\n\nCurrently selected: <b>" + selectedracetext + "</b>")
+		outputText("\n\nCurrently selected: <b>" + selectedracetext + "</b>");
 		flushOutputTextToGUI()
 	}
 
@@ -2770,7 +2770,7 @@ public function RacialScores():void {
 		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText((10 * (1 + player.newGamePlusMod())) + " Armor, +" + (60 + (1 * player.newGamePlusMod())) + " spell resistance");
 		outputText(")</font>");
 	}
-	else if (player.gargoyleScore() >= 1 && player.gargoyleScore() < 20) ("\n<font color=\"#008000\">GARGOYLE: " + player.gargoyleScore() + "</font>");
+	else if (player.gargoyleScore() >= 1 && player.gargoyleScore() < 20) outputText("\n<font color=\"#008000\">GARGOYLE: " + player.gargoyleScore() + "</font>");
 	else if (player.gargoyleScore() < 1) outputText("\n<font color=\"#ff0000\">GARGOYLE: 0</font>");
 	//Goblin
 	if (player.goblinScore() >= 10) outputText("\n<font color=\"#0000a0\">Goblin: " + player.goblinScore() + " (-" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (75 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
@@ -3056,6 +3056,7 @@ public function RacialScores():void {
 	else if (player.oniScore() >= 6 && player.oniScore() < 12) outputText("\n<font color=\"#0000a0\">Half Oni: " + player.oniScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, -" + (10 * (1 + player.newGamePlusMod())) + " max Int, +" + (20 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
 	else if (player.oniScore() >= 1 && player.oniScore() < 6) outputText("\n<font color=\"#008000\">Half Oni: " + player.oniScore() + "</font>");
 	else if (player.oniScore() < 1) outputText("\n<font color=\"#ff0000\">Half Oni: 0</font>");
+	//Oomukade
 	if (player.oomukadeScore() >= 8) outputText("\n<font color=\"#0000a0\">Oomukade: " + player.oomukadeScore() + " (+" + (75 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (110 * (1 + player.newGamePlusMod())) + " max Lib, -" + (50 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
 	else if (player.oomukadeScore() >= 1 && player.oomukadeScore() < 4) outputText("\n<font color=\"#008000\">Oomukade: " + player.oomukadeScore() + "</font>");
 	else if (player.oomukadeScore() < 1) outputText("\n<font color=\"#ff0000\">Oomukade: 0</font>");
