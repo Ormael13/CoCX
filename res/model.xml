@@ -1519,46 +1519,34 @@
         <switch value="arms.type">
             <case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
 				<if test="PlayerHasViewableOutfit">
-					<if test="SuccubusDress"> <!--For future addons-->
-						<!--see switch[value=skin.coverage]-->
+					<if test="armStanceNonBannedList">
 						<if test="femininity &gt;=40">
 							<if test="cor &gt;=50">
 								<if test="skin.coverage==Skin.COVERAGE_NONE">
-									<switch value="lowerBody.type">
-										<case values="LowerBody.HUMAN,LowerBody.DEMONIC_HIGH_HEELS,LowerBody.ELF,LowerBody.KITSUNE">
-											<hide part="hands/*"/>
-											<hide part="hands_bg/*"/>
-											<hide part="arms/*"/>
-											<hide part="arms_bg/*"/>
-											<show part="arms/demonlewd"/>
-											<show part="arms_bg/demonlewd"/>
-											<show part="arms_fg/demonlewd"/>
-										</case>
-										<default>
-										</default>
-									</switch>
+									<hide part="hands/*"/>
+									<hide part="hands_bg/*"/>
+									<hide part="arms/*"/>
+									<hide part="arms_bg/*"/>
+									<show part="arms/demonlewd"/>
+									<show part="arms_bg/demonlewd"/>
+									<show part="arms_fg/demonlewd"/>
 								</if>
 							</if>
 						</if>
 					</if>
 					<else>
-						<!--see switch[value=skin.coverage]-->
 						<if test="femininity &gt;=40">
 							<if test="cor &gt;=50">
 								<if test="skin.coverage==Skin.COVERAGE_NONE">
-									<switch value="lowerBody.type">
-										<case values="LowerBody.HUMAN,LowerBody.DEMONIC_HIGH_HEELS,LowerBody.ELF,LowerBody.KITSUNE">
-											<hide part="hands/*"/>
-											<hide part="hands_bg/*"/>
-											<hide part="arms/*"/>
-											<hide part="arms_bg/*"/>
-											<show part="arms/demonlewd"/>
-											<show part="arms_bg/demonlewd"/>
-											<show part="arms_fg/demonlewd"/>
-										</case>
-										<default>
-										</default>
-									</switch>
+									<if test="showClothing">
+										<hide part="hands/*"/>
+										<hide part="hands_bg/*"/>
+										<hide part="arms/*"/>
+										<hide part="arms_bg/*"/>
+										<show part="arms/demonlewd"/>
+										<show part="arms_bg/demonlewd"/>
+										<show part="arms_fg/demonlewd"/>
+									</if>
 								</if>
 							</if>
 						</if>

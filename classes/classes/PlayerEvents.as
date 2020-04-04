@@ -1593,7 +1593,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.AvatorOfCorruption);
 				if (!player.hasPerk(PerkLib.EclipticMind))
 				{
-					player.removePerk(PerkLib.AuraOfPurity);
+					player.removePerk(PerkLib.AuraOfCorruption);
 				}
 				needNext = true;
 			}

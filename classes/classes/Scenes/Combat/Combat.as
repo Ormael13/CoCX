@@ -5583,7 +5583,7 @@ private function combatStatusesUpdate():void {
 		if (player.hasPerk(PerkLib.EclipticMindEvolved) && monster.cor > player.cor/2) lustDmg = Math.round(lustDmg * 2);
 		else if (player.hasPerk(PerkLib.EclipticMindFinalForm) && monster.cor > player.cor/2) lustDmg = Math.round(lustDmg * 3);
 
-		outputText("[monster a] [monster name] slowly succumbs to [monster c] basest desires as your aura of corruption seeps through [monster him].");
+		outputText("[monster a] [monster name] slowly succumbs to [monster his] basest desires as your aura of corruption seeps through [monster him].");
 		if (monster.cor < 100) outputText("Your victims purity is slowly becoming increasingly eroded by your seeping corruption.");
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg, false);
