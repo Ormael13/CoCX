@@ -1531,6 +1531,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
 				needNext = true;
 			}
+
+			//Turn to Bicorn
+			var CurentColor:String;
+			var bicornColorPalette:Array = ["black", "midnight black", "midnight"];
+			var bicornHairPalette:Array = ["silver","black", "midnight black", "midnight"];
 			if ((player.horns.type == Horns.BICORN || player.horns.type == Horns.UNICORN) && player.cor > 89 && player.findPerk(PerkLib.AvatorOfCorruption) < 0) {
 				outputText("\nA sudden wave of pleasure strike you making you moan");
 				if (player.horns.type == Horns.UNICORN) {
@@ -1541,10 +1546,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						player.createStatusEffect(StatusEffects.UnlockedBicornHorns, 0, 0, 0, 0);
 					}
 				}
-				outputText(".");
-				if (player.hairColor != "black") {
-					outputText(" Your fur tingle and you coo in delight as it turn abyssal black.");
-					player.hairColor = "black";
+				if (!InCollection(player.hairColor, bicornHairPalette)) {
+					CurentColor = randomChoice(bicornHairPalette);
+					player.coatColor = randomChoice(bicornHairPalette);
+					outputText(" Your feel a tingling in your hairs as the strands turns "+CurentColor+".");
+				}
+				if (!InCollection(player.coatColor, bicornColorPalette)) {
+					CurentColor = randomChoice(bicornColorPalette);
+					outputText(" Your fur tingle and you coo in delight as it turn "+CurentColor+".");
+					player.coatColor = randomChoice(bicornColorPalette);
 				}
 				if (player.eyes.colour != "red") {
 					outputText(" Meanwhile your eyes shine with malice as they take on a red corrupted tone reflecting the sorry state of your soul.");
@@ -1587,7 +1597,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				needNext = true;
 			}
+
 			//Turn to unicorn
+			var unicornColorPalette:Array = ["silver", "white", "pure white"];
+			var unicornHairPalette:Array = ["platinum blonde","silver", "white", "pure white"];
 			if ((player.horns.type == Horns.BICORN || player.horns.type == Horns.UNICORN) && player.cor < 11 && player.findPerk(PerkLib.AvatorOfPurity) < 0) {
 				outputText("\nA sudden wave of serenity pass over you as you realise how pure you have become.");
 				if (player.horns.type == Horns.BICORN) {
@@ -1598,9 +1611,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						player.createStatusEffect(StatusEffects.UnlockedUnicornHorn, 0, 0, 0, 0);
 					}
 				}
-				if (player.hairColor != "white") {
-					outputText(" You sigh in relief as your fur turns immaculate white.");
-					player.hairColor = "white";
+				if (!InCollection(player.coatColor, unicornHairPalette)) {
+					CurentColor = randomChoice(unicornHairPalette);
+					outputText(" Your feel a tingling in your hairs as the strands turns "+CurentColor+".");
+					player.coatColor = randomChoice(unicornHairPalette);
+				}
+				if (!InCollection(player.hairColor, unicornColorPalette)) {
+					CurentColor = randomChoice(unicornColorPalette);
+					outputText(" You sigh in relief as your fur turns "+CurentColor+".");
+					player.coatColor = randomChoice(unicornColorPalette);
 				}
 				if (player.eyes.colour != "blue") {
 					outputText(" Meanwhile your irises shift toward the sapphire blue as your mind clears off.");

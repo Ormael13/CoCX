@@ -6676,6 +6676,10 @@ use namespace CoC;
 
 		//Determine Unicornkin Rating
 		public function unicornkinScore():Number {
+			var bicornColorPalette:Array = ["black", "midnight black", "midnight"];
+			var bicornHairPalette:Array = ["silver","black", "midnight black", "midnight"];
+			var unicornColorPalette:Array = ["silver", "white", "pure white"];
+			var unicornHairPalette:Array = ["platinum blonde","silver", "white", "pure white"];
 			Begin("Player","racialScore","unicornkin");
 			var unicornCounter:Number = 0;
 			if (faceType == Face.HORSE)
@@ -6693,7 +6697,7 @@ use namespace CoC;
 					unicornCounter++;
 				if (horns.count >= 6)
 					unicornCounter += 2;
-				if (hairColor == "platinum blonde" || hairColor == "silver" || hairColor == "white")
+				if (InCollection(hairColor, unicornHairPalette) && InCollection(coatColor, unicornColorPalette))
 					unicornCounter++;
 				if (eyes.colour == "blue")
 					unicornCounter++;
@@ -6705,7 +6709,7 @@ use namespace CoC;
 					unicornCounter++;
 				if (horns.count >= 6)
 					unicornCounter += 2;
-				if (hairColor == "black")
+				if (InCollection(hairColor, bicornHairPalette) && InCollection(coatColor, bicornColorPalette))
 					unicornCounter++;
 				if (eyes.colour == "red")
 					unicornCounter++;
@@ -6748,6 +6752,10 @@ use namespace CoC;
 
 		//Determine Unicorn Rating
 		public function unicornScore():Number {
+			var bicornColorPalette:Array = ["black", "midnight black", "midnight"];
+			var bicornHairPalette:Array = ["silver","black", "midnight black", "midnight"];
+			var unicornColorPalette:Array = ["silver", "white", "pure white"];
+			var unicornHairPalette:Array = ["platinum blonde","silver", "white", "pure white"];
 			Begin("Player","racialScore","unicorn");
 			var unicornCounter:Number = 0;
 			if (faceType == Face.HUMAN)
@@ -6767,7 +6775,7 @@ use namespace CoC;
 					unicornCounter++;
 				if (horns.count >= 6)
 					unicornCounter += 2;
-				if (hairColor == "platinum blonde" || hairColor == "silver" || hairColor == "white" || hairColor == "pure white")
+				if (InCollection(hairColor, unicornHairPalette) && InCollection(coatColor, unicornColorPalette))
 					unicornCounter++;
 				if (eyes.colour == "blue")
 					unicornCounter++;
@@ -6779,7 +6787,7 @@ use namespace CoC;
 					unicornCounter++;
 				if (horns.count >= 6)
 					unicornCounter += 2;
-				if (hairColor == "black")
+				if (InCollection(hairColor, bicornHairPalette) && InCollection(coatColor, bicornColorPalette))
 					unicornCounter++;
 				if (eyes.colour == "red")
 					unicornCounter++;
@@ -6825,6 +6833,10 @@ use namespace CoC;
 
 		//Determine Alicornkin Rating
 		public function alicornkinScore():Number {
+			var bicornColorPalette:Array = ["black", "midnight black", "midnight"];
+			var bicornHairPalette:Array = ["silver","black", "midnight black", "midnight"];
+			var unicornColorPalette:Array = ["silver", "white", "pure white"];
+			var unicornHairPalette:Array = ["platinum blonde","silver", "white", "pure white"];
 			Begin("Player","racialScore","alicorn");
 			var alicornCounter:Number = 0;
 			if (faceType == Face.HORSE)
@@ -6844,7 +6856,7 @@ use namespace CoC;
 					alicornCounter += 2;
 				if (wings.type == Wings.FEATHERED_ALICORN)
 					alicornCounter += 2;
-				if (hairColor == "platinum blonde" || hairColor == "silver" || hairColor == "white")
+				if (InCollection(hairColor, unicornHairPalette) && InCollection(coatColor, unicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "blue")
 					alicornCounter++;
@@ -6858,7 +6870,7 @@ use namespace CoC;
 					alicornCounter += 2;
 				if (wings.type == Wings.NIGHTMARE)
 					alicornCounter += 2;
-				if (hairColor == "black")
+				if (InCollection(hairColor, bicornHairPalette) && InCollection(coatColor, bicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "red")
 					alicornCounter++;
@@ -6903,6 +6915,10 @@ use namespace CoC;
 
 		//Determine Alicorn Rating
 		public function alicornScore():Number {
+			var bicornColorPalette:Array = ["black", "midnight black", "midnight"];
+			var bicornHairPalette:Array = ["silver","black", "midnight black", "midnight"];
+			var unicornColorPalette:Array = ["silver", "white", "pure white"];
+			var unicornHairPalette:Array = ["platinum blonde","silver", "white", "pure white"];
 			Begin("Player","racialScore","alicorn");
 			var alicornCounter:Number = 0;
 			if (faceType == Face.HUMAN)
@@ -6922,7 +6938,7 @@ use namespace CoC;
 					alicornCounter += 2;
 				if (wings.type == Wings.FEATHERED_ALICORN)
 					alicornCounter += 2;
-				if (hairColor == "platinum blonde" || hairColor == "silver" || hairColor == "white")
+				if (InCollection(hairColor, unicornHairPalette) && InCollection(coatColor, unicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "blue")
 					alicornCounter++;
@@ -6936,7 +6952,7 @@ use namespace CoC;
 					alicornCounter += 2;
 				if (wings.type == Wings.NIGHTMARE)
 					alicornCounter += 2;
-				if (hairColor == "black")
+				if (InCollection(hairColor, bicornHairPalette) && InCollection(coatColor, bicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "red")
 					alicornCounter++;
