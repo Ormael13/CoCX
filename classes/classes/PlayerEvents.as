@@ -1534,7 +1534,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 			//Turn to Bicorn
 			var CurentColor:String;
-			var bicornColorPalette:Array = ["silver","black", "midnight black", "midnight"];
+			var bicornColorPalette:Array = ["black", "midnight black", "midnight"];
 			var bicornHairPalette:Array = ["silver","black", "midnight black", "midnight"];
 			if ((player.horns.type == Horns.BICORN || player.horns.type == Horns.UNICORN) && player.cor > 89 && player.findPerk(PerkLib.AvatorOfCorruption) < 0) {
 				outputText("\nA sudden wave of pleasure strike you making you moan");
