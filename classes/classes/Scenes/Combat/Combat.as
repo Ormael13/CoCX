@@ -5533,7 +5533,6 @@ private function combatStatusesUpdate():void {
 			else damage = Math.round(damage * 1.4); //30% more damage against very high corruption.
 			var corruptionModifier:Number = ((100 - player.cor)/50);
 			if (corruptionModifier < 1) corruptionModifier = 1;
-			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasPerk(PerkLib.EclipticMind)) damage *= corruptionModifier;
 			if (player.hasPerk(PerkLib.EclipticMindEvolved)) damage *= corruptionModifier;
 			if (player.hasPerk(PerkLib.EclipticMindFinalForm)) damage *= corruptionModifier;
