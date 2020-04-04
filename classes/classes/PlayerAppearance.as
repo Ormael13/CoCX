@@ -675,6 +675,9 @@ public class PlayerAppearance extends BaseContent {
 		if (player.vaginas.length > 1){
             outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clits each.  ");
 		}
+		if (player.vaginaType() == VaginaClass.CAVE_WYRM){
+			outputText("It constantly drools with acid.");
+		}
 		if (player.vaginaType() == VaginaClass.VENOM_DRIPPING){
 			outputText("It constantly drools with aphrodisiac venom.");
 		}
