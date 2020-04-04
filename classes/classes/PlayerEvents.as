@@ -1548,13 +1548,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (!InCollection(player.hairColor, bicornHairPalette)) {
 					CurentColor = randomChoice(bicornHairPalette);
-					player.coatColor = randomChoice(bicornHairPalette);
 					outputText(" Your feel a tingling in your hairs as the strands turns "+CurentColor+".");
+					player.hairColor = CurentColor;
 				}
 				if (!InCollection(player.coatColor, bicornColorPalette)) {
 					CurentColor = randomChoice(bicornColorPalette);
 					outputText(" Your fur tingle and you coo in delight as it turn "+CurentColor+".");
-					player.coatColor = randomChoice(bicornColorPalette);
+					player.coatColor = CurentColor;
 				}
 				if (player.eyes.colour != "red") {
 					outputText(" Meanwhile your eyes shine with malice as they take on a red corrupted tone reflecting the sorry state of your soul.");
@@ -1611,15 +1611,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						player.createStatusEffect(StatusEffects.UnlockedUnicornHorn, 0, 0, 0, 0);
 					}
 				}
-				if (!InCollection(player.coatColor, unicornHairPalette)) {
+				if (!InCollection(player.hairColor, unicornHairPalette)) {
 					CurentColor = randomChoice(unicornHairPalette);
 					outputText(" Your feel a tingling in your hairs as the strands turns "+CurentColor+".");
-					player.coatColor = randomChoice(unicornHairPalette);
+					player.hairColor = CurentColor;
 				}
-				if (!InCollection(player.hairColor, unicornColorPalette)) {
+				if (!InCollection(player.coatColor, unicornColorPalette)) {
 					CurentColor = randomChoice(unicornColorPalette);
 					outputText(" You sigh in relief as your fur turns "+CurentColor+".");
-					player.coatColor = randomChoice(unicornColorPalette);
+					player.coatColor = CurentColor;
 				}
 				if (player.eyes.colour != "blue") {
 					outputText(" Meanwhile your irises shift toward the sapphire blue as your mind clears off.");
