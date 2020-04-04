@@ -5992,8 +5992,6 @@ use namespace CoC;
 				oomukadeCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && oomukadeCounter >= 8)
 				oomukadeCounter += 1;
-			if (hasPerk(PerkLib.EasterBunnyBalls) && balls >= 2)
-				oomukadeCounter = 0;
 			if (isGargoyle()) oomukadeCounter = 0;
 			oomukadeCounter = finalRacialScore(oomukadeCounter, Race.CENTIPEDE);
 			End("Player","racialScore");
@@ -6651,6 +6649,8 @@ use namespace CoC;
 				sphinxCounter++;
 			if (wings.type == Wings.FEATHERED_SPHINX)
 				sphinxCounter += 2;
+			if (catCocks() > 0)
+				sphinxCounter++;
 			if (findPerk(PerkLib.Flexibility) > 0)
 				sphinxCounter++;
 			if (findPerk(PerkLib.CatlikeNimbleness) > 0)
@@ -6680,8 +6680,6 @@ use namespace CoC;
 			var unicornCounter:Number = 0;
 			if (faceType == Face.HORSE)
 				unicornCounter += 2;
-			if (faceType != Face.HORSE)
-				unicornCounter = 0;
 			if (ears.type == Ears.HORSE)
 				unicornCounter++;
 			if (tailType == Tail.HORSE)
@@ -6690,8 +6688,6 @@ use namespace CoC;
 				unicornCounter++;
 			if (eyes.type == Eyes.HUMAN)
 				unicornCounter++;
-			if (horns.type != Horns.BICORN || horns.type != Horns.UNICORN)
-				unicornCounter = 0;
 			if (horns.type == Horns.UNICORN) {
 				if (horns.count < 6)
 					unicornCounter++;
@@ -6720,6 +6716,10 @@ use namespace CoC;
 				unicornCounter = 0;
 			if (hasFur())
 				unicornCounter++;
+			if (horseCocks() > 0)
+				unicornCounter++;
+			if (hasVagina() && vaginaType() == VaginaClass.EQUINE)
+				unicornCounter++;
 			if (horns.type != Horns.UNICORN && horns.type != Horns.BICORN && (wings.type == Wings.FEATHERED_ALICORN || wings.type == Wings.NIGHTMARE))
 				unicornCounter = 0;
 			if (findPerk(PerkLib.EclipticMind) > 0)
@@ -6734,6 +6734,12 @@ use namespace CoC;
 				unicornCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && unicornCounter >= 8)
 				unicornCounter += 1;
+			if (wings.type == Wings.FEATHERED_ALICORN || wings.type == Wings.NIGHTMARE)
+				unicornCounter = 0;
+			if (faceType != Face.HORSE)
+				unicornCounter = 0;
+			if (horns.type != Horns.UNICORN && horns.type != Horns.BICORN)
+				unicornCounter = 0;
 			if (isGargoyle()) unicornCounter = 0;
 			unicornCounter = finalRacialScore(unicornCounter, Race.UNICORNKIN);
 			End("Player","racialScore");
@@ -6744,26 +6750,24 @@ use namespace CoC;
 		public function unicornScore():Number {
 			Begin("Player","racialScore","unicorn");
 			var unicornCounter:Number = 0;
-			if (faceType != Face.HUMAN)
-				unicornCounter = 0;
 			if (faceType == Face.HUMAN)
 				unicornCounter++;
 			if (ears.type == Ears.HORSE)
 				unicornCounter++;
 			if (tailType == Tail.HORSE)
 				unicornCounter++;
+			if (isTaur())
+				unicornCounter++;
 			if (lowerBody == LowerBody.HOOFED)
 				unicornCounter++;
 			if (eyes.type == Eyes.HUMAN)
 				unicornCounter++;
-			if (horns.type != Horns.BICORN || horns.type != Horns.UNICORN)
-				unicornCounter = 0;
 			if (horns.type == Horns.UNICORN) {
 				if (horns.count < 6)
 					unicornCounter++;
 				if (horns.count >= 6)
 					unicornCounter += 2;
-				if (hairColor == "platinum blonde" || hairColor == "silver" || hairColor == "white")
+				if (hairColor == "platinum blonde" || hairColor == "silver" || hairColor == "white" || hairColor == "pure white")
 					unicornCounter++;
 				if (eyes.colour == "blue")
 					unicornCounter++;
@@ -6782,12 +6786,13 @@ use namespace CoC;
 				if (findPerk(PerkLib.AvatorOfCorruption) >= 0)
 					unicornCounter++;
 			}
-			if (wings.type == Wings.FEATHERED_ALICORN)
-				unicornCounter = 0;
+			if (wings.type == Wings.NONE) unicornCounter += 2;
 			if (hasPlainSkinOnly())
 				unicornCounter++;
-			if (horns.type != Horns.UNICORN && horns.type != Horns.BICORN && (wings.type == Wings.FEATHERED_ALICORN || wings.type == Wings.NIGHTMARE))
-				unicornCounter = 0;
+			if (horseCocks() > 0)
+				unicornCounter++;
+			if (hasVagina() && vaginaType() == VaginaClass.EQUINE)
+				unicornCounter++;
 			if (findPerk(PerkLib.TwinHeart) > 0)
 				unicornCounter += 2;
 			if (findPerk(PerkLib.TwinHeartEvolved) > 0)
@@ -6806,6 +6811,12 @@ use namespace CoC;
 				unicornCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && unicornCounter >= 8)
 				unicornCounter += 1;
+			if (wings.type == Wings.FEATHERED_ALICORN || wings.type == Wings.NIGHTMARE)
+				unicornCounter = 0;
+			if (faceType != Face.HUMAN)
+				unicornCounter = 0;
+			if (horns.type != Horns.UNICORN && horns.type != Horns.BICORN)
+				unicornCounter = 0;
 			if (isGargoyle()) unicornCounter = 0;
 			unicornCounter = finalRacialScore(unicornCounter, Race.UNICORN);
 			End("Player","racialScore");
@@ -6818,8 +6829,6 @@ use namespace CoC;
 			var alicornCounter:Number = 0;
 			if (faceType == Face.HORSE)
 				alicornCounter += 2;
-			if (faceType != Face.HORSE)
-				alicornCounter = 0;
 			if (ears.type == Ears.HORSE)
 				alicornCounter++;
 			if (tailType == Tail.HORSE)
@@ -6828,15 +6837,11 @@ use namespace CoC;
 				alicornCounter++;
 			if (eyes.type == Eyes.HUMAN)
 				alicornCounter++;
-			if (horns.type != Horns.BICORN || horns.type != Horns.UNICORN)
-				alicornCounter = 0;
 			if (horns.type == Horns.UNICORN) {
 				if (horns.count < 6)
 					alicornCounter++;
 				if (horns.count >= 6)
 					alicornCounter += 2;
-				if (wings.type != Wings.FEATHERED_ALICORN)
-					alicornCounter = 0;
 				if (wings.type == Wings.FEATHERED_ALICORN)
 					alicornCounter += 2;
 				if (hairColor == "platinum blonde" || hairColor == "silver" || hairColor == "white")
@@ -6851,8 +6856,6 @@ use namespace CoC;
 					alicornCounter++;
 				if (horns.count >= 6)
 					alicornCounter += 2;
-				if (wings.type != Wings.NIGHTMARE)
-					alicornCounter = 0;
 				if (wings.type == Wings.NIGHTMARE)
 					alicornCounter += 2;
 				if (hairColor == "black")
@@ -6864,8 +6867,10 @@ use namespace CoC;
 			}
 			if (hasFur())
 				alicornCounter++;
-			if (horns.type != Horns.UNICORN && wings.type != Wings.FEATHERED_ALICORN && horns.type != Horns.BICORN && wings.type != Wings.NIGHTMARE)
-				alicornCounter = 0;
+			if (horseCocks() > 0)
+				alicornCounter++;
+			if (hasVagina() && vaginaType() == VaginaClass.EQUINE)
+				alicornCounter++;
 			if (findPerk(PerkLib.EclipticMind) > 0)
 				alicornCounter += 1;
 			if (findPerk(PerkLib.EclipticMindEvolved) > 0)
@@ -6878,6 +6883,18 @@ use namespace CoC;
 				alicornCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && alicornCounter >= 8)
 				alicornCounter += 1;
+			if (faceType != Face.HORSE)
+				alicornCounter = 0;
+			if (horns.type != Horns.BICORN && horns.type != Horns.UNICORN)
+				alicornCounter = 0;
+			if (horns.type == Horns.BICORN) {
+				if (wings.type != Wings.NIGHTMARE)
+					alicornCounter = 0;
+			}
+			if (horns.type == Horns.UNICORN) {
+				if (wings.type != Wings.FEATHERED_ALICORN)
+					alicornCounter = 0;
+			}
 			if (isGargoyle()) alicornCounter = 0;
 			alicornCounter = finalRacialScore(alicornCounter, Race.ALICORNKIN);
 			End("Player","racialScore");
@@ -6888,8 +6905,6 @@ use namespace CoC;
 		public function alicornScore():Number {
 			Begin("Player","racialScore","alicorn");
 			var alicornCounter:Number = 0;
-			if (faceType == Face.HORSE)
-				alicornCounter += 2;
 			if (faceType == Face.HUMAN)
 				alicornCounter++;
 			if (ears.type == Ears.HORSE)
@@ -6900,15 +6915,11 @@ use namespace CoC;
 				alicornCounter++;
 			if (eyes.type == Eyes.HUMAN)
 				alicornCounter++;
-			if (horns.type != Horns.BICORN || horns.type != Horns.UNICORN)
-				alicornCounter = 0;
 			if (horns.type == Horns.UNICORN) {
 				if (horns.count < 6)
 					alicornCounter++;
 				if (horns.count >= 6)
 					alicornCounter += 2;
-				if (wings.type != Wings.FEATHERED_ALICORN)
-					alicornCounter = 0;
 				if (wings.type == Wings.FEATHERED_ALICORN)
 					alicornCounter += 2;
 				if (hairColor == "platinum blonde" || hairColor == "silver" || hairColor == "white")
@@ -6923,8 +6934,6 @@ use namespace CoC;
 					alicornCounter++;
 				if (horns.count >= 6)
 					alicornCounter += 2;
-				if (wings.type != Wings.NIGHTMARE)
-					alicornCounter = 0;
 				if (wings.type == Wings.NIGHTMARE)
 					alicornCounter += 2;
 				if (hairColor == "black")
@@ -6934,10 +6943,12 @@ use namespace CoC;
 				if (findPerk(PerkLib.AvatorOfCorruption) >= 0)
 					alicornCounter++;
 			}
-			if (hasFur() || hasPlainSkinOnly())
+			if (hasPlainSkinOnly())
 				alicornCounter++;
-			if (horns.type != Horns.UNICORN && wings.type != Wings.FEATHERED_ALICORN && horns.type != Horns.BICORN && wings.type != Wings.NIGHTMARE)
-				alicornCounter = 0;
+			if (horseCocks() > 0)
+				alicornCounter++;
+			if (hasVagina() && vaginaType() == VaginaClass.EQUINE)
+				alicornCounter++;
 			if (findPerk(PerkLib.TwinHeart) > 0)
 				alicornCounter += 2;
 			if (findPerk(PerkLib.TwinHeartEvolved) > 0)
@@ -6956,6 +6967,18 @@ use namespace CoC;
 				alicornCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && alicornCounter >= 8)
 				alicornCounter += 1;
+			if (faceType != Face.HUMAN)
+				alicornCounter = 0;
+			if (horns.type != Horns.BICORN && horns.type != Horns.UNICORN)
+				alicornCounter = 0;
+			if (horns.type == Horns.BICORN) {
+				if (wings.type != Wings.NIGHTMARE)
+					alicornCounter = 0;
+			}
+			if (horns.type == Horns.UNICORN) {
+				if (wings.type != Wings.FEATHERED_ALICORN)
+					alicornCounter = 0;
+			}
 			if (isGargoyle()) alicornCounter = 0;
 			alicornCounter = finalRacialScore(alicornCounter, Race.ALICORN);
 			End("Player","racialScore");
@@ -7559,6 +7582,8 @@ use namespace CoC;
 			if (lowerBody == LowerBody.LION)
 				manticoreCounter++;
 			if (tongue.type == Tongue.CAT)
+				manticoreCounter++;
+			if (vaginaType() == VaginaClass.MANTICORE)
 				manticoreCounter++;
 			if (wings.type == Wings.MANTICORE_LIKE_SMALL)
 				manticoreCounter++;
@@ -10123,9 +10148,9 @@ use namespace CoC;
 				maxSpeCap2 += (5 * newGamePlusMod);
 			}//+10/10-20
 			if (manticoreScore() >= 6) {
-				if (manticoreScore() >= 12) {
+				if (manticoreScore() >= 13) {
 					maxSpeCap2 += (100 * newGamePlusMod);
-					maxIntCap2 += (50 * newGamePlusMod);
+					maxIntCap2 += (65 * newGamePlusMod);
 					maxLibCap2 += (60 * newGamePlusMod);
 				}
 				else {
@@ -10219,10 +10244,10 @@ use namespace CoC;
 				}
 			}//+15/10-20
 			if (unicornScore() >= 10) {
-				if (unicornScore() >= 21) {
-					maxStrCap2 += (45 * newGamePlusMod);
+				if (unicornScore() >= 24) {
+					maxStrCap2 += (60 * newGamePlusMod);
 					maxTouCap2 += (70 * newGamePlusMod);
-					maxSpeCap2 += (80 * newGamePlusMod);
+					maxSpeCap2 += (95 * newGamePlusMod);
 					maxIntCap2 += (120 * newGamePlusMod);
 				}
 				else {
@@ -10237,8 +10262,8 @@ use namespace CoC;
 				maxIntCap2 += (75 * newGamePlusMod);
 			}//+(15)30/(10-20)30-40
 			if (alicornScore() >= 12) {
-				if (alicornScore() >= 21) {
-					maxStrCap2 += (45 * newGamePlusMod);
+				if (alicornScore() >= 24) {
+					maxStrCap2 += (60 * newGamePlusMod);
 					maxTouCap2 += (70 * newGamePlusMod);
 					maxSpeCap2 += (120 * newGamePlusMod);
 					maxIntCap2 += (110 * newGamePlusMod);

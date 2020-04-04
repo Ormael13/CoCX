@@ -654,11 +654,20 @@ public class PlayerAppearance extends BaseContent {
 		if(player.gender == 2 && player.isScylla())
 			outputText("\nYour womanly parts have shifted to lie underneath your tentacle legs.");
 		outputText("\n");
-		if (player.vaginas.length == 1 && player.lowerBody == LowerBody.MELKIE){
-			outputText("You have two set of vaginal lips one twice as bigger then the other and hidding the smaller within it folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
-		}
-		if (player.vaginas.length == 1 && player.lowerBody != LowerBody.MELKIE){
+		if (player.vaginas.length == 1){
+			if(player.vaginaType() == VaginaClass.EQUINE){
+				outputText("Your " + vaginaDescript(0) + " is deep and wide just like that of a horse. Sometime you lament that most of your partners are no longuer big enought to satisfy you. Inside you have a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+			}
+			else if (player.lowerBody == LowerBody.MELKIE){
+				outputText("You have two set of vaginal lips one twice as bigger then the other and hidding the smaller within it folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+			}
+			else if (player.vaginaType() == VaginaClass.MANTICORE){
+				outputText("You have a ultrasensitive " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit. " +
+						"Your manticore vagina is so sensitive that you can't help but moan musical note out loud when touching yourself.");
+			}
+			else{
             outputText("You have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+			}
 		}
 		if(player.vaginas[0].virgin)
 			outputText(" and an intact hymen");
@@ -666,7 +675,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.vaginas.length > 1){
             outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clits each.  ");
 		}
-		if (player.vaginas[0].type == 7){
+		if (player.vaginaType() == VaginaClass.VENOM_DRIPPING){
 			outputText("It constantly drools with aphrodisiac venom.");
 		}
 		if(player.lib < 50 && player.lust < 50) //not particularly horny
@@ -2533,7 +2542,7 @@ public function RacialScores():void {
 	clearOutput();
 	outputText("<b>Current racial scores (and bonuses to stats if applicable):</b>\n");
 	//Alicorn
-	if (player.alicornScore() >= 23) outputText("\n<font color=\"#0000a0\">True Alicorn/True Nightmare: " + player.alicornScore() + " (+" + (45 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, +" + (140 * (1 + player.newGamePlusMod())) + " max Spe, +" + (85 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+	if (player.alicornScore() >= 24) outputText("\n<font color=\"#0000a0\">True Alicorn/True Nightmare: " + player.alicornScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, +" + (140 * (1 + player.newGamePlusMod())) + " max Spe, +" + (85 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 	else if (player.alicornScore() >= 12 && player.alicornScore() < 23) outputText("\n<font color=\"#0000a0\">Alicorn/Nightmare: " + player.alicornScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (75 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 	else if (player.alicornScore() >= 1 && player.alicornScore() < 12) outputText("\n<font color=\"#008000\">Alicorn/Nightmare: " + player.alicornScore() + "</font>");
 	else if (player.alicornScore() < 1) outputText("\n<font color=\"#ff0000\">Alicorn/Nightmare: 0</font>");
@@ -2945,8 +2954,8 @@ public function RacialScores():void {
 	else if (player.magmagooScore() >= 1 && player.magmagooScore() < 6) outputText("\n<font color=\"#008000\">Half Magma Slime: " + player.magmagooScore() + "</font>");
 	else if (player.magmagooScore() < 1) outputText("\n<font color=\"#ff0000\">Half Magma Slime: 0</font>");
 	//Manticore
-	if (player.manticoreScore() >= 12) {
-		outputText("\n<font color=\"#0000a0\">Manticore: " + player.manticoreScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max Int, +" + (60 * (1 + player.newGamePlusMod())) + " max Lib, +" + (30 * (1 + player.newGamePlusMod())) + " min Sens, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+	if (player.manticoreScore() >= 13) {
+		outputText("\n<font color=\"#0000a0\">Manticore: " + player.manticoreScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Spe, +" + (65 * (1 + player.newGamePlusMod())) + " max Int, +" + (60 * (1 + player.newGamePlusMod())) + " max Lib, +" + (30 * (1 + player.newGamePlusMod())) + " min Sens, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 	}
 	else if (player.manticoreScore() >= 6 && player.manticoreScore() < 12) {
 		outputText("\n<font color=\"#0000a0\">Half Manticore: " + player.manticoreScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (25 * (1 + player.newGamePlusMod())) + " max Int, +" + (30 * (1 + player.newGamePlusMod())) + " max Lib, +" + (15 * (1 + player.newGamePlusMod())) + " min Sens, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
@@ -3208,7 +3217,7 @@ public function RacialScores():void {
 	else if (player.wolfScore() >= 1 && player.wolfScore() < 4) outputText("\n<font color=\"#008000\">Wolf girl/boy: " + player.wolfScore() + "</font>");
 	else if (player.wolfScore() < 1) outputText("\n<font color=\"#ff0000\">Wolf girl/boy: 0</font>");
 	//Unicorn
-	if (player.unicornScore() >= 21) outputText("\n<font color=\"#0000a0\">True Unicorn/True Bicorn: " + player.unicornScore() + " (+" + (45 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, +" + (100 * (1 + player.newGamePlusMod())) + " max Spe, +" + (120 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+	if (player.unicornScore() >= 24) outputText("\n<font color=\"#0000a0\">True Unicorn/True Bicorn: " + player.unicornScore() + " (+" + (75 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, +" + (115 * (1 + player.newGamePlusMod())) + " max Spe, +" + (120 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 	else if (player.unicornScore() >= 10 && player.unicornScore() < 21) outputText("\n<font color=\"#0000a0\">Unicorn/Bicorn: " + player.unicornScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, +" + (105 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 	else if (player.unicornScore() >= 1 && player.unicornScore() < 10) outputText("\n<font color=\"#008000\">Unicorn/Bicorn: " + player.unicornScore() + "</font>");
 	else if (player.unicornScore() < 1) outputText("\n<font color=\"#ff0000\">Unicorn/Bicorn: 0</font>");

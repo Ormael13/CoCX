@@ -5399,6 +5399,11 @@ public final class Mutations extends MutationsHelper
 				player.vaginaType(0);
 				changes++;
 			}
+            else if (changes < changeLimit && rand(3) == 0 && (player.vaginaType() != 5 || player.vaginaType() != 6) && player.vaginaType() != VaginaClass.HUMAN && player.hasVagina()) {
+                outputText("\n\nSomething invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its old human qualities.");
+                player.vaginaType(0);
+                changes++;
+            }
 			//Fertility Decrease:
 			if (player.hasVagina() && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\nThe vague numbness in your skin sinks slowly downwards, and you put a hand on your lower stomach as the sensation centers itself there.  ");

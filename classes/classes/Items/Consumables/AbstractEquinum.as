@@ -470,6 +470,15 @@ public class AbstractEquinum extends Consumable {
 		//NON - GENDER SPECIFIC CHANGES
 		//Legs -> Tail -> Ears -> Fur -> Face
 		//Hoofed legs
+
+		if (player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE && changes < changeLimit && rand(3) == 0) {
+			outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your " + Appearance.vaginaDescript(player,0) + " has grown larger, in depth AND size. To your absolute surprise it suddenly resume deepening inside your body. " +
+					"When you finaly take a check you discover your vagina is now not unlike that of a horse, capable of taking the largest cock witheout ease." +
+					"<b>  You now have a equine vagina!</b>");
+			player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
+			player.vaginaType(VaginaClass.EQUINE);
+		}
+
 		if (player.lowerBody != LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE) {
 			if (changes < changeLimit && rand(3) == 0) {
 				if (player.lowerBody == LowerBody.NAGA) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
@@ -498,7 +507,7 @@ public class AbstractEquinum extends Consumable {
 			mutations.setFaceType(Face.HORSE);
 		}
 		//Fur - if has horsetail && ears and not at changelimit
-		if (!player.hasFur() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.tailType == Tail.HORSE) {
+		if (!player.hasFur() && !player.isTaur() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.tailType == Tail.HORSE) {
 			if (!player.hasScales()) {
 				outputText("\n\nAn itchy feeling springs up over every inch of your [skin base].  As you scratch yourself madly, you feel fur grow out of your [skin base] until <b>you have a fine coat of ");
 				if (type == 0) outputText("[haircolor]-colored fur.</b>");
@@ -512,7 +521,7 @@ public class AbstractEquinum extends Consumable {
 			}
 			changes++;
 			if (type == 0) player.skin.growCoat(Skin.FUR, {color: randomChoice(["brown", "chocolate", "auburn", "sandy brown", "caramel", "peach", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "brown and white", "black and white"])});
-			else player.skin.growCoat(Skin.FUR, {color: randomChoice(["platinum blonde", "silver", "white"])});
+			else player.skin.growCoat(Skin.FUR, {color: randomChoice(["platinum blonde", "silver", "white", "pure white"])});
 			if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
 				outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
 				player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);

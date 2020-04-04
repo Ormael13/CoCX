@@ -1589,7 +1589,8 @@ public function FightHellfireSnail():void {
 				//addButton(2, "", ).hint("Add 1 .");
 				//addButton(3, "", ).hint("Add 1 .");
 				//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
-				addButton(5, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
+				//addButton(5, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
+				addButton(5, "ALICORN", AddAlicornium).hint("Add 1 Displacer Fruit.");
 				addButton(6, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
 				addButton(7, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
 				addButton(8, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
@@ -1813,7 +1814,11 @@ public function FightHellfireSnail():void {
 		}
 		public function AddDisplacerFruit():void {
 			outputText("\n\n<b>(Gained 1 Displacer Fruit!)</b>\n\n");
-			inventory.takeItem(consumables.D_FRUIT, curry(NonEquipmentMenu, 1));
+			inventory.takeItem(consumables.ALICORN, curry(NonEquipmentMenu, 1));
+		}
+		public function AddAlicornium():void {
+			outputText("\n\n<b>(Gained 1 Alicornium!)</b>\n\n");
+			inventory.takeItem(consumables.ALICORN, curry(NonEquipmentMenu, 1));
 		}
 		public function AddSkybornSeed():void {
 			outputText("\n\n<b>(Gained 1 Skyborn Seed!)</b>\n\n");
