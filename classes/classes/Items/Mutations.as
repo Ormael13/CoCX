@@ -7252,7 +7252,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 				outputText("\n\nThere's a tightening in your [sack] that only gets higher and higher until you're doubled over and wheezing.  When it passes, you reach down and discover that <b>two of your testicles are gone.</b>");
 				player.balls -= 2;
-			}
+			}/*
             //Make PC an Easter bunny
             if (!player.hasPerk(PerkLib.EasterBunnyBalls) && player.hasCock() && player.balls <= 4 && rand(3) == 0) {
                 outputText("\n\nYou gasp as ");
@@ -7269,10 +7269,8 @@ public final class Mutations extends MutationsHelper
                         "ejaculated. <b>You now have Easter Bunny balls!</b>");
                 player.createPerk(PerkLib.EasterBunnyBalls, 0, 0, 0, 0);
                 player.ballSize = 1;
-
                 flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] += 2;
-            }
-
+            }*/
 			//Boost cum production
 			if ((player.balls > 0 || player.hasCock()) && player.cumQ() < 3000 && rand(3) == 0 && changeLimit > 1) {
 				changes++;
@@ -11700,11 +11698,11 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Hair
-            var color:String;
+            var color1:String;
             var Hinezumi_HairColor:Array = ["red", "orange", "platinum crimson", "pinkish orange"];
 			if ((player.faceType == Face.BUCKTEETH || player.faceType == Face.MOUSE) && player.hairType != Hair.BURNING && changes < changeLimit && rand(3) == 0 && type == 1) {
-                color = randomChoice(Hinezumi_HairColor);
-                player.hairColor = color;
+                color1 = randomChoice(Hinezumi_HairColor);
+                player.hairColor = color1;
 				outputText("\n\nSomething weird happen in your hairs. The strands coloration slowly shift to a [haircolor] hue and to your absolute surprise the tips turns incandescent like embers. There's no doubt to the heat your hairs now produce as if the tips were on fire. <b>Better keep watch not to set anything on fire with your fiery hairs now.</b>");
 				setHairType(Hair.BURNING);
 				changes++;

@@ -3100,13 +3100,13 @@ use namespace CoC;
 				if (bunnyScore() >= 10) race = "bunny-" + mf("boy", "girl");
 				else race = "half bunny-" + mf("boy", "girl");
 			}
-
+/*
 			if (easterbunnyScore() >= 12)
 			{
-				if (easterbunnyScore() >= 12 && easterbunnyScore() < 15) race = "easter bunny-" + mf("boy", "girl");
 				if (easterbunnyScore() >= 15) race = "true easter bunny-" + mf("boy", "girl");
+				else race = "easter bunny-" + mf("boy", "girl");
 			}
-
+*/
 			if (harpyScore() >= 4)
 			{
 				if (harpyScore() >= 8) {
@@ -3556,14 +3556,14 @@ use namespace CoC;
 				humanCounter++;
 			if (skin.base.pattern == Skin.PATTERN_NONE)
 				humanCounter++;
-			humanCounter += (65 - internalChimeraScore());
+			humanCounter += (71 - internalChimeraScore());
 			if (isGargoyle()) humanCounter = 0;
 			End("Player","racialScore");
 			return humanCounter;
 		}
 
 		public function humanMaxScore():Number {
-			var humanMaxCounter:Number = 82;//17 + 65 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
+			var humanMaxCounter:Number = 88;//17 + 71 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
 			return humanMaxCounter;
 		}
 
@@ -3634,6 +3634,12 @@ use namespace CoC;
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.DraconicLungsFinalForm) >= 0)
 				internalChimeraCounter++;
+			if (findPerk(PerkLib.EasterBunnyEggBag) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.EasterBunnyEggBagEvolved) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.EasterBunnyEggBagFinalForm) >= 0)
+				internalChimeraCounter++;
 			if (findPerk(PerkLib.ElvishPeripheralNervSys) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.ElvishPeripheralNervSysEvolved) >= 0)
@@ -3685,6 +3691,12 @@ use namespace CoC;
 			if (findPerk(PerkLib.MantislikeAgility) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.MantislikeAgilityEvolved) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.MelkieLung) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.MelkieLungEvolved) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.MelkieLungFinalForm) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.MinotaurTesticles) >= 0)
 				internalChimeraCounter++;
@@ -3820,6 +3832,8 @@ use namespace CoC;
 			if (thunderbirdScore() >= 12)
 				chimeraCounter++;
 			if (bunnyScore() >= 10)
+				chimeraCounter++;
+			if (easterbunnyScore() >= 12)
 				chimeraCounter++;
 			if (harpyScore() >= 8)
 				chimeraCounter++;
@@ -5774,6 +5788,10 @@ use namespace CoC;
 			if (hasPerk(PerkLib.EasterBunnyEggBagEvolved) && balls >= 2)
 				EbunnyCounter++;
 			if (hasPerk(PerkLib.EasterBunnyEggBagFinalForm) && balls >= 2)
+				EbunnyCounter++;
+			if (hasPerk(PerkLib.EasterBunnyEggBag) && balls >= 2 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
+				EbunnyCounter++;
+			if (hasPerk(PerkLib.EasterBunnyEggBagEvolved) && balls >= 2 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
 				EbunnyCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				EbunnyCounter += 50;
@@ -8694,7 +8712,7 @@ use namespace CoC;
 			if (this.firesnailScore() >= 15) minSen += (50 * newGamePlusMod);
 			if (this.melkieScore() >= 8) minSen += (25 * newGamePlusMod);
 			if (this.melkieScore() >= 18) minSen += (25 * newGamePlusMod);
-			if (this.melkieScore() >= 21) minSen += (25 * newGamePlusMod);
+			if (this.melkieScore() >= 21) minSen += (15 * newGamePlusMod);
 			//Rings
 			if (this.jewelryName == "Ring of Intelligence") minInt += 5;
 			if (this.jewelryName == "Ring of Libido") minLib += 5;
@@ -8722,7 +8740,9 @@ use namespace CoC;
 				if (this.hasKeyItem("M.G.S. bracer") >= 0) minSen += 15;
 			}
 			if (hasStatusEffect(StatusEffects.PlayerPhylactery)) minCor = 100;
+			if (this.hasPerk(PerkLib.PurityElixir)) minCor -= (this.perkv1(PerkLib.PurityElixir) * 20);
 			if (minLib < 1) minLib = 1;
+			if (minCor < 0) minCor = 0;
 			return {
 				str:minStr,
 				tou:minTou,
@@ -9847,25 +9867,27 @@ use namespace CoC;
 					maxTouCap2 -= (10 * newGamePlusMod);
 					maxSpeCap2 += (90 * newGamePlusMod);
 					maxLibCap2 += (90 * newGamePlusMod);
-			}
-			if (bunnyScore() >= 5 && bunnyScore() < 10){
-				maxStrCap2 -= (10 * newGamePlusMod);
-				maxTouCap2 -= (5 * newGamePlusMod);
-				maxSpeCap2 += (55 * newGamePlusMod);
-				maxLibCap2 += (35 * newGamePlusMod);
-			}
-			if (easterbunnyScore() >= 12 && easterbunnyScore() < 15) {
-				maxStrCap2 -= (20 * newGamePlusMod);
-				maxTouCap2 -= (10 * newGamePlusMod);
-				maxSpeCap2 += (105 * newGamePlusMod);
-				maxLibCap2 += (120 * newGamePlusMod);
-			}
-			if (easterbunnyScore() >= 15) {
-				maxStrCap2 -= (20 * newGamePlusMod);
-				maxTouCap2 -= (10 * newGamePlusMod);
-				maxSpeCap2 += (120 * newGamePlusMod);
-				maxLibCap2 += (150 * newGamePlusMod);
-			}//-20/-10+105+150
+			}/*
+			if (bunnyScore() >= 5 && findPerk(PerkLib.EasterBunnyBalls) > 0) {
+				if (easterbunnyScore() >= 15) {
+					maxStrCap2 -= (20 * newGamePlusMod);
+					maxTouCap2 -= (10 * newGamePlusMod);
+					maxSpeCap2 += (105 * newGamePlusMod);
+					maxLibCap2 += (150 * newGamePlusMod);
+				}
+				else {//if (easterbunnyScore() >= 12 && easterbunnyScore() < 15) 
+					maxStrCap2 -= (20 * newGamePlusMod);
+					maxTouCap2 -= (10 * newGamePlusMod);
+					maxSpeCap2 += (90 * newGamePlusMod);
+					maxLibCap2 += (120 * newGamePlusMod);
+				}/*
+				else {
+					maxStrCap2 -= (10 * newGamePlusMod);
+					maxTouCap2 -= (5 * newGamePlusMod);
+					maxSpeCap2 += (55 * newGamePlusMod);
+					maxLibCap2 += (35 * newGamePlusMod);
+				}*/
+			//-20/-10+105+150
 			if (raccoonScore() >= 4) {
 				maxSpeCap2 += (15 * newGamePlusMod);
 			}//+15/10-20
@@ -10403,22 +10425,19 @@ use namespace CoC;
 			}
 			if (melkieScore() >= 8) {
 				if (melkieScore() >= 21) {
-					maxSpeCap2 += (110 * newGamePlusMod);
-					maxIntCap2 += (110 * newGamePlusMod);
-					maxLibCap2 += (95 * newGamePlusMod);
-					maxSenCap2 += (75 * newGamePlusMod);
+					maxSpeCap2 += (140 * newGamePlusMod);
+					maxIntCap2 += (140 * newGamePlusMod);
+					maxLibCap2 += (100 * newGamePlusMod);
 				}
 				if (melkieScore() >= 18) {
-					maxSpeCap2 += (95 * newGamePlusMod);
-					maxIntCap2 += (95 * newGamePlusMod);
+					maxSpeCap2 += (120 * newGamePlusMod);
+					maxIntCap2 += (120 * newGamePlusMod);
 					maxLibCap2 += (80 * newGamePlusMod);
-					maxSenCap2 += (50 * newGamePlusMod);
 				}
 				else {
-					maxSpeCap2 += (40 * newGamePlusMod);
-					maxIntCap2 += (40 * newGamePlusMod);
+					maxSpeCap2 += (55 * newGamePlusMod);
+					maxIntCap2 += (55 * newGamePlusMod);
 					maxLibCap2 += (35 * newGamePlusMod);
-					maxSenCap2 += (25 * newGamePlusMod);
 				}
 			}
 

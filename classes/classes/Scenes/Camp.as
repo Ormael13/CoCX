@@ -520,6 +520,18 @@ CoC.instance.saves.saveGame(player.slotName);
 		SceneLib.mitziFollower.MitziDaughtersIzmaDaughters();
 		return;
 	}
+	//Rathazul april fool
+	if(isAprilFools() && player.hasStatusEffect(StatusEffects.CampRathazul) && rand(5) == 0) {
+		if (player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv2(StatusEffects.RathazulAprilFool) < 5) {
+			if (player.statusEffectv3(StatusEffects.RathazulAprilFool) == 1) SceneLib.rathazul.rathazulAprilFoolPart3();
+			if (date.fullYear > player.statusEffectv1(StatusEffects.RathazulAprilFool)) SceneLib.rathazul.rathazulAprilFool();
+			return;
+		}
+		else if (!player.hasStatusEffect(StatusEffects.RathazulAprilFool)) {
+			SceneLib.rathazul.rathazulAprilFool();
+			return;
+		}
+	}
 	//Cotton preg freakout
 	if (player.pregnancyIncubation <= 280 && player.pregnancyType == PregnancyStore.PREGNANCY_COTTON &&
 	   	flags[kFLAGS.COTTON_KNOCKED_UP_PC_AND_TALK_HAPPENED] == 0 && (model.time.hours == 6 || model.time.hours == 7)) {
@@ -1830,7 +1842,7 @@ private function campActions():void {
 	//addButton(5, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 	if (player.hasPerk(PerkLib.JobElementalConjurer) || player.hasPerk(PerkLib.JobGolemancer)) addButton(6, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
 	else addButtonDisabled(6, "Winions", "You need to be able to make some minions that fight for you to use this option like elementals or golems...");
-	addButton(7, "Reflect", campActionsReflect).hint("Reflect on your current state and future plans. (Also would make your body fully adjust to any sudden changes to natural limits of your attributes after eating any odd things and etc.)");
+	//button 7 (empty)
 	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(8, "Fishery", VisitFishery).hint("Visit Fishery.");
 	if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(9, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around [camp].");
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(10, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at [camp] Kitsune Shrine.");
@@ -1894,36 +1906,6 @@ private function campWinionsArmySim():void {
 	addButton(14, "Back", campActions);
 }
 
-private function campActionsReflect():void {
-	clearOutput();
-	outputText("Placeholder text for now... till any of our writers decide to grace us with any text to be used here...");
-	var oldmaxes:Object = player.getAllMaxStats();
-	var strStat:Number = player.str/oldmaxes.str;
-	var touStat:Number = player.tou/oldmaxes.tou;
-	var speStat:Number = player.spe/oldmaxes.spe;
-	var inteStat:Number = player.inte/oldmaxes.inte;
-	var wisStat:Number = player.wis/oldmaxes.wis;
-	var libStat:Number = player.lib/oldmaxes.lib;
-	var sensStat:Number = player.sens/oldmaxes.sens;
-	var strStat1:Number = oldmaxes.str;
-	var touStat1:Number = oldmaxes.tou;
-	var speStat1:Number = oldmaxes.spe;
-	var inteStat1:Number = oldmaxes.inte;
-	var wisStat1:Number = oldmaxes.wis;
-	var libStat1:Number = oldmaxes.lib;
-	var sensStat1:Number = oldmaxes.sens;
-	player.strtouspeintwislibsenCalculation2();
-	var newmaxes:Object = player.getAllMaxStats();
-	if (newmaxes.str != strStat1) player.str = Math.round(player.str * strStat);
-	if (newmaxes.tou != touStat1) player.tou = Math.round(player.tou * touStat);
-	if (newmaxes.spe != speStat1) player.spe = Math.round(player.spe * speStat);
-	if (newmaxes.inte != inteStat1) player.inte = Math.round(player.inte * inteStat);
-	if (newmaxes.wis != wisStat1) player.wis = Math.round(player.wis * wisStat);
-	if (newmaxes.lib != libStat1) player.lib = Math.round(player.lib * libStat);
-	if (newmaxes.sens != sensStat1) player.sens = Math.round(player.sens * sensStat);
-	doNext(campActions);
-}
-
 private function MagicWardMenu():void {
 	clearOutput();
 	outputText("You touch one of the warding stones");
@@ -1980,6 +1962,7 @@ private function SparrableNPCsMenu():void {
 	if (player.hasStatusEffect(StatusEffects.ElectraOff)) outputText("\nElectra: <font color=\"#800000\"><b>Disabled</b></font>");
 	if (player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("\nEtna: <font color=\"#800000\"><b>Disabled</b></font>");
 	if (player.hasStatusEffect(StatusEffects.LunaOff)) outputText("\nLuna: <font color=\"#800000\"><b>Disabled</b></font>");
+	if (player.hasStatusEffect(StatusEffects.TedOff)) outputText("\nDragon Boi: <font color=\"#800000\"><b>Disabled</b></font>");
 	menu();
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 		if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(10, "Train", NPCsTrain);
@@ -1990,6 +1973,7 @@ private function SparrableNPCsMenu():void {
 	addButton(2, "Electra", toggleElectraMenu).hint("Enable or Disable Electra. This will remove her from enc table and if already in [camp] disable access to her.");
 	addButton(3, "Etna", toggleEtnaMenu).hint("Enable or Disable Etna. This will remove her from enc table and if already in [camp] disable access to her.");
 	addButton(5, "Luna", toggleLunaMenu).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
+	addButton(6, "DragonBoi", toggleTedMenu).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
 	addButton(14, "Back", campActions);
 }
 private function NPCsTrain():void {
@@ -2029,6 +2013,11 @@ private function toggleLunaMenu():void {
 		player.createStatusEffect(StatusEffects.LunaOff, 0, 0, 0, 0);
 		flags[kFLAGS.SLEEP_WITH] == "";
 	}
+	SparrableNPCsMenu();
+}
+private function toggleTedMenu():void {
+	if (player.hasStatusEffect(StatusEffects.TedOff)) player.removeStatusEffect(StatusEffects.TedOff);
+	else player.createStatusEffect(StatusEffects.TedOff, 0, 0, 0, 0);
 	SparrableNPCsMenu();
 }
 
@@ -4128,10 +4117,10 @@ private function promptSaveUpdate():void {
 		doNext(doCamp);
 		return;
 	}
-/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 27) {
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 27) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 28;
 		clearOutput();
-		outputText("Text.");
+		outputText("Titan's into Gigant's, Legends and Myths into Epics and short holidays for game engine ^^");
 		if (player.hasPerk(PerkLib.TitanGrip)) {
 			player.removePerk(PerkLib.TitanGrip);
 			player.createPerk(PerkLib.GigantGrip, 0, 0, 0, 0);
@@ -4165,7 +4154,7 @@ private function promptSaveUpdate():void {
 		doNext(doCamp);
 		return;
 	}
-	if (flags[kFLAGS.MOD_SAVE_VERSION] == 28) {
+/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 28) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 29;
 		clearOutput();
 		outputText("Text.");
@@ -4637,7 +4626,7 @@ private function updateAchievements():void {
 	if (player.newGamePlusMod() >= 5) awardAchievement("xXx 6: Rise of the Demons", kACHIEVEMENTS.EPIC_XXX6_RISE_OF_THE_DEMONS);/*
 	if (player.newGamePlusMod() >= 6) awardAchievement("xXx 7: Salvation", kACHIEVEMENTS.EPIC_XXX7_SALVATION);
 	if (player.newGamePlusMod() >= 7) awardAchievement("xXx 8: Genisys", kACHIEVEMENTS.EPIC_XXX8_GENISYS);
-	if (player.newGamePlusMod() >= 8) awardAchievement("xXx 8: Dark Fate", kACHIEVEMENTS.EPIC_XXX9_DARK_FATE);*/
+	if (player.newGamePlusMod() >= 8) awardAchievement("xXx 9: Dark Fate", kACHIEVEMENTS.EPIC_XXX9_DARK_FATE);*/
 	
 	if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] > 0 || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] > 0) awardAchievement("My own Demon Weapon", kACHIEVEMENTS.EPIC_MY_OWN_DEMON_WEAPON);
 	var EvolvingItems:int = 0;

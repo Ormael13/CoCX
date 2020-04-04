@@ -296,6 +296,7 @@ public class PerkLib
 		public static const PowerShot:PerkType = mk("Power Shot", "Power Shot",
 				"Enable Power Shoot p. special. Add some of your strength (~40% of str scaling value) to bow damage.",
 				"You choose the 'Power Shot' perk. Enable Power Shoot p. special. Add some of your strength (~40% of str scaling value) to bow damage.");
+		public static const PurityElixir:PurityElixirPerk = new PurityElixirPerk();
 		public static const TooAngryToDie:PerkType = mk("Too Angry to Die", "Too Angry to Die",
 				"+600 to max Wrath.",//stay alive when berserking at cost of super fast 20% max wrath drain per turn when below min HP or above max Lust (?drain decreased by some specific perks?)?
 				"You choose the 'Too Angry to Die' perk, .");
@@ -335,9 +336,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You choose the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You choose the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You choose the '' perk, .");
@@ -900,11 +898,11 @@ public class PerkLib
 		public static const EasterBunnyEggBag:PerkType = mk("Easter Bunny egg bag", "Easter Bunny egg bag",
 				"Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one eggs per round. Double cum production.",
 				"Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one eggs per round. Double cum production.");
-		public static const EasterBunnyEggBagEvolved:PerkType = mk("Easter bunny balls, evolved", "Easter bunny balls, evolved",
+		public static const EasterBunnyEggBagEvolved:PerkType = mk("Easter bunny balls (Evolved)", "Easter bunny balls (Evolved)",
 				"Raise libido by a percentage based on current ball size. Triple cum production.",
 				"Raise libido by a percentage based on current ball size. Triple cum production.");
-		public static const EasterBunnyEggBagFinalForm:PerkType = mk("Easter bunny balls, final form", "Easter bunny balls, final form",
-				"Further raise libido by a percentage based on current ball size. Double ball growth rates. Double cum production again.",
+		public static const EasterBunnyEggBagFinalForm:PerkType = mk("Easter bunny balls (Final Form)", "Easter bunny balls (Final Form)",
+				"Further raise libido by a percentage based on current ball size. Double ball growth rates. Double cum production again.\n",
 				"Further raise libido by a percentage based on current ball size. Double ball growth rates. Double cum production again.");
 		public static const EagleEye:PerkType = mk("Eagle eye", "Eagle eye",
 				"Increase traditional range weapons (like bows) base attack by another 50%.",
@@ -1959,15 +1957,15 @@ public class PerkLib
 		public static const Medicine:PerkType = mk("Medicine", "Medicine",
 				"Grants 15% chance per round of cleansing poisons/drugs from your body. Increases HP restoration on rest.",
 				"You choose the 'Medicine' perk, giving you a chance to remove debilitating poisons automatically! Also, increases HP restoration on rest.");
-		public static const MelkieLung:PerkType = mk("Melkie Lung", "Melkie lung",
+		public static const MelkieLung:PerkType = mk("Melkie Lungs", "Melkie Lungs",
 				"Increase damage reduction against spells by 5% and increase the power of compelling aria by 20%, Compelling Aria is kept at all time.",
-				"You choose the 'Melkie Lung, Greater' perk, gaining increased magic resistances and the power to sing regardless of being a Melkie.");
-		public static const MelkieLungEvolved:PerkType = mk("Melkie Lung, Evolved", "Melkie lung, Evolved",
+				"You choose the 'Melkie Lungs' perk, gaining increased magic resistances and the power to sing regardless of being a Melkie.");
+		public static const MelkieLungEvolved:PerkType = mk("Melkie Lungs (Evolved)", "Melkie Lungs (Evolved)",
 				"Increase damage reduction against spells by 10% and increase the power of compelling aria by 30%. Compelling Aria now has an Intelligence scaling.",
-				"You choose the 'Melkie Lung, Evolved' perk, gaining increased magic resistances and improving the power of your song based on your inteligence.");
-		public static const MelkieLungFinalForm:PerkType = mk("Melkie Lung, Final Form", "Melkie lung, Final Form",
+				"You choose the 'Melkie Lungs (Evolved)' perk, gaining increased magic resistances and improving the power of your song based on your inteligence.");
+		public static const MelkieLungFinalForm:PerkType = mk("Melkie Lungs (Final Form)", "Melkie Lungs (Final Form)",
 				"Increase damage reduction against spells by 15% and increase the power of compelling aria by 40%. Compelling Aria intelligence scaling is doubled.",
-				"You choose the 'Melkie Lung, Final Form' perk, gaining increased magic resistances and further improving the power of your song.");
+				"You choose the 'Melkie Lungs (Final Form)' perk, gaining increased magic resistances and further improving the power of your song.");
 		public static const MelkieSong:PerkType = mk("Melkie Song", "Melkie Song",
 				"Your voice is supernaturaly enhanced and may be used during battle to arouse foes.");
 		public static const Metamorph:MetamorphPerk = new MetamorphPerk();
@@ -5306,9 +5304,11 @@ public class PerkLib
                 .requirePerk(DragonLightningBreath)
                 .requirePerk(DragonDarknessBreath).requireCustomFunction(function (player:Player):Boolean {
                 return player.dragonScore() >= 4;
-            }, "Dragon race");
+            }, "Dragon race");/*
 			EasterBunnyEggBag.requirePerk(EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
+			}, "Easter Bunny race");*/
+            ElvishPeripheralNervSys.requirePerk(ElvenSense).requireCustomFunction(function (player:Player):Boolean {
 			}, "Easter Bunny race");
 			EclipticMind.requirePerk(EclipticMind).requireCustomFunction(function (player:Player):Boolean {
 				return player.unicornScore() >= 12;

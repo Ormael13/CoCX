@@ -72,7 +72,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 27;
+    public var modSaveVersion:Number = 28;
     public var levelCap:Number = 185;
 
     //Used to restrict random drops from overlapping uniques
@@ -254,7 +254,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_0.8n8";
-			version = ver + " (<b></b>)";
+			version = ver + " (<b>CharView update, Melkie TF, sex scenes giving tease exp, less lagging game max stat cap updates, typical many smaller or larger QoL changes and bugfixes</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
