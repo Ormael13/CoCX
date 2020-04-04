@@ -6676,9 +6676,9 @@ use namespace CoC;
 
 		//Determine Unicornkin Rating
 		public function unicornkinScore():Number {
-			var bicornColorPalette:Array = ["black", "midnight black", "midnight"];
+			var bicornColorPalette:Array = ["silver", "black", "midnight black", "midnight"];
 			var bicornHairPalette:Array = ["silver","black", "midnight black", "midnight"];
-			var unicornColorPalette:Array = ["silver", "white", "pure white"];
+			var unicornColorPalette:Array = ["white", "pure white"];
 			var unicornHairPalette:Array = ["platinum blonde","silver", "white", "pure white"];
 			Begin("Player","racialScore","unicornkin");
 			var unicornCounter:Number = 0;
@@ -6752,9 +6752,9 @@ use namespace CoC;
 
 		//Determine Unicorn Rating
 		public function unicornScore():Number {
-			var bicornColorPalette:Array = ["black", "midnight black", "midnight"];
+			var bicornColorPalette:Array = ["silver", "black", "midnight black", "midnight"];
 			var bicornHairPalette:Array = ["silver","black", "midnight black", "midnight"];
-			var unicornColorPalette:Array = ["silver", "white", "pure white"];
+			var unicornColorPalette:Array = ["white", "pure white"];
 			var unicornHairPalette:Array = ["platinum blonde","silver", "white", "pure white"];
 			Begin("Player","racialScore","unicorn");
 			var unicornCounter:Number = 0;
@@ -6833,9 +6833,9 @@ use namespace CoC;
 
 		//Determine Alicornkin Rating
 		public function alicornkinScore():Number {
-			var bicornColorPalette:Array = ["black", "midnight black", "midnight"];
+			var bicornColorPalette:Array = ["silver", "black", "midnight black", "midnight"];
 			var bicornHairPalette:Array = ["silver","black", "midnight black", "midnight"];
-			var unicornColorPalette:Array = ["silver", "white", "pure white"];
+			var unicornColorPalette:Array = ["white", "pure white"];
 			var unicornHairPalette:Array = ["platinum blonde","silver", "white", "pure white"];
 			Begin("Player","racialScore","alicorn");
 			var alicornCounter:Number = 0;
@@ -6915,9 +6915,9 @@ use namespace CoC;
 
 		//Determine Alicorn Rating
 		public function alicornScore():Number {
-			var bicornColorPalette:Array = ["black", "midnight black", "midnight"];
+			var bicornColorPalette:Array = ["silver", "black", "midnight black", "midnight"];
 			var bicornHairPalette:Array = ["silver","black", "midnight black", "midnight"];
-			var unicornColorPalette:Array = ["silver", "white", "pure white"];
+			var unicornColorPalette:Array = ["white", "pure white"];
 			var unicornHairPalette:Array = ["platinum blonde","silver", "white", "pure white"];
 			Begin("Player","racialScore","alicorn");
 			var alicornCounter:Number = 0;
