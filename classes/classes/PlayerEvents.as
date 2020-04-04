@@ -1579,6 +1579,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.cor = 100;
 				needNext = true;
 			}
+			//Fixing wings
 			if (player.horns.type == Horns.BICORN && player.wings.type == Wings.FEATHERED_ALICORN) {
 				outputText("\nYour wings changes as all the feather falling off to reveal a membranous demonic pair of bat wings.\n");
 				player.wings.type = Wings.NIGHTMARE;
@@ -1588,6 +1589,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				needNext = true;
 			}
+			//Losing horn
 			if (player.findPerk(PerkLib.AvatorOfCorruption) >= 0 && player.cor > 10 && player.horns.type != Horns.BICORN) {
 				outputText("\n<b>Without your horns, the magic power they once granted withers and dies, vanishing completely.</b>\n");
 				player.removePerk(PerkLib.AvatorOfCorruption);

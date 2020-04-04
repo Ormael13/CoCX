@@ -2900,9 +2900,9 @@ use namespace CoC;
 				else
 					race = "half equine-morph";
 			}
-			if (unicornScore() >= 10)
+			if (unicornScore() >= 8)
 			{
-				if (unicornScore() >= 21){
+				if (unicornScore() >= 24){
 					if (horns.type == Horns.UNICORN) {
 						race = "true unicorn";
 					}
@@ -2910,12 +2910,20 @@ use namespace CoC;
 						race = "true bicorn";
 					}
 				}
-				else{
+				else if (unicornScore() >= 12) {
 					if (horns.type == Horns.UNICORN) {
 						race = "unicorn";
 					}
 					else {
 						race = "bicorn";
+					}
+				}
+				else {
+					if (horns.type == Horns.UNICORN) {
+						race = "half unicorn";
+					}
+					else {
+						race = "half bicorn";
 					}
 				}
 			}
@@ -2928,9 +2936,9 @@ use namespace CoC;
 					race = "bicornkin";
 				}
 			}
-			if (alicornScore() >= 12)
+			if (alicornScore() >= 8)
 			{
-				if (unicornScore() >= 23){
+				if (unicornScore() >= 24){
 					if (horns.type == Horns.UNICORN) {
 						race = "true alicorn";
 					}
@@ -2938,12 +2946,20 @@ use namespace CoC;
 						race = "true nightmare";
 					}
 				}
-				else{
+				else if (unicornScore() >= 12){
 					if (horns.type == Horns.UNICORN) {
 						race = "alicorn";
 					}
 					else {
 						race = "nightmare";
+					}
+				}
+				else {
+					if (horns.type == Horns.UNICORN) {
+						race = "half alicorn";
+					}
+					else {
+						race = "half nightmare";
 					}
 				}
 			}
@@ -3545,6 +3561,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return humanCounter;
 		}
+
 		public function humanMaxScore():Number {
 			var humanMaxCounter:Number = 82;//17 + 65 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
 			return humanMaxCounter;
@@ -6745,7 +6762,7 @@ use namespace CoC;
 			if (horns.type != Horns.UNICORN && horns.type != Horns.BICORN)
 				unicornCounter = 0;
 			if (isGargoyle()) unicornCounter = 0;
-			unicornCounter = finalRacialScore(unicornCounter, Race.UNICORNKIN);
+			unicornCounter = finalRacialScore(unicornCounter, Race.UNICORN);
 			End("Player","racialScore");
 			return unicornCounter;
 		}
@@ -6908,7 +6925,7 @@ use namespace CoC;
 					alicornCounter = 0;
 			}
 			if (isGargoyle()) alicornCounter = 0;
-			alicornCounter = finalRacialScore(alicornCounter, Race.ALICORNKIN);
+			alicornCounter = finalRacialScore(alicornCounter, Race.UNICORN);
 			End("Player","racialScore");
 			return alicornCounter;
 		}
@@ -6996,7 +7013,7 @@ use namespace CoC;
 					alicornCounter = 0;
 			}
 			if (isGargoyle()) alicornCounter = 0;
-			alicornCounter = finalRacialScore(alicornCounter, Race.ALICORN);
+			alicornCounter = finalRacialScore(alicornCounter, Race.UNICORN);
 			End("Player","racialScore");
 			return alicornCounter;
 		}
@@ -10259,17 +10276,22 @@ use namespace CoC;
 					maxLibCap2 += (25 * newGamePlusMod);
 				}
 			}//+15/10-20
-			if (unicornScore() >= 10) {
+			if (unicornScore() >= 8) {
 				if (unicornScore() >= 24) {
 					maxStrCap2 += (60 * newGamePlusMod);
 					maxTouCap2 += (70 * newGamePlusMod);
 					maxSpeCap2 += (95 * newGamePlusMod);
 					maxIntCap2 += (120 * newGamePlusMod);
 				}
-				else {
+				else if (unicornScore() >= 12){
 					maxTouCap2 += (35 * newGamePlusMod);
-					maxSpeCap2 += (40 * newGamePlusMod);
+					maxSpeCap2 += (70 * newGamePlusMod);
 					maxIntCap2 += (105 * newGamePlusMod);
+				}
+				else {
+					maxTouCap2 += (25 * newGamePlusMod);
+					maxSpeCap2 += (40 * newGamePlusMod);
+					maxIntCap2 += (55 * newGamePlusMod);
 				}
 			}//+(15)30/(10-20)30-40
 			if (unicornkinScore() >= 10) {
@@ -10277,17 +10299,22 @@ use namespace CoC;
 				maxSpeCap2 += (40 * newGamePlusMod);
 				maxIntCap2 += (75 * newGamePlusMod);
 			}//+(15)30/(10-20)30-40
-			if (alicornScore() >= 12) {
+			if (alicornScore() >= 8) {
 				if (alicornScore() >= 24) {
 					maxStrCap2 += (60 * newGamePlusMod);
 					maxTouCap2 += (70 * newGamePlusMod);
 					maxSpeCap2 += (120 * newGamePlusMod);
 					maxIntCap2 += (110 * newGamePlusMod);
 				}
-				else {
+				else if (alicornScore() >= 12){
 					maxTouCap2 += (35 * newGamePlusMod);
 					maxSpeCap2 += (70 * newGamePlusMod);
 					maxIntCap2 += (75 * newGamePlusMod);
+				}
+				else {
+					maxTouCap2 += (15 * newGamePlusMod);
+					maxSpeCap2 += (50 * newGamePlusMod);
+					maxIntCap2 += (55 * newGamePlusMod);
 				}
 			}//+(30)55/(30-40)50-60
 			if (alicornkinScore() >= 12) {
@@ -11433,7 +11460,7 @@ use namespace CoC;
 			if (scyllaScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (scyllaScore() >= 7) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (scyllaScore() >= 12) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (unicornScore() >= 10) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (unicornScore() >= 12) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.ElementalBondFlesh) && statusEffectv1(StatusEffects.SummonedElementals) >= 2) max += maxLust_ElementalBondFleshMulti() * statusEffectv1(StatusEffects.SummonedElementals);
 			
 			return max;

@@ -497,10 +497,10 @@ public class PerkLib
 		public static const ArouseTheAudience:PerkType = mk("Arouse the audience", "Arouse the audience",
 				"Increase the damage of non periodic tease against groups by 50% and periodic by 20%.",
 				"You choose the 'Arouse the audience' perk, increasing the damage of tease against groups.");
-		public static const AuraOfPurity:PerkType = mk("Arousing Aura", "Arousing Aura",
+		public static const AuraOfPurity:PerkType = mk("Aura of Purity", "Aura of Purity",
 				"Those of impure heart who come close to you are seared by holy fire and blinded by your inner light.",
 				"Those of impure heart who come close to you are seared by holy fire and blinded by your inner light.");
-		public static const AuraOfCorruption:PerkType = mk("Arousing Aura", "Arousing Aura",
+		public static const AuraOfCorruption:PerkType = mk("Aura of Corruption", "Aura of Corruption",
 				"You radiate corruption, tainting everything near you with uncontrollable lust.",
 				"You radiate corruption, tainting everything near you with uncontrollable lust.");
 		public static const ArousingAura:PerkType = mk("Arousing Aura", "Arousing Aura",

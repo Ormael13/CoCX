@@ -1821,7 +1821,7 @@
 					<if test="cor &gt;=50">
 						<if test="skin.coverage==Skin.COVERAGE_NONE">
 							<switch value="arms.type">
-								<case values="arms.type==Arms.HUMAN,arms.type==Arms.ELF,arms.type==Arms.KITSUNE">
+								<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
 									<hide part="feet/*"/>
 									<hide part="legs/*"/>
 									<show part="legs/demonlewd"/>
