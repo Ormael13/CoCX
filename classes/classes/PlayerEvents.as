@@ -1334,7 +1334,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Titanic Strength
-			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 12) && player.tallness >= 84 && player.findPerk(PerkLib.TitanicStrength) < 0) {
+			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 17) && player.tallness >= 84 && player.findPerk(PerkLib.TitanicStrength) < 0) {
 				outputText("\nWhoa you've grown so big its sheer miracle if you don't damage the landscape while moving. This said your size contribute to your strength as well now.\n\n<b>(Gained Titanic Strength perk!)</b>\n");
 				player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
 				needNext = true;

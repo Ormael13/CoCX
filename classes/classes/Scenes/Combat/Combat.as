@@ -7659,6 +7659,29 @@ public function combatRoundOver():void {
 		}
 	}
 
+	public function OrcaCleanup():void {
+		player.addStatusValue(StatusEffects.OrcaPlayRoundLeft,1,-1);
+		if (player.statusEffectv1(StatusEffects.OrcaPlayRoundLeft) <= 0)
+		{
+			outputText("\n\n Unable to prolong the game further you finaly let [monster a] [monster name] drops to the ground. [monster He] try catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.\n\n");
+			var damage = unarmedAttack();
+			damage += player.str;
+			damage += scalingBonusStrength() * 0.25;
+			doDamage(damage, true, true);
+			monster.removeStatusEffect(StatusEffects.OrcaPlay);
+			player.removeStatusEffect(StatusEffects.OrcaPlayRoundLeft);
+			player.removeStatusEffect(StatusEffects.OrcaCanJuggleStill);
+			monster.removeStatusEffect(StatusEffects.OrcaHasWacked);
+			if(monster.hasStatusEffect(StatusEffects.OrcaHasSmashed))
+			{
+				outputText("\n\nYour opponent is still stunned from the vicious blow of your weapon.");
+				monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+				monster.removeStatusEffect(StatusEffects.OrcaHasSmashed);
+			}
+		}
+		enemyAI();
+	}
+
 	public function OrcaWack():void {
 		clearOutput();
 		if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
@@ -7700,7 +7723,6 @@ public function combatRoundOver():void {
 				return;
 			}
 			outputText("\n\n");
-			player.addStatusValue(StatusEffects.OrcaPlayRoundLeft,1,-1);
 			if(!monster.hasStatusEffect(StatusEffects.OrcaHasWacked))
 			{
 				monster.createStatusEffect(StatusEffects.OrcaHasWacked, 2,0,0,0)
@@ -7709,25 +7731,7 @@ public function combatRoundOver():void {
 			{
 				monster.addStatusValue(StatusEffects.OrcaHasWacked,1,+2);
 			}
-			if (player.statusEffectv1(StatusEffects.OrcaPlayRoundLeft) <= 0)
-			{
-				outputText("\n\n Unable to prolong the game further you finaly let [monster a] [monster name] drops to the ground. [monster He] try catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.\n\n");
-				damage = unarmedAttack();
-				damage += player.str;
-				damage += scalingBonusStrength() * 0.25;
-				doDamage(damage, true, true);
-				monster.removeStatusEffect(StatusEffects.OrcaPlay);
-				player.removeStatusEffect(StatusEffects.OrcaPlayRoundLeft);
-				player.removeStatusEffect(StatusEffects.OrcaCanJuggleStill);
-				monster.removeStatusEffect(StatusEffects.OrcaHasWacked);
-				if(monster.hasStatusEffect(StatusEffects.OrcaHasSmashed))
-				{
-					outputText("\n\nYour opponent is still stunned from the vicious blow of your weapon.");
-					monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-					monster.removeStatusEffect(StatusEffects.OrcaHasSmashed);
-				}
-			}
-			enemyAI();
+			OrcaCleanup();
 		}
 	}
 
@@ -7777,30 +7781,11 @@ public function combatRoundOver():void {
 				return;
 			}
 			outputText("\n\n");
-			player.addStatusValue(StatusEffects.OrcaPlayRoundLeft,1,-1);
 			if(!monster.hasStatusEffect(StatusEffects.OrcaHasSmashed))
 			{
 				monster.createStatusEffect(StatusEffects.OrcaHasSmashed, 0,0,0,0);
 			}
-			if (player.statusEffectv1(StatusEffects.OrcaPlayRoundLeft) <= 0)
-			{
-				outputText("\n\n Unable to prolong the game further you finaly let [monster a] [monster name] drops to the ground. [monster He] try catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.\n\n");
-				damage = unarmedAttack();
-				damage += player.str;
-				damage += scalingBonusStrength() * 0.25;
-				doDamage(damage, true, true);
-				monster.removeStatusEffect(StatusEffects.OrcaPlay);
-				player.removeStatusEffect(StatusEffects.OrcaPlayRoundLeft);
-				player.removeStatusEffect(StatusEffects.OrcaCanJuggleStill);
-				monster.removeStatusEffect(StatusEffects.OrcaHasWacked);
-				if(monster.hasStatusEffect(StatusEffects.OrcaHasSmashed))
-				{
-					outputText("\n\nYour opponent is still stunned from the vicious blow of your weapon.");
-					monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-					monster.removeStatusEffect(StatusEffects.OrcaHasSmashed);
-				}
-			}
-			enemyAI();
+			OrcaCleanup();
 		}
 	}
 

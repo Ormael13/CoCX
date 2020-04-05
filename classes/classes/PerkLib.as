@@ -5428,6 +5428,9 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.spiderScore() >= 4 || player.nagaScore() >= 4 || player.gorgonScore() >= 4 || player.vouivreScore() >= 4 || player.couatlScore() >= 4 || player.hydraScore() >= 4;
             }, "Spider or any snake-like race");
+			WhaleFat.requireMouthMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+				return player.orcaScore() >= 12;
+			}, "Orca race")
             /*
 			if (player.() >=  && ) {
 			_add(new PerkClass(PerkLib.));
@@ -5727,7 +5730,10 @@ public class PerkLib
 			VenomGlandsEvolved.requireLevel(12).requirePerk(VenomGlands).requireCustomFunction(function (player:Player):Boolean {
                 return player.spiderScore() >= 8 || player.nagaScore() >= 8 || player.gorgonScore() >= 8 || player.vouivreScore() >= 8 || player.couatlScore() >= 8 || player.hydraScore() >= 8;
             }, "Spider or any snake-like race");
-            ChimericalBodySemiBasicStage.requirePerk(ChimericalBodyInitialStage)
+			WhaleFatEvolved.requireLevel(12).requirePerk(WhaleFat).requireCustomFunction(function (player:Player):Boolean {
+				return player.orcaScore() >= 12;
+			}, "Orca race");
+			ChimericalBodySemiBasicStage.requirePerk(ChimericalBodyInitialStage)
                     .requireLevel(12)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 4;
@@ -5940,6 +5946,9 @@ public class PerkLib
 			VenomGlandsFinalForm.requireLevel(24).requirePerk(VenomGlandsEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.spiderScore() >= 12 || player.nagaScore() >= 12 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12 || player.hydraScore() >= 12;
             }, "Spider or any snake-like race");
+			WhaleFatFinalForm.requireLevel(24).requirePerk(WhaleFatEvolved).requireCustomFunction(function (player:Player):Boolean {
+				return player.orcaScore() >= 12;
+			}, "Orca race");
 			ChimericalBodySemiAdvancedStage.requirePerk(ChimericalBodyBasicStage)
                     .requireLevel(24)
                     .requireCustomFunction(function (player:Player):Boolean {

@@ -3361,6 +3361,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			monster.createStatusEffect(StatusEffects.OrcaPlay, 0,0,0,0);
 			monster.createStatusEffect(StatusEffects.OrcaCanJuggleStill, 0,0,0,0);
 			player.createStatusEffect(StatusEffects.CooldownPlay,15,0,0,0);
+			player.createStatusEffect(StatusEffects.OrcaPlayRoundLeft,3,0,0,0);
 			outputText("\n\n");
 			enemyAI();
 		}

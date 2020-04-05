@@ -5932,6 +5932,8 @@ use namespace CoC;
 				orcaCounter++;
 			if (faceType == Face.ORCA)
 				orcaCounter++;
+			if (faceType != Face.ORCA)
+				orcaCounter = 0;
 			if (eyes.type == Eyes.HUMAN)
 				orcaCounter++;
 			if (eyes.colour == "orange")
