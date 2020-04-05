@@ -7595,8 +7595,7 @@ public function combatRoundOver():void {
 		}
 		else {
 			fatigue(20, USEFATG_PHYSICAL);
-			var damage:Number = 0;
-			damage = unarmedAttack();
+			var damage:Number = unarmedAttack();
 			damage += player.str;
 			damage += scalingBonusStrength() * 0.25;
 			if (damage < 10) damage = 10;
@@ -7619,7 +7618,7 @@ public function combatRoundOver():void {
 			}
 			//Dealing damage -
 			outputText("You catch your falling opponent back into your maw and send it flying extending your playtime.\n");
-			damage = doDamage(damage, true, true);
+			doDamage(damage, true, true);
 			outputText(" damage.");
 			//Enemy faints -
 			if(monster.HP <= monster.minHP()) {
@@ -7666,8 +7665,7 @@ public function combatRoundOver():void {
 		}
 		else {
 			fatigue(20, USEFATG_PHYSICAL);
-			var damage:Number = 0;
-			damage = unarmedAttack();
+			var damage:Number = unarmedAttack();
 			damage += player.str;
 			damage += scalingBonusStrength() * 0.25;
 			if (damage < 10) damage = 10;
@@ -7690,7 +7688,7 @@ public function combatRoundOver():void {
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 			//Dealing damage -
 			outputText("You give your opponent a powerful blow with your tail sending it flying back in the sky and forcing the air out of its lung. [monster The] [monster name] is completely disoriented and [monster his] defences is wide open!\n\n");
-			damage = doDamage(damage, true, true);
+			doDamage(damage, true, true);
 			outputText(" damage.");
 			//Enemy faints -
 			if(monster.HP <= monster.minHP()) {
@@ -7706,6 +7704,10 @@ public function combatRoundOver():void {
 			{
 				monster.removeStatusEffect(StatusEffects.OrcaPlay);
 				outputText("\n\n Unable to prolong the game further you finaly let [monster a] [monster name] drops to the ground. [monster He] try catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.\n\n");
+				damage = unarmedAttack();
+				damage += player.str;
+				damage += scalingBonusStrength() * 0.25;
+				doDamage(damage, true, true);
 			}
 			enemyAI();
 		}
@@ -7719,8 +7721,7 @@ public function combatRoundOver():void {
 		}
 		else {
 			fatigue(20, USEFATG_PHYSICAL);
-			var damage:Number = 0;
-			damage += player.str;
+			var damage:Number = player.str;
 			damage += scalingBonusStrength() * 0.25;
 			if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
 			if (damage < 10) damage = 10;
@@ -7765,6 +7766,10 @@ public function combatRoundOver():void {
 			{
 				monster.removeStatusEffect(StatusEffects.OrcaPlay);
 				outputText("\n\n Unable to prolong the game further you finaly let [monster a] [monster name] drops to the ground. [monster He] try catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.\n\n");
+				damage = unarmedAttack();
+				damage += player.str;
+				damage += scalingBonusStrength() * 0.25;
+				doDamage(damage, true, true);
 			}
 			enemyAI();
 		}
@@ -7778,7 +7783,7 @@ public function combatRoundOver():void {
 		}
 		else {
 			fatigue(20, USEFATG_PHYSICAL);
-			var damage:Number = 0;
+			var damage:Number = player.str;
 			var SAMulti:Number = 1;
 			if (player.level >= 6) SAMulti += 1;
 			if (player.level >= 12) SAMulti += 1;
@@ -7786,7 +7791,6 @@ public function combatRoundOver():void {
 			if (player.level >= 24) SAMulti += 1;
 			if (player.level >= 30) SAMulti += 1;
 			if (player.level >= 36) SAMulti += 1;
-			damage += player.str;
 			damage += scalingBonusStrength() * 0.25;
 			if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
 			if (damage < 10) damage = 10;
@@ -7846,6 +7850,10 @@ public function combatRoundOver():void {
 				return;
 			}
 			outputText("You finish the game by swinging [monster a] [monster name] off your weapon, brutaly tossing it to the side.\n\n");
+			damage = unarmedAttack();
+			damage += player.str;
+			damage += scalingBonusStrength() * 0.25;
+			doDamage(damage, true, true);
 			combat.checkAchievementDamage(damage);
 			if(wasWacked)
 			{
@@ -7856,6 +7864,17 @@ public function combatRoundOver():void {
 			orcaPlayRoundLeft = 0;
 			enemyAI();
 		}
+	}
+
+	public function OrcaLeggoMyEggo():void {
+		clearOutput();
+		outputText("You let [monster a] [monster name] drops to the ground. [monster He] try catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.\n\n");
+		var damage = unarmedAttack();
+		damage += player.str;
+		damage += scalingBonusStrength() * 0.25;
+		doDamage(damage, true, true);
+		monster.removeStatusEffect(StatusEffects.OrcaPlay);
+		enemyAI();
 	}
 
 public function ScyllaSqueeze():void {
@@ -8247,13 +8266,6 @@ public function GooTease():void {
 			return;
 		}
 	}
-	enemyAI();
-}
-
-public function OrcaLeggoMyEggo():void {
-	clearOutput();
-	outputText("You let [monster a] [monster name] drops to the ground. [monster He] try catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.\n\n");
-	monster.removeStatusEffect(StatusEffects.OrcaPlay);
 	enemyAI();
 }
 
