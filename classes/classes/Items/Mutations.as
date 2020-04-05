@@ -13385,7 +13385,7 @@ public final class Mutations extends MutationsHelper
 				if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ");
 				if (player.hasScales()) outputText("You suddenly start sweating abundantly as your scales fall off leaving bare the smooth skin underneath.  ");
 				outputText("Your skin starts to change, turning darker and darker until it is pitch black. Your underbelly, on the other hand , turns pure white. Just as you thought it was over, your skin takes on a glossy shine similar to that of a whale. <b>Your body is now black with a white underbelly running on the underside of your limbs and up to your mouth in a color pattern similar to an orca’s.</b>");
-				player.skin.setBaseOnly({type:Skin.PLAIN,adj:"glossy",pattern:Skin.PATTERN_ORCA_UNDERBODY,color:"white",color2:"black"});
+				player.skin.setBaseOnly({type:Skin.PLAIN,adj:"glossy",pattern:Skin.PATTERN_ORCA_UNDERBODY,color:"black",color2:"white"});
 				changes++;
 			}
 
@@ -13447,18 +13447,18 @@ public final class Mutations extends MutationsHelper
                 changes++;
             }
             //eyes to orange
-            if (player.eyes.colour == "orange" && changes < changeLimit && rand(4) == 0) {
+            if (player.eyes.colour != "orange" && changes < changeLimit && rand(4) == 0) {
                 player.eyes.colour = "orange";
                 outputText("\n\nYour eyes begins to tingle and you hurry to a puddle to check what is going on. <b>You discover to your surprise that your eyes have turned orange!</b>");
                 changes++;
             }
 			//tallness
 			if (player.tallness < 132 && changes < changeLimit && rand(2) == 0) {
-				var heightGain:int = rand(5) + 3;
+				var heightGain:int = rand(15) + 5;
 				//Flavor texts.  Flavored like 1950's cigarettes. Yum.
-				if (heightGain < 5) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
-				else if (heightGain >= 5 && heightGain < 7) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
-				else if (heightGain == 7) outputText("\n\nStaggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.");
+				if (heightGain < 10) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
+				else if (heightGain >= 10 && heightGain < 20) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
+				else if (heightGain == 20) outputText("\n\nStaggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.");
 				player.tallness += heightGain;
 				changes++;
 			}
