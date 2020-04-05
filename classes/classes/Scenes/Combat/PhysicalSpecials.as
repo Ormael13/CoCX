@@ -3360,6 +3360,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			outputText("You grab [monster the] [monster name] with your jaw while [monster he] is stunned inflicting grievous wounds before you toss [monster him] high in the air!");
 			monster.createStatusEffect(StatusEffects.OrcaPlay, 0,0,0,0);
 			monster.createStatusEffect(StatusEffects.OrcaCanJuggleStill, 0,0,0,0);
+			player.createStatusEffect(StatusEffects.CooldownPlay,15,0,0,0);
 			outputText("\n\n");
 			enemyAI();
 		}

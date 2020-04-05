@@ -6192,6 +6192,15 @@ private function combatStatusesUpdate():void {
 			player.addStatusValue(StatusEffects.CooldownEveryAndNowhere,1,-1);
 		}
 	}
+	//Play
+	if (player.hasStatusEffect(StatusEffects.CooldownPlay)) {
+		if (player.statusEffectv1(StatusEffects.CooldownPlay) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownPlay);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownPlay,1,-1);
+		}
+	}
 	//Tail Smack
 	if (player.hasStatusEffect(StatusEffects.CooldownTailSmack)) {
 		if (player.statusEffectv1(StatusEffects.CooldownTailSmack) <= 0) {
@@ -7571,20 +7580,15 @@ public function combatRoundOver():void {
 	doNext(playerMenu); //This takes us back to the combatMenu and a new combat round
 	return false;
 }
-	public var orcaPlayRoundLeft:Number;
-	public var hasJuggled:Number;
-	public var wasSmashed:Boolean;
-	public var wasWacked:Boolean;
-	public var smashedDamageBoost:Number;
 
 	public function OrcaJuggle():void {
 		clearOutput();
-		if (hasJuggled == 2 && !player.hasPerk(PerkLib.WhaleFatFinalForm)) {
+		if (player.statusEffectv1(StatusEffects.OrcaCanJuggleStill) == 2 && !player.hasPerk(PerkLib.WhaleFatFinalForm)) {
 			outputText("You have already juggled twice.");
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		if (hasJuggled == 3 && player.hasPerk(PerkLib.WhaleFatFinalForm)) {
+		if (player.statusEffectv1(StatusEffects.OrcaCanJuggleStill) == 3 && player.hasPerk(PerkLib.WhaleFatFinalForm)) {
 			outputText("You have already juggled three time.");
 			addButton(0, "Next", combatMenu, false);
 			return;
@@ -7611,10 +7615,10 @@ public function combatRoundOver():void {
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
-			if (smashedDamageBoost > 0)
+			if (monster.statusEffectv1(StatusEffects.OrcaHasWacked) >= 1)
 			{
 				damage *= 1.20;
-				smashedDamageBoost--;
+				monster.addStatusValue(StatusEffects.OrcaHasWacked,1,-1);
 			}
 			//Dealing damage -
 			outputText("You catch your falling opponent back into your maw and send it flying extending your playtime.\n");
@@ -7628,10 +7632,10 @@ public function combatRoundOver():void {
 				return;
 			}
 			outputText("\n\n");
-			orcaPlayRoundLeft += 2;
-			if (player.hasPerk(PerkLib.WhaleFatEvolved)) orcaPlayRoundLeft += 1;
-			hasJuggled++;
-			if (hasJuggled == 1) {
+			player.addStatusValue(StatusEffects.OrcaPlayRoundLeft,1,+2);
+			if (player.hasPerk(PerkLib.WhaleFatEvolved)) player.addStatusValue(StatusEffects.OrcaPlayRoundLeft,1,+1);
+			player.addStatusValue(StatusEffects.OrcaCanJuggleStill,1,+1);
+			if (player.statusEffectv1(StatusEffects.OrcaCanJuggleStill) == 1) {
 				if (!player.hasPerk(PerkLib.WhaleFatFinalForm)) {
 					outputText("\n\nYou can still juggle one more time.");
 					monster.removeStatusEffect(StatusEffects.OrcaCanJuggleStill);
@@ -7640,18 +7644,16 @@ public function combatRoundOver():void {
 					outputText("\n\nYou can still juggle two more time.");
 				}
 			}
-			if (hasJuggled == 2) {
+			if (player.statusEffectv1(StatusEffects.OrcaCanJuggleStill) == 2) {
 				if (!player.hasPerk(PerkLib.WhaleFatFinalForm)) {
 				outputText("\n\nYou cannot juggle any further.");
-				monster.removeStatusEffect(StatusEffects.OrcaCanJuggleStill);
 				}
 				else{
 					outputText("\n\nYou can still juggle one more time.");
 				}
 			}
-			if (hasJuggled == 3) {
+			if (player.statusEffectv1(StatusEffects.OrcaCanJuggleStill) == 3) {
 				outputText("\n\nYou cannot juggle any further.");
-				monster.removeStatusEffect(StatusEffects.OrcaCanJuggleStill);
 			}
 			enemyAI();
 		}
@@ -7678,10 +7680,10 @@ public function combatRoundOver():void {
 			if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-			if (smashedDamageBoost > 0)
+			if (monster.statusEffectv1(StatusEffects.OrcaHasWacked) >= 1)
 			{
 				damage *= 1.20;
-				smashedDamageBoost--;
+				monster.addStatusValue(StatusEffects.OrcaHasWacked,1,-1);
 			}
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
@@ -7698,16 +7700,32 @@ public function combatRoundOver():void {
 				return;
 			}
 			outputText("\n\n");
-			orcaPlayRoundLeft--;
-			wasSmashed=true;
-			if (orcaPlayRoundLeft == 0)
+			player.addStatusValue(StatusEffects.OrcaPlayRoundLeft,1,-1);
+			if(!monster.hasStatusEffect(StatusEffects.OrcaHasWacked))
 			{
-				monster.removeStatusEffect(StatusEffects.OrcaPlay);
+				monster.createStatusEffect(StatusEffects.OrcaHasWacked, 2,0,0,0)
+			}
+			else
+			{
+				monster.addStatusValue(StatusEffects.OrcaHasWacked,1,+2);
+			}
+			if (player.statusEffectv1(StatusEffects.OrcaPlayRoundLeft) <= 0)
+			{
 				outputText("\n\n Unable to prolong the game further you finaly let [monster a] [monster name] drops to the ground. [monster He] try catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.\n\n");
 				damage = unarmedAttack();
 				damage += player.str;
 				damage += scalingBonusStrength() * 0.25;
 				doDamage(damage, true, true);
+				monster.removeStatusEffect(StatusEffects.OrcaPlay);
+				player.removeStatusEffect(StatusEffects.OrcaPlayRoundLeft);
+				player.removeStatusEffect(StatusEffects.OrcaCanJuggleStill);
+				monster.removeStatusEffect(StatusEffects.OrcaHasWacked);
+				if(monster.hasStatusEffect(StatusEffects.OrcaHasSmashed))
+				{
+					outputText("\n\nYour opponent is still stunned from the vicious blow of your weapon.");
+					monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+					monster.removeStatusEffect(StatusEffects.OrcaHasSmashed);
+				}
 			}
 			enemyAI();
 		}
@@ -7739,10 +7757,10 @@ public function combatRoundOver():void {
 			if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-			if (smashedDamageBoost > 0)
+			if (monster.statusEffectv1(StatusEffects.OrcaHasWacked) >= 1)
 			{
 				damage *= 1.20;
-				smashedDamageBoost--;
+				monster.addStatusValue(StatusEffects.OrcaHasWacked,1,-1);
 			}
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
@@ -7759,17 +7777,28 @@ public function combatRoundOver():void {
 				return;
 			}
 			outputText("\n\n");
-			orcaPlayRoundLeft--;
-			wasSmashed=true;
-			smashedDamageBoost=2;
-			if (orcaPlayRoundLeft == 0)
+			player.addStatusValue(StatusEffects.OrcaPlayRoundLeft,1,-1);
+			if(!monster.hasStatusEffect(StatusEffects.OrcaHasSmashed))
 			{
-				monster.removeStatusEffect(StatusEffects.OrcaPlay);
+				monster.createStatusEffect(StatusEffects.OrcaHasSmashed, 0,0,0,0);
+			}
+			if (player.statusEffectv1(StatusEffects.OrcaPlayRoundLeft) <= 0)
+			{
 				outputText("\n\n Unable to prolong the game further you finaly let [monster a] [monster name] drops to the ground. [monster He] try catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.\n\n");
 				damage = unarmedAttack();
 				damage += player.str;
 				damage += scalingBonusStrength() * 0.25;
 				doDamage(damage, true, true);
+				monster.removeStatusEffect(StatusEffects.OrcaPlay);
+				player.removeStatusEffect(StatusEffects.OrcaPlayRoundLeft);
+				player.removeStatusEffect(StatusEffects.OrcaCanJuggleStill);
+				monster.removeStatusEffect(StatusEffects.OrcaHasWacked);
+				if(monster.hasStatusEffect(StatusEffects.OrcaHasSmashed))
+				{
+					outputText("\n\nYour opponent is still stunned from the vicious blow of your weapon.");
+					monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+					monster.removeStatusEffect(StatusEffects.OrcaHasSmashed);
+				}
 			}
 			enemyAI();
 		}
@@ -7808,10 +7837,10 @@ public function combatRoundOver():void {
 			if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-			if (smashedDamageBoost > 0)
+			if (monster.statusEffectv1(StatusEffects.OrcaHasWacked) >= 1)
 			{
 				damage *= 1.20;
-				smashedDamageBoost--;
+				monster.addStatusValue(StatusEffects.OrcaHasWacked,1,-1);
 			}
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
@@ -7855,13 +7884,16 @@ public function combatRoundOver():void {
 			damage += scalingBonusStrength() * 0.25;
 			doDamage(damage, true, true);
 			combat.checkAchievementDamage(damage);
-			if(wasWacked)
-			{
-				outputText("\n\nYour opponent is still stunned from the vicious blow of your tail.");
-				monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-			}
 			monster.removeStatusEffect(StatusEffects.OrcaPlay);
-			orcaPlayRoundLeft = 0;
+			player.removeStatusEffect(StatusEffects.OrcaPlayRoundLeft);
+			player.removeStatusEffect(StatusEffects.OrcaCanJuggleStill);
+			monster.removeStatusEffect(StatusEffects.OrcaHasWacked);
+			if(monster.hasStatusEffect(StatusEffects.OrcaHasSmashed))
+			{
+				outputText("\n\nYour opponent is still stunned from the vicious blow of your weapon.");
+				monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+				monster.removeStatusEffect(StatusEffects.OrcaHasSmashed);
+			}
 			enemyAI();
 		}
 	}
@@ -7874,6 +7906,15 @@ public function combatRoundOver():void {
 		damage += scalingBonusStrength() * 0.25;
 		doDamage(damage, true, true);
 		monster.removeStatusEffect(StatusEffects.OrcaPlay);
+		player.removeStatusEffect(StatusEffects.OrcaPlayRoundLeft);
+		player.removeStatusEffect(StatusEffects.OrcaCanJuggleStill);
+		monster.removeStatusEffect(StatusEffects.OrcaHasWacked);
+		if(monster.hasStatusEffect(StatusEffects.OrcaHasSmashed))
+		{
+			outputText("\n\nYour opponent is still stunned from the vicious blow of your tail.");
+			monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+			monster.removeStatusEffect(StatusEffects.OrcaHasSmashed);
+		}
 		enemyAI();
 	}
 
