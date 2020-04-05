@@ -1541,7 +1541,7 @@
                     <show part="breasts/D$skinx"/>
                 </case>
 				<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-                    <show part="breasts/D$skinx"/>
+                    <show part="breasts/F$skinx"/>
                 </case>
                 <default>
                     <show part="breasts/F$skinx"/>
@@ -3122,12 +3122,17 @@
 					</default>
 				</switch>
 			</if>
-			<if test="isTaur == false and showLegClothing">
-				<show part="panty/sexyBlackBikiniPanty"/>	
-				<hide part="penis/*"/>
-				<hide part="balls/*"/>
+			<if test="showLegClothing">
+				<if test="isTaur()">
+					<else>
+					<show part="panty/sexyBlackBikiniPanty"/>	
+					<hide part="penis/*"/>
+					<hide part="balls/*"/>
+					</else>
+				</if>
 			</if>
 		</if>
+		
 		<if test="sexyAquamarineBikini">
 			<if test="breastRows.length gt 0">
 				<switch>
@@ -3151,10 +3156,14 @@
 					</default>
 				</switch>
 			</if>
-			<if test="isTaur == false and showLegClothing">
-				<show part="panty/sexyAquamarineBikiniPanty"/>	
-				<hide part="penis/*"/>
-				<hide part="balls/*"/>
+			<if test="showLegClothing">
+				<if test="isTaur()">
+					<else>
+					<show part="panty/sexyAquamarineBikiniPanty"/>	
+					<hide part="penis/*"/>
+					<hide part="balls/*"/>
+					</else>
+				</if>
 			</if>
 		</if>
 		<if test="sexyBlueBikini">
@@ -3180,10 +3189,14 @@
 					</default>
 				</switch>
 			</if>
-			<if test="isTaur == false and showLegClothing">
-				<show part="panty/sexyBlueBikiniPanty"/>	
-				<hide part="penis/*"/>
-				<hide part="balls/*"/>
+			<if test="showLegClothing">
+				<if test="isTaur()">
+					<else>
+					<show part="panty/sexyBlueBikiniPanty"/>	
+					<hide part="penis/*"/>
+					<hide part="balls/*"/>
+					</else>
+				</if>
 			</if>
 		</if>
 		<if test="sexyGreenBikini">
@@ -3209,12 +3222,17 @@
 					</default>
 				</switch>
 			</if>
-			<if test="isTaur == false and showLegClothing">
-				<show part="panty/sexyGreenBikiniPanty"/>	
-				<hide part="penis/*"/>
-				<hide part="balls/*"/>
+			<if test="showLegClothing">
+				<if test="isTaur()">
+					<else>
+					<show part="panty/sexyGreenBikiniPanty"/>	
+					<hide part="penis/*"/>
+					<hide part="balls/*"/>
+					</else>
+				</if>
 			</if>
 		</if>
+		
 		<if test="sexyPinkBikini">
 			<if test="breastRows.length gt 0">
 				<switch>
@@ -3238,41 +3256,119 @@
 					</default>
 				</switch>
 			</if>
-			<if test="isTaur == false and showLegClothing">
-				<show part="panty/sexyPinkBikiniPanty"/>	
-				<hide part="penis/*"/>
-				<hide part="balls/*"/>
+			<if test="showLegClothing">
+				<if test="isTaur()">
+					<else>
+					<show part="panty/sexyPinkBikiniPanty"/>	
+					<hide part="penis/*"/>
+					<hide part="balls/*"/>
+					</else>
+				</if>
 			</if>
 		</if>
-		<if test="sexyPinkBikini">
+		
+		<if test="sexyRedBikini">
 			<if test="breastRows.length gt 0">
 				<switch>
 					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-						<show part="bra/sexyPinkBikiniBraSmall"/>
+						<show part="bra/sexyRedBikiniBraSmall"/>
 					</case>
 					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="bra/sexyPinkBikiniBraSmall"/>
+						<show part="bra/sexyRedBikiniBraSmall"/>
 					</case>
 					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-						<show part="bra/sexyPinkBikiniBraMedium"/>
+						<show part="bra/sexyRedBikiniBraMedium"/>
 					</case>
 					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-						<show part="bra/sexyPinkBikiniBraMedium"/>
+						<show part="bra/sexyRedBikiniBraMedium"/>
 					</case>
 					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-						<show part="bra/sexyPinkBikiniBraLarge"/>
+						<show part="bra/sexyRedBikiniBraLarge"/>
 					</case>
 					<default>
-						<show part="bra/sexyPinkBikiniBraLarge"/>
+						<show part="bra/sexyRedBikiniBraLarge"/>
 					</default>
 				</switch>
 			</if>
-			<if test="isTaur == false and showLegClothing">
-				<show part="panty/sexyPinkBikiniPanty"/>	
-				<hide part="penis/*"/>
-				<hide part="balls/*"/>
+			<if test="showLegClothing">
+				<if test="isTaur()">
+					<else>
+					<show part="panty/sexyRedBikiniPanty"/>	
+					<hide part="penis/*"/>
+					<hide part="balls/*"/>
+					</else>
+				</if>
 			</if>
 		</if>
+		
+		<if test="sexyWhiteBikini">
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="bra/sexyWhiteBikiniBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra/sexyWhiteBikiniBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra/sexyWhiteBikiniBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra/sexyWhiteBikiniBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra/sexyWhiteBikiniBraLarge"/>
+					</case>
+					<default>
+						<show part="bra/sexyWhiteBikiniBraLarge"/>
+					</default>
+				</switch>
+			</if>
+			<if test="showLegClothing">
+				<if test="isTaur()">
+					<else>
+					<show part="panty/sexyWhiteBikiniPanty"/>	
+					<hide part="penis/*"/>
+					<hide part="balls/*"/>
+					</else>
+				</if>
+			</if>
+		</if>
+		
+		<if test="sexyYellowBikini">
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="bra/sexyYellowBikiniBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra/sexyYellowBikiniBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra/sexyYellowBikiniBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra/sexyYellowBikiniBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra/sexyYellowBikiniBraLarge"/>
+					</case>
+					<default>
+						<show part="bra/sexyYellowBikiniBraLarge"/>
+					</default>
+				</switch>
+			</if>
+			<if test="showLegClothing">
+				<if test="isTaur()">
+					<else>
+					<show part="panty/sexyYellowBikiniPanty"/>	
+					<hide part="penis/*"/>
+					<hide part="balls/*"/>
+					</else>
+				</if>
+			</if>
+		</if>
+		
 		
 		<!--Quipao set -->
 		<if test="redQipao">

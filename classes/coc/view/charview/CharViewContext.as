@@ -90,7 +90,7 @@ public class CharViewContext extends ExecContext {
 				centaurBlackguardArmor: player.armor == game.armors.CTPALAD,
 				centaurPaladinArmor: player.armor == game.armors.CTPALAD,
 				goblinTechnomancerClothe: player.armor == game.armors.GTECHC_,
-				sexyAquamarineBikini: player.armor == game.armors.SAMUARM,
+				sexyAquamarineBikini: player.armor == game.armors.SAQBIKNI,
 				sexyBlackBikini: player.armor == game.armors.SBABIKNI,
 				sexyBlueBikini: player.armor == game.armors.SBUBIKNI,
 				sexyGreenBikini: player.armor == game.armors.SGRBIKNI,
