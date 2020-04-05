@@ -5954,7 +5954,7 @@ use namespace CoC;
 				orcaCounter++;
 			if (wings.type == Wings.NONE)
 				orcaCounter += 2;
-			if (game.player.tone > 4)
+			if (game.player.tone < 10)
 				orcaCounter++;
 			if (tallness >= 84)
 				orcaCounter++;

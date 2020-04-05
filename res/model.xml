@@ -1796,8 +1796,8 @@
                 <hide part="arms_bg/*"/>
                 <show part="arms_bg/orca"/>
                 <show part="arms/orca"/>
-                <show part="arms/fins-orca"/>
-                <show part="arms_bg/fins-orca"/>
+                <show part="hands/fins-orca"/>
+                <show part="hands_bg/fins-orca"/>
             </case>
             <case values="Arms.DEVIL,Arms.RAIJU_2">
                 <show part="hands/devil"/>

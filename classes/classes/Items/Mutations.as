@@ -13338,7 +13338,7 @@ public final class Mutations extends MutationsHelper
 
             //Tone
             if (changes < changeLimit && rand(3) == 0 && player.tone < player.maxToneCap()) {
-                outputText(player.modTone(player.maxToneCap(), -3));
+                outputText(player.modTone(0, -10));
             }
 
             //In case of immunities
