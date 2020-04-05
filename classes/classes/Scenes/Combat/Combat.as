@@ -7615,46 +7615,46 @@ public function combatRoundOver():void {
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
-			if (monster.statusEffectv1(StatusEffects.OrcaHasWacked) >= 1)
+			if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1)
 			{
-				damage *= 1.20;
-				monster.addStatusValue(StatusEffects.OrcaHasWacked,1,-1);
+				damage *= 1.50;
+				monster.addStatusValue(StatusEffects.OrcaHasSmashed,1,-1);
+				outputText("This blow is particularly vicious as your opponent defences were previously crushed. ");
+				if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) == 0) monster.removeStatusEffect(StatusEffects.OrcaHasSmashed);
 			}
 			//Dealing damage -
-			outputText("You catch your falling opponent back into your maw and send it flying extending your playtime.\n");
+			outputText("You catch your falling opponent back into your maw and send it flying, extending your playtime. ");
 			doDamage(damage, true, true);
 			outputText(" damage.");
 			//Enemy faints -
 			if(monster.HP <= monster.minHP()) {
-				outputText("\n\nYou can feel [monster a] [monster name]'s life signs beginning to fade, and before you you kill it, you let go, letting [monster him] fall to the floor, unconscious but alive.  In no time, [monster his]'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
-				outputText("\n\n");
+				outputText("\n\nYou can feel your foe's life signs beginning to fade, and before you you kill [monster him], you let go, letting [monster him] fall to the floor, unconscious but alive.  In no time, [monster his]'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
 				doNext(endHpVictory);
 				return;
 			}
-			outputText("\n\n");
 			player.addStatusValue(StatusEffects.OrcaPlayRoundLeft,1,+2);
 			if (player.hasPerk(PerkLib.WhaleFatEvolved)) player.addStatusValue(StatusEffects.OrcaPlayRoundLeft,1,+1);
 			player.addStatusValue(StatusEffects.OrcaCanJuggleStill,1,+1);
 			if (player.statusEffectv1(StatusEffects.OrcaCanJuggleStill) == 1) {
 				if (!player.hasPerk(PerkLib.WhaleFatFinalForm)) {
-					outputText("\n\nYou can still juggle one more time.");
-					monster.removeStatusEffect(StatusEffects.OrcaCanJuggleStill);
+					outputText("\n\nYou can still juggle one more time. ");
 				}
 				else{
-					outputText("\n\nYou can still juggle two more time.");
+					outputText("\n\nYou can still juggle two more time. ");
 				}
 			}
 			if (player.statusEffectv1(StatusEffects.OrcaCanJuggleStill) == 2) {
 				if (!player.hasPerk(PerkLib.WhaleFatFinalForm)) {
-				outputText("\n\nYou cannot juggle any further.");
+				outputText("\n\nYou cannot juggle any further. ");
 				}
 				else{
-					outputText("\n\nYou can still juggle one more time.");
+					outputText("\n\nYou can still juggle one more time. ");
 				}
 			}
 			if (player.statusEffectv1(StatusEffects.OrcaCanJuggleStill) == 3) {
-				outputText("\n\nYou cannot juggle any further.");
+				outputText("\n\nYou cannot juggle any further. ");
 			}
+			outputText("\n\n"+player.statusEffectv1(StatusEffects.OrcaPlayRoundLeft)+" rounds to play  left.\n\n");
 			enemyAI();
 		}
 	}
@@ -7663,22 +7663,30 @@ public function combatRoundOver():void {
 		player.addStatusValue(StatusEffects.OrcaPlayRoundLeft,1,-1);
 		if (player.statusEffectv1(StatusEffects.OrcaPlayRoundLeft) <= 0)
 		{
-			outputText("\n\n Unable to prolong the game further you finaly let [monster a] [monster name] drops to the ground. [monster He] try catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.\n\n");
+			outputText("\n\nUnable to prolong the game further you finaly let your opponent drops to the ground. ");
 			var damage = unarmedAttack();
 			damage += player.str;
 			damage += scalingBonusStrength() * 0.25;
 			doDamage(damage, true, true);
+			outputText(" damage. ");
+			outputText("[monster He] try catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.");
 			monster.removeStatusEffect(StatusEffects.OrcaPlay);
 			player.removeStatusEffect(StatusEffects.OrcaPlayRoundLeft);
 			player.removeStatusEffect(StatusEffects.OrcaCanJuggleStill);
-			monster.removeStatusEffect(StatusEffects.OrcaHasWacked);
-			if(monster.hasStatusEffect(StatusEffects.OrcaHasSmashed))
+			monster.removeStatusEffect(StatusEffects.OrcaHasSmashed);
+			//Enemy faints -
+			if(monster.HP <= monster.minHP()) {
+				if(monster.hasStatusEffect(StatusEffects.OrcaHasWacked)) monster.removeStatusEffect(StatusEffects.OrcaHasWacked);
+				outputText("[monster He] stays still as [monster he] hit the ground, too weak to keep up on fighting. ");
+				doNext(endHpVictory);
+			}
+			if(monster.hasStatusEffect(StatusEffects.OrcaHasWacked))
 			{
-				outputText("\n\nYour opponent is still stunned from the vicious blow of your weapon.");
-				monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-				monster.removeStatusEffect(StatusEffects.OrcaHasSmashed);
+				monster.removeStatusEffect(StatusEffects.OrcaHasWacked);
+				monster.createStatusEffect(StatusEffects.OrcaHasWackedFinish, 0, 0, 0, 0);
 			}
 		}
+		outputText("\n\n"+player.statusEffectv1(StatusEffects.OrcaPlayRoundLeft)+" rounds to play  left.\n\n");
 		enemyAI();
 	}
 
@@ -7703,33 +7711,29 @@ public function combatRoundOver():void {
 			if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-			if (monster.statusEffectv1(StatusEffects.OrcaHasWacked) >= 1)
+			if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1)
 			{
-				damage *= 1.20;
-				monster.addStatusValue(StatusEffects.OrcaHasWacked,1,-1);
+				damage *= 1.50;
+				monster.addStatusValue(StatusEffects.OrcaHasSmashed,1,-1);
+				outputText("This blow is particularly vicious as your opponent defences were previously crushed. ");
+				if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) == 0) monster.removeStatusEffect(StatusEffects.OrcaHasSmashed);
 			}
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 			//Dealing damage -
-			outputText("You give your opponent a powerful blow with your tail sending it flying back in the sky and forcing the air out of its lung. [monster The] [monster name] is completely disoriented and [monster his] defences is wide open!\n\n");
+			outputText("You give your opponent a powerful blow with your tail sending it flying back in the sky and forcing the air out of its lung. Your opponent is completely disoriented! ");
 			doDamage(damage, true, true);
-			outputText(" damage.");
+			outputText(" damage. ");
 			//Enemy faints -
 			if(monster.HP <= monster.minHP()) {
-				outputText("\n\nYou can feel [monster a] [monster name]'s life signs beginning to fade, and before you you kill it, you let go, letting [monster him] fall to the floor, unconscious but alive.  In no time, [monster his]'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
-				outputText("\n\n");
+				outputText("\n\nYou can feel your foe's life signs beginning to fade, and before you you kill [monster him], you let go, letting [monster him] fall to the floor, unconscious but alive.  In no time, [monster his]'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
 				doNext(endHpVictory);
 				return;
 			}
-			outputText("\n\n");
 			if(!monster.hasStatusEffect(StatusEffects.OrcaHasWacked))
 			{
-				monster.createStatusEffect(StatusEffects.OrcaHasWacked, 2,0,0,0)
-			}
-			else
-			{
-				monster.addStatusValue(StatusEffects.OrcaHasWacked,1,+2);
+				monster.createStatusEffect(StatusEffects.OrcaHasWacked, 2,0,0,0);
 			}
 			OrcaCleanup();
 		}
@@ -7761,29 +7765,33 @@ public function combatRoundOver():void {
 			if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-			if (monster.statusEffectv1(StatusEffects.OrcaHasWacked) >= 1)
+			if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1)
 			{
-				damage *= 1.20;
-				monster.addStatusValue(StatusEffects.OrcaHasWacked,1,-1);
+				damage *= 1.50;
+				monster.addStatusValue(StatusEffects.OrcaHasSmashed,1,-1);
+				outputText("This blow is particularly vicious as your opponent defences were previously crushed. ");
+				if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) == 0) monster.removeStatusEffect(StatusEffects.OrcaHasSmashed);
 			}
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 			//Dealing damage -
-			outputText("You grab your weapon with both hands and smash your target back up in the air keeping it dazed.\n");
-			damage = doDamage(damage, true, true);
-			outputText(" damage.");
+			outputText("You grab your weapon with both hands and smash your target back up in the air breaching [monster his] defences leaving [monster him] wide open! ");
+			doDamage(damage, true, true);
+			outputText(" damage. ");
 			//Enemy faints -
 			if(monster.HP <= monster.minHP()) {
-				outputText("\n\nYou can feel [monster a] [monster name]'s life signs beginning to fade, and before you you kill it, you let go, letting [monster him] fall to the floor, unconscious but alive.  In no time, [monster his]'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
-				outputText("\n\n");
+				outputText("\n\nYou can feel your foe's life signs beginning to fade, and before you you kill [monster him], you let go, letting [monster him] fall to the floor, unconscious but alive.  In no time, [monster his]'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
 				doNext(endHpVictory);
 				return;
 			}
-			outputText("\n\n");
 			if(!monster.hasStatusEffect(StatusEffects.OrcaHasSmashed))
 			{
-				monster.createStatusEffect(StatusEffects.OrcaHasSmashed, 0,0,0,0);
+				monster.createStatusEffect(StatusEffects.OrcaHasSmashed, 2,0,0,0)
+			}
+			else
+			{
+				monster.addStatusValue(StatusEffects.OrcaHasSmashed,1,+2);
 			}
 			OrcaCleanup();
 		}
@@ -7822,10 +7830,11 @@ public function combatRoundOver():void {
 			if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-			if (monster.statusEffectv1(StatusEffects.OrcaHasWacked) >= 1)
+			if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1)
 			{
-				damage *= 1.20;
-				monster.addStatusValue(StatusEffects.OrcaHasWacked,1,-1);
+				damage *= 1.50;
+				monster.addStatusValue(StatusEffects.OrcaHasSmashed,1,-1);
+				outputText("This blow is particularly vicious as your opponent defences were previously crushed. ");
 			}
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
@@ -7844,40 +7853,40 @@ public function combatRoundOver():void {
 				damage *= critMulti;
 			}
 			damage = Math.round(damage);
+			//Dealing damage -
+			outputText("You receive your falling opponent on the length of your weapon running [monster him] through. ");
+			doDamage(damage, true, true);
+			outputText(" damage");
 			if (crit) {
-				outputText("<b>Critical!</b>");
+				outputText("<b> Critical!</b>");
 				if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
 			}
 			if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
 				if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
 				else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 			}
-			//Dealing damage -
-			outputText("You receive your falling opponent on the length of your weapon running [monster him] through.\n\n");
-			damage = doDamage(damage, true, true);
-			outputText(" damage.");
+			outputText(". ");
 			//Enemy faints -
-			if(monster.HP <= monster.minHP()) {
-				outputText("\n\nYou can feel [monster a] [monster name]'s life signs beginning to fade, and before you truly kill it, you let go, letting [monster him] slide from your weapon and fall to the floor, unconscious but alive.  In no time, [monster his]'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
-				outputText("\n\n");
-				doNext(endHpVictory);
-				return;
-			}
-			outputText("You finish the game by swinging [monster a] [monster name] off your weapon, brutaly tossing it to the side.\n\n");
+			outputText("You finish the game by swinging your opponent off your weapon, brutaly tossing [monster him] to the side. ");
 			damage = unarmedAttack();
 			damage += player.str;
 			damage += scalingBonusStrength() * 0.25;
 			doDamage(damage, true, true);
+			outputText(" damage. ");
 			combat.checkAchievementDamage(damage);
 			monster.removeStatusEffect(StatusEffects.OrcaPlay);
 			player.removeStatusEffect(StatusEffects.OrcaPlayRoundLeft);
 			player.removeStatusEffect(StatusEffects.OrcaCanJuggleStill);
-			monster.removeStatusEffect(StatusEffects.OrcaHasWacked);
-			if(monster.hasStatusEffect(StatusEffects.OrcaHasSmashed))
+			monster.removeStatusEffect(StatusEffects.OrcaHasSmashed);
+			if(monster.HP <= monster.minHP()) {
+				outputText("[monster He] stays on the ground, too weak to keep up on fighting. ");
+				if(monster.hasStatusEffect(StatusEffects.OrcaHasWacked)) monster.removeStatusEffect(StatusEffects.OrcaHasWacked);
+				doNext(endHpVictory);
+			}
+			if(monster.hasStatusEffect(StatusEffects.OrcaHasWacked))
 			{
-				outputText("\n\nYour opponent is still stunned from the vicious blow of your weapon.");
-				monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-				monster.removeStatusEffect(StatusEffects.OrcaHasSmashed);
+				monster.removeStatusEffect(StatusEffects.OrcaHasWacked);
+				monster.createStatusEffect(StatusEffects.OrcaHasWackedFinish, 0, 0, 0, 0);
 			}
 			enemyAI();
 		}
@@ -7885,21 +7894,28 @@ public function combatRoundOver():void {
 
 	public function OrcaLeggoMyEggo():void {
 		clearOutput();
-		outputText("You let [monster a] [monster name] drops to the ground. [monster He] try catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.\n\n");
+		outputText("You let [monster a] [monster name] drop, tired of playing.");
 		var damage = unarmedAttack();
 		damage += player.str;
 		damage += scalingBonusStrength() * 0.25;
 		doDamage(damage, true, true);
+		outputText(" damage. ");
 		monster.removeStatusEffect(StatusEffects.OrcaPlay);
 		player.removeStatusEffect(StatusEffects.OrcaPlayRoundLeft);
 		player.removeStatusEffect(StatusEffects.OrcaCanJuggleStill);
-		monster.removeStatusEffect(StatusEffects.OrcaHasWacked);
-		if(monster.hasStatusEffect(StatusEffects.OrcaHasSmashed))
-		{
-			outputText("\n\nYour opponent is still stunned from the vicious blow of your tail.");
-			monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-			monster.removeStatusEffect(StatusEffects.OrcaHasSmashed);
+		monster.removeStatusEffect(StatusEffects.OrcaHasSmashed);
+		if(monster.HP <= monster.minHP()) {
+			if(monster.hasStatusEffect(StatusEffects.OrcaHasWacked)) monster.removeStatusEffect(StatusEffects.OrcaHasWacked);
+			outputText("[monster He] stays still as he hit the ground, too weak to keep up on fighting. ");
+			doNext(endHpVictory);
 		}
+		if(monster.hasStatusEffect(StatusEffects.OrcaHasWacked))
+		{
+			monster.removeStatusEffect(StatusEffects.OrcaHasWacked);
+			monster.createStatusEffect(StatusEffects.OrcaHasWackedFinish, 0, 0, 0, 0);
+		}
+		outputText("[monster He] try catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more. ");
+		outputText("\n\n");
 		enemyAI();
 	}
 
@@ -7946,7 +7962,7 @@ public function ScyllaSqueeze():void {
 		outputText(" tentacle");
 	}
 	outputText(", leaving [monster him] short of breath. You can feel it in your tentacles as [monster his] struggles are briefly intensified. \n\n" + monster.capitalA + monster.short + " takes ");
-	damage = doDamage(damage, true, true);
+	doDamage(damage, true, true);
 	outputText(" damage.");
 	//Enemy faints -
 	if(monster.HP <= monster.minHP()) {

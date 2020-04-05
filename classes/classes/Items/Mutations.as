@@ -13280,7 +13280,7 @@ public final class Mutations extends MutationsHelper
 			//Randomly choose affects limit
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
-			if (rand(3) == 0) changeLimit++;
+			if (rand(4) == 0) changeLimit++;
 			changeLimit += additionalTransformationChances();
 			//clear screen
 			clearOutput();
@@ -13305,27 +13305,28 @@ public final class Mutations extends MutationsHelper
 			//Randomly choose affects limit
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
+            if (rand(4) == 0) changeLimit++;
 			changeLimit += additionalTransformationChances();
 			//clear screen
 			clearOutput();
 			outputText("You apply the sunscreen on your skin and suddenly feel some of your worries fly as you laugh cheerfully at the thought of taking a vacation day or two to rest and swim at the beach. Your body seems to react weirdly to the sunscreen.");
 
             //Strenght
-            if (player.str < 100 && rand(3) == 0) {
+            if (player.str < 100 && rand(4) == 0) {
 				dynStats("str", 1 + rand(3));
 				changes++;
 				outputText("\n\nYou suddenly feel stronger. Your body growing with raw physical power. Funnily enough, you don’t seem to grow in muscle.");
 			}
 
             //Speed
-			if (player.spe < 100 && rand(3) == 0) {
+			if (player.spe < 100 && rand(4) == 0) {
 				dynStats("spe", 1 + rand(3));
 				changes++;
 				outputText("\n\nShivering without warning, you nearly trip over yourself as you walk.  A few tries later you realize your muscles have become faster.");
 			}
 
             //Toughness
-            if (changes < changeLimit && rand(3) == 0) {
+            if (changes < changeLimit && rand(4) == 0) {
                 temp = 60 - player.tou;
                 if (temp <= 0) temp = 0;
                 else {
@@ -13338,14 +13339,14 @@ public final class Mutations extends MutationsHelper
 
             //Tone
             if (changes < changeLimit && rand(3) == 0 && player.tone < player.maxToneCap()) {
-                outputText(player.modTone(0, -10));
+                outputText(player.modTone(0, 10));
             }
 
             //In case of immunities
             if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
 
             //Cock gets bigger!
-            if ((player.gender == 1 || player.gender == 3) && player.cocks.length > 0  && player.biggestCockLength() < 30 && changes < changeLimit && rand(3) == 0) {
+            if ((player.gender == 1 || player.gender == 3) && player.cocks.length > 0  && player.biggestCockLength() < 30 && changes < changeLimit && rand(4) == 0) {
                 var selectedCock:int = -1;
                 for (var i:int = 0; i < player.cocks.length; i++)
                 {
@@ -13372,14 +13373,21 @@ public final class Mutations extends MutationsHelper
                 }
             }
 
-            if ((player.gender >= 2 || player.gender == 3) && player.biggestTitSize() < 30 && changes < changeLimit && rand(3) == 0) {
+            if ((player.gender >= 2 || player.gender == 3) && player.biggestTitSize() < 30 && changes < changeLimit && rand(4) == 0) {
                 outputText("\n\nYou are suddenly pulled forward as you feel a loss of balance on your front. Looking down you notice your [breasts] have increased by a full cup.");
-                player.growTits(3 + rand(3), 1, false, 3);
+                player.growTits(5 + rand(5), 1, false, 3);
+                changes++;
+            }
+
+            //face
+            if (player.faceType != Face.ORCA && changes < changeLimit && rand(4) == 0) {
+                outputText("\n\nYour nose starts to tingle, getting bigger and rounder as your facial features take on a bombed shape. Your nasal hole disappears entirely as you feel your mouth change, your dentition turning into pointed teeth fit for an orca. You go look at your reflection in the water to be sure, and discover your face is now similar in shape to that of a killer whale. Um… you could use a fish or two, you are getting pretty hungry. <b>Taking a bite out of fresh fish would be great with your new orca face.</b>");
+                setFaceType(Face.ORCA);
                 changes++;
             }
 
 			//skin
-			if ((player.skinAdj != "glossy" || !player.hasPlainSkinOnly()) && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+			if ((player.skinAdj != "glossy" || !player.hasPlainSkinOnly()) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\n");
 				if (player.hasFur()) outputText("You suddenly start sweating abundantly as your [skin.type] fall off leaving bare the smooth skin underneath.  ");
 				if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ");
@@ -13407,7 +13415,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//tail
-			if (player.arms.type == Arms.ORCA && player.tailType != Tail.ORCA && changes < changeLimit && rand(3) == 0) {
+			if (player.arms.type == Arms.ORCA && player.tailType != Tail.ORCA && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nA large bump starts to grow out of your " + assDescript() + ", making you groan as your spine lengthens for this whole new appendage to form. You finally grow a tail black as midnight with a white underside and a smaller fin closer to your body, likely for hydrodynamism sake. ");
 				outputText("You swing your tail a few times, battering the ground with it and smile as you rush to the stream to take a dip. With the help of your mighty tail you easily reach such a high swim speed you even manage to jump several meters out of the water, laughing with delight at the trill of this aquatic experience. ");
 				outputText("<b>You're going to have a lot of fun swimming with your new Orca tail.</b>");
@@ -13427,18 +13435,12 @@ public final class Mutations extends MutationsHelper
                 changes++;
             }
 			//blowhole
-			if (player.ears.type == Ears.ORCA && player.rearBody.type != RearBody.ORCA_BLOWHOLE && changes < changeLimit && rand(3) == 0) {
+			if (player.ears.type == Ears.ORCA && player.rearBody.type != RearBody.ORCA_BLOWHOLE && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\n");
 				if (player.rearBody.type > RearBody.NONE) outputText("Your wings fold into themselves, merging together with your back.  ");
 				outputText("Pain rushes just behind your shoulder blades as a hole opens up, air rushing in. The hole is burning making you groan in pain as air flows in and out. Eventually you get accustomed to breathing from your back like whales do, but it sure was a weird experience.");
 				if (silly()) outputText("  Well it doesn't matter because now you can break the world record of the longest breath holding by sitting on the ocean floor for more than 90 minutes.");
 				setRearBody(RearBody.ORCA_BLOWHOLE);
-				changes++;
-			}
-			//face
-			if (player.rearBody.type == RearBody.ORCA_BLOWHOLE && player.faceType != Face.ORCA && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYour nose starts to tingle, getting bigger and rounder as your facial features take on a bombed shape. Your nasal hole disappears entirely as you feel your mouth change, your dentition turning into pointed teeth fit for an orca. You go look at your reflection in the water to be sure, and discover your face is now similar in shape to that of a killer whale. Um… you could use a fish or two, you are getting pretty hungry. <b>Taking a bite out of fresh fish would be great with your new orca face.</b>");
-				setFaceType(Face.ORCA);
 				changes++;
 			}
             //eyes to human
@@ -13453,7 +13455,7 @@ public final class Mutations extends MutationsHelper
                 changes++;
             }
 			//tallness
-			if (player.tallness < 132 && changes < changeLimit && rand(2) == 0) {
+			if (player.tallness < 132 && changes < changeLimit && rand(4) == 0) {
 				var heightGain:int = rand(15) + 5;
 				//Flavor texts.  Flavored like 1950's cigarettes. Yum.
 				if (heightGain < 10) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");

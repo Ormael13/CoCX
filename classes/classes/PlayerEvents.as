@@ -997,19 +997,36 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 		private function hourlyCheckRacialPerks():Boolean {
 			var needNext:Boolean = false;
-			//Recharge tail
-			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS) { //Spider, Bee, Scorpion, Manticore and Naga Venom Recharge
-				if (player.tailRecharge < 5) player.tailRecharge = 5;
-				player.tailVenom += player.tailRecharge;
-				if (player.findPerk(PerkLib.ImprovedVenomGland) >= 0) player.tailVenom += 5;
-				if (player.findPerk(PerkLib.VenomGlandsEvolved) >= 0) player.tailVenom += 2;
-				if (player.findPerk(PerkLib.VenomGlandsFinalForm) >= 0) player.tailVenom += 8;
-				if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
+			//Demonic hunger perk
+			if (player.demonScore() > 10) { //Check for being a demon enought
+				if (player.findPerk(PerkLib.DemonEnergyThirst) < 0) {
+					outputText("\nYou begin fantasising about pussies and cocks foaming at the idea of fucking or getting fucked. It would look like you aquired the demons hunger for sex and can now feed from the orgasms of your partners. \n\n(<b>Gained Perk: Demonic Hunger</b>)\n");
+					player.createPerk(PerkLib.DemonEnergyThirst, 0, 0, 0, 0);
+					needNext = true;
+				}
 			}
-			//Improved venom gland
-			if (flags[kFLAGS.VENOM_TIMES_USED] >= 50 && player.findPerk(PerkLib.ImprovedVenomGland) < 0) {
-				outputText("\nYou feel wonderfully healthy. After using your venom so many time your body finally got acclimated to the presence of your venom gland allowing for increased capacity and production. \n\n(<b>Gained Perk: Improved venom gland</b>)\n");
-				player.createPerk(PerkLib.ImprovedVenomGland, 0, 0, 0, 0);
+			//Demonic hunger perk loss
+			if (player.kitsuneScore() < 10) { //Check for being a demon enought
+				if (player.findPerk(PerkLib.DemonEnergyThirst) > 0) {
+					outputText("\nYour mind clears up as becoming less of a demon you also lost the demonic hunger only sex could sate. \n\n(<b>Lost Perk: Demonic Hunger</b>)\n");
+					player.removePerk(PerkLib.DemonEnergyThirst);
+					needNext = true;
+				}
+			}
+			//Demonic energy thirst
+			if (player.hasStatusEffect(StatusEffects.DemonEnergyThirstFeed)) {
+				player.refillHunger(10, false);
+				if (player.HP < player.maxHP()) {
+					EngineCore.HPChange(100 + (player.tou*2), true);
+				}
+				if (player.mana < player.maxMana()) {
+					EngineCore.ManaChange(100 + (player.inte*2), true);
+				}
+				if (player.fatigue < player.maxFatigue()) {
+					EngineCore.changeFatigue(100 + (player.spe*2));
+				}
+				outputText("You feel energised and empowered by the energy drained out of the cum of your recent fuck. What a meal!");
+				player.removeStatusEffect(StatusEffects.DemonEnergyThirstFeed)
 			}
 			//Flexibility perk
 			if ((player.tailType == Tail.CAT || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.tailType == Tail.BURNING) && (player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LION) && (player.arms.type == Arms.CAT || player.arms.type == Arms.LION || player.arms.type == Arms.DISPLACER)) { //Check for gain of cat agility - requires legs, tail, and arms
@@ -1024,6 +1041,75 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Flexibility);
 				needNext = true;
 			}
+			//Ghost-slinger perk
+			if (player.poltergeistScore() >= 12 && player.findPerk(PerkLib.Ghostslinger) < 0) {
+				outputText("\nYour head is suddenly filled with strange otherworldly knowledge. Things you didn't think possible before could become a reality now thanks to your supernatural intellect and abilities. You could even apply these newfound abilities to your equipment.\n\n(<b>Gained Perk: Ghost-slinger</b>)");
+				player.createPerk(PerkLib.Ghostslinger, 0, 0, 0, 0);
+				needNext = true;
+			}
+			else if (player.poltergeistScore() < 12 && player.findPerk(PerkLib.Ghostslinger) >= 0) {// && player.findPerk(PerkLib.LizanMarrow) < 0
+				outputText("\nYour supernatural knowledge fades along with the abilities that came with it as you become more corporeal.\n\n(<b>Lost Perk: Ghost-slinger</b>)");
+				player.removePerk(PerkLib.Ghostslinger);
+				needNext = true;
+			}
+			//Hydra Regeneration and Hydra acid breath perk
+			if (player.findPerk(PerkLib.HydraRegeneration) >= 0 && player.lowerBody != LowerBody.HYDRA) { //Remove hydra regeneration perk if not meeting requirements
+				outputText("\nYou accidentally cut yourself but to your stupor the wound does not close as fast as it should. Guess you are no longer a hydra enough to benefit from superior regeneration.\n\n(<b>Lost Perk: Hydra Regeneration</b>)");
+				player.removePerk(PerkLib.HydraRegeneration);
+				needNext = true;
+			}
+			if (player.findPerk(PerkLib.HydraAcidBreath) >= 0 && player.lowerBody != LowerBody.HYDRA) { //Remove hydra acid breath perk if not meeting requirements
+				outputText("\nAs your lead hydra head vanishes so do your ability to belch acid.\n\n(<b>Lost Perk: Hydra Acid Breath</b>)");
+				player.removePerk(PerkLib.HydraAcidBreath);
+				needNext = true;
+			}
+			//Improved venom gland
+			if (flags[kFLAGS.VENOM_TIMES_USED] >= 50 && player.findPerk(PerkLib.ImprovedVenomGland) < 0) {
+				outputText("\nYou feel wonderfully healthy. After using your venom so many time your body finally got acclimated to the presence of your venom gland allowing for increased capacity and production. \n\n(<b>Gained Perk: Improved venom gland</b>)\n");
+				player.createPerk(PerkLib.ImprovedVenomGland, 0, 0, 0, 0);
+			}
+			//Kitsune hunger perk
+			if (player.kitsuneScore() >= 10) { //Check for being a kitsune enought
+				if (player.findPerk(PerkLib.KitsuneEnergyThirst) < 0) {
+					outputText("\nYou begin fantasising about pussies and cocks foaming at the idea of fucking or getting fucked. It would look like you aquired the kitsunes hunger for sex and can now feed from the life force extracted of the orgasms of your partners. \n\n(<b>Gained Perk: Kitsune Hunger</b>)\n");
+					player.createPerk(PerkLib.KitsuneEnergyThirst, 0, 0, 0, 0);
+					needNext = true;
+				}
+			}
+			//Kitsune hunger perk
+			if (player.kitsuneScore() < 10) { //Check for being a kitsune enought
+				if (player.findPerk(PerkLib.KitsuneEnergyThirst) > 0) {
+					outputText("\nYour mind clears up as becoming less of a kitsune you also lost the hunger for life force only sex could provide you. \n\n(<b>Lost Perk: Kitsune Hunger</b>)\n");
+					player.removePerk(PerkLib.KitsuneEnergyThirst);
+					needNext = true;
+				}
+			}
+			//Kitsune energy thirst
+			if (player.hasStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)) {
+				player.refillHunger(10, false);
+				if (player.HP < player.maxHP()) {
+					EngineCore.HPChange(100 + (player.tou*2), true);
+				}
+				if (player.mana < player.maxMana()) {
+					EngineCore.ManaChange(100 + (player.inte*2), true);
+				}
+				if (player.fatigue < player.maxFatigue()) {
+					EngineCore.changeFatigue(100 + (player.spe*2));
+				}
+				if (player.soulforce < player.maxSoulforce()) {
+					EngineCore.SoulforceChange(500 + (player.wis*2), true);
+				}
+				outputText("You feel energised and empowered by the life force drained out of the fluids of your recent blind date. What a meal!");
+				player.removeStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)
+			}
+			//Lizan Regeneration perk
+			if ((player.tailType == Tail.LIZARD && player.lowerBody == LowerBody.LIZARD && player.arms.type == Arms.LIZARD) || (player.findPerk(PerkLib.LizanRegeneration) < 0 && player.findPerk(PerkLib.LizanMarrow) >= 0)) { //Check for gain of lizan regeneration - requires legs, arms and tail
+				if (player.findPerk(PerkLib.LizanRegeneration) < 0) {
+					outputText("\nAfter drinking the last drop of reptilium you starts to feel unusual feeling somewhere inside your body.  Like many tiny waves moving inside your veins making you feel so much more refreshed than moment ago.  Remembering about fact that lizans are so much similar to lizards and those usualy posses natural talent to regenerate from even sever injuries you quessing it's could be that.\n\n(<b>Gained Perk: Lizan Regeneration</b>)");
+					player.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
+					needNext = true;
+				}
+			}
 			//Lustzerker perk
 			if ((player.tailType == Tail.SALAMANDER && player.lowerBody == LowerBody.SALAMANDER && player.arms.type == Arms.SALAMANDER) || (player.findPerk(PerkLib.Lustzerker) < 0 && player.findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)) { //Check for gain of lustzerker - requires legs, arms and tail
 				if (player.findPerk(PerkLib.Lustzerker) < 0) {
@@ -1037,15 +1123,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Lustzerker);
 				needNext = true;
 			}
-			//Ghost-slinger perk
-			if (player.poltergeistScore() >= 12 && player.findPerk(PerkLib.Ghostslinger) < 0) {
-				outputText("\nYour head is suddenly filled with strange otherworldly knowledge. Things you didn't think possible before could become a reality now thanks to your supernatural intellect and abilities. You could even apply these newfound abilities to your equipment.\n\n(<b>Gained Perk: Ghost-slinger</b>)");
-				player.createPerk(PerkLib.Ghostslinger, 0, 0, 0, 0);
-				needNext = true;
-			}
-			else if (player.poltergeistScore() < 12 && player.findPerk(PerkLib.Ghostslinger) >= 0) {// && player.findPerk(PerkLib.LizanMarrow) < 0
-				outputText("\nYour supernatural knowledge fades along with the abilities that came with it as you become more corporeal.\n\n(<b>Lost Perk: Ghost-slinger</b>)");
-				player.removePerk(PerkLib.Ghostslinger);
+			else if (player.findPerk(PerkLib.LizanRegeneration) >= 0 && player.perkv4(PerkLib.LizanRegeneration) == 0 && player.findPerk(PerkLib.LizanMarrow) < 0 && player.findPerk(PerkLib.HydraRegeneration) < 0) { //Remove lizan regeneration perk if not meeting requirements
+				outputText("\nAll of sudden something change inside your body.  You think about a long while, until it dawned on you.  You can't feel that refreshing feeling inside your body anymore meaning for now just human rate of recovery from all kind of injuries.\n\n(<b>Lost Perk: Lizan Regeneration</b>)");
+				player.removePerk(PerkLib.LizanRegeneration);
 				needNext = true;
 			}
 			//Phantom Shooting perk
@@ -1062,29 +1142,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.PhantomShooting);
 				needNext = true;
 			}
-			//Hydra Regeneration and Hydra acid breath perk
-			if (player.findPerk(PerkLib.HydraRegeneration) >= 0 && player.lowerBody != LowerBody.HYDRA) { //Remove hydra regeneration perk if not meeting requirements
-				outputText("\nYou accidentally cut yourself but to your stupor the wound does not close as fast as it should. Guess you are no longer a hydra enough to benefit from superior regeneration.\n\n(<b>Lost Perk: Hydra Regeneration</b>)");
-				player.removePerk(PerkLib.HydraRegeneration);
-				needNext = true;
-			}
-			if (player.findPerk(PerkLib.HydraAcidBreath) >= 0 && player.lowerBody != LowerBody.HYDRA) { //Remove hydra acid breath perk if not meeting requirements
-				outputText("\nAs your lead hydra head vanishes so do your ability to belch acid.\n\n(<b>Lost Perk: Hydra Acid Breath</b>)");
-				player.removePerk(PerkLib.HydraAcidBreath);
-				needNext = true;
-			}
-			//Lizan Regeneration perk
-			if ((player.tailType == Tail.LIZARD && player.lowerBody == LowerBody.LIZARD && player.arms.type == Arms.LIZARD) || (player.findPerk(PerkLib.LizanRegeneration) < 0 && player.findPerk(PerkLib.LizanMarrow) >= 0)) { //Check for gain of lizan regeneration - requires legs, arms and tail
-				if (player.findPerk(PerkLib.LizanRegeneration) < 0) {
-					outputText("\nAfter drinking the last drop of reptilium you starts to feel unusual feeling somewhere inside your body.  Like many tiny waves moving inside your veins making you feel so much more refreshed than moment ago.  Remembering about fact that lizans are so much similar to lizards and those usualy posses natural talent to regenerate from even sever injuries you quessing it's could be that.\n\n(<b>Gained Perk: Lizan Regeneration</b>)");
-					player.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
-					needNext = true;
-				}
-			}
-			else if (player.findPerk(PerkLib.LizanRegeneration) >= 0 && player.perkv4(PerkLib.LizanRegeneration) == 0 && player.findPerk(PerkLib.LizanMarrow) < 0 && player.findPerk(PerkLib.HydraRegeneration) < 0) { //Remove lizan regeneration perk if not meeting requirements
-				outputText("\nAll of sudden something change inside your body.  You think about a long while, until it dawned on you.  You can't feel that refreshing feeling inside your body anymore meaning for now just human rate of recovery from all kind of injuries.\n\n(<b>Lost Perk: Lizan Regeneration</b>)");
-				player.removePerk(PerkLib.LizanRegeneration);
-				needNext = true;
+			//Recharge tail
+			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS) { //Spider, Bee, Scorpion, Manticore and Naga Venom Recharge
+				if (player.tailRecharge < 5) player.tailRecharge = 5;
+				player.tailVenom += player.tailRecharge;
+				if (player.findPerk(PerkLib.ImprovedVenomGland) >= 0) player.tailVenom += 5;
+				if (player.findPerk(PerkLib.VenomGlandsEvolved) >= 0) player.tailVenom += 2;
+				if (player.findPerk(PerkLib.VenomGlandsFinalForm) >= 0) player.tailVenom += 8;
+				if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
 			}
 			//Satyr Sexuality
 			if (player.satyrScore() >= 4 && player.balls > 0) {
@@ -1334,12 +1399,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Titanic Strength
-			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 17) && player.tallness >= 84 && player.findPerk(PerkLib.TitanicStrength) < 0) {
+			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 17) && player.tallness >= 80 && player.findPerk(PerkLib.TitanicStrength) < 0) {
 				outputText("\nWhoa you've grown so big its sheer miracle if you don't damage the landscape while moving. This said your size contribute to your strength as well now.\n\n<b>(Gained Titanic Strength perk!)</b>\n");
 				player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if ((player.hydraScore() < 14 && player.oniScore() < 12 && player.orcaScore() < 17 || player.tallness < 84)  && player.findPerk(PerkLib.TitanicStrength) >= 0) {
+			if ((player.hydraScore() < 14 && player.oniScore() < 12 && player.orcaScore() < 17 || player.tallness < 80)  && player.findPerk(PerkLib.TitanicStrength) >= 0) {
 				if (player.tallness < 84) outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
 				else outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
 				player.removePerk(PerkLib.TitanicStrength);

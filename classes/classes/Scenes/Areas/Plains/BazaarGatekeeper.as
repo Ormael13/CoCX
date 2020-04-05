@@ -69,7 +69,7 @@ import classes.internals.*;
 		
 		override public function doAI():void
 		{
-			if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FreezingBreathStun) || hasStatusEffect(StatusEffects.StunnedTornado)) {
+			if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.StunnedTornado)) {
 				outputText("Your foe is too dazed from your last hit to strike back!");
 				if (hasStatusEffect(StatusEffects.Uber)) {
 					outputText(" You've managed to interrupt his special attack!");

@@ -261,8 +261,8 @@ public class CombatUI extends BaseCombatContent {
 		} else if (monster.hasStatusEffect(StatusEffects.OrcaPlay)) {
 			menu();
 			addButton(0, "Juggle", combat.OrcaJuggle).hint("Deal bite damage and send your foe back in the air at the cost of a fairly decent amount of fatigue. Extend the duration of play by 2 rounds up to twice. \n\nFatigue Cost: " + physicalCost(50) + "");
-			addButton(1, "Smash", combat.OrcaWack).hint("Stun your opponent and smash it back into the air with your weapon.\n\nFatigue Cost: " + physicalCost(20) + "");
-			addButton(2, "Tail wack", combat.OrcaSmash).hint("Smash your opponent with your tail crushing its armor. \n\nFatigue Cost: " + physicalCost(20) + "");
+			addButton(1, "Tail wack", combat.OrcaWack).hint("Stun your opponent and smash it back into the air with your tail.\n\nFatigue Cost: " + physicalCost(20) + "");
+			addButton(2, "Smash", combat.OrcaSmash).hint("Wack your opponent with your weapon crushing its armor and increasing all further damage dealth by 50% for two rounds.\n\nFatigue Cost: " + physicalCost(20) + "");
 			if(player.tailType == !Tail.ORCA) {
 				button(0).disable("You need a orca tail to use this ability.");
 			}

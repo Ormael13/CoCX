@@ -45,9 +45,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 			}
 			if (player.haveWeaponForCleave() && player.hasStatusEffect(StatusEffects.KnowsCleave)) buttons.add("Cleave", pcCleave).hint("Deal extra damage to multiple foes. Cause area effect bleed damage.");
-			if (player.hasPerk(PerkLib.SneakyAttack) && player.haveWeaponForSneakAttack() && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.FreezingBreathStun) || monster.hasStatusEffect(StatusEffects.StunnedTornado)
+			if (player.hasPerk(PerkLib.SneakyAttack) && player.haveWeaponForSneakAttack() && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.FrozenSolid) || monster.hasStatusEffect(StatusEffects.StunnedTornado)
 				|| monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind) || monster.hasStatusEffect(StatusEffects.Distracted))) buttons.add("SneakAttack (M)", sneakAttack).hint("Strike the vitals of a stunned, blinded or distracted opponent for heavy damage. (Melee variant)");
-			if (player.hasPerk(PerkLib.MarkedForDeath) && player.haveWeaponForSneakAttackRange() && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.FreezingBreathStun) || monster.hasStatusEffect(StatusEffects.StunnedTornado)
+			if (player.hasPerk(PerkLib.MarkedForDeath) && player.haveWeaponForSneakAttackRange() && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.FrozenSolid) || monster.hasStatusEffect(StatusEffects.StunnedTornado)
 				|| monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind) || monster.hasStatusEffect(StatusEffects.Distracted))) buttons.add("SneakAttack (R)", sneakAttackRange).hint("Strike the vitals of a stunned, blinded or distracted opponent for heavy damage. (Range variant)");
 			if (player.hasPerk(PerkLib.Feint)) buttons.add("Feint", feint).hint("Attempt to feint an opponent into dropping its guard.");
 			bd = buttons.add("Charge", charging).hint("Charge your opponent for massive damage. Deals more damage if using a spear or lance. Gains extra damage from the usage of a horn or a pair of horns.");
@@ -381,6 +381,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.tallness < monster.tallness)
 				{
 					bd.disable("<b>You need the ennemy to be smaller then you in order to use this ability.</b>\n\n");
+				}
+				if (player.hasStatusEffect(StatusEffects.CooldownPlay))
+				{
+					bd.disable("<b>You need more time before you can use Play again.</b>\n\n");
 				}
 			}
 		}
@@ -1918,10 +1922,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownTailSmack,5,0,0,0);
 		//miss
 		if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-			outputText("  You smash your tail at " + monster.a + monster.short + ", but connect with only empty air.");
+			outputText("You smash your tail at " + monster.a + monster.short + ", but connect with only empty air.");
 		}
 		else {
-			outputText("  You smash your tail at " + monster.a + monster.short + " face making ");
+			outputText("You smash your tail at " + monster.a + monster.short + " face making ");
 			if(!monster.plural) outputText("it");
 			else outputText("them");
 			outputText(" reel ");
@@ -3357,9 +3361,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 				return;
 			}
 			//WRAP IT UPPP
-			outputText("You grab [monster the] [monster name] with your jaw while [monster he] is stunned inflicting grievous wounds before you toss [monster him] high in the air!");
+			outputText("You grab your opponent with your jaw while [monster he] is stunned inflicting grievous wounds before you toss [monster him] high in the air!");
 			monster.createStatusEffect(StatusEffects.OrcaPlay, 0,0,0,0);
-			monster.createStatusEffect(StatusEffects.OrcaCanJuggleStill, 0,0,0,0);
+			player.createStatusEffect(StatusEffects.OrcaCanJuggleStill, 0,0,0,0);
 			player.createStatusEffect(StatusEffects.CooldownPlay,15,0,0,0);
 			player.createStatusEffect(StatusEffects.OrcaPlayRoundLeft,3,0,0,0);
 			outputText("\n\n");

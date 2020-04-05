@@ -3052,6 +3052,8 @@ public class PerkLib
 				"Allows access to demons charm attacks.");
 		public static const DeadMetabolism:PerkType = mk("Dead metabolism", "Dead metabolism",
 				"Kills off hunger. (hunger meter wouldn't decay with time)");
+		public static const DemonEnergyThirst:PerkType = mk("Demonic hunger", "Demonic hunger",
+				"You can metabolise sex into energy and can feed from your partners orgasms.");
 		public static const Diapause:PerkType = mk("Diapause", "Diapause",
 				"Pregnancy does not advance normally, but develops quickly after taking in fluids.");
 		public static const DragonDarknessBreath:PerkType = mk("Dragon darkness breath", "Dragon darkness breath",
@@ -3126,6 +3128,8 @@ public class PerkLib
 				"Allows you to shoot blinding and probably slightly arousing ink out of your genitalia similar like octopus.");
 		public static const JunglesWanderer:PerkType = mk("Jungle’s Wanderer", "Jungle’s Wanderer",
 				"Your nimble body has adapted to moving through jungles and forests, evading enemy attacks with ease and making yourself harder to catch. (+35 to the Evasion percentage)");
+		public static const KitsuneEnergyThirst:PerkType = mk("Kitsune hunger", "Kitsune hunger",
+				"You can metabolise sex into life force and can feed from your partners orgasms.");
 		public static const LifeLeech:PerkType = mk("Life leech", "Life leech",
 				"Your unarmed strike steals vital energy from your victims, dealing 5% extra damage and restoring 1% mana, health, fatigue and soulforce per hit.");
 		public static const Lycanthropy:PerkType = mk("Lycanthropy", "Lycanthropy",

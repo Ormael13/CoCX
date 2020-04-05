@@ -1139,7 +1139,7 @@
                 <show part="ears/cat"/>
                 <show part="ears_bg/cat"/>
             </case>
-            <case values="Ears.LIZARD"></case>
+            <case values="Ears.LIZARD,Ears.ORCA2"></case>
             <case values="Ears.BUNNY">
                 <show part="ears/bunny"/>
                 <show part="ears_bg/bunny"/>
