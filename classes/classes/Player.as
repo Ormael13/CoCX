@@ -1755,6 +1755,15 @@ use namespace CoC;
 				mult -= 20;
 				dynStats("lus", (2 * (1 + game.player.newGamePlusMod())));
 			}
+			if (findPerk(PerkLib.WhaleFat) >= 0) {
+				mult -= 10;
+			}
+			if (findPerk(PerkLib.WhaleFatEvolved) >= 0) {
+				mult -= 10;
+			}
+			if (findPerk(PerkLib.WhaleFatFinalForm) >= 0) {
+				mult -= 10;
+			}
 			if (findPerk(PerkLib.FenrirSpikedCollar) >= 0) {
 				mult -= 15;
 			}
@@ -2927,7 +2936,7 @@ use namespace CoC;
 					}
 				}
 			}
-			if (unicornkinScore() >= 10)
+			if (unicornkinScore() >= 12)
 			{
 				if (horns.type == Horns.UNICORN) {
 					race = "unicornkin";
@@ -3081,10 +3090,18 @@ use namespace CoC;
 			}
 			if (orcaScore() >= 6)
 			{
-				if (orcaScore() >= 12) {
+				if (orcaScore() >= 20) {
+					if (isTaur()) race = "great orca-taur";
+					else {
+						race = "great orca-";
+						race += mf("boy", "girl");
+					}
+				}
+				else if (orcaScore() >= 17) {
 					if (isTaur()) race = "orca-taur";
 					else {
-						race = "orca-morph";
+						race = "orca-";
+						race += mf("boy", "girl");
 					}
 				}
 				else {
@@ -3819,7 +3836,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (sharkScore() >= 8)
 				chimeraCounter++;
-			if (orcaScore() >= 12)
+			if (orcaScore() >= 17)
 				chimeraCounter++;
 			if (oniScore() >= 12)
 				chimeraCounter++;
@@ -5909,11 +5926,17 @@ use namespace CoC;
 		public function orcaScore():Number {
 			Begin("Player","racialScore","orca");
 			var orcaCounter:Number = 0;
-			if (ears.type == Ears.ORCA)
+			if (ears.type == Ears.ORCA || ears.type == Ears.ORCA2)
 				orcaCounter++;
 			if (tailType == Tail.ORCA)
 				orcaCounter++;
 			if (faceType == Face.ORCA)
+				orcaCounter++;
+			if (eyes.type == Eyes.HUMAN)
+				orcaCounter++;
+			if (eyes.colour == "orange")
+				orcaCounter++;
+			if (hairType == Hair.NORMAL)
 				orcaCounter++;
 			if (lowerBody == LowerBody.ORCA)
 				orcaCounter++;
@@ -5921,16 +5944,26 @@ use namespace CoC;
 				orcaCounter++;
 			if (rearBody.type == RearBody.ORCA_BLOWHOLE)
 				orcaCounter++;
-			if (hasPlainSkinOnly() && skinAdj == "glossy")
+			if (hasPlainSkinOnly())
+				orcaCounter++;
+			if (skinAdj == "glossy")
 				orcaCounter++;
 			if (skin.base.pattern == Skin.PATTERN_ORCA_UNDERBODY)
 				orcaCounter++;
 			if (wings.type == Wings.NONE)
 				orcaCounter += 2;
-			if (eyes.type == Eyes.HUMAN)
+			if (game.player.tone > 4)
 				orcaCounter++;
 			if (tallness >= 84)
 				orcaCounter++;
+			if (biggestTitSize() > 19 || (cocks.length > 18))
+				orcaCounter++;
+			if (findPerk(PerkLib.WhaleFat) >= 0)
+				orcaCounter += 1;
+			if (findPerk(PerkLib.WhaleFatEvolved) >= 0)
+				orcaCounter += 1;
+			if (findPerk(PerkLib.WhaleFatFinalForm) >= 0)
+				orcaCounter += 1;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				orcaCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && orcaCounter >= 4)
@@ -6272,7 +6305,6 @@ use namespace CoC;
 					mutantCounter--;
 			}
 			if (isGargoyle()) mutantCounter = 0;
-			if (hasPerk(PerkLib.RacialParagon)) {mutantCounter -= 100}
 			End("Player","racialScore");
 			return mutantCounter;
 		}
@@ -6574,6 +6606,8 @@ use namespace CoC;
 				melkieCounter++;
 			if (findPerk(PerkLib.MelkieLungFinalForm) >= 0)
 				melkieCounter++;
+			if (lowerBody != LowerBody.MELKIE)
+				melkieCounter = 0;
 			if (findPerk(PerkLib.MelkieLung) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
 				melkieCounter++;
 			if (findPerk(PerkLib.MelkieLungEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
@@ -6704,7 +6738,6 @@ use namespace CoC;
 				sphinxCounter += 1;
 			if (isGargoyle()) sphinxCounter = 0;
 			sphinxCounter = finalRacialScore(sphinxCounter, Race.SPHINX);
-			if (hasPerk(PerkLib.RacialParagon)) {sphinxCounter -= 100}
 			End("Player","racialScore");
 			return sphinxCounter;
 		}
@@ -6727,6 +6760,8 @@ use namespace CoC;
 				unicornCounter++;
 			if (eyes.type == Eyes.HUMAN)
 				unicornCounter++;
+			if (wings.type == Wings.NONE)
+				unicornCounter += 2;
 			if (horns.type == Horns.UNICORN) {
 				if (horns.count < 6)
 					unicornCounter++;
@@ -6829,7 +6864,8 @@ use namespace CoC;
 				if (findPerk(PerkLib.AvatorOfCorruption) >= 0)
 					unicornCounter++;
 			}
-			if (wings.type == Wings.NONE) unicornCounter += 2;
+			if (wings.type == Wings.NONE)
+				unicornCounter += 2;
 			if (hasPlainSkinOnly())
 				unicornCounter++;
 			if (horseCocks() > 0)
@@ -7177,7 +7213,6 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				kitshooCounter += 50;
 			if (isGargoyle()) kitshooCounter = 0;
-			if (hasPerk(PerkLib.RacialParagon)) {kitshooCounter -= 100}
 			End("Player","racialScore");
 			return kitshooCounter;
 		}
@@ -7226,7 +7261,6 @@ use namespace CoC;
 				plantCounter += 1;
 			if (isGargoyle()) plantCounter = 0;
 			plantCounter = finalRacialScore(plantCounter, Race.PLANT);
-			if (hasPerk(PerkLib.RacialParagon)) {plantCounter -= 100}
 			End("Player","racialScore");
 			return plantCounter;
 		}
@@ -7766,19 +7800,30 @@ use namespace CoC;
 		public function batScore():int {
             Begin("Player","racialScore","bat");
 			var counter:int = 0;
-			if (ears.type == Ears.BAT) { counter++;}
-			if (ears.type == Ears.VAMPIRE) { counter -= 10;}
-			if (wings.type == Wings.BAT_ARM) {counter += 4; }
-			if (faceType == Face.VAMPIRE) {counter += 2;}
-			if (eyes.type == Eyes.VAMPIRE) {counter++;}
-			if (rearBody.type == RearBody.BAT_COLLAR) {counter++;}
+			if (ears.type == Ears.BAT)
+				counter++;
+			if (ears.type == Ears.VAMPIRE)
+				counter -= 10;
+			if (wings.type == Wings.BAT_ARM)
+				counter += 4;
+			if (faceType == Face.VAMPIRE)
+				counter += 2;
+			if (eyes.type == Eyes.VAMPIRE)
+				counter++;
+			if (rearBody.type == RearBody.BAT_COLLAR)
+				counter++;
 			if (counter >= 8) {
-				if (arms.type == Arms.HUMAN) {counter++;}
-				if (lowerBody == LowerBody.HUMAN) {counter++;}
+				if (arms.type == Arms.HUMAN)
+					counter++;
+				if (lowerBody == LowerBody.HUMAN)
+					counter++;
 			}
-			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && counter >= 4) {counter++;}
-			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && counter >= 8) {counter++;}
-            if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0) {counter += 50;}
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && counter >= 4)
+				counter++;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && counter >= 8)
+				counter++;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				counter += 50;
 			if (isGargoyle()) counter = 0;
 			counter = finalRacialScore(counter, Race.BAT);
 			End("Player","racialScore");
@@ -7789,32 +7834,51 @@ use namespace CoC;
 		public function vampireScore():int {
             Begin("Player","racialScore","vampire");
             var counter:int = 0;
-            if (ears.type == Ears.BAT) {counter -= 10;}
-            if (ears.type == Ears.VAMPIRE) { counter++;}
-			if (wings.type == Wings.VAMPIRE) {counter += 4;}
-            if (faceType == Face.VAMPIRE) {counter += 2;}
-			if (eyes.type == Eyes.VAMPIRE) {counter++; }
+            if (ears.type == Ears.BAT)
+				counter -= 10;
+            if (ears.type == Ears.VAMPIRE)
+				counter++;
+			if (wings.type == Wings.VAMPIRE)
+				counter += 4;
+            if (faceType == Face.VAMPIRE)
+				counter += 2;
+			if (eyes.type == Eyes.VAMPIRE)
+				counter++;
 			if (counter >= 8) {
-				if (arms.type == Arms.HUMAN) {counter++;}
-				if (lowerBody == LowerBody.HUMAN) {counter++;}
+				if (arms.type == Arms.HUMAN)
+					counter++;
+				if (lowerBody == LowerBody.HUMAN)
+					counter++;
 			}
-			if (findPerk(PerkLib.VampiricBloodsteam) >= 0) {counter++;}
-			if (findPerk(PerkLib.VampiricBloodsteamEvolved) >= 0) {counter++;}
-			if (findPerk(PerkLib.VampiricBloodsteamFinalForm) >= 0) {counter++;}
-			if (findPerk(PerkLib.HollowFangs) >= 0) {counter++;}
-			if (findPerk(PerkLib.HollowFangsEvolved) >= 0) {counter++;}
-			if (findPerk(PerkLib.HollowFangsFinalForm) >= 0) {counter++;}
-			if ((findPerk(PerkLib.VampiricBloodsteam) >= 0 || findPerk(PerkLib.HollowFangs) >= 0) && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0) {counter++;}
-			if ((findPerk(PerkLib.VampiricBloodsteamEvolved) >= 0 || findPerk(PerkLib.HollowFangsEvolved) >= 0) && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0) {counter++;}
-			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && counter >= 4) {counter++;}
-			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && counter >= 8) {counter++;}
-            if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0) {counter += 50;}
-			if (isGargoyle()) counter = 0;
+			if (findPerk(PerkLib.VampiricBloodsteam) >= 0)
+				counter++;
+			if (findPerk(PerkLib.VampiricBloodsteamEvolved) >= 0)
+				counter++;
+			if (findPerk(PerkLib.VampiricBloodsteamFinalForm) >= 0)
+				counter++;
+			if (findPerk(PerkLib.HollowFangs) >= 0)
+				counter++;
+			if (findPerk(PerkLib.HollowFangsEvolved) >= 0)
+				counter++;
+			if (findPerk(PerkLib.HollowFangsFinalForm) >= 0)
+				counter++;
+			if ((findPerk(PerkLib.VampiricBloodsteam) >= 0 || findPerk(PerkLib.HollowFangs) >= 0) && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
+				counter++;
+			if ((findPerk(PerkLib.VampiricBloodsteamEvolved) >= 0 || findPerk(PerkLib.HollowFangsEvolved) >= 0) && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
+				counter++;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && counter >= 4)
+				counter++;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && counter >= 8)
+				counter++;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				counter += 50;
+			if (isGargoyle())
+				counter = 0;
 			counter = finalRacialScore(counter, Race.VAMPIRE);
 			End("Player","racialScore");
 			return counter < 0? 0:counter;
 		}
-		
+
 		//Gargoyle
 		public function gargoyleScore():Number {
 			Begin("Player","racialScore","gargoyle");
@@ -10061,10 +10125,15 @@ use namespace CoC;
 				maxIntCap2 += (40 * newGamePlusMod);
 			}//+20/10-20
 			if (orcaScore() >= 6) {
-				if (orcaScore() >= 12) {
-					maxStrCap2 += (70 * newGamePlusMod);
+				if (orcaScore() >= 20) {
+					maxStrCap2 += (140 * newGamePlusMod);
+					maxTouCap2 += (70 * newGamePlusMod);
+					maxSpeCap2 += (100 * newGamePlusMod);
+				}
+				else if (orcaScore() >= 17) {
+					maxStrCap2 += (125 * newGamePlusMod);
 					maxTouCap2 += (40 * newGamePlusMod);
-					maxSpeCap2 += (70 * newGamePlusMod);
+					maxSpeCap2 += (100 * newGamePlusMod);
 				}
 				else {
 					maxStrCap2 += (35 * newGamePlusMod);
@@ -10316,9 +10385,9 @@ use namespace CoC;
 					maxIntCap2 += (55 * newGamePlusMod);
 				}
 			}//+(15)30/(10-20)30-40
-			if (unicornkinScore() >= 10) {
+			if (unicornkinScore() >= 12) {
 				maxTouCap2 += (55 * newGamePlusMod);
-				maxSpeCap2 += (40 * newGamePlusMod);
+				maxSpeCap2 += (70 * newGamePlusMod);
 				maxIntCap2 += (75 * newGamePlusMod);
 			}//+(15)30/(10-20)30-40
 			if (alicornScore() >= 8) {

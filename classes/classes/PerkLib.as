@@ -2877,6 +2877,15 @@ public class PerkLib
 		public static const WellAdjusted:PerkType = mk("Well Adjusted", "Well Adjusted",
 				"You gain half as much lust as time passes in Mareth.",
 				"You choose the 'Well Adjusted' perk, reducing the amount of lust you naturally gain over time while in this strange land!");
+		public static const WhaleFat:PerkType = mk("Whale fat", "Whale fat",
+				"Your whale fat increase your damage reduction against physical attacks and grants you resistance to cold permanantly.",
+				"You choose the 'Whale fat' perk, making your more resilient against physical attacks and gaining cold affinity permanantly.");
+		public static const WhaleFatEvolved:PerkType = mk("Whale fat, Evolved", "Whale fat, Evolved",
+				"Your whale fat further increase your damage reduction against physical attacks and the duration of juggle is increased by 1 round.",
+				"You choose the 'Whale fat' perk, making your more resilient against physical attacks and increasing the duration of Juggle by 1 round while playing.");
+		public static const WhaleFatFinalForm:PerkType = mk("Whale fat, Final Form", "Whale fat, Final Form",
+				"Your whale fat further increase your damage reduction against physical attacks and the duration of juggle is increased by 1 additionnal round. Juggle can now be used a third time",
+				"You choose the 'Whale fat' perk, making your more resilient against physical attacks and Juggle can now be used a third time while playing.");
 		public static const Whipping:PerkType = mk("Whipping", "Whipping",
 				"Whipping special deal increased damage based on current strength.",
 				"You choose the 'Whipping' perk, making your Whipping special stronger.");
@@ -3176,7 +3185,6 @@ public class PerkLib
 				"Increase max Strength by a percentage equal to the size in ft of the player x4.");
 		public static const TransformationResistance:PerkType = mk("Transformation Resistance", "Transformation Resistance",
 				"Reduces the likelihood of undergoing a transformation. Disables Bad Ends from transformative items.");
-				
 		// Quest, Event & NPC perks
 		public static const AdvancedLeadership:PerkType = mk("Advanced Leadership", "Advanced Leadership",
 				"Allows to form 4 people party.");
@@ -5308,10 +5316,8 @@ public class PerkLib
 			EasterBunnyEggBag.requirePerk(EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
 			}, "Easter Bunny race");*/
-            ElvishPeripheralNervSys.requirePerk(ElvenSense).requireCustomFunction(function (player:Player):Boolean {
-			}, "Easter Bunny race");
 			EclipticMind.requirePerk(EclipticMind).requireCustomFunction(function (player:Player):Boolean {
-				return player.unicornScore() >= 12;
+				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
 			}, "Unicorn or Bicorn race");
 			ElvishPeripheralNervSys.requirePerk(ElvenSense).requireCustomFunction(function (player:Player):Boolean {
                 return player.elfScore() >= 4;
@@ -5668,7 +5674,7 @@ public class PerkLib
 				return player.easterbunnyScore() >= 12;
 			}, "Easter bunny race");
 			EclipticMindEvolved.requireLevel(12).requirePerk(EclipticMindEvolved).requireCustomFunction(function (player:Player):Boolean {
-				return player.easterbunnyScore() >= 12;
+				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
 			}, "Unicorn or Bicorn race");
 			ElvishPeripheralNervSysEvolved.requireLevel(12).requirePerk(ElvishPeripheralNervSys).requireCustomFunction(function (player:Player):Boolean {
                 return player.elfScore() >= 8;
@@ -6042,7 +6048,7 @@ public class PerkLib
 				return player.easterbunnyScore() >= 12;
 			}, "Easter Bunny race");
 			EclipticMindFinalForm.requireLevel(30).requirePerk(EclipticMindFinalForm).requireCustomFunction(function (player:Player):Boolean {
-				return player.unicornScore() >= 12;
+				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
 			}, "Unicorn or Bicorn race");
 			ElvishPeripheralNervSysFinalForm.requireLevel(30).requirePerk(ElvishPeripheralNervSysEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.elfScore() >= 12;

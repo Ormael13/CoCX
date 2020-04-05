@@ -1840,6 +1840,8 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  A pair of yeti ears, bigger than your old human ones have sprouted from the top of your head.");
 			else if(earType == Ears.ORCA)
 				outputText("  A pair of very large fin at least twice as large as your head which help you orient yourself underwater have sprouted from the top of your head. Their underside is white while the top is black.");
+			else if(earType == Ears.ORCA2)
+				outputText("  A pair of rounded protrusions with small holes on the sides of your head serve as your ears.");
 			else if(earType == Ears.SNAKE)
 				outputText("  A pair of large pointy ears covered in small scales stick out from your skull.");
 			else if(earType == Ears.GOAT)
@@ -3086,8 +3088,9 @@ public function RacialScores():void {
 	else if (player.orcScore() >= 1 && player.orcScore() < 5) outputText("\n<font color=\"#008000\">Half Orc: " + player.orcScore() + "</font>");
 	else if (player.orcScore() < 1) outputText("\n<font color=\"#ff0000\">Half Orc: 0</font>");
 	//Orca
-	if (player.orcaScore() >= 12) outputText("\n<font color=\"#0000a0\">Orca-morph: " + player.orcaScore() + " (+" + (70 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (70 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
-	else if (player.orcaScore() >= 6 && player.orcaScore() < 12) outputText("\n<font color=\"#0000a0\">Half Orca-boy/girl: " + player.orcaScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (35 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
+	if (player.orcaScore() >= 20) outputText("\n<font color=\"#0000a0\">Great Orca-boy/girl: " + player.orcaScore() + " (+" + (140 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, +" + (100 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
+	else if (player.orcaScore() >= 17 && player.orcaScore() < 20) outputText("\n<font color=\"#0000a0\">Orca-boy/girl: " + player.orcaScore() + " (+" + (125 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (100 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
+	else if (player.orcaScore() >= 6 && player.orcaScore() < 15) outputText("\n<font color=\"#0000a0\">Half Orca-boy/girl: " + player.orcaScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (35 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
 	else if (player.orcaScore() >= 1 && player.orcaScore() < 6) outputText("\n<font color=\"#008000\">Half Orca-boy/girl: " + player.orcaScore() + "</font>");
 	else if (player.orcaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Orca-boy/girl: 0</font>");
 	//Phantom > Poltergeist
@@ -3233,8 +3236,8 @@ public function RacialScores():void {
 	else if (player.unicornScore() >= 1 && player.unicornScore() < 8) outputText("\n<font color=\"#008000\">Unicorn/Bicorn: " + player.unicornScore() + "</font>");
 	else if (player.unicornScore() < 1) outputText("\n<font color=\"#ff0000\">Unicorn/Bicorn: 0</font>");
 	//UnicornKin
-	if (player.unicornkinScore() >= 10) outputText("\n<font color=\"#0000a0\">Unicornkin/Bicornkin: " + player.unicornkinScore() + " (+" + (55 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (85 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.unicornkinScore() >= 1 && player.unicornScore() < 10) outputText("\n<font color=\"#008000\">Unicorn/Bicorn: " + player.unicornkinScore() + "</font>");
+	if (player.unicornkinScore() >= 12) outputText("\n<font color=\"#0000a0\">Unicornkin/Bicornkin: " + player.unicornkinScore() + " (+" + (55 * (1 + player.newGamePlusMod())) + " max Tou, +" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (85 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+	else if (player.unicornkinScore() >= 1 && player.unicornScore() < 12) outputText("\n<font color=\"#008000\">Unicorn/Bicorn: " + player.unicornkinScore() + "</font>");
 	else if (player.unicornkinScore() < 1) outputText("\n<font color=\"#ff0000\">Unicornkin/Bicornkin: 0</font>");
 	//Vampire
 	if (player.vampireScore() >= 10) outputText("\n<font color=\"#0000a0\">Vampire: " + player.vampireScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Str, +" + (35 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max Int, +" + (45 * (1 + player.newGamePlusMod())) + " max Lib)</font>");

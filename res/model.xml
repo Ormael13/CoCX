@@ -67,7 +67,7 @@
 <model name="demo" dir="./res/charview/" width="200" height="220" scale="2" originX="15" originY="10">
     <palette>
         <!--Colors common for skin/hair/fur/scales/... go here. Can be overriden later-->
-                <common>
+        <common>
             <color name="albino">#f2f2e8</color>
             <color name="aqua">#00cccc</color>
             <color name="ashen">#817d79</color>
@@ -154,9 +154,9 @@
             <color name="platinum blonde">#f7f3e8</color>
             <color name="platinum crimson">#ff745c</color>
             <color name="platinum-blonde">#ffe5c7</color>
-            <color name="purplish-black">#794474</color>
+            <color name="purplish-black">#4b2a48</color>
             <color name="quartz white">#ffffff</color>
-			<color name="pure white">#ffffff</color>
+            <color name="pure white">#ffffff</color>
             <color name="reddish-orange">#df8453</color>
             <color name="rough gray">#525252</color>
             <color name="sandy blonde">#ebd69e</color>
@@ -548,7 +548,7 @@
         <cell rect="91,70,29,32" name="head/scales" dx="80" dy="37"/>
         <cell rect="121,70,29,32" name="head/chitin" dx="80" dy="37"/>
         <cell rect="151,70,29,32" name="head/bee" dx="80" dy="37"/>
-        <cell rect="181,70,29,32" name="head/orca" dx="80" dy="37"/>
+        <cell rect="181,70,29,32" name="head/orca" dx="81" dy="37"/>
         <cell rect="211,70,29,32" name="head/goo" dx="80" dy="37"/>
         <cell rect="271,70,29,32" name="head/panda" dx="80" dy="37"/>
         <cell rect="1,110,29,32" name="face/human" dx="80" dy="37"/>
@@ -557,7 +557,7 @@
         <cell rect="91,110,29,32" name="face/spider" dx="80" dy="37"/>
         <cell rect="121,110,29,32" name="face/insect" dx="80" dy="37"/>
         <cell rect="151,110,29,32" name="face/mouse" dx="80" dy="37"/>
-        <cell rect="181,110,29,32" name="face/orca" dx="80" dy="37"/>
+        <cell rect="181,110,29,32" name="face/orca" dx="79" dy="36"/>
         <cell rect="211,110,29,32" name="face/shark" dx="81" dy="37"/>
         <cell rect="241,110,29,32" name="face/reptile" dx="80" dy="37"/>
         <cell rect="271,110,29,32" name="face/fur2" dx="80" dy="37"/>
@@ -781,7 +781,39 @@
         <cell rect="11,410,49,29" name="bra/goblinTechnomancerBraSmall" dx="69" dy="68"/>
         <cell rect="11,440,49,29" name="bra/goblinTechnomancerBraMedium" dx="69" dy="68"/>
         <cell rect="11,470,49,29" name="bra/goblinTechnomancerBraLarge" dx="69" dy="68"/>
+        <cell rect="261,410,49,29" name="bra/sexyBlackBikiniBraSmall" dx="69" dy="68"/>
+        <cell rect="261,440,49,29" name="bra/sexyBlackBikiniBraMedium" dx="69" dy="68"/>
+        <cell rect="261,470,49,29" name="bra/sexyBlackBikiniBraLarge" dx="69" dy="68"/>
+        <cell rect="311,410,49,29" name="bra/sexyAquamarineBikiniBraSmall" dx="69" dy="68"/>
+        <cell rect="311,440,49,29" name="bra/sexyAquamarineBikiniBraMedium" dx="69" dy="68"/>
+        <cell rect="311,470,49,29" name="bra/sexyAquamarineBikiniBraLarge" dx="69" dy="68"/>
+        <cell rect="361,410,49,29" name="bra/sexyBlueBikiniBraSmall" dx="69" dy="68"/>
+        <cell rect="361,440,49,29" name="bra/sexyBlueBikiniBraMedium" dx="69" dy="68"/>
+        <cell rect="361,470,49,29" name="bra/sexyBlueBikiniBraLarge" dx="69" dy="68"/>
+        <cell rect="411,410,49,29" name="bra/sexyGreenBikiniBraSmall" dx="69" dy="68"/>
+        <cell rect="411,440,49,29" name="bra/sexyGreenBikiniBraMedium" dx="69" dy="68"/>
+        <cell rect="411,470,49,29" name="bra/sexyGreenBikiniBraLarge" dx="69" dy="68"/>
+        <cell rect="461,410,49,29" name="bra/sexyPinkBikiniBraSmall" dx="69" dy="68"/>
+        <cell rect="461,440,49,29" name="bra/sexyPinkBikiniBraMedium" dx="69" dy="68"/>
+        <cell rect="461,470,49,29" name="bra/sexyPinkBikiniBraLarge" dx="69" dy="68"/>
+        <cell rect="511,410,49,29" name="bra/sexyRedBikiniBraSmall" dx="69" dy="68"/>
+        <cell rect="511,440,49,29" name="bra/sexyRedBikiniBraMedium" dx="69" dy="68"/>
+        <cell rect="511,470,49,29" name="bra/sexyRedBikiniBraLarge" dx="69" dy="68"/>
+        <cell rect="561,410,49,29" name="bra/sexyWhiteBikiniBraSmall" dx="69" dy="68"/>
+        <cell rect="561,440,49,29" name="bra/sexyWhiteBikiniBraMedium" dx="69" dy="68"/>
+        <cell rect="561,470,49,29" name="bra/sexyWhiteBikiniBraLarge" dx="69" dy="68"/>
+        <cell rect="611,410,49,29" name="bra/sexyYellowBikiniBraSmall" dx="69" dy="68"/>
+        <cell rect="611,440,49,29" name="bra/sexyYellowBikiniBraMedium" dx="69" dy="68"/>
+        <cell rect="611,470,49,29" name="bra/sexyYellowBikiniBraLarge" dx="69" dy="68"/>
         <cell rect="11,500,49,29" name="panty/goblinTechnomancerPanty" dx="69" dy="99"/>
+        <cell rect="61,500,49,29" name="panty/sexyBlackBikiniPanty" dx="69" dy="99"/>
+        <cell rect="111,500,49,29" name="panty/sexyAquamarineBikiniPanty" dx="69" dy="99"/>
+        <cell rect="161,500,49,29" name="panty/sexyBlueBikiniPanty" dx="69" dy="99"/>
+        <cell rect="211,500,49,29" name="panty/sexyGreenBikiniPanty" dx="69" dy="99"/>
+        <cell rect="261,500,49,29" name="panty/sexyPinkBikiniPanty" dx="69" dy="99"/>
+        <cell rect="311,500,49,29" name="panty/sexyRedBikiniPanty" dx="69" dy="99"/>
+        <cell rect="361,500,49,29" name="panty/sexyWhiteBikiniPanty" dx="69" dy="99"/>
+        <cell rect="411,500,49,29" name="panty/sexyYellowBikiniPanty" dx="69" dy="99"/>
     </spritemap>
     <spritemap file="tails.png">
         <cell rect="1,71,168,139" name="tail/manticore" dx="10" dy="40"/>
@@ -871,6 +903,9 @@
         <cell rect="1,350,84,139" name="wings_bg/demon" dx="10" dy="20"/>
         <cell rect="86,350,83,139" name="wings/demon" dx="95" dy="20"/>
         <cell rect="86,490,83,139" name="wings_front/demon" dx="95" dy="20"/>
+        <cell rect="339,210,84,139" name="wings_bg/nightmare" dx="10" dy="20"/>
+        <cell rect="424,210,83,139" name="wings/nightmare" dx="95" dy="20"/>
+        <cell rect="423,490,83,139" name="wings_front/nightmare" dx="95" dy="20"/>
         <cell rect="508,70,84,139" name="wings_bg/devilfeather" dx="11" dy="12"/>
         <cell rect="593,70,83,139" name="wings/devilfeather" dx="95" dy="12"/>
         <cell rect="339,350,168,139" name="wings/wraith" dx="17" dy="39"/>
@@ -884,6 +919,8 @@
     <layers>	
 		<layer name="fullbody"/>
 		<layer name="overclothe"/>
+		<layer name="hands_fg"/>
+		<layer name="arms_fg"/>
 		<layer name="clotheScarf"/>
 		
 		<layer name="wings_front"/>
@@ -908,8 +945,6 @@
 		<layer name="armorLegs"/>
 		<layer name="panty"/>
 		
-		<layer name="hands_fg"/>
-		<layer name="arms_fg"/>
         <layer name="antennae"/>
         <layer name="horns"/>
         <layer name="ears"/>
@@ -2233,10 +2268,15 @@
                 <show part="wings_bg/feather_large"/>
 				<show part="wings_front/feather_large"/>
             </case>
-            <case values="Wings.IMP,Wings.BAT_LIKE_TINY,Wings.BAT_LIKE_LARGE,Wings.BAT_LIKE_LARGE_2,Wings.NIGHTMARE,Wings.GARGOYLE_LIKE_LARGE"><!--TODO sizes -->
+            <case values="Wings.IMP,Wings.BAT_LIKE_TINY,Wings.BAT_LIKE_LARGE,Wings.BAT_LIKE_LARGE_2,Wings.GARGOYLE_LIKE_LARGE"><!--TODO sizes -->
                 <show part="wings/demon"/>
                 <show part="wings_bg/demon"/>
 				<show part="wings_front/demon"/>
+            </case>
+			<case values="Wings.NIGHTMARE">
+                <show part="wings/nightmare"/>
+                <show part="wings_bg/nightmare"/>
+				<show part="wings_front/nightmare"/>
             </case>
             <case values="Wings.DRACONIC_SMALL,Wings.DRACONIC_LARGE,Wings.DRACONIC_HUGE"><!--TODO sizes -->
                 <show part="wings_bg/scales"/>
@@ -3056,6 +3096,182 @@
 			<show part="panty/goblinTechnomancerPanty"/>	
 			<hide part="penis/*"/>
 			<hide part="balls/*"/>
+		</if>
+		
+		<!--Bikini set -->
+		<if test="sexyBlackBikini">
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="bra/sexyBlackBikiniBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra/sexyBlackBikiniBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra/sexyBlackBikiniBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra/sexyBlackBikiniBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra/sexyBlackBikiniBraLarge"/>
+					</case>
+					<default>
+						<show part="bra/sexyBlackBikiniBraLarge"/>
+					</default>
+				</switch>
+			</if>
+			<if test="isTaur == false and showLegClothing">
+				<show part="panty/sexyBlackBikiniPanty"/>	
+				<hide part="penis/*"/>
+				<hide part="balls/*"/>
+			</if>
+		</if>
+		<if test="sexyAquamarineBikini">
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="bra/sexyAquamarineBikiniBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra/sexyAquamarineBikiniBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra/sexyAquamarineBikiniBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra/sexyAquamarineBikiniBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra/sexyAquamarineBikiniBraLarge"/>
+					</case>
+					<default>
+						<show part="bra/sexyAquamarineBikiniBraLarge"/>
+					</default>
+				</switch>
+			</if>
+			<if test="isTaur == false and showLegClothing">
+				<show part="panty/sexyAquamarineBikiniPanty"/>	
+				<hide part="penis/*"/>
+				<hide part="balls/*"/>
+			</if>
+		</if>
+		<if test="sexyBlueBikini">
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="bra/sexyBlueBikiniBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra/sexyBlueBikiniBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra/sexyBlueBikiniBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra/sexyBlueBikiniBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra/sexyBlueBikiniBraLarge"/>
+					</case>
+					<default>
+						<show part="bra/sexyBlueBikiniBraLarge"/>
+					</default>
+				</switch>
+			</if>
+			<if test="isTaur == false and showLegClothing">
+				<show part="panty/sexyBlueBikiniPanty"/>	
+				<hide part="penis/*"/>
+				<hide part="balls/*"/>
+			</if>
+		</if>
+		<if test="sexyGreenBikini">
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="bra/sexyGreenBikiniBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra/sexyGreenBikiniBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra/sexyGreenBikiniBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra/sexyGreenBikiniBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra/sexyGreenBikiniBraLarge"/>
+					</case>
+					<default>
+						<show part="bra/sexyGreenBikiniBraLarge"/>
+					</default>
+				</switch>
+			</if>
+			<if test="isTaur == false and showLegClothing">
+				<show part="panty/sexyGreenBikiniPanty"/>	
+				<hide part="penis/*"/>
+				<hide part="balls/*"/>
+			</if>
+		</if>
+		<if test="sexyPinkBikini">
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="bra/sexyPinkBikiniBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra/sexyPinkBikiniBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra/sexyPinkBikiniBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra/sexyPinkBikiniBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra/sexyPinkBikiniBraLarge"/>
+					</case>
+					<default>
+						<show part="bra/sexyPinkBikiniBraLarge"/>
+					</default>
+				</switch>
+			</if>
+			<if test="isTaur == false and showLegClothing">
+				<show part="panty/sexyPinkBikiniPanty"/>	
+				<hide part="penis/*"/>
+				<hide part="balls/*"/>
+			</if>
+		</if>
+		<if test="sexyPinkBikini">
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="bra/sexyPinkBikiniBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra/sexyPinkBikiniBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra/sexyPinkBikiniBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra/sexyPinkBikiniBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra/sexyPinkBikiniBraLarge"/>
+					</case>
+					<default>
+						<show part="bra/sexyPinkBikiniBraLarge"/>
+					</default>
+				</switch>
+			</if>
+			<if test="isTaur == false and showLegClothing">
+				<show part="panty/sexyPinkBikiniPanty"/>	
+				<hide part="penis/*"/>
+				<hide part="balls/*"/>
+			</if>
 		</if>
 		
 		<!--Quipao set -->

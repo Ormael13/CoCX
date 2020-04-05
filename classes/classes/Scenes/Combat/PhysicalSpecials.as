@@ -371,6 +371,18 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.requireFatigue(physicalCost(30));
 				}
 			}
+			if (player.orcaScore() > 10 && player.faceType == Face.ORCA) {
+				bd = buttons.add("Play", orcaPlay).hint("Begin toying with your prey by tossing it in the air, initiating a juggling combo.");
+				bd.requireFatigue(physicalCost(30));
+				if (!monster.hasStatusEffect(StatusEffects.Stunned))
+				{
+					bd.disable("<b>You need the ennemy to be stunned in order to use this ability.</b>\n\n");
+				}
+				if (player.tallness < monster.tallness)
+				{
+					bd.disable("<b>You need the ennemy to be smaller then you in order to use this ability.</b>\n\n");
+				}
+			}
 		}
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Dynapunch Glove") >= 0) {
@@ -2695,15 +2707,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(rand(player.spe/2 + 40) + 20 > monster.spe/1.5) {
 			var lustDmgF:Number = 20 + rand(6);
 			var lustBoostToLustDmg:Number = 0;
-			var bimbo:Boolean   = false;
-			var bro:Boolean     = false;
-			var futa:Boolean    = false;
 			if (player.hasPerk(PerkLib.DeadlyThrow)) lustDmgF += (player.spe/100);
 			if (player.findPerk(PerkLib.SensualLover) >= 0) lustDmgF += 2;
 			if (player.findPerk(PerkLib.Seduction) >= 0) lustDmgF += 5;
 			if (player.findPerk(PerkLib.SluttySeduction) >= 0) lustDmgF += player.perkv1(PerkLib.SluttySeduction);
 			if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) lustDmgF += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
-			if (bimbo || bro || futa) lustDmgF += 5;
+			if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) lustDmgF += 5;
 			if (player.findPerk(PerkLib.FlawlessBody) >= 0) lustDmgF += 10;
 			lustDmgF += scalingBonusLibido() * 0.1;
 			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmgF *= 1.5;
@@ -3313,6 +3322,47 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		enemyAI();
+	}
+
+	public function orcaPlay():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if (monster.plural == true) {
+			outputText("You cannot play while fighting multiple opponents at the same times!");
+			addButton(0, "Next", combatMenu, false);
+		}
+		else{
+			if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
+				clearOutput();
+				outputText("You just don't have the energy to start playing right now...");
+				//Gone		menuLoc = 1;
+				menu();
+				addButton(0, "Next", combatMenu, false);
+				return;
+			}
+			if(monster.short == "pod") {
+				clearOutput();
+				outputText("You can't play with something you are inside off!");
+				//Gone		menuLoc = 1;
+				menu();
+				addButton(0, "Next", combatMenu, false);
+				return;
+			}
+			fatigue(10, USEFATG_PHYSICAL);
+			//Amily!
+			if(monster.hasStatusEffect(StatusEffects.Concentration)) {
+				clearOutput();
+				outputText("Amily recovers just in time to get out of your reach as you attempt to grapple her.");
+				enemyAI();
+				return;
+			}
+			//WRAP IT UPPP
+			outputText("You grab [monster the] [monster name] with your jaw while [monster he] is stunned inflicting grievous wounds before you toss [monster him] high in the air!");
+			monster.createStatusEffect(StatusEffects.OrcaPlay, 0,0,0,0);
+			monster.createStatusEffect(StatusEffects.OrcaCanJuggleStill, 0,0,0,0);
+			outputText("\n\n");
+			enemyAI();
+		}
 	}
 
 	public function gooEngulf():void {

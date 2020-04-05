@@ -1153,6 +1153,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Cold Affinity
+			if (player.hasPerk(PerkLib.WhaleFat) && player.findPerk(PerkLib.ColdAffinity) < 0) {
+				outputText("\nYou suddenly no longer feel the cold thanks to your whale fat so you guess you finally got acclimated to the icy winds of the glacial rift. \n\n(<b>Gained Perks: Cold Affinity</b>)\n");
+				player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
+				needNext = true;
+			}
 			if (player.yetiScore() >= 6 && player.findPerk(PerkLib.ColdAffinity) < 0) {
 				outputText("\nYou suddenly no longer feel the cold so you guess you finally got acclimated to the icy winds of the glacial rift. You feel at one with the cold. So well that you actually developed icy power of your own.\n\n(<b>Gained Perks: Cold Affinity and Freezing Breath Yeti</b>)\n");
 				player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
@@ -1164,7 +1169,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.yetiScore() < 6 && player.yukiOnnaScore() < 14 && player.melkieScore() < 8 && player.findPerk(PerkLib.ColdAffinity) >= 0) {
+			else if (player.yetiScore() < 6 && player.yukiOnnaScore() < 14 && player.melkieScore() < 8 && !player.hasPerk(PerkLib.WhaleFat) && player.findPerk(PerkLib.ColdAffinity) >= 0) {
 				outputText("\nYou suddenly feel a chill in the air. You guess you somehow no longer resist the cold.\n\n<b>(Lost Perks: Cold Affinity");
 				player.removePerk(PerkLib.ColdAffinity);
 				if (player.yetiScore() < 6){
@@ -1329,13 +1334,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Titanic Strength
-			if ((player.hydraScore() >= 14 || player.oniScore() >= 12) && player.findPerk(PerkLib.TitanicStrength) < 0) {
+			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 12) && player.tallness >= 84 && player.findPerk(PerkLib.TitanicStrength) < 0) {
 				outputText("\nWhoa you've grown so big its sheer miracle if you don't damage the landscape while moving. This said your size contribute to your strength as well now.\n\n<b>(Gained Titanic Strength perk!)</b>\n");
 				player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if (player.hydraScore() < 14 && player.oniScore() < 12 && player.findPerk(PerkLib.TitanicStrength) >= 0) {
-				outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
+			if ((player.hydraScore() < 14 && player.oniScore() < 12 && player.orcaScore() < 17 || player.tallness < 84)  && player.findPerk(PerkLib.TitanicStrength) >= 0) {
+				if (player.tallness < 84) outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
+				else outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
 				player.removePerk(PerkLib.TitanicStrength);
 				needNext = true;
 			}
@@ -1678,6 +1684,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nA dramatic change in your alignment has altered your formerly corrupt aura into one of purity\n");
 				player.removePerk(PerkLib.AuraOfCorruption);
 				player.createPerk(PerkLib.AuraOfPurity, 0, 0, 0, 0);
+				needNext = true;
+			}
+			//Remove Bullshit
+			if ((player.horns.type != Horns.BICORN || player.horns.type != Horns.UNICORN) && (player.hasPerk(PerkLib.AuraOfPurity) || player.hasPerk(PerkLib.AuraOfCorruption)) && !player.hasPerk(PerkLib.EclipticMind)) {
+				outputText("\nNo idea how you got this weird aura about you but whatever the reason why you had it its gone now.\n");
+				player.removePerk(PerkLib.AuraOfPurity);
+				player.removePerk(PerkLib.AuraOfCorruption);
 				needNext = true;
 			}
 			//Harpy

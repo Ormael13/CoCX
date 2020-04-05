@@ -227,6 +227,7 @@ public class CombatUI extends BaseCombatContent {
 				}
 			}
 			addButton(4, "Maintain", combat.HypnosisMaintain);
+		//Naga grapple
 		} else if (monster.hasStatusEffect(StatusEffects.Constricted) && !monster.hasStatusEffect(StatusEffects.HypnosisNaga)) {
 			menu();
 			addButton(0, "Squeeze", SceneLib.desert.nagaScene.naggaSqueeze).hint("Squeeze some HP out of your opponent! \n\nFatigue Cost: " + physicalCost(20) + "");
@@ -238,6 +239,7 @@ public class CombatUI extends BaseCombatContent {
 				}
 			}
 			addButton(4, "Release", SceneLib.desert.nagaScene.nagaLeggoMyEggo);
+		//Grappling scylla
 		} else if (monster.hasStatusEffect(StatusEffects.ConstrictedScylla)) {
 			menu();
 			addButton(0, "Squeeze", combat.ScyllaSqueeze);
@@ -254,6 +256,14 @@ public class CombatUI extends BaseCombatContent {
 				}
 			}
 			addButton(4, "Release", combat.ScyllaLeggoMyEggo);
+		//Orca be playing rought
+		} else if (monster.hasStatusEffect(StatusEffects.OrcaPlay)) {
+			menu();
+			addButton(0, "Juggle", combat.OrcaJuggle).hint("Deal bite damage and send your foe back in the air at the cost of a fairly decent amount of fatigue. Extend the duration of play by 2 rounds up to twice. \n\nFatigue Cost: " + physicalCost(50) + "");
+			addButton(0, "Smash", combat.OrcaWack).hint("Stun your opponent and smash it back into the air with your weapon.\n\nFatigue Cost: " + physicalCost(20) + "");
+			addButton(0, "Tail wack", combat.OrcaSmash).hint("Smash your opponent with your tail crushing its armor. \n\nFatigue Cost: " + physicalCost(20) + "");
+			addButton(0, "Impale", combat.OrcaImpale).hint("End the game by viciously impaling your falling foe on your weapon. \n\nFatigue Cost: " + physicalCost(20) + "");
+			addButton(4, "Release", combat.OrcaLeggoMyEggo).hint("Stop playing early ");
 		} else if (monster.hasStatusEffect(StatusEffects.GooEngulf)) {
 			menu();
 			addButton(0, "Tease", combat.GooTease).hint("Mold limb to caress and pleasure your grappled foe. \n\nFatigue Cost: " + physicalCost(20) + "");
