@@ -182,7 +182,39 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	private function playTime():void {
 		var locals:* = myLocals;
 		locals["$dangerousPlants"] = player.hasKeyItem("Dangerous Plants") >= 0;
-		scene("strings/playTime", locals);
+		clearOutput();
+		if (isCorrupt){
+			outputText(""+_name+" seems somewhat bored, and it occurs to you that being a mother comes before being the Champion." +
+					"You decide to bring your girl on an excursion, but the pair of you stumble upon a gang of imps." +
+					"You defeat them all to keep your daughter safe, but as you prepare to leave, you’re suddenly hit by a splash on your back." +
+					"You turn around and notice "+_name+" is making a naughty smile, holding one of the imps by the dick, the other hand on his torso.\n\n<i>“Tehehe. Got you, mom.”</i>\n\nOoooh reeeeally? Well then, it’s time you teach your daughter a lesson! " +
+					"You pick one of the imps and grab him by the cock, pumping to make him shoot his cum at your daughter, who laughs as this turn into an all out impshot battle. " +
+					"Imp cum is soon splashing everywhere in the forest, the both of you using trees and bushes as cover. Eventually, you and "+_name+" are covered in so much cum her black fur almost appears white. " +
+					"After a few hours of this, the both of you head back to camp, still laughing.");
+		}
+		else
+		{
+			outputText("You spend some time with your beloved daughter in the forest. " +
+					"The pair of you eventually stumble upon a grove filled with blooming white flowers which she happily gallops towards to in order to smell.\n\n"+
+					"<i>“Mom, they smell </i>so<i> good! Are they blooming all the time like this?”</i>\n\n" +
+					"You admit that you don’t know, as Mareth’s time and space is distorted and difficult to predict at the best of times. ");
+			if(player.inte > 60){
+				outputText("Although you could give a rough estimate if you brought the right tools, some books on Mareth’s local botany would also help");
+				if(player.hasKeyItem("Dangerous Plants") >= 0){
+					outputText(", the only thing you have is that one book from the traveling merchant, but it focuses more on the signs of the more dangerous ones and how to avoid them rather than their life cycle")
+				}
+			}
+			outputText(".\n\n");
+			outputText("She doesn't seem to mind, though. Apparently more interested in playing, the both of you play tag, hide and seek and other such innocent games in the grove. " +
+					"However, an unwanted visitor shows up before the end of the last game. " +
+					"The imp, because it’s clearly an imp, is masturbating, intent on spreading his filth on the flowers. " +
+					"This happening in front of your daughter is <i>unacceptable</i>. " +
+					"You tell her to go play on the other side for a while, so as to allow you to discreetly take care of the annoying little bugger before he has the chance to damage the grove and <output>$name</output>’s innocence. " +
+					"You make sure to dispose of the body properly, not wanting to risk your daughter stumbling upon it and winding up traumatized. That taken care of, you go back to playing with your daughter.\n\n" +
+					"The time passes and eventually both of you head back to camp, your daughter still sporting a wide smile from all the fun she had, none the wiser about your little altercation with that moron of an imp.\n\n" +
+					"As innocent as a day can be in Mareth, even if you had to force the issue. But if it’s for the sake of your daughter having a happy childhood, you would gladly beat this whole crazy realm into submission.")
+		}
+		doNext(camp.returnToCampUseOneHour);
 	}
 
 		//region INTERFACE classes.TimeAwareInterface
