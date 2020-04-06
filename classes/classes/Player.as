@@ -2711,8 +2711,9 @@ use namespace CoC;
 
 		public function race():String {
 
+			var race:String = "human";
 			var ScoreList:Array = [
-				//{ name: 'human', score: humanScore() },
+				{name: 'human', score: 1, minscore: 1},
 				{name: 'minotaur', score: minotaurScore(), minscore: 4},
 				{name: 'lizard', score: lizardScore(), minscore: 4},
 				{name: 'dragon', score: dragonScore(), minscore: 4},
@@ -2797,13 +2798,11 @@ use namespace CoC;
 			ScoreList = ScoreList.filter(function(element:Object, index:int, array:Array):Boolean {
 				return element.score >= element.minscore;
 			});
-
 			ScoreList.sortOn('score', Array.NUMERIC | Array.DESCENDING);
 			var TopRace:String = ScoreList[0].name;
 			var TopScore:Number = ScoreList[0].score;
 
 			//Determine race type:
-			var race:String = "human";
 			if (TopRace == "cat") {
 				if (TopScore >= 4) {
 					if (TopScore >= 8) {
