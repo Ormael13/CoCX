@@ -105,6 +105,9 @@ public function winningOverCaveWyrmWithCaveWyrmDick():void {
 	outputText("She huffs and groans; you're not sure how many times she came or if she's been cumming for minutes already, but ecstasy peaks on her face before she smiles and leans back, palms now on your knees. \"<i>Haaah~</i>\" She groans, wiggling her hips into your crotch as you reach your own orgasmYour member spurts and swells keeping on filling the horny cave wyrm cunt for whats its worth of your glowing seed until her belly balloons out with the sheer volume of your neon blue cum. You can actualy see your cum from inside her stomach as it cause her bellow to glow with the characteristic neon blue of your fluids. \"<i>Ah- good. Finally. Normaly most of my mate dicks melt but yours is thankfully made for this</i>\" She says, before pushing-up off your thighs.\n\n");
 	outputText("She just shrugs. \"<i>Well the bad news is that I still need to get nourishment for the eggs so I can't stay with you, but at least you'll probably make a few hatchling.</i>\" She says before lifting up. While your still recovering from the subsequant orgasms you hear her footsteps carrying her away, and by the time you look, the Cave Wyrm is gone.\n\n");
 	player.sexReward("vaginalFluids");
+	outputText("\n\nThe residual effect of her vaginal acid seems to have enhanced your member sensitivity as well as your libido by a notch.");
+	player.lib+=5;
+	player.sens++;
 	cleanupAfterCombat();
 }
 
