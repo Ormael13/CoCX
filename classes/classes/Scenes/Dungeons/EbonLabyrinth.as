@@ -24,8 +24,9 @@ import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.CoC;
 import classes.StatusEffects;
+import classes.display.SpriteDb;
 
-	public class EbonLabyrinth extends DungeonAbstractContent
+public class EbonLabyrinth extends DungeonAbstractContent
 	{
 		private static const DUNGEON_EBON_LABYRINTH_0:int	= 131;
 		private static const DUNGEON_EBON_LABYRINTH_1:int	= 132;
@@ -383,6 +384,7 @@ import classes.StatusEffects;
 				flags[kFLAGS.CODEX_ENTRY_HYDRA] = 1;
 				outputText("\n\n<b>New codex entry unlocked: Hydra!</b>");
 			}
+			spriteSelect(SpriteDb.s_hydra_16bit);
 			outputText("The first telltale that something might have gone really wrong is the hissing which seems to come from all around the room. The only warning you get of the impending attack is a sudden move of the shadows as a massive snake head bites the air mere inches from your face. You ready for battle as several huge snakes comes out of the shadow, each connected to a single junction to what appears to be the body of a very tall woman.\n\n");
 			if (player.isNaga()) {
 				outputText("\"<i>Why, would you look at that, how did you little grass snake make it all the way here. Are you perhaps lost?</i>\"\n\n");

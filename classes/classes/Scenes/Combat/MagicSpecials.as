@@ -653,7 +653,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
 				outputText("  " + monster.capitalA + monster.short + " scream for an instant as it is flash frozen solid by the wave along with everything around it! Your opponent now trapped in a block of ice tries very hard to burst out and get free of its glacial prison.");
-				monster.createStatusEffect(StatusEffects.FreezingBreathStun,3,0,0,0);
+				monster.createStatusEffect(StatusEffects.FrozenSolid,3,0,0,0);
 			}
 			else {
 				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
@@ -756,7 +756,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if(!monster.plural) outputText("is ");
 				else outputText("are");
 				outputText(" frozen solid!");
-				monster.createStatusEffect(StatusEffects.FreezingBreathStun,3,0,0,0);
+				monster.createStatusEffect(StatusEffects.FrozenSolid,3,0,0,0);
 			}
 			else {
 				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");

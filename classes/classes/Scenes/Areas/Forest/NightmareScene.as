@@ -8,13 +8,15 @@ package classes.Scenes.Areas.Forest
 	import classes.BodyParts.Horns;
 	import classes.BodyParts.Wings;
 	import classes.Scenes.NPCs.CelessScene;
-	
-	public class NightmareScene extends BaseContent
+import classes.display.SpriteDb;
+
+public class NightmareScene extends BaseContent
 	{
 		public function NightmareScene() 
 		{}
 		
 		public function nightmareIntro():void {
+			spriteSelect(SpriteDb.s_celessBlack);
 			clearOutput();
 			outputText("As you explore the deepwoods you come upon a particularly corrupted grove. At the center of it you see many demons busy fucking each other, some of them wearing armors and weapons. The demons could’ve been a concern if not for an even bigger threat looming at the epicenter of this scene of utter decadence. At the middle of a grove a centauress is busy fucking what seems to be a dog morph. ");
 			outputText("Her massive horsecock bulges clearly visible in the woman’s stomach and each thrust rocks the adventurer’s body as her features begin to change. The dog woman is begging but the centauress won’t stop, and you see the telltale sign of orgasm as her eyes roll, filling the woman with a massive amount of cum. The centauress screaming her delight.\n\n");

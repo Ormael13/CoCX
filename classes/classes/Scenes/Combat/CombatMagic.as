@@ -2386,7 +2386,7 @@ public class CombatMagic extends BaseCombatContent {
 			outputText(" " + monster.a + monster.short + " is encased in a thick layer of ice.\n\n");
 			if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 			if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
-			monster.createStatusEffect(StatusEffects.Stunned,5,0,0,0);
+			monster.createStatusEffect(StatusEffects.FrozenSolid,5,0,0,0);
 			checkAchievementDamage(damage);
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);

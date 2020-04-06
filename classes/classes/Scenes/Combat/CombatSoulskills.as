@@ -258,13 +258,13 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
-		if (monster.hasStatusEffect(StatusEffects.Frozen)) {
+		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
 			outputText("Your [weapon] hits the ice in three specific points, making it explode along with your frozen adversary!");
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
-			monster.spe += monster.statusEffectv1(StatusEffects.Frozen);
-			monster.removeStatusEffect(StatusEffects.Frozen);
+			monster.spe += monster.statusEffectv1(StatusEffects.FrozenSolid);
+			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
 		}
 		else {
@@ -293,7 +293,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownSextupleThrust, 1, 0, 0, 0);
-		if (monster.hasStatusEffect(StatusEffects.Frozen)) {
+		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
 			outputText("Your [weapon] hits the ice in three specific points, making it explode along with your frozen adversary!");
 			MultiThrustD();
 			MultiThrustD();
@@ -301,8 +301,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
-			monster.spe += monster.statusEffectv1(StatusEffects.Frozen);
-			monster.removeStatusEffect(StatusEffects.Frozen);
+			monster.spe += monster.statusEffectv1(StatusEffects.FrozenSolid);
+			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
 		}
 		else {
@@ -334,7 +334,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownNonupleThrust, 2, 0, 0, 0);
-		if (monster.hasStatusEffect(StatusEffects.Frozen)) {
+		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
 			outputText("Your [weapon] hits the ice in three specific points, making it explode along with your frozen adversary!");
 			MultiThrustD();
 			MultiThrustD();
@@ -345,8 +345,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
-			monster.spe += monster.statusEffectv1(StatusEffects.Frozen);
-			monster.removeStatusEffect(StatusEffects.Frozen);
+			monster.spe += monster.statusEffectv1(StatusEffects.FrozenSolid);
+			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
 		}
 		else {
@@ -431,7 +431,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-		if (monster.hasStatusEffect(StatusEffects.Frozen)) damage *= 2;
+		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) damage *= 2;
 		var d2:Number = 0.9;
 		d2 += (rand(21) * 0.01);
 		damage *= d2;
@@ -895,10 +895,10 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		damage *= soulskillMod();
 		damage *= corruptionMulti;
-		if (player.findPerk(PerkLib.PerfectStrike) >= 0 && (monster.hasStatusEffect(StatusEffects.Frozen) || monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.FreezingBreathStun))) damage *= 1.5;
+		if (player.findPerk(PerkLib.PerfectStrike) >= 0 && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.FrozenSolid))) damage *= 1.5;
 		if (damage > 0) {
 			outputText("You thrust your palm forward, causing a blast of pure energy to slam against " + monster.a + monster.short + ", tossing");
-			if ((monster as Monster).plural == true) outputText(" them");
+			if ((monster as Monster).plural) outputText(" them");
 			else outputText((monster as Monster).mfn(" him", " her", " it"));
 			outputText(" back a few feet.\n\n");
 			if (silly() && corruptionMulti >= 1.75) outputText("It's super effective!  ");
@@ -913,7 +913,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) damage *= 2;
 			outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + damage + "</font></b> damage.\n\n");
-			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+			if (crit) outputText(" <b>*Critical Hit!*</b>");
 		}
 		else {
 			damage = 0;
@@ -942,7 +942,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage += player.wis;
 		damage += scalingBonusWisdom();
 		//other bonuses
-		if (player.findPerk(PerkLib.PerfectStrike) >= 0 && (monster.hasStatusEffect(StatusEffects.Frozen) || monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.FreezingBreathStun))) damage *= 1.5;
+		if (player.findPerk(PerkLib.PerfectStrike) >= 0 && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.FrozenSolid))) damage *= 1.5;
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		var crit:Boolean = false;
@@ -961,24 +961,24 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("Air seems to lose all temperature around your fist as you dash at " + monster.a + monster.short + " and shove your palm on " + monster.pronoun2 + ", " + monster.pronoun3 + " body suddenly is frozen solid, encased in a thick block of ice! ");
 		damage = doIceDamage(damage, true, true);
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
-		if (monster.hasStatusEffect(StatusEffects.Frozen)) {
+		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
 			if (monster.spe - 20 >= 0) {
-				monster.addStatusValue(StatusEffects.Frozen, 1, 20);
+				monster.addStatusValue(StatusEffects.FrozenSolid, 1, 20);
 				monster.spe -= 20;
 			}
 			else {
-				monster.addStatusValue(StatusEffects.Frozen, 1, monster.spe);
+				monster.addStatusValue(StatusEffects.FrozenSolid, 1, monster.spe);
 				monster.spe -= monster.spe;
 			}
 		}
 		else {
-			monster.createStatusEffect(StatusEffects.Frozen, 0, 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.FrozenSolid, 0, 0, 0, 0);
 			if (monster.spe - 20 >= 0) {
-				monster.addStatusValue(StatusEffects.Frozen, 1, 20);
+				monster.addStatusValue(StatusEffects.FrozenSolid, 1, 20);
 				monster.spe -= 20;
 			}
 			else {
-				monster.addStatusValue(StatusEffects.Frozen, 1, monster.spe);
+				monster.addStatusValue(StatusEffects.FrozenSolid, 1, monster.spe);
 				monster.spe -= monster.spe;
 			}
 		}
@@ -1016,7 +1016,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			else damage *= 2;
 		}
 		//other bonuses
-		if (player.findPerk(PerkLib.PerfectStrike) >= 0 && (monster.hasStatusEffect(StatusEffects.Frozen) || monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.FreezingBreathStun))) damage *= 1.5;
+		if (player.findPerk(PerkLib.PerfectStrike) >= 0 && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.FrozenSolid))) damage *= 1.5;
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1101,7 +1101,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			damage += damage1;
 		}
 		//other bonuses
-		if (player.findPerk(PerkLib.PerfectStrike) >= 0 && (monster.hasStatusEffect(StatusEffects.Frozen) || monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.FreezingBreathStun))) damage *= 1.5;
+		if (player.findPerk(PerkLib.PerfectStrike) >= 0 && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.FrozenSolid))) damage *= 1.5;
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1144,7 +1144,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//soulskill mod effect
 		damage *= combat.soulskillMagicalMod();
 		//other bonuses
-		if (player.findPerk(PerkLib.PerfectStrike) >= 0 && (monster.hasStatusEffect(StatusEffects.Frozen) || monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.FreezingBreathStun))) damage *= 1.5;
+		if (player.findPerk(PerkLib.PerfectStrike) >= 0 && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.FrozenSolid))) damage *= 1.5;
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyGigantType) >= 0)) damage *= 2;
 		var crit:Boolean = false;
 		var critChance:int = 5;

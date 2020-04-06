@@ -70,6 +70,7 @@ public class OnikiriSake extends Consumable {
 			}
 			changes++;
 		}
+
 		if (rand(3) == 0 && changes < changeLimit) {
 			if (player.tou <= 50) {
 				outputText("\n\nYour hide... skin... whatever... you can feel it getting tougher as it thickens perceptibly.");
@@ -83,6 +84,7 @@ public class OnikiriSake extends Consumable {
 			}
 			changes++;
 		}
+
 		if (changes < changeLimit && rand(3) == 0 && player.tone < player.maxToneCap()) {
 			outputText(player.modTone(player.maxToneCap(), 3));
 		}

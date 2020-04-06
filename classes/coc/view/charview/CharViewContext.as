@@ -26,6 +26,7 @@ import classes.Items.ArmorLib;
 import classes.Player;
 import classes.StatusEffects;
 import classes.CockTypesEnum;
+import classes.VaginaClass;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
 
@@ -41,6 +42,9 @@ public class CharViewContext extends ExecContext {
 			{}, // local variables
 			character,
 			{
+
+				CaveWyrmPussy: player.vaginaType() == VaginaClass.CAVE_WYRM,
+				CaveWyrmNipples: player.hasStatusEffect(StatusEffects.GlowingNipples),
 				showClothing: [LowerBody.LION,LowerBody.GARGOYLE,LowerBody.GARGOYLE_2].indexOf(player.lowerBody) <= 0,
 				showArmClothing: [Arms.LION,Arms.DISPLACER,Arms.GARGOYLE,Arms.GARGOYLE_2,Arms.YETI,Arms.HINEZUMI].indexOf(player.arms.type) <= 0,
 				showLegClothing: [LowerBody.YETI,LowerBody.HOOFED,LowerBody.HARPY,LowerBody.GOO,LowerBody.NAGA,LowerBody.DRIDER,LowerBody.HINEZUMI,LowerBody.MELKIE].indexOf(player.lowerBody) <= 0,
@@ -74,6 +78,7 @@ public class CharViewContext extends ExecContext {
 				StatusEffects: StatusEffects,
 
 				// Viewable Clothing lists
+				armStanceNonBannedList: player.armor == game.armors.B_QIPAO || player.armor == game.armors.G_QIPAO || player.armor == game.armors.P_QIPAO || player.armor == game.armors.R_QIPAO,
 				yukiDress: player.armor == game.armors.BLIZZ_K,
 				sakuraPetalKimono: player.armor == game.armors.SPKIMO,
 				whiteKimono: player.armor == game.armors.WKIMONO,
@@ -88,6 +93,14 @@ public class CharViewContext extends ExecContext {
 				centaurBlackguardArmor: player.armor == game.armors.CTPALAD,
 				centaurPaladinArmor: player.armor == game.armors.CTPALAD,
 				goblinTechnomancerClothe: player.armor == game.armors.GTECHC_,
+				sexyAquamarineBikini: player.armor == game.armors.SAQBIKNI,
+				sexyBlackBikini: player.armor == game.armors.SBABIKNI,
+				sexyBlueBikini: player.armor == game.armors.SBUBIKNI,
+				sexyGreenBikini: player.armor == game.armors.SGRBIKNI,
+				sexyPinkBikini: player.armor == game.armors.SPIBIKNI,
+				sexyRedBikini: player.armor == game.armors.SREBIKNI,
+				sexyWhiteBikini: player.armor == game.armors.SWHBIKNI,
+				sexyYellowBikini: player.armor == game.armors.SYEBIKNI,
 				platemail: player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 
 				//viewable bra list
