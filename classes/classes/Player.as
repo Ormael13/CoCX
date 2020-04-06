@@ -6560,7 +6560,7 @@ use namespace CoC;
 			Begin("Player","racialScore","cavewyrm");
 			var cavewyrmCounter:Number = 0;
 			if (hasPartialCoat(Skin.SCALES)) {
-				if (coatColor == "black") cavewyrmCounter++;
+				if (coatColor == "midnight black") cavewyrmCounter++;
 				cavewyrmCounter++;
 			}
 			if (skinTone == "greyish blue")
@@ -6568,6 +6568,8 @@ use namespace CoC;
 			if (ears.type == Ears.CAVE_WYRM)
 				cavewyrmCounter++;
 			if (eyes.type == Eyes.CAVE_WYRM)
+				cavewyrmCounter++;
+			if (eyes.colour == "neon blue")
 				cavewyrmCounter++;
 			if (tongue.type == Tongue.CAVE_WYRM)
 				cavewyrmCounter++;

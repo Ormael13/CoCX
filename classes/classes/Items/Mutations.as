@@ -6667,7 +6667,7 @@ public final class Mutations extends MutationsHelper
 			//Lizard eyes
 			if (changes < changeLimit && rand(3) == 0 && player.faceType == Face.SALAMANDER_FANGS && player.eyes.type == Eyes.HUMAN) {
 				outputText("\n\nSomething shift in your eyes as the level of light around you seems to increase. You go to check on what happened and discover your pupils not only changed to reptilian slits but now glow with a neon blue light. Well seeing in the dark will be easy with your <b>new dark blue iris with reptilian neon blue pupils that glow in the dark.</b>");
-				setEyeTypeAndColor(Eyes.CAVE_WYRM, "dark blue");
+				setEyeTypeAndColor(Eyes.CAVE_WYRM, "neon blue");
 				changes++;
 			}
 			//Remove odd eyes
@@ -6696,7 +6696,7 @@ public final class Mutations extends MutationsHelper
 			if (player.hasPlainSkinOnly() && rand(3) == 0) {
 				outputText("\n\nYou feel your skin shift as black scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.");
 				outputText("  <b>Your body is now partially covered with small patches of black scales!</b>");
-				player.skin.growCoat(Skin.SCALES,{color:"black"},Skin.COVERAGE_LOW);
+				player.skin.growCoat(Skin.SCALES,{color:"midnight black"},Skin.COVERAGE_LOW);
 				changes++;
 			}
 			if (!player.hasPartialCoat(Skin.SCALES) && !player.isGargoyle() && rand(4) == 0) {

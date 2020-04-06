@@ -67,7 +67,7 @@
 <model name="demo" dir="./res/charview/" width="200" height="220" scale="2" originX="15" originY="10">
     <palette>
         <!--Colors common for skin/hair/fur/scales/... go here. Can be overriden later-->
-        <common>
+                <common>
             <color name="albino">#f2f2e8</color>
             <color name="aqua">#00cccc</color>
             <color name="ashen">#817d79</color>
@@ -97,6 +97,7 @@
             <color name="green">#08a108</color>
             <color name="indigo">#4d0080</color>
             <color name="light">#feebd7</color>
+            <color name="neon blue">#29eaff</color>
             <color name="mahogany">#81473b</color>
             <color name="mahogany2">#672828</color>
             <color name="metallic">#9c9c9c</color>
@@ -134,7 +135,7 @@
             <color name="ghostly pale">#e3deed</color>
             <color name="glacial white">#dee5f2</color>
             <color name="golden blonde">#f5d88a</color>
-            <color name="grayish-blue">#b0c9e3</color>
+            <color name="grayish-blue">#3f3f50</color>
             <color name="iridescent gray">#999999</color>
             <color name="leaf green">#5eba5e</color>
             <color name="light blonde">#ffe78f</color>
@@ -571,6 +572,7 @@
         <cell rect="511,110,29,32" name="face/demonlewd" dx="80" dy="37"/>
         <cell rect="541,110,29,32" name="face/ghost" dx="81" dy="38"/>
         <cell rect="571,110,29,32" name="face/melancholic" dx="81" dy="38"/>
+        <cell rect="601,110,29,32" name="face/caveWyrm" dx="81" dy="38"/>
         <cell rect="1,150,29,32" name="eyes/human" dx="80" dy="37"/>
         <cell rect="31,150,29,32" name="eyes/devil" dx="80" dy="37"/>
         <cell rect="61,150,29,32" name="eyes/cat" dx="80" dy="37"/>
@@ -583,6 +585,7 @@
         <cell rect="271,150,29,32" name="eyes/yandere" dx="80" dy="37"/>
         <cell rect="301,150,29,32" name="eyes/goat" dx="80" dy="37"/>
         <cell rect="331,150,29,32" name="eyes/centipede" dx="80" dy="37"/>
+        <cell rect="361,150,29,32" name="eyes/caveWyrm" dx="80" dy="37"/>
         <cell rect="1,190,29,32" name="ears_bg/human" dx="80" dy="37"/>
         <cell rect="31,190,29,32" name="ears/fur" dx="80" dy="37"/>
         <cell rect="61,190,59,32" name="ears_bg/elfin" dx="65" dy="37"/>
@@ -615,6 +618,8 @@
         <cell rect="631,256,29,65" name="ears/panda" dx="80" dy="8"/>
         <cell rect="661,190,59,32" name="ears_bg/shark" dx="66" dy="38"/>
         <cell rect="661,223,59,32" name="ears/shark" dx="66" dy="38"/>
+        <cell rect="721,190,59,32" name="ears_bg/caveWyrm" dx="66" dy="38"/>
+        <cell rect="721,223,59,32" name="ears/caveWyrm" dx="66" dy="38"/>
         <cell rect="541,330,87,97" name="ears_truebg/melkie" dx="50" dy="36"/>
         <cell rect="1,396,59,65" name="horns/orchid" dx="65" dy="4"/>
         <cell rect="61,396,59,65" name="horns/devil" dx="62" dy="4"/>
@@ -687,6 +692,8 @@
         <cell rect="311,230,49,58" name="penis/human2big" dx="68" dy="106"/>
         <cell rect="261,260,49,29" name="penis/chitin" dx="68" dy="106"/>
         <cell rect="361,230,49,58" name="penis/chitinbig" dx="68" dy="106"/>
+        <cell rect="561,290,49,35" name="penis/caveWyrm" dx="68" dy="106"/>
+        <cell rect="561,230,49,58" name="penis/caveWyrmbig" dx="68" dy="106"/>
         <cell rect="11,290,49,29" name="balls/Bhumansmall" dx="69" dy="104"/>
         <cell rect="11,320,49,29" name="balls/Bhumanlarge" dx="69" dy="104"/>
         <cell rect="11,350,49,29" name="balls/Bhumanhuge" dx="69" dy="105"/>
@@ -733,6 +740,8 @@
         <cell rect="311,230,49,58" name="penis/human2big_taur" dx="108" dy="134"/>
         <cell rect="261,260,49,29" name="penis/chitin_taur" dx="109" dy="135"/>
         <cell rect="361,230,49,58" name="penis/chitinbig_taur" dx="108" dy="134"/>
+        <cell rect="561,290,49,35" name="penis/caveWyrm_taur" dx="108" dy="135"/>
+        <cell rect="561,230,49,58" name="penis/caveWyrmbig_taur" dx="108" dy="135"/>
         <cell rect="11,290,49,29" name="balls/Bhumansmall_taur" dx="111" dy="128"/>
         <cell rect="11,320,49,29" name="balls/Bhumanlarge_taur" dx="111" dy="128"/>
         <cell rect="11,350,49,29" name="balls/Bhumanhuge_taur" dx="111" dy="128"/>
@@ -764,8 +773,12 @@
         <cell rect="561,110,49,29" name="overskin/Bpyeti" dx="69" dy="68"/>
         <cell rect="561,140,49,29" name="overskin/Byeti" dx="69" dy="68"/>
         <cell rect="561,170,49,29" name="overskin/Blyeti" dx="69" dy="68"/>
+        <cell rect="611,110,49,29" name="overskin/BpcaveWyrm" dx="69" dy="68"/>
+        <cell rect="611,140,49,29" name="overskin/BcaveWyrm" dx="69" dy="68"/>
+        <cell rect="611,170,49,29" name="overskin/BlcaveWyrm" dx="69" dy="68"/>
         <cell rect="261,200,49,29" name="overskinpanty/yetipanty" dx="70" dy="99"/>
-        <cell rect="311,200,49,29" name="overskinpanty/Bvenom" dx="65" dy="104"/>
+        <cell rect="311,200,49,29" name="overskinpanty/Ookumukadevenom" dx="65" dy="104"/>
+        <cell rect="361,200,49,29" name="overskinpanty/caveWyrm" dx="70" dy="112"/>
         <cell rect="61,410,49,29" name="bra_fg/qipaoRedBraSmall" dx="69" dy="68"/>
         <cell rect="61,440,49,29" name="bra_fg/qipaoRedBraMedium" dx="69" dy="68"/>
         <cell rect="61,470,49,29" name="bra_fg/qipaoRedBraLarge" dx="69" dy="68"/>
@@ -1046,6 +1059,7 @@
 		<!-- VARIABLES AREA -->
 		<set var="hydraTails" value="statusEffectv1(StatusEffects.HydraTailsPlayer)"/>
 		<set var="big" value="(cocks[0].cockLength gt 12) ? 'big' : ''"/>
+		<!--<set var="CaveWyrmNipples" value="hasStatusEffect(StatusEffects.GlowingNipples)"/>-->
 		
 		<!-- CLOTHING VARIABLES AREA -->
 		
@@ -1197,6 +1211,10 @@
                 <show part="ears/shark"/>
                 <show part="ears_bg/shark"/>
             </case>
+            <case values="Ears.CAVE_WYRM">
+                <show part="ears/caveWyrm"/>
+                <show part="ears_bg/caveWyrm"/>
+            </case>
             <default> <!-- TODO RED_PANDA, AVIAN, GRYPHON -->
                 <show part="ears_bg/human"/>
             </default>
@@ -1237,6 +1255,9 @@
             </case>
             <case values="Eyes.CENTIPEDE">
                 <show part="eyes/centipede"/>
+            </case>
+			<case values="Eyes.CAVE_WYRM">
+                <show part="eyes/caveWyrm"/>
             </case>
             <default>
                 <show part="eyes/human"/>
@@ -1496,6 +1517,12 @@
                     <hide part="face/human_fang"/>
 					<show part="face/melancholic"/>
 				</if>
+				<if test="faceType == Face.SALAMANDER_FANGS">
+					<if test="tongue.type == Tongue.CAVE_WYRM">
+						<hide part="face/human_fang"/>
+						<show part="face/caveWyrm"/>
+					</if>
+				</if>
             </case>
             <case values="Face.ORCA">
                 <show part="face/orca"/>
@@ -1548,7 +1575,31 @@
                 </default>
             </switch>
         </if>
-
+        <!-- nipple colors -->
+		<if test="breastRows.length gt 0">
+			<if test="CaveWyrmNipples">
+            <switch>
+                <case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+                    <show part="overskin/BpcaveWyrm"/>
+                </case>
+                <case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+                    <show part="overskin/BpcaveWyrm"/>
+                </case>
+				<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+                    <show part="overskin/BcaveWyrm"/>
+                </case>
+				<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+                    <show part="overskin/BcaveWyrm"/>
+                </case>
+				<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+                    <show part="overskin/BlcaveWyrm"/>
+                </case>
+                <default>
+                    <show part="overskin/BlcaveWyrm"/>
+                </default>
+            </switch>
+			 </if>
+        </if>
 
 		<!-- ARMS AREA -->
         <switch value="arms.type">
@@ -1615,7 +1666,7 @@
                 <show part="arms/bee"/>
                 <show part="arms_bg/bee"/>
             </case>
-            <case values="Arms.SALAMANDER">
+            <case values="Arms.SALAMANDER,Arms.CAVE_WYRM">
                 <hide part="arms/*"/>
                 <hide part="arms_bg/*"/>
                 <show part="arms/pscales"/>
@@ -2026,7 +2077,7 @@
                 <hide part="legs/*"/>
                 <show part="legs/gooblob"/>
             </case>
-			<case values="LowerBody.LIZARD,LowerBody.DRAGON,LowerBody.SALAMANDER">
+			<case values="LowerBody.LIZARD,LowerBody.DRAGON,LowerBody.SALAMANDER,LowerBody.CAVE_WYRM">
                 <switch>
                     <case test="legCount==4">
                         <hide part="legs/*"/>
@@ -2390,7 +2441,7 @@
 					</else>
 				</if>
             </case>
-            <case values="Tail.LIZARD,Tail.DRACONIC">
+            <case values="Tail.LIZARD,Tail.DRACONIC,Tail.CAVE_WYRM">
 				<if test="isTaur()">
 					<show part="tail/reptile_taur"/>
 					<else>
@@ -2625,6 +2676,15 @@
                         </else>
                     </if>
                 </case>
+				
+				<case values="CockTypesEnum.CAVE_WYRM">
+                    <if test="big">
+                        <show part="penis/caveWyrmbig$taur"/>
+                        <else>
+                            <show part="penis/caveWyrm$taur"/>
+                        </else>
+                    </if>
+                </case>
                 <!-- <case values="CockTypesEnum.HUMAN"></case> use default -->
                 <default>
                     <if test="big">
@@ -2639,6 +2699,11 @@
                 <hide part="penis/*"/>
             </if>
         </if>
+		
+		<!-- Unique pussy AREA -->
+		<if test="CaveWyrmPussy">
+			<show part="overskinpanty/caveWyrm"/>
+		</if>
 
 		<!-- BALLS AREA -->
         <if test="balls gt 0">
