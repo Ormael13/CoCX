@@ -233,12 +233,12 @@ public class PerkLib
 				"Seductive experience causes your tease attacks to be 15% more effective.", null, true);
 		
 		// Ordinary (levelup) perks
-		public static const Apex:PerkType = mk("Apex", "Apex",
-				"Add up to 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Racial Paragon.",
-				"You choose the 'Apex' perk. Further increasing your specialisation into a unique race and increasing racial skill power by 50%.");
 		public static const AlphaAndOmega:PerkType = mk("Alpha and Omega", "Alpha and Omega",
 				"Add up to 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Apex.",
 				"You choose the 'Alpha and Omega' perk. Further increasing your specialisation into a unique race and increasing racial skill power by an addtionnal 50%.");
+		public static const Apex:PerkType = mk("Apex", "Apex",
+				"Add up to 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Racial Paragon.",
+				"You choose the 'Apex' perk. Further increasing your specialisation into a unique race and increasing racial skill power by 50%.");
 		public static const DevastatingCharge:PerkType = mk("Devastating charge", "Devastating charge",
 				"When using the charge action you have a 20% chance to stun the opponent for a round. Charge is 50% more powerful.",
 				"You choose the 'Devastating charge' perk, when using the charge action you have a 20% chance to stun the opponent for a round. Charge is 50% more powerful.");
@@ -266,6 +266,10 @@ public class PerkLib
 		public static const MotivationSu:PerkType = mk("Motivation (Su)", "Motivation (Su)",
 				"Decrease to 5% henchmans idle time during combat.",
 				"You choose the 'Motivation (Su)' perk, further increasing motivation of allies to act in combat.");
+		public static const PowerShot:PerkType = mk("Power Shot", "Power Shot",
+				"Enable Power Shoot p. special. Add some of your strength (~40% of str scaling value) to bow damage.",
+				"You choose the 'Power Shot' perk. Enable Power Shoot p. special. Add some of your strength (~40% of str scaling value) to bow damage.");
+		public static const PurityElixir:PurityElixirPerk = new PurityElixirPerk();
 		public static const ShootTheLoadAndHitTheRoad:PerkType = mk("Shoot the load and hit the road", "Shoot the load and hit the road",
 				"Removes penalty to libido and boost slightly speed. (+5 to max spe - scalable).",
 				"You choose the 'Shoot the load and hit the road' perk, removing penalty to libido and slight boosting speed.");
@@ -293,10 +297,6 @@ public class PerkLib
 		public static const WispMajor:PerkType = mk("Wisp Major", "Wisp Major",
 				"Increase wisp commanding aura boosting other summoned pets/minions attack power effects by 40% (100% in total).",
 				"You choose the 'Wisp Major' perk, training your wisp to Wisp Major.");
-		public static const PowerShot:PerkType = mk("Power Shot", "Power Shot",
-				"Enable Power Shoot p. special. Add some of your strength (~40% of str scaling value) to bow damage.",
-				"You choose the 'Power Shot' perk. Enable Power Shoot p. special. Add some of your strength (~40% of str scaling value) to bow damage.");
-		public static const PurityElixir:PurityElixirPerk = new PurityElixirPerk();
 		public static const TooAngryToDie:PerkType = mk("Too Angry to Die", "Too Angry to Die",
 				"+600 to max Wrath.",//stay alive when berserking at cost of super fast 20% max wrath drain per turn when below min HP or above max Lust (?drain decreased by some specific perks?)?
 				"You choose the 'Too Angry to Die' perk, .");
@@ -1788,6 +1788,9 @@ public class PerkLib
 		public static const Lifeline:PerkType = mk("Lifeline", "Lifeline",
 				"Increases self healing by 90 out of combat and by 45 in combat (using defend option will double it).",
 				"You choose the 'Lifeline' perk, increasing your self healing.");
+		public static const LightningReload:PerkType = mk("Lightning Reload", "Lightning Reload",
+				"Allow to reload in middle of shooting as long PC have enough fatigue for that without ending turn.",
+				"You choose the 'Lightning Reload' perk, lowering even more time needed to reload with ammo range weapons like pistols.");
 		public static const LightningStrikes:PerkType = mk("Lightning Strikes", "Lightning Strikes",
 				"[if(player.spe>=60)" +
 						"Increases the attack damage for non-heavy/non-small weapons.</b>" +
@@ -2294,23 +2297,20 @@ public class PerkLib
 		public static const QuickStrike:PerkType = mk("Quick Strike", "Quick Strike",
 				"Add speed based scaling of melee attacks when using small weapon(s). It effect is added on top of Speed Demon perk boost.",
 				"You choose the 'Quick Strike' perk, allowing you to use your speed when attacking with small melee weapons.");
-		public static const Rage:PerkType = mk("Rage", "Rage",
-				"Increasing crit chance by up to 50% in berserk state that would reset after succesful crit attack.",
-				"You choose the 'Rage' perk, increasing crit chance by up to 50% in berserk state until next crit attack.");
-		public static const RapidReload:PerkType = mk("Rapid Reload", "Rapid Reload",
-				"Allow to not spend whole turn to use Reload button as long PC got enough fatigue.",
-				"You choose the 'Rapid Reload' perk, lowering time needed to reload ammo for range weapons like pistols.");
-		public static const LightningReload:PerkType = mk("Lightning Reload", "Lightning Reload",
-				"Allow to reload in middle of shooting as long PC have enough fatigue for that without ending turn.",
-				"You choose the 'Lightning Reload' perk, lowering even more time needed to reload with ammo range weapons like pistols.");
 		public static const RacialParagon:PerkType = mk("Racial Paragon", "Racial Paragon",
 				"Add up to 1 to each stat per level and increase racial skill power by 50% but remove all chimerical disposition stat gains and degeneration as well lock you into a single race.",
 				"You choose the 'Racial Paragon' perk, chosing to specialise into a specific race and increasing racial skill power by 50%.");
+		public static const Rage:PerkType = mk("Rage", "Rage",
+				"Increasing crit chance by up to 50% in berserk state that would reset after succesful crit attack.",
+				"You choose the 'Rage' perk, increasing crit chance by up to 50% in berserk state until next crit attack.");
 		public static const RagingInferno:PerkType = mk("Raging Inferno", "Raging Inferno",
 				"Cumulative 20% damage increase for every subsequent fire spell without interruption.",
 				"You choose the 'Raging Inferno' perk. Cumulative 20% damage increase for every subsequent fire spell without interruption.");
 				//"Cumulative 10% damage increase for every subsequent fire spell. Each turn without casted fire spell lower damage by 10%.",
 				//"You choose the 'Raging Inferno' perk. Cumulative 10% damage increase for every subsequent fire spell.");
+		public static const RapidReload:PerkType = mk("Rapid Reload", "Rapid Reload",
+				"Allow to not spend whole turn to use Reload button as long PC got enough fatigue.",
+				"You choose the 'Rapid Reload' perk, lowering time needed to reload ammo for range weapons like pistols.");
 		public static const RecoveryMantra:PerkType = mk("Recovery mantra", "Recovery mantra",
 				"Gain soulforce recovery equal to 2% of your total soulforce.",
 				"You choose the 'Recovery mantra' perk, gaining soulfroce recovery rate equal to 2% of your total soulforce.");

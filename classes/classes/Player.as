@@ -3058,13 +3058,13 @@ use namespace CoC;
 				if (bunnyScore() >= 10) race = "bunny-" + mf("boy", "girl");
 				else race = "half bunny-" + mf("boy", "girl");
 			}
-/*
+
 			if (easterbunnyScore() >= 12)
 			{
 				if (easterbunnyScore() >= 15) race = "true easter bunny-" + mf("boy", "girl");
 				else race = "easter bunny-" + mf("boy", "girl");
 			}
-*/
+
 			if (harpyScore() >= 4)
 			{
 				if (harpyScore() >= 8) {
