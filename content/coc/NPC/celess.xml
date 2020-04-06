@@ -102,33 +102,7 @@
 				You point at the centaur toys and she swiftly gallops to them with a clear idea of how to use them.
 				Well that's one problem solved.
 			</text>
-			
-			<text name="pureIncest">
-				No matter how weird a parent you might be, you just can’t find the resolve to fuck your innocent daughter.
-				<if test="player.cor gt 20">Just as you're about to dismiss the idea completely, <output>$name</output> surprises you.</if>
-				
-				<i>“MOM! HELP! ITS BACK!</i>
-				
-				You watch, spellbound, as <output>$name</output>’s massive shaft rises to full mast, throbbing and leaking a steady stream of precum already. Clearly, <output>$name</output> has no idea about how to get it to calm down.
-				It seems the job falls to you.
-				
-				<i>“I can’t hold this thing anymore. Please, mom, do something!”</i>
-				
-				This is a… somewhat unusual situation, but as a female/(herm like her) it’s something you can understand.
-				You approach your girl’s massive tool and give it a few experimental strokes, making <output>$name</output> gasp in surprise. You lick the flared tip to get a taste. Satisfied with it you then proceed to put the thing in your mouth proper. <output>$name</output> moans as her horse dong throbs in appreciation for the attention you’re giving it. 
-				
-				<i>“Eep!!! Mom, I’m scared. It feels all weird... S..something is comiiiiiiing!”</i>
-				
-				<output>$name</output> whines as she finally orgasms, her sweet cum flooding your throat. 
-				It tastes like cake icing, making it an exercise on willpower to keep from desperately trying to get more. 
-				As her erection finally dies down, you feel something change in you as the cum reaches your stomach.
-				<display ref="../doHeatOrRut"/>
-			</text>
-			<text name="addCorruption">
-				Just as you're about to go, however, you catch a glimpse of <output>$name</output>’s horse dong as it resumes acting up, just as you wanted. 
-				You’ll need to keep her constantly aroused to educate her properly and set her on the path to depravity if she's to become a proper daughter of yours.
-				<dynStats cor="-1"/>
-			</text>
+
 			<text name="pureCorruption">
 				<output>$name</output> suddenly starts moaning as she holds her horns with both hands.
 				
@@ -167,7 +141,7 @@
 				
 				<i>“Mommy wanna play daddy today? Sure, I can get in front of that ride.”</i>
 				
-				That being all the encouragement you need, you position yourself behind her and ram  your “Cock descript” into her warm gaping cunt without hesitation.
+				That being all the encouragement you need, you position yourself behind her and ram  your [cock] into her warm gaping cunt without hesitation.
 				She moans in delight as you force in as much of your cock as you can while looking for the perfect angle. <output>$name</output> taunts you with dirty talk all the while.
 				
 				<i>“Mom, please defile me as much as you want, punish my sinful pussy!”</i>

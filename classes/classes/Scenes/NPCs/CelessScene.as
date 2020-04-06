@@ -174,7 +174,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				submenu(menu, campInteraction);
 			}
 			else {
-				incestScene("pureIncest")
+				pureIncest()
 			}
 		}
 	}
@@ -214,6 +214,28 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 					"The time passes and eventually both of you head back to camp, your daughter still sporting a wide smile from all the fun she had, none the wiser about your little altercation with that moron of an imp.\n\n" +
 					"As innocent as a day can be in Mareth, even if you had to force the issue. But if it’s for the sake of your daughter having a happy childhood, you would gladly beat this whole crazy realm into submission.")
 		}
+		doNext(camp.returnToCampUseOneHour);
+	}
+
+
+	private function pureIncest():void {
+		clearOutput();
+		outputText("No matter how weird a parent you might be, you just can’t find the resolve to fuck your innocent daughter. ");
+				if(player.cor > 20) outputText("Just as you're about to dismiss the idea completely, "+_name+" surprises you.</if>\n\n");
+				outputText("<i>“MOM! HELP! ITS BACK!</i>\n\n" +
+				"You watch, spellbound, as "+_name+"’s massive shaft rises to full mast, throbbing and leaking a steady stream of precum already. Clearly, "+_name+" has no idea about how to get it to calm down. " +
+				"It seems the job falls to you.\n\n" +
+				"<i>“I can’t hold this thing anymore. Please, mom, do something!”</i>\n\n" +
+				"This is a… somewhat unusual situation, but as a ");
+				if (player.gender == 1) outputText("male ");
+				if (player.gender == 2) outputText("parent ");
+				if (player.gender == 3) outputText("herm like her ");
+				outputText("it’s something you can understand. You approach your girl’s massive tool and give it a few experimental strokes, making "+_name+" gasp in surprise. " +
+				"You lick the flared tip to get a taste. Satisfied with it you then proceed to put the thing in your mouth proper. <output>$name</output> moans as her horse dong throbs in appreciation for the attention you’re giving it.\n\n" +
+				"<i>“Eep!!! Mom, I’m scared. It feels all weird... S..something is comiiiiiiing!”</i>\n\n" +
+				""+_name+" whines as she finally orgasms, her sweet cum flooding your throat. It tastes like cake icing, making it an exercise on willpower to keep from desperately trying to get more. " +
+				"As her erection finally dies down, you feel something change in you as the cum reaches your stomach.");
+		display("strings/incest/doHeatOrRut")
 		doNext(camp.returnToCampUseOneHour);
 	}
 
@@ -471,7 +493,9 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				addButton(0, "Next", incestScene, "pureCorruption");
 			}
 			else {
-				display("strings/incest/addCorruption", myLocals);
+				outputText("Just as you're about to go, however, you catch a glimpse of <output>$name</output>’s horse dong as it resumes acting up, just as you wanted. " +
+						"You’ll need to keep her constantly aroused to educate her properly and set her on the path to depravity if she's to become a proper daughter of yours.");
+				dynStats("cor", -1);
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
