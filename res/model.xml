@@ -2650,7 +2650,7 @@
                     </if>
                 </case>
 
-                <case values="CockTypesEnum.LIZARD,CockTypesEnum.CAVE_WYRM,CockTypesEnum.DRAGON">
+                <case values="CockTypesEnum.LIZARD,CockTypesEnum.DRAGON">
 					<if test="big">
                         <show part="penis/reptilebig$taur"/>
                         <else>

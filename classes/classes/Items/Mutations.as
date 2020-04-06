@@ -6589,8 +6589,9 @@ public final class Mutations extends MutationsHelper
 				changes++;
 				outputText("\n\nYour butt cheeks itch as they inflates to a larger plumper size. When it stops, you find yourself the proud owner of a " + buttDescript() + ".");
 			}
+
 			//Glowing Lizard Cock:
-			if (player.cockTotal() > 1 && player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
+			if (player.cockTotal() > 0 && player.cocks[0].cockType != CockTypesEnum.CAVE_WYRM && rand(4) == 0 && changes < changeLimit) {
 				for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
 					//Stop loopahn when dick be found
 					if (player.cocks[temp2].cockType != CockTypesEnum.CAVE_WYRM) break;
@@ -6704,9 +6705,9 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Skin color change
-			if (player.skinTone != "greyish blue" && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYou skin begin to itch as it darkens taking on <b>a greyish blue color.</b>");
-				player.skinTone = "greyish blue";
+			if (player.skinTone != "grayish-blue" && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+				outputText("\n\nYou skin begin to itch as it darkens taking on <b>a grayish-blue color.</b>");
+				player.skinTone = "grayish-blue";
 				changes++;
 			}
 			//Acid Spit

@@ -6563,7 +6563,7 @@ use namespace CoC;
 				if (coatColor == "midnight black") cavewyrmCounter++;
 				cavewyrmCounter++;
 			}
-			if (skinTone == "greyish blue")
+			if (skinTone == "grayish-blue")
 				cavewyrmCounter++;
 			if (ears.type == Ears.CAVE_WYRM)
 				cavewyrmCounter++;
