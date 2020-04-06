@@ -5588,23 +5588,23 @@ private function combatStatusesUpdate():void {
 	}
 	//Alraune Pollen
 	if(player.hasStatusEffect(StatusEffects.AlraunePollen) && monster.lustVuln > 0) {
-		var lustDmg:Number = (scalingBonusLibido() * 0.5);
-		if (player.findPerk(PerkLib.SensualLover) >= 0) lustDmg += 2;
-		if (player.findPerk(PerkLib.Seduction) >= 0) lustDmg += 5;
-		if (player.findPerk(PerkLib.SluttySeduction) >= 0) lustDmg += player.perkv1(PerkLib.SluttySeduction);
-		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) lustDmg += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
-		if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) lustDmg += 5;
-		if (player.findPerk(PerkLib.FlawlessBody) >= 0) lustDmg += 10;
-		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
-		if (player.findPerk(PerkLib.JobSeducer) >= 0) lustDmg += player.teaseLevel * 3;
-		else lustDmg += player.teaseLevel * 2;
-		if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) lustDmg *= 1.2;
-		if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") lustDmg *= (1 + ((10 + rand(11)) / 100));
-		if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) lustDmg *= (1 + (player.lust100 * 0.01));
-		if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) lustDmg *= (1 + combat.historyWhoreBonus());
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+		var lustDmgA:Number = (scalingBonusLibido() * 0.5);
+		if (player.findPerk(PerkLib.SensualLover) >= 0) lustDmgA += 2;
+		if (player.findPerk(PerkLib.Seduction) >= 0) lustDmgA += 5;
+		if (player.findPerk(PerkLib.SluttySeduction) >= 0) lustDmgA += player.perkv1(PerkLib.SluttySeduction);
+		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) lustDmgA += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+		if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) lustDmgA += 5;
+		if (player.findPerk(PerkLib.FlawlessBody) >= 0) lustDmgA += 10;
+		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmgA *= 1.5;
+		if (player.findPerk(PerkLib.JobSeducer) >= 0) lustDmgA += player.teaseLevel * 3;
+		else lustDmgA += player.teaseLevel * 2;
+		if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) lustDmgA *= 1.2;
+		if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") lustDmgA *= (1 + ((10 + rand(11)) / 100));
+		if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) lustDmgA *= (1 + (player.lust100 * 0.01));
+		if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) lustDmgA *= (1 + combat.historyWhoreBonus());
+		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgA *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) lustDmgA *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgA *= 1.50;
 		if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
 		if(monster.lust < (monster.maxLust() * 0.5)) outputText(monster.capitalA + monster.short + " breaths in your pollen but does not have any visible effects just yet.");
 		else if(monster.lust < (monster.maxLust() * 0.6)) {
@@ -5620,8 +5620,8 @@ private function combatStatusesUpdate():void {
 			if(!monster.plural) outputText("The effects of your pollen are quite pronounced on [monster a] [monster name] as [monster he] begins to shake and steal glances at your body.");
 			else outputText("The effects of your pollen are quite pronounced on [monster a] [monster name] as [monster he] begin to shake and steal glances at your body.");
 		}
-		lustDmg = Math.round(lustDmg);
-		monster.teased(lustDmg, false);
+		lustDmgA = Math.round(lustDmgA);
+		monster.teased(lustDmgA, false);
 		outputText("\n\n");
 		bonusExpAfterSuccesfullTease();
 	}
@@ -5866,8 +5866,8 @@ private function combatStatusesUpdate():void {
 	}
 	if (monster.hasStatusEffect(StatusEffects.OnFire))
 	{
-		var damage:Number = 20 + rand(5);
-		monster.HP -= damage;
+		var damage1:Number = 20 + rand(5);
+		monster.HP -= damage1;
 		monster.addStatusValue(StatusEffects.OnFire, 1, -1);
 		if (monster.statusEffectv1(StatusEffects.OnFire) <= 0)
 		{
@@ -5951,7 +5951,7 @@ private function combatStatusesUpdate():void {
 		if (player.statusEffectv3(StatusEffects.WarriorsRage) <= 0) {
 			player.dynStats("str", -player.statusEffectv1(StatusEffects.WarriorsRage),"tou", -player.statusEffectv2(StatusEffects.WarriorsRage),"spe", -player.statusEffectv2(StatusEffects.WarriorsRage), "scale", false);
 			player.removeStatusEffect(StatusEffects.WarriorsRage);
-			outputText("<b>Dwarf Rage effect wore off!</b>\n\n");
+			outputText("<b>Warrior's Rage effect wore off!</b>\n\n");
 		}
 		else player.addStatusValue(StatusEffects.WarriorsRage,3,-1);
 	}
@@ -7664,7 +7664,7 @@ public function combatRoundOver():void {
 		if (player.statusEffectv1(StatusEffects.OrcaPlayRoundLeft) <= 0)
 		{
 			outputText("\n\nUnable to prolong the game further you finaly let your opponent drops to the ground. ");
-			var damage = unarmedAttack();
+			var damage:Number = unarmedAttack();
 			damage += player.str;
 			damage += scalingBonusStrength() * 0.25;
 			doDamage(damage, true, true);
@@ -7686,7 +7686,7 @@ public function combatRoundOver():void {
 				monster.createStatusEffect(StatusEffects.OrcaHasWackedFinish, 0, 0, 0, 0);
 			}
 		}
-		outputText("\n\n"+player.statusEffectv1(StatusEffects.OrcaPlayRoundLeft)+" rounds to play  left.\n\n");
+		outputText("\n\n"+player.statusEffectv1(StatusEffects.OrcaPlayRoundLeft)+" rounds to play left.\n\n");
 		enemyAI();
 	}
 
@@ -7895,7 +7895,7 @@ public function combatRoundOver():void {
 	public function OrcaLeggoMyEggo():void {
 		clearOutput();
 		outputText("You let [monster a] [monster name] drop, tired of playing.");
-		var damage = unarmedAttack();
+		var damage:Number = unarmedAttack();
 		damage += player.str;
 		damage += scalingBonusStrength() * 0.25;
 		doDamage(damage, true, true);
