@@ -17,7 +17,7 @@
 				
 				When you wake up, you're no longer holding a baby, but what looks like a centaur girl in her tender years.
 				You are hardly surprised, already knowing how short most pregnancies are in Mareth.
-				<if test="player.inte gt 50">Maybe it’s due to how time and space distort in Mareth?</if>
+				<if test="player.inte gt 50">Maybe it’s due to how time and space distort here?</if>
 				Still, you had hoped this phase would have lasted at least a little bit longer.
 				<if test="$isCorrupt">
 					Your daughter wakes up as well, opening her beautiful crimson eyes to the world.
@@ -32,8 +32,8 @@
 				
 				<i>“Mom, is something wrong?”</i>
 				
-				You reply that no… Although you wistfully hope she will stay cute like this forever, despite knowing perfectly well that she will not. 
-				For now, you still have a lot of things to do, so you simply tell her to stay at camp for now whenever you're not here for her safety.
+				You reply that no… Although you wistfully hope she will stay cute like this forever, despite knowing perfectly well that she will not.
+				While you would like to spend more time enjoying your role as a parent you still have a lot of things to do, so you simply tell her to stay at camp for now whenever you're not here for her safety.
 			</text>
 		</lib>
 		<text name="growUp">
@@ -261,11 +261,11 @@
 					
 				</else>
 			</if>
-			As all centauress <output>$name</output> has a horse vagina behind her hindquarter.
+			Just like all centauresses <output>$name</output> has a horse vagina behind her hindquarter.
 			<if test="$isCorrupt">
 				Knowing her well she likely already took enough cock down that way to beat a succubus at the art of fucking. Your lascivious daughter is far from virgin.
 				<else>
-					You pray that she will not lose her virginity to some corrupt creature. 
+					You pray that she will not lose her virginity to some corrupt creature. It will be your duty as a parent to preserve her innocence for as long as possible in this messed up world.
 				</else>
 			</if>
 		</text>

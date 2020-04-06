@@ -196,7 +196,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		{
 			outputText("You spend some time with your beloved daughter in the forest. " +
 					"The pair of you eventually stumble upon a grove filled with blooming white flowers which she happily gallops towards to in order to smell.\n\n"+
-					"<i>“Mom, they smell </i>so<i> good! Are they blooming all the time like this?”</i>\n\n" +
+					"<i>“Mom, they smell <b>so</b> good! Are they blooming all the time like this?”</i>\n\n" +
 					"You admit that you don’t know, as Mareth’s time and space is distorted and difficult to predict at the best of times. ");
 			if(player.inte > 60){
 				outputText("Although you could give a rough estimate if you brought the right tools, some books on Mareth’s local botany would also help");
