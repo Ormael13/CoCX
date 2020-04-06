@@ -495,6 +495,12 @@ public class PerkLib
 		public static const ArouseTheAudience:PerkType = mk("Arouse the audience", "Arouse the audience",
 				"Increase the damage of non periodic tease against groups by 50% and periodic by 20%.",
 				"You choose the 'Arouse the audience' perk, increasing the damage of tease against groups.");
+		public static const AuraOfPurity:PerkType = mk("Aura of Purity", "Aura of Purity",
+				"Those of impure heart who come close to you are seared by holy fire and blinded by your inner light.",
+				"Those of impure heart who come close to you are seared by holy fire and blinded by your inner light.");
+		public static const AuraOfCorruption:PerkType = mk("Aura of Corruption", "Aura of Corruption",
+				"You radiate corruption, tainting everything near you with uncontrollable lust.",
+				"You radiate corruption, tainting everything near you with uncontrollable lust.");
 		public static const ArousingAura:PerkType = mk("Arousing Aura", "Arousing Aura",
 				"Exude a lust-inducing aura (Req's corruption of 70 or more)",
 				"You choose the 'Arousing Aura' perk, causing you to radiate an aura of lust when your corruption is over 70.");
@@ -698,11 +704,11 @@ public class PerkLib
 				"Add your wisdom to gun damage as a modifier.",
 				"You choose the 'Church of the gun' perk, adding wisdom scaling to firearms damage.");
 		public static const ClawingFlurry:PerkType = mk("Clawing flurry", "Clawing flurry",
-				"When attacking with your claws, add an additional attack striking up to 5 times.",
-				"You choose the 'Clawing flurry' perk, gaining an additional attack with your claws!");
+				"When attacking with your natural weapons, add an additional attack striking up to 5 times.",
+				"You choose the 'Clawing flurry' perk, gaining an additional attack with your natural weapons!");
 		public static const ClawTraining:PerkType = mk("Claw training", "Claw training",
-				"Gain 1 extra natural attack with your claws.",
-				"You choose the 'Claw training' perk, gain 1 extra natural attack with your claws!");
+				"Gain 1 extra natural attack with your natural weapons.",
+				"You choose the 'Claw training' perk, gain 1 extra natural attack with your natural weapons!");
 		public static const CloseToDeath:PerkType = mk("Close to death", "Close to death",
 				"Increasing healing spells effect by 50% when below 25% max HP.",
 				"You choose the 'Close to death' perk, increasing healing spells effect when below 25% max HP.");
@@ -904,6 +910,15 @@ public class PerkLib
 		public static const EclipsingShadow:PerkType = mk("Eclipsing Shadow", "Eclipsing Shadow",
 				"Cumulative 20% damage increase for every subsequent darkness spell without interruption.",
 				"You choose the 'Eclipsing Shadow' perk. Cumulative 20% damage increase for every subsequent darkness spell without interruption.");
+		public static const EclipticMind:PerkType = mk("Ecliptic Mind", "Ecliptic Mind",
+				"Allows to retains aura at all time, gaining whichever corresponds to your alignment. Empower the effect of your aura based on your purity or corruption score.",
+				"Allows to retains aura at all time, gaining whichever corresponds to your alignment. Empower the effect of your aura based on your purity or corruption score.");
+		public static const EclipticMindEvolved:PerkType = mk("Ecliptic Mind, evolved", "Ecliptic Mind, evolved",
+				"Further empower the effect of your aura based on your purity or corruption score. Aura effect is doubled against creatures of the opposite alignment.",
+				"Further empower the effect of your aura based on your purity or corruption score. Aura effect is doubled against creatures of the opposite alignment.");
+		public static const EclipticMindFinalForm:PerkType = mk("Ecliptic Mind, final form", "Ecliptic Mind, final form",
+				"Further empower the effect of your aura based on your purity or corruption score. Aura effect is tripled against creatures of the opposite alignment. Gain minor regeneration based on your alignment.",
+				"Further empower the effect of your aura based on your purity or corruption score. Aura effect is tripled against creatures of the opposite alignment. Gain minor regeneration based on your alignment.");
 		public static const ElementalArrows:PerkType = mk("Elemental Arrows", "Elemental Arrows",
 				"Shoot elemental arrows adding your intelligence to your damage.",
 				"You choose the 'Elemental Arrows' perk, allowing you to shoot elemental arrows.");
@@ -1139,8 +1154,8 @@ public class PerkLib
 				"Gunshots deals double damage against groups and large enemies.",
 				"You choose the 'Explosive cartridge' perk, allowing for your gunshots dealing extra damage to group or large enemies.");
 		public static const ExtraClawAttack:PerkType = mk("Extra claw attack", "Extra claw attack",
-				"When attacking with your claws, add an additional attack striking up to 3 times.",
-				"You choose the 'Extra claw attack' perk, gaining an additional attack with your claws!");
+				"When attacking with your natural weapons, add an additional attack striking up to 3 times.",
+				"You choose the 'Extra claw attack' perk, gaining an additional attack with your natural weapons!");
 		public static const ExtremelyLucky:PerkType = mk("Extremely Lucky", "Extremely Lucky",
 				"You're banned from casinos with that luck of yours, but you still find stuff lying around after battles, increasing your gain upon victory. (15% more gems from victories)",
 				"You choose the 'Extremely Lucky' perk, increasing gem gains from victories by 15%.");
@@ -1994,8 +2009,8 @@ public class PerkLib
 				"Some people get all the luck it seems... Shut up and take our money is what all enemies scream at you upon defeat, increasing your gains on victory. (15% more gems from victories)",
 				"You choose the 'Money Finder' perk, increasing gem gains from victories by 15%.");
 		public static const MultiClawAttack:PerkType = mk("Multi Claw Attack", "Multi Claw Attack",
-				"When attacking with your claws, add an additional attack striking up to 4 times.",
-				"You choose the 'Multi Claw Attack' perk, gaining an additional attack with your claws!");
+				"When attacking with your natural weapons, add an additional attack striking up to 4 times.",
+				"You choose the 'Multi Claw Attack' perk, gaining an additional attack with your natural weapons!");
 		public static const Multishot:PerkType = mk("Multishot", "Multishot",
 				"Allows you to perform additional range attack per round.",
 				"You choose the 'Multishot' perk, This allows you to make additional range attack.");
@@ -2862,6 +2877,15 @@ public class PerkLib
 		public static const WellAdjusted:PerkType = mk("Well Adjusted", "Well Adjusted",
 				"You gain half as much lust as time passes in Mareth.",
 				"You choose the 'Well Adjusted' perk, reducing the amount of lust you naturally gain over time while in this strange land!");
+		public static const WhaleFat:PerkType = mk("Whale fat", "Whale fat",
+				"Your whale fat increase your damage reduction against physical attacks and grants you resistance to cold permanantly.",
+				"You choose the 'Whale fat' perk, making your more resilient against physical attacks and gaining cold affinity permanantly.");
+		public static const WhaleFatEvolved:PerkType = mk("Whale fat, Evolved", "Whale fat, Evolved",
+				"Your whale fat further increase your damage reduction against physical attacks and the duration of juggle is increased by 1 round.",
+				"You choose the 'Whale fat' perk, making your more resilient against physical attacks and increasing the duration of Juggle by 1 round while playing.");
+		public static const WhaleFatFinalForm:PerkType = mk("Whale fat, Final Form", "Whale fat, Final Form",
+				"Your whale fat further increase your damage reduction against physical attacks and the duration of juggle is increased by 1 additionnal round. Juggle can now be used a third time",
+				"You choose the 'Whale fat' perk, making your more resilient against physical attacks and Juggle can now be used a third time while playing.");
 		public static const Whipping:PerkType = mk("Whipping", "Whipping",
 				"Whipping special deal increased damage based on current strength.",
 				"You choose the 'Whipping' perk, making your Whipping special stronger.");
@@ -3028,6 +3052,8 @@ public class PerkLib
 				"Allows access to demons charm attacks.");
 		public static const DeadMetabolism:PerkType = mk("Dead metabolism", "Dead metabolism",
 				"Kills off hunger. (hunger meter wouldn't decay with time)");
+		public static const DemonEnergyThirst:PerkType = mk("Demonic hunger", "Demonic hunger",
+				"You can metabolise sex into energy and can feed from your partners orgasms.");
 		public static const Diapause:PerkType = mk("Diapause", "Diapause",
 				"Pregnancy does not advance normally, but develops quickly after taking in fluids.");
 		public static const DragonDarknessBreath:PerkType = mk("Dragon darkness breath", "Dragon darkness breath",
@@ -3102,6 +3128,8 @@ public class PerkLib
 				"Allows you to shoot blinding and probably slightly arousing ink out of your genitalia similar like octopus.");
 		public static const JunglesWanderer:PerkType = mk("Jungle’s Wanderer", "Jungle’s Wanderer",
 				"Your nimble body has adapted to moving through jungles and forests, evading enemy attacks with ease and making yourself harder to catch. (+35 to the Evasion percentage)");
+		public static const KitsuneEnergyThirst:PerkType = mk("Kitsune hunger", "Kitsune hunger",
+				"You can metabolise sex into life force and can feed from your partners orgasms.");
 		public static const LifeLeech:PerkType = mk("Life leech", "Life leech",
 				"Your unarmed strike steals vital energy from your victims, dealing 5% extra damage and restoring 1% mana, health, fatigue and soulforce per hit.");
 		public static const Lycanthropy:PerkType = mk("Lycanthropy", "Lycanthropy",
@@ -3161,7 +3189,6 @@ public class PerkLib
 				"Increase max Strength by a percentage equal to the size in ft of the player x4.");
 		public static const TransformationResistance:PerkType = mk("Transformation Resistance", "Transformation Resistance",
 				"Reduces the likelihood of undergoing a transformation. Disables Bad Ends from transformative items.");
-				
 		// Quest, Event & NPC perks
 		public static const AdvancedLeadership:PerkType = mk("Advanced Leadership", "Advanced Leadership",
 				"Allows to form 4 people party.");
@@ -5293,7 +5320,10 @@ public class PerkLib
 			EasterBunnyEggBag.requirePerk(EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
 			}, "Easter Bunny race");*/
-            ElvishPeripheralNervSys.requirePerk(ElvenSense).requireCustomFunction(function (player:Player):Boolean {
+			EclipticMind.requirePerk(EclipticMind).requireCustomFunction(function (player:Player):Boolean {
+				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
+			}, "Unicorn or Bicorn race");
+			ElvishPeripheralNervSys.requirePerk(ElvenSense).requireCustomFunction(function (player:Player):Boolean {
                 return player.elfScore() >= 4;
             }, "Elf race");
             FrozenHeart.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
@@ -5388,8 +5418,8 @@ public class PerkLib
                 return player.beeScore() >= 4 || player.mantisScore() >= 4 || player.scorpionScore() >= 4 || player.spiderScore() >= 4;
             }, "Any insect race");
             TwinHeart.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-                return player.centaurScore() >= 4;
-            }, "Centaur race");
+				return player.centaurScore() >= 4 || player.unicornScore() >= 8;
+            }, "Centaur or Unicorn race");
 			VampiricBloodsteam.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
                 return player.hasStatusEffect(StatusEffects.VampireThirst);
 				}, "Vampire Thirst")
@@ -5402,6 +5432,9 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.spiderScore() >= 4 || player.nagaScore() >= 4 || player.gorgonScore() >= 4 || player.vouivreScore() >= 4 || player.couatlScore() >= 4 || player.hydraScore() >= 4;
             }, "Spider or any snake-like race");
+			WhaleFat.requireMouthMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+				return player.orcaScore() >= 12;
+			}, "Orca race")
             /*
 			if (player.() >=  && ) {
 			_add(new PerkClass(PerkLib.));
@@ -5503,8 +5536,8 @@ public class PerkLib
             TwinHeartEvolved.requireLevel(6)
 				.requirePerk(TwinHeart)
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.centaurScore() >= 8;
-            }, "Centaur race");
+				return player.centaurScore() >= 8 || player.unicornScore() >= 8;
+            }, "Centaur or Unicorn race");
 			ChimericalBodyInitialStage.requireLevel(6)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 2;
@@ -5647,7 +5680,10 @@ public class PerkLib
 			EasterBunnyEggBagEvolved.requireLevel(12).requirePerk(EasterBunnyEggBag).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
 			}, "Easter bunny race");
-            ElvishPeripheralNervSysEvolved.requireLevel(12).requirePerk(ElvishPeripheralNervSys).requireCustomFunction(function (player:Player):Boolean {
+			EclipticMindEvolved.requireLevel(12).requirePerk(EclipticMindEvolved).requireCustomFunction(function (player:Player):Boolean {
+				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
+			}, "Unicorn or Bicorn race");
+			ElvishPeripheralNervSysEvolved.requireLevel(12).requirePerk(ElvishPeripheralNervSys).requireCustomFunction(function (player:Player):Boolean {
                 return player.elfScore() >= 8;
             }, "Elf race");
 			HollowFangsEvolved.requireLevel(12).requirePerk(HollowFangs)
@@ -5698,7 +5734,10 @@ public class PerkLib
 			VenomGlandsEvolved.requireLevel(12).requirePerk(VenomGlands).requireCustomFunction(function (player:Player):Boolean {
                 return player.spiderScore() >= 8 || player.nagaScore() >= 8 || player.gorgonScore() >= 8 || player.vouivreScore() >= 8 || player.couatlScore() >= 8 || player.hydraScore() >= 8;
             }, "Spider or any snake-like race");
-            ChimericalBodySemiBasicStage.requirePerk(ChimericalBodyInitialStage)
+			WhaleFatEvolved.requireLevel(12).requirePerk(WhaleFat).requireCustomFunction(function (player:Player):Boolean {
+				return player.orcaScore() >= 12;
+			}, "Orca race");
+			ChimericalBodySemiBasicStage.requirePerk(ChimericalBodyInitialStage)
                     .requireLevel(12)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 4;
@@ -5906,11 +5945,14 @@ public class PerkLib
             TwinHeartFinalForm.requireLevel(24)
 				.requirePerk(TwinHeartEvolved)
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.centaurScore() >= 12;
-            }, "Centaur race");
+                return player.centaurScore() >= 12 || player.unicornScore() >= 12;
+            }, "Centaur or Unicorn race");
 			VenomGlandsFinalForm.requireLevel(24).requirePerk(VenomGlandsEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.spiderScore() >= 12 || player.nagaScore() >= 12 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12 || player.hydraScore() >= 12;
             }, "Spider or any snake-like race");
+			WhaleFatFinalForm.requireLevel(24).requirePerk(WhaleFatEvolved).requireCustomFunction(function (player:Player):Boolean {
+				return player.orcaScore() >= 12;
+			}, "Orca race");
 			ChimericalBodySemiAdvancedStage.requirePerk(ChimericalBodyBasicStage)
                     .requireLevel(24)
                     .requireCustomFunction(function (player:Player):Boolean {
@@ -6018,7 +6060,10 @@ public class PerkLib
 			EasterBunnyEggBagFinalForm.requireLevel(30).requirePerk(EasterBunnyEggBagEvolved).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
 			}, "Easter Bunny race");
-            ElvishPeripheralNervSysFinalForm.requireLevel(30).requirePerk(ElvishPeripheralNervSysEvolved).requireCustomFunction(function (player:Player):Boolean {
+			EclipticMindFinalForm.requireLevel(30).requirePerk(EclipticMindFinalForm).requireCustomFunction(function (player:Player):Boolean {
+				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
+			}, "Unicorn or Bicorn race");
+			ElvishPeripheralNervSysFinalForm.requireLevel(30).requirePerk(ElvishPeripheralNervSysEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.elfScore() >= 12;
             }, "Elf race");
 			HollowFangsFinalForm.requireLevel(30).requirePerk(HollowFangsEvolved)
@@ -6417,4 +6462,4 @@ public class PerkLib
 	}
 	initDependencies();
 }
-}
+}

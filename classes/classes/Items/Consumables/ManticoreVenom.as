@@ -14,6 +14,7 @@ import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.Items.Consumable;
 import classes.PerkLib;
+import classes.VaginaClass;
 
 public class ManticoreVenom extends Consumable {
 	public function ManticoreVenom() {
@@ -71,6 +72,15 @@ public class ManticoreVenom extends Consumable {
 				dynStats("sen", .5);
 				boobsGrew = true;
 			}
+		}
+		if (player.sens > 20 && player.vaginaType() != VaginaClass.MANTICORE && changes < changeLimit && rand(3) == 0) {
+			outputText("\n\nYou suddenly became exceedingly aware of your surroundings, feeling the caress of the wind on your skin and especially its passage next to your endowment. " +
+					"Out of curiosity you slid a single digit inside your pussy to test your new sensitiveness and yelp a sound note unlike a singing. " +
+					"Your pussy has reached the sensitiveness of a manticore and the mere act of touching it will now cause you to moan an entire partition!" +
+					"<b>Your ultrasensitive pussy is now exactly like that of a manticore!</b>");
+			dynStats("sen", 20);
+			player.vaginaType(VaginaClass.MANTICORE);
+			changes++;
 		}
 		//Physical changes
 		//Legs

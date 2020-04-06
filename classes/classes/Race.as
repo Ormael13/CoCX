@@ -20,18 +20,18 @@ public class Race {
     public static const FERRET:Race = new Race("Ferret",16);
     public static const KITSUNE:Race = new Race("Kitsune",17);
     public static const HORSE:Race = new Race("Horse",18);
-    public static const UNICORN:Race = new Race("Unicorn",19);
-    public static const ALICORN:Race = new Race("Alicorn",20);
-    public static const CENTAUR:Race = new Race("Centaur",21);
-    public static const MINOTAUR:Race = new Race("Minotaur",22);
-    public static const COW:Race = new Race("Cow",23);
-    public static const SANDTRAP:Race = new Race("SANDTRAP",24);
-    public static const BEE:Race = new Race("Bee",25);
-    public static const GOBLIN:Race = new Race("Goblin",26);
-    public static const DEMON:Race = new Race("Demon",27);
-    public static const DEVIL:Race = new Race("Devil",28);
-    public static const SHARK:Race = new Race("Shark",29);
-    public static const ORCA:Race = new Race("Orca",30);
+    public static const UNICORN:Race = new Race("Unicorn and its variants",19);
+    public static const CENTAUR:Race = new Race("Centaur",20);
+    public static const MINOTAUR:Race = new Race("Minotaur",21);
+    public static const COW:Race = new Race("Cow",22);
+    public static const SANDTRAP:Race = new Race("SANDTRAP",23);
+    public static const BEE:Race = new Race("Bee",24);
+    public static const GOBLIN:Race = new Race("Goblin",25);
+    public static const DEMON:Race = new Race("Demon",26);
+    public static const DEVIL:Race = new Race("Devil",27);
+    public static const SHARK:Race = new Race("Shark",28);
+    public static const ORCA:Race = new Race("Orca",29);
+    public static const OOMUKADE:Race = new Race("Oomukade",30);
     public static const ONI:Race = new Race("Oni",31);
     public static const ELF:Race = new Race("Elf",32);
     public static const ORC:Race = new Race("Orc",33);
@@ -82,7 +82,6 @@ public class Race {
     public static const MELKIE:Race = new Race("Yuki Onna",78);
     public static const EASTERBUNNY:Race = new Race("Easter Bunny",79);
     public static const CENTIPEDE:Race = new Race("Centipede",80);
-    public static const OOMUKADE:Race = new Race("Oomukade",81);
 
     public var name:String;
     public var id:int;
