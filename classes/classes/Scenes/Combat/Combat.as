@@ -7664,7 +7664,7 @@ public function combatRoundOver():void {
 		if (player.statusEffectv1(StatusEffects.OrcaPlayRoundLeft) <= 0)
 		{
 			outputText("\n\nUnable to prolong the game further you finaly let your opponent drops to the ground. ");
-			var damage = unarmedAttack();
+			var damage:Number = unarmedAttack();
 			damage += player.str;
 			damage += scalingBonusStrength() * 0.25;
 			doDamage(damage, true, true);
@@ -7895,7 +7895,7 @@ public function combatRoundOver():void {
 	public function OrcaLeggoMyEggo():void {
 		clearOutput();
 		outputText("You let [monster a] [monster name] drop, tired of playing.");
-		var damage = unarmedAttack();
+		var damage:Number = unarmedAttack();
 		damage += player.str;
 		damage += scalingBonusStrength() * 0.25;
 		doDamage(damage, true, true);
