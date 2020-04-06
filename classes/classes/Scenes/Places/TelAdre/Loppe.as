@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Places.TelAdre {
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
+import classes.display.SpriteDb;
 
 public class Loppe extends TelAdreAbstractContent {
 public function Loppe(){
@@ -64,6 +65,7 @@ private function appearanceOfLoppe():void {
 //First Meeting (edited) (C)
 //Happens randomly when choosing to go into the bar after 16:00
 public function loppeFirstMeeting():void {
+	spriteSelect(SpriteDb.s_Loppe_16bit);
 	clearOutput();
 	outputText("Wandering towards the bar, you notice an unusual commotion; there are a lot more people hanging around here than is usual for the time of day.  Feeling curious, you go over to investigate, and ask a bystander what all of this is about.");
 	outputText("\n\n\"<i>You don't know?  Today we're having a show at the bar.  A dancer is going to be dancing for us.  You should go and have a look, it's very beautiful!</i>\"");
@@ -276,6 +278,7 @@ private function yesLoppesHouse():void {
 //Generic Meeting (edited) (C)
 //Loppe can be found from 6:00 to 15:00 (yeah she works out like a boss!)
 public function loppeGenericMeetings():void {
+	spriteSelect(SpriteDb.s_Loppe_16bit);
 	clearOutput();
 	outputText("You decide to approach the bunny-girl.  Loppe smiles and wipes the sweat off her brow with the towel.  \"<i>Hey there, [name], nice seeing you around here.  So... do you want to do something?  Talk, maybe?  Or go to my place for a 'workout'?</i>\" she asks with a smirk.");
 	//Appearance
