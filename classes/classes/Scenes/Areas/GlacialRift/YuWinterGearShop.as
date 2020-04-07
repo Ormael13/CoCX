@@ -77,7 +77,7 @@ import classes.internals.Utils;
 			addButton(8, weapons.NORTHIP.shortName, buyItem, 8).hint("Northerner ice picks");
 			addButton(10, armors.BLIZZ_K.shortName, buyItem, 10).hint("Blizzard Kimono");
 			addButton(11, headjewelries.SNOWFH.shortName, buyItem, 11).hint("Snowflake hairpin");
-			addButton(12, consumables.SKELP__.shortName, buyItem, 4).hint("Skelp");
+			addButton(12, consumables.SKELP__.shortName, buyItem, 12).hint("Skelp");
 			addButton(14, "Back", YuMenuMain2);
 		}		
 		private function buyItem(item:Number = 0):void

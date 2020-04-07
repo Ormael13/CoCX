@@ -253,8 +253,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8n8";
-			version = ver + " (<b>CharView update, Melkie TF, sex scenes giving tease exp, less lagging game max stat cap updates, typical many smaller or larger QoL changes and bugfixes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8n9";
+			version = ver + " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
