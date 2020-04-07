@@ -45,6 +45,7 @@ public class PinchousWaterwearAndTools extends BaseContent
 			addButton(6, necklaces.MCPNECK.shortName, itemBuy, necklaces.MCPNECK);
 			addButton(7, shields.BATTNET.shortName, itemBuy, shields.BATTNET);
 			addButton(8, headjewelries.AQBREATH.shortName, itemBuy, headjewelries.AQBREATH);
+			addButton(9, armors.KBDRESS.shortName, itemBuy, armors.KBDRESS);
 			//kraken dress - 9
 			addButton(10, "Bikini", PinchousWaterwearAndToolsShopBikiniMenu);
 			addButton(14, "Leave", leavePinchousWaterwearAndToolsShop);
@@ -83,8 +84,8 @@ public class PinchousWaterwearAndTools extends BaseContent
 				case armors.SPIBIKNI:
 				case armors.SREBIKNI:
 				case armors.SWHBIKNI:
-				case armors.SYEBIKNI:
-					outputText("\"<i>What now? This is just a bikini… you know... for swimming. It’ll make any groundwalker less of a bad swimmer anyway that’s for sure. It’s yours for only " + itype.value + " gems.</i>\""); break;
+				case armors.SYEBIKNI:			outputText("\"<i>What now? This is just a bikini… you know... for swimming. It’ll make any groundwalker less of a bad swimmer anyway that’s for sure. It’s yours for only " + itype.value + " gems.</i>\""); break;
+				case armors.KBDRESS:			outputText("\"<i>That’s for people with tentacle legs… I can’t understand that fashion style really, but apparently it would improve those tentacle people’s abilities. " + itype.value + " gems and it’s yours.</i>\""); break;
 			}
 			//outputText("\"<i>That is a trident… useful for catching fish or fighting underwater. I can part with it for " + itype.value + " gems.</i>\"");
 			if(player.gems < itype.value) {

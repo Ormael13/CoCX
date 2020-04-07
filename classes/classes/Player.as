@@ -7239,18 +7239,29 @@ use namespace CoC;
 		public function scyllaScore():Number {
 			Begin("Player","racialScore","scylla");
 			var scyllaCounter:Number = 0;
+			var krakenEyeColor:Array = ["Bright pink", "light purple", "purple"];
 			if (faceType == Face.HUMAN)
 				scyllaCounter++;
 			if (faceType != 0)
 				scyllaCounter--;
 			if (ears.type == Ears.ELFIN)
 				scyllaCounter++;
+			if (horns.type == Horns.KRAKEN)
+				scyllaCounter++;
+			if (arms.type == Arms.KRAKEN)
+				scyllaCounter++;
 			if (hasPlainSkinOnly() && skinAdj == "slippery")
 				scyllaCounter++;
-		//	if (hasPlainSkinOnly() && skinAdj == "rubberlike slippery")
-		//		scyllaCounter += 2;
 			if (isScylla())
 				scyllaCounter += 2;
+			if (isKraken())
+				scyllaCounter += 4;
+			if (rearBody.type = RearBody.KRAKEN)
+				scyllaCounter++;
+			if (skinTone == "ghostly pale")
+				scyllaCounter++;
+			if (InCollection(eyes.colour, krakenEyeColor))
+				scyllaCounter++;
 			if (tallness > 96)
 				scyllaCounter++;
 			if (findPerk(PerkLib.InkSpray) >= 0)
@@ -7555,7 +7566,7 @@ use namespace CoC;
 				sirenCounter++;
 			if (lowerBody == LowerBody.SHARK)
 				sirenCounter++;
-			if (skinType == Skin.SCALES && (skinTone == "rough gray" || skinTone == "orange" || skinTone == "dark gray" || skinTone == "grayish-blue" || skinTone == "iridescent gray" || skinTone == "ashen grayish-blue" || skinTone == "gray"))
+			if (skinType == Skin.AQUA_SCALES && (skinTone == "rough gray" || skinTone == "orange" || skinTone == "dark gray" || skinTone == "grayish-blue" || skinTone == "iridescent gray" || skinTone == "ashen grayish-blue" || skinTone == "gray"))
 				sirenCounter++;
 			if (gills.type == Gills.FISH)
 				sirenCounter++;

@@ -77,6 +77,7 @@
             <color name="blond">#e0c685</color>
             <color name="blonde">#f2e4bf</color>
             <color name="blue">#405fce</color>
+			<color name="bright pink">#f000f0</color>
             <color name="bronzed">#a89148</color>
             <color name="brown">#664400</color>
             <color name="caramel">#c39350</color>
@@ -279,7 +280,6 @@
         <cell rect="251,90,49,59" name="torso/pscales" dx="69" dy="64"/>
         <cell rect="301,90,49,59" name="torso/scales" dx="69" dy="64"/>
         <cell rect="351,90,49,59" name="torso/goo" dx="69" dy="64"/>
-        <cell rect="401,90,49,59" name="torso/kraken" dx="69" dy="64"/>
         <cell rect="601,90,49,59" name="torso/panda" dx="69" dy="64"/>
         <cell rect="451,90,49,59" name="torso_pattern/Bstripe" dx="69" dy="64"/>
         <cell rect="501,90,49,59" name="torso_pattern/Blightning" dx="69" dy="64"/>
@@ -439,6 +439,9 @@
         <cell rect="638,611,90,90" name="feet/bunny" dx="49" dy="92"/>
         <cell rect="151,450,49,59" name="overfeet/fire" dx="69" dy="115"/>
         <cell rect="701,90,49,59" name="muscle/muscle" dx="69" dy="64"/>
+        <cell rect="401,90,49,59" name="clothe/krakenM" dx="69" dy="64"/>
+		<cell rect="851,90,49,59" name="clothe/krakenL" dx="69" dy="64"/>
+		<cell rect="901,90,49,59" name="clothe/krakenS" dx="69" dy="64"/>
     </spritemap>
     <spritemap file="extra.png">
         <cell rect="2,55,147,128" name="legs_fg/alraune" dx="24" dy="82"/>
@@ -1101,10 +1104,6 @@
                 <show part="horns/orchid"/>
                 <show part="horns_bg/orchid"/>
             </case>
-            <case values="'never'">
-                <show part="horns/2small"/>
-                <show part="horns_bg/kraken"/>
-            </case>
             <case values="Horns.DRACONIC_X4_12_INCH_LONG">
                 <show part="horns_bg/dragon"/>
             </case>
@@ -1126,6 +1125,9 @@
 			<case values="Horns.GHOSTLY_WISPS">
 				<show part="horns_bg/ghost"/>
 			</case>
+            <case values="Horns.KRAKEN">
+                <show part="horns_bg/kraken"/>
+            </case>
         </switch>
 		
 		
@@ -1887,11 +1889,9 @@
                 <show part="hands/furracoon"/>
                 <show part="hands_bg/furracoon"/>
             </case>
-            <case values="'never'"><!--TODO kraken-->
-                <hide part="arms/*"/>
-                <hide part="arms_bg/*"/>
-                <show part="arms/kraken"/>
-                <show part="arms_bg/kraken"/>
+            <case values="Arms.KRAKEN">
+                <show part="hands/kraken"/>
+                <show part="hands_bg/kraken"/>
             </case>
             <default>
                 <!--see switch[value=skinType]-->
@@ -2122,6 +2122,10 @@
             <case values="LowerBody.SCYLLA">
                 <hide part="legs/*"/>
                 <show part="legs/scylla"/>
+            </case>
+            <case values="LowerBody.KRAKEN">
+                <hide part="legs/*"/>
+                <show part="legs/kraken"/>
             </case>
             <case values="LowerBody.MANTIS"><!--TODO -->
                 <hide part="legs/*"/>
@@ -2851,6 +2855,9 @@
 		<if test="lowerBody == LowerBody.SCYLLA">
 			<hide part="legs_pattern/*"/>
 		</if>
+        <if test="lowerBody == LowerBody.KRAKEN">
+            <hide part="legs_pattern/*"/>
+        </if>
 		<if test="lowerBody == LowerBody.WOLF and arms.type == Arms.WOLF">
 			<hide part="arms_bg_pattern/*"/>
 			<hide part="arms_pattern/*"/>
@@ -3536,6 +3543,31 @@
 			</switch>	
 			</if>
 		</if>
+
+        <if test="krakenBlackDress">
+			<if test="breastRows.length gt 0">
+			<switch>
+				<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+					<show part="clothe/krakenS"/>
+				</case>
+				<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+					<show part="clothe/krakenS"/>
+				</case>
+				<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+					<show part="clothe/krakenM"/>
+				</case>
+				<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+					<show part="clothe/krakenM"/>
+				</case>
+				<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+					<show part="clothe/krakenL"/>
+				</case>
+				<default>
+					<show part="clothe/krakenL"/>
+				</default>
+			</switch>	
+			</if>
+        </if>
 		
     </logic>
 </model>

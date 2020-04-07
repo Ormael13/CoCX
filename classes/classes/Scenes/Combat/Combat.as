@@ -7940,12 +7940,17 @@ public function ScyllaSqueeze():void {
 	}
 	else fatigue(20, USEFATG_PHYSICAL);
 	var damage:int = monster.maxHP() * (.10 + rand(15) / 100) * 1.5;
+	if (player.isKraken()) {
+		damage *= player.tallness / 25;
+		damage += player.str;
+	}
 	if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
 	if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 	if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 	if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 	if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 	if (monster.plural) damage *= 5;
+	if (player.hasPerk(PerkLib.KrakenBlackDress)) damage *= 2;
 	//Squeeze -
 	outputText("You start squeezing your");
 	if (monster.plural) {
@@ -8125,6 +8130,7 @@ public function ScyllaTease():void {
 				crit = true;
 				damage *= 1.75;
 			}
+			if (player.hasPerk(PerkLib.KrakenBlackDress)) damage *= 2;
 			monster.teased(monster.lustVuln * damage);
 			if (crit == true) outputText(" <b>Critical!</b>");
 			teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
@@ -8142,181 +8148,181 @@ public function ScyllaTease():void {
 	}
 	enemyAI();
 }
-public function ScyllaLeggoMyEggo():void {
-	clearOutput();
-	outputText("You release [monster a] [monster name] from [monster his] bonds, and [monster he] drops to the ground, catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.");
-	outputText("\n\n");
-	monster.removeStatusEffect(StatusEffects.ConstrictedScylla);
-	enemyAI();
-}
-
-public function GooTease():void {
-	clearOutput();
-	//(if poisoned)
-	if(monster.hasStatusEffect(StatusEffects.NagaVenom))
-	{
-		outputText("You casualy caress your opponent with a free hand as you use one of your tentacle to expertly molest its bottom half.\n\n");
-	}
-	else if(monster.gender == 0)
-	{
-		outputText("You look over [monster a] [monster name], but can't figure out how to tease such an unusual foe.\n\n");
-	}
-	if(monster.lustVuln == 0) {
-		outputText("You casualy caress your opponent with a free hand as you use one of your tentacle to expertly molest its bottom half, but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
+	public function ScyllaLeggoMyEggo():void {
+		clearOutput();
+		outputText("You release [monster a] [monster name] from [monster his] bonds, and [monster he] drops to the ground, catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.");
+		outputText("\n\n");
+		monster.removeStatusEffect(StatusEffects.ConstrictedScylla);
 		enemyAI();
-		return;
 	}
-	//(Otherwise)
-	else {
-		wrathregeneration();
-		fatigueRecovery();
-		manaregeneration();
-		soulforceregeneration();
-		var damage:Number = 0;
-		var chance:Number= 0;
-		var bimbo:Boolean = false;
-		var bro:Boolean = false;
-		var futa:Boolean = false;
-		var choices:Array = new Array();
-		var select:Number = 0;
-		//Tags used for bonus damage and chance later on
-		var breasts:Boolean = false;
-		var penis:Boolean = false;
-		var balls:Boolean = false;
-		var vagina:Boolean = false;
-		var anus:Boolean = false;
-		var ass:Boolean = false;
-		//If auto = true, set up bonuses using above flags
-		var auto:Boolean = true;
-		//==============================
-		//Determine basic success chance.
-		//==============================
-		chance = 60;
-		//1% chance for each tease level.
-		chance += player.teaseLevel;
-		//10% for seduction perk
-		if(player.hasPerk(PerkLib.Seduction)) chance += 10;
-		//10% for sexy armor types
-		if(player.hasPerk(PerkLib.SluttySeduction) || player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) chance += 10;
-		//10% for bimbo shits
-		if(player.hasPerk(PerkLib.BimboBody)) {
-			chance += 10;
-			bimbo = true;
+
+	public function GooTease():void {
+		clearOutput();
+		//(if poisoned)
+		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
+		{
+			outputText("You casualy caress your opponent with a free hand as you use one of your tentacle to expertly molest its bottom half.\n\n");
 		}
-		if(player.hasPerk(PerkLib.BroBody)) {
-			chance += 10;
-			bro = true;
+		else if(monster.gender == 0)
+		{
+			outputText("You look over [monster a] [monster name], but can't figure out how to tease such an unusual foe.\n\n");
 		}
-		if(player.hasPerk(PerkLib.FutaForm)) {
-			chance += 10;
-			futa = true;
-		}
-		//2 & 2 for seductive valentines!
-		if(player.hasPerk(PerkLib.SensualLover)) {
-			chance += 2;
-		}
-		if (player.findPerk(PerkLib.FlawlessBody) >= 0) chance += 10;
-		//==============================
-		//Determine basic damage.
-		//==============================
-		damage = 6 + rand(3);
-		if(player.hasPerk(PerkLib.SensualLover)) {
-			damage += 2;
-		}
-		if(player.hasPerk(PerkLib.Seduction)) damage += 5;
-		//+ slutty armor bonus
-		if(player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
-		if(player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
-		//10% for bimbo shits
-		if(bimbo || bro || futa) {
-			damage += 5;
-			bimbo = true;
-		}
-		if (player.findPerk(PerkLib.FlawlessBody) >= 0) damage += 10;
-		damage += scalingBonusLibido() * 0.1;
-		damage += player.teaseLevel;
-		damage += rand(7);
-		//partial skins bonuses
-		switch (player.coatType()) {
-			case Skin.FUR:
-				damage += (1 + player.newGamePlusMod());
-				break;
-			case Skin.SCALES:
-				damage += (2 * (1 + player.newGamePlusMod()));
-				break;
-			case Skin.CHITIN:
-				damage += (3 * (1 + player.newGamePlusMod()));
-				break;
-			case Skin.BARK:
-				damage += (4 * (1 + player.newGamePlusMod()));
-				break;
-		}
-		chance += 2;
-		//Land the hit!
-		if(rand(100) <= chance) {
-			outputText("You start to play with [monster a] [monster name] body ");
-			if(monster.gender == 1)
-			{
-				outputText("stroking his " + monster.cockDescriptShort(0) + " from inside of you to feast on his precum.");
-			}
-			if(monster.gender == 2)
-			{
-				outputText("forcefully filling her pussy and ass with your fluid form as you molest her breast.");
-			}
-			if(monster.gender == 3)
-			{
-				outputText("forcefully filling her pussy and ass with your fluid form as you molest her breast. Unsatisfied with her female parts you also stroke her cock to feast on her precum.");
-			}
-			outputText(" This feels very pleasurable to you but not as much as to your opponent who start to drool at your ministration.");
-			//NERF TEASE DAMAGE
-			damage += scalingBonusLibido();
-			damage *= 0.25;
-			damage = Math.round(damage);
-			var damagemultiplier:Number = 1;
-			if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += historyWhoreBonus();
-			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
-			if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.01 * (chance - 100));
-			if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) damagemultiplier *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) damagemultiplier *= 1.50;
-			if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
-			damage *= damagemultiplier;
-			//Determine if critical tease!
-			var crit:Boolean = false;
-			var critChance:int = 5;
-			if (player.hasPerk(PerkLib.CriticalPerformance)) {
-				if (player.lib <= 100) critChance += player.lib / 5;
-				if (player.lib > 100) critChance += 20;
-			}
-			if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
-			if (rand(100) < critChance) {
-				crit = true;
-				damage *= 1.75;
-			}
-			monster.teased(monster.lustVuln * damage);
-			if (crit == true) outputText(" <b>Critical!</b>");
-			teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-		}
-		//Nuttin honey
-		else {
-			teaseXP(1);
-			outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.");
-		}
-		outputText("\n\n");
-		if(monster.lust >= monster.maxLust()) {
-			doNext(endLustVictory);
+		if(monster.lustVuln == 0) {
+			outputText("You casualy caress your opponent with a free hand as you use one of your tentacle to expertly molest its bottom half, but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
+			enemyAI();
 			return;
 		}
+		//(Otherwise)
+		else {
+			wrathregeneration();
+			fatigueRecovery();
+			manaregeneration();
+			soulforceregeneration();
+			var damage:Number = 0;
+			var chance:Number= 0;
+			var bimbo:Boolean = false;
+			var bro:Boolean = false;
+			var futa:Boolean = false;
+			var choices:Array = new Array();
+			var select:Number = 0;
+			//Tags used for bonus damage and chance later on
+			var breasts:Boolean = false;
+			var penis:Boolean = false;
+			var balls:Boolean = false;
+			var vagina:Boolean = false;
+			var anus:Boolean = false;
+			var ass:Boolean = false;
+			//If auto = true, set up bonuses using above flags
+			var auto:Boolean = true;
+			//==============================
+			//Determine basic success chance.
+			//==============================
+			chance = 60;
+			//1% chance for each tease level.
+			chance += player.teaseLevel;
+			//10% for seduction perk
+			if(player.hasPerk(PerkLib.Seduction)) chance += 10;
+			//10% for sexy armor types
+			if(player.hasPerk(PerkLib.SluttySeduction) || player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) chance += 10;
+			//10% for bimbo shits
+			if(player.hasPerk(PerkLib.BimboBody)) {
+				chance += 10;
+				bimbo = true;
+			}
+			if(player.hasPerk(PerkLib.BroBody)) {
+				chance += 10;
+				bro = true;
+			}
+			if(player.hasPerk(PerkLib.FutaForm)) {
+				chance += 10;
+				futa = true;
+			}
+			//2 & 2 for seductive valentines!
+			if(player.hasPerk(PerkLib.SensualLover)) {
+				chance += 2;
+			}
+			if (player.findPerk(PerkLib.FlawlessBody) >= 0) chance += 10;
+			//==============================
+			//Determine basic damage.
+			//==============================
+			damage = 6 + rand(3);
+			if(player.hasPerk(PerkLib.SensualLover)) {
+				damage += 2;
+			}
+			if(player.hasPerk(PerkLib.Seduction)) damage += 5;
+			//+ slutty armor bonus
+			if(player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
+			if(player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+			//10% for bimbo shits
+			if(bimbo || bro || futa) {
+				damage += 5;
+				bimbo = true;
+			}
+			if (player.findPerk(PerkLib.FlawlessBody) >= 0) damage += 10;
+			damage += scalingBonusLibido() * 0.1;
+			damage += player.teaseLevel;
+			damage += rand(7);
+			//partial skins bonuses
+			switch (player.coatType()) {
+				case Skin.FUR:
+					damage += (1 + player.newGamePlusMod());
+					break;
+				case Skin.SCALES:
+					damage += (2 * (1 + player.newGamePlusMod()));
+					break;
+				case Skin.CHITIN:
+					damage += (3 * (1 + player.newGamePlusMod()));
+					break;
+				case Skin.BARK:
+					damage += (4 * (1 + player.newGamePlusMod()));
+					break;
+			}
+			chance += 2;
+			//Land the hit!
+			if(rand(100) <= chance) {
+				outputText("You start to play with [monster a] [monster name] body ");
+				if(monster.gender == 1)
+				{
+					outputText("stroking his " + monster.cockDescriptShort(0) + " from inside of you to feast on his precum.");
+				}
+				if(monster.gender == 2)
+				{
+					outputText("forcefully filling her pussy and ass with your fluid form as you molest her breast.");
+				}
+				if(monster.gender == 3)
+				{
+					outputText("forcefully filling her pussy and ass with your fluid form as you molest her breast. Unsatisfied with her female parts you also stroke her cock to feast on her precum.");
+				}
+				outputText(" This feels very pleasurable to you but not as much as to your opponent who start to drool at your ministration.");
+				//NERF TEASE DAMAGE
+				damage += scalingBonusLibido();
+				damage *= 0.25;
+				damage = Math.round(damage);
+				var damagemultiplier:Number = 1;
+				if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += historyWhoreBonus();
+				if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
+				if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.01 * (chance - 100));
+				if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= 1.50;
+				if (player.hasPerk(PerkLib.Apex)) damagemultiplier *= 1.50;
+				if (player.hasPerk(PerkLib.AlphaAndOmega)) damagemultiplier *= 1.50;
+				if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
+				damage *= damagemultiplier;
+				//Determine if critical tease!
+				var crit:Boolean = false;
+				var critChance:int = 5;
+				if (player.hasPerk(PerkLib.CriticalPerformance)) {
+					if (player.lib <= 100) critChance += player.lib / 5;
+					if (player.lib > 100) critChance += 20;
+				}
+				if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+				if (rand(100) < critChance) {
+					crit = true;
+					damage *= 1.75;
+				}
+				monster.teased(monster.lustVuln * damage);
+				if (crit == true) outputText(" <b>Critical!</b>");
+				teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+			}
+			//Nuttin honey
+			else {
+				teaseXP(1);
+				outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.");
+			}
+			outputText("\n\n");
+			if(monster.lust >= monster.maxLust()) {
+				doNext(endLustVictory);
+				return;
+			}
+		}
+		enemyAI();
 	}
-	enemyAI();
-}
 
-public function GooLeggoMyEggo():void {
-	clearOutput();
-	outputText("You release [monster a] [monster name] from your body and [monster he] drops to the ground, catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.\n\n");
-	monster.removeStatusEffect(StatusEffects.GooEngulf);
-	enemyAI();
-}
+	public function GooLeggoMyEggo():void {
+		clearOutput();
+		outputText("You release [monster a] [monster name] from your body and [monster he] drops to the ground, catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.\n\n");
+		monster.removeStatusEffect(StatusEffects.GooEngulf);
+		enemyAI();
+	}
 
 //Vampiric bite
 public function VampiricBite():void {

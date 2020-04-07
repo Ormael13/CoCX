@@ -19,6 +19,7 @@ public class RearBody extends BodyPart {
 	public static const YETI_FUR:int			= 16;
 	public static const GLACIAL_AURA:int		= 17;
 	public static const CENTIPEDE:int			= 18;
+	public static const KRAKEN:int				= 19;
 	// Don't forget to add new types in DebugMenu.as list REAR_TYPE_CONSTANTS
 	
 	public function RearBody() {
