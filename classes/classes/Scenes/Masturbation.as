@@ -65,7 +65,7 @@ public class Masturbation extends BaseContent {
 				addButton(button++, "Lay eggs", EasterBunnyLayEggs);
 			}
 			//scylla
-			if (player.hasVagina() && player.isScylla()) {
+			if (player.hasVagina() && (player.isScylla() || player.isKraken())) {
 				addButton(button++, "Tentacle Fun", tentacleSelfFuck2);
 			}
 			if (player.tentacleCocks() > 0 && player.hasVagina()) {

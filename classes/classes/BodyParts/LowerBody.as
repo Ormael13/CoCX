@@ -66,6 +66,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const YUKI_ONNA:int			  = 56;//button 0 on 5th page of metamorph
 	public static const MELKIE:int			  	  = 57;
 	public static const CENTIPEDE:int			  = 58;
+	public static const KRAKEN:int                = 59;
 	// Don't forget to add new types in DebugMenu.as list LOWER_TYPE_CONSTANTS
 	
 	override public function set type(value:int):void {
@@ -357,6 +358,9 @@ public class LowerBody extends SaveableBodyPart {
 	}
 	public function isScylla():Boolean {
 		return type == SCYLLA;
+	}
+	public function isKraken():Boolean {
+		return type == KRAKEN;
 	}
 	public function isAlraune():Boolean {
 		return type == PLANT_FLOWER;

@@ -693,6 +693,17 @@ public class Appearance extends Utils
 					"slithering vine-prick",
 					"vine-shaped cock");
 			}
+			else if (cockType == CockTypesEnum.SCYLLATENTACLE) {
+				return randomChoice("twisting tentacle-prick",
+						"wriggling tentacle-shaft",
+						"sinuous tentacle-cock",
+						"squirming cock-tendril",
+						"writhing tentacle-pecker",
+						"wriggling tentacle-prick",
+						"smooth shaft",
+						"undulating tentacle-dick",
+						"slithering tentacle-prick");
+			}
 			else if (cockType == CockTypesEnum.STAMEN) {
 				return randomChoice("squirming cock-stamen",
 					"plant-like stamen",

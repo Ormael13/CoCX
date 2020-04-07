@@ -249,7 +249,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("concealed within a cavity in your tail when not in use, though when the need arises, you can part your concealing slit and reveal your true self.\n");
 	}
 	//Crotchial stuff - mention scylla
-	if(player.lowerBody == LowerBody.SCYLLA)
+	if(player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN)
 	{
 		if(player.gender == 1)
 		{
@@ -522,9 +522,9 @@ public class PlayerAppearance extends BaseContent {
 			outputText("\nYour equipment has shifted to lie between your hind legs, like a feral animal.");
 		else if (player.isTaur())
 			outputText("\nBetween your hind legs, you have grown " + player.multiCockDescript() + "!\n");
-		else if (player.isScylla() && player.cocks.length == 1)
+		else if ((player.isScylla() || player.isKraken()) && player.cocks.length == 1)
 			outputText("\nYour equipment has shifted to lie between your front tentacles.");
-		else if (player.isScylla())
+		else if (player.isScylla() || player.isKraken())
 			outputText("\nBetween front tentacles of your bestial body you have grown " + player.multiCockDescript() + "!\n");
 		else if (player.isAlraune())
 			outputText("\nYour equipment has shifted to lie below your pitcher now in the form of a mass of tentacle vine.");
@@ -627,7 +627,7 @@ public class PlayerAppearance extends BaseContent {
 			} else {
 				swingsWhere = " under your [cocks].";
 			}
-			if (player.hasPlainSkinOnly())
+			if (player.hasPlainSkinOnly() || player.hasRubberSkin())
 				outputText("A [sack]" + sdesc + " with [balls] swings heavily" + swingsWhere);
 			else if (player.hasFur())
 				outputText("A fuzzy [sack] filled with [balls] swings low" + swingsWhere);
@@ -651,7 +651,7 @@ public class PlayerAppearance extends BaseContent {
 	{
 		if(player.gender == 2 && player.isTaur() && player.lowerBody != 26)
 			outputText("\nYour womanly parts have shifted to lie between your hind legs, in a rather feral fashion.");
-		if(player.gender == 2 && player.isScylla())
+		if(player.gender == 2 && (player.isScylla() || player.isKraken()))
 			outputText("\nYour womanly parts have shifted to lie underneath your tentacle legs.");
 		outputText("\n");
 		if (player.vaginas.length == 1){
@@ -909,6 +909,8 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  Where your legs would normally start you have grown the body of a spider, with " + num2Text(player.legCount) + " spindly legs that sprout from its sides.");
 			else if (player.lowerBody == LowerBody.SCYLLA)
 				outputText("  Where your legs would normally start you have grown the body of an octopus, with " + num2Text(player.legCount) + " tentacle legs that sprout from your [hips].");
+			else if (player.lowerBody == LowerBody.KRAKEN)
+				outputText("  Where your legs would normally start you've grown the body of a giant squid, with " + num2Text(player.legCount) + " tentacles leg that sprout from your [hips], two of them larger than the others. Your tentacle reaches for up to "+player.tallness*2+" feet in length!");
 			else if (player.lowerBody == LowerBody.PLANT_FLOWER)
 				outputText("  Around your waist, the petals of a large pink orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the centre, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud.  While you don't technically have legs anymore, you can still move around on your " + num2Text(player.legCount) + " vine-like stamens.");
 			else if (player.lowerBody == LowerBody.MELKIE)
@@ -1479,6 +1481,9 @@ public class PlayerAppearance extends BaseContent {
 		if (player.rearBody.type == RearBody.CENTIPEDE) {
 			outputText("  Around your neck sits a set of pincer like maxillipeds. You can use them to sting and hold onto your prey.");
 		}
+		if (player.rearBody.type == RearBody.KRAKEN) {
+			outputText("  Small glowing dots draw a trail all over the length of your body. They shine beautifully in both the deepest waters and the night giving you a somewhat ominous presence.");
+		}
 	}
 	public function describeWings():void {
 //WINGS!
@@ -1666,6 +1671,10 @@ public class PlayerAppearance extends BaseContent {
 		if (player.horns.type == Horns.SPELL_TAG) {
 			if (player.horns.count > 0)
 				outputText("  On your forehead is a cursed spell tag, the source of your current predicament and supernatural powers.");
+		}
+		if (player.horns.type == Horns.KRAKEN) {
+			if (player.horns.count > 0)
+				outputText("  Crowning above your head is a fleshy Kraken hood easily adding you a few extra inch in height.\n");
 		}
 	}
 	public function describeTongue():void {
