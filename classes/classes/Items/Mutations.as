@@ -12727,11 +12727,11 @@ public final class Mutations extends MutationsHelper
 					if (player.cocks.length == 1) { //Single cawks
 						outputText("\n\nYour feel your [cock] bending and flexing of its own volition... looking down, you see it morph into a green vine-like shape.  <b>You now have a tentacle cock!</b>  ");
 						//Set primary cock flag
-						player.cocks[0].cockType = CockTypesEnum.TENTACLE;
+						player.cocks[0].cockType = CockTypesEnum.SCYLLATENTACLE;
 					}
 					if (player.cockTotal() > 1) { //multi
 						outputText("\n\nYour feel your [cocks] bending and flexing of their own volition... looking down, you watch them morph into flexible vine-like shapes.  <b>You now have green tentacle cocks!</b>  ");
-						for (var x:int = 0; x < player.cocks.length; x++) player.cocks[x].cockType = CockTypesEnum.TENTACLE;
+						for (var x:int = 0; x < player.cocks.length; x++) player.cocks[x].cockType = CockTypesEnum.SCYLLATENTACLE;
 					}
 				}
 			}
@@ -12770,8 +12770,9 @@ public final class Mutations extends MutationsHelper
 			}
 			
 			//Physical changes:
+
 			//Skin
-			if ((player.skinAdj != "slippery" || !player.hasPlainSkinOnly()) && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+            if (player.skinAdj != "slippery" || (!player.hasPlainSkinOnly() && player.skinType != Skin.AQUA_RUBBER_LIKE) && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\n");
 				if (player.hasFur()) outputText("You suddenly start sweating abundantly as your [skin.type] fall off leaving bare the smooth skin underneath.  ");
 				else if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ");
@@ -12812,7 +12813,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//Legs
-			if (player.faceType == Face.HUMAN && player.lowerBody != LowerBody.GARGOYLE && (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.CLOVEN_HOOFED)) {
+			if (player.faceType == Face.HUMAN && player.lowerBody != LowerBody.GARGOYLE && (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.CLOVEN_HOOFED || player.lowerBody != LowerBody.SCYLLA)) {
 				if (changes < changeLimit && rand(3) == 0) {
 					if (player.lowerBody == LowerBody.CLOVEN_HOOFED) outputText("\n\nYour lower half suddenly transform back into two human legs. You so missed having normal legs like before.");
 					if (player.lowerBody == LowerBody.NAGA) outputText("\n\nYour tail split in two and turn into a pair of legs. You missed behing able to walk instead of slithering around.");
@@ -12845,18 +12846,12 @@ public final class Mutations extends MutationsHelper
 				}
 				changes++;
 			}
-			//Skin part 2
-		//	if (player.hasPlainSkinOnly() && player.skinAdj == "slippery" && player.skinAdj != "rubberlike slippery" && changes < changeLimit && rand(4) == 0) {
-		//		outputText("\n\nYour body is hit by a quake of sensation as your body shift into something more fitting for underwater swimming, your flesh becoming rubbery like the flesh of octopus and squid. You now have rubber like skin same as a scylla or a kraken.");
-		//		player.skinAdj = "rubberlike slippery";
-		//		changes++;
-		//	}
 			//FAILSAFE CHANGE
 			if (changes == 0) outputText("\n\nRemarkably, the black ink has no effect.  Should you really be surprised at black ink NOT doing anything?");
 			player.refillHunger(5);
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
-	/*
+
 		public function krakenInk(type:Number, player:Player):void
 		{
 			//'type' refers to the variety of ink.
@@ -12878,11 +12873,448 @@ public final class Mutations extends MutationsHelper
 			//clear screen
 			clearOutput();
 			outputText("The ink taste salty and slimy, you really think you could use a full glass of fresh water to wash your aching throat.");
-			
-			if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
-			
+
+            //Statistical changes:
+            //-Raises intelligence to 80.
+            if (player.inte < 80 && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nAs you finish drinking the ink you suddenly feel more cunning and by far way smarter.");
+                dynStats("int", 1);
+                changes++;
+            }
+            //-Raises strength to 90.
+            if (player.str < 90 && rand(3) == 0 && changes < changeLimit) {
+                outputText("\n\nYou suddenly feel like you could do a wrestling contest with anyone who ask.");
+                if (player.str > 60) outputText(" Heck you feel so strong you could bend wood or even steel!");
+                dynStats("str", 1);
+                changes++;
+            }
+            //-Decrease muscle tone toward 30
+            if (player.tone >= 30 && rand(4) == 0 && changes < changeLimit) {
+                outputText("\n\nYour muscle start to vanish but strangely you didn't lose strength or gain any weight. Well that was weird.");
+                player.tone -= 3;
+                changes++;
+            }
+            //-Femininity to 100 (female scylla version)
+            if (type == 0 && player.femininity < 100 && changes < changeLimit && rand(3) == 0) {
+                changes++;
+                outputText(player.modFem(100, 3 + rand(5)));
+            }
+            //-Femininity to 0 (male scylla version)
+            if (type == 2 && player.femininity > 0 && changes < changeLimit && rand(3) == 0) {
+                changes++;
+                outputText(player.modFem(0, 3 + rand(5)));
+            }
+
+            //Size
+            if ((player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) && player.tallness < 132 && changes < changeLimit && rand(4) == 0) {
+                var heightGain:int = rand(15) + 5;
+                //Flavor texts.  Flavored like 1950's cigarettes. Yum.
+                outputText("\n\nYou notice that your tentacles have lengthened. Furthermore, you are clearly taller.");
+                player.tallness += heightGain;
+                changes++;
+            }
+
+            if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+            //Sexual Changes:
+            //FEMALE
+            if (player.gender == 2 || player.gender == 3) {
+                //Single vag
+                if (player.vaginas.length == 1) {
+                    if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_DROOLING && changes < changeLimit && rand(2) == 0) {
+                        temp = player.vaginas.length;
+                        while (temp > 0) {
+                            temp--;
+                            if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) player.vaginas[temp].vaginalWetness++;
+                            changes++;
+                        }
+                        if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) {
+                            outputText("\n\nYour pussy feels hot and juicy, aroused and tender.  You cannot resist as your hands dive into your [vagina].  You quickly orgasm, squirting fluids everywhere.  <b>You are now a squirter</b>.");
+                            player.orgasm();
+                        }
+                        if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) {
+                            outputText("\n\nWow your wet down there just what on going on. When you put your hand to your " + vaginaDescript(temp) + ". Surprised you discover it's twice as more lubricated then before.");
+                        }
+                    }
+                    if (player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING && changes < changeLimit && rand(3) == 0) {
+                        outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your [vagina] has grown larger, in depth AND size.");
+                        player.vaginas[0].vaginalLooseness++;
+                        changes++;
+                    }
+                }
+                //Multicooch
+                else {
+                    //determine least wet
+                    //temp - least wet
+                    //temp2 - saved wetness
+                    //temp3 - counter
+                    temp = 0;
+                    temp2 = player.vaginas[temp].vaginalWetness;
+                    temp3 = player.vaginas.length;
+                    while (temp3 > 0) {
+                        temp3--;
+                        if (temp2 > player.vaginas[temp3].vaginalWetness) {
+                            temp = temp3;
+                            temp2 = player.vaginas[temp].vaginalWetness;
+                        }
+                    }
+                    if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) {
+                        outputText("Your pussies feel hot and juicy, aroused and tender.  You cannot resist plunging your hands inside your [vagina]s.  You quiver around your fingers, squirting copious fluids over yourself and the ground.  The fluids quickly disappear into the dirt.");
+                        player.orgasm();
+                        changes++;
+                    }
+                    if (player.vaginas[temp].vaginalWetness < VaginaClass.WETNESS_DROOLING && changes < changeLimit && rand(2) == 0) {
+                        outputText("\n\nWow your wet down there just what on going on. When you put your hand to one of your " + vaginaDescript(temp) + " you discover not only is it twice as more lubricated then before.");
+                        player.vaginas[temp].vaginalWetness++;
+                        changes++;
+                    }
+                    //determine smallest
+                    //temp - least big
+                    //temp2 - saved looseness
+                    //temp3 - counter
+                    temp = 0;
+                    temp2 = player.vaginas[temp].vaginalLooseness;
+                    temp3 = player.vaginas.length;
+                    while (temp3 > 0) {
+                        temp3--;
+                        if (temp2 > player.vaginas[temp3].vaginalLooseness) {
+                            temp = temp3;
+                            temp2 = player.vaginas[temp].vaginalLooseness;
+                        }
+                    }
+                    if (player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING && changes < changeLimit && rand(3) == 0) {
+                        outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize one of your " + vaginaDescript(temp) + " has grown larger, in depth AND size.");
+                        player.vaginas[temp].vaginalLooseness++;
+                        changes++;
+                    }
+                }
+            }
+            //Feminization of males
+            if (type == 0 && (player.gender == 1 || player.gender == 3) && player.cocks.length > 0 && rand(2) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
+                //If the player has at least one dick, decrease the size of each slightly,
+                outputText("\n\n");
+                temp = 0;
+                temp2 = player.cocks.length;
+                temp3 = 0;
+                //Find biggest cock
+                while (temp2 > 0) {
+                    temp2--;
+                    if (player.cocks[temp].cockLength <= player.cocks[temp2].cockLength) temp = temp2;
+                }
+                //Shrink said cock
+                if (player.cocks[temp].cockLength < 6 && player.cocks[temp].cockLength >= 2.9) {
+                    player.cocks[temp].cockLength -= .5;
+                    temp3 -= .5;
+                }
+                temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
+                player.lengthChange(temp3, 1);
+                if (player.cocks[temp].cockLength < 2) {
+                    outputText("  ");
+                    if (player.cockTotal() == 1 && !player.hasVagina()) {
+                        outputText("Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.");
+                        if (player.balls > 0) outputText("  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.");
+                        outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>");
+                        player.balls = 0;
+                        player.ballSize = 1;
+                        player.createVagina();
+                        player.clitLength = .25;
+                        player.removeCock(0, 1);
+                    }
+                    else {
+                        player.killCocks(1);
+                    }
+                }
+                //if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
+                if (player.cocks.length == 0 && !player.hasVagina()) {
+                    player.createVagina();
+                    player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
+                    player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
+                    player.vaginas[0].virgin = true;
+                    player.clitLength = .25;
+                    outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
+
+                    changes++;
+                    dynStats("lus", 10);
+                }
+            }
+            //MALES
+            //Masculinization of females
+            if (type == 2 && (player.gender == 2 || player.gender == 3) && player.cocks.length > 0 && rand(2) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
+                //Kills vagina size (and eventually the whole vagina)
+                if (player.vaginas.length > 0) {
+                    if (player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_TIGHT) {
+                        //tighten that bitch up!
+                        outputText("\n\nYour [vagina] clenches up painfully as it tightens up, becoming smaller and tighter.");
+                        player.vaginas[0].vaginalLooseness--;
+                    }
+                    else {
+                        outputText("\n\nA tightness in your groin is the only warning you get before your <b>[vagina] disappears forever</b>!");
+                        //Goodbye womanhood!
+                        player.removeVagina(0, 1);
+                        if (player.cocks.length == 0) {
+                            outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
+                            player.createCock();
+                            player.cocks[0].cockLength = player.clitLength + 2;
+                            player.cocks[0].cockThickness = 1;
+                            player.cocks[0].cockType = CockTypesEnum.HUMAN;
+                            player.clitLength = .25;
+                        }
+                    }
+                    changes++;
+                }
+                //-Remove extra breast rows
+                if (changes < changeLimit && player.bRows() > 1 && rand(3) == 0) {
+                    changes++;
+                    outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
+                    if (player.bRows() >= 3) outputText("abdomen");
+                    else outputText("chest");
+                    outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
+                    if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
+                    else outputText(player.skinTone + " " + player.skinDesc);
+                    outputText(" remains. <b>You've lost a row of breasts!</b>");
+                    dynStats("sen", -5);
+                    player.removeBreastRow(player.breastRows.length - 1, 1);
+                }
+                //Shrink boobages till they are normal
+                else if (rand(2) == 0 && changes < changeLimit && player.breastRows.length > 0) {
+                    //Single row
+                    if (player.breastRows.length == 1) {
+                        //Shrink if bigger than B cups
+                        if (player.breastRows[0].breastRating >= 1) {
+                            temp = 1;
+                            player.breastRows[0].breastRating--;
+                            //Shrink again if huuuuge
+                            if (player.breastRows[0].breastRating > 8) {
+                                temp++;
+                                player.breastRows[0].breastRating--;
+                            }
+                            //Talk about shrinkage
+                            if (temp == 1) outputText("\n\nYou feel a weight lifted from you, and realize your [breasts] have shrunk to " + player.breastCup(0) + "s.");
+                            if (temp == 2) outputText("\n\nYou feel significantly lighter.  Looking down, you realize your breasts are MUCH smaller, down to " + player.breastCup(0) + "s.");
+                            changes++;
+                        }
+
+                    }
+                    //multiple
+                    else {
+                        //temp2 = amount changed
+                        //temp3 = counter
+                        temp = 0;
+                        temp2 = 0;
+                        temp3 = 0;
+                        if (player.biggestTitSize() >= 1) outputText("\n");
+                        while (temp3 < player.breastRows.length) {
+                            if (player.breastRows[temp3].breastRating >= 1) {
+                                player.breastRows[temp3].breastRating--;
+                                temp2++;
+                                outputText("\n");
+                                //If this isn't the first change...
+                                if (temp2 > 1) outputText("...and y");
+                                else outputText("Y");
+                                outputText("our " + breastDescript(temp3) + " shrink, dropping to " + player.breastCup(temp3) + "s.");
+                            }
+                            temp3++;
+                        }
+                        if (temp2 == 2) outputText("\nYou feel so much lighter after the change.");
+                        if (temp2 == 3) outputText("\nWithout the extra weight you feel particularly limber.");
+                        if (temp2 >= 4) outputText("\nIt feels as if the weight of the world has been lifted from your shoulders, or in this case, your chest.");
+                        if (temp2 > 0) changes++;
+                    }
+                }
+            }
+
+            //Boost vaginal capacity without gaping
+            if ((type == 0 || type == 1) && changes < changeLimit && rand(3) == 0 && player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) < 200) {
+                if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
+                player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5);
+                outputText("\n\nThere is a sudden... emptiness within your [vagina].  Somehow you know you could accommodate even larger... insertions.");
+                changes++;
+            }
+            //Increase player's breast size, if they are big DD or smaller
+            if ((type == 0 || type == 1) && player.smallestTitSize() <= 5 && player.gender == 2 && changes < changeLimit && rand(4) == 0) {
+                outputText("\n\nAfter drinking it, your chest aches and tingles, and your hands reach up to scratch at it unthinkingly.  Silently, you hope that you aren't allergic to it.  Just as you start to scratch at your " + breastDescript(player.smallestTitRow()) + ", your chest pushes out in slight but sudden growth.");
+                player.breastRows[player.smallestTitRow()].breastRating++;
+                changes++;
+            }
+            //Change one prick to a vine-like tentacle cock.
+            if ((type == 2 || type == 1) && rand(3) == 0 && player.cocks.length > 0) {
+                if (player.tentacleCocks() < player.cockTotal()) {
+                    if (player.cocks.length == 1) { //Single cawks
+                        outputText("\n\nYour feel your [cock] bending and flexing of its own volition... looking down, you see it morph into a tentacle-like shape.  <b>You now have a tentacle cock!</b>  ");
+                        //Set primary cock flag
+                        player.cocks[0].cockType = CockTypesEnum.SCYLLATENTACLE;
+                    }
+                    if (player.cockTotal() > 1) { //multi
+                        outputText("\n\nYour feel your [cocks] bending and flexing of their own volition... looking down, you watch them morph into flexible vine-like shapes.  <b>You now have green tentacle cocks!</b>  ");
+                        for (var x:int = 0; x < player.cocks.length; x++) player.cocks[x].cockType = CockTypesEnum.SCYLLATENTACLE;
+                    }
+                }
+            }
+            //Grow cock(s) longer
+            if ((type == 2 || type == 1) && rand(3) == 0 && player.cocks.length > 0) {
+                //single cock
+                if (player.cocks.length == 1) {
+                    temp2 = player.increaseCock(0, rand(4) + 3);
+                    temp = 0;
+                    dynStats("sen", 1, "lus", 10);
+                }
+                //Multicock
+                else {
+                    //Find smallest cock
+                    //Temp2 = smallness size
+                    //temp = current smallest
+                    temp3 = player.cocks.length;
+                    temp = 0;
+                    while (temp3 > 0) {
+                        temp3--;
+                        //If current cock is smaller than saved, switch values.
+                        if (player.cocks[temp].cockLength > player.cocks[temp3].cockLength) {
+                            temp2 = player.cocks[temp3].cockLength;
+                            temp = temp3;
+                        }
+                    }
+                    //Grow smallest cock!
+                    //temp2 changes to growth amount
+                    temp2 = player.increaseCock(temp, rand(4) + 3);
+                    dynStats("sen", 1, "lus", 10);
+                    if (player.cocks[temp].cockThickness <= 2) player.cocks[temp].thickenCock(1);
+                }
+                if (temp2 > 2) outputText("\n\nYour " + cockDescript(temp) + " tightens painfully, inches of bulging dick-flesh pouring out from your crotch as it grows longer.  Thick pre forms at the pointed tip, drawn out from the pleasure of the change.");
+                if (temp2 > 1 && temp2 <= 2) outputText("\n\nAching pressure builds within your crotch, suddenly releasing as an inch or more of extra dick-flesh spills out.  A dollop of pre beads on the head of your enlarged " + cockDescript(temp) + " from the pleasure of the growth.");
+                if (temp2 <= 1) outputText("\n\nA slight pressure builds and releases as your " + cockDescript(temp) + " pushes a bit further out of your crotch.");
+            }
+
+            //Physical changes:
+            //Hood
+            if (player.lowerBody == LowerBody.KRAKEN && player.horns.type != Horns.KRAKEN && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nYou feel like your head is going to explode and, in a way, it does. Something large and fleshy grows out of the top of your head. When you move toward the water to check your reflection, you discover that you have grown a <b>large fleshy hood, crowning your head just like a Kraken.</b>");
+                setHornType(Horns.KRAKEN);
+                changes++;
+            }
+
+            //Skin
+            //Skin
+            if ((!player.hasPlainSkinOnly() && player.skinType != Skin.AQUA_RUBBER_LIKE) && rand(3) == 0 && changes < changeLimit) {
+                humanizeSkin();
+                changes++;
+            }
+            //Skin part 2
+            if (player.hasPlainSkinOnly() && player.skinType != Skin.AQUA_RUBBER_LIKE && changes < changeLimit && rand(4) == 0) {
+                outputText("You suddenly start sweating abundantly.  ");
+                outputText("As much as you try to dry your skin using a cloth it remains slimy and slippery to the touch as if constantly wet! Your skin is now slippery like the one of a sea creature!");
+                outputText("\n\nMeanwhile your body is hit by a quake of sensation as your body shift into something more fitting for underwater swimming, your flesh becoming rubbery like the flesh of octopus and squid. <b>You now have rubber like skin same as a scylla or a kraken.</b>");
+                var color:String = player.skin.color;
+                player.skin.growCoat(Skin.AQUA_RUBBER_LIKE);
+                player.skin.setProps({adj:"slippery"});
+                player.coatColor = color;
+                changes++;
+            }
+            //SkinColor
+            if (player.coatColor != "ghostly white" && player.skinType == Skin.AQUA_RUBBER_LIKE && changes < changeLimit && rand(4) == 0) {
+                outputText("\n\nAs you look at yourself for a second, you notice some small glowing pink dot appearing on your skin as it starts to change hue toward a ghostly white. " +
+                        "You think of the deep sea predators using light to confound and capture prey. " +
+                        "You realise that you now have <b>bioluminescent ghostly pale skin that will glow slightly even in the darkest reach of the ocean.</b>");
+                player.coatColor = "ghostly pale";
+                setRearBody(RearBody.KRAKEN);
+                changes++;
+            }
+
+            //Face
+            if (player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {
+                humanizeFace();
+                changes++;
+            }
+            //Ears
+            if (player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
+                if (player.ears.type != Ears.HUMAN) {
+                    outputText("\n\nYour ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, pointed elfin ears.</b>");
+                }
+                else {
+                    outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!");
+                }
+                setEarType(Ears.ELFIN);
+                changes++;
+            }
+
+            //Arms
+            if (player.arms.type != Arms.KRAKEN && changes < changeLimit && rand(3) == 0){
+                setArmType(Arms.KRAKEN);
+                outputText("\n\nYou notice your hand and forearm skin slowly darkening until it turns pitch black as your nails disappear entirely. Your hands now look like they’re covered in a thin layer of black rubber like gloves, but you know the truth. These truly are your arms and you can feel the touch on your black hands. At least you'll always be dressed elegantly with your<b> new kraken arms.</b>");
+                changes++;
+            }
+
+            //Eyes Color
+            var krakenEyeColor:Array = ["bright pink", "light purple", "purple"];
+            if (!InCollection(player.eyes.colour, krakenEyeColor)){
+                setEyeTypeAndColor(Eyes.HUMAN,randomChoice(krakenEyeColor));
+                outputText("\n\nYou feel something fundamental change in your sight when you go check yourself in a puddle you notice your iris now are <b>[eyecolor].</b>");
+                changes++;
+            }
+
+            //Ink spray attack
+            if ((type == 0 && player.gender == 2 || type == 2 && player.gender == 1) && (player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) && player.findPerk(PerkLib.InkSpray) < 0) {
+                if (type == 0) {
+                    outputText("\n\nYour pussy suddenly start gushing around and you squirt so much your tentacle are drenched. Blushing red in embarrassment you examine the damage lifting a tentacle and suddenly a jet black shot of girl juice shoot out of your pussy like a spray dying a nearby tree black.");
+                    outputText(" You smell the liquid and discover your girl juice turned into actual ink! Thinking about octopus behing able to spray ink you point your pussy at a random tree and take aim. As your relax the newly discovery organ a gush of ink splatter the tree.");
+                }
+                if (type == 2) {
+                    outputText("\n\nYour cock suddenly start leaking pre-cum around so much your front tentacles are drenched. Blushing red in embarrassment you examine the damage reaching to it and suddenly when you merely touched it a jet black shot of cum shoot out of your cock like a spray dying a nearby tree black.");
+                    outputText(" You smell the liquid and discover your cum turned into actual ink! Thinking about octopus behing able to spray ink you point your cock at a random tree and take aim. After moment of pumping it shoot another portion of the ink that splatter at the tree.");
+                }
+                outputText(" You think you could use this interesting ability to blind foe in battle.  (<b>Gained Perk: Ink Spray!</b>)");
+                player.createPerk(PerkLib.InkSpray, 0, 0, 0, 0);
+                changes++;
+            }
+
+            //Legs
+            if (player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.SCYLLA && player.lowerBody != LowerBody.KRAKEN) {
+                if (changes < changeLimit && rand(3) == 0) {
+                    if (player.lowerBody == LowerBody.CLOVEN_HOOFED) outputText("\n\nYour lower half suddenly transform back into two human legs. You so missed having normal legs like before.");
+                    if (player.lowerBody == LowerBody.NAGA) outputText("\n\nYour tail split in two and turn into a pair of legs. You missed behing able to walk instead of slithering around.");
+                    if (player.lowerBody == LowerBody.MELKIE) humanizeLowerBody();
+                    outputText("<b>  You now have human legs in place of your feet!</b>");
+                    setLowerBody(LowerBody.HUMAN);
+                    player.legCount = 2;
+                    dynStats("spe", 1);
+                    changes++;
+                }
+            }
+            if (((type == 0 && player.gender == 2) || (type == 1 && player.gender == 3) || (type == 2 && player.gender == 1)) && player.lowerBody == LowerBody.HUMAN && player.lowerBody != LowerBody.SCYLLA && player.lowerBody != LowerBody.KRAKEN && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nYou suddenly feel your legs giving in bellow you and you fall off to the ground unable to resume standing.");
+                if (player.tailType != 0) {
+                    if (player.tailType == 5 || player.tailType == 6) outputText(" Your insectile abdomen");
+                    else if (player.tailType > 0 && player.tailCount > 1) outputText(" Your tails");
+                    else outputText(" Your tail");
+                    outputText(" recede back into your body disappearing entirely into your backside as if it never existed.");
+                }
+                outputText(" You suddenly feel something weird down your leg as you notice they are literally boneless! No wonder you fell down there's no way those empty lump of flesh would be able to carry your weight around. As you think over how you will fix this annoying situation wracking pain hits you in waves as your legs seems to stretch to a ridiculous length up to twice your height. Just as you think this can't get any weirder your legs split apart dividing into four then again into eighths!");
+                outputText(" You watch you toe disappearing turning your feet into what could have been described as eight very weird tails when your legs start to cover with what looks like suction cups similar to those of an octopus. <b>Your legs have turned into tentacles!</b>\n\n");
+                if (type == 0) outputText(" Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became about huge like a mouth ready to engulf anything.");
+                if (type == 1) outputText(" Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became about huge like a mouth ready to engulf anything and your cock is right between your 2 front 'legs' looking almost like another tentacle.");
+                if (type == 2) outputText(" Looking for your privates you notice your cock is right between your 2 front 'legs' looking almost like another tentacle.");
+                outputText(" As you lift yourself standing on your tentacles not only can you still walk somewhat but heck don't you feel like grabbing something and squeezing it in your pleasurable new legs!");
+                setLowerBody(LowerBody.SCYLLA);
+                player.legCount = 8;
+                if (player.tailType != Tail.NONE) {
+                    setTailType(Tail.NONE, 0);
+                }
+                changes++;
+            }
+            if (((type == 0 && player.gender == 2) || (type == 1 && player.gender == 3) || (type == 2 && player.gender == 1)) && player.lowerBody == LowerBody.SCYLLA && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nSomething in your tentacle legs shifts as additional limbs grow. You look down to discover two larger tentacles have grown along your eight legs. <b>They look similar to the ones a kraken might have.</b>");
+                setLowerBody(LowerBody.KRAKEN);
+                player.legCount = 10;
+                if (player.tailType != Tail.NONE) {
+                    setTailType(Tail.NONE, 0);
+                }
+                changes++;
+            }
+
+            //FAILSAFE CHANGE
+            if (changes == 0) outputText("\n\nRemarkably, the abyssal ink has no effect.  Should you really be surprised at this item NOT doing anything?");
+            player.refillHunger(5);
+            flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
-	*/
+
 		public function yetiCum(player:Player):void
 		{
 			player.slimeFeed();

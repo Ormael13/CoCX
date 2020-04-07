@@ -96,6 +96,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.cor < 50) dynStats("cor", 0.05);
 				if (player.cor < 80) dynStats("cor", 0.05);
 			}
+			//Armor
+			if (player.armor == armors.LTHCARM)
+			{
+				if (player.cor < 50) dynStats("cor", 0.05);
+				if (player.cor < 80) dynStats("cor", 0.05);
+			}
 			if (player.armor == armors.DBARMOR)
 			{
 				dynStats("cor", -0.1);
@@ -997,6 +1003,20 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 		private function hourlyCheckRacialPerks():Boolean {
 			var needNext:Boolean = false;
+
+			//Armor unequip zone
+			if (player.armor == armors.CTPALAD && !player.isTaur())
+			{
+				outputText("Due to your current body shape you are no longuer able to wear the centaur armor and thus you drop the over encumbering equipment back into your inventory");
+				SceneLib.inventory.takeItem(player.setArmor(armors.NOTHING), playerMenu);
+				needNext = true;
+			}
+			if (player.armor == armors.KBDRESS && !player.isScylla() && !player.isKraken())
+			{
+				outputText("Due to your current body shape you are no longuer able to wear the Kraken black dress and thus you put the over item back into your inventory");
+				SceneLib.inventory.takeItem(player.setArmor(armors.NOTHING), playerMenu);
+				needNext = true;
+			}
 			//Demonic hunger perk
 			if (player.demonScore() >= 10) { //Check for being a demon enought
 				if (player.findPerk(PerkLib.DemonEnergyThirst) < 0) {
@@ -1399,13 +1419,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Titanic Strength
-			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 17) && player.tallness >= 80 && player.findPerk(PerkLib.TitanicStrength) < 0) {
+			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 17 || player.scyllaScore() >= 12) && player.tallness >= 80 && player.findPerk(PerkLib.TitanicStrength) < 0) {
 				outputText("\nWhoa you've grown so big its sheer miracle if you don't damage the landscape while moving. This said your size contribute to your strength as well now.\n\n<b>(Gained Titanic Strength perk!)</b>\n");
 				player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if ((player.hydraScore() < 14 && player.oniScore() < 12 && player.orcaScore() < 17 || player.tallness < 80)  && player.findPerk(PerkLib.TitanicStrength) >= 0) {
-				if (player.tallness < 84) outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
+				if (((player.hydraScore() < 14 && player.oniScore() < 12 && player.orcaScore() < 17 && player.scyllaScore() < 12) || player.tallness < 80) && player.findPerk(PerkLib.TitanicStrength) >= 0) {
+				if (player.tallness < 80) outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
 				else outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
 				player.removePerk(PerkLib.TitanicStrength);
 				needNext = true;

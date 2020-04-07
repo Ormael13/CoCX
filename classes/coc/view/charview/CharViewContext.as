@@ -101,6 +101,7 @@ public class CharViewContext extends ExecContext {
 				sexyRedBikini: player.armor == game.armors.SREBIKNI,
 				sexyWhiteBikini: player.armor == game.armors.SWHBIKNI,
 				sexyYellowBikini: player.armor == game.armors.SYEBIKNI,
+				krakenBlackDress: player.armor == game.armors.KBDRESS,
 				platemail: player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 
 				//viewable bra list

@@ -275,6 +275,9 @@ public class Skin extends SaveableBodyPart {
 	public function hasGooSkin():Boolean {
 		return base.isAny(GOO);
 	}
+	public function hasRubberSkin():Boolean {
+		return base.isAny(AQUA_RUBBER_LIKE);
+	}
 	public function hasGhostSkin():Boolean {
 		return base.isAny(TRANSPARENT);
 	}
