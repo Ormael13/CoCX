@@ -48,7 +48,10 @@ import classes.internals.Utils;
 			menu();
 			addButton(0, "Shop", YuShopMain);
 			addButton(1, "Talk", YuShopTalkMain);
-			if (flags[kFLAGS.YU_TALKS] == 1) addButton(2, "Sex", YuShopSex);
+			if (flags[kFLAGS.YU_TALKS] == 1) {
+				if (player.gender == 0) addButtonDisabled(2, "Sex", "You need to have any gender other than genderless.");
+				else addButton(2, "Sex", YuShopSex);
+			}
 			else addButtonDisabled(2, "Sex", "You need to talk with her first.");
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}

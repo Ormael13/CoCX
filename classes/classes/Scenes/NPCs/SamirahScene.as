@@ -166,7 +166,7 @@ public function samirahMainCampMenu():void {
 		outputText("You check on Samirah who to your surprise is watching Jojo do his daily set of trainings. She sighs as you come over.\n\n");
 		outputText("\"<i>I really don't get what’s so cool about monks. I couldn’t do the crane stance even if I wanted to, mostly because I have no legs.</i>\"\n\n");
 		outputText("What about the snake stance?\n\n");
-		outputText("\"<i>Well now, that's something I would consider. So tell me -name-, did you need anything?</i>\"\n\n");
+		outputText("\"<i>Well now, that's something I would consider. So tell me [name], did you need anything?</i>\"\n\n");
 		doNext(samirahMainCampMenu2);
 	}
 	else if (rand(2) == 0 && flags[kFLAGS.LUNA_FOLLOWER] >= 4 && flags[kFLAGS.LUNA_FOLLOWER] < 7 && !player.hasStatusEffect(StatusEffects.LunaOff)) {

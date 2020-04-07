@@ -11651,6 +11651,11 @@ use namespace CoC;
 		public function EnergyDependentRestore():void {
 			addStatusValue(StatusEffects.EnergyDependent, 1, 5);
 			addStatusValue(StatusEffects.EnergyDependent, 2, 12);
+			if (statusEffectv1(StatusEffects.EnergyDependent) > 45) {
+				var rebalance:Number = statusEffectv1(StatusEffects.EnergyDependent);
+				rebalance -= 45;
+				addStatusValue(StatusEffects.EnergyDependent, 1, -rebalance);
+			}
 			spe += statusEffectv1(StatusEffects.EnergyDependent);
 			inte += statusEffectv2(StatusEffects.EnergyDependent);
 			soulforce += maxSoulforce() * 0.04;
