@@ -440,8 +440,8 @@
         <cell rect="151,450,49,59" name="overfeet/fire" dx="69" dy="115"/>
         <cell rect="701,90,49,59" name="muscle/muscle" dx="69" dy="64"/>
         <cell rect="401,90,49,59" name="clothe/krakenM" dx="69" dy="64"/>
-		<cell rect="851,90,49,59" name="clothe/krakenL" dx="69" dy="64"/>
-		<cell rect="901,90,49,59" name="clothe/krakenS" dx="69" dy="64"/>
+        <cell rect="851,90,49,59" name="clothe/krakenL" dx="69" dy="64"/>
+        <cell rect="901,90,49,59" name="clothe/krakenS" dx="69" dy="64"/>
     </spritemap>
     <spritemap file="extra.png">
         <cell rect="2,55,147,128" name="legs_fg/alraune" dx="24" dy="82"/>
@@ -525,6 +525,9 @@
         <cell rect="882,12,125,75" name="armorLegs_fg/taurarmorbottom" dx="62" dy="96"/>
         <cell rect="776,42,25,55" name="armorLeftArm/fullplateleftarm" dx="68" dy="66"/>
         <cell rect="804,42,25,55" name="armorRightArm/fullplaterightarm" dx="92" dy="66"/>
+        <cell rect="644,798,173,156" name="armorNeck/WalpurgisClothes" dx="10" dy="12"/>
+        <cell rect="817,798,173,156" name="clothCape/WalpurgisClothesBack" dx="9" dy="12"/>
+        <cell rect="150,91,35,25" name="eyes/SpecialForeheadShadow" dx="71" dy="35"/>
     </spritemap>
     <spritemap file="hair.png">
         <cell rect="1,70,59,65" name="hair/0" dx="65" dy="21"/>
@@ -544,6 +547,7 @@
         <cell rect="271,350,89,164" name="hair_bg/hellcat" dx="50" dy="4"/>
         <cell rect="541,350,89,164" name="hair/yukionna" dx="51" dy="4"/>
         <cell rect="631,350,89,164" name="hair_bg/yukionna" dx="51" dy="4"/>
+        <cell rect="1,449,28,30" name="hair/hairHood" dx="81" dy="39"/>
     </spritemap>
     <spritemap file="head.png">
         <cell rect="1,70,29,32" name="head/human" dx="80" dy="37"/>
@@ -584,7 +588,7 @@
         <cell rect="151,150,29,32" name="eyes/manticore" dx="80" dy="37"/>
         <cell rect="181,150,29,32" name="eyes/orca" dx="80" dy="37"/>
         <cell rect="211,150,29,32" name="eyes/raiju" dx="80" dy="37"/>
-        <cell rect="241,150,29,32" name="eyes/infernal" dx="80" dy="37"/>
+        <cell rect="241,150,29,32" name="eyes_fg/infernal" dx="80" dy="37"/>
         <cell rect="271,150,29,32" name="eyes/yandere" dx="80" dy="37"/>
         <cell rect="301,150,29,32" name="eyes/goat" dx="80" dy="37"/>
         <cell rect="331,150,29,32" name="eyes/centipede" dx="80" dy="37"/>
@@ -843,12 +847,14 @@
         <cell rect="86,211,83,139" name="tail/mouse_taur" dx="135" dy="46"/>
         <cell rect="170,211,83,139" name="tail/mouse_fire" dx="85" dy="40"/>
         <cell rect="170,211,83,139" name="tail/mouse_fire_taur" dx="135" dy="46"/>
-        <cell rect="255,211,83,139" name="tail/cat" dx="85" dy="40"/>
-        <cell rect="255,211,83,139" name="tail/cat_taur" dx="138" dy="55"/>
-        <cell rect="339,211,83,139" name="tail/cat2" dx="85" dy="40"/>
-        <cell rect="339,211,83,139" name="tail/cat2_taur" dx="138" dy="55"/>
-        <cell rect="593,211,83,139" name="tail/hellcat" dx="85" dy="40"/>
-        <cell rect="593,211,83,139" name="tail/hellcat_taur" dx="138" dy="55"/>
+        <cell rect="255,211,83,139" name="tail/cat" dx="98" dy="40"/>
+        <cell rect="255,211,83,139" name="tail/cat_taur" dx="148" dy="51"/>
+        <cell rect="339,211,83,139" name="tail/cat2" dx="98" dy="40"/>
+        <cell rect="339,211,83,139" name="tail/cat2_taur" dx="148" dy="55"/>
+        <cell rect="593,211,83,139" name="tail/hellcat" dx="98" dy="39"/>
+        <cell rect="593,211,83,139" name="tail/hellcat_taur" dx="148" dy="55"/>
+        <cell rect="761,211,83,139" name="tail/kasha" dx="98" dy="40"/>
+        <cell rect="761,211,83,139" name="tail/kasha_taur" dx="148" dy="55"/>
         <cell rect="509,211,83,139" name="tail/horse" dx="85" dy="40"/>
         <cell rect="509,211,83,139" name="tail/horse_taur" dx="133" dy="45"/>
         <cell rect="1,351,168,69" name="tail/reptile" dx="10" dy="90"/>
@@ -937,6 +943,7 @@
 		<layer name="overclothe"/>
 		<layer name="hands_fg"/>
 		<layer name="arms_fg"/>
+		<layer name="eyes_fg"/>
 		<layer name="clotheScarf"/>
 		
 		<layer name="wings_front"/>
@@ -966,6 +973,7 @@
         <layer name="ears"/>
 		<layer name="hair"/>
         <layer name="eyes"/>
+		<layer name="forehead"/>
         <layer name="ears_bg"/>
 
         <layer name="face"/>
@@ -999,6 +1007,7 @@
         <layer name="hair_bg"/>
 		<layer name="wings"/>
 		<layer name="rearbody"/>
+		<layer name="clothCape"/>
         <layer name="tail_fg"/>
         <layer name="tail"/>
         <layer name="wings_bg"/>
@@ -1244,7 +1253,7 @@
                 <show part="eyes/raiju"/>
             </case>
 			<case values="Eyes.INFERNAL">
-                <show part="eyes/infernal"/>
+                <show part="eyes_fg/infernal"/>
             </case>
 			<case values="Eyes.DISPLACER">
                 <show part="eyes/devil"/>
@@ -1252,7 +1261,7 @@
 			<case values="Eyes.FERAL">
                 <show part="eyes/yandere"/>
             </case>
-			<case values="Eyes.GOAT">
+			<case values="Eyes.GOAT, Eyes.KRAKEN">
                 <show part="eyes/goat"/>
             </case>
             <case values="Eyes.CENTIPEDE">
@@ -3567,6 +3576,16 @@
 				</default>
 			</switch>	
 			</if>
+        </if>
+		
+		<if test="walpurgisIzaliaRobe">
+			<hide part="hair_bg/*"/>
+			<if test="hairType == Hair.BURNING">
+				<hide part="hair/*"/>
+				<show part="hair/hairHood"/>
+			</if>
+			<show part="armorNeck/WalpurgisClothes"/>
+			<show part="clothCape/WalpurgisClothesBack"/>
         </if>
 		
     </logic>

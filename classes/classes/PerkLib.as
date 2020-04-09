@@ -630,6 +630,9 @@ public class PerkLib
 		public static const CatlikeNimblenessEvolved:PerkType = mk("Cat-like Nimbleness (Evolved)", "Cat-like Nimbleness (Evolved)",
 				"Your nimble body allows you to move more swiftly and with greater nimbleness than before.",
 				"You choose the 'Cat-like Nimbleness (Evolved)' perk. Continuous usage of cat-like flexibility caused it to undergo change.");
+		public static const CatlikeNimblenessFinalForm:PerkType = mk("Cat-like Nimbleness (Final Form)", "Cat-like Nimbleness (Final Form)",
+				"Your nimble body allows you to move more swiftly and with even greater nimbleness than before.",
+				"You choose the 'Cat-like Nimbleness (Final Form)' perk. Continuous usage of cat-like flexibility caused it to undergo change.");
 		public static const Channeling:PerkType = mk("Channeling", "Channeling",
 				"[if (player.inte>=60)" +
 						"Increases base spell strength by 20% and base mana pool by 30." +
@@ -2854,6 +2857,9 @@ public class PerkLib
 		public static const VitalShot:PerkType = mk("Vital Shot", "Vital Shot",
 				"Gain a +10% chance to do a critical strike with arrows.",
 				"You choose the 'Vital Shot' perk, gaining an additional +10% chance to cause a critical hit with arrows.");
+		public static const WalpurgisIzaliaRobe:PerkType = mk("WalpurgisIzaliaRobe", "WalpurgisIzaliaRobe",
+				"Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.",
+				"Increase fire damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.\n");
 		public static const WarCaster:PerkType = mk("War caster", "War caster",
 				"Increases magical and physical critical chance by up to 25% based on intelligence.",
 				"You choose the 'War caster' perk, increasing magical and physical critical chance by up to 25% based on intelligence.");
@@ -5930,6 +5936,11 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.demonScore() >= 14;
             }, "Demon race");
+			CatlikeNimblenessFinalForm.requireLevel(24)
+					.requirePerk(CatlikeNimblenessEvolved)
+					.requireCustomFunction(function (player:Player):Boolean {
+						return player.catScore() >= 8 || player.nekomataScore() >= 8 || player.displacerbeastScore() >= 8 || player.hellcatScore() >= 8 || player.cheshireScore() >= 8;
+					}, "Any cat race");
             FrozenHeartFinalForm.requireLevel(24)
 				.requirePerk(FrozenHeartEvolved)
 				.requireCustomFunction(function (player:Player):Boolean {

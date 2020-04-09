@@ -59,6 +59,7 @@ public class Tail extends SaveableBodyPart {
 	public static const HINEZUMI:int			= 43;
 	public static const THUNDERBIRD:int			= 44;
 	public static const BEAR:int				= 45;
+	public static const TWINKASHA:int			= 46;
 	// Don't forget to add new types in DebugMenu.as list TAIL_TYPE_CONSTANTS
 
 	override public function set type(value:int):void {

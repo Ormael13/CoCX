@@ -5721,7 +5721,7 @@ public final class Mutations extends MutationsHelper
 				setTailType(Tail.CAT,1);
 				changes++;
 			}
-			if (player.tailType == Tail.CAT && player.tailCount == 1 && player.ears.type == Ears.CAT && type == 1 && rand(3) == 0 && changes < changeLimit) {
+			if (player.tailType == Tail.CAT && !player.tailType == Tail.BURNING && player.tailCount == 1 && player.ears.type == Ears.CAT && type == 1 && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\nA tingling pressure builds on your backside, and your soft, glossy tail begins to glow with an eerie, ghostly light.  With a crackle of electrical energy, it starts splitting into two, stopping once the split reaches a third of the way down the length!  <b>You now have a cat tail that is forked on the last third of its length.</b>");
 				setTailType(Tail.NEKOMATA_FORKED_1_3);
 				changes++;
@@ -5740,6 +5740,12 @@ public final class Mutations extends MutationsHelper
 				setTailType(Tail.CAT,2);
 				changes++;
 			}
+            //Kasha tail
+            if (player.tailType == Tail.BURNING && player.tailCount == 1 && player.ears.type == Ears.CAT && type == 1 && rand(3) == 0 && changes < changeLimit) {
+                outputText("\n\nSomething weird is happening to your tail as the fire suddenly begins to flare to twice its volume. You screech, hiss and yowl in pain like a cat as it suddenly cracks and splits into <b>two fiery cat tails.</b> Feeling horny you proceed to stretch and lick your vagina to damp out your growing heat but it swiftly becomes obvious you will not be able to get rid of that scorching heat without a victim. ");
+                setTailType(Tail.TWINKASHA, 2);
+                changes++;
+            }
 			//Da paws (if already haz tail)
 			if ((player.tailType == Tail.CAT || player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3) && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT && type != 3) {
 				//hoof to cat:
@@ -13223,6 +13229,7 @@ public final class Mutations extends MutationsHelper
                 humanizeFace();
                 changes++;
             }
+
             //Ears
             if (player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
                 if (player.ears.type != Ears.HUMAN) {
@@ -13242,11 +13249,12 @@ public final class Mutations extends MutationsHelper
                 changes++;
             }
 
+
             //Eyes Color
             var krakenEyeColor:Array = ["bright pink", "light purple", "purple"];
-            if (!InCollection(player.eyes.colour, krakenEyeColor)){
-                setEyeTypeAndColor(Eyes.HUMAN,randomChoice(krakenEyeColor));
-                outputText("\n\nYou feel something fundamental change in your sight when you go check yourself in a puddle you notice your iris now are <b>[eyecolor].</b>");
+            if (!InCollection(player.eyes.colour, krakenEyeColor) || player.eyes.type != Eyes.KRAKEN){
+                setEyeTypeAndColor(Eyes.KRAKEN,randomChoice(krakenEyeColor));
+                outputText("\n\nYou feel something fundamental change in your sight when you go check yourself in a puddle you notice that not only they now have horizontal slit like those of an octupus but your iris are now <b>[eyecolor].</b>");
                 changes++;
             }
 

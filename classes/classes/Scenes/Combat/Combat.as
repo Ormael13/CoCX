@@ -2590,17 +2590,17 @@ public function throwWeapon():void {
 				outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
 			else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
 			damage = doDamage(damage, true, true);
-			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			outputText("\n\n");
 			doNext(endHpVictory);
 			return;
 		}
 		else {
-			if (MSGControll == false) {
+			if (!MSGControll) {
 				outputText(".  It's clearly very painful. ");
 				damage = doDamage(damage, true, true);
 			}
-			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			outputText("\n\n");
 			heroBaneProc(damage);
 		}
@@ -4491,6 +4491,7 @@ public function doMagicDamage(damage:Number, apply:Boolean = true, display:Boole
 }
 public function doFireDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 	MDOCount ++; // for multipile attacks to prevent stupid repeating of damage messages
+	if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage*2;
 	damage *= doDamageReduction();
 	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
@@ -4569,6 +4570,7 @@ public function doFireDamage(damage:Number, apply:Boolean = true, display:Boolea
 }
 public function doIceDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 	MDOCount ++; // for multipile attacks to prevent stupid repeating of damage messages
+	if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage/100;
 	damage *= doDamageReduction();
 	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
@@ -4645,6 +4647,7 @@ public function doIceDamage(damage:Number, apply:Boolean = true, display:Boolean
 }
 public function doLightingDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 	MDOCount ++; // for multipile attacks to prevent stupid repeating of damage messages
+	if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage/100;
 	damage *= doDamageReduction();
 	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
