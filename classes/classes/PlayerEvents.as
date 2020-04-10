@@ -1018,7 +1018,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Demonic hunger perk
-			if (player.demonScore() >= 10) { //Check for being a demon enought
+			if (player.demonScore() >= 10 || player.hasStatusEffect(StatusEffects.PlayerPhylactery)) { //Check for being a demon enought
 				if (player.findPerk(PerkLib.DemonEnergyThirst) < 0) {
 					outputText("\nYou begin fantasising about pussies and cocks foaming at the idea of fucking or getting fucked. It would look like you aquired the demons hunger for sex and can now feed from the orgasms of your partners. \n\n(<b>Gained Perk: Demonic Hunger</b>)\n");
 					player.createPerk(PerkLib.DemonEnergyThirst, 0, 0, 0, 0);
@@ -1026,7 +1026,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Demonic hunger perk loss
-			if (player.demonScore() < 10) { //Check for being a demon enought
+			if (player.demonScore() < 10 && !player.hasStatusEffect(StatusEffects.PlayerPhylactery)) { //Check for being a demon enought
 				if (player.findPerk(PerkLib.DemonEnergyThirst) > 0) {
 					outputText("\nYour mind clears up as becoming less of a demon you also lost the demonic hunger only sex could sate. \n\n(<b>Lost Perk: Demonic Hunger</b>)\n");
 					player.removePerk(PerkLib.DemonEnergyThirst);

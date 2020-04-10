@@ -475,15 +475,20 @@ public class PerkMenu extends BaseContent {
 		clearOutput();
 		menu();
 		outputText("Set weither you will be sacrificing blood to empower your magic or not.\n\n");
-		if (!player.hasStatusEffect(StatusEffects.DarkRitual)) addButton(10, "Off", DarkRitualOptionOn);
-		if (player.hasStatusEffect(StatusEffects.DarkRitual)) addButton(10, "On", DarkRitualOptionOff);
-
+		if (!player.hasStatusEffect(StatusEffects.DarkRitual)) {
+			outputText("Dark ritual is currently inactive.");
+			addButton(10, "On", DarkRitualOptionOn);
+		}
+		if (player.hasStatusEffect(StatusEffects.DarkRitual)) {
+			outputText("Dark ritual is currently active.");
+			addButton(11, "Off", DarkRitualOptionOff);
+		}
 		var e:MouseEvent;
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu);
 		else addButton(14, "Back", displayPerks);
 		function DarkRitualOptionOn():void {
 			player.createStatusEffect(StatusEffects.DarkRitual,0,0,0,0);
-			golemsbehaviourOptions();
+			DarkRitualOption();
 		}
 		function DarkRitualOptionOff():void {
 			player.removeStatusEffect(StatusEffects.DarkRitual);

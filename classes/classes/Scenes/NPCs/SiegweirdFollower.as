@@ -110,6 +110,7 @@ public function siegweirdFirstEncounterPostFightAnotherFightLost():void
 public function siegweirdRepeatEncounterPostFight():void
 {
 	if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3) {
+		clearOutput();
 		outputText("You find Siegweird about where you left him. He's still patrolling the ridge looking for his target which you assume right now is having a good read next to your camp. The moment he spots you however, he does not greet you warmly.\n\n");
 		outputText("\"<i>So you came back after all. I should've known, you've been working with this witch from the start haven't you? Even went so far as to sell your soul to her? I don't know what she promised you but in the end you will come to regret it, be it by my blade or by some twisted machinations she may have prepared for you.</i>\"\n\n");
 		outputText("You tell him you're here for his pendant and his life and that you ain't leaving without it.\n\n");

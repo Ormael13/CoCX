@@ -4892,14 +4892,21 @@ public function doPoisonDamage(damage:Number, apply:Boolean = true, display:Bool
 				break;
 		}
 		//Blood mages use HP for spells
+		var damage:Number;
 		if (player.hasPerk(PerkLib.BloodMage)
 			&& (type == USEMANA_MAGIC || type == USEMANA_WHITE || type == USEMANA_BLACK)) {
 			player.takePhysDamage(mod);
+			if (player.hasStatusEffect(StatusEffects.DarkRitual)) {
+				damage = player.maxHP()*0.1;
+				player.takePhysDamage(damage);
+				statScreenRefresh();
+			}
 			statScreenRefresh();
 			return;
 		}
 		if (player.hasStatusEffect(StatusEffects.DarkRitual)) {
-			player.takePhysDamage(player.maxHP()/10);
+			damage = player.maxHP()*0.1;
+			player.takePhysDamage(damage);
 			statScreenRefresh();
 		}
 		if (mod < 0) {

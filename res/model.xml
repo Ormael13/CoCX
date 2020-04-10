@@ -3581,6 +3581,7 @@
 		<if test="walpurgisIzaliaRobe">
 			<hide part="horns/*"/>
 			<hide part="ears/*"/>
+			<hide part="ears_bg/*"/>
 			<hide part="antennae/*"/>
 			<hide part="hair_bg/*"/>
 			<if test="hairType == Hair.BURNING">

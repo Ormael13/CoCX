@@ -4542,9 +4542,9 @@ public class PerkLib
                     .requireInt(200)
                     .requireLevel(42)
 					.requireCustomFunction(function (player:Player):Boolean {
-                        return player.statusEffectv1(StatusEffects.AlvinaTraining2) > 3;// || player.statusEffectv1(StatusEffects.SiegweirdTraining2) > 2
-                    }, "Finished Alvina quest line up to the optional battle");//Siegweird
-			DarkRitual.requirePerk(PrestigeJobWarlock)
+                        return player.statusEffectv1(StatusEffects.AlvinaTraining2) > 2;// || player.statusEffectv1(StatusEffects.SiegweirdTraining2) > 2
+                    }, "Finished a certain black mage quest line up to the third part of the training");//Siegweird
+			DarkRitual.requirePerk(HexKnowledge)
 					.requireInt(200)
 					.requireLevel(43);
 			HalfStepToPeerlessSpirituality.requireWis(160)
@@ -4571,7 +4571,7 @@ public class PerkLib
                     .requireLevel(48);
             HexKnowledge.requirePerk(PrestigeJobWarlock)
                     .requireInt(225)
-                    .requireLevel(48);
+                    .requireLevel(43);
             //Tier 9 Intelligence perks
             HalfStepToInhumanSpirituality.requireWis(200)
                     .requireInt(300)
