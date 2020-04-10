@@ -1327,7 +1327,10 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  From your backside hangs a long tail, leonine in shape and covered mostly by a layer of [skin coat.color2] fur with a tip made of a tuft of [skin coat.color] colored feathers. It moves sinuously as you walk.");
 		}
 		else if(player.tailType == Tail.BURNING) {
-			outputText("  A blazing cat tail pokes out from your " + assDescript() + ". It has a tendency to light things on fire if you are not careful but at least It assists with your balance.");
+			outputText("  A blazing cat tail pokes out from your " + assDescript() + ". It has a tendency to light things on fire if you are not careful but at least it assists with your balance.");
+		}
+		else if(player.tailType == Tail.TWINKASHA) {
+			outputText("  A pair blazing cat tail pokes out from your " + assDescript() + ". They have a tendency to light things on fire if you are not careful but at least they assists with your balance. From these tails you draw in tremendous fell power.");
 		}
 		else if(player.tailType == Tail.HINEZUMI) {
 			outputText("  A blazing, " + player.skinTone + " mouse tail pokes out from your " + assDescript() + ". It has a tendency to light things on fire if you are not careful.");

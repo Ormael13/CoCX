@@ -2454,6 +2454,14 @@
 					</else>
 				</if>
             </case>
+			<case values="Tail.TWINKASHA">
+				<if test="isTaur()">
+					<show part="tail/kasha_taur"/>
+					<else>
+						<show part="tail/kasha"/>
+					</else>
+				</if>
+            </case>
             <case values="Tail.LIZARD,Tail.DRACONIC,Tail.CAVE_WYRM">
 				<if test="isTaur()">
 					<show part="tail/reptile_taur"/>

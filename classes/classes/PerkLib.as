@@ -257,6 +257,9 @@ public class PerkLib
 		public static const DarkRitual:PerkType = mk("Dark Ritual", "Dark Ritual",
 				"Allow to use the Dark Ritual option wich can be Toggled on or off. While Dark Ritual is active spells are 300% stronger but consume 10% health on cast as they are paid in blood.",
 				"You choose the 'Dark Ritual' perk, Allowing you to sacricice health to empower your spells.");
+		//public static const BloodSacrifice:PerkType = mk("Blood Sacrifice", "Blood Sacrifice",
+				//"You are currently sacrificing blood to empower your spells.",
+				//"You are currently sacrificing blood to empower your spells.");
 		public static const JobLeader:PerkType = mk("Job: Leader", "Job: Leader",
 				"You've trained in ways to better lead combat companions or command minions. (+5 to max int/wis, -5 to max lib - scalable)",
 				"You choose 'Job: Leader' perk, training yourself to better lead your companions or command minions.");
@@ -4546,7 +4549,7 @@ public class PerkLib
                     }, "Finished a certain black mage quest line up to the third part of the training");//Siegweird
 			DarkRitual.requirePerk(HexKnowledge)
 					.requireInt(200)
-					.requireLevel(43);
+					.requireLevel(45);
 			HalfStepToPeerlessSpirituality.requireWis(160)
                     .requireInt(240)
                     .requirePerk(SuperiorSpirituality)

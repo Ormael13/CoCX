@@ -5699,7 +5699,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//DA TAIL (IF ALREADY HAZ URZ)
-			if (player.tailType != Tail.CAT && player.ears.type == Ears.CAT && type != 1 && rand(3) == 0 && changes < changeLimit) {
+			if (player.tailType != Tail.CAT && player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA && player.ears.type == Ears.CAT && type != 1 && rand(3) == 0 && changes < changeLimit) {
 				if (player.tailType == Tail.NONE) {
 					choice = rand(3);
 					if (choice == 0) outputText("\n\nA pressure builds in your backside. You feel under your [armor] and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers, bursts out the back of your clothes and grows most of the way to the ground. A thick coat of fur springs up to cover your new tail. You instinctively keep adjusting it to improve your balance. <b>You now have a cat-tail.</b>");
@@ -5710,7 +5710,7 @@ public final class Mutations extends MutationsHelper
 				setTailType(Tail.CAT);
 				changes++;
 			}
-			if (player.tailType != Tail.CAT && player.tailType != Tail.NEKOMATA_FORKED_1_3 && player.tailType != Tail.NEKOMATA_FORKED_2_3 && player.ears.type == Ears.CAT && type == 1 && rand(3) == 0 && changes < changeLimit) {
+			if (player.tailType != Tail.CAT && player.tailType != Tail.NEKOMATA_FORKED_1_3 && player.tailType != Tail.NEKOMATA_FORKED_2_3 && player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA && player.ears.type == Ears.CAT && type == 1 && rand(3) == 0 && changes < changeLimit) {
 				if (player.tailType == Tail.NONE) {
 					choice = rand(3);
 					if (choice == 0) outputText("\n\nA pressure builds in your backside. You feel under your [armor] and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers, bursts out the back of your clothes and grows most of the way to the ground. A thick coat of fur springs up to cover your new tail. You instinctively keep adjusting it to improve your balance. <b>You now have a cat-tail.</b>");
@@ -5721,7 +5721,7 @@ public final class Mutations extends MutationsHelper
 				setTailType(Tail.CAT,1);
 				changes++;
 			}
-			if (player.tailType == Tail.CAT && !player.tailType == Tail.BURNING && player.tailCount == 1 && player.ears.type == Ears.CAT && type == 1 && rand(3) == 0 && changes < changeLimit) {
+			if (player.tailType == Tail.CAT && player.tailCount == 1 && player.ears.type == Ears.CAT && type == 1 && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\nA tingling pressure builds on your backside, and your soft, glossy tail begins to glow with an eerie, ghostly light.  With a crackle of electrical energy, it starts splitting into two, stopping once the split reaches a third of the way down the length!  <b>You now have a cat tail that is forked on the last third of its length.</b>");
 				setTailType(Tail.NEKOMATA_FORKED_1_3);
 				changes++;
@@ -5841,7 +5841,7 @@ public final class Mutations extends MutationsHelper
 				changes++;
 			}
 			//DAT EYES
-			if (rand(3) == 0 && changes < changeLimit && player.tongue.type == Tongue.CAT && player.eyes.type != Eyes.CAT_SLITS && type != 3) {
+			if (rand(3) == 0 && changes < changeLimit && player.tongue.type == Tongue.CAT && player.eyes.type != Eyes.CAT_SLITS && player.eyes.type != Eyes.INFERNAL && type != 3) {
 				//Gain cat-like eyes
 				outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.  <b>Your eyes has turned into those of cat with vertical slit.</b>");
 				setEyeType(Eyes.CAT_SLITS);
@@ -5875,10 +5875,10 @@ public final class Mutations extends MutationsHelper
 			}
 			//-Skin color change – dark gray
 			if (player.skinTone != "dark gray" && !player.isGargoyle() && changes < changeLimit && rand(3) == 0 && type == 3) {
-				outputText("\n\nIt takes a while for you to notice, but <b>");
-				if (player.hasFur()) outputText("the skin under your [skin coat.color] " + player.skinDesc);
+				outputText("\n\nIt takes a while for you to notice, but");
+				if (player.hasFur()) outputText("the skin under your <b>[skin coat.color]</b>" + player.skinDesc);
 				else outputText("your " + player.skinDesc);
-				outputText(" has changed to become dark gray colored.</b>");
+				outputText(" has changed to become <b>dark gray</b> colored.");
 				player.skinTone = "dark gray";
 				changes++;
 			}

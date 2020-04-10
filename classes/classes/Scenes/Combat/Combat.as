@@ -4907,7 +4907,7 @@ public function doPoisonDamage(damage:Number, apply:Boolean = true, display:Bool
 		if (player.hasStatusEffect(StatusEffects.DarkRitual)) {
 			damage = player.maxHP()*0.1;
 			player.takePhysDamage(damage);
-			statScreenRefresh();
+			//statScreenRefresh();
 		}
 		if (mod < 0) {
 			mod *= manaRecoveryMultiplier();

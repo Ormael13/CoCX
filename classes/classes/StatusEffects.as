@@ -807,7 +807,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CrinosShape:StatusEffectType               = mkCombat("Crinos Shape");
 		public static const CurseOfDesire:StatusEffectType             = mkCombat("Curse of Desire");
 		public static const CurseOfWeeping:StatusEffectType            = mkCombat("Curse of Weeping");
-		public static const DarkRitual:StatusEffectType            	   = mkCombat("Dark Ritual");
+		public static const DarkRitual:StatusEffectType            	   = mk("Dark Ritual");
 		public static const Defend:StatusEffectType                    = mkCombat("Defend");
 		public static const DefendMonsterVer:StatusEffectType          = mkCombat("Defend Monster Ver");
 		public static const DemonSeed:StatusEffectType                 = mkCombat("DemonSeed");
