@@ -3579,10 +3579,21 @@
         </if>
 		
 		<if test="walpurgisIzaliaRobe">
+			<hide part="horns/*"/>
+			<hide part="ears/*"/>
+			<hide part="antennae/*"/>
 			<hide part="hair_bg/*"/>
 			<if test="hairType == Hair.BURNING">
 				<hide part="hair/*"/>
 				<show part="hair/hairHood"/>
+			</if>
+			<if test="hairType == Hair.RAIJU">
+				<hide part="hair/*"/>
+				<show part="hair/feather"/>
+			</if>
+			<if test="hairType == Hair.FLUFFY">
+				<hide part="hair/*"/>
+				<show part="hair/feather"/>
 			</if>
 			<show part="armorNeck/WalpurgisClothes"/>
 			<show part="clothCape/WalpurgisClothesBack"/>

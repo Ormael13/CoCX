@@ -4718,6 +4718,7 @@ public function doLightingDamage(damage:Number, apply:Boolean = true, display:Bo
 }
 public function doDarknessDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 	MDOCount ++; // for multipile attacks to prevent stupid repeating of damage messages
+	if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage*2;
 	damage *= doDamageReduction();
 	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
@@ -4897,7 +4898,10 @@ public function doPoisonDamage(damage:Number, apply:Boolean = true, display:Bool
 			statScreenRefresh();
 			return;
 		}
-		//Mana restoration buffs!
+		if (player.hasStatusEffect(StatusEffects.DarkRitual)) {
+			player.takePhysDamage(player.maxHP()/10);
+			statScreenRefresh();
+		}
 		if (mod < 0) {
 			mod *= manaRecoveryMultiplier();
 		}
@@ -6510,68 +6514,52 @@ private function combatStatusesUpdate():void {
 		}
 	}
 	//Spells
-	if (player.hasStatusEffect(StatusEffects.CooldownSpellArcticGale)) {
-		if (player.statusEffectv1(StatusEffects.CooldownSpellArcticGale) <= 0) {
-			player.removeStatusEffect(StatusEffects.CooldownSpellArcticGale);
+	if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier1)) {
+		if (player.statusEffectv1(StatusEffects.CooldownSpellBlackTier1) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownSpellBlackTier1);
 		}
 		else {
-			player.addStatusValue(StatusEffects.CooldownSpellArcticGale,1,-1);
+			player.addStatusValue(StatusEffects.CooldownSpellBlackTier1,1,-1);
 		}
 	}
-	if (player.hasStatusEffect(StatusEffects.CooldownSpellChainLighting)) {
-		if (player.statusEffectv1(StatusEffects.CooldownSpellChainLighting) <= 0) {
-			player.removeStatusEffect(StatusEffects.CooldownSpellChainLighting);
+	if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier2)) {
+		if (player.statusEffectv1(StatusEffects.CooldownSpellBlackTier2) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownSpellBlackTier2);
 		}
 		else {
-			player.addStatusValue(StatusEffects.CooldownSpellChainLighting,1,-1);
+			player.addStatusValue(StatusEffects.CooldownSpellBlackTier2,1,-1);
 		}
 	}
-	if (player.hasStatusEffect(StatusEffects.CooldownSpellDarknessShard)) {
-		if (player.statusEffectv1(StatusEffects.CooldownSpellDarknessShard) <= 0) {
-			player.removeStatusEffect(StatusEffects.CooldownSpellDarknessShard);
+	if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier3)) {
+		if (player.statusEffectv1(StatusEffects.CooldownSpellBlackTier3) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownSpellBlackTier3);
 		}
 		else {
-			player.addStatusValue(StatusEffects.CooldownSpellDarknessShard,1,-1);
+			player.addStatusValue(StatusEffects.CooldownSpellBlackTier3,1,-1);
 		}
 	}
-	if (player.hasStatusEffect(StatusEffects.CooldownSpellDuskWave)) {
-		if (player.statusEffectv1(StatusEffects.CooldownSpellDuskWave) <= 0) {
-			player.removeStatusEffect(StatusEffects.CooldownSpellDuskWave);
+	if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier1)) {
+		if (player.statusEffectv1(StatusEffects.CooldownSpellWhiteTier1) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownSpellWhiteTier1);
 		}
 		else {
-			player.addStatusValue(StatusEffects.CooldownSpellDuskWave,1,-1);
+			player.addStatusValue(StatusEffects.CooldownSpellWhiteTier1,1,-1);
 		}
 	}
-	if (player.hasStatusEffect(StatusEffects.CooldownSpellIceSpike)) {
-		if (player.statusEffectv1(StatusEffects.CooldownSpellIceSpike) <= 0) {
-			player.removeStatusEffect(StatusEffects.CooldownSpellIceSpike);
+	if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier2)) {
+		if (player.statusEffectv1(StatusEffects.CooldownSpellWhiteTier2) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownSpellWhiteTier2);
 		}
 		else {
-			player.addStatusValue(StatusEffects.CooldownSpellIceSpike,1,-1);
+			player.addStatusValue(StatusEffects.CooldownSpellWhiteTier2,1,-1);
 		}
 	}
-	if (player.hasStatusEffect(StatusEffects.CooldownSpellLightningBolt)) {
-		if (player.statusEffectv1(StatusEffects.CooldownSpellLightningBolt) <= 0) {
-			player.removeStatusEffect(StatusEffects.CooldownSpellLightningBolt);
+	if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier3)) {
+		if (player.statusEffectv1(StatusEffects.CooldownSpellWhiteTier3) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownSpellWhiteTier3);
 		}
 		else {
-			player.addStatusValue(StatusEffects.CooldownSpellLightningBolt,1,-1);
-		}
-	}
-	if (player.hasStatusEffect(StatusEffects.CooldownSpellPolarMidnight)) {
-		if (player.statusEffectv1(StatusEffects.CooldownSpellPolarMidnight) <= 0) {
-			player.removeStatusEffect(StatusEffects.CooldownSpellPolarMidnight);
-		}
-		else {
-			player.addStatusValue(StatusEffects.CooldownSpellPolarMidnight,1,-1);
-		}
-	}
-	if (player.hasStatusEffect(StatusEffects.CooldownSpellPyreBurst)) {
-		if (player.statusEffectv1(StatusEffects.CooldownSpellPyreBurst) <= 0) {
-			player.removeStatusEffect(StatusEffects.CooldownSpellPyreBurst);
-		}
-		else {
-			player.addStatusValue(StatusEffects.CooldownSpellPyreBurst,1,-1);
+			player.addStatusValue(StatusEffects.CooldownSpellWhiteTier3,1,-1);
 		}
 	}
 	if (player.hasStatusEffect(StatusEffects.CooldownSpellRegenerate)) {
@@ -6588,14 +6576,6 @@ private function combatStatusesUpdate():void {
 		}
 		else {
 			player.addStatusValue(StatusEffects.CooldownSpellWaveOfEcstasy,1,-1);
-		}
-	}
-	if (player.hasStatusEffect(StatusEffects.CooldownSpellWhitefire)) {
-		if (player.statusEffectv1(StatusEffects.CooldownSpellWhitefire) <= 0) {
-			player.removeStatusEffect(StatusEffects.CooldownSpellWhitefire);
-		}
-		else {
-			player.addStatusValue(StatusEffects.CooldownSpellWhitefire,1,-1);
 		}
 	}
 	//Companion Boosting PC Armor Value

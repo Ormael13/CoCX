@@ -254,6 +254,9 @@ public class PerkLib
 		public static const HexKnowledge:PerkType = mk("Hex Knowledge", "Hex Knowledge",
 				"Allow to cast hex magic spells as long corruption is 80+, locks out access to white spells and deal 20% more dmg when using black or hex magic to attack pure enemies.",
 				"You choose the 'Hex Knowledge' perk, gaining access to hex magic.");
+		public static const DarkRitual:PerkType = mk("Dark Ritual", "Dark Ritual",
+				"Allow to use the Dark Ritual option wich can be Toggled on or off. While Dark Ritual is active spells are 300% stronger but consume 10% health on cast as they are paid in blood.",
+				"You choose the 'Dark Ritual' perk, Allowing you to sacricice health to empower your spells.");
 		public static const JobLeader:PerkType = mk("Job: Leader", "Job: Leader",
 				"You've trained in ways to better lead combat companions or command minions. (+5 to max int/wis, -5 to max lib - scalable)",
 				"You choose 'Job: Leader' perk, training yourself to better lead your companions or command minions.");
@@ -2857,7 +2860,7 @@ public class PerkLib
 		public static const VitalShot:PerkType = mk("Vital Shot", "Vital Shot",
 				"Gain a +10% chance to do a critical strike with arrows.",
 				"You choose the 'Vital Shot' perk, gaining an additional +10% chance to cause a critical hit with arrows.");
-		public static const WalpurgisIzaliaRobe:PerkType = mk("WalpurgisIzaliaRobe", "WalpurgisIzaliaRobe",
+		public static const WalpurgisIzaliaRobe:PerkType = mk("Walpurgis Izalia Robe", "Walpurgis Izalia Robe",
 				"Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.",
 				"Increase fire damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.\n");
 		public static const WarCaster:PerkType = mk("War caster", "War caster",
@@ -4541,7 +4544,10 @@ public class PerkLib
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.statusEffectv1(StatusEffects.AlvinaTraining2) > 3;// || player.statusEffectv1(StatusEffects.SiegweirdTraining2) > 2
                     }, "Finished Alvina quest line up to the optional battle");//Siegweird
-        	HalfStepToPeerlessSpirituality.requireWis(160)
+			DarkRitual.requirePerk(PrestigeJobWarlock)
+					.requireInt(200)
+					.requireLevel(43);
+			HalfStepToPeerlessSpirituality.requireWis(160)
                     .requireInt(240)
                     .requirePerk(SuperiorSpirituality)
                     .requireLevel(42);
