@@ -29,14 +29,39 @@ package classes.Scenes
 		private function Changelog32():void {
 			clearOutput();
 			outputText("<b>Version 0.8n9:</b>\n\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
-			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-Orca TF has been revamped.\n");
+			outputText("-New Orca perk Whale fat.\n");
+			outputText("-New Orca ability play.\n");
+			outputText("-Orca sprite revised.\n");
+			outputText("-New Melkie tf was added.\n");
+			outputText("-Melkie Lung perk added.\n");
+			outputText("-Skelp can now be purchased in Yu shop.\n");
+			outputText("-New Centipede tf was added.\n");
+			outputText("-Centipede venom can be bought from moga hen and upgraded to potent venom at Lumi.\n");
+			outputText("-Hellcat was updated.\n");
+			outputText("-Hellcat now has a higher tf into Kasha. Try using a ghastly fruit.\n");
+			outputText("-Kraken TF was added evolving from Scylla.\n");
+			outputText("-Scylla constrict was empowered for Krakens.\n");
+			outputText("-Easter bunny TF was added.\n");
+			outputText("-New ability Easter bunny balls, Egg throw and Omni egg throw.\n");
+			outputText("-New perks Easter bunny bag.\n");
+			outputText("-Manticore tail shot now has Iterative attacks.\n");
+			outputText("-Pounce and Rend has been upgraded with multi attacks.\n");
+			outputText("-Manticore now has a pussy bodypart.\n");
+			outputText("-Bicorn/Unicorn scores have been redefined.\n");
+			outputText("-New Bicorn/Unicorn ability Aura of purity and Aura of Corruption.\n");
+			outputText("-Equine pussy is back or finaly here whatever you may call it.\n");
+			outputText("-Cave wyrm has been updated.\n");
+			outputText("-Cave wyrm now has a cock and pussy type instead of mere status.\n");
+			outputText("-Demons and kitsunes as well as players with phylactery can new heal and leech energy from sex.\n");
+			outputText("-Pussy are now recognised by the appearance screen.\n");
+			outputText("-New items: Sphinx Regalia availlable from Sanurah, Walpurgis Izalia Robe availlable in Kaiba shop, Kraken black dress availlable at Pinchou\n");
+			outputText("-Dark ritual was added to the Warlock prestige class perk tree.\n");
+			outputText("-Warlock now require less aggravating prerequisite.\n");
+			outputText("-Warlock no longuer spoils.\n");
+			outputText("-New sprites were added for: Centaur armor, All scarves, All Bikini, All Qipao, All Kimono, Goblin technomancer outfit, Full plate armors, Basic stat necklaces, Naga head accessory, Kasha tail, Centipede full body, Walpurgis Izalia Robe, Kraken Black Dress, Hinezumi stance, New cock Cave wyrm, New pussy Cave wyrm\n");
+			outputText("-Fixed Appearance screen declaring you as your lowest score race. You will now always be declared as by your highest valid score.\n");
+			outputText("-Fixed bugs: error in cat tf that would cause text to become bolded\n\n");/*ostatni punkt changelogu
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");
@@ -45,7 +70,10 @@ package classes.Scenes
 			//outputText("-Fixed Excellia will move to Lovers tab and add option to sleep with her, show up at hot springs or assist in fights as henchman.\n");
 			//outputText("-Added Mitzi and Excellia kids counter tracker to Stats page under Children subpage.\n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
-			outputText("-Fixed bugs: \n\n");/*ostatni punkt changelogu
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
+			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
@@ -104,25 +132,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -169,16 +179,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

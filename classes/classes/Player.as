@@ -4091,8 +4091,8 @@ use namespace CoC;
 				grandchimeraCounter++;
 //			if (mantisScore() >= 12)
 //				grandchimeraCounter++;
-//			if (scyllaScore() >= 7)
-//				grandchimeraCounter++;
+			if (scyllaScore() >= 12)
+				grandchimeraCounter++;
 			if (pigScore() >= 15)
 				grandchimeraCounter++;
 			if (melkieScore() >= 21)
@@ -7256,7 +7256,7 @@ use namespace CoC;
 				scyllaCounter += 2;
 			if (isKraken())
 				scyllaCounter += 4;
-			if (rearBody.type = RearBody.KRAKEN)
+			if (rearBody.type == RearBody.KRAKEN)
 				scyllaCounter++;
 			if (skinTone == "ghostly pale")
 				scyllaCounter++;
@@ -11815,4 +11815,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}
