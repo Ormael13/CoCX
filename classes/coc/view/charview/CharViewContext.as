@@ -47,7 +47,7 @@ public class CharViewContext extends ExecContext {
 				CaveWyrmNipples: player.hasStatusEffect(StatusEffects.GlowingNipples),
 				showClothing: [LowerBody.LION,LowerBody.GARGOYLE,LowerBody.GARGOYLE_2].indexOf(player.lowerBody) <= 0,
 				showArmClothing: [Arms.LION,Arms.DISPLACER,Arms.GARGOYLE,Arms.GARGOYLE_2,Arms.YETI,Arms.HINEZUMI].indexOf(player.arms.type) <= 0,
-				showLegClothing: [LowerBody.YETI,LowerBody.HOOFED,LowerBody.HARPY,LowerBody.GOO,LowerBody.NAGA,LowerBody.DRIDER,LowerBody.HINEZUMI,LowerBody.MELKIE].indexOf(player.lowerBody) <= 0,
+				showLegClothing: [LowerBody.YETI,LowerBody.HOOFED,LowerBody.HARPY,LowerBody.GOO,LowerBody.NAGA,LowerBody.DRIDER,LowerBody.HINEZUMI,LowerBody.MELKIE,LowerBody.CENTIPEDE,LowerBody.SCYLLA,LowerBody.KRAKEN].indexOf(player.lowerBody) <= 0,
 				PlayerHasViewableOutfit: player.isWearingArmor(),
 
 				Antennae     : Antennae,
@@ -102,6 +102,7 @@ public class CharViewContext extends ExecContext {
 				sexyWhiteBikini: player.armor == game.armors.SWHBIKNI,
 				sexyYellowBikini: player.armor == game.armors.SYEBIKNI,
 				krakenBlackDress: player.armor == game.armors.KBDRESS,
+				walpurgisIzaliaRobe: player.armor == game.armors.WIR,
 				platemail: player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 
 				//viewable bra list

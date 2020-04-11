@@ -64,6 +64,10 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can adjust your Will-o'-the-wisp behaviour during combat.</b>");
 			addButton(14, "Will-o'-the-wisp",WOTWbehaviourOptions);
 		}
+		if (player.hasPerk(PerkLib.DarkRitual)){
+			outputText("\n<b>You can choose if you wish to use dark ritual and sacrifice health to empower your magic.</b>");
+			addButton(12, "D.Ritual",DarkRitualOption);
+		}
 	}
 
 	public function doubleAttackOptions():void {
@@ -465,6 +469,31 @@ public class PerkMenu extends BaseContent {
             flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] = (attacking)?1:0;
             golemsbehaviourOptions();
         }
+	}
+
+	public function DarkRitualOption():void {
+		clearOutput();
+		menu();
+		outputText("Set weither you will be sacrificing blood to empower your magic or not.\n\n");
+		if (!player.hasStatusEffect(StatusEffects.DarkRitual)) {
+			outputText("Dark ritual is currently: <b>Inactive</b>.");
+			addButton(10, "On", DarkRitualOptionOn);
+		}
+		if (player.hasStatusEffect(StatusEffects.DarkRitual)) {
+			outputText("Dark ritual is currently: <b>Active</b>.");
+			addButton(11, "Off", DarkRitualOptionOff);
+		}
+		var e:MouseEvent;
+		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu);
+		else addButton(14, "Back", displayPerks);
+		function DarkRitualOptionOn():void {
+			player.createStatusEffect(StatusEffects.DarkRitual,0,0,0,0);
+			DarkRitualOption();
+		}
+		function DarkRitualOptionOff():void {
+			player.removeStatusEffect(StatusEffects.DarkRitual);
+			DarkRitualOption();
+		}
 	}
 	
 	public function WOTWbehaviourOptions():void {

@@ -72,7 +72,7 @@ public class Lumi extends BaseContent {
             [consumables.PURHONY,consumables.SPHONEY],
             [consumables.REDVIAL,consumables.VAMPBLD],
             [consumables.C_VEMOM,consumables.P_VEMOM],
-			[consumables.BLACKIN,consumables.ABYSSIN]
+			[consumables.BLACKIN,consumables.ABYSSIN],
             [consumables.ECTOPLS,consumables.PROTPLS],
             [consumables.C_VEMOM,consumables.P_VEMOM]
         ];
