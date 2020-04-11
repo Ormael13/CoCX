@@ -2058,6 +2058,7 @@ use namespace CoC;
 		}
 		public override function takeFireDamage(damage:Number, display:Boolean = false):Number {
 			//Round
+			if (hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage/4*3;
 			damage = Math.round(damage);
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
@@ -2839,7 +2840,12 @@ use namespace CoC;
 			}
 			if (TopRace == "hellcat") {
 				if (TopScore >= 10) {
-					race = "hellcat";
+					if (TopScore >= 17) {
+						race = "Kasha";
+					} else {
+						race = "hellcat";
+
+					}
 				}
 			}
 			if (TopRace == "displacer beast") {
@@ -2862,8 +2868,12 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "oomukade") {
-				if (TopScore >= 11) {
-					race = "oomukade";
+				if (TopScore >= 15) {
+					if (TopScore >= 18) {
+						race = "elder oomukade";
+					} else if (TopScore >= 15) {
+						race = "oomukade";
+					}
 				}
 			}
 			if (TopRace == "lizard") {
@@ -3265,7 +3275,10 @@ use namespace CoC;
 			}
 			if (TopRace == "mouse") {
 				if (TopScore >= 4) {
-					if (TopScore >= 12 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI) {
+					if (TopScore >= 15 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI) {
+						if (isTaur()) race = "hinezumi-taur";
+						race = "hinezumi";
+					} else if (TopScore >= 12 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI) {
 						if (isTaur()) race = "hinezumi-taur";
 						race = "hinezumi";
 					} else if (TopScore >= 8) {
@@ -3398,7 +3411,8 @@ use namespace CoC;
 			}
 			if (TopRace == "scylla") {
 				if (TopScore >= 4) {
-					if (TopScore >= 12) race = "kraken";
+					if (TopScore >= 17) race = "elder kraken";
+					else if (TopScore >= 12) race = "kraken";
 					else if (TopScore >= 7) race = "scylla";
 					else race = "half scylla";
 				}
@@ -3578,7 +3592,9 @@ use namespace CoC;
 			}
 			if (TopRace == "vampire") {
 				if (TopScore >= 6) {
-					race = TopScore >= 10 ? "vampire" : "dhampir"
+					if (TopScore >= 18) race = "pureblood vampire";
+					else if (TopScore >= 10) race = "vampire";
+					else race = "dhampir";
 				}
 			}
 			if (TopRace == "avian") {
@@ -3764,6 +3780,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.CatlikeNimbleness) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessFinalForm) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.DraconicLungs) >= 0)
 				internalChimeraCounter++;
@@ -4651,6 +4669,8 @@ use namespace CoC;
 				catCounter++;
 			if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0)
 				catCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0)
+				catCounter++;
 			if (findPerk(PerkLib.CatlikeNimbleness) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
 				catCounter++;
 			if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
@@ -4705,6 +4725,8 @@ use namespace CoC;
 				nekomataCounter++;
 			if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0)
 				nekomataCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0)
+				nekomataCounter++;
 			if (findPerk(PerkLib.CatlikeNimbleness) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
 				nekomataCounter++;
 			if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
@@ -4750,6 +4772,8 @@ use namespace CoC;
 				cheshireCounter++;
 			if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0)
 				cheshireCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0)
+				cheshireCounter++;
 			if (findPerk(PerkLib.CatlikeNimbleness) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
 				cheshireCounter++;
 			if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
@@ -4784,6 +4808,8 @@ use namespace CoC;
 				hellcatCounter++;
 			if (tailType == Tail.BURNING)
 				hellcatCounter++;
+			if (tailType == Tail.BURNING && tailCount == 2)
+				hellcatCounter+=3;
 			if (arms.type == Arms.CAT)
 				hellcatCounter++;
 			if (lowerBody == LowerBody.CAT)
@@ -4799,6 +4825,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.CatlikeNimbleness) > 0)
 				hellcatCounter++;
 			if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0)
+				hellcatCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0)
 				hellcatCounter++;
 			if (findPerk(PerkLib.CatlikeNimbleness) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
 				hellcatCounter++;
@@ -4849,6 +4877,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.CatlikeNimbleness) > 0)
 				displacerbeastCounter++;
 			if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0)
+				displacerbeastCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0)
 				displacerbeastCounter++;
 			if (findPerk(PerkLib.CatlikeNimbleness) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
 				displacerbeastCounter++;
@@ -6169,13 +6199,19 @@ use namespace CoC;
 			if (antennae.type == Antennae.CENTIPEDE)
 				oomukadeCounter++;
 			if (rearBody.type == RearBody.CENTIPEDE)
-				oomukadeCounter += 2;
+				oomukadeCounter += 4;
 			if (ears.type == Ears.ELFIN)
 				oomukadeCounter++;
 			if (skin.hasVenomousMarking())
 				oomukadeCounter += 2;
 			if (hasCock() && countCocksOfType(CockTypesEnum.OOMUKADE) > 0 || hasVagina() && vaginaType() == VaginaClass.VENOM_DRIPPING)
 				oomukadeCounter += 2;
+			//if (hasPerk(PerkLib.OomukadeGlands)
+			//oomukadeCounter++;
+			//if (hasPerk(PerkLib.OomukadeGlandsEvolved)
+			//oomukadeCounter++;
+			//if (hasPerk(PerkLib.OomukadeGlandsFinalForm)
+			//oomukadeCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				oomukadeCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && oomukadeCounter >= 4)
@@ -6850,6 +6886,8 @@ use namespace CoC;
 				sphinxCounter++;
 			if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0)
 				sphinxCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0)
+				sphinxCounter++;
 			if (findPerk(PerkLib.CatlikeNimbleness) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
 				sphinxCounter++;
 			if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
@@ -7242,12 +7280,14 @@ use namespace CoC;
 			var krakenEyeColor:Array = ["Bright pink", "light purple", "purple"];
 			if (faceType == Face.HUMAN)
 				scyllaCounter++;
-			if (faceType != 0)
+			if (faceType != Face.HUMAN)
 				scyllaCounter--;
+			if (eyes.type == Eyes.KRAKEN)
+				scyllaCounter++;
 			if (ears.type == Ears.ELFIN)
 				scyllaCounter++;
 			if (horns.type == Horns.KRAKEN)
-				scyllaCounter++;
+				scyllaCounter+= 2;
 			if (arms.type == Arms.KRAKEN)
 				scyllaCounter++;
 			if (hasPlainSkinOnly() && skinAdj == "slippery")
@@ -7985,6 +8025,10 @@ use namespace CoC;
 				if (lowerBody == LowerBody.HUMAN)
 					counter++;
 			}
+			if (tail.type == Tail.NONE)
+				counter++;
+			if (horns.type == Horns.NONE)
+				counter++;
 			if (findPerk(PerkLib.VampiricBloodsteam) >= 0)
 				counter++;
 			if (findPerk(PerkLib.VampiricBloodsteamEvolved) >= 0)
@@ -8907,6 +8951,7 @@ use namespace CoC;
 			if (this.elfScore() >= 11) minSen += (15 * newGamePlusMod);
 			if (this.raijuScore() >= 5) minSen += (25 * newGamePlusMod);
 			if (this.raijuScore() >= 10) minSen += (25 * newGamePlusMod);
+			if (this.hellcatScore() >= 17) minSen += (50 * newGamePlusMod);
 			if (this.hellcatScore() >= 10) minSen += (25 * newGamePlusMod);
 			if (this.firesnailScore() >= 15) minSen += (50 * newGamePlusMod);
 			if (this.melkieScore() >= 8) minSen += (25 * newGamePlusMod);
@@ -9455,6 +9500,7 @@ use namespace CoC;
 				maxLibCap1 += (10 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0) maxSpeCap1 += (10 * newGamePlusMod);
+			if (findPerk(PerkLib.CatlikeNimblenessFinalForm) >= 0) maxSpeCap1 += (10 * newGamePlusMod);
 			if (findPerk(PerkLib.DraconicLungs) >= 0) maxSpeCap1 += (5 * newGamePlusMod);
 			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0) {
 				maxTouCap1 += (5 * newGamePlusMod);
@@ -9940,7 +9986,13 @@ use namespace CoC;
 				maxIntCap2 -= (5 * newGamePlusMod);
 			}//+10/10-20
 			if (mouseScore() >= 4) {
-				if (mouseScore() >= 12 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI) {
+				if (mouseScore() >= 15 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI) {
+					maxStrCap2 += (75 * newGamePlusMod);
+					maxTouCap2 -= (10 * newGamePlusMod);
+					maxSpeCap2 += (80 * newGamePlusMod);
+					maxWisCap2 += (80 * newGamePlusMod);
+				}
+				else if (mouseScore() >= 12 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI) {
 					maxStrCap2 += (60 * newGamePlusMod);
 					maxTouCap2 -= (10 * newGamePlusMod);
 					maxSpeCap2 += (80 * newGamePlusMod);
@@ -10041,20 +10093,36 @@ use namespace CoC;
 				}
 			}
 			if (cheshireScore() >= 11) {
+				if (findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) maxSpeCap2 += (90 * newGamePlusMod);
+				if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) maxSpeCap2 += (80 * newGamePlusMod);
 				if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += (70 * newGamePlusMod);
 				else maxSpeCap2 += (60 * newGamePlusMod);
 				maxIntCap2 += (80 * newGamePlusMod);
 				maxSenCap2 += (25 * newGamePlusMod)
 			}
 			if (hellcatScore() >= 10) {
-				if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += (50 * newGamePlusMod);
-				else maxSpeCap2 += (40 * newGamePlusMod);
-				maxIntCap2 += (70 * newGamePlusMod);
-				maxLibCap2 += (40 * newGamePlusMod);
-				maxSenCap2 += (25 * newGamePlusMod);
+				if (hellcatScore() >= 17) {
+					if (findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) maxSpeCap2 += (100 * newGamePlusMod);
+					if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) maxSpeCap2 += (90 * newGamePlusMod);
+					if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += (80 * newGamePlusMod);
+					else maxSpeCap2 += (70 * newGamePlusMod);
+					maxIntCap2 += (125 * newGamePlusMod);
+					maxLibCap2 += (100 * newGamePlusMod);
+					maxSenCap2 += (50 * newGamePlusMod);
+				} else {
+					if (findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) maxSpeCap2 += (70 * newGamePlusMod);
+					if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) maxSpeCap2 += (60 * newGamePlusMod);
+					if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += (50 * newGamePlusMod);
+					else maxSpeCap2 += (40 * newGamePlusMod);
+					maxIntCap2 += (70 * newGamePlusMod);
+					maxLibCap2 += (40 * newGamePlusMod);
+					maxSenCap2 += (25 * newGamePlusMod);
+				}
 			}
 			if (displacerbeastScore() >= 14) {
 				maxStrCap2 += (95 * newGamePlusMod);
+				if (findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) maxSpeCap2 += (130 * newGamePlusMod);
+				if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) maxSpeCap2 += (120 * newGamePlusMod);
 				if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += (110 * newGamePlusMod);
 				else maxSpeCap2 += (100 * newGamePlusMod);
 				maxIntCap2 -= (25 * newGamePlusMod);
@@ -10555,6 +10623,11 @@ use namespace CoC;
 				maxLibCap2 += (40 * newGamePlusMod);
 			}//+30/30-40
 			if (scyllaScore() >= 4) {
+				if (scyllaScore() >= 17) {
+					maxStrCap2 += (135 * newGamePlusMod);
+					maxTouCap2 += (60 * newGamePlusMod);
+					maxIntCap2 += (60 * newGamePlusMod);
+				}
 				if (scyllaScore() >= 12) {
 					maxStrCap2 += (120 * newGamePlusMod);
 					maxIntCap2 += (60 * newGamePlusMod);
@@ -10743,12 +10816,21 @@ use namespace CoC;
 					maxSpeCap2 += (40 * newGamePlusMod);
 				}
 			}
-			if (oomukadeScore() >= 11) {
-				maxStrCap2 += (75 * newGamePlusMod);
-				maxTouCap2 += (80 * newGamePlusMod);
-				maxSpeCap2 += (90 * newGamePlusMod);
-				maxLibCap2 += (110 * newGamePlusMod);
-				maxWisCap2 -= (50 * newGamePlusMod);
+			if (oomukadeScore() >= 15) {
+				if (oomukadeScore() >= 18) {
+					maxStrCap2 += (125 * newGamePlusMod);
+					maxTouCap2 += (45 * newGamePlusMod);
+					maxSpeCap2 += (60 * newGamePlusMod);
+					maxLibCap2 += (110 * newGamePlusMod);
+					maxWisCap2 -= (50 * newGamePlusMod);
+				}
+				else {
+					maxStrCap2 += (75 * newGamePlusMod);
+					maxTouCap2 += (40 * newGamePlusMod);
+					maxSpeCap2 += (50 * newGamePlusMod);
+					maxLibCap2 += (110 * newGamePlusMod);
+					maxWisCap2 -= (50 * newGamePlusMod);
+				}
 			}
 			if (avianScore() >= 4) {
 				if (avianScore() >= 9) {
@@ -10773,8 +10855,13 @@ use namespace CoC;
 				maxTouCap2 += (15 * newGamePlusMod);
 				maxSpeCap2 += (15 * newGamePlusMod);
 			}
-			if (isScylla()) {
+			if (isScylla() || isKraken()) {
 				maxStrCap2 += (30 * newGamePlusMod);
+			}
+			if (lowerBody == LowerBody.CENTIPEDE) {
+				maxStrCap2 += (15 * newGamePlusMod);
+				maxTouCap2 += (5 * newGamePlusMod);
+				maxSpeCap2 += (10 * newGamePlusMod);
 			}
 			if (isAlraune()) {
 				maxTouCap2 += (15 * newGamePlusMod);
@@ -10788,11 +10875,28 @@ use namespace CoC;
 				maxLibCap2 += (10+mod) * newGamePlusMod;
 			}
 			if (vampireScore() >= 6){
-				mod = vampireScore() >= 10 ? 35:20;
-				maxStrCap2 += mod * newGamePlusMod;
-				maxSpeCap2 += mod * newGamePlusMod;
-				maxIntCap2 += mod * newGamePlusMod;
-				maxLibCap2 += (10 + mod) * newGamePlusMod;
+				if (vampireScore() >= 18)
+				{
+					mod = 65;
+					maxStrCap2 += mod * newGamePlusMod;
+					maxSpeCap2 += mod * newGamePlusMod;
+					maxIntCap2 += mod * newGamePlusMod;
+					maxLibCap2 += (10 + mod) * newGamePlusMod;
+				}
+				else if (vampireScore() >= 10) {
+					mod =  35;
+					maxStrCap2 += mod * newGamePlusMod;
+					maxSpeCap2 += mod * newGamePlusMod;
+					maxIntCap2 += mod * newGamePlusMod;
+					maxLibCap2 += (10 + mod) * newGamePlusMod;
+				}
+				else {
+					mod = 20;
+					maxStrCap2 += mod * newGamePlusMod;
+					maxSpeCap2 += mod * newGamePlusMod;
+					maxIntCap2 += mod * newGamePlusMod;
+					maxLibCap2 += (10 + mod) * newGamePlusMod;
+				}
 			}
 			if (internalChimeraScore() >= 1 && !hasPerk(PerkLib.RacialParagon)) {
 				maxStrCap2 += (5 * internalChimeraScore() * newGamePlusMod);

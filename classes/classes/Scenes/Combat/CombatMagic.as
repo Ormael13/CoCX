@@ -310,6 +310,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
+		if (player.hasStatusEffect(StatusEffects.DarkRitual)) mod *=3;
 		mod = Math.round(mod * 100)/100;
 		return mod;
 	}
@@ -862,8 +863,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40) && player.HP < spellCostWhite(40)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhitefire)) {
-				bd.disable("You need more time before you can cast Whitefire again.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier1)) {
+				bd.disable("You need more time before you can cast a first tier white magic spell again.");
 			}
 			
 		}
@@ -879,8 +880,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40) && player.HP < spellCostWhite(40)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellLightningBolt)) {
-				bd.disable("You need more time before you can cast Lightning Bolt again.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier1)) {
+				bd.disable("You need more time before you can cast a first tier white magic spell again.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
@@ -895,8 +896,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40) && player.HP < spellCostWhite(200)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellPyreBurst)) {
-				bd.disable("You need more time before you can cast Pyre Burst again.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier2)) {
+				bd.disable("You need more time before you can cast a second tier white magic spell again.");
 			}
 			
 		}
@@ -912,8 +913,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40) && player.HP < spellCostWhite(200)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellChainLighting)) {
-				bd.disable("You need more time before you can cast Chain Lighting again.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier2)) {
+				bd.disable("You need more time before you can cast a second tier white magic spell again.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsCharge)) {
@@ -1018,8 +1019,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40) && player.HP < spellCostBlack(40)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellIceSpike)) {
-				bd.disable("You need more time before you can cast Ice Spike again.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier1)) {
+				bd.disable("You need more time before you can cast a first tier black magic spell again.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) {
@@ -1032,8 +1033,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40) && player.HP < spellCostBlack(40)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellDarknessShard)) {
-				bd.disable("You need more time before you can cast Darkness Shard again.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier1)) {
+				bd.disable("You need more time before you can cast a first tier black magic spell again.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsWaveOfEcstasy)) {
@@ -1060,8 +1061,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40) && player.HP < spellCostBlack(200)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellArcticGale)) {
-				bd.disable("You need more time before you can cast Arctic Gale again.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier2)) {
+				bd.disable("You need more time before you can cast a second tier black magic spell again.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsDuskWave)) {
@@ -1074,8 +1075,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40) && player.HP < spellCostBlack(200)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellDuskWave)) {
-				bd.disable("You need more time before you can cast Dusk Wave again.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier2)) {
+				bd.disable("You need more time before you can cast a second tier black magic spell again.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsMight)) {
@@ -1220,13 +1221,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can't use this spell inside small spaces. Unless you want get killed along with your enemies.");
 			} else if (player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
 				bd.disable("You can't use this spell underwater.");
-			} else if (badLustForGrey) {
-				bd.disable("You can't use any grey magics.");
 			} else if(!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(250)) {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(250) && player.HP < spellCost(250)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellMeteorShower)) {
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier3)) {
 				bd.disable("You need more time before you can cast Meteor Shower again.");
 			}
 		}
@@ -1245,13 +1244,11 @@ public class CombatMagic extends BaseCombatContent {
 			bd = buttons.add("Polar Midnight", spellPolarMidnight)
 						.hint("Cause a massive temperature drop which freezes the air solid in an area. Opponents caught in this spell take the cold damage and are stunned for 5 round.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  " +
 							 "\n\n<b>AoE Spell and req. 1 turn channeling. Cooldown: 12 turns</b>  \n\nMana Cost: " + spellCost(250) + "");
-			if (badLustForGrey) {
-				bd.disable("You can't use any grey magics.");
-			} else if(!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(250)) {
+			if(!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(250)) {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(250) && player.HP < spellCost(250)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellPolarMidnight)) {
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier3)) {
 				bd.disable("You need more time before you can cast Polar Midnight again.");
 			}
 		}
@@ -1701,7 +1698,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
 		else useMana(40, 6);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellIceSpike,spellBlackCooldown(),0,0,0);
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellBlackTier1,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -1770,7 +1767,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
 		else useMana(40, 6);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellDarknessShard,spellBlackCooldown(),0,0,0);
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellBlackTier1,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -1907,7 +1904,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200)) player.HP -= spellCostBlack(200);
 		else useMana(200,6);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellArcticGale,spellBlackCooldown(),0,0,0);
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellBlackTier2,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -1974,7 +1971,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200)) player.HP -= spellCostBlack(200);
 		else useMana(200,6);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellDuskWave,spellBlackCooldown(),0,0,0);
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellBlackTier2,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -2419,7 +2416,7 @@ public class CombatMagic extends BaseCombatContent {
 			outputText("You begin to channel magic, the air temperature dropping around you.");
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 5, 0, 0, 0);
-			player.createStatusEffect(StatusEffects.CooldownSpellPolarMidnight,12,0,0,0);
+			player.createStatusEffect(StatusEffects.CooldownSpellBlackTier3,12,0,0,0);
 			outputText("\n\n");
 			enemyAI();
 		}
@@ -2605,7 +2602,7 @@ public class CombatMagic extends BaseCombatContent {
 			outputText("You begin to channel magic, the sky reddening above you.");
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 6, 0, 0, 0);
-			player.createStatusEffect(StatusEffects.CooldownSpellMeteorShower,12,0,0,0);
+			player.createStatusEffect(StatusEffects.CooldownSpellWhiteTier3,12,0,0,0);
 			outputText("\n\n");
 			enemyAI();
 		}
@@ -2996,7 +2993,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
 		else useMana(40, 5);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellWhitefire,spellWhiteCooldown(),0,0,0);
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellWhiteTier1,spellWhiteCooldown(),0,0,0);
 		if (handleShell()){return;}
 		if (monster is Doppleganger)
 		{
@@ -3109,7 +3106,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
 		else useMana(40, 5);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellLightningBolt,spellWhiteCooldown(),0,0,0);
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellWhiteTier1,spellWhiteCooldown(),0,0,0);
 		if (handleShell()){return;}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
@@ -3168,7 +3165,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200)) player.HP -= spellCostWhite(200);
 		else useMana(200,5);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellPyreBurst,spellWhiteCooldown(),0,0,0);
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellWhiteTier2,spellWhiteCooldown(),0,0,0);
 		if (handleShell()){return;}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
@@ -3262,7 +3259,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200)) player.HP -= spellCostWhite(200);
 		else useMana(200,5);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellChainLighting,spellWhiteCooldown(),0,0,0);
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellWhiteTier2,spellWhiteCooldown(),0,0,0);
 		if (handleShell()){return;}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
