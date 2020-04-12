@@ -2501,7 +2501,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
 			outputText("You call out to the celestial vault, knocking some rocks out of orbit and into a crash course towards your opponents.\n\n");
-			var damage:Number = scalingBonusIntelligence() * spellMod() * 3;
+			var damage:Number = (scalingBonusIntelligence() * spellMod())*0.75;
 			//Determine if critical hit!
 			var crit:Boolean = false;
 			var critChance:int = 5;
@@ -2516,13 +2516,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 			if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
 			if (monster.plural == true) damage *= 5;
-			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 			damage = Math.round(damage);
-			if (monster.plural == true) damage *= 5;
 			damage = doFireDamage(damage, true, true);
 			damage = doFireDamage(damage, true, true);
 			damage = doFireDamage(damage, true, true);
@@ -2664,7 +2658,9 @@ public class CombatMagic extends BaseCombatContent {
 		else {
 			var nosferatu:Number = 0;
 			nosferatu += player.inte;
-			if (player.hasPerk(PerkLib.WisenedHealer)) nosferatu += player.wis;
+			nosferatu += scalingBonusIntelligence();
+			if (player.hasPerk(PerkLib.WisenedHealer)) nosferatu += scalingBonusWisdom();
+			nosferatu *= healModBlack();
 			outputText(" You chant as your shadow suddenly takes on a life of its own, sprouting a multitude of mouths and tentacles which seek and tear into " + monster.a + monster.short + " shadow");
 			if (monster.plural == true) outputText("s");
 			outputText(", gorging on its owner’s life force to replenish your own. Soon enough the spell is over and your shadow returns to you, leaving you better for the wear. <b>(<font color=\"#800000\">" + nosferatu + "</font>)</b>");

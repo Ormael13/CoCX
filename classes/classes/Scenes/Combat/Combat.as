@@ -4568,6 +4568,7 @@ public function doFireDamage(damage:Number, apply:Boolean = true, display:Boolea
 	}
 	return damage;
 }
+
 public function doIceDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 	MDOCount ++; // for multipile attacks to prevent stupid repeating of damage messages
 	if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage/100;
