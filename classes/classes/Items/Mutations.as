@@ -3622,6 +3622,12 @@ public final class Mutations extends MutationsHelper
 				player.createStatusEffect(StatusEffects.KnowsWaveOfEcstasy, 0, 0, 0, 0);
 				return;
 			}
+            //Smart enough for nosferatu and doesnt have it
+            if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Nosferatu.</b>");
+                player.createStatusEffect(StatusEffects.KnowsNosferatu, 0, 0, 0, 0);
+                return;
+            }
 			//Smart enough for lifetap and doesnt have it
 			if (player.inte >= 150 && player.hasPerk(PerkLib.HexKnowledge) && !player.hasStatusEffect(StatusEffects.KnowsLifetap)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Lifetap.</b>");
@@ -3708,16 +3714,22 @@ public final class Mutations extends MutationsHelper
 					player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
 					return;
 				}*/
+                //Smart enough for Fraction of heal and harm and doesnt have it
+                /*if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsFractionOfHealAndHarm)) {
+                    outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Fraction of heal and harm.</b>");
+                    player.createStatusEffect(StatusEffects.KnowsFractionOfHealAndHarm, 0, 0, 0, 0);
+                    return;
+                }*/
+                //Smart enough for Clear Mind and doesnt have it
+                /*if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsClearMind)) {
+                    outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Clear Mind.</b>");
+                    player.createStatusEffect(StatusEffects.KnowsClearMind, 0, 0, 0, 0);
+                    return;
+                }*/
 				//Smart enough for ice rain and doesnt have it
 				if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsIceRain)) {
 					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Ice Rain.</b>");
 					player.createStatusEffect(StatusEffects.KnowsIceRain, 0, 0, 0, 0);
-					return;
-				}
-				//Smart enough for nosferatu and doesnt have it
-				if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
-					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Nosferatu.</b>");
-					player.createStatusEffect(StatusEffects.KnowsNosferatu, 0, 0, 0, 0);
 					return;
 				}
 				//Smart enough for mana shield and doesnt have it
@@ -3801,6 +3813,11 @@ public final class Mutations extends MutationsHelper
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blizzard.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBlizzard, 0, 0, 0, 0);
 			}
+            //Smart enough for Mental Shield and doesnt have it
+            /*if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Mental Shield.</b>");
+                player.createStatusEffect(StatusEffects.KnowsMentalShield, 0, 0, 0, 0);
+            }*/
 		}
 
 		public function lustDraft(fuck:Boolean,player:Player):void

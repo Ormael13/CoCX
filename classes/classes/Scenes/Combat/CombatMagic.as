@@ -2501,7 +2501,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
 			outputText("You call out to the celestial vault, knocking some rocks out of orbit and into a crash course towards your opponents.\n\n");
-			var damage:Number = (scalingBonusIntelligence() * spellMod())*0.75;
+			var damage:Number = (scalingBonusIntelligence() * spellMod())*3;
 			//Determine if critical hit!
 			var crit:Boolean = false;
 			var critChance:int = 5;
@@ -2613,7 +2613,7 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 		clearOutput();
-		outputText("Deciding you need additional protection during current fight you spend moment to concentrate and form barrier made of mana around you.  It will block attacks as long you would have enough mana.\n\n");
+		outputText("Deciding you need additional protection during current fight you spend a moment to concentrate and form a barrier made of mana around you.  It will block attacks as long as you have enough mana to sustain it.\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		player.createStatusEffect(StatusEffects.ManaShield,0,0,0,0);
 		enemyAI();
@@ -2621,7 +2621,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	public function DeactivateManaShield():void {
 		clearOutput();
-		outputText("Deciding you not need for now to keep youe mana shield you concentrate and deactivating it.\n\n");
+		outputText("Deciding you no longuer need to maintain your mana shield, you concentrate on deactivating it.\n\n");
 		player.removeStatusEffect(StatusEffects.ManaShield);
 		enemyAI();
 	}
