@@ -2156,13 +2156,14 @@ public class CombatMagic extends BaseCombatContent {
 		else {
 			var consumingdarkness:Number = scalingBonusIntelligence() * spellModBlack();
 			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) consumingdarkness = Math.round(consumingdarkness * 1.2);
+			if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) consumingdarkness *= 4;
 			outputText("You call on the power of primordial darkness, which is all too happy to oblige your request of ripping your foe to shreds. The shadows all around you sprouting countless mouths and claws to do just that. " + monster.capitalA + monster.short + " can only scream in surprise, then in pain, at the sudden assault. ");
-			player.createStatusEffect(StatusEffects.ConsumingDarkness, 7, 0.05, 0, 0);
+			player.createStatusEffect(StatusEffects.ConsumingDarkness, 7, Math.round(consumingdarkness*0.5), 0, 0);
 			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) {
 				consumingdarkness = Math.round(consumingdarkness * 1.2);
 				player.addStatusValue(StatusEffects.ConsumingDarkness, 2, 0.01);
 			}
-			consumingdarkness = doDarknessDamage(consumingdarkness, true, true);
+			doDarknessDamage(consumingdarkness, true, true);
 		}
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -2207,12 +2208,12 @@ public class CombatMagic extends BaseCombatContent {
 		else {
 			var lustDmg:Number = monster.lustVuln * 0.5 * (player.inte / 5 * spellModBlack() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 			outputText("You moan in pleasure as you curse your target with lewd thoughts. " + monster.capitalA + monster.short + " pants in arousal, unable to stop the encroaching fantasies you forced on her/him/it/them from having their desired effect. ");
-			player.createStatusEffect(StatusEffects.CurseOfDesire, 8, 0.05, 0, 0);
 			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) {
 				lustDmg = Math.round(lustDmg * 1.2);
 				player.addStatusValue(StatusEffects.CurseOfDesire, 2, 0.01);
 			}
 			lustDmg = Math.round(lustDmg);
+			player.createStatusEffect(StatusEffects.CurseOfDesire, 8, lustDmg*0.05, 0, 0);
 			monster.teased(lustDmg);
 			dynStats("lus", 10);
 		}
@@ -2258,10 +2259,12 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		else {
 			outputText("You cut deep into your arm, drawing plenty of your blood and letting it flow in a large pattern on the ground as you hex your target with a powerful malediction, causing it to bleed from every orifice. " + monster.capitalA + monster.short + " screams in pain, unable to stop the blood flow. ");
-			player.createStatusEffect(StatusEffects.CurseOfWeeping, 6, 0.125, 0, 0);
 			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) player.addStatusValue(StatusEffects.CurseOfWeeping, 2, 0.025);
 			HPChange(-(Math.round(player.maxHP() * .5)), false);
 		}
+		var CurseOfWeepingMod:Number = scalingBonusIntelligence() * spellModBlack();
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) CurseOfWeepingMod *= 4;
+		player.createStatusEffect(StatusEffects.CurseOfWeeping, 6, CurseOfWeepingMod, 0, 0);
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		statScreenRefresh();

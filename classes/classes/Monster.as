@@ -18,11 +18,14 @@ import classes.Items.WeaponRangeLib;
 import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
+import classes.Scenes.Combat.Combat;
+import classes.Scenes.Combat.CombatMagic;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.EbonLabyrinth.Hydra;
 import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
 import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
 import classes.Scenes.NPCs.ChiChi;
+import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
@@ -2832,6 +2835,7 @@ import flash.utils.getQualifiedClassName;
 				}
 				else addStatusValue(StatusEffects.IceArmor,1,-1);
 			}
+
 			//Consuming darkness
 			if (player.hasStatusEffect(StatusEffects.ConsumingDarkness)) {
 				if (player.statusEffectv1(StatusEffects.ConsumingDarkness) <= 0) player.removeStatusEffect(StatusEffects.ConsumingDarkness);
@@ -2839,8 +2843,8 @@ import flash.utils.getQualifiedClassName;
 					player.addStatusValue(StatusEffects.ConsumingDarkness, 1, -1);
 					outputText("Hungry darkness gnaw at your foe for ");
 					var store11:Number = 0;
-					store11 += maxHP() * statusEffectv2(StatusEffects.ConsumingDarkness);
-					store11 = SceneLib.combat.doDarknessDamage(store11, true, true);
+					store11 += statusEffectv2(StatusEffects.ConsumingDarkness);
+					SceneLib.combat.doDarknessDamage(store11, true, true);
 					outputText(" damage!\n\n");
 				}
 			}
@@ -2850,24 +2854,26 @@ import flash.utils.getQualifiedClassName;
 				else {
 					player.addStatusValue(StatusEffects.CurseOfDesire, 1, -1);
 					var lustDmg3:Number = 0;
-					lustDmg3 += maxLust() * statusEffectv2(StatusEffects.CurseOfDesire);
+					lustDmg3 += statusEffectv2(StatusEffects.CurseOfDesire);
 					outputText("The curse of desire slowly sap at your victim's resolve and countenance. ");
 					teased(lustDmg3);
 					outputText("\n\n");
 				}
 			}
+
 			//Curse of Weeping
 			if (player.hasStatusEffect(StatusEffects.CurseOfWeeping)) {
 				if (player.statusEffectv1(StatusEffects.CurseOfWeeping) <= 0) player.removeStatusEffect(StatusEffects.CurseOfWeeping);
 				else {
 					player.addStatusValue(StatusEffects.CurseOfWeeping, 1, -1);
 					outputText("Your foe is bleeding due to your curse. ");
-					var hemorrhage3:Number = 0;
-					hemorrhage3 += maxHP() * statusEffectv2(StatusEffects.CurseOfWeeping);
-					hemorrhage3 = SceneLib.combat.doDamage(hemorrhage3);
-					outputText("<b>(<font color=\"#800000\">" + hemorrhage3 + "</font>)</b>\n\n");
+					var hemorrhage3Damage:Number = 0;
+					hemorrhage3Damage += statusEffectv2(StatusEffects.CurseOfWeeping);
+					SceneLib.combat.doDamage(hemorrhage3Damage);
+					outputText("<b>(<font color=\"#800000\">" + hemorrhage3Damage + "</font>)</b>\n\n");
 				}
 			}
+
 			//lowered damage done by enemy attacks debuff
 			if (hasStatusEffect(StatusEffects.EnemyLoweredDamageH)) {
 				if (statusEffectv1(StatusEffects.EnemyLoweredDamageH) <= 0) removeStatusEffect(StatusEffects.EnemyLoweredDamageH);
