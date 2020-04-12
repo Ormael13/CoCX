@@ -101,6 +101,7 @@ package classes.Scenes.NPCs
 			addButton(3, "Camp", talkMenuLunaCampThoughts);
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) addButton(4, "Lycanthropy", talkMenuLunaLycanthropy);
 			else addButtonDisabled(4, "???", "You need to know her better for this.");
+			if (player.hasStatusEffect(StatusEffects.LunaWasWarned))addButton(5, "Camp", talkMenuLunaStopJealousy);
 			if ((flags[kFLAGS.LUNA_FOLLOWER] == 13 || flags[kFLAGS.LUNA_FOLLOWER] == 14) && (!player.hasPerk(PerkLib.Lycanthropy) || !player.hasPerk(PerkLib.LycanthropyDormant))) addButton(9, "Bite Me", talkMenuBiteMe);
 			addButton(14, "Back", mainLunaMenu);
 		}
@@ -426,6 +427,7 @@ package classes.Scenes.NPCs
 							"Yep, you ain't going to bed without some sex first as Luna intends to bang you one way or another. You've been neglecting her of late and she's not letting you get away with it. " +
 							"Without much surprise, her already naked form indeed takes on a beastial shape. She sits in a waiting position, reminiscent of a good dog waiting on its treat.\n\n" +
 							"\"<i>Well " + player.mf("Master","Mistress") + ", you already know my why I am here, so let's get wild ok? I have been waiting eagerly for this.</i>\"\n\n");
+							flags[kFLAGS.LUNA_JEALOUSY] = 0;
 				}
 			}
 			else if (player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
@@ -441,6 +443,7 @@ package classes.Scenes.NPCs
 				outputText("\"<i>See? I’m a werewolf, [name]. A fiend created by demonic magic that changes between hybrid and human shape at will. This is the second reason my former master fired me for. I’m a monster. " +
 						"At first I tried to hide it, for your sake, but you’ve been teasing me for so long now I can’t hold it in anymore. I'm going to make you mine!</i>\"\n\n");
 				outputText("This is quickly going to get out of hand. How will you answer to her advances?\n\n");
+				flags[kFLAGS.LUNA_JEALOUSY] = 0;
 			}
 			else {
 				outputText("You are woken up by something forcefully pinning you down. What you see takes you entirely by surprise. Luna is standing over you, staring at you like some kind of predator.\n\n");
