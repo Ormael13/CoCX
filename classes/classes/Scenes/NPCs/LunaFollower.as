@@ -157,6 +157,20 @@ package classes.Scenes.NPCs
 			lunaAffection(2);
 			doNext(camp.returnToCampUseOneHour);
 		}
+		public function talkMenuLunaStopJealousy():void {
+			spriteSelect(SpriteDb.s_luna_maid);
+			clearOutput();
+			outputText("Luna loses all color the moment she sees that expression on your face but still attempt to start the conversation.\n\n\"<i>Oh uh is something on the good " + player.mf("master","mistress") + " mind?\"\n\n" +
+					"Hell that there is something, you know everything about how she's been sneakily making tons of trouble around camp in an attempt to stop anyone else from talking to you and you are not exactly happy about it.\n\n" +
+					"\"<i>But master/mistress, you have been ignoring me for weeks. I labor for you freely only wishing for the slightest acknowledgement yet you gave me none.</i>");
+			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) outputText("<i>What is my unconditional love even worth to you? Am I but an object free for you to dispose of once you tire of it? What of my feelings as a person?</i>");
+			outputText("\"\n\nShe is kind of right come to think of it, you definitely have been neglecting her and this was her way of desperately attempting to draw attention to herself. " +
+					"You promise Luna that you will be more considerate of her from now on. This said she has to stop these acts of passive aggression here and now. She winces her teeth but nods.");
+			player.createStatusEffect(StatusEffects.LunaWasWarned, 0,0,0,0);
+			lunaJealousy(-100);
+			lunaAffection(2);
+			doNext(camp.returnToCampUseOneHour);
+		}
 		public function talkMenuLunaLycanthropy():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
@@ -396,14 +410,37 @@ package classes.Scenes.NPCs
 			outputText("She walk away to prepare today's food and clean which reminds you that you indeed hadn’t had her food in a while.\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function fullMoonEvent():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 8) {
-				outputText("Luna is smirking, a green glint in her eyes.\n\n");
-				outputText("\"<i>Sorry [name] I can’t hold myself anymore.</i>\"\n\n");
-				outputText("Oh no it's happening again! Luna is totally going to jump you, you can already see her beginning to transform as she prepare to make a second attempt.\n\n");
+				if (!player.hasStatusEffect(StatusEffects.LunaWasWarned)){
+					outputText("Luna is smirking, a green glint in her eyes.\n\n");
+					outputText("\"<i>Sorry [name] I can’t hold myself anymore.</i>\"\n\n");
+					outputText("Oh no it's happening again! Luna is totally going to jump you, you can already see her beginning to transform as she prepare to make a second attempt.\n\n");
+				}
+				else{
+					outputText("You would close your eyes and sleep, but the sound of footsteps alerts you to the fact that Luna has other plans tonight, " +
+							"you can spot the telltale green glow in her eyes announcing her intentions clear as days and she smirks knowingly. " +
+							"Yep, you ain't going to bed without some sex first as Luna intends to bang you one way or another. You've been neglecting her of late and she's not letting you get away with it. " +
+							"Without much surprise, her already naked form indeed takes on a beastial shape. She sits in a waiting position, reminiscent of a good dog waiting on its treat.\n\n" +
+							"\"<i>Well " + player.mf("Master","Mistress") + ", you already know my why I am here, so let's get wild ok? I have been waiting eagerly for this.</i>\"\n\n");
+				}
+			}
+			else if (player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
+				outputText("You are woken up by something forcefully pinning you down. What you see takes you entirely by surprise. Luna is standing over you, staring at you like some kind of predator. Considering you've forgotten to interact with her in the first place maybe you had it coming.\n\n");
+				outputText("\"<i>I can’t hold it anymore, " + player.mf("Master","Mistress") + ". I tried to but the things you do to me... the things I wish you would do to me... it's been intolerable. It's all your fault, after all you pushed me to do this.</i>\"\n\n");
+				outputText("What the hell is she talking about, you’ve done nothing of the sort.\n\n");
+				outputText("\"<i>Oh but you've been ignoring and neglecting me again [name], despite your promise, I love you unconditionally but you have hurt me and deep down I'm unsure if the sentiment is even shared, is my love not enough? " +
+						"Is my service not enough? Is my body that I offer to you on display free for you to use at all times not to your liking, " + player.mf("Master","Mistress") + "? " +
+						"Don’t worry, now that the moon is at its peak I’m finally ready, ready to make you realise how much you truly love me, if only for a few minutes I will FINALLY get you to love me. You can’t deny us behing a thing anymore, [name]!</i>\"\n\n");
+
+				outputText("A green flash appears in her brown eyes as they turn increasingly bestial. Her naked body shivers as fur begins to cover it, her hands and feet turn into paws her irises glow fluorescent green. Fur swiftly cover her arms up to a little under the shoulders and her legs up to the tight. The transformation ends with a bushy tail and a pair of animal ears at the top of her head. ");
+				outputText("She pants in delight at the pleasure of the change, revealing a dog like tongue and canines way too long and sharp to belong on any humans. Just what is she!?\n\n");
+				outputText("\"<i>See? I’m a werewolf, [name]. A fiend created by demonic magic that changes between hybrid and human shape at will. This is the second reason my former master fired me for. I’m a monster. " +
+						"At first I tried to hide it, for your sake, but you’ve been teasing me for so long now I can’t hold it in anymore. I'm going to make you mine!</i>\"\n\n");
+				outputText("This is quickly going to get out of hand. How will you answer to her advances?\n\n");
 			}
 			else {
 				outputText("You are woken up by something forcefully pinning you down. What you see takes you entirely by surprise. Luna is standing over you, staring at you like some kind of predator.\n\n");

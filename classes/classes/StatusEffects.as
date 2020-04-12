@@ -457,6 +457,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const LootEgg:StatusEffectType                        = mk("lootEgg");
 		public static const LostVillagerSpecial:StatusEffectType            = mk("lostVillagerSpecial");
 		public static const LumiWorkshop:StatusEffectType                   = mk("Lumi Workshop");
+		public static const LunaWasCaugh:StatusEffectType                   = mk("Caugh the bitch red handed");
+		public static const LunaWasWarned:StatusEffectType                   = mk("Luna was warned to stop behing a bitch");
 		public static const Luststick:StatusEffectType                      = mk("Luststick");
 		public static const LustStickApplied:StatusEffectType               = mk("Lust Stick Applied");
 		public static const LustyTongue:StatusEffectType                    = mk("LustyTongue");
