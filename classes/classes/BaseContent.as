@@ -949,10 +949,13 @@ import coc.xxc.StoryContext;
 		protected function get context():StoryContext {
 			return CoC.instance.context;
 		}
-		protected function submenu(buttons:ButtonDataList,back:Function=null,page:int=0):void {
+		protected function submenu(buttons:ButtonDataList,back:Function=null,page:int=0,IsSorted:Boolean = true):void {
 			var list:/*ButtonData*/Array = buttons.list.filter(function(e:ButtonData, i:int, a:Array):Boolean{
 				return e.visible;
-			}).sortOn('text');
+			});
+			if (IsSorted){
+				list.sortOn('text');
+			}
 			menu();
 			var total:int = list.length;
 			var n:int = Math.min(total,(page+1)*12);
@@ -960,8 +963,8 @@ import coc.xxc.StoryContext;
 				list[li].applyTo(button(bi%12));
 			}
 			if (page!=0 || total>12) {
-				button(12).show("Prev Page", curry(submenu, buttons, back, page - 1)).disableIf(page == 0);
-				button(13).show("Next Page", curry(submenu, buttons, back, page + 1)).disableIf(n >= total);
+				button(12).show("Prev Page", curry(submenu, buttons, back, page - 1, IsSorted)).disableIf(page == 0);
+				button(13).show("Next Page", curry(submenu, buttons, back, page + 1, IsSorted)).disableIf(n >= total);
 			}
 			if (back != null) button(14).show("Back",back);
 		}

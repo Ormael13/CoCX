@@ -19,6 +19,8 @@ import classes.Scenes.SceneLib;
 import classes.StatusEffectClass;
 import classes.StatusEffects;
 
+import coc.view.ButtonData;
+
 import coc.view.ButtonDataList;
 import coc.view.CoCButton;
 
@@ -29,14 +31,22 @@ public class CombatUI extends BaseCombatContent {
 	
 	private var magspButtons:ButtonDataList = new ButtonDataList();
 	private var physpButtons:ButtonDataList = new ButtonDataList();
-	private var spellButtons:ButtonDataList = new ButtonDataList();
+	private var spellBookButtons:ButtonDataList = new ButtonDataList();
+	private var whiteSpellButtons:ButtonDataList = new ButtonDataList();
+	private var blackSpellButtons:ButtonDataList = new ButtonDataList();
+	private var greySpellButtons:ButtonDataList = new ButtonDataList();
+	private var hexSpellButtons:ButtonDataList = new ButtonDataList();
 	private var soulforceButtons:ButtonDataList = new ButtonDataList();
 	private var otherButtons:ButtonDataList = new ButtonDataList();
 	public function mainMenu():void {
 		menu();
 		magspButtons.clear();
 		physpButtons.clear();
-		spellButtons.clear();
+		spellBookButtons.clear();
+		whiteSpellButtons.clear();
+		blackSpellButtons.clear();
+		greySpellButtons.clear();
+		hexSpellButtons.clear();
 		soulforceButtons.clear();
 		otherButtons.clear();
 		
@@ -160,8 +170,8 @@ public class CombatUI extends BaseCombatContent {
 			btnMSpecials.disable();
 		}
 		// Submenu - Spells
-		combat.magic.buildMenu(spellButtons);
-		if (spellButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
+		BuildSpellBookMenu(spellBookButtons);
+		if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) {
 			btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
 		} else if (!combat.canUseMagic()) {
@@ -383,7 +393,36 @@ public class CombatUI extends BaseCombatContent {
 			}
 		}
 	}
-	
+
+	private function BuildSpellBookMenu(buttons:ButtonDataList):void{
+		var bd:ButtonData;
+		var BtnMBolt:CoCButton = button(1);
+		var BtnWhite:CoCButton = button(2);
+		var BtnBlack:CoCButton = button(3);
+		//Most basic spell ever ^^
+
+		if (player.hasPerk(PerkLib.JobSorcerer)) {
+			bd = buttons.add("M.Bolt", combat.magic.spellMagicBolt);
+			if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") bd.hint("Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
+			else bd.hint("Attempt to attack the enemy with magic bolt.  Damage done is determined by your intelligence.", "Magic Bolt");
+			if (player.mana < spellCost(40)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			}
+		}
+		combat.magic.buildWhiteMenu(whiteSpellButtons);
+		combat.magic.buildBlackMenu(blackSpellButtons);
+		combat.magic.buildGreyMenu(greySpellButtons);
+		combat.magic.buildHexMenu(hexSpellButtons);
+		if (whiteSpellButtons.length > 0) buttons.add("White Spells", curry(submenu,whiteSpellButtons, submenuSpells, 0, false)).hint("Open your white spell book");
+		if (blackSpellButtons.length > 0) buttons.add("Black Spells", curry(submenu,blackSpellButtons, submenuSpells, 0, false)).hint("Open your black spell book");
+		if (player.hasPerk(PerkLib.PrestigeJobGreySage)){
+			if (greySpellButtons.length > 0) buttons.add("Grey Spells", curry(submenu,greySpellButtons, submenuSpells, 0, false)).hint("Open your grey spell book");
+		}
+		if (player.hasPerk(PerkLib.HexKnowledge)){
+			if (hexSpellButtons.length > 0) buttons.add("Hexes", curry(submenu,hexSpellButtons, submenuSpells, 0, false)).hint("Open your Hex grimoire");
+		}
+	}
+
 	private function isPlayerPlayingWithElementalsOrGolems():Boolean {
 	var dancingwithminions:Boolean = false;
 	if (player.hasPerk(PerkLib.FirstAttackElementals) && flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] != 1) dancingwithminions = true;
@@ -514,7 +553,7 @@ public class CombatUI extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		submenu(spellButtons,mainMenu);
+		submenu(spellBookButtons,mainMenu, 0, false);
 	}
 	internal function submenuSoulforce():void {
 		//if (inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 5) {

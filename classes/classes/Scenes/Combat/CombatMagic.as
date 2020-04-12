@@ -858,7 +858,7 @@ public class CombatMagic extends BaseCombatContent {
 		//	if (player.hasStatusEffect(StatusEffects.Knows)) buttons.add("	ice single target spell goes here
 	}
 
-	internal function buildWhiteMenu(buttons:ButtonDataList):void {
+	public function buildWhiteMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		var badLustForWhite:Boolean = player.lust >= getWhiteMagicLustCap();
 
@@ -878,7 +878,6 @@ public class CombatMagic extends BaseCombatContent {
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier1)) {
 				bd.disable("You need more time before you can cast a first tier white magic spell again.");
 			}
-
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
 			bd = buttons.add("Pyre Burst", spellPyreBurst)
@@ -1026,10 +1025,9 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			}
 		}
-		buttons.add("Back", buildMenu)
 	}
 
-	internal function buildBlackMenu(buttons:ButtonDataList):void {
+	public function buildBlackMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		var badLustForBlack:Boolean = player.lust < getBlackMagicMinLust();
 
@@ -1185,7 +1183,7 @@ public class CombatMagic extends BaseCombatContent {
 		//	if (player.hasStatusEffect(StatusEffects.Knows)) buttons.add("	ice single target spell goes here
 	}
 
-	internal function buildHexMenu(buttons:ButtonDataList):void {
+	public function buildHexMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		var badLustForBlack:Boolean        = player.lust < getBlackMagicMinLust();
 
@@ -1261,7 +1259,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 	}
 
-	internal function buildGreyMenu(buttons:ButtonDataList):void {
+	public function buildGreyMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		var badLustForGrey:Boolean = player.lust < 50 || player.lust > (player.maxLust() - 50);
 
