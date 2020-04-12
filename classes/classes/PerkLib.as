@@ -750,7 +750,7 @@ public class PerkLib
 				"You choose the 'Combo Master' perk, gaining another extra attack with fist (weapon).");
 		public static const Convergence:PerkType = mk("Convergence", "Convergence",
 				"Grey magic area of effect spells strike three times against single targets.",
-				"You choose the 'Convergence' perk, gaining chance to attack single targets three times with grey aoe spells.");
+				"You choose the 'Convergence' perk, gaining chance to attack single targets three times with grey aoe and third tier white and black spells.");
 		public static const CorruptedLibido:PerkType = mk("Corrupted Libido", "Corrupted Libido",
 				"Reduces lust gain by 10%.",
 				"You choose the 'Corrupted Libido' perk.  As a result of your body's corruption, you've become a bit harder to turn on. (Lust gain reduced by 10%!)");
