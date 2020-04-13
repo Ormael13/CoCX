@@ -4361,6 +4361,10 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 	damage *= doDamageReduction();
 	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
+		if(player.armorName == "Scandalous Succubus Clothing") {
+			damage *= 1.2;
+			dynStats("lus", 3);
+		}
 		dynStats("lus", 3);
 	}
 	if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
@@ -4430,6 +4434,10 @@ public function doMagicDamage(damage:Number, apply:Boolean = true, display:Boole
 	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
 		dynStats("lus", 3);
+		if(player.armorName == "Scandalous Succubus Clothing") {
+			damage *= 1.2;
+			dynStats("lus", 3);
+		}
 	}
 	if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
 	if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
@@ -4496,6 +4504,10 @@ public function doFireDamage(damage:Number, apply:Boolean = true, display:Boolea
 	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
 		dynStats("lus", 3);
+		if(player.armorName == "Scandalous Succubus Clothing") {
+			damage *= 1.2;
+			dynStats("lus", 3);
+		}
 	}
 	if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
 	if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
@@ -4576,6 +4588,10 @@ public function doIceDamage(damage:Number, apply:Boolean = true, display:Boolean
 	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
 		dynStats("lus", 3);
+		if(player.armorName == "Scandalous Succubus Clothing") {
+			damage *= 1.2;
+			dynStats("lus", 3);
+		}
 	}
 	if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
 	if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
@@ -4653,6 +4669,10 @@ public function doLightingDamage(damage:Number, apply:Boolean = true, display:Bo
 	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
 		dynStats("lus", 3);
+		if(player.armorName == "Scandalous Succubus Clothing") {
+			damage *= 1.2;
+			dynStats("lus", 3);
+		}
 	}
 	if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
 	if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
@@ -4724,6 +4744,10 @@ public function doDarknessDamage(damage:Number, apply:Boolean = true, display:Bo
 	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
 		dynStats("lus", 3);
+		if(player.armorName == "Scandalous Succubus Clothing") {
+			damage *= 1.2;
+			dynStats("lus", 3);
+		}
 	}
 	if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
 	if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
@@ -4794,6 +4818,10 @@ public function doPoisonDamage(damage:Number, apply:Boolean = true, display:Bool
 	if (player.hasPerk(PerkLib.Sadist)) {
 		damage *= 1.2;
 		dynStats("lus", 3);
+		if(player.armorName == "Scandalous Succubus Clothing") {
+			damage *= 1.2;
+			dynStats("lus", 3);
+		}
 	}
 	if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
 	if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {

@@ -78,7 +78,7 @@ public class CharViewContext extends ExecContext {
 				StatusEffects: StatusEffects,
 
 				// Viewable Clothing lists
-				armStanceNonBannedList: player.armor == game.armors.B_QIPAO || player.armor == game.armors.G_QIPAO || player.armor == game.armors.P_QIPAO || player.armor == game.armors.R_QIPAO,
+				armStanceNonBannedList: player.armor == game.armors.SSC || player.armor == game.armors.B_QIPAO || player.armor == game.armors.G_QIPAO || player.armor == game.armors.P_QIPAO || player.armor == game.armors.R_QIPAO,
 				yukiDress: player.armor == game.armors.BLIZZ_K,
 				sakuraPetalKimono: player.armor == game.armors.SPKIMO,
 				whiteKimono: player.armor == game.armors.WKIMONO,
@@ -102,7 +102,8 @@ public class CharViewContext extends ExecContext {
 				sexyWhiteBikini: player.armor == game.armors.SWHBIKNI,
 				sexyYellowBikini: player.armor == game.armors.SYEBIKNI,
 				krakenBlackDress: player.armor == game.armors.KBDRESS,
-				walpurgisIzaliaRobe: player.armor == game.armors.WIR,
+				walpurgisIzaliaCloak: player.armor == game.armors.WIC,
+				scandalousSuccubusClothing: player.armor == game.armors.SSC,
 				platemail: player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 
 				//viewable bra list

@@ -756,6 +756,10 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.Masochist) >= 0 && lib >= 60) {
 				multShared += 20;
 				lust += (2 * (1 + newGamePlusMod()));
+				if(armorName == "Scandalous Succubus Clothing") {
+					multShared += 20;
+					lust += (2 * (1 + newGamePlusMod()));
+				}
 			}
 			if (findPerk(PerkLib.FenrirSpikedCollar) >= 0) {
 				multShared += 15;
@@ -775,7 +779,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.ShieldHarmony) >= 0 && tou >= 100 && !hasStatusEffect(StatusEffects.Stunned)) {
 				multShared += 10;
 			}
-			if (findPerk(PerkLib.NakedTruth) >= 0 && spe >= 75 && lib >= 60 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing")) {
+			if (findPerk(PerkLib.NakedTruth) >= 0 && spe >= 75 && lib >= 60 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "Scandalous Succubus Clothing" || armorName == "Walpurgis Izalia Cloak" || armorName == "nothing")) {
 				multShared += 10;
 			}
 			//--STATUS AFFECTS--

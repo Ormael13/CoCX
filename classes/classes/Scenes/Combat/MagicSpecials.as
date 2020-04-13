@@ -3867,6 +3867,9 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+		if(player.armorName == "Scandalous Succubus Clothing") {
+			lustDmg *= 1.25;
+		}
 		monster.teased(lustDmg);
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());

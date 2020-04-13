@@ -821,6 +821,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head, as the size of your increasingly growing balls remind you that you need to expel those eggs one way or another before they become too big.");
 					}
 				}
+
+				//Armor daily event
+				//Scandalous succubus armor corruption updates
+				if (player.armor == armors.SSC && player.cor < 100) {
+					outputText("Corruption seethes from the succubus clothes into you.");
+					player.cor += 5;
+				}
 			}
 
 			//Easter bunny egg balls Loosing
@@ -1014,6 +1021,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.armor == armors.KBDRESS && !player.isScylla() && !player.isKraken())
 			{
 				outputText("Due to your current body shape you are no longuer able to wear the Kraken black dress and thus you put the over item back into your inventory");
+				SceneLib.inventory.takeItem(player.setArmor(armors.NOTHING), playerMenu);
+				needNext = true;
+			}
+			if (player.armor == armors.SSC && (player.isTaur() || player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN || player.lowerBody == LowerBody.CENTIPEDE || player.lowerBody == LowerBody.GOO || player.lowerBody == LowerBody.MELKIE || player.lowerBody == LowerBody.DRIDER))
+			{
+				outputText("Due to your current body shape you are no longuer able to wear the scandalous succubus clothes and thus you drop the over encumbering equipment back into your inventory.");
 				SceneLib.inventory.takeItem(player.setArmor(armors.NOTHING), playerMenu);
 				needNext = true;
 			}

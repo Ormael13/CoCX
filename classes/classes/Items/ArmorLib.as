@@ -128,7 +128,8 @@ package classes.Items
 				PerkLib.WizardsEndurance,25,0,0,0);
 		public const WKIMONO:ArmorWithPerk = new ArmorWithPerk("W.Kimono","W.Kimono","white kimono","a white kimono",0,1,200,"This lovely white kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
 				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
-		public const WIR:ArmorWithPerk = new WalpurgisIzaliaRobe();
+		public const WIC:ArmorWithPerk = new WalpurgisIzaliaRobe();
+		public const SSC:ArmorWithPerk = new ScandalousSuccubusClothing();
 		/*
 		private static function mk(id:String,shortName:String,name:String,longName:String,def:Number,value:Number,description:String,perk:String=""):Armor {
 			return new Armor(id,shortName,name,longName,def,value,description,perk);

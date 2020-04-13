@@ -67,7 +67,7 @@
 <model name="demo" dir="./res/charview/" width="200" height="220" scale="2" originX="15" originY="10">
     <palette>
         <!--Colors common for skin/hair/fur/scales/... go here. Can be overriden later-->
-                <common>
+        <common>
             <color name="albino">#f2f2e8</color>
             <color name="aqua">#00cccc</color>
             <color name="ashen">#817d79</color>
@@ -77,7 +77,7 @@
             <color name="blond">#e0c685</color>
             <color name="blonde">#f2e4bf</color>
             <color name="blue">#405fce</color>
-			<color name="bright pink">#f000f0</color>
+            <color name="bright pink">#f000f0</color>
             <color name="bronzed">#a89148</color>
             <color name="brown">#664400</color>
             <color name="caramel">#c39350</color>
@@ -116,7 +116,7 @@
             <color name="sanguine">#c03030</color>
             <color name="silky">#ffd6ff</color>
             <color name="silver">#d8e0e9</color>
-            <color name="tan">#af8750</color>
+            <color name="tan">#a3845c</color>
             <color name="tan2">#cfaa30</color>
             <color name="tawny">#b97f27</color>
             <color name="turquoise">#1ed9dc</color>
@@ -518,16 +518,25 @@
         <cell rect="751,158,40,54" name="clotheLegs/whiteKimonoBottom" dx="75" dy="121"/>
         <cell rect="919,158,40,54" name="clotheLegs/blackKimonoBottom" dx="75" dy="121"/>
         <cell rect="1099,325,80,104" name="clotheLegs/goblinTechnomancerClotheBoots" dx="54" dy="72"/>
+		 <cell rect="1066,158,40,55" name="clotheLegs/scandalousSuccubusClothinglegs" dx="62" dy="96"/>
+        <cell rect="1108,158,40,55" name="clotheLegs/scandalousSuccubusClothinglegsLewd" dx="70" dy="119"/>
+        <cell rect="1108,158,40,55" name="clotheLegs/scandalousSuccubusClothingTaurTODO" dx="62" dy="96"/>
         <cell rect="776,12,45,25" name="armorNeck/fullplatetopFemale" dx="70" dy="63"/>
         <cell rect="833,12,45,25" name="armorNeck/fullplatetopMale" dx="70" dy="63"/>
+        <cell rect="644,798,173,156" name="armorNeck/WalpurgisClothes" dx="10" dy="12"/>
         <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="72" dy="75"/>
         <cell rect="728,42,45,58" name="armorLegs/fullplateLegs" dx="72" dy="115"/>
         <cell rect="882,12,125,75" name="armorLegs_fg/taurarmorbottom" dx="62" dy="96"/>
         <cell rect="776,42,25,55" name="armorLeftArm/fullplateleftarm" dx="68" dy="66"/>
+        <cell rect="961,158,20,55" name="clothLeftArm/scandalousSuccubusClothingleftArm" dx="71" dy="68"/>
+        <cell rect="1003,158,20,55" name="clothLeftArm/scandalousSuccubusClothingleftArmLewd" dx="75" dy="59"/>
         <cell rect="804,42,25,55" name="armorRightArm/fullplaterightarm" dx="92" dy="66"/>
-        <cell rect="644,798,173,156" name="armorNeck/WalpurgisClothes" dx="10" dy="12"/>
+        <cell rect="982,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArm" dx="99" dy="69"/>
+        <cell rect="1024,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArmLewd" dx="92" dy="53"/>
         <cell rect="817,798,173,156" name="clothCape/WalpurgisClothesBack" dx="9" dy="12"/>
         <cell rect="150,91,35,25" name="eyes/SpecialForeheadShadow" dx="71" dy="35"/>
+        <cell rect="1045,158,20,55" name="glove_fg/scandalousSuccubusClothingRightArmFront" dx="92" dy="53"/>
+        <cell rect="201,91,15,9" name="tailAccessory/demonTailJewelery" dx="127" dy="132"/>
     </spritemap>
     <spritemap file="hair.png">
         <cell rect="1,70,59,65" name="hair/0" dx="65" dy="21"/>
@@ -825,6 +834,9 @@
         <cell rect="611,410,49,29" name="bra/sexyYellowBikiniBraSmall" dx="69" dy="68"/>
         <cell rect="611,440,49,29" name="bra/sexyYellowBikiniBraMedium" dx="69" dy="68"/>
         <cell rect="611,470,49,29" name="bra/sexyYellowBikiniBraLarge" dx="69" dy="68"/>
+        <cell rect="661,410,49,29" name="bra/scandalousSuccubusClothingBraSmall" dx="69" dy="67"/>
+        <cell rect="661,440,49,29" name="bra/scandalousSuccubusClothingBraMedium" dx="69" dy="67"/>
+        <cell rect="661,470,49,29" name="bra/scandalousSuccubusClothingBraLarge" dx="70" dy="67"/>
         <cell rect="11,500,49,29" name="panty/goblinTechnomancerPanty" dx="69" dy="99"/>
         <cell rect="61,500,49,29" name="panty/sexyBlackBikiniPanty" dx="69" dy="99"/>
         <cell rect="111,500,49,29" name="panty/sexyAquamarineBikiniPanty" dx="69" dy="99"/>
@@ -834,6 +846,7 @@
         <cell rect="311,500,49,29" name="panty/sexyRedBikiniPanty" dx="69" dy="99"/>
         <cell rect="361,500,49,29" name="panty/sexyWhiteBikiniPanty" dx="69" dy="99"/>
         <cell rect="411,500,49,29" name="panty/sexyYellowBikiniPanty" dx="69" dy="99"/>
+        <cell rect="461,500,49,29" name="panty/scandalousSuccubusClothingPanty" dx="69" dy="94"/>
     </spritemap>
     <spritemap file="tails.png">
         <cell rect="1,71,168,139" name="tail/manticore" dx="10" dy="40"/>
@@ -859,7 +872,7 @@
         <cell rect="509,211,83,139" name="tail/horse_taur" dx="133" dy="45"/>
         <cell rect="1,351,168,69" name="tail/reptile" dx="10" dy="90"/>
         <cell rect="1,351,168,69" name="tail/reptile_taur" dx="57" dy="102"/>
-        <cell rect="170,351,168,69" name="tail/demon" dx="10" dy="90"/>
+        <cell rect="170,351,168,69" name="tail/demon" dx="5" dy="91"/>
         <cell rect="170,351,168,69" name="tail/demon_taur" dx="64" dy="93"/>
         <cell rect="339,351,168,69" name="tail/gargoyle_axe" dx="10" dy="90"/>
         <cell rect="339,421,168,69" name="tail/gargoyle_mace" dx="10" dy="90"/>
@@ -942,6 +955,7 @@
 		<layer name="fullbody"/>
 		<layer name="overclothe"/>
 		<layer name="hands_fg"/>
+		<layer name="glove_fg"/>
 		<layer name="arms_fg"/>
 		<layer name="eyes_fg"/>
 		<layer name="clotheScarf"/>
@@ -984,6 +998,8 @@
 		<layer name="overskin"/>
 		<layer name="breasts_pattern"/>
         <layer name="breasts"/>
+		<layer name="clothRightArm"/>
+		<layer name="clothLeftArm"/>
 		<layer name="overhands"/>
         <layer name="hands"/>
 		<layer name="arms_pattern"/>
@@ -1008,6 +1024,7 @@
 		<layer name="wings"/>
 		<layer name="rearbody"/>
 		<layer name="clothCape"/>
+		<layer name="tailAccessory"/>
         <layer name="tail_fg"/>
         <layer name="tail"/>
         <layer name="wings_bg"/>
@@ -1912,20 +1929,24 @@
         <switch value="lowerBody">
             <case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
                 <!--see switch[value=skin.coverage]-->
-				<if test="femininity &gt;=40">
-					<if test="cor &gt;=50">
-						<if test="skin.coverage==Skin.COVERAGE_NONE">
-							<switch value="arms.type">
-								<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
-									<hide part="feet/*"/>
-									<hide part="legs/*"/>
-									<show part="legs/demonlewd"/>
-								</case>
-								<default>
-								</default>
-							</switch>
+				<if test="PlayerHasViewableOutfit">
+					<else>
+						<if test="femininity &gt;=40">
+							<if test="cor &gt;=50">
+								<if test="skin.coverage==Skin.COVERAGE_NONE">
+									<switch value="arms.type">
+										<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
+											<hide part="feet/*"/>
+											<hide part="legs/*"/>
+											<show part="legs/demonlewd"/>
+										</case>
+										<default>
+										</default>
+									</switch>
+								</if>
+							</if>
 						</if>
-					</if>
+					</else>
 				</if>
             </case>
             <case values="LowerBody.HOOFED,LowerBody.PONY,LowerBody.CLOVEN_HOOFED">
@@ -3586,7 +3607,7 @@
 			</if>
         </if>
 		
-		<if test="walpurgisIzaliaRobe">
+		<if test="walpurgisIzaliaCloak">
 			<hide part="horns/*"/>
 			<hide part="ears/*"/>
 			<hide part="ears_bg/*"/>
@@ -3607,6 +3628,74 @@
 			<show part="armorNeck/WalpurgisClothes"/>
 			<show part="clothCape/WalpurgisClothesBack"/>
         </if>
-		
+
+        <if test="scandalousSuccubusClothing">
+            <if test="breastRows.length gt 0">
+                <switch>
+                    <case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+                        <show part="bra/scandalousSuccubusClothingBraSmall"/>
+                    </case>
+                    <case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+                        <show part="bra/scandalousSuccubusClothingBraSmall"/>
+                    </case>
+                    <case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+                        <show part="bra/scandalousSuccubusClothingBraMedium"/>
+                    </case>
+                    <case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+                        <show part="bra/scandalousSuccubusClothingBraMedium"/>
+                    </case>
+                    <case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+                        <show part="bra/scandalousSuccubusClothingBraLarge"/>
+                    </case>
+                    <default>
+                        <show part="bra/scandalousSuccubusClothingBraLarge"/>
+                    </default>
+                </switch>
+            </if>
+            <if test="showArmClothing">
+                <if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+                    <switch value="arms.type">
+                        <case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
+                            <show part="clothLeftArm/scandalousSuccubusClothingleftArmLewd"/>
+                            <show part="clothRightArmArm/scandalousSuccubusClothingRightArmLewd"/>
+                            <show part="glove_fg/scandalousSuccubusClothingRightArmFront"/>
+                        </case>
+                        <default>
+                            <show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
+                            <show part="clothRightArmArm/scandalousSuccubusClothingRightArm"/>
+                        </default>
+                    </switch>
+                    <switch value="arms.type">
+                        <case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
+                            <show part="clothLeftArm/scandalousSuccubusClothingleftArmLewd"/>
+                            <show part="clothRightArmArm/scandalousSuccubusClothingRightArmLewd"/>
+                            <show part="glove_fg/scandalousSuccubusClothingRightArmFront"/>
+                        </case>
+                        <default>
+                            <show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
+                            <show part="clothRightArmArm/scandalousSuccubusClothingRightArm"/>
+                        </default>
+                    </switch>
+                    <switch value="lowerBody">
+                        <case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
+                                <switch value="arms.type">
+                                    <case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
+                                        <show part="clotheLegs/scandalousSuccubusClothinglegsLewd"/>
+                                    </case>
+                                    <default>
+                                        <show part="clotheLegs/scandalousSuccubusClothinglegs"/>
+                                    </default>
+                                </switch>
+                        </case>
+                    </switch>
+                    <else>
+                        <show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
+                        <show part="clothRightArmArm/scandalousSuccubusClothingRightArm"/>
+                        <show part="clotheLegs/scandalousSuccubusClothinglegs"/>
+                    </else>
+                </if>
+            </if>
+        </if>
+
     </logic>
 </model>

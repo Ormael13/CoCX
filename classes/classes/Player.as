@@ -1753,6 +1753,10 @@ use namespace CoC;
 			//Take damage you masochist!
 			if (findPerk(PerkLib.Masochist) >= 0 && lib >= 60) {
 				mult -= 20;
+				if(armorName == "Scandalous Succubus Clothing"){
+					mult -= 20;
+					dynStats("lus", (2 * (1 + game.player.newGamePlusMod())));
+				}
 				dynStats("lus", (2 * (1 + game.player.newGamePlusMod())));
 			}
 			if (findPerk(PerkLib.WhaleFat) >= 0) {
