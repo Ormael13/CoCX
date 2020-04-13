@@ -258,6 +258,13 @@ public class Centaurinum extends Consumable{
 			}
 		}
 		//Mare-gina
+		if (player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE && changes < changeLimit && rand(3) == 0) {
+			outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your " + Appearance.vaginaDescript(player,0) + " has grown larger, in depth AND size. To your absolute surprise it suddenly resume deepening inside your body. " +
+					"When you finaly take a check you discover your vagina is now not unlike that of a horse, capable of taking the largest cock witheout ease." +
+					"<b>  You now have a equine vagina!</b>");
+			player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
+			player.vaginaType(VaginaClass.EQUINE);
+		}
 
 		//classic horse-taur version
 		if (changes < changeLimit && rand(2) == 0 && player.lowerBody == LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur()) {

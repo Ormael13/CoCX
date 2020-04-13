@@ -17,7 +17,7 @@
 				
 				When you wake up, you're no longer holding a baby, but what looks like a centaur girl in her tender years.
 				You are hardly surprised, already knowing how short most pregnancies are in Mareth.
-				<if test="player.inte gt 50">Maybe it’s due to how time and space distort in Mareth?</if>
+				<if test="player.inte gt 50">Maybe it’s due to how time and space distort here?</if>
 				Still, you had hoped this phase would have lasted at least a little bit longer.
 				<if test="$isCorrupt">
 					Your daughter wakes up as well, opening her beautiful crimson eyes to the world.
@@ -32,48 +32,10 @@
 				
 				<i>“Mom, is something wrong?”</i>
 				
-				You reply that no… Although you wistfully hope she will stay cute like this forever, despite knowing perfectly well that she will not. 
-				For now, you still have a lot of things to do, so you simply tell her to stay at camp for now whenever you're not here for her safety.
+				You reply that no… Although you wistfully hope she will stay cute like this forever, despite knowing perfectly well that she will not.
+				While you would like to spend more time enjoying your role as a parent you still have a lot of things to do, so you simply tell her to stay at camp for now whenever you're not here for her safety.
 			</text>
 		</lib>
-		<text name="playTime">
-			<if test="$isCorrupt">
-				<output>$name</output> seems somewhat bored, and it occurs to you that being a mother comes before being the Champion.
-				You decide to bring your girl on an excursion, but the pair of you stumble upon a gang of imps.
-				You defeat them all to keep your daughter safe, but as you prepare to leave, you’re suddenly hit by a splash on your back.
-				You turn around and notice <output>$name</output> is making a naughty smile, holding one of the imps by the dick, the other hand on his torso.
-				
-				<i>“Tehehe. Got you, mom.”</i>
-				
-				Ooooh reeeeally? Well then, it’s time you teach your daughter a lesson!
-				You pick one of the imps and grab him by the cock, pumping to make him shoot his cum at your daughter, who laughs as this turn into an all out impshot battle.
-				Imp cum is soon splashing everywhere in the forest, the both of you using trees and bushes as cover.
-				Eventually, you and <output>$name</output> are covered in so much cum her black fur almost appears white.
-				After a few hours of this, the both of you head back to camp, still laughing.
-				<else>
-					You spend some time with your beloved daughter in the forest.
-					The pair of you eventually stumble upon a grove filled with blooming white flowers which she happily gallops towards to in order to smell.
-					
-					<i>“Mom, they smell </i>so<i> good! Are they blooming all the time like this?”</i>
-					
-					You admit that you don’t know, as Mareth’s time and space is distorted and difficult to predict at the best of times.
-					<if test="player.inte gt 60">
-						Although you could give a rough estimate if you brought the right tools, some books on Mareth’s local botany would also help
-						<if test="$dangerousPlants">, the only thing you have is that one book from the traveling merchant, but it focuses more on the signs of the more dangerous ones and how to avoid them rather than their life cycle</if>
-					</if>.
-					
-					She doesn't seem to mind, though. Apparently more interested in playing, the both of you play tag, hide and seek and other such innocent games in the grove. However, an unwanted visitor shows up before the end of the last game.
-					The imp, because it’s clearly an imp, is masturbating, intent on spreading his filth on the flowers.
-					This happening in front of your daughter is <i>unacceptable</i>. 
-					You tell her to go play on the other side for a while, so as to allow you to discreetly take care of the annoying little bugger before he has the chance to damage the grove and <output>$name</output>’s innocence.
-					You make sure to dispose of the body properly, not wanting to risk your daughter stumbling upon it and winding up traumatized. That taken care of, you go back to playing with your daughter.
-					
-					The time passes and eventually both of you head back to camp, your daughter still sporting a wide smile from all the fun she had, none the wiser about your little altercation with that moron of an imp.
-					
-					As innocent as a day can be in Mareth, even if you had to force the issue. But if it’s for the sake of your daughter having a happy childhood, you would gladly beat this whole crazy realm into submission.
-				</else>
-			</if>
-		</text>
 		<text name="growUp">
 			As you wake up this morning, you check the space next to you where <output>$name</output> usually sleeps, and find it empty. 
 			You almost panic for a moment, before calming down and deciding to go look for her. 
@@ -140,33 +102,7 @@
 				You point at the centaur toys and she swiftly gallops to them with a clear idea of how to use them.
 				Well that's one problem solved.
 			</text>
-			
-			<text name="pureIncest">
-				No matter how weird a parent you might be, you just can’t find the resolve to fuck your innocent daughter.
-				<if test="player.cor gt 20">Just as you're about to dismiss the idea completely, <output>$name</output> surprises you.</if>
-				
-				<i>“MOM! HELP! ITS BACK!</i>
-				
-				You watch, spellbound, as <output>$name</output>’s massive shaft rises to full mast, throbbing and leaking a steady stream of precum already. Clearly, <output>$name</output> has no idea about how to get it to calm down.
-				It seems the job falls to you.
-				
-				<i>“I can’t hold this thing anymore. Please, mom, do something!”</i>
-				
-				This is a… somewhat unusual situation, but as a female/(herm like her) it’s something you can understand.
-				You approach your girl’s massive tool and give it a few experimental strokes, making <output>$name</output> gasp in surprise. You lick the flared tip to get a taste. Satisfied with it you then proceed to put the thing in your mouth proper. <output>$name</output> moans as her horse dong throbs in appreciation for the attention you’re giving it. 
-				
-				<i>“Eep!!! Mom, I’m scared. It feels all weird... S..something is comiiiiiiing!”</i>
-				
-				<output>$name</output> whines as she finally orgasms, her sweet cum flooding your throat. 
-				It tastes like cake icing, making it an exercise on willpower to keep from desperately trying to get more. 
-				As her erection finally dies down, you feel something change in you as the cum reaches your stomach.
-				<display ref="../doHeatOrRut"/>
-			</text>
-			<text name="addCorruption">
-				Just as you're about to go, however, you catch a glimpse of <output>$name</output>’s horse dong as it resumes acting up, just as you wanted. 
-				You’ll need to keep her constantly aroused to educate her properly and set her on the path to depravity if she's to become a proper daughter of yours.
-				<dynStats cor="-1"/>
-			</text>
+
 			<text name="pureCorruption">
 				<output>$name</output> suddenly starts moaning as she holds her horns with both hands.
 				
@@ -205,7 +141,7 @@
 				
 				<i>“Mommy wanna play daddy today? Sure, I can get in front of that ride.”</i>
 				
-				That being all the encouragement you need, you position yourself behind her and ram  your “Cock descript” into her warm gaping cunt without hesitation.
+				That being all the encouragement you need, you position yourself behind her and ram  your [cock] into her warm gaping cunt without hesitation.
 				She moans in delight as you force in as much of your cock as you can while looking for the perfect angle. <output>$name</output> taunts you with dirty talk all the while.
 				
 				<i>“Mom, please defile me as much as you want, punish my sinful pussy!”</i>
@@ -325,11 +261,11 @@
 					
 				</else>
 			</if>
-			As all centauress <output>$name</output> has a horse vagina behind her hindquarter.
+			Just like all centauresses <output>$name</output> has a horse vagina behind her hindquarter.
 			<if test="$isCorrupt">
 				Knowing her well she likely already took enough cock down that way to beat a succubus at the art of fucking. Your lascivious daughter is far from virgin.
 				<else>
-					You pray that she will not lose her virginity to some corrupt creature. 
+					You pray that she will not lose her virginity to some corrupt creature. It will be your duty as a parent to preserve her innocence for as long as possible in this messed up world.
 				</else>
 			</if>
 		</text>

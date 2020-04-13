@@ -96,6 +96,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.cor < 50) dynStats("cor", 0.05);
 				if (player.cor < 80) dynStats("cor", 0.05);
 			}
+			//Armor
+			if (player.armor == armors.LTHCARM)
+			{
+				if (player.cor < 50) dynStats("cor", 0.05);
+				if (player.cor < 80) dynStats("cor", 0.05);
+			}
 			if (player.armor == armors.DBARMOR)
 			{
 				dynStats("cor", -0.1);
@@ -997,19 +1003,50 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 		private function hourlyCheckRacialPerks():Boolean {
 			var needNext:Boolean = false;
-			//Recharge tail
-			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS) { //Spider, Bee, Scorpion, Manticore and Naga Venom Recharge
-				if (player.tailRecharge < 5) player.tailRecharge = 5;
-				player.tailVenom += player.tailRecharge;
-				if (player.findPerk(PerkLib.ImprovedVenomGland) >= 0) player.tailVenom += 5;
-				if (player.findPerk(PerkLib.VenomGlandsEvolved) >= 0) player.tailVenom += 2;
-				if (player.findPerk(PerkLib.VenomGlandsFinalForm) >= 0) player.tailVenom += 8;
-				if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
+
+			//Armor unequip zone
+			if (player.armor == armors.CTPALAD && !player.isTaur())
+			{
+				outputText("Due to your current body shape you are no longuer able to wear the centaur armor and thus you drop the over encumbering equipment back into your inventory");
+				SceneLib.inventory.takeItem(player.setArmor(armors.NOTHING), playerMenu);
+				needNext = true;
 			}
-			//Improved venom gland
-			if (flags[kFLAGS.VENOM_TIMES_USED] >= 50 && player.findPerk(PerkLib.ImprovedVenomGland) < 0) {
-				outputText("\nYou feel wonderfully healthy. After using your venom so many time your body finally got acclimated to the presence of your venom gland allowing for increased capacity and production. \n\n(<b>Gained Perk: Improved venom gland</b>)\n");
-				player.createPerk(PerkLib.ImprovedVenomGland, 0, 0, 0, 0);
+			if (player.armor == armors.KBDRESS && !player.isScylla() && !player.isKraken())
+			{
+				outputText("Due to your current body shape you are no longuer able to wear the Kraken black dress and thus you put the over item back into your inventory");
+				SceneLib.inventory.takeItem(player.setArmor(armors.NOTHING), playerMenu);
+				needNext = true;
+			}
+			//Demonic hunger perk
+			if (player.demonScore() >= 10 || player.hasStatusEffect(StatusEffects.PlayerPhylactery)) { //Check for being a demon enought
+				if (player.findPerk(PerkLib.DemonEnergyThirst) < 0) {
+					outputText("\nYou begin fantasising about pussies and cocks foaming at the idea of fucking or getting fucked. It would look like you aquired the demons hunger for sex and can now feed from the orgasms of your partners. \n\n(<b>Gained Perk: Demonic Hunger</b>)\n");
+					player.createPerk(PerkLib.DemonEnergyThirst, 0, 0, 0, 0);
+					needNext = true;
+				}
+			}
+			//Demonic hunger perk loss
+			if (player.demonScore() < 10 && !player.hasStatusEffect(StatusEffects.PlayerPhylactery)) { //Check for being a demon enought
+				if (player.findPerk(PerkLib.DemonEnergyThirst) > 0) {
+					outputText("\nYour mind clears up as becoming less of a demon you also lost the demonic hunger only sex could sate. \n\n(<b>Lost Perk: Demonic Hunger</b>)\n");
+					player.removePerk(PerkLib.DemonEnergyThirst);
+					needNext = true;
+				}
+			}
+			//Demonic energy thirst
+			if (player.hasStatusEffect(StatusEffects.DemonEnergyThirstFeed)) {
+				player.refillHunger(10, false);
+				if (player.HP < player.maxHP()) {
+					EngineCore.HPChange(100 + (player.tou*2), true);
+				}
+				if (player.mana < player.maxMana()) {
+					EngineCore.ManaChange(100 + (player.inte*2), true);
+				}
+				if (player.fatigue < player.maxFatigue()) {
+					EngineCore.changeFatigue(100 + (player.spe*2));
+				}
+				outputText("You feel energised and empowered by the energy drained out of the cum of your recent fuck. What a meal!");
+				player.removeStatusEffect(StatusEffects.DemonEnergyThirstFeed)
 			}
 			//Flexibility perk
 			if ((player.tailType == Tail.CAT || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.tailType == Tail.BURNING) && (player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LION) && (player.arms.type == Arms.CAT || player.arms.type == Arms.LION || player.arms.type == Arms.DISPLACER)) { //Check for gain of cat agility - requires legs, tail, and arms
@@ -1024,6 +1061,75 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Flexibility);
 				needNext = true;
 			}
+			//Ghost-slinger perk
+			if (player.poltergeistScore() >= 12 && player.findPerk(PerkLib.Ghostslinger) < 0) {
+				outputText("\nYour head is suddenly filled with strange otherworldly knowledge. Things you didn't think possible before could become a reality now thanks to your supernatural intellect and abilities. You could even apply these newfound abilities to your equipment.\n\n(<b>Gained Perk: Ghost-slinger</b>)");
+				player.createPerk(PerkLib.Ghostslinger, 0, 0, 0, 0);
+				needNext = true;
+			}
+			else if (player.poltergeistScore() < 12 && player.findPerk(PerkLib.Ghostslinger) >= 0) {// && player.findPerk(PerkLib.LizanMarrow) < 0
+				outputText("\nYour supernatural knowledge fades along with the abilities that came with it as you become more corporeal.\n\n(<b>Lost Perk: Ghost-slinger</b>)");
+				player.removePerk(PerkLib.Ghostslinger);
+				needNext = true;
+			}
+			//Hydra Regeneration and Hydra acid breath perk
+			if (player.findPerk(PerkLib.HydraRegeneration) >= 0 && player.lowerBody != LowerBody.HYDRA) { //Remove hydra regeneration perk if not meeting requirements
+				outputText("\nYou accidentally cut yourself but to your stupor the wound does not close as fast as it should. Guess you are no longer a hydra enough to benefit from superior regeneration.\n\n(<b>Lost Perk: Hydra Regeneration</b>)");
+				player.removePerk(PerkLib.HydraRegeneration);
+				needNext = true;
+			}
+			if (player.findPerk(PerkLib.HydraAcidBreath) >= 0 && player.lowerBody != LowerBody.HYDRA) { //Remove hydra acid breath perk if not meeting requirements
+				outputText("\nAs your lead hydra head vanishes so do your ability to belch acid.\n\n(<b>Lost Perk: Hydra Acid Breath</b>)");
+				player.removePerk(PerkLib.HydraAcidBreath);
+				needNext = true;
+			}
+			//Improved venom gland
+			if (flags[kFLAGS.VENOM_TIMES_USED] >= 50 && player.findPerk(PerkLib.ImprovedVenomGland) < 0) {
+				outputText("\nYou feel wonderfully healthy. After using your venom so many time your body finally got acclimated to the presence of your venom gland allowing for increased capacity and production. \n\n(<b>Gained Perk: Improved venom gland</b>)\n");
+				player.createPerk(PerkLib.ImprovedVenomGland, 0, 0, 0, 0);
+			}
+			//Kitsune hunger perk
+			if (player.kitsuneScore() >= 10) { //Check for being a kitsune enought
+				if (player.findPerk(PerkLib.KitsuneEnergyThirst) < 0) {
+					outputText("\nYou begin fantasising about pussies and cocks foaming at the idea of fucking or getting fucked. It would look like you aquired the kitsunes hunger for sex and can now feed from the life force extracted of the orgasms of your partners. \n\n(<b>Gained Perk: Kitsune Hunger</b>)\n");
+					player.createPerk(PerkLib.KitsuneEnergyThirst, 0, 0, 0, 0);
+					needNext = true;
+				}
+			}
+			//Kitsune hunger perk
+			if (player.kitsuneScore() < 10) { //Check for being a kitsune enought
+				if (player.findPerk(PerkLib.KitsuneEnergyThirst) > 0) {
+					outputText("\nYour mind clears up as becoming less of a kitsune you also lost the hunger for life force only sex could provide you. \n\n(<b>Lost Perk: Kitsune Hunger</b>)\n");
+					player.removePerk(PerkLib.KitsuneEnergyThirst);
+					needNext = true;
+				}
+			}
+			//Kitsune energy thirst
+			if (player.hasStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)) {
+				player.refillHunger(10, false);
+				if (player.HP < player.maxHP()) {
+					EngineCore.HPChange(100 + (player.tou*2), true);
+				}
+				if (player.mana < player.maxMana()) {
+					EngineCore.ManaChange(100 + (player.inte*2), true);
+				}
+				if (player.fatigue < player.maxFatigue()) {
+					EngineCore.changeFatigue(100 + (player.spe*2));
+				}
+				if (player.soulforce < player.maxSoulforce()) {
+					EngineCore.SoulforceChange(500 + (player.wis*2), true);
+				}
+				outputText("You feel energised and empowered by the life force drained out of the fluids of your recent blind date. What a meal!");
+				player.removeStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)
+			}
+			//Lizan Regeneration perk
+			if ((player.tailType == Tail.LIZARD && player.lowerBody == LowerBody.LIZARD && player.arms.type == Arms.LIZARD) || (player.findPerk(PerkLib.LizanRegeneration) < 0 && player.findPerk(PerkLib.LizanMarrow) >= 0)) { //Check for gain of lizan regeneration - requires legs, arms and tail
+				if (player.findPerk(PerkLib.LizanRegeneration) < 0) {
+					outputText("\nAfter drinking the last drop of reptilium you starts to feel unusual feeling somewhere inside your body.  Like many tiny waves moving inside your veins making you feel so much more refreshed than moment ago.  Remembering about fact that lizans are so much similar to lizards and those usualy posses natural talent to regenerate from even sever injuries you quessing it's could be that.\n\n(<b>Gained Perk: Lizan Regeneration</b>)");
+					player.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
+					needNext = true;
+				}
+			}
 			//Lustzerker perk
 			if ((player.tailType == Tail.SALAMANDER && player.lowerBody == LowerBody.SALAMANDER && player.arms.type == Arms.SALAMANDER) || (player.findPerk(PerkLib.Lustzerker) < 0 && player.findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)) { //Check for gain of lustzerker - requires legs, arms and tail
 				if (player.findPerk(PerkLib.Lustzerker) < 0) {
@@ -1037,15 +1143,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Lustzerker);
 				needNext = true;
 			}
-			//Ghost-slinger perk
-			if (player.poltergeistScore() >= 12 && player.findPerk(PerkLib.Ghostslinger) < 0) {
-				outputText("\nYour head is suddenly filled with strange otherworldly knowledge. Things you didn't think possible before could become a reality now thanks to your supernatural intellect and abilities. You could even apply these newfound abilities to your equipment.\n\n(<b>Gained Perk: Ghost-slinger</b>)");
-				player.createPerk(PerkLib.Ghostslinger, 0, 0, 0, 0);
-				needNext = true;
-			}
-			else if (player.poltergeistScore() < 12 && player.findPerk(PerkLib.Ghostslinger) >= 0) {// && player.findPerk(PerkLib.LizanMarrow) < 0
-				outputText("\nYour supernatural knowledge fades along with the abilities that came with it as you become more corporeal.\n\n(<b>Lost Perk: Ghost-slinger</b>)");
-				player.removePerk(PerkLib.Ghostslinger);
+			else if (player.findPerk(PerkLib.LizanRegeneration) >= 0 && player.perkv4(PerkLib.LizanRegeneration) == 0 && player.findPerk(PerkLib.LizanMarrow) < 0 && player.findPerk(PerkLib.HydraRegeneration) < 0) { //Remove lizan regeneration perk if not meeting requirements
+				outputText("\nAll of sudden something change inside your body.  You think about a long while, until it dawned on you.  You can't feel that refreshing feeling inside your body anymore meaning for now just human rate of recovery from all kind of injuries.\n\n(<b>Lost Perk: Lizan Regeneration</b>)");
+				player.removePerk(PerkLib.LizanRegeneration);
 				needNext = true;
 			}
 			//Phantom Shooting perk
@@ -1062,29 +1162,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.PhantomShooting);
 				needNext = true;
 			}
-			//Hydra Regeneration and Hydra acid breath perk
-			if (player.findPerk(PerkLib.HydraRegeneration) >= 0 && player.lowerBody != LowerBody.HYDRA) { //Remove hydra regeneration perk if not meeting requirements
-				outputText("\nYou accidentally cut yourself but to your stupor the wound does not close as fast as it should. Guess you are no longer a hydra enough to benefit from superior regeneration.\n\n(<b>Lost Perk: Hydra Regeneration</b>)");
-				player.removePerk(PerkLib.HydraRegeneration);
-				needNext = true;
-			}
-			if (player.findPerk(PerkLib.HydraAcidBreath) >= 0 && player.lowerBody != LowerBody.HYDRA) { //Remove hydra acid breath perk if not meeting requirements
-				outputText("\nAs your lead hydra head vanishes so do your ability to belch acid.\n\n(<b>Lost Perk: Hydra Acid Breath</b>)");
-				player.removePerk(PerkLib.HydraAcidBreath);
-				needNext = true;
-			}
-			//Lizan Regeneration perk
-			if ((player.tailType == Tail.LIZARD && player.lowerBody == LowerBody.LIZARD && player.arms.type == Arms.LIZARD) || (player.findPerk(PerkLib.LizanRegeneration) < 0 && player.findPerk(PerkLib.LizanMarrow) >= 0)) { //Check for gain of lizan regeneration - requires legs, arms and tail
-				if (player.findPerk(PerkLib.LizanRegeneration) < 0) {
-					outputText("\nAfter drinking the last drop of reptilium you starts to feel unusual feeling somewhere inside your body.  Like many tiny waves moving inside your veins making you feel so much more refreshed than moment ago.  Remembering about fact that lizans are so much similar to lizards and those usualy posses natural talent to regenerate from even sever injuries you quessing it's could be that.\n\n(<b>Gained Perk: Lizan Regeneration</b>)");
-					player.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
-					needNext = true;
-				}
-			}
-			else if (player.findPerk(PerkLib.LizanRegeneration) >= 0 && player.perkv4(PerkLib.LizanRegeneration) == 0 && player.findPerk(PerkLib.LizanMarrow) < 0 && player.findPerk(PerkLib.HydraRegeneration) < 0) { //Remove lizan regeneration perk if not meeting requirements
-				outputText("\nAll of sudden something change inside your body.  You think about a long while, until it dawned on you.  You can't feel that refreshing feeling inside your body anymore meaning for now just human rate of recovery from all kind of injuries.\n\n(<b>Lost Perk: Lizan Regeneration</b>)");
-				player.removePerk(PerkLib.LizanRegeneration);
-				needNext = true;
+			//Recharge tail
+			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS) { //Spider, Bee, Scorpion, Manticore and Naga Venom Recharge
+				if (player.tailRecharge < 5) player.tailRecharge = 5;
+				player.tailVenom += player.tailRecharge;
+				if (player.findPerk(PerkLib.ImprovedVenomGland) >= 0) player.tailVenom += 5;
+				if (player.findPerk(PerkLib.VenomGlandsEvolved) >= 0) player.tailVenom += 2;
+				if (player.findPerk(PerkLib.VenomGlandsFinalForm) >= 0) player.tailVenom += 8;
+				if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
 			}
 			//Satyr Sexuality
 			if (player.satyrScore() >= 4 && player.balls > 0) {
@@ -1153,6 +1238,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Cold Affinity
+			if (player.hasPerk(PerkLib.WhaleFat) && player.findPerk(PerkLib.ColdAffinity) < 0) {
+				outputText("\nYou suddenly no longer feel the cold thanks to your whale fat so you guess you finally got acclimated to the icy winds of the glacial rift. \n\n(<b>Gained Perks: Cold Affinity</b>)\n");
+				player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
+				needNext = true;
+			}
 			if (player.yetiScore() >= 6 && player.findPerk(PerkLib.ColdAffinity) < 0) {
 				outputText("\nYou suddenly no longer feel the cold so you guess you finally got acclimated to the icy winds of the glacial rift. You feel at one with the cold. So well that you actually developed icy power of your own.\n\n(<b>Gained Perks: Cold Affinity and Freezing Breath Yeti</b>)\n");
 				player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
@@ -1164,7 +1254,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.yetiScore() < 6 && player.yukiOnnaScore() < 14 && player.melkieScore() < 8 && player.findPerk(PerkLib.ColdAffinity) >= 0) {
+			else if (player.yetiScore() < 6 && player.yukiOnnaScore() < 14 && player.melkieScore() < 8 && !player.hasPerk(PerkLib.WhaleFat) && player.findPerk(PerkLib.ColdAffinity) >= 0) {
 				outputText("\nYou suddenly feel a chill in the air. You guess you somehow no longer resist the cold.\n\n<b>(Lost Perks: Cold Affinity");
 				player.removePerk(PerkLib.ColdAffinity);
 				if (player.yetiScore() < 6){
@@ -1329,13 +1419,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Titanic Strength
-			if ((player.hydraScore() >= 14 || player.oniScore() >= 12) && player.findPerk(PerkLib.TitanicStrength) < 0) {
+			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 17 || player.scyllaScore() >= 12) && player.tallness >= 80 && player.findPerk(PerkLib.TitanicStrength) < 0) {
 				outputText("\nWhoa you've grown so big its sheer miracle if you don't damage the landscape while moving. This said your size contribute to your strength as well now.\n\n<b>(Gained Titanic Strength perk!)</b>\n");
 				player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if (player.hydraScore() < 14 && player.oniScore() < 12 && player.findPerk(PerkLib.TitanicStrength) >= 0) {
-				outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
+				if (((player.hydraScore() < 14 && player.oniScore() < 12 && player.orcaScore() < 17 && player.scyllaScore() < 12) || player.tallness < 80) && player.findPerk(PerkLib.TitanicStrength) >= 0) {
+				if (player.tallness < 80) outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
+				else outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
 				player.removePerk(PerkLib.TitanicStrength);
 				needNext = true;
 			}
@@ -1534,6 +1625,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
 				needNext = true;
 			}
+
+			//Turn to Bicorn
+			var CurentColor:String;
+			var bicornColorPalette:Array = ["black", "midnight black", "midnight"];
+			var bicornHairPalette:Array = ["silver","black", "midnight black", "midnight"];
 			if ((player.horns.type == Horns.BICORN || player.horns.type == Horns.UNICORN) && player.cor > 89 && player.findPerk(PerkLib.AvatorOfCorruption) < 0) {
 				outputText("\nA sudden wave of pleasure strike you making you moan");
 				if (player.horns.type == Horns.UNICORN) {
@@ -1544,10 +1640,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						player.createStatusEffect(StatusEffects.UnlockedBicornHorns, 0, 0, 0, 0);
 					}
 				}
-				outputText(".");
-				if (player.hairColor != "black") {
-					outputText(" Your fur tingle and you coo in delight as it turn abyssal black.");
-					player.hairColor = "black";
+				if (!InCollection(player.hairColor, bicornHairPalette)) {
+					CurentColor = randomChoice(bicornHairPalette);
+					outputText(" Your feel a tingling in your hairs as the strands turns "+CurentColor+".");
+					player.hairColor = CurentColor;
+				}
+				if (!InCollection(player.coatColor, bicornColorPalette)) {
+					CurentColor = randomChoice(bicornColorPalette);
+					outputText(" Your fur tingle and you coo in delight as it turn "+CurentColor+".");
+					player.coatColor = CurentColor;
 				}
 				if (player.eyes.colour != "red") {
 					outputText(" Meanwhile your eyes shine with malice as they take on a red corrupted tone reflecting the sorry state of your soul.");
@@ -1567,9 +1668,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText(". Mighty magical power start to swell in the twin horns on your forehead, washing away whats left of any purity you may have, and you will gladly use them to despoil and tarnish anything pure or innocent left on mareth.</b>\n");
 				if (player.findPerk(PerkLib.AvatorOfPurity) >= 0) player.removePerk(PerkLib.AvatorOfPurity);
 				player.createPerk(PerkLib.AvatorOfCorruption, 0, 0, 0, 0);
+				player.createPerk(PerkLib.AuraOfCorruption, 0, 0, 0, 0);
+				if(player.hasPerk(PerkLib.AuraOfPurity)) player.removePerk(PerkLib.AuraOfPurity);
 				player.cor = 100;
 				needNext = true;
 			}
+			//Fixing wings
 			if (player.horns.type == Horns.BICORN && player.wings.type == Wings.FEATHERED_ALICORN) {
 				outputText("\nYour wings changes as all the feather falling off to reveal a membranous demonic pair of bat wings.\n");
 				player.wings.type = Wings.NIGHTMARE;
@@ -1579,11 +1683,20 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				needNext = true;
 			}
+			//Losing horn
 			if (player.findPerk(PerkLib.AvatorOfCorruption) >= 0 && player.cor > 10 && player.horns.type != Horns.BICORN) {
 				outputText("\n<b>Without your horns, the magic power they once granted withers and dies, vanishing completely.</b>\n");
 				player.removePerk(PerkLib.AvatorOfCorruption);
+				if (!player.hasPerk(PerkLib.EclipticMind))
+				{
+					player.removePerk(PerkLib.AuraOfCorruption);
+				}
 				needNext = true;
 			}
+
+			//Turn to unicorn
+			var unicornColorPalette:Array = ["white", "pure white"];
+			var unicornHairPalette:Array = ["platinum blonde","silver", "white", "pure white"];
 			if ((player.horns.type == Horns.BICORN || player.horns.type == Horns.UNICORN) && player.cor < 11 && player.findPerk(PerkLib.AvatorOfPurity) < 0) {
 				outputText("\nA sudden wave of serenity pass over you as you realise how pure you have become.");
 				if (player.horns.type == Horns.BICORN) {
@@ -1594,9 +1707,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						player.createStatusEffect(StatusEffects.UnlockedUnicornHorn, 0, 0, 0, 0);
 					}
 				}
-				if (player.hairColor != "white") {
-					outputText(" You sigh in relief as your fur turns immaculate white.");
-					player.hairColor = "white";
+				if (!InCollection(player.hairColor, unicornHairPalette)) {
+					CurentColor = randomChoice(unicornHairPalette);
+					outputText(" Your feel a tingling in your hairs as the strands turns "+CurentColor+".");
+					player.hairColor = CurentColor;
+				}
+				if (!InCollection(player.coatColor, unicornColorPalette)) {
+					CurentColor = randomChoice(unicornColorPalette);
+					outputText(" You sigh in relief as your fur turns "+CurentColor+".");
+					player.coatColor = CurentColor;
 				}
 				if (player.eyes.colour != "blue") {
 					outputText(" Meanwhile your irises shift toward the sapphire blue as your mind clears off.");
@@ -1616,6 +1735,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText(" now. Mighty magical power start to swell in the horn on your forehead, cleansing whats left of any corruption you may have, and you will gladly use them to fight off the corruption that plagues mareth.</b>\n");
 				if (player.findPerk(PerkLib.AvatorOfCorruption) >= 0) player.removePerk(PerkLib.AvatorOfCorruption);
 				player.createPerk(PerkLib.AvatorOfPurity, 0, 0, 0, 0);
+				player.createPerk(PerkLib.AuraOfPurity, 0, 0, 0, 0);
+				if(player.hasPerk(PerkLib.AuraOfCorruption)) player.removePerk(PerkLib.AuraOfCorruption);
 				player.cor = 0;
 				needNext = true;
 			}
@@ -1631,8 +1752,33 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.findPerk(PerkLib.AvatorOfPurity) >= 0 && player.cor < 90 && player.horns.type != Horns.UNICORN) {
 				outputText("\n<b>Without your horn, the magic power it once granted withers and dies, vanishing completely.</b>\n");
 				player.removePerk(PerkLib.AvatorOfPurity);
+				if (!player.hasPerk(PerkLib.EclipticMind))
+				{
+					player.removePerk(PerkLib.AuraOfPurity);
+				}
 				needNext = true;
 			}
+			//Switch Aura Based On Alignment
+			if ((player.horns.type != Horns.BICORN || player.horns.type != Horns.UNICORN) && player.cor > 89 && player.hasPerk(PerkLib.AuraOfPurity) && player.hasPerk(PerkLib.EclipticMind)) {
+				outputText("\nA dramatic change in your alignment has altered your formerly pure aura into one of corruption\n");
+				player.removePerk(PerkLib.AuraOfPurity);
+				player.createPerk(PerkLib.AuraOfCorruption, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if ((player.horns.type != Horns.BICORN || player.horns.type != Horns.UNICORN) && player.cor < 20 && player.hasPerk(PerkLib.AuraOfCorruption) && player.hasPerk(PerkLib.EclipticMind)) {
+				outputText("\nA dramatic change in your alignment has altered your formerly corrupt aura into one of purity\n");
+				player.removePerk(PerkLib.AuraOfCorruption);
+				player.createPerk(PerkLib.AuraOfPurity, 0, 0, 0, 0);
+				needNext = true;
+			}
+			//Remove Bullshit
+			if ((player.horns.type != Horns.BICORN || player.horns.type != Horns.UNICORN) && (player.hasPerk(PerkLib.AuraOfPurity) || player.hasPerk(PerkLib.AuraOfCorruption)) && !player.hasPerk(PerkLib.EclipticMind)) {
+				outputText("\nNo idea how you got this weird aura about you but whatever the reason why you had it its gone now.\n");
+				player.removePerk(PerkLib.AuraOfPurity);
+				player.removePerk(PerkLib.AuraOfCorruption);
+				needNext = true;
+			}
+			//Harpy
 			if (player.lowerBody == LowerBody.HARPY && player.tailType == Tail.HARPY && player.findPerk(PerkLib.HarpyWomb) >= 0) { //Make eggs big if harpied!
 				if (player.hasStatusEffect(StatusEffects.Eggs) && player.statusEffectv2(StatusEffects.Eggs) == 0) {
 					player.changeStatusValue(StatusEffects.Eggs, 2, 1);

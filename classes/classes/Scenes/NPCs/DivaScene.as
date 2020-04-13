@@ -3,6 +3,7 @@ import classes.BodyParts.Face;
 import classes.Items.Consumables.VampireBlood;
 import classes.Scenes.Camp;
 import classes.StatusEffects;
+import classes.display.SpriteDb;
 
 import coc.view.ButtonDataList;
 
@@ -76,6 +77,7 @@ public class DivaScene extends XXCNPC{
         }
     }
     override public function campInteraction():void{
+        spriteSelect(SpriteDb.s_diva);
         if(time.hours > 20){
             scene("camp/campInteraction/dusk");
         } else {
@@ -166,6 +168,7 @@ public class DivaScene extends XXCNPC{
         }
     }
     public static function encounter():void{
+        instance.spriteSelect(SpriteDb.s_diva);
         if(instance.status == 2){
             instance.scene("combat/scenes/intro/final");
             instance.startCombat(new Diva(true));

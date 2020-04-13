@@ -1888,4 +1888,4 @@ public class DebugMenu extends BaseContent
 		}
 	}
 
-}
+}

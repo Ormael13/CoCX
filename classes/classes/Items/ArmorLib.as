@@ -12,6 +12,7 @@ package classes.Items
 		public static const COMFORTABLE_UNDERCLOTHES:Armor = new ComfortableUnderclothes();
 		public static const NOTHING:Armor = new Nothing();
 //25 za 1 ptk robes, 20 dla light, 40 dla medium i 60 dla heavy, z perkiem/dod. efektem podwaja koszt za każdy
+		public const NOTHING:Armor = new Nothing();
 		public const ADVCLTH:Armor = new Armor("AdvClth","G. Clothes","green adventurer's clothes","a green adventurer's outfit, complete with pointed cap",2,0,50,"A set of comfortable green adventurer's clothes.  It even comes complete with a pointy hat!","Light");
 		public const A_ROBE_:ArmorWithPerk = new ArmorWithPerk("A.Robe","A.Robe","apprentice's robe","an apprentice's robe",0,1,25,"This drab robe lacks adornment, yet retains an air of mysticality. The low quality of the fabric coupled with its mystic air suggests that it is a garment meant for mages in training.","Light",
 				PerkLib.WizardsEndurance,10,0,0,0);
@@ -66,6 +67,7 @@ package classes.Items
 				PerkLib.WizardsEnduranceAndSluttySeduction,20,5,0,0,"Your indecent ebonweave robe allows you access to 'Seduce', an improved form of 'Tease'.");
 		public const INDESSR:ArmorWithPerk = new ArmorWithPerk("IndeSSR","Indec S.S. Robe","indecent spider silk robe","an indecent spider silk robe",0,2,200,"More of a longcoat than a robe, this outfit is crafted from alchemically treated spider silk. Discrete straps centered around the belt keep the front perpetually open, displaying your groin and any cleavage you might have.","Light",
 				PerkLib.WizardsEnduranceAndSluttySeduction,15,5,0,0,"Your indecent spider silk robe allows you access to 'Seduce', an improved form of 'Tease'.");
+		public const KBDRESS:Armor = new KrakenBlackDress();
 		public const LEATHRA:Armor = new Armor("LeathrA","LeathrA","leather armor segments","a set of leather armor",5,0,100,"This is a suit of well-made leather armor.  It looks fairly rugged.","Light");
 		public const URTALTA:LeatherArmorSegments = new LeatherArmorSegments();
 		public const LMARMOR:LustyMaidensArmor = new LustyMaidensArmor();
@@ -126,7 +128,7 @@ package classes.Items
 				PerkLib.WizardsEndurance,25,0,0,0);
 		public const WKIMONO:ArmorWithPerk = new ArmorWithPerk("W.Kimono","W.Kimono","white kimono","a white kimono",0,1,200,"This lovely white kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
 				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
-
+		public const WIR:ArmorWithPerk = new WalpurgisIzaliaRobe();
 		/*
 		private static function mk(id:String,shortName:String,name:String,longName:String,def:Number,value:Number,description:String,perk:String=""):Armor {
 			return new Armor(id,shortName,name,longName,def,value,description,perk);

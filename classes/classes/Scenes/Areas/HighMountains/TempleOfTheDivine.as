@@ -1728,6 +1728,10 @@ use namespace CoC;
 				player.removePerk(PerkLib.CatlikeNimblenessEvolved);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.CatlikeNimblenessFinalForm)) {
+				player.removePerk(PerkLib.CatlikeNimblenessFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.CaveWyrmLungs)) {
 				player.removePerk(PerkLib.HinezumiBurningBlood);
 				player.perkPoints += 1;
@@ -1797,15 +1801,15 @@ use namespace CoC;
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.HellcatParathyroidGlands)) {
-				player.removePerk(PerkLib.HinezumiBurningBlood);
+				player.removePerk(PerkLib.HellcatParathyroidGlands);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.HellcatParathyroidGlandsEvolved)) {
-				player.removePerk(PerkLib.HinezumiBurningBloodEvolved);
+				player.removePerk(PerkLib.HellcatParathyroidGlandsEvolved);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.HellcatParathyroidGlandsFinalForm)) {
-				player.removePerk(PerkLib.HinezumiBurningBloodFinalForm);
+				player.removePerk(PerkLib.HellcatParathyroidGlandsFinalForm);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.HinezumiBurningBlood)) {
@@ -2030,6 +2034,18 @@ use namespace CoC;
 			}
 			if (player.hasPerk(PerkLib.VenomGlandsFinalForm)) {
 				player.removePerk(PerkLib.VenomGlandsFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.WhaleFat)) {
+				player.removePerk(PerkLib.WhaleFat);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.WhaleFatEvolved)) {
+				player.removePerk(PerkLib.WhaleFat);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.WhaleFatFinalForm)) {
+				player.removePerk(PerkLib.WhaleFat);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.ChimericalBodyInitialStage)){

@@ -17,7 +17,7 @@ package classes.Scenes
 		{}
 		
 		public function accessChangelogMenu():void {
-			Changelog31();
+			Changelog32();
 		}
 		//zrobić do 2020 na świeta event z reniferami i nie odblokowywać go do ok. 20-24 grudnia 2020 xD
 		private function Changelog33():void {
@@ -29,15 +29,55 @@ package classes.Scenes
 		private function Changelog32():void {
 			clearOutput();
 			outputText("<b>Version 0.8n9:</b>\n\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Orca TF has been revamped.\n");
+			outputText("-New Orca perk Whale fat.\n");
+			outputText("-New Orca ability play.\n");
+			outputText("-Orca sprite revised.\n");
+			outputText("-New Melkie tf was added.\n");
+			outputText("-Melkie Lung perk added.\n");
+			outputText("-Skelp can now be purchased in Yu shop.\n");
+			outputText("-New Centipede tf was added.\n");
+			outputText("-Centipede venom can be bought from moga hen and upgraded to potent venom at Lumi.\n");
+			outputText("-Hellcat was updated.\n");
+			outputText("-Hellcat now has a higher tf into Kasha. Try using a ghastly fruit.\n");
+			outputText("-Kraken TF was added evolving from Scylla.\n");
+			outputText("-Scylla constrict was empowered for Krakens.\n");
+			outputText("-Easter bunny TF was added.\n");
+			outputText("-New ability Easter bunny balls, Egg throw and Omni egg throw.\n");
+			outputText("-New perks Easter bunny bag.\n");
+			outputText("-Manticore tail shot now has Iterative attacks.\n");
+			outputText("-Pounce and Rend has been upgraded with multi attacks.\n");
+			outputText("-Manticore now has a pussy bodypart.\n");
+			outputText("-Bicorn/Unicorn scores have been redefined.\n");
+			outputText("-New Bicorn/Unicorn ability Aura of purity and Aura of Corruption.\n");
+			outputText("-Equine pussy is back or finaly here whatever you may call it.\n");
+			outputText("-Cave wyrm has been updated.\n");
+			outputText("-Cave wyrm now has a cock and pussy type instead of mere status.\n");
+			outputText("-Demons and kitsunes as well as players with phylactery can new heal and leech energy from sex.\n");
+			outputText("-Pussy are now recognised by the appearance screen.\n");
+			outputText("-New items: Sphinx Regalia availlable from Sanurah, Walpurgis Izalia Robe availlable in Kaiba shop, Kraken black dress availlable at Pinchou\n");
+			outputText("-Dark ritual was added to the Warlock prestige class perk tree.\n");
+			outputText("-Warlock now require less aggravating prerequisite.\n");
+			outputText("-Warlock no longuer spoils.\n");
+			outputText("-New sprites were added for: Centaur armor, All scarves, All Bikini, All Qipao, All Kimono, Goblin technomancer outfit, Full plate armors, Basic stat necklaces, Naga head accessory, Kasha tail, Centipede full body, Walpurgis Izalia Robe, Kraken Black Dress, Hinezumi stance, New cock Cave wyrm, New pussy Cave wyrm\n");
+			outputText("-Fixed Appearance screen declaring you as your lowest score race. You will now always be declared as by your highest valid score.\n");
+			outputText("-All changes for 0.8n9 was due to hard work of our glorious lady Liadri. With a bit of Lia Twist.\n");
+			outputText("-Golem scavenging got texts instead of placeholder texts. (Texts ofc also sponsored by Lia Twist and coded by me ;) )\n");
+			outputText("-Fixed bugs: error in cat tf that would cause text to become bolded, golemancer shop 2 items been unbuyable\n\n");/*ostatni punkt changelogu
+			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
+			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
+			//outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");
+			//outputText("-After beating Minotaur King PC could in vanilla take Excellia as npc back to camp. Just that in mods it was never followed thing. Not anymore and now we all can enjoy cow slut in camp same as we already enjoy Mitzi. But there will be choice to make: break Excellia even more and make her camp Slave or start helping her restore her clear mins and keep as Follower?\n");
+			//outputText("-Each of Excellia versions will have few interactions (including pregnancy). Fixing excellia will take ~30 ingame days and will req. to use at the end one De-Bimbo potion. Each interaction before she's fixed will be worth of one day of natural recovery. And each Debimbo potion is worth of 10 days (so yeah those rich PC's can just feed her 3 potions to instant fix her).\n");
+			//outputText("-Fixed Excellia will move to Lovers tab and add option to sleep with her, show up at hot springs or assist in fights as henchman.\n");
+			//outputText("-Added Mitzi and Excellia kids counter tracker to Stats page under Children subpage.\n");
+			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-Fixed bugs: \n");/*ostatni punkt changelogu
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
@@ -89,7 +129,15 @@ package classes.Scenes
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -170,7 +218,37 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");*/
+			outputText("\n\n\n");
+			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
+			outputText("-Add more soulforce options.\n");
+			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
+			outputText("-Add soulforce stuff to kitsune encounters.\n");
+			outputText("-Add Wuxia themed area and enemies.\n");
+			outputText("-Add few new options during chara creation.\n");
+			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
+			outputText("-More camp build options (involving using stones and etc.)\n");
+			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
 			menu();
 			addButton(0, "Next", Changelog31);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
@@ -234,7 +312,7 @@ package classes.Scenes
 			outputText("-During exploration of Mountains is possible to find quarry. Picking old pickaxe there allow to mine getting few stoens and if PC is lucky few gems too.\n");
 			outputText("-Fixed bugs: Giacomo taking much more gems than he meantioned for Mysterious Seed, missing req. for Job: All-Rounder, Tamani daughters replacing Tamani encounters after there is 16+ of them, missing 3 newest elemental types from menu for picking elemental to attack in combat, Thunderbird TF having wrong req. to get eyes tf, Izma appearaing at lake before PC reach lvl 3, ");
 			outputText("repeating some texts in scenes, Named Bullet perk adding bonus dmg to wrong type of enemies, Adventure Guild promotion to higher tier not taking any Spirit Stones, Bee venom pernamently lowering stats, still lingering half werewolf stat bonuses, Centaurium sometimes not giving hooved legs\n\n");
-			outputText("<b>Version 0.8n8:</b>\n\n");
+			outputText("<b>Version 0.8n8 (CharView update, Melkie TF, sex scenes giving tease exp, less lagging game max stat cap updates, typical many smaller or larger QoL changes and bugfixes):</b>\n\n");
 			outputText("-New tier 0 misc lvl-up perk: Twin Heart. Req. Free heart mutation slot and 4+ in centaur score. Effect: +40% base fatigue recovery and +5 to max tou/spe (scalable). +100% base fatigue recovery and reduce charge fatigue cost by 10% as well as its cooldown by 1 round so long as your body is tauric(drider). (Also raise all Taur race score by 1, by 2 as long pc is tauric/drider).\n");
 			outputText("-New tier 0 speed lvl-up perk: Power Shot. Req. Job: Ranger perk. Effect: Enable Power Shoot p. special. Add some of your strength (~40% of str scaling value) to bow damage.\n");
 			outputText("-New tier 0 misc lvl-up perk (by Liadri): Melkie Lungs. Req. Free lungs mutation slot and 12+ in melkie score. Effect: Increase damage reduction against spells by 5% and increase the power of compelling aria by 20%, Compelling Aria is kept at all time.\n");
@@ -304,30 +382,12 @@ package classes.Scenes
 			outputText("-Liadri updates for character viewer including clothes for specific items.\n");
 			outputText("-Some of under the hood changes to lessed ocasisonal lags due to max stat cap calculations there was added button 'Reflect' to Appearance screen that would allow recount race related part of max stat bonuses. So now it won't update automaticaly after using tf item but will require to manualy make caps update due to possible race score changes.\n");
 			outputText("-Dragon Boy that can be found outside his cave as result of clearing this dungeon can be disabled form appearing (but he will still have Strong Dao Heart not amused by player stopping him from appearing to torment PC).\n");
-			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
-			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
-			//outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");
-			//outputText("-After beating Minotaur King PC could in vanilla take Excellia as npc back to camp. Just that in mods it was never followed thing. Not anymore and now we all can enjoy cow slut in camp same as we already enjoy Mitzi. But there will be choice to make: break Excellia even more and make her camp Slave or start helping her restore her clear mins and keep as Follower?\n");
-			//outputText("-Each of Excellia versions will have few interactions (including pregnancy). Fixing excellia will take ~30 ingame days and will req. to use at the end one De-Bimbo potion. Each interaction before she's fixed will be worth of one day of natural recovery. And each Debimbo potion is worth of 10 days (so yeah those rich PC's can just feed her 3 potions to instant fix her).\n");
-			//outputText("-Fixed Excellia will move to Lovers tab and add option to sleep with her, show up at hot springs or assist in fights as henchman.\n");
-			//outputText("-Added Mitzi and Excellia kids counter tracker to Stats page under Children subpage.\n");
-			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
 			outputText("-Melkie have access to Compeling Aura M. Special as long they got melkie tongue.\n");
 			outputText("-During April Fool day Rathazul will heve special... interaction. It's one time scene but can be repeated next year if you find it.... to your liking ;)\n");
 			outputText("-Fixed bugs: Missing Next button causing to skip first half of Yuki Onna encounter scene for too low wisdom PC's, picking Bloodline perk at chara creation causing to skip to end of chara creation, going into combat options and back to get free Wisp/Elemental action(s), Mitzi & Izma daugters camp scene loop, desert naga sex scenes not showing with 33+ lust, Nieve camp lover been ");
 			outputText("too early taken away (gee Fen don't put notes on Nieve lasting 3 months just 6 code lines below line of code saying it's just 2 months), shooting any type of projectle (even bullets) from bow, alraune struggle showing wrong sprite, Dual Small wepaons having 2x more attacks per turn than intended, some of enemy specific actions showing wehn elemental conjuer or golemancer PC would ");
 			outputText("be choosing elemental / amount of golems to attack, Beautiful Shield, Staff and Bow been impossible to find after taking Beautiful Sword, fatal error for some of newest 4 firearms in combat code, 2H Firearms not usable outside mech, exploring Deepwoods not increasing exploration counter for that area, tease max level cap on info page stuck at 25, not been able buy jabberwocky tf ");
-			outputText("at Dinah shop after meeting him, Plasma Blast not using it own cooldown, Swift Casting not opening melee options menu, resistance related head accessories and necklaces not adding resistance, not removing Lighting Claw perk after PC stop to been Raiju, small text typos here and there\n");
-			outputText("\n\n\n");
-			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
-			outputText("-Add more soulforce options.\n");
-			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
-			outputText("-Add soulforce stuff to kitsune encounters.\n");
-			outputText("-Add Wuxia themed area and enemies.\n");
-			outputText("-Add few new options during chara creation.\n");
-			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
-			outputText("-More camp build options (involving using stones and etc.)\n");
-			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
+			outputText("at Dinah shop after meeting him, Plasma Blast not using it own cooldown, Swift Casting not opening melee options menu, resistance related head accessories and necklaces not adding resistance, not removing Lighting Claw perk after PC stop to been Raiju, small text typos here and there");
 			menu();
 			addButton(0, "Next", Changelog30);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);

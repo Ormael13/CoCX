@@ -1785,7 +1785,7 @@ import flash.utils.getQualifiedClassName;
 		}
 
 		public function monsterIsStunned():Boolean {
-			if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FreezingBreathStun) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Polymorphed) || hasStatusEffect(StatusEffects.HypnosisNaga)) return true;
+			if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Polymorphed) || hasStatusEffect(StatusEffects.HypnosisNaga)) return true;
 			return false;
 		}
 
@@ -1803,6 +1803,14 @@ import flash.utils.getQualifiedClassName;
 			}
 			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear)) {
 				if (!handleConstricted()) return;
+			}
+			if (hasStatusEffect(StatusEffects.OrcaPlay)) {
+				return;
+			}
+			if (hasStatusEffect(StatusEffects.OrcaHasWackedFinish)) {
+				outputText("\n\nYour opponent is still stunned from the powerful blow of your tail.");
+				createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+				return;
 			}
 			if (hasStatusEffect(StatusEffects.AbilityCooldown1) ) {
 				if (statusEffectv1(StatusEffects.AbilityCooldown1) <= 0) {
@@ -1972,7 +1980,7 @@ import flash.utils.getQualifiedClassName;
 				if (plural) EngineCore.outputText("Your foes are busy trying to remove the ink and therefore does no other action then flay their hand about its faces.");
 				else EngineCore.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.");
 			}
-			else if (hasStatusEffect(StatusEffects.FreezingBreathStun)) {
+			else if (hasStatusEffect(StatusEffects.FrozenSolid)) {
 				if (plural) EngineCore.outputText("Your foes are too busy trying to break out of their icy prison to fight back.");
 				else EngineCore.outputText("Your foe is too busy trying to break out of his icy prison to fight back.");
 			}
@@ -2315,11 +2323,11 @@ import flash.utils.getQualifiedClassName;
 				}
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently blind!</b>\n\n");
 			}
-			if(hasStatusEffect(StatusEffects.FreezingBreathStun)) {
-				addStatusValue(StatusEffects.FreezingBreathStun,1,-1);
-				if(statusEffectv1(StatusEffects.FreezingBreathStun) <= 0) {
+			if(hasStatusEffect(StatusEffects.FrozenSolid)) {
+				addStatusValue(StatusEffects.FrozenSolid,1,-1);
+				if(statusEffectv1(StatusEffects.FrozenSolid) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer encased in the ice prison!</b>\n\n");
-					removeStatusEffect(StatusEffects.FreezingBreathStun);
+					removeStatusEffect(StatusEffects.FrozenSolid);
 				}
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently encased in the ice prison!</b>\n\n");
 			}

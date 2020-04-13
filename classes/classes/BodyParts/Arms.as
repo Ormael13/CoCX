@@ -41,10 +41,11 @@ public class Arms extends BodyPart {
 	public static const HYDRA:int		= 37;
 	public static const GHOST:int		= 38;
 	public static const JIANGSHI:int	= 39;
-	public static const RAIJU_2:int		= 40;
+	public static const RAIJU_2:int		= 40;//button 0 on 4th page of metamorph
 	public static const YUKI_ONNA:int	= 41;
 	public static const MELKIE:int		= 42;
-	//public static const RAIJU_2:int		= 42;//button 0 on 4th page of metamorph
+	public static const CENTIPEDE:int	= 43;
+	public static const KRAKEN:int		= 44;
 	// Don't forget to add new types in DebugMenu.as list ARM_TYPE_CONSTANTS
 
 	public function Arms() {

@@ -10,6 +10,7 @@ import classes.PerkLib;
 import classes.BodyParts.Horns;
 import classes.BodyParts.Wings;
 import classes.StatusEffects;
+import classes.display.SpriteDb;
 
 import coc.view.ButtonDataList;
 
@@ -144,6 +145,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	public override function campInteraction():void {
+		if (isCorrupt)spriteSelect(SpriteDb.s_celessBlack);
+		if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
 		clearOutput();
 		doNext(camp.returnToCampUseOneHour);
 		display("strings/campInteraction", myLocals);
@@ -155,10 +158,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			addButton(2, "Items", itemImproveMenu);
 		}
 		else {
-			addButton(1, "Play Time", scene, "strings/playTime", {
-				$name: _name,
-				$dangerousPlants: (player.hasKeyItem("Dangerous Plants") >= 0)
-			});
+			addButton(1, "Play Time", playTime);
 		}
 		addButton(14, "Back", camp.campFollowers);
 		flushOutputTextToGUI();
@@ -174,12 +174,72 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				submenu(menu, campInteraction);
 			}
 			else {
-				incestScene("pureIncest")
+				pureIncest()
 			}
 		}
 	}
 
-	//region INTERFACE classes.TimeAwareInterface
+	private function playTime():void {
+		var locals:* = myLocals;
+		locals["$dangerousPlants"] = player.hasKeyItem("Dangerous Plants") >= 0;
+		clearOutput();
+		if (isCorrupt){
+			outputText(""+_name+" seems somewhat bored, and it occurs to you that being a mother comes before being the Champion." +
+					"You decide to bring your girl on an excursion, but the pair of you stumble upon a gang of imps." +
+					"You defeat them all to keep your daughter safe, but as you prepare to leave, you’re suddenly hit by a splash on your back." +
+					"You turn around and notice "+_name+" is making a naughty smile, holding one of the imps by the dick, the other hand on his torso.\n\n<i>“Tehehe. Got you, mom.”</i>\n\nOoooh reeeeally? Well then, it’s time you teach your daughter a lesson! " +
+					"You pick one of the imps and grab him by the cock, pumping to make him shoot his cum at your daughter, who laughs as this turn into an all out impshot battle. " +
+					"Imp cum is soon splashing everywhere in the forest, the both of you using trees and bushes as cover. Eventually, you and "+_name+" are covered in so much cum her black fur almost appears white. " +
+					"After a few hours of this, the both of you head back to camp, still laughing.");
+		}
+		else
+		{
+			outputText("You spend some time with your beloved daughter in the forest. " +
+					"The pair of you eventually stumble upon a grove filled with blooming white flowers which she happily gallops towards to in order to smell.\n\n"+
+					"<i>“Mom, they smell <b>so</b> good! Are they blooming all the time like this?”</i>\n\n" +
+					"You admit that you don’t know, as Mareth’s time and space is distorted and difficult to predict at the best of times. ");
+			if(player.inte > 60){
+				outputText("Although you could give a rough estimate if you brought the right tools, some books on Mareth’s local botany would also help");
+				if(player.hasKeyItem("Dangerous Plants") >= 0){
+					outputText(", the only thing you have is that one book from the traveling merchant, but it focuses more on the signs of the more dangerous ones and how to avoid them rather than their life cycle")
+				}
+			}
+			outputText(".\n\n");
+			outputText("She doesn't seem to mind, though. Apparently more interested in playing, the both of you play tag, hide and seek and other such innocent games in the grove. " +
+					"However, an unwanted visitor shows up before the end of the last game. " +
+					"The imp, because it’s clearly an imp, is masturbating, intent on spreading his filth on the flowers. " +
+					"This happening in front of your daughter is <i>unacceptable</i>. " +
+					"You tell her to go play on the other side for a while, so as to allow you to discreetly take care of the annoying little bugger before he has the chance to damage the grove and <output>$name</output>’s innocence. " +
+					"You make sure to dispose of the body properly, not wanting to risk your daughter stumbling upon it and winding up traumatized. That taken care of, you go back to playing with your daughter.\n\n" +
+					"The time passes and eventually both of you head back to camp, your daughter still sporting a wide smile from all the fun she had, none the wiser about your little altercation with that moron of an imp.\n\n" +
+					"As innocent as a day can be in Mareth, even if you had to force the issue. But if it’s for the sake of your daughter having a happy childhood, you would gladly beat this whole crazy realm into submission.")
+		}
+		doNext(camp.returnToCampUseOneHour);
+	}
+
+
+	private function pureIncest():void {
+		clearOutput();
+		outputText("No matter how weird a parent you might be, you just can’t find the resolve to fuck your innocent daughter. ");
+				if(player.cor > 20) outputText("Just as you're about to dismiss the idea completely, "+_name+" surprises you.</if>\n\n");
+				outputText("<i>“MOM! HELP! ITS BACK!</i>\n\n" +
+				"You watch, spellbound, as "+_name+"’s massive shaft rises to full mast, throbbing and leaking a steady stream of precum already. Clearly, "+_name+" has no idea about how to get it to calm down. " +
+				"It seems the job falls to you.\n\n" +
+				"<i>“I can’t hold this thing anymore. Please, mom, do something!”</i>\n\n" +
+				"This is a… somewhat unusual situation, but as a ");
+				if (player.gender == 1) outputText("male ");
+				if (player.gender == 2) outputText("parent ");
+				if (player.gender == 3) outputText("herm like her ");
+				outputText("it’s something you can understand. You approach your girl’s massive tool and give it a few experimental strokes, making "+_name+" gasp in surprise. " +
+				"You lick the flared tip to get a taste. Satisfied with it you then proceed to put the thing in your mouth proper. <output>$name</output> moans as her horse dong throbs in appreciation for the attention you’re giving it.\n\n" +
+				"<i>“Eep!!! Mom, I’m scared. It feels all weird... S..something is comiiiiiiing!”</i>\n\n" +
+				""+_name+" whines as she finally orgasms, her sweet cum flooding your throat. It tastes like cake icing, making it an exercise on willpower to keep from desperately trying to get more. " +
+				"As her erection finally dies down, you feel something change in you as the cum reaches your stomach.");
+		display("strings/incest/doHeatOrRut")
+		doNext(camp.returnToCampUseOneHour);
+	}
+
+		//region INTERFACE classes.TimeAwareInterface
 	public function timeChange():Boolean {
 		if (_age > 0) {
 			_age++;
@@ -206,6 +266,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			_age = _ageShouldDoBirth;
 		}
 		else {
+			if (isCorrupt)spriteSelect(SpriteDb.s_celessBlack);
+			if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
 			mainView.nameBox.text = "";
 			scene("strings/birth/intro", null, nameScene);
 		}
@@ -233,6 +295,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	public function itemImproveMenu():void {
+		if (isCorrupt)spriteSelect(SpriteDb.s_celessBlack);
+		if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
 		var improvableItems:Array = [
 			[weapons.BFSWORD, weapons.NPHBLDE, weapons.EBNYBLD],
 			[weapons.MASTGLO, weapons.KARMTOU, weapons.YAMARG],
@@ -273,6 +337,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	public function celessUnicornIntro():void {
+		spriteSelect(SpriteDb.s_celessWhite);
 		if (player.hasPerk(PerkLib.BicornBlessing)) {
 			outputText("No matter how much you try to you cannot find the grove where the holy shield rest. It seems that the barriers are keeping you at bay now.");
 			doNext(camp.returnToCampUseOneHour);	
@@ -289,6 +354,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		celessUnicornIntro1();
 	}
 	private function celessUnicornIntro1(stage1:int = 0, wasMale:Boolean = false):void {
+		spriteSelect(SpriteDb.s_celessWhite);
 		switch (stage1) {
 			case 0:
 				scene("strings/forest-unicorn/intro/intro");
@@ -341,6 +407,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		}
 	}
 	private function celessUnicornIntro2(stage2:int = 0, wasMale:Boolean = false):void {
+		spriteSelect(SpriteDb.s_celessWhite);
 		switch (stage2) {
 			case 0:
 				scene("strings/forest-unicorn/intro/introAfterNightmareShowProof");
@@ -386,6 +453,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	public function celessArmor():void {
+		if (isCorrupt)spriteSelect(SpriteDb.s_celessBlack);
+		if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
 		scene("strings/forest-unicorn/armorScene");
 		findArmor();
 		inventory.takeItem(armors.CTPALAD, camp.returnToCampUseOneHour);
@@ -397,6 +466,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	private function growUpScene():void {
+		if (isCorrupt)spriteSelect(SpriteDb.s_celessBlack);
+		if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
 		scene("strings/growUp", myLocals);
 		if (isCorrupt) {
 			addButton(0, "MasturbateHer", incestScene, "masturbateHer");
@@ -422,7 +493,9 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				addButton(0, "Next", incestScene, "pureCorruption");
 			}
 			else {
-				display("strings/incest/addCorruption", myLocals);
+				outputText("Just as you're about to go, however, you catch a glimpse of <output>$name</output>’s horse dong as it resumes acting up, just as you wanted. " +
+						"You’ll need to keep her constantly aroused to educate her properly and set her on the path to depravity if she's to become a proper daughter of yours.");
+				dynStats("cor", -1);
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
