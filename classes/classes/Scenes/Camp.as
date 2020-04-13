@@ -4168,6 +4168,27 @@ private function promptSaveUpdate():void {
 		doNext(doCamp);
 		return;
 	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 30) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 31;
+		clearOutput();
+		outputText("Text.");
+		doNext(doCamp);
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 31) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 32;
+		clearOutput();
+		outputText("Text.");
+		doNext(doCamp);
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 32) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 33;
+		clearOutput();
+		outputText("Text.");
+		doNext(doCamp);
+		return;
+	}
 */	doCamp();
 }
 
@@ -4668,4 +4689,4 @@ private function fixHistory():void {
 }
 */
 }
-}
+}

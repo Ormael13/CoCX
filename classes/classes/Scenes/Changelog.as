@@ -61,7 +61,9 @@ package classes.Scenes
 			outputText("-Warlock no longuer spoils.\n");
 			outputText("-New sprites were added for: Centaur armor, All scarves, All Bikini, All Qipao, All Kimono, Goblin technomancer outfit, Full plate armors, Basic stat necklaces, Naga head accessory, Kasha tail, Centipede full body, Walpurgis Izalia Robe, Kraken Black Dress, Hinezumi stance, New cock Cave wyrm, New pussy Cave wyrm\n");
 			outputText("-Fixed Appearance screen declaring you as your lowest score race. You will now always be declared as by your highest valid score.\n");
-			outputText("-Fixed bugs: error in cat tf that would cause text to become bolded\n\n");/*ostatni punkt changelogu
+			outputText("-All changes for 0.8n9 was due to hard work of our glorious lady Liadri. With a bit of Lia Twist.\n");
+			outputText("-Golem scavenging got texts instead of placeholder texts. (Texts ofc also sponsored by Lia Twist and coded by me ;) )\n");
+			outputText("-Fixed bugs: error in cat tf that would cause text to become bolded, golemancer shop 2 items been unbuyable\n\n");/*ostatni punkt changelogu
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");
@@ -70,6 +72,8 @@ package classes.Scenes
 			//outputText("-Fixed Excellia will move to Lovers tab and add option to sleep with her, show up at hot springs or assist in fights as henchman.\n");
 			//outputText("-Added Mitzi and Excellia kids counter tracker to Stats page under Children subpage.\n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
@@ -133,10 +137,6 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
