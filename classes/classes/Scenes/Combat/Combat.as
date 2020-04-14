@@ -7981,7 +7981,6 @@ public function combatRoundOver():void {
 			}
 			else outputText("You take hold of your dazed opponent and gently pull [monster him] to the ground, straddling him as you get into position.");
 			monster.createStatusEffect(StatusEffects.Straddle, 0,0,0,0);
-			player.createStatusEffect(StatusEffects.StraddleCooldown,10,0,0,0);
 			player.createStatusEffect(StatusEffects.StraddleRoundLeft,3,0,0,0);
 			if (player.hasPerk(PerkLib.StraddleImproved)) player.addStatusValue(StatusEffects.StraddleRoundLeft,1,+2);
 			enemyAI();
@@ -8056,8 +8055,7 @@ public function combatRoundOver():void {
 		damage = Math.round(damage);
 
 		//Select the scene
-		var TeaseFunctionList:Array = [RandomTeaseKiss
-		];
+		var TeaseFunctionList:Array = [RandomTeaseKiss];
 		if ((player.tail.type == Tail.DEMONIC || player.tail.type == Tail.MOUSE || player.tail.type == Tail.THUNDERBIRD || player.tail.type == Tail.HINEZUMI) && monster.hasCock() > 0) TeaseFunctionList.push(RandomTeaseStranglingTail);
 		if (player.tail.type == Tail.MANTICORE_PUSSYTAIL && player.tailVenom >= 5) TeaseFunctionList.push(RandomTeaseManticore);
 		if (player.tail.type == Tail.LIZARD || player.tail.type == Tail.CAVE_WYRM || player.tail.type == Tail.SALAMANDER) TeaseFunctionList.push(RandomTeaseButtfuckTail);

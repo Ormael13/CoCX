@@ -751,7 +751,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const StunCooldown:StatusEffectType       = mk("Stun Cooldown");
 		public static const Straddle:StatusEffectType  			= mk("Straddling your opponent");
 		public static const StraddleRoundLeft:StatusEffectType  = mk("Straddling your opponent");
-		public static const StraddleCooldown:StatusEffectType  = mk("Time before you can straddle again");
 		public static const TentacleCoolDown:StatusEffectType   = mk("TentacleCoolDown");
 		public static const Timer:StatusEffectType              = mk("Timer");
 		public static const TimesBashed:StatusEffectType        = mk("TimesBashed");
