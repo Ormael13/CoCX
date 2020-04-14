@@ -1814,6 +1814,9 @@ import flash.utils.getQualifiedClassName;
 			if (hasStatusEffect(StatusEffects.OrcaPlay)) {
 				return;
 			}
+			if (hasStatusEffect(StatusEffects.Straddle)) {
+				return;
+			}
 			if (hasStatusEffect(StatusEffects.OrcaHasWackedFinish)) {
 				outputText("\n\nYour opponent is still stunned from the powerful blow of your tail.");
 				createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
@@ -1907,7 +1910,7 @@ import flash.utils.getQualifiedClassName;
 			else if (player.lowerBody == 8) {
 			EngineCore.outputText("" + capitalA + short + " struggle in your fluid form kicking and screaming to try and get out.");
 			if (statusEffectv1(StatusEffects.GooEngulf) <= 0) {
-				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
+				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your slimy body to handle, breaking free of your fluids.");
 				removeStatusEffect(StatusEffects.GooEngulf);
 			}
 			addStatusValue(StatusEffects.GooEngulf, 1, -1);

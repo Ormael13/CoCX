@@ -194,6 +194,7 @@ public class CombatUI extends BaseCombatContent {
 			else btnTease.disable("No way you could make an enemy more aroused by striking a seductive pose and exposing parts of your body while piloting goblin mech.");
 			
 		}
+		else if (monster.hasStatusEffect(StatusEffects.Stunned) && player.hasPerk(PerkLib.Straddle)) btnTease.show("Straddle", combat.Straddle, "Go to town on your opponent with devastating teases.");
 		else btnTease.show("Tease", combat.teaseAttack, "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.");
 		btnWait.show("Wait", combat.wait, "Take no action for this round.  Why would you do this?  This is a terrible idea.");
 		if (monster.hasStatusEffect(StatusEffects.CreepingDoom)) btnRun.show("Struggle", combat.struggleCreepingDoom, "Shake away the pests.");
@@ -278,6 +279,14 @@ public class CombatUI extends BaseCombatContent {
 			}
 			addButton(3, "Impale", combat.OrcaImpale).hint("End the game by viciously impaling your falling foe on your weapon. \n\nFatigue Cost: " + physicalCost(20) + "");
 			addButton(4, "Release", combat.OrcaLeggoMyEggo).hint("Stop playing early and let your prey fall to the ground.");
+		} else if (monster.hasStatusEffect(StatusEffects.Straddle)) {
+			menu();
+			addButton(0, "Tease", combat.StraddleTease).hint("Use a powerful teasing attack");
+			addButton(4, "Release", combat.StraddleLeggoMyEggo).hint("Release your opponent.");
+		} else if (monster.hasStatusEffect(StatusEffects.GooEngulf)) {
+			menu();
+			addButton(0, "Tease", combat.GooTease).hint("Toy with your opponent");
+			addButton(4, "Release", combat.GooLeggoMyEggo).hint("Release your opponent.");
 		} else if (monster.hasStatusEffect(StatusEffects.EmbraceVampire)) {
 			menu();
 			if (player.faceType == Face.VAMPIRE || player.hasPerk(PerkLib.HollowFangs)) {

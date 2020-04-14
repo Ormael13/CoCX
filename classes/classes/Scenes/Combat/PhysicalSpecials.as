@@ -387,6 +387,22 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You need more time before you can use Play again.</b>\n\n");
 				}
 			}
+			if (player.orcaScore() > 10 && player.faceType == Face.ORCA) {
+				bd = buttons.add("Play", orcaPlay).hint("Begin toying with your prey by tossing it in the air, initiating a juggling combo.");
+				bd.requireFatigue(physicalCost(30));
+				if (!monster.hasStatusEffect(StatusEffects.Stunned))
+				{
+					bd.disable("<b>You need the ennemy to be stunned in order to use this ability.</b>\n\n");
+				}
+				if (player.tallness < monster.tallness)
+				{
+					bd.disable("<b>You need the ennemy to be smaller then you in order to use this ability.</b>\n\n");
+				}
+				if (player.hasStatusEffect(StatusEffects.CooldownPlay))
+				{
+					bd.disable("<b>You need more time before you can use Play again.</b>\n\n");
+				}
+			}
 		}
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Dynapunch Glove") >= 0) {

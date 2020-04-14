@@ -4187,6 +4187,8 @@ use namespace CoC;
 				demonCounter += 4;
 			if (tongue.type == Tongue.DEMONIC)
 				demonCounter++;
+			if (ears.type == Ears.ELFIN || ears.type == Ears.ELVEN || ears.type == Ears.HUMAN)
+				demonCounter++;
 			if (lowerBody == LowerBody.DEMONIC_HIGH_HEELS || lowerBody == LowerBody.DEMONIC_CLAWS)
 				demonCounter++;
 			if (demonCocks() > 0)
@@ -4198,7 +4200,7 @@ use namespace CoC;
 					demonCounter++;
 				if (skinTone == "shiny black" || skinTone == "sky blue" || skinTone == "indigo" || skinTone == "ghostly white" || skinTone == "light purple" || skinTone == "purple" || skinTone == "red" || skinTone == "grey" || skinTone == "blue")
 					demonCounter++;
-				if (faceType == Face.HUMAN)
+				if (faceType == Face.HUMAN || faceType == Face.ANIMAL_TOOTHS || faceType == Face.DEVIL_FANGS)
 					demonCounter++;
 				if (arms.type == Arms.HUMAN)
 					demonCounter++;
@@ -11651,6 +11653,7 @@ use namespace CoC;
 				}
 			}
 			SexXP(5+level);
+			if (armor == game.armors.SSC)SexXP(5+level);
 			orgasm(type,real);
 			if (type == "Dick")
 			{
@@ -11923,4 +11926,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}
