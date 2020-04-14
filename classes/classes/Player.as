@@ -4788,7 +4788,7 @@ use namespace CoC;
 				cheshireCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && cheshireCounter >= 8)
 				cheshireCounter += 1;
-			if (catScore() >= 4 || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || rearBody.type == RearBody.LION_MANE || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING
+			if (catScore() >= 4 || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING || tailType == Tail.TWINKASHA
 			 || eyes.type == Eyes.DISPLACER || ears.type == Ears.DISPLACER || arms.type == Arms.DISPLACER || rearBody.type == RearBody.DISPLACER_TENTACLES) cheshireCounter = 0;
 			if (isGargoyle()) cheshireCounter = 0;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
@@ -4814,7 +4814,7 @@ use namespace CoC;
 				hellcatCounter++;
 			if (tailType == Tail.BURNING)
 				hellcatCounter++;
-			if (tailType == Tail.BURNING && tailCount == 2)
+			if (tailType == Tail.TWINKASHA && tailCount == 2)
 				hellcatCounter+=3;
 			if (arms.type == Arms.CAT)
 				hellcatCounter++;
@@ -4842,7 +4842,7 @@ use namespace CoC;
 				hellcatCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && hellcatCounter >= 8)
 				hellcatCounter += 1;
-			if (catScore() >= 4 || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || rearBody.type == RearBody.LION_MANE || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type != Eyes.INFERNAL || hairType != Hair.BURNING || tailType != Tail.BURNING
+			if (catScore() >= 4 || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type != Eyes.INFERNAL || hairType != Hair.BURNING || (tailType != Tail.BURNING || tailType != Tail.TWINKASHA)
 			 || eyes.type == Eyes.DISPLACER || ears.type == Ears.DISPLACER || arms.type == Arms.DISPLACER || rearBody.type == RearBody.DISPLACER_TENTACLES) hellcatCounter = 0;
 			if (isGargoyle()) hellcatCounter = 0;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)

@@ -3,6 +3,7 @@
  */
 package classes.Scenes.Combat {
 import classes.BodyParts.Face;
+import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
@@ -216,6 +217,7 @@ public class CombatUI extends BaseCombatContent {
 			} else {
 				btnMelee.show("Approach", combat.approachAfterKnockback3, "Close some distance between you and your opponent.");
 			}
+		//HYPNOSIS
 		} else if (monster.hasStatusEffect(StatusEffects.HypnosisNaga) && !monster.hasStatusEffect(StatusEffects.Constricted)) {
 			menu();
 			addButton(0, "Heal", combat.HypnosisHeal);
@@ -283,6 +285,21 @@ public class CombatUI extends BaseCombatContent {
 			menu();
 			addButton(0, "Tease", combat.StraddleTease).hint("Use a powerful teasing attack");
 			addButton(4, "Release", combat.StraddleLeggoMyEggo).hint("Release your opponent.");
+		} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+			menu();
+			if (monster.statusEffectv1(StatusEffects.Dig) > 0){
+				if (player.lowerBody == LowerBody.CANCER) addButton(0, "Grab", combat.CancerGrab).hint("Dig underneath your opponent and attempt to grab it in your pincers");
+				addButton(1, "Wait", combat.wait);
+				BuildSpellBookMenu(spellBookButtons, true);
+				if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
+				if (player.hasStatusEffect(StatusEffects.OniRampage)) {
+					btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
+				} else if (!combat.canUseMagic()) {
+					btnMagic.disable();
+				}
+			}
+			addButton(2, "Dig out", combat.DigOut).hint("Dig back out out of the ground.");
+			addButton(14, "Escape", combat.runAway).hint("Escape away from the battle throught underground tunneling.");
 		} else if (monster.hasStatusEffect(StatusEffects.GooEngulf)) {
 			menu();
 			addButton(0, "Tease", combat.GooTease).hint("Toy with your opponent");
@@ -403,7 +420,7 @@ public class CombatUI extends BaseCombatContent {
 		}
 	}
 
-	private function BuildSpellBookMenu(buttons:ButtonDataList):void{
+	private function BuildSpellBookMenu(buttons:ButtonDataList, CanOnlyUseBuff:Boolean = false):void{
 		var bd:ButtonData;
 		var BtnMBolt:CoCButton = button(1);
 		var BtnWhite:CoCButton = button(2);
@@ -418,10 +435,10 @@ public class CombatUI extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			}
 		}
-		combat.magic.buildWhiteMenu(whiteSpellButtons);
-		combat.magic.buildBlackMenu(blackSpellButtons);
-		combat.magic.buildGreyMenu(greySpellButtons);
-		combat.magic.buildHexMenu(hexSpellButtons);
+		combat.magic.buildWhiteMenu(whiteSpellButtons, CanOnlyUseBuff);
+		combat.magic.buildBlackMenu(blackSpellButtons, CanOnlyUseBuff);
+		combat.magic.buildGreyMenu(greySpellButtons, CanOnlyUseBuff);
+		combat.magic.buildHexMenu(hexSpellButtons, CanOnlyUseBuff);
 		if (whiteSpellButtons.length > 0) buttons.add("White Spells", curry(submenu,whiteSpellButtons, submenuSpells, 0, false)).hint("Open your white spell book");
 		if (blackSpellButtons.length > 0) buttons.add("Black Spells", curry(submenu,blackSpellButtons, submenuSpells, 0, false)).hint("Open your black spell book");
 		if (player.hasPerk(PerkLib.PrestigeJobGreySage)){

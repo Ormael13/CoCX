@@ -836,34 +836,12 @@ public class CombatMagic extends BaseCombatContent {
 		return damage;
 	}
 
-	internal function buildMenu(buttons:ButtonDataList):void {
-		var bd:ButtonData;
-		//Most basic spell ever ^^
-		if (player.hasPerk(PerkLib.JobSorcerer)) {
-			bd = buttons.add("M.Bolt", spellMagicBolt);
-			if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") bd.hint("Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
-			else bd.hint("Attempt to attack the enemy with magic bolt.  Damage done is determined by your intelligence.", "Magic Bolt");
-			if (player.mana < spellCost(40)) {
-				bd.disable("Your mana is too low to cast this spell.");
-			}
-		}
-		buttons.add("White Spells", buildWhiteMenu);
-		buttons.add("Black Spells", buildBlackMenu);
-		if (player.hasPerk(PerkLib.PrestigeJobGreySage)){
-			buttons.add("Grey Spells", buildGreyMenu);
-		}
-		if (player.hasPerk(PerkLib.HexKnowledge)){
-			buttons.add("Hexes", buildHexMenu);
-		}
-		//	if (player.hasStatusEffect(StatusEffects.Knows)) buttons.add("	ice single target spell goes here
-	}
-
-	public function buildWhiteMenu(buttons:ButtonDataList):void {
+	public function buildWhiteMenu(buttons:ButtonDataList, CanOnlyUseBuff:Boolean):void {
 		var bd:ButtonData;
 		var badLustForWhite:Boolean = player.lust >= getWhiteMagicLustCap();
 
 		//WHITE SHITZ
-		if (player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsWhitefire) && !CanOnlyUseBuff) {
 			bd = buttons.add("Whitefire", spellWhitefire)
 					.hint("Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  " +
 							"\n\nMana Cost: " + spellCostWhite(40) + "");
@@ -879,7 +857,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast a first tier white magic spell again.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsPyreBurst) && !CanOnlyUseBuff) {
 			bd = buttons.add("Pyre Burst", spellPyreBurst)
 					.hint("Teach your foes a lesson with the strenght of a firestorm.  \n\n<b>AoE Spell.</b>  " +
 							"\n\nMana Cost: " + spellCostWhite(200) + "");
@@ -895,7 +873,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast a second tier white magic spell again.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsMeteorShower)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsMeteorShower)  && !CanOnlyUseBuff) {
 			bd = buttons.add("Meteor Shower", spellMeteorShower)
 					.hint("Call down a rain of meteors on your opponents, stunning them for 1 round and dealing area damage. Hits 12 times. Despite been grey magic it still does carry the risk of backfiring and raising lust.  " +
 							"\n\n<b>AoE Spell and req. 1 turn channeling. Cooldown: 12 turns</b>  \n\nMana Cost: " + spellCost(250) + "");
@@ -913,7 +891,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast Meteor Shower again.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsLightningBolt) && !CanOnlyUseBuff) {
 			bd = buttons.add("LightningBolt", spellLightningBolt)
 					.hint("Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning.  " +
 							"\n\nMana Cost: " + spellCostWhite(40) + "");
@@ -929,7 +907,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast a first tier white magic spell again.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsChainLighting)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsChainLighting) && !CanOnlyUseBuff) {
 			bd = buttons.add("ChainLighting", spellChainLightning)
 					.hint("Chain Lighting is a lightning attack that will electrocute your foes with a chain bolts of lightning.  \n\n<b>AoE Spell.</b>  " +
 							"\n\nMana Cost: " + spellCostWhite(200) + "");
@@ -945,7 +923,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast a second tier white magic spell again.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsBlind)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsBlind) && !CanOnlyUseBuff) {
 			bd = buttons.add("Blind", spellBlind)
 					.hint("Blind is a fairly self-explanatory spell.  It will create a bright flash just in front of the victim's eyes, blinding them for a time.  However if they blink it will be wasted.  " +
 							"\n\nMana Cost: " + spellCostWhite(30) + "");
@@ -1009,7 +987,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsBlizzard) && !CanOnlyUseBuff) {
 			bd = buttons.add("Blizzard", spellBlizzard)
 					.hint("Blizzard is a potent ice based defense spell that will reduce power of any fire based attack used against the user.  " +
 							"\n\nMana Cost: " + spellCostWhite(50) + "");
@@ -1027,12 +1005,12 @@ public class CombatMagic extends BaseCombatContent {
 		}
 	}
 
-	public function buildBlackMenu(buttons:ButtonDataList):void {
+	public function buildBlackMenu(buttons:ButtonDataList, CanOnlyUseBuff:Boolean):void {
 		var bd:ButtonData;
 		var badLustForBlack:Boolean = player.lust < getBlackMagicMinLust();
 
 		//BLACK MAGICSKS
-		if (player.hasStatusEffect(StatusEffects.KnowsIceSpike)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsIceSpike) && !CanOnlyUseBuff) {
 			bd = buttons.add("Ice Spike", spellIceSpike)
 					.hint("Drawning your own lust to concentrate it into chilling spike of ice that will attack your enemies.  " +
 							"\n\nMana Cost: " + spellCostBlack(40) + "");
@@ -1046,7 +1024,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast a first tier black magic spell again.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsArcticGale)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsArcticGale) && !CanOnlyUseBuff) {
 			bd = buttons.add("Arctic Gale", spellArcticGale)
 					.hint("Devastate the enemy ranks with a blast of icy wind sharper then steel blades.  \n\n<b>AoE Spell.</b>  " +
 							"\n\nMana Cost: " + spellCostBlack(200) + "");
@@ -1060,7 +1038,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast a second tier black magic spell again.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsPolarMidnight)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsPolarMidnight) && !CanOnlyUseBuff) {
 			bd = buttons.add("Polar Midnight", spellPolarMidnight)
 					.hint("Cause a massive temperature drop which freezes the air solid in an area. Opponents caught in this spell take the cold damage and are stunned for 5 round.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  " +
 							"\n\n<b>AoE Spell and req. 1 turn channeling. Cooldown: 12 turns</b>  \n\nMana Cost: " + spellCost(250) + "");
@@ -1074,7 +1052,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast Polar Midnight again.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsDarknessShard) && !CanOnlyUseBuff) {
 			bd = buttons.add("DarknessShard", spellDarknessShard)
 					.hint("Drawning your own lust to condense part of the the ambivalent darkness into a shard to attack your enemies.  " +
 							"\n\nMana Cost: " + spellCostBlack(40) + "");
@@ -1088,7 +1066,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast a first tier black magic spell again.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsDuskWave)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsDuskWave) && !CanOnlyUseBuff) {
 			bd = buttons.add("Dusk Wave", spellDuskWave)
 					.hint("Drawning your own lust to condense part of the the ambivalent darkness into a wave to attack your enemies.  \n\n<b>AoE Spell.</b>  " +
 							"\n\nMana Cost: " + spellCostBlack(200) + "");
@@ -1102,7 +1080,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast a second tier black magic spell again.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsArouse)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsArouse) && !CanOnlyUseBuff) {
 			bd = buttons.add("Arouse", spellArouse)
 					.hint("The arouse spell draws on your own inner lust in order to enflame the enemy's passions.  " +
 							"\n\nMana Cost: " + spellCostBlack(20) + "");
@@ -1114,7 +1092,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsWaveOfEcstasy)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsWaveOfEcstasy) && !CanOnlyUseBuff) {
 			bd = buttons.add("WaveOfEcstasy", spellWaveOfEcstasy)
 					.hint("The arouse spell draws on your own inner lust in order to enflame the enemyies passions.  " +
 							"\n\nMana Cost: " + spellCostBlack(100) + "");
@@ -1170,7 +1148,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast Regenerate again.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsNosferatu) && !CanOnlyUseBuff) {
 			bd = buttons.add("Nosferatu", spellNosferatu)
 					.hint("Vampirise the health of your foe, dealing damage and healing you back for 100% of the damage done." +
 							"\n\nMana Cost: " + healCost(50) + "");
@@ -1183,7 +1161,7 @@ public class CombatMagic extends BaseCombatContent {
 		//	if (player.hasStatusEffect(StatusEffects.Knows)) buttons.add("	ice single target spell goes here
 	}
 
-	public function buildHexMenu(buttons:ButtonDataList):void {
+	public function buildHexMenu(buttons:ButtonDataList, CanOnlyUseBuff:Boolean):void {
 		var bd:ButtonData;
 		var badLustForBlack:Boolean        = player.lust < getBlackMagicMinLust();
 
@@ -1199,7 +1177,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your HP is too low to cast this spell.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsLifeSiphon)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsLifeSiphon) && !CanOnlyUseBuff) {
 			bd = buttons.add("Life siphon", spellLifeSiphon)
 					.hint("Create a funnel between you and your target, forcefully stealing its vitality to recover your own.  " +
 							"\n\nMana Cost: " + spellCostBlack(750) + "");
@@ -1213,7 +1191,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You're still linked to the enemy.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsConsumingDarkness)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsConsumingDarkness) && !CanOnlyUseBuff) {
 			bd = buttons.add("Consuming darkness", spellConsumingDarkness)
 					.hint("For the next 7 round the target is devoured by living shadow trying to tear its body apart deals good damage on each round.  \n\n<b>Cooldown: 15 turns</b>  " +
 							"\n\nMana Cost: " + spellCostBlack(350) + "");
@@ -1227,7 +1205,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast Consuming darkness again.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsCurseOfDesire)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsCurseOfDesire) && !CanOnlyUseBuff) {
 			bd = buttons.add("Curse of Desire", spellCurseOfDesire)
 					.hint("Arouse yourself and curse the target with lewd thoughts, weakening its resistance to lust and forcing it to take low lust damage each round for 8 rounds.  \n\n<b>Cooldown: 15 turns</b>  " +
 							"\n\nMana Cost: " + spellCostBlack(400) + "");
@@ -1241,7 +1219,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast Curse of Desire again.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsCurseOfWeeping)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsCurseOfWeeping) && !CanOnlyUseBuff) {
 			bd = buttons.add("Curse of Weeping", spellCurseOfWeeping)
 					.hint("Draw your own blood and inflict on your target a terrible curse, dealing high damage for 6 rounds.  \n\n<b>Cooldown: 10 turns</b>  " +
 							"\n\nMana Cost: " + spellCostBlack(300) + "");
@@ -1259,7 +1237,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 	}
 
-	public function buildGreyMenu(buttons:ButtonDataList):void {
+	public function buildGreyMenu(buttons:ButtonDataList, CanOnlyUseBuff:Boolean):void {
 		var bd:ButtonData;
 		var badLustForGrey:Boolean = player.lust < 50 || player.lust > (player.maxLust() - 50);
 
@@ -1277,7 +1255,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		//	if (player.hasStatusEffect(StatusEffects.KnowsWereBeast)) buttons.add("Were-beast",	were-beast spell goes here
 		//	if (player.hasStatusEffect(StatusEffects.Knows)) buttons.add("	next spell (non-fire or non-ice based) goes here
-		if (player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsFireStorm) && !CanOnlyUseBuff) {
 			bd = buttons.add("Fire Storm", spellFireStorm).hint("Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Fire Storm that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCost(200) + "");
 			if (badLustForGrey) {
 				bd.disable("You can't use any grey magics.");
@@ -1288,7 +1266,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 		}
 		//	if (player.hasStatusEffect(StatusEffects.Knows)) buttons.add("	fire single target spell goes here
-		if (player.hasStatusEffect(StatusEffects.KnowsIceRain)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsIceRain) && !CanOnlyUseBuff) {
 			bd = buttons.add("Ice Rain", spellIceRain).hint("Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Ice Rain that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCost(200) + "");
 			if (badLustForGrey) {
 				bd.disable("You can't use any grey magics.");

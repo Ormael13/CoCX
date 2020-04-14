@@ -1585,6 +1585,10 @@ internal function wait():void {
 		outputText("You shake off the mental compulsions and ready yourself to fight!\n\n");
 		player.removeStatusEffect(StatusEffects.Whispered);
 	}
+	else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+		clearOutput();
+		outputText("You bid your time underground preparing your next move.\n\n");
+	}
 	else if (player.hasStatusEffect(StatusEffects.HarpyBind)) {
 		clearOutput();
 		outputText("The brood continues to hammer away at your defenseless self. ");
@@ -7942,6 +7946,79 @@ public function combatRoundOver():void {
 		enemyAI();
 	}
 
+	public function CancerGrab():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if (monster.plural) {
+			outputText("You cannot grab a single target while fighting multiple opponents at the same times!");
+			addButton(0, "Next", combatMenu, false);
+		}
+		if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
+			clearOutput();
+			outputText("You just don't have the energy to grab your opponent right now...");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		if(monster.short == "pod") {
+			clearOutput();
+			outputText("You can't grab something you're trapped inside of!");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		fatigue(10, USEFATG_PHYSICAL);
+		//Amily!
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
+			enemyAI();
+			return;
+		}
+		//WRAP IT UPPP
+		if (monster.hasStatusEffect(StatusEffects.Dig))
+		{
+			outputText("You dig right underneath your opponent, ");
+			if (80 + rand(player.spe) > monster.spe) {
+				outputText(" taking it by surprise and grappling it with your powerful pincers as you prepare to crush it to death.");
+			}
+			//Failure
+			else {
+				//Failure (-10 HPs) -
+				outputText("surging right under your target but missing by a mere inch as your opponent escapes your pincers.\n");
+				player.takePhysDamage(5, true);
+				if (player.HP <= player.minHP()) {
+					doNext(endHpLoss);
+					if (monster.hasStatusEffect(StatusEffects.Dig)) monster.removeStatusEffect(StatusEffects.Dig);
+					return;
+				}
+			}
+		}
+		else{
+			outputText("You launch yourself at your opponent,");
+			if (40 + rand(player.spe) > monster.spe) {
+				outputText("grappling it with your powerful pincers as you prepare to crush it to death.");
+			}
+			//Failure
+			else {
+				//Failure (-10 HPs) -
+				outputText("Sadly you miss by a mere inch as your opponent escapes your grapple attempt.");
+				player.takePhysDamage(5, true);
+				if (player.HP <= player.minHP()) {
+					doNext(endHpLoss);
+					if (monster.hasStatusEffect(StatusEffects.Dig)) monster.removeStatusEffect(StatusEffects.Dig);
+					return;
+				}
+			}
+		}
+		monster.createStatusEffect(StatusEffects.CancerGrab, 3 + rand(3),0,0,0);
+		if (monster.hasStatusEffect(StatusEffects.Dig)) monster.removeStatusEffect(StatusEffects.Dig);
+		outputText("\n\n");
+		enemyAI();
+	}
+
 	public function Straddle():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
@@ -8277,15 +8354,17 @@ public function combatRoundOver():void {
 	public function StraddleLeggoMyEggo():void {
 		clearOutput();
 		outputText("You let [monster a] [monster name] go, prefering to continue the fight normaly.");
-		var damage:Number = unarmedAttack();
-		damage += player.str;
-		damage += scalingBonusStrength() * 0.25;
-		doDamage(damage, true, true);
-		outputText(" damage. ");
 		monster.removeStatusEffect(StatusEffects.Straddle);
 		player.removeStatusEffect(StatusEffects.StraddleRoundLeft);
 		outputText("[monster He] try catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more. ");
 		outputText("\n\n");
+		enemyAI();
+	}
+
+	public function DigOut():void {
+		clearOutput();
+		outputText("You dig back up to the surface in need of air.\n\n");
+		monster.removeStatusEffect(StatusEffects.Dig);
 		enemyAI();
 	}
 
@@ -8928,6 +9007,14 @@ public function runAway(callHook:Boolean = true):void {
 	if (monster.hasStatusEffect(StatusEffects.Level) && player.canFly() && monster is SandTrap) {
 		clearOutput();
 		outputText("You flex the muscles in your back and, shaking clear of the sand, burst into the air!  Wasting no time you fly free of the sandtrap and its treacherous pit.  \"One day your wings will fall off, little ant,\" the snarling voice of the thwarted androgyne carries up to you as you make your escape.  \"And I will be waiting for you when they do!\"");
+		inCombat = false;
+		clearStatuses(false);
+		doNext(camp.returnToCampUseOneHour);
+		return;
+	}
+	if (monster.hasStatusEffect(StatusEffects.Dig)) {
+		clearOutput();
+		outputText("You tunnel away from your opponent, escaping the fight and fleeing back to camp.\n");
 		inCombat = false;
 		clearStatuses(false);
 		doNext(camp.returnToCampUseOneHour);

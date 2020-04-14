@@ -94,6 +94,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.lowerBody == LowerBody.NAGA) {
 				buttons.add("Constrict", SceneLib.desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail.");
 			}
+			//Dig
+			if (player.lowerBody == LowerBody.CANCER || player.lowerBody == LowerBody.CENTIPEDE) {
+				bd = buttons.add("Dig", Dig).hint("Dig underground to escape your opponent attack for a while.");
+				if (player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
+					bd.disable("<b>You can't dig in open water!</b>\n\n");
+				}
+			}
 			//Grapple
 			if (player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) {
 				buttons.add("Grapple", scyllaGrapple).hint("Attempt to grapple a foe with your tentacles.");
@@ -4836,7 +4843,19 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else doNext(endLustVictory);
 		}
 	}
-	
+
+	public function Dig():void {
+		clearOutput();
+		if(monster.short == "pod") {
+			outputText("You can't grab something you're trapped inside of!");
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		outputText("You dig yourself into the ground, moving out of your opponent’s reach.");
+		monster.createStatusEffect(StatusEffects.Dig,5,0,0,0);
+	}
+
 	public function kick():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();

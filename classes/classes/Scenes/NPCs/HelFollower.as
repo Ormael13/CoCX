@@ -477,6 +477,7 @@ public function angryHelAndIzzyCampHelHereFirst():void {
 public function heliaFollowerMenu2():void {
 	if (!player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
 		if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaHel();
+		else heliaFollowerMenu();
 	}
 	else heliaFollowerMenu();
 }

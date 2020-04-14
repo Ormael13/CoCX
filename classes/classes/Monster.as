@@ -2,6 +2,7 @@
 {
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
@@ -1817,6 +1818,11 @@ import flash.utils.getQualifiedClassName;
 			if (hasStatusEffect(StatusEffects.Straddle)) {
 				return;
 			}
+			if (hasStatusEffect(StatusEffects.Dig)) {
+				outputText("\n\nYour opponent is still looking for you as you remain quietly hiding underground, away from view.");
+				addStatusValue(StatusEffects.Dig, 1, -1);
+				return;
+			}
 			if (hasStatusEffect(StatusEffects.OrcaHasWackedFinish)) {
 				outputText("\n\nYour opponent is still stunned from the powerful blow of your tail.");
 				createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
@@ -1898,7 +1904,7 @@ import flash.utils.getQualifiedClassName;
 			addStatusValue(StatusEffects.Pounce, 1, -1);
 			return false;
 			}
-			else if (player.lowerBody == 26) {
+			else if (player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) {
 			EngineCore.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.");
 			if (statusEffectv1(StatusEffects.ConstrictedScylla) <= 0) {
 				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
@@ -1907,7 +1913,16 @@ import flash.utils.getQualifiedClassName;
 			addStatusValue(StatusEffects.ConstrictedScylla, 1, -1);
 			return false;
 			}
-			else if (player.lowerBody == 8) {
+			else if (player.lowerBody == LowerBody.CANCER) {
+				EngineCore.outputText("Your prey pushes at your pincer, twisting and writhing in an effort to escape from your iron grip.");
+				if (statusEffectv1(StatusEffects.CancerGrab) <= 0) {
+					EngineCore.outputText("  " + capitalA + short + " proves to be too much for your pincer to handle, breaking free of your iron grip.");
+					removeStatusEffect(StatusEffects.CancerGrab);
+				}
+				addStatusValue(StatusEffects.CancerGrab, 1, -1);
+				return false;
+			}
+			else if (player.lowerBody == LowerBody.GOO) {
 			EngineCore.outputText("" + capitalA + short + " struggle in your fluid form kicking and screaming to try and get out.");
 			if (statusEffectv1(StatusEffects.GooEngulf) <= 0) {
 				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your slimy body to handle, breaking free of your fluids.");
