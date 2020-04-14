@@ -2,6 +2,7 @@
  * Coded by aimozg on 27.09.2017.
  */
 package classes.Scenes.Combat {
+import classes.BodyParts.Arms;
 import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
@@ -289,8 +290,11 @@ public class CombatUI extends BaseCombatContent {
 			menu();
 			if (monster.statusEffectv1(StatusEffects.Dig) > 0){
 				if (player.lowerBody == LowerBody.CANCER) addButton(0, "Grab", combat.CancerGrab).hint("Dig underneath your opponent and attempt to grab it in your pincers");
-				addButton(1, "Wait", combat.wait);
-				BuildSpellBookMenu(spellBookButtons, true);
+				if (player.arms.type == Arms.FROSTWYRM) {
+					if (!player.hasStatusEffect(StatusEffects.CooldownTremor)) addButton(1, "Tremor", combat.Tremor).hint("Cause seismic activity beneath your foes in an attempt to stun them");
+					if (player.lowerBody == LowerBody.FROSTWYRM) addButton(0, "Grab", SceneLib.desert.nagaScene.nagaPlayerConstrict).hint("Surge out of the ground and coil around your opponent!");
+				}
+				addButton(4, "Wait", combat.wait);
 				if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
 				if (player.hasStatusEffect(StatusEffects.OniRampage)) {
 					btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
@@ -420,11 +424,8 @@ public class CombatUI extends BaseCombatContent {
 		}
 	}
 
-	private function BuildSpellBookMenu(buttons:ButtonDataList, CanOnlyUseBuff:Boolean = false):void{
+	private function BuildSpellBookMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
-		var BtnMBolt:CoCButton = button(1);
-		var BtnWhite:CoCButton = button(2);
-		var BtnBlack:CoCButton = button(3);
 		//Most basic spell ever ^^
 
 		if (player.hasPerk(PerkLib.JobSorcerer)) {
@@ -433,12 +434,14 @@ public class CombatUI extends BaseCombatContent {
 			else bd.hint("Attempt to attack the enemy with magic bolt.  Damage done is determined by your intelligence.", "Magic Bolt");
 			if (player.mana < spellCost(40)) {
 				bd.disable("Your mana is too low to cast this spell.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
-		combat.magic.buildWhiteMenu(whiteSpellButtons, CanOnlyUseBuff);
-		combat.magic.buildBlackMenu(blackSpellButtons, CanOnlyUseBuff);
-		combat.magic.buildGreyMenu(greySpellButtons, CanOnlyUseBuff);
-		combat.magic.buildHexMenu(hexSpellButtons, CanOnlyUseBuff);
+		combat.magic.buildWhiteMenu(whiteSpellButtons);
+		combat.magic.buildBlackMenu(blackSpellButtons);
+		combat.magic.buildGreyMenu(greySpellButtons);
+		combat.magic.buildHexMenu(hexSpellButtons);
 		if (whiteSpellButtons.length > 0) buttons.add("White Spells", curry(submenu,whiteSpellButtons, submenuSpells, 0, false)).hint("Open your white spell book");
 		if (blackSpellButtons.length > 0) buttons.add("Black Spells", curry(submenu,blackSpellButtons, submenuSpells, 0, false)).hint("Open your black spell book");
 		if (player.hasPerk(PerkLib.PrestigeJobGreySage)){

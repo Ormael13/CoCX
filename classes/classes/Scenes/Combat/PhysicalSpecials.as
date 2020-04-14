@@ -91,11 +91,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 			}
 			//Constrict
-			if (player.lowerBody == LowerBody.NAGA) {
+			if (player.isNaga()) {
 				buttons.add("Constrict", SceneLib.desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail.");
 			}
 			//Dig
-			if (player.lowerBody == LowerBody.CANCER || player.lowerBody == LowerBody.CENTIPEDE) {
+			if (player.lowerBody == LowerBody.CANCER || player.lowerBody == LowerBody.CENTIPEDE || player.lowerBody == LowerBody.FROSTWYRM) {
 				bd = buttons.add("Dig", Dig).hint("Dig underground to escape your opponent attack for a while.");
 				if (player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
 					bd.disable("<b>You can't dig in open water!</b>\n\n");
@@ -4854,6 +4854,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("You dig yourself into the ground, moving out of your opponent’s reach.");
 		monster.createStatusEffect(StatusEffects.Dig,5,0,0,0);
+		enemyAI();
 	}
 
 	public function kick():void {

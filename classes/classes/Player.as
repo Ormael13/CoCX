@@ -6342,6 +6342,8 @@ use namespace CoC;
 				frostWyrmCounter++;
 			if (hasVagina() && biggestTitSize() >= 3)
 				frostWyrmCounter++;
+			if (findPerk(PerkLib.DragonIceBreath) >= 0)
+				frostWyrmCounter++;
 			if (findPerk(PerkLib.DraconicLungs) >= 0)
 				frostWyrmCounter++;
 			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0)
@@ -10437,15 +10439,15 @@ use namespace CoC;
 					maxWisCap2 += (60 * newGamePlusMod);
 					maxSenCap2 += (30 * newGamePlusMod);
 				}
-				else */if (elfScore() >= 11) {
+				else */
+				if (elfScore() >= 11) {
 					maxStrCap2 -= (10 * newGamePlusMod);
 					maxTouCap2 -= (15 * newGamePlusMod);
 					maxSpeCap2 += (80 * newGamePlusMod);
 					maxIntCap2 += (80 * newGamePlusMod);
 					maxWisCap2 += (60 * newGamePlusMod);
 					maxSenCap2 += (30 * newGamePlusMod);
-				}
-				else {
+				} else {
 					maxStrCap2 -= (10 * newGamePlusMod);
 					maxTouCap2 -= (10 * newGamePlusMod);
 					maxSpeCap2 += (40 * newGamePlusMod);
@@ -10453,7 +10455,28 @@ use namespace CoC;
 					maxWisCap2 += (30 * newGamePlusMod);
 					maxSenCap2 += (15 * newGamePlusMod);
 				}
-			}//+10/10-20
+			}
+			if (frostWyrmScore() >= 10) {
+				if (frostWyrmScore() >= 20) {
+					maxStrCap2 += (135 * newGamePlusMod);
+					maxSpeCap2 += (90 * newGamePlusMod);
+					maxTouCap2 += (115 * newGamePlusMod);
+					maxIntCap2 -= (90 * newGamePlusMod);
+					maxLibCap2 += (50 * newGamePlusMod);
+				} else if (frostWyrmScore() >= 18) {
+					maxStrCap2 += (125 * newGamePlusMod);
+					maxSpeCap2 += (75 * newGamePlusMod);
+					maxTouCap2 += (110 * newGamePlusMod);
+					maxIntCap2 -= (90 * newGamePlusMod);
+					maxLibCap2 += (50 * newGamePlusMod);
+				} else {
+					maxStrCap2 += (85 * newGamePlusMod);
+					maxSpeCap2 += (55 * newGamePlusMod);
+					maxTouCap2 += (60 * newGamePlusMod);
+					maxIntCap2 -= (90 * newGamePlusMod);
+					maxLibCap2 += (30 * newGamePlusMod);
+				}
+			}
 			if (orcScore() >= 5) {
 				/*if (orcScore() >= 12 && tailType == Tail.NONE) {
 					maxStrCap2 += (130 * newGamePlusMod);

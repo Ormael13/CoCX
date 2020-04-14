@@ -836,12 +836,12 @@ public class CombatMagic extends BaseCombatContent {
 		return damage;
 	}
 
-	public function buildWhiteMenu(buttons:ButtonDataList, CanOnlyUseBuff:Boolean):void {
+	public function buildWhiteMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		var badLustForWhite:Boolean = player.lust >= getWhiteMagicLustCap();
 
 		//WHITE SHITZ
-		if (player.hasStatusEffect(StatusEffects.KnowsWhitefire) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
 			bd = buttons.add("Whitefire", spellWhitefire)
 					.hint("Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  " +
 							"\n\nMana Cost: " + spellCostWhite(40) + "");
@@ -855,9 +855,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier1)) {
 				bd.disable("You need more time before you can cast a first tier white magic spell again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+			bd.disable("You can only use buff magic while underground.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsPyreBurst) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
 			bd = buttons.add("Pyre Burst", spellPyreBurst)
 					.hint("Teach your foes a lesson with the strenght of a firestorm.  \n\n<b>AoE Spell.</b>  " +
 							"\n\nMana Cost: " + spellCostWhite(200) + "");
@@ -871,9 +873,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier2)) {
 				bd.disable("You need more time before you can cast a second tier white magic spell again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsMeteorShower)  && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsMeteorShower)) {
 			bd = buttons.add("Meteor Shower", spellMeteorShower)
 					.hint("Call down a rain of meteors on your opponents, stunning them for 1 round and dealing area damage. Hits 12 times. Despite been grey magic it still does carry the risk of backfiring and raising lust.  " +
 							"\n\n<b>AoE Spell and req. 1 turn channeling. Cooldown: 12 turns</b>  \n\nMana Cost: " + spellCost(250) + "");
@@ -889,9 +893,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier3)) {
 				bd.disable("You need more time before you can cast Meteor Shower again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsLightningBolt) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) {
 			bd = buttons.add("LightningBolt", spellLightningBolt)
 					.hint("Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning.  " +
 							"\n\nMana Cost: " + spellCostWhite(40) + "");
@@ -905,9 +911,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier1)) {
 				bd.disable("You need more time before you can cast a first tier white magic spell again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsChainLighting) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsChainLighting)) {
 			bd = buttons.add("ChainLighting", spellChainLightning)
 					.hint("Chain Lighting is a lightning attack that will electrocute your foes with a chain bolts of lightning.  \n\n<b>AoE Spell.</b>  " +
 							"\n\nMana Cost: " + spellCostWhite(200) + "");
@@ -921,9 +929,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier2)) {
 				bd.disable("You need more time before you can cast a second tier white magic spell again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsBlind) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsBlind)) {
 			bd = buttons.add("Blind", spellBlind)
 					.hint("Blind is a fairly self-explanatory spell.  It will create a bright flash just in front of the victim's eyes, blinding them for a time.  However if they blink it will be wasted.  " +
 							"\n\nMana Cost: " + spellCostWhite(30) + "");
@@ -937,6 +947,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(30) && player.HP < spellCostWhite(30)) {
 				bd.disable("Your hp is too low to cast this spell.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsCharge)) {
@@ -987,7 +999,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsBlizzard) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
 			bd = buttons.add("Blizzard", spellBlizzard)
 					.hint("Blizzard is a potent ice based defense spell that will reduce power of any fire based attack used against the user.  " +
 							"\n\nMana Cost: " + spellCostWhite(50) + "");
@@ -1001,16 +1013,18 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(50) && player.HP < spellCostWhite(50)) {
 				bd.disable("Your hp is too low to cast this spell.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
 	}
 
-	public function buildBlackMenu(buttons:ButtonDataList, CanOnlyUseBuff:Boolean):void {
+	public function buildBlackMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		var badLustForBlack:Boolean = player.lust < getBlackMagicMinLust();
 
 		//BLACK MAGICSKS
-		if (player.hasStatusEffect(StatusEffects.KnowsIceSpike) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsIceSpike)) {
 			bd = buttons.add("Ice Spike", spellIceSpike)
 					.hint("Drawning your own lust to concentrate it into chilling spike of ice that will attack your enemies.  " +
 							"\n\nMana Cost: " + spellCostBlack(40) + "");
@@ -1022,9 +1036,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier1)) {
 				bd.disable("You need more time before you can cast a first tier black magic spell again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsArcticGale) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsArcticGale)) {
 			bd = buttons.add("Arctic Gale", spellArcticGale)
 					.hint("Devastate the enemy ranks with a blast of icy wind sharper then steel blades.  \n\n<b>AoE Spell.</b>  " +
 							"\n\nMana Cost: " + spellCostBlack(200) + "");
@@ -1036,9 +1052,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier2)) {
 				bd.disable("You need more time before you can cast a second tier black magic spell again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsPolarMidnight) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsPolarMidnight)) {
 			bd = buttons.add("Polar Midnight", spellPolarMidnight)
 					.hint("Cause a massive temperature drop which freezes the air solid in an area. Opponents caught in this spell take the cold damage and are stunned for 5 round.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  " +
 							"\n\n<b>AoE Spell and req. 1 turn channeling. Cooldown: 12 turns</b>  \n\nMana Cost: " + spellCost(250) + "");
@@ -1050,9 +1068,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier3)) {
 				bd.disable("You need more time before you can cast Polar Midnight again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsDarknessShard) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) {
 			bd = buttons.add("DarknessShard", spellDarknessShard)
 					.hint("Drawning your own lust to condense part of the the ambivalent darkness into a shard to attack your enemies.  " +
 							"\n\nMana Cost: " + spellCostBlack(40) + "");
@@ -1064,9 +1084,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier1)) {
 				bd.disable("You need more time before you can cast a first tier black magic spell again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsDuskWave) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsDuskWave)) {
 			bd = buttons.add("Dusk Wave", spellDuskWave)
 					.hint("Drawning your own lust to condense part of the the ambivalent darkness into a wave to attack your enemies.  \n\n<b>AoE Spell.</b>  " +
 							"\n\nMana Cost: " + spellCostBlack(200) + "");
@@ -1078,9 +1100,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier2)) {
 				bd.disable("You need more time before you can cast a second tier black magic spell again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsArouse) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsArouse)) {
 			bd = buttons.add("Arouse", spellArouse)
 					.hint("The arouse spell draws on your own inner lust in order to enflame the enemy's passions.  " +
 							"\n\nMana Cost: " + spellCostBlack(20) + "");
@@ -1090,9 +1114,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(20) && player.HP < spellCostBlack(20)) {
 				bd.disable("Your hp is too low to cast this spell.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsWaveOfEcstasy) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsWaveOfEcstasy)) {
 			bd = buttons.add("WaveOfEcstasy", spellWaveOfEcstasy)
 					.hint("The arouse spell draws on your own inner lust in order to enflame the enemyies passions.  " +
 							"\n\nMana Cost: " + spellCostBlack(100) + "");
@@ -1104,6 +1130,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWaveOfEcstasy)) {
 				bd.disable("You need more time before you can cast Wave of Ecstasy again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsMight)) {
@@ -1148,7 +1176,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast Regenerate again.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsNosferatu) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
 			bd = buttons.add("Nosferatu", spellNosferatu)
 					.hint("Vampirise the health of your foe, dealing damage and healing you back for 100% of the damage done." +
 							"\n\nMana Cost: " + healCost(50) + "");
@@ -1156,12 +1184,14 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You aren't turned on enough to use any black magics.");
 			} else if(player.mana < healCost(50)) {
 				bd.disable("Your mana is too low to cast this spell.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
 		//	if (player.hasStatusEffect(StatusEffects.Knows)) buttons.add("	ice single target spell goes here
 	}
 
-	public function buildHexMenu(buttons:ButtonDataList, CanOnlyUseBuff:Boolean):void {
+	public function buildHexMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		var badLustForBlack:Boolean        = player.lust < getBlackMagicMinLust();
 
@@ -1177,7 +1207,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your HP is too low to cast this spell.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsLifeSiphon) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsLifeSiphon)) {
 			bd = buttons.add("Life siphon", spellLifeSiphon)
 					.hint("Create a funnel between you and your target, forcefully stealing its vitality to recover your own.  " +
 							"\n\nMana Cost: " + spellCostBlack(750) + "");
@@ -1189,9 +1219,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.LifeSiphon)) {
 				bd.disable("You're still linked to the enemy.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsConsumingDarkness) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsConsumingDarkness)) {
 			bd = buttons.add("Consuming darkness", spellConsumingDarkness)
 					.hint("For the next 7 round the target is devoured by living shadow trying to tear its body apart deals good damage on each round.  \n\n<b>Cooldown: 15 turns</b>  " +
 							"\n\nMana Cost: " + spellCostBlack(350) + "");
@@ -1203,9 +1235,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownConsumingDarkness)) {
 				bd.disable("You need more time before you can cast Consuming darkness again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsCurseOfDesire) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsCurseOfDesire)) {
 			bd = buttons.add("Curse of Desire", spellCurseOfDesire)
 					.hint("Arouse yourself and curse the target with lewd thoughts, weakening its resistance to lust and forcing it to take low lust damage each round for 8 rounds.  \n\n<b>Cooldown: 15 turns</b>  " +
 							"\n\nMana Cost: " + spellCostBlack(400) + "");
@@ -1217,9 +1251,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownCurseOfDesire)) {
 				bd.disable("You need more time before you can cast Curse of Desire again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsCurseOfWeeping) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsCurseOfWeeping)) {
 			bd = buttons.add("Curse of Weeping", spellCurseOfWeeping)
 					.hint("Draw your own blood and inflict on your target a terrible curse, dealing high damage for 6 rounds.  \n\n<b>Cooldown: 10 turns</b>  " +
 							"\n\nMana Cost: " + spellCostBlack(300) + "");
@@ -1233,11 +1269,13 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your HP is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownCurseOfWeeping)) {
 				bd.disable("You need more time before you can cast Curse of Weeping again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
 	}
 
-	public function buildGreyMenu(buttons:ButtonDataList, CanOnlyUseBuff:Boolean):void {
+	public function buildGreyMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		var badLustForGrey:Boolean = player.lust < 50 || player.lust > (player.maxLust() - 50);
 
@@ -1255,7 +1293,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		//	if (player.hasStatusEffect(StatusEffects.KnowsWereBeast)) buttons.add("Were-beast",	were-beast spell goes here
 		//	if (player.hasStatusEffect(StatusEffects.Knows)) buttons.add("	next spell (non-fire or non-ice based) goes here
-		if (player.hasStatusEffect(StatusEffects.KnowsFireStorm) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
 			bd = buttons.add("Fire Storm", spellFireStorm).hint("Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Fire Storm that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCost(200) + "");
 			if (badLustForGrey) {
 				bd.disable("You can't use any grey magics.");
@@ -1263,10 +1301,12 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(200) && player.HP < spellCost(200)) {
 				bd.disable("Your hp is too low to cast this spell.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
 		//	if (player.hasStatusEffect(StatusEffects.Knows)) buttons.add("	fire single target spell goes here
-		if (player.hasStatusEffect(StatusEffects.KnowsIceRain) && !CanOnlyUseBuff) {
+		if (player.hasStatusEffect(StatusEffects.KnowsIceRain)) {
 			bd = buttons.add("Ice Rain", spellIceRain).hint("Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Ice Rain that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCost(200) + "");
 			if (badLustForGrey) {
 				bd.disable("You can't use any grey magics.");
@@ -1274,6 +1314,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(200) && player.HP < spellCost(200)) {
 				bd.disable("Your hp is too low to cast this spell.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
 	}

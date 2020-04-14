@@ -49,6 +49,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
 import classes.StatusEffectClass;
 import classes.StatusEffects;
+import classes.StatusEffects;
 import classes.StatusEffects.VampireThirstEffect;
 
 import coc.view.ButtonData;
@@ -788,6 +789,7 @@ public function unarmedAttack():Number {
 	if (player.arms.type == Arms.YETI || player.arms.type == Arms.CAT) unarmed += 5 * (1 + player.newGamePlusMod());
 	if (player.arms.type == Arms.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
 	if (player.arms.type == Arms.BEAR) unarmed += 5 * (1 + player.newGamePlusMod());
+	if (player.arms.type == Arms.FROSTWYRM) unarmed += 12 * (1 + player.newGamePlusMod());
 	if (player.lowerBody == LowerBody.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
 	if (player.lowerBody == LowerBody.BEAR) unarmed += 5 * (1 + player.newGamePlusMod());
 	if (player.tailType == Tail.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
@@ -6457,6 +6459,15 @@ private function combatStatusesUpdate():void {
 			player.addStatusValue(StatusEffects.CooldownTDistraction,1,-1);
 		}
 	}
+	//Tremor
+	if (player.hasStatusEffect(StatusEffects.CooldownTremor)) {
+		if (player.statusEffectv1(StatusEffects.CooldownTremor) <= 0) {
+			player.removeStatusEffect(StatusEffects.CooldownTremor);
+		}
+		else {
+			player.addStatusValue(StatusEffects.CooldownTremor,1,-1);
+		}
+	}
 	//Charging
 	if (player.hasStatusEffect(StatusEffects.CooldownCharging)) {
 		if (player.statusEffectv1(StatusEffects.CooldownCharging) <= 0) {
@@ -8019,6 +8030,47 @@ public function combatRoundOver():void {
 		enemyAI();
 	}
 
+	public function Tremor():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		var damage:int;
+		clearOutput();
+		if (monster.hasStatusEffect(StatusEffects.Flying))
+		{
+			clearOutput();
+			outputText("There is absolutely no point to you causing a tremor against an opponent that isn't even touching the ground!");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
+			clearOutput();
+			outputText("You just don't have the energy to create a tremor right now...");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		fatigue(10, USEFATG_PHYSICAL);
+		//WRAP IT UPPP
+		outputText("You wriggle underground, collapsing galleries behind you and causing a serious seismic activity. [monster a] [monster name] loses [monster his] balance from this, falling on the ground dazed and taking heavy damage. ");
+		damage = unarmedAttack();
+		damage *= player.tallness / 10;
+		damage *= scalingBonusStrength()*0.5;
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
+		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (monster.plural) damage *= 5;
+		damage = Math.round(damage);
+		doDamage(damage, true, true);
+		monster.createStatusEffect(StatusEffects.Stunned, 3,0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownTremor, 5,0,0,0);
+		outputText("\n\n");
+		enemyAI();
+	}
+
 	public function Straddle():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
@@ -8928,6 +8980,7 @@ public function HypnosisCoil():void {
 	}
 	enemyAI();
 }
+
 public function HypnosisMaintain():void {
 	clearOutput();
 	var damagemultiplier:Number = 1;

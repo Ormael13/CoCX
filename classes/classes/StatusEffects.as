@@ -992,6 +992,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownStoneClaw:StatusEffectType           		= mkCombat("Cooldown Stone Claw");
 		public static const CooldownStoneFist:StatusEffectType           		= mkCombat("Cooldown Stone Fist");
 		public static const CooldownTDistraction:StatusEffectType        		= mkCombat("Cooldown Tactical Distraction");
+		public static const CooldownTremor:StatusEffectType        				= mkCombat("Cooldown Tremor");
 		public static const CooldownTailCleave:StatusEffectType          		= mkCombat("Cooldown Tail Cleave");
 		public static const CooldownTailSlam:StatusEffectType            		= mkCombat("Cooldown Tail Slam");
 		public static const CooldownTailSmack:StatusEffectType           		= mkCombat("Cooldown Tail Smack");

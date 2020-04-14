@@ -919,10 +919,19 @@ public function nagaPlayerConstrict():void {
 	}
 	//Cannot be used on plural enemies
 	if(monster.plural) {
-		outputText("You launch yourself at " + monster.a + monster.short + ", but with multiple enemies, wrapping one up would leave you completely open to attack.  You hastily slither backwards before you expose yourself to danger.");
-		outputText("\n\n");
-        SceneLib.combat.enemyAIImpl();
-        return;
+		if (monster.hasStatusEffect(StatusEffects.Dig))
+		{
+			outputText("You begin to dig up toward " + monster.a + monster.short + ", but with multiple enemies, wrapping one up would leave you completely open to attack.  You halt your progression and dig back down before you expose yourself to danger.");
+			outputText("\n\n");
+			SceneLib.combat.enemyAIImpl();
+			return;
+		}
+		else {
+			outputText("You launch yourself at " + monster.a + monster.short + ", but with multiple enemies, wrapping one up would leave you completely open to attack.  You hastily slither backwards before you expose yourself to danger.");
+			outputText("\n\n");
+			SceneLib.combat.enemyAIImpl();
+			return;
+		}
 	}
 	if(monster.short == "pod") {
 		outputText("You can't constrict something you're trapped inside of!");
@@ -939,26 +948,53 @@ public function nagaPlayerConstrict():void {
         return;
 	}
 	//WRAP IT UPPP
-	if(rand(player.spe + 40) > monster.spe) {
-		if(monster.short == "demons") {
-			outputText("You look at the crowd for a moment, wondering which of their number you should wrap up. Your glance lands upon a random demon amongst the crowd. You quickly slither through the demon crowd as it closes in around you and launch yourself towards your chosen prey. You grab him out of the sea of monsters, wrap your long snake tail around his form and squeeze tightly, grinning as you hear his roars of pleasure turn to cries of distress.");
+	if (monster.hasStatusEffect(StatusEffects.Dig)) {
+		if (rand(player.spe + 80) > monster.spe) {
+			if (monster.short == "demons") {
+				outputText("You feel for the crowd above you for a moment, wondering which of their number you should wrap up. Your sense an isolated demon amongst the crowd. You quickly dig your way up and underneath the demon crowd as it closes in around you and, as you break out of the ground, launch yourself towards your chosen prey. You grab him out of the sea of monsters, wrap your long snake tail around his form and squeeze tightly, grinning as you hear his roars of pleasure turn to cries of distress.");
+			}
+			//(Otherwise)
+			else {
+				outputText("You quickly dig your way up and underneath your opponent and, as you break out of the ground, launch yourself at " + monster.a + monster.short + " and wrap yourself around " + monster.pronoun2 + ". You squeeze " + monster.pronoun2 + " tightly and hear " + monster.pronoun2 + " cry out in pain.");
+			}
+			monster.createStatusEffect(StatusEffects.Constricted, 1 + rand(4), 0, 0, 0);
 		}
-		//(Otherwise)
+		//Failure
 		else {
-			outputText("You launch yourself at " + monster.a + monster.short + " and wrap yourself around " + monster.pronoun2+ ". You squeeze " + monster.pronoun2 + " tightly and hear " + monster.pronoun2 + " cry out in pain.");
+			//Failure (-10 HPs) -
+			outputText("You quickly dig your way up and underneath your opponent and, as you break out of the ground, launch yourself at your opponent and attempt to wrap yourself around " + monster.pronoun2 + ". Before you can even get close enough, " + monster.a + monster.short + " jumps out of the way, causing you to fall flat on your face. You quickly pick yourself up and jump back. ");
+			player.takePhysDamage(5, true);
+			if (player.HP <= player.minHP()) {
+				doNext(SceneLib.combat.endHpLoss);
+				if (monster.hasStatusEffect(StatusEffects.Dig)) monster.removeStatusEffect(StatusEffects.Dig);
+				return;
+			}
 		}
-		monster.createStatusEffect(StatusEffects.Constricted, 1 + rand(4),0,0,0);
 	}
-	//Failure
 	else {
-		//Failure (-10 HPs) -
-		outputText("You launch yourself at your opponent and attempt to wrap yourself around " + monster.pronoun2 + ". Before you can even get close enough, " +monster.a + monster.short + " jumps out of the way, causing you to fall flat on your face. You quickly pick yourself up and jump back. ");
-		player.takePhysDamage(5, true);
-		if(player.HP <= player.minHP()) {
-			doNext(SceneLib.combat.endHpLoss);
-			return;
+		if (rand(player.spe + 40) > monster.spe) {
+			if (monster.short == "demons") {
+				outputText("You look at the crowd for a moment, wondering which of their number you should wrap up. Your glance lands upon a random demon amongst the crowd. You quickly slither through the demon crowd as it closes in around you and launch yourself towards your chosen prey. You grab him out of the sea of monsters, wrap your long snake tail around his form and squeeze tightly, grinning as you hear his roars of pleasure turn to cries of distress.");
+			}
+			//(Otherwise)
+			else {
+				outputText("You launch yourself at " + monster.a + monster.short + " and wrap yourself around " + monster.pronoun2 + ". You squeeze " + monster.pronoun2 + " tightly and hear " + monster.pronoun2 + " cry out in pain.");
+			}
+			monster.createStatusEffect(StatusEffects.Constricted, 1 + rand(4), 0, 0, 0);
+		}
+		//Failure
+		else {
+			//Failure (-10 HPs) -
+			outputText("You launch yourself at your opponent and attempt to wrap yourself around " + monster.pronoun2 + ". Before you can even get close enough, " + monster.a + monster.short + " jumps out of the way, causing you to fall flat on your face. You quickly pick yourself up and jump back. ");
+			player.takePhysDamage(5, true);
+			if (player.HP <= player.minHP()) {
+				doNext(SceneLib.combat.endHpLoss);
+				if (monster.hasStatusEffect(StatusEffects.Dig)) monster.removeStatusEffect(StatusEffects.Dig);
+				return;
+			}
 		}
 	}
+	if (monster.hasStatusEffect(StatusEffects.Dig)) monster.removeStatusEffect(StatusEffects.Dig);
 	outputText("\n\n");
     SceneLib.combat.enemyAIImpl();
 }
@@ -972,12 +1008,18 @@ public function naggaSqueeze():void {
 	}
 	//Squeeze -
 	outputText("Your coils wrap tighter around your prey, leaving " + monster.pronoun2 + " short of breath. You can feel it in your tail as " + monster.pronoun3 + " struggles are briefly intensified. ");
+	var damageBonus:int = 0;
 	var damage:int = monster.maxHP() * (.10 + rand(15) / 100);
 	if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= SceneLib.combat.oniRampagePowerMulti();
 	if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 	if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 	if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 	if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+	if (player.lowerBody == LowerBody.FROSTWYRM) {
+		damageBonus = combat.unarmedAttack();
+		damageBonus *= combat.scalingBonusStrength() * 2;
+	}
+	damage = damage+damageBonus;
 	SceneLib.combat.doDamage(damage, true, true);
 	fatigue(20, USEFATG_PHYSICAL);
 	//Enemy faints -

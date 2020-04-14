@@ -5347,8 +5347,8 @@ public class PerkLib
                 .requirePerk(DragonIceBreath)
                 .requirePerk(DragonLightningBreath)
                 .requirePerk(DragonDarknessBreath).requireCustomFunction(function (player:Player):Boolean {
-                return player.dragonScore() >= 4;
-            }, "Dragon race");/*
+                return (player.dragonScore() >= 4 || player.frostWyrmScore() >= 10);
+            }, "Dragon race and its variants");/*
 			EasterBunnyEggBag.requirePerk(EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
 			}, "Easter Bunny race");*/
@@ -5707,8 +5707,8 @@ public class PerkLib
             DraconicLungsEvolved.requireLevel(12)
                     .requirePerk(DraconicLungs)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.dragonScore() >= 10;
-                    }, "Dragon race");
+						return (player.dragonScore() >= 10 || player.frostWyrmScore() >= 10);
+                    }, "Dragon race and its variants");
 			EasterBunnyEggBagEvolved.requireLevel(12).requirePerk(EasterBunnyEggBag).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
 			}, "Easter bunny race");
@@ -6092,8 +6092,8 @@ public class PerkLib
             DraconicLungsFinalForm.requireLevel(30)
                     .requirePerk(DraconicLungsEvolved)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.dragonScore() >= 16;
-                    }, "Dragon race");
+						return (player.dragonScore() >= 16 || player.frostWyrmScore() >= 16);
+                    }, "Dragon race and its variants");
 			EasterBunnyEggBagFinalForm.requireLevel(30).requirePerk(EasterBunnyEggBagEvolved).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
 			}, "Easter Bunny race");

@@ -1612,7 +1612,7 @@ public function FightHellfireSnail():void {
 				addButton(7, "Naga Oils", AddGorgonOil).hint("Add 1 vial of Gorgon, Vouivre and Couatl Oil.");
 				addButton(8, "VT RV WF", AddVoltageTopaz).hint("Add 1 Voltage Topaz, 1 vial of Red Blood (Bat TF) and 1 Wonder Fruit.");
 				addButton(9, "DSJ HS FSS", AddDarkSlimeJelly).hint("Add 1 Dark Slime Jelly, 1 Hydra Scale and 1 Fire Snail Saliva.");
-				//addButton(10, "", ).hint("Add 1 .");
+				addButton(10, "Fafnir tear", AddFTear).hint("Add 1 Fafnir tear (WIP Frost wyrm TF).");
 				//addButton(11, "", ).hint("Add 1 .");
 				if (player.findPerk(PerkLib.ElementalConjurerMindAndBodySacrifice) < 0) addButton(12, "E.Pearls", AddThePearls).hint("Add all three Elemental Pearls.");
 				addButton(13, "-1-", NonEquipmentMenu, page - 1);
@@ -1791,6 +1791,10 @@ public function FightHellfireSnail():void {
 		public function AddSkelp():void {
 			outputText("\n\n<b>(Gained 1 Skelp!)</b>\n\n");
 			inventory.takeItem(consumables.SKELP__, curry(NonEquipmentMenu, 2));
+		}
+		public function AddFTear():void {
+			outputText("\n\n<b>(Gained 1 Fafnir Tear!)</b>\n\n");
+			inventory.takeItem(consumables.F_TEAR, curry(NonEquipmentMenu, 2));
 		}
 		public function AddWhiteIceShard():void {
 			outputText("\n\n<b>(Gained 1 White Ice Shard!)</b>\n\n");
