@@ -28,7 +28,7 @@ package classes.Scenes
 		}
 		private function Changelog32():void {
 			clearOutput();
-			outputText("<b>Version 0.8n9:</b>\n\n");
+			outputText("<b>Version 0.8n9 (Orca, Manticore, Bicorn/Unicorn, Cave Wyrm updates; New TF's: Eastern Bunny, Melkie, Centipede, Kasha, Kraken; Warlocks Dark Ritual, new way to determine showed PC race at app screen and many new sprites showing on character viewer (Lia Twist sponsored whole this title)):</b>\n\n");
 			outputText("-Orca TF has been revamped.\n");
 			outputText("-New Orca perk Whale fat.\n");
 			outputText("-New Orca ability play.\n");
@@ -63,7 +63,9 @@ package classes.Scenes
 			outputText("-Fixed Appearance screen declaring you as your lowest score race. You will now always be declared as by your highest valid score.\n");
 			outputText("-All changes for 0.8n9 was due to hard work of our glorious lady Liadri. With a bit of Lia Twist.\n");
 			outputText("-Golem scavenging got texts instead of placeholder texts. (Texts ofc also sponsored by Lia Twist and coded by me ;) )\n");
-			outputText("-Fixed bugs: error in cat tf that would cause text to become bolded, golemancer shop 2 items been unbuyable\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: error in cat tf that would cause text to become bolded, golemancer shop 2 items been unbuyable\n\n");
+			outputText("<b>Version 0.8o:</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");
@@ -74,10 +76,18 @@ package classes.Scenes
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-Fixed bugs: \n\n");/*ostatni punkt changelogu
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
@@ -128,14 +138,6 @@ package classes.Scenes
 			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("\n");
 			outputText("\n");
@@ -167,8 +169,6 @@ package classes.Scenes
 			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
 			outputText("\n");aqua seed - item mający być siren tf item
 			outputText("\n");
-			outputText("<b>Version 0.8o:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("<b>Version 0.8p:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("\n");
