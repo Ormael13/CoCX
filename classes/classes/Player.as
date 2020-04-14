@@ -2752,6 +2752,7 @@ use namespace CoC;
 				{name: 'orca', score: orcaScore(), minscore: 6},
 				{name: 'oni', score: oniScore(), minscore: 6},
 				{name: 'elf', score: elfScore(), minscore: 5},
+				{name: 'frost wyrm', score: frostWyrmScore(), minscore: 10},
 				{name: 'orc', score: orcScore(), minscore: 5},
 				{name: 'raiju', score: raijuScore(), minscore: 5},
 				{name: 'thunderbird', score: thunderbirdScore(), minscore: 12},
@@ -3461,6 +3462,17 @@ use namespace CoC;
 					} else {
 						if (isTaur()) race = "half elf-taur";
 						else race = "half elf";
+					}
+				}
+			}
+			if (TopRace == "frost wyrm") {
+				if (TopScore >= 10) {
+					if (TopScore >= 20) {
+						race = "great frost wyrm";
+					} else if (TopScore >= 18){
+						race = "frost wyrm";
+					} else {
+						race = "half frost wyrm";
 					}
 				}
 			}
@@ -5138,7 +5150,7 @@ use namespace CoC;
 				dragonCounter += 2;
 			if (wings.type == Wings.DRACONIC_HUGE)
 				dragonCounter += 4;
-			if (wings.type == Wings.FEY_DRAGON_WINGS)
+			if (wings.type == Wings.FEY_DRAGON_WINGS || lowerBody == LowerBody.FROSTWYRM)
 				dragonCounter -= 10;
 			if (lowerBody == LowerBody.DRAGON)
 				dragonCounter++;
@@ -5146,14 +5158,14 @@ use namespace CoC;
 				dragonCounter++;
 			if (tallness > 120 && dragonCounter >= 10)
 				dragonCounter++;
-			if (skinType == Skin.DRAGON_SCALES)// FIXME: what about PARTIAL_DRAGON_SCALES?
+			if (hasPartialCoat(Skin.DRAGON_SCALES) || hasCoatOfType(Skin.DRAGON_SCALES))
 				dragonCounter++;
 			if (horns.type == Horns.DRACONIC_X4_12_INCH_LONG)
 				dragonCounter += 2;
 			if (horns.type == Horns.DRACONIC_X2)
 				dragonCounter++;
-		//	if (dragonCocks() > 0)
-		//		dragonCounter++;
+			if (dragonCocks() > 0 || hasVagina())
+				dragonCounter++;
 			if (dragonCounter >= 4) {
 				if (findPerk(PerkLib.DragonFireBreath) >= 0)
 					dragonCounter++;
@@ -5246,7 +5258,7 @@ use namespace CoC;
 				jabberwockyCounter++;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && jabberwockyCounter >= 8)
 				jabberwockyCounter += 1;
-			if (faceType != Face.JABBERWOCKY || faceType != Face.BUCKTOOTH || wings.type != Wings.FEY_DRAGON_WINGS) jabberwockyCounter = 0;
+			if (faceType != Face.JABBERWOCKY || faceType != Face.BUCKTOOTH || wings.type != Wings.FEY_DRAGON_WINGS || lowerBody == LowerBody.FROSTWYRM) jabberwockyCounter = 0;
 			if (isGargoyle()) jabberwockyCounter = 0;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				jabberwockyCounter += 50;
@@ -6294,6 +6306,58 @@ use namespace CoC;
 			elfCounter = finalRacialScore(elfCounter, Race.ELF);
 			End("Player","racialScore");
 			return elfCounter;
+		}
+
+		//Elf score
+		public function frostWyrmScore():Number {
+			Begin("Player","racialScore","frost wyrm");
+			var frostWyrmCounter:Number = 0;
+			if (ears.type == Ears.SNAKE)
+				frostWyrmCounter++;
+			if (eyes.type == Eyes.FROSTWYRM)
+				frostWyrmCounter++;
+			if (tongue.type == Tongue.DRACONIC)
+				frostWyrmCounter++;
+			if (arms.type == Arms.FROSTWYRM)
+				frostWyrmCounter++;
+			if (lowerBody == LowerBody.FROSTWYRM)
+				frostWyrmCounter+=3;
+			if (rearBody.type == RearBody.FROSTWYRM)
+				frostWyrmCounter++;
+			if (wings.type == Wings.NONE)
+				frostWyrmCounter += 4;
+			if (hairColor == "white" || hairColor == "snow white" || hairColor == "glacial white" || hairColor == "silver" || hairColor == "platinum silver")
+				frostWyrmCounter++;
+			if (coatColor == "bluish black" || coatColor == "dark grey" || coatColor == "black" || coatColor == "midnight black" || coatColor == "midnight")
+				frostWyrmCounter++;
+			if (tallness > 120 && frostWyrmCounter >= 10)
+				frostWyrmCounter++;
+			if (hasPartialCoat(Skin.DRAGON_SCALES) || hasCoatOfType(Skin.DRAGON_SCALES))
+				frostWyrmCounter++;
+			if (horns.type == Horns.FROSTWYRM)
+				frostWyrmCounter += 2;
+			if (dragonCocks() > 0)
+				frostWyrmCounter++;
+			if (hasCock() && cocks.length < 6)
+				frostWyrmCounter++;
+			if (hasVagina() && biggestTitSize() >= 3)
+				frostWyrmCounter++;
+			if (findPerk(PerkLib.DraconicLungs) >= 0)
+				frostWyrmCounter++;
+			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0)
+				frostWyrmCounter++;
+			if (findPerk(PerkLib.DraconicLungsFinalForm) >= 0)
+				frostWyrmCounter++;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				frostWyrmCounter += 50;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && frostWyrmCounter >= 4)
+				frostWyrmCounter += 1;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && frostWyrmCounter >= 8)
+				frostWyrmCounter += 1;
+			if (isGargoyle()) frostWyrmCounter = 0;
+			frostWyrmCounter = finalRacialScore(frostWyrmCounter, Race.FROSTWYRM);
+			End("Player","racialScore");
+			return frostWyrmCounter;
 		}
 		
 		//Orc score

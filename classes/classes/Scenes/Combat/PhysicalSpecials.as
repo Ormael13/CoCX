@@ -101,10 +101,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You can't dig in open water!</b>\n\n");
 				}
 			}
-			//Grapple
-			if (player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) {
-				buttons.add("Grapple", scyllaGrapple).hint("Attempt to grapple a foe with your tentacles.");
-			}
 			//Engulf
 			if (player.lowerBody == LowerBody.GOO) {
 				buttons.add("Engulf", gooEngulf).hint("Attempt to engulf a foe with your body.");
@@ -112,25 +108,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//Embrace
 			if ((player.wings.type == Wings.BAT_ARM || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
 				buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
-			}
-			//Pounce
-			if (player.canPounce() && !monster.hasPerk(PerkLib.EnemyGroupType)) {
-				buttons.add("Pounce", catPounce).hint("Pounce and rend your enemy using your claws, this initiate a grapple combo.");
-			}
-			//Grab & Slam
-			if (player.bearpandaScore() >= 10 && !monster.hasPerk(PerkLib.EnemyGroupType)) {
-				buttons.add("Grab", bearGrab).hint("Attempt to grab the opponent in your powerful paws. Does not work on opponent taller than you.");
-				bd = buttons.add("Slam", bearSlam).hint("Furiously slam your target with your powerful paw, staggering and stunning it.");
-				if (player.hasStatusEffect(StatusEffects.CooldownSlamBear)) {
-					bd.disable("<b>You need more time before you can perform Slam again.</b>\n\n");
-				}
-			}
-			//Kick attackuuuu
-			if (player.isTaur() || player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.BUNNY || player.lowerBody == LowerBody.KANGAROO) {
-				bd = buttons.add("Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
-				if (player.hasStatusEffect(StatusEffects.CooldownKick)) {
-					bd.disable("<b>You need more time before you can perform Kick again.</b>\n\n");
-				}
 			}
 			//Gore if mino horns or unicorn/alicorn/bicorn/nightmare horns
 			if (player.horns.type == Horns.COW_MINOTAUR && player.horns.count >= 6) {
@@ -144,6 +121,29 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Upheaval", upheavalAttack).hint("Send your foe flying with your dual nose mounted horns. \n");
 				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(30));
 				else bd.requireFatigue(physicalCost(15));
+			}
+			//Grab & Slam
+			if (player.bearpandaScore() >= 10 && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+				buttons.add("Grab", bearGrab).hint("Attempt to grab the opponent in your powerful paws. Does not work on opponent taller than you.");
+				bd = buttons.add("Slam", bearSlam).hint("Furiously slam your target with your powerful paw, staggering and stunning it.");
+				if (player.hasStatusEffect(StatusEffects.CooldownSlamBear)) {
+					bd.disable("<b>You need more time before you can perform Slam again.</b>\n\n");
+				}
+			}
+			//Grapple
+			if (player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) {
+				buttons.add("Grapple", scyllaGrapple).hint("Attempt to grapple a foe with your tentacles.");
+			}
+			//Kick
+			if (player.isTaur() || player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.BUNNY || player.lowerBody == LowerBody.KANGAROO) {
+				bd = buttons.add("Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
+				if (player.hasStatusEffect(StatusEffects.CooldownKick)) {
+					bd.disable("<b>You need more time before you can perform Kick again.</b>\n\n");
+				}
+			}
+			//Pounce
+			if (player.canPounce() && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+				buttons.add("Pounce", catPounce).hint("Pounce and rend your enemy using your claws, this initiate a grapple combo.");
 			}
 			//Infest if infested
 			if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5 && player.hasCock()) {
@@ -200,19 +200,19 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (!player.hasPerk(PerkLib.ManticoreMetabolism)) {
 					bd = buttons.add("Tail Spike", playerTailSpike).hint("Shoot an envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 					if (player.tailVenom < 50 && player.hasPerk(PerkLib.ManticoreMetabolism)) {
-						bd.disable("You do not have enough venom to shoot spikes right now!");
+						bd.disable("You do not have enough venom to shoot a spikes right now!");
 					}
 					else if (player.tailVenom < 25) {
-						bd.disable("You do not have enough venom to shoot spike right now!");
+						bd.disable("You do not have enough venom to shoot a spike right now!");
 					}
 				}
 				if (player.hasPerk(PerkLib.ManticoreMetabolism)) {
 					bd = buttons.add("Tail Spike", playerOmniTailSpike).hint("Shoot a volley of envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 					if (player.tailVenom < 50 && player.hasPerk(PerkLib.ManticoreMetabolism)) {
-						bd.disable("You do not have enough venom to shoot spikes right now!");
+						bd.disable("You do not have enough venom to shoot multiple spikes right now!");
 					}
 					else if (player.tailVenom < 25) {
-						bd.disable("You do not have enough venom to shoot spike right now!");
+						bd.disable("You do not have enough venom to shoot multiple spikes right now!");
 					}
 				}
 			}

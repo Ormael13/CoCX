@@ -68,6 +68,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const CENTIPEDE:int			  = 58;
 	public static const KRAKEN:int                = 59;
 	public static const CANCER:int                = 60;
+	public static const FROSTWYRM:int             = 61;
 	// Don't forget to add new types in DebugMenu.as list LOWER_TYPE_CONSTANTS
 	
 	override public function set type(value:int):void {
@@ -350,7 +351,7 @@ public class LowerBody extends SaveableBodyPart {
 		return legCount == 2;
 	}
 	public function isNaga():Boolean {
-		return type == NAGA || type == HYDRA;
+		return type == NAGA || type == HYDRA || type == FROSTWYRM;
 	}
 
 	public function isTaur():Boolean {

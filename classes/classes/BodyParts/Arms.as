@@ -46,6 +46,7 @@ public class Arms extends BodyPart {
 	public static const MELKIE:int		= 42;
 	public static const CENTIPEDE:int	= 43;
 	public static const KRAKEN:int		= 44;
+	public static const FROSTWYRM:int	= 45;
 	// Don't forget to add new types in DebugMenu.as list ARM_TYPE_CONSTANTS
 
 	public function Arms() {

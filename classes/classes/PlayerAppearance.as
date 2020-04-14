@@ -240,7 +240,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("\n");
 	}
 	//Crotchial stuff - mention snake
-	if(player.lowerBody == LowerBody.NAGA && player.gender > 0)
+	if(player.isNaga() && player.gender > 0)
 	{
 		outputText("\nYour sex");
 		if(player.gender == 3 || player.cockTotal() > 1)
@@ -921,7 +921,7 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  Where your legs would normally start you have grown the body of a feral animal, with all " + num2Text(player.legCount) + " legs.");
 		}
 		//Hip info only displays if you aren't a centaur.
-		if (player.isBiped() || player.lowerBody == LowerBody.NAGA) {
+		if (player.isBiped() || player.isNaga()) {
 			if (player.thickness > 70) {
 				outputText("  You have " + hipDescript());
 				if (player.hips.type < 6) {
@@ -1024,7 +1024,7 @@ public class PlayerAppearance extends BaseContent {
 			}
 		}
 		//Non-horse PCs
-		else if (player.isBiped() || player.lowerBody == LowerBody.NAGA) {
+		else if (player.isBiped() || player.isNaga()) {
 			//TUBBY ASS
 			if (player.tone < 60) {
 				outputText(" your " + buttDescript());
@@ -1074,6 +1074,12 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  " + Num2Text(player.legCount) + " digitigrade legs grow downwards from your waist, ending in clawed wolf-like hind-paws.");
 		else if (player.lowerBody == LowerBody.NAGA)
 			outputText("  Below your waist your flesh is fused together into a very long snake-like tail.");
+		else if (player.lowerBody == LowerBody.FROSTWYRM){
+			outputText("  Below your waist your flesh is fused together into a very long snake-like tail easily "+player.tallness*4+" feet long. " +
+					"Your entire tail length up to the waist is covered with thick snow white fur but is far from vulnerable as underneath the fur is a whole layer of "+player.coatColor+" " +
+					"dragon scales harder than steel and capable of deflecting most weapon.");
+			if (player.tallness > 120)outputText("With a body so large it's no wonder your passage underground can cause tremors.");
+		}
 		//Horse body is placed higher for readability purposes
 		else if (player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS)
 			outputText("  Your " + num2Text(player.legCount) + " perfect lissome legs end in mostly human feet, apart from the horns protruding straight down from the heel that forces you to walk with a sexy, swaying gait.");
@@ -1440,6 +1446,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your arms and hands are human in appearance but your blue nailed hands touch is void of warmth and colder than death.");
 		else if (armType == Arms.CENTIPEDE)
 			outputText("  Your arms and hands are mostly human in shape tipped with sharp purple nails. Intricate flowing purple markings stretch from your hands to your shoulders.");
+		else if (armType == Arms.FROSTWYRM)
+			outputText("  Your forearms are covered with scales which themselves are covered with fur and end with five fingered clawed hands. Your claws are strong enough to dig and tear through next to anything.");
 	}
 	public function describeRearBody():void {
 		if (player.rearBody.type == RearBody.FENRIR_ICE_SPIKES) {
@@ -1447,6 +1455,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if (player.rearBody.type == RearBody.LION_MANE) {
 			outputText("  Around your neck there is a thick mane of [skin coat.color] fur. It looks great on you.");
+		}
+		else if (player.rearBody.type == RearBody.FROSTWYRM) {
+			outputText("  Around your neck there is a thick collar of snowy white fur. It looks great on you and, best of all, shields you against the cold.");
 		}
 		else if (player.rearBody.type == RearBody.SHARK_FIN) {
 			outputText("  A large shark-like fin has sprouted between your shoulder blades.  With it you have far more control over swimming underwater.");
@@ -1595,6 +1606,11 @@ public class PlayerAppearance extends BaseContent {
 		//Super lizard horns
 		if (player.horns.type == Horns.DRACONIC_X4_12_INCH_LONG)
 			outputText("  Two pairs of horns, roughly a foot long, sprout from the sides of your head.  They sweep back and give you a fearsome look, almost like the dragons from your village's legends.");
+		//Frost wyrm Horns
+		if (player.horns.type == Horns.FROSTWYRM)
+			outputText(" Two large sized spiraling horns grow from the side of your head, similar to those of a ram or frost wyrm. They kind of look great");
+			if (player.lowerBody == LowerBody.FROSTWYRM)outputText(" especially with your fur which makes you look like a sheep serpantine dragon");
+			outputText(".");
 		//Antlers!
 		if (player.horns.type == Horns.ANTLERS) {
 			if (player.horns.count > 0)
@@ -1792,6 +1808,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if(eyeType == Eyes.JIANGSHI){
 			outputText("  Your [eyecolor] eyes, while humans are vacant and devoid of the warmth of life.");
+		}
+		else if(eyeType == Eyes.FROSTWYRM){
+			outputText("  Your [eyecolor] eyes have slitted pupils and dark sclera like those of a frost wyrm.");
 		}
 		else outputText("  Your eyes are [eyecolor].");
 	}

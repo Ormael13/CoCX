@@ -13791,7 +13791,7 @@ public final class Mutations extends MutationsHelper
                 else {
                     if (rand(2) == 0) outputText("\n\nYou feel your insides toughening up; it feels like you could stand up to almost any blow.");
                     else outputText("\n\nYour bones and joints feel sore for a moment, and before long you realize they've gotten more durable.");
-                    dynStats("tou", temp / 10);
+                    dynStats("tou", 1 + rand(10));
                     changes++;
                 }
             }
@@ -13932,6 +13932,283 @@ public final class Mutations extends MutationsHelper
 			outputText("You bring the flower up to your nose and smell it. It has exquisite smell. You suddenly have the strange desire to eat it. You pop the flower into your mouth and chew. It tastes like vanilla somehow. Before you know it, you're undergoing changes.");
 			emberTFchanges.dragonTFeffects(true);
 		}
+
+    public function FafnirTear(player:Player):void
+    {
+        player.slimeFeed();
+        //init variables
+        var changes:Number = 0;
+        var changeLimit:Number = 1;
+        var temp:Number = 0;
+        var temp2:Number = 0;
+        var temp3:Number = 0;
+        var wyrmCoatColor:Array = ["bluish black", "dark grey", "black", "midnight black", "midnight"];
+        var wyrmHairColor:Array = ["white", "snow white", "glacial white", "silver", "platinum silver"];
+        //Randomly choose affects limit
+        if (rand(2) == 0) changeLimit++;
+        if (rand(3) == 0) changeLimit++;
+        if (rand(4) == 0) changeLimit++;
+        if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
+        if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
+        if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
+        if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
+        if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
+        if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
+        if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
+        if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
+        if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
+        if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+        changeLimit += additionalTransformationChances();
+        //clear screen
+        clearOutput();
+        outputText("You bring the flower up to your nose and smell it. " +
+                "It has an exquisite smell, like that of snowberries mixed with vanilla. You suddenly have the strange desire to eat it. " +
+                "You pop the flower into your mouth and chew. Before you know it, you’re undergoing changes.");
+
+        //Statistical changes:
+
+        //-Raises strength to 200.
+        if (player.str < 200 && rand(3) == 0 && changes < changeLimit) {
+            outputText("\n\nYou feel raw power run through your muscle. Gosh you might as well be strong enought to shatter rocks.");
+            if (player.tou < 50) outputText(" Well maybe not that strong yet but you sure can pack a punch with your fist.");
+            dynStats("str", 5);
+            changes++;
+        }
+
+        //-Raises speed to 100.
+        if (player.spe < 100 && rand(2) == 0 && changes < changeLimit) {
+            outputText("\n\nHearing a suddent sound you suddently move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
+            dynStats("spe", 2);
+            changes++;
+        }
+        
+        //-Raises toughness to 200.
+        if (player.spe < 200 && rand(2) == 0 && changes < changeLimit) {
+            outputText("\n\nYou feel hardier and sturdier. ");
+            if (player.tou > 100 && player.hasCoatOfType(Skin.DRAGON_SCALES)) outputText(" Your scales might as well be harder then steel right now, aint nothing thats going to get past it so easily.");
+            dynStats("tou", 5);
+            changes++;
+        }
+
+        //-drop inteligence
+        if (player.spe > 15 && rand(2) == 0 && changes < changeLimit) {
+            outputText("\n\nYour train of thought begins to slow down as if your head been dipped into cold water for a few minutes.");
+            if (player.tou < 30) outputText("  You're starting to have trouble speaking normally, using pronouns like I less and less and [name] more often than not when describing yourself. Ugh that's fine, doesn't matter if you're not the smartest person on Mareth so long as you got a body that can do the talking for you or fuck some nice mate into doing it in your stead.");
+            dynStats("int", -10);
+            changes++;
+        }
+
+        //Libido
+        if (player.lib < 200 && rand(2) == 0 && changes < changeLimit) {
+            outputText("\n\n A knot of fire in your gut doubles you over but passes after a few moments. " +
+                    "As you straighten you can feel the need seeping into you, puddling in your nethers."
+                    + "An instinctive desire to mate spreads through you, increasing your lust and boosting your sex-drive.");
+            dynStats("lib", +10);
+            changes++;
+        }
+
+        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        //Sexual Changes:
+
+        //Gain Dragon Dick
+        if (changes < changeLimit && player.dragonCocks() < player.cockTotal() && rand(3) == 0) {
+            temp = 0;
+            var choices:Array = [];
+            var select:int;
+            temp = player.cockTotal();
+            //Build an array of all the locations for TF'able cocks.
+            while (temp > 0) {
+                temp--;
+                if (player.cocks[temp].cockType != CockTypesEnum.DRAGON) choices[choices.length] = temp;
+            }
+            //Randomly choose one of those locations
+            select = choices[rand(choices.length)];
+            outputText("\n\nYour " + player.cockDescript(select) + " tingles as pins and needles sweep across it.  You pull open your [armor] to watch as it changes; the tip elongates and tapers, like a spear; a series of ridges form along the shaft, giving it an almost segmented look, and a prominent knot swells at its base.  You can't resist stroking it, until it begins dripping pre; ");
+            if (player.sens >= 50) outputText("however, it's not until you press on your new, sensitive knot that you manage to blow your load and enjoy the last few spasms of pleasure as it finally finishes changing.");
+            else outputText("but you sternly rein in your hands and tuck them into your armpits as the arousing changes run their course.");
+            outputText("  <b>You now have a dragon penis.</b>");
+            //lose lust if sens>=50, gain lust if else
+            dynStats("sen", 10, "lus", 10);
+            changes++;
+            //Apply the TF
+            player.cocks[select].cockType = CockTypesEnum.DRAGON;
+            player.cocks[select].knotMultiplier = 1.3;
+        }
+        //Increase player's breast size
+        if (player.gender > 1 && player.biggestTitSize() <= 12 && changes < changeLimit && rand(3) == 0) {
+            if (rand(2) == 0) outputText("\n\nYour [breasts] tingle for a moment before becoming larger.");
+            else outputText("\n\nYou feel a little weight added to your chest as your [breasts] seem to inflate and settle in a larger size. " +
+                    "Maybe it’s not that bad. You will need that fat when it’s cold outside.\n");
+            player.growTits(1 + rand(3), 1, false, 3);
+            changes++;
+            dynStats("sen", .5);
+        }
+
+        //Normalchanges
+
+        //grow up to 11 feet tall
+        if (changes < changeLimit && rand(2) == 0 && player.tallness < 132) {
+            temp = rand(5) + 3;
+            //Slow rate of growth after some tresholds
+            if (player.tallness >= 120) temp = Math.floor(temp / 3.5);
+            if (player.tallness >= 96 && player.tallness < 120) temp = Math.floor(temp / 2);
+            //Never 0
+            if (temp == 0) temp = 1;
+            if (temp < 5) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
+            if (temp >= 5 && temp < 7) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
+            if (temp == 7) outputText("\n\nStaggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.");
+            player.tallness += temp;
+            changes++;
+        }
+
+        if (changes < changeLimit && rand(2) == 0) outputText(player.modThickness(70, 4));
+        if (changes < changeLimit && rand(2) == 0) outputText(player.modTone(10, 5));
+
+        //Gain frost wyrm Horns
+        if (changes < changeLimit && rand(3) == 0 && player.horns.type != Horns.FROSTWYRM) {
+            if (player.horns.type != Horns.NONE)
+            {
+                if (player.horns.type == Horns.ORCHID) outputText("\n\nYour orchid flowers crumble, falling apart");
+                else outputText("\n\nYour old horns crumble, falling apart in large chunks");
+                outputText(" until they flake away to nothing. This said something soon replaces them.");
+                setHornType(Horns.NONE, 0);
+            }
+            setHornType(Horns.FROSTWYRM, 2);
+            outputText("\n\nYou write in pain as two bony lumps begins to push out of the side of your head. The transformation gives you a hell of a headache but as soon as it is over you feel for the two large spiraling horns on your head similar to those of a ram and unsurprisingly they are as sensitive as they are sturdy.");
+            changes++;
+        }
+        //Gain frost wyrm Ears
+        if (changes < changeLimit && rand(3) == 0 && player.ears.type != Ears.SNAKE) {
+            CoC.instance.mutations.setEarType(Ears.SNAKE);
+            outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed ears covered in small scales</b>.  You bet they look cute!");
+            changes++;
+        }
+        //Gain Frost wyrm Eyes
+        if (player.eyes.type != Eyes.FROSTWYRM && rand(3) == 0 && changes < changeLimit) {
+            CoC.instance.mutations.setEyeType(Eyes.FROSTWYRM);
+            outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil and black sclera like that of a frost wyrm. <b>You now have frost wyrm eyes!</b>.");
+            changes++;
+        }
+        //Gain Dragon Tongue
+        if (changes < changeLimit && rand(3) == 0 && player.tongue.type != Tongue.DRACONIC) {
+            outputText("\n\nYour tongue suddenly falls out of your mouth and begins undulating as it grows longer.  For a moment it swings wildly, completely out of control; but then settles down and you find you can control it at will, almost like a limb.  You're able to stretch it to nearly 4 feet and retract it back into your mouth to the point it looks like a normal human tongue.  <b>You now have a draconic tongue.</b>");
+            CoC.instance.mutations.setTongueType(Tongue.DRACONIC);
+            changes++;
+            //Note: This type of tongue should be eligible for all things you can do with demon tongue... Dunno if it's best attaching a boolean just to change the description or creating a whole new tongue type.
+        }
+        //Hair Color
+        if (!InCollection(player.hairColor, wyrmHairColor) < changeLimit && rand(3) == 0) {
+            player.hairColor = randomChoice(wyrmHairColor);
+            outputText("\n\nYour head tingles as something in your hair change, the strands flashing for an instant before they turn " + player.hairColor + " just like those of a frost wyrm.<");
+            changes++;
+        }
+        //Coat
+        if (!player.hasCoatOfType(Skin.DRAGON_SCALES) && changes < changeLimit && rand(4) == 0){
+            if (!InCollection(player.coatColor, wyrmCoatColor)) player.coatColor = randomChoice(wyrmCoatColor);
+            outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, as new scales grew up filling the gaps. ");
+            player.skin.growCoat(Skin.DRAGON_SCALES,{},Skin.COVERAGE_LOW);
+            outputText("<b>Your body is now partialy covered in " + player.skin.coat.color + " shield-shaped dragon scales.</b>");
+            changes++;
+        }
+        //Coat color fix
+        if (player.hasCoatOfType(Skin.DRAGON_SCALES) && !InCollection(player.coatColor, wyrmCoatColor) && changes < changeLimit && rand(4) == 0){
+            player.coatColor = randomChoice(wyrmCoatColor);
+            outputText("\n\nWoa! Your scales suddenly changed color to <b>"+player.skin.coat.color+"</b>!");
+            changes++;
+        }
+        //Remove those damn wings!
+        if (changes < changeLimit && rand(3) == 0 && player.wings.type != Wings.NONE) {
+            setWingType(Wings.NONE, "non-existant");
+            outputText("\n\nYou wings suddenly shrivel and fall of your back before turning to dust.");
+            changes++;
+        }
+        //Neck
+        if (changes < changeLimit && rand(3) == 0 && player.rearBody.type != RearBody.FROSTWYRM) {
+            setRearBody(RearBody.FROSTWYRM);
+            outputText("\n\nYou suddenly feel hair growing all around your neck at a crazy pace. It soon gets so thick it almost looks as if you're wearing a white fur collar. <b>Your neck is now well protected against the cold thanks to your thick fur collar.</b>");
+            changes++;
+        }
+        //Wyrm tail
+        if (changes == 0 && player.lowerBody != LowerBody.FROSTWYRM && rand(3) == 0 && changes < changeLimit) {
+            if (player.lowerBody == LowerBody.SCYLLA) {
+                outputText("\n\nYou collapse as your tentacle legs starts to merge and the pain is immense.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. " +
+                        "Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: " +
+                        "the bottom half of your body is like that of a snake's and easily four times your length from the waist up.");
+            }
+            else {
+                if (player.lowerBody == LowerBody.MELKIE){
+                    humanizeLowerBody();
+                    outputText("\n\nHowever this doesnt last long as changes begins to overcome your legs again.");
+                }
+                outputText("\n\nYou find it increasingly harder to keep standing as your legs start feeling weak. " +
+                        "You swiftly collapse, unable to maintain your own weight as your legs begins to changes.");
+                //(If used in combat, you lose a turn here. Half-corrupted Jojo and the Naga won't attack you during that period, but other monsters will)
+                //FUCK NO
+                outputText("\n\nTrying to get back up, you realize that the skin on the inner sides of your thighs is merging together like it was being sewn by an invisible needle.");
+                outputText("  The process continues through the length of your [legs], eventually reaching your [feet].  " +
+                        "Just when you think that the transformation is over, you find yourself pinned to the ground by an overwhelming sensation of pain. " +
+                        "You hear the horrible sound of your bones snapping, fusing together and changing into something else while you contort in unthinkable agony. " +
+                        "Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, " +
+                        "but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's and easily four times your length from the waist up.");
+            }
+            outputText("\n\nWondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.");
+            if (player.balls > 0 && player.ballSize > 10) outputText("  You're happy not to have to drag those testicles around with you anymore.");
+            if (!player.hasCoatOfType(Skin.DRAGON_SCALES))
+            {
+                player.coatColor = randomChoice(wyrmCoatColor);
+            }
+            outputText("  But then, "+player.coatColor+" armored scales start to form on the surface of your skin, slowly becoming visible, recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, except on your whole lower body. The transformation complete, you get up, standing on your newly formed snake tail. You can't help feeling proud of this majestic new body of yours.");
+            setLowerBody(LowerBody.FROSTWYRM);
+            player.legCount = 1;
+            changes++;
+        }
+
+
+        //Fix non human arms
+        if (changes < changeLimit && rand(3) == 0 && player.arms.type != Arms.FROSTWYRM && player.arms.type != Arms.HUMAN) {
+            humanizeArms();
+            changes++;
+        }
+        //Gain frost wyrm Arms
+        if (changes < changeLimit && rand(3) == 0 && player.lowerBody == LowerBody.FROSTWYRM && player.arms.type != Arms.FROSTWYRM) {
+            setArmType(Arms.FROSTWYRM);
+            outputText("\n\nYour arms and hands suddenly begins to get thicker and bigger, way beyond human size. Your entire forearms and now massive hands first cover with -scale color- scales then with white fur, giving them the appearance of fluffy padded gloves. From the fur however surges out what used to be your nails, now powerful claws capable of digging through solid rock and ice just like those of a frost wyrm. <b>You now have frost wyrm arms!</b>");
+            changes++;
+        }
+
+        //BREEDING TIME
+        if (player.frostWyrmScore() >= 10 && rand(3) == 0 && player.gender > 0) {
+            outputText("\n\nA sudden swell of lust races through your ");
+            if (player.hasCock()) {
+                outputText(cockDescript(0));
+                if (player.hasVagina()) outputText(" and ");
+            }
+            if (player.hasVagina()) outputText(vaginaDescript());
+            outputText(", making you wish you had a big fat dragon cock to go with. All you can think about now is fucking a dragon or something of that size right now ");
+            if (player.hasCock() && flags[kFLAGS.EMBER_GENDER] >= 2) {
+                    outputText("filling a womb with your seed and fertilizing those eggs");
+                    if (player.hasVagina() && flags[kFLAGS.EMBER_GENDER] == 3) outputText(" even while ");
+            }
+            if (player.hasVagina() && (flags[kFLAGS.EMBER_GENDER] == 3)){
+                outputText("taking that hard, spurting cock inside your own " + vaginaDescript(0));
+            }
+            outputText("... too late, you realize that the<b> Fafnir tear has sent your draconic body into ");
+            if (player.hasCock() && (rand(2) == 0 || !player.hasVagina())) { //If hermaphrodite, the chance is 50/50.
+                outputText("rut");
+                player.goIntoRut(false);
+                changes++;
+            }
+            else {
+                outputText("heat");
+                player.goIntoHeat(false);
+                changes++;
+            }
+            outputText("</b>.");
+        }
+
+        player.refillHunger(5);
+        flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+    }
 		
 		public function bladeGrass(player:Player):void
 		{
