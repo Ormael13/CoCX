@@ -5077,6 +5077,7 @@ public final class Mutations extends MutationsHelper
 			player.rearBody.type = RearBody.NONE;
 			player.removeStatusEffect(StatusEffects.Uniball);
 			player.removeStatusEffect(StatusEffects.BlackNipples);
+			player.removeStatusEffect(StatusEffects.GlowingAsshole);
 			player.removeStatusEffect(StatusEffects.GlowingNipples);
 			player.vaginaType(0);
 		}

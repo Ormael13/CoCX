@@ -4113,8 +4113,8 @@ use namespace CoC;
 				grandchimeraCounter++;
 //			if (mantisScore() >= 12)
 //				grandchimeraCounter++;
-//			if (scyllaScore() >= 7)
-//				grandchimeraCounter++;
+			if (scyllaScore() >= 12)
+				grandchimeraCounter++;
 			if (pigScore() >= 15)
 				grandchimeraCounter++;
 			if (melkieScore() >= 21)
@@ -11923,4 +11923,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}

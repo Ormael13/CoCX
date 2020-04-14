@@ -253,8 +253,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8n8";
-			version = ver + " (<b>CharView update, Melkie TF, sex scenes giving tease exp, less lagging game max stat cap updates, typical many smaller or larger QoL changes and bugfixes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8n9";
+			version = ver + " (<b>Orca, Manticore, Bicorn/Unicorn, Cave Wyrm updates; New TF's: Eastern Bunny, Melkie, Centipede, Kasha, Kraken; Warlocks Dark Ritual, new way to determine showed PC race at app screen and many new sprites showing on character viewer (Lia Twist sponsored whole this title)</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

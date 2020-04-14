@@ -267,7 +267,7 @@ package classes.Scenes.Camp
 		
 		public function postFightGolemOptions1():void {
 			clearOutput();
-			outputText("Placeholder text 1.");
+			outputText("What you gonna do now?\n\n");
 			menu();
 			addButton(1, "Leave", cleanupAfterCombat);
 			addButton(3, "Scavenge", golemScavenge1);
@@ -275,14 +275,14 @@ package classes.Scenes.Camp
 		public function postFightGolemOptions2():void {
 			clearOutput();
 			if (!player.hasStatusEffect(StatusEffects.GolemScavenge)) player.createStatusEffect(StatusEffects.GolemScavenge,2 + rand(2),0,0,0);
-			outputText("Placeholder text 1. Amount of golems you can scavenge: "+player.statusEffectv1(StatusEffects.GolemScavenge)+"");
+			outputText("What you gonna do now?\n\nAmount of golems you can scavenge: "+player.statusEffectv1(StatusEffects.GolemScavenge)+"\n\n");
 			menu();
 			addButton(1, "Leave", cleanupAfterCombat);
 			addButton(3, "Scavenge", golemScavenge2);
 		}
 		public function postFightGolemOptions3():void {
 			clearOutput();
-			outputText("Placeholder text 1.");
+			outputText("What you gonna do now?\n\n");
 			menu();
 			addButton(1, "Leave", cleanupAfterCombat);
 			addButton(3, "Scavenge", golemScavenge3);
@@ -290,62 +290,62 @@ package classes.Scenes.Camp
 		public function postFightGolemOptions4():void {
 			clearOutput();
 			if (!player.hasStatusEffect(StatusEffects.GolemScavenge)) player.createStatusEffect(StatusEffects.GolemScavenge,2 + rand(2),1,0,0);
-			outputText("Placeholder text 1. Amount of golems you can scavenge: "+player.statusEffectv1(StatusEffects.GolemScavenge)+"");
+			outputText("What you gonna do now?\n\nAmount of golems you can scavenge: "+player.statusEffectv1(StatusEffects.GolemScavenge)+"\n\n");
 			menu();
 			addButton(1, "Leave", cleanupAfterCombat);
 			addButton(3, "Scavenge", golemScavenge4);
 		}
 		private function golemScavenge1():void {
 			clearOutput();
-			outputText("Placeholder text 2. ");
+			outputText("You sit down by the golem and begin extracting the core from the big chunk that remains of its chest. ");
 			if (rand(4) == 0 || player.hasPerk(PerkLib.JobGolemancer)) {
-				outputText("Placeholder text. On success.");
+				outputText("At first the core resist but after a few tries you successfully manage to harvest the golem core.");
 				doNext(takeCore);
 			}
 			else {
-				outputText("Placeholder text. On failure.");
+				outputText("Sadly despite your best efforts the core is damaged during the extraction and rendered useless.");
 				doNext(cleanupAfterCombat);
 			}
 		}
 		private function golemScavenge2():void {
 			clearOutput();
-			outputText("Placeholder text 2. ");
+			outputText("You sit down by the golem and begin extracting the core from the big chunk that remains of its chest. ");
 			player.addStatusValue(StatusEffects.GolemScavenge, 1, -1);
 			if (rand(4) == 0 || player.statusEffectv1(StatusEffects.GolemScavenge) == 0 || player.hasPerk(PerkLib.JobGolemancer)) {
-				outputText("Placeholder text. On success.");
+				outputText("At first the core resist but after a few tries you successfully manage to harvest the golem core.");
 				doNext(takeCore);
 			}
 			else {
-				outputText("Placeholder text. On failure.");
+				outputText("Sadly despite your best efforts the core is damaged during the extraction and rendered useless.");
 				if (player.hasStatusEffect(StatusEffects.GolemScavenge)) doNext(golemScavenge2);
 				else doNext(cleanupAfterCombat);
 			}
 		}
 		private function golemScavenge3():void {
 			clearOutput();
-			outputText("Placeholder text 2. ");
+			outputText("You sit down by the golem and begin extracting the core from the big chunk that remains of its chest. ");
 			if (rand(4) == 0 || player.hasPerk(PerkLib.JobGolemancer)) {
-				outputText("Placeholder text. +2 stones. On success.");
+				outputText("At first the core resist but after a few tries you successfully manage to harvest the golem core. Not one to waste spare material you gather the remaining stone. (+2 stones)");
 				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += 2;
 				doNext(takeCore);
 			}
 			else {
-				outputText("Placeholder text. +5 stones. On failure.");
+				outputText("Sadly despite your best efforts the core is damaged during the extraction and rendered useless. Not one to waste spare material you gather the remaining stone. (+5 stones)");
 				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += 5;
 				doNext(cleanupAfterCombat);
 			}
 		}
 		private function golemScavenge4():void {
 			clearOutput();
-			outputText("Placeholder text 2. ");
+			outputText("You sit down by the golem and begin extracting the core from the big chunk that remains of its chest. ");
 			player.addStatusValue(StatusEffects.GolemScavenge, 1, -1);
 			if (rand(4) == 0 || player.statusEffectv1(StatusEffects.GolemScavenge) == 0 || player.hasPerk(PerkLib.JobGolemancer)) {
-				outputText("Placeholder text. +2 stones. On success.");
+				outputText("At first the core resist but after a few tries you successfully manage to harvest the golem core. Not one to waste spare material you gather the remaining stone. (+2 stones)");
 				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += 2;
 				doNext(takeCore);
 			}
 			else {
-				outputText("Placeholder text. +5 stones. On failure.");
+				outputText("Sadly despite your best efforts the core is damaged during the extraction and rendered useless. Not one to waste spare material you gather the remaining stone. (+5 stones)");
 				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += 5;
 				if (player.hasStatusEffect(StatusEffects.GolemScavenge)) doNext(golemScavenge4);
 				else doNext(cleanupAfterCombat);
