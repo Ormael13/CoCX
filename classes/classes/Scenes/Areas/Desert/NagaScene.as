@@ -912,7 +912,7 @@ public function nagaPlayerConstrict():void {
 	clearOutput();
 	if(player.fatigue + combat.physicalCost(10) > player.maxFatigue()) {
 		outputText("You just don't have the energy to wrap yourself so tightly around someone right now...");
-//Gone		menuLoc = 1;
+		//Gone		menuLoc = 1;
 		menu();
 		addButton(0, "Next", SceneLib.combat.combatMenu, false);
 		return;
@@ -935,7 +935,7 @@ public function nagaPlayerConstrict():void {
 	}
 	if(monster.short == "pod") {
 		outputText("You can't constrict something you're trapped inside of!");
-//Gone		menuLoc = 1;
+		//Gone		menuLoc = 1;
 		menu();
 		addButton(0, "Next", SceneLib.combat.combatMenu, false);
 		return;

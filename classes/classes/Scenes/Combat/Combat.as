@@ -7315,13 +7315,13 @@ public class Combat extends BaseContent {
         }
     }
 
-// This is a bullshit work around to get the parser to do what I want without having to fuck around in it's code.
+    // This is a bullshit work around to get the parser to do what I want without having to fuck around in it's code.
     public function teaseText():String {
         tease(true);
         return "";
     }
 
-// Just text should force the function to purely emit the test text to the output display, and not have any other side effects
+    // Just text should force the function to purely emit the test text to the output display, and not have any other side effects
     public function tease(justText:Boolean = false):void {
         teases.tease(justText);
     }
@@ -7331,7 +7331,7 @@ public class Combat extends BaseContent {
         player.SexXP(XP);
     }
 
-//VICTORY OR DEATH?
+    //VICTORY OR DEATH?
     // Called after the monster's action. Increments round counter. Setups doNext to win/loss/combat menu
     public function combatRoundOver():void {
         combatRound++;
