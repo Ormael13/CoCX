@@ -78,7 +78,7 @@ import classes.internals.Utils;
 			addButton(10, armors.BLIZZ_K.shortName, buyItem, 10).hint("Blizzard Kimono");
 			addButton(11, headjewelries.SNOWFH.shortName, buyItem, 11).hint("Snowflake hairpin");
 			addButton(12, consumables.SKELP__.shortName, buyItem, 12).hint("Skelp");
-			addButton(13, consumables.F_TEAR.shortName, buyItem, 12).hint("Fafnir Tear");
+			addButton(13, consumables.F_TEAR.shortName, buyItem, 13).hint("Fafnir Tear");
 			addButton(14, "Back", YuMenuMain2);
 		}		
 		private function buyItem(item:Number = 0):void
