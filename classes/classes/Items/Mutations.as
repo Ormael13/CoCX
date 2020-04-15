@@ -1,24 +1,24 @@
 ﻿package classes.Items {
     import classes.*;
-import classes.BodyParts.Antennae;
-import classes.BodyParts.Arms;
-import classes.BodyParts.Ears;
-import classes.BodyParts.Eyes;
-import classes.BodyParts.Face;
-import classes.BodyParts.Gills;
-import classes.BodyParts.Hair;
-import classes.BodyParts.Horns;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.RearBody;
-import classes.BodyParts.Skin;
-import classes.BodyParts.Tail;
-import classes.BodyParts.Tongue;
-import classes.BodyParts.Wings;
-import classes.GlobalFlags.kACHIEVEMENTS;
-import classes.GlobalFlags.kFLAGS;
-import classes.Items.Consumables.EmberTF;
-import classes.Scenes.Areas.Forest.KitsuneScene;
-import classes.Scenes.SceneLib;
+    import classes.BodyParts.Antennae;
+    import classes.BodyParts.Arms;
+    import classes.BodyParts.Ears;
+    import classes.BodyParts.Eyes;
+    import classes.BodyParts.Face;
+    import classes.BodyParts.Gills;
+    import classes.BodyParts.Hair;
+    import classes.BodyParts.Horns;
+    import classes.BodyParts.LowerBody;
+    import classes.BodyParts.RearBody;
+    import classes.BodyParts.Skin;
+    import classes.BodyParts.Tail;
+    import classes.BodyParts.Tongue;
+    import classes.BodyParts.Wings;
+    import classes.GlobalFlags.kACHIEVEMENTS;
+    import classes.GlobalFlags.kFLAGS;
+    import classes.Items.Consumables.EmberTF;
+    import classes.Scenes.Areas.Forest.KitsuneScene;
+    import classes.Scenes.SceneLib;
 
     public final class Mutations extends MutationsHelper {
         public function Mutations() {
