@@ -3,8 +3,7 @@
 import classes.BodyParts.IOrifice;
 import classes.internals.Utils;
 
-public class VaginaClass implements IOrifice
-	{
+public class VaginaClass implements IOrifice {
 
         public static const DEFAULT_CLIT_LENGTH:Number = 0.5;
 		

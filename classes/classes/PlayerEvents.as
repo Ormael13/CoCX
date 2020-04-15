@@ -1406,6 +1406,20 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Necromancy);
 				needNext = true;
 			}
+			//Cancer stance
+			if (player.arms.type == Arms.HUMAN && player.lowerBody == LowerBody.CANCER && !player.hasStatusEffect(StatusEffects.CancerCrabStance) < 0) {
+				outputText("\nEver since your lower body became that of a crab you began instinctively folding your arms and hands like those of a mantis or rather, the pincers of a crab. " +
+						"This pose, natural to you, somewhat looks weird or mystical to the onlooker, " +
+						"as if you were taking some form of martial art stance though for you this is just the natural way to rest your limbs.\n");
+				player.createStatusEffect(StatusEffects.CancerCrabStance,0,0,0,0);
+				needNext = true;
+			}
+			//Cancer stance
+			if ((player.arms.type != Arms.HUMAN || player.lowerBody != LowerBody.CANCER) && player.hasStatusEffect(StatusEffects.CancerCrabStance) < 0) {
+				outputText("\nYour body now less crab like, you have stopped folding your arms like one would.\n");
+				player.removeStatusEffect(StatusEffects.CancerCrabStance);
+				needNext = true;
+			}
 			//Elven Sense
 			if ((player.eyes.type != Eyes.ELF || player.ears.type != Ears.ELVEN) && player.findPerk(PerkLib.ElvenSense) >= 0 && player.findPerk(PerkLib.ElvishPeripheralNervSys) < 0) {
 				outputText("\nYou feels yourself less aware of your surrounding. Heck your vision seems less keen then it used to be. Likely it's because you no longer possess the senses of an elf.\n\n<b>(Lost the Elven Sense perk!)</b>\n");

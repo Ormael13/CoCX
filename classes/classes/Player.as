@@ -2721,6 +2721,7 @@ use namespace CoC;
 				{name: 'human', score: 1, minscore: 1},
 				{name: 'minotaur', score: minotaurScore(), minscore: 4},
 				{name: 'lizard', score: lizardScore(), minscore: 4},
+				{name: 'cancer', score: cancerScore(), minscore: 8},
 				{name: 'dragon', score: dragonScore(), minscore: 4},
 				{name: 'jabberwocky', score: jabberwockyScore(), minscore: 10},
 				{name: 'dog', score: dogScore(), minscore: 4},
@@ -2809,6 +2810,19 @@ use namespace CoC;
 			var TopScore:Number = ScoreList[0].score;
 
 			//Determine race type:
+			if (TopRace == "cancer") {
+				if (TopScore >= 8) {
+					if (TopScore >= 20) {
+						race = "cancer";
+					}
+					else if (TopScore >= 13) {
+						race = "lesser cancer";
+					}
+					else{
+						race = "half cancer";
+					}
+				}
+			}
 			if (TopRace == "cat") {
 				if (TopScore >= 4) {
 					if (TopScore >= 8) {
@@ -6930,14 +6944,14 @@ use namespace CoC;
 				cancerCounter++;
 			if (faceType == Face.KUDERE)
 				cancerCounter++;
-			if (arms.type == Arms.HUMAN)
-				cancerCounter++;
 			if (hasStatusEffect(StatusEffects.CancerCrabStance))
 				cancerCounter++;
 			if (lowerBody == LowerBody.CRAB)
 				cancerCounter+=1;
 			if (lowerBody == LowerBody.CANCER)
 				cancerCounter+=4;
+			if (lowerBody != LowerBody.CANCER && lowerBody != LowerBody.CRAB)
+				cancerCounter = 0;
 			if (wings.type == Wings.NONE)
 				cancerCounter ++;
 			if (eyes.colour == "orange")
@@ -6965,7 +6979,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && cancerCounter >= 8)
 				cancerCounter += 1;
 			if (isGargoyle()) cancerCounter = 0;
-			cancerCounter = finalRacialScore(cancerCounter, Race.FROSTWYRM);
+			cancerCounter = finalRacialScore(cancerCounter, Race.CANCER);
 			End("Player","racialScore");
 			return cancerCounter;
 		}
@@ -10186,6 +10200,28 @@ use namespace CoC;
 					maxIntCap2 += (25 * newGamePlusMod);
 				}
 			}//+10/10-20
+			if (cancerScore() >= 8) {
+				if (cancerScore() >= 20) {
+					maxStrCap2 += (130 * newGamePlusMod);
+					maxSpeCap2 += (110 * newGamePlusMod);
+					maxTouCap2 += (120 * newGamePlusMod);
+					maxIntCap2 -= (30 * newGamePlusMod);
+					maxWisCap2 -= (15 * newGamePlusMod);
+				}
+				else if (cancerScore() >= 13) {
+					maxStrCap2 += (105 * newGamePlusMod);
+					maxSpeCap2 += (55 * newGamePlusMod);
+					maxTouCap2 += (80 * newGamePlusMod);
+					maxIntCap2 -= (30 * newGamePlusMod);
+					maxWisCap2 -= (15 * newGamePlusMod);
+				}
+				else {
+					maxStrCap2 += (70 * newGamePlusMod);
+					maxSpeCap2 += (30 * newGamePlusMod);
+					maxTouCap2 += (65 * newGamePlusMod);
+					maxWisCap2 -= (15 * newGamePlusMod);
+				}
+			}//+10 / 10 - 20
 			if (catScore() >= 4) {
 				if (catScore() >= 8) {
 					if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += (70 * newGamePlusMod);
@@ -10260,7 +10296,7 @@ use namespace CoC;
 					maxTouCap2 -= (10 * newGamePlusMod);
 					maxSpeCap2 += (90 * newGamePlusMod);
 					maxLibCap2 += (90 * newGamePlusMod);
-			}/*
+			}
 			if (bunnyScore() >= 5 && findPerk(PerkLib.EasterBunnyBalls) > 0) {
 				if (easterbunnyScore() >= 15) {
 					maxStrCap2 -= (20 * newGamePlusMod);
@@ -10268,18 +10304,19 @@ use namespace CoC;
 					maxSpeCap2 += (105 * newGamePlusMod);
 					maxLibCap2 += (150 * newGamePlusMod);
 				}
-				else {//if (easterbunnyScore() >= 12 && easterbunnyScore() < 15) 
+				else if (easterbunnyScore() >= 12 && easterbunnyScore() < 15) {
 					maxStrCap2 -= (20 * newGamePlusMod);
 					maxTouCap2 -= (10 * newGamePlusMod);
 					maxSpeCap2 += (90 * newGamePlusMod);
 					maxLibCap2 += (120 * newGamePlusMod);
-				}/*
+				}
 				else {
 					maxStrCap2 -= (10 * newGamePlusMod);
 					maxTouCap2 -= (5 * newGamePlusMod);
 					maxSpeCap2 += (55 * newGamePlusMod);
 					maxLibCap2 += (35 * newGamePlusMod);
-				}*/
+				}
+			}
 			//-20/-10+105+150
 			if (raccoonScore() >= 4) {
 				maxSpeCap2 += (15 * newGamePlusMod);
@@ -10999,8 +11036,16 @@ use namespace CoC;
 				maxSpeCap2 += (20 * newGamePlusMod);
 			}
 			if (isDrider()) {
-				maxTouCap2 += (15 * newGamePlusMod);
-				maxSpeCap2 += (15 * newGamePlusMod);
+				if(lowerBody == LowerBody.CANCER){
+					maxStrCap2 += (15 * newGamePlusMod);
+					maxSpeCap2 += (5 * newGamePlusMod);
+					maxTouCap2 += (10 * newGamePlusMod);
+				}
+				else
+				{
+					maxTouCap2 += (15 * newGamePlusMod);
+					maxSpeCap2 += (15 * newGamePlusMod);
+				}
 			}
 			if (isScylla() || isKraken()) {
 				maxStrCap2 += (30 * newGamePlusMod);

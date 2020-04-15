@@ -352,6 +352,7 @@
         <cell rect="301,1184,99,119" name="arms/hinezumistanced_pscales" dx="48" dy="55"/>
         <cell rect="401,1184,99,119" name="arms/hinezumistanced_chitin" dx="48" dy="55"/>
         <cell rect="501,1184,99,119" name="arms/hinezumistanced_orca" dx="48" dy="55"/>
+        <cell rect="601,210,49,59" name="arms/crabStance" dx="68" dy="64"/>
         <cell rect="851,210,49,59" name="arms_fg/demonlewd" dx="88" dy="54"/>
         <cell rect="451,210,49,59" name="arms_pattern/Bstripe" dx="94" dy="64"/>
         <cell rect="501,210,49,59" name="arms_pattern/Blightning" dx="94" dy="64"/>
@@ -1946,7 +1947,13 @@
                 <!--see switch[value=skinType]-->
             </default>
         </switch>
-
+        <if test="CancerCrabStance">
+            <hide part="arms/*"/>
+            <hide part="arms_bg/*"/>
+            <hide part="hands/*"/>
+            <hide part="hands_bg/*"/>
+            <show part="arms/crabStance"/>
+        </if>
 
 		<!-- LEGS AREA -->
         <switch value="lowerBody">
@@ -2070,6 +2077,10 @@
                 <hide part="legs/*"/>
                 <show part="legs/frostWyrm"/>
             </case>
+            <case values="LowerBody.CANCER">
+                <hide part="legs/*"/>
+                <show part="legs_fg/crabtaur"/>
+            </case>
 			<case values="LowerBody.HYDRA">
                 <hide part="legs/*"/>
 				<hide part="feet/*"/>
@@ -2135,7 +2146,7 @@
             </case>
             <!--<case values="LowerBody.DEMONIC_HIGH_HEELS">TODO </case>-->
             <!--<case values="LowerBody.DEMONIC_CLAWS"">TODO </case>-->
-            <case values="LowerBody.BEE">
+            <case values="LowerBody.BEE,LowerBody.CRAB">
                 <hide part="legs/*"/>
                 <show part="legs/chitin2"/>
             </case>
@@ -2773,7 +2784,7 @@
                     </if>
                 </default>
             </switch>
-            <if test="lowerBody == LowerBody.CRAB_TAUR">
+            <if test="lowerBody == LowerBody.CANCER">
                 <hide part="penis/*"/>
             </if>
         </if>
@@ -2800,7 +2811,7 @@
             </default>
             </switch>
             <show part="balls/B$skinx$ballsz$taur"/>
-			<if test="lowerBody == LowerBody.CRAB_TAUR">
+			<if test="lowerBody == LowerBody.CANCER">
 				<hide part="balls/*"/>
 			</if>
         </if>
@@ -2920,7 +2931,7 @@
 		</if>
 		
 		<!-- HIDING INVALID LEG PATTERN AREA -->
-		<if test="lowerBody == LowerBody.CRAB_TAUR">
+		<if test="lowerBody == LowerBody.CANCER">
 			<hide part="legs_pattern/*"/>
 		</if>
 		<if test="lowerBody == LowerBody.DRIDER">

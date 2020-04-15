@@ -685,6 +685,10 @@ public class PlayerAppearance extends BaseContent {
 		if (player.vaginaType() == VaginaClass.VENOM_DRIPPING){
 			outputText("It constantly drools with aphrodisiac venom. ");
 		}
+		if (player.vaginaType() == VaginaClass.CANCER){
+			outputText("It is constantly foaming in anticipation of a potential mate. ");
+		}
+
 		if(player.lib < 50 && player.lust < 50) //not particularly horny
 
 		{
@@ -2614,6 +2618,12 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.bunnyScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Bunny-morph: " + player.bunnyScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Str, -" + (5 * (1 + player.newGamePlusMod())) + " max Tou, +" + (55 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 		else if (player.bunnyScore() >= 1) outputText("\n<font color=\"#008000\">Half Bunny-morph: " + player.bunnyScore() + "</font>");
 		else if (player.bunnyScore() < 1) outputText("\n<font color=\"#ff0000\">Half Bunny-morph: 0</font>");
+		//Cancer
+		if (player.cancerScore() >= 20) outputText("\n<font color=\"#0000a0\">Cancer: " + player.cancerScore() + " (+" + (145 * (1 + player.newGamePlusMod())) + " max Str, +" + (130 * (1 + player.newGamePlusMod())) + " max Tou, +" + (115 * (1 + player.newGamePlusMod())) + " max Spe, -" + (30 * (1 + player.newGamePlusMod())) + " max Int, -" + (15 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+		else if (player.cancerScore() >= 13) outputText("\n<font color=\"#0000a0\">Lesser Cancer: " + player.cancerScore() + " (+" + (120 * (1 + player.newGamePlusMod())) + " max Str, +" + (95 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, -" + (30 * (1 + player.newGamePlusMod())) + " max Int, -" + (15 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+		else if (player.cancerScore() >= 8) outputText("\n<font color=\"#0000a0\">Half Cancer: " + player.cancerScore() + " (+" + (85 * (1 + player.newGamePlusMod())) + " max Str, +" + (85 * (1 + player.newGamePlusMod())) + " max Tou, +" + (35 * (1 + player.newGamePlusMod())) + " max Spe, -" + (30 * (1 + player.newGamePlusMod())) + " max Int, -" + (15 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+		else if (player.cancerScore() >= 1) outputText("\n<font color=\"#008000\">Half Cancer: " + player.cancerScore() + "</font>");
+		else if (player.cancerScore() < 1) outputText("\n<font color=\"#ff0000\">Half Cancer: 0</font>");
 		//Cat
 		if (player.catScore() >= 8) {
 			outputText("\n<font color=\"#0000a0\">Cat-girl/Cat-boy/Cat Morph: " + player.catScore() + " (");

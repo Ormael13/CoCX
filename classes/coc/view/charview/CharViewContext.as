@@ -42,12 +42,12 @@ public class CharViewContext extends ExecContext {
 			{}, // local variables
 			character,
 			{
-
 				CaveWyrmPussy: player.vaginaType() == VaginaClass.CAVE_WYRM,
 				CaveWyrmNipples: player.hasStatusEffect(StatusEffects.GlowingNipples),
+				CancerCrabStance: player.hasStatusEffect(StatusEffects.CancerCrabStance),
 				showClothing: [LowerBody.LION,LowerBody.GARGOYLE,LowerBody.GARGOYLE_2].indexOf(player.lowerBody) <= 0,
-				showArmClothing: [Arms.LION,Arms.DISPLACER,Arms.GARGOYLE,Arms.GARGOYLE_2,Arms.YETI,Arms.HINEZUMI].indexOf(player.arms.type) <= 0,
-				showLegClothing: [LowerBody.YETI,LowerBody.HOOFED,LowerBody.HARPY,LowerBody.GOO,LowerBody.NAGA,LowerBody.DRIDER,LowerBody.HINEZUMI,LowerBody.MELKIE,LowerBody.CENTIPEDE,LowerBody.SCYLLA,LowerBody.KRAKEN].indexOf(player.lowerBody) <= 0,
+				showArmClothing: [Arms.LION,Arms.DISPLACER,Arms.GARGOYLE,Arms.GARGOYLE_2,Arms.YETI,Arms.HINEZUMI].indexOf(player.arms.type) <= 0 && !player.hasStatusEffect(StatusEffects.CancerCrabStance),
+				showLegClothing: [LowerBody.YETI,LowerBody.HOOFED,LowerBody.HARPY,LowerBody.GOO,LowerBody.NAGA,LowerBody.DRIDER,LowerBody.HINEZUMI,LowerBody.MELKIE,LowerBody.CENTIPEDE,LowerBody.SCYLLA,LowerBody.KRAKEN,LowerBody.CANCER].indexOf(player.lowerBody) <= 0,
 				PlayerHasViewableOutfit: player.isWearingArmor(),
 
 				Antennae     : Antennae,

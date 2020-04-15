@@ -2204,7 +2204,7 @@
                 }
             }
             //Remove odd eyes
-            if (changes < changeLimit && rand(5) == 0 && player.eyes.type > Eyes.HUMAN && type != 6) {
+            if (changes < changeLimit && rand(5) == 0 && player.eyes.type != Eyes.HUMAN && type != 6) {
                 humanizeEyes();
                 changes++;
             }
@@ -15067,10 +15067,10 @@
             changeLimit += additionalTransformationChances();
             clearOutput();
             outputText("You eat the kelp and a deep chill runs across your body as something in you begins to change.");
-            if (player.isGargoyle()) {
+            if (player.hasPerk(PerkLib.TransformationImmunity)) {
                 outputText("\n\nOr rather normaly it would but since you are seldom immunised to transformatives nothing happens.");
             }
-            if (!player.isGargoyle()) {
+            if (!player.hasPerk(PerkLib.TransformationImmunity)) {
                 //spe change
                 if (player.spe < 100 && rand(4) == 0 && changes < changeLimit) {
                     outputText("\n\nYou feel like a coiled spring, ready to swim or run a marathon!");
@@ -15322,6 +15322,189 @@
                 if (changes < changeLimit && rand(4) == 0) outputText(player.modFem(100, 3));
                 player.refillHunger(20);
                 flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+            }
+        }
+
+        public function bubblegum(player:Player):void {
+            player.slimeFeed();
+            //init variables
+            var changes:Number = 0;
+            var changeLimit:Number = 1;
+            var x:int = 0;
+            //Temporary storage
+            var temp:Number = 0;
+            var temp2:Number = 0;
+            var temp3:Number = 0;
+            //Randomly choose affects limit
+            if (rand(4) == 0) changeLimit++;
+            if (rand(4) == 0) changeLimit++;
+            if (rand(4) == 0) changeLimit++;
+            changeLimit += additionalTransformationChances();
+            clearOutput();
+            outputText("You bite into the candy, your mouth foaming small sweet bubbles. Your body seems to react to it as you begin to change.");
+            if (player.hasPerk(PerkLib.TransformationImmunity)) {
+                outputText("\n\nOr rather normaly it would but since you are seldom immunised to transformatives nothing happens.");
+            }
+            if (!player.hasPerk(PerkLib.TransformationImmunity)) {
+
+                //str change
+                if (player.str < 100 && rand(4) == 0 && changes < changeLimit) {
+                    outputText("\n\nYou suddenly feel stronger, as if your hands could shred steel and grind rocks to dust!");
+                    dynStats("str", 1);
+                    changes++;
+                }
+
+                //tou change
+                if (player.tou < 70 && rand(4) == 0 && changes < changeLimit) {
+                    outputText("\n\nYou feel sturdier, but it might just be your imagination.");
+                    dynStats("tou", 1);
+                    changes++;
+                }
+
+                //spe change and Kudere face
+                if (player.spe >= 30 && rand(3) == 0 && changes < changeLimit) {
+                    outputText("\n\nLife is boring, so boring… why do you run all the time? " +
+                            "Heck, why do you even make the effort to smile and wink? It's way easier to keep a passive face all the time. " +
+                            "The more you think about it, the more you lose your ability to display your emotions, your voice’s tone starts becoming somewhat empty. " +
+                            "Well what your face won't show, your body will.\n");
+                    dynStats("spe", -10);
+                    if (player.spe >= 30 && player.faceType == Face.HUMAN && player.faceType != Face.KUDERE)
+                    {
+                        outputText("\n\nHey, why do you even bother with those expressions? " +
+                                "Your flat tone and emotionless face is the perfect armor against all the lust mongers out there. Let them guess whether you are aroused or not. " +
+                                "Only your bodily movement can betray your hidden desires to mate or your anger now. " +
+                                "<b>You now have an expressionless visage.");
+                        if (silly())outputText("Card sharks would gladly sell their souls for a poker face as good as yours.");
+                        outputText("</b>");
+                        setFaceType(Face.KUDERE);
+                    }
+                    changes++;
+                }
+
+                //Fix the face if player face isn't human
+                if (player.faceType != Face.HUMAN && player.faceType != Face.KUDERE) {
+                    humanizeFace()
+                }
+
+                //Get those Cock to bubble:
+                if (player.cockTotal() > 0 && player.cocks[0].cockType != CockTypesEnum.CANCER && rand(4) == 0 && changes < changeLimit) {
+                    for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
+                        //Stop loopahn when dick be found
+                        if (player.cocks[temp2].cockType != CockTypesEnum.CANCER) break;
+                    }
+                    outputText("\n\nYour penis begins foaming bubbles... well guess thats going to take some time to get used to? <b>Your penis is now foaming bubbles like that of a Cancer!</b>");
+                    //(REMOVE SHEATH IF NECESSARY)
+                    if (player.hasSheath()) {
+                        player.cocks[temp2].cockType = CockTypesEnum.CANCER;
+                        outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
+                    } else player.cocks[temp2].cockType = CockTypesEnum.CANCER;
+                    changes++;
+                    dynStats("lib", 3, "lus", 10);
+                }
+
+                //decrease player's breast size
+                if (player.biggestTitSize() >= 2 && changes < changeLimit && rand(4) == 0) {
+                    player.shrinkTits(true);
+                    dynStats("sen", .5);
+                }
+
+                if (player.hasVagina() && changes < changeLimit && rand(4) == 0) {
+                    var index:int = 0;
+                    //0 = dry, 1 = wet, 2 = extra wet, 3 = always slick, 4 = drools constantly, 5 = female ejaculator
+                    if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) {
+                        if (player.vaginas.length == 1) outputText("Your [vagina] gushes fluids down your leg as you spontaneously orgasm.");
+                        else outputText("Your [vagina]s gush fluids down your legs as you spontaneously orgasm, leaving a thick puddle of pussy-juice on the ground.  It is rapidly absorbed by the earth.");
+                        player.orgasm();
+                    }
+                    if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) {
+                        if (player.vaginas.length == 1) outputText("Your pussy starts foaming bubbles for a few seconds, juice slowly flowing out. You cannot resist as your hands dive into your [vagina]. Your pussy gushes, foaming more and more bubbles until you suddenly shoot a powerful bubble jet. You make a dopey smile at the many uses of this you can already think of. <b>You are now a squirter</b>.");
+                        if (player.vaginas.length > 1) outputText("Your pussy starts foaming bubbles for a few seconds, juice slowly flowing out. You cannot resist plunging your hands inside your [vagina]s. Your pussy gushes, foaming more and more bubbles until you suddenly shoot a powerful bubble jet. You make a dopey smile at the many uses of this you can already think of. The fluids quickly disappear into the dirt. <b>You are now a squirter</b>.");
+                        player.vaginaType(9);
+                        player.orgasm();
+                    }
+                    if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) {
+                        if (player.vaginas.length == 1) outputText("You feel a sudden trickle of fluid down your leg.  You smell it and realize it's your pussy-juice.  Your [vagina] now drools lubricant constantly down your leg.");
+                        if (player.vaginas.length > 1) outputText("You feel sudden trickles of fluids down your leg.  You smell the stuff and realize it's your pussies-juices.  They seem to drool lubricant constantly down your legs.");
+                    }
+                    if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) {
+                        outputText("You flush in sexual arousal as you realize how moist your cunt-lips have become.  Once you've calmed down a bit you realize they're still slick and ready to fuck, and always will be.");
+                    }
+                    if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) {
+                        if (player.vaginas.length == 1) outputText("A feeling of intense arousal passes through you, causing you to masturbate furiously.  You realize afterwards that your [vagina] felt much wetter than normal.");
+                        else outputText("A feeling of intense arousal passes through you, causing you to masturbate furiously.  You realize afterwards that your [vagina] were much wetter than normal.");
+                    }
+                    if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) {
+                        outputText("You feel a tingling in your crotch, but cannot identify it.");
+                    }
+                    index = player.vaginas.length;
+                    while (index > 0) {
+                        index--;
+                        if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) player.vaginas[index].vaginalWetness++;
+                    }
+                }
+
+                //Remove odd eyes
+                if (changes < changeLimit && rand(4) == 0 && player.eyes.type != Eyes.HUMAN && player.eyes.type != Eyes.CANCER) {
+                    humanizeEyes();
+                }
+
+                //Set eyes to the racial coloration and change them to cancer type
+                if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && player.eyes.type != Eyes.CANCER) {
+                    setEyeTypeAndColor(Eyes.CANCER,"orange");
+                    outputText("\n\nA slight change happens in your eyes as they begin to water. " +
+                            "You clear away the tears, going to a puddle to see what's going on. " +
+                            "Your eyes look about the same, save for the fact that your irises now have the particular orange hue characteristic of cancers, with slightly larger pupils. " +
+                            "Likely you won’t need to blink while underwater with <b>your orange cancer eyes.</b>");
+                    changes++;
+                }
+                //Remove weird hairs
+                if (changes < changeLimit && rand(4) == 0 && player.hairType != Hair.NORMAL) {
+                    humanizeHairs();
+                }
+                //Set ears to human
+                if (changes < changeLimit && rand(4) == 0 && player.ears.type != Ears.HUMAN) {
+                    humanizeEars();
+                }
+                //Set legs to human
+                if (changes < changeLimit && rand(4) == 0 && player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.CRAB && player.lowerBody != LowerBody.CANCER) {
+                    humanizeLowerBody();
+                }
+                //Set legs to crab
+                if (changes < changeLimit && rand(4) == 0 && player.lowerBody == LowerBody.HUMAN) {
+                    setLowerBody(LowerBody.CRAB);
+                    player.coatColor = "red";
+                    outputText("\n\nYour two legs suddenly feel weird, their structure rearranging into bright red carapace. You try walking on them, " +
+                            "making a few false starts until you manage to achieve a proper gait. " +
+                            "Soon enough, it becomes second nature to you.. You now have crab legs covered in red chitin.");
+                    changes++;
+                }
+                //Set legs to cancer
+                if (changes < changeLimit && rand(4) == 0 && player.lowerBody == LowerBody.CRAB) {
+                    setLowerBody(LowerBody.CANCER);
+                    player.legCount = 6;
+                    outputText("\n\nYou fall to the ground, your body going limp as you are wracked by intense pain, you faint. " +
+                            "When you wake up you are almost scared to look at whatever damage might have occurred. " +
+                            "To your surprise, below your waist your body  has transformed into a huge armored crab, eyes included, with 6 legs and two large pincers strong enough to break rocks. " +
+                            "Your privates are at the same place as they were before, hidden behind a quatuor of armored mandibula constantly chittering and foaming. " +
+                            "You clench and unclench your pincers, feeling the raw strength in them. Those are going to be soooooo fun to use. You have grown the body of a crab from your waist down.");
+                    changes++;
+                }
+
+                //Set weird face to human
+                if (changes < changeLimit && rand(4) == 0 && player.faceType != Face.HUMAN && player.faceType != Face.KUDERE) {
+                    humanizeFace()
+                }
+
+                //Dump that damn coat away
+                if (player.hasCoat() && rand(4) == 0) {
+                    humanizeSkin();
+                    changes++;
+                }
+
+                //Arms
+                if (changes < changeLimit && rand(4) == 0 && player.arms.type != Arms.HUMAN) {
+                    humanizeArms();
+                }
             }
         }
 
