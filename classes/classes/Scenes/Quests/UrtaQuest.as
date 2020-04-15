@@ -291,9 +291,9 @@ public function startUrtaQuest():void {
 	player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_DROOLING;
 	player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_NORMAL;
 	player.clitLength = 1;
-	player.str = 100;
-	player.tou = 110;
-	player.spe = 120;
+	player.str = 143;
+	player.tou = 183;
+	player.spe = 178;
 	player.inte = 60;
 	player.wis = 50;
 	player.lib = 90;
@@ -304,7 +304,7 @@ public function startUrtaQuest():void {
 	player.soulforce = 50;
 	player.wrath = 0;
 	player.gems = 183;
-	player.level = 26;
+	player.level = 30;
 	player.teaseLevel = 15;
 	player.str += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 34);
 	player.tou += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 37);
@@ -336,7 +336,9 @@ public function startUrtaQuest():void {
 	player.createPerk(PerkLib.JobAllRounder,0,0,0,0);
 	player.createPerk(PerkLib.HiddenMomentum,0,0,0,0);
 	player.createPerk(PerkLib.HoldWithBothHands,0,0,0,0);
-	player.createPerk(PerkLib.ColdFury,0,0,0,0);
+	player.createPerk(PerkLib.ColdFury, 0, 0, 0, 0);
+	player.createPerk(PerkLib.UnlockBody, 0, 0, 0, 0);
+	player.createPerk(PerkLib.UnlockBody2ndStage, 0, 0, 0, 0);
 	player.createPerk(PerkLib.BasicSelfControl, 0, 0, 0, 0);
 	if (player.newGamePlusMod() >= 1) player.createPerk(PerkLib.HalfStepToImprovedSelfControl, 0, 0, 0, 0);
 	if (player.newGamePlusMod() >= 2) player.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
@@ -373,6 +375,18 @@ public function startUrtaQuest():void {
 	if (player.newGamePlusMod() >= 3) player.createPerk(PerkLib.TankIV,0,0,0,0);
 	if (player.newGamePlusMod() >= 4) player.createPerk(PerkLib.TankV,0,0,0,0);
 	if (player.newGamePlusMod() >= 5) player.createPerk(PerkLib.TankVI,0,0,0,0);
+	player.createPerk(PerkLib.GoliathI,0,0,0,0);
+	if (player.newGamePlusMod() >= 1) player.createPerk(PerkLib.GoliathII,0,0,0,0);
+	if (player.newGamePlusMod() >= 2) player.createPerk(PerkLib.GoliathIII,0,0,0,0);
+	if (player.newGamePlusMod() >= 3) player.createPerk(PerkLib.GoliathIV,0,0,0,0);
+	if (player.newGamePlusMod() >= 4) player.createPerk(PerkLib.GoliathV,0,0,0,0);
+	if (player.newGamePlusMod() >= 5) player.createPerk(PerkLib.GoliathVI,0,0,0,0);
+	player.createPerk(PerkLib.CheetahI,0,0,0,0);
+	if (player.newGamePlusMod() >= 1) player.createPerk(PerkLib.CheetahII,0,0,0,0);
+	if (player.newGamePlusMod() >= 2) player.createPerk(PerkLib.CheetahIII,0,0,0,0);
+	if (player.newGamePlusMod() >= 3) player.createPerk(PerkLib.CheetahIV,0,0,0,0);
+	if (player.newGamePlusMod() >= 4) player.createPerk(PerkLib.CheetahV,0,0,0,0);
+	if (player.newGamePlusMod() >= 5) player.createPerk(PerkLib.CheetahVI,0,0,0,0);
 	player.createPerk(PerkLib.DancersVitalityI,0,0,0,0);
 	if (player.newGamePlusMod() >= 1) player.createPerk(PerkLib.DancersVitalityII,0,0,0,0);
 	if (player.newGamePlusMod() >= 2) player.createPerk(PerkLib.DancersVitalityIII,0,0,0,0);
@@ -1360,7 +1374,7 @@ private function urtaSidewinder():void {
 		else monster.armorDef = 0;
 	}
 	if(!monster.hasStatusEffect(StatusEffects.Stunned) && monster.findPerk(PerkLib.Resolute) < 0 && damage > 0) {
-		if(monster.tou/10 + rand(20) + 1 < 20) {
+		if(rand(3) > 0) {
 			outputText("\n<b>" + monster.capitalA + monster.short + " is stunned!</b>");
 			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 		}
