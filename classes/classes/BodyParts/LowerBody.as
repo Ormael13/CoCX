@@ -67,8 +67,9 @@ public class LowerBody extends SaveableBodyPart {
 	public static const MELKIE:int			  	  = 57;
 	public static const CENTIPEDE:int			  = 58;
 	public static const KRAKEN:int                = 59;
-	public static const CANCER:int                = 60;
-	public static const FROSTWYRM:int             = 61;
+	public static const CRAB:int                  = 60;
+	public static const CANCER:int                = 61;
+	public static const FROSTWYRM:int             = 62;
 	// Don't forget to add new types in DebugMenu.as list LOWER_TYPE_CONSTANTS
 	
 	override public function set type(value:int):void {
@@ -342,7 +343,7 @@ public class LowerBody extends SaveableBodyPart {
 		}
 	}
 	public function isDrider():Boolean {
-		return (type == DRIDER);
+		return (type == DRIDER || type == CANCER);
 	}
 	public function isGoo():Boolean {
 		return type == GOO;

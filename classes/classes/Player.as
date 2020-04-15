@@ -6316,6 +6316,8 @@ use namespace CoC;
 				frostWyrmCounter++;
 			if (eyes.type == Eyes.FROSTWYRM)
 				frostWyrmCounter++;
+			if (faceType == Face.ANIMAL_TOOTHS)
+				frostWyrmCounter++;
 			if (tongue.type == Tongue.DRACONIC)
 				frostWyrmCounter++;
 			if (arms.type == Arms.FROSTWYRM)
@@ -6914,6 +6916,58 @@ use namespace CoC;
 			centaurCounter = finalRacialScore(centaurCounter, Race.CENTAUR);
 			End("Player","racialScore");
 			return centaurCounter;
+		}
+
+		//Elf score
+		public function cancerScore():Number {
+			Begin("Player","racialScore","frost wyrm");
+			var cancerCounter:Number = 0;
+			if (ears.type == Ears.HUMAN)
+				cancerCounter++;
+			if (hairType == Hair.NORMAL)
+				cancerCounter++;
+			if (eyes.type == Eyes.CANCER)
+				cancerCounter++;
+			if (faceType == Face.KUDERE)
+				cancerCounter++;
+			if (arms.type == Arms.HUMAN)
+				cancerCounter++;
+			if (hasStatusEffect(StatusEffects.CancerCrabStance))
+				cancerCounter++;
+			if (lowerBody == LowerBody.CRAB)
+				cancerCounter+=1;
+			if (lowerBody == LowerBody.CANCER)
+				cancerCounter+=4;
+			if (wings.type == Wings.NONE)
+				cancerCounter ++;
+			if (eyes.colour == "orange")
+				cancerCounter++;
+			if (foamingCocks() > 0 || (hasVagina() && vaginaType() == VaginaClass.CANCER))
+				cancerCounter++;
+			if (biggestTitSize() <= 3)
+				cancerCounter++;
+			if (findPerk(PerkLib.TwinHeart) >= 0)
+				cancerCounter += 2;
+			if (findPerk(PerkLib.TwinHeartEvolved) >= 0)
+				cancerCounter += 2;
+			if (findPerk(PerkLib.TwinHeartFinalForm) >= 0)
+				cancerCounter += 2;
+			if (findPerk(PerkLib.TrachealSystem) >= 0)
+				cancerCounter++;
+			if (findPerk(PerkLib.TrachealSystemEvolved) >= 0)
+				cancerCounter++;
+			if (findPerk(PerkLib.TrachealSystemFinalForm) >= 0)
+				cancerCounter++;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				cancerCounter += 50;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && cancerCounter >= 4)
+				cancerCounter += 1;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && cancerCounter >= 8)
+				cancerCounter += 1;
+			if (isGargoyle()) cancerCounter = 0;
+			cancerCounter = finalRacialScore(cancerCounter, Race.FROSTWYRM);
+			End("Player","racialScore");
+			return cancerCounter;
 		}
 
 		public function sphinxScore():Number
