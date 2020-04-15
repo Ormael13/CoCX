@@ -64,6 +64,9 @@ package classes.Scenes
 			outputText("-All changes for 0.8n9 was due to hard work of our glorious lady Liadri. With a bit of Lia Twist.\n");
 			outputText("-Golem scavenging got texts instead of placeholder texts. (Texts ofc also sponsored by Lia Twist and coded by me ;) )\n");
 			outputText("-Fixed bugs: error in cat tf that would cause text to become bolded, golemancer shop 2 items been unbuyable\n\n");
+			outputText("<b>Version 0.8n10:</b>\n\n");
+			outputText("-Urta lvl, stats been slight increased. Her stunning mov now just have 66% chance to stun instead smth that felt around 20%.\n");
+			outputText("-Fixed bugs: Eastern Bunny tf not giving eastern bunny balls\n\n");/*ostatni punkt changelogu
 			outputText("<b>Version 0.8o:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
@@ -81,13 +84,11 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-Fixed bugs: \n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: \n\n");
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
