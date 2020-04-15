@@ -6308,7 +6308,7 @@ use namespace CoC;
 			return elfCounter;
 		}
 
-		//Elf score
+		//Frost Wyrm score
 		public function frostWyrmScore():Number {
 			Begin("Player","racialScore","frost wyrm");
 			var frostWyrmCounter:Number = 0;
