@@ -1809,7 +1809,7 @@ import flash.utils.getQualifiedClassName;
 			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
 				if (SceneLib.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
 			}
-			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear)) {
+			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug)) {
 				if (!handleConstricted()) return;
 			}
 			if (hasStatusEffect(StatusEffects.OrcaPlay)) {
@@ -1903,6 +1903,36 @@ import flash.utils.getQualifiedClassName;
 			}
 			addStatusValue(StatusEffects.Pounce, 1, -1);
 			return false;
+			}
+			if (hasStatusEffect(StatusEffects.ManticorePlug)) {
+				EngineCore.outputText("" + capitalA + short + " pulls to unplug your tail from [monster his] "+cockDescriptShort()+".");
+				if (statusEffectv1(StatusEffects.ManticorePlug) <= 0) {
+					EngineCore.outputText("" + capitalA + short +" pulls to unplug your tail from [monster his] "+cockDescriptShort()+" and manages with great efforts to get it off.");
+					if (statusEffectv3(StatusEffects.ManticorePlug) >= 1) {
+						EngineCore.outputText("You lick your paws in delight still feeling the remains of your recent meal in your tail.");
+					} else {
+						EngineCore.outputText("You growl in annoyance at your denied meal.");
+					}
+					createStatusEffect(StatusEffects.Straddle, statusEffectv2(StatusEffects.ManticorePlug),0,0,0);
+					removeStatusEffect(StatusEffects.ManticorePlug);
+				}
+				addStatusValue(StatusEffects.ManticorePlug, 1, -1);
+				return false;
+			}
+			if (hasStatusEffect(StatusEffects.DisplacerPlug)) {
+				EngineCore.outputText("" + capitalA + short + " struggle to unplug your tentacles suckers.");
+				if (statusEffectv1(StatusEffects.DisplacerPlug) <= 0) {
+					EngineCore.outputText("" + capitalA + short +" struggle to unplug your tentacles suckers from [monster his] "+breastDescript+" and manages with great efforts to get them off.");
+					if (statusEffectv3(StatusEffects.DisplacerPlug) >= 1) {
+						EngineCore.outputText("You lick your paws in delight still feeling the remains of the recent milk flow in your tentacles.");
+					} else {
+						EngineCore.outputText("You growl in annoyance at your denied meal.");
+					}
+					createStatusEffect(StatusEffects.Straddle, statusEffectv2(StatusEffects.DisplacerPlug),0,0,0);
+					removeStatusEffect(StatusEffects.DisplacerPlug);
+				}
+				addStatusValue(StatusEffects.DisplacerPlug, 1, -1);
+				return false;
 			}
 			else if (player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) {
 			EngineCore.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.");

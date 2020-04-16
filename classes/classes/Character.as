@@ -1123,6 +1123,7 @@ import classes.Items.JewelryLib;
 			//if (game.player.dragonScore() >= 11) max += 25;//pig races having max hunger bonus too?
 			if (findPerk(PerkLib.EzekielBlessing) >= 0) max += 50;
 			if (findPerk(PerkLib.ManticoreMetabolismEvolved) >= 0) max += 50;
+			if (findPerk(PerkLib.DisplacerMetabolismEvolved) >= 0) max += 50;
 			// (findPerk(PerkLib.) >= 0 && game.player.humanScore() < 5) max += 100;
 			// jak bedzie mieć chimeryczna nature to kolejny boost to max hunger moze...150 lub nawet 200 ^^
 			if (findPerk(PerkLib.IronStomach) >= 0) max += 50;

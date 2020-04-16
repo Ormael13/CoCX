@@ -15362,13 +15362,13 @@
                 }
 
                 //spe change and Kudere face
-                if (player.spe >= 30 && rand(3) == 0 && changes < changeLimit) {
+                if (player.spe >= 1 && rand(3) == 0 && changes < changeLimit) {
                     outputText("\n\nLife is boring, so boring… why do you run all the time? " +
                             "Heck, why do you even make the effort to smile and wink? It's way easier to keep a passive face all the time. " +
                             "The more you think about it, the more you lose your ability to display your emotions, your voice’s tone starts becoming somewhat empty. " +
-                            "Well what your face won't show, your body will.\n");
-                    dynStats("spe", -10);
-                    if (player.spe >= 30 && player.faceType == Face.HUMAN && player.faceType != Face.KUDERE)
+                            "Well what your face won't show, your body will.");
+                    dynStats("spe", -5);
+                    if (player.spe < 30 && player.faceType == Face.HUMAN && player.faceType != Face.KUDERE)
                     {
                         outputText("\n\nHey, why do you even bother with those expressions? " +
                                 "Your flat tone and emotionless face is the perfect armor against all the lust mongers out there. Let them guess whether you are aroused or not. " +
@@ -15403,13 +15403,14 @@
                 }
 
                 //decrease player's breast size
-                if (player.biggestTitSize() >= 2 && changes < changeLimit && rand(4) == 0) {
+                if (player.biggestTitSize() >= 3 && changes < changeLimit && rand(4) == 0) {
                     player.shrinkTits(true);
                     dynStats("sen", .5);
                 }
 
                 if (player.hasVagina() && changes < changeLimit && rand(4) == 0) {
                     var index:int = 0;
+                    outputText("\n\n");
                     //0 = dry, 1 = wet, 2 = extra wet, 3 = always slick, 4 = drools constantly, 5 = female ejaculator
                     if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) {
                         if (player.vaginas.length == 1) outputText("Your [vagina] gushes fluids down your leg as you spontaneously orgasm.");
@@ -15472,10 +15473,10 @@
                 //Set legs to crab
                 if (changes < changeLimit && rand(4) == 0 && player.lowerBody == LowerBody.HUMAN) {
                     setLowerBody(LowerBody.CRAB);
-                    player.coatColor = "red";
-                    outputText("\n\nYour two legs suddenly feel weird, their structure rearranging into bright red carapace. You try walking on them, " +
+                    player.coatColor = "reddish-orange";
+                    outputText("\n\nYour two legs suddenly feel weird, their structure rearranging into bright reddish-orange carapace. You try walking on them, " +
                             "making a few false starts until you manage to achieve a proper gait. " +
-                            "Soon enough, it becomes second nature to you.. You now have crab legs covered in red chitin.");
+                            "Soon enough, it becomes second nature to you.. You now have crab legs covered in reddish-orange chitin.");
                     changes++;
                 }
                 //Set legs to cancer
@@ -15484,9 +15485,9 @@
                     player.legCount = 6;
                     outputText("\n\nYou fall to the ground, your body going limp as you are wracked by intense pain, you faint. " +
                             "When you wake up you are almost scared to look at whatever damage might have occurred. " +
-                            "To your surprise, below your waist your body  has transformed into a huge armored crab, eyes included, with 6 legs and two large pincers strong enough to break rocks. " +
+                            "To your surprise, below your waist your body has transformed into that of a huge armored crab, eyes included, with 6 legs and two large pincers strong enough to break rocks. " +
                             "Your privates are at the same place as they were before, hidden behind a quatuor of armored mandibula constantly chittering and foaming. " +
-                            "You clench and unclench your pincers, feeling the raw strength in them. Those are going to be soooooo fun to use. You have grown the body of a crab from your waist down.");
+                            "You clench and unclench your pincers, feeling the raw strength in them. Those are going to be soooooo fun to use. <b>You have grown the body of a crab from your waist down.</b>");
                     changes++;
                 }
 
@@ -15504,6 +15505,10 @@
                 //Arms
                 if (changes < changeLimit && rand(4) == 0 && player.arms.type != Arms.HUMAN) {
                     humanizeArms();
+                }
+
+                if (changes == 0) {
+                    outputText("\n\nNothing happened.  Weird.");
                 }
             }
         }

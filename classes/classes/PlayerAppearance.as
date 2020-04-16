@@ -1361,7 +1361,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if(player.lowerBody == LowerBody.CANCER)
 		{
-			outputText("On the front of your crab half, covering your privates, is a set of chitinous mandibula covered in feelers, constantly chittering and foaming with your drooling fluids.");
+			outputText(" On the front of your crab half, covering your privates, is a set of chitinous mandibula covered in feelers, constantly chittering and foaming with your drooling fluids.");
 		}
 	}
 	public function describeArms():void {
@@ -1623,10 +1623,11 @@ public class PlayerAppearance extends BaseContent {
 		if (player.horns.type == Horns.DRACONIC_X4_12_INCH_LONG)
 			outputText("  Two pairs of horns, roughly a foot long, sprout from the sides of your head.  They sweep back and give you a fearsome look, almost like the dragons from your village's legends.");
 		//Frost wyrm Horns
-		if (player.horns.type == Horns.FROSTWYRM)
+		if (player.horns.type == Horns.FROSTWYRM){
 			outputText(" Two large sized spiraling horns grow from the side of your head, similar to those of a ram or frost wyrm. They kind of look great");
 			if (player.lowerBody == LowerBody.FROSTWYRM)outputText(" especially with your fur which makes you look like a sheep serpantine dragon");
 			outputText(".");
+		}
 		//Antlers!
 		if (player.horns.type == Horns.ANTLERS) {
 			if (player.horns.count > 0)

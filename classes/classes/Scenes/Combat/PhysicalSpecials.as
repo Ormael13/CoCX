@@ -94,6 +94,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.isNaga()) {
 				buttons.add("Constrict", SceneLib.desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail.");
 			}
+			//Cancer Grab
+			if (player.lowerBody == LowerBody.CANCER) {
+				buttons.add("Grab", combat.CancerGrab).hint("Grab your opponents with your pincers, then proceed to crush them.");
+			}
 			//Dig
 			if (player.lowerBody == LowerBody.CANCER || player.lowerBody == LowerBody.CENTIPEDE || player.lowerBody == LowerBody.FROSTWYRM) {
 				bd = buttons.add("Dig", Dig).hint("Dig underground to escape your opponent attack for a while.");

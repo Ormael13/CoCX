@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
+import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.UniqueSexScenes;
 
@@ -148,11 +149,8 @@ public function treeMenu(output:Boolean = true):void {
 		} else {
 			addButtonDisabled(2, "TentacleBone");
 		}
-		if(player.countCocksOfType(CockTypesEnum.STAMEN)>4){
-			addButton(3, "TentacleDuel", uniquuuesexscene.alrauneExtraSceneWithHollicyntiaTentacleDuel);
-		} else {
-			addButtonDisabled(2, "TentacleDuel", "Requires <i>a lot</i> of tentacle (or stamen) cocks");
-		}
+		if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(3, "TentacleDuel", uniquuuesexscene.alrauneExtraSceneWithHollicyntiaTentacleDuel);
+		else addButtonDisabled(2, "TentacleDuel", "This scene requires to be an alraune of some kind.");
 		addButton(5,"Drink Sap", haveAMapleSyrupSnack);
 		if(flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(6,"Eat A Fruit", eatHolliFruit);
 		else addButtonDisabled(6,"Eat A Fruit");

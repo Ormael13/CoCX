@@ -5,6 +5,7 @@ package classes.Scenes.Combat {
 import classes.BodyParts.Arms;
 import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
@@ -254,6 +255,17 @@ public class CombatUI extends BaseCombatContent {
 				}
 			}
 			addButton(4, "Release", SceneLib.desert.nagaScene.nagaLeggoMyEggo);
+		//Grappling Cancer
+		} else if (monster.hasStatusEffect(StatusEffects.CancerGrab)) {
+			menu();
+			addButton(0, "Guillotine", combat.Guillotine).hint("Crush your foe with your pincer and attempt to break it appart! \n\nFatigue Cost: " + physicalCost(20) + "");
+			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
+				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
+				if (player.fatigueLeft() <= combat.physicalCost(20)) {
+					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+				}
+			}
+			addButton(4, "Release", combat.CrabLeggoMyEggo);
 		//Grappling scylla
 		} else if (monster.hasStatusEffect(StatusEffects.ConstrictedScylla)) {
 			menu();
@@ -286,6 +298,12 @@ public class CombatUI extends BaseCombatContent {
 			menu();
 			addButton(0, "Tease", combat.StraddleTease).hint("Use a powerful teasing attack");
 			addButton(4, "Release", combat.StraddleLeggoMyEggo).hint("Release your opponent.");
+		} else if (monster.hasStatusEffect(StatusEffects.ManticorePlug)) {
+			menu();
+			addButton(0, "Feed", combat.ManticoreFeed).hint("Milk your victim's cock with your powerful tail!");
+		} else if (monster.hasStatusEffect(StatusEffects.DisplacerPlug)) {
+			menu();
+			addButton(0, "Feed", combat.DisplacerFeed).hint("Milk your victim's breast with your tentacles!");
 		} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 			menu();
 			if (monster.statusEffectv1(StatusEffects.Dig) > 0){
@@ -320,7 +338,10 @@ public class CombatUI extends BaseCombatContent {
 			addButton(4, "Release", combat.VampireLeggoMyEggo);
 		} else if (monster.hasStatusEffect(StatusEffects.Pounce)) {
 			menu();
-			addButton(0, "Claws", combat.clawsRend).hint("Rend your enemy using your claws. \n\nFatigue Cost: " + physicalCost(20) + "");
+			if (player.arms.type = Arms.DISPLACER)
+			addButton(0, "Ravage", combat.clawsRend).hint("Rend your enemy using your four sets of claws. \n\nFatigue Cost: " + physicalCost(20) + "");
+			else addButton(0, "Claws", combat.clawsRend).hint("Rend your enemy using your claws. \n\nFatigue Cost: " + physicalCost(20) + "");
+			addButton(1, "Straddle", combat.Straddle).hint("Change position and initiate a straddling stance");
 			if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigueLeft() <= combat.physicalCost(40))) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigueLeft() <= combat.physicalCost(20)))) {
 				button(0).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
 			}

@@ -1048,7 +1048,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Demonic energy thirst
 			if (player.hasStatusEffect(StatusEffects.DemonEnergyThirstFeed)) {
-				player.refillHunger(10, false);
+				if (player.hunger < player.maxHunger())
+				{
+					player.refillHunger(10, false);
+				}
 				if (player.HP < player.maxHP()) {
 					EngineCore.HPChange(100 + (player.tou*2), true);
 				}
@@ -1119,7 +1122,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Kitsune energy thirst
 			if (player.hasStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)) {
-				player.refillHunger(10, false);
+				if (player.hunger < player.maxHunger())
+				{
+					player.refillHunger(10, false);
+				}
 				if (player.HP < player.maxHP()) {
 					EngineCore.HPChange(100 + (player.tou*2), true);
 				}
@@ -1407,15 +1413,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Cancer stance
-			if (player.arms.type == Arms.HUMAN && player.lowerBody == LowerBody.CANCER && !player.hasStatusEffect(StatusEffects.CancerCrabStance) < 0) {
-				outputText("\nEver since your lower body became that of a crab you began instinctively folding your arms and hands like those of a mantis or rather, the pincers of a crab. " +
+			if (player.arms.type == Arms.HUMAN && player.lowerBody == LowerBody.CANCER && !player.hasStatusEffect(StatusEffects.CancerCrabStance)) {
+				outputText("\n\nEver since your lower body became that of a crab you began instinctively folding your arms and hands like those of a mantis or rather, the pincers of a crab. " +
 						"This pose, natural to you, somewhat looks weird or mystical to the onlooker, " +
 						"as if you were taking some form of martial art stance though for you this is just the natural way to rest your limbs.\n");
 				player.createStatusEffect(StatusEffects.CancerCrabStance,0,0,0,0);
 				needNext = true;
 			}
 			//Cancer stance
-			if ((player.arms.type != Arms.HUMAN || player.lowerBody != LowerBody.CANCER) && player.hasStatusEffect(StatusEffects.CancerCrabStance) < 0) {
+			if ((player.arms.type != Arms.HUMAN || player.lowerBody != LowerBody.CANCER) && player.hasStatusEffect(StatusEffects.CancerCrabStance)) {
 				outputText("\nYour body now less crab like, you have stopped folding your arms like one would.\n");
 				player.removeStatusEffect(StatusEffects.CancerCrabStance);
 				needNext = true;
@@ -1581,6 +1587,18 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.tailType != Tail.MANTICORE_PUSSYTAIL && player.findPerk(PerkLib.ManticoreCumAddict) >= 0) {
 				outputText("\nYou suddently feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail. Losing it was perhaps for the best.\n");
 				player.removePerk(PerkLib.ManticoreCumAddict);
+				needNext = true;
+			}
+			//Milk Hunger
+			if (player.rearBody.type == RearBody.DISPLACER_TENTACLES && player.findPerk(PerkLib.DisplacerMilkAddict) < 0) {
+				outputText("\nYou suddenly feel a desire to eat, or rather, drink. It's like you have been thirsty for months, yet the thirst does not originate from your throat. Your tentacles are dying for milks and you feel that as long as you don't sate them, you will only be getting hornier! Milk... You need milk, a lot of it. It’s obvious now why displacer beasts are this crazy for sex as you feel the urge to pounce and feed on every single pair of breast in Mareth you can find!\n");
+				flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] = 50;
+				player.createPerk(PerkLib.DisplacerMilkAddict, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.rearBody.type != RearBody.DISPLACER_TENTACLES && player.findPerk(PerkLib.DisplacerMilkAddict) >= 0) {
+				outputText("\nYou suddently feel like your mind is clear of the constant haze of lust and hunger for the first time since you had these tentacles. Losing them was perhaps for the best.\n");
+				player.removePerk(PerkLib.DisplacerMilkAddict);
 				needNext = true;
 			}
 			//Vampire Thirst

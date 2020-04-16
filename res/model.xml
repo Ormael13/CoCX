@@ -462,7 +462,7 @@
         <cell rect="470,798,173,156" name="legs_fg/hydra4" dx="19" dy="47"/>
         <cell rect="122,956,173,156" name="legs_fg/hydra5" dx="19" dy="47"/>
         <cell rect="296,956,173,156" name="legs_fg/hydra6" dx="19" dy="47"/>
-        <cell rect="371,325,175,119" name="legs_fg/crabtaur" dx="22" dy="65"/>
+        <cell rect="371,325,165,119" name="legs_fg/crabtaur" dx="21" dy="64"/>
         <cell rect="546,325,175,119" name="legs_fg/bugtaur" dx="22" dy="65"/>
         <cell rect="607,101,143,107" name="legs/centaur" dx="47" dy="93"/>
         <cell rect="507,230,125,88" name="legs/cattaur" dx="71" dy="103"/>

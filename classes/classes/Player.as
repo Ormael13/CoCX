@@ -4912,6 +4912,10 @@ use namespace CoC;
 				displacerbeastCounter++;
 			if (findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0)
 				displacerbeastCounter++;
+			if (findPerk(PerkLib.DisplacerMetabolism) >= 0)
+				displacerbeastCounter++;
+			if (findPerk(PerkLib.DisplacerMetabolismEvolved) >= 0)
+				displacerbeastCounter++;
 			if (findPerk(PerkLib.CatlikeNimbleness) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
 				displacerbeastCounter++;
 			if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
@@ -6358,6 +6362,8 @@ use namespace CoC;
 				frostWyrmCounter++;
 			if (hasVagina() && biggestTitSize() >= 3)
 				frostWyrmCounter++;
+			if (lowerBody != LowerBody.FROSTWYRM)
+				frostWyrmCounter=0;
 			if (findPerk(PerkLib.DragonIceBreath) >= 0)
 				frostWyrmCounter++;
 			if (findPerk(PerkLib.DraconicLungs) >= 0)
@@ -9195,6 +9201,14 @@ use namespace CoC;
 				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 10 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) min += 40;
 				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 5) min += 50;
 			}
+			//MilkOMeter
+			if (rearBody.type == RearBody.DISPLACER_TENTACLES && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25) {
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 20) min += 10;
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 20 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 15) min += 20;
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 15 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 10) min += 30;
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 10 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) min += 40;
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 5) min += 50;
+			}
 			//SPOIDAH BOOSTS
 			if(eggs() >= 20) {
 				min += 10;
@@ -11206,6 +11220,9 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.EverywhereAndNowhere)) {
 				removeStatusEffect(StatusEffects.EverywhereAndNowhere);
 			}
+			if(hasStatusEffect(StatusEffects.Displacement)) {
+				removeStatusEffect(StatusEffects.Displacement);
+			}
 			if(hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 				removeStatusEffect(StatusEffects.BlazingBattleSpirit);
 			}
@@ -11813,6 +11830,37 @@ use namespace CoC;
 			refillHunger(100);
 		}
 
+		public function displacerFeed():void
+		{
+			if (findPerk(PerkLib.DisplacerMetabolism) >= 0) {
+				if (hasStatusEffect(StatusEffects.FeedingEuphoria)) {
+					if (findPerk(PerkLib.DisplacerMetabolismEvolved) >= 0) {
+						if (statusEffectv2(StatusEffects.FeedingEuphoria) < (30 + (10 * (1 + newGamePlusMod())))) {
+							addStatusValue(StatusEffects.FeedingEuphoria, 2, 10);
+							dynStats("spe", 10);
+						}
+						changeStatusValue(StatusEffects.FeedingEuphoria, 1, 15);
+					}
+					else {
+						if (statusEffectv2(StatusEffects.FeedingEuphoria) < 30) {
+							addStatusValue(StatusEffects.FeedingEuphoria, 2, 10);
+							dynStats("spe", 10);
+						}
+						changeStatusValue(StatusEffects.FeedingEuphoria, 1, 10);
+					}
+				}
+				else {
+					if (findPerk(PerkLib.DisplacerMetabolismEvolved) >= 0) createStatusEffect(StatusEffects.FeedingEuphoria, 15, 10, 0, 0);
+					else createStatusEffect(StatusEffects.FeedingEuphoria, 10, 10, 0, 0);
+					dynStats("spe", 10);
+				}
+			}
+			EngineCore.HPChange(Math.round(maxHP() * .2), true);
+			cumOmeter(40);
+			cor += 2;
+			refillHunger(100);
+		}
+
 		public function sexReward(fluidtype:String = 'Default', type:String = 'Default', real:Boolean = true, Wasfluidinvolved:Boolean = true):void
 		{
 			if(Wasfluidinvolved)
@@ -11834,6 +11882,10 @@ use namespace CoC;
 					case 'saliva':
 						break;
 					case 'milk':
+						if (hasPerk(PerkLib.ManticoreCumAddict))
+						{
+							displacerFeed();
+						}
 						refillHunger(10, false);
 						break;
 				}

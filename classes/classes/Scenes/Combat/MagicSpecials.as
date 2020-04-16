@@ -451,6 +451,13 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You need more time before you can use Everywhere and nowhere again.\n\n");
 			}
 		}
+		if (player.displacerbeastScore() >= 11) {
+			bd = buttons.add("Displacement", Displacement).hint("Teleport around to avoid your opponents attacks.\n.  \n\nWould go into cooldown after use for: 10 rounds");
+			bd.requireFatigue(physicalCost(30));
+			if (player.hasStatusEffect(StatusEffects.CooldownDisplacement)) {
+				bd.disable("You need more time before you can use Displacement again.\n\n");
+			}
+		}
 		if (player.isNaga() && flags[kFLAGS.SAMIRAH_HYPNOSIS] == 6 && !monster.plural) {
 			bd = buttons.add("Tactical Distraction", TacticalDistraction).hint("Make the target lose its current turn forcing it to interrupt whatever it is doing. \n\nWould go into cooldown after use for: 5 rounds", "Tactical Distraction");
 			if (player.hasStatusEffect(StatusEffects.CooldownTDistraction)) {
@@ -2582,6 +2589,15 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You smirk as you start to phase in and out of existence. Good luck to whoever going to try and hit you because they will have to try extra hard.\n\n");
 		player.createStatusEffect(StatusEffects.EverywhereAndNowhere,6,0,0,0);
 		player.createStatusEffect(StatusEffects.CooldownEveryAndNowhere,10,0,0,0);
+		enemyAI();
+	}
+
+	public function Displacement():void {
+		clearOutput();
+		fatigue(30, USEFATG_PHYSICAL);
+		outputText("You begin teleporting at high speed in order to avoid your opponents strikes\n\n");
+		player.createStatusEffect(StatusEffects.Displacement,6,0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownDisplacement,10,0,0,0);
 		enemyAI();
 	}
 
