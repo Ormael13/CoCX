@@ -8137,11 +8137,11 @@ public class Combat extends BaseContent {
 
     public function RandomTeaseKitsune(Damage:Number):void {
         outputText("With a mischievous grin you coat your hands and tail tip with foxfire running the tingling flames deliciously along the length of [monster a] [monster name] body");
-        if (monster.hasBreasts()) outputText(" your tails tracing [monster his] " + monster.breastDescript(1) + ". ");
-        outputText("You finish [monster him] up by focusing your flames on [monster his] crotch bathing [monster his]");
+        if (monster.hasBreasts()) outputText(", your tails tracing [monster his] " + monster.breastDescript(0) + "");
+        outputText(". You finish [monster him] up by focusing your flames on [monster his] crotch bathing [monster his]");
         if (monster.hasVagina()) outputText(" pussy");
         if (monster.hasCock() && monster.hasVagina()) outputText(" and");
-        if (monster.hasVagina()) outputText(" " + monster.cockDescriptShort() + "");
+        if (monster.hasCock()) outputText(" " + monster.cockDescriptShort() + "");
         outputText(" with fiery lust. Your opponent eventually breaks your concentration by striking you back but nothing prevents you from trying again.");
         Damage *= 1+(((scalingBonusWisdom()) + (scalingBonusIntelligence()))/100);
         Damage = Math.round(Damage);
@@ -8149,7 +8149,7 @@ public class Combat extends BaseContent {
     }
 
     public function RandomTeaseAlraune(Damage:Number):void {
-        outputText("Now that -opponent name- is nicely tied up you giggle and you pull [monster him] into a kiss, " +
+        outputText("Now that [monster a] [monster name] is nicely tied up you giggle and you pull [monster him] into a kiss, " +
                 "feeding [monster him] your aphrodisiac nectar as your hand sweetly traces [monster his] cheek, one of your stamen going straight for");
         if (monster.hasVagina()) outputText(" the waiting love canal up front as another takes aim and plunge into ");
         outputText("his/her waiting backdoor hole stretching the passage up and going as deep as [monster his] bowels. ");
