@@ -79,6 +79,7 @@ public class CharViewContext extends ExecContext {
 
 				// Viewable Clothing lists
 				armStanceNonBannedList: player.armor == game.armors.SSC || player.armor == game.armors.B_QIPAO || player.armor == game.armors.G_QIPAO || player.armor == game.armors.P_QIPAO || player.armor == game.armors.R_QIPAO,
+				ComfyCLothes: player.armor == game.armors.C_CLOTH,
 				yukiDress: player.armor == game.armors.BLIZZ_K,
 				sakuraPetalKimono: player.armor == game.armors.SPKIMO,
 				whiteKimono: player.armor == game.armors.WKIMONO,

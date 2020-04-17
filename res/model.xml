@@ -520,12 +520,14 @@
         <cell rect="1099,216,80,105" name="clothe/purpleKimonoSleeves" dx="54" dy="72"/>
         <cell rect="853,325,80,105" name="clothe/blackKimonoSleeves" dx="54" dy="72"/>
         <cell rect="935,325,80,104" name="clothe/goblinTechnomancerClotheArms" dx="54" dy="72"/>
+        <cell rect="622,445,40,80" name="clothe/comfortableClothes" dx="69" dy="44"/>
         <cell rect="751,158,40,54" name="clotheLegs/whiteKimonoBottom" dx="75" dy="121"/>
         <cell rect="919,158,40,54" name="clotheLegs/blackKimonoBottom" dx="75" dy="121"/>
         <cell rect="1099,325,80,104" name="clotheLegs/goblinTechnomancerClotheBoots" dx="54" dy="72"/>
         <cell rect="1066,158,40,55" name="clotheLegs/scandalousSuccubusClothinglegs" dx="75" dy="120"/>
         <cell rect="1108,158,40,55" name="clotheLegs/scandalousSuccubusClothinglegsLewd" dx="70" dy="119"/>
         <cell rect="1108,158,40,55" name="clotheLegs/scandalousSuccubusClothingTaurTODO" dx="62" dy="96"/>
+        <cell rect="672,445,45,75" name="clotheLegs/comfortableClothes" dx="69" dy="90"/>
         <cell rect="776,12,45,25" name="armorNeck/fullplatetopFemale" dx="70" dy="63"/>
         <cell rect="833,12,45,25" name="armorNeck/fullplatetopMale" dx="70" dy="63"/>
         <cell rect="644,798,173,156" name="armorNeck/WalpurgisClothes" dx="10" dy="12"/>
@@ -814,6 +816,9 @@
         <cell rect="211,410,49,29" name="bra_fg/qipaoBlueBraSmall" dx="69" dy="68"/>
         <cell rect="211,440,49,29" name="bra_fg/qipaoBlueBraMedium" dx="69" dy="68"/>
         <cell rect="211,470,49,29" name="bra_fg/qipaoBlueBraLarge" dx="69" dy="68"/>
+        <cell rect="711,410,49,29" name="bra_fg/comfortableClotheBraSmall" dx="69" dy="68"/>
+        <cell rect="711,440,49,29" name="bra_fg/comfortableClotheBraMedium" dx="69" dy="68"/>
+        <cell rect="711,470,49,29" name="bra_fg/comfortableClotheBraLarge" dx="69" dy="68"/>
         <cell rect="11,410,49,29" name="bra/goblinTechnomancerBraSmall" dx="69" dy="68"/>
         <cell rect="11,440,49,29" name="bra/goblinTechnomancerBraMedium" dx="69" dy="68"/>
         <cell rect="11,470,49,29" name="bra/goblinTechnomancerBraLarge" dx="69" dy="68"/>
@@ -3525,6 +3530,44 @@
 				</if>
 			</if>
 		</if>
+
+
+        <if test="ComfyCLothes">
+            <if test="showClothing">
+                <show part="clothe/comfortableClothes"/>
+                <if test="breastRows.length gt 0">
+                    <switch>
+                        <case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+                            <show part="bra_fg/comfortableClotheBraSmall"/>
+                        </case>
+                        <case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+                            <show part="bra/comfortableClotheBraSmall"/>
+                        </case>
+                        <case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+                            <show part="bra/comfortableClotheBraMedium"/>
+                        </case>
+                        <case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+                            <show part="bra/comfortableClotheBraMedium"/>
+                        </case>
+                        <case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+                            <show part="bra/comfortableClotheBraLarge"/>
+                        </case>
+                        <default>
+                            <show part="bra/comfortableClotheBraLarge"/>
+                        </default>
+                    </switch>
+                </if>
+                <if test="showLegClothing">
+                    <if test="isTaur()">
+                        <else>
+                            <show part="clotheLegs/comfortableClothes"/>
+                            <hide part="penis/*"/>
+                            <hide part="balls/*"/>
+                        </else>
+                    </if>
+                </if>
+            </if>
+        </if>
 		
 		
 		<!--Quipao set -->

@@ -935,8 +935,8 @@ public class Combat extends BaseContent {
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleeattacksCost += 6;
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleeattacksCost += 2;
                 if (player.hasStatusEffect(StatusEffects.BladeDance) || player.weaponPerk == "Dual") {
-                    if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) mutlimeleelargeattacksCost += 2;
-                    else mutlimeleelargeattacksCost *= 2;
+                    if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) multimeleelargeattacksCost += 2;
+                    else multimeleelargeattacksCost *= 2;
                     flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
                 }
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
@@ -971,17 +971,17 @@ public class Combat extends BaseContent {
                     else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
                 } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
                 if (player.statusEffectv1(StatusEffects.CounterAction) > 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = player.statusEffectv1(StatusEffects.CounterAction);
-                var mutlimeleelargeattacksCost:Number = 0;
+                var multimeleelargeattacksCost:Number = 0;
                 //multiple melee large attacks costs
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleelargeattacksCost += 9;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleelargeattacksCost += 3;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) multimeleelargeattacksCost += 9;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) multimeleelargeattacksCost += 3;
                 if (player.weaponPerk == "Dual Large") {
-                    if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) mutlimeleelargeattacksCost += 3;
-                    else mutlimeleelargeattacksCost *= 2;
+                    if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) multimeleelargeattacksCost += 3;
+                    else multimeleelargeattacksCost *= 2;
                     flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
                 }
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
-                    if (player.wrath < mutlimeleelargeattacksCost) {
+                    if (player.wrath < multimeleelargeattacksCost) {
                         if (player.weaponPerk == "Dual Large") {
                             outputText("You're too <b>'calm'</b> to attack more than twice in this turn!\n\n");
                             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
@@ -991,7 +991,7 @@ public class Combat extends BaseContent {
                             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
                         }
                     } else {
-                        player.wrath -= mutlimeleelargeattacksCost;
+                        player.wrath -= multimeleelargeattacksCost;
                         if (player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && player.weaponPerk == "Dual Large") {
                             if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 9) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 4;
                             else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
@@ -1030,30 +1030,30 @@ public class Combat extends BaseContent {
                     if (player.hasPerk(PerkLib.DoubleAttackSmall)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
                     else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
                 } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                var mutlimeleesmallattacksCost:Number = 0;
+                var multimeleesmallattacksCost:Number = 0;
                 //multiple melee small attacks costs
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 10) mutlimeleesmallattacksCost += 45;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 9) mutlimeleesmallattacksCost += 36;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 8) mutlimeleesmallattacksCost += 28;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 7) mutlimeleesmallattacksCost += 21;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 6) mutlimeleesmallattacksCost += 15;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) mutlimeleesmallattacksCost += 10;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 4) mutlimeleesmallattacksCost += 6;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleesmallattacksCost += 3;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleesmallattacksCost += 1;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 10) multimeleesmallattacksCost += 45;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 9) multimeleesmallattacksCost += 36;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 8) multimeleesmallattacksCost += 28;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 7) multimeleesmallattacksCost += 21;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 6) multimeleesmallattacksCost += 15;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) multimeleesmallattacksCost += 10;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 4) multimeleesmallattacksCost += 6;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) multimeleesmallattacksCost += 3;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) multimeleesmallattacksCost += 1;
                 if (player.weaponPerk == "Dual Small") {
-                    if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) mutlimeleelargeattacksCost += 1;
-                    else mutlimeleelargeattacksCost *= 2;
+                    if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) multimeleelargeattacksCost += 1;
+                    else multimeleelargeattacksCost *= 2;
                 }
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
-                    if (player.wrath < mutlimeleesmallattacksCost) {
+                    if (player.wrath < multimeleesmallattacksCost) {
                         if (player.weaponPerk == "Dual Small") {
                             outputText("You're too <b>'calm'</b> to attack more than twice in this turn!\n\n");
                             player.HP -= 10;
                         } else outputText("You're too <b>'calm'</b> to attack more than once in this turn!\n\n");
                         flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
                     } else {
-                        player.wrath -= mutlimeleesmallattacksCost;
+                        player.wrath -= multimeleesmallattacksCost;
                         if (player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && player.weaponPerk == "Dual Small") {
                             if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 8) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 3;
                             else if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 4) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
@@ -1090,22 +1090,22 @@ public class Combat extends BaseContent {
                     else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
                 } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
                 if (player.statusEffectv1(StatusEffects.CounterAction) > 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = player.statusEffectv1(StatusEffects.CounterAction);
-                var mutlimeleefistattacksCost:Number = 0;
+                var multimeleefistattacksCost:Number = 0;
                 //multiple melee unarmed attacks costs
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) mutlimeleefistattacksCost += 10;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 4) mutlimeleefistattacksCost += 6;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleefistattacksCost += 3;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleefistattacksCost += 1;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) multimeleefistattacksCost += 10;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 4) multimeleefistattacksCost += 6;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) multimeleefistattacksCost += 3;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) multimeleefistattacksCost += 1;
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
-                    if (player.fatigue + mutlimeleefistattacksCost <= player.maxFatigue()) {
-                        if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) fatigue(mutlimeleefistattacksCost);
+                    if (player.fatigue + multimeleefistattacksCost <= player.maxFatigue()) {
+                        if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) fatigue(multimeleefistattacksCost);
                         else {
-                            if (player.soulforce < mutlimeleefistattacksCost * 3) {
+                            if (player.soulforce < multimeleefistattacksCost * 3) {
                                 outputText("Your current soulforce is too low to attack more than once in this turn!\n\n");
                                 flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
                             } else {
-                                fatigue(mutlimeleefistattacksCost);
-                                player.soulforce -= mutlimeleefistattacksCost * 3;
+                                fatigue(multimeleefistattacksCost);
+                                player.soulforce -= multimeleefistattacksCost * 3;
                             }
                         }
                     } else {
@@ -2501,7 +2501,7 @@ public class Combat extends BaseContent {
                 else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
                 else damage = Math.round(damage * 1.4);
             }
-            if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion == true) && (MSGControll == false)) {
+            if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll)) {
                 //if (damage == 0) {
                 if (monster.inte > 0) {
                     outputText(monster.capitalA + monster.short + " shrugs as the [weaponrange] bounces off them harmlessly.\n\n");
@@ -2595,7 +2595,7 @@ public class Combat extends BaseContent {
                 else if (monster.plural)
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-                damage = doDamage(damage, true, true);
+                doDamage(damage, true, true);
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
                 outputText("\n\n");
                 doNext(endHpVictory);
@@ -2628,7 +2628,6 @@ public class Combat extends BaseContent {
         }
         if (monster.lust >= monster.maxLust()) {
             doNext(endLustVictory);
-            return;
         } else if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) {
             flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
             flags[kFLAGS.ARROWS_ACCURACY] += 15;
@@ -2738,7 +2737,7 @@ public class Combat extends BaseContent {
                     }
                 }
             }
-            if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion == true) && (MSGControll == false)) {
+            if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll)) {
                 //if ((damage == 0) ){
                 if (monster.inte > 0) {
                     outputText(monster.capitalA + monster.short + " shrugs as the " + ammoWord + " bounces off them harmlessly.\n\n");
@@ -2862,7 +2861,7 @@ public class Combat extends BaseContent {
                         damage = doDamage(damage, true, true);
                         if (crit) outputText(" <b>*Critical Hit!*</b>");
                         outputText(" ");
-                        damage = doDamage(damage, true, true);
+                        doDamage(damage, true, true);
                         if (crit) outputText(" <b>*Critical Hit!*</b>");
                     }
                 }
@@ -2874,7 +2873,7 @@ public class Combat extends BaseContent {
                     outputText(".  It's clearly very painful. ");
                     damage = doDamage(damage, true, true);
                 } else {
-                    if (MSGControll == false) {
+                    if (!MSGControll) {
                         outputText(".  It's clearly very painful. ");
                         damage = doDamage(damage, true, true);
                     }
@@ -3514,7 +3513,7 @@ public class Combat extends BaseContent {
                     default:
                 }
             }
-            if ((damage <= 0) && ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion == true) && (MSGControll == false))) {
+            if ((damage <= 0) && ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll))) {
                 damage = 0;
                 outputText("Your attacks are deflected or blocked by [monster a] [monster name].");
             } else {
@@ -4008,7 +4007,6 @@ public class Combat extends BaseContent {
                 player.takePhysDamage(20);
                 if (player.HP <= player.minHP()) {
                     doNext(endHpLoss);
-                    return;
                 }
             }
         }
@@ -4196,7 +4194,10 @@ public class Combat extends BaseContent {
             var times:int = 1;
             var lock:Boolean = false; // when false - enemy SPE greater
             // threshold math
-            if (isBowDamageMDO) lower_threshold = 25, higher_threshold = 125; // Bow damage would have higher difference than melee.
+            if (isBowDamageMDO) {
+                lower_threshold = 25;
+                higher_threshold = 125;
+            } // Bow damage would have higher difference than melee.
             percent = player.spe / 100; // this var is needed for comprehension Player SPE and Monster SPE in % difference
             percent = Math.round(monster.spe / percent) - 100; // this operation give us info how bigger/smaller monster SPE in comprehension with player SPE
             if (percent > 20) {
@@ -5846,7 +5847,7 @@ public class Combat extends BaseContent {
             } else {
                 var frozenlung:Number = player.maxHP() * player.statusEffectv2(StatusEffects.FrozenLung);
                 outputText("You are hurt by lingering Frozen Lung after-effect. ");
-                player.takeIceDamage(frostburnPlayer, true);
+                player.takeIceDamage(frozenlung, true);
                 outputText("\n\n");
             }
         }
@@ -7930,7 +7931,7 @@ public class Combat extends BaseContent {
         var damagemultiplier:Number = 1;
         if (player.hasPerk(PerkLib.ElectrifiedDesire)) damagemultiplier += player.lust100 * 0.01;
         if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
-        if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
+        if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
         if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
         if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
         damage *= damagemultiplier;
@@ -8275,7 +8276,6 @@ public class Combat extends BaseContent {
         outputText("\n\n");
         enemyAI();
     }
-
 
     public function ScyllaSqueeze():void {
         clearOutput();
@@ -8752,7 +8752,7 @@ public class Combat extends BaseContent {
             damage = Math.round(damage);
             var damagemultiplier:Number = 1;
             if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += historyWhoreBonus();
-            if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
+            if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
             if (player.hasPerk(PerkLib.SuperSensual)) damagemultiplier += 0.5;
             if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= 1.50;
             if (player.hasPerk(PerkLib.Apex)) damagemultiplier *= 1.50;
@@ -8875,7 +8875,7 @@ public class Combat extends BaseContent {
             damage = Math.round(damage);
             var damagemultiplier:Number = 1;
             if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += historyWhoreBonus();
-            if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
+            if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
             if (player.hasPerk(PerkLib.SuperSensual)) damagemultiplier += 0.5;
             if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= 1.50;
             if (player.hasPerk(PerkLib.Apex)) damagemultiplier *= 1.50;
@@ -9149,8 +9149,8 @@ public class Combat extends BaseContent {
         if (player.inRut && monster.cockTotal() > 0) {
             clearOutput();
             outputText("The thought of another male in your area competing for all the pussy infuriates you!  No way will you run!");
-//Pass false to combatMenu instead:		menuLoc = 3;
-//		doNext(combatMenu);
+            //Pass false to combatMenu instead:		menuLoc = 3;
+            //		doNext(combatMenu);
             menu();
             addButton(0, "Next", combatMenu, false);
             return;
