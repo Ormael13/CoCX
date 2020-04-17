@@ -867,10 +867,10 @@ public class PerkLib
 				"You choose the 'Diehard' perk, allowing to contiue fight even when below 0 HP.");
 		public static const DisplacerMetabolism:PerkType = mk("Displacer Metabolism", "Displacer Metabolism",
 				"Allows you to gain a boost of speed for a few hours after an intake of cum and allow attack twice with tail spike per turn.",
-				"You choose the 'Displacer Metabolism' perk, allows you to gain a boost of speed after an intake of milk and double the damage of claws attacks.");
+				"You choose the 'Displacer Metabolism' perk, allows you to gain a boost of speed after an intake of milk and double the damage of displacer beast claws attacks.");
 		public static const DisplacerMetabolismEvolved:PerkType = mk("Displacer Metabolism (Evolved)", "Displacer Metabolism (Evolved)",
 				"Increase by (10 * NG tier) boost of speed for a five hours longer after an intake of milk and increase max Hunger cap by 50 (if PC have Hunger bar active).",
-				"You choose the 'Displacer Metabolism (Evolved)' perk, allows you to increase max boost of speed after an intake of milk and keeping it for 50% longer. Alse triple the damage of claws attacks.");
+				"You choose the 'Displacer Metabolism (Evolved)' perk, allows you to increase max boost of speed after an intake of milk and keeping it for 50% longer. Alse triple the damage of displacer beast claws attacks.");
 		public static const Doctor:PerkType = mk("Doctor", "Doctor",
 				"You got promoted to a doctor, allowing you to cure a wider variety of ailments. This knowledge allows you to heal yourself better, increasing health regen.",
 				"You choose the 'Doctor' perk, increasing HP gains by 20%.");
@@ -4711,7 +4711,7 @@ public class PerkLib
 			Straddle.requirePerk(JobCourtesan)
 					.requireLib(75)
 					.requireLevel(12);
-			StraddleImproved.requirePerk(JobCourtesan)
+			StraddleImproved.requirePerk(Straddle)
 					.requireLib(150)
 					.requireLevel(24);
             RapidReload.requirePerk(JobGunslinger)

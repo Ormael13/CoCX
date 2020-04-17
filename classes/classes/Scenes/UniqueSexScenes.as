@@ -17,7 +17,6 @@ package classes.Scenes
 		{
 		}
 
-
 		public function alrauneExtraSceneWithHollicyntiaTentacleDuel():void {
 			clearOutput();
 			outputText("As you ponder how you will deal with Hollicyntia’s behaviour today, you catch a glimpse of her checking out your vines. Holli seems to be comparing her vines with yours, evaluating size and length thoroughly like a boy in a shower room. As if that upstart could rival your floral perfection!\n\n");
