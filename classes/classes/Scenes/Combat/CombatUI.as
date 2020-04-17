@@ -338,7 +338,7 @@ public class CombatUI extends BaseCombatContent {
 			addButton(4, "Release", combat.VampireLeggoMyEggo);
 		} else if (monster.hasStatusEffect(StatusEffects.Pounce)) {
 			menu();
-			if (player.arms.type = Arms.DISPLACER)
+			if (player.arms.type == Arms.DISPLACER)
 			addButton(0, "Ravage", combat.clawsRend).hint("Rend your enemy using your four sets of claws. \n\nFatigue Cost: " + physicalCost(20) + "");
 			else addButton(0, "Claws", combat.clawsRend).hint("Rend your enemy using your claws. \n\nFatigue Cost: " + physicalCost(20) + "");
 			if (player.hasPerk(PerkLib.Straddle)) addButton(1, "Straddle", combat.Straddle).hint("Change position and initiate a straddling stance");

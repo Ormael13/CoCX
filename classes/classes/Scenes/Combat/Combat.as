@@ -823,8 +823,8 @@ public class Combat extends BaseContent {
             if (player.findPerk(PerkLib.DisplacerMetabolism) >= 0) unarmed += 6 * (1 + player.newGamePlusMod());
             if (player.findPerk(PerkLib.DisplacerMetabolismEvolved) >= 0) unarmed += 6 * (1 + player.newGamePlusMod());
         }
-        if (player.arms.type == Arms.CAT) unarmed += 6 * (1 + player.newGamePlusMod());
-        if (player.arms.type == Arms.LION) unarmed += 6 * (1 + player.newGamePlusMod());
+        if (player.arms.type == Arms.CAT || player.arms.type == Arms.LION) unarmed += 6 * (1 + player.newGamePlusMod());
+        if (player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LION) unarmed += 6 * (1 + player.newGamePlusMod());
         if (player.lowerBody == LowerBody.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
         if (player.lowerBody == LowerBody.BEAR) unarmed += 5 * (1 + player.newGamePlusMod());
         if (player.lowerBody == LowerBody.CANCER) unarmed += 12 * (1 + player.newGamePlusMod());
@@ -1146,7 +1146,7 @@ public class Combat extends BaseContent {
         willothewispDamage = Math.round(willothewispDamage);
         outputText("Your will-o'-the-wisp hit [monster a] [monster name]! ");
         doMagicDamage(willothewispDamage, true, true);
-        if (crit == true) outputText(" <b>Critical! </b>");
+        if (crit) outputText(" <b>Critical! </b>");
         outputText("\n\n");
         //checkMinionsAchievementDamage(elementalDamage);
         if (flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1 && flags[kFLAGS.WILL_O_THE_WISP] == 0) {
@@ -1331,7 +1331,7 @@ public class Combat extends BaseContent {
                 doDamage(elementalDamage, true, true);
                 break;
         }
-        if (crit == true) outputText(" <b>Critical! </b>");
+        if (crit) outputText(" <b>Critical! </b>");
         outputText("\n\n");
         //checkMinionsAchievementDamage(elementalDamage);
         if (monster.HP >= 1 && monster.lust <= monster.maxLust()) {
@@ -1516,11 +1516,11 @@ public class Combat extends BaseContent {
             outputText("You activate the mech’s saw blade, intent on slicing your opponent in half. " + monster.capitalA + monster.short + " takes ");
             damage = doDamage(damage, true, true);
             outputText(" damage.");
-            if (crit == true) {
+            if (crit) {
                 outputText("<b>Critical! </b>");
                 if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
             }
-            if (crit == false && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+            if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
                 if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
                 else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
             }
@@ -2286,7 +2286,7 @@ public class Combat extends BaseContent {
                 else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) damage = doLightingDamage(damage, true, true);
                 else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) damage = doDarknessDamage(damage, true, true);
                 else damage = doDamage(damage, true, true);
-                if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+                if (crit) outputText(" <b>*Critical Hit!*</b>");
                 outputText("\n\n");
                 checkAchievementDamage(damage);
                 flags[kFLAGS.ARROWS_SHOT]++;
@@ -2298,7 +2298,7 @@ public class Combat extends BaseContent {
                     monster.createStatusEffect(StatusEffects.Blind, 3, 0, 0, 0);
                     outputText(",  your radiant shots blinded [monster he]");
                 }
-                if (MSGControll == false) {
+                if (!MSGControll) {
                     outputText(".  It's clearly very painful. ");
                     if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) damage = doFireDamage(damage, true, true);
                     else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) damage = doIceDamage(damage, true, true);
@@ -2836,34 +2836,34 @@ public class Combat extends BaseContent {
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
                 damage = doDamage(damage, true, true);
-                if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+                if (crit) outputText(" <b>*Critical Hit!*</b>");
                 if (player.weaponRange == weaponsrange.TOUHOM3) {
                     outputText(" ");
                     damage = doDamage(damage, true, true);
-                    if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+                    if (crit) outputText(" <b>*Critical Hit!*</b>");
                     if (player.hasPerk(PerkLib.AmateurGunslinger)) {
                         outputText(" ");
                         damage = doDamage(damage, true, true);
-                        if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+                        if (crit) outputText(" <b>*Critical Hit!*</b>");
                         outputText(" ");
                         damage = doDamage(damage, true, true);
-                        if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+                        if (crit) outputText(" <b>*Critical Hit!*</b>");
                     }
                     if (player.hasPerk(PerkLib.ExpertGunslinger)) {
                         outputText(" ");
                         damage = doDamage(damage, true, true);
-                        if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+                        if (crit) outputText(" <b>*Critical Hit!*</b>");
                         outputText(" ");
                         damage = doDamage(damage, true, true);
-                        if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+                        if (crit) outputText(" <b>*Critical Hit!*</b>");
                     }
                     if (player.hasPerk(PerkLib.MasterGunslinger)) {
                         outputText(" ");
                         damage = doDamage(damage, true, true);
-                        if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+                        if (crit) outputText(" <b>*Critical Hit!*</b>");
                         outputText(" ");
                         damage = doDamage(damage, true, true);
-                        if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+                        if (crit) outputText(" <b>*Critical Hit!*</b>");
                     }
                 }
                 outputText("\n\n");
@@ -2878,7 +2878,7 @@ public class Combat extends BaseContent {
                         outputText(".  It's clearly very painful. ");
                         damage = doDamage(damage, true, true);
                     }
-                    if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+                    if (crit) outputText(" <b>*Critical Hit!*</b>");
                     //	if (flaga dla efektu arouse arrow) outputText(" tekst dla arouse arrow effect.");
                     //	if (flaga dla efektu poison arrow) outputText(" tekst dla poison arrow effect.");
                 }
@@ -3271,7 +3271,7 @@ public class Combat extends BaseContent {
                     if (rand(2) == 0) outputText("You slice through the air with your cane, completely missing your enemy.");
                     else outputText("You lunge at your enemy with the cane.  It glows with a golden light but fails to actually hit anything.");
                 }
-                if (MSGControll == false) {
+                if (!MSGControll) {
                     if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
                     if (monster.spe - player.spe >= 8 && monster.spe - player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
                     if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
@@ -3594,22 +3594,22 @@ public class Combat extends BaseContent {
                         damage = damage * 0.33 * monster.lustVuln;
                         damage = Math.round(damage);
                         monster.teased(damage);
-                        if (crit1 == true) outputText(" <b>Critical!</b>");
+                        if (crit1) outputText(" <b>Critical!</b>");
                         outputText(" ");
                         if (player.hasPerk(PerkLib.SuperSensual) && player.hasPerk(PerkLib.Sensual)) teaseXP(2);
                         else teaseXP(1);
                     }
-                } else if (vbladeeffect == true) outputText("As you strike, the sword shine with a red glow as somehow you aim straight for [monster a] [monster name] throat. ");
+                } else if (vbladeeffect) outputText("As you strike, the sword shine with a red glow as somehow you aim straight for [monster a] [monster name] throat. ");
                 else if (MDODialogs) {
 
-                } else if (MSGControll == false) {
+                } else if (!MSGControll) {
                     outputText("You hit [monster a] [monster name]! "); // for not displaying the same msg a lot of times.
                 }
-                if (crit == true) {
+                if (crit) {
                     outputText("<b>Critical! </b>");
                     if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
                 }
-                if (crit == false && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+                if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
                     if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
                     else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
                 }
@@ -3938,7 +3938,7 @@ public class Combat extends BaseContent {
         //40% Stun chance
         if (player.weapon == weapons.BFGAUNT && player.hasPerk(PerkLib.MightyFist)) stunChance += 40;
         if ((rand(100) < stunChance) && !monster.hasPerk(PerkLib.Resolute)) stun = true;
-        if (stun == true) {
+        if (stun) {
             outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
             if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
                 if (player.weapon == weapons.ZWNDER || player.weapon == weapons.UDKDEST) monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
@@ -3953,7 +3953,7 @@ public class Combat extends BaseContent {
         if (player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2) bleedChance += 100;
         if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType)) bleedChance = 0;
         if (rand(100) < bleedChance) bleed = true;
-        if (bleed == true) {
+        if (bleed) {
             if (monster.hasPerk(PerkLib.EnemyConstructType)) {
                 if (monster is LivingStatue) outputText("Despite the rents you've torn in its stony exterior, the statue does not bleed.");
                 else outputText("Despite the rents you've torn in its exterior, [monster a] [monster name] does not bleed.");
@@ -4282,7 +4282,7 @@ public class Combat extends BaseContent {
                     if ((random_value > 100) && (random_value < higher_threshold)) outputText("Your mighty blow made [monster a] [monster name] stagger for a moment! ");
                     if (random_value == higher_threshold) outputText("Nimbly shortening the distance, you hit [monster a] [monster name] with overwhelming power! ");
                 } else if (!lock) {
-                    if (random_value <= 20) outputText("You hit your opponent, but defence stance of [monster a] [monster name] almost totally absorbed your attack. ")
+                    if (random_value <= 20) outputText("You hit your opponent, but defence stance of [monster a] [monster name] almost totally absorbed your attack. ");
                     if ((random_value > 20) && (random_value <= 40)) outputText("You hit [monster a] [monster name], but [monster.pronoun1] moves so deft that yours strike loses most of its strenght. ");
                     if ((random_value > 40) && (random_value <= 70)) outputText("As you hurtle toward [monster a] [monster name], you draw your weapon and prepare to hit. Getting close enough, you swing and crush your [weapon] onto [monster.pronoun2]. No matter how agile your foe is, [monster.pronoun1] wasn't able to evade your attack! ");
                     if ((random_value > 70) && (random_value <= 85)) outputText("You take the [weapon] in steady grip of your hands and widely swing at the foe. " + firstLetterUpperCase("[monster a]") + " [monster name] predicted your attack, but you manage to change it's trajectory just in time! ");
@@ -5502,7 +5502,7 @@ public class Combat extends BaseContent {
                 outputText("Your aura of purity burns [monster a] [monster name] with holy fire for ");
                 doFireDamage(damage, true, true);
                 outputText(" damage!");
-                if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+                if (crit) outputText(" <b>*Critical Hit!*</b>");
                 outputText("\n\n");
             } else {
                 outputText("Your opponent seems not to be affected by the cleansing flames of your aura of purity. Probably because [monster he] has no corruption within [monster his] body.");
@@ -8143,7 +8143,7 @@ public class Combat extends BaseContent {
         if (monster.hasCock() && monster.hasVagina()) outputText(" and");
         if (monster.hasCock()) outputText(" " + monster.cockDescriptShort() + "");
         outputText(" with fiery lust. Your opponent eventually breaks your concentration by striking you back but nothing prevents you from trying again.");
-        Damage *= 1+(((scalingBonusWisdom()) + (scalingBonusIntelligence()))/100);
+        Damage *= 1+((scalingBonusWisdom() + scalingBonusIntelligence())/100);
         Damage = Math.round(Damage);
         monster.teased(monster.lustVuln * Damage, false);
     }
@@ -8159,7 +8159,7 @@ public class Combat extends BaseContent {
                 "begins trashing about eventualy forcing [monster him]self out of your grip with enough strenght to force the both of you back into the previous position. " +
                 "You will mate eventually… it's just a matter of time now.");
         //(Add a toughness modifier and double lust damage)
-        Damage *= 1+(scalingBonusToughness()*4/100);
+        Damage *= 1+(scalingBonusToughness()*2/100);
         Damage = Math.round(Damage);
         Damage *= 2;
         monster.teased(monster.lustVuln * Damage, false);
@@ -8167,7 +8167,7 @@ public class Combat extends BaseContent {
 
     public function RandomTeaseLiliraune(Damage:Number):void {
         outputText("");
-        Damage *= 1+(scalingBonusToughness()*4/100);
+        Damage *= 1+(scalingBonusToughness()*2/100);
         Damage = Math.round(Damage);
         Damage *= 2;
         monster.teased(monster.lustVuln * Damage, false);
@@ -8480,7 +8480,7 @@ public class Combat extends BaseContent {
                 }
                 if (player.hasPerk(PerkLib.KrakenBlackDress)) damage *= 2;
                 monster.teased(monster.lustVuln * damage);
-                if (crit == true) outputText(" <b>Critical!</b>");
+                if (crit) outputText(" <b>Critical!</b>");
                 teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             }
             //Nuttin honey
@@ -8651,7 +8651,7 @@ public class Combat extends BaseContent {
                     damage *= 1.75;
                 }
                 monster.teased(monster.lustVuln * damage);
-                if (crit == true) outputText(" <b>Critical!</b>");
+                if (crit) outputText(" <b>Critical!</b>");
                 teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             }
             //Nuttin honey
@@ -9559,7 +9559,7 @@ public class Combat extends BaseContent {
             } else outputText(" hitting your target with violence ");
         }
         if (player.hasPerk(PerkLib.SpiritedDive)) {
-            if (monster.plural == true) damage *= 5;
+            if (monster.plural) damage *= 5;
             else damage *= 1.5;
         }
         var crit:Boolean = false;
@@ -9581,11 +9581,11 @@ public class Combat extends BaseContent {
         }
         damage = Math.round(damage);
         damage = doDamage(damage, true, true);
-        if (crit == true) {
+        if (crit) {
             outputText("<b>Critical! </b>");
             if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
         }
-        if (crit == false && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+        if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
             if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
             else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
         }
