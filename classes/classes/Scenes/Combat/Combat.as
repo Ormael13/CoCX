@@ -8052,9 +8052,9 @@ public class Combat extends BaseContent {
     }
 
     public function RandomTeaseViolateOpponentBreast(Damage:Number):void {
-        outputText("You begin to groppe [monster a] [monster name] " + monster.breastDescript(1) + " with both hands, licking the areola and smirking knowingly as the tips hardens in reaction. " +
+        outputText("You begin to groppe [monster a] [monster name] " + monster.breastDescript(0) + " with both hands, licking the areola and smirking knowingly as the tips hardens in reaction. " +
                 "[monster a] [monster name] moans coax you in doubling up the attention your tongue circling a nipple then moving to the other. " +
-                "It takes great effort from [monster a] [monster name] to snap out and force you off his/her tormented chest but this blush you spy on [monster his] cheeks definitively was worth it.");
+                "It takes great effort from [monster a] [monster name] to snap out and force you off [monster his] tormented chest but this blush you spy on [monster his] cheeks definitively was worth it.");
         monster.teased(monster.lustVuln * Damage);
     }
 
