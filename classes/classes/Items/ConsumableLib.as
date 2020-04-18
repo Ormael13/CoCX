@@ -201,6 +201,7 @@ public final class ConsumableLib extends BaseContent
 		public const DEBIMBO:DeBimbo = new DeBimbo();
 		public const EXTSERM:HairExtensionSerum = new HairExtensionSerum();
 		public const F_DRAFT:SimpleConsumable = mk("F.Draft", "FuckDraft", "a vial of roiling red fluid labeled \"Fuck Draft\"", 6, "This vial of red fluid bubbles constantly inside the glass, as if eager to escape.  It smells very strongly, though its odor is difficult to identify.  The word \"Fuck\" is inscribed on the side of the vial.", curry(m.lustDraft, true));
+		public const F_TEAR:SimpleConsumable = mk("F.Tear", "FafnirTear", "a Fafnir Tear", 15, "This beautiful flower only grows in the snow. It somehow digs its way and survives even in the harsh climate of the rift.", m.FafnirTear);
 		public const INCOINS:SimpleConsumable = mk("IncOIns", "IncenOfIns", "an incense of Insight", 15, "These sticks, when burned, are rumored to fill an area with an incense that allows for deep meditation and granting greater insight.", m.incenseOfInsight);
 		public const H_PILL:Consumable = new HealPill();
 		public const MH_PILL:SimpleConsumable = mk("MH.Pill", "M.Heal Pill", "a medium healing pill", 15, "A medium healing pill that's guaranteed to heal you by a bit.", m.mediumhealpill);
@@ -242,6 +243,7 @@ public final class ConsumableLib extends BaseContent
 		public const BLACKPP:SimpleConsumable = mk("BlackPp", "BlackPp", "a solid black canine pepper", 10, "This solid black canine pepper is smooth and shiny, but something about it doesn't seem quite right...", curry(m.caninePepper, 3));
 		public const BLADEGR:SimpleConsumable = mk("BladeGr", "BladeGrass", "a blade shaped grass", 6, "A form of herb normaly infused in samurai and other warrior tea.  You think infusing this unprocessed item in your tea could result in interesting result.", m.bladeGrass);
 		public const BOARTRU:SimpleConsumable = mk("BoarTru", "BoarTruffle", "a boar truffle", 6, "It’s clear where the pigtail truffle gets its name.  A small, curly sprig resembling a pig’s tail can be seen jutting out of it. Now that it’s been enhanced by Lumi, it’s larger and fuzzier than it was before, almost like a peach.", curry(m.pigTruffle, true));
+		public const BUBBLEG:SimpleConsumable = mk("B.Gum", "B.Gum", "a bubblegum candy", 6, "A somewhat innocent pink spherical candy favored by cancers.", m.bubblegum);
 		public const BULBYPP:SimpleConsumable = mk("BulbyPp", "BulbyPp", "a bulbous pepper", 10, "This bulbous pepper has a slightly different shape than the other canine peppers, with two large orb-like protrusions at the base.", curry(m.caninePepper, 5));
 		public const CANINEP:SimpleConsumable = mk("CanineP", "CanineP", "a Canine pepper", 6, "The pepper is shiny and red, bulbous at the base but long and narrow at the tip.  It smells spicy.", curry(m.caninePepper, 0));
 		public const CENTARI:Centaurinum = new Centaurinum();

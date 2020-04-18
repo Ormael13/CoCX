@@ -38,15 +38,14 @@ public class PinchousWaterwearAndTools extends BaseContent
 			menu();
 			//crab tf - 0
 			addButton(1, consumables.ORCASUN.shortName, itemBuy, consumables.ORCASUN);
-			addButton(2, weapons.TRIDENT.shortName, itemBuy, weapons.TRIDENT);
+			addButton(2, consumables.BUBBLEG.shortName, itemBuy, consumables.BUBBLEG);
 			addButton(3, consumables.BLACKIN.shortName, itemBuy, consumables.BLACKIN);
-			//kraken tf - 4
+			addButton(4, weapons.TRIDENT.shortName, itemBuy, weapons.TRIDENT);
 			addButton(5, consumables.AIRWEED.shortName, itemBuy, consumables.AIRWEED);
 			addButton(6, necklaces.MCPNECK.shortName, itemBuy, necklaces.MCPNECK);
 			addButton(7, shields.BATTNET.shortName, itemBuy, shields.BATTNET);
 			addButton(8, headjewelries.AQBREATH.shortName, itemBuy, headjewelries.AQBREATH);
 			addButton(9, armors.KBDRESS.shortName, itemBuy, armors.KBDRESS);
-			//kraken dress - 9
 			addButton(10, "Bikini", PinchousWaterwearAndToolsShopBikiniMenu);
 			addButton(14, "Leave", leavePinchousWaterwearAndToolsShop);
 		}
@@ -71,6 +70,7 @@ public class PinchousWaterwearAndTools extends BaseContent
 			clearOutput();
 			switch (itype) {
 				case consumables.ORCASUN:		outputText("\"<i>A bottle of sunscreen lotion to protect against those annoying sunburns. That said its an item made for orca morphs who favor sunbathing. You might want to take precautions. Anyway it’s " + itype.value + " gems each.</i>\""); break;
+				case consumables.BUBBLEG:		outputText("\"<i>Just a very ordinary candy, I eat these all the time but I’ve never seen an outsider take these. You might want to take precautions. Anyway it’s " + itype.value + " gems each.</i>\""); break;
 				case weapons.TRIDENT:			outputText("\"<i>That is a trident… useful for catching fish or fighting underwater. I can part with it for " + itype.value + " gems.</i>\""); break;
 				case consumables.BLACKIN:		outputText("\"<i>This is standard calligraphy equipment, you know to write stuff. However I heard that if consumed weird things can happens. You might want to take precautions. Anyway it’s " + itype.value + " gems each.</i>\""); break;
 				case consumables.AIRWEED:		outputText("\"<i>Don’t like the breather, huh? Well these Airweeds will allow you to breath underwater for a time for only " + itype.value + " gem each.</i>\""); break;

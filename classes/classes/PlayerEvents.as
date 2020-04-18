@@ -821,6 +821,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head, as the size of your increasingly growing balls remind you that you need to expel those eggs one way or another before they become too big.");
 					}
 				}
+
+				//Armor daily event
+				//Scandalous succubus armor corruption updates
+				if (player.armor == armors.SSC && player.cor < 100) {
+					outputText("Corruption seethes from the succubus clothes into you.");
+					player.cor += 5;
+				}
 			}
 
 			//Easter bunny egg balls Loosing
@@ -1017,6 +1024,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				SceneLib.inventory.takeItem(player.setArmor(armors.NOTHING), playerMenu);
 				needNext = true;
 			}
+			if (player.armor == armors.SSC && (player.isTaur() || player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN || player.lowerBody == LowerBody.CENTIPEDE || player.lowerBody == LowerBody.GOO || player.lowerBody == LowerBody.MELKIE || player.lowerBody == LowerBody.DRIDER))
+			{
+				outputText("Due to your current body shape you are no longuer able to wear the scandalous succubus clothes and thus you drop the over encumbering equipment back into your inventory.");
+				SceneLib.inventory.takeItem(player.setArmor(armors.NOTHING), playerMenu);
+				needNext = true;
+			}
 			//Demonic hunger perk
 			if (player.demonScore() >= 10 || player.hasStatusEffect(StatusEffects.PlayerPhylactery)) { //Check for being a demon enought
 				if (player.findPerk(PerkLib.DemonEnergyThirst) < 0) {
@@ -1035,7 +1048,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Demonic energy thirst
 			if (player.hasStatusEffect(StatusEffects.DemonEnergyThirstFeed)) {
-				player.refillHunger(10, false);
+				if (player.hunger < player.maxHunger())
+				{
+					player.refillHunger(10, false);
+				}
 				if (player.HP < player.maxHP()) {
 					EngineCore.HPChange(100 + (player.tou*2), true);
 				}
@@ -1106,7 +1122,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Kitsune energy thirst
 			if (player.hasStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)) {
-				player.refillHunger(10, false);
+				if (player.hunger < player.maxHunger())
+				{
+					player.refillHunger(10, false);
+				}
 				if (player.HP < player.maxHP()) {
 					EngineCore.HPChange(100 + (player.tou*2), true);
 				}
@@ -1249,16 +1268,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.FreezingBreathYeti, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if (player.melkieScore() >= 8 && player.findPerk(PerkLib.ColdAffinity) < 0) {
+			if ((player.melkieScore() >= 8 || player.frostWyrmScore() >= 10) && player.findPerk(PerkLib.ColdAffinity) < 0) {
 				outputText("\nYou suddenly no longer feel the cold so you guess you finally got acclimated to the icy winds of the glacial rift. You feel at one with the cold. So well that you actually developed icy power of your own.\n\n(<b>Gained Perks: Cold Affinity</b>)\n");
 				player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.yetiScore() < 6 && player.yukiOnnaScore() < 14 && player.melkieScore() < 8 && !player.hasPerk(PerkLib.WhaleFat) && player.findPerk(PerkLib.ColdAffinity) >= 0) {
+			else if (player.yetiScore() < 6 && player.yukiOnnaScore() < 14 && player.melkieScore() < 8 && player.frostWyrmScore() < 10 && !player.hasPerk(PerkLib.WhaleFat) && player.findPerk(PerkLib.ColdAffinity) >= 0) {
 				outputText("\nYou suddenly feel a chill in the air. You guess you somehow no longer resist the cold.\n\n<b>(Lost Perks: Cold Affinity");
 				player.removePerk(PerkLib.ColdAffinity);
-				if (player.yetiScore() < 6){
-					outputText(" and and Freezing Breath Yeti");
+				if (player.hasPerk(PerkLib.FreezingBreathYeti)){
+					outputText(" and Freezing Breath Yeti");
 					player.removePerk(PerkLib.FreezingBreathYeti);
 				}
 				outputText(")</b>\n");
@@ -1393,6 +1412,20 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Necromancy);
 				needNext = true;
 			}
+			//Cancer stance
+			if (player.arms.type == Arms.HUMAN && player.lowerBody == LowerBody.CANCER && !player.hasStatusEffect(StatusEffects.CancerCrabStance)) {
+				outputText("\n\nEver since your lower body became that of a crab you began instinctively folding your arms and hands like those of a mantis or rather, the pincers of a crab. " +
+						"This pose, natural to you, somewhat looks weird or mystical to the onlooker, " +
+						"as if you were taking some form of martial art stance though for you this is just the natural way to rest your limbs.\n");
+				player.createStatusEffect(StatusEffects.CancerCrabStance,0,0,0,0);
+				needNext = true;
+			}
+			//Cancer stance
+			if ((player.arms.type != Arms.HUMAN || player.lowerBody != LowerBody.CANCER) && player.hasStatusEffect(StatusEffects.CancerCrabStance)) {
+				outputText("\nYour body now less crab like, you have stopped folding your arms like one would.\n");
+				player.removeStatusEffect(StatusEffects.CancerCrabStance);
+				needNext = true;
+			}
 			//Elven Sense
 			if ((player.eyes.type != Eyes.ELF || player.ears.type != Ears.ELVEN) && player.findPerk(PerkLib.ElvenSense) >= 0 && player.findPerk(PerkLib.ElvishPeripheralNervSys) < 0) {
 				outputText("\nYou feels yourself less aware of your surrounding. Heck your vision seems less keen then it used to be. Likely it's because you no longer possess the senses of an elf.\n\n<b>(Lost the Elven Sense perk!)</b>\n");
@@ -1419,12 +1452,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Titanic Strength
-			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 17 || player.scyllaScore() >= 12) && player.tallness >= 80 && player.findPerk(PerkLib.TitanicStrength) < 0) {
+			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 17 || player.scyllaScore() >= 12 || player.frostWyrmScore() >= 10) && player.tallness >= 80 && player.findPerk(PerkLib.TitanicStrength) < 0) {
 				outputText("\nWhoa you've grown so big its sheer miracle if you don't damage the landscape while moving. This said your size contribute to your strength as well now.\n\n<b>(Gained Titanic Strength perk!)</b>\n");
 				player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
 				needNext = true;
 			}
-				if (((player.hydraScore() < 14 && player.oniScore() < 12 && player.orcaScore() < 17 && player.scyllaScore() < 12) || player.tallness < 80) && player.findPerk(PerkLib.TitanicStrength) >= 0) {
+				if (((player.hydraScore() < 14 && player.oniScore() < 12 && player.orcaScore() < 17 && player.scyllaScore() < 12 && player.frostWyrmScore() < 10) || player.tallness < 80) && player.findPerk(PerkLib.TitanicStrength) >= 0) {
 				if (player.tallness < 80) outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
 				else outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
 				player.removePerk(PerkLib.TitanicStrength);
@@ -1554,6 +1587,18 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.tailType != Tail.MANTICORE_PUSSYTAIL && player.findPerk(PerkLib.ManticoreCumAddict) >= 0) {
 				outputText("\nYou suddently feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail. Losing it was perhaps for the best.\n");
 				player.removePerk(PerkLib.ManticoreCumAddict);
+				needNext = true;
+			}
+			//Milk Hunger
+			if (player.rearBody.type == RearBody.DISPLACER_TENTACLES && player.findPerk(PerkLib.DisplacerMilkAddict) < 0) {
+				outputText("\nYou suddenly feel a desire to eat, or rather, drink. It's like you have been thirsty for months, yet the thirst does not originate from your throat. Your tentacles are dying for milks and you feel that as long as you don't sate them, you will only be getting hornier! Milk... You need milk, a lot of it. It’s obvious now why displacer beasts are this crazy for sex as you feel the urge to pounce and feed on every single pair of breast in Mareth you can find!\n");
+				flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] = 50;
+				player.createPerk(PerkLib.DisplacerMilkAddict, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.rearBody.type != RearBody.DISPLACER_TENTACLES && player.findPerk(PerkLib.DisplacerMilkAddict) >= 0) {
+				outputText("\nYou suddently feel like your mind is clear of the constant haze of lust and hunger for the first time since you had these tentacles. Losing them was perhaps for the best.\n");
+				player.removePerk(PerkLib.DisplacerMilkAddict);
 				needNext = true;
 			}
 			//Vampire Thirst

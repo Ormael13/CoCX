@@ -210,7 +210,10 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 
 //Approaching Ember (Z)
 		public function emberCampMenu2():void {
-			if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaEmber();
+			if (!player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
+				if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaEmber();
+				else emberCampMenu();
+			}
 			else emberCampMenu();
 		}
 
@@ -4640,6 +4643,9 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("As you call for Ember the dragon simply does not show up. You can see " + emberMF("him", "her") + " in the sky searching angrily for something and even hear " + emberMF("him", "her") + " swear in the distance. Whatever made Ember so mad you don’t want to know. You decide to call " + emberMF("him", "her") + " later so to avoid getting yourself burned as " + emberMF("he", "she") + " indeed start to torch the landscape at random.\n\n");
 			if (player.hasStatusEffect(StatusEffects.CampLunaMishaps2)) player.addStatusValue(StatusEffects.CampLunaMishaps2, 2, 1);
 			else player.createStatusEffect(StatusEffects.CampLunaMishaps2, 0, 1, 0, 0);
+			if (!player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.createStatusEffect(StatusEffects.LunaWasCaugh, 1, 0, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.addStatusValue(StatusEffects.LunaWasCaugh, 1, 1);
+			if (player.statusEffectv1(StatusEffects.LunaWasCaugh) == 3) outputText("<b>That's it, you're sure of it now, it's all Luna's doing!</b>\n\n");
 			doNext(playerMenu);
 		}
 	}

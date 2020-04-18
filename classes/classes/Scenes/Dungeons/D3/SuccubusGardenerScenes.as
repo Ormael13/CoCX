@@ -461,7 +461,7 @@ import classes.Scenes.SceneLib;
 			if (player.isTaur() || player.isDrider())
 			{
 				outputText("\n\nThe longer you follow, the more you bow over, submissively, and at some point, you even start putting your hands on the path, moving your weight onto them. Elsewhere, your middle is raising up, and your body is changing, you're sure of that. The change slows you at first, but soon enough you're plodding along just fine, the");
-				if (player.isDrider()) outputText(" clip-clop of your hooves");
+				if (!player.isDrider()) outputText(" clip-clop of your hooves");
 				else outputText(" sharp clacks of your spidery claws");
 				outputText(" fading into the near silent pats of padded paws. Your hands are changing too: the fingers are shortening, but your nails are growing. Fur grows out over them, and your spine shifts, all so that you can follow on all fours that much easier.");
 			}

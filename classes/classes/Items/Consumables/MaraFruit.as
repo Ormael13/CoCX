@@ -290,7 +290,7 @@ public class MaraFruit extends Consumable{
 		if (player.hairColor != "green" && !player.isGargoyle() && rand(3) == 0 && changes < changeLimit)
 		{
 			outputText("\n\nAt first it looks like nothing changed but then you realize all the hair on your body has shifted to a verdant green color.  <b>You now have green hair.</b>");
-			player.hairColor = "green";
+			player.hairColorOnly = "green";
 		}
 		//Horns
 		if ((player.hairType == Hair.LEAF || player.hairType == Hair.GRASS) && changes < changeLimit && rand(2) == 0) {
@@ -310,10 +310,12 @@ public class MaraFruit extends Consumable{
 				if (player.horns.count == 0 && player.horns.type == Horns.NONE) {
 					outputText("\n\nA spot on each side of your head has been getting steadily sorer.  You’re beginning to think about finding somewhere quiet to take a look at it when it suddenly and rather shockingly bursts, allowing something hand-sized to bloom out from your [hair]. A huge orchids is now flourishing their floppy petals and stamen above your head!  <b>You've grown twin orchid flowers!</b>");
 					mutations.setHornType(Horns.ORCHID, 2);
+					player.coatColor = "pink";
 				}
 				if (player.horns.count > 0 && player.horns.type != Horns.ORCHID) {
 					outputText("\n\nYour old horns slowly crumbling away until nothing is left.  Then a spot on each side of your head has been getting steadily sorer.  You’re beginning to think about finding somewhere quiet to take a look at it when it suddenly and rather shockingly bursts, allowing something hand-sized to bloom out from your [hair]. A huge pair of orchids is now flourishing their floppy petals and stamen above your head!  <b>You've grown a pair of orchid flowers!</b>");
 					mutations.setHornType(Horns.ORCHID, 2);
+					player.coatColor = "pink";
 				}
 			}
 			changes++;
@@ -331,6 +333,7 @@ public class MaraFruit extends Consumable{
 			if (player.tailType != 0) mutations.setTailType(0);
 			mutations.setWingType(Wings.NONE, "non-existant");
 			mutations.setLowerBody(LowerBody.PLANT_FLOWER);
+			player.coatColor = "pink";
 			player.legCount = 12;
 			changes++;
 		}

@@ -67,7 +67,7 @@
 <model name="demo" dir="./res/charview/" width="200" height="220" scale="2" originX="15" originY="10">
     <palette>
         <!--Colors common for skin/hair/fur/scales/... go here. Can be overriden later-->
-                <common>
+        <common>
             <color name="albino">#f2f2e8</color>
             <color name="aqua">#00cccc</color>
             <color name="ashen">#817d79</color>
@@ -77,7 +77,7 @@
             <color name="blond">#e0c685</color>
             <color name="blonde">#f2e4bf</color>
             <color name="blue">#405fce</color>
-			<color name="bright pink">#f000f0</color>
+            <color name="bright pink">#f000f0</color>
             <color name="bronzed">#a89148</color>
             <color name="brown">#664400</color>
             <color name="caramel">#c39350</color>
@@ -116,7 +116,7 @@
             <color name="sanguine">#c03030</color>
             <color name="silky">#ffd6ff</color>
             <color name="silver">#d8e0e9</color>
-            <color name="tan">#af8750</color>
+            <color name="tan">#a3845c</color>
             <color name="tan2">#cfaa30</color>
             <color name="tawny">#b97f27</color>
             <color name="turquoise">#1ed9dc</color>
@@ -133,6 +133,7 @@
             <color name="dark green">#36582d</color>
             <color name="deep blue">#1e3667</color>
             <color name="deep red">#742525</color>
+			<color name="ember">#ff6224</color>
             <color name="ghostly pale">#e3deed</color>
             <color name="glacial white">#dee5f2</color>
             <color name="golden blonde">#f5d88a</color>
@@ -351,6 +352,7 @@
         <cell rect="301,1184,99,119" name="arms/hinezumistanced_pscales" dx="48" dy="55"/>
         <cell rect="401,1184,99,119" name="arms/hinezumistanced_chitin" dx="48" dy="55"/>
         <cell rect="501,1184,99,119" name="arms/hinezumistanced_orca" dx="48" dy="55"/>
+        <cell rect="601,210,49,59" name="arms/crabStance" dx="68" dy="64"/>
         <cell rect="851,210,49,59" name="arms_fg/demonlewd" dx="88" dy="54"/>
         <cell rect="451,210,49,59" name="arms_pattern/Bstripe" dx="94" dy="64"/>
         <cell rect="501,210,49,59" name="arms_pattern/Blightning" dx="94" dy="64"/>
@@ -372,6 +374,7 @@
         <cell rect="701,270,49,59" name="hands_bg/panda" dx="46" dy="64"/>
         <cell rect="301,1064,49,59" name="hand_bg/kumiho" dx="46" dy="56"/>
         <cell rect="851,150,49,59" name="hands_bg/wraithleft" dx="53" dy="75"/>
+        <cell rect="651,270,49,59" name="hands_bg/frostWyrmleft" dx="52" dy="72"/>
         <cell rect="351,270,49,59" name="overhands_bg/fire" dx="46" dy="64"/>
         <cell rect="1,330,49,59" name="hands/fur" dx="94" dy="64"/>
         <cell rect="601,330,49,59" name="hands/furracoon" dx="94" dy="64"/>
@@ -389,6 +392,7 @@
         <cell rect="729,520,90,90" name="hands/yeti" dx="47" dy="43"/>
         <cell rect="301,1124,49,59" name="hands/kumiho" dx="91" dy="56"/>
         <cell rect="901,210,49,59" name="hands/wraithright" dx="84" dy="75"/>
+        <cell rect="651,330,49,59" name="hands/frostWyrmright" dx="88" dy="72"/>
         <cell rect="951,210,49,59" name="hands_fg/wraithrightlewd" dx="95" dy="48"/>
         <cell rect="351,330,49,59" name="overhands/fire" dx="94" dy="64"/>
         <cell rect="1,390,49,59" name="legs/human" dx="69" dy="115"/>
@@ -458,7 +462,7 @@
         <cell rect="470,798,173,156" name="legs_fg/hydra4" dx="19" dy="47"/>
         <cell rect="122,956,173,156" name="legs_fg/hydra5" dx="19" dy="47"/>
         <cell rect="296,956,173,156" name="legs_fg/hydra6" dx="19" dy="47"/>
-        <cell rect="371,325,175,119" name="legs_fg/crabtaur" dx="22" dy="65"/>
+        <cell rect="371,325,165,119" name="legs_fg/crabtaur" dx="21" dy="64"/>
         <cell rect="546,325,175,119" name="legs_fg/bugtaur" dx="22" dy="65"/>
         <cell rect="607,101,143,107" name="legs/centaur" dx="47" dy="93"/>
         <cell rect="507,230,125,88" name="legs/cattaur" dx="71" dy="103"/>
@@ -474,6 +478,7 @@
         <cell rect="132,611,125,69" name="legs/gooblob" dx="31" dy="102"/>
         <cell rect="1013,101,130,108" name="legs/wraith" dx="32" dy="97"/>
         <cell rect="644,1114,173,156" name="legs/centipede" dx="35" dy="75"/>
+        <cell rect="722,434,130,108" name="legs/frostWyrm" dx="32" dy="97"/>
         <cell rect="122,1114,173,156" name="legs_bg/hydra2" dx="19" dy="47"/>
         <cell rect="296,1114,173,156" name="legs_bg/hydra3" dx="19" dy="47"/>
         <cell rect="470,1114,173,156" name="legs_bg/hydra4" dx="19" dy="47"/>
@@ -518,16 +523,25 @@
         <cell rect="751,158,40,54" name="clotheLegs/whiteKimonoBottom" dx="75" dy="121"/>
         <cell rect="919,158,40,54" name="clotheLegs/blackKimonoBottom" dx="75" dy="121"/>
         <cell rect="1099,325,80,104" name="clotheLegs/goblinTechnomancerClotheBoots" dx="54" dy="72"/>
+        <cell rect="1066,158,40,55" name="clotheLegs/scandalousSuccubusClothinglegs" dx="75" dy="120"/>
+        <cell rect="1108,158,40,55" name="clotheLegs/scandalousSuccubusClothinglegsLewd" dx="70" dy="119"/>
+        <cell rect="1108,158,40,55" name="clotheLegs/scandalousSuccubusClothingTaurTODO" dx="62" dy="96"/>
         <cell rect="776,12,45,25" name="armorNeck/fullplatetopFemale" dx="70" dy="63"/>
         <cell rect="833,12,45,25" name="armorNeck/fullplatetopMale" dx="70" dy="63"/>
+        <cell rect="644,798,173,156" name="armorNeck/WalpurgisClothes" dx="10" dy="12"/>
         <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="72" dy="75"/>
         <cell rect="728,42,45,58" name="armorLegs/fullplateLegs" dx="72" dy="115"/>
         <cell rect="882,12,125,75" name="armorLegs_fg/taurarmorbottom" dx="62" dy="96"/>
         <cell rect="776,42,25,55" name="armorLeftArm/fullplateleftarm" dx="68" dy="66"/>
+        <cell rect="961,158,20,55" name="clothLeftArm/scandalousSuccubusClothingleftArm" dx="71" dy="68"/>
+        <cell rect="1003,158,20,55" name="clothLeftArm/scandalousSuccubusClothingleftArmLewd" dx="75" dy="59"/>
         <cell rect="804,42,25,55" name="armorRightArm/fullplaterightarm" dx="92" dy="66"/>
-        <cell rect="644,798,173,156" name="armorNeck/WalpurgisClothes" dx="10" dy="12"/>
+        <cell rect="982,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArm" dx="99" dy="69"/>
+        <cell rect="1024,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArmLewd" dx="92" dy="53"/>
         <cell rect="817,798,173,156" name="clothCape/WalpurgisClothesBack" dx="9" dy="12"/>
         <cell rect="150,91,35,25" name="eyes/SpecialForeheadShadow" dx="71" dy="35"/>
+        <cell rect="1045,158,20,55" name="glove_fg/scandalousSuccubusClothingRightArmFront" dx="92" dy="53"/>
+        <cell rect="201,91,15,9" name="tailAccessory/demonTailJewelery" dx="127" dy="132"/>
     </spritemap>
     <spritemap file="hair.png">
         <cell rect="1,70,59,65" name="hair/0" dx="65" dy="21"/>
@@ -637,6 +651,7 @@
         <cell rect="421,330,29,32" name="horns/unicorn" dx="76" dy="24"/>
         <cell rect="421,363,29,32" name="horns/bicorn" dx="73" dy="23"/>
         <cell rect="451,363,29,32" name="horns/2oni" dx="79" dy="40"/>
+        <cell rect="181,396,29,30" name="horns/frostWyrm" dx="96" dy="26"/>
         <cell rect="1,330,59,65" name="horns_bg/orchid" dx="65" dy="4"/>
         <cell rect="61,330,59,65" name="horns_bg/devil" dx="62" dy="4"/>
         <cell rect="121,330,59,65" name="horns_bg/cow" dx="65" dy="4"/>
@@ -645,6 +660,7 @@
         <cell rect="361,330,59,65" name="horns_bg/dragon" dx="65" dy="4"/>
         <cell rect="421,396,59,65" name="horns_bg/ghost" dx="63" dy="8"/>
         <cell rect="631,330,87,65" name="horns_bg/devilquad" dx="49" dy="2"/>
+        <cell rect="181,429,29,30" name="horns_bg/frostWyrm" dx="64" dy="26"/>
         <cell rect="1,470,59,65" name="antennae/bee" dx="65" dy="4"/>
     </spritemap>
     <spritemap file="lewd.png">
@@ -825,6 +841,9 @@
         <cell rect="611,410,49,29" name="bra/sexyYellowBikiniBraSmall" dx="69" dy="68"/>
         <cell rect="611,440,49,29" name="bra/sexyYellowBikiniBraMedium" dx="69" dy="68"/>
         <cell rect="611,470,49,29" name="bra/sexyYellowBikiniBraLarge" dx="69" dy="68"/>
+        <cell rect="661,410,49,29" name="bra/scandalousSuccubusClothingBraSmall" dx="69" dy="67"/>
+        <cell rect="661,440,49,29" name="bra/scandalousSuccubusClothingBraMedium" dx="69" dy="67"/>
+        <cell rect="661,470,49,29" name="bra/scandalousSuccubusClothingBraLarge" dx="70" dy="67"/>
         <cell rect="11,500,49,29" name="panty/goblinTechnomancerPanty" dx="69" dy="99"/>
         <cell rect="61,500,49,29" name="panty/sexyBlackBikiniPanty" dx="69" dy="99"/>
         <cell rect="111,500,49,29" name="panty/sexyAquamarineBikiniPanty" dx="69" dy="99"/>
@@ -834,6 +853,7 @@
         <cell rect="311,500,49,29" name="panty/sexyRedBikiniPanty" dx="69" dy="99"/>
         <cell rect="361,500,49,29" name="panty/sexyWhiteBikiniPanty" dx="69" dy="99"/>
         <cell rect="411,500,49,29" name="panty/sexyYellowBikiniPanty" dx="69" dy="99"/>
+        <cell rect="461,500,49,29" name="panty/scandalousSuccubusClothingPanty" dx="69" dy="94"/>
     </spritemap>
     <spritemap file="tails.png">
         <cell rect="1,71,168,139" name="tail/manticore" dx="10" dy="40"/>
@@ -859,7 +879,7 @@
         <cell rect="509,211,83,139" name="tail/horse_taur" dx="133" dy="45"/>
         <cell rect="1,351,168,69" name="tail/reptile" dx="10" dy="90"/>
         <cell rect="1,351,168,69" name="tail/reptile_taur" dx="57" dy="102"/>
-        <cell rect="170,351,168,69" name="tail/demon" dx="10" dy="90"/>
+        <cell rect="170,351,168,69" name="tail/demon" dx="5" dy="91"/>
         <cell rect="170,351,168,69" name="tail/demon_taur" dx="64" dy="93"/>
         <cell rect="339,351,168,69" name="tail/gargoyle_axe" dx="10" dy="90"/>
         <cell rect="339,421,168,69" name="tail/gargoyle_mace" dx="10" dy="90"/>
@@ -942,6 +962,7 @@
 		<layer name="fullbody"/>
 		<layer name="overclothe"/>
 		<layer name="hands_fg"/>
+		<layer name="glove_fg"/>
 		<layer name="arms_fg"/>
 		<layer name="eyes_fg"/>
 		<layer name="clotheScarf"/>
@@ -984,6 +1005,8 @@
 		<layer name="overskin"/>
 		<layer name="breasts_pattern"/>
         <layer name="breasts"/>
+		<layer name="clothRightArm"/>
+		<layer name="clothLeftArm"/>
 		<layer name="overhands"/>
         <layer name="hands"/>
 		<layer name="arms_pattern"/>
@@ -1008,6 +1031,7 @@
 		<layer name="wings"/>
 		<layer name="rearbody"/>
 		<layer name="clothCape"/>
+		<layer name="tailAccessory"/>
         <layer name="tail_fg"/>
         <layer name="tail"/>
         <layer name="wings_bg"/>
@@ -1137,6 +1161,10 @@
             <case values="Horns.KRAKEN">
                 <show part="horns_bg/kraken"/>
             </case>
+            <case values="Horns.FROSTWYRM">
+                <show part="horns_bg/frostWyrm"/>
+                <show part="horns/frostWyrm"/>
+            </case>
         </switch>
 		
 		
@@ -1246,7 +1274,7 @@
             <case values="Eyes.SLITS,Eyes.FENRIR,Eyes.REPTILIAN,Eyes.SNAKE,Eyes.GORGON,Eyes.DRAGON,Eyes.ONI,Eyes.ELF,Eyes.VAMPIRE,Eyes.CAVE_WYRM">
                 <show part="eyes/cat"/>
             </case>
-            <case values="Eyes.DEVIL">
+            <case values="Eyes.DEVIL,Eyes.FROSTWYRM">
                 <show part="eyes/devil"/>
             </case>
             <case values="Eyes.RAIJU,Eyes.MANTICORE">
@@ -1280,7 +1308,7 @@
             <case values="RearBody.RAIJU_MANE">
                 <show part="neck/weasel"/>
             </case>
-			<case values="RearBody.BAT_COLLAR,RearBody.WOLF_COLLAR,RearBody.FENRIR_ICE_SPIKES,RearBody.LION_MANE">
+			<case values="RearBody.BAT_COLLAR,RearBody.WOLF_COLLAR,RearBody.FENRIR_ICE_SPIKES,RearBody.LION_MANE,RearBody.FROSTWYRM">
 				<show part="neck/manticore"/>
             </case>
 			<case values="RearBody.SHARK_FIN">
@@ -1344,17 +1372,26 @@
                         <case test="hairLength lt 16">
 							<show part="hair/feather"/>
 							<show part="hair_bg/feather"/>
-                            <show part="hair_bg/0"/>
                         </case>
                         <default>
                             <show part="hair/feather"/>
 							<show part="hair_bg/feather"/>
+                            <show part="hair_bg/02"/>
                         </default>
                     </switch>
                 </case>
                 <case values="Hair.GORGON">
-                    <show part="hair/gorgon"/>
-                    <show part="hair_bg/gorgon"/>
+                    <switch>
+                        <case test="hairLength lt 16">
+                            <show part="hair/gorgon"/>
+                            <show part="hair_bg/gorgon"/>
+                        </case>
+                        <default>
+                            <show part="hair/gorgon"/>
+                            <show part="hair_bg/gorgon"/>
+                            <show part="hair_bg/02"/>
+                        </default>
+                    </switch>
                 </case>
                 <case values="Hair.STORM">
                     <switch>
@@ -1902,19 +1939,29 @@
                 <show part="hands/kraken"/>
                 <show part="hands_bg/kraken"/>
             </case>
+            <case values="Arms.FROSTWYRM">
+                <show part="hands/frostWyrmright"/>
+                <show part="hands_bg/frostWyrmleft"/>
+            </case>
             <default>
                 <!--see switch[value=skinType]-->
             </default>
         </switch>
-
+        <if test="CancerCrabStance">
+            <hide part="arms/*"/>
+            <hide part="arms_bg/*"/>
+            <hide part="hands/*"/>
+            <hide part="hands_bg/*"/>
+            <show part="arms/crabStance"/>
+        </if>
 
 		<!-- LEGS AREA -->
         <switch value="lowerBody">
             <case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
                 <!--see switch[value=skin.coverage]-->
-				<if test="femininity &gt;=40">
-					<if test="cor &gt;=50">
-						<if test="skin.coverage==Skin.COVERAGE_NONE">
+				<if test="PlayerHasViewableOutfit">
+					<if test ="armStanceNonBannedList">
+						<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage == Skin.COVERAGE_NONE)">
 							<switch value="arms.type">
 								<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
 									<hide part="feet/*"/>
@@ -1926,6 +1973,19 @@
 							</switch>
 						</if>
 					</if>
+					<else>
+						<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+							<switch value="arms.type">
+								<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
+									<hide part="feet/*"/>
+									<hide part="legs/*"/>
+									<show part="legs/demonlewd"/>
+								</case>
+								<default>
+								</default>
+							</switch>
+						</if>
+					</else>
 				</if>
             </case>
             <case values="LowerBody.HOOFED,LowerBody.PONY,LowerBody.CLOVEN_HOOFED">
@@ -2013,6 +2073,14 @@
                 <hide part="legs/*"/>
                 <show part="legs/naga"/>
             </case>
+            <case values="LowerBody.FROSTWYRM">
+                <hide part="legs/*"/>
+                <show part="legs/frostWyrm"/>
+            </case>
+            <case values="LowerBody.CANCER">
+                <hide part="legs/*"/>
+                <show part="legs_fg/crabtaur"/>
+            </case>
 			<case values="LowerBody.HYDRA">
                 <hide part="legs/*"/>
 				<hide part="feet/*"/>
@@ -2078,7 +2146,7 @@
             </case>
             <!--<case values="LowerBody.DEMONIC_HIGH_HEELS">TODO </case>-->
             <!--<case values="LowerBody.DEMONIC_CLAWS"">TODO </case>-->
-            <case values="LowerBody.BEE">
+            <case values="LowerBody.BEE,LowerBody.CRAB">
                 <hide part="legs/*"/>
                 <show part="legs/chitin2"/>
             </case>
@@ -2716,7 +2784,7 @@
                     </if>
                 </default>
             </switch>
-            <if test="lowerBody == LowerBody.CRAB_TAUR">
+            <if test="lowerBody == LowerBody.CANCER">
                 <hide part="penis/*"/>
             </if>
         </if>
@@ -2743,7 +2811,7 @@
             </default>
             </switch>
             <show part="balls/B$skinx$ballsz$taur"/>
-			<if test="lowerBody == LowerBody.CRAB_TAUR">
+			<if test="lowerBody == LowerBody.CANCER">
 				<hide part="balls/*"/>
 			</if>
         </if>
@@ -2863,7 +2931,7 @@
 		</if>
 		
 		<!-- HIDING INVALID LEG PATTERN AREA -->
-		<if test="lowerBody == LowerBody.CRAB_TAUR">
+		<if test="lowerBody == LowerBody.CANCER">
 			<hide part="legs_pattern/*"/>
 		</if>
 		<if test="lowerBody == LowerBody.DRIDER">
@@ -3586,7 +3654,7 @@
 			</if>
         </if>
 		
-		<if test="walpurgisIzaliaRobe">
+		<if test="walpurgisIzaliaCloak">
 			<hide part="horns/*"/>
 			<hide part="ears/*"/>
 			<hide part="ears_bg/*"/>
@@ -3607,6 +3675,77 @@
 			<show part="armorNeck/WalpurgisClothes"/>
 			<show part="clothCape/WalpurgisClothesBack"/>
         </if>
-		
+
+        <if test="scandalousSuccubusClothing">
+            <if test="breastRows.length gt 0">
+                <switch>
+                    <case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+                        <show part="bra/scandalousSuccubusClothingBraSmall"/>
+                    </case>
+                    <case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+                        <show part="bra/scandalousSuccubusClothingBraSmall"/>
+                    </case>
+                    <case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+                        <show part="bra/scandalousSuccubusClothingBraMedium"/>
+                    </case>
+                    <case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+                        <show part="bra/scandalousSuccubusClothingBraMedium"/>
+                    </case>
+                    <case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+                        <show part="bra/scandalousSuccubusClothingBraLarge"/>
+                    </case>
+                    <default>
+                        <show part="bra/scandalousSuccubusClothingBraLarge"/>
+                    </default>
+                </switch>
+            </if>
+            <if test="showArmClothing">
+                <if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+                    <switch value="arms.type">
+                        <case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
+                            <show part="clothLeftArm/scandalousSuccubusClothingleftArmLewd"/>
+                            <show part="clothRightArm/scandalousSuccubusClothingRightArmLewd"/>
+                            <show part="glove_fg/scandalousSuccubusClothingRightArmFront"/>
+                        </case>
+                        <default>
+                            <show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
+                            <show part="clothRightArm/scandalousSuccubusClothingRightArm"/>
+                        </default>
+                    </switch>
+                    <switch value="arms.type">
+                        <case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
+                            <show part="clothLeftArm/scandalousSuccubusClothingleftArmLewd"/>
+                            <show part="clothRightArmArm/scandalousSuccubusClothingRightArmLewd"/>
+                            <show part="glove_fg/scandalousSuccubusClothingRightArmFront"/>
+                        </case>
+                        <default>
+                            <show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
+                            <show part="clothRightArm/scandalousSuccubusClothingRightArm"/>
+                        </default>
+                    </switch>
+                    <switch value="lowerBody">
+                        <case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
+                                <switch value="arms.type">
+                                    <case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
+                                        <show part="clotheLegs/scandalousSuccubusClothinglegsLewd"/>
+                                    </case>
+                                    <default>
+                                        <show part="clotheLegs/scandalousSuccubusClothinglegs"/>
+                                    </default>
+                                </switch>
+                        </case>
+                    </switch>
+                    <else>
+                        <show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
+                        <show part="clothRightArm/scandalousSuccubusClothingRightArm"/>
+                        <show part="clotheLegs/scandalousSuccubusClothinglegs"/>
+                    </else>
+                </if>
+				<show part="panty/scandalousSuccubusClothingPanty"/>
+				<hide part="penis/*"/>
+				<hide part="balls/*"/>
+            </if>
+        </if>
+
     </logic>
 </model>
