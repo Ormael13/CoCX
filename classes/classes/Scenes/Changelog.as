@@ -64,9 +64,9 @@ package classes.Scenes
 			outputText("-All changes for 0.8n9 was due to hard work of our glorious lady Liadri. With a bit of Lia Twist.\n");
 			outputText("-Golem scavenging got texts instead of placeholder texts. (Texts ofc also sponsored by Lia Twist and coded by me ;) )\n");
 			outputText("-Fixed bugs: error in cat tf that would cause text to become bolded, golemancer shop 2 items been unbuyable\n\n");
-			outputText("<b>Version 0.8n10:</b>\n\n");
+			outputText("<b>Version 0.8n10 (Tiny fix):</b>\n\n");
 			outputText("-Urta lvl, stats been slight increased. Her stunning mov now just have 66% chance to stun instead smth that felt around 20%.\n");
-			outputText("-Fixed bugs: Eastern Bunny tf not giving eastern bunny balls\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Eastern Bunny tf not giving eastern bunny balls\n\n");
 			outputText("<b>Version 0.8o:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
@@ -77,7 +77,7 @@ package classes.Scenes
 			//outputText("-Fixed Excellia will move to Lovers tab and add option to sleep with her, show up at hot springs or assist in fights as henchman.\n");
 			//outputText("-Added Mitzi and Excellia kids counter tracker to Stats page under Children subpage.\n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
-			outputText("-\n");
+			outputText("-PC would gain 10 stat poins per level up instead of 5. Below lvl 7 it will increase form 10 stat points to 20 per lvl-up.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -88,7 +88,7 @@ package classes.Scenes
 			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-Fixed bugs: \n\n");
+			outputText("-Fixed bugs: \n\n");/*ostatni punkt changelogu
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
