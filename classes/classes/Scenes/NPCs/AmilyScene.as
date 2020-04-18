@@ -219,7 +219,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			//20% chance of playing with a rack
 			if(rand(5) == 0 && rackCount() < 3) {
-				var rack:Number = 0;
+				var rack:Number;
 				var rackArray:Array = [];
 				if (player.hasKeyItem("Equipment Rack - Armor") < 0) rackArray[rackArray.length] = 0;
 				if (player.hasKeyItem("Equipment Rack - Weapons") < 0) rackArray[rackArray.length] = 1;

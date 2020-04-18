@@ -8,7 +8,6 @@ package classes.Scenes
 	import classes.BodyParts.Arms;
 	import classes.BodyParts.LowerBody;
 	import classes.BodyParts.Tail;
-	import classes.GlobalFlags.kFLAGS;
 	
 	public class UniqueSexScenes extends BaseContent
 	{
@@ -27,9 +26,9 @@ package classes.Scenes
 			outputText(" The both of you are moaning like wanton whores and lost in sensations by now, but neither of you want to lose to the other in this desperate duel of endurance and sexual skill. Soon your mind is going blank from the vigorous fucking but you don’t care. You won’t allow yourself to orgasm before Holli does. Eventually, unable to hold anymore, the both of you scream your defeat together as your stamens explode, filling each others wombs to the brim. There’s so much liquid pollen pumped into you and you can feel your bloated stomach groan under the pressure. You can’t help but cup it with your hand in motherly delight. Holli isn't looking any better, it will probably take hours for her belly to deflate.\n\n");
 			outputText("\"<i>I... want a rematch...No way I'll stop at a tie!</i>\"\n\n");
 			outputText("That won’t be today though. You're so packed up with plant cum that without even checking your odds, you're pretty sure you are pregnant. You doubt Holli can hold any more of your pollen either, so you dress back up, highly satisfied and somewhat smug, leaving Holli to her personal frustration.");
-			player.sexReward("cum")
-			player.sexReward("vaginalFluids")
-			player.sexReward("saliva")
+			player.sexReward("cum");
+			player.sexReward("vaginalFluids");
+			player.sexReward("saliva");
 			statScreenRefresh();
 			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 			doNext(camp.returnToCampUseOneHour);
@@ -82,7 +81,6 @@ package classes.Scenes
 			player.sexReward("cum");
 			statScreenRefresh();
 			cleanupAfterCombat();
-			return;
 		}
 
 		public function hinezumiTailpegScene():void {
@@ -100,10 +98,9 @@ package classes.Scenes
 			if (player.hasVagina()) outputText("[pussy]");
 			outputText(" make a fine mess on " + monster.a + monster.short + " back. You pull your tail out of " + monster.pronoun3 + " abused hole utterly satisfied before wiping " + monster.pronoun3 + " ass once or twice as a parting gift, making " + monster.pronoun2 + " double in pain. Gosh, it feels so good to put those freaks in their place.\n\n");
 			outputText("You head back to camp both morally and physically satisfied of your deeds.\n\n");
-			player.sexReward("Default", "Default", true, false)
+			player.sexReward("Default", "Default", true, false);
 			statScreenRefresh();
 			cleanupAfterCombat();
-			return;
 		}
 
 		public function strangleAndRapeScene():void {
@@ -134,10 +131,9 @@ package classes.Scenes
 			if (player.hasVagina()) outputText("[pussy]");
 			outputText("harder into " + monster.pronoun3 + " face!\n\n");
 			outputText("Only as you reach your third orgasm do you finally release your abused victim from your noose. You can still see your tail imprints on its neck but hell if you care " + monster.pronoun1 + " had it coming. You head home highly satisfied.\n\n");
-			player.sexReward("saliva")
+			player.sexReward("saliva");
 			statScreenRefresh();
 			cleanupAfterCombat();
-			return;
 		}
 
 		public function alrauneGetPollinatedScene():void {
@@ -151,7 +147,6 @@ package classes.Scenes
 			statScreenRefresh();
 			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 			cleanupAfterCombat();
-			return;
 		}
 
 		public function alrauneSeedingScene():void {
@@ -165,7 +160,6 @@ package classes.Scenes
 			statScreenRefresh();
 			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 			cleanupAfterCombat();
-			return;
 		}
 
 		public function raijuVoltTransfer():void {
@@ -185,10 +179,9 @@ package classes.Scenes
 			if (monster.biggestTitSize() > 0) outputText(" and milk");
 			outputText(" everywhere in the vicinity. You can see the pulse of your statics as a small glow in every thrust of " + monster.pronoun3 + " hips as " + monster.pronoun1 + " keep fiercely masturbating in an attempt to expel the lust.\n\n");
 			outputText("You leave your lust receptacle there, it's unlikely " + monster.pronoun1 + " will stop masturbating anytime soon.");
-			player.sexReward("Default", "Default", true, false)
+			player.sexReward("Default", "Default", true, false);
 			statScreenRefresh();
 			cleanupAfterCombat();
-			return;
 		}
 
 		public function hinezumiHeatTransferScene():void {
@@ -197,9 +190,8 @@ package classes.Scenes
 			outputText("You feel like some payback is in order, however, this time around you have something different in mind than your regular antics.\n\n");
 			outputText("You feel like some payback is in order, however, this time around you have something different in mind than your regular antics.\n\n");
 			outputText("You feel like some payback is in order, however, this time around you have something different in mind than your regular antics.\n\n");
-			player.sexReward("Default", "Default", true, false)
+			player.sexReward("Default", "Default", true, false);
 			cleanupAfterCombat();
-			return;
 		}
 
 		public function TentacleRape():void {
@@ -226,7 +218,6 @@ package classes.Scenes
 					"That said, you return to camp satisfied.");
 			player.sexReward("vaginalFluids");
 			cleanupAfterCombat();
-			return;
 		}
 
 		public function HumanDildo():void {
@@ -241,7 +232,6 @@ package classes.Scenes
 					"\n\nYou laugh at it’s shocked expression, the scene is just too hilarious. Satisfied you throw your opponent away as you head back to camp.");
 			player.sexReward("Default", "Vaginal", true, false);
 			cleanupAfterCombat();
-			return;
 		}
 
 		public function EasterBunnyLayEggsRape():void {
@@ -255,9 +245,8 @@ package classes.Scenes
 			outputText("Your [cock] still hard, you keep bucking inside -opponent- name relentlessly until you cum not once not twice but three times, tongues out, caring little for the destroyed hole of your partner. Only caring for your own satisfaction you stop fucking only once " + monster.a + monster.short + " faint from exhaustion. " +
 					"Well you still got plenty of energy left but might as well fuck something that's awake. You unplug your still hard cock from " + monster.pronoun3 + " asshole gasping as your cock sensitive flesh is exposed to the air again." +
 					" Without anything to plug it the excessive load of cum stashed in your victim's stomach surges out and dye the ground beneath " + monster.pronoun3 + " white. For good measure you clean your dripping penis on " + monster.a + monster.short + " ass and hops off back to camp.\n\n");
-			player.sexReward("Default", "Dick", true, false)
+			player.sexReward("Default", "Dick", true, false);
 			cleanupAfterCombat();
-			return;
 		}
 
 		public function gobomechFillTheReservoir():void {
@@ -275,7 +264,6 @@ package classes.Scenes
 			if (player.keyItemv1("Cum Reservoir") == 4) outputText("full");
 			outputText(", a little before the cum pump falls unconscious, well that's a good harvest.\n\nYou go to the passed out cum cow and unfasten your equipment before jumping back into the mech, heading back to camp.\n\n");
 			cleanupAfterCombat();
-			return;
 		}
 
 		public function yukionnaStealWarmthScene():void {
@@ -290,7 +278,6 @@ package classes.Scenes
 			player.soulforce = player.maxSoulforce();
 			player.sexReward("cum");
 			cleanupAfterCombat();
-			return;
 		}
 //this.pronoun1 = "he";
 //this.pronoun2 = "him";

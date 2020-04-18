@@ -5,7 +5,6 @@ package classes.Scenes.Combat {
 import classes.BodyParts.Arms;
 import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
-import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
@@ -64,8 +63,8 @@ public class CombatUI extends BaseCombatContent {
 		var btnSoulskills:CoCButton = button(8);
 		var btnOther:CoCButton      = button(9);
 		var btnSpecial1:CoCButton   = button(10);
-		var btnSpecial2:CoCButton   = button(11);
-		var btnSpecial3:CoCButton   = button(12);
+		//var btnSpecial2:CoCButton   = button(11);
+		//var btnSpecial3:CoCButton   = button(12);
 		var btnFantasize:CoCButton  = button(13);
 		var btnRun:CoCButton        = button(14);
 		/*
@@ -154,6 +153,14 @@ public class CombatUI extends BaseCombatContent {
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 		
 		// Submenus
+		function vampireBiteDuringGrapple(Position:int):void{
+			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
+				addButton(Position, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
+				if (player.fatigueLeft() <= combat.physicalCost(20)) {
+					button(Position).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+				}
+			}
+		}
 		
 		// Submenu - Physical Specials
 		if (player.isFlying()) combat.pspecials.buildMenuForFlying(physpButtons);
@@ -225,12 +232,7 @@ public class CombatUI extends BaseCombatContent {
 			addButton(0, "Heal", combat.HypnosisHeal);
 			addButton(1, "Attack", combat.HypnosisAttack);
 			addButton(2, "Coil", combat.HypnosisCoil);
-			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
-				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
-				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
-				}
-			}
+			vampireBiteDuringGrapple(3);
 			addButton(4, "Maintain", combat.HypnosisMaintain);
 		} else if (monster.hasStatusEffect(StatusEffects.HypnosisNaga) && monster.hasStatusEffect(StatusEffects.Constricted)) {
 			menu();
@@ -248,23 +250,13 @@ public class CombatUI extends BaseCombatContent {
 			menu();
 			addButton(0, "Squeeze", SceneLib.desert.nagaScene.naggaSqueeze).hint("Squeeze some HP out of your opponent! \n\nFatigue Cost: " + physicalCost(20) + "");
 			addButton(1, "Tease", SceneLib.desert.nagaScene.naggaTease);
-			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
-				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
-				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
-				}
-			}
+			vampireBiteDuringGrapple(3);
 			addButton(4, "Release", SceneLib.desert.nagaScene.nagaLeggoMyEggo);
 		//Grappling Cancer
 		} else if (monster.hasStatusEffect(StatusEffects.CancerGrab)) {
 			menu();
 			addButton(0, "Guillotine", combat.Guillotine).hint("Crush your foe with your pincer and attempt to break it appart! \n\nFatigue Cost: " + physicalCost(20) + "");
-			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
-				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
-				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
-				}
-			}
+			vampireBiteDuringGrapple(3);
 			addButton(4, "Release", combat.CrabLeggoMyEggo);
 		//Grappling scylla
 		} else if (monster.hasStatusEffect(StatusEffects.ConstrictedScylla)) {
@@ -276,12 +268,7 @@ public class CombatUI extends BaseCombatContent {
 				button(0).hint("Squeeze your foe with your tentacle attempting to break it appart! \n\nFatigue Cost: " + physicalCost(20) + "");
 			}
 			addButton(1, "Tease", combat.ScyllaTease).hint("Use a free limb to caress and pleasure your grappled foe. \n\nFatigue Cost: " + physicalCost(20) + "");
-			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
-				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
-				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
-				}
-			}
+			vampireBiteDuringGrapple(3);
 			addButton(4, "Release", combat.ScyllaLeggoMyEggo);
 		//Orca be playing rought
 		} else if (monster.hasStatusEffect(StatusEffects.OrcaPlay)) {
@@ -345,12 +332,7 @@ public class CombatUI extends BaseCombatContent {
 			if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigueLeft() <= combat.physicalCost(40))) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigueLeft() <= combat.physicalCost(20)))) {
 				button(0).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
 			}
-			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
-				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
-				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
-				}
-			}
+			vampireBiteDuringGrapple(3);
 			addButton(4, "Release", combat.PussyLeggoMyEggo);
 		} else if (monster.hasStatusEffect(StatusEffects.GrabBear)) {
 			menu();

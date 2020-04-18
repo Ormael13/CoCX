@@ -14,7 +14,6 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.JewelryLib;
 import classes.Items.ShieldLib;
 import classes.Items.WeaponLib;
-import classes.Items.UndergarmentLib;
 import classes.PerkLib;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Camp.CampMakeWinions;
@@ -2682,8 +2681,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(!monster.plural) outputText("its");
 		else outputText("their");
 		outputText(" movement.\n\n");
-		var EntangleStrNerf:Number = 0;
-		var EntangleSpeNerf:Number = 0;
+		var EntangleStrNerf:Number;
+		var EntangleSpeNerf:Number;
 		EntangleStrNerf = Math.round(monster.str * .5);
 		EntangleSpeNerf = Math.round(monster.spe * .5);
 		monster.str -= EntangleStrNerf;
@@ -3852,7 +3851,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) HBD *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) HBD *= 1.50;
 		HBD = Math.round(HBD);
-		HBD = doDamage(HBD, true, true);
+		doDamage(HBD, true, true);
 	}
 	public function nagaBiteAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -4309,7 +4308,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		chance += player.spe/2;
 		//Hit & calculation
 		if(chance >= rand(100)) {
-			var horns:Number = player.horns.count;
 			if (player.horns.count > 40) player.horns.count = 40;
 			damage = int(player.str + (player.tou / 2) + (player.spe / 2) + (player.level * 2) * 1.2 * (monster.damagePercent() / 100)); //As normal attack + horns length bonus
 			if(damage < 0) damage = 5;
@@ -4696,7 +4694,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		attack = rand(4);
-		var damage:Number = 0;
+		var damage:Number;
 		switch(attack) {
 				//Success 1:
 			case 1:
@@ -5388,7 +5386,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= 0.5;
 			damage = Math.round(damage);
 			outputText("potent discharge ");
-			damage = doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
 			outputText(" damage!");
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			monster.createStatusEffect(StatusEffects.Stunned,4,0,0,0);
@@ -5487,7 +5485,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		outputText("You press the spiral button and aim, unleashing the gravity sphere at " + monster.a + monster.short + ". ");
 		player.createStatusEffect(StatusEffects.CooldownGravityShots,8,0,0,0);
-		var damage:Number = 0;
+		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModBlack() * 2;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (monster.hasPerk(PerkLib.EnemyGroupType)) damage *= 8;
@@ -5522,7 +5520,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		outputText("You press the BIG lightning button and aim, smirking wide as the Raijin blaster power up your mech zapping " + monster.a + monster.short + " for ");
 		player.createStatusEffect(StatusEffects.CooldownRaijinBlaster,8,0,0,0);
-		var damage:Number = 0;
+		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModWhite() * 2;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (monster.hasPerk(PerkLib.EnemyGroupType)) damage *= 8;
@@ -5570,7 +5568,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		outputText("You activate the snowball generator, taking aim and launching a volley of snowballs at the " + monster.a + monster.short + " for ");
 		player.createStatusEffect(StatusEffects.CooldownSnowballGenerator,8,0,0,0);
-		var damage:Number = 0;
+		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModBlack() * 4;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.armor == armors.GTECHC_) damage *= 1.5;
@@ -5602,7 +5600,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		outputText("You shoot with the Whitefire beam cannon at " + monster.a + monster.short + " burning " + monster.pronoun3 + " badly for ");
 		player.createStatusEffect(StatusEffects.CooldownWhitefireBeamCannon,8,0,0,0);
-		var damage:Number = 0;
+		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModWhite() * 4;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.armor == armors.GTECHC_) damage *= 1.5;

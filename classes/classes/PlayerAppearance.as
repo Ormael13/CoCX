@@ -1516,7 +1516,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 	}
 	public function describeWings():void {
-//WINGS!
+	//WINGS!
 		var wingType:Number = player.wings.type;
 		if (wingType == Wings.BEE_LIKE_SMALL)
 			outputText("  A pair of tiny-yet-beautiful bee-wings sprout from your back, too small to allow you to fly.");

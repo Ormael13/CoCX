@@ -15,14 +15,11 @@ import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.ItemType;
-import classes.Items.ArmorLib;
 import classes.Items.JewelryLib;
 import classes.Items.ShieldLib;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
-import classes.Items.UndergarmentLib;
 import classes.Monster;
-import classes.PerkLib;
 import classes.PerkLib;
 import classes.Scenes.Areas.Beach.Gorgon;
 import classes.Scenes.Areas.Caves.DisplacerBeast;
@@ -49,8 +46,6 @@ import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
 import classes.StatusEffectClass;
-import classes.StatusEffects;
-import classes.StatusEffects;
 import classes.StatusEffects;
 import classes.StatusEffects.VampireThirstEffect;
 
@@ -149,9 +144,9 @@ public class Combat extends BaseContent {
         return magic.spellModImpl();
     }
 
-    public function spellGreyCooldown():Number {
-        return magic.spellGreyCooldownImpl();
-    }
+    //public function spellGreyCooldown():Number {
+        //return magic.spellGreyCooldownImpl();
+    //}
 
     public function spellModWhite():Number {
         return magic.spellModWhiteImpl();
@@ -369,7 +364,7 @@ public class Combat extends BaseContent {
                 inCombat = false;
                 if (player.hasStatusEffect(StatusEffects.SoulArena)) player.removeStatusEffect(StatusEffects.SoulArena);
                 if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) player.removeStatusEffect(StatusEffects.SoulArenaGaunlet);
-                if (prison.inPrison == false && flags[kFLAGS.PRISON_CAPTURE_CHANCE] > 0 && rand(100) < flags[kFLAGS.PRISON_CAPTURE_CHANCE] && (prison.trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp() || !prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) && (monster.short == "goblin" || monster.short == "goblin assassin" || monster.short == "imp" || monster.short == "imp lord" || monster.short == "imp warlord" || monster.short == "hellhound" || monster.short == "minotaur" || monster.short == "satyr" || monster.short == "gnoll" || monster.short == "gnoll spear-thrower" || monster.short == "basilisk")) {
+                if (!prison.inPrison && flags[kFLAGS.PRISON_CAPTURE_CHANCE] > 0 && rand(100) < flags[kFLAGS.PRISON_CAPTURE_CHANCE] && (prison.trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp() || !prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) && (monster.short == "goblin" || monster.short == "goblin assassin" || monster.short == "imp" || monster.short == "imp lord" || monster.short == "imp warlord" || monster.short == "hellhound" || monster.short == "minotaur" || monster.short == "satyr" || monster.short == "gnoll" || monster.short == "gnoll spear-thrower" || monster.short == "basilisk")) {
                     outputText("  You feel yourself being dragged and carried just before you black out.");
                     doNext(prison.prisonIntro);
                     return;
@@ -448,7 +443,6 @@ public class Combat extends BaseContent {
         if (player.findPerk(PerkLib.RapidReload) < 0) {
             outputText("  This takes up a turn.\n\n");
             enemyAI();
-            return;
         } else {
             outputText("\n\n");
             doNext(combatMenu);
@@ -461,7 +455,6 @@ public class Combat extends BaseContent {
         player.removeStatusEffect(StatusEffects.KnockedBack);
         outputText("At the same time, you fire a round at [monster name]. ");
         fireBow();
-        return;
     }
 
     public function approachAfterKnockback3():void {
@@ -469,7 +462,6 @@ public class Combat extends BaseContent {
         outputText("You close the distance between you and [monster a] [monster name] as quickly as possible.\n\n");
         player.removeStatusEffect(StatusEffects.KnockedBack);
         enemyAI();
-        return;
     }
 
     public function isPlayerSilenced():Boolean {
@@ -927,20 +919,20 @@ public class Combat extends BaseContent {
                     else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
                 } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
                 if (player.statusEffectv1(StatusEffects.CounterAction) > 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = player.statusEffectv1(StatusEffects.CounterAction);
-                var mutlimeleeattacksCost:Number = 0;
+                var multimeleeattacksCost:Number = 0;
                 //multiple melee attacks costs
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 6) mutlimeleeattacksCost += 30;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) mutlimeleeattacksCost += 20;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 4) mutlimeleeattacksCost += 12;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleeattacksCost += 6;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleeattacksCost += 2;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 6) multimeleeattacksCost += 30;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) multimeleeattacksCost += 20;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 4) multimeleeattacksCost += 12;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) multimeleeattacksCost += 6;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) multimeleeattacksCost += 2;
                 if (player.hasStatusEffect(StatusEffects.BladeDance) || player.weaponPerk == "Dual") {
-                    if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) multimeleelargeattacksCost += 2;
-                    else multimeleelargeattacksCost *= 2;
+                    if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) multimeleeattacksCost += 2;
+                    else multimeleeattacksCost *= 2;
                     flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
                 }
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
-                    if (player.wrath < mutlimeleeattacksCost) {
+                    if (player.wrath < multimeleeattacksCost) {
                         if (player.weaponPerk == "Dual") {
                             outputText("You're too <b>'calm'</b> to attack more than twice in this turn!\n\n");
                             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
@@ -950,7 +942,7 @@ public class Combat extends BaseContent {
                             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
                         }
                     } else {
-                        player.wrath -= mutlimeleeattacksCost;
+                        player.wrath -= multimeleeattacksCost;
                         if (player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && player.weaponPerk == "Dual") {
                             if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 9) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 6;
                             else if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 5) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 4;
@@ -1042,8 +1034,8 @@ public class Combat extends BaseContent {
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) multimeleesmallattacksCost += 3;
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) multimeleesmallattacksCost += 1;
                 if (player.weaponPerk == "Dual Small") {
-                    if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) multimeleelargeattacksCost += 1;
-                    else multimeleelargeattacksCost *= 2;
+                    if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) multimeleesmallattacksCost += 1;
+                    else multimeleesmallattacksCost *= 2;
                 }
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
                     if (player.wrath < multimeleesmallattacksCost) {
@@ -3006,7 +2998,7 @@ public class Combat extends BaseContent {
 
 //Fantasize
     public function fantasize():void {
-        var lustChange:Number = 0;
+        var lustChange:Number;
         doNext(combatMenu);
         clearOutput();
         if (monster.short == "frost giant" && (player.hasStatusEffect(StatusEffects.GiantBoulder))) {
@@ -3706,7 +3698,7 @@ public class Combat extends BaseContent {
                 if (player.weapon == weapons.NPHBLDE && player.cor > 10) dynStats("cor", -0.3);
                 if (player.weapon == weapons.EXCALIB) {
                     if (player.cor > 10) dynStats("cor", -0.3);
-                    var excaliburLustSelf:Number = 0;
+                    var excaliburLustSelf:Number;
                     excaliburLustSelf = (rand(2) == 0) ? 0 : 1;
                     if (excaliburLustSelf > 0) dynStats("lus", -excaliburLustSelf);
                 }
@@ -4843,9 +4835,9 @@ public class Combat extends BaseContent {
 
     public static const USEMANA_NORMAL:int = 0;
     public static const USEMANA_MAGIC:int = 1;
-    public static const USEMANA_PHYSICAL:int = 2;
+    //public static const USEMANA_PHYSICAL:int = 2;
     public static const USEMANA_MAGIC_NOBM:int = 3;
-    public static const USEMANA_BOW:int = 4;
+    //public static const USEMANA_BOW:int = 4;
     public static const USEMANA_WHITE:int = 5;
     public static const USEMANA_BLACK:int = 6;
     public static const USEMANA_WHITE_NOBM:int = 7;
@@ -5170,9 +5162,6 @@ public class Combat extends BaseContent {
 
 //Update combat status effects
     private function combatStatusesUpdate():void {
-        //old outfit used for fetish cultists
-        var oldOutfit:String = "";
-        var changed:Boolean = false;
         //Reset menuloc
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
         hideUpDown();
@@ -6614,7 +6603,7 @@ public class Combat extends BaseContent {
     }
 
     public function regeneration(combat:Boolean = true):void {
-        var healingPercent:Number = 0;
+        var healingPercent:Number;
         if (combat) {
             //Regeneration
             healingPercent = 0;
@@ -7958,29 +7947,29 @@ public class Combat extends BaseContent {
         //Select the scene
         var TeaseFunctionList:Array = [RandomTeaseKiss];
         if (monster.hasCock() > 0)
-            if (player.tail.type == Tail.DEMONIC || player.tail.type == Tail.MOUSE || player.tail.type == Tail.THUNDERBIRD || player.tail.type == Tail.HINEZUMI) TeaseFunctionList.push(RandomTeaseStranglingTail);
+            if (player.tail.type == Tail.DEMONIC || player.tail.type == Tail.MOUSE || player.tail.type == Tail.THUNDERBIRD || player.tail.type == Tail.HINEZUMI) TeaseFunctionList.push(RandomTeaseStranglingTail(damage, crit));
             if (player.tail.type == Tail.MANTICORE_PUSSYTAIL) TeaseFunctionList.push(RandomTeaseManticoreTailfuckInitiate);
         if (player.tail.type == Tail.MANTICORE_PUSSYTAIL && player.tailVenom >= 5)
         {
-            TeaseFunctionList.push(RandomTeaseManticoreTailSpike);
+            TeaseFunctionList.push(RandomTeaseManticoreTailSpike(damage, crit));
         }
-        if (player.tail.type == Tail.LIZARD || player.tail.type == Tail.CAVE_WYRM || player.tail.type == Tail.SALAMANDER) TeaseFunctionList.push(RandomTeaseButtfuckTail);
-        if (player.lowerBody == LowerBody.PLANT_FLOWER) TeaseFunctionList.push(RandomTeaseAlraune);
-        if (player.rearBody.type == RearBody.DISPLACER_TENTACLES) TeaseFunctionList.push(RandomTeaseAlraune);
-        if (player.lowerBody == LowerBody.GOO) TeaseFunctionList.push(RandomTeaseSlime);
-        if (player.countCocksOfType(CockTypesEnum.ANEMONE) > 0) TeaseFunctionList.push(RandomTeaseAnemone);
-        if (player.hasPerk(PerkLib.ElectrifiedDesire)) TeaseFunctionList.push(RandomTeaseRaiju);
-        if (player.harpyScore() >= 8) TeaseFunctionList.push(RandomTeaseHarpy);
-        if (player.kitsuneScore() >= 8) TeaseFunctionList.push(RandomTeaseKitsune);
-        if (player.hasPerk(PerkLib.BlackHeart)) TeaseFunctionList.push(RandomTeaseLustStrike);
-        if (monster.hasBreasts()) TeaseFunctionList.push(RandomTeaseViolateOpponentBreast);
+        if (player.tail.type == Tail.LIZARD || player.tail.type == Tail.CAVE_WYRM || player.tail.type == Tail.SALAMANDER) TeaseFunctionList.push(RandomTeaseButtfuckTail(damage, crit));
+        if (player.lowerBody == LowerBody.PLANT_FLOWER) TeaseFunctionList.push(RandomTeaseAlraune(damage, crit));
+        if (player.rearBody.type == RearBody.DISPLACER_TENTACLES) TeaseFunctionList.push(RandomTeaseDisplacerMilkingInitiate);
+        if (player.lowerBody == LowerBody.GOO) TeaseFunctionList.push(RandomTeaseSlime(damage, crit));
+        if (player.countCocksOfType(CockTypesEnum.ANEMONE) > 0) TeaseFunctionList.push(RandomTeaseAnemone(damage, crit));
+        if (player.hasPerk(PerkLib.ElectrifiedDesire)) TeaseFunctionList.push(RandomTeaseRaiju(damage, crit));
+        if (player.harpyScore() >= 8) TeaseFunctionList.push(RandomTeaseHarpy(damage, crit));
+        if (player.kitsuneScore() >= 8) TeaseFunctionList.push(RandomTeaseKitsune(damage, crit));
+        if (player.hasPerk(PerkLib.BlackHeart)) TeaseFunctionList.push(RandomTeaseLustStrike(damage, crit));
+        if (monster.hasBreasts()) TeaseFunctionList.push(RandomTeaseViolateOpponentBreast(damage, crit));
         if (monster.hasVagina()) {
-            TeaseFunctionList.push(RandomTeaseViolateOpponentPussy);
-            if (player.tongue.type == Tongue.DEMONIC || player.tongue.type == Tongue.DRACONIC || player.tongue.type == Tongue.SNAKE) TeaseFunctionList.push(RandomTeaseLongTongue);
+            TeaseFunctionList.push(RandomTeaseViolateOpponentPussy(damage, crit));
+            if (player.tongue.type == Tongue.DEMONIC || player.tongue.type == Tongue.DRACONIC || player.tongue.type == Tongue.SNAKE) TeaseFunctionList.push(RandomTeaseLongTongue(damage, crit));
         }
         if (monster.hasCock()) {
-            TeaseFunctionList.push(RandomTeaseIfEnnemyCock);
-            if (!player.hasVirginVagina()) TeaseFunctionList.push(RandomTeaseIfEnnemyCockIfPCNoVirgin);
+            TeaseFunctionList.push(RandomTeaseIfEnnemyCock(damage, crit));
+            if (!player.hasVirginVagina()) TeaseFunctionList.push(RandomTeaseIfEnnemyCockIfPCNoVirgin(damage, crit));
         }
 
         var ChosenTease:Function = randomChoice(
@@ -8015,22 +8004,24 @@ public class Combat extends BaseContent {
         }
     }
 
-    public function RandomTeaseKiss(Damage:Number):void {
+    public function RandomTeaseKiss(Damage:Number,crit:Boolean):void {
         outputText("You pull in opponent name into a wild french kiss forcing your tongue in as you begin to choke the protest out of [monster him]. " +
                 "Your opponent eventually starts to struggles and shove you off his face doing [monster his] best not to show how much this aroused [monster him].");
         monster.teased(monster.lustVuln * Damage, false);
+        if (crit) outputText(" <b>Critical!</b>");
     }
 
-    public function RandomTeaseIfEnnemyCock(Damage:Number):void {
+    public function RandomTeaseIfEnnemyCock(Damage:Number,crit:Boolean):void {
         outputText("You gently and skillfully begin to stroke [monster a] [monster name] " + monster.cockDescriptShort() + " giving the tip a wet kiss every now and then in order to coax the delicious pre out, " +
                 "your saliva dripping from the length. [monster a] [monster name] mouths open to let out a confused moan as you work [monster his] tool. ");
         if (monster.balls > 0) outputText("Your second hand is busy massaging the ball sack beneath, " +
                 "intent on speeding up the inevitable and messy orgasm your skillful play will force out of [monster him]. ");
         outputText("Your opponent finally try and fight back for a moment, forcing you to unwrap your grip on [monster his] dick momentarily but the damage is already done.");
         monster.teased(monster.lustVuln * Damage, false);
+        if (crit) outputText(" <b>Critical!</b>");
     }
 
-    public function RandomTeaseIfEnnemyCockIfPCNoVirgin(Damage:Number):void {
+    public function RandomTeaseIfEnnemyCockIfPCNoVirgin(Damage:Number,crit:Boolean):void {
         outputText("You lower yourself onto [monster a] [monster name] " + monster.cockDescriptShort() + " and begin to gently gyrate your hips in order to coax the delicious pre out, " +
                 "drool to the mouth as you drink in on the pleasure as well. [monster a] [monster name] mouths open to let out a confused moan as you work [monster his] tool. " +
                 "You bounce up and down the rod keeping your pussy tightly wrapped around [monster a] [monster name] aching member in order to speed up the inevitable and messy orgasm your " +
@@ -8039,54 +8030,61 @@ public class Combat extends BaseContent {
         Damage *= 1.5;
         Damage = Math.round(Damage);
         monster.teased(monster.lustVuln * Damage, false);
+        if (crit) outputText(" <b>Critical!</b>");
         player.lust += (20 * (1 + monster.newGamePlusMod()));
     }
 
-    public function RandomTeaseStranglingTail(Damage:Number):void {
+    public function RandomTeaseStranglingTail(Damage:Number,crit:Boolean):void {
         outputText("You wrap your prehensile tail around [monster a] [monster name] " + monster.cockDescriptShort() + " and skillfully begin to stroke it, your tail tip poking inside the urethra every now and then, " +
                 "pre gushing out through whatever space is left between. [monster a] [monster name] mouths open to let out a confused moan as you work [monster his] tool. ");
         if (monster.balls > 0) outputText("Your hand is busy massaging the ball sack beneath, intent on speeding up the inevitable and messy orgasm your skillful play will force out of [monster him].");
         outputText("Your opponent finally try and fight back for a moment, forcing you to unwrap your tail momentarily but the damage is done precum already.");
         monster.teased(monster.lustVuln * Damage, false);
+        if (crit) outputText(" <b>Critical!</b>");
     }
 
-    public function RandomTeaseButtfuckTail(Damage:Number):void {
+    public function RandomTeaseButtfuckTail(Damage:Number,crit:Boolean):void {
         outputText("You smile mischievously as you insert inches after inches of your tail into your opponent slowly stretching that cute pucker of [monster his], " +
                 "[monster a] [monster name] eyes going big like platters as you slowly proceed to analy tail fuck [monster him]. Ahhh such thighness in that hole. " +
                 "Sadly it only lasts for a while before [monster he] finally try and fight back for a moment, " +
                 "forcing you to unplug your tail momentarily but by the time your fully out the damage and arousal is already done.");
         monster.teased(monster.lustVuln * Damage);
+        if (crit) outputText(" <b>Critical!</b>");
     }
 
-    public function RandomTeaseViolateOpponentBreast(Damage:Number):void {
+    public function RandomTeaseViolateOpponentBreast(Damage:Number,crit:Boolean):void {
         outputText("You begin to groppe [monster a] [monster name] " + monster.breastDescript(0) + " with both hands, licking the areola and smirking knowingly as the tips hardens in reaction. " +
                 "[monster a] [monster name] moans coax you in doubling up the attention your tongue circling a nipple then moving to the other. " +
                 "It takes great effort from [monster a] [monster name] to snap out and force you off [monster his] tormented chest but this blush you spy on [monster his] cheeks definitively was worth it.");
         monster.teased(monster.lustVuln * Damage, false);
+        if (crit) outputText(" <b>Critical!</b>");
     }
 
-    public function RandomTeaseViolateOpponentPussy(Damage:Number):void {
+    public function RandomTeaseViolateOpponentPussy(Damage:Number,crit:Boolean):void {
         outputText("You mischievously begin to finger [monster a] [monster name] " + monster.vaginaDescript() + " forcing a surprised moan out of [monster him] as you attack [monster his] clitoris relentlessly. " +
                 "Girl precum coat your hand clear sign of your victim pleasure as you strike the weak spot. " +
                 "It takes great effort from [monster a] [monster name] to snap out and force your fingers out [monster his] tormented cunt but this blush you spy on [monster his] cheeks definitively was worth it.");
         monster.teased(monster.lustVuln * Damage, false);
+        if (crit) outputText(" <b>Critical!</b>");
     }
 
-    public function RandomTeaseLongTongue(Damage:Number):void {
+    public function RandomTeaseLongTongue(Damage:Number,crit:Boolean):void {
         outputText("Oh god, [monster a] [monster name] had it coming as you prepare yourself to use your strongest weapon. " +
                 "Your long prehensile tongue slide into [monster a] [monster name] " + monster.vaginaDescript() + " like a tentacle striking the sweet spot with unerring and implacable precision. " +
                 "Your almost jerk your victim clit with your flexible tongue forcing out delirious moans from [monster a] [monster name] as [monster his] knee goes weak from your ministration. " +
                 "In desperation [monster he] punches you forcing you to pull your tongue out of [monster his] tormented cunt but this blush on [monster his] cheeks and those sweat beads you spy " +
                 "on [monster his] forehead definitively were worth it heck your opponent is so staggered by the experiance that you may as well have a few more seconds to play with [monster him].");
         monster.teased(monster.lustVuln * Damage, false);
+        if (crit) outputText(" <b>Critical!</b>");
         player.addStatusValue(StatusEffects.StraddleRoundLeft, 1, +1);
     }
 
-    public function RandomTeaseManticoreTailSpike(Damage:Number):void {
+    public function RandomTeaseManticoreTailSpike(Damage:Number,crit:Boolean):void {
         outputText("Taking advantage of your opponent precary position you pull and grab one of your spike and begins to manicaly " +
                 "impale your opponent repetitively with it injecting venom over and over again while inflicting grievous wounds. " +
                 "Your victim eventually starts to struggles and knock the spike out of your hand but the damage is done.");
         monster.teased(monster.lustVuln * Damage, false);
+        if (crit) outputText(" <b>Critical!</b>");
         monster.tou -= 6;
         if (monster.tou < 1) monster.tou = 1;
         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
@@ -8095,14 +8093,14 @@ public class Combat extends BaseContent {
         player.tailVenom -= 5;
     }
 
-    public function RandomTeaseManticoreTailfuckInitiate(Damage:Number):void {
+    public function RandomTeaseManticoreTailfuckInitiate():void {
         outputText("You lick your lips and hold your victim down as you get into position,  engulfing [monster a] [monster name] juicy " + monster.cockDescriptShort() + " with your tail pussy. You’re going to milk that cumpump for what its worth.");
         var DurationLeft:int = player.statusEffectv1(StatusEffects.StraddleRoundLeft);
         monster.createStatusEffect(StatusEffects.ManticorePlug, 1 + rand(3), DurationLeft, 0, 0);
         monster.removeStatusEffect(StatusEffects.StraddleRoundLeft);
     }
 
-    public function RandomTeaseDisplacerMilkingInitiate(Damage:Number):void {
+    public function RandomTeaseDisplacerMilkingInitiate():void {
         outputText("\n\nYou lick your lips in anticipation as you hold your victim's arms to the ground and plug your two tentacle suckers to [monster his] breasts. " +
                 "[monster he] struggles, flushing red as you flood [monster his] nipples with your lactation inducing venom and begin to force the delicious milk out of [monster his] chest. ");
         var DurationLeft:int = player.statusEffectv1(StatusEffects.StraddleRoundLeft);
@@ -8110,7 +8108,7 @@ public class Combat extends BaseContent {
         monster.removeStatusEffect(StatusEffects.StraddleRoundLeft);
     }
 
-    public function RandomTeaseRaiju(Damage:Number):void {
+    public function RandomTeaseRaiju(Damage:Number,crit:Boolean):void {
         outputText("You begin gathering up electricity before discharging it into your opponent genitals at point blank. [monster His] ");
         if (monster.hasCock()) outputText("cock begins shooting an endless flow of cum");
         if (monster.hasCock() && monster.hasVagina()) outputText(" as [monster his]");
@@ -8121,10 +8119,11 @@ public class Combat extends BaseContent {
         if (monster.hasCock() && monster.hasVagina()) outputText("s");
         outputText(" with your current at the rhythm of [monster a] [monster name] owns heartbeat.");
         monster.teased(monster.lustVuln * Damage, false);
+        if (crit) outputText(" <b>Critical!</b>");
         monster.lustVuln += 0.50;
     }
 
-    public function RandomTeaseHarpy(Damage:Number):void {
+    public function RandomTeaseHarpy(Damage:Number,crit:Boolean):void {
         outputText("You wrap your wings around [monster a] [monster name] firmly planting your plush backside down onto [monster his] cock and slipping it between your cheeks. " +
                 "Your soft ass completely engulfs [monster his] dick and hugs it tightly. " +
                 "You moving your hips up and down massaging and stroking it between your warm soft flesh. You pull [monster a] [monster name] into a kiss, " +
@@ -8133,10 +8132,11 @@ public class Combat extends BaseContent {
                 "You giggle planting a few more kisses around [monster his] mouth and neck as you push [monster him] closer to the edge. " +
                 "Your opponent finally tries and fight back for a moment, forcing you to release [monster his] dick from between your cheeks momentarily but the damage is already done.");
         monster.teased(monster.lustVuln * Damage, false);
+        if (crit) outputText(" <b>Critical!</b>");
         monster.lustVuln += 0.50;
     }
 
-    public function RandomTeaseKitsune(Damage:Number):void {
+    public function RandomTeaseKitsune(Damage:Number,crit:Boolean):void {
         outputText("With a mischievous grin you coat your hands and tail tip with foxfire running the tingling flames deliciously along the length of [monster a] [monster name] body");
         if (monster.hasBreasts()) outputText(", your tails tracing [monster his] " + monster.breastDescript(0) + "");
         outputText(". You finish [monster him] up by focusing your flames on [monster his] crotch bathing [monster his]");
@@ -8147,9 +8147,10 @@ public class Combat extends BaseContent {
         Damage *= 1+((scalingBonusWisdom() + scalingBonusIntelligence())/100);
         Damage = Math.round(Damage);
         monster.teased(monster.lustVuln * Damage, false);
+        if (crit) outputText(" <b>Critical!</b>");
     }
 
-    public function RandomTeaseAlraune(Damage:Number):void {
+    public function RandomTeaseAlraune(Damage:Number,crit:Boolean):void {
         outputText("Now that [monster a] [monster name] is nicely tied up you giggle and you pull [monster him] into a kiss, " +
                 "feeding [monster him] your aphrodisiac nectar as your hand sweetly traces [monster his] cheek, one of your stamen going straight for");
         if (monster.hasVagina()) outputText(" the waiting love canal up front as another takes aim and plunge into ");
@@ -8164,17 +8165,18 @@ public class Combat extends BaseContent {
         Damage = Math.round(Damage);
         Damage *= 2;
         monster.teased(monster.lustVuln * Damage, false);
+        if (crit) outputText(" <b>Critical!</b>");
     }
 
-    public function RandomTeaseLiliraune(Damage:Number):void {
-        outputText("");
-        Damage *= 1+(scalingBonusToughness()*2/100);
-        Damage = Math.round(Damage);
-        Damage *= 2;
-        monster.teased(monster.lustVuln * Damage, false);
-    }
+    //public function RandomTeaseLiliraune(Damage:Number,crit:Boolean):void {
+    //outputText("");
+    //Damage *= 1+(scalingBonusToughness()*2/100);
+    //Damage = Math.round(Damage);
+    //Damage *= 2;
+    //monster.teased(monster.lustVuln * Damage, false);
+    //}
 
-    public function RandomTeaseLustStrike(Damage:Number):void {
+    public function RandomTeaseLustStrike(Damage:Number,crit:Boolean):void {
         outputText("You smile lewdly, almost moaning the syllables as you pose your hand on [monster a] [monster name] crotch " +
                 "waving the demonic signs and delivering your unholy magic directly into your victim's endowment. [monster His] ");
         if (monster.hasCock() > 0) outputText("cock drools black precum and triple in size");
@@ -8189,10 +8191,11 @@ public class Combat extends BaseContent {
         Damage *= 1+(scalingBonusIntelligence()*2/100);
         Damage = Math.round(Damage);
         monster.teased(monster.lustVuln * Damage);
+        if (crit) outputText(" <b>Critical!</b>");
         monster.lustVuln += 0.50;
     }
 
-    public function RandomTeaseAnemone(Damage:Number):void {
+    public function RandomTeaseAnemone(Damage:Number,crit:Boolean):void {
         outputText("You take no time and plug your venomous tentacled anemone cock into [monster a] [monster name] vulnerable pussy. " +
                 "The effect is instantaneous as [monster he] is stung on the entire surface of [monster his] vaginal walls, " +
                 "the lips puffing up and the hole gushing with a telltale spray of girlcum. You begin to piston inside, " +
@@ -8201,9 +8204,10 @@ public class Combat extends BaseContent {
                 "cheeks and those sweat beads you spy on [monster his] forehead definitively were worth it.");
         Damage *= 2;
         monster.teased(monster.lustVuln * Damage, false);
+        if (crit) outputText(" <b>Critical!</b>");
     }
 
-    public function RandomTeaseSlime(Damage:Number):void {
+    public function RandomTeaseSlime(Damage:Number,crit:Boolean):void {
         outputText("You take no time and begins flooding yourself into [monster a] [monster name] vulnerable ");
         if (monster.hasVagina()) outputText("pussy");
         if (monster.hasVagina() && monster.hasCock()) outputText(" and ");
@@ -8219,6 +8223,7 @@ public class Combat extends BaseContent {
         Damage = Math.round(Damage);
         player.slimeFeed();
         monster.teased(monster.lustVuln * Damage, false);
+        if (crit) outputText(" <b>Critical!</b>");
     }
 
     public function StraddleLeggoMyEggo():void {
@@ -8355,22 +8360,13 @@ public class Combat extends BaseContent {
             fatigueRecovery();
             manaregeneration();
             soulforceregeneration();
-            var damage:Number = 0;
-            var chance:Number = 0;
+            var damage:Number;
+            var chance:Number;
             var bimbo:Boolean = false;
             var bro:Boolean = false;
             var futa:Boolean = false;
-            var choices:Array = new Array();
-            var select:Number = 0;
             //Tags used for bonus damage and chance later on
-            var breasts:Boolean = false;
-            var penis:Boolean = false;
-            var balls:Boolean = false;
-            var vagina:Boolean = false;
-            var anus:Boolean = false;
-            var ass:Boolean = false;
             //If auto = true, set up bonuses using above flags
-            var auto:Boolean = true;
             //==============================
             //Determine basic success chance.
             //==============================
@@ -8413,7 +8409,6 @@ public class Combat extends BaseContent {
             //10% for bimbo shits
             if (bimbo || bro || futa) {
                 damage += 5;
-                bimbo = true;
             }
             if (player.findPerk(PerkLib.FlawlessBody) >= 0) damage += 10;
             damage += scalingBonusLibido() * 0.1;
@@ -8532,22 +8527,12 @@ public class Combat extends BaseContent {
             fatigueRecovery();
             manaregeneration();
             soulforceregeneration();
-            var damage:Number = 0;
-            var chance:Number = 0;
+            var damage:Number;
+            var chance:Number;
             var bimbo:Boolean = false;
             var bro:Boolean = false;
             var futa:Boolean = false;
-            var choices:Array = new Array();
-            var select:Number = 0;
-            //Tags used for bonus damage and chance later on
-            var breasts:Boolean = false;
-            var penis:Boolean = false;
-            var balls:Boolean = false;
-            var vagina:Boolean = false;
-            var anus:Boolean = false;
-            var ass:Boolean = false;
             //If auto = true, set up bonuses using above flags
-            var auto:Boolean = true;
             //==============================
             //Determine basic success chance.
             //==============================
@@ -8590,7 +8575,6 @@ public class Combat extends BaseContent {
             //10% for bimbo shits
             if (bimbo || bro || futa) {
                 damage += 5;
-                bimbo = true;
             }
             if (player.findPerk(PerkLib.FlawlessBody) >= 0) damage += 10;
             damage += scalingBonusLibido() * 0.1;
@@ -8688,21 +8672,10 @@ public class Combat extends BaseContent {
             fatigueRecovery();
             manaregeneration();
             soulforceregeneration();
-            var damage:Number = 0;
+            var damage:Number;
             var bimbo:Boolean = false;
             var bro:Boolean = false;
             var futa:Boolean = false;
-            var choices:Array = new Array();
-            var select:Number = 0;
-            //Tags used for bonus damage and chance later on
-            var breasts:Boolean = false;
-            var penis:Boolean = false;
-            var balls:Boolean = false;
-            var vagina:Boolean = false;
-            var anus:Boolean = false;
-            var ass:Boolean = false;
-            //If auto = true, set up bonuses using above flags
-            var auto:Boolean = true;
             //==============================
             //Determine basic success chance.
             //==============================
@@ -8724,7 +8697,6 @@ public class Combat extends BaseContent {
             //10% for bimbo shits
             if (bimbo || bro || futa) {
                 damage += 5;
-                bimbo = true;
             }
             if (player.findPerk(PerkLib.FlawlessBody) >= 0) damage += 10;
             damage += scalingBonusLibido() * 0.1;
@@ -8811,21 +8783,10 @@ public class Combat extends BaseContent {
             fatigueRecovery();
             manaregeneration();
             soulforceregeneration();
-            var damage:Number = 0;
+            var damage:Number;
             var bimbo:Boolean = false;
             var bro:Boolean = false;
             var futa:Boolean = false;
-            var choices:Array = new Array();
-            var select:Number = 0;
-            //Tags used for bonus damage and chance later on
-            var breasts:Boolean = false;
-            var penis:Boolean = false;
-            var balls:Boolean = false;
-            var vagina:Boolean = false;
-            var anus:Boolean = false;
-            var ass:Boolean = false;
-            //If auto = true, set up bonuses using above flags
-            var auto:Boolean = true;
             //==============================
             //Determine basic success chance.
             //==============================
@@ -8847,7 +8808,6 @@ public class Combat extends BaseContent {
             //10% for bimbo shits
             if (bimbo || bro || futa) {
                 damage += 5;
-                bimbo = true;
             }
             if (player.findPerk(PerkLib.FlawlessBody) >= 0) damage += 10;
             damage += scalingBonusLibido() * 0.1;

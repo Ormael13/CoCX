@@ -5477,7 +5477,7 @@ public class PerkLib
             }, "Spider or any snake-like race");
 			WhaleFat.requireMouthMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.orcaScore() >= 12;
-			}, "Orca race")
+			}, "Orca race");
             /*
 			if (player.() >=  && ) {
 			_add(new PerkClass(PerkLib.));

@@ -795,7 +795,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
 			outputText("You end your theme with a powerful finale compelling everyone around to adore and love you.");
 			var lustDmgF:Number = monster.lustVuln * 3 * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
-			lustDmg += IntligenceModifier;
+			lustDmgF += IntligenceModifier;
 			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmgF *= 1.5;
 			if (monster.hasPerk(PerkLib.EnemyGroupType)) {
 				if (player.hasPerk(PerkLib.ArouseTheAudience)) lustDmgF *= 7.5;
@@ -828,14 +828,14 @@ public class MagicSpecials extends BaseCombatContent {
 			if(monster.plural) outputText("s");
 			outputText(" ears.");
 			var lustDmg2:Number = monster.lustVuln * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
-			lustDmg += IntligenceModifier * 0.5;
+			lustDmg2 += IntligenceModifier * 0.5;
 			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg2 *= 1.5;
-			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
-			if (player.hasPerk(PerkLib.MelkieLung)) lustDmgF *= 1.2;
-			if (player.hasPerk(PerkLib.MelkieLungEvolved)) lustDmgF *= 1.3;
-			if (player.hasPerk(PerkLib.MelkieLungFinalForm)) lustDmgF *= 1.4;
+			if (player.hasPerk(PerkLib.RacialParagon)) lustDmg2 *= 1.50;
+			if (player.hasPerk(PerkLib.Apex)) lustDmg2 *= 1.50;
+			if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg2 *= 1.50;
+			if (player.hasPerk(PerkLib.MelkieLung)) lustDmg2 *= 1.2;
+			if (player.hasPerk(PerkLib.MelkieLungEvolved)) lustDmg2 *= 1.3;
+			if (player.hasPerk(PerkLib.MelkieLungFinalForm)) lustDmg2 *= 1.4;
 			lustDmg2 = Math.round(lustDmg2);
 			monster.teased(lustDmg2);
 			player.addStatusValue(StatusEffects.ChanneledAttack, 1, 1);
@@ -849,12 +849,12 @@ public class MagicSpecials extends BaseCombatContent {
 			var lustDmg:Number = monster.lustVuln * 0.5 * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 			lustDmg += IntligenceModifier * 0.25;
 			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
-			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
-			if (player.hasPerk(PerkLib.MelkieLung)) lustDmgF *= 1.2;
-			if (player.hasPerk(PerkLib.MelkieLungEvolved)) lustDmgF *= 1.3;
-			if (player.hasPerk(PerkLib.MelkieLungFinalForm)) lustDmgF *= 1.4;
+			if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
+			if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
+			if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+			if (player.hasPerk(PerkLib.MelkieLung)) lustDmg *= 1.2;
+			if (player.hasPerk(PerkLib.MelkieLungEvolved)) lustDmg *= 1.3;
+			if (player.hasPerk(PerkLib.MelkieLungFinalForm)) lustDmg *= 1.4;
 			lustDmg = Math.round(lustDmg);
 			monster.teased(lustDmg);
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
@@ -867,13 +867,13 @@ public class MagicSpecials extends BaseCombatContent {
 	public function OrgasmicLightningStrike():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		var temp2:Number = 0;
+		var temp2:Number;
 		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
 			outputText("You achieve a thundering orgasm, lightning surging out of your body as you direct it toward " + monster.a + monster.short + ", gleefully zapping " + monster.pronoun2 + " body with your accumulated lust! Your desire, however, only continues to ramp up.\n\n");
 			temp2 = 5 + rand(player.lib / 5 + player.cor / 10);
 			dynStats("lus", temp2, "scale", false);
 			var lustDmgF:Number = 20 + rand(6);
-			var lustBoostToLustDmg:Number = 0;
+			var lustBoostToLustDmg:Number;
 			var bimbo:Boolean   = false;
 			var bro:Boolean     = false;
 			var futa:Boolean    = false;
@@ -938,7 +938,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
 			lustDmgF = Math.round(lustDmgF);
 			monster.teased(lustDmgF);
-			if (crit == true) outputText(" <b>Critical!</b>");
+			if (crit) outputText(" <b>Critical!</b>");
 			outputText("\n\n");
 			if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 			if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
@@ -989,7 +989,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = Math.round(damage);
 		damage = doLightingDamage(damage, true, true);
 		outputText(" damage. ");
-		if (crit1 == true) outputText(" <b>*Critical Hit!*</b>");
+		if (crit1) outputText(" <b>*Critical Hit!*</b>");
 		dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
 		var lustDmgF:Number = 20 + rand(6);
 		var lustBoostToLustDmg:Number = 0;
@@ -1057,7 +1057,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
 		lustDmgF = Math.round(lustDmgF);
 		monster.teased(lustDmgF);
-		if (crit2 == true) outputText(" <b>Critical!</b>");
+		if (crit2) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -1135,15 +1135,6 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
 		enemyAI();
-	}
-	public function milkBlast():void {
-		
-		
-	}
-	
-	public function cumCannon():void {
-			
-		
 	}
 
 	public function startOniRampage():void {
@@ -1335,7 +1326,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
-		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		monster.createStatusEffect(StatusEffects.Hemorrhage, 4, 0.05, 0, 0);
 		if (monster.hasStatusEffect(StatusEffects.FrostburnDoT)) {
@@ -1404,7 +1395,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
-		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		if (monster.hasStatusEffect(StatusEffects.FrostburnDoT)) {
@@ -2476,9 +2467,9 @@ public class MagicSpecials extends BaseCombatContent {
 	public function warriorsrage():void {
 		clearOutput();
 		player.wrath -= 50;
-		var temp:Number = 0;
-		var tempStr:Number = 0;
-		var tempTouSpe:Number = 0;
+		var temp:Number;
+		var tempStr:Number;
+		var tempTouSpe:Number;
 		var warriorsrageDuration:Number = 10;
 		var WarriorsRageBoost:Number = 10;
 		if (player.hasPerk(PerkLib.JobSwordsman)) WarriorsRageBoost += 5;
@@ -2519,9 +2510,9 @@ public class MagicSpecials extends BaseCombatContent {
 		var temp1:Number = 0;
 		var temp2:Number = 0;
 		var temp3:Number = 0;
-		var tempStr:Number = 0;
-		var tempTou:Number = 0;
-		var tempSpe:Number = 0;
+		var tempStr:Number;
+		var tempTou:Number;
+		var tempSpe:Number;
 		if (player.hasPerk(PerkLib.ImprovedCrinosShape)) {
 			if (player.hasPerk(PerkLib.GreaterCrinosShape)) {
 				if (player.hasPerk(PerkLib.MasterCrinosShape)) {
@@ -2689,7 +2680,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("for ");
 		damage = doFireDamage(damage, true, true);
 		outputText(" damage.");
-		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
 			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -2909,7 +2900,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		damage = Math.round(damage);
 		damage = doFireDamage(damage, true, true);
-		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -3021,7 +3012,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		damage = Math.round(damage);
 		damage = doFireDamage(damage, true, true);
-		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -3144,7 +3135,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		damage = Math.round(damage);
 		damage = doFireDamage(damage, true, true);
-		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -3253,13 +3244,13 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
-		outputText(" ")
+		outputText(" ");
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		damage = Math.round(damage);
 		damage = doFireDamage(damage, true, true);
-		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -3380,7 +3371,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		damage = Math.round(damage);
 		damage = doFireDamage(damage, true, true);
-		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -3612,7 +3603,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
 		lustDmgF = Math.round(lustDmgF);
 		monster.teased(lustDmgF);
-		if (critL == true) outputText(" <b>Critical!</b>");
+		if (critL) outputText(" <b>Critical!</b>");
 		monster.spe -= 15;
 		if (monster.spe < 1) monster.spe = 1;
 		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
@@ -3630,7 +3621,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = Math.round(damage);
 		outputText(" ");
 		damage = doMagicDamage(damage, true, true);
-		if (critP == true) outputText(" <b>*Critical Hit!*</b>");
+		if (critP) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
@@ -3664,8 +3655,8 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("Startled by your query, " + monster.a + monster.short + " gives you a troubled look, everyone knows of the terrifying power of a sphinx riddle used as a curse. You give " + monster.a + monster.short + " some time crossing your forepaws in anticipation. ");
 
 		//odds of success
-		var baseInteReq:Number = 200
-		var chance:Number = Math.max(player.inte/baseInteReq, 0.05) + 25
+		var baseInteReq:Number = 200;
+		var chance:Number = Math.max(player.inte/baseInteReq, 0.05) + 25;
 		chance = Math.min(chance, 0.80);
 
 		if (Math.random() < chance) {
@@ -3679,7 +3670,6 @@ public class MagicSpecials extends BaseCombatContent {
 			critChance += combatMagicalCritical();
 			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
-				crit = true;
 				damage *= 1.75;
 			}
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
@@ -3687,6 +3677,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 			damage = Math.round(damage);
 			damage = doMagicDamage(damage, true, true);
+			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			//Lust damage dealth
 			if (monster.lustVuln > 0) {
 				outputText(" ");
@@ -3753,7 +3744,6 @@ public class MagicSpecials extends BaseCombatContent {
 		doNext(playerMenu);
 		if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		else enemyAI();
-		return;
 	}
 
 //Fascinate
@@ -3826,7 +3816,6 @@ public class MagicSpecials extends BaseCombatContent {
 		doNext(playerMenu);
 		if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		else enemyAI();
-		return;
 	}
 
 //Lust strike
@@ -3892,7 +3881,6 @@ public class MagicSpecials extends BaseCombatContent {
 		doNext(playerMenu);
 		if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		else enemyAI();
-		return;
 	}
 	
 	public function possess():void {
