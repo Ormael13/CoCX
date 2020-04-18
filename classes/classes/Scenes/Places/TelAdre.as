@@ -1076,7 +1076,7 @@ public function kaibaShopMainMenu2():void {
 	addButton(0, "FlameLizR", buyItem, jewelries.FLLIRNG).hint("Flame Lizard ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
 	addButton(1, "InferMouseR", buyItem, jewelries.INMORNG).hint("Infernal Mouse ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Blazing battle spirit.");
 	addButton(2, "UnDefKingS", buyItem, jewelries.UNDKINS).hint("Undefeated King's Signet - Increase max wrath by 100. When worn on right hand (slot 1 and 3 for rings) would have additional effects: increase max wrath by another 100 (with base bonus it's +200), generate 6/3 wrath per turn/hour, increase multiplied on Power Attack damage by 1.");
-	addButton(3, "W.I.Cloak", buyItem, armors.WIC).hint("Walpurgis Izalia Cloak -  Increase fire damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
+	addButton(3, "W.I.Cloak", buyItem, armors.WIC).hint("Walpurgis Izalia Cloak -  Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
 	//addButton(3, "Necklace", buyItem, necklaces.CSNECK);
 	//addButton(4, "Necklace", buyItem, necklaces.CSNECK);
 	addButton(5, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Remove range accuracy penalty when flying and increase range accuracy by 20%.");
@@ -1108,7 +1108,6 @@ private function buyItem(odd:ItemType):void{
 		outputText("You realise you don’t have enough gems for this item. When you tell the shopkeeper so it causes Kaiba to sigh in disappointment.\n\n");
 		outputText("\"<i>Fair enough keep looking around I’m sure we have a cheaper product you may need.</i>\"\n\n");
 		doNext(kaibaShopInside);
-		return;
 	}
 	else doYesNo(curry(buyItemYes,odd), buyItemNo);
 }
@@ -1272,7 +1271,6 @@ private function buyItemT1(odd:ItemType, page:int = 1):void{
 		outputText("Sadly no you don't and Tripxi put back the thing in its display case.\n\n");
 		outputText("\"<i>Anything else I can do for you then?</i>\"\n\n");
 		doNext(tripxiShopMainMenu2a);
-		return;
 	}
 	else doYesNo(curry(buyItemT1Yes,odd), buyItemT1No);
 }
@@ -1296,7 +1294,6 @@ private function buyItemT2(odd:ItemType):void{
 		outputText("Sadly no you don't and Tripxi put back the thing in its display case.\n\n");
 		outputText("\"<i>Anything else I can do for you then?</i>\"\n\n");
 		doNext(tripxiShopMainMenu2b);
-		return;
 	}
 	else doYesNo(curry(buyItemT2Yes,odd), buyItemT2No);
 }
@@ -1320,7 +1317,6 @@ private function buyItemT3(odd:ItemType):void{
 		outputText("Sadly no you don't and Tripxi put back the thing in its display case.\n\n");
 		outputText("\"<i>Anything else I can do for you then?</i>\"\n\n");
 		doNext(tripxiShopMainMenu2c);
-		return;
 	}
 	else doYesNo(curry(buyItemT3Yes,odd), buyItemT3No);
 }

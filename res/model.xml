@@ -3541,19 +3541,19 @@
                             <show part="bra_fg/comfortableClotheBraSmall"/>
                         </case>
                         <case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-                            <show part="bra/comfortableClotheBraSmall"/>
+                            <show part="bra_fg/comfortableClotheBraSmall"/>
                         </case>
                         <case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-                            <show part="bra/comfortableClotheBraMedium"/>
+                            <show part="bra_fg/comfortableClotheBraMedium"/>
                         </case>
                         <case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-                            <show part="bra/comfortableClotheBraMedium"/>
+                            <show part="bra_fg/comfortableClotheBraMedium"/>
                         </case>
                         <case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-                            <show part="bra/comfortableClotheBraLarge"/>
+                            <show part="bra_fg/comfortableClotheBraLarge"/>
                         </case>
                         <default>
-                            <show part="bra/comfortableClotheBraLarge"/>
+                            <show part="bra_fg/comfortableClotheBraLarge"/>
                         </default>
                     </switch>
                 </if>
