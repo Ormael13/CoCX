@@ -4104,7 +4104,7 @@
 
             }
             //6b.Infinite Vagina
-            if (player.vaginalCapacity() < 9000 && rand(3) == 0 && changes < changeLimit) {
+            if (player.hasVagina && player.vaginalCapacity() < 9000 && rand(3) == 0 && changes < changeLimit) {
                 if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 9000, 0, 0, 0);
                 else player.addStatusValue(StatusEffects.BonusVCapacity, 1, 9000);
                 outputText("\n\nYour [vagina]'s internal walls feel a tingly wave of strange tightness.  Experimentally, you slip a few fingers, then your hand, then most of your forearm inside yourself.  <b>It seems you're now able to accommodate just about ANYTHING inside your sex.</b>");
