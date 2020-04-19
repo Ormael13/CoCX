@@ -80,17 +80,39 @@ import classes.internals.*;
 			trace(game.flags);
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 				this.short = "labyrinth minotaur";
-				initStrTouSpeInte(350, 300, 175, 100);
-				initWisLibSensCor(100, 120 + this.ballSize * 3, 45 + this.ballSize * 3, 35);
 				this.weaponName = "pair of deadly battle axes";
 				this.weaponVerb = "cleave";
-				this.weaponAttack = 100;
 				this.armorName = "steel full plate";
-				this.armorDef = 75;
-				this.armorMDef = 15;
-				this.bonusHP = 200 + rand(this.ballSize * 3);
-				this.bonusLust = 40 + rand(this.ballSize * 4);
-				this.level = 65;
+				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
+					initStrTouSpeInte(400, 340, 215, 110);
+					initWisLibSensCor(110, 140 + this.ballSize * 5, 55 + this.ballSize * 5, 35);
+					this.weaponAttack = 154;
+					this.armorDef = 125;
+					this.armorMDef = 25;
+					this.bonusHP = 300 + rand(this.ballSize * 5);
+					this.bonusLust = 60 + rand(this.ballSize * 6);
+					this.level = 73;
+				}
+				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 50) {
+					initStrTouSpeInte(375, 320, 195, 105);
+					initWisLibSensCor(105, 130 + this.ballSize * 4, 50 + this.ballSize * 4, 35);
+					this.weaponAttack = 127;
+					this.armorDef = 100;
+					this.armorMDef = 20;
+					this.bonusHP = 250 + rand(this.ballSize * 4);
+					this.bonusLust = 50 + rand(this.ballSize * 5);
+					this.level = 69;
+				}
+				else {
+					initStrTouSpeInte(350, 300, 175, 100);
+					initWisLibSensCor(100, 120 + this.ballSize * 3, 45 + this.ballSize * 3, 35);
+					this.weaponAttack = 100;
+					this.armorDef = 75;
+					this.armorMDef = 15;
+					this.bonusHP = 200 + rand(this.ballSize * 3);
+					this.bonusLust = 40 + rand(this.ballSize * 4);
+					this.level = 65;
+				}
 				this.drop = new ChainedDrop().add(weapons.DL_AXE_, 1 / 8)
 						.add(consumables.MINOCUM, 1 / 5)
 						.add(consumables.MINOBLO, 1 / 2)

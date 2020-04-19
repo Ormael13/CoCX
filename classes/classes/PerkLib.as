@@ -750,7 +750,7 @@ public class PerkLib
 				"You choose the 'Combo Master' perk, gaining another extra attack with fist (weapon).");
 		public static const Convergence:PerkType = mk("Convergence", "Convergence",
 				"Grey magic area of effect spells strike three times against single targets.",
-				"You choose the 'Convergence' perk, gaining chance to attack single targets three times with grey aoe spells.");
+				"You choose the 'Convergence' perk, gaining chance to attack single targets three times with grey aoe spells.");// and third tier white and black
 		public static const CorruptedLibido:PerkType = mk("Corrupted Libido", "Corrupted Libido",
 				"Reduces lust gain by 10%.",
 				"You choose the 'Corrupted Libido' perk.  As a result of your body's corruption, you've become a bit harder to turn on. (Lust gain reduced by 10%!)");
@@ -865,6 +865,12 @@ public class PerkLib
 		public static const Diehard:PerkType = mk("Diehard", "Diehard",
 				"You can't loose by HP until reaching droping into negative health larger than 2% of max HP + 200(scalable). When below 0 HP would lose 1% of max HP per turn.",
 				"You choose the 'Diehard' perk, allowing to contiue fight even when below 0 HP.");
+		public static const DisplacerMetabolism:PerkType = mk("Displacer Metabolism", "Displacer Metabolism",
+				"Allows you to gain a boost of speed for a few hours after an intake of cum and allow attack twice with tail spike per turn.",
+				"You choose the 'Displacer Metabolism' perk, allows you to gain a boost of speed after an intake of milk and double the damage of claws attacks.");
+		public static const DisplacerMetabolismEvolved:PerkType = mk("Displacer Metabolism (Evolved)", "Displacer Metabolism (Evolved)",
+				"Increase by (10 * NG tier) boost of speed for a five hours longer after an intake of milk and increase max Hunger cap by 50 (if PC have Hunger bar active).",
+				"You choose the 'Displacer Metabolism (Evolved)' perk, allows you to increase max boost of speed after an intake of milk and keeping it for 50% longer. Alse triple the damage of claws attacks.");
 		public static const Doctor:PerkType = mk("Doctor", "Doctor",
 				"You got promoted to a doctor, allowing you to cure a wider variety of ailments. This knowledge allows you to heal yourself better, increasing health regen.",
 				"You choose the 'Doctor' perk, increasing HP gains by 20%.");
@@ -2417,6 +2423,9 @@ public class PerkLib
 		public static const Saturation:PerkType = mk("Saturation", "Saturation",
 				"Using your advanced knowledge, you soak each transformative in a special liquid to enhance their effects +1 effect.",
 				"You choose the 'Saturation' perk, number of possible effects of transformatives +1.");
+		public static const ScandalousSuccubusClothing:PerkType = mk("Scandalous Succubus Clothing", "Scandalous SuccubusClothing",
+				"Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.",
+				"Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.\n");
 		public static const ScyllaInkGlands:PerkType = mk("Scylla Ink Glands", "Scylla Ink Glands",
 				"Your Scylla Ink Glands increase rate at which your body produce ink and slight boost to your natural strength.",
 				"You choose the 'Scylla Ink Glands' perk, due to repeadly use of ink attack leading to denveloping ink glands!");
@@ -2595,6 +2604,12 @@ public class PerkLib
 		public static const SteelStorm:PerkType = mk("Steel Storm", "Steel Storm",
 				"Gain two (or four/six if PC normaly attack 5+/9+ times per turn) extra attack when dual wielding.",
 				"You choose the 'Steel Storm' perk. Gain two (or four/six if PC normaly attack 5+/9+ times per turn) extra attack when dual wielding.");
+		public static const Straddle:PerkType = mk("Straddle", "Straddle",
+				"You may now perform the straddle action in battle against stunned foes. Initiating a grappling stance. This grapple efficiency is based on libido and only function on single target humanoids.\n",
+				"You choose the 'Straddle' perk, Allowing you to further tease your stunned foe throught devastating grappling techniques.");
+		public static const StraddleImproved:PerkType = mk("Improved Straddle", "Improved Straddle",
+				"Increase the straddle maneuver maximum duration by two rounds.\n",
+				"You choose the 'Improved Straddle' perk, Allowing you to increase the straddle maneuver maximum duration by two rounds.");
 		public static const StrongElementalBond:PerkType = mk("Strong Elemental Bond", "Strong Elemental Bond",
 				"Lower by 10 needed mana to sustain active elemental in combat.",
 				"You choose the 'Strong Elemental Bond' perk, enhancing your connection with elementals and lowering mana needed to maintain bonds.");
@@ -3070,6 +3085,8 @@ public class PerkLib
 				"You can metabolise sex into energy and can feed from your partners orgasms.");
 		public static const Diapause:PerkType = mk("Diapause", "Diapause",
 				"Pregnancy does not advance normally, but develops quickly after taking in fluids.");
+		public static const DisplacerMilkAddict:PerkType = mk("Displacer Milk Addict", "Displacer Milk Addict",
+				"Causes you to crave milk frequently.");
 		public static const DragonDarknessBreath:PerkType = mk("Dragon darkness breath", "Dragon darkness breath",
 				"Allows access to a dragon darkness breath attack.");
 		public static const DragonFireBreath:PerkType = mk("Dragon fire breath", "Dragon fire breath",
@@ -5017,6 +5034,9 @@ public class PerkLib
             DazzlingDisplay.requirePerk(JobCourtesan)
                     .requireLib(50)
                     .requireLevel(12);
+			Straddle.requirePerk(JobCourtesan)
+					.requireLib(65)
+					.requireLevel(12);
             //Tier 3 Libido Perks
             DemonicDesireIV.requirePerk(DemonicDesireIII)
                     .requireLib(135)
@@ -5057,6 +5077,9 @@ public class PerkLib
                     .requirePerk(EromancyBeginner)
 					.requireLevel(24)
                     .requireLib(100);
+			StraddleImproved.requirePerk(Straddle)
+					.requireLib(130)
+					.requireLevel(24);
             //Tier 5 Libido Perks
             HalfStepToSuperiorSelfControl.requireLib(180)
                     .requireInt(120)
@@ -5327,13 +5350,16 @@ public class PerkLib
             CatlikeNimbleness.requirePerk(Flexibility).requireCustomFunction(function (player:Player):Boolean {
                 return player.catScore() >= 4 || player.nekomataScore() >= 4 || player.displacerbeastScore() >= 4 || player.hellcatScore() >= 4 || player.cheshireScore() >= 4;
             }, "Any cat race");
-            DraconicLungs.requireLungsMutationSlot()
+			DisplacerMetabolism.requireCustomFunction(function (player:Player):Boolean {
+				return player.displacerbeastScore() >= 8;
+			}, "Displacer beast");
+			DraconicLungs.requireLungsMutationSlot()
 				.requirePerk(DragonFireBreath)
                 .requirePerk(DragonIceBreath)
                 .requirePerk(DragonLightningBreath)
                 .requirePerk(DragonDarknessBreath).requireCustomFunction(function (player:Player):Boolean {
-                return player.dragonScore() >= 4;
-            }, "Dragon race");/*
+                return (player.dragonScore() >= 4 || player.frostWyrmScore() >= 10);
+            }, "Dragon race and its variants");/*
 			EasterBunnyEggBag.requirePerk(EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
 			}, "Easter Bunny race");*/
@@ -5432,11 +5458,11 @@ public class PerkLib
                 return player.scyllaScore() >= 5;
             }, "Scylla race");
             TrachealSystem.requireCustomFunction(function (player:Player):Boolean {
-                return player.beeScore() >= 4 || player.mantisScore() >= 4 || player.scorpionScore() >= 4 || player.spiderScore() >= 4;
+                return player.beeScore() >= 4 || player.mantisScore() >= 4 || player.scorpionScore() >= 4 || player.spiderScore() >= 4 || player.cancerScore() >= 4;
             }, "Any insect race");
             TwinHeart.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-				return player.centaurScore() >= 4 || player.unicornScore() >= 8;
-            }, "Centaur or Unicorn race");
+				return player.centaurScore() >= 4 || player.unicornScore() >= 8 || player.cancerScore() >= 8;
+            }, "Tauric or Unicorn race");
 			VampiricBloodsteam.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
                 return player.hasStatusEffect(StatusEffects.VampireThirst);
 				}, "Vampire Thirst")
@@ -5548,13 +5574,13 @@ public class PerkLib
                 return player.scyllaScore() >= 10;
             }, "Scylla race");*/
             TrachealSystemEvolved.requireLevel(6).requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
-                return player.beeScore() >= 8 || player.mantisScore() >= 8 || player.scorpionScore() >= 8 || player.spiderScore() >= 8;
+                return player.beeScore() >= 8 || player.mantisScore() >= 8 || player.scorpionScore() >= 8 || player.spiderScore() >= 8 || player.cancerScore() >= 8;
             }, "Any insect race");
             TwinHeartEvolved.requireLevel(6)
 				.requirePerk(TwinHeart)
 				.requireCustomFunction(function (player:Player):Boolean {
-				return player.centaurScore() >= 8 || player.unicornScore() >= 8;
-            }, "Centaur or Unicorn race");
+				return player.centaurScore() >= 8 || player.unicornScore() >= 8 || player.cancerScore() >= 8;
+            }, "Tauric or Unicorn race");
 			ChimericalBodyInitialStage.requireLevel(6)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 2;
@@ -5689,11 +5715,15 @@ public class PerkLib
 			Amateur.requireLevel(6)
 					.requireAnyPerk(HistoryWhore, PastLifeWhore);
             //Tier 2
+			DisplacerMetabolismEvolved.requireLevel(12)
+					.requirePerk(DisplacerMetabolism).requireCustomFunction(function (player:Player):Boolean {
+				return player.displacerbeastScore() >= 12;
+			}, "Displacer beast");
             DraconicLungsEvolved.requireLevel(12)
                     .requirePerk(DraconicLungs)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.dragonScore() >= 10;
-                    }, "Dragon race");
+						return (player.dragonScore() >= 10 || player.frostWyrmScore() >= 10);
+                    }, "Dragon race and its variants");
 			EasterBunnyEggBagEvolved.requireLevel(12).requirePerk(EasterBunnyEggBag).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
 			}, "Easter bunny race");
@@ -5962,13 +5992,13 @@ public class PerkLib
                 return player.devilkinScore() >= 14;
             }, "Devil race");
             TrachealSystemFinalForm.requireLevel(24).requirePerk(TrachealSystemEvolved).requireCustomFunction(function (player:Player):Boolean {
-                return player.beeScore() >= 12 || player.mantisScore() >= 12 || player.scorpionScore() >= 12 || player.spiderScore() >= 12;
+                return player.beeScore() >= 12 || player.mantisScore() >= 12 || player.scorpionScore() >= 12 || player.spiderScore() >= 12 || player.cancerScore() >= 12;
             }, "Any insect race");
             TwinHeartFinalForm.requireLevel(24)
 				.requirePerk(TwinHeartEvolved)
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.centaurScore() >= 12 || player.unicornScore() >= 12;
-            }, "Centaur or Unicorn race");
+                return player.centaurScore() >= 12 || player.unicornScore() >= 12 || player.cancerScore() >= 12;
+            }, "Tauric or Unicorn race");
 			VenomGlandsFinalForm.requireLevel(24).requirePerk(VenomGlandsEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.spiderScore() >= 12 || player.nagaScore() >= 12 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12 || player.hydraScore() >= 12;
             }, "Spider or any snake-like race");
@@ -6077,8 +6107,8 @@ public class PerkLib
             DraconicLungsFinalForm.requireLevel(30)
                     .requirePerk(DraconicLungsEvolved)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.dragonScore() >= 16;
-                    }, "Dragon race");
+						return (player.dragonScore() >= 16 || player.frostWyrmScore() >= 16);
+                    }, "Dragon race and its variants");
 			EasterBunnyEggBagFinalForm.requireLevel(30).requirePerk(EasterBunnyEggBagEvolved).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
 			}, "Easter Bunny race");

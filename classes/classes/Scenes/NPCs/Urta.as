@@ -3563,7 +3563,13 @@ public function giveTheFoxSomeEggs():void {
 
 	outputText("\n\nBut it's a far different need that is driving you now, and you can't be bothered to engage in much foreplay.  You straddle the sloshed fox, ");
 	if(player.isTaur()) outputText("positioning your centaur, ");
-	else if(player.isDrider()) outputText("drider body over the bulk of her back, ");
+	else if(player.isDrider()) {
+		if (player.lowerBody == LowerBody.DRIDER)
+			outputText("drider body over the bulk of her back, ");
+		else if (player.lowerBody == LowerBody.CANCER){
+			outputText("cancer body over the bulk of her back, ");
+		}
+	}
 	outputText("and release your ovipositor from its usual hiding slit, already dripping with ");
 	if(player.findPerk(PerkLib.SpiderOvipositor) >= 0) outputText("green slime");
 	else outputText("honey");

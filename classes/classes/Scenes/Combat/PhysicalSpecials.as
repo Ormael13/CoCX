@@ -91,12 +91,19 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 			}
 			//Constrict
-			if (player.lowerBody == LowerBody.NAGA) {
+			if (player.isNaga()) {
 				buttons.add("Constrict", SceneLib.desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail.");
 			}
-			//Grapple
-			if (player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) {
-				buttons.add("Grapple", scyllaGrapple).hint("Attempt to grapple a foe with your tentacles.");
+			//Cancer Grab
+			if (player.lowerBody == LowerBody.CANCER) {
+				buttons.add("Grab", combat.CancerGrab).hint("Grab your opponents with your pincers, then proceed to crush them.");
+			}
+			//Dig
+			if (player.lowerBody == LowerBody.CANCER || player.lowerBody == LowerBody.CENTIPEDE || player.lowerBody == LowerBody.FROSTWYRM) {
+				bd = buttons.add("Dig", Dig).hint("Dig underground to escape your opponent attack for a while.");
+				if (player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
+					bd.disable("<b>You can't dig in open water!</b>\n\n");
+				}
 			}
 			//Engulf
 			if (player.lowerBody == LowerBody.GOO) {
@@ -105,25 +112,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//Embrace
 			if ((player.wings.type == Wings.BAT_ARM || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
 				buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
-			}
-			//Pounce
-			if (player.canPounce() && !monster.hasPerk(PerkLib.EnemyGroupType)) {
-				buttons.add("Pounce", catPounce).hint("Pounce and rend your enemy using your claws, this initiate a grapple combo.");
-			}
-			//Grab & Slam
-			if (player.bearpandaScore() >= 10 && !monster.hasPerk(PerkLib.EnemyGroupType)) {
-				buttons.add("Grab", bearGrab).hint("Attempt to grab the opponent in your powerful paws. Does not work on opponent taller than you.");
-				bd = buttons.add("Slam", bearSlam).hint("Furiously slam your target with your powerful paw, staggering and stunning it.");
-				if (player.hasStatusEffect(StatusEffects.CooldownSlamBear)) {
-					bd.disable("<b>You need more time before you can perform Slam again.</b>\n\n");
-				}
-			}
-			//Kick attackuuuu
-			if (player.isTaur() || player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.BUNNY || player.lowerBody == LowerBody.KANGAROO) {
-				bd = buttons.add("Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
-				if (player.hasStatusEffect(StatusEffects.CooldownKick)) {
-					bd.disable("<b>You need more time before you can perform Kick again.</b>\n\n");
-				}
 			}
 			//Gore if mino horns or unicorn/alicorn/bicorn/nightmare horns
 			if (player.horns.type == Horns.COW_MINOTAUR && player.horns.count >= 6) {
@@ -137,6 +125,29 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Upheaval", upheavalAttack).hint("Send your foe flying with your dual nose mounted horns. \n");
 				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(30));
 				else bd.requireFatigue(physicalCost(15));
+			}
+			//Grab & Slam
+			if (player.bearpandaScore() >= 10 && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+				buttons.add("Grab", bearGrab).hint("Attempt to grab the opponent in your powerful paws. Does not work on opponent taller than you.");
+				bd = buttons.add("Slam", bearSlam).hint("Furiously slam your target with your powerful paw, staggering and stunning it.");
+				if (player.hasStatusEffect(StatusEffects.CooldownSlamBear)) {
+					bd.disable("<b>You need more time before you can perform Slam again.</b>\n\n");
+				}
+			}
+			//Grapple
+			if (player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) {
+				buttons.add("Grapple", scyllaGrapple).hint("Attempt to grapple a foe with your tentacles.");
+			}
+			//Kick
+			if (player.isTaur() || player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.BUNNY || player.lowerBody == LowerBody.KANGAROO) {
+				bd = buttons.add("Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
+				if (player.hasStatusEffect(StatusEffects.CooldownKick)) {
+					bd.disable("<b>You need more time before you can perform Kick again.</b>\n\n");
+				}
+			}
+			//Pounce
+			if (player.canPounce() && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+				buttons.add("Pounce", catPounce).hint("Pounce and rend your enemy using your claws, this initiate a grapple combo.");
 			}
 			//Infest if infested
 			if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5 && player.hasCock()) {
@@ -193,19 +204,19 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (!player.hasPerk(PerkLib.ManticoreMetabolism)) {
 					bd = buttons.add("Tail Spike", playerTailSpike).hint("Shoot an envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 					if (player.tailVenom < 50 && player.hasPerk(PerkLib.ManticoreMetabolism)) {
-						bd.disable("You do not have enough venom to shoot spikes right now!");
+						bd.disable("You do not have enough venom to shoot a spikes right now!");
 					}
 					else if (player.tailVenom < 25) {
-						bd.disable("You do not have enough venom to shoot spike right now!");
+						bd.disable("You do not have enough venom to shoot a spike right now!");
 					}
 				}
 				if (player.hasPerk(PerkLib.ManticoreMetabolism)) {
 					bd = buttons.add("Tail Spike", playerOmniTailSpike).hint("Shoot a volley of envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 					if (player.tailVenom < 50 && player.hasPerk(PerkLib.ManticoreMetabolism)) {
-						bd.disable("You do not have enough venom to shoot spikes right now!");
+						bd.disable("You do not have enough venom to shoot multiple spikes right now!");
 					}
 					else if (player.tailVenom < 25) {
-						bd.disable("You do not have enough venom to shoot spike right now!");
+						bd.disable("You do not have enough venom to shoot multiple spikes right now!");
 					}
 				}
 			}
@@ -369,6 +380,22 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasPerk(PerkLib.EasterBunnyEggBag) && flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] > 1) {
 					bd = buttons.add("Omni Egg throw", OmniEggthrowAttack).hint("Throw one or more of your many stashed bunny eggs blinding and arousing the opponent. These attacks benefit from skills that improve thrown weapons. \n\n"+flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+" egg remaining.");
 					bd.requireFatigue(physicalCost(30));
+				}
+			}
+			if (player.orcaScore() > 10 && player.faceType == Face.ORCA) {
+				bd = buttons.add("Play", orcaPlay).hint("Begin toying with your prey by tossing it in the air, initiating a juggling combo.");
+				bd.requireFatigue(physicalCost(30));
+				if (!monster.hasStatusEffect(StatusEffects.Stunned))
+				{
+					bd.disable("<b>You need the ennemy to be stunned in order to use this ability.</b>\n\n");
+				}
+				if (player.tallness < monster.tallness)
+				{
+					bd.disable("<b>You need the ennemy to be smaller then you in order to use this ability.</b>\n\n");
+				}
+				if (player.hasStatusEffect(StatusEffects.CooldownPlay))
+				{
+					bd.disable("<b>You need more time before you can use Play again.</b>\n\n");
 				}
 			}
 			if (player.orcaScore() > 10 && player.faceType == Face.ORCA) {
@@ -4820,7 +4847,20 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else doNext(endLustVictory);
 		}
 	}
-	
+
+	public function Dig():void {
+		clearOutput();
+		if(monster.short == "pod") {
+			outputText("You can't grab something you're trapped inside of!");
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		outputText("You dig yourself into the ground, moving out of your opponent’s reach.");
+		monster.createStatusEffect(StatusEffects.Dig,5,0,0,0);
+		enemyAI();
+	}
+
 	public function kick():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();

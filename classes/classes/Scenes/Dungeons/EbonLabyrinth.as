@@ -262,6 +262,39 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("\n\n");
 			cleanupAfterCombat();
 		}
+		public function defeatedByBoosNo7():void {
+			clearOutput();
+			outputText("\n\n");
+			//[GAME OVER]
+			EventParser.gameOver();
+		}
+		public function defeatBoosNo7():void {
+			clearOutput();
+			outputText("\n\n");
+			cleanupAfterCombat();
+		}
+		public function defeatedByBoosNo8():void {
+			clearOutput();
+			outputText("\n\n");
+			//[GAME OVER]
+			EventParser.gameOver();
+		}
+		public function defeatBoosNo8():void {
+			clearOutput();
+			outputText("\n\n");
+			cleanupAfterCombat();
+		}
+		public function defeatedByBoosNo9():void {
+			clearOutput();
+			outputText("\n\n");
+			//[GAME OVER]
+			EventParser.gameOver();
+		}
+		public function defeatBoosNo9():void {
+			clearOutput();
+			outputText("\n\n");
+			cleanupAfterCombat();
+		}
 		
 		private function encountersFountainOfPurity():void {
 			player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
@@ -465,7 +498,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("<b>It's placeholder encounter to test procing boss fight!</b>");
 			startCombat(new DisplacerBeast(), true);
 		}
-		private function encountersRuletteEL():void {
+		private function encountersRuletteEL1():void {
 			if ((rand(100) < player.statusEffectv1(StatusEffects.EbonLabyrinthA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 				var reset:Number = 10;
 				reset -= player.statusEffectv1(StatusEffects.EbonLabyrinthA);
@@ -714,7 +747,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 				encountersFountainOfPurity();
 			}
-			else encountersRuletteEL();
+			else encountersRuletteEL1();
 		}
 		public function checkingELAchievs():void {
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 50 && flags[kFLAGS.EBON_LABYRINTH] == 1) {

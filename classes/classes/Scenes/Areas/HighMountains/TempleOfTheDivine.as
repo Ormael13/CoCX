@@ -1744,6 +1744,14 @@ use namespace CoC;
 				player.removePerk(PerkLib.HinezumiBurningBloodFinalForm);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.DisplacerMetabolism)) {
+				player.removePerk(PerkLib.DisplacerMetabolism);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.DisplacerMetabolismEvolved)) {
+				player.removePerk(PerkLib.DisplacerMetabolismEvolved);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.DraconicLungs)) {
 				player.removePerk(PerkLib.DraconicLungs);
 				player.perkPoints += 1;

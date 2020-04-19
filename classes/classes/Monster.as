@@ -2,6 +2,7 @@
 {
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
@@ -18,11 +19,14 @@ import classes.Items.WeaponRangeLib;
 import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
+import classes.Scenes.Combat.Combat;
+import classes.Scenes.Combat.CombatMagic;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.EbonLabyrinth.Hydra;
 import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
 import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
 import classes.Scenes.NPCs.ChiChi;
+import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
@@ -753,6 +757,10 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.Masochist) >= 0 && lib >= 60) {
 				multShared += 20;
 				lust += (2 * (1 + newGamePlusMod()));
+				if(armorName == "Scandalous Succubus Clothing") {
+					multShared += 20;
+					lust += (2 * (1 + newGamePlusMod()));
+				}
 			}
 			if (findPerk(PerkLib.FenrirSpikedCollar) >= 0) {
 				multShared += 15;
@@ -772,7 +780,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.ShieldHarmony) >= 0 && tou >= 100 && !hasStatusEffect(StatusEffects.Stunned)) {
 				multShared += 10;
 			}
-			if (findPerk(PerkLib.NakedTruth) >= 0 && spe >= 75 && lib >= 60 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing")) {
+			if (findPerk(PerkLib.NakedTruth) >= 0 && spe >= 75 && lib >= 60 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "Scandalous Succubus Clothing" || armorName == "Walpurgis Izalia Cloak" || armorName == "nothing")) {
 				multShared += 10;
 			}
 			//--STATUS AFFECTS--
@@ -1801,10 +1809,18 @@ import flash.utils.getQualifiedClassName;
 			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
 				if (SceneLib.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
 			}
-			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear)) {
+			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug)) {
 				if (!handleConstricted()) return;
 			}
 			if (hasStatusEffect(StatusEffects.OrcaPlay)) {
+				return;
+			}
+			if (hasStatusEffect(StatusEffects.Straddle)) {
+				return;
+			}
+			if (hasStatusEffect(StatusEffects.Dig)) {
+				outputText("\n\nYour opponent is still looking for you as you remain quietly hiding underground, away from view.");
+				addStatusValue(StatusEffects.Dig, 1, -1);
 				return;
 			}
 			if (hasStatusEffect(StatusEffects.OrcaHasWackedFinish)) {
@@ -1888,7 +1904,37 @@ import flash.utils.getQualifiedClassName;
 			addStatusValue(StatusEffects.Pounce, 1, -1);
 			return false;
 			}
-			else if (player.lowerBody == 26) {
+			if (hasStatusEffect(StatusEffects.ManticorePlug)) {
+				EngineCore.outputText("" + capitalA + short + " pulls to unplug your tail from [monster his] "+cockDescriptShort()+".");
+				if (statusEffectv1(StatusEffects.ManticorePlug) <= 0) {
+					EngineCore.outputText("" + capitalA + short +" pulls to unplug your tail from [monster his] "+cockDescriptShort()+" and manages with great efforts to get it off.");
+					if (statusEffectv3(StatusEffects.ManticorePlug) >= 1) {
+						EngineCore.outputText("You lick your paws in delight still feeling the remains of your recent meal in your tail.");
+					} else {
+						EngineCore.outputText("You growl in annoyance at your denied meal.");
+					}
+					createStatusEffect(StatusEffects.Straddle, statusEffectv2(StatusEffects.ManticorePlug),0,0,0);
+					removeStatusEffect(StatusEffects.ManticorePlug);
+				}
+				addStatusValue(StatusEffects.ManticorePlug, 1, -1);
+				return false;
+			}
+			if (hasStatusEffect(StatusEffects.DisplacerPlug)) {
+				EngineCore.outputText("" + capitalA + short + " struggle to unplug your tentacles suckers.");
+				if (statusEffectv1(StatusEffects.DisplacerPlug) <= 0) {
+					EngineCore.outputText("" + capitalA + short +" struggle to unplug your tentacles suckers from [monster his] "+breastDescript+" and manages with great efforts to get them off.");
+					if (statusEffectv3(StatusEffects.DisplacerPlug) >= 1) {
+						EngineCore.outputText("You lick your paws in delight still feeling the remains of the recent milk flow in your tentacles.");
+					} else {
+						EngineCore.outputText("You growl in annoyance at your denied meal.");
+					}
+					createStatusEffect(StatusEffects.Straddle, statusEffectv2(StatusEffects.DisplacerPlug),0,0,0);
+					removeStatusEffect(StatusEffects.DisplacerPlug);
+				}
+				addStatusValue(StatusEffects.DisplacerPlug, 1, -1);
+				return false;
+			}
+			else if (player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) {
 			EngineCore.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.");
 			if (statusEffectv1(StatusEffects.ConstrictedScylla) <= 0) {
 				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
@@ -1897,10 +1943,19 @@ import flash.utils.getQualifiedClassName;
 			addStatusValue(StatusEffects.ConstrictedScylla, 1, -1);
 			return false;
 			}
-			else if (player.lowerBody == 8) {
+			else if (player.lowerBody == LowerBody.CANCER) {
+				EngineCore.outputText("Your prey pushes at your pincer, twisting and writhing in an effort to escape from your iron grip.");
+				if (statusEffectv1(StatusEffects.CancerGrab) <= 0) {
+					EngineCore.outputText("  " + capitalA + short + " proves to be too much for your pincer to handle, breaking free of your iron grip.");
+					removeStatusEffect(StatusEffects.CancerGrab);
+				}
+				addStatusValue(StatusEffects.CancerGrab, 1, -1);
+				return false;
+			}
+			else if (player.lowerBody == LowerBody.GOO) {
 			EngineCore.outputText("" + capitalA + short + " struggle in your fluid form kicking and screaming to try and get out.");
 			if (statusEffectv1(StatusEffects.GooEngulf) <= 0) {
-				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
+				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your slimy body to handle, breaking free of your fluids.");
 				removeStatusEffect(StatusEffects.GooEngulf);
 			}
 			addStatusValue(StatusEffects.GooEngulf, 1, -1);
@@ -2832,6 +2887,7 @@ import flash.utils.getQualifiedClassName;
 				}
 				else addStatusValue(StatusEffects.IceArmor,1,-1);
 			}
+
 			//Consuming darkness
 			if (player.hasStatusEffect(StatusEffects.ConsumingDarkness)) {
 				if (player.statusEffectv1(StatusEffects.ConsumingDarkness) <= 0) player.removeStatusEffect(StatusEffects.ConsumingDarkness);
@@ -2839,8 +2895,8 @@ import flash.utils.getQualifiedClassName;
 					player.addStatusValue(StatusEffects.ConsumingDarkness, 1, -1);
 					outputText("Hungry darkness gnaw at your foe for ");
 					var store11:Number = 0;
-					store11 += maxHP() * statusEffectv2(StatusEffects.ConsumingDarkness);
-					store11 = SceneLib.combat.doDarknessDamage(store11, true, true);
+					store11 += statusEffectv2(StatusEffects.ConsumingDarkness);
+					SceneLib.combat.doDarknessDamage(store11, true, true);
 					outputText(" damage!\n\n");
 				}
 			}
@@ -2850,24 +2906,26 @@ import flash.utils.getQualifiedClassName;
 				else {
 					player.addStatusValue(StatusEffects.CurseOfDesire, 1, -1);
 					var lustDmg3:Number = 0;
-					lustDmg3 += maxLust() * statusEffectv2(StatusEffects.CurseOfDesire);
+					lustDmg3 += statusEffectv2(StatusEffects.CurseOfDesire);
 					outputText("The curse of desire slowly sap at your victim's resolve and countenance. ");
 					teased(lustDmg3);
 					outputText("\n\n");
 				}
 			}
+
 			//Curse of Weeping
 			if (player.hasStatusEffect(StatusEffects.CurseOfWeeping)) {
 				if (player.statusEffectv1(StatusEffects.CurseOfWeeping) <= 0) player.removeStatusEffect(StatusEffects.CurseOfWeeping);
 				else {
 					player.addStatusValue(StatusEffects.CurseOfWeeping, 1, -1);
 					outputText("Your foe is bleeding due to your curse. ");
-					var hemorrhage3:Number = 0;
-					hemorrhage3 += maxHP() * statusEffectv2(StatusEffects.CurseOfWeeping);
-					hemorrhage3 = SceneLib.combat.doDamage(hemorrhage3);
-					outputText("<b>(<font color=\"#800000\">" + hemorrhage3 + "</font>)</b>\n\n");
+					var hemorrhage3Damage:Number = 0;
+					hemorrhage3Damage += statusEffectv2(StatusEffects.CurseOfWeeping);
+					SceneLib.combat.doDamage(hemorrhage3Damage);
+					outputText("<b>(<font color=\"#800000\">" + hemorrhage3Damage + "</font>)</b>\n\n");
 				}
 			}
+
 			//lowered damage done by enemy attacks debuff
 			if (hasStatusEffect(StatusEffects.EnemyLoweredDamageH)) {
 				if (statusEffectv1(StatusEffects.EnemyLoweredDamageH) <= 0) removeStatusEffect(StatusEffects.EnemyLoweredDamageH);

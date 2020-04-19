@@ -456,7 +456,10 @@ public function SoulskilsManualsShopPunishingKick2():void {
 }
 
 public function ChiChiCampMainMenu2():void {
-	if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaChiChi();
+	if (!player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
+		if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaChiChi();
+		else ChiChiCampMainMenu();
+	}
 	else ChiChiCampMainMenu();
 }
 
@@ -765,6 +768,9 @@ public function mishapsLunaChiChi():void {
 	outputText("That’s quite the surprise. Does the proud fighter she normaly is turn into an awkward village girl the moment shes wet? Well regardless you guess you will have to visit her later because there’s no way she’s letting you approach her right now.\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampLunaMishaps2)) player.addStatusValue(StatusEffects.CampLunaMishaps2, 4, 1);
 	else player.createStatusEffect(StatusEffects.CampLunaMishaps2, 0, 0, 0, 1);
+	if (!player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.createStatusEffect(StatusEffects.LunaWasCaugh, 1, 0, 0, 0);
+	if (player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.addStatusValue(StatusEffects.LunaWasCaugh, 1, 1);
+	if (player.statusEffectv1(StatusEffects.LunaWasCaugh) == 3) outputText("<b>That's it, you're sure of it now, it's all Luna's doing!</b>\n\n");
 	doNext(playerMenu);
 }
 

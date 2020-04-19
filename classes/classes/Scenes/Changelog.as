@@ -78,16 +78,16 @@ package classes.Scenes
 			//outputText("-Added Mitzi and Excellia kids counter tracker to Stats page under Children subpage.\n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
 			outputText("-PC would gain 10 stat poins per level up instead of 5. Below lvl 7 it will increase form 10 stat points to 20 per lvl-up.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
-			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-Hex magic spells gotten dmg calculation changed. (Liadri)\n");
+			outputText("-Magic menu have be seperated into groups: White, Black, Grey and Hex. (Liadri)\n");
+			outputText("-Luna can be caugh after she disable 3 npc's. It would add then option to her interactions to confront her about it. (Liadri)\n");
+			outputText("-New armor (by Liadri): Scandalous Succubus Clothing - buyable at Kaiba shop in Tel'Adre. Cost 6000 gems. Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.\n");
+			outputText("-New tier 2 libido lvl-up perk: Straddle. Req. Job: Courtesan perk and 65+ lib. Effect: You may now perform the straddle action in battle against stunned foes. Initiating a grappling stance.\n");
+			outputText("-New tier 4 libido lvl-up perk: Improved Straddle. Req. Straddle perk and 130+ lib. Effect: Increase the straddle maneuver maximum duration by two rounds.\n");
+			outputText("-New P. Special: Straddle. Type of grapple move like naga coiling. This grapple efficiency is based on libido and only function on single target humanoids.\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-New P. Special: Cancer Grab. Req. to have lower body of Cancer. Type of grapple move like naga coiling.\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
+			outputText("-New P. Special: Dig. Req. to have lower body of Cancer or Centipede.\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-Mobs in Ebon labyrinth would have stats scaling up with amount of passed by room. each 50 rooms they stats and level would grow.\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-Fixed bugs: \n\n");/*ostatni punkt changelogu
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
@@ -139,7 +139,30 @@ package classes.Scenes
 			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -180,6 +203,29 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -451,6 +451,13 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You need more time before you can use Everywhere and nowhere again.\n\n");
 			}
 		}
+		if (player.displacerbeastScore() >= 11) {
+			bd = buttons.add("Displacement", Displacement).hint("Teleport around to avoid your opponents attacks.\n.  \n\nWould go into cooldown after use for: 10 rounds");
+			bd.requireFatigue(physicalCost(30));
+			if (player.hasStatusEffect(StatusEffects.CooldownDisplacement)) {
+				bd.disable("You need more time before you can use Displacement again.\n\n");
+			}
+		}
 		if (player.isNaga() && flags[kFLAGS.SAMIRAH_HYPNOSIS] == 6 && !monster.plural) {
 			bd = buttons.add("Tactical Distraction", TacticalDistraction).hint("Make the target lose its current turn forcing it to interrupt whatever it is doing. \n\nWould go into cooldown after use for: 5 rounds", "Tactical Distraction");
 			if (player.hasStatusEffect(StatusEffects.CooldownTDistraction)) {
@@ -2585,6 +2592,15 @@ public class MagicSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 
+	public function Displacement():void {
+		clearOutput();
+		fatigue(30, USEFATG_PHYSICAL);
+		outputText("You begin teleporting at high speed in order to avoid your opponents strikes\n\n");
+		player.createStatusEffect(StatusEffects.Displacement,6,0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownDisplacement,10,0,0,0);
+		enemyAI();
+	}
+
 	public function TacticalDistraction():void {
 		clearOutput();
 		outputText("You give " + monster.a + monster.short + " a belly dance show, moving your hip from a side to another and displaying your assets. " + monster.capitalA + monster.short + " is so distracted by your dancing it doesn’t realise the two of you are still in battle for a few seconds before snapping out only in time to realise " + monster.pronoun1 + " did absolutely nothing for the last six seconds. ");
@@ -3867,6 +3883,9 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+		if(player.armorName == "Scandalous Succubus Clothing") {
+			lustDmg *= 1.25;
+		}
 		monster.teased(lustDmg);
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
@@ -4684,36 +4703,9 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = doDamage(damage);
 		outputText("Your poison elemental condenses aphrodisiac poison into spike, striking your opponent with them doing <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage.");
 		var lustdamage:Number = 20 + rand(player.statusEffectv2(StatusEffects.SummonedElementalsPoison) + 1);
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 2) damage += 1;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 3) damage += 1;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 4) damage += 1;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 5) damage += 1;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 6) damage += 1;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 7) damage += 1;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 8) damage += 1;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 9) damage += 2;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 10) damage += 2;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 11) damage += 2;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 12) damage += 2;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 13) damage += 2;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 14) damage += 2;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 15) damage += 2;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 16) damage += 2;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 17) damage += 2;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 18) damage += 2;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 19) damage += 2;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 20) damage += 2;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 21) damage += 3;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 22) damage += 3;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 23) damage += 3;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 24) damage += 3;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 25) damage += 3;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 26) damage += 3;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 27) damage += 3;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 28) damage += 3;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 29) damage += 3;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 30) damage += 3;
-		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 31) damage += 3;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 2) lustdamage += 1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 1);
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 9) lustdamage += 1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 8);
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 21) lustdamage += 1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 20);
 		monster.teased(monster.lustVuln * lustdamage);
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);

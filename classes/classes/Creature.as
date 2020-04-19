@@ -863,6 +863,10 @@ public class Creature extends Utils
 		public function get hairColor():String {
 			return _hairColor;
 		}
+		public function set hairColorOnly(value:String):void {
+			_hairColor = value;
+		}
+
 		public function set hairColor(value:String):void {
 			_hairColor = value;
 			if (!skin.hasCoat()) skin.coat.color = value;
@@ -2545,6 +2549,10 @@ public class Creature extends Utils
 			return countCocksOfType(CockTypesEnum.ANEMONE);
 		}
 
+		public function foamingCocks():int { //How many catcocks?
+			return countCocksOfType(CockTypesEnum.CANCER);
+		}
+
 		public function catCocks():int { //How many catcocks?
 			return countCocksOfType(CockTypesEnum.CAT);
 		}
@@ -3325,7 +3333,8 @@ public class Creature extends Utils
 		public function hasFeather():Boolean { return skin.hasFeather(); }
 		public function hasMostlyPlainSkin():Boolean { return skin.hasMostlyPlainSkin(); }
 		public function hasPlainSkinOnly():Boolean { return skin.hasPlainSkinOnly(); }
-		public function hasPartialCoat(coat_type:int):Boolean { return skin.hasPartialCoat(coat_type); }
+		public function hasPartialCoat(coat_type:int):Boolean { return skin.hasPartialCoatOfType(coat_type); }
+		public function hasPartialCoatNoTypeDeclaration():Boolean { return skin.hasPartialCoat(); }
 		public function hasRubberSkin():Boolean { return skin.hasRubberSkin(); }
 		public function hasPlainSkin():Boolean { return skin.hasPlainSkin(); }
 		public function hasGooSkin():Boolean { return skin.hasGooSkin(); }
@@ -4065,6 +4074,10 @@ public class Creature extends Utils
 				if (hasStatusEffect(StatusEffects.EverywhereAndNowhere)) chance += 80;
 				else chance += 30;
 			}
+			if (game.player.displacerbeastScore() >= 11) {
+				if (hasStatusEffect(StatusEffects.Displacement)) chance += 80;
+				else chance += 30;
+			}
 			if (hasStatusEffect(StatusEffects.Flying)) chance += flychance;
 			return chance;
 		}
@@ -4124,6 +4137,7 @@ public class Creature extends Utils
 			if (hasStatusEffect(StatusEffects.HurricaneDance) && (roll < 25)) return "Hurricane Dance";
 			if (hasStatusEffect(StatusEffects.BladeDance) && (roll < 30)) return "Blade Dance";
 			if (game.player.cheshireScore() >= 11 && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 80)))) return "Phasing";
+			if (game.player.displacerbeastScore() >= 11 && ((!hasStatusEffect(StatusEffects.Displacement) && (roll < 30)) || (hasStatusEffect(StatusEffects.Displacement) && (roll < 80)))) return "Displacing";
 			return null;
 		}
 

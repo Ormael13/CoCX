@@ -156,15 +156,39 @@ use namespace CoC;
 		public function DarkSlime() 
 		{
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
-				initStrTouSpeInte(160, 200, 100, 150);
-				initWisLibSensCor(150, 250, 200, 10);
-				this.weaponAttack = 35;
-				this.armorDef = 20;
-				this.armorMDef = 60;
-				this.bonusHP = 400;
-				this.bonusMana = 100;
-				this.bonusLust = 20;
-				this.level = 60;
+				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
+					initStrTouSpeInte(174, 236, 120, 160);
+					initWisLibSensCor(160, 298, 240, 10);
+					this.weaponAttack = 39;
+					this.armorDef = 30;
+					this.armorMDef = 90;
+					this.bonusHP = 800;
+					this.bonusMana = 200;
+					this.bonusLust = 40;
+					this.level = 68;
+				}
+				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 50) {
+					initStrTouSpeInte(167, 218, 110, 155);
+					initWisLibSensCor(155, 274, 220, 10);
+					this.weaponAttack = 37;
+					this.armorDef = 25;
+					this.armorMDef = 75;
+					this.bonusHP = 600;
+					this.bonusMana = 150;
+					this.bonusLust = 30;
+					this.level = 64;
+				}
+				else {
+					initStrTouSpeInte(160, 200, 100, 150);
+					initWisLibSensCor(150, 250, 200, 10);
+					this.weaponAttack = 35;
+					this.armorDef = 20;
+					this.armorMDef = 60;
+					this.bonusHP = 400;
+					this.bonusMana = 100;
+					this.bonusLust = 20;
+					this.level = 60;
+				}
 			}
 			else {
 				initStrTouSpeInte(32, 40, 20, 30);
