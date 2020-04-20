@@ -4708,6 +4708,12 @@ public class PerkLib
             StrongElementalBond.requirePerk(ElementalContractRank3)
                     .requireWis(75)
                     .requireLevel(12);
+			Straddle.requirePerk(JobCourtesan)
+					.requireLib(75)
+					.requireLevel(12);
+			StraddleImproved.requirePerk(JobCourtesan)
+					.requireLib(150)
+					.requireLevel(24);
             RapidReload.requirePerk(JobGunslinger)
 					.requireWis(35)
                     .requireTou(30)
