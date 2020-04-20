@@ -5350,7 +5350,7 @@ public class PerkLib
             CatlikeNimbleness.requirePerk(Flexibility).requireCustomFunction(function (player:Player):Boolean {
                 return player.catScore() >= 4 || player.nekomataScore() >= 4 || player.displacerbeastScore() >= 4 || player.hellcatScore() >= 4 || player.cheshireScore() >= 4;
             }, "Any cat race");
-			DisplacerMetabolism.requireCustomFunction(function (player:Player):Boolean {
+			DisplacerMetabolism.requireMetabolismMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.displacerbeastScore() >= 8;
 			}, "Displacer beast");
 			DraconicLungs.requireLungsMutationSlot()
@@ -5359,10 +5359,10 @@ public class PerkLib
                 .requirePerk(DragonLightningBreath)
                 .requirePerk(DragonDarknessBreath).requireCustomFunction(function (player:Player):Boolean {
                 return (player.dragonScore() >= 4 || player.frostWyrmScore() >= 10);
-            }, "Dragon race and its variants");/*
+            }, "Dragon race and its variants");
 			EasterBunnyEggBag.requirePerk(EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
-			}, "Easter Bunny race");*/
+			}, "Easter Bunny race");
 			EclipticMind.requirePerk(EclipticMind).requireCustomFunction(function (player:Player):Boolean {
 				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
 			}, "Unicorn or Bicorn race");
@@ -5412,7 +5412,7 @@ public class PerkLib
             LizanMarrow.requirePerk(LizanRegeneration).requireCustomFunction(function (player:Player):Boolean {
                 return player.lizardScore() >= 4;
             }, "Lizan race");
-            ManticoreMetabolism.requireCustomFunction(function (player:Player):Boolean {
+            ManticoreMetabolism.requireMetabolismMutationSlot().requireCustomFunction(function (player:Player):Boolean {
                 return player.manticoreScore() >= 5 && player.tailType == Tail.MANTICORE_PUSSYTAIL;
             }, "Manticore race and tail");
             MantislikeAgility.requireMusclesMutationSlot().requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {

@@ -1874,6 +1874,7 @@ private function campMiscActions():void {
 	else addButtonDisabled(0, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
 	if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(1, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
 	else addButtonDisabled(1, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
+	addButton(13, "WiPButton", strtouspeintwislibsenCalculation1ipol).hint("Taka a Hint (wip tooltip)");
 	addButton(14, "Back", campActions);
 }
 
@@ -1924,16 +1925,24 @@ private function MagicWardMenu():void {
 }
 
 private function fillUpPillBottle00():void {
+	clearOutput();
 	outputText("\n\nYou pick up one of your empty pills bottle and starts to put in some of your loose low-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
 	player.destroyItems(useables.E_P_BOT, 1);
 	player.destroyItems(consumables.LG_SFRP, 10);
 	inventory.takeItem(consumables.LGSFRPB, campMiscActions);
 }
 private function fillUpPillBottle01():void {
+	clearOutput();
 	outputText("\n\nYou pick up one of your empty pills bottle and starts to put in some of your loose mid-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
 	player.destroyItems(useables.E_P_BOT, 1);
 	player.destroyItems(consumables.MG_SFRP, 10);
 	inventory.takeItem(consumables.MGSFRPB, campMiscActions);
+}
+private function strtouspeintwislibsenCalculation1ipol():void {
+	clearOutput();
+	outputText("Placeholder for text on how PC reflect on effects of lvl up perks.");
+	player.strtouspeintwislibsenCalculation1();
+	doNext(campMiscActions);
 }
 
 private function SparrableNPCsMenu():void {
@@ -2671,7 +2680,6 @@ public function doSleep(clrScreen:Boolean = true):void {
 		if(timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n");
 		else outputText("You lie down to resume sleeping for the remaining hour.\n");
 	}
-	player.strtouspeintwislibsenCalculation1();
 	goNext(timeQ, true);
 }
 //For shit that breaks normal sleep processing.

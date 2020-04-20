@@ -312,6 +312,17 @@ public function startUrtaQuest():void {
 	player.inte += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 20);
 	player.wis += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 18);
 	player.lib += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30);
+	var UrtaMulti:Number = 1;
+	if (flags[kFLAGS.GAME_DIFFICULTY] == 1) UrtaMulti += 0.1;
+	if (flags[kFLAGS.GAME_DIFFICULTY] == 2) UrtaMulti += 0.3;
+	if (flags[kFLAGS.GAME_DIFFICULTY] == 3) UrtaMulti += 0.6;
+	if (flags[kFLAGS.GAME_DIFFICULTY] == 4) UrtaMulti += 1;
+	player.str = Math.round(player.str * UrtaMulti);
+	player.tou = Math.round(player.tou * UrtaMulti);
+	player.spe = Math.round(player.spe * UrtaMulti);
+	player.inte = Math.round(player.inte * UrtaMulti);
+	player.wis = Math.round(player.wis * UrtaMulti);
+	player.lib = Math.round(player.lib * UrtaMulti);
 
 	//PERKS
 	player.createPerk(PerkLib.Agility,0,0,0,0);

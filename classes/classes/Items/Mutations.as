@@ -13717,7 +13717,7 @@
             if (changes < changeLimit && rand(2) == 0) outputText(player.modTone(10, 5));
 
             //Gain frost wyrm Horns
-            if (changes < changeLimit && rand(3) == 0 && player.horns.type != Horns.FROSTWYRM) {
+            if (player.faceType == Face.ANIMAL_TOOTHS && changes < changeLimit && rand(3) == 0 && player.horns.type != Horns.FROSTWYRM) {
                 if (player.horns.type != Horns.NONE) {
                     if (player.horns.type == Horns.ORCHID) outputText("\n\nYour orchid flowers crumble, falling apart");
                     else outputText("\n\nYour old horns crumble, falling apart in large chunks");
@@ -13735,7 +13735,7 @@
                 changes++;
             }
             //Gain Frost wyrm Eyes
-            if (player.eyes.type != Eyes.FROSTWYRM && rand(3) == 0 && changes < changeLimit) {
+            if (player.faceType == Face.ANIMAL_TOOTHS && player.eyes.type != Eyes.FROSTWYRM && rand(3) == 0 && changes < changeLimit) {
                 CoC.instance.mutations.setEyeTypeAndColor(Eyes.FROSTWYRM, "yellow");
                 outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil and black sclera like that of a frost wyrm. <b>You now have frost wyrm eyes!</b>.");
                 changes++;
@@ -13781,13 +13781,7 @@
                 outputText("\n\nYou wings suddenly shrivel and fall of your back before turning to dust.");
                 changes++;
             }
-            //Neck
-            if (player.rearBody.type != RearBody.FROSTWYRM && changes < changeLimit && rand(3) == 0) {
-                setRearBody(RearBody.FROSTWYRM);
-                outputText("\n\nYou suddenly feel hair growing all around your neck at a crazy pace. It soon gets so thick it almost looks as if you're wearing a white fur collar. <b>Your neck is now well protected against the cold thanks to your thick fur collar.</b>");
-                changes++;
-            }
-            //Wyrm tail
+            //Wyrm legs
             if (player.lowerBody != LowerBody.FROSTWYRM && changes < changeLimit && rand(3) == 0) {
                 if (player.lowerBody == LowerBody.SCYLLA) {
                     outputText("\n\nYou collapse as your tentacle legs starts to merge and the pain is immense.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. " +
@@ -13823,8 +13817,6 @@
                 player.legCount = 1;
                 changes++;
             }
-
-
             //Fix non human arms
             if (changes < changeLimit && rand(3) == 0 && player.arms.type != Arms.FROSTWYRM && player.arms.type != Arms.HUMAN) {
                 humanizeArms();
@@ -13836,14 +13828,18 @@
                 outputText("\n\nYour arms and hands suddenly begins to get thicker and bigger, way beyond human size. Your entire forearms and now massive hands first cover with -scale color- scales then with white fur, giving them the appearance of fluffy padded gloves. From the fur however surges out what used to be your nails, now powerful claws capable of digging through solid rock and ice just like those of a frost wyrm. <b>You now have frost wyrm arms!</b>");
                 changes++;
             }
-
+            //Neck
+            if (player.arms.type == Arms.FROSTWYRM && player.rearBody.type != RearBody.FROSTWYRM && changes < changeLimit && rand(3) == 0) {
+                setRearBody(RearBody.FROSTWYRM);
+                outputText("\n\nYou suddenly feel hair growing all around your neck at a crazy pace. It soon gets so thick it almost looks as if you're wearing a white fur collar. <b>Your neck is now well protected against the cold thanks to your thick fur collar.</b>");
+                changes++;
+            }
             if (player.frostWyrmScore() >= 10 && changes < changeLimit && player.findPerk(PerkLib.DragonIceBreath) < 0) {
                 outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
                 outputText("\n\nIt seems the fafnir tear has awaked some kind of power within you... your throat and chest feel very cold, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon ice breath!</b>)");
                 player.createPerk(PerkLib.DragonIceBreath, 0, 0, 0, 0);
                 changes++;
             }
-
             //BREEDING TIME
             if (player.frostWyrmScore() >= 10 && rand(3) == 0 && player.gender > 0) {
                 outputText("\n\nA sudden swell of lust races through your ");
@@ -15449,7 +15445,7 @@
                 }
 
                 //Set eyes to the racial coloration and change them to cancer type
-                if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && player.eyes.type != Eyes.CANCER) {
+                if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && player.eyes.type != Eyes.CANCER && player.faceType == Face.KUDERE) {
                     setEyeTypeAndColor(Eyes.CANCER,"orange");
                     outputText("\n\nA slight change happens in your eyes as they begin to water. " +
                             "You clear away the tears, going to a puddle to see what's going on. " +

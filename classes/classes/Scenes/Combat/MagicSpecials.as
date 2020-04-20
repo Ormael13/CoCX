@@ -452,7 +452,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.displacerbeastScore() >= 11) {
-			bd = buttons.add("Displacement", Displacement).hint("Teleport around to avoid your opponents attacks.\n.  \n\nWould go into cooldown after use for: 10 rounds");
+			bd = buttons.add("Displacement", Displacement).hint("Teleport around to avoid your opponents attacks. \n\nWould go into cooldown after use for: 10 rounds");
 			bd.requireFatigue(physicalCost(30));
 			if (player.hasStatusEffect(StatusEffects.CooldownDisplacement)) {
 				bd.disable("You need more time before you can use Displacement again.\n\n");

@@ -6372,6 +6372,10 @@ use namespace CoC;
 				frostWyrmCounter++;
 			if (findPerk(PerkLib.DraconicLungsFinalForm) >= 0)
 				frostWyrmCounter++;
+			if (findPerk(PerkLib.DraconicLungs) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
+				frostWyrmCounter++;
+			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
+				frostWyrmCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				frostWyrmCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && frostWyrmCounter >= 4)
@@ -6977,6 +6981,10 @@ use namespace CoC;
 			if (findPerk(PerkLib.TrachealSystemEvolved) >= 0)
 				cancerCounter++;
 			if (findPerk(PerkLib.TrachealSystemFinalForm) >= 0)
+				cancerCounter++;
+			if ((findPerk(PerkLib.TwinHeart) >= 0 || findPerk(PerkLib.TrachealSystem) >= 0) && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
+				cancerCounter++;
+			if ((findPerk(PerkLib.TwinHeartEvolved) >= 0 || findPerk(PerkLib.TrachealSystemEvolved) >= 0) && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
 				cancerCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				cancerCounter += 50;
@@ -8497,6 +8505,20 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
 				lungsMutations++;
 			return lungsMutations;
+		}
+		public function maxMetabolismMutations():Number {
+			var metabolismMutations:Number = 1;
+			if (findPerk(PerkLib.ManticoreMetabolism) >= 0)
+				metabolismMutations--;
+			if (findPerk(PerkLib.DisplacerMetabolism) >= 0)
+				metabolismMutations--;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
+				metabolismMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
+				metabolismMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
+				metabolismMutations++;
+			return metabolismMutations;
 		}
 
 		public function lactationQ():Number
@@ -10216,9 +10238,9 @@ use namespace CoC;
 			}//+10/10-20
 			if (cancerScore() >= 8) {
 				if (cancerScore() >= 20) {
-					maxStrCap2 += (130 * newGamePlusMod);
-					maxSpeCap2 += (110 * newGamePlusMod);
-					maxTouCap2 += (120 * newGamePlusMod);
+					maxStrCap2 += (125 * newGamePlusMod);
+					maxSpeCap2 += (105 * newGamePlusMod);
+					maxTouCap2 += (115 * newGamePlusMod);
 					maxIntCap2 -= (30 * newGamePlusMod);
 					maxWisCap2 -= (15 * newGamePlusMod);
 				}
@@ -10230,9 +10252,9 @@ use namespace CoC;
 					maxWisCap2 -= (15 * newGamePlusMod);
 				}
 				else {
-					maxStrCap2 += (70 * newGamePlusMod);
-					maxSpeCap2 += (30 * newGamePlusMod);
-					maxTouCap2 += (65 * newGamePlusMod);
+					maxStrCap2 += (60 * newGamePlusMod);
+					maxSpeCap2 += (20 * newGamePlusMod);
+					maxTouCap2 += (55 * newGamePlusMod);
 					maxWisCap2 -= (15 * newGamePlusMod);
 				}
 			}//+10 / 10 - 20
@@ -10575,8 +10597,8 @@ use namespace CoC;
 					maxIntCap2 -= (90 * newGamePlusMod);
 					maxLibCap2 += (50 * newGamePlusMod);
 				} else {
-					maxStrCap2 += (85 * newGamePlusMod);
-					maxSpeCap2 += (55 * newGamePlusMod);
+					maxStrCap2 += (90 * newGamePlusMod);
+					maxSpeCap2 += (60 * newGamePlusMod);
 					maxTouCap2 += (60 * newGamePlusMod);
 					maxIntCap2 -= (90 * newGamePlusMod);
 					maxLibCap2 += (30 * newGamePlusMod);
@@ -12164,4 +12186,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}
