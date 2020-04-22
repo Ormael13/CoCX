@@ -4729,7 +4729,7 @@ use namespace CoC;
 				nekomataCounter++;
 			if (lowerBody == LowerBody.CAT)
 				nekomataCounter++;
-			if (rearBody.type == RearBody.LION_MANE)
+			if (rearBody.type == RearBody.NONE)
 				nekomataCounter++;
 			if (hasPartialCoat(Skin.FUR))
 				nekomataCounter++;

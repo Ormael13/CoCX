@@ -5680,11 +5680,12 @@
                 setRearBody(RearBody.DISPLACER_TENTACLES);
                 changes++;
             }
-            if (player.arms.type == Arms.CAT && type == 1 && player.rearBody.type != RearBody.LION_MANE && changes < changeLimit && rand(3) == 0) {
-                outputText("\n\nYou suddenly feel hair growing all around your neck at a crazy pace. It soon get so thick it almost looks as if you're wearing a [haircolor] fur collar. <b>You now have a full lion mane around your neck.</b>");
-                setRearBody(RearBody.LION_MANE);
-                changes++;
-            }
+            //Lion Mane is kept for when the large cat tf is added ORM FOR GOD SAKE NEKOMATA DONT HAVE MANES THEIR OVERSIZED HOUSECATS!
+            //if (player.arms.type == Arms.CAT && type == 1 && player.rearBody.type != RearBody.LION_MANE && changes < changeLimit && rand(3) == 0) {
+                //outputText("\n\nYou suddenly feel hair growing all around your neck at a crazy pace. It soon get so thick it almost looks as if you're wearing a [haircolor] fur collar. <b>You now have a full lion mane around your neck.</b>");
+                //setRearBody(RearBody.LION_MANE);
+                //changes++;
+            //}
             if ((player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES) && type == 2 && rand(3) == 0 && changes < changeLimit && player.faceType != Face.CHESHIRE && player.faceType != Face.CHESHIRE_SMILE) {
                 outputText("\n\nYou suddenly feel like smiling. Why actually look so serious? Everything is easier if you take it with a smile and a laughter. Perhaps it's just you taking on that mentality or it's that weird wonderfruit you took but now you feel you could smile forever showing that wide grin of yours. <b>You now have a cheshire smile.</b>");
                 if (player.faceType == Face.CAT) setFaceType(Face.CHESHIRE);
