@@ -1857,15 +1857,6 @@ public class Camp extends NPCAwareContent {
 		addButton(14, "Back", campActions);
 	}
 
-	private function campMiscActions():void {
-		menu();
-		if (player.hasItem(consumables.LG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(0, "Fill bottle", fillUpPillBottle00).hint("Fill up one of your pill bottles with low-grade soulforce recovery pills.");
-		else addButtonDisabled(0, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
-		if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(1, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
-		else addButtonDisabled(1, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
-		addButton(14, "Back", campActions);
-	}
-
 	private function campBuildingSim():void {
 		menu();
 		if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
@@ -1885,15 +1876,15 @@ public class Camp extends NPCAwareContent {
 		addButton(14, "Back", campActions);
 	}
 
-private function campMiscActions():void {
-	menu();
-	if (player.hasItem(consumables.LG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(0, "Fill bottle", fillUpPillBottle00).hint("Fill up one of your pill bottles with low-grade soulforce recovery pills.");
-	else addButtonDisabled(0, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
-	if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(1, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
-	else addButtonDisabled(1, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
-	addButton(13, "WiPButton", strtouspeintwislibsenCalculation1ipol).hint("Taka a Hint (wip tooltip)");
-	addButton(14, "Back", campActions);
-}
+	private function campMiscActions():void {
+		menu();
+		if (player.hasItem(consumables.LG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(0, "Fill bottle", fillUpPillBottle00).hint("Fill up one of your pill bottles with low-grade soulforce recovery pills.");
+		else addButtonDisabled(0, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
+		if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(1, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
+		else addButtonDisabled(1, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
+		addButton(13, "WiPButton", strtouspeintwislibsenCalculation1ipol).hint("Taka a Hint (wip tooltip)");
+		addButton(14, "Back", campActions);
+	}
 
 	private function MagicWardMenu():void {
 		clearOutput();
@@ -1913,39 +1904,25 @@ private function campMiscActions():void {
 	}
 
 	private function fillUpPillBottle00():void {
+		clearOutput();
 		outputText("\n\nYou pick up one of your empty pills bottle and starts to put in some of your loose low-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
 		player.destroyItems(useables.E_P_BOT, 1);
 		player.destroyItems(consumables.LG_SFRP, 10);
 		inventory.takeItem(consumables.LGSFRPB, campMiscActions);
 	}
-
 	private function fillUpPillBottle01():void {
+		clearOutput();
 		outputText("\n\nYou pick up one of your empty pills bottle and starts to put in some of your loose mid-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
 		player.destroyItems(useables.E_P_BOT, 1);
 		player.destroyItems(consumables.MG_SFRP, 10);
 		inventory.takeItem(consumables.MGSFRPB, campMiscActions);
 	}
-
-private function fillUpPillBottle00():void {
-	clearOutput();
-	outputText("\n\nYou pick up one of your empty pills bottle and starts to put in some of your loose low-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
-	player.destroyItems(useables.E_P_BOT, 1);
-	player.destroyItems(consumables.LG_SFRP, 10);
-	inventory.takeItem(consumables.LGSFRPB, campMiscActions);
-}
-private function fillUpPillBottle01():void {
-	clearOutput();
-	outputText("\n\nYou pick up one of your empty pills bottle and starts to put in some of your loose mid-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
-	player.destroyItems(useables.E_P_BOT, 1);
-	player.destroyItems(consumables.MG_SFRP, 10);
-	inventory.takeItem(consumables.MGSFRPB, campMiscActions);
-}
-private function strtouspeintwislibsenCalculation1ipol():void {
-	clearOutput();
-	outputText("Placeholder for text on how PC reflect on effects of lvl up perks.");
-	player.strtouspeintwislibsenCalculation1();
-	doNext(campMiscActions);
-}
+	private function strtouspeintwislibsenCalculation1ipol():void {
+		clearOutput();
+		outputText("Placeholder for text on how PC reflect on effects of lvl up perks.");
+		player.strtouspeintwislibsenCalculation1();
+		doNext(campMiscActions);
+	}
 
 private function SparrableNPCsMenu():void {
 	clearOutput();
@@ -2688,32 +2665,6 @@ private function SparrableNPCsMenu():void {
 		sleepRecovery(true);
 		goNext(timeQ, true);
 	}
-	goNext(timeQ, true);
-}
-//For shit that breaks normal sleep processing.
-public function sleepWrapper():void {
-	if(model.time.hours == 16) timeQ = 14;
-	if(model.time.hours == 17) timeQ = 13;
-	if(model.time.hours == 18) timeQ = 12;
-	if(model.time.hours == 19) timeQ = 11;
-	if(model.time.hours == 20) timeQ = 10;
-	if(model.time.hours == 21) timeQ = 9;
-	if(model.time.hours == 22) timeQ = 8;
-	if(model.time.hours >= 23) timeQ = 7;
-	if(model.time.hours == 0) timeQ = 6;
-	if(model.time.hours == 1) timeQ = 5;
-	if(model.time.hours == 2) timeQ = 4;
-	if(model.time.hours == 3) timeQ = 3;
-	if(model.time.hours == 4) timeQ = 2;
-	if(model.time.hours == 5) timeQ = 1;
-	if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Ember" || flags[kFLAGS.SLEEP_WITH] == 0)) timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
-	clearOutput();
-	clearOutput();
-	if(timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n");
-	else outputText("You lie down to resume sleeping for the remaining hour.\n");
-	sleepRecovery(true);
-	goNext(timeQ, true);
-}
 
 	public function sleepRecovery(display:Boolean = false):void {
 		var multiplier:Number = 1.0;
@@ -3128,6 +3079,54 @@ public function sleepWrapper():void {
 		addButton(0, "Next", doCamp);//addButton(0, "Next", playerMenu);
 	}
 
+//Wake up from a bad end.
+public function wakeFromBadEnd():void {
+	clearOutput();
+	trace("Escaping bad end!");
+	outputText("No, it can't be.  It's all just a dream!  You've got to wake up!");
+	outputText("\n\nYou wake up and scream.  You pull out a mirror and take a look at yourself.  Yep, you look normal again.  That was the craziest dream you ever had.");
+	if (flags[kFLAGS.TIMES_BAD_ENDED] >= 2) { //FOURTH WALL BREAKER
+		outputText("\n\nYou mumble to yourself \"<i>Another goddamn bad-end.</i>\"");
+	}
+	if (marbleFollower()) outputText("\n\n\"<i>Are you okay, sweetie?</i>\" Marble asks.  You assure her that you're fine; you've just had a nightmare.");
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0) player.hunger = 40;
+	if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2) + (player.tallness / 4))) {
+		outputText("\n\nYou realize the consequences of having oversized balls and you NEED to shrink it right away. Reducto will do.");
+		player.ballSize = (14 + (player.str / 2) + (player.tallness / 4));
+		if (player.ballSize < 1) player.ballSize = 1;
+	}
+	outputText("\n\nYou get up, still feeling traumatized from the nightmares.");
+	//Skip time forward
+	model.time.days++;
+	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0) model.time.hours = flags[kFLAGS.BENOIT_CLOCK_ALARM];
+	else model.time.hours = 6;
+	//Set so you're in camp.
+	DungeonAbstractContent.inDungeon = false;
+	inRoomedDungeon = false;
+	inRoomedDungeonResume = null;
+    CoC.instance.inCombat = false;
+    //Restore stats
+	player.HP = player.maxHP();
+	player.fatigue = 0;
+	statScreenRefresh();
+	//PENALTY!
+	var penaltyMultiplier:int = 1;
+	penaltyMultiplier += flags[kFLAGS.GAME_DIFFICULTY] * 0.5;
+	//Deduct XP and gems.
+	player.gems -= int((player.gems / 10) * penaltyMultiplier);
+	player.XP -= int((player.level * 10) * penaltyMultiplier);
+	if (player.gems < 0) player.gems = 0;
+	if (player.XP < 0) player.XP = 0;
+	//Deduct attributes.
+	if (player.str > 20) dynStats("str", Math.ceil(-player.str * 0.02) * penaltyMultiplier);
+	if (player.tou > 20) dynStats("tou", Math.ceil(-player.tou * 0.02) * penaltyMultiplier);
+	if (player.spe > 20) dynStats("spe", Math.ceil(-player.spe * 0.02) * penaltyMultiplier);
+	if (player.inte > 20) dynStats("inte", Math.ceil(-player.inte * 0.02) * penaltyMultiplier);
+	if (player.wis > 20) dynStats("wis", Math.ceil(-player.wis * 0.02) * penaltyMultiplier);
+	menu();
+	addButton(0, "Next", doCamp);//addButton(0, "Next", playerMenu);
+}
+
 //Camp wall
 	private function buildCampWallPrompt():void {
 		clearOutput();
@@ -3470,7 +3469,7 @@ public function sleepWrapper():void {
 				var soulforce:int = 0;
 				var wrath:int = 0;
 				var lust:int = 0;
-				var statpoints:int = 5;
+				var statpoints:int = 10;
 				var perkpoints:int = 1;
 				if (player.findPerk(PerkLib.AscensionUnlockedPotential) >= 0) {
 					hp += 20;
@@ -3507,7 +3506,7 @@ public function sleepWrapper():void {
 				if (player.findPerk(PerkLib.UnlockArdor3rdStage) >= 0) lust += 1;
 				if (player.findPerk(PerkLib.UnlockArdor4thStage) >= 0) lust += 1;
 				if (player.level < 6) {
-					statpoints += 5;
+					statpoints += 10;
 					perkpoints += 1;
 				}
 				mainView.levelButton.toolTipText = "Level up to increase your maximum HP by " + hp + ", maximum Fatigue by " + fatigue + ", maximum Mana by " + mana + ", maximum Soulforce by " + soulforce + ", maximum Wrath by " + wrath + " and maximum Lust by " + lust + "; gain " + statpoints + " attribute points and " + perkpoints + " perk points.";

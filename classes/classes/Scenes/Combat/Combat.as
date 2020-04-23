@@ -928,13 +928,8 @@ public class Combat extends BaseContent {
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleeattacksCost += 6;
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleeattacksCost += 2;
                 if (player.hasStatusEffect(StatusEffects.BladeDance) || player.weaponPerk == "Dual") {
-<<<<<<< HEAD
                     if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) mutlimeleeattacksCost += 2;
                     else mutlimeleeattacksCost *= 2;
-=======
-                    if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) mutlimeleelargeattacksCost += 2;
-                    else mutlimeleelargeattacksCost *= 2;
->>>>>>> master-wip
                     flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
                 }
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
@@ -1040,13 +1035,9 @@ public class Combat extends BaseContent {
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleesmallattacksCost += 3;
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleesmallattacksCost += 1;
                 if (player.weaponPerk == "Dual Small") {
-<<<<<<< HEAD
                     if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) mutlimeleesmallattacksCost += 1;
                     else mutlimeleesmallattacksCost *= 2;
-=======
-                    if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) mutlimeleelargeattacksCost += 1;
-                    else mutlimeleelargeattacksCost *= 2;
->>>>>>> master-wip
+                    flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
                 }
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
                     if (player.wrath < mutlimeleesmallattacksCost) {
@@ -8994,11 +8985,7 @@ public class Combat extends BaseContent {
         var damage:int;
         damage = unarmedAttack();
         damage += scalingBonusStrength() * 0.5;
-<<<<<<< HEAD
         if (player.arms.type == Arms.DISPLACER) damage*= 2; //Displacers got extra limbs to rend
-=======
-        if (player.arms.type = Arms.DISPLACER) damage*= 2; //Displacers got extra limbs to rend
->>>>>>> master-wip
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
         if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
         if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
