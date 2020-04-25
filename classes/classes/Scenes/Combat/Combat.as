@@ -7877,44 +7877,45 @@ public class Combat extends BaseContent {
         }
     }
 
+    private var StraddleDamage:Number;
+    private var Randomcrit:Boolean;
     public function StraddleTease():void {
         clearOutput();
-        var damage:Number;
-        damage = 6 + rand(3);
+        StraddleDamage = 6 + rand(3);
         if (player.findPerk(PerkLib.SensualLover) >= 0) {
-            damage += 2;
+            StraddleDamage += 2;
         }
-        if (player.findPerk(PerkLib.Seduction) >= 0) damage += 5;
+        if (player.findPerk(PerkLib.Seduction) >= 0) StraddleDamage += 5;
         //+ slutty armor bonus
-        if (player.findPerk(PerkLib.SluttySeduction) >= 0) damage += player.perkv1(PerkLib.SluttySeduction);
-        if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+        if (player.findPerk(PerkLib.SluttySeduction) >= 0) StraddleDamage += player.perkv1(PerkLib.SluttySeduction);
+        if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) StraddleDamage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
         //10% for bimbo shits
         if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) {
-            damage += 5;
+            StraddleDamage += 5;
         }
-        if (player.findPerk(PerkLib.FlawlessBody) >= 0) damage += 10;
-        damage += scalingBonusLibido() * 0.1;
-        if (player.findPerk(PerkLib.JobSeducer) >= 0) damage += player.teaseLevel * 3;
-        else damage += player.teaseLevel * 2;
-        if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) damage *= 1.2;
+        if (player.findPerk(PerkLib.FlawlessBody) >= 0) StraddleDamage += 10;
+        StraddleDamage += scalingBonusLibido() * 0.1;
+        if (player.findPerk(PerkLib.JobSeducer) >= 0) StraddleDamage += player.teaseLevel * 3;
+        else StraddleDamage += player.teaseLevel * 2;
+        if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) StraddleDamage *= 1.2;
         //partial skins bonuses
         switch (player.coatType()) {
             case Skin.FUR:
-                damage += (1 + player.newGamePlusMod());
+                StraddleDamage += (1 + player.newGamePlusMod());
                 break;
             case Skin.SCALES:
-                damage += (2 * (1 + player.newGamePlusMod()));
+                StraddleDamage += (2 * (1 + player.newGamePlusMod()));
                 break;
             case Skin.CHITIN:
-                damage += (3 * (1 + player.newGamePlusMod()));
+                StraddleDamage += (3 * (1 + player.newGamePlusMod()));
                 break;
             case Skin.BARK:
-                damage += (4 * (1 + player.newGamePlusMod()));
+                StraddleDamage += (4 * (1 + player.newGamePlusMod()));
                 break;
         }
         //slutty simplicity bonus
-        if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") damage *= (1 + ((10 + rand(11)) / 100));
-        damage *= .7;
+        if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") StraddleDamage *= (1 + ((10 + rand(11)) / 100));
+        StraddleDamage *= .7;
         var bonusDamage:Number = 0;
         bonusDamage *= .7;
         var damagemultiplier:Number = 1;
@@ -7923,10 +7924,10 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
         if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
         if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
-        damage *= damagemultiplier;
+        StraddleDamage *= damagemultiplier;
         bonusDamage *= damagemultiplier;
         //Determine if critical tease!
-        var crit:Boolean = false;
+        Randomcrit = false;
         var critChance:int = 5;
         if (player.hasPerk(PerkLib.CriticalPerformance)) {
             if (player.lib <= 100) critChance += player.lib / 5;
@@ -7934,48 +7935,46 @@ public class Combat extends BaseContent {
         }
         if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
         if (rand(100) < critChance) {
-            crit = true;
-            damage *= 1.75;
+            Randomcrit = true;
+            StraddleDamage *= 1.75;
         }
-        if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
-        if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) damage *= 1.5;
-        damage = (damage + rand(bonusDamage)) * monster.lustVuln;
-        if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) damage *= 2;
-        damage *= 1.5;
-        damage = Math.round(damage);
+        if (player.hasPerk(PerkLib.ChiReflowLust)) StraddleDamage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
+        if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) StraddleDamage *= 1.5;
+        StraddleDamage = (StraddleDamage + rand(bonusDamage)) * monster.lustVuln;
+        if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) StraddleDamage *= 2;
+        StraddleDamage *= 1.5;
+        StraddleDamage = Math.round(StraddleDamage);
 
         //Select the scene
         var TeaseFunctionList:Array = [RandomTeaseKiss];
-        if (monster.hasCock() > 0)
-            if (player.tail.type == Tail.DEMONIC || player.tail.type == Tail.MOUSE || player.tail.type == Tail.THUNDERBIRD || player.tail.type == Tail.HINEZUMI) TeaseFunctionList.push(RandomTeaseStranglingTail(damage, crit));
+        if (monster.hasCock() > 0) {
+            if (player.tail.type == Tail.DEMONIC || player.tail.type == Tail.MOUSE || player.tail.type == Tail.THUNDERBIRD || player.tail.type == Tail.HINEZUMI) TeaseFunctionList.push(RandomTeaseStranglingTail);
             if (player.tail.type == Tail.MANTICORE_PUSSYTAIL) TeaseFunctionList.push(RandomTeaseManticoreTailfuckInitiate);
+        }
         if (player.tail.type == Tail.MANTICORE_PUSSYTAIL && player.tailVenom >= 5)
         {
-            TeaseFunctionList.push(RandomTeaseManticoreTailSpike(damage, crit));
+            TeaseFunctionList.push(RandomTeaseManticoreTailSpike);
         }
-        if (player.tail.type == Tail.LIZARD || player.tail.type == Tail.CAVE_WYRM || player.tail.type == Tail.SALAMANDER) TeaseFunctionList.push(RandomTeaseButtfuckTail(damage, crit));
-        if (player.lowerBody == LowerBody.PLANT_FLOWER) TeaseFunctionList.push(RandomTeaseAlraune(damage, crit));
+        if (player.tail.type == Tail.LIZARD || player.tail.type == Tail.CAVE_WYRM || player.tail.type == Tail.SALAMANDER) TeaseFunctionList.push(RandomTeaseButtfuckTail);
+        if (player.lowerBody == LowerBody.PLANT_FLOWER) TeaseFunctionList.push(RandomTeaseAlraune);
         if (player.rearBody.type == RearBody.DISPLACER_TENTACLES) TeaseFunctionList.push(RandomTeaseDisplacerMilkingInitiate);
-        if (player.lowerBody == LowerBody.GOO) TeaseFunctionList.push(RandomTeaseSlime(damage, crit));
-        if (player.countCocksOfType(CockTypesEnum.ANEMONE) > 0) TeaseFunctionList.push(RandomTeaseAnemone(damage, crit));
-        if (player.hasPerk(PerkLib.ElectrifiedDesire)) TeaseFunctionList.push(RandomTeaseRaiju(damage, crit));
-        if (player.harpyScore() >= 8) TeaseFunctionList.push(RandomTeaseHarpy(damage, crit));
-        if (player.kitsuneScore() >= 8) TeaseFunctionList.push(RandomTeaseKitsune(damage, crit));
-        if (player.hasPerk(PerkLib.BlackHeart)) TeaseFunctionList.push(RandomTeaseLustStrike(damage, crit));
-        if (monster.hasBreasts()) TeaseFunctionList.push(RandomTeaseViolateOpponentBreast(damage, crit));
+        if (player.lowerBody == LowerBody.GOO) TeaseFunctionList.push(RandomTeaseSlime);
+        if (player.countCocksOfType(CockTypesEnum.ANEMONE) > 0) TeaseFunctionList.push(RandomTeaseAnemone);
+        if (player.hasPerk(PerkLib.ElectrifiedDesire)) TeaseFunctionList.push(RandomTeaseRaiju);
+        if (player.harpyScore() >= 8) TeaseFunctionList.push(RandomTeaseHarpy);
+        if (player.kitsuneScore() >= 8) TeaseFunctionList.push(RandomTeaseKitsune);
+        if (player.hasPerk(PerkLib.BlackHeart)) TeaseFunctionList.push(RandomTeaseLustStrike);
+        if (monster.hasBreasts()) TeaseFunctionList.push(RandomTeaseViolateOpponentBreast);
         if (monster.hasVagina()) {
-            TeaseFunctionList.push(RandomTeaseViolateOpponentPussy(damage, crit));
-            if (player.tongue.type == Tongue.DEMONIC || player.tongue.type == Tongue.DRACONIC || player.tongue.type == Tongue.SNAKE) TeaseFunctionList.push(RandomTeaseLongTongue(damage, crit));
+            TeaseFunctionList.push(RandomTeaseViolateOpponentPussy);
+            if (player.tongue.type == Tongue.DEMONIC || player.tongue.type == Tongue.DRACONIC || player.tongue.type == Tongue.SNAKE) TeaseFunctionList.push(RandomTeaseLongTongue);
         }
         if (monster.hasCock()) {
-            TeaseFunctionList.push(RandomTeaseIfEnnemyCock(damage, crit));
-            if (!player.hasVirginVagina()) TeaseFunctionList.push(RandomTeaseIfEnnemyCockIfPCNoVirgin(damage, crit));
+            TeaseFunctionList.push(RandomTeaseIfEnnemyCock);
+            if (!player.hasVirginVagina()) TeaseFunctionList.push(RandomTeaseIfEnnemyCockIfPCNoVirgin);
         }
-
-        var ChosenTease:Function = randomChoice(
-                TeaseFunctionList
-        );
-        ChosenTease(damage);
+        var ChosenTease:Function = randomChoice(TeaseFunctionList);
+        ChosenTease();
         combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
         if (player.hasPerk(PerkLib.DemonEnergyThirst) || player.hasPerk(PerkLib.KitsuneEnergyThirst)) {
             outputText("\n\nYou gasp in delight as you drink on your victim's energy to replenish your own, feeding of [monster his] pleasure. ");
@@ -8004,87 +8003,87 @@ public class Combat extends BaseContent {
         }
     }
 
-    public function RandomTeaseKiss(Damage:Number,crit:Boolean):void {
+    public function RandomTeaseKiss():void {
         outputText("You pull in opponent name into a wild french kiss forcing your tongue in as you begin to choke the protest out of [monster him]. " +
                 "Your opponent eventually starts to struggles and shove you off his face doing [monster his] best not to show how much this aroused [monster him].");
-        monster.teased(monster.lustVuln * Damage, false);
-        if (crit) outputText(" <b>Critical!</b>");
+        monster.teased(monster.lustVuln * StraddleDamage, false);
+        if (Randomcrit) outputText(" <b>Critical!</b>");
     }
 
-    public function RandomTeaseIfEnnemyCock(Damage:Number,crit:Boolean):void {
+    public function RandomTeaseIfEnnemyCock():void {
         outputText("You gently and skillfully begin to stroke [monster a] [monster name] " + monster.cockDescriptShort() + " giving the tip a wet kiss every now and then in order to coax the delicious pre out, " +
                 "your saliva dripping from the length. [monster a] [monster name] mouths open to let out a confused moan as you work [monster his] tool. ");
         if (monster.balls > 0) outputText("Your second hand is busy massaging the ball sack beneath, " +
                 "intent on speeding up the inevitable and messy orgasm your skillful play will force out of [monster him]. ");
         outputText("Your opponent finally try and fight back for a moment, forcing you to unwrap your grip on [monster his] dick momentarily but the damage is already done.");
-        monster.teased(monster.lustVuln * Damage, false);
-        if (crit) outputText(" <b>Critical!</b>");
+        monster.teased(monster.lustVuln * StraddleDamage, false);
+        if (Randomcrit) outputText(" <b>Critical!</b>");
     }
 
-    public function RandomTeaseIfEnnemyCockIfPCNoVirgin(Damage:Number,crit:Boolean):void {
+    public function RandomTeaseIfEnnemyCockIfPCNoVirgin():void {
         outputText("You lower yourself onto [monster a] [monster name] " + monster.cockDescriptShort() + " and begin to gently gyrate your hips in order to coax the delicious pre out, " +
                 "drool to the mouth as you drink in on the pleasure as well. [monster a] [monster name] mouths open to let out a confused moan as you work [monster his] tool. " +
                 "You bounce up and down the rod keeping your pussy tightly wrapped around [monster a] [monster name] aching member in order to speed up the inevitable and messy orgasm your " +
                 "skilled cunt will force out of [monster him]. Your opponent finally try and fight back for a moment, forcing you to unplug from [monster his] dick momentarily but the damage is already done. " +
                 "And you lick your lips still riding on your own pleasure.");
-        Damage *= 1.5;
-        Damage = Math.round(Damage);
-        monster.teased(monster.lustVuln * Damage, false);
-        if (crit) outputText(" <b>Critical!</b>");
+        StraddleDamage *= 1.5;
+        StraddleDamage = Math.round(StraddleDamage);
+        monster.teased(monster.lustVuln * StraddleDamage, false);
+        if (Randomcrit) outputText(" <b>Critical!</b>");
         player.lust += (20 * (1 + monster.newGamePlusMod()));
     }
 
-    public function RandomTeaseStranglingTail(Damage:Number,crit:Boolean):void {
+    public function RandomTeaseStranglingTail():void {
         outputText("You wrap your prehensile tail around [monster a] [monster name] " + monster.cockDescriptShort() + " and skillfully begin to stroke it, your tail tip poking inside the urethra every now and then, " +
                 "pre gushing out through whatever space is left between. [monster a] [monster name] mouths open to let out a confused moan as you work [monster his] tool. ");
         if (monster.balls > 0) outputText("Your hand is busy massaging the ball sack beneath, intent on speeding up the inevitable and messy orgasm your skillful play will force out of [monster him].");
         outputText("Your opponent finally try and fight back for a moment, forcing you to unwrap your tail momentarily but the damage is done precum already.");
-        monster.teased(monster.lustVuln * Damage, false);
-        if (crit) outputText(" <b>Critical!</b>");
+        monster.teased(monster.lustVuln * StraddleDamage, false);
+        if (Randomcrit) outputText(" <b>Critical!</b>");
     }
 
-    public function RandomTeaseButtfuckTail(Damage:Number,crit:Boolean):void {
+    public function RandomTeaseButtfuckTail():void {
         outputText("You smile mischievously as you insert inches after inches of your tail into your opponent slowly stretching that cute pucker of [monster his], " +
                 "[monster a] [monster name] eyes going big like platters as you slowly proceed to analy tail fuck [monster him]. Ahhh such thighness in that hole. " +
                 "Sadly it only lasts for a while before [monster he] finally try and fight back for a moment, " +
                 "forcing you to unplug your tail momentarily but by the time your fully out the damage and arousal is already done.");
-        monster.teased(monster.lustVuln * Damage);
-        if (crit) outputText(" <b>Critical!</b>");
+        monster.teased(monster.lustVuln * StraddleDamage);
+        if (Randomcrit) outputText(" <b>Critical!</b>");
     }
 
-    public function RandomTeaseViolateOpponentBreast(Damage:Number,crit:Boolean):void {
+    public function RandomTeaseViolateOpponentBreast():void {
         outputText("You begin to groppe [monster a] [monster name] " + monster.breastDescript(0) + " with both hands, licking the areola and smirking knowingly as the tips hardens in reaction. " +
                 "[monster a] [monster name] moans coax you in doubling up the attention your tongue circling a nipple then moving to the other. " +
                 "It takes great effort from [monster a] [monster name] to snap out and force you off [monster his] tormented chest but this blush you spy on [monster his] cheeks definitively was worth it.");
-        monster.teased(monster.lustVuln * Damage, false);
-        if (crit) outputText(" <b>Critical!</b>");
+        monster.teased(monster.lustVuln * StraddleDamage, false);
+        if (Randomcrit) outputText(" <b>Critical!</b>");
     }
 
-    public function RandomTeaseViolateOpponentPussy(Damage:Number,crit:Boolean):void {
+    public function RandomTeaseViolateOpponentPussy():void {
         outputText("You mischievously begin to finger [monster a] [monster name] " + monster.vaginaDescript() + " forcing a surprised moan out of [monster him] as you attack [monster his] clitoris relentlessly. " +
                 "Girl precum coat your hand clear sign of your victim pleasure as you strike the weak spot. " +
                 "It takes great effort from [monster a] [monster name] to snap out and force your fingers out [monster his] tormented cunt but this blush you spy on [monster his] cheeks definitively was worth it.");
-        monster.teased(monster.lustVuln * Damage, false);
-        if (crit) outputText(" <b>Critical!</b>");
+        monster.teased(monster.lustVuln * StraddleDamage, false);
+        if (Randomcrit) outputText(" <b>Critical!</b>");
     }
 
-    public function RandomTeaseLongTongue(Damage:Number,crit:Boolean):void {
+    public function RandomTeaseLongTongue():void {
         outputText("Oh god, [monster a] [monster name] had it coming as you prepare yourself to use your strongest weapon. " +
                 "Your long prehensile tongue slide into [monster a] [monster name] " + monster.vaginaDescript() + " like a tentacle striking the sweet spot with unerring and implacable precision. " +
                 "Your almost jerk your victim clit with your flexible tongue forcing out delirious moans from [monster a] [monster name] as [monster his] knee goes weak from your ministration. " +
                 "In desperation [monster he] punches you forcing you to pull your tongue out of [monster his] tormented cunt but this blush on [monster his] cheeks and those sweat beads you spy " +
                 "on [monster his] forehead definitively were worth it heck your opponent is so staggered by the experiance that you may as well have a few more seconds to play with [monster him].");
-        monster.teased(monster.lustVuln * Damage, false);
-        if (crit) outputText(" <b>Critical!</b>");
+        monster.teased(monster.lustVuln * StraddleDamage, false);
+        if (Randomcrit) outputText(" <b>Critical!</b>");
         player.addStatusValue(StatusEffects.StraddleRoundLeft, 1, +1);
     }
 
-    public function RandomTeaseManticoreTailSpike(Damage:Number,crit:Boolean):void {
+    public function RandomTeaseManticoreTailSpike():void {
         outputText("Taking advantage of your opponent precary position you pull and grab one of your spike and begins to manicaly " +
                 "impale your opponent repetitively with it injecting venom over and over again while inflicting grievous wounds. " +
                 "Your victim eventually starts to struggles and knock the spike out of your hand but the damage is done.");
-        monster.teased(monster.lustVuln * Damage, false);
-        if (crit) outputText(" <b>Critical!</b>");
+        monster.teased(monster.lustVuln * StraddleDamage, false);
+        if (Randomcrit) outputText(" <b>Critical!</b>");
         monster.tou -= 6;
         if (monster.tou < 1) monster.tou = 1;
         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
@@ -8098,6 +8097,7 @@ public class Combat extends BaseContent {
         var DurationLeft:int = player.statusEffectv1(StatusEffects.StraddleRoundLeft);
         monster.createStatusEffect(StatusEffects.ManticorePlug, 1 + rand(3), DurationLeft, 0, 0);
         monster.removeStatusEffect(StatusEffects.StraddleRoundLeft);
+        monster.removeStatusEffect(StatusEffects.Straddle);
     }
 
     public function RandomTeaseDisplacerMilkingInitiate():void {
@@ -8106,9 +8106,10 @@ public class Combat extends BaseContent {
         var DurationLeft:int = player.statusEffectv1(StatusEffects.StraddleRoundLeft);
         monster.createStatusEffect(StatusEffects.DisplacerPlug, 1 + rand(3), DurationLeft, 0, 0);
         monster.removeStatusEffect(StatusEffects.StraddleRoundLeft);
+        monster.removeStatusEffect(StatusEffects.Straddle);
     }
 
-    public function RandomTeaseRaiju(Damage:Number,crit:Boolean):void {
+    public function RandomTeaseRaiju():void {
         outputText("You begin gathering up electricity before discharging it into your opponent genitals at point blank. [monster His] ");
         if (monster.hasCock()) outputText("cock begins shooting an endless flow of cum");
         if (monster.hasCock() && monster.hasVagina()) outputText(" as [monster his]");
@@ -8118,12 +8119,12 @@ public class Combat extends BaseContent {
         outputText(" pulse");
         if (monster.hasCock() && monster.hasVagina()) outputText("s");
         outputText(" with your current at the rhythm of [monster a] [monster name] owns heartbeat.");
-        monster.teased(monster.lustVuln * Damage, false);
-        if (crit) outputText(" <b>Critical!</b>");
+        monster.teased(monster.lustVuln * StraddleDamage, false);
+        if (Randomcrit) outputText(" <b>Critical!</b>");
         monster.lustVuln += 0.50;
     }
 
-    public function RandomTeaseHarpy(Damage:Number,crit:Boolean):void {
+    public function RandomTeaseHarpy():void {
         outputText("You wrap your wings around [monster a] [monster name] firmly planting your plush backside down onto [monster his] cock and slipping it between your cheeks. " +
                 "Your soft ass completely engulfs [monster his] dick and hugs it tightly. " +
                 "You moving your hips up and down massaging and stroking it between your warm soft flesh. You pull [monster a] [monster name] into a kiss, " +
@@ -8131,12 +8132,12 @@ public class Combat extends BaseContent {
                 "[monster His] pre drooling " + monster.cockDescriptShort() + " twitches and strains between your plush cheeks making them slicker. " +
                 "You giggle planting a few more kisses around [monster his] mouth and neck as you push [monster him] closer to the edge. " +
                 "Your opponent finally tries and fight back for a moment, forcing you to release [monster his] dick from between your cheeks momentarily but the damage is already done.");
-        monster.teased(monster.lustVuln * Damage, false);
-        if (crit) outputText(" <b>Critical!</b>");
+        monster.teased(monster.lustVuln * StraddleDamage, false);
+        if (Randomcrit) outputText(" <b>Critical!</b>");
         monster.lustVuln += 0.50;
     }
 
-    public function RandomTeaseKitsune(Damage:Number,crit:Boolean):void {
+    public function RandomTeaseKitsune():void {
         outputText("With a mischievous grin you coat your hands and tail tip with foxfire running the tingling flames deliciously along the length of [monster a] [monster name] body");
         if (monster.hasBreasts()) outputText(", your tails tracing [monster his] " + monster.breastDescript(0) + "");
         outputText(". You finish [monster him] up by focusing your flames on [monster his] crotch bathing [monster his]");
@@ -8144,13 +8145,13 @@ public class Combat extends BaseContent {
         if (monster.hasCock() && monster.hasVagina()) outputText(" and");
         if (monster.hasCock()) outputText(" " + monster.cockDescriptShort() + "");
         outputText(" with fiery lust. Your opponent eventually breaks your concentration by striking you back but nothing prevents you from trying again.");
-        Damage *= 1+((scalingBonusWisdom() + scalingBonusIntelligence())/100);
-        Damage = Math.round(Damage);
-        monster.teased(monster.lustVuln * Damage, false);
-        if (crit) outputText(" <b>Critical!</b>");
+        StraddleDamage *= 1+((scalingBonusWisdom() + scalingBonusIntelligence())/100);
+        StraddleDamage = Math.round(StraddleDamage);
+        monster.teased(monster.lustVuln * StraddleDamage, false);
+        if (Randomcrit) outputText(" <b>Critical!</b>");
     }
 
-    public function RandomTeaseAlraune(Damage:Number,crit:Boolean):void {
+    public function RandomTeaseAlraune():void {
         outputText("Now that [monster a] [monster name] is nicely tied up you giggle and you pull [monster him] into a kiss, " +
                 "feeding [monster him] your aphrodisiac nectar as your hand sweetly traces [monster his] cheek, one of your stamen going straight for");
         if (monster.hasVagina()) outputText(" the waiting love canal up front as another takes aim and plunge into ");
@@ -8161,11 +8162,11 @@ public class Combat extends BaseContent {
                 "begins trashing about eventualy forcing [monster him]self out of your grip with enough strenght to force the both of you back into the previous position. " +
                 "You will mate eventually… it's just a matter of time now.");
         //(Add a toughness modifier and double lust damage)
-        Damage *= 1+(scalingBonusToughness()*2/100);
-        Damage = Math.round(Damage);
-        Damage *= 2;
-        monster.teased(monster.lustVuln * Damage, false);
-        if (crit) outputText(" <b>Critical!</b>");
+        StraddleDamage *= 1+(scalingBonusToughness()*2/100);
+        StraddleDamage = Math.round(StraddleDamage);
+        StraddleDamage *= 2;
+        monster.teased(monster.lustVuln * StraddleDamage, false);
+        if (Randomcrit) outputText(" <b>Critical!</b>");
     }
 
     //public function RandomTeaseLiliraune(Damage:Number,crit:Boolean):void {
@@ -8176,7 +8177,7 @@ public class Combat extends BaseContent {
     //monster.teased(monster.lustVuln * Damage, false);
     //}
 
-    public function RandomTeaseLustStrike(Damage:Number,crit:Boolean):void {
+    public function RandomTeaseLustStrike():void {
         outputText("You smile lewdly, almost moaning the syllables as you pose your hand on [monster a] [monster name] crotch " +
                 "waving the demonic signs and delivering your unholy magic directly into your victim's endowment. [monster His] ");
         if (monster.hasCock() > 0) outputText("cock drools black precum and triple in size");
@@ -8188,26 +8189,26 @@ public class Combat extends BaseContent {
         if (monster.hasCock() && monster.hasVagina()) outputText("s");
         outputText(" with your demonic powers at the rhythm of [monster a] [monster name] owns heartbeat. " +
                 "The unholy transformation even if temporary arouses [monster a] [monster name] to no end.");
-        Damage *= 1+(scalingBonusIntelligence()*2/100);
-        Damage = Math.round(Damage);
-        monster.teased(monster.lustVuln * Damage);
-        if (crit) outputText(" <b>Critical!</b>");
+        StraddleDamage *= 1+(scalingBonusIntelligence()*2/100);
+        StraddleDamage = Math.round(StraddleDamage);
+        monster.teased(monster.lustVuln * StraddleDamage);
+        if (Randomcrit) outputText(" <b>Critical!</b>");
         monster.lustVuln += 0.50;
     }
 
-    public function RandomTeaseAnemone(Damage:Number,crit:Boolean):void {
+    public function RandomTeaseAnemone():void {
         outputText("You take no time and plug your venomous tentacled anemone cock into [monster a] [monster name] vulnerable pussy. " +
                 "The effect is instantaneous as [monster he] is stung on the entire surface of [monster his] vaginal walls, " +
                 "the lips puffing up and the hole gushing with a telltale spray of girlcum. You begin to piston inside, " +
                 "insensible to [monster a] [monster name] crazed moans as you attempt to force in as much pleasure as you can. " +
                 "In desperation [monster he] punches you forcing you to pull your devilish cock out of its tormented cunt but this blush on [monster his] " +
                 "cheeks and those sweat beads you spy on [monster his] forehead definitively were worth it.");
-        Damage *= 2;
-        monster.teased(monster.lustVuln * Damage, false);
-        if (crit) outputText(" <b>Critical!</b>");
+        StraddleDamage *= 2;
+        monster.teased(monster.lustVuln * StraddleDamage, false);
+        if (Randomcrit) outputText(" <b>Critical!</b>");
     }
 
-    public function RandomTeaseSlime(Damage:Number,crit:Boolean):void {
+    public function RandomTeaseSlime():void {
         outputText("You take no time and begins flooding yourself into [monster a] [monster name] vulnerable ");
         if (monster.hasVagina()) outputText("pussy");
         if (monster.hasVagina() && monster.hasCock()) outputText(" and ");
@@ -8219,11 +8220,11 @@ public class Combat extends BaseContent {
         if (monster.hasVagina()) outputText(" inside [monster his] vagina, you begin viciously bumping into as many of [monster his] sensitive spot as you can going past the cervix straith into [monster his] womb, coaxing numerous loud moans from your playtoy.");
         outputText("Eventualy forcefull contractions force you back out of your opponent wich look like it barely survived your stay inside of [monster him]." +
                 "Aww thats to bad because this journey was quite delicious to you and you intend to go right back in first chance you get.");
-        Damage *= 1+(scalingBonusToughness()*2/100+scalingBonusLibido()*2/100);
-        Damage = Math.round(Damage);
+        StraddleDamage *= 1+(scalingBonusToughness()*2/100+scalingBonusLibido()*2/100);
+        StraddleDamage = Math.round(StraddleDamage);
         player.slimeFeed();
-        monster.teased(monster.lustVuln * Damage, false);
-        if (crit) outputText(" <b>Critical!</b>");
+        monster.teased(monster.lustVuln * StraddleDamage, false);
+        if (Randomcrit) outputText(" <b>Critical!</b>");
     }
 
     public function StraddleLeggoMyEggo():void {
