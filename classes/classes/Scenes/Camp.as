@@ -1885,6 +1885,15 @@ public class Camp extends NPCAwareContent {
 		addButton(13, "WiPButton", strtouspeintwislibsenCalculation1ipol).hint("Taka a Hint (wip tooltip)");
 		addButton(14, "Back", campActions);
 	}
+	
+private function campWinionsArmySim():void {
+	menu();
+	if (player.hasPerk(PerkLib.JobGolemancer)) addButton(0, "Make", campMake.accessMakeWinionsMainMenu).hint("Check your options for making some golems.");
+	else addButtonDisabled(0, "Make", "You need to be golemancer to use this option.");
+	if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) addButton(1, "Summon", campMake.accessSummonElementalsMainMenu).hint("Check your options for managing your elemental summons.");
+	else addButtonDisabled(1, "Summon", "You should first build Arcane Circle. Without some tools from the carpenter's toolbox it would be near impossible to do this.");
+	addButton(14, "Back", campActions);
+}
 
 	private function MagicWardMenu():void {
 		clearOutput();
@@ -2985,98 +2994,7 @@ private function SparrableNPCsMenu():void {
 				player.removeStatusEffect(StatusEffects.Exgartuan);
 			}
 		}
-		else {
-			mainView.setMenuButton( MainView.MENU_LEVEL, "Level Up" );
-			var hp:int = 15;
-			var fatigue:int = 5;
-			var mana:int = 10;
-			var soulforce:int = 0;
-			var wrath:int = 0;
-			var lust:int = 0;
-			var statpoints:int = 10;
-			var perkpoints:int = 1;
-			if (player.findPerk(PerkLib.AscensionUnlockedPotential) >= 0) {
-				hp += 20;
-				lust += 2;
-				fatigue += 6;
-			}
-			if (player.findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) {
-				wrath += 2;
-				mana += 12;
-				soulforce += 6;
-			}
-			if (player.findPerk(PerkLib.UnlockBody) >= 0) hp += 15;
-			if (player.findPerk(PerkLib.UnlockBody2ndStage) >= 0) hp += 15;
-			if (player.findPerk(PerkLib.UnlockBody3rdStage) >= 0) hp += 15;
-			if (player.findPerk(PerkLib.UnlockBody4thStage) >= 0) hp += 15;
-			if (player.findPerk(PerkLib.UnlockEndurance) >= 0) fatigue += 5;
-			if (player.findPerk(PerkLib.UnlockEndurance2ndStage) >= 0) fatigue += 5;
-			if (player.findPerk(PerkLib.UnlockEndurance3rdStage) >= 0) fatigue += 5;
-			if (player.findPerk(PerkLib.UnlockEndurance4thStage) >= 0) fatigue += 5;
-			if (player.findPerk(PerkLib.UnlockForce) >= 0) mana += 10;
-			if (player.findPerk(PerkLib.UnlockForce2ndStage) >= 0) mana += 10;
-			if (player.findPerk(PerkLib.UnlockForce3rdStage) >= 0) mana += 10;
-			if (player.findPerk(PerkLib.UnlockForce4thStage) >= 0) mana += 10;
-			if (player.findPerk(PerkLib.UnlockSpirit) >= 0) soulforce += 5;
-			if (player.findPerk(PerkLib.UnlockSpirit2ndStage) >= 0) soulforce += 5;
-			if (player.findPerk(PerkLib.UnlockSpirit3rdStage) >= 0) soulforce += 5;
-			if (player.findPerk(PerkLib.UnlockSpirit4thStage) >= 0) soulforce += 5;
-			if (player.findPerk(PerkLib.UnlockId) >= 0) wrath += 1;
-			if (player.findPerk(PerkLib.UnlockId2ndStage) >= 0) wrath += 1;
-			if (player.findPerk(PerkLib.UnlockId3rdStage) >= 0) wrath += 1;
-			if (player.findPerk(PerkLib.UnlockId4thStage) >= 0) wrath += 1;
-			if (player.findPerk(PerkLib.UnlockArdor) >= 0) lust += 1;
-			if (player.findPerk(PerkLib.UnlockArdor2ndStage) >= 0) lust += 1;
-			if (player.findPerk(PerkLib.UnlockArdor3rdStage) >= 0) lust += 1;
-			if (player.findPerk(PerkLib.UnlockArdor4thStage) >= 0) lust += 1;
-			if (player.level < 6) {
-				statpoints += 10;
-				perkpoints += 1;
-			}
-			mainView.levelButton.toolTipText = "Level up to increase your maximum HP by " + hp + ", maximum Fatigue by " + fatigue + ", maximum Mana by " + mana + ", maximum Soulforce by " + soulforce + ", maximum Wrath by " + wrath + " and maximum Lust by " + lust + "; gain " + statpoints + " attribute points and " + perkpoints + " perk points.";
-			if (flags[kFLAGS.AUTO_LEVEL] > 0 && allowAutoLevelTransition) {
-                CoC.instance.playerInfo.levelUpGo();
-                return true; //True indicates that you should be routed to level-up.
-			}
-			
-		}
-		if (marbleFollower()) outputText("\n\n\"<i>Are you okay, sweetie?</i>\" Marble asks.  You assure her that you're fine; you've just had a nightmare.");
-		if (flags[kFLAGS.HUNGER_ENABLED] > 0) player.hunger = 40;
-		if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2) + (player.tallness / 4))) {
-			outputText("\n\nYou realize the consequences of having oversized balls and you NEED to shrink it right away. Reducto will do.");
-			player.ballSize = (14 + (player.str / 2) + (player.tallness / 4));
-			if (player.ballSize < 1) player.ballSize = 1;
-		}
-		outputText("\n\nYou get up, still feeling traumatized from the nightmares.");
-		//Skip time forward
-		model.time.days++;
-		if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0) model.time.hours = flags[kFLAGS.BENOIT_CLOCK_ALARM];
-		else model.time.hours = 6;
-		//Set so you're in camp.
-		DungeonAbstractContent.inDungeon = false;
-		inRoomedDungeon = false;
-		inRoomedDungeonResume = null;
-		CoC.instance.inCombat = false;
-		//Restore stats
-		player.HP = player.maxHP();
-		player.fatigue = 0;
-		statScreenRefresh();
-		//PENALTY!
-		var penaltyMultiplier:int = 1;
-		penaltyMultiplier += flags[kFLAGS.GAME_DIFFICULTY] * 0.5;
-		//Deduct XP and gems.
-		player.gems -= int((player.gems / 10) * penaltyMultiplier);
-		player.XP -= int((player.level * 10) * penaltyMultiplier);
-		if (player.gems < 0) player.gems = 0;
-		if (player.XP < 0) player.XP = 0;
-		//Deduct attributes.
-		if (player.str > 20) dynStats("str", Math.ceil(-player.str * 0.02) * penaltyMultiplier);
-		if (player.tou > 20) dynStats("tou", Math.ceil(-player.tou * 0.02) * penaltyMultiplier);
-		if (player.spe > 20) dynStats("spe", Math.ceil(-player.spe * 0.02) * penaltyMultiplier);
-		if (player.inte > 20) dynStats("inte", Math.ceil(-player.inte * 0.02) * penaltyMultiplier);
-		if (player.wis > 20) dynStats("wis", Math.ceil(-player.wis * 0.02) * penaltyMultiplier);
-		menu();
-		addButton(0, "Next", doCamp);//addButton(0, "Next", playerMenu);
+		doNext(playerMenu);
 	}
 
 //Wake up from a bad end.

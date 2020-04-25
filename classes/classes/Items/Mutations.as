@@ -5682,7 +5682,7 @@
                 setRearBody(RearBody.DISPLACER_TENTACLES);
                 changes++;
             }
-            if (player.arms.type == Arms.CAT && type == 1 && player.rearBody.type != RearBody.LION_MANE && changes < changeLimit && rand(3) == 0) {
+            if (player.arms.type == Arms.CAT && type == 1 && player.rearBody.type != RearBody.LION_MANE && player.tailType == Tail.CAT && player.tailCount == 2 && changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nYou suddenly feel hair growing all around your neck at a crazy pace. It soon get so thick it almost looks as if you're wearing a [haircolor] fur collar. <b>You now have a full lion mane around your neck.</b>");
                 setRearBody(RearBody.LION_MANE);
                 changes++;

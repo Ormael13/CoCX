@@ -106,7 +106,7 @@ package classes.Scenes
 			outputText("-New tier 0 misc lvl-up perk: Displacer Metabolism. Req. Free metabolism mutation slot and 8+ pts in displacer beast score. Effect: (text pending Liadri adjustments).\n");
 			outputText("-New tier 2 misc lvl-up perk: Displacer Metabolism (Evolved). Req. Displacer Metabolism perk and 12+ pts in displacer beast score. Effect: Increase by (10 * NG tier) boost of speed for a five hours longer after an intake of milk and increase max Hunger cap by 50 (if PC have Hunger bar active).\n");
 			outputText("-Manticore metabolism now would req. also free metabolism mutation slot.\n");
-			outputText("-\n");
+			outputText("-Nekomata mane tf effect req. now to having twin cat tails.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -129,7 +129,7 @@ package classes.Scenes
 			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-Fixed bugs: \n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Lizan Regeneration been gained and lost repeadly, perks desc in one of creation PC stages showing incorectly amount of boosting max cap for stat, chance to pick Bite Me option at certain NPC more than once\n\n");/*ostatni punkt changelogu
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
