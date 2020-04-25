@@ -2991,7 +2991,7 @@
         public function useMarbleMilk(player:Player):void {
             player.slimeFeed();
             //Bottle of Marble's milk - item
-            //Description: "A clear bottle of milk from Marble's breasts.  It smells delicious.  "
+            //Description: "A clear bottle of milk from Marble's breasts.  It smells delicious.  "
             clearOutput();
             //Text for when the player uses the bottle:
             //[before the player is addicted, Addiction < 30]
@@ -4322,24 +4322,24 @@
             flags[kFLAGS.TIMES_TRANSFORMED] += changes;
         }
 
-        //9)  Transformation Item - Snake Oil (S. Oil)
+        //9)  Transformation Item - Snake Oil (S. Oil)
         /*Effects:
-      Boosts Speed stat
-      Ass reduction
-      Testicles return inside your body (could be reverted by the use of succubi delight)
-      Can change penis into reptilian form  (since there's a lot of commentary here not knowing where to go, let me lay it out.)
+      Boosts Speed stat
+      Ass reduction
+      Testicles return inside your body (could be reverted by the use of succubi delight)
+      Can change penis into reptilian form  (since there's a lot of commentary here not knowing where to go, let me lay it out.)
      the change will select one cock (randomly if you have multiple)
      said cock will become two reptilian cocks
      these can then be affected separately, so if someone wants to go through the effort of removing one and leaving themselves with one reptile penis, they have the ability to do that
      This also means that someone who's already reached the maximum numbers of dicks cannot get a reptilian penis unless they remove one first
-     "Your reptilian penis is X.X inches long and X.X inches thick.  The sheath extends halfway up the shaft, thick and veiny, while the smooth shaft extends out of the sheath coming to a pointed tip at the head. "
-      Grow poisonous fangs (grants Poison Bite ability to player, incompatible with the sting ability, as it uses the same poison-meter)
-      Causes your tongue to fork
-      Legs fuse together and dissolve into snake tail  (grants Constrict ability to player, said tail can only be covered in scales, independently from the rest of the body)
-      If snake tail exists:
-        Make it longer, possibly larger (tail length is considered independently of your height, so it doesn't enable you to use the axe, for instance.
-        Change tail's color according to location
-          [Smooth] Beige and Tan (Desert), [Rough] Brown and Rust (Mountains), [Lush]  Forest Green and Yellow (Forest), [Cold] Blue and White (ice land?), [Fresh] Meadow Green [#57D53B - #7FFF00] and Dark Teal [#008080] (lake) , [Menacing] Black and Red (Demon realm, outside encounters), [Distinguished] Ivory (#FFFFF0) and Royal Purple/Amethyst (#702963) (Factory), [Mossy] Emerald and Chestnut (Swamp), [Arid] Orange and Olive pattern (Tel' Adre)
+     "Your reptilian penis is X.X inches long and X.X inches thick.  The sheath extends halfway up the shaft, thick and veiny, while the smooth shaft extends out of the sheath coming to a pointed tip at the head. "
+      Grow poisonous fangs (grants Poison Bite ability to player, incompatible with the sting ability, as it uses the same poison-meter)
+      Causes your tongue to fork
+      Legs fuse together and dissolve into snake tail  (grants Constrict ability to player, said tail can only be covered in scales, independently from the rest of the body)
+      If snake tail exists:
+        Make it longer, possibly larger (tail length is considered independently of your height, so it doesn't enable you to use the axe, for instance.
+        Change tail's color according to location
+          [Smooth] Beige and Tan (Desert), [Rough] Brown and Rust (Mountains), [Lush]  Forest Green and Yellow (Forest), [Cold] Blue and White (ice land?), [Fresh] Meadow Green [#57D53B - #7FFF00] and Dark Teal [#008080] (lake) , [Menacing] Black and Red (Demon realm, outside encounters), [Distinguished] Ivory (#FFFFF0) and Royal Purple/Amethyst (#702963) (Factory), [Mossy] Emerald and Chestnut (Swamp), [Arid] Orange and Olive pattern (Tel' Adre)
 
      9a) Item Description
      "A vial the size of your fist made of dark brown glass. It contains what appears to be an oily, yellowish liquid. The odor is abominable."
@@ -4354,9 +4354,9 @@
             if (rand(2) == 0) changeLimit++;
             changeLimit += additionalTransformationChances();
             //b) Description while used
-            outputText("Pinching your nose, you quickly uncork the vial and bring it to your mouth, determined to see what effects it might have on your body. Pouring in as much as you can take, you painfully swallow before going for another shot, emptying the bottle.");
+            outputText("Pinching your nose, you quickly uncork the vial and bring it to your mouth, determined to see what effects it might have on your body. Pouring in as much as you can take, you painfully swallow before going for another shot, emptying the bottle.");
             //(if outside combat)
-            if (!CoC.instance.inCombat) outputText("  Minutes pass as you start wishing you had water with you, to get rid of the aftertaste.");
+            if (!CoC.instance.inCombat) outputText("  Minutes pass as you start wishing you had water with you, to get rid of the aftertaste.");
             //+ speed to 70!
             if (player.spe < 70 && rand(2) == 0) {
                 dynStats("spe", (2 - (player.spe / 10 / 5)));
@@ -4398,20 +4398,20 @@
             //Should the enemy "kill" you during the transformation, it skips the scene and immediately goes to tthe rape scene. (Now that I'm thinking about it, we should add some sort of appendix where the player realizes how much he's/she's changed. -Ace)
             if (changes == 0 && player.faceType == Face.SNAKE_FANGS && player.lowerBody != LowerBody.NAGA && rand(4) == 0 && changes < changeLimit) {
                 if (player.lowerBody == LowerBody.SCYLLA) {
-                    outputText("\n\nYou collapse as your tentacle legs starts to merge and the pain is immense.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.");
+                    outputText("\n\nYou collapse as your tentacle legs starts to merge and the pain is immense.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.");
                 } else {
                     if (player.lowerBody == LowerBody.MELKIE) {
                         humanizeLowerBody();
                         outputText("\n\nHowever this doesnt last long as changes begins to overcome your legs again.");
                     }
-                    outputText("\n\nYou find it increasingly harder to keep standing as your legs start feeling weak.  You swiftly collapse, unable to maintain your own weight.");
+                    outputText("\n\nYou find it increasingly harder to keep standing as your legs start feeling weak.  You swiftly collapse, unable to maintain your own weight.");
                     //(If used in combat, you lose a turn here. Half-corrupted Jojo and the Naga won't attack you during that period, but other monsters will)
                     //FUCK NO
                     outputText("\n\nTrying to get back up, you realize that the skin on the inner sides of your thighs is merging together like it was being sewn by an invisible needle.");
-                    outputText("  The process continues through the length of your [legs], eventually reaching your [feet].  Just when you think that the transformation is over, you find yourself pinned to the ground by an overwhelming sensation of pain. You hear the horrible sound of your bones snapping, fusing together and changing into something else while you contort in unthinkable agony.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.");
+                    outputText("  The process continues through the length of your [legs], eventually reaching your [feet].  Just when you think that the transformation is over, you find yourself pinned to the ground by an overwhelming sensation of pain. You hear the horrible sound of your bones snapping, fusing together and changing into something else while you contort in unthinkable agony.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.");
                 }
-                outputText("\n\nWondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.");
-                if (player.balls > 0 && player.ballSize > 10) outputText("  You're happy not to have to drag those testicles around with you anymore.");
+                outputText("\n\nWondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.");
+                if (player.balls > 0 && player.ballSize > 10) outputText("  You're happy not to have to drag those testicles around with you anymore.");
                 outputText("  But then, scales start to form on the surface of your skin, slowly becoming visible, recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, except on your whole lower body. The transformation complete, you get up, standing on your newly formed snake tail. You can't help feeling proud of this majestic new body of yours.");
                 setLowerBody(LowerBody.NAGA);
                 player.legCount = 1;
@@ -4459,7 +4459,7 @@
          outputText("\n\nAs the liquid takes effect, ");
          //(if multicock)
          if(player.cockTotal() > 1) outputText("one of ");
-         outputText("your [cocks] starts to throb painfully and swell to its full size.  With a horrifying ripping sensation, your cock splits down the middle, the pain causing you to black out momentarily.");
+         outputText("your [cocks] starts to throb painfully and swell to its full size.  With a horrifying ripping sensation, your cock splits down the middle, the pain causing you to black out momentarily.");
          outputText("When you awaken, you quickly look down to see that where ");
          //(if multicock)
          if(player.cockTotal() > 1) outputText("one of ");
@@ -4484,7 +4484,7 @@
             if (rand(4) == 0) changeLimit++;
             changeLimit += additionalTransformationChances();
             if (type != 3) {
-                outputText("Pinching your nose, you quickly uncork the vial and bring it to your mouth, determined to see what effects it might have on your body. Pouring in as much as you can take, you painfully swallow before going for another shot, emptying the bottle.  Minutes pass as you start wishing you had water with you, to get rid of the ");
+                outputText("Pinching your nose, you quickly uncork the vial and bring it to your mouth, determined to see what effects it might have on your body. Pouring in as much as you can take, you painfully swallow before going for another shot, emptying the bottle.  Minutes pass as you start wishing you had water with you, to get rid of the ");
                 if (type == 0) outputText("aftertaste.");
                 if (type == 1 || type == 2) outputText("strange mixed taste.");
             }
@@ -4537,14 +4537,14 @@
             //Snake lower body
             if (player.faceType == Face.SNAKE_FANGS && player.lowerBody != LowerBody.NAGA && player.lowerBody != LowerBody.HYDRA && rand(4) == 0 && changes < changeLimit) {
                 if (player.lowerBody == LowerBody.SCYLLA) {
-                    outputText("\n\nYou collapse as your tentacle legs starts to merge and the pain is immense.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.");
+                    outputText("\n\nYou collapse as your tentacle legs starts to merge and the pain is immense.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.");
                 } else {
-                    outputText("\n\nYou find it increasingly harder to keep standing as your legs start feeling weak.  You swiftly collapse, unable to maintain your own weight.");
+                    outputText("\n\nYou find it increasingly harder to keep standing as your legs start feeling weak.  You swiftly collapse, unable to maintain your own weight.");
                     outputText("\n\nTrying to get back up, you realize that the skin on the inner sides of your thighs is merging together like it was being sewn by an invisible needle.");
-                    outputText("  The process continues through the length of your [legs], eventually reaching your [feet].  Just when you think that the transformation is over, you find yourself pinned to the ground by an overwhelming sensation of pain. You hear the horrible sound of your bones snapping, fusing together and changing into something else while you contort in unthinkable agony.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.");
+                    outputText("  The process continues through the length of your [legs], eventually reaching your [feet].  Just when you think that the transformation is over, you find yourself pinned to the ground by an overwhelming sensation of pain. You hear the horrible sound of your bones snapping, fusing together and changing into something else while you contort in unthinkable agony.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's.");
                 }
-                outputText("\n\nWondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.");
-                if (player.balls > 0 && player.ballSize > 10) outputText("  You're happy not to have to drag those testicles around with you anymore.");
+                outputText("\n\nWondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.");
+                if (player.balls > 0 && player.ballSize > 10) outputText("  You're happy not to have to drag those testicles around with you anymore.");
                 outputText("  But then, scales start to form on the surface of your skin, slowly becoming visible, recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, except on your whole lower body. The transformation complete, you get up, standing on your <b>newly formed snake tail.</b> You can't help feeling proud of this majestic new body of yours.");
                 setLowerBody(LowerBody.NAGA);
                 player.legCount = 1;
@@ -5680,12 +5680,11 @@
                 setRearBody(RearBody.DISPLACER_TENTACLES);
                 changes++;
             }
-            //Lion Mane is kept for when the large cat tf is added ORM FOR GOD SAKE NEKOMATA DONT HAVE MANES THEIR OVERSIZED HOUSECATS!
-            //if (player.arms.type == Arms.CAT && type == 1 && player.rearBody.type != RearBody.LION_MANE && changes < changeLimit && rand(3) == 0) {
-                //outputText("\n\nYou suddenly feel hair growing all around your neck at a crazy pace. It soon get so thick it almost looks as if you're wearing a [haircolor] fur collar. <b>You now have a full lion mane around your neck.</b>");
-                //setRearBody(RearBody.LION_MANE);
-                //changes++;
-            //}
+            if (player.arms.type == Arms.CAT && type == 1 && player.rearBody.type != RearBody.LION_MANE && player.tailType == Tail.CAT && player.tailCount == 2 && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nYou suddenly feel hair growing all around your neck at a crazy pace. It soon get so thick it almost looks as if you're wearing a [haircolor] fur collar. <b>You now have a full lion mane around your neck.</b>");
+                setRearBody(RearBody.LION_MANE);
+                changes++;
+            }
             if ((player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES) && type == 2 && rand(3) == 0 && changes < changeLimit && player.faceType != Face.CHESHIRE && player.faceType != Face.CHESHIRE_SMILE) {
                 outputText("\n\nYou suddenly feel like smiling. Why actually look so serious? Everything is easier if you take it with a smile and a laughter. Perhaps it's just you taking on that mentality or it's that weird wonderfruit you took but now you feel you could smile forever showing that wide grin of yours. <b>You now have a cheshire smile.</b>");
                 if (player.faceType == Face.CAT) setFaceType(Face.CHESHIRE);
@@ -13586,16 +13585,6 @@
             if (rand(2) == 0) changeLimit++;
             if (rand(3) == 0) changeLimit++;
             if (rand(4) == 0) changeLimit++;
-            if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-            if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
-            if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
-            if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
-            if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
-            if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
-            if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
-            if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
-            if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-            if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
             changeLimit += additionalTransformationChances();
             //clear screen
             clearOutput();
@@ -13703,7 +13692,7 @@
             if (changes < changeLimit && rand(2) == 0) outputText(player.modTone(10, 5));
 
             //Gain frost wyrm Horns
-            if (changes < changeLimit && rand(3) == 0 && player.horns.type != Horns.FROSTWYRM) {
+            if (changes < changeLimit && rand(3) == 0 && player.horns.type != Horns.FROSTWYRM && player.faceType == Face.ANIMAL_TOOTHS) {
                 if (player.horns.type != Horns.NONE) {
                     if (player.horns.type == Horns.ORCHID) outputText("\n\nYour orchid flowers crumble, falling apart");
                     else outputText("\n\nYour old horns crumble, falling apart in large chunks");
@@ -13721,7 +13710,7 @@
                 changes++;
             }
             //Gain Frost wyrm Eyes
-            if (player.eyes.type != Eyes.FROSTWYRM && rand(3) == 0 && changes < changeLimit) {
+            if (player.eyes.type != Eyes.FROSTWYRM && rand(3) == 0 && changes < changeLimit && player.faceType == Face.ANIMAL_TOOTHS) {
                 CoC.instance.mutations.setEyeTypeAndColor(Eyes.FROSTWYRM, "yellow");
                 outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil and black sclera like that of a frost wyrm. <b>You now have frost wyrm eyes!</b>.");
                 changes++;
@@ -13768,35 +13757,35 @@
                 changes++;
             }
             //Neck
-            if (player.rearBody.type != RearBody.FROSTWYRM && changes < changeLimit && rand(3) == 0) {
+            if (player.rearBody.type != RearBody.FROSTWYRM && changes < changeLimit && rand(3) == 0 && player.arms.type == Arms.FROSTWYRM) {
                 setRearBody(RearBody.FROSTWYRM);
                 outputText("\n\nYou suddenly feel hair growing all around your neck at a crazy pace. It soon gets so thick it almost looks as if you're wearing a white fur collar. <b>Your neck is now well protected against the cold thanks to your thick fur collar.</b>");
                 changes++;
             }
-            //Wyrm tail
+            //Wyrm legs
             if (player.lowerBody != LowerBody.FROSTWYRM && changes < changeLimit && rand(3) == 0) {
                 if (player.lowerBody == LowerBody.SCYLLA) {
-                    outputText("\n\nYou collapse as your tentacle legs starts to merge and the pain is immense.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. " +
-                            "Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: " +
+                    outputText("\n\nYou collapse as your tentacle legs starts to merge and the pain is immense.  Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. " +
+                            "Once you feel you've recovered, you try to stand, but to your amazement you discover that you no longer have [legs]: " +
                             "the bottom half of your body is like that of a snake's and easily four times your length from the waist up.");
                 } else {
                     if (player.lowerBody == LowerBody.MELKIE) {
                         humanizeLowerBody();
                         outputText("\n\nHowever this doesnt last long as changes begins to overcome your legs again.");
                     }
-                    outputText("\n\nYou find it increasingly harder to keep standing as your legs start feeling weak. " +
+                    outputText("\n\nYou find it increasingly harder to keep standing as your legs start feeling weak. " +
                             "You swiftly collapse, unable to maintain your own weight as your legs begins to changes.");
                     //(If used in combat, you lose a turn here. Half-corrupted Jojo and the Naga won't attack you during that period, but other monsters will)
                     //FUCK NO
                     outputText("\n\nTrying to get back up, you realize that the skin on the inner sides of your thighs is merging together like it was being sewn by an invisible needle.");
-                    outputText("  The process continues through the length of your [legs], eventually reaching your [feet].  " +
+                    outputText("  The process continues through the length of your [legs], eventually reaching your [feet].  " +
                             "Just when you think that the transformation is over, you find yourself pinned to the ground by an overwhelming sensation of pain. " +
                             "You hear the horrible sound of your bones snapping, fusing together and changing into something else while you contort in unthinkable agony. " +
-                            "Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, " +
-                            "but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's and easily four times your length from the waist up.");
+                            "Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, " +
+                            "but to your amazement you discover that you no longer have [legs]: the bottom half of your body is like that of a snake's and easily four times your length from the waist up.");
                 }
-                outputText("\n\nWondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.");
-                if (player.balls > 0 && player.ballSize > 10) outputText("  You're happy not to have to drag those testicles around with you anymore.");
+                outputText("\n\nWondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.");
+                if (player.balls > 0 && player.ballSize > 10) outputText("  You're happy not to have to drag those testicles around with you anymore.");
                 if (!player.hasCoatOfType(Skin.DRAGON_SCALES)) {
                     player.coatColor = randomChoice(wyrmCoatColor);
                 }
@@ -15423,7 +15412,7 @@
                 }
 
                 //Set eyes to the racial coloration and change them to cancer type
-                if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && player.eyes.type != Eyes.CANCER) {
+                if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && player.eyes.type != Eyes.CANCER && player.faceType == Face.KUDERE) {
                     setEyeTypeAndColor(Eyes.CANCER,"orange");
                     outputText("\n\nA slight change happens in your eyes as they begin to water. " +
                             "You clear away the tears, going to a puddle to see what's going on. " +

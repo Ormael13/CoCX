@@ -1176,18 +1176,6 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast Regenerate again.");
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
-			bd = buttons.add("Nosferatu", spellNosferatu)
-					.hint("Vampirise the health of your foe, dealing damage and healing you back for 100% of the damage done." +
-							"\n\nMana Cost: " + healCost(50) + "");
-			if (badLustForBlack) {
-				bd.disable("You aren't turned on enough to use any black magics.");
-			} else if(player.mana < healCost(50)) {
-				bd.disable("Your mana is too low to cast this spell.");
-			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
-				bd.disable("You can only use buff magic while underground.");
-			}
-		}
 		//	if (player.hasStatusEffect(StatusEffects.Knows)) buttons.add("	ice single target spell goes here
 	}
 
@@ -1289,6 +1277,18 @@ public class CombatMagic extends BaseCombatContent {
 				if (badLustForGrey) {
 					bd.disable("You can't use any grey magics.");
 				}
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
+			bd = buttons.add("Nosferatu", spellNosferatu)
+					.hint("Vampirise the health of your foe, dealing damage and healing you back for 100% of the damage done." +
+							"\n\nMana Cost: " + healCost(50) + "");
+			if (badLustForGrey) {
+				bd.disable("You can't use any grey magics.");
+			} else if(player.mana < healCost(50)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
 			}
 		}
 		//	if (player.hasStatusEffect(StatusEffects.KnowsWereBeast)) buttons.add("Were-beast",	were-beast spell goes here

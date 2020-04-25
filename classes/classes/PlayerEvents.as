@@ -1088,7 +1088,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Hydra Regeneration and Hydra acid breath perk
 			if (player.findPerk(PerkLib.HydraRegeneration) >= 0 && player.lowerBody != LowerBody.HYDRA) { //Remove hydra regeneration perk if not meeting requirements
-				outputText("\nYou accidentally cut yourself but to your stupor the wound does not close as fast as it should. Guess you are no longer a hydra enough to benefit from superior regeneration.\n\n(<b>Lost Perk: Hydra Regeneration</b>)");
+				outputText("\nYou accidentally cut yourself but to your stupor the wound does not close as fast as it should. Guess you are no longer a hydra enough to benefit from superior regeneration.\n\n(<b>Lost Perk: Hydra Regeneration");
+				if (player.findPerk(PerkLib.LizanRegeneration) >= 0 && player.perkv4(PerkLib.LizanRegeneration) == 0 && player.findPerk(PerkLib.LizanMarrow) < 0) {
+					player.removePerk(PerkLib.LizanRegeneration);
+					outputText(" and Lizan Regeneration");
+				}
+				outputText("</b>)");
 				player.removePerk(PerkLib.HydraRegeneration);
 				needNext = true;
 			}
@@ -1158,7 +1163,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Lustzerker);
 				needNext = true;
 			}
-			else if (player.findPerk(PerkLib.LizanRegeneration) >= 0 && player.perkv4(PerkLib.LizanRegeneration) == 0 && player.findPerk(PerkLib.LizanMarrow) < 0 && player.findPerk(PerkLib.HydraRegeneration) < 0) { //Remove lizan regeneration perk if not meeting requirements
+			else if (player.findPerk(PerkLib.LizanRegeneration) >= 0 && player.perkv4(PerkLib.LizanRegeneration) == 0 && player.findPerk(PerkLib.LizanMarrow) < 0) { //Remove lizan regeneration perk if not meeting requirements && player.findPerk(PerkLib.HydraRegeneration) < 0
 				outputText("\nAll of sudden something change inside your body.  You think about a long while, until it dawned on you.  You can't feel that refreshing feeling inside your body anymore meaning for now just human rate of recovery from all kind of injuries.\n\n(<b>Lost Perk: Lizan Regeneration</b>)");
 				player.removePerk(PerkLib.LizanRegeneration);
 				needNext = true;

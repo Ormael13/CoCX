@@ -340,6 +340,16 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
+		public function requireMetabolismMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxMetabolismMutations() > 0;
+				},
+				text: "Free Metabolism Mutation Slot",
+				type: "metabolismmutation"
+			});
+			return this;
+		}
 		public function requireHungerEnabled():PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {

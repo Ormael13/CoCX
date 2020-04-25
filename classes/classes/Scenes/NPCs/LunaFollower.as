@@ -102,7 +102,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) addButton(4, "Lycanthropy", talkMenuLunaLycanthropy);
 			else addButtonDisabled(4, "???", "You need to know her better for this.");
 			if (player.hasStatusEffect(StatusEffects.LunaWasWarned))addButton(5, "Camp", talkMenuLunaStopJealousy);
-			if ((flags[kFLAGS.LUNA_FOLLOWER] == 13 || flags[kFLAGS.LUNA_FOLLOWER] == 14) && (!player.hasPerk(PerkLib.Lycanthropy) || !player.hasPerk(PerkLib.LycanthropyDormant))) addButton(9, "Bite Me", talkMenuBiteMe);
+			if ((flags[kFLAGS.LUNA_FOLLOWER] == 13 || flags[kFLAGS.LUNA_FOLLOWER] == 14) && !player.hasPerk(PerkLib.Lycanthropy) && !player.hasPerk(PerkLib.LycanthropyDormant)) addButton(9, "Bite Me", talkMenuBiteMe);
 			addButton(14, "Back", mainLunaMenu);
 		}
 		public function talkMenuLunaHer():void {
@@ -237,7 +237,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats += 20;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
-			player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
+			if (player.findPerk(PerkLib.Lycanthropy) < 0) player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
 			player.dynStats("str", (bonusStats * (player.newGamePlusMod() + 1)), "tou", (bonusStats * (player.newGamePlusMod() + 1)), "spe", (bonusStats * (player.newGamePlusMod() + 1)), "cor", 20);
 			statScreenRefresh();
 			outputText("Barely satiated your eyes now focus back on Luna, lust overwhelming your cursed body. You must have her... NOW!\n\n");

@@ -1857,15 +1857,6 @@ public class Camp extends NPCAwareContent {
 		addButton(14, "Back", campActions);
 	}
 
-	private function campMiscActions():void {
-		menu();
-		if (player.hasItem(consumables.LG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(0, "Fill bottle", fillUpPillBottle00).hint("Fill up one of your pill bottles with low-grade soulforce recovery pills.");
-		else addButtonDisabled(0, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
-		if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(1, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
-		else addButtonDisabled(1, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
-		addButton(14, "Back", campActions);
-	}
-
 	private function campBuildingSim():void {
 		menu();
 		if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
@@ -1885,14 +1876,24 @@ public class Camp extends NPCAwareContent {
 		addButton(14, "Back", campActions);
 	}
 
-	private function campWinionsArmySim():void {
+	private function campMiscActions():void {
 		menu();
-		if (player.hasPerk(PerkLib.JobGolemancer)) addButton(0, "Make", campMake.accessMakeWinionsMainMenu).hint("Check your options for making some golems.");
-		else addButtonDisabled(0, "Make", "You need to be golemancer to use this option.");
-		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) addButton(1, "Summon", campMake.accessSummonElementalsMainMenu).hint("Check your options for managing your elemental summons.");
-		else addButtonDisabled(1, "Summon", "You should first build Arcane Circle. Without some tools from the carpenter's toolbox it would be near impossible to do this.");
+		if (player.hasItem(consumables.LG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(0, "Fill bottle", fillUpPillBottle00).hint("Fill up one of your pill bottles with low-grade soulforce recovery pills.");
+		else addButtonDisabled(0, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
+		if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(1, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
+		else addButtonDisabled(1, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
+		addButton(13, "WiPButton", strtouspeintwislibsenCalculation1ipol).hint("Taka a Hint (wip tooltip)");
 		addButton(14, "Back", campActions);
 	}
+	
+private function campWinionsArmySim():void {
+	menu();
+	if (player.hasPerk(PerkLib.JobGolemancer)) addButton(0, "Make", campMake.accessMakeWinionsMainMenu).hint("Check your options for making some golems.");
+	else addButtonDisabled(0, "Make", "You need to be golemancer to use this option.");
+	if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) addButton(1, "Summon", campMake.accessSummonElementalsMainMenu).hint("Check your options for managing your elemental summons.");
+	else addButtonDisabled(1, "Summon", "You should first build Arcane Circle. Without some tools from the carpenter's toolbox it would be near impossible to do this.");
+	addButton(14, "Back", campActions);
+}
 
 	private function MagicWardMenu():void {
 		clearOutput();
@@ -1912,26 +1913,33 @@ public class Camp extends NPCAwareContent {
 	}
 
 	private function fillUpPillBottle00():void {
+		clearOutput();
 		outputText("\n\nYou pick up one of your empty pills bottle and starts to put in some of your loose low-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
 		player.destroyItems(useables.E_P_BOT, 1);
 		player.destroyItems(consumables.LG_SFRP, 10);
 		inventory.takeItem(consumables.LGSFRPB, campMiscActions);
 	}
-
 	private function fillUpPillBottle01():void {
+		clearOutput();
 		outputText("\n\nYou pick up one of your empty pills bottle and starts to put in some of your loose mid-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
 		player.destroyItems(useables.E_P_BOT, 1);
 		player.destroyItems(consumables.MG_SFRP, 10);
 		inventory.takeItem(consumables.MGSFRPB, campMiscActions);
 	}
-
-	private function SparrableNPCsMenu():void {
+	private function strtouspeintwislibsenCalculation1ipol():void {
 		clearOutput();
-		outputText("Champion party composition: [name]");
-		if (player.hasPerk(PerkLib.BasicLeadership)) {
-			if (flags[kFLAGS.PLAYER_COMPANION_1] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_1]);
-			else outputText(", (no combat companion)");
-		}/*
+		outputText("Placeholder for text on how PC reflect on effects of lvl up perks.");
+		player.strtouspeintwislibsenCalculation1();
+		doNext(campMiscActions);
+	}
+
+private function SparrableNPCsMenu():void {
+	clearOutput();
+	outputText("Champion party composition: [name]");
+	if (player.hasPerk(PerkLib.BasicLeadership)) {
+		if (flags[kFLAGS.PLAYER_COMPANION_1] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_1]);
+		else outputText(", (no combat companion)");
+	}/*
 	if (player.hasPerk(PerkLib.IntermediateLeadership)) {
 		if (flags[kFLAGS.PLAYER_COMPANION_2] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_2]);
 		else outputText(", (no combat companion)");
@@ -2990,52 +2998,52 @@ public class Camp extends NPCAwareContent {
 	}
 
 //Wake up from a bad end.
-	public function wakeFromBadEnd():void {
-		clearOutput();
-		trace("Escaping bad end!");
-		outputText("No, it can't be.  It's all just a dream!  You've got to wake up!");
-		outputText("\n\nYou wake up and scream.  You pull out a mirror and take a look at yourself.  Yep, you look normal again.  That was the craziest dream you ever had.");
-		if (flags[kFLAGS.TIMES_BAD_ENDED] >= 2) { //FOURTH WALL BREAKER
-			outputText("\n\nYou mumble to yourself \"<i>Another goddamn bad-end.</i>\"");
-		}
-		if (marbleFollower()) outputText("\n\n\"<i>Are you okay, sweetie?</i>\" Marble asks.  You assure her that you're fine; you've just had a nightmare.");
-		if (flags[kFLAGS.HUNGER_ENABLED] > 0) player.hunger = 40;
-		if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2) + (player.tallness / 4))) {
-			outputText("\n\nYou realize the consequences of having oversized balls and you NEED to shrink it right away. Reducto will do.");
-			player.ballSize = (14 + (player.str / 2) + (player.tallness / 4));
-			if (player.ballSize < 1) player.ballSize = 1;
-		}
-		outputText("\n\nYou get up, still feeling traumatized from the nightmares.");
-		//Skip time forward
-		model.time.days++;
-		if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0) model.time.hours = flags[kFLAGS.BENOIT_CLOCK_ALARM];
-		else model.time.hours = 6;
-		//Set so you're in camp.
-		DungeonAbstractContent.inDungeon = false;
-		inRoomedDungeon = false;
-		inRoomedDungeonResume = null;
-		CoC.instance.inCombat = false;
-		//Restore stats
-		player.HP = player.maxHP();
-		player.fatigue = 0;
-		statScreenRefresh();
-		//PENALTY!
-		var penaltyMultiplier:int = 1;
-		penaltyMultiplier += flags[kFLAGS.GAME_DIFFICULTY] * 0.5;
-		//Deduct XP and gems.
-		player.gems -= int((player.gems / 10) * penaltyMultiplier);
-		player.XP -= int((player.level * 10) * penaltyMultiplier);
-		if (player.gems < 0) player.gems = 0;
-		if (player.XP < 0) player.XP = 0;
-		//Deduct attributes.
-		if (player.str > 20) dynStats("str", Math.ceil(-player.str * 0.02) * penaltyMultiplier);
-		if (player.tou > 20) dynStats("tou", Math.ceil(-player.tou * 0.02) * penaltyMultiplier);
-		if (player.spe > 20) dynStats("spe", Math.ceil(-player.spe * 0.02) * penaltyMultiplier);
-		if (player.inte > 20) dynStats("inte", Math.ceil(-player.inte * 0.02) * penaltyMultiplier);
-		if (player.wis > 20) dynStats("wis", Math.ceil(-player.wis * 0.02) * penaltyMultiplier);
-		menu();
-		addButton(0, "Next", doCamp);//addButton(0, "Next", playerMenu);
+public function wakeFromBadEnd():void {
+	clearOutput();
+	trace("Escaping bad end!");
+	outputText("No, it can't be.  It's all just a dream!  You've got to wake up!");
+	outputText("\n\nYou wake up and scream.  You pull out a mirror and take a look at yourself.  Yep, you look normal again.  That was the craziest dream you ever had.");
+	if (flags[kFLAGS.TIMES_BAD_ENDED] >= 2) { //FOURTH WALL BREAKER
+		outputText("\n\nYou mumble to yourself \"<i>Another goddamn bad-end.</i>\"");
 	}
+	if (marbleFollower()) outputText("\n\n\"<i>Are you okay, sweetie?</i>\" Marble asks.  You assure her that you're fine; you've just had a nightmare.");
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0) player.hunger = 40;
+	if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2) + (player.tallness / 4))) {
+		outputText("\n\nYou realize the consequences of having oversized balls and you NEED to shrink it right away. Reducto will do.");
+		player.ballSize = (14 + (player.str / 2) + (player.tallness / 4));
+		if (player.ballSize < 1) player.ballSize = 1;
+	}
+	outputText("\n\nYou get up, still feeling traumatized from the nightmares.");
+	//Skip time forward
+	model.time.days++;
+	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0) model.time.hours = flags[kFLAGS.BENOIT_CLOCK_ALARM];
+	else model.time.hours = 6;
+	//Set so you're in camp.
+	DungeonAbstractContent.inDungeon = false;
+	inRoomedDungeon = false;
+	inRoomedDungeonResume = null;
+    CoC.instance.inCombat = false;
+    //Restore stats
+	player.HP = player.maxHP();
+	player.fatigue = 0;
+	statScreenRefresh();
+	//PENALTY!
+	var penaltyMultiplier:int = 1;
+	penaltyMultiplier += flags[kFLAGS.GAME_DIFFICULTY] * 0.5;
+	//Deduct XP and gems.
+	player.gems -= int((player.gems / 10) * penaltyMultiplier);
+	player.XP -= int((player.level * 10) * penaltyMultiplier);
+	if (player.gems < 0) player.gems = 0;
+	if (player.XP < 0) player.XP = 0;
+	//Deduct attributes.
+	if (player.str > 20) dynStats("str", Math.ceil(-player.str * 0.02) * penaltyMultiplier);
+	if (player.tou > 20) dynStats("tou", Math.ceil(-player.tou * 0.02) * penaltyMultiplier);
+	if (player.spe > 20) dynStats("spe", Math.ceil(-player.spe * 0.02) * penaltyMultiplier);
+	if (player.inte > 20) dynStats("inte", Math.ceil(-player.inte * 0.02) * penaltyMultiplier);
+	if (player.wis > 20) dynStats("wis", Math.ceil(-player.wis * 0.02) * penaltyMultiplier);
+	menu();
+	addButton(0, "Next", doCamp);//addButton(0, "Next", playerMenu);
+}
 
 //Camp wall
 	private function buildCampWallPrompt():void {
@@ -3379,7 +3387,7 @@ public class Camp extends NPCAwareContent {
 				var soulforce:int = 0;
 				var wrath:int = 0;
 				var lust:int = 0;
-				var statpoints:int = 5;
+				var statpoints:int = 10;
 				var perkpoints:int = 1;
 				if (player.findPerk(PerkLib.AscensionUnlockedPotential) >= 0) {
 					hp += 20;
@@ -3416,7 +3424,7 @@ public class Camp extends NPCAwareContent {
 				if (player.findPerk(PerkLib.UnlockArdor3rdStage) >= 0) lust += 1;
 				if (player.findPerk(PerkLib.UnlockArdor4thStage) >= 0) lust += 1;
 				if (player.level < 6) {
-					statpoints += 5;
+					statpoints += 10;
 					perkpoints += 1;
 				}
 				mainView.levelButton.toolTipText = "Level up to increase your maximum HP by " + hp + ", maximum Fatigue by " + fatigue + ", maximum Mana by " + mana + ", maximum Soulforce by " + soulforce + ", maximum Wrath by " + wrath + " and maximum Lust by " + lust + "; gain " + statpoints + " attribute points and " + perkpoints + " perk points.";
@@ -4108,6 +4116,10 @@ public class Camp extends NPCAwareContent {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 29;
 		clearOutput();
 		outputText("Text.");
+		if (flags[kFLAGS.STAT_GAIN_MODE] == CoC.STAT_GAIN_CLASSIC) {
+			if (player.level > 6) player.statPoints += ((5 * player.level) + 60);
+			else player.statPoints += (10 * player.level);
+		}
 		doNext(doCamp);
 		return;
 	}

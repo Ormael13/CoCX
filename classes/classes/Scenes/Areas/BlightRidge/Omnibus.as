@@ -37,15 +37,39 @@ use namespace CoC;
 		{
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 				this.short = "stray omnibus";
-				initStrTouSpeInte(280, 245, 210, 175);
-				initWisLibSensCor(175, 180, 90, 100);
-				this.weaponAttack = 52;
-				this.armorDef = 48;
-				this.armorMDef = 8;
-				this.bonusHP = 1150;
-				this.bonusLust = 80;
-				this.level = 66;
-				this.additionalXP = 700;
+				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
+					initStrTouSpeInte(304, 275, 240, 175);
+					initWisLibSensCor(175, 200, 106, 100);
+					this.weaponAttack = 62;
+					this.armorDef = 72;
+					this.armorMDef = 12;
+					this.bonusHP = 3450;
+					this.bonusLust = 240;
+					this.level = 74;
+					this.additionalXP = 1400;
+				}
+				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 50) {
+					initStrTouSpeInte(292, 260, 225, 175);
+					initWisLibSensCor(175, 190, 98, 100);
+					this.weaponAttack = 57;
+					this.armorDef = 60;
+					this.armorMDef = 10;
+					this.bonusHP = 2300;
+					this.bonusLust = 160;
+					this.level = 70;
+					this.additionalXP = 1050;
+				}
+				else {
+					initStrTouSpeInte(280, 245, 210, 175);
+					initWisLibSensCor(175, 180, 90, 100);
+					this.weaponAttack = 52;
+					this.armorDef = 48;
+					this.armorMDef = 8;
+					this.bonusHP = 1150;
+					this.bonusLust = 80;
+					this.level = 66;
+					this.additionalXP = 700;
+				}
 			}
 			else {
 				this.short = "omnibus";

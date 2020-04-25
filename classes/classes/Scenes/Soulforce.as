@@ -263,8 +263,7 @@ use namespace CoC;
 			addButton(5, "Enemies", EnemiesMenu).hint("For spawning various enemies to test fight them.");
 			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(7, "Body State", BodyStateMenu).hint("For more precise adjusting of few other body values or parts than Stats Adj option.");
-			if (player.hasPerk(PerkLib.Metamorph)) addButton(8, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Metamorph all options unlock.");
-			addButton(9, "ClickItOnce", AddMaxBackpack2).hint("setup change for lessen engine load on max stat calculations. Will work only once so not need to click it twice (no it won't bug if you click so unless you like clicking really not click it more than once...");
+			if (player.hasPerk(PerkLib.Metamorph)) addButton(8, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Metamorph all options unlock.")
 			addButton(10, "-2-", submenucuzwhynot).hint("Other test option that not fit anywhere else and etc.");
 			addButton(11, "PerkGalore1", PerkGalore1);
 			addButton(12, "PerkGalore2", PerkGalore2);
@@ -273,7 +272,7 @@ use namespace CoC;
 		}
 		public function submenucuzwhynot():void {
 			menu();
-			addButton(4, "ClickItOnce", AddMaxBackpack3).hint("Fixing possible mess ups form bimbo/bro/futa body to PC");
+			//addButton(4, "ClickItOnce", AddMaxBackpack3).hint("");
 			addButton(6, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(7, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
 			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
@@ -293,27 +292,11 @@ use namespace CoC;
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack2():void {
-			if (!player.hasStatusEffect(StatusEffects.StrTouSpeCounter1)) {
-				player.createStatusEffect(StatusEffects.StrTouSpeCounter1, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.StrTouSpeCounter2, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.IntWisCounter1, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.IntWisCounter2, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.LibSensCounter1, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.LibSensCounter2, 0, 0, 0, 0);
-				player.strtouspeintwislibsenCalculation1();
-				player.strtouspeintwislibsenCalculation2();
-			}
+			
 			doNext(SoulforceCheats);
 		}
 		public function AddMaxBackpack3():void {
-			if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) {
-				if (player.hasPerk(PerkLib.BimboBody)) player.removePerk(PerkLib.BimboBody);
-				if (player.hasPerk(PerkLib.BimboBrains)) player.removePerk(PerkLib.BimboBrains);
-				if (player.hasPerk(PerkLib.BroBody)) player.removePerk(PerkLib.BroBody);
-				if (player.hasPerk(PerkLib.BroBrains)) player.removePerk(PerkLib.BroBrains);
-				if (player.hasPerk(PerkLib.FutaForm)) player.removePerk(PerkLib.FutaForm);
-				if (player.hasPerk(PerkLib.FutaFaculties)) player.removePerk(PerkLib.FutaFaculties);
-			}
+			
 			doNext(SoulforceCheats);
 		}
 public function FightAria():void {
@@ -3675,4 +3658,4 @@ public function FightHellfireSnail():void {
 			}
 		}
 	}
-}
+}

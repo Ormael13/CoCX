@@ -64,11 +64,34 @@ package classes.Scenes
 			outputText("-All changes for 0.8n9 was due to hard work of our glorious lady Liadri. With a bit of Lia Twist.\n");
 			outputText("-Golem scavenging got texts instead of placeholder texts. (Texts ofc also sponsored by Lia Twist and coded by me ;) )\n");
 			outputText("-Fixed bugs: error in cat tf that would cause text to become bolded, golemancer shop 2 items been unbuyable\n\n");
-			outputText("<b>Version 0.8n10:</b>\n\n");
+			outputText("<b>Version 0.8n10 (Tiny fix):</b>\n\n");
 			outputText("-Urta lvl, stats been slight increased. Her stunning mov now just have 66% chance to stun instead smth that felt around 20%.\n");
-			outputText("-Fixed bugs: Eastern Bunny tf not giving eastern bunny balls\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Eastern Bunny tf not giving eastern bunny balls\n\n");
 			outputText("<b>Version 0.8o:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-New tier 2 libido lvl-up perk: Straddle. Req. Job: Courtesan perk and 65+ lib. Effect: You may now perform the straddle action in battle against stunned foes. Initiating a grappling stance.\n");
+			outputText("-New tier 4 libido lvl-up perk: Improved Straddle. Req. Straddle perk and 130+ lib. Effect: Increase the straddle maneuver maximum duration by two rounds.\n");
+			outputText("-New armor (by Liadri): Scandalous Succubus Clothing - buyable at Kaiba shop in Tel'Adre. Cost 6000 gems. Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.\n");
+			outputText("-New TF item: Fafnir Tear. Currently found in Yu shop. Allow to change into Frost Wyrm race with race bonuses at 10/18/20+: +90/125/135 to max Str (scal), +60/75/90 to max Spe (scal), +60/110/115 to max Tou (scal), -90/90/90 to max Int (scal), +30/50/50 to max Lib (scal).\n");
+			outputText("-New body part - horns: Frost Wyrm horns. Req. Animal tooths\n");
+			outputText("-New body part - eyes: Frost Wyrm eyes. Req. Animal tooths\n");
+			outputText("-New body part - rear body: Frost Wyrm rear body. Req. Frost Wyrm arms\n");
+			outputText("-New body part - lower body: Frost Wyrm lower body. No Req.\n");
+			outputText("-New body part - arms: Frost Wyrm arms. Req. Frost Wyrm lower body\n");
+			outputText("-New TF item: Bubblegum candy. Currently found in Yu shop. Allow to change into Cancer race with race bonuses at 8/13/20+: +60/105/125 to max Str (scal), +20/55/105 to max Spe (scal), +55/80/115 to max Tou (scal), -0/30/30 to max Int (scal), -15/15/15 to max Wis (scal).\n");
+			outputText("-New body part - face: Kudere face. No Req.\n");
+			outputText("-New body part - eyes: Cancer eyes. Req. Kudere face\n");
+			outputText("-New body part - lower body: Crab lower body. No Req.\n");
+			outputText("-New body part - lower body: Cancer lower body. Req. Crab lower body\n");
+			outputText("-New P. Special: Straddle. Type of grapple move like naga coiling. This grapple efficiency is based on libido and only function on single target humanoids.\n");
+			outputText("-New P. Special: Cancer Grab. Req. to have lower body of Cancer. Type of grapple move like naga coiling.\n");
+			outputText("-New P. Special: Dig. Req. to have lower body of Cancer, Centipede or Frost Wyrm. Dig underground to escape your opponent attack for a while. (Liadri)\n");
+			outputText("-New P. Special: Grab. Req. lower body of cancer. Type of grapple move. Grab your opponents with your pincers, then proceed to crush them. (Liadri)\n");
+			outputText("-PC would gain 10 stat poins per level up instead of 5. Below lvl 7 it will increase form 10 stat points to 20 per lvl-up.\n");
+			outputText("-Hex magic spells gotten dmg calculation changed. (Liadri)\n");
+			outputText("-Magic menu have be seperated into groups: White, Black, Grey and Hex. (Liadri)\n");
+			outputText("-Luna can be caugh after she disable 3 npc's. It would add then option to her interactions to confront her about it. (Liadri)\n");
+			outputText("-Mobs in Ebon labyrinth would have stats scaling up with amount of passed by room. each 50 rooms they stats and level would grow.\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");
@@ -77,6 +100,24 @@ package classes.Scenes
 			//outputText("-Fixed Excellia will move to Lovers tab and add option to sleep with her, show up at hot springs or assist in fights as henchman.\n");
 			//outputText("-Added Mitzi and Excellia kids counter tracker to Stats page under Children subpage.\n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
+			outputText("-New M. Special: Displacement. Req. 11+ in displacer beast score. Teleport around to avoid your opponents attacks. (Liadri)\n");
+			outputText("-Draconic Lungs perks also would boost Frost Wyrm racial score.\n");
+			outputText("-New event perk: Displacer Milk Addict. Causes you to crave milk frequently. (Liadri)\n");
+			outputText("-New tier 0 misc lvl-up perk: Displacer Metabolism. Req. Free metabolism mutation slot and 8+ pts in displacer beast score. Effect: (text pending Liadri adjustments).\n");
+			outputText("-New tier 2 misc lvl-up perk: Displacer Metabolism (Evolved). Req. Displacer Metabolism perk and 12+ pts in displacer beast score. Effect: Increase by (10 * NG tier) boost of speed for a five hours longer after an intake of milk and increase max Hunger cap by 50 (if PC have Hunger bar active).\n");
+			outputText("-Manticore metabolism now would req. also free metabolism mutation slot.\n");
+			outputText("-Nekomata mane tf effect req. now to having twin cat tails.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -88,7 +129,7 @@ package classes.Scenes
 			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-Fixed bugs: \n\n");
+			outputText("-Fixed bugs: Lizan Regeneration been gained and lost repeadly, perks desc in one of creation PC stages showing incorectly amount of boosting max cap for stat, chance to pick Bite Me option at certain NPC more than once\n\n");/*ostatni punkt changelogu
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
@@ -139,7 +180,55 @@ package classes.Scenes
 			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -180,6 +269,27 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

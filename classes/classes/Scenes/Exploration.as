@@ -906,7 +906,7 @@ public class Exploration extends BaseContent
 		
 		public function tryRNGod():void {
 			clearOutput();
-			outputText("Traversing Mareth vast areas you're suddenly found yourself... somewhere!!! Abnd looks like prayers was heard!!! (Even if you not prayed at all!!!)");
+			outputText("Traversing Mareth vast areas you're suddenly found yourself... somewhere!!! And looks like your prayers have been heard!!! (Even if you didn't pray at all!!!)");
 			outputText("\n\n<b>Aaaand....A RNGod Appears.</b>");
 			startCombat(new RNGod());
 		}

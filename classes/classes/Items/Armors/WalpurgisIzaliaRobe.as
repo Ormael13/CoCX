@@ -14,7 +14,7 @@ import classes.StatusEffects;
 
 		public function WalpurgisIzaliaRobe()
 		{
-			super("W.I.Cloak","W.I.Cloak","Walpurgis Izalia Cloak","a Walpurgis Izalia Cloak",0,30,2000,"This black cloak is very similar to the clothes of the hellcat witches cabal this cloak include golden filigree shaped like fiery tongues and troubling arcane design. Rumored to have been the prized cloak of the legendary Izalia herself who created the original whitefire.","Light",
+			super("W.I.Cloak","W.I.Cloak","Walpurgis Izalia Cloak","a Walpurgis Izalia Cloak",0,30,6000,"This black cloak is very similar to the clothes of the hellcat witches cabal this cloak include golden filigree shaped like fiery tongues and troubling arcane design. Rumored to have been the prized cloak of the legendary Izalia herself who created the original whitefire.","Light",
 					PerkLib.WizardsAndDaoistsEndurance,60,0,0,0);
 		}
 

@@ -243,7 +243,7 @@ public final class ConsumableLib extends BaseContent
 		public const BLACKPP:SimpleConsumable = mk("BlackPp", "BlackPp", "a solid black canine pepper", 10, "This solid black canine pepper is smooth and shiny, but something about it doesn't seem quite right...", curry(m.caninePepper, 3));
 		public const BLADEGR:SimpleConsumable = mk("BladeGr", "BladeGrass", "a blade shaped grass", 6, "A form of herb normaly infused in samurai and other warrior tea.  You think infusing this unprocessed item in your tea could result in interesting result.", m.bladeGrass);
 		public const BOARTRU:SimpleConsumable = mk("BoarTru", "BoarTruffle", "a boar truffle", 6, "It’s clear where the pigtail truffle gets its name.  A small, curly sprig resembling a pig’s tail can be seen jutting out of it. Now that it’s been enhanced by Lumi, it’s larger and fuzzier than it was before, almost like a peach.", curry(m.pigTruffle, true));
-		public const BUBBLEG:SimpleConsumable = mk("B.Gum", "B.Gum", "a bubblegum candy", 6, "A somewhat innocent pink spherical candy favored by cancers.", m.bubblegum);
+		public const BUBBLEG:SimpleConsumable = mk("B.Gum", "B.Gum", "a Bubblegum candy", 6, "A somewhat innocent pink spherical candy favored by cancers.", m.bubblegum);
 		public const BULBYPP:SimpleConsumable = mk("BulbyPp", "BulbyPp", "a bulbous pepper", 10, "This bulbous pepper has a slightly different shape than the other canine peppers, with two large orb-like protrusions at the base.", curry(m.caninePepper, 5));
 		public const CANINEP:SimpleConsumable = mk("CanineP", "CanineP", "a Canine pepper", 6, "The pepper is shiny and red, bulbous at the base but long and narrow at the tip.  It smells spicy.", curry(m.caninePepper, 0));
 		public const CENTARI:Centaurinum = new Centaurinum();

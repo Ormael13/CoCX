@@ -750,7 +750,7 @@ public class PerkLib
 				"You choose the 'Combo Master' perk, gaining another extra attack with fist (weapon).");
 		public static const Convergence:PerkType = mk("Convergence", "Convergence",
 				"Grey magic area of effect spells strike three times against single targets.",
-				"You choose the 'Convergence' perk, gaining chance to attack single targets three times with grey aoe and third tier white and black spells.");
+				"You choose the 'Convergence' perk, gaining chance to attack single targets three times with grey aoe spells.");// and third tier white and black
 		public static const CorruptedLibido:PerkType = mk("Corrupted Libido", "Corrupted Libido",
 				"Reduces lust gain by 10%.",
 				"You choose the 'Corrupted Libido' perk.  As a result of your body's corruption, you've become a bit harder to turn on. (Lust gain reduced by 10%!)");
@@ -5040,6 +5040,9 @@ public class PerkLib
             DazzlingDisplay.requirePerk(JobCourtesan)
                     .requireLib(50)
                     .requireLevel(12);
+			Straddle.requirePerk(JobCourtesan)
+					.requireLib(65)
+					.requireLevel(12);
             //Tier 3 Libido Perks
             DemonicDesireIV.requirePerk(DemonicDesireIII)
                     .requireLib(135)
@@ -5080,6 +5083,9 @@ public class PerkLib
                     .requirePerk(EromancyBeginner)
 					.requireLevel(24)
                     .requireLib(100);
+			StraddleImproved.requirePerk(Straddle)
+					.requireLib(130)
+					.requireLevel(24);
             //Tier 5 Libido Perks
             HalfStepToSuperiorSelfControl.requireLib(180)
                     .requireInt(120)
@@ -5350,7 +5356,7 @@ public class PerkLib
             CatlikeNimbleness.requirePerk(Flexibility).requireCustomFunction(function (player:Player):Boolean {
                 return player.catScore() >= 4 || player.nekomataScore() >= 4 || player.displacerbeastScore() >= 4 || player.hellcatScore() >= 4 || player.cheshireScore() >= 4;
             }, "Any cat race");
-			DisplacerMetabolism.requireCustomFunction(function (player:Player):Boolean {
+			DisplacerMetabolism.requireMetabolismMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.displacerbeastScore() >= 8;
 			}, "Displacer beast");
 			DraconicLungs.requireLungsMutationSlot()
@@ -5359,10 +5365,10 @@ public class PerkLib
                 .requirePerk(DragonLightningBreath)
                 .requirePerk(DragonDarknessBreath).requireCustomFunction(function (player:Player):Boolean {
                 return (player.dragonScore() >= 4 || player.frostWyrmScore() >= 10);
-            }, "Dragon race and its variants");/*
+            }, "Dragon race and its variants");
 			EasterBunnyEggBag.requirePerk(EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
-			}, "Easter Bunny race");*/
+			}, "Easter Bunny race");
 			EclipticMind.requirePerk(EclipticMind).requireCustomFunction(function (player:Player):Boolean {
 				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
 			}, "Unicorn or Bicorn race");
@@ -5412,7 +5418,7 @@ public class PerkLib
             LizanMarrow.requirePerk(LizanRegeneration).requireCustomFunction(function (player:Player):Boolean {
                 return player.lizardScore() >= 4;
             }, "Lizan race");
-            ManticoreMetabolism.requireCustomFunction(function (player:Player):Boolean {
+            ManticoreMetabolism.requireMetabolismMutationSlot().requireCustomFunction(function (player:Player):Boolean {
                 return player.manticoreScore() >= 5 && player.tailType == Tail.MANTICORE_PUSSYTAIL;
             }, "Manticore race and tail");
             MantislikeAgility.requireMusclesMutationSlot().requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {

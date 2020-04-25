@@ -116,15 +116,39 @@ public class TentacleBeast extends Monster
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 				this.short = "ancient tentacle beast";
 				this.long = "You see the titanic, shambling form of the tentacle beast before you.  Appearing as a massive shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.";
-				initStrTouSpeInte(292, 320, 150, 120);
-				initWisLibSensCor(100, 270, 60, 100);
-				this.weaponAttack = 50;
-				this.armorDef = 90;
-				this.armorMDef = 20;
-				this.bonusHP = 4000;
-				this.bonusLust = 50;
-				this.level = 60;
-				this.additionalXP = 250;
+				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
+					initStrTouSpeInte(354, 400, 170, 130);
+					initWisLibSensCor(110, 270, 70, 100);
+					this.weaponAttack = 70;
+					this.armorDef = 180;
+					this.armorMDef = 40;
+					this.bonusHP = 12000;
+					this.bonusLust = 150;
+					this.level = 68;
+					this.additionalXP = 450;
+				}
+				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 50) {
+					initStrTouSpeInte(323, 360, 160, 125);
+					initWisLibSensCor(105, 270, 65, 100);
+					this.weaponAttack = 60;
+					this.armorDef = 135;
+					this.armorMDef = 30;
+					this.bonusHP = 8000;
+					this.bonusLust = 100;
+					this.level = 64;
+					this.additionalXP = 350;
+				}
+				else {
+					initStrTouSpeInte(292, 320, 150, 120);
+					initWisLibSensCor(100, 270, 60, 100);
+					this.weaponAttack = 50;
+					this.armorDef = 90;
+					this.armorMDef = 20;
+					this.bonusHP = 4000;
+					this.bonusLust = 50;
+					this.level = 60;
+					this.additionalXP = 250;
+				}
 			}
 			else {
 				this.short = "tentacle beast";
