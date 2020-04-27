@@ -464,6 +464,12 @@ public class Combat extends BaseContent {
         enemyAI();
     }
 
+    public function isEnnemyInvisible():Boolean {
+        var isEnnemyInvisible:Boolean = false;
+        if (player.hasStatusEffect(StatusEffects.MonsterInvisible)) isEnnemyInvisible = true;
+        return isEnnemyInvisible;
+    }
+
     public function isPlayerSilenced():Boolean {
         var silenced:Boolean = false;
         if (player.hasStatusEffect(StatusEffects.ThroatPunch)) silenced = true;
@@ -482,6 +488,7 @@ public class Combat extends BaseContent {
             outputText("\n<b>You're bound up in the minotaur lord's chains!  All you can do is try to struggle free!</b>");
             bound = true;
         }
+        if (player.hasStatusEffect(StatusEffects.MonsterDig)) bound = true;
         if (player.hasStatusEffect(StatusEffects.UBERWEB)) bound = true;
         if (player.hasStatusEffect(StatusEffects.Bound)) bound = true;
         if (player.hasStatusEffect(StatusEffects.Chokeslam)) bound = true;
@@ -521,9 +528,9 @@ public class Combat extends BaseContent {
 
     public function canUseMagic():Boolean {
         if (player.hasStatusEffect(StatusEffects.ThroatPunch)) return false;
-        if (player.hasStatusEffect(StatusEffects.WebSilence)) return false;
-        if (player.hasStatusEffect(StatusEffects.GooArmorSilence)) return false;
-        if (player.hasStatusEffect(StatusEffects.WhipSilence)) return false;
+        else if (player.hasStatusEffect(StatusEffects.WebSilence)) return false;
+        else if (player.hasStatusEffect(StatusEffects.GooArmorSilence)) return false;
+        else if (player.hasStatusEffect(StatusEffects.WhipSilence)) return false;
         return true;
     }
 
