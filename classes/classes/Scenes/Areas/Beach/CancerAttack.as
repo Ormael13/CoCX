@@ -23,13 +23,16 @@ public class CancerAttack extends Monster
 				if (player.statusEffectv1(StatusEffects.MonsterDig) > 0) {
 					CancerWait();
 				}
-				if (player.statusEffectv1(StatusEffects.MonsterDig) == 0) {
+				else if (player.statusEffectv1(StatusEffects.MonsterDig) == 0) {
 					Grab();
 				}
 			} else if (player.hasStatusEffect(StatusEffects.CancerMonsterGrab)) {
 				Guillotine();
 			} else {
-				var choice:Function = randomChoice(Slam,Slam,Slam,Slam,Slam,BubbleSplash,BubbleSplash,Dig,Dig);
+				var choiceList:Array = [Dig,Dig];
+				if (!player.isFlying()) choiceList.push(Slam,Slam,Slam,Slam,Slam);
+				if (!player.hasStatusEffect(StatusEffects.Blind)) choiceList.push(BubbleSplash,BubbleSplash);
+				var choice:Function = randomChoice(choiceList);
 				choice();
 			}
 		}
@@ -42,26 +45,27 @@ public class CancerAttack extends Monster
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (this.hasCock()){
-				doNext(cancerScene.CancerMaleRape);
+				cancerScene.CancerMaleRape();
 			}
 			if (this.hasVagina()){
-				doNext(cancerScene.CancerFemaleRape);
+				cancerScene.CancerFemaleRape();
 			}
 		}
 
 		private function Dig():void {
 			if (this.hasStatusEffect(StatusEffects.AlrauneEntangle))
-				outputText("The cancer would love to dig a path away from you but is currently entangled in your vines!\n\n");
+				outputText("The cancer would love to dig a path away from you but is currently entangled in your vines!");
 			else{
-				outputText("The cancer dig [monster his] way underground, disappearing from view.\n\n");
+				outputText("The cancer dig [monster his] way underground, disappearing from view.");
 				if (!player.hasStatusEffect(StatusEffects.MonsterDig)) player.createStatusEffect(StatusEffects.MonsterDig, 1 + rand(3), 0, 0, 0);
+				if (!player.hasStatusEffect(StatusEffects.MonsterInvisible)) player.createStatusEffect(StatusEffects.MonsterInvisible, 0, 0, 0, 0);
 			}
 		}
 
 		private function Grab():void {
 			if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1){
 				outputText("By observing your environment and staying alert, you manage to dodge just in time as the pincer dig its way back up from under you. \n\n");
-			} else if (player.isFlying) {
+			} else if (player.isFlying()) {
 				outputText("You can’t help but chuckle at the cancer futile attempts to ambush you from beneath, simply flying way out of its reach. You taunt [monster him] still chuckling.\n\n" +
 						"<i>\"Hey, idiot! How do you plan to dig under and surprise that which does not even touch the ground!\"</i>\n\n");
 			} else {
@@ -69,6 +73,8 @@ public class CancerAttack extends Monster
 						"<i>\"Gotcha… You struggled, I don’t like it when they struggle, so I will crush you until you stop struggling.\"</i>\n\n");
 				player.createStatusEffect(StatusEffects.CancerMonsterGrab, 2 + rand(5), 0, 0, 0);
 			}
+			player.removeStatusEffect(StatusEffects.MonsterDig);
+			player.removeStatusEffect(StatusEffects.MonsterInvisible);
 		}
 
 		private function CancerWait():void {
@@ -101,19 +107,19 @@ public class CancerAttack extends Monster
 
 		private function Guillotine():void {
 			var damage:Number = 0;
-			outputText("The cancer begins to crush you inside [monster his] pincers. It hurts!! You can almost hear your bones breaking!\n\n");
+			outputText("The cancer begins to crush you inside [monster his] pincers. It hurts!! You can almost hear your bones breaking!");
 			damage += eBaseStrengthDamage() * 2;
 			damage = Math.round(damage);
-			player.takePhysDamage(damage);//, true
+			player.takePhysDamage(damage, true);
 			statScreenRefresh();
 		}
 
 		private function Slam():void {
 			var damage:Number = 0;
-			outputText("The cancer slams [monster his] giant pincer on you like a hammer.\n\n");
+			outputText("The cancer slams [monster his] giant pincer on you like a hammer.");
 			damage += eBaseStrengthDamage() * 2;
 			damage = Math.round(damage);
-			player.takePhysDamage(damage);//, true
+			player.takePhysDamage(damage, true);
 			statScreenRefresh();
 		}
 
@@ -131,7 +137,7 @@ public class CancerAttack extends Monster
 			this.long= "You are fighting a cancer, a centaur mixing the upper body of a human with the bottom body of a large crab. " +
 					"Its pincers stands at the ready looking for the opportunity of a swift and likely fatal grapple. " +
 					"While your opponent torso is pretty bare it’s obvious the crab part is sturdier than any steel plating. " +
-					"The creepiest thing about all of this is that her/his facial expression seems frozen in a constant blank state. \n";
+					"The creepiest thing about all of this is that her/his facial expression seems frozen in a constant blank state.";
 			//
 			if (IsFemale) {
 				this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_LOOSE);

@@ -464,7 +464,7 @@ public class Combat extends BaseContent {
         enemyAI();
     }
 
-    public function isEnnemyInvisible():Boolean {
+    public function get isEnnemyInvisible():Boolean {
         var isEnnemyInvisible:Boolean = false;
         if (player.hasStatusEffect(StatusEffects.MonsterInvisible)) isEnnemyInvisible = true;
         return isEnnemyInvisible;
@@ -488,9 +488,9 @@ public class Combat extends BaseContent {
             outputText("\n<b>You're bound up in the minotaur lord's chains!  All you can do is try to struggle free!</b>");
             bound = true;
         }
-        if (player.hasStatusEffect(StatusEffects.MonsterDig)) bound = true;
         if (player.hasStatusEffect(StatusEffects.UBERWEB)) bound = true;
         if (player.hasStatusEffect(StatusEffects.Bound)) bound = true;
+        if (player.hasStatusEffect(StatusEffects.CancerMonsterGrab)) bound = true;
         if (player.hasStatusEffect(StatusEffects.Chokeslam)) bound = true;
         if (player.hasStatusEffect(StatusEffects.Titsmother)) bound = true;
         if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {

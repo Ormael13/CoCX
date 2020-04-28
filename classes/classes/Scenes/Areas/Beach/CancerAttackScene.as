@@ -17,11 +17,12 @@ public class CancerAttackScene extends BaseContent
 		}
 
 		public function CancerEncounter():void {
-			spriteSelect(SpriteDb.s_crabgirl);
 			clearOutput();
 			var IsFemale:Boolean = rand(2) == 0;
 			var cancer:CancerAttack = new CancerAttack(IsFemale);
 			monster = cancer;
+			if (monster.hasCock()) spriteSelect(SpriteDb.s_crabboy);
+			else if (monster.hasVagina()) spriteSelect(SpriteDb.s_crabgirl);
 			if (player.lowerBody == LowerBody.CANCER) {
 				outputText("As you explore the beach you begin to feel the sand rumble under your feet… just what the hell is going on?\n\n" +
 						"You indeed are answered shortly afterward as a huge pincers surge out of the sand beneath you and try to grab you, " +
@@ -61,6 +62,12 @@ public class CancerAttackScene extends BaseContent
 							"<i>\"Don’t struggle… the mating will be both swift and nice.\"</i>\n\n" +
 							"You sure would struggle but the way [monster he]’s squeezing you right now left you gasping for air and begging for mercy. " +
 							"Gosh, [monster he]’s totally going to have [monster his] way with you.");
+					if (monster.hasVagina()) {
+						doNext(CancerFemaleRape);
+					}
+					if (monster.hasCock()) {
+						doNext(CancerMaleRape);
+					}
 				} else {
 					outputText("Thankfully your peerless reflexes allows you to move out of range just in time. " +
 							"The creature follows you as it moves out of the sand, revealing the massive chitinous body of a crab, a smaller form atop it with the physiognomy of a young woman/men from the waist up. " +
@@ -68,15 +75,15 @@ public class CancerAttackScene extends BaseContent
 							"<i>\"Ah…so I caught a [man].\"</i>\n\n" +
 							"Despite [monster his] flat tone and somewhat blank stare it's clear that what [monster he] intends to do with you will result into nothing good.\n\n" +
 							"<i>\"Don’t struggle… the mating will be both swift and nice.\"</i>\n\n" +
-							"At that she/he passively lick her/his lip. Yea no way you are letting her/him do that! ");
-					menu();
+							"At that [monster he] passively lick [monster his] lip. Yea no way you are letting [monster him] do that! ");
 					startCombat(cancer);
 				}
 			}
 		}
+
 		public function CancerMaleRape():void {
-			spriteSelect(SpriteDb.s_crabgirl);
 			clearOutput();
+			spriteSelect(SpriteDb.s_crabboy);
 			outputText("The cancer looks at you for a full minute and considers your body for a moment before smiling, " +
 					"except his eyes kept the same blank expression of earlier which makes the small smile only more awkward.\n\n" +
 					"<i>\"I’m going to enjoy this…\"</i>\n\n" +
@@ -107,8 +114,8 @@ public class CancerAttackScene extends BaseContent
 		}
 
 		public function CancerFemaleRape():void {
-			spriteSelect(SpriteDb.s_crabgirl);
 			clearOutput();
+			spriteSelect(SpriteDb.s_crabgirl);
 			if (!player.hasVagina() && !player.hasCock()){
 				outputText("The cancer looks at you for a full minute and considers your body for a moment before shrugging." +
 						"<i>\"Know what? I’m not interested anymore. See ya.\"</i>\n\n" +

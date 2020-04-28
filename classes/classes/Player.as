@@ -4719,6 +4719,8 @@ use namespace CoC;
 				nekomataCounter++;
 			if (tailType == Tail.CAT)
 				nekomataCounter++;
+			if (rearBody.type == RearBody.LION_MANE)
+				nekomataCounter++;
 			if (tailType == Tail.NEKOMATA_FORKED_1_3)
 				nekomataCounter += 2;
 			if (tailType == Tail.NEKOMATA_FORKED_2_3)
