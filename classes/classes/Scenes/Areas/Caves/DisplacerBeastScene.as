@@ -44,11 +44,12 @@ public function displacerBeastMilkfeeding():void {
 	outputText("She wants milk, eh? Ain’t she lucky, you have more milk than she can take and you will be more than happy to give it all to her!\n\n");
 	outputText("You playfully grab her tentacles, to her complete surprise, as you rub them against your chest showing your obvious intent to the catgirl. She slowly calms down, smiling wide as you make it clear that you want to breastfeed her. She gently latches her suction cup-like tentacles to your chest and you moo in pleasure as your milk udders are slowly being drank from. The displacer beast purrs, ");
 	outputText("delighted as she feeds from your top quality milk and you reward her attention by slipping a finger into her pussy. Soon, both of you begin to moan, you from the pleasurable sensation in your chest and her from your invading fingers. It doesn't take long for the both of you to finally cum together as you fill her tentacles with a massive output of milk, the beverage going all the way to her now balloony stomach.\n\n");
-	outputText("She pats her belly with a delighted smile as she unplugs from you and kisses you in gratitude, leaving a few gems behind and teleporting to some unknown location. Wow, out of all the possible breast feeds, that sure was one of the best. You hope to meet her again.\n\n");
+	outputText("She pats her belly with a delighted smile as she unplugs from you and kisses you in gratitude, leaving a few gems behind and teleporting to some unknown location. Wow, out of all the possible breast feeds, that sure was one of the best. You hope to meet her again.\n\n<b>You got 100 gems from this chance encounter how nice!</b>");
 	player.sexReward("Default", "Nipples", true, false);
 	player.addStatusValue(StatusEffects.Feeder,1,1);
 	player.changeStatusValue(StatusEffects.Feeder,2,0);
 	player.boostLactation(0.1);
+	player.gems += 100;
 	cleanupAfterCombat();
 }
 public function displacerBeastDefeat():void {

@@ -11939,8 +11939,8 @@ use namespace CoC;
 					break;
 				case 'Nipples': //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_NIPPLES] < 10) flags[kFLAGS.TIMES_ORGASM_NIPPLES]++;
 					break;
-				case 'Ovi':     break;
-
+				case 'Ovi':
+					break;
 					// Now to the more complex types
 				case 'VaginalAnal':
 					orgasm((hasVagina() ? 'Vaginal' : 'Anal'), real);
