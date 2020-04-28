@@ -5,7 +5,8 @@
 package classes.Scenes.Areas.Caves 
 {
 	import classes.*;
-	import classes.internals.*;
+import classes.Scenes.Combat.Combat;
+import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Dungeons.DungeonAbstractContent;
 	
@@ -19,6 +20,10 @@ package classes.Scenes.Areas.Caves
 public function displacerBeastEncounter():void {
 	clearOutput();
 //	spriteSelect(32);
+	if (player.hasPerk(PerkLib.Feeder)) {
+		displacerBeastMilkfeeding();
+	}
+	else {
 	outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.\n\n");
 	if (flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] <= 0) {
 		flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] = 1;
@@ -26,6 +31,7 @@ public function displacerBeastEncounter():void {
 	}
 	outputText("You are fighting a Displacer beast!");
 	startCombat(new DisplacerBeast());
+	}
 }
 public function displacerBeastVictory():void {
 	clearOutput();
@@ -34,10 +40,15 @@ public function displacerBeastVictory():void {
 }
 public function displacerBeastMilkfeeding():void {
 	clearOutput();
-	outputText("So, she wants milk, eh? Ain’t she lucky, you have more milk than she can take and you will be more than happy to give it to her!\n\n");
-	outputText("You casually walk to her and playfully grab her tentacles, to her complete surprise, as you rub them against your chest showing your obvious intent to the catgirl. She slowly calms down, smiling wide as you make it clear that you want to breastfeed her. She gently latches her suction cup-like tentacles to your chest and you moan in pleasure as your milk udders are slowly being drank from. The displacer beast purrs, ");
+	outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would look terrifying if not for the fact that she is exactly what you needed right now, a walking milker. Licking your lips in anticipation, you giddily walk toward the displacer beast which confused by your friendly demeanor let's you come closer.\n\n");
+	outputText("She wants milk, eh? Ain’t she lucky, you have more milk than she can take and you will be more than happy to give it all to her!\n\n");
+	outputText("You playfully grab her tentacles, to her complete surprise, as you rub them against your chest showing your obvious intent to the catgirl. She slowly calms down, smiling wide as you make it clear that you want to breastfeed her. She gently latches her suction cup-like tentacles to your chest and you moo in pleasure as your milk udders are slowly being drank from. The displacer beast purrs, ");
 	outputText("delighted as she feeds from your top quality milk and you reward her attention by slipping a finger into her pussy. Soon, both of you begin to moan, you from the pleasurable sensation in your chest and her from your invading fingers. It doesn't take long for the both of you to finally cum together as you fill her tentacles with a massive output of milk, the beverage going all the way to her now balloony stomach.\n\n");
 	outputText("She pats her belly with a delighted smile as she unplugs from you and kisses you in gratitude, leaving a few gems behind and teleporting to some unknown location. Wow, out of all the possible breast feeds, that sure was one of the best. You hope to meet her again.\n\n");
+	player.sexReward("Default", "Nipples", true, false);
+	player.addStatusValue(StatusEffects.Feeder,1,1);
+	player.changeStatusValue(StatusEffects.Feeder,2,0);
+	player.boostLactation(0.1);
 	cleanupAfterCombat();
 }
 public function displacerBeastDefeat():void {
@@ -69,6 +80,7 @@ public function displacerBeastDefeat():void {
 		if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
 		DungeonAbstractContent.dungeonLoc = 0;
 	}
+	player.sexReward("Default", "Nipples", true, false);
 	cleanupAfterCombat();
 }
 
