@@ -159,6 +159,10 @@ public class SpriteDb {
 	}
 	[Embed(source="../../../res/sprites/crabgirl.png")]
 	public static var s_crabgirl:Class;
+	[Embed(source="../../../res/sprites/crabgirlShop.png")]
+	public static var s_crabgirlShop:Class;
+	[Embed(source="../../../res/sprites/crabboy.png")]
+	public static var s_crabboy:Class;
 	[Embed(source="../../../res/sprites/dickworms.png")]
 	public static var s_dickworms_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/worms-old.png")]
