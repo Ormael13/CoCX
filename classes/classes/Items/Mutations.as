@@ -351,7 +351,6 @@
                 outputText("You hang your bag of cosmos on your belt and bind using small amount of your soulforce.  ");
                 player.createKeyItem("Bag of Cosmos", 0, 0, 0, 0);
                 outputText("<b>You now have 12 item slots bag.</b>");
-                return;
             } else if (player.hasKeyItem("Bag of Cosmos") >= 0) {
                 outputText("When binding this bag of cosmos you notice you already have one of such type.  Damn now this one is wasted.  Well next time you will remember to not bind new ones when you got one already.");
             }
@@ -1225,7 +1224,6 @@
                         if (player.clitLength > 5 && player.findPerk(PerkLib.BigClit) >= 0) outputText("  Eventually it shrinks back down to its normal (but still HUGE) size.  You guess it can't get any bigger.");
                         if (((player.findPerk(PerkLib.BigClit) >= 0) && player.clitLength < 6)
                                 || player.clitLength < 3) {
-                            index += 2;
                             player.clitLength += (rand(4) + 2) / 10;
                         }
                         dynStats("sen", 3, "lus", 8);
@@ -4106,7 +4104,7 @@
 
             }
             //6b.Infinite Vagina
-            if (player.vaginalCapacity() < 9000 && rand(3) == 0 && changes < changeLimit) {
+            if (player.hasVagina && player.vaginalCapacity() < 9000 && rand(3) == 0 && changes < changeLimit) {
                 if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 9000, 0, 0, 0);
                 else player.addStatusValue(StatusEffects.BonusVCapacity, 1, 9000);
                 outputText("\n\nYour [vagina]'s internal walls feel a tingly wave of strange tightness.  Experimentally, you slip a few fingers, then your hand, then most of your forearm inside yourself.  <b>It seems you're now able to accommodate just about ANYTHING inside your sex.</b>");
@@ -11891,8 +11889,6 @@
         public function pigTruffle(boar:Boolean, player:Player):void {
             var changes:int = 0;
             var changeLimit:int = 1;
-            var temp:int = 0;
-            var x:int = 0;
             if (rand(2) == 0) changeLimit++;
             if (rand(2) == 0) changeLimit++;
             if (rand(3) == 0) changeLimit++;
@@ -12063,7 +12059,7 @@
             }
             if (boar && rand(2) == 0 && player.hasPlainSkinOnly() && !player.hasFur() && changes < changeLimit) {
                 var skinChoosen:int = rand(5);
-                var furToBeChosen:String = "";
+                var furToBeChosen:String;
                 if (skinChoosen == 0) furToBeChosen = "brown";
                 else if (skinChoosen == 1) furToBeChosen = "dark brown";
                 else if (skinChoosen == 2) furToBeChosen = "black";
@@ -12081,7 +12077,7 @@
             //Change skin colour
             if (rand(boar ? 2 : 3) == 0 && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit) {
                 var skinChoose:int = rand(3);
-                var skinToBeChosen:String = "pink";
+                var skinToBeChosen:String;
                 if (boar) {
                     if (skinChoose == 0) skinToBeChosen = "pink";
                     else if (skinChoose == 1) skinToBeChosen = "dark blue";
@@ -13266,7 +13262,6 @@
                     dynStats("lus", 10);
                 }
             }
-            var boobsGrew:Boolean = false;
             //Increase player's breast size
             if (player.gender > 1 && player.biggestTitSize() < 4 && changes < changeLimit && rand(3) == 0) {
                 if (rand(2) == 0) outputText("\n\nYour [breasts] tingle for a moment before becoming larger.");
@@ -13274,7 +13269,6 @@
                 player.growTits(1 + rand(3), 1, false, 3);
                 changes++;
                 dynStats("sen", .5);
-                boobsGrew = true;
             }
             if (player.breastRows.length == 0) {
                 outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
@@ -13392,7 +13386,7 @@
             if (rand(2) == 0) changeLimit++;
             if (rand(3) == 0) changeLimit++;
             if (rand(4) == 0) changeLimit++;
-            changeLimit += additionalTransformationChances();
+            //changeLimit += additionalTransformationChances();
             //clear screen
             clearOutput();
             outputText("You eat the weird kelp seed and feel suddenly like singing. Seems your talent for music are skyrocketing as you embrace the changes within you.");
@@ -13409,9 +13403,6 @@
             //init variables
             var changes:Number = 0;
             var changeLimit:Number = 1;
-            var temp:Number = 0;
-            //	var temp2:Number = 0;
-            //	var temp3:Number = 0;
             //Randomly choose affects limit
             if (rand(2) == 0) changeLimit++;
             if (rand(3) == 0) changeLimit++;
@@ -13436,15 +13427,11 @@
             }
 
             //Toughness
-            if (changes < changeLimit && rand(4) == 0) {
-                temp = 60 - player.tou;
-                if (temp <= 0) temp = 0;
-                else {
-                    if (rand(2) == 0) outputText("\n\nYou feel your insides toughening up; it feels like you could stand up to almost any blow.");
-                    else outputText("\n\nYour bones and joints feel sore for a moment, and before long you realize they've gotten more durable.");
-                    dynStats("tou", 1 + rand(10));
-                    changes++;
-                }
+            if (player.tou < 100 && changes < changeLimit && rand(4) == 0) {
+                if (rand(2) == 0) outputText("\n\nYou feel your insides toughening up; it feels like you could stand up to almost any blow.");
+                else outputText("\n\nYour bones and joints feel sore for a moment, and before long you realize they've gotten more durable.");
+                dynStats("tou", 1 + rand(10));
+                changes++;
             }
 
             //Tone
@@ -13466,12 +13453,12 @@
                 }
                 if (selectedCock != -1) {
                     if (player.cocks[selectedCock].cockThickness < 4) {
-                        temp = player.increaseCock(selectedCock, 2 + rand(4));
-                        temp += player.cocks[selectedCock].thickenCock(1);
+                        player.increaseCock(selectedCock, 2 + rand(4));
+                        player.cocks[selectedCock].thickenCock(1);
                         outputText("\n\nYou moan as your cock suddenly becomes erect, dripping precum as it increases in thickness and length.");
                         if (player.biggestCockLength() > 21) outputText(" It has became so big you could likely fuck a horse or a small whale with it if you wanted.");
                     } else {
-                        temp = player.increaseCock(selectedCock, 2 + rand(4));
+                        player.increaseCock(selectedCock, 2 + rand(4));
                         outputText("\n\nYou moan as your cock suddenly becomes erect, dripping precum as it increases in thickness and length.");
                         if (player.biggestCockLength() > 21) outputText(" It has became so big you could likely fuck a horse or a small whale with it if you wanted.");
                         outputText(" The pleasure of the change cause you to orgasm, a big load of cum splattering the ground below you.");
@@ -13592,8 +13579,6 @@
             var changes:Number = 0;
             var changeLimit:Number = 1;
             var temp:Number = 0;
-            var temp2:Number = 0;
-            var temp3:Number = 0;
             var wyrmCoatColor:Array = ["bluish black", "dark grey", "black", "midnight black", "midnight"];
             var wyrmHairColor:Array = ["white", "snow white", "glacial white", "silver", "platinum silver"];
             //Randomly choose affects limit
@@ -14449,7 +14434,6 @@
             //init variables
             var changes:Number = 0;
             var changeLimit:Number = 1;
-            var temp2:Number = 0;
             //Randomly choose affects limit
             if (rand(2) == 0) changeLimit++;
             if (rand(3) == 0) changeLimit++;
@@ -14487,7 +14471,6 @@
                 player.tallness += temp;
                 changes++;
             }
-            var boobsGrew:Boolean = false;
             //Increase player's breast size
             if (player.gender > 1 && player.biggestTitSize() <= 12 && changes < changeLimit && rand(3) == 0) {
                 if (rand(2) == 0) outputText("\n\nYour [breasts] tingle for a moment before becoming larger.");
@@ -14495,7 +14478,6 @@
                 player.growTits(1 + rand(3), 1, false, 3);
                 changes++;
                 dynStats("sen", .5);
-                boobsGrew = true;
             }
             //-Grow hips out if narrow.
             if (player.hips.type < 10 && changes < changeLimit && rand(3) == 0) {
@@ -14601,7 +14583,7 @@
                     });
                 } else {
                     var skinChoosen:int = rand(3);
-                    var furToBeChosen:String = "";
+                    var furToBeChosen:String;
                     if (skinChoosen == 0) furToBeChosen = "brown";
                     else if (skinChoosen == 1) furToBeChosen = "white";
                     else furToBeChosen = "black";
@@ -14631,14 +14613,11 @@
             //init variables
             var changes:Number = 0;
             var changeLimit:Number = 1;
-            var temp2:Number = 0;
             //Randomly choose affects limit
             if (rand(2) == 0) changeLimit++;
             if (rand(3) == 0) changeLimit++;
             if (rand(4) == 0) changeLimit++;
             changeLimit += additionalTransformationChances();
-            //Temporary storage
-            var temp:Number = 0;
             //clear screen
             clearOutput();
             outputText("Sometimes you question your choices in life. Right now, for instance, your choice is to drink up the saliva of some fiery snail, thing. The first thing of note to happen is that your body begins to heat up. Whatever this thing is doing to you, it's clearly raising your arousal.");
@@ -15044,7 +15023,6 @@
             //init variables
             var changes:Number = 0;
             var changeLimit:Number = 1;
-            var x:int = 0;
             //Temporary storage
             var temp:Number = 0;
             var temp2:Number = 0;
@@ -15137,7 +15115,6 @@
                     }
                 }
                 //Sex bits - girly
-                var boobsGrew:Boolean = false;
                 //Increase player's breast size, if they are HH or bigger
                 //do not increase size, but do the other actions:
                 if (player.biggestTitSize() <= 10 && changes < changeLimit && rand(4) == 0) {
@@ -15146,7 +15123,6 @@
                     player.growTits(1 + rand(3), 1, false, 3);
                     changes++;
                     dynStats("sen", .5);
-                    boobsGrew = true;
                 }
                 //If the player is under 7 feet in height, increase their height
                 if (player.tallness < 96 && changes < changeLimit && rand(4) == 0) {
@@ -15319,11 +15295,8 @@
             //init variables
             var changes:Number = 0;
             var changeLimit:Number = 1;
-            var x:int = 0;
             //Temporary storage
-            var temp:Number = 0;
             var temp2:Number = 0;
-            var temp3:Number = 0;
             //Randomly choose affects limit
             if (rand(4) == 0) changeLimit++;
             if (rand(4) == 0) changeLimit++;
@@ -15398,7 +15371,7 @@
                 }
 
                 if (player.hasVagina() && changes < changeLimit && rand(4) == 0) {
-                    var index:int = 0;
+                    var index:int;
                     outputText("\n\n");
                     //0 = dry, 1 = wet, 2 = extra wet, 3 = always slick, 4 = drools constantly, 5 = female ejaculator
                     if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) {

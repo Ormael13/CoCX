@@ -819,7 +819,7 @@ public class PerkLib
 				"You choose the 'Daoist: Warrior Stage' perk, progressing on your Daoist path. (+30% soulskill/m.soulskill power, +40 max SF at S.Sprite, S.Scholar, S.Elder stages)");
 		public static const DazzlingDisplay:PerkType = mk("Dazzling display", "Dazzling display",
 				"Teasing can stun enemy for one round or increase lust damage for grapple-type teases.",
-				"You choose 'Dazzling display' perk, allowing to increse tease dmg a little bit or even stun enemy for short moment.");
+				"You choose 'Dazzling display' perk, allowing to slightly increase tease damage or even stun your enemy for a short moment.");
 		public static const DeadlyAim:PerkType = mk("Deadly Aim", "Deadly Aim",
 				"Arrows/Bolts ignore damage reductions piercing right through your opponent armor weak points (ignore enemy dmg red).",
 				"You choose the 'Deadly Aim' perk, causing arrows/bolts to ignore the damage reductions of opponent.");
@@ -867,10 +867,10 @@ public class PerkLib
 				"You choose the 'Diehard' perk, allowing to contiue fight even when below 0 HP.");
 		public static const DisplacerMetabolism:PerkType = mk("Displacer Metabolism", "Displacer Metabolism",
 				"Allows you to gain a boost of speed for a few hours after an intake of cum and allow attack twice with tail spike per turn.",
-				"You choose the 'Displacer Metabolism' perk, allows you to gain a boost of speed after an intake of milk and double the damage of claws attacks.");
+				"You choose the 'Displacer Metabolism' perk, allows you to gain a boost of speed after an intake of milk and double the damage of displacer beast claws attacks.");
 		public static const DisplacerMetabolismEvolved:PerkType = mk("Displacer Metabolism (Evolved)", "Displacer Metabolism (Evolved)",
 				"Increase by (10 * NG tier) boost of speed for a five hours longer after an intake of milk and increase max Hunger cap by 50 (if PC have Hunger bar active).",
-				"You choose the 'Displacer Metabolism (Evolved)' perk, allows you to increase max boost of speed after an intake of milk and keeping it for 50% longer. Alse triple the damage of claws attacks.");
+				"You choose the 'Displacer Metabolism (Evolved)' perk, allows you to increase max boost of speed after an intake of milk and keeping it for 50% longer. Alse triple the damage of displacer beast claws attacks.");
 		public static const Doctor:PerkType = mk("Doctor", "Doctor",
 				"You got promoted to a doctor, allowing you to cure a wider variety of ailments. This knowledge allows you to heal yourself better, increasing health regen.",
 				"You choose the 'Doctor' perk, increasing HP gains by 20%.");
@@ -2423,7 +2423,7 @@ public class PerkLib
 		public static const Saturation:PerkType = mk("Saturation", "Saturation",
 				"Using your advanced knowledge, you soak each transformative in a special liquid to enhance their effects +1 effect.",
 				"You choose the 'Saturation' perk, number of possible effects of transformatives +1.");
-		public static const ScandalousSuccubusClothing:PerkType = mk("Scandalous Succubus Clothing", "Scandalous SuccubusClothing",
+		public static const ScandalousSuccubusClothing:PerkType = mk("Scandalous Succubus Clothing", "Scandalous Succubus Clothing",
 				"Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.",
 				"Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.\n");
 		public static const ScyllaInkGlands:PerkType = mk("Scylla Ink Glands", "Scylla Ink Glands",
@@ -2606,7 +2606,7 @@ public class PerkLib
 				"You choose the 'Steel Storm' perk. Gain two (or four/six if PC normaly attack 5+/9+ times per turn) extra attack when dual wielding.");
 		public static const Straddle:PerkType = mk("Straddle", "Straddle",
 				"You may now perform the straddle action in battle against stunned foes. Initiating a grappling stance. This grapple efficiency is based on libido and only function on single target humanoids.\n",
-				"You choose the 'Straddle' perk, Allowing you to further tease your stunned foe throught devastating grappling techniques.");
+				"You choose the 'Straddle' perk, allowing you to further tease your stunned foe through devastating grappling techniques.");
 		public static const StraddleImproved:PerkType = mk("Improved Straddle", "Improved Straddle",
 				"Increase the straddle maneuver maximum duration by two rounds.\n",
 				"You choose the 'Improved Straddle' perk, Allowing you to increase the straddle maneuver maximum duration by two rounds.");
@@ -4711,7 +4711,7 @@ public class PerkLib
 			Straddle.requirePerk(JobCourtesan)
 					.requireLib(75)
 					.requireLevel(12);
-			StraddleImproved.requirePerk(JobCourtesan)
+			StraddleImproved.requirePerk(Straddle)
 					.requireLib(150)
 					.requireLevel(24);
             RapidReload.requirePerk(JobGunslinger)
@@ -5483,7 +5483,7 @@ public class PerkLib
             }, "Spider or any snake-like race");
 			WhaleFat.requireMouthMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.orcaScore() >= 12;
-			}, "Orca race")
+			}, "Orca race");
             /*
 			if (player.() >=  && ) {
 			_add(new PerkClass(PerkLib.));

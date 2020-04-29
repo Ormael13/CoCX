@@ -857,6 +857,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast a first tier white magic spell again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 			bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
@@ -875,6 +877,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast a second tier white magic spell again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsMeteorShower)) {
@@ -895,6 +899,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast Meteor Shower again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) {
@@ -913,6 +919,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast a first tier white magic spell again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsChainLighting)) {
@@ -931,6 +939,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast a second tier white magic spell again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBlind)) {
@@ -949,6 +959,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsCharge)) {
@@ -1015,6 +1027,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 	}
@@ -1038,6 +1052,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast a first tier black magic spell again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsArcticGale)) {
@@ -1054,6 +1070,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast a second tier black magic spell again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsPolarMidnight)) {
@@ -1070,6 +1088,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast Polar Midnight again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) {
@@ -1086,6 +1106,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast a first tier black magic spell again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsDuskWave)) {
@@ -1102,6 +1124,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast a second tier black magic spell again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsArouse)) {
@@ -1116,6 +1140,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsWaveOfEcstasy)) {
@@ -1132,6 +1158,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast Wave of Ecstasy again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsMight)) {
@@ -1209,6 +1237,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You're still linked to the enemy.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsConsumingDarkness)) {
@@ -1225,6 +1255,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast Consuming darkness again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsCurseOfDesire)) {
@@ -1241,6 +1273,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast Curse of Desire again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsCurseOfWeeping)) {
@@ -1259,6 +1293,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You need more time before you can cast Curse of Weeping again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 	}
@@ -1289,6 +1325,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 		//	if (player.hasStatusEffect(StatusEffects.KnowsWereBeast)) buttons.add("Were-beast",	were-beast spell goes here
@@ -1303,6 +1341,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 		//	if (player.hasStatusEffect(StatusEffects.Knows)) buttons.add("	fire single target spell goes here
@@ -1316,6 +1356,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
 	}

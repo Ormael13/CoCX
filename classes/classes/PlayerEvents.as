@@ -1058,9 +1058,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.mana < player.maxMana()) {
 					EngineCore.ManaChange(100 + (player.inte*2), true);
 				}
-				if (player.fatigue < player.maxFatigue()) {
-					EngineCore.changeFatigue(100 + (player.spe*2));
-				}
+				EngineCore.changeFatigue(-(100 + (player.spe*2)));
 				outputText("You feel energised and empowered by the energy drained out of the cum of your recent fuck. What a meal!");
 				player.removeStatusEffect(StatusEffects.DemonEnergyThirstFeed)
 			}
@@ -1137,9 +1135,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.mana < player.maxMana()) {
 					EngineCore.ManaChange(100 + (player.inte*2), true);
 				}
-				if (player.fatigue < player.maxFatigue()) {
-					EngineCore.changeFatigue(100 + (player.spe*2));
-				}
+				EngineCore.changeFatigue(-(100 + (player.spe*2)));
 				if (player.soulforce < player.maxSoulforce()) {
 					EngineCore.SoulforceChange(500 + (player.wis*2), true);
 				}

@@ -5,11 +5,11 @@ package classes.Scenes.Combat {
 import classes.BodyParts.Arms;
 import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
-import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
+import classes.Scenes.Areas.Beach.CancerAttack;
 import classes.Scenes.Areas.Desert.SandTrap;
 import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.HighMountains.Izumi;
@@ -52,7 +52,7 @@ public class CombatUI extends BaseCombatContent {
 		hexSpellButtons.clear();
 		soulforceButtons.clear();
 		otherButtons.clear();
-		
+
 		var btnMelee:CoCButton      = button(0);
 		var btnRanged:CoCButton     = button(1);
 		var btnTease:CoCButton      = button(2);
@@ -64,8 +64,8 @@ public class CombatUI extends BaseCombatContent {
 		var btnSoulskills:CoCButton = button(8);
 		var btnOther:CoCButton      = button(9);
 		var btnSpecial1:CoCButton   = button(10);
-		var btnSpecial2:CoCButton   = button(11);
-		var btnSpecial3:CoCButton   = button(12);
+		//var btnSpecial2:CoCButton   = button(11);
+		//var btnSpecial3:CoCButton   = button(12);
 		var btnFantasize:CoCButton  = button(13);
 		var btnRun:CoCButton        = button(14);
 		/*
@@ -73,10 +73,11 @@ public class CombatUI extends BaseCombatContent {
 		 5 ability groups
 		10 [   ?   ] [   ?   ] [   ?   ] [Fantasize] [  Run  ]
 		 */
-		
+
 		//Standard menu before modifications.
 		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2) {
 			btnMelee.show("E.Attack", combat.baseelementalattacks, "Command your elemental to attack the enemy.  Damage it will deal is affcted by your wisdom and intelligence.");
+			if (combat.isEnnemyInvisible) btnMelee.disable("You cannot use command your elemental to attack an opponent you cannot see or target.");
 		}
 		else {/*
 			btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your "+player.weaponName+".  Damage done is determined by your strength and weapon.");
@@ -98,8 +99,10 @@ public class CombatUI extends BaseCombatContent {
 				if (monster.isFlying()) {
 					if (player.isFlying()) btnMelee.show("Sawblade", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech sawblade.  Damage done is determined by your strength and weapon.");
 					else btnMelee.disable("No way you could reach enemy in air with melee attacks.");
+					if (combat.isEnnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 				}
 				else btnMelee.show("Sawblade", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech sawblade.  Damage done is determined by your strength and weapon.");
+				if (combat.isEnnemyInvisible) btnMelee.disable("You cannot use attack an opponent you cannot see or target.");
 			}
 			else {
 				if (monster.isFlying()) {
@@ -118,27 +121,35 @@ public class CombatUI extends BaseCombatContent {
 				else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.");
 			}
 		}
+		if (combat.isEnnemyInvisible){
+			btnMelee.disable("You cannot use attack an opponent you cannot see or target.");
+		}
 		// Ranged
 		switch (player.weaponRangePerk) {
 			case "Bow":
 				btnRanged.show("Bow", combat.fireBow, "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined by your speed and weapon.");
+				if (combat.isEnnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 				break;
 			case "Crossbow":
 				btnRanged.show("Crossbow", combat.fireBow, "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined only by your weapon.");
+				if (combat.isEnnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 				break;
 			case "Throwing":
-                btnRanged.show("Throw", combat.fireBow, "Attempt to throw " + player.weaponRangeName + " at enemy.  Damage done is determined by your strength and weapon.");
-                if (player.ammo <= 0 && player.weaponRange != weaponsrange.SHUNHAR) btnRanged.disable("You have used all your throwing weapons in this fight.");
+				btnRanged.show("Throw", combat.fireBow, "Attempt to throw " + player.weaponRangeName + " at enemy.  Damage done is determined by your strength and weapon.");
+				if (player.ammo <= 0 && player.weaponRange != weaponsrange.SHUNHAR) btnRanged.disable("You have used all your throwing weapons in this fight.");
+				if (combat.isEnnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 				break;
 			case "Pistol":
 			case "Rifle":
 			case "2H Firearm":
-                if (player.ammo <= 0)
-                    btnRanged.show("Reload", combat.reloadWeapon1, "Your " + player.weaponRangeName + " is out of ammo.  You'll have to reload it before attack.");
-                else btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
+				if (player.ammo <= 0)
+					btnRanged.show("Reload", combat.reloadWeapon1, "Your " + player.weaponRangeName + " is out of ammo.  You'll have to reload it before attack.");
+				else btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
+				if (combat.isEnnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 				break;
 			default:
-				btnRanged.showDisabled("Shoot");
+				btnRanged.showDisabled("Shoot", "You cannot use ranged combat witheout a ranged weapon equiped");
+				if (combat.isEnnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 		}
 		if (player.isFlying() && player.wings.type == Wings.BAT_ARM){btnRanged.disable("It would be rather difficult to aim while flapping your arms."); }
 		if (player.isInGoblinMech()) {
@@ -148,13 +159,21 @@ public class CombatUI extends BaseCombatContent {
 					else btnRanged.disable("Your firearms is not compatibile to be used with current piloted mech.");
 				}
 				else btnRanged.disable("You could use your range weapon while piloting goblin mech if it would be any form of firearms.");
-			}
-			else btnRanged.disable("No way you could use your range weapon while piloting goblin mech.");
+			} else btnRanged.disable("No way you could use your range weapon while piloting goblin mech.");
+			if (combat.isEnnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 		}
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
-		
+
 		// Submenus
-		
+		function vampireBiteDuringGrapple(Position:int):void{
+			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
+				addButton(Position, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
+				if (player.fatigueLeft() <= combat.physicalCost(20)) {
+					button(Position).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
+				}
+			}
+		}
+
 		// Submenu - Physical Specials
 		if (player.isFlying()) combat.pspecials.buildMenuForFlying(physpButtons);
 		else combat.pspecials.buildMenu(physpButtons);
@@ -164,7 +183,7 @@ public class CombatUI extends BaseCombatContent {
 		}
 		if (!player.isFlying() && monster.isFlying() && !player.canFly()) {
 			if (player.isInGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
-			else btnPSpecials.disable("No way you could reach enemy in air with p. specials.");
+			else btnPSpecials.disable("No way you could reach an opponent in the air with p. specials.");
 		}
 		// Submenu - Magical Specials
 		combat.mspecials.buildMenu(magspButtons);
@@ -177,9 +196,7 @@ public class CombatUI extends BaseCombatContent {
 		if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) {
 			btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
-		} else if (!combat.canUseMagic()) {
-			btnMagic.disable();
-		}
+		} else if (!combat.canUseMagic()) btnMagic.disable();
 		// Submenu - Soulskills
 		combat.soulskills.buildMenu(soulforceButtons);
 		if (soulforceButtons.length > 0) btnSoulskills.show("Soulforce", submenuSoulforce, "Soulforce attacks menu.", "Soulforce Specials");
@@ -195,10 +212,11 @@ public class CombatUI extends BaseCombatContent {
 			}
 			else if (player.hasKeyItem("Aphrodigas Gun") >= 0) btnTease.show("Aphrodigas Gun", combat.goboLustnadeLauncher, "Gassing the opponent with aphrodisiacs.");
 			else btnTease.disable("No way you could make an enemy more aroused by striking a seductive pose and exposing parts of your body while piloting goblin mech.");
-			
+
 		}
 		else if (monster.hasStatusEffect(StatusEffects.Stunned) && player.hasPerk(PerkLib.Straddle)) btnTease.show("Straddle", combat.Straddle, "Go to town on your opponent with devastating teases.");
 		else btnTease.show("Tease", combat.teaseAttack, "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.");
+		if (combat.isEnnemyInvisible) btnTease.disable("You cannot tease an opponent you cannot see or target, heck is it even looking at you right now?");
 		btnWait.show("Wait", combat.wait, "Take no action for this round.  Why would you do this?  This is a terrible idea.");
 		if (monster.hasStatusEffect(StatusEffects.CreepingDoom)) btnRun.show("Struggle", combat.struggleCreepingDoom, "Shake away the pests.");
 		else btnRun.show("Run", combat.runAway, "Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.");
@@ -225,12 +243,7 @@ public class CombatUI extends BaseCombatContent {
 			addButton(0, "Heal", combat.HypnosisHeal);
 			addButton(1, "Attack", combat.HypnosisAttack);
 			addButton(2, "Coil", combat.HypnosisCoil);
-			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
-				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
-				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
-				}
-			}
+			vampireBiteDuringGrapple(3);
 			addButton(4, "Maintain", combat.HypnosisMaintain);
 		} else if (monster.hasStatusEffect(StatusEffects.HypnosisNaga) && monster.hasStatusEffect(StatusEffects.Constricted)) {
 			menu();
@@ -248,23 +261,13 @@ public class CombatUI extends BaseCombatContent {
 			menu();
 			addButton(0, "Squeeze", SceneLib.desert.nagaScene.naggaSqueeze).hint("Squeeze some HP out of your opponent! \n\nFatigue Cost: " + physicalCost(20) + "");
 			addButton(1, "Tease", SceneLib.desert.nagaScene.naggaTease);
-			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
-				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
-				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
-				}
-			}
+			vampireBiteDuringGrapple(3);
 			addButton(4, "Release", SceneLib.desert.nagaScene.nagaLeggoMyEggo);
 		//Grappling Cancer
 		} else if (monster.hasStatusEffect(StatusEffects.CancerGrab)) {
 			menu();
 			addButton(0, "Guillotine", combat.Guillotine).hint("Crush your foe with your pincer and attempt to break it appart! \n\nFatigue Cost: " + physicalCost(20) + "");
-			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
-				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
-				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
-				}
-			}
+			vampireBiteDuringGrapple(3);
 			addButton(4, "Release", combat.CrabLeggoMyEggo);
 		//Grappling scylla
 		} else if (monster.hasStatusEffect(StatusEffects.ConstrictedScylla)) {
@@ -276,12 +279,7 @@ public class CombatUI extends BaseCombatContent {
 				button(0).hint("Squeeze your foe with your tentacle attempting to break it appart! \n\nFatigue Cost: " + physicalCost(20) + "");
 			}
 			addButton(1, "Tease", combat.ScyllaTease).hint("Use a free limb to caress and pleasure your grappled foe. \n\nFatigue Cost: " + physicalCost(20) + "");
-			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
-				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
-				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
-				}
-			}
+			vampireBiteDuringGrapple(3);
 			addButton(4, "Release", combat.ScyllaLeggoMyEggo);
 		//Orca be playing rought
 		} else if (monster.hasStatusEffect(StatusEffects.OrcaPlay)) {
@@ -338,18 +336,14 @@ public class CombatUI extends BaseCombatContent {
 			addButton(4, "Release", combat.VampireLeggoMyEggo);
 		} else if (monster.hasStatusEffect(StatusEffects.Pounce)) {
 			menu();
-			if (player.arms.type == Arms.DISPLACER) addButton(0, "Ravage", combat.clawsRend).hint("Rend your enemy using your four sets of claws. \n\nFatigue Cost: " + physicalCost(20) + "");
+			if (player.arms.type == Arms.DISPLACER)
+			addButton(0, "Ravage", combat.clawsRend).hint("Rend your enemy using your four sets of claws. \n\nFatigue Cost: " + physicalCost(20) + "");
 			else addButton(0, "Claws", combat.clawsRend).hint("Rend your enemy using your claws. \n\nFatigue Cost: " + physicalCost(20) + "");
-			addButton(1, "Straddle", combat.Straddle).hint("Change position and initiate a straddling stance");
+			if (player.hasPerk(PerkLib.Straddle)) addButton(1, "Straddle", combat.Straddle).hint("Change position and initiate a straddling stance");
 			if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigueLeft() <= combat.physicalCost(40))) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigueLeft() <= combat.physicalCost(20)))) {
 				button(0).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
 			}
-			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
-				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
-				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(3).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
-				}
-			}
+			vampireBiteDuringGrapple(3);
 			addButton(4, "Release", combat.PussyLeggoMyEggo);
 		} else if (monster.hasStatusEffect(StatusEffects.GrabBear)) {
 			menu();
@@ -456,6 +450,8 @@ public class CombatUI extends BaseCombatContent {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
+			} else if (player.hasStatusEffect(StatusEffects.MonsterDig)) {
+				bd.disable("You cannot use offensive spell against an opponent you cannot see or target.");
 			}
 		}
 		combat.magic.buildWhiteMenu(whiteSpellButtons);
@@ -493,6 +489,10 @@ public class CombatUI extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Bound)) {
 			btnStruggle.call((monster as Ceraph).ceraphBindingStruggle);
 			btnBoundWait.call((monster as Ceraph).ceraphBoundWait);
+		}
+		if (player.hasStatusEffect(StatusEffects.CancerMonsterGrab)) {
+			btnStruggle.call((monster as CancerAttack).cancerGrabStruggle);
+			btnBoundWait.call((monster as CancerAttack).cancerGrabWait);
 		}
 		if (player.hasStatusEffect(StatusEffects.Chokeslam)) {
 			btnStruggle.call((monster as Izumi).chokeSlamStruggle);

@@ -28,8 +28,6 @@ import classes.Items.Necklace;
 import classes.Items.NecklaceLib;
 import classes.Items.Shield;
 import classes.Items.ShieldLib;
-import classes.Items.Undergarment;
-import classes.Items.UndergarmentLib;
 import classes.Items.Vehicles;
 import classes.Items.VehiclesLib;
 import classes.Items.Weapon;
@@ -947,7 +945,7 @@ use namespace CoC;
 		//No multishoot firearms
 		public function noMultishootFirearms():Boolean
 		{
-			return weaponRange == game.weaponsrange.TRFATBI;//weaponRange == game.weaponsrange.TRFATBI || 
+			return weaponRange == game.weaponsrange.TRFATBI;//weaponRange == game.weaponsrange.TRFATBI ||
 		}
 		//Is in goblin mech
 		public function isInGoblinMech():Boolean
@@ -1113,7 +1111,7 @@ use namespace CoC;
 			return _weaponRange.verb;
 		}
 		override public function get weaponRangeAttack():Number {
-			var newGamePlusMod:int = this.newGamePlusMod()+1;
+			//var newGamePlusMod:int = this.newGamePlusMod()+1;
 			var rangeattack:Number = _weaponRange.attack;
 			if (findPerk(PerkLib.PracticedShot) >= 0 && str >= 60 && (weaponRangePerk == "Bow" || weaponRangePerk == "Crossbow" || weaponRangePerk == "Throwing")) {
 				if (findPerk(PerkLib.EagleEye) >= 0) rangeattack *= 2;
@@ -1890,7 +1888,6 @@ use namespace CoC;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damageMultiplier *= 2;
 			
 			//Opponents can critical too!
-			var crit:Boolean = false;
 			var critChanceMonster:int = 5;
 			if (CoC.instance.monster.findPerk(PerkLib.Tactician) >= 0 && CoC.instance.monster.inte >= 50) {
 				if (CoC.instance.monster.inte <= 100) critChanceMonster += (CoC.instance.monster.inte - 50) / 5;
@@ -1898,7 +1895,6 @@ use namespace CoC;
 			}
 			if (CoC.instance.monster.findPerk(PerkLib.VitalShot) >= 0 && CoC.instance.monster.inte >= 50) critChanceMonster += 10;
 			if (rand(100) < critChanceMonster) {
-				crit = true;
 				damage *= 1.75;
 				flags[kFLAGS.ENEMY_CRITICAL] = 1;
 			}
@@ -2015,14 +2011,12 @@ use namespace CoC;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) magicdamageMultiplier *= 1.5;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) magicdamageMultiplier *= 2;
 			//Opponents can critical too!
-			var crit:Boolean = false;
 			var critChanceMonster:int = 5;
 			if (CoC.instance.monster.findPerk(PerkLib.MagiculesTheory) >= 0 && CoC.instance.monster.wis >= 50) {
 				if (CoC.instance.monster.wis <= 100) critChanceMonster += (CoC.instance.monster.wis - 50) / 5;
 				if (CoC.instance.monster.wis > 100) critChanceMonster += 10;
 			}
 			if (rand(100) < critChanceMonster) {
-				crit = true;
 				damage *= 1.75;
 				flags[kFLAGS.ENEMY_CRITICAL] = 1;
 			}
@@ -2117,14 +2111,12 @@ use namespace CoC;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) firedamageMultiplier *= 1.5;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) firedamageMultiplier *= 2;
 			//Opponents can critical too!
-			var crit:Boolean = false;
 			var critChanceMonster:int = 5;
 			if (CoC.instance.monster.findPerk(PerkLib.MagiculesTheory) >= 0 && CoC.instance.monster.wis >= 50) {
 				if (CoC.instance.monster.wis <= 100) critChanceMonster += (CoC.instance.monster.wis - 50) / 5;
 				if (CoC.instance.monster.wis > 100) critChanceMonster += 10;
 			}
 			if (rand(100) < critChanceMonster) {
-				crit = true;
 				damage *= 1.75;
 				flags[kFLAGS.ENEMY_CRITICAL] = 1;
 			}
@@ -2223,14 +2215,12 @@ use namespace CoC;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) icedamageMultiplier *= 1.5;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) icedamageMultiplier *= 2;
 			//Opponents can critical too!
-			var crit:Boolean = false;
 			var critChanceMonster:int = 5;
 			if (CoC.instance.monster.findPerk(PerkLib.MagiculesTheory) >= 0 && CoC.instance.monster.wis >= 50) {
 				if (CoC.instance.monster.wis <= 100) critChanceMonster += (CoC.instance.monster.wis - 50) / 5;
 				if (CoC.instance.monster.wis > 100) critChanceMonster += 10;
 			}
 			if (rand(100) < critChanceMonster) {
-				crit = true;
 				damage *= 1.75;
 				flags[kFLAGS.ENEMY_CRITICAL] = 1;
 			}
@@ -2320,14 +2310,12 @@ use namespace CoC;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) lightningdamageMultiplier *= 1.5;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) lightningdamageMultiplier *= 2;
 			//Opponents can critical too!
-			var crit:Boolean = false;
 			var critChanceMonster:int = 5;
 			if (CoC.instance.monster.findPerk(PerkLib.MagiculesTheory) >= 0 && CoC.instance.monster.wis >= 50) {
 				if (CoC.instance.monster.wis <= 100) critChanceMonster += (CoC.instance.monster.wis - 50) / 5;
 				if (CoC.instance.monster.wis > 100) critChanceMonster += 10;
 			}
 			if (rand(100) < critChanceMonster) {
-				crit = true;
 				damage *= 1.75;
 				flags[kFLAGS.ENEMY_CRITICAL] = 1;
 			}
@@ -2414,14 +2402,12 @@ use namespace CoC;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) darknessdamageMultiplier *= 1.5;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) darknessdamageMultiplier *= 2;
 			//Opponents can critical too!
-			var crit:Boolean = false;
 			var critChanceMonster:int = 5;
 			if (CoC.instance.monster.findPerk(PerkLib.MagiculesTheory) >= 0 && CoC.instance.monster.wis >= 50) {
 				if (CoC.instance.monster.wis <= 100) critChanceMonster += (CoC.instance.monster.wis - 50) / 5;
 				if (CoC.instance.monster.wis > 100) critChanceMonster += 10;
 			}
 			if (rand(100) < critChanceMonster) {
-				crit = true;
 				damage *= 1.75;
 				flags[kFLAGS.ENEMY_CRITICAL] = 1;
 			}
@@ -2510,14 +2496,12 @@ use namespace CoC;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) poisondamageMultiplier *= 1.5;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) poisondamageMultiplier *= 2;
 			//Opponents can critical too!
-			var crit:Boolean = false;
 			var critChanceMonster:int = 5;
 			if (CoC.instance.monster.findPerk(PerkLib.MagiculesTheory) >= 0 && CoC.instance.monster.wis >= 50) {
 				if (CoC.instance.monster.wis <= 100) critChanceMonster += (CoC.instance.monster.wis - 50) / 5;
 				if (CoC.instance.monster.wis > 100) critChanceMonster += 10;
 			}
 			if (rand(100) < critChanceMonster) {
-				crit = true;
 				damage *= 1.75;
 				flags[kFLAGS.ENEMY_CRITICAL] = 1;
 			}
@@ -2703,7 +2687,7 @@ use namespace CoC;
 		//Camp Development Stage
 		public function campDevelopmentStage():String
 		{
-			var descC:String = "";
+			var descC:String;
 			if (hasStatusEffect(StatusEffects.AdvancingCamp)) {
 				/*if (statusEffectv1(StatusEffects.AdvancingCamp) ) descC = "city";
 				else if (statusEffectv1(StatusEffects.AdvancingCamp) =) descC = "town";
@@ -4735,6 +4719,8 @@ use namespace CoC;
 				nekomataCounter++;
 			if (tailType == Tail.CAT)
 				nekomataCounter++;
+			if (rearBody.type == RearBody.LION_MANE)
+				nekomataCounter++;
 			if (tailType == Tail.NEKOMATA_FORKED_1_3)
 				nekomataCounter += 2;
 			if (tailType == Tail.NEKOMATA_FORKED_2_3)
@@ -4745,7 +4731,7 @@ use namespace CoC;
 				nekomataCounter++;
 			if (lowerBody == LowerBody.CAT)
 				nekomataCounter++;
-			if (rearBody.type == RearBody.LION_MANE)
+			if (rearBody.type == RearBody.NONE)
 				nekomataCounter++;
 			if (hasPartialCoat(Skin.FUR))
 				nekomataCounter++;
@@ -4868,7 +4854,7 @@ use namespace CoC;
 				hellcatCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && hellcatCounter >= 8)
 				hellcatCounter += 1;
-			if (catScore() >= 4 || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type != Eyes.INFERNAL || hairType != Hair.BURNING || (tailType != Tail.BURNING || tailType != Tail.TWINKASHA)
+			if (catScore() >= 4 || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type != Eyes.INFERNAL || hairType != Hair.BURNING || (tailType != Tail.BURNING && tailType != Tail.TWINKASHA)
 			 || eyes.type == Eyes.DISPLACER || ears.type == Ears.DISPLACER || arms.type == Arms.DISPLACER || rearBody.type == RearBody.DISPLACER_TENTACLES) hellcatCounter = 0;
 			if (isGargoyle()) hellcatCounter = 0;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
@@ -11674,17 +11660,13 @@ use namespace CoC;
 		public function increaseCock(cockNum:Number, lengthDelta:Number):Number
 		{
 			var bigCock:Boolean = false;
-	
-			if (findPerk(PerkLib.BigCock) >= 0)
-				bigCock = true;
-
+			if (findPerk(PerkLib.BigCock) >= 0) bigCock = true;
 			return cocks[cockNum].growCock(lengthDelta, bigCock);
 		}
 		
 		public function increaseEachCock(lengthDelta:Number):Number
 		{
 			var totalGrowth:Number = 0;
-			
 			for (var i:Number = 0; i < cocks.length; i++) {
 				trace( "increaseEachCock at: " + i);
 				totalGrowth += increaseCock(i as Number, lengthDelta);

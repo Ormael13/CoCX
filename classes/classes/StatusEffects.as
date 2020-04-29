@@ -721,6 +721,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const MinoMilk:StatusEffectType           = mk("Mino Milk");
 		public static const MinotaurEntangled:StatusEffectType  = mk("Minotaur Entangled");
 		public static const MissFirstRound:StatusEffectType     = mk("miss first round");
+		public static const MonsterDig:StatusEffectType        	= mkCombat("Dig");
+		public static const MonsterInvisible:StatusEffectType   = mkCombat("Monster is stealthing");
 		public static const MonsterRegen:StatusEffectType       = mk("Monster Regeneration");//% regen
 		public static const MonsterRegen2:StatusEffectType      = mk("Monster Regeneration2");//flat regen
 		public static const MonsterVPT:StatusEffectType 		= mk("Monster Violet Pupil Transformation");
@@ -799,6 +801,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Bound:StatusEffectType                     = mkCombat("Bound");
 		public static const BurnDoT:StatusEffectType                   = mkCombat("Burn DoT");
 		public static const BurnDoT2:StatusEffectType                  = mkCombat("Burn DoT 2");
+		public static const CancerMonsterGrab:StatusEffectType         = mkCombat("Cancer Grappled");
 		public static const CalledShot:StatusEffectType                = CalledShotDebuff.TYPE;
 		public static const CastedSpell:StatusEffectType               = mkCombat("Casted Spell");
 		public static const Cauterize:StatusEffectType                 = mkCombat("Cauterize");
