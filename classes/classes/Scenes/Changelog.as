@@ -70,6 +70,7 @@ package classes.Scenes
 			outputText("<b>Version 0.8o:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New tier 2 libido lvl-up perk: Straddle. Req. Job: Courtesan perk and 65+ lib. Effect: You may now perform the straddle action in battle against stunned foes. Initiating a grappling stance.\n");
+			outputText("-New tier 2 misc lvl-up perk: Displacer Metabolism (Evolved). Req. Displacer Metabolism perk and 12+ pts in displacer beast score. Effect: Increase by (10 * NG tier) boost of speed for a five hours longer after an intake of milk and increase max Hunger cap by 50 (if PC have Hunger bar active).\n");
 			outputText("-New tier 4 libido lvl-up perk: Improved Straddle. Req. Straddle perk and 130+ lib. Effect: Increase the straddle maneuver maximum duration by two rounds.\n");
 			outputText("-New armor (by Liadri): Scandalous Succubus Clothing - buyable at Kaiba shop in Tel'Adre. Cost 6000 gems. Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.\n");
 			outputText("-New TF item: Fafnir Tear. Currently found in Yu shop. Allow to change into Frost Wyrm race with race bonuses at 10/18/20+: +90/125/135 to max Str (scal), +60/75/90 to max Spe (scal), +60/110/115 to max Tou (scal), -90/90/90 to max Int (scal), +30/50/50 to max Lib (scal).\n");
@@ -92,6 +93,9 @@ package classes.Scenes
 			outputText("-Magic menu have be seperated into groups: White, Black, Grey and Hex. (Liadri)\n");
 			outputText("-Luna can be caugh after she disable 3 npc's. It would add then option to her interactions to confront her about it. (Liadri)\n");
 			outputText("-Mobs in Ebon labyrinth would have stats scaling up with amount of passed by room. each 50 rooms they stats and level would grow.\n");
+			outputText("-Draconic Lungs perks also would boost Frost Wyrm racial score.\n");
+			outputText("-Manticore metabolism now would req. also free metabolism mutation slot.\n");
+			outputText("-Nekomata mane tf effect req. now to having twin cat tails.\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");
@@ -101,12 +105,8 @@ package classes.Scenes
 			//outputText("-Added Mitzi and Excellia kids counter tracker to Stats page under Children subpage.\n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
 			outputText("-New M. Special: Displacement. Req. 11+ in displacer beast score. Teleport around to avoid your opponents attacks. (Liadri)\n");
-			outputText("-Draconic Lungs perks also would boost Frost Wyrm racial score.\n");
 			outputText("-New event perk: Displacer Milk Addict. Causes you to crave milk frequently. (Liadri)\n");
 			outputText("-New tier 0 misc lvl-up perk: Displacer Metabolism. Req. Free metabolism mutation slot and 8+ pts in displacer beast score. Effect: (text pending Liadri adjustments).\n");
-			outputText("-New tier 2 misc lvl-up perk: Displacer Metabolism (Evolved). Req. Displacer Metabolism perk and 12+ pts in displacer beast score. Effect: Increase by (10 * NG tier) boost of speed for a five hours longer after an intake of milk and increase max Hunger cap by 50 (if PC have Hunger bar active).\n");
-			outputText("-Manticore metabolism now would req. also free metabolism mutation slot.\n");
-			outputText("-Nekomata mane tf effect req. now to having twin cat tails.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -204,7 +204,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
