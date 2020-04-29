@@ -258,6 +258,8 @@ public class SpriteDb {
 	}
 	[Embed(source="../../../res/sprites/goblin.png")]
 	public static var s_goblin_16bit:Class;
+	[Embed(source="../../../res/sprites/goblinAssassin.png")]
+	public static var s_goblinAssassin:Class;
 	[Embed(source="../../../res/sprites8bit/goblin-old.png")]
 	public static var s_goblin_8bit:Class;
 	public static function get s_goblin(): Class {
