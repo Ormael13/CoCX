@@ -35,6 +35,11 @@ public class Bog extends BaseContent
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
+			//Zenji
+			if (rand(5) == 0) {
+				SceneLib.zenjiScene.part1TrollEncounter();
+				return;
+			}
 			if ((isHalloween() && (date.fullYear > flags[kFLAGS.TREACLE_MINE_YEAR_DONE]) && flags[kFLAGS.BOG_EXPLORED] % 4 == 0) && (flags[kFLAGS.PHOUKA_LORE] > 0)) {
 				phoukaScene.phoukaHalloween(); //Must have met them enough times to know what they're called, have some idea of their normal behaviour
 				return;

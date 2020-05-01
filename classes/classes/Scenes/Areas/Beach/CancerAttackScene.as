@@ -1,6 +1,6 @@
 /**
  * ...
- * @author Ormael
+ * @author Liadri
  */
 package classes.Scenes.Areas.Beach 
 {
@@ -91,7 +91,7 @@ public class CancerAttackScene extends BaseContent
 					"Wow you didn’t expect from the look of his face that he was getting off already, or maybe it's how he is at all times?");
 			if (!player.hasVagina()) {
 				outputText("He move you all the way to him");
-				if (!player.isNaga && !player.lowerBody != LowerBody.MELKIE && !player.lowerBody != LowerBody.GOO) outputText(" and proceeds to pull one of your leg away with his free pincer");
+				if (!player.isNaga() && !player.lowerBody != LowerBody.MELKIE && !player.lowerBody != LowerBody.GOO) outputText(" and proceeds to pull one of your leg away with his free pincer");
 				outputText("  slowly and forcefully shoving you into his cock like a sleeve. You gasp as he begins to use you like a sex toy denying your movement in favor of simply sliding you up and down his cock. " +
 						"Its still sex albeit not on your own terms this guy is controlling the entire event spearing you at his leisure.");
 				if (player.looseness() < 2) outputText(" Thankfully his rod isn’t too small or you wouldn’t be getting off at all from this, to be honest you have begun to enjoy yourself as well despite your predicament.");

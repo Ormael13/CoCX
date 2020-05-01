@@ -1,5 +1,5 @@
 /**
- * @author Stadler (mostly) and Ormael (choice of enemies encounters and other events)
+ * @author Liadri and Ormael
  * Area with lvl 30-45 enemies.
  * Currently a Work in Progress.
  */

@@ -526,6 +526,11 @@ public class Camp extends NPCAwareContent {
 			SceneLib.mitziFollower.MitziDaughtersIzmaDaughters();
 			return;
 		}
+		//Excellia + Jojo
+		if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33 && player.hasStatusEffect(StatusEffects.PureCampJojo) && !player.hasStatusEffect(StatusEffects.ExcelliaJojo) && rand(5) == 0) {
+			SceneLib.excelliaFollower.ExcelliaAndJojoCampScene();
+			return;
+		}
 		//Rathazul april fool
 		if (isAprilFools() && player.hasStatusEffect(StatusEffects.CampRathazul) && rand(5) == 0) {
 			if (player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv2(StatusEffects.RathazulAprilFool) < 5) {

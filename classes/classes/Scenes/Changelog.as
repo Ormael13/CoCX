@@ -96,19 +96,19 @@ package classes.Scenes
 			outputText("-Draconic Lungs perks also would boost Frost Wyrm racial score.\n");
 			outputText("-Manticore metabolism now would req. also free metabolism mutation slot.\n");
 			outputText("-Nekomata mane tf effect req. now to having twin cat tails.\n");
+			outputText("-After beating Minotaur King PC could in vanilla take Excellia as npc back to camp. Just that in mods it was never followed thing. Not anymore and now we all can enjoy cow slut in camp same as we already enjoy Mitzi. But there will be choice to make: break Excellia even more and make her camp Slave or start helping her restore her clear mins and keep as Follower?\n");
+			outputText("-Each of Excellia versions will have few interactions (including pregnancy). Fixing excellia will take ~30 ingame days and will req. to use at the end one De-Bimbo potion. Each interaction before she's fixed will be worth of one day of natural recovery. And each Debimbo potion is worth of 10 days (so yeah those rich PC's can just feed her 3 potions to instant fix her).\n");
+			outputText("-Fixed Excellia will move to Lovers tab and add option to sleep with her, show up at hot springs or assist in fights as henchman.\n");
+			outputText("-Added Mitzi and Excellia kids counter tracker to Stats page under Children subpage.\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");
-			//outputText("-After beating Minotaur King PC could in vanilla take Excellia as npc back to camp. Just that in mods it was never followed thing. Not anymore and now we all can enjoy cow slut in camp same as we already enjoy Mitzi. But there will be choice to make: break Excellia even more and make her camp Slave or start helping her restore her clear mins and keep as Follower?\n");
-			//outputText("-Each of Excellia versions will have few interactions (including pregnancy). Fixing excellia will take ~30 ingame days and will req. to use at the end one De-Bimbo potion. Each interaction before she's fixed will be worth of one day of natural recovery. And each Debimbo potion is worth of 10 days (so yeah those rich PC's can just feed her 3 potions to instant fix her).\n");
-			//outputText("-Fixed Excellia will move to Lovers tab and add option to sleep with her, show up at hot springs or assist in fights as henchman.\n");
-			//outputText("-Added Mitzi and Excellia kids counter tracker to Stats page under Children subpage.\n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
 			outputText("-New M. Special: Displacement. Req. 11+ in displacer beast score. Teleport around to avoid your opponents attacks. (Liadri)\n");
 			outputText("-New event perk: Displacer Milk Addict. Causes you to crave milk frequently. (Liadri)\n");
 			outputText("-New tier 0 misc lvl-up perk: Displacer Metabolism. Req. Free metabolism mutation slot and 8+ pts in displacer beast score. Effect: (text pending Liadri adjustments).\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New enemy encounter: Cancer (male and female variant) (lvl 40 - Beach)\n");
+			outputText("-New possible debuff on monsters that will make them ocassionaly miss like they would been under blind debuff: Lowered Accuracy.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

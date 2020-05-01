@@ -1,6 +1,6 @@
 /**
  * ...
- * @author Ormael
+ * @author Liadri
  */
 package classes.Scenes.Areas.Beach 
 {
@@ -171,7 +171,7 @@ public class CancerAttack extends Monster
 			this.bonusLust = 200;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 50;
+			this.level = 40;
 			this.gems = rand(60)+20;
 			this.drop = new WeightedDrop().addMany(1, consumables.BUBBLEG);
 			this.special1 = SceneLib.combat.packAttack;

@@ -773,6 +773,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 				if (player.hasStatusEffect(StatusEffects.MitziIzmaDaughters)) player.removeStatusEffect(StatusEffects.MitziIzmaDaughters);
+				if (player.hasStatusEffect(StatusEffects.ExcelliaJojo)) player.removeStatusEffect(StatusEffects.ExcelliaJojo);
 				if (flags[kFLAGS.SAMIRAH_HYPNOSIS] == 4 || flags[kFLAGS.SAMIRAH_HYPNOSIS] == 2) flags[kFLAGS.SAMIRAH_HYPNOSIS]++;
 				//Soul Arena Gaunlet reset
 				if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlets1)) {

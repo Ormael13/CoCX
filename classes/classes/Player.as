@@ -2745,6 +2745,7 @@ use namespace CoC;
 				{name: 'devil', score: devilkinScore(), minscore: 7},
 				{name: 'rhino', score: rhinoScore(), minscore: 4},
 				{name: 'echidna', score: echidnaScore(), minscore: 4},
+				{name: 'ushi-onna', score: ushionnaScore(), minscore: 5},
 				{name: 'satyr', score: satyrScore(), minscore: 4},
 				{name: 'manticore', score: manticoreScore(), minscore: 6},
 				{name: 'red panda', score: redpandaScore(), minscore: 4},
@@ -4049,6 +4050,8 @@ use namespace CoC;
 			if (rhinoScore() >= 4)
 				chimeraCounter++;
 			if (echidnaScore() >= 4)
+				chimeraCounter++;
+			if (ushionnaScore() >= 5)
 				chimeraCounter++;
 			if (deerScore() >= 4)
 				chimeraCounter++;
@@ -7904,6 +7907,27 @@ use namespace CoC;
 			echidnaCounter = finalRacialScore(echidnaCounter, Race.ECHIDNA);
 			End("Player","racialScore");
 			return echidnaCounter;
+		}
+		
+		public function ushionnaScore():Number {
+			Begin("Player","racialScore","ushionna");
+			var ushionnaCounter:Number = 0;/*
+			if (ears.type == Ears.ECHIDNA)
+				ushionnaCounter++;
+			if (tailType == Tail.ECHIDNA)
+				ushionnaCounter++;
+			if (faceType == Face.ECHIDNA)
+				ushionnaCounter++;
+			if (tongue.type == Tongue.ECHIDNA)
+				ushionnaCounter++;
+			if (lowerBody == LowerBody.ECHIDNA)
+				ushionnaCounter++;*/
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				ushionnaCounter += 50;
+			if (isGargoyle()) ushionnaCounter = 0;
+			ushionnaCounter = finalRacialScore(ushionnaCounter, Race.USHIONNA);
+			End("Player","racialScore");
+			return ushionnaCounter;
 		}
 		
 		public function deerScore():Number {

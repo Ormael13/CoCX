@@ -211,6 +211,8 @@ public class SceneLib {
 
     public static var vapula:Vapula = new Vapula();
 
+    public static var zenjiScene:ZenjiScenes = new ZenjiScenes();
+
     public static var sharkgirlScene:SharkGirlScene = new SharkGirlScene();
 
     public static var bazaar:Bazaar = new Bazaar();

@@ -187,7 +187,7 @@ public class MainMenu extends BaseContent {
 		outputText("Adventure Guild, underwater sharkgirls sex scenes, Kaiba the tanuki merchant, Den of Desire dungeon, most of writing for 1st floor of River Dungeon, Erma archery training, Gaunlet 1 and 2, Jiangshi TF, part of Michiko)</li>");
 		outputText("<li> Zevos (Spider-silk shirt, Dragonscale vest, Eldritch Ribbon, Ascensus, Depravation, Puritas items, Ebonbloom crafting material and all items made from it, Ignis)</li>");
 		outputText("<li> Coalsack (Anzu the Avian Deity, Arian App desc, option to change his/her scales color)</li>");
-		outputText("<li> Lord Snakebite (Centipede TF, part of Ghost TF rework)</li>");
+		outputText("<li> Lord Snakebite (Centipede TF, part of Ghost TF rework, Mitzi & Excellia X-packs)</li>");
 		outputText("<li> T0uchMe (part of Ghost TF rework)</li>");
 		outputText("<li> Apex (part of Michiko)</li>");
 		outputText("<li> Dxasmodeus (Tentacles, Worms, Giacomo)</li>");

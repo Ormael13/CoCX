@@ -825,6 +825,8 @@ public class SpriteDb {
 	public static function get s_yvonne(): Class {
 		return is8bit ? s_yvonne_8bit : s_yvonne_16bit;
 	}
+//	[Embed(source="../../../res/sprites/zenji_brancer.png")]
+//	public static var s_zenji:Class;
 
 	public static function bitmapData(clazz:Class):BitmapData {
 		if (!clazz) return null;

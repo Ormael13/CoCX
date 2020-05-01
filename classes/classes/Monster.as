@@ -1615,6 +1615,9 @@ import flash.utils.getQualifiedClassName;
 		protected function attackSucceeded():Boolean
 		{
 			var attack:Boolean = true;
+			if (hasStatusEffect(StatusEffects.LoweredAccuracy)) {
+				attack &&= handleBlind();
+			}
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind)) {
 				attack &&= handleBlind();
@@ -1708,7 +1711,12 @@ import flash.utils.getQualifiedClassName;
 		 */
 		protected function handleBlind():Boolean
 		{
-			if (rand(3) < 2) {
+			if (hasStatusEffect(StatusEffects.LoweredAccuracy) && rand(100) < statusEffectv1(StatusEffects.LoweredAccuracy)) {
+				if (weaponVerb == "tongue-slap") outputText(capitalA + short + " completely misses you with a thrust from "+pronoun3+" tongue!\n");
+				else outputText(capitalA + short + " completely misses you with an attack!\n");
+				return false;
+			}
+			else if (rand(3) < 2) {
 				if (weaponVerb == "tongue-slap") outputText(capitalA + short + " completely misses you with a thrust from "+pronoun3+" tongue!\n");
 				else outputText(capitalA + short + " completely misses you with a blind attack!\n");
 				return false;
@@ -2377,6 +2385,13 @@ import flash.utils.getQualifiedClassName;
 					removeStatusEffect(StatusEffects.InkBlind);
 				}
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently blind!</b>\n\n");
+			}
+			if(hasStatusEffect(StatusEffects.LoweredAccuracy)) {
+				addStatusValue(StatusEffects.LoweredAccuracy,1,-1);
+				if(statusEffectv1(StatusEffects.LoweredAccuracy) <= 0) {
+					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer having lowered accuracy!</b>\n\n");
+					removeStatusEffect(StatusEffects.LoweredAccuracy);
+				}
 			}
 			if(hasStatusEffect(StatusEffects.FrozenSolid)) {
 				addStatusValue(StatusEffects.FrozenSolid,1,-1);

@@ -420,22 +420,23 @@ public function ExcelliaCampFixHerSexSuckleFuck():void {
 public function excelliaHenchmanOption():void {
 	clearOutput();
 	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
-		outputText("\"<i>Nyaaaaa we hunting together [name]? This is going to be enjoyable!</i>\"\n\n");
+		outputText("The cowgirl grins and stretches, pumping herself up.\n\n");
+		outputText("\"<i>Of course, I'll help you out [name]. I'm ready for anything the world throws at us!</i>\"\n\n");
 		outputText("Excellia is now following you around.\n\n");
-		var strEtna:Number = 100;
-		var libEtna:Number = 170;
-		if (flags[kFLAGS.ETNA_LVL_UP] >= 1) {
-			strEtna += 10 * flags[kFLAGS.ETNA_LVL_UP];
-			libEtna += 20 * flags[kFLAGS.ETNA_LVL_UP];
-		}
-		strEtna *= (1 + (0.2 * player.newGamePlusMod()));
-		strEtna = Math.round(strEtna);
-		libEtna *= (1 + (0.2 * player.newGamePlusMod()));
-		libEtna = Math.round(libEtna);
-		player.createStatusEffect(StatusEffects.CombatFollowerExcellia, strEtna, libEtna, 0, 0);
+		var strExcellia:Number = 290;//tyle i miałby mino king an tym samym levelu ^^
+		var unarmedExcellia:Number = 90;//j.w.
+		/*if (flags[kFLAGS.ETNA_LVL_UP] >= 1) {
+			strExcellia += 10 * flags[kFLAGS.ETNA_LVL_UP];
+			unarmedExcellia += 20 * flags[kFLAGS.ETNA_LVL_UP];
+		}*/
+		strExcellia *= (1 + (0.2 * player.newGamePlusMod()));
+		strExcellia = Math.round(strExcellia);
+		unarmedExcellia += (1 + (int)(unarmedExcellia / 5)) * player.newGamePlusMod();
+		player.createStatusEffect(StatusEffects.CombatFollowerExcellia, strExcellia, unarmedExcellia, 0, 0);
 		flags[kFLAGS.PLAYER_COMPANION_1] = "Excellia";
 	}
 	else {
+		outputText("\"<i>Well, that was fun. If you want to go out on another adventure, be sure to let me know!</i>\"\n\n");
 		outputText("Excellia is no longer following you around.\n\n");
 		player.removeStatusEffect(StatusEffects.CombatFollowerExcellia);
 		flags[kFLAGS.PLAYER_COMPANION_1] = "";
@@ -721,6 +722,19 @@ private function ExcelliaPoopsBabies2():void {
 	if (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1) flags[kFLAGS.EXCELLIA_MALE_COW_KIDS]++;
 	else flags[kFLAGS.EXCELLIA_FEMALE_COW_KIDS]++;
 	player.removeStatusEffect(StatusEffects.ExcelliaChildbirth);
+}
+
+public function ExcelliaAndJojoCampScene():void {
+	//spriteSelect(SpriteDb.s_electra);
+	clearOutput();
+	outputText("You catch your resident cowgirl, Excellia talking with Jojo. You notice that he shifts nervously in place as he talks to her, a slight blush on his face.\n\n");
+	outputText("\"<i>I-I'm just saying that maybe it would be better if you wore some uh… clothing. Surely it can't be too comfortable walking around like that?</i>\"\n\n");
+	outputText("Excellia chuckles giving the mouse monk a friendly pat on the shoulder.\n\n");
+	outputText("\"<i>I assure you that I'm fine really. I guess after being like this for so long that it's kinda grown on me in a way. I do appreciate your concern though.</i>\"\n\n");
+	outputText("\"<i>Ah I see… W-Well if it doesn't bother you then I suppose it's okay. Sorry if I offended you in any way.</i>\"\n\n");
+	outputText("Excellia assures him that he did nothing wrong then inquires about his style of fighting. This definitely peaks Jojo's interest, his previous nervousness seemingly pushed aside for the time being.\n\n");
+	player.createStatusEffect(StatusEffects.ExcelliaJojo,0,0,0,0);
+	doNext(camp.returnToCampUseOneHour);
 }
 	}
 }
