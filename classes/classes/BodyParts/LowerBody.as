@@ -70,6 +70,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const CRAB:int                  = 60;
 	public static const CANCER:int                = 61;
 	public static const FROSTWYRM:int             = 62;
+	public static const USHI_ONI_ONNA:int         = 63;
 	// Don't forget to add new types in DebugMenu.as list LOWER_TYPE_CONSTANTS
 	
 	override public function set type(value:int):void {

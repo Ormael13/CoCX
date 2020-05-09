@@ -819,6 +819,7 @@ public class DebugMenu extends BaseContent
 			[Skin.PATTERN_LIGHTNING_SHAPED_TATTOO, "7 LIGHTNING_SHAPED_TATTOO"],
 			[Skin.PATTERN_SCAR_SHAPED_TATTOO, "9 SCAR_SHAPED_TATTOO"],
 			[Skin.PATTERN_WHITE_BLACK_VEINS, "10 PATTERN_WHITE_BLACK_VEINS"],
+			[Skin.PATTERN_USHI_ONI_ONNA_TATTOO, "12 PATTERN_USHI_ONI_ONNA_TATTOO"],
 		];
 		private static const PATTERN_COAT_TYPES:Array = [
 			[Skin.PATTERN_NONE, "0 NONE"],
@@ -1353,6 +1354,8 @@ public class DebugMenu extends BaseContent
 			[Tail.HINEZUMI, "43 HINEZUMI"],
 			[Tail.THUNDERBIRD, "44 THUNDERBIRD"],
 			[Tail.BEAR, "45 BEAR"],
+			[Tail.TWINKASHA, "46 TWINKASHA"],
+			[Tail.USHI_ONI_ONNA, "47 USHI_ONI_ONNA"],
 		];
 		private static const TAIL_COUNT_CONSTANTS:Array = [
 			[0,"0"],1,2,3,4,
@@ -1457,6 +1460,13 @@ public class DebugMenu extends BaseContent
 			[LowerBody.GHOST_2, "54 POLTERGEIST"],
 			[LowerBody.JIANGSHI, "55 JIANGSHI"],
 			[LowerBody.YUKI_ONNA, "56 YUKI_ONNA"],
+			[LowerBody.MELKIE, "57 MELKIE"],
+			[LowerBody.CENTIPEDE, "58 CENTIPEDE"],
+			[LowerBody.KRAKEN, "59 KRAKEN"],
+			[LowerBody.CRAB, "60 CRAB"],
+			[LowerBody.CANCER, "61 CANCER"],
+			[LowerBody.FROSTWYRM, "62 FROSTWYRM"],
+			[LowerBody.USHI_ONI_ONNA, "63 USHI_ONI_ONNA"],
 		];
 		private static const LEG_COUNT_CONSTANTS:Array = [
 			1,2,4,6,8,

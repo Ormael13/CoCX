@@ -2745,7 +2745,7 @@ use namespace CoC;
 				{name: 'devil', score: devilkinScore(), minscore: 7},
 				{name: 'rhino', score: rhinoScore(), minscore: 4},
 				{name: 'echidna', score: echidnaScore(), minscore: 4},
-				{name: 'ushi-onna', score: ushionnaScore(), minscore: 5},
+				{name: 'ushi-onna', score: ushionnaScore(), minscore: 11},
 				{name: 'satyr', score: satyrScore(), minscore: 4},
 				{name: 'manticore', score: manticoreScore(), minscore: 6},
 				{name: 'red panda', score: redpandaScore(), minscore: 4},
@@ -3527,6 +3527,16 @@ use namespace CoC;
 					if (faceType == Face.HUMAN) race = "echidna-" + mf("boy", "girl");
 				}
 			}
+			if (TopRace == "ushi-onna") {
+				if (TopScore >= 5) {
+					if (statusEffectv1(StatusEffects.UshiOnnaVariant) == 1) race = "fiery ushi-" + mf("oni", "onna");
+					else if (statusEffectv1(StatusEffects.UshiOnnaVariant) == 2) race = "frozen ushi-" + mf("oni", "onna");
+					else if (statusEffectv1(StatusEffects.UshiOnnaVariant) == 3) race = "sandy ushi-" + mf("oni", "onna");
+					else if (statusEffectv1(StatusEffects.UshiOnnaVariant) == 4) race = "pure ushi-" + mf("oni", "onna");
+					else if (statusEffectv1(StatusEffects.UshiOnnaVariant) == 5) race = "wicked ushi-" + mf("oni", "onna");
+					else race = "ushi-" + mf("oni", "onna");
+				}
+			}
 			if (TopRace == "deer") {
 				if (TopScore >= 4) {
 					if (isTaur()) race = "deer-taur";
@@ -4051,11 +4061,11 @@ use namespace CoC;
 				chimeraCounter++;
 			if (echidnaScore() >= 4)
 				chimeraCounter++;
-			if (ushionnaScore() >= 5)
+*/			if (ushionnaScore() >= 11)
 				chimeraCounter++;
-			if (deerScore() >= 4)
-				chimeraCounter++;
-*/			if (manticoreScore() >= 12)
+//			if (deerScore() >= 4)
+//				chimeraCounter++;
+			if (manticoreScore() >= 12)
 				chimeraCounter += 2;
 			if (redpandaScore() >= 8)
 				chimeraCounter++;
@@ -7911,17 +7921,23 @@ use namespace CoC;
 		
 		public function ushionnaScore():Number {
 			Begin("Player","racialScore","ushionna");
-			var ushionnaCounter:Number = 0;/*
-			if (ears.type == Ears.ECHIDNA)
+			var ushionnaCounter:Number = 0;
+			if (ears.type == Ears.COW)
 				ushionnaCounter++;
-			if (tailType == Tail.ECHIDNA)
-				ushionnaCounter++;
+			if (tailType == Tail.USHI_ONI_ONNA)
+				ushionnaCounter++;/*
 			if (faceType == Face.ECHIDNA)
 				ushionnaCounter++;
 			if (tongue.type == Tongue.ECHIDNA)
-				ushionnaCounter++;
-			if (lowerBody == LowerBody.ECHIDNA)
 				ushionnaCounter++;*/
+			if (lowerBody == LowerBody.USHI_ONI_ONNA)
+				ushionnaCounter += 2;
+			if (skin.base.pattern == Skin.PATTERN_RED_PANDA_UNDERBODY)
+				ushionnaCounter += 2;
+			if (hasPlainSkinOnly() && (skinTone == "green" || skinTone == "red" || skinTone == "grey" || skinTone == "sandy-tan" || skinTone == "pale" || skinTone == "purple"))
+				ushionnaCounter++;
+			if (hairType == Hair.NORMAL && (hairColor == "dark green" || hairColor == "dark red" || hairColor == "blue" || hairColor == "brown" || hairColor == "white" || hairColor == "black"))
+				ushionnaCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				ushionnaCounter += 50;
 			if (isGargoyle()) ushionnaCounter = 0;
@@ -10907,6 +10923,13 @@ use namespace CoC;
 			}//+150
 			if (deerScore() >= 4) {
 				maxSpeCap2 += (20 * newGamePlusMod);
+			}//+20/10-20
+			if (ushionnaScore() >= 11) {
+				maxStrCap2 += (80 * newGamePlusMod);
+				maxTouCap2 += (70 * newGamePlusMod);
+				maxIntCap2 -= (40 * newGamePlusMod);
+				maxWisCap2 -= (40 * newGamePlusMod);
+				maxLibCap2 += (95 * newGamePlusMod);
 			}//+20/10-20
 			if (yetiScore() >= 7) {
 				if (yetiScore() >= 14) {

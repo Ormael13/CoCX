@@ -852,6 +852,12 @@ public class Appearance extends Utils
 					"four-headed cock",
 					"four-headed dick");
 			}
+			else if (cockType == CockTypesEnum.USHI_ONI) {
+				return randomChoice("starfish tipped shaft",
+					"starfish tipped cock",
+					"starfish tipped dick",
+					"starfish tipped penis");
+			}
 			return randomChoice("cock",
 				"prick",
 				"pecker",

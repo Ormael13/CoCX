@@ -48,6 +48,7 @@ import classes.Scenes.NPCs.Electra;
 import classes.Scenes.NPCs.Neisa;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
+import classes.Scenes.NPCs.Zenji;
 import classes.Scenes.Places.Boat.Marae;
 import classes.Player;
 import classes.Items.*;
@@ -1588,7 +1589,7 @@ public function FightHellfireSnail():void {
 				addButton(0, "SkybornSeed", AddSkybornSeed).hint("Add 1 Skyborn Seed.");
 				addButton(1, "F.Fish", AddFreshFish).hint("Add 1 Fresh Fish.");
 				addButton(2, "BehemothCum", AddBehemothCum).hint("Add 1 bottle of Behemoth Cum.");
-				//addButton(3, "", ).hint("Add 1 .");
+				addButton(3, "TGOGossamer", AddThickGreenOnnaGossamer).hint("Add 1 Thick Green Onna Gossamer.");
 				addButton(4, "WhiteIceS.", AddWhiteIceShard).hint("White Ice Shard");
 				addButton(5, "Enigmanium", AddEnigmanium).hint("Add 1 vial of Enigmanium.");
 				addButton(6, "Skelp", AddSkelp).hint("Add 1 Skelp (WIP Melkie TF).");
@@ -1650,7 +1651,7 @@ public function FightHellfireSnail():void {
 				//addButton(4, "", ).hint("Test fight with .");
 				//addButton(5, "", ).hint("Test fight with .");
 				//addButton(6, "", ).hint("Test fight with .");
-				//addButton(7, "", ).hint("Test fight with .");
+				addButton(7, "Zenji", FightZenji).hint("Test fight with Zenji.");
 				addButton(8, "Sonya", FightSonya).hint("Test fight with Sonya.");
 				addButton(9, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
 				addButton(10, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
@@ -1783,6 +1784,10 @@ public function FightHellfireSnail():void {
 		public function AddBubble():void {
 			outputText("\n\n<b>(Gained 1 Bubblegum!)</b>\n\n");
 			inventory.takeItem(consumables.BUBBLEG, curry(NonEquipmentMenu, 2));
+		}
+		public function AddThickGreenOnnaGossamer():void {
+			outputText("\n\n<b>(Gained 1 Thick Green Onna Gossamer!)</b>\n\n");
+			inventory.takeItem(consumables.WHITEIS, SoulforceCheats);
 		}
 		public function AddWhiteIceShard():void {
 			outputText("\n\n<b>(Gained 1 White Ice Shard!)</b>\n\n");
@@ -2526,6 +2531,12 @@ public function FightHellfireSnail():void {
 			clearOutput();
 			outputText("Entering battle with Pierce! Enjoy ^^");
 			startCombat(new Pierce());
+		}
+		public function FightZenji():void {
+			clearOutput();
+			outputText("Entering battle with Zenji! Enjoy ^^");
+			flags[kFLAGS.ZENJI_PROGRESS] = 1;
+			startCombat(new Zenji());
 		}
 		public function FightSonya():void {
 			clearOutput();

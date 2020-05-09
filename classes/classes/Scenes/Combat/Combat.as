@@ -531,6 +531,7 @@ public class Combat extends BaseContent {
         else if (player.hasStatusEffect(StatusEffects.WebSilence)) return false;
         else if (player.hasStatusEffect(StatusEffects.GooArmorSilence)) return false;
         else if (player.hasStatusEffect(StatusEffects.WhipSilence)) return false;
+        else if (player.hasStatusEffect(StatusEffects.PiercingBlow)) return false;
         return true;
     }
 
@@ -4538,8 +4539,11 @@ public class Combat extends BaseContent {
         //Keep shit in bounds.
         if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
         if (monster.hasStatusEffect(StatusEffects.MonsterRegen)) {
-            monster.createStatusEffect(StatusEffects.RegenInhibitor, 5, 0, 0, 0);
-            if (monster.short == "Hydra") outputText(" The hydra hisses in anger as her wound cauterised, preventing regeneration. It's the time to strike!");
+            if (monster.short == "Hydra") {
+				monster.createStatusEffect(StatusEffects.RegenInhibitor, 5, 0, 0, 0);
+				outputText(" The hydra hisses in anger as her wound cauterised, preventing regeneration. It's the time to strike!");
+			}
+			if (monster.short == "troll" || monster.short == "Zenji") monster.createStatusEffect(StatusEffects.RegenInhibitor, 2, 0, 0, 0);
         }
         if (monster.hasStatusEffect(StatusEffects.IceArmor)) {
             monster.addStatusValue(StatusEffects.IceArmor, 1, -1);
@@ -5306,6 +5310,10 @@ public class Combat extends BaseContent {
                 outputText("<b>Your mouth is obstructed by sticky goo!  You are silenced!</b>\n\n");
                 player.addStatusValue(StatusEffects.GooArmorSilence, 1, 1);
             }
+        }
+		if (player.hasStatusEffect(StatusEffects.PiercingBlow)) {
+            player.addStatusValue(StatusEffects.PiercingBlow, 1, -1);
+            if (player.statusEffectv1(StatusEffects.PiercingBlow) < 0) player.removeStatusEffect(StatusEffects.PiercingBlow);
         }
         if (player.hasStatusEffect(StatusEffects.LustStones)) {
             //[When witches activate the stones for goo bodies]

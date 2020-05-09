@@ -571,6 +571,7 @@ public class PlayerAppearance extends BaseContent {
 				case CockTypesEnum.ECHIDNA:   outputText("  It is quite a sight to behold, coming well-equipped with four heads."); break;
 				case CockTypesEnum.RED_PANDA: outputText("  It lies protected in a soft, fuzzy sheath."); break;
 				case CockTypesEnum.OOMUKADE:  outputText("  It constantly drips with venom."); break;
+				case CockTypesEnum.USHI_ONI:  outputText("  It's starfish tipped shaft."); break;
 				default: //Nothing here, move along!
 			}
 			// Knot?
@@ -868,6 +869,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText(", arms, hands and fingers.");
 		if (player.skin.base.pattern == Skin.PATTERN_ORCA_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
 		if (player.skin.base.pattern == Skin.PATTERN_RED_PANDA_UNDERBODY) outputText(" Your body is covered from head to toe in [skin color] with a [skin color2] underbelly, giving to your nimble frame a red-panda appearance.");
+		if (player.skin.base.pattern == Skin.PATTERN_USHI_ONI_ONNA_TATTOO) outputText(" You have strange ushi oni-onna tattoos in your body, they appear in your belly, chest, breasts, shoulders and even face, you don’t know why but some are like a black sheen plate while others are just fur.");
 	}
 
 	public function describeGear():void {
@@ -1202,6 +1204,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  While your legs are human in appearance your body is so rigid due to this pseudo rigor mortis that the only way you found for movement is by hopping around.");
 		else if (player.lowerBody == LowerBody.YUKI_ONNA)
 			outputText("  Your legs are human in appearance albeit for the bluish nails.");
+		else if (player.lowerBody == LowerBody.USHI_ONI_ONNA)
+			outputText("  You have the lower body of a Ushi-"+player.mf("oni","onna")+", it is like the one of a drider except that it is covered in fur with the exoskeleton under it, the usually black sheen legs of a drider are replaced with rough bone ones of an ushi-"+player.mf("oni","onna")+".");
 	}
 	public function describeTail():void {
 		if (player.tailType == Tail.HORSE)
@@ -1359,9 +1363,11 @@ public class PlayerAppearance extends BaseContent {
 		else if(player.tailType == Tail.BEAR) {
 			outputText("  A cute, furry ursan tail sits up from your backside.");
 		}
-		else if(player.lowerBody == LowerBody.CANCER)
-		{
+		else if(player.lowerBody == LowerBody.CANCER) {
 			outputText(" On the front of your crab half, covering your privates, is a set of chitinous mandibula covered in feelers, constantly chittering and foaming with your drooling fluids.");
+		}
+		else if(player.tailType == Tail.USHI_ONI_ONNA) {
+			outputText("  You have an Ushi-"+player.mf("oni","onna")+" tail, the furred member is "+(player.tallness > 72 ? "5":"4")+" feet long and prehensile, the tip can shoot web string that are very thick and strong, and produce an arousing substance when in contact with the victim.");
 		}
 	}
 	public function describeArms():void {
@@ -1856,7 +1862,7 @@ public class PlayerAppearance extends BaseContent {
 			else if(earType == Ears.DOG)
 				outputText("  A pair of dog ears protrude from your skull, flopping down adorably.");
 			else if(earType == Ears.COW)
-				outputText("  A pair of round, floppy cow ears protrude from the sides of your skull.");
+				outputText("  A pair of round, " + player.hairColor + " floppy cow ears protrude from the sides of your skull.");
 			else if(earType == Ears.ELFIN)
 				outputText("  A pair of large pointy ears stick out from your skull.");
 			else if(earType == Ears.SHARK)
@@ -1965,7 +1971,7 @@ public class PlayerAppearance extends BaseContent {
 			else if(earType == Ears.DOG)
 				outputText("  The [hair] on your head is overlapped by a pair of pointed dog ears.");
 			else if(earType == Ears.COW)
-				outputText("  The [hair] on your head is parted by a pair of rounded cow ears that stick out sideways.");
+				outputText("  The [hair] on your head is parted by a pair of " + player.hairColor + " rounded cow ears that stick out sideways.");
 			else if(earType == Ears.ELFIN)
 				outputText("  The [hair] on your head is parted by a pair of cute pointed ears, bigger than your old human ones.");
 			else if(earType == Ears.CAT)
@@ -3224,6 +3230,19 @@ public class PlayerAppearance extends BaseContent {
 		if (player.thunderbirdScore() >= 12) outputText("\n<font color=\"#0000a0\">Thunderbird: " + player.thunderbirdScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (100 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 		else if (player.thunderbirdScore() >= 1) outputText("\n<font color=\"#008000\">Thunderbird: " + player.thunderbirdScore() + "</font>");
 		else if (player.thunderbirdScore() < 1) outputText("\n<font color=\"#ff0000\">Thunderbird: 0</font>");
+		//Ushi Onna
+		if (player.ushionnaScore() >= 11) {
+			outputText("\n<font color=\"#0000a0\">");
+			if (player.statusEffectv1(StatusEffects.UshiOnnaVariant) == 1) outputText("Fiery Ushi-" + player.mf("oni", "onna") + "");
+			else if (player.statusEffectv1(StatusEffects.UshiOnnaVariant) == 2) outputText("Frozen Ushi-" + player.mf("oni", "onna") + "");
+			else if (player.statusEffectv1(StatusEffects.UshiOnnaVariant) == 3) outputText("Sandy Ushi-" + player.mf("oni", "onna") + "");
+			else if (player.statusEffectv1(StatusEffects.UshiOnnaVariant) == 4) outputText("Pure Ushi-" + player.mf("oni", "onna") + "");
+			else if (player.statusEffectv1(StatusEffects.UshiOnnaVariant) == 5) outputText("Wicked Ushi-" + player.mf("oni", "onna") + "");
+			else outputText("Ushi-" + player.mf("oni", "onna") + "");
+			outputText(": " + player.ushionnaScore() + " (+" + (80 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, -" + (40 * (1 + player.newGamePlusMod())) + " max Int, -" + (40 * (1 + player.newGamePlusMod())) + " max Wis, +" + (95 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		}
+		else if (player.ushionnaScore() >= 1) outputText("\n<font color=\"#008000\">Ushi-Onna: " + player.ushionnaScore() + "</font>");
+		else if (player.ushionnaScore() < 1) outputText("\n<font color=\"#ff0000\">Ushi-Onna: 0</font>");
 		//Werewolf
 		if (player.werewolfScore() >= 12) outputText("\n<font color=\"#0000a0\">Werewolf: " + player.werewolfScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, -" + (20 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 		else if (player.wolfScore() >= 1) outputText("\n<font color=\"#008000\">Werewolf: " + player.werewolfScore() + "</font>");

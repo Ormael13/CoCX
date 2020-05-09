@@ -807,6 +807,10 @@ public class PlayerInfo extends BaseContent {
 				interpersonStats += "<b>Urta Status:</b> Ready To Confess Love\n";
 		}
 
+		if (flags[kFLAGS.ZENJI_PROGRESS] > 0) {
+			interpersonStats += "<b>Zenji's perspective on player:</b> " + Math.round(flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER]) + "%\n";
+		}
+
 		if (interpersonStats != "")
 			outputText("\n<b><u>Interpersonal Stats</u></b>\n" + interpersonStats);
 		// End Interpersonal Stats

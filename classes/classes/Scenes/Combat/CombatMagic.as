@@ -1146,7 +1146,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsWaveOfEcstasy)) {
 			bd = buttons.add("WaveOfEcstasy", spellWaveOfEcstasy)
-					.hint("The arouse spell draws on your own inner lust in order to enflame the enemyies passions.  " +
+					.hint("The arouse spell draws on your own inner lust in order to enflame the enemies passions.  " +
 							"\n\nMana Cost: " + spellCostBlack(100) + "");
 			if (badLustForBlack) {
 				bd.disable("You aren't turned on enough to use any black magics.");
@@ -1955,6 +1955,18 @@ public class CombatMagic extends BaseCombatContent {
 			doNext(playerMenu);
 			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 			else enemyAI();
+			return;
+		}
+		if (monster.short == "Zenji") {
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 2) outputText("\nThe troll shakes off the effects of the spell, \"<i>I. Will. Not. Break.</i>\"\n\n");
+			else {
+				outputText("\nThe troll shakes off the effects of the spell.\n\n");
+				outputText("\n\"<i>Gonna have ta do more dan dat ta break me.</i>\"\n\n");
+			}
+			flags[kFLAGS.SPELLS_CAST]++;
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+			spellPerkUnlock();
+			enemyAI();
 			return;
 		}
 		if(monster.lustVuln == 0) {

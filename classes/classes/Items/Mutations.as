@@ -28,7 +28,7 @@
         public static const magmagooSkinColors:Array = ["red", "orange", "reddish orange"];
         public static const darkgooSkinColors:Array = ["indigo", "light purple", "purple", "purplish black"];
         public static const oniEyeColors:Array = ["red", "orange", "yellow", "green"];
-        // import classes.ItemSlotClass;
+		// import classes.ItemSlotClass;
 
         //const FOX_BAD_END_WARNING:int = 477;
         //const TIMES_MET_CHICKEN_HARPY:int = 652;
@@ -15018,6 +15018,189 @@
             flags[kFLAGS.TIMES_TRANSFORMED] += changes;
         }
 
+        public function thickGossamer(type:Number, player:Player):void {
+			//'type' refers to the variety of gossamer.
+            //0 == Thick Green Onna Gossamer
+            //1 == Thick Green Herm Gossamer
+            //2 == Thick Green Oni Gossamer
+            //3 == Thick Fiery Onna Gossamer
+            //4 == Thick Fiery Herm Gossamer
+            //5 == Thick Fiery Oni Gossamer
+            //6 == Thick Frozen Onna Gossamer
+            //7 == Thick Frozen Herm Gossamer
+            //8 == Thick Frozen Oni Gossamer
+            //9 == Thick Sandy Onna Gossamer
+            //10 == Thick Sandy Herm Gossamer
+            //11 == Thick Sandy Oni Gossamer
+            //12 == Thick Pure Onna Gossamer
+            //13 == Thick Pure Herm Gossamer
+            //14 == Thick Pure Oni Gossamer
+            //15 == Thick Wicked Onna Gossamer
+            //16 == Thick Wicked Herm Gossamer
+            //17 == Thick Wicked Oni Gossamer
+            player.slimeFeed();
+			//init variables
+            var changes:Number = 0;
+            var changeLimit:Number = 1;
+			//Temporary storage
+            var temp2:Number = 0;
+            //Randomly choose affects limit
+            if (rand(4) == 0) changeLimit++;
+            if (rand(4) == 0) changeLimit++;
+            if (rand(4) == 0) changeLimit++;
+            changeLimit += additionalTransformationChances();
+            clearOutput();
+			outputText("You use all the courage you can muster and in one go, swallow the gossamer. At that very moment, your stomach groans as you feel your body changing...");
+			
+			//if (type >= 0 && type <= 2 && player.femininity < 100 && changes < changeLimit && rand(3) == 0) na feminity zmiany
+			
+			//public static const ushionnaSkinColors:Array = ["", "red", "grey", "sandy-tan", "pale", "purple"];
+			//public static const ushionnaHairColors:Array = ["", "dark red", "blue", "brown", "white", "black"];
+			
+			if ((type == 0 || type == 1 || type == 2) && player.hasPlainSkinOnly() && player.skinTone != "green" && changes < changeLimit && rand(3) == 0) {
+				player.skinTone = "green";
+				outputText("\n\nYour skin tingles ever so slightly as you skin’s color changes before your eyes. As the tingling diminishes, you find that your skin has turned " + player.skinTone + ".");
+				changes++;
+			}
+            if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+                humanizeSkin();
+                changes++;
+            }
+			if ((type == 0 || type == 1 || type == 2) && player.hairType == Hair.NORMAL && player.hairColor != "dark green" && changes < changeLimit && rand(3) == 0) {
+				player.hairColor = "dark green";
+				outputText("\n\nYour head tingles as something in your hair change, the strands flashing for an instant before they turn " + player.hairColor + ".");
+				changes++;
+			}
+            //Remove feathery/quill hair (copy for equinum, canine peppers, Labova)
+            if (changes < changeLimit && (player.hairType == Hair.FEATHER || player.hairType == Hair.QUILL) && rand(3) == 0) {
+                humanizeHairs();
+            }
+            //Remove anemone hair
+            if (changes < changeLimit && player.hairType == Hair.ANEMONE && rand(3) == 0) {
+                //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
+                outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your tentacle-hair, only to find out that the tentacles have vanished and replaced with normal hair.  <b>Your hair is normal again!</b>");
+                setHairType(Hair.NORMAL);
+                changes++;
+            }
+            //Remove goo hair
+            if (changes < changeLimit && player.hairType == Hair.GOO && rand(3) == 0) {
+                outputText("\n\nYour gooey hair begins to fall out in globs, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of hair sprouts from the skin of your scalp.  <b>Your hair is normal again!</b>");
+                //Turn hair growth on.
+                flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
+                setHairType(Hair.NORMAL);
+                changes++;
+            }
+            //Remove gorgon hair
+            if (changes < changeLimit && player.hairType == Hair.GORGON && rand(3) == 0) {
+                player.hairLength = 1;
+                outputText("\n\nAs you finish the root, the scaled critters on your head shake wildly in displeasure. Then, a sudden heat envelopes your scalp. The transformative effects of your spicy meal make themselves notorious, as the writhing mess of snakes start hissing uncontrollably. Many of them go rigid, any kind of life that they could had taken away by the root effects. Soon all the snakes that made your hair are limp and lifeless.");
+                outputText("\n\nTheir dead bodies are separated from you head by a scorching sensation, and start falling to the ground, turning to dust in a matter of seconds. Examining your head on the stream, you realize that you have a normal, healthy scalp, though devoid of any kind of hair.");
+                outputText("\n\nThe effects don’t end here, though as the familiar sensation of hair returns to your head a moment later. After looking yourself on the stream again, you confirm that <b>your once bald head now has normal, short [haircolor] hair</b>.");
+                setHairType(Hair.NORMAL);
+                changes++;
+            }
+            //Remove ghost hair
+            if (changes < changeLimit && player.hairType == Hair.GHOST && rand(3) == 0) {
+                outputText("\n\nA sensation of weight assaults your scalp. You reach up and grab a handful of hair, confused. Your perplexion only heightens when you actually feel the follicles becoming heavier in your grasp.  Plucking a strand, you hold it up before you, surprised to see... it's no longer transparent!  You have normal hair!");
+                setHairType(Hair.NORMAL);
+                changes++;
+            }
+            //Remove leaf hair
+            if (changes < changeLimit && player.hairType == Hair.LEAF && rand(4) == 0) {
+                //(long):
+                if (player.hairLength >= 6) outputText("\n\nA lock of your leaf-hair droops over your eye.  Before you can blow the offending down away, you realize the leaf is changing until all that remains is a normal strand of hair.  <b>Your hair is no longer leaf-like!</b>");
+                //(short)
+                else outputText("\n\nYou run your fingers through your leaf-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your leafs.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer leaf-like!</b>");
+                changes++;
+                setHairType(Hair.NORMAL);
+            }
+            //Remove fluffy hair
+            if (changes < changeLimit && player.hairType == Hair.FLUFFY && rand(3) == 0) {
+                outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your fluffy hair, only to find out that they have vanished and replaced with normal hair.  <b>Your hair is normal again!</b>");
+                setHairType(Hair.NORMAL);
+                changes++;
+            }
+            //Remove grass hair
+            if (changes < changeLimit && player.hairType == Hair.GRASS && rand(3) == 0) {
+                outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your grass-hair, only to find out that the long, soft and leafy blades have vanished and replaced with normal hair.  <b>Your hair is normal again!</b>");
+                setHairType(Hair.NORMAL);
+                changes++;
+            }
+            //Remove silken hair
+            if (changes < changeLimit && player.hairType == Hair.SILKEN && rand(3) == 0) {
+                outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your silken-hair, only to find out that they have changed back to normal hair.  <b>Your hair is normal again!</b>");
+                setHairType(Hair.NORMAL);
+                changes++;
+            }
+            //Remove storm hair
+            if (changes < changeLimit && player.hairType == Hair.STORM && rand(3) == 0) {
+                outputText("\n\nYour charged up hair begins to lose their luster, the fizzling bolts dying out as the current dies down before vanishing entirely, leaving you with normal human hair.  <b>Your hair is normal again!</b>");
+                setHairType(Hair.NORMAL);
+                changes++;
+            }
+            //Remove burning hair
+            if (changes < changeLimit && player.hairType == Hair.BURNING && rand(3) == 0) {
+                outputText("\n\nYou're head begins to cool down until the flames entirely disapears leaving you with ordinary hairs.  <b>Your hair is normal again!</b>");
+                setHairType(Hair.NORMAL);
+                changes++;
+            }
+			if ((type == 0 || type == 1 || type == 2) && player.ears.type != Ears.COW && changes < changeLimit && rand(3) == 0) {
+				if (player.hasStatusEffect(StatusEffects.UshiOnnaVariant)) {
+					player.removeStatusEffect(StatusEffects.UshiOnnaVariant);
+					player.createStatusEffect(StatusEffects.UshiOnnaVariant, 0, 0, 0, 0);
+				}
+				else player.createStatusEffect(StatusEffects.UshiOnnaVariant, 0, 0, 0, 0);
+                outputText("\n\nYou feel your ears tug on your scalp as they twist shape, becoming oblong and cow-like.  <b>You now have " + player.hairColor + " cow ears.</b>");
+                setEarType(Ears.COW);
+                changes++;
+            }
+			if (player.skin.base.type == Skin.PLAIN && !player.skin.hasUshiOniOnnaTattoo() && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nYour chest burns as strange marks appear on it, burning your skin until it creates a <b>black spider glyph in your chest</b>. You feel like something is coming up throughout your skin and upon taking your [armor] off, strokes of coarse fur travelling from your abdomen, all the way up to your breasts. Conveniently ending around the nipples, covering them, <b>you know have a Ushi-"+player.mf("Oni", "Onna")+" torso pattern.</b>");
+				/*if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed)) {
+					outputText("\n\n<b>Genetic Memory: Battle Tattoed Skin - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedBattleTattoed, 0, 0, 0, 0);
+				}*/
+				player.skin.base.pattern = Skin.PATTERN_USHI_ONI_ONNA_TATTOO;
+				player.skin.base.adj = "black spider glyph tattooed";
+				changes++;
+			}
+			if ((player.isTaur() || player.isGoo() || player.isNaga() || player.isScylla() || player.isAlraune()) && changes < changeLimit && rand(4) == 0) {
+                humanizeLowerBody();
+                changes++;
+            }
+            //Normal Biped Legs -> Carapace-Clad Legs
+            if (((type == 1 && player.lowerBody != LowerBody.DRIDER && player.lowerBody != LowerBody.CHITINOUS_SPIDER_LEGS) || (type != 1 && player.lowerBody != LowerBody.CHITINOUS_SPIDER_LEGS)) && (!player.isGoo() && !player.isNaga() && !player.isTaur() && !player.isScylla()) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+                outputText("\n\nStarting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs.  From the waist down, your strength completely deserts you, leaving you to fall hard on your " + buttDescript() + " in the dirt.  With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf.  It crests up your knee to envelop the joint in a many-faceted onyx coating.  Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton.  From a distance it would look almost like a black, thigh-high boot, but you know the truth.  <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>");
+                setLowerBody(LowerBody.CHITINOUS_SPIDER_LEGS);
+                player.legCount = 2;
+                changes++;
+            }
+            //Tail
+            if (player.tailType != Tail.USHI_ONI_ONNA && (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || player.lowerBody == LowerBody.DRIDER) && rand(4) == 0) {// && player.arms.type == Arms.SPIDER
+                outputText("\n\n");
+                if (player.tailType > Tail.NONE) outputText("You feel something shifting in your backside. Then something detaches from your backside and it falls onto the ground. ");
+				outputText("You feel a little pressure in your rear as you look back you see something emerging from it, a long, dexterous tail appear from it, It looks something along 25 inches witha little orifice in the tip, where the spinneret is located, <b>you now have an Ushi-"+player.mf("Oni","Onna")+" tail.</b>\n\n");
+                setTailType(Tail.USHI_ONI_ONNA, 1);
+                //player.tailVenom = 5;
+                //player.tailRecharge = 5;
+                changes++;
+            }
+            //Drider Item Only: Carapace-Clad Legs to Drider Legs
+            if (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && rand(4) == 0 && player.tailType == Tail.SPIDER_ADBOMEN) {
+                outputText("\n\nJust like when your legs changed to those of a spider-morph, you find yourself suddenly paralyzed below the waist.  Your dark, reflective legs splay out and drop you flat on your back.   Before you can sit up, you feel tiny feelers of pain mixed with warmth and tingling running through them.  Terrified at the thought of all the horrible changes that could be wracking your body, you slowly sit up, expecting to find yourself turned into some incomprehensible monstrosity from the waist down.  As if to confirm your suspicions, the first thing you see is that your legs have transformed into eight long, spindly legs.  Instead of joining directly with your hips, they now connect with the spider-like body that has sprouted in place of where your legs would normally start.  Your abdomen has gotten even larger as well.  Once the strength returns to your new, eight-legged lower body, you struggle up onto your pointed 'feet', and wobble around, trying to get your balance.  As you experiment with your new form, you find you're even able to twist the spider half of your body down between your legs in an emulation of your old, bipedal stance.  That might prove useful should you ever want to engage in 'normal' sexual positions, particularly since your " + buttDescript() + " is still positioned just above the start of your arachnid half.  <b>You're now a drider.</b>");
+                setLowerBody(LowerBody.DRIDER);
+                player.legCount = 8;
+                changes++;
+            }
+			//Drider butt
+            if (player.isDrider() && player.tailType == Tail.USHI_ONI_ONNA && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nYour spider body trembles, an intense pressure forming under the chitin, at the same time your plates fall to the ground and " + player.hairColor + " fur begins to sprout all over your abdomen. You wince in pain from the sudden growth, your drider legs chitin falls off as well,  getting thicker and harder turning into bone. After the torturous session, you look back to see <b>you now have an Ushi-"+player.mf("Oni","Onna")+" lower body with an internal skeleton and fur.</b>");
+                changes++;
+            }
+			
+			
+		}
+
         public function skelp(player:Player):void {
             player.slimeFeed();
             //init variables
@@ -15205,7 +15388,6 @@
                             "in the depth of the icy sea with your <b>brand new Melkie tail. Heck, it seems you can get rid of your human legs at will and be a mermaid full time if you want.</b>");
                     changes++;
                 }
-
                 //Set weird face to human
                 if (changes < changeLimit && rand(4) == 0 && player.faceType != Face.HUMAN && player.faceType != Face.ANIMAL_TOOTHS) {
                     humanizeFace()
@@ -15218,7 +15400,6 @@
                             "<b>You now have sharp canine just like a Melkie.</b>");
                     changes++;
                 }
-
                 if (changes < changeLimit && rand(4) == 0 && player.tongue.type != Tongue.HUMAN && player.tongue.type != Tongue.MELKIE) {
                     humaniseTongue();
                 }
@@ -15235,15 +15416,12 @@
                     humanizeSkin();
                     changes++;
                 }
-
                 //Reset fur if fully coated
                 if (player.hasFullCoatOfType(Skin.FUR) && !player.hasPartialCoat(Skin.FUR)) {
-
                     outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] fur.  Panicked, you look down and realize that your chitin is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. To your surprise you are back to being furless just like your old human self.");
                     player.skin.growCoat(Skin.COVERAGE_NONE);
                     changes++;
                 }
-
                 //Partial fur
                 var color:String;
                 var melkie_FurColor:Array = ["grey", "silver", "white", "glacial white", "light grey"];
@@ -15272,7 +15450,6 @@
                     player.skin.growCoat(Skin.FUR, {color: color}, Skin.COVERAGE_LOW);
                     changes++;
                 }
-
                 //Arms
                 if (changes < changeLimit && rand(4) == 0 && player.arms.type != Arms.HUMAN && player.arms.type != Arms.MELKIE) {
                     humanizeArms();
@@ -15290,7 +15467,7 @@
             }
         }
 
-        public function bubblegum(player:Player):void {
+		public function bubblegum(player:Player):void {
             player.slimeFeed();
             //init variables
             var changes:Number = 0;
@@ -15308,21 +15485,18 @@
                 outputText("\n\nOr rather normaly it would but since you are seldom immunised to transformatives nothing happens.");
             }
             if (!player.hasPerk(PerkLib.TransformationImmunity)) {
-
                 //str change
                 if (player.str < 100 && rand(4) == 0 && changes < changeLimit) {
                     outputText("\n\nYou suddenly feel stronger, as if your hands could shred steel and grind rocks to dust!");
                     dynStats("str", 1);
                     changes++;
                 }
-
                 //tou change
                 if (player.tou < 70 && rand(4) == 0 && changes < changeLimit) {
                     outputText("\n\nYou feel sturdier, but it might just be your imagination.");
                     dynStats("tou", 1);
                     changes++;
                 }
-
                 //spe change and Kudere face
                 if (player.spe >= 1 && rand(3) == 0 && changes < changeLimit) {
                     outputText("\n\nLife is boring, so boring… why do you run all the time? " +
@@ -15342,12 +15516,10 @@
                     }
                     changes++;
                 }
-
                 //Fix the face if player face isn't human
                 if (player.faceType != Face.HUMAN && player.faceType != Face.KUDERE) {
                     humanizeFace()
                 }
-
                 //Get those Cock to bubble:
                 if (player.cockTotal() > 0 && player.cocks[0].cockType != CockTypesEnum.CANCER && rand(4) == 0 && changes < changeLimit) {
                     for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
@@ -15363,13 +15535,11 @@
                     changes++;
                     dynStats("lib", 3, "lus", 10);
                 }
-
                 //decrease player's breast size
                 if (player.biggestTitSize() >= 3 && changes < changeLimit && rand(4) == 0) {
                     player.shrinkTits(true);
                     dynStats("sen", .5);
                 }
-
                 if (player.hasVagina() && changes < changeLimit && rand(4) == 0) {
                     var index:int;
                     outputText("\n\n");
@@ -15405,12 +15575,10 @@
                         if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) player.vaginas[index].vaginalWetness++;
                     }
                 }
-
                 //Remove odd eyes
                 if (changes < changeLimit && rand(4) == 0 && player.eyes.type != Eyes.HUMAN && player.eyes.type != Eyes.CANCER) {
                     humanizeEyes();
                 }
-
                 //Set eyes to the racial coloration and change them to cancer type
                 if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && player.eyes.type != Eyes.CANCER && player.faceType == Face.KUDERE) {
                     setEyeTypeAndColor(Eyes.CANCER,"orange");
@@ -15452,23 +15620,19 @@
                             "You clench and unclench your pincers, feeling the raw strength in them. Those are going to be soooooo fun to use. <b>You have grown the body of a crab from your waist down.</b>");
                     changes++;
                 }
-
                 //Set weird face to human
                 if (changes < changeLimit && rand(4) == 0 && player.faceType != Face.HUMAN && player.faceType != Face.KUDERE) {
                     humanizeFace()
                 }
-
                 //Dump that damn coat away
                 if (player.hasCoat() && rand(4) == 0) {
                     humanizeSkin();
                     changes++;
                 }
-
                 //Arms
                 if (changes < changeLimit && rand(4) == 0 && player.arms.type != Arms.HUMAN) {
                     humanizeArms();
                 }
-
                 if (changes == 0) {
                     outputText("\n\nNothing happened.  Weird.");
                 }

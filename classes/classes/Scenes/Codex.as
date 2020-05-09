@@ -167,6 +167,9 @@ package classes.Scenes
 			}			
 			if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] > 0) {
 				num++;
+			}			
+			if (flags[kFLAGS.CODEX_ENTRY_TROLLS] > 0) {
+				num++;
 			}
 			if (flags[kFLAGS.CODEX_ENTRY_VAMPIRE] > 0) {
 				num++;
@@ -189,7 +192,7 @@ package classes.Scenes
 				num++;
 			}
 			if (num >= 20) awardAchievement("Scholar (1)", kACHIEVEMENTS.GENERAL_SCHOLAR);
-			if (num >= 30) awardAchievement("Scholar (2)", kACHIEVEMENTS.GENERAL_SCHOLAR_2);//aktualnie 34 codex entries exist ingame
+			if (num >= 30) awardAchievement("Scholar (2)", kACHIEVEMENTS.GENERAL_SCHOLAR_2);//aktualnie 35 codex entries exist ingame
 			//if (num >= 40) awardAchievement("Scholar (3)", kACHIEVEMENTS.GENERAL_SCHOLAR_3);
 			return num;
 		}
@@ -285,10 +288,11 @@ package classes.Scenes
 			addCodexButton("Rhinoceros", "Rhinos", codexEntryRhinos, kFLAGS.CODEX_ENTRY_RHINOS);
 			addCodexButton("Salamanders", "Salamanders", codexEntrySalamanders, kFLAGS.CODEX_ENTRY_SALAMANDERS);
 			addCodexButton("Satyrs", "Satyrs", codexEntrySatyrs, kFLAGS.CODEX_ENTRY_SATYRS);
-			addCodexButton("Succubus", "Succubus", codexEntrySuccubus, kFLAGS.CODEX_ENTRY_SUCCUBUS);
+			addCodexButton("Shark Girls", "SharkGirls", codexEntrySharkGirls, kFLAGS.CODEX_ENTRY_SHARKGIRLS);
 			
 			//2nd row
-			addCodexButton("Shark Girls", "SharkGirls", codexEntrySharkGirls, kFLAGS.CODEX_ENTRY_SHARKGIRLS);
+			addCodexButton("Succubus", "Succubus", codexEntrySuccubus, kFLAGS.CODEX_ENTRY_SUCCUBUS);
+			addCodexButton("Trolls", "Trolls", codexEntryTrolls, kFLAGS.CODEX_ENTRY_TROLLS);
 			addCodexButton("Zebras", "Zebras", codexEntryZebras, kFLAGS.CODEX_ENTRY_ZEBRAS);
 			
 			//3rd row
@@ -1117,6 +1121,30 @@ package classes.Scenes
 			outputText("A Succubus' Milk can be an extraordinarily powerful aphrodisiac when drank straight from the source. If it is stored, the aphrodisiacal properties rapidly diminish while its mutagenic properties rapidly rise. Some more powerful succubi are able to use their milk with black magic in order to work changes on their partners.");
 			headerSub("Feeding");
 			outputText("Like most demons, Succubi gain power from corrupting others, and require a steady supply of sexual fluids to survive. In rare cases, if a Succubus has been deprived of ‘food’ for too long, she may find herself too weak to seduce a partner, and enter into an less than advantageous agreement in order to get her food. Amazingly, most succubi will hold themselves to such an agreement after 'eating' their fill. ");
+			setCodexMenusAfterDisplay();
+		}
+		
+		private function codexEntryTrolls():void {
+			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Trolls";
+			clearOutput();
+			headerMain("Shark-Girls & Tigershark-Girls");
+			outputText("<b>Genders:</b> Male, Female.\n");
+			outputText("<b>Height:</b> 7’3 - 7’9”. Females generally tend to be slightly shorter.\n");
+			outputText("<b>Build:</b> Lithe, athletic, muscular. Most trolls have a more rectangular body shape, including females. It is extremely rare for a female troll to be busty or have an hourglass figure. Female trolls commonly have B cup breasts or smaller as infantile trolls do not need much milk to develop.\n");
+			outputText("<b>Skin / Fur:</b> Trolls are normally covered head to toe in remarkably soft hair that camouflages them to their climate.\n");
+			outputText("<b>Eye color:</b> Generally green, grey or blue.\n");
+			outputText("<b>Notable Features:</b> Most trolls have tusks protruding from their mouth, on average they are 5 - 8 inches long. Females tend to have slightly shorter tusks. Trolls will grow their tusks a few months after birth. Their ears are long and elven-like. Male trolls have noticeable tails that extend from their spine, female trolls generally do not have tails.\n");
+			headerSub("Appearance");
+			outputText("Descendants from Elves from ages ago, the elven subrace “Trolls”, as they refer themselves to, are a mostly humanoid race. Their hands and feet support only 4 appendages instead of five. Trolls will grow their tusks a few months after birth. Trolls in colder areas have thicker fur and are known to have claws. Similarities can be drawn to orcs due to existing within the same region, notably troll tusks are longer as they’ve honed the ability to use it in combat and tear through meat. Trolls still yield elven-like qualities from their ancestors, namely aesthetically pleasing body shapes and facial features along elven ears. Their elven ears are alert to any noises. Trolls in colder climates do not have a tail.");
+			headerSub("Reproduction");
+			outputText("When a female troll has chosen her mate, the chosen male will become far more receptive to her scent, when a female troll becomes aroused, so too will their mate. Females only carry two eggs, which are receptive to their chosen mate. Once both eggs have been fertilised, the male becomes considerably less fertile, but is still able to ejaculate copious amounts. Excess oxytocin is released as the female’s pheromones will specifically target their mate, tremendously enhancing their virility. This bond unites the trolls for the remainder of their lifetime. When united trolls are separated they quickly become depressed. Similarly to humans, troll reproduction involves a male and a female troll. Eggs are fertilized and trolls give live birth, they will actively care for their young.");
+			headerSub("Behavior");
+			outputText("All trolls worship and respect Marae, the goddess that granted them life. There are two main tribes of trolls, jungle trolls and glacial trolls. Jungle trolls are calm and have a tightly packed community, they generally don’t enjoy the presence of outsiders. Glacial trolls are standoffish and shun outsiders.");
+			headerSub("History");
+			outputText("Trolls were among one of the tribes that Marae lent her power to in order to fend off the demons, but as trolls were mostly a quiet and passive race, they did not use their enhanced strength and intelligence to defeat the imps, fearing they could not take them, even with the assistance of a goddess they hid. Ashamed, trolls have retreated to the jungles to live on their own, the strength of Marae lives on within them, giving them strong resistance to corruption and magic to this day.");
+			headerSub("Other Notes");
+			outputText("Trolls are exceptionally strong, quick and intelligent. Trolls have the natural ability to regenerate damaged limbs and parts of their body, this can be halted with extreme injury or applications of fire, acid or other volatile elements All female trolls exude a pheromone cloud once matured, the cloud will cause males to become attracted to the female. This cloud affects males of any race, females are unaffected. The cloud is more potent depending on the female’s sex drive. This helps a female troll secure a mate. When a female troll has successfully claimed a mate, the male troll becomes extremely receptive to their female’s pheromones. A male troll’s sex drive is almost completely dependant on their mate. While it is uncommon, a female troll can  subdue multiple mates, this will cause aggression between males.");
+			outputText("\n\nEven less common is homosexuality, as a female troll’s pheromones are generally powerful enough to unite two trolls of the opposite gender.");
 			setCodexMenusAfterDisplay();
 		}
 		

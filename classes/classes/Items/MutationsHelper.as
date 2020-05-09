@@ -625,6 +625,7 @@ import classes.BodyParts.Wings;
 		[LowerBody.SALAMANDER, StatusEffects.UnlockedSalamanderLegs],
 		[LowerBody.SCYLLA, null],
 		[LowerBody.SHARK, StatusEffects.UnlockedSharkLegs],
+		[LowerBody.USHI_ONI_ONNA, null],
 		[LowerBody.WOLF, null],
 		[LowerBody.YETI, null],
 		[LowerBody.YGG_ROOT_CLAWS, null],
@@ -730,6 +731,7 @@ import classes.BodyParts.Wings;
 		[Tail.SHARK, StatusEffects.UnlockedSharkTail],
 		[Tail.SPIDER_ADBOMEN, StatusEffects.UnlockedSpiderTail],
 		[Tail.THUNDERBIRD, null],
+		[Tail.USHI_ONI_ONNA, null],
 		[Tail.WOLF, null],
 		[Tail.YGGDRASIL, null],
 	]);
