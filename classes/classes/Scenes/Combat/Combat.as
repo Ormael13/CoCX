@@ -6978,11 +6978,6 @@ public class Combat extends BaseContent {
             doNext(endLustLoss);
             return;
         }
-        if (player.hasPerk(PerkLib.Feeder) && flags[kFLAGS.DISPLACER_BEAST_WINS] >= 1) {
-            SceneLib.displacerbeastScene.displacerBeastMilkfeeding();
-            doNext(endHpVictory);
-            return;
-        }
         doNext(playerMenu);
     }
 

@@ -9,6 +9,7 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.UniqueSexScenes;
+import classes.display.SpriteDb;
 
 public class GoblinAssassinScene extends BaseContent
 	{
@@ -65,10 +66,12 @@ public class GoblinAssassinScene extends BaseContent
 				flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
 				outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
 			}
+			spriteSelect(SpriteDb.s_goblinAssassin);
 			startCombat(new GoblinAssassin());
 		}
 		public function goblinAdventurersEncounter():void {
 			clearOutput();
+
 			//First Time Intro
 			if(flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ASSASSIN] == 1)
 			{
@@ -213,14 +216,14 @@ public class GoblinAssassinScene extends BaseContent
 
 //[WIN RAEPZ]
 		public function gobboAssassinRapeIntro1():void {
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblinAssassin);
 			clearOutput();
 			outputText("The assassin falls to her feet, desperately trying to regain her composure but ultimately caving in to the exhaustion of defeat. The leather belt that was once wrapped around her pillowy breasts now hangs unfastened around her waist, the syringes once adorning it now littered around her. A shattered needle by her side emits a sweet-smelling vapor that soon reaches her nose, causing the girl to blush furiously as lust begins to overcome her senses.");
 			dynStats("lus", 20);
 			gobboAssassinRapeIntro();
 		}
 		public function gobboAssassinRapeIntro2():void {
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblinAssassin);
 			clearOutput();
 			outputText("The adventurers falls on the ground, desperately trying to regain their composure but ultimately caving in to the exhaustion of defeat. The leather belt that was once wrapped around their pillowy breasts now hangs unfastened around waist, the syringes once adorning it now littered around them. Some of shattered needles emits a sweet-smelling vapor that soon reaches their nose, causing girls to blush furiously as lust begins to overcome their senses. Still most of them somehow managed to run away leaving one most affected by lustfull vapor.");
 			dynStats("lus", 20);
@@ -322,7 +325,7 @@ public class GoblinAssassinScene extends BaseContent
 		}
 		private function gobboButtSecks():void
 		{
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblinAssassin);
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;
 			clearOutput();
@@ -349,7 +352,7 @@ public class GoblinAssassinScene extends BaseContent
 //[FEMSAUCE]
 		private function gobboGetsRapedFem():void
 		{
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblinAssassin);
 			clearOutput();
 			if (player.isTaur()) {
 				outputText(images.showImage("goblin-win-female-taur-rapedfem"));
@@ -460,7 +463,7 @@ public class GoblinAssassinScene extends BaseContent
 		{
 			var x:Number = player.biggestCockIndex();
 			clearOutput();
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblinAssassin);
 			outputText(images.showImage("goblin-win-male-corruptedfuck"));
 			outputText("You begin to remove your [armor], looking down on your helpless would-be-attacker and soon-to-be victim while licking your lips hungrily. Your " + multiCockDescriptLight());
 			if (player.cockTotal() == 1) outputText(" is");
@@ -540,7 +543,7 @@ public class GoblinAssassinScene extends BaseContent
 			clearOutput();
 			outputText(images.showImage("goblin-win-male-corruptedbj"));
 			var x:Number = player.biggestCockIndex();
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblinAssassin);
 			outputText("You whip out your stiffening maleness, revealing its ");
 			if (player.cockArea(x) < 80) outputText("nearly ");
 			outputText(" absurd size to your victim.  The goblin-girl's eyes grow to the size of dinner plates in shock as she takes in the view.   Knowing you'll try regardless of the size-mismatch, she spreads her legs and settles herself more comfortably on the ground.\n\n");
@@ -574,7 +577,7 @@ public class GoblinAssassinScene extends BaseContent
 //[DUDEGASM]
 		private function gobboGetsRapedMaleFits():void
 		{
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblinAssassin);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = player.biggestCockIndex();
 			clearOutput();
@@ -655,7 +658,7 @@ public class GoblinAssassinScene extends BaseContent
 //Spider goblin condom
 		private function goblinCondomed(mode:Number = 0):void
 		{
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblinAssassin);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			clearOutput();
 			outputText(images.showImage("goblin-win-male-goblincondomed"));
