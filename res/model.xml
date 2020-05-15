@@ -2378,7 +2378,7 @@
                 <show part="feet/alraune"/>
             </case>
             <case values="LowerBody.CENTIPEDE">
-                <hide part="legs/human"/>
+                <hide part="legs/*"/>
                 <show part="legs/centipede"/>
                 <show part="legs_bg/centipede"/>
             </case>
@@ -3188,6 +3188,7 @@
 						</default>
 					</switch>	
 				</if>
+				<show part="armorChest/fullplatebottom"/>
 				<if test="(legCount!=4) and (showLegClothing)">
 					<show part="armorLegs/fullplateLegs"/>
 				</if>
@@ -3293,8 +3294,7 @@
 					</else>
 				</if>
 			</if>
-		</if>
-		
+		</if>		
 		<if test="sexyAquamarineBikini">
 			<if test="breastRows.length gt 0">
 				<switch>
@@ -3393,8 +3393,7 @@
 					</else>
 				</if>
 			</if>
-		</if>
-		
+		</if>		
 		<if test="sexyPinkBikini">
 			<if test="breastRows.length gt 0">
 				<switch>
@@ -3427,8 +3426,7 @@
 					</else>
 				</if>
 			</if>
-		</if>
-		
+		</if>		
 		<if test="sexyRedBikini">
 			<if test="breastRows.length gt 0">
 				<switch>
@@ -3461,8 +3459,7 @@
 					</else>
 				</if>
 			</if>
-		</if>
-		
+		</if>		
 		<if test="sexyWhiteBikini">
 			<if test="breastRows.length gt 0">
 				<switch>
@@ -3495,8 +3492,7 @@
 					</else>
 				</if>
 			</if>
-		</if>
-		
+		</if>		
 		<if test="sexyYellowBikini">
 			<if test="breastRows.length gt 0">
 				<switch>
@@ -3531,7 +3527,7 @@
 			</if>
 		</if>
 
-
+		<!--Comfortable clothing set -->
         <if test="ComfyCLothes">
             <if test="showClothing">
                 <show part="clothe/comfortableClothes"/>
