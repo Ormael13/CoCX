@@ -464,6 +464,7 @@
         <cell rect="296,956,173,156" name="legs_fg/hydra6" dx="19" dy="47"/>
         <cell rect="371,325,165,119" name="legs_fg/crabtaur" dx="21" dy="64"/>
         <cell rect="546,325,175,119" name="legs_fg/bugtaur" dx="22" dy="65"/>
+        <cell rect="165,689,130,108" name="legs_fg/snail" dx="32" dy="97"/>
         <cell rect="607,101,143,107" name="legs/centaur" dx="47" dy="93"/>
         <cell rect="507,230,125,88" name="legs/cattaur" dx="71" dy="103"/>
         <cell rect="633,230,125,88" name="legs/reptaur" dx="71" dy="103"/>
@@ -492,6 +493,7 @@
         <cell rect="217,59,54,31" name="neck/weasel" dx="67" dy="50"/>
         <cell rect="162,27,54,31" name="neck/centipede" dx="67" dy="49"/>
         <cell rect="217,27,54,31" name="rearbody/shark" dx="74" dy="72"/>
+        <cell rect="61,689,100,100" name="rearbody/snail" dx="77" dy="82"/>
         <cell rect="470,641,173,156" name="aura/ghostlyaura" dx="11" dy="28"/>
         <cell rect="644,641,173,156" name="aura/wraithaura" dx="11" dy="28"/>
         <cell rect="818,641,173,156" name="aura/thunderaura" dx="11" dy="28"/>
@@ -1112,7 +1114,7 @@
             <case values="Antennae.MANTIS">
                 <show part="antennae/bee"/>
             </case>
-            <case values="Antennae.BEE">
+            <case values="Antennae.BEE,Antennae.FIRE_SNAIL">
                 <show part="antennae/bee"/>
             </case>
             <case values="Antennae.CENTIPEDE">
@@ -1349,6 +1351,9 @@
             <case values="RearBody.CENTIPEDE">
                 <show part="neck/centipede"/>
             </case>
+			<case values="RearBody.SNAIL_SHELL">
+                <show part="rearBody/snail"/>
+            </case>
             <default>
             </default>
         </switch>
@@ -1536,6 +1541,10 @@
 					<hide part="face/human"/>
 					<show part="face/demonlewd"/>
 				</if>
+				<if test="skin.base.type == Skin.GOO">
+					<hide part="face/*"/>
+					<show part="face/goo"/>
+				</if>
             </case>
             <case values="Face.HORSE,Face.FOX,Face.PIG,Face.BOAR,Face.RHINO,Face.ECHIDNA"><!--TODO -->
                 <show part="face/fur"/>
@@ -1576,6 +1585,9 @@
 						<show part="face/caveWyrm"/>
 					</if>
 				</if>
+            </case>
+			<case values="Face.FIRE_SNAIL">
+                <show part="face/goo"/>
             </case>
             <case values="Face.ORCA">
                 <show part="face/orca"/>
@@ -2378,9 +2390,13 @@
                 <show part="feet/alraune"/>
             </case>
             <case values="LowerBody.CENTIPEDE">
-                <hide part="legs/human"/>
+                <hide part="legs/*"/>
                 <show part="legs/centipede"/>
                 <show part="legs_bg/centipede"/>
+            </case>
+			<case values="LowerBody.FIRE_SNAIL">
+                <hide part="legs/*"/>
+                <show part="legs_fg/snail"/>
             </case>
             <!--<case values="LowerBody.YGG_ROOT_CLAWS">TODO </case>-->
             <case values="'never'"><!--TODO liliraune-->
@@ -3188,6 +3204,7 @@
 						</default>
 					</switch>	
 				</if>
+				<show part="armorChest/fullplatebottom"/>
 				<if test="(legCount!=4) and (showLegClothing)">
 					<show part="armorLegs/fullplateLegs"/>
 				</if>
@@ -3293,8 +3310,7 @@
 					</else>
 				</if>
 			</if>
-		</if>
-		
+		</if>		
 		<if test="sexyAquamarineBikini">
 			<if test="breastRows.length gt 0">
 				<switch>
@@ -3393,8 +3409,7 @@
 					</else>
 				</if>
 			</if>
-		</if>
-		
+		</if>		
 		<if test="sexyPinkBikini">
 			<if test="breastRows.length gt 0">
 				<switch>
@@ -3427,8 +3442,7 @@
 					</else>
 				</if>
 			</if>
-		</if>
-		
+		</if>		
 		<if test="sexyRedBikini">
 			<if test="breastRows.length gt 0">
 				<switch>
@@ -3461,8 +3475,7 @@
 					</else>
 				</if>
 			</if>
-		</if>
-		
+		</if>		
 		<if test="sexyWhiteBikini">
 			<if test="breastRows.length gt 0">
 				<switch>
@@ -3495,8 +3508,7 @@
 					</else>
 				</if>
 			</if>
-		</if>
-		
+		</if>		
 		<if test="sexyYellowBikini">
 			<if test="breastRows.length gt 0">
 				<switch>
@@ -3531,7 +3543,7 @@
 			</if>
 		</if>
 
-
+		<!--Comfortable clothing set -->
         <if test="ComfyCLothes">
             <if test="showClothing">
                 <show part="clothe/comfortableClothes"/>
