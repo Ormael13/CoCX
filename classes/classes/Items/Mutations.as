@@ -14664,6 +14664,7 @@
                 outputText("\n\nYour back begins to hurt as you feel like your flesh and bones are being torn out. You lie down, screaming in pain as your back keeps on expanding, breathing heavily. Not just that but you feel eviscerated as your guts and organs shift places within your body, causing you to puke from the growing nausea. Eventually it all stops and you take a glimpse behind you. A massive shell has grown behind your back, your organs relocating to inside its safety. ");
                 outputText("Geez, what a deep breath! it's like your lungs doubled in size. You finally manage to calm down and crawl your way to a resting spot in order to finish coping with the transformation and the now massive weight on your back. <b>You now have a Shell.</b>");
                 setRearBody(RearBody.SNAIL_SHELL);
+                player.coatColor = "brown";
                 changes++;
             }
             //Removes wings!
