@@ -21,6 +21,7 @@ public class Horns extends BodyPart {
 	public static const GOATQUAD:int                 = 17;
 	public static const KRAKEN:int              	 = 18;
 	public static const FROSTWYRM:int              	 = 19;
+	public static const USHI_ONI_ONNA:int            = 20;
 	// Don't forget to add new types in DebugMenu.as list HORN_TYPE_CONSTANTS
 	
 	public function Horns() {

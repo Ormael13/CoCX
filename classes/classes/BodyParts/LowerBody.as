@@ -344,7 +344,7 @@ public class LowerBody extends SaveableBodyPart {
 		}
 	}
 	public function isDrider():Boolean {
-		return (type == DRIDER || type == CANCER);
+		return (type == DRIDER || type == CANCER || type == USHI_ONI_ONNA);
 	}
 	public function isGoo():Boolean {
 		return type == GOO;

@@ -204,7 +204,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
