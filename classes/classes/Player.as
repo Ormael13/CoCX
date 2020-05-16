@@ -7925,11 +7925,13 @@ use namespace CoC;
 			if (ears.type == Ears.COW)
 				ushionnaCounter++;
 			if (tailType == Tail.USHI_ONI_ONNA)
-				ushionnaCounter++;/*
-			if (faceType == Face.ECHIDNA)
 				ushionnaCounter++;
-			if (tongue.type == Tongue.ECHIDNA)
-				ushionnaCounter++;*/
+			if (faceType == Face.USHI_ONI_ONNA)
+				ushionnaCounter++;
+			if (horns.type == Horns.USHI_ONI_ONNA)
+				ushionnaCounter++;
+			if (arms.type == Arms.USHI_ONI_ONNA)
+				ushionnaCounter++;
 			if (lowerBody == LowerBody.USHI_ONI_ONNA)
 				ushionnaCounter += 2;
 			if (skin.base.pattern == Skin.PATTERN_RED_PANDA_UNDERBODY)

@@ -1470,6 +1470,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your arms and hands are mostly human in shape tipped with sharp purple nails. Intricate flowing purple markings stretch from your hands to your shoulders.");
 		else if (armType == Arms.FROSTWYRM)
 			outputText("  Your forearms are covered with scales which themselves are covered with fur and end with five fingered clawed hands. Your claws are strong enough to dig and tear through next to anything.");
+		else if (armType == Arms.USHI_ONI_ONNA)
+			outputText("  You have Ushi-"+player.mf("oni","onna")+" arms they are longer and thicker than most races, strange pattern of fur begins at you middle biceps and go down until the furred part in your forearms, it extends to your hands where even you fingers had changed to bone like claws.");
 	}
 	public function describeRearBody():void {
 		if (player.rearBody.type == RearBody.FENRIR_ICE_SPIKES) {
@@ -1717,6 +1719,10 @@ public class PlayerAppearance extends BaseContent {
 		if (player.horns.type == Horns.KRAKEN) {
 			if (player.horns.count > 0)
 				outputText("  Crowning above your head is a fleshy Kraken hood easily adding you a few extra inch in height.\n");
+		}
+		if (player.horns.type == Horns.USHI_ONI_ONNA) {
+			if (player.horns.count > 0)
+				outputText("  You have a pair of ushi-" + player.mf("oni", "onna") + " horns, both come out of your skull and go upward in a spiral pattern.\n");
 		}
 	}
 	public function describeTongue():void {
@@ -2556,6 +2562,9 @@ public class PlayerAppearance extends BaseContent {
 			} else {
 				outputText("  It's covered in [skin coat] that covers your " + player.skinTone + " skin underneath, making your face looks more unusual.");
 			}
+		}
+		if (faceType == Face.USHI_ONI_ONNA) {
+			outputText("  You have the face of a ushi " + player.mf("oni", "onna") + ", you have strange black tattoos circling your eyes and in your mouth small fangs with a weak poison can be seen when you smile or open you mouth.");
 		}
 		//WIP Code reformating of the face section
 		//section for the tatoo

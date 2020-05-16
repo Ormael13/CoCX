@@ -2423,9 +2423,6 @@ public class PerkLib
 		public static const Saturation:PerkType = mk("Saturation", "Saturation",
 				"Using your advanced knowledge, you soak each transformative in a special liquid to enhance their effects +1 effect.",
 				"You choose the 'Saturation' perk, number of possible effects of transformatives +1.");
-		public static const ScandalousSuccubusClothing:PerkType = mk("Scandalous Succubus Clothing", "Scandalous Succubus Clothing",
-				"Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.",
-				"Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.\n");
 		public static const ScyllaInkGlands:PerkType = mk("Scylla Ink Glands", "Scylla Ink Glands",
 				"Your Scylla Ink Glands increase rate at which your body produce ink and slight boost to your natural strength.",
 				"You choose the 'Scylla Ink Glands' perk, due to repeadly use of ink attack leading to denveloping ink glands!");
@@ -3001,6 +2998,8 @@ public class PerkLib
 		public static const Obsession:ObsessionPerk = new ObsessionPerk();
 		public static const Sanctuary:PerkType = mk("Sanctuary", "Sanctuary", "Regenerates up to 1% of HP scaling on purity.");
 		public static const SeersInsight:SeersInsightPerk = new SeersInsightPerk();
+		public static const ScandalousSuccubusClothing:PerkType = mk("Scandalous Succubus Clothing", "Scandalous Succubus Clothing",
+				"Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.",null,true);
 		public static const SluttySeduction:SluttySeductionPerk = new SluttySeductionPerk();
 		public static const WellspringOfLust:PerkType = mk("Wellspring of Lust", "Wellspring of Lust",
 				"At the beginning of combat, gain lust up to black magic threshold if lust is bellow black magic threshold.",null,true);

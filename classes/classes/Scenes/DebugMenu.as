@@ -1037,6 +1037,8 @@ public class DebugMenu extends BaseContent
 			[Face.GHOST, "48 GHOST"],
 			[Face.JIANGSHI, "49 JIANGSHI"],
 			[Face.YUKI_ONNA, "50 YUKI_ONNA"],
+			[Face.KUDERE, "51 KUDERE"],
+			[Face.USHI_ONI_ONNA, "52 USHI_ONI_ONNA"],
 		];
 		private static const TONGUE_TYPE_CONSTANTS:Array = [
 			[Tongue.HUMAN, "0 HUMAN"],
@@ -1137,6 +1139,10 @@ public class DebugMenu extends BaseContent
 			[Horns.BICORN, "14 BICORN"],
 			[Horns.GHOSTLY_WISPS, "15 GHOSTLY_WISPS"],
 			[Horns.SPELL_TAG, "16 SPELL_TAG"],
+			[Horns.GOATQUAD, "17 GOATQUAD"],
+			[Horns.KRAKEN, "18 KRAKEN"],
+			[Horns.FROSTWYRM, "19 FROSTWYRM"],
+			[Horns.USHI_ONI_ONNA, "20 USHI_ONI_ONNA"],
 		];
 		private static const HORN_COUNT_CONSTANTS:Array = [
 				0,1,2,3,4,
@@ -1293,6 +1299,12 @@ public class DebugMenu extends BaseContent
 			[Arms.JIANGSHI, "39 JIANGSHI"],
 			[Arms.RAIJU_2, "40 RAIJU_2"],
 			[Arms.YUKI_ONNA, "41 YUKI_ONNA"],
+			[Arms.MELKIE, "42 MELKIE"],
+			[Arms.CENTIPEDE, "43 CENTIPEDE"],
+			[Arms.KRAKEN, "44 KRAKEN"],
+			[Arms.FROSTWYRM, "45 FROSTWYRM"],
+			[Arms.CANCER, "46 CANCER"],
+			[Arms.USHI_ONI_ONNA, "47 USHI_ONI_ONNA"],
 		];
 		private static const CLAW_TYPE_CONSTANTS:Array = [
 			[Claws.NORMAL, "0 NORMAL"],

@@ -37,7 +37,8 @@ public class Bog extends BaseContent
 			}
 			//Zenji
 			if (rand(5) == 0) {
-				if (flags[kFLAGS.ZENJI_PROGRESS] > 0 && flags[kFLAGS.ZENJI_PROGRESS] < 4) SceneLib.zenjiScene.part1TrollEncounterRepeat();
+				if (flags[kFLAGS.ZENJI_PROGRESS] >= 4) SceneLib.zenjiScene.part2TrollEncounterFirst();
+				else if (flags[kFLAGS.ZENJI_PROGRESS] > 0 && flags[kFLAGS.ZENJI_PROGRESS] < 4) SceneLib.zenjiScene.part1TrollEncounterRepeat();
 				else if (flags[kFLAGS.ZENJI_PROGRESS] == 0) SceneLib.zenjiScene.part1TrollEncounter();
 				return;
 			}

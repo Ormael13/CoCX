@@ -105,7 +105,7 @@ use namespace CoC;
 		
 		override protected function performCombatAction():void
 		{
-			if (flags[kFLAGS.ZENJI_PROGRESS] == -1) {
+			if (flags[kFLAGS.ZENJI_PROGRESS] == -1 || flags[kFLAGS.ZENJI_PROGRESS] == 5 || flags[kFLAGS.ZENJI_PROGRESS] == 6) {
 				if (this.lust > this.maxLust() * .8 || this.HP < this.maxHP() * .3) zenjiEnrage();
 				else if (this.HP < this.maxHP() * .4 && mana > maxMana() * 0.2) zenjiRegenerate();
 				else {
@@ -130,13 +130,17 @@ use namespace CoC;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (flags[kFLAGS.ZENJI_PROGRESS] == -1) SceneLib.zenjiScene.part1TrollEncounterFightTOTHEDEATHZenjiDefeated();
+			if (flags[kFLAGS.ZENJI_PROGRESS] > 5) SceneLib.zenjiScene.part2TrollEncounterRepeatFightZenjiDefeated();
+			else if (flags[kFLAGS.ZENJI_PROGRESS] == 5) SceneLib.zenjiScene.part2TrollEncounterFirstFightZenjiDefeated();
+			else if (flags[kFLAGS.ZENJI_PROGRESS] == -1) SceneLib.zenjiScene.part1TrollEncounterFightTOTHEDEATHZenjiDefeated();
 			else SceneLib.zenjiScene.part1TrollEncounterFightZenjiDefeated();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (flags[kFLAGS.ZENJI_PROGRESS] == -1) SceneLib.zenjiScene.part1TrollEncounterFightTOTHEDEATHPCDefeated();
+			if (flags[kFLAGS.ZENJI_PROGRESS] > 5) SceneLib.zenjiScene.part2TrollEncounterRepeatFightPCDefeated();
+			else if (flags[kFLAGS.ZENJI_PROGRESS] == 5) SceneLib.zenjiScene.part2TrollEncounterFirstFightPCDefeated();
+			else if (flags[kFLAGS.ZENJI_PROGRESS] == -1) SceneLib.zenjiScene.part1TrollEncounterFightTOTHEDEATHPCDefeated();
 			else SceneLib.zenjiScene.part1TrollEncounterFightPCDefeated();
 		}
 		
@@ -174,7 +178,7 @@ use namespace CoC;
 				}
 				else this.level = 25;
 			}
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 3) {
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 5) {
 				initStrTouSpeInte(145, 140, 135, 125);
 				initWisLibSensCor(135, 20, 40, 0);
 				this.weaponAttack = 50;
@@ -191,6 +195,7 @@ use namespace CoC;
 				this.short = "Zenji";
 			}
 			this.imageName = "zenji";
+			if (flags[kFLAGS.ZENJI_PROGRESS] >= 5) this.long = "";
 			if (flags[kFLAGS.ZENJI_PROGRESS] >= 1 && flags[kFLAGS.ZENJI_PROGRESS] < 5) this.long = "You are fighting what appears to be an adult troll male. He is over 8 feet tall, covered in green fuzz and has a lithe, yet notably muscular build. He has tusks protruding from his mouth each about 8 inches long curving upwards. He stands tall, ready to deflect your blows. You can tell by his softer features, perfect symmetry and handsome face that he’s actually quite young. His tail sways gently behind him, trying to keep balance and a steady rhythm.";
 			if (flags[kFLAGS.ZENJI_PROGRESS] == -1) this.long = "You are fighting what appears to be an adult troll male. He is over 8 feet tall, covered in green fuzz and has a lithe, yet notably muscular build. He has tusks protruding from his mouth each about 8 inches long curving upwards. He stands tall, having recovered from previous ordeals. He is unyielding, sensing your corruption now, ready to end this quarrel. His tail is tucked between his legs, is he afraid or trying to prevent it from being injured?";
 			// this.plural = false;

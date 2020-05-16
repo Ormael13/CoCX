@@ -12299,7 +12299,6 @@
                     player.vaginas[0].virgin = true;
                     player.clitLength = .25;
                     outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
-
                     changes++;
                     dynStats("lus", 10);
                 }
@@ -15043,8 +15042,11 @@
 			//init variables
             var changes:Number = 0;
             var changeLimit:Number = 1;
+			var boobsGrew:Boolean = false;
 			//Temporary storage
+            var temp:Number = 0;
             var temp2:Number = 0;
+            var temp3:Number = 0;
             //Randomly choose affects limit
             if (rand(4) == 0) changeLimit++;
             if (rand(4) == 0) changeLimit++;
@@ -15053,11 +15055,370 @@
             clearOutput();
 			outputText("You use all the courage you can muster and in one go, swallow the gossamer. At that very moment, your stomach groans as you feel your body changing...");
 			
-			//if (type >= 0 && type <= 2 && player.femininity < 100 && changes < changeLimit && rand(3) == 0) na feminity zmiany
+			
 			
 			//public static const ushionnaSkinColors:Array = ["", "red", "grey", "sandy-tan", "pale", "purple"];
 			//public static const ushionnaHairColors:Array = ["", "dark red", "blue", "brown", "white", "black"];
 			
+			 if (changes < changeLimit && rand(2) == 0 && player.tallness < 84) {
+                temp = rand(5) + 3;
+                //Slow rate of growth near ceiling
+                if (player.tallness > 90) temp = Math.floor(temp / 2);
+                //Never 0
+                if (temp == 0) temp = 1;
+                //Flavor texts.  Flavored like 1950's cigarettes. Yum.
+                if (temp < 5) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
+                if (temp >= 5 && temp < 7) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
+                if (temp == 7) outputText("\n\nStaggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.");
+                player.tallness += temp;
+                changes++;
+            }
+			
+			if (type == 0 || type == 3 || type == 6 || type == 9 || type == 12 || type == 15) {		//female
+				if (player.biggestTitSize() <= 20 && changes < changeLimit && rand(3) == 0) {
+					if (rand(2) == 0) outputText("\n\nYour [breasts] tingle for a moment before becoming larger.");
+					else outputText("\n\nYou feel a little weight added to your chest as your [breasts] seem to inflate and settle in a larger size.");
+					player.growTits(1 + rand(2), 1, false, 3);
+					changes++;
+					dynStats("sen", .5);
+					boobsGrew = true;
+				}
+                if (player.breastRows.length == 0 && changes < changeLimit) {
+                    outputText("A perfect pair of A cup breasts, complete with tiny nipples, form on your chest.");
+                    player.createBreastRow();
+                    player.breastRows[0].breasts = 2;
+                    player.breastRows[0].nipplesPerBreast = 1;
+                    player.breastRows[0].breastRating = 1;
+                    outputText("\n");
+					changes++;
+                }
+				//Shrink boobages till they are normal
+				if (rand(2) == 0 && changes < changeLimit && player.breastRows.length > 0) {
+					//Single row
+					if (player.breastRows.length == 1) {
+						//Shrink if bigger than B cups
+						if (player.breastRows[0].breastRating >= 21) {
+							temp = 1;
+							player.breastRows[0].breastRating--;
+							//Shrink again if huuuuge
+							if (player.breastRows[0].breastRating > 28) {
+								temp++;
+								player.breastRows[0].breastRating--;
+							}
+							//Talk about shrinkage
+							if (temp == 1) outputText("\n\nYou feel a weight lifted from you, and realize your " + player.breastDescript(0) + " have shrunk to " + player.breastCup(0) + "s.");
+							if (temp == 2) outputText("\n\nYou feel significantly lighter.  Looking down, you realize your breasts are MUCH smaller, down to " + player.breastCup(0) + "s.");
+							changes++;
+						}
+					}
+					//multiple
+					else {
+						//temp2 = amount changed
+						//temp3 = counter
+						temp = 0;
+						temp2 = 0;
+						temp3 = 0;
+						if (player.biggestTitSize() >= 1) outputText("\n");
+						while (temp3 < player.breastRows.length) {
+							if (player.breastRows[temp3].breastRating >= 21) {
+								player.breastRows[temp3].breastRating--;
+								temp2++;
+								outputText("\n");
+								//If this isn't the first change...
+								if (temp2 > 1) outputText("...and y");
+								else outputText("Y");
+								outputText("our " + player.breastDescript(temp3) + " shrink, dropping to " + player.breastCup(temp3) + "s.");
+							}
+							temp3++;
+						}
+						if (temp2 == 2) outputText("\nYou feel so much lighter after the change.");
+						if (temp2 == 3) outputText("\nWithout the extra weight you feel particularly limber.");
+						if (temp2 >= 4) outputText("\nIt feels as if the weight of the world has been lifted from your shoulders, or in this case, your chest.");
+						if (temp2 > 0) changes++;
+					}
+				}
+				//-Grow hips out if narrow.
+				if (player.hips.type < 15 && changes < changeLimit && rand(3) == 0) {
+					outputText("\n\nYour gait shifts slightly to accommodate your widening [hips]. The change is subtle, but they're definitely broader.");
+					player.hips.type++;
+					changes++;
+				}
+				//-Narrow hips if crazy wide
+				if (player.hips.type >= 16 && changes < changeLimit && rand(3) == 0) {
+					outputText("\n\nYour gait shifts inward, your [hips] narrowing significantly. They remain quite thick, but they're not as absurdly wide as before.");
+					player.hips.type--;
+					changes++;
+				}
+				//-Big booty
+				if (player.butt.type < 16 && changes < changeLimit && rand(3) == 0) {
+					player.butt.type++;
+					changes++;
+					outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your [armor] being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a " + buttDescript() + ".");
+				}
+				//-Narrow booty if crazy huge.
+				if (player.butt.type >= 17 && changes < changeLimit && rand(3) == 0) {
+					changes++;
+					player.butt.type--;
+					outputText("\n\nA feeling of tightness starts in your " + buttDescript() + ", increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your massive booty is shrinking into a more manageable size.");
+				}
+				
+				if (changes < changeLimit && player.cocks.length > 0 && rand(2) == 0) {
+					//If the player has at least one dick, decrease the size of each slightly,
+					outputText("\n\n");
+					temp = 0;
+					temp2 = player.cocks.length;
+					temp3 = 0;
+					//Find biggest cock
+					while (temp2 > 0) {
+						temp2--;
+						if (player.cocks[temp].cockLength <= player.cocks[temp2].cockLength) temp = temp2;
+					}
+					//Shrink said cock
+					if (player.cocks[temp].cockLength < 6 && player.cocks[temp].cockLength >= 2.9) {
+						player.cocks[temp].cockLength -= .5;
+						temp3 -= .5;
+					}
+					temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
+					player.lengthChange(temp3, 1);
+					if (player.cocks[temp].cockLength < 2) {
+						outputText("  ");
+						if (player.cockTotal() == 1 && !player.hasVagina()) {
+							outputText("Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.");
+							if (player.balls > 0) outputText("  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.");
+							outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>");
+							player.balls = 0;
+							player.ballSize = 1;
+							player.createVagina();
+							player.clitLength = .25;
+							player.removeCock(0, 1);
+						} else {
+							player.killCocks(1);
+						}
+					}
+					//if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
+					if (player.cocks.length == 0 && !player.hasVagina()) {
+						player.createVagina();
+						player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
+						player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
+						player.vaginas[0].virgin = true;
+						player.clitLength = .25;
+						outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
+						changes++;
+						dynStats("lus", 10);
+					}
+				}
+				if (player.tone < 79) outputText(player.modTone(80, 2));
+				if (player.thickness < 66) outputText(player.modThickness(70, 5));
+				if (player.femininity < 100) player.modFem(100, rand(3));
+				
+				
+			}
+			if (type == 1 || type == 4 || type == 7 || type == 10 || type == 13 || type == 16) {	//herm
+				if (player.biggestTitSize() <= 22 && changes < changeLimit && rand(3) == 0) {
+					if (rand(2) == 0) outputText("\n\nYour [breasts] tingle for a moment before becoming larger.");
+					else outputText("\n\nYou feel a little weight added to your chest as your [breasts] seem to inflate and settle in a larger size.");
+					player.growTits(1 + rand(2), 1, false, 3);
+					changes++;
+					dynStats("sen", .5);
+					boobsGrew = true;
+				}
+                if (player.breastRows.length == 0 && changes < changeLimit) {
+                    outputText("A perfect pair of A cup breasts, complete with tiny nipples, form on your chest.");
+                    player.createBreastRow();
+                    player.breastRows[0].breasts = 2;
+                    player.breastRows[0].nipplesPerBreast = 1;
+                    player.breastRows[0].breastRating = 1;
+                    outputText("\n");
+					changes++;
+                }
+				//Shrink boobages till they are normal
+				if (rand(2) == 0 && changes < changeLimit && player.breastRows.length > 0) {
+					//Single row
+					if (player.breastRows.length == 1) {
+						//Shrink if bigger than B cups
+						if (player.breastRows[0].breastRating >= 23) {
+							temp = 1;
+							player.breastRows[0].breastRating--;
+							//Shrink again if huuuuge
+							if (player.breastRows[0].breastRating > 30) {
+								temp++;
+								player.breastRows[0].breastRating--;
+							}
+							//Talk about shrinkage
+							if (temp == 1) outputText("\n\nYou feel a weight lifted from you, and realize your " + player.breastDescript(0) + " have shrunk to " + player.breastCup(0) + "s.");
+							if (temp == 2) outputText("\n\nYou feel significantly lighter.  Looking down, you realize your breasts are MUCH smaller, down to " + player.breastCup(0) + "s.");
+							changes++;
+						}
+					}
+					//multiple
+					else {
+						//temp2 = amount changed
+						//temp3 = counter
+						temp = 0;
+						temp2 = 0;
+						temp3 = 0;
+						if (player.biggestTitSize() >= 1) outputText("\n");
+						while (temp3 < player.breastRows.length) {
+							if (player.breastRows[temp3].breastRating >= 23) {
+								player.breastRows[temp3].breastRating--;
+								temp2++;
+								outputText("\n");
+								//If this isn't the first change...
+								if (temp2 > 1) outputText("...and y");
+								else outputText("Y");
+								outputText("our " + player.breastDescript(temp3) + " shrink, dropping to " + player.breastCup(temp3) + "s.");
+							}
+							temp3++;
+						}
+						if (temp2 == 2) outputText("\nYou feel so much lighter after the change.");
+						if (temp2 == 3) outputText("\nWithout the extra weight you feel particularly limber.");
+						if (temp2 >= 4) outputText("\nIt feels as if the weight of the world has been lifted from your shoulders, or in this case, your chest.");
+						if (temp2 > 0) changes++;
+					}
+				}
+				//-Grow hips out if narrow.
+				if (player.hips.type < 20 && changes < changeLimit && rand(3) == 0) {
+					outputText("\n\nYour gait shifts slightly to accommodate your widening [hips]. The change is subtle, but they're definitely broader.");
+					player.hips.type++;
+					changes++;
+				}
+				//-Narrow hips if crazy wide
+				if (player.hips.type >= 21 && changes < changeLimit && rand(3) == 0) {
+					outputText("\n\nYour gait shifts inward, your [hips] narrowing significantly. They remain quite thick, but they're not as absurdly wide as before.");
+					player.hips.type--;
+					changes++;
+				}
+				//-Big booty
+				if (player.butt.type < 20 && changes < changeLimit && rand(3) == 0) {
+					player.butt.type++;
+					changes++;
+					outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your [armor] being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a " + buttDescript() + ".");
+				}
+				//-Narrow booty if crazy huge.
+				if (player.butt.type >= 21 && changes < changeLimit && rand(3) == 0) {
+					changes++;
+					player.butt.type--;
+					outputText("\n\nA feeling of tightness starts in your " + buttDescript() + ", increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your massive booty is shrinking into a more manageable size.");
+				}
+				
+				
+				if (player.tone < player.maxToneCap()) outputText(player.modTone(player.maxToneCap(), 15));
+				if (player.thickness < player.maxThicknessCap()) outputText(player.modThickness(player.maxThicknessCap(), 5));
+				if (player.femininity < 85) player.modFem(85, rand(3));
+				
+				
+			}
+			if (type == 2 || type == 5 || type == 8 || type == 11 || type == 14 || type == 17) {	//male
+				//-Remove extra breast rows
+				if (changes < changeLimit && player.bRows() > 1 && rand(3) == 0) {
+					changes++;
+					outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + player.breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
+					if (player.bRows() >= 3) outputText("abdomen");
+					else outputText("chest");
+					outputText(". The " + Appearance.nippleDescription(player, player.breastRows.length - 1) + "s even fade until nothing but [skin] remains. <b>You've lost a row of breasts!</b>");
+					dynStats("sen", -5);
+					player.removeBreastRow(player.breastRows.length - 1, 1);
+				}
+				//Shrink boobages till they are normal
+				if (rand(2) == 0 && changes < changeLimit && player.breastRows.length > 0) {
+					//Single row
+					if (player.breastRows.length == 1) {
+						//Shrink if bigger than B cups
+						if (player.breastRows[0].breastRating >= 1) {
+							temp = 1;
+							player.breastRows[0].breastRating--;
+							//Shrink again if huuuuge
+							if (player.breastRows[0].breastRating > 8) {
+								temp++;
+								player.breastRows[0].breastRating--;
+							}
+							//Talk about shrinkage
+							if (temp == 1) outputText("\n\nYou feel a weight lifted from you, and realize your " + player.breastDescript(0) + " have shrunk to " + player.breastCup(0) + "s.");
+							if (temp == 2) outputText("\n\nYou feel significantly lighter.  Looking down, you realize your breasts are MUCH smaller, down to " + player.breastCup(0) + "s.");
+							changes++;
+						}
+					}
+					//multiple
+					else {
+						//temp2 = amount changed
+						//temp3 = counter
+						temp = 0;
+						temp2 = 0;
+						temp3 = 0;
+						if (player.biggestTitSize() >= 1) outputText("\n");
+						while (temp3 < player.breastRows.length) {
+							if (player.breastRows[temp3].breastRating >= 1) {
+								player.breastRows[temp3].breastRating--;
+								temp2++;
+								outputText("\n");
+								//If this isn't the first change...
+								if (temp2 > 1) outputText("...and y");
+								else outputText("Y");
+								outputText("our " + player.breastDescript(temp3) + " shrink, dropping to " + player.breastCup(temp3) + "s.");
+							}
+							temp3++;
+						}
+						if (temp2 == 2) outputText("\nYou feel so much lighter after the change.");
+						if (temp2 == 3) outputText("\nWithout the extra weight you feel particularly limber.");
+						if (temp2 >= 4) outputText("\nIt feels as if the weight of the world has been lifted from your shoulders, or in this case, your chest.");
+						if (temp2 > 0) changes++;
+					}
+				}
+				//-Grow hips out if narrow.
+				if (player.hips.type < 4 && changes < changeLimit && rand(3) == 0) {
+					outputText("\n\nYour gait shifts slightly to accommodate your widening [hips]. The change is subtle, but they're definitely broader.");
+					player.hips.type++;
+					changes++;
+				}
+				//-Narrow hips if crazy wide
+				if (player.hips.type >= 5 && changes < changeLimit && rand(3) == 0) {
+					outputText("\n\nYour gait shifts inward, your [hips] narrowing significantly. They remain quite thick, but they're not as absurdly wide as before.");
+					player.hips.type--;
+					changes++;
+				}
+				//-Big booty
+				if (player.butt.type < 4 && changes < changeLimit && rand(3) == 0) {
+					player.butt.type++;
+					changes++;
+					outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your [armor] being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a " + buttDescript() + ".");
+				}
+				//-Narrow booty if crazy huge.
+				if (player.butt.type >= 5 && changes < changeLimit && rand(3) == 0) {
+					changes++;
+					player.butt.type--;
+					outputText("\n\nA feeling of tightness starts in your " + buttDescript() + ", increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your massive booty is shrinking into a more manageable size.");
+				}
+				
+				
+				if (player.tone < player.maxToneCap()) outputText(player.modTone(player.maxToneCap(), 15));
+				if (player.thickness < 30) outputText(player.modThickness(30, 5));
+				if (player.femininity > 10) player.modFem(10, 20);
+				
+				
+				//Kills vagina size (and eventually the whole vagina)
+				if (player.vaginas.length > 0) {
+                    if (player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_TIGHT) {
+                        //tighten that bitch up!
+                        outputText("\n\nYour [vagina] clenches up painfully as it tightens up, becoming smaller and tighter.");
+                        player.vaginas[0].vaginalLooseness--;
+                    } else {
+                        outputText("\n\nA tightness in your groin is the only warning you get before your <b>[vagina] disappears forever</b>!");
+                        //Goodbye womanhood!
+                        player.removeVagina(0, 1);
+                        if (player.cocks.length == 0) {
+                            outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
+                            player.createCock();
+                            player.cocks[0].cockLength = player.clitLength + 2;
+                            player.cocks[0].cockThickness = 1;
+                            player.cocks[0].cockType = CockTypesEnum.HUMAN;
+                            player.clitLength = .25;
+                        }
+                    }
+                    changes++;
+                }
+				
+				
+			}
 			if ((type == 0 || type == 1 || type == 2) && player.hasPlainSkinOnly() && player.skinTone != "green" && changes < changeLimit && rand(3) == 0) {
 				player.skinTone = "green";
 				outputText("\n\nYour skin tingles ever so slightly as you skin’s color changes before your eyes. As the tingling diminishes, you find that your skin has turned " + player.skinTone + ".");
@@ -15195,10 +15556,87 @@
             }
 			//Drider butt
             if (player.isDrider() && player.tailType == Tail.USHI_ONI_ONNA && changes < changeLimit && rand(3) == 0) {
-                outputText("\n\nYour spider body trembles, an intense pressure forming under the chitin, at the same time your plates fall to the ground and " + player.hairColor + " fur begins to sprout all over your abdomen. You wince in pain from the sudden growth, your drider legs chitin falls off as well,  getting thicker and harder turning into bone. After the torturous session, you look back to see <b>you now have an Ushi-"+player.mf("Oni","Onna")+" lower body with an internal skeleton and fur.</b>");
+                outputText("\n\nYour spider body trembles, an intense pressure forming under the chitin, at the same time your plates fall to the ground and " + player.hairColor + " fur begins to sprout all over your abdomen. You wince in pain from the sudden growth, your drider legs chitin falls off as well,  getting thicker and harder turning into bone. After the torturous session, you look back to see <b>you now have an Ushi-" + player.mf("Oni", "Onna") + " lower body with an internal skeleton and fur.</b>");
+				setLowerBody(LowerBody.USHI_ONI_ONNA);
+				changes++;
+            }
+            //Ushi oni/onna arms
+            if (player.arms.type == Arms.SPIDER && player.arms.type != Arms.USHI_ONI_ONNA && player.lowerBody == LowerBody.USHI_ONI_ONNA && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nYour onyx exoskeleton begins to itch. You begin to scratch at it incessantly until you can see " + player.hairColor + " fur begin to sprout from your arms from the biceps down, forming a diamond spiral where the fur meets skin. Your fingers begin to shake and sink into your hands as 4 huge strong claws grow in their places. <b>After the painful experience you see that you now have Ushi-"+player.mf("Oni","Onna")+" bestial arms.</b>");
+                setArmType(Arms.USHI_ONI_ONNA);
                 changes++;
             }
-			
+            //(Arms to carapace-covered arms)
+            if (!InCollection(Arms.GARGOYLE, Arms.SPIDER) && player.lowerBody == LowerBody.USHI_ONI_ONNA && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\n");
+                if (player.arms.type == Arms.HARPY || player.arms.type == Arms.HUMAN) {
+                    //(Bird pretext)
+                    if (player.arms.type == Arms.HARPY) outputText("The feathers covering your arms fall away, leaving them to return to a far more human appearance.  ");
+                    outputText("You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.");
+                } else {
+                    if (player.arms.type == Arms.BEE) outputText("The fizz covering your upper arms starting to fall down leaving only shiny black chitin clad arms.");
+                    else if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRAGON) outputText("The scales covering your upper arms starting to fall down leaving only shiny black chitin clad arms.");
+                    else if (player.arms.type == Arms.MANTIS) outputText("The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.");
+                    else outputText("You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.");
+                }
+                setArmType(Arms.SPIDER);
+                changes++;
+            }
+            //Ushi oni/onna fangs
+            if (player.faceType == Face.HUMAN && player.faceType != Face.USHI_ONI_ONNA && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nYou feel something under the skin around your eyes and in your mouth as they begin to burn, smoke coming out of it, from the bottom of your eyes, circling to the upper part. In your mouth your teeth make cracking noises as they remodel themselves. After the torturing experience you feel like <b>you've gained Ushi-"+player.mf("Oni","Onna")+" fangs,</b> going to a barrel with water you see your face now has a strange tattoo around your eyes.");
+                setFaceType(Face.USHI_ONI_ONNA);
+				if (player.tailRecharge < 5) player.tailRecharge = 5;
+                changes++;
+            }
+            if (player.faceType != Face.HUMAN && player.faceType != Face.USHI_ONI_ONNA && changes < changeLimit && rand(3) == 0) {
+                humanizeFace();
+                changes++;
+            }
+			//Ushi oni/onna horns
+			if (player.horns.type != Horns.USHI_ONI_ONNA && player.horns.type == Horns.NONE && player.faceType == Face.USHI_ONI_ONNA && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nFrom the back of your head you feel like something is pushing out of your skull and from the pressure a pair of horns begin to grow, continuing to get bigger and bigger, curving up along the sides of your head. You reach up to feel them and see they have a spiral shape, <b>you now have a Ushi-"+player.mf("Oni","Onna")+" pair of horns.</b>");
+                setHornType(Horns.USHI_ONI_ONNA, 2);
+                changes++;
+            }
+            if (changes < changeLimit && player.horns.count > 0 && player.horns.type != Horns.USHI_ONI_ONNA && rand(3) == 0) {
+                if (player.horns.type == Horns.ORCHID) outputText("\n\nYour orchid flowers crumble, falling apart");
+                else outputText("\n\nYour horns crumble, falling apart in large chunks");
+                outputText(" until they flake away to nothing.");
+                setHornType(Horns.NONE, 0);
+                changes++;
+            }
+			//eyes color change
+			if ((type == 0 || type == 1 || type == 2) && player.eyes.colour != "black" && changes < changeLimit && rand(2) == 0) {
+				player.eyes.colour = "black";
+				outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now black.");
+                changes++;
+			}
+			if ((type == 3 || type == 4 || type == 5) && player.eyes.colour != "red" && changes < changeLimit && rand(2) == 0) {
+				player.eyes.colour = "red";
+				outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now red.");
+                changes++;
+			}
+			if ((type == 6 || type == 7 || type == 8) && player.eyes.colour != "grey" && changes < changeLimit && rand(2) == 0) {
+				player.eyes.colour = "grey";
+				outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now grey.");
+                changes++;
+			}
+			if ((type == 9 || type == 10 || type == 11) && player.eyes.colour != "grey" && changes < changeLimit && rand(2) == 0) {
+				player.eyes.colour = "grey";
+				outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now grey.");
+                changes++;
+			}
+			if ((type == 12 || type == 13 || type == 14) && player.eyes.colour != "light blue" && changes < changeLimit && rand(2) == 0) {
+				player.eyes.colour = "light blue";
+				outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now light blue.");
+                changes++;
+			}
+			if ((type == 15 || type == 16 || type == 17) && player.eyes.colour != "yellow" && changes < changeLimit && rand(2) == 0) {
+				player.eyes.colour = "yellow";
+				outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now yellow.");
+                changes++;
+			}
 			
 		}
 

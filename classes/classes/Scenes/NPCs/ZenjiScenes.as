@@ -24,6 +24,8 @@ public function zenjiPerspectiveOnPlayer(changes:Number = 0):Number
 	return flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER];
 }
 
+//PART 1
+
 public function part1TrollEncounter():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
@@ -71,6 +73,7 @@ public function part1TrollEncounterLeave():void {
 public function part1TrollEncounterFight():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
+	flags[kFLAGS.ZENJI_PROGRESS] += 0.1;
 	outputText("You raise your [weapon] and adopt a fighting stance.\n\n");
 	outputText("\"<i>Are ya ready ta fight den? Good, show me whatcha got!</i>\"\n\n");
 	startCombat(new Zenji());
@@ -127,6 +130,7 @@ public function part1TrollEncounterFightZenjiDefeatedHuntHim2():void {
 }
 
 public function part1TrollEncounterFightTOTHEDEATHPCDefeated():void {
+	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
 	if (player.HP < player.minHP()) {
 		outputText("You fall to the ground, bruised and beaten, wounds too severe for you to walk off right now.\n\n");
@@ -387,34 +391,220 @@ public function part1TrollEncounterRewards():void {
 	inventory.takeItem(itype, camp.returnToCampUseOneHour);
 }
 
-public function part2TrollEncounter1():void {
+//PART 2
+
+public function part2TrollEncounterFirst():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	flags[kFLAGS.ZENJI_PROGRESS]++;
+	outputText("As you are maneuvering your way through the dense bog, careful not to let the wildlife best you at your adventure, you hear a familiar voice ring through the trees.\n\n");
+	outputText("\"<i>Ahaha! It’s you again! Welcome, welcome!</i>\" A male voice rings through the thicket and a familiar troll leaps down from the trees, \"<i>Me temo que no nos hemos presentado adecuadamente.</i>\"\n\n");
+	outputText("He holds a hand over his chest. \"<i>Me llamo Zenji, and who am I gifted ta meet again once more?</i>\" He says leaning close and raising an eyebrow toward you.\n\n");
+	outputText("You state your name.\n\n");
+	if (player.cor >= 50) outputText("enji gives you a sideways glance, almost as if he doesn't trust you. \"<i>If dat is de truth, it's nice ta meet you, [name]</i>\"\n\n");
+	else outputText("\"<i>Ahah, [name], so dat is your name, a pleasure ta get to really know ya.</i>\" He replies.\n\n");
+	outputText("\"<i>So, you've been around here a lot, I see, what really brings ya here? Why do you like de bog enough ta come here all de time?</i>\" He asks the question, seeking a response, but before you can even answer he's already cut you off. \"<i>It don' really matta, it's been a while since I had some good company, ya know? I mean, I know you know dat I am not de only troll out here, but dey don't come dis far from de outskirts of our land like I do.</i>\" ");
+	outputText("He states, \"<i>Dey're all a buncha cowards and liars. Afraid of what really is out der, afraid of competition, but I like a good challenge, ya see?</i>\"\n\n");
+	if (flags[kFLAGS.ZENJI_PROGRESS] != 5) {
+		outputText("\"<i>So I ask ya, I want ta fight ya, not to de death, or out of malice, but I want ta see how good you can put up fo' ya self. Ya in? Cause I won't ask for dis again.</i>\"\n\n");
+		menu();
+		addButton(1, "Fight", part2TrollEncounterFirstFight);
+		addButton(3, "Decline", part2TrollEncounterFirstDecline);
+	}
+	else {
+		flags[kFLAGS.ZENJI_PROGRESS]++;
+		outputText("Zenji smirks, \"<i>And ya really put up a fight last time, I can see the fire in ya eyes, so I want ta know if ye be willing ta face me again, or do ya want to practice some training wit me ta become stronga?</i>\"\n\n");
+		menu();
+		addButton(1, "Fight", part2TrollEncounterFirstFight);
+		addButton(2, "Train", part2TrollEncounterTrain);
+		addButton(3, "Leave", part2TrollEncounterLeave);
+	}
+}
+
+public function part2TrollEncounterFirstDecline():void {
+	flags[kFLAGS.ZENJI_PROGRESS] = -1;
+	outputText("\"<i>Ah, so be it den, I shall go somewhere else for a real challenge, all I see here are cowards.</i>\" Zenji leans back and climbs on top of a nearby tree, he quickly vanishes into the canopy where you can't see him anymore.\n\n");
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function part2TrollEncounterFirstFight():void {
+	flags[kFLAGS.ZENJI_PROGRESS] = 5;
+	outputText("If he really wants a fight, then so be it, who knows, it could be fun after all.\n\n");
+	startCombat(new Zenji());
+	doNext(playerMenu);
+}
+
+public function part2TrollEncounterFirstFightPCDefeated():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	zenjiPerspectiveOnPlayer(-12);
+	flags[kFLAGS.ZENJI_PROGRESS]++;
+	outputText("\"<i>Ahah... So... dat's why ya didn' want ta fight? Perhap I shouldn’ta fought so hard on ya... Forgive me, I just didn' expect someone out here in de bog to be so weak.</i>\" He shakes his head, \"<i>Ya be safe now, I don' want ya ta get hurt out dere.</i>\"\n\n");
+	cleanupAfterCombat();
+}
+
+public function part2TrollEncounterFirstFightZenjiDefeated():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	zenjiPerspectiveOnPlayer(12);
+	flags[kFLAGS.ZENJI_PROGRESS]++;
+	outputText("\"<i>Hah...</i>\" He chuckles, out of breath, \"<i>Ya put up a strong fight, I can see da fire in ya eyes. I tink we can train more later, but I need a moment...</i>\" Zenji sits down by a tree, pressing his back against it. \"<i>I just need a moment ta rest, ya go off now, I will still be here later.</i>\"\n\n");
+	outputText("You make your way back to camp as the troll takes a moment to rest.\n\n");
+	cleanupAfterCombat();
+}
+
+public function part2TrollEncounterRepeat():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("Zenji smirks, \"<i>And ya really put up a fight last time, I can see the fire in ya eyes, so I want ta know if ye be willing ta face me again, or do ya want to practice some training wit me ta become stronga?</i>\"\n\n");
+	menu();
+	addButton(1, "Fight", part2TrollEncounterRepeatFight);
+	addButton(2, "Train", part2TrollEncounterTrain);
+	addButton(3, "Leave", part2TrollEncounterLeave);
+}
+
+public function part2TrollEncounterLeave():void {
+	outputText("You tell Zenji that you are not in the mood for sticking around with him at the moment.\n\n");
+	outputText("\"<i>Eh? Then whatcha here for? Go on den, no reason to stay if ya don' wanta be here.</i>\"\n\n");
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function part2TrollEncounterRepeatFight():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("\"<i>Ahaha, I was hoping ya be willing to put up anoda fight, be ready now.</i>\"\n\n");
+	startCombat(new Zenji());
+	doNext(playerMenu);
+}
+
+public function part2TrollEncounterRepeatFightPCDefeated():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	if (player.HP < player.minHP()) {
+		if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] < 30) outputText("\"<i>[name]... Are you okay..? Would it help if I went easier? You don’ have ta fight me if you aren’t ready… Please, get some rest./i>\"\n\n");
+		else outputText("\"<i>Das all ya got?</i>\" Zenji shakes his head, \"<i>Ya gotta try harder dan dat next time. Ya be safe out dere now.</i>\"\n\n");
+		zenjiPerspectiveOnPlayer(-4);
+	}
+	else {
+		if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] < 30) outputText("Zenji blushes, noticing your apparent arousal, \"<i>[player]... Do… Do you like me…? ¿Es mi jale tan fuerte?</i>\"\n\n");
+		else outputText("\"<i>Uh… Geez, I’ve been told I am handsome by de chameleon girl, but...</i>\" Zenji shakes his head, \"<i>Yeah, Im gonna act like dis didn’t happen.</i>\"\n\n");
+		zenjiPerspectiveOnPlayer(-2);
+	}
+	cleanupAfterCombat();
+}
+
+public function part2TrollEncounterRepeatFightZenjiDefeated():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	zenjiPerspectiveOnPlayer(4);
+	outputText("\"<i>Hah... ya be strong I say, go on now, I just need a moment to rest before I see you again.</i>\"\n\n");
+	outputText("Zenji leans back against a tree and sits down, he rubs his hands along his tusks as if they were sore from combat.\n\n");
+	cleanupAfterCombat();
+}
+
+public function part2TrollEncounterTrain():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("\"<i>So ya want ta train wit me? All right, It’s been a while from da last time someone want ta train wit me. Whatcha wanna do?</i>\"\n\n");
+	menu();
+	addButton(1, "Strength", part2TrollEncounterTrainStrength);
+	addButton(2, "Toughness", part2TrollEncounterTrainToughness);
+	addButton(3, "Speed", part2TrollEncounterTrainSpeed);
+}
+
+public function part2TrollEncounterTrainStrength():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("Zenji leads you over to a pile of rocks of different shapes and sizes.\n\n");
+	outputText("\"<i>Ya may remember da challenge I put up against ya, it not be hard ta practice and become stronga, all you gotta do is prepare ya self for your next task and ta overcome it.</i>\" He guides you to a pull up bar that he presumably crafted himself.\n\n");
+	outputText("\"<i>Keep ya hand ova da bar or unda it, you pick, but I want ya to pull yourself ova the bar as many times as you can, try to go for as many as ya can.</i>\"\n\n");
+	outputText("You decide to try your hardest at doing as many pull-ups as you can, the Troll has his own bar that he practices on as well.\n\n");
+	if (player.fatigue > player.maxFatigue() * 0.5) {
+		outputText("You try to do as many pull-ups as you can, but your tired arms can't support you, and you are worn out after barely doing one.\n\n");
+		if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] < 30) outputText("\"<i>Are... are sure you’re okay? Dere's... You don' have ta train wit me if ya don' wanta. Dere's oda ways to...</i>\" Zenji shakes his head, \"<i>Ya should go home and get some rest, I'll tink of sometin lata.</i>\"\n\n");
+		else outputText("\"<i>Das all ya got? Maybe dere's an easier ting I got next time, ya should go home and rest for a moment so I can prepare for next time.</i>\"\n\n");
+		player.fatigue += Math.round(player.maxFatigue() * 0.2);
+		zenjiPerspectiveOnPlayer(-3);
+	}
+	else {
+		outputText("Some time passes and you can't do anymore, but you feel that this exercise was worth the effort and return to camp after dismissing yourself.\n\n");
+		if (player.str < (119 + (25 * player.newGamePlusMod()))) dynStats("str", 2, "scale", false);
+		player.fatigue += Math.round(player.maxFatigue() * 0.35);
+		zenjiPerspectiveOnPlayer(3);
+	}
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function part2TrollEncounterTrainToughness():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("Zenji leads you over to a pile of rocks of different shapes and sizes.\n\n");
+	outputText("\"<i>Ya may remember da challenge I put up against ya, toughness is not about being strong, it about endurance, and tenathity, how much can ya take before ya break?</i>\" He guides you to a pile of rocks.\n\n");
+	outputText("\"<i>Don't actually break yaself, dis is for training. All I want you ta do is start by stretching, ya don't want ta hurt yaself, do ya?</i>\" He extends his arm over himself and repeats with the other arm, stretching himself as far out as he can, you follow in his lead. \"<i>Now, follow my lead.</i>\"\n\n");
+	outputText("Zenji lowers himself to the ground and begins planking, \"<i>Simple, no? Keep dis stance until ya can't take it anymore, endure it, don't break unda de pressure.</i>\"\n\n");
+	if (player.fatigue > player.maxFatigue() * 0.5) {
+		outputText("You try to hold the plank for as long as you can, but you feel too weak to hold it much longer than nearly half a minute and collapse to the ground.\n\n");
+		if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] < 30) outputText("\"<i>Are... are sure you’re okay? Dere's... You don' have ta train wit me if ya don' wanta. Dere's oda ways to...</i>\" Zenji shakes his head, \"<i>Ya should go home and get some rest, I'll tink of sometin lata.</i>\"\n\n");
+		else outputText("\"<i>Dat’s all ya got? Maybe dere's an easier ting I got next time, ya should go home and rest for a moment so I can prepare for next time.</i>\"\n\n");
+		player.fatigue += Math.round(player.maxFatigue() * 0.2);
+		zenjiPerspectiveOnPlayer(-3);
+	}
+	else {
+		outputText("You begin planking, a few minutes pass and your arms start feeling weak, you figure you've been planking for enough time and relax. You feel that the exercise was worth the time and return to camp after dismissing yourself.\n\n");
+		if (player.tou < (119 + (25 * player.newGamePlusMod()))) dynStats("tou", 2, "scale", false);
+		player.fatigue += Math.round(player.maxFatigue() * 0.35);
+		zenjiPerspectiveOnPlayer(3);
+	}
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function part2TrollEncounterTrainSpeed():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("Zenji leads you to a clearing in the bog, it's a more open area, ideal for an exercise that requires space.\n\n");
+	outputText("\"<i>Ya may remember da challenge I put up against ya, it not be hard ta practice and work on ya speed, train and aim for da goal, each time a little quicka dan before.</i>\" He guides you to the edge of the clearing. \"<i>Ya see dat tree ova der? All you gotta do is make good speed from here ta der. Ya don't have ta go too fast, just ta make yaself feel da effort.</i>\"\n\n");
+	if (player.fatigue > player.maxFatigue() * 0.5) {
+		outputText("You start at a slow pace, sure that you can work up slowly from there.\n\n");
+		outputText("\"<i>Dat's ya top speed? Come on, ya can afford a little more dan dat.</i>\"\n\n");
+		outputText("You're unsure if you can go much faster in your fatigued state and tell him so.\n\n");
+		if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] < 30) outputText("\"<i>Are... are sure you’re okay? Dere's... You don' have ta train wit me if ya don' wanta. Dere's oda ways to...</i>\" Zenji shakes his head, \"<i>Ya should go home and get some rest, I'll tink of sometin lata.</i>\"\n\n");
+		else outputText("\"<i>Das all ya got? Maybe dere's an easier ting I got next time, ya should go home and rest for a moment so I can prepare for next time.</i>\"\n\n");
+		player.fatigue += Math.round(player.maxFatigue() * 0.2);
+		zenjiPerspectiveOnPlayer(-3);
+	}
+	else {
+		outputText("You begin at a brisk pace, jogging from the tree and back to Zenji.\n\n");
+		outputText("\"<i>Das a good start, try ta go fasta each time.</i>\"\n\n");
+		outputText("You jog back and forth with the troll, making sure to keep a good pace. You feel that the exercise was worth the time and return to camp after dismissing yourself.\n\n");
+		if (player.spe < (119 + (25 * player.newGamePlusMod()))) dynStats("spe", 2, "scale", false);
+		player.fatigue += Math.round(player.maxFatigue() * 0.35);
+		zenjiPerspectiveOnPlayer(3);
+	}
+	doNext(camp.returnToCampUseOneHour);
+}
+
+//ZENJI FOLLOWER
+
+public function followerZenji1():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
 	
 }
 
-public function part2TrollEncounter2():void {
+public function followerZenji2():void {
 	
 }
 
-public function part2TrollEncounter3():void {
+//ZENJI LOVER
+
+public function loverZenji1():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
 	
 }
 
-public function part2TrollEncounter4():void {
+public function loverZenji2():void {
 	
 }
-
-public function part2TrollEncounter5():void {
-	
-}
-
-public function part2TrollEncounter6():void {
-	
-}
-
-public function part2TrollEncounter7():void {
-	
-}
-
-		
 	}
 }

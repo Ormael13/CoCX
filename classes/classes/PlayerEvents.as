@@ -1151,6 +1151,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
+			else if (player.tailType != Tail.LIZARD && player.lowerBody != LowerBody.LIZARD && player.arms.type != Arms.LIZARD && player.findPerk(PerkLib.LizanRegeneration) >= 0 && player.perkv4(PerkLib.LizanRegeneration) == 0 && player.findPerk(PerkLib.LizanMarrow) < 0) { //Remove lizan regeneration perk if not meeting requirements && player.findPerk(PerkLib.HydraRegeneration) < 0
+				outputText("\nAll of sudden something change inside your body.  You think about a long while, until it dawned on you.  You can't feel that refreshing feeling inside your body anymore meaning for now just human rate of recovery from all kind of injuries.\n\n(<b>Lost Perk: Lizan Regeneration</b>)");
+				player.removePerk(PerkLib.LizanRegeneration);
+				needNext = true;
+			}
 			//Lustzerker perk
 			if ((player.tailType == Tail.SALAMANDER && player.lowerBody == LowerBody.SALAMANDER && player.arms.type == Arms.SALAMANDER) || (player.findPerk(PerkLib.Lustzerker) < 0 && player.findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)) { //Check for gain of lustzerker - requires legs, arms and tail
 				if (player.findPerk(PerkLib.Lustzerker) < 0) {
@@ -1159,14 +1164,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			else if (player.findPerk(PerkLib.Lustzerker) >= 0 && player.perkv4(PerkLib.Lustzerker) == 0 && player.findPerk(PerkLib.SalamanderAdrenalGlands) < 0) { //Remove lustzerker perk if not meeting requirements
+			else if (player.tailType != Tail.SALAMANDER && player.lowerBody != LowerBody.SALAMANDER && player.arms.type != Arms.SALAMANDER && player.findPerk(PerkLib.Lustzerker) >= 0 && player.perkv4(PerkLib.Lustzerker) == 0 && player.findPerk(PerkLib.SalamanderAdrenalGlands) < 0) { //Remove lustzerker perk if not meeting requirements
 				outputText("\nAll of sudden something change inside your body.  You think about a long while, until it dawned on you.  You can't feel that slight warm feeling inside your body anymore meaning for now no more lustzerking.\n\n(<b>Lost Perk: Lustzerker</b>)");
 				player.removePerk(PerkLib.Lustzerker);
-				needNext = true;
-			}
-			else if (player.findPerk(PerkLib.LizanRegeneration) >= 0 && player.perkv4(PerkLib.LizanRegeneration) == 0 && player.findPerk(PerkLib.LizanMarrow) < 0) { //Remove lizan regeneration perk if not meeting requirements && player.findPerk(PerkLib.HydraRegeneration) < 0
-				outputText("\nAll of sudden something change inside your body.  You think about a long while, until it dawned on you.  You can't feel that refreshing feeling inside your body anymore meaning for now just human rate of recovery from all kind of injuries.\n\n(<b>Lost Perk: Lizan Regeneration</b>)");
-				player.removePerk(PerkLib.LizanRegeneration);
 				needNext = true;
 			}
 			//Phantom Shooting perk
