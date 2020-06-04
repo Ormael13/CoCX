@@ -922,7 +922,7 @@ public class PlayerAppearance extends BaseContent {
 			else if (player.lowerBody == LowerBody.SCYLLA)
 				outputText("  Where your legs would normally start you have grown the body of an octopus, with " + num2Text(player.legCount) + " tentacle legs that sprout from your [hips].");
 			else if (player.lowerBody == LowerBody.KRAKEN)
-				outputText("  Where your legs would normally start you've grown the body of a giant squid, with " + num2Text(player.legCount) + " tentacles leg that sprout from your [hips], two of them larger than the others. Your tentacle reaches for up to "+player.tallness*2+" feet in length!");
+				outputText("  Where your legs would normally start you've grown the body of a giant squid, with " + num2Text(player.legCount) + " tentacles leg that sprout from your [hips], two of them larger than the others. Your tentacle reaches for up to "+Measurements.footInchOrMetres(player.tallness * 2)+" feet in length!");
 			else if (player.lowerBody == LowerBody.PLANT_FLOWER)
 				outputText("  Around your waist, the petals of a large pink orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the centre, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud.  While you don't technically have legs anymore, you can still move around on your " + num2Text(player.legCount) + " vine-like stamens.");
 			else if (player.lowerBody == LowerBody.MELKIE)
@@ -1087,7 +1087,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.lowerBody == LowerBody.NAGA)
 			outputText("  Below your waist your flesh is fused together into a very long snake-like tail.");
 		else if (player.lowerBody == LowerBody.FROSTWYRM){
-			outputText("  Below your waist your flesh is fused together into a very long snake-like tail easily "+player.tallness*4+" feet long. " +
+			outputText("  Below your waist your flesh is fused together into a very long snake-like tail easily "+Measurements.footInchOrMetres(player.tallness * 4)+" feet long. " +
 					"Your entire tail length up to the waist is covered with thick snow white fur but is far from vulnerable as underneath the fur is a whole layer of "+player.coatColor+" " +
 					"dragon scales harder than steel and capable of deflecting most weapon.");
 			if (player.tallness > 120)outputText("With a body so large it's no wonder your passage underground can cause tremors.");
