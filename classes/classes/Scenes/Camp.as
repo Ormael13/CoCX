@@ -2562,7 +2562,7 @@ private function SparrableNPCsMenu():void {
 				sleepRecovery(false);
 				return;
 			}
-			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && flags[kFLAGS.LUNA_FOLLOWER] < 9 && flags[kFLAGS.LUNA_JEALOUSY] >= 400 && player.gender > 0 && player.hasStatusEffect(StatusEffects.LunaWasWarned) && !player.hasStatusEffect(StatusEffects.LunaOff)) {
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && flags[kFLAGS.LUNA_JEALOUSY] >= 400 && player.gender > 0 && player.hasStatusEffect(StatusEffects.LunaWasWarned) && !player.hasStatusEffect(StatusEffects.LunaOff)) {
 				SceneLib.lunaFollower.fullMoonEvent();
 				sleepRecovery(false);
 				return;
