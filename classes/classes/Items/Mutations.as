@@ -5348,8 +5348,8 @@
             //Text go!
             clearOutput();
             if (type == 0) outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.");
-            if (type == 1) outputText("I know you expected text here but *cough* someone said she will write it...eventualy so till then there is nice placeholder text here.");
-            if (type == 2) outputText("");
+            if (type == 1) outputText("Nekomata to be done.");
+            if (type == 2) outputText("Cheshire to be done.");
             if (type == 3) outputText("As you close your eyes and savor the fruit you feel somewhat weird. Looking around you realise you unconsciously moved 10 feet from your original location. Well you have seen weirder things.");
             //Speed raises up to 75
             if (player.spe < 75 && rand(3) == 0 && changes < changeLimit) {
@@ -5581,10 +5581,11 @@
             if (player.ears.type != Ears.DISPLACER && player.tailType != Tail.GARGOYLE && type == 3 && rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nYour ears begin to prickle and burn as the skin tears and stretches migrating to the top of your head as they change into long wide, deep ears, perfect for catching any stray sound. Which becomes apparent when your hearing becomes far more clear than it has ever been. <b>Sound has become an entirely new experience now that you have displacer beast ears!</b>");
                 setEarType(Ears.DISPLACER);
+                player.coatColor = "midnight";
                 changes++;
             }
             //DA TAIL (IF ALREADY HAZ URZ)
-            if (player.tailType != Tail.CAT && player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA && player.ears.type == Ears.CAT && type != 1 && rand(3) == 0 && changes < changeLimit) {
+            if (player.tailType != Tail.CAT && player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA && (player.ears.type == Ears.CAT || player.ears.type == Ears.DISPLACER) && type != 1 && rand(3) == 0 && changes < changeLimit) {
                 if (player.tailType == Tail.NONE) {
                     choice = rand(3);
                     if (choice == 0) outputText("\n\nA pressure builds in your backside. You feel under your [armor] and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers, bursts out the back of your clothes and grows most of the way to the ground. A thick coat of fur springs up to cover your new tail. You instinctively keep adjusting it to improve your balance. <b>You now have a cat-tail.</b>");
@@ -5623,7 +5624,7 @@
                 setTailType(Tail.CAT, 2);
                 changes++;
             }
-            //Kasha tail
+            //Kasha tail interaction with nekomata ghastly fruit
             if (player.tailType == Tail.BURNING && player.tailCount == 1 && player.ears.type == Ears.CAT && type == 1 && rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nSomething weird is happening to your tail as the fire suddenly begins to flare to twice its volume. You screech, hiss and yowl in pain like a cat as it suddenly cracks and splits into <b>two fiery cat tails.</b> Feeling horny you proceed to stretch and lick your vagina to damp out your growing heat but it swiftly becomes obvious you will not be able to get rid of that scorching heat without a victim. ");
                 setTailType(Tail.TWINKASHA, 2);
@@ -5673,6 +5674,12 @@
                 setArmType(Arms.DISPLACER);
                 changes++;
             }
+            if (player.arms.type == Arms.CAT && type == 1 && player.rearBody.type != RearBody.LION_MANE && player.tailType == Tail.CAT && player.tailCount == 2 && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nYou suddenly feel hair growing all around your neck at a crazy pace. It soon get so thick it almost looks as if you're wearing a [haircolor] fur collar. <b>You now have a full lion mane around your neck.</b>");
+                setRearBody(RearBody.LION_MANE);
+                changes++;
+            }
+            //Displacer beast tentacles
             if (player.rearBody.type != RearBody.DISPLACER_TENTACLES && type == 3 && rand(3) == 0 && changes < changeLimit && player.arms.type == Arms.DISPLACER) {
                 if (player.rearBody.type != RearBody.NONE) outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger in it.  After a moment the pain passes, though your back is back to what you looked like when you entered this realm! ");
                 else outputText("\n\n");
@@ -5680,38 +5687,34 @@
                 setRearBody(RearBody.DISPLACER_TENTACLES);
                 changes++;
             }
-            if (player.arms.type == Arms.CAT && type == 1 && player.rearBody.type != RearBody.LION_MANE && player.tailType == Tail.CAT && player.tailCount == 2 && changes < changeLimit && rand(3) == 0) {
-                outputText("\n\nYou suddenly feel hair growing all around your neck at a crazy pace. It soon get so thick it almost looks as if you're wearing a [haircolor] fur collar. <b>You now have a full lion mane around your neck.</b>");
-                setRearBody(RearBody.LION_MANE);
+            //CAT-FACE!
+            if ((player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LION) && rand(3) == 0 && changes < changeLimit && type != 1 && (player.faceType != Face.CAT || player.faceType != Face.CAT_CANINES || player.faceType != Face.CHESHIRE || player.faceType != Face.CHESHIRE_SMILE) && type != 3) {
+                if (player.faceType != Face.CAT_CANINES) {
+                    outputText("\n\n");
+                    if (player.faceType != Face.HUMAN) outputText("Your face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
+                    outputText("You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You purr at the change it gives you a cute look. <b>Your mouth is now filled with Cat-like canines.</b>");
+                    setFaceType(Face.CAT_CANINES);
+                } else {
+                    choice = rand(3);
+                    if (choice == 0) outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different. You find a puddle to view your reflection and discover <b>your face is now a cross between human and feline features.</b>");
+                    else if (choice == 1) outputText("\n\nMind-numbing pain courses through you as you feel your facial bones rearranging.  You clutch at your face in agony as your skin crawls and shifts, your visage reshaping to replace your facial characteristics with those of a feline. <b>You now have an anthropomorphic cat-face.</b>");
+                    else outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something else. <b>Your facial features rearrange to take on many feline aspects.</b>");
+                    setFaceType(Face.CAT);
+                }
+                changes++;
+            }
+            if ((player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LION) && rand(3) == 0 && changes < changeLimit && player.faceType != Face.CAT_CANINES && (type == 1 || type == 3)) {
+                //This scenario exist only for cat tf that have no furry version!
+                outputText("\n\n");
+                if (player.faceType != Face.HUMAN) outputText("Your face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
+                outputText("You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You purr at the change it gives you a cute look. <b>Your mouth is now filled with Cat-like canines.</b>");
+                setFaceType(Face.CAT_CANINES);
                 changes++;
             }
             if ((player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES) && type == 2 && rand(3) == 0 && changes < changeLimit && player.faceType != Face.CHESHIRE && player.faceType != Face.CHESHIRE_SMILE) {
                 outputText("\n\nYou suddenly feel like smiling. Why actually look so serious? Everything is easier if you take it with a smile and a laughter. Perhaps it's just you taking on that mentality or it's that weird wonderfruit you took but now you feel you could smile forever showing that wide grin of yours. <b>You now have a cheshire smile.</b>");
                 if (player.faceType == Face.CAT) setFaceType(Face.CHESHIRE);
                 if (player.faceType == Face.CAT_CANINES) setFaceType(Face.CHESHIRE_SMILE);
-                changes++;
-            }
-            //CAT-FACE!
-            if ((player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LION) && rand(3) == 0 && changes < changeLimit && type != 1 && (player.faceType != Face.CAT || player.faceType != Face.CAT_CANINES || player.faceType != Face.CHESHIRE || player.faceType != Face.CHESHIRE_SMILE)) {
-                if (player.faceType != Face.CAT) {
-                    choice = rand(3);
-                    if (choice == 0) outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different. You find a puddle to view your reflection and discover <b>your face is now a cross between human and feline features.</b>");
-                    else if (choice == 1) outputText("\n\nMind-numbing pain courses through you as you feel your facial bones rearranging.  You clutch at your face in agony as your skin crawls and shifts, your visage reshaping to replace your facial characteristics with those of a feline. <b>You now have an anthropomorphic cat-face.</b>");
-                    else outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something else. <b>Your facial features rearrange to take on many feline aspects.</b>");
-                    setFaceType(Face.CAT);
-                } else {
-                    outputText("\n\n");
-                    if (player.faceType != Face.HUMAN) outputText("Your face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
-                    outputText("You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You purr at the change it gives you a cute look. <b>Your mouth is now filled with Cat-like canines.</b>");
-                    setFaceType(Face.CAT_CANINES);
-                }
-                changes++;
-            }
-            if (player.lowerBody == LowerBody.CAT && rand(3) == 0 && changes < changeLimit && type == 1 && player.faceType != Face.CAT_CANINES) {
-                outputText("\n\n");
-                if (player.faceType != Face.HUMAN) outputText("Your face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
-                outputText("You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You purr at the change it gives you a cute look. <b>Your mouth is now filled with Cat-like canines.</b>");
-                setFaceType(Face.CAT_CANINES);
                 changes++;
             }
             //CAT TOUNGE CUZ WHY NOT?

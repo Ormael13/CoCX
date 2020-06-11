@@ -4899,7 +4899,7 @@ use namespace CoC;
 				displacerbeastCounter += 2;
 			if (hasFur() || hasPartialCoat(Skin.FUR))
 				displacerbeastCounter++;
-			if (coatColor == "black" || coatColor == "midnight black")
+			if (coatColor == "black" || coatColor == "midnight black" || coatColor == "midnight")
 				displacerbeastCounter++;
 			if (skinTone == "dark grey")
 				displacerbeastCounter++;

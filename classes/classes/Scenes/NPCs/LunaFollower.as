@@ -101,7 +101,7 @@ package classes.Scenes.NPCs
 			addButton(3, "Camp", talkMenuLunaCampThoughts);
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) addButton(4, "Lycanthropy", talkMenuLunaLycanthropy);
 			else addButtonDisabled(4, "???", "You need to know her better for this.");
-			if (player.hasStatusEffect(StatusEffects.LunaWasWarned))addButton(5, "Camp", talkMenuLunaStopJealousy);
+			if (player.statusEffectv1(StatusEffects.LunaWasCaugh) >= 3)addButton(7, "Accuse", talkMenuLunaStopJealousy);
 			if ((flags[kFLAGS.LUNA_FOLLOWER] == 13 || flags[kFLAGS.LUNA_FOLLOWER] == 14) && !player.hasPerk(PerkLib.Lycanthropy) && !player.hasPerk(PerkLib.LycanthropyDormant)) addButton(9, "Bite Me", talkMenuBiteMe);
 			addButton(14, "Back", mainLunaMenu);
 		}
@@ -161,13 +161,14 @@ package classes.Scenes.NPCs
 		public function talkMenuLunaStopJealousy():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
-			outputText("Luna loses all color the moment she sees that expression on your face but still attempt to start the conversation.\n\n\"<i>Oh uh is something on the good " + player.mf("master","mistress") + " mind?\"\n\n" +
+			outputText("Luna loses all color the moment she sees that expression on your face but still attempt to start the conversation.\n\n\"<i>Oh uh is something on the good " + player.mf("master","mistress") + " mind?</i>\"\n\n" +
 					"Hell that there is something, you know everything about how she's been sneakily making tons of trouble around camp in an attempt to stop anyone else from talking to you and you are not exactly happy about it.\n\n" +
 					"\"<i>But master/mistress, you have been ignoring me for weeks. I labor for you freely only wishing for the slightest acknowledgement yet you gave me none.</i>");
-			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) outputText("<i>What is my unconditional love even worth to you? Am I but an object free for you to dispose of once you tire of it? What of my feelings as a person?</i>");
-			outputText("\"\n\nShe is kind of right come to think of it, you definitely have been neglecting her and this was her way of desperately attempting to draw attention to herself. " +
+			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) outputText("\"<i>What is my unconditional love even worth to you? Am I but an object free for you to dispose of once you tire of it? What of my feelings as a person?</i>\"");
+			outputText("\n\nShe is kind of right come to think of it, you definitely have been neglecting her and this was her way of desperately attempting to draw attention to herself. " +
 					"You promise Luna that you will be more considerate of her from now on. This said she has to stop these acts of passive aggression here and now. She winces her teeth but nods.");
 			player.createStatusEffect(StatusEffects.LunaWasWarned, 0,0,0,0);
+			player.removeStatusEffect(StatusEffects.LunaWasCaugh);
 			lunaJealousy(-100);
 			lunaAffection(2);
 			doNext(camp.returnToCampUseOneHour);
@@ -415,11 +416,12 @@ package classes.Scenes.NPCs
 		public function fullMoonEvent():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
-			if (flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 8) {
-				if (!player.hasStatusEffect(StatusEffects.LunaWasWarned)){
-					outputText("Luna is smirking, a green glint in her eyes.\n\n");
+			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) {
+				if (player.hasStatusEffect(StatusEffects.LunaWasWarned)){
+					outputText("You would close your eyes and sleep, but the sound of footsteps alerts you to the fact that you are not alone unable to find sleep tonight. Luna right above you already naked and smirking, a green glint dancing in her eyes.\n\n");
 					outputText("\"<i>Sorry [name] I can’t hold myself anymore.</i>\"\n\n");
-					outputText("Oh no it's happening again! Luna is totally going to jump you, you can already see her beginning to transform as she prepare to make a second attempt.\n\n");
+					outputText("Oh no it's happening again! Luna is totally going to try and jump you, you can already see her beginning to transform as she prepare to force herself upon you.\n\n");
+					outputText("This is quickly going to get out of hand. How will you answer to her advances?\n\n");
 				}
 				else{
 					outputText("You would close your eyes and sleep, but the sound of footsteps alerts you to the fact that Luna has other plans tonight, " +
@@ -627,6 +629,8 @@ package classes.Scenes.NPCs
 			doNext(sexMenuVaginal);
 		}
 		public function sexMenuVaginal():void {
+			spriteSelect(SpriteDb.s_luna_maid);
+			clearOutput();
 			if (player.hasCock()) {
 				outputText("Your cock begins to rise as your thoughts become increasingly carnal, your desire for her now taking over your thoughts. Luna smiles at your reaction before mounting you, grabbing your cock in her soft grip and stroking it calmly. She leans in for another kiss and this time you take the lead, breaking through her lips and dominating her tongue relating your want for her.\n\n");
 				outputText("She aligns your [cock] with her moist cunt and sinks down onto it. She wraps both her arms around your neck and pulls you in, moaning as you stretch her walls. Your hips connect and Luna savors the feeling of being filled by you before she raises her hips once more, slowly bringing her ass down again, a soft clap from the contact is made. ");
