@@ -9586,6 +9586,14 @@ use namespace CoC;
 					maxSen += 15;
 				}
 			}
+			//multi effects or perks
+			if (hasPerk(PerkLib.ZenjisInfluence3)) {
+				maxStr += Math.round(maxStr * 0.1);
+				maxTou += Math.round(maxTou * 0.1);
+				maxSpe += Math.round(maxSpe * 0.1);
+				maxInt += Math.round(maxInt * 0.1);
+				maxWis += Math.round(maxWis * 0.1);
+			}
 			End("Player","getAllMaxStats.effects");
 			End("Player","getAllMaxStats");
 			maxStr = Math.max(maxStr,1);
@@ -10037,6 +10045,11 @@ use namespace CoC;
 			if (findPerk(PerkLib.EpicGolemMaker3rdCircle) >= 0) {
 				maxIntCap1 += 30;
 				maxWisCap1 += 30;
+			}
+			if (findPerk(PerkLib.ZenjisInfluence1) >= 0) {
+				maxStrCap1 += (25 * newGamePlusMod);
+				maxTouCap1 += (25 * newGamePlusMod);
+				maxSpeCap1 += (25 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.LimitBreakerFlesh1stStage) >= 0) {
 				maxStrCap1 += (10 * newGamePlusMod);

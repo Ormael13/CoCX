@@ -88,7 +88,7 @@ package classes.Scenes
 			outputText("-New P. Special: Cancer Grab. Req. to have lower body of Cancer. Type of grapple move like naga coiling.\n");
 			outputText("-New P. Special: Dig. Req. to have lower body of Cancer, Centipede or Frost Wyrm. Dig underground to escape your opponent attack for a while. (Liadri)\n");
 			outputText("-New P. Special: Grab. Req. lower body of cancer. Type of grapple move. Grab your opponents with your pincers, then proceed to crush them. (Liadri)\n");
-			outputText("-PC would gain 10 stat poins per level up instead of 5. Below lvl 7 it will increase form 10 stat points to 20 per lvl-up.\n");
+			outputText("-PC would gain 10 stat poins per level up instead of 5. Below lvl 7 it will increase from 10 stat points to 20 per lvl-up.\n");
 			outputText("-Hex magic spells gotten dmg calculation changed. (Liadri)\n");
 			outputText("-Magic menu have be seperated into groups: White, Black, Grey and Hex. (Liadri)\n");
 			outputText("-Luna can be caugh after she disable 3 npc's. It would add then option to her interactions to confront her about it. (Liadri)\n");
@@ -112,11 +112,11 @@ package classes.Scenes
 			outputText("-New codex entry added to the game: Trolls.\n");
 			outputText("-When exploring Bog PC can meet male troll. There is few possible options to end this encounter from paying gems to fight him. After that he would be repeatable encounter. First 4 enounters are conisdered part1 of his content and all after those part 2.\n");
 			outputText("-If picking to Hunt Him during post figt of part 1 it's posisble to fight him without him holding back. Winning would allow to take trophy for beating him (only if PC pick any other option to leave him). Trophy is worth 4k gems.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-After reaching 100 score on his view of PC it open option to invite him to camp as Follower. And it would lock this option so even lowering this value to 0% will still give only option to bring him as follower.\n");
+			//outputText("-When in camp as follower Zenji have following interaction optiona: Appearance, Training, Spar, Talk, Sex and dealng with corrupted glades.\n");
+			outputText("-New event perk: Zenji's influence 1. Gained by training with Zenji 5+ times. Effects: Increases strength, toughness & speed cap by 25 (x NG tier).\n");
+			outputText("-New event perk: Zenji's influence 2. Gained by training with Zenji 15+ times. Effects: Increases maximum mana and fatigue by 10%.\n");
+			outputText("-New event perk: Zenji's influence 3. Gained by training with Zenji 30+ times. Effects: Increases strength, toughness, speed, wisdom & intelligence cap by 10%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -612,6 +612,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const YetiScarf:StatusEffectType                      = mk("Yeti Scarf");
 		public static const YukiOnnaHairpin:StatusEffectType                = mk("Yuki Onna Hairpin");
 		public static const YukiOnnaKimono:StatusEffectType                 = mk("Yuki Onna Kimono");
+		public static const ZenjiTrainingsCounters1:StatusEffectType        = mk("Zenji Trainings Counters 1");
+		public static const ZenjiTrainingsCounters2:StatusEffectType        = mk("Zenji Trainings Counters 2");
 		
 		//Old status plots. DEPRECATED, DO NOT USE. Currently cannot be removed without breaking existing saves.
 		public static const DungeonShutDown:StatusEffectType         = mk("DungeonShutDown");

@@ -799,6 +799,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) > 6) player.addStatusValue(StatusEffects.AdventureGuildQuests3, 2, -3);
 				}
 				if (flags[kFLAGS.AURORA_LVL] > 0.3 && flags[kFLAGS.AURORA_LVL] < 0.7) flags[kFLAGS.AURORA_LVL] += 0.05;
+				//Zenji training conuters
+				if (player.hasStatusEffect(StatusEffects.ZenjiTrainingsCounters1)) {
+					if (player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters1) > 0) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters1, 1, -player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters1));
+					if (player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters1) > 0) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters1, 2, -player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters1));
+					if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters1) > 0) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters1, 3, -player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters1));
+				}
+				if (player.hasStatusEffect(StatusEffects.ZenjiTrainingsCounters2)) {
+					if (player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters2) > 0) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters2, 1, -player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters2));
+					if (player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2) > 0) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters2, 2, -player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2));
+				}
 
 
 				//Racial perk daily effect Area

@@ -9,6 +9,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
+import coc.view.ButtonDataList;
 	
 	public class ZenjiScenes extends NPCAwareContent
 	{
@@ -18,11 +19,13 @@ import classes.display.SpriteDb;
 	
 public function zenjiPerspectiveOnPlayer(changes:Number = 0):Number
 {
-	flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] += changes;
-	if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] > 99) flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] = 99;
+	if (flags[kFLAGS.ZENJI_PROGRESS] < 7) flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] += changes;
+	if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] > 100) flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] = 100;
 	if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] < 1) flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] = 1;
 	return flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER];
 }
+
+private var spellBookButtons:ButtonDataList = new ButtonDataList();
 
 //PART 1
 
@@ -585,14 +588,233 @@ public function part2TrollEncounterTrainSpeed():void {
 
 //ZENJI FOLLOWER
 
-public function followerZenji1():void {
+public function followerZenjiFirstTimeOffer():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("As you are wandering through the dense bog, a familiar voice rings through the trees, you immediately recognize it as Zenji the troll as he jumps down from a tree.\n\n");
+	outputText("\"<i>Ahahah! It is you again! Welcome friend! I hoped ta see ya again, ya be a worthy ally in training and fighting.</i>\" He exclaims. \"<i>Listen, I was wondering if you are willing to let me accompany ya back in ya home? Dis bog... not really a good place ta keep home, all dem phouka keep messing wit ma stuff no matter how many times I give 'em a lesson. I will make it worth ya while, I will show you a special technique for training yaself even betta.</i>\"\n\n");
+	outputText("You think for a moment, do you want to move the troll to your camp to have easier access to your trainer?\n\n");
+	menu();
+	addButton(1, "Yes", followerZenjiOfferYes);
+	addButton(3, "No", followerZenjiOfferNo);
+}
+
+public function followerZenjiRepeatOffer():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("\"<i>[name] Good ta see ya... Did you want me to join your camp... or just here ta train?</i>\"\n\n");
+	menu();
+	addButton(1, "Fight", part2TrollEncounterRepeatFight);
+	addButton(2, "Train", part2TrollEncounterTrain);
+	addButton(3, "Leave", part2TrollEncounterLeave);
+	addButton(7, "Yes", followerZenjiOfferYes);
+}
+
+public function followerZenjiOfferNo():void {
+	outputText("You tell Zenji that you don't want him to hang out around your camp.\n\n");
+	outputText("\"<i>Ah, dat is a shame, if ya don't want ta, I undastand, I still got all dis land to maself at least.</i>\"\n\n");
+	flags[kFLAGS.ZENJI_PROGRESS]++;
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function followerZenjiOfferYes():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("You tell Zenji that you would enjoy having him around your camp.\n\n");
+	outputText("\"<i>Ahaha! Da's great, Lead da way, I’ll be right behind ya.</i>\"\n\n");
+	outputText("Upon entering your camp, Zenji looks around curiously, \"<i>Some place ya got here, I'll be settled on ma own, don't worry.</i>\"\n\n");
+	outputText("<b>Zenji has joined you as a follower.</b>\n\n");
+	player.createStatusEffect(StatusEffects.ZenjiTrainingsCounters1,0,0,0,0);
+	player.createStatusEffect(StatusEffects.ZenjiTrainingsCounters2,0,0,0,0);
+	flags[kFLAGS.ZENJI_PROGRESS] = 8;
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function followerZenjiMainCampMenu():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("You approach Zenji, he looks up at you while you approach, raising an eyebrow.\n\n");
+	menu();
+	addButton(0, "Appearance", followerZenjiMainCampMenuAppearance).hint("Examine Zenji.");
+	addButton(1, "Training", followerZenjiMainCampMenuTraining).hint("Train with Zenji to increase your stats.");
+	//fight or spar
+	
+	addButton(14, "Leave", followerZenjiMainCampMenuLeave);
+}
+
+public function followerZenjiMainCampMenuAppearance():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("Zenji is a troll to your knowledge, at least that’s what he calls himself.\n\n");
+	outputText("He is 8’2”, covered head to toe in green fur, the top of his head is crowned with a shaggy, pale green mohawk. All things considered, his face is rather handsome, with good symmetry, strong brows and a chiseled jawline. He has deep set eyes with ashen green irises. His nose is pronounced and elongated. As your eyes wander down his face, you can see 2 ivory tusks protrude from his mouth, each about 7 inches long, his left tusk is covered in a series of rings hanging from the tip to the midsection. ");
+	outputText("Between those tusks his lower two canines stick out slightly past his lips. Darker colored hair wraps around his mouth, emphasizing the scruffy beard that covers his lower face. His beard is fairly dense, you could easily get your fingers lost beneath it. His ears are long and pointed, similar to that of an elf, fuzzy like the rest of him.\n\n");
+	outputText("Zenji’s physique is imposing, chiseled and very muscular. He wears a beaded necklace over his neck. He has broad shoulders with long, very muscular and toned arms that extend past his waist. His arms are human shaped with large four fingered hands. His elbows are covered in darker colored hair that hangs out slightly. He wears fur bracers that cover his wrists. He has 2 manly pecs with a tuft of hair sticking out between them. His midriff is covered in fuzz, hiding his abs.\n\n");
+	outputText("He currently is only wearing a loincloth over his waist, tied by an animal fur pelt as his fur covers his entire body. Sprouting from the base of his spine is a long, fuzzy tail at least 3 feet long with a large tuft of fur at the tip. Beneath that, he has 2 long, muscular legs that ends in four toed, furry feet.\n\n");
+	outputText("Zenji peers at you while you examine him.\n\n");
+	menu();
+	addButton(14, "Back", followerZenjiMainCampMenu);
+}
+
+public function followerZenjiMainCampMenuTraining():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("Zenji is a troll to your knowledge, at least that’s what he calls himself.\n\n");
+	if (player.fatigue >= player.maxFatigue() * .75) {
+		outputText("Zenji shakes his head, \"<i>[name], go get some rest, ya look exhausted, and it’s neva a good idea ta hurt yaself. Even a trained mind will struggle ta concentrate when tired.</i>\"\n\n");
+		menu();
+		addButton(14, "Back", followerZenjiMainCampMenu);
+	}
+	else {
+		outputText("Zenji nods, \"<i>Glad ta help, [name]. Just tell me whatcha wanta do.</i>\"\n\n");
+		menu();
+		addButton(0, "Strength", followerZenjiMainCampMenuTrainingStrength);
+		addButton(1, "Toughness", followerZenjiMainCampMenuTrainingToughness);
+		addButton(2, "Speed", followerZenjiMainCampMenuTrainingSpeed);
+		addButton(3, "Intelligence", followerZenjiMainCampMenuTrainingIntelligence);
+		addButton(4, "Wisdom", followerZenjiMainCampMenuTrainingWisdom);
+	}
+}
+
+public function followerZenjiMainCampMenuTrainingStrength():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("You tell Zenji that you want his help to become stronger.\n\n");
+	outputText("\"<i>Strength is mostly about physical power, but not all power is from de muscles. If you can’t carry your own weight, den you wont be able to surmount de weight of anotha task.</i>\" Zenji says as he leads you over to a pile of rocks of different shapes and sizes.\n\n");
+	outputText("\"<i>Ya may remember da challenge I put up against ya. It wont be hard ta practice and become stronga. All you gotta do is prepare yaself for your next task and ta overcome it.</i>\" He guides you to a pull up bar that he presumably crafted himself.\n\n");
+	outputText("\"<i>Keep ya hand ova da bar or unda it, you pick, but I want ya to pull yourself ova the bar as many times as you can, try to go for as many as ya can.</i>\"\n\n");
+	outputText("You decide to try your hardest at doing as many pull-ups as you can, the Troll has his own bar that he practices on as well, he helps guide you on good form as he trains with you.\n\n");
+	outputText("Once you’re done, you feel that this exercise was worth the effort. You thank Zenji before dismissing yourself.\n\n");
+	if (player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters1) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters1, 1, 1);
+	dynStats("str", (4 - player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters1)), "scale", false);
+	player.fatigue += Math.round(player.maxFatigue() * 0.2);
+	followerZenjiMainCampMenuTrainingPerks();
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function followerZenjiMainCampMenuTrainingToughness():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("You tell Zenji that you want his help to become tougher.\n\n");
+	outputText("\"<i>Toughness is mostly about endurance. To withstand and remain, othawise you will break when put unda stress.</i>\" Zenji says as he leads you over to a pile of rocks of different shapes and sizes.\n\n");
+	outputText("\"<i>Ya may remember da challenge I put up against ya, toughness is not about being strong, it about endurance, and tenathity, how much can ya take before ya break?</i>\" Zenji says as he guides you to a pile of rocks.\n\n");
+	outputText("\"<i>Don't actually break yaself, dis is for training. All I want you ta do is start by stretching, ya don't want ta hurt yaself, do ya?</i>\" He extends his arm over himself and repeats with the other arm, stretching himself as far out as he can, you follow in his lead. \"<i>Now, follow my lead.</i>\"\n\n");
+	outputText("Zenji lowers himself to the ground and begins planking, \"<i>Simple, no? Keep dis stance until ya can't take it anymore, endure it, don't break unda de pressure.</i>\"\n\n");
+	outputText("You begin planking, a few minutes pass and your arms start feeling weak. Zenji helps you and planks beside you, teaching you about endurance, form and technique.\n\n");
+	outputText("Once you’re done you feel that the exercise was worth the time. You thank Zenji before dismissing yourself.\n\n");
+	if (player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters1) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters1, 2, 1);
+	dynStats("tou", (4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters1)), "scale", false);
+	player.fatigue += Math.round(player.maxFatigue() * 0.2);
+	followerZenjiMainCampMenuTrainingPerks();
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function followerZenjiMainCampMenuTrainingSpeed():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("You tell Zenji that you want his help to become quicker.\n\n");
+	outputText("\"<i>Speed is mostly about de ability ta remain quick on ya feet, agile and ready ta make ya next move.</i>\" Zenji says as he leads you to a clearing in the camp, it's a more open area, ideal for an exercise that requires space.\n\n");
+	outputText("\"<i>Ya may remember da challenge I put up against ya, it not be hard ta practice and work on ya speed, train and aim for da goal, each time a little quicka dan before.</i>\" He guides you to the edge of the clearing. \"<i>Ya see dat tree ova der? All you gotta do is make good speed from here ta der. Ya don't have ta go too fast, just ta make yaself feel da effort.</i>\"\n\n");
+	outputText("You begin at a brisk pace, jogging from the tree and back to Zenji.\n\n");
+	outputText("\"<i>Dats a good start, try ta go fasta each time.</i>\"\n\n");
+	outputText("You jog back and forth with the troll, making sure to keep a good pace. Zenji soon joins you and instructs you on good form and technique.\n\n");
+	outputText("Once you’re done, you feel that the exercise was worth the time. You thank Zenji before dismissing yourself.\n\n");
+	if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters1) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters1, 3, 1);
+	dynStats("spe", (4 - player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters1)), "scale", false);
+	player.fatigue += Math.round(player.maxFatigue() * 0.2);
+	followerZenjiMainCampMenuTrainingPerks();
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function followerZenjiMainCampMenuTrainingIntelligence():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("You tell Zenji that you want his help to become smarter.\n\n");
+	outputText("Zenji gestures for you to sit down with him. \"<i>Intelligence is about sharpness of mind, de ability ta focus ya efforts into a single or many tasks and your ability ta do dem.</i>\"\n\n");
+	outputText("Zenji grabs a flat rock from nearby. \"<i>Keep dis on ya head, don’t let it fall.</i>\"\n\n");
+	outputText("You follow his instructions and place the flat rock on your head, shifting around slightly until you feel it’s stable on the top of your head.\n\n");
+	outputText("\"<i>A smart person knows deir limits and what dey’re capable of. But dey also know dat it may not be easy ta do everyting. Consider what needs ta be done first, but know what you are capable of doing.</i>\"\n\n");
+	outputText("Zenji stands up, but he gestures for you to remain seated. After a moment he returns with a book. You can’t say you actively see him read, but he must have some way he’s gotten his intelligence.\n\n");
+	outputText("\"<i>I wantcha ta read dis, not de entire ting, just dis page.</i>\" He says as he opens the book for you.\n\n");
+	outputText("You being looking over the page, it’s about somatic components for casting spells and ways to strengthen spells as you cast them. As you read the page, you almost forget about the rock you’re trying to support. You quickly catch yourself and keep it up before it slips down. Is this what he was talking about with knowing your limits?\n\n");
+	outputText("\"<i>Now, I want ya ta focus your mind, try ta focus some magic into your hands.</i>\"\n\n");
+	outputText("You focus your efforts into conjuring a spell with some help from the book all while keeping the stone balanced on top of your head. You take a deep breath, but it’s not terribly difficult, even if you have to constantly shift your head to keep the stone steady. The magic you’re trying to conjure is unstable as you’re trying to focus your efforts in keeping the stone stead.\n\n");
+	outputText("\"<i>Focus, [name], ya gotta keep dese tasks steady and unda control.</i>\"\n\n");
+	outputText("Once you feel the rhythm and find a good balance with the stone, the magic you’ve conjured steadies and Zenji applauds.\n\n");
+	outputText("\"<i>Strength of mind requires balance and strategy. Know your limits and how much you are capable of.</i>\"\n\n");
+	if (player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters2) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters2, 1, 1);
+	dynStats("inte", (4 - player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters2)), "scale", false);
+	player.fatigue += Math.round(player.maxFatigue() * 0.2);
+	followerZenjiMainCampMenuTrainingPerks();
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function followerZenjiMainCampMenuTrainingWisdom():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("You tell Zenji that you want his help to become wiser.\n\n");
+	outputText("Zenji gestures for you to sit down with him. \"<i>Wisdom is about de application of knowledge and de ability ta keep ya senses intact. A smart person is not always a wise person. If ya don’t know how ta use de smarts ya have, den it will not be of good use ta you.</i>\"\n\n");
+	outputText("Zenji holds out a small ball of energy within his hands. \"<i>Now, I may not be de best magic user, or use it very often, but magic and mental strength are closely related.</i>\"\n\n");
+	outputText("Zenji instructs you to hold out your hand as well and you follow his teachings.\n\n");
+	outputText("\"<i>Now concentrate, [player], Tink about de power ya have witin yaself."+(spellBookButtons.length < 3 ? " I know ya have some magic witin yaself, even if ya don’ know it.":"")+"</i>\"\n\n");
+	outputText("You focus your efforts into conjuring a ball of magic energy within your palm.\n\n");
+	outputText("\"<i>Good, good, [name]. Keep dat up. I want ya ta concentrate on dat energy.</i>\" Zenji says as he stands up. \"<i>No matta what happens, keep ya mind focused on concentrating onto dat energy.</i>\"\n\n");
+	outputText("You hear rustling as a shower of leaves falls from above you, presumably from Zenji in an attempt to distract you.\n\n");
+	outputText("You keep your mind focused, remaining calm and collected.\n\n");
+	outputText("Suddenly you feel a quick gust of wind as a spear lands only inches away from you, impaling the ground. You almost flinch, which would break your channeled spell, but your mind was so concentrated on holding onto the energy that you don’t break focus.\n\n");
+	outputText("\"<i>Well done, [name]. Keep dat keenness and focus of mind.</i>\" Zenji says with small applause.\n\n");
+	outputText("\"<i>Remember everting you’ve learned, wisdom is about how ya use de knowledge ya have.</i>\"\n\n");
+	if (player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters2, 2, 1);
+	dynStats("wis", (4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2)), "scale", false);
+	player.fatigue += Math.round(player.maxFatigue() * 0.2);
+	followerZenjiMainCampMenuTrainingPerks();
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function followerZenjiMainCampMenuTrainingPerks():void {
+	if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) < 30) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters2, 3, 1);
+	if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) == 5 || player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) == 15 || player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) == 30) outputText("After you're done training, you feel different, you can't explain it, but something has surely changed, almost as if the training you've done with Zenji is really speaking to you.\n\n");
+	if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) == 5) {
+		outputText("(<b>Gained Perk: Zenji's influence 1</b>)\n\n");
+		player.createPerk(PerkLib.ZenjisInfluence1,0,0,0,0);
+	}
+	if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) == 15) {
+		outputText("(<b>Gained Perk: Zenji's influence 2</b>)\n\n");
+		player.createPerk(PerkLib.ZenjisInfluence2,0,0,0,0);
+	}
+	if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) == 30) {
+		outputText("(<b>Gained Perk: Zenji's influence 3</b>)\n\n");
+		player.createPerk(PerkLib.ZenjisInfluence3,0,0,0,0);
+	}
+}
+
+public function followerZenjiSpar():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
 	
 }
 
-public function followerZenji2():void {
+public function followerZenjiTalks():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
 	
+}
+
+public function followerZenjiSex():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	
+}
+
+public function followerZenjiGlades():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	
+}
+
+public function followerZenjiMainCampMenuLeave():void {
+	outputText("You realize that you don’t have anything you need from him at this moment, you apologize and take your leave.\n\n");
+	outputText("Zenji gives you a small nod as he dismisses you.\n\n");
+	doNext(camp.campFollowers);
 }
 
 //ZENJI LOVER
