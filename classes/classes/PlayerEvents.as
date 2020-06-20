@@ -1806,20 +1806,20 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Switch Aura Based On Alignment
-			if ((player.horns.type != Horns.BICORN || player.horns.type != Horns.UNICORN) && player.cor > 89 && player.hasPerk(PerkLib.AuraOfPurity) && player.hasPerk(PerkLib.EclipticMind)) {
+			if ((player.horns.type != Horns.BICORN || player.horns.type != Horns.UNICORN) && player.cor > 89 && player.hasPerk(PerkLib.EclipticMind)) {
 				outputText("\nA dramatic change in your alignment has altered your formerly pure aura into one of corruption\n");
 				player.removePerk(PerkLib.AuraOfPurity);
 				player.createPerk(PerkLib.AuraOfCorruption, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if ((player.horns.type != Horns.BICORN || player.horns.type != Horns.UNICORN) && player.cor < 20 && player.hasPerk(PerkLib.AuraOfCorruption) && player.hasPerk(PerkLib.EclipticMind)) {
+			if ((player.horns.type != Horns.BICORN || player.horns.type != Horns.UNICORN) && player.cor < 20 && player.hasPerk(PerkLib.EclipticMind)) {
 				outputText("\nA dramatic change in your alignment has altered your formerly corrupt aura into one of purity\n");
 				player.removePerk(PerkLib.AuraOfCorruption);
 				player.createPerk(PerkLib.AuraOfPurity, 0, 0, 0, 0);
 				needNext = true;
 			}
 			//Remove Bullshit
-			if ((player.horns.type != Horns.BICORN || player.horns.type != Horns.UNICORN) && (player.hasPerk(PerkLib.AuraOfPurity) || player.hasPerk(PerkLib.AuraOfCorruption)) && !player.hasPerk(PerkLib.EclipticMind)) {
+			if ((player.horns.type != Horns.BICORN && player.horns.type != Horns.UNICORN) && (player.hasPerk(PerkLib.AuraOfPurity) || player.hasPerk(PerkLib.AuraOfCorruption)) && !player.hasPerk(PerkLib.EclipticMind)) {
 				outputText("\nNo idea how you got this weird aura about you but whatever the reason why you had it its gone now.\n");
 				player.removePerk(PerkLib.AuraOfPurity);
 				player.removePerk(PerkLib.AuraOfCorruption);

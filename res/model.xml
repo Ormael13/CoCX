@@ -2934,6 +2934,7 @@
 			</if>
 		</if>
 		
+		<!-- Succu arm stuff -->
 		<if test="femininity &gt;=40">
 			<if test="cor &gt;=50">
 				<if test="yukiDress">
@@ -3558,7 +3559,6 @@
                 <if test="breastRows.length gt 0">
                     <switch>
                         <case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-                            <show part="bra_fg/comfortableClotheBraSmall"/>
                         </case>
                         <case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
                             <show part="bra_fg/comfortableClotheBraSmall"/>
