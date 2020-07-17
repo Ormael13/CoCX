@@ -460,6 +460,32 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You need more time before you can use Everywhere and nowhere again.\n\n");
 			}
 		}
+		if (player.fairyScore() >= 18) {
+			bd = buttons.add("Fae Storm", FaeStorm).hint("Use a beam of chaotic magic, damaging your foe and inflicting various status effects. Single target but very likely to cause a lot of effects.");
+			bd.requireMana(spellCost(80));
+		}
+		if (player.fairyScore() >= 18) {
+			bd = buttons.add("Flicker", Flicker).hint("Vanish out of sight for a short time. \n\nWould go into cooldown after use for: 4 rounds");
+			bd.requireMana(physicalCost(40));
+			if (player.hasStatusEffect(StatusEffects.CooldownFlicker)) {
+				bd.disable("You need more time before you can use Flicker again.\n\n");
+			}
+		}
+		if (player.fairyScore() >= 18 && !player.hasStatusEffect(StatusEffects.Minimise)) {
+			bd = buttons.add("Minimise", Minimise).hint("Shrink to the size of 5 inches, gaining highly increased evasion but reducing melee and ranged damage as well as physical strenght.");
+			bd.requireMana(spellCost(50));
+		}
+		if (player.fairyScore() >= 18 && player.hasStatusEffect(StatusEffects.Minimise)) {
+			bd = buttons.add("Enlarge", Enlarge).hint("Grow back to your normal size.");
+			bd.requireMana(physicalCost(40));
+		}
+		if (player.fairyScore() >= 18) {
+			bd = buttons.add("Baleful Polymorph", BalefulPolymorph).hint("Turn an opponent into a cute harmless critter.");
+			bd.requireMana(spellCost(80));
+			if (player.hasStatusEffect(StatusEffects.CooldownBalefulPolymorph)) {
+				bd.disable("You need more time before you can use Baleful Polymorph again.\n\n");
+			}
+		}
 		if (player.displacerbeastScore() >= 11) {
 			bd = buttons.add("Displacement", Displacement).hint("Teleport around to avoid your opponents attacks. \n\nWould go into cooldown after use for: 10 rounds");
 			bd.requireFatigue(physicalCost(30));
@@ -2596,9 +2622,34 @@ public class MagicSpecials extends BaseCombatContent {
 	public function Displacement():void {
 		clearOutput();
 		fatigue(30, USEFATG_PHYSICAL);
-		outputText("You begin teleporting at high speed in order to avoid your opponents strikes\n\n");
+		outputText("You begin teleporting at high speed in order to avoid your opponents strikes.\n\n");
 		player.createStatusEffect(StatusEffects.Displacement,6,0,0,0);
 		player.createStatusEffect(StatusEffects.CooldownDisplacement,10,0,0,0);
+		enemyAI();
+	}
+
+	public function Minimise():void {
+		clearOutput();
+		useMana(40, 1);
+		outputText("You shrink to your minimum size, evading your opponent as you mock [monster his] attempt to hit you.\n\n");
+		player.createStatusEffect(StatusEffects.Minimise,100,0,0,0);
+		enemyAI();
+	}
+
+	public function Enlarge():void {
+		clearOutput();
+		useMana(40, 1);
+		outputText("You grow back to your normal size.\n\n");
+		player.removeStatusEffect(StatusEffects.Minimise);
+		enemyAI();
+	}
+
+	public function Flicker():void {
+		clearOutput();
+		useMana(40, 1);
+		outputText("Your form shimmers for a second as you vanish into thin air. Your opponent starts looking for you, annoyed.\n\n");
+		monster.createStatusEffect(StatusEffects.InvisibleOrStealth,2,0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownFlicker,4,0,0,0);
 		enemyAI();
 	}
 
@@ -3036,7 +3087,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
-//Corrupted Fox Fire
+	//Corrupted Fox Fire
 	public function corruptedFoxFire():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -3159,7 +3210,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
-//Fused Fox Fire
+	//Fused Fox Fire
 	public function fusedFoxFire():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -3274,7 +3325,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
-//Pure Fox Fire
+	//Pure Fox Fire
 	public function pureFoxFire():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -3406,7 +3457,7 @@ public class MagicSpecials extends BaseCombatContent {
 		return modksc;
 	}
 
-//Terror
+	//Terror
 	public function kitsuneTerror():void {
 		clearOutput();
 		//Fatigue Cost: 25
@@ -3454,7 +3505,7 @@ public class MagicSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 
-//Illusion
+	//Illusion
 	public function kitsuneIllusion():void {
 		clearOutput();
 		//Fatigue Cost: 25
@@ -3641,7 +3692,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else enemyAI();
 	}
 
-	//cursed riddle
+	//Cursed Riddle
 	public function CursedRiddle():void {
 		clearOutput();
 		player.createStatusEffect(StatusEffects.CooldownCursedRiddle, 0, 0, 0, 0);
@@ -3708,7 +3759,129 @@ public class MagicSpecials extends BaseCombatContent {
 	else enemyAI();
 	}
 
-//Transfer
+	//Fae Storm
+	public function FaeStorm():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		outputText("Your opponent Your wings start shining with rainbowish light as you charge and unleash a beam of primal energy on your opponent. ");
+		var damage:Number = (scalingBonusIntelligence() * spellMod());
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			damage *= 1.75;
+		}
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		damage = Math.round(damage);
+		damage = doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+
+		//Randomising secondary effects
+		var EffectList:Array = []
+		EffectList.push(FaeStormLightning);
+		EffectList.push(FaeStormAcid);
+		EffectList.push(FaeStormBurn);
+		EffectList.push(FaeStormPoison);
+		EffectList.push(FaeStormFrozen);
+		EffectList.push(FaeStormLust);
+		EffectList.push(FaeStormSleep);
+		var ProcChance:Number = 85;
+		var procCount:int = 0;
+		for (var i:int = 0; i < 6; i++) {
+			if (rand(100) >= ProcChance) {
+				procCount++;
+			} else {
+				break;
+			}
+		}
+		for (i=1; i<=procCount; i++) {
+			var choice:Function = randomChoice(EffectList);
+			if(i == 1) {
+				outputText("Your opponent ");
+			}
+			if(i == 2) {
+				outputText(". At the same time as [monster he] ");
+			}
+			if(i == 3) {
+				outputText(". As if to add insult to injury, [monster he] ");
+			}
+			if(i == 4) {
+				outputText(" while [monster he] ");
+			}
+			if(i == 5) {
+				outputText(". Finally [monster he] ");
+			}
+			if(i == 6) {
+				outputText(". Just as you thought you couldn’t get luckier [monster he] ");
+			}
+			choice(damage);
+			EffectList.splice(EffectList.indexOf(choice), 1)
+		}
+		outputText(".\n\n");
+
+	}
+
+	private function FaeStormLightning(damage):void{
+		if(monster.plural) {
+			outputText("begin spasming while [monster his] bodies are ran through by electricity");
+		}
+		else outputText("begin spasming while [monster his] body is ran through by electricity");
+		doLightingDamage(damage);
+	}
+	private function FaeStormAcid(damage):void{
+		if(monster.plural) {
+			outputText("begins screaming as [monster his] bodies is suddenly coated with acid and [monster his] armor melting");
+		}
+		else outputText("begins screaming as [monster his] body is suddenly coated with acid and [monster his] armor melting");
+		monster.armorDef *= 0.5;
+	}
+	private function FaeStormBurn(damage):void{
+		if(monster.plural) {
+			outputText("starts to burn as [monster his] bodies catch fire");
+		}
+		else outputText("starts to burn as [monster his] body catch fire");
+		monster.createStatusEffect(StatusEffects.BurnDoT, 10, 0.02, 0, 0);
+	}
+	private function FaeStormPoison(damage):void {
+		outputText("turns green as a potent poison saps [monster his] strength");
+		monster.createStatusEffect(StatusEffects.NagaVenom, 1, 1, 0, 0);
+	}
+	private function FaeStormFrozen(damage):void{
+		outputText("skin is covered with ice as the surrounding air freezes solid");
+		monster.createStatusEffect(StatusEffects.FrozenSolid,3,0,0,0);
+	}
+	private function FaeStormLust(damage):void{
+		var lustDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+		if(monster.plural) {
+			outputText("are magically aroused by the spell");
+		}
+		else outputText("is magically aroused by the spell");
+		monster.teased(lustDmg);
+	}
+	private function FaeStormSleep(damage):void{
+		if(monster.plural) {
+			outputText("are sent straight to the dream lands by the spell’s powerful hypnotic effects");
+		}
+		else outputText("is sent straight to the dream lands by the spell’s powerful hypnotic effects");
+		monster.createStatusEffect(StatusEffects.Sleep,2,0,0,0);
+	}
+
+	public function BalefulPolymorph():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		outputText("You chuckle playfully as you throw this spell on “opponent name”, turning it/her/him temporarily into a cute harmless ");
+		var chosen:String = randomChoice("rabbit.", "squirrel.", "sheep.", "mouse.", "cat.", "dog."
+		);
+		outputText(chosen);
+		monster.createStatusEffect(StatusEffects.Polymorphed, 3, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.CooldownBalefulPolymorph, 16, 0, 0, 0)
+	}
+
+	//Transfer
 	public function lustTransfer():void {
 		clearOutput();
 		if (player.hasPerk(PerkLib.GreaterGiftOfLust)) fatigue(60, USEFATG_MAGIC_NOBM);

@@ -1801,7 +1801,7 @@ import flash.utils.getQualifiedClassName;
 		}
 
 		public function monsterIsStunned():Boolean {
-			if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Polymorphed) || hasStatusEffect(StatusEffects.HypnosisNaga)) return true;
+			if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Polymorphed) || hasStatusEffect(StatusEffects.HypnosisNaga) || hasStatusEffect(StatusEffects.Sleep) || hasStatusEffect(StatusEffects.InvisibleOrStealth)) return true;
 			return false;
 		}
 
@@ -2046,6 +2046,14 @@ import flash.utils.getQualifiedClassName;
 			else if (hasStatusEffect(StatusEffects.FrozenSolid)) {
 				if (plural) EngineCore.outputText("Your foes are too busy trying to break out of their icy prison to fight back.");
 				else EngineCore.outputText("Your foe is too busy trying to break out of his icy prison to fight back.");
+			}
+			else if (hasStatusEffect(StatusEffects.Sleep)) {
+				if (plural) EngineCore.outputText("Your foes are fast asleep.");
+				else EngineCore.outputText("Your foe is fast asleep.");
+			}
+			else if (hasStatusEffect(StatusEffects.InvisibleOrStealth)) {
+				if (plural) EngineCore.outputText("Your foes are still looking for you, swearing in annoyance.");
+				else EngineCore.outputText("Your foe is still looking for you, swearing in annoyance.");
 			}
 			else if (hasStatusEffect(StatusEffects.Polymorphed)) EngineCore.outputText(capitalA + short + " is fighting against the curse.");
 			else if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled)) EngineCore.outputText(capitalA + short + " try to hit you but is unable to reach you!");

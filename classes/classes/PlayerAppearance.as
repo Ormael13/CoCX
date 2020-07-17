@@ -1596,6 +1596,9 @@ public class PlayerAppearance extends BaseContent {
 		if (wingType == Wings.LEVITATION){
 			outputText("  You have the ability to levitate in the air should you wish to although you prefer to stay at ground level to not alert your would be victims to your otherworldly nature.");
 		}
+		if (wingType == Wings.FAIRY){
+			outputText("  A large pair of colorful butterfly wings rest on your shoulder blades. Your fairy wings give you a regal appearance fit for fey royalty.");
+		}
 	}
 	public function describeHorns():void {
 //Horns
@@ -1842,6 +1845,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if(eyeType == Eyes.FROSTWYRM){
 			outputText("  Your [eyecolor] eyes have slitted pupils and dark sclera like those of a frost wyrm.");
+		}
+		else if(eyeType == Eyes.FAIRY){
+			outputText("  Your beautiful [eyecolor] eyes sparkle with the eternal hope and child-like innocence of fairykind.");
 		}
 		else outputText("  Your eyes are [eyecolor].");
 	}
@@ -2166,9 +2172,18 @@ public class PlayerAppearance extends BaseContent {
 				} else {
 					outputText("  In addition, your mouth, while human looking, has sharp yeti fangs not unlike those of a monkey.");
 				}
-			}
-			if(faceType == Face.VAMPIRE){
+			} else if(faceType == Face.VAMPIRE){
+				if (odd == 0){
 				outputText("  Your mouth could pass for human if not for the pair of long and pointy canines you use to tear into your victims to get at their blood.");
+				} else {
+					outputText("  In addition, your mouth could pass for human if not for the pair of long and pointy canines you use to tear into your victims to get at their blood.");
+				}
+			} else if(faceType == Face.FAIRY){
+				if (odd == 0){
+					outputText("  Your fairy nature allows you to always display a pure, cheerful, innocent smile that warms the hearts of those around you.");
+				} else {
+					outputText("  In addition, Your fairy nature allows you to always display a pure, cheerful, innocent smile that warms the hearts of those around you.");
+				}
 			}
 		}
 		else if (faceType == Face.FERRET) {
@@ -2807,6 +2822,10 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.foxScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Fox: " + player.foxScore() + " (-" + (5 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (25 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 		else if (player.foxScore() >= 1) outputText("\n<font color=\"#008000\">Half Fox: " + player.foxScore() + "</font>");
 		else if (player.foxScore() < 1) outputText("\n<font color=\"#ff0000\">Half Fox: 0</font>");
+		//Fairy
+		if (player.fairyScore() >= 18) outputText("\n<font color=\"#0000a0\">Greater Fairy: " + player.fairyScore() + " (-" + (25 * (1 + player.newGamePlusMod())) + " max Str, -" + (25 * (1 + player.newGamePlusMod())) + " max Tou, +" + (140 * (1 + player.newGamePlusMod())) + " max Spe, +" + (200 * (1 + player.newGamePlusMod())) + " max Int, +" + (20 * (1 + player.newGamePlusMod())) + " max max Sens)</font>");
+		else if (player.fairyScore() >= 1) outputText("\n<font color=\"#008000\">Greater Fairy: " + player.fairyScore() + "</font>");
+		else if (player.fairyScore() < 1) outputText("\n<font color=\"#ff0000\">Greater Fairy: 0</font>");
 		//Frost Wyrm
 		if (player.frostWyrmScore() >= 20) outputText("\n<font color=\"#0000a0\">Greater Frost Wyrm: " + player.frostWyrmScore() + " (+" + (135 * (1 + player.newGamePlusMod())) + " max Str, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (115 * (1 + player.newGamePlusMod())) + " max Tou, -" + (90 * (1 + player.newGamePlusMod())) + " max Int, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 		else if (player.frostWyrmScore() >= 18) outputText("\n<font color=\"#0000a0\">Frost Wyrm: " + player.frostWyrmScore() + " (+" + (125 * (1 + player.newGamePlusMod())) + " max Str, +" + (75 * (1 + player.newGamePlusMod())) + " max Spe, +" + (110 * (1 + player.newGamePlusMod())) + " max Tou, -" + (90 * (1 + player.newGamePlusMod())) + " max Int, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib)</font>");

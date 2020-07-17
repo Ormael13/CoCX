@@ -17,6 +17,7 @@ import classes.Items.*;
 import classes.Scenes.Camp.CampScenes;
 import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.Dreams;
+import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.DivaScene;
@@ -2307,6 +2308,21 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
+
+			//QUEST AREA
+			//Vala Gathering Quest
+			if (player.hasItem(useables.S_SHARD, 15) && ValaScene.ValaFairyQueenQuest == ValaScene.QUEST_STAGE_STARTED) {
+				outputText("\n<b>You now have enought scepter shards to repair the fairy queen scepter! Go turn this to Vala in Tel Adre.</b>\n");
+				ValaScene.ValaFairyQueenQuest = ValaScene.QUEST_STAGE_ITEM_GATHERED;
+				needNext = true;
+			}
+			if (!player.hasItem(useables.S_SHARD, 15) && ValaScene.ValaFairyQueenQuest == ValaScene.QUEST_STAGE_ITEM_GATHERED) {
+				outputText("\n<b>Oops you seem to have forgot that Vala needs those items to repair the royal scepter and parted way with them! Well its fine you can always go beat some more Phouka for extras.</b>\n");
+				ValaScene.ValaFairyQueenQuest = ValaScene.QUEST_STAGE_STARTED;
+				needNext = true;
+			}
+
+			//Wrap it up
 			return needNext;
 		}
 

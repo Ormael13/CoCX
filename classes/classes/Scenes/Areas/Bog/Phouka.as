@@ -10,6 +10,7 @@ import classes.BodyParts.Ears;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Wings;
+import classes.Items.Useable;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
@@ -305,9 +306,10 @@ public class Phouka extends Monster
 				.add(consumables.RIZZART, 10)
 				.add(consumables.GROPLUS, 2)
 				.add(consumables.SDELITE, 13)
-				.add(consumables.P_WHSKY, 35)
+				.add(consumables.P_WHSKY, 15)
+				.add(useables.S_SHARD, 20)
 				.add(null, 20);
-			this.wings.type = Wings.GIANT_DRAGONFLY; //Maybe later, if the PC can get them, make a Faerie wing type.
+			this.wings.type = Wings.FAIRY;
 			this.wings.desc = "small black faerie wings";
 			checkMonster();
 		}

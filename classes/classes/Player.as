@@ -10,6 +10,7 @@ import classes.BodyParts.Hair;
 import classes.BodyParts.Horns;
 import classes.BodyParts.ISexyPart;
 import classes.BodyParts.LowerBody;
+import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
@@ -2713,6 +2714,7 @@ use namespace CoC;
 				{name: 'wolf', score: wolfScore(), minscore: 4},
 				{name: 'werewolf', score: werewolfScore(), minscore: 12},
 				{name: 'fox', score: foxScore(), minscore: 4},
+				{name: 'fairy', score: fairyScore(), minscore: 18},
 				{name: 'ferret', score: ferretScore(), minscore: 4},
 				{name: 'cat', score: catScore(), minscore: 4},
 				{name: 'sphinx', score: sphinxScore(), minscore: 14},
@@ -2982,6 +2984,11 @@ use namespace CoC;
 						race = "fox-morph";
 					else
 						race = "half fox";
+				}
+			}
+			if (TopRace == "fairy") {
+				if (TopScore >= 18) {
+					race = "great fairy";
 				}
 			}
 			if (TopRace == "ferret") {
@@ -4654,6 +4661,55 @@ use namespace CoC;
 			foxCounter = finalRacialScore(foxCounter, Race.FOX);
 			End("Player","racialScore");
 			return foxCounter;
+		}
+
+		//Determine Fairy Rating
+		public function fairyScore():Number {
+			Begin("Player","racialScore","fairy");
+			var fairyCounter:Number = 0;
+			if (faceType == Face.FAIRY)
+				fairyCounter++;
+			if (eyes.type == Eyes.FAIRY)
+				fairyCounter++;
+			if (ears.type == Ears.ELVEN)
+				fairyCounter++;
+			if (tailType == Tail.NONE)
+				fairyCounter++;
+			if (arms.type == Arms.ELF)
+				fairyCounter++;
+			if (lowerBody == LowerBody.ELF)
+				fairyCounter++;
+			if (tongue.type == Tongue.ELF)
+				fairyCounter++;
+			if (wings.type == Wings.FAIRY)
+				fairyCounter+=4;
+			if (hairType == Hair.FAIRY)
+				fairyCounter++;
+			if (hasCock() > 0 && fairyCounter > 0)
+				fairyCounter++;
+			if (breastRows.length > 1 && fairyCounter > 0)
+				fairyCounter++;
+			if (breastRows.length == 3 && fairyCounter > 0)
+				fairyCounter++;
+			if (breastRows.length == 4 && fairyCounter > 0)
+				fairyCounter++;
+			//Fur only counts if some canine features are present
+			if (!hasCoat() && fairyCounter > 0)
+				fairyCounter++;
+			if (skinType == Skin.PLAIN && skinAdj == "flawless")
+				fairyCounter++;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				fairyCounter += 50;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && fairyCounter >= 4)
+				fairyCounter += 1;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && fairyCounter >= 8)
+				fairyCounter += 1;
+			if (hasPerk(PerkLib.TransformationImmunity))
+				fairyCounter += 4;
+			if (isGargoyle()) fairyCounter = 0;
+			fairyCounter = finalRacialScore(fairyCounter, Race.FAIRY);
+			End("Player","racialScore");
+			return fairyCounter;
 		}
 
 		//Determine cat Rating
@@ -9153,6 +9209,7 @@ use namespace CoC;
 			if (this.melkieScore() >= 8) minSen += (25 * newGamePlusMod);
 			if (this.melkieScore() >= 18) minSen += (25 * newGamePlusMod);
 			if (this.melkieScore() >= 21) minSen += (15 * newGamePlusMod);
+			if (this.fairyScore() >= 18) minSen += (20 * newGamePlusMod);
 			//Rings
 			if (this.jewelryName == "Ring of Intelligence") minInt += 5;
 			if (this.jewelryName == "Ring of Libido") minLib += 5;
@@ -9443,6 +9500,10 @@ use namespace CoC;
 			//Blink
 			if (hasStatusEffect(StatusEffects.Blink)) {
 				maxSpe += statusEffectv1(StatusEffects.Blink);
+			}
+			//Minimise
+			if (hasStatusEffect(StatusEffects.Minimise)) {
+				maxStr -= statusEffectv1(StatusEffects.Minimise);
 			}
 			//Dwarf Rage
 			if (hasStatusEffect(StatusEffects.WarriorsRage)) {
@@ -10263,6 +10324,13 @@ use namespace CoC;
 					maxSpeCap2 += (40 * newGamePlusMod);
 					maxIntCap2 += (25 * newGamePlusMod);
 				}
+			}
+			if (fairyScore() >= 18) {
+				maxStrCap2 -= (25 * newGamePlusMod);
+				maxTouCap2 -= (25 * newGamePlusMod);
+				maxSpeCap2 += (140 * newGamePlusMod);
+				maxIntCap2 += (200 * newGamePlusMod);
+				maxSenCap2 += (20 * newGamePlusMod);
 			}//+10/10-20
 			if (cancerScore() >= 8) {
 				if (cancerScore() >= 20) {
@@ -11331,6 +11399,10 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.Blink)) {
 				dynStats("spe", -statusEffectv1(StatusEffects.Blink), "scale", false);
 				removeStatusEffect(StatusEffects.Blink);
+			}
+			if(hasStatusEffect(StatusEffects.Minimise)) {
+				dynStats("str", +statusEffectv1(StatusEffects.Minimise), "scale", false);
+				removeStatusEffect(StatusEffects.Minimise);
 			}
 			if(hasStatusEffect(StatusEffects.BeatOfWar)) {
 				dynStats("str", -statusEffectv1(StatusEffects.BeatOfWar), "scale", false);

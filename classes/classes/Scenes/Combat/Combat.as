@@ -4334,6 +4334,7 @@ public class Combat extends BaseContent {
     public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
+        if (player.hasStatusEffect(StatusEffects.Minimise)) damage *= 0.01;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             if (player.armorName == "Scandalous Succubus Clothing") {
@@ -6099,6 +6100,14 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.Flying);
             }
         }
+        //Baleful Polymorph
+        if (player.hasStatusEffect(StatusEffects.CooldownBalefulPolymorph)) {
+            if (player.statusEffectv1(StatusEffects.CooldownBalefulPolymorph) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownBalefulPolymorph);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownBalefulPolymorph, 1, -1);
+            }
+        }
         //Ink Spray
         if (player.hasStatusEffect(StatusEffects.CooldownInkSpray)) {
             if (player.statusEffectv1(StatusEffects.CooldownInkSpray) <= 0) {
@@ -6113,6 +6122,14 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownEveryAndNowhere);
             } else {
                 player.addStatusValue(StatusEffects.CooldownEveryAndNowhere, 1, -1);
+            }
+        }
+        //Flicker
+        if (player.hasStatusEffect(StatusEffects.CooldownFlicker)) {
+            if (player.statusEffectv1(StatusEffects.CooldownFlicker) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownFlicker);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownFlicker, 1, -1);
             }
         }
         //Play

@@ -4078,6 +4078,7 @@ public class Creature extends Utils
 				if (hasStatusEffect(StatusEffects.Displacement)) chance += 80;
 				else chance += 30;
 			}
+			if (hasStatusEffect(StatusEffects.Displacement)) chance += 60;
 			if (hasStatusEffect(StatusEffects.Flying)) chance += flychance;
 			return chance;
 		}

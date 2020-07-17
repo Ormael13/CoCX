@@ -2501,7 +2501,8 @@ public class Appearance extends Utils
 					[Hair.GRASS, "grass"],
 					[Hair.SILKEN, "silk-like"],
 					[Hair.STORM, "glowing lightning shaped"],
-					[Hair.SNOWY, "snowy"]
+					[Hair.SNOWY, "snowy"],
+					[Hair.FAIRY, "otherworldly, silk-like and almost translucent"]
 				]
 		);
 		public static const DEFAULT_BEARD_NAMES:Object = createMapFromPairs(
@@ -2564,7 +2565,8 @@ public class Appearance extends Utils
 					[Face.FIRE_SNAIL, "fire snail"],
 					[Face.GHOST, "ghost"],
 					[Face.JIANGSHI, "jiangshi"],
-					[Face.YUKI_ONNA, "yuki onna"]
+					[Face.YUKI_ONNA, "yuki onna"],
+					[Face.FAIRY, "fairy"]
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2609,7 +2611,8 @@ public class Appearance extends Utils
 					[Eyes.DISPLACER, "displacer"],
 					[Eyes.FIRE_SNAIL, "fire snail"],
 					[Eyes.GHOST, "ghost"],
-					[Eyes.JIANGSHI, "jiangshi"]
+					[Eyes.JIANGSHI, "jiangshi"],
+					[Eyes.FAIRY, "fairy"]
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
@@ -2669,7 +2672,8 @@ public class Appearance extends Utils
 					[Horns.ONI_X2, "2 oni"],
 					[Horns.BICORN, "bicorn"],
 					[Horns.GHOSTLY_WISPS, "ghostly wisps"],
-					[Horns.SPELL_TAG, "spell tag"]
+					[Horns.SPELL_TAG, "spell tag"],
+					[Horns.FROSTWYRM, "frost wyrm"]
 				]
 		);
 		public static const DEFAULT_ANTENNAE_NAMES:Object = createMapFromPairs(
@@ -2723,7 +2727,8 @@ public class Appearance extends Utils
 					[Arms.GHOST, "phantom"],
 					[Arms.JIANGSHI, "jiangshi"],
 					[Arms.RAIJU_2, "raiju paws"],
-					[Arms.YUKI_ONNA, "yuki onna"]
+					[Arms.YUKI_ONNA, "yuki onna"],
+					[Arms.FROSTWYRM, "frost wyrm"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2801,7 +2806,8 @@ public class Appearance extends Utils
 					[Wings.FEATHERED_AVIAN, "avian"],
 					[Wings.NIGHTMARE, "leathery"],
 					[Wings.ETHEREAL_WINGS, "etheral tendrils"],
-					[Wings.THUNDEROUS_AURA, "thunderous aura"]
+					[Wings.THUNDEROUS_AURA, "thunderous aura"],
+					[Wings.FAIRY, "fairy"]
 				]
 		);
 		public static const DEFAULT_WING_DESCS:Object = createMapFromPairs(
@@ -2835,7 +2841,8 @@ public class Appearance extends Utils
 					[Wings.NIGHTMARE, "large leathery"],
 					[Wings.ETHEREAL_WINGS, "etheral tendrils"],
 					[Wings.THUNDEROUS_AURA, "thunderous aura"],
-					[Wings.LEVITATION, "levitation"]
+					[Wings.LEVITATION, "levitation"],
+					[Wings.FAIRY, "butterfly"]
 				]
 		);
 		public static const DEFAULT_LOWER_BODY_NAMES:Object = createMapFromPairs(
@@ -2894,7 +2901,8 @@ public class Appearance extends Utils
 					[LowerBody.GHOST, "phantom"],
 					[LowerBody.GHOST_2, "poltergeist"],
 					[LowerBody.JIANGSHI, "jiangshi"],
-					[LowerBody.YUKI_ONNA, "yuki onna"]
+					[LowerBody.YUKI_ONNA, "yuki onna"],
+					[LowerBody.FROSTWYRM, "frost wyrm"]
 				]
 		);
 		// <mod name="Dragon patch" author="Stadler76">

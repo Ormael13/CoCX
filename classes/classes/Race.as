@@ -85,6 +85,7 @@ public class Race {
     public static const FROSTWYRM:Race = new Race("Frost Wyrm",81);
     public static const CANCER:Race = new Race("Cancer",82);
     public static const USHIONNA:Race = new Race("Ushi-Onna",83);
+    public static const FAIRY:Race = new Race("Fairy",84);
 
     public var name:String;
     public var id:int;
