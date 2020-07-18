@@ -36,8 +36,7 @@ import classes.Scenes.SceneLib;
 		public var rubi:Rubi = new Rubi();
 		public var scylla:Scylla = new Scylla();
 		public var sexMachine:SexMachine = new SexMachine();
-		public var umasShop:UmasShop = new UmasShop();		
-		public var vala:ValaScene = new ValaScene();
+		public var umasShop:UmasShop = new UmasShop();
 		
 		public var nails:Number = 0;
 		public var wood:Number = 0;
@@ -45,7 +44,7 @@ import classes.Scenes.SceneLib;
 		
 		public function TelAdre()
 		{
-			
+		
 		}
 
 //const YVONNE_FUCK_COUNTER:int = 437;
@@ -458,7 +457,7 @@ public function barTelAdre():void {
 		}
 	}
 	if (flags[kFLAGS.KATHERINE_LOCATION] == Katherine.KLOC_BAR) {
-		if (flags[kFLAGS.KATHERINE_UNLOCKED] == 4) { 
+		if (flags[kFLAGS.KATHERINE_UNLOCKED] == 4) {
 			katherine.barFirstEncounter();
 			return;
 		}
@@ -564,7 +563,7 @@ public function barTelAdre():void {
 		}
 	}
 	//VALA
-	if(vala.purifiedFaerieBitchBar()) button = anotherButton(button,"Vala",vala.chooseValaInBar);
+	if(SceneLib.vala.purifiedFaerieBitchBar()) button = anotherButton(button,"Vala",SceneLib.vala.chooseValaInBar);
 
 	addButton(14,"Leave",telAdreMenu);
 }
@@ -591,7 +590,7 @@ public function carpentryShopInside():void {
 	addButton(0, "Buy Nails", carpentryShopBuyNails);
 	addButton(1, "Buy Wood", carpentryShopBuyWood);
 	addButton(2, "Buy Stones", carpentryShopBuyStone);
-	addButton(5, "Sell Nails", carpentryShopSellNails);	
+	addButton(5, "Sell Nails", carpentryShopSellNails);
 	addButton(6, "Sell Wood", carpentryShopSellWood);
 	addButton(7, "Sell Stones", carpentryShopSellStone);
 	addButton(10, "Toolbox", carpentryShopBuySet);
@@ -682,7 +681,7 @@ public function carpentryShopBuyWood():void {
 	addButton(6, "Buy 200", carpentryShopBuyWoodAmount, 200);
 	addButton(7, "Buy 300", carpentryShopBuyWoodAmount, 300);
 	addButton(14, "Back", carpentryShopInside);
-}	
+}
 
 private function carpentryShopBuyWoodAmount(amount:int):void {
 	wood = amount;
@@ -844,7 +843,7 @@ public function carpentryShopSellWood():void {
 	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 300) addButton(7, "Sell 300", carpentryShopSellWoodAmount, 300);
 	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 0) addButton(8, "Sell All", carpentryShopSellWoodAmount, flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES]);
 	addButton(14, "Back", carpentryShopInside);
-}	
+}
 
 private function carpentryShopSellWoodAmount(amount:int):void {
 	wood = amount;
@@ -1610,7 +1609,7 @@ private function goJogging():void {
 	}
 	else doYesNo(sexMachine.exploreShowers, camp.returnToCampUseOneHour);
 }
-		
+
 public function meetingLunaFirstTime():void {
 	clearOutput();
 	outputText("As you wander the streets of Tel'Adre, you see a woman being brutally thrown out of a house along with her belongings. The crowd seems to be ignoring her.  Curious, you walk up to her just in time to see her start to cry. She wears what looks like a formal maid dress. Under her white bonnet, the maid sports short, ashen hair. You decide to break the ice and ask her what's going on. By all means she looks human, which is a surprise to you.\n\n");
