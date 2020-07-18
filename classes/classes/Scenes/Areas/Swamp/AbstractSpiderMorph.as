@@ -48,7 +48,7 @@ public class AbstractSpiderMorph extends Monster
 				outputText("You evade, avoiding the sticky strands!");
 			}
 			//("Misdirection"
-			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Your misleading movements allow you to easily sidestep the sticky strands!");
 			}
 			//Determine if cat'ed
@@ -108,7 +108,7 @@ public class AbstractSpiderMorph extends Monster
 				outputText("You evade, avoiding the bite!");
 			}
 			//("Misdirection"
-			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Your misleading movements allow you to easily sidestep the spider bite!");
 			}
 			//Determine if cat'ed
@@ -147,7 +147,7 @@ public class AbstractSpiderMorph extends Monster
 				outputText("You pull your weapon back evasively and the webbing goes wide, missing entirely!");
 			}
 			//("Misdirection"
-			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Your misleading movements allow you to easily sidestep the webbing!");
 			}
 			//Determine if cat'ed
@@ -190,7 +190,7 @@ public class AbstractSpiderMorph extends Monster
 				outputText("You pull your weapon back evasively and the webbing goes wide, missing entirely.");
 			}
 			//("Misdirection"
-			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Your misleading movements allow you to easily sidestep the webbing!");
 			}
 			//Determine if cat'ed

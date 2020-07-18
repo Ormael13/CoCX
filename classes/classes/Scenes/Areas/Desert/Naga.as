@@ -63,7 +63,7 @@ public class Naga extends Monster
 			if((player.findPerk(PerkLib.Evade) && rand(6) == 0)) {
 				outputText("You see her tail whipping toward you and evade it at the last second. You quickly roll back onto your feet.");
 			}
-			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s tail-whip.");
 			}
 			else if(player.spe > rand(300)) {

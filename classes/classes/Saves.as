@@ -900,6 +900,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.tallness = player.tallness;
 		saveFile.data.hairColor = player.hairColor;
 		saveFile.data.hairType = player.hairType;
+		saveFile.data.hairStyle = player.hairStyle;
 		saveFile.data.gillType = player.gills.type;
 		saveFile.data.armType = player.arms.type;
 		saveFile.data.hairLength = player.hairLength;
@@ -1899,6 +1900,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.hairType = 0;
 		else
 			player.hairType = saveFile.data.hairType;
+		if (saveFile.data.hairStyle == undefined)
+			player.hairStyle = 0;
+		else
+			player.hairStyle = saveFile.data.hairStyle;
 		if (saveFile.data.gillType != undefined)
 			player.gills.type = saveFile.data.gillType;
 		else if (saveFile.data.gills == undefined)

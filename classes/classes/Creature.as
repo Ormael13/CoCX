@@ -858,6 +858,7 @@ public class Creature extends Utils
 		3- goo!
 		4- anemononeoenoeneo!*/
 		public var hairType:Number = Hair.NORMAL;
+		public var hairStyle:Number = Hair.NORMAL;
 		private var _hairColor:String = "no";
 		public var hairLength:Number = 0;
 		public function get hairColor():String {
@@ -3942,6 +3943,11 @@ public class Creature extends Utils
 		{
 			return Appearance.beardDescription(this);
 		}
+
+		public function hairStyleDescript():String
+		{
+			return Appearance.beardDescription(this);
+		}
 		
 		public function hipDescript():String
 		{
@@ -4056,7 +4062,7 @@ public class Creature extends Utils
 				if (findPerk(PerkLib.ElvishPeripheralNervSysFinalForm) >= 0) chance += 15;
 			}
 			if (findPerk(PerkLib.Flexibility) >= 0) chance += 6;
-			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit") chance += 10;
+			if (findPerk(PerkLib.Misdirection) >= 0 && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia")) chance += 10;
 			//if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq()) chance += 10;
 			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "nothing")) chance += 10;
 			if (game.player.armor == game.armors.R_CHANG || game.player.armor == game.armors.R_QIPAO || game.player.armor == game.armors.G_CHANG || game.player.armor == game.armors.G_QIPAO || game.player.armor == game.armors.B_CHANG || game.player.armor == game.armors.B_QIPAO || game.player.armor == game.armors.P_CHANG || game.player.armor == game.armors.P_QIPAO) chance += 5;
@@ -4126,7 +4132,7 @@ public class Creature extends Utils
 			// perks
 			if ((findPerk(PerkLib.Evade) >= 0 || findPerk(PerkLib.ElvenSense) >= 0 || ((game.player.hasKeyItem("Nitro Boots") >= 0 || game.player.hasKeyItem("Rocket Boots") >= 0 || game.player.hasKeyItem("Spring Boots") >= 0) && game.player.tallness < 48 && game.player.isBiped())) && (roll < generalevasion)) return "Evade";
 			if (findPerk(PerkLib.Flexibility) >= 0 && (roll < 6)) return "Flexibility";
-			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit" && (roll < 10)) return "Misdirection";
+			if (findPerk(PerkLib.Misdirection) >= 0 && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia") && (roll < 10)) return "Misdirection";
 			//if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq() && (roll < 10)) return "Unhindered";
 			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "nothing") && (roll < 10)) return "Unhindered";
 			if (findPerk(PerkLib.JunglesWanderer) >= 0 && (roll < 35)) return "Jungle's Wanderer";

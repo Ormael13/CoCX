@@ -172,6 +172,21 @@ public class Appearance extends Utils
 			return description;
 		}
 
+		public static function hairStyleDescription(i_creature:Creature):String
+		{
+			var description:String = "";
+			var options:Array;
+			//
+			if (i_creature.hairStyle == 0) description += "plain";
+			else if (i_creature.hairStyle == 1) description += "wild";
+			else if (i_creature.hairStyle == 2) description += "ponytail";
+			else if (i_creature.hairStyle == 3) description += "Long tied up";
+			else if (i_creature.hairStyle == 4) description += "twin pigtail";
+			else if (i_creature.hairStyle == 5) description += "dwarven";
+
+			return description;
+		}
+
 		/**
 		 * Describe tongue. Monsters don't have tongues, apparently.
 		 * @param    i_character Either Player or NonPlayer

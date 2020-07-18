@@ -35,6 +35,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("  It has " + player.faceDesc() + "."); //M/F stuff!
 		describeEyes();
 		describeHairAndEars();
+		describeHairStyle();
 		describeBeard();
 		describeTongue();
 		describeHorns();
@@ -2082,6 +2083,26 @@ public class PlayerAppearance extends BaseContent {
 					outputText("  Limp antennae also grow from just behind your hairline, waving and swaying in the breeze with your ears.");
 				else outputText("  Floppy antennae also grow from just behind your hairline, bouncing and swaying in the breeze.");
 			}
+		}
+	}
+	public function describeHairStyle():void {
+		var hairStyle:Number = player.hairStyle;
+		if(player.hairLength == 0 && (player.hairType == Hair.STORM || player.hairType == Hair.BURNING || player.hairType == Hair.ANEMONE
+				|| player.hairType == Hair.QUILL || player.hairType == Hair.FEATHER || player.hairType == Hair.GORGON || player.hairType == Hair.FLUFFY)) {
+		}
+		else {
+			if(hairStyle == Hair.PLAIN)
+				outputText("  Your hairs hangs plainly along the side of your head.");
+			else if(hairStyle == Hair.WILD)
+				outputText("  Your hairs are stand up in a wild fashion.")
+			else if(hairStyle == Hair.PONYTAIL)
+				outputText("  Your hairs are tied up into a ponytail.");
+			else if(hairStyle == Hair.LONGTRESSES)
+				outputText("  Your hairs are tied up into a great ponytail.");
+			else if(hairStyle == Hair.TWINPIGTAIL)
+				outputText("  Your hairs are tied up into a pair of pigtail.");
+			else if(hairStyle == Hair.DWARVEN)
+				outputText("  Your hairs are tied up into a dwarven fashion");
 		}
 	}
 	public function describeFaceShape():void {

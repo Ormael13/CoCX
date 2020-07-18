@@ -126,6 +126,7 @@ public function salonPurchaseMenu():void {
 	addButton(7, "Beard Options", beardMenu);
 	if (mudFacialEnabled) addButton(8, "Mud Facial", mudFacial).hint("This facial is supposed to enhance the softness of your face and enhance its femininity greatly.");
 	if (sandFacialEnabled) addButton(9, "Sand Facial", sandFacial).hint("The goblins promise this facial will give you a rough, handsome look thanks to their special, timeless sands.");
+	if (player.hairLength > 2 && (player.hairType == Hair.STORM || player.hairType == Hair.BURNING || player.hairType == Hair.ANEMONE || player.hairType == Hair.QUILL || player.hairType == Hair.FEATHER || player.hairType == Hair.GORGON || player.hairType == Hair.FLUFFY)) addButton(10, "Haircut", changeHairStyle);
 	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }
 
@@ -512,7 +513,27 @@ private function chooseBeardStyleFinalize(choiceStyle:int = 0):void {
 	outputText("After a while, you now have " + player.beardDescript() + "!");
 	doNext(camp.returnToCampUseOneHour);
 }
+	private function changeHairStyle():void {
+		clearOutput();
+		outputText("What hair style would you like?");
+		menu();
+		addButton(0, "Normal", chooseHairStyleFinalize, 0);
+		addButton(1, "Wild", chooseHairStyleFinalize, 1);
+		addButton(2, "Ponytail", chooseHairStyleFinalize, 2);
+		addButton(2, "G.Ponytail", chooseHairStyleFinalize, 3);
+		addButton(3, "TwinPigtail", chooseHairStyleFinalize, 4);
+		addButton(4, "Dwarven", chooseHairStyleFinalize, 5);
+		addButton(5, "Back", salonPurchaseMenu);
+	}
 
+	private function chooseHairStyleFinalize(choiceStyle:int = 0):void {
+		clearOutput();
+		outputText("You tell Lynnette that you'd like to have your hair style changed to what you've indicated.\n\n");
+		outputText("Lynnette and her daughters begin to mess with your hair with razor-sharp scissors and white fluid while they work to change your beard into what you've wanted.\n\n");
+		player.hairStyle = choiceStyle;
+		outputText("After a while, you now have " + player.hairStyleDescript() + "!");
+		doNext(camp.returnToCampUseOneHour);
+	}
 private function removeBeard():void {
 	clearOutput();
 	outputText("You tell Lynnette that you'd like to have your beard removed.\n\n");

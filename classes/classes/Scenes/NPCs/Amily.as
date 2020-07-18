@@ -105,7 +105,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 				dodged++;
 			}
 			//("Misdirection"
-			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				dodged++;
 			}
 			//Determine if cat'ed
@@ -158,7 +158,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 				dodged = 2;
 			}
 			//("Misdirection"
-			if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 15 && player.armorName == "red, high-society bodysuit") {
+			if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 15 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				dodged = 3;
 			}
 			//Determine if cat'ed

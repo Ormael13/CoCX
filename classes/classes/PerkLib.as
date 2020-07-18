@@ -1183,6 +1183,9 @@ public class PerkLib
 		public static const EyesOfTheHunterNovice:PerkType = mk("Eyes of the Hunter (Novice)", "Eyes of the Hunter (Novice)",
 				"Allow see few more than usual infomations about enemy (req. 25+ sensitivity).",
 				"You choose the 'Eyes of the Hunter (Novice)' perk, allowing you to gain more information about enemy you fight.");
+		public static const FairyQueenRegalia:PerkType = mk("Fairy Queen Regalia", "Fairy Queen Regalia",
+				"Misdirection, Slutty seduction 10, Increase Fae storm status chance,reduce spellcasting cost by 60%. ",
+				"Misdirection, Slutty seduction 10, Increase Fae storm chances to proc multiple status,reduce spellcasting cost by 60%.\n");
 		public static const Feint:PerkType = mk("Feint", "Feint",
 				"Unlock p. special 'Feint' that have chance to cause 1 turn long distraction of enemy(ies) that allow to use sneaky attack.",
 				"You choose the 'Feint' perk. Unlock p. special 'Feint' that have chance to cause 1 turn long distraction of enemy(ies) that allow to use sneaky attack.");

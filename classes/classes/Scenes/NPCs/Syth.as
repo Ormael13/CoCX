@@ -64,7 +64,7 @@ public class Syth extends Monster
 				return;
 			}
 			//("Misdirection"
-			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 5 && player.armorName == "red, high-society bodysuit") {
+			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 5 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' tail-swipe.\n");
 				return;
 			}

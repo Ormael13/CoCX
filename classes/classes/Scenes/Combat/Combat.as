@@ -1555,7 +1555,7 @@ public class Combat extends BaseContent {
             outputText("Using your skills at evading attacks, you anticipate and sidestep [monster a] [monster name]' attacks.");
         }
         //("Misdirection"
-        else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 15 && player.armorName == "red, high-society bodysuit") {
+        else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 15 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
             outputText("Using Raphael's teachings, you anticipate and sidestep [monster a] [monster name]' attacks.");
         }
         //Determine if cat'ed

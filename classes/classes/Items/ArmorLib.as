@@ -47,6 +47,7 @@ package classes.Items
 				PerkLib.WizardsEndurance,15,0,0,0);
 		public const EWROBE_:ArmorWithPerk = new ArmorWithPerk("EWRobe","E.W. Robe","ebonweave robe","an ebonweave robe",2,10,600,"This robe is ebonweave, created using refined ebonbloom petals. This robe is as comfortable as cloth yet more protective than chainmail. The cloth has a mystic aura, helpful when working magic.","Light",
 				PerkLib.WizardsEndurance,30,0,0,0);
+		public const FQR:ArmorWithPerk = new FairyQueenRegalia();
 		public const FULLCHN:Armor = new Armor("FullChn","Full Chain","full-body chainmail","a full suit of chainmail armor",8,0,320,"This full suit of chainmail armor covers its wearer from head to toe in protective steel rings.","Medium");
 		public const FULLPLT:Armor = new Armor("FullPlt","Full Plate","full platemail","a suit of full-plate armor",21,0,1260,"A highly protective suit of steel platemail.  It would be hard to find better physical protection than this.","Heavy");
 		public const G_CHANG:Armor = new Armor("G.Chang","GreenChangshan","Green Lunar new year dress (m)","a Green Lunar new year dress (m)",0,0,100,"A simple yet elegant green changshan with dragon motif. This clothing is said to bring in good luck increasing evasiveness and critical chance.","Light");

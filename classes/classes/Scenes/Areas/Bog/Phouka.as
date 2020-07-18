@@ -306,9 +306,9 @@ public class Phouka extends Monster
 				.add(consumables.RIZZART, 10)
 				.add(consumables.GROPLUS, 2)
 				.add(consumables.SDELITE, 13)
-				.add(consumables.P_WHSKY, 15)
-				.add(useables.S_SHARD, 20)
-				.add(null, 20);
+				.add(consumables.P_WHSKY, 10)
+				.add(useables.S_SHARD, 35)
+				.add(null, 10);
 			this.wings.type = Wings.FAIRY;
 			this.wings.desc = "small black faerie wings";
 			checkMonster();

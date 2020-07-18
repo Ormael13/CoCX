@@ -65,7 +65,7 @@ public class Zetaz extends Monster
 					if((player.findPerk(PerkLib.Evade) >= 0 && rand(4) == 0) ||
 						(player.findPerk(PerkLib.Flexibility) >= 0 && rand(6) == 0) ||
 						(player.spe > 65 && rand(10) == 0) ||
-						(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 20 && player.armorName == "red, high-society bodysuit")) {
+						(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 20 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia"))) {
 						outputText("You sidestep it a moment before it shatters on the wall, soaking the tapestries with red fluid!");
 					}
 					else {

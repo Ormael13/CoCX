@@ -34,7 +34,7 @@ import classes.internals.*;
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
 			}
 			//("Misdirection"
-			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
 			}
 			//Determine if cat'ed
@@ -147,7 +147,7 @@ import classes.internals.*;
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
 			}
 			//("Misdirection"
-			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
 			}
 			//Determine if cat'ed
@@ -269,7 +269,7 @@ import classes.internals.*;
 					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
 				}
 				//("Misdirection"
-				else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+				else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 					outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
 				}
 				//Determine if cat'ed
