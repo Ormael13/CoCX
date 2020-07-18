@@ -30,7 +30,6 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
-import classes.internals.MonsterCounters;
 import classes.internals.RandomDrop;
 import classes.internals.Utils;
 import classes.internals.WeightedDrop;
@@ -119,7 +118,6 @@ import flash.utils.getQualifiedClassName;
 		public var bonusSoulforce:Number = 0;
 		public var bonusWrath:Number = 0;
 		public var bonusMana:Number = 0;
-		public var monsterCounters:MonsterCounters = null;
 		public var bonusStr:Number = 0;
 		public var bonusTou:Number = 0;
 		public var bonusSpe:Number = 0;
@@ -337,7 +335,7 @@ import flash.utils.getQualifiedClassName;
 		public override function maxHP():Number {
             return Math.round(maxHP_base()*maxHP_mult());
         }
-		
+
 		public override function minHP():Number
 		{
 			var min:Number = 0;
@@ -441,7 +439,7 @@ import flash.utils.getQualifiedClassName;
 			temp = Math.round(temp);
 			return temp;
 		}
-		
+
 		public override function maxFatigue():Number
 		{
 			//Base fatigue
@@ -486,7 +484,7 @@ import flash.utils.getQualifiedClassName;
 			temp = Math.round(temp);
 			return temp;
 		}
-		
+
 		public override function maxSoulforce():Number
 		{
 			//Base soulforce
@@ -556,7 +554,7 @@ import flash.utils.getQualifiedClassName;
 			if ((hasPerk(PerkLib.EnemyTrueDemon) && !hasPerk(PerkLib.Phylactery)) || (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience))) temp = 0;
 			return temp;
 		}
-		
+
 		public override function maxWrath():Number
 		{
 			//Base wrath
@@ -627,7 +625,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience)) temp = 0;
 			return temp;
 		}
-		
+
 		public override function maxMana():Number
 		{
 			//Base mana
@@ -809,7 +807,7 @@ import flash.utils.getQualifiedClassName;
 			if (mult < 0) mult = 0;
 			return mult;
 		}
-		
+
 		public function canMonsterBleed():Boolean
 		{
 			return !hasPerk(PerkLib.EnemyConstructType) || !hasPerk(PerkLib.EnemyPlantType) || !hasPerk(PerkLib.EnemyGooType);
@@ -1229,7 +1227,7 @@ import flash.utils.getQualifiedClassName;
 			if (game.player.level >= 102) baseHumBoost1 += 1;
 			if (game.player.level >= 141) baseHumBoost1 += 1;
 			if (game.player.level >= 180) baseHumBoost1 += 1;
-			//if (level >= 274) 
+			//if (level >= 274)
 			return baseHumBoost1;
 		}
 		public function humanityBoostExpValue():Number
@@ -1623,7 +1621,7 @@ import flash.utils.getQualifiedClassName;
 				attack &&= handleBlind();
 			}
 			attack &&= !playerDodged();
-			
+
 			return attack;
 		}
 
@@ -2130,11 +2128,6 @@ import flash.utils.getQualifiedClassName;
 		 */
 		public final function defeated_(hpVictory:Boolean):void
 		{
-			if (monsterCounters!=null) {
-				monsterCounters.lost_total++;
-				if (hpVictory) monsterCounters.lost_hp++;
-				else monsterCounters.lost_lust++;
-			}
 			if (onDefeated != null) onDefeated(hpVictory);
 			else defeated(hpVictory);
 		}
@@ -2144,11 +2137,6 @@ import flash.utils.getQualifiedClassName;
 		 */
 		public final function won_(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			if (monsterCounters!=null) {
-				monsterCounters.won_total++;
-				if (hpVictory) monsterCounters.won_hp++;
-				else monsterCounters.won_lust++;
-			}
 			if (onWon != null) onWon(hpVictory,pcCameWorms);
 			else won(hpVictory,pcCameWorms);
 		}
@@ -2311,7 +2299,7 @@ import flash.utils.getQualifiedClassName;
 			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + maxLust() + " lust, " + fatigue + "/" + maxFatigue() + " fatigue, " + wrath + "/" + maxWrath() + " wrath, " + soulforce + "/" + maxSoulforce() + " soulforce, " + mana + "/" + maxMana() + " mana. ";
 			result += Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", bonus wrath=" + bonusWrath + ", bonus mana=" + bonusMana + ", bonus soulforce=" + bonusSoulforce + ", and lust vulnerability=" + lustVuln + ".\n"
 			result += Heis + "level " + level + " and " + have+" " + gems + " gems. You will be awarded " + XP + " XP.\n";
-			
+
 			var numSpec:int = (special1 != null ? 1 : 0) + (special2 != null ? 1 : 0) + (special3 != null ? 1 : 0);
 			if (numSpec > 0) {
 				result += Hehas + numSpec + " special attack" + (numSpec > 1 ? "s" : "") + ".\n";
@@ -2955,7 +2943,7 @@ import flash.utils.getQualifiedClassName;
 				else addStatusValue(StatusEffects.EnemyLoweredDamageH,1,-1);
 			}
 			//regeneration perks for monsters
-			if (((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0 || findPerk(PerkLib.ImprovedLifeline) >= 0 
+			if (((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0 || findPerk(PerkLib.ImprovedLifeline) >= 0
 			|| findPerk(PerkLib.GreaterLifeline) >= 0 || findPerk(PerkLib.EpicLifeline) >= 0 || findPerk(PerkLib.IcyFlesh) >= 0 || findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2))
 			&& this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxHP()) && (this.HP > 0))) {
 				var healingPercent:Number = 0;
@@ -3031,7 +3019,7 @@ import flash.utils.getQualifiedClassName;
 				addMana(manaRecovery);
 			}
 		}
-		
+
 		public function handleAwardItemText(itype:ItemType):void
 		{ //New Function, override this function in child classes if you want a monster to output special item drop text
 			if (itype != null) outputText("\nThere is " + itype.longName + " on your defeated opponent.  ");
@@ -3044,7 +3032,7 @@ import flash.utils.getQualifiedClassName;
 			else if (this.gems > 1) outputText("\n\nYou grab " + this.gems + " gems and " + this.XP + " XP from your victory.");
 			else if (this.gems == 0) outputText("\n\nYou gain " + this.XP + " XP from the battle.");
 		}
-		
+
 		public function handleCombatLossText(inDungeon:Boolean, gemsLost:int):int
 		{ //New Function, override this function in child classes if you want a monster to output special text after the player loses in combat
 			//This function doesn’t take the gems away from the player, it just provides the output text
