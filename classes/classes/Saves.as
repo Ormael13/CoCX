@@ -17,6 +17,7 @@ import classes.Items.*;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
+import classes.internals.SaveableState;
 import classes.lists.BreastCup;
 
 import flash.events.Event;
@@ -53,6 +54,7 @@ public class Saves extends BaseContent {
     //Any classes that need to be made aware when the game is saved or loaded can add themselves to this array using saveAwareAdd.
     //	Once in the array they will be notified by Saves.as whenever the game needs them to write or read their data to the flags array.
 	private static var _saveAwareClassList:Vector.<SaveAwareInterface> = new Vector.<SaveAwareInterface>();
+	private static var _saveableStates:Object = {};
 
     public function Saves(gameStateDirectGet:Function, gameStateDirectSet:Function) {
 		gameStateGet = gameStateDirectGet; //This is so that the save game functions (and nothing else) get direct access to the gameState variable
@@ -756,7 +758,13 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	saveFile.data.exists = true;
 	saveFile.data.version = ver;
 	flags[kFLAGS.SAVE_FILE_INTEGER_FORMAT_VERSION] = SAVE_FILE_CURRENT_INTEGER_FORMAT_VERSION;
-
+	
+	saveFile.data.ss = {};
+	for (var key:String in _saveableStates) {
+		var ss:SaveableState = _saveableStates[key];
+		saveFile.data.ss[key] = ss.saveToObject();
+	}
+	
 	//CLEAR OLD ARRAYS
 	
 	//Save sum dataz
@@ -2462,7 +2470,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				saveFile.data.itemSlot20.id || saveFile.data.itemSlot20.shortName),
 				saveFile.data.itemSlot20.quantity);
 		}
-
+		for (var key:String in _saveableStates) {
+			var ss:SaveableState = _saveableStates[key];
+			if (saveFile.data.ss && key in saveFile.data.ss) {
+				ss.loadFromObject(saveFile.data.ss[key], true);
+			} else {
+				ss.loadFromObject(null, true);
+			}
+		}
 		loadAllAwareClasses(CoC.instance); //Informs each saveAwareClass that it must load its values from the flags array
         unFuckSave();
 		
@@ -2734,5 +2749,18 @@ public function unFuckSave():void
     public static function saveAwareClassAdd(newEntry:SaveAwareInterface):void {
         _saveAwareClassList.push(newEntry);
     }
+	
+	public static function registerSaveableState(ss:SaveableState):void {
+		var name:String = ss.stateObjectName();
+		if (name in _saveableStates && _saveableStates[name] != ss) throw new Error("Duplicate saveable state named "+name);
+		_saveableStates[name] = ss;
+	}
+	public function resetSaveableStates():void {
+		for (var key:String in _saveableStates) {
+			var ss:SaveableState = _saveableStates[key];
+			ss.resetState();
+		}
+	}
+	
 }
 }
