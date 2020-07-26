@@ -45,6 +45,7 @@ import classes.Scenes.Dungeons.HelDungeon.HarpyQueen;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
+import classes.Stats.Buff;
 import classes.StatusEffectClass;
 import classes.StatusEffects;
 import classes.StatusEffects.VampireThirstEffect;
@@ -7369,6 +7370,8 @@ public class Combat extends BaseContent {
     // Called after the monster's action. Increments round counter. Setups doNext to win/loss/combat menu
     public function combatRoundOver():void {
         combatRound++;
+        player.statStore.advanceTime(Buff.RATE_ROUNDS,1);
+        monster.statStore.advanceTime(Buff.RATE_ROUNDS,1);
         statScreenRefresh();
         flags[kFLAGS.ENEMY_CRITICAL] = 0;
         combatIsOver();

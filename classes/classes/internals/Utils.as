@@ -69,6 +69,44 @@ package classes.internals
 			return r;
 		}
 		/**
+		 * Mimics JS Object.values
+		 */
+		public static function values(o:Object):Array {
+			var r:Array = [];
+			for each(var k:* in o) r.push(k);
+			return r;
+		}
+		/**
+		 * @return src.map( el => el['propname'] )
+		 */
+		public static function mapOneProp(src:Array,propname:String):Array {
+			var result:Array = [];
+			for (var i:int = 0; i< src.length; i++) {
+				result.push(src[i][propname]);
+			}
+			return result;
+		}
+		/**
+		 * @return src.filter(el=>el).map( el => mapping.map(prop => el[prop]) )
+		 * if keepNulls = true: src.map( el => el ? mapping.map(prop => el[prop]) : null )
+		 */
+		public static function mapToArrays(src:Array,mapping:/*String*/Array,keepNulls:Boolean=false):Array {
+			var result:/*Array*/Array = [];
+			for (var i:int=0; i<src.length; i++) {
+				var el:* = src[i];
+				if (el) {
+					var mapped:Array = [];
+					for each (var prop:String in mapping) {
+						mapped.push(el[prop]);
+					}
+					result.push(mapped);
+				} else if (keepNulls) {
+					result.push(null);
+				}
+			}
+			return result;
+		}
+		/**
 		 * Deleting obj[key] with default.
 		 *
 		 * If `key` in `obj`: return `obj[key]` and delete `obj[key]`
