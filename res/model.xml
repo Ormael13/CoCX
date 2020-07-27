@@ -527,6 +527,7 @@
         <cell rect="853,325,80,105" name="clothe/blackKimonoSleeves" dx="64" dy="72"/>
         <cell rect="935,325,80,104" name="clothe/goblinTechnomancerClotheArms" dx="64" dy="72"/>
         <cell rect="622,445,40,80" name="clothe/comfortableClothes" dx="79" dy="44"/>
+        <cell rect="672,445,45,80" name="clotheLegs/comfortableClothes" dx="79" dy="90"/>
         <cell rect="751,158,40,54" name="clotheLegs/whiteKimonoBottom" dx="85" dy="121"/>
         <cell rect="919,158,40,54" name="clotheLegs/blackKimonoBottom" dx="85" dy="121"/>
         <cell rect="1099,325,80,104" name="clotheLegs/goblinTechnomancerClotheBoots" dx="54" dy="72"/>
@@ -534,7 +535,6 @@
         <cell rect="1108,158,40,55" name="clotheLegs/scandalousSuccubusClothinglegsLewd" dx="80" dy="119"/>
         <cell rect="1108,158,40,55" name="clotheLegs/scandalousSuccubusClothingTaurTODO" dx="72" dy="96"/>
         <cell rect="935,543,150,80" name="clotheLegs/fairyQueenDressUnder" dx="22" dy="61"/>
-        <cell rect="1099,325,80,104" name="clotheLegs/" dx="54" dy="72"/>
         <cell rect="776,12,45,25" name="armorNeck/fullplatetopFemale" dx="80" dy="63"/>
         <cell rect="833,12,45,25" name="armorNeck/fullplatetopMale" dx="80" dy="63"/>
         <cell rect="644,798,173,156" name="armorNeck/WalpurgisClothes" dx="20" dy="12"/>
@@ -1497,57 +1497,75 @@
 		
 		<!-- HAIR STYLE AREA -->
 		<if test="hairLength &gt; 0">
-            <if test="hairType == Hair.STORM || hairType == Hair.BURNING || hairType == Hair.ANEMONE
-            || hairType == Hair.QUILL || hairType == Hair.FEATHER || hairType == Hair.GORGON || hairType == Hair.FLUFFY">
-                <else>
-                    <switch value="hairStyle">
-                        <case values="Hair.WILD">
-                            <switch>
-                                <case test="hairLength lt 16">
-                                    <show part="hair/feather"/>
-                                    <show part="hair_bg/feather"/>
-                                </case>
-                                <default>
-                                    <show part="hair/feather"/>
-                                    <show part="hair_bg/feather"/>
+            <if test="hairType != Hair.FLUFFY and hairType != Hair.GORGON and hairType != Hair.ANEMONE and hairType != Hair.GOO">
+                <if test="hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL">
+                    <if test="hairStyle != Hair.PLAIN">
+                        <hide part="hair/0"/>
+                        <hide part="hair_bg/02"/>
+                        <show part="hair/feather"/>
+                        <show part="hair_bg/feather"/>
+                    </if>
+                </if>
+                <switch value="hairStyle">
+                    <case values="Hair.WILD">
+                        <switch>
+                            <case test="hairLength lt 16">
+                            </case>
+                            <default>
+                                <if test="hairType != Hair.STORM and hairType != Hair.BURNING">
+                                    <hide part="hair_bg/*"/>
                                     <show part="hair_bg/02"/>
-                                </default>
-                            </switch>
-                        </case>
-                        <case values="Hair.PONYTAIL">
-                            <show part="hair/feather"/>
-                            <show part="hair_bg/feather"/>
-                            <show part="hair_bg/ponytail"/>
-                        </case>
-                        <case values="Hair.LONGTRESSES">
-                            <show part="hair/feather"/>
-                            <show part="hair_bg/feather"/>
-                            <show part="hair_bg/longTresse"/>
-                        </case>
-                        <case values="Hair.TWINPIGTAIL">
-                            <show part="hair/feather"/>
-                            <show part="hair_bg/feather"/>
-                            <show part="hair_bg/twinPigtail"/>
-                        </case>
-                        <case values="Hair.DWARVEN">
-                            <show part="hair/feather"/>
-                            <show part="hair_bg/feather"/>
-                            <show part="hair_bg/dwarven"/>
-                        </case>
-                        <default>
+                                </if>
+                            </default>
+                        </switch>
+                    </case>
+                    <case values="Hair.PONYTAIL">
+                        <show part="hair_bg/ponytail"/>
+                        <if test="hairType == Hair.STORM or hairType == Hair.BURNING">
+                            <hide part="hair_bg/raiju3"/>
+                            <hide part="hair_bg/hellcat"/>
+                        </if>
+                    </case>
+                    <case values="Hair.LONGTRESSES">
+                        <show part="hair_bg/longTresse"/>
+                        <if test="hairType == Hair.STORM or hairType == Hair.BURNING">
+                            <hide part="hair_bg/raiju3"/>
+                            <hide part="hair_bg/hellcat"/>
+                        </if>
+                    </case>
+                    <case values="Hair.TWINPIGTAIL">
+                        <show part="hair_bg/twinPigtail"/>
+                        <if test="hairType == Hair.STORM or hairType == Hair.BURNING">
+                            <hide part="hair_bg/raiju3"/>
+                            <hide part="hair_bg/hellcat"/>
+                        </if>
+                    </case>
+                    <case values="Hair.DWARVEN">
+                        <show part="hair_bg/dwarven"/>
+                        <if test="hairType == Hair.STORM or hairType == Hair.BURNING">
+                            <hide part="hair_bg/raiju3"/>
+                            <hide part="hair_bg/hellcat"/>
+                        </if>
+                    </case>
+                    <default>
+                        <if test="hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.FEATHER">
                             <switch>
                                 <case test="hairLength lt 16">
+                                    <hide part="hair/*"/>
+                                    <hide part="hair_bg/*"/>
                                     <show part="hair/0"/>
                                     <show part="hair_bg/0"/>
                                 </case>
                                 <default>
+                                    <hide part="hair/*"/>
+                                    <hide part="hair_bg/*"/>
                                     <show part="hair/0"/>
                                     <show part="hair_bg/02"/>
                                 </default>
                             </switch>
-                        </default>
-                    </switch>
-                </else>
+                        </if>
+                    </default>
+                </switch>
             </if>
 		</if>
 		

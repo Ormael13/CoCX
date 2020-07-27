@@ -2102,7 +2102,7 @@ public class PlayerAppearance extends BaseContent {
 			else if(hairStyle == Hair.TWINPIGTAIL)
 				outputText("  Your hairs are tied up into a pair of pigtail.");
 			else if(hairStyle == Hair.DWARVEN)
-				outputText("  Your hairs are tied up into a dwarven fashion");
+				outputText("  Your hairs are tied up into a dwarven fashion.");
 		}
 	}
 	public function describeFaceShape():void {

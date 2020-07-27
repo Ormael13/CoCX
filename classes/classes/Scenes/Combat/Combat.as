@@ -5517,7 +5517,7 @@ public class Combat extends BaseContent {
 
         //Bicorn
         if (player.hasPerk(PerkLib.AuraOfCorruption) && monster.lustVuln > 0) {
-            var lustDmg:Number = ((scalingBonusIntelligence() * 0.5) + (scalingBonusLibido() * 0.5));
+            var lustDmg:Number = ((scalingBonusIntelligence() * 0.30) + (scalingBonusLibido() * 0.30));
             if (player.findPerk(PerkLib.SensualLover) >= 0) lustDmg += 2;
             if (player.findPerk(PerkLib.Seduction) >= 0) lustDmg += 5;
             if (player.findPerk(PerkLib.SluttySeduction) >= 0) lustDmg += player.perkv1(PerkLib.SluttySeduction);
@@ -5525,15 +5525,16 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) lustDmg += 5;
             if (player.findPerk(PerkLib.FlawlessBody) >= 0) lustDmg += 10;
             if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
+            if (player.hasPerk(PerkLib.ArcaneLash)) lustDmg *= 1.5;
             if (player.findPerk(PerkLib.JobSeducer) >= 0) lustDmg += player.teaseLevel * 3;
             else lustDmg += player.teaseLevel * 2;
             if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) lustDmg *= 1.2;
             if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") lustDmg *= (1 + ((10 + rand(11)) / 100));
             if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) lustDmg *= (1 + (player.lust100 * 0.01));
             if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) lustDmg *= (1 + combat.historyWhoreBonus());
-            if (player.hasPerk(PerkLib.EclipticMind)) lustDmg *= (player.cor / 50);
-            if (player.hasPerk(PerkLib.EclipticMindEvolved)) lustDmg *= (player.cor / 50);
-            if (player.hasPerk(PerkLib.EclipticMindFinalForm)) lustDmg *= (player.cor / 50);
+            if (player.hasPerk(PerkLib.EclipticMind)) lustDmg *= ((player.cor / 50 / 100)+1);
+            if (player.hasPerk(PerkLib.EclipticMindEvolved)) lustDmg *= ((player.cor / 50 / 100)+1);
+            if (player.hasPerk(PerkLib.EclipticMindFinalForm)) lustDmg *= ((player.cor / 50 / 100)+1);
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
             if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
             if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
@@ -5544,7 +5545,7 @@ public class Combat extends BaseContent {
             outputText("[monster A] [monster name] slowly succumbs to [monster his] basest desires as your aura of corruption seeps through [monster him].");
             if (monster.cor < 100) outputText("Your victims purity is slowly becoming increasingly eroded by your seeping corruption.");
             lustDmg = Math.round(lustDmg);
-            monster.teased(lustDmg, false);
+            monster.teased(monster.lustVuln * lustDmg, false);
             outputText("\n\n");
             bonusExpAfterSuccesfullTease();
         }
