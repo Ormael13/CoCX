@@ -1,4 +1,4 @@
-﻿package classes 
+﻿package classes
 {
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
@@ -17,7 +17,6 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kACHIEVEMENTS;
-import classes.GlobalFlags.kCOUNTERS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
 import classes.Scenes.Areas.Desert.SandWitchScene;
@@ -25,8 +24,6 @@ import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
-import classes.internals.CountersStorage;
-import classes.internals.RootCounters;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
 
@@ -79,6 +76,7 @@ import coc.view.MainView;
 		
 		public function newGameGo():void {
 			XXCNPC.unloadSavedNPCs();
+			CoC.instance.saves.resetSaveableStates();
 			mainView.eventTestInput.x = -10207.5;
 			mainView.eventTestInput.y = -1055.1;
 			hideStats();
@@ -98,11 +96,11 @@ import coc.view.MainView;
 			mainView.setButtonText(0, "Newgame"); // b1Text.text = "Newgame";
 			//flags[kFLAGS.CUSTOM_PC_ENABLED] = 0;
 			
-			var showSpecialNames:Boolean = true; // achievements[kACHIEVEMENTS.STORY_FINALBOSS] > 0;			
+			var showSpecialNames:Boolean = true; // achievements[kACHIEVEMENTS.STORY_FINALBOSS] > 0;
 			
 			clearOutput();
 			outputText("You grew up in the small village of Ingnam, a remote village with rich traditions, buried deep in the wilds.  Every year for as long as you can remember, your village has chosen a champion to send to the cursed Demon Realm.  Legend has it that in years Ingnam has failed to produce a champion, chaos has reigned over the countryside.  Children disappear, crops wilt, and disease spreads like wildfire.  This year, <b>you</b> have been selected to be the champion.\n\n");
-			//if (showSpecialNames) outputText("\n\n\n\n");			
+			//if (showSpecialNames) outputText("\n\n\n\n");
 			outputText("What is your name?");
 		
 			/*CODE FROM CMACLOAD HERE
@@ -131,7 +129,7 @@ import coc.view.MainView;
 			
 			var preList:Array = [];
 			//function _add(element:Array):void{preList.push({label: element[0], data:element});}
-			//if (CoC_Settings.debugBuild) preList.push( { label: "TestChar", data: [ "TestChar", customTestChar, true, "For debug." ]} );			
+			//if (CoC_Settings.debugBuild) preList.push( { label: "TestChar", data: [ "TestChar", customTestChar, true, "For debug." ]} );
 			for (var t:int = 0; t < specialCharacters.customs.length; t++) preList.push( { label: specialCharacters.customs[t][0], data:specialCharacters.customs[t] } );
 
 			if (showSpecialNames) {
@@ -174,7 +172,7 @@ import coc.view.MainView;
 			player.lust = 15;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				player.XP = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP];
-				player.level = 0;				
+				player.level = 0;
 				player.gems = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS];
 			}
 			player.hairLength = 5;
@@ -403,9 +401,6 @@ import coc.view.MainView;
 			}
 			//Clear plot storage array!
 			CoC.instance.flags = new DefaultDict();
-			var countersStorage:CountersStorage = kCOUNTERS.create();
-			kCOUNTERS.initialize(countersStorage);
-			CoC.instance.counters = new RootCounters(countersStorage);
 			CoC.instance.saves.loadPermObject();
 			//Carry over data if new game plus.
 			if (player.hasKeyItem("Ascension") >= 0) CoC.instance.flags = newFlags;
@@ -481,7 +476,7 @@ import coc.view.MainView;
 				completeCharacterCreation(); //Skip character creation, customPlayerProfile will be called in completeCharacterCreation
 			}
 			else {
-				//After character creation the fact that customPlayerProfile is not null will activate a custom player setup 
+				//After character creation the fact that customPlayerProfile is not null will activate a custom player setup
 				outputText("There is something different about you, but first, what is your basic gender?  An individual such as you may later overcome this, of course...\n\n");
 				genericGenderChoice();
 			}
@@ -511,7 +506,7 @@ import coc.view.MainView;
 			else
 				outputText("\n\nThis character have no pre-defined history.");
 				
-			flushOutputTextToGUI();	
+			flushOutputTextToGUI();
 			mainView.nameBox.text = selectedItem.data[0];
 		}
 		
@@ -843,7 +838,7 @@ import coc.view.MainView;
 			addButton(5, "Mahogany", confirmComplexion, "mahogany");
 			addButton(6, "Russet", confirmComplexion, "russet");
 			addButton(14, "Back", genericStyleCustomizeMenu);
-		}	
+		}
 		private function confirmComplexion(complexion:String):void {
 			player.skinTone = complexion;
 			genericStyleCustomizeMenu();
@@ -968,7 +963,7 @@ import coc.view.MainView;
 			if (player.gender == 2)
 			{
 				mainView.nameBox.text = "67";
-			}	
+			}
 			if (player.gender == 3)
 			{
 				mainView.nameBox.text = "69";
@@ -1503,7 +1498,7 @@ import coc.view.MainView;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) chooseGameModes();
 			else startTheGame();
 		}
-			
+		
 		public function arrival():void {
 			statScreenRefresh();
 			model.time.hours = 11;
@@ -1563,7 +1558,7 @@ import coc.view.MainView;
 			flags[kFLAGS.HUNGER_ENABLED] = 0;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
 			doNext(startTheGame);
-		}	
+		}
 
 		private function chooseModeSurvival():void {
 			clearOutput();
@@ -1573,7 +1568,7 @@ import coc.view.MainView;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
 			player.hunger = 80;
 			doNext(startTheGame);
-		}	
+		}
 
 		private function chooseModeRealistic():void {
 			clearOutput();
@@ -1583,7 +1578,7 @@ import coc.view.MainView;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
 			player.hunger = 80;
 			doNext(startTheGame);
-		}	
+		}
 
 		private function chooseModeHard():void {
 			clearOutput();
@@ -1625,7 +1620,7 @@ import coc.view.MainView;
 				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
 			}
 			addButton(14, "Back", chooseGameModes);
-		}	
+		}
 
 		private function chooseModeXianxia():void {
 			clearOutput();
@@ -1645,7 +1640,7 @@ import coc.view.MainView;
 		private function chooseSlotHardcore(num:int):void {
 			flags[kFLAGS.HARDCORE_SLOT] = "CoC_" + num;
 			startTheGame();
-		}	
+		}
 
 		//Choose the game mode when called!
 		private function chooseGameModes():void {
@@ -3531,10 +3526,10 @@ import coc.view.MainView;
 		}
 
 		private function isSpecialKeyItem(keyName:* = null):Boolean {//tylko sky poinson pearl zostawić tutaj
-			return (keyName == "Ascension" || keyName == "Sky Poison Pearl" || keyName == "Nieve's Tear"); 
+			return (keyName == "Ascension" || keyName == "Sky Poison Pearl" || keyName == "Nieve's Tear");
 		}
 
-		private function isSpecialStatus(statusEffects:StatusEffectClass, statusEffect:* = null):Boolean {	
+		private function isSpecialStatus(statusEffects:StatusEffectClass, statusEffect:* = null):Boolean {
 			return (statusEffect == StatusEffects.KnowsWereBeast || statusEffects.value4 == 9000);	//na razie jest tu tylko werebeast
 		}	//ale potem zamienić to na specialne soulskills z każdego z klanów
 	}

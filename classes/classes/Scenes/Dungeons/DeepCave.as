@@ -1,5 +1,5 @@
 //Dungeon 2: Deep Cave
-package classes.Scenes.Dungeons 
+package classes.Scenes.Dungeons
 {
 import classes.*;
 import classes.BodyParts.LowerBody;
@@ -23,7 +23,6 @@ use namespace CoC;
 		private static const DUNGEON_CAVE_SECRET_TUNNEL:int		= 15;
 		private static const DUNGEON_CAVE_ZETAZ_CHAMBER:int		= 16;
 		
-		public var vala:ValaScene = new ValaScene();
 		public var shouldraFollower:ShouldraFollower = new ShouldraFollower();
 		
 		public function DeepCave() {}
@@ -39,7 +38,7 @@ use namespace CoC;
 				flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] = 1;
 				simpleChoices("Enter", roomEntrance, "", null, "", null, "", null, "Leave", exitDungeon);
 			}
-			else 
+			else
 			{
 				outputText("You make your way back to the cave entrance.");
 				doNext(roomEntrance);
@@ -50,7 +49,7 @@ use namespace CoC;
 			inDungeon = false;
 			clearOutput();
 			outputText("You leave the cave behind and take off through the deepwoods back towards camp.");
-			doNext(camp.returnToCampUseOneHour);	
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		private function checkDoor1():void {
@@ -76,7 +75,7 @@ use namespace CoC;
 		private function takeBondageStraps():void {
 			clearOutput();
 			flags[kFLAGS.ZETAZ_LAIR_TOOK_BONDAGE_STRAPS]++;
-			inventory.takeItem(armors.BONSTRP, roomSecretPassage);			
+			inventory.takeItem(armors.BONSTRP, roomSecretPassage);
 		}
 		
 		//Sean the Incubus
@@ -141,7 +140,7 @@ use namespace CoC;
 			addButton(11, weapons.PSWHIP.shortName, buyItem, 11);
 			addButton(12, weaponsrange.SSKETCH.shortName, buyItem, 12);
 			addButton(14, "Leave", roomEntrance);
-		}		
+		}
 		
 		private function buyItem(item:Number = 0):void
 		{
@@ -332,7 +331,7 @@ use namespace CoC;
 			//[Fuck] [Leave]
 			if(player.gender > 0) {
 				outputText(" What will you do?");
-				simpleChoices("Fuck",vala.valaFightVictoryFuck,"", null,"", null,"", null,"Leave",cleanupAfterCombat);
+				simpleChoices("Fuck",SceneLib.vala.valaFightVictoryFuck,"", null,"", null,"", null,"Leave",cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}
@@ -404,13 +403,13 @@ use namespace CoC;
 		}
 		public function loseToImpMob():void {
 			clearOutput();
-			//(HP) 
+			//(HP)
 			if(player.HP < 1) outputText("Unable to handle your myriad wounds, you collapse with your strength exhausted.\n\n");
 			//(LUST)
 			else outputText("Unable to handle the lust coursing through your body, you give up and collapse, hoping the mob will get you off.\n\n");
 			
 			outputText("In seconds, the squirming red bodies swarm over you, blotting the rest of the room from your vision.  You can feel their scrabbling fingers and hands tearing off your [armor], exposing your body to their always hungry eyes.   Their loincloths disappear as their growing demonic members make themselves known, pushing the tiny flaps of fabric out of the way or outright tearing through them.   You're groped, touched, and licked all over, drowning in a sea of long tongues and small nude bodies.\n\n");
-					   
+			
 			outputText("You're grabbed by the chin, and your jaw is pried open to make room for a swollen dog-dick.   It's shoved in without any warmup or fan-fare, and you're forced to taste his pre in the back of your throat.  You don't dare bite down or resist in such a compromised position, and you're forced to try and suppress your gag reflex and keep your teeth back as he pushes the rest of the way in, burying his knot behind your lips.\n\n");
 			
 			//(tits)
@@ -435,7 +434,7 @@ use namespace CoC;
 				else outputText("all the");
 				outputText(" openings on your chest are plugged with a tumescent demon-cock.\n\n");
 			}
-			//(SINGLE PEN) 
+			//(SINGLE PEN)
 			if(!player.hasVagina()) {
 				outputText("Most of the crowd centers itself around your lower body, taking a good long look at your " + assholeDescript() + ".  An intrepid imp steps forwards and pushes his member into the unfilled orifice.  You're stretched wide by the massive and unexpectedly forceful intrusion.  The tiny corrupted nodules stroke every inch of your interior, eliciting uncontrollable spasms from your inner muscles.  The unintentional dick massage gives your rapist a wide smile, and he reaches down to smack your ass over and over again throughout the ordeal.");
 				player.buttChange(12,true,true,false);
@@ -510,16 +509,16 @@ use namespace CoC;
 			player.HP += 100;
 			//GAME OVER NERD
 			EventParser.gameOver();
-		}		
+		}
 		public function defeatZetaz():void {
 			flags[kFLAGS.DEFEATED_ZETAZ]++;
 			clearOutput();
 			//[VICTORY HP]
 			if(monster.HP < 1) outputText("Zetaz sinks down on his knees, too wounded to continue.  He looks up at you with helpless rage in his eyes and asks, \"<i>Are you satisfied now?  Go ahead then, kill me.  My life hasn't been worth living since I met you anyway.</i>\"\n\n");
-			//[VICTORY LUST] 
+			//[VICTORY LUST]
 			else outputText("Zetaz sinks down on his knees and fishes his massive, pre-drooling member from under his loincloth.  He looks up at you, nearly crying and moans, \"<i>Why? Ruining my life wasn't enough?  You had to make me jerk off at your feet too?  Just kill me, I don't want to live anymore.</i>\"\n\n");
 			
-			//[Both] 
+			//[Both]
 			outputText("He can't die yet.  You need to know where his master, this 'Lethice', is.  It sounds like she's the queen-bitch of the demons, and if you're going to break this vicious cycle");
 			//( or take her place)
 			if(player.cor > 66) outputText(" or take her place");
@@ -563,7 +562,7 @@ use namespace CoC;
 			player.createKeyItem("Zetaz's Map",0,0,0,0);
 			cleanupAfterCombat();
 		}
-			
+		
 		//[Sexual Interrogation]
 		public function sexualInterrogation():void {
 			clearOutput();
@@ -625,7 +624,7 @@ use namespace CoC;
 			cleanupAfterCombat();
 		}
 
-		//[Tighten Strap] 
+		//[Tighten Strap]
 		public function sexualTortureTightenZetaz():void {
 			clearOutput();
 			outputText("\"<i>Idiot,</i>\" you taunt while you tighten the strap further.  Zetaz actually starts to bawl in anguish while another orgasm worth of cum backs up inside him.  You don't want him to get out of the binding while you search for his map, so you pull the cord under his leg and use the free end to bind his wrists together behind his back.  Fondling his turgid prick one last time for good luck, you leave him to struggle with his need as you search for your map.  It's difficult to blank out all the whines and cries, but you manage.\n\n");
@@ -678,7 +677,7 @@ use namespace CoC;
 
 		public function femaleZetazOver():void {
 			//F-drugged up and tied to the table in the main room.  Cum in by all the imps till pregnant.  Daily fuckings with accompanying mind-fuck.
-				
+			
 			outputText("With your resistance ");
 			if(player.HP < 1) outputText("beaten out of you");
 			else outputText("moistening the delta of your legs");
@@ -837,7 +836,7 @@ use namespace CoC;
 			dynStats("cor", 50);
 			doNext(zetazBadEndEpilogue);
 		}
-			
+		
 		//M-Males – drugged & pegged, slowly have their memories erased/brainwashed.
 		//[Males]
 		public function malesZetazOver():void {
@@ -934,18 +933,18 @@ use namespace CoC;
 			clearOutput();
 			outputText("\"<i>When we captured Vala, I entertained the thought of breaking her on my dick like a crystalline condom, but I'm rather glad I chose to raise her to be my pet instead.</i>\" The imp's voice is familiar and your mind lurches to the memory of that first violation you suffered when you stepped through the portal to this world. Zetaz. He said never to forget the name Zetaz. You eyes roll in panic, but he holds your chin, his leering face filling your vision. \"<i>As a reward to obedient little Vala, I've decided to remake you in her image. We'll crush all that fatty flesh from your waist, keep your torso bound until you're too weak to walk, and pump you so full of drugs and cum that even seeing your name will be painful,</i>\" he taps the bronze plaque he's prepared for you, a mirror to the fairy's. \"<i>Why, in a few months, we'll be hard pressed to tell the two of you apart.</i>\" A fresh wave of fairy-lubricated imp-seed pumps into your abdomen and the rubber girdle strains, but holds, washing the spunk back up, into your throat, until it feels like you might drown in the frothing cream.\n\n");
 			outputText("There's no time to contemplate your fate, however, as the imp's black poison seems to take hold and you feel a burning all along your body. ");
-			//(No vagina: 
+			//(No vagina:
 			if(!player.hasVagina()) {
 				outputText("Between your thighs, a wet slurping tears through the air and a sudden seething heat fills your groin as a fresh pussy opens up, just under your dick.  ");
 				player.createVagina(true, 1, 0);
 			}
-			//(No breasts: 
+			//(No breasts:
 			if(player.biggestTitSize() < 1) outputText("You shudder and your chest feels like it's being flooded by the spooge floating at your tonsils. Before your eyes, the girdle around your chest is pushed down and a pair of swelling breasts fills your vision, filling heavily with milk just aching to be sucked from your distended nipples.  ");
 			outputText("The space between your shoulder blades feels like it's been torn open and your muscles reknit themselves as gossamer wings burst from your skin, thin as a dragonfly's and nearly as long as you are tall, settling against their rubber counterparts. Every inch of your skin seems to blister as a feeling of molten glass pouring over you causes you to tremble with agonized shudders, your pores sealing and skin gaining a glossy sheen.\n\n");
 			outputText("\"<i>You're looking more like her by the second,</i>\" Zetaz compliments, stroking your now-flawless face. \"<i>Don't worry about that pesky mind of yours- I don't like using drugs to wipe that imperfection away like some of my kin. No, we'll just use you until you break. Perhaps I'll let Vala have you from time to time, too. Won't that be fun? The two of you will grow to be inseparable, I'm sure.</i>\" Zetaz steps back and signals the imps clinging to the fairy to come down. \"<i>Why don't we get started?</i>\"");
 			//GAME OVER.
 			EventParser.gameOver();
-		}		
+		}
 		
 		public function loseToThisShitPartII():void {
 			hideUpDown();
@@ -986,7 +985,7 @@ use namespace CoC;
 				return;
 			}
 			//[BAD-END GO]
-			//(MALE)  
+			//(MALE)
 			if(player.gender == 1 || (player.gender == 3 && rand(2) == 0)) {
 				outputText("The orgasm squirts and drips from " + sMultiCockDesc() + " for what seems like forever.  It feels so right, so perfect, that you actually whine in disappointment when it finally does end.  You can't even be bothered to reach down and stroke yourself.  The softening in your loins is nothing compared to your flaccid, listless muscles.  You couldn't make your arms reach down to touch yourself even if you could work up the motivation to try.  Thankfully the slippery tentacles curl back around your ");
 				if(!player.hasSheath()) outputText("base");
@@ -1002,7 +1001,7 @@ use namespace CoC;
 				
 				outputText("Another wave of sperm begins the slow escape from your helpless, pinned form, drawn out by the fungus' constant sexual ministrations.  The fluid inside your pod gurgles noisily as the fluids are exchanged, but the sensory input doesn't register to your overloaded, drugged-out shell of a mind.  You've lost yourself to mindless pleasure, and repeated, endless orgasms.  The rest of your life is spent floating in an artificial womb, orgasming over and over to feed your fungus prison, and enjoying the pleasure that long ago eroded your ability to reason.");
 				EventParser.gameOver();
-				//GAME OVER 
+				//GAME OVER
 			}
 			//(FEM)
 			else {
@@ -1010,7 +1009,7 @@ use namespace CoC;
 				outputText("The steady rhythm of your penetration sends rockets of bliss-powered pleasure up your spinal cord and straight into your brain, where it explodes in orgasm.  Your body barely twitches, too relaxed to work up any muscle response, involuntary or otherwise.  A moment to rest never presents itself.  The cruel fungus never relents.  It never slows, unless it's only the briefest pause to intensify the next thrust.  Were you in the open air, away from the strange fluid you're now breathing, you'd be twisting and screaming with pleasure.  Instead you float and cum in silence.\n\n");
 				outputText("Fluids gurgle and shift inside the pod as they are exchanged.  If you were capable of noticing the sound or change, you might wonder if it's harvesting your sexual fluids, but even those thoughts are beyond you now. You've lost yourself to mindless pleasure, and repeated, endless orgasms.  The rest of your life is spent floating in an artificial womb, orgasming over and over to feed your fungus prison, and enjoying the pleasure that long ago eroded your ability to reason.");
 				EventParser.gameOver();
-				//GAME OVER 
+				//GAME OVER
 			}
 		}
 		
@@ -1127,18 +1126,18 @@ use namespace CoC;
 					outputText("You step around her and are startled to see that while the fey girl is whip-thin, her breasts are disproportionately huge. They'd be at least a DD-cup on a normal human, but for her height and body type, they're practically as large as her head. They jiggle at her slow, uneven breathing, tiny drops of milk bubbling at her nipples with every heartbeat. If she weren't chained to the ceiling, you suspect she wouldn't even be able to stand under her own power. Her eyes are open, but she's staring blankly ahead, unaware of the world around her, pupils constricted to pinpricks amid the ocean of her dulled pink irises. Like this, she's no threat to anybody. You suppose you could let her go, though it's unclear if she's self-aware enough to even move. Alternately, you could blow off a little steam.");
 					//[Free] [Use] [Leave]
 					if (player.gender > 0) {
-						addButton(0, "Free", vala.freeValazLooseCoochie)
+						addButton(0, "Free", SceneLib.vala.freeValazLooseCoochie)
 					}
 					if (player.lust >= 33 && shouldraFollower.followerShouldra()) {
 						addButton(1, "ShouldraVala", shouldraFollower.shouldraMeetsCorruptVala);
 					}
 				}
-				//Zetaz defeated 
+				//Zetaz defeated
 				else {
 					outputText("In the far corner, there is a small woman, her back to you, hanging limply by manacles that keep her suspended in a half-kneel. Rich purple hair hangs in long, clumped strands that sparkle occasionally with a pink glitter. Above her, there is a tarnished bronze nameplate that you think reads 'Vala,' but it's impossible to tell for sure under all the imp graffiti. She does not seem to be conscious.\n\n");
 					//Option to investigate her
 					//leftValaAlone()
-					addButton(0, "Faerie", vala.leftValaAlone);
+					addButton(0, "Faerie", SceneLib.vala.leftValaAlone);
 				}
 			}
 			//Not here
