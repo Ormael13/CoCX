@@ -530,7 +530,7 @@
         <cell rect="672,445,45,80" name="clotheLegs/comfortableClothes" dx="79" dy="90"/>
         <cell rect="751,158,40,54" name="clotheLegs/whiteKimonoBottom" dx="85" dy="121"/>
         <cell rect="919,158,40,54" name="clotheLegs/blackKimonoBottom" dx="85" dy="121"/>
-        <cell rect="1099,325,80,104" name="clotheLegs/goblinTechnomancerClotheBoots" dx="54" dy="72"/>
+        <cell rect="1099,325,80,104" name="clotheLegs/goblinTechnomancerClotheBoots" dx="64" dy="72"/>
         <cell rect="1066,158,40,55" name="clotheLegs/scandalousSuccubusClothinglegs" dx="85" dy="120"/>
         <cell rect="1108,158,40,55" name="clotheLegs/scandalousSuccubusClothinglegsLewd" dx="80" dy="119"/>
         <cell rect="1108,158,40,55" name="clotheLegs/scandalousSuccubusClothingTaurTODO" dx="72" dy="96"/>
