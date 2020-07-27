@@ -6047,7 +6047,7 @@ use namespace CoC;
 				EbunnyCounter++;
 			if (hasCock() && normalCocks())
 				EbunnyCounter++;
-			if (balls > 2)
+			if (hasPerk(PerkLib.EasterBunnyBalls) && balls >= 2)
 				EbunnyCounter++;
 			if (hasPerk(PerkLib.EasterBunnyEggBag) && balls >= 2)
 				EbunnyCounter++;
@@ -6058,6 +6058,8 @@ use namespace CoC;
 			if (hasPerk(PerkLib.EasterBunnyEggBag) && balls >= 2 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
 				EbunnyCounter++;
 			if (hasPerk(PerkLib.EasterBunnyEggBagEvolved) && balls >= 2 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
+				EbunnyCounter++;
+			if (hasPerk(PerkLib.EasterBunnyEggBagFinalForm) && balls >= 2 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
 				EbunnyCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				EbunnyCounter += 50;
