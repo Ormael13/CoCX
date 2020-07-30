@@ -17,6 +17,10 @@ import classes.Items.*;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
+import classes.Stats.BuffableStat;
+import classes.Stats.IStat;
+import classes.Stats.RawStat;
+import classes.internals.Jsonable;
 import classes.internals.SaveableState;
 import classes.lists.BreastCup;
 
@@ -849,6 +853,13 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.nosePShort = player.nosePShort;
 		saveFile.data.nosePLong = player.nosePLong;
 		
+		saveFile.data.stats = {};
+		for each(var k:String in player.statStore.allStatNames()) {
+			var stat:Jsonable = player.statStore.findStat(k) as Jsonable;
+			if (stat) {
+				saveFile.data.stats[k] = (stat as Jsonable).saveToObject();
+			}
+		}
 		//MAIN STATS
 		saveFile.data.str = player.str;
 		saveFile.data.tou = player.tou;
@@ -1561,6 +1572,20 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.nosePShort = saveFile.data.nosePShort;
 		player.nosePLong = saveFile.data.nosePLong;
 		
+		if (data.stats) {
+			player.statStore.forEachStat(function(stat:IStat):void {
+				if (stat is BuffableStat) {
+					(stat as BuffableStat).removeAllBuffs();
+				}
+			});
+			for (var k:String in data.stats) {
+				var statdata:* = data.stats[k];
+				var stat:IStat = player.statStore.findStat(k);
+				if (stat && stat is Jsonable) {
+					(stat as Jsonable).loadFromObject(statdata, false);
+				}
+			}
+		}
 		//MAIN STATS
 		player.str = saveFile.data.str;
 		player.tou = saveFile.data.tou;
