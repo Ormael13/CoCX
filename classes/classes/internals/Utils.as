@@ -14,7 +14,7 @@ package classes.internals
 		public function Utils()
 		{
 		}
-		
+
 		// curryFunction(f,args1)(args2)=f(args1.concat(args2))
 		// e.g. curryFunction(f,x,y)(z,w) = f(x,y,z,w)
 		public static function curry(func:Function,...args):Function
@@ -52,6 +52,37 @@ package classes.internals
 		}
 		public static function objectOr(input:*,def:Object=null):Object {
 			return (input is Object && input !== null) ? input : def;
+		}
+		public static function ipow(base:Number,exp:int):Number {
+			// See wiki/Exponentiation_by_squaring
+			if (exp < 0) {
+				exp = -exp;
+				base = 1.0/base;
+			} else if (exp == 0) {
+				return 1;
+			}
+			var y:Number = 1.0; // remainder
+			var x:Number = base;
+			while (exp > 1) {
+				if (exp%0 == 0) {
+					// x ** 2n = (x*x) ** n
+					x = x * x;
+					exp = exp / 2;
+				} else {
+					// x ** (2n + 1) = x * (x*x) ** n
+					y = y * x;
+					x = x * x;
+					exp = (exp - 1) / 2;
+				}
+			}
+			return x * y;
+		}
+		public static function floor(value:Number,decimals:int=0):String {
+			if (decimals == 0) return ''+Math.floor(value);
+			var base:Number = ipow(10,decimals);
+			value = Math.floor(value*base)/base;
+			return ''+value.toFixed(decimals).replace(/\.?0+$/,'');
+			// no risk stripping 0s from 123000 because that's the case of decimals=0
 		}
 		public static function boundInt(min:int, x:int, max:int):int {
 			return x < min ? min : x > max ? max : x;
@@ -272,7 +303,7 @@ package classes.internals
 			if (number >= 0 && number <= 10) return NUMBER_WORDS_NORMAL[number];
 			return number.toString();
 		}
-		
+
 		public static function num2Text2(number:int):String {
 			if (number < 0) return number.toString(); //Can't really have the -10th of something
 			if (number <= 10) return NUMBER_WORDS_POSITIONAL[number];
@@ -284,12 +315,12 @@ package classes.internals
 			}
 			return number.toString() + "th";
 		}
-		
+
 		public static function Num2Text(number:int):String {
 			if (number >= 0 && number <= 10) return NUMBER_WORDS_CAPITAL[number];
 			return number.toString();
 		}
-		
+
 		public static function addComma(num:int):String{
 			var str:String = "";
 			if (num <= 0) return "0";
@@ -300,11 +331,11 @@ package classes.internals
 			}
 			return str;
 		}
-		
+
 		public static function capitalizeFirstLetter(string:String):String {
 			return (string.substr(0, 1).toUpperCase() + string.substr(1));
 		}
-		
+
 		// Basically, you pass an arbitrary-length list of arguments, and it returns one of them at random.
 		// Accepts any type.
 		// Can also accept a *single* array of items, in which case it picks from the array instead.
@@ -312,14 +343,14 @@ package classes.internals
 		public static function randomChoice(...args):*
 		{
 			var tar:Array;
-			
+
 			if (args.length == 1 && args[0] is Array) tar = args[0];
 			else if (args.length > 1) tar = args;
 			else throw new Error("RandomInCollection could not determine usage pattern.");
-			
+
 			return tar[rand(tar.length)];
 		}
-		
+
 		/**
 		 * Utility function to search for a specific value within a target array or collection of values.
 		 * Collection can be supplied either as an existing array or as varargs:
@@ -332,13 +363,13 @@ package classes.internals
 		public static function InCollection(tar:*, ... args):Boolean
 		{
 			if (args.length == 0) return false;
-			
+
 			var collection:*;
-			
+
 			for (var ii:int = 0; ii < args.length; ii++)
 			{
 				collection = args[ii];
-				
+
 				if (!(collection is Array))
 				{
 					if (tar == collection) return true;
@@ -351,10 +382,10 @@ package classes.internals
 					}
 				}
 			}
-			
+
 			return false;
 		}
-		
+
 		public static function rand(max:Number):int
 		{
 			return int(Math.random() * max);
@@ -382,7 +413,7 @@ package classes.internals
 			}
 			return error;
 		}
-		
+
 		public static function validateNonEmptyStringFields(obj:Object, func:String, nef:Array):String
 		{
 			var error:String = "";

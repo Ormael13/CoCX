@@ -10,7 +10,7 @@ import coc.script.Eval;
 public class StatUtils {
 	public function StatUtils() {
 	}
-	
+
 	/**
 	 * Warning: can cause infinite recursion if called from owner.findStat() unchecked
 	 */
@@ -24,7 +24,7 @@ public class StatUtils {
 		}
 		return s;
 	}
-	
+
 	/**
 	 * Returns string like "Strength +10" or "Spell Power -50%"
 	 */
@@ -38,7 +38,7 @@ public class StatUtils {
 	public static function explainStat(stat:String,value:Number,withSignum:Boolean=false):String {
 		var signum:String  = (value >= 0 && withSignum ? '+' : '');
 		var x:String       = signum + value;
-		
+
 		if (stat in PlainNumberStats) {
 			return PlainNumberStats[stat]+' '+x;
 		}
@@ -48,6 +48,41 @@ public class StatUtils {
 		}
 		trace('[WARN] Unexplainable stat '+stat);
 		return stat+' '+x;
+	}
+
+	/**
+	 * Returns a multi-line string of "BuffName: +20"
+	 * @param asPercent show "+20%" instead of "+0.2"
+	 * @param includeHidden show hidden buffs
+	 */
+	public static function describeBuffs(stat:BuffableStat, asPercent:Boolean, includeHidden:Boolean = false):String {
+		var buffs:/*Buff*/Array = stat.listBuffs();
+		var hasHidden:Boolean = false;
+		var text:String = "";
+		for each(var buff:Buff in buffs) {
+			var value:Number = buff.value;
+			if (value >= 0.0 && value < 0.01) continue;
+			if (!buff.show && !includeHidden) {
+				hasHidden = true;
+				continue;
+			}
+			text += '<b>' + buff.text + ':</b> ';
+			if (asPercent) {
+				text += (value >= 0 ? '+' : '') + Utils.floor(value * 100) + '%';
+			} else {
+				text += (value >= 0 ? '+' : '') + Utils.floor(value, 1);
+			}
+			if (buff.rate != Buff.RATE_PERMANENT) {
+				text += ' ('+Utils.numberOfThings(buff.tick, {
+					([Buff.RATE_ROUNDS]):'round',
+					([Buff.RATE_HOURS]):'hour',
+					([Buff.RATE_DAYS]):'day'
+				}[buff.rate])+')'
+			}
+			text += '\n';
+		}
+		if (hasHidden) text += '<b>Unknown Sources:</b> ±??';
+		return text;
 	}
 	public static function nameOfStat(stat:String):String {
 		if (stat in PlainNumberStats) {
