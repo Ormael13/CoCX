@@ -265,7 +265,7 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.headjewelryEffectMagnitude.");
 		}
-				
+		
 		override public function set headjewelryPerk(value:String):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.headjewelryPerk.");
@@ -291,7 +291,7 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.necklaceEffectMagnitude.");
 		}
-				
+		
 		override public function set necklacePerk(value:String):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.necklacePerk.");
@@ -317,7 +317,7 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryEffectMagnitude.");
 		}
-				
+		
 		override public function set jewelryPerk(value:String):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryPerk.");
@@ -341,7 +341,7 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryEffectMagnitude2.");
 		}
-				
+		
 		override public function set jewelryPerk2(value:String):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryPerk2.");
@@ -419,7 +419,7 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.vehiclesEffectMagnitude.");
 		}
-				
+		
 		override public function set vehiclesPerk(value:String):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.vehiclesPerk.");
@@ -1580,7 +1580,7 @@ use namespace CoC;
 			//Returns the old undergarment, allowing the caller to discard it, store it or try to place it in the player's inventory
 			//Can return null, in which case caller should discard.
 			var oldUndergarment:Undergarment = UndergarmentLib.NOTHING;
-			if (newUndergarment.type == UndergarmentLib.TYPE_UPPERWEAR || typeOverride == 0) { 
+			if (newUndergarment.type == UndergarmentLib.TYPE_UPPERWEAR || typeOverride == 0) {
 				oldUndergarment = _upperGarment.playerRemove(); //The undergarment is responsible for removing any bonuses, perks, etc.
 				if (newUndergarment == null) {
 					CoC_Settings.error(short + ".upperGarment is set to null");
@@ -1588,7 +1588,7 @@ use namespace CoC;
 				}
 				_upperGarment = newUndergarment.playerEquip(); //The undergarment can also choose to equip something else.
 			}
-			else if (newUndergarment.type == UndergarmentLib.TYPE_LOWERWEAR || typeOverride == 1) { 
+			else if (newUndergarment.type == UndergarmentLib.TYPE_LOWERWEAR || typeOverride == 1) {
 				oldUndergarment = _lowerGarment.playerRemove(); //The undergarment is responsible for removing any bonuses, perks, etc.
 				if (newUndergarment == null) {
 					CoC_Settings.error(short + ".lowerGarment is set to null");
@@ -3993,13 +3993,13 @@ use namespace CoC;
 //			if (ferretScore() >= 4)
 //				chimeraCounter++;
 			if (kitsuneScore() >= 6 && tailType == 13 && tailCount >= 2)
-				chimeraCounter++;	
+				chimeraCounter++;
 			if (horseScore() >= 7)
 				chimeraCounter++;
 			if (unicornScore() >= 10)
 				chimeraCounter++;
 			if (alicornScore() >= 12)
-				chimeraCounter++;	
+				chimeraCounter++;
 			if (centaurScore() >= 8)
 				chimeraCounter++;
 			if (minotaurScore() >= 9)
@@ -4101,7 +4101,7 @@ use namespace CoC;
 			if (vampireScore() >= 10)
 				chimeraCounter++;
 			if (jabberwockyScore() >= 10)
-				chimeraCounter++;	
+				chimeraCounter++;
 			if (avianScore() >= 9)
 				chimeraCounter++;
 			if (gargoyleScore() >= 20)
@@ -4134,7 +4134,7 @@ use namespace CoC;
 			if (ferretScore() >= 4)
 				grandchimeraCounter++;
 			if (kitsuneScore() >= 12 && tailType == 13 && tailCount == 9)
-				grandchimeraCounter++;	
+				grandchimeraCounter++;
 			if (demonScore() >= 16 && hasStatusEffect(StatusEffects.PlayerPhylactery))
 				grandchimeraCounter++;
 			if (devilkinScore() >= 16 && hasStatusEffect(StatusEffects.PlayerPhylactery))
@@ -4164,7 +4164,7 @@ use namespace CoC;
 			if (magmagooScore() >= 17)
 				grandchimeraCounter++;
 			if (darkgooScore() >= 17)
-				grandchimeraCounter++;	
+				grandchimeraCounter++;
 			
 			End("Player","racialScore");
 			return grandchimeraCounter;
@@ -5519,7 +5519,7 @@ use namespace CoC;
 				darkgooCounter++;
 				if (hairType == Hair.GOO)
 					darkgooCounter++;
-				if (arms.type == Arms.GOO) 
+				if (arms.type == Arms.GOO)
 					darkgooCounter++;
 				if (lowerBody == LowerBody.GOO)
 					darkgooCounter += 3;
@@ -7874,9 +7874,9 @@ use namespace CoC;
 			}
 			if (faceType == Face.BOAR || arms.type == Arms.BOAR) {
 				if (faceType == Face.BOAR)
-					pigCounter += 2;		
+					pigCounter += 2;
 				if (arms.type == Arms.BOAR)
-					pigCounter += 2;		
+					pigCounter += 2;
 				if (skinTone == "pink" || skinTone == "dark blue")
 					pigCounter += 2;
 				if (hasFur() && (coatColor == "dark brown" || coatColor == "brown" || coatColor == "black" || coatColor == "red" || coatColor == "grey"))
@@ -8351,7 +8351,7 @@ use namespace CoC;
 			return gargoyleCounter;
 		}
 
-		//TODO: (logosK) elderSlime, succubus pussy/demonic eyes, arachne, wasp, lactabovine/slut, sleipnir, hellhound, ryu, quetzalcoatl, eredar, anihilan, 
+		//TODO: (logosK) elderSlime, succubus pussy/demonic eyes, arachne, wasp, lactabovine/slut, sleipnir, hellhound, ryu, quetzalcoatl, eredar, anihilan,
 
 		public function currentBasicJobs():Number {
 			var basicJobs:Number = 0;
@@ -9421,7 +9421,7 @@ use namespace CoC;
 				else maxSpe -= (5 * newGamePlusMod);
 			}
 			//Uma's Needlework affects max stats. Takes effect BEFORE racial modifiers and AFTER modifiers from body size.
-			//Caps strength from Uma's needlework. 
+			//Caps strength from Uma's needlework.
 			if (findPerk(PerkLib.ChiReflowSpeed) >= 0)
 			{
 				if (maxStr > UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP)
@@ -11490,6 +11490,7 @@ use namespace CoC;
 				// Using a copy of array in case effects are removed/added in handler
 				if (statusEffects.indexOf(a[i])>=0) a[i].onCombatEnd();
 			}
+			statStore.removeCombatRoundTrackingBuffs();
 		}
 
 		public function consumeItem(itype:ItemType, amount:int = 1):Boolean {
@@ -11511,7 +11512,7 @@ use namespace CoC;
 				}
 			}
 			return true;
-/*			
+/*
 			var consumed:Boolean = false;
 			var slot:ItemSlotClass;
 			while (amount > 0)
@@ -11809,9 +11810,9 @@ use namespace CoC;
 		// Attempts to put the player in heat (or deeper in heat).
 		// Returns true if successful, false if not.
 		// The player cannot go into heat if she is already pregnant or is a he.
-		// 
+		//
 		// First parameter: boolean indicating if function should output standard text.
-		// Second parameter: intensity, an integer multiplier that can increase the 
+		// Second parameter: intensity, an integer multiplier that can increase the
 		// duration and intensity. Defaults to 1.
 		public function goIntoHeat(output:Boolean, intensity:int = 1):Boolean {
 			if(!hasVagina() || pregnancyIncubation != 0) {
@@ -11844,9 +11845,9 @@ use namespace CoC;
 		// Attempts to put the player in rut (or deeper in heat).
 		// Returns true if successful, false if not.
 		// The player cannot go into heat if he is a she.
-		// 
+		//
 		// First parameter: boolean indicating if function should output standard text.
-		// Second parameter: intensity, an integer multiplier that can increase the 
+		// Second parameter: intensity, an integer multiplier that can increase the
 		// duration and intensity. Defaults to 1.
 		public function goIntoRut(output:Boolean, intensity:int = 1):Boolean {
 			if (!hasCock()) {
