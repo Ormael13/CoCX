@@ -4881,7 +4881,6 @@
             player.tou = 30;
             player.inte = 30;
             player.wis = 30;
-            player.sens = 20;
             player.lib = 25;
             player.cor = 5;
             player.lust = 10;

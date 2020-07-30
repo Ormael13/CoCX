@@ -24,6 +24,7 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.JewelryLib;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Stats.BuffableStat;
 import classes.Stats.StatStore;
 import classes.StatusEffects.Combat.CombatInteBuff;
 import classes.StatusEffects.Combat.CombatSpeBuff;
@@ -260,9 +261,47 @@ public class Creature extends Utils
 		 */
 		private var _stats: StatStore = new StatStore({
 			// 'statName': new BuffableStats({base: 0, min: 0});
+			'sens': new BuffableStat({base: 15, min: 0})
 		});
 		public function get statStore():StatStore { return _stats; }
-		
+
+		public function addCurse(statName:String, power:Number):void {
+			if (statName == "sens" || statName == "cor") {
+				statStore.addBuff(statName, power, 'Curse', {text: 'Curse'});
+			}
+			else {
+				statStore.addBuff(statName, -power, 'Curse', {text: 'Curse'});
+			}
+		}
+		public function removeCurse(statName:String, power:Number):void {
+			var stat:BuffableStat = statStore.findBuffableStat(statName);
+			if (!stat) {
+				// Error? No stat with such name
+				throw new Error("No such stat "+statName);
+			}
+			var current:Number = stat.valueOfBuff('Curse');
+			if (statName == "sens" || statName == "cor") {
+				if (current >0){
+					if (power >= current) {
+						stat.removeBuff(statName);
+					}
+					else if (power < current) {
+						stat.addOrIncreaseBuff(statName, -power);
+					}
+				}
+			}
+			else{
+				if (current <0){
+					if (power >= -current) {
+						stat.removeBuff(statName);
+					}
+					else if (power < -current) {
+						stat.addOrIncreaseBuff(statName, power);
+					}
+				}
+			}
+		}
+
 		//Primary stats
 		public var str:Number = 0;
 		public var tou:Number = 0;
@@ -270,7 +309,8 @@ public class Creature extends Utils
 		public var inte:Number = 0;
 		public var wis:Number = 0;
 		public var lib:Number = 0;
-		public var sens:Number = 0;
+		public var sensStat:BuffableStat = _stats.findStat('sens') as BuffableStat;
+		public function get sens():Number { return sensStat.value; }
 		public var cor:Number = 0;
 		public var fatigue:Number = 0;
 		public var mana:Number = 0;
@@ -779,7 +819,13 @@ public class Creature extends Utils
 			inte = Utils.boundFloat(mins.inte, inte + dinte, maxes.inte);
 			wis  = Utils.boundFloat(mins.wis, wis + dwis, maxes.wis);
 			lib  = Utils.boundFloat(mins.lib, lib + dlib, maxes.lib);
-			sens = Utils.boundFloat(mins.sens, sens + dsens, maxes.sens);
+			if (dsens > 0){
+				addCurse("sens", dsens);
+			}
+			if (dsens < 0){
+				removeCurse("sens", -dsens);
+			}
+			//sens = Utils.boundFloat(mins.sens, sens + dsens, maxes.sens);
 			lust = Utils.boundFloat(mins.lust, lust + dlust, maxes.lust);
 			cor  = Utils.boundFloat(mins.cor, cor + dcor, maxes.cor);
 			

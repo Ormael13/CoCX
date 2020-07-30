@@ -53,6 +53,7 @@ import classes.Scenes.Places.Boat.Marae;
 import classes.Player;
 import classes.Items.*;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
+import classes.Stats.Buff;
 
 use namespace CoC;
 	
@@ -958,7 +959,6 @@ public function FightHellfireSnail():void {
 			addButton(9, "Wis", StatsMenuWis).hint("Adj Wis.");
 			addButton(10, "Tone/Thicc/Fem", StatsMenuToneThicknessFeminity).hint("Adj Tone/Thickness/Feminity.");
 			addButton(11, "Lib", StatsMenuLib).hint("Adj Lib.");
-			addButton(12, "Sens", StatsMenuSens).hint("Adj Sens.");
 			addButton(13, "Cor", StatsMenuCor).hint("Adj Cor.");
 			addButton(14, "Back", SoulforceCheats);
 		}
@@ -1046,20 +1046,6 @@ public function FightHellfireSnail():void {
 			addButton(9, "Lib Down 5", SubLib5).hint("Substract 1000 from Lib.");
 			addButton(14, "Back", StatsAscensionMenu);
 		}
-		public function StatsMenuSens():void {
-			menu();
-			addButton(0, "Sens Up 1", AddSens1).hint("Add 1 to Sens.");
-			addButton(5, "Sens Down 1", SubSens1).hint("Substract 1 from Sens.");
-			addButton(1, "Sens Up 2", AddSens2).hint("Add 10 to Sens.");
-			addButton(6, "Sens Down 2", SubSens2).hint("Substract 10 from Sens.");
-			addButton(2, "Sens Up 3", AddSens3).hint("Add 50 to Sens.");
-			addButton(7, "Sens Down 3", SubSens3).hint("Substract 50 from Sens.");
-			addButton(3, "Sens Up 4", AddSens4).hint("Add 200 to Sens.");
-			addButton(8, "Sens Down 4", SubSens4).hint("Substract 200 from Sens.");
-			addButton(4, "Sens Up 5", AddSens5).hint("Add 1000 to Sens.");
-			addButton(9, "Sens Down 5", SubSens5).hint("Substract 1000 from Sens.");
-			addButton(14, "Back", StatsAscensionMenu);
-		}
 		public function StatsMenuCor():void {
 			menu();
 			addButton(0, "Cor Up 1", AddCor1).hint("Add 1 to Cor.");
@@ -1098,7 +1084,8 @@ public function FightHellfireSnail():void {
 			addButton(5, "Add EXP 1", AddEXP1).hint("Add 100 EXP.");
 			addButton(6, "Add EXP 2", AddEXP2).hint("Add 1000 EXP.");
 			addButton(7, "Add EXP 3", AddEXP3).hint("Add 10000 EXP.");
-			addButton(8, "Add EXP 4", AddEXP4).hint("Add 100000 EXP.");
+			//addButton(8, "Add EXP 4", AddEXP4).hint("Add 100000 EXP.");
+			addButton(8, "Test dynamic stat", TestDynamicStats).hint("Test Dynamic stats.");
 			if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) < 0) addButton(10, "Trib Perks", TribulationPerks).hint("Add 2 Tribulation perks.");
 			if (player.findPerk(PerkLib.SoulAncestor) < 0) addButton(11, "10-12 St.", Stage10to12SoulPerks).hint("Add all soul cultivator related perks for stages 10-12 of cultivation.");
 			if (player.level < CoC.instance.levelCap) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
@@ -2090,31 +2077,6 @@ public function FightHellfireSnail():void {
 			statScreenRefresh();
 			StatsMenuLib();
 		}
-		public function AddSens1():void {
-			player.sens = player.sens + 1;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function AddSens2():void {
-			player.sens = player.sens + 10;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function AddSens3():void {
-			player.sens = player.sens + 50;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function AddSens4():void {
-			player.sens = player.sens + 200;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function AddSens5():void {
-			player.sens = player.sens + 1000;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
 		public function AddCor1():void {
 			player.cor = player.cor + 1;
 			statScreenRefresh();
@@ -2315,31 +2277,6 @@ public function FightHellfireSnail():void {
 			statScreenRefresh();
 			StatsMenuLib();
 		}
-		public function SubSens1():void {
-			player.sens = player.sens - 1;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function SubSens2():void {
-			player.sens = player.sens - 10;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function SubSens3():void {
-			player.sens = player.sens - 50;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function SubSens4():void {
-			player.sens = player.sens - 200;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function SubSens5():void {
-			player.sens = player.sens - 1000;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
 		public function SubCor1():void {
 			player.cor = player.cor - 1;
 			statScreenRefresh();
@@ -2431,6 +2368,10 @@ public function FightHellfireSnail():void {
 			player.XP = player.XP + 100000;
 			statScreenRefresh();
 			PerksGemsEXPLvL();
+		}
+		public function TestDynamicStats():void {
+			player.statStore.addBuff('sens',+10,'tag',{text:'Debug buff!', rate: Buff.RATE_HOURS, ticks: 1});
+			statScreenRefresh();
 		}
 		public function AddLvL1():void {
 			player.level = player.level + 1;

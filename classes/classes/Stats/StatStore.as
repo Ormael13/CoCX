@@ -77,7 +77,15 @@ public class StatStore implements IStatHolder {
 		});
 		return result;
 	}
-	
+
+	/**
+	 * Options are
+	 * text, displayed text in buff description
+	 * show, default true. If false, then the buff will be hidden in detalization. You'll still see total value but not the reason.
+	 * save, default true. If false, then the buff will not be saved. It is useable for buffs from races, perks, and items - they should be auto-added
+	 * rate, default Buff.RATE_PERMANENT. Other options are: RATE_ROUNDS, RATE_HOURS, RATE_DAYS. Used with ticks, see below.
+	 * ticks, default 0. How many units of time (see rate) the buff will last until it will be auto-removed
+	 */
 	public function addBuff(stat:String, amount:Number, tag:String, options:*):void {
 		var s:BuffableStat = findBuffableStat(stat);
 		if (!s) {

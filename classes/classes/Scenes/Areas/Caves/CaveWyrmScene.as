@@ -5,7 +5,8 @@
 package classes.Scenes.Areas.Caves 
 {
 	import classes.*;
-	import classes.internals.*;
+import classes.Stats.Buff;
+import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.UniqueSexScenes;
 
@@ -107,7 +108,7 @@ public function winningOverCaveWyrmWithCaveWyrmDick():void {
 	player.sexReward("vaginalFluids");
 	outputText("\n\nThe residual effect of her vaginal acid seems to have enhanced your member sensitivity as well as your libido by a notch.");
 	player.lib+=5;
-	player.sens++;
+	player.addCurse('sens',+1)
 	cleanupAfterCombat();
 }
 

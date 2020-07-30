@@ -3828,39 +3828,38 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText(".\n\n");
 		enemyAI();
-		return;
 	}
 
-	private function FaeStormLightning(damage):void{
+	private function FaeStormLightning(damage:Number):void{
 		if(monster.plural) {
 			outputText("begin spasming while [monster his] bodies are ran through by electricity");
 		}
 		else outputText("begin spasming while [monster his] body is ran through by electricity");
 		doLightingDamage(damage);
 	}
-	private function FaeStormAcid(damage):void{
+	private function FaeStormAcid(damage:Number):void{
 		if(monster.plural) {
 			outputText("begins screaming as [monster his] bodies is suddenly coated with acid and [monster his] armor melting");
 		}
 		else outputText("begins screaming as [monster his] body is suddenly coated with acid and [monster his] armor melting");
 		monster.armorDef *= 0.5;
 	}
-	private function FaeStormBurn(damage):void{
+	private function FaeStormBurn(damage:Number):void{
 		if(monster.plural) {
 			outputText("starts to burn as [monster his] bodies catch fire");
 		}
 		else outputText("starts to burn as [monster his] body catch fire");
 		monster.createStatusEffect(StatusEffects.BurnDoT, 10, 0.02, 0, 0);
 	}
-	private function FaeStormPoison(damage):void {
+	private function FaeStormPoison(damage:Number):void {
 		outputText("turns green as a potent poison saps [monster his] strength");
 		monster.createStatusEffect(StatusEffects.NagaVenom, 1, 1, 0, 0);
 	}
-	private function FaeStormFrozen(damage):void{
+	private function FaeStormFrozen(damage:Number):void{
 		outputText(" shivers as [monster his] skin covers with ice, the surrounding air freezing solid");
 		monster.createStatusEffect(StatusEffects.FrozenSolid,3,0,0,0);
 	}
-	private function FaeStormLust(damage):void{
+	private function FaeStormLust(damage:Number):void{
 		var lustDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 		if(monster.plural) {
 			outputText("are magically aroused by the spell");
@@ -3868,7 +3867,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else outputText("is magically aroused by the spell");
 		monster.teased(lustDmg, false);
 	}
-	private function FaeStormSleep(damage):void{
+	private function FaeStormSleep(damage:Number):void{
 		if(monster.plural) {
 			outputText("are sent straight to the dream lands by the spell’s powerful hypnotic effects");
 		}
@@ -3887,7 +3886,6 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.createStatusEffect(StatusEffects.Polymorphed, 3+DurationIncrease, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.CooldownBalefulPolymorph, 16, 0, 0, 0)
 		enemyAI();
-		return;
 	}
 
 	//Transfer

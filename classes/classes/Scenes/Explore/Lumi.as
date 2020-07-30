@@ -1222,7 +1222,7 @@ public class Lumi extends BaseContent {
 		player.removeKeyItem("Blueprint - Potent Drug injectors");
 		player.removeKeyItem("Improved Drug injectors");
 		player.lib += 25;
-		player.sens += 5;
+		player.statStore.addBuff('sens',+5,'PotentDrugInjector',{text:'Potent Drug injectors'})
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
 		else doNext(camp.returnToCampUseTwelveHours);
@@ -1237,7 +1237,7 @@ public class Lumi extends BaseContent {
 		player.removeKeyItem("Blueprint - Improved Drug injectors");
 		player.removeKeyItem("Drug injectors");
 		player.lib += 25;
-		player.sens += 5;
+		player.statStore.addBuff('sens',+5,'ImprovedDrugInjector',{text:'Improved Drug injectors'})
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
 		else doNext(camp.returnToCampUseEightHours);
@@ -1251,7 +1251,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Drug injectors", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Drug injectors");
 		player.lib += 25;
-		player.sens += 5;
+		player.statStore.addBuff('sens',+5,'DrugInjector',{text:'Drug injectors'})
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
 		else doNext(camp.returnToCampUseFourHours);

@@ -297,7 +297,7 @@ public function startUrtaQuest():void {
 	player.inte = 60;
 	player.wis = 50;
 	player.lib = 90;
-	player.sens = 50;
+	player.sensStat.redefine({base:50});
 	player.cor = 30;
 	player.lust = 40;
 	player.hunger = 100;

@@ -9634,27 +9634,21 @@ use namespace CoC;
 			if (hasPerk(PerkLib.GoblinoidBlood)) {
 				if (hasKeyItem("Drug injectors") >= 0) {
 					maxLib += 25;
-					maxSen += 5;
 				}
 				if (hasKeyItem("Improved Drug injectors") >= 0) {
 					maxLib += 50;
-					maxSen += 10;
 				}
 				if (hasKeyItem("Potent Drug injectors") >= 0) {
 					maxLib += 75;
-					maxSen += 15;
 				}
 				if (hasKeyItem("Power bracer") >= 0) {
 					maxStr += 50;
-					maxSen += 5;
 				}
 				if (hasKeyItem("Powboy") >= 0) {
 					maxStr += 75;
-					maxSen += 10;
 				}
 				if (hasKeyItem("M.G.S. bracer") >= 0) {
 					maxStr += 100;
-					maxSen += 15;
 				}
 			}
 			End("Player","getAllMaxStats.effects");

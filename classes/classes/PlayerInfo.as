@@ -5,6 +5,7 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
 import classes.Scenes.NPCs.IsabellaScene;
 import classes.Scenes.SceneLib;
+import classes.Stats.StatUtils;
 import classes.StatusEffects.VampireThirstEffect;
 
 import coc.view.MainView;

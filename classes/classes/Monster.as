@@ -1563,7 +1563,7 @@ import flash.utils.getQualifiedClassName;
 		{
 			this.wis = wis;
 			this.lib = lib;
-			this.sens = sens;
+			sensStat.redefine({base:sens});
 			this.cor = cor;
 			initedWisLibSensCor = true;
 		}
@@ -3085,7 +3085,8 @@ import flash.utils.getQualifiedClassName;
 				tou += (5 * (1 + newGamePlusMod()));
 				spe += (5 * (1 + newGamePlusMod()));
 				wis += (5 * (1 + newGamePlusMod()));
-				sens += (5 * (1 + newGamePlusMod()));
+				statStore.addBuff("sens", (5 * (1 + newGamePlusMod())), "ChimericalBodyBasicStage", {});
+				//sens += (5 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.ChimericalBodyAdvancedStage)) {
 				str += (5 * (1 + newGamePlusMod()));
@@ -3093,7 +3094,7 @@ import flash.utils.getQualifiedClassName;
 				inte += (5 * (1 + newGamePlusMod()));
 				wis += (5 * (1 + newGamePlusMod()));
 				lib += (5 * (1 + newGamePlusMod()));
-				sens += (5 * (1 + newGamePlusMod()));
+				statStore.addBuff("sens", (5 * (1 + newGamePlusMod())), "ChimericalBodyAdvancedStage", {});
 			}
 			if (hasPerk(PerkLib.ChimericalBodySemiSuperiorStage)) {
 				str += (5 * (1 + newGamePlusMod()));
@@ -3102,7 +3103,7 @@ import flash.utils.getQualifiedClassName;
 				inte += (5 * (1 + newGamePlusMod()));
 				wis += (5 * (1 + newGamePlusMod()));
 				lib += (5 * (1 + newGamePlusMod()));
-				sens += (5 * (1 + newGamePlusMod()));
+				statStore.addBuff("sens", (5 * (1 + newGamePlusMod())), "ChimericalBodySemiSuperiorStage", {});
 			}
 			if (hasPerk(PerkLib.ChimericalBodySuperiorStage)) {
 				str += (5 * (1 + newGamePlusMod()));
@@ -3111,7 +3112,7 @@ import flash.utils.getQualifiedClassName;
 				inte += (5 * (1 + newGamePlusMod()));
 				wis += (5 * (1 + newGamePlusMod()));
 				lib += (5 * (1 + newGamePlusMod()));
-				sens += (5 * (1 + newGamePlusMod()));
+				statStore.addBuff("sens", (5 * (1 + newGamePlusMod())), "ChimericalBodySuperiorStage", {});
 			}
 			if (hasPerk(PerkLib.ChimericalBodyPeerlessStage)) {
 				str += (10 * (1 + newGamePlusMod()));
@@ -3120,7 +3121,7 @@ import flash.utils.getQualifiedClassName;
 				inte += (5 * (1 + newGamePlusMod()));
 				wis += (5 * (1 + newGamePlusMod()));
 				lib += (5 * (1 + newGamePlusMod()));
-				sens += (5 * (1 + newGamePlusMod()));
+				statStore.addBuff("sens", (5 * (1 + newGamePlusMod())), "ChimericalBodyPeerlessStage", {});
 			}
 			if (hasPerk(PerkLib.ChimericalBodySemiEpicStage)) {
 				str += (5 * (1 + newGamePlusMod()));
@@ -3129,7 +3130,7 @@ import flash.utils.getQualifiedClassName;
 				inte += (10 * (1 + newGamePlusMod()));
 				wis += (10 * (1 + newGamePlusMod()));
 				lib += (10 * (1 + newGamePlusMod()));
-				sens += (10 * (1 + newGamePlusMod()));
+				statStore.addBuff("sens", (10 * (1 + newGamePlusMod())), "ChimericalBodySemiEpicStage", {});
 			}
 			if (hasPerk(PerkLib.ChimericalBodyEpicStage)) {
 				str += (10 * (1 + newGamePlusMod()));
@@ -3138,7 +3139,7 @@ import flash.utils.getQualifiedClassName;
 				inte += (10 * (1 + newGamePlusMod()));
 				wis += (10 * (1 + newGamePlusMod()));
 				lib += (5 * (1 + newGamePlusMod()));
-				sens += (5 * (1 + newGamePlusMod()));
+				statStore.addBuff("sens", (5 * (1 + newGamePlusMod())), "ChimericalBodyEpicStage", {});
 			}
 			if (hasPerk(PerkLib.BlackHeartFinalForm)) {
 				wis += (5 * (1 + newGamePlusMod()));
@@ -3159,7 +3160,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm)) spe += (5 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.GorgonsEyesEvolved)) {
 				spe += (5 * (1 + newGamePlusMod()));
-				sens += (10 * (1 + newGamePlusMod()));
+				statStore.addBuff("sens", (10 * (1 + newGamePlusMod())), "GorgonsEyesEvolved", {});
 			}
 			if (hasPerk(PerkLib.HinezumiBurningBloodFinalForm)) tou += (10 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.KitsuneThyroidGland)) spe += (5 * (1 + newGamePlusMod()));
@@ -3235,7 +3236,7 @@ import flash.utils.getQualifiedClassName;
 				spe += (5 * (1 + newGamePlusMod()));
 				inte += (5 * (1 + newGamePlusMod()));
 				lib += (5 * (1 + newGamePlusMod()));
-				sens += (5 * (1 + newGamePlusMod()));
+				statStore.addBuff("sens", (5 * (1 + newGamePlusMod())), "EzekielBlessing", {});
 			}
 			if (hasPerk(PerkLib.JobAllRounder)) {
 				str += (5 * (1 + newGamePlusMod()));
@@ -3244,7 +3245,7 @@ import flash.utils.getQualifiedClassName;
 				inte += (5 * (1 + newGamePlusMod()));
 				wis += (5 * (1 + newGamePlusMod()));
 				lib += (5 * (1 + newGamePlusMod()));
-				sens += (5 * (1 + newGamePlusMod()));
+				statStore.addBuff("sens", (5 * (1 + newGamePlusMod())), "JobAllRounder", {});
 			}
 			if (hasPerk(PerkLib.JobBeastWarrior)) {
 				str += (5 * (1 + newGamePlusMod()));
@@ -3342,7 +3343,7 @@ import flash.utils.getQualifiedClassName;
 				inte += (25 * (1 + newGamePlusMod()));
 				wis += (25 * (1 + newGamePlusMod()));
 				lib += (15 * (1 + newGamePlusMod()));
-				sens += (15 * (1 + newGamePlusMod()));
+				statStore.addBuff("sens", (15 * (1 + newGamePlusMod())), "DeityJobMunchkin", {});
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
 				str += (10 * (1 + newGamePlusMod()));
@@ -3351,7 +3352,7 @@ import flash.utils.getQualifiedClassName;
 				inte += (10 * (1 + newGamePlusMod()));
 				wis += (10 * (1 + newGamePlusMod()));
 				lib += (10 * (1 + newGamePlusMod()));
-				sens += (10 * (1 + newGamePlusMod()));
+				statStore.addBuff("sens", (10 * (1 + newGamePlusMod())), "HclassHeavenTribulationSurvivor", {});
 			}
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) {
 				str += (15 * (1 + newGamePlusMod()));
@@ -3360,7 +3361,7 @@ import flash.utils.getQualifiedClassName;
 				inte += (15 * (1 + newGamePlusMod()));
 				wis += (15 * (1 + newGamePlusMod()));
 				lib += (15 * (1 + newGamePlusMod()));
-				sens += (15 * (1 + newGamePlusMod()));
+				statStore.addBuff("sens", (15 * (1 + newGamePlusMod())), "GclassHeavenTribulationSurvivor", {});
 			}
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) {
 				str += (20 * (1 + newGamePlusMod()));
@@ -3369,7 +3370,7 @@ import flash.utils.getQualifiedClassName;
 				inte += (20 * (1 + newGamePlusMod()));
 				wis += (20 * (1 + newGamePlusMod()));
 				lib += (20 * (1 + newGamePlusMod()));
-				sens += (20 * (1 + newGamePlusMod()));
+				statStore.addBuff("sens", (20 * (1 + newGamePlusMod())), "FclassHeavenTribulationSurvivor", {});
 			}
 			if (hasPerk(PerkLib.EpicStrength)) str += (35 + (5 * (1 + newGamePlusMod())));
 			if (hasPerk(PerkLib.LegendaryStrength)) str += (50 + (10 * (1 + newGamePlusMod())));
@@ -3389,9 +3390,9 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EpicLibido)) lib += (35 + (5 * (1 + newGamePlusMod())));
 			if (hasPerk(PerkLib.LegendaryLibido)) lib += (50 + (10 * (1 + newGamePlusMod())));
 			if (hasPerk(PerkLib.MythicalLibido)) lib += (65 + (15 * (1 + newGamePlusMod())));
-			if (hasPerk(PerkLib.EpicSensitivity)) sens += (35 + (5 * (1 + newGamePlusMod())));
-			if (hasPerk(PerkLib.LegendarySensitivity)) sens += (50 + (10 * (1 + newGamePlusMod())));
-			if (hasPerk(PerkLib.MythicalSensitivity)) sens += (65 + (15 * (1 + newGamePlusMod())));
+			if (hasPerk(PerkLib.EpicSensitivity)) statStore.addBuff("sens", (35 * (1 + newGamePlusMod())), "EpicSensitivity", {});
+			if (hasPerk(PerkLib.LegendarySensitivity)) statStore.addBuff("sens", (50 * (1 + newGamePlusMod())), "LegendarySensitivity", {});
+			if (hasPerk(PerkLib.MythicalSensitivity)) statStore.addBuff("sens", (65 * (1 + newGamePlusMod())), "MythicalSensitivity", {});
 			if (hasPerk(PerkLib.IronStomachSu)) tou += (5 * (1 + newGamePlusMod()));
 			if (level > 25) bonusStatsAmp += 0.1*((int)(level-1)/25);
 			bonusAscStr += bonusStatsAmp * str * newGamePlusMod();
@@ -3414,7 +3415,7 @@ import flash.utils.getQualifiedClassName;
 			this.inte += bonusAscInt;
 			this.wis += bonusAscWis;
 			this.lib += bonusAscLib;
-			this.sens += bonusAscSen;
+			statStore.addBuff("sens", bonusAscSen, "Ascension", {});
 			var multiStatsAmp1:Number = 0;
 			if (hasPerk(PerkLib.LimitBreakerFlesh1stStage)) multiStatsAmp1 += (10 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.LimitBreakerFlesh2ndStage)) multiStatsAmp1 += (20 * (1 + newGamePlusMod()));
@@ -3427,7 +3428,7 @@ import flash.utils.getQualifiedClassName;
 			this.inte += multiStatsAmp2;
 			this.wis += multiStatsAmp2;
 			this.lib += multiStatsAmp2;
-			this.sens += multiStatsAmp2;
+			statStore.addBuff("sens", multiStatsAmp2, "AscensionMultiplier", {});
 			bonusAscMaxHP += bonusAscStr + bonusAscTou + bonusAscSpe + bonusAscInt + bonusAscWis + bonusAscLib + bonusAscSen;
 			if (level > 10) bonusAscMaxHP *= (int)(level / 10 + 1);
 			weaponAttack += (1 + (int)(weaponAttack / 5)) * newGamePlusMod();

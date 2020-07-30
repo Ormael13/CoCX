@@ -4,6 +4,7 @@ import classes.*;
 import classes.BodyParts.Horns;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.UniqueSexScenes;
+import classes.Stats.Buff;
 
 /**
 	 * Izumi, the fuckhuge Oni. TOUCH THE FLUFFY HORN.
@@ -339,11 +340,10 @@ import classes.Scenes.UniqueSexScenes;
 			
 			// Can't use dynStats for this, because stats() has a chained modifier to incoming sens changes that could turn this value into 8x what we expected it to be
 			player.spe += deltaSpd;
-			player.sens += deltaSns;
+			player.statStore.addBuff('sens',+deltaSns,'IzumiSmoke',{text:'Izumi Pipe Smoke', rate:Buff.RATE_HOURS, ticks: 24})
 			player.lib += deltaLib;
 			var maxes:Object = player.getAllMaxStats();
 			if (player.spe <= 0) player.spe = 1;
-			if (player.sens >= maxes.sens) player.sens = maxes.sens;
 			if (player.lib >= maxes.lib) player.lib = maxes.lib;
 			
 			showStatDown('spe');
@@ -377,10 +377,7 @@ import classes.Scenes.UniqueSexScenes;
 			if (sac)
 			{
 				player.spe += Math.abs(sac.value2);
-				player.sens -= sac.value3;
 				player.lib -= sac.value4;
-				
-				if (player.sens > 100) player.sens = 100;
 				var max:int = player.getMaxStats("spe");
 				if (player.spe > max) player.spe = max;
 				if (player.lib <= 0) player.lib = 1;

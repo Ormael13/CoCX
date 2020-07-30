@@ -1489,6 +1489,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.goblinScore() >= 10 && player.findPerk(PerkLib.GoblinoidBlood) < 0) {
 				outputText("\nAs you become a goblinoid again you can feel the chemicals pumped in by your gadgets resume working.\n");
 				outputText("\n(<b>Gained Perk: Goblinoid blood</b>)\n");
+				if (player.hasKeyItem("Drug injectors")){
+					player.statStore.addBuff('sens',+5,'DrugInjector',{text:'Drug injectors'})
+				}
+				if (player.hasKeyItem("Improved Drug injectors")){
+					player.statStore.addBuff('sens',+5,'ImprovedDrugInjector',{text:'Improved Drug injectors'})
+				}
+				if (player.hasKeyItem("Potent Drug injectors")){
+					player.statStore.addBuff('sens',+5,'PotentDrugInjector',{text:'Potent Drug injectors'})
+				}
 				player.createPerk(PerkLib.GoblinoidBlood, 0, 0, 0, 0);
 				needNext = true;
 			}
@@ -1496,6 +1505,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nYou feel the drugs in your blood losing effect. Damnit, of course it won’t work since those chemical power ups were tested for goblinoids only. Guess perhaps a in few years you could try and develop a variant.\n");
 				outputText("\n<b>(Lost Perk: Goblinoid blood)</b>\n");
 				player.removePerk(PerkLib.GoblinoidBlood);
+				player.statStore.removeBuffs("DrugInjector");
+				player.statStore.removeBuffs("ImprovedDrugInjector");
+				player.statStore.removeBuffs("PotentDrugInjector");
 				needNext = true;
 			}
 			if (player.goblinScore() >= 10 && player.findPerk(PerkLib.BouncyBody) < 0) {

@@ -1593,7 +1593,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.inte = saveFile.data.inte;
 		player.wis = saveFile.data.wis;
 		player.lib = saveFile.data.lib;
-		player.sens = saveFile.data.sens;
 		player.cor = saveFile.data.cor;
 		player.fatigue = saveFile.data.fatigue;
 		player.mana = saveFile.data.mana;

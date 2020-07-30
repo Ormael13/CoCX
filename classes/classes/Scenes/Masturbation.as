@@ -6,6 +6,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
+import classes.Stats.Buff;
 
 //	import classes.Scenes.NPCs.*;
 public class Masturbation extends BaseContent {
@@ -2518,9 +2519,9 @@ public class Masturbation extends BaseContent {
 			if (player.lib < 30) dynStats("lib", .5);
 			if (player.lib < 50) dynStats("lib", .5);
 			if (player.lib < 60) dynStats("lib", .5);
-			if (player.sens > 40) player.sens -= 1;
-			if (player.sens > 60) player.sens -= 1;
-			if (player.sens > 80) player.sens -= 1;
+			if (player.sens > 40) player.removeCurse('sens',1)
+			if (player.sens > 60) player.removeCurse('sens',1)
+			if (player.sens > 80) player.removeCurse('sens',1)
 			if (player.tou > 50) dynStats("tou", -1);
 			if (player.tou > 75) dynStats("tou", -1);
 			doNext(camp.returnToCampUseOneHour);
