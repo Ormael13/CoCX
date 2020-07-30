@@ -222,7 +222,7 @@ public function telAdreMenuShow():void { //Just displays the normal Tel'Adre men
 private function armorShops():void {
 	clearOutput();
 	outputText("The shopping district of Tel’adre happens to be contained in a large dead end street, with a large set of doors at the entrance to protect it from thieves at night, you’d assume from a higher elevation it would look like a giant square courtyard. Due to the cities shopping area being condensed into one spot, most if not every visible wall has been converted into a store front, in the center of the area are some small stands, guess not everyone can afford a real store.");
-	outputText("\n\nRight off the bat you see the ‘Piercing Studio’, its piercing covered centaur sign is a real eye catcher. You can also spot some kind of wolf-man banging away on an anvil in a blacksmith's stand. As well as other shops lining the walls, perhaps those shops will be interesting as well. One shop named Kaiba cosmetic emporium specialises in magical trinkets and other oddities.");
+	outputText("\n\nRight off the bat you see the ‘Piercing Studio’, its piercing covered centaur sign is a real eye catcher. You can also spot some kind of wolf-man banging away on an anvil in a blacksmith's stand. As well as other shops lining the walls, perhaps those shops will be interesting as well. One shop named Kaiba cosmetic emporium specialises in magical trinkets and other oddities while another named Tripxi Artillery seems to sell firearms.");
 	menu();
 	addButton(0, "Blacksmith", new YvonneArmorShop().enter);
 	addButton(1, "Piercing", new YaraPiercingStudio().piercingStudio);
@@ -230,8 +230,8 @@ private function armorShops():void {
 	addButton(3, "Weapons", new WeaponShop().enter);
 	addButton(4, "Jewelry", new JewelryShop().enter);
 	addButton(5, "Carpenter", carpentryShopEntry);
-	addButton(6, "Kaiba", kaibaShopMainMenu);
-	addButton(7, "Tripxi", tripxiShopMainMenu);
+	addButton(6, "Oddities", kaibaShopMainMenu);
+	addButton(7, "Gunshop", tripxiShopMainMenu);
 	if (flags[kFLAGS.LOPPE_PC_MET_UMA] == 1)
 	{
 		addButton(10, "Clinic", umasShop.enterClinic);
@@ -1176,7 +1176,7 @@ public function tripxiShopMainMenu():void {
 		}
 	}
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
-		outputText("Tripxi move on from whatever weird experiment she was on to greet you at the counter.\n\n");
+		outputText("As you enter ringing the shop bell Tripxi move on from whatever weird experiment she was on to greet you at the counter.\n\n");
 		outputText("\"<i>Day [name] did you waltz over to buy firearms?</i>\"\n\n");
 	}
 	else {
@@ -1190,7 +1190,7 @@ public function tripxiShopMainMenu():void {
 		flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
 		outputText("<b>New codex entry unlocked: Goblins!</b>")
 	}
-	doNext(tripxiShopMainMenu2a);
+	tripxiShopMainMenu2a();
 }
 
 public function tripxiShopMainMenu2a():void {
@@ -1209,7 +1209,7 @@ public function tripxiShopMainMenu2a():void {
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(7, "???", "Search the Forest.");
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) > 2) addButton(8, weaponsrange.TRFATBI.shortName, buyItemT1, weaponsrange.TRFATBI);
 	else if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) == 2) addButtonDisabled(8, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(8, "???", "Search the Vulcanic Crag.");
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(8, "???", "Search the Volcanic Crag.");
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) > 2) addButton(9, weaponsrange.SNIPPLE.shortName, buyItemT1, weaponsrange.SNIPPLE);
 	else if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) == 2) addButtonDisabled(9, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns4)) addButtonDisabled(9, "???", "Search the Deepwoods.");
@@ -1244,6 +1244,7 @@ public function tripxiShopMainMenu2b():void {
 	//addButton(12, "-2-", tripxiShopMainMenu2c);
 	addButton(14, "Leave", telAdreMenu);
 }
+
 public function tripxiShopMainMenu2c():void {
 	menu();
 	//addButton(0, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
@@ -1257,8 +1258,8 @@ public function tripxiShopMainMenu2c():void {
 
 public function tripxiShopInside():void {
 	clearOutput();
-	outputText("Tripxi move on from whatever weird experiment she was on to greet you at the counter.\n\n");
-	outputText("\"<i>Day [name] did you waltz over to buy firearms?</i>\"\n\n");
+	outputText("Tripxi awaits at the counter giving a glance every now and then at her project at the back of the store, she's likely in a rush to resume working. Despite all this she try and keep the shopkeeper act... at least until you're gone.\n\n");
+	outputText("\"<i>So [name] can I interest you into any of my wares?</i>\"\n\n");
 	tripxiShopMainMenu2a();
 }
 
@@ -1333,7 +1334,19 @@ private function buyItemT3No():void {
 }
 
 private function tripxiShopTalk():void {
+	clearOutput();
 	menu();
+	outputText("You tell the goblin shopkeeper you would like to have a talk with her.\n\n")
+	outputText("\"<i>Just wanted a chat? Well okay fine but make it quick, my time is both researches and gems and I would rather not waste either.</i>\"\n\n");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxi) > 0) addButtonDisabled(5, "Small Selection", "You already talked about this subject.");
+	else addButton(5, "SmallSelection", tripxiShopTalkSmallSelection);
+	addButton(14, "Leave", tripxiShopInside);
+}
+private function tripxiShopTalk2():void {
+	clearOutput();
+	menu();
+	outputText("Tripxi looks semi bored but try and keep the professionnal attitude.\n\n")
+	outputText("\"<i>Well now that this is sorted is there anything else you wanted to talk about?</i>\"\n\n");
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxi) > 0) addButtonDisabled(5, "Small Selection", "You already talked about this subject.");
 	else addButton(5, "SmallSelection", tripxiShopTalkSmallSelection);
 	addButton(14, "Leave", tripxiShopInside);
@@ -1352,7 +1365,7 @@ private function tripxiShopTalkSmallSelection():void {
 	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns5, 0, 0, 0, 0);
 	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns6, 0, 0, 0, 0);
 	player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
-	doNext(tripxiShopTalk)
+	doNext(tripxiShopTalk2)
 }
 
 //[Invetigate]

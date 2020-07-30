@@ -1569,7 +1569,7 @@ public function FightHellfireSnail():void {
 			menu();
 			if (page == 1) {
 				addButton(0, "Fox Jewel", AddFoxJewel).hint("Add 1 Fox Jewel.");
-				addButton(1, "Methir Crytal", AddMethir).hint("Add 1 crystal Melts.");
+				addButton(1, "CDI", AddCurrentDebugItem).hint("Add 1 Gun.");
 				//addButton(2, "", ).hint("Add 1 .");
 				//addButton(3, "", ).hint("Add 1 .");
 				//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
@@ -1825,6 +1825,10 @@ public function FightHellfireSnail():void {
 		public function AddMethir():void {
 			outputText("\n\n<b>(Gained 1 Methir crystal!)</b>\n\n");
 			inventory.takeItem(consumables.METHIRC, curry(NonEquipmentMenu, 1));
+		}
+		public function AddCurrentDebugItem():void {
+			outputText("\n\n<b>(Gained 1 Testing gun!)</b>\n\n");
+			inventory.takeItem(weaponsrange.M1CERBE, curry(NonEquipmentMenu, 1));
 		}
 		public function AddSkybornSeed():void {
 			outputText("\n\n<b>(Gained 1 Skyborn Seed!)</b>\n\n");
