@@ -1617,7 +1617,7 @@ public function FightHellfireSnail():void {
 				addButton(7, "ChitinShard", AddBeeChitin).hint("Add 1 Chitin shard.");
 				addButton(8, "GreenGel", AddGreenGel).hint("Add 1 Green Gel.");
 				addButton(9, "DragonScale", AddDragonscale).hint("Add 1 Dragonscale.");
-				//addButton(10, "", ).hint("Add 1 .");
+				addButton(10, "S.Shard", AddShard).hint("Add 1 S.Shard.");//addButton(10, "", ).hint("Add 1 .");
 				//addButton(11, "", ).hint("Add 1 .");
 				//addButton(12, "", ).hint("Add 1 .");
 				addButton(13, "-2-", MaterialMenu, page + 1);
@@ -1647,6 +1647,7 @@ public function FightHellfireSnail():void {
 				addButton(0, "FightForPearl", FightForPearl).hint("Test fight to get Sky Poison Pearl legally (aside we cheat to start fight)");
 				addButton(1, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
 				addButton(2, "Pierce", FightPierce).hint("Test fight with Pierce.");
+				addButton(2, "FairyTest", FairyTest).hint("Become a fairy.");
 				//addButton(3, "", ).hint("Test fight with .");
 				//addButton(4, "", ).hint("Test fight with .");
 				//addButton(5, "", ).hint("Test fight with .");
@@ -1724,6 +1725,10 @@ public function FightHellfireSnail():void {
 		public function AddDragonscale():void {
 			outputText("\n\n<b>(Gained 1 Dragonscale!)</b>\n\n");
 			inventory.takeItem(useables.D_SCALE, curry(MaterialMenu, 1));
+		}
+		public function AddShard():void {
+			outputText("\n\n<b>(Gained 1 Shard!)</b>\n\n");
+			inventory.takeItem(useables.S_SHARD, curry(MaterialMenu, 1));
 		}
 		public function AddFreshFish():void {
 			outputText("\n\n<b>(Gained 1 Fresh Fish!)</b>\n\n");
@@ -2531,6 +2536,30 @@ public function FightHellfireSnail():void {
 			clearOutput();
 			outputText("Entering battle with Pierce! Enjoy ^^");
 			startCombat(new Pierce());
+		}
+		public function FairyTest():void {
+			clearOutput();
+			outputText("FAIRYTIME ^^");
+			player.faceType = Face.FAIRY;
+			player.tongue.type = Tongue.ELF;
+			player.eyes.type = Eyes.FAIRY
+			player.ears.type = Ears.ELVEN
+			player.hairType = Hair.FAIRY;
+			player.tailType = Tail.NONE
+			player.arms.type = Arms.ELF
+			player.lowerBody = LowerBody.ELF;
+			player.wings.type = Wings.FAIRY;
+			player.skinType = Skin.PLAIN
+			player.skinAdj = "flawless";
+			player.removeCock(0, player.cockTotal());
+			player.skin.coverage = Skin.COVERAGE_NONE;
+			var growth:int = 1 + rand(3);
+			if (player.breastRows.length > 0) {
+				if (player.breastRows[0].breastRating < 2 && rand(3) == 0) growth++;
+				if (player.breastRows[0].breastRating < 5 && rand(4) == 0) growth++;
+				if (player.breastRows[0].breastRating < 6 && rand(5) == 0) growth++;
+			}
+			player.createPerk(PerkLib.TransformationImmunity,0,0,0,0);
 		}
 		public function FightZenji():void {
 			clearOutput();
@@ -3669,4 +3698,4 @@ public function FightHellfireSnail():void {
 			}
 		}
 	}
-}
+}

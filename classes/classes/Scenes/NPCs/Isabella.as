@@ -30,7 +30,7 @@ public class Isabella extends Monster
 				outputText("You easily evade her incredibly linear attack.\n");
 			}
 			//("Misdirection"
-			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("You easily misdirect her and step aside at the last moment.\n");
 			}
 			//Determine if cat'ed
@@ -84,7 +84,7 @@ public class Isabella extends Monster
 				outputText("You easily evade her incredibly linear attack.\n");
 			}
 			//("Misdirection"
-			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("You easily misdirect her and step aside at the last moment.\n");
 			}
 			//Determine if cat'ed
@@ -129,7 +129,7 @@ public class Isabella extends Monster
 				outputText("You easily evade her incredibly linear attack.\n");
 			}
 			//("Misdirection"
-			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("You easily misdirect her and step aside at the last moment.\n");
 			}
 			//Determine if cat'ed

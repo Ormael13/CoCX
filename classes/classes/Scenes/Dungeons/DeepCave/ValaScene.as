@@ -12,6 +12,9 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.Armor;
+import classes.Items.ArmorLib;
+import classes.Items.Armors.ArmorWithPerk;
 import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
 
@@ -651,7 +654,7 @@ public class ValaScene extends BaseContent implements SaveableState
 					//[Fairies][You][Scepter][Leave]
 					addButton(4,"Scepter",Scepter);
 				}
-				if(ValaFairyQueenQuest == QUEST_STAGE_ITEM_SCEPTER_REPAIRED) {
+				if(ValaFairyQueenQuest == QUEST_STAGE_ITEM_TURNEDIN) { //Temporary until I work in a timer
 					outputText("\n\nCome to think of it what happened with the scepter after you brought it back to her? Maybe you should ask her.");
 					//[Fairies][You][Scepter][Leave]
 					addButton(4,"Scepter",Scepter2);
@@ -848,87 +851,65 @@ public class ValaScene extends BaseContent implements SaveableState
 		public function Worries():void {
 			spriteSelect(60);
 			clearOutput();
-			outputText("She seems worried for some reason and so you ask her about it.\n" +
-					"\n" +
-					"\"<i>Oh! I’m kind of sorry. It’s just that we fairies have lost our queen. Without the queen there is no one to protect us or safeguard our future.</i>\"" +
-					"\n" +
-					"But you saved her. As a champion your duty is to defeat the demons and protect the innocent. Wouldn't she and the fairies agree that they are not without a hero even in these dark times?\n" +
-					"\n" +
-					"\"<i>You do not understand, without the queen to lead us all. The fairies are slowly losing their will to resist and begin to abandon themselves to corruption. Before long the demons will have enslaved my race and turned us all into fiendish sex starved creatures just like the goblins were.</i>\"" +
-					"\n" +
-					"This is terrible! You ask her what you can do to save the fairies.\n" +
-					"\n" +
-					"You tell Vala that you will try then head off to camp to plan out how you will hunt down the parts of the scepter.");
+			outputText("She seems worried for some reason and so you ask her about it.\n\n" +
+					"\"<i>Oh! I’m kind of sorry. It’s just that we fairies have lost our queen. Without the queen there is no one to protect us or safeguard our future.</i>\"\n" +
+					"But you saved her. As a champion your duty is to defeat the demons and protect the innocent. Wouldn't she and the fairies agree that they are not without a hero even in these dark times?\n\n" +
+					"\"<i>You do not understand, without the queen to lead us all. The fairies are slowly losing their will to resist and begin to abandon themselves to corruption. Before long the demons will have enslaved my race and turned us all into fiendish sex starved creatures just like the goblins were.</i>\"\n\n" +
+					"This is terrible! You ask her what you can do to save the fairies.\n\n" +
+					"\"<i>A little before the previous queen was slain by the demons her badge of office and weapon was broken in battle, and a few malevolent sprites escaped with the parts of the legendary pixia scepter. Without this item we cannot crown a new queen. Should you recover the fifteen lost parts of the scepter we would forever be in your debt.</i>\"\n\n" +
+					"You tell Vala that you will try then head off to camp.\n");
 			ValaFairyQueenQuest = QUEST_STAGE_STARTED;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function Scepter():void {
 			spriteSelect(60);
 			clearOutput();
-			outputText("You deposit the fifteen shards of the scepter before Vala, who looks at you with complete awe.\n" +
-					"\n" +
-					"\"<i>What you did today might have just saved the fairies. I will bring these back to my sisters and let you know about the developments!</i>\"\n" +
-					"\n" +
-					"With that said, she picks up the scepter and head out as you go back to camp.\n");
-			ValaFairyQueenQuest = QUEST_STAGE_ITEM_GATHERED;
+			outputText("You deposit the fifteen shards of the scepter before Vala, who looks at you with complete awe.\n\n" +
+					"\"<i>What you did today might have just saved the fairies. I will bring these back to my sisters and let you know about the developments!</i>\"\n\n" +
+					"With that said, she picks up the scepter and head out as you go back to camp.");
+			player.destroyItems(useables.S_SHARD, 15);
+			ValaFairyQueenQuest = QUEST_STAGE_ITEM_TURNEDIN;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function Scepter2():void {
 			spriteSelect(60);
 			clearOutput();
+			menu();
 			if (player.isFemaleOrHerm && (player.humanScore() >= (player.humanMaxScore() - player.internalChimeraScore())) || player.elfScore() >= 11)
 			{
-				outputText("Vala spots you from a distance and flies to you right away.\n" +
-						"\n" +
-						"\"<i>[name] I have great news! The new fairy queen has finally been chosen!</i>\"\n" +
-						"\n" +
-						"You idly ask if you could meet her.\n" +
-						"\n" +
-						"“Well that's where things get complicated, just follow me…”\n" +
-						"\n" +
-						"Vala escorts you all the way to the woods where you spot an unusual amount of fairies watching you. You both enter what looks to be a grove. You can see small bubble of energy slowly flying up from the ground and deduce the place is highly magical. Vala turns to face you looking somewhat embarrassed.\n" +
-						"\n" +
-						"\"<i>[name] when we first met, I wanted to thank you for saving me from those imps. While we have had sex many times. I never could really feel like it was enough to let go of my debt to you. Today I’m actually telling you something very few humans have ever been told. We, the fairies would like you to become our champion.</i>\"\n" +
-						"\n" +
-						"Sure why not, you're already trying to save Mareth anyway.\n" +
-						"\n" +
-						"“You don’t understand. What the fairies agreed to is that YOU should be the next queen.”\n" +
-						"\n" +
-						"Whoa, wait, what?! You never agreed to anything of the such! Can’t you at least be allowed to make the choice.\n" +
-						"\n" +
-						"\"<i>I know this is a lot to take in, but take a deep breath and make a choice. Will you become the next great fairy, queen of fairykind?</i>\"\n" +
-						"\n" +
-						"How could you even become the queen of the fairies. You’re way too big to become a fairy to begin with. Vala laughs, but explains.\n" +
-						"\n" +
-						"\"<i>Out of all the fairies the queen is the only one to naturally reach your size. Fact is, we fairies need a big elder sister like you to protect us since our diminutive size won’t allow us to protect ourselves.</i>\"\n" +
-						"\n" +
-						"Why not her, a true fairy, become the next queen?\n" +
-						"\n" +
-						"\"<i>It wouldn’t come as a secret to anyone that my body has been and still is corrupted. That, and this is not my original size. The fairies need someone like you who is still pure of mind and body to protect them. So, will you accept?</i>\"\n" +
-						"\n" +
+				outputText("Vala spots you from a distance and flies to you right away.\n\n" +
+						"\"<i>[name] I have great news! The new fairy queen has finally been chosen!</i>\"\n\n" +
+						"You idly ask if you could meet her.\n\n" +
+						"\"<i>Well that's where things get complicated, just follow me…</i>\"\n\n" +
+						"Vala escorts you all the way to the woods where you spot an unusual amount of fairies watching you. You both enter what looks to be a grove. You can see small bubble of energy slowly flying up from the ground and deduce the place is highly magical. Vala turns to face you looking somewhat embarrassed.\n\n" +
+						"\"<i>[name] when we first met, I wanted to thank you for saving me from those imps. While we have had sex many times. I never could really feel like it was enough to let go of my debt to you. Today I’m actually telling you something very few humans have ever been told. We, the fairies would like you to become our champion.</i>\"\n\n" +
+						"Sure why not, you're already trying to save Mareth anyway.\n\n" +
+						"“You don’t understand. What the fairies agreed to is that YOU should be the next queen.”\n\n" +
+						"Whoa, wait, what?! You never agreed to anything of the such! Can’t you at least be allowed to make the choice.\n\n" +
+						"\"<i>I know this is a lot to take in, but take a deep breath and make a choice. Will you become the next great fairy, queen of fairykind?</i>\"\n\n" +
+						"How could you even become the queen of the fairies. You’re way too big to become a fairy to begin with. Vala laughs, but explains.\n\n" +
+						"\"<i>Out of all the fairies the queen is the only one to naturally reach your size. Fact is, we fairies need a big elder sister like you to protect us since our diminutive size won’t allow us to protect ourselves.</i>\"\n\n" +
+						"Why not her, a true fairy, become the next queen?\n\n" +
+						"\"<i>It wouldn’t come as a secret to anyone that my body has been and still is corrupted. That, and this is not my original size. The fairies need someone like you who is still pure of mind and body to protect them. So, will you accept?</i>\"\n\n" +
 						"It seems you have an important choice to make, what will you do?");
 				addButton(1,"Accept",Accept);
 				addButton(2,"Decline",Decline);
 			}
 			else
 			{
-				outputText("");
+				outputText("Vala spots you from a distance and flies to you right away.\n\n" +
+						"\"<i>[name] I have great news! Thanks to your efforts in recovering the shards we managed to repair the scepter. The new fairy queen is still in the process of being chosen but this is just a mather of time! If only we had a human or an elf female we could believe into... Regardless its all fine [name] you already did plenty for us.</i>\"\n\n");
 				doNext(SceneLib.telAdre.barTelAdre);
 			}
 		}
 		public function Accept():void {
 			spriteSelect(60);
 			clearOutput();
-			outputText("While this is a great honor, maybe too much for a human you still nod in agreement. Vala hugs you right away.\n" +
-					"\n" +
-					"\"<i>Thank you! Thank you so much, you cannot grasp how much this means to us. Once you are ready, go lay down in the big red flower there and your coronation will begin.<i>\"\n" +
-					"\n" +
-					"Not one to waste time, as instructed by Vala you lay down in the giant orchid. The flower is surprisingly comfortable for a plant, you could almost mistake it for a comfy velvet bed, and so you slowly drift to sleep as the petals close on you.\n" +
-					"\n" +
-					"You dream of a beautiful world from before the age of the demons as you walk in a floral palace filled with echoes of laughter and cheers. Small fairies fly from one side to another, singing while carrying foods, flowers, and various items. At the back of the room is a figure of greater size. Sitting on a crystalline throne is a woman who wields no crown yet has the presence of royalty. While bigger in size than her sisters who fly in this otherworldly palace she is nonetheless a fairy and only one word comes to your mind to describe her… queen. This fairy sports a pair of colorful translucent butterfly wings which stretch six feet wide on a mature, almost perfect body not unlike that of an elf. Her regal visage turns toward you and looks straight in your eyes as if peering at the depth of your soul. It is only as you realise this royal figure was a beautified version of yourself all along that you slowly open your eyes, waking up with a loud yawn. The flower feels bigger than what you remembered it to be and so you slowly part away the petals so to let the light of the sun filter in. To your surprise, it's not the flower that got smaller but your body which got slightly bigger. While your overall shape did not change that much your body took on a more fragile and graceful version of itself, almost a mimicry of that of the elves. Your unblemished skin and refined limbs wouldn't look out of place on a nymph, not to mention your elf like pointed ears. However what really sets you apart from a human is your shiny, almost translucent hair, in which many beads of morning dew shine like beautiful gems, and your large, colorful butterfly wings easily twice as wide as your stretched arms. You flap them a few time with childlike curiosity and only stop short of taking flight. While admiring your new body you can't help but wish the flower was just a little bigger and to your surprise you actually shrink in size. Afraid as the world suddenly becomes bigger around you, including dog sized bugs you swiftly return to normal realizing that you can now shrink and grow back to human size at will. Heck, this is only a fragment of your new powers as you begin exploring the many fae magical abilities you acquired. After a few minutes, satisfied with your inspection, you finally take the time to gaze beyond the flower back to your waiting subjects. These fairies need a champion and a leader to fight for and rule them, you won’t let the fairies or Vala down. Lethice shall be defeated and the fairies protected! A few fairies come over to you carrying a human sized dress that could actually fit you just right. You are amazed they got it so quickly. To humor them you put the dress on and discover to your delight that it is the dress from the dream. Vala cheers for you right away pulling all the other fairies in.\n" +
-					"\n" +
-					"\"<i>All hail [name], new queen of the fairies!!<i>\"\n" +
-					"\n" +
+			outputText("While this is a great honor, maybe too much for a human you still nod in agreement. Vala hugs you right away.\n\n" +
+					"\"<i>Thank you! Thank you so much, you cannot grasp how much this means to us. Once you are ready, go lay down in the big red flower there and your coronation will begin.</i>\"\n\n" +
+					"Not one to waste time, as instructed by Vala you lay down in the giant orchid. The flower is surprisingly comfortable for a plant, you could almost mistake it for a comfy velvet bed, and so you slowly drift to sleep as the petals close on you.\n\n" +
+					"You dream of a beautiful world from before the age of the demons as you walk in a floral palace filled with echoes of laughter and cheers. Small fairies fly from one side to another, singing while carrying foods, flowers, and various items. At the back of the room is a figure of greater size. Sitting on a crystalline throne is a woman who wields no crown yet has the presence of royalty. While bigger in size than her sisters who fly in this otherworldly palace she is nonetheless a fairy and only one word comes to your mind to describe her… queen. This fairy sports a pair of colorful translucent butterfly wings which stretch six feet wide on a mature, almost perfect body not unlike that of an elf. Her regal visage turns toward you and looks straight in your eyes as if peering at the depth of your soul. It is only as you realise this royal figure was a beautified version of yourself all along that you slowly open your eyes, waking up with a loud yawn. The flower feels bigger than what you remembered it to be and so you slowly part away the petals so to let the light of the sun filter in. To your surprise, it's not the flower that got smaller but your body which got slightly bigger. While your overall shape did not change that much your body took on a more fragile and graceful version of itself, almost a mimicry of that of the elves. Your unblemished skin and refined limbs wouldn't look out of place on a nymph, not to mention your elf like pointed ears. However what really sets you apart from a human is your shiny, almost translucent hair, in which many beads of morning dew shine like beautiful gems, and your large, colorful butterfly wings easily twice as wide as your stretched arms. You flap them a few times with childlike curiosity and only stop short of taking flight. While admiring your new body you can't help but wish the flower was just a little bigger and to your surprise you actually shrink in size. Afraid as the world suddenly becomes bigger around you, including dog sized bugs you swiftly return to normal realizing that you can now shrink and grow back to human size at will. Heck, this is only a fragment of your new powers as you begin exploring the many fae magical abilities you acquired. After a few minutes, satisfied with your inspection, you finally take the time to gaze beyond the flower back to your waiting subjects. These fairies need a champion and a leader to fight for and rule them, you won’t let the fairies or Vala down. Lethice shall be defeated and the fairies protected! A few fairies come over to you carrying a human sized dress that could actually fit you just right. Its light but... perhaps a little skimpy? Well at least it won't hinder your flight. Still you are amazed they got it so quickly. To humor them you put the dress on and discover to your delight that it is the dress from the dream. Vala cheers for you right away pulling all the other fairies in.\n\n" +
+					"\"<i>All hail [name], new queen of the fairies!!</i>\"\n\n" +
 					"The fairies give you an ovation, everyone clapping for the new fairy queen. You are in awe before the thousands of butterfly girls cheering for you and while your charge is a big one, you are confident that you will succeed. It's time for you to make good on your promise to them thus you head back out to your adventure ready to face the agents of evil in the name of your people.\n");
 			ValaFairyQueenQuest = QUEST_STAGE_PCDACCEPTED;
 			//Turn pc into a proper fairy
@@ -951,15 +932,15 @@ public class ValaScene extends BaseContent implements SaveableState
 				if (player.breastRows[0].breastRating < 5 && rand(4) == 0) growth++;
 				if (player.breastRows[0].breastRating < 6 && rand(5) == 0) growth++;
 			}
-			doNext(camp.returnToCampUseOneHour);
+			player.createPerk(PerkLib.TransformationImmunity,0,0,0,0)
+			outputText("\n\n");
+			inventory.takeItem(armors.FQR, camp.returnToCampUseOneHour);
 		}
 		public function Decline():void {
 			spriteSelect(60);
 			clearOutput();
-			outputText("You announce your decision to a somewhat disappointed Vala but she nods in understanding.\n" +
-					"\n" +
-					"\"<i>It’s ok, [name]. No one will force you to make that choice through I wish you did.<i>\"\n" +
-					"\n" +
+			outputText("You announce your decision to a somewhat disappointed Vala but she nods in understanding.\n\n" +
+					"\"<i>It’s ok, [name]. No one will force you to make that choice through I wish you did.<i>\"\n\n" +
 					"You wave Vala and the fairies goodbye as you head back to camp. Still you can feel their disappointed eyes on your back as you leave the grove, likely not to return again.\n");
 			ValaFairyQueenQuest = QUEST_STAGE_PCDECLINED;
 			doNext(camp.returnToCampUseOneHour);

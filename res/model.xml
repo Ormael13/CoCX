@@ -345,7 +345,7 @@
         <cell rect="151,1124,49,59" name="arms/feral_pscales" dx="101" dy="56"/>
         <cell rect="201,1124,49,59" name="arms/feral_chitin" dx="101" dy="56"/>
         <cell rect="251,1124,49,59" name="arms/feral_orca" dx="101" dy="56"/>
-        <cell rect="801,210,49,59" name="arms/demonlewd" dx="98" dy="54"/>
+        <cell rect="801,210,49,59" name="arms/demonlewd" dx="100" dy="53"/>
         <cell rect="1,1184,99,119" name="arms/hinezumistanced_human" dx="58" dy="55"/>
         <cell rect="101,1184,99,119" name="arms/hinezumistanced_fur" dx="58" dy="55"/>
         <cell rect="201,1184,99,119" name="arms/hinezumistanced_scales" dx="58" dy="55"/>
@@ -353,7 +353,7 @@
         <cell rect="401,1184,99,119" name="arms/hinezumistanced_chitin" dx="58" dy="55"/>
         <cell rect="501,1184,99,119" name="arms/hinezumistanced_orca" dx="58" dy="55"/>
         <cell rect="601,210,49,59" name="arms/crabStance" dx="78" dy="64"/>
-        <cell rect="851,210,49,59" name="arms_fg/demonlewd" dx="98" dy="54"/>
+        <cell rect="851,210,49,59" name="arms_fg/demonlewd" dx="100" dy="53"/>
         <cell rect="638,702,90,90" name="arms_fg/manticore_sit" dx="60" dy="61"/>
         <cell rect="451,210,49,59" name="arms_pattern/Bstripe" dx="104" dy="64"/>
         <cell rect="501,210,49,59" name="arms_pattern/Blightning" dx="104" dy="64"/>
@@ -480,13 +480,14 @@
         <cell rect="1013,101,130,108" name="legs/wraith" dx="42" dy="97"/>
         <cell rect="644,1114,173,156" name="legs/centipede" dx="45" dy="75"/>
         <cell rect="722,434,130,108" name="legs/frostWyrm" dx="42" dy="97"/>
+        <cell rect="853,543,80,88" name="legs/fairyFlying" dx="65" dy="89"/>
         <cell rect="122,1114,173,156" name="legs_bg/hydra2" dx="29" dy="47"/>
         <cell rect="296,1114,173,156" name="legs_bg/hydra3" dx="29" dy="47"/>
         <cell rect="470,1114,173,156" name="legs_bg/hydra4" dx="29" dy="47"/>
         <cell rect="122,1272,173,156" name="legs_bg/hydra5" dx="29" dy="47"/>
         <cell rect="296,1272,173,156" name="legs_bg/hydra6" dx="29" dy="47"/>
         <cell rect="644,1272,173,156" name="legs_bg/centipede" dx="31" dy="17"/>
-		<cell rect="122,1430,173,186" name="legs_bg/liliraune" dx="2" dy="39"/>
+        <cell rect="122,1430,173,186" name="legs_bg/liliraune" dx="2" dy="39"/>
         <cell rect="470,956,173,156" name="fullbody/femalejiangshi" dx="16" dy="23"/>
         <cell rect="470,1272,173,156" name="fullbody/malejiangshi" dx="16" dy="23"/>
         <cell rect="260,620,21,28" name="neck/goocore" dx="95" dy="67"/>
@@ -500,6 +501,7 @@
         <cell rect="818,641,173,156" name="aura/thunderaura" dx="21" dy="28"/>
         <cell rect="607,12,40,28" name="clotheHead/goldenNagaHairpin" dx="83" dy="32"/>
         <cell rect="607,70,40,28" name="clotheHead/machinistGoggles" dx="84" dy="32"/>
+        <cell rect="486,1574,30,20" name="clotheHead/fairyQueenCirclet" dx="88" dy="38"/>
         <cell rect="607,41,15,13" name="clotheAmulet/GoldStatAmulet" dx="97" dy="65"/>
         <cell rect="67,26,80,28" name="clotheScarf/scarfBlue" dx="94" dy="64"/>
         <cell rect="524,12,80,28" name="clotheScarf/scarfGreen" dx="94" dy="64"/>
@@ -513,6 +515,7 @@
         <cell rect="935,101,40,50" name="clothe/purpleKimonoTop" dx="83" dy="72"/>
         <cell rect="981,101,40,50" name="clothe/blackKimonoTop" dx="83" dy="72"/>
         <cell rect="1017,325,80,104" name="clothe/goblinTechnomancerClothe" dx="64" dy="55"/>
+        <cell rect="722,543,130,90" name="clothe/fairyQueenDressFront" dx="40" dy="62"/>
         <cell rect="853,434,80,104" name="clothe/qipaoRedClothe" dx="64" dy="55"/>
         <cell rect="935,434,80,104" name="clothe/qipaoPurpleClothe" dx="64" dy="55"/>
         <cell rect="1017,434,80,104" name="clothe/qipaoGreenClothe" dx="64" dy="55"/>
@@ -524,13 +527,14 @@
         <cell rect="853,325,80,105" name="clothe/blackKimonoSleeves" dx="64" dy="72"/>
         <cell rect="935,325,80,104" name="clothe/goblinTechnomancerClotheArms" dx="64" dy="72"/>
         <cell rect="622,445,40,80" name="clothe/comfortableClothes" dx="79" dy="44"/>
+        <cell rect="672,445,45,80" name="clotheLegs/comfortableClothes" dx="79" dy="90"/>
         <cell rect="751,158,40,54" name="clotheLegs/whiteKimonoBottom" dx="85" dy="121"/>
         <cell rect="919,158,40,54" name="clotheLegs/blackKimonoBottom" dx="85" dy="121"/>
-        <cell rect="1099,325,80,104" name="clotheLegs/goblinTechnomancerClotheBoots" dx="54" dy="72"/>
+        <cell rect="1099,325,80,104" name="clotheLegs/goblinTechnomancerClotheBoots" dx="64" dy="72"/>
         <cell rect="1066,158,40,55" name="clotheLegs/scandalousSuccubusClothinglegs" dx="85" dy="120"/>
         <cell rect="1108,158,40,55" name="clotheLegs/scandalousSuccubusClothinglegsLewd" dx="80" dy="119"/>
         <cell rect="1108,158,40,55" name="clotheLegs/scandalousSuccubusClothingTaurTODO" dx="72" dy="96"/>
-        <cell rect="672,445,45,75" name="clotheLegs/comfortableClothes" dx="79" dy="90"/>
+        <cell rect="935,543,150,80" name="clotheLegs/fairyQueenDressUnder" dx="22" dy="61"/>
         <cell rect="776,12,45,25" name="armorNeck/fullplatetopFemale" dx="80" dy="63"/>
         <cell rect="833,12,45,25" name="armorNeck/fullplatetopMale" dx="80" dy="63"/>
         <cell rect="644,798,173,156" name="armorNeck/WalpurgisClothes" dx="20" dy="12"/>
@@ -540,12 +544,14 @@
         <cell rect="776,42,25,55" name="armorLeftArm/fullplateleftarm" dx="78" dy="66"/>
         <cell rect="961,158,20,55" name="clothLeftArm/scandalousSuccubusClothingleftArm" dx="81" dy="68"/>
         <cell rect="1003,158,20,55" name="clothLeftArm/scandalousSuccubusClothingleftArmLewd" dx="85" dy="59"/>
+        <cell rect="1099,543,70,90" name="clothLeftArm/fairyQueenDressUnderClothes" dx="64" dy="65"/>
         <cell rect="804,42,25,55" name="armorRightArm/fullplaterightarm" dx="102" dy="66"/>
         <cell rect="982,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArm" dx="109" dy="69"/>
-        <cell rect="1024,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArmLewd" dx="102" dy="53"/>
+        <cell rect="1024,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArmLewd" dx="104" dy="52"/>
         <cell rect="817,798,173,156" name="clothCape/WalpurgisClothesBack" dx="19" dy="12"/>
         <cell rect="150,91,35,25" name="eyes/SpecialForeheadShadow" dx="81" dy="35"/>
-        <cell rect="1045,158,20,55" name="glove_fg/scandalousSuccubusClothingRightArmFront" dx="102" dy="53"/>
+        <cell rect="1045,158,20,55" name="glove_fg/scandalousSuccubusClothingRightArmFront" dx="104" dy="52"/>
+        <cell rect="517,1550,30,20" name="glove_fg/fairyQueenDressArmFront" dx="105" dy="75"/>
         <cell rect="201,91,15,9" name="tailAccessory/demonTailJewelery" dx="137" dy="132"/>
         <cell rect="296,1550,99,45" name="uniquePlantBath/lilirauneBath" dx="34" dy="88"/>
         <cell rect="546,1430,50,100" name="torso/liliraune" dx="36" dy="26"/>
@@ -576,12 +582,16 @@
         <cell rect="91,251,89,98" name="hair_bg/slime2" dx="60" dy="4"/>
         <cell rect="181,251,89,98" name="hair/yeti" dx="60" dy="4"/>
         <cell rect="271,251,89,98" name="hair_bg/yeti" dx="60" dy="4"/>
+        <cell rect="361,251,89,98" name="hair_bg/dwarven" dx="59" dy="7"/>
+        <cell rect="451,251,89,98" name="hair_bg/ponytail" dx="74" dy="4"/>
+        <cell rect="541,251,89,98" name="hair_bg/twinPigtail" dx="59" dy="6"/>
         <cell rect="1,350,89,98" name="hair/raiju" dx="60" dy="4"/>
         <cell rect="91,350,89,164" name="hair_bg/raiju3" dx="60" dy="4"/>
         <cell rect="181,350,89,98" name="hair/hellcat" dx="60" dy="4"/>
         <cell rect="271,350,89,164" name="hair_bg/hellcat" dx="60" dy="4"/>
         <cell rect="541,350,89,164" name="hair/yukionna" dx="61" dy="4"/>
         <cell rect="631,350,89,164" name="hair_bg/yukionna" dx="61" dy="4"/>
+        <cell rect="721,350,89,164" name="hair_bg/longTresse" dx="50" dy="19"/>
         <cell rect="1,449,28,30" name="hair/hairHood" dx="91" dy="39"/>
     </spritemap>
     <spritemap file="head.png">
@@ -615,6 +625,7 @@
         <cell rect="541,110,29,32" name="face/ghost" dx="91" dy="38"/>
         <cell rect="571,110,29,32" name="face/melancholic" dx="91" dy="38"/>
         <cell rect="601,110,29,32" name="face/caveWyrm" dx="91" dy="38"/>
+        <cell rect="631,110,29,32" name="face/fairySmile" dx="91" dy="38"/>
         <cell rect="1,150,29,32" name="eyes/human" dx="90" dy="37"/>
         <cell rect="31,150,29,32" name="eyes/devil" dx="90" dy="37"/>
         <cell rect="61,150,29,32" name="eyes/cat" dx="90" dy="37"/>
@@ -1484,6 +1495,81 @@
             </switch>
         </if>
 		
+		<!-- HAIR STYLE AREA -->
+		<if test="hairLength &gt; 0">
+            <if test="hairType != Hair.FLUFFY and hairType != Hair.GORGON and hairType != Hair.ANEMONE and hairType != Hair.GOO">
+                <if test="hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL">
+                    <if test="hairStyle != Hair.PLAIN">
+                        <hide part="hair/0"/>
+                        <hide part="hair_bg/02"/>
+                        <show part="hair/feather"/>
+                        <show part="hair_bg/feather"/>
+                    </if>
+                </if>
+                <switch value="hairStyle">
+                    <case values="Hair.WILD">
+                        <switch>
+                            <case test="hairLength lt 16">
+                            </case>
+                            <default>
+                                <if test="hairType != Hair.STORM and hairType != Hair.BURNING">
+                                    <hide part="hair_bg/*"/>
+                                    <show part="hair_bg/02"/>
+                                </if>
+                            </default>
+                        </switch>
+                    </case>
+                    <case values="Hair.PONYTAIL">
+                        <show part="hair_bg/ponytail"/>
+                        <if test="hairType == Hair.STORM or hairType == Hair.BURNING">
+                            <hide part="hair_bg/raiju3"/>
+                            <hide part="hair_bg/hellcat"/>
+                        </if>
+                    </case>
+                    <case values="Hair.LONGTRESSES">
+                        <show part="hair_bg/longTresse"/>
+                        <if test="hairType == Hair.STORM or hairType == Hair.BURNING">
+                            <hide part="hair_bg/raiju3"/>
+                            <hide part="hair_bg/hellcat"/>
+                        </if>
+                    </case>
+                    <case values="Hair.TWINPIGTAIL">
+                        <show part="hair_bg/twinPigtail"/>
+                        <if test="hairType == Hair.STORM or hairType == Hair.BURNING">
+                            <hide part="hair_bg/raiju3"/>
+                            <hide part="hair_bg/hellcat"/>
+                        </if>
+                    </case>
+                    <case values="Hair.DWARVEN">
+                        <show part="hair_bg/dwarven"/>
+                        <if test="hairType == Hair.STORM or hairType == Hair.BURNING">
+                            <hide part="hair_bg/raiju3"/>
+                            <hide part="hair_bg/hellcat"/>
+                        </if>
+                    </case>
+                    <default>
+                        <if test="hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.FEATHER">
+                            <switch>
+                                <case test="hairLength lt 16">
+                                    <hide part="hair/*"/>
+                                    <hide part="hair_bg/*"/>
+                                    <show part="hair/0"/>
+                                    <show part="hair_bg/0"/>
+                                </case>
+                                <default>
+                                    <hide part="hair/*"/>
+                                    <hide part="hair_bg/*"/>
+                                    <show part="hair/0"/>
+                                    <show part="hair_bg/02"/>
+                                </default>
+                            </switch>
+                        </if>
+                    </default>
+                </switch>
+            </if>
+		</if>
+		
+		
         <!--
         Sets following local variables:
         $skinb - basic skin type: "human", "fur", "goo", "chitin", "pscales"
@@ -1621,6 +1707,9 @@
             </case>
 			<case values="Face.COW_MINOTAUR">
                 <show part="face/bovine"/>
+            </case>
+			<case values="Face.FAIRY">
+                <show part="face/fairySmile"/>
             </case>
 			<case values="Face.GHOST">
 				<show part="face/human"/>
@@ -2473,6 +2562,20 @@
                 <show part="wings/fairy"/>
                 <show part="wings_bg/fairy"/>
 				<show part="wings_front/fairy"/>
+            </case>
+			<case values="Wings.FAIRY">
+                <show part="wings/fairy"/>
+                <show part="wings_bg/fairy"/>
+				<show part="wings_front/fairy"/>
+				<if test="PlayerHasViewableOutfit == false">
+					<hide part="arms/*"/>
+					<show part="arms/demonlewd"/>
+					<show part="arms_fg/demonlewd"/>
+					<hide part="arms_bg/*"/>
+					<show part="arms_bg/human"/>
+					<hide part="legs/*"/>
+					<show part="legs/fairyFlying"/>
+				</if>
             </case>
 			<case values="Wings.DEVILFEATHER">
 				<show part="wings/devilfeather"/>
@@ -3829,6 +3932,21 @@
 				<hide part="balls/*"/>
 			</if>
 		</if>
-
+			
+		<if test="fairyQueenRegalia">
+			<show part="clothe/fairyQueenDressFront"/>
+			<show part="clothLeftArm/fairyQueenDressUnderClothes"/>
+			<show part="clotheLegs/fairyQueenDressUnder"/>
+			<show part="glove_fg/fairyQueenDressArmFront"/>
+			<show part="clotheHead/fairyQueenCirclet"/>
+			<hide part="arms/*"/>
+			<show part="arms/demonlewd"/>
+			<show part="arms_fg/demonlewd"/>
+			<hide part="arms_bg/*"/>
+			<show part="arms_bg/human"/>
+			<hide part="legs/*"/>
+			<show part="legs/fairyFlying"/>
+		</if>
+		
     </logic>
 </model>

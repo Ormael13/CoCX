@@ -2631,8 +2631,10 @@ public class MagicSpecials extends BaseCombatContent {
 	public function Minimise():void {
 		clearOutput();
 		useMana(40, 1);
+		var evasionIncrease:Number = 0;
+		if (player.hasPerk(PerkLib.FairyQueenRegalia)) evasionIncrease = 25;
 		outputText("You shrink to your minimum size, evading your opponent as you mock [monster his] attempt to hit you.\n\n");
-		player.createStatusEffect(StatusEffects.Minimise,100,0,0,0);
+		player.createStatusEffect(StatusEffects.Minimise,50+evasionIncrease,0,0,0);
 		enemyAI();
 	}
 
@@ -2648,7 +2650,9 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		useMana(40, 1);
 		outputText("Your form shimmers for a second as you vanish into thin air. Your opponent starts looking for you, annoyed.\n\n");
-		monster.createStatusEffect(StatusEffects.InvisibleOrStealth,2,0,0,0);
+		var DurationIncrease:Number = 0;
+		if (player.hasPerk(PerkLib.FairyQueenRegalia)) DurationIncrease = 1;
+		monster.createStatusEffect(StatusEffects.InvisibleOrStealth,2+DurationIncrease,0,0,0);
 		player.createStatusEffect(StatusEffects.CooldownFlicker,4,0,0,0);
 		enemyAI();
 	}
@@ -3763,7 +3767,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function FaeStorm():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		outputText("Your opponent Your wings start shining with rainbowish light as you charge and unleash a beam of primal energy on your opponent. ");
+		outputText("Your wings start shining with rainbowish light as you charge and unleash a beam of primal energy on " + monster.a + monster.short + ". ");
 		var damage:Number = (scalingBonusIntelligence() * spellMod());
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -3781,7 +3785,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 
 		//Randomising secondary effects
-		var EffectList:Array = []
+		var EffectList:Array = [];
 		EffectList.push(FaeStormLightning);
 		EffectList.push(FaeStormAcid);
 		EffectList.push(FaeStormBurn);
@@ -3789,7 +3793,8 @@ public class MagicSpecials extends BaseCombatContent {
 		EffectList.push(FaeStormFrozen);
 		EffectList.push(FaeStormLust);
 		EffectList.push(FaeStormSleep);
-		var ProcChance:Number = 85;
+		var ProcChance:Number = 50;
+		if (player.hasPerk(PerkLib.FairyQueenRegalia)) ProcChance = 25;
 		var procCount:int = 0;
 		for (var i:int = 0; i < 6; i++) {
 			if (rand(100) >= ProcChance) {
@@ -3822,7 +3827,8 @@ public class MagicSpecials extends BaseCombatContent {
 			EffectList.splice(EffectList.indexOf(choice), 1)
 		}
 		outputText(".\n\n");
-
+		enemyAI();
+		return;
 	}
 
 	private function FaeStormLightning(damage):void{
@@ -3851,7 +3857,7 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.createStatusEffect(StatusEffects.NagaVenom, 1, 1, 0, 0);
 	}
 	private function FaeStormFrozen(damage):void{
-		outputText("skin is covered with ice as the surrounding air freezes solid");
+		outputText(" shivers as [monster his] skin covers with ice, the surrounding air freezing solid");
 		monster.createStatusEffect(StatusEffects.FrozenSolid,3,0,0,0);
 	}
 	private function FaeStormLust(damage):void{
@@ -3860,7 +3866,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("are magically aroused by the spell");
 		}
 		else outputText("is magically aroused by the spell");
-		monster.teased(lustDmg);
+		monster.teased(lustDmg, false);
 	}
 	private function FaeStormSleep(damage):void{
 		if(monster.plural) {
@@ -3873,12 +3879,15 @@ public class MagicSpecials extends BaseCombatContent {
 	public function BalefulPolymorph():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		outputText("You chuckle playfully as you throw this spell on “opponent name”, turning it/her/him temporarily into a cute harmless ");
-		var chosen:String = randomChoice("rabbit.", "squirrel.", "sheep.", "mouse.", "cat.", "dog."
-		);
-		outputText(chosen);
-		monster.createStatusEffect(StatusEffects.Polymorphed, 3, 0, 0, 0);
+		outputText("You chuckle playfully as you throw this spell on " + monster.a + monster.short + ", turning [monster he] temporarily into a cute harmless ");
+		var chosen:String = randomChoice("rabbit.", "squirrel.", "sheep.", "mouse.", "cat.", "dog.");
+		outputText(chosen+"\n\n");
+		var DurationIncrease:Number = 0;
+		if (player.hasPerk(PerkLib.FairyQueenRegalia)) DurationIncrease = 2;
+		monster.createStatusEffect(StatusEffects.Polymorphed, 3+DurationIncrease, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.CooldownBalefulPolymorph, 16, 0, 0, 0)
+		enemyAI();
+		return;
 	}
 
 	//Transfer

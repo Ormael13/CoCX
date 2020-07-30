@@ -105,6 +105,7 @@ import coc.xlogic.ExecContext;
 					krakenBlackDress: player.armor == game.armors.KBDRESS,
 					walpurgisIzaliaCloak: player.armor == game.armors.WIC,
 					scandalousSuccubusClothing: player.armor == game.armors.SSC,
+					fairyQueenRegalia: player.armor == game.armors.FQR,
 					platemail: player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 
 					//viewable bra list

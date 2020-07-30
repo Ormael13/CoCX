@@ -3238,15 +3238,13 @@ use namespace CoC;
 					else race = "half bunny-" + mf("boy", "girl");
 				}
 			}
-			/*
-                        if (TopRace == "easter bunny") {
-                            if (TopScore >= 12)
-                            {
-                                if (TopScore >= 15) race = "true easter bunny-" + mf("boy", "girl");
-                                else race = "easter bunny-" + mf("boy", "girl");
-                            }
-                        }
-            */
+			if (TopRace == "easter bunny") {
+				if (TopScore >= 12)
+				{
+					if (TopScore >= 15) race = "true easter bunny-" + mf("boy", "girl");
+					else race = "easter bunny-" + mf("boy", "girl");
+				}
+			}
 			if (TopRace == "harpy") {
 				if (TopScore >= 4) {
 					if (TopScore >= 8) {
@@ -3827,6 +3825,12 @@ use namespace CoC;
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.EasterBunnyEggBagFinalForm) >= 0)
 				internalChimeraCounter++;
+			if (findPerk(PerkLib.EclipticMind) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.EclipticMindEvolved) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.EclipticMindFinalForm) >= 0)
+				internalChimeraCounter++;
 			if (findPerk(PerkLib.ElvishPeripheralNervSys) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.ElvishPeripheralNervSysEvolved) >= 0)
@@ -3934,6 +3938,12 @@ use namespace CoC;
 			if (findPerk(PerkLib.TrachealSystemEvolved) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.TrachealSystemFinalForm) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.TwinHeart) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.TwinHeartEvolved) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.TwinHeartFinalForm) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.VampiricBloodsteam) >= 0)
 				internalChimeraCounter++;
@@ -6021,11 +6031,9 @@ use namespace CoC;
 				EbunnyCounter++;
 			if (lowerBody == LowerBody.BUNNY)
 				EbunnyCounter++;
-			if (hasPartialCoat(Skin.FUR) || hasFullCoatOfType(Skin.FUR))
+			if (hasPartialCoat(Skin.FUR) || hasFullCoatOfType(Skin.FUR) || hasFur())
 				EbunnyCounter++;
 			if (tailType == Tail.RABBIT)
-				EbunnyCounter++;
-			if (hasFur() || hasPartialCoat(Skin.FUR))
 				EbunnyCounter++;
 			if (eyes.type == Eyes.HUMAN)
 				EbunnyCounter++;
@@ -6039,7 +6047,7 @@ use namespace CoC;
 				EbunnyCounter++;
 			if (hasCock() && normalCocks())
 				EbunnyCounter++;
-			if (balls > 2)
+			if (hasPerk(PerkLib.EasterBunnyBalls) && balls >= 2)
 				EbunnyCounter++;
 			if (hasPerk(PerkLib.EasterBunnyEggBag) && balls >= 2)
 				EbunnyCounter++;
@@ -6050,6 +6058,8 @@ use namespace CoC;
 			if (hasPerk(PerkLib.EasterBunnyEggBag) && balls >= 2 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
 				EbunnyCounter++;
 			if (hasPerk(PerkLib.EasterBunnyEggBagEvolved) && balls >= 2 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
+				EbunnyCounter++;
+			if (hasPerk(PerkLib.EasterBunnyEggBagFinalForm) && balls >= 2 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
 				EbunnyCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				EbunnyCounter += 50;

@@ -1,6 +1,6 @@
 /**
  * ...
- * @author Zavos
+ * @author Liadri
  */
 package classes.Items.Armors 
 {

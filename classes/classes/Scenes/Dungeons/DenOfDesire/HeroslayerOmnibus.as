@@ -45,7 +45,7 @@ public class HeroslayerOmnibus extends Monster
 			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.");
 			}
-			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 15 && player.armorName == "red, high-society bodysuit") {
+			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 15 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("With Raphael's teachings and the easy movement afforded by your bodysuit, you easily anticipate and sidestep " + a + short + "'s attack.");
 			}
 			else {
