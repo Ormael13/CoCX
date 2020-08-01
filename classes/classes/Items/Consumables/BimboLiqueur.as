@@ -132,7 +132,6 @@ public class BimboLiqueur extends Consumable {
 					game.player.breastRows[0].breastRating += 5 + Utils.rand(5);
 					outputText(", admiring how sensitive they're getting.  The big breasts start getting bigger and bigger, soft chest-flesh practically oozing out between your fingers as the squishy mammaries sprout like weeds, expanding well beyond any hand's ability to contain them.  The supple, " + game.player.breastCup(0) + " boobs still manage to sit high on your chest, almost gravity defying in their ability to generate cleavage.  You pinch a nipple with one hand ");
 				}
-				game.player.dynStats("sen", 20);
 				outputText("while the other toys with the juicy entrance of your folds.  Mmmm, it, like, feels too good not to touch yourself, and after being worried about getting all dumb and stuff, you need to relax.  Thinking is hard, but sex is so easy and, like, natural!  You lean back and start grunting as you plunge four fingers inside yourself, plowing your " + game.player.vaginaDescript(0) + " like no tomorrow.  By now, your " + game.player.clitDescript() + " is throbbing, and you give it an experimental ");
 				if (game.player.clitLength >= 3) outputText("jerk ");
 				else outputText("caress ");
@@ -182,7 +181,7 @@ public class BimboLiqueur extends Consumable {
 					}
 				}
 				game.player.orgasm();
-				game.player.dynStats("int", -1, "lib", 5, "sen", 25);
+				game.player.dynStats("int", -1, "lib", 5);
 				if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= mutations.DrunkenPowerEmpowerOni()) mutations.DrunkenPowerEmpower();
 				//FULL ON BITCHFACE
 				game.player.modFem(100, 100);

@@ -55,7 +55,7 @@ public class StatUtils {
 	 * @param asPercent show "+20%" instead of "+0.2"
 	 * @param includeHidden show hidden buffs
 	 */
-	public static function describeBuffs(stat:BuffableStat, asPercent:Boolean, includeHidden:Boolean = false):String {
+	public static function describeBuffs(stat:BuffableStat, asPercent:Boolean, isPositiveStat:Boolean = true, includeHidden:Boolean = false):String {
 		var buffs:/*Buff*/Array = stat.listBuffs();
 		var hasHidden:Boolean = false;
 		var text:String = "";
@@ -65,6 +65,14 @@ public class StatUtils {
 			if (!buff.show && !includeHidden) {
 				hasHidden = true;
 				continue;
+			}
+			if (isPositiveStat) {
+				if (value > 0) text += '<font color="#008000">';
+				else text += '<font color="#800000">';
+			}
+			if (!isPositiveStat) {
+				if (value > 0) text += '<font color="#800000">';
+				else text += '<font color="#008000">';
 			}
 			text += '<b>' + buff.text + ':</b> ';
 			if (asPercent) {
@@ -80,6 +88,9 @@ public class StatUtils {
 				}[buff.rate])+')'
 			}
 			text += '\n';
+			text += "</font>";
+			//if (!isPositiveStat) text += '<font color="#800000">'
+			//if (isPositiveStat) text = "<font color=\"#008000\">"+text+"</font>";
 		}
 		if (hasHidden) text += '<b>Unknown Sources:</b> ±??';
 		return text;

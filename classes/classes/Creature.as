@@ -1314,7 +1314,10 @@ public class Creature extends Utils
 				perks.push(newKeyItem);
 				keySlot = perks.length - 1;
 			}
-			
+			if (ptype.buffs != null)
+			{
+				statStore.addBuffObject(ptype.buffs, "perk_"+ptype.id, {text:ptype.name, save:false});
+			}
 			perk(keySlot).value1 = value1;
 			perk(keySlot).value2 = value2;
 			perk(keySlot).value3 = value3;
@@ -1345,6 +1348,10 @@ public class Creature extends Utils
 				{
 					perks.splice(counter, 1);
 					//trace("Attempted to remove \"" + perkName + "\" perk.");
+					if (ptype.buffs != null)
+					{
+						statStore.removeBuffs("perk_"+ptype.id);
+					}
 					return true;
 				}
 			}

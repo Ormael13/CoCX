@@ -4,7 +4,11 @@ import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Player;
 import classes.Scenes.SceneLib;
+import classes.Stats.BuffableStat;
+import classes.Stats.StatUtils;
 import classes.internals.Utils;
+
+import flash.events.MouseEvent;
 
 import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
@@ -113,13 +117,29 @@ public class StatsView extends Block {
 			defaultTextFormat: LABEL_FORMAT
 		},{before:1});
 		col1.addElement(strBar = new StatBar({statName: "Strength:"}));
+		strBar.addEventListener("rollOver",Utils.curry(hoverStat,'str'));
+		strBar.addEventListener("rollOut",Utils.curry(hoverStat,'str'));
 		col1.addElement(touBar = new StatBar({statName: "Toughness:"}));
+		touBar.addEventListener("rollOver",Utils.curry(hoverStat,'tou'));
+		touBar.addEventListener("rollOut",Utils.curry(hoverStat,'tou'));
 		col1.addElement(speBar = new StatBar({statName: "Speed:"}));
+		speBar.addEventListener("rollOver",Utils.curry(hoverStat,'spe'));
+		speBar.addEventListener("rollOut",Utils.curry(hoverStat,'spe'));
 		col1.addElement(intBar = new StatBar({statName: "Intelligence:"}));
+		intBar.addEventListener("rollOver",Utils.curry(hoverStat,'inte'));
+		intBar.addEventListener("rollOut",Utils.curry(hoverStat,'inte'));
 		col1.addElement(wisBar = new StatBar({statName: "Wisdom:"}));
+		wisBar.addEventListener("rollOver",Utils.curry(hoverStat,'wis'));
+		wisBar.addEventListener("rollOut",Utils.curry(hoverStat,'wis'));
 		col1.addElement(libBar = new StatBar({statName: "Libido:"}));
+		libBar.addEventListener("rollOver",Utils.curry(hoverStat,'lib'));
+		libBar.addEventListener("rollOut",Utils.curry(hoverStat,'lib'));
 		col1.addElement(senBar = new StatBar({statName: "Sensitivity:"}));
+		senBar.addEventListener("rollOver",Utils.curry(hoverStat,'sens'));
+		senBar.addEventListener("rollOut",Utils.curry(hoverStat,'sens'));
 		col1.addElement(corBar = new StatBar({statName: "Corruption:"}));
+		corBar.addEventListener("rollOver",Utils.curry(hoverStat,'cor'));
+		corBar.addEventListener("rollOut",Utils.curry(hoverStat,'cor'));
 		
 		combatStatsText = col2.addTextField({
 			text: 'Combat stats',
@@ -200,7 +220,7 @@ public class StatsView extends Block {
 	public function hide():void {
 		this.visible = false;
 	}
-	
+
 	
 	override public function set visible(value:Boolean):void {
 		super.visible = value;
@@ -405,6 +425,26 @@ public class StatsView extends Block {
 			dtf.color = style.statTextColor;
 			tf.defaultTextFormat = dtf;
 			tf.setTextFormat(dtf);
+		}
+	}
+
+	private function hoverStat(statname:String, event:MouseEvent):void {
+		var player:Player = CoC.instance.player;
+		switch (event.type) {
+			case MouseEvent.ROLL_OVER:
+				var isPositiveStat:Boolean = true;
+				var stat:BuffableStat = player.statStore.findBuffableStat(statname);
+				if (!stat) return;
+				var bar:StatBar = event.target as StatBar;
+				if (!bar) return;
+				CoC.instance.mainView.toolTipView.header = bar.statName;
+				if (statname == "sens" || statname == "cor") isPositiveStat = false;
+				CoC.instance.mainView.toolTipView.text = StatUtils.describeBuffs(stat, false, isPositiveStat);
+				CoC.instance.mainView.toolTipView.showForElement(bar);
+				break;
+			case MouseEvent.ROLL_OUT:
+				CoC.instance.mainView.toolTipView.hide();
+				break;
 		}
 	}
 }
