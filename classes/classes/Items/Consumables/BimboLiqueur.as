@@ -192,7 +192,7 @@ public class BimboLiqueur extends Consumable {
 				//Brain
 				//Max int - 50
 			}
-			return(false);
+			return false;
 		}
 	}
 }
