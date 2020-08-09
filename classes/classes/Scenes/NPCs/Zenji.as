@@ -166,7 +166,7 @@ use namespace CoC;
 					this.tou += 28 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.spe += 27 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.inte += 25 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-					this.wis += 27 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.wisStat.core.value += 27 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				}
 				else if (player.level >= 150) {
 					this.level = 150;
@@ -174,7 +174,7 @@ use namespace CoC;
 					this.tou += 728 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.spe += 702 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.inte += 650 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-					this.wis += 702 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.wisStat.core.value += 702 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				}
 				else this.level = 25;
 			}

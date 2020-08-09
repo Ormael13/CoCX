@@ -2028,27 +2028,27 @@ public function FightHellfireSnail():void {
 			StatsMenuInte();
 		}
 		public function AddWis1():void {
-			player.wis = player.wis + 1;
+			player.wisStat.core.value += 1;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function AddWis2():void {
-			player.wis = player.wis + 10;
+			player.wisStat.core.value += 10;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function AddWis3():void {
-			player.wis = player.wis + 50;
+			player.wisStat.core.value += 50;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function AddWis4():void {
-			player.wis = player.wis + 200;
+			player.wisStat.core.value += 200;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function AddWis5():void {
-			player.wis = player.wis + 1000;
+			player.wisStat.core.value += 1000;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
@@ -2228,27 +2228,27 @@ public function FightHellfireSnail():void {
 			StatsMenuInte();
 		}
 		public function SubWis1():void {
-			player.wis = player.wis - 1;
+			player.wisStat.core.value -= 1;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function SubWis2():void {
-			player.wis = player.wis - 10;
+			player.wisStat.core.value -= 10;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function SubWis3():void {
-			player.wis = player.wis - 50;
+			player.wisStat.core.value -= 50;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function SubWis4():void {
-			player.wis = player.wis - 200;
+			player.wisStat.core.value -= 200;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function SubWis5():void {
-			player.wis = player.wis - 1000;
+			player.wisStat.core.value -= 1000;
 			statScreenRefresh();
 			StatsMenuWis();
 		}

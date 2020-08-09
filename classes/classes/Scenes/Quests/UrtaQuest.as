@@ -295,7 +295,7 @@ public function startUrtaQuest():void {
 	player.tou = 183;
 	player.spe = 178;
 	player.inte = 60;
-	player.wis = 50;
+	player.wisStat.core.value = 50;
 	player.lib = 90;
 	player.sensStat.redefine({base:50});
 	player.cor = 30;
@@ -310,7 +310,7 @@ public function startUrtaQuest():void {
 	player.tou += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 37);
 	player.spe += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 40);
 	player.inte += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 20);
-	player.wis += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 18);
+	player.wisStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 18);
 	player.lib += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30);
 	var UrtaMulti:Number = 1;
 	if (flags[kFLAGS.GAME_DIFFICULTY] == 1) UrtaMulti += 0.1;
@@ -321,7 +321,7 @@ public function startUrtaQuest():void {
 	player.tou = Math.round(player.tou * UrtaMulti);
 	player.spe = Math.round(player.spe * UrtaMulti);
 	player.inte = Math.round(player.inte * UrtaMulti);
-	player.wis = Math.round(player.wis * UrtaMulti);
+	player.wisStat.core.value = Math.round(player.wis * UrtaMulti);
 	player.lib = Math.round(player.lib * UrtaMulti);
 
 	//PERKS

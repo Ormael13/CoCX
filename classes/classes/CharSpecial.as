@@ -561,7 +561,7 @@ import classes.Items.*;
 			player.tou = 15;
 			player.spe = 18;
 			player.inte = 17;
-			player.wis = 17;
+			player.wisStat.core.value = 17;
 			player.sensStat.redefine({base:15});
 			player.lib = 15;
 			player.cor = 0;
@@ -642,7 +642,6 @@ import classes.Items.*;
 			player.tou = 17;
 			player.spe = 15;
 			player.inte = 15;
-			player.wis = 15;
 			player.sensStat.redefine({base:15});
 			player.lib = 15;
 			player.cor = 0;
@@ -1227,7 +1226,7 @@ import classes.Items.*;
 			player.tou = 25;
 			player.spe = 25;
 			player.inte = 25;
-			player.wis = 25;
+			player.wisStat.core.value = 25;
 			outputText("You are a literal angel from beyond, and you take the place of a vilage's champion for your own reasons...");
 		}
 		
@@ -1320,7 +1319,7 @@ import classes.Items.*;
 			player.createVagina();
 			player.vaginas[0].virgin = true;
 			player.inte = 40;
-			player.wis = 40;
+			player.wisStat.core.value = 40;
 			player.gems += 250;
 			player.tallness = 45;
 			player.tone = 30;
@@ -1372,7 +1371,7 @@ import classes.Items.*;
 			player.spe = 100;
 			player.inte = 100;
 			player.sensStat.redefine({base:100});
-			player.wis = 100;
+			player.wisStat.core.value = 100;
 			player.lib = 30;
 			player.cor = 71;
 			player.HP = EngineCore.maxHP();
@@ -1797,7 +1796,7 @@ import classes.Items.*;
 			player.tou += 0; // still, your dragon blood makes you surprisingly tough for your size and condition
 			player.spe += 5; // can take some advantage from small frame
 			player.inte += 55; // your mind is your power!
-			player.wis += 55; // your mind is your power!
+			player.wisStat.core.value = 55; // your mind is your power!
 			player.lib += 85; // yes, you have problems
 			player.cor += 31; // have high initial corruption, but also have religious history to meditate
 			

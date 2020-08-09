@@ -158,7 +158,6 @@ import coc.view.MainView;
 			player.tou = 15;
 			player.spe = 15;
 			player.inte = 15;
-			player.wis = 15;
 			player.lib = 15;
 			player.cor = 15;
 			player.soulforce = 50;

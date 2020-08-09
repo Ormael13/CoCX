@@ -3396,7 +3396,6 @@ public class PlayerAppearance extends BaseContent {
 		if (touStat != touStat1) player.tou = Math.round(player.tou * (touStat1 / touStat));
 		if (speStat != speStat1) player.spe = Math.round(player.spe * (speStat1 / speStat));
 		if (inteStat != inteStat1) player.inte = Math.round(player.inte * (inteStat1 / inteStat));
-		if (wisStat != wisStat1) player.wis = Math.round(player.wis * (wisStat1 / wisStat));
 		if (libStat != libStat1) player.lib = Math.round(player.lib * (libStat1 / libStat));
 		doNext(playerMenu);
 	}

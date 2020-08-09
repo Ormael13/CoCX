@@ -81,7 +81,7 @@ public class Enigmanium extends Consumable{
 			if (player.inte < 100 && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nThousands of glowing symbols, hieroglyphics you remember them being denoted as, appear in vast arrays in your mind. Miraculously, you can make sense of them, as if they were in your own language. Shifting them, you giggle to yourself as you begin crafting a riddle that will surely baffle great minds. The visions end, and you feel incredibly enlightened! Is this how Sanurah feels?");
 				dynStats("int", 2);
-				dynStats("wis", 2);
+				player.wisStat.core.value += 2;
 				changes++;
 			}
 			

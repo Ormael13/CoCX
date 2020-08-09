@@ -95,6 +95,9 @@ public class StatUtils {
 		if (hasHidden) text += '<b>Unknown Sources:</b> ±??';
 		return text;
 	}
+
+
+
 	public static function nameOfStat(stat:String):String {
 		if (stat in PlainNumberStats) {
 			return PlainNumberStats[stat];

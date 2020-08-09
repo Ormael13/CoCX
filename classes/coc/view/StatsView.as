@@ -5,6 +5,8 @@ import classes.CoC;
 import classes.Player;
 import classes.Scenes.SceneLib;
 import classes.Stats.BuffableStat;
+import classes.Stats.IStat;
+import classes.Stats.PrimaryStat;
 import classes.Stats.StatUtils;
 import classes.internals.Utils;
 
@@ -432,16 +434,30 @@ public class StatsView extends Block {
 		var player:Player = CoC.instance.player;
 		switch (event.type) {
 			case MouseEvent.ROLL_OVER:
+				var astat:IStat = player.statStore.findStat(statname);
 				var isPositiveStat:Boolean = true;
-				var stat:BuffableStat = player.statStore.findBuffableStat(statname);
-				if (!stat) return;
 				var bar:StatBar = event.target as StatBar;
-				if (!bar) return;
-				CoC.instance.mainView.toolTipView.header = bar.statName;
-				if (statname == "sens" || statname == "cor") isPositiveStat = false;
-				CoC.instance.mainView.toolTipView.text = StatUtils.describeBuffs(stat, false, isPositiveStat);
-				CoC.instance.mainView.toolTipView.showForElement(bar);
-				break;
+				if (astat is BuffableStat) {
+					var stat:BuffableStat = astat as BuffableStat;
+					if (!stat) return;
+					if (!bar) return;
+					CoC.instance.mainView.toolTipView.header = bar.statName;
+					if (statname == "sens" || statname == "cor") isPositiveStat = false;
+					CoC.instance.mainView.toolTipView.text = StatUtils.describeBuffs(stat, false, isPositiveStat);
+					CoC.instance.mainView.toolTipView.showForElement(bar);
+					break;
+				} else if (astat is PrimaryStat) {
+					var primStat:PrimaryStat = astat as PrimaryStat;
+					if (!primStat) return;
+					if (!primStat) return;
+					CoC.instance.mainView.toolTipView.header = bar.statName;
+					if (statname == "sens" || statname == "cor") isPositiveStat = false;
+					CoC.instance.mainView.toolTipView.text = "Base: "+primStat.core.value+"\n" +
+							""+StatUtils.describeBuffs(primStat.bonus, false, isPositiveStat)+"" +
+							""+StatUtils.describeBuffs(primStat.mult, true, isPositiveStat)+"";
+					CoC.instance.mainView.toolTipView.showForElement(bar);
+					break;
+				}
 			case MouseEvent.ROLL_OUT:
 				CoC.instance.mainView.toolTipView.hide();
 				break;

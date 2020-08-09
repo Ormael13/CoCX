@@ -25,6 +25,8 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.JewelryLib;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Stats.BuffableStat;
+import classes.Stats.PrimaryStat;
+import classes.Stats.RawStat;
 import classes.Stats.StatStore;
 import classes.StatusEffects.Combat.CombatInteBuff;
 import classes.StatusEffects.Combat.CombatSpeBuff;
@@ -261,9 +263,30 @@ public class Creature extends Utils
 		 */
 		private var _stats: StatStore = new StatStore({
 			// 'statName': new BuffableStats({base: 0, min: 0});
+			// 'statName': new PrimaryStat();
+			'str': new PrimaryStat(),
+			'tou': new PrimaryStat(),
+			'spe': new PrimaryStat(),
+			'int': new PrimaryStat(),
+			'wis': new PrimaryStat(),
+			'lib': new PrimaryStat(),
 			'sens': new BuffableStat({base: 15, min: 0})
 		});
 		public function get statStore():StatStore { return _stats; }
+
+		//new stat area
+		public var strStat:PrimaryStat = _stats.findStat('str') as PrimaryStat;
+		public function get str2():Number { return strStat.value; }
+		public var touStat:PrimaryStat = _stats.findStat('tou') as PrimaryStat;
+		public function get tou2():Number { return touStat.value; }
+		public var speStat:PrimaryStat = _stats.findStat('spe') as PrimaryStat;
+		public function get spe2():Number { return speStat.value; }
+		public var intStat:PrimaryStat = _stats.findStat('int') as PrimaryStat;
+		public function get int2():Number { return intStat.value; }
+		public var wisStat:PrimaryStat = _stats.findStat('wis') as PrimaryStat;
+		public function get wis():Number { return wisStat.value; }
+		public var libStat:PrimaryStat = _stats.findStat('lib') as PrimaryStat;
+		public function get lib2():Number { return libStat.value; }
 
 		public function addCurse(statName:String, power:Number):void {
 			if (statName == "sens" || statName == "cor") {
@@ -307,7 +330,6 @@ public class Creature extends Utils
 		public var tou:Number = 0;
 		public var spe:Number = 0;
 		public var inte:Number = 0;
-		public var wis:Number = 0;
 		public var lib:Number = 0;
 		public var sensStat:BuffableStat = _stats.findStat('sens') as BuffableStat;
 		public function get sens():Number { return sensStat.value; }
@@ -817,15 +839,22 @@ public class Creature extends Utils
 			tou  = Utils.boundFloat(mins.tou, tou + dtou, maxes.tou);
 			spe  = Utils.boundFloat(mins.spe, spe + dspe, maxes.spe);
 			inte = Utils.boundFloat(mins.inte, inte + dinte, maxes.inte);
-			wis  = Utils.boundFloat(mins.wis, wis + dwis, maxes.wis);
+			//Wisdom
+			if (dwis < 0){
+				addCurse("wis", -dwis);
+			}
+			if (dwis > 0){
+				removeCurse("wis", dwis);
+			}
+
 			lib  = Utils.boundFloat(mins.lib, lib + dlib, maxes.lib);
+			//Sensitivity
 			if (dsens > 0){
 				addCurse("sens", dsens);
 			}
 			if (dsens < 0){
 				removeCurse("sens", -dsens);
 			}
-			//sens = Utils.boundFloat(mins.sens, sens + dsens, maxes.sens);
 			lust = Utils.boundFloat(mins.lust, lust + dlust, maxes.lust);
 			cor  = Utils.boundFloat(mins.cor, cor + dcor, maxes.cor);
 			
@@ -1105,6 +1134,12 @@ public class Creature extends Utils
 			breastRows    = [];
 			_perks        = [];
 			statusEffects = [];
+			this.strStat.core.value = 15;
+			this.touStat.core.value = 15;
+			this.speStat.core.value = 15;
+			this.intStat.core.value = 15;
+			this.wisStat.core.value = 15;
+			this.libStat.core.value = 15;
 			//keyItems = new Array();
 		}
 

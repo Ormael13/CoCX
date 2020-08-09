@@ -104,16 +104,16 @@
                 else outputText(player.modTone(15, 1));
             }
             if (player.wis < 50) {
-                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) player.wis += 2 + rand(7);
-                else player.wis += 1 + rand(4);
+                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) player.wisStat.core.value += 2 + rand(7);
+                else player.wisStat.core.value += 1 + rand(4);
                 dynStats();
             } else if (player.wis < 100) {
-                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) player.wis += 2 + rand(5);
-                else player.wis += 1 + rand(3);
+                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) player.wisStat.core.value += 2 + rand(5);
+                else player.wisStat.core.value += 1 + rand(3);
                 dynStats();
             } else {
-                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) player.wis += 2 + rand(3);
-                else player.wis += 1 + rand(2);
+                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) player.wisStat.core.value += 2 + rand(3);
+                else player.wisStat.core.value += 1 + rand(2);
                 dynStats();
             }
         }/*
@@ -217,7 +217,8 @@
             outputText("You take first bite of fruit that Evangeline gave you.  Surprisingly it taste delicious as nothing else you tasted before so without thinking more you ate rest of the fruit.");
             if (player.findPerk(PerkLib.EzekielBlessing) < 0) player.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
             statScreenRefresh();
-            dynStats("str", 5, "tou", 5, "spe", 5, "inte", 5, "wis", 5, "lib", 5, "sen", 5);
+            dynStats("str", 5, "tou", 5, "spe", 5, "inte", 5, "lib", 5);
+            player.statStore.addBuffObject({'wis': 5}, 'EzekielBLessing', { text: 'Ezekiel BLessing'});
             player.refillHunger(50);
         }
 
@@ -4876,14 +4877,6 @@
             }
             outputText("You shovel the stuff into your face, not sure WHY you're eating it, but once you start, you just can't stop.  It tastes incredibly bland, and with a slight hint of cheese.");
             player.refillHunger(100);
-            player.str = 30;
-            player.spe = 30;
-            player.tou = 30;
-            player.inte = 30;
-            player.wis = 30;
-            player.lib = 25;
-            player.cor = 5;
-            player.lust = 10;
             player.hairType = Hair.NORMAL;
             if (player.humanScore() > 4) {
                 outputText("\n\nYou blink and the world twists around you.  You feel more like yourself than you have in a while, but exactly how isn't immediately apparent.  Maybe you should take a look at yourself?");
