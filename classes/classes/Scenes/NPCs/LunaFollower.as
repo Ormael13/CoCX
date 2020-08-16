@@ -21,13 +21,40 @@ package classes.Scenes.NPCs
 	import classes.Scenes.SceneLib;
 	import classes.Items.MutationsHelper;
 	import classes.display.SpriteDb;
-	
-	public class LunaFollower extends NPCAwareContent
+	import classes.internals.SaveableState;
+
+public class LunaFollower extends NPCAwareContent implements SaveableState
 	{
 		public var mutations:MutationsHelper = new MutationsHelper();
+		public static var Nursed:Boolean;
+
+		public function stateObjectName():String {
+			return "LunaFollower";
+		}
+
+		public function resetState():void {
+			Nursed = false;
+		}
+
+		public function saveToObject():Object {
+			return {
+				"LunaNursed": Nursed
+			};
+		}
+
+		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
+			if (o) {
+				Nursed = o["LunaNursed"];
+			} else {
+				// loading from old save
+				resetState();
+			}
+		}
 		
 		public function LunaFollower() 
-		{}
+		{
+			Saves.registerSaveableState(this);
+		}
 		//luna follower flag: 2 - kicked post moon event, 3 seen her dead in forest, 4,5 - pre full moon event, 6 jelly pre full moon, 7,8 - post moon unchained, 9,10 - post moon chained, 11,12 - unchained post moon accepted (PC no WW), 13,14 - unchained post moon accepted and talked about lycantrophy (PC no WW), 15,16 - unchained post moon accepted (PC WW)
 		public function lunaAffection(changes:Number = 0):Number
 		{
@@ -57,8 +84,9 @@ package classes.Scenes.NPCs
 			addButton(1, "Talk", talkMenuLuna);
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 4) {
 				addButton(3, "Meal", mealLuna);
-				if (player.HP >= player.maxHP()) addButtonDisabled(4, "Nurse", "You are currently in perfect health.");
-				else addButton(4, "Nurse", nurseLuna);
+				addButton(4, "Nurse", nurseLuna);
+				button(4).disableIf(player.HP >= player.maxHP(), "You are currently in perfect health.");
+				button(4).disableIf(Nursed, "Luna needs time to gather medicinal herbs and remedies, you will have to wait for tomorow to get nursed again.");
 			}
 			if (flags[kFLAGS.LUNA_AFFECTION] >= 50) {
 				if (flags[kFLAGS.SLEEP_WITH] != "Luna") addButton(5, "Sleep With", lunaSleepToggle);
@@ -339,9 +367,12 @@ package classes.Scenes.NPCs
 			outputText("\"<i>I will tend to your wounds at once.</i>\"\n\n");
 			outputText("Luna casts a few healing spells on you to help your recovery. She traces your skin with her fingers, closing wounds wherever they pass. This treatment is highly effective, but leaves you somewhat aroused.\n\n");
 			dynStats("lus", 33);
+			for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"])
+				player.removeCurse(stat, 4);
 			lunaJealousy(-100);
 			lunaAffection(5);
 			HPChange(Math.round(player.maxHP() * .5), true);
+			Nursed = true;
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) {
 				outputText("\nLuna is giving a knowing smile, likely hoping you will jump at the opportunity, maybe she even did it on purpose. Do you take her here and now?\n\n");
 				menu();

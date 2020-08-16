@@ -284,9 +284,9 @@ public class Creature extends Utils
 		public var intStat:PrimaryStat = _stats.findStat('int') as PrimaryStat;
 		public function get int2():Number { return intStat.value; }
 		public var wisStat:PrimaryStat = _stats.findStat('wis') as PrimaryStat;
-		public function get wis():Number { return wisStat.value; }
+		public function get wis():Number { return Math.round(wisStat.value); }
 		public var libStat:PrimaryStat = _stats.findStat('lib') as PrimaryStat;
-		public function get lib2():Number { return libStat.value; }
+		public function get lib2():Number { return Math.round(libStat.value); }
 
 		public function addCurse(statName:String, power:Number):void {
 			if (statName == "sens" || statName == "cor") {

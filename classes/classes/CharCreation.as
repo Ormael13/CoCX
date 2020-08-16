@@ -3494,6 +3494,7 @@ import coc.view.MainView;
 			inventory.clearStorage();
 			inventory.clearGearStorage();
 			inventory.initializeGearStorage();
+			player.strtouspeintwislibsenCalculation1();
 			doNext(removeLevelPerks);
 		}
 		

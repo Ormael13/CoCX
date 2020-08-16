@@ -7,6 +7,8 @@ import classes.internals.Utils;
 
 import coc.script.Eval;
 
+import flash.sampler.startSampling;
+
 public class StatUtils {
 	public function StatUtils() {
 	}
@@ -55,42 +57,67 @@ public class StatUtils {
 	 * @param asPercent show "+20%" instead of "+0.2"
 	 * @param includeHidden show hidden buffs
 	 */
-	public static function describeBuffs(stat:BuffableStat, asPercent:Boolean, isPositiveStat:Boolean = true, includeHidden:Boolean = false):String {
+	public static function describeBuffs(stat:BuffableStat, asPercent:Boolean, isPositiveStat:Boolean = true, includeHidden:Boolean = false, IncludePerkBuff:Boolean = false):String {
 		var buffs:/*Buff*/Array = stat.listBuffs();
 		var hasHidden:Boolean = false;
 		var text:String = "";
+		var PerkBuff:Number = 0;
 		for each(var buff:Buff in buffs) {
 			var value:Number = buff.value;
-			if (value >= 0.0 && value < 0.01) continue;
-			if (!buff.show && !includeHidden) {
-				hasHidden = true;
-				continue;
+			if (buff.tag.indexOf("perk_") == 0 && !IncludePerkBuff)
+			{
+				PerkBuff = PerkBuff+buff.value;
 			}
+			else{
+				if (value >= 0.0 && value < 0.01) continue;
+				if (!buff.show && !includeHidden) {
+					hasHidden = true;
+					continue;
+				}
+				if (isPositiveStat) {
+					if (value > 0) text += '<font color="#008000">';
+					else text += '<font color="#800000">';
+				}
+				if (!isPositiveStat) {
+					if (value > 0) text += '<font color="#800000">';
+					else text += '<font color="#008000">';
+				}
+				text += '<b>' + buff.text + ':</b> ';
+				if (asPercent) {
+					text += (value >= 0 ? '+' : '') + Utils.floor(value * 100) + '%';
+				} else {
+					text += (value >= 0 ? '+' : '') + Utils.floor(value, 1);
+				}
+				if (buff.rate != Buff.RATE_PERMANENT) {
+					text += ' ('+Utils.numberOfThings(buff.tick, {
+						([Buff.RATE_ROUNDS]):'round',
+						([Buff.RATE_HOURS]):'hour',
+						([Buff.RATE_DAYS]):'day'
+					}[buff.rate])+')'
+				}
+				text += '\n';
+				text += "</font>";
+				//if (!isPositiveStat) text += '<font color="#800000">'
+				//if (isPositiveStat) text = "<font color=\"#008000\">"+text+"</font>";
+			}
+		}
+		if (PerkBuff != 0)
+		{
 			if (isPositiveStat) {
-				if (value > 0) text += '<font color="#008000">';
+				if (PerkBuff > 0) text += '<font color="#008000">';
 				else text += '<font color="#800000">';
 			}
 			if (!isPositiveStat) {
-				if (value > 0) text += '<font color="#800000">';
+				if (PerkBuff > 0) text += '<font color="#800000">';
 				else text += '<font color="#008000">';
 			}
-			text += '<b>' + buff.text + ':</b> ';
+			text += "<b>Perk:</b> ";
 			if (asPercent) {
-				text += (value >= 0 ? '+' : '') + Utils.floor(value * 100) + '%';
+				text += (PerkBuff >= 0 ? '+' : '') + Utils.floor(PerkBuff * 100) + '%';
 			} else {
-				text += (value >= 0 ? '+' : '') + Utils.floor(value, 1);
+				text += (PerkBuff >= 0 ? '+' : '') + Utils.floor(PerkBuff, 1);
 			}
-			if (buff.rate != Buff.RATE_PERMANENT) {
-				text += ' ('+Utils.numberOfThings(buff.tick, {
-					([Buff.RATE_ROUNDS]):'round',
-					([Buff.RATE_HOURS]):'hour',
-					([Buff.RATE_DAYS]):'day'
-				}[buff.rate])+')'
-			}
-			text += '\n';
 			text += "</font>";
-			//if (!isPositiveStat) text += '<font color="#800000">'
-			//if (isPositiveStat) text = "<font color=\"#008000\">"+text+"</font>";
 		}
 		if (hasHidden) text += '<b>Unknown Sources:</b> ±??';
 		return text;

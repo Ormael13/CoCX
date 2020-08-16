@@ -21,6 +21,7 @@ import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.DivaScene;
+import classes.Scenes.NPCs.LunaFollower;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.VampireThirstEffect;
 
@@ -2333,7 +2334,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				ValaScene.ValaFairyQueenQuest = ValaScene.QUEST_STAGE_STARTED;
 				needNext = true;
 			}
-
+			//Luna nursing reset
+			if (LunaFollower.Nursed) {
+				LunaFollower.Nursed = false;
+			}
 			//Wrap it up
 			return needNext;
 		}

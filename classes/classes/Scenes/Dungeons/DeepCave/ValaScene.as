@@ -43,7 +43,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		
 		public function saveToObject():Object {
 			return {
-				stage: ValaFairyQueenQuest
+				"stage": ValaFairyQueenQuest
 			};
 		}
 		
