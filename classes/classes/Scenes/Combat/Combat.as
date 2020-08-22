@@ -8024,14 +8024,15 @@ public class Combat extends BaseContent {
                 EngineCore.SoulforceChange(100 + (player.wis*2), true);
             }
         }
-        enemyAI();
         if(player.hasStatusEffect(StatusEffects.StraddleRoundLeft)) {
             player.addStatusValue(StatusEffects.StraddleRoundLeft, 1, -1);
-            if (player.statusEffectv1(StatusEffects.StraddleRoundLeft) == 0) {
+            if (player.statusEffectv1(StatusEffects.StraddleRoundLeft) <= 0) {
                 monster.removeStatusEffect(StatusEffects.Straddle);
+                player.removeStatusEffect(StatusEffects.StraddleRoundLeft);
                 outputText("Your opponent finaly manage to struggle free of your grapple!");
             }
         }
+        enemyAI();
     }
 
     public function RandomTeaseKiss():void {
@@ -8127,7 +8128,7 @@ public class Combat extends BaseContent {
         outputText("You lick your lips and hold your victim down as you get into position,  engulfing [monster a] [monster name] juicy " + monster.cockDescriptShort() + " with your tail pussy. You’re going to milk that cumpump for what its worth.");
         var DurationLeft:int = player.statusEffectv1(StatusEffects.StraddleRoundLeft);
         monster.createStatusEffect(StatusEffects.ManticorePlug, 1 + rand(3), DurationLeft, 0, 0);
-        monster.removeStatusEffect(StatusEffects.StraddleRoundLeft);
+        player.removeStatusEffect(StatusEffects.StraddleRoundLeft);
         monster.removeStatusEffect(StatusEffects.Straddle);
     }
 
@@ -8136,7 +8137,7 @@ public class Combat extends BaseContent {
                 "[monster he] struggles, flushing red as you flood [monster his] nipples with your lactation inducing venom and begin to force the delicious milk out of [monster his] chest. ");
         var DurationLeft:int = player.statusEffectv1(StatusEffects.StraddleRoundLeft);
         monster.createStatusEffect(StatusEffects.DisplacerPlug, 1 + rand(3), DurationLeft, 0, 0);
-        monster.removeStatusEffect(StatusEffects.StraddleRoundLeft);
+        player.removeStatusEffect(StatusEffects.StraddleRoundLeft);
         monster.removeStatusEffect(StatusEffects.Straddle);
     }
 

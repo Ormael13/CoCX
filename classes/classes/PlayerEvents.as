@@ -1438,8 +1438,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Flawless Body
 			if ((player.lowerBody != LowerBody.ELF || player.arms.type != Arms.ELF || !player.hasPlainSkinOnly() || player.skinAdj != "flawless") && player.findPerk(PerkLib.FlawlessBody) >= 0) {
-				outputText("\nYour body has becomes less alluring and graceful as part of reverting to a more mundane appearance.\n\n<b>(Lost the Flawless Body perk!)</b>\n");
+				outputText("\nYour body has becomes less alluring and graceful as part of reverting to a more mundane appearance.\n\n<b>(Lost the Flawless Body perk and the perfect skin!)</b>\n");
 				player.removePerk(PerkLib.FlawlessBody);
+				player.skin.setBaseOnly({type: Skin.PLAIN, adj:""});
 				needNext = true;
 			}
 			//Ferocity
