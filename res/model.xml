@@ -2932,9 +2932,11 @@
                     </if>
                 </default>
             </switch>
-            <if test="lowerBody == LowerBody.CANCER">
+            <if test="lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER">
                 <hide part="penis/*"/>
 				<hide part="penis_taur/*"/>
+				<hide part="balls/*"/>
+				<hide part="balls_taur/*"/>
             </if>
         </if>
 		
