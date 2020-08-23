@@ -22,6 +22,7 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
 import classes.Scenes.SceneLib;
+import classes.Stats.Buff;
 
 use namespace CoC;
 	
@@ -143,7 +144,7 @@ use namespace CoC;
 				var tempStr:int = player.statusEffectv2(StatusEffects.BlessingOfDivineFenrir);
 				var tempTou:int = player.statusEffectv3(StatusEffects.BlessingOfDivineFenrir);
 				player.removeStatusEffect(StatusEffects.BlessingOfDivineFenrir);
-				dynStats("str", -tempStr);
+				player.statStore.removeBuffs("BlessingOfDivineFenrir");
 				dynStats("tou", -tempTou);
 			}
 		}
@@ -218,11 +219,10 @@ use namespace CoC;
 			player.createStatusEffect(StatusEffects.BlessingOfDivineFenrir, 169, 0, 0, 0);
 			tempStr = temp1;
 			tempTou = temp2;
-			player.changeStatusValue(StatusEffects.BlessingOfDivineFenrir,2,tempStr);
+			player.statStore.replaceBuffObject({ 'str.mult': 0.1}, 'FenrirBlessing', { text: 'Fenrir Blessing', rate: Buff.RATE_DAYS, tick: 7 });
 			player.changeStatusValue(StatusEffects.BlessingOfDivineFenrir,3,tempTou);
 			mainView.statsView.showStatUp('str');
 			mainView.statsView.showStatUp('tou');
-			player.str += player.statusEffectv2(StatusEffects.BlessingOfDivineFenrir);
 			player.tou += player.statusEffectv3(StatusEffects.BlessingOfDivineFenrir);
 			if (player.HP < player.maxHP()) player.HP = player.maxHP();
 			dynStats("cor", -10);

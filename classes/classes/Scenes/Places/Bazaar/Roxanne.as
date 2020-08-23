@@ -3,6 +3,7 @@ import classes.*;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Stats.Buff;
 
 public class Roxanne extends BazaarAbstractContent implements TimeAwareInterface {
 
@@ -54,18 +55,15 @@ WIN:
 			//Reset if she finds someone to take it (random at high values)
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] >= 300 && model.time.hours == 1 && rand(5) == 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] = 1;
 			//hangover status stuff
-			if (player.hasStatusEffect(StatusEffects.Hangover)) {
+			if (player.statStore.hasBuff("Hangover")) {
 			//Countdown
-				if (player.statusEffectv1(StatusEffects.Hangover) > 0) player.addStatusValue(StatusEffects.Hangover,1,-1);
+				if (player.statStore.hasBuff("Hangover"));
 				else {
 					outputText("\n<b>Your head finally clears as your hangover wears off.  Drinking with the shemale lizard was definitely a bad idea.</b>\n");
 					//Restore stats
-					player.str += player.statusEffectv2(StatusEffects.Hangover);
-					player.spe += player.statusEffectv3(StatusEffects.Hangover);
-					player.inte += player.statusEffectv4(StatusEffects.Hangover);
 					dynStats("cor", 0);
 					//Clear status
-					player.removeStatusEffect(StatusEffects.Hangover);
+					player.statStore.removeBuffs("Hangover");
 					return true;
 				}
 			}
@@ -567,10 +565,12 @@ private function applyHangover():void {
 	//v4 = intelligence
 
 	//Already hungover?  Reset duration.
-	if(player.hasStatusEffect(StatusEffects.Hangover)) player.changeStatusValue(StatusEffects.Hangover,1,8);
+	if(player.statStore.hasBuff("Hangover")) {
+		player.statStore.addBuff("str",-1,"Hangover",{text:"Hangover",time:Buff.RATE_HOURS, tick:8});
+		player.statStore.addTicksToBuffs("Hangover", 8)
+	}
 	//No hangover yet?  Create and yoink stats
 	else {
-		player.createStatusEffect(StatusEffects.Hangover,8,0,0,0);
 		//Strength minus 5
 		var index:int = 5;
 		while(index > 0) {
@@ -578,10 +578,7 @@ private function applyHangover():void {
 			//If PC has strength to lose
 			if(player.str >= 2) {
 				mainView.statsView.showStatDown( 'str' );
-				// strDown.visible = true;
-				// strUp.visible = false;
-				player.str--;
-				player.addStatusValue(StatusEffects.Hangover,2,1);
+				player.statStore.addBuff("str",-1,"Hangover",{text:"Hangover",time:Buff.RATE_HOURS, tick:8});
 			}
 		}
 		//speed minus 10

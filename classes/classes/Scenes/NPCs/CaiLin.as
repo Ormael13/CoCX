@@ -11,6 +11,7 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
+import classes.Stats.Buff;
 import classes.internals.*;
 
 public class CaiLin extends Monster
@@ -55,7 +56,7 @@ public class CaiLin extends Monster
 			if(!player.hasStatusEffect(StatusEffects.MedusaVenom)) {
 				outputText("The venom's effects are almost instantaneous; your body begins to weaken and even your mind becoming muddled.");
 				if(player.str > 8 && player.tou > 8 && player.spe > 8 && player.inte > 7) {
-					player.str -= 2;
+					player.statStore.addBuff("str",-2,"Poison", {text:"Poisoned!",time:Buff.RATE_HOURS, tick:4})
 					showStatDown( 'str' );
 					player.tou -= 2;
 					showStatDown( 'tou' );
@@ -63,10 +64,10 @@ public class CaiLin extends Monster
 					showStatDown( 'spe' );
 					player.inte -= 1;
 					showStatDown( 'inte' );
-					player.createStatusEffect(StatusEffects.MedusaVenom,2,2,2,1);
+					player.createStatusEffect(StatusEffects.MedusaVenom,0,2,2,1);
 				}
 				else if(player.str > 8 && player.tou > 8 && player.spe > 9) {
-					player.str -= 2;
+					player.statStore.addBuff("str",-2,"Poison", {text:"Poisoned!",time:Buff.RATE_HOURS, tick:4})
 					showStatDown( 'str' );
 					player.tou -= 2;
 					showStatDown( 'tou' );
@@ -96,7 +97,7 @@ public class CaiLin extends Monster
 			else {
 				outputText("The venom's effects intensify causing yor body and mind further weaker and mind even more muddled.");
 				if(player.str > 7 && player.tou > 7 && player.spe > 7 && player.inte > 7) {
-					player.str -= 1;
+					player.statStore.addBuff("str",-1,"Poison", {text:"Poisoned!",time:Buff.RATE_HOURS, tick:2})
 					showStatDown( 'str' );
 					player.tou -= 1;
 					showStatDown( 'tou' );
@@ -104,19 +105,17 @@ public class CaiLin extends Monster
 					showStatDown( 'spe' );
 					player.inte -= 1;
 					showStatDown( 'inte' );
-					player.addStatusValue(StatusEffects.MedusaVenom,1,1);
 					player.addStatusValue(StatusEffects.MedusaVenom,2,1);
 					player.addStatusValue(StatusEffects.MedusaVenom,3,1);
 					player.addStatusValue(StatusEffects.MedusaVenom,4,1);
 				}
 				else if(player.str > 7 && player.tou > 7 && player.spe > 8) {
-					player.str -= 1;
+					player.statStore.addBuff("str",-2,"Poison", {text:"Poisoned!",time:Buff.RATE_HOURS, tick:2})
 					showStatDown( 'str' );
 					player.tou -= 1;
 					showStatDown( 'tou' );
 					player.spe -= 2;
 					showStatDown( 'spe' );
-					player.addStatusValue(StatusEffects.MedusaVenom,1,1);
 					player.addStatusValue(StatusEffects.MedusaVenom,2,1);
 					player.addStatusValue(StatusEffects.MedusaVenom,3,2);
 				}

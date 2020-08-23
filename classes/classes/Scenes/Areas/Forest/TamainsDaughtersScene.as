@@ -166,7 +166,8 @@ private function fightTamanisDaughters():void {
 	spriteSelect(57);
 	if (tamaniPresent) {
 		//(+5 mob strength)
-		monster.str += 5;
+
+		monster.strStat.core.value += 5;
 		//(+5 mob toughness)
 		monster.tou += 5;
 		monster.HP += 10;
@@ -707,7 +708,8 @@ private function legTamanisDaughtersRAEPYou():void {
 	}
 	//knock bitches up, slight libido gain, slight strength/toughness loss.
 	player.sexReward("vaginalFluids")
-	dynStats("str", -.5,"int", -.5, "lib", 1, "cor", 1);
+	dynStats("int", -.5, "lib", 1, "cor", 1);
+	player.addCurse("str",-.5)
 	if (tamaniPresent) SceneLib.forest.tamaniScene.tamaniKnockUp(); //If she wasn't pregnant she will be now
 	knockUpDaughters();
     if (CoC.instance.inCombat) cleanupAfterCombat();
@@ -852,7 +854,8 @@ private function tamaniDaughtersCombatLossDrain():void {
 	player.cumMultiplier += .3;
 	//increase libido, slight corruption, minus stregth and speed.
 	player.sexReward("vaginalFluids")
-	dynStats("str", -.5,"int", -.5, "lib", 1, "cor", 1);
+	dynStats("int", -.5, "lib", 1, "cor", 1);
+	player.addCurse("str",-.5)
 }
 
 private function tamaniDaughtersBadEndChoice():void {
@@ -1022,7 +1025,8 @@ private function loseToDaughtersWithTamaniThere():void {
 	flags[kFLAGS.TAMANI_TIMES_HYPNOTISED]++;
 	//daughter countdown reset. 
 	player.sexReward("vaginalFluids")
-	dynStats("str", -.5,"int", -.5, "lib", 1, "sen", 1, "cor", 1);
+	dynStats("int", -.5, "lib", 1, "sen", 1, "cor", 1);
+	player.addCurse("str",0.5)
     if (CoC.instance.inCombat) cleanupAfterCombat();
     else doNext(camp.returnToCampUseOneHour);
 }

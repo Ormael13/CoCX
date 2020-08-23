@@ -1552,7 +1552,7 @@ import flash.utils.getQualifiedClassName;
 
 		protected function initStrTouSpeInte(str:Number, tou:Number, spe:Number, inte:Number):void
 		{
-			this.str = str;
+			this.strStat.core.value = str;
 			this.tou = tou;
 			this.spe = spe;
 			this.inte = inte;
@@ -3086,7 +3086,7 @@ import flash.utils.getQualifiedClassName;
 			bonusAscWis = Math.round(bonusAscWis);
 			bonusAscLib = Math.round(bonusAscLib);
 			bonusAscSen = Math.round(bonusAscSen);
-			this.str += bonusAscStr;
+			this.strStat.core.value += bonusAscStr;
 			this.tou += bonusAscTou;
 			this.spe += bonusAscSpe;
 			this.inte += bonusAscInt;
@@ -3094,7 +3094,7 @@ import flash.utils.getQualifiedClassName;
 			this.lib += bonusAscLib;
 			statStore.addBuff("sens", bonusAscSen, "Ascension", {});
 			var multiStatsAmp1:Number = 0;
-			this.str += multiStatsAmp1;
+			this.strStat.core.value += multiStatsAmp1;
 			this.tou += multiStatsAmp1;
 			this.spe += multiStatsAmp1;
 			var multiStatsAmp2:Number = 0;

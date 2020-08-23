@@ -289,7 +289,8 @@ public class HarpyScene extends BaseContent
 			cleanupAfterCombat();
 			if (player.hasCock())player.sexReward("Default","Dick",true,false);
 			if (player.hasVagina())player.sexReward("Default","Default",true,false);
-			dynStats("str", -1, "tou", -1, "lib", 1, "sen", 2);
+			dynStats("tou", -1, "lib", 1, "sen", 2);
+			player.addCurse("str",1);
 		}
 
 		private function victoryHarpyGetsHerPussyRaped():void

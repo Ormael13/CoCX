@@ -402,15 +402,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 							needNext = true;
 						}
 						if (player.spe > 1) player.addStatusValue(StatusEffects.SlimeCraving, 3, 0.1); //Keep track of how much has been taken from speed
-						player.dynStats("str", -0.1,"spe", -0.1, "lus", 2);
+						player.dynStats("spe", -0.1, "lus", 2);
+						player.addCurse("str",1);
 						player.addStatusValue(StatusEffects.SlimeCraving, 2, 0.1); //Keep track of how much has been taken from strength
 					}
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.SlimeCravingFeed)) { //Slime feeding stuff
 				outputText("\n<b>You feel revitalized from your recent intake, but soon you'll need more...</b>\n");
-				player.dynStats("str", player.statusEffectv2(StatusEffects.SlimeCraving) * 0.5, "spe", player.statusEffectv3(StatusEffects.SlimeCraving)); //Boost speed and restore half the player's lost strength
+				player.dynStats( "spe", player.statusEffectv3(StatusEffects.SlimeCraving)); //Boost speed and restore half the player's lost strength
 				player.removeStatusEffect(StatusEffects.SlimeCravingFeed); //Remove feed succuss status so it can be reset
+				player.removeCurse("str",1)
 				player.changeStatusValue(StatusEffects.SlimeCraving, 2, 0); //Reset stored hp/toughness values
 				needNext = true;
 			}
@@ -459,10 +461,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.addStatusValue(StatusEffects.BlessingOfDivineFenrir, 1, -1);
 				if (player.statusEffectv1(StatusEffects.BlessingOfDivineFenrir) <= 0) {
 					outputText("\n<b>The divine blessing starts to fade. You think it’s high time you go back to the temple and pray.</b>\n");
-					var tempStr:int = player.statusEffectv2(StatusEffects.BlessingOfDivineFenrir);
 					var tempTou:int = player.statusEffectv3(StatusEffects.BlessingOfDivineFenrir);
 					player.removeStatusEffect(StatusEffects.BlessingOfDivineFenrir);
-					dynStats("str", -tempStr);
+					player.statStore.removeBuffs("FenrirBlessing");
 					dynStats("tou", -tempTou);
 					needNext = true;
 				}
@@ -730,46 +731,55 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 5) {
 						outputText("<b>\nYou can’t help but notice the moon is almost full as it rises up.  It seems transfixing like it is calling to you.");
 						outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>\n");
-						dynStats("str", changeV, "tou", changeV, "spe", changeV);
+						dynStats("tou", changeV, "spe", changeV);
+						player.statStore.replaceBuffObject({ 'str': changeV}, 'Lycantropy', { text: 'Lycantropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,10);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 6) {
 						outputText("<b>\nWhen the almost-full moon appears it causes your heart to race with excitement.  You hearing seems better than ever.  Every breath brings a rush of smells through your nose that seem much more pronounced than they should.");
 						outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>\n");
-						dynStats("str", changeV, "tou", changeV, "spe", changeV);
+						dynStats("tou", changeV, "spe", changeV);
+						player.statStore.replaceBuffObject({ 'str': changeV}, 'Lycantropy', { text: 'Lycantropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,20);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 7) {
 						outputText("<b>\nYou gaze at the moon and it seems to gaze back into you.   Something is coming and it won’t be long now.   You feel like you are crawling in your skin.  It feels like tear out of your body and be born anew.");
 						outputText("\n\nYou feel your might increasing as the moon draws closer to fullness. It's almost time.</b>\n");
-						dynStats("str", changeV, "tou", changeV, "spe", changeV);
+						dynStats("tou", changeV, "spe", changeV);
+						player.statStore.replaceBuffObject({ 'str': changeV}, 'Lycantropy', { text: 'Lycantropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,30);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) {
-						outputText("<b>\nYou are at the peak of your strength, it's a full moon tonight and you feel yourself burning with maddening desire as you go into " + player.mf("rut","heat") + ".</b>\n");
-						dynStats("str", changeV, "tou", changeV, "spe", changeV);
+						outputText("<b>\nYou are at the peak of your strength, it's a full moon tonight and you feel yourself burning with maddening desire as you go into " + player.mf("rut your cock hardening and dripping precum at the prospect of impregnating a bitch womb full of your lupine seeds","heat your womb aching for the fresh semen of a virile male.") + "</b>\n.");
+						if (player.hasCock());
+						dynStats("tou", changeV, "spe", changeV);
+						player.statStore.replaceBuffObject({ 'str': changeV}, 'Lycantropy', { text: 'Lycantropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,40);
 						if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
 						else if (player.hasVagina()) player.goIntoHeat(false);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1) {
 						outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
-						dynStats("str", -changeV, "tou", -changeV, "spe", -changeV);
+						dynStats("tou", -changeV, "spe", -changeV);
+						player.statStore.replaceBuffObject({ 'str': -changeV}, 'Lycantropy', { text: 'Lycantropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,30);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2) {
 						outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
-						dynStats("str", -changeV, "tou", -changeV, "spe", -changeV);
+						dynStats("tou", -changeV, "spe", -changeV);
+						player.statStore.replaceBuffObject({ 'str': -changeV}, 'Lycantropy', { text: 'Lycantropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,20);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3) {
 						outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
-						dynStats("str", -changeV, "tou", -changeV, "spe", -changeV);
+						dynStats("tou", -changeV, "spe", -changeV);
+						player.statStore.replaceBuffObject({ 'str': -changeV}, 'Lycantropy', { text: 'Lycantropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,10);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 4) {
 						outputText("<b>\nIt's a new moon tonight, you feel somewhat weak.</b>\n");
-						dynStats("str", -changeV, "tou", -changeV, "spe", -changeV);
+						dynStats("tou", -changeV, "spe", -changeV);
+						player.statStore.replaceBuffObject({ 'str': -changeV}, 'Lycantropy', { text: 'Lycantropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,0);
 					}
 					needNext = true;
@@ -972,7 +982,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 							if (player.thickness < 25) {
 								player.takePhysDamage(player.maxHP() / 25);
 								fatigue(2);
-								dynStats("str", -0.5, "tou", -0.5);
+								dynStats("tou", -0.5);
+								player.addCurse("str", -1);
 							}
 							else if ((model.time.hours + 2) % 4 == 0) { //Lose thickness 2x as fast.
 								player.modThickness(1, 1);
@@ -1941,7 +1952,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.hasStatusEffect(StatusEffects.DrunkenPower)) {
 				if (player.statusEffectv1(StatusEffects.DrunkenPower) <= 0) {
-					player.str -= player.statusEffectv2(StatusEffects.DrunkenPower);
+					player.strStat.core.value -= player.statusEffectv2(StatusEffects.DrunkenPower);
 					player.spe += player.statusEffectv3(StatusEffects.DrunkenPower);
 					player.inte += player.statusEffectv3(StatusEffects.DrunkenPower);
 					player.lib -= player.statusEffectv2(StatusEffects.DrunkenPower);
@@ -2094,22 +2105,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) >= 1) {
 				if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) == 1) {
-					if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
+					if (player.statStore.hasBuff("ShiraOfTheEastFoodBuff") >= 1) {
 						var tempStrength:int = player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2);
-						dynStats("str", -tempStrength);
+						player.statStore.removeBuffs("ShiraOfTheEastFoodBuff");
 					}
-					if (player.statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
-						var tempSpeed:int = player.statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2);
-						dynStats("spe", -tempSpeed);
-					}
-					if (player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
-						var tempIntelligence:int = player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2);
-						dynStats("inte", -tempIntelligence);
-					}
-					var tempToughness:int = player.statusEffectv4(StatusEffects.ShiraOfTheEastFoodBuff2);
-					dynStats("tou", -tempToughness);
 					player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1);
-					player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2);
 					outputText("\n<b>Effect of eating in 'Shira of the east' restaurant wears off.</b>\n");
 					needNext = true;
 				}

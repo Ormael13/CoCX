@@ -97,7 +97,6 @@ public class LizanRogueScene extends BaseContent
 			}
 			else {
 				outputText("The lizan raises his hands in defeat and you celebrate with a victory dance. ");
-				dynStats("str", 1, "tou", 1);
 				if (player.lust >= 33) {
 					outputText("<b>You could have sex with him if you like to.</b> ");
 					addButton(0, "Sex", haveSexWithLizan).hint("Have some fun with the oh-so-sexy lizan.");
@@ -122,7 +121,6 @@ public class LizanRogueScene extends BaseContent
 			}
 			else {
 				outputText("You are forced to raise your hand in defeat and the lizan celebrates with a few acrobatic flips and plenty of bragging. After a quick friendly chat the two of you part ways, having gotten a good workout in the process. ");
-				dynStats("str", 1, "tou", 1);
 				cleanupAfterCombat();
 			}			
 		}

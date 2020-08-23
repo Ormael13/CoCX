@@ -16,6 +16,7 @@ import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.NPCs.Holli;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
+import classes.Stats.Buff;
 import classes.StatusEffects.VampireThirstEffect;
 
 import coc.view.ButtonData;
@@ -378,7 +379,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.JobWarrior)) {
 			bd = buttons.add("WarriorRage", warriorsrage).hint("Throw yourself into a warrior's rage!  Greatly increases your strength, speed and fortitude! \n", "Warrior's Rage");
 			bd.requireWrath(50);
-			if(player.hasStatusEffect(StatusEffects.WarriorsRage)) {
+			if(player.statStore.hasBuff("WarriorsRage")) {
 				bd.disable("You already raging!");
 			}
 		}
@@ -411,7 +412,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.necklaceName == "Crinos Shape necklace") {
-			if (player.hasStatusEffect(StatusEffects.CrinosShape)) {
+			if (player.statStore.hasBuff("CrinosShape")) {
 				buttons.add("Return", returnToNormalShape).hint("Return to normal from Crinos Shape.");
 			} else {
 				bd = buttons.add("CrinosShape", assumeCrinosShape).hint("Let your wrath flow thou you, transforming you into more bestial shape!  Greatly increases your strength, speed and fortitude! \n\nWrath Cost: " + crinosshapeCost() + " per turn");
@@ -2515,18 +2516,13 @@ public class MagicSpecials extends BaseCombatContent {
 	//	WarriorsRageBoost += player.tou / 10;player.tou * 0.1 - im wytrzymalesze ciało tym wiekszy bonus może udźwignąć
 		outputText("You roar and unleash your dwarf rage in order to destroy your foe!\n\n");
 		var oldHPratio:Number = player.hp100/100;
-		player.createStatusEffect(StatusEffects.WarriorsRage, 0, 0, warriorsrageDuration, 0);
 		temp = WarriorsRageBoost;
 		tempStr = temp * 2;
 		tempTouSpe = temp;
-		player.changeStatusValue(StatusEffects.WarriorsRage,1,tempStr);
-		player.changeStatusValue(StatusEffects.WarriorsRage,2,tempTouSpe);
 		mainView.statsView.showStatUp('str');
 		mainView.statsView.showStatUp('tou');
 		mainView.statsView.showStatUp('spe');
-		player.str += player.statusEffectv1(StatusEffects.WarriorsRage);
-		player.tou += player.statusEffectv2(StatusEffects.WarriorsRage);
-		player.spe += player.statusEffectv2(StatusEffects.WarriorsRage);
+		player.statStore.addBuffObject({str:tempStr,tou:tempTouSpe,spe:tempTouSpe}, "WarriorsRage", {Text:"Warriors Rage", time:Buff.RATE_ROUNDS, tick:warriorsrageDuration});
 		player.HP = oldHPratio*player.maxHP();
 		statScreenRefresh();
 		enemyAI();
@@ -2583,19 +2579,13 @@ public class MagicSpecials extends BaseCombatContent {
 		temp3 = Math.round(temp3);
 		outputText("You roar and unleash your inner beast assuming Crinos Shape in order to destroy your foe!\n\n");
 		var oldHPratio:Number = player.hp100/100;
-		player.createStatusEffect(StatusEffects.CrinosShape, 0, 0, 0, 0);
 		tempStr = temp1;
 		tempTou = temp2;
 		tempSpe = temp3;
-		player.changeStatusValue(StatusEffects.CrinosShape,1,tempStr);
-		player.changeStatusValue(StatusEffects.CrinosShape,2,tempTou);
-		player.changeStatusValue(StatusEffects.CrinosShape,3,tempSpe);
 		mainView.statsView.showStatUp('str');
 		mainView.statsView.showStatUp('tou');
 		mainView.statsView.showStatUp('spe');
-		player.str += player.statusEffectv1(StatusEffects.CrinosShape);
-		player.tou += player.statusEffectv2(StatusEffects.CrinosShape);
-		player.spe += player.statusEffectv3(StatusEffects.CrinosShape);
+		player.statStore.addBuffObject({str:tempStr,tou:tempTou,spe:tempSpe}, "CrinosShape", {Text:"Crinos Shape", time:Buff.RATE_ROUNDS, tick:Infinity});
 		player.HP = oldHPratio*player.maxHP();
 		statScreenRefresh();
 		enemyAI();
@@ -2603,10 +2593,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function returnToNormalShape():void {
 		clearOutput();
 		outputText("Gathering all you willpower you forcefully subduing your inner beast and returning to your normal shape.");
-		player.dynStats("str", -player.statusEffectv1(StatusEffects.CrinosShape));
-		player.dynStats("tou", -player.statusEffectv2(StatusEffects.CrinosShape));
-		player.dynStats("spe", -player.statusEffectv3(StatusEffects.CrinosShape));
-		player.removeStatusEffect(StatusEffects.CrinosShape);
+		player.statStore.removeBuffs("CrinosShape")
 		enemyAI();
 	}
 
@@ -2635,6 +2622,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FairyQueenRegalia)) evasionIncrease = 25;
 		outputText("You shrink to your minimum size, evading your opponent as you mock [monster his] attempt to hit you.\n\n");
 		player.createStatusEffect(StatusEffects.Minimise,50+evasionIncrease,0,0,0);
+		player.statStore.addBuff("str", -50,"Minimise",{text:"Minimise",time:Buff.RATE_ROUNDS,tick:Infinity});
 		enemyAI();
 	}
 

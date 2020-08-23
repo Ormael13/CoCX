@@ -99,7 +99,25 @@ public class StatStore implements IStatHolder {
 			stat.removeBuff(tag);
 		},BuffableStat);
 	}
-	
+
+	public function hasBuff(tag:String):Boolean {
+		var result:Boolean = false;
+		forEachStat(function(stat:BuffableStat):void{
+			if (stat.hasBuff(tag)) result = true;
+		},BuffableStat);
+		return result;
+	}
+
+	/**
+	 * Add `amount` ticks to all buffs tagged `tag`.
+	 * Does nothing if no such buffs or they are permanent
+	 */
+	public function addTicksToBuffs(tag: String, amount: Number):void {
+		forEachStat(function(stat:BuffableStat):void{
+			stat.addTicksToBuff(tag, amount);
+		},BuffableStat);
+	}
+
 	public function replaceBuffObject(buffs:Object, tag:String, options:*=null, evalContext:*=null):void {
 		applyBuffObject(buffs, tag, options, evalContext, true);
 	}

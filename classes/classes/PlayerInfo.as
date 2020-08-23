@@ -1316,7 +1316,7 @@ public class PlayerInfo extends BaseContent {
 		if (player.tempStr + player.tempTou + player.tempSpe + player.tempInt + player.tempWis + player.tempLib <= 0 || player.statPoints > 0) {
 			outputText("\nYou may allocate your remaining stat points later.");
 		}
-		player.str += player.tempStr;
+		player.strStat.core.value += player.tempStr;
 		player.tou += player.tempTou;
 		player.spe += player.tempSpe;
 		player.inte += player.tempInt;

@@ -14,6 +14,7 @@ import classes.PerkLib;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Dungeons.D3.LivingStatue;
+import classes.Stats.Buff;
 import classes.StatusEffects;
 
 import coc.view.ButtonData;
@@ -232,7 +233,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.findPerk(PerkLib.Trance) >= 0) {
-			if (!player.hasStatusEffect(StatusEffects.TranceTransformation)) {
+			if (!player.statStore.hasBuff("TranceTransformation")) {
 				bd = buttons.add("Trance", TranceTransformation).hint("Activate Trance state, whcih enhancing physical and mental abilities at constant cost of soulforce.\n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
 				if (player.soulforce < 100) {
 					bd.disable("Your current soulforce is too low.");
@@ -1244,16 +1245,13 @@ public class CombatSoulskills extends BaseCombatContent {
 			TranceBoost = FnHelpers.FN.logScale(TranceBoost,TranceABC,10);
 			TranceBoost = Math.round(TranceBoost);
 			tempStrTou = TranceBoost;
-			player.createStatusEffect(StatusEffects.TranceTransformation, 0, 0, 0, 0);
-			player.changeStatusValue(StatusEffects.TranceTransformation, 1, tempStrTou);
 			mainView.statsView.showStatUp('str');
 			// strUp.visible = true;
 			// strDown.visible = false;
 			mainView.statsView.showStatUp('tou');
 			// touUp.visible = true;
 			// touDown.visible = false;
-			player.str += player.statusEffectv1(StatusEffects.TranceTransformation);
-			player.tou += player.statusEffectv1(StatusEffects.TranceTransformation);
+			player.statStore.addBuffObject({str:TranceBoost,tou:TranceBoost}, "TranceTransformation", {Text:"Trance Transformation", time:Buff.RATE_ROUNDS, tick:Infinity});
 			statScreenRefresh();
 		};
 		var tempStrTou:Number = 0;
@@ -1266,25 +1264,17 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function DeactivateTranceTransformation():void {
 		clearOutput();
 		outputText("You disrupt the flow of power within you, softly falling to the ground as the crystal sheathing your [skin] dissipates into nothingness.");
-		player.dynStats("str", -player.statusEffectv1(StatusEffects.TranceTransformation));
-		player.dynStats("tou", -player.statusEffectv1(StatusEffects.TranceTransformation));
-		player.removeStatusEffect(StatusEffects.TranceTransformation);
+		player.statStore.removeBuffs("TranceTransformation")
 		enemyAI();
 	}
 
 	public function BeatOfWar():void {
 		clearOutput();
-		var tempStr:Number = 0;
 		var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
-		var BeatOfWarBoost:Number = (player.str - player.statusEffectv1(StatusEffects.BeatOfWar)) * 0.15;
-		if (BeatOfWarBoost < 1) BeatOfWarBoost = 1;
-		BeatOfWarBoost = Math.round(BeatOfWarBoost);
-		if (!player.hasStatusEffect(StatusEffects.BeatOfWar)) player.createStatusEffect(StatusEffects.BeatOfWar,0,0,0,0);//player.addStatusValue(StatusEffects.BeatOfWar, 1, BeatOfWarBoost);
-		tempStr = BeatOfWarBoost;
-		player.addStatusValue(StatusEffects.BeatOfWar,1,tempStr);
+		if (!player.statStore.hasBuff("BeatOfWar"))
 		mainView.statsView.showStatUp('str');
-		player.str += BeatOfWarBoost;			//player.statusEffectv1(StatusEffects.BeatOfWar);
+		player.statStore.addBuff("str.mult", +0.15, "BeatOfWar", {text:"Beat of War", time:Buff.RATE_ROUNDS, ticks:Infinity});
 		statScreenRefresh();
 		outputText("You momentarily attune yourself to the song of the mother tree, and prepare to add a note of your own to it’s rhythm. You feel the beat shift the song’s tempo slightly, taking a twist towards the ominous. This attunement augments your strength.\n\n");
 		combat.basemeleeattacks();
@@ -1304,7 +1294,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function AvatarOfTheSong():void {
 		clearOutput();
 		outputText("You feel the song of the mother tree all around you, and using your staff as a beacon, you unify it with the flow of magic through your body,");
-		if (!player.hasStatusEffect(StatusEffects.Might)) {
+		if (!player.statStore.hasBuff("Might")) {
 			outputText("drawing strength from it");
 			combat.magic.spellMight(true);
 			flags[kFLAGS.SPELLS_CAST]++;

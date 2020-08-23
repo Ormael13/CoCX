@@ -3391,8 +3391,7 @@ public class PlayerAppearance extends BaseContent {
 		var inteStat1:Number = newmaxes.inte;
 		var wisStat1:Number = newmaxes.wis;
 		var libStat1:Number = newmaxes.lib;
-		if (strStat != strStat1 || touStat != touStat1 || speStat != speStat1 || inteStat != inteStat1 || wisStat != wisStat1 || libStat != libStat1) outputText(" As if this reflection unlocked some hidden door in you, you feel your body awaken with newfound vigor and might. Let your adversaries come, you are ready for them now!");
-		if (strStat != strStat1) player.str = Math.round(player.str * (strStat1 / strStat));
+		if (touStat != touStat1 || speStat != speStat1 || inteStat != inteStat1 || wisStat != wisStat1 || libStat != libStat1) outputText(" As if this reflection unlocked some hidden door in you, you feel your body awaken with newfound vigor and might. Let your adversaries come, you are ready for them now!");
 		if (touStat != touStat1) player.tou = Math.round(player.tou * (touStat1 / touStat));
 		if (speStat != speStat1) player.spe = Math.round(player.spe * (speStat1 / speStat));
 		if (inteStat != inteStat1) player.inte = Math.round(player.inte * (inteStat1 / inteStat));

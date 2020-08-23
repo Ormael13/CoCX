@@ -2727,12 +2727,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var EntangleSpeNerf:Number;
 		EntangleStrNerf = Math.round(monster.str * .5);
 		EntangleSpeNerf = Math.round(monster.spe * .5);
-		monster.str -= EntangleStrNerf;
+		monster.strStat.core.value -= EntangleStrNerf;
 		monster.spe -= EntangleSpeNerf;
 		if (player.hasPerk(PerkLib.RacialParagon)) EntangleSpeNerf *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) EntangleSpeNerf *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) EntangleSpeNerf *= 1.50;
-		if(monster.str < 1) monster.str = 1;
 		if(monster.spe < 1) monster.spe = 1;
 		player.createStatusEffect(StatusEffects.AlrauneEntangle,EntangleStrNerf,EntangleSpeNerf,0,0);
 		enemyAI();
@@ -3858,9 +3857,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 11) hydraBiteAttackpoweeeeer();
 		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12) hydraBiteAttackpoweeeeer();
 		//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
-		monster.str -= 2;
+		monster.strStat.core.value -= 2;
 		monster.spe -= 2;
-		if(monster.str < 1) monster.str = 1;
 		if(monster.spe < 1) monster.spe = 1;
 		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 		{
@@ -3918,9 +3916,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//(Otherwise)
 			else outputText("You lunge at the foe headfirst, fangs bared. You manage to catch " + monster.a + monster.short + " off guard, your needle-like fangs penetrating deep into " + monster.pronoun3 + " body. You quickly release your venom, and retreat before " + monster.pronoun1 + " manages to react.");
 			//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
-			monster.str -= 2;
+			monster.strStat.core.value -= 2;
 			monster.spe -= 2;
-			if(monster.str < 1) monster.str = 1;
 			if(monster.spe < 1) monster.spe = 1;
 			if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 			{
@@ -4021,9 +4018,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//(Otherwise)
 			else outputText("You lunge at the foe headfirst, maw open for a bite. You manage to catch the " + monster.a + monster.short + " off guard, biting it viciously. The merciless cold of your bite transfer to your foe weakening it as you retreat before " + monster.pronoun1 + " manages to react.");
 			//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
-			monster.str -= 5 + rand(5);
+			monster.strStat.core.value -= 5 + rand(5);
 			monster.spe -= 5 + rand(5);
-			if(monster.str < 1) monster.str = 1;
 			if(monster.spe < 1) monster.spe = 1;
 			if(monster.hasStatusEffect(StatusEffects.Frostbite))
 			{

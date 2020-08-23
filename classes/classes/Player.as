@@ -634,7 +634,7 @@ use namespace CoC;
 				else armorDef = Math.round(armorDef * 1.1);
 				armorDef += 1;
 			}
-			if (hasStatusEffect(StatusEffects.CrinosShape) && findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor) >= 0) {
+			if (statStore.hasBuff("CrinosShape") && findPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor) >= 0) {
 				armorDef = Math.round(armorDef * 1.1);
 				armorDef += 1;
 			}
@@ -9501,55 +9501,11 @@ use namespace CoC;
 			if (hasPerk(PerkLib.IcyFlesh)) maxTou = 1;
 			End("Player","getAllMaxStats.perks2");
 			Begin("Player","getAllMaxStats.effects");
-			//Might
-			if (hasStatusEffect(StatusEffects.Might)) {
-				if (hasStatusEffect(StatusEffects.FortressOfIntellect)) maxInt += statusEffectv1(StatusEffects.Might);
-				else maxStr += statusEffectv1(StatusEffects.Might);
-				maxTou += statusEffectv2(StatusEffects.Might);
-			}
 			//Blink
 			if (hasStatusEffect(StatusEffects.Blink)) {
 				maxSpe += statusEffectv1(StatusEffects.Blink);
 			}
-			//Minimise
-			if (hasStatusEffect(StatusEffects.Minimise)) {
-				maxStr -= statusEffectv1(StatusEffects.Minimise);
-			}
-			//Dwarf Rage
-			if (hasStatusEffect(StatusEffects.WarriorsRage)) {
-				maxStr += statusEffectv1(StatusEffects.WarriorsRage);
-				maxTou += statusEffectv2(StatusEffects.WarriorsRage);
-				maxSpe += statusEffectv2(StatusEffects.WarriorsRage);
-			}
-			//Drunken Power
-			if (hasStatusEffect(StatusEffects.DrunkenPower)) {
-				maxStr += statusEffectv2(StatusEffects.DrunkenPower);
-				maxSpe -= statusEffectv3(StatusEffects.DrunkenPower);
-				maxInt -= statusEffectv3(StatusEffects.DrunkenPower);
-				maxLib += statusEffectv2(StatusEffects.DrunkenPower);
-			}
-			//Trance Transformation
-			if (hasStatusEffect(StatusEffects.TranceTransformation)) {
-				maxStr += statusEffectv1(StatusEffects.TranceTransformation);
-				maxTou += statusEffectv1(StatusEffects.TranceTransformation);
-			}
-			//Crinos Shape
-			if (hasStatusEffect(StatusEffects.CrinosShape)) {
-				maxStr += statusEffectv1(StatusEffects.CrinosShape);
-				maxTou += statusEffectv2(StatusEffects.CrinosShape);
-				maxSpe += statusEffectv3(StatusEffects.CrinosShape);
-			}
 			//
-			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2)) {
-				if (statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) maxStr += statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2);
-				maxTou += statusEffectv4(StatusEffects.ShiraOfTheEastFoodBuff2);
-				if (statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) maxSpe += statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2);
-				if (statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) maxInt += statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2);
-			}
-			//Beat of War
-			if (hasStatusEffect(StatusEffects.BeatOfWar)) {
-				maxStr += statusEffectv1(StatusEffects.BeatOfWar);
-			}
 			if (hasStatusEffect(StatusEffects.AndysSmoke)) {
 				maxSpe -= statusEffectv2(StatusEffects.AndysSmoke);
 				maxInt += statusEffectv3(StatusEffects.AndysSmoke);
@@ -9558,7 +9514,6 @@ use namespace CoC;
 				maxSpe += statusEffectv2(StatusEffects.FeedingEuphoria);
 			}
 			if (hasStatusEffect(StatusEffects.BlessingOfDivineFenrir)) {
-				maxStr += statusEffectv2(StatusEffects.BlessingOfDivineFenrir);
 				maxTou += statusEffectv3(StatusEffects.BlessingOfDivineFenrir);
 			}
 			if (hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) {
@@ -11262,8 +11217,14 @@ use namespace CoC;
 
 		public function sleepUpdateStat():void{
 			strtouspeintwislibsenCalculation2();
-			statStore.removeBuffs("Racials");
-			statStore.addBuff('wis.mult', statusEffectv2(StatusEffects.IntWisCounter2)/100, "Racials", {text:"Racials"});
+			statStore.replaceBuffObject({
+				"str.mult":statusEffectv1(StatusEffects.StrTouSpeCounter2)/100,
+				"tou.mult":statusEffectv2(StatusEffects.StrTouSpeCounter2)/100,
+				"spe.mult":statusEffectv3(StatusEffects.StrTouSpeCounter2)/100,
+				"int.mult":statusEffectv1(StatusEffects.IntWisCounter2)/100,
+				"wis.mult":statusEffectv2(StatusEffects.IntWisCounter2)/100,
+				"lib.mult":statusEffectv1(StatusEffects.LibSensCounter2)/100
+			}, "Racials", {text:"Racials"});
 		}
 
 		public function requiredXP():int {
@@ -11288,15 +11249,10 @@ use namespace CoC;
 		{
 			if (hasStatusEffect(StatusEffects.DriderIncubusVenom))
 			{
-				str += statusEffectv2(StatusEffects.DriderIncubusVenom);
 				removeStatusEffect(StatusEffects.DriderIncubusVenom);
 				CoC.instance.mainView.statsView.showStatUp('str');
 			}
 			if(CoC.instance.monster.hasStatusEffect(StatusEffects.Sandstorm)) CoC.instance.monster.removeStatusEffect(StatusEffects.Sandstorm);
-			if(hasStatusEffect(StatusEffects.WarriorsRage)) {
-				dynStats("str", -statusEffectv1(StatusEffects.WarriorsRage),"tou", -statusEffectv2(StatusEffects.WarriorsRage),"spe", -statusEffectv2(StatusEffects.WarriorsRage), "scale", false);
-				removeStatusEffect(StatusEffects.WarriorsRage);
-			}
 			if(hasStatusEffect(StatusEffects.Berzerking)) {
 				removeStatusEffect(StatusEffects.Berzerking);
 			}
@@ -11329,7 +11285,6 @@ use namespace CoC;
 				removeStatusEffect(StatusEffects.NagaVenom);
 			}
 			if(hasStatusEffect(StatusEffects.MedusaVenom)) {
-				str += statusEffectv1(StatusEffects.MedusaVenom);
 				tou += statusEffectv2(StatusEffects.MedusaVenom);
 				spe += statusEffectv3(StatusEffects.MedusaVenom);
 				inte += statusEffectv4(StatusEffects.MedusaVenom);
@@ -11340,7 +11295,6 @@ use namespace CoC;
 				removeStatusEffect(StatusEffects.MedusaVenom);
 			}
 			if(hasStatusEffect(StatusEffects.Frostbite)) {
-				str += statusEffectv1(StatusEffects.Frostbite);
 				CoC.instance.mainView.statsView.showStatUp( 'str' );
 				removeStatusEffect(StatusEffects.Frostbite);
 			}
@@ -11351,38 +11305,17 @@ use namespace CoC;
 					removePerk(PerkLib.Resolute);
 				}
 			}
-			if(hasStatusEffect(StatusEffects.Might)) {
-				if (hasStatusEffect(StatusEffects.FortressOfIntellect)) dynStats("int", -statusEffectv1(StatusEffects.Might), "scale", false);
-				else dynStats("str", -statusEffectv1(StatusEffects.Might), "scale", false);
-				dynStats("tou", -statusEffectv2(StatusEffects.Might), "scale", false);
-				removeStatusEffect(StatusEffects.Might);
-			}
 			if(hasStatusEffect(StatusEffects.Blink)) {
 				dynStats("spe", -statusEffectv1(StatusEffects.Blink), "scale", false);
 				removeStatusEffect(StatusEffects.Blink);
 			}
 			if(hasStatusEffect(StatusEffects.Minimise)) {
-				dynStats("str", +statusEffectv1(StatusEffects.Minimise), "scale", false);
+				statStore.removeBuffs("Minimise");
 				removeStatusEffect(StatusEffects.Minimise);
 			}
-			if(hasStatusEffect(StatusEffects.BeatOfWar)) {
-				dynStats("str", -statusEffectv1(StatusEffects.BeatOfWar), "scale", false);
-				removeStatusEffect(StatusEffects.BeatOfWar);
-			}
 			if(hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
-				dynStats("str", -statusEffectv1(StatusEffects.UnderwaterCombatBoost),"spe", -statusEffectv2(StatusEffects.UnderwaterCombatBoost), "scale", false);
+				dynStats("spe", -statusEffectv2(StatusEffects.UnderwaterCombatBoost), "scale", false);
 				removeStatusEffect(StatusEffects.UnderwaterCombatBoost);
-			}
-			if(hasStatusEffect(StatusEffects.TranceTransformation)) {
-				dynStats("str", -statusEffectv1(StatusEffects.TranceTransformation), "scale", false);
-				dynStats("tou", -statusEffectv1(StatusEffects.TranceTransformation), "scale", false);
-				removeStatusEffect(StatusEffects.TranceTransformation);
-			}
-			if(hasStatusEffect(StatusEffects.CrinosShape)) {
-				dynStats("str", -statusEffectv1(StatusEffects.CrinosShape), "scale", false);
-				dynStats("tou", -statusEffectv2(StatusEffects.CrinosShape), "scale", false);
-				dynStats("spe", -statusEffectv3(StatusEffects.CrinosShape), "scale", false);
-				removeStatusEffect(StatusEffects.CrinosShape);
 			}
 			if(hasStatusEffect(StatusEffects.EzekielCurse) && flags[kFLAGS.EVANGELINE_AFFECTION] >= 3 && findPerk(PerkLib.EzekielBlessing) >= 0) {
 				removeStatusEffect(StatusEffects.EzekielCurse);
@@ -11421,7 +11354,6 @@ use namespace CoC;
 			}
 			if (hasStatusEffect(StatusEffects.DriderIncubusVenom))
 			{
-				str += statusEffectv2(StatusEffects.DriderIncubusVenom);
 				removeStatusEffect(StatusEffects.DriderIncubusVenom);
 			}
 			if(statusEffectv4(StatusEffects.CombatFollowerAlvina) > 0) addStatusValue(StatusEffects.CombatFollowerAlvina, 4, -1);

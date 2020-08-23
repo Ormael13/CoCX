@@ -1587,7 +1587,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 		}
 		//MAIN STATS
-		player.str = saveFile.data.str;
 		player.tou = saveFile.data.tou;
 		player.spe = saveFile.data.spe;
 		player.inte = saveFile.data.inte;

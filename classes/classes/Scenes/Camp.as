@@ -189,12 +189,6 @@ public class Camp extends NPCAwareContent {
 			return;
 		}
 		fixFlags();
-		if (player.hasStatusEffect(StatusEffects.Might)) {
-			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.dynStats("int", -player.statusEffectv1(StatusEffects.Might));
-			else player.dynStats("str", -player.statusEffectv1(StatusEffects.Might));
-			player.dynStats("tou", -player.statusEffectv2(StatusEffects.Might));
-			player.removeStatusEffect(StatusEffects.Might);
-		}
 		if (player.hasStatusEffect(StatusEffects.Blink)) {
 			player.dynStats("spe", -player.statusEffectv1(StatusEffects.Blink));
 			player.removeStatusEffect(StatusEffects.Blink);
@@ -3839,7 +3833,6 @@ public function wakeFromBadEnd():void {
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
 				player.createPerk(PerkLib.Lycanthropy, bonusStats, 0, 0, 0);
-				player.dynStats("str", (bonusStats * (player.newGamePlusMod() + 1)), "tou", (bonusStats * (player.newGamePlusMod() + 1)), "spe", (bonusStats * (player.newGamePlusMod() + 1)), "cor", 20);
 			}
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] > 8) flags[kFLAGS.LUNA_MOON_CYCLE] = 1;
 			clearOutput();

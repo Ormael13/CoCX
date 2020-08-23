@@ -1062,10 +1062,10 @@ public class DesertCave extends DungeonAbstractContent
 			
 			//Decrease PC's strength by 2 for every digit of cum production they have after 100 (I can provide an algorithm for that if you need it, it is very simple), set lust to 0, increase cum production multiplier by 1
 			player.orgasm();
-			dynStats("str", -1);
+			player.addCurse("str", 2);
 			player.cumMultiplier++;
-			if(player.cumQ() >= 200) dynStats("str", -1);
-			if(player.cumQ() >= 3000) dynStats("str", -1);
+			if(player.cumQ() >= 200) player.addCurse("str", 2);
+			if(player.cumQ() >= 3000) player.addCurse("str", 2);
 			//Usual loss text+gem loss.
 			cleanupAfterCombat();
 		}

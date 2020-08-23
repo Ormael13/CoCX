@@ -23,8 +23,8 @@ package classes.Scenes.Areas.GlacialRift
 			else {
 				outputText("With one swift, contemptuous kick to the head, she knocks you right out.");
 				outputText("  You are utterly freezing after such long exposure to the cold.");
-				if (player.str > 50) dynStats("str", -1);
-				dynStats("str", -1);
+				if (player.str > 50) player.addCurse("str",1);
+				player.addCurse("str",1);
 				if (player.spe > 50) dynStats("spe", -1);
 				dynStats("spe", -1);
 				cleanupAfterCombat();

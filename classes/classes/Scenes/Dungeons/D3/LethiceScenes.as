@@ -87,7 +87,7 @@ public class LethiceScenes extends BaseContent
 		}
 		
 		private function quitToMenu():void {
-			player.str = 0;
+			player = null;
             CoC.instance.mainMenu.mainMenu();
         }
 

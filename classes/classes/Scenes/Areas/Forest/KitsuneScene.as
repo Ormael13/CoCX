@@ -2377,6 +2377,7 @@ public class KitsuneScene extends BaseContent
 					outputText("<b>You acquired your own kitsune star sphere.</b>\n\n");
 					dynStats("int", 5, "lus", -50, "cor", -5);
 					player.wisStat.core.value += 5;
+					showStatUp( 'wis' );
 					player.createPerk(PerkLib.StarSphereMastery, 1, 0, 0, 0);
 					player.createKeyItem("Kitsune Star Sphere", 0, 0, 0, 0);
 					player.consumeItem(consumables.FOXJEWL);

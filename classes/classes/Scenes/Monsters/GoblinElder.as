@@ -28,7 +28,7 @@ public class GoblinElder extends Goblin
 			if (spellChooser == 4 && HPRatio() >= 0.7) {
 				spellChooser++;
 			}
-			if (spellChooser == 5 && hasStatusEffect(StatusEffects.Might)) {
+			if (spellChooser == 5 && statStore.hasBuff("GoblinMight")) {
 				spellChooser = rand(5);
 				if (spellChooser == 0 && hasStatusEffect(StatusEffects.ChargeWeapon)) spellChooser++;
 			}
@@ -97,9 +97,7 @@ public class GoblinElder extends Goblin
 			else if (spellChooser == 5 && (mana + spellCostMight) <= maxMana()) {
 				outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
 				outputText("The rush of success and power flows through her body.  She feels like she can do anything!");
-				createStatusEffect(StatusEffects.Might, 15 * spellMultiplier(), 15 * spellMultiplier(), 0, 0);
-				str += 15 * spellMultiplier();
-				tou += 15 * spellMultiplier();
+				this.statStore.addBuffObject({"str":+15 * spellMultiplier(), "tou":+15 * spellMultiplier()},"GoblinMight");
 				mana -= spellCostMight;
 			}
 		}

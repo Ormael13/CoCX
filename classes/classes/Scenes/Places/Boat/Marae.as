@@ -155,7 +155,7 @@ public class Marae extends Monster
 				if (game.flags[kFLAGS.MINERVA_TOWER_TREE] > 0) {
 					this.armorDef = 600;
 					this.armorMDef = 600;
-					this.str += 260;
+					this.strStat.core.value += 260;
 					this.tou += 260;
 					this.bonusHP += 4000;
 					this.additionalXP += 2000;

@@ -17,6 +17,7 @@ import classes.Scenes.NPCs.Diva;
 import classes.Scenes.NPCs.Holli;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
+import classes.Stats.Buff;
 import classes.StatusEffects;
 import classes.VaginaClass;
 
@@ -1168,7 +1169,7 @@ public class CombatMagic extends BaseCombatContent {
 							"\n\nMana Cost: " + spellCostBlack(50) * spellMightCostMultiplier() + "");
 			if (badLustForBlack) {
 				bd.disable("You aren't turned on enough to use any black magics.");
-			} else if (player.hasStatusEffect(StatusEffects.Might)) {
+			} else if (player.statStore.hasBuff("Might")) {
 				bd.disable("You are already under the effects of Might and cannot cast it again.");
 			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < (spellCostBlack(50) * spellMightCostMultiplier())) {
 				bd.disable("Your mana is too low to cast this spell.");
@@ -1615,16 +1616,12 @@ public class CombatMagic extends BaseCombatContent {
 				tempStr = MightBoost;
 			}
 			var oldHPratio:Number = player.hp100/100;
-			player.createStatusEffect(StatusEffects.Might,0,0,MightDuration,0);
-			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.changeStatusValue(StatusEffects.Might,1,tempInt);
-			else player.changeStatusValue(StatusEffects.Might,1,tempStr);
-			player.changeStatusValue(StatusEffects.Might,2,tempTou);
 			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) {
-				player.inte += player.statusEffectv1(StatusEffects.Might);
+				player.statStore.addBuff("inte.mult", tempInt/100, "Might", {text:"Might", time:Buff.RATE_ROUNDS, tick:MightDuration})
 			} else {
-				player.str += player.statusEffectv1(StatusEffects.Might);
+				player.statStore.addBuff("str.mult", tempStr/100, "Might", {text:"Might", time:Buff.RATE_ROUNDS, tick:MightDuration})
 			}
-			player.tou += player.statusEffectv2(StatusEffects.Might);
+			player.statStore.addBuff("tou.mult", tempTou/100, "Might", {text:"Might", time:Buff.RATE_ROUNDS, tick:MightDuration})
 			player.HP = oldHPratio*player.maxHP();
 			statScreenRefresh();
 		};

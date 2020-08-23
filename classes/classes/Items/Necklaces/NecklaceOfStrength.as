@@ -27,12 +27,12 @@ package classes.Items.Necklaces
 		}
 		
 		override public function playerEquip():Necklace {
-			game.player.str += 25;
+			game.player.statStore.addBuff('str',+25,'tag',{text:'NecklaceOfStrength'});
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():Necklace {
-			game.player.str -= 25;
+			game.player.statStore.removeBuffs('NecklaceOfStrength');
 			return super.playerRemove();
 		}
 		

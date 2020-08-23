@@ -71,7 +71,7 @@ public class BuffableStat implements IStat, Jsonable {
 		if (x > max) return max;
 		return x;
 	}
-	
+
 	/**
 	 * @param options Options object: {
 	 *     aggregate: how to aggregate multiple effects, AGGREGATE_constant or 'sum'/'min'/'max';
@@ -85,6 +85,17 @@ public class BuffableStat implements IStat, Jsonable {
 		
 		if (!(this._aggregate in AggregateTypes)) throw new Error("Invalid aggregate type");
 		// TODO validate other arguments
+	}
+
+	/**
+	 * Add `amount` ticks to buff tagged `tag`.
+	 * Does nothing if no such buff or it is permanent
+	 */
+	public function addTicksToBuff(tag:String, amount:Number):void {
+		var buff:Buff = findBuff(tag);
+		if (!buff || buff.rate == Buff.RATE_PERMANENT) return;
+		buff.tick += amount;
+		if (buff.tick <= 0) removeBuff(tag);
 	}
 	
 	private function aggregateBase():Number {

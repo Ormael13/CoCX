@@ -162,7 +162,7 @@ use namespace CoC;
 				this.armorMDef = 200;
 				if (player.level > 25 && player.level < 150) {
 					this.level = player.level;
-					this.str += 29 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.strStat.core.value += 29 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.tou += 28 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.spe += 27 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.inte += 25 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
@@ -170,7 +170,7 @@ use namespace CoC;
 				}
 				else if (player.level >= 150) {
 					this.level = 150;
-					this.str += 754 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.strStat.core.value += 754 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.tou += 728 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.spe += 702 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.inte += 650 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

@@ -24,6 +24,7 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.JewelryLib;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Stats.Buff;
 import classes.Stats.BuffableStat;
 import classes.Stats.PrimaryStat;
 import classes.Stats.RawStat;
@@ -276,7 +277,7 @@ public class Creature extends Utils
 
 		//new stat area
 		public var strStat:PrimaryStat = _stats.findStat('str') as PrimaryStat;
-		public function get str2():Number { return strStat.value; }
+		public function get str():Number { return strStat.value; }
 		public var touStat:PrimaryStat = _stats.findStat('tou') as PrimaryStat;
 		public function get tou2():Number { return touStat.value; }
 		public var speStat:PrimaryStat = _stats.findStat('spe') as PrimaryStat;
@@ -326,7 +327,6 @@ public class Creature extends Utils
 		}
 
 		//Primary stats
-		public var str:Number = 0;
 		public var tou:Number = 0;
 		public var spe:Number = 0;
 		public var inte:Number = 0;
@@ -835,10 +835,18 @@ public class Creature extends Utils
 			var mins:Object = getAllMinStats();
 			mins.lust = minLust();
 			var oldHPratio:Number = hp100/100;
-			str  = Utils.boundFloat(mins.str, str + dstr, maxes.str);
+			//Strenght
+			if (dstr < 0){
+				addCurse("str", -dstr);
+			}
+			if (dstr > 0){
+				removeCurse("str", dstr);
+			}
+
 			tou  = Utils.boundFloat(mins.tou, tou + dtou, maxes.tou);
 			spe  = Utils.boundFloat(mins.spe, spe + dspe, maxes.spe);
 			inte = Utils.boundFloat(mins.inte, inte + dinte, maxes.inte);
+
 			//Wisdom
 			if (dwis < 0){
 				addCurse("wis", -dwis);
@@ -2936,8 +2944,7 @@ public class Creature extends Utils
 			}
 			if (game.player.necklaceName == "Magic coral and pearl necklace") bonusSpe += 10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			if (bonusStr > 0) {
-				addStatusValue(StatusEffects.UnderwaterCombatBoost, 1, bonusStr);
-				game.player.str += bonusStr;
+				game.player.statStore.addBuff("str", bonusStr,"UnderwaterCombatBoost",{text:"Fighting Underwater",time:Buff.RATE_ROUNDS,tick:Infinity});
 			}
 			if (bonusSpe > 0) {
 				addStatusValue(StatusEffects.UnderwaterCombatBoost,2,bonusSpe);

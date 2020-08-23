@@ -1928,27 +1928,27 @@ public function FightHellfireSnail():void {
 			doNext(StatsAscensionMenu);
 		}
 		public function AddStr1():void {
-			player.str = player.str + 1;
+			player.strStat.core.value += 1;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function AddStr2():void {
-			player.str = player.str + 10;
+			player.strStat.core.value += 10;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function AddStr3():void {
-			player.str = player.str + 50;
+			player.strStat.core.value += 50;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function AddStr4():void {
-			player.str = player.str + 200;
+			player.strStat.core.value += 200;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function AddStr5():void {
-			player.str = player.str + 1000;
+			player.strStat.core.value += 1000;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
@@ -2128,27 +2128,27 @@ public function FightHellfireSnail():void {
 			StatsMenuToneThicknessFeminity();
 		}
 		public function SubStr1():void {
-			player.str = player.str - 1;
+			player.strStat.core.value -= 1;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function SubStr2():void {
-			player.str = player.str - 10;
+			player.strStat.core.value -= 10;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function SubStr3():void {
-			player.str = player.str - 50;
+			player.strStat.core.value -= 50;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function SubStr4():void {
-			player.str = player.str - 200;
+			player.strStat.core.value -= 200;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function SubStr5():void {
-			player.str = player.str - 1000;
+			player.strStat.core.value -= 1000;
 			statScreenRefresh();
 			StatsMenuStr();
 		}

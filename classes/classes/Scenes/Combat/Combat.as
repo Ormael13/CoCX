@@ -812,7 +812,7 @@ public class Combat extends BaseContent {
             if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 6) unarmed += 4 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
             else unarmed += 2 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
         }
-        if (player.hasStatusEffect(StatusEffects.CrinosShape) && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) unarmed *= 1.1;
+        if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) unarmed *= 1.1;
         if (player.findPerk(PerkLib.Lycanthropy) >= 0) unarmed += 8 * (1 + player.newGamePlusMod());
         if (player.arms.type == Arms.MANTIS) unarmed += 15 * (1 + player.newGamePlusMod());
         if (player.arms.type == Arms.YETI || player.arms.type == Arms.CAT) unarmed += 5 * (1 + player.newGamePlusMod());
@@ -3812,9 +3812,8 @@ public class Combat extends BaseContent {
                 } else outputText("  You do not have enough venom to apply on [weapon]!\n");
             }
             if (player.weapon == weapons.DSSPEAR) {
-                monster.str -= 2;
+                monster.strStat.core.value -= 2;
                 monster.spe -= 2;
-                if (monster.str < 1) monster.str = 1;
                 if (monster.spe < 1) monster.spe = 1;
                 if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                     monster.addStatusValue(StatusEffects.NagaVenom, 2, 2);
@@ -5023,8 +5022,8 @@ public class Combat extends BaseContent {
             return;
         }
         monster.doAI();
-        if (player.hasStatusEffect(StatusEffects.TranceTransformation)) player.soulforce -= 50;
-        if (player.hasStatusEffect(StatusEffects.CrinosShape)) player.wrath -= mspecials.crinosshapeCost();
+        if (player.statStore.hasBuff("TranceTransformation")) player.soulforce -= 50;
+        if (player.statStore.hasBuff("CrinosShape")) player.wrath -= mspecials.crinosshapeCost();
         combatRoundOver();
     }
 
@@ -5725,7 +5724,8 @@ public class Combat extends BaseContent {
             //Chance to cleanse!
             if (player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) {
                 outputText("You manage to cleanse [monster a] [monster name] venom from your system with your knowledge of medicine!\n\n");
-                player.str += player.statusEffectv1(StatusEffects.MedusaVenom);
+                player.statStore.removeBuffs("Poison");
+                player.statStore.removeBuffs("MedusaVenom")
                 player.tou += player.statusEffectv2(StatusEffects.MedusaVenom);
                 player.spe += player.statusEffectv3(StatusEffects.MedusaVenom);
                 player.inte += player.statusEffectv4(StatusEffects.MedusaVenom);
@@ -5737,8 +5737,7 @@ public class Combat extends BaseContent {
             } else if (player.str <= 5 && player.tou <= 5 && player.spe <= 5 && player.inte <= 5) player.takePhysDamage(5);
             else {
                 if (player.str > 5) {
-                    player.addStatusValue(StatusEffects.MedusaVenom, 1, 1);
-                    player.str -= 1;
+                    player.statStore.addBuff("str",-1,"Poison", {text:"Poisoned!",time:Buff.RATE_HOURS, tick:2})
                 }
                 if (player.tou > 5) {
                     player.addStatusValue(StatusEffects.MedusaVenom, 2, 1);
@@ -5793,14 +5792,13 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.DriderIncubusVenom)) {
             if (player.hasPerk(PerkLib.Medicine) && rand(100) <= 41) {
                 outputText("You negate the effects of the drider incubus’ venom with your knowledge of medicine!\n\n");
-
-                player.str += player.statusEffectv2(StatusEffects.DriderIncubusVenom);
+                player.statStore.removeBuffs("Poison");
                 player.removeStatusEffect(StatusEffects.DriderIncubusVenom);
                 CoC.instance.mainView.statsView.showStatUp('str');
             } else {
                 player.addStatusValue(StatusEffects.DriderIncubusVenom, 1, -1);
                 if (player.statusEffectv1(StatusEffects.DriderIncubusVenom) <= 0) {
-                    player.str += player.statusEffectv2(StatusEffects.DriderIncubusVenom);
+                    player.statStore.removeBuffs("Poison");
                     player.removeStatusEffect(StatusEffects.DriderIncubusVenom);
                     CoC.instance.mainView.statsView.showStatUp('str');
                     outputText("The drider incubus’ venom wanes, the effects of the poision weakening as strength returns to your limbs!\n\n");
@@ -5884,13 +5882,6 @@ public class Combat extends BaseContent {
                 outputText("<b>Lustzerker effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.Lustzerking, 1, -1);
         }
-        if (player.hasStatusEffect(StatusEffects.WarriorsRage)) {
-            if (player.statusEffectv3(StatusEffects.WarriorsRage) <= 0) {
-                player.dynStats("str", -player.statusEffectv1(StatusEffects.WarriorsRage), "tou", -player.statusEffectv2(StatusEffects.WarriorsRage), "spe", -player.statusEffectv2(StatusEffects.WarriorsRage), "scale", false);
-                player.removeStatusEffect(StatusEffects.WarriorsRage);
-                outputText("<b>Warrior's Rage effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.WarriorsRage, 3, -1);
-        }
         if (player.hasStatusEffect(StatusEffects.OniRampage)) {
             if (player.statusEffectv1(StatusEffects.OniRampage) <= 0) {
                 player.removeStatusEffect(StatusEffects.OniRampage);
@@ -5927,16 +5918,6 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.ChargeArmor);
                 outputText("<b>Charged Armor effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.ChargeArmor, 2, -1);
-        }
-        if (player.hasStatusEffect(StatusEffects.Might)) {
-            if (player.statusEffectv3(StatusEffects.Might) <= 0) {
-                if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.dynStats("int", -player.statusEffectv1(StatusEffects.Might), "scale", false);
-                else player.dynStats("str", -player.statusEffectv1(StatusEffects.Might), "scale", false);
-                player.dynStats("tou", -player.statusEffectv2(StatusEffects.Might), "scale", false);
-                player.removeStatusEffect(StatusEffects.Might);
-                //	statScreenRefresh();
-                outputText("<b>Might effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.Might, 3, -1);
         }
         if (player.hasStatusEffect(StatusEffects.Blink)) {
             if (player.statusEffectv3(StatusEffects.Blink) <= 0) {
@@ -6022,11 +6003,9 @@ public class Combat extends BaseContent {
             }
         }
         //Trance Transformation
-        if (player.hasStatusEffect(StatusEffects.TranceTransformation)) {
+        if (player.statStore.hasBuff("TranceTransformation")) {
             if (player.soulforce < 50) {
-                player.dynStats("str", -player.statusEffectv1(StatusEffects.TranceTransformation));
-                player.dynStats("tou", -player.statusEffectv1(StatusEffects.TranceTransformation));
-                player.removeStatusEffect(StatusEffects.TranceTransformation);
+                player.statStore.removeBuffs("TranceTransformation");
                 outputText("<b>The flow of power through you suddenly stops, as you no longer have the soul energy to sustain it.  You drop roughly to the floor, the crystal coating your [skin] cracking and fading to nothing.</b>\n\n");
             }
             //	else {
@@ -6048,12 +6027,9 @@ public class Combat extends BaseContent {
             }
         }
         //Crinos Shape
-        if (player.hasStatusEffect(StatusEffects.CrinosShape)) {
+        if (player.statStore.hasBuff("CrinosShape")) {
             if (player.wrath < mspecials.crinosshapeCost()) {
-                player.dynStats("str", -player.statusEffectv1(StatusEffects.CrinosShape));
-                player.dynStats("tou", -player.statusEffectv2(StatusEffects.CrinosShape));
-                player.dynStats("spe", -player.statusEffectv3(StatusEffects.CrinosShape));
-                player.removeStatusEffect(StatusEffects.CrinosShape);
+                player.statStore.removeBuffs("CrinosShape");
                 outputText("<b>The flow of power through you suddenly stops, as you no longer have the wrath to sustain it.  You drop roughly to the floor, the bestial chanches slowly fading away leaving you in your normal form.</b>\n\n");
             }
             //	else {
@@ -6644,7 +6620,7 @@ public class Combat extends BaseContent {
             healingPercent += PercentBasedRegeneration();
             if (player.armor == armors.GOOARMR) healingPercent += (SceneLib.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
             if ((player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater)) && player.hasPerk(PerkLib.AquaticAffinity) && player.necklaceName == "Magic coral and pearl necklace") healingPercent += 1;
-            if (player.hasStatusEffect(StatusEffects.CrinosShape) && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) healingPercent += 2;
+            if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) healingPercent += 2;
             if (player.perkv1(PerkLib.Sanctuary) == 1) healingPercent += ((player.corruptionTolerance() - player.cor) / (100 + player.corruptionTolerance()));
             if (player.perkv1(PerkLib.Sanctuary) == 2) healingPercent += player.cor / (100 + player.corruptionTolerance());
             if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) healingPercent += 5;
@@ -6724,7 +6700,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.LizanMarrowEvolved) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxRegen += 1;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if ((player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater)) && player.hasPerk(PerkLib.AquaticAffinity) && player.necklaceName == "Magic coral and pearl necklace") maxRegen += 1;
-        if (player.hasStatusEffect(StatusEffects.CrinosShape) && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) maxRegen += 2;
+        if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) maxRegen += 2;
         if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) maxRegen += 5;
         if (player.hasStatusEffect(StatusEffects.Cauterize)) {
             maxRegen += 1.5;
@@ -6858,7 +6834,7 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.Lustzerking)) gainedwrath += 6;
             if (player.hasStatusEffect(StatusEffects.Rage)) gainedwrath += 6;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) gainedwrath += 12;
-            if (player.hasStatusEffect(StatusEffects.CrinosShape)) {
+            if (player.statStore.hasBuff("CrinosShape")) {
                 gainedwrath += 2;
                 if (player.hasPerk(PerkLib.ImprovedCrinosShape)) gainedwrath += 4;
                 if (player.hasPerk(PerkLib.GreaterCrinosShape)) gainedwrath += 6;
@@ -7225,9 +7201,8 @@ public class Combat extends BaseContent {
                 }
             }
             monster.spe -= monster.statusEffectv1(StatusEffects.NagaVenom);
-            monster.str -= monster.statusEffectv1(StatusEffects.NagaVenom);
+            monster.strStat.core.value -= monster.statusEffectv1(StatusEffects.NagaVenom);
             if (monster.spe < 1) monster.spe = 1;
-            if (monster.str < 1) monster.str = 1;
             if (monster.statusEffectv3(StatusEffects.NagaVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.NagaVenom);
             if (combatIsOver()) return;
         }

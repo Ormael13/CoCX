@@ -135,7 +135,7 @@ public class Ceraph extends Monster
 				//(+10 str/toughness, 1 level, and 10 xp reward.)
 				XP += 20;
 				level += 2;
-				str += 15;
+				this.strStat.core.value += 15;
 				tou += 15;
 				HP += 100;
 				lust = (maxLust() * 0.33);

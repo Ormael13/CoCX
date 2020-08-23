@@ -19,8 +19,9 @@
     import classes.Items.Consumables.EmberTF;
     import classes.Scenes.Areas.Forest.KitsuneScene;
     import classes.Scenes.SceneLib;
+import classes.Stats.Buff;
 
-    public final class Mutations extends MutationsHelper {
+public final class Mutations extends MutationsHelper {
         public function Mutations() {
         }
 
@@ -46,11 +47,7 @@
                 else bonusdepower -= (player.spe - 1);
             }
             bonusempower += (20 * (1 + player.newGamePlusMod()));
-            player.createStatusEffect(StatusEffects.DrunkenPower, durationhour, bonusempower, bonusdepower, 0);
-            dynStats("str", player.statusEffectv2(StatusEffects.DrunkenPower));
-            dynStats("spe", -player.statusEffectv3(StatusEffects.DrunkenPower));
-            dynStats("inte", -player.statusEffectv3(StatusEffects.DrunkenPower));
-            dynStats("lib", player.statusEffectv2(StatusEffects.DrunkenPower));
+            player.statStore.addBuffObject({str:bonusempower,spe:bonusdepower,inte:bonusdepower,lib:bonusempower}, "DrunkenPowerEmpower",{text:"Drunken Power", time:Buff.RATE_HOURS, tick:durationhour});
         }
 
         public function DrunkenPowerEmpowerOni():Number {

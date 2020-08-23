@@ -350,7 +350,8 @@ private function wakeUpAfterDemonGangBangs():void {
 	//+med-high corruption, - libido, - toughness, - strength, +20 fatigue, high imp preg chance, slimefeed
 	fatigue(20);
 	player.slimeFeed();
-	dynStats("str", -2,"tou", -2, "spe", -1, "int", -1, "lib", 1, "sen", 1, "lus=", 100, "cor", 3);
+	dynStats("tou", -2, "spe", -1, "int", -1, "lib", 1, "sen", 1, "lus=", 100, "cor", 3);
+	player.addCurse("str", 2);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);

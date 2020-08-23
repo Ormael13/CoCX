@@ -491,7 +491,8 @@ internal function tentacleLossRape():void {
 	}
 	if(player.gender == 1) 
 	{
-		dynStats("str", -1,"int", -1, "lib", 5, "sen", 2, "lus", 25, "cor", 1);
+		dynStats("int", -1, "lib", 5, "sen", 2, "lus", 25, "cor", 1);
+		player.addCurse("str",1);
 		if(player.cor < 75) outputText("It grabs you before you can get away!\n\nWhile you attempt to resist the abomination, its raw muscle mass is too much. ");
 		outputText("It pins you to the ground easily. You immediately feel a sharp, horrible pain ");
 		if(player.cockTotal() > 1) outputText("at the base of your [cocks].");

@@ -197,14 +197,11 @@ public class Evangeline2 extends Monster
 		public function MightSpell():void {
 			outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
 			outputText("The rush of success and power flows through her body.  <b>She looks like she can do anything!</b>");
-			createStatusEffect(StatusEffects.Might, 50, 0, 0, 0);
 			if (findPerk(PerkLib.JobEnchanter) >= 0) {
-				this.str += (5 + (inte / 10)) * 1.2 * SpellMod();
-				this.tou += (5 + (inte / 10)) * 1.2 * SpellMod();
+				this.statStore.addBuffObject({ 'str': +(5 + (inte / 10)) * 1.2 * SpellMod(), 'tou': -(5 + (inte / 10)) * 1.2 * SpellMod()}, "EvangelineMight",{})
 			}
 			else {
-				this.str += (5 + (inte / 10)) * SpellMod();
-				this.tou += (5 + (inte / 10)) * SpellMod();
+				this.statStore.addBuffObject({ 'str': +(5 + (inte / 10)) * SpellMod(), 'tou': -(5 + (inte / 10)) * SpellMod()}, "EvangelineMight",{})
 			}
 			fatigue += spellCostMight();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
@@ -226,8 +223,7 @@ public class Evangeline2 extends Monster
 			this.weaponAttack += (5 + (inte / 10)) * 1.2 * SpellMod();
 			outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
 			outputText("The rush of success and power flows through her body.  <b>She looks like she can do anything!</b>\n\n");
-			createStatusEffect(StatusEffects.Might, 50, 0, 0, 0);
-			this.str += (5 + (inte / 10)) * 1.2 * SpellMod();
+			this.strStat.core.value += (5 + (inte / 10)) * 1.2 * SpellMod();
 			this.tou += (5 + (inte / 10)) * 1.2 * SpellMod();
 			fatigue += spellCostChargeWeaponMight();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED] += 2;
@@ -262,7 +258,7 @@ public class Evangeline2 extends Monster
 				if (choice2 == 0) eAttack();
 				if (choice2 == 1) {
 					if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeWeapon)) ChargeWeaponSpell();
-					else if (!hasStatusEffect(StatusEffects.Might) && (fatigue < (maxFatigue() - spellCostMight()))) MightSpell();
+					else if (!statStore.hasBuff("EvangelineMight") && (fatigue < (maxFatigue() - spellCostMight()))) MightSpell();
 					else if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeArmor)) ChargeArmorSpell();
 					else if (!hasStatusEffect(StatusEffects.Blink) && (fatigue < (maxFatigue() - spellCostBlink()))) BlinkSpell();
 					else if (HPRatio() < .75 && (fatigue < (maxFatigue() - spellCostHeal()))) HealSpell();
@@ -281,7 +277,7 @@ public class Evangeline2 extends Monster
 					if (this.lust > 50) {
 						if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeWeapon)) ChargeWeaponSpell();
 						else if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeArmor)) ChargeArmorSpell();
-						else if (!hasStatusEffect(StatusEffects.Might) && (fatigue < (maxFatigue() - spellCostMight()))) MightSpell();
+						else if (!statStore.hasBuff("EvangelineMight") && (fatigue < (maxFatigue() - spellCostMight()))) MightSpell();
 						else if (!hasStatusEffect(StatusEffects.Blink) && (fatigue < (maxFatigue() - spellCostBlink()))) BlinkSpell();
 						else if (HPRatio() < .75 && (fatigue < (maxFatigue() - spellCostHeal()))) HealSpell();
 						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (fatigue < (maxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();

@@ -26,7 +26,7 @@ public class ImpOverlord extends Imp
 			if (spellChooser == 0 && hasStatusEffect(StatusEffects.ChargeWeapon)) {
 				spellChooser = rand(5) + 1;
 			}
-			if (spellChooser == 5 && hasStatusEffect(StatusEffects.Might)) {
+			if (spellChooser == 5 && statStore.hasBuff("ImpMight")) {
 				spellChooser = rand(5);
 				if (spellChooser == 0 && hasStatusEffect(StatusEffects.ChargeWeapon)) spellChooser++;
 			}
@@ -93,7 +93,7 @@ public class ImpOverlord extends Imp
 			else if (spellChooser == 5 && fatigue <= (maxFatigue() - spellCostMight)) {
 				outputText("He flushes, drawing on his body's desires to empower his muscles and toughen his up.");
 				outputText("The rush of success and power flows through his body.  He feels like he can do anything!");
-				createStatusEffect(StatusEffects.Might, 20, 20, 0, 0);
+				statStore.addBuffObject({str:+20, tou:+20},"ImpMight")
 				fatigue += spellCostMight;
 			}
 		}
