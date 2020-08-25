@@ -106,13 +106,16 @@ import coc.xlogic.ExecContext;
 					walpurgisIzaliaCloak: player.armor == game.armors.WIC,
 					scandalousSuccubusClothing: player.armor == game.armors.SSC,
 					fairyQueenRegalia: player.armor == game.armors.FQR,
+					chainMailBikini: player.armor == game.armors.CHBIKNI || player.armor == game.armors.LMARMOR,
 					platemail: player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 
 					//viewable bra list
 					goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,
+					dragonscaleBikiniBra: player.upperGarment == game.undergarments.DS_BRA,
 
 					//viewable panty list
 					goblinTechnomancerPanty: player.lowerGarment == game.undergarments.T_PANTY,
+					dragonscaleBikiniPanty: player.lowerGarment == game.undergarments.DSTHONG,
 
 					// Viewable neck Accessory lists
 					blueScarf: player.necklace == game.necklaces.BWSCARF,
