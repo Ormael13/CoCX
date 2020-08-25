@@ -1310,7 +1310,7 @@
             <case values="Eyes.BLACK_EYES_SAND_TRAP">
                 <show part="eyes/sandtrap"/>
             </case>
-            <case values="Eyes.SLITS,Eyes.FENRIR,Eyes.REPTILIAN,Eyes.SNAKE,Eyes.GORGON,Eyes.DRAGON,Eyes.ONI,Eyes.ELF,Eyes.VAMPIRE,Eyes.CAVE_WYRM">
+            <case values="Eyes.FOX,Eyes,Eyes.CAT_SLITS,Eyes.FENRIR,Eyes.REPTILIAN,Eyes.SNAKE,Eyes.GORGON,Eyes.DRAGON,Eyes.ONI,Eyes.ELF,Eyes.VAMPIRE">
                 <show part="eyes/cat"/>
             </case>
             <case values="Eyes.DEVIL,Eyes.FROSTWYRM">

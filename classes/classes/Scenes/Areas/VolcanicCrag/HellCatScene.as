@@ -258,6 +258,7 @@ public function WitchesSabbathThirdVisitYes():void {
 	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningHair)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningHair, 0, 0, 0, 0);
 	outputText(" Your skin tingle with residual heat as well, progressively and delightfully burning toward a ashen hue.");
 	player.skinTone = "ashen";
+	player.hairColor = "midnight black";
 	player.coatColor = "midnight black";
 	outputText(" Speaking of fire you having some hellish hot thoughts right now. You really wish you could stick that cock of yours in some cunt or get yourself filled good and hell with a body like yours going in heat likely is going to be a recurring two sided joke. <b>You were altered and transformed into a Hellcat!</b>");
 	if (rand(2) == 0) player.goIntoRut(false);
