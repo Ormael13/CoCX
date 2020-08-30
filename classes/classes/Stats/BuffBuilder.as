@@ -15,22 +15,22 @@ public class BuffBuilder {
 	
 	// Utility functions
 	
-	public function present(): Boolean {
+	public function isPresent(): Boolean {
 		return store.hasBuff(tag);
 	}
-	public function buffObjects(): /*Buff*/Array {
+	public function findAllBuffObjects(): /*Buff*/Array {
 		return store.buffObjects(tag);
 	}
-	public function buffObjectOfStat(statName:String): Buff {
+	public function findBuffObjectOfStat(statName:String): Buff {
 		var stat:BuffableStat = store.findBuffableStat(statName);
 		return stat.findBuff(tag);
 	}
-	public function ticksLeft():int {
+	public function getRemainingTicks():int {
 		var buff:Buff = store.buffObjects(tag)[0];
 		if (buff) return buff.tick;
 		return 0;
 	}
-	public function buffOfStat(statName:String): Number {
+	public function getValueOfStatBuff(statName:String): Number {
 		var stat:BuffableStat = store.findBuffableStat(statName);
 		return stat.valueOfBuff(tag);
 	}
