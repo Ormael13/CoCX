@@ -25,6 +25,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.JewelryLib;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Stats.Buff;
+import classes.Stats.BuffBuilder;
 import classes.Stats.BuffableStat;
 import classes.Stats.PrimaryStat;
 import classes.Stats.RawStat;
@@ -274,6 +275,10 @@ public class Creature extends Utils
 			'sens': new BuffableStat({base: 15, min: 0})
 		});
 		public function get statStore():StatStore { return _stats; }
+		
+		public function buff(tag:String):BuffBuilder {
+			return new BuffBuilder(statStore, tag);
+		}
 
 		//new stat area
 		public var strStat:PrimaryStat = _stats.findStat('str') as PrimaryStat;

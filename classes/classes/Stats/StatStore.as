@@ -124,6 +124,14 @@ public class StatStore implements IStatHolder {
 		},BuffableStat);
 		return result;
 	}
+	public function buffObjects(tag:String):/*Buff*/Array {
+		var result:/*Buff*/Array = [];
+		forEachStat(function(stat:BuffableStat):void{
+			var buff:Buff = stat.findBuff(tag);
+			if (buff) result.push(buff);
+		},BuffableStat);
+		return result;
+	}
 
 	/**
 	 * Add `amount` ticks to all buffs tagged `tag`.
@@ -142,6 +150,13 @@ public class StatStore implements IStatHolder {
 	}
 	public function addBuffObject(buffs:Object, tag:String, options:*=null, evalContext:*=null):void {
 		applyBuffObject(buffs, tag, options, evalContext, false);
+	}
+	public function setBuffOptions(tag: String, options:*):void {
+		if(!options) return;
+		forEachStat(function(stat:BuffableStat):void{
+			var buff:Buff = stat.findBuff(tag);
+			if (buff) buff.options = options;
+		}, BuffableStat);
 	}
 	private function applyBuffObject(buffs:Object, tag:String, options:*, evalContext:*, replaceMode:Boolean=false):void {
 		for (var statname:String in buffs) {
