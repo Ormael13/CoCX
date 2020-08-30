@@ -9,6 +9,12 @@ import coc.script.Eval;
 public class StatStore implements IStatHolder {
 	private var _stats:Object = {};
 	/**
+	 * Set of buff tags (key is tag and value is true) that were removed since last
+	 * `advanceTime`, `removeCombatRoundTrackingBuffs`, or `addTicksToBuffs` call.
+	 */
+	public var recentlyRemovedTags:Object = {};
+	
+	/**
 	 * @param setup object { [statName:String] => IStat }
 	 */
 	public function StatStore(setup:Object =null) {
@@ -40,16 +46,27 @@ public class StatStore implements IStatHolder {
 	}
 	/**
 	 * Advance time-tracking buffs by `ticks` units, unit type is defined by `rate`
-	 * Buffs with their countdown expired are removed
+	 * Buffs with their countdown expired are removed.
+	 *
+	 * Will reset & populate `recentlyRemovedTags`
 	 */
 	public function advanceTime(rate:int, ticks:int):void {
+		recentlyRemovedTags = {};
 		forEachStat(function(stat:BuffableStat):void{
-			stat.advanceTime(rate, ticks)
+			stat.advanceTime(rate, ticks);
+			Utils.extend(recentlyRemovedTags, stat.recentlyRemovedTags);
 		},BuffableStat);
 	}
+	/**
+	 * Remove all buffs with `rate == RATE_ROUNDS`.
+	 *
+	 * Will reset & populate `recentlyRemovedTags`
+	 */
 	public function removeCombatRoundTrackingBuffs():void {
+		recentlyRemovedTags = {};
 		forEachStat(function(stat:BuffableStat):void{
-			stat.removeCombatRoundTrackingBuffs()
+			stat.removeCombatRoundTrackingBuffs();
+			Utils.extend(recentlyRemovedTags, stat.recentlyRemovedTags);
 		},BuffableStat);
 	}
 	
@@ -113,8 +130,10 @@ public class StatStore implements IStatHolder {
 	 * Does nothing if no such buffs or they are permanent
 	 */
 	public function addTicksToBuffs(tag: String, amount: Number):void {
+		recentlyRemovedTags = {};
 		forEachStat(function(stat:BuffableStat):void{
 			stat.addTicksToBuff(tag, amount);
+			Utils.extend(recentlyRemovedTags, stat.recentlyRemovedTags);
 		},BuffableStat);
 	}
 

@@ -108,6 +108,13 @@ package classes.internals
 			return r;
 		}
 		/**
+		 * Append all values to target. Return target.
+		 */
+		public static function pushAll(target:Array, values:Array):Array {
+			target.push.apply(target, values);
+			return target;
+		}
+		/**
 		 * @return src.map( el => el['propname'] )
 		 */
 		public static function mapOneProp(src:Array,propname:String):Array {

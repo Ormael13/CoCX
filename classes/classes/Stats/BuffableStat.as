@@ -29,6 +29,12 @@ public class BuffableStat implements IStat, Jsonable {
 	private var _value:Number = 0.0; // Aggregate of buffs ONLY
 	private var _buffs:/*Buff*/Array = [];
 	
+	/**
+	 * Set of buff tags (key is tag and value is true) that were removed since last
+	 * `advanceTime`, `removeCombatRoundTrackingBuffs`, or `addTicksToBuff` call.
+	 */
+	public var recentlyRemovedTags:Object = {};
+	
 	public function get base():Number {
 		return (_baseFn != null) ? _baseFn() : _base;
 	}
@@ -89,13 +95,19 @@ public class BuffableStat implements IStat, Jsonable {
 
 	/**
 	 * Add `amount` ticks to buff tagged `tag`.
-	 * Does nothing if no such buff or it is permanent
+	 * Does nothing if no such buff or it is permanent.
+	 *
+	 * Will reset & populate`recentlyRemovedTags`
 	 */
 	public function addTicksToBuff(tag:String, amount:Number):void {
+		recentlyRemovedTags = {};
 		var buff:Buff = findBuff(tag);
 		if (!buff || buff.rate == Buff.RATE_PERMANENT) return;
 		buff.tick += amount;
-		if (buff.tick <= 0) removeBuff(tag);
+		if (buff.tick <= 0) {
+			recentlyRemovedTags[tag] = true;
+			removeBuff(tag);
+		}
 	}
 	
 	private function aggregateBase():Number {
@@ -138,7 +150,7 @@ public class BuffableStat implements IStat, Jsonable {
 		return indexOfBuff(tag) != -1;
 	}
 	/**
-	 * @return Buff null
+	 * @return Buff or null
 	 */
 	public function findBuff(tag:String):Buff {
 		var i:int = indexOfBuff(tag);
@@ -149,6 +161,11 @@ public class BuffableStat implements IStat, Jsonable {
 		var i:int = indexOfBuff(tag);
 		if (i == -1) return defaultValue;
 		return _buffs[i].value;
+	}
+	public function ticksOfBuff(tag:String):int {
+		var i:int = indexOfBuff(tag);
+		if (i == -1) return 0;
+		return _buffs[i].tick;
 	}
 	public function addOrIncreaseBuff(tag:String, buffValue:Number, newOptions:Object = null):void {
 		var i:int = indexOfBuff(tag);
@@ -198,18 +215,22 @@ public class BuffableStat implements IStat, Jsonable {
 	}
 	/**
 	 * Advance time-tracking buffs by `ticks` units, unit type is defined by `rate`
-	 * Buffs with their countdown expired are removed
+	 * Buffs with their countdown expired are removed.
+	 *
+	 * Will reset & populate `recentlyRemovedTags`
 	 */
 	public function advanceTime(rate:int, ticks:int):void {
 		if (rate == Buff.RATE_PERMANENT) throw "Invalid time unit "+rate;
 		if (ticks < 0) throw "Invalid ticks count "+ticks;
 		if (ticks == 0) return;
 		var changed:Boolean = false;
+		recentlyRemovedTags = {};
 		for (var i:int = _buffs.length-1; i>=0; i--) {
 			var buff:Buff = _buffs[i];
 			if (buff.rate == rate) {
 				buff.tick-=ticks;
 				if (buff.tick < 0) {
+					recentlyRemovedTags[buff.tag] = true;
 					_buffs.splice(i,1);
 					changed = true;
 				}
@@ -217,10 +238,18 @@ public class BuffableStat implements IStat, Jsonable {
 		}
 		if (changed) recalculate();
 	}
+	
+	/**
+	 * Remove all buffs with `rate == RATE_ROUNDS`.
+	 *
+	 * Will reset & populate `recentlyRemovedTags`
+	 */
 	public function removeCombatRoundTrackingBuffs():void {
 		var changed:Boolean = false;
+		recentlyRemovedTags = {};
 		for (var i:int = _buffs.length-1; i>=0; i--) {
 			if (_buffs[i].rate == Buff.RATE_ROUNDS) {
+				recentlyRemovedTags[_buffs[i].tag] = true;
 				_buffs.splice(i,1);
 				changed = true;
 			}
