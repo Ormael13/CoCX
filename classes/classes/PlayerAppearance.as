@@ -1780,7 +1780,7 @@ public class PlayerAppearance extends BaseContent {
 		else if(eyeType == Eyes.GORGON)
 			outputText("  Your [eyecolor] eyes are similar to those of snake-like gorgons with ability to temporally petrify.");
 		else if(eyeType == Eyes.FENRIR)
-			outputText("  Your eyes glows with a freezing blue light icy smoke rising in the air around it.");
+			outputText("  Your [eyecolor] eyes glows with a freezing blue light, icy smoke rising in the air around it.");
 		else if(eyeType == Eyes.MANTICORE)
 			outputText("  Your eyes are similar to those of a cat, with slit pupils. However, their [eyecolor] iris dismiss any links to the regular felines in favor of something way more ominous.");
 		else if(eyeType == Eyes.FOX)
@@ -1806,7 +1806,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Instead of regular eyes you see through a pair of gemstones that change hue based on your mood.");
 		}
 		else if(eyeType == Eyes.FERAL){
-			outputText("  In your eyes sometime dance a green light. It encompass your entire pupil when you let the beast within loose.");
+			outputText("  In your [eyecolor] eyes sometime dance a sinister light. It encompass your entire pupil when you let the beast within loose.");
 		}
 		else if(eyeType == Eyes.GRYPHON){
 			outputText("  Your gifted eyes have a bird-like appearance, having an [eyecolor] sclera and a large, black iris. A thin ring of black separates your sclera from your outer iris.");
@@ -1824,7 +1824,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your [eyecolor], slanted eyes have slitted pupils. They usually seem to gleam with a sort of malice, avarice, or lechery, giving off beady-eyed vibe.");
 		}
 		else if(eyeType == Eyes.CAVE_WYRM){
-			outputText("  Dark blue iris with neon blue eyes pupil that glow in the dark.");
+			outputText("  Dark blue iris with [eyecolor] eyes pupil that glow in the dark.");
 		}
 		else if(eyeType == Eyes.HINEZUMI){
 			outputText("  Your eyes are human-like. However, their [eyecolor] irises are clearly those of an Hinezumi.");
@@ -2642,7 +2642,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.alicornkinScore() >= 1) outputText("\n<font color=\"#008000\">Alicornkin/Nightmarekin: " + player.alicornkinScore() + "</font>");
 		else if (player.alicornkinScore() < 1) outputText("\n<font color=\"#ff0000\">Alicornkin/Nightmarekin: 0</font>");
 		//Alraune
-		if (player.alrauneScore() >= 10) outputText("\n<font color=\"#0000a0\">Alraune: " + player.alrauneScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		if (player.alrauneScore() >= 17) outputText("\n<font color=\"#0000a0\">Greater Alraune: " + player.alrauneScore() + " (+" + (115 * (1 + player.newGamePlusMod())) + " max Tou, -" + (60 * (1 + player.newGamePlusMod())) + " max Spe, +" + (200 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.alrauneScore() >= 13) outputText("\n<font color=\"#0000a0\">Alraune: " + player.alrauneScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (145 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 		else if (player.alrauneScore() >= 1) outputText("\n<font color=\"#008000\">Alraune: " + player.alrauneScore() + "</font>");
 		else if (player.alrauneScore() < 1) outputText("\n<font color=\"#ff0000\">Alraune: 0</font>");
 		//Avian
@@ -3297,7 +3298,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.wolfScore() >= 1) outputText("\n<font color=\"#008000\">Werewolf: " + player.werewolfScore() + "</font>");
 		else if (player.wolfScore() < 1) outputText("\n<font color=\"#ff0000\">Werewolf: 0</font>");
 		//Wolf
-		if (player.wolfScore() >= 10) outputText("\n<font color=\"#0000a0\">Fenrir: " + player.wolfScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		if (player.wolfScore() >= 23) outputText("\n<font color=\"#0000a0\">Fenrir: " + player.wolfScore() + " (+" + (135 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Tou, +" + (100 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 		else if (player.wolfScore() >= 7 && player.coatColor == "glacial white") outputText("\n<font color=\"#0000a0\">Winter wolf: " + player.wolfScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 		else if (player.wolfScore() >= 6) outputText("\n<font color=\"#0000a0\">Wolf-morph: " + player.wolfScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
 		else if (player.wolfScore() >= 4) outputText("\n<font color=\"#0000a0\">Wolf girl/boy: " + player.wolfScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (10 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
@@ -3377,24 +3378,17 @@ public class PlayerAppearance extends BaseContent {
 		outputText("You sit down on your sleeping " + (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "bed" : "bag") + " and contemplate your current outlook on life. You have been through much and became bigger, better, way more than what you once were.");
 		if (player.race() != player.startingRace) outputText(" While you were formerly a " + player.startingRace + " you now are a " + player.race() + " for  better or for worse and have decided to live this new life to its fullest.");
 		var oldmaxes:Object = player.getAllMaxStats();
-		var strStat:Number = oldmaxes.str;
 		var touStat:Number = oldmaxes.tou;
 		var speStat:Number = oldmaxes.spe;
-		var inteStat:Number = oldmaxes.inte;
-		var wisStat:Number = oldmaxes.wis;
 		var libStat:Number = oldmaxes.lib;
 		player.strtouspeintwislibsenCalculation2();
 		var newmaxes:Object = player.getAllMaxStats();
-		var strStat1:Number = newmaxes.str;
 		var touStat1:Number = newmaxes.tou;
 		var speStat1:Number = newmaxes.spe;
-		var inteStat1:Number = newmaxes.inte;
-		var wisStat1:Number = newmaxes.wis;
 		var libStat1:Number = newmaxes.lib;
-		if (touStat != touStat1 || speStat != speStat1 || inteStat != inteStat1 || wisStat != wisStat1 || libStat != libStat1) outputText(" As if this reflection unlocked some hidden door in you, you feel your body awaken with newfound vigor and might. Let your adversaries come, you are ready for them now!");
+		if (touStat != touStat1 || speStat != speStat1 || libStat != libStat1) outputText(" As if this reflection unlocked some hidden door in you, you feel your body awaken with newfound vigor and might. Let your adversaries come, you are ready for them now!");
 		if (touStat != touStat1) player.tou = Math.round(player.tou * (touStat1 / touStat));
 		if (speStat != speStat1) player.spe = Math.round(player.spe * (speStat1 / speStat));
-		if (inteStat != inteStat1) player.inte = Math.round(player.inte * (inteStat1 / inteStat));
 		if (libStat != libStat1) player.lib = Math.round(player.lib * (libStat1 / libStat));
 		doNext(playerMenu);
 	}

@@ -1555,7 +1555,8 @@ import flash.utils.getQualifiedClassName;
 			this.strStat.core.value = str;
 			this.tou = tou;
 			this.spe = spe;
-			this.inte = inte;
+			this.intStat.core.value = inte;
+
 			initedStrTouSpeInte = true;
 		}
 
@@ -1799,7 +1800,7 @@ import flash.utils.getQualifiedClassName;
 		}
 
 		public function monsterIsStunned():Boolean {
-			if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Polymorphed) || hasStatusEffect(StatusEffects.HypnosisNaga) || hasStatusEffect(StatusEffects.Sleep) || hasStatusEffect(StatusEffects.InvisibleOrStealth)) return true;
+			if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Polymorphed) || hasStatusEffect(StatusEffects.HypnosisNaga) || hasStatusEffect(StatusEffects.Sleep) || hasStatusEffect(StatusEffects.InvisibleOrStealth) || hasStatusEffect(StatusEffects.Fascinated)) return true;
 			return false;
 		}
 
@@ -2040,6 +2041,11 @@ import flash.utils.getQualifiedClassName;
 			if (hasStatusEffect(StatusEffects.InkBlind)) {
 				if (plural) EngineCore.outputText("Your foes are busy trying to remove the ink and therefore does no other action then flay their hand about its faces.");
 				else EngineCore.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.");
+			}
+			if (hasStatusEffect(StatusEffects.Fascinated)) {
+				if (plural) EngineCore.outputText("Your opponents stares emptily in the space in front of [monster him] a dreamy expression on [monster his] face, totaly entranced. A brief moment later [monster he] realises [monster he]'s been doing nothing for the past six second and snaps out of it.");
+				else EngineCore.outputText("Your opponent stares emptily in the space in front of [monster him] a dreamy expression on [monster his] face, totaly entranced. A brief moment later [monster he] realises [monster he]'s been doing nothing for the past six second and snaps out of it.");
+				removeStatusEffect(StatusEffects.Fascinated);
 			}
 			else if (hasStatusEffect(StatusEffects.FrozenSolid)) {
 				if (plural) EngineCore.outputText("Your foes are too busy trying to break out of their icy prison to fight back.");
@@ -3089,7 +3095,7 @@ import flash.utils.getQualifiedClassName;
 			this.strStat.core.value += bonusAscStr;
 			this.tou += bonusAscTou;
 			this.spe += bonusAscSpe;
-			this.inte += bonusAscInt;
+			this.intStat.core.value += bonusAscInt;
 			this.wisStat.core.value += bonusAscWis;
 			this.lib += bonusAscLib;
 			statStore.addBuff("sens", bonusAscSen, "Ascension", {});
@@ -3098,7 +3104,7 @@ import flash.utils.getQualifiedClassName;
 			this.tou += multiStatsAmp1;
 			this.spe += multiStatsAmp1;
 			var multiStatsAmp2:Number = 0;
-			this.inte += multiStatsAmp2;
+			this.intStat.core.value += multiStatsAmp2;
 			this.wisStat.core.value += multiStatsAmp2;
 			this.lib += multiStatsAmp2;
 			statStore.addBuff("sens", multiStatsAmp2, "AscensionMultiplier", {});

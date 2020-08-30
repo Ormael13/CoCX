@@ -78,10 +78,10 @@ public class BuffBuilder {
 		return withOptions({rate:Buff.RATE_ROUNDS, tick:rounds});
 	}
 	public function combatPermanent(): BuffBuilder {
-		return withOptions({rate:Buff.RATE_ROUNDS, tick:Infinity});
+		return withOptions({rate:Buff.RATE_ROUNDS, tick:9999});
 	}
-	public function addDuration(ticks:int): BuffBuilder {
-		store.addTicksToBuffs(tag, ticks);
+	public function addDuration(tick:int): BuffBuilder {
+		store.addTicksToBuffs(tag, tick);
 		return this;
 	}
 	

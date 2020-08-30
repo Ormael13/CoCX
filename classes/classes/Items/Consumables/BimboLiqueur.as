@@ -59,10 +59,6 @@ public class BimboLiqueur extends Consumable {
 				game.player.removePerk(PerkLib.BroBrains);
 				game.player.createPerk(PerkLib.FutaFaculties, 0, 0, 0, 0);
 				game.player.createPerk(PerkLib.FutaForm, 0, 0, 0, 0);
-				if (game.player.inte > 35) {
-					game.player.inte = 35;
-					game.player.dynStats("int", -0.1);
-				}
 				if (game.player.lib < 50) {
 					game.player.lib = 50;
 					game.player.dynStats("lib", .1);
@@ -175,10 +171,6 @@ public class BimboLiqueur extends Consumable {
 				if (game.player.findPerk(PerkLib.BimboBrains) < 0) {
 					outputText("<b>(Bimbo Brains - Perk Gained!)</b>\n");//int to 20.  max int 50)
 					game.player.createPerk(PerkLib.BimboBrains, 0, 0, 0, 0);
-					if (game.player.inte > 21) {
-						var boost:Number = game.player.inte / 5;
-						game.player.inte = 21 + boost;
-					}
 				}
 				game.player.orgasm();
 				game.player.dynStats("int", -1, "lib", 5);

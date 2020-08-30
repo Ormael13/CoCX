@@ -106,6 +106,7 @@ import coc.xlogic.ExecContext;
 					walpurgisIzaliaCloak: player.armor == game.armors.WIC,
 					scandalousSuccubusClothing: player.armor == game.armors.SSC,
 					fairyQueenRegalia: player.armor == game.armors.FQR,
+					berserkerArmor: player.armor == game.armors.BA,
 					chainMailBikini: player.armor == game.armors.CHBIKNI || player.armor == game.armors.LMARMOR,
 					platemail: player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 

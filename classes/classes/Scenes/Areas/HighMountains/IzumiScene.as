@@ -340,7 +340,7 @@ import classes.Stats.Buff;
 			
 			// Can't use dynStats for this, because stats() has a chained modifier to incoming sens changes that could turn this value into 8x what we expected it to be
 			player.spe += deltaSpd;
-			player.statStore.addBuff('sens',+deltaSns,'IzumiSmoke',{text:'Izumi Pipe Smoke', rate:Buff.RATE_HOURS, ticks: 24})
+			player.statStore.addBuff('sens',+deltaSns,'IzumiSmoke',{text:'Izumi Pipe Smoke', rate:Buff.RATE_HOURS, tick: 24})
 			player.lib += deltaLib;
 			var maxes:Object = player.getAllMaxStats();
 			if (player.spe <= 0) player.spe = 1;

@@ -1077,7 +1077,7 @@ public function kaibaShopMainMenu2():void {
 	addButton(2, "UnDefKingS", buyItem, jewelries.UNDKINS).hint("Undefeated King's Signet - Increase max wrath by 100. When worn on right hand (slot 1 and 3 for rings) would have additional effects: increase max wrath by another 100 (with base bonus it's +200), generate 6/3 wrath per turn/hour, increase multiplied on Power Attack damage by 1.");
 	addButton(3, "W.I.Cloak", buyItem, armors.WIC).hint("Walpurgis Izalia Cloak -  Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
 	//addButton(3, "Necklace", buyItem, necklaces.CSNECK);
-	//addButton(4, "Necklace", buyItem, necklaces.CSNECK);
+	addButton(4, "B.Armor", buyItem, armors.BA).hint("Berzerker Armor -  Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.");
 	addButton(5, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Remove range accuracy penalty when flying and increase range accuracy by 20%.");
 	addButton(6, "R.Ambidexty", buyItem, jewelries.RNGAMBI).hint("Ring of Ambidexty - Remove melee accuracy penalty when flying and increase melee accuracy by 15%.");
 	addButton(7, "CroUndefKing", buyItem, headjewelries.CUNDKIN).hint("Crown of the Undefeated King - You can't loose by HP until reaching droping into negative health larger than 5% of max HP + 500(scalable). When below 0 HP PC wouldn gain additional 1% of max HP per turn regeneration effect.");
@@ -1517,8 +1517,14 @@ private function weightLifting():void {
 	//(else)
 	else outputText("This place barely has anything left to challenge you, but you take the heaviest weights you can get your mitts on and get to it.  By the time an hour has passed, you've worked up a good sweat, but without heavier weights you probably won't get any stronger.");
 	//Stat changes HERE!
-	if(player.str < 90) dynStats("str", .5);
-	if(player.tou < 40) dynStats("tou", .3);
+	if(player.str < 100) {
+		dynStats("str", 5);
+		player.strStat.core.value += .5;
+	}
+	if(player.tou < 100) {
+		dynStats("tou", 5);
+		player.touStat.core.value += .5;
+	}
 	//Body changes here
 	//Muscleness boost!
 	outputText(player.modTone(85,5+rand(5)));
@@ -1568,8 +1574,14 @@ private function goJogging():void {
 	//else)
 	else outputText("and it barely challenges you.  You run at a sprint half the time and still don't feel like you're improving in the slightest.  Still, you do manage to burn a lot of calories.");
 	//Stat changes HERE!
-	if(player.spe < 40) dynStats("spe", .3);
-	if(player.tou < 90) dynStats("tou", .5);
+	if(player.spe < 100) {
+			dynStats("spe", 5);
+			player.speStat.core.value += .5;
+	}
+	if(player.tou < 100) {
+		dynStats("tou", 5);
+		player.touStat.core.value += .5;
+	}
 
 	//If butt is over 15 guaranteed reduction
 	if(player.butt.type >= 15) {

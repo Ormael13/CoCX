@@ -45,7 +45,7 @@ public class VampireThirstEffect extends StatusEffectClass {
     }
 
 	override public function onAttach():void {
-		host.statStore.replaceBuffObject({str:currentBoost,spe:currentBoost,int:currentBoost,lib:currentBoost},"VampirismSatiety",{Text:"Vampirism"});
+		host.statStore.replaceBuffObject({str:currentBoost,spe:currentBoost,int:currentBoost,lib:currentBoost},"VampirismSatiety",{text:"Vampirism"});
 	}
 }
 }

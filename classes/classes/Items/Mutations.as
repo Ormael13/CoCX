@@ -47,7 +47,8 @@ public final class Mutations extends MutationsHelper {
                 else bonusdepower -= (player.spe - 1);
             }
             bonusempower += (20 * (1 + player.newGamePlusMod()));
-            player.statStore.addBuffObject({str:bonusempower,spe:bonusdepower,inte:bonusdepower,lib:bonusempower}, "DrunkenPowerEmpower",{text:"Drunken Power", time:Buff.RATE_HOURS, tick:durationhour});
+            player.statStore.addBuffObject({str:bonusempower,spe:-bonusdepower,inte:-bonusdepower,lib:bonusempower}, "DrunkenPowerEmpower",{text:"Drunken Power", time:Buff.RATE_HOURS, tick:durationhour});
+            //TODO WE MUST ADD SOME TEXT TO SAY WHEN PC BECOMES SOBER AGAIN
         }
 
         public function DrunkenPowerEmpowerOni():Number {
@@ -1551,25 +1552,40 @@ public final class Mutations extends MutationsHelper {
                     }
                 }
             }
+            //Animal tooth face
+            if (rand(2) == 0 && changes < changeLimit && player.faceType != Face.ANIMAL_TOOTHS && player.hasPartialCoat(Skin.FUR)) {
+                outputText("\n\n");
+                if (player.faceType != Face.HUMAN) outputText("Your face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
+                outputText("You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. <b>Your mouth is now filled with wolf like canines.</b>");
+                setFaceType(Face.ANIMAL_TOOTHS);
+                changes++;
+            }
             //Wolf face
-            if (rand(2) == 0 && changes < changeLimit && player.faceType != Face.WOLF && player.hasFullCoatOfType(Skin.FUR)) {
+            if (rand(2) == 0 && changes < changeLimit && player.faceType == Face.ANIMAL_TOOTHS && player.hasFullCoatOfType(Skin.FUR)) {
                 outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting reforming into something... different, your screams turning into a howl as the change ends. You go to find a puddle in order to view your reflection...  <b>Your face looks like the one of a feral looking wolf composed of a maw jagged with threatening canines a wet muzzle and a animalistic tongue.</b>");
                 setFaceType(Face.WOLF);
                 changes++;
             }
-            //Winter wolf fur
-            if (rand(3) == 0
-                    && changes < changeLimit
-                    && player.lowerBody == LowerBody.WOLF
-                    && player.tailType == Tail.WOLF
-                    && player.ears.type == Ears.WOLF
-                    && !player.hasFur()
-                    && (player.hairColor != "glacial white" || player.coatColor != "glacial white")) {
+            //Winter wolf fur partial fur
+            if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && !player.hasPartialCoat(Skin.FUR) && (player.hairColor != "glacial white" || player.coatColor != "glacial white")) {
+                player.hairColor = "glacial white";
+                if (!player.hasCoat()) outputText("\n\nYour skin itches intensely. You gaze down as more and more hairs break forth from your skin quickly transforming into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now partialy covered in [haircolor] fur from head to toe.</b>");
+                else if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of [haircolor] fur growing out from below!  <b>You are now partialy covered in [haircolor] fur from head to toe.</b>");
+                else outputText("\n\nYour skin itch incessantly.  You scratch, feeling it current form shifting into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now partialy covered in [haircolor] fur from head to toe.</b>");
+                player.skin.growFur({color: player.hairColor}, Skin.COVERAGE_LOW);
+                if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+                    outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
+                    player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+                }
+                changes++;
+            }
+            //Winter wolf full fur
+            if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && player.hasPartialCoat(Skin.FUR) && (player.hairColor != "glacial white" || player.coatColor != "glacial white")) {
                 player.hairColor = "glacial white";
                 if (!player.hasCoat()) outputText("\n\nYour skin itches intensely. You gaze down as more and more hairs break forth from your skin quickly transforming into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now covered in [haircolor] fur from head to toe.</b>");
                 else if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of [haircolor] fur growing out from below!  <b>You are now covered in [haircolor] fur from head to toe.</b>");
                 else outputText("\n\nYour skin itch incessantly.  You scratch, feeling it current form shifting into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now covered in [haircolor] fur from head to toe.</b>");
-                player.skin.growCoat(Skin.FUR, {color: player.hairColor});
+                player.skin.growFur({color: player.hairColor}, Skin.COVERAGE_COMPLETE);
                 if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
                     outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
                     player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
@@ -8531,12 +8547,7 @@ public final class Mutations extends MutationsHelper {
                     player.ballSize = 3;
                 }
                 outputText("Finally, you feel the transformation skittering to a halt, leaving you to openly roam your new chiseled and sex-ready body.  So what if you can barely form coherent sentences anymore?  A body like this does all the talking you need, you figure!");
-                if (player.inte > 35) {
-                    var boost:Number = (player.inte - 35) / 5;
-                    player.inte = 35 + boost;
-                    dynStats("int", -0.1);
-
-                }
+                var boost:Number = (player.inte - 35) / 5;
                 if (player.lib < 50) {
                     player.lib = 50;
                     dynStats("lib", .1);
@@ -8546,6 +8557,7 @@ public final class Mutations extends MutationsHelper {
                 outputText("Bimbo Body)\n");
                 player.removePerk(PerkLib.BimboBrains);
                 player.removePerk(PerkLib.BimboBody);
+                player.buff("FutaBimboBroBrain").withText("Futa Brain");
                 player.createPerk(PerkLib.FutaForm, 0, 0, 0, 0);
                 player.createPerk(PerkLib.FutaFaculties, 0, 0, 0, 0);
                 outputText("(Gained Perks - Futa Form, Futa Faculties)</b>");
@@ -8649,10 +8661,6 @@ public final class Mutations extends MutationsHelper {
             if (player.findPerk(PerkLib.Feeder) >= 0) {
                 outputText("<b>(Perk Lost - Feeder!)</b>\n");
                 player.removePerk(PerkLib.Feeder);
-            }
-            if (player.inte > 21) {
-                boost = (player.inte - 20) / 4;
-                player.inte = 21 + boost;
             }
             if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
             dynStats("str", 35, "tou", 35, "int", -1, "lib", 5, "lus", 40);
@@ -11633,8 +11641,7 @@ public final class Mutations extends MutationsHelper {
                 //Get warned!
                 if (flags[kFLAGS.FERRET_BAD_END_WARNING] == 0) {
                     outputText("\n\nYou find yourself staring off into the distance, dreaming idly of chasing rabbits through a warren.  You shake your head, returning to reality.  <b>Perhaps you should cut back on all the Ferret Fruit?</b>");
-                    player.inte -= 5 + rand(3);
-                    if (player.inte < 5) player.inte = 5;
+                    dynStats("int", -(5+rand(3)));
                     flags[kFLAGS.FERRET_BAD_END_WARNING] = 1;
                 }
                 //BEEN WARNED! BAD END! DUN DUN DUN
@@ -15778,11 +15785,9 @@ public final class Mutations extends MutationsHelper {
                 }
                 var melkie_skinTone:Array = ["light", "fair", "pale"];
                 if ((!InCollection(player.skinTone, melkie_skinTone) && changes < changeLimit && rand(4) == 0)) {
-                    if (!InCollection(player.hairColor, melkie_skinTone)) {
                         player.skinTone = randomChoice(melkie_skinTone);
                         outputText("\n\nYour skin suddenly lightens. While lighter skin won't help you against cold weither you got the feeling that, despite this and against all logic, you won't die from freezing either, must be something related to Melkies.<b> You now have " + player.skinTone + " skin.</b>");
                         changes++;
-                    }
                 }
                 //Remove weird hairs
                 if (changes < changeLimit && rand(4) == 0 && player.hairType != Hair.NORMAL) {

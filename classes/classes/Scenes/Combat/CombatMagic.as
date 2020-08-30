@@ -1616,12 +1616,15 @@ public class CombatMagic extends BaseCombatContent {
 				tempStr = MightBoost;
 			}
 			var oldHPratio:Number = player.hp100/100;
+
+			var buffValues:Object = {"tou.mult":tempTou/100};
 			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) {
-				player.statStore.addBuff("inte.mult", tempInt/100, "Might", {text:"Might", time:Buff.RATE_ROUNDS, tick:MightDuration})
+				buffValues["int.mult"] = tempInt/100;
 			} else {
-				player.statStore.addBuff("str.mult", tempStr/100, "Might", {text:"Might", time:Buff.RATE_ROUNDS, tick:MightDuration})
+				buffValues["str.mult"] = tempStr/100;
 			}
-			player.statStore.addBuff("tou.mult", tempTou/100, "Might", {text:"Might", time:Buff.RATE_ROUNDS, tick:MightDuration})
+			player.buff("Might").setStats(buffValues).combatTemporary(MightDuration);
+
 			player.HP = oldHPratio*player.maxHP();
 			statScreenRefresh();
 		};
@@ -1742,6 +1745,7 @@ public class CombatMagic extends BaseCombatContent {
 			mainView.statsView.showStatUp('spe');
 			// strUp.visible = true;
 			// strDown.visible = false;
+			player.buff("Blink").setStats({"spe.mult":tempSpe/100}).combatTemporary(BlinkDuration);
 			player.spe += player.statusEffectv1(StatusEffects.Blink);
 			statScreenRefresh();
 		};

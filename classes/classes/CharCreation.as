@@ -156,7 +156,6 @@ import coc.view.MainView;
 			model.player = player;
 			player.tou = 15;
 			player.spe = 15;
-			player.inte = 15;
 			player.lib = 15;
 			player.cor = 15;
 			player.soulforce = 50;
@@ -558,7 +557,7 @@ import coc.view.MainView;
 			//Attributes
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				player.spe += 3;
-				player.inte += 2;
+				player.intStat.core.value += 2;
 			}
 			//Body attributes
 			player.fertility = 10;
@@ -587,7 +586,7 @@ import coc.view.MainView;
 				player.strStat.core.value += 1;
 				player.tou+=1;
 				player.spe+=1;
-				player.inte+= 1;
+				player.intStat.core.value += 1;
 			}
 			//Body attributes
 			player.fertility = 10;

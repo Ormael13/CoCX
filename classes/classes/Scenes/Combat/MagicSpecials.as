@@ -2522,7 +2522,11 @@ public class MagicSpecials extends BaseCombatContent {
 		mainView.statsView.showStatUp('str');
 		mainView.statsView.showStatUp('tou');
 		mainView.statsView.showStatUp('spe');
-		player.statStore.addBuffObject({str:tempStr,tou:tempTouSpe,spe:tempTouSpe}, "WarriorsRage", {Text:"Warriors Rage", time:Buff.RATE_ROUNDS, tick:warriorsrageDuration});
+		if (player.hasPerk(PerkLib.BerserkerArmor)){
+			tempStr = tempStr*1.5;
+			tempTouSpe = tempTouSpe*1.5;
+		}
+		player.buff("WarriorsRage").addStats({str:tempStr,tou:tempTouSpe,spe:tempTouSpe}).withText("Warriors Rage").combatTemporary(warriorsrageDuration);
 		player.HP = oldHPratio*player.maxHP();
 		statScreenRefresh();
 		enemyAI();
@@ -2579,13 +2583,18 @@ public class MagicSpecials extends BaseCombatContent {
 		temp3 = Math.round(temp3);
 		outputText("You roar and unleash your inner beast assuming Crinos Shape in order to destroy your foe!\n\n");
 		var oldHPratio:Number = player.hp100/100;
-		tempStr = temp1;
+		tempStr = temp1; //
 		tempTou = temp2;
 		tempSpe = temp3;
+		if (player.hasPerk(PerkLib.BerserkerArmor)){
+			tempStr = tempStr*1.5;
+			tempTou = temp2*1.5;
+			tempSpe = temp3*1.5;
+		}
 		mainView.statsView.showStatUp('str');
 		mainView.statsView.showStatUp('tou');
 		mainView.statsView.showStatUp('spe');
-		player.statStore.addBuffObject({str:tempStr,tou:tempTou,spe:tempSpe}, "CrinosShape", {Text:"Crinos Shape", time:Buff.RATE_ROUNDS, tick:Infinity});
+		player.buff("CrinosShape").addStats({str:tempStr,tou:tempTou,spe:tempSpe}).withText("Crinos Shape").combatPermanent();
 		player.HP = oldHPratio*player.maxHP();
 		statScreenRefresh();
 		enemyAI();
@@ -2622,7 +2631,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FairyQueenRegalia)) evasionIncrease = 25;
 		outputText("You shrink to your minimum size, evading your opponent as you mock [monster his] attempt to hit you.\n\n");
 		player.createStatusEffect(StatusEffects.Minimise,50+evasionIncrease,0,0,0);
-		player.statStore.addBuff("str", -50,"Minimise",{text:"Minimise",time:Buff.RATE_ROUNDS,tick:Infinity});
+		player.buff("Minimise").addStats({"str":-50}).withText("Minimise").combatPermanent();
 		enemyAI();
 	}
 
@@ -2630,6 +2639,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		useMana(40, 1);
 		outputText("You grow back to your normal size.\n\n");
+		player.buff("Minimise").remove();
 		player.removeStatusEffect(StatusEffects.Minimise);
 		enemyAI();
 	}

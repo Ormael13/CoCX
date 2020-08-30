@@ -739,7 +739,6 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 			player.ballSize = 3;
 		}
 		if(player.inte > 35) {
-			player.inte = 35;
 			dynStats("int", -0.1);
 		}
 		if(player.lib < 50) {
@@ -788,7 +787,6 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 		if(player.thickness < player.maxThicknessCap()) {
 			player.modThickness(player.maxThicknessCap(),(player.maxThicknessCap() * 0.5));
 		}
-		if(player.inte > 21) player.inte = 21;
 		dynStats("str", 33,"tou", 33, "int", -1, "lib", 4, "lus", 40);
 		changed = true;
 		player.removePerk(PerkLib.Feeder);

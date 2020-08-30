@@ -219,16 +219,16 @@ public class BuffableStat implements IStat, Jsonable {
 	 *
 	 * Will reset & populate `recentlyRemovedTags`
 	 */
-	public function advanceTime(rate:int, ticks:int):void {
+	public function advanceTime(rate:int, tick:int):void {
 		if (rate == Buff.RATE_PERMANENT) throw "Invalid time unit "+rate;
-		if (ticks < 0) throw "Invalid ticks count "+ticks;
-		if (ticks == 0) return;
+		if (tick < 0) throw "Invalid ticks count "+tick;
+		if (tick == 0) return;
 		var changed:Boolean = false;
 		recentlyRemovedTags = {};
 		for (var i:int = _buffs.length-1; i>=0; i--) {
 			var buff:Buff = _buffs[i];
 			if (buff.rate == rate) {
-				buff.tick-=ticks;
+				buff.tick-=tick;
 				if (buff.tick <= 0) {
 					recentlyRemovedTags[buff.tag] = true;
 					_buffs.splice(i,1);

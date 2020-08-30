@@ -126,7 +126,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				if (player.statusEffectv1(StatusEffects.MarblesMilk) <= 0) {
 					needNext = true;
 					dynStats("tou", (-1 * player.statusEffectv3(StatusEffects.MarblesMilk)));
-					player.addCurse("str", -1 * player.statusEffectv2(StatusEffects.MarblesMilk));
+					player.buff("MarblesMilk").remove();
 					player.removeStatusEffect(StatusEffects.MarblesMilk);
 					//Text for when Marble's Milk effect wears off:
 					//[addiction is 10 or less] 
@@ -1147,8 +1147,7 @@ private function playerRefusesToDrinkBottledMilk():void {
 	//(decrease addiction by 5)
 	marbleStatusChange(-5,-5);
 	//(decrease player str and tou by 1.5)
-	dynStats("tou", -1);
-	player.addCurse("str", 1);
+	dynStats("str", 1,"tou", -1);
 	//(delay withdrawal effect)
 	//If the player is addicted, this item negates the withdrawal effects for a few hours (suggest 6), there will need to be a check here to make sure the withdrawal effect doesn't reactivate while the player is under the effect of 'Marble's Milk'.
 	if(player.hasStatusEffect(StatusEffects.BottledMilk)) {
@@ -1189,8 +1188,7 @@ private function playerDeclinesToDrinkMarbleMilk():void {
 	//(decrease affection by 5)
 	marbleStatusChange(-5,-5);
 	//(decrease player str and tou by 1.5)
-	dynStats("tou", -1);
-	player.addCurse("str", 1);
+	dynStats("str", -1,"tou", -1);
 	//(delay withdrawal for a few hours)
 	if(player.hasStatusEffect(StatusEffects.BottledMilk)) {
 		player.addStatusValue(StatusEffects.BottledMilk,1,(1 + rand(6)));
@@ -1238,8 +1236,7 @@ private function marbleChoreRefusal():void {
 	clearOutput();
 	outputText("You angrily tell her that you aren't going to work for her milk and turn away, leaving her visibly upset.  Your body seems to be upset at your refusal too, feeling painful all over.  Fortunately, you also feel a temporary reprieve from the symptoms of your withdrawal.");
 	//(decrease str and tou by 1.5)
-	dynStats("tou", -1);
-	player.addCurse("str", 1);
+	dynStats("str", -1,"tou", -1);
 	//(decrease affection by 5)
 	//(decrease addiction by 5)
 	marbleStatusChange(-5,-5);
@@ -1302,8 +1299,7 @@ private function AshamedAddictionBlame():void {
 	//(reduce addiction by 15)
 	marbleStatusChange(-100,-15);
 	//(decrease player str and tou by 1.5)
-	dynStats("tou", -1);
-	player.addCurse("str", 1);
+	dynStats("str", -1,"tou", -1);
 	//(delay withdrawal effect)
 	if(player.hasStatusEffect(StatusEffects.BottledMilk)) {
 		player.addStatusValue(StatusEffects.BottledMilk,1,(1 + rand(6)));
@@ -1351,8 +1347,7 @@ private function resistAddiction():void {
 	//(decrease addiction by 5)
 	marbleStatusChange(0,-5);
 	//(decrease player str and tou by 1.5)
-	dynStats("tou", -1);
-	player.addCurse("str", 1);
+	dynStats("str", -1,"tou", -1);
 	//(delay withdrawal for a few hours)
 	if(player.hasStatusEffect(StatusEffects.BottledMilk)) {
 		player.addStatusValue(StatusEffects.BottledMilk,1,(1 + rand(6)));
@@ -1392,8 +1387,7 @@ private function dumpMarblesMilk():void {
 	//(reduce addiction by 5)
 	marbleStatusChange(-5,-5);
 	//(reduce str and tou by 1.5)
-	dynStats("tou", -1);
-	player.addCurse("str", 1);
+	dynStats("str", -1,"tou", -1);
 	//(delay withdrawal for a few hours)
 	if(player.hasStatusEffect(StatusEffects.BottledMilk)) {
 		player.addStatusValue(StatusEffects.BottledMilk,1,(1 + rand(6)));
@@ -1957,6 +1951,7 @@ private function applyMarblesMilk():void {
 			tou = 100 - player.tou;
 			if(tou < 0) tou = 0;
 		}
+		player.statStore.replaceBuffObject({"str.mult":0.10,"tou.mult":0.10},"MarblesMilk",{text:"MarblesMilk"});
 		dynStats("str", str,"tou", tou);
 		player.changeStatusValue(StatusEffects.MarblesMilk,2,str);
 		player.changeStatusValue(StatusEffects.MarblesMilk,3,tou);

@@ -27,12 +27,12 @@ package classes.Items.HeadJewelries
 		}
 		
 		override public function playerEquip():HeadJewelry {
-			game.player.inte += 20;
+			game.player.statStore.addBuff('int',+20,'tag',{text:'CrownOfIntelligence'});
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():HeadJewelry {
-			game.player.inte -= 20;
+			game.player.statStore.removeBuffs('CrownOfIntelligence');
 			return super.playerRemove();
 		}
 		

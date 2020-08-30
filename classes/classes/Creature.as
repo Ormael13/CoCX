@@ -288,7 +288,7 @@ public class Creature extends Utils
 		public var speStat:PrimaryStat = _stats.findStat('spe') as PrimaryStat;
 		public function get spe2():Number { return speStat.value; }
 		public var intStat:PrimaryStat = _stats.findStat('int') as PrimaryStat;
-		public function get int2():Number { return intStat.value; }
+		public function get inte():Number { return intStat.value; }
 		public var wisStat:PrimaryStat = _stats.findStat('wis') as PrimaryStat;
 		public function get wis():Number { return Math.round(wisStat.value); }
 		public var libStat:PrimaryStat = _stats.findStat('lib') as PrimaryStat;
@@ -312,20 +312,20 @@ public class Creature extends Utils
 			if (statName == "sens" || statName == "cor") {
 				if (current >0){
 					if (power >= current) {
-						stat.removeBuff(statName);
+						stat.removeBuff('Curse');
 					}
 					else if (power < current) {
-						stat.addOrIncreaseBuff(statName, -power);
+						stat.addOrIncreaseBuff('Curse', -power);
 					}
 				}
 			}
 			else{
 				if (current <0){
 					if (power >= -current) {
-						stat.removeBuff(statName);
+						stat.removeBuff('Curse');
 					}
 					else if (power < -current) {
-						stat.addOrIncreaseBuff(statName, power);
+						stat.addOrIncreaseBuff('Curse', power);
 					}
 				}
 			}
@@ -334,7 +334,6 @@ public class Creature extends Utils
 		//Primary stats
 		public var tou:Number = 0;
 		public var spe:Number = 0;
-		public var inte:Number = 0;
 		public var lib:Number = 0;
 		public var sensStat:BuffableStat = _stats.findStat('sens') as BuffableStat;
 		public function get sens():Number { return sensStat.value; }
@@ -819,7 +818,7 @@ public class Creature extends Utils
 				cor:cor-prevCor
 			};
 		}
-		public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {
+		public function modStats(dstr:Number, dtou:Number, dspe:Number, dint:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {
 			var maxes:Object;
 			if (max) {
 				maxes = getAllMaxStats();
@@ -850,7 +849,14 @@ public class Creature extends Utils
 
 			tou  = Utils.boundFloat(mins.tou, tou + dtou, maxes.tou);
 			spe  = Utils.boundFloat(mins.spe, spe + dspe, maxes.spe);
-			inte = Utils.boundFloat(mins.inte, inte + dinte, maxes.inte);
+
+			//Inteligence
+			if (dint < 0){
+				addCurse("int", -dint);
+			}
+			if (dint > 0){
+				removeCurse("int", dint);
+			}
 
 			//Wisdom
 			if (dwis < 0){
@@ -2948,13 +2954,7 @@ public class Creature extends Utils
 				bonusSpe += 20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			}
 			if (game.player.necklaceName == "Magic coral and pearl necklace") bonusSpe += 10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-			if (bonusStr > 0) {
-				game.player.statStore.addBuff("str", bonusStr,"UnderwaterCombatBoost",{text:"Fighting Underwater",time:Buff.RATE_ROUNDS,tick:Infinity});
-			}
-			if (bonusSpe > 0) {
-				addStatusValue(StatusEffects.UnderwaterCombatBoost,2,bonusSpe);
-				game.player.spe += bonusSpe;
-			}
+			game.player.buff("UnderwaterCombatBoost").addStats({str:bonusStr,spe:bonusSpe}).withText("Fighting Underwater").combatPermanent();
 			HP = oldHPratio * maxHP();
 		}
 

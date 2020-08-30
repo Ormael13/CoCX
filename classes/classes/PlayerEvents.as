@@ -516,12 +516,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
 				player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
+				player.statStore.replaceBuffObject({ 'str': bonusStats,'tou': bonusStats,'spe': bonusStats}, 'Lycanthropy', { text: 'Lycanthropy'});
 				player.removePerk(PerkLib.LycanthropyDormant);
 				needNext = true;
 			}
 			if (player.werewolfScore() < 6 && player.hasPerk(PerkLib.Lycanthropy)) {
 				outputText("\nYou feel your animalistic urges go dormant within you as you no longer are the werewolf you once were. <b>Gained Dormant lycanthropy.</b>\n");
 				player.createPerk(PerkLib.LycanthropyDormant,0,0,0,0);
+				player.statStore.removeBuffs("Lycanthropy");
 				player.removePerk(PerkLib.Lycanthropy);
 				needNext = true;
 			}
@@ -649,8 +651,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				//Energy Dependent
 				if (player.hasStatusEffect(StatusEffects.EnergyDependent) && player.statusEffectv1(StatusEffects.EnergyDependent) > 0) {
 					player.addStatusValue(StatusEffects.EnergyDependent, 1, -1);
+					var intBuff:Number = player.buff("Energy Vampire").getValueOfStatBuff("int.mult");
+					var speBuff:Number = player.buff("Energy Vampire").getValueOfStatBuff("spe.mult");
+					if (intBuff > -0.9) {
+						player.buff("Energy Vampire").addStats({ "int.mult": -0.05 }).withText("Energy Vampire");
+					}
+					if (speBuff > -0.9) {
+						player.buff("Energy Vampire").addStats({ "spe.mult": -0.05 }).withText("Energy Vampire");
+					}
+					//too do remove the player.statusEffectv1 and the spe part when updating speed
 					player.spe -= 5;
-					player.inte -= 12;
 				}
 				//Tripxi firearms selection update
 				if (player.statusEffectv2(StatusEffects.TelAdreTripxi) == 3) {
@@ -731,55 +741,46 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 5) {
 						outputText("<b>\nYou can’t help but notice the moon is almost full as it rises up.  It seems transfixing like it is calling to you.");
 						outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>\n");
-						dynStats("tou", changeV, "spe", changeV);
-						player.statStore.replaceBuffObject({ 'str': changeV}, 'Lycantropy', { text: 'Lycantropy'});
+						player.statStore.replaceBuffObject({ 'str': 10,'tou': 10,'spe': 10}, 'Lycanthropy', { text: 'Lycanthropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,10);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 6) {
 						outputText("<b>\nWhen the almost-full moon appears it causes your heart to race with excitement.  You hearing seems better than ever.  Every breath brings a rush of smells through your nose that seem much more pronounced than they should.");
 						outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>\n");
-						dynStats("tou", changeV, "spe", changeV);
-						player.statStore.replaceBuffObject({ 'str': changeV}, 'Lycantropy', { text: 'Lycantropy'});
+						player.statStore.replaceBuffObject({ 'str': 20,'tou': 20,'spe': 20}, 'Lycanthropy', { text: 'Lycanthropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,20);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 7) {
 						outputText("<b>\nYou gaze at the moon and it seems to gaze back into you.   Something is coming and it won’t be long now.   You feel like you are crawling in your skin.  It feels like tear out of your body and be born anew.");
 						outputText("\n\nYou feel your might increasing as the moon draws closer to fullness. It's almost time.</b>\n");
-						dynStats("tou", changeV, "spe", changeV);
-						player.statStore.replaceBuffObject({ 'str': changeV}, 'Lycantropy', { text: 'Lycantropy'});
+						player.statStore.replaceBuffObject({ 'str': 30,'tou': 30,'spe': 30}, 'Lycanthropy', { text: 'Lycanthropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,30);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) {
 						outputText("<b>\nYou are at the peak of your strength, it's a full moon tonight and you feel yourself burning with maddening desire as you go into " + player.mf("rut your cock hardening and dripping precum at the prospect of impregnating a bitch womb full of your lupine seeds","heat your womb aching for the fresh semen of a virile male.") + "</b>\n.");
-						if (player.hasCock());
-						dynStats("tou", changeV, "spe", changeV);
-						player.statStore.replaceBuffObject({ 'str': changeV}, 'Lycantropy', { text: 'Lycantropy'});
+						player.statStore.replaceBuffObject({ 'str': 40,'tou': 40,'spe': 40}, 'Lycanthropy', { text: 'Lycanthropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,40);
 						if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
 						else if (player.hasVagina()) player.goIntoHeat(false);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1) {
 						outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
-						dynStats("tou", -changeV, "spe", -changeV);
-						player.statStore.replaceBuffObject({ 'str': -changeV}, 'Lycantropy', { text: 'Lycantropy'});
+						player.statStore.replaceBuffObject({ 'str': 30,'tou': 30,'spe': 30}, 'Lycanthropy', { text: 'Lycanthropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,30);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2) {
 						outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
-						dynStats("tou", -changeV, "spe", -changeV);
-						player.statStore.replaceBuffObject({ 'str': -changeV}, 'Lycantropy', { text: 'Lycantropy'});
+						player.statStore.replaceBuffObject({ 'str': 20,'tou': 20,'spe': 20}, 'Lycanthropy', { text: 'Lycanthropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,20);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3) {
 						outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
-						dynStats("tou", -changeV, "spe", -changeV);
-						player.statStore.replaceBuffObject({ 'str': -changeV}, 'Lycantropy', { text: 'Lycantropy'});
+						player.statStore.replaceBuffObject({ 'str': 10,'tou': 10,'spe': 10}, 'Lycanthropy', { text: 'Lycanthropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,10);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 4) {
 						outputText("<b>\nIt's a new moon tonight, you feel somewhat weak.</b>\n");
-						dynStats("tou", -changeV, "spe", -changeV);
-						player.statStore.replaceBuffObject({ 'str': -changeV}, 'Lycantropy', { text: 'Lycantropy'});
+						player.statStore.replaceBuffObject({ 'str': 0,'tou': 0,'spe': 0}, 'Lycanthropy', { text: 'Lycanthropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,0);
 					}
 					needNext = true;
@@ -983,7 +984,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 								player.takePhysDamage(player.maxHP() / 25);
 								fatigue(2);
 								dynStats("tou", -0.5);
-								player.addCurse("str", -1);
+								dynStats("str", -0.5);
 							}
 							else if ((model.time.hours + 2) % 4 == 0) { //Lose thickness 2x as fast.
 								player.modThickness(1, 1);
@@ -1260,7 +1261,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nThe bone chilling voice of Fenrir ring in the back of your mind.");
 				outputText("\n\n\"<i>How dare you throw away my gifts...</i>\"");
 				outputText("\n\nThe collar power suddenly forcefully surge through your body transforming you back. \"<b>You now have glowing icy eyes.</b>\"\n");
-				player.eyes.type = Eyes.FENRIR;
+				CoC.instance.mutations.setEyeTypeAndColor(Eyes.FENRIR, "glacial blue");
 				needNext = true;
 			}
 			//Fenrir Back Ice Shards
@@ -1949,18 +1950,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText("\n<b>The lust-increasing effects of harpy lipstick have worn off!\n</b>");
 					needNext = true;
 				}
-			}
-			if (player.hasStatusEffect(StatusEffects.DrunkenPower)) {
-				if (player.statusEffectv1(StatusEffects.DrunkenPower) <= 0) {
-					player.strStat.core.value -= player.statusEffectv2(StatusEffects.DrunkenPower);
-					player.spe += player.statusEffectv3(StatusEffects.DrunkenPower);
-					player.inte += player.statusEffectv3(StatusEffects.DrunkenPower);
-					player.lib -= player.statusEffectv2(StatusEffects.DrunkenPower);
-					player.removeStatusEffect(StatusEffects.DrunkenPower);
-					outputText("<b>Seems you are sober again.</b>\n\n");
-					needNext = true;
-				}
-				else player.addStatusValue(StatusEffects.DrunkenPower,1,-1);
 			}
 			if (player.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] >= 50 && player.findPerk(PerkLib.LuststickAdapted) < 0) { //Luststick resistance unlock
                 SceneLib.sophieBimbo.unlockResistance();

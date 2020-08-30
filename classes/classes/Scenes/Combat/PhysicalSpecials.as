@@ -357,10 +357,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 			}
-			if (player.lowerBody == LowerBody.PLANT_FLOWER) {
+			if (player.lowerBody == LowerBody.PLANT_FLOWER || player.hasPerk(PerkLib.FloralOvaries)) {
 				// Pollen
 				bd = buttons.add("AlraunePollen", AlraunePollen).hint("Release a cloud of your pollen in the air to arouse your foe.");
 				if (player.hasStatusEffect(StatusEffects.AlraunePollen)) bd.disable("<b>You already spread your pollen over battlefield.</b>\n\n");
+			}
+			if (player.lowerBody == LowerBody.PLANT_FLOWER) {
 				// Entangle
 				bd = buttons.add("Entangle", AlrauneEntangle).hint("Use your vines to hinder your opponent.");
 				if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) bd.disable("<b>You already entangle your opponent.</b>\n\n");
@@ -2727,8 +2729,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var EntangleSpeNerf:Number;
 		EntangleStrNerf = Math.round(monster.str * .5);
 		EntangleSpeNerf = Math.round(monster.spe * .5);
-		monster.strStat.core.value -= EntangleStrNerf;
-		monster.spe -= EntangleSpeNerf;
+		monster.statStore.addBuffObject({str:-EntangleStrNerf,spe:-EntangleStrNerf}, "EntangleNerf",{text:"EntangleNerf"});
 		if (player.hasPerk(PerkLib.RacialParagon)) EntangleSpeNerf *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) EntangleSpeNerf *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) EntangleSpeNerf *= 1.50;
@@ -3857,8 +3858,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 11) hydraBiteAttackpoweeeeer();
 		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12) hydraBiteAttackpoweeeeer();
 		//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
-		monster.strStat.core.value -= 2;
-		monster.spe -= 2;
+		monster.statStore.addBuffObject({str:-2,spe:-2}, "Poison",{text:"Poison"});
 		if(monster.spe < 1) monster.spe = 1;
 		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 		{
@@ -3916,8 +3916,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//(Otherwise)
 			else outputText("You lunge at the foe headfirst, fangs bared. You manage to catch " + monster.a + monster.short + " off guard, your needle-like fangs penetrating deep into " + monster.pronoun3 + " body. You quickly release your venom, and retreat before " + monster.pronoun1 + " manages to react.");
 			//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
-			monster.strStat.core.value -= 2;
-			monster.spe -= 2;
+			monster.statStore.addBuffObject({str:-2,spe:-2}, "Poison",{text:"Poison"});
 			if(monster.spe < 1) monster.spe = 1;
 			if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 			{
@@ -4011,15 +4010,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
+		//Frostbite for Fenrir
 		if(rand(player.spe/2 + 40) + 20 > monster.spe/1.5 || monster.hasStatusEffect(StatusEffects.Constricted)) {
 			//(if monster = demons)
 			if(monster.short == "demons") outputText("You look at the crowd for a moment, wondering which of their number you should bite. Your glance lands upon the leader of the group, easily spotted due to his snakeskin cloak. You quickly dart through the demon crowd as it closes in around you and lunge towards the broad form of the leader. You manage to catch the demon off guard, biting it viciously. The merciless cold of your bite transfer to your foe weakening it as you retreat before he manages to react.");
 			//(Otherwise)
 			else outputText("You lunge at the foe headfirst, maw open for a bite. You manage to catch the " + monster.a + monster.short + " off guard, biting it viciously. The merciless cold of your bite transfer to your foe weakening it as you retreat before " + monster.pronoun1 + " manages to react.");
 			//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
-			monster.strStat.core.value -= 5 + rand(5);
-			monster.spe -= 5 + rand(5);
+			monster.statStore.addBuffObject({str:-10,spe:-10}, "Poison",{text:"Poison"});
 			if(monster.spe < 1) monster.spe = 1;
 			if(monster.hasStatusEffect(StatusEffects.Frostbite))
 			{

@@ -2470,9 +2470,12 @@ public class Combat extends BaseContent {
         var accRange:Number = 0;
         accRange += (arrowsAccuracy() / 2);
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
-        if (player.hasPerk(PerkLib.PhantomShooting)) player.takePhysDamage(fc);
+        if (player.hasPerk(PerkLib.PhantomShooting))
+        {
+            if (player.weaponRange != weaponsrange.SHUNHAR && player.weaponRange != weaponsrange.KSLHARP && player.weaponRange != weaponsrange.LEVHARP) player.takePhysDamage(fc);
+        }
         else {
-            if (player.weaponRange != weaponsrange.SHUNHAR || player.weaponRange != weaponsrange.KSLHARP || player.weaponRange != weaponsrange.LEVHARP) player.ammo--;
+            if (player.weaponRange != weaponsrange.SHUNHAR && player.weaponRange != weaponsrange.KSLHARP && player.weaponRange != weaponsrange.LEVHARP) player.ammo--;
             fatigue(fc);
         }
         if (rand(100) < accRange) {
@@ -3812,7 +3815,7 @@ public class Combat extends BaseContent {
                 } else outputText("  You do not have enough venom to apply on [weapon]!\n");
             }
             if (player.weapon == weapons.DSSPEAR) {
-                monster.strStat.core.value -= 2;
+                monster.statStore.addBuff("str",-2, "DemonSnakeSpear",{text:"DemonSnakeSpear"});
                 monster.spe -= 2;
                 if (monster.spe < 1) monster.spe = 1;
                 if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
@@ -4378,8 +4381,10 @@ public class Combat extends BaseContent {
         if (damage < 0) damage = 1;
         if (apply) {
             monster.HP -= damage;
-            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round(damage / 5);
-            else monster.wrath += Math.round(damage / 10);
+            var BonusWrathMult:Number = 1;
+            if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
+            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
+            else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
         if (display) {
@@ -4445,8 +4450,10 @@ public class Combat extends BaseContent {
         if (damage < 0) damage = 1;
         if (apply) {
             monster.HP -= damage;
-            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round(damage / 5);
-            else monster.wrath += Math.round(damage / 10);
+            var BonusWrathMult:Number = 1;
+            if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
+            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
+            else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
         if (display) {
@@ -4518,8 +4525,10 @@ public class Combat extends BaseContent {
         if (damage < 0) damage = 1;
         if (apply) {
             monster.HP -= damage;
-            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round(damage / 5);
-            else monster.wrath += Math.round(damage / 10);
+            var BonusWrathMult:Number = 1;
+            if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
+            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
+            else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
         if (display) {
@@ -4604,8 +4613,10 @@ public class Combat extends BaseContent {
         if (damage < 0) damage = 1;
         if (apply) {
             monster.HP -= damage;
-            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round(damage / 5);
-            else monster.wrath += Math.round(damage / 10);
+            var BonusWrathMult:Number = 1;
+            if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
+            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
+            else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
         if (display) {
@@ -4681,8 +4692,10 @@ public class Combat extends BaseContent {
         if (damage < 0) damage = 1;
         if (apply) {
             monster.HP -= damage;
-            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round(damage / 5);
-            else monster.wrath += Math.round(damage / 10);
+            var BonusWrathMult:Number = 1;
+            if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
+            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
+            else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
         if (display) {
@@ -4754,8 +4767,10 @@ public class Combat extends BaseContent {
         if (damage < 0) damage = 1;
         if (apply) {
             monster.HP -= damage;
-            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round(damage / 5);
-            else monster.wrath += Math.round(damage / 10);
+            var BonusWrathMult:Number = 1;
+            if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
+            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
+            else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
         if (display) {
@@ -4821,8 +4836,10 @@ public class Combat extends BaseContent {
         if (damage < 0) damage = 1;
         if (apply) {
             monster.HP -= damage;
-            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round(damage / 5);
-            else monster.wrath += Math.round(damage / 10);
+            var BonusWrathMult:Number = 1;
+            if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
+            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
+            else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
         if (display) {
@@ -5568,6 +5585,18 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmgA *= 1.50;
             if (player.hasPerk(PerkLib.Apex)) lustDmgA *= 1.50;
             if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgA *= 1.50;
+            if (player.hasPerk(PerkLib.FloralOvaries)) lustDmgA *= 1.25;
+            if (player.hasPerk(PerkLib.FloralOvariesEvolved)) {
+                if (monster.isMaleOrHerm()) lustDmgA *= 1.50;
+                lustDmgA *= 1.25;
+            }
+            if (player.hasPerk(PerkLib.FloralOvariesFinalForm)) {
+                if (rand(100) > 80) {
+                    monster.createStatusEffect(StatusEffects.Fascinated,0,0,0,0);
+                }
+                lustDmgA *= 1.25;
+            }
+
             if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
             if (monster.lust < (monster.maxLust() * 0.5)) outputText(monster.capitalA + monster.short + " breaths in your pollen but does not have any visible effects just yet.");
             else if (monster.lust < (monster.maxLust() * 0.6)) {
@@ -5708,14 +5737,10 @@ public class Combat extends BaseContent {
             //Chance to cleanse!
             if (player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) {
                 outputText("You manage to cleanse [monster a] [monster name] venom from your system with your knowledge of medicine!\n\n");
-                player.spe += player.statusEffectv1(StatusEffects.NagaVenom);
-                mainView.statsView.showStatUp('spe');
-                // speUp.visible = true;
-                // speDown.visible = false;
                 player.removeStatusEffect(StatusEffects.NagaVenom);
             } else if (player.spe > 3) {
                 player.addStatusValue(StatusEffects.NagaVenom, 1, 2);
-                player.spe -= 2;
+                player.statStore.addBuffObject({"spe": player.statusEffectv1(StatusEffects.NagaVenom)}, "Poison", {text: "Poisoned!"})
             } else player.takePhysDamage(5);
             outputText("You wince in pain and try to collect yourself, [monster a] [monster name]'s venom still plaguing you.\n\n");
             player.takePhysDamage(2);
@@ -5725,36 +5750,18 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) {
                 outputText("You manage to cleanse [monster a] [monster name] venom from your system with your knowledge of medicine!\n\n");
                 player.statStore.removeBuffs("Poison");
-                player.statStore.removeBuffs("MedusaVenom")
-                player.tou += player.statusEffectv2(StatusEffects.MedusaVenom);
-                player.spe += player.statusEffectv3(StatusEffects.MedusaVenom);
-                player.inte += player.statusEffectv4(StatusEffects.MedusaVenom);
-                mainView.statsView.showStatUp('str');
-                mainView.statsView.showStatUp('tou');
-                mainView.statsView.showStatUp('spe');
-                mainView.statsView.showStatUp('inte');
                 player.removeStatusEffect(StatusEffects.MedusaVenom);
             } else if (player.str <= 5 && player.tou <= 5 && player.spe <= 5 && player.inte <= 5) player.takePhysDamage(5);
             else {
-                if (player.str > 5) {
-                    player.statStore.addBuff("str",-1,"Poison", {text:"Poisoned!",time:Buff.RATE_HOURS, tick:2})
-                }
-                if (player.tou > 5) {
-                    player.addStatusValue(StatusEffects.MedusaVenom, 2, 1);
-                    player.tou -= 1;
-                }
-                if (player.spe > 5) {
-                    player.addStatusValue(StatusEffects.MedusaVenom, 3, 1);
-                    player.spe -= 1;
-                }
-                if (player.inte > 5) {
-                    player.addStatusValue(StatusEffects.MedusaVenom, 4, 1);
-                    player.inte -= 1;
-                }
+                player.addStatusValue(StatusEffects.MedusaVenom, 1, 2);
+                player.addStatusValue(StatusEffects.MedusaVenom, 2, 1);
+                player.statStore.addBuffObject({"str": player.statusEffectv1(StatusEffects.MedusaVenom), "tou": player.statusEffectv1(StatusEffects.MedusaVenom), "spe": player.statusEffectv1(StatusEffects.MedusaVenom), "int": player.statusEffectv2(StatusEffects.MedusaVenom)}, "Poison", {text: "Poisoned!"})
             }
             outputText("You wince in pain and try to collect yourself, [monster a] [monster name]'s venom still plaguing you.\n\n");
             player.takePhysDamage(2);
-        } else if (player.hasStatusEffect(StatusEffects.TemporaryHeat)) {
+        }
+        //Temporary heat
+        if (player.hasStatusEffect(StatusEffects.TemporaryHeat)) {
             //Chance to cleanse!
             if (player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) {
                 outputText("You manage to cleanse the heat and rut drug from your system with your knowledge of medicine!\n\n");
@@ -6829,18 +6836,20 @@ public class Combat extends BaseContent {
     public function wrathregeneration(combat:Boolean = true):void {
         var gainedwrath:Number = 0;
         if (combat) {
-            gainedwrath += wrathregeneration2() * 2;
-            if (player.hasStatusEffect(StatusEffects.Berzerking)) gainedwrath += 6;
-            if (player.hasStatusEffect(StatusEffects.Lustzerking)) gainedwrath += 6;
-            if (player.hasStatusEffect(StatusEffects.Rage)) gainedwrath += 6;
-            if (player.hasStatusEffect(StatusEffects.OniRampage)) gainedwrath += 12;
+            var BonusWrathMult:Number = 1;
+            if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
+            gainedwrath += wrathregeneration2() * 2 * BonusWrathMult;
+            if (player.hasStatusEffect(StatusEffects.Berzerking)) gainedwrath += 6*BonusWrathMult;
+            if (player.hasStatusEffect(StatusEffects.Lustzerking)) gainedwrath += 6*BonusWrathMult;
+            if (player.hasStatusEffect(StatusEffects.Rage)) gainedwrath += 6*BonusWrathMult;
+            if (player.hasStatusEffect(StatusEffects.OniRampage)) gainedwrath += 12*BonusWrathMult;
             if (player.statStore.hasBuff("CrinosShape")) {
                 gainedwrath += 2;
-                if (player.hasPerk(PerkLib.ImprovedCrinosShape)) gainedwrath += 4;
-                if (player.hasPerk(PerkLib.GreaterCrinosShape)) gainedwrath += 6;
-                if (player.hasPerk(PerkLib.MasterCrinosShape)) gainedwrath += 8;
+                if (player.hasPerk(PerkLib.ImprovedCrinosShape)) gainedwrath += 4*BonusWrathMult;
+                if (player.hasPerk(PerkLib.GreaterCrinosShape)) gainedwrath += 6*BonusWrathMult;
+                if (player.hasPerk(PerkLib.MasterCrinosShape)) gainedwrath += 8*BonusWrathMult;
             }
-            if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) gainedwrath *= 2;
+            if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) gainedwrath *= 2*BonusWrathMult;
             EngineCore.WrathChange(gainedwrath, false);
         } else {
             gainedwrath += wrathregeneration2();
@@ -6850,39 +6859,41 @@ public class Combat extends BaseContent {
 
     public function wrathregeneration2():Number {
         var wrathregen:Number = 0;
-        if (player.hasPerk(PerkLib.DoubleAttackSmall)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.TripleAttackSmall)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.QuadrupleAttackSmall)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.PentaAttackSmall)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.HexaAttackSmall)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.HectaAttackSmall)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.OctaAttackSmall)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.NonaAttackSmall)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.DecaAttackSmall)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.DoubleAttack)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.TripleAttack)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.QuadrupleAttack)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.PentaAttack)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.HexaAttack)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.DoubleAttackLarge)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.TripleAttackLarge)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.ClawTraining)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.ExtraClawAttack)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.MultiClawAttack)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.ClawingFlurry)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.JobBeastWarrior)) wrathregen += 2;
-        if (player.hasPerk(PerkLib.PrimalFuryI)) wrathregen += 2;
-        if (player.hasPerk(PerkLib.PrimalFuryII)) wrathregen += 2;
-        if (player.hasPerk(PerkLib.PrimalFuryIII)) wrathregen += 2;
-        if (player.hasPerk(PerkLib.PrimalFuryIV)) wrathregen += 2;
-        if (player.hasPerk(PerkLib.PrimalFuryV)) wrathregen += 2;
-        if (player.hasPerk(PerkLib.PrimalFuryVI)) wrathregen += 2;
-        if (player.hasPerk(PerkLib.Berzerker)) wrathregen += 2;
-        if (player.hasPerk(PerkLib.Lustzerker)) wrathregen += 2;
-        if (player.hasPerk(PerkLib.Rage)) wrathregen += 2;
-        if (player.hasPerk(PerkLib.Anger)) wrathregen += 2;
-        if (player.hasPerk(PerkLib.OrcAdrenalGlandsFinalForm)) wrathregen += 4;
-        if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) wrathregen += 4;
+        var BonusWrathMult:Number = 1;
+        if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 2;
+        if (player.hasPerk(PerkLib.DoubleAttackSmall)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.TripleAttackSmall)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.QuadrupleAttackSmall)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.PentaAttackSmall)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.HexaAttackSmall)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.HectaAttackSmall)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.OctaAttackSmall)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.NonaAttackSmall)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.DecaAttackSmall)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.DoubleAttack)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.TripleAttack)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.QuadrupleAttack)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.PentaAttack)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.HexaAttack)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.DoubleAttackLarge)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.TripleAttackLarge)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.ClawTraining)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.ExtraClawAttack)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.MultiClawAttack)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.ClawingFlurry)) wrathregen += 1*BonusWrathMult;
+        if (player.hasPerk(PerkLib.JobBeastWarrior)) wrathregen += 2*BonusWrathMult;
+        if (player.hasPerk(PerkLib.PrimalFuryI)) wrathregen += 2*BonusWrathMult;
+        if (player.hasPerk(PerkLib.PrimalFuryII)) wrathregen += 2*BonusWrathMult;
+        if (player.hasPerk(PerkLib.PrimalFuryIII)) wrathregen += 2*BonusWrathMult;
+        if (player.hasPerk(PerkLib.PrimalFuryIV)) wrathregen += 2*BonusWrathMult;
+        if (player.hasPerk(PerkLib.PrimalFuryV)) wrathregen += 2*BonusWrathMult;
+        if (player.hasPerk(PerkLib.PrimalFuryVI)) wrathregen += 2*BonusWrathMult;
+        if (player.hasPerk(PerkLib.Berzerker)) wrathregen += 2*BonusWrathMult;
+        if (player.hasPerk(PerkLib.Lustzerker)) wrathregen += 2*BonusWrathMult;
+        if (player.hasPerk(PerkLib.Rage)) wrathregen += 2*BonusWrathMult;
+        if (player.hasPerk(PerkLib.Anger)) wrathregen += 2*BonusWrathMult;
+        if (player.hasPerk(PerkLib.OrcAdrenalGlandsFinalForm)) wrathregen += 4*BonusWrathMult;
+        if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) wrathregen += 4*BonusWrathMult;
         if (player.necklace == necklaces.CSNECK) {
             var csneckb:Number = 2;
             if (player.wrath >= player.wrath100 * 0.2) csneckb += 2;
@@ -6892,15 +6903,15 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.Lycanthropy)) csneckb *= 2;
             wrathregen += csneckb;
         }
-        if (player.jewelry == jewelries.FLLIRNG) wrathregen += 1;
-        if (player.jewelry == jewelries.INMORNG) wrathregen += 1;
-        if (player.jewelry2 == jewelries.FLLIRNG) wrathregen += 1;
-        if (player.jewelry2 == jewelries.INMORNG) wrathregen += 1;
-        if (player.jewelry3 == jewelries.FLLIRNG) wrathregen += 1;
-        if (player.jewelry3 == jewelries.INMORNG) wrathregen += 1;
-        if (player.jewelry4 == jewelries.FLLIRNG) wrathregen += 1;
-        if (player.jewelry4 == jewelries.INMORNG) wrathregen += 1;
-        if (player.jewelry4 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS || player.jewelry2 == jewelries.UNDKINS || player.jewelry == jewelries.UNDKINS) wrathregen += 3;
+        if (player.jewelry == jewelries.FLLIRNG) wrathregen += 1*BonusWrathMult;
+        if (player.jewelry == jewelries.INMORNG) wrathregen += 1*BonusWrathMult;
+        if (player.jewelry2 == jewelries.FLLIRNG) wrathregen += 1*BonusWrathMult;
+        if (player.jewelry2 == jewelries.INMORNG) wrathregen += 1*BonusWrathMult;
+        if (player.jewelry3 == jewelries.FLLIRNG) wrathregen += 1*BonusWrathMult;
+        if (player.jewelry3 == jewelries.INMORNG) wrathregen += 1*BonusWrathMult;
+        if (player.jewelry4 == jewelries.FLLIRNG) wrathregen += 1*BonusWrathMult;
+        if (player.jewelry4 == jewelries.INMORNG) wrathregen += 1*BonusWrathMult;
+        if (player.jewelry4 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS || player.jewelry2 == jewelries.UNDKINS || player.jewelry == jewelries.UNDKINS) wrathregen += 3*BonusWrathMult;
         return wrathregen;
     }
 
@@ -7201,7 +7212,7 @@ public class Combat extends BaseContent {
                 }
             }
             monster.spe -= monster.statusEffectv1(StatusEffects.NagaVenom);
-            monster.strStat.core.value -= monster.statusEffectv1(StatusEffects.NagaVenom);
+            monster.statStore.addBuff("str",-monster.statusEffectv1(StatusEffects.NagaVenom), "NagaVenom",{text:"NagaVenom"});
             if (monster.spe < 1) monster.spe = 1;
             if (monster.statusEffectv3(StatusEffects.NagaVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.NagaVenom);
             if (combatIsOver()) return;
@@ -7348,6 +7359,18 @@ public class Combat extends BaseContent {
         combatRound++;
         player.statStore.advanceTime(Buff.RATE_ROUNDS,1);
         monster.statStore.advanceTime(Buff.RATE_ROUNDS,1);
+        if (player.statStore.recentlyRemovedTags["WarriorsRage"]){
+            EngineCore.outputText("\nYour warriors rage has ended.\n");
+        }
+        if (player.statStore.recentlyRemovedTags["Might"]){
+            EngineCore.outputText("\nYour powers wanes as your Might spell ends.\n");
+        }
+        if (player.statStore.recentlyRemovedTags["Might"]){
+            EngineCore.outputText("\nYour powers wanes as your Might spell ends.\n");
+        }
+        if (player.statStore.recentlyRemovedTags["Blink"]){
+            EngineCore.outputText("\nYour speeds wanes as your Blink spell ends.\n");
+        }
         statScreenRefresh();
         flags[kFLAGS.ENEMY_CRITICAL] = 0;
         combatIsOver();

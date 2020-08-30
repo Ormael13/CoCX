@@ -56,16 +56,12 @@ WIN:
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] >= 300 && model.time.hours == 1 && rand(5) == 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] = 1;
 			//hangover status stuff
 			if (player.statStore.hasBuff("Hangover")) {
-			//Countdown
-				if (player.statStore.hasBuff("Hangover"));
-				else {
-					outputText("\n<b>Your head finally clears as your hangover wears off.  Drinking with the shemale lizard was definitely a bad idea.</b>\n");
-					//Restore stats
-					dynStats("cor", 0);
-					//Clear status
-					player.statStore.removeBuffs("Hangover");
-					return true;
-				}
+				outputText("\n<b>Your head finally clears as your hangover wears off.  Drinking with the shemale lizard was definitely a bad idea.</b>\n");
+				//Restore stats
+				dynStats("cor", 0);
+				//Clear status
+				player.statStore.removeBuffs("Hangover");
+				return true;
 			}
 			if (model.time.hours > 23 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00227] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00227]--; //Reduce drinking contest bonus
 			return false;
@@ -567,46 +563,10 @@ private function applyHangover():void {
 	//Already hungover?  Reset duration.
 	if(player.statStore.hasBuff("Hangover")) {
 		player.statStore.addBuff("str",-1,"Hangover",{text:"Hangover",time:Buff.RATE_HOURS, tick:8});
-		player.statStore.addTicksToBuffs("Hangover", 8)
 	}
 	//No hangover yet?  Create and yoink stats
 	else {
-		//Strength minus 5
-		var index:int = 5;
-		while(index > 0) {
-			index--;
-			//If PC has strength to lose
-			if(player.str >= 2) {
-				mainView.statsView.showStatDown( 'str' );
-				player.statStore.addBuff("str",-1,"Hangover",{text:"Hangover",time:Buff.RATE_HOURS, tick:8});
-			}
-		}
-		//speed minus 10
-		index = 10;
-		while(index > 0) {
-			index--;
-			//If PC has speed to lose
-			if(player.spe >= 2) {
-				mainView.statsView.showStatDown( 'spe' );
-				// speDown.visible = true;
-				// speUp.visible = false;
-				player.spe--;
-				player.addStatusValue(StatusEffects.Hangover,3,1);
-			}
-		}
-		//int minus 15
-		index = 15;
-		while(index > 0) {
-			index--;
-			//If PC has intelligence to lose
-			if(player.inte >= 2) {
-				mainView.statsView.showStatDown( 'inte' );
-				// inteDown.visible = true;
-				// inteUp.visible = false;
-				player.inte--;
-				player.addStatusValue(StatusEffects.Hangover,4,1);
-			}
-		}
+		player.statStore.addBuffObject({"str":-5,"spe":-10,"int":-15},"Hangover",{text:"Hangover",time:Buff.RATE_HOURS, tick:8});
 	}
 	statScreenRefresh();
 }

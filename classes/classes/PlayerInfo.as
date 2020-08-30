@@ -1319,7 +1319,7 @@ public class PlayerInfo extends BaseContent {
 		player.strStat.core.value += player.tempStr;
 		player.tou += player.tempTou;
 		player.spe += player.tempSpe;
-		player.inte += player.tempInt;
+		player.intStat.core.value += player.tempInt;
 		player.wisStat.core.value += player.tempWis;
 		player.lib += player.tempLib;
 		player.tempStr = 0;

@@ -50,10 +50,10 @@ public class StatStore implements IStatHolder {
 	 *
 	 * Will reset & populate `recentlyRemovedTags`
 	 */
-	public function advanceTime(rate:int, ticks:int):void {
+	public function advanceTime(rate:int, tick:int):void {
 		recentlyRemovedTags = {};
 		forEachStat(function(stat:BuffableStat):void{
-			stat.advanceTime(rate, ticks);
+			stat.advanceTime(rate, tick);
 			Utils.extend(recentlyRemovedTags, stat.recentlyRemovedTags);
 		},BuffableStat);
 	}

@@ -184,6 +184,12 @@ public class EventParser {
                 CoC.instance.model.time.hours = 0;
                 CoC.instance.model.time.days++;
                 player.statStore.advanceTime(Buff.RATE_DAYS,1);
+                if (player.statStore.recentlyRemovedTags["KitsuneShrine"]){
+                    EngineCore.outputText("\nYou feel like you should meditate again at the kitsune shrine as the serenity and peace you have recently aquired has waned.\n");
+                }
+                if (player.statStore.recentlyRemovedTags["WellFed"]){
+                    EngineCore.outputText("\nYou begin feeling hungry again as the satisfaction of your last cooked meal has all but disapeared.\n");
+                }
             } else if (CoC.instance.model.time.hours == 21) {
                 if (CoC.instance.flags[kFLAGS.LETHICE_DEFEATED] <= 0) EngineCore.outputText("\nThe sky darkens as a starless night falls.  The blood-red moon slowly rises up over the horizon.\n");
                 else EngineCore.outputText("\nThe sky darkens as a starry night falls.  The blood-red moon slowly rises up over the horizon.\n");

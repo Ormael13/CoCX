@@ -2003,27 +2003,27 @@ public function FightHellfireSnail():void {
 			StatsMenuSpe();
 		}
 		public function AddInte1():void {
-			player.inte = player.inte + 1;
+			player.intStat.core.value += 1;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function AddInte2():void {
-			player.inte = player.inte + 10;
+			player.intStat.core.value += 10;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function AddInte3():void {
-			player.inte = player.inte + 50;
+			player.intStat.core.value += 50;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function AddInte4():void {
-			player.inte = player.inte + 200;
+			player.intStat.core.value += 200;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function AddInte5():void {
-			player.inte = player.inte + 1000;
+			player.intStat.core.value += 1000;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
@@ -2203,27 +2203,27 @@ public function FightHellfireSnail():void {
 			StatsMenuSpe();
 		}
 		public function SubInte1():void {
-			player.inte = player.inte - 1;
+			player.intStat.core.value -= 1;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function SubInte2():void {
-			player.inte = player.inte - 10;
+			player.intStat.core.value -= 10;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function SubInte3():void {
-			player.inte = player.inte - 50;
+			player.intStat.core.value -= 50;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function SubInte4():void {
-			player.inte = player.inte - 200;
+			player.intStat.core.value -= 200;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function SubInte5():void {
-			player.inte = player.inte - 1000;
+			player.intStat.core.value -= 1000;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
@@ -2370,7 +2370,7 @@ public function FightHellfireSnail():void {
 			PerksGemsEXPLvL();
 		}
 		public function TestDynamicStats():void {
-			player.statStore.addBuff('sens',+10,'tag',{text:'Debug buff!', rate: Buff.RATE_HOURS, ticks: 1});
+			player.statStore.addBuff('sens',+10,'tag',{text:'Debug buff!', rate: Buff.RATE_HOURS, tick: 1});
 			statScreenRefresh();
 		}
 		public function AddLvL1():void {

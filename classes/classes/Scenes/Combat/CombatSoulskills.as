@@ -1251,7 +1251,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			mainView.statsView.showStatUp('tou');
 			// touUp.visible = true;
 			// touDown.visible = false;
-			player.statStore.addBuffObject({str:TranceBoost,tou:TranceBoost}, "TranceTransformation", {Text:"Trance Transformation", time:Buff.RATE_ROUNDS, tick:Infinity});
+			player.buff("TranceTransformation").addStats({str:TranceBoost,tou:TranceBoost}).withText("Trance Transformation").combatPermanent();
 			statScreenRefresh();
 		};
 		var tempStrTou:Number = 0;
@@ -1274,7 +1274,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.soulforce -= soulforcecost;
 		if (!player.statStore.hasBuff("BeatOfWar"))
 		mainView.statsView.showStatUp('str');
-		player.statStore.addBuff("str.mult", +0.15, "BeatOfWar", {text:"Beat of War", time:Buff.RATE_ROUNDS, ticks:Infinity});
+		player.buff("BeatOfWar").addStats({"str.mult":0.15}).withText("Beat of War").combatPermanent();
 		statScreenRefresh();
 		outputText("You momentarily attune yourself to the song of the mother tree, and prepare to add a note of your own to it’s rhythm. You feel the beat shift the song’s tempo slightly, taking a twist towards the ominous. This attunement augments your strength.\n\n");
 		combat.basemeleeattacks();

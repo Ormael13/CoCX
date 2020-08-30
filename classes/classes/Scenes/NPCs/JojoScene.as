@@ -1046,11 +1046,26 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 		else if (player.cor > 40)
 			cleanse -= 1;
 		dynStats("cor", cleanse - player.countCockSocks("alabaster"));
-		if (player.str < 45) dynStats("str", 1); //Str boost to 45
-		if (player.tou < 45) dynStats("tou", 1); //Tou boost to 45
-		if (player.spe < 75) dynStats("spe", 1); //Speed boost to 75
-		if (player.inte < 80) dynStats("int", 1); //Int boost to 80
-		if (player.lib > 0) dynStats("lib", -1); //Libido lower to 15
+		if (player.str < 45){
+			dynStats("str", 1); //Str boost to 45
+			player.strStat.core.value += .5;
+		}
+		if (player.tou < 45){
+			dynStats("tou", 1); //Tou boost to 45
+			player.touStat.core.value += .5;
+		}
+		if (player.spe < 75){
+			dynStats("spe", 1); //Speed boost to 75
+			player.speStat.core.value += .5;
+		}
+		if (player.inte < 80){
+			dynStats("int", 1); //Int boost to 80
+			player.intStat.core.value += .5;
+		}
+		if (player.wis < 100){
+			dynStats("wis", 1); //Wisdom boost to 100
+			player.wisStat.core.value += .5;
+		}
 		flags[kFLAGS.JOJO_LAST_MEDITATION] = model.time.days;
 		player.addStatusValue(StatusEffects.JojoMeditationCount, 1, 1);
 	}
@@ -3042,10 +3057,31 @@ public function apparantlyJojoDOESlift():void
 		outputText(enlightenedBlurbs[rand(enlightenedBlurbs.length)] + "\n\n");
 	}
 	//Boost attributes!
-	if (player.str < 50) dynStats("str", 0.5);
-	if (player.str < 80) dynStats("str", 0.5);
-	if (player.inte < 50) dynStats("inte", 0.5);
-	if (player.inte < 80) dynStats("inte", 0.5);
+	if (player.str < 50) {
+		dynStats("str", 1); //Str boost to 45
+		player.strStat.core.value += .5;
+	}
+	if (player.str < 80) {
+		dynStats("str", 1); //Str boost to 45
+		player.strStat.core.value += .5;
+	}
+	if (player.inte < 50){
+		dynStats("int", 1); //Int boost to 80
+		player.intStat.core.value += .5;
+	}
+	if (player.inte < 80){
+		dynStats("int", 1); //Int boost to 80
+		player.intStat.core.value += .5;
+	}
+	if (player.wis < 50){
+		dynStats("wis", 1); //Wisdom boost to 100
+		player.wisStat.core.value += .5;
+	}
+	if (player.wis < 100){
+		dynStats("wis", 1); //Wisdom boost to 100
+		player.wisStat.core.value += .5;
+	}
+
 	menu();
 	doNext(camp.returnToCampUseOneHour);
 }

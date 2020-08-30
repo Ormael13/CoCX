@@ -294,7 +294,7 @@ public function startUrtaQuest():void {
 	player.strStat.core.value = 143;
 	player.tou = 183;
 	player.spe = 178;
-	player.inte = 60;
+	player.intStat.core.value = 60;
 	player.wisStat.core.value = 50;
 	player.lib = 90;
 	player.sensStat.redefine({base:50});
@@ -309,7 +309,7 @@ public function startUrtaQuest():void {
 	player.strStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 34);
 	player.tou += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 37);
 	player.spe += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 40);
-	player.inte += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 20);
+	player.intStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 20);
 	player.wisStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 18);
 	player.lib += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30);
 	var UrtaMulti:Number = 1;
@@ -320,7 +320,7 @@ public function startUrtaQuest():void {
 	player.strStat.core.value = Math.round(player.str * UrtaMulti);
 	player.tou = Math.round(player.tou * UrtaMulti);
 	player.spe = Math.round(player.spe * UrtaMulti);
-	player.inte = Math.round(player.inte * UrtaMulti);
+	player.intStat.core.value = Math.round(player.inte * UrtaMulti);
 	player.wisStat.core.value = Math.round(player.wis * UrtaMulti);
 	player.lib = Math.round(player.lib * UrtaMulti);
 
@@ -1700,7 +1700,7 @@ private function gnollAlphaBitchIntro():void {
 	monster.strStat.core.value += 20 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 	monster.tou += 25 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 	monster.spe += 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-	monster.inte += 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);			
+	monster.intStat.core.value += 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 	monster.lib += 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 	monster.bonusHP = 750;
 	monster.level += 11;

@@ -20,7 +20,8 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.SceneLib;
 	import classes.Items.MutationsHelper;
-	import classes.display.SpriteDb;
+import classes.Stats.Buff;
+import classes.display.SpriteDb;
 	import classes.internals.SaveableState;
 
 public class LunaFollower extends NPCAwareContent implements SaveableState
@@ -267,9 +268,14 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
 			if (player.findPerk(PerkLib.Lycanthropy) < 0) player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
+			player.statStore.replaceBuffObject({ 'str': bonusStats,'tou': bonusStats,'spe': bonusStats}, 'Lycanthropy', { text: 'Lycanthropy'});
+			player.strStat.core.value += 5;
+			player.touStat.core.value += 5;
+			player.speStat.core.value += 5;
+			player.libStat.core.value += 5;
 			player.dynStats("cor", 20);
 			statScreenRefresh();
-			outputText("Barely satiated your eyes now focus back on Luna, lust overwhelming your cursed body. You must have her... NOW!\n\n");
+			outputText("Surging with newfound strenght and barely satiated your eyes now focus back on Luna, lust overwhelming your cursed body. You must have her... NOW!\n\n");
 			doNext(sexMenuDominateHer);
 		}
 		
@@ -352,6 +358,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				HPChange(Math.round(player.maxHP() * .1), true);
 				player.mana += Math.round(player.maxMana() * 0.1);
 				if (player.mana > player.maxMana()) player.mana = player.maxMana();
+				player.buff("WellFed").setStats({"str.mult":0.05,"tou.mult":0.05,"spe.mult":0.05}).forDays(1).withText("Well Fed");
 				EngineCore.changeFatigue(-(Math.round(player.maxFatigue() * 0.1)));
 				flags[kFLAGS.LUNA_MEAL] = 1;
 				lunaJealousy(-100);

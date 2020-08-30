@@ -79,7 +79,7 @@ public class Race {
     public static const JIANGSHI:Race = new Race("Jiangshi",75);
     public static const POLTERGEIST:Race = new Race("Poltergeist",76);
     public static const BANSHEE:Race = new Race("Banshee",77);
-    public static const MELKIE:Race = new Race("Yuki Onna",78);
+    public static const MELKIE:Race = new Race("Melkie",78);
     public static const EASTERBUNNY:Race = new Race("Easter Bunny",79);
     public static const CENTIPEDE:Race = new Race("Centipede",80);
     public static const FROSTWYRM:Race = new Race("Frost Wyrm",81);
