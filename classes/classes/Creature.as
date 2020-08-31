@@ -3465,6 +3465,7 @@ public class Creature extends Utils
 		public function isScylla():Boolean { return lowerBodyPart.isScylla(); }
 		public function isKraken():Boolean { return lowerBodyPart.isKraken(); }
 		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
+		public function isLiliraune():Boolean { return lowerBodyPart.isLiliraune(); }
 		
 		public function isFlying():Boolean {
 			return hasStatusEffect(StatusEffects.Flying);

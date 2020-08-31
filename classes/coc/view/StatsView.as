@@ -324,8 +324,8 @@ public class StatsView extends Block {
 		speBar.value          = player.spe;
 		intBar.maxValue       = player.intStat.max;
 		intBar.value          = player.inte;
-		wisBar.maxValue       = maxes.wis;
-		wisBar.value          = player.wisStat.max;
+		wisBar.maxValue       = player.wisStat.max;
+		wisBar.value          = maxes.wis;
 		libBar.maxValue       = maxes.lib;
 		libBar.value          = player.lib;
 		senBar.maxValue       = maxes.sens;

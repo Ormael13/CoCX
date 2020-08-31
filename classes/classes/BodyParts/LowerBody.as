@@ -71,6 +71,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const CANCER:int                = 61;
 	public static const FROSTWYRM:int             = 62;
 	public static const USHI_ONI_ONNA:int         = 63;
+	public static const FLOWER_LILIRAUNE:int	  = 64;
 	// Don't forget to add new types in DebugMenu.as list LOWER_TYPE_CONSTANTS
 	
 	override public function set type(value:int):void {
@@ -368,6 +369,9 @@ public class LowerBody extends SaveableBodyPart {
 	}
 	public function isAlraune():Boolean {
 		return type == PLANT_FLOWER;
+	}
+	public function isLiliraune():Boolean {
+		return type == FLOWER_LILIRAUNE;
 	}
 	
 	override protected function loadFromOldSave(savedata:Object):void {

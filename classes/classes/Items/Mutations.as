@@ -48,7 +48,6 @@ public final class Mutations extends MutationsHelper {
             }
             bonusempower += (20 * (1 + player.newGamePlusMod()));
             player.statStore.addBuffObject({str:bonusempower,spe:-bonusdepower,inte:-bonusdepower,lib:bonusempower}, "DrunkenPowerEmpower",{text:"Drunken Power", time:Buff.RATE_HOURS, tick:durationhour});
-            //TODO WE MUST ADD SOME TEXT TO SAY WHEN PC BECOMES SOBER AGAIN
         }
 
         public function DrunkenPowerEmpowerOni():Number {
@@ -8776,7 +8775,6 @@ public final class Mutations extends MutationsHelper {
                 outputText("Bimbo Body)\n");
                 player.removePerk(PerkLib.BimboBrains);
                 player.removePerk(PerkLib.BimboBody);
-                player.buff("FutaBimboBroBrain").withText("Futa Brain");
                 player.createPerk(PerkLib.FutaForm, 0, 0, 0, 0);
                 player.createPerk(PerkLib.FutaFaculties, 0, 0, 0, 0);
                 outputText("(Gained Perks - Futa Form, Futa Faculties)</b>");

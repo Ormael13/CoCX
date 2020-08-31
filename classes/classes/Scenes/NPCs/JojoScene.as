@@ -1046,23 +1046,23 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 		else if (player.cor > 40)
 			cleanse -= 1;
 		dynStats("cor", cleanse - player.countCockSocks("alabaster"));
-		if (player.str < 45){
+		if (player.strStat.core.value < 45){
 			dynStats("str", 1); //Str boost to 45
 			player.strStat.core.value += .5;
 		}
-		if (player.tou < 45){
+		if (player.touStat.core.value < 45){
 			dynStats("tou", 1); //Tou boost to 45
 			player.touStat.core.value += .5;
 		}
-		if (player.spe < 75){
+		if (player.speStat.core.value < 75){
 			dynStats("spe", 1); //Speed boost to 75
 			player.speStat.core.value += .5;
 		}
-		if (player.inte < 80){
+		if (player.intStat.core.value < 80){
 			dynStats("int", 1); //Int boost to 80
 			player.intStat.core.value += .5;
 		}
-		if (player.wis < 100){
+		if (player.wisStat.core.value < 100){
 			dynStats("wis", 1); //Wisdom boost to 100
 			player.wisStat.core.value += .5;
 		}
@@ -3057,27 +3057,27 @@ public function apparantlyJojoDOESlift():void
 		outputText(enlightenedBlurbs[rand(enlightenedBlurbs.length)] + "\n\n");
 	}
 	//Boost attributes!
-	if (player.str < 50) {
+	if (player.strStat.core.value < 50) {
 		dynStats("str", 1); //Str boost to 45
 		player.strStat.core.value += .5;
 	}
-	if (player.str < 80) {
+	if (player.strStat.core.value < 80) {
 		dynStats("str", 1); //Str boost to 45
 		player.strStat.core.value += .5;
 	}
-	if (player.inte < 50){
+	if (player.intStat.core.value < 50){
 		dynStats("int", 1); //Int boost to 80
 		player.intStat.core.value += .5;
 	}
-	if (player.inte < 80){
+	if (player.intStat.core.value < 80){
 		dynStats("int", 1); //Int boost to 80
 		player.intStat.core.value += .5;
 	}
-	if (player.wis < 50){
+	if (player.wisStat.core.value < 50){
 		dynStats("wis", 1); //Wisdom boost to 100
 		player.wisStat.core.value += .5;
 	}
-	if (player.wis < 100){
+	if (player.wisStat.core.value < 100){
 		dynStats("wis", 1); //Wisdom boost to 100
 		player.wisStat.core.value += .5;
 	}

@@ -54,15 +54,6 @@ WIN:
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225]++;
 			//Reset if she finds someone to take it (random at high values)
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] >= 300 && model.time.hours == 1 && rand(5) == 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] = 1;
-			//hangover status stuff
-			if (player.statStore.hasBuff("Hangover")) {
-				outputText("\n<b>Your head finally clears as your hangover wears off.  Drinking with the shemale lizard was definitely a bad idea.</b>\n");
-				//Restore stats
-				dynStats("cor", 0);
-				//Clear status
-				player.statStore.removeBuffs("Hangover");
-				return true;
-			}
 			if (model.time.hours > 23 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00227] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00227]--; //Reduce drinking contest bonus
 			return false;
 		}

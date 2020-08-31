@@ -118,7 +118,9 @@ private function studyInTA():void {
 			//magic)
 			outputText("\n\nSelecting a book at chance from the mess across the tables, you are delighted to find that it is a tome about magic.  Though the language used is archaic at first you slowly find yourself getting the grasp of it and understanding more of the theory put down in the text.  You find yourself thinking about how to apply the things you're reading about to your own abilities, and figuring out how to better utilize magic yourself.  In short, you experience the condition known as \"learning\", and feel smarter for it.");
 			dynStats("int", 3+rand(4));
-			player.intStat.core.value += 1;
+			if (player.intStat.core.value < 100) {
+				player.intStat.core.value += 2;
+			}
 			statScreenRefresh()
 			//(Intelligence increase)
 			//Smart enough for ice spike and doesnt have it

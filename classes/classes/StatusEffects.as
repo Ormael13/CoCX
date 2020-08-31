@@ -454,6 +454,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const LactationReduc1:StatusEffectType                = mk("Lactation Reduc1");
 		public static const LactationReduc2:StatusEffectType                = mk("Lactation Reduc2");
 		public static const LactationReduc3:StatusEffectType                = mk("Lactation Reduc3");
+		public static const Liliraune:StatusEffectType                     	= mk("Liliraune");
 		public static const LethiceRedemed:StatusEffectType                 = mk("Lethice Redemed");
 		public static const LootEgg:StatusEffectType                        = mk("lootEgg");
 		public static const LostVillagerSpecial:StatusEffectType            = mk("lostVillagerSpecial");

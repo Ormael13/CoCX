@@ -2706,6 +2706,7 @@ use namespace CoC;
 			var ScoreList:Array = [
 				{name: 'human', score: 1, minscore: 1},
 				{name: 'minotaur', score: minotaurScore(), minscore: 4},
+				{name: 'cow', score: cowScore(), minscore: 4},
 				{name: 'lizard', score: lizardScore(), minscore: 4},
 				{name: 'cancer', score: cancerScore(), minscore: 8},
 				{name: 'dragon', score: dragonScore(), minscore: 4},
@@ -2782,7 +2783,7 @@ use namespace CoC;
 				{name: 'naga', score: nagaScore(), minscore: 4},
 				{name: 'centaur', score: centaurScore(), minscore: 8},
 				{name: 'centipede', score: centipedeScore(), minscore: 4},
-				{name: 'oomukade', score: oomukadeScore(), minscore: 11},
+				{name: 'oomukade', score: oomukadeScore(), minscore: 15},
 				{name: 'scorpion', score: scorpionScore(), minscore: 4},
 				{name: 'avian', score: avianScore(), minscore: 4},
 				{name: 'bat', score: batScore(), minscore: 6},
@@ -3448,6 +3449,9 @@ use namespace CoC;
 			if (TopRace == "alraune") {
 				if (TopScore >= 10) {
 					race = "Alraune";
+				}
+				else if (TopScore >= 10 && isLiliraune()) {
+					race = "Liliraune";
 				}
 			}
 			if (TopRace == "yggdrasil") {
@@ -11166,7 +11170,7 @@ use namespace CoC;
 
 		public function sleepUpdateStat():void{
 			strtouspeintwislibsenCalculation2();
-			if (hasPerk(PerkLib.TitanicStrength) && !statStore.hasBuff('Titanic Strength')) statStore.replaceBuffObject({'str.mult':(Math.round(0.01 * Math.round(tallness*4)))}, 'Titanic Strength', { text: 'Titanic Strength' });
+			if (hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tallness*4))}, 'Titanic Strength', { text: 'Titanic Strength' });
 			if (!hasPerk(PerkLib.TitanicStrength) && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
 			statStore.replaceBuffObject({
 				"str.mult":statusEffectv1(StatusEffects.StrTouSpeCounter2)/100,
@@ -11225,20 +11229,6 @@ use namespace CoC;
 			}
 			if(CoC.instance.monster.hasStatusEffect(StatusEffects.TailWhip)) {
 				CoC.instance.monster.removeStatusEffect(StatusEffects.TailWhip);
-			}
-			if(hasStatusEffect(StatusEffects.NagaVenom)) {
-				spe += statusEffectv1(StatusEffects.NagaVenom);
-				CoC.instance.mainView.statsView.showStatUp( 'spe' );
-				removeStatusEffect(StatusEffects.NagaVenom);
-				statStore.removeBuffs("Poison");
-			}
-			if(hasStatusEffect(StatusEffects.MedusaVenom)) {
-				tou += statusEffectv2(StatusEffects.MedusaVenom);
-				spe += statusEffectv3(StatusEffects.MedusaVenom);
-				CoC.instance.mainView.statsView.showStatUp( 'tou' );
-				CoC.instance.mainView.statsView.showStatUp( 'spe' );
-				removeStatusEffect(StatusEffects.MedusaVenom);
-				statStore.removeBuffs("Poison");
 			}
 			if(hasStatusEffect(StatusEffects.Flying)) {
 				removeStatusEffect(StatusEffects.Flying);

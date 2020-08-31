@@ -6861,39 +6861,39 @@ public class Combat extends BaseContent {
         var wrathregen:Number = 0;
         var BonusWrathMult:Number = 1;
         if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 2;
-        if (player.hasPerk(PerkLib.DoubleAttackSmall)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.TripleAttackSmall)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.QuadrupleAttackSmall)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.PentaAttackSmall)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.HexaAttackSmall)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.HectaAttackSmall)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.OctaAttackSmall)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.NonaAttackSmall)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.DecaAttackSmall)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.DoubleAttack)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.TripleAttack)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.QuadrupleAttack)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.PentaAttack)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.HexaAttack)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.DoubleAttackLarge)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.TripleAttackLarge)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.ClawTraining)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.ExtraClawAttack)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.MultiClawAttack)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.ClawingFlurry)) wrathregen += 1*BonusWrathMult;
-        if (player.hasPerk(PerkLib.JobBeastWarrior)) wrathregen += 2*BonusWrathMult;
-        if (player.hasPerk(PerkLib.PrimalFuryI)) wrathregen += 2*BonusWrathMult;
-        if (player.hasPerk(PerkLib.PrimalFuryII)) wrathregen += 2*BonusWrathMult;
-        if (player.hasPerk(PerkLib.PrimalFuryIII)) wrathregen += 2*BonusWrathMult;
-        if (player.hasPerk(PerkLib.PrimalFuryIV)) wrathregen += 2*BonusWrathMult;
-        if (player.hasPerk(PerkLib.PrimalFuryV)) wrathregen += 2*BonusWrathMult;
-        if (player.hasPerk(PerkLib.PrimalFuryVI)) wrathregen += 2*BonusWrathMult;
-        if (player.hasPerk(PerkLib.Berzerker)) wrathregen += 2*BonusWrathMult;
-        if (player.hasPerk(PerkLib.Lustzerker)) wrathregen += 2*BonusWrathMult;
-        if (player.hasPerk(PerkLib.Rage)) wrathregen += 2*BonusWrathMult;
-        if (player.hasPerk(PerkLib.Anger)) wrathregen += 2*BonusWrathMult;
-        if (player.hasPerk(PerkLib.OrcAdrenalGlandsFinalForm)) wrathregen += 4*BonusWrathMult;
-        if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) wrathregen += 4*BonusWrathMult;
+        if (player.hasPerk(PerkLib.DoubleAttackSmall)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.TripleAttackSmall)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.QuadrupleAttackSmall)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.PentaAttackSmall)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.HexaAttackSmall)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.HectaAttackSmall)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.OctaAttackSmall)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.NonaAttackSmall)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.DecaAttackSmall)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.DoubleAttack)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.TripleAttack)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.QuadrupleAttack)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.PentaAttack)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.HexaAttack)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.DoubleAttackLarge)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.TripleAttackLarge)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.ClawTraining)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.ExtraClawAttack)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.MultiClawAttack)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.ClawingFlurry)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.JobBeastWarrior)) wrathregen += 2;
+        if (player.hasPerk(PerkLib.PrimalFuryI)) wrathregen += 2;
+        if (player.hasPerk(PerkLib.PrimalFuryII)) wrathregen += 2;
+        if (player.hasPerk(PerkLib.PrimalFuryIII)) wrathregen += 2;
+        if (player.hasPerk(PerkLib.PrimalFuryIV)) wrathregen += 2;
+        if (player.hasPerk(PerkLib.PrimalFuryV)) wrathregen += 2;
+        if (player.hasPerk(PerkLib.PrimalFuryVI)) wrathregen += 2;
+        if (player.hasPerk(PerkLib.Berzerker)) wrathregen += 2;
+        if (player.hasPerk(PerkLib.Lustzerker)) wrathregen += 2;
+        if (player.hasPerk(PerkLib.Rage)) wrathregen += 2;
+        if (player.hasPerk(PerkLib.Anger)) wrathregen += 2;
+        if (player.hasPerk(PerkLib.OrcAdrenalGlandsFinalForm)) wrathregen += 4;
+        if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) wrathregen += 4;
         if (player.necklace == necklaces.CSNECK) {
             var csneckb:Number = 2;
             if (player.wrath >= player.wrath100 * 0.2) csneckb += 2;
@@ -6903,16 +6903,16 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.Lycanthropy)) csneckb *= 2;
             wrathregen += csneckb;
         }
-        if (player.jewelry == jewelries.FLLIRNG) wrathregen += 1*BonusWrathMult;
-        if (player.jewelry == jewelries.INMORNG) wrathregen += 1*BonusWrathMult;
-        if (player.jewelry2 == jewelries.FLLIRNG) wrathregen += 1*BonusWrathMult;
-        if (player.jewelry2 == jewelries.INMORNG) wrathregen += 1*BonusWrathMult;
-        if (player.jewelry3 == jewelries.FLLIRNG) wrathregen += 1*BonusWrathMult;
-        if (player.jewelry3 == jewelries.INMORNG) wrathregen += 1*BonusWrathMult;
-        if (player.jewelry4 == jewelries.FLLIRNG) wrathregen += 1*BonusWrathMult;
-        if (player.jewelry4 == jewelries.INMORNG) wrathregen += 1*BonusWrathMult;
-        if (player.jewelry4 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS || player.jewelry2 == jewelries.UNDKINS || player.jewelry == jewelries.UNDKINS) wrathregen += 3*BonusWrathMult;
-        return wrathregen;
+        if (player.jewelry == jewelries.FLLIRNG) wrathregen += 1;
+        if (player.jewelry == jewelries.INMORNG) wrathregen += 1;
+        if (player.jewelry2 == jewelries.FLLIRNG) wrathregen += 1;
+        if (player.jewelry2 == jewelries.INMORNG) wrathregen += 1;
+        if (player.jewelry3 == jewelries.FLLIRNG) wrathregen += 1;
+        if (player.jewelry3 == jewelries.INMORNG) wrathregen += 1;
+        if (player.jewelry4 == jewelries.FLLIRNG) wrathregen += 1;
+        if (player.jewelry4 == jewelries.INMORNG) wrathregen += 1;
+        if (player.jewelry4 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS || player.jewelry2 == jewelries.UNDKINS || player.jewelry == jewelries.UNDKINS) wrathregen += 3;
+        return wrathregen*BonusWrathMult;
     }
 
     internal var combatRound:int = 0;
@@ -7361,9 +7361,6 @@ public class Combat extends BaseContent {
         monster.statStore.advanceTime(Buff.RATE_ROUNDS,1);
         if (player.statStore.recentlyRemovedTags["WarriorsRage"]){
             EngineCore.outputText("\nYour warriors rage has ended.\n");
-        }
-        if (player.statStore.recentlyRemovedTags["Might"]){
-            EngineCore.outputText("\nYour powers wanes as your Might spell ends.\n");
         }
         if (player.statStore.recentlyRemovedTags["Might"]){
             EngineCore.outputText("\nYour powers wanes as your Might spell ends.\n");

@@ -190,6 +190,12 @@ public class EventParser {
                 if (player.statStore.recentlyRemovedTags["WellFed"]){
                     EngineCore.outputText("\nYou begin feeling hungry again as the satisfaction of your last cooked meal has all but disapeared.\n");
                 }
+                if (player.statStore.recentlyRemovedTags["DrunkenPowerEmpower"]){
+                    EngineCore.outputText("\nYou sober up, loosing the benefits of your oni drunken rampage.\n");
+                }
+                if (player.statStore.recentlyRemovedTags["Hangover"]){
+                    EngineCore.outputText("\nYour head finally clears as your hangover wears off.  Drinking with the shemale lizard was definitely a bad idea.\n");
+                }
             } else if (CoC.instance.model.time.hours == 21) {
                 if (CoC.instance.flags[kFLAGS.LETHICE_DEFEATED] <= 0) EngineCore.outputText("\nThe sky darkens as a starless night falls.  The blood-red moon slowly rises up over the horizon.\n");
                 else EngineCore.outputText("\nThe sky darkens as a starry night falls.  The blood-red moon slowly rises up over the horizon.\n");

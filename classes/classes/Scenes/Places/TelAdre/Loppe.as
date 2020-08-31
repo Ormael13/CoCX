@@ -1108,11 +1108,11 @@ private function loppeRidesPCCockFinal():void {
 	outputText(".  Finished, you depart.");
 	player.sexReward("vaginalFluids");
 	dynStats("tou", .5, "lib", .5, "sen", -4);
-	if (player.lib < 100){
-		player.libStat.core.value += .5;
+	if (player.libStat.core.value < 100){
+		player.libStat.core.value += 1;
 	}
-	if (player.tou < 100){
-		player.touStat.core.value += .5;
+	if (player.touStat.core.value < 100){
+		player.touStat.core.value += 1;
 	}
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
 	//3 hours pass.
