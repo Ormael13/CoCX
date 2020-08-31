@@ -374,8 +374,13 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			outputText("\"<i>I will tend to your wounds at once.</i>\"\n\n");
 			outputText("Luna casts a few healing spells on you to help your recovery. She traces your skin with her fingers, closing wounds wherever they pass. This treatment is highly effective, but leaves you somewhat aroused.\n\n");
 			dynStats("lus", 33);
-			for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"])
-				player.removeCurse(stat, 4);
+			for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]){
+				player.removeCurse(stat, 5);
+				if (stat != "sens")
+				{
+					player.removeCurse(stat+".mult", 0.05);
+				}
+			}
 			lunaJealousy(-100);
 			lunaAffection(5);
 			HPChange(Math.round(player.maxHP() * .5), true);

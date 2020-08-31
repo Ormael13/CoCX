@@ -3774,6 +3774,225 @@ public final class Mutations extends MutationsHelper {
             player.refillHunger(5);
         }
 
+        public function gremlinBeer(player:Player):void {
+            player.slimeFeed();
+            var changes:Number = 0;
+            var changeLimit:Number = 1;
+            if (rand(2) == 0) changeLimit++;
+            if (rand(3) == 0) changeLimit++;
+            if (rand(4) == 0) changeLimit++;
+            if (rand(5) == 0) changeLimit++;
+            changeLimit += additionalTransformationChances();
+            clearOutput();
+            outputText("Whoa it was definitely tasting just as bad as it smelled but hey it's not like your drinking this disgusting concoction for fun right? Or maybe you are?");
+            if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
+            dynStats("lus", 15);
+            dynStats("cor", 2);
+            //Stronger
+            if (player.str > 50 && rand(3) == 0 && changes < changeLimit) {
+                dynStats("str", -1);
+                if (player.str > 70) dynStats("str", -1);
+                if (player.str > 90) dynStats("str", -2);
+                outputText("\n\nYou feel a little weaker, but maybe it's just the alcohol.");
+                changes++;
+            }
+            ///Less tough
+            if (player.tou > 50 && rand(3) == 0 && changes < changeLimit) {
+                outputText("\n\nGiggling, you poke yourself, which only makes you giggle harder when you realize how much softer you feel.");
+                dynStats("tou", -1);
+                if (player.tou > 70) dynStats("tou", -1);
+                if (player.tou > 90) dynStats("tou", -2);
+                changes++;
+            }
+            //Speed boost
+            if (player.spe < 50 && rand(3) == 0 && changes < changeLimit) {
+                dynStats("spe", 1 + rand(2));
+                outputText("\n\nYou feel like dancing, and stumble as your legs react more quickly than you'd think.  Is the alcohol slowing you down or are you really faster?  You take a step and nearly faceplant as you go off balance.  It's definitely both.");
+                changes++;
+            }
+            if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+            //Shrink
+            if (rand(2) == 0 && player.tallness > 42) {
+                changes++;
+                outputText("\n\nThe world spins, and not just from the strength of the drink!  Your viewpoint is closer to the ground.  How fun!");
+                player.tallness -= (1 + rand(5));
+            }
+            //Nipples Turn Back:
+            if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
+                changes++;
+                player.removeStatusEffect(StatusEffects.BlackNipples);
+            }
+            //SEXYTIEMS
+            //Multidick killa!
+            if (player.cocks.length > 1 && rand(3) == 0 && changes < changeLimit) {
+                outputText("\n\n");
+                player.killCocks(1);
+                changes++;
+            }
+            //Shrink primary dick to no longer than 12 inches
+            else if (player.cocks.length == 1 && rand(2) == 0 && changes < changeLimit && !flags[kFLAGS.HYPER_HAPPY]) {
+                if (player.cocks[0].cockLength > 12) {
+                    changes++;
+                    var temp3:Number = 0;
+                    outputText("\n\n");
+                    //Shrink said cock
+                    if (player.cocks[0].cockLength < 6 && player.cocks[0].cockLength >= 2.9) {
+                        player.cocks[0].cockLength -= .5;
+                        temp3 -= .5;
+                    }
+                    temp3 += player.increaseCock(0, (rand(3) + 1) * -1);
+                    player.lengthChange(temp3, 1);
+                }
+            }
+            //Debugcunt
+            if (changes < changeLimit && rand(3) == 0 && (player.vaginaType() == 5 || player.vaginaType() == 6) && player.hasVagina()) {
+                outputText("\n\nSomething invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its natural flesh colour.");
+                player.vaginaType(0);
+                changes++;
+            }
+            if (changes < changeLimit && rand(4) == 0 && ((player.ass.analWetness > 0 && player.findPerk(PerkLib.MaraesGiftButtslut) < 0) || player.ass.analWetness > 1)) {
+                outputText("\n\nYou feel a tightening up in your colon and your [asshole] sucks into itself.  You feel sharp pain at first but that thankfully fades.  Your ass seems to have dried and tightened up.");
+                player.ass.analWetness--;
+                if (player.ass.analLooseness > 1) player.ass.analLooseness--;
+                changes++;
+            }
+            //Boost vaginal capacity without gaping
+            if (changes < changeLimit && rand(3) == 0 && player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) < 40) {
+                if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
+                player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5);
+                outputText("\n\nThere is a sudden... emptiness within your [vagina].  Somehow you know you could accommodate even larger... insertions.");
+                changes++;
+            }
+            //Boost fertility
+            if (changes < changeLimit && rand(4) == 0 && player.fertility < 40 && player.hasVagina()) {
+                player.fertility += 2 + rand(5);
+                changes++;
+                outputText("\n\nYou feel strange.  Fertile... somehow.  You don't know how else to think of it, but you're ready to be a mother.");
+            }
+            //GENERAL APPEARANCE STUFF BELOW
+            //antianemone corollary:
+            if (changes < changeLimit && player.hairType == 4 && rand(2) == 0) {
+                //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
+                outputText("\n\nAs you down the potent ale, your head begins to feel heavier - and not just from the alcohol!  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels smooth, silky, and fibrous; you watch as it dissolves into many thin, hair-like strands.  <b>Your hair is now back to normal!</b>");
+                setHairType(Hair.NORMAL);
+                changes++;
+            }
+            //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
+            if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
+                humanizeArms();
+                changes++;
+            }
+            //Removes wings!
+            if ((player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE || player.wings.type >= Wings.HARPY) && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(4) == 0) {
+                outputText("\n\nYour shoulders tingle, feeling lighter.  Something lands behind you with a 'thump', and when you turn to look you see your wings have fallen off.  This might be the best (and worst) booze you've ever had!  <b>You no longer have wings!</b>");
+                setWingType(Wings.NONE, "non-existant");
+                changes++;
+            }
+            //Removes antennaes!
+            if (player.antennae.type > Antennae.NONE && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nYour [hair] itches so you give it a scratch, only to have your antennae.type fall to the ground.  What a relief.  <b>You've lost your antennae.type!</b>");
+                changes++;
+                player.antennae.type = Antennae.NONE;
+            }
+            //Fix Legs!
+            if (player.lowerBody != LowerBody.HUMAN) {
+                humanizeLowerBody();
+                changes++;
+            }
+            //Eye colors
+            var goblin_eyes_color:Array = ["red", "yellow", "purple", "orange"];
+            if (player.eyes.type == Eyes.HUMAN && player.eyes.colour != "red" && player.eyes.colour != "yellow" && player.eyes.colour != "purple" && changes < changeLimit && rand(3) == 0) {
+                player.eyes.colour = randomChoice(goblin_eyes_color);
+                outputText("\n\nSomething weird happens in your eyes… like colors have slightly become brighter and wilder. <b>You make sure you ain’t on some drug trip from the Gremlin Oil before checking yourself in a puddle, discovering that your iris changed to [eyecolor].</b>");
+                changes++;
+            }
+            //Remove odd eyes
+            if (changes < changeLimit && rand(5) == 0 && player.eyes.type != Eyes.HUMAN && player.eyes.type != Eyes.GREMLIN) {
+                humanizeEyes();
+                changes++;
+            }
+            //Add gremlin eyes
+            if (changes < changeLimit && rand(5) == 0 && player.eyes.type == Eyes.HUMAN) {
+                player.eyes.type = Eyes.GREMLIN;
+                outputText("Aw gosh, you feel tired as hell, it’s like you spent the better part of yesterday night working on some stupid project. Truth is with those darkened eyelids of yours you might just have. That said, perhaps you should think of it less like a sign of fatigue and more like a sign of demonic nature because you easily imagine these on the faces of small fiends or possessed people too. <b>Seems like you have darkened eyelids now.</b>");
+                changes++;
+            }
+            //Omg Crazy hairs
+            if (player.hairType != Hair.CRAZY && changes < changeLimit && rand(3) == 0) {
+                player.hairType = Hair.CRAZY;
+                outputText("\n\nYou feel as if electricity is running through you and responding to the static your hair distorts in all possible directions. When the statics drops your hair is permanently frozen in a new… spiked form? You've heard of hair curling, dropping flat and what not but naturally spiking up? <b>You won’t need to put gel in your hair anymore to look like some </b>");
+                if (silly()){
+                    outputText("<b>punk kid from an anime series</b>");
+                } else {
+                    outputText("<b>weirdo</b>");
+                }
+                outputText("<b>, your hair naturally spikes up in a wild way which remind you of animal fur. </b>");
+                changes++;
+            }
+            //Dye those hairs
+            var gremlin_hair_color:Array = ["emerald", "dark green", "green", "aqua", "light green"];
+            if (player.hairType == Hair.CRAZY && player.hairColor != "emerald" && player.hairColor != "dark green" && player.hairColor != "green" && player.hairColor != "aqua" && player.hairColor != "light green" && changes < changeLimit && rand(3) == 0) {
+                player.hairColor = randomChoice(gremlin_hair_color);
+                outputText("\n\nGosh just while you were getting used to that new fucked up haircut of yours,  they began changing again. The strands glow for a moment before turning all " + player.hairColor + "! <b>Guess you won’t need to dye your hair color for it to match your weird haircut, you definitely look like what could pass for some crazy midget right now.</b>");
+                changes++;
+            }
+            //-Remove extra breast rows
+            if (changes < changeLimit && player.bRows() > 1 && rand(3) == 0) {
+                changes++;
+                outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
+                if (player.bRows() >= 3) outputText("abdomen");
+                else outputText("chest");
+                outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
+                if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
+                else outputText(player.skinTone + " " + player.skinDesc);
+                outputText(" remains. <b>You've lost a row of breasts!</b>");
+                dynStats("sen", -5);
+                player.removeBreastRow(player.breastRows.length - 1, 1);
+            }
+            //Skin/fur
+            if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.faceType == Face.HUMAN) {
+                humanizeSkin();
+                changes++;
+            }
+            //skinTone 
+            var gremlin_skin_color:Array = ["emerald", "dark green", "green", "aqua", "light green"];
+            if (player.skinTone != "light" && player.skinTone != "tan" && player.skinTone != "dark" && changes < changeLimit && rand(2) == 0) {
+                player.skinTone = randomChoice(gremlin_skin_color);
+                outputText("\n\nWhoah, that was weird.  You just hallucinated that your ");
+                if (player.hasFur()) outputText("skin");
+                else outputText(player.skinDesc);
+                outputText(" turned " + player.skinTone + ".  No way!  It's staying, it really changed color!");
+                changes++;
+            }
+            //Face!
+            if ((player.faceType != Face.CRAZY) && changes < changeLimit && rand(4) == 0 && player.ears.type == Ears.GREMLIN && player.tallness < 55) {
+                if (player.faceType != Face.HUMAN) {
+                    outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look.  <b>You have a human looking face again!</b>");
+                    setFaceType(Face.HUMAN);
+                } else {
+                    outputText("\n\nThinking on it, you’re smart, small and smuggly. The whole idea makes you laugh uncontrollably. But hey seriously since you’re the superior genius around here, might as well flash these idiots an unsettling smile, heck just thinking about how stupid everyone else is makes you smirk constantly, halfway to laughter. Well they might call you crazy but once you bury these primitive fools in the ground they'll all be the crazy ones. <b>You’re now constantly flashing a crazy grin just like a gremlin.</b>");
+                    setFaceType(Face.CRAZY);
+                }
+                changes++;
+            }
+            //Ears!
+            if (player.ears.type != Ears.GREMLIN && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nWhoa, something messed up is going about with your ears. They migrate slowly up your head, elongating and distorting as they get covered in -haircolor- fur. When you go check what the hell happened to them you discover instead of human ears you now have a pair of cute animal ears up on your head. Well these sure will give you a cute look. <b>You now have gremlin ears.!</b>");
+                setEarType(Ears.GREMLIN);
+                changes++;
+            }
+            // Remove gills
+            if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+            if (changes < changeLimit && rand(3) == 0) {
+                if (rand(2) == 0) player.modFem(85, 3);
+                if (rand(2) == 0) player.modThickness(20, 3);
+                if (rand(2) == 0) player.modTone(15, 5);
+            }
+            player.refillHunger(15);
+            flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+        }
+
         public function goblinAle(player:Player):void {
             player.slimeFeed();
             var changes:Number = 0;

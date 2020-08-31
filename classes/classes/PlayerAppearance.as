@@ -1850,6 +1850,9 @@ public class PlayerAppearance extends BaseContent {
 		else if(eyeType == Eyes.FAIRY){
 			outputText("  Your beautiful [eyecolor] eyes sparkle with the eternal hope and child-like innocence of fairykind.");
 		}
+		else if(eyeType == Eyes.GREMLIN){
+			outputText("  Your [eyecolor] eyes looks human enough though your eyelids are dark, just as if you very tired althought it's more likely traces of your demonic corruption.");
+		}	
 		else outputText("  Your eyes are [eyecolor].");
 	}
 	public function describeHairAndEars():void {
@@ -1922,6 +1925,12 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  A pair of pointed elf-like oni ears stick out from your skull.");
 			else if(earType == Ears.ELVEN)
 				outputText("  A pair of cute, long, elven, pointy ears, bigger than your old human ones and alert to every sound stick out from your skull.");
+			else if(earType == Ears.GREMLIN){
+				outputText("  A pair of sideways leaning furry ears that flick toward every slight sound. They don’t belong to any known animal but like anything demonic related help improve your devilish charm.");
+				if (silly()){
+					outputText(" With ears like that anyone would be hard pressed to resist the urge to headpat you.");
+				}
+			}
 			else if(earType == Ears.WEASEL)
 				outputText("  A pair of sideways leaning raiju ears that flick toward every slight sound stick out from your skull.");
 			if (earType == Ears.BAT){
@@ -2029,6 +2038,12 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  The [hair] is parted by a pair of cute, long, elven, pointy ears, bigger than your old human ones and alert to every sound.");
 				//if (player.hairType == SILKEN) outputText(" .");
 			}
+			else if(earType == Ears.GREMLIN){
+				outputText("  The [hair] is parted by a pair of sideways leaning furry ears that flick toward every slight sound. They don’t belong to any known animal but like anything demonic related help improve your devilish charm.");
+				if (silly()){
+					outputText(" With ears like that anyone would be hard pressed to resist the urge to headpat you.");
+				}
+			}
 			else if(earType == Ears.WEASEL)
 				outputText("  Your [hair] is parted by two sideways leaning raiju ears that flick toward every slight sound.");
 			if (earType == Ears.BAT){
@@ -2057,6 +2072,9 @@ public class PlayerAppearance extends BaseContent {
 			}
 			if (earType == Ears.DISPLACER){
 				outputText(" The [hair] on your head is parted by large long furry ears atop your head, always perked up to catch any stray sound.");
+			}
+			if (earType == Ears.MELKIE){
+				outputText("The [hair] on your head is parted by your long and flat furry Melkie ears, reaching all the way down to your waist.");
 			}
 			//</mod>
 			if(player.antennae.type == Antennae.MANTIS)
@@ -2198,6 +2216,12 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  Your mouth could pass for human if not for the pair of long and pointy canines you use to tear into your victims to get at their blood.");
 				} else {
 					outputText("  In addition, your mouth could pass for human if not for the pair of long and pointy canines you use to tear into your victims to get at their blood.");
+				}
+			} else if(faceType == Face.VAMPIRE){
+				if (odd == 0){
+					outputText("  Your mouth is human looking all right though your near constant crazy toothy smile isn't exactly helping to make you look sane. A careful onlooker could also easily notice that your canines are longuer and pointier then normal like those of tiny fiends.");
+				} else {
+					outputText("  In addition, your mouth could pass for human if not for your near constant crazy toothy smile isn't exactly helping to make you look sane. A careful onlooker also could easily notice that your canines are longuer and pointier then normal like those of tiny fiends.");
 				}
 			} else if(faceType == Face.FAIRY){
 				if (odd == 0){
@@ -2877,6 +2901,11 @@ public class PlayerAppearance extends BaseContent {
 		if (player.goblinScore() >= 10) outputText("\n<font color=\"#0000a0\">Goblin: " + player.goblinScore() + " (-" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (75 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 		else if (player.goblinScore() >= 1) outputText("\n<font color=\"#008000\">Goblin: " + player.goblinScore() + "</font>");
 		else if (player.goblinScore() < 1) outputText("\n<font color=\"#ff0000\">Goblin: 0</font>");
+		//Gremlin
+		if (player.gremlinScore() >= 18) outputText("\n<font color=\"#0000a0\">High Gremlin: " + player.gremlinScore() + " (-" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (135 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib, +" + (20 * (1 + player.newGamePlusMod())) + " min sens)</font>");
+		if (player.gremlinScore() >= 15) outputText("\n<font color=\"#0000a0\">Gremlin: " + player.gremlinScore() + " (-" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (75 * (1 + player.newGamePlusMod())) + " max Spe, +" + (120 * (1 + player.newGamePlusMod())) + " max Int, +" + (115 * (1 + player.newGamePlusMod())) + " max Lib, +" + (20 * (1 + player.newGamePlusMod())) + " min sens)</font>");
+		else if (player.gremlinScore() >= 1) outputText("\n<font color=\"#008000\">Gremlin: " + player.gremlinScore() + "</font>");
+		else if (player.gremlinScore() < 1) outputText("\n<font color=\"#ff0000\">Gremlin: 0</font>");
 		//Goo
 		if (player.gooScore() >= 15) outputText("\n<font color=\"#0000a0\">Slime Queen: " + player.gooScore() + " (+" + (115 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (160 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 		else if (player.gooScore() >= 11) outputText("\n<font color=\"#0000a0\">Slime: " + player.gooScore() + " (+" + (105 * (1 + player.newGamePlusMod())) + " max Tou, -" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib)</font>");

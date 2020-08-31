@@ -273,7 +273,7 @@
 
 
 	<!-- LOCATION IN SCREEN AREA -->
-    <spritemap file="body.png">
+        <spritemap file="body.png">
         <cell rect="1,90,49,59" name="torso/human" dx="79" dy="64"/>
         <cell rect="51,90,49,59" name="torso/fur" dx="79" dy="64"/>
         <cell rect="101,90,49,59" name="torso/chitin" dx="79" dy="64"/>
@@ -590,6 +590,7 @@
         <cell rect="1,251,89,98" name="hair/slime" dx="60" dy="4"/>
         <cell rect="91,251,89,98" name="hair_bg/slime2" dx="60" dy="4"/>
         <cell rect="181,251,89,98" name="hair/yeti" dx="60" dy="4"/>
+        <cell rect="241,136,59,65" name="hair/gremlin" dx="75" dy="21"/>
         <cell rect="271,251,89,98" name="hair_bg/yeti" dx="60" dy="4"/>
         <cell rect="361,251,89,98" name="hair_bg/dwarven" dx="59" dy="7"/>
         <cell rect="451,251,89,98" name="hair_bg/ponytail" dx="74" dy="4"/>
@@ -648,6 +649,8 @@
         <cell rect="301,150,29,32" name="eyes/goat" dx="90" dy="37"/>
         <cell rect="331,150,29,32" name="eyes/centipede" dx="90" dy="37"/>
         <cell rect="361,150,29,32" name="eyes/caveWyrm" dx="90" dy="37"/>
+        <cell rect="391,150,29,32" name="eyes/gazer" dx="90" dy="37"/>
+        <cell rect="421,150,29,32" name="eyes/gremlin" dx="90" dy="37"/>
         <cell rect="1,190,29,32" name="ears_bg/human" dx="90" dy="37"/>
         <cell rect="31,190,29,32" name="ears/fur" dx="90" dy="37"/>
         <cell rect="61,190,59,32" name="ears_bg/elfin" dx="75" dy="36"/>
@@ -1287,7 +1290,7 @@
                 <show part="ears/goat"/>
                 <show part="ears_bg/goat"/>
             </case>
-            <case values="Ears.WEASEL">
+            <case values="Ears.WEASEL, Ears.GREMLIN">
                 <show part="ears/weasel"/>
                 <show part="ears_bg/weasel"/>
             </case>
@@ -1356,6 +1359,9 @@
             </case>
 			<case values="Eyes.CAVE_WYRM">
                 <show part="eyes/caveWyrm"/>
+            </case>
+			<case values="Eyes.GREMLIN">
+                <show part="eyes/gremlin"/>
             </case>
             <default>
                 <show part="eyes/human"/>
@@ -1499,6 +1505,16 @@
                         </default>
                     </switch>
                 </case>		
+				<case values="Hair.CRAZY">
+                    <switch>
+                        <case test="hairLength lt 16">
+                            <show part="hair/gremlin"/>
+                        </case>
+                        <default>
+                            <show part="hair/gremlin"/>
+                        </default>
+                    </switch>
+                </case>	
 				
                 <default> <!-- covers Hair.NORMAL, Hair.GHOST, Hair.ANEMONE, Hair.QUILL, Hair.LEAF, Hair.FLUFFY, Hair.GRASS, Hair.SILKEN, Hair.STORM --> <!-- TODO  -->
                     <switch>
@@ -1518,7 +1534,7 @@
 		<!-- HAIR STYLE AREA -->
 		<if test="hairLength &gt; 0">
             <if test="hairType != Hair.FLUFFY and hairType != Hair.GORGON and hairType != Hair.ANEMONE and hairType != Hair.GOO">
-                <if test="hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL">
+                <if test="hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.CRAZY">
                     <if test="hairStyle != Hair.PLAIN">
                         <hide part="hair/0"/>
                         <hide part="hair_bg/02"/>
@@ -1728,7 +1744,7 @@
 			<case values="Face.COW_MINOTAUR">
                 <show part="face/bovine"/>
             </case>
-			<case values="Face.FAIRY">
+			<case values="Face.FAIRY,Face.CRAZY">
                 <show part="face/fairySmile"/>
             </case>
 			<case values="Face.GHOST">

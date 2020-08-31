@@ -31,7 +31,7 @@ public class PerkLib
 		public static const Pervert:PerkType = mk("Pervert", "Pervert",
 				"Gains corruption 25% faster. Reduces corruption requirement for high-corruption variant of scenes.", null, true);
 		public static const Sensitive:PerkType = mk("Sensitive", "Sensitive",
-				"Gains sensitivity 25% faster.", null, true);
+				"Gains sensitivity 25% faster.", null, true).withBuffs({'sens':50});
 		public static const Wise:PerkType = mk("Wise", "Wise",
 				"Gains wisdom 25% faster.", null, true).withBuffs({'wis.mult':0.50});
 		public static const Smart:PerkType = mk("Smart", "Smart",
@@ -1119,7 +1119,7 @@ public class PerkLib
 				"You choose the 'Epic Self-Control' perk. Thanks to your epic mental conditioning, your maximum lust has been increased by 2250!");
 		public static const EpicSensitivity:PerkType = mk("Epic Sensitivity", "Epic Sensitivity",
 				"Increases maximum sensitivity by 35 + 5 * NG tier.",
-				"You choose the 'Epic Sensitivity' perk. Increases maximum sensitivity by 35 + 5 * NG tier.");
+				"You choose the 'Epic Sensitivity' perk. Increases maximum sensitivity by 35 + 5 * NG tier.").withBuffs({'sens':35});
 		public static const EpicSpeed:PerkType = mk("Epic Speed", "Epic Speed",
 				"Increases maximum speed by 35 + 5 * NG tier.",
 				"You choose the 'Epic Speed' perk. Increases maximum speed by 35 + 5 * NG tier.");
@@ -1802,7 +1802,7 @@ public class PerkLib
 				"You choose the 'Legendary Self-Control' perk. Thanks to your legendary mental conditioning, your maximum lust has been increased by 5000!");
 		public static const LegendarySensitivity:PerkType = mk("Legendary Sensitivity", "Legendary Sensitivity",
 				"Increases maximum sensitivity by 50 + 10 * NG tier.",
-				"You choose the 'Legendary Sensitivity' perk. Increases maximum sensitivity by 50 + 10 * NG tier.");
+				"You choose the 'Legendary Sensitivity' perk. Increases maximum sensitivity by 50 + 10 * NG tier.").withBuffs({'sens':50});
 		public static const LegendarySpeed:PerkType = mk("Legendary Speed", "Legendary Speed",
 				"Increases maximum speed by 50 + 10 * NG tier.",
 				"You choose the 'Legendary Speed' perk. Increases speed by 50 + 10 * NG tier.");
@@ -2064,7 +2064,7 @@ public class PerkLib
 				"You choose the 'Mythical Self-Control' perk. Thanks to your mythical mental conditioning, your maximum lust has been increased by 10000!");
 		public static const MythicalSensitivity:PerkType = mk("Mythical Sensitivity", "Mythical Sensitivity",
 				"Increases maximum sensitivity by 65 + 15 * NG tier.",
-				"You choose the 'Mythical Sensitivity' perk. Increases maximum sensitivity by 65 + 15 * NG tier.");
+				"You choose the 'Mythical Sensitivity' perk. Increases maximum sensitivity by 65 + 15 * NG tier.").withBuffs({'sens':65});
 		public static const MythicalSpeed:PerkType = mk("Mythical Speed", "Mythical Speed",
 				"Increases maximum speed by 65 + 15 * NG tier.",
 				"You choose the 'Mythical Speed' perk. Increases maximum speed by 65 + 15 * NG tier.");
@@ -5189,29 +5189,28 @@ public class PerkLib
             // SENSITIVITY
             //------------
             //Slot 6 - Tier 0
-            EyesOfTheHunterNovice.requireSen(25);
-            //.requireSen(25);
+            EyesOfTheHunterNovice;
             //.requireMinSens(15);
             //Tier 1 Sensitivity Perks
-            EyesOfTheHunterAdept.requireSen(50)
+            EyesOfTheHunterAdept
                     .requirePerk(EyesOfTheHunterNovice)
                     .requireLevel(6);
             //Tier 2 Sensitivity Perks
-            EyesOfTheHunterMaster.requireSen(75)
+            EyesOfTheHunterMaster
                     .requirePerk(EyesOfTheHunterAdept)
                     .requireLevel(12);
             //Tier 3 Sensitivity Perks
             //Tier 4 Sensitivity Perks
             //Tier 5 Sensitivity Perks
             //Tier 6 Sensitivity Perks
-			EpicSensitivity.requireSen(10)
+			EpicSensitivity
                     .requireLevel(36);
             //Tier 7 Sensitivity Perks
             //Tier 8 Sensitivity Perks
             //Tier 9 Sensitivity Perks
             //Tier 10 Sensitivity Perks
             //Tier 11 Sensitivity Perks
-            LegendarySensitivity.requireSen(15)
+            LegendarySensitivity
                     .requirePerk(EpicSensitivity)
                     .requireLevel(66);
             //Tier 12 Sensitivity Perks
@@ -5219,7 +5218,7 @@ public class PerkLib
             //Tier 14 Sensitivity Perks
             //Tier 15 Sensitivity Perks
             //Tier 16 Sensitivity Perks
-            MythicalSensitivity.requireSen(20)
+            MythicalSensitivity
                     .requirePerk(LegendarySensitivity)
                     .requireLevel(96);
             //Tier 17 Sensitivity Perks
@@ -6054,7 +6053,6 @@ public class PerkLib
                     .requireInt(75)
                     .requireWis(75)
                     .requireLib(45)
-                    .requireSen(45);
             Tornado.requireLevel(24)
                     .requireStr(75)
                     .requireTou(75)
@@ -6209,7 +6207,6 @@ public class PerkLib
                                 .requireInt(150)
                                 .requireWis(150)
                                 .requireLib(90)
-                                .requireSen(90)
                                 .requireLevel(30); //requirePerk(JobEromancer)
 			*/	//(Still need some other related stuff added to make PC true Munchkin
             //na razie jest perk GreyMage, potrzeba jeszcze pare innych perków tak z 3-5 innych jeszcze)

@@ -2728,6 +2728,7 @@ use namespace CoC;
 				{name: 'raccoon', score: raccoonScore(), minscore: 4},
 				{name: 'horse', score: horseScore(), minscore: 4},
 				{name: 'goblin', score: goblinScore(), minscore: 10},
+				{name: 'gremlin', score: gremlinScore(), minscore: 10},
 				{name: 'goo', score: gooScore(), minscore: 5},
 				{name: 'magmagoo', score: magmagooScore(), minscore: 6},
 				{name: 'darkgoo', score: darkgooScore(), minscore: 6},
@@ -3137,6 +3138,12 @@ use namespace CoC;
 			if (TopRace == "goblin") {
 				if (TopScore >= 10)
 					race = "goblin";
+			}
+			if (TopRace == "gremlin") {
+				if (TopScore >= 15) {
+					if (TopScore >= 18) race = "high gremlin";
+					else race = "gremlin";
+				}
 			}
 			//if (humanScore() >= 5 && race == "corrupted mutant")
 			//	race = "somewhat human mutant";
@@ -4016,6 +4023,8 @@ use namespace CoC;
 			if (beeScore() >= 9)
 				chimeraCounter++;
 			if (goblinScore() >= 10)
+				chimeraCounter++;
+			if (gremlinScore() >= 15)
 				chimeraCounter++;
 			if (demonScore() >= 11)
 				chimeraCounter++;
@@ -5409,6 +5418,88 @@ use namespace CoC;
 			goblinCounter = finalRacialScore(goblinCounter, Race.GOBLIN);
 			End("Player","racialScore");
 			return goblinCounter;
+		}
+
+		//Goblin score
+		public function gremlinScore():Number
+		{
+			Begin("Player","racialScore","gremlin");
+			var gremlinCounter:Number = 0;
+			if (faceType == Face.CRAZY)
+				gremlinCounter++;
+			if (ears.type == Ears.GREMLIN)
+				gremlinCounter++;
+			if (hairType == Hair.CRAZY)
+				gremlinCounter++;
+			if (tallness < 48)
+				gremlinCounter+=2;
+			if (hasVagina())
+				gremlinCounter++;
+			if (hasPlainSkinOnly()) {
+				gremlinCounter++;
+				if (skinTone == "light" || skinTone == "tan" || skinTone == "dark")
+					gremlinCounter++;
+				if (skinTone != "light" && skinTone != "tan" && skinTone != "dark")
+					gremlinCounter=0;
+				if (eyes.type == Eyes.GREMLIN && (eyes.colour == "red" || eyes.colour == "yellow" || eyes.colour == "purple" || eyes.colour == "orange"))
+					gremlinCounter++;
+				if (hairColor == "emerald" || hairColor == "green" || hairColor == "dark green" || hairColor == "aqua" || hairColor == "light green")
+					gremlinCounter++;
+				if (arms.type == Arms.HUMAN)
+					gremlinCounter++;
+				if (lowerBody == LowerBody.HUMAN)
+					gremlinCounter++;
+				if (wings.type == Wings.NONE)
+					gremlinCounter++;
+				if (tail.type == Tail.NONE)
+					gremlinCounter++;
+			}
+			if (femininity > 70)
+				gremlinCounter+=2;
+			if (cor >= 20)
+				gremlinCounter++;
+			if (cor >= 40)
+				gremlinCounter++;
+			if (findPerk(PerkLib.GoblinoidBlood) >= 0)
+				gremlinCounter++;
+			if (findPerk(PerkLib.BouncyBody) >= 0)
+				gremlinCounter++;
+			if (findPerk(PerkLib.NaturalPunchingBag) >= 0)
+				gremlinCounter++;
+			if (findPerk(PerkLib.NaturalPunchingBagEvolved) >= 0)
+				gremlinCounter++;
+			if (findPerk(PerkLib.NaturalPunchingBagFinalForm) >= 0)
+				gremlinCounter++;
+			if (findPerk(PerkLib.NaturalPunchingBag) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
+				gremlinCounter++;
+			if (findPerk(PerkLib.NaturalPunchingBagEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
+				gremlinCounter++;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && gremlinCounter >= 4)
+				gremlinCounter += 1;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && gremlinCounter >= 8)
+				gremlinCounter += 1;
+			if (findPerk(PerkLib.GoblinsDescendant) >= 0 || findPerk(PerkLib.BloodlineGoblin) >= 0)
+				gremlinCounter += 2;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				gremlinCounter += 50;
+			if (hasStatusEffect(StatusEffects.PlayerPhylactery))
+				gremlinCounter += 5;
+			if (findPerk(PerkLib.BlackHeart) >= 0)
+				gremlinCounter++;
+			if (findPerk(PerkLib.BlackHeartEvolved) >= 0)
+				gremlinCounter++;
+			if (findPerk(PerkLib.BlackHeartFinalForm) >= 0)
+				gremlinCounter++;
+			if (findPerk(PerkLib.BlackHeart) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
+				gremlinCounter++;
+			if (findPerk(PerkLib.BlackHeartEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
+				gremlinCounter++;
+			if (hasPerk(PerkLib.DemonicLethicite))
+				gremlinCounter+=1;
+			if (isGargoyle()) gremlinCounter = 0;
+			gremlinCounter = finalRacialScore(gremlinCounter, Race.GREMLIN);
+			End("Player","racialScore");
+			return gremlinCounter;
 		}
 
 		//Goo score
@@ -9397,7 +9488,6 @@ use namespace CoC;
 			var maxInt:int = 100;
 			var maxWis:int = 100;
 			var maxLib:int = 100;
-			var maxSen:int = 100;
 			var maxCor:int = 100;
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			
@@ -9409,7 +9499,6 @@ use namespace CoC;
 				maxInt -= (5 * (12 - level));
 				maxWis -= (5 * (12 - level));
 				maxLib -= (5 * (12 - level));
-				maxSen -= (5 * (12 - level));
 			}
 			
 			//Alter max speed if you have oversized parts. (Realistic mode)
@@ -9466,14 +9555,12 @@ use namespace CoC;
 			maxInt += statusEffectv1(StatusEffects.IntWisCounter2);
 			maxWis += statusEffectv2(StatusEffects.IntWisCounter2);
 			maxLib += statusEffectv1(StatusEffects.LibSensCounter2);
-			maxSen += statusEffectv2(StatusEffects.LibSensCounter2);
 			if (maxStr < 25) maxStr = 25;
 			if (maxTou < 25) maxTou = 25;
 			if (maxSpe < 25) maxSpe = 25;
 			if (maxInt < 25) maxInt = 25;
 			if (maxWis < 25) maxWis = 25;
 			if (maxLib < 25) maxLib = 25;
-			if (maxSen < 25) maxSen = 25;
 			End("Player","getAllMaxStats.racial");
 			Begin("Player","getAllMaxStats.perks2");
 			maxStr += statusEffectv1(StatusEffects.StrTouSpeCounter1);
@@ -9482,7 +9569,6 @@ use namespace CoC;
 			maxInt += statusEffectv1(StatusEffects.IntWisCounter1);
 			maxWis += statusEffectv2(StatusEffects.IntWisCounter1);
 			maxLib += statusEffectv1(StatusEffects.LibSensCounter1);
-			maxSen += statusEffectv2(StatusEffects.LibSensCounter1);
 			if (findPerk(PerkLib.MantislikeAgility) >= 0) {
 				if (hasCoatOfType(Skin.CHITIN) && findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (20 * newGamePlusMod);
 				if ((skinType == Skin.SCALES && findPerk(PerkLib.ThickSkin) >= 0) || hasCoatOfType(Skin.CHITIN)) maxSpe += (15 * newGamePlusMod);
@@ -9556,55 +9642,27 @@ use namespace CoC;
 				maxInt += statusEffectv2(StatusEffects.EnergyDependent);
 			}
 			//Equipment
-			if (this.jewelryName == "Ring of Intelligence") maxInt += 5;
-			if (this.jewelryName2 == "Ring of Intelligence") maxInt += 5;
-			if (this.jewelryName3 == "Ring of Intelligence") maxInt += 5;
-			if (this.jewelryName4 == "Ring of Intelligence") maxInt += 5;
 			if (this.jewelryName == "Ring of Libido") maxLib += 5;
 			if (this.jewelryName2 == "Ring of Libido") maxLib += 5;
 			if (this.jewelryName3 == "Ring of Libido") maxLib += 5;
 			if (this.jewelryName4 == "Ring of Libido") maxLib += 5;
-			if (this.jewelryName == "Ring of Sensitivity") maxSen += 5;
-			if (this.jewelryName2 == "Ring of Sensitivity") maxSen += 5;
-			if (this.jewelryName3 == "Ring of Sensitivity") maxSen += 5;
-			if (this.jewelryName4 == "Ring of Sensitivity") maxSen += 5;
 			if (this.jewelryName == "Ring of Speed") maxSpe += 5;
 			if (this.jewelryName2 == "Ring of Speed") maxSpe += 5;
 			if (this.jewelryName3 == "Ring of Speed") maxSpe += 5;
 			if (this.jewelryName4 == "Ring of Speed") maxSpe += 5;
-			if (this.jewelryName == "Ring of Strength") maxStr += 5;
-			if (this.jewelryName2 == "Ring of Strength") maxStr += 5;
-			if (this.jewelryName3 == "Ring of Strength") maxStr += 5;
-			if (this.jewelryName4 == "Ring of Strength") maxStr += 5;
 			if (this.jewelryName == "Ring of Toughness") maxTou += 5;
 			if (this.jewelryName2 == "Ring of Toughness") maxTou += 5;
 			if (this.jewelryName3 == "Ring of Toughness") maxTou += 5;
 			if (this.jewelryName4 == "Ring of Toughness") maxTou += 5;
-			if (this.jewelryName == "Ring of Wisdom") maxWis += 5;
-			if (this.jewelryName2 == "Ring of Wisdom") maxWis += 5;
-			if (this.jewelryName3 == "Ring of Wisdom") maxWis += 5;
-			if (this.jewelryName4 == "Ring of Wisdom") maxWis += 5;
-			if (this.headjewelryName == "Crown of Intelligence") maxInt += 20;
 			if (this.headjewelryName == "Crown of Libido") maxLib += 20;
-			if (this.headjewelryName == "Crown of Sensitivity") maxSen += 20;
 			if (this.headjewelryName == "Crown of Speed") maxSpe += 20;
-			if (this.headjewelryName == "Crown of Strength") maxStr += 20;
 			if (this.headjewelryName == "Crown of Toughness") maxTou += 20;
-			if (this.headjewelryName == "Crown of Wisdom") maxWis += 20;
-			if (this.necklaceName == "Necklace of Intelligence") maxInt += 25;
 			if (this.necklaceName == "Necklace of Libido") maxLib += 25;
-			if (this.necklaceName == "Necklace of Sensitivity") maxSen += 25;
 			if (this.necklaceName == "Necklace of Speed") maxSpe += 25;
-			if (this.necklaceName == "Necklace of Strength") maxStr += 25;
 			if (this.necklaceName == "Necklace of Toughness") maxTou += 25;
-			if (this.necklaceName == "Necklace of Wisdom") maxWis += 25;
-			if (this.jewelryName == "Ring of Intelligence" && this.jewelryName2 == "Ring of Intelligence" && this.jewelryName3 == "Ring of Intelligence" && this.jewelryName4 == "Ring of Intelligence" && this.headjewelryName == "Crown of Intelligence" && this.necklaceName == "Necklace of Intelligence") maxInt += 15;
 			if (this.jewelryName == "Ring of Libido" && this.jewelryName2 == "Ring of Libido" && this.jewelryName3 == "Ring of Libido" && this.jewelryName4 == "Ring of Libido" && this.headjewelryName == "Crown of Libido" && this.necklaceName == "Necklace of Libido") maxLib += 15;
-			if (this.jewelryName == "Ring of Sensitivity" && this.jewelryName2 == "Ring of Sensitivity" && this.jewelryName3 == "Ring of Sensitivity" && this.jewelryName4 == "Ring of Sensitivity" && this.headjewelryName == "Crown of Sensitivity" && this.necklaceName == "Necklace of Sensitivity") maxSen += 15;
 			if (this.jewelryName == "Ring of Speed" && this.jewelryName2 == "Ring of Speed" && this.jewelryName3 == "Ring of Speed" && this.jewelryName4 == "Ring of Speed" && this.headjewelryName == "Crown of Speed" && this.necklaceName == "Necklace of Speed") maxSpe += 15;
-			if (this.jewelryName == "Ring of Strength" && this.jewelryName2 == "Ring of Strength" && this.jewelryName3 == "Ring of Strength" && this.jewelryName4 == "Ring of Strength" && this.headjewelryName == "Crown of Strength" && this.necklaceName == "Necklace of Strength") maxStr += 15;
 			if (this.jewelryName == "Ring of Toughness" && this.jewelryName2 == "Ring of Toughness" && this.jewelryName3 == "Ring of Toughness" && this.jewelryName4 == "Ring of Toughness" && this.headjewelryName == "Crown of Toughness" && this.necklaceName == "Necklace of Toughness") maxTou += 15;
-			if (this.jewelryName == "Ring of Wisdom" && this.jewelryName2 == "Ring of Wisdom" && this.jewelryName3 == "Ring of Wisdom" && this.jewelryName4 == "Ring of Wisdom" && this.headjewelryName == "Crown of Wisdom" && this.necklaceName == "Necklace of Wisdom") maxWis += 15;
 			//Key Items
 			if (hasPerk(PerkLib.GoblinoidBlood)) {
 				if (hasKeyItem("Drug injectors") >= 0) {
@@ -9634,7 +9692,6 @@ use namespace CoC;
 			maxInt = Math.max(maxInt,1);
 			maxWis = Math.max(maxWis,1);
 			maxLib = Math.max(maxLib,1);
-			maxSen = Math.max(maxSen,1);
 			maxCor = Math.max(maxCor,1);
 			return {
 				str:maxStr,
@@ -9643,7 +9700,6 @@ use namespace CoC;
 				inte:maxInt,
 				wis:maxWis,
 				lib:maxLib,
-				sens:maxSen,
 				cor:maxCor
 			};
 		}
@@ -9662,11 +9718,9 @@ use namespace CoC;
 			var maxIntCap1:Number = 0;
 			var maxWisCap1:Number = 0;
 			var maxLibCap1:Number = 0;
-			var maxSenCap1:Number = 0;
 			if (findPerk(PerkLib.Tough) > 0) maxTouCap1 += (50 * newGamePlusMod);
 			if (findPerk(PerkLib.Fast) > 0) maxSpeCap1 += (50 * newGamePlusMod);
 			if (findPerk(PerkLib.Lusty) > 0) maxLibCap1 += (50 * newGamePlusMod);
-			if (findPerk(PerkLib.Sensitive) > 0) maxSenCap1 += (50 * newGamePlusMod);
 			if (findPerk(PerkLib.ChimericalBodyInitialStage) >= 0) {
 				maxTouCap1 += (5 * newGamePlusMod);
 				maxLibCap1 += (5 * newGamePlusMod);
@@ -9677,42 +9731,35 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyBasicStage) >= 0) {
 				maxTouCap1 += (5 * newGamePlusMod);
 				maxSpeCap1 += (5 * newGamePlusMod);
-				maxSenCap1 += (5 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0) {
 				maxTouCap1 += (5 * newGamePlusMod);
 				maxLibCap1 += (5 * newGamePlusMod);
-				maxSenCap1 += (5 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0) {
 				maxTouCap1 += (5 * newGamePlusMod);
 				maxSpeCap1 += (5 * newGamePlusMod);
 				maxLibCap1 += (5 * newGamePlusMod);
-				maxSenCap1 += (5 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.ChimericalBodySuperiorStage) >= 0) {
 				maxTouCap1 += (5 * newGamePlusMod);
 				maxSpeCap1 += (5 * newGamePlusMod);
 				maxLibCap1 += (5 * newGamePlusMod);
-				maxSenCap1 += (5 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.ChimericalBodyPeerlessStage) >= 0) {
 				maxTouCap1 += (5 * newGamePlusMod);
 				maxSpeCap1 += (5 * newGamePlusMod);
 				maxLibCap1 += (5 * newGamePlusMod);
-				maxSenCap1 += (5 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0) {
 				maxTouCap1 += (5 * newGamePlusMod);
 				maxSpeCap1 += (5 * newGamePlusMod);
 				maxLibCap1 += (5 * newGamePlusMod);
-				maxSenCap1 += (5 * newGamePlusMod);// 8/8/8/7/7/7/7
 			}
 			if (findPerk(PerkLib.ChimericalBodyEpicStage) >= 0) {
 				maxTouCap1 += (5 * newGamePlusMod);
 				maxSpeCap1 += (5 * newGamePlusMod);
 				maxLibCap1 += (5 * newGamePlusMod);
-				maxSenCap1 += (5 * newGamePlusMod);// 10/10/10/7/7/6/6
 			}
 			if (findPerk(PerkLib.BlackHeartFinalForm) >= 0) {
 				maxLibCap1 += (10 * newGamePlusMod);
@@ -9732,7 +9779,6 @@ use namespace CoC;
 			if (findPerk(PerkLib.ElvishPeripheralNervSysFinalForm) >= 0) maxSpeCap1 += (5 * newGamePlusMod);
 			if (findPerk(PerkLib.GorgonsEyesEvolved) >= 0) {
 				maxSpeCap1 += (5 * newGamePlusMod);
-				maxSenCap1 += (10 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.HinezumiBurningBloodFinalForm) >= 0) maxTouCap1 += (10 * newGamePlusMod);
 			if (findPerk(PerkLib.KitsuneThyroidGland) >= 0) maxSpeCap1 += (5 * newGamePlusMod);
@@ -9872,19 +9918,16 @@ use namespace CoC;
 				maxTouCap1 += (10 * newGamePlusMod);
 				maxSpeCap1 += (10 * newGamePlusMod);
 				maxLibCap1 += (10 * newGamePlusMod);
-				maxSenCap1 += (10 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) {
 				maxTouCap1 += (15 * newGamePlusMod);
 				maxSpeCap1 += (15 * newGamePlusMod);
 				maxLibCap1 += (15 * newGamePlusMod);
-				maxSenCap1 += (15 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) {
 				maxTouCap1 += (20 * newGamePlusMod);
 				maxSpeCap1 += (20 * newGamePlusMod);
 				maxLibCap1 += (20 * newGamePlusMod);
-				maxSenCap1 += (20 * newGamePlusMod);
 			}
 			if (findPerk(PerkLib.EpicToughness) >= 0) maxTouCap1 += (35 + (5 * newGamePlusMod));
 			if (findPerk(PerkLib.LegendaryToughness) >= 0) maxTouCap1 += (50 + (10 * newGamePlusMod));
@@ -9895,9 +9938,6 @@ use namespace CoC;
 			if (findPerk(PerkLib.EpicLibido) >= 0) maxLibCap1 += (35 + (5 * newGamePlusMod));
 			if (findPerk(PerkLib.LegendaryLibido) >= 0) maxLibCap1 += (50 + (10 * newGamePlusMod));
 			if (findPerk(PerkLib.MythicalLibido) >= 0) maxLibCap1 += (65 + (15 * newGamePlusMod));
-			if (findPerk(PerkLib.EpicSensitivity) >= 0) maxSenCap1 += (35 + (5 * newGamePlusMod));
-			if (findPerk(PerkLib.LegendarySensitivity) >= 0) maxSenCap1 += (50 + (10 * newGamePlusMod));
-			if (findPerk(PerkLib.MythicalSensitivity) >= 0) maxSenCap1 += (65 + (15 * newGamePlusMod));
 			if (findPerk(PerkLib.IronStomachSu) >= 0) maxTouCap1 += (5 * newGamePlusMod);
 			if (findPerk(PerkLib.GigantGripEx) >= 0) {
 				maxTouCap1 += 5;
@@ -9935,14 +9975,12 @@ use namespace CoC;
 			maxIntCap1 += 5 * perkv1(PerkLib.AscensionTranshumanism);
 			maxWisCap1 += 5 * perkv1(PerkLib.AscensionTranshumanism);
 			maxLibCap1 += 5 * perkv1(PerkLib.AscensionTranshumanism);
-			maxSenCap1 += 5 * perkv1(PerkLib.AscensionTranshumanism);
 			addStatusValue(StatusEffects.StrTouSpeCounter1, 1, maxStrCap1);
 			addStatusValue(StatusEffects.StrTouSpeCounter1, 2, maxTouCap1);
 			addStatusValue(StatusEffects.StrTouSpeCounter1, 3, maxSpeCap1);
 			addStatusValue(StatusEffects.IntWisCounter1, 1, maxIntCap1);
 			addStatusValue(StatusEffects.IntWisCounter1, 2, maxWisCap1);
 			addStatusValue(StatusEffects.LibSensCounter1, 1, maxLibCap1);
-			addStatusValue(StatusEffects.LibSensCounter1, 2, maxSenCap1);
 		}
 		
 		public function strtouspeintwislibsenCalculation2():void {
@@ -9959,7 +9997,7 @@ use namespace CoC;
 			var maxIntCap2:Number = 0;
 			var maxWisCap2:Number = 0;
 			var maxLibCap2:Number = 0;
-			var maxSenCap2:Number = 0;
+			var minSen:Number = 0;
 			//Alter max stats depending on race (+15 za pkt)
 			if (cowScore() >= 4) {
 				if (cowScore() >= 10) {
@@ -10137,7 +10175,7 @@ use namespace CoC;
 				maxTouCap2 -= (25 * newGamePlusMod);
 				maxSpeCap2 += (140 * newGamePlusMod);
 				maxIntCap2 += (200 * newGamePlusMod);
-				maxSenCap2 += (20 * newGamePlusMod);
+				minSen += (20 * newGamePlusMod);
 			}//+10/10-20
 			if (cancerScore() >= 8) {
 				if (cancerScore() >= 20) {
@@ -10199,7 +10237,7 @@ use namespace CoC;
 				if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += (70 * newGamePlusMod);
 				else maxSpeCap2 += (60 * newGamePlusMod);
 				maxIntCap2 += (80 * newGamePlusMod);
-				maxSenCap2 += (25 * newGamePlusMod)
+				minSen += (25 * newGamePlusMod)
 			}
 			if (hellcatScore() >= 10) {
 				if (hellcatScore() >= 17) {
@@ -10209,7 +10247,7 @@ use namespace CoC;
 					else maxSpeCap2 += (70 * newGamePlusMod);
 					maxIntCap2 += (125 * newGamePlusMod);
 					maxLibCap2 += (100 * newGamePlusMod);
-					maxSenCap2 += (50 * newGamePlusMod);
+					minSen += (50 * newGamePlusMod);
 				} else {
 					if (findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) maxSpeCap2 += (70 * newGamePlusMod);
 					if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) maxSpeCap2 += (60 * newGamePlusMod);
@@ -10217,7 +10255,7 @@ use namespace CoC;
 					else maxSpeCap2 += (40 * newGamePlusMod);
 					maxIntCap2 += (70 * newGamePlusMod);
 					maxLibCap2 += (40 * newGamePlusMod);
-					maxSenCap2 += (25 * newGamePlusMod);
+					minSen += (25 * newGamePlusMod);
 				}
 			}
 			if (displacerbeastScore() >= 14) {
@@ -10275,7 +10313,25 @@ use namespace CoC;
 				maxSpeCap2 += (75 * newGamePlusMod);
 				maxIntCap2 += (100 * newGamePlusMod);
 				maxLibCap2 += (25 * newGamePlusMod);
-			}//+20/10-20
+			}
+			if (gremlinScore() >= 13) {
+				if (gremlinScore() >= 18) {
+					maxStrCap2 -= (50 * newGamePlusMod);
+					maxSpeCap2 += (90 * newGamePlusMod);
+					maxIntCap2 += (135 * newGamePlusMod);
+					maxLibCap2 += (115 * newGamePlusMod);
+					minSen += (20 * newGamePlusMod);
+					//minCor += 10;
+				}
+				else {
+					maxStrCap2 -= (50 * newGamePlusMod);
+					maxSpeCap2 += (75 * newGamePlusMod);
+					maxIntCap2 += (120 * newGamePlusMod);
+					maxLibCap2 += (100 * newGamePlusMod);
+					minSen += (20 * newGamePlusMod);
+					//minCor += 10;
+				}
+			}
 			if (gooScore() >= 5) {
 				if (gooScore() >= 15) {
 					maxTouCap2 += (115 * newGamePlusMod);
@@ -10461,29 +10517,20 @@ use namespace CoC;
 				}
 			}//+10/10-20
 			if (elfScore() >= 5) {
-				/*if (elfScore() >= 12 && wings.type == Wings.NONE) {
-					maxStrCap2 -= (10 * newGamePlusMod);
-					maxTouCap2 -= (15 * newGamePlusMod);
-					maxSpeCap2 += (80 * newGamePlusMod);
-					maxIntCap2 += (80 * newGamePlusMod);
-					maxWisCap2 += (60 * newGamePlusMod);
-					maxSenCap2 += (30 * newGamePlusMod);
-				}
-				else */
 				if (elfScore() >= 11) {
 					maxStrCap2 -= (10 * newGamePlusMod);
 					maxTouCap2 -= (15 * newGamePlusMod);
 					maxSpeCap2 += (80 * newGamePlusMod);
 					maxIntCap2 += (80 * newGamePlusMod);
 					maxWisCap2 += (60 * newGamePlusMod);
-					maxSenCap2 += (30 * newGamePlusMod);
+					minSen += (30 * newGamePlusMod);
 				} else {
 					maxStrCap2 -= (10 * newGamePlusMod);
 					maxTouCap2 -= (10 * newGamePlusMod);
 					maxSpeCap2 += (40 * newGamePlusMod);
 					maxIntCap2 += (40 * newGamePlusMod);
 					maxWisCap2 += (30 * newGamePlusMod);
-					maxSenCap2 += (15 * newGamePlusMod);
+					minSen += (15 * newGamePlusMod);
 				}
 			}
 			if (frostWyrmScore() >= 10) {
@@ -10535,13 +10582,13 @@ use namespace CoC;
 					maxSpeCap2 += (70 * newGamePlusMod);
 					maxIntCap2 += (50 * newGamePlusMod);
 					maxLibCap2 += (80 * newGamePlusMod);
-					maxSenCap2 += (50 * newGamePlusMod);
+					minSen += (50 * newGamePlusMod);
 				}
 				else {
 					maxSpeCap2 += (35 * newGamePlusMod);
 					maxIntCap2 += (25 * newGamePlusMod);
 					maxLibCap2 += (40 * newGamePlusMod);
-					maxSenCap2 += (25 * newGamePlusMod);
+					minSen += (25 * newGamePlusMod);
 				}
 			}//+10/10-20
 			if (thunderbirdScore() >= 12) {
@@ -10884,7 +10931,7 @@ use namespace CoC;
 				maxTouCap2 += (140 * newGamePlusMod);
 				maxSpeCap2 -= (80 * newGamePlusMod);
 				maxLibCap2 += (100 * newGamePlusMod);
-				maxSenCap2 += (50 * newGamePlusMod);
+				minSen += (50 * newGamePlusMod);
 			}//+30/30-40
 			if (lowerBody == 51 && hydraScore() >= 14) {
 				if (hydraScore() >= 29) {
@@ -11048,7 +11095,7 @@ use namespace CoC;
 				maxIntCap2 += (5 * internalChimeraScore() * newGamePlusMod);
 				maxWisCap2 += (5 * internalChimeraScore() * newGamePlusMod);
 				maxLibCap2 += (5 * internalChimeraScore() * newGamePlusMod);
-				maxSenCap2 += (5 * internalChimeraScore() * newGamePlusMod);
+				minSen += (5 * internalChimeraScore() * newGamePlusMod);
 			}
 			if (hasPerk(PerkLib.RacialParagon)) {
 				maxStrCap2 += (1 * level * newGamePlusMod);
@@ -11057,7 +11104,7 @@ use namespace CoC;
 				maxIntCap2 += (1 * level * newGamePlusMod);
 				maxWisCap2 += (1 * level * newGamePlusMod);
 				maxLibCap2 += (1 * level * newGamePlusMod);
-				maxSenCap2 += (1 * level * newGamePlusMod);
+				minSen += (1 * level * newGamePlusMod);
 			}
 			if (hasPerk(PerkLib.Apex)) {
 				maxStrCap2 += (2 * level * newGamePlusMod);
@@ -11066,7 +11113,7 @@ use namespace CoC;
 				maxIntCap2 += (2 * level * newGamePlusMod);
 				maxWisCap2 += (2 * level * newGamePlusMod);
 				maxLibCap2 += (2 * level * newGamePlusMod);
-				maxSenCap2 += (2 * level * newGamePlusMod);
+				minSen += (2 * level * newGamePlusMod);
 			}
 			if (hasPerk(PerkLib.AlphaAndOmega)) {
 				maxStrCap2 += (2 * level * newGamePlusMod);
@@ -11075,7 +11122,7 @@ use namespace CoC;
 				maxIntCap2 += (2 * level * newGamePlusMod);
 				maxWisCap2 += (2 * level * newGamePlusMod);
 				maxLibCap2 += (2 * level * newGamePlusMod);
-				maxSenCap2 += (2 * level * newGamePlusMod);
+				minSen += (2 * level * newGamePlusMod);
 			}
 			if (jiangshiScore() >= 20) {
 				maxStrCap2 += (140 * newGamePlusMod);
@@ -11101,7 +11148,7 @@ use namespace CoC;
 				if (findPerk(PerkLib.GargoylePure) >= 0) {
 					maxWisCap2 += (80 * newGamePlusMod);
 					maxLibCap2 -= (10 * newGamePlusMod);
-					maxSenCap2 -= (10 * newGamePlusMod);
+					minSen -= (10 * newGamePlusMod);
 				}
 				if (findPerk(PerkLib.GargoyleCorrupted) >= 0) {
 					maxWisCap2 -= (10 * newGamePlusMod);
@@ -11114,7 +11161,7 @@ use namespace CoC;
 			addStatusValue(StatusEffects.IntWisCounter2, 1, maxIntCap2);
 			addStatusValue(StatusEffects.IntWisCounter2, 2, maxWisCap2);
 			addStatusValue(StatusEffects.LibSensCounter2, 1, maxLibCap2);
-			addStatusValue(StatusEffects.LibSensCounter2, 2, maxSenCap2);
+			addStatusValue(StatusEffects.LibSensCounter2, 2, minSen);
 		}
 
 		public function sleepUpdateStat():void{
@@ -11127,7 +11174,8 @@ use namespace CoC;
 				"spe.mult":statusEffectv3(StatusEffects.StrTouSpeCounter2)/100,
 				"int.mult":statusEffectv1(StatusEffects.IntWisCounter2)/100,
 				"wis.mult":statusEffectv2(StatusEffects.IntWisCounter2)/100,
-				"lib.mult":statusEffectv1(StatusEffects.LibSensCounter2)/100
+				"lib.mult":statusEffectv1(StatusEffects.LibSensCounter2)/100,
+				"sens":statusEffectv2(StatusEffects.LibSensCounter2)
 			}, "Racials", {text:"Racials"});
 		}
 
@@ -11182,6 +11230,7 @@ use namespace CoC;
 				spe += statusEffectv1(StatusEffects.NagaVenom);
 				CoC.instance.mainView.statsView.showStatUp( 'spe' );
 				removeStatusEffect(StatusEffects.NagaVenom);
+				statStore.removeBuffs("Poison");
 			}
 			if(hasStatusEffect(StatusEffects.MedusaVenom)) {
 				tou += statusEffectv2(StatusEffects.MedusaVenom);
@@ -11190,10 +11239,6 @@ use namespace CoC;
 				CoC.instance.mainView.statsView.showStatUp( 'spe' );
 				removeStatusEffect(StatusEffects.MedusaVenom);
 				statStore.removeBuffs("Poison");
-			}
-			if(hasStatusEffect(StatusEffects.Frostbite)) {
-				CoC.instance.mainView.statsView.showStatUp( 'str' );
-				removeStatusEffect(StatusEffects.Frostbite);
 			}
 			if(hasStatusEffect(StatusEffects.Flying)) {
 				removeStatusEffect(StatusEffects.Flying);

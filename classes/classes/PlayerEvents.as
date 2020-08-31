@@ -1490,7 +1490,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Goblinoid blood & Bouncy body & goblin mechs periodical check up
-			if (player.goblinScore() >= 10 && player.findPerk(PerkLib.GoblinoidBlood) < 0) {
+			if ((player.goblinScore() >= 10 || player.gremlinScore() >= 10) && player.findPerk(PerkLib.GoblinoidBlood) < 0) {
 				outputText("\nAs you become a goblinoid again you can feel the chemicals pumped in by your gadgets resume working.\n");
 				outputText("\n(<b>Gained Perk: Goblinoid blood</b>)\n");
 				if (player.hasKeyItem("Drug injectors")){
@@ -1505,7 +1505,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.GoblinoidBlood, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.goblinScore() < 10 && player.findPerk(PerkLib.GoblinoidBlood) >= 0) {
+			else if ((player.goblinScore() <= 10 && player.gremlinScore() <= 10) && player.findPerk(PerkLib.GoblinoidBlood) >= 0) {
 				outputText("\nYou feel the drugs in your blood losing effect. Damnit, of course it won’t work since those chemical power ups were tested for goblinoids only. Guess perhaps a in few years you could try and develop a variant.\n");
 				outputText("\n<b>(Lost Perk: Goblinoid blood)</b>\n");
 				player.removePerk(PerkLib.GoblinoidBlood);
@@ -1514,13 +1514,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.statStore.removeBuffs("PotentDrugInjector");
 				needNext = true;
 			}
-			if (player.goblinScore() >= 10 && player.findPerk(PerkLib.BouncyBody) < 0) {
+			if ((player.goblinScore() >= 10 || player.gremlinScore() >= 10) && player.findPerk(PerkLib.BouncyBody) < 0) {
 				outputText("\nGeeze with how round and small you've become its like you’ve got natural cushion now. The worst that will happen is that you'll get yourself punted by some random people mistaking you for a ball. Your body is so bouncy that it naturally has a chance to reduce damage from attacks.\n");
 				outputText("\n(<b>Gained Perk: Bouncy body</b>)\n");
 				player.createPerk(PerkLib.BouncyBody, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.goblinScore() < 10 && player.findPerk(PerkLib.BouncyBody) >= 0 && player.findPerk(PerkLib.NaturalPunchingBagFinalForm) < 0) {
+			else if ((player.goblinScore() <= 10 && player.gremlinScore() <= 10) && player.findPerk(PerkLib.BouncyBody) >= 0 && player.findPerk(PerkLib.NaturalPunchingBagFinalForm) < 0) {
 				outputText("\nYou're not as cushiony as you used to be. Better avoid getting hit.\n");
 				outputText("\n<b>(Lost Perk: Bouncy body)</b>\n");
 				player.removePerk(PerkLib.BouncyBody);

@@ -1248,6 +1248,12 @@ import flash.utils.getQualifiedClassName;
 
 		public function Monster()
 		{
+			this.strStat.core.max = Infinity;
+			this.speStat.core.max = Infinity;
+			this.touStat.core.max = Infinity;
+			this.intStat.core.max = Infinity;
+			this.wisStat.core.max = Infinity;
+			this.libStat.core.max = Infinity;
 			// trace("Generic Monster Constructor!");
 
 			//// INSTRUCTIONS
