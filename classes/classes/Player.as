@@ -3447,16 +3447,16 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "alraune") {
-				if (TopScore >= 10) {
-					race = "Alraune";
+				if (TopScore >= 10 && lowerBody == LowerBody.PLANT_FLOWER) {
+					race = "alraune";
 				}
-				else if (TopScore >= 10 && isLiliraune()) {
-					race = "Liliraune";
+				else if (TopScore >= 10 && lowerBody == LowerBody.FLOWER_LILIRAUNE) {
+					race = "liliraune";
 				}
 			}
 			if (TopRace == "yggdrasil") {
 				if (TopScore >= 10) {
-					race = "Yggdrasil";
+					race = "yggdrasil";
 				}
 			}
 			if (TopRace == "oni") {
@@ -7772,7 +7772,7 @@ use namespace CoC;
 				alrauneCounter++;
 			if (ears.type == Ears.ELFIN)
 				alrauneCounter++;
-			if ((hairType == Hair.LEAF || hairType == Hair.GRASS) && hairColor == "green")
+			if ((hairType == Hair.LEAF || hairType == Hair.GRASS) && (hairColor == "green" || hairColor == "light purple"))
 				alrauneCounter++;
 			if (hasPlainSkinOnly() && (skinTone == "leaf green" || skinTone == "lime green" || skinTone == "turquoise" || skinTone == "light green"))
 				alrauneCounter++;
@@ -7780,8 +7780,8 @@ use namespace CoC;
 				alrauneCounter++;
 			if (wings.type == Wings.NONE)
 				alrauneCounter++;
-			if (lowerBody == LowerBody.PLANT_FLOWER)
-				alrauneCounter += 4;
+			if (lowerBody == LowerBody.PLANT_FLOWER || lowerBody == LowerBody.FLOWER_LILIRAUNE)
+				alrauneCounter += 5;
 			if (stamenCocks() > 0)
 				alrauneCounter++;
 			if (hasVagina())

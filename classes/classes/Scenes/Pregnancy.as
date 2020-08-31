@@ -2121,6 +2121,21 @@ public class Pregnancy extends NPCAwareContent {
                 EngineCore.outputText("\n\nWith a sudden gush of nectar you feel something slowly sliding out of you, slowly but steadily prying your body open. Something is coming out and it feels so good, to the point of leaving you spasming periodically.");
                 EngineCore.outputText("\n\nYour eyes roll inward and you feel your consciousness partially shut down from the consecutive orgasms, as you feel seeds the size of an apple each, drop one by one out of a hidden hole under your pitcher that might as well be a second pussy from how sensitive it is. One, two, three... Eventually, you lose count of the seeds as you temporarily lose the capability of rational thought. Before long the ground is littered with your seeds. Both instinct and common sense tell you they won't grow up if you just leave them there, on top of the ground, and as such you proceed to sow them in the fertile earth around your camp, promising to yourself that you will water them everyday. You can’t help but want to do this again as soon as possible.");
             }
+            else if (player.isLiliraune()) {
+                EngineCore.outputText("\n\nWith a sudden gush of nectar, you feel that something, somewhere, is slowly sliding out of you, " +
+                        "prying your body open with slow but steady progress. Something is coming out and it feels so good, " +
+                        "causing you to periodically spasm in reaction to the crashing waves of pleasure rushing to your brain. " +
+                        "Your twin sister is in no better condition and you both strongly hug each other, squeezing your breasts together, as the both of you go into labor.\n\n" +
+                        "\"<i>Ahhhhh sis... it’s coming!</i>\"\n\n" +
+                        "\"<i>I feel it too!! Ahhh Cummiiiiing!</i>\"\n\n" +
+                        "Your eyes roll inward and the both of you orgasm as you feel seeds, " +
+                        "each the size of an apple drop, one by one, out of a hidden hole under your pitcher that might as well be a third pussy. " +
+                        "Well, you pondered how you would give birth while bathing in your pitcher and now you know. One, two, three... " +
+                        "Eventually, you lose count of the seeds as your mind temporarily loses the ability to think rationally.  " +
+                        "Before long the ground is covered with seeds, your seeds. Something tells you they won't grow big if you just leave them here on top of the ground, " +
+                        "and as such you proceed to bury them in the fertile earth around your camp, promising yourself that you will water them every day. " +
+                        "You can’t help but think that you want to do this again as soon as possible.");
+            }
             else {
                 EngineCore.outputText("\n\nWith a sudden gush of nectar you feel something slowly sliding out of you, prying your body open with slow but steady progress. Something is coming out and it feels so good, causing you to periodically spasm in reaction to the crashing waves of pleasure rushing to your brain. You pussy starts gushing and you know exactly what is coming next.");
                 EngineCore.outputText("\n\nYour eyes roll inward and you lose yourself to consecutive orgasms as you feel seeds the size of an apple drop, one by one, out of your abused pussy. One, two, three... Eventually, you lose count of the seeds as your mind temporarily loses the ability of rational thought.  Before long the ground is covered with seeds which you proceed to swiftly throw away in the forest. Despite how wrong it was you can’t help but think you want to do this again as soon as possible.");

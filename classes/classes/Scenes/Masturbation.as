@@ -75,9 +75,12 @@ public class Masturbation extends BaseContent {
 			if (player.tentacleCocks() > 0) {
 				addButton(button++, "Tentabutt", tentacleGoesUpYerPooperNewsAtEleven);
 			}
-			if (player.lowerBody == LowerBody.PLANT_FLOWER) {
+			if (player.lowerBody == LowerBody.PLANT_FLOWER || player.lowerBody == LowerBody.FLOWER_LILIRAUNE) {
 				if (player.hasVagina()) addButton(button++, "Stamenpussy", stamenSelfFuck);
 				addButton(button++, "Stamenbutt", stamenGoesUpYerPooperNewsAtEleven);
+			}
+			if (player.lowerBody == LowerBody.FLOWER_LILIRAUNE) {
+				if (player.hasVagina()) addButton(button++, "TwinYuri", twinYuri);
 			}
 			if (player.canOvipositBee() && player.lust >= 33 && player.biggestCockArea() > 100) {
 				addButton(button++, "LayInCock", getHugeEggsInCawk);
@@ -3466,7 +3469,13 @@ public class Masturbation extends BaseContent {
 				index++;
 			}
 			clearOutput();
-			doStripCheck();			
+			doStripCheck();
+
+			if(player.isLiliraune())
+			{
+				outputText("\n\n\"<i>Hey sis feel in the mood for a ride?</i>\"\n\n");
+				outputText("\"<i>I was about to suggest that very thing.</i>\"\n\n");
+			}
 			outputText("Aroused your twisting vine stamen perks up like a pet expecting to be fed, and you have to admit that you plan to give your vine exactly what it needs - a hot, slippery slit to nestle inside of. Already, your [vagina] has grown ");
 			if (player.wetness() <= 2)
 				outputText("moist");
@@ -3517,8 +3526,58 @@ public class Masturbation extends BaseContent {
 				player.orgasm();
 				dynStats("sen", (-1*(1 + (player.tentacleCocks() + player.stamenCocks()))));
 			}
+			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 			doNext(camp.returnToCampUseOneHour);
 		}
+
+	private function twinYuri():void {
+		var x:int = -1;
+		var y:int = -1;
+		var index:int = 0;
+		while (index < player.cocks.length) {
+			if (player.cocks[index].cockType == CockTypesEnum.STAMEN) {
+				if (x == -1) x = index;
+			}
+			index++;
+		}
+		//Pick a second dick that isn't the first.
+		index = 0;
+		while (index < player.cocks.length) {
+			if (index != x) {
+				if (y < 0)
+					y = index;
+				else if (rand(2) == 0 && player.cocks[y].cockType != CockTypesEnum.STAMEN)
+					y = index;
+				else if (player.cocks[index].cockType == CockTypesEnum.STAMEN)
+					y = index;
+			}
+			index++;
+		}
+		clearOutput();
+		outputText("You realize how horny you are, your twin sister giving a silent nod.\n\n\"" +
+				"\"<i>Hey sis feel in the mood for a ride?</i>\"\n\n" +
+				"\"<i>Yeah, we can’t fight properly while aroused like this, close the curtain.</i>\"\n\n" +
+				"She doesn’t need to say another word as you close your petals in order to give yourself some well-needed privacy. " +
+				"You gently insert your finger in her nectar drenched pussy as your twin plays with your nectar-laden breast, suckling on your nipples. " +
+				"The two of you moan in delight. Feeling both your “breast descript” and her “pussy descript”, you can’t help but slip your finger deeper, " +
+				"seeking more pleasure as she mashes and squeezes both of your tits together trying to make you leak that excess nectar out. " +
+				"The connection between your senses is so perfect, it feels like having four sets of hands massaging your cunt and milking your tits at the same time, " +
+				"and the best about it is you can pinpoint your own G spots! You scream together in perfect sync.\n\n" +
+				"\"<i>I’m cummmmmming!!!!</i>\"\n\n" +
+				"The both of you orgasm at the same time, your four breasts and two cunts gushing and filling the pitcher with pints of extra nectar. You reopen your petals and the two of you chuckle.\n\n" +
+				"\"<i>Who needs anyone else when we can just fuck ourselves?</i>\"\n\n" +
+				"\"<i>I think we only do it for variety. Truthfully, I would get bored if it was just us two all the time… Plus, who says no to a threesome?</i>\"\n\n" +
+				"The two of you giggle at this idea as you resume your journey, highly satisfied.");
+		if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			player.orgasmRaijuStyle();
+			dynStats("sen", (1*(1 + (player.tentacleCocks() + player.stamenCocks()))));
+		}
+		else {
+			player.orgasm();
+			dynStats("sen", (-1*(1 + (player.tentacleCocks() + player.stamenCocks()))));
+		}
+		doNext(camp.returnToCampUseOneHour);
+	}
 		
 		//Upon selecting the option to masturbate you should have the option to fuck your own ass if you have a tentacle dick
 		//Replace n with the tentacle cock number
@@ -3536,6 +3595,7 @@ public class Masturbation extends BaseContent {
 			//[Standard text for stripping off goes here]
 			doStripCheck();			
 			outputText("You eagerly reveal your flora pecker as it squirms and wriggles on its own, gently caressing the green surface here and there, its coloration changing as you tease yourself.  After toying with your tentacle dick for a while, you decide to get down to business; using your newly acquired shaft muscles, you expertly guide your ever-writhing " + player.cockDescript(tentacle) + " to your back, pointing it toward your buttocks.  You grind the tip against your [butt], making pre-cum flow from your mushroom-like head and smearing it against your " + player.skinFurScales() + ".  Using your own seminal fluid as a natural lube, you press the tip of your " + player.cockDescript(tentacle) + " in front of your own backdoor, stretching your anal opening little by little, careful not to tear your own insides.  This goes on for a while, until you suddenly lose all patience and roughly stuff your own " + player.cockDescript(tentacle) + " at full force inside your colon.");
+
 			//[anal tightness check]
 			player.buttChange(player.cockArea(tentacle), true, true, false);
 			
@@ -3604,11 +3664,27 @@ public class Masturbation extends BaseContent {
 			}
 			clearOutput();
 			//[Standard text for stripping off goes here]
-			doStripCheck();			
-			outputText("You grab one of your stamen mounted vine, gently caressing the green surface here and there, its coloration changing as you tease yourself. After toying with your vine for a while, you decide to get down to business; using your newly acquired shaft muscles, you expertly guide your stamen to your back, pointing it toward your buttocks. You grind the tip against your [butt], making liquid pollen flow from your stamen head and smearing it against your [skin]. Using your own seminal fluid as a natural lube, you press the tip of your stamen in front of your backdoor, stretching your anal opening little by little, careful not to tear your own insides. This goes on for a while, until you suddenly lose all patience and roughly stuff your own stamen at full force inside your colon.");
+			doStripCheck();
+			if(player.isLiliraune())
+			{
+				outputText("\n\n\"<i>Hey sis I’m in the mood for anal today what about you?</i>\"\n\n");
+				outputText("\"<i>That works but don’t you go and pick the largest one for yourself.</i>\"\n\n");
+			}
+			outputText("You ");
+			if(player.isLiliraune()) outputText("both ");
+			outputText("grab one of your stamen mounted vine, gently caressing the green surface here and there, its coloration changing as you tease yourself. After toying with your vine for a while, you decide to get down to business; using your newly acquired shaft muscles, you expertly guide your stamen to your back, pointing it toward your buttocks. You grind the tip against your [butt], making liquid pollen flow from your stamen head and smearing it against your [skin]. Using your own seminal fluid as a natural lube, you");
+			if(player.isLiliraune()) outputText(" and your sister both");
+			outputText(" press the tip of your stamen in front of your backdoor, stretching your anal opening little by little, careful not to tear your own insides. This goes on for a while, until you suddenly lose all patience and roughly stuff your own stamen at full force inside your colon.");
+			if(player.isLiliraune())
+			{
+				outputText("\n\n\"<i>EEEEep! Not so rough sister! you're going to break us apart!</i>\"\n\n");
+				outputText("\"<i>Shut up! You have the stamen up to your bowel!</i>\"\n\n");
+			}
 			//[anal tightness check]
 			player.buttChange(player.cockArea(tentacle), true, true, false);
-			outputText("\n\nThe impetuousness of the act makes you cry in a mixture of pleasure and pain, your moist tight butthole being overloaded with intense sensations. Fortunately the tender and rubbery texture of your vines allows them for more sensitivity, the subtle friction sending tingles from your pitcher all the way up your spine. You shiver from the sheer cocktail of raw pleasure you’re inflicting on your own body. Your vine keeps squirming against your insides, making you quiver and giggle like a whore, until it lodges all the way inside your colon, adopting a more comfortable position. You then proceed to ferociously fuck your own [asshole], stretching it a bit more at every thrust.");
+			outputText("\n\nThe impetuousness of the act makes you ");
+			if(player.isLiliraune()) outputText("both ");
+			outputText("cry in a mixture of pleasure and pain, your moist tight butthole being overloaded with intense sensations. Fortunately the tender and rubbery texture of your vines allows them for more sensitivity, the subtle friction sending tingles from your pitcher all the way up your spine. You shiver from the sheer cocktail of raw pleasure you’re inflicting on your own body. Your vine keeps squirming against your insides, making you quiver and giggle like a whore, until it lodges all the way inside your colon, adopting a more comfortable position. You then proceed to ferociously fuck your own [asshole], stretching it a bit more at every thrust.");
 			outputText("\n\nThe conjugated friction of your vine writhing inside your devastated interior (as well as the rough hanjdob you’re giving yourself) eventually proves too much for your horny body, and all of your stamens releases a massive load, squirting flower juices everywhere inside (and outside) your body. Pressure builds in your ass (and your hands) as pollen flows out of you. You groan and lazily remove your stamen from your anus as you give in to your pleasure-induced drowsiness. You drift into a brief catnap, your stamens mounted vines pulsing and throbbing with continual lust.");
 			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();

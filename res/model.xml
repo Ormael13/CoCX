@@ -273,7 +273,7 @@
 
 
 	<!-- LOCATION IN SCREEN AREA -->
-        <spritemap file="body.png">
+    <spritemap file="body.png">
         <cell rect="1,90,49,59" name="torso/human" dx="79" dy="64"/>
         <cell rect="51,90,49,59" name="torso/fur" dx="79" dy="64"/>
         <cell rect="101,90,49,59" name="torso/chitin" dx="79" dy="64"/>
@@ -466,6 +466,7 @@
         <cell rect="371,325,165,119" name="legs_fg/crabtaur" dx="31" dy="64"/>
         <cell rect="546,325,175,119" name="legs_fg/bugtaur" dx="32" dy="65"/>
         <cell rect="165,689,130,108" name="legs_fg/snail" dx="42" dy="97"/>
+        <cell rect="122,1514,173,86" name="legs_fg/liliraune" dx="2" dy="123"/>
         <cell rect="607,101,143,107" name="legs/centaur" dx="57" dy="93"/>
         <cell rect="507,230,125,88" name="legs/cattaur" dx="81" dy="103"/>
         <cell rect="633,230,125,88" name="legs/reptaur" dx="81" dy="103"/>
@@ -1089,8 +1090,8 @@
 		<layer name="muscle"/>	
         <layer name="torso"/>	
 		<layer name="ears_truebg"/>
-        <layer name="hair_bg"/>
 		<layer name="rearbody"/>
+		<layer name="hair_bg"/>
 		<layer name="clothCape"/>
 		<layer name="wings"/>
 		<layer name="tailAccessory"/>
@@ -1683,6 +1684,11 @@
 				<if test="cor &gt;=50">
 					<hide part="face/human"/>
 					<show part="face/demonlewd"/>
+				</if>
+				<if test="cor &gt;=50 and lowerBody == LowerBody.FLOWER_LILIRAUNE">
+					<hide part="face/*"/>
+					<show part="face/lilirauneCorruptedSmile"/>
+					<show part="forehead/lilirauneCorruptedShadow"/>
 				</if>
 				<if test="skin.base.type == Skin.GOO">
 					<hide part="face/*"/>
@@ -2378,6 +2384,56 @@
                 <hide part="legs/*"/>
                 <show part="legs_fg/alraune"/>
             </case>
+			<case values="LowerBody.FLOWER_LILIRAUNE">
+                <hide part="legs/*"/>
+				<show part="legs_fg/liliraune"/>
+                <show part="legs_bg/liliraune"/>
+				<show part="torso/liliraune"/>
+				<show part="face/liliraune"/>
+				<show part="arms/liliraune"/>
+				<show part="arms_bg/liliraune"/>
+			
+				<show part="ears/liliraune"/>
+				<show part="horns/LilirauneOrchid"/>
+				<show part="horns_bg/LilirauneOrchid"/>							
+				<show part="uniquePlantBath/lilirauneBath"/>	
+				
+				<!-- HAIR AREA -->
+                <if test="hairLength lt 16">
+					<show part="hair/liliraune"/>
+					<show part="hair_bg/liliraune"/>
+					<else>
+						<show part="hair/liliraune"/>
+					<show part="hair_bg/liliraune"/>
+                    <show part="hair_bg/lilirauneLong"/>
+					</else>
+                </if>		
+				
+				<!-- CHEST AREA -->
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="breasts/0liliraune"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="breasts/Bliliraune"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="breasts/Dliliraune"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="breasts/Dliliraune"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="breasts/Fliliraune"/>
+						</case>
+						<default>
+							<show part="breasts/Fliliraune"/>
+						</default>
+					</switch>
+				</if>			
+				
+            </case>
 			<case values="LowerBody.SHARK,LowerBody.ORCA">
 				<if test="lowerBody==LowerBody.ORCA">
 					<hide part="legs/*"/>
@@ -2968,11 +3024,9 @@
                     </if>
                 </default>
             </switch>
-            <if test="lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER">
+            <if test="lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER or lowerBody == LowerBody.FLOWER_LILIRAUNE">
                 <hide part="penis/*"/>
 				<hide part="penis_taur/*"/>
-				<hide part="balls/*"/>
-				<hide part="balls_taur/*"/>
             </if>
         </if>
 		
@@ -2998,7 +3052,7 @@
             </default>
             </switch>
             <show part="balls$taur/B$skinx$ballsz$taur"/>
-			<if test="lowerBody == LowerBody.CANCER">
+			<if test="lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER or lowerBody == LowerBody.FLOWER_LILIRAUNE">
 				<hide part="balls/*"/>
 				<hide part="balls_taur/*"/>
 			</if>

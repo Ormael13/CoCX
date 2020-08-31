@@ -976,6 +976,9 @@ public class Creature extends Utils
 			if (!skin.hasCoat()) return hairColor;
 			return skin.coat.color;
 		}
+		public function get NakedCoatColor():String {
+			return skin.coat.color;
+		}
 		public function set coatColor(value:String):void {
 			if (!skin.hasCoat()) trace("[WARNING] set coatColor() called with no coat");
 			skin.coat.color = value;

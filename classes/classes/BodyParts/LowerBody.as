@@ -368,7 +368,7 @@ public class LowerBody extends SaveableBodyPart {
 		return type == KRAKEN;
 	}
 	public function isAlraune():Boolean {
-		return type == PLANT_FLOWER;
+		return type == PLANT_FLOWER || type == FLOWER_LILIRAUNE;
 	}
 	public function isLiliraune():Boolean {
 		return type == FLOWER_LILIRAUNE;

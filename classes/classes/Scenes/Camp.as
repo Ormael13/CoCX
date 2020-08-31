@@ -2366,6 +2366,9 @@ private function SparrableNPCsMenu():void {
 			} else if (player.lowerBody == LowerBody.PLANT_FLOWER) {
 				if (timeQ != 1) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hours.\n");
 				else outputText("You lie down in your pitcher, closing off your petals as you get comfortable for an hour.\n");
+			} else if (player.lowerBody == LowerBody.FLOWER_LILIRAUNE) {
+				if (timeQ != 1) outputText("You and your twin sister lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hours.\n");
+				else outputText("You and your twin sister lie down in your pitcher, closing off your petals as you get comfortable for an hour.\n");
 			} else if (player.isGargoyle()) {
 				if (timeQ != 1) outputText("You sit on your pedestal, your body petrifying like stone as you briefly slumber for " + num2Text(timeQ) + " hours.\n");
 				else outputText("You sit on your pedestal, your body petrifying like stone as you briefly slumber for an hour.\n");
@@ -2730,6 +2733,11 @@ private function SparrableNPCsMenu():void {
 		}
 		if (player.lowerBody == LowerBody.PLANT_FLOWER) {
 			outputText("You lie down in your pitcher, dozing off for the night as you close off your petals to sleep.\n");
+		}
+		if (player.lowerBody == LowerBody.FLOWER_LILIRAUNE) {
+			outputText("You and your twin sister (end of cut)lie down in your pitcher, dozing off for the night as you close off your petals to sleep. You hug her before closing your eyes.\n\n" +
+					"\"<i>Good night, sis.</i>\"\n\n" +
+					"\"<i>Good night.</i>\"\n\n");
 		}
 		//REGULAR HP/FATIGUE RECOVERY
 		HPChange(timeQ * hpRecovery * multiplier, display);

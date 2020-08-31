@@ -3248,6 +3248,8 @@ public class PerkLib
 		public static const DemonicLethicite:PerkType = mk("Demonic Lethicite", "Demonic Lethicite",
 				"Improves soulforce and makes you more demonic.");//Effects: maxSoulforce += lib; +1 demonscore; 10 min corruption
 		public static const DemonSlayer:DemonSlayerPerk = new DemonSlayerPerk();
+		public static const DualMind:PerkType = mk("Dual Mind", "Dual Mind",
+				"Greatly empower the tease ability.");
 		public static const ElvenBounty:ElvenBountyPerk = new ElvenBountyPerk();
 		public static const FclassHeavenTribulationSurvivor:PerkType = mk("F class Heaven Tribulation Survivor", "F class Heaven Tribulation Survivor",
 				"You have survived third trial on cultivation path: F class Heaven Tribulation.").withBuffs({'str.mult':0.20,'int.mult':0.20,'wis.mult':0.20});

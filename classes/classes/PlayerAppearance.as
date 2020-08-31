@@ -908,10 +908,21 @@ public class PlayerAppearance extends BaseContent {
 		//Height and race.
 		outputText("You are a ");
 		outputText(Measurements.footInchOrMetres(player.tallness));
-		outputText(" tall [malefemaleherm] [race], with [bodytype].");
+		var pcrace:String = player.race();
+		if (pcrace != "half cow-morph" && pcrace != "half cow-girl" && pcrace != "cow-girl" && pcrace != "cow-girl" && pcrace != "cow-morph"
+				&& pcrace != "minotaur" && pcrace != "half-minotaur"
+				&& pcrace != "alraune" && pcrace != "liliraune"
+				&& pcrace != "half unicorn" && pcrace != "unicorn" && pcrace != "unicornkin" && pcrace != "half alicorn" && pcrace != "alicorn" && pcrace != "alicornkin" && pcrace != "true alicorn"
+				&& pcrace != "half bicorn" && pcrace != "bicorn" && pcrace != "bicornkin" && pcrace != "half nightmare" && pcrace != "nightmare" && pcrace != "nightmarekin" && pcrace != "true nightmare")
+		{
+			outputText(" tall [malefemaleherm] [race], with [bodytype].");
+		}
+		else{
+			outputText(" tall [race], with [bodytype].");
+		}
 	}
 	public function describeLowerBody():void {
-		if (player.isTaur() || player.lowerBody == LowerBody.DRIDER || player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.MELKIE || player.lowerBody == LowerBody.CENTIPEDE || player.lowerBody == LowerBody.PLANT_FLOWER) {
+		if (player.isTaur() || player.lowerBody == LowerBody.DRIDER || player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.MELKIE || player.lowerBody == LowerBody.CENTIPEDE || player.lowerBody == LowerBody.PLANT_FLOWER || player.lowerBody == LowerBody.FLOWER_LILIRAUNE) {
 			if (player.lowerBody == LowerBody.HOOFED)
 				outputText("  From the waist down you have the body of a horse, with all " + num2Text(player.legCount) + " legs capped by hooves.");
 			else if (player.lowerBody == LowerBody.PONY)
@@ -925,7 +936,9 @@ public class PlayerAppearance extends BaseContent {
 			else if (player.lowerBody == LowerBody.KRAKEN)
 				outputText("  Where your legs would normally start you've grown the body of a giant squid, with " + num2Text(player.legCount) + " tentacles leg that sprout from your [hips], two of them larger than the others. Your tentacle reaches for up to "+Measurements.footInchOrMetres(player.tallness * 2)+" feet in length!");
 			else if (player.lowerBody == LowerBody.PLANT_FLOWER)
-				outputText("  Around your waist, the petals of a large pink orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the centre, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud.  While you don't technically have legs anymore, you can still move around on your " + num2Text(player.legCount) + " vine-like stamens.");
+				outputText("  Around your waist, the petals of a large "+player.NakedCoatColor+" orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the centre, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud.  While you don't technically have legs anymore, you can still move around on your " + num2Text(player.legCount) + " vine-like stamens.");
+			else if (player.lowerBody == LowerBody.FLOWER_LILIRAUNE)
+				outputText("  Around your waist, the petals of a large "+player.NakedCoatColor+" orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the center, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud. While you don't technically have legs anymore, you can still move around on your " + num2Text(player.legCount) + " vine-like stamens. You used to be alone in the pitcher, but you now share space with your twin sister, taking turns with her whether it's for battle or sex.");
 			else if (player.lowerBody == LowerBody.MELKIE)
 				outputText("  Beneath your waist your body ends in the tail of a leopard seal. It allows you to swim gracefully in arctic waters. However, when the time to move on land arises, you can part the fur at your waist in order to let your two human legs out and walk on solid ground as the land dwellers do.");
 			else if (player.lowerBody == LowerBody.CENTIPEDE)
@@ -1702,7 +1715,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (player.horns.type == Horns.ORCHID) {
 			if (player.horns.count > 0)
-				outputText("  A huge pair of orchids grows on each side of your head, their big long petals flopping gaily when you move.");
+				outputText("  A huge pair of "+player.NakedCoatColor+" orchids grows on each side of your head, their big long petals flopping gaily when you move.");
 		}
 		if (player.horns.type == Horns.ONI_X2) {
 			if (player.horns.count > 0)
@@ -2666,10 +2679,18 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.alicornkinScore() >= 1) outputText("\n<font color=\"#008000\">Alicornkin/Nightmarekin: " + player.alicornkinScore() + "</font>");
 		else if (player.alicornkinScore() < 1) outputText("\n<font color=\"#ff0000\">Alicornkin/Nightmarekin: 0</font>");
 		//Alraune
-		if (player.alrauneScore() >= 17) outputText("\n<font color=\"#0000a0\">Greater Alraune: " + player.alrauneScore() + " (+" + (115 * (1 + player.newGamePlusMod())) + " max Tou, -" + (60 * (1 + player.newGamePlusMod())) + " max Spe, +" + (200 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-		else if (player.alrauneScore() >= 13) outputText("\n<font color=\"#0000a0\">Alraune: " + player.alrauneScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (145 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-		else if (player.alrauneScore() >= 1) outputText("\n<font color=\"#008000\">Alraune: " + player.alrauneScore() + "</font>");
-		else if (player.alrauneScore() < 1) outputText("\n<font color=\"#ff0000\">Alraune: 0</font>");
+		if(player.lowerBody != LowerBody.FLOWER_LILIRAUNE) {
+			if (player.alrauneScore() >= 17) outputText("\n<font color=\"#0000a0\">Greater Alraune: " + player.alrauneScore() + " (+" + (115 * (1 + player.newGamePlusMod())) + " max Tou, -" + (60 * (1 + player.newGamePlusMod())) + " max Spe, +" + (200 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+			else if (player.alrauneScore() >= 13) outputText("\n<font color=\"#0000a0\">Alraune: " + player.alrauneScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (145 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+			else if (player.alrauneScore() >= 1) outputText("\n<font color=\"#008000\">Alraune: " + player.alrauneScore() + "</font>");
+			else if (player.alrauneScore() < 1) outputText("\n<font color=\"#ff0000\">Alraune: 0</font>");
+		} else {
+		//Liliraune	
+			if (player.alrauneScore() >= 17) outputText("\n<font color=\"#0000a0\">Greater Liliraune: " + player.alrauneScore() + " (+" + (115 * (1 + player.newGamePlusMod())) + " max Tou, -" + (60 * (1 + player.newGamePlusMod())) + " max Spe, +" + (200 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+			else if (player.alrauneScore() >= 13) outputText("\n<font color=\"#0000a0\">Liliraune: " + player.alrauneScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (145 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+			else if (player.alrauneScore() >= 1) outputText("\n<font color=\"#008000\">Liliraune: " + player.alrauneScore() + "</font>");
+			else if (player.alrauneScore() < 1) outputText("\n<font color=\"#ff0000\">Liliraune: 0</font>");
+		}
 		//Avian
 		if (player.avianScore() >= 9) outputText("\n<font color=\"#0000a0\">Avian-morph: " + player.avianScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (75 * (1 + player.newGamePlusMod())) + " max Spe, +" + (30 * (1 + player.newGamePlusMod())) + " max Intb)</font>");
 		else if (player.avianScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Avian-morph: " + player.avianScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (15 * (1 + player.newGamePlusMod())) + " max Int)</font>");

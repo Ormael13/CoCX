@@ -34,6 +34,113 @@ package classes.Scenes
 			doNext(camp.returnToCampUseOneHour);
 		}
 
+		public function TreeWayRapeLiliraune():void {
+			clearOutput();
+			outputText("With your foe on the ground before you, you feel a familiar warmth rushing through you, making you blush purple as fantasies of filling this woman with your progeny overcome you. You smile mischievously at your twin sister.\n\n" +
+					"\"<i>Hey sister, feel like going for a threeway, including pollination?</i>\"\n\n" +
+					"\"<i>Sure, and she looks just like the kind of girl I'd like to relieve me of my load.</i>\"\n\n" +
+					"Resolving to make your dreams a reality, the pair of you loose a spray of pollen for your victim to slowly inhale as it lays thick in the air...\n\n" +
+					"Her face flushes rapidly as her expression gradually turns to that of a bitch in heat, ready for pollination as your aphrodisiacs fill her with pink thoughts. " +
+					"You and your sister help your soon to be bride of the day to climb up into the nectar bath, allowing her to get a full whiff of your intoxicating scent from the source, " +
+					"something she eagerly does. When you're sure she’s sufficiently entranced you start with a sweet kiss, pulling her into your arms as you sister massages and plays with her breasts.  " +
+					"Meanwhile, with the prey distracted, you ready your many stamen mounted vines for the incoming pollination.\n\n" +
+					"You and your sister share a bath with her, washing her body thoroughly with your syrupy nectar until she’s as slimy and ready as the two of you are. " +
+					"Your ambient pollen and various aphrodisiacs only serve to turn her on more, her skin a flushed shade of pink under your sticky nectar, making her squirt from the smallest stimulation, like your heated breath against her neck or your sister’s hands toying with her nipples. " +
+					"The two of you caress her skin, making sure not to leave any area untouched, as you pull your vines into the bath, slowly aligning your cunnies and hers with your stamens.\n\n" +
+					"She lazily gasps in surprise and delight as you insert yourself in her, filling her ass and cunt in just the perfect way with your thick vines. You aren't left wanting either, " +
+					"expertly fucking your pussies in a way only your own stamens can manage. The three of you moan together as your stamens work both yours and her holes in perfect synchronization. " +
+					"While you and your sister are in control, you aren’t sure whether you’re more enthusiastic about fucking the woman’s cunt or fucking your own, " +
+					"as you can feel every stamen and the two cunts from your body that much more sharply. " +
+					"Not that it matters at all as long as all these holes are filled with pollen by the end.\n\n" +
+					"\"<i>Ahhh sis! It's like fucking with three dicks except you also feel two in your own pussy! Ahhhhn!!!</i>\"\n\n" +
+					"\"<i>I’m completely losing it! I think I’m going to cum!</i>\"\n\n" +
+					"Nectar and pussy juice mix in the bath, as the trio of you, reach orgasm after orgasm, pumping your respective bodies full of liquid pollen. " +
+					"Reaching your peak for the last time with a shuddering cry, you slowly pull the girl out of your flower and deposit her back on the ground, " +
+					"leaving her unconscious but satisfied as you caress her belly still full of your pollen. " +
+					"You look back at your twin to confer with her.\n\n" +
+					"\"<i>You think it took?</i>\"\n\n" +
+					"\"<i>Oh, I’m positive it did… she should be giving birth to our seedling in no time.</i>\"\n\n" +
+					"Your bellies aren’t any better, though the pregnancy will soon move down to the pitcher, " +
+					"and you fantasize at the idea of giving birth, the two of you hoping for the best as you head back to camp.");
+			player.sexReward("cum");
+			player.sexReward("vaginalFluids");
+			player.sexReward("saliva");
+			statScreenRefresh();
+			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
+			doNext(camp.returnToCampUseOneHour);
+		}
+
+		public function TagTeam():void {
+			clearOutput();
+			outputText("With your foe on the ground beneath you, you can’t help but think you’ve finally found a stamen to fertilize yourself with! " +
+					"You grin at your sister, voicing your line of thought.\n\n" +
+					"\"<i>Think he can fertilize us good?</i>\"\n\n" +
+					"\"<i>If he can feed our two pistils sure, but I want the first turn.</i>\"\n\n" +
+					"Without waiting any longer, the two of you proceed to grab him with your vines and pull him toward your waiting flower. " +
+					"He violently struggles to escape as you pull him ever closer to the pool, all the while you and your sister giggle at his desperate attempts to get away.\n\n" +
+					"\"<i>Look sister, he's trying so hard to escape. I love these guys.</i>\"\n\n" +
+					"\"<i>You can’t run away silly, not from our vines. There's no way you will make it, tied up like this… Mmmmmmm, that and the fact your resistance only makes us hornier.</i>\"\n\n" +
+					"All good things must come to an end however, and entertaining as it is, you want to pollinate now, even if your twin will get the first round! " +
+					"The both of you release a massive cloud of aphrodisiac pollen toward him, letting him inhale your scent. " +
+					"He doesn’t struggle much anymore as his ‘stamen’ betrays him, going erect in seconds, drooling precum at the mere thought of getting a shot at your lovely pair of pussies, " +
+					"something you will be more than happy to let him do. Looking at you both with half-lidded eyes, he relinquishes control entirely. " +
+					"You finally reel him into your nectar bath and kiss him as your sister lubes up his stamen with your nectar. He makes a cute moan as she prepares him for the next step, " +
+					"drooling with delight at the idea of getting what she wants. You sister straddles him right away as you lay against his back feeling your own pussy clench in pleasure as she milks him for his semen. " +
+					"Eventually, you both achieve orgasm, her on his dick and you on his ass. Giggling, your sister hands him over.\n\n" +
+					"\"<i>It’s your turn sis, please take him in as I take his mouth.</i>\"\n\n" +
+					"\"<i>All good, I have it under control. Make sure to kiss him correctly, the last time it didn't feel quite as good for me.</i>\"\n\n" +
+					"While your twin takes care of his mouth, unable to wait any longer, you pull him to you, impaling your nectar drenched hole on his cock. You begin to slide yourself up and down, making lewd wet noises as you forcefully milk your former opponent's stamen. Pollination feels so wonderful! You fawn over him, moving into your drugged victim’s open arms and before long, it’s hard to figure out which of you is the most addicted. Your sister suddenly breaks the sloppy kiss, her mouth and his still linked by a strand of saliva, as your mate finally bottoms out and fills your flower with his seed, you and your sister achieve a second orgasm.\n\n" +
+					"Highly satisfied, the both of you deposit him back on the ground with little ceremony, half conscious from the massive drug-induced orgasm your pollen put him under. You and your twin can’t help but hope the seed took, " +
+					"daydreaming of your children to come as you seal your vaginas shut to prevent the load from escaping.");
+			player.sexReward("cum");
+			player.sexReward("vaginalFluids");
+			player.sexReward("saliva");
+			statScreenRefresh();
+			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
+			doNext(camp.returnToCampUseOneHour);
+		}
+
+		public function Convert():void {
+			clearOutput();
+			outputText("You watch delighted as -female enemy name- drops to the ground in defeat. You could have used her as a seedbed, but this time around you have other ideas as you raise your stamen mounted vine. ");
+			if(player.isLiliraune())
+			{
+				outputText("Your twin smirks mischievously, she likes this program.\n\n" +
+						"\"<i>Um, look at her lovely body; do you think we can make it better?</i>\"\n\n" +
+						"\"<i>We sure can! I wonder how she'll look once the pleasure ravages her.</i>\"\n\n");
+			}
+			outputText("Terrified of you, she tries to crawl away, but your vines firmly grip her and pull her toward you. " +
+					"your victim screams, claws and struggles in all the ways she can, but your vines finish binding her in place as your last free vine moves towards her pussy. You ");
+			if(player.isLiliraune()) outputText("and your sister both ");
+			outputText("moan in pleasure as the tentacle tip blooms open into a flower mounted by a hard stamen. It begins to slowly leak a purple fluid, a sign of your corruption, " +
+					"as you approach it from the wanton slut slit. Unable to escape and immobilized like she is, she can only beg as your stamen suddenly starts leaking it’s liquid corruption into her pussy, " +
+					"flooding her womb until her belly looks pregnant with your corrupted fluids. She resists for a moment, but it is short lived as her body begins to change color to light green, " +
+					"spreading from her already nectar gushing pussy of which the amber brew mixes with your fluids. She moans and drools nectar as her hair is replaced by grass and her body becomes progressively closer to that of a plant morph, " +
+					"her overflowing pussy drenching the ground from which corrupted grass begins to grow. Unsatisfied with your stamen in her pussy, " +
+					"she yanks at a vine, forces it open and shoves it in her mouth with an eye crossed glaze. You can’t hold the pleasure at bay anymore, " +
+					"cuming both inside and outside as the bitch grows her floral hair ornament, finishing her transformation into a dryad.\n\n");
+			if(player.isLiliraune())
+			{
+				outputText("\"<i>Mmmmm, look how good she looks now! I’d eat her flower anytime.</i>\"\n\n" +
+						"\"<i>Except we already did, sister, she doesn’t look like she will wake up anytime soon either.</i>\"\n\n" +
+						"The two of you chuckle, turning people into messes like these is so much more fun with each other around. ");
+			}
+			outputText("Satisfied with your handiwork,");
+			if(player.isLiliraune()) outputText(" the both of");
+			outputText(" you depose your newest adopted daughter on the ground, who swiftly wakes up and looks at ");
+			if(player.isLiliraune()) outputText(" the pair of");
+			outputText(" you with eyes full of adoration." +
+					"\"<i>Thank you so much, I’m so happy! Let me repay you by spreading this gift to everyone I can!</i>\"\n\n" +
+					"Aw, ain’t she grateful. She stands up in a rush, having spotted a somewhat terrified imp. She proceeds to run after it, screaming." +
+					"\"<i>Stop running away and fuck my flower!!!!</i>\"\n\n" +
+					"You giggle and shrug. How your newest daughter enjoys her new life is none of your concern. " +
+					"You head back to camp as she begins to forcefully rub the imp’s stamen for his pollen.");
+			player.sexReward("vaginalFluids");
+			player.sexReward("saliva");
+			statScreenRefresh();
+			doNext(camp.returnToCampUseOneHour);
+		}
+
 		public function pcUniqueSexScenesChoiceMenu():void {
 			menu();
 			if (player.tailType == Tail.MANTICORE_PUSSYTAIL && monster.hasCock()) addButton(0, "Tail Rape", manticoreTailRapeScene);
@@ -63,11 +170,22 @@ package classes.Scenes
 			if (player.hasVagina() && (((player.isKraken() || player.lowerBody == LowerBody.HYDRA) && player.tallness*3/2 > monster.tallness) || player.tallness > monster.tallness*2) ) addButton(10, "Living Dildo", HumanDildo);
 			else addButtonDisabled(10, "Living Dildo", "To be way taller then your opponent in order to even use this scene.");
 
-			if (player.isInGoblinMech() && player.hasKeyItem("Cum Reservoir") >= 0 && monster.hasCock()) {
+			if (player.isAlraune()) {
+				//Liliraune
+				if (player.isLiliraune() && monster.hasVagina()) addButton(11, "Triple Girl Fun", TreeWayRapeLiliraune);
+				else addButtonDisabled(11, "Triple Girl Fun", "You need to be two person against a female to use this scene.");
+				if (player.isLiliraune() && monster.hasCock()) addButton(12, "Tag Team", TagTeam);
+				else addButtonDisabled(12, "Tag Team", "You need to be two person against a male to use this scene.");
+				if (player.isAlraune() && player.cor >= 50 && monster.hasVagina()) addButton(13, "Convert", Convert);
+				else addButtonDisabled(13, "Convert", "You need to be a very corrupted alraune against a female to use this scene.");
+			}
+			else {
+				if (player.isInGoblinMech() && player.hasKeyItem("Cum Reservoir") >= 0 && monster.hasCock()) {
 				if (player.keyItemv1("Cum Reservoir") == 4) addButtonDisabled(13, "Fill the reservoir", "Reservoir is already full. You need to use all this stored cum before you harvest new one.");
 				else addButton(13, "Fill the reservoir", gobomechFillTheReservoir);
-			} else addButtonDisabled(13, "Fill the reservoir", "Req. to be in goblin mech, having Cum Reservoir upgrade instaled on it and enemy with cock.");
-			addButton(14, "Leave", cleanupAfterCombat);
+				} else addButtonDisabled(13, "Fill the reservoir", "Req. to be in goblin mech, having Cum Reservoir upgrade instaled on it and enemy with cock.");
+				addButton(14, "Leave", cleanupAfterCombat);
+			}
 		}
 
 		public function manticoreTailRapeScene():void {
