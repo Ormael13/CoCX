@@ -4023,7 +4023,7 @@ private function fillMeUpPleaseUrta():void {
 	urtaLove(2);
 	flags[kFLAGS.TIMES_FUCKED_URTA]++;
 	if (flags[kFLAGS.URTA_FERTILE] == 1) {
-		if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+		if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 		else player.knockUp(PregnancyStore.PREGNANCY_URTA, PregnancyStore.INCUBATION_URTA, 25);
 	}
 	if(player.hasCock())player.sexReward("Default","Dick",true,false);

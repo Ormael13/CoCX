@@ -75,7 +75,7 @@ public class Masturbation extends BaseContent {
 			if (player.tentacleCocks() > 0) {
 				addButton(button++, "Tentabutt", tentacleGoesUpYerPooperNewsAtEleven);
 			}
-			if (player.lowerBody == LowerBody.PLANT_FLOWER || player.lowerBody == LowerBody.FLOWER_LILIRAUNE) {
+			if (player.isAlraune()) {
 				if (player.hasVagina()) addButton(button++, "Stamenpussy", stamenSelfFuck);
 				addButton(button++, "Stamenbutt", stamenGoesUpYerPooperNewsAtEleven);
 			}
@@ -3559,12 +3559,13 @@ public class Masturbation extends BaseContent {
 				"\"<i>Yeah, we can’t fight properly while aroused like this, close the curtain.</i>\"\n\n" +
 				"She doesn’t need to say another word as you close your petals in order to give yourself some well-needed privacy. " +
 				"You gently insert your finger in her nectar drenched pussy as your twin plays with your nectar-laden breast, suckling on your nipples. " +
-				"The two of you moan in delight. Feeling both your “breast descript” and her “pussy descript”, you can’t help but slip your finger deeper, " +
+				"The two of you moan in delight. Feeling both your chest and her cunt, you can’t help but slip your finger deeper, " +
 				"seeking more pleasure as she mashes and squeezes both of your tits together trying to make you leak that excess nectar out. " +
 				"The connection between your senses is so perfect, it feels like having four sets of hands massaging your cunt and milking your tits at the same time, " +
 				"and the best about it is you can pinpoint your own G spots! You scream together in perfect sync.\n\n" +
 				"\"<i>I’m cummmmmming!!!!</i>\"\n\n" +
-				"The both of you orgasm at the same time, your four breasts and two cunts gushing and filling the pitcher with pints of extra nectar. You reopen your petals and the two of you chuckle.\n\n" +
+				"The both of you orgasm at the same time, your four breasts and two cunts gushing and filling the pitcher with pints of extra nectar. " +
+				"You reopen your petals and the two of you chuckle.\n\n" +
 				"\"<i>Who needs anyone else when we can just fuck ourselves?</i>\"\n\n" +
 				"\"<i>I think we only do it for variety. Truthfully, I would get bored if it was just us two all the time… Plus, who says no to a threesome?</i>\"\n\n" +
 				"The two of you giggle at this idea as you resume your journey, highly satisfied.");
@@ -3667,7 +3668,7 @@ public class Masturbation extends BaseContent {
 			doStripCheck();
 			if(player.isLiliraune())
 			{
-				outputText("\n\n\"<i>Hey sis I’m in the mood for anal today what about you?</i>\"\n\n");
+				outputText("\"<i>Hey sis I’m in the mood for anal today what about you?</i>\"\n\n");
 				outputText("\"<i>That works but don’t you go and pick the largest one for yourself.</i>\"\n\n");
 			}
 			outputText("You ");

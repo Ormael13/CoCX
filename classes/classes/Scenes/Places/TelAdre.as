@@ -8,6 +8,7 @@ import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.TelAdre.*;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 /**
  * The lovely town of Tel Adre
@@ -1637,6 +1638,7 @@ private function goJogging():void {
 
 public function meetingLunaFirstTime():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_luna_maid);
 	outputText("As you wander the streets of Tel'Adre, you see a woman being brutally thrown out of a house along with her belongings. The crowd seems to be ignoring her.  Curious, you walk up to her just in time to see her start to cry. She wears what looks like a formal maid dress. Under her white bonnet, the maid sports short, ashen hair. You decide to break the ice and ask her what's going on. By all means she looks human, which is a surprise to you.\n\n");
 	outputText("\"<i>Why, this is terrible... I’m masterless, and out of a job! What am I going to do?</i>\"\n\n");
 	outputText("What did she do to be fired to begin with?\n\n");

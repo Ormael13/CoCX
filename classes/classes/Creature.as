@@ -2998,7 +2998,7 @@ public class Creature extends Utils
 		//Unique sex scenes
 		public function pcCanUseUniqueSexScene():Boolean
 		{
-			if ((game.player.tailType == Tail.MANTICORE_PUSSYTAIL && game.monster.hasCock()) || (game.player.lowerBody == LowerBody.PLANT_FLOWER && game.monster.hasCock()) || (game.player.lowerBody == LowerBody.PLANT_FLOWER && game.monster.hasVagina()) || game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.SALAMANDER ||
+			if ((game.player.tailType == Tail.MANTICORE_PUSSYTAIL && game.monster.hasCock()) || (game.player.isAlraune() && game.monster.hasCock()) || (game.player.isAlraune() && game.monster.hasVagina()) || game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.SALAMANDER ||
 			((game.player.gender == 1 || game.player.gender == 2) && (game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.MOUSE || game.player.tailType == Tail.DEMONIC)) || (game.player.isInGoblinMech() && game.player.hasKeyItem("Cum Reservoir") >= 0 && game.monster.hasCock()) ||
 			(game.player.raijuScore() >= 10 && !game.monster.hasPerk(PerkLib.EnemyGigantType) && !game.monster.isAlraune() && !game.monster.isDrider() && !game.monster.isGoo() && !game.monster.isNaga() && !game.monster.isScylla() && !game.monster.isTaur()) ||
 			(game.player.yukiOnnaScore() >= 14 && game.monster.hasCock() && !game.monster.hasPerk(PerkLib.UniqueNPC) && !game.monster.hasPerk(PerkLib.EnemyGigantType) && !game.monster.isAlraune() && !game.monster.isDrider() && !game.monster.isGoo() && !game.monster.isNaga() && !game.monster.isScylla() && !game.monster.isTaur()))
@@ -3469,6 +3469,7 @@ public class Creature extends Utils
 		public function isKraken():Boolean { return lowerBodyPart.isKraken(); }
 		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
 		public function isLiliraune():Boolean { return lowerBodyPart.isLiliraune(); }
+		public function isGoblinoid():Boolean { return (game.player.goblinScore() > 9 || game.player.gremlinScore() > 12); }
 		
 		public function isFlying():Boolean {
 			return hasStatusEffect(StatusEffects.Flying);

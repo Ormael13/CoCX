@@ -3385,7 +3385,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			//Preg shit goez hurdur
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
 			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
             else player.knockUp(PregnancyStore.PREGNANCY_EMBER, PregnancyStore.INCUBATION_EMBER, 0); //Will always impregnate unless contraceptives are in use
 			player.createStatusEffect(StatusEffects.EmberFuckCooldown, 36, 0, 0, 0);
 			doNext(createCallBackFunction(emberBreedingAfterMathWatchOutForRadioactiveFallout,false));

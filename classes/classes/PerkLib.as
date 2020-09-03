@@ -5455,7 +5455,7 @@ public class PerkLib
                 return player.minotaurScore() >= 4;
             }, "Minotaur race");
             NaturalPunchingBag.requireFatTissueMutationSlot().requirePerk(BouncyBody).requireCustomFunction(function (player:Player):Boolean {
-                return player.goblinScore() >= 4;
+                return player.isGoblinoid();
             }, "Goblin race");
             ObsidianHeart.requireHeartMutationSlot().requireCor(100).requireCustomFunction(function (player:Player):Boolean {
                 return player.devilkinScore() >= 10;
@@ -5779,7 +5779,7 @@ public class PerkLib
 				return player.melkieScore() >= 12;
 			}, "Melkie race");
             NaturalPunchingBagEvolved.requireLevel(12).requirePerk(NaturalPunchingBag).requireCustomFunction(function (player:Player):Boolean {
-                return player.goblinScore() >= 8
+                return player.isGoblinoid()
             }, "Goblin race");
             OniMusculatureEvolved.requireLevel(12).requirePerk(OniMusculature).requireCustomFunction(function (player:Player):Boolean {
                 return player.tone >= 100;
@@ -6157,7 +6157,7 @@ public class PerkLib
                         return player.kitsuneScore() >= 12;
                     }, "Kitsune race");
             NaturalPunchingBagFinalForm.requireLevel(30).requirePerk(NaturalPunchingBagEvolved).requireCustomFunction(function (player:Player):Boolean {
-                return player.goblinScore() >= 12
+                return player.isGoblinoid()
             }, "Goblin race");
             OniMusculatureFinalForm.requireLevel(30).requirePerk(OniMusculatureEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.tone >= 100;

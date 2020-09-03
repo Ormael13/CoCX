@@ -378,7 +378,7 @@ public class BehemothScene extends BaseContent
 			player.orgasm();
 			player.slimeFeed();
 			if (flags[kFLAGS.BEHEMOTH_CHILDREN] < 3 && player.cor < 25 + player.corruptionTolerance()) {
-				if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 				else player.knockUp(PregnancyStore.PREGNANCY_BEHEMOTH, PregnancyStore.INCUBATION_BEHEMOTH, 50 + (flags[kFLAGS.BEHEMOTH_CHILDREN] * 15) + player.cor);
 			}
 			flags[kFLAGS.BEHEMOTH_VAGINAL_CATCH]++;

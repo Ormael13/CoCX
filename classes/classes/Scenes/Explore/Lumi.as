@@ -236,7 +236,7 @@ public class Lumi extends BaseContent {
 		outputText("\"<i>Ah, go fegures. True genius is dyin thase days. Sure, I make sex toys and poetions but I think the true arft still is in a functional goblin mech!</i>\"\n\n");
 		outputText("A goblin mech?\n\n");
 		outputText("\"<i>I often forget fome people especially non goblin don’t exactly know what a mech is…basically it’s a sort ov combat confraption a goblin can drive. I have an alpha version jast right dere");
-		if (player.goblinScore() >= 10) {
+		if (player.isGoblinoid()) {
 			outputText("if you have da gems fer it.</i>\"\n\n");
 			outputText("She points at what looks like a goblin sized seat mounted on a weird six legged contraption.\n\n");
 			outputText("\"<i>It can ba customised in dozens of ways if yer smart enough and have da time fer it. Fer only 500 gem it’s yours... Interested?</i>\"\n\n");
@@ -273,7 +273,7 @@ public class Lumi extends BaseContent {
 		outputText("You inquire on the goblin mech.\n\n");
 		outputText("\"<i>Oh ya came back on your decision? Sure I still have it in the backroom. 500 gems as before.</i>\"\n\n");
 		menu();
-		if (player.goblinScore() >= 10) addButton(1, "Yes", lumiGarageYes);
+		if (player.isGoblinoid()) addButton(1, "Yes", lumiGarageYes);
 		else addButtonDisabled(1, "Yes", "You still not enough goblin to get this beauty. Money can't buy everything, ok?");
 		addButton(3, "No", lumiGarageNo);
 	}
@@ -1048,7 +1048,7 @@ public class Lumi extends BaseContent {
 	}
 	
 	public function lumiWorkshop():void {
-		if (player.goblinScore() >= 10) {
+		if (player.isGoblinoid()) {
 			clearOutput();
 			if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
 				outputText("You reply that you're here to perform some tinkering of your own.\n\n");

@@ -296,6 +296,9 @@ public class KitsuneScene extends BaseContent
 			if (player.tentacleCocks() >= 3) {
 				doNext(tentacleKitsuneWingWangs);
 			}
+			if (player.isAlraune()) {
+				doNext(alrauneVSKitsune);
+			}
 			else {
 				if (player.hasCock())  doNext(createCallBackFunction(kitsuneMaleOrHermMansion,willing));
 				else doNext(createCallBackFunction(kitsuneFemaleOrGenderless, willing));
@@ -603,7 +606,7 @@ public class KitsuneScene extends BaseContent
 		} // end stillHungry();
 
 
-//3+ Tentacle cocks of 30" or longer
+		//3+ Tentacle cocks of 30" or longer
 		private function tentacleKitsuneWingWangs():void
 		{
 			clearOutput();
@@ -643,6 +646,46 @@ public class KitsuneScene extends BaseContent
 			player.sexReward("vaginalFluids", "Dick");
 			player.sexReward("cum");
 		}
+
+	private function alrauneVSKitsune():void
+	{
+		clearOutput();
+		kitsuneSprite();
+		outputText("\"<i>Oh my!  It looks like we're in for a real treat tonight, sisters...</i>\" the blonde says as she runs her hands along your impressive prehensile endowments.\n\n");
+		outputText("\"<i>Mmm... tentacles... my favorite flavor though these ones are vines.</i>\" the black-haired one chimes in, rubbing her pudgy belly and licking her lips hungrily.  Slipping into the water next to you, each of them takes one of your hulking tentacles into her hands, grinning eagerly.  Working together, they weave their tails through your brace of writhing appendages, cinching tight around the base of each one as their fingers slide along the flexible shafts.  Trails of blue fire dance across each writhing vines, sending you into a shivering, shuddering frenzy, and the three sisters cast each other knowing grins.  Your liquor-addled mind is too foggy by now to resist their advances, " + ((player.lib < 50) ? "slurred protests falling on deaf ears." : "though who would want to?") + "\n\n");
+		outputText("\"<i>Oh, I do so enjoy our work,</i>\" the blonde remarks, running her hand up to the tip of your stamen and squeezing the head experimentally.  She flashes a satisfied smirk at the way your firm flesh yields under her touch, nodding softly.  The tip of one of her tails trails along the underside, tickling you sensually as more coils of fur stroke and knead along the obscene vine.\n\n");
+		outputText("\"<i>We just looooove tentacles,</i>\" the black-haired girl explains to you, giggling like a schoolgirl as one of your obscene tendrils starts moving on its own, sliding down between her legs and threading its way between her expansive ass cheeks.  \"<i>When we see tentacles this thick, long, and...</i>\" she pauses to wrap her lips around the end of your stamen, sliding her tongue along the tip, \"<i>... mmm... juicy.... it's just impossible to contain our excitement.</i>\"\n\n");
+		outputText("As if to illustrate this point, she hungrily swallows almost a foot of your wriggling vine, a trail of spittle hanging out lazily from one corner of her mouth as she swallows carefully along your length.  Your writhing shafts are assaulted on all sides by all manner of touches and caresses; fingers, tongues, tails and breasts all working in glorious harmony to tease and pleasure you.  One tendril instinctively coils around one of the blonde's breasts, squeezing it tightly while the tip pokes and prods the soft flesh, teasing her pert pink nipples.  Moaning in response, she slides her fingers along the base, cool blue flames crackling to life across her fingertips and sending chills through your body.  Each of your thick tentacles swells up incredibly, the kitsune's magic sending jolts of pleasure across the surface.  As the pale flames dance across your groin, you feel an odd tension building up, and in a shower of viscous cum, your loins erupt into a monstrous, wriggling mass of at least a dozen undulating tentacles!\n\n");
+		outputText("\"<i>Hehe, that's how we like it!</i>\"  the blonde says with a chuckle, pressing her body to the squirming brace of vines and moaning in anticipation.\n\n");
+		outputText("You feel something warm prodding you in the side, and look down to find that the redhead has something between her legs that her sisters are lacking.  With one of your undulating cocks curled down between her legs, she begins to grind herself against you, lining up her thick, throbbing member up against one of yours and rubbing her hips back and forth lewdly.  Grabbing a segment of your ropey dick, she coils it around the base of her own, thrusting through the ring of cock flesh and groaning into your ear.\n\n");
+		outputText("Her hot breath cascades across your shoulders, followed shortly by a distinctive minty coolness.  The stark contrast between the two feelings makes you shudder, your chest rising and falling quickly as the pleasure begins to mount.  Your breath is knocked out of you with a startling abruptness as the blonde is thrown down onto your chest, toppled over by her black-haired sister.  With a vine in one hand and the blonde's sizeable breast in the other, the plucky ravenette alternates between the two, sucking, squeezing and stroking while wriggling her plump rear back and forth.  Your hands start to glide across their silky skin of their own accord, groping the supple flesh and stroking their shimmering tails, squeezing their firm breasts and running your fingers through their soft hair.\n\n");
+		outputText("A number of your stamens are ensnared by a group of long black tails, guiding them down to her upended pussy and slowly running the head of one up and down her glistening snatch.  She crawls up over her blonde sister, leaning down to nibble on your ear along with the redhead, and mumbles through her teeth, \"<i>Nn... time for the main course...  Go on, you know you wanna stick it in...  Ravage us.</i>\"\n\n");
+		outputText("Without hesitation, your tentacle-dick drills eagerly into her sopping snatch before you can think.  Your moans join hers in a lewd symphony, each of your writhing vines finding its home in one hole or another, sending the three girls into a lust-filled frenzy atop you.  Before long, you lose track of where one girl ends and the others begin, your hands cascading over their soft, supple bodies, intersecting in a carnal mass of flesh, tails, vines and lust.\n\n");
+		outputText("Your vines move of their own accord, ensnaring the three sisters in a densely tangled knot of limbs and tendrils.  The redhead hangs upside-down, dangling by her ankles with a look of utter bliss on her face as her cock is furiously jerked by one of your apprendage, both of her holes being pounded simultaneously by two thick tendrils pistoning in and out alternately.  The black-haired girl is in no less of a predicament, her eyes rolled back and tongue hanging out as her ass is stuffed full of throbbing vines, one hand haphazardly thrusting into her pussy alongside another.\n\n");
+		outputText("\"<i>Uuuoohh... my belly's so fulllll...</i>\" she groans orgasmically, clutching her stomach as your cock snakes its way through her insides, visibly distorting her pudgy belly.  Her body goes slack, hand falling away from her groin as a thick stream of girlcum arcs through the air, her face turning red and her eyes going blank with ecstasy.\n\n");
+		outputText("The blonde is folded double, her thighs spread out while her ankles are hooked behind her head, all six of her tails twitching madly.  Her breasts squash and bulge around your tentacles as they squeeze and coil around them, rubbing lewdly against her nipples.  It seems as though sense has long since been driven from her mind, her mouth hanging agape and her eyes vacant with lust.  Her throat bulges from the intrusion of your cock, pre-cum mixed with drool dribbling down her chin as she eagerly begins to suck on it, thrusting her hips automatically in sync with the undulations of your cocks in her other orifices.\n\n");
+		outputText("The air is filled with the heavy, musky scent of semen as a jet of cum shoots skyward from the redhead's cock, the throbbing member swelling visibly each time she spurts another stream.  The entire deck and the water around you is stained with her seed, she and her sisters all plastered from head to toe with her copious emissions.  The cooling sensation of mint permeates your skin wherever the sticky droplets land on you, making you shudder in pleasure, and the tingling feeling of her seed dribbling down along your tentacle shafts sends an unbearable pleasure to your groin.\n\n");
+		outputText("The three insensate kitsune twitch helplessly in the grips of your tendrils, maddened by pleasure as your magically enhanced tendrils plow away at them without pause, pummeling their abused holes unceasingly.  Every muscle in your body tenses in preparation for an incredible climax, the lust boiling in your loins like a coiling spring.  The pressure builds until you just can't take it any longer, convulsing beneath the three sisters and groaning in ecstasy as your orgasm shoots up each of your shafts simultaneously, swelling from base to tip and releasing your thick load inside of them.\n\n");
+		if (player.cumQ() <= 150) {
+			outputText("Warm streams of pollen flow from each of your stamens, painting the sisters with your seeds inside and out.  Hot pearls of pollen drench the three kitsune, mixing with the redhead's and rolling off of their bodies to dribble into the water.");
+		}
+		else if (player.cumQ() <= 350) {
+			outputText("Thick streams of pollen pour from your stamens, spurting white streaks into the air and painting the sisters with a glistening coat of white, inside and out.  Pearls of plant jizz drip and dribble off their bodies, mixing with the redhead's and rolling off into the water.");
+		}
+		else if (player.cumQ() <= 1000) {
+			outputText("Ribbons of thick, pollen sling into the air, falling across the sisters' bodies and painting their insides with your hot seed.  A thick layer of pollen coats their bodies, matting down hair and dribbling over the edges of their voluptuous curves.");
+		}
+		else if (player.cumQ() <= 2500) {
+			outputText("Thick jets of hot pollen fill the air, arcing high and showering the sisters with streaks of white.  As your vines pump load after load of hot, creamy plant jizz into their abused holes, their abdomens begin to swell up, thin streams spurting out around each of your cocks and dribbling down their curves.  A thick patina of pearly-white cum coats their bodies, matting down their hair and sloughing off of their voluptuous curves in heavy globs.");
+		}
+		else if (player.cumQ() > 2500) {
+			outputText("Thick streams of pollen arc through the air, raining down on the three sisters like a hot shower as ropes of semen splatter across their bodies, streaking them with a heavy mat of plant fluid.  Thick bulges work their way down your obscene vegetal shafts, load after load erupting into their abused holes and making their abdomens begin to swell, expanding ever outward with the weight of your cum.  Before long, pressurized streams are escaping from around your cocks, twin jets of semen spurting from their noses.  Drenched, matted, and utterly stuffed with your virile pollen, the sisters limply hang within the coils of your tendrils, their limbs and tails twitching weakly.");
+		}
+		outputText("\n\nEvery twitch and spasm of your loins finds you feeling a little more fatigued, your eyelids growing heavy with drowsiness as you can feel the life being drained from you.  Panting desperately, the three sisters gradually regain their senses as your flagging tendrils slowly lower them down into the water" + ((player.cumQ() > 1000) ? ", their arms wrapped protectively around their seed-bloated bellies" : "" ) + ".  Exhausted from your ordeal, you let yourself relax into a blissful stupor, only vaguely aware of the feeling of being dragged up onto the deck.  The last thing you see before going unconscious is the three sisters crawling up around you, coaxing your spent vines back to life, their eyes glinting hungrily.");
+		outro();
+		player.sexReward("vaginalFluids", "Dick");
+		player.sexReward("cum");
+	}
 
 		private function outro(tentacles:Boolean = false):void
 		{

@@ -316,7 +316,7 @@ public function PCGoblinDaughters():void {
 	}
 	menu();
 	if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 9 && player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
-		if (player.goblinScore() > 9) addButton(2, "Engineering",  SceneLib.lumi.lumiWorkshop);
+		if (player.isGoblinoid()) addButton(2, "Engineering",  SceneLib.lumi.lumiWorkshop);
 		else addButtonDisabled(2, "Engineering", "You need to be goblin for this.");
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshopSpareParts)) addButton(3, "Spare parts", PCGoblinDaughtersBuilingWorkshopSpareParts);
 		else addButtonDisabled(3, "Spare parts", "You need to wait till tomorrow for new spare parts.");

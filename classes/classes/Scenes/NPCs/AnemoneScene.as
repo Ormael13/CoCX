@@ -98,7 +98,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 
 		private function anemonePreg():void
 		{
-			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
             else player.knockUp(PregnancyStore.PREGNANCY_ANEMONE, PregnancyStore.INCUBATION_ANEMONE, 101);
 		}
 

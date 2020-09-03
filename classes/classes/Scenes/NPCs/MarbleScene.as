@@ -3582,7 +3582,7 @@ private function marbleNightSexChicks():void {
 		}
 		outputText("The two of you give one more shudder from the wonderful stimulation, before collapsing on top of one another.  ");
 		//Pregnancy chance for PC, ¼ their fertility
-		if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+		if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 		else player.knockUp(PregnancyStore.PREGNANCY_MARBLE, PregnancyStore.INCUBATION_MARBLE, 150);
 		player.sexReward("cum");
 		player.cuntChange(flags[kFLAGS.MARBLE_DICK_THICKNESS] * flags[kFLAGS.MARBLE_DICK_LENGTH], true);
@@ -4181,7 +4181,7 @@ private function milkMarbleTakeHerDick():void
 	player.sexReward("cum");
 	flags[kFLAGS.MARBLE_LUST] = 10;
 	dynStats( "lib", .5 );
-	if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 	else player.knockUp(PregnancyStore.PREGNANCY_MARBLE, PregnancyStore.INCUBATION_MARBLE, 150);
 	doNext(camp.returnToCampUseTwoHours);
 }

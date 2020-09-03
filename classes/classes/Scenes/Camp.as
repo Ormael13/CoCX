@@ -2735,7 +2735,7 @@ private function SparrableNPCsMenu():void {
 			outputText("You lie down in your pitcher, dozing off for the night as you close off your petals to sleep.\n");
 		}
 		if (player.lowerBody == LowerBody.FLOWER_LILIRAUNE) {
-			outputText("You and your twin sister (end of cut)lie down in your pitcher, dozing off for the night as you close off your petals to sleep. You hug her before closing your eyes.\n\n" +
+			outputText("You and your twin sister lie down in your pitcher, dozing off for the night as you close off your petals to sleep. You hug her before closing your eyes.\n\n" +
 					"\"<i>Good night, sis.</i>\"\n\n" +
 					"\"<i>Good night.</i>\"\n\n");
 		}

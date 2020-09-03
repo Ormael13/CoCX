@@ -449,7 +449,7 @@ private function alrauneVineInButtScene():void
 	player.cuntChange(monster.cockArea(0), true);
 	outputText("Your remaining stamens wave around the minotaur, tending to his balls, weaving around his limbs, and generally rubbing and throbbing all over him, spreading liquid pollen around and through him, leaving both of you moaning in pleasure. Your vines throb and pulse, quickening in pace as you can feel the pollen swelling in your pitcher. They wave madly, and then, just as their motion makes you dizzy, you feel them stiffen suddenly, and start spewing their load all in and across the minotaur. You gasp and pause, collapsing on the strong back of the minotaur, basking in the afterglow.");
 	statScreenRefresh();
-	if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
     else player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 	player.sexReward("Default","Dick",true,false);
 	player.sexReward("cum","Vaginal");
@@ -496,7 +496,7 @@ private function girlRapeAMinotaur():void {
 	player.sexReward("cum","Vaginal");
 	dynStats("spe", -.5, "int", -.5, "sen", 1.5, "cor", 1);
 	//Preggers chance!
-	if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
     else player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
 	cleanupAfterCombat();
 }
@@ -516,7 +516,7 @@ private function minotaurGetsRapedByHerms():void {
 	player.sexReward("Default","Dick",true,false);
 	dynStats("spe", -.5, "int", -.5, "sen", 1.5, "cor", 1);
 	//Preggers chance!
-	if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
     else player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
 	cleanupAfterCombat();
 }
@@ -663,7 +663,7 @@ if (doSFWloss() && CoC.instance.inCombat) { //No rape in SFW mode.
 			dynStats("tou", -.5, "sen", 1, "lus", -5, "cor", 1);
 		}
 		//Preggers chance!
-		if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+		if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
         else player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
 		player.sexReward("cum","Vaginal");
 	}

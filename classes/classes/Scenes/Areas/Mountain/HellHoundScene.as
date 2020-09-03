@@ -68,7 +68,7 @@ public class HellHoundScene extends BaseContent
 				if (player.cor < 40) outputText("You moan as your insides begin to heat up. The uncomfortably hot sensation only grows as more and more of its fiery seed is pumped into your body. After what feels like an eternity, the beast pulls out of you. He gives your " + vaginaDescript(0) + " and your " + assholeDescript() + " a single extended lick with its long dog-like tongue before running off out of sight. The tainted heat inside you proves to be too much and you pass out. After some time passes, you wake up to find the corrupt warmth inside you has thankfully faded away. You're able to stand up again, but the damage is done and the creature's seed has left you feeling rather weak.");
 				else outputText("His flaming seed brings about a pleasure you had not expected; your insides feel like they are burning with passion and power.  It is an incredible and fiery experience, one that you don't think you could have had if it wasn't for the power of corruption that you've gained since you got here. Too soon, the beast pulls out of you.  He gives your " + vaginaDescript(0) + " and your " + assholeDescript() + " a single extended lick with his long dog-like tongue before he runs off. You quickly look over and manage to catch a glimpse of its tail before it disappears from view, just before your body falls into a deep sleep. When you wake, you can still feel the afterglow of the hot seed inside you.");
 				//Preggers chance!
-				if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 				else player.knockUp(PregnancyStore.PREGNANCY_HELL_HOUND, PregnancyStore.INCUBATION_HELL_HOUND, 101);
 			}
 			else {
@@ -104,6 +104,8 @@ public class HellHoundScene extends BaseContent
 			menu();
 			addButton(0, "Lick it", hellHoundGetsRaped);
 			if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) addButton(1, "Fuck", hellHoundPropahRape);
+			if (player.isLiliraune()) addButton(2, "TakeBothIn", takeBothIn);
+
 			if (monster.HP < 1) addButton (12, "Slay", killHellhound);
 			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 			addButton(14, "Leave", cleanupAfterCombat);
@@ -400,9 +402,43 @@ public class HellHoundScene extends BaseContent
 				//[if corrupt]
 				else dynStats("cor", 1.5);
 				//Preggers chance!
-				if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 				else player.knockUp(PregnancyStore.PREGNANCY_HELL_HOUND, PregnancyStore.INCUBATION_HELL_HOUND, 101);
 			}
+			cleanupAfterCombat();
+		}
+
+		public function takeBothIn():void
+		{
+			clearOutput();
+			outputText("You and your twin lick your lips in anticipation as you grab the hellhound with your vines lifting it up to expose that wonderful crotch of his.\n\n" +
+					"\"<i>Now that’s what I’m talking about! Look at this delicious set! Every male on Mareth should have at least a pair of these!</i>\"\n\n" +
+					"\"<i>Ohhh yes indeed! And the best thing about it, is that we will both get him to fuck us at the same time! No waiting turns on this one. " +
+					"It’s like his stamens were made for us! Now boy, be a good doggy and we will make you feel veeeery good.</i>\"\n\n" +
+					"The hellhound, of course, is not in any position to protest against that, not that any of you would allow him to if he could. " +
+					"You reel the puppy in all the way to your shared pitcher and drop him in, dipping him down to the crotch in your nectar. " +
+					"You giggle as you wrap one of the hellhound’s peckers between your nectar soaked breasts and start licking the tip, your twin sister doing the same. " +
+					"Your attention and overpowering scent has an immediate effect on him causing both of his dongs to get almost painfully hard. " +
+					"The hellhound winces as salty drops of precum start to flow out of his twin dicks.\n\n" +
+					"\"<i>Hmmmm... now that’s a good dog.</i>\"\n\n" +
+					"\"<i>That’s going to create some delicious nectar here sis. I want him inside already.</i>\"\n\n" +
+					"The hellhound pants in pleasure, his drool mixing with your nectar, as you both insert a cock in, mewling in delight as his twin knots lock you both in place. " +
+					"You kiss your sister as you both toy with your side of the dog’s twin tool, your tongues dancing as you mash your nectar dripping teats against hers. " +
+					"The hellhound is simply enjoying himself, both front paws groping your asses as you bring his peckers to the seventh layer of heaven.\n\n" +
+					"You and your sister both scream in orgasm as all four of the hellhound’s eyes crossed, howling in pleasure, a large bulge moving up his twin dicks as they explode into your pussies, creampieing them. " +
+					"You both sigh in relief as his knots shrink back allowing you to slide off his dick, your pussies leaking some cum out into the bath which will eventually melt deliciously in your nectar.\n\n" +
+					"Utterly satisfied, you grab the doggy and pull him out of your pitcher. " +
+					"He's still trying to recover from the double orgasm you gave him, but truthfully his enjoyment is the last of your concern. " +
+					"You and your sister are still patting your bellies with content smiles as you head back to camp.");
+			//--> increases corruption, usual post coital procedure
+			player.sexReward("cum","Vaginal");
+			//[if not corrupt]
+			if (player.cor < 40) dynStats("tou", -2, "cor", 1);
+			//[if corrupt]
+			else dynStats("cor", 1.5);
+			//Preggers chance!
+			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			else player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE, 101);
 			cleanupAfterCombat();
 		}
 		

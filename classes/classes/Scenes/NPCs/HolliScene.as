@@ -149,7 +149,7 @@ public function treeMenu(output:Boolean = true):void {
 		} else {
 			addButtonDisabled(2, "TentacleBone");
 		}
-		if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(3, "TentacleDuel", uniquuuesexscene.alrauneExtraSceneWithHollicyntiaTentacleDuel);
+		if (player.isAlraune()) addButton(3, "TentacleDuel", uniquuuesexscene.alrauneExtraSceneWithHollicyntiaTentacleDuel);
 		else addButtonDisabled(2, "TentacleDuel", "This scene requires to be an alraune of some kind.");
 		addButton(5,"Drink Sap", haveAMapleSyrupSnack);
 		if(flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(6,"Eat A Fruit", eatHolliFruit);
