@@ -63,7 +63,7 @@ public class Holli extends Monster
 					outputText("\n\nJojo continues to ferry firewood to stoke the blaze; flames lick at Holli, and her face contorts in anger.  Sap flows from her burn wounds, but much of it boils away before it can do her any good and her iron-hard bark is peeling in places.");
 					//much less HP regain, no lust regain, monster armor lowered
 					if (armorDef > 20) armorDef = 20;
-					if (tou > 50) tou = 50;
+					if (tou > 50) this.touStat.core.value = 50;
 					//Reduced Regen
 					addHP(5);
 					lust -= 2;

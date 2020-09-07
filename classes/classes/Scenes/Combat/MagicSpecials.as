@@ -376,6 +376,12 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You already cauterizing your wounds!");
 			}
 		}
+		if (player.salamanderScore() >= 12 && player.tail.type == Tail.SALAMANDER && (player.isSwordTypeWeapon() || player.isAxeTypeWeapon())) {
+			bd = buttons.add("Flame Blade", flameBlade).hint("Set your weapon on fire \n", "Flame Blade");
+			if (player.hasStatusEffect(StatusEffects.FlameBlade)) {
+				bd.disable("Your weapon is already on fire!");
+			}
+		}
 		if (player.hasPerk(PerkLib.JobWarrior)) {
 			bd = buttons.add("WarriorRage", warriorsrage).hint("Throw yourself into a warrior's rage!  Greatly increases your strength, speed and fortitude! \n", "Warrior's Rage");
 			bd.requireWrath(50);
@@ -2497,6 +2503,18 @@ public class MagicSpecials extends BaseCombatContent {
 		player.HP -= player.HP * 0.05;
 		outputText("You wince in pain but feel relief as your wounds begin to smoke and close.\n\n");
 		player.createStatusEffect(StatusEffects.Cauterize,10,0,0,0);
+		statScreenRefresh();
+		enemyAI();
+	}
+
+	public function flameBlade():void {
+		clearOutput();
+		var flameBladeDuration:Number = 10;
+		if (player.hasPerk(PerkLib.SalamanderAdrenalGlands)) flameBladeDuration += 1;
+		if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsEvolved)) flameBladeDuration += 2;
+		if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) flameBladeDuration += 7;
+		outputText("Your run your tail across your weapon igniting it with raging flames.\n\n");
+		player.createStatusEffect(StatusEffects.FlameBlade,flameBladeDuration,0,0,0);
 		statScreenRefresh();
 		enemyAI();
 	}

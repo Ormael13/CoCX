@@ -551,7 +551,9 @@ public function part2TrollEncounterTrainToughness():void {
 	}
 	else {
 		outputText("You begin planking, a few minutes pass and your arms start feeling weak, you figure you've been planking for enough time and relax. You feel that the exercise was worth the time and return to camp after dismissing yourself.\n\n");
-		if (player.tou < (119 + (25 * player.newGamePlusMod()))) dynStats("tou", 2, "scale", false);
+		if( player.touStat.core.value < 100) {
+			player.touStat.core.value += 1;
+		}
 		player.fatigue += Math.round(player.maxFatigue() * 0.35);
 		zenjiPerspectiveOnPlayer(3);
 	}

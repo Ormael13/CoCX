@@ -284,7 +284,12 @@ public class Creature extends Utils
 		public var strStat:PrimaryStat = _stats.findStat('str') as PrimaryStat;
 		public function get str():Number { return strStat.value; }
 		public var touStat:PrimaryStat = _stats.findStat('tou') as PrimaryStat;
-		public function get tou2():Number { return touStat.value; }
+		public function get tou():Number {if (this.hasPerk(PerkLib.IcyFlesh) || this.hasPerk(PerkLib.HaltedVitals)) {
+			return 1;
+		} else {
+			return touStat.value;
+		}}
+
 		public var speStat:PrimaryStat = _stats.findStat('spe') as PrimaryStat;
 		public function get spe2():Number { return speStat.value; }
 		public var intStat:PrimaryStat = _stats.findStat('int') as PrimaryStat;
@@ -294,7 +299,15 @@ public class Creature extends Utils
 		public var libStat:PrimaryStat = _stats.findStat('lib') as PrimaryStat;
 		public function get lib2():Number { return Math.round(libStat.value); }
 
+		public function trainStat(statName: String, amount: Number, limit: Number){
+			var stat:PrimaryStat = statStore.findStat(statName) as PrimaryStat;
+			if (stat.core.value < limit){
+				stat.core.value += amount;
+			}
+		}
+
 		public function addCurse(statName:String, power:Number):void {
+
 			if (statName == "sens" || statName == "cor") {
 				statStore.addBuff(statName, power, 'Curse', {text: 'Curse'});
 			}
@@ -332,7 +345,6 @@ public class Creature extends Utils
 		}
 
 		//Primary stats
-		public var tou:Number = 0;
 		public var spe:Number = 0;
 		public var lib:Number = 0;
 		public var sensStat:BuffableStat = _stats.findStat('sens') as BuffableStat;
@@ -846,10 +858,20 @@ public class Creature extends Utils
 			if (dstr > 0){
 				removeCurse("str", dstr);
 			}
-
-			tou  = Utils.boundFloat(mins.tou, tou + dtou, maxes.tou);
-			spe  = Utils.boundFloat(mins.spe, spe + dspe, maxes.spe);
-
+			//tougness
+			if (dtou < 0){
+				addCurse("tou", -dtou);
+			}
+			if (dtou > 0){
+				removeCurse("tou", dtou);
+			}
+			//Speed
+			if (dspe < 0){
+				addCurse("spe", -dspe);
+			}
+			if (dspe > 0){
+				removeCurse("spe", dspe);
+			}
 			//Inteligence
 			if (dint < 0){
 				addCurse("int", -dint);
@@ -857,7 +879,6 @@ public class Creature extends Utils
 			if (dint > 0){
 				removeCurse("int", dint);
 			}
-
 			//Wisdom
 			if (dwis < 0){
 				addCurse("wis", -dwis);

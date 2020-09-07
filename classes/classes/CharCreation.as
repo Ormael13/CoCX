@@ -154,8 +154,6 @@ import coc.view.MainView;
             }
 
 			model.player = player;
-			player.tou = 15;
-			player.spe = 15;
 			player.lib = 15;
 			player.cor = 15;
 			player.soulforce = 50;
@@ -526,7 +524,7 @@ import coc.view.MainView;
 			//Attributes
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				player.strStat.core.value += 3;
-				player.tou += 2;
+				player.touStat.core.value += 2;
 			}
 			//Body attributes
 			player.fertility = 5;
@@ -556,7 +554,7 @@ import coc.view.MainView;
 		private function isAWoman():void {
 			//Attributes
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
-				player.spe += 3;
+				player.speStat.core.value += 3;
 				player.intStat.core.value += 2;
 			}
 			//Body attributes
@@ -584,8 +582,8 @@ import coc.view.MainView;
 			//Attributes
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				player.strStat.core.value += 1;
-				player.tou+=1;
-				player.spe+=1;
+				player.touStat.core.value += 1;
+				player.speStat.core.value +=1;
 				player.intStat.core.value += 1;
 			}
 			//Body attributes
@@ -622,7 +620,7 @@ import coc.view.MainView;
 		
 		private function buildLeanMale():void {
 			player.strStat.core.value -= 1;
-			player.spe += 1;
+			player.speStat.core.value += 1;
 			
 			player.femininity = 34;
 			player.thickness = 30;
@@ -636,7 +634,7 @@ import coc.view.MainView;
 
 		private function buildSlenderFemale():void {
 			player.strStat.core.value -= 1;
-			player.spe += 1;
+			player.speStat.core.value += 1;
 			
 			player.femininity = 66;
 			player.thickness = 30;
@@ -669,9 +667,9 @@ import coc.view.MainView;
 		}
 
 		private function buildThickMale():void {
-			player.spe -= 4;
+			player.speStat.core.value -= 4;
 			player.strStat.core.value += 2;
-			player.tou += 2;
+			player.touStat.core.value += 2;
 			
 			player.femininity = 29;
 			player.thickness = 70;
@@ -684,9 +682,9 @@ import coc.view.MainView;
 		}
 
 		private function buildCurvyFemale():void {
-			player.spe -= 2;
+			player.speStat.core.value -= 2;
 			player.strStat.core.value += 1;
-			player.tou += 1;
+			player.touStat.core.value += 1;
 			
 			player.femininity = 71;
 			player.thickness = 70;
@@ -699,7 +697,7 @@ import coc.view.MainView;
 
 		private function buildGirlyMale():void {
 			player.strStat.core.value -= 2;
-			player.spe += 2;
+			player.speStat.core.value += 2;
 			
 			player.femininity = 50;
 			player.thickness = 50;
@@ -713,7 +711,7 @@ import coc.view.MainView;
 
 		private function buildTomboyishFemale():void {
 			player.strStat.core.value += 1;
-			player.spe -= 1;
+			player.speStat.core.value -= 1;
 			
 			player.femininity = 56;
 			player.thickness = 50;

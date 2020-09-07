@@ -1953,27 +1953,27 @@ public function FightHellfireSnail():void {
 			StatsMenuStr();
 		}
 		public function AddTou1():void {
-			player.tou = player.tou + 1;
+			player.touStat.core.value += 1;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function AddTou2():void {
-			player.tou = player.tou + 10;
+			player.touStat.core.value += 10;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function AddTou3():void {
-			player.tou = player.tou + 50;
+			player.touStat.core.value += 50;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function AddTou4():void {
-			player.tou = player.tou + 200;
+			player.touStat.core.value += 200;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function AddTou5():void {
-			player.tou = player.tou + 1000;
+			player.touStat.core.value += 1000;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
@@ -2153,27 +2153,27 @@ public function FightHellfireSnail():void {
 			StatsMenuStr();
 		}
 		public function SubTou1():void {
-			player.tou = player.tou - 1;
+			player.touStat.core.value -= 1;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function SubTou2():void {
-			player.tou = player.tou - 10;
+			player.touStat.core.value -= 10;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function SubTou3():void {
-			player.tou = player.tou - 50;
+			player.touStat.core.value -= 50;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function SubTou4():void {
-			player.tou = player.tou - 200;
+			player.touStat.core.value -= 200;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function SubTou5():void {
-			player.tou = player.tou - 1000;
+			player.touStat.core.value -= 1000;
 			statScreenRefresh();
 			StatsMenuTou();
 		}

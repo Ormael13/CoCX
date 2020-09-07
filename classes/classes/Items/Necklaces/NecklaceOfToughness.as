@@ -27,12 +27,12 @@ package classes.Items.Necklaces
 		}
 		
 		override public function playerEquip():Necklace {
-			game.player.tou += 25;
+			game.player.statStore.addBuff('tou',+25,'tag',{text:'NecklaceOfToughness'});
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():Necklace {
-			game.player.tou -= 25;
+			game.player.statStore.removeBuffs('NecklaceOfToughness');
 			return super.playerRemove();
 		}
 		

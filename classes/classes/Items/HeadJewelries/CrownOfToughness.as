@@ -25,14 +25,14 @@ package classes.Items.HeadJewelries
 			desc += "\nSpecial: Toughness +20";
 			return desc;
 		}
-		
+
 		override public function playerEquip():HeadJewelry {
-			game.player.tou += 20;
+			game.player.statStore.addBuff('tou',+20,'tag',{text:'CrownOfToughness'});
 			return super.playerEquip();
 		}
-		
+
 		override public function playerRemove():HeadJewelry {
-			game.player.tou -= 20;
+			game.player.statStore.removeBuffs('CrownOfToughness');
 			return super.playerRemove();
 		}
 		

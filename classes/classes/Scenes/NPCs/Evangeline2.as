@@ -224,7 +224,7 @@ public class Evangeline2 extends Monster
 			outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
 			outputText("The rush of success and power flows through her body.  <b>She looks like she can do anything!</b>\n\n");
 			this.strStat.core.value += (5 + (inte / 10)) * 1.2 * SpellMod();
-			this.tou += (5 + (inte / 10)) * 1.2 * SpellMod();
+			this.touStat.core.value += (5 + (inte / 10)) * 1.2 * SpellMod();
 			fatigue += spellCostChargeWeaponMight();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED] += 2;
 		}

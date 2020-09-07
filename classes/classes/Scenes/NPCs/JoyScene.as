@@ -940,9 +940,9 @@ import classes.lists.Gender;
 				dynStats("lus", 20);
 			}
 			//Increase strength
-			if (player.str <= 33) dynStats("str", 0.5);
-			if (player.str <= 66) dynStats("str", 0.5);
-			if (player.str < 90) dynStats("str", 0.5);
+			if (player.strStat.core.value < 50){
+				player.strStat.core.value += 1;
+			}
 			dynStats("str", 0.5);
 			fatigue(40);
 			doNext(camp.returnToCampUseOneHour);
@@ -1014,9 +1014,7 @@ import classes.lists.Gender;
 				outputText("\n\nWatching her go, you redress yourself and then head your seperate ways.");
 			}
 			//Increase toughness
-			if (player.tou <= 33) dynStats("tou", 0.5);
-			if (player.tou <= 66) dynStats("tou", 0.5);
-			if (player.tou < 90) dynStats("tou", 0.5);
+			player.trainStat("tou", +1, 50);
 			dynStats("tou", 0.5);
 			fatigue(40);
 			doNext(camp.returnToCampUseOneHour);

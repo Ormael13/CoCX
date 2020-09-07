@@ -363,6 +363,38 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
+			if ((player.salamanderScore()>=7 || player.hasStatusEffect(StatusEffects.HinezumiCoat) || player.hellcatScore() >= 10) && !player.hasStatusEffect(StatusEffects.Overheat))
+			{
+				//Argument 1 is weither pc is in heat stage or not 1 means active
+				//Argument 2 is how many day left before player enter heats again typicaly 3;
+				//Argument 3 tells if player had sex and satisfied its overheat set to 1 when true;
+				outputText("\n\nWoa your body is heating up like crazy. You suddenly realise that due to being a");
+				if (player.salamanderScore()>=7) outputText(" salamander");
+				else if (player.hellcatScore() >= 10) outputText(" hellcat");
+				else if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) outputText(" hinezumi");
+				outputText(" your body has started overheating with lust. You will have to constantly sate your uncontrollable burning need for sex if only to stay sane long enought not to jump on everything that moves.");
+				player.createStatusEffect(StatusEffects.Overheat, 1, 0, 0,0);
+				if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
+				else if (player.hasVagina()) player.goIntoHeat(false);
+			}
+			if ((player.salamanderScore()<7 && !player.hasStatusEffect(StatusEffects.HinezumiCoat) && player.hellcatScore() < 10) && player.hasStatusEffect(StatusEffects.Overheat))
+			{
+				outputText("\n\nYour body finaly calms down it would seem you no longer are as hot as you used to be wich might be a good thing as you won't have to deal with those bodily heat problems anymore.");
+				player.removeStatusEffect(StatusEffects.Overheat);
+				player.removeStatusEffect(StatusEffects.Heat);
+				player.removeStatusEffect(StatusEffects.Rut);
+				player.statStore.removeBuffs("Overheat");
+			}
+			//Player overheat was cleaned by sex!
+			if (player.statusEffectv1(StatusEffects.Overheat) == 1 && player.statusEffectv3(StatusEffects.Overheat) == 1) { //Lose slime core perk
+				player.addStatusValue(StatusEffects.Overheat, 1, -1);
+				player.addStatusValue(StatusEffects.Overheat, 2, 3);
+				player.addStatusValue(StatusEffects.Overheat, 3, -1);
+				player.statStore.removeBuffs("Overheat");
+				player.removeStatusEffect(StatusEffects.Heat);
+				player.removeStatusEffect(StatusEffects.Rut);
+				needNext = true;
+			}
 			if (player.findPerk(PerkLib.SlimeCore) >= 0) { //Lose slime core perk
 				if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != LowerBody.GOO) {
                     outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into [skin] while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + CoC.instance.player.chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + Appearance.buttDescription(player) + ".  A delicious pressure pulses in your abdomen and you loosen your [armor] as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
@@ -454,17 +486,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					var tempSpeed:int = player.statusEffectv2(StatusEffects.FeedingEuphoria);
 					player.removeStatusEffect(StatusEffects.FeedingEuphoria);
 					dynStats("spe", -tempSpeed); //Properly revert speed
-					needNext = true;
-				}
-			}
-			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineFenrir)) {
-				player.addStatusValue(StatusEffects.BlessingOfDivineFenrir, 1, -1);
-				if (player.statusEffectv1(StatusEffects.BlessingOfDivineFenrir) <= 0) {
-					outputText("\n<b>The divine blessing starts to fade. You think it’s high time you go back to the temple and pray.</b>\n");
-					var tempTou:int = player.statusEffectv3(StatusEffects.BlessingOfDivineFenrir);
-					player.removeStatusEffect(StatusEffects.BlessingOfDivineFenrir);
-					player.statStore.removeBuffs("FenrirBlessing");
-					dynStats("tou", -tempTou);
 					needNext = true;
 				}
 			}
@@ -805,6 +826,41 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 
 				//Racial perk daily effect Area
+
+				//Player overheat is progressing toward active
+				if (player.statusEffectv1(StatusEffects.Overheat) == 0 && player.statusEffectv2(StatusEffects.Overheat) > 0) {
+					player.addStatusValue(StatusEffects.Overheat, 2, -1);
+					if(player.statusEffectv2(StatusEffects.Overheat) == 0){
+						player.addStatusValue(StatusEffects.Overheat, 1, 1);
+						outputText("\nYour body start overheating again, you really could use sex right now.\n");
+						if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
+						else if (player.hasVagina()) player.goIntoHeat(false);
+						needNext = true;
+					}
+				}
+				//Player overheat is intensifying
+				if (player.statusEffectv1(StatusEffects.Overheat) == 1) {
+					if (player.hasCock() || (player.gender == 3 && rand(2) == 0)){
+						if (player.goIntoRut(false)) {
+							outputText("\nYour cock aches for a wet snatch to cool itself in. It would seem your burning body has gone into rut.\n");
+							player.statStore.addBuffObject({sen:2}, "Overheat",{text:"Overheat"});
+						} else {
+							outputText("\nYour cock aches for a wet snatch to cool itself in.T Thankfully your rut cannot get any worse then it is now\n");
+							player.statStore.addBuffObject({sen:2}, "Overheat",{text:"Overheat"});
+						}
+					} else if (player.hasVagina()){
+						var intensified:Boolean = player.inHeat;
+						if (player.goIntoHeat(false)) {
+							if (intensified) {
+								outputText("\nThe hot throbbing in you intensify as your burning body aches for sex. It's difficult NOT to think about a cock slipping inside your moist fuck-tunnel as you realy could use some form of cooling for your furnace.\n");
+								player.statStore.addBuffObject({sen:2}, "Overheat",{text:"Overheat"});
+							} else {
+								outputText("\nThe hot throbbing in you intensify as your burning body aches for sex. Thankfully your heat cannot get any worse then it is now\n");
+							}
+						}
+					}
+					needNext = true;
+				}
 
 				//Easter bunny egg balls
 				if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.balls >=2) {
@@ -1310,7 +1366,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nYour body slowly comes back to life as if it has been hibernating for a long time. You feel sickly as if dying, hungry as if you'd been starving for weeks and thirstier than if you'd been wandering the desert without drinks for about half as much.\n\n(<b>Lost Perks: "+((player.hasPerk(PerkLib.ColdAffinity) && player.yetiScore() < 6) ? "Cold Affinity, ":"")+"Dead metabolism and Icy flesh</b>)\n");
 				if (player.hasPerk(PerkLib.ColdAffinity) && player.yetiScore() < 6) player.removePerk(PerkLib.ColdAffinity);
 				player.removePerk(PerkLib.DeadMetabolism);
-				if (player.tou < 10) player.tou = 10;
 				player.removePerk(PerkLib.IcyFlesh);
 				needNext = true;
 			}

@@ -196,6 +196,9 @@ public class EventParser {
                 if (player.statStore.recentlyRemovedTags["Hangover"]){
                     EngineCore.outputText("\nYour head finally clears as your hangover wears off.  Drinking with the shemale lizard was definitely a bad idea.\n");
                 }
+                if (player.statStore.recentlyRemovedTags["TaothBlessing"] || player.statStore.recentlyRemovedTags["FenrirBlessing"]){
+                    EngineCore.outputText("\nThe divine blessing starts to fade. You think it’s high time you go back to the temple and pray.\n");
+                }
             } else if (CoC.instance.model.time.hours == 21) {
                 if (CoC.instance.flags[kFLAGS.LETHICE_DEFEATED] <= 0) EngineCore.outputText("\nThe sky darkens as a starless night falls.  The blood-red moon slowly rises up over the horizon.\n");
                 else EngineCore.outputText("\nThe sky darkens as a starry night falls.  The blood-red moon slowly rises up over the horizon.\n");

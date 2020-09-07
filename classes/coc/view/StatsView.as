@@ -2,6 +2,7 @@ package coc.view {
 import classes.CoC;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
+import classes.PerkLib;
 import classes.Player;
 import classes.Scenes.SceneLib;
 import classes.Stats.BuffableStat;
@@ -449,12 +450,17 @@ public class StatsView extends Block {
 				} else if (astat is PrimaryStat) {
 					var primStat:PrimaryStat = astat as PrimaryStat;
 					if (!primStat) return;
-					if (!primStat) return;
 					CoC.instance.mainView.toolTipView.header = bar.statName;
 					if (statname == "sens" || statname == "cor") isPositiveStat = false;
-					CoC.instance.mainView.toolTipView.text = "Base: "+primStat.core.value+"\n" +
-							""+StatUtils.describeBuffs(primStat.bonus, false, isPositiveStat)+"" +
-							""+StatUtils.describeBuffs(primStat.mult, true, isPositiveStat)+"";
+					if (statname == "tou" && (player.hasPerk(PerkLib.IcyFlesh) || player.hasPerk(PerkLib.HaltedVitals))) {
+						CoC.instance.mainView.toolTipView.text = "Base: "+primStat.core.value+"\n" +
+								"You are currently in a state of undeath and cannot benefit from bonus to toughness.";
+					}
+					else{
+						CoC.instance.mainView.toolTipView.text = "Base: "+primStat.core.value+"\n" +
+								""+StatUtils.describeBuffs(primStat.bonus, false, isPositiveStat)+"" +
+								""+StatUtils.describeBuffs(primStat.mult, true, isPositiveStat)+"";
+					}
 					CoC.instance.mainView.toolTipView.showForElement(bar);
 					break;
 				}

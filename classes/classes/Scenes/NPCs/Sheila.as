@@ -299,7 +299,7 @@ public class Sheila extends Monster
 			if (sheilaDemon) {
 				//-slightly slower, has much more stamina, intel, and HP now
 				this.spe -= 15 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.tou += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.touStat.core.value += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.intStat.core.value += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				bonusHP += 200;
 				this.bonusLust = 30;

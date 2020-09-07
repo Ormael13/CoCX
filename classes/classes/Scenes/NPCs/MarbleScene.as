@@ -125,7 +125,6 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				//Remove the status and stat boosts when time runs out on the milk
 				if (player.statusEffectv1(StatusEffects.MarblesMilk) <= 0) {
 					needNext = true;
-					dynStats("tou", (-1 * player.statusEffectv3(StatusEffects.MarblesMilk)));
 					player.buff("MarblesMilk").remove();
 					player.removeStatusEffect(StatusEffects.MarblesMilk);
 					//Text for when Marble's Milk effect wears off:
@@ -310,7 +309,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				}
 				//Boost stats if not under its affects
 				else {
-					dynStats("str", 5,"tou", 10);
+					player.statStore.replaceBuffObject({"str.mult":0.10,"tou.mult":0.10},"MarblesMilk",{text:"MarblesMilk"});
 				}
 				//Post-addiction flavors
 				//Marble liked you addicted

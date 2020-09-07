@@ -357,12 +357,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 			}
-			if (player.lowerBody == LowerBody.PLANT_FLOWER || player.hasPerk(PerkLib.FloralOvaries)) {
+			if (player.isAlraune() || player.hasPerk(PerkLib.FloralOvaries)) {
 				// Pollen
 				bd = buttons.add("AlraunePollen", AlraunePollen).hint("Release a cloud of your pollen in the air to arouse your foe.");
 				if (player.hasStatusEffect(StatusEffects.AlraunePollen)) bd.disable("<b>You already spread your pollen over battlefield.</b>\n\n");
 			}
-			if (player.lowerBody == LowerBody.PLANT_FLOWER) {
+			if (player.isAlraune()) {
 				// Entangle
 				bd = buttons.add("Entangle", AlrauneEntangle).hint("Use your vines to hinder your opponent.");
 				if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) bd.disable("<b>You already entangle your opponent.</b>\n\n");
@@ -590,6 +590,31 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 	}
+
+	public function checkForElementalEnchantmentAndDoDamage(damage:Number, canUseFist:Boolean = true, canUseWhip:Boolean = true):void{
+		if (player.weapon == weapons.L_WHIP) damage = doFireDamage(damage, true, true);
+		else if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doFireDamage(damage, true, true);
+		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doIceDamage(damage, true, true);
+		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doLightingDamage(damage, true, true);
+		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doDarknessDamage(damage, true, true);
+		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) damage = doFireDamage(damage, true, true);
+		else if ((player.isSwordTypeWeapon() || player.isAxeTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade)){
+			damage += scalingBonusLibido() * 0.20;
+			damage = doDamage(damage, true, true);
+			damage = doFireDamage(Math.round(damage*0.1), true, true);
+			damage = Math.round(damage * 1.1);
+		}
+		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
+			damage = doDamage(damage, true, true);
+			damage = doFireDamage(Math.round(damage*0.1), true, true);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			damage = Math.round(damage * 1.1);
+		}
+		else{
+			damage = Math.round(damage);
+			damage = doDamage(damage, true, true);
+		}
+	}
 	
 	public function powerAttackMenu():void {
 		menu();
@@ -649,8 +674,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
 			else damage *= 1.75;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -696,8 +720,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
 			else damage *= 1.75;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -743,8 +766,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
 			else damage *= 1.75;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -790,8 +812,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
 			else damage *= 1.75;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -837,8 +858,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
 			else damage *= 1.75;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -884,8 +904,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
 			else damage *= 1.75;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -932,19 +951,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= 1.75;
 		}
 		damage = Math.round(damage);
-		if (player.weapon == weapons.L_WHIP) damage = doFireDamage(damage, true, true);
-		else if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doFireDamage(damage, true, true);
-		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doIceDamage(damage, true, true);
-		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doLightingDamage(damage, true, true);
-		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doDarknessDamage(damage, true, true);
-		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) damage = doFireDamage(damage, true, true);
-		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
-			damage = doDamage(damage, true, true);
-			damage = doFireDamage(Math.round(damage*0.1), true, true);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
-			damage = Math.round(damage * 1.1);
-		}
-		else damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -1161,11 +1168,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.spe >= 225) damage = doDamage(damage, true, true);
 			if (player.spe >= 300) damage = doDamage(damage, true, true);
 		}
-		else if (player.weapon == weapons.RCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doFireDamage(damage, true, true);
-		else if (player.weapon == weapons.SCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doIceDamage(damage, true, true);
-		else if (player.weapon == weapons.TCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doLightingDamage(damage, true, true);
-		else if (player.weapon == weapons.ACLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doDarknessDamage(damage, true, true);
-		else damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage, false, false);
 		if (crit) {
 			outputText(" <b>Critical!</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -1301,8 +1304,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					else damage += 80;
 					lustdamage *= 0.14;
 					monster.teased(monster.lustVuln * lustdamage);
-					monster.tou -= 2;
-					if (monster.tou < 1) monster.tou = 1;
+					monster.statStore.addBuffObject({tou:-2}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom))
 					{
 						monster.addStatusValue(StatusEffects.NagaVenom,3,1);
@@ -1535,8 +1537,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= critMulti;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		if (player.hasPerk(PerkLib.PhantomStrike)) {
 			damage = doDamage(damage, true, true);
 			damage *= 2;
@@ -1647,7 +1648,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//final touches
 		damage = Math.round(damage);
 		damage *= (monster.damagePercent() / 100);
-		damage = doDamage(damage);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText("Your [weapon] hits few of " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
 		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");

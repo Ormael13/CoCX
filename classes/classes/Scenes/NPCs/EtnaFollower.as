@@ -384,7 +384,7 @@ public function etnaRapeYandere():void
 	if (player.hasCock()) outputText("as she prepares to feast");
 	else outputText("at the mere thought of finally having sex with you");
 	outputText(".\n\n\"<i>You are mine [name] whether you like it or not! I’ve been unable to think of anything but you for days and it is obvious that we were made for each others body. No one else can douse the fire burning in me like you do!</i>\"\n\n");
-	player.tou -= 5;
+	dynStats("tou", -5);
 	statScreenRefresh();
 	etnaRapesPlayer();
 	if (player.tou >= 30) {

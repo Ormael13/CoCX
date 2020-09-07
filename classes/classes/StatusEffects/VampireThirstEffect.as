@@ -29,6 +29,10 @@ public class VampireThirstEffect extends StatusEffectClass {
     public function modSatiety(delta:Number):void {
         value1 = boundFloat(-10, value1 + delta, maxThirst());
 		host.statStore.replaceBuffObject({str:currentBoost,spe:currentBoost,int:currentBoost,lib:currentBoost},"VampirismSatiety",{text:"Vampirism"});
+		if (game.player.hunger < game.player.maxHunger())
+		{
+			game.player.refillHunger(10, false);
+		}
     }
 	
 	public function get currentBoost():int {

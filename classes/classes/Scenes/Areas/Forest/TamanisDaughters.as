@@ -43,7 +43,7 @@ public class TamanisDaughters extends Goblin
 				//(+5 mob strength)
 				strStat.core.value += 5;
 				//(+5 mob toughness)
-				tou += 5;
+				touStat.core.value += 5;
 				HP += 10;
 				//(-20 mob lust)
 				lust -= 20;

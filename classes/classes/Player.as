@@ -41,6 +41,7 @@ import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Pregnancy;
 import classes.Scenes.SceneLib;
+import classes.StatusEffects;
 import classes.StatusEffects.VampireThirstEffect;
 import classes.internals.Utils;
 import classes.lists.BreastCup;
@@ -3333,7 +3334,10 @@ use namespace CoC;
 			}
 			if (TopRace == "salamander") {
 				if (TopScore >= 4) {
-					if (TopScore >= 7) {
+					if (TopScore >= 16) {
+						if (isTaur()) race = "primordial salamander-taur";
+						else race = "primordial salamander";
+					} else if (TopScore >= 7) {
 						if (isTaur()) race = "salamander-taur";
 						else race = "salamander";
 					} else {
@@ -6814,11 +6818,16 @@ use namespace CoC;
 		public function salamanderScore():Number {
 			Begin("Player","racialScore","salamander");
 			var salamanderCounter:Number = 0;
-			if (hasPartialCoat(Skin.SCALES))
+			if (hasPartialCoat(Skin.SCALES)) {
 				salamanderCounter++;
+				if (coatColor == "red" || "blazing red" || "orange" || "reddish-orange" || "orange")
+					salamanderCounter++;
+				if (skinTone == "tan" || "light" || "dark" || "mohagany" || "russet")
+					salamanderCounter++;
+			}
 			if (faceType == Face.SALAMANDER_FANGS) {
 				salamanderCounter++;
-				if (ears.type == Ears.HUMAN)
+				if (ears.type == Ears.HUMAN || ears.type == Ears.LIZARD || ears.type == Ears.DRAGON)
 					salamanderCounter++;
 			}
 			if (eyes.type == Eyes.REPTILIAN)
@@ -6827,8 +6836,15 @@ use namespace CoC;
 				salamanderCounter++;
 			if (lowerBody == LowerBody.SALAMANDER)
 				salamanderCounter++;
-			if (tailType == Tail.SALAMANDER)
-				salamanderCounter++;
+			if (tailType == Tail.SALAMANDER) {
+				salamanderCounter += 2;
+				if (wings.type == Wings.NONE)
+					salamanderCounter++;
+				if (horns.type == Horns.NONE)
+					salamanderCounter++;
+				if (rearBody.type == RearBody.NONE)
+					salamanderCounter++;
+			}
 			if (lizardCocks() > 0)
 				salamanderCounter++;
 			if (findPerk(PerkLib.Lustzerker) >= 0)
@@ -7780,7 +7796,7 @@ use namespace CoC;
 				alrauneCounter++;
 			if (wings.type == Wings.NONE)
 				alrauneCounter++;
-			if (lowerBody == LowerBody.PLANT_FLOWER || lowerBody == LowerBody.FLOWER_LILIRAUNE)
+			if (isAlraune())
 				alrauneCounter += 5;
 			if (stamenCocks() > 0)
 				alrauneCounter++;
@@ -9623,9 +9639,6 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.FeedingEuphoria)) {
 				maxSpe += statusEffectv2(StatusEffects.FeedingEuphoria);
 			}
-			if (hasStatusEffect(StatusEffects.BlessingOfDivineFenrir)) {
-				maxTou += statusEffectv3(StatusEffects.BlessingOfDivineFenrir);
-			}
 			if (hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) {
 				maxSpe += statusEffectv2(StatusEffects.BlessingOfDivineTaoth);
 			}
@@ -10719,7 +10732,13 @@ use namespace CoC;
 				}
 			}//+35/30-40
 			if (salamanderScore() >= 4) {
-				if (salamanderScore() >= 7) {
+				if (salamanderScore() >= 16) {
+					maxStrCap2 += (105 * newGamePlusMod);
+					maxTouCap2 += (80 * newGamePlusMod);
+					maxLibCap2 += (130 * newGamePlusMod);
+					minSen += (75 * newGamePlusMod);
+				}
+				else if (salamanderScore() >= 7) {
 					maxStrCap2 += (25 * newGamePlusMod);
 					maxTouCap2 += (25 * newGamePlusMod);
 					maxLibCap2 += (40 * newGamePlusMod);
@@ -11129,12 +11148,11 @@ use namespace CoC;
 				minSen += (2 * level * newGamePlusMod);
 			}
 			if (jiangshiScore() >= 20) {
-				maxStrCap2 += (140 * newGamePlusMod);
-				maxTouCap2 += (100 * newGamePlusMod);
+				maxStrCap2 += (150 * newGamePlusMod);
 				maxSpeCap2 -= (90 * newGamePlusMod);
 				maxIntCap2 -= (90 * newGamePlusMod);
-				maxWisCap2 += (110 * newGamePlusMod);
-				maxLibCap2 += (130 * newGamePlusMod);
+				maxWisCap2 += (130 * newGamePlusMod);
+				maxLibCap2 += (200 * newGamePlusMod);
 			}//+110 strength +80 toughness +60 Wisdom +100 Libido +50 sensitivity
 			if (gargoyleScore() >= 20) {
 				if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
@@ -11823,12 +11841,22 @@ use namespace CoC;
 				{
 					// Start with that, whats easy
 					case 'cum':
+						if (hasStatusEffect(StatusEffects.Overheat) && inHeat){
+							if (statusEffectv3(StatusEffects.Overheat) != 1){
+								addStatusValue(StatusEffects.Overheat, 3, 1);
+							}
+						}
 						if (hasPerk(PerkLib.ManticoreCumAddict))
 						{
 							manticoreFeed();
 						}
 						break;
 					case 'vaginalFluids':
+						if (hasStatusEffect(StatusEffects.Overheat) && inRut){
+							if (statusEffectv3(StatusEffects.Overheat) != 1){
+							addStatusValue(StatusEffects.Overheat, 3, 1);
+							}
+						}
 						break;
 					case 'saliva':
 						break;

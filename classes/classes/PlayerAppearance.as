@@ -3041,11 +3041,11 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Int, -" + (20 * (1 + player.newGamePlusMod())) + " max Wis, +" + (10 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 		} else if (player.jabberwockyScore() >= 1 && player.jabberwockyScore() < 10) outputText("\n<font color=\"#008000\">Jabberwocky: " + player.jabberwockyScore() + "</font>");
 		else if (player.jabberwockyScore() < 1) outputText("\n<font color=\"#ff0000\">Jabberwocky: 0</font>");
-		//JIANGSHI
+		//Jiangshi
 		if (player.jiangshiScore() >= 20) {
-			outputText("\n<font color=\"#0000a0\">JIANGSHI: " + player.jiangshiScore() + " (+" + (140 * (1 + player.newGamePlusMod())) + " max Str, +" + (100 * (1 + player.newGamePlusMod())) + " max Tou, -" + (90 * (1 + player.newGamePlusMod())) + " min Spe, -" + (90 * (1 + player.newGamePlusMod())) + " min Int, ");
-			outputText("+" + (110 * (1 + player.newGamePlusMod())) + " max Wis, +" + (130 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-		} else if (player.jiangshiScore() < 20) outputText("\n<font color=\"#008000\">JIANGSHI: " + player.jiangshiScore() + "</font>");
+			outputText("\n<font color=\"#0000a0\">Jiangshi: " + player.jiangshiScore() + " (+" + (150 * (1 + player.newGamePlusMod())) + " max Str, -" + (90 * (1 + player.newGamePlusMod())) + " min Spe, -" + (90 * (1 + player.newGamePlusMod())) + " min Int, ");
+			outputText("+" + (130 * (1 + player.newGamePlusMod())) + " max Wis, +" + (200 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		} else if (player.jiangshiScore() < 20) outputText("\n<font color=\"#008000\">Jiangshi: " + player.jiangshiScore() + "</font>");
 		//Kangaroo
 		if (player.kangaScore() >= 4) outputText("\n<font color=\"#0000a0\">Kangaroo-morph: " + player.kangaScore() + " (+" + (5 * (1 + player.newGamePlusMod())) + " max Tou, +" + (15 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
 		else if (player.kangaScore() >= 1) outputText("\n<font color=\"#008000\">Kangaroo-morph: " + player.kangaScore() + "</font>");
@@ -3244,17 +3244,15 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.rhinoScore() >= 1) outputText("\n<font color=\"#008000\">Rhino-morph: " + player.rhinoScore() + "</font>");
 		else if (player.rhinoScore() < 1) outputText("\n<font color=\"#ff0000\">Rhino-morph: 0</font>");
 		//Salamander
-		if (player.salamanderScore() >= 7) {
+		if (player.salamanderScore() >= 16) {
+			outputText("\n<font color=\"#0000a0\">Primordial Salamander: " + player.salamanderScore() + " (+");
+			outputText("" + (105 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Tou, +" + (130 * (1 + player.newGamePlusMod())) + "max Lib, +" + (75 * (1 + player.newGamePlusMod())) + " min sens, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		} else if (player.salamanderScore() >= 7) {
 			outputText("\n<font color=\"#0000a0\">Salamander: " + player.salamanderScore() + " (+");
-			if (player.findPerk(PerkLib.SalamanderAdrenalGlands) > 0 && player.findPerk(PerkLib.SalamanderAdrenalGlandsEvolved) > 0) outputText("" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (35 * (1 + player.newGamePlusMod())) + " max Tou, +" + (5 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " ");
-			else if (player.findPerk(PerkLib.SalamanderAdrenalGlands) > 0) outputText("" + (25 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (45 * (1 + player.newGamePlusMod())) + " ");
-			else outputText("" + (25 * (1 + player.newGamePlusMod())) + " max Str, +" + (25 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " ");
-			outputText("max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+			outputText("" + (25 * (1 + player.newGamePlusMod())) + " max Str, +" + (25 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + "max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		} else if (player.salamanderScore() >= 4) {
-			outputText("\n<font color=\"#0000a0\">Half Salamander: " + player.salamanderScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, ");
-			if (player.findPerk(PerkLib.SalamanderAdrenalGlands) > 0) outputText("+" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (35 * (1 + player.newGamePlusMod())) + " ");
-			else outputText("+" + (15 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " ");
-			outputText("max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+			outputText("\n<font color=\"#0000a0\">Salamander: " + player.salamanderScore() + " (+");
+			outputText("" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (15 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + "max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		} else if (player.salamanderScore() >= 1) outputText("\n<font color=\"#008000\">Half Salamander: " + player.salamanderScore() + "</font>");
 		else if (player.salamanderScore() < 1) outputText("\n<font color=\"#ff0000\">Half Salamander: 0</font>");
 		//Satyr
@@ -3432,8 +3430,7 @@ public class PlayerAppearance extends BaseContent {
 		var touStat1:Number = newmaxes.tou;
 		var speStat1:Number = newmaxes.spe;
 		var libStat1:Number = newmaxes.lib;
-		if (touStat != touStat1 || speStat != speStat1 || libStat != libStat1) outputText(" As if this reflection unlocked some hidden door in you, you feel your body awaken with newfound vigor and might. Let your adversaries come, you are ready for them now!");
-		if (touStat != touStat1) player.tou = Math.round(player.tou * (touStat1 / touStat));
+		if (speStat != speStat1 || libStat != libStat1) outputText(" As if this reflection unlocked some hidden door in you, you feel your body awaken with newfound vigor and might. Let your adversaries come, you are ready for them now!");
 		if (speStat != speStat1) player.spe = Math.round(player.spe * (speStat1 / speStat));
 		if (libStat != libStat1) player.lib = Math.round(player.lib * (libStat1 / libStat));
 		doNext(playerMenu);

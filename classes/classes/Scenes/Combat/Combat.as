@@ -2370,8 +2370,7 @@ public class Combat extends BaseContent {
                     else damage += 80;
                     lustdamage *= 0.14;
                     monster.teased(monster.lustVuln * lustdamage);
-                    monster.tou -= 2;
-                    if (monster.tou < 1) monster.tou = 1;
+                    monster.statStore.addBuffObject({tou:-2}, "Poison",{text:"Poison"});
                     if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                         monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
                     } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
@@ -3394,6 +3393,16 @@ public class Combat extends BaseContent {
                 if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
                 damage += damage1;
             }
+            if ((player.isSwordTypeWeapon() || player.isAxeTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade)) {
+                var damage1:Number = damage;
+                if (monster.hasPerk(PerkLib.IceNature)) damage1 += (damage1 * 0.5);
+                if (monster.hasPerk(PerkLib.FireVulnerability)) damage1 += (damage1 * 0.2);
+                if (monster.hasPerk(PerkLib.IceVulnerability)) damage1 += (damage1 * 0.05);
+                if (monster.hasPerk(PerkLib.FireNature)) damage1 += (damage1 * 0.02);
+                if (player.hasPerk(PerkLib.FireAffinity)) damage1 *= 2;
+                damage += scalingBonusLibido() * 0.20;
+                damage += damage1;
+            }
             if (player.weapon == weapons.BFGAUNT) damage *= 4;
             if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
             //Determine if critical hit!
@@ -3724,10 +3733,7 @@ public class Combat extends BaseContent {
                     var lust0damage:Number = 35 + rand(player.lib / 10);
                     lust0damage *= 0.14;
                     monster.teased(monster.lustVuln * lust0damage);
-                    monster.tou -= 2;
-                    monster.spe -= 2;
-                    if (monster.tou < 1) monster.tou = 1;
-                    if (monster.spe < 1) monster.spe = 1;
+                    monster.statStore.addBuffObject({tou:-2, spe:-2}, "Poison",{text:"Poison"});
                     if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                         monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
                     } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
@@ -3777,8 +3783,7 @@ public class Combat extends BaseContent {
                         if (player.hasPerk(PerkLib.AlphaAndOmega)) lustdamage *= 1.50;
                         lustdamage *= 0.14;
                         monster.teased(monster.lustVuln * lustdamage);
-                        monster.tou -= 2;
-                        if (monster.tou < 1) monster.tou = 1;
+                        monster.statStore.addBuffObject({tou:-2}, "Poison",{text:"Poison"});
                         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                             monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
                         } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
@@ -5895,23 +5900,37 @@ public class Combat extends BaseContent {
                 outputText("<b>Your rage wear off.</b>\n\n");
             } else player.addStatusValue(StatusEffects.OniRampage, 1, -1);
         }
-        if (player.hasStatusEffect(StatusEffects.Maleficium)) {
-            if (player.statusEffectv1(StatusEffects.Maleficium) <= 0) {
-                player.removeStatusEffect(StatusEffects.Maleficium);
-                outputText("<b>Maleficium effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.Maleficium, 1, -1);
-        }
         if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
             if (player.statusEffectv1(StatusEffects.BlazingBattleSpirit) <= 0) {
                 player.removeStatusEffect(StatusEffects.BlazingBattleSpirit);
                 outputText("<b>Blazing battle spirit effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.BlazingBattleSpirit, 1, -1);
         }
+        if (player.hasStatusEffect(StatusEffects.Blink)) {
+            if (player.statusEffectv3(StatusEffects.Blink) <= 0) {
+                player.dynStats("spe", -player.statusEffectv1(StatusEffects.Blink), "scale", false);
+                player.removeStatusEffect(StatusEffects.Blink);
+                //	statScreenRefresh();
+                outputText("<b>Blink effect wore off!</b>\n\n");
+            } else player.addStatusValue(StatusEffects.Blink, 3, -1);
+        }
         if (player.hasStatusEffect(StatusEffects.Cauterize)) {
             if (player.statusEffectv1(StatusEffects.Cauterize) <= 0) {
                 player.removeStatusEffect(StatusEffects.Cauterize);
                 outputText("<b>Cauterize effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.Cauterize, 1, -1);
+        }
+        if (player.hasStatusEffect(StatusEffects.FlameBlade)) {
+            if (player.statusEffectv1(StatusEffects.FlameBlade) <= 0) {
+                player.removeStatusEffect(StatusEffects.FlameBlade);
+                outputText("<b>Blazing battle spirit effect wore off!</b>\n\n");
+            } else player.addStatusValue(StatusEffects.FlameBlade, 1, -1);
+        }
+        if (player.hasStatusEffect(StatusEffects.Maleficium)) {
+            if (player.statusEffectv1(StatusEffects.Maleficium) <= 0) {
+                player.removeStatusEffect(StatusEffects.Maleficium);
+                outputText("<b>Maleficium effect wore off!</b>\n\n");
+            } else player.addStatusValue(StatusEffects.Maleficium, 1, -1);
         }
         //Spell buffs
         if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
@@ -5925,14 +5944,6 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.ChargeArmor);
                 outputText("<b>Charged Armor effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.ChargeArmor, 2, -1);
-        }
-        if (player.hasStatusEffect(StatusEffects.Blink)) {
-            if (player.statusEffectv3(StatusEffects.Blink) <= 0) {
-                player.dynStats("spe", -player.statusEffectv1(StatusEffects.Blink), "scale", false);
-                player.removeStatusEffect(StatusEffects.Blink);
-                //	statScreenRefresh();
-                outputText("<b>Blink effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.Blink, 3, -1);
         }
         //Blizzard
         if (player.hasStatusEffect(StatusEffects.Blizzard)) {
@@ -8111,8 +8122,7 @@ public class Combat extends BaseContent {
                 "Your victim eventually starts to struggles and knock the spike out of your hand but the damage is done.");
         monster.teased(monster.lustVuln * StraddleDamage, false);
         if (Randomcrit) outputText(" <b>Critical!</b>");
-        monster.tou -= 6;
-        if (monster.tou < 1) monster.tou = 1;
+        monster.statStore.addBuffObject({tou:-6}, "Poison",{text:"Poison"});
         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
             monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
         } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);

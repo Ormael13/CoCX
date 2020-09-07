@@ -156,7 +156,7 @@ public class Marae extends Monster
 					this.armorDef = 600;
 					this.armorMDef = 600;
 					this.strStat.core.value += 260;
-					this.tou += 260;
+					this.touStat.core.value += 260;
 					this.bonusHP += 4000;
 					this.additionalXP += 2000;
 					this.createPerk(PerkLib.MonsterRegeneration, 9, 0, 0, 0);

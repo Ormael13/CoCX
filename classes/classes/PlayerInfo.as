@@ -264,9 +264,6 @@ public class PlayerInfo extends BaseContent {
 		if (player.inRut)
 			statEffects += "Rut - " + Math.round(player.statusEffectv3(StatusEffects.Rut)) + " hours remaining\n";
 
-		if (player.statusEffectv1(StatusEffects.BlessingOfDivineFenrir) > 0)
-			statEffects += "Blessing of Divine Agency - Fenrir: " + player.statusEffectv1(StatusEffects.BlessingOfDivineFenrir) + " hours remaining (Your strength and toughness is empowered by ~10% under the guidance of Fenrir)\n";
-
 		if (player.statusEffectv1(StatusEffects.BlessingOfDivineFera) > 0)
 			statEffects += "Blessing of Divine Agency - Fera: " + player.statusEffectv1(StatusEffects.BlessingOfDivineFera) + " hours remaining (Your lust resistance and corruption gains are empowered by 15% and 100% under the guidance of Fera)\n";
 
@@ -1317,7 +1314,7 @@ public class PlayerInfo extends BaseContent {
 			outputText("\nYou may allocate your remaining stat points later.");
 		}
 		player.strStat.core.value += player.tempStr;
-		player.tou += player.tempTou;
+		player.strStat.core.value += player.tempTou;
 		player.spe += player.tempSpe;
 		player.intStat.core.value += player.tempInt;
 		player.wisStat.core.value += player.tempWis;

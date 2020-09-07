@@ -201,6 +201,7 @@ import flash.utils.getQualifiedClassName;
 			var temp:Number = 100 + this.level * 15 + this.bonusHP;
 			var baseStat:Number = 0;
 			if (findPerk(PerkLib.IcyFlesh) >= 0) baseStat += this.inte;
+			if (findPerk(PerkLib.HaltedVitals) >= 0) baseStat += this.lib;
 			else baseStat += this.tou;
 			temp += (baseStat);
 			if (baseStat >= 21) temp += (baseStat*2);
@@ -1559,7 +1560,7 @@ import flash.utils.getQualifiedClassName;
 		protected function initStrTouSpeInte(str:Number, tou:Number, spe:Number, inte:Number):void
 		{
 			this.strStat.core.value = str;
-			this.tou = tou;
+			this.touStat.core.value = tou;
 			this.spe = spe;
 			this.intStat.core.value = inte;
 
@@ -2010,12 +2011,12 @@ import flash.utils.getQualifiedClassName;
 		{
 			if (statusEffectv1(StatusEffects.Fear) == 0) {
 				if (plural) {
-					this.spe += statusEffectv2(StatusEffects.Fear);
+					this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
 					removeStatusEffect(StatusEffects.Fear);
 					EngineCore.outputText("Your foes shake free of their fear and ready themselves for battle.");
 				}
 				else {
-					this.spe += statusEffectv2(StatusEffects.Fear);
+					this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
 					removeStatusEffect(StatusEffects.Fear);
 					EngineCore.outputText("Your foe shakes free of its fear and readies itself for battle.");
 				}
@@ -3099,7 +3100,7 @@ import flash.utils.getQualifiedClassName;
 			bonusAscLib = Math.round(bonusAscLib);
 			bonusAscSen = Math.round(bonusAscSen);
 			this.strStat.core.value += bonusAscStr;
-			this.tou += bonusAscTou;
+			this.touStat.core.value += bonusAscTou;
 			this.spe += bonusAscSpe;
 			this.intStat.core.value += bonusAscInt;
 			this.wisStat.core.value += bonusAscWis;
@@ -3107,7 +3108,7 @@ import flash.utils.getQualifiedClassName;
 			statStore.addBuff("sens", bonusAscSen, "Ascension", {});
 			var multiStatsAmp1:Number = 0;
 			this.strStat.core.value += multiStatsAmp1;
-			this.tou += multiStatsAmp1;
+			this.touStat.core.value += multiStatsAmp1;
 			this.spe += multiStatsAmp1;
 			var multiStatsAmp2:Number = 0;
 			this.intStat.core.value += multiStatsAmp2;

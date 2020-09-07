@@ -107,8 +107,8 @@ use namespace CoC;
 				outputText("Would you like to pray and if yes to who?");
 				menu();
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) addButton(0, "Marae", PlayerPrayAtTempleMaraeAltair).hint("Pray to Marae for empowered white magic.");
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) addButton(1, "Taoth", PlayerPrayAtTempleTaothAltair).hint("Pray the trickster god for an increase to your Agility, (if kitsune)kitsune powers (end of cut) and guile.");
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFenrir)) addButton(2, "Fenrir", PlayerPrayAtTempleFenrirAltair).hint("Pray to the god sharing your body for an increase to your might.");
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 && !player.statStore.hasBuff("TaothBlessing")) addButton(1, "Taoth", PlayerPrayAtTempleTaothAltair).hint("Pray the trickster god for an increase to your Agility, (if kitsune)kitsune powers (end of cut) and guile.");
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 && !player.statStore.hasBuff("FenrirBlessing")) addButton(2, "Fenrir", PlayerPrayAtTempleFenrirAltair).hint("Pray to the god sharing your body for an increase to your might.");
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFera)) addButton(3, "Fera", PlayerPrayAtTempleFeraAltair).hint("Pray the fallen goddess Fera for an increase to your innuendo and resilience to desire.");
 				addButton(14, "Back", templemainmenu);
 			}
@@ -138,14 +138,10 @@ use namespace CoC;
 			}
 		}
 		public function loosingFenrirBlessing():void {
-			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineFenrir)) {
+			if (player.statStore.hasBuff("BlessingOfDivineFenrir")) {
 				outputText("You chose to pray a different Deity losing the favor of the first to gain the bonus of the other.\n");
 				outputText("<b>You lost the Blessing of Divine Agency - Fenrir</b>\n");
-				var tempStr:int = player.statusEffectv2(StatusEffects.BlessingOfDivineFenrir);
-				var tempTou:int = player.statusEffectv3(StatusEffects.BlessingOfDivineFenrir);
-				player.removeStatusEffect(StatusEffects.BlessingOfDivineFenrir);
 				player.statStore.removeBuffs("BlessingOfDivineFenrir");
-				dynStats("tou", -tempTou);
 			}
 		}
 		public function loosingFeraBlessing():void {
@@ -208,22 +204,9 @@ use namespace CoC;
 			loosingTaothBlessing();
 			loosingFeraBlessing();
 			outputText("<b>You gained the Blessing of Divine Agency - Fenrir for 7 days</b>");
-			var temp1:Number = 0;
-			var temp2:Number = 0;
-			var tempStr:Number = 0;
-			var tempTou:Number = 0;
-			temp1 += player.str * 0.1;
-			temp2 += player.tou * 0.1;
-			temp1 = Math.round(temp1);
-			temp2 = Math.round(temp2);
-			player.createStatusEffect(StatusEffects.BlessingOfDivineFenrir, 169, 0, 0, 0);
-			tempStr = temp1;
-			tempTou = temp2;
-			player.statStore.replaceBuffObject({ 'str.mult': 0.1}, 'FenrirBlessing', { text: 'Fenrir Blessing', rate: Buff.RATE_DAYS, tick: 7 });
-			player.changeStatusValue(StatusEffects.BlessingOfDivineFenrir,3,tempTou);
+			player.statStore.replaceBuffObject({ 'str.mult': 0.1, 'tou.mult': 0.1}, 'FenrirBlessing', { text: 'Fenrir Blessing', rate: Buff.RATE_DAYS, tick: 7 });
 			mainView.statsView.showStatUp('str');
 			mainView.statsView.showStatUp('tou');
-			player.tou += player.statusEffectv3(StatusEffects.BlessingOfDivineFenrir);
 			if (player.HP < player.maxHP()) player.HP = player.maxHP();
 			dynStats("cor", -10);
 			statScreenRefresh();

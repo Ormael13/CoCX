@@ -117,7 +117,7 @@ public class Jojo extends Monster
 				this.cocks[0].cockThickness += 1;
 				this.cocks[0].cockLength += 5.5;
 				this.strStat.core.value -= 20 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.tou += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.touStat.core.value += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.cor += 10;
 				this.HP += 60 + (60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.bonusLust = 30;

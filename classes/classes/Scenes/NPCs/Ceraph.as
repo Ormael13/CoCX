@@ -136,7 +136,7 @@ public class Ceraph extends Monster
 				XP += 20;
 				level += 2;
 				this.strStat.core.value += 15;
-				tou += 15;
+				this.touStat.core.value += 15;
 				HP += 100;
 				lust = (maxLust() * 0.33);
 				player.dynStats("lus", 30);

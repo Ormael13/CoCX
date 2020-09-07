@@ -169,7 +169,7 @@ private function fightTamanisDaughters():void {
 
 		monster.strStat.core.value += 5;
 		//(+5 mob toughness)
-		monster.tou += 5;
+		monster.touStat.core.value += 5;
 		monster.HP += 10;
 		//(-20 mob lust)
 		monster.lust -= 20;
