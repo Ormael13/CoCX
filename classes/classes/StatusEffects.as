@@ -337,7 +337,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const EmberFuckCooldown:StatusEffectType              = mk("ember fuck cooldown");
 		public static const EmberMilk:StatusEffectType                      = mk("Ember's Milk");
 		public static const EmberNapping:StatusEffectType                   = mk("Ember Napping");
-		public static const EnergyDependent:StatusEffectType                = mk("Energy dependent");
 		public static const EverRapedJojo:StatusEffectType                  = mk("Ever Raped Jojo");
 		public static const ExcelliaChildbirth:StatusEffectType             = mk("Excellia Childbirth");
 		public static const ExcelliaJojo:StatusEffectType             		= mk("Excellia & Jojo");
@@ -348,7 +347,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const FappedGenderless:StatusEffectType               = mk("fapped genderless");
 		public static const FastingPill:StatusEffectType					= mk("Fasting Pill");
 		public static const Feeder:StatusEffectType                         = mk("Feeder");
-		public static const FeedingEuphoria:StatusEffectType                = mk("Manticore's and Displacer's Metabolism"); //v1: Hours; v2: Speed
 		public static const Fertilized:StatusEffectType                     = mk("Fertilized");
 		public static const FetishOn:StatusEffectType                       = mk("fetishON");
 		public static const FortressOfIntellect:StatusEffectType            = mk("Fortress of Intellect");

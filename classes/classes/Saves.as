@@ -1587,8 +1587,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 		}
 		//MAIN STATS
-
-		player.spe = saveFile.data.spe;
+		
 		player.lib = saveFile.data.lib;
 		player.cor = saveFile.data.cor;
 		player.fatigue = saveFile.data.fatigue;

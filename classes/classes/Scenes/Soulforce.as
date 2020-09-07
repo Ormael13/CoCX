@@ -1978,27 +1978,27 @@ public function FightHellfireSnail():void {
 			StatsMenuTou();
 		}
 		public function AddSpe1():void {
-			player.spe = player.spe + 1;
+			player.speStat.core.value += 1;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function AddSpe2():void {
-			player.spe = player.spe + 10;
+			player.speStat.core.value += 10;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function AddSpe3():void {
-			player.spe = player.spe + 50;
+			player.speStat.core.value += 50;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function AddSpe4():void {
-			player.spe = player.spe + 200;
+			player.speStat.core.value += 200;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function AddSpe5():void {
-			player.spe = player.spe + 1000;
+			player.speStat.core.value += 1000;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
@@ -2178,27 +2178,27 @@ public function FightHellfireSnail():void {
 			StatsMenuTou();
 		}
 		public function SubSpe1():void {
-			player.spe = player.spe - 1;
+			player.speStat.core.value -= 1;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function SubSpe2():void {
-			player.spe = player.spe - 10;
+			player.speStat.core.value -= 10;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function SubSpe3():void {
-			player.spe = player.spe - 50;
+			player.speStat.core.value -= 50;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function SubSpe4():void {
-			player.spe = player.spe - 200;
+			player.speStat.core.value -= 200;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function SubSpe5():void {
-			player.spe = player.spe - 1000;
+			player.speStat.core.value -= 1000;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}

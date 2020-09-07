@@ -11,6 +11,7 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.Scenes.Areas.Desert.NagaScene;
+import classes.Stats.Buff;
 import classes.internals.*;
 
 public class Gorgon extends Monster
@@ -73,7 +74,7 @@ public class Gorgon extends Monster
 			if(!player.hasStatusEffect(StatusEffects.NagaVenom)) {
 				outputText("The venom's effects are almost instantaneous; your vision begins to blur and it becomes increasingly harder to stand.");
 				if(player.spe > 6) {
-					player.spe -= 5;
+					player.buff("Poison").addStats({"spe":-5}).withText("Poisoned!").forHours(4);
 					showStatDown( 'spe' );
 					// speUp.visible = false;
 					// speDown.visible = true;
@@ -89,7 +90,7 @@ public class Gorgon extends Monster
 				outputText("The venom's effects intensify as your vision begins to blur and it becomes increasingly harder to stand.");
 				if(player.spe > 5) {
 					//stats(0,0,-2,0,0,0,0,0);
-					player.spe -= 4;
+					player.buff("Poison").addStats({"spe":-4}).withText("Poisoned!").forHours(4);
 					showStatDown( 'spe' );
 					// speUp.visible = false;
 					// speDown.visible = true;

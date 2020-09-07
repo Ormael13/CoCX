@@ -520,8 +520,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			outputText("\n\nHe's a demon. Maybe he'll actually find his way to your camp to be your fucktoy. More likely he was just saying whatever would save his hide and sharing his excessive perversions with you. You wouldn't mind him fucking you every morning, would you?");
 
 			outputText("\n\nShaking your head, you clear away the errant thoughts and focus on the battles to come.");
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("cum");
 			player.orgasm();
 			dynStats("cor+", 5);
 

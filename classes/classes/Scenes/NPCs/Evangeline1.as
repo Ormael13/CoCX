@@ -231,7 +231,7 @@ public class Evangeline1 extends Monster
 			outputText("She flushes, drawing on her body's desires to empower her muscles and hasten her up.");
 			outputText("The rush of success and power flows through her body.  <b>She looks like she can move faster!</b>");
 			createStatusEffect(StatusEffects.Blink, 50, 0, 0, 0);
-			this.spe += (5 + (inte / 10)) * 1.2 * SpellMod();
+			this.speStat.core.value += (5 + (inte / 10)) * 1.2 * SpellMod();
 			fatigue += spellCostBlink();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}

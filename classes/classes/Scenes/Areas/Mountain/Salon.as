@@ -627,8 +627,7 @@ private function minotaurCumBukkakeInSalon():void {
 	//[NEXT]
 	player.orgasm();
 	dynStats("lib", 2, "sen", 2, "cor", 2);
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+	player.sexReward("cum");
 	doNext(minotaurSalonFollowUp);
 }
 private function minotaurSalonFollowUp():void {

@@ -123,7 +123,7 @@ public class Kiha extends Monster
 		*/
 		override protected function handleFear():Boolean
 		{
-			this.spe += statusEffectv2(StatusEffects.Fear);
+			this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
 			removeStatusEffect(StatusEffects.Fear);
 			outputText("Kiha shudders for a moment, then looks your way with a clear head.  \"<i>Fear was the first thing the demons taught us to overcome.  Do you think it would stay my blade?</i>\"\n");
 			return true;

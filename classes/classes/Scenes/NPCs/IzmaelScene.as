@@ -304,8 +304,6 @@ import classes.Scenes.SceneLib;
 			outputText(" Eventually, finally, you come to and slowly unravel yourself from him, stand up and clamber, dripping out of the bath.");
 			if (player.isGoo()) outputText(" It takes a while to persuade much of your slimy bulk to follow you out of the pool, relaxed and diffused into the steaming waters as it is. You find yourself wondering how the lake slimes do it so effortlessly.");
 			outputText("\n\n<i>Alpha " + player.mf("dude", "chick") + "... I'm gonna need, like, 3 warm downs to get over this one,</i>\" he groans.  You laugh as you take in his exhausted, submerged frame.  The water has been polluted by the copious fluids the two of you have spurted out; you can smell the hot musk from here.  You suspect by the time Izmael himself manages to pull his frame out of the morass, he will be just as horny as he was when he got in.  Grinning, you saunter your steaming, naked self back to camp in search of something to towel yourself down.");
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.sexReward("cum");
 			doNext(camp.returnToCampUseOneHour);
 		}

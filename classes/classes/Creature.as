@@ -291,7 +291,7 @@ public class Creature extends Utils
 		}}
 
 		public var speStat:PrimaryStat = _stats.findStat('spe') as PrimaryStat;
-		public function get spe2():Number { return speStat.value; }
+		public function get spe():Number { return speStat.value; }
 		public var intStat:PrimaryStat = _stats.findStat('int') as PrimaryStat;
 		public function get inte():Number { return intStat.value; }
 		public var wisStat:PrimaryStat = _stats.findStat('wis') as PrimaryStat;
@@ -345,7 +345,6 @@ public class Creature extends Utils
 		}
 
 		//Primary stats
-		public var spe:Number = 0;
 		public var lib:Number = 0;
 		public var sensStat:BuffableStat = _stats.findStat('sens') as BuffableStat;
 		public function get sens():Number { return sensStat.value; }

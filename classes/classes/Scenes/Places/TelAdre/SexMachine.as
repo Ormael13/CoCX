@@ -249,8 +249,7 @@ private function useTheSexMachine():void {
 	}
 	//PREG IT UP!
 	if (player.hasVagina()) {
-		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-		if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+		player.sexReward("cum","Vaginal");
 		switch(rand(6)) {
 			case 0:
 				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);

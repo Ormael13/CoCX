@@ -164,7 +164,7 @@ use namespace CoC;
 					this.level = player.level;
 					this.strStat.core.value += 29 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.touStat.core.value += 28 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-					this.spe += 27 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.speStat.core.value += 27 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.intStat.core.value += 25 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.wisStat.core.value += 27 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				}
@@ -172,7 +172,7 @@ use namespace CoC;
 					this.level = 150;
 					this.strStat.core.value += 754 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.touStat.core.value += 728 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-					this.spe += 702 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.speStat.core.value += 702 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.intStat.core.value += 650 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.wisStat.core.value += 702 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				}

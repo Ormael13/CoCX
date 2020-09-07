@@ -184,7 +184,7 @@ public class Phouka extends Monster
 			}
 			this.long = "The " + this.short + " is hopping around near you, waiting for an opening.  He has the general appearance of a bunny with coal black fur.  A large cock stands erect between his legs.  His cat-like green eyes, filled with lust, follow your every motion.";
 			this.armorValue = 60;
-			this.spe = 90;
+			this.speStat.core.value = 90;
 			PhoukaScene.phoukaForm = PhoukaScene.PHOUKA_FORM_BUNNY;
 		}
 
@@ -202,7 +202,7 @@ public class Phouka extends Monster
 			}
 			this.long = "The " + this.short + " is charging back and forth just out of reach, waiting for an opening.  He has the general appearance of a goat with coal black fur.  He has large glossy black horns and a large cock between his legs.  His cat-like green eyes, filled with lust, follow your every motion.";
 			this.armorValue = 60;
-			this.spe = 70;
+			this.speStat.core.value = 70;
 			PhoukaScene.phoukaForm = PhoukaScene.PHOUKA_FORM_GOAT;
 		}
 
@@ -220,7 +220,7 @@ public class Phouka extends Monster
 			}
 			this.long = "The " + this.short + " is running in a wide circle around you, waiting for an opening.  He has the general appearance of a stallion with coal black fur.  A massive cock stands erect between his legs.  His cat-like green eyes, filled with lust, follow your every motion.";
 			this.armorValue = 75;
-			this.spe = 55;
+			this.speStat.core.value = 55;
 			PhoukaScene.phoukaForm = PhoukaScene.PHOUKA_FORM_HORSE;
 		}
 		
@@ -238,7 +238,7 @@ public class Phouka extends Monster
 			}
 			this.long = "The " + this.short + " is flying around near you, waiting for an opening.  He has the general appearance of a faerie, though he is slightly larger and his skin and wings are coal black.  A large cock stands erect between his legs.  His cat-like green eyes, filled with lust, follow your every motion.";
 			this.armorValue = 80;
-			this.spe = 80;
+			this.speStat.core.value = 80;
 			PhoukaScene.phoukaForm = PhoukaScene.PHOUKA_FORM_FAERIE;
 		}
 

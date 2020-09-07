@@ -264,7 +264,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
-			monster.spe += monster.statusEffectv1(StatusEffects.FrozenSolid);
+			monster.statStore.removeBuffs("FrozenSolid");
 			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
 		}
@@ -302,7 +302,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
-			monster.spe += monster.statusEffectv1(StatusEffects.FrozenSolid);
+			monster.statStore.removeBuffs("FrozenSolid");
 			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
 		}
@@ -346,7 +346,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
-			monster.spe += monster.statusEffectv1(StatusEffects.FrozenSolid);
+			monster.statStore.removeBuffs("FrozenSolid");
 			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
 		}
@@ -958,29 +958,29 @@ public class CombatSoulskills extends BaseCombatContent {
 		//final touches
 		damage *= (monster.damagePercent() / 100);
 		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) damage *= 2;
-		monster.spe -= 20;
+		monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
 		outputText("Air seems to lose all temperature around your fist as you dash at " + monster.a + monster.short + " and shove your palm on " + monster.pronoun2 + ", " + monster.pronoun3 + " body suddenly is frozen solid, encased in a thick block of ice! ");
 		damage = doIceDamage(damage, true, true);
-		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
 			if (monster.spe - 20 >= 0) {
 				monster.addStatusValue(StatusEffects.FrozenSolid, 1, 20);
-				monster.spe -= 20;
+				monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
 			}
 			else {
 				monster.addStatusValue(StatusEffects.FrozenSolid, 1, monster.spe);
-				monster.spe -= monster.spe;
+				monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
 			}
 		}
 		else {
 			monster.createStatusEffect(StatusEffects.FrozenSolid, 0, 0, 0, 0);
 			if (monster.spe - 20 >= 0) {
 				monster.addStatusValue(StatusEffects.FrozenSolid, 1, 20);
-				monster.spe -= 20;
+				monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
 			}
 			else {
 				monster.addStatusValue(StatusEffects.FrozenSolid, 1, monster.spe);
-				monster.spe -= monster.spe;
+				monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
 			}
 		}
 		if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);

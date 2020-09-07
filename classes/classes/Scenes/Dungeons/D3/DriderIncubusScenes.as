@@ -744,8 +744,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			flags[kFLAGS.DRIDERINCUBUS_FUCKED] = 1;
 			player.dynStats("cor+", 20);
 			player.orgasm();
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("cum", "Vaginal");
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			driderDefeatMenu();
 		}

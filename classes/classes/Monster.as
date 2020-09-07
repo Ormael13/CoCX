@@ -1561,7 +1561,7 @@ import flash.utils.getQualifiedClassName;
 		{
 			this.strStat.core.value = str;
 			this.touStat.core.value = tou;
-			this.spe = spe;
+			this.speStat.core.value = spe;
 			this.intStat.core.value = inte;
 
 			initedStrTouSpeInte = true;
@@ -3101,7 +3101,7 @@ import flash.utils.getQualifiedClassName;
 			bonusAscSen = Math.round(bonusAscSen);
 			this.strStat.core.value += bonusAscStr;
 			this.touStat.core.value += bonusAscTou;
-			this.spe += bonusAscSpe;
+			this.speStat.core.value += bonusAscSpe;
 			this.intStat.core.value += bonusAscInt;
 			this.wisStat.core.value += bonusAscWis;
 			this.lib += bonusAscLib;
@@ -3109,7 +3109,7 @@ import flash.utils.getQualifiedClassName;
 			var multiStatsAmp1:Number = 0;
 			this.strStat.core.value += multiStatsAmp1;
 			this.touStat.core.value += multiStatsAmp1;
-			this.spe += multiStatsAmp1;
+			this.speStat.core.value += multiStatsAmp1;
 			var multiStatsAmp2:Number = 0;
 			this.intStat.core.value += multiStatsAmp2;
 			this.wisStat.core.value += multiStatsAmp2;

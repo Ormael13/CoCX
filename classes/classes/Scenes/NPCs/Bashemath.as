@@ -18,8 +18,8 @@ import classes.internals.*;
 
 use namespace CoC;
 
-	public class Bashemath 
-	{
+	public class Bashemath extends Monster
+{
 		public function moveClawCombo():void {
 			createStatusEffect(StatusEffects.Attacks, 6, 0, 0, 0);
 			eAttack();

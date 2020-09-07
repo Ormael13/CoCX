@@ -1446,8 +1446,6 @@ private function kihaGirlGirlSex():void {
 	else outputText("explosion");
 	outputText(" of lady-spooge to mess her face.");
 	outputText("[pg]Mouths stuffed in each others' twats, you lie with your lover, lazily lapping at fragrant girl-honey while your bodies shiver from aftershocks of bliss.  Kiha admits, \"<i>Okay, you're - lick - not too bad - lick - at this.</i>\"  You swat her rump and stroke her happily swaying tail before thanking her.");
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	player.sexReward("vaginalFluids");
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);

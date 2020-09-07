@@ -189,10 +189,6 @@ public class Camp extends NPCAwareContent {
 			return;
 		}
 		fixFlags();
-		if (player.hasStatusEffect(StatusEffects.Blink)) {
-			player.dynStats("spe", -player.statusEffectv1(StatusEffects.Blink));
-			player.removeStatusEffect(StatusEffects.Blink);
-		}
 		if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 			player.removeStatusEffect(StatusEffects.ChargeWeapon);
 		}
@@ -4031,7 +4027,7 @@ public function wakeFromBadEnd():void {
 				if (player.hasPerk(PerkLib.LifeLeech)) player.removePerk(PerkLib.LifeLeech);
 				if (player.hasPerk(PerkLib.Undeath)) player.removePerk(PerkLib.Undeath);
 				if (player.hasPerk(PerkLib.EnergyDependent)) player.removePerk(PerkLib.EnergyDependent);
-				if (player.hasStatusEffect(StatusEffects.EnergyDependent)) player.removeStatusEffect(StatusEffects.EnergyDependent);
+				if (player.statStore.hasBuff("Energy Vampire")) player.statStore.removeBuffs("Energy Vampire");
 				flags[kFLAGS.CURSE_OF_THE_JIANGSHI] = 0;
 			}
 			if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests1)) {

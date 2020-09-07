@@ -1197,9 +1197,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				}
 				
 				outputText("\n\nYou stand on wobbly legs, happy to have so thoroughly fucked such a chaste and good-natured creature.  You vow to do it again soon, realizing you feel more clearheaded, if a bit more evil.");
-				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-				player.sexReward("cum");
+				player.sexReward("cum","Vaginal");
 				dynStats("lib", -10, "cor", 4);
 				monk+=1;
 				
@@ -1367,10 +1365,9 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 					dynStats("lib", 2, "cor", 1);
 				}
 				//Preggers chance!
-				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 				else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
+				player.sexReward("cum","Vaginal");
 			}
 			if(player.gender == 3) {
 				if (player.isBiped()) outputText("You spread your legs and crook your finger");
@@ -1410,7 +1407,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 					dynStats("lib", 2, "cor", 1);
 				}
 				//Preggers chance!
-				player.sexReward("cum");
+				player.sexReward("cum","Vaginal");
 				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 				else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 			}

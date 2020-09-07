@@ -168,6 +168,18 @@ public class EventParser {
             CoC.instance.timeQ--;
             CoC.instance.model.time.hours++;
             player.statStore.advanceTime(Buff.RATE_HOURS,1);
+            if (player.statStore.recentlyRemovedTags["IzumiSmoke"]){
+                EngineCore.outputText("\n<b>You groan softly as your thoughts begin to clear somewhat.  It looks like the effects of Izumi's pipe smoke have worn off.</b>\n");
+            }
+            if (player.statStore.recentlyRemovedTags["DrunkenPowerEmpower"]){
+                EngineCore.outputText("\nYou sober up, loosing the benefits of your oni drunken rampage.\n");
+            }
+            if (player.statStore.recentlyRemovedTags["Hangover"]){
+                EngineCore.outputText("\nYour head finally clears as your hangover wears off. Drinking with the shemale lizard was definitely a bad idea.\n");
+            }
+            if (player.statStore.recentlyRemovedTags["Feeding Euphoria"]){
+                EngineCore.outputText("\nThe change in your body agility prowess confirms that the effects of cum must have worn off.\n");
+            }
             SceneLib.combat.regeneration(false);
             if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) SceneLib.combat.soulforceregeneration(false);
             if (player.findPerk(PerkLib.JobSorcerer) >= 0) SceneLib.combat.manaregeneration(false);
@@ -189,12 +201,6 @@ public class EventParser {
                 }
                 if (player.statStore.recentlyRemovedTags["WellFed"]){
                     EngineCore.outputText("\nYou begin feeling hungry again as the satisfaction of your last cooked meal has all but disapeared.\n");
-                }
-                if (player.statStore.recentlyRemovedTags["DrunkenPowerEmpower"]){
-                    EngineCore.outputText("\nYou sober up, loosing the benefits of your oni drunken rampage.\n");
-                }
-                if (player.statStore.recentlyRemovedTags["Hangover"]){
-                    EngineCore.outputText("\nYour head finally clears as your hangover wears off.  Drinking with the shemale lizard was definitely a bad idea.\n");
                 }
                 if (player.statStore.recentlyRemovedTags["TaothBlessing"] || player.statStore.recentlyRemovedTags["FenrirBlessing"]){
                     EngineCore.outputText("\nThe divine blessing starts to fade. You think it’s high time you go back to the temple and pray.\n");
@@ -250,11 +256,6 @@ public class EventParser {
         SceneLib.telAdre.umasShop.updateBonusDuration(time);
         if (player.hasStatusEffect(StatusEffects.UmasMassage)) {
             trace("Uma's massage bonus time remaining: " + player.statusEffectv3(StatusEffects.UmasMassage));
-        }
-
-        SceneLib.highMountains.izumiScenes.updateSmokeDuration(time);
-        if (player.hasStatusEffect(StatusEffects.IzumisPipeSmoke)) {
-            trace("Izumis pipe smoke time remaining: " + player.statusEffectv1(StatusEffects.IzumisPipeSmoke));
         }
 
         //Drop axe if too short!

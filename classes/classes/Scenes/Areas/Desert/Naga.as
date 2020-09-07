@@ -19,7 +19,7 @@ public class Naga extends Monster
 			if(!player.hasStatusEffect(StatusEffects.NagaVenom)) {
 				outputText("The venom's effects are almost instantaneous; your vision begins to blur and it becomes increasingly harder to stand.");
 				if(player.spe > 4) {
-					player.spe -= 3;
+					player.buff("Poison").addStats({"spe":-3}).withText("Poisoned!").forHours(4);
 					showStatDown( 'spe' );
 					// speUp.visible = false;
 					// speDown.visible = true;
@@ -34,7 +34,7 @@ public class Naga extends Monster
 			else {
 				outputText("The venom's effects intensify as your vision begins to blur and it becomes increasingly harder to stand.");
 				if(player.spe > 3) {
-					player.spe -= 2;
+					player.buff("Poison").addStats({"spe":-2}).withText("Poisoned!").forHours(4);
 					showStatDown( 'spe' );
 					// speUp.visible = false;
 					// speDown.visible = true;

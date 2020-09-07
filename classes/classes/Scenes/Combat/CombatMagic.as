@@ -1183,7 +1183,7 @@ public class CombatMagic extends BaseCombatContent {
 							"\n\nMana Cost: " + spellCostBlack(40) * spellBlinkCostMultiplier() + "");
 			if (badLustForBlack) {
 				bd.disable("You aren't turned on enough to use any black magics.");
-			} else if (player.hasStatusEffect(StatusEffects.Blink)) {
+			} else if (player.statStore.hasBuff("Blink")) {
 				bd.disable("You are already under the effects of Blink and cannot cast it again.");
 			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < (spellCostBlack(40) * spellBlinkCostMultiplier())) {
 				bd.disable("Your mana is too low to cast this spell.");
@@ -1738,15 +1738,12 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.LongerLastingBuffsVI)) BlinkDuration += 1;
 			if (player.hasPerk(PerkLib.EverLastingBuffs)) BlinkDuration += 5;
 			if (player.hasPerk(PerkLib.EternalyLastingBuffs)) BlinkDuration += 5;
-			player.createStatusEffect(StatusEffects.Blink,0,0,BlinkDuration,0);
 			tempSpe = BlinkBoost;
 			//if(player.spe + temp > 100) tempSpe = 100 - player.spe;
-			player.changeStatusValue(StatusEffects.Blink,1,tempSpe);
 			mainView.statsView.showStatUp('spe');
 			// strUp.visible = true;
 			// strDown.visible = false;
 			player.buff("Blink").setStats({"spe.mult":tempSpe/100}).combatTemporary(BlinkDuration);
-			player.spe += player.statusEffectv1(StatusEffects.Blink);
 			statScreenRefresh();
 		};
 

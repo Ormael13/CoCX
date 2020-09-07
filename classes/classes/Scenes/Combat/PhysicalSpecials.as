@@ -1286,8 +1286,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 				if (player.tailType == Tail.SCORPION) {
 					outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
-					monster.spe -= 2;
-					if (monster.spe < 1) monster.spe = 1;
+					monster.statStore.addBuffObject({spe:-2}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom))
 					{
 						monster.addStatusValue(StatusEffects.NagaVenom,3,1);
@@ -1314,10 +1313,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 				if (player.faceType == Face.SNAKE_FANGS) {
 					outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
-					monster.spe -= 0.4;
-					monster.spe -= 0.4;
-					if (monster.spe < 1) monster.spe = 1;
-					if (monster.spe < 1) monster.spe = 1;
+					monster.statStore.addBuffObject({spe:-1}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom))
 					{
 						monster.addStatusValue(StatusEffects.NagaVenom,2,0.4);
@@ -1896,7 +1892,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				damage += 5 + rand(6);
 			}
 			damage += player.level * 1.5;
-			monster.spe -= damage/2;
+			monster.statStore.addBuffObject({spe:-damage/2}, "Poison",{text:"Poison"});
 			damage = monster.lustVuln * damage;
 			//Clean up down to 1 decimal point
 			damage = Math.round(damage*10)/10;
@@ -2225,8 +2221,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		monster.teased(lustDmgF);
 		if (crit) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
-		monster.spe -= 15;
-		if (monster.spe < 1) monster.spe = 1;
+		monster.statStore.addBuffObject({spe:-15}, "Poison",{text:"Poison"});
 		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		enemyAI();
 	}
@@ -2730,12 +2725,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var EntangleSpeNerf:Number;
 		EntangleStrNerf = Math.round(monster.str * .5);
 		EntangleSpeNerf = Math.round(monster.spe * .5);
-		monster.statStore.addBuffObject({str:-EntangleStrNerf,spe:-EntangleStrNerf}, "EntangleNerf",{text:"EntangleNerf"});
 		if (player.hasPerk(PerkLib.RacialParagon)) EntangleSpeNerf *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) EntangleSpeNerf *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) EntangleSpeNerf *= 1.50;
-		if(monster.spe < 1) monster.spe = 1;
 		player.createStatusEffect(StatusEffects.AlrauneEntangle,EntangleStrNerf,EntangleSpeNerf,0,0);
+		monster.statStore.addBuffObject({str:-EntangleStrNerf,spe:-EntangleStrNerf}, "EntangleNerf",{text:"EntangleNerf"});
 		enemyAI();
 	}
 
@@ -3345,8 +3339,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else {
 			if(!monster.plural) outputText("The adhesive strands cover " + monster.a + monster.short + " with restrictive webbing, greatly slowing " + monster.mf("him","her") + ". ");
 			else outputText("The adhesive strands cover " + monster.a + monster.short + " with restrictive webbing, greatly slowing " + monster.mf("him","her") + ". ");
-			monster.spe -= 45;
-			if(monster.spe < 0) monster.spe = 0;
+			monster.statStore.addBuffObject({spe:-45}, "Web",{text:"Web"});
 		}
 		awardAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB);
 		outputText("\n\n");
@@ -3860,7 +3853,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12) hydraBiteAttackpoweeeeer();
 		//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
 		monster.statStore.addBuffObject({str:-2,spe:-2}, "Poison",{text:"Poison"});
-		if(monster.spe < 1) monster.spe = 1;
 		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 		{
 			monster.addStatusValue(StatusEffects.NagaVenom,2,2);
@@ -3918,7 +3910,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("You lunge at the foe headfirst, fangs bared. You manage to catch " + monster.a + monster.short + " off guard, your needle-like fangs penetrating deep into " + monster.pronoun3 + " body. You quickly release your venom, and retreat before " + monster.pronoun1 + " manages to react.");
 			//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
 			monster.statStore.addBuffObject({str:-2,spe:-2}, "Poison",{text:"Poison"});
-			if(monster.spe < 1) monster.spe = 1;
 			if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 			{
 				monster.addStatusValue(StatusEffects.NagaVenom,2,2);
@@ -4019,7 +4010,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("You lunge at the foe headfirst, maw open for a bite. You manage to catch the " + monster.a + monster.short + " off guard, biting it viciously. The merciless cold of your bite transfer to your foe weakening it as you retreat before " + monster.pronoun1 + " manages to react.");
 			//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
 			monster.statStore.addBuffObject({str:-10,spe:-10}, "Poison",{text:"Poison"});
-			if(monster.spe < 1) monster.spe = 1;
 			if(monster.hasStatusEffect(StatusEffects.Frostbite))
 			{
 				monster.addStatusValue(StatusEffects.Frostbite,1,1);
@@ -4477,8 +4467,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			monster.teased(monster.lustVuln * damage);
 		}
 		if (player.tailType == 20) {
-			monster.spe -= 10;
-			if(monster.spe < 1) monster.spe = 1;
+			monster.statStore.addBuffObject({spe:-10}, "Poison",{text:"Poison"});
 		}
 		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 		{
@@ -4559,8 +4548,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
 		monster.teased(monster.lustVuln * lustdamage, false);
 		if (crit) outputText(" <b>Critical!</b>");
-		monster.spe -= 10;
-		if(monster.spe < 1) monster.spe = 1;
+		monster.statStore.addBuffObject({spe:-10}, "Poison",{text:"Poison"});
 		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 		{
 			monster.addStatusValue(StatusEffects.NagaVenom,3,5);
@@ -4568,8 +4556,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 5, 0);
 		//if (!monster.hasStatusEffect(StatusEffects.lustvenom)) monster.createStatusEffect(StatusEffects.lustvenom, 0, 0, 0, 0);
 		//New line before monster attack
-		monster.spe -= (2+rand(3));
-		if(monster.spe < 1) monster.spe = 1;
+		monster.statStore.addBuffObject({spe:-(2+rand(3))}, "Poison",{text:"Poison"});
 		//Use tail mp
 		player.tailVenom -= 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;

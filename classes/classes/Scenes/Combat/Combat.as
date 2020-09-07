@@ -2354,8 +2354,7 @@ public class Combat extends BaseContent {
                 }
                 if (player.tailType == Tail.SCORPION) {
                     outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
-                    monster.spe -= 2;
-                    if (monster.spe < 1) monster.spe = 1;
+                    monster.statStore.addBuffObject({tou:-2, spe:-2}, "Poison",{text:"Poison"});
                     if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                         monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
                     } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
@@ -2378,10 +2377,7 @@ public class Combat extends BaseContent {
                 }
                 if (player.faceType == Face.SNAKE_FANGS) {
                     outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
-                    monster.spe -= 0.4;
-                    monster.spe -= 0.4;
-                    if (monster.spe < 1) monster.spe = 1;
-                    if (monster.spe < 1) monster.spe = 1;
+                    monster.statStore.addBuffObject({spe:-1}, "Poison",{text:"Poison"});
                     if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                         monster.addStatusValue(StatusEffects.NagaVenom, 2, 0.4);
                         monster.addStatusValue(StatusEffects.NagaVenom, 1, 0.4);
@@ -3761,8 +3757,7 @@ public class Combat extends BaseContent {
                     }
                     if (player.tailType == Tail.SCORPION) {
                         outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
-                        monster.spe -= 2;
-                        if (monster.spe < 1) monster.spe = 1;
+                        monster.statStore.addBuffObject({spe:-2}, "Poison",{text:"Poison"});
                         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                             monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
                         } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
@@ -3791,10 +3786,7 @@ public class Combat extends BaseContent {
                     }
                     if (player.faceType == Face.SNAKE_FANGS) {
                         outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
-                        monster.spe -= 0.4;
-                        monster.spe -= 0.4;
-                        if (monster.spe < 1) monster.spe = 1;
-                        if (monster.spe < 1) monster.spe = 1;
+                        monster.statStore.addBuffObject({spe:-1}, "Poison",{text:"Poison"});
                         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                             monster.addStatusValue(StatusEffects.NagaVenom, 2, 0.4);
                             monster.addStatusValue(StatusEffects.NagaVenom, 1, 0.4);
@@ -3821,8 +3813,7 @@ public class Combat extends BaseContent {
             }
             if (player.weapon == weapons.DSSPEAR) {
                 monster.statStore.addBuff("str",-2, "DemonSnakeSpear",{text:"DemonSnakeSpear"});
-                monster.spe -= 2;
-                if (monster.spe < 1) monster.spe = 1;
+                monster.statStore.addBuffObject({spe:-2}, "Poison",{text:"Poison"});
                 if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                     monster.addStatusValue(StatusEffects.NagaVenom, 2, 2);
                     monster.addStatusValue(StatusEffects.NagaVenom, 1, 2);
@@ -5906,14 +5897,6 @@ public class Combat extends BaseContent {
                 outputText("<b>Blazing battle spirit effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.BlazingBattleSpirit, 1, -1);
         }
-        if (player.hasStatusEffect(StatusEffects.Blink)) {
-            if (player.statusEffectv3(StatusEffects.Blink) <= 0) {
-                player.dynStats("spe", -player.statusEffectv1(StatusEffects.Blink), "scale", false);
-                player.removeStatusEffect(StatusEffects.Blink);
-                //	statScreenRefresh();
-                outputText("<b>Blink effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.Blink, 3, -1);
-        }
         if (player.hasStatusEffect(StatusEffects.Cauterize)) {
             if (player.statusEffectv1(StatusEffects.Cauterize) <= 0) {
                 player.removeStatusEffect(StatusEffects.Cauterize);
@@ -7222,9 +7205,7 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            monster.spe -= monster.statusEffectv1(StatusEffects.NagaVenom);
-            monster.statStore.addBuff("str",-monster.statusEffectv1(StatusEffects.NagaVenom), "NagaVenom",{text:"NagaVenom"});
-            if (monster.spe < 1) monster.spe = 1;
+            monster.statStore.addBuffObject({str:-monster.statusEffectv1(StatusEffects.NagaVenom), spe:-monster.statusEffectv1(StatusEffects.NagaVenom)}, "Poison",{text:"Poison"});
             if (monster.statusEffectv3(StatusEffects.NagaVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.NagaVenom);
             if (combatIsOver()) return;
         }

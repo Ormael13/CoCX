@@ -18,7 +18,7 @@ public class Zetaz extends Monster
 			//burns lust and clears statuses before continuing with 
 			//turn.
 			if(lust > 50 && (hasStatusEffect(StatusEffects.Fear) || hasStatusEffect(StatusEffects.Blind))) {
-				if (hasStatusEffect(StatusEffects.Fear)) this.spe += statusEffectv2(StatusEffects.Fear);
+				if (hasStatusEffect(StatusEffects.Fear)) this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
 				removeStatusEffect(StatusEffects.Fear);
 				removeStatusEffect(StatusEffects.Blind);
 				lust -= 10;

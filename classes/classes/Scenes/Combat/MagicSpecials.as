@@ -3520,7 +3520,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (monster.spe >= 21) speedDebuff += 20;
 			else speedDebuff += 20 - monster.spe;
 		}
-		monster.spe -= speedDebuff;
+		monster.speStat.core.value -= speedDebuff;
 		monster.createStatusEffect(StatusEffects.Fear, 2, speedDebuff, 0, 0);
 		enemyAI();
 	}
@@ -3685,8 +3685,7 @@ public class MagicSpecials extends BaseCombatContent {
 		lustDmgF = Math.round(lustDmgF);
 		monster.teased(lustDmgF);
 		if (critL) outputText(" <b>Critical!</b>");
-		monster.spe -= 15;
-		if (monster.spe < 1) monster.spe = 1;
+		monster.statStore.addBuffObject({spe:-15}, "Poison",{text:"Poison"});
 		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		var damage:Number = scalingBonusIntelligence() * spellMod() * 1.2;
 		if (damage < 10) damage = 10;

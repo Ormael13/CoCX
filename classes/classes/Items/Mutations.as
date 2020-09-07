@@ -365,7 +365,7 @@ public final class Mutations extends MutationsHelper {
 
         public function lowgradesoulforcerecoverypill(player:Player):void {
             outputText("You cram the pill in your mouth and swallow it.  ");
-            if (player.hasStatusEffect(StatusEffects.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
+            if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
             else {
                 outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 100)");
                 player.soulforce += 100;
@@ -377,7 +377,7 @@ public final class Mutations extends MutationsHelper {
 
         public function lowgradesoulforcerecoverypill2(player:Player):void {
             outputText("You open the bottle and start to cram the pills in your mouth, then swallowing them all.  ");
-            if (player.hasStatusEffect(StatusEffects.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
+            if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
             else {
                 outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 1000)");
                 player.soulforce += 1000;
@@ -389,7 +389,7 @@ public final class Mutations extends MutationsHelper {
 
         public function midgradesoulforcerecoverypill(player:Player):void {
             outputText("You cram the pill in your mouth and swallow it.  ");
-            if (player.hasStatusEffect(StatusEffects.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
+            if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
             else {
                 outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 600)");
                 player.soulforce += 600;
@@ -401,7 +401,7 @@ public final class Mutations extends MutationsHelper {
 
         public function midgradesoulforcerecoverypill2(player:Player):void {
             outputText("You open the bottle and start to cram the pills in your mouth, then swallowing them all.  ");
-            if (player.hasStatusEffect(StatusEffects.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
+            if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
             else {
                 outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 6000)");
                 player.soulforce += 6000;
@@ -413,7 +413,7 @@ public final class Mutations extends MutationsHelper {
 
         public function highgradesoulforcerecoverypill(player:Player):void {
             outputText("You cram the pill in your mouth and swallow it.  ");
-            if (player.hasStatusEffect(StatusEffects.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
+            if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
             else {
                 outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 3600)");
                 player.soulforce += 3600;
@@ -425,7 +425,7 @@ public final class Mutations extends MutationsHelper {
 
         public function highgradesoulforcerecoverypill2(player:Player):void {
             outputText("You open the bottle and start to cram the pills in your mouth, then swallowing them all.  ");
-            if (player.hasStatusEffect(StatusEffects.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
+            if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
             else {
                 outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 36000)");
                 player.soulforce += 36000;

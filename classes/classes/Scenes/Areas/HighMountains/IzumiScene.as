@@ -335,61 +335,11 @@ import classes.Stats.Buff;
 				deltaLib *= 2;
 				lustMod *= 2;
 			}
-
-			player.createStatusEffect(StatusEffects.IzumisPipeSmoke, SMOKE_DURATION, deltaSpd, deltaSns, deltaLib);
-			
-			// Can't use dynStats for this, because stats() has a chained modifier to incoming sens changes that could turn this value into 8x what we expected it to be
-			player.spe += deltaSpd;
-			player.statStore.addBuff('sens',+deltaSns,'IzumiSmoke',{text:'Izumi Pipe Smoke', rate:Buff.RATE_HOURS, tick: 24})
-			player.lib += deltaLib;
-			var maxes:Object = player.getAllMaxStats();
-			if (player.spe <= 0) player.spe = 1;
-			if (player.lib >= maxes.lib) player.lib = maxes.lib;
-			
+			player.statStore.addBuffObject({'spe':+deltaSpd,'sens':+deltaSns,'lib':+deltaLib},'IzumiSmoke',{text:'Izumi Pipe Smoke', rate:Buff.RATE_HOURS, tick: 24})
 			showStatDown('spe');
 			showStatUp('sens');
 			showStatUp('lib');
-			
 			dynStats("lus", lustMod);
-		}
-
-		// Update the duration of the pipe smoke effect
-		public function updateSmokeDuration(hours:int):void
-		{
-			var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.IzumisPipeSmoke);
-
-			if (sac)
-			{
-				sac.value1 -= hours;
-
-				if (sac.value1 <= 0)
-				{
-					this.smokeEffectWearsOff();
-				}
-			}
-		}
-
-		// Method to contain removal mechanics + scene text to spit out
-		protected function smokeEffectWearsOff():void
-		{
-			var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.IzumisPipeSmoke);
-
-			if (sac)
-			{
-				player.spe += Math.abs(sac.value2);
-				player.lib -= sac.value4;
-				var max:int = player.getMaxStats("spe");
-				if (player.spe > max) player.spe = max;
-				if (player.lib <= 0) player.lib = 1;
-				
-				showStatUp('spe');
-				showStatDown('sens');
-				showStatDown('lib');
-				
-				outputText("\n<b>You groan softly as your thoughts begin to clear somewhat.  It looks like the effects of Izumi's pipe smoke have worn off.</b>\n");
-				
-				player.removeStatusEffect(StatusEffects.IzumisPipeSmoke);
-			}
 		}
 
 		// Actual introduction scene content for pipesmokin

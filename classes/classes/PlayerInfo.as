@@ -288,9 +288,6 @@ public class PlayerInfo extends BaseContent {
 		if (player.statusEffectv1(StatusEffects.AndysSmoke) > 0)
 			statEffects += "Andy's Pipe Smoke - " + player.statusEffectv1(StatusEffects.AndysSmoke) + " hours remaining (Speed temporarily lowered, intelligence temporarily increased.)\n";
 
-		if (player.statusEffectv1(StatusEffects.FeedingEuphoria) > 0)
-			statEffects += "Feeding Euphoria - " + player.statusEffectv1(StatusEffects.FeedingEuphoria) + " hours remaining (Speed temporarily increased.)\n";
-
 		if (player.statusEffectv1(StatusEffects.IzumisPipeSmoke) > 0)
 			statEffects += "Izumi's Pipe Smoke - " + player.statusEffectv1(StatusEffects.IzumisPipeSmoke) + " hours remaining. (Speed temporarily lowered.)\n";
 
@@ -329,10 +326,6 @@ public class PlayerInfo extends BaseContent {
 			statEffects += "Vampire Thirst: " + vthirst.value1 + "/" + vthirst.maxThirst() + " ";
 			if (vthirst.currentBoost > 0) statEffects += "(+" + vthirst.currentBoost + " to str / spe / int / lib)";
 			statEffects += "\n";
-		}
-		
-		if (player.hasStatusEffect(StatusEffects.EnergyDependent)) {
-			statEffects += "Energy Dependent: " + Math.round(player.statusEffectv1(StatusEffects.EnergyDependent)) + "/45 (+" + Math.round(player.statusEffectv1(StatusEffects.EnergyDependent)) * 5 + " to spe, +" + Math.round(player.statusEffectv1(StatusEffects.EnergyDependent)) * 12 + " to int)\n";
 		}
 
 		if (player.statusEffectv1(StatusEffects.Bammed1) > 0) {
@@ -463,7 +456,6 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<i>Sensitivity Minimum:</i> " + mins.sens + "\n";
 		combatStats += "<i>Corruption Minimum:</i> " + mins.cor + "\n";
 		combatStats += "\n";
-		if (player.statusEffectv1(StatusEffects.FeedingEuphoria) > 0) combatStats += "<b>Feeding Euphoria:</b> " + player.statusEffectv1(StatusEffects.FeedingEuphoria) + " hours remaining (+" + player.statusEffectv2(StatusEffects.FeedingEuphoria) + " to spe)\n";
 		var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 		if (vthirst != null) {
 			combatStats += "<b>Vampire Thirst:</b> " + vthirst.value1 + "/" + vthirst.maxThirst() + " ";
@@ -1165,11 +1157,11 @@ public class PlayerInfo extends BaseContent {
 		menu();
 		//Add
 		if (player.statPoints > 0) {
-			if ((player.str + player.tempStr) < maxes.str) addButton(0, "Add STR", addAttribute, "str", null, null, "Add 1 point (5 points with Shift) to Strength.", "Add Strength");
-			if ((player.tou + player.tempTou) < maxes.tou) addButton(1, "Add TOU", addAttribute, "tou", null, null, "Add 1 point (5 points with Shift) to Toughness.", "Add Toughness");
-			if ((player.spe + player.tempSpe) < maxes.spe) addButton(2, "Add SPE", addAttribute, "spe", null, null, "Add 1 point (5 points with Shift) to Speed.", "Add Speed");
-			if ((player.inte + player.tempInt) < maxes.inte) addButton(3, "Add INT", addAttribute, "int", null, null, "Add 1 point (5 points with Shift) to Intelligence.", "Add Intelligence");
-			if ((player.wis + player.tempWis) < maxes.wis) addButton(4, "Add WIS", addAttribute, "wis", null, null, "Add 1 point (5 points with Shift) to Wisdom.", "Add Wisdom");
+			if ((player.strStat.core.value + player.tempStr) < player.strStat.core.max) addButton(0, "Add STR", addAttribute, "str", null, null, "Add 1 point (5 points with Shift) to Strength.", "Add Strength");
+			if ((player.touStat.core.value + player.tempTou) < player.touStat.core.max) addButton(1, "Add TOU", addAttribute, "tou", null, null, "Add 1 point (5 points with Shift) to Toughness.", "Add Toughness");
+			if ((player.speStat.core.value + player.tempSpe) < player.speStat.core.max) addButton(2, "Add SPE", addAttribute, "spe", null, null, "Add 1 point (5 points with Shift) to Speed.", "Add Speed");
+			if ((player.intStat.core.value + player.tempInt) < player.intStat.core.max) addButton(3, "Add INT", addAttribute, "int", null, null, "Add 1 point (5 points with Shift) to Intelligence.", "Add Intelligence");
+			if ((player.wisStat.core.value + player.tempWis) < player.wisStat.core.max) addButton(4, "Add WIS", addAttribute, "wis", null, null, "Add 1 point (5 points with Shift) to Wisdom.", "Add Wisdom");
 			if ((player.lib + player.tempLib) < maxes.lib) addButton(10, "Add LIB", addAttribute, "lib", null, null, "Add 1 point (5 points with Shift) to Libido.", "Add Libido");
 		}
 		//Subtract
@@ -1314,8 +1306,8 @@ public class PlayerInfo extends BaseContent {
 			outputText("\nYou may allocate your remaining stat points later.");
 		}
 		player.strStat.core.value += player.tempStr;
-		player.strStat.core.value += player.tempTou;
-		player.spe += player.tempSpe;
+		player.touStat.core.value += player.tempTou;
+		player.speStat.core.value += player.tempSpe;
 		player.intStat.core.value += player.tempInt;
 		player.wisStat.core.value += player.tempWis;
 		player.lib += player.tempLib;

@@ -434,8 +434,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 							needNext = true;
 						}
 						if (player.spe > 1) player.addStatusValue(StatusEffects.SlimeCraving, 3, 0.1); //Keep track of how much has been taken from speed
-						player.dynStats("spe", -0.1, "lus", 2);
-						player.addCurse("str",1);
+						player.dynStats("str",-1,"spe", -0.1, "lus", 2);
 						player.addStatusValue(StatusEffects.SlimeCraving, 2, 0.1); //Keep track of how much has been taken from strength
 					}
 				}
@@ -474,18 +473,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					var tempSpe:int = player.statusEffectv2(StatusEffects.AndysSmoke);
 					var tempInt:int = player.statusEffectv3(StatusEffects.AndysSmoke);
 					player.removeStatusEffect(StatusEffects.AndysSmoke);
-					dynStats("spe", -tempSpe); //Properly revert speed and intelligence.
-					dynStats("inte", -tempInt);
-					needNext = true;
-				}
-			}
-			if (player.hasStatusEffect(StatusEffects.FeedingEuphoria)) {
-				player.addStatusValue(StatusEffects.FeedingEuphoria, 1, -1);
-				if (player.statusEffectv1(StatusEffects.FeedingEuphoria) <= 0) {
-					outputText("\n<b>The change in your body agility prowess confirms that the effects of cum must have worn off.</b>\n");
-					var tempSpeed:int = player.statusEffectv2(StatusEffects.FeedingEuphoria);
-					player.removeStatusEffect(StatusEffects.FeedingEuphoria);
-					dynStats("spe", -tempSpeed); //Properly revert speed
+					dynStats("spe", -tempSpe, "inte", -tempInt); //Properly revert speed and intelligence.
 					needNext = true;
 				}
 			}
@@ -502,16 +490,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.statusEffectv1(StatusEffects.BlessingOfDivineMarae) <= 0) {
 					outputText("\n<b>The divine blessing starts to fade. You think it’s high time you go back to the temple and pray.</b>\n");
 					player.removeStatusEffect(StatusEffects.BlessingOfDivineMarae);
-					needNext = true;
-				}
-			}
-			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) {
-				player.addStatusValue(StatusEffects.BlessingOfDivineTaoth, 1, -1);
-				if (player.statusEffectv1(StatusEffects.BlessingOfDivineTaoth) <= 0) {
-					outputText("\n<b>The divine blessing starts to fade. You think it’s high time you go back to the temple and pray.</b>\n");
-					var temporalSpeed:int = player.statusEffectv2(StatusEffects.BlessingOfDivineTaoth);
-					player.removeStatusEffect(StatusEffects.BlessingOfDivineTaoth);
-					dynStats("spe", -temporalSpeed);
 					needNext = true;
 				}
 			}
@@ -660,8 +638,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				//Clear sidewinder cooldown
 				if (player.hasStatusEffect(StatusEffects.CooldownSideWinder)) player.removeStatusEffect(StatusEffects.CooldownSideWinder);
 				//Energy Dependent
-				if (player.hasStatusEffect(StatusEffects.EnergyDependent) && player.statusEffectv1(StatusEffects.EnergyDependent) > 0) {
-					player.addStatusValue(StatusEffects.EnergyDependent, 1, -1);
+				if (player.hasPerk(PerkLib.EnergyDependent)) {
 					var intBuff:Number = player.buff("Energy Vampire").getValueOfStatBuff("int.mult");
 					var speBuff:Number = player.buff("Energy Vampire").getValueOfStatBuff("spe.mult");
 					if (intBuff > -0.9) {
@@ -670,8 +647,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (speBuff > -0.9) {
 						player.buff("Energy Vampire").addStats({ "spe.mult": -0.05 }).withText("Energy Vampire");
 					}
-					//too do remove the player.statusEffectv1 and the spe part when updating speed
-					player.spe -= 5;
 				}
 				//Tripxi firearms selection update
 				if (player.statusEffectv2(StatusEffects.TelAdreTripxi) == 3) {

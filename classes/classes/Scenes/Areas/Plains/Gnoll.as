@@ -215,12 +215,12 @@ import classes.internals.*;
 			if (hasStatusEffect(StatusEffects.Fear)) {
 				if (statusEffectv1(StatusEffects.Fear) == 0) {
 					if (plural) {
-						this.spe += statusEffectv2(StatusEffects.Fear);
+						this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
 						removeStatusEffect(StatusEffects.Fear);
 						outputText("Your foes shake free of their fear and ready themselves for battle.");
 					}
 					else {
-						this.spe += statusEffectv2(StatusEffects.Fear);
+						this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
 						removeStatusEffect(StatusEffects.Fear);
 						outputText("Your foe shakes free of its fear and readies itself for battle.");
 					}

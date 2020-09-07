@@ -129,19 +129,17 @@ use namespace CoC;
 			}
 		}
 		public function loosingTaothBlessing():void {
-			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) {
+			if (player.statStore.hasBuff("TaothBlessing")) {
 				outputText("You chose to pray a different Deity losing the favor of the first to gain the bonus of the other.\n");
 				outputText("<b>You lost the Blessing of Divine Agency - Taoth</b>\n");
-				var tempSpe:int = player.statusEffectv2(StatusEffects.BlessingOfDivineTaoth);
-				player.removeStatusEffect(StatusEffects.BlessingOfDivineTaoth);
-				dynStats("spe", -tempSpe);
+				player.statStore.removeBuffs("TaothBlessing");
 			}
 		}
 		public function loosingFenrirBlessing():void {
-			if (player.statStore.hasBuff("BlessingOfDivineFenrir")) {
+			if (player.statStore.hasBuff("FenrirBlessing")) {
 				outputText("You chose to pray a different Deity losing the favor of the first to gain the bonus of the other.\n");
 				outputText("<b>You lost the Blessing of Divine Agency - Fenrir</b>\n");
-				player.statStore.removeBuffs("BlessingOfDivineFenrir");
+				player.statStore.removeBuffs("FenrirBlessing");
 			}
 		}
 		public function loosingFeraBlessing():void {
@@ -183,15 +181,9 @@ use namespace CoC;
 			loosingFenrirBlessing();
 			loosingFeraBlessing();
 			outputText("<b>You gained the Blessing of Divine Agency - Taoth for 7 days</b>");
-			var temp1:Number = 0;
-			var tempSpe:Number = 0;
-			temp1 += player.spe * 0.1;
-			temp1 = Math.round(temp1);
 			player.createStatusEffect(StatusEffects.BlessingOfDivineTaoth, 169, 0, 0, 0);
-			tempSpe = temp1;
-			player.changeStatusValue(StatusEffects.BlessingOfDivineTaoth,2,tempSpe);
 			mainView.statsView.showStatUp('spe');
-			player.spe += player.statusEffectv2(StatusEffects.BlessingOfDivineTaoth);
+			player.statStore.replaceBuffObject({ 'spe.mult': 0.1}, 'TaothBlessing', { text: 'Taoth Blessing', rate: Buff.RATE_DAYS, tick: 7 });
 			if (player.HP < player.maxHP()) player.HP = player.maxHP();
 			dynStats("cor", -10);
 			statScreenRefresh();

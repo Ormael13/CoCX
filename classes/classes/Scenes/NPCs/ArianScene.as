@@ -2137,8 +2137,6 @@ private function getButtWreckedByArian():void {
 		outputText("\n\n\"<i>I guess I need a nap now.  Care to join me?</i>\" [Arian ey] asks, yawning widely.  You tell him the offer is tempting, but you really need to get going and attend to other things.  You stroke [Arian eir] cheek and tell [Arian em] to get some rest to build [Arian eir] strength back up - after all, it wasn't really that long ago that [Arian ey] was so sick.  Arian nods.  \"<i>Okay, see you soon?</i>\"");
 		outputText("\n\nYou promise [Arian ey] will, and plant a quick kiss on [Arian eir] brow.  As the lizan settles down to rest, you quietly redress yourself and leave [Arian em] to [Arian eir] slumbers.");
 	}
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	player.sexReward("cum", "Anal");
 	dynStats("sen", 2);
 	doNext(camp.returnToCampUseOneHour);

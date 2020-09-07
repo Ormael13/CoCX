@@ -246,11 +246,9 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 
 				outputText("\n\nYou nervelessly slide off the pole into the ground, earning a fresh bukkake of creamy cum to plaster your " + player.skinFurScales() + ".  While you recover, your demonic lover's bulk shifts away, and you soon here the telltale clopping of her moving away.  It sounds like she's heading towards the south - the exit.  You missed your chance to do anything about that demon...");
 			}
-
 			player.orgasm();
 			dynStats("cor+", 5);
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("vaginalFluids");
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			menu();
             cleanupAfterCombat(SceneLib.d3.resumeFromFight);

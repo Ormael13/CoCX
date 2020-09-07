@@ -771,8 +771,7 @@ public function urtaFuckHer(afterBefriending:Boolean = false):void {
 		outputText("Urta blows you a kiss as you put your own gear back together and flounces back to the bar, calling out, \"<i>We should do thish again shoon!</i>\"\n\n");
 
 		outputText("\"<i>Yes indeed,</i>\" you muse - the sooner the better.");
-		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-		if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+		player.sexReward("vaginalFluids","Dick");
 	}
 	else {
 		var x:Number = player.cockThatFits(urtaCapacity());
@@ -851,6 +850,7 @@ public function urtaFuckHer(afterBefriending:Boolean = false):void {
 
 			outputText("You waste no time cleaning up and you stagger back inside after her, sated and happy with your new friend and her 'benefits'.");
 			knockUpUrtaChance();
+			player.sexReward("vaginalFluids","Dick");
 		}
 		//(TOO BIG)
 		else {
@@ -885,8 +885,8 @@ public function urtaFuckHer(afterBefriending:Boolean = false):void {
 			}
 		}
 	}
-	doNext(afterBefriending ? camp.returnToCampUseFourHours : camp.returnToCampUseOneHour);
 	player.sexReward("vaginalFluids","Dick");
+	doNext(afterBefriending ? camp.returnToCampUseFourHours : camp.returnToCampUseOneHour);
 }
 
 
@@ -1433,9 +1433,7 @@ private function tenderTakeItUpTheAssFromUrta():void {
 	if(player.cumQ() > 750) outputText("  You really are a messy, " + player.mf("boy","girl") + " aren't you?");
 	outputText("</i>\"\n\n");
 	outputText("She untangles herself from you, the filled end of her condom loudly popping free from your backside as she disengages herself from you.  The two of you do your best to clean up and get dressed, and you give her a quick but passionate kiss before ducking out the door to check up on your camp.");
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-	player.sexReward("cum");
+	player.sexReward("cum","Anal");
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -4870,8 +4868,6 @@ private function doggyStyle():void {
 	else outputText("boypussy");
 	outputText(".");
 	player.buttChange(60,true,true,false);
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	outputText("\n\nSoon, Urta develops a good rhythm, thrusting in and out, her balls slapping your ");
 	if(player.hasCock()) outputText("dick");
 	else outputText("cunt");
@@ -4896,7 +4892,7 @@ private function doggyStyle():void {
 	outputText("\n\nExhausted, you slouch forwards, suddenly aware of the large, almost pregnant belly you're sporting as it makes contact with the slick, wet floor below.  You tentatively reach down with one weak hand, cradling your sloshing cum belly as you flop over onto your side, completely spent.  Urta curls up behind you, her cock still firmly inside, plugging all that warm seed inside.  You nuzzle back into her and drift off into a relaxing, orgasm-induced nap.");
 
 	outputText("\n\n...");
-	player.sexReward("Default","Dick",true,false);
+	player.sexReward("cum","Anal");
 	dynStats("sen", 2);
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 4;
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 2;

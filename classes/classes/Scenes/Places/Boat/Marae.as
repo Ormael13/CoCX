@@ -91,7 +91,7 @@ public class Marae extends Monster
 			}
 			if (hasStatusEffect(StatusEffects.Fear)) {
 				EngineCore.outputText("\"<i>You think I'm afraid of anything? Foolish mortal.</i>\" Marae snarls.\n\n");
-				this.spe += statusEffectv2(StatusEffects.Fear);
+				this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
 				removeStatusEffect(StatusEffects.Fear);
 			}
 			var chooser:int = rand(10);

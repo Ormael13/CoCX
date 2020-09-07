@@ -3430,8 +3430,7 @@ public class PlayerAppearance extends BaseContent {
 		var touStat1:Number = newmaxes.tou;
 		var speStat1:Number = newmaxes.spe;
 		var libStat1:Number = newmaxes.lib;
-		if (speStat != speStat1 || libStat != libStat1) outputText(" As if this reflection unlocked some hidden door in you, you feel your body awaken with newfound vigor and might. Let your adversaries come, you are ready for them now!");
-		if (speStat != speStat1) player.spe = Math.round(player.spe * (speStat1 / speStat));
+		if (libStat != libStat1) outputText(" As if this reflection unlocked some hidden door in you, you feel your body awaken with newfound vigor and might. Let your adversaries come, you are ready for them now!");
 		if (libStat != libStat1) player.lib = Math.round(player.lib * (libStat1 / libStat));
 		doNext(playerMenu);
 	}

@@ -65,11 +65,11 @@ public class HellHound extends Monster
 				}
 				else {
 					outputText("The hellhound sniffs your scent again, seemingly gaining more and more energy as he circles faster around you.");
-					spe = 100;	
+					speStat.core.value = 100;	
 				}
 			}
 			else {
-				spe += 40;
+				speStat.core.value += 40;
 				outputText("The hellhound keeps his four eyes on you as he sniffs the ground where you were moments ago. He raises his heads back up and gives you a fiery grin - he seems to have acquired your scent!  It'll be hard to get away now...");
 				player.createStatusEffect(StatusEffects.NoFlee,0,0,0,0);
 			}

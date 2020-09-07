@@ -12,7 +12,7 @@ package classes.Items.HeadJewelries
 		
 		public function CrownOfSpeed() 
 		{
-			super("CrowInt", "CrownOfSpeed", "Crown of Speed", "a Crown of Speed", 0, 0, 3200, "A simple crown to boost speed.","Crown");
+			super("CrowSpe", "CrownOfSpeed", "Crown of Speed", "a Crown of Speed", 0, 0, 3200, "A simple crown to boost speed.","Crown");
 		}
 		
 		override public function get description():String {
@@ -27,12 +27,12 @@ package classes.Items.HeadJewelries
 		}
 		
 		override public function playerEquip():HeadJewelry {
-			game.player.spe += 20;
+			game.player.statStore.addBuff('spe',+20,'tag',{text:'CrownOfSpeed'});
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():HeadJewelry {
-			game.player.spe -= 20;
+			game.player.statStore.removeBuffs('CrownOfSpeed');
 			return super.playerRemove();
 		}
 		

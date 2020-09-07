@@ -1602,8 +1602,6 @@ private function urtaRaepsJoo():void {
 	outputText(" and close your eyes, letting sleep take you over even as the fox behind you drools on your back and continues to pound your ass raw.");
 	
 	outputText("\n\nYou come to your senses and notice the amazing softness of the pillow you're laying on.  It feels so good you can't help but dig your head in and rub your cheek against it.  \"<i>You like that, do you?</i>\"  A familiar voice says, sounding rather amused.");
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	player.sexReward("vaginalFluids");
 	dynStats("sen", 3);
 	menu();
