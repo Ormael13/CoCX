@@ -24,8 +24,9 @@ public function isAlvinaBirthday():Boolean {
 
 public function alvinaFirstEncounter():void
 {
-	//spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 	clearOutput();
+
 	outputText("As you travel you meet with a woman in robes with black hair. You didn’t expect to see a fellow human around in Mareth, which is a relief. Perhaps you aren’t alone in this quest. You ask if she could give you directions, as you have no idea what to expect in this realm. As a champion, your job is to fight the demons, but you can’t fight them if you have no idea where to look.\n\n");
 	outputText("\"<i>Directions and demons, hm? There are many places you could visit. If I were you, I would go to the lake and look for a peculiar island at its center. That said, be respectful of whomever you meet there.</i>\"");
 	outputText("You nod and prepare to leave, but ask her who she is in case you should ever see her again.\n\n");
@@ -82,7 +83,7 @@ public function alvinaSecondEncounterTalkHobby():void
 
 public function alvinaSecondBonusEncounter():void
 {
-	//spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 	clearOutput();
 	outputText("As you explore Mareth you come again upon Alvina. Her back is facing you as she gazes to the horizon beyond.\n\n");
 	outputText("\"<i>I overheard that you defeated Queen Lethice... Most impressive, champion of Ingnam.</i>\"\n\n");
