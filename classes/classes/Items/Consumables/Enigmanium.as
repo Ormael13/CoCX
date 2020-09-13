@@ -50,17 +50,17 @@ public class Enigmanium extends Consumable{
 				//low speed
 				if (player.spe <= 30) {
 					outputText("\n\nYou feel... more balanced, sure of step. You're certain that you've become just a little bit faster.");
-					dynStats("spe", 2);
+					player.MutagenBonus("spe", 2);
 				}
 				//medium speed
 				else if (player.spe <= 60) {
 					outputText("\n\nYou stumble as you shift position, surprised by how quickly you move. After a moment or two of disorientation, you adjust. You're certain that you can run faster now.");
-					dynStats("spe", 1);
+					player.MutagenBonus("spe", 1);
 				}
 				//high speed
 				else {
 					outputText("\n\nYou pause mid-step and crouch. Your leg muscles have cramped up like crazy. After a few moments, the pain passes and you feel like you could chase anything down.");
-					dynStats("spe", .5);
+					player.MutagenBonus("spe", 0.5);
 				}
 				changes++;
 			}
@@ -68,7 +68,7 @@ public class Enigmanium extends Consumable{
 			if (player.str < 80 && rand(3) == 0 && changes < changeLimit) {
 				if (rand(2) == 0) outputText("\n\nYour muscles feel taut, like a coiled spring, and a bit more on edge.");
 				else outputText("\n\nYou arch your back as your muscles clench painfully.  The cramp passes swiftly, leaving you feeling like you've gotten a bit stronger.");
-				dynStats("str", 1);
+				player.MutagenBonus("str", 1);
 				changes++;
 			}
 			//Toughness drops if over 50
@@ -80,8 +80,8 @@ public class Enigmanium extends Consumable{
 			//IntelliWisGain
 			if (player.inte < 100 && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nThousands of glowing symbols, hieroglyphics you remember them being denoted as, appear in vast arrays in your mind. Miraculously, you can make sense of them, as if they were in your own language. Shifting them, you giggle to yourself as you begin crafting a riddle that will surely baffle great minds. The visions end, and you feel incredibly enlightened! Is this how Sanurah feels?");
-				dynStats("int", 2);
-				player.wisStat.core.value += 2;
+				player.MutagenBonus("int", 2);
+				player.MutagenBonus("wis", 2);
 				changes++;
 			}
 			
@@ -102,7 +102,8 @@ public class Enigmanium extends Consumable{
 					if (player.lust > 60) outputText("even more ");
 					outputText("turned on.");
 				}
-				dynStats("lib", 1, "sen", .25);
+				dynStats("sen", .25);
+				player.MutagenBonus("lib", 1);
 				changes++;
 			}
 
@@ -232,7 +233,8 @@ public class Enigmanium extends Consumable{
 						player.cocks[i].knotMultiplier = 1;
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("lib", 5, "sen", 4, "lus", 35);
+						dynStats("sen", 4, "lus", 35);
+						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType == CockTypesEnum.DOG) {
 						player.cocks[i].cockType = CockTypesEnum.CAT;
@@ -240,7 +242,8 @@ public class Enigmanium extends Consumable{
 						outputText("\n\nYour [cock] swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. Your new feline dong throbs powerfully and spurts a few droplets of cum.");
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("lib", 5, "sen", 4, "lus", 35);
+						dynStats("sen", 4, "lus", 35);
+						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
 						player.cocks[i].cockType = CockTypesEnum.CAT;
@@ -248,7 +251,8 @@ public class Enigmanium extends Consumable{
 						outputText("\n\nYour [cock] swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. Your new feline dong throbs powerfully and spurts a few droplets of cum.");
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("lib", 5, "sen", 4, "lus", 35);
+						dynStats("sen", 4, "lus", 35);
+						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType.Index > 4) {
 						outputText("\n\nYour [cock] swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. Your new feline dong throbs powerfully and spurts a few droplets of cum.");
@@ -256,14 +260,16 @@ public class Enigmanium extends Consumable{
 						player.cocks[i].knotMultiplier = 1;
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("lib", 5, "sen", 4, "lus", 35);
+						dynStats("sen", 4, "lus", 35);
+						player.MutagenBonus("lib", 5);
 					}
 					}
 					if (temp3 == 1) outputText("  <b>Your penis has transformed into a Cat's!</b>");
 				}
 				//MULTICOCK
 				else {
-					dynStats("lib", 5, "sen", 4, "lus", 35);
+					dynStats("sen", 4, "lus", 35);
+					player.MutagenBonus("lib", 5);
 					player.cocks[i].cockType = CockTypesEnum.CAT;
 					player.cocks[i].knotMultiplier = 1;
 					outputText("\n\nOne of your penises begins to feel strange.  You pull down your clothes to take a look and see your [cock] swells up with near-painful arousal and begin to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum..");
@@ -339,7 +345,8 @@ public class Enigmanium extends Consumable{
 				if (player.cor >= 30 && player.cor < 60) outputText("  You wonder why you thought such odd things, but they have a certain appeal.");
 				if (player.cor >= 60 && player.cor < 90) outputText("  You relish your twisted fantasies, hoping to dream of them again.");
 				if (player.cor >= 90) outputText("  You flush hotly and give a twisted smile, resolving to find a fitting subject to rape and relive your fantasies.");
-				dynStats("lib", .5, "lus", 10);
+				dynStats("lus", 10);
+				player.MutagenBonus("lib", 0.5);
 			}
 			//Chance of ball growth if not 3" yet
 			if (rand(2) == 0 && changes < changeLimit && player.ballSize <= 3 && player.horseCocks() > 0) {
@@ -347,13 +354,15 @@ public class Enigmanium extends Consumable{
 					player.balls = 2;
 					player.ballSize = 1;
 					outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
-					dynStats("lib", 2, "lus", 5);
+					dynStats("lus", 5);
+					player.MutagenBonus("lib", 2);
 				}
 				else {
 					player.ballSize++;
 					if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + Appearance.ballsDescription(false, true, player) + " have grown larger than a human's.");
 					if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your [sack].  Walking becomes difficult as you discover your " + Appearance.ballsDescription(false, true, player) + " have enlarged again.");
-					dynStats("lib", 1, "lus", 3);
+					dynStats("lus", 3);
+					player.MutagenBonus("lib", 1);
 				}
 				changes++;
 			}
@@ -365,7 +374,7 @@ public class Enigmanium extends Consumable{
 			if (player.gender > 0) {
 				outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the back legs on your centaur body.");
 			}
-			dynStats("spe", 3);
+			player.MutagenBonus("spe", 3);
 			mutations.setLowerBody(LowerBody.CAT);
 			player.legCount = 4;
 		}
@@ -403,7 +412,7 @@ public class Enigmanium extends Consumable{
 				}
 				if (player.gender > 0)
 					outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the hind legs of your body.");
-				dynStats("spe", 3);
+				player.MutagenBonus("spe", 3);
 				//outputText("  A coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have paws in place of your feet!</b>");
 				player.legCount = 4;
 				//dynStats("cor", 0);

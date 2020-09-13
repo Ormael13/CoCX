@@ -556,24 +556,24 @@ public class PerkLib
 		public static const BerserkerArmor:PerkType = mk("Berserker Armor", "Berserker Armor",
 				"Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.",
 				"Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.\n");
-		public static const BiggerGolemBag1:PerkType = mk("Bigger Golem Bag 1", "Bigger Golem Bag 1",
+		public static const BiggerGolemBagI:PerkType = mk("Bigger Golem Bag I", "Bigger Golem Bag I",
 				"Your extra dimensional golem bag can store 2 more temporal (and 1 more pernament when becoming Master Golem Maker) golems.",
-				"You choose 'Bigger Golem Bag 1' perk, increasing your golems bag.");
-		public static const BiggerGolemBag2:PerkType = mk("Bigger Golem Bag 2", "Bigger Golem Bag 2",
+				"You choose 'Bigger Golem Bag I' perk, increasing your golems bag.");
+		public static const BiggerGolemBagII:PerkType = mk("Bigger Golem Bag II", "Bigger Golem Bag II",
 				"Your extra dimensional golem bag can store 2 more temporal (and 1 more pernament when becoming Master Golem Maker) golems.",
-				"You choose 'Bigger Golem Bag 2' perk, increasing your golems bag.");
-		public static const BiggerGolemBag3:PerkType = mk("Bigger Golem Bag 3", "Bigger Golem Bag 3",
+				"You choose 'Bigger Golem Bag II' perk, increasing your golems bag.");
+		public static const BiggerGolemBagIII:PerkType = mk("Bigger Golem Bag III", "Bigger Golem Bag III",
 				"Your extra dimensional golem bag can store 2 more temporal (and 1 more pernament when becoming Master Golem Maker) golems.",
-				"You choose 'Bigger Golem Bag 3' perk, increasing your golems bag.");
-		public static const BiggerGolemBag4:PerkType = mk("Bigger Golem Bag 4", "Bigger Golem Bag 4",
+				"You choose 'Bigger Golem Bag III' perk, increasing your golems bag.");
+		public static const BiggerGolemBagIV:PerkType = mk("Bigger Golem Bag IV", "Bigger Golem Bag IV",
 				"Your extra dimensional golem bag can store 2 more temporal (and 1 more pernament when becoming Master Golem Maker) golems.",
-				"You choose 'Bigger Golem Bag 4' perk, increasing your golems bag.");
-		public static const BiggerGolemBag5:PerkType = mk("Bigger Golem Bag 5", "Bigger Golem Bag 5",
+				"You choose 'Bigger Golem Bag IV' perk, increasing your golems bag.");
+		public static const BiggerGolemBagV:PerkType = mk("Bigger Golem Bag V", "Bigger Golem Bag V",
 				"Your extra dimensional golem bag can store 2 more temporal (and 1 more pernament when becoming Master Golem Maker) golems.",
-				"You choose 'Bigger Golem Bag 5' perk, increasing your golems bag.");
-		public static const BiggerGolemBag6:PerkType = mk("Bigger Golem Bag 6", "Bigger Golem Bag 6",
+				"You choose 'Bigger Golem Bag V' perk, increasing your golems bag.");
+		public static const BiggerGolemBagVI:PerkType = mk("Bigger Golem Bag VI", "Bigger Golem Bag VI",
 				"Your extra dimensional golem bag can store 2 more temporal (and 1 more pernament when becoming Master Golem Maker) golems.",
-				"You choose 'Bigger Golem Bag 6' perk, increasing your golems bag.");
+				"You choose 'Bigger Golem Bag VI' perk, increasing your golems bag.");
 		public static const BlackHeart:PerkType = mk("Black Heart", "Black Heart",
 				"You intelligence to increase power of lust strike as well making fascinate slightly stronger.",
 				"You choose the 'Black Heart' perk. Your heart due to repeadly exposition to corruption turned black.");
@@ -914,14 +914,14 @@ public class PerkLib
 				"Your balls constantly grows until emptied through your cock, producing eggs.",
 				"Your balls constantly grows until emptied through your cock, producing eggs.");
 		public static const EasterBunnyEggBag:PerkType = mk("Easter Bunny egg bag", "Easter Bunny egg bag",
-				"Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one eggs per round. Double cum production.",
-				"Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one eggs per round. Double cum production.");
+				"Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one egg per round. Double cum production.",
+				"Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one egg per round. Double cum production.");
 		public static const EasterBunnyEggBagEvolved:PerkType = mk("Easter bunny balls (Evolved)", "Easter bunny balls (Evolved)",
-				"Raise libido by a percentage based on current ball size. Triple cum production.",
-				"Raise libido by a percentage based on current ball size. Triple cum production.");
+				"Raise libido by a percentage based on current balls size. Triple cum production.",
+				"Raise libido by a percentage based on current balls size. Triple cum production.");
 		public static const EasterBunnyEggBagFinalForm:PerkType = mk("Easter bunny balls (Final Form)", "Easter bunny balls (Final Form)",
-				"Further raise libido by a percentage based on current ball size. Double ball growth rates. Double cum production again.\n",
-				"Further raise libido by a percentage based on current ball size. Double ball growth rates. Double cum production again.");
+				"Further raise libido by a percentage based on current balls size. Double balls growth rates and double cum production again.\n",
+				"Further raise libido by a percentage based on current balls size. Double balls growth rates and double cum production again.");
 		public static const EagleEye:PerkType = mk("Eagle eye", "Eagle eye",
 				"Increase traditional range weapons (like bows) base attack by another 50%.",
 				"You choose the 'Eagle eye' perk, increasing traditional range weapons base attack.");
@@ -1597,22 +1597,22 @@ public class PerkLib
 				"You are in control of your desires, that's it... except another 10% soul force gain.",
 				"You choose the 'In Control' perk, gaining +10% max Soulforce.");
 		public static const InhumanDesireI:PerkType = mk("Inhuman Desire I", "Inhuman Desire I",
-				"Raises max LP by 20.",
+				"Raises max lust by 20.",
 				"You choose the 'Inhuman Desire I' perk, giving you an additional 20 LP!");
 		public static const InhumanDesireII:PerkType = mk("Inhuman Desire II", "Inhuman Desire II",
-				"Raises max LP by 20.",
+				"Raises max lust by 20.",
 				"You choose the 'Inhuman Desire II' perk, giving you an additional 20 LP!");
 		public static const InhumanDesireIII:PerkType = mk("Inhuman Desire III", "Inhuman Desire III",
-				"Raises max LP by 20.",
+				"Raises max lust by 20.",
 				"You choose the 'Inhuman Desire III' perk, giving you an additional 20 LP!");
 		public static const InhumanDesireIV:PerkType = mk("Inhuman Desire IV", "Inhuman Desire IV",
-				"Raises max LP by 20.",
+				"Raises max lust by 20.",
 				"You choose the 'Inhuman Desire IV' perk, giving you an additional 20 LP!");
 		public static const InhumanDesireV:PerkType = mk("Inhuman Desire V", "Inhuman Desire V",
-				"Raises max LP by 20.",
+				"Raises max lust by 20.",
 				"You choose the 'Inhuman Desire V' perk, giving you an additional 20 LP!");
 		public static const InhumanDesireVI:PerkType = mk("Inhuman Desire VI", "Inhuman Desire VI",
-				"Raises max LP by 20.",
+				"Raises max lust by 20.",
 				"You choose the 'Inhuman Desire VI' perk, giving you an additional 20 LP!");
 		public static const InhumanEndurance:PerkType = mk("Inhuman Endurance", "Inhuman Endurance",
 				"Increases maximum fatigue by 2000.",
@@ -1950,7 +1950,7 @@ public class PerkLib
 				"You choose the 'Mantis-like Agility' perk, by becoming much more mantis-like your body musculature started to slowly adapt to existance of exoskeleton.");
 		public static const MantislikeAgilityEvolved:PerkType = mk("Mantis-like Agility (Evolved)", "Mantis-like Agility (Evolved)",
 				"Your evolved musculature providing you with even higher increase to agility and speed. If somehow you would have some type of natural armor or even thicker skin this increase would be even bigger.",
-				"You choose the 'Mantis-like Agility (Evolved)' perk, by becoming much more mantis-like your body musculature started to slowly adapt to existance of exoskeleton.");
+				"You choose the 'Mantis-like Agility (Evolved)' perk, by becoming much more mantis-like your body musculature started to slowly adapt to existance of exoskeleton.").withBuffs({'spe.mult':20});
 		public static const Manyshot:PerkType = mk("Manyshot", "Manyshot",
 				"You always shoot two arrows instead of one on your first strike.",
 				"You choose the 'Manyshot' perk, to always shoot two arrows instead of one on your first strike.");
@@ -2964,14 +2964,13 @@ public class PerkLib
 		public static const ChiReflowAttack:PerkType = mk("Chi Reflow - Attack", "Chi Reflow - Attack",
 				"Regular attacks boosted, but damage resistance decreased.");
 		public static const ChiReflowDefense:PerkType = mk("Chi Reflow - Defense", "Chi Reflow - Defense",
-				"Passive damage resistance, but caps speed");
+				"Passive damage resistance, but caps speed").withBuffs({'spe.mult':-0.20});
 		public static const ChiReflowLust:PerkType = mk("Chi Reflow - Lust", "Chi Reflow - Lust",
 				"Lust resistance and Tease are enhanced, but Libido and Sensitivity gains increased.");
 		public static const ChiReflowMagic:PerkType = mk("Chi Reflow - Magic", "Chi Reflow - Magic",
 				"Magic attacks boosted, but regular attacks are weaker.");
 		public static const ChiReflowSpeed:PerkType = mk("Chi Reflow - Speed", "Chi Reflow - Speed",
-				"Speed reductions are halved but caps strength");
-
+				"Speed reductions are halved but caps strength").withBuffs({'str.mult':-0.20});
 		// Piercing perks
 		public static const PiercedCrimstone:PiercedCrimstonePerk = new PiercedCrimstonePerk();
 		public static const PiercedIcestone:PiercedIcestonePerk = new PiercedIcestonePerk();
@@ -3357,7 +3356,7 @@ public class PerkLib
 		public static const LightningVulnerability:PerkType = mk("Lightning Vulnerability", "Lightning Vulnerability", "");
 		public static const MonsterRegeneration:PerkType = mk("Monster Regeneration", "Monster Regeneration", "");
 		public static const NoGemsLost:PerkType = mk("No Gems Lost", "No Gems Lost", "");
-		public static const Phylactery:PerkType = mk("Phylactery", "Phylactery", "");
+		public static const Phylactery:PerkType = mk("Phylactery", "Phylactery", "Your soul has been safely stored into a phylactery allowing you to fully unlock your potential as a demon.").withBuffs({'int.mult':0.75});
 		public static const Sentience:PerkType = mk("Sentience", "Sentience", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
@@ -3398,10 +3397,12 @@ public class PerkLib
                     .requirePerk(JobWarrior);
             JobBrawler.requireAdvancedJobSlot()
 					.requireLevel(6)
-                    .requireStr(60);
+                    .requireStr(60)
+					.requirePerk(JobWarrior);
             JobSwordsman.requireAdvancedJobSlot()
 					.requireLevel(6)
-                    .requireStr(60);
+                    .requireStr(60)
+					.requirePerk(JobWarrior);
             IronFistsI.requireLevel(6)
                     .requireStr(60)
                     .requirePerk(JobBrawler);
@@ -3454,7 +3455,7 @@ public class PerkLib
             DoubleAttackLarge.requireLevel(12)
                     .requirePerk(JobSwordsman)
                     .requireStr(75)
-                    .requireStr(50);
+                    .requireSpe(50);
             Brawn.requireLevel(12)
                     .requireStr(75)
                     .requirePerk(Brute);
@@ -5383,7 +5384,7 @@ public class PerkLib
             }, "Dragon race and its variants");
 			EasterBunnyEggBag.requirePerk(EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
-			}, "Easter Bunny race");
+			}, "Easter Bunny race and Easter bunny balls.");
 			EclipticMind.requireCustomFunction(function (player:Player):Boolean {
 				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
 			}, "Unicorn or Bicorn race");
@@ -5651,19 +5652,19 @@ public class PerkLib
                     .requireInt(30)
                     .requireWis(30)
                     .requirePerk(JobGolemancer);
-            BiggerGolemBag1.requireLevel(6)
+            BiggerGolemBagI.requireLevel(6)
                     .requireInt(40)
                     .requireWis(40)
                     .requirePerk(JobGolemancer);
-            BiggerGolemBag2.requireLevel(8)
+            BiggerGolemBagII.requireLevel(8)
                     .requireInt(60)
                     .requireWis(60)
-                    .requirePerk(BiggerGolemBag1)
+                    .requirePerk(BiggerGolemBagI)
                     .requireNGPlus(1);
-            BiggerGolemBag3.requireLevel(10)
+            BiggerGolemBagIII.requireLevel(10)
                     .requireInt(80)
                     .requireWis(80)
-                    .requirePerk(BiggerGolemBag2)
+                    .requirePerk(BiggerGolemBagII)
                     .requireNGPlus(2);
             ImprovingNaturesBlueprintsNaturalWeapons.requirePerk(JobBeastWarrior)
                     .requireStr(35)
@@ -5753,7 +5754,7 @@ public class PerkLib
                     }, "Dragon race and its variants");
 			EasterBunnyEggBagEvolved.requireLevel(12).requirePerk(EasterBunnyEggBag).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
-			}, "Easter bunny race");
+			}, "Easter Bunny race and Easter bunny balls.");
 			EclipticMindEvolved.requireLevel(12).requirePerk(EclipticMind).requireCustomFunction(function (player:Player):Boolean {
 				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
 			}, "Unicorn or Bicorn race");
@@ -5855,20 +5856,20 @@ public class PerkLib
                     .requireInt(50)
                     .requireWis(50)
                     .requirePerk(BeginnerGolemMaker);
-            BiggerGolemBag4.requireLevel(12)
+            BiggerGolemBagIV.requireLevel(12)
                     .requireInt(100)
                     .requireWis(100)
-                    .requirePerk(BiggerGolemBag3)
+                    .requirePerk(BiggerGolemBagIII)
                     .requireNGPlus(3);
-            BiggerGolemBag5.requireLevel(14)
+            BiggerGolemBagV.requireLevel(14)
                     .requireInt(120)
                     .requireWis(120)
-                    .requirePerk(BiggerGolemBag4)
+                    .requirePerk(BiggerGolemBagIV)
                     .requireNGPlus(4);
-            BiggerGolemBag6.requireLevel(14)
+            BiggerGolemBagVI.requireLevel(14)
                     .requireInt(140)
                     .requireWis(140)
-                    .requirePerk(BiggerGolemBag5)
+                    .requirePerk(BiggerGolemBagV)
                     .requireNGPlus(5);
             ChargedCore.requireLevel(12)
                     .requireInt(70)
@@ -6140,7 +6141,7 @@ public class PerkLib
                     }, "Dragon race and its variants");
 			EasterBunnyEggBagFinalForm.requireLevel(30).requirePerk(EasterBunnyEggBagEvolved).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
-			}, "Easter Bunny race");
+			}, "Easter Bunny race and Easter bunny balls.");
 			EclipticMindFinalForm.requireLevel(30).requirePerk(EclipticMindEvolved).requireCustomFunction(function (player:Player):Boolean {
 				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
 			}, "Unicorn or Bicorn race");

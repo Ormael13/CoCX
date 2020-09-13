@@ -61,7 +61,7 @@ public class BimboLiqueur extends Consumable {
 				game.player.createPerk(PerkLib.FutaForm, 0, 0, 0, 0);
 				if (game.player.lib < 50) {
 					game.player.lib = 50;
-					game.player.dynStats("lib", .1);
+					player.MutagenBonus("lib", 0.1);
 				}
 			}
 			else {
@@ -173,7 +173,8 @@ public class BimboLiqueur extends Consumable {
 					game.player.createPerk(PerkLib.BimboBrains, 0, 0, 0, 0);
 				}
 				game.player.orgasm();
-				game.player.dynStats("int", -1, "lib", 5);
+				game.player.dynStats("int", -1);
+				player.MutagenBonus("lib", 5);
 				if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= mutations.DrunkenPowerEmpowerOni()) mutations.DrunkenPowerEmpower();
 				//FULL ON BITCHFACE
 				game.player.modFem(100, 100);

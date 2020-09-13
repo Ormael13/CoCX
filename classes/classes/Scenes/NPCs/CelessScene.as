@@ -209,7 +209,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 					"However, an unwanted visitor shows up before the end of the last game. " +
 					"The imp, because it’s clearly an imp, is masturbating, intent on spreading his filth on the flowers. " +
 					"This happening in front of your daughter is <i>unacceptable</i>. " +
-					"You tell her to go play on the other side for a while, so as to allow you to discreetly take care of the annoying little bugger before he has the chance to damage the grove and <output>$name</output>’s innocence. " +
+					"You tell her to go play on the other side for a while, so as to allow you to discreetly take care of the annoying little bugger before he has the chance to damage the grove and "+_name+"’s innocence. " +
 					"You make sure to dispose of the body properly, not wanting to risk your daughter stumbling upon it and winding up traumatized. That taken care of, you go back to playing with your daughter.\n\n" +
 					"The time passes and eventually both of you head back to camp, your daughter still sporting a wide smile from all the fun she had, none the wiser about your little altercation with that moron of an imp.\n\n" +
 					"As innocent as a day can be in Mareth, even if you had to force the issue. But if it’s for the sake of your daughter having a happy childhood, you would gladly beat this whole crazy realm into submission.")

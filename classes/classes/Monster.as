@@ -1936,7 +1936,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasStatusEffect(StatusEffects.DisplacerPlug)) {
 				EngineCore.outputText("" + capitalA + short + " struggle to unplug your tentacles suckers.");
 				if (statusEffectv1(StatusEffects.DisplacerPlug) <= 0) {
-					EngineCore.outputText("" + capitalA + short +" struggle to unplug your tentacles suckers from [monster his] "+breastDescript+" and manages with great efforts to get them off.");
+					EngineCore.outputText("" + capitalA + short +" struggle to unplug your tentacles suckers from [monster his] "+breastDescript(0)+" and manages with great efforts to get them off.");
 					if (statusEffectv3(StatusEffects.DisplacerPlug) >= 1) {
 						EngineCore.outputText("You lick your paws in delight still feeling the remains of the recent milk flow in your tentacles.");
 					} else {

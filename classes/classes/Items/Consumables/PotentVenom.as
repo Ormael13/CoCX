@@ -54,13 +54,13 @@ public class PotentVenom extends Consumable {
 
 		if (player.spe < 80 && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYou suddenly jerk forward, feeling somewhat twitchy. Surprised, you didn't know you could react so quickly.");
-			dynStats("spe", 1);
+			player.MutagenBonus("spe", 1);
 			changes++;
 		}
 
 		if (player.tou < 80 && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYou feel oddly revitalized. You're so pumped that you feel that you can take on the strongest of enemies and even they would fail to even leave a scratch on you.");
-			dynStats("tou", 5);
+			player.MutagenBonus("tou", 5);
 			changes++;
 		}
 
@@ -251,7 +251,8 @@ public class PotentVenom extends Consumable {
 				if (player.vaginaType() != VaginaClass.VENOM_DRIPPING) player.vaginaType(VaginaClass.VENOM_DRIPPING);
 				if (player.cocks[0].cockType != CockTypesEnum.OOMUKADE) player.cocks[0].cockType = CockTypesEnum.OOMUKADE;
 			}
-			dynStats("lib", 3, "lus", 10);
+			dynStats("lus", 10);
+			player.MutagenBonus("lib", 3);
 			changes++;
 		}
 		//Venom Increase TEMPORARY

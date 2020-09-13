@@ -24,6 +24,7 @@ import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.LunaFollower;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.VampireThirstEffect;
+import classes.lists.BreastCup;
 
 public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//Handles all timeChange events for the player. Needed because player is not unique.
@@ -204,6 +205,31 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.LUNA_JEALOUSY] < 400) flags[kFLAGS.LUNA_JEALOUSY]++;
 				if ((flags[kFLAGS.LUNA_FOLLOWER] == 6 || flags[kFLAGS.LUNA_FOLLOWER] == 8 || flags[kFLAGS.LUNA_FOLLOWER] == 10 || flags[kFLAGS.LUNA_FOLLOWER] == 12 || flags[kFLAGS.LUNA_FOLLOWER] == 14 || flags[kFLAGS.LUNA_FOLLOWER] == 16) && flags[kFLAGS.LUNA_JEALOUSY] < 100) flags[kFLAGS.LUNA_FOLLOWER]--;
 				if ((flags[kFLAGS.LUNA_FOLLOWER] == 5 || flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 9 || flags[kFLAGS.LUNA_FOLLOWER] == 11 || flags[kFLAGS.LUNA_FOLLOWER] == 13 || flags[kFLAGS.LUNA_FOLLOWER] == 15) && flags[kFLAGS.LUNA_JEALOUSY] >= 100 && (CoC.instance.model.time.hours > 6 && CoC.instance.model.time.hours < 23)) SceneLib.lunaFollower.warrningAboutJelously();
+			}
+			//Alter max speed if you have oversized parts. (Realistic mode)
+			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
+			{
+				var maxSpe:Number;
+				//Balls
+				var tempSpeedPenalty:Number = 0;
+				var lim:int = player.isTaur() ? 9 : 4;
+				if (player.ballSize > lim && player.balls > 0) tempSpeedPenalty += Math.round((player.ballSize - lim) / 2);
+				//Breasts
+				lim = player.isTaur() ? BreastCup.I : BreastCup.G;
+				if (player.hasBreasts() && player.biggestTitSize() > lim) tempSpeedPenalty += ((player.biggestTitSize() - lim) / 2);
+				//Cocks
+				lim = player.isTaur() ? 72 : 24;
+				if (player.biggestCockArea() > lim) tempSpeedPenalty += ((player.biggestCockArea() - lim) / 6);
+				//Min-cap
+				var penaltyMultiplier:Number = 1;
+				penaltyMultiplier -= player.str * 0.1;
+				penaltyMultiplier -= (player.tallness - 72) / 168;
+				if (penaltyMultiplier < 0.4) penaltyMultiplier = 0.4;
+				tempSpeedPenalty *= penaltyMultiplier;
+				player.buff("RealisticMode").setStat("spe.mult",-tempSpeedPenalty/100).withText("Oversized Endowments");
+			}
+			else{
+				player.buff("RealisticMode").remove();
 			}
 			Begin("PlayerEvents","hourlyCheckRacialPerks");
 			needNext = hourlyCheckRacialPerks();
@@ -1067,7 +1093,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Demonic hunger perk
-			if (player.demonScore() >= 10 || player.hasStatusEffect(StatusEffects.PlayerPhylactery)) { //Check for being a demon enought
+			if (player.demonScore() >= 10 || player.hasPerk(PerkLib.Phylactery)) { //Check for being a demon enought
 				if (player.findPerk(PerkLib.DemonEnergyThirst) < 0) {
 					outputText("\nYou begin fantasising about pussies and cocks foaming at the idea of fucking or getting fucked. It would look like you aquired the demons hunger for sex and can now feed from the orgasms of your partners. \n\n(<b>Gained Perk: Demonic Hunger</b>)\n");
 					player.createPerk(PerkLib.DemonEnergyThirst, 0, 0, 0, 0);
@@ -1075,7 +1101,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Demonic hunger perk loss
-			if (player.demonScore() < 10 && !player.hasStatusEffect(StatusEffects.PlayerPhylactery)) { //Check for being a demon enought
+			if (player.demonScore() < 10 && !player.hasPerk(PerkLib.Phylactery)) { //Check for being a demon enought
 				if (player.findPerk(PerkLib.DemonEnergyThirst) > 0) {
 					outputText("\nYour mind clears up as becoming less of a demon you also lost the demonic hunger only sex could sate. \n\n(<b>Lost Perk: Demonic Hunger</b>)\n");
 					player.removePerk(PerkLib.DemonEnergyThirst);
@@ -1524,13 +1550,22 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nAs you become a goblinoid again you can feel the chemicals pumped in by your gadgets resume working.\n");
 				outputText("\n(<b>Gained Perk: Goblinoid blood</b>)\n");
 				if (player.hasKeyItem("Drug injectors")){
-					player.statStore.addBuff('sens',+5,'DrugInjector',{text:'Drug injectors'})
+					player.statStore.replaceBuffObject({'sens':5,'lib.mult':0.25},'DrugInjector',{text:'Drug injectors'})
 				}
 				if (player.hasKeyItem("Improved Drug injectors")){
-					player.statStore.addBuff('sens',+5,'ImprovedDrugInjector',{text:'Improved Drug injectors'})
+					player.statStore.replaceBuffObject({'sens':10,'lib.mult':0.50},'DrugInjector',{text:'Improved Drug injectors'})
 				}
 				if (player.hasKeyItem("Potent Drug injectors")){
-					player.statStore.addBuff('sens',+5,'PotentDrugInjector',{text:'Potent Drug injectors'})
+					player.statStore.replaceBuffObject({'sens':15,'lib.mult':0.5},'DrugInjector',{text:'Potent Drug injectors'})
+				}
+				if (player.hasKeyItem("Power bracer") >= 0) {
+					player.statStore.replaceBuffObject({'str.mult':0.50},'Power bracer',{text:'Power bracer'})
+				}
+				if (player.hasKeyItem("Powboy") >= 0) {
+					player.statStore.replaceBuffObject({'str.mult':0.75},'Power bracer',{text:'Powboy'})
+				}
+				if (player.hasKeyItem("M.G.S. bracer") >= 0) {
+					player.statStore.replaceBuffObject({'str.mult':1},'Power bracer',{text:'M.G.S. bracer'})
 				}
 				player.createPerk(PerkLib.GoblinoidBlood, 0, 0, 0, 0);
 				needNext = true;
@@ -1540,8 +1575,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\n<b>(Lost Perk: Goblinoid blood)</b>\n");
 				player.removePerk(PerkLib.GoblinoidBlood);
 				player.statStore.removeBuffs("DrugInjector");
-				player.statStore.removeBuffs("ImprovedDrugInjector");
-				player.statStore.removeBuffs("PotentDrugInjector");
+				player.statStore.removeBuffs("Power bracer");
 				needNext = true;
 			}
 			if ((player.isGoblinoid()) && player.findPerk(PerkLib.BouncyBody) < 0) {

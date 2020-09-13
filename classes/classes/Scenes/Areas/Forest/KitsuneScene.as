@@ -2380,6 +2380,8 @@ public class KitsuneScene extends BaseContent
 				outputText("It's a rather dry read, but informative.  Chapter after chapter explains the underlying theory of magic, going to almost excruciating levels of detail.  " + ((player.inte < 50) ? "Much of it flies over your head, but the book does manage to clarify a few points.  You close the book and set it back on the shelf, feeling like you've learned something." : "Much of it is merely review, but you do manage to glean a few facts before closing the book and setting it back on the shelf."));
 				//+2 INT, Advance 1hr and return to camp
 				dynStats("int", 2);
+				player.KnowledgeBonus("int",2);
+				player.KnowledgeBonus("wis", 2);
 				doNext(camp.returnToCampUseOneHour);
 			}
 			else if (choice == 1) {
@@ -2392,6 +2394,7 @@ public class KitsuneScene extends BaseContent
 				outputText("You start to flip through the pages, a deep blush slowly forming on your cheeks the further you read into what is clearly an erotic novella of some form.  Graphic descriptions of women being violated by tentacle beasts abound on almost every page, " + ((player.lib < 50) ? "and you slam the book shut before reading further, already feeling a heat building in your groin." : "and you lick your lips hungrily, poring over every line and word of lascivious prose."));
 				//+ 1 LIB, + 5 LUST, Advance 1hr and return to camp
 				dynStats("lib", 1, "lus", 5);
+				player.KnowledgeBonus("lib",1);
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}

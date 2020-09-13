@@ -533,7 +533,7 @@ use namespace CoC;
 			//If Genderless: \"<i>Unfortunately, there's not much she can do for you...</i>\"
 			if(player.gender == 0) outputText("Unfortunately, there's not much she can do for you...");
 			if (player.hasCock()) addButton(0, "Anal", kiriSexAnal).hint("Put your " + player.cockDescript() + " into Kiri's ass!");
-			if (player.hasVagina()) addButton(1, "Get Licked", kiriSexGetLicked).hint("Have Kiri lick your " + player.vaginaDescript() + ".");
+			if (player.hasVagina()) addButton(1, "Get Licked", kiriSexGetLicked).hint("Have Kiri lick your [pussy]");
 			addButton(4, "Back", playerMenu);
 		}
 

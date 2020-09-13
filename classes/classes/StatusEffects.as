@@ -492,7 +492,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const PCDaughtersWorkshopSpareParts:StatusEffectType  = mk("PC Daughters Workshop Spare parts");
 		public static const PlainOnaholeUsed:StatusEffectType               = mk("plain onahole used");
 		public static const PlayerHasViewableOutfit:StatusEffectType        = mk("Player Has Viewable Outfit");
-		public static const PlayerPhylactery:StatusEffectType               = mk("Player Phylactery");
 		public static const PhoukaWhiskeyAffect:StatusEffectType            = mk("PhoukaWhiskeyAffect");
 		public static const PostAkbalSubmission:StatusEffectType            = mk("Post Akbal Submission");
 		public static const PostAnemoneBeatdown:StatusEffectType            = mk("Post Anemone Beatdown");

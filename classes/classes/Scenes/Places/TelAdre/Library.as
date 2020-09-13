@@ -120,6 +120,7 @@ private function studyInTA():void {
 			dynStats("int", 3+rand(4));
 			if (player.intStat.core.value < 100) {
 				player.intStat.core.value += 2;
+				player.KnowledgeBonus("int",2);
 			}
 			statScreenRefresh()
 			//(Intelligence increase)

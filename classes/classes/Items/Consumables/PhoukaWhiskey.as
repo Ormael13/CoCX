@@ -109,12 +109,14 @@ public class PhoukaWhiskey extends Consumable {
 				player.addStatusValue(StatusEffects.PhoukaWhiskeyAffect, 3, 256 * libidoChange + sensChange);
 				player.addStatusValue(StatusEffects.PhoukaWhiskeyAffect, 4, 256 * speedChange + intChange);
 				outputText("\n\nOh, it tastes so good.  This stuff just slides down your throat.");
-				game.player.dynStats("lib", libidoChange, "sens", -sensChange, "spe", -speedChange, "int", -intChange);
+				game.player.dynStats("sens", -sensChange, "spe", -speedChange, "int", -intChange);
+				player.MutagenBonus("lib", libidoChange);
 			}
 			else { //First time
 				player.createStatusEffect(StatusEffects.PhoukaWhiskeyAffect, 8, 1, 256 * libidoChange + sensChange, 256 * speedChange + intChange);
 					//The four stats we’re affecting get paired together to save space. This way we don’t need a second StatusEffect to store more info.
-				game.player.dynStats("lib", libidoChange, "sens", -sensChange, "spe", -speedChange, "int", -intChange);
+				game.player.dynStats("sens", -sensChange, "spe", -speedChange, "int", -intChange);
+				player.MutagenBonus("lib", libidoChange);
 			}
 			EngineCore.statScreenRefresh();
         }

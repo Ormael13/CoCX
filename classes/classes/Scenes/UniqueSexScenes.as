@@ -395,9 +395,9 @@ package classes.Scenes
 					"Your flames stretch out from your ");
 			if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) outputText("coat,");
 			else outputText("body,");
-			if (monster.hasCock()) outputText("wrap and sheath around [monster his] "+monster.cockDescriptShort+",");
-			if (monster.biggestTitSize() >= 1) outputText("massage the shape of [monster his] "+monster.breastDescript+",");
-			if (monster.hasVagina()) outputText("lick the entrance of [monster his] "+monster.vaginaDescript+"");
+			if (monster.hasCock()) outputText(" wrap and sheath around [monster his] "+monster.cockDescriptShort()+",");
+			if (monster.biggestTitSize() >= 1) outputText("massage the shape of [monster his] "+monster.breastDescript(0)+",");
+			if (monster.hasVagina()) outputText("lick the entrance of [monster his] "+monster.vaginaDescript()+"");
 			outputText("and spread across the rest of [monster his] skin like a wildfire. You smile in contentment as the haze of lust progressively clears from your mind which is the opposite of what can be said for your victim. The excess of your");
 			if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) outputText("hinezumi coat,");
 			else outputText("flames,");
@@ -420,13 +420,13 @@ package classes.Scenes
 
 		public function Cooldown():void {
 			clearOutput();
-			outputText("You eye " + monster.a + monster.short + " with anticipation. Being a "+player.race+", your body temperature is constantly burning way above normal and right now your "+player.vaginaDescript+" is like 40° celcius in summer with high humidity. " +
+			outputText("You eye " + monster.a + monster.short + " with anticipation. Being a "+player.race+", your body temperature is constantly burning way above normal and right now your [pussy] is like 40° celcius in summer with high humidity. " +
 					"A little cooling is in order and this unlucky rift denizen is about to serve as natural refreshment for your burning hot body.\n\n" +
 					"You proceed to force " + monster.a + monster.short + " on [monster his] back");
 			if (monster.wolfCocks() > 0) outputText(", your warm body slowly forcing his puppy pecker out of its sheath");
 			outputText(". Once your partner’s towering erection is suitable you proceed to straddle him and fill your burning vagina full of his dick." +
 					"" + monster.a + monster.short + " "+monster.cockDescriptShort()+" twitches as warmth coats his member and you begin to slide up and down his towering maleness");
-			if (monster.wolfCocks() > 0) outputText(", enjoying yourself as his knot grows and locks itself in your "+player.vaginaDescript+"");
+			if (monster.wolfCocks() > 0) outputText(", enjoying yourself as his knot grows and locks itself in your [pussy]");
 			outputText(". You begin to slowly work his tool with your vagina, moaning as the shaft ever so gently scrapes your walls. You want the cool cream inside to fill you all over and soon the beast growls as it reaches its impending climax, its dick unloading thick ropes of cooling cum into your furnace of a pussy.\n\n" +
 					"Thoroughly satisfied you pull from " + monster.a + monster.short + " "+monster.cockDescriptShort()+" and walk off. Gosh, this one felt hella good you should come back more often when you’re in need of some cooling.")
 			//We give both sex reward so to end player rut or heat in the event pc has either
@@ -439,7 +439,7 @@ package classes.Scenes
 			clearOutput();
 			outputText("You eye your defeated opponent’s form with delight. " + monster.Pronoun1 + "'s so warm and full of life, certainly sharing some of it with you should be no problem? Yet the greedy creature squirms and crawl away in a vain attempt to escape you and this angers you to no end. Even worse this thing is a guy. You freeze " + monster.a + monster.short + " limbs in place, trapping them with ice, and approach him.\n\n");
 			outputText("\"<i>You're hoarding that sweet warmth all to yourself aren't you? How about you share.</i>\"\n\n");
-			outputText("He looks at you fearfully and rightly so, there's no telling how far you will go to get the warmth you’re craving from him. You spread " + monster.pronoun3 + " leg wide to reveal the already hardening " + monster.cockDescriptShort(0) + " between. You lick his length to lube it properly for what is coming next, your cool saliva making " + monster.a + monster.short + " shiver. You rub your body along his while doing this, enjoying the sensation of warmth over your skin. A few seconds later you're already straddling the towering erection, inserting inch after inch inside your folds. Moans are exchanged as you begins to lower your body on your victim’s cock, moving at a steady pace. Midway you kiss " + monster.a + monster.short + " silencing his pain and pleasure mixed groans ");
+			outputText("He looks at you fearfully and rightly so, there's no telling how far you will go to get the warmth you’re craving from him. You spread " + monster.pronoun3 + " leg wide to reveal the already hardening " + monster.cockDescriptShort() + " between. You lick his length to lube it properly for what is coming next, your cool saliva making " + monster.a + monster.short + " shiver. You rub your body along his while doing this, enjoying the sensation of warmth over your skin. A few seconds later you're already straddling the towering erection, inserting inch after inch inside your folds. Moans are exchanged as you begins to lower your body on your victim’s cock, moving at a steady pace. Midway you kiss " + monster.a + monster.short + " silencing his pain and pleasure mixed groans ");
 			outputText("as your cool breath pours in and you draw out his warm one. He begins to shake as his cock hardens further, both from the pleasure and the thin layer of ice preventing his release and softening, freezing the very blood inside and spreading out across his body. He would be screaming half mad right now if you weren't choking his loud reply with a kiss, breathing in his warmth. He keeps thrusting until his lower body loses mobility to the creeping frost, not one to end so soon you prolong his agonizing pleasure and yours by your own efforts, moaning in delight each time his diamond hard frozen member bottoms in.\n\n");
 			outputText("As you achieve your fifth orgasm, his body is entirely covered in creeping ice and he's no better than a frozen statue, devoid of all warmth and life. What a bore, you were just barely satiated and could've went on for several hours. You kick him in anger, causing his form to crack and explode like glass in the opposite direction. Guess you had fun while it lasted, time to head back to camp.\n\n");
 			player.HP = player.maxHP();

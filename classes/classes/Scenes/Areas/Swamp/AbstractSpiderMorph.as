@@ -81,7 +81,7 @@ public class AbstractSpiderMorph extends Monster
 				outputText("The arachnid aggressor slowly saunters forward while you struggle under the heaps of webbing, gently placing " + mf("his", "her") + " arms around your back in a tender hug.  " + mf("His", "Her") + " fangs slide into your neck with agonizing slowness, immediately setting off a burning heat inside you that makes you dizzy and weak.  ");
 				if (player.hasCock()) {
 					outputText(player.SMultiCockDesc() + " turns rock hard and squirts weakly, suddenly so aroused that it starts soaking your " + player.armorName);
-					if (player.hasVagina()) outputText(" along with your " + player.vaginaDescript());
+					if (player.hasVagina()) outputText(" along with your [pussy]");
 					outputText(".  ");
 				}
 				else if (player.hasVagina()) outputText("Your [vagina] grows wet as hell and so sensitive that every step and movement reminds you of the powerful need for something between your sopping nether-lips.  ");

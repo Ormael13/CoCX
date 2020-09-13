@@ -2877,20 +2877,21 @@ private function campCuntManual():void {
 	//(Usual random stat increase from the combat Manual)
  	//(One of the following random effects happens)
 	var choice:Number = rand(3);
+	//TOODO ADD SPEED AND WISDOM TO THIS LIST
 	if(choice == 0) {
 		outputText("You learn a few new guarding stances that seem rather promising.");
 		//(+2 Toughness)
-		dynStats("tou", 2);
+		player.KnowledgeBonus("tou",2);
 	}
 	else if(choice == 1) {
 		outputText("After a quick skim you reach the end of the book. You don't learn any new fighting moves, but the refresher on the overall mechanics and flow of combat and strategy helped.");
 		//(+2 Intelligence)
-		dynStats("int", 2);
+		player.KnowledgeBonus("int",2);
 	}
 	else {
 		outputText("Your read-through of the manual has given you insight into how to put more of your weight behind your strikes without leaving yourself open.  Very useful.");
 		//(+2 Strength)
-		dynStats("str", 2);
+		player.KnowledgeBonus("str",2);
 	}
 	outputText("\n\nAfter about an hour you yawn and stretch, telling Izma that you're going off to do other business.  She nods lazily at your words but doesn't look up from her old book. \"<i>Sure thing [name], I'm just gonna read this for a little while longer,</i>\" Izma says.  You nod at her, before moving off.");
 	doNext(camp.returnToCampUseOneHour);
@@ -2920,7 +2921,8 @@ private function stephenHawkingPorn():void {
 	outputText("By the time you're done reading, Izma certainly seems turned on.  She tries to hide it and sit primly - ");
 	if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("but that's not exactly possible for someone who just had over a foot of dick slip from between her thighs and stick into the air.  You laugh openly and give Izma's silver hair a soft tug, before getting up and telling her you have business elsewhere.  Izma simply nods in taciturn response but keeps her gaze fixed on the lewd images before her.  Another laugh escapes your lips as soon as you think you're out of earshot.");
 	else outputText("but that's not exactly possible for someone who keeps squirming, creating lewd squishes from below the waist.  You laugh openly and give Izma's silver hair a soft tug, before getting up and telling her you have business elsewhere.  Izma simply nods in taciturn response but keeps her gaze fixed on the lewd images before her.  Another laugh escapes your lips as soon as you think you're out of earshot.");
-	dynStats("lib", 1, "lus", 5);
+	dynStats("lus", 5);
+	player.KnowledgeBonus("lib",1);
 	doNext(camp.returnToCampUseOneHour);
 }
 //(Trying to use another book inside the span of 6 hours)

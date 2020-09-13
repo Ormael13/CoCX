@@ -303,6 +303,9 @@ public class Creature extends Utils
 			var stat:PrimaryStat = statStore.findStat(statName) as PrimaryStat;
 			if (stat.core.value < limit){
 				stat.core.value += amount;
+				if (stat.core.value < limit){
+					stat.core.value = limit;
+				}
 			}
 		}
 

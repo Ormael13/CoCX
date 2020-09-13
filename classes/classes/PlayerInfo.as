@@ -443,16 +443,16 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "\n";
 		var maxes:Object = player.getAllMaxStats();
 		var mins:Object = player.getAllMinStats();
-		combatStats += "<b>Strength Cap:</b> " + maxes.str + "\n";
+		combatStats += "<b>Strength Cap:</b> " + player.strStat.max + "\n";
 		combatStats += "<i>Ghost Strength:</i> +" + combat.ghostStrength() + "\n";
-		combatStats += "<b>Toughness Cap:</b> " + maxes.tou + "\n";
-		combatStats += "<b>Speed Cap:</b> " + maxes.spe + "\n";
+		combatStats += "<b>Toughness Cap:</b> " + player.touStat.max + "\n";
+		combatStats += "<b>Speed Cap:</b> " + player.speStat.max + "\n";
 		combatStats += "<i>Ghost Speed:</i> +" + combat.ghostSpeed() + "\n";
-		combatStats += "<b>Intelligence Cap:</b> " + maxes.inte + "\n";
-		combatStats += "<b>Wisdom Cap:</b> " + maxes.wis + "\n";
+		combatStats += "<b>Intelligence Cap:</b> " + player.intStat.max + "\n";
+		combatStats += "<b>Wisdom Cap:</b> " + player.wisStat.max + "\n";
 		combatStats += "<b>Libido Cap:</b> " + maxes.lib + "\n";
 		combatStats += "<i>Libido Minimum:</i> " + mins.lib + "\n";
-		combatStats += "<b>Sensitivity Cap:</b> " + maxes.sens + "\n";
+		combatStats += "<b>Sensitivity Cap:</b> " + player.sensStat.max + "\n";
 		combatStats += "<i>Sensitivity Minimum:</i> " + mins.sens + "\n";
 		combatStats += "<i>Corruption Minimum:</i> " + mins.cor + "\n";
 		combatStats += "\n";
@@ -1184,32 +1184,32 @@ public class PlayerInfo extends BaseContent {
 		if (n > player.statPoints) n = player.statPoints;
 		switch (attribute) {
 			case "str":
-				m = maxes.str - int(player.str + player.tempStr);
+				m = player.strStat.core.max - int(player.strStat.core.value + player.tempStr);
 				if (m < n) n = m;
 				player.tempStr+=n;
 				break;
 			case "tou":
-				m = maxes.tou - int(player.tou + player.tempTou);
+				m = player.touStat.core.max - int(player.touStat.core.value + player.tempTou);
 				if (m < n) n = m;
 				player.tempTou+=n;
 				break;
 			case "spe":
-				m = maxes.spe - int(player.spe + player.tempSpe);
+				m = player.speStat.core.max - int(player.speStat.core.value + player.tempSpe);
 				if (m < n) n = m;
 				player.tempSpe+=n;
 				break;
 			case "int":
-				m = maxes.inte - int(player.inte + player.tempInt);
+				m = player.intStat.core.max - int(player.intStat.core.value + player.tempInt);
 				if (m < n) n = m;
 				player.tempInt+=n;
 				break;
 			case "wis":
-				m = maxes.wis - int(player.wis + player.tempWis);
+				m = player.wisStat.core.max - int(player.wisStat.core.value + player.tempWis);
 				if (m < n) n = m;
 				player.tempWis+=n;
 				break;
 			case "lib":
-				m = maxes.lib - int(player.lib + player.tempLib);
+				m = player.libStat.core.max - int(player.libStat.core.value + player.tempLib);
 				if (m < n) n = m;
 				player.tempLib+=n;
 				break;

@@ -34,7 +34,7 @@ public class Scorpinum extends Consumable {
 		if (changes < changeLimit && rand(2) == 0 && player.tou < 80) {
 			changes++;
 			outputText("\n\nAfter drinking the potion, you feel a bit tougher.");
-			dynStats("tou", 1);
+			player.MutagenBonus("tou", 1);
 		}
 		if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
 		//gain scorpion tail

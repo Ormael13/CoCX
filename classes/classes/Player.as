@@ -3151,7 +3151,7 @@ use namespace CoC;
 			//	race = "somewhat human mutant";
 			if (TopRace == "demon") {
 				if (TopScore >= 5) {
-					if (TopScore >= 16 && hasStatusEffect(StatusEffects.PlayerPhylactery)) {
+					if (TopScore >= 16 && hasPerk(PerkLib.Phylactery)) {
 						if (isTaur()) {
 							race = "";
 							race += mf("incubi-taur", "succubi-taur");
@@ -3181,7 +3181,7 @@ use namespace CoC;
 			if (TopRace == "devil") {
 				if (TopScore >= 7) {
 					if (TopScore >= 11) {
-						if (TopScore >= 16 && hasStatusEffect(StatusEffects.PlayerPhylactery)) {
+						if (TopScore >= 16 && hasPerk(PerkLib.Phylactery)) {
 							if (TopScore >= 21) {
 								if (isTaur()) race = "archdevil-taur";
 								else race = "archdevil";
@@ -4159,9 +4159,9 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (kitsuneScore() >= 12 && tailType == 13 && tailCount == 9)
 				grandchimeraCounter++;
-			if (demonScore() >= 16 && hasStatusEffect(StatusEffects.PlayerPhylactery))
+			if (demonScore() >= 16 && hasPerk(PerkLib.Phylactery))
 				grandchimeraCounter++;
-			if (devilkinScore() >= 16 && hasStatusEffect(StatusEffects.PlayerPhylactery))
+			if (devilkinScore() >= 16 && hasPerk(PerkLib.Phylactery))
 				grandchimeraCounter++;
 			if (sharkScore() >= 9 && vaginas.length > 0 && cocks.length > 0)
 				grandchimeraCounter++;
@@ -4269,7 +4269,7 @@ use namespace CoC;
 				if (arms.type == Arms.HUMAN)
 					demonCounter++;
 			}
-			if (hasStatusEffect(StatusEffects.PlayerPhylactery))
+			if (hasPerk(PerkLib.Phylactery))
 				demonCounter += 5;
 			if (horns.type == Horns.GOAT)
 				demonCounter -= 10;
@@ -4321,7 +4321,7 @@ use namespace CoC;
 				devilkinCounter++;
 			if (cor >= 60)
 				devilkinCounter++;
-			if (hasStatusEffect(StatusEffects.PlayerPhylactery))
+			if (hasPerk(PerkLib.Phylactery))
 				devilkinCounter += 5;
 			if (findPerk(PerkLib.ObsidianHeart) >= 0)
 				devilkinCounter++;
@@ -5490,7 +5490,7 @@ use namespace CoC;
 				gremlinCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				gremlinCounter += 50;
-			if (hasStatusEffect(StatusEffects.PlayerPhylactery))
+			if (hasPerk(PerkLib.Phylactery))
 				gremlinCounter += 5;
 			if (findPerk(PerkLib.BlackHeart) >= 0)
 				gremlinCounter++;
@@ -6426,7 +6426,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && oomukadeCounter >= 8)
 				oomukadeCounter += 1;
 			if (isGargoyle()) oomukadeCounter = 0;
-			oomukadeCounter = finalRacialScore(oomukadeCounter, Race.CENTIPEDE);
+			oomukadeCounter = finalRacialScore(oomukadeCounter, Race.OOMUKADE);
 			End("Player","racialScore");
 			return oomukadeCounter;
 		}
@@ -9372,7 +9372,7 @@ use namespace CoC;
 				if (this.hasKeyItem("Powboy") >= 0) minSen += 10;
 				if (this.hasKeyItem("M.G.S. bracer") >= 0) minSen += 15;
 			}
-			if (hasStatusEffect(StatusEffects.PlayerPhylactery)) minCor = 100;
+			if (hasPerk(PerkLib.Phylactery)) minCor = 100;
 			if (this.hasPerk(PerkLib.PurityElixir)) minCor -= (this.perkv1(PerkLib.PurityElixir) * 20);
 			if (minLib < 1) minLib = 1;
 			if (minCor < 0) minCor = 0;
@@ -9496,169 +9496,42 @@ use namespace CoC;
 		
 		public override function getAllMaxStats():Object {
 			Begin("Player","getAllMaxStats");
-			var maxStr:int = 100;
-			var maxTou:int = 100;
-			var maxSpe:int = 100;
-			var maxInt:int = 100;
-			var maxWis:int = 100;
 			var maxLib:int = 100;
 			var maxCor:int = 100;
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			
 			//Lowered caps due to too low lvl (yes every hero started from zero....right?)
-			if (level < 12) {
-				maxStr -= (5 * (12 - level));
-				maxTou -= (5 * (12 - level));
-				maxSpe -= (5 * (12 - level));
-				maxInt -= (5 * (12 - level));
-				maxWis -= (5 * (12 - level));
-				maxLib -= (5 * (12 - level));
-			}
-			
-			//Alter max speed if you have oversized parts. (Realistic mode)
-			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
-			{
-				//Balls
-				var tempSpeedPenalty:Number = 0;
-				var lim:int = isTaur() ? 9 : 4;
-				if (ballSize > lim && balls > 0) tempSpeedPenalty += Math.round((ballSize - lim) / 2);
-				//Breasts
-				lim = isTaur() ? BreastCup.I : BreastCup.G;
-				if (hasBreasts() && biggestTitSize() > lim) tempSpeedPenalty += ((biggestTitSize() - lim) / 2);
-				//Cocks
-				lim = isTaur() ? 72 : 24;
-				if (biggestCockArea() > lim) tempSpeedPenalty += ((biggestCockArea() - lim) / 6);
-				//Min-cap
-				var penaltyMultiplier:Number = 1;
-				penaltyMultiplier -= str * 0.1;
-				penaltyMultiplier -= (tallness - 72) / 168;
-				if (penaltyMultiplier < 0.4) penaltyMultiplier = 0.4;
-				tempSpeedPenalty *= penaltyMultiplier;
-				maxSpe -= tempSpeedPenalty;
-				if (maxSpe < 50) maxSpe = 50;
-			}
+			//if (level < 12) {
+				//maxStr -= (5 * (12 - level));
+				//maxTou -= (5 * (12 - level));
+				//maxSpe -= (5 * (12 - level));
+				//maxInt -= (5 * (12 - level));
+				//maxWis -= (5 * (12 - level));
+				//maxLib -= (5 * (12 - level));
+			//}
 			//Perks ahoy
 			Begin("Player","getAllMaxStats.perks");
-			if (findPerk(PerkLib.BasiliskResistance) >= 0 && findPerk(PerkLib.GorgonsEyes) >= 0)
-			{
-				if (findPerk(PerkLib.GorgonsEyesEvolved) >= 0) maxSpe += (5 * newGamePlusMod);
-				else maxSpe -= (5 * newGamePlusMod);
-			}
 			//Uma's Needlework affects max stats. Takes effect BEFORE racial modifiers and AFTER modifiers from body size.
 			//Caps strength from Uma's needlework.
-			if (findPerk(PerkLib.ChiReflowSpeed) >= 0)
-			{
-				if (maxStr > UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP)
-				{
-					maxStr = UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP;
-				}
-			}
 			//Caps speed from Uma's needlework.
-			if (findPerk(PerkLib.ChiReflowDefense) >= 0)
-			{
-				if (maxSpe > UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP)
-				{
-					maxSpe = UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP;
-				}
-			}
 			End("Player","getAllMaxStats.perks");
 			Begin("Player","getAllMaxStats.racial");
-			maxStr += statusEffectv1(StatusEffects.StrTouSpeCounter2);
-			maxTou += statusEffectv2(StatusEffects.StrTouSpeCounter2);
-			maxSpe += statusEffectv3(StatusEffects.StrTouSpeCounter2);
-			maxInt += statusEffectv1(StatusEffects.IntWisCounter2);
-			maxWis += statusEffectv2(StatusEffects.IntWisCounter2);
 			maxLib += statusEffectv1(StatusEffects.LibSensCounter2);
-			if (maxStr < 25) maxStr = 25;
-			if (maxTou < 25) maxTou = 25;
-			if (maxSpe < 25) maxSpe = 25;
-			if (maxInt < 25) maxInt = 25;
-			if (maxWis < 25) maxWis = 25;
 			if (maxLib < 25) maxLib = 25;
 			End("Player","getAllMaxStats.racial");
 			Begin("Player","getAllMaxStats.perks2");
-			maxStr += statusEffectv1(StatusEffects.StrTouSpeCounter1);
-			maxTou += statusEffectv2(StatusEffects.StrTouSpeCounter1);
-			maxSpe += statusEffectv3(StatusEffects.StrTouSpeCounter1);
-			maxInt += statusEffectv1(StatusEffects.IntWisCounter1);
-			maxWis += statusEffectv2(StatusEffects.IntWisCounter1);
 			maxLib += statusEffectv1(StatusEffects.LibSensCounter1);
-			if (findPerk(PerkLib.MantislikeAgility) >= 0) {
-				if (hasCoatOfType(Skin.CHITIN) && findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (20 * newGamePlusMod);
-				if ((skinType == Skin.SCALES && findPerk(PerkLib.ThickSkin) >= 0) || hasCoatOfType(Skin.CHITIN)) maxSpe += (15 * newGamePlusMod);
-				if (skinType == Skin.SCALES) maxSpe += (10 * newGamePlusMod);
-				if (findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.MantislikeAgilityEvolved) >= 0) {
-				if (hasCoatOfType(Skin.CHITIN) && findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (25 * newGamePlusMod);
-				if ((skinType == Skin.SCALES && findPerk(PerkLib.ThickSkin) >= 0) || hasCoatOfType(Skin.CHITIN)) maxSpe += (20 * newGamePlusMod);
-				if (skinType == Skin.SCALES) maxSpe += (15 * newGamePlusMod);
-				if (findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (10 * newGamePlusMod);
-			}
-			if (hasPerk(PerkLib.Lycanthropy)) {
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) {
-					maxStr += (10 * newGamePlusMod);
-					maxTou += (10 * newGamePlusMod);
-					maxSpe += (10 * newGamePlusMod);
-				}
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) {
-					maxStr += (20 * newGamePlusMod);
-					maxTou += (20 * newGamePlusMod);
-					maxSpe += (20 * newGamePlusMod);
-				}
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) {
-					maxStr += (30 * newGamePlusMod);
-					maxTou += (30 * newGamePlusMod);
-					maxSpe += (30 * newGamePlusMod);
-				}
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) {
-					maxStr += (40 * newGamePlusMod);
-					maxTou += (40 * newGamePlusMod);
-					maxSpe += (40 * newGamePlusMod);
-				}
-			}
 			if (hasPerk(PerkLib.ProductivityDrugs)) maxLib += perkv1(PerkLib.ProductivityDrugs);
-			if (hasPerk(PerkLib.IcyFlesh)) maxTou = 1;
 			End("Player","getAllMaxStats.perks2");
 			Begin("Player","getAllMaxStats.effects");
-			if (hasStatusEffect(StatusEffects.AndysSmoke)) {
-				maxSpe -= statusEffectv2(StatusEffects.AndysSmoke);
-				maxInt += statusEffectv3(StatusEffects.AndysSmoke);
-			}
-			var vthirst:VampireThirstEffect = statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
-			if (vthirst != null) {
-				maxStr += vthirst.currentBoost;
-				maxSpe += vthirst.currentBoost;
-				maxInt += vthirst.currentBoost;
-				maxLib += vthirst.currentBoost;
-			}
-			if (hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
-				maxStr += statusEffectv1(StatusEffects.UnderwaterCombatBoost);
-				maxSpe += statusEffectv2(StatusEffects.UnderwaterCombatBoost);
-			}
-			if (hasStatusEffect(StatusEffects.PlayerPhylactery)) maxInt += (75 * newGamePlusMod);
 			//Equipment
 			if (this.jewelryName == "Ring of Libido") maxLib += 5;
 			if (this.jewelryName2 == "Ring of Libido") maxLib += 5;
 			if (this.jewelryName3 == "Ring of Libido") maxLib += 5;
 			if (this.jewelryName4 == "Ring of Libido") maxLib += 5;
-			if (this.jewelryName == "Ring of Speed") maxSpe += 5;
-			if (this.jewelryName2 == "Ring of Speed") maxSpe += 5;
-			if (this.jewelryName3 == "Ring of Speed") maxSpe += 5;
-			if (this.jewelryName4 == "Ring of Speed") maxSpe += 5;
-			if (this.jewelryName == "Ring of Toughness") maxTou += 5;
-			if (this.jewelryName2 == "Ring of Toughness") maxTou += 5;
-			if (this.jewelryName3 == "Ring of Toughness") maxTou += 5;
-			if (this.jewelryName4 == "Ring of Toughness") maxTou += 5;
 			if (this.headjewelryName == "Crown of Libido") maxLib += 20;
-			if (this.headjewelryName == "Crown of Speed") maxSpe += 20;
-			if (this.headjewelryName == "Crown of Toughness") maxTou += 20;
 			if (this.necklaceName == "Necklace of Libido") maxLib += 25;
-			if (this.necklaceName == "Necklace of Speed") maxSpe += 25;
-			if (this.necklaceName == "Necklace of Toughness") maxTou += 25;
 			if (this.jewelryName == "Ring of Libido" && this.jewelryName2 == "Ring of Libido" && this.jewelryName3 == "Ring of Libido" && this.jewelryName4 == "Ring of Libido" && this.headjewelryName == "Crown of Libido" && this.necklaceName == "Necklace of Libido") maxLib += 15;
-			if (this.jewelryName == "Ring of Speed" && this.jewelryName2 == "Ring of Speed" && this.jewelryName3 == "Ring of Speed" && this.jewelryName4 == "Ring of Speed" && this.headjewelryName == "Crown of Speed" && this.necklaceName == "Necklace of Speed") maxSpe += 15;
-			if (this.jewelryName == "Ring of Toughness" && this.jewelryName2 == "Ring of Toughness" && this.jewelryName3 == "Ring of Toughness" && this.jewelryName4 == "Ring of Toughness" && this.headjewelryName == "Crown of Toughness" && this.necklaceName == "Necklace of Toughness") maxTou += 15;
 			//Key Items
 			if (hasPerk(PerkLib.GoblinoidBlood)) {
 				if (hasKeyItem("Drug injectors") >= 0) {
@@ -9670,31 +9543,12 @@ use namespace CoC;
 				if (hasKeyItem("Potent Drug injectors") >= 0) {
 					maxLib += 75;
 				}
-				if (hasKeyItem("Power bracer") >= 0) {
-					maxStr += 50;
-				}
-				if (hasKeyItem("Powboy") >= 0) {
-					maxStr += 75;
-				}
-				if (hasKeyItem("M.G.S. bracer") >= 0) {
-					maxStr += 100;
-				}
 			}
 			End("Player","getAllMaxStats.effects");
 			End("Player","getAllMaxStats");
-			maxStr = Math.max(maxStr,1);
-			maxTou = Math.max(maxTou,1);
-			maxSpe = Math.max(maxSpe,1);
-			maxInt = Math.max(maxInt,1);
-			maxWis = Math.max(maxWis,1);
 			maxLib = Math.max(maxLib,1);
 			maxCor = Math.max(maxCor,1);
 			return {
-				str:maxStr,
-				tou:maxTou,
-				spe:maxSpe,
-				inte:maxInt,
-				wis:maxWis,
 				lib:maxLib,
 				cor:maxCor
 			};
@@ -10436,7 +10290,7 @@ use namespace CoC;
 				}
 			}//+60/50-60
 			if (devilkinScore() >= 7) {
-				if (devilkinScore() >= 16 && hasStatusEffect(StatusEffects.PlayerPhylactery)) {
+				if (devilkinScore() >= 16 && hasPerk(PerkLib.Phylactery)) {
 					if (devilkinScore() >= 21) {
 						maxStrCap2 += (105 * newGamePlusMod);
 						maxIntCap2 += (150 * newGamePlusMod);
@@ -11834,6 +11688,30 @@ use namespace CoC;
 			if (hasPerk(PerkLib.MinotaurTesticlesFinalForm)) max += (90 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			return max;
 		}
+
+		public function MutagenBonus(statName: String, bonus: Number):void
+		{
+			removeCurse(statName, bonus)
+			if (buff("Mutagen").getValueOfStatBuff(""+statName+".mult") < 0.20){
+				buff("Mutagen").addStat(""+statName+".mult",0.01);
+			}
+		}
+
+		public function AlchemyBonus(statName: String, bonus: Number):void
+		{
+			removeCurse(statName, bonus)
+			if (buff("Alchemical").getValueOfStatBuff(""+statName+".mult") < 0.20){
+				buff("Alchemical").addStat(""+statName+".mult",0.01);
+			}
+		}
+
+		public function KnowledgeBonus(statName: String, bonus: Number):void
+		{
+			removeCurse(statName, bonus)
+			if (buff("Knowledge").getValueOfStatBuff(""+statName+".mult") < 0.20){
+				buff("Knowledge").addStat(""+statName+".mult",0.01);
+			}
+		}
 		
 		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {
 			//Easy mode cuts lust gains!
@@ -11872,7 +11750,6 @@ use namespace CoC;
 				}
 				
 				// Uma's Perkshit
-				if (findPerk(PerkLib.ChiReflowSpeed) >= 0 && dspe < 0) dspe *= UmasShop.NEEDLEWORK_SPEED_SPEED_MULTI;
 				if (findPerk(PerkLib.ChiReflowLust) >= 0 && dlib > 0) dlib *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
 				if (findPerk(PerkLib.ChiReflowLust) >= 0 && dsens > 0) dsens *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
 				

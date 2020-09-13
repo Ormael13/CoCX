@@ -110,19 +110,35 @@ public function alvinaThirdEncounterNo():void
 }
 public function alvinaThirdEncounterYes():void
 {
-	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 	outputText("Against your better judgment, you enter the cave. You proceed down into the depths, getting ever closer to the source of the lights.\n\nYou finally reach a large room filled with what looks to be various magical implements. ");
 	outputText("This is clearly the laboratory of a wizard and not the good kind. Pentagrams are etched everywhere. There's clearly humanoid bones on a table, and the room itself is decorated with quite a few Lethicite crystals -- proof of its owner's fiendish successes. You turn to leave the room, having seen more than enough, when you bump into a wall that wasn’t there earlier.\n\n");
 	outputText("\"<i>Leaving so soon [name]? I didn’t give you permission yet.</i>\"\n\n");
 	outputText("At the other side of the laboratory stands Alvina. She's smiling under her hood.\n\n");
 	outputText("\"<i>I see you finally made it here [name], you did… An excellent job. I can only applaud your competence. ");
-	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("You even defeated Lethice for me, which I will admit is highly convenient. ");
-	outputText("Though you had no idea that I set you on this path on purpose all along, did you? You could have gone anywhere, or got defeated by a random fiend and lost yourself, but you gladly acted like a perfect pawn and did everything just as I had planned.</i>\"\n\n");
+	if (flags[kFLAGS.DEFEATED_ZETAZ] > 0) {
+		outputText("Though you had no idea that I set you on this path on purpose all along, did you? You could have gone anywhere, or got defeated by a random fiend and lost yourself, but you gladly acted like a perfect pawn and did everything just as I had planned shuting down the factory and");
+		if (flags[kFLAGS.MET_MARAE_CORRUPTED] > 0) {
+			outputText("<i> corrupted Marae into a demon.</i>");
+		}
+		else
+		{
+			outputText("<i> saved that stupid tree god bitch</i>");
+		}
+		outputText("<i> setting up the stage for my plans.</i>");
+	}
+	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("You even defeated Lethice for me, which I will admit is highly convenient she was way to hardheaded for me to properly redirect as I pleased.</i>");
+	addButton(0, "Next", alvinaThirdEncounterYesContinue);
+}
+public function alvinaThirdEncounterYesContinue():void
+{
+	clearOutput();
+	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 	outputText("The woman laughs, her chuckling slowly turning increasingly youthful as she shrinks in size. The hooded woman is gone, replaced by a small demoness that stands before you. She doesn’t sport the usual features of a succubus, but is clearly a demon nonetheless. Her body looks mostly human in shape, save for her large hooves and furry clawed hands. A small pair of demonic wings spread from ");
 	outputText("between her shoulders, hidden by her long abyssal black hair. A goat's tail adorns her backside, and her horns curve backwards - just like a goat. She looks like some kind of demon despite the odd mix. Her subtle A cup breasts fit her 3 and a half feet tall body perfectly, although you would expect a succubus to have at least an E cup. Her eyes don’t exactly look like those of most succubi either, ");
 	outputText("as they shine with an inner malice even other demons might find disturbing. Her black sclera and glowing fiendish ember iris only making the intimidating appearance worse. She wears a pair of glasses and a somewhat revealing armor, which is unusual considering most demons prefer to wander around naked.\n\n");
 	outputText("\"<i>So… Done sizing up my perfect features? Sorry to disappoint, but if you thought I was human, that was a lie all along. In truth, I have stopped being human for several decades. Now, less about me and more about you. ");
-	if (!player.hasStatusEffect(StatusEffects.PlayerPhylactery)) outputText("I’m amazed a being still carrying a soul would achieve what you did. ");
+	if (!player.hasPerk(PerkLib.Phylactery)) outputText("I’m amazed a being still carrying a soul would achieve what you did. ");
 	outputText("Your prowess thus far have more than earned my interest. Perhaps you were just lucky... Or perhaps, like me, you are destined to a greater calling. Regardless, you served my goals well until now and I am highly interested in seeing what else you can accomplish.</i>\"\n\n");
 	outputText("A greater calling? Like what?\n\n");
 	outputText("\"<i>Power, pure and simple. You desire power, and to further increase it, the only proper path is to beseech those that possess it. Most academics seek to obtain true mastery of magic, although most are not willing to sacrifice everything for their study. After many years of researching forbidden knowledge, performing tedious experiments and depraved rituals, I came to one conclusion: ");
@@ -716,7 +732,7 @@ public function alvinaCampStudy():void
 				else {
 					if (rand(2) == 0 && date.month == 7) {
 						outputText("\"<i>Did you know that Lethicite can be used as icing for cakes? A decent demon should have a frozen soul on every dessert really. I also heard only Lethice can afford such a delicacy daily. My birthday is in a few days so I hadn’t considered until now whether I want a cake or not.</i>\" You back away before she considers using yours.");
-						if (!player.hasStatusEffect(StatusEffects.PlayerPhylactery)) outputText(" You back away before she considers using yours.");
+						if (!player.hasPerk(PerkLib.Phylactery)) outputText(" You back away before she considers using yours.");
 						outputText("\n\n");
 					}
 					else {
@@ -799,8 +815,8 @@ public function alvinaCampAdvancedStudy():void
 		outputText("She jumps to sit on a nearby stool and crosses her legs, tapping her chin as she’s seemingly remembering something important.\n\n");
 		outputText("\"<i>Oh! That's right, a last warning. In case you had ‘fantasies’ of rebellion against me... I had a few extra components inserted into the spell used to create your phylactery. Should you attempt anything ‘out of line’ I can force it to explode as easily as snapping my finger.</i>\"\n\n");
 		outputText("You realize Alvina has your very life in the palm of that cute paw of hers. It's a terrible realization but at the same time, it dawns on you that you have no reason to antagonize her. Truth be told, having a good relation with a font of power like her could only prove beneficial could it not?\n\n");
-		player.createStatusEffect(StatusEffects.PlayerPhylactery, 0, 0, 0, 0);
 		player.addStatusValue(StatusEffects.AlvinaTraining2, 1, 1);
+		player.createPerk(PerkLib.Phylactery, 0, 0, 0, 0);
 		if (player.cor < 100) player.cor = 100;
 		doNext(camp.returnToCampUseSixHours);
 	}

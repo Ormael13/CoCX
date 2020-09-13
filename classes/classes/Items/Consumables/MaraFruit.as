@@ -43,13 +43,13 @@ public class MaraFruit extends Consumable{
 		//-Increase strength up to 80.
 		if (player.str < 80 && changes < changeLimit && rand(4) == 0) {
 			outputText("\n\nYour fill your muscles filling with plants might.");
-			dynStats("str", 1);
+			player.MutagenBonus("str", 1);
 			changes++;
 		}
 		//-Increase toughness up to 100.
 		if (player.tou < 100 && changes < changeLimit && rand(4) == 0) {
 			outputText("\n\nYour body suddenly feels tougher and more resilient just like a tree.");
-			dynStats("tou", 1);
+			player.MutagenBonus("tou", 1);
 			changes++;
 		}
 		//-Reduces speed down to 60.

@@ -2579,12 +2579,12 @@ public class Masturbation extends BaseContent {
 				outputText("Denied a single touch, your ");
 				if (player.hasCock()) {
 					if (player.hasVagina())
-						outputText(player.multiCockDescriptLight() + " and " + player.vaginaDescript());
+						outputText(player.multiCockDescriptLight() + " and [pussy]");
 					else outputText(player.cockDescript());
 					//Set as plural if multi dick or dick and vag.
 					if (player.hasVagina() || player.cockTotal() > 1) plural = true;
 				}
-				else outputText(player.vaginaDescript());
+				else outputText("[pussy]");
 				if (plural)
 					outputText(" leak their own fluid, quivering with ache and need that you can't reach to satisfy.");
 				else outputText(" leaks its own fluids, quivering with ache and need that you can't reach to satisfy.");
@@ -3558,8 +3558,8 @@ public class Masturbation extends BaseContent {
 				"\"<i>Hey sis feel in the mood for a ride?</i>\"\n\n" +
 				"\"<i>Yeah, we can’t fight properly while aroused like this, close the curtain.</i>\"\n\n" +
 				"She doesn’t need to say another word as you close your petals in order to give yourself some well-needed privacy. " +
-				"You gently insert your finger in her nectar drenched pussy as your twin plays with your nectar-laden breast, suckling on your nipples. " +
-				"The two of you moan in delight. Feeling both your chest and her cunt, you can’t help but slip your finger deeper, " +
+				"You gently insert your finger in her nectar drenched [pussy] as your twin plays with your nectar-laden breast, suckling on your nipples. " +
+				"The two of you moan in delight. Feeling both your [chest] and her [pussy], you can’t help but slip your finger deeper, " +
 				"seeking more pleasure as she mashes and squeezes both of your tits together trying to make you leak that excess nectar out. " +
 				"The connection between your senses is so perfect, it feels like having four sets of hands massaging your cunt and milking your tits at the same time, " +
 				"and the best about it is you can pinpoint your own G spots! You scream together in perfect sync.\n\n" +

@@ -664,6 +664,21 @@ import coc.xxc.StoryContext;
 			player.dynStats.apply(player, args);
 		}
 
+		protected function MutagenBonus(statName: String, bonus: Number):void
+		{
+			player.MutagenBonus(statName,bonus);
+		}
+
+		protected function AlchemyBonus(statName: String, bonus: Number):void
+		{
+			player.AlchemyBonus(statName,bonus);
+		}
+
+		protected function KnowledgeBonus(statName: String, bonus: Number):void
+		{
+			player.KnowledgeBonus(statName,bonus);
+		}
+
 		protected function silly():Boolean
 		{
 			return EngineCore.silly();

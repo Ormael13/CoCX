@@ -2721,15 +2721,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(!monster.plural) outputText("its");
 		else outputText("their");
 		outputText(" movement.\n\n");
-		var EntangleStrNerf:Number;
-		var EntangleSpeNerf:Number;
-		EntangleStrNerf = Math.round(monster.str * .5);
-		EntangleSpeNerf = Math.round(monster.spe * .5);
-		if (player.hasPerk(PerkLib.RacialParagon)) EntangleSpeNerf *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) EntangleSpeNerf *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) EntangleSpeNerf *= 1.50;
-		player.createStatusEffect(StatusEffects.AlrauneEntangle,EntangleStrNerf,EntangleSpeNerf,0,0);
-		monster.statStore.addBuffObject({str:-EntangleStrNerf,spe:-EntangleStrNerf}, "EntangleNerf",{text:"EntangleNerf"});
+		var EntangleNerf:Number;
+		EntangleNerf = 0.5;
+		if (player.hasPerk(PerkLib.RacialParagon)) EntangleNerf = 0.75;
+		if (player.hasPerk(PerkLib.Apex)) EntangleNerf = 0.80;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) EntangleNerf = 0.90;
+		player.createStatusEffect(StatusEffects.AlrauneEntangle,EntangleNerf,EntangleNerf,0,0);
+		monster.statStore.addBuffObject({"str.mult":-EntangleNerf,"spe.mult":-EntangleNerf}, "EntangleNerf",{text:"EntangleNerf"});
 		enemyAI();
 	}
 
