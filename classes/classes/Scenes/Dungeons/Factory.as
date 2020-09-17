@@ -249,7 +249,9 @@ use namespace CoC;
 				player.sexReward("cum");
 				player.orgasm();
 				dynStats("int", -player.cor/10, "lib", 2*player.cor, "cor", 20);
-				player.createPerk(PerkLib.ProductivityDrugs,player.cor,10,player.lib,0);	//minlibido += CURRENT cor / 2 && cumproduction += CURRENT lib (same as cum witch blessing) && milkproduction += CURRENT lib (same as level1 milkmaid)
+				//first is libido second is corruption third is production
+				player.createPerk(PerkLib.ProductivityDrugs,30,10,100,0);	//minlibido += CURRENT cor / 2 && cumproduction += CURRENT lib (same as cum witch blessing) && milkproduction += CURRENT lib (same as level1 milkmaid)
+				player.buff("ProductivityDrugs").setStat("lib.mult",0.30).withText("Productivity Drugs");
 				doNext(roomMainChamber);
 			}
 		}

@@ -1220,8 +1220,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Potent Drug injectors", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Potent Drug injectors");
 		player.removeKeyItem("Improved Drug injectors");
-		player.lib += 25;
-		player.statStore.addBuff('sens',+5,'PotentDrugInjector',{text:'Potent Drug injectors'})
+		player.statStore.addBuffObject({'lib.mult':+25,'sens':+5},'PotentDrugInjector',{text:'Potent Drug injectors'})
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
 		else doNext(camp.returnToCampUseTwelveHours);
@@ -1235,8 +1234,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Improved Drug injectors", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Improved Drug injectors");
 		player.removeKeyItem("Drug injectors");
-		player.lib += 25;
-		player.statStore.addBuff('sens',+5,'ImprovedDrugInjector',{text:'Improved Drug injectors'})
+		player.statStore.addBuffObject({'lib.mult':+25,'sens':+5},'ImprovedDrugInjector',{text:'Improved Drug injectors'})
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
 		else doNext(camp.returnToCampUseEightHours);
@@ -1249,8 +1247,7 @@ public class Lumi extends BaseContent {
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Drug injectors is ready.\n\n");
 		player.createKeyItem("Drug injectors", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Drug injectors");
-		player.lib += 25;
-		player.statStore.addBuff('sens',+5,'DrugInjector',{text:'Drug injectors'})
+		player.statStore.addBuffObject({'lib.mult':+25,'sens':+5},'DrugInjector',{text:'Drug injectors'})
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
 		else doNext(camp.returnToCampUseFourHours);

@@ -739,10 +739,7 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 		if(player.inte > 35) {
 			dynStats("int", -0.1);
 		}
-		if(player.lib < 50) {
-			player.lib = 50;
-			dynStats("lib", .1);
-		}
+		player.trainStat("lib", 1, 100);
 		outputText("\n\n");
 		//(Tits b' gone) 
 		if(player.biggestTitSize() >= 1) {

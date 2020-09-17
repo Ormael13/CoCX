@@ -2,6 +2,7 @@ package classes
 {
 import classes.StatusEffects.Combat.*;
 import classes.StatusEffects.CombatStatusEffect;
+import classes.StatusEffects.HeatEffect;
 import classes.StatusEffects.VampireThirstEffect;
 
 /**
@@ -364,7 +365,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const GolemancerShop:StatusEffectType                 = mk("Golemancer Shop");
 		public static const Groundpound:StatusEffectType                    = mk("Groundpound");
 		public static const HairdresserMeeting:StatusEffectType             = mk("hairdresser meeting");
-		public static const Heat:StatusEffectType                           = mk("heat");
+		public static const Heat:StatusEffectType                           = HeatEffect.TYPE;
 		public static const HinezumiCoat:StatusEffectType                   = mk("Hinezumi Coat");
 		public static const HorseWarning:StatusEffectType                   = mk("horse warning");
 		public static const HydraRegenerationDisabled:StatusEffectType  	= mk("Hydra Regeneration Disabled");

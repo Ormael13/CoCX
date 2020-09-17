@@ -519,7 +519,7 @@ private function drinkSomeUrtaPostBirthTitMilk():void {
 	else outputText("children");
 	outputText(" together... but that's a poor substitute if you don't ever come back.  Please, be careful with yourself, [name],</i>\" she tells you solemnly.  You kiss her goodbye, giving her shaft a teasing grope then step out of the room.");
 	//Maybe lower Libido by -1?//
-	dynStats("lib", -1, "lus", 10);
+	dynStats("lus", 10);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1508,7 +1508,6 @@ private function weirdUrtaCravingsConclusion():void {
 	else if(player.tongue.type == Tongue.DRACONIC) outputText("draconic ");
 	outputText("tongue.  She yips in surprise, then moans as she eagerly sinks into your embrace, kissing you back with equal passion.  She suddenly breaks it, looking apologetic.  \"<i>Sorry, [name], but if we keep that up, I'll be wanting another round, and I have things to do.</i>\"  She pats your face apologetically and shifts herself, somewhat clumsily, out of the bed, gathering her clothes and starting to dress herself.");
 	outputText("\n\nTaking that as your cue, you do likewise, and the two of you go your separate ways after locking the apartment up behind you.");
-	dynStats("lib", -.5);
 	doNext(camp.returnToCampUseTwoHours);
 }
 

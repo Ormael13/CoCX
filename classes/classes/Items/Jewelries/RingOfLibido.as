@@ -27,12 +27,12 @@ package classes.Items.Jewelries
 		}
 		
 		override public function playerEquip():Jewelry {
-			game.player.lib += 5;
+			game.player.statStore.addBuff('lib',+5,'RingOfLibido',{text:'Ring Of Libido'});
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():Jewelry {
-			game.player.lib -= 5;
+			game.player.statStore.removeBuffs('RingOfLibido');
 			return super.playerRemove();
 		}
 		

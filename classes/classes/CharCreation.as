@@ -154,7 +154,6 @@ import coc.view.MainView;
             }
 
 			model.player = player;
-			player.lib = 15;
 			player.cor = 15;
 			player.soulforce = 50;
 			player.wrath = 0;

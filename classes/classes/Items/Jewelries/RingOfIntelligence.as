@@ -27,7 +27,7 @@ package classes.Items.Jewelries
 		}
 		
 		override public function playerEquip():Jewelry {
-			game.player.statStore.addBuff('int',+5,'tag',{text:'RingOfIntelligence'});
+			game.player.statStore.addBuff('int',+5,'RingOfIntelligence',{text:'Ring Of Intelligence'});
 			return super.playerEquip();
 		}
 		

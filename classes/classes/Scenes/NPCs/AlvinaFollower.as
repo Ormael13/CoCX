@@ -631,6 +631,9 @@ public function alvinaMainCampSexMenuBlasphemeOfBaphomet():void
 	dynStats("lib", 2 + rand(3));
 	dynStats("str", 2 + rand(3));
 	dynStats("inte", 2 + rand(3));
+	player.trainStat("str",2,100)
+	player.trainStat("inte",2,100)
+	player.trainStat("lib",2,100)
 	alvinaMainCampSexMenu3();
 }
 public function alvinaMainCampSexMenuContractOfMephistopheles():void
@@ -750,23 +753,29 @@ public function alvinaCampStudy():void
 		outputText("\"<i>Still daydreaming in the middle of my lectures [name]?</i>\"\n\n");
 		outputText("You quickly jerk back into action to show you're listening. Alvina resumes explaining the universal principle of how to channel desire into power. You learn a lot, but the way she flaunts her body, and the many innuendos she punctuates the lesson with, make you flush red in arousal.  During the entire lesson, your teacher is teasing you, ");
 		outputText("and there's nothing you can do about it but wait patiently for the end of the lecture. By the time you get to doing something practical, you are so aroused you feel your lust rise uncontrollably just from casting those spells as wild fantasies assault your mind.\n\n");
-		if (player.inte > 70 && player.lib > 70 && flags[kFLAGS.ALVINA_FOLLOWER] == 15) {
+		if (player.intStat.core.value > 70 && player.libStat.core.value > 70 && flags[kFLAGS.ALVINA_FOLLOWER] == 15) {
 			outputText("You finally achieved complete mastery over your lust, conquering your arousal and turning it into a weapon to use against your foe as you unleash a massive blast of black magic on the target dummy.\n\n");
 			outputText("\"<i>Very good [name], you finally achieved mastery of the theory. Tomorrow we will discuss more advanced principles.</i>\" She dismisses you with these congratulations as you head back to camp feeling both sexy and powerful.\n\n");
 			player.createStatusEffect(StatusEffects.AlvinaTraining, 0, 0, 0, 0);
-			dynStats("inte", 10, "lib", 10, "cor", 3);
+			dynStats("inte", 4, "lib", 4, "cor", 3);
+			player.trainStat("inte",4,100)
+			player.trainStat("lib",4,100)
 			flags[kFLAGS.ALVINA_FOLLOWER] = 16;
 		}
-		else if (player.inte > 35 && player.lib > 35 && flags[kFLAGS.ALVINA_FOLLOWER] == 14) {
+		else if (player.intStat.core.value > 35 && player.libStat.core.value > 35 && flags[kFLAGS.ALVINA_FOLLOWER] == 14) {
 			outputText("Against all odds, you manage to hold your lust in check and cast the spells properly.\n\n");
 			outputText("\"<i>That will be all for today [name], we will continue tomorrow.</i>\" You head back to camp feeling extremely pent up, but also smarter.\n\n");
 			dynStats("inte", 7, "lib", 7, "cor", 2);
+			player.trainStat("inte",7,100)
+			player.trainStat("lib",7,100)
 			flags[kFLAGS.ALVINA_FOLLOWER] = 15;
 		}
 		else {
 			outputText("Unable to hold back any longer, you orgasm as you cast the spell. Alvina is amused by your lack of endurance.\n\n");
 			outputText("\"<i>Well aren’t you the lewd student. Regardless, you will need to practice until you develop some resilience. Come back tomorrow to resume your training.</i>\" She dismisses you, leaving you to clean up your mess. At least you learned a few new things.\n\n");
-			dynStats("inte", 4, "lib", 4, "cor", 1);
+			dynStats("inte", 10, "lib", 10, "cor", 10);
+			player.trainStat("inte",10,100)
+			player.trainStat("lib",10,100)
 			flags[kFLAGS.ALVINA_FOLLOWER] = 14;
 		}
 		doNext(camp.returnToCampUseSixHours);

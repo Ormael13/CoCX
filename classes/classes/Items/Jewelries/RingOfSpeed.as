@@ -27,7 +27,7 @@ package classes.Items.Jewelries
 		}
 		
 		override public function playerEquip():Jewelry {
-			game.player.statStore.addBuff('spe',+5,'tag',{text:'RingOfSpeed'});
+			game.player.statStore.addBuff('spe',+5,'RingOfSpeed',{text:'Ring Of Speed'});
 			return super.playerEquip();
 		}
 		

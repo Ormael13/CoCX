@@ -27,7 +27,7 @@ package classes.Items.Necklaces
 		}
 		
 		override public function playerEquip():Necklace {
-			game.player.statStore.addBuff('sens',+25,'NecklaceOfSensitivity',{text:'NecklaceOfSensitivity'});
+			game.player.statStore.addBuff('sens',+25,'NecklaceOfSensitivity',{text:'Necklace Of Sensitivity'});
 			return super.playerEquip();
 		}
 		

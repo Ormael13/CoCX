@@ -27,7 +27,7 @@ package classes.Items.HeadJewelries
 		}
 		
 		override public function playerEquip():HeadJewelry {
-			game.player.statStore.addBuff('int',+20,'tag',{text:'CrownOfIntelligence'});
+			game.player.statStore.addBuff('int',+20,'CrownOfIntelligence',{text:'Crown Of Intelligence'});
 			return super.playerEquip();
 		}
 		

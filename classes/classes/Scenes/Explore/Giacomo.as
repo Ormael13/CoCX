@@ -780,7 +780,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				player.HP = int(player.maxHP() * .15);
 			//Maybe add a random chance of losing a random transformation with a smaller chance of losing ALL transformations except gender changes. This will probably be a bitch to implement.
 			player.removeStatusEffect(StatusEffects.Infested);
-			dynStats("lib", -1, "lus", -99, "cor", -4);
+			dynStats("lus", -99, "cor", -4);
 			player.gems -= 175;
 			statScreenRefresh();
 			inventory.takeItem(consumables.VITAL_T, camp.returnToCampUseOneHour);
@@ -992,7 +992,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 					else outputText("She embraces you, moaning inhumanly, and reflexively digs her claws into your back. Searing with lust, the pain means little to you as you only feel the sensation of your body forcing your fluids out of your body and into hers. You slam your pelvis into hers");
 					outputText(", as if to force yourself to cum harder than you already are capable of, prompting an equally pleasurable reaction from her.\n\n");
 					outputText("For the first time since you have had your 'visits', the succubus appears winded. Without another word, her muscles release your manhood, which she quickly licks clean of your intermingled juices.  She tongues your face in lustful approval and flies away. You quickly fall asleep, utterly spent.  ");
-					dynStats("lib", -1);
 				}
 			}
 			else if(player.gender == 3) {

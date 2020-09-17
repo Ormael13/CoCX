@@ -2053,27 +2053,27 @@ public function FightHellfireSnail():void {
 			StatsMenuWis();
 		}
 		public function AddLib1():void {
-			player.lib = player.lib + 1;
+			player.libStat.core.value += 1;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function AddLib2():void {
-			player.lib = player.lib + 10;
+			player.libStat.core.value += 10;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function AddLib3():void {
-			player.lib = player.lib + 50;
+			player.libStat.core.value += 50;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function AddLib4():void {
-			player.lib = player.lib + 200;
+			player.libStat.core.value += 200;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function AddLib5():void {
-			player.lib = player.lib + 1000;
+			player.libStat.core.value += 1000;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
@@ -2253,27 +2253,27 @@ public function FightHellfireSnail():void {
 			StatsMenuWis();
 		}
 		public function SubLib1():void {
-			player.lib = player.lib - 1;
+			player.libStat.core.value -= 1;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function SubLib2():void {
-			player.lib = player.lib - 10;
+			player.libStat.core.value -= 10;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function SubLib3():void {
-			player.lib = player.lib - 50;
+			player.libStat.core.value -= 50;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function SubLib4():void {
-			player.lib = player.lib - 200;
+			player.libStat.core.value -= 200;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function SubLib5():void {
-			player.lib = player.lib - 1000;
+			player.libStat.core.value -= 1000;
 			statScreenRefresh();
 			StatsMenuLib();
 		}

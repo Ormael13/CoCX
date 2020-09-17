@@ -859,7 +859,6 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//{+10 Affection}
 			flags[kFLAGS.AMILY_AFFECTION] += 10;
 			//{-5 Libido}
-			dynStats("lib", -2);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -6345,7 +6344,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			else outputText(cockDescript(x) + " throb");
 			outputText("; the very idea of a mousy slut eager for cum distills into one massive load of cum, and you dump it all in her mouth.\n\nYou sigh, sated for now and leave her to clean herself up.");
 			player.orgasm();
-			dynStats("lib", -2, "cor", 5);
+			dynStats("cor", 5);
             if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
 		}
@@ -6383,7 +6382,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("Finally done, you let go of her and get up; she proceeds to slump down and give a small burp of satisfaction, then drift off into sleep. You untie her and proceed to get dressed; you give her a light pat on the thigh and return to your camp. You'll have to do this again sometime later...");
 			player.sexReward("saliva");
-			dynStats("lib", -2, "cor", 5);
+			dynStats("cor", 5);
             if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
 		}
@@ -6486,7 +6485,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			player.orgasm();
 
-			dynStats("lib", -2, "cor", 5);
+			dynStats("cor", 5);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -6609,7 +6608,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			player.orgasm();
 
-			dynStats("lib", -2, "cor", 5);
+			dynStats("cor", 5);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -7641,7 +7640,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			amilyPreggoChance();
 			player.sexReward("vaginalFluids","Dick");
-			dynStats("lib", -1, "sen", -1);
+			dynStats("sen", -1);
 			doNext(camp.returnToCampUseOneHour);
 		}
 

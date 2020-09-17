@@ -527,6 +527,7 @@ public class Holidays {
                     +"\n\nAs you head back to camp to prepare for your next adventure, you realize that you had some really, really fucked up dreams.  You hope you have more tomorrow night.");
             //Add ten more corruption.
             player.dynStats("lus", 20, "cor", 10, "scale", false);
+            player.buff("FeraBlessing").setStat("lib.mult", 5).withText("Fera Blessing");
             EngineCore.doNext(SceneLib.camp.returnToCampUseFourHours);
         }
 
@@ -580,6 +581,7 @@ public class Holidays {
             EngineCore.outputText("You awaken fully dressed with a familiar ache between your legs.  Damn, that was a good nap.  You rise, stretching as you rub your back, sore from lying against a tree for so long.  You suppose you could find yourself something to fight and fuck, but you ought to head back to camp first.  You idly reach into your [armor] and slip a finger into your [vagina], feeling your tight walls instinctively clamp down and squeeze it.  It's nice, but it's just so much better when you can do that to a captive cock until it has no choice but to impregnate you with its hot seed.  What better way to save the world than by making sure that the strongest get to breed as often as possible?"
                     +"\n\nAs you head back to camp to prepare for your next adventure, you realize that you had some really, really fucked up dreams.  You hope you have more tomorrow night.");
             player.dynStats("lus", 20, "cor", 10, "scale", false);
+            player.buff("FeraBlessing").setStat("lib.mult", 5).withText("Fera Blessing");
             EngineCore.doNext(SceneLib.camp.returnToCampUseFourHours);
             //Add ten more corruption.
         }
@@ -618,6 +620,7 @@ public class Holidays {
             //Add ten more corruption.
             //Add 50 lust.
             player.dynStats("lus", 20, "cor", 10);
+            player.buff("FeraBlessing").setStat("lib.mult", 5).withText("Fera Blessing");
             EngineCore.doNext(SceneLib.camp.returnToCampUseFourHours);
         }
     }

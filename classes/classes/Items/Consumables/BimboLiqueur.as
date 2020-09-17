@@ -59,10 +59,7 @@ public class BimboLiqueur extends Consumable {
 				game.player.removePerk(PerkLib.BroBrains);
 				game.player.createPerk(PerkLib.FutaFaculties, 0, 0, 0, 0);
 				game.player.createPerk(PerkLib.FutaForm, 0, 0, 0, 0);
-				if (game.player.lib < 50) {
-					game.player.lib = 50;
-					player.MutagenBonus("lib", 0.1);
-				}
+				player.MutagenBonus("lib", 0.1);
 			}
 			else {
 				outputText("You pop the cork from the flask and are immediately assaulted by a cloying, spiced scent that paints visions of a slutty slave-girl's slightly-spread folds.  Wow, this is some potent stuff!  Well, you knew what you were getting into when you found this bottle!  You open wide and guzzle it down, feeling the fire of alcohol burning a path to your belly.  The burning quickly fades to a pleasant warmth that makes you light-headed and giggly.\n\n");

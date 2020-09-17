@@ -301,7 +301,7 @@ private function readSharkEdgingGuideLOL():void {
 
 	outputText("You peruse the strange book in an attempt to refine your manners, though you're almost offended by the stereotypes depicted within.  Still, the book has some good ideas on how to maintain chastity and decorum in the face of lewd advances.\n\n");
 	//(-2 Libido, -2 Corruption)
-	dynStats("lib", -2, "cor", -2);
+	dynStats("cor", -2);
 	
 	outputText("After reading through the frilly book you give it back to Izma who delicately places it back in the trunk.  You say your goodbyes and then ");
 	if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] != 1) outputText("head back to your camp.");
@@ -2905,7 +2905,7 @@ private function entropyGuideByStephenHawking():void {
 	//(Usual random stat increase from the E.Guide)
 	outputText("You peruse the strange book in an attempt to refine your manners, though you're almost offended by the stereotypes depicted within.  Still, the book has some good ideas on how to maintain chastity and decorum in the face of lewd advances.\n\n");
 	//(-2 Libido, -2 Corruption)
-	dynStats("lib", -2, "cor", -2);
+	dynStats("cor", -2);
  
 	outputText("As time passes you realize that you do have other things to do.  You thank Izma for her company and get up to leave.  \"<i>All right, thanks for sitting with me [name].  You go on ahead, I'm just going to read some more of this,</i>\" she replies, not even looking up from the pages of her book.\n\n");
 	doNext(camp.returnToCampUseOneHour);

@@ -2203,15 +2203,15 @@ private function SparrableNPCsMenu():void {
 		if (randText == 0) {
 			if (player.cor < 33) {
 				outputText("A wave of nostalgia washes over you as you remember your greatest moments from your childhood.");
-				dynStats("cor", -1, "lib", -1, "lust", -30, "scale", false);
+				dynStats("cor", -1, "lust", -30, "scale", false);
 			}
 			if (player.cor >= 33 && player.cor < 66) {
 				outputText("A wave of nostalgia washes over you as you remember your greatest moments from your childhood. Suddenly, your memories are somewhat twisted from some of the perverted moments. You shake your head and just relax.");
-				dynStats("cor", -0.5, "lib", -1, "lust", -20, "scale", false);
+				dynStats("cor", -0.5, "lust", -20, "scale", false);
 			}
 			if (player.cor >= 66) {
 				outputText("A wave of nostalgia washes over you as you remember your greatest moments from your childhood. Suddenly, your memories twist into some of the dark and perverted moments. You chuckle at that moment but you shake your head and focus on relaxing.");
-				dynStats("cor", 0, "lib", -1, "lust", -10, "scale", false);
+				dynStats("cor", 0, "lust", -10, "scale", false);
 			}
 		}
 		//Greatest moments GO!
@@ -2764,7 +2764,7 @@ private function SparrableNPCsMenu():void {
 		if (player.ballSize < 1) player.ballSize = 1;
 		outputText("You feel your scrotum shift, shrinking down along with your [balls].  ");
 		outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.  ");
-		dynStats("lib", -2, "lus", -10);
+		dynStats("lus", -10);
 		player.consumeItem(consumables.REDUCTO, 1);
 		doNext(camp.returnToCampUseOneHour);
 	}

@@ -2464,7 +2464,7 @@ private function flipUrtaTheBird():void {
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] -= 2;
 	if(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] < 0) flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] = 0;
 	//(gain lust and lose corruption + libido)
-	dynStats("lib", -2, "lus", 35, "cor", -1);
+	dynStats("lus", 35, "cor", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
 //[Jerk Off And Watch]

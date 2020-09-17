@@ -449,7 +449,7 @@ public class Evangeline1 extends Monster
 			this.fatigue = 0;
 			this.gems = 0;
 			this.drop = NO_DROP;
-			this.lib += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.libStat.core.value += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
 			checkMonster();
 		}

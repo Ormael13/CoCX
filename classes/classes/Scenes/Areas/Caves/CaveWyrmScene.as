@@ -107,7 +107,7 @@ public function winningOverCaveWyrmWithCaveWyrmDick():void {
 	outputText("She just shrugs. \"<i>Well the bad news is that I still need to get nourishment for the eggs so I can't stay with you, but at least you'll probably make a few hatchling.</i>\" She says before lifting up. While your still recovering from the subsequant orgasms you hear her footsteps carrying her away, and by the time you look, the Cave Wyrm is gone.\n\n");
 	player.sexReward("vaginalFluids");
 	outputText("\n\nThe residual effect of her vaginal acid seems to have enhanced your member sensitivity as well as your libido by a notch.");
-	player.lib+=5;
+	dynStats("lib"+5);
 	player.addCurse('sens',+1)
 	cleanupAfterCombat();
 }

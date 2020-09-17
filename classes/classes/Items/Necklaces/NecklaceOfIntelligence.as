@@ -27,7 +27,7 @@ package classes.Items.Necklaces
 		}
 		
 		override public function playerEquip():Necklace {
-			game.player.statStore.addBuff('int',+25,'tag',{text:'NecklaceOfIntelligence'});
+			game.player.statStore.addBuff('int',+25,'NecklaceOfIntelligence',{text:'Necklace Of Intelligence'});
 			return super.playerEquip();
 		}
 		

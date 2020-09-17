@@ -27,7 +27,7 @@ package classes.Items.Necklaces
 		}
 		
 		override public function playerEquip():Necklace {
-			game.player.statStore.addBuff('spe',+25,'tag',{text:'NecklaceOfSpeed'});
+			game.player.statStore.addBuff('spe',+25,'NecklaceOfSpeed',{text:'Necklace Of Speed'});
 			return super.playerEquip();
 		}
 		

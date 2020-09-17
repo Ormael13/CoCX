@@ -345,10 +345,6 @@ private function joeysMassageWifNoExtraJizz():void {
 	}
 	//(reduces libido significantly if very high, reduces lust, and reduces sensitivity to 40)
 	player.orgasm();
-	if(player.lib > 20) dynStats("lib", -.5);
-	if(player.lib > 80) dynStats("lib", -1);
-	if(player.lib > 60) dynStats("lib", -1);
-	if(player.sens > 40) dynStats("lib", -.5);
 	doNext(camp.returnToCampUseOneHour);
 }
 	
@@ -397,10 +393,6 @@ private function joeysMassageWithEXTRASpooge():void {
 	outputText("Joey leaves, his poofy tail bobbing back and forth.  You can see his thong is distended, virtually packed with his own still-pumping spooge, and you marvel at his perverse ingenuity when you realize his thong is waterproofed and shaped to guide all the jizz between his thighs and into his back-door.  Kinky.");
 	player.cumMultiplier += 2;
 	player.orgasm();
-	if(player.lib > 20) dynStats("lib", -.5);
-	if(player.lib > 80) dynStats("lib", -1);
-	if(player.lib > 60) dynStats("lib", -1);
-	if(player.sens > 40) dynStats("sen", -4);
 	doNext(camp.returnToCampUseOneHour);
 }
 private function joeyBigBalls():void {
@@ -978,7 +970,7 @@ private function eggsInButt(eggButt:Boolean = false):void {
 	
 	outputText("\n\nJoey leaves, his rabbit tail bobbing to and fro.  You see his thong is distended, practically packed to the brim with more of his still-drooling chocolatey cum.  As usual, the waterproof thong seems to be pumping it all between his soft thighs and right into his already egg-filled asshole.  He really does like feeling full back there.  Kinky.");
 	player.orgasm();
-	dynStats("lib", -2, "sen", -2);
+	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
 

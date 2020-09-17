@@ -296,7 +296,7 @@ public function startUrtaQuest():void {
 	player.speStat.core.value = 178;
 	player.intStat.core.value = 60;
 	player.wisStat.core.value = 50;
-	player.lib = 90;
+	player.libStat.core.value = 90;
 	player.sensStat.redefine({base:50});
 	player.cor = 30;
 	player.lust = 40;
@@ -311,7 +311,7 @@ public function startUrtaQuest():void {
 	player.speStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 40);
 	player.intStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 20);
 	player.wisStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 18);
-	player.lib += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30);
+	player.libStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30);
 	var UrtaMulti:Number = 1;
 	if (flags[kFLAGS.GAME_DIFFICULTY] == 1) UrtaMulti += 0.1;
 	if (flags[kFLAGS.GAME_DIFFICULTY] == 2) UrtaMulti += 0.3;
@@ -322,7 +322,7 @@ public function startUrtaQuest():void {
 	player.speStat.core.value = Math.round(player.spe * UrtaMulti);
 	player.intStat.core.value = Math.round(player.inte * UrtaMulti);
 	player.wisStat.core.value = Math.round(player.wis * UrtaMulti);
-	player.lib = Math.round(player.lib * UrtaMulti);
+	player.libStat.core.value = Math.round(player.lib * UrtaMulti);
 
 	//PERKS
 	player.createPerk(PerkLib.Agility,0,0,0,0);
@@ -1701,7 +1701,7 @@ private function gnollAlphaBitchIntro():void {
 	monster.touStat.core.value += 25 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 	monster.speStat.core.value += 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 	monster.intStat.core.value += 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-	monster.lib += 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+	monster.libStat.core.value += 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 	monster.bonusHP = 750;
 	monster.level += 11;
 	monster.short = "alpha gnoll";

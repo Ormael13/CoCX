@@ -42,6 +42,8 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Pregnancy;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
+import classes.StatusEffects.HeatEffect;
+import classes.StatusEffects.RutEffect;
 import classes.StatusEffects.VampireThirstEffect;
 import classes.internals.Utils;
 import classes.lists.BreastCup;
@@ -5391,6 +5393,8 @@ use namespace CoC;
 				goblinCounter++;
 				if (skinTone == "pale yellow" || skinTone == "grayish-blue" || skinTone == "green" || skinTone == "dark green" || skinTone == "emerald")
 					goblinCounter++;
+				if (skinTone != "pale yellow" && skinTone != "grayish-blue" && skinTone != "green" && skinTone != "dark green" && skinTone == "emerald")
+					goblinCounter = 0;
 				if (eyes.type == Eyes.HUMAN && (eyes.colour == "red" || eyes.colour == "yellow" || eyes.colour == "purple"))
 					goblinCounter++;
 				if (hairColor == "red" || hairColor == "purple" || hairColor == "green" || hairColor == "blue" || hairColor == "pink")
@@ -9496,7 +9500,6 @@ use namespace CoC;
 		
 		public override function getAllMaxStats():Object {
 			Begin("Player","getAllMaxStats");
-			var maxLib:int = 100;
 			var maxCor:int = 100;
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			
@@ -9516,40 +9519,14 @@ use namespace CoC;
 			//Caps speed from Uma's needlework.
 			End("Player","getAllMaxStats.perks");
 			Begin("Player","getAllMaxStats.racial");
-			maxLib += statusEffectv1(StatusEffects.LibSensCounter2);
-			if (maxLib < 25) maxLib = 25;
 			End("Player","getAllMaxStats.racial");
 			Begin("Player","getAllMaxStats.perks2");
-			maxLib += statusEffectv1(StatusEffects.LibSensCounter1);
-			if (hasPerk(PerkLib.ProductivityDrugs)) maxLib += perkv1(PerkLib.ProductivityDrugs);
 			End("Player","getAllMaxStats.perks2");
 			Begin("Player","getAllMaxStats.effects");
-			//Equipment
-			if (this.jewelryName == "Ring of Libido") maxLib += 5;
-			if (this.jewelryName2 == "Ring of Libido") maxLib += 5;
-			if (this.jewelryName3 == "Ring of Libido") maxLib += 5;
-			if (this.jewelryName4 == "Ring of Libido") maxLib += 5;
-			if (this.headjewelryName == "Crown of Libido") maxLib += 20;
-			if (this.necklaceName == "Necklace of Libido") maxLib += 25;
-			if (this.jewelryName == "Ring of Libido" && this.jewelryName2 == "Ring of Libido" && this.jewelryName3 == "Ring of Libido" && this.jewelryName4 == "Ring of Libido" && this.headjewelryName == "Crown of Libido" && this.necklaceName == "Necklace of Libido") maxLib += 15;
-			//Key Items
-			if (hasPerk(PerkLib.GoblinoidBlood)) {
-				if (hasKeyItem("Drug injectors") >= 0) {
-					maxLib += 25;
-				}
-				if (hasKeyItem("Improved Drug injectors") >= 0) {
-					maxLib += 50;
-				}
-				if (hasKeyItem("Potent Drug injectors") >= 0) {
-					maxLib += 75;
-				}
-			}
 			End("Player","getAllMaxStats.effects");
 			End("Player","getAllMaxStats");
-			maxLib = Math.max(maxLib,1);
 			maxCor = Math.max(maxCor,1);
 			return {
-				lib:maxLib,
 				cor:maxCor
 			};
 		}
@@ -9568,87 +9545,6 @@ use namespace CoC;
 			var maxIntCap1:Number = 0;
 			var maxWisCap1:Number = 0;
 			var maxLibCap1:Number = 0;
-			if (findPerk(PerkLib.Lusty) > 0) maxLibCap1 += (50 * newGamePlusMod);
-			if (findPerk(PerkLib.ChimericalBodyInitialStage) >= 0) {
-				maxLibCap1 += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0) {
-				maxLibCap1 += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0) {
-				maxLibCap1 += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.ChimericalBodySuperiorStage) >= 0) {
-				maxLibCap1 += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.ChimericalBodyPeerlessStage) >= 0) {
-				maxLibCap1 += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0) {
-				maxLibCap1 += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.ChimericalBodyEpicStage) >= 0) {
-				maxLibCap1 += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.BlackHeartFinalForm) >= 0) {
-				maxLibCap1 += (10 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.LactaBovinaOvariesEvolved) >= 0) maxLibCap1 += (10 * newGamePlusMod);
-			if (findPerk(PerkLib.LactaBovinaOvariesFinalForm) >= 0) {
-				maxLibCap1 += (10 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.MinotaurTesticlesEvolved) >= 0) maxLibCap1 += (10 * newGamePlusMod);
-			if (findPerk(PerkLib.MinotaurTesticlesFinalForm) >= 0) {
-				maxLibCap1 += (10 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.SalamanderAdrenalGlands) >= 0) {
-				maxLibCap1 += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.SalamanderAdrenalGlandsEvolved) >= 0) {
-				maxLibCap1 += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.SalamanderAdrenalGlandsFinalForm) >= 0) {
-				maxLibCap1 += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.EzekielBlessing) >= 0) {
-				maxLibCap1 += (5 * newGamePlusMod);
-			}
-			//Perks
-			if (findPerk(PerkLib.JobAllRounder) >= 0) {
-				maxLibCap1 += (10 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.JobCourtesan) >= 0) maxLibCap1 += (15 * newGamePlusMod);
-			if (findPerk(PerkLib.JobEromancer) >= 0) {
-				maxLibCap1 += (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.JobLeader) >= 0) {
-				if (findPerk(PerkLib.ShootTheLoadAndHitTheRoad) < 0) maxLibCap1 -= (5 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.JobSeducer) >= 0) maxLibCap1 += (5 * newGamePlusMod);
-			if (findPerk(PerkLib.PrestigeJobWarlock) >= 0) {
-				maxLibCap1 += (20 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) {
-				maxLibCap1 += (15 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) {
-				maxLibCap1 += (10 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) {
-				maxLibCap1 += (15 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) {
-				maxLibCap1 += (20 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.EpicLibido) >= 0) maxLibCap1 += (35 + (5 * newGamePlusMod));
-			if (findPerk(PerkLib.LegendaryLibido) >= 0) maxLibCap1 += (50 + (10 * newGamePlusMod));
-			if (findPerk(PerkLib.MythicalLibido) >= 0) maxLibCap1 += (65 + (15 * newGamePlusMod));
-			if (findPerk(PerkLib.LimitBreakerFlesh2ndStage) >= 0) {
-				maxLibCap1 += (10 * newGamePlusMod);
-			}
-			if (findPerk(PerkLib.LimitBreakerPsyche2ndStage) >= 0) {
-				maxLibCap1 += (20 * newGamePlusMod);
-			}
 			//Apply New Game+
 			maxStrCap1 += 5 * perkv1(PerkLib.AscensionTranshumanism);
 			maxTouCap1 += 5 * perkv1(PerkLib.AscensionTranshumanism);
@@ -11318,11 +11214,11 @@ use namespace CoC;
 				if(output) {
 					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.");
 				}
-				var sac:StatusEffectClass = statusEffectByType(StatusEffects.Heat);
+				var sac:HeatEffect = statusEffectByType(StatusEffects.Heat) as HeatEffect;
 				sac.value1 += 5 * intensity;
 				sac.value2 += 5 * intensity;
 				sac.value3 += 48 * intensity;
-				dynStats("lib", 5 * intensity, "scale", false);
+				sac.ApplyEffect();
 			}
 			//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 			else {
@@ -11330,7 +11226,6 @@ use namespace CoC;
 					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as <b>you realize you have gone into heat!</b>");
 				}
 				createStatusEffect(StatusEffects.Heat, 10 * intensity, 15 * intensity, 48 * intensity, 0);
-				dynStats("lib", 15 * intensity, "scale", false);
 			}
 			return true;
 		}
@@ -11353,11 +11248,11 @@ use namespace CoC;
 				if(output) {
 					outputText("\n\nYour [cock] throbs and dribbles as your desire to mate intensifies.  You know that <b>you've sunken deeper into rut</b>, but all that really matters is unloading into a cum-hungry cunt.");
 				}
-				
-				addStatusValue(StatusEffects.Rut, 1, 100 * intensity);
-				addStatusValue(StatusEffects.Rut, 2, 5 * intensity);
-				addStatusValue(StatusEffects.Rut, 3, 48 * intensity);
-				dynStats("lib", 5 * intensity, "scale", false);
+				var sac:RutEffect = statusEffectByType(StatusEffects.Rut) as RutEffect;
+				sac.value1 += 100 * intensity;
+				sac.value2 += 5 * intensity;
+				sac.value3 += 48 * intensity;
+				sac.ApplyEffect();
 			}
 			else {
 				if(output) {
@@ -11368,7 +11263,6 @@ use namespace CoC;
 				//v2 - bonus libido
 				//v3 - time remaining!
 				createStatusEffect(StatusEffects.Rut, 150 * intensity, 5 * intensity, 100 * intensity, 0);
-				dynStats("lib", 5 * intensity, "scale", false);
 			}
 			
 			return true;

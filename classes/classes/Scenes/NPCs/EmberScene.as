@@ -4413,7 +4413,6 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\nYou head off yourself, ready to resume the rest of your day.");
 			//2 hours pass, PC's fatigue is healed some, Libido is reduced.
 			fatigue(-20);
-			dynStats("lib", -1);
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		

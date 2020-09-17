@@ -1131,28 +1131,28 @@ public class PlayerInfo extends BaseContent {
 		outputText("You have <b>" + (player.statPoints) + "</b> left to spend.\n\n");
 
 		outputText("Strength: ");
-		if (player.str < maxes.str) outputText("" + Math.floor(player.str) + " + <b>" + player.tempStr + "</b> → " + Math.floor(player.str + player.tempStr) + "\n");
-		else outputText("" + Math.floor(player.str) + " (Maximum)\n");
+		if (player.strStat.core.value < player.strStat.core.max) outputText("" + Math.floor(player.strStat.core.value) + " + <b>" + player.tempStr + "</b> → " + Math.floor(player.strStat.core.value + player.tempStr) + " Total "+(player.strStat.core.value + player.tempStr + player.strStat.bonus.value) * player.strStat.mult.value+"\n");
+		else outputText("" + Math.floor(player.strStat.core.value) + " (Maximum)\n");
 
 		outputText("Toughness: ");
-		if (player.tou < maxes.tou) outputText("" + Math.floor(player.tou) + " + <b>" + player.tempTou + "</b> → " + Math.floor(player.tou + player.tempTou) + "\n");
-		else outputText("" + Math.floor(player.tou) + " (Maximum)\n");
+		if (player.touStat.core.value < player.touStat.core.max) outputText("" + Math.floor(player.touStat.core.value) + " + <b>" + player.tempTou + "</b> → " + Math.floor(player.touStat.core.value + player.tempTou) + " Total "+Math.floor((player.touStat.core.value + player.tempTou + player.touStat.bonus.value) * player.touStat.mult.value)+"\n");
+		else outputText("" + Math.floor(player.touStat.core.value) + " (Maximum)\n");
 
 		outputText("Speed: ");
-		if (player.spe < maxes.spe) outputText("" + Math.floor(player.spe) + " + <b>" + player.tempSpe + "</b> → " + Math.floor(player.spe + player.tempSpe) + "\n");
-		else outputText("" + Math.floor(player.spe) + " (Maximum)\n");
+		if (player.speStat.core.value < player.speStat.core.max) outputText("" + Math.floor(player.speStat.core.value) + " + <b>" + player.tempSpe + "</b> → " + Math.floor(player.speStat.core.value + player.tempSpe) + " Total "+Math.floor((player.speStat.core.value + player.tempSpe + player.speStat.bonus.value) * player.speStat.mult.value)+"\n");
+		else outputText("" + Math.floor(player.speStat.core.value) + " (Maximum)\n");
 
 		outputText("Intelligence: ");
-		if (player.inte < maxes.inte) outputText("" + Math.floor(player.inte) + " + <b>" + player.tempInt + "</b> → " + Math.floor(player.inte + player.tempInt) + "\n");
-		else outputText("" + Math.floor(player.inte) + " (Maximum)\n");
+		if (player.intStat.core.value < player.intStat.core.max) outputText("" + Math.floor(player.intStat.core.value) + " + <b>" + player.tempInt + "</b> → " + Math.floor(player.intStat.core.value + player.tempInt) + " Total "+Math.floor((player.intStat.core.value + player.tempInt + player.intStat.bonus.value) * player.intStat.mult.value)+"\n");
+		else outputText("" + Math.floor(player.intStat.core.value) + " (Maximum)\n");
 
 		outputText("Wisdom: ");
-		if (player.wis < maxes.wis) outputText("" + Math.floor(player.wis) + " + <b>" + player.tempWis + "</b> → " + Math.floor(player.wis + player.tempWis) + "\n");
-		else outputText("" + Math.floor(player.wis) + " (Maximum)\n");
+		if (player.wisStat.core.value < player.wisStat.core.max) outputText("" + Math.floor(player.wisStat.core.value) + " + <b>" + player.tempWis + "</b> → " + Math.floor(player.wisStat.core.value + player.tempWis) + " Total "+Math.floor((player.wisStat.core.value + player.tempWis + player.wisStat.bonus.value) * player.wisStat.mult.value)+"\n");
+		else outputText("" + Math.floor(player.wisStat.core.value) + " (Maximum)\n");
 
 		outputText("Libido: ");
-		if (player.lib < maxes.lib) outputText("" + Math.floor(player.lib) + " + <b>" + player.tempLib + "</b> → " + Math.floor(player.lib + player.tempLib) + "\n");
-		else outputText("" + Math.floor(player.lib) + " (Maximum)\n");
+		if (player.libStat.core.value < player.libStat.core.max) outputText("" + Math.floor(player.libStat.core.value) + " + <b>" + player.tempLib + "</b> → " + Math.floor(player.libStat.core.value + player.tempLib) + " Total "+Math.floor((player.libStat.core.value + player.tempLib + player.libStat.bonus.value) * player.libStat.mult.value)+"\n");
+		else outputText("" + Math.floor(player.libStat.core.value) + " (Maximum)\n");
 
 		menu();
 		//Add
@@ -1162,7 +1162,7 @@ public class PlayerInfo extends BaseContent {
 			if ((player.speStat.core.value + player.tempSpe) < player.speStat.core.max) addButton(2, "Add SPE", addAttribute, "spe", null, null, "Add 1 point (5 points with Shift) to Speed.", "Add Speed");
 			if ((player.intStat.core.value + player.tempInt) < player.intStat.core.max) addButton(3, "Add INT", addAttribute, "int", null, null, "Add 1 point (5 points with Shift) to Intelligence.", "Add Intelligence");
 			if ((player.wisStat.core.value + player.tempWis) < player.wisStat.core.max) addButton(4, "Add WIS", addAttribute, "wis", null, null, "Add 1 point (5 points with Shift) to Wisdom.", "Add Wisdom");
-			if ((player.lib + player.tempLib) < maxes.lib) addButton(10, "Add LIB", addAttribute, "lib", null, null, "Add 1 point (5 points with Shift) to Libido.", "Add Libido");
+			if ((player.libStat.core.value + player.tempLib) < player.libStat.core.max) addButton(10, "Add LIB", addAttribute, "lib", null, null, "Add 1 point (5 points with Shift) to Libido.", "Add Libido");
 		}
 		//Subtract
 		if (player.tempStr > 0) addButton(5, "Sub STR", subtractAttribute, "str", null, null, "Subtract 1 point (5 points with Shift) from Strength.", "Subtract Strength");
@@ -1310,7 +1310,7 @@ public class PlayerInfo extends BaseContent {
 		player.speStat.core.value += player.tempSpe;
 		player.intStat.core.value += player.tempInt;
 		player.wisStat.core.value += player.tempWis;
-		player.lib += player.tempLib;
+		player.libStat.core.value += player.tempLib;
 		player.tempStr = 0;
 		player.tempTou = 0;
 		player.tempSpe = 0;

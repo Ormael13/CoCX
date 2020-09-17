@@ -193,7 +193,7 @@ public final class Mutations extends MutationsHelper {
         public function purePearl(player:Player):void {
             clearOutput();
             outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your core.");
-            dynStats("lib", -5, "lus", -25, "cor", -10);
+            dynStats("lus", -25, "cor", -10);
             if (player.findPerk(PerkLib.PurityBlessing) < 0) player.createPerk(PerkLib.PurityBlessing, 0, 0, 0, 0);
         }
 
@@ -8844,10 +8844,7 @@ public final class Mutations extends MutationsHelper {
                 }
                 outputText("Finally, you feel the transformation skittering to a halt, leaving you to openly roam your new chiseled and sex-ready body.  So what if you can barely form coherent sentences anymore?  A body like this does all the talking you need, you figure!");
                 var boost:Number = (player.inte - 35) / 5;
-                if (player.lib < 50) {
-                    player.lib = 50;
-                    MutagenBonus("lib", .1);
-                }
+                MutagenBonus("lib", .1);
                 outputText("\n\n<b>(Lost Perk - ");
                 if (player.findPerk(PerkLib.BimboBrains) >= 0) outputText("Bimbo Brains, ");
                 outputText("Bimbo Body)\n");
@@ -16351,7 +16348,7 @@ public final class Mutations extends MutationsHelper {
                     } else player.cocks[temp2].cockType = CockTypesEnum.CANCER;
                     changes++;
                     dynStats("lus", 10);
-                    dynStats("lib", 3);
+                    MutagenBonus("lib", 3);
                 }
                 //decrease player's breast size
                 if (player.biggestTitSize() >= 3 && changes < changeLimit && rand(4) == 0) {

@@ -27,7 +27,7 @@ package classes.Items.HeadJewelries
 		}
 		
 		override public function playerEquip():HeadJewelry {
-			game.player.statStore.addBuff('spe',+20,'tag',{text:'CrownOfSpeed'});
+			game.player.statStore.addBuff('spe',+20,'CrownOfSpeed',{text:'Crown Of Speed'});
 			return super.playerEquip();
 		}
 		

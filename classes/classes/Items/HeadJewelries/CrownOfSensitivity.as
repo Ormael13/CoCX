@@ -28,7 +28,7 @@ public class CrownOfSensitivity extends HeadJewelry
 		}
 		
 		override public function playerEquip():HeadJewelry {
-			game.player.statStore.addBuff('sens',+20,'tag',{text:'CrownOfSensitivity'});
+			game.player.statStore.addBuff('sens',+20,'CrownOfSensitivity',{text:'Crown Of Sensitivity'});
 			return super.playerEquip();
 		}
 		

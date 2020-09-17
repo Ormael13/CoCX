@@ -1110,7 +1110,7 @@ public class CeraphScene extends NPCAwareContent
 				//(-fetish, +cock-toy status +1)
 				flags[kFLAGS.PC_FETISH]--;
 				flags[kFLAGS.CERAPH_OWNED_DICKS]++;
-				dynStats("lib", -2, "sen", -2, "cor", 5);
+				dynStats("sen", -2, "cor", 5);
 			}
 			//(Pussy)
 			else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] == 2) {

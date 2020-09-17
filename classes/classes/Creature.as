@@ -297,7 +297,7 @@ public class Creature extends Utils
 		public var wisStat:PrimaryStat = _stats.findStat('wis') as PrimaryStat;
 		public function get wis():Number { return Math.round(wisStat.value); }
 		public var libStat:PrimaryStat = _stats.findStat('lib') as PrimaryStat;
-		public function get lib2():Number { return Math.round(libStat.value); }
+		public function get lib():Number { return Math.round(libStat.value); }
 
 		public function trainStat(statName: String, amount: Number, limit: Number){
 			var stat:PrimaryStat = statStore.findStat(statName) as PrimaryStat;
@@ -348,7 +348,6 @@ public class Creature extends Utils
 		}
 
 		//Primary stats
-		public var lib:Number = 0;
 		public var sensStat:BuffableStat = _stats.findStat('sens') as BuffableStat;
 		public function get sens():Number { return sensStat.value; }
 		public var cor:Number = 0;
@@ -888,8 +887,13 @@ public class Creature extends Utils
 			if (dwis > 0){
 				removeCurse("wis", dwis);
 			}
-
-			lib  = Utils.boundFloat(mins.lib, lib + dlib, maxes.lib);
+			//Libido
+			if (dlib < 0){
+				addCurse("wis", -dlib);
+			}
+			if (dlib > 0){
+				removeCurse("wis", dlib);
+			}
 			//Sensitivity
 			if (dsens > 0){
 				addCurse("sens", dsens);

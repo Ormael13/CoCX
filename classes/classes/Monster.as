@@ -1570,7 +1570,7 @@ import flash.utils.getQualifiedClassName;
 		protected function initWisLibSensCor(wis:Number, lib:Number, sens:Number, cor:Number):void
 		{
 			this.wisStat.core.value = wis;
-			this.lib = lib;
+			this.libStat.core.value = lib;
 			sensStat.redefine({base:sens});
 			this.cor = cor;
 			initedWisLibSensCor = true;
@@ -3104,7 +3104,7 @@ import flash.utils.getQualifiedClassName;
 			this.speStat.core.value += bonusAscSpe;
 			this.intStat.core.value += bonusAscInt;
 			this.wisStat.core.value += bonusAscWis;
-			this.lib += bonusAscLib;
+			this.libStat.core.value += bonusAscLib;
 			statStore.addBuff("sens", bonusAscSen, "Ascension", {});
 			var multiStatsAmp1:Number = 0;
 			this.strStat.core.value += multiStatsAmp1;
@@ -3113,7 +3113,7 @@ import flash.utils.getQualifiedClassName;
 			var multiStatsAmp2:Number = 0;
 			this.intStat.core.value += multiStatsAmp2;
 			this.wisStat.core.value += multiStatsAmp2;
-			this.lib += multiStatsAmp2;
+			this.libStat.core.value += multiStatsAmp2;
 			statStore.addBuff("sens", multiStatsAmp2, "AscensionMultiplier", {});
 			bonusAscMaxHP += bonusAscStr + bonusAscTou + bonusAscSpe + bonusAscInt + bonusAscWis + bonusAscLib + bonusAscSen;
 			if (level > 10) bonusAscMaxHP *= (int)(level / 10 + 1);

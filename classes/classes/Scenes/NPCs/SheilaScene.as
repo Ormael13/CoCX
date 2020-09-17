@@ -1002,7 +1002,6 @@ private function shielaXPThreeSexyTimePostSexStayII():void {
 		
 		//reduce lust/lib and reset hours since cum; if sheila corruption >= 90 and pc corruption >= 90, redirect to demonization; else continue
 		player.sexReward("vaginalFluids","Dick");
-		dynStats("lib", -2);
 		if(player.cor >= 90 && sheilaCorruption() >= 90) {
 			menu();
 			addButton(0,"Next",sheilaGoesDemon);
@@ -1112,7 +1111,6 @@ private function shielaXPThreeSexyTimePostSexStayII():void {
 		
 		//reduce lust/lib and reset hours since cum; if sheila corruption >= 90 and PC corr >= 90 go to demonization here, else continue
 		player.sexReward("vaginalFluids");
-		dynStats("lib", -2);
 		if(sheilaCorruption() >= 90 && player.cor >= 90) {
 			menu();
 			addButton(0,"Next",sheilaGoesDemon);
@@ -1208,7 +1206,6 @@ private function shielaXPThreeSexyTimePostSexStayII():void {
 		if(player.hasCock())
 		{
 			player.sexReward("vaginalFluids","Dick");
-			dynStats("lib", -2);
 		}
 		else dynStats("lus", player.lib/4);
 		sheilaCorruptionUpdate();
@@ -1897,7 +1894,6 @@ private function consensualSheila69(cock:Boolean = true):void {
 		outputText("\n\nEr... well, there's definitely something to be said against tying up her friends and fucking them silly... without sharing them with you, anyway.  Ah, wait, that slippery thought you were trying to hold onto just got away from you again when Sheila's breast heaved in your hand.  Speaking of things to grab hold of and tie up...");
 		//minus lust, minus small libido; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption and slimefeed
 		player.sexReward("cum");
-		dynStats("lib", -.5);
 		//[Fondle Her][Listen to Her]
 		menu();
 		addButton(0,"Listen2Her",sheilaCorruptionWarningListenToHer);
@@ -1916,7 +1912,6 @@ private function consensualSheila69(cock:Boolean = true):void {
 	outputText("\"<i>You could give a girl a bloody warning before that sort of behavior.  I thought you were going to kill me!</i>\"");
 	
 	//minus lust, minus small libido; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption and slimefeed
-	dynStats("lib", -.5);
 	sheilaCorruptionUpdate();
 	/*if(player.cor >= 90 || player.cor > flags[kFLAGS.SHEILA_CORRUPTION]) {
 		dynStats("cor", -10);
@@ -2069,7 +2064,6 @@ private function consentacleVagSexForKangarooSlutBitches():void {
 	outputText("; the two of you lie there breathing raggedly for several minutes.  Sheila breaks the silence first.");
 
 	player.sexReward("vaginalFluids","Dick");
-	dynStats("lib", -0.5);
 	
 	//if sheila corruption >= 90 and pc corr >= 90, go to demonization, else continue
 	if(player.cor >= 90 && sheilaCorruption() >= 90) {
@@ -2493,7 +2487,6 @@ private function rapeSheilasCooter():void {
 		//end scene, sheilapreg check, reduce lust and libido
 		sheilaPreg();
 		player.sexReward("vaginalFluids");
-		dynStats("lib", -1);
 	}
 	else {
 		outputText("\n\n\"<i>Why shouldn't I?</i>\"  You back away and slip a hand into her panties, letting the fingertips dangle against her opening; every inch of her flesh is hot with arousal, betraying her words.  Even her pussy lips stroke and caress your fingers gently.  \"<i>The only part of you that doesn't want this is your lying mouth.</i>\"");
@@ -2574,7 +2567,6 @@ private function rapeSheilasCooter():void {
 		//pregcheck
 		sheilaPreg();
 		player.sexReward("vaginalFluids");
-		dynStats("lib", -1);
 		sheilaCorruptionUpdate();
 		/*if(player.cor > 90 || player.cor > sheilaCorruption()) {
 			dynStats("cor", -10);
@@ -2715,7 +2707,7 @@ private function forcedSheilaOral(dick:Boolean = true):void {
 		//end worm fork
 		//end forced fellatio branch, reset hours since cum, lower lust and libido, add corruption
 		player.sexReward("vaginalFluids");
-		dynStats("lib", -1, "cor", 1);
+		dynStats("cor", 1);
 	}
 	else {
 		//(else if no qualified cocks)
@@ -2763,7 +2755,7 @@ private function forcedSheilaOral(dick:Boolean = true):void {
 		outputText("\n\n\"<i>Worthless,</i>\" you spit, climbing off.  She turns a disconsolate, wet face to you as you redress and leave, but doesn't defend herself.");
 		//end lingus branch, reduce lust, lower libido, add corruption
 		player.sexReward("vaginalFluids");
-		dynStats("lib", -1, "cor", 1);
+		dynStats("cor", 1);
 	}
 	cleanupAfterCombat();
 }
@@ -3071,7 +3063,6 @@ private function sheilaCowgirlRapesYou():void {
 			sheilaPreg(true);
 			player.sexReward("vaginalFluids");
 			sheilaPreg();
-			dynStats("lib", -1);
 			cleanupAfterCombat();
 		}
 	}
@@ -3688,7 +3679,7 @@ private function sheilaGoesDemon():void {
 	
 	//reduce lust and lib, raise corr slightly, gain key item Sheila's Lethicite, set sheilacite = 1
 	player.sexReward("vaginalFluids");
-	dynStats("lib", -1, "cor", 3);
+	dynStats("cor", 3);
 	player.createKeyItem("Sheila's Lethicite",0,0,0,0);
 	flags[kFLAGS.SHEILA_CITE] = 1;
 	flags[kFLAGS.SHEILA_DEMON] = 1;
@@ -4381,7 +4372,7 @@ private function clitSwellingDemonSheilaClitSoundingAnal():void {
 		dynStats("cor", -10);
 	}
 	player.sexReward("vaginalFluids");
-	dynStats("lib", -1, "sen", -2);
+	dynStats("sen", -2);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
@@ -4508,7 +4499,6 @@ private function missionaryForThePurposesOfCreatingImpsWithSheila():void {
 		outputText("I used a bit of power to help you finish.  Don't hate me for it; your orgasm face is just so cute when you're giving up your seed to me.</i>\"  The woman places her hand on her stomach, below her navel.  \"<i>Thank you for this.  I hope it takes, so I can raise a big strong imp to be just as " + player.mf("productive as his father","sexy as his mother") + ".</i>\"  She kisses you softly again, and you roll off with a groan.  \"<i>Your sperm are the best,</i>\" Sheila whispers, \"<i>so come see me again soon.  I'll be wantin' more.</i>\"  Your demon stands up and winks at you, then walks off, tails swishing happily as a trickle of white runs down the brown skin of her naked thigh.");
 		//(end scene)
 		player.sexReward("vaginalFluids");
-		dynStats("lib", -1);
 		sheilaPreg();
 		//if short scene, sheilapreg check, reduce PC lust and libido
         if (CoC.instance.inCombat)
@@ -4557,7 +4547,6 @@ private function missionaryForThePurposesOfCreatingImpsWithSheila():void {
 		//if long scene, sheilapreg check, reduce lust, reduce libido, slimefeed if corr < 50; if PC corr <50 then +10 corr and -10 sheila corruption, else if PC corr >=50 then -10 corr and +10 sheila corruption
 		sheilaPreg();
 		player.sexReward("cum");
-		dynStats("lib", -1);
 		if(player.cor < 50) player.sexReward("cum");
 		if(player.cor < 50) {
 			dynStats("cor", 10);
@@ -4655,7 +4644,7 @@ private function sheilaAnalHateFuckAGoGoNO():void {
 	
 	//minus lust, minus libido, plus small corruption
 	player.sexReward("vaginalFluids");
-	dynStats("lib", -1, "cor", 2);
+	dynStats("cor", 2);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
@@ -4936,7 +4925,7 @@ private function bigDickAndThighs():void {
 	
 	//reduce lust, reduce libido, reduce sens, +10 corr and sheila corruption -10 if corr <50 or -10 corr and sheila corruption +10 if corr >= 50
 	player.sexReward("vaginalFluids");
-	dynStats("lib", -1, "sen", -1);
+	dynStats("sen", -1);
 	if(player.cor < 50) {
 		dynStats("cor", 10);
 		sheilaCorruption(-10);
@@ -5014,7 +5003,6 @@ private function winAgainstDemoNSheilaForVaginas():void {
 	}
 	//slimefeed, reduce lust, reduce libido, +10 corr and sheila corruption -10 if corr <50 or -10 corr and sheila corruption +10 if corr >= 50, also fertility and wetness increases as denoted in the text
 	player.sexReward("cum");
-	dynStats("lib", -1);
 	if(player.cor < 50) {
 		sheilaCorruption(-10);
 		dynStats("cor", 10);

@@ -156,7 +156,7 @@ public class BehemothScene extends BaseContent
 				
 			}
 			outputText("\n\nPLACEHOLDER");
-			dynStats("lib", -1, "lus", -20, "scale", false);
+			dynStats("lus", -20, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//Cum offer

@@ -27,12 +27,12 @@ package classes.Items.HeadJewelries
 		}
 		
 		override public function playerEquip():HeadJewelry {
-			game.player.lib += 20;
+			game.player.statStore.addBuff('lib',+20,'CrownOfLibido',{text:'Crown Of Libido'});
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():HeadJewelry {
-			game.player.lib -= 20;
+			game.player.statStore.removeBuffs('CrownOfLibido');
 			return super.playerRemove();
 		}
 		

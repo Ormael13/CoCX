@@ -36,8 +36,6 @@ public class Pregnancy extends NPCAwareContent {
         if(player.inHeat) {
             EngineCore.outputText("\nYou calm down a bit and realize you no longer fantasize about getting fucked constantly.  It seems your heat has ended.\n");
             //Remove bonus libido from heat
-            player.dynStats("lib", -player.statusEffectv2(StatusEffects.Heat));
-            if(player.lib < 10) player.lib = 10;
             EngineCore.statScreenRefresh();
             player.removeStatusEffect(StatusEffects.Heat);
             displayedUpdate = true;

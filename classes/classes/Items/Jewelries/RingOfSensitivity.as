@@ -27,7 +27,7 @@ package classes.Items.Jewelries
 		}
 		
 		override public function playerEquip():Jewelry {
-			game.player.statStore.addBuff('sens',+5,'tag',{text:'RingOfSensitivity'});
+			game.player.statStore.addBuff('sens',+5,'RingOfSensitivity',{text:'Ring Of Sensitivity'});
 			return super.playerEquip();
 		}
 		
