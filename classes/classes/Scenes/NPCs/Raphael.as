@@ -209,7 +209,7 @@ private function RaphaelFirstMeetingSWOON():void {
 	outputText("You hold the hand he touched close to your chest.");
 
 	dynStats("str", -1,"tou", -1, "spe", 3, "sen", 1, "lus", 25);
-	player.trainStat("spe",3,60);
+	player.trainStat("spe",3,100);
 	doNext(playerMenu);
 }
 
@@ -544,7 +544,7 @@ private function friskFondleChoice():void {
 
 	outputText("\"<i>But the day is young!</i>\" He proclaims before shooting up the wall and extending you his paw. \"<i>Join me! Together we shall paint the forest russet red!</i>\" He winks at you while pulling you up. \"<i>Stick with me and I could finish your education. I will promise that your graduation will be... everything you hoped for. Like the wild mare is shown what is expected from her, the russet rogue never leaves a lady wanting.</i>\"\n\n");
 	dynStats("str", -1,"tou", -1, "spe", 3, "sen", 1, "lus", 25);
-	player.trainStat("spe",3,60);
+	player.trainStat("spe",3,100);
 	//{Next scene Picnic}
 	doNext(RaphaelPicnic);
 }
@@ -694,7 +694,7 @@ private function RaphaelPicnicSkill():void {
 
 		outputText("\"<i>Again!</i>\" He stands up and extends you an arm with renewed energy.");
 		dynStats("str", -1,"tou", -1, "spe", 3, "sen", 1, "lus", 25);
-		player.trainStat("spe",3,60);
+		player.trainStat("spe",3,100);
 		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 1;
 	}
 	//{Fencing practice variables: Speed 30-39 Must play out at least once}
@@ -726,7 +726,7 @@ private function RaphaelPicnicSkill():void {
 		outputText("<i>\"Magnefique.\"</i> Raphael comments, pleased.  <i>\"You could use some work on how to wield it properly, but only because you weren't born with one in hand like I was.\"</i> He smiles, saunters closer to you and releases the rapier from your intoxicated grip by fondling your fingers.  <i>\"You still need a master to show you how to thrust and parry properly.\"</i>\n\n");
 		
 		dynStats("str", -1,"tou", -1, "spe", 3, "sen", 1, "lus", 25);
-		player.trainStat("spe",3,60);
+		player.trainStat("spe",3,100);
 		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 2;
 	}
 	//{Fencing practice variables: Speed 40-49, Must play out at least once}
@@ -749,7 +749,7 @@ private function RaphaelPicnicSkill():void {
 
 		outputText("Perhaps with a deliberate, firmer brush than necessary, Raphael removes his crotch from your upturned ass and moves backward, seemingly uninterested.  He adopts a serious stare, nods and commands you to practice jabs again, this time holding your stance.  You do so to the letter with a bright blush, never remiss, but always feeling Raphael is getting a good look at your exposed buttocks as you raise them towards him like an offering.  His tail wags to the rhythm of the display, even though the fox stares you down solemnly with crossed arms - ever the harsh taskmaster when it comes to grace.\n\n");
 		dynStats("str", -1,"tou", -1, "spe", 3, "sen", 2, "lus", 60);
-		player.trainStat("spe",3,60);
+		player.trainStat("spe",3,100);
 		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 3;
 	}
 	//{Warning when you have 50 speed, played through all 3 variables and choose {Skill} at the opening picnic}
@@ -981,7 +981,7 @@ private function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 
 		outputText("You respond with a embarrassed \"<i>uh-huh</i>\" as you turn your back to the fox and shield your breasts. The taste of his saliva is still on your tongue, surprisingly sweet. You would have protested, if you hadn't asked for a demonstration of his skills earlier.\n\n");
 		dynStats("str", -1,"tou", -1, "int", 3, "sen", 1, "lus", 40);
-		player.trainStat("int",3,40);
+		player.trainStat("int",3,50);
 		flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] = 1;
 	}
 	//{Picnic Thieving 30-39 Int. Must play out at least once.}
@@ -1012,7 +1012,7 @@ private function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 
 		outputText("When you ask him what he means, Raphael merely winks.  <i>\"You've come this far, I'm sure you'll figure it out. A proper rogue knows it by heart.\"</i>\n\n");
 		dynStats("str", -1,"tou", -1, "int", 3, "sen", 1, "lus", 40);
-		player.trainStat("int",3,40);
+		player.trainStat("int",3,50);
 		flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] = 2;
 	}
 	//{Picnic Thieving at 40-49 Int. Must play out at least once.}
@@ -1036,7 +1036,7 @@ private function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 
 		outputText("You crack up and laugh openly at his antics.  Suddenly, you don't have as hard a time imagining Raphael relaxing.\n\n");
 		dynStats("str", -1,"tou", -1, "int", 3, "sen", 1, "lus", 20);
-		player.trainStat("int",3,40);
+		player.trainStat("int",3,50);
 		flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] = 3;
 	}
 	//{Int Thieving Apex Warning: When the PC's intelligence is at 50 or higher.}

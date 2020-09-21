@@ -121,7 +121,7 @@ private function postfightoptions():void {
 		if (player.canOvipositSpider() || (player.canOvipositBee() && player.gender > 0)) addButton(8, "Lay Eggs", layEggsInAMinotaurSpiderLike);
 		if ((temp2 == null || rand(2) == 0) && player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(9, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 		if (player.findPerk(PerkLib.Feeder) >= 0) addButton(10, "Nurse", minotaurDrinksMilkNewsAtEleven);
-		if (player.lowerBody == player.isAlraune()) addButton(11, "Vine in Butt", alrauneVineInButtScene);
+		if (player.isAlraune()) addButton(11, "Vine in Butt", alrauneVineInButtScene);
 	}
 	addButton(12, "Kill", killMinotaur);
 	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
@@ -590,7 +590,6 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 			startCombat(new Minotaur());
 			return;
 		}
-		
 		outputText("Suddenly you're grabbed from behind, your arms held together by a single massive, furry hand. A heavy, snorting breath brushes the top of your head. You turn your neck to see a massive bull-man. His impressive dick presses ");
 		
 		if (player.isTaur())

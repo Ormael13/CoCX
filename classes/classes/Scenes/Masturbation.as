@@ -3449,6 +3449,15 @@ public class Masturbation extends BaseContent {
 			var x:int = -1;
 			var y:int = -1;
 			var index:int = 0;
+			var tentacle:int;
+			for (tentacle = 0; tentacle < player.cocks.length; tentacle++) {
+				if (player.cocks[tentacle].cockType == CockTypesEnum.TENTACLE ||
+						player.cocks[tentacle].cockType == CockTypesEnum.STAMEN) break;
+			}
+			for (var x:int = tentacle + 1; x < player.cocks.length; x++) { //Find the biggest tentacle cock you've got
+				if ((player.cocks[x].cockType == CockTypesEnum.TENTACLE  ||
+						player.cocks[tentacle].cockType == CockTypesEnum.STAMEN) && player.cocks[x].cArea() > player.cocks[tentacle].cArea()) tentacle = x;
+			}
 			while (index < player.cocks.length) {
 				if (player.cocks[index].cockType == CockTypesEnum.STAMEN) {
 					if (x == -1) x = index;
@@ -3500,7 +3509,7 @@ public class Masturbation extends BaseContent {
 			outputText("  You twist your wrist down.  That change in direction comes far easier than trying to stroke it. Releasing sets of alien muscles that you had held instinctively, you let your sinuous stamen mounted vine do what it was made to do. You slither it down sinuously, the head pressing heavy and hot against your juicy mound as you press back against it. It slowly spreads your clinging tunnel around its delicious girth one fold at a time.");
 			//Cunt change!
 			player.cuntChange(player.cockArea(x), true, true, false);
-			outputText("\n\nRipples of delight radiate along your " + cockDescript(x) + " as it buries itself as deeply into your velvet tunnel as possible. The stamen stretches you out as it goes, just enough that the trailing stalk is comfortably ensconced in twat. Tugging on the exposed portion, you find yourself pumping wildly on your vine, squeezing it while paroxysms of ecstasy render your fine muscle control useless. The dual sensations of being fucked and dishing out a hot dicking have overlapped into a tangled-up knot inside you. Your wide, squirming stamen mounted vine is getting jacked off by the engorged vine-coil’s motions and slowly leaks liquid pollen over the jerking length.");
+			outputText("\n\nRipples of delight radiate along your " + cockDescript(tentacle) + " as it buries itself as deeply into your velvet tunnel as possible. The stamen stretches you out as it goes, just enough that the trailing stalk is comfortably ensconced in twat. Tugging on the exposed portion, you find yourself pumping wildly on your vine, squeezing it while paroxysms of ecstasy render your fine muscle control useless. The dual sensations of being fucked and dishing out a hot dicking have overlapped into a tangled-up knot inside you. Your wide, squirming stamen mounted vine is getting jacked off by the engorged vine-coil’s motions and slowly leaks liquid pollen over the jerking length.");
 			if (y >= 0) {
 				outputText("  Still aroused, In no time flat you move your second tendril to reach for your unoccupied asshole. There’s a moment of token resistance before you violates your [asshole], but then, there’s only the warm heat of a torrid butt-fuck.");
 				player.buttChange(player.cockArea(y), true, true, false);

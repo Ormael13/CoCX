@@ -5393,8 +5393,6 @@ use namespace CoC;
 				goblinCounter++;
 				if (skinTone == "pale yellow" || skinTone == "grayish-blue" || skinTone == "green" || skinTone == "dark green" || skinTone == "emerald")
 					goblinCounter++;
-				if (skinTone != "pale yellow" && skinTone != "grayish-blue" && skinTone != "green" && skinTone != "dark green" && skinTone == "emerald")
-					goblinCounter = 0;
 				if (eyes.type == Eyes.HUMAN && (eyes.colour == "red" || eyes.colour == "yellow" || eyes.colour == "purple"))
 					goblinCounter++;
 				if (hairColor == "red" || hairColor == "purple" || hairColor == "green" || hairColor == "blue" || hairColor == "pink")
@@ -5426,6 +5424,10 @@ use namespace CoC;
 				goblinCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				goblinCounter += 50;
+			if (skinTone != "pale yellow" && skinTone != "grayish-blue" && skinTone != "green" && skinTone != "dark green" && skinTone == "emerald")
+				goblinCounter = 0;
+			if (ears.type != Ears.ELFIN)
+				goblinCounter = 0;
 			if (isGargoyle()) goblinCounter = 0;
 			goblinCounter = finalRacialScore(goblinCounter, Race.GOBLIN);
 			End("Player","racialScore");
@@ -5451,8 +5453,6 @@ use namespace CoC;
 				gremlinCounter++;
 				if (skinTone == "light" || skinTone == "tan" || skinTone == "dark")
 					gremlinCounter++;
-				if (skinTone != "light" && skinTone != "tan" && skinTone != "dark")
-					gremlinCounter=0;
 				if (eyes.type == Eyes.GREMLIN && (eyes.colour == "red" || eyes.colour == "yellow" || eyes.colour == "purple" || eyes.colour == "orange"))
 					gremlinCounter++;
 				if (hairColor == "emerald" || hairColor == "green" || hairColor == "dark green" || hairColor == "aqua" || hairColor == "light green")
@@ -5508,6 +5508,10 @@ use namespace CoC;
 				gremlinCounter++;
 			if (hasPerk(PerkLib.DemonicLethicite))
 				gremlinCounter+=1;
+			if (skinTone != "light" && skinTone != "tan" && skinTone != "dark")
+				gremlinCounter=0;
+			if (ears.type == Ears.GREMLIN)
+				gremlinCounter=0;
 			if (isGargoyle()) gremlinCounter = 0;
 			gremlinCounter = finalRacialScore(gremlinCounter, Race.GREMLIN);
 			End("Player","racialScore");
@@ -8403,6 +8407,8 @@ use namespace CoC;
 				counter += 2;
 			if (eyes.type == Eyes.VAMPIRE)
 				counter++;
+			if (eyes.colour == "blood-red")
+				counter++;
 			if (counter >= 8) {
 				if (arms.type == Arms.HUMAN)
 					counter++;
@@ -9496,39 +9502,6 @@ use namespace CoC;
 			if (findPerk(PerkLib.PigBoarFatFinalForm) >= 0) maxThicknessCap += 30;
 			if (findPerk(PerkLib.ElvishPeripheralNervSysEvolved) >= 0) maxThicknessCap += 10;
 			return maxThicknessCap;
-		}
-		
-		public override function getAllMaxStats():Object {
-			Begin("Player","getAllMaxStats");
-			var maxCor:int = 100;
-			var newGamePlusMod:int = this.newGamePlusMod()+1;
-			
-			//Lowered caps due to too low lvl (yes every hero started from zero....right?)
-			//if (level < 12) {
-				//maxStr -= (5 * (12 - level));
-				//maxTou -= (5 * (12 - level));
-				//maxSpe -= (5 * (12 - level));
-				//maxInt -= (5 * (12 - level));
-				//maxWis -= (5 * (12 - level));
-				//maxLib -= (5 * (12 - level));
-			//}
-			//Perks ahoy
-			Begin("Player","getAllMaxStats.perks");
-			//Uma's Needlework affects max stats. Takes effect BEFORE racial modifiers and AFTER modifiers from body size.
-			//Caps strength from Uma's needlework.
-			//Caps speed from Uma's needlework.
-			End("Player","getAllMaxStats.perks");
-			Begin("Player","getAllMaxStats.racial");
-			End("Player","getAllMaxStats.racial");
-			Begin("Player","getAllMaxStats.perks2");
-			End("Player","getAllMaxStats.perks2");
-			Begin("Player","getAllMaxStats.effects");
-			End("Player","getAllMaxStats.effects");
-			End("Player","getAllMaxStats");
-			maxCor = Math.max(maxCor,1);
-			return {
-				cor:maxCor
-			};
 		}
 		
 		public function strtouspeintwislibsenCalculation1():void {
@@ -10781,6 +10754,8 @@ use namespace CoC;
 
 		public function clearStatuses(visibility:Boolean):void
 		{
+			var HPPercent:Number;
+			HPPercent = HP/maxHP();
 			if (hasStatusEffect(StatusEffects.DriderIncubusVenom))
 			{
 				removeStatusEffect(StatusEffects.DriderIncubusVenom);
@@ -10814,6 +10789,11 @@ use namespace CoC;
 					removeStatusEffect(StatusEffects.FlyingNoStun);
 					removePerk(PerkLib.Resolute);
 				}
+			}
+
+			if(statStore.hasBuff("Might")){
+				statStore.removeBuffs("Might");
+				removeStatusEffect(StatusEffects.Minimise);
 			}
 			if(hasStatusEffect(StatusEffects.Minimise)) {
 				statStore.removeBuffs("Minimise");
@@ -10880,6 +10860,7 @@ use namespace CoC;
 				if (statusEffects.indexOf(a[i])>=0) a[i].onCombatEnd();
 			}
 			statStore.removeCombatRoundTrackingBuffs();
+			HP = HPPercent*maxHP();
 		}
 
 		public function consumeItem(itype:ItemType, amount:int = 1):Boolean {

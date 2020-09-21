@@ -1109,7 +1109,7 @@ private function loppeRidesPCCockFinal():void {
 	player.sexReward("vaginalFluids");
 	dynStats("tou", .5, "lib", .5, "sen", -4);
 	player.trainStat("lib", +1, 100);
-	player.trainStat("tou", +1, 100);
+	player.trainStat("tou", +1, 75);
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
 	//3 hours pass.
 	doNext(camp.returnToCampUseFourHours);
@@ -1202,7 +1202,7 @@ private function loppeWorshipsDicks():void {
 	player.sexReward("saliva");
 	dynStats("tou", .5, "lib", .5, "sen", -4);
 	player.trainStat("lib", +1, 100);
-	player.trainStat("tou", +1, 100);
+	player.trainStat("tou", +1, 75);
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
 	doNext(camp.returnToCampUseFourHours);
 }
@@ -1359,7 +1359,7 @@ private function getFuckedInYerTwatYaCunt():void {
 	player.orgasm();
 	dynStats("tou", .5, "lib", .5, "sen", -4);
 	player.trainStat("lib", +1, 100);
-	player.trainStat("tou", +1, 100);
+	player.trainStat("tou", +1, 75);
 	doNext(camp.returnToCampUseFourHours);
 }
 
@@ -1526,7 +1526,7 @@ private function getButtFuckedNonHoarseByLoppe():void {
 	//3 hours pass
 	dynStats("tou", .5, "lib", .5, "sen", -4);
 	player.trainStat("lib", +1, 100);
-	player.trainStat("tou", +1, 100);
+	player.trainStat("tou", +1, 75);
 	doNext(camp.returnToCampUseFourHours);
 }
 
@@ -1672,7 +1672,7 @@ private function getAssFuckedByLoppeAsACentaur():void {
 	player.sexReward("cum")
 	dynStats("tou", .5, "lib", .5, "sen", -4);
 	player.trainStat("lib", +1, 100);
-	player.trainStat("tou", +1, 100);
+	player.trainStat("tou", +1, 75);
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
 	doNext(camp.returnToCampUseFourHours);
 }
@@ -1940,7 +1940,7 @@ private function boobjobLoppe():void {
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
 	dynStats("tou", .5, "lib", .5, "sen", -4);
 	player.trainStat("lib", +1, 100);
-	player.trainStat("tou", +1, 100);
+	player.trainStat("tou", +1, 75);
 	doNext(camp.returnToCampUseFourHours);
 }
 

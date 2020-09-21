@@ -86,6 +86,7 @@ public class Appearance extends Utils
 				else if (i_creature.hairType == Hair.SILKEN) description += "silk-like ";
 				else if (i_creature.hairType == Hair.BURNING) description += "burning ";
 				else if (i_creature.hairType == Hair.SNOWY) description += "snowy ";
+				else if (i_creature.hairType == Hair.CRAZY) description += "crazy ";
 				description += "mane";
 				if (i_creature.hairType == Hair.STORM) description += ". The tips ends with glowing lightning shaped locks";
 				return description;
@@ -108,6 +109,7 @@ public class Appearance extends Utils
 			else if (i_creature.hairType == Hair.GRASS) description += "grass-";
 			else if (i_creature.hairType == Hair.SILKEN) description += "silk-like ";
 			else if (i_creature.hairType == Hair.SNOWY) description += "snowy ";
+			else if (i_creature.hairType == Hair.CRAZY) description += "crazy ";
 			if (i_creature.hairType == Hair.BURNING) description += "mane of fire that burns things only when you wish it to";
 			else description += "hair";
 			if (i_creature.hairType == Hair.STORM) description += ". The tips ends with glowing lightning shaped locks";

@@ -2119,7 +2119,7 @@ public class PlayerAppearance extends BaseContent {
 	public function describeHairStyle():void {
 		var hairStyle:Number = player.hairStyle;
 		if(player.hairLength == 0 && (player.hairType == Hair.STORM || player.hairType == Hair.BURNING || player.hairType == Hair.ANEMONE
-				|| player.hairType == Hair.QUILL || player.hairType == Hair.FEATHER || player.hairType == Hair.GORGON || player.hairType == Hair.FLUFFY)) {
+				|| player.hairType == Hair.QUILL || player.hairType == Hair.FEATHER || player.hairType == Hair.GORGON || player.hairType == Hair.FLUFFY || player.hairType == Hair.CRAZY)) {
 		}
 		else {
 			if(hairStyle == Hair.PLAIN)
@@ -3421,15 +3421,7 @@ public class PlayerAppearance extends BaseContent {
 		clearOutput();
 		outputText("You sit down on your sleeping " + (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "bed" : "bag") + " and contemplate your current outlook on life. You have been through much and became bigger, better, way more than what you once were.");
 		if (player.race() != player.startingRace) outputText(" While you were formerly a " + player.startingRace + " you now are a " + player.race() + " for  better or for worse and have decided to live this new life to its fullest.");
-		var oldmaxes:Object = player.getAllMaxStats();
-		var touStat:Number = oldmaxes.tou;
-		var speStat:Number = oldmaxes.spe;
-		var libStat:Number = oldmaxes.lib;
 		player.strtouspeintwislibsenCalculation2();
-		var newmaxes:Object = player.getAllMaxStats();
-		var touStat1:Number = newmaxes.tou;
-		var speStat1:Number = newmaxes.spe;
-		var libStat1:Number = newmaxes.lib;
 		outputText(" As if this reflection unlocked some hidden door in you, you feel your body awaken with newfound vigor and might. Let your adversaries come, you are ready for them now!");
 		doNext(playerMenu);
 	}

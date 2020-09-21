@@ -1586,24 +1586,20 @@ use namespace CoC;
 		//Rare Drops: LaBova & Minotaur Blood
 		public function defeatImpLord():void {
 			clearOutput();
+			menu();
 			if(monster.HP < 1) {
-				outputText("The greater imp falls to the ground panting and growling in anger.  He quickly submits however, the thoroughness of his defeat obvious.  You walk towards the imp who gives one last defiant snarl before slipping into unconsciousness.");
-				if (monster.short != "imp overlord") addButton(0, "Kill Him", killImp);
-				else {
-					cleanupAfterCombat();
-					return;
-				}
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
-				addButton(4, "Leave", cleanupAfterCombat);
-			}
-			else {
+				outputText("The greater imp falls to the ground panting and growling in anger.  He quickly submits however, the thoroughness of his defeat obvious.");
+			} else {
 				outputText("The muscular imp groans in pained arousal, his loincloth being pushed to the side by his thick, powerful dick.  Grabbing the useless clothing, he rips it from his body, discarding it.  The imp's eyes lock on his cock as he becomes completely ignorant of your presence.  His now insatiable lust has completely clouded his judgment.  Wrapping both of his hands around his pulsing member he begins to masturbate furiously, attempting to relieve the pressure you've caused.");
-				//Leave // Rape]
-				menu();
-				if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) addButton(0, "Sex", sexAnImpLord);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
-				addButton(4,"Leave",cleanupAfterCombat);
 			}
+			if (player.lust >= 33) {
+				addButton(0, "Sex", sexAnImpLord);
+				if (player.pcCanUseUniqueSexScene()) addButton(14, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			} else {
+				outputText("\n\nYou are not aroused enought to rape him.");
+			}
+			addButton(1, "Kill Him", killImp);
+			addButton(4, "Leave", cleanupAfterCombat);
 		}
 		public function loseToAnImpLord():void {
 			clearOutput();
@@ -1633,7 +1629,6 @@ use namespace CoC;
 				if(player.hasVagina()) addButton(2,"Ride Cock",femaleVagRape);
 				if(player.findPerk(PerkLib.Feeder) >= 0 && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
 				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-				if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(5, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 			}
 			addButton(14,"Leave",cleanupAfterCombat);
 		}

@@ -1585,7 +1585,7 @@
                         </if>
                     </case>
                     <default>
-                        <if test="hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.FEATHER">
+                        <if test="hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.FEATHER and hairType != Hair.CRAZY">
                             <switch>
                                 <case test="hairLength lt 16">
                                     <hide part="hair/*"/>

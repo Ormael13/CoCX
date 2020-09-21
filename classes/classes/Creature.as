@@ -303,8 +303,12 @@ public class Creature extends Utils
 			var stat:PrimaryStat = statStore.findStat(statName) as PrimaryStat;
 			if (stat.core.value < limit){
 				stat.core.value += amount;
-				if (stat.core.value < limit){
+				if (stat.core.value > limit){
 					stat.core.value = limit;
+				}
+				else{
+					CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+					CoC.instance.mainView.statsView.showStatUp(statName);
 				}
 			}
 		}
@@ -365,14 +369,14 @@ public class Creature extends Utils
 		public var level:Number = 0;
 		public var gems:Number = 0;
 		public var additionalXP:Number = 0;
-		
-		public function get str100():Number { return 100*str/getMaxStats('str'); }
-		public function get tou100():Number { return 100*tou/getMaxStats('tou'); }
-		public function get spe100():Number { return 100*spe/getMaxStats('spe'); }
-		public function get inte100():Number { return 100*inte/getMaxStats('inte'); }
-		public function get wis100():Number { return 100*wis/getMaxStats('wis'); }
-		public function get lib100():Number { return 100*lib/getMaxStats('lib'); }
-		public function get sens100():Number { return 100*sens/getMaxStats('sens'); }
+
+		public function get str100():Number { return 100*str/strStat.max; }
+		public function get tou100():Number { return 100*tou/touStat.max; }
+		public function get spe100():Number { return 100*spe/speStat.max; }
+		public function get inte100():Number { return 100*inte/intStat.max; }
+		public function get wis100():Number { return 100*wis/wisStat.max; }
+		public function get lib100():Number { return 100*lib/libStat.max; }
+		public function get sens100():Number { return 100*sens/sensStat.max; }
 		public function get fatigue100():Number { return 100*fatigue/maxFatigue(); }
 		public function get hp100():Number { return 100*HP/maxHP(); }
 		public function get wrath100():Number { return 100*wrath/maxWrath(); }
@@ -755,32 +759,9 @@ public class Creature extends Utils
 		public function maxMana():Number {
 			return 0;
 		}
-		public function getMaxStats(stats:String):int {
-			var obj:Object = getAllMaxStats();
-			if (stats == "str" || stats == "strength") return obj.str;
-			else if (stats == "tou" || stats == "toughness") return obj.tou;
-			else if (stats == "spe" || stats == "speed") return obj.spe;
-			else if (stats == "inte" || stats == "int" || stats == "intelligence") return obj.inte;
-			else if (stats == "wis" || stats == "wisdom") return obj.wis;
-			else if (stats == "lib" || stats == "libido") return obj.lib;
-			else if (stats == "sens" || stats == "sen" || stats == "sensitivity") return obj.sen;
-			else return 100;
-		}
 		/**
 		 * @return keys: str, tou, spe, inte, wis, lib, sens, cor
 		 */
-		public function getAllMaxStats():Object {
-			return {
-				str:100,
-				tou:100,
-				spe:100,
-				inte:100,
-				wis:100,
-				lib:100,
-				sens:100,
-				cor:100
-			};
-		}
 		public function getAllMinStats():Object {
 			return {
 				str:1,
@@ -788,7 +769,7 @@ public class Creature extends Utils
 				spe:1,
 				inte:1,
 				wis:1,
-				lib:10,
+				lib:1,
 				sens:10,
 				cor:0
 			};
@@ -833,22 +814,9 @@ public class Creature extends Utils
 		}
 		public function modStats(dstr:Number, dtou:Number, dspe:Number, dint:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {
 			var maxes:Object;
-			if (max) {
-				maxes = getAllMaxStats();
-				maxes.lust = maxLust();
-			} else {
-				maxes = {
-					str:Infinity,
-					tou:Infinity,
-					spe:Infinity,
-					inte:Infinity,
-					wis:Infinity,
-					lib:Infinity,
-					sens:Infinity,
-					cor:Infinity,
-					lust:Infinity
-				}
-			}
+			//if (max) {
+			//	maxes.lust = maxLust();
+			//}
 			var mins:Object = getAllMinStats();
 			mins.lust = minLust();
 			var oldHPratio:Number = hp100/100;
@@ -901,8 +869,8 @@ public class Creature extends Utils
 			if (dsens < 0){
 				removeCurse("sens", -dsens);
 			}
-			lust = Utils.boundFloat(mins.lust, lust + dlust, maxes.lust);
-			cor  = Utils.boundFloat(mins.cor, cor + dcor, maxes.cor);
+			lust = Utils.boundFloat(mins.lust, lust + dlust, maxLust());
+			cor  = Utils.boundFloat(mins.cor, cor + dcor, 100);
 			
 			// old_hp / old_max = new_hp / new_max
 			HP = oldHPratio * maxHP();

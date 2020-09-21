@@ -1046,11 +1046,11 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 		else if (player.cor > 40)
 			cleanse -= 1;
 		dynStats("cor", cleanse - player.countCockSocks("alabaster"));
-		player.trainStat("str", +2, 45);
-		player.trainStat("tou", +2, 45);
-		player.trainStat("spe", +2, 75);
-		player.trainStat("int", +2, 80);
-		player.trainStat("wis", +1, 80);
+		player.trainStat("str", +1, 50);
+		player.trainStat("tou", +1, 50);
+		player.trainStat("spe", +1, 50);
+		player.trainStat("int", +1, 50);
+		player.trainStat("wis", +1, 50);
 		player.trainStat("wis", +1, 100);
 		flags[kFLAGS.JOJO_LAST_MEDITATION] = model.time.days;
 		player.addStatusValue(StatusEffects.JojoMeditationCount, 1, 1);

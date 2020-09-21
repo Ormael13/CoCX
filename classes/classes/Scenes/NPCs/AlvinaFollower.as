@@ -556,14 +556,19 @@ public function alvinaMainCampSexMenuPrideOfLucifer():void
 	outputText("Alvina’s womb quickly overflowing from the relentless torrent of cum that streams from your cock"+(player.cockTotal() > 1 ? "s" : "")+" is unable to contain the excess, pulling away from you,  leaving you and the bed to be showered in your spooge. Alvina, however, is not done as she grabs your still erupting cock.\n\n");
 	outputText("\"<i>Mmmmmm... time for my treat. This looks just about ripe.</i>\"\n\n");
 	outputText("She licks her lips in delight and to make sure not to lose a drop, as she starts to suck on your drooling penis, drinking the cum as it comes out and prolonging your orgasm. You faint against her as the rush of pleasure overloads your brain, your cock still twitching in her grasp.\n\n");
+	player.trainStat("str",2,100)
+	player.trainStat("inte",2,100)
+	player.trainStat("lib",2,100)
 	alvinaMainCampSexMenu3();
 }
 public function alvinaMainCampSexMenuGreedOfMammon():void
 {
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 	clearOutput();
-	outputText("You find Alvina somewhat busy packing up her gear. You're surprised she’s leaving this early.\n\n");
-	outputText("\"<i>There's no point in me staying here, you successfully learned all I know and did all I asked. I have no further need or interest for you.</i>\"\n\n");
+	outputText("TOO DO\n\n");
+	player.trainStat("str",2,100)
+	player.trainStat("inte",2,100)
+	player.trainStat("lib",2,100)
 	alvinaMainCampSexMenu3();
 }
 public function alvinaMainCampSexMenuBlasphemeOfBaphomet():void
@@ -656,6 +661,9 @@ public function alvinaMainCampSexMenuContractOfMephistopheles():void
 	outputText("You slowly lose the concept of time as the tentacles fuck you, drenches you in cum, and wrecks your spasming body again and again. A tentacle even forced its way into Alvina’s ass and surged back out of her mouth and shoved itself right into yours, exploring your body up to the exit and cumming out of your anus. ");
 	outputText("The ground is constantly soaked with your fluids, which you barely register being drunk by some kind of weird orifice.\n\n");
 	outputText("You pass out from the overstimulation abandoning yourself to the wild fucking of the tentacles.\n\n");
+	player.trainStat("str",2,100)
+	player.trainStat("inte",2,100)
+	player.trainStat("lib",2,100)
 	alvinaMainCampSexMenu3();
 }
 public function alvinaMainCampSexMenuGluttonyOfBeelzebub():void
@@ -670,6 +678,9 @@ public function alvinaMainCampSexMenuGluttonyOfBeelzebub():void
 	outputText("with a slimy double dildo made of squirming bugs. You keep bucking your hips as your pussies touch then part ways linked by a chain of squirming larvae. Your vagina suddenly fills up with cum as the dick-larvae all starts to bottom out inside your pussy, cuming in all directions and painting your inner walls. That done the larvae all proceed to leave your cunt one by one. ");
 	outputText("This is way too much and you start orgasming consecutively each time one slides out, your pussy spewing them out with a torrent of cum as you begin to babble and drool. Alvina is in a similar state smiling with an ecstatic expression as the larvae flood out of her drenching pussy. Once outside, they merge back in the bed, disappearing in whatever dimensional hole they came from.\n\n");
 	outputText("The both of you stay entangled in one another still tired after the crazy ordeal.\n\n");
+	player.trainStat("str",2,100)
+	player.trainStat("inte",2,100)
+	player.trainStat("lib",2,100)
 	alvinaMainCampSexMenu3();
 }
 public function alvinaMainCampSexMenu3():void
@@ -753,7 +764,7 @@ public function alvinaCampStudy():void
 		outputText("\"<i>Still daydreaming in the middle of my lectures [name]?</i>\"\n\n");
 		outputText("You quickly jerk back into action to show you're listening. Alvina resumes explaining the universal principle of how to channel desire into power. You learn a lot, but the way she flaunts her body, and the many innuendos she punctuates the lesson with, make you flush red in arousal.  During the entire lesson, your teacher is teasing you, ");
 		outputText("and there's nothing you can do about it but wait patiently for the end of the lecture. By the time you get to doing something practical, you are so aroused you feel your lust rise uncontrollably just from casting those spells as wild fantasies assault your mind.\n\n");
-		if (player.intStat.core.value > 70 && player.libStat.core.value > 70 && flags[kFLAGS.ALVINA_FOLLOWER] == 15) {
+		if (player.intStat.core.value > 80 && player.libStat.core.value > 80 && flags[kFLAGS.ALVINA_FOLLOWER] == 15) {
 			outputText("You finally achieved complete mastery over your lust, conquering your arousal and turning it into a weapon to use against your foe as you unleash a massive blast of black magic on the target dummy.\n\n");
 			outputText("\"<i>Very good [name], you finally achieved mastery of the theory. Tomorrow we will discuss more advanced principles.</i>\" She dismisses you with these congratulations as you head back to camp feeling both sexy and powerful.\n\n");
 			player.createStatusEffect(StatusEffects.AlvinaTraining, 0, 0, 0, 0);
@@ -762,7 +773,7 @@ public function alvinaCampStudy():void
 			player.trainStat("lib",4,100)
 			flags[kFLAGS.ALVINA_FOLLOWER] = 16;
 		}
-		else if (player.intStat.core.value > 35 && player.libStat.core.value > 35 && flags[kFLAGS.ALVINA_FOLLOWER] == 14) {
+		else if (player.intStat.core.value > 50 && player.libStat.core.value > 50 && flags[kFLAGS.ALVINA_FOLLOWER] == 14) {
 			outputText("Against all odds, you manage to hold your lust in check and cast the spells properly.\n\n");
 			outputText("\"<i>That will be all for today [name], we will continue tomorrow.</i>\" You head back to camp feeling extremely pent up, but also smarter.\n\n");
 			dynStats("inte", 7, "lib", 7, "cor", 2);

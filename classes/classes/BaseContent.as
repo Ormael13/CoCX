@@ -52,6 +52,10 @@ import coc.xxc.StoryContext;
 			return CoC.instance.timeQ;
 		}
 
+		protected function get isNightTime():Boolean {
+			return (model.time.hours <= 5 || model.time.hours >= 21);
+		}
+
 		/*protected function get measurements():Class
 		{
 			return Measurements;

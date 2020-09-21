@@ -84,7 +84,7 @@ public class HellHound extends Monster
 				if (hpVictory) {
 					outputText("The hellhound's flames dim and the heads let out a whine before the creature slumps down, defeated and nearly unconscious.", true);
 					//Rape if not naga, turned on, and girl that can fit!
-					if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) {
+					if (player.hasVagina() && player.lust >= 33) {
 						outputText("  You find yourself musing that you could probably take advantage of the poor 'doggy'.  Do you fuck it?");
 						SceneLib.mountain.hellHoundScene.hellHoundPostFightSexScenes();
 					} else {

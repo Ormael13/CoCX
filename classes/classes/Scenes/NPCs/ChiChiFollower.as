@@ -268,7 +268,7 @@ public function TrainingSoulArtsWithChiChi():void {
 			player.trainStat("tou", +2, 75);
 			player.trainStat("tou", +1, 100);
 			player.HP -= player.maxHP() * 0.5;
-			if (player.touStat.core.value >= 75) {
+			if (player.touStat.core.value >= 100) {
 				if (player.findPerk(PerkLib.MightyFist) < 0) {
 					player.createPerk(PerkLib.MightyFist, 0, 0, 0, 0);
 					outputText(" <b>You've gained the Mighty Fist perk.</b>");
@@ -288,7 +288,7 @@ public function TrainingSoulArtsWithChiChi():void {
 			player.trainStat("str", +1, 100);
 			player.trainStat("spe", +2, 75);
 			player.trainStat("spe", +1, 100);
-			if (player.strStat.core.value >= 75 && player.speStat.core.value >= 75) {
+			if (player.strStat.core.value >= 100 && player.speStat.core.value >= 100) {
 				if (!player.hasStatusEffect(StatusEffects.KnowsOverlimit)) {
 					outputText(" Chi Chi, noticing that you’re training hard, hands you a scroll.\n\n");
 					outputText("\"<i>This is a scroll containing the technique Overlimit. Use it with caution, because if abused, this technique can and WILL kill you.</i>\"\n\n");

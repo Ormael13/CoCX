@@ -70,8 +70,8 @@ public final class Mutations extends MutationsHelper {
             player.slimeFeed();
             clearOutput();
             outputText("You open the can and “bottom up”, hoping it wasn’t just a scam to buy an overpriced beer. “Whoa, that’s one hell of a manly beverage!” The alcohol in the beer is so strong you actually feel like you could lift bigger things now. No...wait, you actually do as your muscle seems to surge with new raw power.");
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) MutagenBonus("str",2 + rand(3));
-            else MutagenBonus("str",1 + rand(2));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) AlchemyBonus("str",2 + rand(3));
+            else AlchemyBonus("str",1 + rand(2));
             if (rand(3) == 0) {
                 if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) outputText(player.modTone(player.maxToneCap(), 6));
                 else outputText(player.modTone(player.maxToneCap(), 3));
@@ -85,8 +85,8 @@ public final class Mutations extends MutationsHelper {
             player.slimeFeed();
             clearOutput();
             outputText("The elixir tastes foul at first, but you guess it’s how it is with all medicine. As the merchant warned you, you begin to feel your muscles coiling like a spring, ready to allow you to make a swift dash. Your co-ordination definitively improved too, as well as your vision, as you can follow your movement despite the acceleration.");
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) MutagenBonus("spe",2 + rand(3));
-            else MutagenBonus("spe",1 + rand(2));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) AlchemyBonus("spe",2 + rand(3));
+            else AlchemyBonus("spe",1 + rand(2));
             if (rand(3) == 0) {
                 if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) outputText(player.modTone(player.maxToneCap(), 6));
                 else outputText(player.modTone(player.maxToneCap(), 3));

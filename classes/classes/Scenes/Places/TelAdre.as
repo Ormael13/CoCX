@@ -1518,14 +1518,10 @@ private function weightLifting():void {
 	//(else)
 	else outputText("This place barely has anything left to challenge you, but you take the heaviest weights you can get your mitts on and get to it.  By the time an hour has passed, you've worked up a good sweat, but without heavier weights you probably won't get any stronger.");
 	//Stat changes HERE!
-	if(player.strStat.core.value < 100) {
-		dynStats("str", 5);
-		player.strStat.core.value += .5;
-	}
-	if(player.touStat.core.value < 100) {
-		dynStats("tou", 5);
-		player.touStat.core.value += .5;
-	}
+	dynStats("str", 5);
+	player.trainStat("str",1,75);
+	dynStats("tou", 5);
+	player.trainStat("tou",1,75);
 	//Body changes here
 	//Muscleness boost!
 	outputText(player.modTone(85,5+rand(5)));
@@ -1575,14 +1571,10 @@ private function goJogging():void {
 	//else)
 	else outputText("and it barely challenges you.  You run at a sprint half the time and still don't feel like you're improving in the slightest.  Still, you do manage to burn a lot of calories.");
 	//Stat changes HERE!
-	if(player.speStat.core.value < 100) {
-			dynStats("spe", 5);
-			player.speStat.core.value += .5;
-	}
-	if(player.touStat.core.value < 100) {
-		dynStats("tou", 5);
-		player.touStat.core.value += .5;
-	}
+	dynStats("spe", 5);
+	player.trainStat("spe",1,75);
+	dynStats("tou", 5);
+	player.trainStat("tou",1,75);
 
 	//If butt is over 15 guaranteed reduction
 	if(player.butt.type >= 15) {

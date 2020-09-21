@@ -2,6 +2,7 @@
  * Coded by aimozg on 01.08.2018.
  */
 package classes.Stats {
+import classes.CoC;
 import classes.internals.Utils;
 
 import coc.script.Eval;
@@ -111,6 +112,7 @@ public class StatStore implements IStatHolder {
 			s.addOrIncreaseBuff(tag, amount, options);
 		}
 	}
+
 	public function removeBuffs(tag:String):void {
 		forEachStat(function(stat:BuffableStat):void{
 			stat.removeBuff(tag);

@@ -441,7 +441,6 @@ public class PlayerInfo extends BaseContent {
 		else
 			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)\n";
 		combatStats += "\n";
-		var maxes:Object = player.getAllMaxStats();
 		var mins:Object = player.getAllMinStats();
 		combatStats += "<b>Strength Cap:</b> " + player.strStat.max + "\n";
 		combatStats += "<i>Ghost Strength:</i> +" + combat.ghostStrength() + "\n";
@@ -450,8 +449,7 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<i>Ghost Speed:</i> +" + combat.ghostSpeed() + "\n";
 		combatStats += "<b>Intelligence Cap:</b> " + player.intStat.max + "\n";
 		combatStats += "<b>Wisdom Cap:</b> " + player.wisStat.max + "\n";
-		combatStats += "<b>Libido Cap:</b> " + maxes.lib + "\n";
-		combatStats += "<i>Libido Minimum:</i> " + mins.lib + "\n";
+		combatStats += "<b>Libido Cap:</b> " + player.libStat.max + "\n";
 		combatStats += "<b>Sensitivity Cap:</b> " + player.sensStat.max + "\n";
 		combatStats += "<i>Sensitivity Minimum:</i> " + mins.sens + "\n";
 		combatStats += "<i>Corruption Minimum:</i> " + mins.cor + "\n";
@@ -1126,7 +1124,6 @@ public class PlayerInfo extends BaseContent {
 
 //Attribute menu
 	private function attributeMenu():void {
-		var maxes:Object = player.getAllMaxStats();
 		clearOutput();
 		outputText("You have <b>" + (player.statPoints) + "</b> left to spend.\n\n");
 
@@ -1177,7 +1174,6 @@ public class PlayerInfo extends BaseContent {
 	}
 
 	private function addAttribute(attribute:String):void {
-		var maxes:Object = player.getAllMaxStats();
 		var n:int=1;
 		var m:int;
 		if (flags[kFLAGS.SHIFT_KEY_DOWN]) n = 5;

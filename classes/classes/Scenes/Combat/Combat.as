@@ -3599,6 +3599,9 @@ public class Combat extends BaseContent {
                             damage *= 1.75;
                         }
                         if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
+                        if (player.findPerk(PerkLib.RacialParagon) >= 0) damage *= 1.5;
+                        if (player.findPerk(PerkLib.Apex) >= 0) damage *= 1.5;
+                        if (player.findPerk(PerkLib.AlphaAndOmega) >= 0) damage *= 1.5;
                         damage = damage * 0.33 * monster.lustVuln;
                         damage = Math.round(damage);
                         monster.teased(damage);
@@ -7348,6 +7351,8 @@ public class Combat extends BaseContent {
     //VICTORY OR DEATH?
     // Called after the monster's action. Increments round counter. Setups doNext to win/loss/combat menu
     public function combatRoundOver():void {
+        var HPPercent:Number;
+        HPPercent = player.HP/player.maxHP();
         combatRound++;
         player.statStore.advanceTime(Buff.RATE_ROUNDS,1);
         monster.statStore.advanceTime(Buff.RATE_ROUNDS,1);
@@ -7362,6 +7367,7 @@ public class Combat extends BaseContent {
         }
         statScreenRefresh();
         flags[kFLAGS.ENEMY_CRITICAL] = 0;
+        player.HP = HPPercent*player.maxHP();
         combatIsOver();
     }
 

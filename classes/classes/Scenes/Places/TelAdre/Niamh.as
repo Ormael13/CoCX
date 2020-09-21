@@ -268,11 +268,10 @@ public function blackCatBeerEffects(player:Player,clearScreen:Boolean = true,new
 	outputText("\n\nYour balance suddenly feels off-kilter and you stumble, narrowly avoiding falling.  You just can't move as fast as you could, not with your head feeling so full of fluff and fuzz; your body prickles and tingles with the warmth once your head feels full, the sensation concentrating around your erogenous zones.  You just feel so fluffy... you want to hold somebody and share your warmth with them, too; it's just so wonderful.");
 	//Regain 40 to 60 lost health, increase lust by 10 to 20 points, decrease Intelligence and Speed by 5, increase Libido by 5//
 	HPChange(40 + rand(21), false);
-	var maxes:Object = player.getAllMaxStats();
 	var lib:Number = 0;
 	if(player.hasStatusEffect(StatusEffects.BlackCatBeer)) {
-		if(maxes.lib - player.lib >= 10) lib = 10;
-		else lib = maxes.lib - player.lib;
+		if(player.libStat.max - player.lib >= 10) lib = 10;
+		else lib = player.libStat.max - player.lib;
 		player.addStatusValue(StatusEffects.BlackCatBeer,1,4);
 		player.addStatusValue(StatusEffects.BlackCatBeer,2,lib);
 		outputText("\n\nDamn, it's even better with every extra drink!");

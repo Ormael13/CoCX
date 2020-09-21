@@ -315,7 +315,6 @@ public class StatsView extends Block {
 	}
 	public function refreshStats(game:CoC):void {
 		var player:Player            = game.player;
-		var maxes:Object      = player.getAllMaxStats();
 		nameText.htmlText     = "<b>" + player.short + "</b>";
 		strBar.maxValue       = player.strStat.max;
 		strBar.value          = player.str;

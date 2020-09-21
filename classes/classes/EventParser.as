@@ -167,7 +167,10 @@ public class EventParser {
         while (CoC.instance.timeQ > 0) {
             CoC.instance.timeQ--;
             CoC.instance.model.time.hours++;
+            var HPPercent:Number;
+            HPPercent = player.HP/player.maxHP();
             player.statStore.advanceTime(Buff.RATE_HOURS,1);
+            player.HP = HPPercent*player.maxHP();
             if (player.statStore.recentlyRemovedTags["IzumiSmoke"]){
                 EngineCore.outputText("\n<b>You groan softly as your thoughts begin to clear somewhat. It looks like the effects of Izumi's pipe smoke have worn off.</b>\n");
             }
@@ -183,6 +186,7 @@ public class EventParser {
             if (player.statStore.recentlyRemovedTags["Feeding Euphoria"]){
                 EngineCore.outputText("\nThe change in your body agility prowess confirms that the effects of cum must have worn off.\n");
             }
+            player.HP = HPPercent*player.maxHP();
             SceneLib.combat.regeneration(false);
             if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) SceneLib.combat.soulforceregeneration(false);
             if (player.findPerk(PerkLib.JobSorcerer) >= 0) SceneLib.combat.manaregeneration(false);
@@ -198,7 +202,9 @@ public class EventParser {
             if (CoC.instance.model.time.hours > 23) {
                 CoC.instance.model.time.hours = 0;
                 CoC.instance.model.time.days++;
+                HPPercent = player.HP/player.maxHP();
                 player.statStore.advanceTime(Buff.RATE_DAYS,1);
+                player.HP = HPPercent*player.maxHP();
                 if (player.statStore.recentlyRemovedTags["KitsuneShrine"]){
                     EngineCore.outputText("\nYou feel like you should meditate again at the kitsune shrine as the serenity and peace you have recently aquired has waned.\n");
                 }

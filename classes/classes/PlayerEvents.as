@@ -402,6 +402,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createStatusEffect(StatusEffects.Overheat, 1, 0, 0,0);
 				if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
 				else if (player.hasVagina()) player.goIntoHeat(false);
+				needNext = true;
 			}
 			if ((player.salamanderScore()<7 && !player.hasStatusEffect(StatusEffects.HinezumiCoat) && player.hellcatScore() < 10) && player.hasStatusEffect(StatusEffects.Overheat))
 			{
@@ -410,6 +411,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removeStatusEffect(StatusEffects.Heat);
 				player.removeStatusEffect(StatusEffects.Rut);
 				player.statStore.removeBuffs("Overheat");
+				needNext = true;
 			}
 			//Player overheat was cleaned by sex!
 			if (player.statusEffectv1(StatusEffects.Overheat) == 1 && player.statusEffectv3(StatusEffects.Overheat) == 1) { //Lose slime core perk

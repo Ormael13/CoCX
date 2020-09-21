@@ -92,20 +92,18 @@ public class HellHoundScene extends BaseContent
 
 		public function hellHoundPostFightOptions():void
 		{
-			if (monster.HP < 1) {
-				menu();
-				addButton(12, "Slay", killHellhound);
-				addButton(14, "Leave", cleanupAfterCombat);
-			}
-			else doNext(cleanupAfterCombat);
+			menu();
+			if (monster.HP < 1) addButton(12, "Slay", killHellhound);
+			addButton(14, "Leave", cleanupAfterCombat);
 		}
 		public function hellHoundPostFightSexScenes():void
 		{
 			menu();
 			addButton(0, "Lick it", hellHoundGetsRaped);
-			if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) addButton(1, "Fuck", hellHoundPropahRape);
+			if(!player.isNaga()){
+				if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) addButton(1, "Fuck", hellHoundPropahRape);
+			}
 			if (player.isLiliraune()) addButton(2, "TakeBothIn", takeBothIn);
-
 			if (monster.HP < 1) addButton (12, "Slay", killHellhound);
 			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 			addButton(14, "Leave", cleanupAfterCombat);
