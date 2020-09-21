@@ -108,7 +108,8 @@ public class StatStore implements IStatHolder {
 		var s:BuffableStat = findBuffableStat(stat);
 		if (!s) {
 			trace("/!\\ addBuff(" + stat + ", " + amount + ") in " + tag);
-		} else {
+		}
+		 else {
 			s.addOrIncreaseBuff(tag, amount, options);
 		}
 	}

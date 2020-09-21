@@ -317,9 +317,13 @@ public class Creature extends Utils
 
 			if (statName == "sens" || statName == "cor") {
 				statStore.addBuff(statName, power, 'Curse', {text: 'Curse'});
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatUp(statName);
 			}
 			else {
 				statStore.addBuff(statName, -power, 'Curse', {text: 'Curse'});
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatDown(statName);
 			}
 		}
 		public function removeCurse(statName:String, power:Number):void {
@@ -333,19 +337,26 @@ public class Creature extends Utils
 				if (current >0){
 					if (power >= current) {
 						stat.removeBuff('Curse');
+						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+						CoC.instance.mainView.statsView.showStatDown(statName);
 					}
 					else if (power < current) {
 						stat.addOrIncreaseBuff('Curse', -power);
+						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+						CoC.instance.mainView.statsView.showStatUp(statName);
 					}
 				}
 			}
-			else{
-				if (current <0){
+			else {
+				if (current < 0) {
 					if (power >= -current) {
 						stat.removeBuff('Curse');
-					}
-					else if (power < -current) {
+						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+						CoC.instance.mainView.statsView.showStatUp(statName);
+					} else if (power < -current) {
 						stat.addOrIncreaseBuff('Curse', power);
+						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+						CoC.instance.mainView.statsView.showStatDown(statName);
 					}
 				}
 			}
