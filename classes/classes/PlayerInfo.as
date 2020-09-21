@@ -1128,7 +1128,7 @@ public class PlayerInfo extends BaseContent {
 		outputText("You have <b>" + (player.statPoints) + "</b> left to spend.\n\n");
 
 		outputText("Strength: ");
-		if (player.strStat.core.value < player.strStat.core.max) outputText("" + Math.floor(player.strStat.core.value) + " + <b>" + player.tempStr + "</b> → " + Math.floor(player.strStat.core.value + player.tempStr) + " Total "+(player.strStat.core.value + player.tempStr + player.strStat.bonus.value) * player.strStat.mult.value+"\n");
+		if (player.strStat.core.value < player.strStat.core.max) outputText("" + Math.floor(player.strStat.core.value) + " + <b>" + player.tempStr + "</b> → " + Math.floor(player.strStat.core.value + player.tempStr) + " Total "+Math.floor((player.strStat.core.value + player.tempStr + player.strStat.bonus.value) * player.strStat.mult.value)+"\n");
 		else outputText("" + Math.floor(player.strStat.core.value) + " (Maximum)\n");
 
 		outputText("Toughness: ");
