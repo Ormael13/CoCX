@@ -288,7 +288,8 @@ public class Creature extends Utils
 			return 1;
 		} else {
 			return touStat.value;
-		}}
+		}
+		}
 
 		public var speStat:PrimaryStat = _stats.findStat('spe') as PrimaryStat;
 		public function get spe():Number { return speStat.value; }
@@ -305,8 +306,7 @@ public class Creature extends Utils
 				stat.core.value += amount;
 				if (stat.core.value > limit){
 					stat.core.value = limit;
-				}
-				else{
+				} else{
 					CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 					CoC.instance.mainView.statsView.showStatUp(statName);
 				}
@@ -319,8 +319,7 @@ public class Creature extends Utils
 				statStore.addBuff(statName, power, 'Curse', {text: 'Curse'});
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatUp(statName);
-			}
-			else {
+			} else {
 				statStore.addBuff(statName, -power, 'Curse', {text: 'Curse'});
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatDown(statName);
@@ -339,8 +338,7 @@ public class Creature extends Utils
 						stat.removeBuff('Curse');
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatDown(statName);
-					}
-					else if (power < current) {
+					} else if (power < current) {
 						stat.addOrIncreaseBuff('Curse', -power);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatUp(statName);

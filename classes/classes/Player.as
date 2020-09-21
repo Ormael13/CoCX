@@ -11197,7 +11197,7 @@ use namespace CoC;
 				}
 				var sac:HeatEffect = statusEffectByType(StatusEffects.Heat) as HeatEffect;
 				sac.value1 += 5 * intensity;
-				sac.value2 += 5 * intensity;
+				sac.value2 += 0.05 * intensity;
 				sac.value3 += 48 * intensity;
 				sac.ApplyEffect();
 			}
@@ -11231,7 +11231,7 @@ use namespace CoC;
 				}
 				var sac:RutEffect = statusEffectByType(StatusEffects.Rut) as RutEffect;
 				sac.value1 += 100 * intensity;
-				sac.value2 += 5 * intensity;
+				sac.value2 += 0.05 * intensity;
 				sac.value3 += 48 * intensity;
 				sac.ApplyEffect();
 			}
