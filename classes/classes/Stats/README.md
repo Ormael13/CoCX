@@ -188,7 +188,7 @@ Remove this buff, if present, but only from one stat.
 
 ### Buff testing
 
-These functions are **non-chanable**, they must be only or last item in chain. 
+These functions are **non-chainable**, they must be only or last item in chain. 
 
 ----
 
