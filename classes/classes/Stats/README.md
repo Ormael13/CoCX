@@ -263,7 +263,7 @@ player.buff("Poison")
       .forHours(4);
 if (poisonAffectInt) {
       player.buff("Poison")
-            .setStats( { "str": -10, "spe": -10 })
+            .setStats( { "int": -10 })
             .withText("Poisoned!")
             .forHours(4);
 }
