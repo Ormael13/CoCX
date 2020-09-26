@@ -662,7 +662,7 @@ public class Camp extends NPCAwareContent {
 		//Build main menu
 		var exploreEvent:Function = SceneLib.exploration.doExplore;
 		var placesEvent:Function = (placesKnown() ? places : null);
-		var canExploreAtNight:Boolean = (player.werewolfScore() >= 12 || player.vampireScore() >= 10 || player.batScore() >= 6);
+		var canExploreAtNight:Boolean = (player.isNightCreature());
 		clearOutput();
 		updateAchievements();
 
@@ -2294,7 +2294,13 @@ private function SparrableNPCsMenu():void {
 		addButton(1, "2 Hours", rest2).hint("Rest for two hours.");
 		addButton(2, "4 Hours", rest4).hint("Rest for four hours.");
 		addButton(3, "8 Hours", rest8).hint("Rest for eight hours.");
-		addButton(4, "Till Dusk", restTillDusk).hint("Rest until the night comes.");
+		if (player.isNightCreature())
+		{
+			addButton(4, "Till Dawn", restTillDawn).hint("Rest until the dawn comes.");
+		}
+		else{
+			addButton(4, "Till Dusk", restTillDusk).hint("Rest until the night comes.");
+		}
 		addButton(14, "Back", playerMenu);
 	}
 
@@ -2320,6 +2326,17 @@ private function SparrableNPCsMenu():void {
 
 	public function restTillDusk():void {
 		waitingORresting = 21 - model.time.hours;
+		rest();
+	}
+
+	public function restTillDawn():void {
+		var TimeBeforeDawn:Number;
+		if (model.time.hours >= 22) {
+			TimeBeforeDawn = 6 + (24 - model.time.hours)
+		} else {
+			TimeBeforeDawn = 6 - model.time.hours
+		}
+		waitingORresting = TimeBeforeDawn;
 		rest();
 	}
 
@@ -2355,21 +2372,10 @@ private function SparrableNPCsMenu():void {
 			multiplier /= 2;
 		if (timeQ == 0) {
 			var hpBefore:int = player.HP;
-			if (flags[kFLAGS.SHIFT_KEY_DOWN] > 0) { //Rest until fully healed, midnight or hunger wake.
-				while (player.HP < player.maxHP() || player.fatigue > 0) {
-					timeQ += 1;
-					HPChange(hpRecovery * multiplier, false); // no display since it is meant to be full rest anyway
-					fatigue(-fatRecovery * multiplier);
-					if (timeQ + model.time.hours == 24 || flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 5)
-						break;
-				}
-				if (timeQ == 0) timeQ = 1;
-				if (timeQ > 21 - model.time.hours) timeQ = 21 - model.time.hours;
-			} else {
-				timeQ = Math.min(waitingORresting, 21 - model.time.hours);
-				HPChange(timeQ * hpRecovery * multiplier, false);
-				fatigue(timeQ * -fatRecovery * multiplier);
-			}
+			timeQ = waitingORresting;
+			//THIS IS THE TEXT AREA FOR NOCTURNAL
+			HPChange(timeQ * hpRecovery * multiplier, false);
+			fatigue(timeQ * -fatRecovery * multiplier);
 
 			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !prison.inPrison && !ingnam.inIngnam) {
 				if (timeQ != 1) outputText("You head into your cabin to rest. You lie down on your bed to rest for " + num2Text(timeQ) + " hours.\n");
@@ -2428,7 +2434,7 @@ private function SparrableNPCsMenu():void {
 		addButton(1, "2 Hours", doWait2).hint("Wait two hours.");
 		addButton(2, "4 Hours", doWait4).hint("Wait four hours.");
 		addButton(3, "8 Hours", doWait8).hint("Wait eight hours.");
-		if (player.werewolfScore() >= 12 || player.vampireScore() >= 10 || player.batScore() >= 6)
+		if (player.isNightCreature())
 		{
 			addButton(4, "Till Dawn", doWaitTillDawn).hint("Wait until the dawn comes.");
 		}

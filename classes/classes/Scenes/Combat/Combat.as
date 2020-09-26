@@ -9164,8 +9164,24 @@ public class Combat extends BaseContent {
             addButton(0, "Next", combatMenu, false);
             return;
         }
-        if (player.firesnailScore() > 14) {
-            outputText("You too slow to escape from this fight!");
+        if (monster.hasStatusEffect(StatusEffects.AlrauneRunDisabled)) {
+            if (player.hasKeyItem("Torch")){
+                clearOutput();
+                outputText("You burn away the vines and run for it, much to the frustration of the [monster name]. You’re thankful that she’s this slow.\n");
+                inCombat = false;
+                clearStatuses(false);
+                doNext(camp.returnToCampUseOneHour);
+                return;
+            }
+            else{
+                outputText("You are currently being grappled by [monster name] vines theres no way for you to simply break free!");
+                menu();
+                addButton(0, "Next", combatMenu, false);
+                return;
+            }
+        }
+        if (player.lowerBody == LowerBody.FIRE_SNAIL) {
+            outputText("You're too slow to escape from this fight!");
 //Pass false to combatMenu instead:		menuLoc = 3;
 //		doNext(combatMenu);
             menu();

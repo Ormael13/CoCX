@@ -165,7 +165,7 @@ package classes.Scenes
 				if (player.isAlraune() && player.cor >= 50 && monster.hasVagina() && !monster.hasPerk(PerkLib.UniqueNPC)) addButton(5, "Convert", Convert);
 				else addButtonDisabled(5, "Convert", "You need to be a very corrupted alraune against a non unique female character to use this scene.");
 			}
-			if (player.raijuScore() >= 10 && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) addButton(6, "Volt Transfer", raijuVoltTransfer);
+			if ((player.raijuScore() >= 10 || player.thunderbirdScore() >= 12) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) addButton(6, "Volt Transfer", raijuVoltTransfer);
 			else addButtonDisabled(6, "Volt Transfer", "Req. to be Raiju and enemy must be non-gigant humanoid.");
 			//Overheat fire species
 			if (player.hasStatusEffect(StatusEffects.Overheat) && !monster.hasPerk(PerkLib.EnemyGigantType)) addButton(3, "Heat transfer", HeatTransfer);

@@ -188,7 +188,8 @@ public class Alraune extends Monster
 				//	.elseDrop(useables.B_CHITN);
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyPlantType, 0, 0, 0, 0);
-			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
+			//this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.AlrauneRunDisabled, 0, 0, 0, 0);
 			createStatusEffect(StatusEffects.Level,6,0,0,0);
 			checkMonster();
 		}

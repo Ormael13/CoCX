@@ -8493,6 +8493,9 @@ use namespace CoC;
 			return gargoyleCounter;
 		}
 
+		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 12); }
+		public function isNightCreature():Boolean { return (werewolfScore() >= 12 || vampireScore() >= 10 || batScore() >= 6);}
+
 		//TODO: (logosK) elderSlime, succubus pussy/demonic eyes, arachne, wasp, lactabovine/slut, sleipnir, hellhound, ryu, quetzalcoatl, eredar, anihilan,
 
 		public function currentBasicJobs():Number {

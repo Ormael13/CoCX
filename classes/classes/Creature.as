@@ -3473,7 +3473,6 @@ public class Creature extends Utils
 		public function isKraken():Boolean { return lowerBodyPart.isKraken(); }
 		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
 		public function isLiliraune():Boolean { return lowerBodyPart.isLiliraune(); }
-		public function isGoblinoid():Boolean { return (game.player.goblinScore() > 9 || game.player.gremlinScore() > 12); }
 		
 		public function isFlying():Boolean {
 			return hasStatusEffect(StatusEffects.Flying);

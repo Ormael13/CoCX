@@ -694,6 +694,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Fear:StatusEffectType               = mk("Fear");
 		public static const FearCounter:StatusEffectType        = mk("FearCounter");
 		public static const GenericRunDisabled:StatusEffectType = mk("Generic Run Disabled");
+		public static const AlrauneRunDisabled:StatusEffectType = mk("Alraune Run Disabled");
 		public static const Gigafire:StatusEffectType           = mk("Gigafire");
 		public static const GooEngulf:StatusEffectType          = mk("Goo Engulf");
 		public static const GottaOpenGift:StatusEffectType      = mk("Gotta Open Gift");
