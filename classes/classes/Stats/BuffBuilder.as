@@ -41,6 +41,10 @@ public class BuffBuilder {
 		store.removeBuffs(tag);
 		return this;
 	}
+	public function removeFromStat(statName: String): BuffBuilder {
+		store.findBuffableStat(statName).removeBuff(tag);
+		return this;
+	}
 	public function addStat(statName: String, value: Number): BuffBuilder {
 		store.findBuffableStat(statName).addOrIncreaseBuff(tag, value, options);
 		return this;
