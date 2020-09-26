@@ -49,7 +49,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		public function timeChangeLarge():Boolean {
-			if (checkedSuccubi++ == 0 && model.time.hours == 4 && player.hasStatusEffect(StatusEffects.SuccubiNight) && (player.hasCock() || player.gender == 0)) { //Call secksins!
+			if (checkedSuccubi++ == 0 && camp.IsSleeping && player.hasStatusEffect(StatusEffects.SuccubiNight) && (player.hasCock() || player.gender == 0)) { //Call secksins!
 				if (player.hasStatusEffect(StatusEffects.RepeatSuccubi)) {
                     if (SceneLib.vapula.vapulaSlave() && player.hasCock() && flags[kFLAGS.VAPULA_THREESOMES] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) //VapulaSurprise
                         SceneLib.vapula.vapulaAssistsCeruleanSuccubus();

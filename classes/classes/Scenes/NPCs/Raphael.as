@@ -128,14 +128,18 @@ override public function RaphaelLikes():Boolean {
 //{First encounter}
 private function meetRaphael():void {
 	clearOutput();
-	outputText("You stir in your sleep, bothered by a noise. It's the familiar creaking of your camp's storage chest, as if you've just opened it up to fill it with freshly found loot. Groaning, you hog your blankets and twist. Nothing to worry about then. You soon drift back into a pleasant dream about all the spoils you've accumulated over the time here. Life is good.\n\n");
-	
-	outputText("Suddenly, you sit up straight and something occurs to you. If you're sleeping, then who's opening the chest?\n\n");
+	if (camp.IsSleeping){
+		outputText("You stir in your sleep, bothered by a noise. It's the familiar creaking of your camp's storage chest, as if you've just opened it up to fill it with freshly found loot. Groaning, you hog your blankets and twist. Nothing to worry about then. You soon drift back into a pleasant dream about all the spoils you've accumulated over the time here. Life is good.\n\n");
+		outputText("Suddenly, you sit up straight and something occurs to you. If you're sleeping, then who's opening the chest?\n\n");
+		outputText("You rush out of bed and into camp, concerned for your stash.\n\n");
+		outputText("\"<i>Hey!</i>\" you call out sleepy as, indeed, a strange red being is rummaging through your belongings. It has its front body in your storage chest, throwing junk about in search of valuables while its bright red tail wags in the air. The moment it notices you, it jumps up and runs off so fast it turns into a red blur. Only at the outskirts of your camp, on top of a small crumbled wall, does it take the time to introduce itself.\n\n");
 
-	outputText("You rush out of bed and into camp, concerned for your stash.\n\n");
-
-	outputText("\"<i>Hey!</i>\" you call out sleepy as, indeed, a strange red being is rummaging through your belongings. It has its front body in your storage chest, throwing junk about in search of valuables while its bright red tail wags in the air. The moment it notices you, it jumps up and runs off so fast it turns into a red blur. Only at the outskirts of your camp, on top of a small crumbled wall, does it take the time to introduce itself.\n\n");
-	
+	}
+	else{
+		outputText("You are doing your things across then camp when you suddenly hear a noise. It's the familiar creaking of your camp's storage chest, as if you've just opened it up to fill it with freshly found loot.");
+		outputText(" Concerned with who might be toying with your stuffs you rush out throught the camp to check on your stash.\n\n");
+		outputText("\"<i>Hey!</i>\" you call out as, indeed, a strange red being is rummaging through your belongings. It has its front body in your storage chest, throwing junk about in search of valuables while its bright red tail wags in the air. The moment it notices you, it jumps up and runs off so fast it turns into a red blur. Only at the outskirts of your camp, on top of a small crumbled wall, does it take the time to introduce itself.\n\n");
+	}
 	outputText("\"<i>Ha-hah!</i>\" it exclaims boastfully with a sharp, young, dashing voice while standing tall and proud on top of its perch. \"<i>Another daring caper committed by...</i>\"  The being takes the time to strike a pose. \"<i>...the Russet Rogue!</i>\"\n\n");
 
 	outputText("You rub your eyes, walk towards the wall and take a curious look up. It appears to be a red fox. He's looking down on you with a triumphant smirk on a tapered snout; most definitely male and masculine. Although not the broadest figure around, his muscles are lean and strong. His contoured torso flares up above narrow hips and gives him a body that has an agile deftness to it. He wears a loose, red-brown jacket and supple deerskin pants, with a red sash across the hip and soft-soled boots below. They do much to complement the vivid color of his fur, which is a vibrant crimson, broken only by the beige fur running down his chest and towards his crotch. Lithe, the only two things that are large about him is the clear bulge in his thin leather pants and the bushy tail that flicks playfully from side to side. The russet rogue takes quite a bit of pleasure from larceny it seems. Judging by his ornate outfit, he does it for the thrill of it. He himself must be well off.");
@@ -286,10 +290,14 @@ private function rapeRaphaelII():void {
 //Again at bedtime
 private function RaphaelDress():void {
 	clearOutput();
-	outputText("A small pebble hits the ground near you, waking you up. When a second one hits, you're sure someone is trying to draw your attention.\n\n");
-
-	outputText("Rubbing your eyes, you pull yourself out of bed, wondering what's going on. Sticking your head through the front wall of your " + camp.homeDesc() + ", you take a curious peek outside, but find no one around.\n\n");
-
+	if (camp.IsSleeping){
+		outputText("A small pebble hits the ground near you, waking you up. When a second one hits, you're sure someone is trying to draw your attention.\n\n");
+		outputText("Rubbing your eyes, you pull yourself out of bed, wondering what's going on. Sticking your head through the front wall of your " + camp.homeDesc() + ", you take a curious peek outside, but find no one around.\n\n");
+	}
+	else {
+		outputText("A small pebble hits the ground near you, alerting you that something is going on. When a second one hits, you're sure someone is trying to draw your attention.\n\n");
+		outputText("You check on your camp confused as to what's going on. Sticking your head through the front wall of your " + camp.homeDesc() + ", you take a curious peek outside, but find no one around.\n\n");
+	}
 	outputText("The first thing you do is open your storage chest, to see if the Russet Rogue has robbed you again. This doesn't appear to be the case, and instantly, your eye is drawn to an addition instead of a subtraction from its contents. You seem to have gained a new outfit! Upon a carefully folded fabric of rose red color, a note is left below a gorgeous ruby pendant upon a golden setting and carried by a filigree chain. Curiously, you open the note and read it.\n\n");
 
 	outputText("\"<i>I happened across this beautiful ensemble and was instantly reminded of the one thing in Mareth that makes its splendor pale in comparison. Fair trappings, to fit around a beautiful body.\n\n");
@@ -340,9 +348,12 @@ private function RaphaelEncounterIIDressFollowup():void {
 	//Clear dress countdown.  Its over and done with.
 	flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
 	clearOutput();
-	
-	outputText("You awake to the soft patter of footsteps moving away from you. For a second you think nothing of it, but soon awake to the realization you might have been robbed again. When you sit up and notice a weight off your chest, you realize someone has made off with the priceless ruby pendant Raphael gifted you earlier. They swiped it straight off your neck!\n\n");
-
+	if (camp.IsSleeping){
+		outputText("You awake to the soft patter of footsteps moving away from you. For a second you think nothing of it, but soon awake to the realization you might have been robbed again. When you sit up and notice a weight off your chest, you realize someone has made off with the priceless ruby pendant Raphael gifted you earlier. They swiped it straight off your neck!\n\n");
+	}
+	else {
+		outputText("You are suddenly startled by the soft patter of footsteps moving away from you at high speed. For a second you think nothing of it, but soon awake to the realization you might have been robbed again and worst of all while wide awake! When you sit up and notice a weight off your chest, you realize someone has made off with the priceless ruby pendant Raphael gifted you earlier. They swiped it straight off your neck!\n\n");
+	}
 	outputText("You rush out of your " + camp.homeDesc() + ", but when you look around and spot something red lying on the small ruined wall on the outskirts of your camp, you realize that the situation isn't as urgent as you had feared. You begin to understand what the wily fox meant to imply with uncertain ownership of the pendant.\n\n");
 
 	outputText("Curious, you amble towards the Russet Rogue. Raphael, this time armed with a picnic basket and a bottle of fine wine, makes a nonchalant impression as he lies leisurely on top of the wall. His tail flicks about playfully, while he swirls a small amount of wine within a crystal glass. At first he looks at the fluid casually and takes a sip, before rolling his head sideways to look down upon you.\n\n");

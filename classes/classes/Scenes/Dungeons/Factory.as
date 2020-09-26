@@ -179,6 +179,15 @@ use namespace CoC;
 			flags[kFLAGS.FACTORY_MILKER_BUILT] = 1;
 			doNext(roomRepairCloset);
 		}
+
+		private function WTFYOUCHEATER():void{
+			clearOutput();
+			outputText("As you fall defeated a scream is heard in the background as the script manager steps out to interrupt the scene.\n\n" +
+					"\"<i>Timeout! This event was not part of the script! How can you be an alraune before even having saved or corrupted Marae! You, the actor over there, you’re fired for breaking the fourth wall!</i>\"\n\n" +
+					"Damn, and you had worked so hard for the role in the cast too! Cheating does not seem to pay, guess you should do it the right way next time you do this. " +
+					"Now jobless you will have to start over elsewhere because for you its…");
+			EventParser.gameOver();
+		}
 		
 		private function doTensionRelease():void {
 			clearOutput();
@@ -931,7 +940,12 @@ use namespace CoC;
 		}
 		
 		public function doLossOmnibus():void {
-			doBadEndOmnibusPart1();
+			if (player.isAlraune())
+			{
+				WTFYOUCHEATER();
+			} else {
+				doBadEndOmnibusPart1();
+			}
 		}
 		
 		//Choose your poison
@@ -1295,38 +1309,41 @@ use namespace CoC;
 		
 		//BAD ENDS
 		private function doBadEndGeneric():void {
-			clearOutput();
-			outputText("You crack your sleep-fuzzed eyes, blinking at the sudden light as you try to get your bearings and remember where you are.  A nearby voice is moaning like a bitch in heat, or a drunk slut.  You giggle a bit at the thought as you work at focusing your eyes.  You feel warm and happy, particularly in your chest and groin.  The cobwebs of sleep clear from your mind with agonizing slowness, but you find it hard to worry about with how warm and wonderful you feel.  It's almost like hot wet mouths are latched onto your crotch and breasts, licking and sucking in perfect rhythm.  ");
-			if(player.cocks.length == 0 || player.biggestTitSize() <= 1) {
-				outputText("A small inner voice pipes up to remind you that you don't have ");
-				if(player.cocks.length == 0) {
-					outputText("anything in your groin to suck on");
-					if(player.biggestTitSize() <= 1) outputText(" or ");
-				}
-				if(player.biggestTitSize() <= 1) outputText("any adornments on your chest");
-				outputText(".  That voice trails off as that feeling of perfect pleasure and rightness sweeps it away with the last remnants of sleep.\n\n");
+			if (player.isAlraune())
+			{
+				WTFYOUCHEATER();
+			} else {
+				clearOutput();
+				outputText("You crack your sleep-fuzzed eyes, blinking at the sudden light as you try to get your bearings and remember where you are.  A nearby voice is moaning like a bitch in heat, or a drunk slut.  You giggle a bit at the thought as you work at focusing your eyes.  You feel warm and happy, particularly in your chest and groin.  The cobwebs of sleep clear from your mind with agonizing slowness, but you find it hard to worry about with how warm and wonderful you feel.  It's almost like hot wet mouths are latched onto your crotch and breasts, licking and sucking in perfect rhythm.  ");
+				if (player.cocks.length == 0 || player.biggestTitSize() <= 1) {
+					outputText("A small inner voice pipes up to remind you that you don't have ");
+					if (player.cocks.length == 0) {
+						outputText("anything in your groin to suck on");
+						if (player.biggestTitSize() <= 1) outputText(" or ");
+					}
+					if (player.biggestTitSize() <= 1) outputText("any adornments on your chest");
+					outputText(".  That voice trails off as that feeling of perfect pleasure and rightness sweeps it away with the last remnants of sleep.\n\n");
+				} else outputText("A small inner voice tries to warn you of something, only to be swept away in the feelings of perfect pleasure and rightness that wash away the last remnants of your sleep.\n\n");
+				outputText("You realize that the moaning voice is your own, and find that the thought just turns you on more.\n\n");
+				outputText("'<i>You're such a horny slut!</i>' echoes a voice in your head.  You want to nod and smile, but are prevented by something.  You realize you're strapped into some kind of chair and harness so securely that you can't even move.  Tiny soothing fingers massage your temples, rubbing away the fears that moments ago threatened to interrupt your pleasure.  You can see a ");
+				if (player.totalBreasts() == 2) outputText("pair of ");
+				else outputText("multitude of ");
+				outputText(" clear hoses coming away from your cow-like chest udders.  ");
+				if (player.biggestLactation() <= 1.5) outputText("Creamy white milk is flowing in a steady stream up the tubes and away from you.  ");
+				else outputText("The hoses bulge obscenely as they struggle to keep up with the torrents of creamy-white milk you're producing.  ");
+				outputText("Even more wanton moans erupt from your disobedient lips now that you know what's going on.  You're not just a horny slut.  You're a horny cow-slut who's getting off on having her tits pumped.  The massage you're getting feels so good once you realize that.\n\n");
+				outputText("A snap echoes through the pumping room, nearly drowned out by the moans of the other milk-sluts around you.  You look around as you realize the band to restrain your head has been unlatched.  You take advantage of your newfound freedom and look around.  Rows and rows of other girls are there, just like you.  Almost all of them have bigger tits and fuller milk-tubes.  In addition, they all have enormous members that would drag on the floor were it not for the gigantic tubes encapsulating each and every one.  ");
+				outputText("The girl next to you squirms and cums, wriggling inside her harness as waves of sticky goop are pumped down her cock-tube into a floor-socket.  She just keeps going and going, making you wonder how she can make so much of the stuff.  As the sight excites you, the pleasure in your own crotch redoubles.  Looking down thanks to your newfound freedom, you see your own giant encapsulated member; though not as large as your neighbor's, it still looks and feels wonderful.\n\n");
+				outputText("The lining of the tube squeezes and massages your trapped prick expertly, even as those hands continue to work on your mind.  Some part of you suspects that your thoughts are being manipulated, but the carnal pleasure you are experiencing is so amazing that you have no intention of resisting. If being a cumslut for your sexy demonic masters is what it takes, so be it. Cramming a massive demon-cock in your throat, getting a few others up your holes to keep you pregnant all the time, and being their busty hermaphrodite breeding tool would be your joy and privilege.  ");
+				if (player.hasStatusEffect(StatusEffects.CampMarble)) {
+					outputText("As if reading your thoughts, the hands stop massaging, and their owner snaps their fingers. You see Marble step in front of you, wearing an odd set of pink panties with a dick-like protrusion sticking out the front of them.  At the command of the figure behind you, she presents the panty-cock to you.  Happy to be of service, you spread your jaws and engulf as much of the great penis-like thing as you can, while the figure behind you moves around and takes Marble in the ass.  You continue to suck on the pink flesh until you feel it pour some kind of unholy load into your stomach.  Gurgling in pleasure, you start cumming yourself, all the while appeasing your demonic masters by servicing your once lover.\n\n");
+				} else outputText("As if reading your thoughts, the hands stop massaging, and their owner comes in front of you, presenting you with a meaty, throbbing cock.  Happy to be of service, you spread your jaws and engulf as much of the great penis as you can, until you feel it pouring his unholy load into your stomach.  Gurgling in pleasure, you start cumming yourself, all the while attending to one or more of your demonic masters.\n\n");
+
+
+				outputText("<b>This kind of treatment continues for a few days, until sucking, fucking and getting fucked is the only thing you desire. As your mind is now broken, injections are no longer necessary to keep you in a perfect pleasure state. After a month, they even untie you, since you are now their complete cum-puppet, eager only to please and obey.</b>");
+				//The style on this part wasn't up to par with the rest, so I rewrote some of it, while keeping the meaning
+				EventParser.gameOver();
 			}
-			else outputText("A small inner voice tries to warn you of something, only to be swept away in the feelings of perfect pleasure and rightness that wash away the last remnants of your sleep.\n\n");
-			outputText("You realize that the moaning voice is your own, and find that the thought just turns you on more.\n\n");
-			outputText("'<i>You're such a horny slut!</i>' echoes a voice in your head.  You want to nod and smile, but are prevented by something.  You realize you're strapped into some kind of chair and harness so securely that you can't even move.  Tiny soothing fingers massage your temples, rubbing away the fears that moments ago threatened to interrupt your pleasure.  You can see a ");
-			if(player.totalBreasts() == 2) outputText("pair of ");
-			else outputText("multitude of ");
-			outputText(" clear hoses coming away from your cow-like chest udders.  ");
-			if(player.biggestLactation() <= 1.5) outputText("Creamy white milk is flowing in a steady stream up the tubes and away from you.  ");
-			else outputText("The hoses bulge obscenely as they struggle to keep up with the torrents of creamy-white milk you're producing.  ");
-			outputText("Even more wanton moans erupt from your disobedient lips now that you know what's going on.  You're not just a horny slut.  You're a horny cow-slut who's getting off on having her tits pumped.  The massage you're getting feels so good once you realize that.\n\n");
-			outputText("A snap echoes through the pumping room, nearly drowned out by the moans of the other milk-sluts around you.  You look around as you realize the band to restrain your head has been unlatched.  You take advantage of your newfound freedom and look around.  Rows and rows of other girls are there, just like you.  Almost all of them have bigger tits and fuller milk-tubes.  In addition, they all have enormous members that would drag on the floor were it not for the gigantic tubes encapsulating each and every one.  ");
-			outputText("The girl next to you squirms and cums, wriggling inside her harness as waves of sticky goop are pumped down her cock-tube into a floor-socket.  She just keeps going and going, making you wonder how she can make so much of the stuff.  As the sight excites you, the pleasure in your own crotch redoubles.  Looking down thanks to your newfound freedom, you see your own giant encapsulated member; though not as large as your neighbor's, it still looks and feels wonderful.\n\n");
-			outputText("The lining of the tube squeezes and massages your trapped prick expertly, even as those hands continue to work on your mind.  Some part of you suspects that your thoughts are being manipulated, but the carnal pleasure you are experiencing is so amazing that you have no intention of resisting. If being a cumslut for your sexy demonic masters is what it takes, so be it. Cramming a massive demon-cock in your throat, getting a few others up your holes to keep you pregnant all the time, and being their busty hermaphrodite breeding tool would be your joy and privilege.  ");
-			if(player.hasStatusEffect(StatusEffects.CampMarble)) {
-				outputText("As if reading your thoughts, the hands stop massaging, and their owner snaps their fingers. You see Marble step in front of you, wearing an odd set of pink panties with a dick-like protrusion sticking out the front of them.  At the command of the figure behind you, she presents the panty-cock to you.  Happy to be of service, you spread your jaws and engulf as much of the great penis-like thing as you can, while the figure behind you moves around and takes Marble in the ass.  You continue to suck on the pink flesh until you feel it pour some kind of unholy load into your stomach.  Gurgling in pleasure, you start cumming yourself, all the while appeasing your demonic masters by servicing your once lover.\n\n");
-			}
-			else outputText("As if reading your thoughts, the hands stop massaging, and their owner comes in front of you, presenting you with a meaty, throbbing cock.  Happy to be of service, you spread your jaws and engulf as much of the great penis as you can, until you feel it pouring his unholy load into your stomach.  Gurgling in pleasure, you start cumming yourself, all the while attending to one or more of your demonic masters.\n\n");
-			
-			
-			outputText("<b>This kind of treatment continues for a few days, until sucking, fucking and getting fucked is the only thing you desire. As your mind is now broken, injections are no longer necessary to keep you in a perfect pleasure state. After a month, they even untie you, since you are now their complete cum-puppet, eager only to please and obey.</b>");
-			//The style on this part wasn't up to par with the rest, so I rewrote some of it, while keeping the meaning
-			EventParser.gameOver();
 		}
 		
 		public function doBadEndSuccubusPart1():void {

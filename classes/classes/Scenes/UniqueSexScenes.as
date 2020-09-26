@@ -142,6 +142,33 @@ package classes.Scenes
 			cleanupAfterCombat();
 		}
 
+		public function AlrauneDungeonBadEnd():void {
+			clearOutput();
+			outputText("Unsure of what to do with you, your captors decide to keep you home as a decorative, if not perverted plant. While you have, for security reasons, been limited to the boundary of a single room to which you have been magically forced to take root, your life is not any less interesting than it was prior to your defeat as a good amount of people come in and out daily to harvest your aphrodisiac nectar, get seeded, pollenise you or a mix of all three. You were quickly repurposed as a lusty if efficient dungeon guardian, always ready to rape anything stupid or horny enough to come within reach of your vines.");
+			if(player.isLiliraune()) outputText(" When you’re not busy raping intruders or using the dungeons many denizens as your seedbed or cumpumps you spend the days of your quasi-infinite lifespan having sex with your twin in the middle of your pitcher, ever ready to invite whoever enters the room next for a threesome.");
+			outputText(" They kept feeding you nutrients and you gave them sex and nectar in return. The perfect deal right?\n\n" +
+					"As the days pass your vines slowly began to grow and exceed the range of the walls of your confinement room, " +
+					"turning what used to be a dungeon into a garden where your vines have become a network of tendrils, always seeking a pussy or ass to fuck. You eventually seize the dungeon in full, " +
+					"forcing the original denizens of the place to build new quarters away from your influence as your canopy of rape-happy vines stretch ever further. " +
+					"At first, they tried to prune your growth but eventually perhaps due to negligence you slowly got past the point at which you could be contained, your many vines capturing people alive to add ever more vessels to serve as your personal seedbeds. Without any further opposition, this place swiftly turned into a nursery for your many seedlings. " +
+					"Your canopy of vines spread so far it's sometimes difficult for you to know just how many people you are fucking at the same time. " +
+					"Your mind has,over time, become accustomed to this gigantic network of constant fucking and orgasms, allowing you to stay clear-headed at all times as you copulate with your many entwined victims.\n\n" +
+					"One day some human woman in armor with a magic sword managed to get past your many daughters and enter your chamber, claiming that she is the champion of some town called Ingnam. (why does that feel familiar? You should remember this…) While the name of the place might’ve had a relevance to you in the past you have been here for so long that you have since forgotten. " +
+					"She says she is here to defeat the ‘Verdant Queen’. Some title the locals have given you perhaps?\n\n" +
+					"You care little for her speech however as you grab her with several of the vines that cover the place,");
+			if(player.isLiliraune()) outputText(" you and your twin");
+			outputText(" licking your lips in delight. It has been many years since one made it this far.\n\n");
+			if(player.isLiliraune()) outputText("\"<i>Oh my! Isn’t she cute? Came all the way down here just to play with us</i>\"\n\n" +
+					"\"<i>How about you tell us your name before we fill you full of stamens and make you forget it? It just so happens to be very lonely here and we definitely will never let you go. You’re way too convenient for that.</i>\"\n\n" +
+					"The both of you giggles");
+			else outputText(" You giggle");
+			outputText(" as you reel in the girl who fight backs tooth and nail to get free, hacking and slashing until the overpowering scent of your pollen and ripe nectar puts an end to her resistance, " +
+					"your vines reeling her into your pitcher to ready her flower for pollination. " +
+					"Nowadays the only things you ever get to pollinate are demons or your own daughters and the flower of a pure human is a delicacy. " +
+					"You could say that for her this is…");
+			EventParser.gameOver();
+		}
+
 		public function pcUniqueSexScenesChoiceMenu():void {
 			menu();
 			if (player.tailType == Tail.MANTICORE_PUSSYTAIL && monster.hasCock()) addButton(0, "Tail Rape", manticoreTailRapeScene);

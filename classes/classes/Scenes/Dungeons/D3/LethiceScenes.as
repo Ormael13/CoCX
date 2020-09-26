@@ -7,6 +7,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Items.WeaponLib;
 import classes.Scenes.SceneLib;
+import classes.Scenes.UniqueSexScenes;
 import classes.StatusEffects;
 
 import flash.net.SharedObject;
@@ -21,6 +22,7 @@ public class LethiceScenes extends BaseContent
 		public static const GAME_END_CONQUER_LOW:uint = 6;
 		public static const GAME_END_CONQUER_MED:uint = 7;
 		public static const GAME_END_CONQUER_HIGH:uint = 8;
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 
 		private function saveExport():void
 		{
@@ -794,62 +796,68 @@ public class LethiceScenes extends BaseContent
 		private function woofwoofII():void
 		{
 			clearOutput();
+			if (player.isAlraune())
+			{
+				uniquuuesexscene.AlrauneDungeonBadEnd();
+			}
+			else {
 
-			outputText("You bark excitedly, ready to be your loving, forgiving mistress’s means of meeting out punishment. The Champion’s eyes turn to you, and her jaw drops like an anchor.");
-			
-			outputText("\n\n<i>“No... [name]? [name] is that you?”</i> she gasps, staring wide-eyed. <i>“Oh, gods, no...”</i>");
-			
-			outputText("\n\nYou cock your head aside, confused. That’s not your name. You’re Champ. You’re Mistress’s favorite puppy-"+ player.mf("stud", "slut") +".");
-			
-			outputText("\n\n<i>“Aw, don’t confuse the poor thing,”</i> Mistress chides, patting your head. <i>“This is Champ. Champ, say hello.”</i>");
-			
-			outputText("\n\nYou bark, rising up on all fours and wagging your tail a hundred miles a minute. Your throbbing, wet canid cock swings between your legs, restrained only by Mistress’s firm hold on your leash. You can practically smell the virgin womanhood before you, begging to be deflowered and bred.");
+				outputText("You bark excitedly, ready to be your loving, forgiving mistress’s means of meeting out punishment. The Champion’s eyes turn to you, and her jaw drops like an anchor.");
 
-			outputText("\n\n<i>“My dear,”</i> Mistress smiles, coiling her hand around your leash. <i>“You’ve been duped. You’re nothing but another sacrificial lamb. Or a sacrificial dog, like Champ here.”</i>");
-			
-			outputText("\n\nSacrificial? You don’t really know what Mistress means, but you guess that doesn’t matter. Mistress is so much smarter than you after all. Whatever she wants you to be, that’s what you are!");
-			
-			outputText("\n\nThe Champion girl stares at you with wide eyes, ignoring Mistress’s words. You can smell the fear on her now, intermixing with the scent that truly has your heart hammering: the scent of a bitch ready to be bred. <i>“[name], listen to me,”</i> she mewls. <i>“I don’t know what they’ve done to you, but you have to snap out of it. Please! Don’t... don’t you recognize me?”</i>");
-			
-			outputText("\n\nYour nose twitches as you stare down the strange woman. Why would you recognize her - and why does your head hurt? You give yourself a vigorous shake before glancing up at Mistress. She’s smiling down at you, her rosy lips looking so lush and loving that you’d give anything just to touch them. The thought of ramming yourself between them, shooting your seed into Mistress’s beautiful mouth tonight, when she’s had done with this random human, makes you shiver in anticipation.");
-			
-			outputText("\n\n<i>“[name], come on!”</i> the girl cries. <i>“You can fight this! You’re still... still human on this inside, I know it!”</i>");
-			
-			outputText("\n\nWhy is she still talking to you!? Your head is starting to hurt with all her blabbering. You’re not a human, you’re a dog! A good, obedient dog. Mistress’s favorite dog.");
-			
-			outputText("\n\nMistress gives your leash a gentle tug, drawing your attention back. <i>“Poor thing. My precious Champ’s starting to get confused. I think we need to shut this pretty little bitch up, don’t we "+ player.mf("boy", "girl") +"? Or better yet, make her scream.”</i>");
-			
-			outputText("\n\nYou bark, feeling yourself harden at your Mistress’s words. Making bitches scream is what she and her friends made you for. There’s nobody in the world better at it than you, and everyone in Mistress’s palace knows it now.");
-			
-			outputText("\n\n<i>“Have fun, Champ. I’ll be watching,”</i> Mistress purrs, dropping your leash.");
-			
-			outputText("\n\nYou’re on the bitch in a heartbeat, leaping forward and slamming your full weight into her. The so-called Champion screams, her limbs flailing weakly as you send her toppling into the pool of seed you’d left on the stones. What little is left of the girl’s clothes are easily rent apart by your bestial claws, leaving her breasts easy targets for your hungry mouth while you tear apart of her skirt and panties, leaving her virginal hole defenseless.");
-			
-			outputText("\n\n<i>“Go get her, Champ,”</i> Mistress coos behind you, munching on her snacks while you defile her prisoner.");
-			
-			outputText("\n\nYour lips lock around a pink teat, sucking hard; fingers scour her flesh, pulling the girl’s pert cheeks apart to expose a rosy hole so tight you can barely get a finger in before she squeals. <i>“[name], get off! Get off!”</i> she yelps, but her body practically begs you to keep going: her teat stiffens between your teeth, and her pussy slathers your furred digit with juices: she’s desperate to get ready for you, to welcome your alpha’s member inside and soak up your seed. Your legs spread hers out, hiking her knees around her shoulders as you align your veiny, throbbing canid member with her breed-hungry hole.");
-			
-			outputText("\n\nThe girl’s struggling stops the moment your ram your hips in, spreading her slick, hot walls wide open around a pillar of dominant meat big enough to make even Mistress’s pet dragons mewl. The Champion’s gut bulges between your bodies and her womb spreads open around your pointed crown, taking you like any of Mistress’s other breeding cows. You just know this one will make a perfect new toy!");
-			
-			outputText("\n\n<i>“[name]...”</i> she gasps, voice ragged and husky, barely able to form the alien, unfamiliar word. <i>“Please...”</i>");
-			
-			outputText("\n\nPlease fuck her harder? Please fill her womb with virile seed until she’s bloated with your pups? You grin ear to floppy ear and piston your hips, hammering into the juicy honeypot between the would-be champion’s legs with renewed vigor. Her voice breaks, no longer able to form words - she descends into incoherent cries and moans, squirming helplessly beneath you.");
-			
-			outputText("\n\n<i>“Good "+ player.mf("boy", "girl")+", Champ,”</i> your Mistress murmurs, and as you give a glance over your shoulder, you’re deeply, deeply pleased to see that one of her hands has slipped beneath her priestly garb to pleasure herself. She approves!");
-			
-			outputText("\n\nSeeing your beloved Mistress enjoying your vigorous domination of her prisoner drives you to finish for her. Your swollen canid knot presses hard against the girl’s cunny, stretching her open around the bulbous bitch-breaker. As strong as you are now, it doesn’t take long before you do break her, forcing her slutty sex to open wide and accept your masculine rod in its entirely. Her body convulses, orgasming in ways you imagine she’s never done before. Then she goes limp, her body surrendering to you utterly and completely. Sweet-smelling feminine slime drools down her thighs and ass, pooling on the floor between your legs. The second your knot submerges into the sultry-wet embrace of her quivering sex, locking the two of you together in primal sexual bliss. There’s nothing left but animal lust, the bestial drive to breed the pathetic, broken vixen.");
-			
-			outputText("\n\nYou cum like a fire hose, loosing yourself inside her. No matter how many times you cum in a day, Mistress’s magics have made sure you’re always so swollen with seed that you leave your bitches’ bellies bloated, drooling sticky whiteness from their twats. And that’s just what you leave this hapless whore doing, spraying your own corrupted seed into her virginal womb until you can feel the rising tide of you cum sloshing against your buried knot. Panting like the dog you are, you flop down overtop the broken <i>“champion,”</i> pinning her to the ground and bottling your seed inside her, making sure it takes.");
-			
-			outputText("\n\n<i>“That’s what I like to see, Champ,”</i> your mistress smiles, standing. You feel the leash around your neck tighten, gently encouraging you to get off of the ravaged woman. It takes a few minutes for your knot to deflate enough to let you slip out, letting loose a deluge of spunk that splatters down her rounded ass and onto the flagstone. You trot happily back to Mistress’s side, wagging your tail as your well-used doggy-dong starts to soften back into its sheath. <i>“Good "+ player.mf("boy", "girl")+". Very good... so good, in fact, I think I’ll keep this would-be heroine. Perhaps I’ll give her to your trainer first. All you poor Ingnam sluts should stick together after all... perhaps I’ll breed myself a whole little village of humans. Well, of </i>dogs<i>, more like.”</i>");
-			
-			outputText("\n\nMistress smiles and strokes your hair, watching as her draconic guardswomen return and cart your bred bitch away for her first training session, still leaking cum as she goes.");
-			
-			outputText("\n\n<i>“As for you,”</i> Mistress adds, tugging your leash as she reclines back in her throne, <i>“I expect you to make me cum even harder. Right now.”</i>");
-			
-			outputText("\n\nYou bark eagerly and lunge up into her lap, burying your face between your loving Mistress’s thighs as the doors slam closed behind you, sealing the Champion of Ingnam’s fate...");
+				outputText("\n\n<i>“No... [name]? [name] is that you?”</i> she gasps, staring wide-eyed. <i>“Oh, gods, no...”</i>");
 
-			EventParser.gameOver();
+				outputText("\n\nYou cock your head aside, confused. That’s not your name. You’re Champ. You’re Mistress’s favorite puppy-" + player.mf("stud", "slut") + ".");
+
+				outputText("\n\n<i>“Aw, don’t confuse the poor thing,”</i> Mistress chides, patting your head. <i>“This is Champ. Champ, say hello.”</i>");
+
+				outputText("\n\nYou bark, rising up on all fours and wagging your tail a hundred miles a minute. Your throbbing, wet canid cock swings between your legs, restrained only by Mistress’s firm hold on your leash. You can practically smell the virgin womanhood before you, begging to be deflowered and bred.");
+
+				outputText("\n\n<i>“My dear,”</i> Mistress smiles, coiling her hand around your leash. <i>“You’ve been duped. You’re nothing but another sacrificial lamb. Or a sacrificial dog, like Champ here.”</i>");
+
+				outputText("\n\nSacrificial? You don’t really know what Mistress means, but you guess that doesn’t matter. Mistress is so much smarter than you after all. Whatever she wants you to be, that’s what you are!");
+
+				outputText("\n\nThe Champion girl stares at you with wide eyes, ignoring Mistress’s words. You can smell the fear on her now, intermixing with the scent that truly has your heart hammering: the scent of a bitch ready to be bred. <i>“[name], listen to me,”</i> she mewls. <i>“I don’t know what they’ve done to you, but you have to snap out of it. Please! Don’t... don’t you recognize me?”</i>");
+
+				outputText("\n\nYour nose twitches as you stare down the strange woman. Why would you recognize her - and why does your head hurt? You give yourself a vigorous shake before glancing up at Mistress. She’s smiling down at you, her rosy lips looking so lush and loving that you’d give anything just to touch them. The thought of ramming yourself between them, shooting your seed into Mistress’s beautiful mouth tonight, when she’s had done with this random human, makes you shiver in anticipation.");
+
+				outputText("\n\n<i>“[name], come on!”</i> the girl cries. <i>“You can fight this! You’re still... still human on this inside, I know it!”</i>");
+
+				outputText("\n\nWhy is she still talking to you!? Your head is starting to hurt with all her blabbering. You’re not a human, you’re a dog! A good, obedient dog. Mistress’s favorite dog.");
+
+				outputText("\n\nMistress gives your leash a gentle tug, drawing your attention back. <i>“Poor thing. My precious Champ’s starting to get confused. I think we need to shut this pretty little bitch up, don’t we " + player.mf("boy", "girl") + "? Or better yet, make her scream.”</i>");
+
+				outputText("\n\nYou bark, feeling yourself harden at your Mistress’s words. Making bitches scream is what she and her friends made you for. There’s nobody in the world better at it than you, and everyone in Mistress’s palace knows it now.");
+
+				outputText("\n\n<i>“Have fun, Champ. I’ll be watching,”</i> Mistress purrs, dropping your leash.");
+
+				outputText("\n\nYou’re on the bitch in a heartbeat, leaping forward and slamming your full weight into her. The so-called Champion screams, her limbs flailing weakly as you send her toppling into the pool of seed you’d left on the stones. What little is left of the girl’s clothes are easily rent apart by your bestial claws, leaving her breasts easy targets for your hungry mouth while you tear apart of her skirt and panties, leaving her virginal hole defenseless.");
+
+				outputText("\n\n<i>“Go get her, Champ,”</i> Mistress coos behind you, munching on her snacks while you defile her prisoner.");
+
+				outputText("\n\nYour lips lock around a pink teat, sucking hard; fingers scour her flesh, pulling the girl’s pert cheeks apart to expose a rosy hole so tight you can barely get a finger in before she squeals. <i>“[name], get off! Get off!”</i> she yelps, but her body practically begs you to keep going: her teat stiffens between your teeth, and her pussy slathers your furred digit with juices: she’s desperate to get ready for you, to welcome your alpha’s member inside and soak up your seed. Your legs spread hers out, hiking her knees around her shoulders as you align your veiny, throbbing canid member with her breed-hungry hole.");
+
+				outputText("\n\nThe girl’s struggling stops the moment your ram your hips in, spreading her slick, hot walls wide open around a pillar of dominant meat big enough to make even Mistress’s pet dragons mewl. The Champion’s gut bulges between your bodies and her womb spreads open around your pointed crown, taking you like any of Mistress’s other breeding cows. You just know this one will make a perfect new toy!");
+
+				outputText("\n\n<i>“[name]...”</i> she gasps, voice ragged and husky, barely able to form the alien, unfamiliar word. <i>“Please...”</i>");
+
+				outputText("\n\nPlease fuck her harder? Please fill her womb with virile seed until she’s bloated with your pups? You grin ear to floppy ear and piston your hips, hammering into the juicy honeypot between the would-be champion’s legs with renewed vigor. Her voice breaks, no longer able to form words - she descends into incoherent cries and moans, squirming helplessly beneath you.");
+
+				outputText("\n\n<i>“Good " + player.mf("boy", "girl") + ", Champ,”</i> your Mistress murmurs, and as you give a glance over your shoulder, you’re deeply, deeply pleased to see that one of her hands has slipped beneath her priestly garb to pleasure herself. She approves!");
+
+				outputText("\n\nSeeing your beloved Mistress enjoying your vigorous domination of her prisoner drives you to finish for her. Your swollen canid knot presses hard against the girl’s cunny, stretching her open around the bulbous bitch-breaker. As strong as you are now, it doesn’t take long before you do break her, forcing her slutty sex to open wide and accept your masculine rod in its entirely. Her body convulses, orgasming in ways you imagine she’s never done before. Then she goes limp, her body surrendering to you utterly and completely. Sweet-smelling feminine slime drools down her thighs and ass, pooling on the floor between your legs. The second your knot submerges into the sultry-wet embrace of her quivering sex, locking the two of you together in primal sexual bliss. There’s nothing left but animal lust, the bestial drive to breed the pathetic, broken vixen.");
+
+				outputText("\n\nYou cum like a fire hose, loosing yourself inside her. No matter how many times you cum in a day, Mistress’s magics have made sure you’re always so swollen with seed that you leave your bitches’ bellies bloated, drooling sticky whiteness from their twats. And that’s just what you leave this hapless whore doing, spraying your own corrupted seed into her virginal womb until you can feel the rising tide of you cum sloshing against your buried knot. Panting like the dog you are, you flop down overtop the broken <i>“champion,”</i> pinning her to the ground and bottling your seed inside her, making sure it takes.");
+
+				outputText("\n\n<i>“That’s what I like to see, Champ,”</i> your mistress smiles, standing. You feel the leash around your neck tighten, gently encouraging you to get off of the ravaged woman. It takes a few minutes for your knot to deflate enough to let you slip out, letting loose a deluge of spunk that splatters down her rounded ass and onto the flagstone. You trot happily back to Mistress’s side, wagging your tail as your well-used doggy-dong starts to soften back into its sheath. <i>“Good " + player.mf("boy", "girl") + ". Very good... so good, in fact, I think I’ll keep this would-be heroine. Perhaps I’ll give her to your trainer first. All you poor Ingnam sluts should stick together after all... perhaps I’ll breed myself a whole little village of humans. Well, of </i>dogs<i>, more like.”</i>");
+
+				outputText("\n\nMistress smiles and strokes your hair, watching as her draconic guardswomen return and cart your bred bitch away for her first training session, still leaking cum as she goes.");
+
+				outputText("\n\n<i>“As for you,”</i> Mistress adds, tugging your leash as she reclines back in her throne, <i>“I expect you to make me cum even harder. Right now.”</i>");
+
+				outputText("\n\nYou bark eagerly and lunge up into her lap, burying your face between your loving Mistress’s thighs as the doors slam closed behind you, sealing the Champion of Ingnam’s fate...");
+
+				EventParser.gameOver();
+			}
 		}
 
 		private function theChoiceDunDunDun():void

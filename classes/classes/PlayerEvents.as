@@ -521,7 +521,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-            if (CoC.instance.model.time.hours == 6 && player.armorName == "bimbo skirt" && rand(10) == 0 && player.biggestTitSize() < 12) {
+            if (camp.IsSleeping && player.armorName == "bimbo skirt" && rand(10) == 0 && player.biggestTitSize() < 12) {
                 outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
 				player.growTits(1, player.bRows(), false, 2);
 				player.dynStats("lus", 10);
@@ -2108,7 +2108,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
                 else if (player.pregnancyIncubation < 1 && player.hasVagina() && CoC.instance.model.time.hours == 1) { //Otherwise pregger check, once every morning
                     if ((player.totalFertility() > 50 && CoC.instance.model.time.days % 15 == 0) || CoC.instance.model.time.days % 30 == 0) { //every 15 days if high fertility get egg preg
-                        outputText("\n<b>Somehow you know that eggs have begun to form inside you.  You wonder how long it will be before they start to show?</b>\n");
+                        outputText("\n<b>Somehow you know that eggs have begun to form inside you. You wonder how long it will be before they start to show?</b>\n");
 						player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS, 1, 1);
 						player.createStatusEffect(StatusEffects.Eggs, rand(6), rand(2), (5 + rand(3)), 0); //v1 is type, v2 is size (1 == large) and v3 is quantity
 						player.addPerkValue(PerkLib.Oviposition, 1, 1); //Count times eggpregged this way in perk.
@@ -2229,9 +2229,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
             else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && CoC.instance.model.time.hours % 13 == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] == 0) { //Repeated warnings!
                 if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2)
-					outputText("\n<b>You shiver, feeling a little cold.  Maybe you ought to get some more minotaur cum?  You just don't feel right without that pleasant buzz in the back of your mind.</b>\n");
+					outputText("\n<b>You shiver, feeling a little cold. Maybe you ought to get some more minotaur cum? You just don't feel right without that pleasant buzz in the back of your mind.</b>\n");
 				else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3)
-					outputText("\n<b>The steady fire of lust within you burns hot, making you shiver and grab at your head.  You're STILL in withdrawal after having gone so long without a dose of minotaur love.  You just know you're going to be horny and achy until you get some.</b>\n");
+					outputText("\n<b>The steady fire of lust within you burns hot, making you shiver and grab at your head. You're STILL in withdrawal after having gone so long without a dose of minotaur love.  You just know you're going to be horny and achy until you get some.</b>\n");
 				needNext = true;
 			}
 			//Decrement mino withdrawal symptoms display cooldown
@@ -2385,11 +2385,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		}
 
 		public function timeChangeLarge():Boolean {
-            if (rand(4) == 0 && Holidays.isHolidays() && player.gender > 0 && CoC.instance.model.time.hours == 6 && flags[kFLAGS.XMAS_CHICKEN_YEAR] < CoC.instance.date.fullYear) {
+            if (rand(4) == 0 && Holidays.isHolidays() && player.gender > 0 && camp.IsSleeping && flags[kFLAGS.XMAS_CHICKEN_YEAR] < CoC.instance.date.fullYear) {
                 Holidays.getAChristmasChicken();
                 return true;
 			}
-            if (CoC.instance.model.time.hours == 1 && Holidays.isHolidays() && CoC.instance.date.fullYear > flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) { //XMAS ELF
+            if (camp.IsSleeping && Holidays.isHolidays() && CoC.instance.date.fullYear > flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) { //XMAS ELF
                 Holidays.xmasBitchEncounter(); //Set it to remember the last year encountered
                 return true;
 			}
@@ -2397,7 +2397,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
                 Holidays.datTurkeyRumpMeeting(); //TURKEY SURPRISE
                 return true;
 			}
-            if (checkedDream++ == 0 && CoC.instance.model.time.hours == 3) { //You can only have one dream each night
+			if (isNightTime && camp.IsWaitingResting){
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && (flags[kFLAGS.LUNA_JEALOUSY] >= 400 || flags[kFLAGS.LUNA_FOLLOWER] > 6) && player.gender > 0 && player.hasStatusEffect(StatusEffects.LunaWasWarned) && !player.hasStatusEffect(StatusEffects.LunaOff)) {
+					SceneLib.lunaFollower.fullMoonEvent(true);
+					return true;
+				}
+			}
+            if (checkedDream++ == 0 && camp.IsSleeping) { //You can only have one dream each night
                 if (player.gender > 0 && CoC.instance.model.time.days == 10) { //Day 10 dream - since this can happen only once it takes priority over all other dreams
                     dreams.dayTenDreams();
 					return true;

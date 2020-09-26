@@ -80,6 +80,11 @@ public class MagicSpecials extends BaseCombatContent {
 					else bd.disable("You can't use it more than once during fight.");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
+			if (player.thunderbirdScore() >= 10 && player.isFlying()) {
+				// Lust Storm
+				bd = buttons.add("Lust storm", Luststorm).hint("Supercharge the air with your lusty electricity to unleash a thunderstorm.");
+				if (player.hasStatusEffect(StatusEffects.lustStorm)) bd.disable("<b>You already unleashed a thunderstorm on the battlefield</b>\n\n");
+			}
 		}
 		if (player.tailType == Tail.FOX && player.tailCount >= 2 && player.tailCount < 7) {
 			bd = buttons.add("Fox Fire", basicFoxFire, "Unleash fox flame at your opponent for high damage. \n");
@@ -1029,6 +1034,9 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = calcVoltageMod(damage);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.FloralOvaries)) damage *= 1.25;
 		damage = Math.round(damage);
 		damage = doLightingDamage(damage, true, true);
 		outputText(" damage. ");
@@ -1100,6 +1108,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
 		lustDmgF = Math.round(lustDmgF);
 		monster.teased(lustDmgF);
+		combat.bonusExpAfterSuccesfullTease();
 		if (crit2) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
@@ -1107,6 +1116,109 @@ public class MagicSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+
+	public function Luststorm():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		var damage:Number = scalingBonusIntelligence() * spellModWhite();
+		//Determine if critical hit!
+		var crit1:Boolean = false;
+		var critChance1:int = 5;
+		critChance1 += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance1 = 0;
+		if (rand(100) < critChance1) {
+			crit1 = true;
+			damage *= 1.75;
+		}
+		//High damage to goes.
+		damage = calcVoltageMod(damage);
+		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		damage = Math.round(damage);
+		dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
+		var lustDmgF:Number = 20 + rand(6);
+		var lustBoostToLustDmg:Number = 0;
+		var bimbo:Boolean   = false;
+		var bro:Boolean     = false;
+		var futa:Boolean    = false;
+		if (player.findPerk(PerkLib.SensualLover) >= 0) {
+			lustDmgF += 2;
+		}
+		if (player.findPerk(PerkLib.Seduction) >= 0) lustDmgF += 5;
+		if (player.findPerk(PerkLib.SluttySeduction) >= 0) lustDmgF += player.perkv1(PerkLib.SluttySeduction);
+		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) lustDmgF += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+		if (bimbo || bro || futa) {
+			lustDmgF += 5;
+		}
+		if (player.findPerk(PerkLib.FlawlessBody) >= 0) lustDmgF += 10;
+		lustDmgF += scalingBonusLibido() * 0.1;
+		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmgF *= 1.5;
+		if (player.findPerk(PerkLib.JobSeducer) >= 0) lustDmgF += player.teaseLevel * 3;
+		else lustDmgF += player.teaseLevel * 2;
+		if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) lustDmgF *= 1.2;
+		switch (player.coatType()) {
+			case Skin.FUR:
+				lustDmgF += (1 + player.newGamePlusMod());
+				break;
+			case Skin.SCALES:
+				lustDmgF += (2 * (1 + player.newGamePlusMod()));
+				break;
+			case Skin.CHITIN:
+				lustDmgF += (3 * (1 + player.newGamePlusMod()));
+				break;
+			case Skin.BARK:
+				lustDmgF += (4 * (1 + player.newGamePlusMod()));
+				break;
+		}
+		if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") lustDmgF *= (1 + ((10 + rand(11)) / 100));
+		if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
+			lustDmgF *= (1 + (player.lust100 * 0.01));
+		}
+		if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
+			lustDmgF *= (1 + combat.historyWhoreBonus());
+		}
+		lustBoostToLustDmg += lustDmgF * 0.01;
+		lustDmgF *= 0.2;
+		if (player.lust100 * 0.01 >= 0.9) lustDmgF += (lustBoostToLustDmg * 140);
+		else if (player.lust100 * 0.01 < 0.2) lustDmgF += (lustBoostToLustDmg * 140);
+		else lustDmgF += (lustBoostToLustDmg * 2 * (20 - (player.lust100 * 0.01)));
+		//Determine if critical tease!
+		var crit2:Boolean = false;
+		var critChance2:int = 5;
+		if (player.findPerk(PerkLib.CriticalPerformance) >= 0) {
+			if (player.lib <= 100) critChance2 += player.lib / 5;
+			if (player.lib > 100) critChance2 += 20;
+		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance2 = 0;
+		if (rand(100) < critChance2) {
+			crit2 = true;
+			lustDmgF *= 1.75;
+		}
+		if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
+		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) lustDmgF *= 1.5;
+		lustDmgF = lustDmgF * monster.lustVuln;
+		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
+		lustDmgF = Math.round(lustDmgF);
+		monster.teased(lustDmgF);
+		outputText("You let electricity build up in your body before unleashing it into the ambient sky, the clouds roaring with thunder. Here comes the storm!\n ");
+		damage = doLightingDamage(damage, true, true);
+		outputText(" damage. ");
+		if (crit1) outputText(" <b>*Critical!*</b>");
+		outputText("(" + lustDmgF + ")\n\n");
+		if (crit2) outputText(" <b>Critical!</b>");
+		outputText("\n\n");
+		combat.bonusExpAfterSuccesfullTease();
+		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		player.createStatusEffect(StatusEffects.lustStorm,0,0,0,0);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}

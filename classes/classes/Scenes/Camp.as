@@ -143,6 +143,9 @@ public class Camp extends NPCAwareContent {
 
 	}
 
+	public var IsSleeping: Boolean = false;
+	public var IsWaitingResting: Boolean = false;
+
 	private function doCamp():void { //Only called by playerMenu
 		//Force autosave on HARDCORE MODE! And level-up.
 		if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) {
@@ -278,7 +281,7 @@ public class Camp extends NPCAwareContent {
 			milkWaifu.ratducto();
 			return;
 		}
-		if (Holidays.nieveHoliday() && model.time.hours == 6) {
+		if (Holidays.nieveHoliday() && camp.IsSleeping) {
 			if (player.hasKeyItem("Nieve's Tear") >= 0 && flags[kFLAGS.NIEVE_STAGE] != 5) {
 				Holidays.returnOfNieve();
 				hideMenus();
@@ -385,14 +388,17 @@ public class Camp extends NPCAwareContent {
 				goNext(timeQ, false);
 				return;
 			} else {
-				if (model.time.hours < 6 || model.time.hours > 20) {
+				if (IsSleeping) {
 					doSleep();
-				} else {
+				}
+				if (IsWaitingResting){
 					rest();
 				}
 				return;
 			}
 		}
+		IsSleeping = false;
+		IsWaitingResting = false;
 		if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] > 0 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
 			if (flags[kFLAGS.FUCK_FLOWER_LEVEL] == 0 && flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] >= 8) {
 				holliScene.getASprout();
@@ -2342,6 +2348,7 @@ private function SparrableNPCsMenu():void {
 
 	public function rest():void {
 		campQ = true;
+		IsWaitingResting = true;
 		clearOutput();
 		//Fatigue recovery
 		var multiplier:Number = 1.0;
@@ -2483,6 +2490,7 @@ private function SparrableNPCsMenu():void {
 	}
 
 	public function doWait():void {
+		IsWaitingResting = true;
 		campQ = true;
 		clearOutput();
 		//Fatigue recovery
@@ -2496,6 +2504,7 @@ private function SparrableNPCsMenu():void {
 		if (player.hasStatusEffect(StatusEffects.BathedInHotSpring)) fatRecovery *= 1.2;
 		if (timeQ == 0) {
 			timeQ = waitingORresting;
+
 			if (player.lowerBody == LowerBody.PLANT_FLOWER) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hours...\n");
 			else outputText("You wait " + num2Text(timeQ) + " hours...\n");
 			//Marble withdrawl
@@ -2529,6 +2538,7 @@ private function SparrableNPCsMenu():void {
 //-- SLEEP
 //-----------------
 	public function doSleep(clrScreen:Boolean = true):void {
+		IsSleeping = true;
 		if (SceneLib.urta.pregnancy.incubation == 0 && SceneLib.urta.pregnancy.type == PregnancyStore.PREGNANCY_PLAYER && model.time.hours >= 20 && model.time.hours < 2) {
 			urtaPregs.preggoUrtaGivingBirth();
 			return;

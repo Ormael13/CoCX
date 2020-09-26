@@ -557,7 +557,7 @@ public function alvinaMainCampSexMenuPrideOfLucifer():void
 	outputText("\"<i>Mmmmmm... time for my treat. This looks just about ripe.</i>\"\n\n");
 	outputText("She licks her lips in delight and to make sure not to lose a drop, as she starts to suck on your drooling penis, drinking the cum as it comes out and prolonging your orgasm. You faint against her as the rush of pleasure overloads your brain, your cock still twitching in her grasp.\n\n");
 	player.trainStat("str",2,100)
-	player.trainStat("inte",2,100)
+	player.trainStat("int",2,100)
 	player.trainStat("lib",2,100)
 	alvinaMainCampSexMenu3();
 }
@@ -567,7 +567,7 @@ public function alvinaMainCampSexMenuGreedOfMammon():void
 	clearOutput();
 	outputText("TOO DO\n\n");
 	player.trainStat("str",2,100)
-	player.trainStat("inte",2,100)
+	player.trainStat("int",2,100)
 	player.trainStat("lib",2,100)
 	alvinaMainCampSexMenu3();
 }
@@ -637,7 +637,7 @@ public function alvinaMainCampSexMenuBlasphemeOfBaphomet():void
 	dynStats("str", 2 + rand(3));
 	dynStats("inte", 2 + rand(3));
 	player.trainStat("str",2,100)
-	player.trainStat("inte",2,100)
+	player.trainStat("int",2,100)
 	player.trainStat("lib",2,100)
 	alvinaMainCampSexMenu3();
 }
@@ -662,7 +662,7 @@ public function alvinaMainCampSexMenuContractOfMephistopheles():void
 	outputText("The ground is constantly soaked with your fluids, which you barely register being drunk by some kind of weird orifice.\n\n");
 	outputText("You pass out from the overstimulation abandoning yourself to the wild fucking of the tentacles.\n\n");
 	player.trainStat("str",2,100)
-	player.trainStat("inte",2,100)
+	player.trainStat("int",2,100)
 	player.trainStat("lib",2,100)
 	alvinaMainCampSexMenu3();
 }
@@ -679,7 +679,7 @@ public function alvinaMainCampSexMenuGluttonyOfBeelzebub():void
 	outputText("This is way too much and you start orgasming consecutively each time one slides out, your pussy spewing them out with a torrent of cum as you begin to babble and drool. Alvina is in a similar state smiling with an ecstatic expression as the larvae flood out of her drenching pussy. Once outside, they merge back in the bed, disappearing in whatever dimensional hole they came from.\n\n");
 	outputText("The both of you stay entangled in one another still tired after the crazy ordeal.\n\n");
 	player.trainStat("str",2,100)
-	player.trainStat("inte",2,100)
+	player.trainStat("int",2,100)
 	player.trainStat("lib",2,100)
 	alvinaMainCampSexMenu3();
 }
@@ -748,8 +748,7 @@ public function alvinaCampStudy():void
 						outputText("\"<i>Did you know that Lethicite can be used as icing for cakes? A decent demon should have a frozen soul on every dessert really. I also heard only Lethice can afford such a delicacy daily. My birthday is in a few days so I hadn’t considered until now whether I want a cake or not.</i>\" You back away before she considers using yours.");
 						if (!player.hasPerk(PerkLib.Phylactery)) outputText(" You back away before she considers using yours.");
 						outputText("\n\n");
-					}
-					else {
+					} else {
 						if (rand(2) == 0 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText("\"<i>Umph I read the latest news, apparently you shut down the factory… nice job, the overseer there was an incompetent slut who deserved to get fired anyway.</i>\" Well getting praised for your heroic acts is one thing, but the way she casually talks about it makes it sounds like you didn’t accomplish anything of serious relevance.\n\n");
 						else outputText("\"<i>Did you know bee girls actually aren’t immune to corruption? I caught and used a few handmaidens as test subjects for some new spells before releasing them back to their hive. Apparently, you can create an entire army of demons just by corrupting a few and letting them spread mayhem and lust back home, very fascinating.</i>\"\n\n");
 					}
@@ -758,8 +757,7 @@ public function alvinaCampStudy():void
 		}
 		doNext(camp.campFollowers);
 		cheatTime2(5);
-	}
-	else {
+	} else {
 		outputText("Strangely, despite being a demon, Alvina makes for a great teacher. She corrects your posture when you miss a movement and helps you learn faster than you would by just reading books.\n\n");
 		outputText("\"<i>Still daydreaming in the middle of my lectures [name]?</i>\"\n\n");
 		outputText("You quickly jerk back into action to show you're listening. Alvina resumes explaining the universal principle of how to channel desire into power. You learn a lot, but the way she flaunts her body, and the many innuendos she punctuates the lesson with, make you flush red in arousal.  During the entire lesson, your teacher is teasing you, ");
@@ -769,23 +767,21 @@ public function alvinaCampStudy():void
 			outputText("\"<i>Very good [name], you finally achieved mastery of the theory. Tomorrow we will discuss more advanced principles.</i>\" She dismisses you with these congratulations as you head back to camp feeling both sexy and powerful.\n\n");
 			player.createStatusEffect(StatusEffects.AlvinaTraining, 0, 0, 0, 0);
 			dynStats("inte", 4, "lib", 4, "cor", 3);
-			player.trainStat("inte",4,100)
+			player.trainStat("int",4,100)
 			player.trainStat("lib",4,100)
 			flags[kFLAGS.ALVINA_FOLLOWER] = 16;
-		}
-		else if (player.intStat.core.value > 50 && player.libStat.core.value > 50 && flags[kFLAGS.ALVINA_FOLLOWER] == 14) {
+		} else if (player.intStat.core.value > 50 && player.libStat.core.value > 50 && flags[kFLAGS.ALVINA_FOLLOWER] == 14) {
 			outputText("Against all odds, you manage to hold your lust in check and cast the spells properly.\n\n");
 			outputText("\"<i>That will be all for today [name], we will continue tomorrow.</i>\" You head back to camp feeling extremely pent up, but also smarter.\n\n");
 			dynStats("inte", 7, "lib", 7, "cor", 2);
-			player.trainStat("inte",7,100)
+			player.trainStat("int",7,100)
 			player.trainStat("lib",7,100)
 			flags[kFLAGS.ALVINA_FOLLOWER] = 15;
-		}
-		else {
+		} else {
 			outputText("Unable to hold back any longer, you orgasm as you cast the spell. Alvina is amused by your lack of endurance.\n\n");
 			outputText("\"<i>Well aren’t you the lewd student. Regardless, you will need to practice until you develop some resilience. Come back tomorrow to resume your training.</i>\" She dismisses you, leaving you to clean up your mess. At least you learned a few new things.\n\n");
 			dynStats("inte", 10, "lib", 10, "cor", 10);
-			player.trainStat("inte",10,100)
+			player.trainStat("int",10,100)
 			player.trainStat("lib",10,100)
 			flags[kFLAGS.ALVINA_FOLLOWER] = 14;
 		}

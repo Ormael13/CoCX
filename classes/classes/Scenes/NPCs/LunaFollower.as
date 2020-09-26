@@ -456,19 +456,27 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			doNext(camp.returnToCampUseOneHour);
 		}
 
-		public function fullMoonEvent():void {
+		public function fullMoonEvent(PCIsAwake:Boolean = false):void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) {
 				if (player.hasStatusEffect(StatusEffects.LunaWasWarned)){
-					outputText("You would close your eyes and sleep, but the sound of footsteps alerts you to the fact that you are not alone unable to find sleep tonight. Luna right above you already naked and smirking, a green glint dancing in her eyes.\n\n");
+					if (PCIsAwake){
+						outputText("Just as you are about to take a break Luna approaches you tossing her clothes to the side, her intentions quite clear. A few second later Luna is right you already naked and smirking, a green glint dancing in her eyes.\n\n");
+					} else {
+						outputText("You would close your eyes and sleep, but the sound of footsteps alerts you to the fact that you are not alone unable to find sleep tonight. Luna right above you already naked and smirking, a green glint dancing in her eyes.\n\n");
+					}
 					outputText("\"<i>Sorry [name] I can’t hold myself anymore.</i>\"\n\n");
 					outputText("Oh no it's happening again! Luna is totally going to try and jump you, you can already see her beginning to transform as she prepare to force herself upon you.\n\n");
 					outputText("This is quickly going to get out of hand. How will you answer to her advances?\n\n");
 				}
 				else{
-					outputText("You would close your eyes and sleep, but the sound of footsteps alerts you to the fact that Luna has other plans tonight, " +
-							"you can spot the telltale green glow in her eyes announcing her intentions clear as days and she smirks knowingly. " +
+					if (PCIsAwake){
+						outputText("You were about to take a break, but the sound of footsteps alerts you to the fact that Luna has other plans tonight, ");
+					} else {
+						outputText("You would close your eyes and sleep, but the sound of footsteps alerts you to the fact that Luna has other plans tonight, ");
+					}
+					outputText("you can spot the telltale green glow in her eyes announcing her intentions clear as days and she smirks knowingly. " +
 							"Yep, you ain't going to bed without some sex first as Luna intends to bang you one way or another. You've been neglecting her of late and she's not letting you get away with it. " +
 							"Without much surprise, her already naked form indeed takes on a beastial shape. She sits in a waiting position, reminiscent of a good dog waiting on its treat.\n\n" +
 							"\"<i>Well " + player.mf("Master","Mistress") + ", you already know my why I am here, so let's get wild ok? I have been waiting eagerly for this.</i>\"\n\n");
@@ -476,7 +484,11 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				}
 			}
 			else if (player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
-				outputText("You are woken up by something forcefully pinning you down. What you see takes you entirely by surprise. Luna is standing over you, staring at you like some kind of predator. Considering you've forgotten to interact with her in the first place maybe you had it coming.\n\n");
+				if (PCIsAwake){
+					outputText("You were about to take a break but the sound of footsteps alerts you to the fact that you are not alone in the dark. Luna is right you already naked and smirking, a green glint dancing in her eyes.\n\n");
+				} else {
+					outputText("You would close your eyes and sleep, but the sound of footsteps alerts you to the fact that you are not alone unable to find sleep tonight. Luna right above you already naked and smirking, a green glint dancing in her eyes.\n\n");
+				}
 				outputText("\"<i>I can’t hold it anymore, " + player.mf("Master","Mistress") + ". I tried to but the things you do to me... the things I wish you would do to me... it's been intolerable. It's all your fault, after all you pushed me to do this.</i>\"\n\n");
 				outputText("What the hell is she talking about, you’ve done nothing of the sort.\n\n");
 				outputText("\"<i>Oh but you've been ignoring and neglecting me again [name], despite your promise, I love you unconditionally but you have hurt me and deep down I'm unsure if the sentiment is even shared, is my love not enough? " +
@@ -491,7 +503,11 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				flags[kFLAGS.LUNA_JEALOUSY] = 0;
 			}
 			else {
-				outputText("You are woken up by something forcefully pinning you down. What you see takes you entirely by surprise. Luna is standing over you, staring at you like some kind of predator.\n\n");
+				if (PCIsAwake){
+					outputText("You were about to take a break but out of nowhere something leaps out of the shadow and forcefully pins you down to the ground. What you see takes you entirely by surprise. Luna is standing over you, staring at you like some kind of predator.\n\n");
+				} else {
+					outputText("You are woken up by something forcefully pinning you down. What you see takes you entirely by surprise. Luna is standing over you, staring at you like some kind of predator.\n\n");
+				}
 				outputText("\"<i>I can’t hold it anymore, " + player.mf("Master","Mistress") + ". I tried to but the things you do to me... the things I wish you would do to me... it's been intolerable. It's all your fault, after all you pushed me to do this.</i>\"\n\n");
 				outputText("What the hell is she talking about, you’ve done nothing of the sort.\n\n");
 				outputText("\"<i>Oh, but yes you did. Every time you made me cook a meal, every time I healed your wounds my desire for you grew, yet you wouldn’t use me fully... is my body not to your liking, " + player.mf("Master","Mistress") + "? Don’t worry, now that the moon is at its peak I’m finally ready, ready to make you realise how much you love me. You can’t deny us anymore, [name]!</i>\"\n\n");
@@ -550,10 +566,11 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			outputText("You have been clear, she should scram now. Luna looks at you for a split second before running off in the woods. You have a bad feeling about this.\n\n");
 			flags[kFLAGS.LUNA_FOLLOWER] = 2;
 			flags[kFLAGS.LUNA_MOONING] = 1;
-			if (model.time.hours >= 21) CoC.instance.timeQ = 24 - model.time.hours;
-			else CoC.instance.timeQ = 0;
-			CoC.instance.timeQ += 6;
-			doNext(camp.sleepWrapper);
+			if (!player.isNightCreature())
+			{
+				doNext(camp.sleepWrapper);
+			}
+			else doNext(camp.returnToCampUseOneHour);
 		}
 		public function fullMoonEventResistWinFireHerForest():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -568,10 +585,11 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			outputText("You resolve to chain her to a tree every full moon from now on, though you suspect it'll be hard on her.\n\n");
 			flags[kFLAGS.LUNA_FOLLOWER] = 9;
 			flags[kFLAGS.LUNA_MOONING] = 1;
-			if (model.time.hours >= 21) CoC.instance.timeQ = 24 - model.time.hours;
-			else CoC.instance.timeQ = 0;
-			CoC.instance.timeQ += 6;
-			doNext(camp.sleepWrapper);
+			if (!player.isNightCreature())
+			{
+				doNext(camp.sleepWrapper);
+			}
+			else doNext(camp.returnToCampUseOneHour);
 		}
 		public function fullMoonEventResistDefeat():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -697,10 +715,11 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			player.orgasm();
 			if (flags[kFLAGS.LUNA_MOONING] == 2) {
 				flags[kFLAGS.LUNA_MOONING] = 1;
-				if (model.time.hours >= 21) CoC.instance.timeQ = 24 - model.time.hours;
-				else CoC.instance.timeQ = 0;
-				CoC.instance.timeQ += 6;
-				doNext(camp.sleepWrapper);
+				if (!player.isNightCreature())
+				{
+					doNext(camp.sleepWrapper);
+				}
+				else doNext(camp.returnToCampUseOneHour);
 			}
 			else doNext(camp.returnToCampUseOneHour);
 		}
@@ -828,10 +847,11 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 						flags[kFLAGS.LUNA_FOLLOWER] = 15;
 					}
 					flags[kFLAGS.LUNA_MOONING] = 1;
-					if (model.time.hours >= 21) CoC.instance.timeQ = 24 - model.time.hours;
-					else CoC.instance.timeQ = 0;
-					CoC.instance.timeQ += 10;
-					doNext(camp.sleepWrapper);
+					if (!player.isNightCreature())
+					{
+						doNext(camp.sleepWrapper);
+					}
+					else doNext(camp.returnToCampUseOneHour);
 				}
 			}
 			else {
@@ -857,10 +877,11 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 						flags[kFLAGS.LUNA_FOLLOWER] = 15;
 					}
 					flags[kFLAGS.LUNA_MOONING] = 1;
-					if (model.time.hours >= 21) CoC.instance.timeQ = 24 - model.time.hours;
-					else CoC.instance.timeQ = 0;
-					CoC.instance.timeQ += 10;
-					doNext(camp.sleepWrapper);
+					if (!player.isNightCreature())
+					{
+						doNext(camp.sleepWrapper);
+					}
+					else doNext(camp.returnToCampUseOneHour);
 				}
 			}
 		}

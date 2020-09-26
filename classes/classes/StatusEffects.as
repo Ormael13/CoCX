@@ -870,6 +870,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const LustDoTH:StatusEffectType                  = mkCombat("Lust DoT (H)");
 		public static const LustStones:StatusEffectType                = mkCombat("lust stones");
 		public static const lustvenom:StatusEffectType                 = mkCombat("lust venom");
+		public static const lustStorm:StatusEffectType             	   = mkCombat("lust storm");
 		public static const Lustzerking:StatusEffectType               = mkCombat("Lustzerking");
 		public static const Maleficium:StatusEffectType                = mkCombat("Maleficium");
 		public static const ManaShield:StatusEffectType                = mkCombat("Mana Shield");
