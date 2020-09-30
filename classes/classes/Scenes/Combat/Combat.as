@@ -4671,6 +4671,9 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
         if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
         if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
+        if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0) damage *= 1.20;
+        if (player.findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) damage *= 1.20;
+        if (player.findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) damage *= 1.20;
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {

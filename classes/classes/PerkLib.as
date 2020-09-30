@@ -3158,6 +3158,12 @@ public class PerkLib
 				"Your vitals are frozen in time by the magic of the curse tag, allowing you to live without the need for breathing, eating and a heartbeat. It also reduces damage taken from physical attacks by 20%. Furthermore your vitality is based of your libido rather then your toughness.");
 		public static const HarpyWomb:PerkType = mk("Harpy Womb", "Harpy Womb",
 				"Increases all laid eggs to large size so long as you have harpy legs and a harpy tail.");
+		public static const HeartOfTheStorm:PerkType = mk("Heart of the storm", "Heart of the storm",
+				"Increase the power of all Wind and Lightning racial abilities by 20%.");
+		public static const HeartOfTheStormEvolved:PerkType = mk("Heart of the storm, Evolved", "Heart of the storm, Evolved",
+				"Further increase the power of all Wind and Lightning abilities by 20% and Increase wind and electricity resistance by 20%.");
+		public static const HeartOfTheStormFinalForm:PerkType = mk("Heart of the storm, Final Form", "Heart of the storm, Final Form",
+				"Further increase the power of all Wind and Lightning abilities by another 20% and Increases wind and electricity resistance by another 20%. If able, you may fly without end at no fatigue cost.");
 		public static const HydraAcidBreath:PerkType = mk("Hydra acid breath", "Hydra acid breath",
 				"Allows access to a hydra acid breath attack.");
 		public static const HydraRegeneration:PerkType = mk("Hydra Regeneration", "Hydra Regeneration",
@@ -5415,6 +5421,9 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.mouseScore() >= 12;
             }, "Mouse race");
+			HeartOfTheStorm.requireCustomFunction(function (player:Player):Boolean {
+						return player.raijuScore() >= 10 || player.thunderbirdScore() >= 10;
+			}, "Stormborn race");
 			HollowFangs.requireMouthMutationSlot().requirePerk(VampiricBloodsteam)
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.facePart.type == 34;//player.facePart.isAny(Face.VAMPIRE, Face.)
@@ -5587,6 +5596,9 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.mouseScore() >= 12;
             }, "Mouse race");
+			HeartOfTheStormEvolved.requireLevel(6).requirePerk(HeartOfTheStorm).requireCustomFunction(function (player:Player):Boolean {
+				return player.raijuScore() >= 10 || player.thunderbirdScore() >= 10;
+			}, "Stormborn race");
 			ManticoreMetabolismEvolved.requireLevel(6)
 				.requirePerk(ManticoreMetabolism)
 				.requireCustomFunction(function (player:Player):Boolean {
@@ -5916,6 +5928,9 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.mouseScore() >= 12;
             }, "Mouse race");
+			HeartOfTheStormFinalForm.requireLevel(18).requirePerk(HeartOfTheStormEvolved).requireCustomFunction(function (player:Player):Boolean {
+				return player.raijuScore() >= 10 || player.thunderbirdScore() >= 10;
+			}, "Stormborn race");
             LactaBovinaOvariesEvolved.requireLevel(18)
 				.requirePerk(LactaBovinaOvaries)
 				.requireCustomFunction(function (player:Player):Boolean {

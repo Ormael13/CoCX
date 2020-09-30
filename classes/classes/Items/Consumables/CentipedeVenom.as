@@ -49,7 +49,7 @@ public class CentipedeVenom extends Consumable {
 			changes++;
 		}
 
-		if (player.spe < 80 && changes < changeLimit && rand(3) == 0) {
+		if (changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYou suddenly jerk forward, feeling somewhat twitchy. Surprised, you didn't know you could react so quickly.");
 			player.MutagenBonus("spe", 1);
 			changes++;

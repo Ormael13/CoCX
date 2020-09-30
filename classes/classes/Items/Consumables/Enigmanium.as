@@ -46,7 +46,7 @@ public class Enigmanium extends Consumable{
 			outputText("You chug down the potion pinching your nose and hoping for the best. Knowledge flood your mind. Hey you could as well get to making riddles as a pastime.");
 			
 			//Speed raises up to 75
-			if (player.spe < 75 && rand(3) == 0 && changes < changeLimit) {
+			if (rand(3) == 0 && changes < changeLimit) {
 				//low speed
 				if (player.spe <= 30) {
 					outputText("\n\nYou feel... more balanced, sure of step. You're certain that you've become just a little bit faster.");
@@ -65,7 +65,7 @@ public class Enigmanium extends Consumable{
 				changes++;
 			}
 			//Strength raises to 80
-			if (player.str < 80 && rand(3) == 0 && changes < changeLimit) {
+			if (rand(3) == 0 && changes < changeLimit) {
 				if (rand(2) == 0) outputText("\n\nYour muscles feel taut, like a coiled spring, and a bit more on edge.");
 				else outputText("\n\nYou arch your back as your muscles clench painfully.  The cramp passes swiftly, leaving you feeling like you've gotten a bit stronger.");
 				player.MutagenBonus("str", 1);
@@ -78,7 +78,7 @@ public class Enigmanium extends Consumable{
 				dynStats("tou", -2);
 			}
 			//IntelliWisGain
-			if (player.inte < 100 && rand(4) == 0 && changes < changeLimit) {
+			if (rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nThousands of glowing symbols, hieroglyphics you remember them being denoted as, appear in vast arrays in your mind. Miraculously, you can make sense of them, as if they were in your own language. Shifting them, you giggle to yourself as you begin crafting a riddle that will surely baffle great minds. The visions end, and you feel incredibly enlightened! Is this how Sanurah feels?");
 				player.MutagenBonus("int", 2);
 				player.MutagenBonus("wis", 2);
@@ -87,7 +87,7 @@ public class Enigmanium extends Consumable{
 			
 			
 			//Libido gain
-			if (player.lib < 80 && changes < changeLimit && rand(4) == 0) {
+			if (changes < changeLimit && rand(4) == 0) {
 				//Cat dicked folks
 				if (player.catCocks() > 0) {
 					choice = player.findFirstCockType(CockTypesEnum.CAT);

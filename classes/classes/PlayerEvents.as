@@ -2403,7 +2403,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					return true;
 				}
 			}
-            if (checkedDream++ == 0 && camp.IsSleeping) { //You can only have one dream each night
+            if (checkedDream++ == 0 && camp.IsSleeping) { //You can only have one dream each night (NEEDS TO BE FIXED)
                 if (player.gender > 0 && CoC.instance.model.time.days == 10) { //Day 10 dream - since this can happen only once it takes priority over all other dreams
                     dreams.dayTenDreams();
 					return true;

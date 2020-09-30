@@ -1,4 +1,6 @@
 package classes {
+import flash.utils.getAliasName;
+
 public class Race {
     public static const ALL_RACES:/*Race*/Array = [];
 
@@ -95,6 +97,7 @@ public class Race {
         this.name = _name;
         this.id = _id;
         ALL_RACES[_id] = this;
+        //ALL_RACES.sort(getAliasName.length)
     }
 
     }

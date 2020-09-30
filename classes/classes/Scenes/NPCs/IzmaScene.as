@@ -233,16 +233,19 @@ private function readSharkCuntManual2():void {
 		outputText("You learn a few new guarding stances that seem rather promising.");
 		//(+2 Toughness)
 		dynStats("tou", 2);
+		player.KnowledgeBonus("tou",2);
 	}
 	else if(choice == 1) {
 		outputText("After a quick skim you reach the end of the book. You don't learn any new fighting moves, but the refresher on the overall mechanics and flow of combat and strategy helped.");
 		//(+2 Intelligence)
 		dynStats("int", 2);
+		KnowledgeBonus("int",2);
 	}
 	else {
 		outputText("Your read-through of the manual has given you insight into how to put more of your weight behind your strikes without leaving yourself open.  Very useful.");
 		//(+2 Strength)
 		dynStats("str", 2);
+		player.KnowledgeBonus("str",2);
 	}
 	outputText("\n\nFinished learning what you can from the old rag, you hand it back to Izma who happily adds it back into her collection.  You say your goodbyes and then ");
 	if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] != 1) outputText("head back to your camp.");
@@ -360,6 +363,7 @@ private function readSharkgirlPornzYouFuckingPervertAsshole():void {
 	outputText("You wet your lips as you flick through the pages of the book and admire the rather... detailed illustrations inside.  A bee-girl getting gangbanged by imps, a minotaur getting sucked off by a pair of goblins... the artist certainly has a dirty mind.  As you flip the pages you notice the air around you heating up a bit; you attribute this to weather until you finish and close the book... only to discover that Izma had been standing behind you for some time, 'reading' over your shoulder.");
 	//(+2! Libido and lust gain)
 	dynStats("lib", 2, "lus", (20+player.lib/10));
+	player.KnowledgeBonus("lib",2);
 	//(0-30 Corruption)
 	if(player.cor < 33) {
 		outputText("  You give a bit of a start.  \"<i>S-sorry,</i>\" she says.  At a loss for words, you hand her the porn and make a hasty retreat");

@@ -981,6 +981,9 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 			if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) lustDmgF *= 1.5;
 			lustDmgF = lustDmgF * monster.lustVuln;
+			if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0) lustDmgF *= 1.20;
+			if (player.findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) lustDmgF *= 1.20;
+			if (player.findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) lustDmgF *= 1.20;
 			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
 			if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
@@ -1102,10 +1105,13 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) lustDmgF *= 1.5;
-		lustDmgF = lustDmgF * monster.lustVuln;
+		if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0) damage *= 1.20;
+		if (player.findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) damage *= 1.20;
+		if (player.findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) damage *= 1.20;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
+		lustDmgF = lustDmgF * monster.lustVuln;
 		lustDmgF = Math.round(lustDmgF);
 		monster.teased(lustDmgF);
 		combat.bonusExpAfterSuccesfullTease();
@@ -1137,6 +1143,9 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = calcVoltageMod(damage);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		damage = Math.round(damage);
 		dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
 		var lustDmgF:Number = 20 + rand(6);
@@ -1199,17 +1208,20 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) lustDmgF *= 1.5;
+		if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0) lustDmgF *= 1.20;
+		if (player.findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) lustDmgF *= 1.20;
+		if (player.findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) lustDmgF *= 1.20;
 		lustDmgF = lustDmgF * monster.lustVuln;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
 		lustDmgF = Math.round(lustDmgF);
-		monster.teased(lustDmgF);
+		monster.teased(lustDmgF, false);
 		outputText("You let electricity build up in your body before unleashing it into the ambient sky, the clouds roaring with thunder. Here comes the storm!\n ");
 		damage = doLightingDamage(damage, true, true);
 		outputText(" damage. ");
 		if (crit1) outputText(" <b>*Critical!*</b>");
-		outputText("(" + lustDmgF + ")\n\n");
+		outputText("<b>(<font color=\"#ff00ff\">" + lustDmgF + "</font>)</b>)\n\n");
 		if (crit2) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
 		combat.bonusExpAfterSuccesfullTease();
@@ -1244,6 +1256,9 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText(" ");
 				var CumLustDmg:Number = 0;
 				CumLustDmg += combat.scalingBonusLibido() * 0.2;
+				if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0) CumLustDmg *= 1.20;
+				if (player.findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) CumLustDmg *= 1.20;
+				if (player.findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) CumLustDmg *= 1.20;
 				monster.teased(CumLustDmg);
 			}
 			player.lust += (player.lust100 * 0.05);
@@ -1262,6 +1277,9 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText(" ");
 				var MilkLustDmg:Number = 0;
 				MilkLustDmg += combat.scalingBonusLibido() * 0.2;
+				if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0) MilkLustDmg *= 1.20;
+				if (player.findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) MilkLustDmg *= 1.20;
+				if (player.findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) MilkLustDmg *= 1.20;
 				monster.teased(MilkLustDmg);
 			}
 			player.lust += (player.lust100 * 0.05);
@@ -1282,6 +1300,9 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText(" ");
 				var MilkCumLustDmg:Number = 0;
 				MilkCumLustDmg += combat.scalingBonusLibido() * 0.4;
+				if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0) MilkCumLustDmg *= 1.20;
+				if (player.findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) MilkCumLustDmg *= 1.20;
+				if (player.findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) MilkCumLustDmg *= 1.20;
 				monster.teased(MilkCumLustDmg);
 			}
 			player.lust += (player.lust100 * 0.1);

@@ -2364,7 +2364,7 @@ public function meditateInForest():void {
 	clearOutput();
 	outputText("Jojo smiles and leads you off the path to a small peaceful clearing.  There is a stump in the center, polished smooth and curved in a way to be comfortable.  He gestures for you to sit, and instructs you to meditate.\n\nAn indeterminate amount of time passes, but you feel more in control of yourself.  Jojo congratulates you, but offers a warning as well.  \"<i>Be ever mindful of your current state, and seek me out before you lose yourself to the taints of this world.  Perhaps someday this tainted world can be made right again.</i>\"");
 	
-	dynStats("str", .5, "tou", .5, "int", .5, "lib", -1, "lus", -5, "cor", (-1 - player.countCockSocks("alabaster")));
+	dynStats("str", .5, "tou", .5, "int", .5, "wis", .5,"lib", -1, "lus", -5, "cor", (-1 - player.countCockSocks("alabaster")));
 	
 	if (!player.hasStatusEffect(StatusEffects.JojoMeditationCount))
 		player.createStatusEffect(StatusEffects.JojoMeditationCount, 1, 0, 0, 0);

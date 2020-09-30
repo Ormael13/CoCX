@@ -277,13 +277,13 @@ public function etnaRapeYesF2():void
 					"You tease her as you close in ");
 			if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("\"<i>Hey Etna</i>");
 			else outputText("\"<i>Hey kitty</i>");
-			outputText("<i>you're always hungry for more ain't you?</i>\"\n\n");
+			outputText("<i> you're always hungry for more ain't you?</i>\"\n\n");
 			if(player.isLiliraune()) {
 				outputText("Your other half chuckles. \"<i>Oh of course she's always hungry for more she's</i>\"\n\n");
 				//if(fidel){
 				outputText("<i> been</i>");
 				//}
-				outputText("<i>hunting minotaurs for their cocks</i>");
+				outputText("<i> hunting minotaurs for their cocks</i>");
 				//if(!fidel){
 				outputText("<i> all day long.</i>");
 				//}
@@ -295,12 +295,12 @@ public function etnaRapeYesF2():void
 				outputText("\"<i>Well </i>");
 				if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("\"<i>Etna</i>");
 				else outputText("\"<i>kitty</i>");
-				outputText("<i>how about we gave you exactly what you want so badly.</i>\"\n\n");
+				outputText("<i> how about we gave you exactly what you want so badly.</i>\"\n\n");
 			} else {
 				outputText("\"<i>Well </i>");
 				if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("\"<i>Etna</i>");
 				else outputText("\"<i>kitty</i>");
-				outputText("<i>how about I give you exactly what you want so badly.</i>\"\n\n");
+				outputText("<i> how about I give you exactly what you want so badly.</i>\"\n\n");
 			}
 			outputText("She perks up at the mere mention, her tails dripping with pussy drool. " +
 					"You pull her closer without much struggling and align your many stamens as she tucks her tail between her leg and hold " +
@@ -311,7 +311,7 @@ public function etnaRapeYesF2():void
 					"The rubbing of your many vines against one another is a delightful feeling and it only gets better as you dive into ");
 			if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("Etna");
 			else outputText("the manticore");
-			outputText("welcoming folds pistoning in and out.\n\n" +
+			outputText(" welcoming folds pistoning in and out.\n\n" +
 					"She mewl in delight as your massive composite member begins to slither all the way down her hole. Her tail feeling a member inside instinctively milks and squeezes your omnicocks, " +
 					"instincts kicking in, as the delirious manticore begs you to keep going.\n\n")
 			if(player.isLiliraune()) {

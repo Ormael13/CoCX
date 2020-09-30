@@ -41,13 +41,13 @@ public class MaraFruit extends Consumable{
 		clearOutput();
 		outputText("Biting into it, sweet juices seem to explode from the flesh, dribbling down your chin.  It tastes like a dessert and you chow down, happily munching away.  In no time flat, you're down to just a core.");
 		//-Increase strength up to 80.
-		if (player.str < 80 && changes < changeLimit && rand(4) == 0) {
+		if (changes < changeLimit && rand(4) == 0) {
 			outputText("\n\nYour fill your muscles filling with plants might.");
 			player.MutagenBonus("str", 1);
 			changes++;
 		}
 		//-Increase toughness up to 100.
-		if (player.tou < 100 && changes < changeLimit && rand(4) == 0) {
+		if (changes < changeLimit && rand(4) == 0) {
 			outputText("\n\nYour body suddenly feels tougher and more resilient just like a tree.");
 			player.MutagenBonus("tou", 1);
 			changes++;

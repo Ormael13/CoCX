@@ -875,7 +875,7 @@ public class Camp extends NPCAwareContent {
 				outputText("<b>You are debilitatingly aroused, but your sexual organs are so numbed the only way to get off would be to find something tight to fuck or get fucked...</b>\n\n");
 			} else if (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] > 0 && player.isTaur()) {
 				outputText("<b>You are delibitatingly aroused, but your sex organs are so difficult to reach that masturbation isn't at the forefront of your mind.</b>\n\n");
-			} else if (player.hasStatusEffect(StatusEffects.IsRaiju)) {
+			} else if (player.hasStatusEffect(StatusEffects.IsRaiju) || player.hasStatusEffect(StatusEffects.IsThunderbird)) {
 				outputText("<b>You are delibitatingly aroused, but have no ways to reach true release on your own. The first thing up your mind right now is to find a partner willing or unwilling to discharge yourself into.</b>\n\n");
 			} else {
 				outputText("<b>You are debilitatingly aroused, and can think of doing nothing other than masturbating.</b>\n\n");

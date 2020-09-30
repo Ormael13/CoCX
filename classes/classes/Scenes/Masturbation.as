@@ -3563,7 +3563,7 @@ public class Masturbation extends BaseContent {
 			index++;
 		}
 		clearOutput();
-		outputText("You realize how horny you are, your twin sister giving a silent nod.\n\n\"" +
+		outputText("You realize how horny you are, your twin sister giving a silent nod.\n\n" +
 				"\"<i>Hey sis feel in the mood for a ride?</i>\"\n\n" +
 				"\"<i>Yeah, we can’t fight properly while aroused like this, close the curtain.</i>\"\n\n" +
 				"She doesn’t need to say another word as you close your petals in order to give yourself some well-needed privacy. " +

@@ -190,7 +190,7 @@ public class AbstractEquinum extends Consumable {
 				changes++;
 			}
 		}
-		if (((type == 1 && player.inte < 65) || (type == 2 && player.inte < 90)) && rand(3) == 0) {
+		if ((type == 1 || type == 2) && rand(3) == 0) {
 			outputText("\n\nAs you finish drinking the potion you suddently feel more cunning and by far way smarter.");
 			player.MutagenBonus("int", 1);
 			changes++;

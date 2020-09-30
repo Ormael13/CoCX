@@ -456,7 +456,7 @@ use namespace CoC;
 		//Unhindered related acceptable armor types
 		public function meetUnhinderedReq():Boolean
 		{
-			return armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "bimbo skirt" || armorName == "desert naga pink and black silk dress" || armorName == "berserker armor" || armor == ArmorLib.NOTHING ;
+			return armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "bimbo skirt" || armorName == "desert naga pink and black silk dress" || hasPerk(PerkLib.BerserkerArmor) || armor == ArmorLib.NOTHING ;
 		}
 		//override public function get armors
 		override public function get armorName():String {
@@ -3871,6 +3871,12 @@ use namespace CoC;
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.HinezumiBurningBloodFinalForm) >= 0)
 				internalChimeraCounter++;
+			if (findPerk(PerkLib.HeartOfTheStorm) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0)
+				internalChimeraCounter++;
 			if (findPerk(PerkLib.HollowFangs) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.HollowFangsEvolved) >= 0)
@@ -6655,6 +6661,12 @@ use namespace CoC;
 				raijuCounter++;
 			if (hairColor == "purple" || hairColor == "light blue" || hairColor == "yellow" || hairColor == "white" || hairColor == "lilac" || hairColor == "green")
 				raijuCounter++;
+			if (findPerk(PerkLib.HeartOfTheStorm) >= 0)
+				raijuCounter += 1;
+			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0)
+				raijuCounter += 1;
+			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0)
+				raijuCounter += 1;
 			if (findPerk(PerkLib.RaijusDescendant) >= 0 || findPerk(PerkLib.BloodlineRaiju) >= 0)
 				raijuCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
@@ -6677,7 +6689,7 @@ use namespace CoC;
 				thunderbirdCounter++;
 			if (eyes.type == Eyes.RAIJU)
 				thunderbirdCounter++;
-			if (faceType == Face.HUMAN)
+			if (faceType == Face.HUMAN || faceType == Face.RAIJU_FANGS)
 				thunderbirdCounter++;
 			if (arms.type == Arms.HARPY)
 				thunderbirdCounter++;
@@ -6693,7 +6705,13 @@ use namespace CoC;
 				thunderbirdCounter++;
 			if (hairType == Hair.STORM)
 				thunderbirdCounter++;
-			if (hairColor == "purple" || hairColor == "light blue" || hairColor == "yellow" || hairColor == "white")
+			if (findPerk(PerkLib.HeartOfTheStorm) >= 0)
+				thunderbirdCounter += 1;
+			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0)
+				thunderbirdCounter += 1;
+			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0)
+				thunderbirdCounter += 1;
+			if (hairColor == "purple" || hairColor == "light blue" || hairColor == "yellow" || hairColor == "white" || hairColor == "emerald" || hairColor == "turquoise")
 				thunderbirdCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				thunderbirdCounter += 50;
@@ -8649,6 +8667,8 @@ use namespace CoC;
 				heartMutations--;
 			if (findPerk(PerkLib.ObsidianHeart) >= 0)
 				heartMutations--;
+			if (findPerk(PerkLib.HeartOfTheStorm) >= 0)
+				heartMutations--;
 			//if (findPerk(PerkLib.) >= 0) - unicorn/bicorn
 			//	heartMutations--;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
@@ -10131,7 +10151,13 @@ use namespace CoC;
 				}
 			}//+10/10-20
 			if (raijuScore() >= 5) {
-				if (raijuScore() >= 10) {
+				if (raijuScore() >= 14) {
+					maxSpeCap2 += (90 * newGamePlusMod);
+					maxIntCap2 += (50 * newGamePlusMod);
+					maxLibCap2 += (120 * newGamePlusMod);
+					minSen += (50 * newGamePlusMod);
+				}
+				else if (raijuScore() >= 10) {
 					maxSpeCap2 += (70 * newGamePlusMod);
 					maxIntCap2 += (50 * newGamePlusMod);
 					maxLibCap2 += (80 * newGamePlusMod);
@@ -10145,9 +10171,16 @@ use namespace CoC;
 				}
 			}//+10/10-20
 			if (thunderbirdScore() >= 12) {
-				maxTouCap2 -= (20 * newGamePlusMod);
-				maxSpeCap2 += (100 * newGamePlusMod);
-				maxLibCap2 += (100 * newGamePlusMod);
+				if (thunderbirdScore() >= 15) {
+					maxTouCap2 -= (20 * newGamePlusMod);
+					maxSpeCap2 += (115 * newGamePlusMod);
+					maxLibCap2 += (130 * newGamePlusMod);
+				}
+				else {
+					maxTouCap2 -= (20 * newGamePlusMod);
+					maxSpeCap2 += (100 * newGamePlusMod);
+					maxLibCap2 += (100 * newGamePlusMod);
+				}
 			}//+10/10-20
 			if (demonScore() >= 5) {
 				if (demonScore() >= 11) {
@@ -11572,6 +11605,8 @@ use namespace CoC;
 			removeCurse(statName, bonus)
 			if (buff("Mutagen").getValueOfStatBuff(""+statName+".mult") < 0.20){
 				buff("Mutagen").addStat(""+statName+".mult",0.01);
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatUp(statName);
 			}
 		}
 
@@ -11580,6 +11615,8 @@ use namespace CoC;
 			removeCurse(statName, bonus)
 			if (buff("Alchemical").getValueOfStatBuff(""+statName+".mult") < 0.20){
 				buff("Alchemical").addStat(""+statName+".mult",0.01);
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatUp(statName);
 			}
 		}
 
@@ -11588,6 +11625,8 @@ use namespace CoC;
 			removeCurse(statName, bonus)
 			if (buff("Knowledge").getValueOfStatBuff(""+statName+".mult") < 0.20){
 				buff("Knowledge").addStat(""+statName+".mult",0.01);
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatUp(statName);
 			}
 		}
 		

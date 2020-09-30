@@ -138,16 +138,19 @@ public class YourCabin extends DungeonAbstractContent
 				outputText("You learn a few new guarding stances that seem rather promising.");
 				//(+2 Toughness)
 				dynStats("tou", 2);
+				player.KnowledgeBonus("tou",2);
 			}
 			else if(choice == 1) {
 				outputText("After a quick skim you reach the end of the book. You don't learn any new fighting moves, but the refresher on the overall mechanics and flow of combat and strategy helped.");
 				//(+2 Intelligence)
 				dynStats("int", 2);
+				player.KnowledgeBonus("int",2);
 			}
 			else {
 				outputText("Your read-through of the manual has given you insight into how to put more of your weight behind your strikes without leaving yourself open.  Very useful.");
 				//(+2 Strength)
 				dynStats("str", 2);
+				player.KnowledgeBonus("str",2);
 			}
 			outputText("\n\nFinished learning what you can from the old rag, you close the book and put it back on your bookshelf.");
 			doNext(camp.returnToCampUseOneHour);
@@ -172,6 +175,7 @@ public class YourCabin extends DungeonAbstractContent
 			outputText("You wet your lips as you flick through the pages of the book and admire the rather... detailed illustrations inside.  A bee-girl getting gangbanged by imps, a minotaur getting sucked off by a pair of goblins... the artist certainly has a dirty mind.  As you flip the pages you notice the air around you heating up a bit; you attribute this to weather until you finish and close the book.\n\n");
 			//(+2! Libido and lust gain)
 			dynStats("lib", 2, "lus", (20+player.lib/10));
+			player.KnowledgeBonus("lib",2);
 			outputText("Your mind is already filled with sexual desires.  You put the pornographic book back in your bookshelf.");
 			
 			doNext(camp.returnToCampUseOneHour);
