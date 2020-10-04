@@ -1174,7 +1174,7 @@ public class Camp extends NPCAwareContent {
 			CoC.instance.inCombat = false;
 			menu();
 		}
-		if (!isNightTime) {
+		if (!(model.time.hours <= 5 || model.time.hours >= 23)) {
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0 && !descOnly) {
 				Holidays.DLCPrompt("Lovers DLC", "Get the Lovers DLC to be able to interact with them and have sex! Start families! The possibilities are endless!", "$4.99", doCamp);
 				return;
@@ -1518,7 +1518,7 @@ public class Camp extends NPCAwareContent {
 			CoC.instance.inCombat = false;
 			menu();
 		}
-		if (!isNightTime) {
+		if (!(model.time.hours <= 5 || model.time.hours >= 23)) {
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0 && !descOnly) {
 				Holidays.DLCPrompt("Slaves DLC", "Get the Slaves DLC to be able to interact with them. Show them that you're dominating!", "$4.99", doCamp);
 				return;
@@ -1592,7 +1592,7 @@ public class Camp extends NPCAwareContent {
 			//ADD MENU FLAGS/INDIVIDUAL FOLLOWER TEXTS
 			menu();
 		}
-		if (!isNightTime) {
+		if (!(model.time.hours <= 5 || model.time.hours >= 23)) {
 			//Aether Twins
 			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] > 0 || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] > 0) {
 				buttons.add("Aether Twins", SceneLib.aethertwins.aethertwinsFollowers).hint("Visit Aether twins the sentient weapons. You can even take and wear them as weapon and shield if you like.");
