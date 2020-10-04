@@ -5705,24 +5705,19 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
             lustDmgF = lustDmgF/2;
             lustDmgF = Math.round(lustDmgF);
-            monster.teased(lustDmgF);
-            outputText("[monster name ]is struck by lightning for ")
+            outputText("Your opponent is struck by lightning as your lust storm rages on.")
             damage = doLightingDamage(damage, true, true);
-            outputText(" damage. ");
             if (crit1) outputText(" <b>*Critical!*</b>");
-            outputText("(" + lustDmgF + ")");
+            monster.teased(lustDmgF, false);
             if (crit2) outputText(" <b>Critical!</b>");
             outputText(" as a bolt falls from the sky!\n\n");
             combat.bonusExpAfterSuccesfullTease();
             if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-            if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
             checkAchievementDamage(damage);
-            combat.heroBaneProc(damage);
             statScreenRefresh();
             if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-            else enemyAI();
+            if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
         }
-
 
         if (player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
             outputText("The feel of tight leather completely immobilizing you turns you on more and more.  Would it be so bad to just wait and let her play with you like this?\n\n");
@@ -9607,6 +9602,7 @@ public class Combat extends BaseContent {
         clearOutput();
         outputText("You open you wing taking flight.\n\n");
         player.createStatusEffect(StatusEffects.Flying, 7, 0, 0, 0);
+        if (player.findPerk(PerkLib.HeartOfTheStormFinalForm)) player.addStatusValue(StatusEffects.Flying, 1, 999);
         if (player.findPerk(PerkLib.Resolute) < 0) {
             player.createStatusEffect(StatusEffects.FlyingNoStun, 0, 0, 0, 0);
             player.createPerk(PerkLib.Resolute, 0, 0, 0, 0);

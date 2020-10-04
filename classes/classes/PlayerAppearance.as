@@ -1142,7 +1142,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.lowerBody == LowerBody.CLOVEN_HOOFED)
 			outputText("  " + Num2Text(player.legCount) + " digitigrade legs form below your [hips], ending in cloven hooves.");
 		else if (player.lowerBody == LowerBody.MANTIS)
-			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a shimmering green, insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.");
+			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a shimmering "+player.coatColor+", insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.");
 		else if (player.lowerBody == LowerBody.SHARK && !player.isTaur())
 			outputText("  Your " + num2Text(player.legCount) + " legs are mostly human save for the webing between your toes.");
 		else if (player.lowerBody == LowerBody.SHARK && player.isTaur())
@@ -1264,7 +1264,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("The deadly set of spikes covering the tip regularly drips with your potent venom. When impaling your tail spikes in a prey isn’t enough you can fling them at a target on a whim like the most talented archer.");
 		}
 		if (player.tailType == Tail.MANTIS_ABDOMEN)
-			outputText("  A large insectile mantis-abdomen dangles from just above your backside, bobbing with its own weight as you shift.  It is covered in hard greenish chitinous material.");
+			outputText("  A large insectile mantis-abdomen dangles from just above your backside, bobbing with its own weight as you shift.  It is covered in hard "+player.coatColor+"ish chitinous material.");
 		if (player.tailType == Tail.SHARK) {
 			outputText("  A long shark-tail trails down from your backside, swaying to and fro while giving you a dangerous air.");
 		}
@@ -1394,7 +1394,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (armType == Arms.SPIDER)
 			outputText("  Shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves from a distance.");
 		else if (armType == Arms.MANTIS)
-			outputText("  Shining green exoskeleton covers your arms from the biceps down with a long and sharp scythes extending from the wrists.");
+			outputText("  Shining "+player.coatColor+" exoskeleton covers your arms from the biceps down with a long and sharp scythes extending from the wrists.");
 		else if (armType == Arms.BEE)
 			outputText("  Shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves ended with a yellow fuzz from a distance.");
 		else if (armType == Arms.SALAMANDER)

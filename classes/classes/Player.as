@@ -2249,6 +2249,9 @@ use namespace CoC;
 			if (armorName == "Goblin Technomancer clothes") mult -= 25;
 			if (upperGarmentName == "Technomancer bra") mult -= 15;
 			if (lowerGarmentName == "Technomancer panties") mult -= 15;
+			if (findPerk(PerkLib.LightningAffinity) >= 0) mult -= 50;
+			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) mult -= 20;
+			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) mult -= 20;
 			if (jewelryEffectId == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude3;
@@ -6788,7 +6791,7 @@ use namespace CoC;
 		public function mantisScore():Number {
 			Begin("Player","racialScore","mantis");
 			var mantisCounter:Number = 0;
-			if (hasCoatOfType(Skin.CHITIN))
+			if (hasCoatOfType(Skin.CHITIN) || hasPartialCoat(Skin.CHITIN))
 				mantisCounter += 3;//mantisCounter++;
 			if (antennae.type == Antennae.MANTIS)
 			{
@@ -6796,6 +6799,8 @@ use namespace CoC;
 				if (faceType == Face.HUMAN)
 					mantisCounter++;
 			}
+			if (coatColor == "green" || "emerald" || "turquoise")
+				mantisCounter++;
 			if (arms.type == Arms.MANTIS)
 				mantisCounter++;
 			if (lowerBody == LowerBody.MANTIS)
@@ -8740,6 +8745,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.PigBoarFat) >= 0)
 				fattissueMutations--;
 			if (findPerk(PerkLib.NaturalPunchingBag) >= 0)
+				fattissueMutations--;
+			if (findPerk(PerkLib.WhaleFat) >= 0)
 				fattissueMutations--;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
 				fattissueMutations++;

@@ -377,6 +377,7 @@
         <cell rect="301,1064,49,59" name="hand_bg/kumiho" dx="56" dy="56"/>
         <cell rect="851,150,49,59" name="hands_bg/wraithleft" dx="63" dy="75"/>
         <cell rect="651,270,49,59" name="hands_bg/frostWyrmleft" dx="62" dy="72"/>
+        <cell rect="801,270,49,59" name="hands_bg/blade-kamaitachiMantis" dx="56" dy="64"/>
         <cell rect="351,270,49,59" name="overhands_bg/fire" dx="56" dy="64"/>
         <cell rect="1,330,49,59" name="hands/fur" dx="104" dy="64"/>
         <cell rect="601,330,49,59" name="hands/furracoon" dx="104" dy="64"/>
@@ -395,6 +396,7 @@
         <cell rect="301,1124,49,59" name="hands/kumiho" dx="101" dy="56"/>
         <cell rect="901,210,49,59" name="hands/wraithright" dx="94" dy="75"/>
         <cell rect="651,330,49,59" name="hands/frostWyrmright" dx="98" dy="72"/>
+        <cell rect="801,330,49,59" name="hands/blade-kamaitachiMantis" dx="104" dy="64"/>
         <cell rect="951,210,49,59" name="hands_fg/wraithrightlewd" dx="105" dy="48"/>
         <cell rect="351,330,49,59" name="overhands/fire" dx="104" dy="64"/>
         <cell rect="1,390,49,59" name="legs/human" dx="79" dy="115"/>
@@ -558,7 +560,7 @@
         <cell rect="1024,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArmLewd" dx="104" dy="52"/>
         <cell rect="1272,489,40,44" name="clothRightArm/berserkerArmorArmsFeralRight" dx="101" dy="56"/>
         <cell rect="1322,489,40,44" name="clothRightArm/berserkerArmorArmsFeralQuadRight" dx="101" dy="56"/>
-        <cell rect="817,798,173,156" name="clothCape/WalpurgisClothesBack" dx="19" dy="12"/>
+        <cell rect="818,798,173,156" name="clothCape/WalpurgisClothesBack" dx="19" dy="12"/>
         <cell rect="150,91,35,25" name="eyes/SpecialForeheadShadow" dx="81" dy="35"/>
         <cell rect="1045,158,20,55" name="glove_fg/scandalousSuccubusClothingRightArmFront" dx="104" dy="52"/>
         <cell rect="517,1550,30,20" name="glove_fg/fairyQueenDressArmFront" dx="105" dy="75"/>
@@ -918,7 +920,7 @@
         <cell rect="1,71,168,139" name="tail/manticore" dx="20" dy="40"/>
         <cell rect="507,71,168,139" name="tail/manticore_taur" dx="45" dy="82"/>
         <cell rect="676,71,168,139" name="tail_front/manticore_taur" dx="45" dy="82"/>
-        <cell rect="1,211,83,139" name="tail/orca" dx="88" dy="39"/>
+        <cell rect="1,211,83,139" name="tail/orca" dx="80" dy="39"/>
         <cell rect="1,211,83,139" name="tail/orca_taur" dx="127" dy="49"/>
         <cell rect="423,71,83,139" name="tail/shark" dx="88" dy="39"/>
         <cell rect="423,71,83,139" name="tail/shark_taur" dx="127" dy="49"/>
@@ -960,6 +962,8 @@
         <cell rect="170,561,83,139" name="tail/bee_taur" dx="136" dy="48"/>
         <cell rect="255,561,83,139" name="tail/spider" dx="95" dy="40"/>
         <cell rect="255,561,83,139" name="tail/spider_taur" dx="135" dy="50"/>
+        <cell rect="675,561,83,139" name="tail/mantis" dx="95" dy="40"/>
+        <cell rect="675,561,83,139" name="tail/mantis_taur" dx="135" dy="50"/>
         <cell rect="339,561,83,139" name="tail/weasel" dx="95" dy="40"/>
         <cell rect="339,561,83,139" name="tail/weasel_taur" dx="144" dy="49"/>
         <cell rect="423,561,168,139" name="tail/thunderbird" dx="20" dy="46"/>
@@ -1872,9 +1876,21 @@
 					<show part="arms_bg/demonlewd"/>
 				</if>		
             </case>
-            <case values="Arms.SPIDER,Arms.MANTIS">
+            <case values="Arms.CHITIN">
                 <show part="hands/chitin2"/>
                 <show part="hands_bg/chitin2"/>
+            </case>
+			<case values="Arms.MANTIS">
+                <show part="hands/chitin2"/>
+				<show part="hands/blade-kamaitachiMantis"/>
+                <show part="hands_bg/chitin2"/>
+				<show part="hands_bg/blade-kamaitachiMantis"/>
+            </case>
+			<case values="Arms.KAMAITACHI">
+                <show part="hands/fur"/>
+				<show part="hands/blade-kamaitachiMantis"/>
+                <show part="hands_bg/fur"/>
+				<show part="hands_bg/blade-kamaitachiMantis"/>
             </case>
             <case values="Arms.BEE">
                 <hide part="arms/*"/>
@@ -2726,6 +2742,14 @@
 					</else>
 				</if>
             </case>
+			<case values="Tail.MANTIS_ABDOMEN">
+				<if test="isTaur()">
+					<show part="tail/mantis_taur"/>
+					<else>
+						<show part="tail/mantis"/>
+					</else>
+				</if>
+            </case>
             <case values="Tail.CAT">
                 <switch value="tailCount">
                     <case values="1">
@@ -2865,9 +2889,6 @@
 				</if>
             </case>
             <case values="Tail.KITSHOO">
-                <!--TODO -->
-            </case>
-            <case values="Tail.MANTIS_ABDOMEN">
                 <!--TODO -->
             </case>
             <case values="Tail.MANTICORE_PUSSYTAIL">

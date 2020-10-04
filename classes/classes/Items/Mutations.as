@@ -9577,7 +9577,7 @@ public final class Mutations extends MutationsHelper {
                 } else humanizeEars();
                 changes++;
             }
-            var raiju_eyes_color:Array = ["blue", "green", "teal"];
+            var raiju_eyes_color:Array = ["blue", "green", "turquoise"];
             if (player.ears.type == Ears.WEASEL && player.eyes.type != Eyes.RAIJU && changes < changeLimit && rand(3) == 0) {
                 if (player.eyes.type == Eyes.HUMAN) {
                     player.eyes.colour = randomChoice(raiju_eyes_color);
@@ -9747,7 +9747,7 @@ public final class Mutations extends MutationsHelper {
                 setEarType(Ears.ELFIN);
                 changes++;
             }
-            var raiju_eyes_color:Array = ["blue", "green", "teal"];
+            var raiju_eyes_color:Array = ["blue", "green", "turquoise"];
             if (player.ears.type == Ears.ELFIN && player.eyes.type != Eyes.RAIJU && changes < changeLimit && rand(3) == 0) {
                 if (player.eyes.type == Eyes.HUMAN) {
                     player.eyes.colour = randomChoice(raiju_eyes_color);
@@ -14367,22 +14367,34 @@ public final class Mutations extends MutationsHelper {
             }
 
             //Physical Changes:
+            //PartialCoatChitin skin
+            var MantisColor:Array = ["green", "turquoise", "emerald"];
+            if (changes < changeLimit && !player.hasPartialCoat(Skin.CHITIN) && rand(2) == 0) {
+                var randomColor:String = randomChoice(MantisColor);
+                growPartialChitin(randomColor);
+                if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
+                    outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
+                    player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);
+                }
+                changes++;
+            }
+
             //Antennae (nie wymaga innych body parts)
-            if (changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.antennae.type != Antennae.MANTIS && rand(3) == 0) {
+            if (changes < changeLimit && player.hasCoatOfType(Skin.CHITIN) && player.lowerBody != LowerBody.GARGOYLE && player.antennae.type != Antennae.MANTIS && rand(3) == 0) {
                 if (player.antennae.type == Antennae.BEE) outputText("\n\nYour head itches momentarily as your two floppy antennae changes slowly into long prehensile ones similar to those seen at mantis.");
                 else outputText("\n\nYour head itches momentarily as two long prehensile antennae sprout from your [hair].");
                 setAntennae(Antennae.MANTIS);
                 changes++;
             }
             //Horns
-            if (changes < changeLimit && player.horns.count > 0 && player.horns.type != Horns.ORCHID && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0) {
+            if (changes < changeLimit && player.hasCoatOfType(Skin.CHITIN) && player.horns.count > 0 && player.horns.type != Horns.ORCHID && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0) {
                 setHornType(Horns.NONE, 0);
                 outputText("\n\nYour horns crumble, falling apart in large chunks until they flake away to nothing.");
                 changes++;
             }
 
             //oviposition (prawdopodobnie podobne do wersji dla bee niż dridera)
-            if (changes < changeLimit && player.findPerk(PerkLib.MantisOvipositor) < 0 && player.tailType == Tail.MANTIS_ABDOMEN && rand(2) == 0) {
+            if (changes < changeLimit && player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.MantisOvipositor) < 0 && player.tailType == Tail.MANTIS_ABDOMEN && rand(2) == 0) {
                 outputText("\n\nAn odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous mantis part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the end.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, green, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new mantis ovipositor will feel like...");
                 outputText("\n\n(<b>Perk Gained:  Mantis Ovipositor - Allows you to lay eggs in your foes!</b>)");
                 player.createPerk(PerkLib.MantisOvipositor, 0, 0, 0, 0);
@@ -14390,7 +14402,7 @@ public final class Mutations extends MutationsHelper {
             }
 
             //Legs
-            if (player.lowerBody != LowerBody.MANTIS && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+            if (player.lowerBody != LowerBody.MANTIS && player.hasCoatOfType(Skin.CHITIN) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nYour legs tremble with sudden unbearable pain, as if they’re being ripped apart from the inside out and being stitched together again all at once.");
                 outputText("\nYou scream in agony as you hear bones snapping and cracking. A moment later the pain fades and you are able to turn your gaze down to your beautiful new legs, covered in shining green chitin from the thigh down. <b>You now have mantis feet.</b>");
                 setLowerBody(LowerBody.MANTIS);
@@ -14399,7 +14411,7 @@ public final class Mutations extends MutationsHelper {
             }
 
             //Arms
-            if (player.lowerBody == LowerBody.MANTIS && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.MANTIS) && changes < changeLimit && rand(3) == 0) {
+            if (player.lowerBody == LowerBody.MANTIS && player.hasCoatOfType(Skin.CHITIN) && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.MANTIS) && changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nYou watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, turning the [skin.type] into a shiny green carapace.");
                 outputText("\nA moment later the pain fades and you are able to turn your gaze down to your beautiful new arms, covered in shining green chitin from the upper arm down.");
                 outputText("\nThe transformation end as down the lenght of your forearms you grow a pair of massive scythe like appendage just like a mantis.");
@@ -14409,7 +14421,7 @@ public final class Mutations extends MutationsHelper {
             }
 
             //Tail
-            if (player.arms.type == Arms.MANTIS && player.tailType != Tail.MANTIS_ABDOMEN && changes < changeLimit && rand(3) == 0) {
+            if (player.arms.type == Arms.MANTIS && player.hasCoatOfType(Skin.CHITIN) && player.tailType != Tail.MANTIS_ABDOMEN && changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nPainful swelling just above your firm backside doubles you over.");
                 outputText("\nIt gets worse and worse as the swollen lump begins to protrude from your backside, swelling and elongating with a series of pops until you have a bulbous abdomen hanging just above your butt.");
                 outputText("\nThe whole thing is covered in a hard greenish chitinous material, and large enough to be impossible to hide. <b>You have a Mantis abdomen.</b>");
@@ -14436,8 +14448,10 @@ public final class Mutations extends MutationsHelper {
             }
 
             //Chitin skin
-            if (changes < changeLimit && !player.hasCoatOfType(Skin.CHITIN) && player.tailType == Tail.MANTIS_ABDOMEN && rand(2) == 0) {
-                growChitin("green");
+            var MantisColor:Array = ["green", "turquoise", "emerald"];
+            if (changes < changeLimit && player.hasPartialCoat(Skin.CHITIN) && player.tailType == Tail.MANTIS_ABDOMEN && rand(2) == 0) {
+                var randomColor:String = randomChoice(MantisColor);
+                growChitin(randomColor);
                 if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
                     outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
                     player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);

@@ -3163,7 +3163,7 @@ public class PerkLib
 		public static const HeartOfTheStormEvolved:PerkType = mk("Heart of the storm, Evolved", "Heart of the storm, Evolved",
 				"Further increase the power of all Wind and Lightning abilities by 20% and Increase wind and electricity resistance by 20%.");
 		public static const HeartOfTheStormFinalForm:PerkType = mk("Heart of the storm, Final Form", "Heart of the storm, Final Form",
-				"Further increase the power of all Wind and Lightning abilities by another 20% and Increases wind and electricity resistance by another 20%. If able, you may fly without end at no fatigue cost.");
+				"Further increase the power of all Wind and Lightning abilities by another 20% and Increases wind and electricity resistance by another 20%. You may fly without end so long as you got the ability to fly.");
 		public static const HydraAcidBreath:PerkType = mk("Hydra acid breath", "Hydra acid breath",
 				"Allows access to a hydra acid breath attack.");
 		public static const HydraRegeneration:PerkType = mk("Hydra Regeneration", "Hydra Regeneration",
@@ -5063,9 +5063,6 @@ public class PerkLib
             DazzlingDisplay.requirePerk(JobCourtesan)
                     .requireLib(50)
                     .requireLevel(12);
-			Straddle.requirePerk(JobCourtesan)
-					.requireLib(65)
-					.requireLevel(12);
             //Tier 3 Libido Perks
             DemonicDesireIV.requirePerk(DemonicDesireIII)
                     .requireLib(135)
@@ -5106,9 +5103,6 @@ public class PerkLib
                     .requirePerk(EromancyBeginner)
 					.requireLevel(24)
                     .requireLib(100);
-			StraddleImproved.requirePerk(Straddle)
-					.requireLib(130)
-					.requireLevel(24);
             //Tier 5 Libido Perks
             HalfStepToSuperiorSelfControl.requireLib(180)
                     .requireInt(120)
@@ -5397,7 +5391,7 @@ public class PerkLib
 			ElvishPeripheralNervSys.requirePerk(ElvenSense).requireCustomFunction(function (player:Player):Boolean {
                 return player.elfScore() >= 4;
             }, "Elf race");
-			FloralOvaries.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+			FloralOvaries.requireCustomFunction(function (player:Player):Boolean {
 				return player.alrauneScore() >= 13;
 			}, "Alraune race");
             FrozenHeart.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
@@ -5509,7 +5503,7 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.spiderScore() >= 4 || player.nagaScore() >= 4 || player.gorgonScore() >= 4 || player.vouivreScore() >= 4 || player.couatlScore() >= 4 || player.hydraScore() >= 4;
             }, "Spider or any snake-like race");
-			WhaleFat.requireMouthMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+			WhaleFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.orcaScore() >= 12;
 			}, "Orca race");
             /*

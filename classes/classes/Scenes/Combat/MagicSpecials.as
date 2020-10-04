@@ -1123,6 +1123,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
 
@@ -1216,22 +1217,20 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
 		lustDmgF = Math.round(lustDmgF);
-		monster.teased(lustDmgF, false);
-		outputText("You let electricity build up in your body before unleashing it into the ambient sky, the clouds roaring with thunder. Here comes the storm!\n ");
+		outputText("You let electricity build up in your body before unleashing it into the ambient sky, the clouds roaring with thunder. Here comes the storm! ");
 		damage = doLightingDamage(damage, true, true);
-		outputText(" damage. ");
 		if (crit1) outputText(" <b>*Critical!*</b>");
-		outputText("<b>(<font color=\"#ff00ff\">" + lustDmgF + "</font>)</b>)\n\n");
+		monster.teased(lustDmgF, false);
 		if (crit2) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
 		combat.bonusExpAfterSuccesfullTease();
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		player.createStatusEffect(StatusEffects.lustStorm,0,0,0,0);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
 	

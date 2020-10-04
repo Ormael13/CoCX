@@ -144,6 +144,7 @@ public class Camp extends NPCAwareContent {
 	}
 
 	public var IsSleeping: Boolean = false;
+	public var CanDream: Boolean = false;
 	public var IsWaitingResting: Boolean = false;
 
 	private function doCamp():void { //Only called by playerMenu
@@ -2545,6 +2546,7 @@ private function SparrableNPCsMenu():void {
 		}
 		campQ = true;
 		if (timeQ == 0) {
+			CanDream = true;
 			model.time.minutes = 0;
 			timeQ = 9;
 			if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0 && flags[kFLAGS.IN_PRISON] == 0) {
