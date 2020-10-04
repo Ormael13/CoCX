@@ -1763,6 +1763,18 @@ use namespace CoC;
 				player.removePerk(PerkLib.EasterBunnyEggBagFinalForm);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.FloralOvaries)) {
+				player.removePerk(PerkLib.FloralOvaries);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.FloralOvariesEvolved)) {
+				player.removePerk(PerkLib.FloralOvariesEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.FloralOvariesFinalForm)) {
+				player.removePerk(PerkLib.FloralOvariesFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.FrozenHeart)) {
 				player.removePerk(PerkLib.FrozenHeart);
 				player.perkPoints += 1;
@@ -1781,6 +1793,18 @@ use namespace CoC;
 			}
 			if (player.hasPerk(PerkLib.GorgonsEyesEvolved)) {
 				player.removePerk(PerkLib.GorgonsEyesEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HeartOfTheStorm)) {
+				player.removePerk(PerkLib.HeartOfTheStorm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HeartOfTheStormEvolved)) {
+				player.removePerk(PerkLib.HeartOfTheStormEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HeartOfTheStormFinalForm)) {
+				player.removePerk(PerkLib.HeartOfTheStormFinalForm);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.HellcatParathyroidGlands)) {

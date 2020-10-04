@@ -3159,11 +3159,11 @@ public class PerkLib
 		public static const HarpyWomb:PerkType = mk("Harpy Womb", "Harpy Womb",
 				"Increases all laid eggs to large size so long as you have harpy legs and a harpy tail.");
 		public static const HeartOfTheStorm:PerkType = mk("Heart of the storm", "Heart of the storm",
-				"Increase the power of all Wind and Lightning racial abilities by 20%.");
+				"Increase the power of all Wind and Lightning racial abilities by 20%.").withBuffs({'speed.mult':0.15});
 		public static const HeartOfTheStormEvolved:PerkType = mk("Heart of the storm, Evolved", "Heart of the storm, Evolved",
-				"Further increase the power of all Wind and Lightning abilities by 20% and Increase wind and electricity resistance by 20%.");
+				"Further increase the power of all Wind and Lightning abilities by 20% and Increase wind and electricity resistance by 20%.").withBuffs({'speed.mult':0.15});
 		public static const HeartOfTheStormFinalForm:PerkType = mk("Heart of the storm, Final Form", "Heart of the storm, Final Form",
-				"Further increase the power of all Wind and Lightning abilities by another 20% and Increases wind and electricity resistance by another 20%. You may fly without end so long as you got the ability to fly.");
+				"Further increase the power of all Wind and Lightning abilities by another 20% and Increases wind and electricity resistance by another 20%. You may fly without end so long as you got the ability to fly.").withBuffs({'speed.mult':0.15});
 		public static const HydraAcidBreath:PerkType = mk("Hydra acid breath", "Hydra acid breath",
 				"Allows access to a hydra acid breath attack.");
 		public static const HydraRegeneration:PerkType = mk("Hydra Regeneration", "Hydra Regeneration",
