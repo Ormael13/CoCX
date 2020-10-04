@@ -2048,11 +2048,11 @@ use namespace CoC;
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.WhaleFatEvolved)) {
-				player.removePerk(PerkLib.WhaleFat);
+				player.removePerk(PerkLib.WhaleFatEvolved);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.WhaleFatFinalForm)) {
-				player.removePerk(PerkLib.WhaleFat);
+				player.removePerk(PerkLib.WhaleFatFinalForm);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.ChimericalBodyInitialStage)){
