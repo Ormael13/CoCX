@@ -6728,6 +6728,50 @@ use namespace CoC;
 			return thunderbirdCounter;
 		}
 
+		//Thunderbird score
+		public function kamaitachiScore():Number {
+			Begin("Player","racialScore","thunderbird");
+			var thunderbirdCounter:Number = 0;
+			if (ears.type == Ears.ELFIN)
+				thunderbirdCounter++;
+			if (eyes.type == Eyes.RAIJU)
+				thunderbirdCounter++;
+			if (faceType == Face.HUMAN || faceType == Face.RAIJU_FANGS)
+				thunderbirdCounter++;
+			if (arms.type == Arms.HARPY)
+				thunderbirdCounter++;
+			if (wings.type == Wings.FEATHERED_LARGE)
+				thunderbirdCounter += 2;
+			if (lowerBody == LowerBody.HARPY)
+				thunderbirdCounter++;
+			if (tailType == Tail.THUNDERBIRD)
+				thunderbirdCounter++;
+			if (rearBody.type == RearBody.RAIJU_MANE)
+				thunderbirdCounter++;
+			if (skin.base.pattern == Skin.PATTERN_LIGHTNING_SHAPED_TATTOO)
+				thunderbirdCounter++;
+			if (hairType == Hair.STORM)
+				thunderbirdCounter++;
+			if (findPerk(PerkLib.HeartOfTheStorm) >= 0)
+				thunderbirdCounter += 1;
+			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0)
+				thunderbirdCounter += 1;
+			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0)
+				thunderbirdCounter += 1;
+			if (hairColor == "purple" || hairColor == "light blue" || hairColor == "yellow" || hairColor == "white" || hairColor == "emerald" || hairColor == "turquoise")
+				thunderbirdCounter++;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				thunderbirdCounter += 50;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && thunderbirdCounter >= 4)
+				thunderbirdCounter += 1;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && thunderbirdCounter >= 8)
+				thunderbirdCounter += 1;
+			if (isGargoyle()) thunderbirdCounter = 0;
+			thunderbirdCounter = finalRacialScore(thunderbirdCounter, Race.THUNDERBIRD);
+			End("Player","racialScore");
+			return thunderbirdCounter;
+		}
+
 		//Determine Mutant Rating
 		public function mutantScore():Number{
 			Begin("Player","racialScore","mutant");
@@ -6839,6 +6883,22 @@ use namespace CoC;
 			mantisCounter = finalRacialScore(mantisCounter, Race.MANTIS);
 			End("Player","racialScore");
 			return mantisCounter;
+		}
+
+		//Kamaitachi score
+		public function KamaitachiScore():Number {
+			Begin("Player","racialScore","mantis");
+			var KamaitachiCounter:Number = 0;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				KamaitachiCounter += 50;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && KamaitachiCounter >= 4)
+				KamaitachiCounter++;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && KamaitachiCounter >= 8)
+				KamaitachiCounter += 1;
+			if (isGargoyle()) KamaitachiCounter = 0;
+			KamaitachiCounter = finalRacialScore(KamaitachiCounter, Race.KAMAITACHI);
+			End("Player","racialScore");
+			return KamaitachiCounter;
 		}
 		
 		//Thunder Mantis score
@@ -8518,6 +8578,13 @@ use namespace CoC;
 
 		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 12); }
 		public function isNightCreature():Boolean { return (werewolfScore() >= 12 || vampireScore() >= 10 || batScore() >= 6 || jiangshiScore() >= 20);}
+		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || faceType == Face.VAMPIRE || faceType == Face.SHARK_TEETH || faceType == Face.WOLF_FANGS || faceType == Face.PANDA || faceType == Face.YETI_FANGS || faceType == Face.WOLF || faceType == Face.SPIDER_FANGS || faceType == Face.ANIMAL_TOOTHS || faceType == Face.CAT_CANINES || faceType == Face.CAT || faceType == Face.MANTICORE || faceType == Face.SALAMANDER_FANGS || faceType == Face.RAIJU_FANGS || faceType == Face.SNAKE_FANGS || faceType == Face.FOX || faceType == Face.BEAR || faceType == Face.DRAGON_FANGS || faceType == Face.DRAGON || faceType == Face.DOG || faceType == Face.FERRET || faceType == Face.ORCA || faceType == Face.LIZARD || faceType == Face.DEVIL_FANGS);}
+		public function hasAClawAttack():Boolean { return (arms.type == Arms.GARGOYLE || arms.type == Arms.WOLF || arms.type == Arms.CAT || arms.type == Arms.FROSTWYRM || arms.type == Arms.LIZARD || arms.type == Arms.DRAGON || arms.type == Arms.KITSUNE || arms.type == Arms.FOX || arms.type == Arms.DEVIL || arms.type == Arms.DISPLACER || arms.type == Arms.BEAR || arms.type == Arms.JIANGSHI || arms.type == Arms.LION || arms.type == Arms.MANTIS || arms.type == Arms.KAMAITACHI);}
+		public function hasAWingAttack():Boolean { return (wings.type == Wings.DRACONIC_HUGE || wings.type == Wings.NIGHTMARE || wings.type == Wings.MANTICORE_LIKE_LARGE || wings.type == Wings.GARGOYLE_LIKE_LARGE);}
+		public function hasAGoreAttack():Boolean { return (horns.type == Horns.UNICORN || horns.type == Horns.BICORN || horns.type == Horns.COW_MINOTAUR || horns.type == Horns.FROSTWYRM);}
+		public function hasATailSlapAttack():Boolean { return (tail.type == Tail.DRACONIC || tail.type == Tail.LIZARD || tail.type == Tail.SALAMANDER || tail.type == Tail.ORCA || tail.type == Tail.SHARK || tail.type == Tail.CAVE_WYRM || tail.type == Tail.GARGOYLE || tail.type == Tail.GARGOYLE_2 || tail.type == Tail.MANTICORE_PUSSYTAIL || tail.type == Tail.SCORPION || tail.type == Tail.BEE_ABDOMEN || lowerBody == LowerBody.FROSTWYRM || lowerBody == LowerBody.NAGA);}
+		public function hasMantisPrayerAttack():Boolean { return (mantisScore() >= 12); }
+		public function hasKamaitachiThreeWayCut():Boolean { return (KamaitachiScore() >= 12); }
 
 		//TODO: (logosK) elderSlime, succubus pussy/demonic eyes, arachne, wasp, lactabovine/slut, sleipnir, hellhound, ryu, quetzalcoatl, eredar, anihilan,
 

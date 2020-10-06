@@ -2049,6 +2049,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		damage = Math.round(damage);
+		if (damage < 1) damage = 1;
 		damage = doDamage(damage);
 		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 		if (player.hasPerk(PerkLib.LactaBovinaOvariesFinalForm)) player.lust -= 200;

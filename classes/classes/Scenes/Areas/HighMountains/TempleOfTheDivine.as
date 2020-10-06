@@ -2031,6 +2031,18 @@ use namespace CoC;
 				player.removePerk(PerkLib.VampiricBloodsteamFinalForm);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.EclipticMind)) {
+				player.removePerk(PerkLib.EclipticMind);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.EclipticMindEvolved)) {
+				player.removePerk(PerkLib.EclipticMindEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.EclipticMindFinalForm)) {
+				player.removePerk(PerkLib.EclipticMindFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.VenomGlands)) {
 				player.removePerk(PerkLib.VenomGlands);
 				player.perkPoints += 1;

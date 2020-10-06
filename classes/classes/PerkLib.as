@@ -931,10 +931,10 @@ public class PerkLib
 		public static const EclipticMind:PerkType = mk("Ecliptic Mind", "Ecliptic Mind",
 				"Allows to retains aura at all time, gaining whichever corresponds to your alignment. Empower the effect of your aura based on your purity or corruption score.",
 				"Allows to retains aura at all time, gaining whichever corresponds to your alignment. Empower the effect of your aura based on your purity or corruption score.");
-		public static const EclipticMindEvolved:PerkType = mk("Ecliptic Mind, evolved", "Ecliptic Mind, evolved",
+		public static const EclipticMindEvolved:PerkType = mk("Ecliptic Mind, (Evolved)", "Ecliptic Mind, (Evolved)",
 				"Further empower the effect of your aura based on your purity or corruption score. Aura effect is doubled against creatures of the opposite alignment.",
 				"Further empower the effect of your aura based on your purity or corruption score. Aura effect is doubled against creatures of the opposite alignment.");
-		public static const EclipticMindFinalForm:PerkType = mk("Ecliptic Mind, final form", "Ecliptic Mind, final form",
+		public static const EclipticMindFinalForm:PerkType = mk("Ecliptic Mind, (Final Form)", "Ecliptic Mind, (Final Form)",
 				"Further empower the effect of your aura based on your purity or corruption score. Aura effect is tripled against creatures of the opposite alignment. Gain minor regeneration based on your alignment.",
 				"Further empower the effect of your aura based on your purity or corruption score. Aura effect is tripled against creatures of the opposite alignment. Gain minor regeneration based on your alignment.");
 		public static const ElementalArrows:PerkType = mk("Elemental Arrows", "Elemental Arrows",
@@ -2910,10 +2910,10 @@ public class PerkLib
 		public static const WhaleFat:PerkType = mk("Whale fat", "Whale fat",
 				"Your whale fat increase your damage reduction against physical attacks and grants you resistance to cold permanantly.",
 				"You choose the 'Whale fat' perk, making your more resilient against physical attacks and gaining cold affinity permanantly.");
-		public static const WhaleFatEvolved:PerkType = mk("Whale fat, Evolved", "Whale fat, Evolved",
+		public static const WhaleFatEvolved:PerkType = mk("Whale fat, (Evolved)", "Whale fat, (Evolved)",
 				"Your whale fat further increase your damage reduction against physical attacks and the duration of juggle is increased by 1 round.",
 				"You choose the 'Whale fat' perk, making your more resilient against physical attacks and increasing the duration of Juggle by 1 round while playing.");
-		public static const WhaleFatFinalForm:PerkType = mk("Whale fat, Final Form", "Whale fat, Final Form",
+		public static const WhaleFatFinalForm:PerkType = mk("Whale fat, (Final Form)", "Whale fat, (Final Form)",
 				"Your whale fat further increase your damage reduction against physical attacks and the duration of juggle is increased by 1 additionnal round. Juggle can now be used a third time",
 				"You choose the 'Whale fat' perk, making your more resilient against physical attacks and Juggle can now be used a third time while playing.");
 		public static const Whipping:PerkType = mk("Whipping", "Whipping",
@@ -3133,9 +3133,9 @@ public class PerkLib
 				"Grants cat-like flexibility.  Useful for dodging and 'fun'.");
 		public static const FloralOvaries:PerkType = mk("Floral Ovaries", "Floral Ovaries",
 				"Increase the potency of Alraune pollen.").withBuffs({'lib.mult':0.15});
-		public static const FloralOvariesEvolved:PerkType = mk("Floral Ovaries, Evolved", "Floral Ovaries, Evolved",
+		public static const FloralOvariesEvolved:PerkType = mk("Floral Ovaries, (Evolved)", "Floral Ovaries, (Evolved)",
 				"Further increase the potency of Alraune pollen. Males takes an extra 50% lust damage.").withBuffs({'lib.mult':0.15});
-		public static const FloralOvariesFinalForm:PerkType = mk("Floral Ovaries, Final Form", "Improved Floral Ovaries, Final Form",
+		public static const FloralOvariesFinalForm:PerkType = mk("Floral Ovaries, (Final Form)", "Improved Floral Ovaries, (Final Form)",
 				"Further increase the potency of Alraune pollen. Alraune pollen has a 20% chance per round to fascinate your victim").withBuffs({'lib.mult':0.15});
 		public static const FreezingBreath:PerkType = mk("Freezing Breath (F)", "Freezing Breath (F)",
 				"Allows access to Fenrir (AoE) freezing breath attack.");
@@ -3160,9 +3160,9 @@ public class PerkLib
 				"Increases all laid eggs to large size so long as you have harpy legs and a harpy tail.");
 		public static const HeartOfTheStorm:PerkType = mk("Heart of the storm", "Heart of the storm",
 				"Increase the power of all Wind and Lightning racial abilities by 20%.").withBuffs({'speed.mult':0.15});
-		public static const HeartOfTheStormEvolved:PerkType = mk("Heart of the storm, Evolved", "Heart of the storm, Evolved",
+		public static const HeartOfTheStormEvolved:PerkType = mk("Heart of the storm, (Evolved)", "Heart of the storm, (Evolved)",
 				"Further increase the power of all Wind and Lightning abilities by 20% and Increase wind and electricity resistance by 20%.").withBuffs({'speed.mult':0.15});
-		public static const HeartOfTheStormFinalForm:PerkType = mk("Heart of the storm, Final Form", "Heart of the storm, Final Form",
+		public static const HeartOfTheStormFinalForm:PerkType = mk("Heart of the storm, (Final Form)", "Heart of the storm, (Final Form)",
 				"Further increase the power of all Wind and Lightning abilities by another 20% and Increases wind and electricity resistance by another 20%. You may fly without end so long as you got the ability to fly.").withBuffs({'speed.mult':0.15});
 		public static const HydraAcidBreath:PerkType = mk("Hydra acid breath", "Hydra acid breath",
 				"Allows access to a hydra acid breath attack.");

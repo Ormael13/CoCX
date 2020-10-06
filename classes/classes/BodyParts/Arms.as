@@ -49,6 +49,7 @@ public class Arms extends BodyPart {
 	public static const FROSTWYRM:int		= 45;
 	public static const CANCER:int			= 46;
 	public static const USHI_ONI_ONNA:int	= 47;
+	public static const KAMAITACHI:int		= 48;
 	// Don't forget to add new types in DebugMenu.as list ARM_TYPE_CONSTANTS
 
 	public function Arms() {

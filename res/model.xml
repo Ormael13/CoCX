@@ -500,6 +500,7 @@
         <cell rect="162,27,54,31" name="neck/centipede" dx="77" dy="49"/>
         <cell rect="217,27,54,31" name="rearbody/shark" dx="84" dy="72"/>
         <cell rect="61,689,100,100" name="rearbody/snail" dx="87" dy="82"/>
+        <cell rect="296,641,173,156" name="aura/windyaura" dx="21" dy="28"/>
         <cell rect="470,641,173,156" name="aura/ghostlyaura" dx="21" dy="28"/>
         <cell rect="644,641,173,156" name="aura/wraithaura" dx="21" dy="28"/>
         <cell rect="818,641,173,156" name="aura/thunderaura" dx="21" dy="28"/>
@@ -970,6 +971,7 @@
         <cell rect="423,561,168,139" name="tail/thunderbird_taur" dx="34" dy="49"/>
         <cell rect="592,561,82,139" name="tail/raccoon" dx="95" dy="40"/>
         <cell rect="592,561,82,139" name="tail/raccoon_taur" dx="149" dy="50"/>
+        <cell rect="508,351,82,69" name="tail/kamaitachi" dx="94" dy="87"/>
         <cell rect="1,1015,173,156" name="tail/fox1" dx="4" dy="31"/>
         <cell rect="1,1015,173,156" name="tail/fox1_taur" dx="60" dy="47"/>
         <cell rect="523,858,173,156" name="tail/fox2" dx="16" dy="36"/>

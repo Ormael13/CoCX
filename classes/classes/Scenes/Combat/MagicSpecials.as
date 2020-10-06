@@ -921,7 +921,7 @@ public class MagicSpecials extends BaseCombatContent {
 			temp2 = 5 + rand(player.lib / 5 + player.cor / 10);
 			dynStats("lus", temp2, "scale", false);
 			var lustDmgF:Number = 20 + rand(6);
-			var lustBoostToLustDmg:Number;
+			var lustBoostToLustDmg:Number = 0;
 			var bimbo:Boolean   = false;
 			var bro:Boolean     = false;
 			var futa:Boolean    = false;
@@ -963,9 +963,15 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			lustBoostToLustDmg += lustDmgF * 0.01;
 			lustDmgF *= 0.2;
-			if (player.lust100 * 0.01 >= 0.9) lustDmgF += (lustBoostToLustDmg * 140);
-			else if (player.lust100 * 0.01 < 0.2) lustDmgF += (lustBoostToLustDmg * 140);
-			else lustDmgF += (lustBoostToLustDmg * 2 * (20 - (player.lust100 * 0.01)));
+			if (player.lust100 * 0.01 >= 0.9) {
+				lustDmgF += (lustBoostToLustDmg * 140);
+			}
+			else if (player.lust100 * 0.01 < 0.2) {
+				lustDmgF += (lustBoostToLustDmg * 140);
+			}
+			else {
+				lustDmgF += (lustBoostToLustDmg * 2 * (20 - (player.lust100 * 0.01)));
+			}
 			//Determine if critical tease!
 			var crit:Boolean = false;
 			var critChance:int = 5;

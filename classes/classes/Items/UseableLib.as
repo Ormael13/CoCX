@@ -119,7 +119,7 @@ use namespace CoC;
 		public const VIALRAI:SimpleUseable = new SimpleUseable("VialRai", "V.Rainbow", "a rainbow vial", 1, 
 			"A rainbow vial used to dye scales.",
 			"You look at rainbow vial.  It would help Arian change scales color.");
-		public const S_SHARD:SimpleUseable = new SimpleUseable("S_SHARD", "S.Shard", "a rusted shard of metal wich may have been part of a golden weapon", 200,
+		public const S_SHARD:SimpleUseable = new SimpleUseable("S_SHARD", "S.Shard", "a tarnished shard of metal wich may have been part of a golden weapon", 200,
 			"These appears to be the shard of a shattered weapon. You are no smith and thus have no idea how to reforge this item. Its likely worthless unless...",
 			"These appears to be the shard of a shattered weapon though wich one you do not know. You are no smith and thus have no idea how to reforge this item. From what Vala told you it might have been part of the scepter of the fairy queen. You recall to need 15 shards in total.");
 		//CHEAT ITEM
