@@ -3412,9 +3412,25 @@ public class Combat extends BaseContent {
             }
             //DOING EXTRA CLAW ATTACKS
             if (player.hasAClawAttack()) {
-                outputText("You claw viciously at your opponent tearing away at its flesh.");
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
+                var DamageMultiplier:Number = 1;
+                if (!player.arms.type == Arms.MANTIS && !player.arms.type == Arms.KAMAITACHI){
+                    outputText("You claw viciously at your opponent tearing away at its flesh.");
+                }
+                else {
+                    var DamageMultiplier:Number = 1.5;
+                    outputText("You slash at your opponent with your scythes leaving deep wounds");
+                    if (player.arms.type == Arms.KAMAITACHI){
+                        outputText(" that bleeds profusely");
+                        if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
+                        else {
+                            monster.removeStatusEffect(StatusEffects.SharkBiteBleed);
+                            monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
+                        }
+                    }
+                    outputText(".");
+                }
+                ExtraNaturalWeaponAttack(DamageMultiplier);
+                ExtraNaturalWeaponAttack(DamageMultiplier);
                 outputText("\n");
                 if (player.arms.type == Arms.WOLF && player.hasPerk(PerkLib.Lycanthropy)){
                     if (flags[kFLAGS.LUNA_MOON_CYCLE] != 7){
