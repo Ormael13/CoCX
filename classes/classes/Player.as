@@ -8585,6 +8585,7 @@ use namespace CoC;
 		public function hasATailSlapAttack():Boolean { return (tail.type == Tail.DRACONIC || tail.type == Tail.LIZARD || tail.type == Tail.SALAMANDER || tail.type == Tail.ORCA || tail.type == Tail.SHARK || tail.type == Tail.CAVE_WYRM || tail.type == Tail.GARGOYLE || tail.type == Tail.GARGOYLE_2 || tail.type == Tail.MANTICORE_PUSSYTAIL || tail.type == Tail.SCORPION || tail.type == Tail.BEE_ABDOMEN || lowerBody == LowerBody.FROSTWYRM || lowerBody == LowerBody.NAGA);}
 		public function hasMantisPrayerAttack():Boolean { return (mantisScore() >= 12); }
 		public function hasKamaitachiThreeWayCut():Boolean { return (KamaitachiScore() >= 12); }
+		public function hasNaturalWeapons():Boolean { return (hasABiteAttack() || hasAClawAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasMantisPrayerAttack() || hasKamaitachiThreeWayCut()); }
 
 		//TODO: (logosK) elderSlime, succubus pussy/demonic eyes, arachne, wasp, lactabovine/slut, sleipnir, hellhound, ryu, quetzalcoatl, eredar, anihilan,
 
@@ -11307,7 +11308,7 @@ use namespace CoC;
 				}
 				var sac:HeatEffect = statusEffectByType(StatusEffects.Heat) as HeatEffect;
 				sac.value1 += 5 * intensity;
-				sac.value2 += 0.05 * intensity;
+				sac.value2 += (0.25 * intensity);
 				sac.value3 += 48 * intensity;
 				sac.ApplyEffect();
 			}
@@ -11316,7 +11317,7 @@ use namespace CoC;
 				if(output) {
 					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as <b>you realize you have gone into heat!</b>");
 				}
-				createStatusEffect(StatusEffects.Heat, 10 * intensity, 15 * intensity, 48 * intensity, 0);
+				createStatusEffect(StatusEffects.Heat, 10 * intensity, (50 * intensity)/100, 48 * intensity, 0);
 			}
 			return true;
 		}
@@ -11341,7 +11342,7 @@ use namespace CoC;
 				}
 				var sac:RutEffect = statusEffectByType(StatusEffects.Rut) as RutEffect;
 				sac.value1 += 100 * intensity;
-				sac.value2 += 0.05 * intensity;
+				sac.value2 += 0.25 * intensity;
 				sac.value3 += 48 * intensity;
 				sac.ApplyEffect();
 			}
@@ -11353,7 +11354,7 @@ use namespace CoC;
 				//v1 - bonus cum production
 				//v2 - bonus libido
 				//v3 - time remaining!
-				createStatusEffect(StatusEffects.Rut, 150 * intensity, 5 * intensity, 100 * intensity, 0);
+				createStatusEffect(StatusEffects.Rut, 150 * intensity, (50 * intensity)/100, 100 * intensity, 0);
 			}
 			
 			return true;

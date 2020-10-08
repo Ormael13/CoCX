@@ -13,7 +13,7 @@ import classes.StatusEffectType;
         }
 
         public function ApplyEffect():void {
-            host.buff("Heat").setStats({"lib.mult":value2}).withText("Heat");
+            host.buff("Heat").setStats({"lib.mult":value2, "sens":value2*100/2}).withText("Heat");
         }
 
         override public function onRemove():void {

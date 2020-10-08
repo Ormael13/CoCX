@@ -414,7 +414,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Player overheat was cleaned by sex!
-			if (player.statusEffectv1(StatusEffects.Overheat) == 1 && player.statusEffectv3(StatusEffects.Overheat) == 1) { //Lose slime core perk
+			if (player.statusEffectv1(StatusEffects.Overheat) == 1 && player.statusEffectv3(StatusEffects.Overheat) == 1) {
 				player.addStatusValue(StatusEffects.Overheat, 1, -1);
 				player.addStatusValue(StatusEffects.Overheat, 2, 3);
 				player.addStatusValue(StatusEffects.Overheat, 3, -1);
@@ -830,17 +830,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 				//Racial perk daily effect Area
 
-				//Player overheat is progressing toward active
-				if (player.statusEffectv1(StatusEffects.Overheat) == 0 && player.statusEffectv2(StatusEffects.Overheat) > 0) {
-					player.addStatusValue(StatusEffects.Overheat, 2, -1);
-					if(player.statusEffectv2(StatusEffects.Overheat) == 0){
-						player.addStatusValue(StatusEffects.Overheat, 1, 1);
-						outputText("\nYour body start overheating again, you really could use sex right now.\n");
-						if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
-						else if (player.hasVagina()) player.goIntoHeat(false);
-						needNext = true;
-					}
-				}
 				//Player overheat is intensifying
 				if (player.statusEffectv1(StatusEffects.Overheat) == 1) {
 					if (player.hasCock() || (player.gender == 3 && rand(2) == 0)){
@@ -863,6 +852,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						}
 					}
 					needNext = true;
+				}
+				//Player overheat is progressing toward active
+				if (player.statusEffectv1(StatusEffects.Overheat) == 0 && player.statusEffectv2(StatusEffects.Overheat) > 0) {
+					player.addStatusValue(StatusEffects.Overheat, 2, -1);
+					if(player.statusEffectv2(StatusEffects.Overheat) == 0){
+						player.addStatusValue(StatusEffects.Overheat, 1, 1);
+						outputText("\nYour body start overheating again, you really could use sex right now.\n");
+						if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
+						else if (player.hasVagina()) player.goIntoHeat(false);
+						needNext = true;
+					}
 				}
 
 				//Easter bunny egg balls

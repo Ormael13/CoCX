@@ -532,7 +532,6 @@
         <cell rect="853,325,80,105" name="clothe/blackKimonoSleeves" dx="64" dy="72"/>
         <cell rect="935,325,80,104" name="clothe/goblinTechnomancerClotheArms" dx="64" dy="72"/>
         <cell rect="622,445,40,80" name="clothe/comfortableClothes" dx="79" dy="44"/>
-        <cell rect="1181,325,80,104" name="clothe/berserkerArmorArms" dx="64" dy="72"/>
         <cell rect="1263,325,80,104" name="clothe/berserkerArmorTop" dx="64" dy="55"/>
         <cell rect="672,445,45,80" name="clotheLegs/comfortableClothes" dx="79" dy="90"/>
         <cell rect="751,158,40,54" name="clotheLegs/whiteKimonoBottom" dx="85" dy="121"/>
@@ -559,6 +558,7 @@
         <cell rect="804,42,25,55" name="armorRightArm/fullplaterightarm" dx="102" dy="66"/>
         <cell rect="982,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArm" dx="109" dy="69"/>
         <cell rect="1024,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArmLewd" dx="104" dy="52"/>
+        <cell rect="1181,325,80,104" name="clothRightArm/berserkerArmorArms" dx="64" dy="72"/>
         <cell rect="1272,489,40,44" name="clothRightArm/berserkerArmorArmsFeralRight" dx="101" dy="56"/>
         <cell rect="1322,489,40,44" name="clothRightArm/berserkerArmorArmsFeralQuadRight" dx="101" dy="56"/>
         <cell rect="818,798,173,156" name="clothCape/WalpurgisClothesBack" dx="19" dy="12"/>
@@ -582,6 +582,12 @@
         <cell rect="296,1460,49,29" name="breasts/Bliliraune" dx="43" dy="68"/>
         <cell rect="296,1490,49,29" name="breasts/Dliliraune" dx="43" dy="68"/>
         <cell rect="296,1520,49,29" name="breasts/Fliliraune" dx="43" dy="68"/>
+        <cell rect="122,1620,80,102" name="weapon/staffGeneric" dx="38" dy="55"/>
+        <cell rect="212,1620,80,90" name="weapon/swordGeneric" dx="38" dy="55"/>
+        <cell rect="302,1620,80,90" name="weapon/axeGeneric" dx="38" dy="55"/>
+        <cell rect="392,1620,80,90" name="weapon/hammerGeneric" dx="38" dy="55"/>
+        <cell rect="482,1620,80,107" name="weapon/spearGeneric" dx="39" dy="53"/>
+        <cell rect="572,1620,80,90" name="shield/shieldGeneric" dx="66" dy="60"/>
     </spritemap>
     <spritemap file="hair.png">
         <cell rect="1,70,59,65" name="hair/0" dx="75" dy="21"/>
@@ -1026,6 +1032,8 @@
     <layers>	
 		<layer name="fullbody"/>
 		<layer name="overclothe"/>
+		<layer name="shield"/>
+		<layer name="weapon"/>
 		<layer name="hands_fg"/>
 		<layer name="glove_fg"/>
 		<layer name="arms_fg"/>
@@ -1169,6 +1177,28 @@
 		<!-- CLOTHING VARIABLES AREA -->
 		
 		<set var="sphinxRegalia" value="hasStatusEffect(StatusEffects.SphinxAS)"/>
+		
+		<!-- WEAPON AREA -->
+		<if test="playerHasWeaponBannedArms">
+			<if test="PlayerHasAStaff">
+				<show part="weapon/staffGeneric"/>
+			</if>
+			<if test="PlayerHasASword">
+				<show part="weapon/swordGeneric"/>
+			</if>
+			<if test="PlayerHasAnAxe">
+				<show part="weapon/axeGeneric"/>
+			</if>
+			<if test="PlayerHasAHammer">
+				<show part="weapon/hammerGeneric"/>
+			</if>
+			<if test="PlayerHasASpear">
+				<show part="weapon/spearGeneric"/>
+			</if>
+			<if test="PlayerHasAShield">
+				<show part="shield/shieldGeneric"/>
+			</if>
+		</if>
 		
 		<!-- ANTENNAE AREA -->
         <switch value="antennae.type">
@@ -2135,11 +2165,15 @@
             </default>
         </switch>
         <if test="CancerCrabStance">
-            <hide part="arms/*"/>
-            <hide part="arms_bg/*"/>
-            <hide part="hands/*"/>
-            <hide part="hands_bg/*"/>
-            <show part="arms/crabStance"/>
+		    <if test="playerWearsAStanceBannedDress or playerWearsAStanceBannedArmor">
+				<else>
+					<hide part="arms/*"/>
+					<hide part="arms_bg/*"/>
+					<hide part="hands/*"/>
+					<hide part="hands_bg/*"/>
+					<show part="arms/crabStance"/>
+				</else>
+			</if>
         </if>
 
 		<!-- LEGS AREA -->
@@ -3172,7 +3206,7 @@
 		<!-- Succu arm stuff -->
 		<if test="femininity &gt;=40">
 			<if test="cor &gt;=50">
-				<if test="yukiDress">
+				<if test="playerWearsAStanceBannedDress or playerWearsAStanceBannedArmor">
 					<else>
 						<if test="skin.coverage==Skin.COVERAGE_NONE">
 							<switch value="arms.type">
@@ -3182,6 +3216,8 @@
 											<hide part="arms_pattern/*"/>
 											<hide part="arms_bg_pattern/*"/>
 											<hide part="legs_pattern/*"/>
+											<hide part="weapon/*"/>
+											<hide part="shield/*"/>
 										</case>
 										<default>
 										</default>
@@ -3288,6 +3324,8 @@
 			<hide part="tail/*"/>
 			<hide part="wings_bg/*"/>
 			<hide part="legs_bg/*"/>
+			<hide part="weapon/*"/>
+			<hide part="shield/*"/>
 			<if test="breastRows[0].breastRating lte BreastCup.FLAT">
 				<show part="fullbody/malejiangshi"/>	
 				<else>
@@ -4122,7 +4160,7 @@
             <if test="showClothing">
                 <show part="clothe/berserkerArmorTop"/>
                 <if test="showArmClothing">
-                    <show part="clothe/berserkerArmorArms"/>
+                    <show part="clothRightArm/berserkerArmorArms"/>
                     <if test="arms.type==Arms.WOLF and lowerBody == LowerBody.WOLF">
                         <hide part="clothe/berserkerArmorArms"/>
                         <show part="clothLeftArm/berserkerArmorArmsFeralLeft"/>

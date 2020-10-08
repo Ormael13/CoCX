@@ -145,6 +145,7 @@ public class Camp extends NPCAwareContent {
 
 	public var IsSleeping: Boolean = false;
 	public var CanDream: Boolean = false;
+	public var HadNightEvent: Boolean = false;
 	public var IsWaitingResting: Boolean = false;
 
 	private function doCamp():void { //Only called by playerMenu
