@@ -418,7 +418,7 @@ package classes.Scenes
 			clearOutput();
 			outputText("You ponder what to do with your defeated opponent then realize your body is on the brink of overheating with lust. Your opponent shudders as you grab [monster him] by the neck." +
 					"\"<i>Do you know how hot I am right now? I’ll need to get rid of that before I loose my mind. Thankfully you came along at the perfect moment.</i>\"\n\n" +
-					"" + monster.a + monster.short + " only understands what you mean when you kiss him/her, your flames starting to lick his/her skin, leaving a tingle of pleasure and arousal as you start to vent your heat out." +
+					"Your opponent only understands what you mean when you kiss [monster him], your flames starting to lick his/her skin, leaving a tingle of pleasure and arousal as you start to vent your heat out." +
 					"Your flames stretch out from your ");
 			if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) outputText("coat,");
 			else outputText("body,");
