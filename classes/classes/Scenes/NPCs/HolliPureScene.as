@@ -75,7 +75,7 @@ public function treeMenu():void {
 		if(player.tentacleCocks() >= 10 && player.lust >= 33) addButton(1, "TentacleBone", fullOnTentacleTasticGangBangForHolli);
 	//	if(player.stamenCocks() >= 10) && player.lust >= 33) addButton(1, "StamenBone", fullOnTentacleTasticGangBangForHolli);
 		if (player.hasVagina() && player.lust >= 33) addButton(2, "Ride Holli", vaginalDomHollisTentacruels);
-		if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(3, "TentacleDuel", uniquuuesexscene.alrauneExtraSceneWithHollicyntiaTentacleDuel);
+		if (player.isAlraune()) addButton(3, "TentacleDuel", uniquuuesexscene.alrauneExtraSceneWithHollicyntiaTentacleDuel);
 		else addButtonDisabled(2, "TentacleDuel", "This scene requires to be an alraune of some kind.");
 		addButton(5, "Drink Sap", haveAMapleSyrupSnack);
 		if (flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(6, "Eat A Fruit", eatHolliFruit);

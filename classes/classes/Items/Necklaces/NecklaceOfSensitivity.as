@@ -27,12 +27,12 @@ package classes.Items.Necklaces
 		}
 		
 		override public function playerEquip():Necklace {
-			game.player.sens += 25;
+			game.player.statStore.addBuff('sens',+25,'NecklaceOfSensitivity',{text:'Necklace Of Sensitivity'});
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():Necklace {
-			game.player.sens -= 25;
+			game.player.statStore.removeBuffs('NecklaceOfSensitivity');
 			return super.playerRemove();
 		}
 		

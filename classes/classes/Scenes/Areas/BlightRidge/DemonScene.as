@@ -166,8 +166,7 @@ import classes.Scenes.UniqueSexScenes;
 			outputText("Unable to contain your body's desires due to either the demon's aura or his wonderful penis, you slam your " + vaginaDescript(0) + " onto his member with impunity, twitching and squeezing involuntarily.  His tainted pre-cum begins seeping deep inside your uterus and you cry out with orgasmic intensity.  Your entire body clenches down, even the hand clamped on the incubus' windpipe. You feel his demon-cock swell up inside you in response to his stress, stretching your cunt taut.  His skin darkens from the lack of oxygen as he begins cumming HARD inside you.  Your womb immediately fills with his demon-seed, leaving ribbons of spunk to drip from your tightly-stretched cunt.  You sigh in delight as your muscles slowly stop quivering.  With a pleasured gasp, you rise off the distended demon-prick, and realize that you've choked your foe into unconsciousness. Still, you did let him cum, so maybe he won't mind too much when he wakes.  Feeling sensual and sated, you redress and prepare to come back to the camp. ");
 			player.cuntChange(player.vaginalCapacity()*.8, true);
 			player.orgasm();
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("cum");
 			dynStats("cor", 2);
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			cleanupAfterCombat();
@@ -204,8 +203,7 @@ import classes.Scenes.UniqueSexScenes;
 				outputText("The demon tenses, pulling your head forwards and burying your nose against his belly.  The dick in your mouth slides down your throat, hanging just above your belly as it begins to fill your gut with bursts of demonic warmth.  Black cum erupts from your nipples as his orgasm overwhelms their meager storage capacity, soaking your tits in his corruptive essence as the pleasure finally breaks your mind.  Your eyes roll back into your head as you begin cumming... and cumming... and cumming. The orgasm drags on and on as more and more cum pours into your body.  Like a passenger in a car you see what's happening but have no control.  Your body is used and abused for hours before you finally drift off to sleep.");
 				player.refillHunger(100);
 				player.orgasm();
-				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+				player.sexReward("cum");
 				dynStats("cor", 20);
 				cleanupAfterCombat();
 				}
@@ -251,10 +249,9 @@ import classes.Scenes.UniqueSexScenes;
 					outputText("The prick in your mouth surges forward, sliding deep into your throat.  The coils around your neck tighten in response, choking your neck into a tight cock-sleeve as you feel bulges of cum moving along its length.  In moments you feel your belly starting to grow full, sloshing with cum as you become desperate to breathe.  The tentacles lodged in your " + assholeDescript() + " and " + vaginaDescript(0) + " react in similar fashion, stretching you wide as they begin pumping your body full of vast quantities of spunk.  A few free tentacles begin spurting gobs of the white stuff onto your [skin.type], soaking you in the stuff as you black out from a combination of oxygen deprivation and pleasure.");
 					player.refillHunger(100);
 					player.orgasm();
-					if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-					if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 					dynStats("cor", 25);
-					player.buttChange(monster.cockArea(0), true);	
+					player.buttChange(monster.cockArea(0), true);
+					player.sexReward("cum");
 					cleanupAfterCombat();
 					}
 				//Male/Genderless
@@ -284,9 +281,10 @@ import classes.Scenes.UniqueSexScenes;
 							outputText("You black out just as you feel the cock-tentacle in your throat retracting. You dully feel your body drop to the ground, your pregnant-looking belly sloshing with demon jizz.");
 							player.refillHunger(100);
 							player.buttChange(monster.cockArea(0), true);
+							player.sexReward("cum");
 							player.orgasm();
 							if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-							if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+							if (player.jiangshiScore() >= 20 && player.hasPerk(PerkLib.EnergyDependent)) player.EnergyDependentRestore();
 							cleanupAfterCombat();
 					}
 				}

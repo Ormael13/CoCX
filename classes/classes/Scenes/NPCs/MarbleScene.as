@@ -125,7 +125,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				//Remove the status and stat boosts when time runs out on the milk
 				if (player.statusEffectv1(StatusEffects.MarblesMilk) <= 0) {
 					needNext = true;
-					dynStats("str", (-1 * player.statusEffectv2(StatusEffects.MarblesMilk)),"tou", (-1 * player.statusEffectv3(StatusEffects.MarblesMilk)));
+					player.buff("MarblesMilk").remove();
 					player.removeStatusEffect(StatusEffects.MarblesMilk);
 					//Text for when Marble's Milk effect wears off:
 					//[addiction is 10 or less] 
@@ -309,7 +309,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				}
 				//Boost stats if not under its affects
 				else {
-					dynStats("str", 5,"tou", 10);
+					player.statStore.replaceBuffObject({"str.mult":0.10,"tou.mult":0.10},"MarblesMilk",{text:"MarblesMilk"});
 				}
 				//Post-addiction flavors
 				//Marble liked you addicted
@@ -1146,7 +1146,7 @@ private function playerRefusesToDrinkBottledMilk():void {
 	//(decrease addiction by 5)
 	marbleStatusChange(-5,-5);
 	//(decrease player str and tou by 1.5)
-	dynStats("str", -1,"tou", -1);
+	dynStats("str", 1,"tou", -1);
 	//(delay withdrawal effect)
 	//If the player is addicted, this item negates the withdrawal effects for a few hours (suggest 6), there will need to be a check here to make sure the withdrawal effect doesn't reactivate while the player is under the effect of 'Marble's Milk'.
 	if(player.hasStatusEffect(StatusEffects.BottledMilk)) {
@@ -1950,6 +1950,7 @@ private function applyMarblesMilk():void {
 			tou = 100 - player.tou;
 			if(tou < 0) tou = 0;
 		}
+		player.statStore.replaceBuffObject({"str.mult":0.10,"tou.mult":0.10},"MarblesMilk",{text:"MarblesMilk"});
 		dynStats("str", str,"tou", tou);
 		player.changeStatusValue(StatusEffects.MarblesMilk,2,str);
 		player.changeStatusValue(StatusEffects.MarblesMilk,3,tou);
@@ -3580,7 +3581,7 @@ private function marbleNightSexChicks():void {
 		}
 		outputText("The two of you give one more shudder from the wonderful stimulation, before collapsing on top of one another.  ");
 		//Pregnancy chance for PC, ¼ their fertility
-		if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+		if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 		else player.knockUp(PregnancyStore.PREGNANCY_MARBLE, PregnancyStore.INCUBATION_MARBLE, 150);
 		player.sexReward("cum");
 		player.cuntChange(flags[kFLAGS.MARBLE_DICK_THICKNESS] * flags[kFLAGS.MARBLE_DICK_LENGTH], true);
@@ -4179,7 +4180,7 @@ private function milkMarbleTakeHerDick():void
 	player.sexReward("cum");
 	flags[kFLAGS.MARBLE_LUST] = 10;
 	dynStats( "lib", .5 );
-	if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 	else player.knockUp(PregnancyStore.PREGNANCY_MARBLE, PregnancyStore.INCUBATION_MARBLE, 150);
 	doNext(camp.returnToCampUseTwoHours);
 }

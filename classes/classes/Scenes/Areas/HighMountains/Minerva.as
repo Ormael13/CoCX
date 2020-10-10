@@ -42,7 +42,7 @@ public class Minerva extends Monster
 			var damage:int = int((str + weaponAttack + 100) - rand(player.tou) - player.armorDef);
 			if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) damage += 200;
 			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) damage += 100;
-			spe -= 70;
+			speStat.core.value -= 70;
 			if (player.getEvasionRoll()) {
 				outputText("  You jump out of the landing zone just in time, piles of dirt exploding in all directions as Minerva slams into the ground.");
 			}
@@ -53,7 +53,7 @@ public class Minerva extends Monster
 				outputText("  She hits you square in the chest, knocking you to the ground as her entire weight lands on you.  The bombshell of a woman jumps off your chest, ready to keep fighting. ");
 				damage = player.takePhysDamage(damage, true);
 			}
-			spe += 70;
+			speStat.core.value += 70;
 		}
 
 //Tail-whip

@@ -152,8 +152,8 @@ import classes.internals.*;
 			outputText("She flushes, drawing on her body's desires to empower her muscles and hasten her up.");
 			outputText("The rush of success and power flows through her body.  <b>She looks like she can move faster!</b>");
 			createStatusEffect(StatusEffects.Blink, 50, 0, 0, 0);
-			if (findPerk(PerkLib.JobEnchanter) >= 0) this.spe += (5 + (inte / 10)) * 1.5 * SpellMod();
-			else this.spe += (5 + (inte / 10)) * 1.2 * SpellMod();
+			if (findPerk(PerkLib.JobEnchanter) >= 0) this.speStat.core.value += (5 + (inte / 10)) * 1.5 * SpellMod();
+			else this.speStat.core.value += (5 + (inte / 10)) * 1.2 * SpellMod();
 			mana -= spellCostBlink();
 			flags[kFLAGS.DINAH_SPELLS_CASTED]++;
 		}

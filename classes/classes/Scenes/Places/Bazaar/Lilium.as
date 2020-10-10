@@ -202,8 +202,7 @@ private function liliumDickRidah():void {
 	outputText("Exhausted, you flop to the side, leaving you lying supine beside Lilium.  You turn your head to look at her and she tilts her own head to meet your gaze.  You can see a similar look of contented exhaustion on her face, although you're fairly sure you lack the mix of cum and feminine lube and the smeared makeup.\n\n");
 
 	outputText("After a moment of recovery time you get up to get dressed before starting your journey back to camp.  \"<i>Don't be a stranger, now,</i>\" calls the voice over your shoulder. A slight smile appears on your face.\n\n");
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+	player.sexReward("cum");
 	player.orgasm();
 	dynStats("cor", 1);
 	//(imp preg check)

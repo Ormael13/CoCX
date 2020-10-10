@@ -34,6 +34,141 @@ package classes.Scenes
 			doNext(camp.returnToCampUseOneHour);
 		}
 
+		public function TreeWayRapeLiliraune():void {
+			clearOutput();
+			outputText("With your foe on the ground before you, you feel a familiar warmth rushing through you, making you blush purple as fantasies of filling this woman with your progeny overcome you. You smile mischievously at your twin sister.\n\n" +
+					"\"<i>Hey sister, feel like going for a threeway, including pollination?</i>\"\n\n" +
+					"\"<i>Sure, and she looks just like the kind of girl I'd like to relieve me of my load.</i>\"\n\n" +
+					"Resolving to make your dreams a reality, the pair of you loose a spray of pollen for your victim to slowly inhale as it lays thick in the air...\n\n" +
+					"Her face flushes rapidly as her expression gradually turns to that of a bitch in heat, ready for pollination as your aphrodisiacs fill her with pink thoughts. " +
+					"You and your sister help your soon to be bride of the day to climb up into the nectar bath, allowing her to get a full whiff of your intoxicating scent from the source, " +
+					"something she eagerly does. When you're sure she’s sufficiently entranced you start with a sweet kiss, pulling her into your arms as you sister massages and plays with her breasts.  " +
+					"Meanwhile, with the prey distracted, you ready your many stamen mounted vines for the incoming pollination.\n\n" +
+					"You and your sister share a bath with her, washing her body thoroughly with your syrupy nectar until she’s as slimy and ready as the two of you are. " +
+					"Your ambient pollen and various aphrodisiacs only serve to turn her on more, her skin a flushed shade of pink under your sticky nectar, making her squirt from the smallest stimulation, like your heated breath against her neck or your sister’s hands toying with her nipples. " +
+					"The two of you caress her skin, making sure not to leave any area untouched, as you pull your vines into the bath, slowly aligning your cunnies and hers with your stamens.\n\n" +
+					"She lazily gasps in surprise and delight as you insert yourself in her, filling her ass and cunt in just the perfect way with your thick vines. You aren't left wanting either, " +
+					"expertly fucking your pussies in a way only your own stamens can manage. The three of you moan together as your stamens work both yours and her holes in perfect synchronization. " +
+					"While you and your sister are in control, you aren’t sure whether you’re more enthusiastic about fucking the woman’s cunt or fucking your own, " +
+					"as you can feel every stamen and the two cunts from your body that much more sharply. " +
+					"Not that it matters at all as long as all these holes are filled with pollen by the end.\n\n" +
+					"\"<i>Ahhh sis! It's like fucking with three dicks except you also feel two in your own pussy! Ahhhhn!!!</i>\"\n\n" +
+					"\"<i>I’m completely losing it! I think I’m going to cum!</i>\"\n\n" +
+					"Nectar and pussy juice mix in the bath, as the trio of you, reach orgasm after orgasm, pumping your respective bodies full of liquid pollen. " +
+					"Reaching your peak for the last time with a shuddering cry, you slowly pull the girl out of your flower and deposit her back on the ground, " +
+					"leaving her unconscious but satisfied as you caress her belly still full of your pollen. " +
+					"You look back at your twin to confer with her.\n\n" +
+					"\"<i>You think it took?</i>\"\n\n" +
+					"\"<i>Oh, I’m positive it did… she should be giving birth to our seedling in no time.</i>\"\n\n" +
+					"Your bellies aren’t any better, though the pregnancy will soon move down to the pitcher, " +
+					"and you fantasize at the idea of giving birth, the two of you hoping for the best as you head back to camp.");
+			player.sexReward("cum");
+			player.sexReward("vaginalFluids");
+			player.sexReward("saliva");
+			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
+			statScreenRefresh();
+			cleanupAfterCombat();
+		}
+
+		public function TagTeam():void {
+			clearOutput();
+			outputText("With your foe on the ground beneath you, you can’t help but think you’ve finally found a stamen to fertilize yourself with! " +
+					"You grin at your sister, voicing your line of thought.\n\n" +
+					"\"<i>Think he can fertilize us good?</i>\"\n\n" +
+					"\"<i>If he can feed our two pistils sure, but I want the first turn.</i>\"\n\n" +
+					"Without waiting any longer, the two of you proceed to grab him with your vines and pull him toward your waiting flower. " +
+					"He violently struggles to escape as you pull him ever closer to the pool, all the while you and your sister giggle at his desperate attempts to get away.\n\n" +
+					"\"<i>Look sister, he's trying so hard to escape. I love these guys.</i>\"\n\n" +
+					"\"<i>You can’t run away silly, not from our vines. There's no way you will make it, tied up like this… Mmmmmmm, that and the fact your resistance only makes us hornier.</i>\"\n\n" +
+					"All good things must come to an end however, and entertaining as it is, you want to pollinate now, even if your twin will get the first round! " +
+					"The both of you release a massive cloud of aphrodisiac pollen toward him, letting him inhale your scent. " +
+					"He doesn’t struggle much anymore as his ‘stamen’ betrays him, going erect in seconds, drooling precum at the mere thought of getting a shot at your lovely pair of pussies, " +
+					"something you will be more than happy to let him do. Looking at you both with half-lidded eyes, he relinquishes control entirely. " +
+					"You finally reel him into your nectar bath and kiss him as your sister lubes up his stamen with your nectar. He makes a cute moan as she prepares him for the next step, " +
+					"drooling with delight at the idea of getting what she wants. You sister straddles him right away as you lay against his back feeling your own pussy clench in pleasure as she milks him for his semen. " +
+					"Eventually, you both achieve orgasm, her on his dick and you on his ass. Giggling, your sister hands him over.\n\n" +
+					"\"<i>It’s your turn sis, please take him in as I take his mouth.</i>\"\n\n" +
+					"\"<i>All good, I have it under control. Make sure to kiss him correctly, the last time it didn't feel quite as good for me.</i>\"\n\n" +
+					"While your twin takes care of his mouth, unable to wait any longer, you pull him to you, impaling your nectar drenched hole on his cock. You begin to slide yourself up and down, making lewd wet noises as you forcefully milk your former opponent's stamen. Pollination feels so wonderful! You fawn over him, moving into your drugged victim’s open arms and before long, it’s hard to figure out which of you is the most addicted. Your sister suddenly breaks the sloppy kiss, her mouth and his still linked by a strand of saliva, as your mate finally bottoms out and fills your flower with his seed, you and your sister achieve a second orgasm.\n\n" +
+					"Highly satisfied, the both of you deposit him back on the ground with little ceremony, half conscious from the massive drug-induced orgasm your pollen put him under. You and your twin can’t help but hope the seed took, " +
+					"daydreaming of your children to come as you seal your vaginas shut to prevent the load from escaping.");
+			player.sexReward("cum");
+			player.sexReward("vaginalFluids");
+			player.sexReward("saliva");
+			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
+			statScreenRefresh();
+			cleanupAfterCombat();
+		}
+
+		public function Convert():void {
+			clearOutput();
+			outputText("You watch delighted as " + monster.a + monster.short + " drops to the ground in defeat. You could have used her as a seedbed, " +
+					"but this time around you have other ideas as you raise your stamen mounted vine. ");
+			if(player.isLiliraune())
+			{
+				outputText("Your twin smirks mischievously, she likes this program.\n\n" +
+						"\"<i>Um, look at her lovely body; do you think we can make it better?</i>\"\n\n" +
+						"\"<i>We sure can! I wonder how she'll look once the pleasure ravages her.</i>\"\n\n");
+			}
+			outputText("Terrified of you, she tries to crawl away, but your vines firmly grip her and pull her toward you. " +
+					"your victim screams, claws and struggles in all the ways she can, but your vines finish binding her in place as your last free vine moves towards her pussy. You ");
+			if(player.isLiliraune()) outputText("and your sister both ");
+			outputText("moan in pleasure as the tentacle tip blooms open into a flower mounted by a hard stamen. It begins to slowly leak a purple fluid, a sign of your corruption, " +
+					"as you approach it from the wanton slut slit. Unable to escape and immobilized like she is, she can only beg as your stamen suddenly starts leaking it’s liquid corruption into her pussy, " +
+					"flooding her womb until her belly looks pregnant with your corrupted fluids. She resists for a moment, but it is short lived as her body begins to change color to light green, " +
+					"spreading from her already nectar gushing pussy of which the amber brew mixes with your fluids. She moans and drools nectar as her hair is replaced by grass and her body becomes progressively closer to that of a plant morph, " +
+					"her overflowing pussy drenching the ground from which corrupted grass begins to grow. Unsatisfied with your stamen in her pussy, " +
+					"she yanks at a vine, forces it open and shoves it in her mouth with an eye crossed glaze. You can’t hold the pleasure at bay anymore, " +
+					"cuming both inside and outside as the bitch grows her floral hair ornament, finishing her transformation into a dryad.\n\n");
+			if(player.isLiliraune())
+			{
+				outputText("\"<i>Mmmmm, look how good she looks now! I’d eat her flower anytime.</i>\"\n\n" +
+						"\"<i>Except we already did, sister, she doesn’t look like she will wake up anytime soon either.</i>\"\n\n" +
+						"The two of you chuckle, turning people into messes like these is so much more fun with each other around. ");
+			}
+			outputText("Satisfied with your handiwork,");
+			if(player.isLiliraune()) outputText(" the both of");
+			outputText(" you depose your newest adopted daughter on the ground, who swiftly wakes up and looks at ");
+			if(player.isLiliraune()) outputText(" the pair of");
+			outputText(" you with eyes full of adoration." +
+					"\"<i>Thank you so much, I’m so happy! Let me repay you by spreading this gift to everyone I can!</i>\"\n\n" +
+					"Aw, ain’t she grateful. She stands up in a rush, having spotted a somewhat terrified imp. She proceeds to run after it, screaming." +
+					"\"<i>Stop running away and fuck my flower!!!!</i>\"\n\n" +
+					"You giggle and shrug. How your newest daughter enjoys her new life is none of your concern. " +
+					"You head back to camp as she begins to forcefully rub the imp’s stamen for his pollen.");
+			player.sexReward("vaginalFluids");
+			player.sexReward("saliva");
+			statScreenRefresh();
+			cleanupAfterCombat();
+		}
+
+		public function AlrauneDungeonBadEnd():void {
+			clearOutput();
+			outputText("Unsure of what to do with you, your captors decide to keep you home as a decorative, if not perverted plant. While you have, for security reasons, been limited to the boundary of a single room to which you have been magically forced to take root, your life is not any less interesting than it was prior to your defeat as a good amount of people come in and out daily to harvest your aphrodisiac nectar, get seeded, pollenise you or a mix of all three. You were quickly repurposed as a lusty if efficient dungeon guardian, always ready to rape anything stupid or horny enough to come within reach of your vines.");
+			if(player.isLiliraune()) outputText(" When you’re not busy raping intruders or using the dungeons many denizens as your seedbed or cumpumps you spend the days of your quasi-infinite lifespan having sex with your twin in the middle of your pitcher, ever ready to invite whoever enters the room next for a threesome.");
+			outputText(" They kept feeding you nutrients and you gave them sex and nectar in return. The perfect deal right?\n\n" +
+					"As the days pass your vines slowly began to grow and exceed the range of the walls of your confinement room, " +
+					"turning what used to be a dungeon into a garden where your vines have become a network of tendrils, always seeking a pussy or ass to fuck. You eventually seize the dungeon in full, " +
+					"forcing the original denizens of the place to build new quarters away from your influence as your canopy of rape-happy vines stretch ever further. " +
+					"At first, they tried to prune your growth but eventually perhaps due to negligence you slowly got past the point at which you could be contained, your many vines capturing people alive to add ever more vessels to serve as your personal seedbeds. Without any further opposition, this place swiftly turned into a nursery for your many seedlings. " +
+					"Your canopy of vines spread so far it's sometimes difficult for you to know just how many people you are fucking at the same time. " +
+					"Your mind has,over time, become accustomed to this gigantic network of constant fucking and orgasms, allowing you to stay clear-headed at all times as you copulate with your many entwined victims.\n\n" +
+					"One day some human woman in armor with a magic sword managed to get past your many daughters and enter your chamber, claiming that she is the champion of some town called Ingnam. (why does that feel familiar? You should remember this…) While the name of the place might’ve had a relevance to you in the past you have been here for so long that you have since forgotten. " +
+					"She says she is here to defeat the ‘Verdant Queen’. Some title the locals have given you perhaps?\n\n" +
+					"You care little for her speech however as you grab her with several of the vines that cover the place,");
+			if(player.isLiliraune()) outputText(" you and your twin");
+			outputText(" licking your lips in delight. It has been many years since one made it this far.\n\n");
+			if(player.isLiliraune()) outputText("\"<i>Oh my! Isn’t she cute? Came all the way down here just to play with us</i>\"\n\n" +
+					"\"<i>How about you tell us your name before we fill you full of stamens and make you forget it? It just so happens to be very lonely here and we definitely will never let you go. You’re way too convenient for that.</i>\"\n\n" +
+					"The both of you giggles");
+			else outputText(" You giggle");
+			outputText(" as you reel in the girl who fight backs tooth and nail to get free, hacking and slashing until the overpowering scent of your pollen and ripe nectar puts an end to her resistance, " +
+					"your vines reeling her into your pitcher to ready her flower for pollination. " +
+					"Nowadays the only things you ever get to pollinate are demons or your own daughters and the flower of a pure human is a delicacy. " +
+					"You could say that for her this is…");
+			EventParser.gameOver();
+		}
+
 		public function pcUniqueSexScenesChoiceMenu():void {
 			menu();
 			if (player.tailType == Tail.MANTICORE_PUSSYTAIL && monster.hasCock()) addButton(0, "Tail Rape", manticoreTailRapeScene);
@@ -42,30 +177,43 @@ package classes.Scenes
 			else addButtonDisabled(1, "Tailpeg", "Req. to have Hinezumi Tail.");
 			if ((player.gender == 1 || player.gender == 2) && (player.tailType == Tail.HINEZUMI || player.tailType == Tail.MOUSE || player.tailType == Tail.DEMONIC)) addButton(2, "Strangle and rape", strangleAndRapeScene);
 			else addButtonDisabled(2, "Strangle and rape", "Req. to be male or female with hinezumi, mouse or demon tail.");
-			if (player.lowerBody == LowerBody.PLANT_FLOWER && monster.hasCock()) addButton(3, "Get Pollinated", alrauneGetPollinatedScene);
-			else addButtonDisabled(3, "Get Pollinated", "Req. to have Alraune lower body and enemy with cock.");
-			if (player.lowerBody == LowerBody.PLANT_FLOWER && monster.hasVagina()) addButton(4, "Seeding", alrauneSeedingScene);
-			else addButtonDisabled(4, "Seeding", "Req. to have Alraune lower body and enemy with vagina.");
-			if (player.raijuScore() >= 10 && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) addButton(5, "Volt Transfer", raijuVoltTransfer);
-			else addButtonDisabled(5, "Volt Transfer", "Req. to be Raiju and enemy must be non-gigant humanoid.");
-			/*if (player.hasStatusEffect(StatusEffects.HinezumiCoat) && player.lust >= player.lust100() * 0.5 && !monster.hasPerk(PerkLib.EnemyGigantType))
-            else */
-			addButtonDisabled(6, "Heat transfer", "Req. to have Hinezumi Coat, over 50% of max lust, enemy must be humanoid and not giant. (not yet added scene)");
-			addButtonDisabled(7, "Cooldown", "Req. to have (Winter wolf/other cold cum creatures, pc must be female salamander or hinezumi). (not yet added scene)");
-			if (player.yukiOnnaScore() >= 14 && monster.hasCock() && !monster.hasPerk(PerkLib.UniqueNPC) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) addButton(8, "Steal warmth", yukionnaStealWarmthScene);
-			else addButtonDisabled(8, "Steal warmth", "Req. to be Yuki Onna and enemy must be: non-gigant, humanoid, with cock, non-unique npc.");
-			if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.hasCock() && player.ballSize > 3) addButton(9, "EGGS!!", EasterBunnyLayEggsRape);
-			else addButtonDisabled(9, "EGGS!!", "Req. to be a Easter Bunny.");
+			if (player.isAlraune()) {
+				if (player.isLiliraune()){
+					if (player.isLiliraune() && monster.hasCock()) addButton(3, "Tag Team", TagTeam);
+					else addButtonDisabled(3, "Tag Team", "You need to be two person against a male to use this scene.");
+					if (player.isLiliraune() && monster.hasVagina()) addButton(4, "Triple Girl Fun", TreeWayRapeLiliraune);
+					else addButtonDisabled(4, "Triple Girl Fun", "You need to be two person against a female to use this scene.");
+				} else {
+					if (player.lowerBody == LowerBody.PLANT_FLOWER && monster.hasCock()) addButton(3, "Get Pollinated", alrauneGetPollinatedScene);
+					else addButtonDisabled(3, "Get Pollinated", "Req. to have Alraune lower body and enemy with cock.");
+					if (player.lowerBody == LowerBody.PLANT_FLOWER && monster.hasVagina()) addButton(4, "Seeding", alrauneSeedingScene);
+					else addButtonDisabled(4, "Seeding", "Req. to have Alraune lower body and enemy with vagina.");
+				}
+				if (player.isAlraune() && player.cor >= 50 && monster.hasVagina() && !monster.hasPerk(PerkLib.UniqueNPC)) addButton(5, "Convert", Convert);
+				else addButtonDisabled(5, "Convert", "You need to be a very corrupted alraune against a non unique female character to use this scene.");
+			}
+			if ((player.raijuScore() >= 10 || player.thunderbirdScore() >= 12) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) addButton(6, "Volt Transfer", raijuVoltTransfer);
+			else addButtonDisabled(6, "Volt Transfer", "Req. to be Raiju and enemy must be non-gigant humanoid.");
+			//Overheat fire species
+			if (player.hasStatusEffect(StatusEffects.Overheat) && !monster.hasPerk(PerkLib.EnemyGigantType)) addButton(3, "Heat transfer", HeatTransfer);
+			else addButtonDisabled(7, "Heat transfer", "Req. to have Hinezumi Coat, over 50% of max lust, enemy must be humanoid and not giant.");
+			if (player.hasStatusEffect(StatusEffects.Overheat) && monster.hasPerk(PerkLib.IceNature) && player.hasVagina() && monster.hasCock()) addButton(3, "Cooldown", Cooldown);
+			addButtonDisabled(8, "Cooldown", "Req. a cold type creatures with a cock, the overheat perk and a vagina.");
+			//Yuki onna
+			if (player.yukiOnnaScore() >= 14 && monster.hasCock() && !monster.hasPerk(PerkLib.UniqueNPC) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) addButton(9, "Steal warmth", yukionnaStealWarmthScene);
+			else addButtonDisabled(9, "Steal warmth", "Req. to be Yuki Onna and enemy must be: non-gigant, humanoid, with cock, non-unique npc.");
+			//easter bunny
+			if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.hasCock() && player.ballSize > 3) addButton(10, "EGGS!!", EasterBunnyLayEggsRape);
+			else addButtonDisabled(10, "EGGS!!", "Req. to be a Easter Bunny.");
 
 			//Giantess and tentacle rape
-			if (monster.hasVagina() && (player.isKraken() || player.isScylla())) addButton(10, "Tentacle rape!", TentacleRape);
-			else addButtonDisabled(10, "Tentacle rape!", "You need scylla or kraken tentacles to do this. Only works on female foes.");
-			if (player.hasVagina() && (((player.isKraken() || player.lowerBody == LowerBody.HYDRA) && player.tallness*3/2 > monster.tallness) || player.tallness > monster.tallness*2) ) addButton(10, "Living Dildo", HumanDildo);
-			else addButtonDisabled(10, "Living Dildo", "To be way taller then your opponent in order to even use this scene.");
+			if (monster.hasVagina() && (player.isKraken() || player.isScylla())) addButton(11, "Tentacle rape!", TentacleRape);
+			else addButtonDisabled(11, "Tentacle rape!", "You need scylla or kraken tentacles to do this. Only works on female foes.");
+			if (player.hasVagina() && (((player.isKraken() || player.lowerBody == LowerBody.HYDRA) && player.tallness*3/2 > monster.tallness) || player.tallness > monster.tallness*2) ) addButton(12, "Living Dildo", HumanDildo);
+			else addButtonDisabled(12, "Living Dildo", "To be way taller then your opponent in order to even use this scene.");
 
-			if (player.isInGoblinMech() && player.hasKeyItem("Cum Reservoir") >= 0 && monster.hasCock()) {
-				if (player.keyItemv1("Cum Reservoir") == 4) addButtonDisabled(13, "Fill the reservoir", "Reservoir is already full. You need to use all this stored cum before you harvest new one.");
-				else addButton(13, "Fill the reservoir", gobomechFillTheReservoir);
+			if (player.isInGoblinMech() && player.hasKeyItem("Cum Reservoir") >= 0 && monster.hasCock()) {if (player.keyItemv1("Cum Reservoir") == 4) addButtonDisabled(13, "Fill the reservoir", "Reservoir is already full. You need to use all this stored cum before you harvest new one.");
+			else addButton(13, "Fill the reservoir", gobomechFillTheReservoir);
 			} else addButtonDisabled(13, "Fill the reservoir", "Req. to be in goblin mech, having Cum Reservoir upgrade instaled on it and enemy with cock.");
 			addButton(14, "Leave", cleanupAfterCombat);
 		}
@@ -266,11 +414,59 @@ package classes.Scenes
 			cleanupAfterCombat();
 		}
 
+		public function HeatTransfer():void {
+			clearOutput();
+			outputText("You ponder what to do with your defeated opponent then realize your body is on the brink of overheating with lust. Your opponent shudders as you grab [monster him] by the neck." +
+					"\"<i>Do you know how hot I am right now? I’ll need to get rid of that before I loose my mind. Thankfully you came along at the perfect moment.</i>\"\n\n" +
+					"Your opponent only understands what you mean when you kiss [monster him], your flames starting to lick his/her skin, leaving a tingle of pleasure and arousal as you start to vent your heat out." +
+					"Your flames stretch out from your ");
+			if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) outputText("coat,");
+			else outputText("body,");
+			if (monster.hasCock()) outputText(" wrap and sheath around [monster his] "+monster.cockDescriptShort()+",");
+			if (monster.biggestTitSize() >= 1) outputText("massage the shape of [monster his] "+monster.breastDescript(0)+",");
+			if (monster.hasVagina()) outputText("lick the entrance of [monster his] "+monster.vaginaDescript()+"");
+			outputText("and spread across the rest of [monster his] skin like a wildfire. You smile in contentment as the haze of lust progressively clears from your mind which is the opposite of what can be said for your victim. The excess of your");
+			if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) outputText("hinezumi coat,");
+			else outputText("flames,");
+			outputText(" slowly pass inch by inch into " + monster.a + monster.short + " prone form and you almost achieve climax from the relief as you purge all of this ");
+			if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) outputText("bad ki ");
+			else outputText("fire ");
+			outputText("out of yourself.\n\n" +
+					"Your victim, however, is not so lucky. As you pour in your lust it begins to completely lose control attempting to fiercely masturbate this excess of desire out, to no avail. " +
+					"As you are close to done your partner is a writing mess on the floor desperate to cum but unable to achieve complete release as the supernatural fire keeps fueling [monster his] desire " +
+					"way beyond normal obliterating self-restraint and pride along the way. You move away from " + monster.a + monster.short + " just as [monster his] hands begin to draw fluids out of [monster his] lust filled endowment. " +
+					"You stay clear as your victim lust explode spewing fluids");
+			if (monster.biggestTitSize() >= 1)outputText(" and milk ");
+			outputText("everywhere in the vicinity. You can see the pulse of your flames as a small embery glow in every thrust of [monster his] hips as [monster he] keeps fiercely masturbating in an attempt to expel the lust.\n\n" +
+					"You leave your writhing lust receptacle there, it's unlikely [monster he] will stop masturbating anytime soon.");
+			//We give both sex reward so to end player rut or heat in the event pc has either
+			player.sexReward("cum");
+			player.sexReward("vaginalFluids");
+			cleanupAfterCombat();
+		}
+
+		public function Cooldown():void {
+			clearOutput();
+			outputText("You eye " + monster.a + monster.short + " with anticipation. Being a "+player.race+", your body temperature is constantly burning way above normal and right now your [pussy] is like 40° celcius in summer with high humidity. " +
+					"A little cooling is in order and this unlucky rift denizen is about to serve as natural refreshment for your burning hot body.\n\n" +
+					"You proceed to force " + monster.a + monster.short + " on [monster his] back");
+			if (monster.wolfCocks() > 0) outputText(", your warm body slowly forcing his puppy pecker out of its sheath");
+			outputText(". Once your partner’s towering erection is suitable you proceed to straddle him and fill your burning vagina full of his dick." +
+					"" + monster.a + monster.short + " "+monster.cockDescriptShort()+" twitches as warmth coats his member and you begin to slide up and down his towering maleness");
+			if (monster.wolfCocks() > 0) outputText(", enjoying yourself as his knot grows and locks itself in your [pussy]");
+			outputText(". You begin to slowly work his tool with your vagina, moaning as the shaft ever so gently scrapes your walls. You want the cool cream inside to fill you all over and soon the beast growls as it reaches its impending climax, its dick unloading thick ropes of cooling cum into your furnace of a pussy.\n\n" +
+					"Thoroughly satisfied you pull from " + monster.a + monster.short + " "+monster.cockDescriptShort()+" and walk off. Gosh, this one felt hella good you should come back more often when you’re in need of some cooling.")
+			//We give both sex reward so to end player rut or heat in the event pc has either
+			player.sexReward("cum");
+			player.sexReward("vaginalFluids");
+			cleanupAfterCombat();
+		}
+
 		public function yukionnaStealWarmthScene():void {
 			clearOutput();
 			outputText("You eye your defeated opponent’s form with delight. " + monster.Pronoun1 + "'s so warm and full of life, certainly sharing some of it with you should be no problem? Yet the greedy creature squirms and crawl away in a vain attempt to escape you and this angers you to no end. Even worse this thing is a guy. You freeze " + monster.a + monster.short + " limbs in place, trapping them with ice, and approach him.\n\n");
 			outputText("\"<i>You're hoarding that sweet warmth all to yourself aren't you? How about you share.</i>\"\n\n");
-			outputText("He looks at you fearfully and rightly so, there's no telling how far you will go to get the warmth you’re craving from him. You spread " + monster.pronoun3 + " leg wide to reveal the already hardening " + monster.cockDescriptShort(0) + " between. You lick his length to lube it properly for what is coming next, your cool saliva making " + monster.a + monster.short + " shiver. You rub your body along his while doing this, enjoying the sensation of warmth over your skin. A few seconds later you're already straddling the towering erection, inserting inch after inch inside your folds. Moans are exchanged as you begins to lower your body on your victim’s cock, moving at a steady pace. Midway you kiss " + monster.a + monster.short + " silencing his pain and pleasure mixed groans ");
+			outputText("He looks at you fearfully and rightly so, there's no telling how far you will go to get the warmth you’re craving from him. You spread " + monster.pronoun3 + " leg wide to reveal the already hardening " + monster.cockDescriptShort() + " between. You lick his length to lube it properly for what is coming next, your cool saliva making " + monster.a + monster.short + " shiver. You rub your body along his while doing this, enjoying the sensation of warmth over your skin. A few seconds later you're already straddling the towering erection, inserting inch after inch inside your folds. Moans are exchanged as you begins to lower your body on your victim’s cock, moving at a steady pace. Midway you kiss " + monster.a + monster.short + " silencing his pain and pleasure mixed groans ");
 			outputText("as your cool breath pours in and you draw out his warm one. He begins to shake as his cock hardens further, both from the pleasure and the thin layer of ice preventing his release and softening, freezing the very blood inside and spreading out across his body. He would be screaming half mad right now if you weren't choking his loud reply with a kiss, breathing in his warmth. He keeps thrusting until his lower body loses mobility to the creeping frost, not one to end so soon you prolong his agonizing pleasure and yours by your own efforts, moaning in delight each time his diamond hard frozen member bottoms in.\n\n");
 			outputText("As you achieve your fifth orgasm, his body is entirely covered in creeping ice and he's no better than a frozen statue, devoid of all warmth and life. What a bore, you were just barely satiated and could've went on for several hours. You kick him in anger, causing his form to crack and explode like glass in the opposite direction. Guess you had fun while it lasted, time to head back to camp.\n\n");
 			player.HP = player.maxHP();

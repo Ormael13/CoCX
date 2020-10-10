@@ -22,6 +22,7 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
 import classes.Scenes.SceneLib;
+import classes.Stats.Buff;
 
 use namespace CoC;
 	
@@ -106,8 +107,8 @@ use namespace CoC;
 				outputText("Would you like to pray and if yes to who?");
 				menu();
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) addButton(0, "Marae", PlayerPrayAtTempleMaraeAltair).hint("Pray to Marae for empowered white magic.");
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) addButton(1, "Taoth", PlayerPrayAtTempleTaothAltair).hint("Pray the trickster god for an increase to your Agility, (if kitsune)kitsune powers (end of cut) and guile.");
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFenrir)) addButton(2, "Fenrir", PlayerPrayAtTempleFenrirAltair).hint("Pray to the god sharing your body for an increase to your might.");
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 && !player.statStore.hasBuff("TaothBlessing")) addButton(1, "Taoth", PlayerPrayAtTempleTaothAltair).hint("Pray the trickster god for an increase to your Agility, (if kitsune)kitsune powers (end of cut) and guile.");
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 && !player.statStore.hasBuff("FenrirBlessing")) addButton(2, "Fenrir", PlayerPrayAtTempleFenrirAltair).hint("Pray to the god sharing your body for an increase to your might.");
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFera)) addButton(3, "Fera", PlayerPrayAtTempleFeraAltair).hint("Pray the fallen goddess Fera for an increase to your innuendo and resilience to desire.");
 				addButton(14, "Back", templemainmenu);
 			}
@@ -128,23 +129,17 @@ use namespace CoC;
 			}
 		}
 		public function loosingTaothBlessing():void {
-			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) {
+			if (player.statStore.hasBuff("TaothBlessing")) {
 				outputText("You chose to pray a different Deity losing the favor of the first to gain the bonus of the other.\n");
 				outputText("<b>You lost the Blessing of Divine Agency - Taoth</b>\n");
-				var tempSpe:int = player.statusEffectv2(StatusEffects.BlessingOfDivineTaoth);
-				player.removeStatusEffect(StatusEffects.BlessingOfDivineTaoth);
-				dynStats("spe", -tempSpe);
+				player.statStore.removeBuffs("TaothBlessing");
 			}
 		}
 		public function loosingFenrirBlessing():void {
-			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineFenrir)) {
+			if (player.statStore.hasBuff("FenrirBlessing")) {
 				outputText("You chose to pray a different Deity losing the favor of the first to gain the bonus of the other.\n");
 				outputText("<b>You lost the Blessing of Divine Agency - Fenrir</b>\n");
-				var tempStr:int = player.statusEffectv2(StatusEffects.BlessingOfDivineFenrir);
-				var tempTou:int = player.statusEffectv3(StatusEffects.BlessingOfDivineFenrir);
-				player.removeStatusEffect(StatusEffects.BlessingOfDivineFenrir);
-				dynStats("str", -tempStr);
-				dynStats("tou", -tempTou);
+				player.statStore.removeBuffs("FenrirBlessing");
 			}
 		}
 		public function loosingFeraBlessing():void {
@@ -186,15 +181,9 @@ use namespace CoC;
 			loosingFenrirBlessing();
 			loosingFeraBlessing();
 			outputText("<b>You gained the Blessing of Divine Agency - Taoth for 7 days</b>");
-			var temp1:Number = 0;
-			var tempSpe:Number = 0;
-			temp1 += player.spe * 0.1;
-			temp1 = Math.round(temp1);
 			player.createStatusEffect(StatusEffects.BlessingOfDivineTaoth, 169, 0, 0, 0);
-			tempSpe = temp1;
-			player.changeStatusValue(StatusEffects.BlessingOfDivineTaoth,2,tempSpe);
 			mainView.statsView.showStatUp('spe');
-			player.spe += player.statusEffectv2(StatusEffects.BlessingOfDivineTaoth);
+			player.statStore.replaceBuffObject({ 'spe.mult': 0.1}, 'TaothBlessing', { text: 'Taoth Blessing', rate: Buff.RATE_DAYS, tick: 7 });
 			if (player.HP < player.maxHP()) player.HP = player.maxHP();
 			dynStats("cor", -10);
 			statScreenRefresh();
@@ -207,23 +196,9 @@ use namespace CoC;
 			loosingTaothBlessing();
 			loosingFeraBlessing();
 			outputText("<b>You gained the Blessing of Divine Agency - Fenrir for 7 days</b>");
-			var temp1:Number = 0;
-			var temp2:Number = 0;
-			var tempStr:Number = 0;
-			var tempTou:Number = 0;
-			temp1 += player.str * 0.1;
-			temp2 += player.tou * 0.1;
-			temp1 = Math.round(temp1);
-			temp2 = Math.round(temp2);
-			player.createStatusEffect(StatusEffects.BlessingOfDivineFenrir, 169, 0, 0, 0);
-			tempStr = temp1;
-			tempTou = temp2;
-			player.changeStatusValue(StatusEffects.BlessingOfDivineFenrir,2,tempStr);
-			player.changeStatusValue(StatusEffects.BlessingOfDivineFenrir,3,tempTou);
+			player.statStore.replaceBuffObject({ 'str.mult': 0.1, 'tou.mult': 0.1}, 'FenrirBlessing', { text: 'Fenrir Blessing', rate: Buff.RATE_DAYS, tick: 7 });
 			mainView.statsView.showStatUp('str');
 			mainView.statsView.showStatUp('tou');
-			player.str += player.statusEffectv2(StatusEffects.BlessingOfDivineFenrir);
-			player.tou += player.statusEffectv3(StatusEffects.BlessingOfDivineFenrir);
 			if (player.HP < player.maxHP()) player.HP = player.maxHP();
 			dynStats("cor", -10);
 			statScreenRefresh();
@@ -1788,6 +1763,18 @@ use namespace CoC;
 				player.removePerk(PerkLib.EasterBunnyEggBagFinalForm);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.FloralOvaries)) {
+				player.removePerk(PerkLib.FloralOvaries);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.FloralOvariesEvolved)) {
+				player.removePerk(PerkLib.FloralOvariesEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.FloralOvariesFinalForm)) {
+				player.removePerk(PerkLib.FloralOvariesFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.FrozenHeart)) {
 				player.removePerk(PerkLib.FrozenHeart);
 				player.perkPoints += 1;
@@ -1806,6 +1793,18 @@ use namespace CoC;
 			}
 			if (player.hasPerk(PerkLib.GorgonsEyesEvolved)) {
 				player.removePerk(PerkLib.GorgonsEyesEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HeartOfTheStorm)) {
+				player.removePerk(PerkLib.HeartOfTheStorm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HeartOfTheStormEvolved)) {
+				player.removePerk(PerkLib.HeartOfTheStormEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HeartOfTheStormFinalForm)) {
+				player.removePerk(PerkLib.HeartOfTheStormFinalForm);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.HellcatParathyroidGlands)) {
@@ -2032,6 +2031,18 @@ use namespace CoC;
 				player.removePerk(PerkLib.VampiricBloodsteamFinalForm);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.EclipticMind)) {
+				player.removePerk(PerkLib.EclipticMind);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.EclipticMindEvolved)) {
+				player.removePerk(PerkLib.EclipticMindEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.EclipticMindFinalForm)) {
+				player.removePerk(PerkLib.EclipticMindFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.VenomGlands)) {
 				player.removePerk(PerkLib.VenomGlands);
 				player.perkPoints += 1;
@@ -2049,11 +2060,11 @@ use namespace CoC;
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.WhaleFatEvolved)) {
-				player.removePerk(PerkLib.WhaleFat);
+				player.removePerk(PerkLib.WhaleFatEvolved);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.WhaleFatFinalForm)) {
-				player.removePerk(PerkLib.WhaleFat);
+				player.removePerk(PerkLib.WhaleFatFinalForm);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.ChimericalBodyInitialStage)){

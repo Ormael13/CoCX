@@ -18,57 +18,106 @@ public class AlrauneScene extends BaseContent
 		{
 			
 		}
+
+		public function AlrauneVSAlraune(Location:String, type:String):void{
+			outputText("As you wander the "+Location+" you come across a rather large flower. " +
+					"You easily recognize the plant for what it is and wake her up by shaking her vines with yours. " +
+					"The "+type+" pops out and yawns, surprised at seeing another flower like her.\n\n" +
+					"\"<i>Oh hello sister I didn't expect to see another of Marae’s lifeblood in the area. What brings you here?</i>\"\n\n");
+			if(player.isLiliraune())
+			{
+				outputText("You and your sister look at each other, then shrug before replying." +
+						"\"<i>Looking for a stamen to fertilize us or a pussy to stuff our seed, truly.</i>\"\n\n" +
+						"\"<i>Except we haven’t found anyone but you so far.</i>\"\n\n");
+			}
+			outputText("You pretty much stumbled upon her at random though truth be told now that you think of it there is no such thing as incest when it comes down to plants.");
+			if(player.isLiliraune()) outputText(" The both of you ");
+			else outputText(" You ");
+			outputText("give the flower girl a wink.");
+			if(player.isLiliraune())
+			{
+				outputText("\"<i>No such thing as incest amongst flowers right sister?</i>\"\n\n" +
+						"\"<i>Since we’re both in need of proper fertilization how about an exchange?</i>\"\n\n");
+			}
+			outputText("The plant girl gets the idea and giggles, her vine stamens already blooming out at the prospect of fertilizing something. " +
+					"You joyously move all the way over to her, as your vines entwine, sliding on each other. " +
+					"Truth be told, if a penis had grown to ridiculous length and gained this kind of absurd flexibility, " +
+					"it would have felt similar to getting a handjob and giving someone a handjob at the same time as one of your vines coil and slide on " +
+					"the other plant girl’s vines, both stamen pointing toward the sky as you moan in delight. " +
+					"You both swiftly reach a first orgasm and the two entwined vines rain pollen in the area. " +
+					"That's only one stamen out of many however and you reposition your vines so that each tip is aligned toward your partner’s cunt, " +
+					"entwining all of your other vines around the first two to create what could be only called a vine made double ended dildo. " +
+					"The smell of her stamens is overpowering your senses and without a second thought you shove all of her 10 appendages together in your pussy just as you feel the end of your vines being pulled inside her wet fold. " +
+					"Your eyes roll in absolute bliss as all of your vine lengths are sliding on each other, all of your stamen fucking a wanting pussy at the same time as your own plant cunt is being filled up. " +
+					"The air itself is becoming increasingly intoxicating as the both of you release pollen everywhere from your combined lust. " +
+					"You don’t care who is fucking who, you are way too lost in the sensations of your pleasure mad body to care.\n\n" +
+					"Liquid pollen eventually floods your crazed pussy stuffing your body so much your belly inflates up to looking absurdly pregnant. " +
+					"It’ll slowly flow all the way back in the depth of your pitcher where your seeds are created but for now, you look like you might as well be filled with four or even eight kids! " +
+					"Your stamens pop free from their cunt sheaths, falling limply to the ground and still leaking as you doze off highly content.");
+			player.sexReward("cum", "Vaginal");
+			doNext(camp.returnToCampUseOneHour);
+		}
 		
 	public function alrauneDeepwoods():void {
 		spriteSelect(SpriteDb.s_alraune);
 		clearOutput();
-		if (isHalloween()) {
-			outputText("As you wander the area you come across a rather large pumpkin growing in the forest. You ponder how plants even manage to grow this big to begin with. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the pumpkin as it opens up, revealing a beautiful woman with pale orange skin and light green eyes.\n\n");
-			outputText("\"<i>Boo!!! Trick or treat?! Well you don’t seem very keen on giving me treats so I guess I will have to collect.</i>\"\n\n");
-			outputText("There's no way you will let this thing pull you in!\n\n");
+		if (player.isAlraune()) {
+			AlrauneVSAlraune("forest","alraune");
+		} else {
+			if (isHalloween()) {
+				outputText("As you wander the area you come across a rather large pumpkin growing in the forest. You ponder how plants even manage to grow this big to begin with. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the pumpkin as it opens up, revealing a beautiful woman with pale orange skin and light green eyes.\n\n");
+				outputText("\"<i>Boo!!! Trick or treat?! Well you don’t seem very keen on giving me treats so I guess I will have to collect.</i>\"\n\n");
+				outputText("There's no way you will let this thing pull you in!\n\n");
+			}
+			else {
+				outputText("As you wander the forest you come across a rather large flower, easily twice your size. You ponder how plants even manage to grow this big even on Mareth. The flower has pink petals and a pitcher like center. While you are busy examining it, several large vines surge out at you, binding your arms and legs and reeling you toward the flower as it opens up, revealing a beautiful woman with light green skin and deep green eyes.\n\n");
+				outputText("\"<i>Mmmmmm such a nice catch... Come closer into my pitcher.</i>\"\n\n");
+				outputText("There's no way you will let this thing pull you in!\n\n");
+			}
+			if (flags[kFLAGS.CODEX_ENTRY_ALRAUNE] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_ALRAUNE] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Alraune!</b>");
+			}
+			startCombat(new Alraune());
 		}
-		else {
-			outputText("As you wander the forest you come across a rather large flower, easily twice your size. You ponder how plants even manage to grow this big even on Mareth. The flower has pink petals and a pitcher like center. While you are busy examining it, several large vines surge out at you, binding your arms and legs and reeling you toward the flower as it opens up, revealing a beautiful woman with light green skin and deep green eyes.\n\n");
-			outputText("\"<i>Mmmmmm such a nice catch... Come closer into my pitcher.</i>\"\n\n");
-			outputText("There's no way you will let this thing pull you in!\n\n");
-		}
-		if (flags[kFLAGS.CODEX_ENTRY_ALRAUNE] <= 0) {
-			flags[kFLAGS.CODEX_ENTRY_ALRAUNE] = 1;
-			outputText("\n\n<b>New codex entry unlocked: Alraune!</b>");
-		}
-		startCombat(new Alraune());
 	}
 	
 	public function alrauneVolcanicCrag():void {
 		spriteSelect(SpriteDb.s_cinderbloom);
 		clearOutput();
-		if (isHalloween()) {
-			outputText("As you wander the area you come across a rather large pumpkin growing in the crag. You ponder how plants even manage to grow this big to begin with. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the pumpkin as it opens up, revealing a beautiful woman with pale orange skin and light green eyes.\n\n");
-			outputText("\"<i>Boo!!! Trick or treat?! Well you don’t seem very keen on giving me treats so I guess I will have to collect.</i>\"\n\n");
-			outputText("There's no way you will let this thing pull you in!\n\n");
+		if (player.isAlraune()) {
+			AlrauneVSAlraune("crag","cinderbloom");
+		} else {
+			if (isHalloween()) {
+				outputText("As you wander the area you come across a rather large pumpkin growing in the crag. You ponder how plants even manage to grow this big to begin with. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the pumpkin as it opens up, revealing a beautiful woman with pale orange skin and light green eyes.\n\n");
+				outputText("\"<i>Boo!!! Trick or treat?! Well you don’t seem very keen on giving me treats so I guess I will have to collect.</i>\"\n\n");
+				outputText("There's no way you will let this thing pull you in!\n\n");
+			} else {
+				outputText("As you wander the crag you come across a rather large flower growing in the ash. You ponder how plants even manage to grow in this inhospitable landscape. The flower has petals the same color as lava and a pitcher like center. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the flower as it opens up, revealing a beautiful woman with chocolate skin and deep red eyes.\n\n");
+				outputText("\"<i>Mmmmmm such a nice catch... Come closer into my pitcher.</i>\"\n\n");
+				outputText("There's no way you will let this thing pull you in!\n\n");
+			}
+			startCombat(new Cinderbloom());
 		}
-		else {
-			outputText("As you wander the crag you come across a rather large flower growing in the ash. You ponder how plants even manage to grow in this inhospitable landscape. The flower has petals the same color as lava and a pitcher like center. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the flower as it opens up, revealing a beautiful woman with chocolate skin and deep red eyes.\n\n");
-			outputText("\"<i>Mmmmmm such a nice catch... Come closer into my pitcher.</i>\"\n\n");
-			outputText("There's no way you will let this thing pull you in!\n\n");
-		}
-		startCombat(new Cinderbloom());
 	}
 	
 	public function alrauneGlacialRift():void {
 		spriteSelect(SpriteDb.s_snow_lily);
 		clearOutput();
-		if (isHalloween()) {
-			outputText("As you wander the area you come across a rather large pumpkin growing in the rift. You ponder how plants even manage to grow this big to begin with. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the pumpkin as it opens up, revealing a beautiful woman with pale orange skin and light green eyes.\n\n");
-			outputText("\"<i>Boo!!! Trick or treat?! Well you don’t seem very keen on giving me treats so I guess I will have to collect.</i>\"\n\n");
-			outputText("There's no way you will let this thing pull you in!\n\n");
+		if (player.isAlraune()) {
+			AlrauneVSAlraune("rift","snow lily");
+		} else {
+			if (isHalloween()) {
+				outputText("As you wander the area you come across a rather large pumpkin growing in the rift. You ponder how plants even manage to grow this big to begin with. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the pumpkin as it opens up, revealing a beautiful woman with pale orange skin and light green eyes.\n\n");
+				outputText("\"<i>Boo!!! Trick or treat?! Well you don’t seem very keen on giving me treats so I guess I will have to collect.</i>\"\n\n");
+				outputText("There's no way you will let this thing pull you in!\n\n");
+			} else {
+				outputText("As you wander the rift you come across a rather large flower growing in the snow. You ponder how plants even manage to grow in this icy landscape. The flower has petals the same color as the snow and a pitcher like center. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the flower as it opens up, revealing a beautiful woman with sky blue skin and light blue eyes.\n\n");
+				outputText("\"<i>Mmmmmm such a nice catch... Come closer into my pitcher.</i>\"\n\n");
+				outputText("There's no way you will let this thing pull you in!\n\n");
+			}
+			startCombat(new SnowLily());
 		}
-		else {
-			outputText("As you wander the rift you come across a rather large flower growing in the snow. You ponder how plants even manage to grow in this icy landscape. The flower has petals the same color as the snow and a pitcher like center. While you are busy examining it, large vines surge out at you, binding your arms and legs and reeling you toward the flower as it opens up, revealing a beautiful woman with sky blue skin and light blue eyes.\n\n");
-			outputText("\"<i>Mmmmmm such a nice catch... Come closer into my pitcher.</i>\"\n\n");
-			outputText("There's no way you will let this thing pull you in!\n\n");
-		}
-		startCombat(new SnowLily());
 	}
 	
 	public function alrauneDeepwoodsWon():void {
@@ -124,7 +173,7 @@ public class AlrauneScene extends BaseContent
 			outputText("Her stamen bulbs open inside of your cunt and ass and your eyes go wide as you are struck by yet another orgasm. She begins to wildly fuck you, your mouth drooling and your eyes rolling back as you lose the ability to make coherent words. She fills you over and over with her liquid pollen, making your belly swell to the size of a heavily pregnant woman as you buck your hips mindlessly. ");
 			outputText("You barely recall her gently lifting you out of her bath and depositing you to the ground as you lose consciousness.\n\n");
 			outputText("When you wake up you are in a different area with your gear packed up next to you. Seems some thief made off with a small amount of your gems though.\n\n");
-			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
             else player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 			player.sexReward("cum", "Vaginal");
 		}

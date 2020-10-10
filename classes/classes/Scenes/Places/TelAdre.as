@@ -8,6 +8,7 @@ import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.TelAdre.*;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 /**
  * The lovely town of Tel Adre
@@ -36,8 +37,7 @@ import classes.Scenes.SceneLib;
 		public var rubi:Rubi = new Rubi();
 		public var scylla:Scylla = new Scylla();
 		public var sexMachine:SexMachine = new SexMachine();
-		public var umasShop:UmasShop = new UmasShop();		
-		public var vala:ValaScene = new ValaScene();
+		public var umasShop:UmasShop = new UmasShop();
 		
 		public var nails:Number = 0;
 		public var wood:Number = 0;
@@ -45,7 +45,7 @@ import classes.Scenes.SceneLib;
 		
 		public function TelAdre()
 		{
-			
+		
 		}
 
 //const YVONNE_FUCK_COUNTER:int = 437;
@@ -223,7 +223,7 @@ public function telAdreMenuShow():void { //Just displays the normal Tel'Adre men
 private function armorShops():void {
 	clearOutput();
 	outputText("The shopping district of Tel’adre happens to be contained in a large dead end street, with a large set of doors at the entrance to protect it from thieves at night, you’d assume from a higher elevation it would look like a giant square courtyard. Due to the cities shopping area being condensed into one spot, most if not every visible wall has been converted into a store front, in the center of the area are some small stands, guess not everyone can afford a real store.");
-	outputText("\n\nRight off the bat you see the ‘Piercing Studio’, its piercing covered centaur sign is a real eye catcher. You can also spot some kind of wolf-man banging away on an anvil in a blacksmith's stand. As well as other shops lining the walls, perhaps those shops will be interesting as well. One shop named Kaiba cosmetic emporium specialises in magical trinkets and other oddities.");
+	outputText("\n\nRight off the bat you see the ‘Piercing Studio’, its piercing covered centaur sign is a real eye catcher. You can also spot some kind of wolf-man banging away on an anvil in a blacksmith's stand. As well as other shops lining the walls, perhaps those shops will be interesting as well. One shop named Kaiba cosmetic emporium specialises in magical trinkets and other oddities while another named Tripxi Artillery seems to sell firearms.");
 	menu();
 	addButton(0, "Blacksmith", new YvonneArmorShop().enter);
 	addButton(1, "Piercing", new YaraPiercingStudio().piercingStudio);
@@ -231,8 +231,8 @@ private function armorShops():void {
 	addButton(3, "Weapons", new WeaponShop().enter);
 	addButton(4, "Jewelry", new JewelryShop().enter);
 	addButton(5, "Carpenter", carpentryShopEntry);
-	addButton(6, "Kaiba", kaibaShopMainMenu);
-	addButton(7, "Tripxi", tripxiShopMainMenu);
+	addButton(6, "Oddities", kaibaShopMainMenu);
+	addButton(7, "Gunshop", tripxiShopMainMenu);
 	if (flags[kFLAGS.LOPPE_PC_MET_UMA] == 1)
 	{
 		addButton(10, "Clinic", umasShop.enterClinic);
@@ -458,7 +458,7 @@ public function barTelAdre():void {
 		}
 	}
 	if (flags[kFLAGS.KATHERINE_LOCATION] == Katherine.KLOC_BAR) {
-		if (flags[kFLAGS.KATHERINE_UNLOCKED] == 4) { 
+		if (flags[kFLAGS.KATHERINE_UNLOCKED] == 4) {
 			katherine.barFirstEncounter();
 			return;
 		}
@@ -564,7 +564,7 @@ public function barTelAdre():void {
 		}
 	}
 	//VALA
-	if(vala.purifiedFaerieBitchBar()) button = anotherButton(button,"Vala",vala.chooseValaInBar);
+	if(SceneLib.vala.purifiedFaerieBitchBar()) button = anotherButton(button,"Vala",SceneLib.vala.chooseValaInBar);
 
 	addButton(14,"Leave",telAdreMenu);
 }
@@ -591,7 +591,7 @@ public function carpentryShopInside():void {
 	addButton(0, "Buy Nails", carpentryShopBuyNails);
 	addButton(1, "Buy Wood", carpentryShopBuyWood);
 	addButton(2, "Buy Stones", carpentryShopBuyStone);
-	addButton(5, "Sell Nails", carpentryShopSellNails);	
+	addButton(5, "Sell Nails", carpentryShopSellNails);
 	addButton(6, "Sell Wood", carpentryShopSellWood);
 	addButton(7, "Sell Stones", carpentryShopSellStone);
 	addButton(10, "Toolbox", carpentryShopBuySet);
@@ -682,7 +682,7 @@ public function carpentryShopBuyWood():void {
 	addButton(6, "Buy 200", carpentryShopBuyWoodAmount, 200);
 	addButton(7, "Buy 300", carpentryShopBuyWoodAmount, 300);
 	addButton(14, "Back", carpentryShopInside);
-}	
+}
 
 private function carpentryShopBuyWoodAmount(amount:int):void {
 	wood = amount;
@@ -844,7 +844,7 @@ public function carpentryShopSellWood():void {
 	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 300) addButton(7, "Sell 300", carpentryShopSellWoodAmount, 300);
 	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 0) addButton(8, "Sell All", carpentryShopSellWoodAmount, flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES]);
 	addButton(14, "Back", carpentryShopInside);
-}	
+}
 
 private function carpentryShopSellWoodAmount(amount:int):void {
 	wood = amount;
@@ -1078,7 +1078,7 @@ public function kaibaShopMainMenu2():void {
 	addButton(2, "UnDefKingS", buyItem, jewelries.UNDKINS).hint("Undefeated King's Signet - Increase max wrath by 100. When worn on right hand (slot 1 and 3 for rings) would have additional effects: increase max wrath by another 100 (with base bonus it's +200), generate 6/3 wrath per turn/hour, increase multiplied on Power Attack damage by 1.");
 	addButton(3, "W.I.Cloak", buyItem, armors.WIC).hint("Walpurgis Izalia Cloak -  Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
 	//addButton(3, "Necklace", buyItem, necklaces.CSNECK);
-	//addButton(4, "Necklace", buyItem, necklaces.CSNECK);
+	addButton(4, "B.Armor", buyItem, armors.BA).hint("Berzerker Armor -  Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.");
 	addButton(5, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Remove range accuracy penalty when flying and increase range accuracy by 20%.");
 	addButton(6, "R.Ambidexty", buyItem, jewelries.RNGAMBI).hint("Ring of Ambidexty - Remove melee accuracy penalty when flying and increase melee accuracy by 15%.");
 	addButton(7, "CroUndefKing", buyItem, headjewelries.CUNDKIN).hint("Crown of the Undefeated King - You can't loose by HP until reaching droping into negative health larger than 5% of max HP + 500(scalable). When below 0 HP PC wouldn gain additional 1% of max HP per turn regeneration effect.");
@@ -1089,7 +1089,7 @@ public function kaibaShopMainMenu2():void {
 	addButton(10, "UnDefKingDest", buyItem, weapons.UDKDEST).hint("Undefeated King's Destroyer - Massive mace weapon that will increase PC parry chance by 20%. Have 20% base chance for stun (3 rounds).");
     addButton(11, "Soul Drill", buyItem, weapons.SDRILL).hint("Soul Drill - 1H large weapon that can deal more damage the more soulforce is feed to it each turn.");
 	addButton(12, "Hodr's bow", buyItem, weaponsrange.BOWHODR).hint("Hodr's bow - Bow that would apply blindess status or deal increased damage to blinded targets.");
-	addButton(13, "Avelynn", buyItem, weaponsrange.AVELYNN).hint("Avelynn - Crossbow that will shoot two additional belts each time.");
+	addButton(13, "Avelynn", buyItem, weaponsrange.AVELYNN).hint("Avelynn - Crossbow that will shoot two additional bolts each time.");
 	addButton(14, "Leave", telAdreMenu);
 }
 
@@ -1177,7 +1177,7 @@ public function tripxiShopMainMenu():void {
 		}
 	}
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
-		outputText("Tripxi move on from whatever weird experiment she was on to greet you at the counter.\n\n");
+		outputText("As you enter ringing the shop bell Tripxi move on from whatever weird experiment she was on to greet you at the counter.\n\n");
 		outputText("\"<i>Day [name] did you waltz over to buy firearms?</i>\"\n\n");
 	}
 	else {
@@ -1191,7 +1191,7 @@ public function tripxiShopMainMenu():void {
 		flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
 		outputText("<b>New codex entry unlocked: Goblins!</b>")
 	}
-	doNext(tripxiShopMainMenu2a);
+	tripxiShopMainMenu2a();
 }
 
 public function tripxiShopMainMenu2a():void {
@@ -1210,7 +1210,7 @@ public function tripxiShopMainMenu2a():void {
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(7, "???", "Search the Forest.");
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) > 2) addButton(8, weaponsrange.TRFATBI.shortName, buyItemT1, weaponsrange.TRFATBI);
 	else if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) == 2) addButtonDisabled(8, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(8, "???", "Search the Vulcanic Crag.");
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(8, "???", "Search the Volcanic Crag.");
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) > 2) addButton(9, weaponsrange.SNIPPLE.shortName, buyItemT1, weaponsrange.SNIPPLE);
 	else if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) == 2) addButtonDisabled(9, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns4)) addButtonDisabled(9, "???", "Search the Deepwoods.");
@@ -1245,6 +1245,7 @@ public function tripxiShopMainMenu2b():void {
 	//addButton(12, "-2-", tripxiShopMainMenu2c);
 	addButton(14, "Leave", telAdreMenu);
 }
+
 public function tripxiShopMainMenu2c():void {
 	menu();
 	//addButton(0, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
@@ -1258,8 +1259,8 @@ public function tripxiShopMainMenu2c():void {
 
 public function tripxiShopInside():void {
 	clearOutput();
-	outputText("Tripxi move on from whatever weird experiment she was on to greet you at the counter.\n\n");
-	outputText("\"<i>Day [name] did you waltz over to buy firearms?</i>\"\n\n");
+	outputText("Tripxi awaits at the counter giving a glance every now and then at her project at the back of the store, she's likely in a rush to resume working. Despite all this she try and keep the shopkeeper act... at least until you're gone.\n\n");
+	outputText("\"<i>So [name] can I interest you into any of my wares?</i>\"\n\n");
 	tripxiShopMainMenu2a();
 }
 
@@ -1334,7 +1335,19 @@ private function buyItemT3No():void {
 }
 
 private function tripxiShopTalk():void {
+	clearOutput();
 	menu();
+	outputText("You tell the goblin shopkeeper you would like to have a talk with her.\n\n")
+	outputText("\"<i>Just wanted a chat? Well okay fine but make it quick, my time is both researches and gems and I would rather not waste either.</i>\"\n\n");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxi) > 0) addButtonDisabled(5, "Small Selection", "You already talked about this subject.");
+	else addButton(5, "SmallSelection", tripxiShopTalkSmallSelection);
+	addButton(14, "Leave", tripxiShopInside);
+}
+private function tripxiShopTalk2():void {
+	clearOutput();
+	menu();
+	outputText("Tripxi looks semi bored but try and keep the professionnal attitude.\n\n")
+	outputText("\"<i>Well now that this is sorted is there anything else you wanted to talk about?</i>\"\n\n");
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxi) > 0) addButtonDisabled(5, "Small Selection", "You already talked about this subject.");
 	else addButton(5, "SmallSelection", tripxiShopTalkSmallSelection);
 	addButton(14, "Leave", tripxiShopInside);
@@ -1353,7 +1366,7 @@ private function tripxiShopTalkSmallSelection():void {
 	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns5, 0, 0, 0, 0);
 	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns6, 0, 0, 0, 0);
 	player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
-	doNext(tripxiShopTalk)
+	doNext(tripxiShopTalk2)
 }
 
 //[Invetigate]
@@ -1505,8 +1518,10 @@ private function weightLifting():void {
 	//(else)
 	else outputText("This place barely has anything left to challenge you, but you take the heaviest weights you can get your mitts on and get to it.  By the time an hour has passed, you've worked up a good sweat, but without heavier weights you probably won't get any stronger.");
 	//Stat changes HERE!
-	if(player.str < 90) dynStats("str", .5);
-	if(player.tou < 40) dynStats("tou", .3);
+	dynStats("str", 5);
+	player.trainStat("str",1,75);
+	dynStats("tou", 5);
+	player.trainStat("tou",1,75);
 	//Body changes here
 	//Muscleness boost!
 	outputText(player.modTone(85,5+rand(5)));
@@ -1556,8 +1571,10 @@ private function goJogging():void {
 	//else)
 	else outputText("and it barely challenges you.  You run at a sprint half the time and still don't feel like you're improving in the slightest.  Still, you do manage to burn a lot of calories.");
 	//Stat changes HERE!
-	if(player.spe < 40) dynStats("spe", .3);
-	if(player.tou < 90) dynStats("tou", .5);
+	dynStats("spe", 5);
+	player.trainStat("spe",1,75);
+	dynStats("tou", 5);
+	player.trainStat("tou",1,75);
 
 	//If butt is over 15 guaranteed reduction
 	if(player.butt.type >= 15) {
@@ -1610,9 +1627,10 @@ private function goJogging():void {
 	}
 	else doYesNo(sexMachine.exploreShowers, camp.returnToCampUseOneHour);
 }
-		
+
 public function meetingLunaFirstTime():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_luna_maid);
 	outputText("As you wander the streets of Tel'Adre, you see a woman being brutally thrown out of a house along with her belongings. The crowd seems to be ignoring her.  Curious, you walk up to her just in time to see her start to cry. She wears what looks like a formal maid dress. Under her white bonnet, the maid sports short, ashen hair. You decide to break the ice and ask her what's going on. By all means she looks human, which is a surprise to you.\n\n");
 	outputText("\"<i>Why, this is terrible... I’m masterless, and out of a job! What am I going to do?</i>\"\n\n");
 	outputText("What did she do to be fired to begin with?\n\n");

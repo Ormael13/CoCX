@@ -126,6 +126,7 @@ public function salonPurchaseMenu():void {
 	addButton(7, "Beard Options", beardMenu);
 	if (mudFacialEnabled) addButton(8, "Mud Facial", mudFacial).hint("This facial is supposed to enhance the softness of your face and enhance its femininity greatly.");
 	if (sandFacialEnabled) addButton(9, "Sand Facial", sandFacial).hint("The goblins promise this facial will give you a rough, handsome look thanks to their special, timeless sands.");
+	if (player.hairLength > 2 && (player.hairType != Hair.ANEMONE || player.hairType != Hair.GORGON || player.hairType != Hair.GOO || player.hairType != Hair.FLUFFY)) addButton(10, "Haircut", changeHairStyle);
 	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }
 
@@ -512,7 +513,27 @@ private function chooseBeardStyleFinalize(choiceStyle:int = 0):void {
 	outputText("After a while, you now have " + player.beardDescript() + "!");
 	doNext(camp.returnToCampUseOneHour);
 }
+	private function changeHairStyle():void {
+		clearOutput();
+		outputText("What hair style would you like?");
+		menu();
+		addButton(0, "Normal", chooseHairStyleFinalize, 0);
+		addButton(1, "Wild", chooseHairStyleFinalize, 1);
+		addButton(2, "Ponytail", chooseHairStyleFinalize, 2);
+		addButton(3, "G.Ponytail", chooseHairStyleFinalize, 3);
+		addButton(4, "TwinPigtail", chooseHairStyleFinalize, 4);
+		addButton(5, "Dwarven", chooseHairStyleFinalize, 5);
+		addButton(6, "Back", salonPurchaseMenu);
+	}
 
+	private function chooseHairStyleFinalize(choiceStyle:int = 0):void {
+		clearOutput();
+		outputText("You tell Lynnette that you'd like to have your hair style changed to what you've indicated.\n\n");
+		outputText("Lynnette and her daughters begin to mess with your hair with razor-sharp scissors and white fluid while they work to change your beard into what you've wanted.\n\n");
+		player.hairStyle = choiceStyle;
+		outputText("After a while, you now have " + player.hairStyleDescript() + "!");
+		doNext(camp.returnToCampUseOneHour);
+	}
 private function removeBeard():void {
 	clearOutput();
 	outputText("You tell Lynnette that you'd like to have your beard removed.\n\n");
@@ -585,7 +606,7 @@ private function minotaurCumBukkakeInSalon():void {
 	outputText(".\n\n");
 	//ADD PREG CHECK
 	//Preggers chance!
-	if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
     else player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR, 70);
 
 	outputText("Giggling, you stagger over to the next cock in line and turn around, possessed with the idea of taking its spooge in the most direct way possible – anally.   You pull your butt-cheeks apart and lean back, surprising one of the horny beasts with the warmth of your " + assholeDescript() + " as you slowly relax, spreading over his flare.  He actually squirts ropes of something inside of you, but you've been around minotaurs enough to know that it can't be cum, at least not yet.  The slippery gouts of preseed make it nice and easy to rock back and spear yourself on the first few inches, ");
@@ -606,8 +627,7 @@ private function minotaurCumBukkakeInSalon():void {
 	//[NEXT]
 	player.orgasm();
 	dynStats("lib", 2, "sen", 2, "cor", 2);
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+	player.sexReward("cum");
 	doNext(minotaurSalonFollowUp);
 }
 private function minotaurSalonFollowUp():void {

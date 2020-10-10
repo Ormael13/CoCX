@@ -59,14 +59,7 @@ public class BimboLiqueur extends Consumable {
 				game.player.removePerk(PerkLib.BroBrains);
 				game.player.createPerk(PerkLib.FutaFaculties, 0, 0, 0, 0);
 				game.player.createPerk(PerkLib.FutaForm, 0, 0, 0, 0);
-				if (game.player.inte > 35) {
-					game.player.inte = 35;
-					game.player.dynStats("int", -0.1);
-				}
-				if (game.player.lib < 50) {
-					game.player.lib = 50;
-					game.player.dynStats("lib", .1);
-				}
+				player.MutagenBonus("lib", 0.1);
 			}
 			else {
 				outputText("You pop the cork from the flask and are immediately assaulted by a cloying, spiced scent that paints visions of a slutty slave-girl's slightly-spread folds.  Wow, this is some potent stuff!  Well, you knew what you were getting into when you found this bottle!  You open wide and guzzle it down, feeling the fire of alcohol burning a path to your belly.  The burning quickly fades to a pleasant warmth that makes you light-headed and giggly.\n\n");
@@ -132,7 +125,6 @@ public class BimboLiqueur extends Consumable {
 					game.player.breastRows[0].breastRating += 5 + Utils.rand(5);
 					outputText(", admiring how sensitive they're getting.  The big breasts start getting bigger and bigger, soft chest-flesh practically oozing out between your fingers as the squishy mammaries sprout like weeds, expanding well beyond any hand's ability to contain them.  The supple, " + game.player.breastCup(0) + " boobs still manage to sit high on your chest, almost gravity defying in their ability to generate cleavage.  You pinch a nipple with one hand ");
 				}
-				game.player.dynStats("sen", 20);
 				outputText("while the other toys with the juicy entrance of your folds.  Mmmm, it, like, feels too good not to touch yourself, and after being worried about getting all dumb and stuff, you need to relax.  Thinking is hard, but sex is so easy and, like, natural!  You lean back and start grunting as you plunge four fingers inside yourself, plowing your " + game.player.vaginaDescript(0) + " like no tomorrow.  By now, your " + game.player.clitDescript() + " is throbbing, and you give it an experimental ");
 				if (game.player.clitLength >= 3) outputText("jerk ");
 				else outputText("caress ");
@@ -176,13 +168,10 @@ public class BimboLiqueur extends Consumable {
 				if (game.player.findPerk(PerkLib.BimboBrains) < 0) {
 					outputText("<b>(Bimbo Brains - Perk Gained!)</b>\n");//int to 20.  max int 50)
 					game.player.createPerk(PerkLib.BimboBrains, 0, 0, 0, 0);
-					if (game.player.inte > 21) {
-						var boost:Number = game.player.inte / 5;
-						game.player.inte = 21 + boost;
-					}
 				}
 				game.player.orgasm();
-				game.player.dynStats("int", -1, "lib", 5, "sen", 25);
+				game.player.dynStats("int", -1);
+				player.MutagenBonus("lib", 5);
 				if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= mutations.DrunkenPowerEmpowerOni()) mutations.DrunkenPowerEmpower();
 				//FULL ON BITCHFACE
 				game.player.modFem(100, 100);
@@ -193,7 +182,7 @@ public class BimboLiqueur extends Consumable {
 				//Brain
 				//Max int - 50
 			}
-			return(false);
+			return false;
 		}
 	}
 }

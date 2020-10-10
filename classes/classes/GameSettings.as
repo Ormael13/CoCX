@@ -48,15 +48,6 @@ public class GameSettings extends BaseContent {
 
 		if (flags[kFLAGS.HARDCORE_MODE] > 0) outputText("<font color=\"#ff0000\">Hardcore mode is enabled. Cheats are disabled.</font>\n\n");
 
-		switch (flags[kFLAGS.STAT_GAIN_MODE]) {
-			case CoC.STAT_GAIN_DAILY:
-				outputText("Stat Pts Gain: <font color=\"#000080\"><b>DAILY</b></font>\n No stat points on new level, + (level) stat points per day, don't accumulate\n\n");
-				break;
-			case CoC.STAT_GAIN_CLASSIC:
-				outputText("Stat Pts Gain: <font color=\"#000000\"><b>CLASSIC</b></font>\n +5 stat points on new level\n\n");
-				break;
-		}
-
 		if (debug)
 			outputText("Debug Mode: <font color=\"#008000\"><b>ON</b></font>\n Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.");
 		else
@@ -228,7 +219,6 @@ public class GameSettings extends BaseContent {
 
 		addButton(5, "SFW Toggle", toggleSFW).hint("Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes."); //Softcore Mode
 		addButton(6, "Auto level", toggleAutoLevel).hint("Toggles automatic leveling when you accumulate sufficient experience.");
-		addButton(7, "Stat Pts", toggleStatGain).hint("Toggles stat gain mode");
 		if (player) addButton(8, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
 		if (player) addButton(9, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
 		
@@ -438,12 +428,6 @@ public class GameSettings extends BaseContent {
 	public function toggleAutoLevel():void {
 		if (flags[kFLAGS.AUTO_LEVEL] < 1) flags[kFLAGS.AUTO_LEVEL] = 1;
 		else flags[kFLAGS.AUTO_LEVEL] = 0;
-		settingsScreenGameSettings();
-	}
-
-	public function toggleStatGain():void {
-		if (flags[kFLAGS.STAT_GAIN_MODE] == CoC.STAT_GAIN_CLASSIC) flags[kFLAGS.STAT_GAIN_MODE] = CoC.STAT_GAIN_DAILY;
-		else flags[kFLAGS.STAT_GAIN_MODE] = CoC.STAT_GAIN_CLASSIC;
 		settingsScreenGameSettings();
 	}
 

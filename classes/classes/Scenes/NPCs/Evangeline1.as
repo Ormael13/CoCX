@@ -222,9 +222,7 @@ public class Evangeline1 extends Monster
 		public function MightSpell():void {
 			outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
 			outputText("The rush of success and power flows through her body.  <b>She looks like she can do anything!</b>");
-			createStatusEffect(StatusEffects.Might, 50, 0, 0, 0);
-			this.str += (5 + (inte / 10)) * SpellMod();
-			this.tou += (5 + (inte / 10)) * SpellMod();
+			this.statStore.addBuffObject({ 'str': +(5 + (inte / 10)) * SpellMod(), 'tou': -(5 + (inte / 10)) * SpellMod()}, "EvangelineMight",{})
 			fatigue += spellCostMight();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}
@@ -233,7 +231,7 @@ public class Evangeline1 extends Monster
 			outputText("She flushes, drawing on her body's desires to empower her muscles and hasten her up.");
 			outputText("The rush of success and power flows through her body.  <b>She looks like she can move faster!</b>");
 			createStatusEffect(StatusEffects.Blink, 50, 0, 0, 0);
-			this.spe += (5 + (inte / 10)) * 1.2 * SpellMod();
+			this.speStat.core.value += (5 + (inte / 10)) * 1.2 * SpellMod();
 			fatigue += spellCostBlink();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}
@@ -247,7 +245,7 @@ public class Evangeline1 extends Monster
 					if (this.lust > 50) {
 						if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeWeapon)) ChargeWeaponSpell();
 						else if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeArmor)) ChargeArmorSpell();
-						else if (!hasStatusEffect(StatusEffects.Might) && (fatigue < (maxFatigue() - spellCostMight()))) MightSpell();
+						else if (!statStore.hasBuff("EvangelineMight") && (fatigue < (maxFatigue() - spellCostMight()))) MightSpell();
 						else if (!hasStatusEffect(StatusEffects.Blink) && (fatigue < (maxFatigue() - spellCostBlink()))) BlinkSpell();
 						else if (HPRatio() < .75 && (fatigue < (maxFatigue() - spellCostHeal()))) HealSpell();
 						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (fatigue < (maxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
@@ -270,7 +268,7 @@ public class Evangeline1 extends Monster
 				if (choice3 == 1) {
 					if (this.lust > 50) {
 						if ((this.lust < maxLust() * 0.75) && !hasStatusEffect(StatusEffects.ChargeWeapon)) ChargeWeaponSpell();
-						else if (!hasStatusEffect(StatusEffects.Might) && (fatigue < (maxFatigue() - spellCostMight()))) MightSpell();
+						else if (!statStore.hasBuff("EvangelineMight") && (fatigue < (maxFatigue() - spellCostMight()))) MightSpell();
 						else if (HPRatio() < .75 && (fatigue < (maxFatigue() - spellCostHeal()))) HealSpell();
 						else if ((this.lust < maxLust() * 0.75) && rand(2) == 0 && (fatigue < (maxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
 						else if (rand(2) == 0 && (fatigue < (maxFatigue() - spellCostArouse()))) ArouseSpell();
@@ -451,7 +449,7 @@ public class Evangeline1 extends Monster
 			this.fatigue = 0;
 			this.gems = 0;
 			this.drop = NO_DROP;
-			this.lib += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.libStat.core.value += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
 			checkMonster();
 		}

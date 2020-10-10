@@ -109,12 +109,14 @@ public class PhoukaWhiskey extends Consumable {
 				player.addStatusValue(StatusEffects.PhoukaWhiskeyAffect, 3, 256 * libidoChange + sensChange);
 				player.addStatusValue(StatusEffects.PhoukaWhiskeyAffect, 4, 256 * speedChange + intChange);
 				outputText("\n\nOh, it tastes so good.  This stuff just slides down your throat.");
-				game.player.dynStats("lib", libidoChange, "sens", -sensChange, "spe", -speedChange, "int", -intChange);
+				game.player.dynStats("sens", -sensChange, "spe", -speedChange, "int", -intChange);
+				player.MutagenBonus("lib", libidoChange);
 			}
 			else { //First time
 				player.createStatusEffect(StatusEffects.PhoukaWhiskeyAffect, 8, 1, 256 * libidoChange + sensChange, 256 * speedChange + intChange);
 					//The four stats we’re affecting get paired together to save space. This way we don’t need a second StatusEffect to store more info.
-				game.player.dynStats("lib", libidoChange, "sens", -sensChange, "spe", -speedChange, "int", -intChange);
+				game.player.dynStats("sens", -sensChange, "spe", -speedChange, "int", -intChange);
+				player.MutagenBonus("lib", libidoChange);
 			}
 			EngineCore.statScreenRefresh();
         }
@@ -129,7 +131,7 @@ public class PhoukaWhiskey extends Consumable {
 			var libidoChange:int = (libidoSensCombined - sensChange) / 256;
 			var intChange:int = intSpeedCombined & 255;
 			var speedChange:int = (intSpeedCombined - intChange) / 256;
-			game.player.dynStats("lib", -libidoChange , "sens", sensChange, "spe", speedChange, "int", intChange); //Get back all the stats you lost
+			player.dynStats("lib", -libidoChange , "sens", sensChange, "spe", speedChange, "int", intChange); //Get back all the stats you lost
 			player.removeStatusEffect(StatusEffects.PhoukaWhiskeyAffect);
 			if (numDrunk > 3)
 				outputText("\n<b>The dizzy sensation dies away and is replaced by a throbbing pain that starts in your skull and then seems to run all through your body, seizing up your joints and making your stomach turn.  The world feels like it’s off kilter and you aren’t in any shape to face it.  You suppose you could down another whiskey, but right now that doesn’t seem like such a good idea.</b>\n");

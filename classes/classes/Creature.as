@@ -24,6 +24,12 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.JewelryLib;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Stats.Buff;
+import classes.Stats.BuffBuilder;
+import classes.Stats.BuffableStat;
+import classes.Stats.PrimaryStat;
+import classes.Stats.RawStat;
+import classes.Stats.StatStore;
 import classes.StatusEffects.Combat.CombatInteBuff;
 import classes.StatusEffects.Combat.CombatSpeBuff;
 import classes.StatusEffects.Combat.CombatStrBuff;
@@ -257,15 +263,106 @@ public class Creature extends Utils
 		   [   S T A T S   ]
 		
 		 */
+		private var _stats: StatStore = new StatStore({
+			// 'statName': new BuffableStats({base: 0, min: 0});
+			// 'statName': new PrimaryStat();
+			'str': new PrimaryStat(),
+			'tou': new PrimaryStat(),
+			'spe': new PrimaryStat(),
+			'int': new PrimaryStat(),
+			'wis': new PrimaryStat(),
+			'lib': new PrimaryStat(),
+			'sens': new BuffableStat({base: 15, min: 0})
+		});
+		public function get statStore():StatStore { return _stats; }
 		
+		public function buff(tag:String):BuffBuilder {
+			return new BuffBuilder(statStore, tag);
+		}
+
+		//new stat area
+		public var strStat:PrimaryStat = _stats.findStat('str') as PrimaryStat;
+		public function get str():Number { return strStat.value; }
+		public var touStat:PrimaryStat = _stats.findStat('tou') as PrimaryStat;
+		public function get tou():Number {if (this.hasPerk(PerkLib.IcyFlesh) || this.hasPerk(PerkLib.HaltedVitals)) {
+			return 1;
+		} else {
+			return touStat.value;
+		}
+		}
+
+		public var speStat:PrimaryStat = _stats.findStat('spe') as PrimaryStat;
+		public function get spe():Number { return speStat.value; }
+		public var intStat:PrimaryStat = _stats.findStat('int') as PrimaryStat;
+		public function get inte():Number { return intStat.value; }
+		public var wisStat:PrimaryStat = _stats.findStat('wis') as PrimaryStat;
+		public function get wis():Number { return Math.round(wisStat.value); }
+		public var libStat:PrimaryStat = _stats.findStat('lib') as PrimaryStat;
+		public function get lib():Number { return Math.round(libStat.value); }
+
+		public function trainStat(statName: String, amount: Number, limit: Number){
+			var stat:PrimaryStat = statStore.findStat(statName) as PrimaryStat;
+			if (stat.core.value < limit){
+				stat.core.value += amount;
+				if (stat.core.value > limit){
+					stat.core.value = limit;
+				} else{
+					CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+					CoC.instance.mainView.statsView.showStatUp(statName);
+				}
+			}
+		}
+
+		public function addCurse(statName:String, power:Number):void {
+
+			if (statName == "sens" || statName == "cor") {
+				statStore.addBuff(statName, power, 'Curse', {text: 'Curse'});
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatUp(statName);
+			} else {
+				statStore.addBuff(statName, -power, 'Curse', {text: 'Curse'});
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatDown(statName);
+			}
+		}
+		public function removeCurse(statName:String, power:Number):void {
+			var stat:BuffableStat = statStore.findBuffableStat(statName);
+			if (!stat) {
+				// Error? No stat with such name
+				throw new Error("No such stat "+statName);
+			}
+			var current:Number = stat.valueOfBuff('Curse');
+			if (statName == "sens" || statName == "cor") {
+				if (current >0){
+					if (power >= current) {
+						stat.removeBuff('Curse');
+						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+						CoC.instance.mainView.statsView.showStatDown(statName);
+					} else if (power < current) {
+						stat.addOrIncreaseBuff('Curse', -power);
+						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+						CoC.instance.mainView.statsView.showStatUp(statName);
+					}
+				}
+			}
+			else {
+				if (current < 0) {
+					if (power >= -current) {
+						stat.removeBuff('Curse');
+						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+						CoC.instance.mainView.statsView.showStatUp(statName);
+					} else if (power < -current) {
+						stat.addOrIncreaseBuff('Curse', power);
+						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+						CoC.instance.mainView.statsView.showStatDown(statName);
+					}
+				}
+			}
+		}
+
 		//Primary stats
-		public var str:Number = 0;
-		public var tou:Number = 0;
-		public var spe:Number = 0;
-		public var inte:Number = 0;
-		public var wis:Number = 0;
-		public var lib:Number = 0;
-		public var sens:Number = 0;
+		public var sensStat:BuffableStat = _stats.findStat('sens') as BuffableStat;
+		public function get sens():Number { return sensStat.value; }
 		public var cor:Number = 0;
 		public var fatigue:Number = 0;
 		public var mana:Number = 0;
@@ -281,14 +378,14 @@ public class Creature extends Utils
 		public var level:Number = 0;
 		public var gems:Number = 0;
 		public var additionalXP:Number = 0;
-		
-		public function get str100():Number { return 100*str/getMaxStats('str'); }
-		public function get tou100():Number { return 100*tou/getMaxStats('tou'); }
-		public function get spe100():Number { return 100*spe/getMaxStats('spe'); }
-		public function get inte100():Number { return 100*inte/getMaxStats('inte'); }
-		public function get wis100():Number { return 100*wis/getMaxStats('wis'); }
-		public function get lib100():Number { return 100*lib/getMaxStats('lib'); }
-		public function get sens100():Number { return 100*sens/getMaxStats('sens'); }
+
+		public function get str100():Number { return 100*str/strStat.max; }
+		public function get tou100():Number { return 100*tou/touStat.max; }
+		public function get spe100():Number { return 100*spe/speStat.max; }
+		public function get inte100():Number { return 100*inte/intStat.max; }
+		public function get wis100():Number { return 100*wis/wisStat.max; }
+		public function get lib100():Number { return 100*lib/libStat.max; }
+		public function get sens100():Number { return 100*sens/sensStat.max; }
 		public function get fatigue100():Number { return 100*fatigue/maxFatigue(); }
 		public function get hp100():Number { return 100*HP/maxHP(); }
 		public function get wrath100():Number { return 100*wrath/maxWrath(); }
@@ -671,32 +768,9 @@ public class Creature extends Utils
 		public function maxMana():Number {
 			return 0;
 		}
-		public function getMaxStats(stats:String):int {
-			var obj:Object = getAllMaxStats();
-			if (stats == "str" || stats == "strength") return obj.str;
-			else if (stats == "tou" || stats == "toughness") return obj.tou;
-			else if (stats == "spe" || stats == "speed") return obj.spe;
-			else if (stats == "inte" || stats == "int" || stats == "intelligence") return obj.inte;
-			else if (stats == "wis" || stats == "wisdom") return obj.wis;
-			else if (stats == "lib" || stats == "libido") return obj.lib;
-			else if (stats == "sens" || stats == "sen" || stats == "sensitivity") return obj.sen;
-			else return 100;
-		}
 		/**
 		 * @return keys: str, tou, spe, inte, wis, lib, sens, cor
 		 */
-		public function getAllMaxStats():Object {
-			return {
-				str:100,
-				tou:100,
-				spe:100,
-				inte:100,
-				wis:100,
-				lib:100,
-				sens:100,
-				cor:100
-			};
-		}
 		public function getAllMinStats():Object {
 			return {
 				str:1,
@@ -704,7 +778,7 @@ public class Creature extends Utils
 				spe:1,
 				inte:1,
 				wis:1,
-				lib:10,
+				lib:1,
 				sens:10,
 				cor:0
 			};
@@ -747,36 +821,65 @@ public class Creature extends Utils
 				cor:cor-prevCor
 			};
 		}
-		public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {
+		public function modStats(dstr:Number, dtou:Number, dspe:Number, dint:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {
 			var maxes:Object;
-			if (max) {
-				maxes = getAllMaxStats();
-				maxes.lust = maxLust();
-			} else {
-				maxes = {
-					str:Infinity,
-					tou:Infinity,
-					spe:Infinity,
-					inte:Infinity,
-					wis:Infinity,
-					lib:Infinity,
-					sens:Infinity,
-					cor:Infinity,
-					lust:Infinity
-				}
-			}
+			//if (max) {
+			//	maxes.lust = maxLust();
+			//}
 			var mins:Object = getAllMinStats();
 			mins.lust = minLust();
 			var oldHPratio:Number = hp100/100;
-			str  = Utils.boundFloat(mins.str, str + dstr, maxes.str);
-			tou  = Utils.boundFloat(mins.tou, tou + dtou, maxes.tou);
-			spe  = Utils.boundFloat(mins.spe, spe + dspe, maxes.spe);
-			inte = Utils.boundFloat(mins.inte, inte + dinte, maxes.inte);
-			wis  = Utils.boundFloat(mins.wis, wis + dwis, maxes.wis);
-			lib  = Utils.boundFloat(mins.lib, lib + dlib, maxes.lib);
-			sens = Utils.boundFloat(mins.sens, sens + dsens, maxes.sens);
-			lust = Utils.boundFloat(mins.lust, lust + dlust, maxes.lust);
-			cor  = Utils.boundFloat(mins.cor, cor + dcor, maxes.cor);
+			//Strenght
+			if (dstr < 0){
+				addCurse("str", -dstr);
+			}
+			if (dstr > 0){
+				removeCurse("str", dstr);
+			}
+			//tougness
+			if (dtou < 0){
+				addCurse("tou", -dtou);
+			}
+			if (dtou > 0){
+				removeCurse("tou", dtou);
+			}
+			//Speed
+			if (dspe < 0){
+				addCurse("spe", -dspe);
+			}
+			if (dspe > 0){
+				removeCurse("spe", dspe);
+			}
+			//Inteligence
+			if (dint < 0){
+				addCurse("int", -dint);
+			}
+			if (dint > 0){
+				removeCurse("int", dint);
+			}
+			//Wisdom
+			if (dwis < 0){
+				addCurse("wis", -dwis);
+			}
+			if (dwis > 0){
+				removeCurse("wis", dwis);
+			}
+			//Libido
+			if (dlib < 0){
+				addCurse("wis", -dlib);
+			}
+			if (dlib > 0){
+				removeCurse("wis", dlib);
+			}
+			//Sensitivity
+			if (dsens > 0){
+				addCurse("sens", dsens);
+			}
+			if (dsens < 0){
+				removeCurse("sens", -dsens);
+			}
+			lust = Utils.boundFloat(mins.lust, lust + dlust, maxLust());
+			cor  = Utils.boundFloat(mins.cor, cor + dcor, 100);
 			
 			// old_hp / old_max = new_hp / new_max
 			HP = oldHPratio * maxHP();
@@ -858,6 +961,7 @@ public class Creature extends Utils
 		3- goo!
 		4- anemononeoenoeneo!*/
 		public var hairType:Number = Hair.NORMAL;
+		public var hairStyle:Number = Hair.NORMAL;
 		private var _hairColor:String = "no";
 		public var hairLength:Number = 0;
 		public function get hairColor():String {
@@ -876,6 +980,9 @@ public class Creature extends Utils
 			if (!skin.hasCoat()) return hairColor;
 			return skin.coat.color;
 		}
+		public function get NakedCoatColor():String {
+			return skin.coat.color;
+		}
 		public function set coatColor(value:String):void {
 			if (!skin.hasCoat()) trace("[WARNING] set coatColor() called with no coat");
 			skin.coat.color = value;
@@ -883,7 +990,7 @@ public class Creature extends Utils
 
 		public var beardStyle:Number = Beard.NORMAL;
 		public var beardLength:Number = 0;
-				
+		
 		public var skin:Skin;
 		public function get skinType():Number { return skin.type; }
 	//	[Deprecated]
@@ -990,7 +1097,7 @@ public class Creature extends Utils
 		
 		public var rearBody:RearBody = new RearBody();
 
-		//Sexual Stuff		
+		//Sexual Stuff
 		//MALE STUFF
 		//public var cocks:Array;
 		//TODO: Tuck away into Male genital class?
@@ -1053,6 +1160,12 @@ public class Creature extends Utils
 			breastRows    = [];
 			_perks        = [];
 			statusEffects = [];
+			this.strStat.core.value = 15;
+			this.touStat.core.value = 15;
+			this.speStat.core.value = 15;
+			this.intStat.core.value = 15;
+			this.wisStat.core.value = 15;
+			this.libStat.core.value = 15;
 			//keyItems = new Array();
 		}
 
@@ -1262,7 +1375,10 @@ public class Creature extends Utils
 				perks.push(newKeyItem);
 				keySlot = perks.length - 1;
 			}
-			
+			if (ptype.buffs != null)
+			{
+				statStore.addBuffObject(ptype.buffs, "perk_"+ptype.id, {text:ptype.name, save:false});
+			}
 			perk(keySlot).value1 = value1;
 			perk(keySlot).value2 = value2;
 			perk(keySlot).value3 = value3;
@@ -1293,6 +1409,10 @@ public class Creature extends Utils
 				{
 					perks.splice(counter, 1);
 					//trace("Attempted to remove \"" + perkName + "\" perk.");
+					if (ptype.buffs != null)
+					{
+						statStore.removeBuffs("perk_"+ptype.id);
+					}
 					return true;
 				}
 			}
@@ -2841,14 +2961,7 @@ public class Creature extends Utils
 				bonusSpe += 20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			}
 			if (game.player.necklaceName == "Magic coral and pearl necklace") bonusSpe += 10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-			if (bonusStr > 0) {
-				addStatusValue(StatusEffects.UnderwaterCombatBoost, 1, bonusStr);
-				game.player.str += bonusStr;
-			}
-			if (bonusSpe > 0) {
-				addStatusValue(StatusEffects.UnderwaterCombatBoost,2,bonusSpe);
-				game.player.spe += bonusSpe;
-			}
+			game.player.buff("UnderwaterCombatBoost").addStats({str:bonusStr,spe:bonusSpe}).withText("Fighting Underwater").combatPermanent();
 			HP = oldHPratio * maxHP();
 		}
 
@@ -2889,9 +3002,9 @@ public class Creature extends Utils
 		//Unique sex scenes
 		public function pcCanUseUniqueSexScene():Boolean
 		{
-			if ((game.player.tailType == Tail.MANTICORE_PUSSYTAIL && game.monster.hasCock()) || (game.player.lowerBody == LowerBody.PLANT_FLOWER && game.monster.hasCock()) || (game.player.lowerBody == LowerBody.PLANT_FLOWER && game.monster.hasVagina()) || game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.SALAMANDER || 
-			((game.player.gender == 1 || game.player.gender == 2) && (game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.MOUSE || game.player.tailType == Tail.DEMONIC)) || (game.player.isInGoblinMech() && game.player.hasKeyItem("Cum Reservoir") >= 0 && game.monster.hasCock()) || 
-			(game.player.raijuScore() >= 10 && !game.monster.hasPerk(PerkLib.EnemyGigantType) && !game.monster.isAlraune() && !game.monster.isDrider() && !game.monster.isGoo() && !game.monster.isNaga() && !game.monster.isScylla() && !game.monster.isTaur()) || 
+			if ((game.player.tailType == Tail.MANTICORE_PUSSYTAIL && game.monster.hasCock()) || (game.player.isAlraune() && game.monster.hasCock()) || (game.player.isAlraune() && game.monster.hasVagina()) || game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.SALAMANDER ||
+			((game.player.gender == 1 || game.player.gender == 2) && (game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.MOUSE || game.player.tailType == Tail.DEMONIC)) || (game.player.isInGoblinMech() && game.player.hasKeyItem("Cum Reservoir") >= 0 && game.monster.hasCock()) ||
+			(game.player.raijuScore() >= 10 && !game.monster.hasPerk(PerkLib.EnemyGigantType) && !game.monster.isAlraune() && !game.monster.isDrider() && !game.monster.isGoo() && !game.monster.isNaga() && !game.monster.isScylla() && !game.monster.isTaur()) ||
 			(game.player.yukiOnnaScore() >= 14 && game.monster.hasCock() && !game.monster.hasPerk(PerkLib.UniqueNPC) && !game.monster.hasPerk(PerkLib.EnemyGigantType) && !game.monster.isAlraune() && !game.monster.isDrider() && !game.monster.isGoo() && !game.monster.isNaga() && !game.monster.isScylla() && !game.monster.isTaur()))
 				return true;
 			return false;
@@ -3359,6 +3472,7 @@ public class Creature extends Utils
 		public function isScylla():Boolean { return lowerBodyPart.isScylla(); }
 		public function isKraken():Boolean { return lowerBodyPart.isKraken(); }
 		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
+		public function isLiliraune():Boolean { return lowerBodyPart.isLiliraune(); }
 		
 		public function isFlying():Boolean {
 			return hasStatusEffect(StatusEffects.Flying);
@@ -3942,6 +4056,11 @@ public class Creature extends Utils
 		{
 			return Appearance.beardDescription(this);
 		}
+
+		public function hairStyleDescript():String
+		{
+			return Appearance.beardDescription(this);
+		}
 		
 		public function hipDescript():String
 		{
@@ -4056,7 +4175,7 @@ public class Creature extends Utils
 				if (findPerk(PerkLib.ElvishPeripheralNervSysFinalForm) >= 0) chance += 15;
 			}
 			if (findPerk(PerkLib.Flexibility) >= 0) chance += 6;
-			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit") chance += 10;
+			if (findPerk(PerkLib.Misdirection) >= 0 && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia")) chance += 10;
 			//if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq()) chance += 10;
 			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "nothing")) chance += 10;
 			if (game.player.armor == game.armors.R_CHANG || game.player.armor == game.armors.R_QIPAO || game.player.armor == game.armors.G_CHANG || game.player.armor == game.armors.G_QIPAO || game.player.armor == game.armors.B_CHANG || game.player.armor == game.armors.B_QIPAO || game.player.armor == game.armors.P_CHANG || game.player.armor == game.armors.P_QIPAO) chance += 5;
@@ -4078,6 +4197,7 @@ public class Creature extends Utils
 				if (hasStatusEffect(StatusEffects.Displacement)) chance += 80;
 				else chance += 30;
 			}
+			if (hasStatusEffect(StatusEffects.Displacement)) chance += 60;
 			if (hasStatusEffect(StatusEffects.Flying)) chance += flychance;
 			return chance;
 		}
@@ -4125,7 +4245,7 @@ public class Creature extends Utils
 			// perks
 			if ((findPerk(PerkLib.Evade) >= 0 || findPerk(PerkLib.ElvenSense) >= 0 || ((game.player.hasKeyItem("Nitro Boots") >= 0 || game.player.hasKeyItem("Rocket Boots") >= 0 || game.player.hasKeyItem("Spring Boots") >= 0) && game.player.tallness < 48 && game.player.isBiped())) && (roll < generalevasion)) return "Evade";
 			if (findPerk(PerkLib.Flexibility) >= 0 && (roll < 6)) return "Flexibility";
-			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit" && (roll < 10)) return "Misdirection";
+			if (findPerk(PerkLib.Misdirection) >= 0 && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia") && (roll < 10)) return "Misdirection";
 			//if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq() && (roll < 10)) return "Unhindered";
 			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "nothing") && (roll < 10)) return "Unhindered";
 			if (findPerk(PerkLib.JunglesWanderer) >= 0 && (roll < 35)) return "Jungle's Wanderer";

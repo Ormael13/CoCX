@@ -7,6 +7,7 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.Stats.Buff;
 import classes.internals.*;
 
 public class Kitsune extends Monster
@@ -88,7 +89,7 @@ public class Kitsune extends Monster
 			}
 			else {
 				createStatusEffect(StatusEffects.Illusion, 0, 0, 0, 0);
-				spe += 20;
+				statStore.addBuff("spe",20,"KitsuneIllusion",{rate:Buff.RATE_ROUNDS,ticks:5});
 			}
 		}
 

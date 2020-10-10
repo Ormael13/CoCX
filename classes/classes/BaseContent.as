@@ -1,5 +1,4 @@
-﻿package classes 
-{
+﻿package classes {
 import classes.CoC;
 import classes.Items.*;
 import classes.Scenes.Camp;
@@ -11,7 +10,6 @@ import classes.Scenes.Inventory;
 import classes.Scenes.Places.Ingnam;
 import classes.Scenes.Places.Prison;
 import classes.Scenes.SceneLib;
-import classes.internals.RootCounters;
 import classes.internals.Utils;
 
 import coc.model.GameModel;
@@ -34,7 +32,7 @@ import coc.xxc.StoryContext;
 	{
         public function BaseContent()
 		{
-			
+		
 		}
 
 		protected function cheatTime(time:Number, needNext:Boolean = false):void
@@ -52,6 +50,10 @@ import coc.xxc.StoryContext;
 		protected function get timeQ():Number
 		{
 			return CoC.instance.timeQ;
+		}
+
+		protected function get isNightTime():Boolean {
+			return (model.time.hours <= 5 || model.time.hours >= 21);
 		}
 
 		/*protected function get measurements():Class
@@ -484,7 +486,7 @@ import coc.xxc.StoryContext;
 		protected function eAssholeDescript():String {
 			return Appearance.assholeDescript(monster);
 		}
-				
+		
 		protected function hipDescript():String {
 			return Appearance.hipDescription(player);
 		}
@@ -637,7 +639,7 @@ import coc.xxc.StoryContext;
 			return Appearance.breastCup(val);
 		}
 */
-		
+
 /* Replaced with calls to Appearance.cockDescription
 		protected function NPCCockDescript(cockType:*,cockLength:Number=0,lust:Number=50):String
 		{
@@ -657,13 +659,28 @@ import coc.xxc.StoryContext;
 		 * Also support operators could be appended with + - * /=
 		 * eg: dynStats("str+", 1, "tou-", 2, "spe*", 1.1, "int/", 2, "cor=", 0)
 		 *     will add 1 to str, subtract 2 from tou, increase spe by 10%, decrease int by 50%, and set cor to 0
-		 * 
+		 *
 		 * @param	... args
 		 */
 		protected function dynStats(... args):void
 		{
 			// Bullshit to unroll the incoming array
 			player.dynStats.apply(player, args);
+		}
+
+		protected function MutagenBonus(statName: String, bonus: Number):void
+		{
+			player.MutagenBonus(statName,bonus);
+		}
+
+		protected function AlchemyBonus(statName: String, bonus: Number):void
+		{
+			player.AlchemyBonus(statName,bonus);
+		}
+
+		protected function KnowledgeBonus(statName: String, bonus: Number):void
+		{
+			player.KnowledgeBonus(statName,bonus);
 		}
 
 		protected function silly():Boolean
@@ -844,14 +861,14 @@ import coc.xxc.StoryContext;
 			CoC.instance.menuLoc = val;
 		}
 */
-		
+
 /*
 		protected function get itemSlots():Array
 		{
 			return CoC.instance.player.itemSlots;
 		}
 */
-		
+
 /*
 		protected function get itemStorage():Array
 		{
@@ -899,10 +916,6 @@ import coc.xxc.StoryContext;
 			return CoC.instance.flags;
 		}
 
-		protected function get counters():RootCounters {
-			return CoC.instance.counters;
-		}
-
 		protected function set flags(val:DefaultDict):void
 		{
 			CoC.instance.flags = val;
@@ -930,7 +943,7 @@ import coc.xxc.StoryContext;
 		
 		protected function buttonTextIsOneOf(index:int, possibleLabels:Array):Boolean {
 			return EngineCore.buttonTextIsOneOf(index, possibleLabels);
-		}		
+		}
 		
 		protected function getButtonText(index:int):String {
 			return EngineCore.getButtonText(index);
@@ -939,7 +952,7 @@ import coc.xxc.StoryContext;
 		protected function buttonIsVisible(index:int):Boolean {
 			return EngineCore.buttonIsVisible(index);
 		}
-				
+		
 		protected function darkTheme():Boolean {
 			return CoC.instance.mainViewManager.darkThemeImpl();
 		}

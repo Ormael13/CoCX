@@ -5,6 +5,7 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
 import classes.Scenes.NPCs.IsabellaScene;
 import classes.Scenes.SceneLib;
+import classes.Stats.StatUtils;
 import classes.StatusEffects.VampireThirstEffect;
 
 import coc.view.MainView;
@@ -263,9 +264,6 @@ public class PlayerInfo extends BaseContent {
 		if (player.inRut)
 			statEffects += "Rut - " + Math.round(player.statusEffectv3(StatusEffects.Rut)) + " hours remaining\n";
 
-		if (player.statusEffectv1(StatusEffects.BlessingOfDivineFenrir) > 0)
-			statEffects += "Blessing of Divine Agency - Fenrir: " + player.statusEffectv1(StatusEffects.BlessingOfDivineFenrir) + " hours remaining (Your strength and toughness is empowered by ~10% under the guidance of Fenrir)\n";
-
 		if (player.statusEffectv1(StatusEffects.BlessingOfDivineFera) > 0)
 			statEffects += "Blessing of Divine Agency - Fera: " + player.statusEffectv1(StatusEffects.BlessingOfDivineFera) + " hours remaining (Your lust resistance and corruption gains are empowered by 15% and 100% under the guidance of Fera)\n";
 
@@ -289,9 +287,6 @@ public class PlayerInfo extends BaseContent {
 
 		if (player.statusEffectv1(StatusEffects.AndysSmoke) > 0)
 			statEffects += "Andy's Pipe Smoke - " + player.statusEffectv1(StatusEffects.AndysSmoke) + " hours remaining (Speed temporarily lowered, intelligence temporarily increased.)\n";
-
-		if (player.statusEffectv1(StatusEffects.FeedingEuphoria) > 0)
-			statEffects += "Feeding Euphoria - " + player.statusEffectv1(StatusEffects.FeedingEuphoria) + " hours remaining (Speed temporarily increased.)\n";
 
 		if (player.statusEffectv1(StatusEffects.IzumisPipeSmoke) > 0)
 			statEffects += "Izumi's Pipe Smoke - " + player.statusEffectv1(StatusEffects.IzumisPipeSmoke) + " hours remaining. (Speed temporarily lowered.)\n";
@@ -331,10 +326,6 @@ public class PlayerInfo extends BaseContent {
 			statEffects += "Vampire Thirst: " + vthirst.value1 + "/" + vthirst.maxThirst() + " ";
 			if (vthirst.currentBoost > 0) statEffects += "(+" + vthirst.currentBoost + " to str / spe / int / lib)";
 			statEffects += "\n";
-		}
-		
-		if (player.hasStatusEffect(StatusEffects.EnergyDependent)) {
-			statEffects += "Energy Dependent: " + Math.round(player.statusEffectv1(StatusEffects.EnergyDependent)) + "/45 (+" + Math.round(player.statusEffectv1(StatusEffects.EnergyDependent)) * 5 + " to spe, +" + Math.round(player.statusEffectv1(StatusEffects.EnergyDependent)) * 12 + " to int)\n";
 		}
 
 		if (player.statusEffectv1(StatusEffects.Bammed1) > 0) {
@@ -450,22 +441,19 @@ public class PlayerInfo extends BaseContent {
 		else
 			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)\n";
 		combatStats += "\n";
-		var maxes:Object = player.getAllMaxStats();
 		var mins:Object = player.getAllMinStats();
-		combatStats += "<b>Strength Cap:</b> " + maxes.str + "\n";
-		combatStats += "<i>Ghost Strength:</i> +" + combat.ghostStrength() + "\n";
-		combatStats += "<b>Toughness Cap:</b> " + maxes.tou + "\n";
-		combatStats += "<b>Speed Cap:</b> " + maxes.spe + "\n";
-		combatStats += "<i>Ghost Speed:</i> +" + combat.ghostSpeed() + "\n";
-		combatStats += "<b>Intelligence Cap:</b> " + maxes.inte + "\n";
-		combatStats += "<b>Wisdom Cap:</b> " + maxes.wis + "\n";
-		combatStats += "<b>Libido Cap:</b> " + maxes.lib + "\n";
-		combatStats += "<i>Libido Minimum:</i> " + mins.lib + "\n";
-		combatStats += "<b>Sensitivity Cap:</b> " + maxes.sens + "\n";
+		combatStats += "<b>Strength Cap:</b> " + Math.floor(player.strStat.max) + "\n";
+		combatStats += "<i>Ghost Strength:</i> +" + Math.floor(combat.ghostStrength()) + "\n";
+		combatStats += "<b>Toughness Cap:</b> " + Math.floor(player.touStat.max) + "\n";
+		combatStats += "<b>Speed Cap:</b> " + Math.floor(player.speStat.max) + "\n";
+		combatStats += "<i>Ghost Speed:</i> +" + Math.floor(combat.ghostSpeed()) + "\n";
+		combatStats += "<b>Intelligence Cap:</b> " + Math.floor(player.intStat.max) + "\n";
+		combatStats += "<b>Wisdom Cap:</b> " + Math.floor(player.wisStat.max) + "\n";
+		combatStats += "<b>Libido Cap:</b> " + Math.floor(player.libStat.max) + "\n";
+		combatStats += "<b>Sensitivity Cap:</b> " + Math.floor(player.sensStat.max) + "\n";
 		combatStats += "<i>Sensitivity Minimum:</i> " + mins.sens + "\n";
 		combatStats += "<i>Corruption Minimum:</i> " + mins.cor + "\n";
 		combatStats += "\n";
-		if (player.statusEffectv1(StatusEffects.FeedingEuphoria) > 0) combatStats += "<b>Feeding Euphoria:</b> " + player.statusEffectv1(StatusEffects.FeedingEuphoria) + " hours remaining (+" + player.statusEffectv2(StatusEffects.FeedingEuphoria) + " to spe)\n";
 		var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 		if (vthirst != null) {
 			combatStats += "<b>Vampire Thirst:</b> " + vthirst.value1 + "/" + vthirst.maxThirst() + " ";
@@ -1136,43 +1124,42 @@ public class PlayerInfo extends BaseContent {
 
 //Attribute menu
 	private function attributeMenu():void {
-		var maxes:Object = player.getAllMaxStats();
 		clearOutput();
 		outputText("You have <b>" + (player.statPoints) + "</b> left to spend.\n\n");
 
 		outputText("Strength: ");
-		if (player.str < maxes.str) outputText("" + Math.floor(player.str) + " + <b>" + player.tempStr + "</b> → " + Math.floor(player.str + player.tempStr) + "\n");
-		else outputText("" + Math.floor(player.str) + " (Maximum)\n");
+		if (player.strStat.core.value < player.strStat.core.max) outputText("" + Math.floor(player.strStat.core.value) + " + <b>" + player.tempStr + "</b> → " + Math.floor(player.strStat.core.value + player.tempStr) + " Total "+Math.floor((player.strStat.core.value + player.tempStr + player.strStat.bonus.value) * player.strStat.mult.value)+"\n");
+		else outputText("" + Math.floor(player.strStat.core.value) + " (Maximum)\n");
 
 		outputText("Toughness: ");
-		if (player.tou < maxes.tou) outputText("" + Math.floor(player.tou) + " + <b>" + player.tempTou + "</b> → " + Math.floor(player.tou + player.tempTou) + "\n");
-		else outputText("" + Math.floor(player.tou) + " (Maximum)\n");
+		if (player.touStat.core.value < player.touStat.core.max) outputText("" + Math.floor(player.touStat.core.value) + " + <b>" + player.tempTou + "</b> → " + Math.floor(player.touStat.core.value + player.tempTou) + " Total "+Math.floor((player.touStat.core.value + player.tempTou + player.touStat.bonus.value) * player.touStat.mult.value)+"\n");
+		else outputText("" + Math.floor(player.touStat.core.value) + " (Maximum)\n");
 
 		outputText("Speed: ");
-		if (player.spe < maxes.spe) outputText("" + Math.floor(player.spe) + " + <b>" + player.tempSpe + "</b> → " + Math.floor(player.spe + player.tempSpe) + "\n");
-		else outputText("" + Math.floor(player.spe) + " (Maximum)\n");
+		if (player.speStat.core.value < player.speStat.core.max) outputText("" + Math.floor(player.speStat.core.value) + " + <b>" + player.tempSpe + "</b> → " + Math.floor(player.speStat.core.value + player.tempSpe) + " Total "+Math.floor((player.speStat.core.value + player.tempSpe + player.speStat.bonus.value) * player.speStat.mult.value)+"\n");
+		else outputText("" + Math.floor(player.speStat.core.value) + " (Maximum)\n");
 
 		outputText("Intelligence: ");
-		if (player.inte < maxes.inte) outputText("" + Math.floor(player.inte) + " + <b>" + player.tempInt + "</b> → " + Math.floor(player.inte + player.tempInt) + "\n");
-		else outputText("" + Math.floor(player.inte) + " (Maximum)\n");
+		if (player.intStat.core.value < player.intStat.core.max) outputText("" + Math.floor(player.intStat.core.value) + " + <b>" + player.tempInt + "</b> → " + Math.floor(player.intStat.core.value + player.tempInt) + " Total "+Math.floor((player.intStat.core.value + player.tempInt + player.intStat.bonus.value) * player.intStat.mult.value)+"\n");
+		else outputText("" + Math.floor(player.intStat.core.value) + " (Maximum)\n");
 
 		outputText("Wisdom: ");
-		if (player.wis < maxes.wis) outputText("" + Math.floor(player.wis) + " + <b>" + player.tempWis + "</b> → " + Math.floor(player.wis + player.tempWis) + "\n");
-		else outputText("" + Math.floor(player.wis) + " (Maximum)\n");
+		if (player.wisStat.core.value < player.wisStat.core.max) outputText("" + Math.floor(player.wisStat.core.value) + " + <b>" + player.tempWis + "</b> → " + Math.floor(player.wisStat.core.value + player.tempWis) + " Total "+Math.floor((player.wisStat.core.value + player.tempWis + player.wisStat.bonus.value) * player.wisStat.mult.value)+"\n");
+		else outputText("" + Math.floor(player.wisStat.core.value) + " (Maximum)\n");
 
 		outputText("Libido: ");
-		if (player.lib < maxes.lib) outputText("" + Math.floor(player.lib) + " + <b>" + player.tempLib + "</b> → " + Math.floor(player.lib + player.tempLib) + "\n");
-		else outputText("" + Math.floor(player.lib) + " (Maximum)\n");
+		if (player.libStat.core.value < player.libStat.core.max) outputText("" + Math.floor(player.libStat.core.value) + " + <b>" + player.tempLib + "</b> → " + Math.floor(player.libStat.core.value + player.tempLib) + " Total "+Math.floor((player.libStat.core.value + player.tempLib + player.libStat.bonus.value) * player.libStat.mult.value)+"\n");
+		else outputText("" + Math.floor(player.libStat.core.value) + " (Maximum)\n");
 
 		menu();
 		//Add
 		if (player.statPoints > 0) {
-			if ((player.str + player.tempStr) < maxes.str) addButton(0, "Add STR", addAttribute, "str", null, null, "Add 1 point (5 points with Shift) to Strength.", "Add Strength");
-			if ((player.tou + player.tempTou) < maxes.tou) addButton(1, "Add TOU", addAttribute, "tou", null, null, "Add 1 point (5 points with Shift) to Toughness.", "Add Toughness");
-			if ((player.spe + player.tempSpe) < maxes.spe) addButton(2, "Add SPE", addAttribute, "spe", null, null, "Add 1 point (5 points with Shift) to Speed.", "Add Speed");
-			if ((player.inte + player.tempInt) < maxes.inte) addButton(3, "Add INT", addAttribute, "int", null, null, "Add 1 point (5 points with Shift) to Intelligence.", "Add Intelligence");
-			if ((player.wis + player.tempWis) < maxes.wis) addButton(4, "Add WIS", addAttribute, "wis", null, null, "Add 1 point (5 points with Shift) to Wisdom.", "Add Wisdom");
-			if ((player.lib + player.tempLib) < maxes.lib) addButton(10, "Add LIB", addAttribute, "lib", null, null, "Add 1 point (5 points with Shift) to Libido.", "Add Libido");
+			if ((player.strStat.core.value + player.tempStr) < player.strStat.core.max) addButton(0, "Add STR", addAttribute, "str", null, null, "Add 1 point (5 points with Shift) to Strength.", "Add Strength");
+			if ((player.touStat.core.value + player.tempTou) < player.touStat.core.max) addButton(1, "Add TOU", addAttribute, "tou", null, null, "Add 1 point (5 points with Shift) to Toughness.", "Add Toughness");
+			if ((player.speStat.core.value + player.tempSpe) < player.speStat.core.max) addButton(2, "Add SPE", addAttribute, "spe", null, null, "Add 1 point (5 points with Shift) to Speed.", "Add Speed");
+			if ((player.intStat.core.value + player.tempInt) < player.intStat.core.max) addButton(3, "Add INT", addAttribute, "int", null, null, "Add 1 point (5 points with Shift) to Intelligence.", "Add Intelligence");
+			if ((player.wisStat.core.value + player.tempWis) < player.wisStat.core.max) addButton(4, "Add WIS", addAttribute, "wis", null, null, "Add 1 point (5 points with Shift) to Wisdom.", "Add Wisdom");
+			if ((player.libStat.core.value + player.tempLib) < player.libStat.core.max) addButton(10, "Add LIB", addAttribute, "lib", null, null, "Add 1 point (5 points with Shift) to Libido.", "Add Libido");
 		}
 		//Subtract
 		if (player.tempStr > 0) addButton(5, "Sub STR", subtractAttribute, "str", null, null, "Subtract 1 point (5 points with Shift) from Strength.", "Subtract Strength");
@@ -1187,39 +1174,38 @@ public class PlayerInfo extends BaseContent {
 	}
 
 	private function addAttribute(attribute:String):void {
-		var maxes:Object = player.getAllMaxStats();
 		var n:int=1;
 		var m:int;
 		if (flags[kFLAGS.SHIFT_KEY_DOWN]) n = 5;
 		if (n > player.statPoints) n = player.statPoints;
 		switch (attribute) {
 			case "str":
-				m = maxes.str - int(player.str + player.tempStr);
+				m = player.strStat.core.max - int(player.strStat.core.value + player.tempStr);
 				if (m < n) n = m;
 				player.tempStr+=n;
 				break;
 			case "tou":
-				m = maxes.tou - int(player.tou + player.tempTou);
+				m = player.touStat.core.max - int(player.touStat.core.value + player.tempTou);
 				if (m < n) n = m;
 				player.tempTou+=n;
 				break;
 			case "spe":
-				m = maxes.spe - int(player.spe + player.tempSpe);
+				m = player.speStat.core.max - int(player.speStat.core.value + player.tempSpe);
 				if (m < n) n = m;
 				player.tempSpe+=n;
 				break;
 			case "int":
-				m = maxes.inte - int(player.inte + player.tempInt);
+				m = player.intStat.core.max - int(player.intStat.core.value + player.tempInt);
 				if (m < n) n = m;
 				player.tempInt+=n;
 				break;
 			case "wis":
-				m = maxes.wis - int(player.wis + player.tempWis);
+				m = player.wisStat.core.max - int(player.wisStat.core.value + player.tempWis);
 				if (m < n) n = m;
 				player.tempWis+=n;
 				break;
 			case "lib":
-				m = maxes.lib - int(player.lib + player.tempLib);
+				m = player.libStat.core.max - int(player.libStat.core.value + player.tempLib);
 				if (m < n) n = m;
 				player.tempLib+=n;
 				break;
@@ -1315,12 +1301,12 @@ public class PlayerInfo extends BaseContent {
 		if (player.tempStr + player.tempTou + player.tempSpe + player.tempInt + player.tempWis + player.tempLib <= 0 || player.statPoints > 0) {
 			outputText("\nYou may allocate your remaining stat points later.");
 		}
-		player.str += player.tempStr;
-		player.tou += player.tempTou;
-		player.spe += player.tempSpe;
-		player.inte += player.tempInt;
-		player.wis += player.tempWis;
-		player.lib += player.tempLib;
+		player.strStat.core.value += player.tempStr;
+		player.touStat.core.value += player.tempTou;
+		player.speStat.core.value += player.tempSpe;
+		player.intStat.core.value += player.tempInt;
+		player.wisStat.core.value += player.tempWis;
+		player.libStat.core.value += player.tempLib;
 		player.tempStr = 0;
 		player.tempTou = 0;
 		player.tempSpe = 0;

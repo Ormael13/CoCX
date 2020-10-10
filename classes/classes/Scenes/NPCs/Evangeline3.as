@@ -164,16 +164,14 @@ public class Evangeline3 extends Monster
 			this.weaponAttack += (5 + (inte / 10)) * 1.2 * SpellMod();
 			outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
 			outputText("The rush of success and power flows through her body.  <b>She looks like she can do anything!</b>\n\n");
-			createStatusEffect(StatusEffects.Might, 50, 0, 0, 0);
-			this.str += (5 + (inte / 10)) * 1.2 * SpellMod();
-			this.tou += (5 + (inte / 10)) * 1.2 * SpellMod();
+			this.statStore.addBuffObject({ 'str': +(5 + (inte / 10)) * 1.2 * SpellMod(), 'tou': -(5 + (inte / 10)) * 1.2 * SpellMod()}, "EvangelineMight",{})
 			outputText("Evangeline utters word of power, summoning an electrical charge around her armor. <b>It looks like her armor will be reducing some of incoming damage now!</b>\n\n");
 			createStatusEffect(StatusEffects.ChargeArmor, 50, 0, 0, 0);
 			this.armorDef += (4 + (inte / 15)) * 1.2 * SpellMod();
 			outputText("She flushes, drawing on her body's desires to empower her muscles and hasten her up.");
 			outputText("The rush of success and power flows through her body.  <b>She looks like she can move faster!</b>\n\n");
 			createStatusEffect(StatusEffects.Blink, 50, 0, 0, 0);
-			this.spe += (5 + (inte / 10)) * 1.5 * SpellMod();
+			this.speStat.core.value += (5 + (inte / 10)) * 1.5 * SpellMod();
 			fatigue += spellCostChargeWeaponMightChargeArmorBlink();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED] += 4;
 		}

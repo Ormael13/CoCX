@@ -26,7 +26,7 @@ package classes.Items.Armors
                 outputText("Last but not least, you put your silken loincloth on to cover your groin. You thank Rathazul for that and you know that you easily have access to your ");
                 if (CoC.instance.player.hasCock()) outputText(CoC.instance.player.multiCockDescriptLight());
                 if (CoC.instance.player.hasCock() && CoC.instance.player.hasVagina()) outputText(" and ");
-                if (CoC.instance.player.hasVagina()) outputText(CoC.instance.player.vaginaDescript());
+                if (CoC.instance.player.hasVagina()) outputText("[vagina]");
                 //Genderless
                 if (!CoC.instance.player.hasCock() && !CoC.instance.player.hasVagina()) outputText("groin");
                 outputText(" should you need to. ");

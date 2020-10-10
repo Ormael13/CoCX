@@ -84,7 +84,7 @@ public class LizanRogueScene extends BaseContent
 				if (player.lust >= 33) {
 					outputText("You wonder what you should do to the lizan.");
 					if (player.hasCock()) addButton(0, "Use Dick", rapeLizanInTheAss).hint("Anally penetrate him with your " + player.multiCockDescriptLight() + ".");
-					if (player.hasVagina()) addButton(1, "Use Pussy", rapeLizanWithPussy).hint("Get on top of the lizan and stuff his cock into your " + player.vaginaDescript() + ".");
+					if (player.hasVagina()) addButton(1, "Use Pussy", rapeLizanWithPussy).hint("Get on top of the lizan and stuff his cock into your [pussy].");
 					if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 					addButton(14, "Leave", cleanupAfterCombat);
 					return;
@@ -97,7 +97,6 @@ public class LizanRogueScene extends BaseContent
 			}
 			else {
 				outputText("The lizan raises his hands in defeat and you celebrate with a victory dance. ");
-				dynStats("str", 1, "tou", 1);
 				if (player.lust >= 33) {
 					outputText("<b>You could have sex with him if you like to.</b> ");
 					addButton(0, "Sex", haveSexWithLizan).hint("Have some fun with the oh-so-sexy lizan.");
@@ -122,7 +121,6 @@ public class LizanRogueScene extends BaseContent
 			}
 			else {
 				outputText("You are forced to raise your hand in defeat and the lizan celebrates with a few acrobatic flips and plenty of bragging. After a quick friendly chat the two of you part ways, having gotten a good workout in the process. ");
-				dynStats("str", 1, "tou", 1);
 				cleanupAfterCombat();
 			}			
 		}

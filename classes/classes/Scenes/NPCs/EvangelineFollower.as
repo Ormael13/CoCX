@@ -794,7 +794,7 @@ private function curingJiangshi():void {
 		player.removePerk(PerkLib.LifeLeech);
 		player.removePerk(PerkLib.Undeath);
 		player.removePerk(PerkLib.EnergyDependent);
-		player.removeStatusEffect(StatusEffects.EnergyDependent);
+		player.statStore.removeBuffs("Energy Vampire");
 		outputText("Done with this place you head back to camp.\n\n");
 		outputText("<b>(Lost Perks: Halted vitals, Super strength, Poison nails, Rigidity, Life leech, Undeath, Energy dependent)</b>\n\n");
 		player.strtouspeintwislibsenCalculation2();

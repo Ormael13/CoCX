@@ -268,11 +268,10 @@ public function blackCatBeerEffects(player:Player,clearScreen:Boolean = true,new
 	outputText("\n\nYour balance suddenly feels off-kilter and you stumble, narrowly avoiding falling.  You just can't move as fast as you could, not with your head feeling so full of fluff and fuzz; your body prickles and tingles with the warmth once your head feels full, the sensation concentrating around your erogenous zones.  You just feel so fluffy... you want to hold somebody and share your warmth with them, too; it's just so wonderful.");
 	//Regain 40 to 60 lost health, increase lust by 10 to 20 points, decrease Intelligence and Speed by 5, increase Libido by 5//
 	HPChange(40 + rand(21), false);
-	var maxes:Object = player.getAllMaxStats();
 	var lib:Number = 0;
 	if(player.hasStatusEffect(StatusEffects.BlackCatBeer)) {
-		if(maxes.lib - player.lib >= 10) lib = 10;
-		else lib = maxes.lib - player.lib;
+		if(player.libStat.max - player.lib >= 10) lib = 10;
+		else lib = player.libStat.max - player.lib;
 		player.addStatusValue(StatusEffects.BlackCatBeer,1,4);
 		player.addStatusValue(StatusEffects.BlackCatBeer,2,lib);
 		outputText("\n\nDamn, it's even better with every extra drink!");
@@ -885,26 +884,25 @@ private function barBeerOrgyTits():void {
 		else if(player.cockTotal() > 1) outputText("  Various girls around the room are patting their bellies and giving you sultry looks while your cum continues to drip from their pussies.  You passively wonder if any of them might indeed be hauling around some larger pregnant bellies in a few days, but you try to push those thoughts from your head.  At the moment they seem happy.");
 		// IF [player has pussy]
 		if (player.hasVagina()) {
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("cum");
 			outputText("  You walk slightly bow legged out of the bar.  Cum is still dripping from your snatch and will likely continue to do so for a while.");
 			//IF [player is not pregnant]
 			if(player.pregnancyType == 0) outputText("  You can't help but wonder how virile those dog morphs might have been as their cum and the cum of other customers sloshes around inside your uterus.");
 			switch(rand(6)) {
 				case 0:
-					if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+					if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 					else player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
 					break;
 				case 1:
-					if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+					if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 					else player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE);
 					break;
 				case 2:
-					if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+					if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 					else player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE); //I'm betting this was meant to be dog morph chance
 					break;
 				default:
-					if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+					if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 					else player.knockUp(PregnancyStore.PREGNANCY_CENTAUR, PregnancyStore.INCUBATION_CENTAUR);
 					break;
 			}

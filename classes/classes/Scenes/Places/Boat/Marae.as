@@ -91,7 +91,7 @@ public class Marae extends Monster
 			}
 			if (hasStatusEffect(StatusEffects.Fear)) {
 				EngineCore.outputText("\"<i>You think I'm afraid of anything? Foolish mortal.</i>\" Marae snarls.\n\n");
-				this.spe += statusEffectv2(StatusEffects.Fear);
+				this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
 				removeStatusEffect(StatusEffects.Fear);
 			}
 			var chooser:int = rand(10);
@@ -155,8 +155,8 @@ public class Marae extends Monster
 				if (game.flags[kFLAGS.MINERVA_TOWER_TREE] > 0) {
 					this.armorDef = 600;
 					this.armorMDef = 600;
-					this.str += 260;
-					this.tou += 260;
+					this.strStat.core.value += 260;
+					this.touStat.core.value += 260;
 					this.bonusHP += 4000;
 					this.additionalXP += 2000;
 					this.createPerk(PerkLib.MonsterRegeneration, 9, 0, 0, 0);

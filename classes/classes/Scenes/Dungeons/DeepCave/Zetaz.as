@@ -18,7 +18,7 @@ public class Zetaz extends Monster
 			//burns lust and clears statuses before continuing with 
 			//turn.
 			if(lust > 50 && (hasStatusEffect(StatusEffects.Fear) || hasStatusEffect(StatusEffects.Blind))) {
-				if (hasStatusEffect(StatusEffects.Fear)) this.spe += statusEffectv2(StatusEffects.Fear);
+				if (hasStatusEffect(StatusEffects.Fear)) this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
 				removeStatusEffect(StatusEffects.Fear);
 				removeStatusEffect(StatusEffects.Blind);
 				lust -= 10;
@@ -65,7 +65,7 @@ public class Zetaz extends Monster
 					if((player.findPerk(PerkLib.Evade) >= 0 && rand(4) == 0) ||
 						(player.findPerk(PerkLib.Flexibility) >= 0 && rand(6) == 0) ||
 						(player.spe > 65 && rand(10) == 0) ||
-						(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 20 && player.armorName == "red, high-society bodysuit")) {
+						(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 20 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia"))) {
 						outputText("You sidestep it a moment before it shatters on the wall, soaking the tapestries with red fluid!");
 					}
 					else {

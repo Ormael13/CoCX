@@ -235,7 +235,8 @@ import classes.internals.*;
 		{
 			outputText("\n\nYamata delights in the pain being caused...  ");
 			this.takeLustDamage(int(dmg/2), true);
-			this.dynStats("str", dmg/25, "spe", -dmg/30);
+			this.dynStats("spe", -dmg/30);
+			this.statStore.addBuff("str",dmg/25, "DispelablePowerUP",{});
 		}
 		
 		//<Masochism Aura> Passive ability

@@ -32,12 +32,12 @@ package classes.Scenes.Camp
 			if (player.hasPerk(PerkLib.GolemArmyMajor)) maxTemporalGolemsBagSizeCounter += 6;
 			if (player.hasPerk(PerkLib.GolemArmyColonel)) maxTemporalGolemsBagSizeCounter += 8;
 			if (player.hasPerk(PerkLib.GolemArmyGeneral)) maxTemporalGolemsBagSizeCounter += 10;
-			if (player.hasPerk(PerkLib.BiggerGolemBag1)) maxTemporalGolemsBagSizeCounter += 2;
-			if (player.hasPerk(PerkLib.BiggerGolemBag2)) maxTemporalGolemsBagSizeCounter += 2;
-			if (player.hasPerk(PerkLib.BiggerGolemBag3)) maxTemporalGolemsBagSizeCounter += 2;
-			if (player.hasPerk(PerkLib.BiggerGolemBag4)) maxTemporalGolemsBagSizeCounter += 2;
-			if (player.hasPerk(PerkLib.BiggerGolemBag5)) maxTemporalGolemsBagSizeCounter += 2;
-			if (player.hasPerk(PerkLib.BiggerGolemBag6)) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.BiggerGolemBagI)) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.BiggerGolemBagII)) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.BiggerGolemBagIII)) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.BiggerGolemBagIV)) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.BiggerGolemBagV)) maxTemporalGolemsBagSizeCounter += 2;
+			if (player.hasPerk(PerkLib.BiggerGolemBagVI)) maxTemporalGolemsBagSizeCounter += 2;
 			return maxTemporalGolemsBagSizeCounter;
 		}
 		public function maxPernamentStoneGolemsBagSize():Number {
@@ -53,12 +53,12 @@ package classes.Scenes.Camp
 			if (player.hasPerk(PerkLib.GolemArmyColonel)) maxPernamentStoneGolemsBagSizeCounter += 4;
 			if (player.hasPerk(PerkLib.GolemArmyGeneral)) maxPernamentStoneGolemsBagSizeCounter += 5;
 			if (player.hasPerk(PerkLib.MasterGolemMaker)) {
-				if (player.hasPerk(PerkLib.BiggerGolemBag1)) maxPernamentStoneGolemsBagSizeCounter += 1;
-				if (player.hasPerk(PerkLib.BiggerGolemBag2)) maxPernamentStoneGolemsBagSizeCounter += 1;
-				if (player.hasPerk(PerkLib.BiggerGolemBag3)) maxPernamentStoneGolemsBagSizeCounter += 1;
-				if (player.hasPerk(PerkLib.BiggerGolemBag4)) maxPernamentStoneGolemsBagSizeCounter += 1;
-				if (player.hasPerk(PerkLib.BiggerGolemBag5)) maxPernamentStoneGolemsBagSizeCounter += 1;
-				if (player.hasPerk(PerkLib.BiggerGolemBag6)) maxPernamentStoneGolemsBagSizeCounter += 1;
+				if (player.hasPerk(PerkLib.BiggerGolemBagI)) maxPernamentStoneGolemsBagSizeCounter += 1;
+				if (player.hasPerk(PerkLib.BiggerGolemBagII)) maxPernamentStoneGolemsBagSizeCounter += 1;
+				if (player.hasPerk(PerkLib.BiggerGolemBagIII)) maxPernamentStoneGolemsBagSizeCounter += 1;
+				if (player.hasPerk(PerkLib.BiggerGolemBagIV)) maxPernamentStoneGolemsBagSizeCounter += 1;
+				if (player.hasPerk(PerkLib.BiggerGolemBagV)) maxPernamentStoneGolemsBagSizeCounter += 1;
+				if (player.hasPerk(PerkLib.BiggerGolemBagVI)) maxPernamentStoneGolemsBagSizeCounter += 1;
 			}
 			return maxPernamentStoneGolemsBagSizeCounter;
 		}
@@ -1671,7 +1671,7 @@ package classes.Scenes.Camp
 			outputText("As it will be your first time summoning a darkness elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The darkness elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
 			outputText("The binding circle holds however acting as a mighty barrier the creature cannot breach. As the restraint rune takes hold it slowly shrink in size to something you can properly control. Their duty fulfilled the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is finally complete congratulation is in order as you bound your very own darkness elemental!</b>\"");
 			player.createStatusEffect(StatusEffects.SummonedElementalsDarkness, 1, 1, 0, 0);
-			finishingSummoningElemental();;
+			finishingSummoningElemental();
 		}
 		private function summonElementalWood():void {
 			clearOutput();
@@ -1691,7 +1691,7 @@ package classes.Scenes.Camp
 			outputText("As it will be your first time summoning a metal elemental, you begin the ritual by drawing a small circle of rune inside the larger arcane circle you already built, including runes for binding, and directive. That done you initiate the most dangerous part of the ritual, invoking the primal might of the elemental. The metal elemental appear within the circle. At first huge and terrifying, it fight against its binding trying to break through. ");
 			outputText("The binding circle holds however acting as a mighty barrier the creature cannot breach. As the restraint rune takes hold it slowly shrink in size to something you can properly control. Their duty fulfilled the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is finally complete congratulation is in order as you bound your very own metal elemental!</b>\"");
 			player.createStatusEffect(StatusEffects.SummonedElementalsMetal, 1, 1, 0, 0);
-			finishingSummoningElemental();;
+			finishingSummoningElemental();
 		}
 		private function summonElementalEther():void {
 			clearOutput();
@@ -1979,4 +1979,4 @@ package classes.Scenes.Camp
 		}
 	}
 
-}
+}

@@ -17,6 +17,7 @@ import classes.Scenes.NPCs.Diva;
 import classes.Scenes.NPCs.Holli;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
+import classes.Stats.Buff;
 import classes.StatusEffects;
 import classes.VaginaClass;
 
@@ -1168,7 +1169,7 @@ public class CombatMagic extends BaseCombatContent {
 							"\n\nMana Cost: " + spellCostBlack(50) * spellMightCostMultiplier() + "");
 			if (badLustForBlack) {
 				bd.disable("You aren't turned on enough to use any black magics.");
-			} else if (player.hasStatusEffect(StatusEffects.Might)) {
+			} else if (player.statStore.hasBuff("Might")) {
 				bd.disable("You are already under the effects of Might and cannot cast it again.");
 			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < (spellCostBlack(50) * spellMightCostMultiplier())) {
 				bd.disable("Your mana is too low to cast this spell.");
@@ -1182,7 +1183,7 @@ public class CombatMagic extends BaseCombatContent {
 							"\n\nMana Cost: " + spellCostBlack(40) * spellBlinkCostMultiplier() + "");
 			if (badLustForBlack) {
 				bd.disable("You aren't turned on enough to use any black magics.");
-			} else if (player.hasStatusEffect(StatusEffects.Blink)) {
+			} else if (player.statStore.hasBuff("Blink")) {
 				bd.disable("You are already under the effects of Blink and cannot cast it again.");
 			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < (spellCostBlack(40) * spellBlinkCostMultiplier())) {
 				bd.disable("Your mana is too low to cast this spell.");
@@ -1615,16 +1616,15 @@ public class CombatMagic extends BaseCombatContent {
 				tempStr = MightBoost;
 			}
 			var oldHPratio:Number = player.hp100/100;
-			player.createStatusEffect(StatusEffects.Might,0,0,MightDuration,0);
-			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.changeStatusValue(StatusEffects.Might,1,tempInt);
-			else player.changeStatusValue(StatusEffects.Might,1,tempStr);
-			player.changeStatusValue(StatusEffects.Might,2,tempTou);
+
+			var buffValues:Object = {"tou.mult":tempTou/100};
 			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) {
-				player.inte += player.statusEffectv1(StatusEffects.Might);
+				buffValues["int.mult"] = tempInt/100;
 			} else {
-				player.str += player.statusEffectv1(StatusEffects.Might);
+				buffValues["str.mult"] = tempStr/100;
 			}
-			player.tou += player.statusEffectv2(StatusEffects.Might);
+			player.buff("Might").setStats(buffValues).combatTemporary(MightDuration);
+
 			player.HP = oldHPratio*player.maxHP();
 			statScreenRefresh();
 		};
@@ -1738,14 +1738,12 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.LongerLastingBuffsVI)) BlinkDuration += 1;
 			if (player.hasPerk(PerkLib.EverLastingBuffs)) BlinkDuration += 5;
 			if (player.hasPerk(PerkLib.EternalyLastingBuffs)) BlinkDuration += 5;
-			player.createStatusEffect(StatusEffects.Blink,0,0,BlinkDuration,0);
 			tempSpe = BlinkBoost;
 			//if(player.spe + temp > 100) tempSpe = 100 - player.spe;
-			player.changeStatusValue(StatusEffects.Blink,1,tempSpe);
 			mainView.statsView.showStatUp('spe');
 			// strUp.visible = true;
 			// strDown.visible = false;
-			player.spe += player.statusEffectv1(StatusEffects.Blink);
+			player.buff("Blink").setStats({"spe.mult":tempSpe/100}).combatTemporary(BlinkDuration);
 			statScreenRefresh();
 		};
 

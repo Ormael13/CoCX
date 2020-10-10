@@ -166,9 +166,10 @@ private function fightTamanisDaughters():void {
 	spriteSelect(57);
 	if (tamaniPresent) {
 		//(+5 mob strength)
-		monster.str += 5;
+
+		monster.strStat.core.value += 5;
 		//(+5 mob toughness)
-		monster.tou += 5;
+		monster.touStat.core.value += 5;
 		monster.HP += 10;
 		//(-20 mob lust)
 		monster.lust -= 20;

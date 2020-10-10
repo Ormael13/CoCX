@@ -209,20 +209,19 @@ public class GoblinScene extends BaseContent
 		}
 
 		//[WIN RAEPZ]
-		public function gobboRapeIntro():void
-		{
+		public function gobboRapeIntro():void {
 			spriteSelect(24);
 			clearOutput();
 			story.display("strings/defeated/intro");
-			var buttseks:Function =null;
-			var feeder:Function =null;
-			var fitsFuck:Function =null;
-			var tooBig:Function =null;
-			var corruptTooBig:Function =null;
-			var cuntFuck:Function =null;
-			var spiderCondom:Function =null;
-			var jog:Function =null;
-			var eggs:Function =null;
+			var buttseks:Function = null;
+			var feeder:Function = null;
+			var fitsFuck:Function = null;
+			var tooBig:Function = null;
+			var corruptTooBig:Function = null;
+			var cuntFuck:Function = null;
+			var spiderCondom:Function = null;
+			var jog:Function = null;
+			var eggs:Function = null;
 			if (player.canOvipositSpider()) {
 				eggs = laySomeDriderEggsInGobboTwat;
 			}
@@ -251,6 +250,8 @@ public class GoblinScene extends BaseContent
 			if (player.hasStatusEffect(StatusEffects.Feeder)) {
 				feeder = giveGoblinAMilkMustache;
 			}
+
+
 			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||
 					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null) && flags[kFLAGS.SFW_MODE] <= 0) {
 				story.display("strings/defeated/prompt-sex");
@@ -267,22 +268,25 @@ public class GoblinScene extends BaseContent
 				}
 				if (player.hasVagina()) addButton(7, "Pussies", cuntFuck);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
-				addButton(10, "Kill", killGoblin);
-				addButton(14, "Leave", cleanupAfterCombat);
-			}
-			else if (feeder!=null || eggs!=null) {
-				if (feeder!=null) story.display("strings/defeated/prompt-feed");
+				//addButton(10, "Kill", killGoblin);
+				//addButton(14, "Leave", cleanupAfterCombat);
+				if (feeder != null || eggs != null) {
+				if (feeder != null) story.display("strings/defeated/prompt-feed");
 				else story.display("strings/defeated/prompt-eggs");
 				menu();
 				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(5, "Breastfeed", feeder);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
+				//addButton(10, "Kill", killGoblin);
+				//addButton(14, "Leave", cleanupAfterCombat);
+				}
 				addButton(10, "Kill", killGoblin);
 				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else {
 				//If cant rape or breastfeed
-				cleanupAfterCombat();
+				addButton(10, "Kill", killGoblin);
+				addButton(14, "Leave", cleanupAfterCombat);
 			}
 		}
 		private function giveGoblinAMilkMustache():void {

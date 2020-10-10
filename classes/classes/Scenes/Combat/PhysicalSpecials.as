@@ -357,10 +357,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 			}
-			if (player.lowerBody == LowerBody.PLANT_FLOWER) {
+			if (player.isAlraune() || player.hasPerk(PerkLib.FloralOvaries)) {
 				// Pollen
 				bd = buttons.add("AlraunePollen", AlraunePollen).hint("Release a cloud of your pollen in the air to arouse your foe.");
 				if (player.hasStatusEffect(StatusEffects.AlraunePollen)) bd.disable("<b>You already spread your pollen over battlefield.</b>\n\n");
+			}
+			if (player.isAlraune()) {
 				// Entangle
 				bd = buttons.add("Entangle", AlrauneEntangle).hint("Use your vines to hinder your opponent.");
 				if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) bd.disable("<b>You already entangle your opponent.</b>\n\n");
@@ -588,6 +590,31 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 	}
+
+	public function checkForElementalEnchantmentAndDoDamage(damage:Number, canUseFist:Boolean = true, canUseWhip:Boolean = true):void{
+		if (player.weapon == weapons.L_WHIP) damage = doFireDamage(damage, true, true);
+		else if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doFireDamage(damage, true, true);
+		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doIceDamage(damage, true, true);
+		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doLightingDamage(damage, true, true);
+		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doDarknessDamage(damage, true, true);
+		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) damage = doFireDamage(damage, true, true);
+		else if ((player.isSwordTypeWeapon() || player.isAxeTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade)){
+			damage += scalingBonusLibido() * 0.20;
+			damage = doDamage(damage, true, true);
+			damage = doFireDamage(Math.round(damage*0.1), true, true);
+			damage = Math.round(damage * 1.1);
+		}
+		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
+			damage = doDamage(damage, true, true);
+			damage = doFireDamage(Math.round(damage*0.1), true, true);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			damage = Math.round(damage * 1.1);
+		}
+		else{
+			damage = Math.round(damage);
+			damage = doDamage(damage, true, true);
+		}
+	}
 	
 	public function powerAttackMenu():void {
 		menu();
@@ -647,8 +674,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
 			else damage *= 1.75;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -694,8 +720,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
 			else damage *= 1.75;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -741,8 +766,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
 			else damage *= 1.75;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -788,8 +812,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
 			else damage *= 1.75;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -835,8 +858,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
 			else damage *= 1.75;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -882,8 +904,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
 			else damage *= 1.75;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -930,19 +951,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= 1.75;
 		}
 		damage = Math.round(damage);
-		if (player.weapon == weapons.L_WHIP) damage = doFireDamage(damage, true, true);
-		else if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doFireDamage(damage, true, true);
-		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doIceDamage(damage, true, true);
-		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doLightingDamage(damage, true, true);
-		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doDarknessDamage(damage, true, true);
-		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) damage = doFireDamage(damage, true, true);
-		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
-			damage = doDamage(damage, true, true);
-			damage = doFireDamage(Math.round(damage*0.1), true, true);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
-			damage = Math.round(damage * 1.1);
-		}
-		else damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -1159,11 +1168,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.spe >= 225) damage = doDamage(damage, true, true);
 			if (player.spe >= 300) damage = doDamage(damage, true, true);
 		}
-		else if (player.weapon == weapons.RCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doFireDamage(damage, true, true);
-		else if (player.weapon == weapons.SCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doIceDamage(damage, true, true);
-		else if (player.weapon == weapons.TCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doLightingDamage(damage, true, true);
-		else if (player.weapon == weapons.ACLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doDarknessDamage(damage, true, true);
-		else damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage, false, false);
 		if (crit) {
 			outputText(" <b>Critical!</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -1281,8 +1286,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 				if (player.tailType == Tail.SCORPION) {
 					outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
-					monster.spe -= 2;
-					if (monster.spe < 1) monster.spe = 1;
+					monster.statStore.addBuffObject({spe:-2}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom))
 					{
 						monster.addStatusValue(StatusEffects.NagaVenom,3,1);
@@ -1299,8 +1303,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					else damage += 80;
 					lustdamage *= 0.14;
 					monster.teased(monster.lustVuln * lustdamage);
-					monster.tou -= 2;
-					if (monster.tou < 1) monster.tou = 1;
+					monster.statStore.addBuffObject({tou:-2}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom))
 					{
 						monster.addStatusValue(StatusEffects.NagaVenom,3,1);
@@ -1310,10 +1313,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 				if (player.faceType == Face.SNAKE_FANGS) {
 					outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
-					monster.spe -= 0.4;
-					monster.spe -= 0.4;
-					if (monster.spe < 1) monster.spe = 1;
-					if (monster.spe < 1) monster.spe = 1;
+					monster.statStore.addBuffObject({spe:-1}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom))
 					{
 						monster.addStatusValue(StatusEffects.NagaVenom,2,0.4);
@@ -1533,8 +1533,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= critMulti;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		if (player.hasPerk(PerkLib.PhantomStrike)) {
 			damage = doDamage(damage, true, true);
 			damage *= 2;
@@ -1645,7 +1644,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//final touches
 		damage = Math.round(damage);
 		damage *= (monster.damagePercent() / 100);
-		damage = doDamage(damage);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText("Your [weapon] hits few of " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
 		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
@@ -1893,7 +1892,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				damage += 5 + rand(6);
 			}
 			damage += player.level * 1.5;
-			monster.spe -= damage/2;
+			monster.statStore.addBuffObject({spe:-damage/2}, "Poison",{text:"Poison"});
 			damage = monster.lustVuln * damage;
 			//Clean up down to 1 decimal point
 			damage = Math.round(damage*10)/10;
@@ -2050,6 +2049,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		damage = Math.round(damage);
+		if (damage < 1) damage = 1;
 		damage = doDamage(damage);
 		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 		if (player.hasPerk(PerkLib.LactaBovinaOvariesFinalForm)) player.lust -= 200;
@@ -2222,8 +2222,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		monster.teased(lustDmgF);
 		if (crit) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
-		monster.spe -= 15;
-		if (monster.spe < 1) monster.spe = 1;
+		monster.statStore.addBuffObject({spe:-15}, "Poison",{text:"Poison"});
 		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		enemyAI();
 	}
@@ -2723,18 +2722,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(!monster.plural) outputText("its");
 		else outputText("their");
 		outputText(" movement.\n\n");
-		var EntangleStrNerf:Number;
-		var EntangleSpeNerf:Number;
-		EntangleStrNerf = Math.round(monster.str * .5);
-		EntangleSpeNerf = Math.round(monster.spe * .5);
-		monster.str -= EntangleStrNerf;
-		monster.spe -= EntangleSpeNerf;
-		if (player.hasPerk(PerkLib.RacialParagon)) EntangleSpeNerf *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) EntangleSpeNerf *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) EntangleSpeNerf *= 1.50;
-		if(monster.str < 1) monster.str = 1;
-		if(monster.spe < 1) monster.spe = 1;
-		player.createStatusEffect(StatusEffects.AlrauneEntangle,EntangleStrNerf,EntangleSpeNerf,0,0);
+		var EntangleNerf:Number;
+		EntangleNerf = 0.5;
+		if (player.hasPerk(PerkLib.RacialParagon)) EntangleNerf = 0.75;
+		if (player.hasPerk(PerkLib.Apex)) EntangleNerf = 0.80;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) EntangleNerf = 0.90;
+		player.createStatusEffect(StatusEffects.AlrauneEntangle,EntangleNerf,EntangleNerf,0,0);
+		monster.statStore.addBuffObject({"str.mult":-EntangleNerf,"spe.mult":-EntangleNerf}, "EntangleNerf",{text:"EntangleNerf"});
 		enemyAI();
 	}
 
@@ -3344,8 +3338,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else {
 			if(!monster.plural) outputText("The adhesive strands cover " + monster.a + monster.short + " with restrictive webbing, greatly slowing " + monster.mf("him","her") + ". ");
 			else outputText("The adhesive strands cover " + monster.a + monster.short + " with restrictive webbing, greatly slowing " + monster.mf("him","her") + ". ");
-			monster.spe -= 45;
-			if(monster.spe < 0) monster.spe = 0;
+			monster.statStore.addBuffObject({spe:-45}, "Web",{text:"Web"});
 		}
 		awardAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB);
 		outputText("\n\n");
@@ -3858,10 +3851,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 11) hydraBiteAttackpoweeeeer();
 		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12) hydraBiteAttackpoweeeeer();
 		//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
-		monster.str -= 2;
-		monster.spe -= 2;
-		if(monster.str < 1) monster.str = 1;
-		if(monster.spe < 1) monster.spe = 1;
+		monster.statStore.addBuffObject({str:-2,spe:-2}, "Poison",{text:"Poison"});
 		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 		{
 			monster.addStatusValue(StatusEffects.NagaVenom,2,2);
@@ -3918,10 +3908,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//(Otherwise)
 			else outputText("You lunge at the foe headfirst, fangs bared. You manage to catch " + monster.a + monster.short + " off guard, your needle-like fangs penetrating deep into " + monster.pronoun3 + " body. You quickly release your venom, and retreat before " + monster.pronoun1 + " manages to react.");
 			//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
-			monster.str -= 2;
-			monster.spe -= 2;
-			if(monster.str < 1) monster.str = 1;
-			if(monster.spe < 1) monster.spe = 1;
+			monster.statStore.addBuffObject({str:-2,spe:-2}, "Poison",{text:"Poison"});
 			if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 			{
 				monster.addStatusValue(StatusEffects.NagaVenom,2,2);
@@ -4014,17 +4001,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
+		//Frostbite for Fenrir
 		if(rand(player.spe/2 + 40) + 20 > monster.spe/1.5 || monster.hasStatusEffect(StatusEffects.Constricted)) {
 			//(if monster = demons)
 			if(monster.short == "demons") outputText("You look at the crowd for a moment, wondering which of their number you should bite. Your glance lands upon the leader of the group, easily spotted due to his snakeskin cloak. You quickly dart through the demon crowd as it closes in around you and lunge towards the broad form of the leader. You manage to catch the demon off guard, biting it viciously. The merciless cold of your bite transfer to your foe weakening it as you retreat before he manages to react.");
 			//(Otherwise)
 			else outputText("You lunge at the foe headfirst, maw open for a bite. You manage to catch the " + monster.a + monster.short + " off guard, biting it viciously. The merciless cold of your bite transfer to your foe weakening it as you retreat before " + monster.pronoun1 + " manages to react.");
 			//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
-			monster.str -= 5 + rand(5);
-			monster.spe -= 5 + rand(5);
-			if(monster.str < 1) monster.str = 1;
-			if(monster.spe < 1) monster.spe = 1;
+			monster.statStore.addBuffObject({str:-10,spe:-10}, "Poison",{text:"Poison"});
 			if(monster.hasStatusEffect(StatusEffects.Frostbite))
 			{
 				monster.addStatusValue(StatusEffects.Frostbite,1,1);
@@ -4482,8 +4466,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			monster.teased(monster.lustVuln * damage);
 		}
 		if (player.tailType == 20) {
-			monster.spe -= 10;
-			if(monster.spe < 1) monster.spe = 1;
+			monster.statStore.addBuffObject({spe:-10}, "Poison",{text:"Poison"});
 		}
 		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 		{
@@ -4564,8 +4547,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
 		monster.teased(monster.lustVuln * lustdamage, false);
 		if (crit) outputText(" <b>Critical!</b>");
-		monster.spe -= 10;
-		if(monster.spe < 1) monster.spe = 1;
+		monster.statStore.addBuffObject({spe:-10}, "Poison",{text:"Poison"});
 		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 		{
 			monster.addStatusValue(StatusEffects.NagaVenom,3,5);
@@ -4573,8 +4555,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 5, 0);
 		//if (!monster.hasStatusEffect(StatusEffects.lustvenom)) monster.createStatusEffect(StatusEffects.lustvenom, 0, 0, 0, 0);
 		//New line before monster attack
-		monster.spe -= (2+rand(3));
-		if(monster.spe < 1) monster.spe = 1;
+		monster.statStore.addBuffObject({spe:-(2+rand(3))}, "Poison",{text:"Poison"});
 		//Use tail mp
 		player.tailVenom -= 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;

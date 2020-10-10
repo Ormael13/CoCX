@@ -3,6 +3,7 @@ import classes.*;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Stats.Buff;
 
 public class Roxanne extends BazaarAbstractContent implements TimeAwareInterface {
 
@@ -53,22 +54,6 @@ WIN:
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225]++;
 			//Reset if she finds someone to take it (random at high values)
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] >= 300 && model.time.hours == 1 && rand(5) == 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] = 1;
-			//hangover status stuff
-			if (player.hasStatusEffect(StatusEffects.Hangover)) {
-			//Countdown
-				if (player.statusEffectv1(StatusEffects.Hangover) > 0) player.addStatusValue(StatusEffects.Hangover,1,-1);
-				else {
-					outputText("\n<b>Your head finally clears as your hangover wears off.  Drinking with the shemale lizard was definitely a bad idea.</b>\n");
-					//Restore stats
-					player.str += player.statusEffectv2(StatusEffects.Hangover);
-					player.spe += player.statusEffectv3(StatusEffects.Hangover);
-					player.inte += player.statusEffectv4(StatusEffects.Hangover);
-					dynStats("cor", 0);
-					//Clear status
-					player.removeStatusEffect(StatusEffects.Hangover);
-					return true;
-				}
-			}
 			if (model.time.hours > 23 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00227] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00227]--; //Reduce drinking contest bonus
 			return false;
 		}
@@ -484,8 +469,7 @@ private function roxanneReamsYouNormal():void {
 	
 	outputText("<b>LATER...</b>\n");
 	outputText("You wake in the lizan's bed<b> with a nasty hangover</b>, her arm curled around your gurgling belly.  From how sore your rear feels, she kept 'winning' at least two or three more times.  Your head is pounding, your [legs] are weak, and you dribble cum with every movement.  It takes some doing to extricate yourself from Roxanne's slumbering form, but you find your equipment and leave, hanging your head in shame under the leering eyes of the caravan-goers.");
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+	player.sexReward("cum","Anal");
 	//(-100 lust, -1 int, hangover effect)
 	player.orgasm();
 	dynStats("int", -1);
@@ -550,8 +534,7 @@ private function roxanneFucksYourAssOHGODITSHUGE():void {
 	else if(player.hasVagina() && player.wetness() >= 4) outputText(", drooling spit into the sloppy puddy of fem-cum you splattered on the mattress");
 	outputText(".");
 	outputText("  <b>You'll wake and head back to camp with a massive hangover.</b>");
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+	player.sexReward("cum","Anal");
 	//(-100 lust, -1 int, hangover effect)
 	player.orgasm();
 	dynStats("int", -1);
@@ -567,49 +550,12 @@ private function applyHangover():void {
 	//v4 = intelligence
 
 	//Already hungover?  Reset duration.
-	if(player.hasStatusEffect(StatusEffects.Hangover)) player.changeStatusValue(StatusEffects.Hangover,1,8);
+	if(player.statStore.hasBuff("Hangover")) {
+		player.statStore.addBuff("str",-1,"Hangover",{text:"Hangover",time:Buff.RATE_HOURS, tick:8});
+	}
 	//No hangover yet?  Create and yoink stats
 	else {
-		player.createStatusEffect(StatusEffects.Hangover,8,0,0,0);
-		//Strength minus 5
-		var index:int = 5;
-		while(index > 0) {
-			index--;
-			//If PC has strength to lose
-			if(player.str >= 2) {
-				mainView.statsView.showStatDown( 'str' );
-				// strDown.visible = true;
-				// strUp.visible = false;
-				player.str--;
-				player.addStatusValue(StatusEffects.Hangover,2,1);
-			}
-		}
-		//speed minus 10
-		index = 10;
-		while(index > 0) {
-			index--;
-			//If PC has speed to lose
-			if(player.spe >= 2) {
-				mainView.statsView.showStatDown( 'spe' );
-				// speDown.visible = true;
-				// speUp.visible = false;
-				player.spe--;
-				player.addStatusValue(StatusEffects.Hangover,3,1);
-			}
-		}
-		//int minus 15
-		index = 15;
-		while(index > 0) {
-			index--;
-			//If PC has intelligence to lose
-			if(player.inte >= 2) {
-				mainView.statsView.showStatDown( 'inte' );
-				// inteDown.visible = true;
-				// inteUp.visible = false;
-				player.inte--;
-				player.addStatusValue(StatusEffects.Hangover,4,1);
-			}
-		}
+		player.statStore.addBuffObject({"str":-5,"spe":-10,"int":-15},"Hangover",{text:"Hangover",time:Buff.RATE_HOURS, tick:8});
 	}
 	statScreenRefresh();
 }
@@ -642,8 +588,7 @@ private function bigBootyRoxanneContestLoss():void {
 	outputText("\n\nYour strength is gone, either from booze, or the incredible reaming and creaming you just took.  In any case, you slump over into the mess[if (hasCock = true) , falling asleep in your own spooge].");
 	outputText("\n\n<b>LATER...</b>\n");
 	outputText("You wake in the lizan's bed, her arm curled around your gurgling belly.  From how sore your rear feels, she probably kept 'winning' at least two or three more times.  Your head is pounding, your [legs] are weak, and you dribble cum from your ass with every movement.  It takes some doing to extricate yourself from Roxanne's slumbering form, but you find your equipment and leave, hanging your head in shame under the leering eyes of the caravan-goers.");
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+	player.sexReward("cum");
 	//(-100 lust, -1 int, hangover effect)
 	player.orgasm();
 	dynStats("int", -1);

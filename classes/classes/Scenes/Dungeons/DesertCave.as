@@ -211,16 +211,22 @@ public class DesertCave extends DungeonAbstractContent
 				dynStats("lib", 1, "sen", -1);
 				cleanupAfterCombat();
 			}
-			//[Bad end for small cocks]
-			outputText("\n\nYou spend the rest of your life being a bitch to the sand witches.  Kept naked and hard all the time, you're chained-up like an animal in the chamber with your hands tied behind your back, making sure you don't play with yourself.  The witches do mess with you from time to time, but mostly they just let you drown in your lust.  Many nights you yearn to feel the touch of your mistresses. You want them to humiliate you if it means they'll pleasure your little cock.  Sometimes, when a group of witches walk by, you try to look as wanting as possible.  They just walk by, saying how desperate and sad you look, leave you alone with that raging hard-on.");
-			
-			outputText("\n\nYour only saving grace are the new witches who came of age throughout the years and join the rest of their sisters in the fun.  A lot of them seem to like you, and sometimes they use you to practice spells.  Your hair has been sandy blond for a long time now, and your chest has been leaking milk too.  Besides the spells, they like to practice fucking with you.  They are nice and gentle at first but become more demanding and demeaning as time goes on, up until they forget about you.");
-			
-			//[END]
-			player.orgasm();
-			dynStats("lib", 1, "sen", -1);
-			EventParser.gameOver();
-			player.HP = player.maxHP();
+			if (player.isAlraune())
+			{
+				uniquuuesexscene.AlrauneDungeonBadEnd();
+			}
+			else {
+				//[Bad end for small cocks]
+				outputText("\n\nYou spend the rest of your life being a bitch to the sand witches.  Kept naked and hard all the time, you're chained-up like an animal in the chamber with your hands tied behind your back, making sure you don't play with yourself.  The witches do mess with you from time to time, but mostly they just let you drown in your lust.  Many nights you yearn to feel the touch of your mistresses. You want them to humiliate you if it means they'll pleasure your little cock.  Sometimes, when a group of witches walk by, you try to look as wanting as possible.  They just walk by, saying how desperate and sad you look, leave you alone with that raging hard-on.");
+
+				outputText("\n\nYour only saving grace are the new witches who came of age throughout the years and join the rest of their sisters in the fun.  A lot of them seem to like you, and sometimes they use you to practice spells.  Your hair has been sandy blond for a long time now, and your chest has been leaking milk too.  Besides the spells, they like to practice fucking with you.  They are nice and gentle at first but become more demanding and demeaning as time goes on, up until they forget about you.");
+
+				//[END]
+				player.orgasm();
+				dynStats("lib", 1, "sen", -1);
+				EventParser.gameOver();
+				player.HP = player.maxHP();
+			}
 		}
 
 		//Female
@@ -307,25 +313,29 @@ public class DesertCave extends DungeonAbstractContent
 		//[Sand-witch mob Bad end for Females]
 		public function sandWitchMobBadEnd():void {
 			clearOutput();
-			outputText("When your mind finally starts straightening things out, you wake up on a bed with your ass, cunt, and more sore than you can remember.  You rub the achy bits as you notice a cloaked figured with a wide-brimmed pointy hat sitting by your bedside, reading a white book.  When the figure sees you've awaken from your slumber, she places a bookmark in the volume and sets it on the nearby nightstand.");
-			outputText("\n\n\"<i>Good morning sister, did you have a nice nap?</i>\"");
-			
-			outputText("\n\nSister? You're not related to this girl... are you?");
-			
-			outputText("\n\n\"<i>Looks like you stumbled into the commons again. You know you're not supposed to go there until you've learned all your spells. Those girls will fuck you raw... which they did.</i>\"");
-			
-			outputText("\n\nOh yes, how could you forget something like that? You've been told hundreds of times before to avoid that place.  Well, you won't forget that anytime soon with how sore and tender your holes are.");
-			
-			outputText("\n\nThe cloaked girl stands up and pulls the blanket off your naked body.  You have bronzed skin, sandy blonde hair, two sore pussies and three rows of decently sized, milk-leaking breasts.  The cloaked girl hands you a mirror for you to look at yourself with.  Yep, you have a normal feminine, human face like you've had your whole life... right?");
-			
-			outputText("\n\nShe helps you out of the bed, and you get a better look at her face, which is almost as dark as the cloak and hat she wears.  The ebony girl reminds you that you can't leave the sanctuary until you've learned your spells and then, pulls you in close, explaining that you'll never get to experience a proper fucking or taste her cum until then.  You look down at the crotch of her robes and see she's pitching a very big cock-tent.  You promise the well-endowed herm that you'll try to do your best, and she gives you a nice pat and grab on your [butt] as you run back to start studying.");
-			
-			outputText("\n\n<b>A few months later...</b>\n");
-			outputText("After weeks of studying hard, you've finally learned everything there is to know about being a sand-witch. You've been given your desert-colored robes and are allowed to join the other witches in the commons, and can even leave the sanctuary.  After your first appointment with the Cum-Witch, you take a nice walk outside with cum drooling from both your cunts, travelling down your legs and leaving a soaked trail to follow. It feels a bit like deja vu as you take your first steps into the world.  You just shake it off.");
-			outputText("\n\nYou wander around the desert for a while, muttering an introduction of who you are and what you want to do.  Then, you see a figure walking along the dunes. Okay, time to show them your stuff.  Getting to the figure, you announce yourself:");
-			outputText("\n\n\"<i>Excuse me, I'm a sand witch, may I cast a spell on you?</i>\"");
-			player.HP = player.maxHP();
-			EventParser.gameOver();
+			if (player.isAlraune()) {
+				uniquuuesexscene.AlrauneDungeonBadEnd();
+			} else {
+				outputText("When your mind finally starts straightening things out, you wake up on a bed with your ass, cunt, and more sore than you can remember.  You rub the achy bits as you notice a cloaked figured with a wide-brimmed pointy hat sitting by your bedside, reading a white book.  When the figure sees you've awaken from your slumber, she places a bookmark in the volume and sets it on the nearby nightstand.");
+				outputText("\n\n\"<i>Good morning sister, did you have a nice nap?</i>\"");
+
+				outputText("\n\nSister? You're not related to this girl... are you?");
+
+				outputText("\n\n\"<i>Looks like you stumbled into the commons again. You know you're not supposed to go there until you've learned all your spells. Those girls will fuck you raw... which they did.</i>\"");
+
+				outputText("\n\nOh yes, how could you forget something like that? You've been told hundreds of times before to avoid that place.  Well, you won't forget that anytime soon with how sore and tender your holes are.");
+
+				outputText("\n\nThe cloaked girl stands up and pulls the blanket off your naked body.  You have bronzed skin, sandy blonde hair, two sore pussies and three rows of decently sized, milk-leaking breasts.  The cloaked girl hands you a mirror for you to look at yourself with.  Yep, you have a normal feminine, human face like you've had your whole life... right?");
+
+				outputText("\n\nShe helps you out of the bed, and you get a better look at her face, which is almost as dark as the cloak and hat she wears.  The ebony girl reminds you that you can't leave the sanctuary until you've learned your spells and then, pulls you in close, explaining that you'll never get to experience a proper fucking or taste her cum until then.  You look down at the crotch of her robes and see she's pitching a very big cock-tent.  You promise the well-endowed herm that you'll try to do your best, and she gives you a nice pat and grab on your [butt] as you run back to start studying.");
+
+				outputText("\n\n<b>A few months later...</b>\n");
+				outputText("After weeks of studying hard, you've finally learned everything there is to know about being a sand-witch. You've been given your desert-colored robes and are allowed to join the other witches in the commons, and can even leave the sanctuary.  After your first appointment with the Cum-Witch, you take a nice walk outside with cum drooling from both your cunts, travelling down your legs and leaving a soaked trail to follow. It feels a bit like deja vu as you take your first steps into the world.  You just shake it off.");
+				outputText("\n\nYou wander around the desert for a while, muttering an introduction of who you are and what you want to do.  Then, you see a figure walking along the dunes. Okay, time to show them your stuff.  Getting to the figure, you announce yourself:");
+				outputText("\n\n\"<i>Excuse me, I'm a sand witch, may I cast a spell on you?</i>\"");
+				player.HP = player.maxHP();
+				EventParser.gameOver();
+			}
 		}
 
 		//*Membered Folks Get Milked
@@ -425,13 +435,17 @@ public class DesertCave extends DungeonAbstractContent
 
 		public function memeberedFolksFindTrueWuv3():void {
 			clearOutput();
-			outputText("You wake from your stupor in a room full of sex toys, some of them being used by the busty witches.  It doesn't take long for one of them to see your state, offer you food and a drink, and present her sopping cunts to you.  You note that these women are both pregnant, but their libidos have obviously gone through the roof.  Thrusting inside her immediately, you gorge yourself on the proffered nourishment and do your duty as a captive love-slave, pleasing their holes again and again until they're so full of your cum that it slops from their lips in lewd waves with every virile ejaculation.");
-			outputText("\n\nSometimes, when you seem unhappy, they let you spend the night with Ophelia.  She's as attentive and caring as when you first met, even if she has grown larger and more powerful.  Her sweet personality shines through despite her inhuman appearance, and she'll tenderly milk you all night long while the two of you share stories of your lives.");
-			outputText("\n\nEventually, she's deemed purified enough to traverse the caves on her own, and though Ophelia does not lactate, the sisters make great use of her fluids.  Your monstrous lover spends most of her time with you, however.  Your adventure ended, but you found a love who genuinely treasures you and ensures that you get to experience dozens of orgasms an hour for days at a time...");
-			player.orgasm();
-			dynStats("lib", 5);
-			//GAME OVER
-			EventParser.gameOver();
+			if (player.isAlraune()) {
+				uniquuuesexscene.AlrauneDungeonBadEnd();
+			} else {
+				outputText("You wake from your stupor in a room full of sex toys, some of them being used by the busty witches.  It doesn't take long for one of them to see your state, offer you food and a drink, and present her sopping cunts to you.  You note that these women are both pregnant, but their libidos have obviously gone through the roof.  Thrusting inside her immediately, you gorge yourself on the proffered nourishment and do your duty as a captive love-slave, pleasing their holes again and again until they're so full of your cum that it slops from their lips in lewd waves with every virile ejaculation.");
+				outputText("\n\nSometimes, when you seem unhappy, they let you spend the night with Ophelia.  She's as attentive and caring as when you first met, even if she has grown larger and more powerful.  Her sweet personality shines through despite her inhuman appearance, and she'll tenderly milk you all night long while the two of you share stories of your lives.");
+				outputText("\n\nEventually, she's deemed purified enough to traverse the caves on her own, and though Ophelia does not lactate, the sisters make great use of her fluids.  Your monstrous lover spends most of her time with you, however.  Your adventure ended, but you found a love who genuinely treasures you and ensures that you get to experience dozens of orgasms an hour for days at a time...");
+				player.orgasm();
+				dynStats("lib", 5);
+				//GAME OVER
+				EventParser.gameOver();
+			}
 		}
 
 		//PC Wins
@@ -694,17 +708,21 @@ public class DesertCave extends DungeonAbstractContent
 
 		public function chicksLoseToSandWitchesBadEndFinale():void {
 			clearOutput();
-			outputText("<b>Some time later...</b>");
-			
-			outputText("\nYou smile and rub your hands across your womb.  True to her word, the Cum Witch got both your wombs pregnant in short order, and you couldn't be happier.  Your sisters have doted on you ever since they discovered your devotion to milk-production and child-incubation.  At first, they were a bit disturbed by your seemingly endless love for the Cum Witch's cum, but as you produced more and more milk (and children) they stopped worrying about making you stay clothed or cleaning her cum from your skin.  Not long after that, you moved in with her as a live-in cum-dump. Life is good.");
-			
-			
-			outputText("\n\nYou swallow a creamy batch of her spunk and cup her heavy balls.  They've grown a little since you moved in, you suppose to keep up with your voracious appetite for her seed, but your black lover doesn't seem to mind.  If anything, she seems quite happy to have you between her knees while she's studying her spells.  You can focus on swallowing her cum until you're full, and she gets the motivation she needs to properly develop her magics.  Why, just last week she learned how to make her jizz taste like chocolate - that was a great week!");
-			
-			outputText("\n\nStill, as you massage her quaking testes and drink down her delicious jism, you have to think, \"<i>Life is good.</i>\"");
-			
-			EventParser.gameOver();
-			removeButton(1);
+			if (player.isAlraune()) {
+				uniquuuesexscene.AlrauneDungeonBadEnd();
+			} else {
+				outputText("<b>Some time later...</b>");
+
+				outputText("\nYou smile and rub your hands across your womb.  True to her word, the Cum Witch got both your wombs pregnant in short order, and you couldn't be happier.  Your sisters have doted on you ever since they discovered your devotion to milk-production and child-incubation.  At first, they were a bit disturbed by your seemingly endless love for the Cum Witch's cum, but as you produced more and more milk (and children) they stopped worrying about making you stay clothed or cleaning her cum from your skin.  Not long after that, you moved in with her as a live-in cum-dump. Life is good.");
+
+
+				outputText("\n\nYou swallow a creamy batch of her spunk and cup her heavy balls.  They've grown a little since you moved in, you suppose to keep up with your voracious appetite for her seed, but your black lover doesn't seem to mind.  If anything, she seems quite happy to have you between her knees while she's studying her spells.  You can focus on swallowing her cum until you're full, and she gets the motivation she needs to properly develop her magics.  Why, just last week she learned how to make her jizz taste like chocolate - that was a great week!");
+
+				outputText("\n\nStill, as you massage her quaking testes and drink down her delicious jism, you have to think, \"<i>Life is good.</i>\"");
+
+				EventParser.gameOver();
+				removeButton(1);
+			}
 		}
 		//*Male Loss - Turned Into Cum Pump
 		public function cumWitchCumPumpBadEnd(volunteered:Boolean = false):void {
@@ -827,14 +845,18 @@ public class DesertCave extends DungeonAbstractContent
 
 		public function cumPumpVolumeThree():void {
 			clearOutput();
-			outputText("With the champion brainwashed into a little more than a loyal cum-pump for the sand witches, they grow in number and strength with alarming speed.  In the space of eight years, the desert is transformed into a verdant forest.  For better or for worse, the witches finally rival the demons in power.  They spread their influence wider, eventually ");
-			if(flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText("destroying");
-			else outputText("rescuing");
-			outputText(" Marae.  Their abilities, numbers, and familiarity at dealing with demons lend them great success at battling Lethice's growing hordes, and within the span of another decade, the demons are exterminated.  The witches are hailed as saviors, and young females of all races seek to join them.  You, of course, inseminate all of them.");
+			if (player.isAlraune()) {
+				uniquuuesexscene.AlrauneDungeonBadEnd();
+			} else {
+				outputText("With the champion brainwashed into a little more than a loyal cum-pump for the sand witches, they grow in number and strength with alarming speed.  In the space of eight years, the desert is transformed into a verdant forest.  For better or for worse, the witches finally rival the demons in power.  They spread their influence wider, eventually ");
+				if(flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText("destroying");
+				else outputText("rescuing");
+				outputText(" Marae.  Their abilities, numbers, and familiarity at dealing with demons lend them great success at battling Lethice's growing hordes, and within the span of another decade, the demons are exterminated.  The witches are hailed as saviors, and young females of all races seek to join them.  You, of course, inseminate all of them.");
 			
-			//[GAME OVER]
-			EventParser.gameOver();
-			removeButton(1);
+				//[GAME OVER]
+				EventParser.gameOver();
+				removeButton(1);
+			}
 		}
 		//*Repeat Desert Loss Male
 		public function repeatLoseToCumWitchForDudes():void {
@@ -1062,10 +1084,10 @@ public class DesertCave extends DungeonAbstractContent
 			
 			//Decrease PC's strength by 2 for every digit of cum production they have after 100 (I can provide an algorithm for that if you need it, it is very simple), set lust to 0, increase cum production multiplier by 1
 			player.orgasm();
-			dynStats("str", -1);
+			player.addCurse("str", 2);
 			player.cumMultiplier++;
-			if(player.cumQ() >= 200) dynStats("str", -1);
-			if(player.cumQ() >= 3000) dynStats("str", -1);
+			if(player.cumQ() >= 200) player.addCurse("str", 2);
+			if(player.cumQ() >= 3000) player.addCurse("str", 2);
 			//Usual loss text+gem loss.
 			cleanupAfterCombat();
 		}
@@ -1113,7 +1135,7 @@ public class DesertCave extends DungeonAbstractContent
 			//Female Victory Sex
 			if(player.hasVagina()) addButton(3,"Ladysex",ladyVictorySex).hint("Ride the Cum Witch's cock until she cums!");
 			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
-if (CoC.instance.inCombat) {
+			if (CoC.instance.inCombat) {
                 if(monster.HP >= 1) addButton(14,"Leave",declineSandWitch);
 				else addButton(14,"Leave",cleanupAfterCombat);
 			}
@@ -1163,10 +1185,10 @@ if (CoC.instance.inCombat) {
 				outputText("\n\nRising slowly, you withdraw yourself from the goo-glazed pussy beneath you and try to ignore the matching river of white that pours out from betwixt your thighs.  You make sure to lean over your onyx lover, salting her with her own dripping seed until the flow slows to a trickle.  She meekly protests at first, then gives up with a lusty sigh, smearing her skin with pristine white as her mind slides back into the gutter.  You make sure to admire your work while you get dressed.");
 				//(cum, then +5 lust){preg check for sammitches}
 				//sand witch preg
-				if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 				else player.knockUp(PregnancyStore.PREGNANCY_SAND_WITCH, PregnancyStore.INCUBATION_SAND_WITCH, 90);
-				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+				player.sexReward("vaginalFluids");
+				player.sexReward("cum");
 				player.orgasm();
 				dynStats("lus", 5);
 			}
@@ -1299,10 +1321,9 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			
 			outputText("\n\nThe orgasm drives your body relentlessly, and you're forced to ride the hermaphrodite like a bucking bronco, milking her cock relentlessly.  You hips thump wetly atop the chocolate lady's thighs, and it isn't until you make that final, echoing smack of soaked flesh on flesh that you come down, sagging weakly into the comfortable tits below.  The witch sighs contently and begins to stroke your [hair], but her fingers fall away after a second as her eyes flutter closed.");
 			outputText("\n\nYou recover after a few minutes and rise up, legs shaking at the overpowering sensation of the witch's withdrawing phallus, but you make it up with spunk pouring from your [vagina].  What a victory!");
-			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
             else player.knockUp(PregnancyStore.PREGNANCY_SAND_WITCH, PregnancyStore.INCUBATION_SAND_WITCH, 90);
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("cum", "Vaginal");
 			player.orgasm();
 			if(inDungeon) {
                 if (CoC.instance.inCombat) cleanupAfterCombat();
@@ -1416,12 +1437,11 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			
 			outputText("\n\nSilently, you nod, and collapse atop her, head buried in her milk-laden chest as you pass out from sexual exhaustion.");
 			player.orgasm();
+			player.sexReward("cum", "Vaginal");
 			dynStats("sen", 2);
 			cleanupAfterCombat();
 			//knock up hurrrr
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
             else player.knockUp(PregnancyStore.PREGNANCY_SAND_WITCH, PregnancyStore.INCUBATION_SAND_WITCH, 90);
 		}
 		//Do Nothing
@@ -1438,12 +1458,11 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			outputText("\n\nSilently, you nod, and collapse atop her, head buried in her milk-laden chest as you pass out from sexual exhaustion.");
 			player.orgasm();
 			dynStats("sen", 2);
-			cleanupAfterCombat();
 			//knock up hurrrr
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
-            else player.knockUp(PregnancyStore.PREGNANCY_SAND_WITCH, PregnancyStore.INCUBATION_SAND_WITCH, 90);
+			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			else player.knockUp(PregnancyStore.PREGNANCY_SAND_WITCH, PregnancyStore.INCUBATION_SAND_WITCH, 90);
+			player.sexReward("cum");
+			cleanupAfterCombat();
 		}
 
 			
@@ -1537,6 +1556,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			else outputText(" stained-white fur in a futile attempt to get some of your cum off.");
 			
 			player.orgasm();
+			player.sexReward("Default", "Default", true, false);
 			dynStats("sen", -2);
 			menu();
 			if(skipped) {
@@ -1922,6 +1942,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 				//if PC has Vagina
 				outputText("\n\nAs your quivering cunt tries to adjust to the pair of massive intruders tearing it apart, the sultry sphinx conjures up a third rod, just as big as the last.  You grit your teeth, bracing for her attempt to cram THAT up your slit as well, but instead feel only a gentle, probing wetness against your [ass].  You shiver from your very core as Sanura drags her tongue along your backdoor, pressing the tip in, seeking entrance.  Despite the static pleasure roiling in your cunt, you try your best to relax the muscles in your sphincter; eventually, after a few long moments of prodding, you feel the first inch of the magic dildo pierce your [asshole], stretching you out to your limit and beyond as Sanura shapes its size to utterly fill your rear entrance.");
 				player.buttChange(10,true,true,false);
+				player.sexReward("cum", "Vaginal");
 			}
 			//If PC Ain't Got No Cunt
 			else {
@@ -1935,8 +1956,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			
 			outputText("\n\nYou collapse as the dildos fade into nothing inside you, leaving you feeling empty to your very core.  \"<i>Enjoy yourself?</i>\" the spunk-covered leonine girl asks, dropping to her knees beside you, a hand resting on your heaving chest.  You give her a weak thumbs-up, and stagger to your [feet].");
 			//(DIsplay Options: Leave, Enter)
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("cum", "Anal");
 			player.orgasm();
 			menu();
 			addButton(0,"Enter",openZeDoorToParadize);
@@ -2106,8 +2126,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			outputText(".  Eventually, she gives a mighty, sphincter-stretching lurch and ejects from your [butt], painting it white on the way out.");
 			outputText("\n\nYou collapse in a well-fucked heap while Sanura's extra addition fades away.  She lays down next to you, fanning her face with her wings as you try to recover.  Her arm rubs one of your cheeks, still sensitive from whatever magic was in her balls, and she says, \"<i>That was great fun.  Let's do it again sometime?</i>\"");
 			outputText("\n\nYou muster the strength for a thumbs up, a dopey smile still painted on your face.");
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("cum", "Anal");
 			player.orgasm();
 			inDungeon = false;
 			menu();
@@ -2586,8 +2605,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 				flags[kFLAGS.SAND_WITCHES_COWED] = 1;
 			}
 			else outputText("\n\nThey may not think much of you, but turning the Sand Witch Queen into a mewling slut never gets old.");
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("vaginalFluids");
 			player.orgasm();
 			dynStats("cor", 1);
             if (!CoC.instance.inCombat) doNext(playerMenu);
@@ -2680,16 +2698,20 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 		//Epilogue:
 		public function menLoseToQueenMotherVolI():void {
 			clearOutput();
-			outputText("The champion woke to a body changed.  " + player.mf("He","She") + " now looked every bit the mirror image of the Cum Witch - a thick, girthy cock, two swollen balls, a pair of pendulous breasts, and skin as dark as the blackest night.  She had become one of them, a futanari witch with an insatiable libido.  As best as she could remember, she had been born a scant ten years earlier, and aged to maturity in five.  She volunteered to be a cum witch when the call went out and beat out over two dozen of her lusty sisters for the vaunted position.  Now, the elder Cum Witch was her best friend, and the two gleefully spent their days dick-deep in double-cunts, knocking up their sisters with reckless abandon.  In their free time, they studied spells and practiced stuffing each other with increasingly large seminal deposits.");
-			
-			outputText("\n\nTwo years later, at the call of the Great Mother, the sand witches went to war.  ");
-			if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0) outputText("Their harpy and phoenix allies allowed them to approach Lethice's fortress unhindered, and i");
-			else outputText("I");
-			outputText("n the bloodiest battle ever to take place on Mareth, the demons were defeated, wiped from the world in a blaze of white fire.  In the years that followed, the covens worked to undo all that had been wronged in the world.  Many demons remained, but their influence was on the wane.  The world moved on, and those that remained wisely hid.");
-			
-			outputText("\n\nThe sand witches turned the deserts into a jungle paradise, and though they lacked the taint of corruption, they never stopped their policies of aggressively bringing in blood.  Many were brainwashed into service, like the champion, but peace was brought to Mareth.  The unanswered question... is a world ruled by lusty milk witches any better than the corrupt one that preceded it?");
-			EventParser.gameOver();
-			removeButton(1);
+			if (player.isAlraune()) {
+				uniquuuesexscene.AlrauneDungeonBadEnd();
+			} else {
+				outputText("The champion woke to a body changed.  " + player.mf("He", "She") + " now looked every bit the mirror image of the Cum Witch - a thick, girthy cock, two swollen balls, a pair of pendulous breasts, and skin as dark as the blackest night.  She had become one of them, a futanari witch with an insatiable libido.  As best as she could remember, she had been born a scant ten years earlier, and aged to maturity in five.  She volunteered to be a cum witch when the call went out and beat out over two dozen of her lusty sisters for the vaunted position.  Now, the elder Cum Witch was her best friend, and the two gleefully spent their days dick-deep in double-cunts, knocking up their sisters with reckless abandon.  In their free time, they studied spells and practiced stuffing each other with increasingly large seminal deposits.");
+
+				outputText("\n\nTwo years later, at the call of the Great Mother, the sand witches went to war.  ");
+				if (flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0) outputText("Their harpy and phoenix allies allowed them to approach Lethice's fortress unhindered, and i");
+				else outputText("I");
+				outputText("n the bloodiest battle ever to take place on Mareth, the demons were defeated, wiped from the world in a blaze of white fire.  In the years that followed, the covens worked to undo all that had been wronged in the world.  Many demons remained, but their influence was on the wane.  The world moved on, and those that remained wisely hid.");
+
+				outputText("\n\nThe sand witches turned the deserts into a jungle paradise, and though they lacked the taint of corruption, they never stopped their policies of aggressively bringing in blood.  Many were brainwashed into service, like the champion, but peace was brought to Mareth.  The unanswered question... is a world ruled by lusty milk witches any better than the corrupt one that preceded it?");
+				EventParser.gameOver();
+				removeButton(1);
+			}
 		}
 			
 		//*Lose Female Loss
@@ -2780,26 +2802,30 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 		//Epilogue:
 		public function sandMotherBadEndsLadiesEpilogue():void {
 			clearOutput();
-			outputText("The Champion awoke to a body changed. " + player.mf("His","Her") + " body had been transformed in to that of a Sand Witch's.");
-			//if player had six breasts
-			if(player.bRows() > 2) outputText("  Although unlike the other Sand Witches, this one sported extra breasts which she used to her utmost advantage.");
-			//if player had gigantic breasts
-			if(player.biggestTitSize() >= 22) outputText("  She was unrivaled in her ability to produce milk thanks to the natural enormity of her breasts that her other sisters couldn't come close to.  They were so large that they often impeded her movement, which she admittedly didn't mind so much.");
-			outputText("\n\nAs best as she could remember, her life had begun only a decade ago, aging quickly to become ready for service in her Sand Mother's coven at the age of five.  She'd been eager to give her milk and use her two wombs to breed as many new sisters as possible.");
-			//if player had the broodmother perk
-			if(player.findPerk(PerkLib.BroodMother) >= 0) outputText("  She'd immediately shown a unique propensity for rapid pregnancies, birthing new sisters at twice the rate of any other Sand Witch.  Her surprisingly fertile wombs helped give an extra edge to the Sand Mother's plans.");
-			
-			//if player had broodmother and gigantic breasts
-			if(player.findPerk(PerkLib.BroodMother) >= 0 && player.biggestTitSize() >= 22) outputText("  As a result, the champion who could no longer remember her true past became little more than a giant pregnant belly surrounded by " + num2Text(player.bRows()) + " breasts so massive that the other sand witches often used her tits as comfortable cushions to sit upon, their thighs tightly gripping each giant nipple against their aching cunts for pleasure.");
-			
-			outputText("\n\nTwo years later, at the call of the Great Mother, the sand witches went to war.  ");
-			if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0) outputText("Their harpy and phoenix allies allowed them to approach Lethice's fortress unhindered, and i");
-			else outputText("I");
-			outputText("n the bloodiest battle ever to take place on Mareth, the demons were defeated, wiped from the world in a blaze of white fire.  In the years that followed, the covens worked to undo all that had been wronged in the world. Many demons remained, but their influence was on the wane.  The world moved on, and those that remained wisely hid.");
-			
-			outputText("\n\nThe sand witches turned the deserts into a jungle paradise, and though they lacked the taint of corruption, they never stopped their policies of aggressively bringing in new blood.  Many were brainwashed into service, like the champion, but peace was brought to Mareth.  The unanswered question remains: is a world ruled by lusty milk witches any better than the 'corrupt' one that preceded it?");
-			EventParser.gameOver();
-			removeButton(1);
+			if (player.isAlraune()) {
+				uniquuuesexscene.AlrauneDungeonBadEnd();
+			} else {
+				outputText("The Champion awoke to a body changed. " + player.mf("His", "Her") + " body had been transformed in to that of a Sand Witch's.");
+				//if player had six breasts
+				if (player.bRows() > 2) outputText("  Although unlike the other Sand Witches, this one sported extra breasts which she used to her utmost advantage.");
+				//if player had gigantic breasts
+				if (player.biggestTitSize() >= 22) outputText("  She was unrivaled in her ability to produce milk thanks to the natural enormity of her breasts that her other sisters couldn't come close to.  They were so large that they often impeded her movement, which she admittedly didn't mind so much.");
+				outputText("\n\nAs best as she could remember, her life had begun only a decade ago, aging quickly to become ready for service in her Sand Mother's coven at the age of five.  She'd been eager to give her milk and use her two wombs to breed as many new sisters as possible.");
+				//if player had the broodmother perk
+				if (player.findPerk(PerkLib.BroodMother) >= 0) outputText("  She'd immediately shown a unique propensity for rapid pregnancies, birthing new sisters at twice the rate of any other Sand Witch.  Her surprisingly fertile wombs helped give an extra edge to the Sand Mother's plans.");
+
+				//if player had broodmother and gigantic breasts
+				if (player.findPerk(PerkLib.BroodMother) >= 0 && player.biggestTitSize() >= 22) outputText("  As a result, the champion who could no longer remember her true past became little more than a giant pregnant belly surrounded by " + num2Text(player.bRows()) + " breasts so massive that the other sand witches often used her tits as comfortable cushions to sit upon, their thighs tightly gripping each giant nipple against their aching cunts for pleasure.");
+
+				outputText("\n\nTwo years later, at the call of the Great Mother, the sand witches went to war.  ");
+				if (flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0) outputText("Their harpy and phoenix allies allowed them to approach Lethice's fortress unhindered, and i");
+				else outputText("I");
+				outputText("n the bloodiest battle ever to take place on Mareth, the demons were defeated, wiped from the world in a blaze of white fire.  In the years that followed, the covens worked to undo all that had been wronged in the world. Many demons remained, but their influence was on the wane.  The world moved on, and those that remained wisely hid.");
+
+				outputText("\n\nThe sand witches turned the deserts into a jungle paradise, and though they lacked the taint of corruption, they never stopped their policies of aggressively bringing in new blood.  Many were brainwashed into service, like the champion, but peace was brought to Mareth.  The unanswered question remains: is a world ruled by lusty milk witches any better than the 'corrupt' one that preceded it?");
+				EventParser.gameOver();
+				removeButton(1);
+			}
 		}
 
 		public function gargoyleBadEndSandWitches():void {
@@ -3030,8 +3056,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			
 			outputText("\n\nSighing, you eventually disentangle yourself from the satisfied enchantress, but not before giving her a long, wet kiss.");
 			outputText("\n\n\"<i>Perhaps we can tend to our needs the next time they get out of hand,</i>\" she suggests.  Yes, you just might have to. ");
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("milk");
 			player.orgasm();
 			doNext(playerMenu);
 		}
@@ -3903,8 +3928,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			outputText(".  You run your fingers through the girl's hair, urging her sexual skills on as your chest heaves and quavers, riding out the massive boobgasm as fem-cum spurts from your cunt and into the milky pool below.");
 			outputText("\n\nYour entire body feels deeply refreshed, her milk having soaked into your body and making you feel fresh and revitalized, and every muscle seems to have relaxed thanks to your blissful coitus.  You start to thank the milk girl for the pleasurable company, but when you open your mouth, she presses her lips to yours for a long, tongue-filled kiss.  Chuckling to yourself, you hold the girl as tightly as her udders will allow, turning her to the side to let her nuzzle her cheek into your [chest], kissing the top of her head before the two of you climb from the pool.  You have to help her out, her massive extra weight nearly dragging her back in except for your quick reflexes.  You gather your [armor] and ruffle the milk slave's hair before turning back to the task at hand.");
 			//[+Lust, +HP, -Fatigue]
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("milk");
 			player.orgasm();
 			doNext(playerMenu);
 			fatigue(-15);
@@ -3953,8 +3977,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 				outputText("  Meanwhile, your juiced-up cunny feels like it's doing backflips inside you, contorting and squeezing as it gushes with fluid, feminine joy.  One brush on your [clit] knocks your [legs] out from underneath you, but thankfully, you float out the rest of your orgasm.");
 			}
 			outputText("\n\nA drawn out, low coo of contentment emanates from the other girl as you separate from her, and she bashfully whispers, \"<i>Thank you,</i>\" as she drags her gigantic tits over the puddly, milk-slicked floor.  Smirking and sexually sated, you pop the drain in the tub and stand there while the sex-scented lactic bathwater runs out the drain.  A quick toweling off later, and you're ready to go, feeling slightly refreshed and fairly sated.  It does take you a little longer to get your [armor] equally dry and back in place, but you manage.");
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("milk");
 			fatigue(-15);
 			player.orgasm();
 			dynStats("sen", -3);

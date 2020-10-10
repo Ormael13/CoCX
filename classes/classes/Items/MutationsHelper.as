@@ -66,6 +66,15 @@ import classes.BodyParts.Wings;
 			changes++;
 		}
 
+		public function growPartialChitin(color:String,coverage:int=Skin.COVERAGE_LOW):void {
+			if (player.hasScales()) outputText("\n\nYour [skin coat.color] scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of [skin coat.type].  At last the itching stops as <b>you brush a few more loose scales from the new chitin exoskeleton that covers some of your body.</b>");
+			else if (player.hasFur()) outputText("Your skin suddenly feels itchy as your [skin coat.type] begins falling out in clumps, <b>revealing smooth chitin</b> underneath thought most of your body is still covered with normal human skin.");
+			else if (player.hasFur()) outputText("Your skin suddenly feels itchy as some of your chitin begins falling out, <b>revealing smooth human</b> underneath thought some of your body is still covered chitin.");
+			else outputText("\n\nAn itchy feeling springs up over every inch of your [skin.type].  As you scratch yourself madly, you feel some area of your skin hardening until <b>you are partialy covered in chitin.</b>");
+			player.skin.growCoat(Skin.CHITIN,{color:color},coverage);
+			changes++;
+		}
+
 		public function growChitin(color:String,coverage:int=Skin.COVERAGE_HIGH):void {
 			if (player.hasScales()) outputText("\n\nYour [skin coat.color] scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of [skin coat.type].  At last the itching stops as <b>you brush a few more loose scales from your new chitin exoskeleton.</b>");
 			else if (player.hasFur()) outputText("Your skin suddenly feels itchy as your [skin coat.type] begins falling out in clumps, <b>revealing smooth chitin</b> underneath.");

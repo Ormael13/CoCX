@@ -17,11 +17,14 @@ import classes.Items.*;
 import classes.Scenes.Camp.CampScenes;
 import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.Dreams;
+import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.DivaScene;
+import classes.Scenes.NPCs.LunaFollower;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.VampireThirstEffect;
+import classes.lists.BreastCup;
 
 public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//Handles all timeChange events for the player. Needed because player is not unique.
@@ -203,6 +206,31 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if ((flags[kFLAGS.LUNA_FOLLOWER] == 6 || flags[kFLAGS.LUNA_FOLLOWER] == 8 || flags[kFLAGS.LUNA_FOLLOWER] == 10 || flags[kFLAGS.LUNA_FOLLOWER] == 12 || flags[kFLAGS.LUNA_FOLLOWER] == 14 || flags[kFLAGS.LUNA_FOLLOWER] == 16) && flags[kFLAGS.LUNA_JEALOUSY] < 100) flags[kFLAGS.LUNA_FOLLOWER]--;
 				if ((flags[kFLAGS.LUNA_FOLLOWER] == 5 || flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 9 || flags[kFLAGS.LUNA_FOLLOWER] == 11 || flags[kFLAGS.LUNA_FOLLOWER] == 13 || flags[kFLAGS.LUNA_FOLLOWER] == 15) && flags[kFLAGS.LUNA_JEALOUSY] >= 100 && (CoC.instance.model.time.hours > 6 && CoC.instance.model.time.hours < 23)) SceneLib.lunaFollower.warrningAboutJelously();
 			}
+			//Alter max speed if you have oversized parts. (Realistic mode)
+			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
+			{
+				var maxSpe:Number;
+				//Balls
+				var tempSpeedPenalty:Number = 0;
+				var lim:int = player.isTaur() ? 9 : 4;
+				if (player.ballSize > lim && player.balls > 0) tempSpeedPenalty += Math.round((player.ballSize - lim) / 2);
+				//Breasts
+				lim = player.isTaur() ? BreastCup.I : BreastCup.G;
+				if (player.hasBreasts() && player.biggestTitSize() > lim) tempSpeedPenalty += ((player.biggestTitSize() - lim) / 2);
+				//Cocks
+				lim = player.isTaur() ? 72 : 24;
+				if (player.biggestCockArea() > lim) tempSpeedPenalty += ((player.biggestCockArea() - lim) / 6);
+				//Min-cap
+				var penaltyMultiplier:Number = 1;
+				penaltyMultiplier -= player.str * 0.1;
+				penaltyMultiplier -= (player.tallness - 72) / 168;
+				if (penaltyMultiplier < 0.4) penaltyMultiplier = 0.4;
+				tempSpeedPenalty *= penaltyMultiplier;
+				player.buff("RealisticMode").setStat("spe.mult",-tempSpeedPenalty/100).withText("Oversized Endowments");
+			}
+			else{
+				player.buff("RealisticMode").remove();
+			}
 			Begin("PlayerEvents","hourlyCheckRacialPerks");
 			needNext = hourlyCheckRacialPerks();
 			End("PlayerEvents","hourlyCheckRacialPerks");
@@ -361,6 +389,40 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
+			if ((player.salamanderScore()>=7 || player.hasStatusEffect(StatusEffects.HinezumiCoat) || player.hellcatScore() >= 10) && !player.hasStatusEffect(StatusEffects.Overheat))
+			{
+				//Argument 1 is weither pc is in heat stage or not 1 means active
+				//Argument 2 is how many day left before player enter heats again typicaly 3;
+				//Argument 3 tells if player had sex and satisfied its overheat set to 1 when true;
+				outputText("\n\nWoa your body is heating up like crazy. You suddenly realise that due to being a");
+				if (player.salamanderScore()>=7) outputText(" salamander");
+				else if (player.hellcatScore() >= 10) outputText(" hellcat");
+				else if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) outputText(" hinezumi");
+				outputText(" your body has started overheating with lust. You will have to constantly sate your uncontrollable burning need for sex if only to stay sane long enought not to jump on everything that moves.");
+				player.createStatusEffect(StatusEffects.Overheat, 1, 0, 0,0);
+				if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
+				else if (player.hasVagina()) player.goIntoHeat(false);
+				needNext = true;
+			}
+			if ((player.salamanderScore()<7 && !player.hasStatusEffect(StatusEffects.HinezumiCoat) && player.hellcatScore() < 10) && player.hasStatusEffect(StatusEffects.Overheat))
+			{
+				outputText("\n\nYour body finaly calms down it would seem you no longer are as hot as you used to be wich might be a good thing as you won't have to deal with those bodily heat problems anymore.");
+				player.removeStatusEffect(StatusEffects.Overheat);
+				player.removeStatusEffect(StatusEffects.Heat);
+				player.removeStatusEffect(StatusEffects.Rut);
+				player.statStore.removeBuffs("Overheat");
+				needNext = true;
+			}
+			//Player overheat was cleaned by sex!
+			if (player.statusEffectv1(StatusEffects.Overheat) == 1 && player.statusEffectv3(StatusEffects.Overheat) == 1) {
+				player.addStatusValue(StatusEffects.Overheat, 1, -1);
+				player.addStatusValue(StatusEffects.Overheat, 2, 3);
+				player.addStatusValue(StatusEffects.Overheat, 3, -1);
+				player.statStore.removeBuffs("Overheat");
+				player.removeStatusEffect(StatusEffects.Heat);
+				player.removeStatusEffect(StatusEffects.Rut);
+				needNext = true;
+			}
 			if (player.findPerk(PerkLib.SlimeCore) >= 0) { //Lose slime core perk
 				if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != LowerBody.GOO) {
                     outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into [skin] while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + CoC.instance.player.chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + Appearance.buttDescription(player) + ".  A delicious pressure pulses in your abdomen and you loosen your [armor] as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
@@ -400,15 +462,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 							needNext = true;
 						}
 						if (player.spe > 1) player.addStatusValue(StatusEffects.SlimeCraving, 3, 0.1); //Keep track of how much has been taken from speed
-						player.dynStats("str", -0.1,"spe", -0.1, "lus", 2);
+						player.dynStats("str",-1,"spe", -0.1, "lus", 2);
 						player.addStatusValue(StatusEffects.SlimeCraving, 2, 0.1); //Keep track of how much has been taken from strength
 					}
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.SlimeCravingFeed)) { //Slime feeding stuff
 				outputText("\n<b>You feel revitalized from your recent intake, but soon you'll need more...</b>\n");
-				player.dynStats("str", player.statusEffectv2(StatusEffects.SlimeCraving) * 0.5, "spe", player.statusEffectv3(StatusEffects.SlimeCraving)); //Boost speed and restore half the player's lost strength
+				player.dynStats( "spe", player.statusEffectv3(StatusEffects.SlimeCraving)); //Boost speed and restore half the player's lost strength
 				player.removeStatusEffect(StatusEffects.SlimeCravingFeed); //Remove feed succuss status so it can be reset
+				player.removeCurse("str",1)
 				player.changeStatusValue(StatusEffects.SlimeCraving, 2, 0); //Reset stored hp/toughness values
 				needNext = true;
 			}
@@ -438,30 +501,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					var tempSpe:int = player.statusEffectv2(StatusEffects.AndysSmoke);
 					var tempInt:int = player.statusEffectv3(StatusEffects.AndysSmoke);
 					player.removeStatusEffect(StatusEffects.AndysSmoke);
-					dynStats("spe", -tempSpe); //Properly revert speed and intelligence.
-					dynStats("inte", -tempInt);
-					needNext = true;
-				}
-			}
-			if (player.hasStatusEffect(StatusEffects.FeedingEuphoria)) {
-				player.addStatusValue(StatusEffects.FeedingEuphoria, 1, -1);
-				if (player.statusEffectv1(StatusEffects.FeedingEuphoria) <= 0) {
-					outputText("\n<b>The change in your body agility prowess confirms that the effects of cum must have worn off.</b>\n");
-					var tempSpeed:int = player.statusEffectv2(StatusEffects.FeedingEuphoria);
-					player.removeStatusEffect(StatusEffects.FeedingEuphoria);
-					dynStats("spe", -tempSpeed); //Properly revert speed
-					needNext = true;
-				}
-			}
-			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineFenrir)) {
-				player.addStatusValue(StatusEffects.BlessingOfDivineFenrir, 1, -1);
-				if (player.statusEffectv1(StatusEffects.BlessingOfDivineFenrir) <= 0) {
-					outputText("\n<b>The divine blessing starts to fade. You think it’s high time you go back to the temple and pray.</b>\n");
-					var tempStr:int = player.statusEffectv2(StatusEffects.BlessingOfDivineFenrir);
-					var tempTou:int = player.statusEffectv3(StatusEffects.BlessingOfDivineFenrir);
-					player.removeStatusEffect(StatusEffects.BlessingOfDivineFenrir);
-					dynStats("str", -tempStr);
-					dynStats("tou", -tempTou);
+					dynStats("spe", -tempSpe, "inte", -tempInt); //Properly revert speed and intelligence.
 					needNext = true;
 				}
 			}
@@ -481,17 +521,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) {
-				player.addStatusValue(StatusEffects.BlessingOfDivineTaoth, 1, -1);
-				if (player.statusEffectv1(StatusEffects.BlessingOfDivineTaoth) <= 0) {
-					outputText("\n<b>The divine blessing starts to fade. You think it’s high time you go back to the temple and pray.</b>\n");
-					var temporalSpeed:int = player.statusEffectv2(StatusEffects.BlessingOfDivineTaoth);
-					player.removeStatusEffect(StatusEffects.BlessingOfDivineTaoth);
-					dynStats("spe", -temporalSpeed);
-					needNext = true;
-				}
-			}
-            if (CoC.instance.model.time.hours == 6 && player.armorName == "bimbo skirt" && rand(10) == 0 && player.biggestTitSize() < 12) {
+            if (camp.IsSleeping && player.armorName == "bimbo skirt" && rand(10) == 0 && player.biggestTitSize() < 12) {
                 outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
 				player.growTits(1, player.bRows(), false, 2);
 				player.dynStats("lus", 10);
@@ -513,12 +543,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
 				player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
+				player.statStore.replaceBuffObject({ 'str': bonusStats,'tou': bonusStats,'spe': bonusStats}, 'Lycanthropy', { text: 'Lycanthropy'});
 				player.removePerk(PerkLib.LycanthropyDormant);
 				needNext = true;
 			}
 			if (player.werewolfScore() < 6 && player.hasPerk(PerkLib.Lycanthropy)) {
 				outputText("\nYou feel your animalistic urges go dormant within you as you no longer are the werewolf you once were. <b>Gained Dormant lycanthropy.</b>\n");
 				player.createPerk(PerkLib.LycanthropyDormant,0,0,0,0);
+				player.statStore.removeBuffs("Lycanthropy");
 				player.removePerk(PerkLib.Lycanthropy);
 				needNext = true;
 			}
@@ -526,16 +558,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] > 0) flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC]--; //Vala post-rape countdown
 			if (flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] > 0 && flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] < 500) flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY]++;
 			if (CoC.instance.model.time.hours > 23) { //Once per day
-                if (flags[kFLAGS.STAT_GAIN_MODE] == CoC.STAT_GAIN_DAILY) {
-					if ((player.level + 1) > player.statPoints) {
-						if (player.level < 6) player.statPoints = 15;
-						else if (player.level >= 6 && player.level < 12) player.statPoints = 18;
-						else if (player.level >= 12 && player.level < 18) player.statPoints = 21;
-						else if (player.level >= 18 && player.level < 24) player.statPoints = 24;
-						else player.statPoints = player.level;
-						camp.setLevelButton(false);
-					}
-				}
 				flags[kFLAGS.BROOKE_MET_TODAY] = 0;
                 if (CoC.instance.model.time.days % 2 == 0 && flags[kFLAGS.KAIJU_BAD_END_COUNTER] > 0) {
                     flags[kFLAGS.KAIJU_BAD_END_COUNTER]--;
@@ -644,10 +666,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				//Clear sidewinder cooldown
 				if (player.hasStatusEffect(StatusEffects.CooldownSideWinder)) player.removeStatusEffect(StatusEffects.CooldownSideWinder);
 				//Energy Dependent
-				if (player.hasStatusEffect(StatusEffects.EnergyDependent) && player.statusEffectv1(StatusEffects.EnergyDependent) > 0) {
-					player.addStatusValue(StatusEffects.EnergyDependent, 1, -1);
-					player.spe -= 5;
-					player.inte -= 12;
+				if (player.hasPerk(PerkLib.EnergyDependent)) {
+					var intBuff:Number = player.buff("Energy Vampire").getValueOfStatBuff("int.mult");
+					var speBuff:Number = player.buff("Energy Vampire").getValueOfStatBuff("spe.mult");
+					if (intBuff > -0.9) {
+						player.buff("Energy Vampire").addStats({ "int.mult": -0.05 }).withText("Energy Vampire");
+					}
+					if (speBuff > -0.9) {
+						player.buff("Energy Vampire").addStats({ "spe.mult": -0.05 }).withText("Energy Vampire");
+					}
 				}
 				//Tripxi firearms selection update
 				if (player.statusEffectv2(StatusEffects.TelAdreTripxi) == 3) {
@@ -728,46 +755,46 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 5) {
 						outputText("<b>\nYou can’t help but notice the moon is almost full as it rises up.  It seems transfixing like it is calling to you.");
 						outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>\n");
-						dynStats("str", changeV, "tou", changeV, "spe", changeV);
+						player.statStore.replaceBuffObject({ 'str': 10,'tou': 10,'spe': 10}, 'Lycanthropy', { text: 'Lycanthropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,10);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 6) {
 						outputText("<b>\nWhen the almost-full moon appears it causes your heart to race with excitement.  You hearing seems better than ever.  Every breath brings a rush of smells through your nose that seem much more pronounced than they should.");
 						outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>\n");
-						dynStats("str", changeV, "tou", changeV, "spe", changeV);
+						player.statStore.replaceBuffObject({ 'str': 20,'tou': 20,'spe': 20}, 'Lycanthropy', { text: 'Lycanthropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,20);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 7) {
 						outputText("<b>\nYou gaze at the moon and it seems to gaze back into you.   Something is coming and it won’t be long now.   You feel like you are crawling in your skin.  It feels like tear out of your body and be born anew.");
 						outputText("\n\nYou feel your might increasing as the moon draws closer to fullness. It's almost time.</b>\n");
-						dynStats("str", changeV, "tou", changeV, "spe", changeV);
+						player.statStore.replaceBuffObject({ 'str': 30,'tou': 30,'spe': 30}, 'Lycanthropy', { text: 'Lycanthropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,30);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) {
-						outputText("<b>\nYou are at the peak of your strength, it's a full moon tonight and you feel yourself burning with maddening desire as you go into " + player.mf("rut","heat") + ".</b>\n");
-						dynStats("str", changeV, "tou", changeV, "spe", changeV);
+						outputText("<b>\nYou are at the peak of your strength, it's a full moon tonight and you feel yourself burning with maddening desire as you go into " + player.mf("rut your cock hardening and dripping precum at the prospect of impregnating a bitch womb full of your lupine seeds","heat your womb aching for the fresh semen of a virile male.") + "</b>\n.");
+						player.statStore.replaceBuffObject({ 'str': 40,'tou': 40,'spe': 40}, 'Lycanthropy', { text: 'Lycanthropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,40);
 						if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
 						else if (player.hasVagina()) player.goIntoHeat(false);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1) {
 						outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
-						dynStats("str", -changeV, "tou", -changeV, "spe", -changeV);
+						player.statStore.replaceBuffObject({ 'str': 30,'tou': 30,'spe': 30}, 'Lycanthropy', { text: 'Lycanthropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,30);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2) {
 						outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
-						dynStats("str", -changeV, "tou", -changeV, "spe", -changeV);
+						player.statStore.replaceBuffObject({ 'str': 20,'tou': 20,'spe': 20}, 'Lycanthropy', { text: 'Lycanthropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,20);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3) {
 						outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
-						dynStats("str", -changeV, "tou", -changeV, "spe", -changeV);
+						player.statStore.replaceBuffObject({ 'str': 10,'tou': 10,'spe': 10}, 'Lycanthropy', { text: 'Lycanthropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,10);
 					}
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 4) {
 						outputText("<b>\nIt's a new moon tonight, you feel somewhat weak.</b>\n");
-						dynStats("str", -changeV, "tou", -changeV, "spe", -changeV);
+						player.statStore.replaceBuffObject({ 'str': 0,'tou': 0,'spe': 0}, 'Lycanthropy', { text: 'Lycanthropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,0);
 					}
 					needNext = true;
@@ -803,17 +830,52 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 				//Racial perk daily effect Area
 
+				//Player overheat is intensifying
+				if (player.statusEffectv1(StatusEffects.Overheat) == 1) {
+					if (player.hasCock() || (player.gender == 3 && rand(2) == 0)){
+						if (player.goIntoRut(false)) {
+							outputText("\nYour cock aches for a wet snatch to cool itself in. It would seem your burning body has gone into rut.\n");
+							player.statStore.addBuffObject({sen:2}, "Overheat",{text:"Overheat"});
+						} else {
+							outputText("\nYour cock aches for a wet snatch to cool itself in.T Thankfully your rut cannot get any worse then it is now\n");
+							player.statStore.addBuffObject({sen:2}, "Overheat",{text:"Overheat"});
+						}
+					} else if (player.hasVagina()){
+						var intensified:Boolean = player.inHeat;
+						if (player.goIntoHeat(false)) {
+							if (intensified) {
+								outputText("\nThe hot throbbing in you intensify as your burning body aches for sex. It's difficult NOT to think about a cock slipping inside your moist fuck-tunnel as you realy could use some form of cooling for your furnace.\n");
+								player.statStore.addBuffObject({sen:2}, "Overheat",{text:"Overheat"});
+							} else {
+								outputText("\nThe hot throbbing in you intensify as your burning body aches for sex. Thankfully your heat cannot get any worse then it is now\n");
+							}
+						}
+					}
+					needNext = true;
+				}
+				//Player overheat is progressing toward active
+				if (player.statusEffectv1(StatusEffects.Overheat) == 0 && player.statusEffectv2(StatusEffects.Overheat) > 0) {
+					player.addStatusValue(StatusEffects.Overheat, 2, -1);
+					if(player.statusEffectv2(StatusEffects.Overheat) == 0){
+						player.addStatusValue(StatusEffects.Overheat, 1, 1);
+						outputText("\nYour body start overheating again, you really could use sex right now.\n");
+						if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
+						else if (player.hasVagina()) player.goIntoHeat(false);
+						needNext = true;
+					}
+				}
+
 				//Easter bunny egg balls
 				if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.balls >=2) {
 					outputText("\n<b>Your balls grow as your eggs increase in size.</b>\n");
 					player.ballSize++;
 					if (player.hasPerk(PerkLib.EasterBunnyEggBagEvolved)) {
-						var changeLib:Number = player.lib*((player.ballSize*5/100)+1); //Exemple (1*5/100)+1= 1.05 wich is the modifier to libido
+						var changeLib:Number = (player.ballSize*5/100)+1; //Exemple (1*5/100)+1= 1.05 wich is the modifier to libido
 						if (player.hasPerk(PerkLib.EasterBunnyEggBagFinalForm)){
-							changeLib = player.lib*((player.ballSize*10/100)+1);
+							changeLib = (player.ballSize*10/100)+1;
 							player.ballSize++;
 						}
-						player.dynStats("lib", changeLib);
+						player.buff("EasterBunnyBalls").setStat("lib.mult",changeLib).withText("Easter Bunny Balls");
 					}
 					if (player.ballSize > 3 && player.ballSize < 4) {
 						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head. Your balls have increased enought that you are ready to lay your eggs.");
@@ -844,8 +906,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.balls == 4)outputText("\nYou sigh in relief as your balls now empty of their eggs dangle under your cock four new way smaller eggs sliding " +
 						"inside to fill the void in them. Of course you also collected those that you shot out, never know when these can come in handy.\n");
 				player.ballSize = 1;
-				var changeLib1:Number = player.lib*((player.ballSize*5/100)+1); //Exemple (1*5/100)+1= 1.05 wich is the modifier to libido
-				player.dynStats("lib", changeLib1);
+				var changeLib1:Number = (player.ballSize*5/100)+1; //Exemple (1*5/100)+1= 1.05 wich is the modifier to libido
+				player.buff("EasterBunnyBalls").setStat("lib.mult",changeLib1).withText("Easter Bunny Balls");
 				player.removeStatusEffect(StatusEffects.EasterBunnyCame); //Remove cumming status
 				flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=2;
 				if (player.balls == 4)flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=2;
@@ -970,7 +1032,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 							if (player.thickness < 25) {
 								player.takePhysDamage(player.maxHP() / 25);
 								fatigue(2);
-								dynStats("str", -0.5, "tou", -0.5);
+								dynStats("tou", -0.5);
+								dynStats("str", -0.5);
 							}
 							else if ((model.time.hours + 2) % 4 == 0) { //Lose thickness 2x as fast.
 								player.modThickness(1, 1);
@@ -1032,7 +1095,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Demonic hunger perk
-			if (player.demonScore() >= 10 || player.hasStatusEffect(StatusEffects.PlayerPhylactery)) { //Check for being a demon enought
+			if (player.demonScore() >= 10 || player.hasPerk(PerkLib.Phylactery)) { //Check for being a demon enought
 				if (player.findPerk(PerkLib.DemonEnergyThirst) < 0) {
 					outputText("\nYou begin fantasising about pussies and cocks foaming at the idea of fucking or getting fucked. It would look like you aquired the demons hunger for sex and can now feed from the orgasms of your partners. \n\n(<b>Gained Perk: Demonic Hunger</b>)\n");
 					player.createPerk(PerkLib.DemonEnergyThirst, 0, 0, 0, 0);
@@ -1040,7 +1103,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Demonic hunger perk loss
-			if (player.demonScore() < 10 && !player.hasStatusEffect(StatusEffects.PlayerPhylactery)) { //Check for being a demon enought
+			if (player.demonScore() < 10 && !player.hasPerk(PerkLib.Phylactery)) { //Check for being a demon enought
 				if (player.findPerk(PerkLib.DemonEnergyThirst) > 0) {
 					outputText("\nYour mind clears up as becoming less of a demon you also lost the demonic hunger only sex could sate. \n\n(<b>Lost Perk: Demonic Hunger</b>)\n");
 					player.removePerk(PerkLib.DemonEnergyThirst);
@@ -1247,7 +1310,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nThe bone chilling voice of Fenrir ring in the back of your mind.");
 				outputText("\n\n\"<i>How dare you throw away my gifts...</i>\"");
 				outputText("\n\nThe collar power suddenly forcefully surge through your body transforming you back. \"<b>You now have glowing icy eyes.</b>\"\n");
-				player.eyes.type = Eyes.FENRIR;
+				CoC.instance.mutations.setEyeTypeAndColor(Eyes.FENRIR, "glacial blue");
 				needNext = true;
 			}
 			//Fenrir Back Ice Shards
@@ -1306,7 +1369,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nYour body slowly comes back to life as if it has been hibernating for a long time. You feel sickly as if dying, hungry as if you'd been starving for weeks and thirstier than if you'd been wandering the desert without drinks for about half as much.\n\n(<b>Lost Perks: "+((player.hasPerk(PerkLib.ColdAffinity) && player.yetiScore() < 6) ? "Cold Affinity, ":"")+"Dead metabolism and Icy flesh</b>)\n");
 				if (player.hasPerk(PerkLib.ColdAffinity) && player.yetiScore() < 6) player.removePerk(PerkLib.ColdAffinity);
 				player.removePerk(PerkLib.DeadMetabolism);
-				if (player.tou < 10) player.tou = 10;
 				player.removePerk(PerkLib.IcyFlesh);
 				needNext = true;
 			}
@@ -1436,8 +1498,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Flawless Body
 			if ((player.lowerBody != LowerBody.ELF || player.arms.type != Arms.ELF || !player.hasPlainSkinOnly() || player.skinAdj != "flawless") && player.findPerk(PerkLib.FlawlessBody) >= 0) {
-				outputText("\nYour body has becomes less alluring and graceful as part of reverting to a more mundane appearance.\n\n<b>(Lost the Flawless Body perk!)</b>\n");
+				outputText("\nYour body has becomes less alluring and graceful as part of reverting to a more mundane appearance.\n\n<b>(Lost the Flawless Body perk and the perfect skin!)</b>\n");
 				player.removePerk(PerkLib.FlawlessBody);
+				player.skin.setBaseOnly({type: Skin.PLAIN, adj:""});
 				needNext = true;
 			}
 			//Ferocity
@@ -1485,25 +1548,45 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Goblinoid blood & Bouncy body & goblin mechs periodical check up
-			if (player.goblinScore() >= 10 && player.findPerk(PerkLib.GoblinoidBlood) < 0) {
+			if ((player.isGoblinoid()) && player.findPerk(PerkLib.GoblinoidBlood) < 0) {
 				outputText("\nAs you become a goblinoid again you can feel the chemicals pumped in by your gadgets resume working.\n");
 				outputText("\n(<b>Gained Perk: Goblinoid blood</b>)\n");
+				if (player.hasKeyItem("Drug injectors")){
+					player.statStore.replaceBuffObject({'sens':5,'lib.mult':0.25},'DrugInjector',{text:'Drug injectors'})
+				}
+				if (player.hasKeyItem("Improved Drug injectors")){
+					player.statStore.replaceBuffObject({'sens':10,'lib.mult':0.50},'DrugInjector',{text:'Improved Drug injectors'})
+				}
+				if (player.hasKeyItem("Potent Drug injectors")){
+					player.statStore.replaceBuffObject({'sens':15,'lib.mult':0.5},'DrugInjector',{text:'Potent Drug injectors'})
+				}
+				if (player.hasKeyItem("Power bracer") >= 0) {
+					player.statStore.replaceBuffObject({'str.mult':0.50},'Power bracer',{text:'Power bracer'})
+				}
+				if (player.hasKeyItem("Powboy") >= 0) {
+					player.statStore.replaceBuffObject({'str.mult':0.75},'Power bracer',{text:'Powboy'})
+				}
+				if (player.hasKeyItem("M.G.S. bracer") >= 0) {
+					player.statStore.replaceBuffObject({'str.mult':1},'Power bracer',{text:'M.G.S. bracer'})
+				}
 				player.createPerk(PerkLib.GoblinoidBlood, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.goblinScore() < 10 && player.findPerk(PerkLib.GoblinoidBlood) >= 0) {
+			else if ((!player.isGoblinoid()) && player.findPerk(PerkLib.GoblinoidBlood) >= 0) {
 				outputText("\nYou feel the drugs in your blood losing effect. Damnit, of course it won’t work since those chemical power ups were tested for goblinoids only. Guess perhaps a in few years you could try and develop a variant.\n");
 				outputText("\n<b>(Lost Perk: Goblinoid blood)</b>\n");
 				player.removePerk(PerkLib.GoblinoidBlood);
+				player.statStore.removeBuffs("DrugInjector");
+				player.statStore.removeBuffs("Power bracer");
 				needNext = true;
 			}
-			if (player.goblinScore() >= 10 && player.findPerk(PerkLib.BouncyBody) < 0) {
+			if ((player.isGoblinoid()) && player.findPerk(PerkLib.BouncyBody) < 0) {
 				outputText("\nGeeze with how round and small you've become its like you’ve got natural cushion now. The worst that will happen is that you'll get yourself punted by some random people mistaking you for a ball. Your body is so bouncy that it naturally has a chance to reduce damage from attacks.\n");
 				outputText("\n(<b>Gained Perk: Bouncy body</b>)\n");
 				player.createPerk(PerkLib.BouncyBody, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.goblinScore() < 10 && player.findPerk(PerkLib.BouncyBody) >= 0 && player.findPerk(PerkLib.NaturalPunchingBagFinalForm) < 0) {
+			else if ((!player.isGoblinoid()) && player.findPerk(PerkLib.BouncyBody) >= 0 && player.findPerk(PerkLib.NaturalPunchingBagFinalForm) < 0) {
 				outputText("\nYou're not as cushiony as you used to be. Better avoid getting hit.\n");
 				outputText("\n<b>(Lost Perk: Bouncy body)</b>\n");
 				player.removePerk(PerkLib.BouncyBody);
@@ -1806,13 +1889,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Switch Aura Based On Alignment
-			if ((player.horns.type != Horns.BICORN || player.horns.type != Horns.UNICORN) && player.cor > 89 && player.hasPerk(PerkLib.EclipticMind)) {
+			if ((player.horns.type != Horns.BICORN && player.horns.type != Horns.UNICORN) && player.cor > 89 && player.hasPerk(PerkLib.EclipticMind) && player.hasPerk(PerkLib.AuraOfPurity)) {
 				outputText("\nA dramatic change in your alignment has altered your formerly pure aura into one of corruption\n");
 				player.removePerk(PerkLib.AuraOfPurity);
 				player.createPerk(PerkLib.AuraOfCorruption, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if ((player.horns.type != Horns.BICORN || player.horns.type != Horns.UNICORN) && player.cor < 20 && player.hasPerk(PerkLib.EclipticMind)) {
+			if ((player.horns.type != Horns.BICORN && player.horns.type != Horns.UNICORN) && player.cor < 20 && player.hasPerk(PerkLib.EclipticMind) && player.hasPerk(PerkLib.AuraOfCorruption)) {
 				outputText("\nA dramatic change in your alignment has altered your formerly corrupt aura into one of purity\n");
 				player.removePerk(PerkLib.AuraOfCorruption);
 				player.createPerk(PerkLib.AuraOfPurity, 0, 0, 0, 0);
@@ -1924,18 +2007,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			if (player.hasStatusEffect(StatusEffects.DrunkenPower)) {
-				if (player.statusEffectv1(StatusEffects.DrunkenPower) <= 0) {
-					player.str -= player.statusEffectv2(StatusEffects.DrunkenPower);
-					player.spe += player.statusEffectv3(StatusEffects.DrunkenPower);
-					player.inte += player.statusEffectv3(StatusEffects.DrunkenPower);
-					player.lib -= player.statusEffectv2(StatusEffects.DrunkenPower);
-					player.removeStatusEffect(StatusEffects.DrunkenPower);
-					outputText("<b>Seems you are sober again.</b>\n\n");
-					needNext = true;
-				}
-				else player.addStatusValue(StatusEffects.DrunkenPower,1,-1);
-			}
 			if (player.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] >= 50 && player.findPerk(PerkLib.LuststickAdapted) < 0) { //Luststick resistance unlock
                 SceneLib.sophieBimbo.unlockResistance();
                 if (player.hasStatusEffect(StatusEffects.Luststick)) player.removeStatusEffect(StatusEffects.Luststick);
@@ -2037,7 +2108,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
                 else if (player.pregnancyIncubation < 1 && player.hasVagina() && CoC.instance.model.time.hours == 1) { //Otherwise pregger check, once every morning
                     if ((player.totalFertility() > 50 && CoC.instance.model.time.days % 15 == 0) || CoC.instance.model.time.days % 30 == 0) { //every 15 days if high fertility get egg preg
-                        outputText("\n<b>Somehow you know that eggs have begun to form inside you.  You wonder how long it will be before they start to show?</b>\n");
+                        outputText("\n<b>Somehow you know that eggs have begun to form inside you. You wonder how long it will be before they start to show?</b>\n");
 						player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS, 1, 1);
 						player.createStatusEffect(StatusEffects.Eggs, rand(6), rand(2), (5 + rand(3)), 0); //v1 is type, v2 is size (1 == large) and v3 is quantity
 						player.addPerkValue(PerkLib.Oviposition, 1, 1); //Count times eggpregged this way in perk.
@@ -2047,9 +2118,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.inHeat) { //Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 				if (player.statusEffectv3(StatusEffects.Heat) <= 1 || player.vaginas.length == 0) { //Remove bonus libido from heat
-					player.dynStats("lib", -player.statusEffectv2(StatusEffects.Heat), "scale", false);
 					player.removeStatusEffect(StatusEffects.Heat); //remove heat
-					if (player.lib < 1) player.lib = 1;
 					EngineCore.statScreenRefresh();
 					outputText("\n<b>Your body calms down, at last getting over your heat.</b>\n");
 					needNext = true;
@@ -2060,9 +2129,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.inRut) { //Rut v1 is bonus cum, v2 is bonus libido, v3 is hours till it's gone
 				trace("RUT:" + player.statusEffectv3(StatusEffects.Rut));
 				if (player.statusEffectv3(StatusEffects.Rut) <= 1 || player.cockTotal() == 0) { //Remove bonus libido from rut
-					player.dynStats("lib", -player.statusEffectv2(StatusEffects.Rut), "scale", false);
 					player.removeStatusEffect(StatusEffects.Rut); //remove heat
-					if (player.lib < 10) player.lib = 10;
                     EngineCore.statScreenRefresh();
 					outputText("\n<b>Your body calms down, at last getting over your rut.</b>\n");
 					needNext = true;
@@ -2079,22 +2146,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) >= 1) {
 				if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) == 1) {
-					if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
+					if (player.statStore.hasBuff("ShiraOfTheEastFoodBuff") >= 1) {
 						var tempStrength:int = player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2);
-						dynStats("str", -tempStrength);
+						player.statStore.removeBuffs("ShiraOfTheEastFoodBuff");
 					}
-					if (player.statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
-						var tempSpeed:int = player.statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2);
-						dynStats("spe", -tempSpeed);
-					}
-					if (player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
-						var tempIntelligence:int = player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2);
-						dynStats("inte", -tempIntelligence);
-					}
-					var tempToughness:int = player.statusEffectv4(StatusEffects.ShiraOfTheEastFoodBuff2);
-					dynStats("tou", -tempToughness);
 					player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1);
-					player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2);
 					outputText("\n<b>Effect of eating in 'Shira of the east' restaurant wears off.</b>\n");
 					needNext = true;
 				}
@@ -2173,9 +2229,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
             else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && CoC.instance.model.time.hours % 13 == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] == 0) { //Repeated warnings!
                 if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2)
-					outputText("\n<b>You shiver, feeling a little cold.  Maybe you ought to get some more minotaur cum?  You just don't feel right without that pleasant buzz in the back of your mind.</b>\n");
+					outputText("\n<b>You shiver, feeling a little cold. Maybe you ought to get some more minotaur cum? You just don't feel right without that pleasant buzz in the back of your mind.</b>\n");
 				else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3)
-					outputText("\n<b>The steady fire of lust within you burns hot, making you shiver and grab at your head.  You're STILL in withdrawal after having gone so long without a dose of minotaur love.  You just know you're going to be horny and achy until you get some.</b>\n");
+					outputText("\n<b>The steady fire of lust within you burns hot, making you shiver and grab at your head. You're STILL in withdrawal after having gone so long without a dose of minotaur love.  You just know you're going to be horny and achy until you get some.</b>\n");
 				needNext = true;
 			}
 			//Decrement mino withdrawal symptoms display cooldown
@@ -2307,15 +2363,33 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
+
+			//QUEST AREA
+			//Vala Gathering Quest
+			if (player.hasItem(useables.S_SHARD, 15) && ValaScene.ValaFairyQueenQuest == ValaScene.QUEST_STAGE_STARTED) {
+				outputText("\n<b>You now have enought scepter shards to repair the fairy queen scepter! Go turn this to Vala in Tel Adre.</b>\n");
+				ValaScene.ValaFairyQueenQuest = ValaScene.QUEST_STAGE_ITEM_GATHERED;
+				needNext = true;
+			}
+			if (!player.hasItem(useables.S_SHARD, 15) && ValaScene.ValaFairyQueenQuest == ValaScene.QUEST_STAGE_ITEM_GATHERED) {
+				outputText("\n<b>Oops you seem to have forgot that Vala needs those items to repair the royal scepter and parted way with them! Well its fine you can always go beat some more Phouka for extras.</b>\n");
+				ValaScene.ValaFairyQueenQuest = ValaScene.QUEST_STAGE_STARTED;
+				needNext = true;
+			}
+			//Luna nursing reset
+			if (LunaFollower.Nursed) {
+				LunaFollower.Nursed = false;
+			}
+			//Wrap it up
 			return needNext;
 		}
 
 		public function timeChangeLarge():Boolean {
-            if (rand(4) == 0 && Holidays.isHolidays() && player.gender > 0 && CoC.instance.model.time.hours == 6 && flags[kFLAGS.XMAS_CHICKEN_YEAR] < CoC.instance.date.fullYear) {
+            if (rand(4) == 0 && Holidays.isHolidays() && player.gender > 0 && camp.IsSleeping && flags[kFLAGS.XMAS_CHICKEN_YEAR] < CoC.instance.date.fullYear) {
                 Holidays.getAChristmasChicken();
                 return true;
 			}
-            if (CoC.instance.model.time.hours == 1 && Holidays.isHolidays() && CoC.instance.date.fullYear > flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) { //XMAS ELF
+            if (camp.IsSleeping && Holidays.isHolidays() && CoC.instance.date.fullYear > flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) { //XMAS ELF
                 Holidays.xmasBitchEncounter(); //Set it to remember the last year encountered
                 return true;
 			}
@@ -2323,7 +2397,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
                 Holidays.datTurkeyRumpMeeting(); //TURKEY SURPRISE
                 return true;
 			}
-            if (checkedDream++ == 0 && CoC.instance.model.time.hours == 3) { //You can only have one dream each night
+			if (isNightTime && camp.IsWaitingResting){
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && (flags[kFLAGS.LUNA_JEALOUSY] >= 400 || flags[kFLAGS.LUNA_FOLLOWER] > 6) && player.gender > 0 && player.hasStatusEffect(StatusEffects.LunaWasWarned) && !player.hasStatusEffect(StatusEffects.LunaOff)) {
+					SceneLib.lunaFollower.fullMoonEvent(true);
+					return true;
+				}
+			}
+            if (checkedDream++ == 0 && camp.IsSleeping && camp.CanDream) { //You can only have one dream each night (NEEDS TO BE FIXED)
+				camp.CanDream = false;
                 if (player.gender > 0 && CoC.instance.model.time.days == 10) { //Day 10 dream - since this can happen only once it takes priority over all other dreams
                     dreams.dayTenDreams();
 					return true;

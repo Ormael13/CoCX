@@ -207,7 +207,7 @@ use namespace CoC;
 						when: function ():Boolean {
 							return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1;
 						},
-						chance: 30,
+						chance: 50,
 						call: partsofM1Cerberus
 					}, {
 						name: "walk",
@@ -395,6 +395,12 @@ use namespace CoC;
 				name: "alraune",
 				call: alrauneEncounterFn,
 				when: Encounters.fn.ifLevelMin(3)
+			}, {
+				name: "lilirauneIngrediant",
+				call  : lilirauneIngrediantEvent,
+				when: function():Boolean {
+					return player.isAlraune();
+				}
 			}, {
 				name  : "dark_elf_scout",
 				call  : darkelfScene.introDarkELfScout,
@@ -685,6 +691,11 @@ use namespace CoC;
 			} else {
 				alrauneScene.alrauneDeepwoods();
 			}
+		}
+		private function lilirauneIngrediantEvent():void {
+			clearOutput();
+			outputText("You spot a weird looking flower on a patch of grass that is ripe with corruption. It looks pretty normal save for it having two pistils instead of just one. You feel oddly drawn to it, deciding to bag it just in case.\n\n");
+			inventory.takeItem(consumables.STRFLOW, camp.returnToCampUseOneHour);
 		}
 		public function partsofM1Cerberus():void {
 			clearOutput();

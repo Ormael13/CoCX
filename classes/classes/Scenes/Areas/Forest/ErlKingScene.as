@@ -271,7 +271,7 @@ public class ErlKingScene extends BaseContent
 
 			outputText("It seems the Erlking has no interest in chasing prey that won’t run.\n\n");
 
-			if (player.inte < 80) player.inte++;
+			if (player.inte < 80) dynStats("int+", 1);
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);

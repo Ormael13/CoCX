@@ -60,12 +60,12 @@ public class OnikiriSake extends Consumable {
 		if (rand(3) == 0 && changes < changeLimit) {
 			if (player.str <= 50) {
 				outputText("\n\nPainful aches ripple through your body, flooding you with pain as your muscles flex and bulge, growing much stronger and more well-defined.");
-				if (player.str <= 20) dynStats("str", 3);
-				else dynStats("str", 2);
+				if (player.str <= 20) player.MutagenBonus("str", 3);
+				else player.MutagenBonus("str", 2);
 			}
 			else {
-				if (player.str >= 75) dynStats("str", .5);
-				else dynStats("str", 1);
+				if (player.str >= 75) player.MutagenBonus("str", 0.5);
+				else player.MutagenBonus("str", 1);
 				outputText("\n\nYour muscles grow tighter, bulging outwards powerfully as you get even stronger!");
 			}
 			changes++;
@@ -74,12 +74,12 @@ public class OnikiriSake extends Consumable {
 		if (rand(3) == 0 && changes < changeLimit) {
 			if (player.tou <= 50) {
 				outputText("\n\nYour hide... skin... whatever... you can feel it getting tougher as it thickens perceptibly.");
-				if (player.tou <= 20) dynStats("tou", 3);
-				else dynStats("tou", 2);
+				if (player.tou <= 20) player.MutagenBonus("tou", 3);
+				else player.MutagenBonus("tou", 2);
 			}
 			else {
-				if (player.tou >= 75) dynStats("tou", .5);
-				else dynStats("tou", 1);
+				if (player.tou >= 75) player.MutagenBonus("tou", 0.5);
+				else player.MutagenBonus("tou", 1);
 				outputText("\n\nYour tough hide grows slightly thicker.");
 			}
 			changes++;

@@ -251,10 +251,8 @@ public class CeraphScene extends NPCAwareContent
 			else outputText("You bend over and rub your belly while whispering in her ear, \"<i>Like mother, like child.</i>\"\n\n");
 			outputText("As you leave, you don't bother to spare a glance at the confused omnibus; she isn't worth your time.\n\n");
 			player.cuntChange(monster.cockArea(0), true);
-			player.sexReward("cum");
+			player.sexReward("cum", "Vaginal");
 			dynStats("lib", 3, "sen", 3, "cor", 1);
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
             if (CoC.instance.inCombat)
                 cleanupAfterCombat();
@@ -1112,7 +1110,7 @@ public class CeraphScene extends NPCAwareContent
 				//(-fetish, +cock-toy status +1)
 				flags[kFLAGS.PC_FETISH]--;
 				flags[kFLAGS.CERAPH_OWNED_DICKS]++;
-				dynStats("lib", -2, "sen", -2, "cor", 5);
+				dynStats("sen", -2, "cor", 5);
 			}
 			//(Pussy)
 			else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] == 2) {

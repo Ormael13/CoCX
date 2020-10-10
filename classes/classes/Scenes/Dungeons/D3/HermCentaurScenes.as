@@ -4,6 +4,7 @@ import classes.BaseContent;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.PregnancyStore;
+import classes.Scenes.UniqueSexScenes;
 import classes.StatusEffects;
 import classes.Scenes.SceneLib;
 import classes.PerkLib;
@@ -19,6 +20,8 @@ import classes.PerkLib;
 		{
 			
 		}
+
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
 		public function encounterThePony():void
 		{
@@ -246,11 +249,9 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 
 				outputText("\n\nYou nervelessly slide off the pole into the ground, earning a fresh bukkake of creamy cum to plaster your " + player.skinFurScales() + ".  While you recover, your demonic lover's bulk shifts away, and you soon here the telltale clopping of her moving away.  It sounds like she's heading towards the south - the exit.  You missed your chance to do anything about that demon...");
 			}
-
 			player.orgasm();
 			dynStats("cor+", 5);
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("vaginalFluids");
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			menu();
             cleanupAfterCombat(SceneLib.d3.resumeFromFight);
@@ -364,14 +365,20 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 		private function femLossIII():void
 		{
 			clearOutput();
-			outputText("<b>Months later...</b>");
+			if (player.isAlraune())
+			{
+				uniquuuesexscene.AlrauneDungeonBadEnd();
+			}
+			else {
+				outputText("<b>Months later...</b>");
 
-			outputText("\n\nYou sigh as your latest litter of imps clamor around your nipples, hungry for their mother's milk.  They're such greedy, ceaselessly ravenous creatures.  Having their clutching mouths on your nipples all the time makes it so hard to sleep, and it doesn't help that the 'father' insists on rutting with you and knotting you for hours until she's 'sure' your pregnant.");
+				outputText("\n\nYou sigh as your latest litter of imps clamor around your nipples, hungry for their mother's milk.  They're such greedy, ceaselessly ravenous creatures.  Having their clutching mouths on your nipples all the time makes it so hard to sleep, and it doesn't help that the 'father' insists on rutting with you and knotting you for hours until she's 'sure' your pregnant.");
 
-			outputText("\n\nThe rest of your days are lived out like that, interrupted only for fresh injections of demonic chemicals and thick centaur-cum.  Amazingly, the demon's experiments bear fruit, and you have the honor of birthing the first true demon offspring - the first of many.  Though you're eventually traded to a new owner once you're well used and other sluts have been similar prepared, you keep a sense of a perverse pride through it all.  You were the first demon mother.  You helped the new species propagate and assure their dominance over lesser forms of life, like yourself.");
+				outputText("\n\nThe rest of your days are lived out like that, interrupted only for fresh injections of demonic chemicals and thick centaur-cum.  Amazingly, the demon's experiments bear fruit, and you have the honor of birthing the first true demon offspring - the first of many.  Though you're eventually traded to a new owner once you're well used and other sluts have been similar prepared, you keep a sense of a perverse pride through it all.  You were the first demon mother.  You helped the new species propagate and assure their dominance over lesser forms of life, like yourself.");
 
-			dynStats("lus=", player.maxLust(), "lib", 50, "cor", 50);
-			EventParser.gameOver();
+				dynStats("lus=", player.maxLust(), "lib", 50, "cor", 50);
+				EventParser.gameOver();
+			}
 		}
 		
 		private function maleLoss(hpVictory:Boolean):void
@@ -463,8 +470,14 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 		private function maleLossII():void
 		{
 			clearOutput();
-			outputText("As the years roll by, you see lots of pussy, and lots of injections.  They test all kinds of cocktails on you.  Ones that makes your balls swell, or your seed runny, or thick, or even black.  Eventually, one of your children comes out as something other than an imp.  The first proper demon infant.  Too fucked up to feel anything but pride, you can only marvel at your amazing virility as you seed the birth of a new species, knocking up every demon with a cunt in a month-long orgy.  Your jism fuels the ascendency of an entire race, dooming Mareth.");
-			EventParser.gameOver();
+			if (player.isAlraune())
+			{
+				uniquuuesexscene.AlrauneDungeonBadEnd();
+			}
+			else {
+				outputText("As the years roll by, you see lots of pussy, and lots of injections.  They test all kinds of cocktails on you.  Ones that makes your balls swell, or your seed runny, or thick, or even black.  Eventually, one of your children comes out as something other than an imp.  The first proper demon infant.  Too fucked up to feel anything but pride, you can only marvel at your amazing virility as you seed the birth of a new species, knocking up every demon with a cunt in a month-long orgy.  Your jism fuels the ascendency of an entire race, dooming Mareth.");
+				EventParser.gameOver();
+			}
 		}
 		
 	}

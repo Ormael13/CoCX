@@ -41,9 +41,9 @@ public class TamanisDaughters extends Goblin
 				outputText("A high-pitched yet familiar voice calls out, \"<i><b>So this is where you skanks ran off to---wait a second.  Are you trying to poach Tamani's man!?</b></i>\"\n\n");
 				outputText("You can see Tamani lurking around the rear of the goblin pack, visibly berating her daughters.  On one hand it sounds like she might help you, but knowing goblins, she'll probably forget about her anger and help them subdue you for more cum...\n\n");
 				//(+5 mob strength)
-				str += 5;
+				strStat.core.value += 5;
 				//(+5 mob toughness)
-				tou += 5;
+				touStat.core.value += 5;
 				HP += 10;
 				//(-20 mob lust)
 				lust -= 20;

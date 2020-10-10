@@ -27,6 +27,7 @@ public class PerkType extends BaseContent
 		private var _desc:String;
 		private var _longDesc:String;
 		private var _keepOnAscension:Boolean;
+		public var buffs:Object;
 		public var defaultValue1:Number = 0;
 		public var defaultValue2:Number = 0;
 		public var defaultValue3:Number = 0;
@@ -437,6 +438,11 @@ public class PerkType extends BaseContent
 				type: "anyperk",
 				perks: perks
 			});
+			return this;
+		}
+
+		public function withBuffs(buffs:Object):PerkType {
+			this.buffs = buffs;
 			return this;
 		}
 	}

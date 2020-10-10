@@ -81,7 +81,7 @@ import classes.internals.*;
 			}
 			if (hasStatusEffect(StatusEffects.Fear)) {
 				EngineCore.outputText("The gatekeeper appears to be immune to your fear.\n\n");
-				this.spe += statusEffectv2(StatusEffects.Fear);
+				this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
 				removeStatusEffect(StatusEffects.Fear);
 			}
 			if (hasStatusEffect(StatusEffects.Uber)) {

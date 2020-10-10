@@ -27,12 +27,12 @@ package classes.Items.Necklaces
 		}
 		
 		override public function playerEquip():Necklace {
-			game.player.lib += 25;
+			game.player.statStore.addBuff('lib',+25,'NecklaceOfLibido',{text:'Necklace Of Libido'});
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():Necklace {
-			game.player.lib -= 25;
+			game.player.statStore.removeBuffs('NecklaceOfLibido');
 			return super.playerRemove();
 		}
 		

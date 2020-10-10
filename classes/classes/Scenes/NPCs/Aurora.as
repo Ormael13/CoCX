@@ -56,7 +56,7 @@ use namespace CoC;
 			player.takePhysDamage(damage, true);
 			createStatusEffect(StatusEffects.AbilityCooldown1, 4, 0, 0, 0);
 			outputText("Aurora flaps her huge bat wings at you trying to knock you down. You’re thrown to the ground. <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			if (player.findPerk(PerkLib.Resolute) < 0) player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			if (player.findPerk(PerkLib.Resolute) >= 0) outputText(" You’re thankfully to resilient to be stunned by such attacks and remain standing.");
 		}
@@ -130,7 +130,7 @@ use namespace CoC;
 			td *= td2;
 			td = Math.round(td);
 			td = player.takePhysDamage(td, true);
-			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			outputText(" ");
 		}
 		
@@ -141,14 +141,9 @@ use namespace CoC;
 			else
 			{
 				var damage:Number = 0;
-				var storeTou:Number = tou;//obniża tou dla ataku na gracza do poziomu str
-				tou = str;
-				damage += this.str;
-				damage += eBaseStrengthDamage() * 0.5;
-				damage += this.tou;
-				damage += eBaseToughnessDamage() * 0.5;
+				damage += this.str*2;
+				damage += eBaseStrengthDamage();
 				damage += weaponAttack;
-				tou = storeTou;
 				var crit:Boolean = false;
 				var critChance:int = 5;
 				if (this.inte <= 200) critChance += this.inte / 10;
@@ -160,7 +155,7 @@ use namespace CoC;
 				damage = Math.round(damage);
 				outputText(" It strikes you in the chest. ");
 				damage = player.takePhysDamage(damage, true);
-				if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+				if (crit) outputText(" <b>*Critical Hit!*</b>");
 			}
 		}
 		

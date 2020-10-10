@@ -4,6 +4,7 @@ package classes.Scenes.Dungeons
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.DenOfDesire.*;
+import classes.Scenes.UniqueSexScenes;
 
 //import classes.Scenes.NPCs.;
 public class DenOfDesire extends DungeonAbstractContent
@@ -14,6 +15,7 @@ public class DenOfDesire extends DungeonAbstractContent
 		private static const DUNGEON_DEN_OF_DESIRE_HERO_SLAYER_OMNIBUS:int  = 67;
 		
 		public function DenOfDesire() { }
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
 		public function enterDungeon():void {
 			inDungeon = true;
@@ -61,12 +63,18 @@ public class DenOfDesire extends DungeonAbstractContent
 		}
 		public function defeatedByHeroslayerOmnibusPage3():void {
 			clearOutput();
-			outputText("<b>Several years later</b>\n\n");
-			outputText("Master is so good with you, allowing you to rape intruders is the best! You've been masturbating for several day on your pedestal just to make this one orgasm perfect, and just as this woman fell down to the devastating power of your assault, you felt the magic restraint on your orgasm shatter, just as you mounted both her ass and her pussy with your duo of penises penetrating her and filling her body with the oozing corruption coming out of your many Lethicite cores. ");
-			outputText("Each woman or man you fuck becomes a new demon and each soul you steal fuels you with more power and desire. It is just so good and right to serve.\n\n");
-			outputText("You've long forgotten everything about your past life. You are ‘master’s’ fuck toy and pet now and your only duty and joy is as ‘master’s’ tool, to thoroughly rape anyone who dares to enter these ruins.\n\n");
-			//[GAME OVER]
-			EventParser.gameOver();
+			if (player.isAlraune())
+			{
+				uniquuuesexscene.AlrauneDungeonBadEnd();
+			}
+			else {
+				outputText("<b>Several years later</b>\n\n");
+				outputText("Master is so good with you, allowing you to rape intruders is the best! You've been masturbating for several day on your pedestal just to make this one orgasm perfect, and just as this woman fell down to the devastating power of your assault, you felt the magic restraint on your orgasm shatter, just as you mounted both her ass and her pussy with your duo of penises penetrating her and filling her body with the oozing corruption coming out of your many Lethicite cores. ");
+				outputText("Each woman or man you fuck becomes a new demon and each soul you steal fuels you with more power and desire. It is just so good and right to serve.\n\n");
+				outputText("You've long forgotten everything about your past life. You are ‘master’s’ fuck toy and pet now and your only duty and joy is as ‘master’s’ tool, to thoroughly rape anyone who dares to enter these ruins.\n\n");
+				//[GAME OVER]
+				EventParser.gameOver();
+			}
 		}
 		public function defeatedHeroslayerOmnibus():void {
 			clearOutput();

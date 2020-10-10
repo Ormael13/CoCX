@@ -50,6 +50,8 @@ public class SpriteDb {
 	}
 	[Embed(source="../../../res/sprites/archmage_alvina_shadowmantle2.png")]
 	public static const s_archmage_alvina_shadowmantle2_16bit:Class;
+	[Embed(source="../../../res/sprites/archmage_alvina_shadowmantleConcealed.png")]
+	public static const s_archmage_alvina_shadowmantle2Concealed_16bit:Class;
 	[Embed(source="../../../res/sprites/aria.png")]
 	public static var s_aria:Class;
 	[Embed(source="../../../res/sprites8bit/assmole-old.png")]

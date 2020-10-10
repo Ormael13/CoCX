@@ -9,6 +9,7 @@ import classes.Scenes.Areas.GlacialRift.YuWinterGearShop;
 import classes.Scenes.Combat.Combat;
 import classes.Scenes.Dungeons.AnzuPalace.AnzuScene;
 import classes.Scenes.Dungeons.D3.D3;
+import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.Dungeons.DungeonEngine;
 import classes.Scenes.Dungeons.HelDungeon.BrigidScene;
 import classes.Scenes.Explore.*;
@@ -207,6 +208,8 @@ public class SceneLib {
 
     public static var urtaPregs:UrtaPregs = new UrtaPregs();
 
+    public static var vala:ValaScene = new ValaScene();
+    
     public static var valeria:Valeria = new Valeria();
 
     public static var vapula:Vapula = new Vapula();

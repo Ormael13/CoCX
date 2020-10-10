@@ -14,9 +14,9 @@ public class ImpLord extends Imp
 		//sMaSh
 		protected function sMaSh():void
 		{
-			str *= 4;
+			this.strStat.core.value *= 4;
 			eAttack();
-			str *= 0.25;
+			this.strStat.core.value *= 0.25;
 		}
 		
 		//Special Attack 1

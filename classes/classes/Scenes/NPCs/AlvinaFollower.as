@@ -24,8 +24,9 @@ public function isAlvinaBirthday():Boolean {
 
 public function alvinaFirstEncounter():void
 {
-	//spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 	clearOutput();
+
 	outputText("As you travel you meet with a woman in robes with black hair. You didn’t expect to see a fellow human around in Mareth, which is a relief. Perhaps you aren’t alone in this quest. You ask if she could give you directions, as you have no idea what to expect in this realm. As a champion, your job is to fight the demons, but you can’t fight them if you have no idea where to look.\n\n");
 	outputText("\"<i>Directions and demons, hm? There are many places you could visit. If I were you, I would go to the lake and look for a peculiar island at its center. That said, be respectful of whomever you meet there.</i>\"");
 	outputText("You nod and prepare to leave, but ask her who she is in case you should ever see her again.\n\n");
@@ -82,7 +83,7 @@ public function alvinaSecondEncounterTalkHobby():void
 
 public function alvinaSecondBonusEncounter():void
 {
-	//spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 	clearOutput();
 	outputText("As you explore Mareth you come again upon Alvina. Her back is facing you as she gazes to the horizon beyond.\n\n");
 	outputText("\"<i>I overheard that you defeated Queen Lethice... Most impressive, champion of Ingnam.</i>\"\n\n");
@@ -109,19 +110,35 @@ public function alvinaThirdEncounterNo():void
 }
 public function alvinaThirdEncounterYes():void
 {
-	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 	outputText("Against your better judgment, you enter the cave. You proceed down into the depths, getting ever closer to the source of the lights.\n\nYou finally reach a large room filled with what looks to be various magical implements. ");
 	outputText("This is clearly the laboratory of a wizard and not the good kind. Pentagrams are etched everywhere. There's clearly humanoid bones on a table, and the room itself is decorated with quite a few Lethicite crystals -- proof of its owner's fiendish successes. You turn to leave the room, having seen more than enough, when you bump into a wall that wasn’t there earlier.\n\n");
 	outputText("\"<i>Leaving so soon [name]? I didn’t give you permission yet.</i>\"\n\n");
 	outputText("At the other side of the laboratory stands Alvina. She's smiling under her hood.\n\n");
 	outputText("\"<i>I see you finally made it here [name], you did… An excellent job. I can only applaud your competence. ");
-	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("You even defeated Lethice for me, which I will admit is highly convenient. ");
-	outputText("Though you had no idea that I set you on this path on purpose all along, did you? You could have gone anywhere, or got defeated by a random fiend and lost yourself, but you gladly acted like a perfect pawn and did everything just as I had planned.</i>\"\n\n");
+	if (flags[kFLAGS.DEFEATED_ZETAZ] > 0) {
+		outputText("Though you had no idea that I set you on this path on purpose all along, did you? You could have gone anywhere, or got defeated by a random fiend and lost yourself, but you gladly acted like a perfect pawn and did everything just as I had planned shuting down the factory and");
+		if (flags[kFLAGS.MET_MARAE_CORRUPTED] > 0) {
+			outputText("<i> corrupted Marae into a demon.</i>");
+		}
+		else
+		{
+			outputText("<i> saved that stupid tree god bitch</i>");
+		}
+		outputText("<i> setting up the stage for my plans.</i>");
+	}
+	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("You even defeated Lethice for me, which I will admit is highly convenient she was way to hardheaded for me to properly redirect as I pleased.</i>");
+	addButton(0, "Next", alvinaThirdEncounterYesContinue);
+}
+public function alvinaThirdEncounterYesContinue():void
+{
+	clearOutput();
+	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 	outputText("The woman laughs, her chuckling slowly turning increasingly youthful as she shrinks in size. The hooded woman is gone, replaced by a small demoness that stands before you. She doesn’t sport the usual features of a succubus, but is clearly a demon nonetheless. Her body looks mostly human in shape, save for her large hooves and furry clawed hands. A small pair of demonic wings spread from ");
 	outputText("between her shoulders, hidden by her long abyssal black hair. A goat's tail adorns her backside, and her horns curve backwards - just like a goat. She looks like some kind of demon despite the odd mix. Her subtle A cup breasts fit her 3 and a half feet tall body perfectly, although you would expect a succubus to have at least an E cup. Her eyes don’t exactly look like those of most succubi either, ");
 	outputText("as they shine with an inner malice even other demons might find disturbing. Her black sclera and glowing fiendish ember iris only making the intimidating appearance worse. She wears a pair of glasses and a somewhat revealing armor, which is unusual considering most demons prefer to wander around naked.\n\n");
 	outputText("\"<i>So… Done sizing up my perfect features? Sorry to disappoint, but if you thought I was human, that was a lie all along. In truth, I have stopped being human for several decades. Now, less about me and more about you. ");
-	if (!player.hasStatusEffect(StatusEffects.PlayerPhylactery)) outputText("I’m amazed a being still carrying a soul would achieve what you did. ");
+	if (!player.hasPerk(PerkLib.Phylactery)) outputText("I’m amazed a being still carrying a soul would achieve what you did. ");
 	outputText("Your prowess thus far have more than earned my interest. Perhaps you were just lucky... Or perhaps, like me, you are destined to a greater calling. Regardless, you served my goals well until now and I am highly interested in seeing what else you can accomplish.</i>\"\n\n");
 	outputText("A greater calling? Like what?\n\n");
 	outputText("\"<i>Power, pure and simple. You desire power, and to further increase it, the only proper path is to beseech those that possess it. Most academics seek to obtain true mastery of magic, although most are not willing to sacrifice everything for their study. After many years of researching forbidden knowledge, performing tedious experiments and depraved rituals, I came to one conclusion: ");
@@ -539,14 +556,19 @@ public function alvinaMainCampSexMenuPrideOfLucifer():void
 	outputText("Alvina’s womb quickly overflowing from the relentless torrent of cum that streams from your cock"+(player.cockTotal() > 1 ? "s" : "")+" is unable to contain the excess, pulling away from you,  leaving you and the bed to be showered in your spooge. Alvina, however, is not done as she grabs your still erupting cock.\n\n");
 	outputText("\"<i>Mmmmmm... time for my treat. This looks just about ripe.</i>\"\n\n");
 	outputText("She licks her lips in delight and to make sure not to lose a drop, as she starts to suck on your drooling penis, drinking the cum as it comes out and prolonging your orgasm. You faint against her as the rush of pleasure overloads your brain, your cock still twitching in her grasp.\n\n");
+	player.trainStat("str",2,100)
+	player.trainStat("int",2,100)
+	player.trainStat("lib",2,100)
 	alvinaMainCampSexMenu3();
 }
 public function alvinaMainCampSexMenuGreedOfMammon():void
 {
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 	clearOutput();
-	outputText("You find Alvina somewhat busy packing up her gear. You're surprised she’s leaving this early.\n\n");
-	outputText("\"<i>There's no point in me staying here, you successfully learned all I know and did all I asked. I have no further need or interest for you.</i>\"\n\n");
+	outputText("TOO DO\n\n");
+	player.trainStat("str",2,100)
+	player.trainStat("int",2,100)
+	player.trainStat("lib",2,100)
 	alvinaMainCampSexMenu3();
 }
 public function alvinaMainCampSexMenuBlasphemeOfBaphomet():void
@@ -614,6 +636,9 @@ public function alvinaMainCampSexMenuBlasphemeOfBaphomet():void
 	dynStats("lib", 2 + rand(3));
 	dynStats("str", 2 + rand(3));
 	dynStats("inte", 2 + rand(3));
+	player.trainStat("str",2,100)
+	player.trainStat("int",2,100)
+	player.trainStat("lib",2,100)
 	alvinaMainCampSexMenu3();
 }
 public function alvinaMainCampSexMenuContractOfMephistopheles():void
@@ -636,6 +661,9 @@ public function alvinaMainCampSexMenuContractOfMephistopheles():void
 	outputText("You slowly lose the concept of time as the tentacles fuck you, drenches you in cum, and wrecks your spasming body again and again. A tentacle even forced its way into Alvina’s ass and surged back out of her mouth and shoved itself right into yours, exploring your body up to the exit and cumming out of your anus. ");
 	outputText("The ground is constantly soaked with your fluids, which you barely register being drunk by some kind of weird orifice.\n\n");
 	outputText("You pass out from the overstimulation abandoning yourself to the wild fucking of the tentacles.\n\n");
+	player.trainStat("str",2,100)
+	player.trainStat("int",2,100)
+	player.trainStat("lib",2,100)
 	alvinaMainCampSexMenu3();
 }
 public function alvinaMainCampSexMenuGluttonyOfBeelzebub():void
@@ -650,6 +678,9 @@ public function alvinaMainCampSexMenuGluttonyOfBeelzebub():void
 	outputText("with a slimy double dildo made of squirming bugs. You keep bucking your hips as your pussies touch then part ways linked by a chain of squirming larvae. Your vagina suddenly fills up with cum as the dick-larvae all starts to bottom out inside your pussy, cuming in all directions and painting your inner walls. That done the larvae all proceed to leave your cunt one by one. ");
 	outputText("This is way too much and you start orgasming consecutively each time one slides out, your pussy spewing them out with a torrent of cum as you begin to babble and drool. Alvina is in a similar state smiling with an ecstatic expression as the larvae flood out of her drenching pussy. Once outside, they merge back in the bed, disappearing in whatever dimensional hole they came from.\n\n");
 	outputText("The both of you stay entangled in one another still tired after the crazy ordeal.\n\n");
+	player.trainStat("str",2,100)
+	player.trainStat("int",2,100)
+	player.trainStat("lib",2,100)
 	alvinaMainCampSexMenu3();
 }
 public function alvinaMainCampSexMenu3():void
@@ -715,10 +746,9 @@ public function alvinaCampStudy():void
 				else {
 					if (rand(2) == 0 && date.month == 7) {
 						outputText("\"<i>Did you know that Lethicite can be used as icing for cakes? A decent demon should have a frozen soul on every dessert really. I also heard only Lethice can afford such a delicacy daily. My birthday is in a few days so I hadn’t considered until now whether I want a cake or not.</i>\" You back away before she considers using yours.");
-						if (!player.hasStatusEffect(StatusEffects.PlayerPhylactery)) outputText(" You back away before she considers using yours.");
+						if (!player.hasPerk(PerkLib.Phylactery)) outputText(" You back away before she considers using yours.");
 						outputText("\n\n");
-					}
-					else {
+					} else {
 						if (rand(2) == 0 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText("\"<i>Umph I read the latest news, apparently you shut down the factory… nice job, the overseer there was an incompetent slut who deserved to get fired anyway.</i>\" Well getting praised for your heroic acts is one thing, but the way she casually talks about it makes it sounds like you didn’t accomplish anything of serious relevance.\n\n");
 						else outputText("\"<i>Did you know bee girls actually aren’t immune to corruption? I caught and used a few handmaidens as test subjects for some new spells before releasing them back to their hive. Apparently, you can create an entire army of demons just by corrupting a few and letting them spread mayhem and lust back home, very fascinating.</i>\"\n\n");
 					}
@@ -727,29 +757,32 @@ public function alvinaCampStudy():void
 		}
 		doNext(camp.campFollowers);
 		cheatTime2(5);
-	}
-	else {
+	} else {
 		outputText("Strangely, despite being a demon, Alvina makes for a great teacher. She corrects your posture when you miss a movement and helps you learn faster than you would by just reading books.\n\n");
 		outputText("\"<i>Still daydreaming in the middle of my lectures [name]?</i>\"\n\n");
 		outputText("You quickly jerk back into action to show you're listening. Alvina resumes explaining the universal principle of how to channel desire into power. You learn a lot, but the way she flaunts her body, and the many innuendos she punctuates the lesson with, make you flush red in arousal.  During the entire lesson, your teacher is teasing you, ");
 		outputText("and there's nothing you can do about it but wait patiently for the end of the lecture. By the time you get to doing something practical, you are so aroused you feel your lust rise uncontrollably just from casting those spells as wild fantasies assault your mind.\n\n");
-		if (player.inte > 70 && player.lib > 70 && flags[kFLAGS.ALVINA_FOLLOWER] == 15) {
+		if (player.intStat.core.value > 80 && player.libStat.core.value > 80 && flags[kFLAGS.ALVINA_FOLLOWER] == 15) {
 			outputText("You finally achieved complete mastery over your lust, conquering your arousal and turning it into a weapon to use against your foe as you unleash a massive blast of black magic on the target dummy.\n\n");
 			outputText("\"<i>Very good [name], you finally achieved mastery of the theory. Tomorrow we will discuss more advanced principles.</i>\" She dismisses you with these congratulations as you head back to camp feeling both sexy and powerful.\n\n");
 			player.createStatusEffect(StatusEffects.AlvinaTraining, 0, 0, 0, 0);
-			dynStats("inte", 10, "lib", 10, "cor", 3);
+			dynStats("inte", 4, "lib", 4, "cor", 3);
+			player.trainStat("int",4,100)
+			player.trainStat("lib",4,100)
 			flags[kFLAGS.ALVINA_FOLLOWER] = 16;
-		}
-		else if (player.inte > 35 && player.lib > 35 && flags[kFLAGS.ALVINA_FOLLOWER] == 14) {
+		} else if (player.intStat.core.value > 50 && player.libStat.core.value > 50 && flags[kFLAGS.ALVINA_FOLLOWER] == 14) {
 			outputText("Against all odds, you manage to hold your lust in check and cast the spells properly.\n\n");
 			outputText("\"<i>That will be all for today [name], we will continue tomorrow.</i>\" You head back to camp feeling extremely pent up, but also smarter.\n\n");
 			dynStats("inte", 7, "lib", 7, "cor", 2);
+			player.trainStat("int",7,100)
+			player.trainStat("lib",7,100)
 			flags[kFLAGS.ALVINA_FOLLOWER] = 15;
-		}
-		else {
+		} else {
 			outputText("Unable to hold back any longer, you orgasm as you cast the spell. Alvina is amused by your lack of endurance.\n\n");
 			outputText("\"<i>Well aren’t you the lewd student. Regardless, you will need to practice until you develop some resilience. Come back tomorrow to resume your training.</i>\" She dismisses you, leaving you to clean up your mess. At least you learned a few new things.\n\n");
-			dynStats("inte", 4, "lib", 4, "cor", 1);
+			dynStats("inte", 10, "lib", 10, "cor", 10);
+			player.trainStat("int",10,100)
+			player.trainStat("lib",10,100)
 			flags[kFLAGS.ALVINA_FOLLOWER] = 14;
 		}
 		doNext(camp.returnToCampUseSixHours);
@@ -798,8 +831,8 @@ public function alvinaCampAdvancedStudy():void
 		outputText("She jumps to sit on a nearby stool and crosses her legs, tapping her chin as she’s seemingly remembering something important.\n\n");
 		outputText("\"<i>Oh! That's right, a last warning. In case you had ‘fantasies’ of rebellion against me... I had a few extra components inserted into the spell used to create your phylactery. Should you attempt anything ‘out of line’ I can force it to explode as easily as snapping my finger.</i>\"\n\n");
 		outputText("You realize Alvina has your very life in the palm of that cute paw of hers. It's a terrible realization but at the same time, it dawns on you that you have no reason to antagonize her. Truth be told, having a good relation with a font of power like her could only prove beneficial could it not?\n\n");
-		player.createStatusEffect(StatusEffects.PlayerPhylactery, 0, 0, 0, 0);
 		player.addStatusValue(StatusEffects.AlvinaTraining2, 1, 1);
+		player.createPerk(PerkLib.Phylactery, 0, 0, 0, 0);
 		if (player.cor < 100) player.cor = 100;
 		doNext(camp.returnToCampUseSixHours);
 	}

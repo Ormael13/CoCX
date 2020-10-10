@@ -6,6 +6,7 @@ import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.PregnancyStore;
+import classes.Scenes.UniqueSexScenes;
 import classes.StatusEffects;
 import classes.Scenes.Dungeons.Factory.IncubusMechanic;
 import classes.Scenes.SceneLib;
@@ -21,6 +22,8 @@ import classes.Scenes.SceneLib;
 		{
 			
 		}
+
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
 		// There's nothing to track if you just enter the Incubus' room in D1 and didn't approach him.
 		// IF you approach him, then we can track that (either you fight, or you talk and give him an item)
@@ -520,8 +523,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			outputText("\n\nHe's a demon. Maybe he'll actually find his way to your camp to be your fucktoy. More likely he was just saying whatever would save his hide and sharing his excessive perversions with you. You wouldn't mind him fucking you every morning, would you?");
 
 			outputText("\n\nShaking your head, you clear away the errant thoughts and focus on the battles to come.");
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("cum");
 			player.orgasm();
 			dynStats("cor+", 5);
 
@@ -691,140 +693,140 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			doNext(maleLossToMechanicIII);
 		}
 		
-		private function maleLossToMechanicIII():void
-		{
+		private function maleLossToMechanicIII():void {
 			clearOutput();
-			outputText("The champion finally got to cum once Lethice had her turn, but by that point, pussy was all " + player.mf("he","she") + " could think about. Release came more frequently with the demon queen's permission. It didn't really matter, though. The champion was addicted to riding on the edge of climax, broken into nothing more than a demonic vibrator.");
+			if (player.isAlraune()) {
+				uniquuuesexscene.AlrauneDungeonBadEnd();
+			} else {
+				outputText("The champion finally got to cum once Lethice had her turn, but by that point, pussy was all " + player.mf("he", "she") + " could think about. Release came more frequently with the demon queen's permission. It didn't really matter, though. The champion was addicted to riding on the edge of climax, broken into nothing more than a demonic vibrator.");
 
-			EventParser.gameOver(); // G-G-G-GAMEOVER.
+				EventParser.gameOver(); // G-G-G-GAMEOVER.
+			}
 		}
 		
 		
 		private function errybodyelseLossToMechanic(hpVictory:Boolean):void
 		{
 			clearOutput();
-
-			//Get turned into girl-lube pot.
-			//Genderless Lust Loss
-			if (!player.hasVagina() && !hpVictory)
-			{
-				outputText("You stagger about drunkenly, stuffing your hand down your [armor] to get at your needy, aching [asshole]. You feel like a molten-hot font of lust and a delirious, jizz-craving slut all at the same time. Nothing short of hours of endlessly rutting on a virile, demonic cock for hours will quench the flames of your ardor and give you the pleasure you now crave. You whimper, looking up at the incubus imploringly as you try to get him to take you, yanking open your [armor] to show off your ready sphincter and busily pumping fingers. You even spread yourself open, beckoning him to stuff you.");
-				outputText("\n\nThe demon uncaps a bottle of something and presses it into your spread-open sphincter, pouring something into you. Before you try to push it out, you feel buzzing heat in your groin, so strong that it's practically disabling. Slowly, that heat focusing into an incredible, wet sensation. <b>You've grown a pussy!</b> The empty bottle falls to the ground.");
-				player.createVagina();
-				outputText("\n\n");
-			}
-			//Genderless HP Loss
-			else if (!player.hasVagina() && hpVictory)
-			{
-				outputText("Collapsing onto the ground, you look up at the demonic aggressor with hate in your eyes, unwilling to admit defeat even when staring full-on into its face. The incubus, for his part, simply smiles down at you as he steps closer, claws clicking noisily on the smooth, tiled pavement.");
-
-				outputText("\n\n\"<i>Is that all the mighty champion is capable of? Feeble resistance that ends itself before lust can be properly awakened? I am... disappointed in you,</i>\" the incubus admits as he kneels down to look at conquered prize. \"<i>Still, Lethice will be pleased to have you at hand at last. I think I might get to keep you.</i>\" He playfully manhandles his foot-long meat to smack against your [face], forcing you to get a good feel for his tainted cock, to smell lurid, sexual scent.");
-
-				outputText("\n\nIt makes your [asshole] tingle hungrily. More hungrily than it's ever felt.");
-
-				outputText("\n\nSmiling, the overall-clad corruptor drags his thick tool up your cheek and across your lips, leaking his slime as he goes, and he gleefully watches you try to maintain your disdain in the face of his lascivious influence.");
-
-				outputText("\n\nWhile you are distracted, he unhooked your [armor], casting it aside, already forgotten. Like this... he can take you more easily. No! You've got to fight this. He gently strokes your [hair] and laughs. You clench needily, aching to feel him inside you. Acting while you're distracted, the incubus suddenly presses something smooth and cold against your exposed ass. Something flows out of it into you! It was a bottle. You squeeze down, trying to force it out, but it stays stubbornly inside you. The incubus pulls it out a moment later, but the damage is done. Increadible warmth gathers in your crotch. With it comes arousal. In seconds, you're panting, and lurid wetness spreads out from your crotch, leaking from <b>your new vagina.</b>");
-
-				player.createVagina();
-
-				outputText("\n\nGods, your pussy is wet, but you've got to fight it! You have to hold on, maybe bite him or something to give you the time to recover and get back on the offensive! Yeah... biting might do the trick. You inhale to steel yourself for the oral assault, getting a nice, long whiff of his supremely potent pheromones in the process. Your [clit] gets so stiff that you start writhing your [hips] in order to squish your cunt-lips tight around. <i>Mmmm, gotta attack...</i> you think, but your heart just isn't in it anymore. You open your mouth, letting him push his tip inside, so that you can bite him, of course. Oh, the flavor is so intense... so strong and masculine and perfect on your tongue that you decide NOT to chomp down. Not yet. You can spend a little time recovering first, with his wonderfully tasty, throbbing-hot demon-cock on your happily licking tongue.");
-
-				outputText("\n\nSoon, those licks turn to sucks, and those sucks into a devilishly pleasurable blowjob. One hand winds to your steaming box while the other gropes at your [fullChest],");
-				if (player.hasFuckableNipples()) outputText(" slipping inside a [nipple] to thrust just like your other hand. You work your upper and lower pussies like a woman possessed.");
-				else
-				{
-					outputText(" pinching and tugging on");
-					if (player.totalNipples() > player.totalBreasts()) outputText(" nipple after nipple, your myriad breastly endowments providing you with oh so many buttons to tend to");
-					else outputText("your [nipples] one after another");
+			if (player.isAlraune()) {
+				uniquuuesexscene.AlrauneDungeonBadEnd();
+			} else {
+				//Get turned into girl-lube pot.
+				//Genderless Lust Loss
+				if (!player.hasVagina() && !hpVictory) {
+					outputText("You stagger about drunkenly, stuffing your hand down your [armor] to get at your needy, aching [asshole]. You feel like a molten-hot font of lust and a delirious, jizz-craving slut all at the same time. Nothing short of hours of endlessly rutting on a virile, demonic cock for hours will quench the flames of your ardor and give you the pleasure you now crave. You whimper, looking up at the incubus imploringly as you try to get him to take you, yanking open your [armor] to show off your ready sphincter and busily pumping fingers. You even spread yourself open, beckoning him to stuff you.");
+					outputText("\n\nThe demon uncaps a bottle of something and presses it into your spread-open sphincter, pouring something into you. Before you try to push it out, you feel buzzing heat in your groin, so strong that it's practically disabling. Slowly, that heat focusing into an incredible, wet sensation. <b>You've grown a pussy!</b> The empty bottle falls to the ground.");
+					player.createVagina();
+					outputText("\n\n");
 				}
-				outputText(" Alas, all good things must come to an end, and your lovely, lovely little lollipop is rudely pulled from your questing lips with a noisy pop.");
+				//Genderless HP Loss
+				else if (!player.hasVagina() && hpVictory) {
+					outputText("Collapsing onto the ground, you look up at the demonic aggressor with hate in your eyes, unwilling to admit defeat even when staring full-on into its face. The incubus, for his part, simply smiles down at you as he steps closer, claws clicking noisily on the smooth, tiled pavement.");
 
-				outputText("\n\nYou give a mewl of disappointment and open your eyes to see the incubus standing back a few feet, smirking at you, his cock hard, jutting, and leaking. That simply won't do! A dick like that... it needs to be sucked... tended to... until it can cum! You struggle out of your [armor] and up onto your [feet], staggering towards it with your hand still firmly lodged in your [vagina]. You've got to tempt him back to you, or catch him at the very least.");
-			}
-			//Lust Lawss
-			else if (player.hasVagina() && !hpVictory)
-			{
-				outputText("You stagger about drunkenly, stuffing your hand down your [armor] to get at your needy, aching [vagina]. You feel like a molten-hot font of lust and a delirious, jizz-craving slut all at the same time. Nothing short of hours of endlessly rutting on a virile, demonic cock for hours will quench the flames of your ardor and give you the pleasure you now crave. You whimper, looking up at the incubus imploringly as you try to get him to take you, yanking open your [armor] to show off your splayed-open twat and busily pumping fingers. You even pull them out lick clean, hoping he'll enjoy the show as much as you enjoy your own taste.");
-			}
-			//HP Lawss:
-			else
-			{
-				outputText("Collapsing onto the ground, you look up at the demonic aggressor with hate in your eyes, unwilling to admit defeat even when staring full-on into its face. The incubus, for his part, simply smiles down at you as he steps closer, claws clicking noisily on the smooth, tiled pavement.");
-				outputText("\n\n\"<i>Is that all the mighty champion is capable of? Feeble resistance that ends itself before lust can be properly awakened? I am... disappointed in you,</i>\" the incubus admits as he kneels down to look at conquered prize. \"<i>Still, Lethice will be pleased to have you at hand at last. I think I might get to keep you.</i>\" He playfully manhandles his foot-long meat to smack against your [face], forcing you to get a good feel for his tainted cock, to smell lurid, sexual scent.");
-				outputText("\n\nIt makes your [vagina] wet. Wetter than it really should be.");
-				outputText("\n\nSmiling, the overall-clad corruptor drags his thick tool up your cheek and across your lips, leaking his slime as he goes, and he gleefully watches you try to maintain your disdain in the face of his lascivious influence. ");
-				outputText("\n\nGods, your pussy is wet, but you've got to fight it! You have to hold on, maybe bite him or something to give you the time to recover and get back on the offensive! Yeah... biting might do the trick. You inhale to steel yourself for the oral assault, getting a nice, long whiff of his supremely potent pheromones in the process. Your [clit] gets so stiff that you start writhing your [hips] in order to squish your cunt-lips tight around. <i>Mmmm, gotta attack...</i> you think, but your heart just isn't in it anymore. You open your mouth, letting him push his tip inside, so that you can bite him, of course. Oh, the flavor is so intense... so strong and masculine and perfect on your tongue that you decide NOT to chomp down. Not yet. You can spend a little time recovering first, with his wonderfully tasty, throbbing-hot demon-cock on your happily licking tongue.");
-				outputText("\n\nSoon, those licks turn to sucks, and those sucks into a devilishly pleasurable blowjob. One hand winds under your [armor] to tend to your steaming box while the other gropes at your [fullChest],");
+					outputText("\n\n\"<i>Is that all the mighty champion is capable of? Feeble resistance that ends itself before lust can be properly awakened? I am... disappointed in you,</i>\" the incubus admits as he kneels down to look at conquered prize. \"<i>Still, Lethice will be pleased to have you at hand at last. I think I might get to keep you.</i>\" He playfully manhandles his foot-long meat to smack against your [face], forcing you to get a good feel for his tainted cock, to smell lurid, sexual scent.");
 
-				if (player.hasFuckableNipples()) outputText(" slipping inside a [nipple] to thrust just like your other hand. You work your upper and lower pussies like a woman possessed.");
-				else
-				{
-					outputText(" pinching and tugging on");
-					if (player.totalNipples() > player.totalBreasts()) outputText(" nipple after nipple, your myriad breastly endowments providing you with oh so many buttons to tend to");
-					else outputText("your [nipples] one after another");
+					outputText("\n\nIt makes your [asshole] tingle hungrily. More hungrily than it's ever felt.");
+
+					outputText("\n\nSmiling, the overall-clad corruptor drags his thick tool up your cheek and across your lips, leaking his slime as he goes, and he gleefully watches you try to maintain your disdain in the face of his lascivious influence.");
+
+					outputText("\n\nWhile you are distracted, he unhooked your [armor], casting it aside, already forgotten. Like this... he can take you more easily. No! You've got to fight this. He gently strokes your [hair] and laughs. You clench needily, aching to feel him inside you. Acting while you're distracted, the incubus suddenly presses something smooth and cold against your exposed ass. Something flows out of it into you! It was a bottle. You squeeze down, trying to force it out, but it stays stubbornly inside you. The incubus pulls it out a moment later, but the damage is done. Increadible warmth gathers in your crotch. With it comes arousal. In seconds, you're panting, and lurid wetness spreads out from your crotch, leaking from <b>your new vagina.</b>");
+
+					player.createVagina();
+
+					outputText("\n\nGods, your pussy is wet, but you've got to fight it! You have to hold on, maybe bite him or something to give you the time to recover and get back on the offensive! Yeah... biting might do the trick. You inhale to steel yourself for the oral assault, getting a nice, long whiff of his supremely potent pheromones in the process. Your [clit] gets so stiff that you start writhing your [hips] in order to squish your cunt-lips tight around. <i>Mmmm, gotta attack...</i> you think, but your heart just isn't in it anymore. You open your mouth, letting him push his tip inside, so that you can bite him, of course. Oh, the flavor is so intense... so strong and masculine and perfect on your tongue that you decide NOT to chomp down. Not yet. You can spend a little time recovering first, with his wonderfully tasty, throbbing-hot demon-cock on your happily licking tongue.");
+
+					outputText("\n\nSoon, those licks turn to sucks, and those sucks into a devilishly pleasurable blowjob. One hand winds to your steaming box while the other gropes at your [fullChest],");
+					if (player.hasFuckableNipples()) outputText(" slipping inside a [nipple] to thrust just like your other hand. You work your upper and lower pussies like a woman possessed.");
+					else {
+						outputText(" pinching and tugging on");
+						if (player.totalNipples() > player.totalBreasts()) outputText(" nipple after nipple, your myriad breastly endowments providing you with oh so many buttons to tend to");
+						else outputText("your [nipples] one after another");
+					}
+					outputText(" Alas, all good things must come to an end, and your lovely, lovely little lollipop is rudely pulled from your questing lips with a noisy pop.");
+
+					outputText("\n\nYou give a mewl of disappointment and open your eyes to see the incubus standing back a few feet, smirking at you, his cock hard, jutting, and leaking. That simply won't do! A dick like that... it needs to be sucked... tended to... until it can cum! You struggle out of your [armor] and up onto your [feet], staggering towards it with your hand still firmly lodged in your [vagina]. You've got to tempt him back to you, or catch him at the very least.");
 				}
-				outputText(" Alas, all good things must come to an end, and your lovely, lovely little lollipop is rudely pulled from your questing lips with a noisy pop.");
+				//Lust Lawss
+				else if (player.hasVagina() && !hpVictory) {
+					outputText("You stagger about drunkenly, stuffing your hand down your [armor] to get at your needy, aching [vagina]. You feel like a molten-hot font of lust and a delirious, jizz-craving slut all at the same time. Nothing short of hours of endlessly rutting on a virile, demonic cock for hours will quench the flames of your ardor and give you the pleasure you now crave. You whimper, looking up at the incubus imploringly as you try to get him to take you, yanking open your [armor] to show off your splayed-open twat and busily pumping fingers. You even pull them out lick clean, hoping he'll enjoy the show as much as you enjoy your own taste.");
+				}
+				//HP Lawss:
+				else {
+					outputText("Collapsing onto the ground, you look up at the demonic aggressor with hate in your eyes, unwilling to admit defeat even when staring full-on into its face. The incubus, for his part, simply smiles down at you as he steps closer, claws clicking noisily on the smooth, tiled pavement.");
+					outputText("\n\n\"<i>Is that all the mighty champion is capable of? Feeble resistance that ends itself before lust can be properly awakened? I am... disappointed in you,</i>\" the incubus admits as he kneels down to look at conquered prize. \"<i>Still, Lethice will be pleased to have you at hand at last. I think I might get to keep you.</i>\" He playfully manhandles his foot-long meat to smack against your [face], forcing you to get a good feel for his tainted cock, to smell lurid, sexual scent.");
+					outputText("\n\nIt makes your [vagina] wet. Wetter than it really should be.");
+					outputText("\n\nSmiling, the overall-clad corruptor drags his thick tool up your cheek and across your lips, leaking his slime as he goes, and he gleefully watches you try to maintain your disdain in the face of his lascivious influence. ");
+					outputText("\n\nGods, your pussy is wet, but you've got to fight it! You have to hold on, maybe bite him or something to give you the time to recover and get back on the offensive! Yeah... biting might do the trick. You inhale to steel yourself for the oral assault, getting a nice, long whiff of his supremely potent pheromones in the process. Your [clit] gets so stiff that you start writhing your [hips] in order to squish your cunt-lips tight around. <i>Mmmm, gotta attack...</i> you think, but your heart just isn't in it anymore. You open your mouth, letting him push his tip inside, so that you can bite him, of course. Oh, the flavor is so intense... so strong and masculine and perfect on your tongue that you decide NOT to chomp down. Not yet. You can spend a little time recovering first, with his wonderfully tasty, throbbing-hot demon-cock on your happily licking tongue.");
+					outputText("\n\nSoon, those licks turn to sucks, and those sucks into a devilishly pleasurable blowjob. One hand winds under your [armor] to tend to your steaming box while the other gropes at your [fullChest],");
 
-				outputText("\n\nYou give a mewl of disappointment and open your eyes to see the incubus standing back a few feet, smirking at you, his cock hard, jutting, and leaking. That simply won't do! A dick like that... it needs to be sucked... tended to... until it can cum! You struggle out of your [armor] and up onto your [feet], staggering towards it with your hand still firmly lodged in your [vagina]. You've got to tempt him back to you, or catch him at the very least.");
+					if (player.hasFuckableNipples()) outputText(" slipping inside a [nipple] to thrust just like your other hand. You work your upper and lower pussies like a woman possessed.");
+					else {
+						outputText(" pinching and tugging on");
+						if (player.totalNipples() > player.totalBreasts()) outputText(" nipple after nipple, your myriad breastly endowments providing you with oh so many buttons to tend to");
+						else outputText("your [nipples] one after another");
+					}
+					outputText(" Alas, all good things must come to an end, and your lovely, lovely little lollipop is rudely pulled from your questing lips with a noisy pop.");
+
+					outputText("\n\nYou give a mewl of disappointment and open your eyes to see the incubus standing back a few feet, smirking at you, his cock hard, jutting, and leaking. That simply won't do! A dick like that... it needs to be sucked... tended to... until it can cum! You struggle out of your [armor] and up onto your [feet], staggering towards it with your hand still firmly lodged in your [vagina]. You've got to tempt him back to you, or catch him at the very least.");
+				}
+
+				//MERGE BOTH FORKS
+				outputText("\n\n\"<i>Come along now, girl. I'll give you all the dick you can suck, but not here,</i>\" the twisted creature promises as he backs away, holding his member in one hand and shaking it before you like a treat for a dog. You stagger after, knowing that a male, even a demonic one, won't deny you the throbbing-hard relief you seek, even if he makes you work for a bit first. The light from outside dims as you clear an open doorway, ignoring everything but the deliciously enticing sway of the member before you. Gods, you <b>need</b> that thing inside you.");
+
+				outputText("\n\nLuckily, he stops backing up not long after entering the building and patiently awaits you. He's even courteous enough to lengthen his cock when you knee before him so that you may more easily slip it into your mouth.");
+
+				outputText("\n\n\"<i>That's my good slut,</i>\" he sighs in whispery pleasure. \"<i>You just keep sucking while I get the machinery into position.</i>\" Whatever. After a little more rod-polishing, you're sure he'll give you a fucking for the ages, the one your cunny deserves. You've just got to focus on getting his musky member so perfectly aroused that he has no other choice. The sound of unspooling chains and clanking metal doesn't bother you. Not even when a set of wooden stocks are fastened around your hands and neck, holding you in place. You regret the inability to cup his balls, but when he pushes wholly inside, you're able to lick them all the same.");
+
+				outputText("\n\nThe source of your lust is soon bending double to fasten more bindings around your waist and [hips], attacking them to more chains by the sounds of it. Soon after, the devices lift you up off the ground such that you");
+
+				// 9999 not sure about these
+				if (player.isNaga()) outputText("r coils don't get sore");
+				else if (!player.isBiped()) outputText(" don't even need to support yourself anymore");
+				else outputText(" knees don't get sore");
+				outputText(". How wonderful! If you move just right, you can make the whole contraption sway slightly to get a proper dick-sucking rhythm going. His pearly pre-cream oozes onto your tongue, and you swallow as much of it as you can.");
+
+				outputText("\n\nWith such skillful oral service being given, it comes as some surprise to you when the incubus removes his dick from your suckling maw. Of course, he must be just changing position to fuck you, hence the elaborate bondage rig! You close your eyes and focus your attentions lower on your body, awaiting the inevitable pentration, but your loins remain completely and totally unmolested. Something cool and rubbery is pressed against your mouth instead. You accept it, letting what you discover to be a faux phallus push the whole way to the back of your mouth before it is sealed on by a band the mechanic fastens to you.");
+
+				outputText("\n\nHe smiles and affectionately tussles your [hair]. \"<i>Silly girl. Your pussy wasn't meant to be fucked and filled.</i>\"");
+
+				outputText("\n\nYou plead with red-rimmed eyes, imploring him to fuck your [vagina]. Of course it is! It's all you want right now! It'll be all you ever want if he does it right!");
+
+				outputText("\n\nShaking his head slowly, the incubus says, \"<i>No, girl. Your pussy isn't meant to be filled. It's meant to lust emptily - to ache for a good firm filling with such passion that you drip unendingly, quivering in need, able to climb to the cusp of cumming at the barest scent of cock.</i>\" He flips a switch, causing the transparent tube attached to the dildo in your mouth to fill with something whitish. It leaks onto the back of your tongue, causing you to instinctively swallow. \"<i>You see, you've got just the right kind of lubricant for some of my machines. This little draught is going to help you produce enough for my uses, and then you'll get to hang here, endlessly horny and leaking into a funnel, only able to cum once you get so used to your situation that you allow sucking off to become your penultimate pleasure.</i>\"");
+
+				outputText("\n\nW-what!? So this... this... delicious goo... it's going to make you even wetter down there?");
+
+				outputText("\n\nThe demon must be able to read the question in your eyes, because he nods understandingly. \"<i>Yes, little mortal, this draught is going to make you wetter and hornier than you can possibly image. That cute little twat you've got is going to be my own personal lubricant-fountain. I suspect you may even manage to learn how to bring yourself off by shifting your [hips] to make your lips rub your [clit] just right.</i>\" He shrugs. \"<i>I don't really care, so long as that cunt of yours stays wet enough to shame the goo-girls at the lake.</i>\" His hand ruffles your hair once more before he steps back to watch you drink this the milky, medicinal goo.");
+
+				outputText("\n\nYou can already feel the first few swallows affecting you. Your [skin] is flushing, worse than before, and your nether-lips are getting so wonderfully slippery that you can feel your moisture beading on your mons. Your [clit] fares little better, swelling up nearly double its old size");
+				if (player.clitLength > 5) outputText(", even if that makes it truly monstrous indeed");
+				outputText(". It drips long, sticky strands of girlish lust as you swallow, only becoming more soaked as time passes as your body becomes even more productive. A plaintive whimper escapes around the edges of your phallic gag, but your cry falls on deaf ears. The incubus is too busy fitting pipes together beneath you to care.");
+
+				outputText("\n\nWhen you hear your pussy juices spattering against metallic funnel like torrential rain, you realize you've lost, truly and completely. You thought with your slit, and now you're nothing more than a whimpering, leaky cunt, leashed to a demon's whims. The thought rocks you to your core, and tears briefly bead at the corners of your eyes, though you aren't sure if it's due to your humiliating defeat or the knowledge that you're not going to get fucked. You drink the last of your medicine, still crying and trying to cum when the dildo goes dry.");
+
+				outputText("\n\n\"<i>Oh no,</i>\" the incubus cruelly says, \"<i>I can't let you get dehydrated.</i>\" He steps back before you, cock smearing against your chin. \"<i>I have just the thing for that.</i>\" His abdominal muscles press against you through the thin denim of his overalls as he undoes the dildo-gag, and he smells... surprising clean, a little smokey... but clean. You twist your face to nuzzle him, already desperate for attention despite your short time in this predicament. Blessedly, he does exactly as you hope, pulling out the dildo and letting it hang suspended by its tube while he wrangles his twitching, corruption-leaking cock up into place in front of your face.");
+
+				outputText("\n\n\"<i>Was this what you wanted?</i>\" the demon asks.");
+
+				outputText("\n\nYou open your mouth into an 'o' with the corners quirked up into a fuck-doll's smile and nod.");
+
+				outputText("\n\n\"<i>Good.</i>\"");
+
+				outputText("\n\nThe large, mushroom-like crown of that glorious, corrupted cock presses between your lips, already sloppy with spit and pre-cum, and glides deeper. A shiver of delight runs down your spine as you feel the nodules that ring the underside of his head pass through your glossy, cum-hungry gates, and you hear the splatters of your pussy-juices nearly double in frequency. You let your tongue out to roll over across his underside, slipping out over your bottom lip even as additional inches pour into your slutty little mouth.");
+
+				outputText("\n\nSoon, the incubus' thick tool is pressing against the back of your throat, and you're squeezing your [legs] as much as your position will allow to grind your [clit] between your thighs. It feels good, but there's no way to crank things up a notch and really get yourself off. He's right, really. There's nothing you can do but suck, ache, and hope that this latest debauchery will arouse you enough to give you the spontaneous orgasm you NEED. You suck him deeper and try to suppress your gag reflex as his long tool slips into your throat. Your cheeks hollow as you provide him with suction, and you're treated to the feeling of his demonic ooze leaking into your belly in long, thick strands of pre-ejaculate.");
+
+				outputText("\n\nHe fondly runs his fingers through your hair as he explains, \"<i>You're part of the demonic war-machine now, pretty.</i>\" He shifts his hips to thrust into your throat savagely as he works his way towards his own relief. \"<i>You aren't even a person any more. You're a literal cog, or oil-applicator, I guess, at this point.</i>\" He presses his balls against your chin, and you lick them, still dripping with such unbelievable fierceness that you wonder where it all comes from. \"<i>I admit, you're a fine piece of work.</i>\"");
+
+				outputText("\n\nThe demon's nuts are sweaty and twitching on your tongue, and his tool is shifting in changing in your mouth, growing a thick bulge near the base that stretches your jaw wide while simultaneously blocking your throat.");
+
+				outputText("\n\n\"<i>Gonna cum!</i>\" the mechanic announces as he ruts against your [face].");
+
+				outputText("\n\nYou suck harder, [legs] quivering from how hard you're trying to squeeze your button, and feel a sudden warmth explode in the back of your throat. It pours a thick, rich load of cum into your belly's wanton stomach. You can feel its corruptive influence acting on you already, helping you come to terms with your new station. Your tongue worships the underside of his knot, the tip tickling his quaking, emptying balls. This is your place after all, to pleasure with your mouth and drip with your cunt, always horny and willing, always delirious with the pleasant, corrupted buzz of an insatiable need.");
+
+				outputText("\n\nYou'll do anything to keep yourself pleasantly slick for your masters. You don't even protest when the plug is forced back into your mouth and hooked to a nutrient solution.");
+
+				EventParser.gameOver();
 			}
-
-			//MERGE BOTH FORKS
-			outputText("\n\n\"<i>Come along now, girl. I'll give you all the dick you can suck, but not here,</i>\" the twisted creature promises as he backs away, holding his member in one hand and shaking it before you like a treat for a dog. You stagger after, knowing that a male, even a demonic one, won't deny you the throbbing-hard relief you seek, even if he makes you work for a bit first. The light from outside dims as you clear an open doorway, ignoring everything but the deliciously enticing sway of the member before you. Gods, you <b>need</b> that thing inside you.");
-
-			outputText("\n\nLuckily, he stops backing up not long after entering the building and patiently awaits you. He's even courteous enough to lengthen his cock when you knee before him so that you may more easily slip it into your mouth.");
-
-			outputText("\n\n\"<i>That's my good slut,</i>\" he sighs in whispery pleasure. \"<i>You just keep sucking while I get the machinery into position.</i>\" Whatever. After a little more rod-polishing, you're sure he'll give you a fucking for the ages, the one your cunny deserves. You've just got to focus on getting his musky member so perfectly aroused that he has no other choice. The sound of unspooling chains and clanking metal doesn't bother you. Not even when a set of wooden stocks are fastened around your hands and neck, holding you in place. You regret the inability to cup his balls, but when he pushes wholly inside, you're able to lick them all the same.");
-
-			outputText("\n\nThe source of your lust is soon bending double to fasten more bindings around your waist and [hips], attacking them to more chains by the sounds of it. Soon after, the devices lift you up off the ground such that you");
-
-			// 9999 not sure about these
-			if (player.isNaga()) outputText("r coils don't get sore");
-			else if (!player.isBiped()) outputText(" don't even need to support yourself anymore");
-			else outputText(" knees don't get sore");
-			outputText(". How wonderful! If you move just right, you can make the whole contraption sway slightly to get a proper dick-sucking rhythm going. His pearly pre-cream oozes onto your tongue, and you swallow as much of it as you can.");
-
-			outputText("\n\nWith such skillful oral service being given, it comes as some surprise to you when the incubus removes his dick from your suckling maw. Of course, he must be just changing position to fuck you, hence the elaborate bondage rig! You close your eyes and focus your attentions lower on your body, awaiting the inevitable pentration, but your loins remain completely and totally unmolested. Something cool and rubbery is pressed against your mouth instead. You accept it, letting what you discover to be a faux phallus push the whole way to the back of your mouth before it is sealed on by a band the mechanic fastens to you.");
-
-			outputText("\n\nHe smiles and affectionately tussles your [hair]. \"<i>Silly girl. Your pussy wasn't meant to be fucked and filled.</i>\"");
-
-			outputText("\n\nYou plead with red-rimmed eyes, imploring him to fuck your [vagina]. Of course it is! It's all you want right now! It'll be all you ever want if he does it right!");
-
-			outputText("\n\nShaking his head slowly, the incubus says, \"<i>No, girl. Your pussy isn't meant to be filled. It's meant to lust emptily - to ache for a good firm filling with such passion that you drip unendingly, quivering in need, able to climb to the cusp of cumming at the barest scent of cock.</i>\" He flips a switch, causing the transparent tube attached to the dildo in your mouth to fill with something whitish. It leaks onto the back of your tongue, causing you to instinctively swallow. \"<i>You see, you've got just the right kind of lubricant for some of my machines. This little draught is going to help you produce enough for my uses, and then you'll get to hang here, endlessly horny and leaking into a funnel, only able to cum once you get so used to your situation that you allow sucking off to become your penultimate pleasure.</i>\"");
-
-			outputText("\n\nW-what!? So this... this... delicious goo... it's going to make you even wetter down there?");
-
-			outputText("\n\nThe demon must be able to read the question in your eyes, because he nods understandingly. \"<i>Yes, little mortal, this draught is going to make you wetter and hornier than you can possibly image. That cute little twat you've got is going to be my own personal lubricant-fountain. I suspect you may even manage to learn how to bring yourself off by shifting your [hips] to make your lips rub your [clit] just right.</i>\" He shrugs. \"<i>I don't really care, so long as that cunt of yours stays wet enough to shame the goo-girls at the lake.</i>\" His hand ruffles your hair once more before he steps back to watch you drink this the milky, medicinal goo.");
-
-			outputText("\n\nYou can already feel the first few swallows affecting you. Your [skin] is flushing, worse than before, and your nether-lips are getting so wonderfully slippery that you can feel your moisture beading on your mons. Your [clit] fares little better, swelling up nearly double its old size");
-			if (player.clitLength > 5) outputText(", even if that makes it truly monstrous indeed");
-			outputText(". It drips long, sticky strands of girlish lust as you swallow, only becoming more soaked as time passes as your body becomes even more productive. A plaintive whimper escapes around the edges of your phallic gag, but your cry falls on deaf ears. The incubus is too busy fitting pipes together beneath you to care.");
-
-			outputText("\n\nWhen you hear your pussy juices spattering against metallic funnel like torrential rain, you realize you've lost, truly and completely. You thought with your slit, and now you're nothing more than a whimpering, leaky cunt, leashed to a demon's whims. The thought rocks you to your core, and tears briefly bead at the corners of your eyes, though you aren't sure if it's due to your humiliating defeat or the knowledge that you're not going to get fucked. You drink the last of your medicine, still crying and trying to cum when the dildo goes dry.");
-
-			outputText("\n\n\"<i>Oh no,</i>\" the incubus cruelly says, \"<i>I can't let you get dehydrated.</i>\" He steps back before you, cock smearing against your chin. \"<i>I have just the thing for that.</i>\" His abdominal muscles press against you through the thin denim of his overalls as he undoes the dildo-gag, and he smells... surprising clean, a little smokey... but clean. You twist your face to nuzzle him, already desperate for attention despite your short time in this predicament. Blessedly, he does exactly as you hope, pulling out the dildo and letting it hang suspended by its tube while he wrangles his twitching, corruption-leaking cock up into place in front of your face.");
-
-			outputText("\n\n\"<i>Was this what you wanted?</i>\" the demon asks.");
-
-			outputText("\n\nYou open your mouth into an 'o' with the corners quirked up into a fuck-doll's smile and nod.");
-
-			outputText("\n\n\"<i>Good.</i>\"");
-
-			outputText("\n\nThe large, mushroom-like crown of that glorious, corrupted cock presses between your lips, already sloppy with spit and pre-cum, and glides deeper. A shiver of delight runs down your spine as you feel the nodules that ring the underside of his head pass through your glossy, cum-hungry gates, and you hear the splatters of your pussy-juices nearly double in frequency. You let your tongue out to roll over across his underside, slipping out over your bottom lip even as additional inches pour into your slutty little mouth.");
-
-			outputText("\n\nSoon, the incubus' thick tool is pressing against the back of your throat, and you're squeezing your [legs] as much as your position will allow to grind your [clit] between your thighs. It feels good, but there's no way to crank things up a notch and really get yourself off. He's right, really. There's nothing you can do but suck, ache, and hope that this latest debauchery will arouse you enough to give you the spontaneous orgasm you NEED. You suck him deeper and try to suppress your gag reflex as his long tool slips into your throat. Your cheeks hollow as you provide him with suction, and you're treated to the feeling of his demonic ooze leaking into your belly in long, thick strands of pre-ejaculate.");
-
-			outputText("\n\nHe fondly runs his fingers through your hair as he explains, \"<i>You're part of the demonic war-machine now, pretty.</i>\" He shifts his hips to thrust into your throat savagely as he works his way towards his own relief. \"<i>You aren't even a person any more. You're a literal cog, or oil-applicator, I guess, at this point.</i>\" He presses his balls against your chin, and you lick them, still dripping with such unbelievable fierceness that you wonder where it all comes from. \"<i>I admit, you're a fine piece of work.</i>\"");
-
-			outputText("\n\nThe demon's nuts are sweaty and twitching on your tongue, and his tool is shifting in changing in your mouth, growing a thick bulge near the base that stretches your jaw wide while simultaneously blocking your throat.");
-
-			outputText("\n\n\"<i>Gonna cum!</i>\" the mechanic announces as he ruts against your [face].");
-
-			outputText("\n\nYou suck harder, [legs] quivering from how hard you're trying to squeeze your button, and feel a sudden warmth explode in the back of your throat. It pours a thick, rich load of cum into your belly's wanton stomach. You can feel its corruptive influence acting on you already, helping you come to terms with your new station. Your tongue worships the underside of his knot, the tip tickling his quaking, emptying balls. This is your place after all, to pleasure with your mouth and drip with your cunt, always horny and willing, always delirious with the pleasant, corrupted buzz of an insatiable need.");
-
-			outputText("\n\nYou'll do anything to keep yourself pleasantly slick for your masters. You don't even protest when the plug is forced back into your mouth and hooked to a nutrient solution.");
-
-			EventParser.gameOver();
 		}
 		
 	}

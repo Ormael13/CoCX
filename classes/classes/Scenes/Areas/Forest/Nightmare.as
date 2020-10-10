@@ -99,12 +99,14 @@ package classes.Scenes.Areas.Forest
 			else {
 				outputText("Her hand slides on your skin leaving a tingling sensation of pleasure as the area she touched glows with tainted magic forcing a moan out you.");
 				player.dynStats("cor", 5, "lib", 10, "sens", 10, "lust", (player.maxLust() * 0.05), "scale", false);
+				player.buff("AuraOfDamnation").addStat("lib", 10).withText("Aura Of Damnation").combatPermanent();
 			}
 		}
 		
 		public function AuraOfDamnation():void {
 			outputText("You feel yourself progressively losing your resolve and restraint as the nightmare’s aura seeps in and corrupts the core of your very being!\n\n");
 			player.dynStats("cor", 5, "lib", 10, "sens", 10, "lust", 10, "scale", false);
+			player.buff("AuraOfDamnation").addStat("lib", 10).withText("Aura Of Damnation").combatPermanent();
 			if (player.cor >= 100) nightmareScene.nightmareVictory();
 		}
 		

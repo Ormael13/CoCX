@@ -934,7 +934,7 @@ public class MinervaPurification extends BaseContent
 			outputText("Minerva grins and slides her arms around you. \"<i>Oh darling, you know I'm always ready to have some fun with you.</i>\" Playfully she reaches down and cups your crotch, gently massaging your "); 
 			if (player.hasCock()) outputText(player.cockDescript());
 			if (player.hasCock() && player.hasVagina()) outputText(" and ");
-			if (player.hasVagina()) outputText(player.vaginaDescript()); 
+			if (player.hasVagina()) outputText("[pussy]"); 
 			if (player.gender == 0) outputText("groin");
 			outputText(". \"<i>So darling, how do you want it today?</i>\" ");
 			if (player.hasVagina()) outputText("\"<i>Want me to stuff that hot little cunt of yours? Or maybe I should prod your delightful rump?</i>\"");

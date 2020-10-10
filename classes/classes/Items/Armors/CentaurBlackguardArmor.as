@@ -4,7 +4,7 @@ package classes.Items.Armors
 	import classes.Scenes.NPCs.CelessScene;
 	/**
 	 * ...
-	 * @author 
+	 * @author Liadri
 	 */
 	public class CentaurBlackguardArmor extends Armor
 	{

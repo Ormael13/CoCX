@@ -233,16 +233,19 @@ private function readSharkCuntManual2():void {
 		outputText("You learn a few new guarding stances that seem rather promising.");
 		//(+2 Toughness)
 		dynStats("tou", 2);
+		player.KnowledgeBonus("tou",2);
 	}
 	else if(choice == 1) {
 		outputText("After a quick skim you reach the end of the book. You don't learn any new fighting moves, but the refresher on the overall mechanics and flow of combat and strategy helped.");
 		//(+2 Intelligence)
 		dynStats("int", 2);
+		KnowledgeBonus("int",2);
 	}
 	else {
 		outputText("Your read-through of the manual has given you insight into how to put more of your weight behind your strikes without leaving yourself open.  Very useful.");
 		//(+2 Strength)
 		dynStats("str", 2);
+		player.KnowledgeBonus("str",2);
 	}
 	outputText("\n\nFinished learning what you can from the old rag, you hand it back to Izma who happily adds it back into her collection.  You say your goodbyes and then ");
 	if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] != 1) outputText("head back to your camp.");
@@ -301,7 +304,7 @@ private function readSharkEdgingGuideLOL():void {
 
 	outputText("You peruse the strange book in an attempt to refine your manners, though you're almost offended by the stereotypes depicted within.  Still, the book has some good ideas on how to maintain chastity and decorum in the face of lewd advances.\n\n");
 	//(-2 Libido, -2 Corruption)
-	dynStats("lib", -2, "cor", -2);
+	dynStats("cor", -2);
 	
 	outputText("After reading through the frilly book you give it back to Izma who delicately places it back in the trunk.  You say your goodbyes and then ");
 	if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] != 1) outputText("head back to your camp.");
@@ -360,6 +363,7 @@ private function readSharkgirlPornzYouFuckingPervertAsshole():void {
 	outputText("You wet your lips as you flick through the pages of the book and admire the rather... detailed illustrations inside.  A bee-girl getting gangbanged by imps, a minotaur getting sucked off by a pair of goblins... the artist certainly has a dirty mind.  As you flip the pages you notice the air around you heating up a bit; you attribute this to weather until you finish and close the book... only to discover that Izma had been standing behind you for some time, 'reading' over your shoulder.");
 	//(+2! Libido and lust gain)
 	dynStats("lib", 2, "lus", (20+player.lib/10));
+	player.KnowledgeBonus("lib",2);
 	//(0-30 Corruption)
 	if(player.cor < 33) {
 		outputText("  You give a bit of a start.  \"<i>S-sorry,</i>\" she says.  At a loss for words, you hand her the porn and make a hasty retreat");
@@ -942,7 +946,7 @@ private function dontEatIzamsLeafAfterRape():void {
 	outputText("Izma cringes.  \"<i>Sorry!  I just don't want to go fathering children with someone who's not my mate!  Please, please take it!</i>\"\n\n");
 	
 	outputText("You slap the leaf out of her hand.  \"<i>Try getting stronger before you impose your decisions on others!</i>\" you bark.  \"<i>Whether I decide to have your kids or not is none of your business; you should be grateful at the chance to father them with someone tougher than you!</i>\"  She shivers and nods meekly, and you turn about and pick your way back to camp.\n\n");
-	if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
     else player.knockUp(PregnancyStore.PREGNANCY_IZMA, PregnancyStore.INCUBATION_IZMA);
 	cleanupAfterCombat();
 	//(Izmafight +1)
@@ -964,10 +968,8 @@ private function takeItInZeButtVictoryLikeFromIzma():void {
 	outputText("She grunts and huffs as you slide down, and you too feel a strain from her iron-hard dick despite the various fluids lubricating it.  But gradually pain turns to pleasure and you're both moaning loudly and calling each other's names as you ride her.");
 	player.buttChange(monster.cockArea(0),true,true,false);
 	outputText("\n\n");
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	outputText("The shark grits her teeth and gives a roar as she cums, blowing a massive, hot load straight up your " + assholeDescript() + ", bloating you slightly as she empties her quads inside you.  Your muscles twitch and contract, and you can swear you see stars as she ejaculates.  It takes you a while to catch your breath as you slide off her slowly softening meat pole and crawl onto the sand.\n\n");
-	player.sexReward("Default", "Default", true,false);
+	player.sexReward("cum", "Anal");
 	//[(if Izmafight <=4)
 	if(flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[kFLAGS.IZMA_GLOVES_TAKEN] > 0) {
 		outputText("You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.");
@@ -2844,7 +2846,7 @@ private function inCampRideIzmasDickDongTheWitchIsDead():void {
  
 	outputText("Izma waves at you and smirks as you go to leave, and you have to wonder if Izma was only acting helpless in order to get off...");
 	if(flags[kFLAGS.IZMA_PREGNANCY_ENABLED] > 0) {
-		if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+		if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
         else player.knockUp(PregnancyStore.PREGNANCY_IZMA, PregnancyStore.INCUBATION_IZMA);
 	}
 	if(player.hasCock())player.sexReward("Default","Dick",true,false);
@@ -2879,20 +2881,21 @@ private function campCuntManual():void {
 	//(Usual random stat increase from the combat Manual)
  	//(One of the following random effects happens)
 	var choice:Number = rand(3);
+	//TOODO ADD SPEED AND WISDOM TO THIS LIST
 	if(choice == 0) {
 		outputText("You learn a few new guarding stances that seem rather promising.");
 		//(+2 Toughness)
-		dynStats("tou", 2);
+		player.KnowledgeBonus("tou",2);
 	}
 	else if(choice == 1) {
 		outputText("After a quick skim you reach the end of the book. You don't learn any new fighting moves, but the refresher on the overall mechanics and flow of combat and strategy helped.");
 		//(+2 Intelligence)
-		dynStats("int", 2);
+		player.KnowledgeBonus("int",2);
 	}
 	else {
 		outputText("Your read-through of the manual has given you insight into how to put more of your weight behind your strikes without leaving yourself open.  Very useful.");
 		//(+2 Strength)
-		dynStats("str", 2);
+		player.KnowledgeBonus("str",2);
 	}
 	outputText("\n\nAfter about an hour you yawn and stretch, telling Izma that you're going off to do other business.  She nods lazily at your words but doesn't look up from her old book. \"<i>Sure thing [name], I'm just gonna read this for a little while longer,</i>\" Izma says.  You nod at her, before moving off.");
 	doNext(camp.returnToCampUseOneHour);
@@ -2906,7 +2909,7 @@ private function entropyGuideByStephenHawking():void {
 	//(Usual random stat increase from the E.Guide)
 	outputText("You peruse the strange book in an attempt to refine your manners, though you're almost offended by the stereotypes depicted within.  Still, the book has some good ideas on how to maintain chastity and decorum in the face of lewd advances.\n\n");
 	//(-2 Libido, -2 Corruption)
-	dynStats("lib", -2, "cor", -2);
+	dynStats("cor", -2);
  
 	outputText("As time passes you realize that you do have other things to do.  You thank Izma for her company and get up to leave.  \"<i>All right, thanks for sitting with me [name].  You go on ahead, I'm just going to read some more of this,</i>\" she replies, not even looking up from the pages of her book.\n\n");
 	doNext(camp.returnToCampUseOneHour);
@@ -2922,7 +2925,8 @@ private function stephenHawkingPorn():void {
 	outputText("By the time you're done reading, Izma certainly seems turned on.  She tries to hide it and sit primly - ");
 	if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("but that's not exactly possible for someone who just had over a foot of dick slip from between her thighs and stick into the air.  You laugh openly and give Izma's silver hair a soft tug, before getting up and telling her you have business elsewhere.  Izma simply nods in taciturn response but keeps her gaze fixed on the lewd images before her.  Another laugh escapes your lips as soon as you think you're out of earshot.");
 	else outputText("but that's not exactly possible for someone who keeps squirming, creating lewd squishes from below the waist.  You laugh openly and give Izma's silver hair a soft tug, before getting up and telling her you have business elsewhere.  Izma simply nods in taciturn response but keeps her gaze fixed on the lewd images before her.  Another laugh escapes your lips as soon as you think you're out of earshot.");
-	dynStats("lib", 1, "lus", 5);
+	dynStats("lus", 5);
+	player.KnowledgeBonus("lib",1);
 	doNext(camp.returnToCampUseOneHour);
 }
 //(Trying to use another book inside the span of 6 hours)

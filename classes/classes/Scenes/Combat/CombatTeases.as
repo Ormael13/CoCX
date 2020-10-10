@@ -195,7 +195,7 @@ public class CombatTeases extends BaseCombatContent {
 		//43 Cowgirl teases
 		//44 Bikini Mail Tease
 		//45 Lethicite Armor Tease
-		//46 Alraune Tease
+		//46 Alraune and Liliraune Tease
 		//47 Manticore Tailpussy Tease
 		//48 Belly Dance (Naga races)
 		//==============================
@@ -1197,14 +1197,15 @@ public class CombatTeases extends BaseCombatContent {
 				//alraune teases
 			case 46:
 				outputText("You let your vines crawl around your opponent, teasing all of " + monster.a + monster.short + " erogenous zones.  " + monster.capitalA + monster.short + " gasps in involuntary arousal at your ministrations, relishing the way your vines seek out all " + monster.a + monster.short + " pleasurable spots and relentlessly assaults them.");
-				/*	if () {//ps is Lilalrune
-				 outputText(" Meanwhile you and your twin smile in understanding coming up with the same idea as you begin to kiss, slathering your respective bodies with sweet syrupy nectar and mashing your breasts against each other in order to give a lewd show to " + monster.a + monster.short +  as the both of you pull a nectar dripping hand out in invitation to your entangled opponent.\n\n");
-				 outputText("\"<i>Can't you see what delights you're missing out on?\n\n");
-				 outputText("Just give up and we'll give you a good time.</i>\"");
-				 breasts = true;
-				 chance += 3;
-				 damage += 10;
-				 }*/
+				if (player.isLiliraune()) {
+					outputText(" Meanwhile you and your twin smile in understanding coming up with the same idea as you begin to kiss, slathering your respective bodies with sweet syrupy nectar and mashing your breasts against each other in order to give a lewd show to " + monster.a + monster.short + " as the both of you pull a nectar dripping hand out in invitation to your entangled opponent.\n\n");
+				 	outputText("\"<i>Can't you see what delights you're missing out on?</i>\"\n\n");
+				 	outputText("\"<i>Just give up and we'll give you a good time.</i>\"\n\n");
+				 	outputText("\"<i>If you think you have the stamina to take both of us, that is.</i>\"\n\n");
+				 	breasts = true;
+					chance += 3;
+				 	damage += 10;
+				}
 				damage += scalingBonusToughness() * 0.1;
 				break;
 				//manticore tailpussy teases
@@ -1513,7 +1514,7 @@ public class CombatTeases extends BaseCombatContent {
 			else if (monster is Doppleganger && !monster.hasStatusEffect(StatusEffects.Stunned)) (monster as Doppleganger).mirrorTease(damage, true);
 			else if (!justText) {
 				monster.teased(damage);
-				if (crit == true) outputText(" <b>Critical!</b>");
+				if (crit) outputText(" <b>Critical!</b>");
 			}
 			if (flags[kFLAGS.PC_FETISH] >= 1 && !SceneLib.urtaQuest.isUrta()) {
 				if (player.lust < (player.maxLust() * 0.75)) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.");

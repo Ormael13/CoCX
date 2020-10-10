@@ -27,7 +27,7 @@ public class GoblinShaman extends Goblin
 			if (spellChooser == 4 && HPRatio() >= 0.7) {
 				spellChooser++;
 			}
-			if (spellChooser == 5 && hasStatusEffect(StatusEffects.Might)) {
+			if (spellChooser == 5 && statStore.hasBuff("GoblinMight")) {
 				spellChooser = rand(5);
 				if (spellChooser == 0 && hasStatusEffect(StatusEffects.ChargeWeapon)) spellChooser++;
 			}
@@ -96,9 +96,7 @@ public class GoblinShaman extends Goblin
 			else if (spellChooser == 5 && fatigue <= (100 - spellCostMight)) {
 				outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
 				outputText("The rush of success and power flows through her body.  She feels like she can do anything!");
-				createStatusEffect(StatusEffects.Might, 20 * spellMultiplier(), 20 * spellMultiplier(), 0, 0);
-				str += 20 * spellMultiplier();
-				tou += 20 * spellMultiplier();
+				statStore.addBuffObject({str:+20 * spellMultiplier(), tou:+20 * spellMultiplier()},"GoblinMight")
 				fatigue += spellCostMight;
 			}
 		}

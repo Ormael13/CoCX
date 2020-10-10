@@ -643,14 +643,14 @@ public class Lethice extends Monster
 			if (_defMode == 1)
 			{
 				outputText("Lethice dabs at her injury, then licks her finger, smiling sensually. She seems excited and invigorated. Scales appear over her skin, and her spaded tail swishes back and forth in a blur, too fast to follow.\n\n");
-				spe = 400;
+				speStat.core.value = 400;
 				armorDef = 400;
 				lustVuln = 1.125;
 			}
 			else
 			{
 				outputText("Shuddering, the Demon Queen steels herself. Her curves soften visibly as she prepares herself for additional arousing efforts, forgoing physical defense.\n\n");
-				spe = 80;
+				speStat.core.value = 80;
 				armorDef = 14;
 				lustVuln = 0.0;
 			}
