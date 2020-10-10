@@ -14,6 +14,7 @@ import classes.PerkLib;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Dungeons.D3.LivingStatue;
+import classes.Stats.Buff;
 import classes.StatusEffects;
 
 import coc.view.ButtonData;
@@ -232,7 +233,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.findPerk(PerkLib.Trance) >= 0) {
-			if (!player.hasStatusEffect(StatusEffects.TranceTransformation)) {
+			if (!player.statStore.hasBuff("TranceTransformation")) {
 				bd = buttons.add("Trance", TranceTransformation).hint("Activate Trance state, whcih enhancing physical and mental abilities at constant cost of soulforce.\n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
 				if (player.soulforce < 100) {
 					bd.disable("Your current soulforce is too low.");
@@ -263,7 +264,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
-			monster.spe += monster.statusEffectv1(StatusEffects.FrozenSolid);
+			monster.statStore.removeBuffs("FrozenSolid");
 			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
 		}
@@ -301,7 +302,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
-			monster.spe += monster.statusEffectv1(StatusEffects.FrozenSolid);
+			monster.statStore.removeBuffs("FrozenSolid");
 			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
 		}
@@ -345,7 +346,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			MultiThrustD();
 			MultiThrustD();
 			MultiThrustD();
-			monster.spe += monster.statusEffectv1(StatusEffects.FrozenSolid);
+			monster.statStore.removeBuffs("FrozenSolid");
 			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
 		}
@@ -957,29 +958,29 @@ public class CombatSoulskills extends BaseCombatContent {
 		//final touches
 		damage *= (monster.damagePercent() / 100);
 		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) damage *= 2;
-		monster.spe -= 20;
+		monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
 		outputText("Air seems to lose all temperature around your fist as you dash at " + monster.a + monster.short + " and shove your palm on " + monster.pronoun2 + ", " + monster.pronoun3 + " body suddenly is frozen solid, encased in a thick block of ice! ");
 		damage = doIceDamage(damage, true, true);
-		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
 			if (monster.spe - 20 >= 0) {
 				monster.addStatusValue(StatusEffects.FrozenSolid, 1, 20);
-				monster.spe -= 20;
+				monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
 			}
 			else {
 				monster.addStatusValue(StatusEffects.FrozenSolid, 1, monster.spe);
-				monster.spe -= monster.spe;
+				monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
 			}
 		}
 		else {
 			monster.createStatusEffect(StatusEffects.FrozenSolid, 0, 0, 0, 0);
 			if (monster.spe - 20 >= 0) {
 				monster.addStatusValue(StatusEffects.FrozenSolid, 1, 20);
-				monster.spe -= 20;
+				monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
 			}
 			else {
 				monster.addStatusValue(StatusEffects.FrozenSolid, 1, monster.spe);
-				monster.spe -= monster.spe;
+				monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
 			}
 		}
 		if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
@@ -1244,16 +1245,13 @@ public class CombatSoulskills extends BaseCombatContent {
 			TranceBoost = FnHelpers.FN.logScale(TranceBoost,TranceABC,10);
 			TranceBoost = Math.round(TranceBoost);
 			tempStrTou = TranceBoost;
-			player.createStatusEffect(StatusEffects.TranceTransformation, 0, 0, 0, 0);
-			player.changeStatusValue(StatusEffects.TranceTransformation, 1, tempStrTou);
 			mainView.statsView.showStatUp('str');
 			// strUp.visible = true;
 			// strDown.visible = false;
 			mainView.statsView.showStatUp('tou');
 			// touUp.visible = true;
 			// touDown.visible = false;
-			player.str += player.statusEffectv1(StatusEffects.TranceTransformation);
-			player.tou += player.statusEffectv1(StatusEffects.TranceTransformation);
+			player.buff("TranceTransformation").addStats({str:TranceBoost,tou:TranceBoost}).withText("Trance Transformation").combatPermanent();
 			statScreenRefresh();
 		};
 		var tempStrTou:Number = 0;
@@ -1266,25 +1264,17 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function DeactivateTranceTransformation():void {
 		clearOutput();
 		outputText("You disrupt the flow of power within you, softly falling to the ground as the crystal sheathing your [skin] dissipates into nothingness.");
-		player.dynStats("str", -player.statusEffectv1(StatusEffects.TranceTransformation));
-		player.dynStats("tou", -player.statusEffectv1(StatusEffects.TranceTransformation));
-		player.removeStatusEffect(StatusEffects.TranceTransformation);
+		player.statStore.removeBuffs("TranceTransformation")
 		enemyAI();
 	}
 
 	public function BeatOfWar():void {
 		clearOutput();
-		var tempStr:Number = 0;
 		var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
-		var BeatOfWarBoost:Number = (player.str - player.statusEffectv1(StatusEffects.BeatOfWar)) * 0.15;
-		if (BeatOfWarBoost < 1) BeatOfWarBoost = 1;
-		BeatOfWarBoost = Math.round(BeatOfWarBoost);
-		if (!player.hasStatusEffect(StatusEffects.BeatOfWar)) player.createStatusEffect(StatusEffects.BeatOfWar,0,0,0,0);//player.addStatusValue(StatusEffects.BeatOfWar, 1, BeatOfWarBoost);
-		tempStr = BeatOfWarBoost;
-		player.addStatusValue(StatusEffects.BeatOfWar,1,tempStr);
+		if (!player.statStore.hasBuff("BeatOfWar"))
 		mainView.statsView.showStatUp('str');
-		player.str += BeatOfWarBoost;			//player.statusEffectv1(StatusEffects.BeatOfWar);
+		player.buff("BeatOfWar").addStats({"str.mult":0.15}).withText("Beat of War").combatPermanent();
 		statScreenRefresh();
 		outputText("You momentarily attune yourself to the song of the mother tree, and prepare to add a note of your own to it’s rhythm. You feel the beat shift the song’s tempo slightly, taking a twist towards the ominous. This attunement augments your strength.\n\n");
 		combat.basemeleeattacks();
@@ -1304,7 +1294,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function AvatarOfTheSong():void {
 		clearOutput();
 		outputText("You feel the song of the mother tree all around you, and using your staff as a beacon, you unify it with the flow of magic through your body,");
-		if (!player.hasStatusEffect(StatusEffects.Might)) {
+		if (!player.statStore.hasBuff("Might")) {
 			outputText("drawing strength from it");
 			combat.magic.spellMight(true);
 			flags[kFLAGS.SPELLS_CAST]++;

@@ -53,6 +53,7 @@ import classes.Scenes.Places.Boat.Marae;
 import classes.Player;
 import classes.Items.*;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
+import classes.Stats.Buff;
 
 use namespace CoC;
 	
@@ -958,7 +959,6 @@ public function FightHellfireSnail():void {
 			addButton(9, "Wis", StatsMenuWis).hint("Adj Wis.");
 			addButton(10, "Tone/Thicc/Fem", StatsMenuToneThicknessFeminity).hint("Adj Tone/Thickness/Feminity.");
 			addButton(11, "Lib", StatsMenuLib).hint("Adj Lib.");
-			addButton(12, "Sens", StatsMenuSens).hint("Adj Sens.");
 			addButton(13, "Cor", StatsMenuCor).hint("Adj Cor.");
 			addButton(14, "Back", SoulforceCheats);
 		}
@@ -1046,20 +1046,6 @@ public function FightHellfireSnail():void {
 			addButton(9, "Lib Down 5", SubLib5).hint("Substract 1000 from Lib.");
 			addButton(14, "Back", StatsAscensionMenu);
 		}
-		public function StatsMenuSens():void {
-			menu();
-			addButton(0, "Sens Up 1", AddSens1).hint("Add 1 to Sens.");
-			addButton(5, "Sens Down 1", SubSens1).hint("Substract 1 from Sens.");
-			addButton(1, "Sens Up 2", AddSens2).hint("Add 10 to Sens.");
-			addButton(6, "Sens Down 2", SubSens2).hint("Substract 10 from Sens.");
-			addButton(2, "Sens Up 3", AddSens3).hint("Add 50 to Sens.");
-			addButton(7, "Sens Down 3", SubSens3).hint("Substract 50 from Sens.");
-			addButton(3, "Sens Up 4", AddSens4).hint("Add 200 to Sens.");
-			addButton(8, "Sens Down 4", SubSens4).hint("Substract 200 from Sens.");
-			addButton(4, "Sens Up 5", AddSens5).hint("Add 1000 to Sens.");
-			addButton(9, "Sens Down 5", SubSens5).hint("Substract 1000 from Sens.");
-			addButton(14, "Back", StatsAscensionMenu);
-		}
 		public function StatsMenuCor():void {
 			menu();
 			addButton(0, "Cor Up 1", AddCor1).hint("Add 1 to Cor.");
@@ -1098,7 +1084,8 @@ public function FightHellfireSnail():void {
 			addButton(5, "Add EXP 1", AddEXP1).hint("Add 100 EXP.");
 			addButton(6, "Add EXP 2", AddEXP2).hint("Add 1000 EXP.");
 			addButton(7, "Add EXP 3", AddEXP3).hint("Add 10000 EXP.");
-			addButton(8, "Add EXP 4", AddEXP4).hint("Add 100000 EXP.");
+			//addButton(8, "Add EXP 4", AddEXP4).hint("Add 100000 EXP.");
+			addButton(8, "Test dynamic stat", TestDynamicStats).hint("Test Dynamic stats.");
 			if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) < 0) addButton(10, "Trib Perks", TribulationPerks).hint("Add 2 Tribulation perks.");
 			if (player.findPerk(PerkLib.SoulAncestor) < 0) addButton(11, "10-12 St.", Stage10to12SoulPerks).hint("Add all soul cultivator related perks for stages 10-12 of cultivation.");
 			if (player.level < CoC.instance.levelCap) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
@@ -1569,7 +1556,7 @@ public function FightHellfireSnail():void {
 			menu();
 			if (page == 1) {
 				addButton(0, "Fox Jewel", AddFoxJewel).hint("Add 1 Fox Jewel.");
-				addButton(1, "Methir Crytal", AddMethir).hint("Add 1 crystal Melts.");
+				addButton(1, "CDI", AddCurrentDebugItem).hint("Add 1 Gun.");
 				//addButton(2, "", ).hint("Add 1 .");
 				//addButton(3, "", ).hint("Add 1 .");
 				//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
@@ -1617,7 +1604,7 @@ public function FightHellfireSnail():void {
 				addButton(7, "ChitinShard", AddBeeChitin).hint("Add 1 Chitin shard.");
 				addButton(8, "GreenGel", AddGreenGel).hint("Add 1 Green Gel.");
 				addButton(9, "DragonScale", AddDragonscale).hint("Add 1 Dragonscale.");
-				//addButton(10, "", ).hint("Add 1 .");
+				addButton(10, "S.Shard", AddShard).hint("Add 1 S.Shard.");//addButton(10, "", ).hint("Add 1 .");
 				//addButton(11, "", ).hint("Add 1 .");
 				//addButton(12, "", ).hint("Add 1 .");
 				addButton(13, "-2-", MaterialMenu, page + 1);
@@ -1647,6 +1634,7 @@ public function FightHellfireSnail():void {
 				addButton(0, "FightForPearl", FightForPearl).hint("Test fight to get Sky Poison Pearl legally (aside we cheat to start fight)");
 				addButton(1, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
 				addButton(2, "Pierce", FightPierce).hint("Test fight with Pierce.");
+				addButton(2, "FairyTest", FairyTest).hint("Become a fairy.");
 				//addButton(3, "", ).hint("Test fight with .");
 				//addButton(4, "", ).hint("Test fight with .");
 				//addButton(5, "", ).hint("Test fight with .");
@@ -1724,6 +1712,10 @@ public function FightHellfireSnail():void {
 		public function AddDragonscale():void {
 			outputText("\n\n<b>(Gained 1 Dragonscale!)</b>\n\n");
 			inventory.takeItem(useables.D_SCALE, curry(MaterialMenu, 1));
+		}
+		public function AddShard():void {
+			outputText("\n\n<b>(Gained 1 Shard!)</b>\n\n");
+			inventory.takeItem(useables.S_SHARD, curry(MaterialMenu, 1));
 		}
 		public function AddFreshFish():void {
 			outputText("\n\n<b>(Gained 1 Fresh Fish!)</b>\n\n");
@@ -1820,6 +1812,10 @@ public function FightHellfireSnail():void {
 		public function AddMethir():void {
 			outputText("\n\n<b>(Gained 1 Methir crystal!)</b>\n\n");
 			inventory.takeItem(consumables.METHIRC, curry(NonEquipmentMenu, 1));
+		}
+		public function AddCurrentDebugItem():void {
+			outputText("\n\n<b>(Gained 1 Testing gun!)</b>\n\n");
+			inventory.takeItem(weaponsrange.M1CERBE, curry(NonEquipmentMenu, 1));
 		}
 		public function AddSkybornSeed():void {
 			outputText("\n\n<b>(Gained 1 Skyborn Seed!)</b>\n\n");
@@ -1932,179 +1928,154 @@ public function FightHellfireSnail():void {
 			doNext(StatsAscensionMenu);
 		}
 		public function AddStr1():void {
-			player.str = player.str + 1;
+			player.strStat.core.value += 1;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function AddStr2():void {
-			player.str = player.str + 10;
+			player.strStat.core.value += 10;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function AddStr3():void {
-			player.str = player.str + 50;
+			player.strStat.core.value += 50;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function AddStr4():void {
-			player.str = player.str + 200;
+			player.strStat.core.value += 200;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function AddStr5():void {
-			player.str = player.str + 1000;
+			player.strStat.core.value += 1000;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function AddTou1():void {
-			player.tou = player.tou + 1;
+			player.touStat.core.value += 1;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function AddTou2():void {
-			player.tou = player.tou + 10;
+			player.touStat.core.value += 10;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function AddTou3():void {
-			player.tou = player.tou + 50;
+			player.touStat.core.value += 50;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function AddTou4():void {
-			player.tou = player.tou + 200;
+			player.touStat.core.value += 200;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function AddTou5():void {
-			player.tou = player.tou + 1000;
+			player.touStat.core.value += 1000;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function AddSpe1():void {
-			player.spe = player.spe + 1;
+			player.speStat.core.value += 1;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function AddSpe2():void {
-			player.spe = player.spe + 10;
+			player.speStat.core.value += 10;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function AddSpe3():void {
-			player.spe = player.spe + 50;
+			player.speStat.core.value += 50;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function AddSpe4():void {
-			player.spe = player.spe + 200;
+			player.speStat.core.value += 200;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function AddSpe5():void {
-			player.spe = player.spe + 1000;
+			player.speStat.core.value += 1000;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function AddInte1():void {
-			player.inte = player.inte + 1;
+			player.intStat.core.value += 1;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function AddInte2():void {
-			player.inte = player.inte + 10;
+			player.intStat.core.value += 10;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function AddInte3():void {
-			player.inte = player.inte + 50;
+			player.intStat.core.value += 50;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function AddInte4():void {
-			player.inte = player.inte + 200;
+			player.intStat.core.value += 200;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function AddInte5():void {
-			player.inte = player.inte + 1000;
+			player.intStat.core.value += 1000;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function AddWis1():void {
-			player.wis = player.wis + 1;
+			player.wisStat.core.value += 1;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function AddWis2():void {
-			player.wis = player.wis + 10;
+			player.wisStat.core.value += 10;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function AddWis3():void {
-			player.wis = player.wis + 50;
+			player.wisStat.core.value += 50;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function AddWis4():void {
-			player.wis = player.wis + 200;
+			player.wisStat.core.value += 200;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function AddWis5():void {
-			player.wis = player.wis + 1000;
+			player.wisStat.core.value += 1000;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function AddLib1():void {
-			player.lib = player.lib + 1;
+			player.libStat.core.value += 1;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function AddLib2():void {
-			player.lib = player.lib + 10;
+			player.libStat.core.value += 10;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function AddLib3():void {
-			player.lib = player.lib + 50;
+			player.libStat.core.value += 50;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function AddLib4():void {
-			player.lib = player.lib + 200;
+			player.libStat.core.value += 200;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function AddLib5():void {
-			player.lib = player.lib + 1000;
+			player.libStat.core.value += 1000;
 			statScreenRefresh();
 			StatsMenuLib();
-		}
-		public function AddSens1():void {
-			player.sens = player.sens + 1;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function AddSens2():void {
-			player.sens = player.sens + 10;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function AddSens3():void {
-			player.sens = player.sens + 50;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function AddSens4():void {
-			player.sens = player.sens + 200;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function AddSens5():void {
-			player.sens = player.sens + 1000;
-			statScreenRefresh();
-			StatsMenuSens();
 		}
 		public function AddCor1():void {
 			player.cor = player.cor + 1;
@@ -2157,179 +2128,154 @@ public function FightHellfireSnail():void {
 			StatsMenuToneThicknessFeminity();
 		}
 		public function SubStr1():void {
-			player.str = player.str - 1;
+			player.strStat.core.value -= 1;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function SubStr2():void {
-			player.str = player.str - 10;
+			player.strStat.core.value -= 10;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function SubStr3():void {
-			player.str = player.str - 50;
+			player.strStat.core.value -= 50;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function SubStr4():void {
-			player.str = player.str - 200;
+			player.strStat.core.value -= 200;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function SubStr5():void {
-			player.str = player.str - 1000;
+			player.strStat.core.value -= 1000;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function SubTou1():void {
-			player.tou = player.tou - 1;
+			player.touStat.core.value -= 1;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function SubTou2():void {
-			player.tou = player.tou - 10;
+			player.touStat.core.value -= 10;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function SubTou3():void {
-			player.tou = player.tou - 50;
+			player.touStat.core.value -= 50;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function SubTou4():void {
-			player.tou = player.tou - 200;
+			player.touStat.core.value -= 200;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function SubTou5():void {
-			player.tou = player.tou - 1000;
+			player.touStat.core.value -= 1000;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function SubSpe1():void {
-			player.spe = player.spe - 1;
+			player.speStat.core.value -= 1;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function SubSpe2():void {
-			player.spe = player.spe - 10;
+			player.speStat.core.value -= 10;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function SubSpe3():void {
-			player.spe = player.spe - 50;
+			player.speStat.core.value -= 50;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function SubSpe4():void {
-			player.spe = player.spe - 200;
+			player.speStat.core.value -= 200;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function SubSpe5():void {
-			player.spe = player.spe - 1000;
+			player.speStat.core.value -= 1000;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function SubInte1():void {
-			player.inte = player.inte - 1;
+			player.intStat.core.value -= 1;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function SubInte2():void {
-			player.inte = player.inte - 10;
+			player.intStat.core.value -= 10;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function SubInte3():void {
-			player.inte = player.inte - 50;
+			player.intStat.core.value -= 50;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function SubInte4():void {
-			player.inte = player.inte - 200;
+			player.intStat.core.value -= 200;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function SubInte5():void {
-			player.inte = player.inte - 1000;
+			player.intStat.core.value -= 1000;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function SubWis1():void {
-			player.wis = player.wis - 1;
+			player.wisStat.core.value -= 1;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function SubWis2():void {
-			player.wis = player.wis - 10;
+			player.wisStat.core.value -= 10;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function SubWis3():void {
-			player.wis = player.wis - 50;
+			player.wisStat.core.value -= 50;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function SubWis4():void {
-			player.wis = player.wis - 200;
+			player.wisStat.core.value -= 200;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function SubWis5():void {
-			player.wis = player.wis - 1000;
+			player.wisStat.core.value -= 1000;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function SubLib1():void {
-			player.lib = player.lib - 1;
+			player.libStat.core.value -= 1;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function SubLib2():void {
-			player.lib = player.lib - 10;
+			player.libStat.core.value -= 10;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function SubLib3():void {
-			player.lib = player.lib - 50;
+			player.libStat.core.value -= 50;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function SubLib4():void {
-			player.lib = player.lib - 200;
+			player.libStat.core.value -= 200;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function SubLib5():void {
-			player.lib = player.lib - 1000;
+			player.libStat.core.value -= 1000;
 			statScreenRefresh();
 			StatsMenuLib();
-		}
-		public function SubSens1():void {
-			player.sens = player.sens - 1;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function SubSens2():void {
-			player.sens = player.sens - 10;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function SubSens3():void {
-			player.sens = player.sens - 50;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function SubSens4():void {
-			player.sens = player.sens - 200;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function SubSens5():void {
-			player.sens = player.sens - 1000;
-			statScreenRefresh();
-			StatsMenuSens();
 		}
 		public function SubCor1():void {
 			player.cor = player.cor - 1;
@@ -2422,6 +2368,10 @@ public function FightHellfireSnail():void {
 			player.XP = player.XP + 100000;
 			statScreenRefresh();
 			PerksGemsEXPLvL();
+		}
+		public function TestDynamicStats():void {
+			player.statStore.addBuff('sens',+10,'tag',{text:'Debug buff!', rate: Buff.RATE_HOURS, tick: 1});
+			statScreenRefresh();
 		}
 		public function AddLvL1():void {
 			player.level = player.level + 1;
@@ -2531,6 +2481,30 @@ public function FightHellfireSnail():void {
 			clearOutput();
 			outputText("Entering battle with Pierce! Enjoy ^^");
 			startCombat(new Pierce());
+		}
+		public function FairyTest():void {
+			clearOutput();
+			outputText("FAIRYTIME ^^");
+			player.faceType = Face.FAIRY;
+			player.tongue.type = Tongue.ELF;
+			player.eyes.type = Eyes.FAIRY
+			player.ears.type = Ears.ELVEN
+			player.hairType = Hair.FAIRY;
+			player.tailType = Tail.NONE
+			player.arms.type = Arms.ELF
+			player.lowerBody = LowerBody.ELF;
+			player.wings.type = Wings.FAIRY;
+			player.skinType = Skin.PLAIN
+			player.skinAdj = "flawless";
+			player.removeCock(0, player.cockTotal());
+			player.skin.coverage = Skin.COVERAGE_NONE;
+			var growth:int = 1 + rand(3);
+			if (player.breastRows.length > 0) {
+				if (player.breastRows[0].breastRating < 2 && rand(3) == 0) growth++;
+				if (player.breastRows[0].breastRating < 5 && rand(4) == 0) growth++;
+				if (player.breastRows[0].breastRating < 6 && rand(5) == 0) growth++;
+			}
+			player.createPerk(PerkLib.TransformationImmunity,0,0,0,0);
 		}
 		public function FightZenji():void {
 			clearOutput();
@@ -3669,4 +3643,4 @@ public function FightHellfireSnail():void {
 			}
 		}
 	}
-}
+}

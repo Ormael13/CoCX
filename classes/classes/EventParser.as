@@ -8,6 +8,7 @@ import classes.Items.UndergarmentLib;
 import classes.Items.WeaponLib;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.SceneLib;
+import classes.Stats.Buff;
 import classes.internals.Utils;
 
 import coc.view.MainView;
@@ -166,6 +167,26 @@ public class EventParser {
         while (CoC.instance.timeQ > 0) {
             CoC.instance.timeQ--;
             CoC.instance.model.time.hours++;
+            var HPPercent:Number;
+            HPPercent = player.HP/player.maxHP();
+            player.statStore.advanceTime(Buff.RATE_HOURS,1);
+            player.HP = HPPercent*player.maxHP();
+            if (player.statStore.recentlyRemovedTags["IzumiSmoke"]){
+                EngineCore.outputText("\n<b>You groan softly as your thoughts begin to clear somewhat. It looks like the effects of Izumi's pipe smoke have worn off.</b>\n");
+            }
+            if (player.statStore.recentlyRemovedTags["AndysSmoke"]){
+                EngineCore.outputText("\n<b>You groan softly as your body begins to feels less sluggish and mind less sharp. It looks like the effects of Andy's pipe smoke have worn off.</b>\n");
+            }
+            if (player.statStore.recentlyRemovedTags["DrunkenPowerEmpower"]){
+                EngineCore.outputText("\nYou sober up, loosing the benefits of your oni drunken rampage.\n");
+            }
+            if (player.statStore.recentlyRemovedTags["Hangover"]){
+                EngineCore.outputText("\nYour head finally clears as your hangover wears off. Drinking with the shemale lizard was definitely a bad idea.\n");
+            }
+            if (player.statStore.recentlyRemovedTags["Feeding Euphoria"]){
+                EngineCore.outputText("\nThe change in your body agility prowess confirms that the effects of cum must have worn off.\n");
+            }
+            player.HP = HPPercent*player.maxHP();
             SceneLib.combat.regeneration(false);
             if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) SceneLib.combat.soulforceregeneration(false);
             if (player.findPerk(PerkLib.JobSorcerer) >= 0) SceneLib.combat.manaregeneration(false);
@@ -181,6 +202,18 @@ public class EventParser {
             if (CoC.instance.model.time.hours > 23) {
                 CoC.instance.model.time.hours = 0;
                 CoC.instance.model.time.days++;
+                HPPercent = player.HP/player.maxHP();
+                player.statStore.advanceTime(Buff.RATE_DAYS,1);
+                player.HP = HPPercent*player.maxHP();
+                if (player.statStore.recentlyRemovedTags["KitsuneShrine"]){
+                    EngineCore.outputText("\nYou feel like you should meditate again at the kitsune shrine as the serenity and peace you have recently aquired has waned.\n");
+                }
+                if (player.statStore.recentlyRemovedTags["WellFed"]){
+                    EngineCore.outputText("\nYou begin feeling hungry again as the satisfaction of your last cooked meal has all but disapeared.\n");
+                }
+                if (player.statStore.recentlyRemovedTags["TaothBlessing"] || player.statStore.recentlyRemovedTags["FenrirBlessing"]){
+                    EngineCore.outputText("\nThe divine blessing starts to fade. You think it’s high time you go back to the temple and pray.\n");
+                }
             } else if (CoC.instance.model.time.hours == 21) {
                 if (CoC.instance.flags[kFLAGS.LETHICE_DEFEATED] <= 0) EngineCore.outputText("\nThe sky darkens as a starless night falls.  The blood-red moon slowly rises up over the horizon.\n");
                 else EngineCore.outputText("\nThe sky darkens as a starry night falls.  The blood-red moon slowly rises up over the horizon.\n");
@@ -232,11 +265,6 @@ public class EventParser {
         SceneLib.telAdre.umasShop.updateBonusDuration(time);
         if (player.hasStatusEffect(StatusEffects.UmasMassage)) {
             trace("Uma's massage bonus time remaining: " + player.statusEffectv3(StatusEffects.UmasMassage));
-        }
-
-        SceneLib.highMountains.izumiScenes.updateSmokeDuration(time);
-        if (player.hasStatusEffect(StatusEffects.IzumisPipeSmoke)) {
-            trace("Izumis pipe smoke time remaining: " + player.statusEffectv1(StatusEffects.IzumisPipeSmoke));
         }
 
         //Drop axe if too short!

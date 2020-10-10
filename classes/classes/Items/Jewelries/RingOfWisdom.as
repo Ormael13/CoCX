@@ -27,12 +27,12 @@ package classes.Items.Jewelries
 		}
 		
 		override public function playerEquip():Jewelry {
-			game.player.wis += 5;
+			game.player.statStore.addBuff('wis',+5,'RingOfWisdom',{text:'Ring Of Wisdom'});
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():Jewelry {
-			game.player.wis -= 5;
+			game.player.statStore.removeBuffs('RingOfWisdom');
 			return super.playerRemove();
 		}
 		

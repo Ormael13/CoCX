@@ -11,6 +11,7 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
+import classes.Stats.Buff;
 import classes.internals.*;
 
 public class CaiLin extends Monster
@@ -54,41 +55,16 @@ public class CaiLin extends Monster
 			outputText("'s strikes with the speed of a cobra, sinking her fangs into your flesh!  ");
 			if(!player.hasStatusEffect(StatusEffects.MedusaVenom)) {
 				outputText("The venom's effects are almost instantaneous; your body begins to weaken and even your mind becoming muddled.");
-				if(player.str > 8 && player.tou > 8 && player.spe > 8 && player.inte > 7) {
-					player.str -= 2;
+				if(player.str > 8 && player.tou > 8 && player.spe > 8 && player.inte > 8) {
+					player.statStore.addBuffObject({"str":-2,"tou":-2,"spe":-2,"int":-1},"Poison", {text:"Poisoned!",time:Buff.RATE_HOURS, tick:4})
 					showStatDown( 'str' );
-					player.tou -= 2;
 					showStatDown( 'tou' );
-					player.spe -= 2;
 					showStatDown( 'spe' );
-					player.inte -= 1;
 					showStatDown( 'inte' );
-					player.createStatusEffect(StatusEffects.MedusaVenom,2,2,2,1);
-				}
-				else if(player.str > 8 && player.tou > 8 && player.spe > 9) {
-					player.str -= 2;
-					showStatDown( 'str' );
-					player.tou -= 2;
-					showStatDown( 'tou' );
-					player.spe -= 3;
-					showStatDown( 'spe' );
-					player.createStatusEffect(StatusEffects.MedusaVenom,2,2,3,0);
-				}
-				else if(player.tou > 9 && player.spe > 10) {
-					player.tou -= 3;
-					showStatDown( 'tou' );
-					player.spe -= 4;
-					showStatDown( 'spe' );
-					player.createStatusEffect(StatusEffects.MedusaVenom,0,3,4,0);
-				}
-				else if(player.spe > 12) {
-					player.spe -= 6;
-					showStatDown( 'spe' );
-					player.createStatusEffect(StatusEffects.MedusaVenom, 0,0,6,0);
-					player.takePoisonDamage(5+rand(5));
+					player.createStatusEffect(StatusEffects.MedusaVenom,2,1,0,0);
 				}
 				else {
-					player.createStatusEffect(StatusEffects.MedusaVenom,0,0,0,0);
+					player.createStatusEffect(StatusEffects.MedusaVenom,2,1,0,0);
 					player.takePoisonDamage(5+rand(5));
 				}
 				player.takePoisonDamage(5+rand(5));
@@ -96,43 +72,12 @@ public class CaiLin extends Monster
 			else {
 				outputText("The venom's effects intensify causing yor body and mind further weaker and mind even more muddled.");
 				if(player.str > 7 && player.tou > 7 && player.spe > 7 && player.inte > 7) {
-					player.str -= 1;
+					player.statStore.addBuffObject({"str":-4,"tou":-4,"spe":-4,"int":-2},"Poison", {text:"Poisoned!",time:Buff.RATE_HOURS, tick:4})
 					showStatDown( 'str' );
-					player.tou -= 1;
 					showStatDown( 'tou' );
-					player.spe -= 1;
 					showStatDown( 'spe' );
-					player.inte -= 1;
 					showStatDown( 'inte' );
 					player.addStatusValue(StatusEffects.MedusaVenom,1,1);
-					player.addStatusValue(StatusEffects.MedusaVenom,2,1);
-					player.addStatusValue(StatusEffects.MedusaVenom,3,1);
-					player.addStatusValue(StatusEffects.MedusaVenom,4,1);
-				}
-				else if(player.str > 7 && player.tou > 7 && player.spe > 8) {
-					player.str -= 1;
-					showStatDown( 'str' );
-					player.tou -= 1;
-					showStatDown( 'tou' );
-					player.spe -= 2;
-					showStatDown( 'spe' );
-					player.addStatusValue(StatusEffects.MedusaVenom,1,1);
-					player.addStatusValue(StatusEffects.MedusaVenom,2,1);
-					player.addStatusValue(StatusEffects.MedusaVenom,3,2);
-				}
-				else if(player.tou > 8 && player.spe > 8) {
-					player.tou -= 2;
-					showStatDown( 'tou' );
-					player.spe -= 2;
-					showStatDown( 'spe' );
-					player.addStatusValue(StatusEffects.MedusaVenom,2,2);
-					player.addStatusValue(StatusEffects.MedusaVenom,3,2);
-				}
-				else if(player.spe > 9) {
-					player.spe -= 3;
-					showStatDown( 'spe' );
-					player.addStatusValue(StatusEffects.MedusaVenom,3,3);
-					player.takeMagicDamage(5+rand(5));
 				}
 				else player.takePoisonDamage(5+rand(5));
 				player.takePoisonDamage(5+rand(5));
@@ -157,7 +102,7 @@ public class CaiLin extends Monster
 			if((player.findPerk(PerkLib.Evade) && rand(6) == 0)) {
 				outputText("You see her tail whipping toward you and evade it at the last second. You quickly roll back onto your feet.");
 			}
-			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s tail-whip.");
 			}
 			else if(player.spe > rand(400)) {

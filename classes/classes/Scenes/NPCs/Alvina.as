@@ -32,7 +32,7 @@ import classes.internals.*;
 			outputText("Alvina moans a word of power, squirting in orgasmic pleasure as a nova of black magic explodes from her. Unable to dodge, you are squarely hit by the energy wave and feel your arousal and sensitivity rise.\n\n");
 			lustDmg = Math.round(lustDmg);
 			player.dynStats("lus", lustDmg, "scale", false);
-			player.sens += 10;
+			player.addCurse("sens", 10);
 		}
 		
 		private function alvinaPolarMidnight():void {
@@ -141,9 +141,9 @@ import classes.internals.*;
 			if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere)) {
 				outputText("Little she know that you have the ability to completely remove yourself from existence if only for a brief moment thanks to ");
 				if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere)) outputText("being everywhere and nowhere at the same time, a living paradox");
-				//outputText("(if titania)your Faerie magic(end of cut)");
 				outputText(". You are barely conscious of the blades colliding together at your previous position with a deafening crash as you appear a few yards away!\n\n");
 			}
+			else if (player.fairyScore() >= 18) outputText("You avoid the attack thanks to your Faerie magic flickering out of reality just as the blades collides.\n\n");
 			else if (player.displacerbeastScore() >= 13) outputText("Little she know that you have the ability to displace yourself out of such deadly attacks, You are barely conscious of the blades colliding together at your previous position with a deafening crash as you appear a few yards away!\n\n");
 			else {
 				var damage:Number = player.maxHP() * 1.1;

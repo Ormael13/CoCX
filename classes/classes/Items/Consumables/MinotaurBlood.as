@@ -57,15 +57,15 @@ public class MinotaurBlood extends Consumable {
 			if (player.str <= 50) {
 				outputText("\n\nPainful aches ripple through your body, flooding you with pain as your muscles flex and bulge, growing much stronger and more well-defined.");
 				//very weak players gain more
-				if (player.str <= 20) dynStats("str", 3);
-				else dynStats("str", 2);
+				if (player.str <= 20) player.MutagenBonus("str", 3);
+				else player.MutagenBonus("str", 2);
 			}
 			//stronger characters gain less
 			else {
 				//small growth if over 75
-				if (player.str >= 75) dynStats("str", .5);
+				if (player.str >= 75) player.MutagenBonus("str", 0.5);
 				//faster from 50-75
-				else dynStats("str", 1);
+				else player.MutagenBonus("str", 1);
 				outputText("\n\nYour muscles grow tighter, bulging outwards powerfully as you get even stronger!");
 			}
 			//Chance of speed drop
@@ -81,15 +81,15 @@ public class MinotaurBlood extends Consumable {
 			if (player.tou <= 50) {
 				outputText("\n\nYour hide... skin... whatever... you can feel it getting tougher as it thickens perceptibly.");
 				//very weak players gain more
-				if (player.tou <= 20) dynStats("tou", 3);
-				else dynStats("tou", 2);
+				if (player.tou <= 20) player.MutagenBonus("tou", 3);
+				else player.MutagenBonus("tou", 2);
 			}
 			//stronger characters gain less
 			else {
 				//small growth if over 75
-				if (player.tou >= 75) dynStats("tou", .5);
+				if (player.tou >= 75) player.MutagenBonus("tou", 0.5);
 				//faster from 50-75
-				else dynStats("tou", 1);
+				else player.MutagenBonus("tou", 1);
 				outputText("\n\nYour tough hide grows slightly thicker.");
 			}
 			//chance of less sensitivity
@@ -118,13 +118,15 @@ public class MinotaurBlood extends Consumable {
 				player.balls = 2;
 				player.ballSize = 1;
 				outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
-				dynStats("lib", 2, "lus", 5);
+				dynStats("lus", 5);
+				player.MutagenBonus("lib", 2);
 			}
 			else {
 				player.ballSize++;
 				if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " +  Appearance.ballsDescription(false, true, player) + " have grown larger than a human's.");
 				if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your " + Appearance.sackDescript(player) + ".  Walking becomes difficult as you discover your " + Appearance.ballsDescription(false, true, player) + " have enlarged again.");
-				dynStats("lib", 1, "lus", 3);
+				dynStats("lus", 3);
+				player.MutagenBonus("lib", 1);
 			}
 			changes++;
 		}
@@ -266,7 +268,8 @@ public class MinotaurBlood extends Consumable {
 				if (player.cocks[selectedCockValue].cockType == CockTypesEnum.DOG) outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.DOG) + " begins to feel odd...  You pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond its traditional size.  You notice your knot vanishing, the extra flesh pushing more fresh horsecock out from your sheath.  <b>Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + "</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.");
 				player.cocks[selectedCockValue].cockType = CockTypesEnum.HORSE;
 				player.increaseCock(selectedCockValue, 4);
-				dynStats("lib", 5, "sen", 4, "lus", 35);
+				dynStats("sen", 4, "lus", 35);
+				player.MutagenBonus("lib", 5);
 				outputText("<b>  You now have a");
 				if (player.horseCocks() > 1) outputText("nother");
 				outputText(" horse-penis.</b>");
@@ -324,7 +327,7 @@ public class MinotaurBlood extends Consumable {
 				outputText("<b>  You now have hooves in place of your feet!</b>");
 				mutations.setLowerBody(LowerBody.HOOFED);
 				player.legCount = 2;
-				dynStats("spe", 1);
+				player.MutagenBonus("spe", 1);
 				changes++;
 			}
 		}

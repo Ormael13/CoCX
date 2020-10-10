@@ -859,7 +859,6 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//{+10 Affection}
 			flags[kFLAGS.AMILY_AFFECTION] += 10;
 			//{-5 Libido}
-			dynStats("lib", -2);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -3152,16 +3151,14 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("thighs.\n\n");
 			outputText("You collapse backwards off of Amily, waiting to regain your breath and your strength, then compliment Amily on just how good she is with her extra appendage.\n\n");
 			outputText("\"<i>Flatterer.</i>\" Is all that she says, but she's smiling happily, even as you both clean up and go your seperate ways again.");
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			//PREGGO CHECK HERE
 			if(flags[kFLAGS.AMILY_ALLOWS_FERTILITY] == 1) {
-				if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 				else player.knockUp(PregnancyStore.PREGNANCY_AMILY, PregnancyStore.INCUBATION_MOUSE);
 			}
-			doNext(camp.returnToCampUseOneHour);
-			player.sexReward("cum");
+			player.sexReward("cum", "Vaginal");
 			dynStats("sen", -1);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		//[=Let Amily Lead=]
@@ -3328,7 +3325,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("Slowly, she raises her head and pecks you affectionately on the lips. \"<i>Thank you,</i>\" is all she says, continuing to lay there with you for a while. Then she picks herself up and walks away, and you do the same.");
 				//PREGGO CHECK HERE
 				if(flags[kFLAGS.AMILY_ALLOWS_FERTILITY] == 1) {
-					if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+					if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 					else player.knockUp(PregnancyStore.PREGNANCY_AMILY, PregnancyStore.INCUBATION_MOUSE);
 				}
 				player.sexReward("cum");
@@ -4853,7 +4850,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//(else)
 			else outputText("  If she did, you'll just have to tie her up and get someone to return the favor...");
 			//Preg chanceeee
-			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
             else player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE);
 			player.sexReward("cum");
 			dynStats("sen", -2, "cor", 2);
@@ -5074,11 +5071,9 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			else {
 				outputText("\"<i>Let's see if you'll be a mommy from this load... If not, well, I guess we'll have to try again.");
 				//PREGGO CHECK HERE
-				if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 				else player.knockUp(PregnancyStore.PREGNANCY_AMILY, PregnancyStore.INCUBATION_MOUSE);
 			}
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			outputText("</i>\"  Chuckling softly, you lay there and embrace your lover for a time and then, reluctantly, you get dressed and leave.");
 			player.sexReward("cum");
 			flags[kFLAGS.AMILY_HERM_TIMES_FUCKED_BY_FEMPC]++;
@@ -6349,7 +6344,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			else outputText(cockDescript(x) + " throb");
 			outputText("; the very idea of a mousy slut eager for cum distills into one massive load of cum, and you dump it all in her mouth.\n\nYou sigh, sated for now and leave her to clean herself up.");
 			player.orgasm();
-			dynStats("lib", -2, "cor", 5);
+			dynStats("cor", 5);
             if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
 		}
@@ -6387,7 +6382,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("Finally done, you let go of her and get up; she proceeds to slump down and give a small burp of satisfaction, then drift off into sleep. You untie her and proceed to get dressed; you give her a light pat on the thigh and return to your camp. You'll have to do this again sometime later...");
 			player.sexReward("saliva");
-			dynStats("lib", -2, "cor", 5);
+			dynStats("cor", 5);
             if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
 		}
@@ -6490,7 +6485,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			player.orgasm();
 
-			dynStats("lib", -2, "cor", 5);
+			dynStats("cor", 5);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -6613,7 +6608,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			player.orgasm();
 
-			dynStats("lib", -2, "cor", 5);
+			dynStats("cor", 5);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -7373,12 +7368,9 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("Now filled with cum, you roll onto your side, taking a now-sleeping Amily with you.  Urta crawls into bed after you, gently stroking your cheek and giving you little kisses on the shoulders and neck.  You don't even mind as her cum drips out of you onto the floor, mixed lewdly with your girlcum and Amily's.  Exhausted, you close your eyes to a final kiss from Urta.\n\n");
 
 			outputText("\"<i>Mmm,</i>\" she purrs, giving your cheek a last stroke with her thumb.  \"<i>We gotta do this again sometime.</i>\"\n\n");
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.sexReward("cum");
 			dynStats("sen", -2);
 			outputText("You couldn't agree more.");
-
 			doNext(urtaXAmilyAfterMurrrath);
 		}
 		//Urta/Amily -- Parting (First & Repeat)
@@ -7476,8 +7468,6 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			outputText("\n\n");
 			outputText("With a shuddering sigh, Amily dismounts you, and you roll onto your side next to her, reaching back to caress her cheek and tell her how wonderful she did.  She wraps her arms around you, hooking a leg around your waist softly, and the two of you lie there and cuddle for some time.\n\n");
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			outputText("\"<i>Mm... you know... maybe we should do this again sometime,</i>\" she says with a devious smirk, kissing your cheek.");
 			flags[kFLAGS.AMILY_TIMES_BUTTFUCKED_PC]++;
 			player.sexReward("cum");
@@ -7650,7 +7640,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			amilyPreggoChance();
 			player.sexReward("vaginalFluids","Dick");
-			dynStats("lib", -1, "sen", -1);
+			dynStats("sen", -1);
 			doNext(camp.returnToCampUseOneHour);
 		}
 

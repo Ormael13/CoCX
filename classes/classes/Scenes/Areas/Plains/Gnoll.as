@@ -34,7 +34,7 @@ import classes.internals.*;
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
 			}
 			//("Misdirection"
-			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
 			}
 			//Determine if cat'ed
@@ -147,7 +147,7 @@ import classes.internals.*;
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
 			}
 			//("Misdirection"
-			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
 			}
 			//Determine if cat'ed
@@ -215,12 +215,12 @@ import classes.internals.*;
 			if (hasStatusEffect(StatusEffects.Fear)) {
 				if (statusEffectv1(StatusEffects.Fear) == 0) {
 					if (plural) {
-						this.spe += statusEffectv2(StatusEffects.Fear);
+						this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
 						removeStatusEffect(StatusEffects.Fear);
 						outputText("Your foes shake free of their fear and ready themselves for battle.");
 					}
 					else {
-						this.spe += statusEffectv2(StatusEffects.Fear);
+						this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
 						removeStatusEffect(StatusEffects.Fear);
 						outputText("Your foe shakes free of its fear and readies itself for battle.");
 					}
@@ -269,7 +269,7 @@ import classes.internals.*;
 					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
 				}
 				//("Misdirection"
-				else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+				else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 					outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
 				}
 				//Determine if cat'ed

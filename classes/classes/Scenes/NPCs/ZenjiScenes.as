@@ -531,7 +531,7 @@ public function part2TrollEncounterTrainStrength():void {
 	}
 	else {
 		outputText("Some time passes and you can't do anymore, but you feel that this exercise was worth the effort and return to camp after dismissing yourself.\n\n");
-		if (player.str < (119 + (25 * player.newGamePlusMod()))) dynStats("str", 2, "scale", false);
+		player.trainStat("str",2,75);
 		player.fatigue += Math.round(player.maxFatigue() * 0.35);
 		zenjiPerspectiveOnPlayer(3);
 	}
@@ -554,7 +554,7 @@ public function part2TrollEncounterTrainToughness():void {
 	}
 	else {
 		outputText("You begin planking, a few minutes pass and your arms start feeling weak, you figure you've been planking for enough time and relax. You feel that the exercise was worth the time and return to camp after dismissing yourself.\n\n");
-		if (player.tou < (119 + (25 * player.newGamePlusMod()))) dynStats("tou", 2, "scale", false);
+		player.trainStat("tou",1,100)
 		player.fatigue += Math.round(player.maxFatigue() * 0.35);
 		zenjiPerspectiveOnPlayer(3);
 	}
@@ -579,7 +579,7 @@ public function part2TrollEncounterTrainSpeed():void {
 		outputText("You begin at a brisk pace, jogging from the tree and back to Zenji.\n\n");
 		outputText("\"<i>Das a good start, try ta go fasta each time.</i>\"\n\n");
 		outputText("You jog back and forth with the troll, making sure to keep a good pace. You feel that the exercise was worth the time and return to camp after dismissing yourself.\n\n");
-		if (player.spe < (119 + (25 * player.newGamePlusMod()))) dynStats("spe", 2, "scale", false);
+		player.trainStat("spe",2,75);
 		player.fatigue += Math.round(player.maxFatigue() * 0.35);
 		zenjiPerspectiveOnPlayer(3);
 	}

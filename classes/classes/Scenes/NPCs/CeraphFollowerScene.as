@@ -771,7 +771,6 @@ public class CeraphFollowerScene extends NPCAwareContent
 
 			//lust to 0, corruption +0.5
 			player.sexReward("Default","Dick",true,false);
-			dynStats("lib", -1);
 			//end scene
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -837,7 +836,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("\n\n");
 			outputText("You wake up before long and find yourself cleaned, though still a little sticky, as if someone had used their tongue to wash the cum from your " + player.skinFurScales() + ".");
 			player.sexReward("cum");
-			dynStats("lib", -1, "sen", -2, "cor", 2);
+			dynStats("sen", -2, "cor", 2);
 			//Preggers chance!
 			if (player.hasVagina() && player.totalFertility() >= rand(45) && player.pregnancyIncubation == 0) {
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
@@ -879,7 +878,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 
 			outputText("Retrieving your [armor], when you turn around again, Urta is gone, the moment vanishing like a drop of water in an endless sea. \"<i>Thank you, " + player.mf("Master", "Mistress") + ",</i>\" Ceraph's voice demurely whispers, gratitude floating on the wind.");
 			player.sexReward("vaginalFluids","Dick");
-			dynStats("lib", -1, "sen", -2, "cor", 2);
+			dynStats("sen", -2, "cor", 2);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1003,7 +1002,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 
 			outputText("Do you?");
 			player.sexReward("vaginalFluids","Dick");
-			dynStats("lib", -3, "cor", 5);
+			dynStats("cor", 5);
 			//[Yes][No][Never Again]
 			simpleChoices("Yes", acceptMoreCeraphFauxCorruption, "No", declineCeraphFauxCorruption, "", null, "", null, "Never Again", iQuitCeraphCorruptionDemons);
 		}
@@ -1550,7 +1549,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("\n\nCeraph runs a finger up and down the length, setting off fireworks in your brain – you can still feel it!  The demoness laughs and says, \"<i>Don't worry, that will fade once I get it further away, though you know what to expect at night, right?  For now, enjoy the pleasure!  Oh, and thank you again for this, you won't regret it.  If you do, no refunds.</i>\"");
 			outputText("\n\nShe pirouettes away, practically dancing into the sky while she strokes and teases the cock you just lost.  You shudder and shake as orgasm wracks your body, your cum falling like rain thousands of feet away.  You swear, you can hear your pet laughing.");
 			player.orgasm();
-			dynStats("lib", -2, "sen", -2, "cor", 5);
+			dynStats("sen", -2, "cor", 5);
 			flags[kFLAGS.CERAPH_OWNED_DICKS]++;
 			player.removeCock(x, 1);
 			doNext(camp.returnToCampUseOneHour);
@@ -1568,7 +1567,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			player.removeVagina(0, 1);
 			//(-100 lust, -1 fetish, +1 vagina toy status)
 			player.orgasm();
-			dynStats("lib", -2, "sen", -2, "cor", 5);
+			dynStats("sen", -2, "cor", 5);
 			flags[kFLAGS.CERAPH_OWNED_PUSSIES]++;
 			doNext(camp.returnToCampUseOneHour);
 		}

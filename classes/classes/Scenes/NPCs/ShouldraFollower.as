@@ -1198,7 +1198,7 @@ private function shrinkDatBootyForYoGhost():void {
 		if(player.butt.type < 1) player.butt.type = 1;
 		outputText("\n\nIn a few brief seconds, your [butt] relaxes into its new, slightly tinier form.  Shouldra huffs and puffs inside you, not wanting to discuss your bottom any further.");
 	}
-	dynStats("lib", -2, "lus", -10);
+	dynStats("lus", -10);
 	doNext(camp.returnToCampUseOneHour);
 }
 

@@ -83,7 +83,7 @@ use namespace CoC;
 		override public function teased(lustDelta:Number, isNotSilent:Boolean = true):void
 		{
 			outputText(capitalA + short + " smiles, rubbing her hands across herself as she watches your display.  She does not seem greatly affected by your show - at least in the sense of increasing arousal.  She does seem oddly more... vital, as if she drew strength from the very display you put on.");
-			str += 5;
+			this.statStore.addBuff("str", 5, "DispelablePowerUP",{});
 			addHP(50);
 			applyTease(lustDelta);
 		}

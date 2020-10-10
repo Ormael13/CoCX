@@ -16,6 +16,7 @@ import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.NPCs.Holli;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
+import classes.Stats.Buff;
 import classes.StatusEffects.VampireThirstEffect;
 
 import coc.view.ButtonData;
@@ -78,6 +79,11 @@ public class MagicSpecials extends BaseCombatContent {
 					if (player.hasPerk(PerkLib.LactaBovinaOvariesFinalForm) || player.hasPerk(PerkLib.MinotaurTesticlesFinalForm)) bd.disable("\n<b>You need more time before you can do it again.</b>");
 					else bd.disable("You can't use it more than once during fight.");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
+			if (player.thunderbirdScore() >= 10 && player.isFlying()) {
+				// Lust Storm
+				bd = buttons.add("Lust storm", Luststorm).hint("Supercharge the air with your lusty electricity to unleash a thunderstorm.");
+				if (player.hasStatusEffect(StatusEffects.lustStorm)) bd.disable("<b>You already unleashed a thunderstorm on the battlefield</b>\n\n");
 			}
 		}
 		if (player.tailType == Tail.FOX && player.tailCount >= 2 && player.tailCount < 7) {
@@ -375,10 +381,16 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You already cauterizing your wounds!");
 			}
 		}
+		if (player.salamanderScore() >= 12 && player.tail.type == Tail.SALAMANDER && (player.isSwordTypeWeapon() || player.isAxeTypeWeapon())) {
+			bd = buttons.add("Flame Blade", flameBlade).hint("Set your weapon on fire \n", "Flame Blade");
+			if (player.hasStatusEffect(StatusEffects.FlameBlade)) {
+				bd.disable("Your weapon is already on fire!");
+			}
+		}
 		if (player.hasPerk(PerkLib.JobWarrior)) {
 			bd = buttons.add("WarriorRage", warriorsrage).hint("Throw yourself into a warrior's rage!  Greatly increases your strength, speed and fortitude! \n", "Warrior's Rage");
 			bd.requireWrath(50);
-			if(player.hasStatusEffect(StatusEffects.WarriorsRage)) {
+			if(player.statStore.hasBuff("WarriorsRage")) {
 				bd.disable("You already raging!");
 			}
 		}
@@ -411,7 +423,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.necklaceName == "Crinos Shape necklace") {
-			if (player.hasStatusEffect(StatusEffects.CrinosShape)) {
+			if (player.statStore.hasBuff("CrinosShape")) {
 				buttons.add("Return", returnToNormalShape).hint("Return to normal from Crinos Shape.");
 			} else {
 				bd = buttons.add("CrinosShape", assumeCrinosShape).hint("Let your wrath flow thou you, transforming you into more bestial shape!  Greatly increases your strength, speed and fortitude! \n\nWrath Cost: " + crinosshapeCost() + " per turn");
@@ -458,6 +470,32 @@ public class MagicSpecials extends BaseCombatContent {
 			bd.requireFatigue(physicalCost(30));
 			if (player.hasStatusEffect(StatusEffects.CooldownEveryAndNowhere)) {
 				bd.disable("You need more time before you can use Everywhere and nowhere again.\n\n");
+			}
+		}
+		if (player.fairyScore() >= 18) {
+			bd = buttons.add("Fae Storm", FaeStorm).hint("Use a beam of chaotic magic, damaging your foe and inflicting various status effects. Single target but very likely to cause a lot of effects.");
+			bd.requireMana(spellCost(80));
+		}
+		if (player.fairyScore() >= 18) {
+			bd = buttons.add("Flicker", Flicker).hint("Vanish out of sight for a short time. \n\nWould go into cooldown after use for: 4 rounds");
+			bd.requireMana(physicalCost(40));
+			if (player.hasStatusEffect(StatusEffects.CooldownFlicker)) {
+				bd.disable("You need more time before you can use Flicker again.\n\n");
+			}
+		}
+		if (player.fairyScore() >= 18 && !player.hasStatusEffect(StatusEffects.Minimise)) {
+			bd = buttons.add("Minimise", Minimise).hint("Shrink to the size of 5 inches, gaining highly increased evasion but reducing melee and ranged damage as well as physical strenght.");
+			bd.requireMana(spellCost(50));
+		}
+		if (player.fairyScore() >= 18 && player.hasStatusEffect(StatusEffects.Minimise)) {
+			bd = buttons.add("Enlarge", Enlarge).hint("Grow back to your normal size.");
+			bd.requireMana(physicalCost(40));
+		}
+		if (player.fairyScore() >= 18) {
+			bd = buttons.add("Baleful Polymorph", BalefulPolymorph).hint("Turn an opponent into a cute harmless critter.");
+			bd.requireMana(spellCost(80));
+			if (player.hasStatusEffect(StatusEffects.CooldownBalefulPolymorph)) {
+				bd.disable("You need more time before you can use Baleful Polymorph again.\n\n");
 			}
 		}
 		if (player.displacerbeastScore() >= 11) {
@@ -883,7 +921,7 @@ public class MagicSpecials extends BaseCombatContent {
 			temp2 = 5 + rand(player.lib / 5 + player.cor / 10);
 			dynStats("lus", temp2, "scale", false);
 			var lustDmgF:Number = 20 + rand(6);
-			var lustBoostToLustDmg:Number;
+			var lustBoostToLustDmg:Number = 0;
 			var bimbo:Boolean   = false;
 			var bro:Boolean     = false;
 			var futa:Boolean    = false;
@@ -925,9 +963,15 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			lustBoostToLustDmg += lustDmgF * 0.01;
 			lustDmgF *= 0.2;
-			if (player.lust100 * 0.01 >= 0.9) lustDmgF += (lustBoostToLustDmg * 140);
-			else if (player.lust100 * 0.01 < 0.2) lustDmgF += (lustBoostToLustDmg * 140);
-			else lustDmgF += (lustBoostToLustDmg * 2 * (20 - (player.lust100 * 0.01)));
+			if (player.lust100 * 0.01 >= 0.9) {
+				lustDmgF += (lustBoostToLustDmg * 140);
+			}
+			else if (player.lust100 * 0.01 < 0.2) {
+				lustDmgF += (lustBoostToLustDmg * 140);
+			}
+			else {
+				lustDmgF += (lustBoostToLustDmg * 2 * (20 - (player.lust100 * 0.01)));
+			}
 			//Determine if critical tease!
 			var crit:Boolean = false;
 			var critChance:int = 5;
@@ -943,6 +987,9 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 			if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) lustDmgF *= 1.5;
 			lustDmgF = lustDmgF * monster.lustVuln;
+			if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0) lustDmgF *= 1.20;
+			if (player.findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) lustDmgF *= 1.20;
+			if (player.findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) lustDmgF *= 1.20;
 			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
 			if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
@@ -996,6 +1043,9 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = calcVoltageMod(damage);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.FloralOvaries)) damage *= 1.25;
 		damage = Math.round(damage);
 		damage = doLightingDamage(damage, true, true);
 		outputText(" damage. ");
@@ -1061,12 +1111,16 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) lustDmgF *= 1.5;
-		lustDmgF = lustDmgF * monster.lustVuln;
+		if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0) damage *= 1.20;
+		if (player.findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) damage *= 1.20;
+		if (player.findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) damage *= 1.20;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
+		lustDmgF = lustDmgF * monster.lustVuln;
 		lustDmgF = Math.round(lustDmgF);
 		monster.teased(lustDmgF);
+		combat.bonusExpAfterSuccesfullTease();
 		if (crit2) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
@@ -1075,6 +1129,114 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		else enemyAI();
+	}
+
+	public function Luststorm():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		var damage:Number = scalingBonusIntelligence() * spellModWhite();
+		//Determine if critical hit!
+		var crit1:Boolean = false;
+		var critChance1:int = 5;
+		critChance1 += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance1 = 0;
+		if (rand(100) < critChance1) {
+			crit1 = true;
+			damage *= 1.75;
+		}
+		//High damage to goes.
+		damage = calcVoltageMod(damage);
+		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		damage = Math.round(damage);
+		dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
+		var lustDmgF:Number = 20 + rand(6);
+		var lustBoostToLustDmg:Number = 0;
+		var bimbo:Boolean   = false;
+		var bro:Boolean     = false;
+		var futa:Boolean    = false;
+		if (player.findPerk(PerkLib.SensualLover) >= 0) {
+			lustDmgF += 2;
+		}
+		if (player.findPerk(PerkLib.Seduction) >= 0) lustDmgF += 5;
+		if (player.findPerk(PerkLib.SluttySeduction) >= 0) lustDmgF += player.perkv1(PerkLib.SluttySeduction);
+		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) lustDmgF += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+		if (bimbo || bro || futa) {
+			lustDmgF += 5;
+		}
+		if (player.findPerk(PerkLib.FlawlessBody) >= 0) lustDmgF += 10;
+		lustDmgF += scalingBonusLibido() * 0.1;
+		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmgF *= 1.5;
+		if (player.findPerk(PerkLib.JobSeducer) >= 0) lustDmgF += player.teaseLevel * 3;
+		else lustDmgF += player.teaseLevel * 2;
+		if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) lustDmgF *= 1.2;
+		switch (player.coatType()) {
+			case Skin.FUR:
+				lustDmgF += (1 + player.newGamePlusMod());
+				break;
+			case Skin.SCALES:
+				lustDmgF += (2 * (1 + player.newGamePlusMod()));
+				break;
+			case Skin.CHITIN:
+				lustDmgF += (3 * (1 + player.newGamePlusMod()));
+				break;
+			case Skin.BARK:
+				lustDmgF += (4 * (1 + player.newGamePlusMod()));
+				break;
+		}
+		if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") lustDmgF *= (1 + ((10 + rand(11)) / 100));
+		if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
+			lustDmgF *= (1 + (player.lust100 * 0.01));
+		}
+		if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
+			lustDmgF *= (1 + combat.historyWhoreBonus());
+		}
+		lustBoostToLustDmg += lustDmgF * 0.01;
+		lustDmgF *= 0.2;
+		if (player.lust100 * 0.01 >= 0.9) lustDmgF += (lustBoostToLustDmg * 140);
+		else if (player.lust100 * 0.01 < 0.2) lustDmgF += (lustBoostToLustDmg * 140);
+		else lustDmgF += (lustBoostToLustDmg * 2 * (20 - (player.lust100 * 0.01)));
+		//Determine if critical tease!
+		var crit2:Boolean = false;
+		var critChance2:int = 5;
+		if (player.findPerk(PerkLib.CriticalPerformance) >= 0) {
+			if (player.lib <= 100) critChance2 += player.lib / 5;
+			if (player.lib > 100) critChance2 += 20;
+		}
+		if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance2 = 0;
+		if (rand(100) < critChance2) {
+			crit2 = true;
+			lustDmgF *= 1.75;
+		}
+		if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
+		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) lustDmgF *= 1.5;
+		if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0) lustDmgF *= 1.20;
+		if (player.findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) lustDmgF *= 1.20;
+		if (player.findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) lustDmgF *= 1.20;
+		lustDmgF = lustDmgF * monster.lustVuln;
+		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
+		lustDmgF = Math.round(lustDmgF);
+		outputText("You let electricity build up in your body before unleashing it into the ambient sky, the clouds roaring with thunder. Here comes the storm! ");
+		damage = doLightingDamage(damage, true, true);
+		if (crit1) outputText(" <b>*Critical!*</b>");
+		monster.teased(lustDmgF, false);
+		if (crit2) outputText(" <b>Critical!</b>");
+		outputText("\n\n");
+		combat.bonusExpAfterSuccesfullTease();
+		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		player.createStatusEffect(StatusEffects.lustStorm,0,0,0,0);
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
 	
@@ -1099,6 +1261,9 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText(" ");
 				var CumLustDmg:Number = 0;
 				CumLustDmg += combat.scalingBonusLibido() * 0.2;
+				if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0) CumLustDmg *= 1.20;
+				if (player.findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) CumLustDmg *= 1.20;
+				if (player.findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) CumLustDmg *= 1.20;
 				monster.teased(CumLustDmg);
 			}
 			player.lust += (player.lust100 * 0.05);
@@ -1117,6 +1282,9 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText(" ");
 				var MilkLustDmg:Number = 0;
 				MilkLustDmg += combat.scalingBonusLibido() * 0.2;
+				if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0) MilkLustDmg *= 1.20;
+				if (player.findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) MilkLustDmg *= 1.20;
+				if (player.findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) MilkLustDmg *= 1.20;
 				monster.teased(MilkLustDmg);
 			}
 			player.lust += (player.lust100 * 0.05);
@@ -1137,6 +1305,9 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText(" ");
 				var MilkCumLustDmg:Number = 0;
 				MilkCumLustDmg += combat.scalingBonusLibido() * 0.4;
+				if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0) MilkCumLustDmg *= 1.20;
+				if (player.findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) MilkCumLustDmg *= 1.20;
+				if (player.findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) MilkCumLustDmg *= 1.20;
 				monster.teased(MilkCumLustDmg);
 			}
 			player.lust += (player.lust100 * 0.1);
@@ -2473,6 +2644,18 @@ public class MagicSpecials extends BaseCombatContent {
 		statScreenRefresh();
 		enemyAI();
 	}
+
+	public function flameBlade():void {
+		clearOutput();
+		var flameBladeDuration:Number = 10;
+		if (player.hasPerk(PerkLib.SalamanderAdrenalGlands)) flameBladeDuration += 1;
+		if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsEvolved)) flameBladeDuration += 2;
+		if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) flameBladeDuration += 7;
+		outputText("Your run your tail across your weapon igniting it with raging flames.\n\n");
+		player.createStatusEffect(StatusEffects.FlameBlade,flameBladeDuration,0,0,0);
+		statScreenRefresh();
+		enemyAI();
+	}
 	
 	public function warriorsrage():void {
 		clearOutput();
@@ -2489,18 +2672,17 @@ public class MagicSpecials extends BaseCombatContent {
 	//	WarriorsRageBoost += player.tou / 10;player.tou * 0.1 - im wytrzymalesze ciało tym wiekszy bonus może udźwignąć
 		outputText("You roar and unleash your dwarf rage in order to destroy your foe!\n\n");
 		var oldHPratio:Number = player.hp100/100;
-		player.createStatusEffect(StatusEffects.WarriorsRage, 0, 0, warriorsrageDuration, 0);
 		temp = WarriorsRageBoost;
 		tempStr = temp * 2;
 		tempTouSpe = temp;
-		player.changeStatusValue(StatusEffects.WarriorsRage,1,tempStr);
-		player.changeStatusValue(StatusEffects.WarriorsRage,2,tempTouSpe);
 		mainView.statsView.showStatUp('str');
 		mainView.statsView.showStatUp('tou');
 		mainView.statsView.showStatUp('spe');
-		player.str += player.statusEffectv1(StatusEffects.WarriorsRage);
-		player.tou += player.statusEffectv2(StatusEffects.WarriorsRage);
-		player.spe += player.statusEffectv2(StatusEffects.WarriorsRage);
+		if (player.hasPerk(PerkLib.BerserkerArmor)){
+			tempStr = tempStr*1.5;
+			tempTouSpe = tempTouSpe*1.5;
+		}
+		player.buff("WarriorsRage").addStats({str:tempStr,tou:tempTouSpe,spe:tempTouSpe}).withText("Warriors Rage").combatTemporary(warriorsrageDuration);
 		player.HP = oldHPratio*player.maxHP();
 		statScreenRefresh();
 		enemyAI();
@@ -2557,19 +2739,18 @@ public class MagicSpecials extends BaseCombatContent {
 		temp3 = Math.round(temp3);
 		outputText("You roar and unleash your inner beast assuming Crinos Shape in order to destroy your foe!\n\n");
 		var oldHPratio:Number = player.hp100/100;
-		player.createStatusEffect(StatusEffects.CrinosShape, 0, 0, 0, 0);
-		tempStr = temp1;
+		tempStr = temp1; //
 		tempTou = temp2;
 		tempSpe = temp3;
-		player.changeStatusValue(StatusEffects.CrinosShape,1,tempStr);
-		player.changeStatusValue(StatusEffects.CrinosShape,2,tempTou);
-		player.changeStatusValue(StatusEffects.CrinosShape,3,tempSpe);
+		if (player.hasPerk(PerkLib.BerserkerArmor)){
+			tempStr = tempStr*1.5;
+			tempTou = temp2*1.5;
+			tempSpe = temp3*1.5;
+		}
 		mainView.statsView.showStatUp('str');
 		mainView.statsView.showStatUp('tou');
 		mainView.statsView.showStatUp('spe');
-		player.str += player.statusEffectv1(StatusEffects.CrinosShape);
-		player.tou += player.statusEffectv2(StatusEffects.CrinosShape);
-		player.spe += player.statusEffectv3(StatusEffects.CrinosShape);
+		player.buff("CrinosShape").addStats({str:tempStr,tou:tempTou,spe:tempSpe}).withText("Crinos Shape").combatPermanent();
 		player.HP = oldHPratio*player.maxHP();
 		statScreenRefresh();
 		enemyAI();
@@ -2577,10 +2758,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function returnToNormalShape():void {
 		clearOutput();
 		outputText("Gathering all you willpower you forcefully subduing your inner beast and returning to your normal shape.");
-		player.dynStats("str", -player.statusEffectv1(StatusEffects.CrinosShape));
-		player.dynStats("tou", -player.statusEffectv2(StatusEffects.CrinosShape));
-		player.dynStats("spe", -player.statusEffectv3(StatusEffects.CrinosShape));
-		player.removeStatusEffect(StatusEffects.CrinosShape);
+		player.statStore.removeBuffs("CrinosShape")
 		enemyAI();
 	}
 
@@ -2596,9 +2774,40 @@ public class MagicSpecials extends BaseCombatContent {
 	public function Displacement():void {
 		clearOutput();
 		fatigue(30, USEFATG_PHYSICAL);
-		outputText("You begin teleporting at high speed in order to avoid your opponents strikes\n\n");
+		outputText("You begin teleporting at high speed in order to avoid your opponents strikes.\n\n");
 		player.createStatusEffect(StatusEffects.Displacement,6,0,0,0);
 		player.createStatusEffect(StatusEffects.CooldownDisplacement,10,0,0,0);
+		enemyAI();
+	}
+
+	public function Minimise():void {
+		clearOutput();
+		useMana(40, 1);
+		var evasionIncrease:Number = 0;
+		if (player.hasPerk(PerkLib.FairyQueenRegalia)) evasionIncrease = 25;
+		outputText("You shrink to your minimum size, evading your opponent as you mock [monster his] attempt to hit you.\n\n");
+		player.createStatusEffect(StatusEffects.Minimise,50+evasionIncrease,0,0,0);
+		player.buff("Minimise").addStats({"str":-50}).withText("Minimise").combatPermanent();
+		enemyAI();
+	}
+
+	public function Enlarge():void {
+		clearOutput();
+		useMana(40, 1);
+		outputText("You grow back to your normal size.\n\n");
+		player.buff("Minimise").remove();
+		player.removeStatusEffect(StatusEffects.Minimise);
+		enemyAI();
+	}
+
+	public function Flicker():void {
+		clearOutput();
+		useMana(40, 1);
+		outputText("Your form shimmers for a second as you vanish into thin air. Your opponent starts looking for you, annoyed.\n\n");
+		var DurationIncrease:Number = 0;
+		if (player.hasPerk(PerkLib.FairyQueenRegalia)) DurationIncrease = 1;
+		monster.createStatusEffect(StatusEffects.InvisibleOrStealth,2+DurationIncrease,0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownFlicker,4,0,0,0);
 		enemyAI();
 	}
 
@@ -3036,7 +3245,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
-//Corrupted Fox Fire
+	//Corrupted Fox Fire
 	public function corruptedFoxFire():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -3159,7 +3368,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
-//Fused Fox Fire
+	//Fused Fox Fire
 	public function fusedFoxFire():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -3274,7 +3483,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
 	}
-//Pure Fox Fire
+	//Pure Fox Fire
 	public function pureFoxFire():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -3406,7 +3615,7 @@ public class MagicSpecials extends BaseCombatContent {
 		return modksc;
 	}
 
-//Terror
+	//Terror
 	public function kitsuneTerror():void {
 		clearOutput();
 		//Fatigue Cost: 25
@@ -3449,12 +3658,12 @@ public class MagicSpecials extends BaseCombatContent {
 			if (monster.spe >= 21) speedDebuff += 20;
 			else speedDebuff += 20 - monster.spe;
 		}
-		monster.spe -= speedDebuff;
+		monster.speStat.core.value -= speedDebuff;
 		monster.createStatusEffect(StatusEffects.Fear, 2, speedDebuff, 0, 0);
 		enemyAI();
 	}
 
-//Illusion
+	//Illusion
 	public function kitsuneIllusion():void {
 		clearOutput();
 		//Fatigue Cost: 25
@@ -3614,8 +3823,7 @@ public class MagicSpecials extends BaseCombatContent {
 		lustDmgF = Math.round(lustDmgF);
 		monster.teased(lustDmgF);
 		if (critL) outputText(" <b>Critical!</b>");
-		monster.spe -= 15;
-		if (monster.spe < 1) monster.spe = 1;
+		monster.statStore.addBuffObject({spe:-15}, "Poison",{text:"Poison"});
 		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		var damage:Number = scalingBonusIntelligence() * spellMod() * 1.2;
 		if (damage < 10) damage = 10;
@@ -3641,7 +3849,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else enemyAI();
 	}
 
-	//cursed riddle
+	//Cursed Riddle
 	public function CursedRiddle():void {
 		clearOutput();
 		player.createStatusEffect(StatusEffects.CooldownCursedRiddle, 0, 0, 0, 0);
@@ -3708,7 +3916,132 @@ public class MagicSpecials extends BaseCombatContent {
 	else enemyAI();
 	}
 
-//Transfer
+	//Fae Storm
+	public function FaeStorm():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		outputText("Your wings start shining with rainbowish light as you charge and unleash a beam of primal energy on " + monster.a + monster.short + ". ");
+		var damage:Number = (scalingBonusIntelligence() * spellMod());
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			damage *= 1.75;
+		}
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		damage = Math.round(damage);
+		damage = doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+
+		//Randomising secondary effects
+		var EffectList:Array = [];
+		EffectList.push(FaeStormLightning);
+		EffectList.push(FaeStormAcid);
+		EffectList.push(FaeStormBurn);
+		EffectList.push(FaeStormPoison);
+		EffectList.push(FaeStormFrozen);
+		EffectList.push(FaeStormLust);
+		EffectList.push(FaeStormSleep);
+		var ProcChance:Number = 50;
+		if (player.hasPerk(PerkLib.FairyQueenRegalia)) ProcChance = 25;
+		var procCount:int = 0;
+		for (var i:int = 0; i < 6; i++) {
+			if (rand(100) >= ProcChance) {
+				procCount++;
+			} else {
+				break;
+			}
+		}
+		for (i=1; i<=procCount; i++) {
+			var choice:Function = randomChoice(EffectList);
+			if(i == 1) {
+				outputText("Your opponent ");
+			}
+			if(i == 2) {
+				outputText(". At the same time as [monster he] ");
+			}
+			if(i == 3) {
+				outputText(". As if to add insult to injury, [monster he] ");
+			}
+			if(i == 4) {
+				outputText(" while [monster he] ");
+			}
+			if(i == 5) {
+				outputText(". Finally [monster he] ");
+			}
+			if(i == 6) {
+				outputText(". Just as you thought you couldn’t get luckier [monster he] ");
+			}
+			choice(damage);
+			EffectList.splice(EffectList.indexOf(choice), 1)
+		}
+		outputText(".\n\n");
+		enemyAI();
+	}
+
+	private function FaeStormLightning(damage:Number):void{
+		if(monster.plural) {
+			outputText("begin spasming while [monster his] bodies are ran through by electricity");
+		}
+		else outputText("begin spasming while [monster his] body is ran through by electricity");
+		doLightingDamage(damage);
+	}
+	private function FaeStormAcid(damage:Number):void{
+		if(monster.plural) {
+			outputText("begins screaming as [monster his] bodies is suddenly coated with acid and [monster his] armor melting");
+		}
+		else outputText("begins screaming as [monster his] body is suddenly coated with acid and [monster his] armor melting");
+		monster.armorDef *= 0.5;
+	}
+	private function FaeStormBurn(damage:Number):void{
+		if(monster.plural) {
+			outputText("starts to burn as [monster his] bodies catch fire");
+		}
+		else outputText("starts to burn as [monster his] body catch fire");
+		monster.createStatusEffect(StatusEffects.BurnDoT, 10, 0.02, 0, 0);
+	}
+	private function FaeStormPoison(damage:Number):void {
+		outputText("turns green as a potent poison saps [monster his] strength");
+		monster.createStatusEffect(StatusEffects.NagaVenom, 1, 1, 0, 0);
+	}
+	private function FaeStormFrozen(damage:Number):void{
+		outputText(" shivers as [monster his] skin covers with ice, the surrounding air freezing solid");
+		monster.createStatusEffect(StatusEffects.FrozenSolid,3,0,0,0);
+	}
+	private function FaeStormLust(damage:Number):void{
+		var lustDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+		if(monster.plural) {
+			outputText("are magically aroused by the spell");
+		}
+		else outputText("is magically aroused by the spell");
+		monster.teased(lustDmg, false);
+	}
+	private function FaeStormSleep(damage:Number):void{
+		if(monster.plural) {
+			outputText("are sent straight to the dream lands by the spell’s powerful hypnotic effects");
+		}
+		else outputText("is sent straight to the dream lands by the spell’s powerful hypnotic effects");
+		monster.createStatusEffect(StatusEffects.Sleep,2,0,0,0);
+	}
+
+	public function BalefulPolymorph():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		outputText("You chuckle playfully as you throw this spell on " + monster.a + monster.short + ", turning [monster he] temporarily into a cute harmless ");
+		var chosen:String = randomChoice("rabbit.", "squirrel.", "sheep.", "mouse.", "cat.", "dog.");
+		outputText(chosen+"\n\n");
+		var DurationIncrease:Number = 0;
+		if (player.hasPerk(PerkLib.FairyQueenRegalia)) DurationIncrease = 2;
+		monster.createStatusEffect(StatusEffects.Polymorphed, 3+DurationIncrease, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.CooldownBalefulPolymorph, 16, 0, 0, 0)
+		enemyAI();
+	}
+
+	//Transfer
 	public function lustTransfer():void {
 		clearOutput();
 		if (player.hasPerk(PerkLib.GreaterGiftOfLust)) fatigue(60, USEFATG_MAGIC_NOBM);

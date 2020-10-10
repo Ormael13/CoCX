@@ -41,15 +41,15 @@ public class MaraFruit extends Consumable{
 		clearOutput();
 		outputText("Biting into it, sweet juices seem to explode from the flesh, dribbling down your chin.  It tastes like a dessert and you chow down, happily munching away.  In no time flat, you're down to just a core.");
 		//-Increase strength up to 80.
-		if (player.str < 80 && changes < changeLimit && rand(4) == 0) {
+		if (changes < changeLimit && rand(4) == 0) {
 			outputText("\n\nYour fill your muscles filling with plants might.");
-			dynStats("str", 1);
+			player.MutagenBonus("str", 1);
 			changes++;
 		}
 		//-Increase toughness up to 100.
-		if (player.tou < 100 && changes < changeLimit && rand(4) == 0) {
+		if (changes < changeLimit && rand(4) == 0) {
 			outputText("\n\nYour body suddenly feels tougher and more resilient just like a tree.");
-			dynStats("tou", 1);
+			player.MutagenBonus("tou", 1);
 			changes++;
 		}
 		//-Reduces speed down to 60.
@@ -222,7 +222,7 @@ public class MaraFruit extends Consumable{
 		}
 		//insert here turning into bark skin so it req. at least 2x use of mara fruit a także dodać wymaganie posiadanie już plant arms i legs
 		//Legs
-		if (player.skin.hasPlainSkinOnly() && (player.skinTone == "leaf green" || player.skinTone == "lime green" || player.skinTone == "turquoise") && changes < changeLimit && rand(3) == 0) {
+		if (player.skin.hasPlainSkinOnly() && (player.skinTone == "leaf green" || player.skinTone == "lime green" || player.skinTone == "turquoise" || player.skinTone == "light green") && changes < changeLimit && rand(3) == 0) {
 			//Males/genderless get clawed feet
 			if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
 				if (player.lowerBody != LowerBody.PLANT_ROOT_CLAWS) {
@@ -266,6 +266,12 @@ public class MaraFruit extends Consumable{
 			outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!");
 			changes++;
 			mutations.setEarType(Ears.ELFIN);
+		}
+		var plant_eyeColor:Array = ["light purple", "green", "light green"];
+		if ((!InCollection(player.eyes.colour, plant_eyeColor) && changes < changeLimit && rand(4) == 0)) {
+			player.eyes.colour = randomChoice(plant_eyeColor);
+			outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady yourself and open your eyes, you realize something seems different, as if the nerves have been optimized.  Your vision has been changed somehow absorbing more light then normal. When you go look into a water puddle you notice your the changes in full. <b>Your eyes color has changed to "+player.eyes.colour+".</b>");
+			changes++;
 		}
 		//Face
 		if (player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {

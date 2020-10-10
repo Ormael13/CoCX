@@ -670,7 +670,6 @@ private function repeatGermanBratwurstInCamp():void {
 	flags[kFLAGS.ISABELLA_TIME_SINCE_LAST_HOTDOGGING] = 1;
 	flags[kFLAGS.ISABELLA_TIMES_HOTDOGGED]++;
 	player.sexReward("vaginalFluids","Dick");
-	dynStats("lib", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -816,7 +815,7 @@ private function tentacleBoneFollowerIzzy():void {
 	
 	outputText("You keep holding her with " + sMultiCockDesc() + " for a moment, both of you enjoying the powerful embrace as you literally dick-hug her.  The entirety of her body is dripping with your jism but she doesn't seem to care.  Eventually, you put her down, letting her splat in the puddle of juices that formed below your junk-prison.  At last, you unfold your arms.\n\n");
 	player.sexReward("vaginalFluids","Dick");
-	dynStats("lib", -1, "sen", -1, "cor", .3);
+	dynStats("sen", -1, "cor", .3);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1564,7 +1563,7 @@ private function isabellaBarnFuckPartII():void {
 	
 	outputText("\n\nYou look over your shoulders as Whitney throws the door open, her pitchfork at the ready, as if expecting some demon.  You grin sheepishly, your bare [ass] staring the farmer girl right in the face as your trouser snake drips onto the barn floor.  Silently, Whitney turns on a heel and withdraws, closing the door behind her.  A silent moment passes before you and Isabella erupt in laughter, both reaching for your clothes.");
 	player.sexReward("vaginalFluids","Dick");
-	dynStats("lib", -1, "sen", -3);
+	dynStats("sen", -3);
 	fatigue(-25);
 	isabellaKnockUpAttempt();
 	doNext(camp.returnToCampUseTwoHours);

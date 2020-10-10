@@ -17,10 +17,12 @@
     import classes.GlobalFlags.kACHIEVEMENTS;
     import classes.GlobalFlags.kFLAGS;
     import classes.Items.Consumables.EmberTF;
-    import classes.Scenes.Areas.Forest.KitsuneScene;
+import classes.PerkLib;
+import classes.Scenes.Areas.Forest.KitsuneScene;
     import classes.Scenes.SceneLib;
+import classes.Stats.Buff;
 
-    public final class Mutations extends MutationsHelper {
+public final class Mutations extends MutationsHelper {
         public function Mutations() {
         }
 
@@ -46,11 +48,7 @@
                 else bonusdepower -= (player.spe - 1);
             }
             bonusempower += (20 * (1 + player.newGamePlusMod()));
-            player.createStatusEffect(StatusEffects.DrunkenPower, durationhour, bonusempower, bonusdepower, 0);
-            dynStats("str", player.statusEffectv2(StatusEffects.DrunkenPower));
-            dynStats("spe", -player.statusEffectv3(StatusEffects.DrunkenPower));
-            dynStats("inte", -player.statusEffectv3(StatusEffects.DrunkenPower));
-            dynStats("lib", player.statusEffectv2(StatusEffects.DrunkenPower));
+            player.statStore.addBuffObject({str:bonusempower,spe:-bonusdepower,inte:-bonusdepower,lib:bonusempower}, "DrunkenPowerEmpower",{text:"Drunken Power", time:Buff.RATE_HOURS, tick:durationhour});
         }
 
         public function DrunkenPowerEmpowerOni():Number {
@@ -72,8 +70,8 @@
             player.slimeFeed();
             clearOutput();
             outputText("You open the can and “bottom up”, hoping it wasn’t just a scam to buy an overpriced beer. “Whoa, that’s one hell of a manly beverage!” The alcohol in the beer is so strong you actually feel like you could lift bigger things now. No...wait, you actually do as your muscle seems to surge with new raw power.");
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) dynStats("str", 2 + rand(3));
-            else dynStats("str", 1 + rand(2));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) AlchemyBonus("str",2 + rand(3));
+            else AlchemyBonus("str",1 + rand(2));
             if (rand(3) == 0) {
                 if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) outputText(player.modTone(player.maxToneCap(), 6));
                 else outputText(player.modTone(player.maxToneCap(), 3));
@@ -87,8 +85,8 @@
             player.slimeFeed();
             clearOutput();
             outputText("The elixir tastes foul at first, but you guess it’s how it is with all medicine. As the merchant warned you, you begin to feel your muscles coiling like a spring, ready to allow you to make a swift dash. Your co-ordination definitively improved too, as well as your vision, as you can follow your movement despite the acceleration.");
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) dynStats("spe", 2 + rand(3));
-            else dynStats("spe", 1 + rand(2));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) AlchemyBonus("spe",2 + rand(3));
+            else AlchemyBonus("spe",1 + rand(2));
             if (rand(3) == 0) {
                 if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) outputText(player.modTone(player.maxToneCap(), 6));
                 else outputText(player.modTone(player.maxToneCap(), 3));
@@ -104,17 +102,14 @@
                 else outputText(player.modTone(15, 1));
             }
             if (player.wis < 50) {
-                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) player.wis += 2 + rand(7);
-                else player.wis += 1 + rand(4);
-                dynStats();
+                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) AlchemyBonus("spe",2 + rand(7));
+                else AlchemyBonus("wis",1 + rand(4));
             } else if (player.wis < 100) {
-                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) player.wis += 2 + rand(5);
-                else player.wis += 1 + rand(3);
-                dynStats();
+                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) AlchemyBonus("spe",2 + rand(5));
+                else AlchemyBonus("wis",1 + rand(3));
             } else {
-                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) player.wis += 2 + rand(3);
-                else player.wis += 1 + rand(2);
-                dynStats();
+                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) AlchemyBonus("spe",2 + rand(3));
+                else AlchemyBonus("wis",1 + rand(2));
             }
         }/*
     //Dao Dew
@@ -140,14 +135,14 @@
                 else outputText(player.modTone(15, 1));
             }
             if (player.lib < 50) {
-                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) dynStats("lib", 2 + rand(7));
-                else dynStats("lib", 1 + rand(4));
+                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) AlchemyBonus("lib",2 + rand(7));
+                else AlchemyBonus("lib",1 + rand(4));
             } else if (player.lib < 100) {
-                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) dynStats("lib", 2 + rand(5));
-                else dynStats("lib", 1 + rand(3));
+                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) AlchemyBonus("lib",2 + rand(5));
+                else AlchemyBonus("lib",1 + rand(3));
             } else {
-                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) dynStats("lib", 2 + rand(3));
-                else dynStats("lib", 1 + rand(2));
+                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) AlchemyBonus("lib",2 + rand(3));
+                else AlchemyBonus("lib",1 + rand(2));
             }
             player.refillHunger(10);
         }
@@ -159,16 +154,6 @@
             outputText("As you eat the soup you shiver as your bodily temperature drop. Not only that but the last thing on your mind right now is sex as you feel yourself freezing from the inside. The cold crisis eventualy passes but you remain relatively less libidinous afterward.");
             if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) dynStats("lus", -20);
             else dynStats("lus", -10);
-            if (player.lib > 100) {
-                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) dynStats("lib", -(4 + rand(7)));
-                else dynStats("lib", -(2 + rand(4)));
-            } else if (player.lib > 50) {
-                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) dynStats("lib", -(4 + rand(5)));
-                else dynStats("lib", -(2 + rand(3)));
-            } else {
-                if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) dynStats("lib", -(4 + rand(3)));
-                else dynStats("lib", -(2 + rand(2)));
-            }
             player.refillHunger(15);
         }
 
@@ -208,7 +193,7 @@
         public function purePearl(player:Player):void {
             clearOutput();
             outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your core.");
-            dynStats("lib", -5, "lus", -25, "cor", -10);
+            dynStats("lus", -25, "cor", -10);
             if (player.findPerk(PerkLib.PurityBlessing) < 0) player.createPerk(PerkLib.PurityBlessing, 0, 0, 0, 0);
         }
 
@@ -217,7 +202,8 @@
             outputText("You take first bite of fruit that Evangeline gave you.  Surprisingly it taste delicious as nothing else you tasted before so without thinking more you ate rest of the fruit.");
             if (player.findPerk(PerkLib.EzekielBlessing) < 0) player.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
             statScreenRefresh();
-            dynStats("str", 5, "tou", 5, "spe", 5, "inte", 5, "wis", 5, "lib", 5, "sen", 5);
+            dynStats("str", 5, "tou", 5, "spe", 5, "inte", 5, "lib", 5);
+            player.statStore.addBuffObject({"str":5, "tou":5, "spe":5, "int":5, "lib":5,'wis': 5}, 'EzekielBlessing', { text: 'Ezekiel Blessing'});
             player.refillHunger(50);
         }
 
@@ -258,9 +244,9 @@
                 else HPChange((50 + player.tou) * 3, true);
                 outputText("Some of your wounds are healed. ");
             } else outputText("You feel an odd sensation. ");
-            if (rand < 70 && player.lib < 80) {
+            if (rand < 70) {
                 outputText("You feel a sense of warmth spread through your erogenous areas.");
-                dynStats("lib", 3);
+                MutagenBonus("lib", 3);
             }
             if (rand >= 70 && rand <= 90) {
                 outputText("Your body tingles and feels more sensitive.");
@@ -282,9 +268,9 @@
                 else HPChange((50 + player.tou) * 9, true);
                 outputText("Some of your wounds are healed. ");
             } else outputText("You feel an odd sensation. ");
-            if (rand < 70 && player.lib < 120) {
+            if (rand < 70) {
                 outputText("You feel a sense of warmth spread through your erogenous areas.");
-                dynStats("lib", 9);
+                MutagenBonus("lib", 9);
             }
             if (rand >= 70 && rand <= 90) {
                 outputText("Your body tingles and feels more sensitive.");
@@ -366,7 +352,7 @@
 
         public function lowgradesoulforcerecoverypill(player:Player):void {
             outputText("You cram the pill in your mouth and swallow it.  ");
-            if (player.hasStatusEffect(StatusEffects.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
+            if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
             else {
                 outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 100)");
                 player.soulforce += 100;
@@ -378,7 +364,7 @@
 
         public function lowgradesoulforcerecoverypill2(player:Player):void {
             outputText("You open the bottle and start to cram the pills in your mouth, then swallowing them all.  ");
-            if (player.hasStatusEffect(StatusEffects.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
+            if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
             else {
                 outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 1000)");
                 player.soulforce += 1000;
@@ -390,7 +376,7 @@
 
         public function midgradesoulforcerecoverypill(player:Player):void {
             outputText("You cram the pill in your mouth and swallow it.  ");
-            if (player.hasStatusEffect(StatusEffects.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
+            if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
             else {
                 outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 600)");
                 player.soulforce += 600;
@@ -402,7 +388,7 @@
 
         public function midgradesoulforcerecoverypill2(player:Player):void {
             outputText("You open the bottle and start to cram the pills in your mouth, then swallowing them all.  ");
-            if (player.hasStatusEffect(StatusEffects.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
+            if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
             else {
                 outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 6000)");
                 player.soulforce += 6000;
@@ -414,7 +400,7 @@
 
         public function highgradesoulforcerecoverypill(player:Player):void {
             outputText("You cram the pill in your mouth and swallow it.  ");
-            if (player.hasStatusEffect(StatusEffects.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
+            if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
             else {
                 outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 3600)");
                 player.soulforce += 3600;
@@ -426,7 +412,7 @@
 
         public function highgradesoulforcerecoverypill2(player:Player):void {
             outputText("You open the bottle and start to cram the pills in your mouth, then swallowing them all.  ");
-            if (player.hasStatusEffect(StatusEffects.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
+            if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
             else {
                 outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 36000)");
                 player.soulforce += 36000;
@@ -825,13 +811,23 @@
                         var selectedCock:int;
                         if (rand(4) == 0) selectedCock = player.increaseCock(0, 3);
                         else selectedCock = player.increaseCock(0, 1);
-                        dynStats("int", 1, "lib", 2, "sen", 1, "lust", 5 + selectedCock * 3, "cor", tainted ? 1 : 0);
+                        dynStats("sen", 1, "lust", 5 + selectedCock * 3, "cor", tainted ? 1 : 0);
+                        MutagenBonus("int", 1);
+                        MutagenBonus("lib", 2);
                         if (selectedCock < .5) outputText("  It stops almost as soon as it starts, growing only a tiny bit longer.");
                         if (selectedCock >= .5 && selectedCock < 1) outputText("  It grows slowly, stopping after roughly half an inch of growth.");
                         if (selectedCock >= 1 && selectedCock <= 2) outputText("  The sensation is incredible as more than an inch of lengthened dick-flesh grows in.");
                         if (selectedCock > 2) outputText("  You smile and idly stroke your lengthening [cock] as a few more inches sprout.");
-                        if (tainted) dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + selectedCock * 3, "cor", 1);
-                        else dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + selectedCock * 3);
+                        if (tainted) {
+                            dynStats("sen", 1, "lus", 5 + selectedCock * 3, "cor", 1);
+                            MutagenBonus("int", 1);
+                            MutagenBonus("lib", 2);
+                        }
+                        else {
+                            dynStats("sen", 1, "lus", 5 + selectedCock * 3);
+                            MutagenBonus("int", 1);
+                            MutagenBonus("lib", 2);
+                        }
                         if (player.cocks[0].cockType != CockTypesEnum.DEMON) outputText("  With the transformation complete, your [cock] returns to its normal coloration.");
                         else outputText("  With the transformation complete, your [cock] throbs in an almost happy way as it goes flaccid once more.");
                     }
@@ -847,8 +843,16 @@
                         }
                         if (int(Math.random() * 4) == 0) temp3 = player.increaseCock(temp2, 3);
                         else temp3 = player.increaseCock(temp2, 1);
-                        if (tainted) dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + selectedCock * 3, "cor", 1);
-                        else dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + selectedCock * 3);
+                        if (tainted) {
+                            dynStats("sen", 1, "lus", 5 + selectedCock * 3, "cor", 1);
+                            MutagenBonus("int", 1);
+                            MutagenBonus("lib", 2);
+                        }
+                        else {
+                            dynStats("sen", 1, "lus", 5 + selectedCock * 3);
+                            MutagenBonus("int", 1);
+                            MutagenBonus("lib", 2);
+                        }
                         //Grammar police for 2 cocks
                         if (player.cockTotal() == 2) outputText("\n\nBoth of your [cocks] become shockingly hard, swollen and twitching as they turn a shiny inhuman purple in color.  They spasm, dripping thick ropes of hot demon-like pre-cum along their lengths as your shortest " + player.cockDescript(temp2) + " begins to grow.");
                         //For more than 2
@@ -867,8 +871,14 @@
                         player.cocks[0].cockThickness = 1;
                         outputText("\n\nYou shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
                         outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinTone + " tone.");
-                        if (tainted) dynStats("lib", 3, "sen", 5, "lus", 10, "cor", 5);
-                        else dynStats("lib", 3, "sen", 5, "lus", 10);
+                        if (tainted) {
+                            dynStats("sen", 5, "lus", 10, "cor", 5);
+                            MutagenBonus("lib", 3);
+                        }
+                        else {
+                            dynStats("sen", 5, "lus", 10);
+                            MutagenBonus("lib", 3);
+                        }
                     }
                     //TIT CHANGE 25% chance of shrinkage
                     if (rand(4) == 0) {
@@ -902,8 +912,14 @@
                             if (player.cocks.length == 1) outputText("\n\nYour cock seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.");
                             if (player.cocks.length > 1) outputText("\n\nYour cocks seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.");
                         }
-                        if (tainted) dynStats("lib", 3, "sen", 5, "lus", 10, "cor", 3);
-                        else dynStats("lib", 3, "sen", 5, "lus", 10);
+                        if (tainted) {
+                            dynStats("sen", 5, "lus", 10, "cor", 3);
+                            MutagenBonus("lib", 3);
+                        }
+                        else {
+                            dynStats("sen", 5, "lus", 10);
+                            MutagenBonus("lib", 3);
+                        }
                     }
                     if (player.cocks.length == 1) {
                         outputText("\n\nYour cock fills to its normal size and begins growing... ");
@@ -923,8 +939,14 @@
                             if (player.cocks.length == 1) outputText("  Your cock seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.");
                             if (player.cocks.length > 1) outputText("  Your cocks seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.");
                         }
-                        if (tainted) dynStats("lib", 3, "sen", 5, "lus", 10, "cor", 3);
-                        else dynStats("lib", 3, "sen", 5, "lus", 10);
+                        if (tainted) {
+                            dynStats("sen", 5, "lus", 10, "cor", 3);
+                            MutagenBonus("lib", 3);
+                        }
+                        else {
+                            dynStats("sen", 5, "lus", 10);
+                            MutagenBonus("lib", 3);
+                        }
                     }
                     if (player.cocks.length == 0) {
                         player.createCock();
@@ -932,8 +954,14 @@
                         player.cocks[0].cockThickness = 1;
                         outputText("\n\nYou shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
                         outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinTone + " tone.");
-                        if (tainted) dynStats("lib", 3, "sen", 5, "lus", 10, "cor", 3);
-                        else dynStats("lib", 3, "sen", 5, "lus", 10);
+                        if (tainted) {
+                            dynStats("sen", 5, "lus", 10, "cor", 3);
+                            MutagenBonus("lib", 3);
+                        }
+                        else {
+                            dynStats("sen", 5, "lus", 10);
+                            MutagenBonus("lib", 3);
+                        }
                     }
                     //Shrink breasts a more
                     //TIT CHANGE 50% chance of shrinkage
@@ -949,8 +977,14 @@
                         if (int(Math.random() * 10) < int(player.cor / 25)) {
                             outputText("\n\n");
                             growDemonCock(rand(2) + 2);
-                            if (tainted) dynStats("lib", 3, "sen", 5, "lus", 10, "cor", 5);
-                            else dynStats("lib", 3, "sen", 5, "lus", 10);
+                            if (tainted) {
+                                dynStats("sen", 5, "lus", 10, "cor", 5);
+                                MutagenBonus("lib", 3);
+                            }
+                            else {
+                                dynStats("sen", 5, "lus", 10);
+                                MutagenBonus("lib", 3);
+                            }
                         } else {
                             growDemonCock(1);
                         }
@@ -1005,7 +1039,8 @@
             outputText("  Unbidden, your hand brings the bottle to your lips, and the heady taste fills your mouth as you convulsively swallow the entire bottle.");
             //-Raises lust by 10.
             //-Raises sensitivity
-            dynStats("sen", 1, "lus", 10);
+            dynStats("lus", 10);
+            MutagenBonus("lib", 1);
             //-Raises corruption by 1 to 50, then by .5 to 75, then by .25 to 100.
             if (!purified) {
                 if (player.cor < 50) dynStats("cor", 1);
@@ -1031,7 +1066,8 @@
             //(Minotaur fantasy)
             if (!CoC.instance.inCombat && rand(10) == 1 && (!purified && (player.findPerk(PerkLib.MinotaurCumResistance) < 0) || player.findPerk(PerkLib.ManticoreCumAddict) < 0)) {
                 outputText("\n\nYour eyes flutter closed for a second as a fantasy violates your mind.  You're on your knees, prostrate before a minotaur.  Its narcotic scent fills the air around you, and you're swaying back and forth with your belly already sloshing and full of spunk.  Its equine-like member is rubbing over your face, and you submit to the beast, stretching your jaw wide to take its sweaty, glistening girth inside you.  Your tongue quivers happily as you begin sucking and slurping, swallowing each drop of pre-cum you entice from the beastly erection.  Gurgling happily, you give yourself to your inhuman master for a chance to swallow into unthinking bliss.");
-                dynStats("lib", 1, "lus", rand(5) + player.cor / 20 + flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] / 5);
+                dynStats("lus", rand(5) + player.cor / 20 + flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] / 5);
+                MutagenBonus("lib", 1);
             }
             //(Healing – if hurt and uber-addicted (hasperk))
             if (player.HP < player.maxHP() && player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {
@@ -1097,8 +1133,14 @@
                     else outputText("  You feel a strange sexual pleasure, but your " + multiCockDescript() + " remain unaffected.");
                 }
             }
-            if (tainted) dynStats("spe", 1, "lus", 3, "cor", 1);
-            else dynStats("spe", 1, "lus", 3);
+            if (tainted) {
+                dynStats("lus", 3, "cor", 1);
+                MutagenBonus("spe", 1);
+            }
+            else {
+                dynStats("lus", 3);
+                MutagenBonus("spe", 1);
+            }
             if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
             //Breast growth (maybe cock reduction!)
             if (rando <= 75) {
@@ -1297,23 +1339,23 @@
                 player.tallness += (1 + rand(5));
                 changes++;
             }
-            if (player.str < 100 && rand(3) == 0 && changes < changeLimit) {
-                dynStats("str", 1);
+            if (rand(3) == 0 && changes < changeLimit) {
+                MutagenBonus("str", 1);
                 outputText("\n\nYou feel raw bestial power coursing through you.");
                 changes++;
             }
-            if (player.spe < 80 && rand(3) == 0 && changes < changeLimit) {
-                dynStats("spe", 1);
+            if (rand(3) == 0 && changes < changeLimit) {
+                MutagenBonus("spe", 1);
                 outputText("\n\nYou feel you could run forever enjoying the feeling of the wind on your [skin.type].");
                 changes++;
             }
-            if (player.tou < 80 && rand(3) == 0 && changes < changeLimit) {
-                dynStats("tou", 1);
+            if (rand(3) == 0 && changes < changeLimit) {
+                MutagenBonus("tou", 1);
                 outputText("\n\nYou become more... solid. Sinewy. A memory comes unbidden from your youth of a grizzled wolf you encountered while hunting, covered in scars, yet still moving with an easy grace. You imagine that must have felt something like this. You don't feel the cold as much as before either maybe you're just getting used to it.");
                 changes++;
             }
             if (player.inte > 30 && rand(3) == 0 && changes < changeLimit) {
-                dynStats("int", -1);
+                MutagenBonus("int", 1);
                 outputText("\n\nYou feel dumber.");
                 changes++;
             }
@@ -1553,25 +1595,40 @@
                     }
                 }
             }
+            //Animal tooth face
+            if (rand(2) == 0 && changes < changeLimit && player.faceType != Face.ANIMAL_TOOTHS && player.hasPartialCoat(Skin.FUR)) {
+                outputText("\n\n");
+                if (player.faceType != Face.HUMAN) outputText("Your face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
+                outputText("You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. <b>Your mouth is now filled with wolf like canines.</b>");
+                setFaceType(Face.ANIMAL_TOOTHS);
+                changes++;
+            }
             //Wolf face
-            if (rand(2) == 0 && changes < changeLimit && player.faceType != Face.WOLF && player.hasFullCoatOfType(Skin.FUR)) {
+            if (rand(2) == 0 && changes < changeLimit && player.faceType == Face.ANIMAL_TOOTHS && player.hasFullCoatOfType(Skin.FUR)) {
                 outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting reforming into something... different, your screams turning into a howl as the change ends. You go to find a puddle in order to view your reflection...  <b>Your face looks like the one of a feral looking wolf composed of a maw jagged with threatening canines a wet muzzle and a animalistic tongue.</b>");
                 setFaceType(Face.WOLF);
                 changes++;
             }
-            //Winter wolf fur
-            if (rand(3) == 0
-                    && changes < changeLimit
-                    && player.lowerBody == LowerBody.WOLF
-                    && player.tailType == Tail.WOLF
-                    && player.ears.type == Ears.WOLF
-                    && !player.hasFur()
-                    && (player.hairColor != "glacial white" || player.coatColor != "glacial white")) {
+            //Winter wolf fur partial fur
+            if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && !player.hasPartialCoat(Skin.FUR) && (player.hairColor != "glacial white" || player.coatColor != "glacial white")) {
+                player.hairColor = "glacial white";
+                if (!player.hasCoat()) outputText("\n\nYour skin itches intensely. You gaze down as more and more hairs break forth from your skin quickly transforming into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now partialy covered in [haircolor] fur from head to toe.</b>");
+                else if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of [haircolor] fur growing out from below!  <b>You are now partialy covered in [haircolor] fur from head to toe.</b>");
+                else outputText("\n\nYour skin itch incessantly.  You scratch, feeling it current form shifting into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now partialy covered in [haircolor] fur from head to toe.</b>");
+                player.skin.growFur({color: player.hairColor}, Skin.COVERAGE_LOW);
+                if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+                    outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
+                    player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+                }
+                changes++;
+            }
+            //Winter wolf full fur
+            if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && player.hasPartialCoat(Skin.FUR) && (player.hairColor != "glacial white" || player.coatColor != "glacial white")) {
                 player.hairColor = "glacial white";
                 if (!player.hasCoat()) outputText("\n\nYour skin itches intensely. You gaze down as more and more hairs break forth from your skin quickly transforming into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now covered in [haircolor] fur from head to toe.</b>");
                 else if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of [haircolor] fur growing out from below!  <b>You are now covered in [haircolor] fur from head to toe.</b>");
                 else outputText("\n\nYour skin itch incessantly.  You scratch, feeling it current form shifting into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now covered in [haircolor] fur from head to toe.</b>");
-                player.skin.growCoat(Skin.FUR, {color: player.hairColor});
+                player.skin.growFur({color: player.hairColor}, Skin.COVERAGE_COMPLETE);
                 if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
                     outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
                     player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
@@ -1717,18 +1774,19 @@
                 outputText("<b>\n\nEating the pepper, you realize how dog-like you've become, and you wonder what else the peppers could change...</b>");
             }
             if (type == 3) {
-                dynStats("lib", 2 + rand(4), "lus", 5 + rand(5), "cor", 2 + rand(4));
+                MutagenBonus("lib", 2 + rand(4));
+                dynStats("lus", 5 + rand(5), "cor", 2 + rand(4));
                 outputText("\n\nYou feel yourself relaxing as gentle warmth spreads through your body.  Honestly you don't think you'd mind running into a demon or monster right now, they'd make for good entertainment.");
                 if (player.cor < 50) outputText("  You shake your head, blushing hotly.  Where did that thought come from?");
             }
-            if (player.str < 50 && rand(3) == 0) {
-                dynStats("str", (crit));
+            if (rand(3) == 0) {
+                MutagenBonus("str", (crit));
                 if (crit > 1) outputText("\n\nYour muscles ripple and grow, bulging outwards.");
                 else outputText("\n\nYour muscles feel more toned.");
                 changes++;
             }
-            if (player.spe < 30 && rand(3) == 0 && changes < changeLimit) {
-                dynStats("spe", (crit));
+            if (rand(3) == 0 && changes < changeLimit) {
+                MutagenBonus("spe", (crit));
                 if (crit > 1) outputText("\n\nYou find your muscles responding quicker, faster, and you feel an odd desire to go for a walk.");
                 else outputText("\n\nYou feel quicker.");
                 changes++;
@@ -1773,7 +1831,8 @@
                             player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
                             player.cocks[1].knotMultiplier = 1.7;
                             player.cocks[1].cockType = CockTypesEnum.DOG;
-                            dynStats("lib", 2, "lus", 50);
+                            dynStats("lus", 50);
+                            MutagenBonus("lib", 2);
                         }
                         //2 dicks+ - convert first 2 to doggie-dom
                         else {
@@ -1782,7 +1841,8 @@
                             player.cocks[1].cockType = CockTypesEnum.DOG;
                             player.cocks[0].knotMultiplier = 1.4;
                             player.cocks[1].knotMultiplier = 1.4;
-                            dynStats("lib", 2, "lus", 50);
+                            dynStats("lus", 50);
+                            MutagenBonus("lib", 2);
                         }
                     }
                     //If player has 1 dogdicks
@@ -1793,7 +1853,8 @@
                             player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
                             player.cocks[1].cockType = CockTypesEnum.DOG;
                             player.cocks[1].knotMultiplier = 1.4;
-                            dynStats("lib", 2, "lus", 50);
+                            dynStats("lus", 50);
+                            MutagenBonus("lib", 2);
                         }
                         //if player has more
                         if (player.cockTotal() >= 1) {
@@ -1809,7 +1870,8 @@
                                 player.cocks[0].cockType = CockTypesEnum.DOG;
                                 player.cocks[0].knotMultiplier = 1.4;
                             }
-                            dynStats("lib", 2, "lus", 50);
+                            dynStats("lus", 50);
+                            MutagenBonus("lib", 2);
                         }
                     }
                 }
@@ -1863,7 +1925,8 @@
                     outputText("\n\nA spike of pain doubles you up, nearly making you vomit.  You stay like that, nearly crying, as a palpable sense of relief suddenly washes over you.  You look down and realize you now have a small sack, complete with two relatively small balls.");
                     player.balls = 2;
                     player.ballSize = 1;
-                    dynStats("lib", 2, "lus", -10);
+                    dynStats("lus", -10);
+                    MutagenBonus("lib", 2);
                 } else {
                     //Makes your balls biggah!
                     player.ballSize++;
@@ -1872,7 +1935,8 @@
                     //Texts
                     if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + simpleBallsDescript() + " have grown larger than a human's.");
                     if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your [sack].  Walking becomes difficult as you discover your " + simpleBallsDescript() + " have enlarged again.");
-                    dynStats("lib", 1, "lus", 3);
+                    dynStats("lus", 3);
+                    MutagenBonus("lib", 1);
                 }
             }
             //Sexual Stuff Now
@@ -2311,7 +2375,8 @@
             if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
             if (player.hasFullCoatOfType(Skin.FUR) && changes < changeLimit && rand(3) == 0 && type != 6) {
                 outputText("\n\nYou become more... solid.  Sinewy.  A memory comes unbidden from your youth of a grizzled wolf you encountered while hunting, covered in scars, yet still moving with an easy grace.  You imagine that must have felt something like this.");
-                dynStats("tou", 4, "sen", -3);
+                dynStats("sen", -3);
+                MutagenBonus("tou", 4);
                 changes++;
             }
             //If no changes yay
@@ -2414,7 +2479,8 @@
                 //Texts
                 if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + simpleBallsDescript() + " have grown larger than a human's.");
                 if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your [sack].  Walking becomes difficult as you discover your " + simpleBallsDescript() + " have enlarged again.");
-                dynStats("lib", 1, "lus", 3);
+                dynStats("lus", 3);
+                MutagenBonus("lib", 1);
                 changes++;
             }
             //Grow new balls!
@@ -2440,7 +2506,7 @@
                         if (player.balls == 0) outputText("\n\nYou feel a churning inside your body as something inside you changes.");
                         if (player.balls > 0) outputText("\n\nYou feel a churning in your [balls].  It quickly settles, leaving them feeling somewhat more dense.");
                         if (crit > 1) outputText("  A bit of milky pre dribbles from your [cocks], pushed out by the change.");
-                        dynStats("lib", 1);
+                        MutagenBonus("lib", 1);
                     }
                     changes++;
                 }
@@ -2510,7 +2576,8 @@
                 //Texts
                 if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + simpleBallsDescript() + " have grown larger than a human's.");
                 if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your [sack].  Walking becomes difficult as you discover your " + simpleBallsDescript() + " have enlarged again.");
-                dynStats("lib", 1, "lus", 3);
+                dynStats("lus", 3);
+                MutagenBonus("lib", 1);
             }
             //Boost cum multiplier
             if (changes < changeLimit && rand(2) == 0 && player.cocks.length > 0) {
@@ -2527,7 +2594,7 @@
                         if (player.balls == 0) outputText("\n\nYou feel a churning inside your body as something inside you changes.");
                         if (player.balls > 0) outputText("\n\nYou feel a churning in your [balls].  It quickly settles, leaving them feeling somewhat more dense.");
                         if (crit > 1) outputText("  A bit of milky pre dribbles from your [cocks], pushed out by the change.");
-                        dynStats("lib", 1);
+                        MutagenBonus("lib", 1);
                     }
                     changes++;
                 }
@@ -2746,7 +2813,8 @@
                             if (player.cocks.length == 1) outputText("\n\nYour [cocks] seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.");
                             if (player.cocks.length > 1) outputText("\n\nYour [cocks] seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.");
                         }
-                        dynStats("lib", 1, "sen", 1, "lus", 20);
+                        dynStats("sen", 1, "lus", 20);
+                        MutagenBonus("lib", 1);
                     }
                     //SINGLEZ
                     if (player.cocks.length == 1) {
@@ -2767,7 +2835,8 @@
                             if (player.cocks.length == 1) outputText("  Your [cocks] seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.");
                             if (player.cocks.length > 1) outputText("  Your [cocks] seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.");
                         }
-                        dynStats("lib", 1, "sen", 1, "lus", 20);
+                        dynStats("sen", 1, "lus", 20);
+                        MutagenBonus("lib", 1);
                     }
 
                 }
@@ -2829,7 +2898,8 @@
                             if (player.cocks.length == 1) outputText("\n\nYour [cocks] seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.");
                             if (player.cocks.length > 1) outputText("\n\nYour [cocks] seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.");
                         }
-                        dynStats("lib", 1, "sen", 1, "lus", 20);
+                        dynStats("sen", 1, "lus", 20);
+                        MutagenBonus("lib", 1);
                     }
                     //SINGLEZ
                     if (player.cocks.length == 1) {
@@ -2850,7 +2920,8 @@
                             if (player.cocks.length == 1) outputText("  Your [cocks] seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.");
                             if (player.cocks.length > 1) outputText("  Your [cocks] seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.");
                         }
-                        dynStats("lib", 1, "sen", 1, "lus", 20);
+                        dynStats("sen", 1, "lus", 20);
+                        MutagenBonus("lib", 1);
                     }
                 }
                 player.refillHunger(60);
@@ -3014,7 +3085,8 @@
             //Purge withdrawl
             if (player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
                 player.removeStatusEffect(StatusEffects.MarbleWithdrawl);
-                dynStats("tou", 5, "int", 5);
+                MutagenBonus("tou", 5);
+                MutagenBonus("int", 5);
                 outputText("You no longer feel the symptoms of withdrawal.\n\n");
             }
             //Heals the player 70-100 health
@@ -3078,7 +3150,7 @@
                 else {
                     if (rand(2) == 0) outputText("\n\nThere is a slight pain as you feel your muscles shift somewhat.  Their appearance does not change much, but you feel much stronger.");
                     else outputText("\n\nYou feel your muscles tighten and clench as they become slightly more pronounced.");
-                    dynStats("str", temp / 10);
+                    MutagenBonus("str", temp / 10);
                     changes++;
                 }
             }
@@ -3089,7 +3161,7 @@
                 else {
                     if (rand(2) == 0) outputText("\n\nYou feel your insides toughening up; it feels like you could stand up to almost any blow.");
                     else outputText("\n\nYour bones and joints feel sore for a moment, and before long you realize they've gotten more durable.");
-                    dynStats("tou", temp / 10);
+                    MutagenBonus("tou", temp / 10);
                     changes++;
                 }
             }
@@ -3466,16 +3538,16 @@
             outputText("You open the small black book, and discover it to be an instructional book on the use of black magic.  Most of it is filled with generic information about black magic - how it is drawn from emotions (typically lust), and how it has the power to affect bodies and emotions.  It also warns against using it on oneself, as it is difficult to draw on your emotions while meddling with your own body.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
             if (player.inte < 30) {
                 outputText("\n\nYou feel greatly enlightened by your time spent reading.");
-                dynStats("int", 4);
+                KnowledgeBonus("int", 4);
             } else if (player.inte < 60) {
                 outputText("\n\nSpending some time reading was probably good for you, and you definitely feel smarter for it.");
-                dynStats("int", 2);
+                KnowledgeBonus("int", 2);
             } else if (player.inte < 90) {
                 outputText("\n\nAfter reading the small tome your already quick mind feels invigorated.");
-                dynStats("int", 1);
+                KnowledgeBonus("int", 1);
             } else {
                 outputText("\n\nThe contents of the book did little for your already considerable intellect.");
-                dynStats("int", .6);
+                KnowledgeBonus("int", 0.5);
             }
             //Smart enough for ice spike and doesnt have it
             if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsIceSpike)) {
@@ -3587,16 +3659,16 @@
             outputText("You open the grey volume, and discover it to be an instructional book on the use of grey magic.  Most of it is filled with generic information about grey magic - how it is drawn from both mental focus and emotions (typically lust), is difficult to use when tired and too little or too much aroused, and is used to at the same time create or control energy and affect bodies or emotions to create final effect.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
             if (player.inte < 100) {
                 outputText("\n\nYou feel greatly enlightened by your time spent reading.");
-                dynStats("int", 4);
+                KnowledgeBonus("int", 4);
             } else if (player.inte < 150) {
                 outputText("\n\nSpending some time reading was probably good for you, and you definitely feel smarter for it.");
-                dynStats("int", 2);
+                KnowledgeBonus("int", 2);
             } else if (player.inte < 200) {
                 outputText("\n\nAfter reading the small tome your already quick mind feels invigorated.");
-                dynStats("int", 1);
+                KnowledgeBonus("int", 1);
             } else {
                 outputText("\n\nThe contents of the book did little for your already considerable intellect.");
-                dynStats("int", .6);
+                KnowledgeBonus("int", 0.5);
             }
             if (player.hasPerk(PerkLib.PrestigeJobGreySage)) {
                 //Smart enough for (single target fire spell) and doesnt have it (player.inte >= 120)
@@ -3648,16 +3720,16 @@
             outputText("You open the white tome, and discover it to be an instructional book on the use of white magic.  Most of it is filled with generic information about white magic - how it is drawn for mental focus, is difficult to use when tired or aroused, and can be used to create and control energy.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
             if (player.inte < 30) {
                 outputText("\n\nYou feel greatly enlightened by your time spent reading.");
-                dynStats("int", 4);
+                KnowledgeBonus("int", 4);
             } else if (player.inte < 60) {
                 outputText("\n\nSpending some time reading was probably good for you, and you definitely feel smarter for it.");
-                dynStats("int", 2);
+                KnowledgeBonus("int", 2);
             } else if (player.inte < 90) {
                 outputText("\n\nAfter reading the small tome your already quick mind feels invigorated.");
-                dynStats("int", 1);
+                KnowledgeBonus("int", 1);
             } else {
                 outputText("\n\nThe contents of the book did little for your already considerable intellect.");
-                dynStats("int", .6);
+                KnowledgeBonus("int", 0.6);
             }
             //Smart enough for whitefire and doesnt have it
             if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
@@ -3752,12 +3824,232 @@
                 outputText(".  Once you've had a chance to calm down, you notice that the explosion of pleasure you just experienced has rocked you to your core.  You are a little hornier than you were before.");
                 //increase player libido, and maybe sensitivity too?
                 player.orgasm();
-                dynStats("lib", 2, "sen", 1);
+                dynStats("sen", 1);
+                MutagenBonus("lib", 2);
                 if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.addStatusValue(StatusEffects.RaijuLightningStatus, 1, 24);
             }
             if (player.lust > player.maxLust()) player.lust = player.maxLust();
             outputText("\n\n");
             player.refillHunger(5);
+        }
+
+        public function gremlinBeer(player:Player):void {
+            player.slimeFeed();
+            var changes:Number = 0;
+            var changeLimit:Number = 1;
+            if (rand(2) == 0) changeLimit++;
+            if (rand(3) == 0) changeLimit++;
+            if (rand(4) == 0) changeLimit++;
+            if (rand(5) == 0) changeLimit++;
+            changeLimit += additionalTransformationChances();
+            clearOutput();
+            outputText("Whoa it was definitely tasting just as bad as it smelled but hey it's not like your drinking this disgusting concoction for fun right? Or maybe you are?");
+            if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
+            dynStats("lus", 15);
+            dynStats("cor", 2);
+            //Stronger
+            if (player.str > 50 && rand(3) == 0 && changes < changeLimit) {
+                dynStats("str", -1);
+                if (player.str > 70) dynStats("str", -1);
+                if (player.str > 90) dynStats("str", -2);
+                outputText("\n\nYou feel a little weaker, but maybe it's just the alcohol.");
+                changes++;
+            }
+            ///Less tough
+            if (player.tou > 50 && rand(3) == 0 && changes < changeLimit) {
+                outputText("\n\nGiggling, you poke yourself, which only makes you giggle harder when you realize how much softer you feel.");
+                dynStats("tou", -1);
+                if (player.tou > 70) dynStats("tou", -1);
+                if (player.tou > 90) dynStats("tou", -2);
+                changes++;
+            }
+            //Speed boost
+            if (rand(3) == 0 && changes < changeLimit) {
+                MutagenBonus("spe", 1 + rand(2));
+                outputText("\n\nYou feel like dancing, and stumble as your legs react more quickly than you'd think.  Is the alcohol slowing you down or are you really faster?  You take a step and nearly faceplant as you go off balance.  It's definitely both.");
+                changes++;
+            }
+            if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+            //Shrink
+            if (rand(2) == 0 && player.tallness > 42) {
+                changes++;
+                outputText("\n\nThe world spins, and not just from the strength of the drink!  Your viewpoint is closer to the ground.  How fun!");
+                player.tallness -= (1 + rand(5));
+            }
+            //Nipples Turn Back:
+            if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
+                changes++;
+                player.removeStatusEffect(StatusEffects.BlackNipples);
+            }
+            //SEXYTIEMS
+            //Multidick killa!
+            if (player.cocks.length > 1 && rand(3) == 0 && changes < changeLimit) {
+                outputText("\n\n");
+                player.killCocks(1);
+                changes++;
+            }
+            //Shrink primary dick to no longer than 12 inches
+            else if (player.cocks.length == 1 && rand(2) == 0 && changes < changeLimit && !flags[kFLAGS.HYPER_HAPPY]) {
+                if (player.cocks[0].cockLength > 12) {
+                    changes++;
+                    var temp3:Number = 0;
+                    outputText("\n\n");
+                    //Shrink said cock
+                    if (player.cocks[0].cockLength < 6 && player.cocks[0].cockLength >= 2.9) {
+                        player.cocks[0].cockLength -= .5;
+                        temp3 -= .5;
+                    }
+                    temp3 += player.increaseCock(0, (rand(3) + 1) * -1);
+                    player.lengthChange(temp3, 1);
+                }
+            }
+            //Debugcunt
+            if (changes < changeLimit && rand(3) == 0 && (player.vaginaType() == 5 || player.vaginaType() == 6) && player.hasVagina()) {
+                outputText("\n\nSomething invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its natural flesh colour.");
+                player.vaginaType(0);
+                changes++;
+            }
+            if (changes < changeLimit && rand(4) == 0 && ((player.ass.analWetness > 0 && player.findPerk(PerkLib.MaraesGiftButtslut) < 0) || player.ass.analWetness > 1)) {
+                outputText("\n\nYou feel a tightening up in your colon and your [asshole] sucks into itself.  You feel sharp pain at first but that thankfully fades.  Your ass seems to have dried and tightened up.");
+                player.ass.analWetness--;
+                if (player.ass.analLooseness > 1) player.ass.analLooseness--;
+                changes++;
+            }
+            //Boost vaginal capacity without gaping
+            if (changes < changeLimit && rand(3) == 0 && player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) < 40) {
+                if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
+                player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5);
+                outputText("\n\nThere is a sudden... emptiness within your [vagina].  Somehow you know you could accommodate even larger... insertions.");
+                changes++;
+            }
+            //Boost fertility
+            if (changes < changeLimit && rand(4) == 0 && player.fertility < 40 && player.hasVagina()) {
+                player.fertility += 2 + rand(5);
+                changes++;
+                outputText("\n\nYou feel strange.  Fertile... somehow.  You don't know how else to think of it, but you're ready to be a mother.");
+            }
+            //GENERAL APPEARANCE STUFF BELOW
+            //antianemone corollary:
+            if (changes < changeLimit && player.hairType == 4 && rand(2) == 0) {
+                //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
+                outputText("\n\nAs you down the potent ale, your head begins to feel heavier - and not just from the alcohol!  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels smooth, silky, and fibrous; you watch as it dissolves into many thin, hair-like strands.  <b>Your hair is now back to normal!</b>");
+                setHairType(Hair.NORMAL);
+                changes++;
+            }
+            //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
+            if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
+                humanizeArms();
+                changes++;
+            }
+            //Removes wings!
+            if ((player.wings.type == Wings.BEE_LIKE_SMALL || player.wings.type == Wings.BEE_LIKE_LARGE || player.wings.type >= Wings.HARPY) && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(4) == 0) {
+                outputText("\n\nYour shoulders tingle, feeling lighter.  Something lands behind you with a 'thump', and when you turn to look you see your wings have fallen off.  This might be the best (and worst) booze you've ever had!  <b>You no longer have wings!</b>");
+                setWingType(Wings.NONE, "non-existant");
+                changes++;
+            }
+            //Removes antennaes!
+            if (player.antennae.type > Antennae.NONE && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nYour [hair] itches so you give it a scratch, only to have your antennae.type fall to the ground.  What a relief.  <b>You've lost your antennae.type!</b>");
+                changes++;
+                player.antennae.type = Antennae.NONE;
+            }
+            //Fix Legs!
+            if (player.lowerBody != LowerBody.HUMAN) {
+                humanizeLowerBody();
+                changes++;
+            }
+            //Eye colors
+            var goblin_eyes_color:Array = ["red", "yellow", "purple", "orange"];
+            if (player.eyes.type == Eyes.HUMAN && player.eyes.colour != "red" && player.eyes.colour != "yellow" && player.eyes.colour != "purple" && changes < changeLimit && rand(3) == 0) {
+                player.eyes.colour = randomChoice(goblin_eyes_color);
+                outputText("\n\nSomething weird happens in your eyes… like colors have slightly become brighter and wilder. <b>You make sure you ain’t on some drug trip from the Gremlin Oil before checking yourself in a puddle, discovering that your iris changed to [eyecolor].</b>");
+                changes++;
+            }
+            //Remove odd eyes
+            if (changes < changeLimit && rand(5) == 0 && player.eyes.type != Eyes.HUMAN && player.eyes.type != Eyes.GREMLIN) {
+                humanizeEyes();
+                changes++;
+            }
+            //Add gremlin eyes
+            if (changes < changeLimit && rand(5) == 0 && player.eyes.type == Eyes.HUMAN) {
+                player.eyes.type = Eyes.GREMLIN;
+                outputText("Aw gosh, you feel tired as hell, it’s like you spent the better part of yesterday night working on some stupid project. Truth is with those darkened eyelids of yours you might just have. That said, perhaps you should think of it less like a sign of fatigue and more like a sign of demonic nature because you easily imagine these on the faces of small fiends or possessed people too. <b>Seems like you have darkened eyelids now.</b>");
+                changes++;
+            }
+            //Omg Crazy hairs
+            if (player.hairType != Hair.CRAZY && changes < changeLimit && rand(3) == 0) {
+                player.hairType = Hair.CRAZY;
+                outputText("\n\nYou feel as if electricity is running through you and responding to the static your hair distorts in all possible directions. When the statics drops your hair is permanently frozen in a new… spiked form? You've heard of hair curling, dropping flat and what not but naturally spiking up? <b>You won’t need to put gel in your hair anymore to look like some </b>");
+                if (silly()){
+                    outputText("<b>punk kid from an anime series</b>");
+                } else {
+                    outputText("<b>weirdo</b>");
+                }
+                outputText("<b>, your hair naturally spikes up in a wild way which remind you of animal fur. </b>");
+                changes++;
+            }
+            //Dye those hairs
+            var gremlin_hair_color:Array = ["emerald", "dark green", "green", "aqua", "light green"];
+            if (player.hairType == Hair.CRAZY && player.hairColor != "emerald" && player.hairColor != "dark green" && player.hairColor != "green" && player.hairColor != "aqua" && player.hairColor != "light green" && changes < changeLimit && rand(3) == 0) {
+                player.hairColor = randomChoice(gremlin_hair_color);
+                outputText("\n\nGosh just while you were getting used to that new fucked up haircut of yours,  they began changing again. The strands glow for a moment before turning all " + player.hairColor + "! <b>Guess you won’t need to dye your hair color for it to match your weird haircut, you definitely look like what could pass for some crazy midget right now.</b>");
+                changes++;
+            }
+            //-Remove extra breast rows
+            if (changes < changeLimit && player.bRows() > 1 && rand(3) == 0) {
+                changes++;
+                outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
+                if (player.bRows() >= 3) outputText("abdomen");
+                else outputText("chest");
+                outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
+                if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
+                else outputText(player.skinTone + " " + player.skinDesc);
+                outputText(" remains. <b>You've lost a row of breasts!</b>");
+                dynStats("sen", -5);
+                player.removeBreastRow(player.breastRows.length - 1, 1);
+            }
+            //Skin/fur
+            if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.faceType == Face.HUMAN) {
+                humanizeSkin();
+                changes++;
+            }
+            //skinTone 
+            var gremlin_skin_color:Array = ["emerald", "dark green", "green", "aqua", "light green"];
+            if (player.skinTone != "light" && player.skinTone != "tan" && player.skinTone != "dark" && changes < changeLimit && rand(2) == 0) {
+                player.skinTone = randomChoice(gremlin_skin_color);
+                outputText("\n\nWhoah, that was weird.  You just hallucinated that your ");
+                if (player.hasFur()) outputText("skin");
+                else outputText(player.skinDesc);
+                outputText(" turned " + player.skinTone + ".  No way!  It's staying, it really changed color!");
+                changes++;
+            }
+            //Face!
+            if ((player.faceType != Face.CRAZY) && changes < changeLimit && rand(4) == 0 && player.ears.type == Ears.GREMLIN && player.tallness < 55) {
+                if (player.faceType != Face.HUMAN) {
+                    outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look.  <b>You have a human looking face again!</b>");
+                    setFaceType(Face.HUMAN);
+                } else {
+                    outputText("\n\nThinking on it, you’re smart, small and smuggly. The whole idea makes you laugh uncontrollably. But hey seriously since you’re the superior genius around here, might as well flash these idiots an unsettling smile, heck just thinking about how stupid everyone else is makes you smirk constantly, halfway to laughter. Well they might call you crazy but once you bury these primitive fools in the ground they'll all be the crazy ones. <b>You’re now constantly flashing a crazy grin just like a gremlin.</b>");
+                    setFaceType(Face.CRAZY);
+                }
+                changes++;
+            }
+            //Ears!
+            if (player.ears.type != Ears.GREMLIN && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nWhoa, something messed up is going about with your ears. They migrate slowly up your head, elongating and distorting as they get covered in -haircolor- fur. When you go check what the hell happened to them you discover instead of human ears you now have a pair of cute animal ears up on your head. Well these sure will give you a cute look. <b>You now have gremlin ears.!</b>");
+                setEarType(Ears.GREMLIN);
+                changes++;
+            }
+            // Remove gills
+            if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+            if (changes < changeLimit && rand(3) == 0) {
+                if (rand(2) == 0) player.modFem(85, 3);
+                if (rand(2) == 0) player.modThickness(20, 3);
+                if (rand(2) == 0) player.modTone(15, 5);
+            }
+            player.refillHunger(15);
+            flags[kFLAGS.TIMES_TRANSFORMED] += changes;
         }
 
         public function goblinAle(player:Player):void {
@@ -3790,8 +4082,8 @@
                 changes++;
             }
             //Speed boost
-            if (player.spe < 50 && rand(3) == 0 && changes < changeLimit) {
-                dynStats("spe", 1 + rand(2));
+            if (rand(3) == 0 && changes < changeLimit) {
+                MutagenBonus("spe", 1 + rand(2));
                 outputText("\n\nYou feel like dancing, and stumble as your legs react more quickly than you'd think.  Is the alcohol slowing you down or are you really faster?  You take a step and nearly faceplant as you go off balance.  It's definitely both.");
                 changes++;
             }
@@ -3985,9 +4277,10 @@
             if (type == 2) outputText("Well here goes nothing, you gulp down the thing and sure enough, you begin to feel strange as you ingest the jelly. Well at least it tastes like grapes.");
             //Stat changes
             //libido up to 80
-            if (player.lib < 80 && changes < changeLimit) {
+            if (changes < changeLimit) {
                 outputText("\n\nBlushing and feeling horny, you make sure to rub it over your chest and erect nipples, letting the strange slimy fluid soak into you.");
-                dynStats("lib", (.5 + (90 - player.lib) / 10), "lus", player.lib / 2);
+                dynStats("lus", player.lib / 2);
+                MutagenBonus("lib", (.5 + (90 - player.lib) / 10));
                 changes++;
             }
             //sensitivity moves towards 50
@@ -4112,7 +4405,8 @@
             } else if (player.tallness < 100 && rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nYour gel-like body swells up from the intake of additional slime.  If you had to guess, you'd bet you were about two inches taller.");
                 player.tallness += 2;
-                dynStats("str", 1, "tou", 1);
+                MutagenBonus("str", 1);
+                MutagenBonus("tou", 1);
                 changes++;
             }
             //Big slime girl
@@ -4146,14 +4440,14 @@
             }
             //STATS
             //Increase strength 1-2 points (Up to 50) (60 for tiger)
-            if (((player.str < 60 && type == 1) || player.str < 50) && rand(3) == 0) {
-                dynStats("str", 1 + rand(2));
+            if (rand(3) == 0) {
+                MutagenBonus("str", 1 + rand(2));
                 outputText("\n\nA painful ripple passes through the muscles of your body.  It takes you a few moments, but you quickly realize you're a little bit stronger now.");
                 changes++;
             }
             //Increase Speed 1-3 points (Up to 75) (100 for tigers)
-            if (((player.spe < 100 && type == 1) || player.spe < 75) && rand(3) == 0) {
-                dynStats("spe", 1 + rand(3));
+            if (rand(3) == 0) {
+                MutagenBonus("spe", 1 + rand(3));
                 changes++;
                 outputText("\n\nShivering without warning, you nearly trip over yourself as you walk.  A few tries later you realize your muscles have become faster.");
             }
@@ -4164,8 +4458,8 @@
                 outputText("\n\nIt takes a while, but you eventually realize your body has become less sensitive.");
             }
             //Increase Libido 2-4 points (Up to 75 points) (100 for tigers)
-            if (((player.lib < 100 && type == 1) || player.lib < 75) && rand(3) == 0 && changes < changeLimit) {
-                dynStats("lib", (1 + rand(3)));
+            if (rand(3) == 0 && changes < changeLimit) {
+                MutagenBonus("lib", 1 + rand(3));
                 changes++;
                 outputText("\n\nA blush of red works its way across your skin as your sex drive kicks up a notch.");
             }
@@ -4202,7 +4496,8 @@
                 }
                 outputText("!");
                 player.createCock(7, 1.4);
-                dynStats("lib", 4, "sen", 5, "lus", 20);
+                dynStats("sen", 5, "lus", 20);
+                MutagenBonus("lib", 4);
                 changes++;
             }
             //(Requires the player having two testicles)
@@ -4215,7 +4510,8 @@
                     player.balls = 2;
                     player.ballSize = 2;
                 }
-                dynStats("lib", 2, "sen", 3, "lus", 10);
+                dynStats("sen", 3, "lus", 10);
+                MutagenBonus("lib", 2);
                 changes++;
             }
             //Transformations:
@@ -4358,8 +4654,8 @@
             //(if outside combat)
             if (!CoC.instance.inCombat) outputText("  Minutes pass as you start wishing you had water with you, to get rid of the aftertaste.");
             //+ speed to 70!
-            if (player.spe < 70 && rand(2) == 0) {
-                dynStats("spe", (2 - (player.spe / 10 / 5)));
+            if (rand(2) == 0) {
+                MutagenBonus("spe", (2 - (player.spe / 10 / 5)));
                 outputText("\n\nYour muscles quiver, feeling ready to strike as fast as a snake!");
                 if (player.spe < 40) outputText("  Of course, you're nowhere near as fast as that.");
                 changes++;
@@ -4490,15 +4786,15 @@
             }
             if (type == 3) outputText("You apply the hydra scale against your chest, unsure of what will happen. It suddenly adheres and begins to merge into your body, vanishing beneath your skin.");
             //Speed up to 80!
-            if (player.spe < 80 && rand(2) == 0) {
-                dynStats("spe", 3);
+            if (rand(2) == 0) {
+                MutagenBonus("spe", 3);
                 outputText("\n\nYour muscles quiver, feeling ready to strike as fast as a snake!");
                 if (player.spe < 40) outputText("  Of course, you're nowhere near as fast as that.");
                 changes++;
             }
             //Toughness up to 70!
-            if (player.tou < 70 && rand(2) == 0) {
-                dynStats("tou", 2);
+            if (rand(2) == 0) {
+                MutagenBonus("tou", 2);
                 outputText("\n\nYour body and skin both thicken noticeably.  You pinch your [skin.type] experimentally and marvel at how much tougher it has gotten.");
                 changes++;
             }
@@ -4876,15 +5172,6 @@
             }
             outputText("You shovel the stuff into your face, not sure WHY you're eating it, but once you start, you just can't stop.  It tastes incredibly bland, and with a slight hint of cheese.");
             player.refillHunger(100);
-            player.str = 30;
-            player.spe = 30;
-            player.tou = 30;
-            player.inte = 30;
-            player.wis = 30;
-            player.sens = 20;
-            player.lib = 25;
-            player.cor = 5;
-            player.lust = 10;
             player.hairType = Hair.NORMAL;
             if (player.humanScore() > 4) {
                 outputText("\n\nYou blink and the world twists around you.  You feel more like yourself than you have in a while, but exactly how isn't immediately apparent.  Maybe you should take a look at yourself?");
@@ -5352,37 +5639,37 @@
             if (type == 2) outputText("Cheshire to be done.");
             if (type == 3) outputText("As you close your eyes and savor the fruit you feel somewhat weird. Looking around you realise you unconsciously moved 10 feet from your original location. Well you have seen weirder things.");
             //Speed raises up to 75
-            if (player.spe < 75 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 //low speed
                 if (player.spe <= 30) {
                     outputText("\n\nYou feel... more balanced, sure of step. You're certain that you've become just a little bit faster.");
-                    dynStats("spe", 2);
+                    MutagenBonus("spe", 2);
                 }
                 //medium speed
                 else if (player.spe <= 60) {
                     outputText("\n\nYou stumble as you shift position, surprised by how quickly you move. After a moment or two of disorientation, you adjust. You're certain that you can run faster now.");
-                    dynStats("spe", 1);
+                    MutagenBonus("spe", 1);
                 }
                 //high speed
                 else {
                     outputText("\n\nYou pause mid-step and crouch. Your leg muscles have cramped up like crazy. After a few moments, the pain passes and you feel like you could chase anything down.");
-                    dynStats("spe", .5);
+                    MutagenBonus("spe", 0.5);
                 }
                 changes++;
             }
             //Strength raises to 40
-            if (player.str < 40 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 if (rand(2) == 0) outputText("\n\nYour muscles feel taut, like a coiled spring, and a bit more on edge.");
                 else outputText("\n\nYou arch your back as your muscles clench painfully.  The cramp passes swiftly, leaving you feeling like you've gotten a bit stronger.");
-                dynStats("str", 1);
+                MutagenBonus("str", 1);
                 changes++;
             }
                     //Strength ALWAYS drops if over 60
             //Does not add to change total
-            else if (player.str > 60 && rand(3) == 0) {
-                outputText("\n\nShivers run from your head to your toes, leaving you feeling weak.  Looking yourself over, your muscles seemed to have lost some bulk.");
-                dynStats("str", -2);
-            }
+            //else if (player.str > 60 && rand(3) == 0) {
+                //outputText("\n\nShivers run from your head to your toes, leaving you feeling weak.  Looking yourself over, your muscles seemed to have lost some bulk.");
+                //dynStats("str", -2);
+            //}
             //Toughness drops if over 50
             //Does not add to change total
             if (player.tou > 50 && rand(3) == 0) {
@@ -5417,9 +5704,9 @@
                 dynStats("int", -1);
                 changes++;
             }
-            if ((type == 1 || type == 2) && player.inte < 80 && rand(3) == 0 && changes < changeLimit) {
+            if ((type == 1 || type == 2) && rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nYou suddenly feel more cunning and by far way smarter.");
-                dynStats("int", 2);
+                MutagenBonus("int", 2);
                 changes++;
             }
             if (type == 3 && player.inte > 12 && rand(3) == 0 && changes < changeLimit) {
@@ -5428,7 +5715,7 @@
                 changes++;
             }
             //Libido gain
-            if (type == 0 && player.lib < 80 && changes < changeLimit && rand(3) == 0) {
+            if (changes < changeLimit && rand(3) == 0) {
                 //Cat dicked folks
                 if (player.catCocks() > 0) {
                     choice = player.findFirstCockType(CockTypesEnum.CAT);
@@ -5443,7 +5730,8 @@
                     if (player.lust > 60) outputText("even more ");
                     outputText("turned on.");
                 }
-                dynStats("lib", 1, "sen", .25);
+                dynStats("sen", .25);
+                MutagenBonus("lib", 1);
                 changes++;
             }
             if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
@@ -5829,7 +6117,7 @@
                 changes++;
             }
             //Raises libido greatly to 50, then somewhat to 75, then slowly to 100.
-            if (player.lib < 100 && changes < changeLimit && rand(3) == 0) {
+            if (changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nA knot of fire in your gut doubles you over but passes after a few moments.  As you straighten you can feel the heat seeping into you, ");
                 //(DICK)
                 if (player.cocks.length > 0 && (player.gender != 3 || rand(2) == 0)) {
@@ -5842,30 +6130,30 @@
                 //(TARDS)
                 else outputText("puddling in your featureless crotch for a split-second before it slides into your " + assDescript() + ".  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.");
                 //+3 lib if less than 50
-                if (player.lib < 50) dynStats("lib", 1);
+                if (player.lib < 50) MutagenBonus("lib", 1);
                 //+2 lib if less than 75
-                if (player.lib < 75) dynStats("lib", 1);
+                if (player.lib < 75) MutagenBonus("lib", 1);
                 //+1 if above 75.
-                dynStats("lib", 1);
+                MutagenBonus("lib", 1);
                 changes++;
             }
             //-Raises toughness to 70
             //(+3 to 40, +2 to 55, +1 to 70)
-            if (player.tou < 70 && changes < changeLimit && rand(3) == 0) {
+            if (changes < changeLimit && rand(3) == 0) {
                 //(+3)
                 if (player.tou < 40) {
                     outputText("\n\nYour body and skin both thicken noticeably.  You pinch your [skin.type] experimentally and marvel at how much tougher your hide has gotten.");
-                    dynStats("tou", 3);
+                    MutagenBonus("tou", 3);
                 }
                 //(+2)
                 else if (player.tou < 55) {
                     outputText("\n\nYou grin as you feel your form getting a little more solid.  It seems like your whole body is toughening up quite nicely, and by the time the sensation goes away, you feel ready to take a hit.");
-                    dynStats("tou", 2);
+                    MutagenBonus("tou", 2);
                 }
                 //(+1)
                 else {
                     outputText("\n\nYou snarl happily as you feel yourself getting even tougher.  It's a barely discernible difference, but you can feel your [skin.type] getting tough enough to make you feel invincible.");
-                    dynStats("tou", 1);
+                    MutagenBonus("tou", 1);
                 }
                 changes++;
             }
@@ -5897,7 +6185,8 @@
                     if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
                 } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
                 changes++;
-                dynStats("lib", 3, "lus", 10);
+                dynStats("lus", 10);
+                MutagenBonus("lib", 3);
             }
             //(CHANGE OTHER DICK)
             //Requires 1 lizard cock, multiple cocks
@@ -5920,7 +6209,8 @@
                     if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
                 } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
                 changes++;
-                dynStats("lib", 3, "lus", 10);
+                dynStats("lus", 10);
+                MutagenBonus("lib", 3);
             }
             //-Grows second lizard dick if only 1 dick
             if (player.lizardCocks() == 1 && player.cocks.length == 1 && rand(4) == 0 && changes < changeLimit) {
@@ -5934,7 +6224,8 @@
                 player.cocks[1].cockLength = player.cocks[0].cockLength;
                 player.cocks[1].cockThickness = player.cocks[0].cockThickness;
                 changes++;
-                dynStats("lib", 3, "lus", 10);
+                dynStats("lus", 10);
+                MutagenBonus("lib", 3);
             }
             //--Worms leave if 100% lizard dicks?
             //Require mammals?
@@ -5962,7 +6253,7 @@
                     else player.breastRows[temp2].breastRating = 0;
                 }
                 //(+2 speed)
-                dynStats("lib", 2);
+                MutagenBonus("lib", 2);
                 changes++;
             }
             //-Lactation stoppage.
@@ -6187,7 +6478,7 @@
                 changes++;
             }
             //-Raises libido up to 90.
-            if (player.lib < 90 && changes < changeLimit && rand(3) == 0) {
+            if (changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nA knot of fire in your gut doubles you over but passes after a few moments.  As you straighten you can feel the heat seeping into you, ");
                 //(DICK)
                 if (player.cocks.length > 0 && (player.gender != 3 || rand(2) == 0)) {
@@ -6199,33 +6490,33 @@
                 else if (player.hasVagina()) outputText("puddling in your [vagina].  An instinctive desire to mate spreads through you, increasing your lust and boosting your sex-drive.");
                 //(TARDS)
                 else outputText("puddling in your featureless crotch for a split-second before it slides into your " + assDescript() + ".  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.");
-                dynStats("lib", 2);
+                MutagenBonus("lib", 2);
                 changes++;
             }
             //-Raises toughness up to 90.
             //(+3 to 50, +2 to 70, +1 to 90)
-            if (player.tou < 90 && changes < changeLimit && rand(3) == 0) {
+            if (changes < changeLimit && rand(3) == 0) {
                 //(+3)
                 if (player.tou < 50) {
                     outputText("\n\nYour body and skin both thicken noticeably.  You pinch your [skin.type] experimentally and marvel at how much tougher it is now.");
-                    dynStats("tou", 3);
+                    MutagenBonus("tou", 3);
                 }
                 //(+2)
                 else if (player.tou < 70) {
                     outputText("\n\nYou grin as you feel your form getting a little more solid.  It seems like your whole body is toughening up quite nicely, and by the time the sensation goes away, you feel ready to take a hit.");
-                    dynStats("tou", 2);
+                    MutagenBonus("tou", 2);
                 }
                 //(+1)
                 else {
                     outputText("\n\nYou snarl happily as you feel yourself getting even tougher.  It's a barely discernible difference, but you can feel your [skin.type] getting tough enough to make you feel invincible.");
-                    dynStats("tou", 1);
+                    MutagenBonus("tou", 1);
                 }
                 changes++;
             }
             //-Raises strength to 80.
-            if (player.str < 80 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nWhile heat builds in your muscles, their already-potent mass shifting slightly as they gain even more strength than before.");
-                dynStats("str", 1);
+                MutagenBonus("str", 1);
                 changes++;
             }
             if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
@@ -6255,7 +6546,8 @@
                     if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
                 } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
                 changes++;
-                dynStats("lib", 3, "lus", 10);
+                dynStats("lus", 10);
+                MutagenBonus("lib", 3);
             }
             //(CHANGE OTHER DICK)
             //Requires 1 lizard cock, multiple cocks
@@ -6278,7 +6570,8 @@
                     if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
                 } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
                 changes++;
-                dynStats("lib", 3, "lus", 10);
+                dynStats("lus", 10);
+                MutagenBonus("lib", 3);
             }
             //-Breasts vanish to 0 rating if male
             if (player.biggestTitSize() >= 1 && player.gender == 1 && changes < changeLimit && rand(3) == 0) {
@@ -6297,7 +6590,7 @@
                     else player.breastRows[temp2].breastRating = 0;
                 }
                 //(+2 speed)
-                dynStats("lib", 2);
+                MutagenBonus("spe", 2);
                 changes++;
             }
             //-Nipples reduction to 1 per tit.
@@ -6413,27 +6706,27 @@
             outputText("You chew on the weird glowy crystal, which begins to melt in your mouth like sugar. Your head spin for a moment as you begin to have hallucinations. This leaves you with weird feeling in your entire body, filling you with changes.");
             //-Raises toughness up to 70.
             //(+2 to 50, +1 to 70)
-            if (player.tou < 70 && changes < changeLimit && rand(3) == 0) {
+            if (changes < changeLimit && rand(3) == 0) {
                 //(+2)
                 if (player.tou < 50) {
                     outputText("\n\nYou grin as you feel your form getting a little more solid.  It seems like your whole body is toughening up quite nicely, and by the time the sensation goes away, you feel ready to take a hit.");
-                    dynStats("tou", 2);
+                    MutagenBonus("tou", 2);
                 }
                 //(+1)
                 else {
                     outputText("\n\nYou snarl happily as you feel yourself getting even tougher.  It's a barely discernible difference, but you can feel your [skin.type] getting tough enough to make you feel invincible.");
-                    dynStats("tou", 1);
+                    MutagenBonus("tou", 1);
                 }
                 changes++;
             }
             //-Raises strength to 60.
-            if (player.str < 60 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nWhile heat builds in your muscles, their already-potent mass shifting slightly as they gain even more strength than before.");
-                dynStats("str", 1);
+                MutagenBonus("str", 2);
                 changes++;
             }
             //Raises libido to 80.
-            if (player.lib < 80 && changes < changeLimit && rand(3) == 0) {
+            if (changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nA knot of fire in your gut doubles you over but passes after a few moments.  As you straighten you can feel the heat seeping into you, ");
                 //(DICK)
                 if (player.cocks.length > 0 && (player.gender != 3 || rand(2) == 0)) {
@@ -6446,9 +6739,9 @@
                 //(TARDS)
                 else outputText("puddling in your featureless crotch for a split-second before it slides into your " + assDescript() + ".  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.");
                 //+2 lib if less than 60
-                if (player.lib < 60) dynStats("lib", 1);
+                if (player.lib < 60) MutagenBonus("lib", 1);
                 //+1 if above 60.
-                dynStats("lib", 1);
+                MutagenBonus("lib", 1);
                 changes++;
             }
             //Lower wisdom down to 40
@@ -6481,7 +6774,8 @@
                     outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
                 } else player.cocks[temp2].cockType = CockTypesEnum.CAVE_WYRM;
                 changes++;
-                dynStats("lib", 3, "lus", 10);
+                dynStats("lus", 10);
+                MutagenBonus("lib", 3);
             }
             //Vagina Turns Glowing:
             if (player.hasVagina() && player.vaginaType() != 6 && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
@@ -6630,12 +6924,12 @@
             if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
             //Statistical changes:
             //-Raises speed up to 90.
-            if (changes < changeLimit && rand(3) == 0 && player.spe < 90) {
+            if (changes < changeLimit && rand(3) == 0) {
                 if (player.spe < 30) outputText("\n\nTingles run through your muscles, and your next few movements seem unexpectedly fast.  The liqueur somehow made you faster!");
                 else if (player.spe < 50) outputText("\n\nYou feel tingles running through your body, and after a moment, it's clear that you're getting faster.");
                 else if (player.spe < 65) outputText("\n\nThe tight, ready feeling you've grown accustomed to seems to intensify, and you know in the back of your mind that you've become even faster.");
                 else outputText("\n\nSomething changes in your physique, and you grunt, chopping an arm through the air experimentally.  You seem to move even faster than before, confirming your suspicions.");
-                dynStats("spe", 1);
+                MutagenBonus("spe", 1);
                 changes++;
             }
             //-Reduces intelligence down to 60.
@@ -6645,7 +6939,7 @@
                 changes++;
             }
             //-Raises libido up to 80.
-            if (player.lib < 80 && changes < changeLimit && rand(3) == 0) {
+            if (changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nA knot of fire in your gut doubles you over but passes after a few moments.  As you straighten you can feel the heat seeping into you, ");
                 //(DICK)
                 if (player.cocks.length > 0 && (player.gender != 3 || rand(2) == 0)) {
@@ -6657,26 +6951,26 @@
                 else if (player.hasVagina()) outputText("puddling in your [vagina].  An instinctive desire to mate spreads through you, increasing your lust and boosting your sex-drive.");
                 //(TARDS)
                 else outputText("puddling in your featureless crotch for a split-second before it slides into your " + assDescript() + ".  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.");
-                dynStats("lib", 2);
+                MutagenBonus("lib", 2);
                 changes++;
             }
             //-Raises toughness up to 90.
             //(+3 to 50, +2 to 70, +1 to 90)
-            if (player.tou < 90 && changes < changeLimit && rand(3) == 0) {
+            if (changes < changeLimit && rand(3) == 0) {
                 //(+3)
                 if (player.tou < 50) {
                     outputText("\n\nYour body and skin both thicken noticeably.  You pinch your [skin.type] experimentally and marvel at how much tougher it is now.");
-                    dynStats("tou", 3);
+                    MutagenBonus("tou", 3);
                 }
                 //(+2)
                 else if (player.tou < 70) {
                     outputText("\n\nYou grin as you feel your form getting a little more solid.  It seems like your whole body is toughening up quite nicely, and by the time the sensation goes away, you feel ready to take a hit.");
-                    dynStats("tou", 2);
+                    MutagenBonus("tou", 2);
                 }
                 //(+1)
                 else {
                     outputText("\n\nYou snarl happily as you feel yourself getting even tougher.  It's a barely discernible difference, but you can feel your [skin.type] getting tough enough to make you feel invincible.");
-                    dynStats("tou", 1);
+                    MutagenBonus("tou", 1);
                 }
                 changes++;
             }
@@ -6714,7 +7008,8 @@
                     if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
                 } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
                 changes++;
-                dynStats("lib", 3, "lus", 10);
+                dynStats("lus", 10);
+                MutagenBonus("lib", 3);
             }
             //(CHANGE OTHER DICK)
             //Requires 1 lizard cock, multiple cocks
@@ -6737,7 +7032,8 @@
                     if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
                 } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
                 changes++;
-                dynStats("lib", 3, "lus", 10);
+                dynStats("lus", 10);
+                MutagenBonus("lib", 3);
             }
             //Grow a cunt (guaranteed if no gender)
             if (player.gender == 0 || (!player.hasVagina() && changes < changeLimit && rand(3) == 0)) {
@@ -6765,7 +7061,8 @@
                 }
                 outputText("!");
                 player.createCock(7, 1.4);
-                dynStats("lib", 4, "sen", 5, "lus", 20);
+                dynStats("sen", 5, "lus", 20);
+                MutagenBonus("lib", 4);
                 changes++;
             }
                     //-Shrink tits if above DDs.
@@ -6962,22 +7259,23 @@
 			}
 			//STATS CHANGURYUUUUU
 			//Boost speed (max 80!)
-			if (changes < changeLimit && rand(3) == 0 && player.spe < 80) {
+			if (changes < changeLimit && rand(3) == 0) {
 				if (player.spe < 30) outputText("\n\nTingles run through your muscles, and your next few movements seem unexpectedly fast.  The egg somehow made you faster!");
 				else if (player.spe < 50) outputText("\n\nYou feel tingles running through your body, and after a moment, it's clear that you're getting faster.");
 				else if (player.spe < 65) outputText("\n\nThe tight, ready feeling you've grown accustomed to seems to intensify, and you know in the back of your mind that you've become even faster.");
 				else outputText("\n\nSomething changes in your physique, and you grunt, chopping an arm through the air experimentally.  You seem to move even faster than before, confirming your suspicions.");
 				changes++;
-				if (player.spe < 35) dynStats("spe", 1);
-				dynStats("spe", 1);
+				if (player.spe < 35) MutagenBonus("spe", 1);
+                MutagenBonus("spe", 1);
 			}
 			//Boost libido
 			if (changes < changeLimit && rand(5) == 0) {
 				changes++;
-				dynStats("lib", 1, "lus", (5 + player.lib / 7));
-				if (player.lib < 30) dynStats("lib", 1);
-				if (player.lib < 40) dynStats("lib", 1);
-				if (player.lib < 60) dynStats("lib", 1);
+				dynStats("lus", (5 + player.lib / 7));
+                MutagenBonus("lib", 1);
+				if (player.lib < 30) MutagenBonus("lib", 1);
+				if (player.lib < 40) MutagenBonus("lib", 1);
+				if (player.lib < 60) MutagenBonus("lib", 1);
 				//Lower ones are gender specific for some reason
 				if (player.lib < 60) {
 					//(Cunts or assholes!
@@ -7304,10 +7602,11 @@
             //FAILSAAAAFE
             if (changes == 0) {
                 if (player.lib < 100) changes++;
-                dynStats("lib", 1, "lus", (5 + player.lib / 7));
-                if (player.lib < 30) dynStats("lib", 1);
-                if (player.lib < 40) dynStats("lib", 1);
-                if (player.lib < 60) dynStats("lib", 1);
+                dynStats("lus", (5 + player.lib / 7));
+                MutagenBonus("lib", 1);
+                if (player.lib < 30) MutagenBonus("lib", 1);
+                if (player.lib < 40) MutagenBonus("lib", 1);
+                if (player.lib < 60) MutagenBonus("lib", 1);
                 //Lower ones are gender specific for some reason
                 if (player.lib < 60) {
                     //(Cunts or assholes!
@@ -7376,14 +7675,14 @@
             //Stats:
             //****************
             //-Speed increase to 100.
-            if (player.spe < 100 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 changes++;
                 if (player.spe >= 75) outputText("\n\nA familiar chill runs down your spine. Your muscles feel like well oiled machinery, ready to snap into action with lightning speed.");
                 else outputText("\n\nA chill runs through your spine, leaving you feeling like your reflexes are quicker and your body faster.");
                 //Speed gains diminish as it rises.
-                if (player.spe < 40) dynStats("spe", .5);
-                if (player.spe < 75) dynStats("spe", .5);
-                dynStats("spe", .5);
+                if (player.spe < 40) MutagenBonus("spe", 0.5);
+                if (player.spe < 75) MutagenBonus("spe", 0.5);
+                MutagenBonus("spe", 0.5);
             }
             //-Toughness decrease to 50
             if (player.tou > 50 && rand(3) == 0 && changes < changeLimit) {
@@ -7393,20 +7692,20 @@
                 dynStats("tou", -1);
             }
             //-Strength increase to 70
-            if (player.str < 70 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 changes++;
                 //(low str)
                 if (player.str < 40) outputText("\n\nShivering, you feel a feverish sensation that reminds you of the last time you got sick. Thankfully, it passes swiftly, leaving slightly enhanced strength in its wake.");
                 //(hi str – 50+)
                 else outputText("\n\nHeat builds in your muscles, their already-potent mass shifting slightly as they gain even more strength.");
                 //Faster until 40 str.
-                if (player.str < 40) dynStats("str", .5);
-                dynStats("str", .5);
+                if (player.str < 40) MutagenBonus("str", 0.5);
+                MutagenBonus("str", 0.5);
             }
             //-Libido increase to 90
-            if ((player.lib < 90 || rand(3) == 0) && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 changes++;
-                if (player.lib < 90) dynStats("lib", 1);
+                MutagenBonus("lib", 1);
                 //(sub 40 lib)
                 if (player.lib < 40) {
                     outputText("\n\nA passing flush colors your [face] for a second as you daydream about sex. You blink it away, realizing the item seems to have affected your libido.");
@@ -7703,14 +8002,14 @@
             if (type == 2) outputText("Looking again at the wonderful peacock carved in alabaster and ruby that you found on that strange alcove, your curiosity gets the best of you, and you start examining it. As you do so, the magic stored long ago within the artifact pours out, and starts changing your body!");
             //Stats changes
             //-Speed increase to 100.
-            if (player.spe < 100 && type == 0 && rand(3) == 0 && changes < changeLimit) {
+            if (type == 0 && rand(3) == 0 && changes < changeLimit) {
                 changes++;
                 if (player.spe >= 75) outputText("\n\nA familiar chill runs down your spine. Your muscles feel like well oiled machinery, ready to snap into action with lightning speed.");
                 else outputText("\n\nA chill runs through your spine, leaving you feeling like your reflexes are quicker and your body faster.");
                 //Speed gains diminish as it rises.
-                if (player.spe < 40) dynStats("spe", .5);
-                if (player.spe < 75) dynStats("spe", .5);
-                dynStats("spe", .5);
+                if (player.spe < 40) MutagenBonus("spe", 0.5);
+                if (player.spe < 75) MutagenBonus("spe", 0.5);
+                MutagenBonus("spe", 0.5);
             }
             //-Toughness decrease to 50
             if (player.tou > 50 && type == 0 && rand(3) == 0 && changes < changeLimit) {
@@ -7720,15 +8019,15 @@
                 dynStats("tou", -1);
             }
             //-Strength increase to 70
-            if (player.str < 70 && type == 0 && rand(3) == 0 && changes < changeLimit) {
+            if (type == 0 && rand(3) == 0 && changes < changeLimit) {
                 changes++;
                 //(low str)
                 if (player.str < 40) outputText("\n\nShivering, you feel a feverish sensation that reminds you of the last time you got sick. Thankfully, it passes swiftly, leaving slightly enhanced strength in its wake.");
                 //(hi str – 50+)
                 else outputText("\n\nHeat builds in your muscles, their already-potent mass shifting slightly as they gain even more strength.");
                 //Faster until 40 str.
-                if (player.str < 40) dynStats("str", .5);
-                dynStats("str", .5);
+                if (player.str < 40) MutagenBonus("str", 0.5);
+                MutagenBonus("str", 0.5);
             }
             if (type == 1 || type == 2) changeLimit = 1;
             if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
@@ -8017,10 +8316,10 @@
                 outputText("\n\nWhile chewing, your mind becomes more and more tranquil.  You find it hard to even remember your mission, let alone your name.  <b>Maybe more kanga fruits will help?</b>");
             }
             //-Speed to 70
-            if (player.spe < 70 && rand(3) == 0) {
+            if (rand(3) == 0) {
                 //2 points up if below 40!
-                if (player.spe < 40) dynStats("spe", 1);
-                dynStats("spe", 1);
+                if (player.spe < 40) MutagenBonus("spe", 1);
+                MutagenBonus("spe", 1);
                 outputText("\n\nYour legs fill with energy as you eat the kanga fruit.  You feel like you could set a long-jump record!  You give a few experimental bounds, both standing and running, with your newfound vigor.  Your stride seems longer too; you even catch a bit of air as you push off with every powerful step.");
                 changes++;
             }
@@ -8235,9 +8534,9 @@
             //Stat Changes
             //*************
             //(If speed<70, increases speed)
-            if (player.spe < 70 && changes < changeLimit && rand(3) == 0) {
+            if (changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nYour reflexes feel much faster. Experimentally, you make a grab at a fly on a nearby rock and quickly snatch it out of the air.  A compulsion to stuff it in your mouth and eat it surfaces, but you resist the odd desire.  Why would you ever want to do something like that?");
-                dynStats("spe", 1.5);
+                MutagenBonus("spe", 1.5);
                 changes++;
             }
             //(If speed>80, decreases speed down to minimum of 80)
@@ -8255,13 +8554,13 @@
             //(Increase libido)
             if (changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nYou suddenly feel slightly needier, and your loins stir in quiet reminder that they could be seen to. The aftertaste hangs on your tongue and your teeth.  You wish there had been more.");
-                dynStats("lib", 1);
+                MutagenBonus("lib", 1);
                 changes++;
             }
             //(increase toughness to 60)
-            if (changes < changeLimit && rand(3) == 0 && player.tou < 60) {
+            if (changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nStretching languidly, you realize you're feeling a little tougher than before, almost as if you had a full-body shell of armor protecting your internal organs.  How strange.  You probe at yourself, and while your " + player.skinFurScales() + " doesn't feel much different, the underlying flesh does seem tougher.");
-                dynStats("tou", 1);
+                MutagenBonus("tou", 1);
                 changes++;
             }
             //(decrease strength to 70)
@@ -8286,7 +8585,8 @@
             if (player.hasVagina()) {
                 if (player.looseness() > 1 && changes < changeLimit && rand(3) == 0) {
                     outputText("\n\nWith a gasp, you feel your [vagina] tightening, making you leak sticky girl-juice. After a few seconds, it stops, and you rub on your [vagina] excitedly. You can't wait to try this out!");
-                    dynStats("lib", 2, "lus", 25);
+                    dynStats("lus", 25);
+                    MutagenBonus("lib", 2);
                     changes++;
                     player.vaginas[0].vaginalLooseness--;
                 }
@@ -8294,7 +8594,8 @@
             //(tightens asshole to 1, increases lust)
             if (player.ass.analLooseness > 1 && changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nYou let out a small cry as your [asshole] shrinks, becoming smaller and tighter. When it's done, you feel much hornier and eager to stretch it out again.");
-                dynStats("lib", 2, "lus", 25);
+                dynStats("lus", 25);
+                MutagenBonus("lib", 2);
                 changes++;
                 player.ass.analLooseness--;
             }
@@ -8398,7 +8699,7 @@
             if (player.hasCoatOfType(Skin.CHITIN) && (player.faceType != Face.SPIDER_FANGS || player.faceType != Face.HUMAN) && player.eyes.type == Eyes.HUMAN && rand(4) == 0 && changes < changeLimit) {
                 outputText("\n\nYou suddenly get the strangest case of double vision.  Stumbling and blinking around, you clutch at your face, but you draw your hands back when you poke yourself in the eye.  Wait, those fingers were on your forehead!  You tentatively run your fingertips across your forehead, not quite believing what you felt.  <b>There's a pair of eyes on your forehead, positioned just above your normal ones!</b>  This will take some getting used to!");
                 setEyeType(Eyes.FOUR_SPIDER_EYES);
-                dynStats("int", 5);
+                MutagenBonus("int", 5);
                 changes++;
             }
             //(Gain spider fangs)
@@ -8542,16 +8843,8 @@
                     player.ballSize = 3;
                 }
                 outputText("Finally, you feel the transformation skittering to a halt, leaving you to openly roam your new chiseled and sex-ready body.  So what if you can barely form coherent sentences anymore?  A body like this does all the talking you need, you figure!");
-                if (player.inte > 35) {
-                    var boost:Number = (player.inte - 35) / 5;
-                    player.inte = 35 + boost;
-                    dynStats("int", -0.1);
-
-                }
-                if (player.lib < 50) {
-                    player.lib = 50;
-                    dynStats("lib", .1);
-                }
+                var boost:Number = (player.inte - 35) / 5;
+                MutagenBonus("lib", .1);
                 outputText("\n\n<b>(Lost Perk - ");
                 if (player.findPerk(PerkLib.BimboBrains) >= 0) outputText("Bimbo Brains, ");
                 outputText("Bimbo Body)\n");
@@ -8661,10 +8954,6 @@
                 outputText("<b>(Perk Lost - Feeder!)</b>\n");
                 player.removePerk(PerkLib.Feeder);
             }
-            if (player.inte > 21) {
-                boost = (player.inte - 20) / 4;
-                player.inte = 21 + boost;
-            }
             if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
             dynStats("str", 35, "tou", 35, "int", -1, "lib", 5, "lus", 40);
             player.refillHunger(30);
@@ -8689,10 +8978,10 @@
             if (rand(3) == 0) changeLimit++;
             changeLimit += additionalTransformationChances();
             //Effect script 1:  (higher intelligence)
-            if (player.inte < 100 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nYou groan softly as your head begins pounding something fierce.  Wincing in pain, you massage your temples as the throbbing continues, and soon, the pain begins to fade; in its place comes a strange sense of sureness and wit.");
-                dynStats("int", 1);
-                if (player.inte < 50) dynStats("int", 1);
+                MutagenBonus("int", 1);
+                if (player.inte < 50) MutagenBonus("int", 1);
                 changes++;
             }
             //Effect script 2:  (lower sensitivity)
@@ -8703,13 +8992,13 @@
                 changes++;
             }
             //Effect script 3:  (higher libido)
-            if (player.lib < 100 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 //([if libido >49]
                 if (player.lib < 50) outputText("\n\nIdly, you drop a hand to your crotch as");
                 else outputText("\n\nWith a substantial amount of effort, you resist the urge to stroke yourself as");
                 outputText(" a trace amount of the ghost girl's lust is transferred into you.  How horny IS she, you have to wonder...");
-                dynStats("lib", 1);
-                if (player.lib < 50) dynStats("lib", 1);
+                MutagenBonus("lib", 1);
+                if (player.lib < 50) MutagenBonus("lib", 1);
                 changes++;
             }
             if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
@@ -8895,15 +9184,15 @@
                 dynStats("str", -1);
                 changes++;
             }
-            if (player.spe < 100 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nYou feel fleet and lighter on your toes; you sense you could dodge, dart or skip away from anything.");
-                dynStats("spe", 1);
+                MutagenBonus("spe", 1);
                 changes++;
             }
-            if (player.inte < 100 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nYou groan softly as your head begins pounding something fierce.  Wincing in pain, you massage your temples as the throbbing continues, and soon, the pain begins to fade; in its place comes a strange sense of sureness and wit.");
-                dynStats("int", 1);
-                if (player.inte < 50) dynStats("int", 1);
+                MutagenBonus("int", 1);
+                if (player.inte < 50) MutagenBonus("int", 1);
                 changes++;
             }
             if (player.sens < 80 && rand(4) == 0 && changes < changeLimit) {
@@ -9042,19 +9331,19 @@
             outputText("You drink the mead, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.");
             if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
             //Stats
-            if (player.str < 80 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nYour fill your muscles filling with orc might.");
-                dynStats("str", 1);
+                MutagenBonus("str", 1);
                 changes++;
             }
-            if (player.tou < 100 && rand(2) == 0 && changes < changeLimit) {
+            if (rand(2) == 0 && changes < changeLimit) {
                 outputText("\n\nYour body and skin both thicken noticeably.  You pinch your [skin.type] experimentally and marvel at how much tougher it has gotten.");
-                dynStats("tou", 1);
+                MutagenBonus("tou", 1);
                 changes++;
             }
-            if (player.spe < 75 && rand(2) == 0 && changes < changeLimit) {
+            if (rand(2) == 0 && changes < changeLimit) {
                 outputText("\n\nHearing a suddent sound you suddently move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
-                dynStats("spe", 1);
+                MutagenBonus("spe", 1);
                 changes++;
             }
             if (player.inte > 15 && rand(3) == 0 && changes < changeLimit) {
@@ -9186,10 +9475,10 @@
                 outputText("As you admire the shiny jewel, you notice a flicker of energy flash across it, before a sudden jolt runs through your body! Letting out a howling moan, the jewel crumbles to dust as your body spasms in pleasure before the feeling subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
             }
             //Stats
-            if (player.lib < 100 && rand(4) == 0 && changes < changeLimit) {
+            if (rand(4) == 0 && changes < changeLimit) {
                 outputText("\n\nYou roll your tongue over your lips as residual static run all over your body. Your nipples are tight and your groin warmed with jolting pleasure. You growl as you feel hornier and hornier before the feeling ebbs. Part of you says you should be concerned by this turn of events, but there are <i>sooo</i> many cuties out there to molest!");
-                dynStats("lib", 2);
-                if (player.lib < 60) dynStats("lib", 2);
+                MutagenBonus("lib", 2);
+                if (player.lib < 60) MutagenBonus("lib", 2);
                 changes++;
             }
             if (player.sens < 70 && rand(4) == 0 && changes < changeLimit) {
@@ -9288,7 +9577,7 @@
                 } else humanizeEars();
                 changes++;
             }
-            var raiju_eyes_color:Array = ["blue", "green", "teal"];
+            var raiju_eyes_color:Array = ["blue", "green", "turquoise"];
             if (player.ears.type == Ears.WEASEL && player.eyes.type != Eyes.RAIJU && changes < changeLimit && rand(3) == 0) {
                 if (player.eyes.type == Eyes.HUMAN) {
                     player.eyes.colour = randomChoice(raiju_eyes_color);
@@ -9332,25 +9621,25 @@
             changeLimit += additionalTransformationChances();
             outputText("You eat up the seed and not to soon after let out a howling moan as your body spasms in pleasure before the feeling subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
             //Stats
-            if (player.spe < 100 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 changes++;
                 if (player.spe >= 75) outputText("\n\nA familiar chill runs down your spine. Your muscles feel like well oiled machinery, ready to snap into action with lightning speed.");
                 else outputText("\n\nA chill runs through your spine, leaving you feeling like your reflexes are quicker and your body faster.");
                 //Speed gains diminish as it rises.
-                if (player.spe < 40) dynStats("spe", .5);
-                if (player.spe < 75) dynStats("spe", .5);
-                dynStats("spe", .5);
+                if (player.spe < 40) MutagenBonus("spe", .5);
+                if (player.spe < 75) MutagenBonus("spe", .5);
+                MutagenBonus("spe", .5);
             }
-            if (player.tou > 50 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 changes++;
                 if (rand(2) == 0) outputText("\n\nA nice, slow warmth rolls from your gut out to your limbs, flowing through them before dissipating entirely. As it leaves, you note that your body feels softer and less resilient.");
                 else outputText("\n\nYou feel somewhat lighter, but consequently more fragile.  Perhaps your bones have changed to be more harpy-like in structure?");
                 dynStats("tou", -1);
             }
-            if (player.lib < 100 && rand(4) == 0 && changes < changeLimit) {
+            if (rand(4) == 0 && changes < changeLimit) {
                 outputText("\n\nYou roll your tongue over your lips as residual tingles run all over your body. Your nipples are tight and your groin warmed with jolting pleasure. You growl as you feel hornier and hornier before the feeling ebbs. Part of you says you should be concerned by this turn of events, but there are <i>sooo</i> many cuties out there to molest!");
-                dynStats("lib", 2);
-                if (player.lib < 60) dynStats("lib", 2);
+                MutagenBonus("lib", 2);
+                if (player.lib < 60) MutagenBonus("lib", 2);
                 changes++;
             }
             if (player.sens < 70 && rand(4) == 0 && changes < changeLimit) {
@@ -9399,7 +9688,7 @@
                 if (player.breastRows[0].breastRating < 1) outputText("  <b>You have breasts now!</b>");
                 player.breastRows[0].breastRating = 2;
             }//Physical
-            var raiju_hair:Array = ["purple", "light blue", "yellow", "white"];
+            var raiju_hair:Array = ["purple", "light blue", "yellow", "white", "turquoise", "emerald"];
             if (!InCollection(player.hairColor, raiju_hair) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
                 player.hairColor = randomChoice(raiju_hair);
                 outputText("\n\nYour hair stands up on end as bolts of lightning run through each strand, changing them to a <b>[haircolor] color!</b>");
@@ -9444,7 +9733,7 @@
                 setRearBody(RearBody.RAIJU_MANE);
                 changes++;
             }
-            if (player.rearBody.type == RearBody.RAIJU_MANE && player.faceType != Face.HUMAN && changes < changeLimit && rand(3) == 0) {
+            if (player.rearBody.type == RearBody.RAIJU_MANE && player.faceType != Face.HUMAN && player.faceType != Face.RAIJU_FANGS && changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nYour visage twists painfully, returning to a more normal human shape, albeit with flawless skin.  <b>Your face is human again!</b>");
                 setFaceType(Face.HUMAN);
                 changes++;
@@ -9458,7 +9747,7 @@
                 setEarType(Ears.ELFIN);
                 changes++;
             }
-            var raiju_eyes_color:Array = ["blue", "green", "teal"];
+            var raiju_eyes_color:Array = ["blue", "green", "turquoise"];
             if (player.ears.type == Ears.ELFIN && player.eyes.type != Eyes.RAIJU && changes < changeLimit && rand(3) == 0) {
                 if (player.eyes.type == Eyes.HUMAN) {
                     player.eyes.colour = randomChoice(raiju_eyes_color);
@@ -9489,6 +9778,69 @@
                 changes++;
             }
             flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+        }
+
+        public function strangeFlower(player:Player):void {
+            clearOutput();
+            if (player.lowerBody == LowerBody.PLANT_FLOWER) {
+                outputText("Having no idea of what could happen when you take a whiff of this obviously corrupted plant, you head to the forest in order to find some privacy.");
+                if (silly) {
+                    outputText(" You have the feeling you might be taunting Murphy.");
+                }
+                outputText("\n\nFinally, you smell the flower, glorious! Soon a giddy smile grows on your face as arousal flushes your skin. As the unknown aphrodisiac gets to work on you,  " +
+                        "you begin to release thick clouds of pollen all around you, dousing a good distance with your own aphrodisiac, " +
+                        "trying to draw in anything to fuck you. Your efforts are rewarded when a clearly aroused succubus comes out of the nearby bush, " +
+                        "though whether her arousal is actually from your pollen is anybody's guess. You pull the entranced demoness into your nectar bath with your vines. " +
+                        "She barely resists, aroused as she is, rather she practically jumps in, of her own volition. You don’t waste any time closing your petals around your catch. " +
+                        "As soon as she is secured, you begin to grind your pussy on the woman’s drooling snatch, eager to get going. The succubus coos and starts to kiss you, while you, " +
+                        "in turn, wrap yourself around her, pulling her deeper into your bath, kissing all the way. The both of you go at it with reckless abandon, " +
+                        "grinding your cunts and splashing nectar everywhere, grabbing each other’s breasts and drinking them dry of milk and nectar. " +
+                        "You eventually doze off in the arms of your blind date, falling asleep for a while.\n\n" +
+
+                        "You wake up a good while later, your flower is still closed, so you decide to open it to let some sunlight in. " +
+                        "You suddenly feel your hand touching your leftmost petal, but that shouldn’t be possible, since you are still on the far right of your flower. " +
+                        "As you look over in confusion, you notice you’re no longer alone in your flower. " +
+                        "On the other side is a second girl who happens to have exactly the same proportions and coloration as you. You poke her side, causing her to jump startled by the contact. " +
+                        "Once she recovers she shoots you a dirty look and speaks at the exact same time as you.\n\n" +
+
+                        "\"<i>The fuck are you doing in my flower!? Out! Now!</i>\"\n\n" +
+                        "\"<i>The fuck are you saying, you damn squatter?! This is <i>my</i> flower!</i>\"\n\n" +
+
+                        "And you find yourself looking at your spitting image, much to your confusion. " +
+                        "Apparently, you are not alone in that feeling, since she looks just as confused, prompting the both of you to start trying to figure out what the fuck happened. " +
+                        "You recall coming to the forest, smelling that weird flower, getting horny, fucking that succubus and finally going off to sleep with her still in the flower. " +
+                        "Meanwhile, your clone has absolutely no memory aside from waking up here in this flower. " +
+                        "No memory doesn’t mean she doesn’t know anything since apparently, you both share all your knowledge, abilities and even your name. " +
+                        "You try and figure out how this could have happened, coming to the conclusion that you probably assimilated the succubus’ soulless body into yours, converting it into your double. " +
+                        "Ain’t that creepy. After the alarm fades off, you finally realize this is the perfect opportunity to make true a crazy fantasy you never thought you would be able to: " +
+                        "literally fucking yourself. No, masturbation didn’t count, and since you two are sharing one body and soul, she should be having this very same idea right now, right? " +
+                        "A thought which is confirmed when you both dive in to kiss each other at the same time. The both of you begin to make out and play with each other’s pussy, " +
+                        "moving fingers with the perfect coordination only possible for those having shared senses. Mmmmmmmm... You never thought fucking yourself would feel so good. " +
+                        "You can feel everything she does and vice versa, riding a double orgasm as both your pussies gush with nectar, the both of you cumming in perfect sync. " +
+                        "You and your sister sit in the flower bath, still tangled together from your recent fuck as you come to a conclusion.\n\n" +
+
+                        "\"<i>You grab the ranged weapon, I'll use the close combat one?</i>\"\n\n" +
+
+                        "She nods.\n\n" +
+
+                        "\"<i>Good!</i>\"\n\n" +
+
+                        "\"<i>We take turns fucking, with some sharing thrown in from time to time?</i>\"\n\n" +
+
+                        "\"<i>That works for me long as you don’t hog all the stamens.</i>\"\n\n" +
+
+                        "\"<i>Does it even matter since whoever gets to fuck will share her senses with the other anyways?</i>\"\n\n" +
+
+                        "The both of you do a high-five and head back to camp ready to tag team your adventure. <b>You are now two but one, one but two. You have become a Liliraune.</b>");
+                player.createPerk(PerkLib.DualMind, 0, 0, 0, 0);
+                player.hairColorOnly = "light purple";
+                player.coatColor = "snow white";
+                player.lowerBody = LowerBody.FLOWER_LILIRAUNE;
+                player.refillHunger(20);
+            } else {
+                outputText("As you take a whif of the plant nothing happens guess this flower has property you can use at the time.");
+                player.refillHunger(20);
+            }
         }
 
         public function isabellaMilk(player:Player):void {
@@ -9525,13 +9877,14 @@
             changeLimit += additionalTransformationChances();
             //possible use effects:
             //- toughess up, sensitivity down
-            if (rand(3) == 0 && player.tou < 50 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nYour skin feels clammy and a little rubbery.  You touch yourself experimentally and notice that you can barely feel the pressure from your fingertips.  Consumed with curiosity, you punch yourself lightly in the arm; the most you feel is a dull throb!");
-                dynStats("tou", 1, "sen", -1);
+                dynStats("sen", -1);
+                MutagenBonus("tou", 1);
                 changes++;
             }
             //- speed down
-            if (rand(3) == 0 && player.spe > 40 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nA pinprick sensation radiates from your stomach down to your knees, as though your legs were falling asleep.  Wobbling slightly, you stand up and take a few stumbling steps to work the blood back into them.  The sensation fades, but your grace fails to return and you stumble again.  You'll have to be a little more careful moving around for a while.");
                 changes++;
                 dynStats("spe", -1);
@@ -9628,17 +9981,17 @@
                 }
             }
             //[increase Intelligence, Libido and Sensitivity]
-            if (changes < changeLimit && rand(3) == 0 && (player.lib < 80 || player.inte < 80 || player.sens < 80)) {
+            if (changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nYou close your eyes, smirking to yourself mischievously as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental picture of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
-                if (player.inte < 80) dynStats("int", 4);
-                if (player.lib < 80) dynStats("lib", 1);
+                if (player.inte < 80) MutagenBonus("int", 4);
+                if (player.lib < 80) MutagenBonus("lib", 1);
                 if (player.sens < 80) dynStats("sen", 1);
                 //gain small lust also
                 dynStats("lus", 10);
                 changes++;
             }
             //[decrease Strength] (to some floor) // I figured 15 was fair, but you're in a better position to judge that than I am.
-            if (changes < changeLimit && rand(3) == 0 && player.str > 40) {
+            if (changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nYou can feel your muscles softening as they slowly relax, becoming a tad weaker than before.  Who needs physical strength when you can outwit your foes with trickery and mischief?  You tilt your head a bit, wondering where that thought came from.");
                 dynStats("str", -1);
                 if (player.str > 60) dynStats("str", -1);
@@ -9647,7 +10000,7 @@
                 changes++;
             }
             //[decrease Toughness] (to some floor) // 20 or so was my thought here
-            if (changes < changeLimit && rand(3) == 0 && player.tou > 30) {
+            if (changes < changeLimit && rand(3) == 0) {
                 if (player.tou < 60) outputText("\n\nYou feel your skin becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your supple skin isn't going to offer you much protection.");
                 else outputText("\n\nYou feel your skin becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your hide isn't quite as tough as it used to be.");
                 dynStats("tou", -1);
@@ -9981,7 +10334,7 @@
                 changes++;
             }
             //-Raises libido up to 90.
-            if (player.lib < 90 && changes < changeLimit && rand(3) == 0) {
+            if (changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nA knot of fire in your gut doubles you over but passes after a few moments.  As you straighten you can feel the heat seeping into you, ");
                 //(DICK)
                 if (player.cocks.length > 0 && (player.gender != 3 || rand(2) == 0)) {
@@ -9993,33 +10346,33 @@
                 else if (player.hasVagina()) outputText("puddling in your [vagina].  An instinctive desire to mate spreads through you, increasing your lust and boosting your sex-drive.");
                 //(TARDS)
                 else outputText("puddling in your featureless crotch for a split-second before it slides into your " + assDescript() + ".  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.");
-                dynStats("lib", 2);
+                MutagenBonus("lib", 2);
                 changes++;
             }
             //-Raises toughness up to 90.
             //(+3 to 50, +2 to 70, +1 to 90)
-            if (player.tou < 90 && changes < changeLimit && rand(3) == 0) {
+            if (changes < changeLimit && rand(3) == 0) {
                 //(+3)
                 if (player.tou < 50) {
                     outputText("\n\nYour body and skin both thicken noticeably.  You pinch your [skin.type] experimentally and marvel at how much tougher it is now.");
-                    dynStats("tou", 3);
+                    MutagenBonus("tou", 3);
                 }
                 //(+2)
                 else if (player.tou < 70) {
                     outputText("\n\nYou grin as you feel your form getting a little more solid.  It seems like your whole body is toughening up quite nicely, and by the time the sensation goes away, you feel ready to take a hit.");
-                    dynStats("tou", 2);
+                    MutagenBonus("tou", 2);
                 }
                 //(+1)
                 else {
                     outputText("\n\nYou snarl happily as you feel yourself getting even tougher.  It's a barely discernible difference, but you can feel your [skin.type] getting tough enough to make you feel invincible.");
-                    dynStats("tou", 1);
+                    MutagenBonus("tou", 1);
                 }
                 changes++;
             }
             //-Raises strength to 80.
-            if (player.str < 80 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nWhile heat builds in your muscles, their already-potent mass shifting slightly as they gain even more strength than before.");
-                dynStats("str", 1);
+                MutagenBonus("str", 1);
                 changes++;
             }
             if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
@@ -10072,7 +10425,8 @@
                     if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
                 } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
                 changes++;
-                dynStats("lib", 3, "lus", 10);
+                dynStats("lus", 10);
+                MutagenBonus("lib", 3);
             }
             //-Breasts vanish to 0 rating if male
             if (player.biggestTitSize() >= 1 && player.gender == 1 && changes < changeLimit && rand(3) == 0) {
@@ -10091,7 +10445,7 @@
                     else player.breastRows[temp2].breastRating = 0;
                 }
                 //(+2 speed)
-                dynStats("lib", 2);
+                MutagenBonus("lib", 2);
                 changes++;
             }
             //-Nipples reduction to 1 per tit.
@@ -10198,19 +10552,20 @@
 
             //Libido: No desc., always increases.
             //Corruption: No desc., always decreases.
-            dynStats("lib", 2, "cor", -2);
+            dynStats("cor", -2);
+            MutagenBonus("lib", 2);
             //Health/HP(Large increase; always occurs):
             outputText("\n\nYou feel suddenly invigorated by the potent beverage, like you could take on a whole horde of barbarians or giants and come out victorious! ");
             HPChange(Math.round(player.maxHP() * .25), true);
             if (rand(3) == 0) {
                 outputText("\n\nThe alcohol fills your limbs with vigor, making you feel like you could take on the world with just your fists!");
                 if (silly()) outputText("  Maybe you should run around shirtless, drink, and fight!  Saxton Hale would be proud.");
-                dynStats("str", 2);
+                MutagenBonus("str", 2);
             }
             //Tough:
             else {
                 outputText("\n\nYou thump your chest and grin - your foes will have a harder time taking you down while you're fortified by liquid courage.");
-                dynStats("tou", 2);
+                MutagenBonus("tou", 2);
             }
             //Grow Beard [ONLY if PC has a masculine face & a dick.)( -- Why? Bearded ladies are also a fetish [That's just nasty.] (I want a lady beard)): A sudden tingling runs along your chin. You rub it with your hand, and find a thin layer of bristles covering your lower face. You now sport a fine [player.HairColor] beard!
             if (rand(6) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.beardLength < 4) {
@@ -10229,7 +10584,8 @@
 
             //Libido: No desc., always increases.
             //Corruption: No desc., always decreases.
-            dynStats("lib", 10, "cor", -10);
+            dynStats("cor", -10);
+            MutagenBonus("lib", 10);
             //Health/HP(Large increase; always occurs):
             outputText("\n\nYou feel suddenly invigorated by the potent beverage, like you could take on a whole horde of barbarians or giants and come out victorious!");
             HPChange(Math.round(player.maxHP()), false);
@@ -10237,12 +10593,12 @@
             if (rand(3) == 0) {
                 outputText("\n\nThe alcohol fills your limbs with vigor, making you feel like you could take on the world with just your fists!");
                 if (silly()) outputText("  Maybe you should run around shirtless, drink, and fight!  Saxton Hale would be proud.");
-                dynStats("str", 10);
+                MutagenBonus("str", 10);
             }
             //Tough:
             else {
                 outputText("\n\nYou thump your chest and grin - your foes will have a harder time taking you down while you're fortified by liquid courage.");
-                dynStats("tou", 10);
+                MutagenBonus("tou", 10);
             }
             //Grow Beard [ONLY if PC has a masculine face & a dick.)( -- Why? Bearded ladies are also a fetish [That's just nasty.] (I want a lady beard)): A sudden tingling runs along your chin. You rub it with your hand, and find a thin layer of bristles covering your lower face. You now sport a fine [player.HairColor] beard!
             if (rand(6) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.beardLength < 6) {
@@ -10341,10 +10697,12 @@
             //BASIC STATS
             //**********************
             //[increase Intelligence, Libido and Sensitivity]
-            mutationStep(player.inte < 100, mystic ? 2 : 4, function ():void {
+            mutationStep(1 == 1, mystic ? 2 : 4, function ():void {
                 outputText("\n\nYou close your eyes, smirking to yourself mischievously as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental image of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
                 //Raise INT, Lib, Sens. and +10 LUST
-                dynStats("int", 2, "lib", 1, "sen", 2, "lus", 10);
+                dynStats("sen", 2, "lus", 10);
+                MutagenBonus("int", 2);
+                MutagenBonus("lib", 1);
             });
             //[decrease Strength toward 15]
             mutationStep(player.str > 15, mystic ? 2 : 3, function ():void {
@@ -10481,7 +10839,8 @@
                     outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into seven tails.  <b>You are now a seven-tails!  But something is wrong...  The cosmic power radiating from your body feels...  tainted somehow.  The corruption pouring off your body feels...  good.</b>");
                     outputText("\n\n(Perk Gained: Corrupted Kitsune - Grants Corrupted Fox Fire and Terror special attacks.)");
                     player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
-                    dynStats("lib", 1, "lus", 5, "cor", 5);
+                    dynStats("lus", 5, "cor", 5);
+                    MutagenBonus("lib", 1);
                 } else outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
                 player.tailCount = 7;
                 if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th) && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
@@ -10504,7 +10863,8 @@
                     outputText("\n\nYou have the inexplicable urge to set fire to the world, just to watch it burn.  With your newfound power, it's a goal that is well within reach.");
                     outputText("\n\n(Perk Gained: Corrupted Nine-tails - Grants boosts to your racial special attacks.)");
                     player.createPerk(PerkLib.CorruptedNinetails, 0, 0, 0, 0);
-                    dynStats("lib", 2, "lus", 10, "cor", 10);
+                    dynStats("lus", 10, "cor", 10);
+                    MutagenBonus("lib", 2);
                 } else outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
                 player.tailCount = 9;
                 if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th) && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
@@ -10782,7 +11142,9 @@
         public function behemothCum(player:Player):void {
             clearOutput();
             outputText("You uncork the bottle and drink the behemoth cum; it tastes great and by the time you've finished drinking, you feel a bit stronger. ");
-            dynStats("str", 0.5, "tou", 0.5, "lus", 5 + (player.cor / 5));
+            dynStats("lus", 5 + (player.cor / 5));
+            MutagenBonus("str", 1);
+            MutagenBonus("tou", 1);
             HPChange(Math.round(player.maxHP() * .25), true);
             player.slimeFeed();
             player.refillHunger(25);
@@ -10826,9 +11188,9 @@
             else if (player.cor > 70) outputText("eagerly ");
             outputText("rub it into your arms and chest.  The substance is warm, coating and ever so slightly numbing; it quickly sinks into your skin, leaving you feeling smooth and sleek.");
             //Speed Increase:
-            if (player.spe < 100 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nYou feel fleet and lighter on your toes; you sense you could dodge, dart or skip away from anything.");
-                dynStats("spe", 1);
+                MutagenBonus("spe", 1);
                 changes++;
             }
             //Strength Loss:
@@ -10844,10 +11206,10 @@
                 changes++;
             }
             //Libido Increase:
-            if (player.lib < 70 && player.hasVagina() && rand(3) == 0 && changes < changeLimit) {
+            if (player.hasVagina() && rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nYou feel your blood quicken and rise, and a desire to... hunt builds within you.");
-                dynStats("lib", 2);
-                if (player.lib < 30) dynStats("lib", 2);
+                MutagenBonus("lib", 2);
+                if (player.lib < 30) MutagenBonus("lib", 2);
                 changes++;
             }
             if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
@@ -11103,7 +11465,7 @@
                 }
             }
             //[Player gains quad nipples, milk production and libido way up]
-            dynStats("lib", 5);
+            MutagenBonus("lib", 5);
             player.boostLactation(3 * player.bRows());
             player.refillHunger(30);
         }
@@ -11121,17 +11483,17 @@
             changeLimit += additionalTransformationChances();
             //stat gains:
             //gain speed to ceiling of 80
-            if (player.spe < 80 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nYou twitch and turn your head this way and that, feeling a bit more alert.  This will definitely help when defending your personal space from violators.");
                 changes++;
-                if (player.spe < 40) dynStats("spe", 1);
-                dynStats("spe", 1);
+                if (player.spe < 40) MutagenBonus("spe", 1);
+                MutagenBonus("spe", 1);
             }
             //gain sensitivity
             if (player.sens < 80 && rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nThe wrinkled rind suddenly feels alarmingly distinct in your hands, and you drop the remnants of the fruit.  Wonderingly, you touch yourself with a finger - you can feel even the lightest pressure on your " + player.skinFurScales() + " much more clearly now!");
-                if (player.sens < 60) dynStats("sen", 2);
-                dynStats("sen", 2);
+                if (player.sens < 60) MutagenBonus("spe", 2);
+                MutagenBonus("spe", 2);
                 changes++;
             }
             //lose toughness to floor of 50
@@ -11149,7 +11511,7 @@
                     outputText("\n\nYour [balls] inflate, stretching the skin of your sack.  Exposing them, you can see that they've grown several inches!  How magical!");
                     changes++;
                     player.ballSize += 2 + rand(3);
-                    dynStats("lib", 1);
+                    MutagenBonus("lib", 1);
                 }
                 //gain balls up to 2 (only if full-coon face and fur; no dick required)
                 if (player.balls == 0 && player.hasFur() && 9999 == 9999 && rand(3) == 0 && changes < changeLimit) {
@@ -11305,7 +11667,7 @@
                 if (!player.isTaur()) outputText("\n\nYou tap your [feet] idly against the rock you sit upon as you enjoy the treat; it takes several minutes before you realize you don't reach as far down as you did when you sat down!  In shock, you jerk upright and leap off, nearly falling forward as your body moves more responsively than before!  Experimentally, you move in place as you look down at your now-closer [feet]; the sensation of a more compact agility stays with you.");
                 //horse
                 else outputText("\n\nYou trot idly in place as you eat, moving quicker and quicker as you become increasingly bored; on one step, the ground sneaks up on you and you hit it sharply, expecting a few more inches before contact!  Looking down, you notice better resolution than before - you can make out the dirt a bit more clearly.  It looks like you just shed some height, but... you're feeling too jittery to care.  You just want to run around.");
-                dynStats("spe", 1);
+                MutagenBonus("spe", 1);
                 player.tallness -= 2;
                 if (player.tallness > 50) player.tallness--;
                 if (player.tallness > 60) player.tallness--;
@@ -11644,8 +12006,7 @@
                 //Get warned!
                 if (flags[kFLAGS.FERRET_BAD_END_WARNING] == 0) {
                     outputText("\n\nYou find yourself staring off into the distance, dreaming idly of chasing rabbits through a warren.  You shake your head, returning to reality.  <b>Perhaps you should cut back on all the Ferret Fruit?</b>");
-                    player.inte -= 5 + rand(3);
-                    if (player.inte < 5) player.inte = 5;
+                    dynStats("int", -(5+rand(3)));
                     flags[kFLAGS.FERRET_BAD_END_WARNING] = 1;
                 }
                 //BEEN WARNED! BAD END! DUN DUN DUN
@@ -11677,9 +12038,9 @@
                 changes++;
             }
             //- If speed is > 80, increase speed:
-            if (player.spe < 80 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nYour muscles begin to twitch rapidly, but the feeling is not entirely unpleasant.  In fact, you feel like running.");
-                dynStats("spe", 1);
+                MutagenBonus("spe", 1);
                 changes++;
             }
             //- If male with a hip rating >4 or a female/herm with a hip rating >6:
@@ -11899,14 +12260,14 @@
             changeLimit += additionalTransformationChances();
             outputText("You take a bite into the pigtail truffle. It oddly tastes like bacon. You eventually finish eating. ");
             player.refillHunger(20);
-            if (player.str < 100 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nYour fill your muscles filling with might.");
-                dynStats("str", 1);
+                MutagenBonus("str", 1);
                 changes++;
             }
-            if (player.tou < 100 && rand(2) == 0 && changes < changeLimit) {
+            if (rand(2) == 0 && changes < changeLimit) {
                 outputText("\n\nYour body and skin both thicken noticeably.  You pinch your [skin.type] experimentally and marvel at how much tougher it has gotten.");
-                dynStats("tou", 1);
+                MutagenBonus("tou", 1);
                 changes++;
             }
             if (player.spe > 50 && changes < changeLimit && rand(4) == 0) {
@@ -12157,16 +12518,16 @@
 
             //Statistical changes:
             //-Raises intelligence to 80.
-            if (player.inte < 80 && changes < changeLimit && rand(3) == 0) {
+            if (changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nAs you finish drinking the ink you suddenly feel more cunning and by far way smarter.");
-                dynStats("int", 1);
+                MutagenBonus("int", 1);
                 changes++;
             }
             //-Raises strength to 90.
-            if (player.str < 90 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nYou suddenly feel like you could do a wrestling contest with anyone who ask.");
                 if (player.str > 60) outputText(" Heck you feel so strong you could bend wood or even steel!");
-                dynStats("str", 1);
+                MutagenBonus("str", 1);
                 changes++;
             }
             //-Decrease muscle tone toward 30
@@ -12503,7 +12864,7 @@
                     outputText("<b>  You now have human legs in place of your feet!</b>");
                     setLowerBody(LowerBody.HUMAN);
                     player.legCount = 2;
-                    dynStats("spe", 1);
+                    MutagenBonus("spe", 1);
                     changes++;
                 }
             }
@@ -12557,16 +12918,16 @@
 
             //Statistical changes:
             //-Raises intelligence to 80.
-            if (player.inte < 80 && changes < changeLimit && rand(3) == 0) {
+            if (changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nAs you finish drinking the ink you suddenly feel more cunning and by far way smarter.");
-                dynStats("int", 1);
+                MutagenBonus("int", 1);
                 changes++;
             }
             //-Raises strength to 90.
-            if (player.str < 90 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nYou suddenly feel like you could do a wrestling contest with anyone who ask.");
                 if (player.str > 60) outputText(" Heck you feel so strong you could bend wood or even steel!");
-                dynStats("str", 1);
+                MutagenBonus("str", 1);
                 changes++;
             }
             //-Decrease muscle tone toward 30
@@ -12954,7 +13315,7 @@
                     outputText("<b>  You now have human legs in place of your feet!</b>");
                     setLowerBody(LowerBody.HUMAN);
                     player.legCount = 2;
-                    dynStats("spe", 1);
+                    MutagenBonus("spe", 1);
                     changes++;
                 }
             }
@@ -13011,21 +13372,21 @@
             clearOutput();
             outputText("The cum tastes pretty much like you expected it would, salty. Strangely, you feel warmer by the minute, perhaps it's your body adapting to the very hot feeling the cum left in your stomach.");
             //str up to 85
-            if (player.str < 80 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nYour fill your muscles filling with yeti might.");
-                dynStats("str", 1);
+                MutagenBonus("str", 1);
                 changes++;
             }
             //tou up to 100
-            if (player.tou < 100 && rand(2) == 0 && changes < changeLimit) {
+            if (rand(2) == 0 && changes < changeLimit) {
                 outputText("\n\nYour body and skin both thicken noticeably.  You pinch your [skin.type] experimentally and marvel at how much tougher it has gotten.");
-                dynStats("tou", 1);
+                MutagenBonus("tou", 1);
                 changes++;
             }
             //spe up to 75
-            if (player.spe < 75 && rand(2) == 0 && changes < changeLimit) {
+            if (rand(2) == 0 && changes < changeLimit) {
                 outputText("\n\nHearing a suddent sound you suddently move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
-                dynStats("spe", 1);
+                MutagenBonus("spe", 1);
                 changes++;
             }
             //int down to 15
@@ -13035,9 +13396,9 @@
                 changes++;
             }
             //lib up to 75
-            if (player.lib < 75 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nA blush of red works its way across your skin as your sex drive kicks up a notch.");
-                dynStats("lib", 1);
+                MutagenBonus("lib", 1);
                 changes++;
             }
             if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
@@ -13047,12 +13408,16 @@
                     outputText("\n\nYour [cock] becomes shockingly hard.  It turns a shiny inhuman purple and spasms, dribbling hot demon-like cum as it begins to grow.");
                     if (rand(4) == 0) temp = player.increaseCock(0, 3);
                     else temp = player.increaseCock(0, 1);
-                    dynStats("int", 1, "lib", 2, "sen", 1, "lust", 5 + temp * 3);
+                    dynStats("sen", 1, "lust", 5 + temp * 3);
+                    MutagenBonus("int", 1);
+                    MutagenBonus("lib", 2);
                     if (temp < .5) outputText("  It stops almost as soon as it starts, growing only a tiny bit longer.");
                     if (temp >= .5 && temp < 1) outputText("  It grows slowly, stopping after roughly half an inch of growth.");
                     if (temp >= 1 && temp <= 2) outputText("  The sensation is incredible as more than an inch of lengthened dick-flesh grows in.");
                     if (temp > 2) outputText("  You smile and idly stroke your lengthening [cock] as a few more inches sprout.");
-                    dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + temp * 3);
+                    dynStats("sen", 1, "lus", 5 + temp * 3);
+                    MutagenBonus("int", 1);
+                    MutagenBonus("lib", 2);
                     outputText("  With the transformation complete, your [cock] returns to its normal coloration.");
                 }
                 if (player.cocks.length > 1) {
@@ -13067,7 +13432,9 @@
                     }
                     if (int(Math.random() * 4) == 0) temp3 = player.increaseCock(temp2, 3);
                     else temp3 = player.increaseCock(temp2, 1);
-                    dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + temp * 3);
+                    dynStats("sen", 1, "lus", 5 + temp * 3);
+                    MutagenBonus("int", 1);
+                    MutagenBonus("lib", 2);
                     //Grammar police for 2 cocks
                     if (player.cockTotal() == 2) outputText("\n\nBoth of your [cocks] become shockingly hard, swollen and twitching as they turn a shiny inhuman purple in color.  They spasm, dripping thick ropes of hot demon-like pre-cum along their lengths as your shortest " + cockDescript(temp2) + " begins to grow.");
                     //For more than 2
@@ -13201,15 +13568,15 @@
                 changes++;
             }
             //spe up to 80
-            if (player.spe < 80 && rand(2) == 0 && changes < changeLimit) {
+            if (rand(2) == 0 && changes < changeLimit) {
                 outputText("\n\nYou feel light and airy, almost as if you are coming apart at the seams. You glance down at yourself and are relieved to see you are still there.");
-                dynStats("spe", 1);
+                MutagenBonus("spe", 1);
                 changes++;
             }
             //int up to 100
-            if (player.inte < 100 && rand(2) == 0 && changes < changeLimit) {
+            if (rand(2) == 0 && changes < changeLimit) {
                 outputText("\n\nFor a moment your mind is filled with visions. You can make out very little in the images of blowing snow and the featureless expanse but somehow you feel enlightened.");
-                dynStats("int", 1);
+                MutagenBonus("int", 1);
                 changes++;
             }
             //sens down to 10
@@ -13415,24 +13782,24 @@
             outputText("You apply the sunscreen on your skin and suddenly feel some of your worries fly as you laugh cheerfully at the thought of taking a vacation day or two to rest and swim at the beach. Your body seems to react weirdly to the sunscreen.");
 
             //Strenght
-            if (player.str < 100 && rand(4) == 0) {
-                dynStats("str", 1 + rand(3));
+            if (rand(4) == 0) {
+                MutagenBonus("str", 1 + rand(3));
                 changes++;
                 outputText("\n\nYou suddenly feel stronger. Your body growing with raw physical power. Funnily enough, you don’t seem to grow in muscle.");
             }
 
             //Speed
-            if (player.spe < 100 && rand(4) == 0) {
-                dynStats("spe", 1 + rand(3));
+            if (rand(4) == 0) {
+                MutagenBonus("spe", 1 + rand(3));
                 changes++;
                 outputText("\n\nShivering without warning, you nearly trip over yourself as you walk.  A few tries later you realize your muscles have become faster.");
             }
 
             //Toughness
-            if (player.tou < 100 && changes < changeLimit && rand(4) == 0) {
+            if (changes < changeLimit && rand(4) == 0) {
                 if (rand(2) == 0) outputText("\n\nYou feel your insides toughening up; it feels like you could stand up to almost any blow.");
                 else outputText("\n\nYour bones and joints feel sore for a moment, and before long you realize they've gotten more durable.");
-                dynStats("tou", 1 + rand(10));
+                MutagenBonus("tou", 1 + rand(10));
                 changes++;
             }
 
@@ -13597,42 +13964,42 @@
             //Statistical changes:
 
             //-Raises strength to 200.
-            if (player.str < 200 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nYou feel raw power run through your muscle. Gosh you might as well be strong enought to shatter rocks.");
-                if (player.tou < 50) outputText(" Well maybe not that strong yet but you sure can pack a punch with your fist.");
-                dynStats("str", 5);
+                if (player.str < 50) outputText(" Well maybe not that strong yet but you sure can pack a punch with your fist.");
+                MutagenBonus("str", 5);
                 changes++;
             }
 
             //-Raises speed to 100.
-            if (player.spe < 100 && rand(2) == 0 && changes < changeLimit) {
+            if (rand(2) == 0 && changes < changeLimit) {
                 outputText("\n\nHearing a suddent sound you suddently move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
-                dynStats("spe", 2);
+                MutagenBonus("spe", 2);
                 changes++;
             }
 
             //-Raises toughness to 200.
-            if (player.spe < 200 && rand(2) == 0 && changes < changeLimit) {
+            if (rand(2) == 0 && changes < changeLimit) {
                 outputText("\n\nYou feel hardier and sturdier. ");
                 if (player.tou > 100 && player.hasCoatOfType(Skin.DRAGON_SCALES)) outputText(" Your scales might as well be harder then steel right now, aint nothing thats going to get past it so easily.");
-                dynStats("tou", 5);
+                MutagenBonus("tou", 5);
                 changes++;
             }
 
             //-drop inteligence
-            if (player.spe > 15 && rand(2) == 0 && changes < changeLimit) {
+            if (player.inte > 15 && rand(2) == 0 && changes < changeLimit) {
                 outputText("\n\nYour train of thought begins to slow down as if your head been dipped into cold water for a few minutes.");
-                if (player.tou < 30) outputText("  You're starting to have trouble speaking normally, using pronouns like I less and less and [name] more often than not when describing yourself. Ugh that's fine, doesn't matter if you're not the smartest person on Mareth so long as you got a body that can do the talking for you or fuck some nice mate into doing it in your stead.");
-                dynStats("int", -10);
+                if (player.inte < 30) outputText("  You're starting to have trouble speaking normally, using pronouns like I less and less and [name] more often than not when describing yourself. Ugh that's fine, doesn't matter if you're not the smartest person on Mareth so long as you got a body that can do the talking for you or fuck some nice mate into doing it in your stead.");
+                dynStats("int", -20);
                 changes++;
             }
 
             //Libido
-            if (player.lib < 200 && rand(2) == 0 && changes < changeLimit) {
+            if (rand(2) == 0 && changes < changeLimit) {
                 outputText("\n\n A knot of fire in your gut doubles you over but passes after a few moments. " +
                         "As you straighten you can feel the need seeping into you, puddling in your nethers."
                         + "An instinctive desire to mate spreads through you, increasing your lust and boosting your sex-drive.");
-                dynStats("lib", +10);
+                MutagenBonus("lib", 10);
                 changes++;
             }
 
@@ -13694,7 +14061,7 @@
             if (changes < changeLimit && rand(2) == 0) outputText(player.modTone(10, 5));
 
             //Gain frost wyrm Horns
-            if (changes < changeLimit && rand(3) == 0 && player.horns.type != Horns.FROSTWYRM && player.faceType == Face.ANIMAL_TOOTHS) {
+            if (changes < changeLimit && rand(3) == 0 && player.horns.type != Horns.FROSTWYRM) {
                 if (player.horns.type != Horns.NONE) {
                     if (player.horns.type == Horns.ORCHID) outputText("\n\nYour orchid flowers crumble, falling apart");
                     else outputText("\n\nYour old horns crumble, falling apart in large chunks");
@@ -13712,7 +14079,7 @@
                 changes++;
             }
             //Gain Frost wyrm Eyes
-            if (player.eyes.type != Eyes.FROSTWYRM && rand(3) == 0 && changes < changeLimit && player.faceType == Face.ANIMAL_TOOTHS) {
+            if (player.eyes.type != Eyes.FROSTWYRM && rand(3) == 0 && changes < changeLimit) {
                 CoC.instance.mutations.setEyeTypeAndColor(Eyes.FROSTWYRM, "yellow");
                 outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil and black sclera like that of a frost wyrm. <b>You now have frost wyrm eyes!</b>.");
                 changes++;
@@ -13759,7 +14126,7 @@
                 changes++;
             }
             //Neck
-            if (player.rearBody.type != RearBody.FROSTWYRM && changes < changeLimit && rand(3) == 0 && player.arms.type == Arms.FROSTWYRM) {
+            if (player.rearBody.type != RearBody.FROSTWYRM && changes < changeLimit && rand(3) == 0) {
                 setRearBody(RearBody.FROSTWYRM);
                 outputText("\n\nYou suddenly feel hair growing all around your neck at a crazy pace. It soon gets so thick it almost looks as if you're wearing a white fur collar. <b>Your neck is now well protected against the cold thanks to your thick fur collar.</b>");
                 changes++;
@@ -13808,7 +14175,7 @@
                 changes++;
             }
             //Gain frost wyrm Arms
-            if (changes < changeLimit && rand(3) == 0 && player.lowerBody == LowerBody.FROSTWYRM && player.arms.type != Arms.FROSTWYRM) {
+            if (changes < changeLimit && rand(3) == 0 && player.arms.type == Arms.HUMAN) {
                 setArmType(Arms.FROSTWYRM);
                 outputText("\n\nYour arms and hands suddenly begins to get thicker and bigger, way beyond human size. Your entire forearms and now massive hands first cover with -scale color- scales then with white fur, giving them the appearance of fluffy padded gloves. From the fur however surges out what used to be your nails, now powerful claws capable of digging through solid rock and ice just like those of a frost wyrm. <b>You now have frost wyrm arms!</b>");
                 changes++;
@@ -13872,16 +14239,16 @@
 
             //Statistical changes:
             //-Raises speed to 100.
-            if (player.spe < 100 && rand(2) == 0 && changes < changeLimit) {
+            if (rand(2) == 0 && changes < changeLimit) {
                 outputText("\n\nHearing a suddent sound you suddently move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
-                dynStats("spe", 1);
+                MutagenBonus("spe", 1);
                 changes++;
             }
             //-Raises intelligence to 80.
-            if (player.inte < 80 && changes < changeLimit && rand(3) == 0) {
+            if (changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nPatience is the key to any successful behavior weither it is battle or carefull planing.");
                 outputText("\nYour mind keep readying new plans and strategy to ambush your future foes as your brain start processing logic way better then you used to.");
-                dynStats("int", 1);
+                MutagenBonus("int", 1);
                 changes++;
             }
             //-Decrease strength toward 30
@@ -13959,7 +14326,8 @@
             if (player.hasVagina()) {
                 if (player.looseness() > 1 && changes < changeLimit && rand(3) == 0) {
                     outputText("\n\nWith a gasp, you feel your [vagina] tightening, making you leak sticky girl-juice. After a few seconds, it stops, and you rub on your [vagina] excitedly. You can't wait to try this out!");
-                    dynStats("lib", 2, "lus", 25);
+                    dynStats("lus", 25);
+                    MutagenBonus("lib", 2);
                     changes++;
                     player.vaginas[0].vaginalLooseness--;
                 }
@@ -13967,7 +14335,8 @@
             //(tightens asshole to 1, increases lust)
             if (player.ass.analLooseness > 1 && changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nYou let out a small cry as your [asshole] shrinks, becoming smaller and tighter. When it's done, you feel much hornier and eager to stretch it out again.");
-                dynStats("lib", 2, "lus", 25);
+                dynStats("lus", 25);
+                MutagenBonus("lib", 2);
                 changes++;
                 player.ass.analLooseness--;
             }
@@ -13998,22 +14367,34 @@
             }
 
             //Physical Changes:
+            //PartialCoatChitin skin
+            var MantisColor:Array = ["green", "turquoise", "emerald"];
+            if (changes < changeLimit && !player.hasPartialCoat(Skin.CHITIN) && rand(2) == 0) {
+                var randomColor:String = randomChoice(MantisColor);
+                growPartialChitin(randomColor);
+                if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
+                    outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
+                    player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);
+                }
+                changes++;
+            }
+
             //Antennae (nie wymaga innych body parts)
-            if (changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.antennae.type != Antennae.MANTIS && rand(3) == 0) {
+            if (changes < changeLimit && player.hasCoatOfType(Skin.CHITIN) && player.lowerBody != LowerBody.GARGOYLE && player.antennae.type != Antennae.MANTIS && rand(3) == 0) {
                 if (player.antennae.type == Antennae.BEE) outputText("\n\nYour head itches momentarily as your two floppy antennae changes slowly into long prehensile ones similar to those seen at mantis.");
                 else outputText("\n\nYour head itches momentarily as two long prehensile antennae sprout from your [hair].");
                 setAntennae(Antennae.MANTIS);
                 changes++;
             }
             //Horns
-            if (changes < changeLimit && player.horns.count > 0 && player.horns.type != Horns.ORCHID && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0) {
+            if (changes < changeLimit && player.hasCoatOfType(Skin.CHITIN) && player.horns.count > 0 && player.horns.type != Horns.ORCHID && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0) {
                 setHornType(Horns.NONE, 0);
                 outputText("\n\nYour horns crumble, falling apart in large chunks until they flake away to nothing.");
                 changes++;
             }
 
             //oviposition (prawdopodobnie podobne do wersji dla bee niż dridera)
-            if (changes < changeLimit && player.findPerk(PerkLib.MantisOvipositor) < 0 && player.tailType == Tail.MANTIS_ABDOMEN && rand(2) == 0) {
+            if (changes < changeLimit && player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.MantisOvipositor) < 0 && player.tailType == Tail.MANTIS_ABDOMEN && rand(2) == 0) {
                 outputText("\n\nAn odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous mantis part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the end.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, green, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new mantis ovipositor will feel like...");
                 outputText("\n\n(<b>Perk Gained:  Mantis Ovipositor - Allows you to lay eggs in your foes!</b>)");
                 player.createPerk(PerkLib.MantisOvipositor, 0, 0, 0, 0);
@@ -14021,7 +14402,7 @@
             }
 
             //Legs
-            if (player.lowerBody != LowerBody.MANTIS && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+            if (player.lowerBody != LowerBody.MANTIS && player.hasCoatOfType(Skin.CHITIN) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nYour legs tremble with sudden unbearable pain, as if they’re being ripped apart from the inside out and being stitched together again all at once.");
                 outputText("\nYou scream in agony as you hear bones snapping and cracking. A moment later the pain fades and you are able to turn your gaze down to your beautiful new legs, covered in shining green chitin from the thigh down. <b>You now have mantis feet.</b>");
                 setLowerBody(LowerBody.MANTIS);
@@ -14030,7 +14411,7 @@
             }
 
             //Arms
-            if (player.lowerBody == LowerBody.MANTIS && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.MANTIS) && changes < changeLimit && rand(3) == 0) {
+            if (player.lowerBody == LowerBody.MANTIS && player.hasCoatOfType(Skin.CHITIN) && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.MANTIS) && changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nYou watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, turning the [skin.type] into a shiny green carapace.");
                 outputText("\nA moment later the pain fades and you are able to turn your gaze down to your beautiful new arms, covered in shining green chitin from the upper arm down.");
                 outputText("\nThe transformation end as down the lenght of your forearms you grow a pair of massive scythe like appendage just like a mantis.");
@@ -14040,7 +14421,7 @@
             }
 
             //Tail
-            if (player.arms.type == Arms.MANTIS && player.tailType != Tail.MANTIS_ABDOMEN && changes < changeLimit && rand(3) == 0) {
+            if (player.arms.type == Arms.MANTIS && player.hasCoatOfType(Skin.CHITIN) && player.tailType != Tail.MANTIS_ABDOMEN && changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nPainful swelling just above your firm backside doubles you over.");
                 outputText("\nIt gets worse and worse as the swollen lump begins to protrude from your backside, swelling and elongating with a series of pops until you have a bulbous abdomen hanging just above your butt.");
                 outputText("\nThe whole thing is covered in a hard greenish chitinous material, and large enough to be impossible to hide. <b>You have a Mantis abdomen.</b>");
@@ -14067,8 +14448,10 @@
             }
 
             //Chitin skin
-            if (changes < changeLimit && !player.hasCoatOfType(Skin.CHITIN) && player.tailType == Tail.MANTIS_ABDOMEN && rand(2) == 0) {
-                growChitin("green");
+            var MantisColor:Array = ["green", "turquoise", "emerald"];
+            if (changes < changeLimit && player.hasPartialCoat(Skin.CHITIN) && player.tailType == Tail.MANTIS_ABDOMEN && rand(2) == 0) {
+                var randomColor:String = randomChoice(MantisColor);
+                growChitin(randomColor);
                 if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
                     outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
                     player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);
@@ -14102,9 +14485,9 @@
             dynStats("cor", 3 + rand(3));
 
             //int change
-            if (player.inte < 100 && changes < changeLimit && rand(3) == 0) {
+            if (changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nArcane knowledge floods into your mind. You immediately imagine tons of new sinister ways to use this knowledge.");
-                dynStats("int", 1);
+                MutagenBonus("int", 1);
                 changes++;
             }
             if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
@@ -14138,32 +14521,37 @@
                             temp = player.addHorseCock();
                             temp2 = player.increaseCock(temp, rand(4) + 4);
                             temp3 = 1;
-                            dynStats("lib", 5, "sen", 4, "lus", 35);
+                            dynStats("sen", 4, "lus", 35);
+                            MutagenBonus("lib", 5);
                         }
                         if (player.cocks[0].cockType == CockTypesEnum.DOG) {
                             temp = player.addHorseCock();
                             outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.DOG) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
                             temp2 = player.increaseCock(temp, rand(4) + 4);
                             temp3 = 1;
-                            dynStats("lib", 5, "sen", 4, "lus", 35);
+                            dynStats("sen", 4, "lus", 35);
+                            MutagenBonus("lib", 5);
                         }
                         if (player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
                             temp = player.addHorseCock();
                             outputText("\n\nYour [cock] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your [cock] as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
                             temp2 = player.increaseCock(temp, rand(4) + 4);
                             temp3 = 1;
-                            dynStats("lib", 5, "sen", 4, "lus", 35);
+                            dynStats("sen", 4, "lus", 35);
+                            MutagenBonus("lib", 5);
                         }
                         if (player.cocks[0].cockType.Index > 4) {
                             outputText("\n\nYour [cock] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your [cock] as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
                             temp = player.addHorseCock();
                             temp2 = player.increaseCock(temp, rand(4) + 4);
                             temp3 = 1;
-                            dynStats("lib", 5, "sen", 4, "lus", 35);
+                            dynStats("sen", 4, "lus", 35);
+                            MutagenBonus("lib", 5);
                         }
                         if (temp3 == 1) outputText("  <b>Your penis has transformed into a horse's!</b>");
                     } else {
-                        dynStats("lib", 5, "sen", 4, "lus", 35);
+                        dynStats("sen", 4, "lus", 35);
+                        MutagenBonus("lib", 5);
                         temp = player.addHorseCock();
                         outputText("\n\nOne of your penises begins to feel strange.  You pull down your clothes to take a look and see the skin of your " + cockDescript(temp) + " darkening to a mottled brown and black pattern.");
                         if (temp == -1) {
@@ -14369,9 +14757,9 @@
             player.refillHunger(10, false);
             if (!player.hasStatusEffect(StatusEffects.Drunk)) {
                 player.createStatusEffect(StatusEffects.Drunk, 2, 1, 1, 0);
-                dynStats("str", 0.1);
+                MutagenBonus("str", 0.1);
                 dynStats("inte", -0.5);
-                dynStats("lib", 0.25);
+                MutagenBonus("lib", 0.25);
             } else {
                 player.addStatusValue(StatusEffects.Drunk, 2, 1);
                 if (player.statusEffectv1(StatusEffects.Drunk) < 2) player.addStatusValue(StatusEffects.Drunk, 1, 1);
@@ -14447,16 +14835,16 @@
             clearOutput();
             outputText("You drink the tea and feel relaxed and in harmony with your surroundings. As you are lost in those relaxing thoughts, your body begins to change.");
             //-Raises toughness up to 100.
-            if (player.tou < 100 && changes < changeLimit && rand(3) == 0) {
+            if (changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nYou're feeling tougher and sturdier. A force of nature, really. Whoever is going to attack you is going to have a hard time damaging your solid athletic body.");
-                dynStats("tou", 1);
+                MutagenBonus("tou", 1);
                 changes++;
             }
             //-Raises strength to 100.
-            if (player.str < 100 && rand(3) == 0 && changes < changeLimit) {
+            if (rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\nYou feel just as strong as a bear!");
                 if (player.tou < 50) outputText(" Well maybe not a bear but you sure can pack a punch with your fist.");
-                dynStats("str", 1);
+                MutagenBonus("str", 1);
                 changes++;
             }
             if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
@@ -14734,14 +15122,14 @@
             outputText("Having bought that odd-looking root on the bakery, you give it a try, only to face the mildly spicy taste of the transformative. Still, it has a rich flavour and texture, but soon that becomes secondary, as you realize that the foreign rhizome is changing your body!");
 
             //spe change
-            if (player.spe < 100 && changes < changeLimit && rand(3) == 0) {
+            if (changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nAfter a momentaneous dizziness, you recover your stance, and find your muscles becoming more nimble and prompt to run.");
                 //+3 spe if less than 50
-                if (player.spe < 50) dynStats("spe", 1);
+                if (player.spe < 50) MutagenBonus("spe", 1);
                 //+2 spe if less than 75
-                if (player.spe < 75) dynStats("spe", 1);
+                if (player.spe < 75) MutagenBonus("spe", 1);
                 //+1 if above 75.
-                dynStats("spe", 1);
+                MutagenBonus("spe", 1);
                 changes++;
             }
             if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
@@ -14776,7 +15164,7 @@
                     player.growTits(1 + rand(2), 1, false, 3);
                     outputText("\n\nYour breasts feel constrained and painful against your top as they grow larger by the moment, finally stopping as they reach " + player.breastCup(0) + " size. You rub the tender orbs as you get used to your larger breast flesh.");
                     changes++;
-                    dynStats("lib", 1);
+                    MutagenBonus("lib", 1);
                 }
                 if (changes < changeLimit && rand(3) == 0 && player.biggestTitSize() > 4) {
                     player.shrinkTits();
@@ -15664,28 +16052,28 @@
             }
             if (!player.hasPerk(PerkLib.TransformationImmunity)) {
                 //spe change
-                if (player.spe < 100 && rand(4) == 0 && changes < changeLimit) {
+                if (rand(4) == 0 && changes < changeLimit) {
                     outputText("\n\nYou feel like a coiled spring, ready to swim or run a marathon!");
                     //+3 spe if less than 50
-                    if (player.spe < 50) dynStats("spe", 1);
+                    if (player.spe < 50) MutagenBonus("spe", 1);
                     //+2 spe if less than 75
-                    if (player.spe < 75) dynStats("spe", 1);
+                    if (player.spe < 75) MutagenBonus("spe", 1);
                     //+1 if above 75.
-                    dynStats("spe", 1);
+                    MutagenBonus("spe", 1);
                     changes++;
                 }
                 //int change
-                if (player.inte < 100 && rand(4) == 0 && changes < changeLimit) {
+                if (rand(4) == 0 && changes < changeLimit) {
                     outputText("\n\nWhile the cold air around you doesn’t feel comfortable it brings you sharpness of mind like never before.");
-                    dynStats("int", 1);
+                    MutagenBonus("int", 1);
                     changes++;
                 }
                 //lib change
-                if (player.lib < 70 && rand(4) == 0 && changes < changeLimit) {
+                if (rand(4) == 0 && changes < changeLimit) {
                     outputText("\n\nGah it's so cold out there, you could use some warmth… the warmth of a strong, caring man. ");
                     if (player.lib < 30) outputText("Whoa wait, what are you daydreaming about exactly? This place is clearly getting to you!");
                     else outputText("Mmmmm, if you could get him tight and snuggly against your body to share his heat perhaps he wouldn’t even mind gently inserting himself in and filling you full of his warm man meat. As you start drooling in desire the sudden chill of the wind against your skin jar you awake from your daydream making you shiver.");
-                    dynStats("lib", 1);
+                    MutagenBonus("lib", 1);
                     changes++;
                 }
                 //sens change
@@ -15789,11 +16177,9 @@
                 }
                 var melkie_skinTone:Array = ["light", "fair", "pale"];
                 if ((!InCollection(player.skinTone, melkie_skinTone) && changes < changeLimit && rand(4) == 0)) {
-                    if (!InCollection(player.hairColor, melkie_skinTone)) {
                         player.skinTone = randomChoice(melkie_skinTone);
                         outputText("\n\nYour skin suddenly lightens. While lighter skin won't help you against cold weither you got the feeling that, despite this and against all logic, you won't die from freezing either, must be something related to Melkies.<b> You now have " + player.skinTone + " skin.</b>");
                         changes++;
-                    }
                 }
                 //Remove weird hairs
                 if (changes < changeLimit && rand(4) == 0 && player.hairType != Hair.NORMAL) {
@@ -15928,13 +16314,13 @@
             }
             if (!player.hasPerk(PerkLib.TransformationImmunity)) {
                 //str change
-                if (player.str < 100 && rand(4) == 0 && changes < changeLimit) {
+                if (rand(4) == 0 && changes < changeLimit) {
                     outputText("\n\nYou suddenly feel stronger, as if your hands could shred steel and grind rocks to dust!");
-                    dynStats("str", 1);
+                    MutagenBonus("str", 1);
                     changes++;
                 }
                 //tou change
-                if (player.tou < 70 && rand(4) == 0 && changes < changeLimit) {
+                if (rand(4) == 0 && changes < changeLimit) {
                     outputText("\n\nYou feel sturdier, but it might just be your imagination.");
                     dynStats("tou", 1);
                     changes++;
@@ -15975,7 +16361,8 @@
                         outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
                     } else player.cocks[temp2].cockType = CockTypesEnum.CANCER;
                     changes++;
-                    dynStats("lib", 3, "lus", 10);
+                    dynStats("lus", 10);
+                    MutagenBonus("lib", 3);
                 }
                 //decrease player's breast size
                 if (player.biggestTitSize() >= 3 && changes < changeLimit && rand(4) == 0) {

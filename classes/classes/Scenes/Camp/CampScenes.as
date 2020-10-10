@@ -291,7 +291,8 @@ private function goblinsBirthScene2():void {
 	outputText("Aw she’s fully grown up now but hey having more hands to get the work done only helps, right?\n\n");
 	if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 	player.orgasm();
-	player.dynStats("str", -1, "tou", -2, "spe", 3, "lib", 1, "sen", .5);
+	player.dynStats("tou", -2, "spe", 3, "lib", 1, "sen", .5);
+	player.addCurse("str", 1);
 	daughtersCount = 0;
 	player.removeStatusEffect(StatusEffects.PCDaughters);
 	doNext(camp.returnToCampUseOneHour);
@@ -315,7 +316,7 @@ public function PCGoblinDaughters():void {
 	}
 	menu();
 	if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 9 && player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
-		if (player.goblinScore() > 9) addButton(2, "Engineering",  SceneLib.lumi.lumiWorkshop);
+		if (player.isGoblinoid()) addButton(2, "Engineering",  SceneLib.lumi.lumiWorkshop);
 		else addButtonDisabled(2, "Engineering", "You need to be goblin for this.");
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshopSpareParts)) addButton(3, "Spare parts", PCGoblinDaughtersBuilingWorkshopSpareParts);
 		else addButtonDisabled(3, "Spare parts", "You need to wait till tomorrow for new spare parts.");

@@ -47,8 +47,17 @@ import coc.xlogic.ExecContext;
 					CancerCrabStance: player.hasStatusEffect(StatusEffects.CancerCrabStance),
 					showClothing: [LowerBody.LION, LowerBody.GARGOYLE, LowerBody.GARGOYLE_2].indexOf(player.lowerBody) == -1 && [Arms.LION, Arms.DISPLACER, Arms.GARGOYLE, Arms.GARGOYLE_2].indexOf(player.arms.type) == -1,
 					showArmClothing: [Arms.LION, Arms.DISPLACER, Arms.GARGOYLE, Arms.GARGOYLE_2, Arms.YETI, Arms.HINEZUMI].indexOf(player.arms.type) == -1 && !player.hasStatusEffect(StatusEffects.CancerCrabStance),
-					showLegClothing: [LowerBody.YETI, LowerBody.HOOFED, LowerBody.HARPY, LowerBody.GOO, LowerBody.NAGA, LowerBody.DRIDER, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER].indexOf(player.lowerBody) == -1 && player.legCount == 2,
+					showLegClothing: [LowerBody.YETI, LowerBody.HOOFED, LowerBody.HARPY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.DRIDER, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER].indexOf(player.lowerBody) == -1 && player.legCount == 2,
 					PlayerHasViewableOutfit: player.isWearingArmor(),
+					playerHasWeaponBannedArms: [Arms.DISPLACER, Arms.GARGOYLE, Arms.FROSTWYRM, Arms.CANCER].indexOf(player.arms.type) == -1 || ([Arms.LION].indexOf(player.arms.type) == -1 && [LowerBody.LION].indexOf(player.lowerBody) == -1) || ([Arms.WOLF].indexOf(player.arms.type) == -1 && [LowerBody.WOLF].indexOf(player.lowerBody) == -1) || ([Arms.HINEZUMI].indexOf(player.arms.type) == -1 && [LowerBody.HINEZUMI].indexOf(player.lowerBody) == -1),
+
+					//Detect Weapon Skins
+					PlayerHasAStaff: player.isStaffTypeWeapon(),
+					PlayerHasASword: player.isSwordTypeWeapon(),
+					PlayerHasAnAxe: player.isAxeTypeWeapon(),
+					PlayerHasAHammer: player.isMaceHammerTypeWeapon(),
+					PlayerHasASpear: player.isSpearTypeWeapon(),
+					PlayerHasAShield: player.shieldName != "nothing" && player.shield != game.shields.SPI_FOC,
 
 					Antennae: Antennae,
 					Arms: Arms,
@@ -79,6 +88,9 @@ import coc.xlogic.ExecContext;
 
 					// Viewable Clothing lists
 					armStanceNonBannedList: player.armor == game.armors.SSC || player.armor == game.armors.B_QIPAO || player.armor == game.armors.G_QIPAO || player.armor == game.armors.P_QIPAO || player.armor == game.armors.R_QIPAO,
+					playerWearsAStanceBannedDress: player.armor == game.armors.BLIZZ_K || player.armor == game.armors.SPKIMO || player.armor == game.armors.WKIMONO || player.armor == game.armors.BKIMONO || player.armor == game.armors.RKIMONO || player.armor == game.armors.PKIMONO || player.armor == game.armors.BLKIMONO || player.armor == game.armors.KBDRESS || player.armor == game.armors.GTECHC_,
+					playerWearsAStanceBannedArmor: player.armor == game.armors.CTPALAD || player.armor == game.armors.BA || player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
+
 					ComfyCLothes: player.armor == game.armors.C_CLOTH,
 					yukiDress: player.armor == game.armors.BLIZZ_K,
 					sakuraPetalKimono: player.armor == game.armors.SPKIMO,
@@ -91,7 +103,7 @@ import coc.xlogic.ExecContext;
 					greenQipao: player.armor == game.armors.G_QIPAO,
 					purpleQipao: player.armor == game.armors.P_QIPAO,
 					redQipao: player.armor == game.armors.R_QIPAO,
-					centaurBlackguardArmor: player.armor == game.armors.CTPALAD,
+					//centaurBlackguardArmor: player.armor == game.armors.CTPALAD,
 					centaurPaladinArmor: player.armor == game.armors.CTPALAD,
 					goblinTechnomancerClothe: player.armor == game.armors.GTECHC_,
 					sexyAquamarineBikini: player.armor == game.armors.SAQBIKNI,
@@ -105,13 +117,18 @@ import coc.xlogic.ExecContext;
 					krakenBlackDress: player.armor == game.armors.KBDRESS,
 					walpurgisIzaliaCloak: player.armor == game.armors.WIC,
 					scandalousSuccubusClothing: player.armor == game.armors.SSC,
+					fairyQueenRegalia: player.armor == game.armors.FQR,
+					berserkerArmor: player.armor == game.armors.BA,
+					chainMailBikini: player.armor == game.armors.CHBIKNI || player.armor == game.armors.LMARMOR,
 					platemail: player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 
 					//viewable bra list
 					goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,
+					dragonscaleBikiniBra: player.upperGarment == game.undergarments.DS_BRA,
 
 					//viewable panty list
 					goblinTechnomancerPanty: player.lowerGarment == game.undergarments.T_PANTY,
+					dragonscaleBikiniPanty: player.lowerGarment == game.undergarments.DSTHONG,
 
 					// Viewable neck Accessory lists
 					blueScarf: player.necklace == game.necklaces.BWSCARF,

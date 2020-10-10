@@ -6,6 +6,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
 import classes.PerkLib;
 import classes.Scenes.SceneLib;
+import classes.Scenes.UniqueSexScenes;
 import classes.StatusEffects;
 
 public class MinotaurKingScenes extends BaseContent
@@ -14,6 +15,8 @@ public class MinotaurKingScenes extends BaseContent
 		{
 
 		}
+
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 
 		public function encounterMinotaurKing():void
 		{
@@ -156,15 +159,20 @@ public class MinotaurKingScenes extends BaseContent
 		private function dockucockuknotu(cockIdx:int):void
 		{
 			clearOutput();
-
-			outputText("When you try to pull out, there’s a problem: your knot. It inflated while you were cumming, and now that you’ve finished, it has expanded to lock you inside your unusual mate. No matter how you tug or pull, you can’t seem to extricate yourself from the cream-filled cow-man, and worse still, he’s starting to moan and squirm. Getting filled full of your spunk must have been more enjoyable for him than you thought.");
-			outputText("\n\nThe Minotaur King is moaning, and his cock is getting still harder in your hands, making it even harder to pull yourself free. Panicked now, you tug in vain, anything to get free before your cum and a wave of bovine beast-cum flows back into you. Your [feet] slip in the puddled juices, and the surging bull’s member pulls you over onto his chest, still joined at the crotch. He catches you, holding you an angle so as not to damage either of your members, and then you feel it: pre-cum mixed with your liquid relief pushing back into your [cock "+cockIdx+"].");
-			outputText("\n\nOrgasmic pressure has reversed the liquid flow, and the moment his hips lift from the floor, carrying you with them, the pressure redoubles, turning your urethra into a minotaur cum pipeline. Some of your own is mixed in of course, but you’ve never had the alabaster jism applied to your body so directly. You sag bonelessly into the brute’s grip as he turns you into his personal twinkie");
-			if (player.balls == 0) outputText(", fat with bull-cream.");
-			else outputText(". Your [sack] swells larger and larger, complete with the realization that your [balls] are being transformed into spooge-filled balloons.");
-			outputText("\n\nYou should be alarmed or worried, but mostly you’re amazed by how good it feels. How great it feels to go limp in his powerful arms. How wonderfully warm and content his narcotic spooge makes your body feel. You drool on his chest, then lick it back up, savoring the salty, sweaty tang of it. Your mouth feels empty without his cock, but then you realize you can suck his nipple until his cock is free.");
-			outputText("\n\nMinotaurs are so great. A fuzzy memory of some other desire tries to make itself known, but another buck of your bull’s hips has your head swimming and your body cumming. The pressure of your own ejaculation is nothing next to his of course. You doubt you could squirt anything out ever again. Your insides must be all stretched out with your lord’s love, but that’s fine so long as he uses you again. You can be his dribbly little spunksleeve.");
-			EventParser.gameOver();
+			if (player.isAlraune())
+			{
+				uniquuuesexscene.AlrauneDungeonBadEnd();
+			}
+			else {
+				outputText("When you try to pull out, there’s a problem: your knot. It inflated while you were cumming, and now that you’ve finished, it has expanded to lock you inside your unusual mate. No matter how you tug or pull, you can’t seem to extricate yourself from the cream-filled cow-man, and worse still, he’s starting to moan and squirm. Getting filled full of your spunk must have been more enjoyable for him than you thought.");
+				outputText("\n\nThe Minotaur King is moaning, and his cock is getting still harder in your hands, making it even harder to pull yourself free. Panicked now, you tug in vain, anything to get free before your cum and a wave of bovine beast-cum flows back into you. Your [feet] slip in the puddled juices, and the surging bull’s member pulls you over onto his chest, still joined at the crotch. He catches you, holding you an angle so as not to damage either of your members, and then you feel it: pre-cum mixed with your liquid relief pushing back into your [cock " + cockIdx + "].");
+				outputText("\n\nOrgasmic pressure has reversed the liquid flow, and the moment his hips lift from the floor, carrying you with them, the pressure redoubles, turning your urethra into a minotaur cum pipeline. Some of your own is mixed in of course, but you’ve never had the alabaster jism applied to your body so directly. You sag bonelessly into the brute’s grip as he turns you into his personal twinkie");
+				if (player.balls == 0) outputText(", fat with bull-cream.");
+				else outputText(". Your [sack] swells larger and larger, complete with the realization that your [balls] are being transformed into spooge-filled balloons.");
+				outputText("\n\nYou should be alarmed or worried, but mostly you’re amazed by how good it feels. How great it feels to go limp in his powerful arms. How wonderfully warm and content his narcotic spooge makes your body feel. You drool on his chest, then lick it back up, savoring the salty, sweaty tang of it. Your mouth feels empty without his cock, but then you realize you can suck his nipple until his cock is free.");
+				outputText("\n\nMinotaurs are so great. A fuzzy memory of some other desire tries to make itself known, but another buck of your bull’s hips has your head swimming and your body cumming. The pressure of your own ejaculation is nothing next to his of course. You doubt you could squirt anything out ever again. Your insides must be all stretched out with your lord’s love, but that’s fine so long as he uses you again. You can be his dribbly little spunksleeve.");
+				EventParser.gameOver();
+			}
 		}
 	
 		private function buttufucku():void
@@ -462,13 +470,18 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 		private function gurglegurgle():void
 		{
 			clearOutput();
+			if (player.isAlraune())
+			{
+				uniquuuesexscene.AlrauneDungeonBadEnd();
+			}
+			else {
+				outputText("You wind up being grateful for that half-forgotten assfucking later, when the minotaur King finally lays claim to your other end. That little bit of extra gape and lubrication is enough to help him lodge his humongous pecker deep into your asshole. Just like with your throat, you find him easier to handle than his size alone would suggest, but that does nothing to diminish the obscene fullness occupying your mind.");
+				outputText("\n\nIt’s wonderful. Even when he’s not fucking your ass, he’s rock hard and dribbling, giving you a constant feed of the fluid you’ve fallen in love with. You let him carry you around like that. That’s what you tell yourself, anyway. The big lug would probably pin you in place if you tried to struggle, but you can’t imagine yourself fighting this.");
+				outputText("\n\nSo what if you’re a dick-cozy, mounted on a minotaur’s beastly cock like some kind of trophy? Who cares if sometimes you have to lick out the Demon Queen while being reamed from behind? Everything is great. You never worry about anything, and there’s always someone filling you, fucking you full of liquid happiness.");
+				outputText("\n\nYou smile and request someone fuck your mouth. It always feels better with one in each end.");
 
-			outputText("You wind up being grateful for that half-forgotten assfucking later, when the minotaur King finally lays claim to your other end. That little bit of extra gape and lubrication is enough to help him lodge his humongous pecker deep into your asshole. Just like with your throat, you find him easier to handle than his size alone would suggest, but that does nothing to diminish the obscene fullness occupying your mind.");
-			outputText("\n\nIt’s wonderful. Even when he’s not fucking your ass, he’s rock hard and dribbling, giving you a constant feed of the fluid you’ve fallen in love with. You let him carry you around like that. That’s what you tell yourself, anyway. The big lug would probably pin you in place if you tried to struggle, but you can’t imagine yourself fighting this.");
-			outputText("\n\nSo what if you’re a dick-cozy, mounted on a minotaur’s beastly cock like some kind of trophy? Who cares if sometimes you have to lick out the Demon Queen while being reamed from behind? Everything is great. You never worry about anything, and there’s always someone filling you, fucking you full of liquid happiness.");
-			outputText("\n\nYou smile and request someone fuck your mouth. It always feels better with one in each end.");
-
-			EventParser.gameOver();
+				EventParser.gameOver();
+			}
 		}
 
 		private function leavethem():void

@@ -54,13 +54,13 @@ private function benoitKnocksUpPCCheck():void {
 	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0 || player.findPerk(PerkLib.BasiliskWomb) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
 		if (player.findPerk(PerkLib.BasiliskWomb) >= 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 1) {
 			if (player.pregnancyType != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0) {
-				if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 				else player.knockUp(PregnancyStore.PREGNANCY_BENOIT, PregnancyStore.INCUBATION_BASILISK);
 			}
 			if (player.pregnancyIncubation > 0) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
 		}
 		else {
-			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 			else player.knockUp(PregnancyStore.PREGNANCY_BASILISK, PregnancyStore.INCUBATION_BASILISK);
 		}
 	}
@@ -648,7 +648,7 @@ private function buyBackpack():void {
 	if (player.keyItemv1("Backpack") < 6) addButton(2, "Large", buyBackpackConfirmation, 6, "Large", 1200, "Grants additional six slots. \n\nCost: 1200 gems");
 	if (player.keyItemv1("Backpack") < 8) addButton(3, "X Large", buyBackpackConfirmation, 8, "X Large", 1600, "Grants additional eight slots. \n\nCost: 1600 gems");
 	if (player.keyItemv1("Backpack") < 10) addButton(4, "XX Large", buyBackpackConfirmation, 10, "XX Large", 2000, "Grants additional ten slots. \n\nCost: 2000 gems");
-	if (player.keyItemv1("Backpack") < 12) addButton(5, "XXX Large", buyBackpackConfirmation, 12, "XXX Large", 2400, "Grants additional twelve slots. \n\nCost: 2000 gems");
+	if (player.keyItemv1("Backpack") < 12) addButton(5, "XXX Large", buyBackpackConfirmation, 12, "XXX Large", 2400, "Grants additional twelve slots. \n\nCost: 2400 gems");
 	addButton(14, "Nevermind", benoitsBuyMenu);
 }
 private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 400):void {
@@ -1053,8 +1053,7 @@ private function eggySuggest():void {
 	outputText("\n\nEventually, the two of you part, dripping your mixed fluids as you step back.  \"<i>Phew!</i>\" " + benoitMF("Benoit","Benoite") + " says after " + benoitMF("he","she") + "'s managed to catch " + benoitMF("his","her") + " breath.  \"<i>That was... somesing.  Mademoiselle, you are... amazing.</i>\"  You find yourself laughing at " + benoitMF("his","her") + " slightly shell-shocked expression, and the light, happy sound seems to bring " + benoitMF("him","her") + " around a bit.  " + benoitMF("He","She") + " brushes your shoulder as " + benoitMF("he","she") + " walks past you, feeling around the stock room until " + benoitMF("he","she") + " finds a chest of drawers.  " + benoitMF("He","She") + " opens a compartment and withdraws a small woollen bag, stuffed with pungent green leaves.");
 	outputText("\n\n\"<i>Ze shark ladies are always coming up from ze lake to sell me zis,</i>\" " + benoitMF("he","she") + " says. \"<i>It is a very effective, 'ow you say, 'counter septic'?");
 	player.orgasm();
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+	player.sexReward("cum");
 	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
 		outputText("  I would not inflict my children upon you.  Ere, take as much as you like.</i>\"");
 		simpleChoices("Take It", takeBenoitsContraceptives, "", null, "", null, "", null, "Leave", dontTakeEggtraceptives);
@@ -1153,9 +1152,8 @@ private function repeatSexWithBenoitLetHim():void {
 		
 		outputText("\n\n\"<i>Zat was... wow,</i>\" " + benoitMF("he","she") + " manages.  With " + benoitMF("his","her") + " dick wrung of every last drop of " + benoitMF("his","her") + " seed you can see " + benoitMF("he","she") + " is returning to himself, and " + benoitMF("his","her") + " hand on your shoulder is cautious.  \"<i>Was zat... alright for you?  I do not know if... I get zese smells in my 'ead and zen...</i>\"  You answer " + benoitMF("him","her") + " by kissing " + benoitMF("him","her") + " on the cheek and saying with teasing huskiness that it was good, but perhaps next time " + benoitMF("he","she") + " shouldn't hold back so much.  " + benoitMF("He","She") + " grins at this.  You spend a bit more time cuddling whilst recovering from the intense fuck, before finally clambering to your feet.  Your final act before dressing and taking your leave is to dip a lazy finger into your cunt and faintly brush your scent across " + benoitMF("Benoit","Benoite") + "'s nose again, telling " + benoitMF("him","her") + " you expect " + benoitMF("him","her") + " to be ready and primed the next time this naughty girl pays a visit.  " + benoitMF("He","She") + " doesn't respond - maybe " + benoitMF("he","she") + " is still privately ashamed about losing " + benoitMF("his","her") + " cool over you - but you can tell by the lines of " + benoitMF("his","her") + " face and the way " + benoitMF("his","her") + " head moves unconsciously to follow your path out of " + benoitMF("his","her") + " shop that " + benoitMF("him","her") + " not being aroused by you isn't something you're ever going to have to worry about.");
 	}
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
+	player.sexReward("cum");
 	benoitKnocksUpPCCheck();
 	benoitAffection(2);
 	player.orgasm();
@@ -1239,8 +1237,7 @@ private function repeatBenoitFuckTakeCharge():void {
 		
 		outputText("\n\n\"<i>I am not really sure what I did to deserve you,</i>\" says " + benoitMF("Benoit","Benoite") + " eventually, " + benoitMF("his","her") + " voice barely above a raspy murmur in " + benoitMF("his","her") + " throat.  You give " + benoitMF("him","her") + " a playful dig in the ribs and say you're only in it for the counter sceptic.  " + benoitMF("He","She") + " grins and the two of you get up, get dressed, and go your separate ways.");
 	}
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+	player.sexReward("cum");
 	benoitKnocksUpPCCheck();
 	benoitAffection(2);
 	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
@@ -1358,8 +1355,7 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 		outputText("\n(<b>Perk Unlocked: Oviposition - You will now regularly lay unfertilized eggs.</b>)");
 	}
 	if (player.pregnancyType == PregnancyStore.PREGNANCY_BASILISK) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+	player.sexReward("cum","Vaginal");
 	doNext(camp.returnToCampUseOneHour);
 	player.orgasm();
 	dynStats("sen", -2);
@@ -1848,5 +1844,3 @@ public function femoitSexIntro():void
 	
 }
 }
-
-

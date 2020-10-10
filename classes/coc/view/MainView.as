@@ -25,6 +25,7 @@ import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.MouseEvent;
 import flash.text.TextField;
+import flash.text.TextFormat;
 
 public class MainView extends Block {
 	[Embed(source="../../../res/ui/background1.png")]
@@ -810,14 +811,19 @@ public class MainView extends Block {
 	}
 
 	public function appendOutputText(text:String):void {
+		var fmt:TextFormat = this.mainText.defaultTextFormat;
 		this.mainText.htmlText += text;
+		this.mainText.defaultTextFormat = fmt;
 		this.scrollBar.update();
 	}
 
 	public function setOutputText(text:String):void {
-		// Commenting out for now, because this is annoying to see flooding the trace.
-		// trace("MainView#setOutputText(): This is never called in the main outputText() function.  Possible bugs that were patched over by updating text manually?");
-		this.mainText.htmlText = text;
+		var fmt:TextFormat     = this.mainText.defaultTextFormat;
+		this.mainText.htmlText = text; // Altering htmlText can cause changes in defaultTextFormat
+		var fmtnew:TextFormat  = this.mainText.defaultTextFormat;
+		this.mainText.defaultTextFormat = fmt;
+		if (fmtnew.bold != fmt.bold || fmtnew.italic != fmt.italic || fmtnew.underline != fmt.underline) {this.mainText.htmlText += " /!\\ UNCLOSED TAG DETECTED /!\\ "
+		}
 		this.scrollBar.update();
 	}
 

@@ -235,7 +235,7 @@ import classes.Scenes.SceneLib;
 			outputText("\n\nAt long last, after he has been going at you from behind for at least twenty minutes, he bites deliberately into your other shoulder and holds you there, grunting into your body as he gives you five final, long hard strokes. You grasp the ground as you feel one more orgasm tremble through you as your packed cunt milks Izmael of the very last drop of jizz his four balls contain. He finally withdraws with a long, gratified sigh; you feel a small waterfall of cum ooze out as he does so, and you fight back a moan.");
 			outputText("\n\n\"<i>That was freaking boss, alpha " + player.mf("bro", "chick") + "!</i>\" he says after he has gathered his breath, grinning at the person he's covered in his seed without the faintest trace of irony. You shakily sit yourself down, touch at the deep teeth marks he's left upon your shoulders and stare at him in faint disbelief. He sounds less like a man at the end of a sordid sexual marathon than one at the end of a really good work-out. \"<i>We're totally gonna do that again, right " + player.mf("boy", "girl") + "?</i>\" he enthuses. \"<i>You have the best ideas for calith... callous... for gym stuff. I normally have to force myself to do presses, but when you're involved...</i>\" a familiar stoned expression appears on the shark morph's face, and his semi-flaccid dick begins to swell again. You realize with a cold, almost frightened thrill that there is no exhausting this being you've created; you could fuck Izmael until he turned your vagina inside out, and he'd still be ready to do it all over again at the end of it. You dismiss him with a feeble wave of your hand before the idea can occur to him, and make your wobbly way to the stream for a thorough clean up.");
 			player.sexReward("cum");
-			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
             else player.knockUp(PregnancyStore.PREGNANCY_IZMA, PregnancyStore.INCUBATION_IZMA);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -304,8 +304,6 @@ import classes.Scenes.SceneLib;
 			outputText(" Eventually, finally, you come to and slowly unravel yourself from him, stand up and clamber, dripping out of the bath.");
 			if (player.isGoo()) outputText(" It takes a while to persuade much of your slimy bulk to follow you out of the pool, relaxed and diffused into the steaming waters as it is. You find yourself wondering how the lake slimes do it so effortlessly.");
 			outputText("\n\n<i>Alpha " + player.mf("dude", "chick") + "... I'm gonna need, like, 3 warm downs to get over this one,</i>\" he groans.  You laugh as you take in his exhausted, submerged frame.  The water has been polluted by the copious fluids the two of you have spurted out; you can smell the hot musk from here.  You suspect by the time Izmael himself manages to pull his frame out of the morass, he will be just as horny as he was when he got in.  Grinning, you saunter your steaming, naked self back to camp in search of something to towel yourself down.");
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			player.sexReward("cum");
 			doNext(camp.returnToCampUseOneHour);
 		}

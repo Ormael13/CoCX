@@ -27,12 +27,12 @@ package classes.Items.Jewelries
 		}
 		
 		override public function playerEquip():Jewelry {
-			game.player.tou += 5;
+			game.player.statStore.addBuff('tou',+5,'tag',{text:'RingOfToughness'});
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():Jewelry {
-			game.player.tou -= 5;
+			game.player.statStore.removeBuffs('RingOfToughness');
 			return super.playerRemove();
 		}
 		

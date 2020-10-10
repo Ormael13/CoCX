@@ -743,6 +743,7 @@ public class DebugMenu extends BaseContent
 			addButton(0,"Head",bodyPartEditorHead);
 			addButton(1,"Skin & Hair",bodyPartEditorSkin);
 			addButton(2,"Torso & Limbs",bodyPartEditorTorso);
+			addButton(3,"AlrauneDebug",AlrauneDebug);
 //			addButton(3,"",bodyPartEditorValues);
 //			addButton(4,"",bodyPartEditorCocks);
 //			addButton(5,"",bodyPartEditorVaginas);
@@ -1240,6 +1241,61 @@ public class DebugMenu extends BaseContent
 			dumpPlayerData();
 			tagDemosSkin();
 			showChangeOptions(bodyPartEditorHead, page, BEARD_LENGTH_CONSTANTS, changeBeardLength);
+		}
+		private function AlrauneDebug():void {
+			outputText("\n\nSet all cocks to tentacle and lower body to alraune!");
+			if (player.cocks.length == 0) {
+				if (player.balls > 0) player.balls = 0;
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.cocks[0].cockType = CockTypesEnum.STAMEN;
+				player.cocks[1].cockType = CockTypesEnum.STAMEN;
+				player.cocks[2].cockType = CockTypesEnum.STAMEN;
+				player.cocks[3].cockType = CockTypesEnum.STAMEN;
+				player.cocks[4].cockType = CockTypesEnum.STAMEN;
+				player.cocks[5].cockType = CockTypesEnum.STAMEN;
+				player.cocks[6].cockType = CockTypesEnum.STAMEN;
+				player.cocks[7].cockType = CockTypesEnum.STAMEN;
+				player.cocks[8].cockType = CockTypesEnum.STAMEN;
+				player.cocks[9].cockType = CockTypesEnum.STAMEN;
+			}
+			if (player.cocks.length > 0) {
+				player.killCocks(-1);
+				if (player.balls > 0) player.balls = 0;
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.cocks[0].cockType = CockTypesEnum.STAMEN;
+				player.cocks[1].cockType = CockTypesEnum.STAMEN;
+				player.cocks[2].cockType = CockTypesEnum.STAMEN;
+				player.cocks[3].cockType = CockTypesEnum.STAMEN;
+				player.cocks[4].cockType = CockTypesEnum.STAMEN;
+				player.cocks[5].cockType = CockTypesEnum.STAMEN;
+				player.cocks[6].cockType = CockTypesEnum.STAMEN;
+				player.cocks[7].cockType = CockTypesEnum.STAMEN;
+				player.cocks[8].cockType = CockTypesEnum.STAMEN;
+				player.cocks[9].cockType = CockTypesEnum.STAMEN;
+			}
+			if (!player.hasStatusEffect(StatusEffects.AlrauneFlower)) player.createStatusEffect(StatusEffects.AlrauneFlower,0,0,0,0);
+			if (player.wings.type == Wings.PLANT) player.wings.type = Wings.NONE;
+			player.lowerBody = LowerBody.PLANT_FLOWER;
+			player.legCount = 12;
+
 		}
 		private function bodyPartEditorTorso():void {
 			menu();

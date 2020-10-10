@@ -547,7 +547,7 @@ private function bodyRitual():void {
 	outputText("\n\n\"<i>With pain comes purity,</i>\" " + flags[kFLAGS.GAR_NAME] + " says, so quietly you can barely hear her.  \"<i>Prepare yourself, Master,</i>\" she adds, and your heart nearly skips a beat when you hear the crack of a whip behind you.  Oh, shit, this is going to hu-CRACK!  You see stars as white-hot pain arcs through your body, making you scream into the wall.  You can feel the burning streak left across your back by the bullwhip, throbbing mercilessly in the moments before CRACK!  She hits you again, throwing you forward against your bonds with the force of the blow.");
 	
 	outputText("\n\nOver your ragged, pained breathing, you can just hear " + flags[kFLAGS.GAR_NAME] + " chanting: \"<i>With pain comes purity... CRACK!  With agony comes enlightenment... CRACK!  Through torment comes holiness... CRACK!</i>\"  The last crack of the whip leaves you groaning, breathless, sagging in your bonds. Somehow, though, you do feel... cleaner?  Like a weight was just lifted from your heart.  And you know you're going to be thicker-skinned after that!  Quietly, reservedly, " + flags[kFLAGS.GAR_NAME] + " releases you from your bonds, and you stagger into her waiting arms.  She helps you over to the altar and lays you down, letting you rest after your ordeal.  She stands over you, watching you pant and gasp.  You suppose you could get some vengeance for her brutality – or you could be kind.  What do you do?");
-	dynStats("lib", -.5, "sen", -2);
+	dynStats("sen", -2);
 	player.takePhysDamage(Math.round(player.maxHP()/2));
 	//(Display options: [Nothing] [Revenge] and [Cuddle])
 	menu();
@@ -723,7 +723,7 @@ private function kinkyBodyRitual():void {
 	outputText(".  Already, you feel more thick-skinned and less lusty, and so give an appreciative grin to your cute little gargoyle.  In response, she nuzzles against you and wraps her bat-like wings protectively around the two of you.");
 	
 	outputText("\n\nYou spend a few minutes cuddling with " + flags[kFLAGS.GAR_NAME] + ", but sadly, you know you can't leave your camp unattended for too long.  Giving her a pat on the head and a kiss on the brow, you gather up your clothes and head on back to camp.");
-	dynStats("tou", .5, "lib", -.5, "sen", -2);
+	dynStats("tou", .5, "sen", -2);
 	gargoyleConfidence(2);
 	player.takePhysDamage(Math.round(player.maxHP()/2));
 	doNext(camp.returnToCampUseOneHour);

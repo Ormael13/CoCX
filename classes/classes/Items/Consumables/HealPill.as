@@ -35,7 +35,7 @@ import classes.PerkLib;
 			
 			if (rand < 70 && player.lib < 40) {
 				outputText("You feel a sense of warmth spread through your erogenous areas.");
-				dynStats("lib", 1);
+				player.MutagenBonus("lib", 1);
 			}
 			
 			if (rand >= 70 && rand <= 90) {

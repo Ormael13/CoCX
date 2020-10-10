@@ -2117,7 +2117,7 @@ private function fancyDate():void {
 
 		outputText("\n\nOnce the two of you finish off your respective meals, you pay for the dinner and escort your lovely date back to [rubi eir] place, enjoying each other's company on the quiet walk.");
 
-		outputText("\n\nOnce you're back in the house, Rubi sprawls out on the couch, a devilish grin on [rubi eir] face.  \"<i>So, you plan on giving me a good \"kiss\" good night?\"");
+		outputText("\n\nOnce you're back in the house, Rubi sprawls out on the couch, a devilish grin on [rubi eir] face.  \"<i>So, you plan on giving me a good \"kiss\" good night?</i>\"");
 		//[to sex menu]
 		rubiSexMenu();
 		addButton(14,"Leave",camp.returnToCampUseOneHour);

@@ -26,6 +26,8 @@ import classes.Scenes.NPCs.Jinx;
 import classes.Scenes.NPCs.Syth;
 import classes.Scenes.NPCs.Rangiku;
 import classes.Scenes.NPCs.Veronika;
+import classes.Stats.Buff;
+
 //import classes.Scenes.Places.HeXinDao.*;
 //import classes.Items.Armor;
 //import classes.Scenes.Dungeons.DeepCave.ValaScene;
@@ -1055,31 +1057,15 @@ public function soularena():void {
         }
         else player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1, 25, 0, 0, 0);
 
-        if (player.hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2)) {ResetFoodBuffStats();}
-        player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2, str, spe, inte, tou);
+        if (player.statStore.hasBuff("ShiraOfTheEastFoodBuff")) player.statStore.removeBuffs("ShiraOfTheEastFoodBuff");
+        player.statStore.addBuffObject({str:str, spe:spe, inte:inte, tou:tou},"ShiraOfTheEastFoodBuff",{text:"Restorant meals"})
 
         menu();
         addButton(0, "Mild", restaurantSpicing,"mild");
         addButton(1, "Spicy", restaurantSpicing,"spicy");
         addButton(2, "Inferno", restaurantSpicing,"inferno");
     }
-    private function ResetFoodBuffStats():void {
-        if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
-            var tempStrength:int = player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2);
-            dynStats("str", -tempStrength);
-        }
-        if (player.statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
-            var tempSpeed:int = player.statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2);
-            dynStats("spe", -tempSpeed);
-        }
-        if (player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
-            var tempIntelligence:int = player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2);
-            dynStats("inte", -tempIntelligence);
-        }
-        var tempToughness:int = player.statusEffectv4(StatusEffects.ShiraOfTheEastFoodBuff2);
-        dynStats("tou", -tempToughness);
-        player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff2);
-    }
+
     private function restaurantSpicing(level:String):void{
         outputText("\n\nShe finish noting your order bow graciously then head to the kitchen. ");
         if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("The waitress");
@@ -1101,20 +1087,6 @@ public function soularena():void {
 				break;
         }
         outputText("\n\nRegardless the food is excellent and you leave in high spirits for the rest of the day.");
-        if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
-            var tempStrength:int = player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2);
-            dynStats("str", tempStrength);
-        }
-        if (player.statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
-            var tempSpeed:int = player.statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff2);
-            dynStats("spe", tempSpeed);
-        }
-        if (player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2) >= 1) {
-            var tempIntelligence:int = player.statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff2);
-            dynStats("inte", tempIntelligence);
-        }
-        var tempToughness:int = player.statusEffectv4(StatusEffects.ShiraOfTheEastFoodBuff2);
-        dynStats("tou", tempToughness);
         flags[kFLAGS.SPIRIT_STONES]--;
 		player.refillHunger(100);
         statScreenRefresh();

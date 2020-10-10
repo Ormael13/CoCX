@@ -27,15 +27,12 @@ public class VampireThirstEffect extends StatusEffectClass {
 		return maxThi;
 	}
     public function modSatiety(delta:Number):void {
-        var oldBoost:Number = currentBoost;
         value1 = boundFloat(-10, value1 + delta, maxThirst());
-        var change:Number = currentBoost - oldBoost;
-        host.dynStats("str", change,
-                "spe", change,
-                "int", change,
-                "lib", change,
-                "max", false,
-                "scale", false);
+		host.statStore.replaceBuffObject({str:currentBoost,spe:currentBoost,int:currentBoost,lib:currentBoost},"VampirismSatiety",{text:"Vampirism"});
+		if (game.player.hunger < game.player.maxHunger())
+		{
+			game.player.refillHunger(10, false);
+		}
     }
 	
 	public function get currentBoost():int {
@@ -48,12 +45,11 @@ public class VampireThirstEffect extends StatusEffectClass {
     }
     
     override public function onRemove():void {
-        host.dynStats("str", -currentBoost,
-                "spe", -currentBoost,
-                "int", -currentBoost,
-                "lib", -currentBoost,
-                "max", false,
-                "scale", false);
+		host.statStore.removeBuffs("VampirismSatiety");
     }
+
+	override public function onAttach():void {
+		host.statStore.replaceBuffObject({str:currentBoost,spe:currentBoost,int:currentBoost,lib:currentBoost},"VampirismSatiety",{text:"Vampirism"});
+	}
 }
 }

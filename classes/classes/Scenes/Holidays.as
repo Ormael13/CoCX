@@ -527,6 +527,7 @@ public class Holidays {
                     +"\n\nAs you head back to camp to prepare for your next adventure, you realize that you had some really, really fucked up dreams.  You hope you have more tomorrow night.");
             //Add ten more corruption.
             player.dynStats("lus", 20, "cor", 10, "scale", false);
+            player.buff("FeraBlessing").setStat("lib.mult", 0.10).withText("Fera Blessing");
             EngineCore.doNext(SceneLib.camp.returnToCampUseFourHours);
         }
 
@@ -580,6 +581,7 @@ public class Holidays {
             EngineCore.outputText("You awaken fully dressed with a familiar ache between your legs.  Damn, that was a good nap.  You rise, stretching as you rub your back, sore from lying against a tree for so long.  You suppose you could find yourself something to fight and fuck, but you ought to head back to camp first.  You idly reach into your [armor] and slip a finger into your [vagina], feeling your tight walls instinctively clamp down and squeeze it.  It's nice, but it's just so much better when you can do that to a captive cock until it has no choice but to impregnate you with its hot seed.  What better way to save the world than by making sure that the strongest get to breed as often as possible?"
                     +"\n\nAs you head back to camp to prepare for your next adventure, you realize that you had some really, really fucked up dreams.  You hope you have more tomorrow night.");
             player.dynStats("lus", 20, "cor", 10, "scale", false);
+            player.buff("FeraBlessing").setStat("lib.mult", 0.10).withText("Fera Blessing");
             EngineCore.doNext(SceneLib.camp.returnToCampUseFourHours);
             //Add ten more corruption.
         }
@@ -618,6 +620,7 @@ public class Holidays {
             //Add ten more corruption.
             //Add 50 lust.
             player.dynStats("lus", 20, "cor", 10);
+            player.buff("FeraBlessing").setStat("lib.mult", 0.10).withText("Fera Blessing");
             EngineCore.doNext(SceneLib.camp.returnToCampUseFourHours);
         }
     }
@@ -3134,7 +3137,7 @@ public class Holidays {
             EngineCore.addButton(0, "Next", processJackFrostEvent);
             flags[kFLAGS.JACK_FROST_PROGRESS] = 5;
             //Preggers chance!
-			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
             else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
         }
 
@@ -4265,7 +4268,7 @@ public class Holidays {
 
     public static function returnOfNieve():void {
         EngineCore.clearOutput();
-        EngineCore.outputText("As you awake in the morning you find yourself shivering slightly.  A cool breeze sweeps over your camp, while in the distance jingling bells can be heard.  How odd.  You haven't heard bells like that since..."
+        EngineCore.outputText("As you awake you find yourself shivering slightly.  A cool breeze sweeps over your camp, while in the distance jingling bells can be heard.  How odd.  You haven't heard bells like that since..."
                 +"\n\nYour heart skips a beat."
                 +"\n\n<i>You haven't heard bells like that since Nieve left you</i>."
                 +"\n\nYou quickly glance around the campsite until your eyes fall upon a glittering patch of white: fresh fallen snow.  The pure white almost hurts your eyes against the hellish red of the surrounding landscape.  You make a mad dash into the snow, which comes up to your ankles.  Little snowflakes continue to drift slowly down as the jingling noise fades away into nothingness.  But you can't see anything...  No familiar snow " + nieveMF("man", "woman") + " to greet you.  Perhaps Nieve really is gone forever?"

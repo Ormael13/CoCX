@@ -207,17 +207,6 @@ public class Izumi extends Monster
 				return;
 			}
 			
-			// Handle groundpound
-			if (player.hasStatusEffect(StatusEffects.Groundpound))
-			{
-				player.addStatusValue(StatusEffects.Groundpound,1,-1);
-				
-				if (player.statusEffectv1(StatusEffects.Groundpound) <= 0)
-				{
-					cleanupGroundpound();
-				}
-			}
-			
 			// Handle titsmother
 			if (player.hasStatusEffect(StatusEffects.Titsmother))
 			{
@@ -259,7 +248,6 @@ public class Izumi extends Monster
 		{
 			if (combatDebug) trace("Cleaning up lingering effects...");
 			cleanupChokeslam();
-			cleanupGroundpound();
 			cleanupTitsmother();
 		}
 		
@@ -421,28 +409,12 @@ public class Izumi extends Monster
 				outputText("The rumbling actually knocks you off your feet, sprawling on the ground and banging your head.  As the shaking subsides, you pull yourself upright, but you feel a little unsteady on your [feet] after the disorienting impact.");
 				
 				var spdReducedBy:int = int(player.spe * 0.25);
-				player.createStatusEffect(StatusEffects.Groundpound, 3, spdReducedBy, 0, 0);
-				player.dynStats("spe-", spdReducedBy);
-				
+				player.buff("Groundpound").addStats({"spe":-spdReducedBy}).withText("Groundpound!").combatPermanent();
+
+
 				if (combatDebug) trace("Applying Groundslam slow");
 			}
 			
-		}
-		
-		// Remove the effect post-combat, fixup stats
-		public function cleanupGroundpound():void
-		{
-			if (player.hasStatusEffect(StatusEffects.Groundpound))
-			{
-				// Can't use dynStats to achieve this, as it can give back more speed than we originally took away due to perks
-				player.spe += player.statusEffectv2(StatusEffects.Groundpound);
-				var max:int = player.getMaxStats("spe");
-				if (player.spe > max) player.spe = max;
-				
-				player.removeStatusEffect(StatusEffects.Groundpound);
-				
-				trace("Removing Groundpound slow effect");
-			}
 		}
 		
 		// Binding attack, mild lust increase per turn until the player breaks out. Not TOO hard to break out, though.
