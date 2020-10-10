@@ -637,6 +637,12 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.ELECTRA_AFFECTION] > 0)
 			interpersonStats += "<b>Electra Affection:</b> " + Math.round(flags[kFLAGS.ELECTRA_AFFECTION]) + "%\n";
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 6) interpersonStats += "<b>Electra lvl:</b> 60\n";
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 5) interpersonStats += "<b>Electra lvl:</b> 54\n";
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 4) interpersonStats += "<b>Electra lvl:</b> 48\n";
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 3) interpersonStats += "<b>Electra lvl:</b> 42\n";
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 2) interpersonStats += "<b>Electra lvl:</b> 36\n";
+			if (flags[kFLAGS.ELECTRA_LVL_UP] < 2) interpersonStats += "<b>Electra lvl:</b> 30\n";
 
 		if (SceneLib.emberScene.emberAffection() > 0) {
             interpersonStats += "<b>Ember Affection:</b> " + Math.round(SceneLib.emberScene.emberAffection()) + "%\n";
@@ -809,6 +815,15 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.ZENJI_PROGRESS] > 0) {
 			interpersonStats += "<b>Zenji's perspective on player:</b> " + Math.round(flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER]) + "%\n";
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 8) {
+				interpersonStats += "<b>Zenji status:</b> Follower\n";
+				interpersonStats += "<b>Zenji lvl:</b> ";
+				if (player.level > 149) interpersonStats += "150";
+				else if (player.level > 24) interpersonStats += ""+player.level+"";
+				else interpersonStats += "25";
+				interpersonStats += "\n";
+			}
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 9) interpersonStats += "<b>Zenji status:</b> Lover\n";
 		}
 
 		if (interpersonStats != "")

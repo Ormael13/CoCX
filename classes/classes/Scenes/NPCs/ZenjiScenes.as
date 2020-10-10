@@ -637,7 +637,9 @@ public function followerZenjiMainCampMenu():void {
 	menu();
 	addButton(0, "Appearance", followerZenjiMainCampMenuAppearance).hint("Examine Zenji.");
 	addButton(1, "Training", followerZenjiMainCampMenuTraining).hint("Train with Zenji to increase your stats.");
-	//fight or spar
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(2, "Spar", followerZenjiSpar).hint("Fight Zenji, hone your skills against a challenging foe.");
+	addButton(3, "Talk", followerZenjiTalks);
+	
 	
 	addButton(14, "Leave", followerZenjiMainCampMenuLeave);
 }
@@ -686,6 +688,7 @@ public function followerZenjiMainCampMenuTrainingStrength():void {
 	outputText("Once you’re done, you feel that this exercise was worth the effort. You thank Zenji before dismissing yourself.\n\n");
 	if (player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters1) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters1, 1, 1);
 	dynStats("str", (4 - player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters1)), "scale", false);
+	outputText(player.modTone(player.maxToneCap(), 1));
 	player.fatigue += Math.round(player.maxFatigue() * 0.2);
 	followerZenjiMainCampMenuTrainingPerks();
 	doNext(camp.returnToCampUseOneHour);
@@ -703,6 +706,8 @@ public function followerZenjiMainCampMenuTrainingToughness():void {
 	outputText("Once you’re done you feel that the exercise was worth the time. You thank Zenji before dismissing yourself.\n\n");
 	if (player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters1) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters1, 2, 1);
 	dynStats("tou", (4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters1)), "scale", false);
+	outputText(player.modThickness(0, 1));
+    outputText(player.modTone(player.maxToneCap(), 1));
 	player.fatigue += Math.round(player.maxFatigue() * 0.2);
 	followerZenjiMainCampMenuTrainingPerks();
 	doNext(camp.returnToCampUseOneHour);
@@ -720,7 +725,8 @@ public function followerZenjiMainCampMenuTrainingSpeed():void {
 	outputText("Once you’re done, you feel that the exercise was worth the time. You thank Zenji before dismissing yourself.\n\n");
 	if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters1) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters1, 3, 1);
 	dynStats("spe", (4 - player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters1)), "scale", false);
-	player.fatigue += Math.round(player.maxFatigue() * 0.2);
+	outputText(player.modThickness(0, 1));
+    player.fatigue += Math.round(player.maxFatigue() * 0.2);
 	followerZenjiMainCampMenuTrainingPerks();
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -790,13 +796,76 @@ public function followerZenjiMainCampMenuTrainingPerks():void {
 public function followerZenjiSpar():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
-	
+	outputText("\"<i>Ya want ta spar wit me? Alright den, I wont hold back!</i>\"\n\n");
+	startCombat(new Zenji());
+	doNext(playerMenu);
+}
+
+public function followerZenjiSparPCDefeated():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	if (player.HP < player.minHP()) {
+		outputText("You hold up your hand and tell him that you can't fight him anymore.\n\n");
+		outputText("\"<i>Ya did good, but I know ya can do betta next time. Here, I know a trick ta help ya recova.</i>\" Zenji examines you for any wounds he may have caused and holds his hand over you, you feel a little better after he's done. \"<i>Give it a moment, you may want ta see if ya can do anything about it personally, 'cause I don’t usually use my tricks to help othas.</i>\"\n\n");
+	}
+	else {
+		outputText("You fall to your knees, you’ve turned yourself on too much to fight him anymore. He really is just so handsome...\n\n");
+		outputText("Zenji looks at you with concern in his eyes, \"<i>¿Es mi jale tan fuerte?</i>\" He shakes his head and leaves you to your business.\n\n");
+	}
+	cleanupAfterCombat();
+}
+
+public function followerZenjiSparZenjiDefeated():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("Zenji crouches down and holds up a hand, \"<i>Enough! Enough... you are too good at dis.</i>\" He says breathlessly, \"<i>Don' worry 'bout me, I learned a few tricks to recova.</i>\" Zenji takes a deep breath and stands up. \"<i>Dat was fun, we should do it again lata, no?</i>\"\n\n");
+	outputText("You tell Zenji you'd need a moment before you could consider fighting him again.\n\n");
+	cleanupAfterCombat();
 }
 
 public function followerZenjiTalks():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
-	
+	outputText("You tell Zenji you just want to talk and get to know him better.\n\n");
+	outputText("\"<i>Interested in trolls are ya? Well, what d'ya wanta talk about?</i>\"\n\n");
+	menu();
+	addButton(0, "Himself", followerZenjiTalksHimself);
+	addButton(1, "Trolls", followerZenjiTalksTrolls);
+	addButton(2, "Yourself", followerZenjiTalksYourself);
+	addButton(14, "Back", followerZenjiMainCampMenu);
+}
+
+public function followerZenjiTalksHimself():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("You tell him you want to know more about him and why he was in the bog in the first place.\n\n");
+	outputText("\"<i>Dat's easy, de trolls back home are cowards, dey didn't starve for adventure, only thinking about how they could get enough food, or worry about otha boring tings. I couldn't stand it, I wanta explore, I needed to get out of der, dey were just so boring, not wanting to train or fight, just scavenge and stick close ta home, ya know? It didn't take much time to get out of der, nobody stopped me, and I was free... I know dey probably wanted me gone, I caused a lotta trouble when I was there… dere was also dis one person…</i>\"\n\n");
+	outputText("Zenji pauses for a moment, sighing softly.\n\n");
+	outputText("\"<i>But da's beside da point, I needed to do tings on ma own, live life on ma own without dem always watching over my every action. De bog was a nice place when I saw it, and dat area ya found me in was great for stretching and training wit people who wanted ta, like you when you came along. Eventually da people who I usually saw stopped coming, I don' know why, but I was starting ta get lonely, if there was one thing I missed about ma troll village, is all the people did care. Even if it was boring, der was still people everywhere. Den you came along, you fought with vigor, trained with passion, der was someting about ya, and I didn't want ta be alone out der anymore, so I wanted ta join you here in ya camp, I've even gotten ta meet some new friends, so dat's nice.</i>\"\n\n");
+	outputText("Zenji spends the rest of the hour talking about new experiences in the camp and other things about himself that he can recall.\n\n");
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function followerZenjiTalksTrolls():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("You ask Zenji what he can tell you about trolls. After all, that’s what he commonly refers to himself as.\n\n");
+	outputText("\"<i>Dere's many kinda trolls, tink of it like alraune, each one may be simila way back den, but now dey've split into different kinds, ya know? My troll village grew used to da jungle we lived in, plenty of shade and cold nights, ma fuzz is great at keeping warm and hiding in da trees of da jungle, da oda trolls never saw me coming haha!</i>\"\n\n");
+	outputText("He pauses for a moment, \"<i>But de other trolls in my village didn't like me too much, I caused trouble, I sought competition, when dey wanted peace and quiet, so I left. I didn't see many oda trolls out dere, but they’re probably not in de bog where I spent most’ve ma time.</i>\"\n\n");
+	outputText("Zenji spends the rest of the hour talking about trolls and other nuances about his kind from the other trolls.\n\n");
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function followerZenjiTalksYourself():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("You tell Zenji you wanted to talk a little bit about yourself and what he thinks of you.\n\n");
+	outputText("Zenji raises an eyebrow at you, \"<i>If dat's what ya want ta talk about, den alright. What's dere to talk about.</i>\"\n\n");
+	outputText("You tell Zenji about your past and how you were selected as the champion of Ingnam. Zenji doesn't give much more than a \"<i>Mhmm</i>\" here and there.\n\n");
+	outputText("You ask what he thinks about you though.\n\n");
+	outputText("\"<i>Well, ya be a good friend here, good fighter, with vigor and strength. In de bog almost nobody could beat me in a fight, but you are something different, ya fight with unrivaled passion dat dey could neva compete with. Da's what I like about ya, ya don't give up, ya only fight harder.</i>\"\n\n");
+	outputText("You spend the rest of the hour talking about yourself and sharing old stories back in Ingnam with Zenji.\n\n");
+	doNext(camp.returnToCampUseOneHour);
 }
 
 public function followerZenjiSex():void {

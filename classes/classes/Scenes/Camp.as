@@ -1155,6 +1155,7 @@ public class Camp extends NPCAwareContent {
 		if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
 		//if (flags[kFLAGS.GALIA_LVL_UP] >= 1) counter++;
 		if (flags[kFLAGS.NEISA_FOLLOWER] >= 7) counter++;
+		if (flags[kFLAGS.ZENJI_PROGRESS] >= 8) counter++;
 		if (helspawnFollower()) counter++;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5) counter++;
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;

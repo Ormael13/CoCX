@@ -8,6 +8,7 @@ package classes.Items.Shields
 	import classes.PerkLib;
 	import classes.Player;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.StatusEffects;
 
 	public class AetherS extends Shield {
 		
@@ -18,8 +19,21 @@ package classes.Items.Shields
 		
 		override public function get block():Number { 
 			var temp:int = 0;
-			//temp += 1;
+			temp += game.player.statusEffectv2(StatusEffects.AetherTwins1);
 			return temp; 
+		}
+		
+		override public function get description():String {
+			var desc:String = _description;
+			//Type
+			desc += "\n\nType: ";
+			if (game.player.statusEffectv4(StatusEffects.AetherTwins1) == 1) "Shield";
+			else "Shield";
+			//Block Rating
+			desc += "\nBlock: " + String(block);
+			//Value
+			desc += "\nBase value: 0";
+			return desc;
 		}
 		
 		override public function useText():void {

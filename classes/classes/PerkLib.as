@@ -71,6 +71,13 @@ public class PerkLib
 		public static const AscensionSpiritualEnlightenment:AscensionSpiritualEnlightenmentPerk = new AscensionSpiritualEnlightenmentPerk();
 		public static const AscensionTolerance:AscensionTolerancePerk = new AscensionTolerancePerk();
 		public static const AscensionTranshumanism:AscensionTranshumanismPerk = new AscensionTranshumanismPerk();
+		public static const AscensionTranshumanismStr:AscensionTranshumanismStrPerk = new AscensionTranshumanismStrPerk();
+		public static const AscensionTranshumanismTou:AscensionTranshumanismTouPerk = new AscensionTranshumanismTouPerk();
+		public static const AscensionTranshumanismSpe:AscensionTranshumanismSpePerk = new AscensionTranshumanismSpePerk();
+		public static const AscensionTranshumanismInt:AscensionTranshumanismIntPerk = new AscensionTranshumanismIntPerk();
+		public static const AscensionTranshumanismWis:AscensionTranshumanismWisPerk = new AscensionTranshumanismWisPerk();
+		public static const AscensionTranshumanismLib:AscensionTranshumanismLibPerk = new AscensionTranshumanismLibPerk();
+		public static const AscensionTranshumanismSen:AscensionTranshumanismSenPerk = new AscensionTranshumanismSenPerk();
 		public static const AscensionVirility:AscensionVirilityPerk = new AscensionVirilityPerk();
 		public static const AscensionWisdom:AscensionWisdomPerk = new AscensionWisdomPerk();
 		
@@ -6525,4 +6532,4 @@ public class PerkLib
 	}
 	initDependencies();
 }
-}
+}

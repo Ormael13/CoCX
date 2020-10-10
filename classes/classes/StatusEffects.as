@@ -253,6 +253,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const AdventureGuildQuestsCounter2:StatusEffectType   = mk("Adventure Guild Quests Counter 2");
 		public static const AdventureGuildQuestsCounter3:StatusEffectType   = mk("Adventure Guild Quests Counter 3");
 		public static const AdventureGuildQuestsCounter4:StatusEffectType   = mk("Adventure Guild Quests Counter 4");
+		public static const AetherTwins1:StatusEffectType                 	= mk("Aether Twins 1");//Attack boost / Block boost / x / Weapon shape
 		public static const Airweed:StatusEffectType                 		= mk("Airweed");
 		public static const AlchemicalThunderBuff:StatusEffectType     		= mk("Alchemical Thunder Buff");
 		public static const AllNaturalOnaholeUsed:StatusEffectType          = mk("all-natural onahole used");

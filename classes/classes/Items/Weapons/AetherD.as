@@ -8,6 +8,7 @@ package classes.Items.Weapons
 	import classes.PerkLib;
 	import classes.Player;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.StatusEffects;
 	
 	public class AetherD extends Weapon {
 		
@@ -18,8 +19,26 @@ package classes.Items.Weapons
 		
 		override public function get attack():Number {
 			var boost:int = 0;
-			//boost += 2;
+			boost += game.player.statusEffectv1(StatusEffects.AetherTwins1);
 			return boost; 
+		}
+		
+		override public function get description():String {
+			var desc:String = _description;
+			//Type
+			desc += "\n\nType: Weapon ";
+			if (game.player.statusEffectv4(StatusEffects.AetherTwins1) == 1) "(Gaunlet)";
+			else "(Gaunlet)";
+			//Attack
+			desc += "\nAttack: " + String(attack);
+			//Value
+			desc += "\nBase value: 0";
+			return desc;
+		}
+		
+		override public function get verb():String {
+			if (game.player.statusEffectv4(StatusEffects.AetherTwins1) == 1) return "punch";
+			else return "punch";
 		}
 		
 		override public function useText():void {
