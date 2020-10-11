@@ -536,7 +536,12 @@ public class PerkMenu extends BaseContent {
 				for each (var cond:Object in ptype.requirements) {
 					if (cond.fn(player)) color=(darkTheme()?'#ffffff':'#000000');
 					else color=darkTheme()?'#ff4444':'#aa2222';
-					reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
+					if (cond.text is String){
+						reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
+					}
+					else {
+						reqs.push("<font color='"+color+"'>"+cond.text(player)+"</font>");
+					}
 				}
 				outputText("<ul><li><b>Requires:</b> " + reqs.join(", ")+".</li></ul>");
 			} else {

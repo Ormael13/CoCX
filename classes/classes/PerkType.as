@@ -103,16 +103,6 @@ public class PerkType extends BaseContent
 		 */
 		public var requirements:Array = [];
 
-		/**
-		 * @return "requirement1, requirement2, ..."
-		 */
-		public function allRequirementDesc():String {
-			var s:Array = [];
-			for each (var c:Object in requirements) {
-				if (c.text) s.push(c.text);
-			}
-			return s.join(", ");
-		}
 		public function available(player:Player):Boolean {
 			for each (var c: Object in requirements) {
 				if (!c.fn(player)) return false;
@@ -150,8 +140,20 @@ public class PerkType extends BaseContent
 		}
 		public function requireTou(value:int):PerkType {
 			requirements.push({
-				fn  : fnRequireAttr("tou", value),
-				text: "Toughness " + value,
+				fn  : function(player):Boolean {
+					// return true if player meets perk requirements
+					var Attribute:String = "tou";
+					if(player.hasPerk(PerkLib.IcyFlesh)) Attribute = "inte";
+					if(player.hasPerk(PerkLib.HaltedVitals)) Attribute = "lib";
+					return player[Attribute] >= value;
+				},
+				text: function(player):String {
+					// return true if player meets perk requirements
+					var Attribute:String = "Toughness";
+					if(player.hasPerk(PerkLib.IcyFlesh)) Attribute = "intelligence";
+					if(player.hasPerk(PerkLib.HaltedVitals)) Attribute = "libido";
+					return Attribute +" "+ value;
+				},
 				type: "attr",
 				attr: "tou",
 				value: value

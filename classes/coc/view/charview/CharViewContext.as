@@ -49,7 +49,7 @@ import coc.xlogic.ExecContext;
 					showArmClothing: [Arms.LION, Arms.DISPLACER, Arms.GARGOYLE, Arms.GARGOYLE_2, Arms.YETI, Arms.HINEZUMI].indexOf(player.arms.type) == -1 && !player.hasStatusEffect(StatusEffects.CancerCrabStance),
 					showLegClothing: [LowerBody.YETI, LowerBody.HOOFED, LowerBody.HARPY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.DRIDER, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER].indexOf(player.lowerBody) == -1 && player.legCount == 2,
 					PlayerHasViewableOutfit: player.isWearingArmor(),
-					playerHasWeaponBannedArms: [Arms.DISPLACER, Arms.GARGOYLE, Arms.FROSTWYRM, Arms.CANCER].indexOf(player.arms.type) == -1 || ([Arms.LION].indexOf(player.arms.type) == -1 && [LowerBody.LION].indexOf(player.lowerBody) == -1) || ([Arms.WOLF].indexOf(player.arms.type) == -1 && [LowerBody.WOLF].indexOf(player.lowerBody) == -1) || ([Arms.HINEZUMI].indexOf(player.arms.type) == -1 && [LowerBody.HINEZUMI].indexOf(player.lowerBody) == -1),
+					playerHasWeaponBannedArms: [Arms.DISPLACER, Arms.GARGOYLE, Arms.FROSTWYRM, Arms.CANCER].indexOf(player.arms.type) == -1,
 
 					//Detect Weapon Skins
 					PlayerHasAStaff: player.isStaffTypeWeapon(),

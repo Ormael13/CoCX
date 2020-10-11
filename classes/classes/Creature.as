@@ -334,12 +334,12 @@ public class Creature extends Utils
 			var current:Number = stat.valueOfBuff('Curse');
 			if (statName == "sens" || statName == "cor") {
 				if (current >0){
-					if (power >= current) {
+					if (power*2 >= current) {
 						stat.removeBuff('Curse');
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatDown(statName);
-					} else if (power < current) {
-						stat.addOrIncreaseBuff('Curse', -power);
+					} else if (power*2 < current) {
+						stat.addOrIncreaseBuff('Curse', -power*2);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatUp(statName);
 					}
@@ -347,12 +347,12 @@ public class Creature extends Utils
 			}
 			else {
 				if (current < 0) {
-					if (power >= -current) {
+					if (power*2 >= -current) {
 						stat.removeBuff('Curse');
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatUp(statName);
-					} else if (power < -current) {
-						stat.addOrIncreaseBuff('Curse', power);
+					} else if (power*2 < -current) {
+						stat.addOrIncreaseBuff('Curse', power*2);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatDown(statName);
 					}
@@ -411,65 +411,16 @@ public class Creature extends Utils
 				if (inte >= 41) max += Math.round(inte);
 				if (inte >= 61) max += Math.round(inte);
 				if (inte >= 81) max += Math.round(inte);
-				if (inte >= 101) max += Math.round(inte);
-				if (inte >= 151) max += Math.round(inte);
-				if (inte >= 201) max += Math.round(inte);
-				if (inte >= 251) max += Math.round(inte);
-				if (inte >= 301) max += Math.round(inte);
-				if (inte >= 351) max += Math.round(inte);
-				if (inte >= 401) max += Math.round(inte);
-				if (inte >= 451) max += Math.round(inte);
-				if (inte >= 501) max += Math.round(inte);
-				if (inte >= 551) max += Math.round(inte);
-				if (inte >= 601) max += Math.round(inte);
-				if (inte >= 651) max += Math.round(inte);
-				if (inte >= 701) max += Math.round(inte);
-				if (inte >= 751) max += Math.round(inte);
-				if (inte >= 801) max += Math.round(inte);
-				if (inte >= 851) max += Math.round(inte);
-				if (inte >= 901) max += Math.round(inte);
-				if (inte >= 951) max += Math.round(inte);
-				if (inte >= 1001) max += Math.round(inte);
-				if (inte >= 1051) max += Math.round(inte);
-				if (inte >= 1101) max += Math.round(inte);
-				if (inte >= 1151) max += Math.round(inte);
-				if (inte >= 1201) max += Math.round(inte);
-				if (inte >= 1251) max += Math.round(inte);
-				if (inte >= 1301) max += Math.round(inte);
-				if (inte >= 1351) max += Math.round(inte);
-				if (inte >= 1401) max += Math.round(inte);
-				if (inte >= 1451) max += Math.round(inte);
-				if (inte >= 1501) max += Math.round(inte);
-				if (inte >= 1551) max += Math.round(inte);
-				if (inte >= 1601) max += Math.round(inte);
-				if (inte >= 1651) max += Math.round(inte);
-				if (inte >= 1701) max += Math.round(inte);
-				if (inte >= 1751) max += Math.round(inte);
-				if (inte >= 1801) max += Math.round(inte);
-				if (inte >= 1851) max += Math.round(inte);
-				if (inte >= 1901) max += Math.round(inte);
-				if (inte >= 1951) max += Math.round(inte);
-				if (inte >= 2001) max += Math.round(inte);
-				if (inte >= 2051) max += Math.round(inte);
-				if (inte >= 2101) max += Math.round(inte);
-				if (inte >= 2151) max += Math.round(inte);
-				if (inte >= 2201) max += Math.round(inte);
-				if (inte >= 2251) max += Math.round(inte);
-				if (inte >= 2301) max += Math.round(inte);
-				if (inte >= 2351) max += Math.round(inte);
-				if (inte >= 2401) max += Math.round(inte);
-				if (inte >= 2451) max += Math.round(inte);
-				if (inte >= 2501) max += Math.round(inte);
-				if (inte >= 2551) max += Math.round(inte);
-				if (inte >= 2601) max += Math.round(inte);
-				if (inte >= 2651) max += Math.round(inte);
-				if (inte >= 2701) max += Math.round(inte);
-				if (inte >= 2751) max += Math.round(inte);
-				if (inte >= 2801) max += Math.round(inte);
-				if (inte >= 2851) max += Math.round(inte);
-				if (inte >= 2901) max += Math.round(inte);
-				if (inte >= 2951) max += Math.round(inte);
+				if (inte >= 101) max += Math.round(inte) * Math.floor( (inte-100)/50 + 1);
 				if (findPerk(PerkLib.FrozenHeartFinalForm) >= 0) max *= 1.5;
+			}
+			else if (findPerk(PerkLib.HaltedVitals) >= 0) {
+				max += int(lib * 2 + 50);
+				if (lib >= 21) max += Math.round(lib);
+				if (lib >= 41) max += Math.round(lib);
+				if (lib >= 61) max += Math.round(lib);
+				if (lib >= 81) max += Math.round(lib);
+				if (lib >= 101) max += Math.round(lib) * Math.floor( (lib-100)/50 + 1);
 			}
 			else {
 				max += int(tou * 2 + 50);
@@ -477,64 +428,7 @@ public class Creature extends Utils
 				if (tou >= 41) max += Math.round(tou);
 				if (tou >= 61) max += Math.round(tou);
 				if (tou >= 81) max += Math.round(tou);
-				if (tou >= 101) max += Math.round(tou);
-				if (tou >= 151) max += Math.round(tou);
-				if (tou >= 201) max += Math.round(tou);
-				if (tou >= 251) max += Math.round(tou);
-				if (tou >= 301) max += Math.round(tou);
-				if (tou >= 351) max += Math.round(tou);
-				if (tou >= 401) max += Math.round(tou);
-				if (tou >= 451) max += Math.round(tou);
-				if (tou >= 501) max += Math.round(tou);
-				if (tou >= 551) max += Math.round(tou);
-				if (tou >= 601) max += Math.round(tou);
-				if (tou >= 651) max += Math.round(tou);
-				if (tou >= 701) max += Math.round(tou);
-				if (tou >= 751) max += Math.round(tou);
-				if (tou >= 801) max += Math.round(tou);
-				if (tou >= 851) max += Math.round(tou);
-				if (tou >= 901) max += Math.round(tou);
-				if (tou >= 951) max += Math.round(tou);
-				if (tou >= 1001) max += Math.round(tou);
-				if (tou >= 1051) max += Math.round(tou);
-				if (tou >= 1101) max += Math.round(tou);
-				if (tou >= 1151) max += Math.round(tou);
-				if (tou >= 1201) max += Math.round(tou);
-				if (tou >= 1251) max += Math.round(tou);
-				if (tou >= 1301) max += Math.round(tou);
-				if (tou >= 1351) max += Math.round(tou);
-				if (tou >= 1401) max += Math.round(tou);
-				if (tou >= 1451) max += Math.round(tou);
-				if (tou >= 1501) max += Math.round(tou);
-				if (tou >= 1551) max += Math.round(tou);
-				if (tou >= 1601) max += Math.round(tou);
-				if (tou >= 1651) max += Math.round(tou);
-				if (tou >= 1701) max += Math.round(tou);
-				if (tou >= 1751) max += Math.round(tou);
-				if (tou >= 1801) max += Math.round(tou);
-				if (tou >= 1851) max += Math.round(tou);
-				if (tou >= 1901) max += Math.round(tou);
-				if (tou >= 1951) max += Math.round(tou);
-				if (tou >= 2001) max += Math.round(tou);
-				if (tou >= 2051) max += Math.round(tou);
-				if (tou >= 2101) max += Math.round(tou);
-				if (tou >= 2151) max += Math.round(tou);
-				if (tou >= 2201) max += Math.round(tou);
-				if (tou >= 2251) max += Math.round(tou);
-				if (tou >= 2301) max += Math.round(tou);
-				if (tou >= 2351) max += Math.round(tou);
-				if (tou >= 2401) max += Math.round(tou);
-				if (tou >= 2451) max += Math.round(tou);
-				if (tou >= 2501) max += Math.round(tou);
-				if (tou >= 2551) max += Math.round(tou);
-				if (tou >= 2601) max += Math.round(tou);
-				if (tou >= 2651) max += Math.round(tou);
-				if (tou >= 2701) max += Math.round(tou);
-				if (tou >= 2751) max += Math.round(tou);
-				if (tou >= 2801) max += Math.round(tou);
-				if (tou >= 2851) max += Math.round(tou);
-				if (tou >= 2901) max += Math.round(tou);
-				if (tou >= 2951) max += Math.round(tou);
+				if (tou >= 101) max += Math.round(tou) * Math.floor( (tou-100)/50 + 1);
 			}
 			if (findPerk(PerkLib.RefinedBodyI) >= 0) max += 50;
 			if (findPerk(PerkLib.RefinedBodyII) >= 0) max += 50;
@@ -866,10 +760,10 @@ public class Creature extends Utils
 			}
 			//Libido
 			if (dlib < 0){
-				addCurse("wis", -dlib);
+				addCurse("lib", -dlib);
 			}
 			if (dlib > 0){
-				removeCurse("wis", dlib);
+				removeCurse("lib", dlib);
 			}
 			//Sensitivity
 			if (dsens > 0){

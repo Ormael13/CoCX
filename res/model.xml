@@ -1977,6 +1977,8 @@
 						<hide part="arms_bg/*"/>
 						<hide part="hands/*"/>
 						<hide part="hands_bg/*"/>
+						<hide part="weapon/*"/>
+						<hide part="shield/*"/>
 						<switch>
 							<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
 								<show part="arms/manticore_sit_pscales"/>
@@ -2011,6 +2013,8 @@
 						<hide part="arms_bg/*"/>
 						<hide part="hands/*"/>
 						<hide part="hands_bg/*"/>
+						<hide part="weapon/*"/>
+						<hide part="shield/*"/>
 						<switch>
 							<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
 								<show part="arms/feral_pscales"/>
@@ -2045,6 +2049,8 @@
 						<hide part="arms_bg/*"/>
 						<hide part="hands/*"/>
 						<hide part="hands_bg/*"/>
+						<hide part="weapon/*"/>
+						<hide part="shield/*"/>
 						<switch>
 							<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
 								<show part="arms/feral_pscales"/>
@@ -2123,6 +2129,8 @@
 				<if test="lowerBody==LowerBody.HINEZUMI">
 					<hide part="arms/*"/>
 					<hide part="arms_bg/*"/>
+					<hide part="weapon/*"/>
+					<hide part="shield/*"/>
 					<switch>
 						<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
 							<show part="arms/hinezumistanced_pscales"/>
