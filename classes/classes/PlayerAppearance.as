@@ -1179,6 +1179,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your " + num2Text(player.legCount) + " perfect lissom legs end in delicate, but agile elven feet allowing you to move gracefully and swiftly.");
 		else if (player.lowerBody == LowerBody.RAIJU)
 			outputText("  You have " + num2Text(player.legCount) + " fluffy, furred legs that look vaguely like knee high socks. Your pawed feet end in four thick toes, which serve as your main source of balance. You can walk on them as normally as your old plantigrade legs. A thick strand of darkly colored fur breaks out from your ankles, emulating a bolt of lighting in appearance.");
+		else if (player.lowerBody == LowerBody.WEASEL)
+			outputText("  You have " + num2Text(player.legCount) + " fluffy, furred legs like those of a weasel. Your pawed feet end in four thick toes, which serve as your main source of balance. You can walk on them as normally as your old plantigrade legs.");
 		else if (player.lowerBody == LowerBody.RED_PANDA)
 			outputText("  Your " + num2Text(player.legCount) + " legs are equally covered in [skin coat.color] fur, ending on red-panda paws with short claws. They have a nimble and strong build, in case you need to escape from something.");
 		else if (player.lowerBody == LowerBody.AVIAN)
@@ -1350,6 +1352,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.tailType == Tail.RAIJU) {
 			outputText("  Your silky tail extends out from just above your " + assDescript() + ". Its fur is lovely to the touch and almost glows at the tip, letting others know of your lightning based motif.");
 		}
+		else if (player.tailType == Tail.WEASEL) {
+			outputText("  Your short silky tail extends out from just above your " + assDescript() + ". Its fur is lovely to the touch.");
+		}
 		else if (player.tailType == Tail.RED_PANDA) {
 			outputText("  Sprouting from your [ass], you have a long, bushy tail. It has a beautiful pattern of rings in [skin coat.color] fluffy fur. It waves playfully as you walk giving to your step a mesmerizing touch.");
 		}
@@ -1395,6 +1400,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves from a distance.");
 		else if (armType == Arms.MANTIS)
 			outputText("  Shining "+player.coatColor+" exoskeleton covers your arms from the biceps down with a long and sharp scythes extending from the wrists.");
+		else if (armType == Arms.KAMAITACHI)
+			outputText("  Your arms are covered in "+player.coatColor+" fur up to your shoulders. They end with a pair of five-toed weasel paws armed with claws. Your forearms fur part ways slightly as a pair of long scythes like blades curves outward toward your elbow, sharper than any sword.");
 		else if (armType == Arms.BEE)
 			outputText("  Shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves ended with a yellow fuzz from a distance.");
 		else if (armType == Arms.SALAMANDER)
@@ -1607,6 +1614,9 @@ public class PlayerAppearance extends BaseContent {
 		if (wingType == Wings.THUNDEROUS_AURA){
 			outputText("  You generate so much electricity that the sound of static and voltage follows you around, announcing your arrival.");
 		}
+		if (wingType == Wings.WINDY_AURA){
+			outputText("  An aura of strong wind constantly seems to accompany you wherever you go. You can use it to create tornados and even take flight riding on a dust devil should you need to.");
+		}
 		if (wingType == Wings.LEVITATION){
 			outputText("  You have the ability to levitate in the air should you wish to although you prefer to stay at ground level to not alert your would be victims to your otherworldly nature.");
 		}
@@ -1812,6 +1822,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your [eyecolor] elven eyes looks somewhat human, save for their cat-like vertical slit which draws light right in, allowing you to see with perfect precision both at day and night time.");
 		else if(eyeType == Eyes.RAIJU)
 			outputText("  Your eyes are of an electric [eyecolor] hue that constantly glows with voltage power. They have slitted pupils like those of a beast.");
+		else if(eyeType == Eyes.WEASEL)
+			outputText("  Your [eyecolor] eyes have slitted pupils like those of a weasel.");
 		else if(eyeType == Eyes.VAMPIRE){
 			outputText("  Your eyes looks somewhat normal, but their [eyecolor] irises seem to have the tendency of drawing in people’s gaze, like moths to a flame.");
 		}
@@ -1880,6 +1892,7 @@ public class PlayerAppearance extends BaseContent {
 				if(player.skin.hasMagicalTattoo()) outputText(" covered with [skin color2] magical tattoo");
 				else if(player.skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo");
 				else if(player.skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
+				else if(player.skin.hasWindSweptScars()) outputText(" covered with scars as if your skin was cut in various place by a windstorm");
 				else if(player.skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos");
 				else if(player.skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
 				outputText(" where your hair should be.");
@@ -1944,36 +1957,39 @@ public class PlayerAppearance extends BaseContent {
 					outputText(" With ears like that anyone would be hard pressed to resist the urge to headpat you.");
 				}
 			}
-			else if(earType == Ears.WEASEL)
+			else if(earType == Ears.RAIJU)
 				outputText("  A pair of sideways leaning raiju ears that flick toward every slight sound stick out from your skull.");
-			if (earType == Ears.BAT){
+			else if (earType == Ears.WEASEL){
+				outputText("  A pair of two round fuzzy weasel ears covered with [skin coat.color] and alert to sound stick out from your skull.");
+			}
+			else if (earType == Ears.BAT){
 				outputText("  A pair of bat ears sit atop your head, always perked up to catch any stray sound.");
 			}
-			if (earType == Ears.VAMPIRE){
+			else if (earType == Ears.VAMPIRE){
 				outputText("  A pair of pointed elfin ears powerful enough to catch even the heartbeat of those around you stick out from your skull.");
 			}
-			if (earType == Ears.RED_PANDA){
+			else if (earType == Ears.RED_PANDA){
 				outputText("  Big, white furred, red-panda ears lie atop your head, keeping you well aware to your surroundings.");
 			}
-			if (earType == Ears.AVIAN){
+			else if (earType == Ears.AVIAN){
 				outputText("  Two small holes at each side of your head serve you as ears. Hidden by tufts of feathers, they’re almost unnoticeable.");
 			}
-			if (earType == Ears.GRYPHON){
+			else if (earType == Ears.GRYPHON){
 				outputText("  A duo of triangular, streamlined ears are located at each side of your head, helping you to pinpoint sounds. They’re covered in soft, [skin coat.color] fur and end in tufts.");
 			}
-			if (earType == Ears.CAVE_WYRM){
+			else if (earType == Ears.CAVE_WYRM){
 				outputText("  Your ears are furry yet they do not actually belong to any known type of mammal. You suspect them to be related to an ancestry closer to that of the serpentine dragons they emulate.");
 			}
-			if (earType == Ears.BEAR){
+			else if (earType == Ears.BEAR){
 				outputText("  A pair of two round fuzzy bear ears covered with [skin coat.color] and alert to sound stick out from your skull.");
 			}
-			if (earType == Ears.PANDA){
+			else if (earType == Ears.PANDA){
 				outputText("  A pair of two round fuzzy panda ears covered with black fur just like a panda and alert to sound stick out from your skull.");
 			}
-			if (earType == Ears.DISPLACER){
+			else if (earType == Ears.DISPLACER){
 				outputText("  A large long furry ears atop your head, always perked up to catch any stray sound.");
 			}
-			if (earType == Ears.MELKIE){
+			else if (earType == Ears.MELKIE){
 				outputText("  Your furry Melkie ears are long and flat, reaching all the way down to your waist.");
 			}
 			//</mod>

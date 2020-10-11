@@ -63,6 +63,7 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_WHITE_BLACK_VEINS:int = 10;
 	public static const PATTERN_VENOMOUS_MARKINGS:int = 11;
 	public static const PATTERN_USHI_ONI_ONNA_TATTOO:int = 12;
+	public static const PATTERN_SCAR_WINDSWEPT:int = 13;
 	// Don't forget to add new types in DebugMenu.as lists SKIN_BASE_TYPES or SKIN_COAT_TYPES
 	
 	public var base:SkinLayer;
@@ -308,6 +309,9 @@ public class Skin extends SaveableBodyPart {
 	}
 	public function hasLightningShapedTattoo():Boolean {
 		return base.pattern == PATTERN_LIGHTNING_SHAPED_TATTOO;
+	}
+	public function hasWindSweptScars():Boolean {
+		return base.pattern == PATTERN_SCAR_WINDSWEPT;
 	}
 	public function hasScarShapedTattoo():Boolean {
 		return base.pattern == PATTERN_SCAR_SHAPED_TATTOO;

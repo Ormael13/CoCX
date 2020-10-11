@@ -6642,7 +6642,7 @@ use namespace CoC;
 		public function raijuScore():Number {
 			Begin("Player","racialScore","raiju");
 			var raijuCounter:Number = 0;
-			if (ears.type == Ears.WEASEL)
+			if (ears.type == Ears.RAIJU || ears.type == Ears.WEASEL)
 				raijuCounter++;
 			if (eyes.type == Eyes.RAIJU)
 				raijuCounter++;
@@ -6728,48 +6728,50 @@ use namespace CoC;
 			return thunderbirdCounter;
 		}
 
-		//Thunderbird score
+		//Kamaitachi score
 		public function kamaitachiScore():Number {
 			Begin("Player","racialScore","thunderbird");
-			var thunderbirdCounter:Number = 0;
-			if (ears.type == Ears.ELFIN)
-				thunderbirdCounter++;
-			if (eyes.type == Eyes.RAIJU)
-				thunderbirdCounter++;
-			if (faceType == Face.HUMAN || faceType == Face.RAIJU_FANGS)
-				thunderbirdCounter++;
-			if (arms.type == Arms.HARPY)
-				thunderbirdCounter++;
-			if (wings.type == Wings.FEATHERED_LARGE)
-				thunderbirdCounter += 2;
-			if (lowerBody == LowerBody.HARPY)
-				thunderbirdCounter++;
-			if (tailType == Tail.THUNDERBIRD)
-				thunderbirdCounter++;
-			if (rearBody.type == RearBody.RAIJU_MANE)
-				thunderbirdCounter++;
-			if (skin.base.pattern == Skin.PATTERN_LIGHTNING_SHAPED_TATTOO)
-				thunderbirdCounter++;
-			if (hairType == Hair.STORM)
-				thunderbirdCounter++;
+			var KamaitachiCounter:Number = 0;
+			if (ears.type == Ears.WEASEL)
+				KamaitachiCounter++;
+			if (eyes.type == Eyes.WEASEL)
+				KamaitachiCounter++;
+			if (eyes.colour == "golden")
+				KamaitachiCounter++;
+			if (faceType == Face.RAIJU_FANGS)
+				KamaitachiCounter++;
+			if (arms.type == Arms.KAMAITACHI)
+				KamaitachiCounter++;
+			if (wings.type == Wings.WINDY_AURA)
+				KamaitachiCounter += 3;
+			if (lowerBody == LowerBody.WEASEL)
+				KamaitachiCounter++;
+			if (tailType == Tail.WEASEL)
+				KamaitachiCounter++;
+			if (skin.base.pattern == Skin.PATTERN_SCAR_WINDSWEPT)
+				KamaitachiCounter++;
+			if (hairType == Hair.WINDSWEPT)
+				KamaitachiCounter++;
+			if (hairColor == "blonde" || hairColor == "yellow" || hairColor == "caramel" || hairColor == "brown")
+				KamaitachiCounter++;
+			if (coatColor == "blonde" || hairColor == "yellow" || hairColor == "caramel" || hairColor == "brown")
+				KamaitachiCounter++;
 			if (findPerk(PerkLib.HeartOfTheStorm) >= 0)
-				thunderbirdCounter += 1;
+				KamaitachiCounter += 1;
 			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0)
-				thunderbirdCounter += 1;
+				KamaitachiCounter += 1;
 			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0)
-				thunderbirdCounter += 1;
-			if (hairColor == "purple" || hairColor == "light blue" || hairColor == "yellow" || hairColor == "white" || hairColor == "emerald" || hairColor == "turquoise")
-				thunderbirdCounter++;
+				KamaitachiCounter += 1;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
-				thunderbirdCounter += 50;
-			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && thunderbirdCounter >= 4)
-				thunderbirdCounter += 1;
-			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && thunderbirdCounter >= 8)
-				thunderbirdCounter += 1;
-			if (isGargoyle()) thunderbirdCounter = 0;
-			thunderbirdCounter = finalRacialScore(thunderbirdCounter, Race.THUNDERBIRD);
+				KamaitachiCounter += 50;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && KamaitachiCounter >= 4)
+				KamaitachiCounter += 1;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && KamaitachiCounter >= 8)
+				KamaitachiCounter += 1;
+			if (isGargoyle()) KamaitachiCounter = 0;
+			KamaitachiCounter = finalRacialScore(KamaitachiCounter, Race.KAMAITACHI);
 			End("Player","racialScore");
-			return thunderbirdCounter;
+			return KamaitachiCounter;
 		}
 
 		//Determine Mutant Rating
@@ -6883,22 +6885,6 @@ use namespace CoC;
 			mantisCounter = finalRacialScore(mantisCounter, Race.MANTIS);
 			End("Player","racialScore");
 			return mantisCounter;
-		}
-
-		//Kamaitachi score
-		public function KamaitachiScore():Number {
-			Begin("Player","racialScore","mantis");
-			var KamaitachiCounter:Number = 0;
-			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
-				KamaitachiCounter += 50;
-			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && KamaitachiCounter >= 4)
-				KamaitachiCounter++;
-			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && KamaitachiCounter >= 8)
-				KamaitachiCounter += 1;
-			if (isGargoyle()) KamaitachiCounter = 0;
-			KamaitachiCounter = finalRacialScore(KamaitachiCounter, Race.KAMAITACHI);
-			End("Player","racialScore");
-			return KamaitachiCounter;
 		}
 		
 		//Thunder Mantis score

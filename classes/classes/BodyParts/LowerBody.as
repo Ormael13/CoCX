@@ -72,6 +72,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const FROSTWYRM:int             = 62;
 	public static const USHI_ONI_ONNA:int         = 63;
 	public static const FLOWER_LILIRAUNE:int	  = 64;
+	public static const WEASEL:int                = 65;
 	// Don't forget to add new types in DebugMenu.as list LOWER_TYPE_CONSTANTS
 	
 	override public function set type(value:int):void {

@@ -28,7 +28,7 @@ public class Ears extends BodyPart {
 	public static const GOAT:int      = 24;
 	public static const ONI:int       = 25;
 	public static const ELVEN:int     = 26;
-	public static const WEASEL:int    = 27;
+	public static const RAIJU:int     = 27;
 	public static const BAT:int       = 28;
 	public static const VAMPIRE:int   = 29;//button 0 on 3rd page of metamorph
 	public static const RED_PANDA:int = 30;
@@ -41,6 +41,7 @@ public class Ears extends BodyPart {
 	public static const DISPLACER:int = 37;
 	public static const MELKIE:int 	  = 38;
 	public static const GREMLIN:int   = 39;
+	public static const WEASEL:int    = 27;
 	// Don't forget to add new types in DebugMenu.as list EAR_TYPE_CONSTANTS
 	
 	public function Ears() {

@@ -287,6 +287,8 @@
         <cell rect="501,90,49,59" name="torso_pattern/Blightning" dx="79" dy="64"/>
         <cell rect="551,90,49,59" name="torso_pattern/Btatoo" dx="79" dy="64"/>
         <cell rect="801,90,49,59" name="torso_pattern/Bvenom" dx="79" dy="64"/>
+		<cell rect="951,90,49,59" name="torso_pattern/BgazerTar" dx="79" dy="64"/>
+		<cell rect="1001,90,49,59" name="torso_pattern/BwindScars" dx="79" dy="64"/>
         <cell rect="1,150,49,59" name="arms_bg/human" dx="56" dy="64"/>
         <cell rect="51,150,49,59" name="arms_bg/fur" dx="56" dy="64"/>
         <cell rect="551,150,49,59" name="arms_bg/furracoon" dx="56" dy="64"/>
@@ -437,6 +439,7 @@
         <cell rect="451,390,49,59" name="legs_pattern/Bstripe" dx="79" dy="115"/>
         <cell rect="501,390,49,59" name="legs_pattern/Blightning" dx="79" dy="115"/>
         <cell rect="601,390,49,59" name="legs_pattern/Btatoo" dx="79" dy="115"/>
+		<cell rect="801,390,49,59" name="legs_pattern/BwindScars" dx="79" dy="115"/>
         <cell rect="51,450,49,59" name="feet/fur" dx="78" dy="115"/>
         <cell rect="101,450,49,59" name="feet/scales" dx="79" dy="115"/>
         <cell rect="551,450,49,59" name="feet/furracoon" dx="79" dy="115"/>
