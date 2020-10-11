@@ -119,7 +119,7 @@ package classes.Scenes
 			outputText("-New event perk: Zenji's influence 3. Gained by training with Zenji 30+ times. Effects: Increases strength, toughness, speed, wisdom & intelligence cap by 10%.\n");
 			outputText("-Artemis and Wild Hunt accuracy penalty was removed and max atk value rised form 25 to 60. Cost of both bows rised due to that by 1000 gems.\n");
 			outputText("-Both Enlighted and Corrupted perks will be permable at the same time during ascension to prevent cases when one of them been permed was causing errors in getting all needed perks for 9 tail of balance perk. That would also mean PC must spend 10 not 5 asc points since it's perming 2 perks at once.\n");
-			outputText("-New ascension perks: Ascension: Transhumanism (Str/Tou/Spe/Int/Wis/Lib/Sen) - one for each core stat aside corruption. each rank rise max cap of related stat by 40.\n");
+			outputText("-New ascension perks: Ascension: Transhumanism (Str/Tou/Spe/Int/Wis/Lib/Sen) - one for each core stat aside corruption. Each rank rise max cap of related stat by 40.\n");
 			outputText("-Limit on some of ascension perks was rised by 5 (meaning one more new game need to be played to reach new cap).\n");
 			outputText("-\n");
 			outputText("-\n");

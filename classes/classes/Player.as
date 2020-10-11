@@ -6665,11 +6665,15 @@ use namespace CoC;
 			if (hairColor == "purple" || hairColor == "light blue" || hairColor == "yellow" || hairColor == "white" || hairColor == "lilac" || hairColor == "green")
 				raijuCounter++;
 			if (findPerk(PerkLib.HeartOfTheStorm) >= 0)
-				raijuCounter += 1;
+				raijuCounter++;
 			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0)
-				raijuCounter += 1;
+				raijuCounter++;
 			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0)
-				raijuCounter += 1;
+				raijuCounter++;
+			if (findPerk(PerkLib.HeartOfTheStorm) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
+				raijuCounter++;
+			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
+				raijuCounter++;
 			if (findPerk(PerkLib.RaijusDescendant) >= 0 || findPerk(PerkLib.BloodlineRaiju) >= 0)
 				raijuCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
@@ -6708,13 +6712,17 @@ use namespace CoC;
 				thunderbirdCounter++;
 			if (hairType == Hair.STORM)
 				thunderbirdCounter++;
-			if (findPerk(PerkLib.HeartOfTheStorm) >= 0)
-				thunderbirdCounter += 1;
-			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0)
-				thunderbirdCounter += 1;
-			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0)
-				thunderbirdCounter += 1;
 			if (hairColor == "purple" || hairColor == "light blue" || hairColor == "yellow" || hairColor == "white" || hairColor == "emerald" || hairColor == "turquoise")
+				thunderbirdCounter++;
+			if (findPerk(PerkLib.HeartOfTheStorm) >= 0)
+				thunderbirdCounter++;
+			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0)
+				thunderbirdCounter++;
+			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0)
+				thunderbirdCounter++;
+			if (findPerk(PerkLib.HeartOfTheStorm) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
+				thunderbirdCounter++;
+			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
 				thunderbirdCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				thunderbirdCounter += 50;
@@ -6752,14 +6760,14 @@ use namespace CoC;
 				thunderbirdCounter++;
 			if (hairType == Hair.STORM)
 				thunderbirdCounter++;
+			if (hairColor == "purple" || hairColor == "light blue" || hairColor == "yellow" || hairColor == "white" || hairColor == "emerald" || hairColor == "turquoise")
+				thunderbirdCounter++;
 			if (findPerk(PerkLib.HeartOfTheStorm) >= 0)
 				thunderbirdCounter += 1;
 			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0)
 				thunderbirdCounter += 1;
 			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0)
 				thunderbirdCounter += 1;
-			if (hairColor == "purple" || hairColor == "light blue" || hairColor == "yellow" || hairColor == "white" || hairColor == "emerald" || hairColor == "turquoise")
-				thunderbirdCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				thunderbirdCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && thunderbirdCounter >= 4)
@@ -7899,6 +7907,10 @@ use namespace CoC;
 				alrauneCounter++;
 			if (findPerk(PerkLib.FloralOvariesFinalForm) >= 0)
 				alrauneCounter++;
+			if (findPerk(PerkLib.FloralOvaries) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
+				alrauneCounter++;
+			if (findPerk(PerkLib.FloralOvariesEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
+				alrauneCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				alrauneCounter += 50;
 			if (isGargoyle()) alrauneCounter = 0;
@@ -8853,6 +8865,20 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
 				metabolismMutations++;
 			return metabolismMutations;
+		}
+		public function maxOvariesMutations():Number {
+			var ovariesMutations:Number = 1;
+			if (findPerk(PerkLib.LactaBovinaOvaries) >= 0)
+				ovariesMutations--;
+			if (findPerk(PerkLib.FloralOvaries) >= 0)
+				ovariesMutations--;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
+				ovariesMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
+				ovariesMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
+				ovariesMutations++;
+			return ovariesMutations;
 		}
 
 		public function lactationQ():Number

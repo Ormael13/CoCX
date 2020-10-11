@@ -351,6 +351,16 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
+		public function requireOvariesMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxOvariesMutations() > 0;
+				},
+				text: "Free Ovaries Mutation Slot",
+				type: "ovariesmutation"
+			});
+			return this;
+		}
 		public function requireHungerEnabled():PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {

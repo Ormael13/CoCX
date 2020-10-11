@@ -3140,9 +3140,9 @@ public class PerkLib
 				"Grants cat-like flexibility.  Useful for dodging and 'fun'.");
 		public static const FloralOvaries:PerkType = mk("Floral Ovaries", "Floral Ovaries",
 				"Increase the potency of Alraune pollen.").withBuffs({'lib.mult':0.15});
-		public static const FloralOvariesEvolved:PerkType = mk("Floral Ovaries, (Evolved)", "Floral Ovaries, (Evolved)",
+		public static const FloralOvariesEvolved:PerkType = mk("Floral Ovaries (Evolved)", "Floral Ovaries (Evolved)",
 				"Further increase the potency of Alraune pollen. Males takes an extra 50% lust damage.").withBuffs({'lib.mult':0.15});
-		public static const FloralOvariesFinalForm:PerkType = mk("Floral Ovaries, (Final Form)", "Improved Floral Ovaries, (Final Form)",
+		public static const FloralOvariesFinalForm:PerkType = mk("Floral Ovaries (Final Form)", "Floral Ovaries (Final Form)",
 				"Further increase the potency of Alraune pollen. Alraune pollen has a 20% chance per round to fascinate your victim").withBuffs({'lib.mult':0.15});
 		public static const FreezingBreath:PerkType = mk("Freezing Breath (F)", "Freezing Breath (F)",
 				"Allows access to Fenrir (AoE) freezing breath attack.");
@@ -3167,9 +3167,9 @@ public class PerkLib
 				"Increases all laid eggs to large size so long as you have harpy legs and a harpy tail.");
 		public static const HeartOfTheStorm:PerkType = mk("Heart of the storm", "Heart of the storm",
 				"Increase the power of all Wind and Lightning racial abilities by 20%.").withBuffs({'speed.mult':0.15});
-		public static const HeartOfTheStormEvolved:PerkType = mk("Heart of the storm, (Evolved)", "Heart of the storm, (Evolved)",
+		public static const HeartOfTheStormEvolved:PerkType = mk("Heart of the storm (Evolved)", "Heart of the storm (Evolved)",
 				"Further increase the power of all Wind and Lightning abilities by 20% and Increase wind and electricity resistance by 20%.").withBuffs({'speed.mult':0.15});
-		public static const HeartOfTheStormFinalForm:PerkType = mk("Heart of the storm, (Final Form)", "Heart of the storm, (Final Form)",
+		public static const HeartOfTheStormFinalForm:PerkType = mk("Heart of the storm (Final Form)", "Heart of the storm (Final Form)",
 				"Further increase the power of all Wind and Lightning abilities by another 20% and Increases wind and electricity resistance by another 20%. You may fly without end so long as you got the ability to fly.").withBuffs({'speed.mult':0.15});
 		public static const HydraAcidBreath:PerkType = mk("Hydra acid breath", "Hydra acid breath",
 				"Allows access to a hydra acid breath attack.");
@@ -5404,7 +5404,7 @@ public class PerkLib
 			ElvishPeripheralNervSys.requirePerk(ElvenSense).requireCustomFunction(function (player:Player):Boolean {
                 return player.elfScore() >= 4;
             }, "Elf race");
-			FloralOvaries.requireCustomFunction(function (player:Player):Boolean {
+			FloralOvaries.requireOvariesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.alrauneScore() >= 13;
 			}, "Alraune race");
             FrozenHeart.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
@@ -5429,7 +5429,7 @@ public class PerkLib
                 return player.mouseScore() >= 12;
             }, "Mouse race");
 			HeartOfTheStorm.requireCustomFunction(function (player:Player):Boolean {
-						return player.raijuScore() >= 10 || player.thunderbirdScore() >= 10;
+						return player.raijuScore() >= 6 || player.thunderbirdScore() >= 10;
 			}, "Stormborn race");
 			HollowFangs.requireMouthMutationSlot().requirePerk(VampiricBloodsteam)
 				.requireCustomFunction(function (player:Player):Boolean {
@@ -5441,7 +5441,7 @@ public class PerkLib
             KitsuneThyroidGland.requireAnyPerk(EnlightenedKitsune, CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
                 return player.kitsuneScore() >= 5;
             }, "Kitsune race");
-            LactaBovinaOvaries.requireCustomFunction(function (player:Player):Boolean {
+            LactaBovinaOvaries.requireOvariesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
                 return player.hasVagina();
 				}, "is Female")
 				.requireCustomFunction(function (player:Player):Boolean {
@@ -5604,7 +5604,7 @@ public class PerkLib
                 return player.mouseScore() >= 12;
             }, "Mouse race");
 			HeartOfTheStormEvolved.requireLevel(6).requirePerk(HeartOfTheStorm).requireCustomFunction(function (player:Player):Boolean {
-				return player.raijuScore() >= 10 || player.thunderbirdScore() >= 10;
+				return player.raijuScore() >= 9 || player.thunderbirdScore() >= 11;
 			}, "Stormborn race");
 			ManticoreMetabolismEvolved.requireLevel(6)
 				.requirePerk(ManticoreMetabolism)
@@ -5936,7 +5936,7 @@ public class PerkLib
                 return player.mouseScore() >= 12;
             }, "Mouse race");
 			HeartOfTheStormFinalForm.requireLevel(18).requirePerk(HeartOfTheStormEvolved).requireCustomFunction(function (player:Player):Boolean {
-				return player.raijuScore() >= 10 || player.thunderbirdScore() >= 10;
+				return player.raijuScore() >= 12 || player.thunderbirdScore() >= 12;
 			}, "Stormborn race");
             LactaBovinaOvariesEvolved.requireLevel(18)
 				.requirePerk(LactaBovinaOvaries)
