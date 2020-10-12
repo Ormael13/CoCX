@@ -1896,7 +1896,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage = monster.lustVuln * damage;
 			//Clean up down to 1 decimal point
 			damage = Math.round(damage*10)/10;
-			monster.teased(monster.lustVuln * damage);
+			monster.teased(damage);
 		}
 		//New lines and moving on!
 		outputText("\n\n");

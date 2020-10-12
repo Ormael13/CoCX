@@ -1685,6 +1685,24 @@ public class Camp extends NPCAwareContent {
 				outputText("Neisa is hanging by a tree next to the [camp] practicing her swordplay on a makeshift dummy for the next expedition.\n\n");
 				buttons.add("Neisa", SceneLib.neisaFollower.neisaCampMenu).hint("Visit Neisa the shield maiden.");
 			}
+		//Zenji folower
+		if (flags[kFLAGS.ZENJI_PROGRESS] == 8) {
+			if (model.time.hours >= 7 && model.time.hours <= 18) {
+				if (rand(3) == 0) outputText("Zenji is around your camp, you see him currently relaxing atop a tree.");
+				else {
+					if (rand(2) == 0) outputText("Zenji is around your camp, you see him doing a routine of stretches.");
+					else outputText("Zenji is around your camp, you see him doing some push-ups.");
+				}
+			}
+			else {
+				if (rand(3) == 0) outputText("Zenji is around your camp, you see him resting on his bedroll.");
+				else {
+					if (rand(2) == 0) outputText("Zenji is around your camp, he is coating his fur in some ashes as he grooms himself.");
+					else outputText("Zenji is around your camp, it looks like he’s polishing his tusks and brushing his teeth with something.");
+				}
+			}
+			buttons.add("Zenji", SceneLib.zenjiScene.followerZenjiMainCampMenu).hint("Visit Zenji the troll.");
+		}
 			//Helspawn
 			if (helspawnFollower()) {
 				buttons.add(flags[kFLAGS.HELSPAWN_NAME], helSpawnScene.helspawnsMainMenu);

@@ -28,6 +28,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 	{
 		public var mutations:MutationsHelper = new MutationsHelper();
 		public static var Nursed:Boolean;
+		public static var NursedCooldown:int;
 
 		public function stateObjectName():String {
 			return "LunaFollower";
@@ -35,17 +36,26 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 
 		public function resetState():void {
 			Nursed = false;
+			NursedCooldown = 0;
 		}
 
 		public function saveToObject():Object {
 			return {
-				"LunaNursed": Nursed
+				"LunaNursed": Nursed,
+				"LunaNursedCooldown": NursedCooldown
 			};
 		}
 
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 			if (o) {
 				Nursed = o["LunaNursed"];
+				if ("LunaNursedCooldown" in o) {
+					// new save, can load
+					NursedCooldown = o["LunaNursedCooldown"];
+				} else {
+					// old save, still need to set NursedCooldown  to something
+					NursedCooldown = 0;
+				}
 			} else {
 				// loading from old save
 				resetState();
@@ -375,16 +385,17 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			outputText("Luna casts a few healing spells on you to help your recovery. She traces your skin with her fingers, closing wounds wherever they pass. This treatment is highly effective, but leaves you somewhat aroused.\n\n");
 			dynStats("lus", 33);
 			for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]){
-				player.removeCurse(stat, 5);
+				player.removeCurse(stat, 10);
 				if (stat != "sens")
 				{
-					player.removeCurse(stat+".mult", 0.05);
+					player.removeCurse(stat+".mult", 0.10);
 				}
 			}
 			lunaJealousy(-100);
 			lunaAffection(5);
 			HPChange(Math.round(player.maxHP() * .5), true);
 			Nursed = true;
+			NursedCooldown = 24;
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) {
 				outputText("\nLuna is giving a knowing smile, likely hoping you will jump at the opportunity, maybe she even did it on purpose. Do you take her here and now?\n\n");
 				menu();

@@ -358,6 +358,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const GargoyleTFSettingTracker1:StatusEffectType      = mk("Gargoyle TF Setting Tracker 1");
 		public static const GargoyleTFSettingTracker2:StatusEffectType      = mk("Gargoyle TF Setting Tracker 2");
 		public static const GargoyleTFSettingTracker3:StatusEffectType      = mk("Gargoyle TF Setting Tracker 3");
+		public static const GazerEyeStalksPlayer:StatusEffectType  			= mk("Gazer Eye Stalks Player");
 		public static const GlowingAsshole:StatusEffectType                 = mk("Glowing Asshole");
 		public static const GlowingNipples:StatusEffectType                 = mk("Glowing Nipples");
 		public static const GolemScavenge:StatusEffectType             		= mk("Golem Scavenge");

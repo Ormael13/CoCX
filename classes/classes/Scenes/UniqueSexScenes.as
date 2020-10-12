@@ -239,12 +239,12 @@ package classes.Scenes
 			outputText("Most creatures on Mareth cares little for being raped, but pain and suffering is a whole different concept. At first " + monster.a + monster.short + " tenses up in shock then stops struggling not to further incur your wrath. In response to " + monster.pronoun3 + " you sarcastically taunt " + monster.pronoun2 + ".\n\n");
 			outputText("\"<i>That's a good buttslut right there. Now let's have a look at the material I will be having my fun with.</i>\"\n\n");
 			outputText("You force " + monster.a + monster.short + " on " + monster.pronoun3 + " belly as you sit on " + monster.pronoun3 + " back releasing " + monster.pronoun3 + " neck from your tail noose and aiming your now still burning whip-like appendage for a new destination. Your ride shakes a little and you decide to properly tell it to stay still by wiping your tail across " + monster.pronoun3 + " ass cheeks. " + monster.capitalA + monster.short + " screams in pain as your tail leaves a pair of red marks across " + monster.pronoun3 + " flesh then finally gets the point.\n\n");
-			outputText("Once your well aligned your tail darts in and forces its way through " + monster.a + monster.short + " welcoming ass hole. You gasp as inch after inch of your tail fills your partner all the way up the bowels. You could even see the bumps of your tail in " + monster.pronoun3 + " stomach if you wanted to. Now well inside you begin to work that hole, stretching it on your passage. While you rape that anus with your tail your hands aren’t left idle and you use them to fiercely masturbate, well intent on covering the back of your unwilling partner with your own personal markings. You feel " + monster.a + monster.short + " moan, " + monster.pronoun3 + " anal ring tightening around your tail, ");
+			outputText("Once you're well aligned your tail darts in and forces its way through " + monster.a + monster.short + " welcoming ass hole. You gasp as inch after inch of your tail fills your partner all the way up the bowels. You could even see the bumps of your tail in " + monster.pronoun3 + " stomach if you wanted to. Now well inside you begin to work that hole, stretching it on your passage. While you rape that anus with your tail your hands aren’t left idle and you use them to fiercely masturbate, well intent on covering the back of your unwilling partner with your own personal markings. You feel " + monster.a + monster.short + " moan, " + monster.pronoun3 + " anal ring tightening around your tail, ");
 			outputText("as you keep sliding in and out faster and faster with your own impending orgasm. The dam finally breaks as your ");
 			if (player.hasCock()) outputText("[cock]");
 			if (player.gender == 3) outputText(" and ");
 			if (player.hasVagina()) outputText("[pussy]");
-			outputText(" make a fine mess on " + monster.a + monster.short + " back. You pull your tail out of " + monster.pronoun3 + " abused hole utterly satisfied before wiping " + monster.pronoun3 + " ass once or twice as a parting gift, making " + monster.pronoun2 + " double in pain. Gosh, it feels so good to put those freaks in their place.\n\n");
+			outputText(" make a fine mess on " + monster.a + monster.short + "'s back. You pull your tail out of " + monster.pronoun3 + " abused hole utterly satisfied before wiping " + monster.pronoun3 + " ass once or twice as a parting gift, making " + monster.pronoun2 + " double in pain. Gosh, it feels so good to put those freaks in their place.\n\n");
 			outputText("You head back to camp both morally and physically satisfied of your deeds.\n\n");
 			player.sexReward("Default", "Default", true, false);
 			statScreenRefresh();
@@ -447,7 +447,7 @@ package classes.Scenes
 
 		public function Cooldown():void {
 			clearOutput();
-			outputText("You eye " + monster.a + monster.short + " with anticipation. Being a "+player.race+", your body temperature is constantly burning way above normal and right now your [pussy] is like 40° celcius in summer with high humidity. " +
+			outputText("You eye " + monster.a + monster.short + " with anticipation. Being a "+player.race()+", your body temperature is constantly burning way above normal and right now your [pussy] is like 40° celcius in summer with high humidity. " +
 					"A little cooling is in order and this unlucky rift denizen is about to serve as natural refreshment for your burning hot body.\n\n" +
 					"You proceed to force " + monster.a + monster.short + " on [monster his] back");
 			if (monster.wolfCocks() > 0) outputText(", your warm body slowly forcing his puppy pecker out of its sheath");

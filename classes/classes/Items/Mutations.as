@@ -9463,7 +9463,6 @@ public final class Mutations extends MutationsHelper {
         }
 
         public function voltageTopaz(itemused:Boolean, player:Player):void {
-            player.slimeFeed();
             if (itemused) clearOutput();
             var changes:Number = 0;
             var changeLimit:Number = 1;
@@ -9779,6 +9778,153 @@ public final class Mutations extends MutationsHelper {
             }
             flags[kFLAGS.TIMES_TRANSFORMED] += changes;
         }
+
+    public function windstormEmerald(itemused:Boolean, player:Player):void {
+        if (itemused) clearOutput();
+        var changes:Number = 0;
+        var changeLimit:Number = 1;
+        var temp2:Number = 0;
+        if (itemused) {
+            if (rand(2) == 0) changeLimit++;
+            if (rand(3) == 0) changeLimit++;
+            changeLimit += additionalTransformationChances();
+            outputText("As you admire the shiny jewel, the wind around you suddenly becomes stronger on sending debris around, before a sudden blade of winds runs through your body leaving a bleeding cut! Rather then pain the fresh wound begins to throb with increasing pleasure. You let out a howling moan, the jewel crumbles to dust before the feeling slowly subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
+        }
+        //Stats
+        if (rand(4) == 0 && changes < changeLimit) {
+            outputText("\n\nYou roll your tongue over your lips as residual static run all over your body. Your nipples are tight and your groin warmed with jolting pleasure. You growl as you feel hornier and hornier before the feeling ebbs. Part of you says you should be concerned by this turn of events, but there are <i>sooo</i> many cuties out there to molest!");
+            MutagenBonus("lib", 2);
+            if (player.lib < 60) MutagenBonus("lib", 2);
+            changes++;
+        }
+        if (player.sens < 70 && rand(4) == 0 && changes < changeLimit) {
+            outputText("\n\nYour skin tingles with delight as every slight movement of the wind feels more distinct. Thoughts about how it would feel against your sexual spots slip into your mind before you can even stop them, and you start idly ");
+            if (player.gender == 1 || player.gender == 3) outputText("stroking your [cock]");
+            if (player.gender == 3) outputText(" and ");
+            if (player.gender > 1) outputText("fingering your [clit]");
+            outputText(". This is going to be fun.");
+            dynStats("sen", 1);
+            if (player.sens < 40) dynStats("sen", 1);
+            changes++;
+        }
+        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        //Sexual
+        if (player.vaginas.length > 0 && player.breastRows[0].breastRating < 7 && changes < changeLimit && rand(3) == 0) {
+            player.growTits(1 + rand(2), 1, false, 3);
+            outputText("\n\nYou feel a surge of energy and heat deep in your [breasts]. They wobble and tingle before suddenly bursting forward, almost throwing you off balance. They jostle a bit before settling into their new size.");
+            if (player.breastRows.length == 0) {
+                outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
+                player.createBreastRow();
+                player.breastRows[0].breasts = 2;
+                //player.breastRows[0].breastsPerRow = 2;
+                player.breastRows[0].nipplesPerBreast = 1;
+                player.breastRows[0].breastRating = 2;
+                outputText("\n");
+            }
+        }
+        //Physical
+        var raiju_hair:Array = ["purple", "light blue", "yellow", "white", "lilac", "green"];
+        if (!InCollection(player.hairColor, raiju_hair) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+            player.hairColor = randomChoice(raiju_hair);
+            outputText("\n\nYour hair stands up on end as bolts of lightning run through each strand, changing them to a <b>[haircolor] color!</b>");
+        }
+        if (player.lowerBody != LowerBody.RAIJU && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+            if (player.lowerBody == LowerBody.HUMAN) {
+                outputText("\n\nYou have trouble standing as multiple flashes of sensation run across your legs. Sitting down before you accidentally hurt yourself, you watch with apprehension as your legs begin to shift, fluffy patches of fur traveling up your legs until they reach your knees. You yelp as the bones in your feet split and rearrange themselves into paws. Eventually, the sensation ebbs and you slowly get used to your <b>Raiju paws!</b>");
+                setLowerBody(LowerBody.RAIJU);
+            } else humanizeLowerBody();
+            changes++;
+        }
+        if (player.lowerBody == LowerBody.RAIJU && player.arms.type != Arms.RAIJU && changes < changeLimit && rand(3) == 0) {
+            if (player.arms.type == Arms.HUMAN) {
+                outputText("\n\nYour nails tingle as they elongate into white claws! They look quite dangerous, but you feel the strange need to use them to stimulate your ");
+                if (player.gender == 1 || player.gender == 3) outputText("[cock]");
+                if (player.gender == 3) outputText(" and ");
+                if (player.gender > 1) outputText("[clit]");
+                outputText(". ");
+                if (player.cor >= 50) outputText("You give a lusty smile, thinking that it wouldn't be so bad...");
+                else outputText("You scowl, shaking away the impure thoughts.");
+                setArmType(Arms.RAIJU);
+            } else humanizeArms();
+            changes++;
+        }
+        if (player.arms.type == Arms.RAIJU && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\nYou shiver in delight as fur begins to form on your forearms, high voltage running along from your shoulders to your fingertips. Before you know it your hands turned to paws and your sharp nails to vicious looking claws coated with electricity. You can't wait to wrap those around a juicy cock or dip them into a waiting snatch.");
+            if (player.coatColor == "") player.coatColor = player.hairColor;
+            setArmType(Arms.RAIJU_2);
+            changes++;
+        }
+        if (player.arms.type == Arms.RAIJU_2 && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\nFur falls of your arms as your pawed hands revert back to human ones. Almost human ones actually as you nail retained their claw like sharpness.");
+            setArmType(Arms.RAIJU);
+            changes++;
+        }
+        if (player.arms.type == Arms.RAIJU && player.tailType != Tail.RAIJU && changes < changeLimit && rand(3) == 0) {
+            if (player.tailType == Tail.NONE) outputText("\n\nYou yelp as a huge lightning bolt bursts out of the area just above your ass. You watch in amazement as it twists and curls, slowly becoming thicker and thicker before it fizzles out, <b>leaving you with a silky Raiju tail!</b>");
+            else outputText("\n\nYou nearly jump out of your skin as your tail bursts into a huge lightning bolt. You watch as it curls and twists around before it fizzles out.  <b>You now have a silky Raiju tail!</b>");
+            setTailType(Tail.RAIJU);
+            changes++;
+        }
+        if (player.tailType == Tail.RAIJU && player.rearBody.type != RearBody.RAIJU_MANE && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\nThe base of your neck tingles with delight as little sparks travel across your skin. Strands of hair quickly grow in, giving you a [haircolor] collar of fur around your neck. Several strands of your new fur collar are quite dark, arcing around it like lightning.");
+            setRearBody(RearBody.RAIJU_MANE);
+            changes++;
+        }
+        if (player.rearBody.type == RearBody.RAIJU_MANE && player.wings.type == Wings.NONE && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\nYou've become so charged in electricity that your movements are sometimes accompanied by the sound of static. <b>It's going to be difficult to hide your presence with that thunderous aura of yours.</b>");
+            setWingType(Wings.THUNDEROUS_AURA, "thunderous aura");
+            changes++;
+        }
+        if (player.wings.type != Wings.THUNDEROUS_AURA && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+            removeWings();
+            changes++;
+        }
+        if (player.rearBody.type == RearBody.RAIJU_MANE && player.faceType != Face.RAIJU_FANGS && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\nY");
+            if (player.faceType != Face.HUMAN) outputText("our face suddenly mold back into it’s former human shape. However y");
+            outputText("ou feel your two canines grow bigger and slightly sharper, not unlike those of a weasel or in your case a raiju. <b>You now have raiju canines.</b>");
+            setFaceType(Face.RAIJU_FANGS);
+            changes++;
+        }
+        if (player.faceType == Face.RAIJU_FANGS && player.ears.type != Ears.WEASEL && changes < changeLimit && rand(3) == 0) {
+            if (player.ears.type == Ears.HUMAN) {
+                outputText("\n\nYour ears twitch as jolts of lightning flows through them, replacing all sound with crackling pops. You moan as the lightning arcs up to the top of your head before fanning out to the side. Hearing suddenly returns as you run your hands across your <b>new raiju ears!</b>");
+                setEarType(Ears.WEASEL);
+            } else humanizeEars();
+            changes++;
+        }
+        var raiju_eyes_color:Array = ["blue", "green", "turquoise"];
+        if (player.ears.type == Ears.WEASEL && player.eyes.type != Eyes.RAIJU && changes < changeLimit && rand(3) == 0) {
+            if (player.eyes.type == Eyes.HUMAN) {
+                player.eyes.colour = randomChoice(raiju_eyes_color);
+                outputText("\n\nBright lights flash into your vision as your eyes glow with electric light. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>glowing [eyecolor] bestial slitted eyes staring back at you.</b>");
+                setEyeType(Eyes.RAIJU);
+            } else humanizeEyes();
+            changes++;
+        }
+        if (player.hairType != 11 && changes < changeLimit && rand(4) == 0) {
+            outputText("\n\nThe ends of your hair seem to split before a quick jolt smacks you in the back of the head. Irritated and confused, you rub the back of your head only to get a small zap in return. You wander over to a puddle and make note of several glowing strands of hair shaped like the typical stylized lightning bolt. There's even a single strand that floats just off the side of your face!");//<b></b>
+            setHairType(Hair.STORM);
+            changes++;
+        }
+        if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
+            outputText("\n\nYou suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>");
+            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
+                outputText("\n\n<b>Genetic Memory: Lighting Tattoed Skin - Memorized!</b>\n\n");
+                player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
+            }
+            player.skin.base.pattern = Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
+            player.skin.base.adj = "lightning shaped tattooed";
+            changes++;
+        }
+        if (player.hairType != 4 && player.hairLength < 26 && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+            temp2 += 1 + rand(3);
+            outputText("\n\nYour hair tingles as it grows longer, adding " + temp2 + " inches of length to your scalp.");
+            player.hairLength += temp2;
+            changes++;
+        }
+        flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+    }
 
         public function strangeFlower(player:Player):void {
             clearOutput();

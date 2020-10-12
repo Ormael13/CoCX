@@ -2388,7 +2388,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Luna nursing reset
 			if (LunaFollower.Nursed) {
-				LunaFollower.Nursed = false;
+				LunaFollower.NursedCooldown -= 1
+				if (LunaFollower.NursedCooldown == 0)
+				{
+					LunaFollower.Nursed = false;
+				}
 			}
 			//Wrap it up
 			return needNext;

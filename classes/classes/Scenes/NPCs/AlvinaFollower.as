@@ -115,9 +115,9 @@ public function alvinaThirdEncounterYes():void
 	outputText("This is clearly the laboratory of a wizard and not the good kind. Pentagrams are etched everywhere. There's clearly humanoid bones on a table, and the room itself is decorated with quite a few Lethicite crystals -- proof of its owner's fiendish successes. You turn to leave the room, having seen more than enough, when you bump into a wall that wasn’t there earlier.\n\n");
 	outputText("\"<i>Leaving so soon [name]? I didn’t give you permission yet.</i>\"\n\n");
 	outputText("At the other side of the laboratory stands Alvina. She's smiling under her hood.\n\n");
-	outputText("\"<i>I see you finally made it here [name], you did… An excellent job. I can only applaud your competence. ");
+	outputText("\"<i>I see you finally made it here [name], you did… An excellent job. I can only applaud your competence. </i>");
 	if (flags[kFLAGS.DEFEATED_ZETAZ] > 0) {
-		outputText("Though you had no idea that I set you on this path on purpose all along, did you? You could have gone anywhere, or got defeated by a random fiend and lost yourself, but you gladly acted like a perfect pawn and did everything just as I had planned shuting down the factory and");
+		outputText("<i>Though you had no idea that I set you on this path on purpose all along, did you? You could have gone anywhere, or got defeated by a random fiend and lost yourself, but you gladly acted like a perfect pawn and did everything just as I had planned shuting down the factory and</i>");
 		if (flags[kFLAGS.MET_MARAE_CORRUPTED] > 0) {
 			outputText("<i> corrupted Marae into a demon.</i>");
 		}
@@ -127,8 +127,8 @@ public function alvinaThirdEncounterYes():void
 		}
 		outputText("<i> setting up the stage for my plans.</i>");
 	}
-	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("You even defeated Lethice for me, which I will admit is highly convenient she was way to hardheaded for me to properly redirect as I pleased.</i>");
-	addButton(0, "Next", alvinaThirdEncounterYesContinue);
+	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("<i>You even defeated Lethice for me, which I will admit is highly convenient she was way to hardheaded for me to properly redirect as I pleased.</i>");
+	doNext(alvinaThirdEncounterYesContinue);
 }
 public function alvinaThirdEncounterYesContinue():void
 {

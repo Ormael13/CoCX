@@ -189,6 +189,5 @@ class PerkTreeEntry {
 
 	public function PerkTreeEntry(perk:PerkType) {
 		this.perk = perk;
-		this.ctxt = perk.allRequirementDesc();
 	}
 }
