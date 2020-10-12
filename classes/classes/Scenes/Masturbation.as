@@ -3454,7 +3454,7 @@ public class Masturbation extends BaseContent {
 				if (player.cocks[tentacle].cockType == CockTypesEnum.TENTACLE ||
 						player.cocks[tentacle].cockType == CockTypesEnum.STAMEN) break;
 			}
-			for (var x:int = tentacle + 1; x < player.cocks.length; x++) { //Find the biggest tentacle cock you've got
+			for (x = tentacle + 1; x < player.cocks.length; x++) { //Find the biggest tentacle cock you've got
 				if ((player.cocks[x].cockType == CockTypesEnum.TENTACLE  ||
 						player.cocks[tentacle].cockType == CockTypesEnum.STAMEN) && player.cocks[x].cArea() > player.cocks[tentacle].cArea()) tentacle = x;
 			}
@@ -3592,12 +3592,13 @@ public class Masturbation extends BaseContent {
 		//Upon selecting the option to masturbate you should have the option to fuck your own ass if you have a tentacle dick
 		//Replace n with the tentacle cock number
 		private function tentacleGoesUpYerPooperNewsAtEleven():void {
+			var x:int = -1;
 			var tentacle:int;
 			for (tentacle = 0; tentacle < player.cocks.length; tentacle++) {
 				if (player.cocks[tentacle].cockType == CockTypesEnum.TENTACLE ||
 					player.cocks[tentacle].cockType == CockTypesEnum.STAMEN) break;
 			}
-			for (var x:int = tentacle + 1; x < player.cocks.length; x++) { //Find the biggest tentacle cock you've got
+			for (x = tentacle + 1; x < player.cocks.length; x++) { //Find the biggest tentacle cock you've got
 				if ((player.cocks[x].cockType == CockTypesEnum.TENTACLE  ||
 					 player.cocks[tentacle].cockType == CockTypesEnum.STAMEN) && player.cocks[x].cArea() > player.cocks[tentacle].cArea()) tentacle = x;
 			}
@@ -3665,11 +3666,12 @@ public class Masturbation extends BaseContent {
 		}
 		
 		private function stamenGoesUpYerPooperNewsAtEleven():void {
+			var x:int = -1;
 			var tentacle:int;
 			for (tentacle = 0; tentacle < player.cocks.length; tentacle++) {
 				if (player.cocks[tentacle].cockType == CockTypesEnum.STAMEN) break;
 			}
-			for (var x:int = tentacle + 1; x < player.cocks.length; x++) { //Find the biggest tentacle cock you've got
+			for (x = tentacle + 1; x < player.cocks.length; x++) { //Find the biggest tentacle cock you've got
 				if (player.cocks[tentacle].cockType == CockTypesEnum.STAMEN && player.cocks[x].cArea() > player.cocks[tentacle].cArea()) tentacle = x;
 			}
 			clearOutput();
@@ -3896,4 +3898,4 @@ public class Masturbation extends BaseContent {
 			}
 		}
 	}
-}
+}

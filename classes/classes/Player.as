@@ -2250,8 +2250,8 @@ use namespace CoC;
 			if (upperGarmentName == "Technomancer bra") mult -= 15;
 			if (lowerGarmentName == "Technomancer panties") mult -= 15;
 			if (findPerk(PerkLib.LightningAffinity) >= 0) mult -= 50;
-			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) mult -= 20;
-			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) mult -= 20;
+			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) mult -= 10;
+			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) mult -= 30;
 			if (jewelryEffectId == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude3;
@@ -6333,11 +6333,15 @@ use namespace CoC;
 			if (biggestTitSize() > 19 || (cocks.length > 18))
 				orcaCounter++;
 			if (findPerk(PerkLib.WhaleFat) >= 0)
-				orcaCounter += 1;
+				orcaCounter++;
 			if (findPerk(PerkLib.WhaleFatEvolved) >= 0)
-				orcaCounter += 1;
+				orcaCounter++;
 			if (findPerk(PerkLib.WhaleFatFinalForm) >= 0)
-				orcaCounter += 1;
+				orcaCounter++;
+			if (findPerk(PerkLib.WhaleFat) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
+				orcaCounter++;
+			if (findPerk(PerkLib.WhaleFatEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
+				orcaCounter++;
 			if (faceType != Face.ORCA)
 				orcaCounter = 0;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
@@ -7395,11 +7399,15 @@ use namespace CoC;
 			if (horns.type != Horns.UNICORN && horns.type != Horns.BICORN && (wings.type == Wings.FEATHERED_ALICORN || wings.type == Wings.NIGHTMARE))
 				unicornCounter = 0;
 			if (findPerk(PerkLib.EclipticMind) > 0)
-				unicornCounter += 1;
+				unicornCounter++;
 			if (findPerk(PerkLib.EclipticMindEvolved) > 0)
-				unicornCounter += 1;
+				unicornCounter++;
 			if (findPerk(PerkLib.EclipticMindFinalForm) > 0)
-				unicornCounter += 1;
+				unicornCounter++;
+			if (findPerk(PerkLib.EclipticMind) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
+				unicornCounter++;
+			if (findPerk(PerkLib.EclipticMindEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
+				unicornCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				unicornCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && unicornCounter >= 4)
@@ -7477,11 +7485,15 @@ use namespace CoC;
 			if (findPerk(PerkLib.TwinHeartFinalForm) > 0)
 				unicornCounter += 2;
 			if (findPerk(PerkLib.EclipticMind) > 0)
-				unicornCounter += 1;
+				unicornCounter++;
 			if (findPerk(PerkLib.EclipticMindEvolved) > 0)
-				unicornCounter += 1;
+				unicornCounter++;
 			if (findPerk(PerkLib.EclipticMindFinalForm) > 0)
-				unicornCounter += 1;
+				unicornCounter++;
+			if ((findPerk(PerkLib.TwinHeart) >= 0 || findPerk(PerkLib.EclipticMind) >= 0) && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
+				unicornCounter++;
+			if ((findPerk(PerkLib.TwinHeartEvolved) >= 0 || findPerk(PerkLib.EclipticMindEvolved) >= 0) && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
+				unicornCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				unicornCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && unicornCounter >= 4)
@@ -7553,11 +7565,15 @@ use namespace CoC;
 			if (hasVagina() && vaginaType() == VaginaClass.EQUINE)
 				alicornCounter++;
 			if (findPerk(PerkLib.EclipticMind) > 0)
-				alicornCounter += 1;
+				alicornCounter++;
 			if (findPerk(PerkLib.EclipticMindEvolved) > 0)
-				alicornCounter += 1;
+				alicornCounter++;
 			if (findPerk(PerkLib.EclipticMindFinalForm) > 0)
-				alicornCounter += 1;
+				alicornCounter++;
+			if (findPerk(PerkLib.CatlikeNimbleness) >= 0 && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
+				alicornCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
+				alicornCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				alicornCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && alicornCounter >= 4)
@@ -7641,11 +7657,15 @@ use namespace CoC;
 			if (findPerk(PerkLib.TwinHeartFinalForm) > 0)
 				alicornCounter += 2;
 			if (findPerk(PerkLib.EclipticMind) > 0)
-				alicornCounter += 1;
+				alicornCounter++;
 			if (findPerk(PerkLib.EclipticMindEvolved) > 0)
-				alicornCounter += 1;
+				alicornCounter++;
 			if (findPerk(PerkLib.EclipticMindFinalForm) > 0)
-				alicornCounter += 1;
+				alicornCounter++;
+			if ((findPerk(PerkLib.TwinHeart) >= 0 || findPerk(PerkLib.EclipticMind) > 0) && findPerk(PerkLib.ChimericalBodySemiAdvancedStage) >= 0)
+				alicornCounter++;
+			if ((findPerk(PerkLib.TwinHeartEvolved) >= 0 || findPerk(PerkLib.EclipticMindEvolved) > 0) && findPerk(PerkLib.ChimericalBodySemiPeerlessStage) >= 0)
+				alicornCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				alicornCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && alicornCounter >= 4)
@@ -8688,10 +8708,10 @@ use namespace CoC;
 			return hiddenJobs2;
 		}
 		public function freeHiddenJobsSlots():Number {
-			var hiddenJobs2:Number = 0;
-			hiddenJobs2 += maxHiddenJobs();
-			hiddenJobs2 -= currentHiddenJobs();
-			return hiddenJobs2;
+			var hiddenJobs3:Number = 0;
+			hiddenJobs3 += maxHiddenJobs();
+			hiddenJobs3 -= currentHiddenJobs();
+			return hiddenJobs3;
 		}
 		public function currentPrestigeJobs():Number {
 			var prestigeJobs1:Number = 0;
@@ -9649,6 +9669,12 @@ use namespace CoC;
 			maxIntCap1 += 5 * perkv1(PerkLib.AscensionTranshumanism);
 			maxWisCap1 += 5 * perkv1(PerkLib.AscensionTranshumanism);
 			maxLibCap1 += 5 * perkv1(PerkLib.AscensionTranshumanism);
+			maxStrCap1 += 40 * perkv1(PerkLib.AscensionTranshumanismStr);
+			maxTouCap1 += 40 * perkv1(PerkLib.AscensionTranshumanismTou);
+			maxSpeCap1 += 40 * perkv1(PerkLib.AscensionTranshumanismSpe);
+			maxIntCap1 += 40 * perkv1(PerkLib.AscensionTranshumanismInt);
+			maxWisCap1 += 40 * perkv1(PerkLib.AscensionTranshumanismWis);
+			maxLibCap1 += 40 * perkv1(PerkLib.AscensionTranshumanismLib);
 			addStatusValue(StatusEffects.StrTouSpeCounter1, 1, maxStrCap1);
 			addStatusValue(StatusEffects.StrTouSpeCounter1, 2, maxTouCap1);
 			addStatusValue(StatusEffects.StrTouSpeCounter1, 3, maxSpeCap1);

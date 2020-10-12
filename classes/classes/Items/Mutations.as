@@ -9784,7 +9784,7 @@ public final class Mutations extends MutationsHelper {
             clearOutput();
             if (player.lowerBody == LowerBody.PLANT_FLOWER) {
                 outputText("Having no idea of what could happen when you take a whiff of this obviously corrupted plant, you head to the forest in order to find some privacy.");
-                if (silly) {
+                if (silly()) {
                     outputText(" You have the feeling you might be taunting Murphy.");
                 }
                 outputText("\n\nFinally, you smell the flower, glorious! Soon a giddy smile grows on your face as arousal flushes your skin. As the unknown aphrodisiac gets to work on you,  " +
@@ -14448,10 +14448,9 @@ public final class Mutations extends MutationsHelper {
             }
 
             //Chitin skin
-            var MantisColor:Array = ["green", "turquoise", "emerald"];
             if (changes < changeLimit && player.hasPartialCoat(Skin.CHITIN) && player.tailType == Tail.MANTIS_ABDOMEN && rand(2) == 0) {
-                var randomColor:String = randomChoice(MantisColor);
-                growChitin(randomColor);
+                var randomColorF:String = randomChoice(MantisColor);
+                growChitin(randomColorF);
                 if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
                     outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
                     player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);
@@ -16480,4 +16479,4 @@ public final class Mutations extends MutationsHelper {
             HPChange(Math.round(player.maxHP() * 0.1), true);
         }
     }
-}
+}

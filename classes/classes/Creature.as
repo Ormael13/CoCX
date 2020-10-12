@@ -300,7 +300,7 @@ public class Creature extends Utils
 		public var libStat:PrimaryStat = _stats.findStat('lib') as PrimaryStat;
 		public function get lib():Number { return Math.round(libStat.value); }
 
-		public function trainStat(statName: String, amount: Number, limit: Number){
+		public function trainStat(statName: String, amount: Number, limit: Number):void {
 			var stat:PrimaryStat = statStore.findStat(statName) as PrimaryStat;
 			if (stat.core.value < limit){
 				stat.core.value += amount;

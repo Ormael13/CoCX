@@ -1482,7 +1482,8 @@ import coc.view.MainView;
 			}
 		}
 		private function noHistoryAtAllCuzYouAscendedTooManyTimesAlready():void {
-			player.perkPoints += 12;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 11) player.perkPoints += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] + 1);
+			else player.perkPoints += 12;
 			flags[kFLAGS.HISTORY_PERK_SELECTED] = 1;
 			completeCharacterCreation();
 		}
