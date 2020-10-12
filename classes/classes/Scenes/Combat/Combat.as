@@ -3417,7 +3417,7 @@ public class Combat extends BaseContent {
                     outputText("You claw viciously at your opponent tearing away at its flesh.");
                 }
                 else {
-                    var DamageMultiplier:Number = 1.5;
+                    DamageMultiplier *= 1.5;
                     outputText("You slash at your opponent with your scythes leaving deep wounds");
                     if (player.arms.type == Arms.KAMAITACHI){
                         outputText(" that bleeds profusely");
@@ -3818,14 +3818,14 @@ public class Combat extends BaseContent {
                 damage += damage1;
             }
             if ((player.isSwordTypeWeapon() || player.isAxeTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade)) {
-                var damage1:Number = damage;
-                if (monster.hasPerk(PerkLib.IceNature)) damage1 += (damage1 * 0.5);
-                if (monster.hasPerk(PerkLib.FireVulnerability)) damage1 += (damage1 * 0.2);
-                if (monster.hasPerk(PerkLib.IceVulnerability)) damage1 += (damage1 * 0.05);
-                if (monster.hasPerk(PerkLib.FireNature)) damage1 += (damage1 * 0.02);
-                if (player.hasPerk(PerkLib.FireAffinity)) damage1 *= 2;
+                var damage2:Number = damage;
+                if (monster.hasPerk(PerkLib.IceNature)) damage2 += (damage2 * 0.5);
+                if (monster.hasPerk(PerkLib.FireVulnerability)) damage2 += (damage2 * 0.2);
+                if (monster.hasPerk(PerkLib.IceVulnerability)) damage2 += (damage2 * 0.05);
+                if (monster.hasPerk(PerkLib.FireNature)) damage2 += (damage2 * 0.02);
+                if (player.hasPerk(PerkLib.FireAffinity)) damage2 *= 2;
                 damage += scalingBonusLibido() * 0.20;
-                damage += damage1;
+                damage += damage2;
             }
             if (player.weapon == weapons.BFGAUNT) damage *= 4;
             if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
@@ -5229,9 +5229,9 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
         if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
         if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
-        if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0) damage *= 1.20;
-        if (player.findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) damage *= 1.20;
-        if (player.findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) damage *= 1.20;
+        if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0) damage *= 1.1;
+        if (player.findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) damage *= 1.2;
+        if (player.findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) damage *= 1.3;
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -6178,7 +6178,7 @@ public class Combat extends BaseContent {
 
         //Lust storm
         if (player.hasStatusEffect(StatusEffects.lustStorm)) {
-            var damage:Number = scalingBonusIntelligence() * spellModWhite();
+            var damage0:Number = scalingBonusIntelligence() * spellModWhite();
             //Determine if critical hit!
             var crit1:Boolean = false;
             var critChance1:int = 5;
@@ -6186,16 +6186,16 @@ public class Combat extends BaseContent {
             if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance1 = 0;
             if (rand(100) < critChance1) {
                 crit1 = true;
-                damage *= 1.75;
+                damage0 *= 1.75;
             }
             //High damage to goes.
-            damage = magic.calcVoltageModImpl(damage);
-            if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-            if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+            damage0 = magic.calcVoltageModImpl(damage);
+            if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage0 *= (1 + (player.lust100 * 0.01));
+            if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage0 *= 4;
             if (player.hasPerk(PerkLib.Apex)) lustDmgA *= 1.50;
             if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgA *= 1.50;
-            damage = damage/2;
-            damage = Math.round(damage);
+            damage0 = damage0/2;
+            damage0 = Math.round(damage0);
             dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
             var lustDmgF:Number = 20 + rand(6);
             var lustBoostToLustDmg:Number = 0;
@@ -6264,14 +6264,14 @@ public class Combat extends BaseContent {
             lustDmgF = lustDmgF/2;
             lustDmgF = Math.round(lustDmgF);
             outputText("Your opponent is struck by lightning as your lust storm rages on.")
-            damage = doLightingDamage(damage, true, true);
+            damage0 = doLightingDamage(damage0, true, true);
             if (crit1) outputText(" <b>*Critical!*</b>");
             monster.teased(lustDmgF, false);
             if (crit2) outputText(" <b>Critical!</b>");
             outputText(" as a bolt falls from the sky!\n\n");
             combat.bonusExpAfterSuccesfullTease();
             if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-            checkAchievementDamage(damage);
+            checkAchievementDamage(damage0);
             statScreenRefresh();
             if (monster.HP <= monster.minHP()) doNext(endHpVictory);
             if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
