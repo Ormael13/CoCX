@@ -6730,7 +6730,7 @@ use namespace CoC;
 
 		//Kamaitachi score
 		public function kamaitachiScore():Number {
-			Begin("Player","racialScore","thunderbird");
+			Begin("Player","racialScore","kamaitachi");
 			var KamaitachiCounter:Number = 0;
 			if (ears.type == Ears.WEASEL)
 				KamaitachiCounter++;
@@ -6772,6 +6772,69 @@ use namespace CoC;
 			KamaitachiCounter = finalRacialScore(KamaitachiCounter, Race.KAMAITACHI);
 			End("Player","racialScore");
 			return KamaitachiCounter;
+		}
+
+		//Gazer score
+		public function gazerScore():Number {
+			Begin("Player","racialScore","gazer");
+			var gazerCounter:Number = 0;
+			if (hairColor == "black" || hairColor == "midnight" || hairColor == "midnight black")
+				gazerCounter++;
+			if (skin.color == "snow white" || skin.color == "red" || skin.color == "pale white")
+				gazerCounter++;
+			if (hasCoatOfType(Skin.COVERAGE_NONE))
+				gazerCounter++;
+			if (eyes.type == Eyes.GAZER)
+				gazerCounter += 2;
+			if (eyes.colour == "red")
+				gazerCounter++;
+			if (skin.base.pattern == Skin.PATTERN_OIL)
+				gazerCounter++;
+			if (faceType == Face.ANIMAL_TOOTHS)
+				gazerCounter++;
+			if (arms.type == Arms.GAZER)
+				gazerCounter++;
+			if (lowerBody == LowerBody.GAZER)
+				gazerCounter++;
+			if (tailType == Tail.NONE)
+				gazerCounter++;
+			if (skin.base.pattern == Skin.PATTERN_OIL)
+				gazerCounter++;
+			if (wings.type == Wings.GAZER && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 2) {
+				gazerCounter += 2;
+				if (statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 3)
+					gazerCounter++;
+				if (statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 4)
+					gazerCounter++;
+				if (statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 5)
+					gazerCounter++;
+				if (statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 6)
+					gazerCounter++;
+				if (statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 7)
+					gazerCounter++;
+				if (statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8)
+					gazerCounter++;
+				if (statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 9)
+					gazerCounter++;
+				if (statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10)
+					gazerCounter++;
+			}
+			if (findPerk(PerkLib.GazerEye) >= 0)
+				gazerCounter += 1;
+			if (findPerk(PerkLib.GazerEyeEvolved) >= 0)
+				gazerCounter += 1;
+			if (findPerk(PerkLib.GazerEyeFinalForm) >= 0)
+				gazerCounter += 1;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				gazerCounter += 50;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && gazerCounter >= 4)
+				gazerCounter += 1;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && gazerCounter >= 8)
+				gazerCounter += 1;
+			if (isGargoyle()) gazerCounter = 0;
+			gazerCounter = finalRacialScore(gazerCounter, Race.GAZER);
+			End("Player","racialScore");
+			return gazerCounter;
 		}
 
 		//Determine Mutant Rating
@@ -7202,9 +7265,9 @@ use namespace CoC;
 			return centaurCounter;
 		}
 
-		//Elf score
+		//Cancer score
 		public function cancerScore():Number {
-			Begin("Player","racialScore","frost wyrm");
+			Begin("Player","racialScore","Cancer");
 			var cancerCounter:Number = 0;
 			if (ears.type == Ears.HUMAN)
 				cancerCounter++;
@@ -8570,7 +8633,7 @@ use namespace CoC;
 		public function hasAGoreAttack():Boolean { return (horns.type == Horns.UNICORN || horns.type == Horns.BICORN || horns.type == Horns.COW_MINOTAUR || horns.type == Horns.FROSTWYRM);}
 		public function hasATailSlapAttack():Boolean { return (tail.type == Tail.DRACONIC || tail.type == Tail.LIZARD || tail.type == Tail.SALAMANDER || tail.type == Tail.ORCA || tail.type == Tail.SHARK || tail.type == Tail.CAVE_WYRM || tail.type == Tail.GARGOYLE || tail.type == Tail.GARGOYLE_2 || tail.type == Tail.MANTICORE_PUSSYTAIL || tail.type == Tail.SCORPION || tail.type == Tail.BEE_ABDOMEN || lowerBody == LowerBody.FROSTWYRM || lowerBody == LowerBody.NAGA);}
 		public function hasMantisPrayerAttack():Boolean { return (mantisScore() >= 12); }
-		public function hasKamaitachiThreeWayCut():Boolean { return (KamaitachiScore() >= 12); }
+		public function hasKamaitachiThreeWayCut():Boolean { return (kamaitachiScore() >= 12); }
 		public function hasNaturalWeapons():Boolean { return (hasABiteAttack() || hasAClawAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasMantisPrayerAttack() || hasKamaitachiThreeWayCut()); }
 
 		//TODO: (logosK) elderSlime, succubus pussy/demonic eyes, arachne, wasp, lactabovine/slut, sleipnir, hellhound, ryu, quetzalcoatl, eredar, anihilan,

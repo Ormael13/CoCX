@@ -447,7 +447,7 @@ package classes.Scenes
 
 		public function Cooldown():void {
 			clearOutput();
-			outputText("You eye " + monster.a + monster.short + " with anticipation. Being a "+player.race+", your body temperature is constantly burning way above normal and right now your [pussy] is like 40° celcius in summer with high humidity. " +
+			outputText("You eye " + monster.a + monster.short + " with anticipation. Being a "+player.race()+", your body temperature is constantly burning way above normal and right now your [pussy] is like 40° celcius in summer with high humidity. " +
 					"A little cooling is in order and this unlucky rift denizen is about to serve as natural refreshment for your burning hot body.\n\n" +
 					"You proceed to force " + monster.a + monster.short + " on [monster his] back");
 			if (monster.wolfCocks() > 0) outputText(", your warm body slowly forcing his puppy pecker out of its sheath");

@@ -602,46 +602,29 @@ public class PlayerAppearance extends BaseContent {
 	{
 		if(player.hasStatusEffect(StatusEffects.Uniball))
 		{
-			if(player.skinType != Skin.GOO)
-				outputText("Your [sack] clings tightly to your groin, holding [balls] snugly against you.");
-			else if(player.skinType == Skin.GOO)
-				outputText("Your [sack] clings tightly to your groin, dripping and holding [balls] snugly against you.");
+			if(player.skinType != Skin.GOO) outputText("Your [sack] clings tightly to your groin, holding [balls] snugly against you.");
+			else if(player.skinType == Skin.GOO) outputText("Your [sack] clings tightly to your groin, dripping and holding [balls] snugly against you.");
 		}
 		else {
 			var sdesc:String;
-			if (player.skin.hasMagicalTattoo()) {
-				sdesc = " covered by magical tattoo";
-			} else if (player.skin.hasBattleTattoo()) {
-				sdesc = " covered by battle tattoo";
-			} else if (player.skin.hasLightningShapedTattoo()) {
-				sdesc = " covered with a few glowing lightning tattoos";
-			} else if (player.skin.hasScarShapedTattoo()) {
-				sdesc = " covered by scar tattoos";
-			} else if (player.skin.hasVenomousMarking()) {
-				sdesc = " covered by venomous marking";
-			} else if (player.skin.hasWhiteBlackVeins()) {
-				sdesc = " covered by [base.color2] veins";
-			} else {
-				sdesc = "";
-			}
+			if (player.skin.hasMagicalTattoo()) sdesc = " covered by magical tattoo";
+			else if (player.skin.hasBattleTattoo()) sdesc = " covered by battle tattoo";
+			else if (player.skin.hasLightningShapedTattoo()) sdesc = " covered with a few glowing lightning tattoos";
+			else if(player.skin.hasWindSweptScars()) sdesc = " covered with scars as if your skin was cut in various place by a windstorm";
+			else if(player.skin.hasOilySkin()) sdesc =" dripping with oily black fluids.";
+			else if (player.skin.hasScarShapedTattoo()) sdesc = " covered by scar tattoos";
+			else if (player.skin.hasVenomousMarking()) sdesc = " covered by venomous marking";
+			else if (player.skin.hasWhiteBlackVeins()) sdesc = " covered by [base.color2] veins";
+			else sdesc = "";
 			var swingsWhere:String;
-			if (player.cockTotal() == 0) {
-				swingsWhere = " where a penis would normally grow.";
-			} else {
-				swingsWhere = " under your [cocks].";
-			}
-			if (player.hasPlainSkinOnly() || player.hasRubberSkin())
-				outputText("A [sack]" + sdesc + " with [balls] swings heavily" + swingsWhere);
-			else if (player.hasFur())
-				outputText("A fuzzy [sack] filled with [balls] swings low" + swingsWhere);
-			else if (player.hasCoatOfType(Skin.CHITIN))
-				outputText("A chitin [sack] hugs your [balls] tightly against your body.");
-			else if (player.hasScales())
-				outputText("A scaly [sack] hugs your [balls] tightly against your body.");
-			else if (player.skinType == Skin.STONE)
-				outputText("A stone-solid sack with [balls] swings heavily" + swingsWhere);
-			else if (player.skinType == Skin.GOO)
-				outputText("An oozing, semi-solid sack with [balls] swings heavily" + swingsWhere);
+			if (player.cockTotal() == 0) swingsWhere = " where a penis would normally grow.";
+			else swingsWhere = " under your [cocks].";
+			if (player.hasPlainSkinOnly() || player.hasRubberSkin()) outputText("A [sack]" + sdesc + " with [balls] swings heavily" + swingsWhere);
+			else if (player.hasFur()) outputText("A fuzzy [sack] filled with [balls] swings low" + swingsWhere);
+			else if (player.hasCoatOfType(Skin.CHITIN)) outputText("A chitin [sack] hugs your [balls] tightly against your body.");
+			else if (player.hasScales()) outputText("A scaly [sack] hugs your [balls] tightly against your body.");
+			else if (player.skinType == Skin.STONE) outputText("A stone-solid sack with [balls] swings heavily" + swingsWhere);
+			else if (player.skinType == Skin.GOO) outputText("An oozing, semi-solid sack with [balls] swings heavily" + swingsWhere);
 		}
 		outputText("  You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ");
 		if(Math.round(player.ballSize) == 1)
@@ -1177,6 +1160,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your " + num2Text(player.legCount) + " legs are covered with a set of warlike tattoo and your feet end with sharp black nails.");
 		else if (player.lowerBody == LowerBody.ELF)
 			outputText("  Your " + num2Text(player.legCount) + " perfect lissom legs end in delicate, but agile elven feet allowing you to move gracefully and swiftly.");
+		else if (player.lowerBody == LowerBody.GAZER)
+			outputText("  Your " + num2Text(player.legCount) + " are human in appearance but drips with oily black fluids. You've not been using them just as much as of late since you are constantly levitating anyway.");
 		else if (player.lowerBody == LowerBody.RAIJU)
 			outputText("  You have " + num2Text(player.legCount) + " fluffy, furred legs that look vaguely like knee high socks. Your pawed feet end in four thick toes, which serve as your main source of balance. You can walk on them as normally as your old plantigrade legs. A thick strand of darkly colored fur breaks out from your ankles, emulating a bolt of lighting in appearance.");
 		else if (player.lowerBody == LowerBody.WEASEL)
@@ -1402,6 +1387,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Shining "+player.coatColor+" exoskeleton covers your arms from the biceps down with a long and sharp scythes extending from the wrists.");
 		else if (armType == Arms.KAMAITACHI)
 			outputText("  Your arms are covered in "+player.coatColor+" fur up to your shoulders. They end with a pair of five-toed weasel paws armed with claws. Your forearms fur part ways slightly as a pair of long scythes like blades curves outward toward your elbow, sharper than any sword.");
+		else if (armType == Arms.GAZER)
+			outputText("  Your arms are human in appearance but drips with oily black fluid.\n");
 		else if (armType == Arms.BEE)
 			outputText("  Shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves ended with a yellow fuzz from a distance.");
 		else if (armType == Arms.SALAMANDER)
@@ -1592,6 +1579,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if (wingType == Wings.PLANT) {
 			outputText("  Three pairs of oily, prehensile phalluses sprout from your shoulders and back. From afar, they may look like innocent vines, but up close, each tentacle contain a bulbous head with a leaking cum-slit, perfect for mass breeding.");
+		}
+		else if (wingType == Wings.GAZER) {
+			outputText(" A set of "+player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer)+" tentacle eyestalks expand from your back giving you all around vision. They're gazes are charged with lethal magical powers..");
 		}
 		if (wingType == Wings.BAT_ARM){
 			outputText("  Your large winged arms allow you to fly in a similar fashion to the bats they resemble. You sometimes wrap them around you like a cape when you walk around, so as to keep them from encumbering you. That being said, you far prefer using them for their intended purpose, traveling by flight whenever you can.");
@@ -1830,6 +1820,9 @@ public class PlayerAppearance extends BaseContent {
 		else if(eyeType == Eyes.GEMSTONES){
 			outputText("  Instead of regular eyes you see through a pair of gemstones that change hue based on your mood.");
 		}
+		else if(eyeType == Eyes.GAZER){
+			outputText("  Your eye sockets have merged together to reform into a single cyclopean eye charged with powerful magical powers. Your almighty gaze is as peerless as its unsettling.");
+		}
 		else if(eyeType == Eyes.FERAL){
 			outputText("  In your [eyecolor] eyes sometime dance a sinister light. It encompass your entire pupil when you let the beast within loose.");
 		}
@@ -1893,6 +1886,7 @@ public class PlayerAppearance extends BaseContent {
 				else if(player.skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo");
 				else if(player.skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
 				else if(player.skin.hasWindSweptScars()) outputText(" covered with scars as if your skin was cut in various place by a windstorm");
+				else if(player.skin.hasOilySkin()) outputText(" dripping with oily black fluids.");
 				else if(player.skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos");
 				else if(player.skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
 				outputText(" where your hair should be.");
@@ -2152,6 +2146,18 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  Your hairs are tied up into a dwarven fashion.");
 		}
 	}
+
+	//Call this function when looking for repeatable tattoo conditional text
+	public function tattooAndPatternGeneric():void{
+		if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
+		else if (player.skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
+		else if (player.skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
+		else if(player.skin.hasWindSweptScars()) outputText(" covered with scars as if your skin was cut in various place by a windstorm");
+		else if(player.skin.hasOilySkin())outputText(" dripping with oily black fluids");
+		else if (player.skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
+		else if (player.skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+	}
+
 	public function describeFaceShape():void {
 		// story.display("faceShape");
 		var faceType:Number = player.faceType;
@@ -2175,6 +2181,14 @@ public class PlayerAppearance extends BaseContent {
 				}
 				else if (skin.hasLightningShapedTattoo()) {
 					outputText(" covered with a few glowing lightning tattoos");
+					odd++;
+				}
+				else if(skin.hasWindSweptScars()) {
+					outputText(" covered with scars as if your skin was cut in various place by a windstorm");
+					odd++;
+				}
+				else if(skin.hasOilySkin()){
+					outputText(" dripping with oily black fluids.");
 					odd++;
 				}
 				else if (skin.hasScarShapedTattoo()) {
@@ -2268,14 +2282,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (faceType == Face.RACCOON_MASK) {
 			if (!player.hasCoat()) { //appearance for skinheads
 				outputText("  Your face is human in shape and structure, with [skin bases");
-				if (InCollection(skin.base.color, "ebony", "black"))
-					outputText(", though with your dusky hue, the black raccoon mask you sport isn't properly visible.");
-				else if (skin.hasMagicalTattoo()) outputText(" covered with [skin color2] magical tattoo, though it is decorated with a sly-looking raccoon mask over your eyes.");
-				else if(skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo, though it is decorated with a sly-looking raccoon mask over your eyes.");
-				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos, though it is decorated with a sly-looking raccoon mask over your eyes.");
-				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos, though it is decorated with a sly-looking raccoon mask over your eyes.");
-				else if (player.skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins, though it is decorated with a sly-looking raccoon mask over your eyes.");
-				else outputText(", though it is decorated with a sly-looking raccoon mask over your eyes.");
+				if (InCollection(skin.base.color, "ebony", "black")) outputText(", though with your dusky hue, the black raccoon mask you sport isn't properly visible.");
+				tattooAndPatternGeneric();
+				outputText(", though it is decorated with a sly-looking raccoon mask over your eyes.");
 			} else { //appearance furscales
 				//(black/midnight furscales)
 				if (InCollection(skin.base.color, "black", "midnight", "black", "midnight", "black", "midnight"))
@@ -2287,45 +2296,24 @@ public class PlayerAppearance extends BaseContent {
 		else if (faceType == Face.RACCOON) {
 			outputText("  You have a triangular raccoon face, replete with sensitive whiskers and a little black nose; a mask shades the space around your eyes, set apart from your [skin coat] by a band of white.");
 			//(if skin)
-			if (player.hasPlainSkinOnly()) {
-				outputText("  It looks a bit strange with only the skin and no fur.");
-			} else if (skin.hasMagicalTattoo()) {
-				outputText("  It looks a bit strange with only the skin covered with [skin color2] magical tattoo and no fur.");
-			} else if (skin.hasBattleTattoo()) {
-				outputText("  It looks a bit strange with only the skin covered with [skin color2] battle tattoo and no fur.");
-			} else if (skin.hasLightningShapedTattoo()) {
-				outputText("  It looks a bit strange with only the skin covered with a few glowing lightning tattoos and no fur.");
-			} else if (skin.hasScarShapedTattoo()) {
-				outputText("  It looks a bit strange with only the skin covered with a few [skin color2] scar tattoos and no fur.");
-			} else if (player.skin.hasWhiteBlackVeins()) {
-				outputText(" It looks a bit strange with only the skin covered by [skin color2] veins and no fur.");
-			} else if (player.hasScales()) {
-				outputText("  The presence of said scales gives your visage an eerie look, more reptile than mammal.");
-			} else if (skin.hasChitin()) {
-				outputText("  The presence of said chitin gives your visage an eerie look, more insect than mammal.");
+			if (player.hasPlainSkinOnly()){
+				outputText("  It looks a bit strange with only the skin");
+				tattooAndPatternGeneric();
+				outputText("and no fur.");
 			}
+			else if (player.hasScales()) outputText("  The presence of said scales gives your visage an eerie look, more reptile than mammal.");
+			else if (skin.hasChitin()) outputText("  The presence of said chitin gives your visage an eerie look, more insect than mammal.");
 		}
 		else if (faceType == Face.FOX) {
 			outputText("  You have a tapered, shrewd-looking vulpine face with a speckling of downward-curved whiskers just behind the nose.");
 			if (!player.hasCoat()) {
-				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat].");
-			} else if (skin.hasMagicalTattoo()) {
-				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat] covered with [skin color2] magical tattoo.");
-			} else if (skin.hasBattleTattoo()) {
-				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat] covered with [skin color2] battle tattoo.");
-			} else if (skin.hasLightningShapedTattoo()) {
-				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat] covered with a few glowing lightning tattoos.");
-			} else if (skin.hasScarShapedTattoo()) {
-				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat] covered with a few [skin color2] scar tattoos.");
-			} else if (player.skin.hasWhiteBlackVeins()) {
-				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat] covered by [skin color2] veins.");
-			} else if (player.hasFullCoatOfType(Skin.FUR)) {
-				outputText("  A coat of [skin coat] decorates your muzzle.");
-			} else if (skin.isCoverLowMid()) {
-				outputText("  Strangely, [skin coat] adorn your animalistic visage.");
-			} else {
-				outputText("  Strangely, [skin coat] adorn every inch of your animalistic visage.");
+				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat]");
+				tattooAndPatternGeneric();
+				outputText(".");
 			}
+			else if (player.hasFullCoatOfType(Skin.FUR)) outputText("  A coat of [skin coat] decorates your muzzle.");
+			else if (skin.isCoverLowMid()) outputText("  Strangely, [skin coat] adorn your animalistic visage.");
+			else outputText("  Strangely, [skin coat] adorn every inch of your animalistic visage.");
 		}
 		else if (faceType == Face.MOUSE) {
 			//appearance
@@ -2336,11 +2324,7 @@ public class PlayerAppearance extends BaseContent {
 		if (faceType == Face.ANIMAL_TOOTHS) {
 			if (!player.hasCoat()) {
 				outputText("  Your face");
-				if (skin.hasMagicalTattoo()) outputText(" covered with [skin color2] magical tattoo");
-				else if(skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo");
-				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos");
-				else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+				tattooAndPatternGeneric();
 				outputText(" looks human save for your sharp canines.");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  Your face looks human save for your sharp canines.  Your [skin coat.nocolor] is [skin coat.color], hiding your [skin base] underneath.");
@@ -2355,11 +2339,7 @@ public class PlayerAppearance extends BaseContent {
 		if (faceType == Face.HORSE) {
 			if (!player.hasCoat()) {
 				outputText("  Your face");
-				if (skin.hasMagicalTattoo()) outputText(", covered with [skin color2] magical tattoo,");
-				else if(skin.hasBattleTattoo()) outputText(", covered with [skin color2] battle tattoo,");
-				else if(skin.hasLightningShapedTattoo()) outputText(", covered with a few glowing lightning tattoos,");
-				else if(skin.hasScarShapedTattoo()) outputText(", covered with a few [skin color2] scar tattoos,");
-				else if(skin.hasWhiteBlackVeins()) outputText(", covered by [skin color2] veins,");
+				tattooAndPatternGeneric();
 				outputText("  is equine in shape and structure.  The odd visage is hairless and covered with [skin base]");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  Your face");
@@ -2373,11 +2353,7 @@ public class PlayerAppearance extends BaseContent {
 		if (faceType == Face.DOG) {
 			if (!player.hasCoat()) {
 				outputText("  You have a dog-like face");
-				if (skin.hasMagicalTattoo()) outputText(" covered with [skin color2] magical tattoo");
-				else if(skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo");
-				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos");
-				else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+				tattooAndPatternGeneric();
 				outputText("  , complete with a wet nose.  The odd visage is hairless and covered with [skin base].");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a dog's face, complete with wet nose and panting tongue.  You've got [skin coat], hiding your [skin base] underneath your furry visage.");
@@ -2391,11 +2367,7 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  You have a wolf-like face, complete with a wet nose.  ");
 				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ");
 				outputText("The odd visage is hairless and covered with [skin coat]");
-				if (skin.hasMagicalTattoo()) outputText(" covered with [skin color2] magical tattoo");
-				else if(skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo");
-				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos");
-				else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+				tattooAndPatternGeneric();
 				outputText(".");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a wolf’s face, complete with wet nose a panting tongue and threatening teeth.  ");
@@ -2409,11 +2381,6 @@ public class PlayerAppearance extends BaseContent {
 		if (faceType == Face.WOLF_FANGS) {
 			if (!player.hasCoat()) {
 				outputText("  Your face is human in shape and structure with [skin coat]");
-				if (skin.hasMagicalTattoo()) outputText(" covered with [skin color2] magical tattoo");
-				else if(skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo");
-				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos");
-				else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
 				outputText(". Your mouth is somewhat human save for your wolf-like canines.");
 			} else if (player.hasPartialCoat(Skin.FUR)) {
 				outputText("  Your face looks human save for your wolf-like canines, but overlaid with glittering patches of [skin coat].");
@@ -2425,11 +2392,7 @@ public class PlayerAppearance extends BaseContent {
 		if (faceType == Face.CAT || faceType == Face.CHESHIRE) {
 			if (!player.hasCoat()) {
 				outputText("  You have a cat-like face, complete with a cute, moist nose and whiskers.  The [skin] that is revealed by your lack of fur looks quite unusual on so feline a face");
-				if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
-				else if(skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
-				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
-				else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+				tattooAndPatternGeneric();
 				outputText(".");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your [skin coat.nocolor] is [skin coat.color], hiding your [skin base] underneath.");
@@ -2445,7 +2408,12 @@ public class PlayerAppearance extends BaseContent {
 		//Minotaaaauuuur-face
 		if (faceType == Face.COW_MINOTAUR) {
 			if (!player.hasCoat()) {
-				outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Despite your lack of fur elsewhere, your visage does have a short layer of [haircolor] fuzz.");
+				outputText("  You have a face resembling that of a minotaur");
+				if (!player.skin.hasNoPattern()){
+					outputText(",");
+					tattooAndPatternGeneric();
+				}
+				outputText(", with cow-like features, particularly a squared off wet nose.  Despite your lack of fur elsewhere, your visage does have a short layer of [haircolor] fuzz.");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Your [skin coat] thickens noticeably on your head, looking shaggy and more than a little monstrous once laid over your visage.");
 			} else if (player.hasFullCoat()) {
@@ -2457,7 +2425,9 @@ public class PlayerAppearance extends BaseContent {
 		//Lizard-face
 		if (faceType == Face.LIZARD) {
 			if (!player.hasCoat()) {
-				outputText("  You have a face resembling that of a lizard, and with your toothy maw, you have quite a fearsome visage.  The reptilian visage does look a little odd with just [skin].");
+				outputText("  You have a face resembling that of a lizard, and with your toothy maw, you have quite a fearsome visage.  The reptilian visage does look a little odd with just [skin]");
+				tattooAndPatternGeneric();
+				outputText(".");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a face resembling that of a lizard.  Between the toothy maw, pointed snout, and the layer of [skin coat] covering your face, you have quite the fearsome visage.");
 			} else if (player.hasFullCoat()) {
@@ -2491,12 +2461,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your face is human in shape and structure with [skin coat]. Your mouth could pass for human if not for your two sharp weasel canines.");
 		}
 		if (faceType == Face.ORC_FANGS) {
-			outputText("  our face is human in shape and structure, with [skin base] ");
-			if (skin.hasMagicalTattoo()) outputText("covered with magical tattoo");
-			else if(skin.hasBattleTattoo()) outputText("covered with battle tattoo");
-			else if(skin.hasLightningShapedTattoo()) outputText("covered with a few glowing lightning tattoos");
-			else if(skin.hasScarShapedTattoo()) outputText("covered in scar-like tattoos");
-			else if(skin.hasWhiteBlackVeins()) outputText("covered by [skin color2] veins");
+			outputText("  Your face is human in shape and structure, with [skin base] ");
+			tattooAndPatternGeneric();
 			outputText(". Your mouth could pass for human if it were not for your two lower canines resembling boar tusks poking out of your mouth.");
 		}
 		if (faceType == Face.ORCA) {
@@ -2507,11 +2473,7 @@ public class PlayerAppearance extends BaseContent {
 					outputText("  You have a fairly normal face, with [skin base]. On your cheek you have [skin coat]");
 				} else {
 					outputText("  You have a fairly normal face, with [skin base]");
-					if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
-					else if(skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
-					else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-					else if(skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
-					else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+					tattooAndPatternGeneric();
 				}
 				outputText(".  In addition you have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
@@ -2524,9 +2486,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your face is ");
 			if (!player.hasCoat()) {
 				outputText("bald");
-				if (skin.base.adj == "sexy tattooed") outputText(" covered with magical tattoo");
-				if (skin.base.adj == "battle tattooed") outputText(" covered with battle tattoo");
-				if (skin.base.adj == "lightning shaped tattooed") outputText(" covered with a few glowing lightning tattoos");
+				tattooAndPatternGeneric();
 			} else outputText("covered with [skin coat]");
 			outputText(" and shaped like that of a kangaroo, somewhat rabbit-like except for the extreme length of your odd visage.");
 		}
@@ -2544,11 +2504,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your face is like that of a rhino");
 			if (!player.hasCoat()) {
 				outputText(", with [skin], complete with a long muzzle and a horns on your nose");
-				if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
-				else if(skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
-				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
-				else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+				tattooAndPatternGeneric();
 				outputText(".");
 			}
 			else
@@ -2558,11 +2514,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your odd visage consists of a long, thin echidna snout.");
 			if (!player.hasCoat()) {
 				outputText("  The [skin base]");
-				if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
-				else if(skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
-				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
-				else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+				tattooAndPatternGeneric();
 				outputText(" that is revealed by your lack of fur looks quite unusual.");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  It's covered in [skin coat].");
@@ -2574,11 +2526,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your face is like that of a deer, with a nose at the end of your muzzle.");
 			if (!player.hasCoat()) {
 				outputText("  The [skin]");
-				if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
-				else if (skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
-				else if (skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-				else if (skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
-				else if (skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+				tattooAndPatternGeneric();
 				outputText(" that is revealed by your lack of fur looks quite unusual.");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  It's covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
@@ -2603,20 +2551,12 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (faceType == Face.FIRE_SNAIL) {
 			outputText("  Your face is human in shape and structure");
-			if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
-			else if (skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
-			else if (skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-			else if (skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
-			else if (skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+			tattooAndPatternGeneric();
 			outputText(" but your mouth is drooling from constant arousal.");
 		}
 		if (faceType == Face.GHOST) {
 			outputText("  Your face is in human shape and structure");
-			if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
-			else if (skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
-			else if (skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-			else if (skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
-			else if (skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+			tattooAndPatternGeneric();
 			outputText(". The only thing out of place is the ever present wide smile on your face. Your unsettling smile often hides your true emotions much to the dismay of others.");
 		}
 		if (faceType == Face.JIANGSHI) {
@@ -2626,11 +2566,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your face is human in shape and structure with " + player.skinTone + ". The most unsettling thing about it is your complete and constant lack of emotion.");
 			if (!player.hasCoat()) {
 				outputText("  The [skin] is");
-				if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo.");
-				else if (skin.hasBattleTattoo()) outputText(" covered with battle tattoo.");
-				else if (skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos.");
-				else if (skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos.");
-				else if (skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins.");
+				tattooAndPatternGeneric();
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  It's covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
 			} else {
@@ -2641,11 +2577,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your face is fully human in appearance although your lips are dyed blue by the cold.");
 			if (!player.hasCoat()) {
 				outputText("  Your [skin] is");
-				if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo.");
-				else if (skin.hasBattleTattoo()) outputText(" covered with battle tattoo.");
-				else if (skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos.");
-				else if (skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos.");
-				else if (skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins.");
+				tattooAndPatternGeneric();
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  It's covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
 			} else {

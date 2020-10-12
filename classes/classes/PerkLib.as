@@ -3148,6 +3148,12 @@ public class PerkLib
 		public static const FutaForm:PerkType = mk("Futa Form", "Futa Form",
 				"Ensures that your body fits the Futa look (Tits DD+, Dick 8\"+, & Pussy).  Also keeps your lusts burning bright and improves the tease skill.")
 				.withBuffs({'lib.mult':0.50,'sens':+45});
+		public static const GazerEye:PerkType = mk("Gazer Eye", "Gazer Eye",
+				"Keep true seeing at all times and empower gaze attacks.").withBuffs({'lib.mult':0.05,'int':0.10});
+		public static const GazerEyeEvolved:PerkType = mk("Gazer Eye, (Evolved)", "Gazer Eye, (Evolved)",
+				"Keep true seeing at all times,empower gaze attacks and empower your ability to cast many spells as a Gazer if available.").withBuffs({'lib.mult':0.05,'int':0.10});
+		public static const GazerEyeFinalForm:PerkType = mk("Gazer Eye, (Final Form)", "Gazer Eye, (Final Form)",
+				"Keep true seeing at all times, empower gaze attacks, further empower your ability to cast many spells as a Gazer if available and increase spell critical hit chance by 10%.").withBuffs({'lib.mult':0.05,'int':0.10});
 		public static const GeneticMemory:PerkType = mk("Genetic Memory", "Genetic Memory",
 				"Your body can remember almost any transformation it undergone.");
 		public static const Ghostslinger:PerkType = mk("Ghost-slinger", "Ghost-slinger",

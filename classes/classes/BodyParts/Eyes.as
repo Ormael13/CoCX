@@ -38,6 +38,7 @@ public class Eyes extends BodyPart {
 	public static const FAIRY:int                = 33;
 	public static const GREMLIN:int              = 34;
 	public static const WEASEL:int               = 35;
+	public static const GAZER:int                = 36;
 	// Don't forget to add new types in DebugMenu.as list EYE_TYPE_CONSTANTS
 	
 	public var colour:String = "brown";

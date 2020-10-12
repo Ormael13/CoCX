@@ -64,6 +64,7 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_VENOMOUS_MARKINGS:int = 11;
 	public static const PATTERN_USHI_ONI_ONNA_TATTOO:int = 12;
 	public static const PATTERN_SCAR_WINDSWEPT:int = 13;
+	public static const PATTERN_OIL:int = 14;
 	// Don't forget to add new types in DebugMenu.as lists SKIN_BASE_TYPES or SKIN_COAT_TYPES
 	
 	public var base:SkinLayer;
@@ -301,6 +302,9 @@ public class Skin extends SaveableBodyPart {
 	public function hasPlainSkin():Boolean {
 		return coverage < COVERAGE_COMPLETE && base.type == PLAIN;
 	}
+	public function hasNoPattern():Boolean {
+		return base.pattern == PATTERN_NONE;
+	}
 	public function hasMagicalTattoo():Boolean {
 		return base.pattern == PATTERN_MAGICAL_TATTOO;
 	}
@@ -312,6 +316,9 @@ public class Skin extends SaveableBodyPart {
 	}
 	public function hasWindSweptScars():Boolean {
 		return base.pattern == PATTERN_SCAR_WINDSWEPT;
+	}
+	public function hasOilySkin():Boolean {
+		return base.pattern == PATTERN_OIL;
 	}
 	public function hasScarShapedTattoo():Boolean {
 		return base.pattern == PATTERN_SCAR_SHAPED_TATTOO;
