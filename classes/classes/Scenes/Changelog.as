@@ -88,7 +88,7 @@ package classes.Scenes
 			outputText("-New P. Special: Cancer Grab. Req. to have lower body of Cancer. Type of grapple move like naga coiling.\n");
 			outputText("-New P. Special: Dig. Req. to have lower body of Cancer, Centipede or Frost Wyrm. Dig underground to escape your opponent attack for a while. (Liadri)\n");
 			outputText("-New P. Special: Grab. Req. lower body of cancer. Type of grapple move. Grab your opponents with your pincers, then proceed to crush them. (Liadri)\n");
-			outputText("-PC would gain 10 stat poins per level up instead of 5. Below lvl 7 it will increase form 10 stat points to 20 per lvl-up.\n");
+			outputText("-PC would gain 10 stat poins per level up instead of 5. Below lvl 7 it will increase from 10 stat points to 20 per lvl-up.\n");
 			outputText("-Hex magic spells gotten dmg calculation changed. (Liadri)\n");
 			outputText("-Magic menu have be seperated into groups: White, Black, Grey and Hex. (Liadri)\n");
 			outputText("-Luna can be caugh after she disable 3 npc's. It would add then option to her interactions to confront her about it. (Liadri)\n");
@@ -112,12 +112,15 @@ package classes.Scenes
 			outputText("-New codex entry added to the game: Trolls.\n");
 			outputText("-When exploring Bog PC can meet male troll. There is few possible options to end this encounter from paying gems to fight him. After that he would be repeatable encounter. First 4 enounters are conisdered part1 of his content and all after those part 2.\n");
 			outputText("-If picking to Hunt Him during post figt of part 1 it's posisble to fight him without him holding back. Winning would allow to take trophy for beating him (only if PC pick any other option to leave him). Trophy is worth 4k gems.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-After reaching 100 score on his view of PC it open option to invite him to camp as Follower. And it would lock this option so even lowering this value to 0% will still give only option to bring him as follower.\n");
+			outputText("-When in camp as follower Zenji have following interaction options: Appearance, Training, Spar.\n");//, Talk, Sex and dealing with corrupted glades
+			outputText("-New event perk: Zenji's influence 1. Gained by training with Zenji 5+ times. Effects: Increases strength, toughness & speed cap by 25 (x NG tier).\n");
+			outputText("-New event perk: Zenji's influence 2. Gained by training with Zenji 15+ times. Effects: Increases maximum mana and fatigue by 10%.\n");
+			outputText("-New event perk: Zenji's influence 3. Gained by training with Zenji 30+ times. Effects: Increases strength, toughness, speed, wisdom & intelligence cap by 10%.\n");
+			outputText("-Artemis and Wild Hunt accuracy penalty was removed and max atk value rised form 25 to 60. Cost of both bows rised due to that by 1000 gems.\n");
+			outputText("-Both Enlighted and Corrupted perks will be permable at the same time during ascension to prevent cases when one of them been permed was causing errors in getting all needed perks for 9 tail of balance perk. That would also mean PC must spend 10 not 5 asc points since it's perming 2 perks at once.\n");
+			outputText("-New ascension perks: Ascension: Transhumanism (Str/Tou/Spe/Int/Wis/Lib/Sen) - one for each core stat aside corruption. each rank rise max cap of related stat by 40.\n");
+			outputText("-Limit on some of ascension perks was rised by 5 (meaning one more new game need to be played to reach new cap).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -129,7 +132,7 @@ package classes.Scenes
 			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-Fixed bugs: Lizan Regeneration been gained and lost repeadly, perks desc in one of creation PC stages showing incorectly amount of boosting max cap for stat, chance to pick Bite Me option at certain NPC more than once\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Lizan Regeneration been gained and lost repeadly, perks desc in one of creation PC stages showing incorectly amount of boosting max cap for stat, chance to pick Bite Me option at certain NPC more than once, food been unaccesable above 90 hunger in Black Cock\n\n");/*ostatni punkt changelogu
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
@@ -179,9 +182,6 @@ package classes.Scenes
 			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

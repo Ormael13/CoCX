@@ -71,6 +71,13 @@ public class PerkLib
 		public static const AscensionSpiritualEnlightenment:AscensionSpiritualEnlightenmentPerk = new AscensionSpiritualEnlightenmentPerk();
 		public static const AscensionTolerance:AscensionTolerancePerk = new AscensionTolerancePerk();
 		public static const AscensionTranshumanism:AscensionTranshumanismPerk = new AscensionTranshumanismPerk();
+		public static const AscensionTranshumanismStr:AscensionTranshumanismStrPerk = new AscensionTranshumanismStrPerk();
+		public static const AscensionTranshumanismTou:AscensionTranshumanismTouPerk = new AscensionTranshumanismTouPerk();
+		public static const AscensionTranshumanismSpe:AscensionTranshumanismSpePerk = new AscensionTranshumanismSpePerk();
+		public static const AscensionTranshumanismInt:AscensionTranshumanismIntPerk = new AscensionTranshumanismIntPerk();
+		public static const AscensionTranshumanismWis:AscensionTranshumanismWisPerk = new AscensionTranshumanismWisPerk();
+		public static const AscensionTranshumanismLib:AscensionTranshumanismLibPerk = new AscensionTranshumanismLibPerk();
+		public static const AscensionTranshumanismSen:AscensionTranshumanismSenPerk = new AscensionTranshumanismSenPerk();
 		public static const AscensionVirility:AscensionVirilityPerk = new AscensionVirilityPerk();
 		public static const AscensionWisdom:AscensionWisdomPerk = new AscensionWisdomPerk();
 		
@@ -3245,6 +3252,12 @@ public class PerkLib
 				"Increase max Strength by a percentage equal to the size in ft of the player x4.");
 		public static const TransformationResistance:PerkType = mk("Transformation Resistance", "Transformation Resistance",
 				"Reduces the likelihood of undergoing a transformation. Disables Bad Ends from transformative items.");
+		public static const ZenjisInfluence1:PerkType = mk("Zenji's influence 1", "Zenji's influence 1",
+				"Increases strength, toughness & speed cap by 25 (x NG tier).");
+		public static const ZenjisInfluence2:PerkType = mk("Zenji's influence 2", "Zenji's influence 2",
+				"Increases maximum mana and fatigue by 10%.");
+		public static const ZenjisInfluence3:PerkType = mk("Zenji's influence 3", "Zenji's influence 3",
+				"Increases strength, toughness, speed, wisdom & intelligence cap by 10%.");
 		// Quest, Event & NPC perks
 		public static const AdvancedLeadership:PerkType = mk("Advanced Leadership", "Advanced Leadership",
 				"Allows to form 4 people party.");

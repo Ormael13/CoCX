@@ -1955,8 +1955,12 @@ public class CombatMagic extends BaseCombatContent {
 			else enemyAI();
 			return;
 		}
-		if (monster.short == "Zenji") {
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 2) outputText("\nThe troll shakes off the effects of the spell, \"<i>I. Will. Not. Break.</i>\"\n\n");
+		if (monster.short == "troll" || monster.short == "Zenji") {
+			if (monster.short == "Zenji") {
+				outputText("\nZenji shakes off the effects of the spell.\n\n");
+				outputText("\n\"<i>Gonna have ta do more dan dat ta break me.</i>\"\n\n");
+			}
+			else if (flags[kFLAGS.ZENJI_PROGRESS] == 2) outputText("\nThe troll shakes off the effects of the spell, \"<i>I. Will. Not. Break.</i>\"\n\n");
 			else {
 				outputText("\nThe troll shakes off the effects of the spell.\n\n");
 				outputText("\n\"<i>Gonna have ta do more dan dat ta break me.</i>\"\n\n");

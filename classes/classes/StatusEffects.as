@@ -254,6 +254,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const AdventureGuildQuestsCounter2:StatusEffectType   = mk("Adventure Guild Quests Counter 2");
 		public static const AdventureGuildQuestsCounter3:StatusEffectType   = mk("Adventure Guild Quests Counter 3");
 		public static const AdventureGuildQuestsCounter4:StatusEffectType   = mk("Adventure Guild Quests Counter 4");
+		public static const AetherTwins1:StatusEffectType                 	= mk("Aether Twins 1");//Attack boost / Block boost / x / Weapon shape
 		public static const Airweed:StatusEffectType                 		= mk("Airweed");
 		public static const AlchemicalThunderBuff:StatusEffectType     		= mk("Alchemical Thunder Buff");
 		public static const AllNaturalOnaholeUsed:StatusEffectType          = mk("all-natural onahole used");
@@ -611,6 +612,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const YetiScarf:StatusEffectType                      = mk("Yeti Scarf");
 		public static const YukiOnnaHairpin:StatusEffectType                = mk("Yuki Onna Hairpin");
 		public static const YukiOnnaKimono:StatusEffectType                 = mk("Yuki Onna Kimono");
+		public static const ZenjiTrainingsCounters1:StatusEffectType        = mk("Zenji Trainings Counters 1");
+		public static const ZenjiTrainingsCounters2:StatusEffectType        = mk("Zenji Trainings Counters 2");
 		
 		//Old status plots. DEPRECATED, DO NOT USE. Currently cannot be removed without breaking existing saves.
 		public static const DungeonShutDown:StatusEffectType         = mk("DungeonShutDown");

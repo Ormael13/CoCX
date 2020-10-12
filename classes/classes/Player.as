@@ -10,7 +10,6 @@ import classes.BodyParts.Hair;
 import classes.BodyParts.Horns;
 import classes.BodyParts.ISexyPart;
 import classes.BodyParts.LowerBody;
-import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
@@ -268,7 +267,7 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.headjewelryEffectMagnitude.");
 		}
-		
+
 		override public function set headjewelryPerk(value:String):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.headjewelryPerk.");
@@ -294,7 +293,7 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.necklaceEffectMagnitude.");
 		}
-		
+
 		override public function set necklacePerk(value:String):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.necklacePerk.");
@@ -320,7 +319,7 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryEffectMagnitude.");
 		}
-		
+
 		override public function set jewelryPerk(value:String):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryPerk.");
@@ -344,7 +343,7 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryEffectMagnitude2.");
 		}
-		
+
 		override public function set jewelryPerk2(value:String):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryPerk2.");
@@ -422,7 +421,7 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.vehiclesEffectMagnitude.");
 		}
-		
+
 		override public function set vehiclesPerk(value:String):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.vehiclesPerk.");
@@ -3990,7 +3989,7 @@ use namespace CoC;
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.FloralOvariesFinalForm) >= 0)
 				internalChimeraCounter++;
-			
+
 			End("Player","racialScore");
 			return internalChimeraCounter;
 		}
@@ -9650,7 +9649,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ElvishPeripheralNervSysEvolved) >= 0) maxThicknessCap += 10;
 			return maxThicknessCap;
 		}
-		
+
 		public function strtouspeintwislibsenCalculation1():void {
 			removeStatusEffect(StatusEffects.StrTouSpeCounter1);
 			createStatusEffect(StatusEffects.StrTouSpeCounter1,0,0,0,0);
@@ -11753,7 +11752,7 @@ use namespace CoC;
 				CoC.instance.mainView.statsView.showStatUp(statName);
 			}
 		}
-		
+
 		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {
 			//Easy mode cuts lust gains!
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && dlust > 0 && scale) dlust /= 2;

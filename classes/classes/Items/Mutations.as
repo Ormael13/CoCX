@@ -16159,9 +16159,9 @@ public final class Mutations extends MutationsHelper {
 				outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now grey.");
                 changes++;
 			}
-			if ((type == 9 || type == 10 || type == 11) && player.eyes.colour != "grey" && changes < changeLimit && rand(2) == 0) {
-				player.eyes.colour = "grey";
-				outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now grey.");
+			if ((type == 9 || type == 10 || type == 11) && player.eyes.colour != "brown" && changes < changeLimit && rand(2) == 0) {
+				player.eyes.colour = "brown";
+				outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now brown.");
                 changes++;
 			}
 			if ((type == 12 || type == 13 || type == 14) && player.eyes.colour != "light blue" && changes < changeLimit && rand(2) == 0) {
