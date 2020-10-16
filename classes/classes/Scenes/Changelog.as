@@ -124,6 +124,7 @@ package classes.Scenes
 			outputText("-New ascension perks: Ascension: Transhumanism (Str/Tou/Spe/Int/Wis/Lib/Sen) - one for each core stat aside corruption. Each rank rise max cap of related stat by 40.\n");
 			outputText("-Limit on some of ascension perks was rised by 5 (meaning one more new game need to be played to reach new cap).\n");
 			outputText("-Limited amount of perks gained by picking 'None' history option to be only as many as current NG tier until ng 11+ at which point it will give fixed amount of perk points (that can change if we get more history options thou).\n");
+			outputText("-\n");
 			outputText("-All below changes was coded/added by Liadri and aimozg!!!\n");
 			outputText("-Strength Toughness Speed Inteligence Wisdom Sensitivity refactoring happened the stats are now calculated in a whole new way!\n");
 			outputText("-Great fairy TF Quest and ability have been added.\n");
@@ -151,13 +152,35 @@ package classes.Scenes
 			outputText("-Alchemical, Mutagenic and Knowledge bonus added to the game. Read book drink potions and use transformative to stack them each up to 20%\n");
 			outputText("-You can now escape from Alraune using the torch and alraune has now customised text when trying to escape witheout it\n");
 			outputText("-Thunderbird can now use Lust Storm\n");
-			outputText("-Biggest Bags are now properly displayed as costing\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-Heart of the storm perk line for Thunderbird, Raiju, Kamaitachi\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
-			outputText("-Thunderbird and Raiju have better max score\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-Added Weapon and Shield Sprites\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-Biggest Bags are now properly displayed as costing\n");
+			outputText("-Heart of the storm perk line for Thunderbird, Raiju, Kamaitachi\n");
+			outputText("-Thunderbird and Raiju have better max score\n");
+			outputText("-Added Weapon and Shield Sprites\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
+			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-Fixed bugs: Lizan Regeneration been gained and lost repeadly, perks desc in one of creation PC stages showing incorectly amount of boosting max cap for stat, chance to pick Bite Me option at certain NPC more than once, food been unaccesable above 90 hunger in Black Cock, several bugs in Easter bunny TF, Tripxi dialogues to look more interactive and ");
 			outputText("changes location names to kaiba and tripxi shop in Tel Adre to be more in tune with the theme, Unicorn/Bicorn aura endless procing when pc has no horn, Unicorn/Bicorn aura procing messages in loops when pc doesnt have ecliptic mind, straddles duration to actualy not being endless, Alraune lower body displaying a penis in viewer, ");
-			outputText("a few viewer issue for cave wyrm eyes fox eyes and cat eyes, haircolor not switching to midnight black when turning into a hellcat, the trice damned Green Slime bug, declining bloodline choice progressing to history choice menu\n\n");/*ostatni punkt changelogu
+			outputText("a few viewer issue for cave wyrm eyes fox eyes and cat eyes, haircolor not switching to midnight black when turning into a hellcat, the trice damned Green Slime bug, declining bloodline choice progressing to history choice menu, not hidden button for stone buildings @carpenter\n\n");/*ostatni punkt changelogu
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
@@ -207,29 +230,6 @@ package classes.Scenes
 			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
