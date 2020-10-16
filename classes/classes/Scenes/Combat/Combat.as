@@ -659,7 +659,7 @@ public class Combat extends BaseContent {
             }
             if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) {
                 bd = buttons.add("KamikazeProtocol", combat.pspecials.sendTemporalGolemKamikazeProtocol)
-                        .hint("Send all golem from your bag to attack enemy. <b>After attack golems will fall apart!</b>");
+                        .hint("Send all temporal golems from your bag to attack enemy. <b>After attack golems will fall apart!</b>");
             }
             if (monster.isFlying() && !player.hasPerk(PerkLib.ExpertGolemMaker)) {
                 bd.disable("Your golems can't attack flying targets. (Only golems made by expert golem maker can do this)");

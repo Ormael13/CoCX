@@ -140,14 +140,14 @@ public class PerkType extends BaseContent
 		}
 		public function requireTou(value:int):PerkType {
 			requirements.push({
-				fn  : function(player):Boolean {
+				fn  : function(player:Player):Boolean {
 					// return true if player meets perk requirements
 					var Attribute:String = "tou";
 					if(player.hasPerk(PerkLib.IcyFlesh)) Attribute = "inte";
 					if(player.hasPerk(PerkLib.HaltedVitals)) Attribute = "lib";
 					return player[Attribute] >= value;
 				},
-				text: function(player):String {
+				text: function(player:Player):String {
 					// return true if player meets perk requirements
 					var Attribute:String = "Toughness";
 					if(player.hasPerk(PerkLib.IcyFlesh)) Attribute = "intelligence";
@@ -360,6 +360,36 @@ public class PerkType extends BaseContent
 				},
 				text: "Free Ovaries Mutation Slot",
 				type: "ovariesmutation"
+			});
+			return this;
+		}
+		public function requireBallsMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxBallsMutations() > 0;
+				},
+				text: "Free Balls Mutation Slot",
+				type: "ballsmutation"
+			});
+			return this;
+		}
+		public function requireEyesMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxEyesMutations() > 0;
+				},
+				text: "Free Eyes Mutation Slot",
+				type: "eyesmutation"
+			});
+			return this;
+		}
+		public function requirePeripheralNervSysMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxPeripheralNervSysMutations() > 0;
+				},
+				text: "Free Peripheral NervSys Mutation Slot",
+				type: "peripheralnervsysmutation"
 			});
 			return this;
 		}

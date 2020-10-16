@@ -280,6 +280,7 @@ use namespace CoC;
 			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
 			addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
 			if ((player.hasPerk(PerkLib.TitanGripEx) && !player.hasPerk(PerkLib.GigantGripEx)) || player.hasPerk(PerkLib.LegendaryGolemMaker)) addButton(10, "PerkFixes", AddMaxBackpack).hint("Fix testers saves perks for Giant's Grip (Ex) and above Epic Golem maker");
+			addButton(11, "ChimeraUprising", AddMaxBackpack4).hint("Use only ONCE if PC from older save have chimerical body perks above Basic stage.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function AddMaxBackpack():void {
@@ -300,6 +301,37 @@ use namespace CoC;
 		public function AddMaxBackpack3():void {
 			
 			doNext(SoulforceCheats);
+		}
+		public function AddMaxBackpack4():void {
+			if (player.hasPerk(PerkLib.ChimericalBodySemiAdvancedStage)) {
+				player.removePerk(PerkLib.ChimericalBodySemiAdvancedStage);
+				player.createPerk(PerkLib.ChimericalBodySemiImprovedStage, 0, 0, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodyAdvancedStage)) {
+				player.removePerk(PerkLib.ChimericalBodyAdvancedStage);
+				player.createPerk(PerkLib.ChimericalBodyImprovedStage, 0, 0, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage)) {
+				player.removePerk(PerkLib.ChimericalBodySemiSuperiorStage);
+				player.createPerk(PerkLib.ChimericalBodySemiAdvancedStage, 0, 0, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySuperiorStage)) {
+				player.removePerk(PerkLib.ChimericalBodySuperiorStage);
+				player.createPerk(PerkLib.ChimericalBodyAdvancedStage, 0, 0, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySemiPeerlessStage)) {
+				player.removePerk(PerkLib.ChimericalBodySemiPeerlessStage);
+				player.createPerk(PerkLib.ChimericalBodySemiSuperiorStage, 0, 0, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodyPeerlessStage)) {
+				player.removePerk(PerkLib.ChimericalBodyPeerlessStage);
+				player.createPerk(PerkLib.ChimericalBodySuperiorStage, 0, 0, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySemiEpicStage)) {
+				player.removePerk(PerkLib.ChimericalBodySemiEpicStage);
+				player.createPerk(PerkLib.ChimericalBodySemiPeerlessStage, 0, 0, 0, 0);
+			}
+			doNext(submenucuzwhynot);
 		}
 public function FightAria():void {
 	clearOutput();

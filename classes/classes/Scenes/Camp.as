@@ -4174,46 +4174,73 @@ public function wakeFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-		/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 28) {
-		flags[kFLAGS.MOD_SAVE_VERSION] = 29;
-		clearOutput();
-		outputText("Text.");
-		if (flags[kFLAGS.STAT_GAIN_MODE] == CoC.STAT_GAIN_CLASSIC) {
-			if (player.level > 6) player.statPoints += ((5 * player.level) + 60);
-			else player.statPoints += (10 * player.level);
+	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 28) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 29;
+			clearOutput();
+			outputText("Text.");
+			if (flags[kFLAGS.STAT_GAIN_MODE] == CoC.STAT_GAIN_CLASSIC) {
+				if (player.level > 6) player.statPoints += ((5 * player.level) + 60);
+				else player.statPoints += (10 * player.level);
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySemiAdvancedStage)) {
+				player.removePerk(PerkLib.ChimericalBodySemiAdvancedStage);
+				player.createPerk(PerkLib.ChimericalBodySemiImprovedStage, 0, 0, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodyAdvancedStage)) {
+				player.removePerk(PerkLib.ChimericalBodyAdvancedStage);
+				player.createPerk(PerkLib.ChimericalBodyImprovedStage, 0, 0, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage)) {
+				player.removePerk(PerkLib.ChimericalBodySemiSuperiorStage);
+				player.createPerk(PerkLib.ChimericalBodySemiAdvancedStage, 0, 0, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySuperiorStage)) {
+				player.removePerk(PerkLib.ChimericalBodySuperiorStage);
+				player.createPerk(PerkLib.ChimericalBodyAdvancedStage, 0, 0, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySemiPeerlessStage)) {
+				player.removePerk(PerkLib.ChimericalBodySemiPeerlessStage);
+				player.createPerk(PerkLib.ChimericalBodySemiSuperiorStage, 0, 0, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodyPeerlessStage)) {
+				player.removePerk(PerkLib.ChimericalBodyPeerlessStage);
+				player.createPerk(PerkLib.ChimericalBodySuperiorStage, 0, 0, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySemiEpicStage)) {
+				player.removePerk(PerkLib.ChimericalBodySemiEpicStage);
+				player.createPerk(PerkLib.ChimericalBodySemiPeerlessStage, 0, 0, 0, 0);
+			}
+			doNext(doCamp);
+			return;
 		}
-		doNext(doCamp);
-		return;
-	}
-	if (flags[kFLAGS.MOD_SAVE_VERSION] == 29) {
-		flags[kFLAGS.MOD_SAVE_VERSION] = 30;
-		clearOutput();
-		outputText("Text.");
-		doNext(doCamp);
-		return;
-	}
-	if (flags[kFLAGS.MOD_SAVE_VERSION] == 30) {
-		flags[kFLAGS.MOD_SAVE_VERSION] = 31;
-		clearOutput();
-		outputText("Text.");
-		doNext(doCamp);
-		return;
-	}
-	if (flags[kFLAGS.MOD_SAVE_VERSION] == 31) {
-		flags[kFLAGS.MOD_SAVE_VERSION] = 32;
-		clearOutput();
-		outputText("Text.");
-		doNext(doCamp);
-		return;
-	}
-	if (flags[kFLAGS.MOD_SAVE_VERSION] == 32) {
-		flags[kFLAGS.MOD_SAVE_VERSION] = 33;
-		clearOutput();
-		outputText("Text.");
-		doNext(doCamp);
-		return;
-	}
-*/
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 29) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 30;
+			clearOutput();
+			outputText("Text.");
+			doNext(doCamp);
+			return;
+		}
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 30) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 31;
+			clearOutput();
+			outputText("Text.");
+			doNext(doCamp);
+			return;
+		}
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 31) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 32;
+			clearOutput();
+			outputText("Text.");
+			doNext(doCamp);
+			return;
+		}
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 32) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 33;
+			clearOutput();
+			outputText("Text.");
+			doNext(doCamp);
+			return;
+		}*/
 		doCamp();
 	}
 

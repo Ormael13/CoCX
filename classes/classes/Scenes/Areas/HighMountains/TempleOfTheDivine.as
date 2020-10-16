@@ -1787,6 +1787,18 @@ use namespace CoC;
 				player.removePerk(PerkLib.FrozenHeartFinalForm);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.GazerEye)) {
+				player.removePerk(PerkLib.GazerEye);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.GazerEyeEvolved)) {
+				player.removePerk(PerkLib.GazerEyeEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) {
+				player.removePerk(PerkLib.GazerEyeFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.GorgonsEyes)) {
 				player.removePerk(PerkLib.GorgonsEyes);
 				player.perkPoints += 1;
@@ -2079,6 +2091,14 @@ use namespace CoC;
 				player.removePerk(PerkLib.ChimericalBodyBasicStage);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage)){
+				player.removePerk(PerkLib.ChimericalBodySemiImprovedStage);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodyImprovedStage)){
+				player.removePerk(PerkLib.ChimericalBodyImprovedStage);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.ChimericalBodySemiAdvancedStage)){
 				player.removePerk(PerkLib.ChimericalBodySemiAdvancedStage);
 				player.perkPoints += 1;
@@ -2101,6 +2121,10 @@ use namespace CoC;
 			}
 			if (player.hasPerk(PerkLib.ChimericalBodyPeerlessStage)) {
 				player.removePerk(PerkLib.ChimericalBodyPeerlessStage);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySemiEpicStage)) {
+				player.removePerk(PerkLib.ChimericalBodySemiEpicStage);
 				player.perkPoints += 1;
 			}
 			becomingGargoyleYes3();
