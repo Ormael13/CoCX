@@ -1358,7 +1358,7 @@ import coc.view.MainView;
 			}
 			menu();
 			addButton(0, "Yes", setBloodline, choice);
-			addButton(1, "No", chooseHistory);
+			addButton(1, "No", chooseBloodline);
 		}
 		
 		private function setBloodline(choice:PerkType):void {

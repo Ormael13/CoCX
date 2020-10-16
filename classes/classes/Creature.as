@@ -2486,9 +2486,9 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.MinotaurTesticlesEvolved) >= 0)
 				quantity += 200;
 			if (findPerk(PerkLib.EasterBunnyEggBagEvolved) >= 0)
-				quantity *= 2;
+				quantity *= 1.5;
 			if (findPerk(PerkLib.EasterBunnyEggBagFinalForm) >= 0)
-				quantity *= 2;
+				quantity *= 3;
 			if (findPerk(PerkLib.ProductivityDrugs) >= 0)
 				quantity += (perkv3(PerkLib.ProductivityDrugs));
 			//if(hasPerk("Elven Bounty") >= 0) quantity += 250;;
