@@ -10872,7 +10872,6 @@ use namespace CoC;
 				maxIntCap2 += (1 * level * newGamePlusMod);
 				maxWisCap2 += (1 * level * newGamePlusMod);
 				maxLibCap2 += (1 * level * newGamePlusMod);
-				minSen += (1 * level * newGamePlusMod);
 			}
 			if (hasPerk(PerkLib.Apex)) {
 				maxStrCap2 += (2 * level * newGamePlusMod);
@@ -10881,7 +10880,6 @@ use namespace CoC;
 				maxIntCap2 += (2 * level * newGamePlusMod);
 				maxWisCap2 += (2 * level * newGamePlusMod);
 				maxLibCap2 += (2 * level * newGamePlusMod);
-				minSen += (2 * level * newGamePlusMod);
 			}
 			if (hasPerk(PerkLib.AlphaAndOmega)) {
 				maxStrCap2 += (2 * level * newGamePlusMod);
@@ -10890,7 +10888,6 @@ use namespace CoC;
 				maxIntCap2 += (2 * level * newGamePlusMod);
 				maxWisCap2 += (2 * level * newGamePlusMod);
 				maxLibCap2 += (2 * level * newGamePlusMod);
-				minSen += (2 * level * newGamePlusMod);
 			}
 			if (jiangshiScore() >= 20) {
 				maxStrCap2 += (150 * newGamePlusMod);
