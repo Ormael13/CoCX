@@ -591,6 +591,8 @@
         <cell rect="392,1620,80,90" name="weapon/hammerGeneric" dx="38" dy="55"/>
         <cell rect="482,1620,80,107" name="weapon/spearGeneric" dx="39" dy="53"/>
         <cell rect="572,1620,80,90" name="shield/shieldGeneric" dx="66" dy="60"/>
+		<cell rect="662,1620,80,90" name="weapon/rapierGeneric" dx="38" dy="55"/>
+		<cell rect="752,1620,80,90" name="weapon/katanaGeneric" dx="38" dy="55"/>
     </spritemap>
     <spritemap file="hair.png">
         <cell rect="1,70,59,65" name="hair/0" dx="75" dy="21"/>
@@ -1197,6 +1199,12 @@
 			</if>
 			<if test="PlayerHasASpear">
 				<show part="weapon/spearGeneric"/>
+			</if>
+			<if test="PlayerHasKatana">	
+				<show part="weapon/katanaGeneric"/>
+			</if>
+			<if test="PlayerHasRapier">
+				<show part="weapon/rapierGeneric"/>
 			</if>
 			<if test="PlayerHasAShield">
 				<show part="shield/shieldGeneric"/>
@@ -4171,19 +4179,21 @@
             <if test="showClothing">
                 <show part="clothe/berserkerArmorTop"/>
                 <if test="showArmClothing">
-                    <show part="clothRightArm/berserkerArmorArms"/>
-                    <if test="arms.type==Arms.WOLF and lowerBody == LowerBody.WOLF">
-                        <hide part="clothe/berserkerArmorArms"/>
-                        <show part="clothLeftArm/berserkerArmorArmsFeralLeft"/>
-                        <show part="clothRightArm/berserkerArmorArmsFeralRight"/>
-                    </if>
+                    <show part="clothRightArm/berserkerArmorArms"/>  
+					<else> 
+						<if test="PlayerIsFeralStancing">                      
+							<show part="clothLeftArm/berserkerArmorArmsFeralLeft"/>
+							<show part="clothRightArm/berserkerArmorArmsFeralRight"/>
+						</if>
+					</else>					
                 </if>
                 <if test="showLegClothing">
                     <show part="clotheLegs/berserkerArmorLegs"/>
-                    <if test="arms.type == Arms.WOLF and lowerBody == LowerBody.WOLF">
-                        <hide part="clotheLegs/berserkerArmorLegs"/>
-                        <show part="clotheLegs/berserkerArmorLegsFeral"/>
-                    </if>
+					<else> 
+						<if test="PlayerIsFeralStancing">                      
+							<show part="clotheLegs/berserkerArmorLegsFeral"/>
+						</if>
+					</else>		
                 </if>
                 <else>
                     <if test="arms.type == Arms.DISPLACER or arms.type == Arms.KUMIHO">
@@ -4193,10 +4203,11 @@
                     </if>
                     <if test="showLegClothing">
                         <show part="clotheLegs/berserkerArmorLegs"/>
-                        <if test="(arms.type == Arms.DISPLACER or arms.type == Arms.KUMIHO) and (lowerBody == LowerBody.LION)">
-                            <hide part="clotheLegs/berserkerArmorLegs"/>
-                            <show part="clotheLegs/berserkerArmorLegsFeral"/>
-                        </if>
+                        <else> 
+							<if test="PlayerIsFeralStancing">
+								<show part="clotheLegs/berserkerArmorLegsFeral"/>
+							</if>
+						</else>
                     </if>
                 </else>
             </if>
