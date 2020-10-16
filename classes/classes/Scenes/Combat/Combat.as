@@ -3298,7 +3298,7 @@ public class Combat extends BaseContent {
         }
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) flags[kFLAGS.ATTACKS_ACCURACY] = 0;
         //Natural weapon Full attack list
-        if ((flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()) || player.isGargoyle()){
+        if ((flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) || player.isGargoyle())){
             //DOING BITE ATTACKS
             if (player.hasABiteAttack()) {
                 var biteMultiplier:Number = 0.5;
