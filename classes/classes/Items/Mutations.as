@@ -12407,7 +12407,7 @@ public final class Mutations extends MutationsHelper {
             outputText("You take a bite into the pigtail truffle. It oddly tastes like bacon. You eventually finish eating. ");
             player.refillHunger(20);
             if (rand(3) == 0 && changes < changeLimit) {
-                outputText("\n\nYour fill your muscles filling with might.");
+                outputText("\n\nYou feel your muscles growing with newfound might.");
                 MutagenBonus("str", 1);
                 changes++;
             }
@@ -16625,4 +16625,4 @@ public final class Mutations extends MutationsHelper {
             HPChange(Math.round(player.maxHP() * 0.1), true);
         }
     }
-}
+}

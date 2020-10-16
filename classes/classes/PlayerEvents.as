@@ -1782,7 +1782,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (!InCollection(player.hairColor, bicornHairPalette)) {
 					CurentColor = randomChoice(bicornHairPalette);
-					outputText(" Your feel a tingling in your hairs as the strands turns "+CurentColor+".");
+					outputText(" You feel a tingling in your hairs as the strands turns "+CurentColor+".");
 					player.hairColor = CurentColor;
 				}
 				if (!InCollection(player.coatColor, bicornColorPalette)) {
@@ -1849,7 +1849,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (!InCollection(player.hairColor, unicornHairPalette)) {
 					CurentColor = randomChoice(unicornHairPalette);
-					outputText(" Your feel a tingling in your hairs as the strands turns "+CurentColor+".");
+					outputText(" You feel a tingling in your hairs as the strands turns "+CurentColor+".");
 					player.hairColor = CurentColor;
 				}
 				if (!InCollection(player.coatColor, unicornColorPalette)) {

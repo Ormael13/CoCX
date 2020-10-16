@@ -45,11 +45,13 @@ import coc.xlogic.ExecContext;
 					CaveWyrmPussy: player.vaginaType() == VaginaClass.CAVE_WYRM,
 					CaveWyrmNipples: player.hasStatusEffect(StatusEffects.GlowingNipples),
 					CancerCrabStance: player.hasStatusEffect(StatusEffects.CancerCrabStance),
-					showClothing: [LowerBody.LION, LowerBody.GARGOYLE, LowerBody.GARGOYLE_2].indexOf(player.lowerBody) == -1 && [Arms.LION, Arms.DISPLACER, Arms.GARGOYLE, Arms.GARGOYLE_2].indexOf(player.arms.type) == -1,
-					showArmClothing: [Arms.LION, Arms.DISPLACER, Arms.GARGOYLE, Arms.GARGOYLE_2, Arms.YETI, Arms.HINEZUMI].indexOf(player.arms.type) == -1 && !player.hasStatusEffect(StatusEffects.CancerCrabStance),
-					showLegClothing: [LowerBody.YETI, LowerBody.HOOFED, LowerBody.HARPY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.DRIDER, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER].indexOf(player.lowerBody) == -1 && player.legCount == 2,
+					showClothing: [Arms.DISPLACER].indexOf(player.arms.type) == -1 && !player.isSitStancing(),
+					showArmClothing: [Arms.DISPLACER, Arms.GARGOYLE, Arms.GARGOYLE_2, Arms.YETI, Arms.HINEZUMI].indexOf(player.arms.type) == -1 && !player.hasStatusEffect(StatusEffects.CancerCrabStance) && !player.isStancing(),
+					showLegClothing: [LowerBody.YETI, LowerBody.HOOFED, LowerBody.HARPY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.DRIDER, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing(),
 					PlayerHasViewableOutfit: player.isWearingArmor(),
-					playerHasWeaponBannedArms: [Arms.DISPLACER, Arms.GARGOYLE, Arms.FROSTWYRM, Arms.CANCER].indexOf(player.arms.type) == -1,
+					PlayerIsStancing: player.isStancing(),
+					PlayerIsFeralStancing: player.isFeralStancing(),
+					playerHasWeaponBannedArms: [Arms.DISPLACER, Arms.GARGOYLE, Arms.FROSTWYRM, Arms.CANCER].indexOf(player.arms.type) == -1 && !player.isStancing(),
 
 					//Detect Weapon Skins
 					PlayerHasAStaff: player.isStaffTypeWeapon(),
@@ -57,6 +59,8 @@ import coc.xlogic.ExecContext;
 					PlayerHasAnAxe: player.isAxeTypeWeapon(),
 					PlayerHasAHammer: player.isMaceHammerTypeWeapon(),
 					PlayerHasASpear: player.isSpearTypeWeapon(),
+					PlayerHasKatana: player.weapon == game.weapons.BLETTER  || player.weapon == game.weapons.KATANA || player.weapon == game.weapons.MASAMUN,
+					PlayerHasRapier: player.weapon == game.weapons.B_WIDOW || player.weapon == game.weapons.DRAPIER || player.weapon == game.weapons.JRAPIER || player.weapon == game.weapons.Q_GUARD || player.weapon == game.weapons.RRAPIER || player.weapon == game.weapons.LRAPIER,
 					PlayerHasAShield: player.shieldName != "nothing" && player.shield != game.shields.SPI_FOC,
 
 					Antennae: Antennae,
