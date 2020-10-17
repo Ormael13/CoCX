@@ -1718,6 +1718,26 @@ import coc.view.MainView;
 			player.createStatusEffect(StatusEffects.IntWisCounter2,0,0,0,0);
 			player.createStatusEffect(StatusEffects.LibSensCounter1,0,0,0,0);
 			player.createStatusEffect(StatusEffects.LibSensCounter2,0,0,0,0);
+			player.strStat.core.max = 100;
+			player.touStat.core.max = 100;
+			player.speStat.core.max = 100;
+			player.intStat.core.max = 100;
+			player.wisStat.core.max = 100;
+			player.libStat.core.max = 100;
+			if (player.findPerk(PerkLib.AscensionTranshumanism) >= 0) {
+				player.strStat.core.max += player.perkv1(PerkLib.AscensionTranshumanism);
+				player.touStat.core.max += player.perkv1(PerkLib.AscensionTranshumanism);
+				player.speStat.core.max += player.perkv1(PerkLib.AscensionTranshumanism);
+				player.intStat.core.max += player.perkv1(PerkLib.AscensionTranshumanism);
+				player.wisStat.core.max += player.perkv1(PerkLib.AscensionTranshumanism);
+				player.libStat.core.max += player.perkv1(PerkLib.AscensionTranshumanism);
+			}
+			if (player.findPerk(PerkLib.AscensionTranshumanismStr) >= 0) player.strStat.core.max += 8 * player.perkv1(PerkLib.AscensionTranshumanismStr);
+			if (player.findPerk(PerkLib.AscensionTranshumanismTou) >= 0) player.touStat.core.max += 8 * player.perkv1(PerkLib.AscensionTranshumanismTou);
+			if (player.findPerk(PerkLib.AscensionTranshumanismSpe) >= 0) player.speStat.core.max += 8 * player.perkv1(PerkLib.AscensionTranshumanismSpe);
+			if (player.findPerk(PerkLib.AscensionTranshumanismInt) >= 0) player.intStat.core.max += 8 * player.perkv1(PerkLib.AscensionTranshumanismInt);
+			if (player.findPerk(PerkLib.AscensionTranshumanismWis) >= 0) player.wisStat.core.max += 8 * player.perkv1(PerkLib.AscensionTranshumanismWis);
+			if (player.findPerk(PerkLib.AscensionTranshumanismLib) >= 0) player.libStat.core.max += 8 * player.perkv1(PerkLib.AscensionTranshumanismLib);
 			player.HP = player.maxHP();
 			doYesNo(goToIngnam, arrival);
 		}

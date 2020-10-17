@@ -1867,6 +1867,9 @@ public class PerkLib
 		public static const LizanMarrowEvolved:PerkType = mk("Lizan Marrow (Evolved)", "Lizan Marrow (Evolved)",
 				"Regenerates 1% of HP per round in combat and 2% of HP per hour. Additionaly your limit for innate self-regeneration rate increased.",
 				"You choose the 'Lizan Marrow (Evolved)' perk. Constant use of your lizan marrow caused it to change.");
+		public static const LizanMarrowFinalForm:PerkType = mk("Lizan Marrow (Final Form)", "Lizan Marrow (Final Form)",
+				"Regenerates 1.5% of HP per round in combat and 3% of HP per hour. Additionaly your limit for innate self-regeneration rate increased. When below 25% of max HP regeneration provided by Lizan regeneration doubles. You can't loose by HP until reaching droping into negative health larger than 5% of max HP.",
+				"You choose the 'Lizan Marrow (Final Form)' perk. Your lizan marrow undergone another change.");
 		public static const LongerLastingBuffsI:PerkType = mk("Long(er) Lasting Buffs I", "Long(er) Lasting Buffs I",
 				"Buff spells last 1 turn longer.",
 				"You choose the 'Long(er) Lasting Buffs I' perk. Constant use of buffs allowed you to optimize them a little bit.");
@@ -5807,10 +5810,10 @@ public class PerkLib
                         return player.kitsuneScore() >= 8;
                     }, "Kitsune race");
             LizanMarrowEvolved.requireLevel(12).requirePerk(LizanMarrow).requireCustomFunction(function (player:Player):Boolean {
-                return player.lizardScore() >= 8
+                return player.lizardScore() >= 8;
             }, "Lizan race");
             MantislikeAgilityEvolved.requireLevel(12).requirePerk(MantislikeAgility).requireCustomFunction(function (player:Player):Boolean {
-                return player.mantisScore() >= 10
+                return player.mantisScore() >= 10;
             }, "Mantis race");
 			MelkieLungEvolved.requirePerk(MelkieLung).requireCustomFunction(function (player:Player):Boolean {
 				return player.melkieScore() >= 12;
@@ -6296,6 +6299,9 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
 					return player.cowScore() >= 12;
             }, "Lacta Bovine race");
+			LizanMarrowFinalForm.requireLevel(36).requirePerk(LizanMarrowEvolved).requireCustomFunction(function (player:Player):Boolean {
+                return player.lizardScore() >= 12;
+            }, "Lizan race");
 			MelkieLungFinalForm.requirePerk(MelkieLungEvolved).requireCustomFunction(function (player:Player):Boolean {
 				return player.melkieScore() >= 12;
 			}, "Melkie race");

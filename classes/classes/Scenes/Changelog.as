@@ -124,7 +124,9 @@ package classes.Scenes
 			outputText("-New ascension perks: Ascension: Transhumanism (Str/Tou/Spe/Int/Wis/Lib/Sen) - one for each core stat aside corruption. Each rank rise max cap of related stat by 40.\n");
 			outputText("-Limit on some of ascension perks was rised by 5 (meaning one more new game need to be played to reach new cap).\n");
 			outputText("-Limited amount of perks gained by picking 'None' history option to be only as many as current NG tier until ng 11+ at which point it will give fixed amount of perk points (that can change if we get more history options thou).\n");
-			outputText("-\n");
+			outputText("-Due to adding two new chimera body perk between Basic stage and Semi-Advanced Stage all of perks in line form Semi-Advanced had updated bonsues to stats (including making all sensitivity bonsues been now flat due to stats rework by Lia/Aimozg and acting like negative penatly - for this one part first three perks also been adjusted to account for that)\n");
+			outputText("-New tier 6 misc lvl-up perk: Lizan Marrow (Final Form). Req. Lizan Marrow (Evolved) perk and lizan score 12+. Effect: Regenerates 1.5% of HP per round in combat and 3% of HP per hour. Additionaly your limit for innate self-regeneration rate increased. When below 25% of max HP regeneration provided by Lizan regeneration doubles. ");
+			outputText("You can't loose by HP until reaching droping into negative health larger than 5% of max HP.\n");
 			outputText("-All below changes was coded/added by Liadri and aimozg!!!\n");
 			outputText("-Strength Toughness Speed Inteligence Wisdom Sensitivity refactoring happened the stats are now calculated in a whole new way!\n");
 			outputText("-Great fairy TF Quest and ability have been added.\n");

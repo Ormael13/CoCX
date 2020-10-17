@@ -13,7 +13,7 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
-			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_TRANSHUMANISM_INT_LEVEL + ") Increases maximum Int by " + params.value1 * 40 + ".";
+			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_TRANSHUMANISM_INT_LEVEL + ") Increases maximum Int by " + params.value1 * 8 + ".";
 		}
 		
 		public function AscensionTranshumanismIntPerk() 
