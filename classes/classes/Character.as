@@ -630,6 +630,7 @@ import classes.Items.JewelryLib;
 				min -= maxHP() * 0.08;
 				min -= (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}//nastepny diehard to 5% i 1000
+			if (findPerk(PerkLib.LizanMarrowFinalForm) >= 0) min -= maxHP() * 0.05;
 			if (findPerk(PerkLib.OrcAdrenalGlandsFinalForm) >= 0 || game.player.orcScore() >= 11) {
 				if (findPerk(PerkLib.Ferocity) >= 0) min -= maxHP() * 0.07;
 				if (findPerk(PerkLib.OrcAdrenalGlands) >= 0) min -= maxHP() * 0.01;

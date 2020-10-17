@@ -1894,6 +1894,10 @@ use namespace CoC;
 				player.removePerk(PerkLib.LizanMarrowEvolved);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.LizanMarrowFinalForm)) {
+				player.removePerk(PerkLib.LizanMarrowFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.ManticoreMetabolism)) {
 				player.removePerk(PerkLib.ManticoreMetabolism);
 				player.perkPoints += 1;

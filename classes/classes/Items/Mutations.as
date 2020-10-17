@@ -4195,8 +4195,8 @@ public final class Mutations extends MutationsHelper {
                 outputText("\n\nBright lights flash into your vision as your eyes glow with light. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment, but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>[eyecolor] human eyes staring back at you.</b>");
                 changes++;
             }
-            var goblin_hair_color:Array = ["red", "purple", "green", "blue", "pink"];
-            if (player.hairColor != "red" && player.hairColor != "purple" && player.hairColor != "green" && player.hairColor != "blue" && player.hairColor != "pink" && (player.hairColor.indexOf("rubbery") != -1 || player.hairColor.indexOf("latex-textured") != -1) && changes < changeLimit && rand(3) == 0) {
+            var goblin_hair_color:Array = ["red", "purple", "green", "blue", "pink", "orange"];
+            if (player.hairColor != "red" && player.hairColor != "purple" && player.hairColor != "green" && player.hairColor != "blue" && player.hairColor != "pink" && player.hairColor != "orange" && (player.hairColor.indexOf("rubbery") != -1 || player.hairColor.indexOf("latex-textured") != -1) && changes < changeLimit && rand(3) == 0) {
                 player.hairColor = randomChoice(goblin_hair_color);
                 outputText("\n\nYour scalp tingles and when you check yourself in nearby steam it seems your <b>[hair] become " + player.hairColor + ".</b>");
                 changes++;
