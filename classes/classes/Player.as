@@ -11069,20 +11069,20 @@ use namespace CoC;
 				maxLibCap2 += level;
 			}
 			if (hasPerk(PerkLib.Apex)) {
-				maxStrCap2 += (2 * level;
-				maxTouCap2 += (2 * level;
-				maxSpeCap2 += (2 * level;
-				maxIntCap2 += (2 * level;
-				maxWisCap2 += (2 * level;
-				maxLibCap2 += (2 * level;
+				maxStrCap2 += 2 * level;
+				maxTouCap2 += 2 * level;
+				maxSpeCap2 += 2 * level;
+				maxIntCap2 += 2 * level;
+				maxWisCap2 += 2 * level;
+				maxLibCap2 += 2 * level;
 			}
 			if (hasPerk(PerkLib.AlphaAndOmega)) {
-				maxStrCap2 += (2 * level;
-				maxTouCap2 += (2 * level;
-				maxSpeCap2 += (2 * level;
-				maxIntCap2 += (2 * level;
-				maxWisCap2 += (2 * level;
-				maxLibCap2 += (2 * level;
+				maxStrCap2 += 2 * level;
+				maxTouCap2 += 2 * level;
+				maxSpeCap2 += 2 * level;
+				maxIntCap2 += 2 * level;
+				maxWisCap2 += 2 * level;
+				maxLibCap2 += 2 * level;
 			}
 			if (jiangshiScore() >= 20) {
 				maxStrCap2 += 150;
