@@ -1142,9 +1142,9 @@ use namespace CoC;
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 0) outputText("\n\nThere's a block where its chest would be.\n\n");
 			if ((!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) < 1) && (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) < 1 || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) < 1)) outputText("There's a block where its crotch would be.");
 			else {
-				outputText("At statue crotch ");
+				outputText("At the statue crotch ");
 				if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) > 1) {
-					outputText("there is ");
+					outputText("hangs a ");
 					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 2) outputText("4 inch");
 					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 3) outputText("4.5 inch");
 					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 4) outputText("5 inch");
@@ -1167,21 +1167,28 @@ use namespace CoC;
 					}
 					outputText(".");
 				}
-				if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 1 && player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) < 2) outputText("there is no cock.");
+				if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 1 && player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) > 1) {
+					outputText(" rests a pair of ");
+					if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 2) outputText("large");
+					if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 3) outputText("baseball-sized");
+					if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 4) outputText("apple-sized");
+					if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 5) outputText("grapefruit-sized");
+					outputText(" balls.");
+				}
 				if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) > 0) {
 					if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) == 2) {
 						if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) > 1) outputText(" Beneath it");
-						if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) > 1) outputText(" Beneath them");
-						outputText(" there is a tight vagina, with a tiny clit.");
+						else if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) > 1) outputText(" Beneath them");
+						outputText(" is a tight vagina, with a tiny clit.");
 					}
 					else outputText("");
 				}
 			}
-			outputText("\n\nAll details in its");
+			outputText("\n\nAll the details in its");
 			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 2) outputText(" bat");
 			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 1) outputText(" feathered");
 			outputText(" wings ");
-			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] >= 1) outputText("are completed, wings folded behind its back");
+			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] >= 1) outputText("are completed and the wings folded behind its back");
 			else outputText("have yet to be done");
 			outputText(".\n\nIt's arms ");
 			if (player.statusEffectv4(StatusEffects.GargoyleTFSettingTracker1) == 1) outputText("ends with a set of bestial four fingered sharp stone claws");

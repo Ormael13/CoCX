@@ -1736,7 +1736,7 @@ public class PerkLib
 				"You choose 'Job: Seducer' perk, training yourself to became Seducer.").withBuffs({'lib.mult':0.05});
 		public static const JobSorcerer:PerkType = mk("Job: Sorcerer", "Job: Sorcerer",
 				"You've trained in magic combat. (+5 to max int - scalable)",
-				"You choose 'Job: Sorcerer' perk, training yourself to became Sorcerer.").withBuffs({'int.mult':0.5});
+				"You choose 'Job: Sorcerer' perk, training yourself to became Sorcerer.").withBuffs({'int.mult':0.05});
 		public static const JobSoulCultivator:PerkType = mk("Job: Soul Cultivator", "Job: Soul Cultivator",
 				"You've cultivated powers of your soul. (+5 to max wis - scalable)",
 				"You choose the 'Job: Soul Cultivator' perk, starting journey of the soul cultivation path!").withBuffs({'wis.mult':0.05});

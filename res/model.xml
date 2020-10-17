@@ -287,8 +287,8 @@
         <cell rect="501,90,49,59" name="torso_pattern/Blightning" dx="79" dy="64"/>
         <cell rect="551,90,49,59" name="torso_pattern/Btatoo" dx="79" dy="64"/>
         <cell rect="801,90,49,59" name="torso_pattern/Bvenom" dx="79" dy="64"/>
-		<cell rect="951,90,49,59" name="torso_pattern/BgazerTar" dx="79" dy="64"/>
-		<cell rect="1001,90,49,59" name="torso_pattern/BwindScars" dx="79" dy="64"/>
+        <cell rect="951,90,49,59" name="torso_pattern/BgazerTar" dx="79" dy="64"/>
+        <cell rect="1001,90,49,59" name="torso_pattern/BwindScars" dx="79" dy="64"/>
         <cell rect="1,150,49,59" name="arms_bg/human" dx="56" dy="64"/>
         <cell rect="51,150,49,59" name="arms_bg/fur" dx="56" dy="64"/>
         <cell rect="551,150,49,59" name="arms_bg/furracoon" dx="56" dy="64"/>
@@ -439,7 +439,7 @@
         <cell rect="451,390,49,59" name="legs_pattern/Bstripe" dx="79" dy="115"/>
         <cell rect="501,390,49,59" name="legs_pattern/Blightning" dx="79" dy="115"/>
         <cell rect="601,390,49,59" name="legs_pattern/Btatoo" dx="79" dy="115"/>
-		<cell rect="801,390,49,59" name="legs_pattern/BwindScars" dx="79" dy="115"/>
+        <cell rect="801,390,49,59" name="legs_pattern/BwindScars" dx="79" dy="115"/>
         <cell rect="51,450,49,59" name="feet/fur" dx="78" dy="115"/>
         <cell rect="101,450,49,59" name="feet/scales" dx="79" dy="115"/>
         <cell rect="551,450,49,59" name="feet/furracoon" dx="79" dy="115"/>
@@ -543,7 +543,6 @@
         <cell rect="1066,158,40,55" name="clotheLegs/scandalousSuccubusClothinglegs" dx="85" dy="120"/>
         <cell rect="1108,158,40,55" name="clotheLegs/scandalousSuccubusClothinglegsLewd" dx="80" dy="119"/>
         <cell rect="1108,158,40,55" name="clotheLegs/scandalousSuccubusClothingTaurTODO" dx="72" dy="96"/>
-        <cell rect="935,543,150,80" name="clotheLegs/fairyQueenDressUnder" dx="22" dy="61"/>
         <cell rect="1345,325,80,104" name="clotheLegs/berserkerArmorLegs" dx="64" dy="72"/>
         <cell rect="1181,434,90,104" name="clotheLegs/berserkerArmorLegsFeral" dx="62" dy="50"/>
         <cell rect="776,12,45,25" name="armorNeck/fullplatetopFemale" dx="80" dy="63"/>
@@ -555,7 +554,7 @@
         <cell rect="776,42,25,55" name="armorLeftArm/fullplateleftarm" dx="78" dy="66"/>
         <cell rect="961,158,20,55" name="clothLeftArm/scandalousSuccubusClothingleftArm" dx="81" dy="68"/>
         <cell rect="1003,158,20,55" name="clothLeftArm/scandalousSuccubusClothingleftArmLewd" dx="85" dy="59"/>
-        <cell rect="1099,543,70,90" name="clothLeftArm/fairyQueenDressUnderClothes" dx="64" dy="65"/>
+        <cell rect="1099,543,70,90" name="clothLeftArm/fairyQueenDressUnderClothes" dx="64" dy="66"/>
         <cell rect="1272,434,40,44" name="clothLeftArm/berserkerArmorArmsFeralLeft" dx="56" dy="56"/>
         <cell rect="1322,434,40,44" name="clothLeftArm/berserkerArmorArmsFeralQuadLeft" dx="56" dy="56"/>
         <cell rect="804,42,25,55" name="armorRightArm/fullplaterightarm" dx="102" dy="66"/>
@@ -565,6 +564,7 @@
         <cell rect="1272,489,40,44" name="clothRightArm/berserkerArmorArmsFeralRight" dx="101" dy="56"/>
         <cell rect="1322,489,40,44" name="clothRightArm/berserkerArmorArmsFeralQuadRight" dx="101" dy="56"/>
         <cell rect="818,798,173,156" name="clothCape/WalpurgisClothesBack" dx="19" dy="12"/>
+		<cell rect="935,543,150,80" name="clothCape/fairyQueenDressUnder" dx="22" dy="61"/>
         <cell rect="150,91,35,25" name="eyes/SpecialForeheadShadow" dx="81" dy="35"/>
         <cell rect="1045,158,20,55" name="glove_fg/scandalousSuccubusClothingRightArmFront" dx="104" dy="52"/>
         <cell rect="517,1550,30,20" name="glove_fg/fairyQueenDressArmFront" dx="105" dy="75"/>
@@ -591,8 +591,8 @@
         <cell rect="392,1620,80,90" name="weapon/hammerGeneric" dx="38" dy="55"/>
         <cell rect="482,1620,80,107" name="weapon/spearGeneric" dx="39" dy="53"/>
         <cell rect="572,1620,80,90" name="shield/shieldGeneric" dx="66" dy="60"/>
-		<cell rect="662,1620,80,90" name="weapon/rapierGeneric" dx="38" dy="55"/>
-		<cell rect="752,1620,80,90" name="weapon/katanaGeneric" dx="38" dy="55"/>
+        <cell rect="662,1620,80,90" name="weapon/rapierGeneric" dx="38" dy="55"/>
+        <cell rect="752,1620,80,90" name="weapon/katanaGeneric" dx="38" dy="55"/>
     </spritemap>
     <spritemap file="hair.png">
         <cell rect="1,70,59,65" name="hair/0" dx="75" dy="21"/>
@@ -1110,8 +1110,8 @@
         <layer name="torso"/>	
 		<layer name="ears_truebg"/>
 		<layer name="rearbody"/>
-		<layer name="hair_bg"/>
 		<layer name="clothCape"/>
+		<layer name="hair_bg"/>
 		<layer name="wings"/>
 		<layer name="tailAccessory"/>
         <layer name="tail_fg"/>
@@ -2695,22 +2695,30 @@
             <case values="Wings.HARPY,Wings.FEATHERED,Wings.FEATHERED_SPHINX,Wings.FEATHERED_ALICORN,Wings.FEATHERED_PHOENIX,Wings.FEATHERED_AVIAN,Wings.FEATHERED_LARGE">
                 <show part="wings/feather_large"/>
                 <show part="wings_bg/feather_large"/>
-				<show part="wings_front/feather_large"/>
+				<if test="playerHasLargeLowerBody">
+					<show part="wings_front/feather_large"/>
+				</if>
             </case>
             <case values="Wings.IMP,Wings.BAT_LIKE_TINY,Wings.BAT_LIKE_LARGE,Wings.BAT_LIKE_LARGE_2,Wings.GARGOYLE_LIKE_LARGE"><!--TODO sizes -->
                 <show part="wings/demon"/>
                 <show part="wings_bg/demon"/>
-				<show part="wings_front/demon"/>
+				<if test="playerHasLargeLowerBody">
+					<show part="wings_front/demon"/>
+				</if>
             </case>
 			<case values="Wings.NIGHTMARE">
                 <show part="wings/nightmare"/>
                 <show part="wings_bg/nightmare"/>
-				<show part="wings_front/nightmare"/>
+				<if test="isTaur()">
+					<show part="wings_front/nightmare"/>
+				</if>
             </case>
             <case values="Wings.DRACONIC_SMALL,Wings.DRACONIC_LARGE,Wings.DRACONIC_HUGE"><!--TODO sizes -->
                 <show part="wings_bg/scales"/>
                 <show part="wings/scales"/>
-				<show part="wings_front/scales"/>
+				<if test="playerHasLargeLowerBody">
+					<show part="wings_front/scales"/>
+				</if>
             </case>
             <case values="Wings.GIANT_DRAGONFLY,Wings.MANTIS_LIKE_SMALL,Wings.MANTIS_LIKE_LARGE,Wings.MANTIS_LIKE_LARGE2"><!--TODO -->
                 <show part="wings/bee"/>
@@ -2719,17 +2727,23 @@
             <case values="Wings.MANTICORE_LIKE_SMALL,Wings.MANTICORE_LIKE_LARGE">
                 <show part="wings/mantibig"/>
                 <show part="wings_bg/mantibig"/>
-				<show part="wings_front/mantibig"/>
+				<if test="playerHasLargeLowerBody">
+					<show part="wings_front/mantibig"/>
+				</if>
             </case>
             <case values="Wings.FEY_DRAGON_WINGS">
                 <show part="wings/fairy"/>
                 <show part="wings_bg/fairy"/>
-				<show part="wings_front/fairy"/>
+				<if test="playerHasLargeLowerBody">
+					<show part="wings_front/fairy"/>
+				</if>
             </case>
 			<case values="Wings.FAIRY">
                 <show part="wings/fairy"/>
                 <show part="wings_bg/fairy"/>
-				<show part="wings_front/fairy"/>
+				<if test="playerHasLargeLowerBody">
+					<show part="wings_front/fairy"/>
+				</if>
 				<if test="PlayerHasViewableOutfit == false">
 					<hide part="arms/*"/>
 					<show part="arms/demonlewd"/>
@@ -2743,6 +2757,9 @@
 			<case values="Wings.DEVILFEATHER">
 				<show part="wings/devilfeather"/>
                 <show part="wings_bg/devilfeather"/>
+				<if test="playerHasLargeLowerBody">
+					<show part="wings_front/devilfeather"/>
+				</if>
             </case>
 			<case values="Wings.ETHEREAL_WINGS">
                 <show part="wings/ghost"/>

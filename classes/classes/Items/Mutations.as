@@ -3930,6 +3930,12 @@ public final class Mutations extends MutationsHelper {
                 outputText("\n\nYou feel strange.  Fertile... somehow.  You don't know how else to think of it, but you're ready to be a mother.");
             }
             //GENERAL APPEARANCE STUFF BELOW
+            //ADDING GOBLINOID BLOOD IF PC QUALIFY
+            if ((player.isGoblinoid()) && player.findPerk(PerkLib.GoblinoidBlood) < 0) {
+                outputText("\nDue to your body becoming closer to that of a gremlin chemicals and drugs have started to affect you with way more potency then before. It would seem you have gained the goblinoid blood quality.\n");
+                outputText("\n(<b>Gained Perk: Goblinoid blood</b>)\n");
+                player.createPerk(PerkLib.GoblinoidBlood, 0, 0, 0, 0);
+            }
             //antianemone corollary:
             if (changes < changeLimit && player.hairType == 4 && rand(2) == 0) {
                 //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
@@ -4148,6 +4154,12 @@ public final class Mutations extends MutationsHelper {
                 outputText("\n\nYou feel strange.  Fertile... somehow.  You don't know how else to think of it, but you're ready to be a mother.");
             }
             //GENERAL APPEARANCE STUFF BELOW
+            //ADDING GOBLINOID BLOOD IF PC QUALIFY
+            if ((player.isGoblinoid()) && player.findPerk(PerkLib.GoblinoidBlood) < 0) {
+                outputText("\nDue to your body becoming closer to that of a goblin chemicals and drugs have started to affect you with way more potency then before. It would seem you have gained the goblinoid blood quality.\n");
+                outputText("\n(<b>Gained Perk: Goblinoid blood</b>)\n");
+                player.createPerk(PerkLib.GoblinoidBlood, 0, 0, 0, 0);
+            }
             //antianemone corollary:
             if (changes < changeLimit && player.hairType == 4 && rand(2) == 0) {
                 //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
@@ -4394,7 +4406,6 @@ public final class Mutations extends MutationsHelper {
                 player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
                 player.clitLength = .4;
                 changes++;
-
             }
             //6b.Infinite Vagina
             if (player.hasVagina && player.vaginalCapacity() < 9000 && rand(3) == 0 && changes < changeLimit) {

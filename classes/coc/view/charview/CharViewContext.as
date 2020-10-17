@@ -52,6 +52,7 @@ import coc.xlogic.ExecContext;
 					PlayerIsStancing: player.isStancing(),
 					PlayerIsFeralStancing: player.isFeralStancing(),
 					playerHasWeaponBannedArms: [Arms.DISPLACER, Arms.GARGOYLE, Arms.FROSTWYRM, Arms.CANCER].indexOf(player.arms.type) == -1 && !player.isStancing(),
+					playerHasLargeLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER].indexOf(player.lowerBody) == 1,
 
 					//Detect Weapon Skins
 					PlayerHasAStaff: player.isStaffTypeWeapon(),
