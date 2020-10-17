@@ -280,6 +280,8 @@ public class Creature extends Utils
 			return new BuffBuilder(statStore, tag);
 		}
 
+
+
 		//new stat area
 		public var strStat:PrimaryStat = _stats.findStat('str') as PrimaryStat;
 		public function get str():Number { return strStat.value; }

@@ -116,6 +116,7 @@ public class PerkType extends BaseContent
 				text: requirementText,
 				type: internalType
 			});
+
 			return this;
 		}
 

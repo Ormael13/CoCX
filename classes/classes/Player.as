@@ -2712,6 +2712,7 @@ use namespace CoC;
 				else */descC = "hamlet";
 			}
 			else descC = "camp";
+
 			return descC;
 		}
 
