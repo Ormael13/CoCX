@@ -837,6 +837,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2) > 0) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters2, 2, -player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2));
 				}
 
+				//Kaiba shor stock daily update
+				flags[kFLAGS.KAIBA_1] = rand(3);
+				flags[kFLAGS.KAIBA_2] = rand(2);
+				flags[kFLAGS.KAIBA_3] = rand(2);
 
 				//Racial perk daily effect Area
 

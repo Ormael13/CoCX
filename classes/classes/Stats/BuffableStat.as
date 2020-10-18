@@ -1,4 +1,5 @@
 package classes.Stats {
+import classes.Creature;
 import classes.internals.EnumValue;
 import classes.internals.Jsonable;
 import classes.internals.Utils;
@@ -28,6 +29,8 @@ public class BuffableStat implements IStat, Jsonable {
 	private var _max:Number = +Infinity;
 	private var _value:Number = 0.0; // Aggregate of buffs ONLY
 	private var _buffs:/*Buff*/Array = [];
+	private var _name:String;
+	private var _host:Creature;
 	
 	/**
 	 * Set of buff tags (key is tag and value is true) that were removed since last
@@ -86,13 +89,23 @@ public class BuffableStat implements IStat, Jsonable {
 	 *     max: default +Infinity;
 	 * }
 	 */
-	public function BuffableStat(options:*=null) {
+	public function BuffableStat(host:Creature, name:String, options:*=null) {
+		this._host = host;
+		this._name = name;
 		redefine(options);
 		
 		if (!(this._aggregate in AggregateTypes)) throw new Error("Invalid aggregate type");
 		// TODO validate other arguments
 	}
-
+	
+	public function get host():Creature {
+		return _host;
+	}
+	
+	public function get statName():String {
+		return _name;
+	}
+	
 	/**
 	 * Add `amount` ticks to buff tagged `tag`.
 	 * Does nothing if no such buff or it is permanent.

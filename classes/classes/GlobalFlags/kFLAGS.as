@@ -1299,11 +1299,11 @@ public static const EXCELLIA_MALE_COW_KIDS:int                                  
 public static const EXCELLIA_FEMALE_KIDS:int                                   		= 1291;
 public static const EXCELLIA_MALE_KIDS:int                                   		= 1292;
 public static const EASTER_BUNNY_EGGS_STORED:int                                   	= 1293;
-public static const UNKNOWN_FLAG_NUMBER_01294:int                                   = 1294;
-public static const UNKNOWN_FLAG_NUMBER_01295:int                                   = 1295;
-public static const UNKNOWN_FLAG_NUMBER_01296:int                                   = 1296;
-public static const UNKNOWN_FLAG_NUMBER_01297:int                                   = 1297;
-public static const UNKNOWN_FLAG_NUMBER_01298:int                                   = 1298;
+public static const KAIBA_1:int                                   					= 1294;
+public static const KAIBA_2:int                                   					= 1295;
+public static const KAIBA_3:int                                   					= 1296;
+public static const KAIBA_4:int                                   					= 1297;
+public static const KAIBA_5:int                                   					= 1298;
 public static const UNKNOWN_FLAG_NUMBER_01299:int                                   = 1299;
 public static const UNKNOWN_FLAG_NUMBER_01300:int                                   = 1300;
 public static const UNKNOWN_FLAG_NUMBER_01301:int                                   = 1301;
