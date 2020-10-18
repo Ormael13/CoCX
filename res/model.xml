@@ -533,6 +533,7 @@
         <cell rect="1017,216,80,105" name="clothe/redKimonoSleeves" dx="64" dy="72"/>
         <cell rect="1099,216,80,105" name="clothe/purpleKimonoSleeves" dx="64" dy="72"/>
         <cell rect="853,325,80,105" name="clothe/blackKimonoSleeves" dx="64" dy="72"/>
+        <cell rect="1181,216,80,105" name="clothe/vampireTop" dx="65" dy="63"/>
         <cell rect="935,325,80,104" name="clothe/goblinTechnomancerClotheArms" dx="64" dy="72"/>
         <cell rect="622,445,40,80" name="clothe/comfortableClothes" dx="79" dy="44"/>
         <cell rect="1263,325,80,104" name="clothe/berserkerArmorTop" dx="64" dy="55"/>
@@ -543,6 +544,8 @@
         <cell rect="1066,158,40,55" name="clotheLegs/scandalousSuccubusClothinglegs" dx="85" dy="120"/>
         <cell rect="1108,158,40,55" name="clotheLegs/scandalousSuccubusClothinglegsLewd" dx="80" dy="119"/>
         <cell rect="1108,158,40,55" name="clotheLegs/scandalousSuccubusClothingTaurTODO" dx="72" dy="96"/>
+        <cell rect="1150,158,40,55" name="clotheLegs/vampireClothinglegs" dx="85" dy="120"/>
+        <cell rect="1192,158,40,55" name="clotheLegs/vampireClothinglegsLewd" dx="85" dy="117"/>
         <cell rect="1345,325,80,104" name="clotheLegs/berserkerArmorLegs" dx="64" dy="72"/>
         <cell rect="1181,434,90,104" name="clotheLegs/berserkerArmorLegsFeral" dx="62" dy="50"/>
         <cell rect="776,12,45,25" name="armorNeck/fullplatetopFemale" dx="80" dy="63"/>
@@ -554,21 +557,26 @@
         <cell rect="776,42,25,55" name="armorLeftArm/fullplateleftarm" dx="78" dy="66"/>
         <cell rect="961,158,20,55" name="clothLeftArm/scandalousSuccubusClothingleftArm" dx="81" dy="68"/>
         <cell rect="1003,158,20,55" name="clothLeftArm/scandalousSuccubusClothingleftArmLewd" dx="85" dy="59"/>
+        <cell rect="1234,158,20,55" name="clothLeftArm/vampireClothingleftArm" dx="81" dy="68"/>
+        <cell rect="1276,158,20,55" name="clothLeftArm/vampireClothingleftArmLewd" dx="85" dy="64"/>
         <cell rect="1099,543,70,90" name="clothLeftArm/fairyQueenDressUnderClothes" dx="64" dy="66"/>
         <cell rect="1272,434,40,44" name="clothLeftArm/berserkerArmorArmsFeralLeft" dx="56" dy="56"/>
         <cell rect="1322,434,40,44" name="clothLeftArm/berserkerArmorArmsFeralQuadLeft" dx="56" dy="56"/>
         <cell rect="804,42,25,55" name="armorRightArm/fullplaterightarm" dx="102" dy="66"/>
         <cell rect="982,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArm" dx="109" dy="69"/>
         <cell rect="1024,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArmLewd" dx="104" dy="52"/>
+        <cell rect="1255,158,20,55" name="clothRightArm/vampireClothingRightArm" dx="108" dy="68"/>
+        <cell rect="1297,158,20,55" name="clothRightArm/vampireClothingRightArmLewd" dx="104" dy="52"/>
         <cell rect="1181,325,80,104" name="clothRightArm/berserkerArmorArms" dx="64" dy="72"/>
         <cell rect="1272,489,40,44" name="clothRightArm/berserkerArmorArmsFeralRight" dx="101" dy="56"/>
         <cell rect="1322,489,40,44" name="clothRightArm/berserkerArmorArmsFeralQuadRight" dx="101" dy="56"/>
         <cell rect="818,798,173,156" name="clothCape/WalpurgisClothesBack" dx="19" dy="12"/>
-		<cell rect="935,543,150,80" name="clothCape/fairyQueenDressUnder" dx="22" dy="61"/>
+        <cell rect="935,543,150,80" name="clothCape/fairyQueenDressUnder" dx="22" dy="61"/>
         <cell rect="150,91,35,25" name="eyes/SpecialForeheadShadow" dx="81" dy="35"/>
         <cell rect="1045,158,20,55" name="glove_fg/scandalousSuccubusClothingRightArmFront" dx="104" dy="52"/>
+        <cell rect="1318,158,20,55" name="glove_fg/vampireClothingRightArmFront" dx="104" dy="52"/>
         <cell rect="517,1550,30,20" name="glove_fg/fairyQueenDressArmFront" dx="105" dy="75"/>
-        <cell rect="201,91,15,9" name="tailAccessory/demonTailJewelery" dx="137" dy="132"/>
+        <cell rect="201,91,15,9" name="tailAccessory/demonTailJewelery" dx="147" dy="132"/>
         <cell rect="296,1550,99,45" name="uniquePlantBath/lilirauneBath" dx="34" dy="88"/>
         <cell rect="546,1430,50,100" name="torso/liliraune" dx="36" dy="26"/>
         <cell rect="296,1596,85,20" name="face/lilirauneCorruptedSmile" dx="34" dy="50"/>
@@ -879,6 +887,9 @@
         <cell rect="861,410,49,29" name="bra_fg/berserkerBraSmall" dx="79" dy="68"/>
         <cell rect="861,440,49,29" name="bra_fg/berserkerBraMedium" dx="79" dy="68"/>
         <cell rect="861,470,49,29" name="bra_fg/berserkerBraLarge" dx="79" dy="68"/>
+        <cell rect="911,410,49,29" name="bra_fg/vampireBraSmall" dx="79" dy="68"/>
+        <cell rect="911,440,49,29" name="bra_fg/vampireBraMedium" dx="79" dy="68"/>
+        <cell rect="911,470,49,29" name="bra_fg/vampireBraLarge" dx="79" dy="68"/>
         <cell rect="11,410,49,29" name="bra/goblinTechnomancerBraSmall" dx="79" dy="68"/>
         <cell rect="11,440,49,29" name="bra/goblinTechnomancerBraMedium" dx="79" dy="68"/>
         <cell rect="11,470,49,29" name="bra/goblinTechnomancerBraLarge" dx="79" dy="68"/>
@@ -1029,8 +1040,8 @@
         <cell rect="339,350,168,139" name="wings/wraith" dx="27" dy="39"/>
         <cell rect="508,350,168,139" name="wings/ghost" dx="21" dy="27"/>
         <cell rect="170,350,168,139" name="rearbody/displacertentacle" dx="24" dy="20"/>
-        <cell rect="1,630,168,139" name="wings/vampire_bg" dx="20" dy="28"/>
-        <cell rect="170,630,168,139" name="overclothe/vampire" dx="20" dy="28"/>
+        <cell rect="1,630,248,139" name="wings_bg/vampire_bg" dx="20" dy="28"/>
+        <cell rect="254,630,168,139" name="overclothe/vampire" dx="20" dy="28"/>
     </spritemap>
 	
 	<!-- LAYER AREA -->
@@ -1742,6 +1753,10 @@
 					<show part="face/goo"/>
 				</if>
             </case>
+			<!--In the event player corruption is maxed enter yandere mode forehead-->
+			<if test="cor &gt;=100">
+				<show part="eyes/SpecialForeheadShadow"/>
+			</if>
             <case values="Face.HORSE,Face.FOX,Face.PIG,Face.BOAR,Face.RHINO,Face.ECHIDNA"><!--TODO -->
                 <show part="face/fur"/>
             </case>
@@ -2772,7 +2787,7 @@
             </case>
 			<case values="Wings.VAMPIRE">
                 <show part="overclothe/vampire"/>
-				<show part="wings/vampire_bg"/>
+				<show part="wings_bg/vampire_bg"/>
             </case>
             <default>
             </default>
