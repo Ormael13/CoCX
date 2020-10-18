@@ -263,29 +263,25 @@ public class Creature extends Utils
 		   [   S T A T S   ]
 		
 		 */
-		private var _stats: StatStore = new StatStore({
-			// 'statName': new BuffableStats({base: 0, min: 0});
-			// 'statName': new PrimaryStat();
-			'str': new PrimaryStat(),
-			'tou': new PrimaryStat(),
-			'spe': new PrimaryStat(),
-			'int': new PrimaryStat(),
-			'wis': new PrimaryStat(),
-			'lib': new PrimaryStat(),
-			'sens': new BuffableStat({base: 15, min: 0})
-		});
 		public function get statStore():StatStore { return _stats; }
 		
 		public function buff(tag:String):BuffBuilder {
 			return new BuffBuilder(statStore, tag);
 		}
 
-
-
 		//new stat area
-		public var strStat:PrimaryStat = _stats.findStat('str') as PrimaryStat;
+		public var strStat:PrimaryStat;
+		public var touStat:PrimaryStat;
+		public var speStat:PrimaryStat;
+		public var intStat:PrimaryStat;
+		public var wisStat:PrimaryStat;
+		public var libStat:PrimaryStat;
+		public var sensStat:BuffableStat;
+		
+		private var _stats: StatStore;
+		
+		
 		public function get str():Number { return strStat.value; }
-		public var touStat:PrimaryStat = _stats.findStat('tou') as PrimaryStat;
 		public function get tou():Number {if (this.hasPerk(PerkLib.IcyFlesh) || this.hasPerk(PerkLib.HaltedVitals)) {
 			return 1;
 		} else {
@@ -293,13 +289,9 @@ public class Creature extends Utils
 		}
 		}
 
-		public var speStat:PrimaryStat = _stats.findStat('spe') as PrimaryStat;
 		public function get spe():Number { return speStat.value; }
-		public var intStat:PrimaryStat = _stats.findStat('int') as PrimaryStat;
 		public function get inte():Number { return intStat.value; }
-		public var wisStat:PrimaryStat = _stats.findStat('wis') as PrimaryStat;
 		public function get wis():Number { return Math.round(wisStat.value); }
-		public var libStat:PrimaryStat = _stats.findStat('lib') as PrimaryStat;
 		public function get lib():Number { return Math.round(libStat.value); }
 
 		public function trainStat(statName: String, amount: Number, limit: Number):void {
@@ -363,7 +355,6 @@ public class Creature extends Utils
 		}
 
 		//Primary stats
-		public var sensStat:BuffableStat = _stats.findStat('sens') as BuffableStat;
 		public function get sens():Number { return sensStat.value; }
 		public var cor:Number = 0;
 		public var fatigue:Number = 0;
@@ -1041,6 +1032,24 @@ public class Creature extends Utils
 		//Constructor
 		public function Creature()
 		{
+			strStat = new PrimaryStat(this,'str');
+			touStat = new PrimaryStat(this,'tou');
+			speStat = new PrimaryStat(this,'spe');
+			intStat = new PrimaryStat(this,'int');
+			wisStat = new PrimaryStat(this,'wis');
+			libStat = new PrimaryStat(this,'lib');
+			sensStat = new BuffableStat(this,'sens', {base:15, min:0});
+			
+			_stats = new StatStore({
+				'str': strStat,
+				'tou': touStat,
+				'spe': speStat,
+				'int': intStat,
+				'wis': wisStat,
+				'lib': libStat,
+				'sens': sensStat
+			});
+			
 			skin = new Skin(this);
 			underBody = new UnderBody(this);
 			lowerBodyPart = new LowerBody(this);

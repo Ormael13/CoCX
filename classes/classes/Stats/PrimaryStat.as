@@ -2,18 +2,17 @@
  * Coded by aimozg on 06.05.2018.
  */
 package classes.Stats {
+import classes.Creature;
 import classes.internals.Jsonable;
 import classes.internals.Utils;
 
 public class PrimaryStat implements IStat,IStatHolder,Jsonable {
-	private var _core:RawStat = new RawStat({value:1,min:1,max:100});
-	private var _mult:BuffableStat = new BuffableStat({base:1.0,min:0});
-	private var _bonus:BuffableStat = new BuffableStat({});
-	private var _substats:Object = {
-		"core": _core,
-		"mult": _mult,
-		"bonus": _bonus
-	};
+	private var _core:RawStat;
+	private var _mult:BuffableStat;
+	private var _bonus:BuffableStat;
+	private var _name:String;
+	private var _host:Creature;
+	private var _substats:Object;
 	
 	public function reset(core:Number):void {
 		_core.value = core;
@@ -41,9 +40,27 @@ public class PrimaryStat implements IStat,IStatHolder,Jsonable {
 	public function get mult100():int {
 		return Math.floor(_mult.value*100);
 	}
-	public function PrimaryStat() {
+	public function PrimaryStat(host:Creature, name:String) {
+		_name = name;
+		_host = host;
+		_core = new CoreStat(host,name+'.core');
+		_mult = new BuffableStat(host,name+'.mult', {base:1.0,min:0});
+		_bonus = new BuffableStat(host,name+'.bonus', {});
+		_substats = {
+			"core": _core,
+			"mult": _mult,
+			"bonus": _bonus
+		};
 	}
 	
+	
+	public function get host():Creature {
+		return _host;
+	}
+	
+	public function get statName():String {
+		return _name;
+	}
 	public function findStat(fullname:String):IStat {
 		if (fullname.indexOf('.') == -1) return _substats[fullname];
 		return StatUtils.findStatByPath(this, fullname);
