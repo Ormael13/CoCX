@@ -281,7 +281,6 @@ use namespace CoC;
 			addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
 			if ((player.hasPerk(PerkLib.TitanGripEx) && !player.hasPerk(PerkLib.GigantGripEx)) || player.hasPerk(PerkLib.LegendaryGolemMaker)) addButton(10, "PerkFixes", AddMaxBackpack).hint("Fix testers saves perks for Giant's Grip (Ex) and above Epic Golem maker");
 			addButton(11, "ChimeraUprising", AddMaxBackpack4).hint("Use only ONCE if PC from older save have chimerical body perks above Basic stage.");
-			addButton(12, "AscTranshumFix", AddMaxBackpack2).hint("Use only ONCE if PC from older save have mess up transhumanism ascension perks.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function AddMaxBackpack():void {
@@ -296,20 +295,7 @@ use namespace CoC;
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack2():void {
-			if (player.findPerk(PerkLib.AscensionTranshumanism) >= 0) {
-				player.strStat.core.max += player.perkv1(PerkLib.AscensionTranshumanism);
-				player.touStat.core.max += player.perkv1(PerkLib.AscensionTranshumanism);
-				player.speStat.core.max += player.perkv1(PerkLib.AscensionTranshumanism);
-				player.intStat.core.max += player.perkv1(PerkLib.AscensionTranshumanism);
-				player.wisStat.core.max += player.perkv1(PerkLib.AscensionTranshumanism);
-				player.libStat.core.max += player.perkv1(PerkLib.AscensionTranshumanism);
-			}
-			if (player.findPerk(PerkLib.AscensionTranshumanismStr) >= 0) player.strStat.core.max += 8 * player.perkv1(PerkLib.AscensionTranshumanismStr);
-			if (player.findPerk(PerkLib.AscensionTranshumanismTou) >= 0) player.touStat.core.max += 8 * player.perkv1(PerkLib.AscensionTranshumanismTou);
-			if (player.findPerk(PerkLib.AscensionTranshumanismSpe) >= 0) player.speStat.core.max += 8 * player.perkv1(PerkLib.AscensionTranshumanismSpe);
-			if (player.findPerk(PerkLib.AscensionTranshumanismInt) >= 0) player.intStat.core.max += 8 * player.perkv1(PerkLib.AscensionTranshumanismInt);
-			if (player.findPerk(PerkLib.AscensionTranshumanismWis) >= 0) player.wisStat.core.max += 8 * player.perkv1(PerkLib.AscensionTranshumanismWis);
-			if (player.findPerk(PerkLib.AscensionTranshumanismLib) >= 0) player.libStat.core.max += 8 * player.perkv1(PerkLib.AscensionTranshumanismLib);
+			
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack3():void {
