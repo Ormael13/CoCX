@@ -92,7 +92,7 @@ use namespace CoC;
 						when  : function ():Boolean {
 							return player.level >= 9 && flags[kFLAGS.ANT_WAIFU] == 0 && flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] == 0 && flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] == 0;
 						},
-						chance: 0.25,
+						chance: phyllaAnthillChance,
 						call  : antsScene.antColonyEncounter
 					}, {
 						name: "dungeon",
@@ -188,6 +188,14 @@ use namespace CoC;
 			player.createKeyItem("Camp - Chest", 0, 0, 0, 0);
 			story.display("strings/chest/b");
 			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		public function phyllaAnthillChance():Number {
+			var temp:Number = 1.5;
+			if (flags[kFLAGS.PHYLLA_SAVED] == 1) temp += 1.5;
+			if (flags[kFLAGS.PC_READY_FOR_ANT_COLONY_CHALLENGE] == 1) temp += 1.5;
+			if (flags[kFLAGS.ANT_ARENA_WINS] > 0) temp += flags[kFLAGS.ANT_ARENA_WINS] * 1.5;
+			return temp;
 		}
 
 		public function nailsEncounter():void {

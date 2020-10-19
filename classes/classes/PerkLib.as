@@ -533,22 +533,22 @@ public class PerkLib
 				"Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.",
 				"Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.\n");
 		public static const BiggerGolemBagI:PerkType = mk("Bigger Golem Bag I", "Bigger Golem Bag I",
-				"Your extra dimensional golem bag can store 2 more temporal (and 1 more pernament when becoming Master Golem Maker) golems.",
+				"Your extra dimensional golem bag can store 2 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
 				"You choose 'Bigger Golem Bag I' perk, increasing your golems bag.");
 		public static const BiggerGolemBagII:PerkType = mk("Bigger Golem Bag II", "Bigger Golem Bag II",
-				"Your extra dimensional golem bag can store 2 more temporal (and 1 more pernament when becoming Master Golem Maker) golems.",
+				"Your extra dimensional golem bag can store 2 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
 				"You choose 'Bigger Golem Bag II' perk, increasing your golems bag.");
 		public static const BiggerGolemBagIII:PerkType = mk("Bigger Golem Bag III", "Bigger Golem Bag III",
-				"Your extra dimensional golem bag can store 2 more temporal (and 1 more pernament when becoming Master Golem Maker) golems.",
+				"Your extra dimensional golem bag can store 2 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
 				"You choose 'Bigger Golem Bag III' perk, increasing your golems bag.");
 		public static const BiggerGolemBagIV:PerkType = mk("Bigger Golem Bag IV", "Bigger Golem Bag IV",
-				"Your extra dimensional golem bag can store 2 more temporal (and 1 more pernament when becoming Master Golem Maker) golems.",
+				"Your extra dimensional golem bag can store 2 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
 				"You choose 'Bigger Golem Bag IV' perk, increasing your golems bag.");
 		public static const BiggerGolemBagV:PerkType = mk("Bigger Golem Bag V", "Bigger Golem Bag V",
-				"Your extra dimensional golem bag can store 2 more temporal (and 1 more pernament when becoming Master Golem Maker) golems.",
+				"Your extra dimensional golem bag can store 2 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
 				"You choose 'Bigger Golem Bag V' perk, increasing your golems bag.");
 		public static const BiggerGolemBagVI:PerkType = mk("Bigger Golem Bag VI", "Bigger Golem Bag VI",
-				"Your extra dimensional golem bag can store 2 more temporal (and 1 more pernament when becoming Master Golem Maker) golems.",
+				"Your extra dimensional golem bag can store 2 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
 				"You choose 'Bigger Golem Bag VI' perk, increasing your golems bag.");
 		public static const BlackHeart:PerkType = mk("Black Heart", "Black Heart",
 				"You intelligence to increase power of lust strike as well making fascinate slightly stronger.",
@@ -626,7 +626,7 @@ public class PerkLib
 						"]",
 				"You choose the 'Channeling' perk, boosting the strength of your spellcasting and expanding your mana pool!");
 		public static const ChargedCore:PerkType = mk("Charged Core", "Charged Core",
-				"At the cost of using additional mana you can charge each temporal golem core allowing them to deal minor area of effect damages (it have small synergistic effect when more golems attacks at once).",
+				"At the cost of using additional mana you can charge each temporary golem core allowing them to deal minor area of effect damages (it have small synergistic effect when more golems attacks at once).",
 				"You choose 'Charged Core' perk, learning how to make golems attacks be slight stronger.");
 		public static const CheatDeath:PerkType = mk("Cheat Death", "Cheat Death",
 				"Increasing healing spells effect by another 100% when below 10% max HP (cumulative with Close to death perk effect for total boost of 150%).",
@@ -1191,7 +1191,7 @@ public class PerkLib
 				"You choose the 'First Attack: Elementals' perk, allowing your summoned elementals to attack independly from you.");
 		public static const FirstAttackGolems:PerkType = mk("First Attack: Golems", "First Attack: Golems",
 				"Before your actions one or more of your golems will attack.",
-				"You choose the 'First Attack: Golems' perk, allowing some of your pernament golems strike before you.");
+				"You choose the 'First Attack: Golems' perk, allowing some of your permanent golems strike before you.");
 		public static const FirstResponse:PerkType = mk("First Response", "First Response",
 				"Your time running into disaster to take care of others allows you to take better care of wounds, further increasing your regen.",
 				"You choose the 'First Response' perk, increasing HP gains by 20%.");
@@ -1262,20 +1262,20 @@ public class PerkLib
 				"You have surpassed your mortal self to become the embodiment of melee damage, further increasing it. (+10% melee phys dmg)",
 				"You choose the 'God of Steel' perk, gaining +10% melee phys dmg.");
 		public static const GolemArmyCaptain:PerkType = mk("Golem Army Captain", "Golem Army Captain",
-				"+2/4 to max limit of stored pernament/temporal stone golems.",// +1 to max limit for stored pernament steel golems.
-				"You choose the 'Golem Army Captain' perk, allowing to store additional pernament (+2) and temporal (+4) stone golems golems in your golem bag.");// Allow to store steel golem. (+1)
+				"+2/4 to max limit of stored permanent/temporary stone golems.",// +1 to max limit for stored permanent steel golems.
+				"You choose the 'Golem Army Captain' perk, allowing to store additional permanent (+2) and temporary (+4) stone golems golems in your golem bag.");// Allow to store steel golem. (+1)
 		public static const GolemArmyColonel:PerkType = mk("Golem Army Colonel", "Golem Army Colonel",
-				"+4/8 to max limit of stored pernament/temporal stone golems.",
-				"You choose the 'Golem Army Colonel' perk, allowing to store additional pernament (+4) and temporal (+8) stone golems in your golem bag.");
+				"+4/8 to max limit of stored permanent/temporary stone golems.",
+				"You choose the 'Golem Army Colonel' perk, allowing to store additional permanent (+4) and temporary (+8) stone golems in your golem bag.");
 		public static const GolemArmyGeneral:PerkType = mk("Golem Army General", "Golem Army General",
-				"+1/5/10 to max limit stored of (pernament improved/normal)/temporal stone golems.",
-				"You choose the 'Golem Army General' perk, allowing to store additional pernament (improved stone +1/stone +5) and temporal (+10) stone golems in your golem bag.");
+				"+1/5/10 to max limit stored of (permanent improved/normal)/temporary stone golems.",
+				"You choose the 'Golem Army General' perk, allowing to store additional permanent (improved stone +1/stone +5) and temporary (+10) stone golems in your golem bag.");
 		public static const GolemArmyLieutenant:PerkType = mk("Golem Army Lieutenant", "Golem Army Lieutenant",
-				"+1/2 to max limit stored of pernament/temporal stone golems.",
-				"You choose the 'Golem Army Lieutenant' perk, allowing to store additional pernament (+1) and temporal (+2) stone golems in your golem bag.");
+				"+1/2 to max limit stored of permanent/temporary stone golems.",
+				"You choose the 'Golem Army Lieutenant' perk, allowing to store additional permanent (+1) and temporary (+2) stone golems in your golem bag.");
 		public static const GolemArmyMajor:PerkType = mk("Golem Army Major", "Golem Army Major",
-				"+3/6 to max limit stored of pernament/temporal stone golems.",
-				"You choose the 'Golem Army Major' perk, allowing to store additional pernament (+3) and temporal (+6) stone golems in your golem bag.");
+				"+3/6 to max limit stored of permanent/temporary stone golems.",
+				"You choose the 'Golem Army Major' perk, allowing to store additional permanent (+3) and temporary (+6) stone golems in your golem bag.");
 		public static const GoliathI:PerkType = mk("Goliath I", "Goliath I",
 				"+2 extra HP per point of strength.",
 				"You choose the 'Goliath I' perk, granting +2 extra maximum HP for each point of strength.");
@@ -1763,7 +1763,7 @@ public class PerkLib
 				"You choose the 'Kitsune Thyroid Gland (Final Form)' perk. Your thyroid gland to evolved once again increasing efficiency of your kitsune powers.").withBuffs({'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05});
 		public static const LactaBovinaOvaries:PerkType = mk("Lacta Bovina Ovaries", "Lacta Bovina Ovaries",
 				"Allow keep Milk Blast special even if cow score is lower than 9. Additionaly your max Lust increase by 10.",
-				"You choose the 'Lacta Bovina Ovaries' perk. Interaction between pernament body alteration from Bimbo Liquer (maybe Bro Brew too) and your cow-like nature allows you to keep cow racial special even if you stop been cow-like.");
+				"You choose the 'Lacta Bovina Ovaries' perk. Interaction between permanent body alteration from Bimbo Liquer (maybe Bro Brew too) and your cow-like nature allows you to keep cow racial special even if you stop been cow-like.");
 		public static const LactaBovinaOvariesEvolved:PerkType = mk("Lacta Bovina Ovaries (Evolved)", "Lacta Bovina Ovaries (Evolved)",
 				"+5% to lust resistance, increase lactation output by 200 mLs and +10 to max libido.",
 				"You choose the 'Lacta Bovina Ovaries (Evolved)' perk. Granting more lust resistance, increase slight lactation output and boost to max libido.").withBuffs({'lib.mult':0.10});
@@ -1863,7 +1863,7 @@ public class PerkLib
 				"You choose the 'Limit Breaker: Soul (2nd stage)' perk, breaking your limits for 'soul' for the second time. (+10% max Mana and Soulforce)");
 		public static const LizanMarrow:PerkType = mk("Lizan Marrow", "Lizan Marrow",
 				"Regenerates 0.5% of HP per round in combat and 1% of HP per hour. Additionaly your limit for innate self-regeneration rate increased.",
-				"You choose the 'Lizan Marrow' perk. Constant regenerating your body caused pernamently change to your body marrow.");
+				"You choose the 'Lizan Marrow' perk. Constant regenerating your body caused permanently change to your body marrow.");
 		public static const LizanMarrowEvolved:PerkType = mk("Lizan Marrow (Evolved)", "Lizan Marrow (Evolved)",
 				"Regenerates 1% of HP per round in combat and 2% of HP per hour. Additionaly your limit for innate self-regeneration rate increased.",
 				"You choose the 'Lizan Marrow (Evolved)' perk. Constant use of your lizan marrow caused it to change.");
@@ -1970,7 +1970,7 @@ public class PerkLib
 				"Defend move now futher reduce incoming damage and allow for slight improved fatigue/mana/soulforce recovery.",
 				"You choose 'Mastered Defence Stance' perk, finally attaining mastery with your defence pose.");
 		public static const MasterGolemMaker:PerkType = mk("Master Golem Maker", "Master Golem Maker",
-				"Your proficiency in making golems allows to make pernament golems that will not longer shatter after one attack. Allows to store one such golem in golem bag.",
+				"Your proficiency in making golems allows to make permanent golems that will not longer shatter after one attack. Allows to store one such golem in golem bag.",
 				"You choose 'Master Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const MasterGunslinger:PerkType = mk("Master Gunslinger", "Master Gunslinger",
 				"Gain an extra firearm attack per turn (4th one).",
@@ -2022,7 +2022,7 @@ public class PerkLib
 				"You choose the 'Mind over Body VI' perk, granting +2 extra maximum mana for each point of intelligence.");
 		public static const MinotaurTesticles:PerkType = mk("Minotaur Testicles", "Minotaur Testicles",
 				"Allow keep Cum Cannon special even if minotaur score is lower than 9. Additionaly your max Lust increase by 10.",
-				"You choose the 'Minotaur Testicles' perk. Interaction between pernament body alteration from Bro Brew (maybe Bimbo Liquer too) and your minotaur nature allows you to keep minotaur racial special even if you stop been bull-like.");
+				"You choose the 'Minotaur Testicles' perk. Interaction between permanent body alteration from Bro Brew (maybe Bimbo Liquer too) and your minotaur nature allows you to keep minotaur racial special even if you stop been bull-like.");
 		public static const MinotaurTesticlesEvolved:PerkType = mk("Minotaur Testicles (Evolved)", "Minotaur Testicles (Evolved)",
 				"+5% to lust resistance, increase cum output by 200 mLs and +10 to max libido (scalable).",
 				"You choose the 'Minotaur Testicles (Evolved)' perk. Granting more lust resistance, increase slight cum output and boost to max libido.").withBuffs({'lib.mult':0.10});
@@ -2646,7 +2646,7 @@ public class PerkLib
 				"You're a new student, kinda have to be studious. Your hours of study has helped you increase max mana by 10%.",
 				"You choose the 'Studious' perk, gaining +10% max Mana.");
 		public static const SuperChargedCore:PerkType = mk("Super Charged Core", "Super Charged Core",
-				"At the cost of using additional mana you can super charge each temporal golem core attaing ever better effects than before.",
+				"At the cost of using additional mana you can super charge each temporary golem core attaing ever better effects than before.",
 				"You choose 'Super Charged Core' perk, learning how to make core charging more effective.");
 		public static const SuperiorEndurance:PerkType = mk("Superior Endurance", "Superior Endurance",
 				"Increases maximum fatigue by 500.",
@@ -2722,8 +2722,8 @@ public class PerkLib
 				"Instead of being taught, now you teach others. Your skill allows you to increase max mana by 10%.",
 				"You choose the 'Teacher' perk, gaining +10% max Mana.");
 		public static const TemporalGolemsRestructuration:PerkType = mk("Temporal Golems Restructuration", "Temporal Golems Restructuration",
-				"Allow to use option of send all temporal golems to attack in one turn. Adding option to make 5 temporal golems at once and shorten a bit time to make 1 temporal golem.",
-				"You choose the 'Temporal Golems Restructuration' perk, adding option to make faster and more temporal golems at once and have option to send them all at once to attack.");
+				"Allow to use option of send all temporary golems to attack in one turn. Adding option to make 5 temporary golems at once and shorten a bit time to make 1 temporary golem.",
+				"You choose the 'Temporal Golems Restructuration' perk, adding option to make faster and more temporary golems at once and have option to send them all at once to attack.");
 		public static const ThirdRing:PerkType = mk("Third Ring", "Third Ring",
 				"Your advanced understanding of magic pools allows you to equip third ring.",
 				"You choose the 'Third Ring' perk, reaching advanced understanding of magic pools to allow you equip third ring.");

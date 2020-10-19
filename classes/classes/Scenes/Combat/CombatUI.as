@@ -143,6 +143,7 @@ public class CombatUI extends BaseCombatContent {
 			case "Pistol":
 			case "Rifle":
 			case "2H Firearm":
+			case "Dual Firearms":
 				if (player.ammo <= 0)
 					btnRanged.show("Reload", combat.reloadWeapon1, "Your " + player.weaponRangeName + " is out of ammo.  You'll have to reload it before attack.");
 				else btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");

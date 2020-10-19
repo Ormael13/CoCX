@@ -40,8 +40,9 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 					dynStats("lus", 2);
 				}
 				outputText("\n\nOf course, you could resolve to destroy the corrupted glade if you want to.");
-				doNext(camp.returnToCampUseOneHour);
-				addButton(1, "Destroy Them", destroyTheCorruptedGladesChoice).hint("Attempt to destroy the perverted glade.");
+				menu();
+				addButton(3, "Destroy Them", destroyTheCorruptedGladesChoice).hint("Attempt to destroy the perverted glade.");
+				addButton(4, "Leave", camp.returnToCampUseOneHour);
 			}
 			else if (player.cor <= 66) { //intrigued reaction
 				outputText("  You explore the glade with equal parts caution and curiosity.  ");
@@ -56,8 +57,9 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 						outputText("A cluster of huge breast-like knots on a nearby tree draws your attention.  Unable to resist, you poke one, and burst into giggles as it jiggles like a real breast!  You cautiously begin groping the tree-tit, and smile as it begins leaking sweet-smelling sap.  The scent conjures memories of helping to make maple syrup back home, and before you realize it, you've gathered a drop of the sap on your finger and tasted it.  It's powerfully sweet, making your tongue tingle and heart beat faster.  Unbidden, the thought of suckling the teat dry of its sweet treat comes to mind, but you manage to reject it and stumble away from the corrupted glade.  You have trouble with your tongue for the next hour: it won't stay in your mouth, and keeps licking your lips, seeking any leftover sweetness.  It almost distracts you from the palpable heat gathering between your thighs.");
 				}
 				dynStats("lus", 20 + player.lib / 5, "cor", .5);
-				doNext(camp.returnToCampUseOneHour);
-				addButton(1, "Destroy Them", destroyTheCorruptedGladesChoice).hint("Attempt to destroy the perverted glade.");
+				menu();
+				addButton(3, "Destroy Them", destroyTheCorruptedGladesChoice).hint("Attempt to destroy the perverted glade.");
+				addButton(4, "Leave", camp.returnToCampUseOneHour);
 			}
 			else { //drink sap/lick flower reaction
 				outputText("  You smile as you enter the glade, wondering which of the forbidden fruits you should try...\n\nThere are flowers that bear more than a passing resemblance to pussies,\nvines with absurdly large penis-like tips,\nand trees covered in breast-like knots, leaking sap.");
@@ -291,21 +293,27 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 			menu();
 			var button:int = 0;
 			if (player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0) {
-				addButton(button++, "Fire Breath", destroyTheCorruptedGlades, 0);
+				if (player.fatigue > player.maxFatigue() - 50) addButtonDisabled(button++, "Fire Breath", "You are too tired to destroy the foul glade this way.");
+				else addButton(button++, "Fire Breath", destroyTheCorruptedGlades, 0);
 			}
 			if ((player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0) && player.tailType == Tail.FOX && player.tailCount >= 7) {
-				addButton(button++, "Fox Fire", destroyTheCorruptedGlades, 1);
+				if (player.fatigue > player.maxFatigue() - 20) addButtonDisabled(button++, "Fox Fire", "You are too tired to destroy the foul glade this way.");
+				else addButton(button++, "Fox Fire", destroyTheCorruptedGlades, 1);
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
-				addButton(button++, "Whitefire", destroyTheCorruptedGlades, 2);
+				if (player.mana < 40) addButtonDisabled(button++, "Whitefire", "You are too low on mana to destroy the foul glade this way.");
+				else addButton(button++, "Whitefire", destroyTheCorruptedGlades, 2);
 			}
 			if (player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.weapon == weapons.L__AXE) {
-				addButton(button++, "Axe", destroyTheCorruptedGlades, 3);
+				if (player.fatigue > player.maxFatigue() - 40) addButtonDisabled(button++, "Axe", "You are too tired to destroy the foul glade this way.");
+				else addButton(button++, "Axe", destroyTheCorruptedGlades, 3);
 			}
 			if (player.weaponVerb == "stab" || player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut") {
-				addButton(button++, "Weapon", destroyTheCorruptedGlades, 4);
+				if (player.fatigue > player.maxFatigue() - 30) addButtonDisabled(button++, "Weapon", "You are too tired to destroy the foul glade this way.");
+				else addButton(button++, "Weapon", destroyTheCorruptedGlades, 4);
 			}
-			addButton(button++, "Your Hands", destroyTheCorruptedGlades, 5);
+			if (player.fatigue > player.maxFatigue() - 50) addButtonDisabled(button++, "Your Hands", "You are too tired to destroy the foul glade this way.");
+			else addButton(button++, "Your Hands", destroyTheCorruptedGlades, 5);
 			addButton(14, "Nevermind", camp.returnToCampUseOneHour);
 		}
 		
@@ -328,13 +336,15 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 				case 2: //Whitefire
 					outputText("You narrow your eyes, focusing your mind with deadly intent. You snap your fingers and the glade is enveloped in a flash of white flames! By the time the fire dies out, charred plants are all that remain of the glade.\n\n");
 					destroyAmount++;
-					fatigue(20, USEFATG_MAGIC);
+					useMana(40, 5);//fatigue(20, USEFATG_MAGIC);
 					break;
 				case 3: //Axe
 					outputText("You grab an axe from your toolbox and hack away at the plants without mercy. Eventually, you manage to chop down every perverted plant in the glade save for some of the trees. They gradually wither away. ");
 					outputText("Finally, you chop down the trees with all your strength, making wedge-shaped cuts. With one last almighty swing, the tree falls and lands on the ground with a loud THUD. It looks like they would make fine wood. You chop the tree into several pieces and haul the wood to your camp. ");
 					camp.cabinProgress.incrementWoodSupply(10);
-					fatigue(30 - (player.str / 10));
+					var minlimit1:Number = 40 - (player.str / 10);
+					if (minlimit1 < 5) minlimit1 = 5;
+					fatigue(minlimit1);
 					outputText("\n\n");
 					if (!player.hasStatusEffect(StatusEffects.ResourceNode1)) player.createStatusEffect(StatusEffects.ResourceNode1, 0, 0, 0, 0);
 					if (player.statusEffectv1(StatusEffects.ResourceNode1) < 15) {
@@ -344,7 +354,9 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 					break;
 				case 4: //Weapon
 					outputText("You ready your [weapon] and hack away at the plants without mercy. Eventually, you manage to cut down every perverted plant in the glade except for the trees. They gradually wither away. You give the breast-knotted trees some vandalism before turning to leave.\n\n");
-					fatigue(40 - (player.str / 5));
+					var minlimit2:Number = 30 - (player.str / 5);
+					if (minlimit2 < 5) minlimit2 = 5;
+					fatigue(minlimit2);
 					break;
 				case 5: //Your strength!
 					if (player.str < 30) { //Low strength.
@@ -367,7 +379,6 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 			}
 			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] == 0) outputText("That's one glade eliminated! With effort and dedication, you will be able to cleanse the forest of foul glades.");
 			else outputText("Once again, the forest is cleansed of a tainted glade.");
-			
 			dynStats("cor", -1);
 			destroyAmount++;
 			flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] += destroyAmount;

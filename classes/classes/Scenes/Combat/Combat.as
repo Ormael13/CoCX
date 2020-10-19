@@ -7538,7 +7538,7 @@ public class Combat extends BaseContent {
     public function wrathregeneration2():Number {
         var wrathregen:Number = 0;
         var BonusWrathMult:Number = 1;
-        if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 2;
+        if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult += 1;
         if (player.hasPerk(PerkLib.DoubleAttackSmall)) wrathregen += 1;
         if (player.hasPerk(PerkLib.TripleAttackSmall)) wrathregen += 1;
         if (player.hasPerk(PerkLib.QuadrupleAttackSmall)) wrathregen += 1;
