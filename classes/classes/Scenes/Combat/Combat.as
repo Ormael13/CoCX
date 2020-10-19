@@ -1843,7 +1843,16 @@ public class Combat extends BaseContent {
                     outputText("The wolf tear your body with its maw wounding you greatly as it starts to eat you alive!");
                     player.takePhysDamage(7 + rand(5));
                 }
-                if (monster is Luna) outputText("You try and shove Luna off but she maintains the pin.");
+                if (monster is Luna) {
+                    outputText("You try and shove Luna off but she maintains the pin.\n");
+                    outputText("Luna rends you twice with her claws.");
+                    var RavageDmg:Number = monster.eBaseStrengthDamage();
+                    if (flags[kFLAGS.LUNA_LVL_UP] >= 3) RavageDmg += monster.eBaseStrengthDamage() * 0.2;
+                    if (flags[kFLAGS.LUNA_LVL_UP] >= 6) RavageDmg += monster.eBaseStrengthDamage() * 0.3;
+                    RavageDmg = Math.round(RavageDmg);
+                    player.takePhysDamage(RavageDmg);
+                    player.takePhysDamage(RavageDmg);
+                }
             }
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {

@@ -31,7 +31,7 @@ package classes.Scenes.NPCs
 		
 		public function usingPounce():void {
 			outputText("Luna pounces on you, pinning you to the ground as she gets in position, claws at the ready.");
-			player.createStatusEffect(StatusEffects.WolfHold,0,0,0,0); 
+			player.createStatusEffect(StatusEffects.WolfHold,0,0,0,0);
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
 				if (flags[kFLAGS.LUNA_LVL_UP] >= 6) player.takePhysDamage(12+rand(20));
 				else if (flags[kFLAGS.LUNA_LVL_UP] >= 3) player.takePhysDamage(10+rand(15));
@@ -49,24 +49,34 @@ package classes.Scenes.NPCs
 		}
 		
 		override protected function performCombatAction():void {
-			var choice:Number = rand(5);
-			if (choice < 3) usingClawCombo();
-			if (choice == 3) {
-				if (!player.hasStatusEffect(StatusEffects.WolfHold) && rand(2) == 0) usingPounce();
-				else usingRavage();
+			var choice:Number = rand(7);
+			if (choice < 5) {
+				if (choice < 2) usingRavage();
+				else usingClawCombo();
 			}
-			if (choice == 4) usingRavage();
+			if (choice >= 5) {
+				if (!player.hasStatusEffect(StatusEffects.WolfHold)) usingPounce();
+			}
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
+			if(player.hasStatusEffect(StatusEffects.LunaMoonAttack)){
+				player.removeStatusEffect(StatusEffects.LunaMoonAttack);
+			}
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) SceneLib.lunaFollower.sparLunaWon();
 			else SceneLib.lunaFollower.fullMoonEventResistWin();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) SceneLib.lunaFollower.sparLunaLost();
+			if (flags[kFLAGS.LUNA_FOLLOWER] > 10){
+				if(player.hasStatusEffect(StatusEffects.LunaMoonAttack)){
+					player.removeStatusEffect(StatusEffects.LunaMoonAttack);
+					SceneLib.lunaFollower.MooningLunaLost();
+				}
+				else SceneLib.lunaFollower.sparLunaLost();
+			}
 			else SceneLib.lunaFollower.fullMoonEventResistDefeat();
 		}
 		

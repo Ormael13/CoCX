@@ -1718,6 +1718,7 @@ import coc.view.MainView;
 			player.createStatusEffect(StatusEffects.IntWisCounter2,0,0,0,0);
 			player.createStatusEffect(StatusEffects.LibSensCounter1,0,0,0,0);
 			player.createStatusEffect(StatusEffects.LibSensCounter2,0,0,0,0);
+			player.sleepUpdateStat();
 			player.HP = player.maxHP();
 			doYesNo(goToIngnam, arrival);
 		}
