@@ -2716,7 +2716,7 @@ private function SparrableNPCsMenu():void {
 			else outputText("You lie down to resume sleeping for the remaining hour.\n");
 		}
 		player.strtouspeintwislibsenCalculation1();
-		player.sleepUpdateStat()
+		player.sleepUpdateStat();
 		goNext(timeQ, true);
 	}
 

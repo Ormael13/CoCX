@@ -1102,12 +1102,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				SceneLib.inventory.takeItem(player.setArmor(armors.NOTHING), playerMenu);
 				needNext = true;
 			}
-			if (player.armor == armors.SSC && (player.isTaur() || player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN || player.lowerBody == LowerBody.CENTIPEDE || player.lowerBody == LowerBody.GOO || player.lowerBody == LowerBody.MELKIE || player.lowerBody == LowerBody.DRIDER))
-			{
-				outputText("Due to your current body shape you are no longuer able to wear the scandalous succubus clothes and thus you drop the over encumbering equipment back into your inventory.");
-				SceneLib.inventory.takeItem(player.setArmor(armors.NOTHING), playerMenu);
-				needNext = true;
-			}
+			//if (player.armor == armors.SSC && (player.isTaur() || player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN || player.lowerBody == LowerBody.CENTIPEDE || player.lowerBody == LowerBody.GOO || player.lowerBody == LowerBody.MELKIE || player.lowerBody == LowerBody.DRIDER))
+			//{
+				//outputText("Due to your current body shape you are no longuer able to wear the scandalous succubus clothes and thus you drop the over encumbering equipment back into your inventory.");
+				//SceneLib.inventory.takeItem(player.setArmor(armors.NOTHING), playerMenu);
+				//needNext = true;
+			//}
 			//Demonic hunger perk
 			if (player.demonScore() >= 10 || player.hasPerk(PerkLib.Phylactery)) { //Check for being a demon enought
 				if (player.findPerk(PerkLib.DemonEnergyThirst) < 0) {

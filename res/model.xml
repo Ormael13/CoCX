@@ -936,6 +936,7 @@
         <cell rect="361,500,49,29" name="panty/sexyWhiteBikiniPanty" dx="79" dy="99"/>
         <cell rect="411,500,49,29" name="panty/sexyYellowBikiniPanty" dx="79" dy="99"/>
         <cell rect="461,500,49,29" name="panty/scandalousSuccubusClothingPanty" dx="79" dy="94"/>
+		<cell rect="511,500,49,48" name="panty/scandalousSuccubusClothingPantyTaur" dx="79" dy="94"/>
         <cell rect="761,500,49,29" name="panty/chainMailPanty" dx="79" dy="99"/>
         <cell rect="811,500,49,29" name="panty/dragonScalePanty" dx="79" dy="99"/>
     </spritemap>
@@ -1736,6 +1737,11 @@
         <show part="arms_bg/$skinx"/>
         <show part="legs/$skinx"/>
 
+        <!--In the event player corruption is maxed enter yandere mode forehead-->
+        <if test="cor &gt;=100">
+            <show part="eyes/SpecialForeheadShadow"/>
+        </if>
+
         <switch value="faceType">
             <case values="Face.HUMAN">
 				<show part="face/human"/>
@@ -1753,10 +1759,6 @@
 					<show part="face/goo"/>
 				</if>
             </case>
-			<!--In the event player corruption is maxed enter yandere mode forehead-->
-			<if test="cor &gt;=100">
-				<show part="eyes/SpecialForeheadShadow"/>
-			</if>
             <case values="Face.HORSE,Face.FOX,Face.PIG,Face.BOAR,Face.RHINO,Face.ECHIDNA"><!--TODO -->
                 <show part="face/fur"/>
             </case>
@@ -1889,12 +1891,16 @@
 							<if test="cor &gt;=50">
 								<if test="skin.coverage==Skin.COVERAGE_NONE">
 									<hide part="hands/*"/>
-									<hide part="hands_bg/*"/>
 									<hide part="arms/*"/>
-									<hide part="arms_bg/*"/>
 									<show part="arms/demonlewd"/>
-									<show part="arms_bg/demonlewd"/>
-									<show part="arms_fg/demonlewd"/>
+									<show part="arms_fg/demonlewd"/>									
+									<if test="PlayerHasAWeapon">
+										<else>
+											<hide part="arms_bg/*"/>
+											<hide part="hands_bg/*"/>
+											<show part="arms_bg/demonlewd"/>
+										</else>
+									</if>
 								</if>
 							</if>
 						</if>
@@ -1905,12 +1911,16 @@
 								<if test="skin.coverage==Skin.COVERAGE_NONE">
 									<if test="showClothing">
 										<hide part="hands/*"/>
-										<hide part="hands_bg/*"/>
 										<hide part="arms/*"/>
-										<hide part="arms_bg/*"/>
 										<show part="arms/demonlewd"/>
-										<show part="arms_bg/demonlewd"/>
 										<show part="arms_fg/demonlewd"/>
+										<if test="PlayerHasAWeapon">
+											<else>
+												<hide part="arms_bg/*"/>
+												<hide part="hands_bg/*"/>
+												<show part="arms_bg/demonlewd"/>
+											</else>
+										</if>
 									</if>
 								</if>
 							</if>
@@ -3267,7 +3277,6 @@
 											<hide part="arms_pattern/*"/>
 											<hide part="arms_bg_pattern/*"/>
 											<hide part="legs_pattern/*"/>
-											<hide part="weapon/*"/>
 											<hide part="shield/*"/>
 										</case>
 										<default>
@@ -4122,52 +4131,55 @@
 			<if test="showClothing">
 				<if test="showArmClothing">
 					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
-					<switch value="arms.type">
-						<case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
-							<show part="clothLeftArm/scandalousSuccubusClothingleftArmLewd"/>
-							<show part="clothRightArm/scandalousSuccubusClothingRightArmLewd"/>
-							<show part="glove_fg/scandalousSuccubusClothingRightArmFront"/>
-						</case>
-						<default>
+						<switch value="arms.type">
+							<case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
+								<show part="clothRightArm/scandalousSuccubusClothingRightArmLewd"/>
+								<if test="PlayerHasAWeapon">
+									<show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
+									<else>								
+										<show part="clothLeftArm/scandalousSuccubusClothingleftArmLewd"/>
+									</else>
+								</if>
+								<show part="glove_fg/scandalousSuccubusClothingRightArmFront"/>
+							</case>
+							<default>
+								<show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
+								<show part="clothRightArm/scandalousSuccubusClothingRightArm"/>
+							</default>
+						</switch>
+						<else>
 							<show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
-							<show part="clothRightArm/scandalousSuccubusClothingRightArm"/>
-						</default>
-					</switch>
-					<switch value="arms.type">
-						<case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
-							<show part="clothLeftArm/scandalousSuccubusClothingleftArmLewd"/>
-							<show part="clothRightArmArm/scandalousSuccubusClothingRightArmLewd"/>
-							<show part="glove_fg/scandalousSuccubusClothingRightArmFront"/>
-						</case>
-						<default>
-							<show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
-							<show part="clothRightArm/scandalousSuccubusClothingRightArm"/>
-						</default>
-					</switch>
-					<else>
-						<show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
-						<show part="clothRightArm/scandalousSuccubusClothingRightArm"/>
-						<show part="clotheLegs/scandalousSuccubusClothinglegs"/>
-					</else>
+							<show part="clothRightArm/scandalousSuccubusClothingRightArm"/>	
+						</else>
+					</if>
 				</if>
 				<if test="showLegClothing">
-					<switch value="lowerBody">
-						<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
-							<switch value="arms.type">
-								<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
-									<show part="clotheLegs/scandalousSuccubusClothinglegsLewd"/>
-								</case>
-								<default>
-									<show part="clotheLegs/scandalousSuccubusClothinglegs"/>
-								</default>
-							</switch>
-						</case>
-					</switch>
-					<show part="panty/scandalousSuccubusClothingPanty"/>
+					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+						<switch value="lowerBody">
+							<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
+								<switch value="arms.type">
+									<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
+										<show part="clotheLegs/scandalousSuccubusClothinglegsLewd"/>
+									</case>
+									<default>
+										<show part="clotheLegs/scandalousSuccubusClothinglegs"/>
+									</default>
+								</switch>
+							</case>
+						</switch>
+						<else>
+							<show part="clotheLegs/scandalousSuccubusClothinglegs"/>
+						</else>
+					</if>
 				</if>
-				</if>
-				<hide part="penis/*"/>
-				<hide part="balls/*"/>
+				<if test="playerHasWeirdLowerBody">
+                    <show part="panty/scandalousSuccubusClothingPantyTaur"/>
+					<else>
+                        <hide part="penis/*"/>
+                        <hide part="balls/*"/>
+                        <show part="panty/scandalousSuccubusClothingPanty"/>
+					</else>	
+				</if>	
 			</if>
 		</if>
 		
