@@ -448,9 +448,6 @@ use namespace CoC;
 		public function isWearingArmor():Boolean {
 			return armor != ArmorLib.COMFORTABLE_UNDERCLOTHES && armor != ArmorLib.NOTHING;
 		}
-		public function isWearingUndergarment():Boolean {
-			return armor != UndergarmentLib.NOTHING;
-		}
 		public function isStancing():Boolean {
 			return (lowerBody == LowerBody.HINEZUMI && arms.type == Arms.HINEZUMI) || isFeralStancing() || isSitStancing();
 		}
