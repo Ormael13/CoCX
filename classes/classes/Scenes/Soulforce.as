@@ -3587,8 +3587,11 @@ public function FightHellfireSnail():void {
 			else addButtonDisabled(2, "KitsuMansion", "");
 			if (flags[kFLAGS.SOUL_SENSE_IZUMI] >= 3) addButton(3, "Izumi", IzumiEnc).hint("Req. 300+ soulforce");
 			else addButtonDisabled(3, "Izumi", "");
+			//next page button?
 			if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] >= 3) addButton(5, "Priscilla", PriscillaEnc).hint("Req. 320+ soulforce");
 			else addButtonDisabled(5, "Priscilla", "");
+			//Sheila find
+			//previous page button?
 			if (flags[kFLAGS.SOUL_SENSE_WORLD_TREE] >= 1) addButton(10, "WorldTree", findWorldTree).hint("Req. 100+ soulforce");
 			else addButtonDisabled(10, "WorldTree", "");
 			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) addButton(13, "Giacomo", findGiacomo).hint("Req. 100+ soulforce");

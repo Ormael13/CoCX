@@ -463,7 +463,7 @@ import coc.view.MainView;
 			addButton(0, "Man", isAMan);
 			addButton(1, "Woman", isAWoman);
 			if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] > 0) {
-				outputText("\n\nOr a hermaphrodite as you've unlocked hermaphrodite option!");
+				outputText("\n\nOr a hermaphroditeas you've unlocked the option for hermaphrodite.");
 				addButton(2, "Herm", isAHerm);
 			}
 		}
@@ -1305,25 +1305,25 @@ import coc.view.MainView;
 		}
 		public function chooseBloodline():void {
 			clearOutput();
-			outputText("In your veins coursing non-human blood.  What race was your ancestor?");
+			outputText("There is a possibility that you were descended from non-human blood.  Was one of your ancestors non-human, and if so, what were they?");
 			menu();
-			if (player.findPerk(PerkLib.BloodlineDragon) < 0) addButton(0, "Dragon", confirmBloodline, PerkLib.DragonsDescendant);
+			if (player.findPerk(PerkLib.BloodlineDragon) < 0) addButton(0, "Dragon", confirmBloodline, PerkLib.DragonsDescendant).hint("(+2 to dragon score)");
 			else addButtonDisabled(0, "Dragon", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineElf) < 0) addButton(1, "Elf", confirmBloodline, PerkLib.ElfsDescendant);
+			if (player.findPerk(PerkLib.BloodlineElf) < 0) addButton(1, "Elf", confirmBloodline, PerkLib.ElfsDescendant).hint("(+2 to elf score)");
 			else addButtonDisabled(1, "Elf", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineGoblin) < 0) addButton(2, "Goblin", confirmBloodline, PerkLib.GoblinsDescendant);
+			if (player.findPerk(PerkLib.BloodlineGoblin) < 0) addButton(2, "Goblin", confirmBloodline, PerkLib.GoblinsDescendant).hint("(+2 to goblin score)");
 			else addButtonDisabled(2, "Goblin", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineKitsune) < 0) addButton(3, "Kitsune", confirmBloodline, PerkLib.KitsunesDescendant);
+			if (player.findPerk(PerkLib.BloodlineKitsune) < 0) addButton(3, "Kitsune", confirmBloodline, PerkLib.KitsunesDescendant).hint("(+2 to kitsune score)");
 			else addButtonDisabled(3, "Kitsune", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineRaiju) < 0) addButton(4, "Raiju", confirmBloodline, PerkLib.RaijusDescendant);
+			if (player.findPerk(PerkLib.BloodlineRaiju) < 0) addButton(4, "Raiju", confirmBloodline, PerkLib.RaijusDescendant).hint("(+2 to raiju score)");
 			else addButtonDisabled(4, "Raiju", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineMinotaur) < 0) addButton(5, "Minotaur", confirmBloodline, PerkLib.MinotaursDescendant);
+			if (player.findPerk(PerkLib.BloodlineMinotaur) < 0) addButton(5, "Minotaur", confirmBloodline, PerkLib.MinotaursDescendant).hint("(+2 to minotaur score)");
 			else addButtonDisabled(5, "Minotaur", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineOni) < 0) addButton(6, "Oni", confirmBloodline, PerkLib.OnisDescendant);
+			if (player.findPerk(PerkLib.BloodlineOni) < 0) addButton(6, "Oni", confirmBloodline, PerkLib.OnisDescendant).hint("(+2 to oni score)");
 			else addButtonDisabled(6, "Oni", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineOrc) < 0) addButton(7, "Orc", confirmBloodline, PerkLib.OrcsDescendant);
+			if (player.findPerk(PerkLib.BloodlineOrc) < 0) addButton(7, "Orc", confirmBloodline, PerkLib.OrcsDescendant).hint("(+2 to orc score)");
 			else addButtonDisabled(7, "Orc", "You already have this bloodline!");
-			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either not have any non-human blood in you or can't pick any new one.It mean you only will get some bonus perk points for start instead new bloodline.");
+			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead new bloodline.)");
 		}
 		
 		private function confirmBloodline(choice:PerkType):void {
@@ -1336,22 +1336,22 @@ import coc.view.MainView;
 					outputText("Your ancestor was an elf?");
 					break;
 				case PerkLib.GoblinsDescendant:
-					outputText("Your ancestor was a goblin");
+					outputText("Your ancestor was a goblin?");
 					break;
 				case PerkLib.KitsunesDescendant:
-					outputText("Your ancestor was a kitsune");
-					break;
-				case PerkLib.RaijusDescendant:
-					outputText("Your ancestor was a raiju");
+					outputText("Your ancestor was a kitsune?");
 					break;
 				case PerkLib.MinotaursDescendant:
-					outputText("Your ancestor was a minotaur");
+					outputText("Your ancestor was a minotaur?");
+					break;
+				case PerkLib.RaijusDescendant:
+					outputText("Your ancestor was a raiju?");
 					break;
 				case PerkLib.OnisDescendant:
-					outputText("Your ancestor was an oni");
+					outputText("Your ancestor was an oni?");
 					break;
 				case PerkLib.OrcsDescendant:
-					outputText("Your ancestor was an orc");
+					outputText("Your ancestor was an orc?");
 					break;
 				default:
 					outputText("Your ancestor was a dragon?");
@@ -1381,32 +1381,32 @@ import coc.view.MainView;
 			outputText("Before you became a champion, you had other plans for your life.  What were you doing before?");
 			menu();
 			if (player.findPerk(PerkLib.PastLifeAlchemist) < 0) addButton(0, "Alchemy", confirmHistory, PerkLib.HistoryAlchemist);
-			else addButtonDisabled(0, "Alchemy", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(0, "Alchemy", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeCultivator) < 0) addButton(1, "Cultivator", confirmHistory, PerkLib.HistoryCultivator);
-			else addButtonDisabled(1, "Cultivator", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(1, "Cultivator", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeFighter) < 0) addButton(2, "Fighting", confirmHistory, PerkLib.HistoryFighter);
-			else addButtonDisabled(2, "Fighting", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(2, "Fighting", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeFortune) < 0) addButton(3, "Fortune", confirmHistory, PerkLib.HistoryFortune);
-			else addButtonDisabled(3, "Fortune", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(3, "Fortune", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeHealer) < 0) addButton(4, "Healing", confirmHistory, PerkLib.HistoryHealer);
-			else addButtonDisabled(4, "Healing", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(4, "Healing", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeReligious) < 0) addButton(5, "Religion", confirmHistory, PerkLib.HistoryReligious);
-			else addButtonDisabled(5, "Religion", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(5, "Religion", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeScholar) < 0) addButton(6, "Schooling", confirmHistory, PerkLib.HistoryScholar);
-			else addButtonDisabled(6, "Schooling", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(6, "Schooling", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeScout) < 0) addButton(7, "Scout", confirmHistory, PerkLib.HistoryScout);
-			else addButtonDisabled(7, "Scout", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(7, "Scout", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeSlacker) < 0) addButton(8, "Slacking", confirmHistory, PerkLib.HistorySlacker);
-			else addButtonDisabled(8, "Slacking", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(8, "Slacking", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeSlut) < 0) addButton(9, "Slutting", confirmHistory, PerkLib.HistorySlut);
-			else addButtonDisabled(9, "Slutting", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(9, "Slutting", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeSmith) < 0) addButton(10, "Smithing", confirmHistory, PerkLib.HistorySmith);
-			else addButtonDisabled(10, "Smithing", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(10, "Smithing", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeTactician) < 0) addButton(11, "Tactician", confirmHistory, PerkLib.HistoryTactician);
-			else addButtonDisabled(11, "Tactician", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(11, "Tactician", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeWhore) < 0) addButton(12, "Whoring", confirmHistory, PerkLib.HistoryWhore);
-			else addButtonDisabled(12, "Whoring", "You already have this History as one of Past Lives!");
-			addButton(14, "None", noHistoryAtAllCuzYouAscendedTooManyTimesAlready).hint("You either never been doing anything before or you have memories of so many past lives you spend all your current live trying to not go postal from those memories. (Yes you not gonna get any History perk only just a few perk points so maybe not use this option till you get all others History perks, ya?)");
+			else addButtonDisabled(12, "Whoring", "You already have this History as one of your Past Lives!");
+			addButton(14, "None", noHistoryAtAllCuzYouAscendedTooManyTimesAlready).hint("Your life hasn't been very specifically focused so far, or you've had so many past lives you can't separate them all. (No history perk, just bonus perk points)");
 			
 		}
 		
@@ -1746,16 +1746,16 @@ import coc.view.MainView;
 			addButton(1, "Perk Select(2)", ascensionPerkMenu2).hint("Spend Ascension Perk Points on special perks!", "Perk Selection");
 			addButton(2, "Rare Perks(1)", rarePerks1).hint("Spend Ascension Points on rare special perks!", "Perk Selection");
 			addButton(3, "Rare Perks(2)", rarePerks2).hint("Spend Ascension Points on rare special perks!", "Perk Selection");
-			addButton(5, "Perm Perks", ascensionPermeryMenu).hint("Spend Ascension Perk Points to make certain perks permanent (5 per perk).", "Perk Selection");
+			addButton(5, "Perm Perks", ascensionPermeryMenu).hint("Spend Ascension Perk Points to make certain perks permanent (5/10 points).", "Perk Selection");
 			if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) {
-				if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) < player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) addButton(6, "Perm G.M.(1)", ascensionMetamorphPermeryMenu).hint("Spend Ascension Perk Points to make unlocked Metamorph options permanent. (5 or 25 per perk)", "Perk Selection");
+				if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) < player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) addButton(6, "Perm G.M.(1)", ascensionMetamorphPermeryMenu).hint("Spend Ascension Perk Points to make unlocked Metamorph options permanent. (For five points each, or 25 for human)", "Perk Selection");
 				else addButtonDisabled(6, "Perm G.M.", "You already reached your current limit on permable Metamorph options.");
 			}
 			else addButtonDisabled(6, "Perm G.M.", "You not have Ascension: Transcendental Genetic Memory (Stage 1) perk to use this option.");
-			if (player.ascensionPerkPoints >= 5) addButton(7, "Past Life", historyTopastlife).hint("Spend Ascension Points to change current possesed History perk into Past Life perk (5 per perk).", "Perk Selection");
+			if (player.ascensionPerkPoints >= 5) addButton(7, "Past Life", historyTopastlife).hint("Spend Ascension Points to change current possesed History perk into Past Life perk (5 points).", "Perk Selection");
 			else addButtonDisabled(7, "Past Life", "You not have enough Ascension Perk Points to use this option.");
 			if (player.findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) {
-				if (player.ascensionPerkPoints >= 10) addButton(8, "Bloodline", bloodlineACQ).hint("Spend Ascension Points to change current possesed Descendante perk into Bloodline perk (10 per perk).", "Perk Selection");
+				if (player.ascensionPerkPoints >= 10) addButton(8, "Bloodline", bloodlineACQ).hint("Spend Ascension Points to change current possesed Descendant perk into Bloodline perk (10 points).", "Perk Selection");
 				else addButtonDisabled(8, "Bloodline", "You not have enough Ascension Perk Points to use this option.");
 			}
 			else addButtonDisabled(8, "???", "You not have Ascended enough times or/and have required ascension perk to use this option.");

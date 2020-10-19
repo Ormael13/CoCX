@@ -12,7 +12,6 @@ package classes.Items
 	{
 		public static const DEFAULT_VALUE:Number = 6;	//cena dla broni dyst bazowa to 50 gems a nie 40 gems
 		public static const NOTHING:WeaponRange = new Nothing();	//cena broni palnych to: (wart atk * 20) + (ilość naboi w magazynku * 30)
-		public const DPISTOL:WeaponRange = new WeaponRange("DPistol", "DartPistol", "Dart pistol", "a Dart pistol", "shot", 1, 120, "This weapon is not designed to wound but to deliver loads of chemical into the victim bloodstream.", "Pistol");
 		//public const TRFATBI:WeaponRange = new WeaponRange("TrFatbi", "TripxiFatbilly", "Tripxi Fatbilly", "a Tripxi Fatbilly", "shot", 260, 5230, "", "2H Firearm");
 		//public const TRFATBI:WeaponRange = new WeaponRange("TrFatbi", "TripxiFatbilly", "Tripxi Fatbilly", "a Tripxi Fatbilly", "shot", 260, 5230, "", "2H Firearm");
 		//public const TRFATBI:WeaponRange = new WeaponRange("TrFatbi", "TripxiFatbilly", "Tripxi Fatbilly", "a Tripxi Fatbilly", "shot", 260, 5230, "", "2H Firearm");
@@ -43,6 +42,7 @@ package classes.Items
 				PerkLib.Accuracy2,50,0,0,0);
 		public const DERPLAU:WeaponRange = new WeaponRange("DerpLau", "DerpnadeLauncher", "Derpnade Launcher", "a Derpnade Launcher", "shot", 100, 2030, "A firearm as deadly to others as it is to the user. Launches bouncing explosives which deals aoe damage but can also bounce back if not careful!", "2H Firearm");
 		public const DESEAGL:WeaponRange = new WeaponRange("DesEagl", "DesertEagle", "Desert Eagle", "a Desert Eagle", "shot", 25, 620, "A single hand firearm, the desert eagle has the largest bullets out of the pistol family. Its shots are deadly and precises through the gun has one hell of a recoil.", "Pistol");
+		public const DPISTOL:WeaponRange = new WeaponRange("DPistol", "DartPistol", "Dart pistol", "a Dart pistol", "shot", 1, 120, "This weapon is not designed to wound but to deliver loads of chemical into the victim bloodstream.", "Pistol");
 		public const DUEL_P_:WeaponRangeWithPerk = new WeaponRangeWithPerk("DuelP", "DuelingP", "dueling pistol", "a dueling pistol", "shot", 20, 430, "A pistol for duels between gentelmen. Or just for shooting. Can shoot only once before it need reload.", "Pistol",
 				PerkLib.Accuracy2,10,0,0,0);
 		public const EVELYN_:WeaponRangeWithPerk = new WeaponRangeWithPerk("Evelyn", "Evelyn", "Evelyn", "Evelyn", "shot", 40, 6000, "A marvel of goblin prehistory before the time the first firearms were created, Avelynn prototype 3.0 is designed with several chained mechanism in order to allow firing up to 3 bolts all at the same time. Despite being primitive by modern goblin design this exquisite tool of death does its job well.", "Crossbow",

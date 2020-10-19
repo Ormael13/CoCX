@@ -127,6 +127,9 @@ package classes.Scenes
 			outputText("-Due to adding two new chimera body perk between Basic stage and Semi-Advanced Stage all of perks in line form Semi-Advanced had updated bonsues to stats (including making all sensitivity bonsues been now flat due to stats rework by Lia/Aimozg and acting like negative penatly - for this one part first three perks also been adjusted to account for that)\n");
 			outputText("-New tier 6 misc lvl-up perk: Lizan Marrow (Final Form). Req. Lizan Marrow (Evolved) perk and lizan score 12+. Effect: Regenerates 1.5% of HP per round in combat and 3% of HP per hour. Additionaly your limit for innate self-regeneration rate increased. When below 25% of max HP regeneration provided by Lizan regeneration doubles. ");
 			outputText("You can't loose by HP until reaching droping into negative health larger than 5% of max HP.\n");
+			outputText("-Chance to meet proc first Phylla event been increased and each one of them after first slowly growing up chance to proc.\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-All below changes was coded/added by Liadri and aimozg!!!\n");
 			outputText("-Strength Toughness Speed Inteligence Wisdom Sensitivity refactoring happened the stats are now calculated in a whole new way!\n");
 			outputText("-Great fairy TF Quest and ability have been added.\n");
@@ -173,16 +176,13 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-Fixed bugs: Lizan Regeneration been gained and lost repeadly, perks desc in one of creation PC stages showing incorectly amount of boosting max cap for stat, chance to pick Bite Me option at certain NPC more than once, food been unaccesable above 90 hunger in Black Cock, several bugs in Easter bunny TF, Tripxi dialogues to look more interactive and ");
 			outputText("changes location names to kaiba and tripxi shop in Tel Adre to be more in tune with the theme, Unicorn/Bicorn aura endless procing when pc has no horn, Unicorn/Bicorn aura procing messages in loops when pc doesnt have ecliptic mind, straddles duration to actualy not being endless, Alraune lower body displaying a penis in viewer, ");
-			outputText("a few viewer issue for cave wyrm eyes fox eyes and cat eyes, haircolor not switching to midnight black when turning into a hellcat, the trice damned Green Slime bug, declining bloodline choice progressing to history choice menu, not hidden button for stone buildings @carpenter\n\n");/*ostatni punkt changelogu
+			outputText("a few viewer issue for cave wyrm eyes fox eyes and cat eyes, haircolor not switching to midnight black when turning into a hellcat, the trice damned Green Slime bug, declining bloodline choice progressing to history choice menu, not hidden button for stone buildings @carpenter, dual firearms greying out shoot button, Aiko scenes parser errors\n\n");/*ostatni punkt changelogu
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
