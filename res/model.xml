@@ -1740,6 +1740,9 @@
         <!--In the event player corruption is maxed enter yandere mode forehead-->
         <if test="cor &gt;=100">
             <show part="eyes/SpecialForeheadShadow"/>
+			<if test="eyes.type= Eyes.CENTIPEDE">
+                <hide part="eyes/SpecialForeheadShadow"/>
+            </case>
         </if>
 
         <switch value="faceType">

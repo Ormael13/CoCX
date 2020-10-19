@@ -816,9 +816,9 @@ private function craftingSoulGem():void {
 	clearOutput();
 	outputText("\"<i>Wait, you want me to craft a soul gem!? What do you even intend to do with it? These things are used to capture and hold souls!</i>\"\n\n");
 	outputText("You remind her that it’s your business, telling her that in the end it will serve a greater purpose.\n\n");
-	if (player.hasItem(consumables.S_WATER, 5) && player.hasItem(consumables.ECTOPLS, 5) && player.gems >= 2000) {
-		player.destroyItems(consumables.S_WATER, 5);
-		player.destroyItems(consumables.ECTOPLS, 5);
+	if (player.hasItem(consumables.S_WATER, 1) && player.hasItem(consumables.ECTOPLS, 1) && player.gems >= 2000) {
+		player.destroyItems(consumables.S_WATER, 1);
+		player.destroyItems(consumables.ECTOPLS, 1);
 		player.gems -= 2000;
 		statScreenRefresh();
 		outputText("\"<i>I hope you know what you're doing. Hand me the recipe and materials, and I will get to work.</i>\"");

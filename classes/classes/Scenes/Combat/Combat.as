@@ -8538,10 +8538,6 @@ public class Combat extends BaseContent {
     public function Straddle():void {
         flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
         clearOutput();
-        if (monster.plural) {
-            outputText("You cannot straddle while fighting multiple opponents at the same times!");
-            addButton(0, "Next", combatMenu, false);
-        } else {
             if (player.fatigue + physicalCost(10) > player.maxFatigue()) {
                 clearOutput();
                 outputText("You just don't have the energy to straddle your opponent right now...");
@@ -8579,7 +8575,6 @@ public class Combat extends BaseContent {
             } else outputText("You take hold of your dazed opponent and gently pull [monster him] to the ground, straddling him as you get into position.");
             if (player.hasPerk(PerkLib.StraddleImproved)) player.addStatusValue(StatusEffects.StraddleRoundLeft, 1, +2);
             enemyAI();
-        }
     }
 
     private var StraddleDamage:Number;

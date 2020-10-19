@@ -128,6 +128,7 @@ public function alvinaThirdEncounterYes():void
 		outputText("<i> setting up the stage for my plans.</i>");
 	}
 	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("<i>You even defeated Lethice for me, which I will admit is highly convenient she was way to hardheaded for me to properly redirect as I pleased.</i>");
+	outputText("\"");
 	doNext(alvinaThirdEncounterYesContinue);
 }
 public function alvinaThirdEncounterYesContinue():void
