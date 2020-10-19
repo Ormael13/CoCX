@@ -458,6 +458,8 @@ public class SpriteDb {
 	}
 	[Embed(source="../../../res/sprites/luna-maid.png")]
 	public static var s_luna_maid:Class;
+	[Embed(source="../../../res/sprites/Luna-Mooning.png")]
+	public static var s_Luna_Mooning:Class;
 	[Embed(source="../../../res/sprites/lumi.png")]
 	public static var s_lumi_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/lumi-old.png")]

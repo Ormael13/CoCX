@@ -671,6 +671,7 @@ public class Camp extends NPCAwareContent {
 		var exploreEvent:Function = SceneLib.exploration.doExplore;
 		var placesEvent:Function = (placesKnown() ? places : null);
 		var canExploreAtNight:Boolean = (player.isNightCreature());
+		var isAWerewolf:Boolean = (player.isWerewolf());
 		clearOutput();
 		updateAchievements();
 
@@ -894,7 +895,7 @@ public class Camp extends NPCAwareContent {
 			if (companionsCount() > 0 && !(model.time.hours > 4 && model.time.hours < 23)) {
 				outputText("Your [camp] is silent as your companions are sleeping right now.\n");
 			}
-			if (canExploreAtNight){
+			if (canExploreAtNight || isAWerewolf){
 			}
 			else
 			{
@@ -956,7 +957,12 @@ public class Camp extends NPCAwareContent {
 		}
 		addButton(12, "Wait", doWaitMenu).hint("Wait for one to eigth hours. Or until the night comes.");
 		if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(12, "Rest", restMenu).hint("Rest for one to eight hours. Or until fully healed / night comes.");
-		if((isNightTime && !canExploreAtNight) || (!isNightTime && canExploreAtNight)) addButton(12, "Sleep", doSleep).hint("Turn yourself in for the night.");
+		if((isNightTime && !canExploreAtNight) || (!isNightTime && canExploreAtNight)) {
+			addButton(12, "Sleep", doSleep).hint("Turn yourself in for the night.");
+			if(isAWerewolf && flags[kFLAGS.LUNA_MOON_CYCLE] == 8) {
+				addButtonDisabled(12, "Sleep", "Try as you may you cannot find sleep tonight. The damn moon won't let you rest as your urges to hunt and fuck are on the rise.");
+			}
+		}
 		//	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && player.findPerk(PerkLib.EzekielBlessing) < 0) addButton(13, "Remov. Curse", EzekielCurseQuickFix).hint("Quick fix for Ezekiel curse when ezekiel fruit was lost.");
 
 		//Remove buttons according to conditions.
@@ -1837,7 +1843,7 @@ public class Camp extends NPCAwareContent {
 			{
 				outputText("Luna wanders around the [camp], doing her chores as usual.");
 			}
-			else if (isNightTime && kFLAGS.LUNA_MOON_CYCLE == 8 && flags[kFLAGS.LUNA_FOLLOWER] >= 7) {
+			else if (isNightTime && flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && flags[kFLAGS.LUNA_FOLLOWER] >= 7) {
 				outputText("Luna is taking a break siting on a nearby rock to watch over the full moon. She's clearly heating up with the desire to mate with you but out of respect for her you is letting you do the first move.");
 			}
 			else {
