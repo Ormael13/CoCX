@@ -127,6 +127,7 @@ import coc.xlogic.ExecContext;
 					scandalousSuccubusClothing: player.armor == game.armors.SSC,
 					fairyQueenRegalia: player.armor == game.armors.FQR,
 					berserkerArmor: player.armor == game.armors.BA,
+					vladimirRegalia: player.armor == game.armors.VR,
 					chainMailBikini: player.armor == game.armors.CHBIKNI || player.armor == game.armors.LMARMOR,
 					platemail: player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 

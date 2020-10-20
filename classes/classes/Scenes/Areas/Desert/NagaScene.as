@@ -1012,6 +1012,7 @@ public function naggaSqueeze():void {
 	var damage:int = monster.maxHP() * (.10 + rand(15) / 100);
 	if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= SceneLib.combat.oniRampagePowerMulti();
 	if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+	if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
 	if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 	if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 	if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
