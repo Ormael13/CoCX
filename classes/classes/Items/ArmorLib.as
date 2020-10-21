@@ -113,7 +113,7 @@ package classes.Items
 		public const SS_ROBE:ArmorWithPerk = new ArmorWithPerk("SS.Robe","SS.Robes","spider-silk robes","a spider-silk robes",0,6,300,"This robe looks incredibly comfortable.  It's made from alchemically enhanced spider-silk, and embroidered with what looks like magical glyphs around the sleeves and hood.","Light",
 				PerkLib.WizardsEndurance,30,0,0,0);
 		public const SSARMOR:Armor = new Armor("SSArmor","SS.Armor","spider-silk armor","a suit of spider-silk armor",25,0,1500,"This armor is as white as the driven snow.  It's crafted out of thousands of strands of spider-silk into an impenetrable protective suit.  The surface is slightly spongy, but so tough you wager most blows would bounce right off.","Heavy");
-		public const SSC:ArmorWithPerk = new ScandalousSuccubusClothing();
+		public const SCANSC:ArmorWithPerk = new ScandalousSuccubusClothing();
 		public const SWHBIKNI:ArmorWithPerk = new ArmorWithPerk("SWhBikini","S Wh Bikini","Sexy White Bikini","a Sexy White Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light",
 				PerkLib.SluttySeduction,10,0,0,0,"Your revealing chain bikini allows you access to 'Seduce', an improved form of 'Tease'.", false, false);
 		public const SYEBIKNI:ArmorWithPerk = new ArmorWithPerk("SYeBikini","S Ye Bikini","Sexy Yellow Bikini","a Sexy Yellow Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light",
@@ -127,8 +127,9 @@ package classes.Items
 		public const TUBETOP:Armor = new Armor("TubeTop","Tube Top","tube top and short shorts","a snug tube top and VERY short shorts",0,0,25,"A clingy tube top and VERY short shorts.","Light");
 		public const W_ROBES:ArmorWithPerk = new ArmorWithPerk("W.Robes","W.Robes","wizard's robes","a wizard's robes",0,1,50,"These robes appear to have once belonged to a female wizard.  They're long with a slit up the side and full billowing sleeves.  The top is surprisingly low cut.  Somehow you know wearing it would aid your spellcasting.","Light",
 				PerkLib.WizardsEndurance,25,0,0,0);
-		public const WIC:ArmorWithPerk = new WalpurgisIzaliaRobe();
-		public const BA:Armor = new BerserkerArmor();
+		public const WALIC:ArmorWithPerk = new WalpurgisIzaliaRobe();
+		public const VLAR:ArmorWithPerk = new VladimirRegalia();
+		public const BERA:Armor = new BerserkerArmor();
 		public const WKIMONO:ArmorWithPerk = new ArmorWithPerk("W.Kimono","W.Kimono","white kimono","a white kimono",0,1,200,"This lovely white kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
 				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
 		/*

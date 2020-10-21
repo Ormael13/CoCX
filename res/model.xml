@@ -1740,9 +1740,9 @@
         <!--In the event player corruption is maxed enter yandere mode forehead-->
         <if test="cor &gt;=100">
             <show part="eyes/SpecialForeheadShadow"/>
-			<if test="eyes.type= Eyes.CENTIPEDE">
+            <if test="eyes.type= Eyes.CENTIPEDE">
                 <hide part="eyes/SpecialForeheadShadow"/>
-            </case>
+            </if>
         </if>
 
         <switch value="faceType">
@@ -4181,6 +4181,85 @@
                         <hide part="penis/*"/>
                         <hide part="balls/*"/>
                         <show part="panty/scandalousSuccubusClothingPanty"/>
+					</else>	
+				</if>	
+			</if>
+		</if>
+		
+		
+		<if test="vladimirRegalia">
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="bra/vampireBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra/vampireBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra/vampireBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra/vampireBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra/vampireBraLarge"/>
+					</case>
+					<default>
+						<show part="bra/vampireBraLarge"/>
+					</default>
+				</switch>
+			</if>
+			<if test="showClothing">
+				<if test="showArmClothing">
+					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+						<switch value="arms.type">
+							<case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
+								<show part="clothRightArm/vampireClothingRightArmLewd"/>
+								<if test="PlayerHasAWeapon">
+									<show part="clothLeftArm/vampireClothingleftArm"/>
+									<else>								
+										<show part="clothLeftArm/vampireClothingleftArmLewd"/>
+									</else>
+								</if>
+								<show part="glove_fg/vampireClothingRightArmFront"/>
+							</case>
+							<default>
+								<show part="clothLeftArm/vampireClothingleftArm"/>
+								<show part="clothRightArm/vampireClothingRightArm"/>
+							</default>
+						</switch>
+						<else>
+							<show part="clothLeftArm/vampireClothingleftArm"/>
+							<show part="clothRightArm/vampireClothingRightArm"/>	
+						</else>
+					</if>
+				</if>
+				<if test="showLegClothing">
+					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+						<switch value="lowerBody">
+							<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
+								<switch value="arms.type">
+									<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
+										<show part="clotheLegs/vampireClothinglegsLewd"/>
+										<hide part="legs/*"/>
+										<hide part="feet/*"/>
+									</case>
+									<default>
+										<show part="clotheLegs/vampireClothinglegs"/>
+									</default>
+								</switch>
+							</case>
+						</switch>
+						<else>
+							<show part="clotheLegs/vampireClothinglegs"/>
+						</else>
+					</if>
+				</if>
+				<if test="isTaur">
+					<else>
+                        <hide part="penis/*"/>
+                        <hide part="balls/*"/>
 					</else>	
 				</if>	
 			</if>
