@@ -1090,9 +1090,9 @@ public function kaibaShopMainMenu2():void {
 	
 	//addButton(5, "Necklace", buyItem, necklaces.CSNECK);
 	//addButton(6, "Necklace", buyItem, necklaces.CSNECK);
-	addButton(7, "W.I.Cloak", buyItem, armors.WIC).hint("Walpurgis Izalia Cloak -  Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
-	addButton(8, "B.Armor", buyItem, armors.BA).hint("Berzerker Armor -  Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.");
-	addButton(9, "S.S.Clothing", buyItem, armors.SSC).hint("Scandalous Succubus Clothing - Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.");
+	addButton(7, "W.I.Cloak", buyItem, armors.WALIC).hint("Walpurgis Izalia Cloak -  Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
+	addButton(8, "B.Armor", buyItem, armors.BERA).hint("Berzerker Armor -  Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.");
+	addButton(9, "S.S.Clothing", buyItem, armors.SCANSC).hint("Scandalous Succubus Clothing - Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.");
 	addButton(10, "C.S.Necklace", buyItem, necklaces.CSNECK).hint("Crinos Shape necklace - Allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior.");
     addButton(11, "Soul Drill", buyItem, weapons.SDRILL).hint("Soul Drill - 1H large weapon that can deal more damage the more soulforce is feed to it each turn.");
 	addButton(12, "Hodr's bow", buyItem, weaponsrange.BOWHODR).hint("Hodr's bow - Bow that would apply blindess status or deal increased damage to blinded targets.");
