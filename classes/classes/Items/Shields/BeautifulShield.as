@@ -13,7 +13,7 @@ package classes.Items.Shields
 		
 		public function BeautifulShield() 
 		{
-			super("BShield", "B.Shield", "beautiful shield", "a beautiful shield", 1, 30, "This beautiful shield shines brilliantly in the light, showing the flawless craftsmanship as it's decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this shield.");
+			super("BShield", "B.Shield", "beautiful shield", "a beautiful shield", 1, 100, "This beautiful shield shines brilliantly in the light, showing the flawless craftsmanship as it's decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this shield.");
 		}
 		
 		override public function get block():Number { 

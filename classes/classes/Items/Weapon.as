@@ -77,7 +77,8 @@ public class Weapon extends Useable //Equipable
 			|| (perk == "Massive" && game.player.shield != ShieldLib.NOTHING)
 			|| (perk == "Dual" && game.player.shield != ShieldLib.NOTHING)
 			|| (perk == "Dual Large" && game.player.shield != ShieldLib.NOTHING)
-			|| (perk == "Dual Small" && game.player.shield != ShieldLib.NOTHING)) {
+			|| (perk == "Dual Small" && game.player.shield != ShieldLib.NOTHING)
+			|| (game.player.shieldPerk == "Massive" && game.player.shield != ShieldLib.NOTHING && game.player.findPerk(PerkLib.GigantGrip) < 0)) {
 				SceneLib.inventory.unequipShield();
 			}
 			return this;

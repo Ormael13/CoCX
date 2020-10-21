@@ -10,23 +10,23 @@ package classes.Items
 	
 	public final class ShieldLib 
 	{
-		public static const DEFAULT_VALUE:Number = 6;
+		public static const DEFAULT_VALUE:Number = 6;	//cena dla tarcz bazowa to 50 gems a nie 40 gems
 		
 		public static const NOTHING:Nothing = new Nothing();
 		
 		public const AETHERS:AetherS = new AetherS();
-		public const BATTNET:Shield = new Shield("BattNet", "BattleNet", "Battle Net", "a Battle Net", 0, 500, "A battle net used in the off hand to impair the opponent's movement. Also very good for fishing.");
+		public const BATTNET:Shield = new Shield("BattNet", "BattleNet", "Battle Net", "a Battle Net", 0, 100, "A battle net used in the off hand to impair the opponent's movement. Also very good for fishing.");
 		public const BSHIELD:BeautifulShield = new BeautifulShield();
 		public const BLASPHE:Blasphemy = new Blasphemy();
-		public const BUCKLER:Shield = new Shield("Buckler", "Buckler", "buckler", "a buckler", 5, 50, "A simple wooden rounded shield.");
-		public const GREATSH:Shield = new Shield("GreatSh", "GreatShld", "greatshield", "a greatshield", 12, 300, "A large metal shield.");
-		public const KITE_SH:Shield = new Shield("Kite Sh", "KiteShield", "kite shield", "a kite shield", 8, 150, "An average-sized kite shield.");
-		public const MABRACE:Shield = new Shield("MaBrace", "ManaBracer", "mana bracer", "a mana bracer", 2, 400, "Runed bracers such as this are popular amongst mages that can afford them. This silver bracer augments a mage’s spell power while leaving the hand open to make gestures used in spellcasting.");
-		public const SPI_FOC:Shield = new Shield("Spi Foc", "SpiritFocus", "spirit focus", "a spirit focus", 4, 800, "This small icon with a silk ribbon is inscribed with eldritch runes and reinforces a kitsune's power and magic. (+20% to Fox Fire dmg and lust dmg, +20% to soulskills power)");
-		public const TRASBUC:Shield = new Shield("TraSBuc", "TrainSBuckler", "training soul buckler", "a training soul buckler", 3, 60, "A simple rounded shield made of soulmetal used to train soulforce by soul cultivator novices.");
-		public const TOWERSH:Shield = new TowerShield();
+		public const BUCKLER:Shield = new Shield("Buckler", "Buckler", "buckler", "a buckler", 5, 250, "A simple wooden rounded shield.");
 		public const DRGNSHL:DragonShellShield = new DragonShellShield();
-		public const SANCTYN:Shield = new Shield ("SanctN", "Sanctuary", "Sanctuary", "a Sanctuary", 20, 1500, "The legendary shield");
+		public const GREATSH:GreatShield = new GreatShield();
+		public const KITE_SH:Shield = new Shield("Kite Sh", "KiteShield", "kite shield", "a kite shield", 8, 500, "An average-sized kite shield.");
+		public const MABRACE:Shield = new Shield("MaBrace", "ManaBracer", "mana bracer", "a mana bracer", 2, 200, "Runed bracers such as this are popular amongst mages that can afford them. This silver bracer augments a mage’s spell power while leaving the hand open to make gestures used in spellcasting.");
+		public const SPI_FOC:Shield = new Shield("Spi Foc", "SpiritFocus", "spirit focus", "a spirit focus", 4, 800, "This small icon with a silk ribbon is inscribed with eldritch runes and reinforces a kitsune's power and magic. (+20% to Fox Fire dmg and lust dmg, +20% to soulskills power)");
+		public const TRASBUC:Shield = new Shield("TraSBuc", "TrainSBuckler", "training soul buckler", "a training soul buckler", 3, 300, "A simple rounded shield made of soulmetal used to train soulforce by soul cultivator novices.");
+		public const TOWERSH:Shield = new TowerShield();
+		public const SANCTYN:SanctuaryN = new SanctuaryN();
 		public const SANCTYL:Sanctuary = new Sanctuary();
 		public const SANCTYD:DarkAegis = new DarkAegis();
 		public const Y_U_PAN:Shield = new Shield("Y.U.Pan", "Y.U.Panel", "Yogi Uh Panel", "an Yogi Uh Panel", 0, 200, "This strange shield helps Summoners and Golemancers store their pets inside an extra dimensional space when out of battle. The shield can then release them through a system of Calling Cards. Apparently it was a widely used tool for summoner battles back in the days which they called duels.");
