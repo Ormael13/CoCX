@@ -8026,7 +8026,7 @@ public class Combat extends BaseContent {
     }
 
     public function teaseXP(XP:Number = 0):void {
-        if (player.armor == armors.SSC) player.SexXP(XP);
+        if (player.armor == armors.SCANSC) player.SexXP(XP);
         player.SexXP(XP);
     }
 

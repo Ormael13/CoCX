@@ -901,7 +901,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 				//Armor daily event
 				//Scandalous succubus armor corruption updates
-				if (player.armor == armors.SSC && player.cor < 100) {
+				if (player.armor == armors.SCANSC && player.cor < 100) {
 					outputText("Corruption seethes from the succubus clothes into you.");
 					player.cor += 5;
 				}
