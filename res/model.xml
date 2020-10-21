@@ -99,6 +99,7 @@
             <color name="indigo">#4d0080</color>
             <color name="light">#feebd7</color>
             <color name="neon blue">#29eaff</color>
+			<color name="spectral blue">#29eaff</color>
 			<color name="glacial blue">#94f6ff</color>
             <color name="mahogany">#81473b</color>
             <color name="mahogany2">#672828</color>
@@ -380,6 +381,7 @@
         <cell rect="851,150,49,59" name="hands_bg/wraithleft" dx="63" dy="75"/>
         <cell rect="651,270,49,59" name="hands_bg/frostWyrmleft" dx="62" dy="72"/>
         <cell rect="801,270,49,59" name="hands_bg/blade-kamaitachiMantis" dx="56" dy="64"/>
+		<cell rect="751,270,49,59" name="hands_bg/wendigo" dx="56" dy="64"/>
         <cell rect="351,270,49,59" name="overhands_bg/fire" dx="56" dy="64"/>
         <cell rect="1,330,49,59" name="hands/fur" dx="104" dy="64"/>
         <cell rect="601,330,49,59" name="hands/furracoon" dx="104" dy="64"/>
@@ -399,6 +401,7 @@
         <cell rect="901,210,49,59" name="hands/wraithright" dx="94" dy="75"/>
         <cell rect="651,330,49,59" name="hands/frostWyrmright" dx="98" dy="72"/>
         <cell rect="801,330,49,59" name="hands/blade-kamaitachiMantis" dx="104" dy="64"/>
+		<cell rect="751,330,49,59" name="hands/wendigo" dx="104" dy="64"/>
         <cell rect="951,210,49,59" name="hands_fg/wraithrightlewd" dx="105" dy="48"/>
         <cell rect="351,330,49,59" name="overhands/fire" dx="104" dy="64"/>
         <cell rect="1,390,49,59" name="legs/human" dx="79" dy="115"/>
@@ -414,6 +417,7 @@
         <cell rect="101,793,49,59" name="legs/hoof_pscales" dx="79" dy="115"/>
         <cell rect="151,793,49,59" name="legs/hoof_chitin" dx="79" dy="115"/>
         <cell rect="201,793,49,59" name="legs/hoof_orca" dx="79" dy="115"/>
+        <cell rect="251,793,49,59" name="legs/wendigo" dx="79" dy="115"/>
         <cell rect="1,520,90,90" name="legs/harpy_human" dx="60" dy="99"/>
         <cell rect="92,520,90,90" name="legs/harpy_fur" dx="60" dy="99"/>
         <cell rect="183,520,90,90" name="legs/harpy_scales" dx="60" dy="99"/>
@@ -551,6 +555,7 @@
         <cell rect="776,12,45,25" name="armorNeck/fullplatetopFemale" dx="80" dy="63"/>
         <cell rect="833,12,45,25" name="armorNeck/fullplatetopMale" dx="80" dy="63"/>
         <cell rect="644,798,173,156" name="armorNeck/WalpurgisClothes" dx="20" dy="12"/>
+        <cell rect="992,798,173,156" name="armorNeck/WendigoCloak" dx="20" dy="12"/>
         <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="82" dy="75"/>
         <cell rect="728,42,45,58" name="armorLegs/fullplateLegs" dx="82" dy="115"/>
         <cell rect="882,12,125,75" name="armorLegs_fg/taurarmorbottom" dx="72" dy="96"/>
@@ -571,6 +576,7 @@
         <cell rect="1272,489,40,44" name="clothRightArm/berserkerArmorArmsFeralRight" dx="101" dy="56"/>
         <cell rect="1322,489,40,44" name="clothRightArm/berserkerArmorArmsFeralQuadRight" dx="101" dy="56"/>
         <cell rect="818,798,173,156" name="clothCape/WalpurgisClothesBack" dx="19" dy="12"/>
+        <cell rect="1166,798,173,156" name="clothCape/WendigoCloakBack" dx="19" dy="12"/>
         <cell rect="935,543,150,80" name="clothCape/fairyQueenDressUnder" dx="22" dy="61"/>
         <cell rect="150,91,35,25" name="eyes/SpecialForeheadShadow" dx="81" dy="35"/>
         <cell rect="1045,158,20,55" name="glove_fg/scandalousSuccubusClothingRightArmFront" dx="104" dy="52"/>
@@ -626,6 +632,7 @@
         <cell rect="631,350,89,164" name="hair_bg/yukionna" dx="61" dy="4"/>
         <cell rect="721,350,89,164" name="hair_bg/longTresse" dx="50" dy="19"/>
         <cell rect="1,449,28,30" name="hair/hairHood" dx="91" dy="39"/>
+        <cell rect="1,482,28,30" name="hair/hairHoodFire" dx="91" dy="39"/>
     </spritemap>
     <spritemap file="head.png">
         <cell rect="1,70,29,32" name="head/human" dx="90" dy="37"/>
@@ -728,6 +735,7 @@
         <cell rect="421,396,59,65" name="horns_bg/ghost" dx="73" dy="8"/>
         <cell rect="631,330,87,65" name="horns_bg/devilquad" dx="59" dy="2"/>
         <cell rect="181,429,29,30" name="horns_bg/frostWyrm" dx="74" dy="26"/>
+        <cell rect="301,396,59,65" name="horns_overclothe/deer" dx="74" dy="-5"/>
         <cell rect="1,470,59,65" name="antennae/bee" dx="75" dy="4"/>
     </spritemap>
     <spritemap file="lewd.png">
@@ -936,7 +944,7 @@
         <cell rect="361,500,49,29" name="panty/sexyWhiteBikiniPanty" dx="79" dy="99"/>
         <cell rect="411,500,49,29" name="panty/sexyYellowBikiniPanty" dx="79" dy="99"/>
         <cell rect="461,500,49,29" name="panty/scandalousSuccubusClothingPanty" dx="79" dy="94"/>
-		<cell rect="511,500,49,48" name="panty/scandalousSuccubusClothingPantyTaur" dx="79" dy="94"/>
+        <cell rect="511,500,49,48" name="panty/scandalousSuccubusClothingPantyTaur" dx="79" dy="94"/>
         <cell rect="761,500,49,29" name="panty/chainMailPanty" dx="79" dy="99"/>
         <cell rect="811,500,49,29" name="panty/dragonScalePanty" dx="79" dy="99"/>
     </spritemap>
@@ -994,7 +1002,10 @@
         <cell rect="423,561,168,139" name="tail/thunderbird_taur" dx="34" dy="49"/>
         <cell rect="592,561,82,139" name="tail/raccoon" dx="95" dy="40"/>
         <cell rect="592,561,82,139" name="tail/raccoon_taur" dx="149" dy="50"/>
-        <cell rect="508,351,82,69" name="tail/kamaitachi" dx="94" dy="87"/>
+        <cell rect="759,561,83,139" name="tail/wendigo" dx="95" dy="40"/>
+        <cell rect="759,561,83,139" name="tail/wendigo_taur" dx="144" dy="49"/>
+        <cell rect="508,351,82,69" name="tail/kamaitachi" dx="95" dy="87"/>
+        <cell rect="508,351,82,69" name="tail/kamaitachi_taur" dx="144" dy="50"/>
         <cell rect="1,1015,173,156" name="tail/fox1" dx="4" dy="31"/>
         <cell rect="1,1015,173,156" name="tail/fox1_taur" dx="60" dy="47"/>
         <cell rect="523,858,173,156" name="tail/fox2" dx="16" dy="36"/>
@@ -1048,6 +1059,7 @@
 	<!-- LAYER AREA -->
     <layers>	
 		<layer name="fullbody"/>
+		<layer name="horns_overclothe"/>
 		<layer name="overclothe"/>
 		<layer name="shield"/>
 		<layer name="weapon"/>
@@ -4094,7 +4106,7 @@
 			<hide part="hair_bg/*"/>
 			<if test="hairType == Hair.BURNING">
 				<hide part="hair/*"/>
-				<show part="hair/hairHood"/>
+				<show part="hair/hairHoodFire"/>
 			</if>
 			<if test="hairType == Hair.RAIJU">
 				<hide part="hair/*"/>
