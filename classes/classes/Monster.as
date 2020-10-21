@@ -1,5 +1,6 @@
 ﻿package classes
 {
+import classes.BaseContent;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
@@ -19,6 +20,7 @@ import classes.Items.WeaponRangeLib;
 import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
+import classes.Scenes.Camp;
 import classes.Scenes.Combat.Combat;
 import classes.Scenes.Combat.CombatMagic;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
@@ -2335,6 +2337,10 @@ import flash.utils.getQualifiedClassName;
 			return _drop.roll() as ItemType;
 		}
 
+		public function isNightTime():Boolean{
+			return (CoC.instance.model.time.hours <= 5 || CoC.instance.model.time.hours >= 21);
+		}
+
 		public function combatRoundUpdate():void
 		{
 			if(hasStatusEffect(StatusEffects.MilkyUrta)) {
@@ -2963,6 +2969,8 @@ import flash.utils.getQualifiedClassName;
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				if (findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.VladimirRegalia) >= 0 && !isNightTime()) healingPercent -= 5;
+				if (findPerk(PerkLib.VladimirRegalia) >= 0 && isNightTime()) healingPercent += 5;
 				if (findPerk(PerkLib.LizanRegeneration) >= 0 && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1.5;
 				if (findPerk(PerkLib.LizanMarrow) >= 0 && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 0.5;
 				if (findPerk(PerkLib.LizanMarrowEvolved) >= 0 && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1;

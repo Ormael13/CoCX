@@ -5290,6 +5290,7 @@ public class Combat extends BaseContent {
     public function doDarknessDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage * 2;
+        if (player.hasPerk(PerkLib.VladimirRegalia)) damage = damage * 2;
         damage *= doDamageReduction();
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
@@ -8965,6 +8966,7 @@ public class Combat extends BaseContent {
         damage *= scalingBonusToughness()*0.2;
         if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
         if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+        if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
         if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
         if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
@@ -9008,6 +9010,7 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
         if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+        if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
         if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
         if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
@@ -9603,6 +9606,7 @@ public class Combat extends BaseContent {
         var damage:int = player.maxHP() * 0.05;
         if (player.hasPerk(PerkLib.HollowFangsEvolved)) damage += player.maxHP() * 0.02;
         if (player.hasPerk(PerkLib.HollowFangsFinalForm)) damage += player.maxHP() * 0.08;
+        if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
         if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
         if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
@@ -9653,6 +9657,7 @@ public class Combat extends BaseContent {
         damage = unarmedAttack();
         damage += scalingBonusStrength() * 0.5;
         if (player.arms.type == Arms.DISPLACER) damage*= 2; //Displacers got extra limbs to rend
+        if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
         if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
         if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
@@ -9767,6 +9772,7 @@ public class Combat extends BaseContent {
         }
         damage += player.tou;
         damage += scalingBonusToughness() * 0.5;
+        if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
         if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
         if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;

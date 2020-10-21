@@ -2907,9 +2907,12 @@ public class PerkLib
 		public static const VitalShot:PerkType = mk("Vital Shot", "Vital Shot",
 				"Gain a +10% chance to do a critical strike with arrows.",
 				"You choose the 'Vital Shot' perk, gaining an additional +10% chance to cause a critical hit with arrows.");
+		public static const VladimirRegalia:PerkType = mk("Vladimir Regalia", "Vladimir Regalia",
+				"+100% damage dealt from grapple and Dark ability, Player suffer from 5% degeneration during the day but regenerate 5% faster at night instead.",
+				"+100% damage dealt from grapple and Dark ability, Player suffer from 5% degeneration during the day but regenerate 5% faster at night instead.");
 		public static const WalpurgisIzaliaRobe:PerkType = mk("Walpurgis Izalia Robe", "Walpurgis Izalia Robe",
 				"Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.",
-				"Increase fire damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.\n");
+				"Increase fire damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
 		public static const WarCaster:PerkType = mk("War caster", "War caster",
 				"Increases magical and physical critical chance by up to 25% based on intelligence.",
 				"You choose the 'War caster' perk, increasing magical and physical critical chance by up to 25% based on intelligence.");

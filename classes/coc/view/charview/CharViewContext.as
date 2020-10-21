@@ -95,9 +95,9 @@ import coc.xlogic.ExecContext;
 					StatusEffects: StatusEffects,
 
 					// Viewable Clothing lists
-					armStanceNonBannedList: player.armor == game.armors.SSC || player.armor == game.armors.B_QIPAO || player.armor == game.armors.G_QIPAO || player.armor == game.armors.P_QIPAO || player.armor == game.armors.R_QIPAO,
+					armStanceNonBannedList: player.armor == game.armors.SCANSC || player.armor == game.armors.B_QIPAO || player.armor == game.armors.G_QIPAO || player.armor == game.armors.P_QIPAO || player.armor == game.armors.R_QIPAO,
 					playerWearsAStanceBannedDress: player.armor == game.armors.BLIZZ_K || player.armor == game.armors.SPKIMO || player.armor == game.armors.WKIMONO || player.armor == game.armors.BKIMONO || player.armor == game.armors.RKIMONO || player.armor == game.armors.PKIMONO || player.armor == game.armors.BLKIMONO || player.armor == game.armors.KBDRESS || player.armor == game.armors.GTECHC_,
-					playerWearsAStanceBannedArmor: player.armor == game.armors.CTPALAD || player.armor == game.armors.BA || player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
+					playerWearsAStanceBannedArmor: player.armor == game.armors.CTPALAD || player.armor == game.armors.BERA || player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 
 					ComfyCLothes: player.armor == game.armors.C_CLOTH,
 					yukiDress: player.armor == game.armors.BLIZZ_K,
@@ -123,10 +123,11 @@ import coc.xlogic.ExecContext;
 					sexyWhiteBikini: player.armor == game.armors.SWHBIKNI,
 					sexyYellowBikini: player.armor == game.armors.SYEBIKNI,
 					krakenBlackDress: player.armor == game.armors.KBDRESS,
-					walpurgisIzaliaCloak: player.armor == game.armors.WIC,
-					scandalousSuccubusClothing: player.armor == game.armors.SSC,
+					walpurgisIzaliaCloak: player.armor == game.armors.WALIC,
+					scandalousSuccubusClothing: player.armor == game.armors.SCANSC,
 					fairyQueenRegalia: player.armor == game.armors.FQR,
-					berserkerArmor: player.armor == game.armors.BA,
+					berserkerArmor: player.armor == game.armors.BERA,
+					vladimirRegalia: player.armor == game.armors.VLAR,
 					chainMailBikini: player.armor == game.armors.CHBIKNI || player.armor == game.armors.LMARMOR,
 					platemail: player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 
