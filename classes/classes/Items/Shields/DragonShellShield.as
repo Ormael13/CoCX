@@ -10,7 +10,7 @@ import classes.Scenes.SceneLib;
 public class DragonShellShield extends Shield {
 		
 		public function DragonShellShield() {
-			super("DrgnShl", "DrgnShl", "dragon-shell shield", "a dragon-shell shield", 14, 1500, "A durable shield that has been forged from the remains of the dragon egg you found in the swamp.  Absorbs any fluid attacks you can catch, rendering them useless.");
+			super("DrgnShl", "DrgnShl", "dragon-shell shield", "a dragon-shell shield", 14, 1400, "A durable shield that has been forged from the remains of the dragon egg you found in the swamp.  Absorbs any fluid attacks you can catch, rendering them useless.");
 		}
 		
 		override public function get description():String {

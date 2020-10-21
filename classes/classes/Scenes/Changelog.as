@@ -128,7 +128,7 @@ package classes.Scenes
 			outputText("-New tier 6 misc lvl-up perk: Lizan Marrow (Final Form). Req. Lizan Marrow (Evolved) perk and lizan score 12+. Effect: Regenerates 1.5% of HP per round in combat and 3% of HP per hour. Additionaly your limit for innate self-regeneration rate increased. When below 25% of max HP regeneration provided by Lizan regeneration doubles. ");
 			outputText("You can't loose by HP until reaching droping into negative health larger than 5% of max HP.\n");
 			outputText("-Chance to meet proc first Phylla event been increased and each one of them after first slowly growing up chance to proc.\n");
-			outputText("-\n");
+			outputText("-Added classification to shields adding 'Large' and 'Massive' tags. Large shields lower evasion by 20% unless PC have perk Gigant's Grip. Massive ones lower it by 50% and with Gigant's Grip lowers by 20%. Shield bash dmg increased 2x for large and 5x for massive shields.\n");
 			outputText("-\n");
 			outputText("-All below changes was coded/added by Liadri and aimozg!!!\n");
 			outputText("-Strength Toughness Speed Inteligence Wisdom Sensitivity refactoring happened the stats are now calculated in a whole new way!\n");

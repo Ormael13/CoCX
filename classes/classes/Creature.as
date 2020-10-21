@@ -4103,6 +4103,11 @@ public class Creature extends Utils
 				else chance += 30;
 			}
 			if (hasStatusEffect(StatusEffects.Displacement)) chance += 60;
+			if (game.player.shieldPerk == "Large" && findPerk(PerkLib.GigantGrip) < 0) chance -= 20;
+			if (game.player.shieldPerk == "Massive") {
+				if (findPerk(PerkLib.GigantGrip) < 0) chance -= 50;
+				else chance -= 20;
+			}
 			if (hasStatusEffect(StatusEffects.Flying)) chance += flychance;
 			return chance;
 		}

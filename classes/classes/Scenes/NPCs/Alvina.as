@@ -87,17 +87,18 @@ import classes.internals.*;
 		}
 		
 		private function alvinaSoulTear():void {
-			if (!hasStatusEffect(StatusEffects.SoulTear)) {
-				outputText("\"<i>Most demons steal souls through sex. I have a more academic approach to it. Do not worry, you will still writhe in pleasure and reach orgasm as I tear it out of your chest!</i>\"\n\n");
-				outputText("You see a set of dark tendrils of black magic surging around her body, like grasping claws, ready to bury themselves in you. You need to stop that incantation before she strikes you with it!\n\n");
-				createStatusEffect(StatusEffects.SoulTear, 0, 0, 0, 0);
-			}
-			else {
+			if (hasStatusEffect(StatusEffects.SoulTear)) {
 				var damage:Number = player.maxHP();
 				if (player.minHP() < 0) damage -= player.minHP();
 				outputText("You barely register in disbelief as the tendrils rush for you like some horrible monsters out of your worst nightmares. These creatures have a mind of their own and even as you try to run away, they plunge into your chest and grab something before forcefully tearing it out. You scream in anguish as your soul is torn from your body. (" + damage + ")\n\n");
+				createStatusEffect(StatusEffects.AbilityCooldown4, 5, 0, 0, 0);
 				removeStatusEffect(StatusEffects.SoulTear);
 				player.HP -= damage;
+			}
+			else {
+				outputText("\"<i>Most demons steal souls through sex. I have a more academic approach to it. Do not worry, you will still writhe in pleasure and reach orgasm as I tear it out of your chest!</i>\"\n\n");
+				outputText("You see a set of dark tendrils of black magic surging around her body, like grasping claws, ready to bury themselves in you. You need to stop that incantation before she strikes you with it!\n\n");
+				createStatusEffect(StatusEffects.SoulTear, 0, 0, 0, 0);
 			}
 		}
 		
