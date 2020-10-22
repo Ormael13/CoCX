@@ -2152,6 +2152,15 @@ public class PerkLib
 		public static const NonaAttackSmall:PerkType = mk("Nona Attack (Small)", "Nona Attack (Small)",
 				"Allows you to perform nine melee attacks with small weapons per round.",
 				"You choose the 'Nona Attack (Small)' perk. This allows you to make nine melee attacks with small weapons.");
+		public static const NukiNuts:PerkType = mk("Nuki Nuts", "Nuki Nuts",
+				"Gain a natural armor bonus based on your ball size and prevent the loss of money strike.",
+				"You choose the 'Nuki Nuts' perk, Gain a natural armor bonus based on your ball size and prevent the loss of money strike..");
+		public static const NukiNutsEvolved:PerkType = mk("Nuki Nuts, (Evolved)", "Nuki Nuts, (Evolved)",
+				"Increase the Armor bonus granted by Nuki nuts and improve cum production. Cumming now has a small chance of generating gems.",
+				"You choose the 'Nuki Nuts, (Evolved)' perk, Increase the Armor bonus granted by Nuki nuts and improve cum production. Cumming now has a small chance of generating gems.");
+		public static const NukiNutsFinalForm:PerkType = mk("Nuki Nuts, (Final Form)", "Nuki Nuts, (Final Form)",
+				"Further Increase the Armor bonus granted by Nuki nuts and further improve cum production. Cumming now has a greater chance of generating gems. Double the damage of Money Strike.",
+				"You choose the 'Nuki Nuts, (Final Form)' perk, Further Increase the Armor bonus granted by Nuki nuts and further improve cum production. Cumming now has a greater chance of generating gems. Double the damage of Money Strike.");
 		public static const Nurse:PerkType = mk("Nurse", "Nurse",
 				"Constantly running around tending to the sick has made you better at taking care of yourself, increasing health regen.",
 				"You choose the 'Nurse' perk, increasing HP gains by 20%.");

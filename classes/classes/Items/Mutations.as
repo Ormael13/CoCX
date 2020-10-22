@@ -11697,10 +11697,14 @@ public final class Mutations extends MutationsHelper {
                 setTailType(Tail.RACCOON);
                 changes++;
             }
+
+            var color1:String;
+            var Coon_HairColor:Array = ["brown", "chocolate", "dark brown", "tan", "caramel"];
             //gain fur
             if ((player.lowerBody == LowerBody.RACCOON && player.ears.type == Ears.RACCOON) && !player.hasFur() && changes < changeLimit && rand(4) == 0) {
+                color1 = randomChoice(Coon_HairColor);
                 outputText("\n\nYou shiver, feeling a bit cold.  Just as you begin to wish for something to cover up with, it seems your request is granted; thick, bushy fur begins to grow all over your body!  You tug at the tufts in alarm, but they're firmly rooted and... actually pretty soft.  Huh.  ");
-                player.skin.growCoat(Skin.FUR, {color: "gray"});
+                player.skin.growCoat(Skin.FUR, {color: color1});
                 outputText("<b>You now have a warm coat of [skin coat.color] raccoon fur!</b>");
                 if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
                     outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
@@ -11708,6 +11712,42 @@ public final class Mutations extends MutationsHelper {
                 }
                 changes++;
             }
+
+            //Dye those hairs
+            var Coon_HairColor:Array = ["brown", "chocolate", "dark brown", "tan", "caramel"];
+            if (!InCollection(player.hairColor, Coon_HairColor) && changes < changeLimit && rand(3) == 0) {
+                player.hairColor = randomChoice(Coon_HairColor);
+                outputText("\n\nYour hairs seems to have changed color to "+player.hairColor+"!");
+                changes++;
+            }
+
+            //get partial fur form full or full from partial fur
+            if (player.hasFur() && rand(3) == 0 && changes < changeLimit) {
+                if (player.skin.coverage == Skin.COVERAGE_COMPLETE || player.skin.coverage == Skin.COVERAGE_HIGH) {
+                    outputText("\n\nWhat used to be a dense coat of fur begins to fall in patches on the ground leaving you with just enough fur to cover some area of your body.  <b>Some area of your body are now partially covered with fur!</b>");
+                    player.skin.coverage = Skin.COVERAGE_LOW;
+                    changes++;
+                } else {
+                    color1 = randomChoice(Coon_HairColor);
+                    outputText("\n\nYou shiver, feeling a bit cold.  Just as you begin to wish for something to cover up with, it seems your request is granted; thick, bushy fur begins to grow all over your body!  You tug at the tufts in alarm, but they're firmly rooted and... actually pretty soft.  Huh.  ");
+                    player.skin.growCoat(Skin.FUR, {color: color1});
+                    outputText("<b>You now have a warm coat of [skin coat.color] raccoon fur!</b>");
+                    if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+                        outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
+                        player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
+                    }
+                    changes++;
+                }
+            }
+
+            //Eyes Color
+            var coonEyeColor:Array = ["gold"];
+            if (!InCollection(player.eyes.colour, coonEyeColor) || player.eyes.type != Eyes.HUMAN) {
+                setEyeTypeAndColor(Eyes.HUMAN, randomChoice(coonEyeColor));
+                outputText("\n\nYou feel something fundamental change in your sight when you go check yourself in a puddle you notice that not only do they look human but your iris are now <b>[eyecolor].</b>");
+                changes++;
+            }
+
             //gain coon ears
             if (player.tailType == Tail.RACCOON && player.ears.type != Ears.RACCOON && rand(4) == 0 && changes < changeLimit) {
                 //from dog, kangaroo, bunny, other long ears
@@ -11752,6 +11792,14 @@ public final class Mutations extends MutationsHelper {
                 player.legCount = 2;
                 changes++;
             }
+
+            //Grow coon Arms
+            if (changes < changeLimit && player.arms.type == Arms.HUMAN && player.arms.type != Arms.RACCOON && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0) {
+                outputText("\n\nYour arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into small like claws so no wonder you felt it that much. <b>You now have pawed hands like those of a raccoon.</b>");
+                setArmType(Arms.RACCOON);
+                changes++;
+            }
+
             //gain half-coon face (prevented if already full-coon)
             if (player.faceType != Face.RACCOON_MASK && player.faceType != Face.RACCOON && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
                 //from human/naga/shark/bun face
@@ -11764,8 +11812,8 @@ public final class Mutations extends MutationsHelper {
                     outputText("Shaking your head a bit, you wait for your energy to return, then examine your appearance.  ");
                     //(if player skinTone = ebony/black/ebony with tats and no fur/scales or if black/midnight fur or if black scales
                     if (((player.skinTone == "ebony" || player.skinTone == "black") && !player.hasCoat()) || ((player.hairColor == "black" || player.hairColor == "midnight") && (player.hasFur() || player.hasScales()))) {
-                        outputText("Nothing seems different at first.  Strange... you look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask.</b>");
-                    } else outputText("A dark, almost black mask shades the " + player.skinFurScales() + " around your eyes and over the topmost portion of your nose, lending you a criminal air!  <b>You now have a raccoon mask!</b>");
+                        outputText("Nothing seems different at first.  Strange... you look closer and discover a darker, mask-line outline on your already inky visage. Furthermore your canines have slightly alongated not unlike those of an animal. <b>You now have a barely-visible raccoon mask and sharp canines like those of a raccoon.</b>");
+                    } else outputText("A dark, almost black mask shades the " + player.skinFurScales() + " around your eyes and over the topmost portion of your nose, lending you a criminal air! Furthermore your canines have slightly alongated not unlike those of an animal. <b>You now have a raccoon mask and sharp canines like those of a raccoon.!</b>");
                 }
                 //from snout (will not overwrite full-coon snout but will overwrite others)
                 else {

@@ -1797,6 +1797,7 @@
             </case>
             <case values="Face.RACCOON_MASK,Face.FERRET_MASK">
                 <show part="face/racoon_mask"/>
+				<show part="face/human_fang"/>
             </case>
 			<case values="Face.RACCOON,Face.FERRET">
                 <show part="face/racoon"/>

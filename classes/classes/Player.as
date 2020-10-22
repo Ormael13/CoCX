@@ -2958,8 +2958,9 @@ use namespace CoC;
 			if (TopRace == "raccoon") {
 				if (TopScore >= 4) {
 					race = "raccoon-morph";
-					if (balls > 0 && ballSize > 5)
+					if (balls > 0 && ballSize > 5 && TopScore >= 14) {
 						race = "tanuki";
+					}
 				}
 			}
 			if (TopRace == "dog") {
@@ -4063,12 +4064,12 @@ use namespace CoC;
 				chimeraCounter++;
 			if (dragonScore() >= 10)
 				chimeraCounter++;
-/*			if (raccoonScore() >= 4)
+			if (raccoonScore() >= 4)
 				chimeraCounter++;
-			if (dogScore() >= 4)
-				chimeraCounter++;
-			if (wolfScore() >= 6)
-				chimeraCounter++;
+/*			if (dogScore() >= 4)
+                chimeraCounter++;
+            if (wolfScore() >= 6)
+                chimeraCounter++;
 */			if (werewolfScore() >= 12)
 				chimeraCounter++;
 			if (foxScore() >= 7)
@@ -4700,20 +4701,38 @@ use namespace CoC;
 		public function raccoonScore():Number {
 			Begin("Player","racialScore","raccoon");
 			var coonCounter:Number = 0;
-			if (faceType == Face.RACCOON_MASK)
-				coonCounter++;
-			if (faceType == Face.RACCOON)
+			if (faceType == Face.RACCOON_MASK || faceType == Face.RACCOON)
 				coonCounter += 2;
 			if (ears.type == Ears.RACCOON)
+				coonCounter++;
+			if (ears.type == Ears.RACCOON)
+				coonCounter++;
+			if (eyes.colour == "gold")
+				coonCounter++;
+			if (arms.type == Arms.RACCOON)
 				coonCounter++;
 			if (tailType == Tail.RACCOON)
 				coonCounter++;
 			if (lowerBody == LowerBody.RACCOON)
 				coonCounter++;
+			if (wings.type == Wings.NONE)
+				coonCounter+= 2;
+			if (cocks.length > 0)
+				coonCounter++;
 			if (coonCounter > 0 && balls > 0)
 				coonCounter++;
 			//Fur only counts if some canine features are present
-			if (hasFur() && coonCounter > 0)
+			if ((hasFur() || hasPartialCoat(Skin.FUR)) && coonCounter > 0)
+				coonCounter++;
+			if (InCollection(skin.coat.color, "chocolate","brown","dark brown","tan", "caramel"))
+				coonCounter++;
+			if (InCollection(hairColor, "chocolate","brown","dark brown","tan", "caramel"))
+				coonCounter++;
+			if (findPerk(PerkLib.NukiNuts) > 0)
+				coonCounter++;
+			if (findPerk(PerkLib.NukiNutsEvolved) > 0)
+				coonCounter++;
+			if (findPerk(PerkLib.NukiNutsFinalForm) > 0)
 				coonCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				coonCounter += 50;
@@ -8194,7 +8213,11 @@ use namespace CoC;
 				wolfCounter++;
 			if (wings.type == Wings.NONE)
 				wolfCounter++;
-			if (hairColor == "glacial white" && hasFur() && coatColor == "glacial white")
+			if (hairColor == "glacial white")
+				wolfCounter++;
+			if (hasFur() || hasPartialCoat(Skin.FUR))
+				wolfCounter++;
+			if (coatColor == "glacial white")
 				wolfCounter++;
 			if (rearBody.type == RearBody.FENRIR_ICE_SPIKES)
 				wolfCounter += 6;
@@ -10242,7 +10265,17 @@ use namespace CoC;
 			}
 			//-20/-10+105+150
 			if (raccoonScore() >= 4) {
-				maxSpeCap2 += 15;
+				if (raccoonScore() >= 17){
+					maxSpeCap2 += 105;
+					maxIntCap2 += 150;
+				}
+				else if (raccoonScore() >= 14) {
+					maxSpeCap2 += 90;
+					maxIntCap2 += 120;
+				}
+				else {
+					maxSpeCap2 += 60;
+				}
 			}//+15/10-20
 			if (horseScore() >= 4) {
 				if (horseScore() >= 7) {
