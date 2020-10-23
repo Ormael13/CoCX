@@ -51,6 +51,7 @@ public class Arms extends BodyPart {
 	public static const USHI_ONI_ONNA:int	= 47;
 	public static const KAMAITACHI:int		= 48;
 	public static const GAZER:int			= 49;
+	public static const RACCOON:int			= 50;
 	// Don't forget to add new types in DebugMenu.as list ARM_TYPE_CONSTANTS
 
 	public function Arms() {

@@ -7,8 +7,13 @@
 package classes.Scenes.Areas 
 {
 import classes.*;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.GlacialRift.*;
@@ -48,7 +53,7 @@ use namespace CoC;
 			if ((flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 || flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] > 0) && flags[kFLAGS.VALARIA_AT_CAMP] == 0 && flags[kFLAGS.TOOK_GOO_ARMOR] == 0 && player.armor != armors.GOOARMR) choice[choice.length] = 6; //Valeria
 			if (rand(3) == 0) choice[choice.length] = 7; //Freebie items!
 			if (rand(15) == 0) choice[choice.length] = 8; //Ornate Chest or cache of gems/pile of stones
-			if (player.faceType == 24 && player.ears.type == 18 && player.arms.type == 10 && player.lowerBody == 33 && player.tailType == 29 && player.hasFur() && player.hairColor == "glacial white" && player.coatColor == "glacial white" && player.hasKeyItem("Fenrir Collar") < 0) choice[choice.length] = 9; //Fenrir ruined shrine
+			if (player.faceType == Face.WOLF && player.ears.type == Ears.WOLF && player.arms.type == Arms.WOLF && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.hasFur() && player.hairColor == "glacial white" && player.coatColor == "glacial white" && player.hasKeyItem("Fenrir Collar") < 0) choice[choice.length] = 9; //Fenrir ruined shrine
 			choice[choice.length] = 10; //Find nothing!
 			
 			//DLC april fools

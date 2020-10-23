@@ -99,6 +99,7 @@
             <color name="indigo">#4d0080</color>
             <color name="light">#feebd7</color>
             <color name="neon blue">#29eaff</color>
+			<color name="spectral blue">#29eaff</color>
 			<color name="glacial blue">#94f6ff</color>
             <color name="mahogany">#81473b</color>
             <color name="mahogany2">#672828</color>
@@ -380,6 +381,7 @@
         <cell rect="851,150,49,59" name="hands_bg/wraithleft" dx="63" dy="75"/>
         <cell rect="651,270,49,59" name="hands_bg/frostWyrmleft" dx="62" dy="72"/>
         <cell rect="801,270,49,59" name="hands_bg/blade-kamaitachiMantis" dx="56" dy="64"/>
+        <cell rect="751,270,49,59" name="hands_bg/wendigo" dx="56" dy="64"/>
         <cell rect="351,270,49,59" name="overhands_bg/fire" dx="56" dy="64"/>
         <cell rect="1,330,49,59" name="hands/fur" dx="104" dy="64"/>
         <cell rect="601,330,49,59" name="hands/furracoon" dx="104" dy="64"/>
@@ -399,6 +401,7 @@
         <cell rect="901,210,49,59" name="hands/wraithright" dx="94" dy="75"/>
         <cell rect="651,330,49,59" name="hands/frostWyrmright" dx="98" dy="72"/>
         <cell rect="801,330,49,59" name="hands/blade-kamaitachiMantis" dx="104" dy="64"/>
+        <cell rect="751,330,49,59" name="hands/wendigo" dx="104" dy="64"/>
         <cell rect="951,210,49,59" name="hands_fg/wraithrightlewd" dx="105" dy="48"/>
         <cell rect="351,330,49,59" name="overhands/fire" dx="104" dy="64"/>
         <cell rect="1,390,49,59" name="legs/human" dx="79" dy="115"/>
@@ -414,6 +417,7 @@
         <cell rect="101,793,49,59" name="legs/hoof_pscales" dx="79" dy="115"/>
         <cell rect="151,793,49,59" name="legs/hoof_chitin" dx="79" dy="115"/>
         <cell rect="201,793,49,59" name="legs/hoof_orca" dx="79" dy="115"/>
+        <cell rect="251,793,49,59" name="legs/wendigo" dx="79" dy="115"/>
         <cell rect="1,520,90,90" name="legs/harpy_human" dx="60" dy="99"/>
         <cell rect="92,520,90,90" name="legs/harpy_fur" dx="60" dy="99"/>
         <cell rect="183,520,90,90" name="legs/harpy_scales" dx="60" dy="99"/>
@@ -510,6 +514,7 @@
         <cell rect="607,12,40,28" name="clotheHead/goldenNagaHairpin" dx="83" dy="32"/>
         <cell rect="607,70,40,28" name="clotheHead/machinistGoggles" dx="84" dy="32"/>
         <cell rect="486,1574,30,20" name="clotheHead/fairyQueenCirclet" dx="88" dy="38"/>
+        <cell rect="1013,12,40,28" name="clotheHead/merchantClotheHat" dx="81" dy="30"/>
         <cell rect="607,41,15,13" name="clotheAmulet/GoldStatAmulet" dx="97" dy="65"/>
         <cell rect="67,26,80,28" name="clotheScarf/scarfBlue" dx="94" dy="64"/>
         <cell rect="524,12,80,28" name="clotheScarf/scarfGreen" dx="94" dy="64"/>
@@ -534,6 +539,7 @@
         <cell rect="1099,216,80,105" name="clothe/purpleKimonoSleeves" dx="64" dy="72"/>
         <cell rect="853,325,80,105" name="clothe/blackKimonoSleeves" dx="64" dy="72"/>
         <cell rect="1181,216,80,105" name="clothe/vampireTop" dx="65" dy="63"/>
+        <cell rect="1263,216,80,105" name="clothe/merchantClothe" dx="65" dy="57"/>
         <cell rect="935,325,80,104" name="clothe/goblinTechnomancerClotheArms" dx="64" dy="72"/>
         <cell rect="622,445,40,80" name="clothe/comfortableClothes" dx="79" dy="44"/>
         <cell rect="1263,325,80,104" name="clothe/berserkerArmorTop" dx="64" dy="55"/>
@@ -548,9 +554,13 @@
         <cell rect="1192,158,40,55" name="clotheLegs/vampireClothinglegsLewd" dx="85" dy="117"/>
         <cell rect="1345,325,80,104" name="clotheLegs/berserkerArmorLegs" dx="64" dy="72"/>
         <cell rect="1181,434,90,104" name="clotheLegs/berserkerArmorLegsFeral" dx="62" dy="50"/>
+        <cell rect="1345,216,70,100" name="clotheLegs/merchantClotheBoots" dx="65" dy="72"/>
+        <cell rect="1427,216,70,100" name="clotheLegs/merchantClotheBootsMale" dx="65" dy="72"/>
         <cell rect="776,12,45,25" name="armorNeck/fullplatetopFemale" dx="80" dy="63"/>
         <cell rect="833,12,45,25" name="armorNeck/fullplatetopMale" dx="80" dy="63"/>
         <cell rect="644,798,173,156" name="armorNeck/WalpurgisClothes" dx="20" dy="12"/>
+        <cell rect="992,798,173,156" name="armorNeck/WendigoCloak" dx="20" dy="12"/>
+        <cell rect="1013,70,40,28" name="armorNeck/merchantClotheCape_fg" dx="85" dy="59"/>
         <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="82" dy="75"/>
         <cell rect="728,42,45,58" name="armorLegs/fullplateLegs" dx="82" dy="115"/>
         <cell rect="882,12,125,75" name="armorLegs_fg/taurarmorbottom" dx="72" dy="96"/>
@@ -567,11 +577,14 @@
         <cell rect="1024,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArmLewd" dx="104" dy="52"/>
         <cell rect="1255,158,20,55" name="clothRightArm/vampireClothingRightArm" dx="108" dy="68"/>
         <cell rect="1297,158,20,55" name="clothRightArm/vampireClothingRightArmLewd" dx="104" dy="52"/>
-        <cell rect="1181,325,80,104" name="clothRightArm/berserkerArmorArms" dx="64" dy="72"/>
+        <cell rect="1181,325,55,55" name="clothRightArm/berserkerArmorArms" dx="64" dy="72"/>
         <cell rect="1272,489,40,44" name="clothRightArm/berserkerArmorArmsFeralRight" dx="101" dy="56"/>
         <cell rect="1322,489,40,44" name="clothRightArm/berserkerArmorArmsFeralQuadRight" dx="101" dy="56"/>
+        <cell rect="1339,158,60,40" name="clothRightArm/merchantClotheArms" dx="74" dy="65"/>
         <cell rect="818,798,173,156" name="clothCape/WalpurgisClothesBack" dx="19" dy="12"/>
+        <cell rect="1166,798,173,156" name="clothCape/WendigoCloakBack" dx="19" dy="12"/>
         <cell rect="935,543,150,80" name="clothCape/fairyQueenDressUnder" dx="22" dy="61"/>
+        <cell rect="1509,216,80,100" name="clothCape_bg/merchantClotheCape_bg" dx="65" dy="64"/>
         <cell rect="150,91,35,25" name="eyes/SpecialForeheadShadow" dx="81" dy="35"/>
         <cell rect="1045,158,20,55" name="glove_fg/scandalousSuccubusClothingRightArmFront" dx="104" dy="52"/>
         <cell rect="1318,158,20,55" name="glove_fg/vampireClothingRightArmFront" dx="104" dy="52"/>
@@ -626,6 +639,7 @@
         <cell rect="631,350,89,164" name="hair_bg/yukionna" dx="61" dy="4"/>
         <cell rect="721,350,89,164" name="hair_bg/longTresse" dx="50" dy="19"/>
         <cell rect="1,449,28,30" name="hair/hairHood" dx="91" dy="39"/>
+        <cell rect="1,482,28,30" name="hair/hairHoodFire" dx="91" dy="39"/>
     </spritemap>
     <spritemap file="head.png">
         <cell rect="1,70,29,32" name="head/human" dx="90" dy="37"/>
@@ -728,6 +742,7 @@
         <cell rect="421,396,59,65" name="horns_bg/ghost" dx="73" dy="8"/>
         <cell rect="631,330,87,65" name="horns_bg/devilquad" dx="59" dy="2"/>
         <cell rect="181,429,29,30" name="horns_bg/frostWyrm" dx="74" dy="26"/>
+        <cell rect="301,396,59,65" name="horns_overclothe/deer" dx="74" dy="-5"/>
         <cell rect="1,470,59,65" name="antennae/bee" dx="75" dy="4"/>
     </spritemap>
     <spritemap file="lewd.png">
@@ -890,6 +905,8 @@
         <cell rect="911,410,49,29" name="bra_fg/vampireBraSmall" dx="79" dy="68"/>
         <cell rect="911,440,49,29" name="bra_fg/vampireBraMedium" dx="79" dy="68"/>
         <cell rect="911,470,49,29" name="bra_fg/vampireBraLarge" dx="79" dy="68"/>
+		<cell rect="961,440,49,29" name="bra_fg/merchantClotheBraMedium" dx="79" dy="68"/>
+        <cell rect="961,470,49,29" name="bra_fg/merchantClotheBraLarge" dx="79" dy="68"/>
         <cell rect="11,410,49,29" name="bra/goblinTechnomancerBraSmall" dx="79" dy="68"/>
         <cell rect="11,440,49,29" name="bra/goblinTechnomancerBraMedium" dx="79" dy="68"/>
         <cell rect="11,470,49,29" name="bra/goblinTechnomancerBraLarge" dx="79" dy="68"/>
@@ -936,7 +953,7 @@
         <cell rect="361,500,49,29" name="panty/sexyWhiteBikiniPanty" dx="79" dy="99"/>
         <cell rect="411,500,49,29" name="panty/sexyYellowBikiniPanty" dx="79" dy="99"/>
         <cell rect="461,500,49,29" name="panty/scandalousSuccubusClothingPanty" dx="79" dy="94"/>
-		<cell rect="511,500,49,48" name="panty/scandalousSuccubusClothingPantyTaur" dx="79" dy="94"/>
+        <cell rect="511,500,49,48" name="panty/scandalousSuccubusClothingPantyTaur" dx="79" dy="94"/>
         <cell rect="761,500,49,29" name="panty/chainMailPanty" dx="79" dy="99"/>
         <cell rect="811,500,49,29" name="panty/dragonScalePanty" dx="79" dy="99"/>
     </spritemap>
@@ -994,7 +1011,10 @@
         <cell rect="423,561,168,139" name="tail/thunderbird_taur" dx="34" dy="49"/>
         <cell rect="592,561,82,139" name="tail/raccoon" dx="95" dy="40"/>
         <cell rect="592,561,82,139" name="tail/raccoon_taur" dx="149" dy="50"/>
-        <cell rect="508,351,82,69" name="tail/kamaitachi" dx="94" dy="87"/>
+        <cell rect="759,561,83,139" name="tail/wendigo" dx="95" dy="40"/>
+        <cell rect="759,561,83,139" name="tail/wendigo_taur" dx="144" dy="49"/>
+        <cell rect="508,351,82,69" name="tail/kamaitachi" dx="95" dy="87"/>
+        <cell rect="508,351,82,69" name="tail/kamaitachi_taur" dx="144" dy="50"/>
         <cell rect="1,1015,173,156" name="tail/fox1" dx="4" dy="31"/>
         <cell rect="1,1015,173,156" name="tail/fox1_taur" dx="60" dy="47"/>
         <cell rect="523,858,173,156" name="tail/fox2" dx="16" dy="36"/>
@@ -1048,6 +1068,7 @@
 	<!-- LAYER AREA -->
     <layers>	
 		<layer name="fullbody"/>
+		<layer name="horns_overclothe"/>
 		<layer name="overclothe"/>
 		<layer name="shield"/>
 		<layer name="weapon"/>
@@ -1128,6 +1149,7 @@
 		<layer name="tailAccessory"/>
         <layer name="tail_fg"/>
         <layer name="tail"/>
+		<layer name="clothCape_bg"/>
         <layer name="wings_bg"/>
 		<layer name="legs_bg"/>
 		<layer name="aura"/>
@@ -1785,6 +1807,7 @@
             </case>
             <case values="Face.RACCOON_MASK,Face.FERRET_MASK">
                 <show part="face/racoon_mask"/>
+				<show part="face/human_fang"/>
             </case>
 			<case values="Face.RACCOON,Face.FERRET">
                 <show part="face/racoon"/>
@@ -3622,6 +3645,47 @@
 			</if>
 		</if>
 		
+		<!--Tanuki set -->
+		<if test="travelingMerchantOutfit">
+			<if test="(showClothing) and (showArmClothing)">
+				<show part="clotheHead/merchantClotheHat"/>
+				<show part="armorNeck/merchantClotheCape_fg"/>
+				<show part="clothe/merchantClothe"/>
+				<show part="clothCape_bg/merchantClotheCape_bg"/>
+				<show part="clothRightArm/merchantClotheArms"/>
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<hide part="breasts/*"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<hide part="breasts/*"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="bra/merchantClotheBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="bra/merchantClotheBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="bra/merchantClotheBraLarge"/>
+						</case>
+						<default>
+							<show part="bra/merchantClotheBraLarge"/>
+						</default>
+					</switch>	
+				</if>
+				<if test="showLegClothing">	
+					<if test="femininity &gt;=40">
+						<show part="clotheLegs/merchantClotheBoots"/>
+						<else>
+							<show part="clotheLegs/merchantClotheBootsMale"/>
+						</else>
+					</if>
+				</if>
+			</if>
+		</if>
+		
 		<!--Dragonscale set -->
 		<if test="dragonscaleBikiniBra">
 			<if test="breastRows.length gt 0">
@@ -4094,7 +4158,7 @@
 			<hide part="hair_bg/*"/>
 			<if test="hairType == Hair.BURNING">
 				<hide part="hair/*"/>
-				<show part="hair/hairHood"/>
+				<show part="hair/hairHoodFire"/>
 			</if>
 			<if test="hairType == Hair.RAIJU">
 				<hide part="hair/*"/>

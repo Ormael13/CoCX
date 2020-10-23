@@ -2281,7 +2281,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if (faceType == Face.RACCOON_MASK) {
 			if (!player.hasCoat()) { //appearance for skinheads
-				outputText("  Your face is human in shape and structure, with [skin bases");
+				outputText("  Your face is human in shape and structure, with [skin bases]");
 				if (InCollection(skin.base.color, "ebony", "black")) outputText(", though with your dusky hue, the black raccoon mask you sport isn't properly visible.");
 				tattooAndPatternGeneric();
 				outputText(", though it is decorated with a sly-looking raccoon mask over your eyes.");
@@ -3174,7 +3174,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.plantScore() >= 1) outputText("\n<font color=\"#008000\">Plant-morph: " + player.plantScore() + "</font>");
 		else if (player.plantScore() < 1) outputText("\n<font color=\"#ff0000\">Plant-morph: 0</font>");
 		//Raccon
-		if (player.raccoonScore() >= 4) outputText("\n<font color=\"#0000a0\">Raccoon-morph: " + player.raccoonScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
+		if (player.raccoonScore() >= 17 && player.balls > 0 && player.ballSize > 5) outputText("\n<font color=\"#0000a0\">-Greater Tanuki: " + player.raccoonScore() + " (+" + (105 * (1 + player.newGamePlusMod())) + " max Spe, +" + (150 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.raccoonScore() >= 14 && player.balls > 0 && player.ballSize > 5) outputText("\n<font color=\"#0000a0\">Tanuki: " + player.raccoonScore() + " (+" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (120 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.raccoonScore() >= 4) outputText("\n<font color=\"#0000a0\">Raccoon-morph: " + player.raccoonScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
 		else if (player.raccoonScore() >= 1) outputText("\n<font color=\"#008000\">Raccoon-morph: " + player.raccoonScore() + "</font>");
 		else if (player.raccoonScore() < 1) outputText("\n<font color=\"#ff0000\">Raccoon-morph: 0</font>");
 		//Raiju

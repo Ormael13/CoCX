@@ -5743,6 +5743,14 @@ public class Combat extends BaseContent {
             monster.gems *= 1 + (player.perkv1(PerkLib.AscensionFortune) * 0.1);
             monster.gems = Math.round(monster.gems);
         }
+        if (player.hasPerk(PerkLib.Greedy)){
+            monster.gems *= 2;
+            monster.gems = Math.round(monster.gems);
+        }
+        if (player.hasPerk(PerkLib.TravelingMerchantOutfit)){
+            monster.gems *= 2;
+            monster.gems = Math.round(monster.gems);
+        }
         monster.handleAwardText(); //Each monster can now override the default award text
         if (!inDungeon && !inRoomedDungeon && !prison.inPrison) { //Not in dungeons
             if (nextFunc != null) doNext(nextFunc);
@@ -6968,6 +6976,14 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownPlasmaBlast);
             } else {
                 player.addStatusValue(StatusEffects.CooldownPlasmaBlast, 1, -1);
+            }
+        }
+        //Prank
+        if (player.hasStatusEffect(StatusEffects.CooldownPrank)) {
+            if (player.statusEffectv1(StatusEffects.CooldownPrank) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownPrank);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownPrank, 1, -1);
             }
         }
         //Tactical Distraction

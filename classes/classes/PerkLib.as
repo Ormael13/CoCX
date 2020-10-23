@@ -1368,6 +1368,9 @@ public class PerkLib
 		public static const GreaterLifeline:PerkType = mk("Greater Lifeline", "Greater Lifeline",
 				"Increases self healing by 180 out of combat and by 90 in combat (using defend option will double it).",
 				"You choose the 'Greater Lifeline' perk, greatly increasing your self healing.");
+		public static const Greedy:PerkType = mk("Greedy", "Greedy",
+				"Double all gems gained!",
+				"Double all gems gained.");
 		public static const GreyArchmage:PerkType = mk("Grey Archmage", "Grey Archmage",
 				"[if (player.inte>=275)" +
 						"Increases base spell strength by 100%, mana pool by 200, lust bar by 50 and regain mana 150% faster." +
@@ -2152,6 +2155,15 @@ public class PerkLib
 		public static const NonaAttackSmall:PerkType = mk("Nona Attack (Small)", "Nona Attack (Small)",
 				"Allows you to perform nine melee attacks with small weapons per round.",
 				"You choose the 'Nona Attack (Small)' perk. This allows you to make nine melee attacks with small weapons.");
+		public static const NukiNuts:PerkType = mk("Nuki Nuts", "Nuki Nuts",
+				"Gain a natural armor bonus based on your ball size and prevent the loss of money strike.",
+				"You choose the 'Nuki Nuts' perk, Gain a natural armor bonus based on your ball size and prevent the loss of money strike..");
+		public static const NukiNutsEvolved:PerkType = mk("Nuki Nuts, (Evolved)", "Nuki Nuts, (Evolved)",
+				"Increase the Armor bonus granted by Nuki nuts and improve cum production. Cumming now has a small chance of generating gems.",
+				"You choose the 'Nuki Nuts, (Evolved)' perk, Increase the Armor bonus granted by Nuki nuts and improve cum production. Cumming now has a small chance of generating gems.");
+		public static const NukiNutsFinalForm:PerkType = mk("Nuki Nuts, (Final Form)", "Nuki Nuts, (Final Form)",
+				"Further Increase the Armor bonus granted by Nuki nuts and further improve cum production. Cumming now has a greater chance of generating gems. Double the damage of Money Strike.",
+				"You choose the 'Nuki Nuts, (Final Form)' perk, Further Increase the Armor bonus granted by Nuki nuts and further improve cum production. Cumming now has a greater chance of generating gems. Double the damage of Money Strike.");
 		public static const Nurse:PerkType = mk("Nurse", "Nurse",
 				"Constantly running around tending to the sick has made you better at taking care of yourself, increasing health regen.",
 				"You choose the 'Nurse' perk, increasing HP gains by 20%.");
@@ -2784,6 +2796,9 @@ public class PerkLib
 		public static const Transference:PerkType = mk("Transference", "Transference",
 				"Your mastery of lust and desire allows you to transfer 15% of your current arousal to your opponent.",
 				"You choose the 'Transference' perk, granting ability to transfer your own arousal to your opponent.");
+		public static const TravelingMerchantOutfit:PerkType = mk("Traveling Merchant Outfit", "Traveling Merchant Outfit",
+				"Double gems gained from selling items and gems found. Gem based abilities are more powerful.",
+				"Double gems gained from selling items and gems found. Gem based abilities are more powerful.");
 		public static const TripleAttack:PerkType = mk("Triple Attack", "Triple Attack",
 				"Allows you to perform three melee attacks with non-large weapons per round.",
 				"You choose the 'Triple Attack' perk.  This allows you to make three melee attacks with non-large weapons.");
@@ -5498,7 +5513,10 @@ public class PerkLib
             NaturalPunchingBag.requireFatTissueMutationSlot().requirePerk(BouncyBody).requireCustomFunction(function (player:Player):Boolean {
                 return player.isGoblinoid();
             }, "Goblin race");
-            ObsidianHeart.requireHeartMutationSlot().requireCor(100).requireCustomFunction(function (player:Player):Boolean {
+			NukiNuts.requireBallsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+				return player.raccoonScore() >= 8 && player.balls > 0 && player.ballSize > 5;
+			}, "Tanuki race");
+			ObsidianHeart.requireHeartMutationSlot().requireCor(100).requireCustomFunction(function (player:Player):Boolean {
                 return player.devilkinScore() >= 10;
             }, "Devil race");
             OniMusculature.requireMusclesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
@@ -5825,7 +5843,10 @@ public class PerkLib
             NaturalPunchingBagEvolved.requireLevel(12).requirePerk(NaturalPunchingBag).requireCustomFunction(function (player:Player):Boolean {
                 return player.isGoblinoid()
             }, "Goblin race");
-            OniMusculatureEvolved.requireLevel(12).requirePerk(OniMusculature).requireCustomFunction(function (player:Player):Boolean {
+			NukiNutsEvolved.requireLevel(12).requirePerk(NukiNuts).requireCustomFunction(function (player:Player):Boolean {
+				return player.raccoonScore() >= 8 && player.balls > 0 && player.ballSize > 5;
+			}, "Tanuki race");
+			OniMusculatureEvolved.requireLevel(12).requirePerk(OniMusculature).requireCustomFunction(function (player:Player):Boolean {
                 return player.tone >= 100;
 				}, "100+ tone")
 				.requireCustomFunction(function (player:Player):Boolean {
@@ -6199,15 +6220,17 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.vampireScore() >= 12;//potem dodać mosquito race i ew. inne co mogą wypijać krew
             }, "Vampire race");
-            KitsuneThyroidGlandFinalForm.requireLevel(30)
-                    .requirePerk(KitsuneThyroidGlandEvolved)
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.kitsuneScore() >= 12;
-                    }, "Kitsune race");
+            KitsuneThyroidGlandFinalForm.requireLevel(30).requirePerk(KitsuneThyroidGlandEvolved)
+                .requireCustomFunction(function (player:Player):Boolean {
+                return player.kitsuneScore() >= 12;
+            }, "Kitsune race");
             NaturalPunchingBagFinalForm.requireLevel(30).requirePerk(NaturalPunchingBagEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.isGoblinoid()
             }, "Goblin race");
-            OniMusculatureFinalForm.requireLevel(30).requirePerk(OniMusculatureEvolved).requireCustomFunction(function (player:Player):Boolean {
+			NukiNutsFinalForm.requireLevel(30).requirePerk(NukiNutsEvolved).requireCustomFunction(function (player:Player):Boolean {
+				return player.raccoonScore() >= 8 && player.balls > 0 && player.ballSize > 5;
+			}, "Tanuki race");
+			OniMusculatureFinalForm.requireLevel(30).requirePerk(OniMusculatureEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.tone >= 100;
 				}, "100+ tone")
 				.requireCustomFunction(function (player:Player):Boolean {

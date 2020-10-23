@@ -505,6 +505,16 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You need more time before you can use Displacement again.\n\n");
 			}
 		}
+		if (player.raccoonScore()>=14 && !monster.plural) {
+			bd = buttons.add("Prank", Prank).hint("Distract the enemy for 1 round interupting its action. \n\nWould go into cooldown after use for: 5 rounds", "Prank");
+			if (player.hasStatusEffect(StatusEffects.CooldownTDistraction)) {
+				bd.disable("You need more time before you can prank your opponent again.");
+			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			bd = buttons.add("Money Strike", MoneyStrike).hint("Attack your opponent using magically enhanced money. Damage is based on personal wealth. Cost some gems upon use.", "Money Strike");
+			if (player.gems < 100) bd.disable("You need more gems in order to use Money Strike.");
+			else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+
+		}
 		if (player.isNaga() && flags[kFLAGS.SAMIRAH_HYPNOSIS] == 6 && !monster.plural) {
 			bd = buttons.add("Tactical Distraction", TacticalDistraction).hint("Make the target lose its current turn forcing it to interrupt whatever it is doing. \n\nWould go into cooldown after use for: 5 rounds", "Tactical Distraction");
 			if (player.hasStatusEffect(StatusEffects.CooldownTDistraction)) {
@@ -2778,6 +2788,62 @@ public class MagicSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.Displacement,6,0,0,0);
 		player.createStatusEffect(StatusEffects.CooldownDisplacement,10,0,0,0);
 		enemyAI();
+	}
+
+	public function Prank():void {
+		clearOutput();
+		outputText("You prank " + monster.a + monster.short + " surprising [monster him]. This causes your opponent to temporarily stop what [monster he] was doing for a second, realising too late this was your plan all along.");
+		outputText(" \n\n");
+		monster.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.CooldownPrank,4,0,0,0);
+		enemyAI();
+	}
+
+	public function MoneyStrike():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		fatigue(40, USEFATG_MAGIC_NOBM);
+		var damage:Number = (scalingBonusIntelligence() * spellMod());
+		var moneyMultiplier:Number = 1+(player.gems/100000);
+		if (moneyMultiplier > 2) moneyMultiplier = 2;
+		damage *= moneyMultiplier;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		//High damage to goes.
+		if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) damage = Math.round(damage * 1.2);
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		damage += player.gems;
+		if (player.hasPerk(PerkLib.NukiNutsFinalForm)) damage *= 2;
+		damage = Math.round(damage);
+		outputText("You grab some of your gems imbuing your Tanuki golden magics in them before throwing them at your foe, the gems your makeshift projectiles exploding upon impact.");
+		damage = doDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		outputText("\n\n");
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (silly())
+		if (monster.plural)	outputText("Adding insult to injury you scream at your opponent. \"Go buy yourself some friend you losers!\"\n\n");
+		else outputText("Adding insult to injury you scream at your opponent. \"Go buy yourself some friend you loser!\"\n\n");
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
+		if (player.gems * 0.99 <= 100) player.gems -= 100;
+		else player.gems *= 0.99;
+		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+		{
+			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			enemyAI();
+		}
+		else combatRoundOver();
 	}
 
 	public function Minimise():void {

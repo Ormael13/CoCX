@@ -1220,6 +1220,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("You feel energised and empowered by the life force drained out of the fluids of your recent blind date. What a meal!");
 				player.removeStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)
 			}
+			//Greed Perk
+			if (player.raccoonScore() >= 13 && !player.hasPerk(PerkLib.Greedy)) { //Check for gain of lizan regeneration - requires legs, arms and tail
+				{
+					outputText("\nYou are feeling absurdly lucky today so lucky there's no way fortune could turn against you. You nature as a tanuki has improved your ability to generate wealth, wherever there is more gems to make you will find and collect them. \n\n(<b>Gained Perk: Greedy</b>)");
+					player.createPerk(PerkLib.Greedy, 0, 0, 0, 0);
+					needNext = true;
+				}
+			}
 			//Lizan Regeneration perk
 			if ((player.tailType == Tail.LIZARD && player.lowerBody == LowerBody.LIZARD && player.arms.type == Arms.LIZARD) || (player.findPerk(PerkLib.LizanRegeneration) < 0 && player.findPerk(PerkLib.LizanMarrow) >= 0)) { //Check for gain of lizan regeneration - requires legs, arms and tail
 				if (player.findPerk(PerkLib.LizanRegeneration) < 0) {
