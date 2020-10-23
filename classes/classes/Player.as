@@ -589,6 +589,15 @@ use namespace CoC;
 			if (findPerk(PerkLib.FeralArmor) >= 0 && haveNaturalArmor() && meetUnhinderedReq()) {
 				toughnessBonus += Math.round(tou / 20);
 			}
+			if (findPerk(PerkLib.NukiNuts) >= 0) {
+				toughnessBonus += Math.round(ballSize);
+			}
+			if (findPerk(PerkLib.NukiNutsEvolved) >= 0) {
+				toughnessBonus += Math.round(ballSize);
+			}
+			if (findPerk(PerkLib.NukiNutsFinalForm) >= 0) {
+				toughnessBonus += Math.round(ballSize);
+			}
 			armorDef += toughnessBonus;
 			if (findPerk(PerkLib.PrestigeJobSentinel) >= 0 && armorPerk == "Heavy") armorDef += _armor.def;
 			if (findPerk(PerkLib.ShieldExpertise) >= 0 && shieldName != "nothing") {
@@ -4707,7 +4716,7 @@ use namespace CoC;
 				coonCounter++;
 			if (ears.type == Ears.RACCOON)
 				coonCounter++;
-			if (eyes.colour == "gold")
+			if (eyes.colour == "golden")
 				coonCounter++;
 			if (arms.type == Arms.RACCOON)
 				coonCounter++;
@@ -11834,6 +11843,24 @@ use namespace CoC;
 					if(ballSize > 3)
 					{
 						createStatusEffect(StatusEffects.EasterBunnyCame, 0, 0, 0, 0);
+					}
+				}
+				if (hasPerk(PerkLib.NukiNutsEvolved)){
+					var cumAmmount:Number = cumQ();
+					var payout:Number = 0;
+					//Get rid of extra digits
+					cumAmmount = int(cumAmmount);
+					//Calculate payout
+					if(cumAmmount > 10) {
+						payout = 2 + int(cumAmmount/20)*2;
+					}
+					//Reduce payout if it would push past
+					if (hasPerk(PerkLib.NukiNutsFinalForm)){
+						payout *= 2;
+					}
+					if(payout > 0) {
+						gems += payout;
+						EngineCore.outputText("\n\nBefore moving on you grab the " + payout + " gems you came from from your " + cockDescript(0) + ".</b>\n\n");
 					}
 				}
 			}

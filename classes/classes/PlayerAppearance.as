@@ -2281,7 +2281,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if (faceType == Face.RACCOON_MASK) {
 			if (!player.hasCoat()) { //appearance for skinheads
-				outputText("  Your face is human in shape and structure, with [skin bases");
+				outputText("  Your face is human in shape and structure, with [skin bases]");
 				if (InCollection(skin.base.color, "ebony", "black")) outputText(", though with your dusky hue, the black raccoon mask you sport isn't properly visible.");
 				tattooAndPatternGeneric();
 				outputText(", though it is decorated with a sly-looking raccoon mask over your eyes.");

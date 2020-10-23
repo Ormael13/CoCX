@@ -834,6 +834,24 @@ public class Masturbation extends BaseContent {
 						}
 						else outputText("You groan and drift into a brief catnap, your rigid erections pulsing and throbbing with continual lust.");
 					}
+					if (player.hasPerk(PerkLib.NukiNutsEvolved)){
+						var cumAmmount:Number = player.cumQ();
+						var payout:Number = 1;
+						//Get rid of extra digits
+						//cumAmmount = int(cumAmmount);
+						//Calculate payout
+						if(cumAmmount > 10) {
+							payout += 2 + int(cumAmmount/20)*2;
+						}
+						//Reduce payout if it would push past
+						if (player.hasPerk(PerkLib.NukiNutsFinalForm)){
+							payout *= 2;
+						}
+						if(payout > 0) {
+							player.gems += payout;
+							outputText("\n\nWhen you wake up you find " + payout + " gems in the puddle of spunge your " + cockDescript(0) + " created.</b>\n\n");
+						}
+					}
 				}
 				//No cock ending
 				else {
@@ -3653,6 +3671,24 @@ public class Masturbation extends BaseContent {
 					}
 					else outputText("  You groan and drift into a brief catnap, your rigid erections pulsing and throbbing with continual lust.");
 				}
+				if (player.hasPerk(PerkLib.NukiNutsEvolved)){
+					var cumAmmount:Number = player.cumQ();
+					var payout:Number = 1;
+					//Get rid of extra digits
+					//cumAmmount = int(cumAmmount);
+					//Calculate payout
+					if(cumAmmount > 10) {
+						payout += 2 + int(cumAmmount/20)*2;
+					}
+					//Reduce payout if it would push past
+					if (player.hasPerk(PerkLib.NukiNutsFinalForm)){
+						payout *= 2;
+					}
+					if(payout > 0) {
+						player.gems += payout;
+						outputText("\n\nWhen you wake up you find " + payout + " gems in the puddle of spunge your " + cockDescript(0) + " created.</b>\n\n");
+					}
+				}
 			}
 			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();
@@ -3661,6 +3697,24 @@ public class Masturbation extends BaseContent {
 			else {
 				player.orgasm();
 				dynStats("sen", -2);
+			}
+			if (player.hasPerk(PerkLib.NukiNutsEvolved)){
+				var cumAmmount:Number = player.cumQ();
+				var payout:Number = 1;
+				//Get rid of extra digits
+				//cumAmmount = int(cumAmmount);
+				//Calculate payout
+				if(cumAmmount > 10) {
+					payout += 2 + int(cumAmmount/20)*2;
+				}
+				//Reduce payout if it would push past
+				if (player.hasPerk(PerkLib.NukiNutsFinalForm)){
+					payout *= 2;
+				}
+				if(payout > 0) {
+					player.gems += payout;
+					outputText("\n\nWhen you wake up you find " + payout + " gems in the puddle of spunge your " + cockDescript(0) + " created.</b>\n\n");
+				}
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -3898,4 +3952,4 @@ public class Masturbation extends BaseContent {
 			}
 		}
 	}
-}
+}

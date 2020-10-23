@@ -35,7 +35,7 @@ public class Diva extends Monster {
         this.skinTone = "pale";
         this.hairColor = "blonde";
         this.hairLength = 16;
-        initWisLibSensCor(4.5*levelBonus,40,50,50);
+        initWisLibSensCor(4.5*levelBonus,40,50,60);
         initStrTouSpeInte(1.5*levelBonus,3*levelBonus,4*levelBonus,4.5*levelBonus);
         this.weaponName = "dive";
         this.weaponVerb = "swoop";

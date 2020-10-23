@@ -5743,6 +5743,10 @@ public class Combat extends BaseContent {
             monster.gems *= 1 + (player.perkv1(PerkLib.AscensionFortune) * 0.1);
             monster.gems = Math.round(monster.gems);
         }
+        if (player.hasPerk(PerkLib.Greedy)){
+            monster.gems *= 2;
+            monster.gems = Math.round(monster.gems);
+        }
         monster.handleAwardText(); //Each monster can now override the default award text
         if (!inDungeon && !inRoomedDungeon && !prison.inPrison) { //Not in dungeons
             if (nextFunc != null) doNext(nextFunc);

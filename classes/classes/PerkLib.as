@@ -1368,6 +1368,9 @@ public class PerkLib
 		public static const GreaterLifeline:PerkType = mk("Greater Lifeline", "Greater Lifeline",
 				"Increases self healing by 180 out of combat and by 90 in combat (using defend option will double it).",
 				"You choose the 'Greater Lifeline' perk, greatly increasing your self healing.");
+		public static const Greedy:PerkType = mk("Greedy", "Greedy",
+				"Double all gems gained!",
+				"Double all gems gained.");
 		public static const GreyArchmage:PerkType = mk("Grey Archmage", "Grey Archmage",
 				"[if (player.inte>=275)" +
 						"Increases base spell strength by 100%, mana pool by 200, lust bar by 50 and regain mana 150% faster." +
@@ -5507,7 +5510,10 @@ public class PerkLib
             NaturalPunchingBag.requireFatTissueMutationSlot().requirePerk(BouncyBody).requireCustomFunction(function (player:Player):Boolean {
                 return player.isGoblinoid();
             }, "Goblin race");
-            ObsidianHeart.requireHeartMutationSlot().requireCor(100).requireCustomFunction(function (player:Player):Boolean {
+			NukiNuts.requireBallsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+				return player.raccoonScore() >= 8 && player.balls > 0 && player.ballSize > 5;
+			}, "Tanuki race");
+			ObsidianHeart.requireHeartMutationSlot().requireCor(100).requireCustomFunction(function (player:Player):Boolean {
                 return player.devilkinScore() >= 10;
             }, "Devil race");
             OniMusculature.requireMusclesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
@@ -5834,7 +5840,10 @@ public class PerkLib
             NaturalPunchingBagEvolved.requireLevel(12).requirePerk(NaturalPunchingBag).requireCustomFunction(function (player:Player):Boolean {
                 return player.isGoblinoid()
             }, "Goblin race");
-            OniMusculatureEvolved.requireLevel(12).requirePerk(OniMusculature).requireCustomFunction(function (player:Player):Boolean {
+			NukiNutsEvolved.requireLevel(12).requirePerk(NukiNuts).requireCustomFunction(function (player:Player):Boolean {
+				return player.raccoonScore() >= 8 && player.balls > 0 && player.ballSize > 5;
+			}, "Tanuki race");
+			OniMusculatureEvolved.requireLevel(12).requirePerk(OniMusculature).requireCustomFunction(function (player:Player):Boolean {
                 return player.tone >= 100;
 				}, "100+ tone")
 				.requireCustomFunction(function (player:Player):Boolean {
@@ -6208,15 +6217,17 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.vampireScore() >= 12;//potem dodać mosquito race i ew. inne co mogą wypijać krew
             }, "Vampire race");
-            KitsuneThyroidGlandFinalForm.requireLevel(30)
-                    .requirePerk(KitsuneThyroidGlandEvolved)
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.kitsuneScore() >= 12;
-                    }, "Kitsune race");
+            KitsuneThyroidGlandFinalForm.requireLevel(30).requirePerk(KitsuneThyroidGlandEvolved)
+                .requireCustomFunction(function (player:Player):Boolean {
+                return player.kitsuneScore() >= 12;
+            }, "Kitsune race");
             NaturalPunchingBagFinalForm.requireLevel(30).requirePerk(NaturalPunchingBagEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.isGoblinoid()
             }, "Goblin race");
-            OniMusculatureFinalForm.requireLevel(30).requirePerk(OniMusculatureEvolved).requireCustomFunction(function (player:Player):Boolean {
+			NukiNutsFinalForm.requireLevel(30).requirePerk(NukiNutsEvolved).requireCustomFunction(function (player:Player):Boolean {
+				return player.raccoonScore() >= 8 && player.balls > 0 && player.ballSize > 5;
+			}, "Tanuki race");
+			OniMusculatureFinalForm.requireLevel(30).requirePerk(OniMusculatureEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.tone >= 100;
 				}, "100+ tone")
 				.requireCustomFunction(function (player:Player):Boolean {
