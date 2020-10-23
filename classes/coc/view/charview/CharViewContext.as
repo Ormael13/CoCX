@@ -128,6 +128,7 @@ import coc.xlogic.ExecContext;
 					fairyQueenRegalia: player.armor == game.armors.FQR,
 					berserkerArmor: player.armor == game.armors.BERA,
 					vladimirRegalia: player.armor == game.armors.VLAR,
+					travelingMerchantOutfit: player.armor == game.armors.TRMOUTF,
 					chainMailBikini: player.armor == game.armors.CHBIKNI || player.armor == game.armors.LMARMOR,
 					platemail: player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 
