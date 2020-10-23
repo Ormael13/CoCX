@@ -4551,6 +4551,38 @@ public class Combat extends BaseContent {
     public function WeaponRangeStatusProcs():void {
 
     }
+	
+	public function ShieldsStatusProcs():void {
+		var bleed:Boolean = false;
+        var bleedChance:int = 0;
+		//50% bleed chance
+        if (player.shield == shields.SPIL_SH || player.shield == shields.SPIH_SH || player.shield == shields.SPIM_SH) bleedChance += 50;
+		if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType)) bleedChance = 0;
+        if (rand(100) < bleedChance) bleed = true;
+		if (bleed) {
+			if (monster.hasStatusEffect(StatusEffects.HemorrhageShield)) monster.addStatusValue(StatusEffects.HemorrhageShield, 1, 2);
+			else monster.createStatusEffect(StatusEffects.HemorrhageShield, 2, 0.01, 0, 0);
+            if (player.shield == shields.SPIH_SH) monster.addStatusValue(StatusEffects.HemorrhageShield, 2, 0.01);
+            if (player.shield == shields.SPIM_SH) monster.addStatusValue(StatusEffects.HemorrhageShield, 2, 0.04);
+			if (monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your [shield] leave behind.");
+            else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your [shield] leave behind.");
+		}
+	}
+
+    public function ArmorStatusProcs():void {
+		var bleed:Boolean = false;
+        var bleedChance:int = 0;
+		//xx% bleed chance
+        
+		if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType)) bleedChance = 0;
+        if (rand(100) < bleedChance) bleed = true;
+		if (bleed) {
+			if (monster.hasStatusEffect(StatusEffects.HemorrhageArmor)) monster.addStatusValue(StatusEffects.HemorrhageArmor, 1, 2);
+			else monster.createStatusEffect(StatusEffects.HemorrhageArmor, 2, 0.01, 0, 0);
+			if (monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your [armor] leave behind.");
+            else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your [armor] leave behind.");
+		}
+    }
 
     public function WrathWeaponsProc():void {
         if (player.weapon == weapons.BLETTER) {
@@ -5740,7 +5772,7 @@ public class Combat extends BaseContent {
             if (monster.lust >= monster.maxLust()) monster.gems += bonusGems3;
         }
         if (player.hasPerk(PerkLib.AscensionFortune)) {
-            monster.gems *= 1 + (player.perkv1(PerkLib.AscensionFortune) * 0.1);
+            monster.gems *= 1 + (player.perkv1(PerkLib.AscensionFortune) * 0.2);
             monster.gems = Math.round(monster.gems);
         }
         if (player.hasPerk(PerkLib.Greedy)){

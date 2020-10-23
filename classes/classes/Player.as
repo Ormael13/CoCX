@@ -1299,7 +1299,7 @@ use namespace CoC;
 		//Shields for Bash
 		public function isShieldsForShieldBash():Boolean
 		{
-			return shield == game.shields.BSHIELD || shield == game.shields.BUCKLER || shield == game.shields.DRGNSHL || shield == game.shields.GREATSH || shield == game.shields.KITE_SH || shield == game.shields.TRASBUC || shield == game.shields.TOWERSH || shield == game.shields.SANCTYN || shield == game.shields.SANCTYL || shield == game.shields.SANCTYD;
+			return shield == game.shields.BSHIELD || shield == game.shields.BUCKLER || shield == game.shields.DRGNSHL || shield == game.shields.KITE_SH || shield == game.shields.TRASBUC || shieldPerk == "Large" || shieldPerk == "Massive";
 		}
 		//override public function get shields
 		override public function get shieldName():String {
@@ -1307,9 +1307,22 @@ use namespace CoC;
 		}
 		override public function get shieldBlock():Number {
 			var block:Number = _shield.block;
-			if (findPerk(PerkLib.JobKnight) >= 0) block += 3;
+			if (findPerk(PerkLib.JobKnight) >= 0) {
+				if (shieldPerk == "Massive") block += 3;
+				else if (shieldPerk == "Large") block += 2;
+				else block += 1;
+			}
 			if (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD) block += 1;
-			//miejce na sposoby boostowania block value like perks or status effects
+			if (findPerk(PerkLib.PrestigeJobSentinel) >= 0) {
+				if (shieldPerk == "Massive") block += 3;
+				else if (shieldPerk == "Large") block += 2;
+				else block += 1;
+			}
+			if (findPerk(PerkLib.ShieldCombat) >= 0) {
+				if (shieldPerk == "Massive") block += 6;
+				else if (shieldPerk == "Large") block += 4;
+				else block += 2;
+			}
 			block = Math.round(block);
 			return block;
 		}
@@ -3787,7 +3800,7 @@ use namespace CoC;
 		}
 
 		public function humanMaxScore():Number {
-			var humanMaxCounter:Number = 113;//17 + 99 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
+			var humanMaxCounter:Number = 116;//17 + 102 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
 			return humanMaxCounter;
 		}
 
@@ -3983,6 +3996,12 @@ use namespace CoC;
 			if (findPerk(PerkLib.NaturalPunchingBagEvolved) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.NaturalPunchingBagFinalForm) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.NukiNuts) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.NukiNutsEvolved) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.NukiNutsFinalForm) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.ObsidianHeart) >= 0)
 				internalChimeraCounter++;
@@ -4742,6 +4761,12 @@ use namespace CoC;
 			if (findPerk(PerkLib.NukiNutsEvolved) > 0)
 				coonCounter++;
 			if (findPerk(PerkLib.NukiNutsFinalForm) > 0)
+				coonCounter++;
+			if (findPerk(PerkLib.NukiNuts) >= 0 && findPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
+				coonCounter++;
+			if (findPerk(PerkLib.NukiNutsEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0)
+				coonCounter++;
+			if (findPerk(PerkLib.NukiNutsFinalForm) >= 0 && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
 				coonCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				coonCounter += 50;
@@ -9141,6 +9166,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.MinotaurTesticles) >= 0)
 				ballsMutations--;
 			if (findPerk(PerkLib.EasterBunnyBalls) >= 0)
+				ballsMutations--;
+			if (findPerk(PerkLib.NukiNuts) >= 0)
 				ballsMutations--;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
 				ballsMutations++;

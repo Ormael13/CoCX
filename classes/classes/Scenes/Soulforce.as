@@ -2110,22 +2110,22 @@ public function FightHellfireSnail():void {
 			StatsMenuLib();
 		}
 		public function AddCor1():void {
-			player.cor = player.cor + 1;
+			dynStats("cor", 1);
 			statScreenRefresh();
 			StatsMenuCor();
 		}
 		public function AddCor2():void {
-			player.cor = player.cor + 5;
+			dynStats("cor", 5);
 			statScreenRefresh();
 			StatsMenuCor();
 		}
 		public function AddCor3():void {
-			player.cor = player.cor + 10;
+			dynStats("cor", 10);
 			statScreenRefresh();
 			StatsMenuCor();
 		}
 		public function AddCor4():void {
-			player.cor = player.cor + 50;
+			dynStats("cor", 50);
 			statScreenRefresh();
 			StatsMenuCor();
 		}
@@ -2310,22 +2310,22 @@ public function FightHellfireSnail():void {
 			StatsMenuLib();
 		}
 		public function SubCor1():void {
-			player.cor = player.cor - 1;
+			dynStats("cor", -1);
 			statScreenRefresh();
 			StatsMenuCor();
 		}
 		public function SubCor2():void {
-			player.cor = player.cor - 5;
+			dynStats("cor", -5);
 			statScreenRefresh();
 			StatsMenuCor();
 		}
 		public function SubCor3():void {
-			player.cor = player.cor - 10;
+			dynStats("cor", -10);
 			statScreenRefresh();
 			StatsMenuCor();
 		}
 		public function SubCor4():void {
-			player.cor = player.cor - 50;
+			dynStats("cor", -50);
 			statScreenRefresh();
 			StatsMenuCor();
 		}
@@ -3678,4 +3678,4 @@ public function FightHellfireSnail():void {
 			}
 		}
 	}
-}
+}

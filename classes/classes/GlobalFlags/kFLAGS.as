@@ -2750,7 +2750,7 @@ public static const UNKNOWN_FLAG_NUMBER_02741:int                               
 public static const UNKNOWN_FLAG_NUMBER_02742:int                                   = 2742;
 public static const ZENJI_PERSPECTIVE_ON_PLAYER:int                                 = 2743;
 public static const ZENJI_PROGRESS:int                                   			= 2744;
-public static const UNKNOWN_FLAG_NUMBER_02745:int                                   = 2745;
+public static const ZENJI_DESTROYING_CORRUPTED_GLADES:int                           = 2745;
 public static const UNKNOWN_FLAG_NUMBER_02746:int                                   = 2746;
 public static const UNKNOWN_FLAG_NUMBER_02747:int                                   = 2747;
 public static const UNKNOWN_FLAG_NUMBER_02748:int                                   = 2748;

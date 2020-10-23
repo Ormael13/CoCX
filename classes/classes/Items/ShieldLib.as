@@ -21,7 +21,7 @@ package classes.Items
 		public const BUCKLER:Shield = new Shield("Buckler", "Buckler", "buckler", "a buckler", 5, 250, "A simple wooden rounded shield.");
 		public const DRGNSHL:DragonShellShield = new DragonShellShield();
 		public const GREATSH:GreatShield = new GreatShield();
-		public const KITE_SH:Shield = new Shield("Kite Sh", "KiteShield", "kite shield", "a kite shield", 8, 500, "An average-sized kite shield.");
+		public const KITE_SH:Shield = new Shield("Kite Sh", "KiteShield", "kite shield", "a kite shield", 14, 700, "An average-sized kite shield.");
 		public const MABRACE:Shield = new Shield("MaBrace", "ManaBracer", "mana bracer", "a mana bracer", 2, 200, "Runed bracers such as this are popular amongst mages that can afford them. This silver bracer augments a mage’s spell power while leaving the hand open to make gestures used in spellcasting.");
 		public const SPI_FOC:Shield = new Shield("Spi Foc", "SpiritFocus", "spirit focus", "a spirit focus", 4, 800, "This small icon with a silk ribbon is inscribed with eldritch runes and reinforces a kitsune's power and magic. (+20% to Fox Fire dmg and lust dmg, +20% to soulskills power)");
 		public const TRASBUC:Shield = new Shield("TraSBuc", "TrainSBuckler", "training soul buckler", "a training soul buckler", 3, 300, "A simple rounded shield made of soulmetal used to train soulforce by soul cultivator novices.");
@@ -29,6 +29,9 @@ package classes.Items
 		public const SANCTYN:SanctuaryN = new SanctuaryN();
 		public const SANCTYL:Sanctuary = new Sanctuary();
 		public const SANCTYD:DarkAegis = new DarkAegis();
+		public const SPIH_SH:SpikedHeavyShield = new SpikedHeavyShield();
+		public const SPIL_SH:Shield = new Shield("SpiL Sh", "SpikeLShield", "spiked light shield", "a spiked light shield", 10, 750, "An average-sized shield with spikes.");
+		public const SPIM_SH:SpikedHeavyShield = new SpikedHeavyShield();
 		public const Y_U_PAN:Shield = new Shield("Y.U.Pan", "Y.U.Panel", "Yogi Uh Panel", "an Yogi Uh Panel", 0, 200, "This strange shield helps Summoners and Golemancers store their pets inside an extra dimensional space when out of battle. The shield can then release them through a system of Calling Cards. Apparently it was a widely used tool for summoner battles back in the days which they called duels.");
 		
 		/*private static function mk(id:String,shortName:String,name:String,longName:String,effectId:Number,effectMagnitude:Number,value:Number,description:String,type:String,perk:String=""):Jewelry {

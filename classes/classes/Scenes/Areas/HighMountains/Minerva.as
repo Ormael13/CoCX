@@ -25,6 +25,7 @@ public class Minerva extends Monster
 			}
 			else if (combatBlock(true)) {
 				outputText("  You raise your [shield] just in time, deflecting her bite.");
+				SceneLib.combat.ShieldsStatusProcs();
 			}
 			//[else block]
 			else if (damage <= 0) outputText("  Your hands lash out, knocking her head to the side as she tries to bite you.  With the bite deflected, Minerva makes a loud chomping sound as she only bites the air.");

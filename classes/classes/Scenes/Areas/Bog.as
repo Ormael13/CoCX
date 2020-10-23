@@ -36,12 +36,16 @@ public class Bog extends BaseContent
 				return;
 			}
 			//Zenji
-			if (rand(5) == 0 && flags[kFLAGS.ZENJI_PROGRESS] < 8 && flags[kFLAGS.ZENJI_PROGRESS] != -1) {
+			if (rand(5) == 0 && flags[kFLAGS.ZENJI_PROGRESS] != -1 && (flags[kFLAGS.ZENJI_PROGRESS] < 8 || flags[kFLAGS.ZENJI_PROGRESS] == 10)) {
 				if (flags[kFLAGS.ZENJI_PROGRESS] >= 4) {
 					if (flags[kFLAGS.ZENJI_PROGRESS] == 6) {
 						if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] == 100) {
 							if (flags[kFLAGS.ZENJI_PROGRESS] == 7) SceneLib.zenjiScene.followerZenjiRepeatOffer();
 							else SceneLib.zenjiScene.followerZenjiFirstTimeOffer();
+						}
+						else if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] == 0) {
+							if (flags[kFLAGS.ZENJI_PROGRESS] == 10) SceneLib.zenjiScene.followerZenjiRepeatOffer();
+							else SceneLib.zenjiScene.loverZenjiFirstTimeOffer();
 						}
 						else SceneLib.zenjiScene.part2TrollEncounterRepeat();
 					}

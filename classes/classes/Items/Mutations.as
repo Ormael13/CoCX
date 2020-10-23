@@ -11638,6 +11638,7 @@ public final class Mutations extends MutationsHelper {
             if (rand(3) == 0) changeLimit++;
             if (rand(3) == 0) changeLimit++;
             changeLimit += additionalTransformationChances();
+            var Coon_HairColor:Array = ["brown", "chocolate", "dark brown", "tan", "caramel"];
             //stat gains:
             //gain speed to ceiling of 80
             if (rand(3) == 0 && changes < changeLimit) {
@@ -11698,7 +11699,6 @@ public final class Mutations extends MutationsHelper {
             }
 
             //Dye those hairs
-            var Coon_HairColor:Array = ["brown", "chocolate", "dark brown", "tan", "caramel"];
             if (!InCollection(player.hairColor, Coon_HairColor) && changes < changeLimit && rand(3) == 0) {
                 player.hairColor = randomChoice(Coon_HairColor);
                 outputText("\n\nYour hairs seems to have changed color to "+player.hairColor+"!");
@@ -11808,7 +11808,6 @@ public final class Mutations extends MutationsHelper {
 
             //FUR TIME
             var color1:String;
-            var Coon_HairColor:Array = ["brown", "chocolate", "dark brown", "tan", "caramel"];
             //get partial fur from full if pc face is human
             if (player.faceType == Face.HUMAN && player.hasFur() && rand(3) == 0 && changes < changeLimit && (player.skin.coverage == Skin.COVERAGE_COMPLETE || player.skin.coverage == Skin.COVERAGE_HIGH)) {
                 outputText("\n\nWhat used to be a dense coat of fur begins to fall in patches on the ground leaving you with just enough fur to cover some area of your body.  <b>Some area of your body are now partially covered with fur!</b>");

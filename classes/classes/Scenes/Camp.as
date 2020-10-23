@@ -1038,7 +1038,7 @@ public class Camp extends NPCAwareContent {
 		if (flags[kFLAGS.ANEMONE_KID] > 0) counter++;
 		if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4) counter++;
 		if (flags[kFLAGS.FLOWER_LEVEL] >= 4) counter++;
-		if (flags[kFLAGS.ZENJI_PROGRESS] == 8) counter++;
+		if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) counter++;
 		if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) counter++;
 		if (flags[kFLAGS.SIDONIE_FOLLOWER] >= 1) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
@@ -1099,6 +1099,7 @@ public class Camp extends NPCAwareContent {
 		if (flags[kFLAGS.NIEVE_STAGE] == 5) counter++;
 		if (flags[kFLAGS.ANT_WAIFU] > 0) counter++;
 		if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) counter++;
+		if (flags[kFLAGS.ZENJI_PROGRESS] == 11) counter++;
 		for each (var npc:XXCNPC in _campFollowers) {
 			if (npc.isCompanion(XXCNPC.LOVER)) {
 				counter++;
@@ -1159,7 +1160,7 @@ public class Camp extends NPCAwareContent {
 		if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
 		//if (flags[kFLAGS.GALIA_LVL_UP] >= 1) counter++;
 		if (flags[kFLAGS.NEISA_FOLLOWER] >= 7) counter++;
-		if (flags[kFLAGS.ZENJI_PROGRESS] >= 8) counter++;
+		if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) counter++;
 		if (helspawnFollower()) counter++;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5) counter++;
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
@@ -1503,6 +1504,49 @@ public class Camp extends NPCAwareContent {
 				outputText("Samirah is quietly sunbathing on a rock, her long tail wrapped around on itself. She looks like she is very busy having a hissing conversation with a common snake which, considering her way of speech, isn’t really that strange.\n\n");
 				buttons.add("Samirah", SceneLib.samirah.samirahMainCampMenu);
 			}
+			//Zenji
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 11) {
+				if (model.time.hours >= 7 && model.time.hours <= 18) {
+					if (slavesCount() > 0 && rand(5) == 0) outputText("Zenji is keeping a close eye on some of your more corrupt camp members, ensuring that they don’t cause any harm.");
+					else {
+						var z:int = rand(7);
+						switch (z) {
+							case 0:
+								outputText("Zenji is around your camp, he remains vigilant, surveying the area for danger atop a tree.");
+								break;
+							case 1:
+								outputText("Zenji is around your camp, you see him doing a routine of stretches and working out.");
+								break;
+							case 2:
+								outputText("Zenji is around your camp, he is looking at you with intent almost as if you were his child.");
+								break;
+							case 3:
+								outputText("Zenji is around your camp, he is eyeing some of your followers warily, almost as if he doesn’t trust them.");
+								break;
+							case 4:
+								outputText("Zenji is around your camp, his ears twitch attentively to any signs of danger.");
+								break;
+							case 5:
+								outputText("Zenji is around your camp, he’s gently stroking the brush of his tail, running his fingers through them almost worriedly as he surveys his surroundings.");
+								break;
+							case 6:
+								outputText("Zenji is around your camp, he appears to be eating some cooked meat.");
+								break;
+						}
+					}
+				}
+				else {
+					if (rand(4) == 0) outputText("Zenji is around your camp, he gives a small yawn before shaking himself awake.");
+					else {
+						if (rand(3) == 0) outputText("Zenji is around your camp, it looks like he’s polishing his tusks and brushing his teeth with something.");
+						else {
+							if (rand(2) == 0) outputText("Zenji is around your camp, he is coating his fur in some ashes as he grooms himself.");
+							else outputText("With how dark it is, Zenji is keeping much closer to you, making sure that you’re safe. His eyes never seem to stray from you.");
+						}
+					}
+				}
+				buttons.add("Zenji", SceneLib.zenjiScene.loverZenjiMainCampMenu).hint("Visit Zenji the troll.");
+			}
 			//Nieve (jako, ze jest sezonowym camp member powinna byc na koncu listy...chyba, ze zrobie cos w stylu utworzenia mini lodowej jaskini dla niej)
 			if (flags[kFLAGS.NIEVE_STAGE] == 5) {
 				Holidays.nieveCampDescs();
@@ -1692,7 +1736,7 @@ public class Camp extends NPCAwareContent {
 				buttons.add("Neisa", SceneLib.neisaFollower.neisaCampMenu).hint("Visit Neisa the shield maiden.");
 			}
 		//Zenji folower
-		if (flags[kFLAGS.ZENJI_PROGRESS] == 8) {
+		if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) {
 			if (model.time.hours >= 7 && model.time.hours <= 18) {
 				if (rand(3) == 0) outputText("Zenji is around your camp, you see him currently relaxing atop a tree.");
 				else {
@@ -4748,4 +4792,4 @@ public function wakeFromBadEnd():void {
         }
         */
 	}
-}
+}

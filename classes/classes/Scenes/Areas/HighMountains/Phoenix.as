@@ -20,6 +20,7 @@ public class Phoenix extends Monster
 			}
 			if (combatBlock(true)) {
 				outputText("You are able to raise your [shield] in time to block the phoenix's blows.");
+				SceneLib.combat.ShieldsStatusProcs();
 			}
 			else {
 				outputText("Seeing an opening, the phoenix forces her way through your guard with a quick pair of powerful strikes. ");

@@ -1166,7 +1166,7 @@ import flash.utils.getQualifiedClassName;
 		public function totalXP(playerLevel:Number=-1):Number
 		{
 			var multiplier:Number = 1;
-			multiplier += game.player.perkv1(PerkLib.AscensionWisdom) * 0.1;
+			multiplier += game.player.perkv1(PerkLib.AscensionWisdom) * 0.2;
 			if (playerLevel == -1) playerLevel = game.player.level;
 			// 1) Nerf xp gains by 10% per level after first one level difference up to 90% at 10 lvl diff!
 			// 2) Bonuses for underlevel all the way to 20 lvl's below enemy! Above 20 lvl diff bonus is fixed at 300%! With underdog it increase to 40 lvl diff and caps at 900%!
@@ -1804,6 +1804,7 @@ import flash.utils.getQualifiedClassName;
 					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
 					SceneLib.combat.pspecials.shieldBash();
 				}
+				SceneLib.combat.ShieldsStatusProcs();
 				return true;
 			}
 			return false;
@@ -2569,18 +2570,24 @@ import flash.utils.getQualifiedClassName;
 					}
 				}
 			}
-			if(hasStatusEffect(StatusEffects.Hemorrhage)) {
+			if(hasStatusEffect(StatusEffects.Hemorrhage) || hasStatusEffect(StatusEffects.HemorrhageArmor) || hasStatusEffect(StatusEffects.HemorrhageShield)) {
 				//Countdown to heal
-				addStatusValue(StatusEffects.Hemorrhage, 1, -1);
+				if (hasStatusEffect(StatusEffects.Hemorrhage)) addStatusValue(StatusEffects.Hemorrhage, 1, -1);
+				if (hasStatusEffect(StatusEffects.HemorrhageArmor)) addStatusValue(StatusEffects.HemorrhageArmor, 1, -1);
+				if (hasStatusEffect(StatusEffects.HemorrhageShield)) addStatusValue(StatusEffects.HemorrhageShield, 1, -1);
 				//Heal wounds
-				if (statusEffectv1(StatusEffects.Hemorrhage) <= 0) {
+				if (statusEffectv1(StatusEffects.Hemorrhage) <= 0 || statusEffectv1(StatusEffects.HemorrhageArmor) <= 0 || statusEffectv1(StatusEffects.HemorrhageShield) <= 0) {
 					outputText("The wounds you left on " + a + short + " stop bleeding so profusely.\n\n");
-					removeStatusEffect(StatusEffects.Hemorrhage);
+					if (statusEffectv1(StatusEffects.Hemorrhage) <= 0) removeStatusEffect(StatusEffects.Hemorrhage);
+					if (statusEffectv1(StatusEffects.HemorrhageArmor) <= 0) removeStatusEffect(StatusEffects.HemorrhageArmor);
+					if (statusEffectv1(StatusEffects.HemorrhageShield) <= 0) removeStatusEffect(StatusEffects.HemorrhageShield);
 				}
 				//Deal damage if still wounded.
 				else {
 					var hemorrhage:Number = 0;
-					hemorrhage += maxHP() * statusEffectv2(StatusEffects.Hemorrhage);
+					if (statusEffectv1(StatusEffects.Hemorrhage) > 0) hemorrhage += maxHP() * statusEffectv2(StatusEffects.Hemorrhage);
+					if (statusEffectv1(StatusEffects.HemorrhageArmor) > 0) hemorrhage += maxHP() * statusEffectv2(StatusEffects.HemorrhageArmor);
+					if (statusEffectv1(StatusEffects.HemorrhageShield) > 0) hemorrhage += maxHP() * statusEffectv2(StatusEffects.HemorrhageShield);
 					hemorrhage = SceneLib.combat.doDamage(hemorrhage);
 					if (plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your attack left behind. <b>(<font color=\"#800000\">" + hemorrhage + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your attack left behind. <b>(<font color=\"#800000\">" + hemorrhage + "</font>)</b>\n\n");
@@ -3137,4 +3144,4 @@ import flash.utils.getQualifiedClassName;
 			armorMDef += ((int)(1 + armorMDef / 10)) * newGamePlusMod();
 		}
 	}
-}
+}

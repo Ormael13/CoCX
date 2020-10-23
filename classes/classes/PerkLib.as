@@ -2158,12 +2158,12 @@ public class PerkLib
 		public static const NukiNuts:PerkType = mk("Nuki Nuts", "Nuki Nuts",
 				"Gain a natural armor bonus based on your ball size and prevent the loss of money strike.",
 				"You choose the 'Nuki Nuts' perk, Gain a natural armor bonus based on your ball size and prevent the loss of money strike..");
-		public static const NukiNutsEvolved:PerkType = mk("Nuki Nuts, (Evolved)", "Nuki Nuts, (Evolved)",
+		public static const NukiNutsEvolved:PerkType = mk("Nuki Nuts (Evolved)", "Nuki Nuts (Evolved)",
 				"Increase the Armor bonus granted by Nuki nuts and improve cum production. Cumming now has a small chance of generating gems.",
-				"You choose the 'Nuki Nuts, (Evolved)' perk, Increase the Armor bonus granted by Nuki nuts and improve cum production. Cumming now has a small chance of generating gems.");
-		public static const NukiNutsFinalForm:PerkType = mk("Nuki Nuts, (Final Form)", "Nuki Nuts, (Final Form)",
+				"You choose the 'Nuki Nuts (Evolved)' perk, Increase the Armor bonus granted by Nuki nuts and improve cum production. Cumming now has a small chance of generating gems.");
+		public static const NukiNutsFinalForm:PerkType = mk("Nuki Nuts (Final Form)", "Nuki Nuts (Final Form)",
 				"Further Increase the Armor bonus granted by Nuki nuts and further improve cum production. Cumming now has a greater chance of generating gems. Double the damage of Money Strike.",
-				"You choose the 'Nuki Nuts, (Final Form)' perk, Further Increase the Armor bonus granted by Nuki nuts and further improve cum production. Cumming now has a greater chance of generating gems. Double the damage of Money Strike.");
+				"You choose the 'Nuki Nuts (Final Form)' perk, Further Increase the Armor bonus granted by Nuki nuts and further improve cum production. Cumming now has a greater chance of generating gems. Double the damage of Money Strike.");
 		public static const Nurse:PerkType = mk("Nurse", "Nurse",
 				"Constantly running around tending to the sick has made you better at taking care of yourself, increasing health regen.",
 				"You choose the 'Nurse' perk, increasing HP gains by 20%.");
@@ -2482,8 +2482,8 @@ public class PerkLib
 				"Allow to increase non-bow range weapons attack up to 200% (Intelligence-based).",
 				"You choose the 'Sharpshooter' perk, allowing to slightly increase non-bow range weapons attack.");
 		public static const ShieldCombat:PerkType = mk("Shield Combat", "Shield Combat",
-				"When you block an attack riposte with a shield bash damaging your opponent.",
-				"You choose the 'Shield Combat' perk, allowing to riposte with a shield bash when you block an attack.");
+				"When you block an attack riposte with a shield bash damaging your opponent. Also minimaly improve block chance.",
+				"You choose the 'Shield Combat' perk, allowing to riposte with a shield bash when you block an attack. Also minimaly improve block chance.");
 		public static const ShieldExpertise:PerkType = mk("Shield Expertise", "Shield Expertise",
 				"When you wearing a shield add quarter of block value to your armor (at least 1).",
 				"You choose the 'Shield Expertise' perk, allowing to increase you armor when using shield.");
@@ -3286,11 +3286,11 @@ public class PerkLib
 		public static const TransformationResistance:PerkType = mk("Transformation Resistance", "Transformation Resistance",
 				"Reduces the likelihood of undergoing a transformation. Disables Bad Ends from transformative items.");
 		public static const ZenjisInfluence1:PerkType = mk("Zenji's influence 1", "Zenji's influence 1",
-				"Increases strength, toughness & speed cap by 25 (x NG tier).");
-		public static const ZenjisInfluence2:PerkType = mk("Zenji's influence 2", "Zenji's influence 2",
 				"Increases maximum mana and fatigue by 10%.");
+		public static const ZenjisInfluence2:PerkType = mk("Zenji's influence 2", "Zenji's influence 2",
+				"Reduces effect from curses by 40%.");
 		public static const ZenjisInfluence3:PerkType = mk("Zenji's influence 3", "Zenji's influence 3",
-				"Increases strength, toughness, speed, wisdom & intelligence cap by 10%.");
+				"Reduces physical special cost by 20%. Increase physical special damage by 50%.");
 		
 		// Quest, Event & NPC perks
 		public static const AdvancedLeadership:PerkType = mk("Advanced Leadership", "Advanced Leadership",
@@ -5844,7 +5844,7 @@ public class PerkLib
                 return player.isGoblinoid()
             }, "Goblin race");
 			NukiNutsEvolved.requireLevel(12).requirePerk(NukiNuts).requireCustomFunction(function (player:Player):Boolean {
-				return player.raccoonScore() >= 8 && player.balls > 0 && player.ballSize > 5;
+				return player.raccoonScore() >= 10 && player.balls > 0 && player.ballSize > 5;
 			}, "Tanuki race");
 			OniMusculatureEvolved.requireLevel(12).requirePerk(OniMusculature).requireCustomFunction(function (player:Player):Boolean {
                 return player.tone >= 100;
@@ -6228,7 +6228,7 @@ public class PerkLib
                 return player.isGoblinoid()
             }, "Goblin race");
 			NukiNutsFinalForm.requireLevel(30).requirePerk(NukiNutsEvolved).requireCustomFunction(function (player:Player):Boolean {
-				return player.raccoonScore() >= 8 && player.balls > 0 && player.ballSize > 5;
+				return player.raccoonScore() >= 12 && player.balls > 0 && player.ballSize > 5;
 			}, "Tanuki race");
 			OniMusculatureFinalForm.requireLevel(30).requirePerk(OniMusculatureEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.tone >= 100;

@@ -1951,15 +1951,27 @@ use namespace CoC;
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.NekomataThyroidGland)) {
-				player.removePerk(PerkLib.HinezumiBurningBlood);
+				player.removePerk(PerkLib.NekomataThyroidGland);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.NekomataThyroidGlandEvolved)) {
-				player.removePerk(PerkLib.HinezumiBurningBloodEvolved);
+				player.removePerk(PerkLib.NekomataThyroidGlandEvolved);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.NekomataThyroidGlandFinalForm)) {
-				player.removePerk(PerkLib.HinezumiBurningBloodFinalForm);
+				player.removePerk(PerkLib.NekomataThyroidGlandFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.NukiNuts)) {
+				player.removePerk(PerkLib.NukiNuts);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.NukiNutsEvolved)) {
+				player.removePerk(PerkLib.NukiNutsEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.NukiNutsFinalForm)) {
+				player.removePerk(PerkLib.NukiNutsFinalForm);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.ObsidianHeart)) {
