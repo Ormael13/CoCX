@@ -6974,6 +6974,14 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownPlasmaBlast, 1, -1);
             }
         }
+        //Prank
+        if (player.hasStatusEffect(StatusEffects.CooldownPrank)) {
+            if (player.statusEffectv1(StatusEffects.CooldownPrank) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownPrank);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownPrank, 1, -1);
+            }
+        }
         //Tactical Distraction
         if (player.hasStatusEffect(StatusEffects.CooldownTDistraction)) {
             if (player.statusEffectv1(StatusEffects.CooldownTDistraction) <= 0) {
