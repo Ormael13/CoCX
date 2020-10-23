@@ -308,7 +308,7 @@ public class Creature extends Utils
 		}
 
 		public function addCurse(statName:String, power:Number):void {
-
+			if (this.hasPerk(PerkLib.ZenjisInfluence2)) power *= 0.60;
 			if (statName == "sens" || statName == "cor") {
 				statStore.addBuff(statName, power, 'Curse', {text: 'Curse'});
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);

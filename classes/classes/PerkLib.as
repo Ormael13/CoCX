@@ -5515,7 +5515,7 @@ public class PerkLib
             }, "Goblin race");
 			NukiNuts.requireBallsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.raccoonScore() >= 8 && player.balls > 0 && player.ballSize > 5;
-			}, "Tanuki race");
+			}, "Tanuki race and large balls");
 			ObsidianHeart.requireHeartMutationSlot().requireCor(100).requireCustomFunction(function (player:Player):Boolean {
                 return player.devilkinScore() >= 10;
             }, "Devil race");
@@ -5844,8 +5844,8 @@ public class PerkLib
                 return player.isGoblinoid()
             }, "Goblin race");
 			NukiNutsEvolved.requireLevel(12).requirePerk(NukiNuts).requireCustomFunction(function (player:Player):Boolean {
-				return player.raccoonScore() >= 10 && player.balls > 0 && player.ballSize > 5;
-			}, "Tanuki race");
+				return player.raccoonScore() >= 8 && player.balls > 0 && player.ballSize > 5;
+			}, "Tanuki race and large balls");
 			OniMusculatureEvolved.requireLevel(12).requirePerk(OniMusculature).requireCustomFunction(function (player:Player):Boolean {
                 return player.tone >= 100;
 				}, "100+ tone")
@@ -6228,8 +6228,8 @@ public class PerkLib
                 return player.isGoblinoid()
             }, "Goblin race");
 			NukiNutsFinalForm.requireLevel(30).requirePerk(NukiNutsEvolved).requireCustomFunction(function (player:Player):Boolean {
-				return player.raccoonScore() >= 12 && player.balls > 0 && player.ballSize > 5;
-			}, "Tanuki race");
+				return player.raccoonScore() >= 8 && player.balls > 0 && player.ballSize > 5;
+			}, "Tanuki race and large balls");
 			OniMusculatureFinalForm.requireLevel(30).requirePerk(OniMusculatureEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.tone >= 100;
 				}, "100+ tone")

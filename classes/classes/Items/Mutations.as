@@ -4043,7 +4043,7 @@ public final class Mutations extends MutationsHelper {
             }
             //Ears!
             if (player.ears.type != Ears.GREMLIN && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
-                outputText("\n\nWhoa, something messed up is going about with your ears. They migrate slowly up your head, elongating and distorting as they get covered in -haircolor- fur. When you go check what the hell happened to them you discover instead of human ears you now have a pair of cute animal ears up on your head. Well these sure will give you a cute look. <b>You now have gremlin ears.!</b>");
+                outputText("\n\nWhoa, something messed up is going about with your ears. They migrate slowly up your head, elongating and distorting as they get covered in -haircolor- fur. When you go check what the hell happened to them you discover instead of human ears you now have a pair of cute animal ears up on your head. Well these sure will give you a cute look. <b>You now have gremlin ears!</b>");
                 setEarType(Ears.GREMLIN);
                 changes++;
             }
@@ -11778,7 +11778,7 @@ public final class Mutations extends MutationsHelper {
                     //(if player skinTone = ebony/black/ebony with tats and no fur/scales or if black/midnight fur or if black scales
                     if (((player.skinTone == "ebony" || player.skinTone == "black") && !player.hasCoat()) || ((player.hairColor == "black" || player.hairColor == "midnight") && (player.hasFur() || player.hasScales()))) {
                         outputText("Nothing seems different at first.  Strange... you look closer and discover a darker, mask-line outline on your already inky visage. Furthermore your canines have slightly alongated not unlike those of an animal. <b>You now have a barely-visible raccoon mask and sharp canines like those of a raccoon.</b>");
-                    } else outputText("A dark, almost black mask shades the " + player.skinFurScales() + " around your eyes and over the topmost portion of your nose, lending you a criminal air! Furthermore your canines have slightly alongated not unlike those of an animal. <b>You now have a raccoon mask and sharp canines like those of a raccoon.!</b>");
+                    } else outputText("A dark, almost black mask shades the " + player.skinFurScales() + " around your eyes and over the topmost portion of your nose, lending you a criminal air! Furthermore your canines have slightly alongated not unlike those of an animal. <b>You now have a raccoon mask and sharp canines like those of a raccoon!</b>");
                 }
                 //from snout (will not overwrite full-coon snout but will overwrite others)
                 else {
@@ -11808,6 +11808,7 @@ public final class Mutations extends MutationsHelper {
 
             //FUR TIME
             var color1:String;
+            var Coon_HairColor:Array = ["brown", "chocolate", "tan", "caramel"];
             //get partial fur from full if pc face is human
             if (player.faceType == Face.HUMAN && player.hasFur() && rand(3) == 0 && changes < changeLimit && (player.skin.coverage == Skin.COVERAGE_COMPLETE || player.skin.coverage == Skin.COVERAGE_HIGH)) {
                 outputText("\n\nWhat used to be a dense coat of fur begins to fall in patches on the ground leaving you with just enough fur to cover some area of your body.  <b>Some area of your body are now partially covered with fur!</b>");
