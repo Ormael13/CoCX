@@ -4733,9 +4733,9 @@ use namespace CoC;
 			//Fur only counts if some canine features are present
 			if ((hasFur() || hasPartialCoat(Skin.FUR)) && coonCounter > 0)
 				coonCounter++;
-			if (InCollection(skin.coat.color, "chocolate","brown","dark brown","tan", "caramel"))
+			if (InCollection(skin.coat.color, "chocolate","brown","tan", "caramel"))
 				coonCounter++;
-			if (InCollection(hairColor, "chocolate","brown","dark brown","tan", "caramel"))
+			if (InCollection(hairColor, "chocolate","brown","tan", "caramel"))
 				coonCounter++;
 			if (findPerk(PerkLib.NukiNuts) > 0)
 				coonCounter++;
