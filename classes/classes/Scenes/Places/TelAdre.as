@@ -352,14 +352,19 @@ private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
 		else outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He nervously pulls out " + num2Text(itemValue * player.itemSlots[slot].quantity)  + " gems and drops them into your waiting hand.");
 		while (player.itemSlots[slot].quantity > 0){
 			player.itemSlots[slot].removeOneItem();
+			if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
 			player.gems += itemValue;
 		}
 	}
 	else {
+		if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
+		if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
 		if (itemValue == 0)
-			outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He shrugs and says, “<i>Well ok, it isn't worth anything, but I'll take it.</i>”");
+		outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He shrugs and says, “<i>Well ok, it isn't worth anything, but I'll take it.</i>”");
 		else outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He nervously pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
 		player.itemSlots[slot].removeOneItem();
+		if (itemValue != 0 && player.hasPerk(PerkLib.Greedy || player.hasPerk(PerkLib.TravelingMerchantOutfit))) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
+		if (itemValue != 0 && player.hasPerk(PerkLib.Greedy && player.hasPerk(PerkLib.TravelingMerchantOutfit))) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four time the amount.");
 		player.gems += itemValue;
 	}
 	statScreenRefresh();
@@ -376,7 +381,12 @@ private function oswaldPawnSellAll():void {
 			player.itemSlots[slot].quantity = 0;
 		}
 	}
+	if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
+	if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
 	outputText("You lay out all the items you're carrying on the counter in front of Oswald.  He examines them all and nods.  Nervously, he pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
+	if (player.hasPerk(PerkLib.Greedy || player.hasPerk(PerkLib.TravelingMerchantOutfit))) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
+	if (player.hasPerk(PerkLib.Greedy && player.hasPerk(PerkLib.TravelingMerchantOutfit))) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four time the amount.");
+
 	player.gems += itemValue;
 	statScreenRefresh();
 	doNext(oswaldPawn);
@@ -1090,6 +1100,7 @@ public function kaibaShopMainMenu2():void {
 	
 	//addButton(5, "Necklace", buyItem, necklaces.CSNECK);
 	//addButton(6, "Necklace", buyItem, necklaces.CSNECK);
+	addButton(6, "T.M.Outfit", buyItem, armors.TRMARMOR).hint("Traveling Merchant Outfit -  Increase all gems gained by 100% and increase the potency of gem based ability by 150%, reduce spellcasting cost by 60%.");
 	addButton(7, "W.I.Cloak", buyItem, armors.WALIC).hint("Walpurgis Izalia Cloak -  Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
 	addButton(8, "B.Armor", buyItem, armors.BERA).hint("Berzerker Armor -  Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.");
 	addButton(9, "S.S.Clothing", buyItem, armors.SCANSC).hint("Scandalous Succubus Clothing - Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.");

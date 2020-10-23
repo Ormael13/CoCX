@@ -5747,6 +5747,10 @@ public class Combat extends BaseContent {
             monster.gems *= 2;
             monster.gems = Math.round(monster.gems);
         }
+        if (player.hasPerk(PerkLib.TravelingMerchantOutfit)){
+            monster.gems *= 2;
+            monster.gems = Math.round(monster.gems);
+        }
         monster.handleAwardText(); //Each monster can now override the default award text
         if (!inDungeon && !inRoomedDungeon && !prison.inPrison) { //Not in dungeons
             if (nextFunc != null) doNext(nextFunc);

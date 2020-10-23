@@ -2796,6 +2796,9 @@ public class PerkLib
 		public static const Transference:PerkType = mk("Transference", "Transference",
 				"Your mastery of lust and desire allows you to transfer 15% of your current arousal to your opponent.",
 				"You choose the 'Transference' perk, granting ability to transfer your own arousal to your opponent.");
+		public static const TravelingMerchantOutfit:PerkType = mk("Traveling Merchant Outfit", "Traveling Merchant Outfit",
+				"Double gems gained from selling items and gems found. Gem based abilities are more powerful.",
+				"Double gems gained from selling items and gems found. Gem based abilities are more powerful.");
 		public static const TripleAttack:PerkType = mk("Triple Attack", "Triple Attack",
 				"Allows you to perform three melee attacks with non-large weapons per round.",
 				"You choose the 'Triple Attack' perk.  This allows you to make three melee attacks with non-large weapons.");
