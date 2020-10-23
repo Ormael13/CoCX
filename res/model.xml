@@ -3652,12 +3652,14 @@
 				<show part="armorNeck/merchantClotheCape_fg"/>
 				<show part="clothe/merchantClothe"/>
 				<show part="clothCape_bg/merchantClotheCape_bg"/>
-				<show part="clothe/merchantClotheArms"/>
+				<show part="clothRightArm/merchantClotheArms"/>
 				<if test="breastRows.length gt 0">
 					<switch>
 						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<hide part="breasts/*"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<hide part="breasts/*"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
 							<show part="bra/merchantClotheBraMedium"/>
