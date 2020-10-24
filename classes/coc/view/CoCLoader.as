@@ -35,18 +35,10 @@ public class CoCLoader {
 	public static var BUNDLE_CONTENT_COC_XML:Class;
 	bundleText("content/coc.xml", BUNDLE_CONTENT_COC_XML);
 	
-	[Embed(source="../../../content/coc/appearance.xml", mimeType="application/octet-stream")]
-	public static var BUNDLE_CONTENT_COC_APPEARANCE_XML:Class;
-	bundleText("content/coc/appearance.xml", BUNDLE_CONTENT_COC_APPEARANCE_XML);
-
 	[Embed(source="../../../content/coc/desert.xml", mimeType="application/octet-stream")]
 	public static var BUNDLE_CONTENT_COC_DESERT_XML:Class;
 	bundleText("content/coc/desert.xml", BUNDLE_CONTENT_COC_DESERT_XML);
 
-	[Embed(source="../../../content/coc/forest.xml", mimeType="application/octet-stream")]
-	public static var BUNDLE_CONTENT_COC_FOREST_XML:Class;
-	bundleText("content/coc/forest.xml", BUNDLE_CONTENT_COC_FOREST_XML);
-	
 	[Embed(source="../../../content/coc/monsters/goblin.xml", mimeType="application/octet-stream")]
 	public static var BUNDLE_CONTENT_COC_MONSTERS_GOBLIN_XML:Class;
 	bundleText("content/coc/monsters/goblin.xml", BUNDLE_CONTENT_COC_MONSTERS_GOBLIN_XML);
