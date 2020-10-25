@@ -14,9 +14,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 	protected function inchesOrCentimetres(...args):String { return Measurements.inchesOrCentimetres.apply(null, args); }
 	protected function shortSuffix(...args):String { return Measurements.shortSuffix.apply(null, args); }
-	private var story:BoundStory;
 	private function init():void {
-        story = new Story("story", CoC.instance.rootStory, "appearance").bind(CoC.instance.context);
     }
 	public function appearance():void {
         //Temp vars
@@ -577,9 +575,9 @@ public class PlayerAppearance extends BaseContent {
 			}
 			// Knot?
 			if (player.cocks[cock_index].knotMultiplier > 1) {
-				if (player.cocks[cock_index].knotMultiplier >= 1.8) 
+				if (player.cocks[cock_index].knotMultiplier >= 1.8)
 					outputText("  The obscenely swollen lump of flesh near the base of your " + player.cockDescript(cock_index) + " looks almost comically mismatched for your cock.");
-				else if (player.cocks[cock_index].knotMultiplier >= 1.4) 
+				else if (player.cocks[cock_index].knotMultiplier >= 1.4)
 					outputText("  A large bulge of flesh nestles just above the bottom of your " + player.cockDescript(cock_index) + ", to ensure it stays where it belongs during mating.");
 				else // knotMultiplier < 1.4
 					outputText("  A small knot of thicker flesh is near the base of your " + player.cockDescript(cock_index) + ", ready to expand to help you lodge it inside a female.");
@@ -1870,7 +1868,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if(eyeType == Eyes.GREMLIN){
 			outputText("  Your [eyecolor] eyes looks human enough though your eyelids are dark, just as if you very tired althought it's more likely traces of your demonic corruption.");
-		}	
+		}
 		else outputText("  Your eyes are [eyecolor].");
 	}
 	public function describeHairAndEars():void {
@@ -2633,7 +2631,7 @@ public class PlayerAppearance extends BaseContent {
 			else if (player.alrauneScore() >= 1) outputText("\n<font color=\"#008000\">Alraune: " + player.alrauneScore() + "</font>");
 			else if (player.alrauneScore() < 1) outputText("\n<font color=\"#ff0000\">Alraune: 0</font>");
 		} else {
-		//Liliraune	
+		//Liliraune
 			if (player.alrauneScore() >= 17) outputText("\n<font color=\"#0000a0\">Greater Liliraune: " + player.alrauneScore() + " (+" + (115 * (1 + player.newGamePlusMod())) + " max Tou, -" + (60 * (1 + player.newGamePlusMod())) + " max Spe, +" + (200 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 			else if (player.alrauneScore() >= 13) outputText("\n<font color=\"#0000a0\">Liliraune: " + player.alrauneScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (145 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 			else if (player.alrauneScore() >= 1) outputText("\n<font color=\"#008000\">Liliraune: " + player.alrauneScore() + "</font>");
