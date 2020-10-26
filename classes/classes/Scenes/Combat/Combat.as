@@ -95,6 +95,8 @@ public class Combat extends BaseContent {
     public function physicalCost(mod:Number):Number {
         var costPercent:Number = 100;
         if (player.hasPerk(PerkLib.IronMan)) costPercent -= 50;
+        if (player.hasPerk(PerkLib.ZenjisInfluence3)) costPercent -= 20;
+		if (costPercent < 10) costPercent = 10; 
         mod *= costPercent / 100;
         return mod;
     }
@@ -103,6 +105,7 @@ public class Combat extends BaseContent {
         var costPercent:Number = 100;
         if (player.hasPerk(PerkLib.BowShooting)) costPercent -= player.perkv1(PerkLib.BowShooting);
         //if(player.hasPerk(PerkLib.)) costPercent -= x0; ((tu umieścić perk dający zmniejszenie % kosztu użycia łuku jak IronMan dla fiz specjali ^^))
+        if (costPercent < 10) costPercent = 10; 
         mod *= costPercent / 100;
         return mod;
     }
@@ -1504,7 +1507,8 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
             if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
             if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
-            if (player.hasPerk(PerkLib.GoblinoidBlood)) {
+            if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+			if (player.hasPerk(PerkLib.GoblinoidBlood)) {
                 if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
                 if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
                 if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
@@ -3929,7 +3933,8 @@ public class Combat extends BaseContent {
                         if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
                         if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
                         if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
-                        if (player.armor == armors.SPKIMO) damage *= 1.2;
+                        if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+						if (player.armor == armors.SPKIMO) damage *= 1.2;
                         if (player.necklace == necklaces.OBNECK) damage *= 1.2;
                         if (player.hasPerk(PerkLib.GoblinoidBlood)) {
                             if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
@@ -3970,7 +3975,8 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
                 if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
                 if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
-                if (player.armor == armors.SPKIMO) damage *= 1.2;
+                if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+				if (player.armor == armors.SPKIMO) damage *= 1.2;
                 if (player.necklace == necklaces.OBNECK) damage *= 1.2;
                 if (player.hasPerk(PerkLib.GoblinoidBlood)) {
                     if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
@@ -4423,7 +4429,8 @@ public class Combat extends BaseContent {
                         if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
                         if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
                         if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
-                        if (player.armor == armors.SPKIMO) damage *= 1.2;
+                        if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+						if (player.armor == armors.SPKIMO) damage *= 1.2;
                         if (player.necklace == necklaces.OBNECK) damage *= 1.2;
                         if (player.hasPerk(PerkLib.GoblinoidBlood)) {
                             if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
@@ -4449,7 +4456,8 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
                 if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
                 if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
-                if (player.armor == armors.SPKIMO) damage *= 1.2;
+                if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+				if (player.armor == armors.SPKIMO) damage *= 1.2;
                 if (player.necklace == necklaces.OBNECK) damage *= 1.2;
                 if (player.hasPerk(PerkLib.GoblinoidBlood)) {
                     if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
@@ -8163,7 +8171,8 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
             if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
             if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
-            if (player.armor == armors.SPKIMO) damage *= 1.2;
+            if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+			if (player.armor == armors.SPKIMO) damage *= 1.2;
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
@@ -8256,7 +8265,8 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
             if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
             if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
-            if (player.armor == armors.SPKIMO) damage *= 1.2;
+            if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+			if (player.armor == armors.SPKIMO) damage *= 1.2;
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
@@ -8307,7 +8317,8 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
             if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
             if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
-            if (player.armor == armors.SPKIMO) damage *= 1.2;
+            if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+			if (player.armor == armors.SPKIMO) damage *= 1.2;
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
@@ -8367,7 +8378,8 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
             if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
             if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
-            if (player.armor == armors.SPKIMO) damage *= 1.2;
+            if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+			if (player.armor == armors.SPKIMO) damage *= 1.2;
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;

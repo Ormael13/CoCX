@@ -774,6 +774,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Vapula:StatusEffectType             	= mk("Vapula");
 		public static const WhipReady:StatusEffectType          	= mk("Whip Ready");
 		public static const YamataCanon:StatusEffectType 			= mk("Yamata Foxfire Canon");
+		public static const ZenjiModificationsList:StatusEffectType = mk("Zenji Modifications List");
 		public static const ZenjiPreparationsList:StatusEffectType  = mk("Zenji Preparations List");
 		
 		// universal combat debuffs

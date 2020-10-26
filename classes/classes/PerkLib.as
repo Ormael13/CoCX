@@ -3290,7 +3290,7 @@ public class PerkLib
 		public static const ZenjisInfluence2:PerkType = mk("Zenji's influence 2", "Zenji's influence 2",
 				"Reduces effect from curses by 40%.");
 		public static const ZenjisInfluence3:PerkType = mk("Zenji's influence 3", "Zenji's influence 3",
-				"Reduces physical special cost by 20%. Increase physical special damage by 50%.");
+				"Reduces physical special cost by 20%. Increase physical special damage by 50% and spellpower by 30%.");
 		
 		// Quest, Event & NPC perks
 		public static const AdvancedLeadership:PerkType = mk("Advanced Leadership", "Advanced Leadership",
@@ -5844,7 +5844,7 @@ public class PerkLib
                 return player.isGoblinoid()
             }, "Goblin race");
 			NukiNutsEvolved.requireLevel(12).requirePerk(NukiNuts).requireCustomFunction(function (player:Player):Boolean {
-				return player.raccoonScore() >= 8 && player.balls > 0 && player.ballSize > 5;
+				return player.raccoonScore() >= 10 && player.balls > 0 && player.ballSize > 5;
 			}, "Tanuki race and large balls");
 			OniMusculatureEvolved.requireLevel(12).requirePerk(OniMusculature).requireCustomFunction(function (player:Player):Boolean {
                 return player.tone >= 100;
@@ -6228,7 +6228,7 @@ public class PerkLib
                 return player.isGoblinoid()
             }, "Goblin race");
 			NukiNutsFinalForm.requireLevel(30).requirePerk(NukiNutsEvolved).requireCustomFunction(function (player:Player):Boolean {
-				return player.raccoonScore() >= 8 && player.balls > 0 && player.ballSize > 5;
+				return player.raccoonScore() >= 12 && player.balls > 0 && player.ballSize > 5;
 			}, "Tanuki race and large balls");
 			OniMusculatureFinalForm.requireLevel(30).requirePerk(OniMusculatureEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.tone >= 100;

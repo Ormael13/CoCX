@@ -10768,6 +10768,15 @@ public final class Mutations extends MutationsHelper {
             player.refillHunger(80);
         }
 
+        public function zenjiHunt(player:Player):void {
+            player.slimeFeed();
+            clearOutput();
+            outputText("You unwrap the food before eating the piece of meat Zenji gave to you. The meat is well done, presumably to make sure that it’s not contaminated, despite this it’s not as chewy as you thought it would be. It has a pleasant savory taste and you finish the delectable morsel rather quickly.  ");
+			//Health/HP(Large increase; always occurs):
+            HPChange(Math.round(player.maxHP() * .25), true);
+            player.refillHunger(45);
+        }
+
         public function sheepMilk(player:Player):void {
             player.slimeFeed();
             clearOutput();
@@ -11808,7 +11817,7 @@ public final class Mutations extends MutationsHelper {
 
             //FUR TIME
             var color1:String;
-            var Coon_HairColor:Array = ["brown", "chocolate", "tan", "caramel"];
+            var Coon_HairColor1:Array = ["brown", "chocolate", "tan", "caramel"];
             //get partial fur from full if pc face is human
             if (player.faceType == Face.HUMAN && player.hasFur() && rand(3) == 0 && changes < changeLimit && (player.skin.coverage == Skin.COVERAGE_COMPLETE || player.skin.coverage == Skin.COVERAGE_HIGH)) {
                 outputText("\n\nWhat used to be a dense coat of fur begins to fall in patches on the ground leaving you with just enough fur to cover some area of your body.  <b>Some area of your body are now partially covered with fur!</b>");
@@ -11817,7 +11826,7 @@ public final class Mutations extends MutationsHelper {
             }
             //get partial fur from nothing
             if (player.faceType == Face.RACCOON_MASK && !player.hasFur() && rand(3) == 0 && changes < changeLimit) {
-                color1 = randomChoice(Coon_HairColor);
+                color1 = randomChoice(Coon_HairColor1);
                 if (player.hasScales()) {
                     //set new skinTone
                     outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] scales.  Panicked, you look down and realize that your scales are falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + color1 + " fur grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the scales is easy to remove.  <b>Your body is now partially covered with small patches of fur!</b>");
@@ -11834,7 +11843,7 @@ public final class Mutations extends MutationsHelper {
             }
             //gain full fur
             if (player.faceType == Face.RACCOON_MASK && (player.lowerBody == LowerBody.RACCOON && player.ears.type == Ears.RACCOON) && player.hasFur() && player.skin.coverage == Skin.COVERAGE_LOW && changes < changeLimit && rand(4) == 0) {
-                color1 = randomChoice(Coon_HairColor);
+                color1 = randomChoice(Coon_HairColor1);
                 outputText("\n\nYou shiver, feeling a bit cold.  Just as you begin to wish for something to cover up with, it seems your request is granted; thick, bushy fur begins to grow all over your body!  You tug at the tufts in alarm, but they're firmly rooted and... actually pretty soft.  Huh.  ");
                 player.skin.growCoat(Skin.FUR, {color: color1});
                 outputText("<b>You now have a warm coat of [skin coat.color] raccoon fur!</b>");

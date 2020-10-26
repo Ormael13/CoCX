@@ -656,11 +656,11 @@ public function followerZenjiMainCampMenu():void {
 	outputText("You approach Zenji, he looks up at you while you approach, raising an eyebrow.\n\n");
 	menu();
 	addButton(0, "Appearance", followerZenjiMainCampMenuAppearance).hint("Examine Zenji.");
-	addButton(1, "Training", followerZenjiMainCampMenuTraining).hint("Train with Zenji to increase your stats.");
-	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(2, "Spar", followerZenjiSpar).hint("Spar with Zenji.");
-	addButton(3, "Talk", followerZenjiTalks).hint("Talk to Zenji.");
-	if (player.lust > 33) addButton(4, "Sex", followerZenjiSex).hint("Perhaps the hunk could be open to share an intimate moment with you.");
-	if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) addButton(5, "Glades", followerZenjiGlades).hint("Ask Zenji for help in destroying the corrupted glades.");
+	addButton(1, "Talk", followerZenjiTalks).hint("Talk to Zenji.");
+	if (player.lust > 33) addButton(2, "Sex", followerZenjiSex).hint("Perhaps the hunk could be open to share an intimate moment with you.");
+	if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) addButton(3, "Glades", followerZenjiGlades).hint("Ask Zenji for help in destroying the corrupted glades.");
+	addButton(4, "Training", followerZenjiMainCampMenuTraining).hint("Train with Zenji to increase your stats.");
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(5, "Spar", followerZenjiSpar).hint("Spar with Zenji.");
 	addButton(14, "Leave", followerZenjiMainCampMenuLeave);
 }
 
@@ -970,10 +970,13 @@ public function loverZenjiOfferYes():void {
 	outputText(". He lets go of you after a moment, \"<i>Lead de way, I won't leave ya side no matta what.</i>\"\n\n");
 	outputText("You lead Zenji back to your camp, once he’s settled Zenji sighs softly, \"<i>Back at my old home, tings were difficult fa me… It was difficult fa me to get over my problems back den, but… With you, I feel like you are a part of me. It’s like I feel… complete with you… Like de horrible tings dat happened back home neva happened... I wanna be dere for you, [player]. I wanna be here wit ya, always, mi corazón.</i>\"\n\n");
 	outputText("<b>Zenji has joined you as a lover.</b>\n\n");
+	player.createStatusEffect(StatusEffects.ZenjiModificationsList,0,0,15,7);
 	player.createStatusEffect(StatusEffects.ZenjiPreparationsList,0,0,0,0);
 	flags[kFLAGS.ZENJI_PROGRESS] = 11;
 	doNext(camp.returnToCampUseOneHour);
 }
+
+public var loadVolume:Number = 1300;
 
 public function loverZenjiMainCampMenu():void {
 	spriteSelect(SpriteDb.s_zenji);
@@ -981,9 +984,14 @@ public function loverZenjiMainCampMenu():void {
 	outputText("You approach Zenji, he looks up at you while you approach, raising an eyebrow.\n\n");
 	menu();
 	addButton(0, "Appearance", loverZenjiMainCampMenuAppearance).hint("Examine Zenji.");
-	addButton(3, "Talk", loverZenjiTalks).hint("Talk to Zenji.");
-	//if (player.lust > 33) addButton(4, "Sex", followerZenjiSex).hint("Perhaps the hunk could be open to share an intimate moment with you.");
-	if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) addButton(5, "Glades", loverZenjiGlades).hint("Have Zenji help you in destroying the corrupted glades.");
+	addButton(1, "Talk", loverZenjiTalks).hint("Talk to Zenji.");
+	addButtonDisabled(2, "Sex", "NYI");
+	//if (player.lust > 33) addButton(2, "Sex", followerZenjiSex).hint("Perhaps the hunk could be open to share an intimate moment with you.");
+	if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) addButton(3, "Glades", loverZenjiGlades).hint("Have Zenji help you in destroying the corrupted glades.");
+	addButtonDisabled(4, "Nightwatch", "NYI");
+	addButtonDisabled(5, "Team", "NYI");
+	addButtonDisabled(6, "Give Item", "NYI");
+	addButtonDisabled(7, "Sleep With", "NYI");
 	addButton(14, "Leave", loverZenjiMainCampMenuLeave);
 }
 
@@ -991,10 +999,14 @@ public function loverZenjiMainCampMenuAppearance():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
 	outputText("Zenji is a troll to your knowledge, at least that’s what he calls himself.\n\n");
-	outputText("He is 8’2”, covered head to toe in soft, cuddly green fur. The top of his head is crowned with a shaggy, pale green mohawk. His face is very handsome, with good symmetry, strong brows, and a chiseled jawline. He has deep-set eyes complimented by ashen green irises. His nose is pronounced and elongated. As your eyes wander down his face, you can see (2 ivory tusks protrude from his mouth, each about 7 inches long. His left tusk is covered in a series of rings hanging from the tip to the midsection.) (2 ivory nibblers protrude from his mouth, barely an inch long). ");
+	outputText("He is 8’2”, covered head to toe in soft, cuddly green fur. The top of his head is crowned with a shaggy, pale green mohawk. His face is very handsome, with good symmetry, strong brows, and a chiseled jawline. He has deep-set eyes complimented by ashen green irises. His nose is pronounced and elongated. As your eyes wander down his face, you can see 2 ivory "+(player.statusEffectv4(StatusEffects.ZenjiModificationsList) == 7 ? "tusks protrude from his mouth, each about 7 inches long. His left tusk is covered in a series of rings hanging from the tip to the midsection" : "nibblers protrude from his mouth, barely an inch long")+". ");
 	outputText("Between those tusks, his lower two canines stick out slightly past his lips. Darker colored hair wraps around his mouth, emphasizing the scruffy beard that covers his lower face. His beard is fairly dense, you could easily get your fingers lost beneath it. He has pointed ears similar to that of an elf, fuzzy like the rest of him. They twitch every so often, provoked easily by any sound that could bring a problem.\n\n");
-	outputText("Zenji’s physique is imposing, chiseled, and very muscular. He wears a beaded necklace over his neck. He has broad shoulders with long, very muscular and toned arms that extend past his waist. His elbows are covered in darker colored hair that hangs out slightly. His arms are human-shaped with large four-fingered hands. He wears fur bracers that cover his wrists. He has 2 manly pecs with a tuft of hair sticking out between them. He has firm, well-defined abs, hidden behind his fur. He currently is only wearing a loincloth over his waist, tied by an animal fur pelt as his fur covers his entire body.  Sprouting from the base of his spine is his fuzzy tail, it is about 3 feet long with a larger tuft of hair at the tip, it sways slowly behind him.\n\n");
-	outputText("He has 2 long, muscular legs that end in four-toed, furry feet. His ass is perfectly round, muscular and symmetrical, it is by far one of the best-looking behinds you will or have ever witnessed in your life. His tight backdoor is nestled between his cheeks where it belongs. Hiding behind his loincloth is his uncut humanoid penis. You know that he’s a grower, when fully erect he is (7.5 inches long and 2.2 inches thick,) (12 inches long and 2.4 inches thick,) (16 inches long and 2.6 inches thick,) the only part of him not covered in hair. Below that is his fuzzy pair of gonads, swaying beneath him, each normally about 3 inches across.\n\n");
+	outputText("Zenji’s physique is imposing, chiseled, and very muscular. He wears a beaded necklace over his neck. He has broad shoulders with long, very muscular and toned arms that extend past his waist. His elbows are covered in darker colored hair that hangs out slightly. His arms are human-shaped with large four-fingered hands. He wears fur bracers that cover his wrists. He has 2 manly pecs with a tuft of hair sticking out between them. He has firm, well-defined abs, hidden behind his fur. He currently is only wearing a loincloth over his waist, tied by an animal fur pelt as his fur covers his entire body.  ");
+	outputText("Sprouting from the base of his spine is his fuzzy tail, it is about 3 feet long with a larger tuft of hair at the tip, it sways slowly behind him.\n\nHe has 2 long, muscular legs that end in four-toed, furry feet. His ass is perfectly round, muscular and symmetrical, it is by far one of the best-looking behinds you will or have ever witnessed in your life. His tight backdoor is nestled between his cheeks where it belongs. Hiding behind his loincloth is his uncut humanoid penis. You know that he’s a grower, when fully erect he is ");
+	if (player.statusEffectv3(StatusEffects.ZenjiModificationsList) == 15) outputText("7.5 inches long and 2.2");
+	if (player.statusEffectv3(StatusEffects.ZenjiModificationsList) == 24) outputText("12 inches long and 2.4");
+	if (player.statusEffectv3(StatusEffects.ZenjiModificationsList) == 32) outputText("16 inches long and 2.6");
+	outputText(" inches thick, the only part of him not covered in hair. Below that is his fuzzy pair of gonads, swaying beneath him, each normally about 3 inches across.\n\n");
 	outputText("Zenji remains fixated on surveying your camp as you examine him, \"<i>If ya want to get a little closer ya don' hafta ask.</i>\" He says giving you a gentle pat on the shoulder.\n\n");
 	menu();
 	addButton(14, "Back", loverZenjiMainCampMenu);
@@ -1011,7 +1023,8 @@ public function loverZenjiTalks():void {
 	addButton(2, "Yourself", loverZenjiTalksYourself).hint("Tell Zenji more about yourself.");
 	addButtonDisabled(5, "Showoff", "NYI");//.hint("Have Zenji display his strength for you to admire.")
 	addButton(6, "Comfort", loverZenjiComfort).hint("Spend a tender moment with him. Now with free headpats.");
-	addButtonDisabled(7, "Food", "NYI");//.hint("Zenji seems like he has something he wants to give you.")			5 min long scene only and only 1 per day
+	if (player.statusEffectv1(StatusEffects.ZenjiModificationsList) == 0) addButton(7, "Food", loverZenjiFood).hint("Zenji seems like he has something he wants to give you.");
+	else addButtonDisabled(7, "Food", "Zenji does not have any more food to offer you right now, ask again tomorrow.");
 	addButton(14, "Back", loverZenjiMainCampMenu);
 }
 
@@ -1094,10 +1107,14 @@ public function loverZenjiComfort():void {
 public function loverZenjiFood():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
-	outputText("Zenji nods softly, \"<i>Me gusta tenerte cerca, flaca. I’m always happy to talk ta ya. Now, what do ya want ta talk about?</i>\"\n\n");
-	
+	outputText("Before you can start, Zenji has already cut you off. \"<i>Ya know, I've been doin’ some huntin’ around ya camp... I got some food for ya.</i>\"\n\n");
+	outputText("Zenji grabs your wrists with gentle dominance, the soft furry texture of his hands tickle you slightly as he places something wrapped within leaves into your palm.\n\n");
+	outputText("\"<i>Just a little meat I cooked fa ya. Algo especial para ti, flaca.</i>\"\n\n");
+	outputText("You're at a loss for words, you didn't expect such a nice gesture. You thank him for his gift and be sure to repay the favor.\n\n");
+	outputText("\"<i>Nah, ya don' have to worry about it, I'd do anything for you, [player]. Remember that I'll always be here for ya.</i>\" He pulls you in for a gentle kiss on the lips, he leaves you be once he ends the embrace.\n\n");
 	if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
-	doNext(loverZenjiTalks);
+	player.addStatusValue(StatusEffects.ZenjiModificationsList, 1, 1);
+	inventory.takeItem(consumables.ZENJI_H, loverZenjiTalks);
 	cheatTime2(5);
 }
 
