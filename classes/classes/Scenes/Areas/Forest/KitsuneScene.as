@@ -296,11 +296,11 @@ public class KitsuneScene extends BaseContent
 			if (player.tentacleCocks() >= 3) {
 				doNext(tentacleKitsuneWingWangs);
 			}
-			if (player.isAlraune()) {
+			else if (player.isAlraune()) {
 				doNext(alrauneVSKitsune);
 			}
-			if (!player.isAlraune() && player.tentacleCocks() < 3) {
-				if (player.hasCock())  doNext(createCallBackFunction(kitsuneMaleOrHermMansion,willing));
+			else {
+				if (player.hasCock()) doNext(createCallBackFunction(kitsuneMaleOrHermMansion,willing));
 				else doNext(createCallBackFunction(kitsuneFemaleOrGenderless, willing));
 			}
 		}
