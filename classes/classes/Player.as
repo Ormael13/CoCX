@@ -6234,6 +6234,8 @@ use namespace CoC;
 				bunnyCounter += 1;
 			if (hasPerk(PerkLib.EasterBunnyBalls) && balls >= 2)
 				bunnyCounter = 0;
+			if (ears.type != Ears.BUNNY)
+				bunnyCounter++;
 			if (isGargoyle()) bunnyCounter = 0;
 			bunnyCounter = finalRacialScore(bunnyCounter, Race.BUNNY);
 			End("Player","racialScore");
@@ -6318,6 +6320,8 @@ use namespace CoC;
 				EbunnyCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && EbunnyCounter >= 8)
 				EbunnyCounter += 1;
+			if (ears.type != Ears.BUNNY)
+				EbunnyCounter = 0;
 			if (isGargoyle()) EbunnyCounter = 0;
 			EbunnyCounter = finalRacialScore(EbunnyCounter, Race.EASTERBUNNY);
 			End("Player","racialScore");

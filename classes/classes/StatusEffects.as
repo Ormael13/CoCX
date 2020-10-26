@@ -775,6 +775,10 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const WhipReady:StatusEffectType          = mk("Whip Ready");
 		public static const YamataCanon:StatusEffectType 		= mk("Yamata Foxfire Canon");
 		
+		//Alchemical buffs
+		public static const AlchIronweed:StatusEffectType       = mk("IronweedEffect");
+		public static const AlchBladeFerns:StatusEffectType     = mk("BladeFernsEffect");
+		public static const AlchAlrauneNectar:StatusEffectType     = mk("AlrauneNectarEffect");
 		// universal combat debuffs
 
 		public static const GenericCombatStrBuff:StatusEffectType  = CombatStrBuff.TYPE;
