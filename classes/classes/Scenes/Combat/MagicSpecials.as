@@ -4416,10 +4416,10 @@ public class MagicSpecials extends BaseCombatContent {
 	public function EclipsingShadow():void {
 		clearOutput();
 		var thirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
-		thirst.modSatiety(-20);
+		thirst.modSatiety(-1);
 		player.createStatusEffect(StatusEffects.CooldownEclipsingShadow,20,0,0,0);
 		outputText("You open your wings wide and call upon the power of your tainted blood a pair of black orbs forming at your fingertips. You shatter them on the ground plunging the area in complete darkness and extinguishing all light. While your opponent will be hard pressed to see anything your ability to echolocate allows you to navigate with perfect clarity.");
-		monster.createStatusEffect(StatusEffects.Blind, 10, 0, 0, 0);
+		monster.createStatusEffect(StatusEffects.Blind, 15, 0, 0, 0);
 		enemyAI();
 	}
 
@@ -4427,7 +4427,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function SonicScream():void {
 		clearOutput();
 		var thirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
-		thirst.modSatiety(-20);
+		thirst.modSatiety(-1);
 		player.createStatusEffect(StatusEffects.CooldownSonicScream, 15, 0, 0, 0);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
@@ -4435,7 +4435,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		var damage:Number = 0;
-		damage += scalingBonusToughness();
+		damage += scalingBonusIntelligence()+scalingBonusToughness()+scalingBonusLibido();
 		if (monster.hasPerk(PerkLib.EnemyGroupType)) damage *= 5;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;

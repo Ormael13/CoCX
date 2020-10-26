@@ -327,6 +327,16 @@ import classes.Items.JewelryLib;
 
 		public function pregnancyUpdate():Boolean { return false; }
 
+		/**
+		 * Returns key item instance by name, or null if no such key item possessed.
+		 */
+		public function getKeyItem(keyName:String):KeyItemClass {
+			for (var i:int = 0; i<keyItems.length; i++) {
+				if (keyItems[i].keyName == keyName) return keyItems[i];
+			}
+			return null;
+		}
+
 		//Create a keyItem
 		public function createKeyItem(keyName:String, value1:Number, value2:Number, value3:Number, value4:Number):void
 		{

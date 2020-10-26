@@ -334,6 +334,15 @@ public final class ConsumableLib extends BaseContent
 
 		public const LARGE_EGGS:Array = [L_BLKEG,L_BLUEG,L_BRNEG,L_PNKEG,L_PRPEG,L_WHTEG];
 		public const SMALL_EGGS:Array = [BLACKEG,BLUEEGG,BROWNEG,PINKEGG,PURPLEG,WHITEEG];
+
+		//ALCHEMICAL INGREDIANTS
+		public const HEALHERB:SimpleConsumable = mk("HealHerb", "HealHerb", "a Healing herb", 6, "A herb with healing properties. Can be consumed directly or processed into a poultice.", m.yetiCum);
+		public const MOONGRASS:SimpleConsumable = mk("MoonGrass", "MoonGrass", "a Moonlight grass", 6, "A grass with invigorative properties. Can be consumed directly or processed into a medicine.\n", m.yetiCum);
+		public const SNAKEBANE:SimpleConsumable = mk("SnakFlowr", "SnakFlowr", "a Snakebane flower", 6, "This flower can cure poison but, when alchemically processed, remove burns and frostburns as well. Can be consumed directly or processed into a medicine.", m.yetiCum);
+		public const IRONWEED:SimpleConsumable = mk("IronWeed", "IronWeed", "a Iron weed", 6, "This magical weed dulls one’s sense of pain and temporarily hardens the skin. Can be consumed directly or processed into a medicine.", m.yetiCum);
+		public const BLADEFERN:SimpleConsumable = mk("BladeFerns", "BladeFerns", "a handfull of Blade ferns", 6, "This magical ferns helps the user temporarily generate more adrenaline and boosts the muscle mass, improving one’s strength and speed. Can be consumed directly or processed into a medicine.", m.yetiCum);
+		public const RAUNENECT:SimpleConsumable = mk("RauneNectar", "RauneNectar", "a bottle of Alaune nectar", 6, "A powerful aphrodisiac when consumed, Alraune nectar can be processed into a perfume, granting the user the infamous arousing scent of the alraunes as well as an alchemical resilience to lust. Can be consumed directly or processed into a perfume.", m.yetiCum);
+
 		private var mutations:Mutations;
 
 		/**

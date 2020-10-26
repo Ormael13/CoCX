@@ -6,6 +6,7 @@ package classes
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
+import classes.Stats.StatUtils;
 
 import flash.utils.Dictionary;
 
@@ -64,12 +65,12 @@ public class PerkType extends BaseContent
 		{
 			return _longDesc;
 		}
-		
+
 		public function keepOnAscension(respec:Boolean = false):Boolean
 		{
 			if (_keepOnAscension)
-				return true;						
-			
+				return true;
+
 			return _longDesc != _desc && !respec; // dirty condition
 		}
 
@@ -484,8 +485,18 @@ public class PerkType extends BaseContent
 			return this;
 		}
 
-		public function withBuffs(buffs:Object):PerkType {
-			this.buffs = buffs;
+		public function withBuffs(buffs:Object, showText:Boolean = true):PerkType {
+			this.buffs = buffs
+			var tempText:String = "";
+			if(showText) {
+				var key:String;
+				for (key in this.buffs) {
+					tempText += " " + StatUtils.explainBuff(key, buffs[key]) + ",";
+				}
+				tempText = tempText.slice(0, tempText.length - 1) + "."
+				_desc += tempText;
+				_longDesc += tempText;
+			}
 			return this;
 		}
 	}

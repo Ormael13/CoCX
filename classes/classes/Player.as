@@ -97,6 +97,10 @@ use namespace CoC;
 		//TODO: Kept for backwards compatibility reasons but should be phased out.
 		public var lustVuln:Number = 1;
 
+		//Herbalism attributes
+		public var herbalismLevel:Number = 0;
+		public var herbalismXP:Number = 0;
+
 		//Teasing attributes
 		public var teaseLevel:Number = 0;
 		public var teaseXP:Number = 0;
@@ -11697,6 +11701,55 @@ use namespace CoC;
 			return true;
 		}
 
+
+		public function maxHerbalismLevel():Number {
+			var maxLevel:Number = 2;
+			//if (hasPerk(PerkLib.SuperSensual)) {
+				//if (level < 48) maxLevel += level;
+				//else maxLevel += 48;
+			//}
+			//else {
+				maxLevel += level;
+			//}
+			return maxLevel;
+		}
+		public function HerbExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = herbalismLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = herbalismLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+
+		public function herbXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					herbalismXP++;
+					XP--;
+				}
+				else {
+					herbalismXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (herbalismLevel < maxHerbalismLevel() && herbalismXP >= HerbExpToLevelUp()) {
+					outputText("\n<b>Herbalism skill leveled up to " + (herbalismLevel + 1) + "!</b>");
+					herbalismLevel++;
+					herbalismXP = 0;
+				}
+			}
+		}
+
+
 		public function maxTeaseLevel():Number {
 			var maxLevel:Number = 2;
 			if (hasPerk(PerkLib.SuperSensual)) {
@@ -11852,7 +11905,7 @@ use namespace CoC;
 					cumAmmount = int(cumAmmount);
 					//Calculate payout
 					if(cumAmmount > 10) {
-						payout = 2 + int(cumAmmount/20)*2;
+						payout = 2 + int(cumAmmount/100)*2;
 					}
 					//Reduce payout if it would push past
 					if (hasPerk(PerkLib.NukiNutsFinalForm)){
