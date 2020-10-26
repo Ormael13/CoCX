@@ -2593,7 +2593,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				return;
 			}
 			//Zenji
-			if((flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) && rand(100) < 15) {
+			if((flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) && rand(100) < 20) {
 				clearOutput();
 				outputText("As you approach Amily, you notice a tall green troll is already chatting with her. Zenji has her pressed up against a tree, his arms above her head flexing nonchalantly, almost as if he were trying to cage her beneath himself.\n\n");
 				outputText("\"<i>Soy un hombre lechero de conocer a alguien como tú.</i>\"\n\n");

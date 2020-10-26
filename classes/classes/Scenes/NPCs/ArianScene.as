@@ -365,7 +365,7 @@ public function visitAriansHouse():void {
 		else
 			outputText(images.showImage("arianmale-tent"));
 		outputText("You approach the enchanted tent and slip easily inside the doors to the luxurious interior.  ");
-		if ((flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) && arianMF("m", "f") == "m" && rand(10) == 0) {
+		if ((flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) && rand(100) < 15) {
 			outputText("As you approach Arian’s tent and enter you overhear the sounds of a bed squeaking coming from his room. You pause for a moment, is Arian jerking off?\n\n");
 			outputText("No, it’s way too noisy and a little too violent for the small lizan. As you get closer to eavesdrop you can hear faint growling… it sounds like Zenji. You never would’ve expected this from Zenji, but apparently he’s managed to subdue Arian, and by the sounds of it Arian is definitely enjoying himself.\n\n");
 			outputText("\"<i>Ah… Z-Zenji…</i>\" Arian mutters through pleasured groans.\n\n");
@@ -381,6 +381,8 @@ public function visitAriansHouse():void {
 			outputText("Arian squeals as you do so. You’re not surprised that he’s enjoying it, but you’re having fun at his expense anyway.\n\n");
 			outputText("After several more spanks his behind is red from the heat as he kneels on the couch, his ass was pounded too hard from both you and Zenji for him to be able to sit properly for quite some time now.\n\n");
 			outputText("You ask if he’s learned his lesson yet. Arian seems even more flustered before giving you a sheepish nod.\n\n");
+			doNext(camp.campLoversMenu);
+			return;
 		}
 		else {
 			var temp:int = rand(10);

@@ -661,6 +661,7 @@ public function followerZenjiMainCampMenu():void {
 	if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) addButton(3, "Glades", followerZenjiGlades).hint("Ask Zenji for help in destroying the corrupted glades.");
 	addButton(4, "Training", followerZenjiMainCampMenuTraining).hint("Train with Zenji to increase your stats.");
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(5, "Spar", followerZenjiSpar).hint("Spar with Zenji.");
+	else addButtonDisabled(5, "Spar", "You can spar with him, but you need to build a sparring ring first!");
 	addButton(14, "Leave", followerZenjiMainCampMenuLeave);
 }
 
@@ -1147,7 +1148,7 @@ public function loverZenjiGlades():void {
 		outputText("Zenji peers at you curiously, \"<i>If dat is what you want.</i>\"\n\n");
 		flags[kFLAGS.ZENJI_DESTROYING_CORRUPTED_GLADES] = 0;
 	}
-	doNext(followerZenjiMainCampMenu);
+	doNext(loverZenjiMainCampMenu);
 }
 
 public function loverZenjiMainCampMenuLeave():void {
