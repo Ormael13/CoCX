@@ -153,7 +153,7 @@ import classes.internals.*;
 				if (player.shieldBlock > 0) damage -= 0.01 * player.maxHP() * combatBlock2();
 				if (damage < 1) damage = 0;
 				player.HP -= damage;
-				if (player.HP < player.minHP()) outputText("You dodge, deflect, parry and block as good as you can to take as little damage as possible yet are still impaled a fair hundred times!");
+				if (player.HP <= player.minHP()) outputText("You dodge, deflect, parry and block as good as you can to take as little damage as possible yet are still impaled a fair hundred times!");
 				else {
 					outputText("Realising that you are still alive Alvina applaud your resilience in annoyance. The fight is far from over but what matters is that you can win.");
 					createStatusEffect(StatusEffects.TimeStopUsed, 0, 0, 0, 0);

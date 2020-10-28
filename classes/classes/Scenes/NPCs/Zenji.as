@@ -192,7 +192,7 @@ use namespace CoC;
 		
 		public function Zenji() 
 		{
-			if (flags[kFLAGS.ZENJI_PROGRESS] >= 1 && flags[kFLAGS.ZENJI_PROGRESS] < 5) {
+			if (flags[kFLAGS.ZENJI_PROGRESS] >= 1 && (flags[kFLAGS.ZENJI_PROGRESS] < 8 || flags[kFLAGS.ZENJI_PROGRESS] == 10)) {
 				initStrTouSpeInte(145, 140, 135, 125);
 				initWisLibSensCor(135, 20, 40, 0);
 				this.weaponAttack = 50;
@@ -200,7 +200,7 @@ use namespace CoC;
 				this.armorMDef = 200;
 				this.level = 25;
 			}
-			if (flags[kFLAGS.ZENJI_PROGRESS] == -1 || flags[kFLAGS.ZENJI_PROGRESS] == 8) {
+			if (flags[kFLAGS.ZENJI_PROGRESS] == -1 || flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) {
 				initStrTouSpeInte(145, 140, 135, 125);
 				initWisLibSensCor(135, 20, 40, 0);
 				this.weaponAttack = 50;
@@ -273,7 +273,7 @@ use namespace CoC;
 			this.createPerk(PerkLib.MonsterRegeneration, 0.5, 0, 0, 0);
 			this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 8 && this.level >= 40) this.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
+			if ((flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) && this.level >= 40) this.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

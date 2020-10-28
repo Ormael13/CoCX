@@ -44,7 +44,7 @@ public class Bog extends BaseContent
 							else SceneLib.zenjiScene.followerZenjiFirstTimeOffer();
 						}
 						else if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] == 0) {
-							if (flags[kFLAGS.ZENJI_PROGRESS] == 10) SceneLib.zenjiScene.followerZenjiRepeatOffer();
+							if (flags[kFLAGS.ZENJI_PROGRESS] == 10) SceneLib.zenjiScene.loverZenjiRepeatOffer();
 							else SceneLib.zenjiScene.loverZenjiFirstTimeOffer();
 						}
 						else SceneLib.zenjiScene.part2TrollEncounterRepeat();

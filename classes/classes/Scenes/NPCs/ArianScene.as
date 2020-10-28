@@ -366,21 +366,22 @@ public function visitAriansHouse():void {
 			outputText(images.showImage("arianmale-tent"));
 		outputText("You approach the enchanted tent and slip easily inside the doors to the luxurious interior.  ");
 		if ((flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) && rand(100) < 15) {
-			outputText("As you approach Arian’s tent and enter you overhear the sounds of a bed squeaking coming from his room. You pause for a moment, is Arian jerking off?\n\n");
-			outputText("No, it’s way too noisy and a little too violent for the small lizan. As you get closer to eavesdrop you can hear faint growling… it sounds like Zenji. You never would’ve expected this from Zenji, but apparently he’s managed to subdue Arian, and by the sounds of it Arian is definitely enjoying himself.\n\n");
+			outputText("As you approach Arian’s tent and enter you overhear the sounds of a bed squeaking coming from [Arian eir] room. You pause for a moment, is Arian jerking off?\n\n");
+			outputText("No, it’s way too noisy and a little too violent for the small lizan. As you get closer to eavesdrop you can hear faint growling… it sounds like Zenji. You never would’ve expected this from Zenji, but apparently he’s managed to subdue Arian. Given the sounds of the moaning, Arian is enjoying [Arian emself] perhaps a little too much.\n\n");
 			outputText("\"<i>Ah… Z-Zenji…</i>\" Arian mutters through pleasured groans.\n\n");
 			outputText("Zenji seemingly only gives a low growl in response.\n\n");
 			outputText("You sigh and wait on Arian’s couch, they’ll finish eventually and Arian will really hear it from you.\n\n");
 			outputText("After a few minutes and several loud moans from the two of them, their pace begins to slow down.\n\n");
 			outputText("Arian emerges from the room after several more minutes pass, flustered with Zenji standing coyly behind him.\n\n");
-			outputText("Arian notices you and blushes, his entire body practically turns red as Zenji casually leaves the tent after giving Arian a kiss on the cheek.\n\n");
+			outputText("Arian notices you and blushes, [Arian eir] entire body practically turns red as Zenji casually leaves the tent after giving Arian a kiss on the cheek.\n\n");
 			outputText("You sigh and ask Arian if it was worth it.\n\n");
 			outputText("\"<i>Do you really want me to answer that?</i>\" Arian replies sheepishly.\n\n");
-			outputText("You shake your head. What a horny archmage he’s become, and he deserves some punishment.\n\n");
-			outputText("Arian looks at you with hints of fear in his eyes.You pull him down onto your lap, lifting up his robes, revealing his petite behind. You raise his tail up with your free hand, holding it up and leaving him unable to defend himself before giving it a firm and swift spank.\n\n");
-			outputText("Arian squeals as you do so. You’re not surprised that he’s enjoying it, but you’re having fun at his expense anyway.\n\n");
-			outputText("After several more spanks his behind is red from the heat as he kneels on the couch, his ass was pounded too hard from both you and Zenji for him to be able to sit properly for quite some time now.\n\n");
-			outputText("You ask if he’s learned his lesson yet. Arian seems even more flustered before giving you a sheepish nod.\n\n");
+			outputText("You shake your head. What a horny archmage [Arian ey]’s become, and [Arian ey] deserves some punishment.\n\n");
+			outputText("Arian looks at you with hints of fear in [Arian eir] eyes.You pull [Arian em] down onto your lap, lifting up [Arian eir] robes, revealing [Arian eir] petite behind. You raise [Arian eir] tail up with your free hand, holding it up and leaving [Arian em] unable to defend himself before giving it a firm and swift spank.\n\n");
+			outputText("Arian squeals as you do so. You’re not surprised that [Arian ey]’s enjoying it, but you’re having fun at [Arian eir] expense anyway.\n\n");
+			outputText("After several more spanks [Arian eir] behind is left red from the heat as [Arian ey] kneels on the couch, [Arian eir] ass was pounded too hard from both you and Zenji for [Arian em] to be able to sit properly for quite some time now.\n\n");
+			outputText("You ask if [Arian ey]’s learned his lesson yet. Arian seems even more flustered before giving you a sheepish nod.\n\n");
+			outputText("You decide to leave him for now, he’ll need some time to recover from the entire ordeal.\n\n");
 			doNext(camp.campLoversMenu);
 			return;
 		}

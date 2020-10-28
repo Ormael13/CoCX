@@ -52,6 +52,7 @@ public class ParserTags {
         "eyes"                  : function ():* { return CoC.instance.player.eyesDescript(); },
         "eyecolor"              : function ():* { return CoC.instance.player.eyes.colour; },
         "face"                  : function ():* { return CoC.instance.player.face(); },
+        "finger"                : function ():* { return CoC.instance.player.finger(); },
         "feet"                  : function ():* { return CoC.instance.player.feet(); },
         "foot"                  : function ():* { return CoC.instance.player.foot(); },
         "fullchest"             : function ():* { return CoC.instance.player.allChestDesc(); },
