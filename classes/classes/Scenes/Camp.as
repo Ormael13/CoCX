@@ -1934,7 +1934,7 @@ public class Camp extends NPCAwareContent {
 		addButton(13, "WiPButton", strtouspeintwislibsenCalculation1ipol).hint("Taka a Hint (wip tooltip)");
 		addButton(14, "Back", campActions);
 	}
-	
+
 	private function campWinionsArmySim():void {
 		menu();
 		if (player.hasPerk(PerkLib.JobGolemancer)) addButton(0, "Make", campMake.accessMakeWinionsMainMenu).hint("Check your options for making some golems.");

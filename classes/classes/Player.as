@@ -4753,6 +4753,8 @@ use namespace CoC;
 				coonCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && coonCounter >= 8)
 				coonCounter += 1;
+			if (tailType != Tail.RACCOON)
+				coonCounter = 0;
 			if (isGargoyle()) coonCounter = 0;
 			coonCounter = finalRacialScore(coonCounter, Race.RACCOON);
 			End("Player","racialScore");
@@ -5637,7 +5639,7 @@ use namespace CoC;
 				gremlinCounter+=1;
 			if (skinTone != "light" && skinTone != "tan" && skinTone != "dark")
 				gremlinCounter=0;
-			if (ears.type == Ears.GREMLIN)
+			if (ears.type != Ears.GREMLIN)
 				gremlinCounter=0;
 			if (isGargoyle()) gremlinCounter = 0;
 			gremlinCounter = finalRacialScore(gremlinCounter, Race.GREMLIN);

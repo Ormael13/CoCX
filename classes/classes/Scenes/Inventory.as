@@ -34,7 +34,7 @@ use namespace CoC;
 
 	public class Inventory extends BaseContent {
 		private static const inventorySlotName:Array = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"];
-		
+
 		private var itemStorage:Array;
 		private var pearlStorage:Array;
 		private var gearStorage:Array;
@@ -45,7 +45,7 @@ use namespace CoC;
 		public var HolliPure:HolliPureScene = new HolliPureScene();
 		public var Gardening:UniqueCampScenes = new UniqueCampScenes();
 		public var Magnolia:MagnoliaFollower = new MagnoliaFollower();
-		
+
 		public function Inventory(saveSystem:Saves) {
 			itemStorage = [];
 			pearlStorage = [];
@@ -53,23 +53,23 @@ use namespace CoC;
 			prisonStorage = [];
 			saveSystem.linkToInventory(itemStorageDirectGet, pearlStorageDirectGet, gearStorageDirectGet);
 		}
-		
+
 		public function showStash():Boolean {
 			return player.hasKeyItem("Equipment Rack - Weapons") >= 0 || player.hasKeyItem("Equipment Rack - Armor") >= 0 || player.hasKeyItem("Equipment Rack - Shields") >= 0 || itemStorage.length > 0 || player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0 || flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] > 0;
 		}
-		
+
 		public function itemStorageDirectGet():Array { return itemStorage; }
-		
+
 		public function pearlStorageDirectGet():Array { return pearlStorage; }
-		
+
 		public function gearStorageDirectGet():Array { return gearStorage; }
-		
+
 		public function prisonStorageDirectGet():Array { return prisonStorage; }
-		
+
 //		public function currentCallNext():Function { return callNext; }
-		
+
 		public function itemGoNext():void { if (callNext != null) doNext(callNext); }
-		
+
 		public function inventoryMenu(page:int = 1):void {
 			var x:int;
 			//var foundItem:Boolean = false;
@@ -109,6 +109,10 @@ use namespace CoC;
 			if (player.keyItems.length > 0) outputText("\n<b><u>Key Items:</u></b>\n");
 			for (x = 0; x < player.keyItems.length; x++) outputText(player.keyItems[x].keyName + "\n");
 			menu();
+			//Button for alchemical items during combat
+			if (CoC.instance.inCombat) {
+				addButton(12, "Potions", PotionMenu, page + 1);
+			}
 			if (page == 1) {
 				for (x = 0; x < 10; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
@@ -176,7 +180,43 @@ use namespace CoC;
 			else addButton(14, "Back", playerMenu);
 //Gone			menuLoc = 1;
 		}
-		
+
+		public function PotionMenu(page:int = 1):void {
+			var x:int;
+			//var foundItem:Boolean = false;
+			if (CoC.instance.inCombat) {
+				callNext = inventoryCombatHandler; //Player will return to combat after item use
+			}
+			else {
+				spriteSelect(-1);
+				callNext = inventoryMenu; //In camp or in a dungeon player will return to inventory menu after item use
+			}
+			hideMenus();
+			hideUpDown();
+			clearOutput();
+			EngineCore.displayHeader("Potions");
+			//List all availlable potions quantity
+			outputText("<b><u>Availlable potions:</u></b>\n");
+			outputText("<b>Poultrice:</b> : " + player.getKeyItem("poultrice").value1 + ")\n");
+			outputText("<b>Energy drink:</b> : " + player.getKeyItem("energy drink").value1 + ")\n");
+			outputText("<b>Cure:</b> : " + player.getKeyItem("cure").value1 + ")\n");
+			outputText("<b>Painkiller:</b> : " + player.getKeyItem("painkiller").value1 + ")\n");
+			outputText("<b>Stimulant:</b> : " + player.getKeyItem("stimulant").value1 + ")\n");
+			outputText("<b>Perfume:</b> : " + player.getKeyItem("perfume").value1 + ")\n");
+			outputText("\n\nWhich item will you use? (To discard unwanted items, hold Shift then click the item.)");
+			menu();
+			addButton(0, "Poultrice", SceneLib.combat.Poultrice, false).disableIf(player.getKeyItem("poultrice").value1 == 0); //Player returns to the combat menu on cancel
+			addButton(1, "Energy drink", SceneLib.combat.EnergyDrink, false).disableIf(player.getKeyItem("energy drink").value1 == 0); //Player returns to the combat menu on cancel
+			addButton(2, "Cure", SceneLib.combat.Cure, false).disableIf(player.getKeyItem("cure").value1 == 0); //Player returns to the combat menu on cancel
+			addButton(3, "Painkiller", SceneLib.combat.Painkiller, false).disableIf(player.getKeyItem("painkiller").value1 == 0); //Player returns to the combat menu on cancel
+			addButton(4, "Stimulant", SceneLib.combat.Stimulant, false).disableIf(player.getKeyItem("stimulant").value1 == 0); //Player returns to the combat menu on cancel
+			addButton(5, "Perfume", SceneLib.combat.Perfume, false).disableIf(player.getKeyItem("perfume").value1 == 0); //Player returns to the combat menu on cancel
+			//Button for alchemical items
+			addButton(14, "Back", SceneLib.combat.combatMenu, false); //Player returns to the combat menu on cancel
+//Gone		menuLoc = 1;
+
+		}
+
 		public function manageEquipmentmiscitemsMenu():void {
 			menu();
 			if (inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
@@ -221,7 +261,7 @@ use namespace CoC;
 			addButton(10, "Unequip", manageEquipment);
 			addButton(14, "Back", inventoryMenu);
 		}
-		
+
 		private function PurityElixir():void {
 			outputText("You feel something unlock within you as you drink the elixir, some of the veil of corruption being washed out of you as the liquid undo and counteract some of the vile demonic changes your body was afflicted with.");
 			if (player.hasPerk(PerkLib.PurityElixir)) player.addPerkValue(PerkLib.PurityElixir, 1, 1);
@@ -275,7 +315,7 @@ use namespace CoC;
 			}
 			addButton(14, "Back", inventoryMenu);
 		}*/
-		
+
 		public function BagOfCosmosMenu():void {
 			hideMenus();
 			spriteSelect(-1);
@@ -284,7 +324,7 @@ use namespace CoC;
 			addButton(1, "Bag Take", pickItemToTakeFromBagOfCosmos);
 			addButton(14, "Back", inventoryMenu);
 		}
-		
+
 		public function SkyPoisonPearlMenu():void {
 			hideMenus();
 			spriteSelect(-1);
@@ -311,7 +351,7 @@ use namespace CoC;
 			else addButtonDisabled(12, "Pearl Store 7", "Req. LvL 36+ to unlock this.");
 			addButton(14, "Back", inventoryMenu);
 		}
-		
+
 		public function stash():void {
 			/*Hacked in cheat to enable shit
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
@@ -321,7 +361,7 @@ use namespace CoC;
 			clearOutput();
 			spriteSelect(-1);
 			menu();
-			
+
 			if (player.hasKeyItem("Camp - Chest") >= 0 || player.hasKeyItem("Camp - Murky Chest") >= 0 || player.hasKeyItem("Camp - Ornate Chest") >= 0) {
 				var chestArray:Array = [];
 				if (player.hasKeyItem("Camp - Chest") >= 0) chestArray.push("a large wood and iron chest");
@@ -346,7 +386,7 @@ use namespace CoC;
 						else  outputText("under your bed inside your cabin.");
 					}
 				}
-				else outputText("next to your bedroll.");	
+				else outputText("next to your bedroll.");
 				addButton(2, "J.Box Put", inventory.pickItemToPlaceInJewelryBox);
 				if (inventory.jewelryBoxDescription()) addButton(3, "J.Box Take", inventory.pickItemToTakeFromJewelryBox);
 				outputText("\n\n");
@@ -383,7 +423,7 @@ use namespace CoC;
 			}
 			addButton(14, "Back", playerMenu);
 		}
-		
+
 		public function warehouse():void {
 			hideMenus();
 			clearOutput();
@@ -438,7 +478,7 @@ use namespace CoC;
 			}
 			addButton(14, "Back", playerMenu);
 		}
-		
+
 		public function takeItem(itype:ItemType, nextAction:Function, overrideAbandon:Function = null, source:ItemSlotClass = null):void {
 			if (itype == null) {
 				CoC_Settings.error("takeItem(null)");
@@ -471,7 +511,7 @@ use namespace CoC;
 			//OH NOES! No room! Call replacer functions!
 			takeItemFull(itype, true, source);
 		}
-		
+
 		public function returnItemToInventory(item:Useable, showNext:Boolean = true):void { //Used only by items that have a sub menu if the player cancels
 			if (!debug) {
 				if (currentItemSlot == null) {
@@ -492,12 +532,12 @@ use namespace CoC;
 				doNext(callNext); //Items with sub menus should return to the inventory screen if the player decides not to use them
 			else callNext(); //When putting items back in your stash we should skip to the take from stash menu
 		}
-		
+
 		//Check to see if anything is stored
 		public function hasItemsInStorage():Boolean { return itemAnyInStorage(itemStorage, 0, itemStorage.length); }
-		
+
 		public function hasItemInStorage(itype:ItemType):Boolean { return itemTypeInStorage(itemStorage, 0, itemStorage.length, itype); }
-		
+
 		public function consumeItemInStorage(itype:ItemType):Boolean {
 			var index:int = itemStorage.length;
 			while(index > 0) {
@@ -509,15 +549,15 @@ use namespace CoC;
 			}
 			return false;
 		}
-		
+
 		public function hasItemsInBagStorage():Boolean { return itemAnyInStorage(gearStorage, 45, 57); }
-		
+
 		public function hasItemInBagStorage(itype:ItemType):Boolean { return itemTypeInStorage(gearStorage, 45, 57, itype); }
-		
+
 		public function hasItemsInPearlStorage():Boolean { return itemAnyInStorage(pearlStorage, 0, 98); }
-		
+
 		public function hasItemInPearlStorage(itype:ItemType):Boolean { return itemTypeInStorage(pearlStorage, 0, 98, itype); }
-		
+
 		public function giveHumanizer():void {
 			clearOutput();
 			if(flags[kFLAGS.TIMES_CHEATED_COUNTER] > 0) {
@@ -529,7 +569,7 @@ use namespace CoC;
 			inventory.takeItem(consumables.HUMMUS_, playerMenu);
 			flags[kFLAGS.TIMES_CHEATED_COUNTER]++;
 		}
-		
+
 		public function getMaxSlots():int {
 			var slots:int = 5;
 			if (player.findPerk(PerkLib.StrongBack) >= 0) slots++;
@@ -548,7 +588,7 @@ use namespace CoC;
 			}
 			return occupiedSlots;
 		}
-		
+
 		//Create a storage slot
 		public function createStorage():Boolean {
 			if (itemStorage.length >= 16) return false;
@@ -556,7 +596,7 @@ use namespace CoC;
 			itemStorage.push(newSlot);
 			return true;
 		}
-		
+
 		//Clear storage slots
 		public function clearStorage():void {
 			//Various Errors preventing action
@@ -566,7 +606,7 @@ use namespace CoC;
 				itemStorage.splice(0, itemStorage.length);
 			}
 		}
-		
+
 		public function clearGearStorage():void {
 			//Various Errors preventing action
 			if (gearStorage == null) trace("ERROR: Cannot clear storage because storage does not exist.");
@@ -575,7 +615,7 @@ use namespace CoC;
 				gearStorage.splice(0, gearStorage.length);
 			}
 		}
-		
+
 		public function clearPearlStorage():void {
 			//Various Errors preventing action
 			if (pearlStorage == null) trace("ERROR: Cannot clear storage because storage does not exist.");
@@ -584,7 +624,7 @@ use namespace CoC;
 				pearlStorage.splice(0, pearlStorage.length);
 			}
 		}
-		
+
 		public function initializeGearStorage():void {
 			//Completely empty storage array
 			if (gearStorage == null) trace("ERROR: Cannot clear gearStorage because storage does not exist.");
@@ -599,7 +639,7 @@ use namespace CoC;
 				gearStorage.push(newSlot);
 			}
 		}
-		
+
 		public function initializePearlStorage():void {
 			//Completely empty storage array
 			if (pearlStorage == null) trace("ERROR: Cannot clear pearlStorage because storage does not exist.");
@@ -614,7 +654,7 @@ use namespace CoC;
 				pearlStorage.push(newSlot);
 			}
 		}
-		
+
 		private function useItemInInventory(slotNum:int):void {
 			clearOutput();
 			if (player.itemSlots[slotNum].itype is Useable) {
@@ -634,7 +674,7 @@ use namespace CoC;
 			}
 			itemGoNext(); //Normally returns to the inventory menu. In combat it goes to the inventoryCombatHandler function
 		}
-		
+
 		private function inventoryCombatHandler():void {
 			//Check if the battle is over. If not then go to the enemy's action.
 			if (combat.combatIsOver()) return;
@@ -649,14 +689,14 @@ use namespace CoC;
 			addButton(1, "No", inventoryMenu);
 			//doYesNo(deleteItem, inventoryMenu);
 		}
-		
+
 		private function deleteItem(item:Useable, slotNum:int):void {
 			clearOutput();
 			outputText(player.itemSlots[slotNum].quantity + "x " + item.shortName + " " + (player.itemSlots[slotNum].quantity == 1 ? "has": "have") + " been destroyed.");
 			player.destroyItems(item, player.itemSlots[slotNum].quantity);
 			doNext(inventoryMenu);
 		}
-		
+
 		private function useItem(item:Useable, fromSlot:ItemSlotClass):void {
 			item.useText();
 			if (item is Armor) {
@@ -696,15 +736,15 @@ use namespace CoC;
 			}
 			else if (item is Jewelry) {
 				if (player.findPerk(PerkLib.FourthRing) >= 0 && player.jewelry4 == JewelryLib.NOTHING) { //if 4th ring slot is empty, equip in that slot
-					player.setJewelry4(item as Jewelry); 
+					player.setJewelry4(item as Jewelry);
 					itemGoNext();
 				}
 				else if (player.findPerk(PerkLib.ThirdRing) >= 0 && player.jewelry3 == JewelryLib.NOTHING) { //if 3rd ring slot is empty, equip in that slot
-					player.setJewelry3(item as Jewelry); 
+					player.setJewelry3(item as Jewelry);
 					itemGoNext();
 				}
 				else if (player.findPerk(PerkLib.SecondRing) >= 0 && player.jewelry2 == JewelryLib.NOTHING) { //if 2nd ring slot is empty, equip in that slot
-					player.setJewelry2(item as Jewelry); 
+					player.setJewelry2(item as Jewelry);
 					itemGoNext();
 				}
 				else { // otherwise replace 1nd ring slot
@@ -745,7 +785,7 @@ use namespace CoC;
 //				if (!item.hasSubMenu()) itemGoNext(); //Don't call itemGoNext if there's a sub menu, otherwise it would never be displayed
 			}
 		}
-		
+
 		private function takeItemFull(itype:ItemType, showUseNow:Boolean, source:ItemSlotClass, page:int = 1):void {
 			var x:int;
 			outputText("There is no room for " + itype.longName + " in your inventory.  You may replace the contents of a pouch with " + itype.longName + " or abandon it.");
@@ -775,7 +815,7 @@ use namespace CoC;
 			if (showUseNow && itype is Useable) addButton(13, "Use Now", createCallBackFunction2(useItemNow, itype as Useable, source));
 			addButton(14, "Abandon", callOnAbandon); //Does not doNext - immediately executes the callOnAbandon function
 		}
-		
+
 		private function useItemNow(item:Useable, source:ItemSlotClass):void {
 			clearOutput();
 			if (item.canUse()) { //If an item cannot be used then canUse should provide a description of why the item cannot be used
@@ -785,7 +825,7 @@ use namespace CoC;
 				takeItemFull(item, false, source); //Give the player another chance to take this item
 			}
 		}
-		
+
 		private function replaceItem(itype:ItemType, slotNum:int):void {
 			clearOutput();
 			if (player.itemSlots[slotNum].itype == itype) //If it is the same as what's in the slot...just throw away the new item
@@ -797,20 +837,20 @@ use namespace CoC;
 			}
 			itemGoNext();
 		}
-		
+
 		//My unequip function is still superior, albeit rewritten.
 		//private function unequipWeapon():void {
 		//	clearOutput();
 		//	takeItem(player.setWeapon(WeaponLib.FISTS), inventoryMenu);
 		//}
-		
+
 /* Never called
 		public function hasItemsInRacks(itype:ItemType, armor:Boolean):Boolean {
 			if (armor) return itemTypeInStorage(gearStorage, 9, 18, itype);
 			return itemTypeInStorage(gearStorage, 0, 9, itype);
 		}
 */
-		
+
 		public function armorRackDescription():Boolean {
 			if (itemAnyInStorage(gearStorage, 9, 18)) {
 				var itemList:Array = [];
@@ -821,7 +861,7 @@ use namespace CoC;
 			}
 			return false;
 		}
-		
+
 		public function weaponRackDescription():Boolean {
 			if (itemAnyInStorage(gearStorage, 0, 9)) {
 				var itemList:Array = [];
@@ -832,7 +872,7 @@ use namespace CoC;
 			}
 			return false;
 		}
-		
+
 		public function shieldRackDescription():Boolean {
 			if (itemAnyInStorage(gearStorage, 36, 45)) {
 				var itemList:Array = [];
@@ -843,7 +883,7 @@ use namespace CoC;
 			}
 			return false;
 		}
-		
+
 		public function jewelryBoxDescription():Boolean {
 			if (itemAnyInStorage(gearStorage, 18, 27)) {
 				var itemList:Array = [];
@@ -854,7 +894,7 @@ use namespace CoC;
 			}
 			return false;
 		}
-		
+
 		public function dresserDescription():Boolean {
 			if (itemAnyInStorage(gearStorage, 27, 36)) {
 				var itemList:Array = [];
@@ -865,7 +905,7 @@ use namespace CoC;
 			}
 			return false;
 		}
-		
+
 		public function warehouse1Description():Boolean {
 			if (itemAnyInStorage(gearStorage, 57, 69)) {
 				var itemList:Array = [];
@@ -876,7 +916,7 @@ use namespace CoC;
 			}
 			return false;
 		}
-		
+
 		public function warehouse2Description():Boolean {
 			if (itemAnyInStorage(gearStorage, 78, 90)) {
 				var itemList:Array = [];
@@ -887,7 +927,7 @@ use namespace CoC;
 			}
 			return false;
 		}
-		
+
 		public function granaryDescription():Boolean {
 			if (itemAnyInStorage(gearStorage, 69, 78)) {
 				var itemList:Array = [];
@@ -898,21 +938,21 @@ use namespace CoC;
 			}
 			return false;
 		}
-		
+
 		private function itemAnyInStorage(storage:Array, startSlot:int, endSlot:int):Boolean {
 			for (var x:int = startSlot; x < endSlot; x++) {
 				if (storage[x] != undefined) if (storage[x].quantity > 0) return true;
 			}
 			return false;
 		}
-		
+
 		private function itemTypeInStorage(storage:Array, startSlot:int, endSlot:int, itype:ItemType):Boolean {
 			for (var x:int = startSlot; x < endSlot; x++) {
 				if (storage[x] != undefined) if (storage[x].quantity > 0 && storage[x].itype == itype) return true;
 			}
 			return false;
 		}
-		
+
 		public function removeItemFromStorage(storage:Array, itype:ItemType):void {
 			for (var x:int = 0; x < storage.length; x++) {
 				if (storage[x] != undefined) {
@@ -923,7 +963,7 @@ use namespace CoC;
 				}
 			}
 		}
-		
+
 		public function manageEquipment(page:int = 1):void {
 			clearOutput();
 			outputText("Which would you like to unequip?\n\n");
@@ -967,7 +1007,7 @@ use namespace CoC;
 				}
 				if (player.headJewelry != HeadJewelryLib.NOTHING) {
 					addButton(5, "Head Acc", unequipHeadJewel).hint(player.headJewelry.description, capitalizeFirstLetter(player.headJewelry.name));
-				}		
+				}
 				if (player.necklace != NecklaceLib.NOTHING) {
 					addButton(6, "Necklace", unequipNecklace).hint(player.necklace.description, capitalizeFirstLetter(player.necklace.name));
 				}
@@ -987,7 +1027,7 @@ use namespace CoC;
 				item = player.setShield(item as Shield); //Item is now the player's old shield
 			*/
 			addButton(14, "Back", inventoryMenu);
-			
+
 		}
 		//Unequip!
 		private function unequipWeapon():void {
@@ -1050,102 +1090,102 @@ use namespace CoC;
 			callNext = pickItemToTakeFromCampStorage;
 			pickItemToTakeFromStorage(itemStorage, 0, itemStorage.length, "storage");
 		}
-		
+
 		private function pickItemToTakeFromBagOfCosmos():void {
 			callNext = pickItemToTakeFromBagOfCosmos;
 			pickItemToTakeFromStorage2(gearStorage, 45, 57, "bag");
 		}
-		
+
 		private function pickItemToTakeFromSkyPoisonPearl1():void {
 			callNext = pickItemToTakeFromSkyPoisonPearl1;
 			pickItemToTakeFromStorage2(pearlStorage, 0, 14, "sky poison pearl (east section)");
 		}
-		
+
 		private function pickItemToTakeFromSkyPoisonPearl2():void {
 			callNext = pickItemToTakeFromSkyPoisonPearl2;
 			pickItemToTakeFromStorage2(pearlStorage, 14, 28, "sky poison pearl (south section)");
 		}
-		
+
 		private function pickItemToTakeFromSkyPoisonPearl3():void {
 			callNext = pickItemToTakeFromSkyPoisonPearl3;
 			pickItemToTakeFromStorage2(pearlStorage, 28, 42, "sky poison pearl (west section)");
 		}
-		
+
 		private function pickItemToTakeFromSkyPoisonPearl4():void {
 			callNext = pickItemToTakeFromSkyPoisonPearl4;
 			pickItemToTakeFromStorage2(pearlStorage, 42, 56, "sky poison pearl (north section)");
 		}
-		
+
 		private function pickItemToTakeFromSkyPoisonPearl5():void {
 			callNext = pickItemToTakeFromSkyPoisonPearl5;
 			pickItemToTakeFromStorage2(pearlStorage, 56, 70, "sky poison pearl (central section)");
 		}
-		
+
 		private function pickItemToTakeFromSkyPoisonPearl6():void {
 			callNext = pickItemToTakeFromSkyPoisonPearl6;
 			pickItemToTakeFromStorage2(pearlStorage, 70, 84, "sky poison pearl (above section)");
 		}
-		
+
 		private function pickItemToTakeFromSkyPoisonPearl7():void {
 			callNext = pickItemToTakeFromSkyPoisonPearl7;
 			pickItemToTakeFromStorage2(pearlStorage, 84, 98, "sky poison pearl (below section)");
 		}
-		
+
 		private function pickItemToTakeFromWarehouse1():void {
 			callNext = pickItemToTakeFromWarehouse1;
 			pickItemToTakeFromStorage3(gearStorage, 57, 69, "1st warehouse");
 		}
-		
+
 		private function pickItemToTakeFromWarehouse2():void {
 			callNext = pickItemToTakeFromWarehouse2;
 			pickItemToTakeFromStorage3(gearStorage, 78, 90, "2nd warehouse");
 		}
-		
+
 		private function pickItemToTakeFromGranary():void {
 			callNext = pickItemToTakeFromGranary;
 			pickItemToTakeFromStorage3(gearStorage, 69, 78, "granary");
 		}
-		
+
 		private function pickItemToTakeFromShieldRack():void {
 			callNext = pickItemToTakeFromShieldRack;
 			pickItemToTakeFromStorage(gearStorage, 36, 45, "rack");
 		}
-		
+
 		private function pickItemToTakeFromShieldRack2():void {
 			callNext = pickItemToTakeFromShieldRack2;
 			pickItemToTakeFromStorage3(gearStorage, 36, 45, "rack");
 		}
-		
+
 		private function pickItemToTakeFromArmorRack():void {
 			callNext = pickItemToTakeFromArmorRack;
 			pickItemToTakeFromStorage(gearStorage, 9, 18, "rack");
 		}
-		
+
 		private function pickItemToTakeFromArmorRack2():void {
 			callNext = pickItemToTakeFromArmorRack2;
 			pickItemToTakeFromStorage3(gearStorage, 9, 18, "rack");
 		}
-		
+
 		private function pickItemToTakeFromWeaponRack():void {
 			callNext = pickItemToTakeFromWeaponRack;
 			pickItemToTakeFromStorage(gearStorage, 0, 9, "rack");
 		}
-		
+
 		private function pickItemToTakeFromWeaponRack2():void {
 			callNext = pickItemToTakeFromWeaponRack2;
 			pickItemToTakeFromStorage3(gearStorage, 0, 9, "rack");
 		}
-		
+
 		public function pickItemToTakeFromJewelryBox():void {
 			callNext = pickItemToTakeFromJewelryBox;
 			pickItemToTakeFromStorage(gearStorage, 18, 27, "box");
 		}
-		
+
 		public function pickItemToTakeFromDresser():void {
 			callNext = pickItemToTakeFromDresser;
 			pickItemToTakeFromStorage(gearStorage, 27, 36, "dresser");
 		}
-		
+
 		private function pickItemToTakeFromStorage(storage:Array, startSlot:int, endSlot:int, text:String):void {
 			clearOutput(); //Selects an item from a gear slot. Rewritten so that it no longer needs to use numbered events
 			hideUpDown();
@@ -1161,7 +1201,7 @@ use namespace CoC;
 			}
 			addButton(14, "Back", stash);
 		}
-		
+
 		private function pickItemToTakeFromStorage2(storage:Array, startSlot:int, endSlot:int, text:String):void {
 			clearOutput(); //Selects an item from a gear slot. Rewritten so that it no longer needs to use numbered events
 			hideUpDown();
@@ -1177,7 +1217,7 @@ use namespace CoC;
 			}
 			addButton(14, "Back", inventoryMenu);
 		}
-		
+
 		private function pickItemToTakeFromStorage3(storage:Array, startSlot:int, endSlot:int, text:String):void {
 			clearOutput(); //Selects an item from a gear slot. Rewritten so that it no longer needs to use numbered events
 			hideUpDown();
@@ -1193,70 +1233,70 @@ use namespace CoC;
 			}
 			addButton(14, "Back", warehouse);
 		}
-		
+
 		private function pickFrom(storage:Array, slotNum:int):void {
 			clearOutput();
 			var itype:ItemType = storage[slotNum].itype;
 			storage[slotNum].quantity--;
 			inventory.takeItem(itype, callNext, callNext, storage[slotNum]);
 		}
-		
+
 		//Pick items to place in storage
 		private function pickItemToPlaceInCampStorage():void { pickItemToPlaceInStorage(placeInCampStorage, allAcceptable, "storage containers", false); }
-		
+
 		private function pickItemToPlaceInBagOfCosmos():void { pickItemToPlaceInStorage2(placeInBagOfCosmos, allAcceptable, "bag of cosmos", false); }
-		
+
 		private function pickItemToPlaceInSkyPoisonPearl1():void { pickItemToPlaceInStorage2(placeInSkyPoisonPearl1, allAcceptable, "sky poison pearl (east section)", false); }
-		
+
 		private function pickItemToPlaceInSkyPoisonPearl2():void { pickItemToPlaceInStorage2(placeInSkyPoisonPearl2, allAcceptable, "sky poison pearl (south section)", false); }
-		
+
 		private function pickItemToPlaceInSkyPoisonPearl3():void { pickItemToPlaceInStorage2(placeInSkyPoisonPearl3, allAcceptable, "sky poison pearl (west section)", false); }
-		
+
 		private function pickItemToPlaceInSkyPoisonPearl4():void { pickItemToPlaceInStorage2(placeInSkyPoisonPearl4, allAcceptable, "sky poison pearl (north section)", false); }
-		
+
 		private function pickItemToPlaceInSkyPoisonPearl5():void { pickItemToPlaceInStorage2(placeInSkyPoisonPearl5, allAcceptable, "sky poison pearl (central section)", false); }
-		
+
 		private function pickItemToPlaceInSkyPoisonPearl6():void { pickItemToPlaceInStorage2(placeInSkyPoisonPearl6, allAcceptable, "sky poison pearl (above section)", false); }
-		
+
 		private function pickItemToPlaceInSkyPoisonPearl7():void { pickItemToPlaceInStorage2(placeInSkyPoisonPearl7, allAcceptable, "sky poison pearl (below section)", false); }
-		
+
 		private function pickItemToPlaceInWarehouse1():void { pickItemToPlaceInStorage3(placeInWarehouse1, allAcceptable, "1st warehouse", false); }
-		
+
 		private function pickItemToPlaceInWarehouse2():void { pickItemToPlaceInStorage3(placeInWarehouse2, allAcceptable, "2nd warehouse", false); }
-		
+
 		private function pickItemToPlaceInGranary():void { pickItemToPlaceInStorage3(placeInGranary, consumableAcceptable, "granary", true); }
-		
+
 		private function pickItemToPlaceInArmorRack():void { pickItemToPlaceInStorage(placeInArmorRack, armorAcceptable, "armor rack", true); }
-		
+
 		private function pickItemToPlaceInArmorRack2():void { pickItemToPlaceInStorage3(placeInArmorRack2, armorAcceptable, "armor rack", true); }
-		
+
 		private function pickItemToPlaceInWeaponRack():void { pickItemToPlaceInStorage(placeInWeaponRack, weaponAcceptable, "weapon rack", true); }
-		
+
 		private function pickItemToPlaceInWeaponRack2():void { pickItemToPlaceInStorage3(placeInWeaponRack2, weaponAcceptable, "weapon rack", true); }
-		
+
 		private function pickItemToPlaceInShieldRack():void { pickItemToPlaceInStorage(placeInShieldRack, shieldAcceptable, "shield rack", true); }
-		
+
 		private function pickItemToPlaceInShieldRack2():void { pickItemToPlaceInStorage3(placeInShieldRack2, shieldAcceptable, "shield rack", true); }
-		
+
 		public function pickItemToPlaceInJewelryBox():void { pickItemToPlaceInStorage(placeInJewelryBox, jewelryAcceptable, "jewelry box", true); }
-		
+
 		public function pickItemToPlaceInDresser():void { pickItemToPlaceInStorage(placeInDresser, undergarmentAcceptable, "dresser", true); }
-		
+
 		//Acceptable type of items
 		private function allAcceptable(itype:ItemType):Boolean { return true; }
-		
+
 		private function consumableAcceptable(itype:ItemType):Boolean { return itype is Consumable; }
-		
+
 		private function armorAcceptable(itype:ItemType):Boolean { return itype is Armor; }
-		
+
 		private function weaponAcceptable(itype:ItemType):Boolean { return itype is (Weapon || WeaponRange); }
 
 		private function shieldAcceptable(itype:ItemType):Boolean { return itype is Shield; }
-		
+
 		private function jewelryAcceptable(itype:ItemType):Boolean { return itype is Jewelry; }
-		
+
 		private function undergarmentAcceptable(itype:ItemType):Boolean { return itype is Undergarment; }
-		
+
 		//Place in storage functions
 		private function pickItemToPlaceInStorage(placeInStorageFunction:Function, typeAcceptableFunction:Function, text:String, showEmptyWarning:Boolean, page:int = 1):void {
 			var x:int;
@@ -1287,9 +1327,9 @@ use namespace CoC;
 			addButton(14, "Back", stash);
 		}
 		private function pickItemToPlaceInStorageA(page:int = 1):void {
-			
+
 		}
-		
+
 		private function pickItemToPlaceInStorage2(placeInStorageFunction:Function, typeAcceptableFunction:Function, text:String, showEmptyWarning:Boolean, page:int = 1):void {
 			var x:int;
 			clearOutput(); //Selects an item to place in a gear slot. Rewritten so that it no longer needs to use numbered events
@@ -1319,9 +1359,9 @@ use namespace CoC;
 			addButton(14, "Back", inventoryMenu);
 		}
 		private function pickItemToPlaceInStorage2A():void {
-			
+
 		}
-		
+
 		private function pickItemToPlaceInStorage3(placeInStorageFunction:Function, typeAcceptableFunction:Function, text:String, showEmptyWarning:Boolean, page:int = 1):void {
 			var x:int;
 			clearOutput(); //Selects an item to place in a gear slot. Rewritten so that it no longer needs to use numbered events
@@ -1351,109 +1391,109 @@ use namespace CoC;
 			addButton(14, "Back", warehouse);
 		}
 		private function pickItemToPlaceInStorage3A(page:int = 1):void {
-			
+
 		}
-		
+
 		private function placeInCampStorage(slotNum:int):void {
 			placeIn(itemStorage, 0, itemStorage.length, slotNum);
 			doNext(pickItemToPlaceInCampStorage);
 		}
-		
+
 		private function placeInBagOfCosmos(slotNum:int):void {
 			placeIn(gearStorage, 45, 57, slotNum);
 			doNext(pickItemToPlaceInBagOfCosmos);
 		}
-		
+
 		private function placeInSkyPoisonPearl1(slotNum:int):void {
 			placeIn(pearlStorage, 0, 14, slotNum);
 			doNext(pickItemToPlaceInSkyPoisonPearl1);
 		}
-		
+
 		private function placeInSkyPoisonPearl2(slotNum:int):void {
 			placeIn(pearlStorage, 14, 28, slotNum);
 			doNext(pickItemToPlaceInSkyPoisonPearl2);
 		}
-		
+
 		private function placeInSkyPoisonPearl3(slotNum:int):void {
 			placeIn(pearlStorage, 28, 42, slotNum);
 			doNext(pickItemToPlaceInSkyPoisonPearl3);
 		}
-		
+
 		private function placeInSkyPoisonPearl4(slotNum:int):void {
 			placeIn(pearlStorage, 42, 56, slotNum);
 			doNext(pickItemToPlaceInSkyPoisonPearl4);
 		}
-		
+
 		private function placeInSkyPoisonPearl5(slotNum:int):void {
 			placeIn(pearlStorage, 56, 70, slotNum);
 			doNext(pickItemToPlaceInSkyPoisonPearl5);
 		}
-		
+
 		private function placeInSkyPoisonPearl6(slotNum:int):void {
 			placeIn(pearlStorage, 70, 84, slotNum);
 			doNext(pickItemToPlaceInSkyPoisonPearl6);
 		}
-		
+
 		private function placeInSkyPoisonPearl7(slotNum:int):void {
 			placeIn(pearlStorage, 84, 98, slotNum);
 			doNext(pickItemToPlaceInSkyPoisonPearl7);
 		}
-		
+
 		private function placeInWarehouse1(slotNum:int):void {
 			placeIn(gearStorage, 57, 69, slotNum);
 			doNext(pickItemToPlaceInWarehouse1);
 		}
-		
+
 		private function placeInWarehouse2(slotNum:int):void {
 			placeIn(gearStorage, 78, 90, slotNum);
 			doNext(pickItemToPlaceInWarehouse2);
 		}
-		
+
 		private function placeInGranary(slotNum:int):void {
 			placeIn(gearStorage, 69, 78, slotNum);
 			doNext(pickItemToPlaceInGranary);
 		}
-		
+
 		private function placeInArmorRack2(slotNum:int):void {
 			placeIn(gearStorage, 9, 18, slotNum);
 			doNext(pickItemToPlaceInArmorRack2);
 		}
-		
+
 		private function placeInArmorRack(slotNum:int):void {
 			placeIn(gearStorage, 9, 18, slotNum);
 			doNext(pickItemToPlaceInArmorRack);
 		}
-		
+
 		private function placeInWeaponRack2(slotNum:int):void {
 			placeIn(gearStorage, 0, 9, slotNum);
 			doNext(pickItemToPlaceInWeaponRack2);
 		}
-		
+
 		private function placeInWeaponRack(slotNum:int):void {
 			placeIn(gearStorage, 0, 9, slotNum);
 			doNext(pickItemToPlaceInWeaponRack);
 		}
-		
+
 		private function placeInShieldRack2(slotNum:int):void {
 			placeIn(gearStorage, 36, 45, slotNum);
 			doNext(pickItemToPlaceInShieldRack2);
 		}
-		
+
 		private function placeInShieldRack(slotNum:int):void {
 			placeIn(gearStorage, 36, 45, slotNum);
 			doNext(pickItemToPlaceInShieldRack);
 		}
-		
+
 		private function placeInJewelryBox(slotNum:int):void {
 			placeIn(gearStorage, 18, 27, slotNum);
 			doNext(pickItemToPlaceInJewelryBox);
 		}
-		
+
 		private function placeInDresser(slotNum:int):void {
 			placeIn(gearStorage, 27, 36, slotNum);
 			doNext(pickItemToPlaceInDresser);
 		}
-		
+
 		private function placeIn(storage:Array, startSlot:int, endSlot:int, slotNum:int):void {
 			clearOutput();
 			var x:int;
