@@ -286,7 +286,7 @@ public class KitsuneScene extends BaseContent
 			doNext(createCallBackFunction2(nonTentaclePCMansion,willing));
 		}
 
-//NON-TENTACLE PC SCENES:
+		//NON-TENTACLE PC SCENES:
 		private function nonTentaclePCMansion(willing:Boolean):void
 		{
 			clearOutput();
@@ -296,16 +296,16 @@ public class KitsuneScene extends BaseContent
 			if (player.tentacleCocks() >= 3) {
 				doNext(tentacleKitsuneWingWangs);
 			}
-			if (player.isAlraune()) {
+			else if (player.isAlraune()) {
 				doNext(alrauneVSKitsune);
 			}
 			else {
-				if (player.hasCock())  doNext(createCallBackFunction(kitsuneMaleOrHermMansion,willing));
+				if (player.hasCock()) doNext(createCallBackFunction(kitsuneMaleOrHermMansion,willing));
 				else doNext(createCallBackFunction(kitsuneFemaleOrGenderless, willing));
 			}
 		}
 
-//Formerly maleOrHerm()
+		//Formerly maleOrHerm()
 		private function kitsuneMaleOrHermMansion(willing:Boolean):void
 		{
 			clearOutput();

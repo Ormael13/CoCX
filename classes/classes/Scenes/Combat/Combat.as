@@ -713,6 +713,32 @@ public class Combat extends BaseContent {
         }
     }
 
+    //ALCHEMY ZONE
+
+    public function Poultrice():void {
+
+    }
+
+    public function EnergyDrink():void {
+
+    }
+
+    public function Cure():void {
+
+    }
+
+    public function Painkiller():void {
+
+    }
+
+    public function Stimulant():void {
+
+    }
+
+    public function Perfume():void {
+
+    }
+
     public function soul1Drill():void {
         menu();
         if (player.statusEffectv1(StatusEffects.SoulDrill1) != 0) addButton(0, "0", soul1Drill00);
