@@ -1469,7 +1469,7 @@ public function loverZenjiGiveItemReductoTusks():void {
 public function loverZenjiGiveItemReductoNevermind():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
-	outputText("After a second thought, you decide that you don’t want to increase the size of anything personal to him. You put it away, stating that you’ve decided against it.\n\n");
+	outputText("After a second thought, you decide that you don’t want to decrease the size of anything personal to him. You put it away, stating that you’ve decided against it.\n\n");
 	outputText("Zenji nods respectfully.\n\n");
 	doNext(loverZenjiGiveItem);
 }

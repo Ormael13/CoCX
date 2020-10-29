@@ -130,9 +130,9 @@ package classes.Scenes
 			outputText("You can't loose by HP until reaching droping into negative health larger than 5% of max HP.\n");
 			outputText("-Chance to meet proc first Phylla event been increased and each one of them after first slowly growing up chance to proc.\n");
 			outputText("-Added classification to shields adding 'Large' and 'Massive' tags. Large shields lower evasion by 20% unless PC have perk Gigant's Grip. Massive ones lower it by 75% and with Gigant's Grip lowers by 30%. Shield bash dmg increased 2x for large and 5x for massive shields.\n");
-			outputText("-New shield (by Ormael): Spiked Light Shield - obtained by . Block 10, cost 750 gems. When using to block will reflect\n");
-			outputText("-New shield (by Ormael): Spiked Heavy Shield - obtained by . Base block 24, cost 1800 gems. Req. to have 60+ str to reach base block value. \n");
-			outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
+			outputText("-New shield (by Ormael): Spiked Light Shield - buyable at Yvonne shop (armor shop) in Tel'Adre. Block 10, cost 750 gems. When using to block will reflect\n");
+			outputText("-New shield (by Ormael): Spiked Heavy Shield - obtained by finding it at Battlefield while been lvl 24+. Base block 24, cost 1800 gems. Req. to have 60+ str to reach base block value. \n");
+			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			outputText("-Fire Breath form Fire Lord perk and Hellfire specials additional scalings based on int/wis or additional from wis. Both in the end should feel closer to power of other fire specials now.\n");
 			outputText("-Perk Ascension: Fortune now have max rank (30) and will follow other ascension perks limits on max rank per ascension. Perk Ascension: Wisodm have new max rank of 30. Both perks would now giving 20% of grems/exp more per rank instead of 10%.\n");
 			outputText("-Cost in ascension perk points to get ranks 6 to 15 of asc perks and ranks 16-30 have been increased.\n");
