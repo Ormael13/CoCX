@@ -143,9 +143,22 @@ public class StatUtils {
 	}
 	public static const PlainNumberStats:Object = Utils.createMapFromPairs([
 		// [StatNames.STR, 'Strength']
+		["str", "Strength"],
+		["tou", "Toughness"],
+		["spe", "Speed"],
+		["int", "Inteligence"],
+		["wis", "Wisdom"],
+		["lib", "Libido"],
+		["sens", "Sensitivity"]
 	]);
 	public static const PercentageStats:Object = Utils.createMapFromPairs([
 		// [StatNames.SPELLPOWER, 'Spellpower']
+		["str.mult", "Strength"],
+		["tou.mult", "Toughness"],
+		["spe.mult", "Speed"],
+		["int.mult", "Inteligence"],
+		["wis.mult", "Wisdom"],
+		["lib.mult", "Libido"],
 	]);
 }
 }

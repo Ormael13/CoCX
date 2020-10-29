@@ -841,7 +841,7 @@ public class Masturbation extends BaseContent {
 						//cumAmmount = int(cumAmmount);
 						//Calculate payout
 						if(cumAmmount > 10) {
-							payout += 2 + int(cumAmmount/20)*2;
+							payout += 2 + int(cumAmmount/100)*2;
 						}
 						//Reduce payout if it would push past
 						if (player.hasPerk(PerkLib.NukiNutsFinalForm)){
@@ -3678,7 +3678,7 @@ public class Masturbation extends BaseContent {
 					//cumAmmount = int(cumAmmount);
 					//Calculate payout
 					if(cumAmmount > 10) {
-						payout += 2 + int(cumAmmount/20)*2;
+						payout += 2 + int(cumAmmount/100)*2;
 					}
 					//Reduce payout if it would push past
 					if (player.hasPerk(PerkLib.NukiNutsFinalForm)){
@@ -3705,7 +3705,7 @@ public class Masturbation extends BaseContent {
 				//cumAmmount = int(cumAmmount);
 				//Calculate payout
 				if(cumAmmount > 10) {
-					payout += 2 + int(cumAmmount/20)*2;
+					payout += 2 + int(cumAmmount/100)*2;
 				}
 				//Reduce payout if it would push past
 				if (player.hasPerk(PerkLib.NukiNutsFinalForm)){

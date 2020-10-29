@@ -777,6 +777,10 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const ZenjiModificationsList:StatusEffectType = mk("Zenji Modifications List");
 		public static const ZenjiPreparationsList:StatusEffectType  = mk("Zenji Preparations List");
 		
+		//Alchemical buffs
+		public static const AlchIronweed:StatusEffectType       = mk("IronweedEffect");
+		public static const AlchBladeFerns:StatusEffectType     = mk("BladeFernsEffect");
+		public static const AlchAlrauneNectar:StatusEffectType     = mk("AlrauneNectarEffect");
 		// universal combat debuffs
 
 		public static const GenericCombatStrBuff:StatusEffectType  = CombatStrBuff.TYPE;
