@@ -33,30 +33,30 @@ import coc.view.MainView;
 
 	public class CharCreation extends BaseContent {
 		
-		public const MAX_TOLERANCE_LEVEL:int = 10;				//40 AP
-		public const MAX_MORALSHIFTER_LEVEL:int = 10;			//40 AP
-		public const MAX_DESIRES_LEVEL:int = 30;				//115 AP
-		public const MAX_ENDURANCE_LEVEL:int = 30;				//115 AP
-		public const MAX_HARDINESS_LEVEL:int = 30;				//115 AP
-		public const MAX_SOULPURITY_LEVEL:int = 30;				//115 AP
-		public const MAX_INNERPOWER_LEVEL:int = 30;				//115 AP
-		public const MAX_FURY_LEVEL:int = 30;					//115 AP
-		public const MAX_MYSTICALITY_LEVEL:int = 20;			//90 AP
-		public const MAX_SPIRITUALENLIGHTENMENT_LEVEL:int = 20;	//90 AP
-		public const MAX_WISDOM_LEVEL:int = 5;					//15 AP
-		public const MAX_TRANSHUMANISM_LEVEL:int = 30;			//115 AP
-		public const MAX_TRANSHUMANISM_STR_LEVEL:int = 30;		//115 AP
-		public const MAX_TRANSHUMANISM_TOU_LEVEL:int = 30;		//115 AP
-		public const MAX_TRANSHUMANISM_SPE_LEVEL:int = 30;		//115 AP
-		public const MAX_TRANSHUMANISM_INT_LEVEL:int = 30;		//115 AP
-		public const MAX_TRANSHUMANISM_WIS_LEVEL:int = 30;		//115 AP
-		public const MAX_TRANSHUMANISM_LIB_LEVEL:int = 30;		//115 AP
-		public const MAX_TRANSHUMANISM_SEN_LEVEL:int = 30;		//115 AP
-		public const MAX_FORTUNE_LEVEL:int = -1;				//No maximum level.(845)
-		public const MAX_VIRILITY_LEVEL:int = 10;				//40 AP
-		public const MAX_FERTILITY_LEVEL:int = 10;				//40 AP
-		public const MAX_MILK_FAUCET_LEVEL:int = 25;			//90 AP
-		public const MAX_CUM_HOSE_LEVEL:int = 25;				//90 AP
+		public const MAX_TOLERANCE_LEVEL:int = 10;
+		public const MAX_MORALSHIFTER_LEVEL:int = 10;
+		public const MAX_DESIRES_LEVEL:int = 30;
+		public const MAX_ENDURANCE_LEVEL:int = 30;
+		public const MAX_HARDINESS_LEVEL:int = 30;
+		public const MAX_SOULPURITY_LEVEL:int = 30;
+		public const MAX_INNERPOWER_LEVEL:int = 30;
+		public const MAX_FURY_LEVEL:int = 30;
+		public const MAX_MYSTICALITY_LEVEL:int = 20;
+		public const MAX_SPIRITUALENLIGHTENMENT_LEVEL:int = 20;
+		public const MAX_WISDOM_LEVEL:int = 30;
+		public const MAX_TRANSHUMANISM_LEVEL:int = 30;
+		public const MAX_TRANSHUMANISM_STR_LEVEL:int = 30;
+		public const MAX_TRANSHUMANISM_TOU_LEVEL:int = 30;
+		public const MAX_TRANSHUMANISM_SPE_LEVEL:int = 30;
+		public const MAX_TRANSHUMANISM_INT_LEVEL:int = 30;
+		public const MAX_TRANSHUMANISM_WIS_LEVEL:int = 30;
+		public const MAX_TRANSHUMANISM_LIB_LEVEL:int = 30;
+		public const MAX_TRANSHUMANISM_SEN_LEVEL:int = 30;
+		public const MAX_FORTUNE_LEVEL:int = 30;
+		public const MAX_VIRILITY_LEVEL:int = 10;
+		public const MAX_FERTILITY_LEVEL:int = 10;
+		public const MAX_MILK_FAUCET_LEVEL:int = 25;
+		public const MAX_CUM_HOSE_LEVEL:int = 25;
 		
 		private var specialCharacters:CharSpecial = new CharSpecial();
 		private var customPlayerProfile:Function;
@@ -1770,7 +1770,7 @@ import coc.view.MainView;
 			menu();
 			addButton(0, "Mysticality", ascensionPerkSelection, PerkLib.AscensionMysticality, MAX_MYSTICALITY_LEVEL, null, PerkLib.AscensionMysticality.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMysticality) + " / " + MAX_MYSTICALITY_LEVEL);
 			addButton(1, "S.Enlight.", ascensionPerkSelection, PerkLib.AscensionSpiritualEnlightenment, MAX_SPIRITUALENLIGHTENMENT_LEVEL, null, PerkLib.AscensionSpiritualEnlightenment.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionSpiritualEnlightenment) + " / " + MAX_SPIRITUALENLIGHTENMENT_LEVEL);
-			addButton(2, "Fortune", ascensionPerkSelection, PerkLib.AscensionFortune, MAX_FORTUNE_LEVEL, null, PerkLib.AscensionFortune.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFortune) + " (No maximum level)");
+			addButton(2, "Fortune", ascensionPerkSelection, PerkLib.AscensionFortune, MAX_FORTUNE_LEVEL, null, PerkLib.AscensionFortune.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFortune) + " / " + MAX_FORTUNE_LEVEL);
 			addButton(3, "Moral Shifter", ascensionPerkSelection, PerkLib.AscensionMoralShifter, MAX_MORALSHIFTER_LEVEL, null, PerkLib.AscensionMoralShifter.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMoralShifter) + " / " + MAX_MORALSHIFTER_LEVEL);
 			addButton(4, "Tolerance", ascensionPerkSelection, PerkLib.AscensionTolerance, MAX_TOLERANCE_LEVEL, null, PerkLib.AscensionTolerance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTolerance) + " / " + MAX_TOLERANCE_LEVEL);
 			addButton(5, "Fertility", ascensionPerkSelection, PerkLib.AscensionFertility, MAX_FERTILITY_LEVEL, null, PerkLib.AscensionFertility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFertility) + " / " + MAX_FERTILITY_LEVEL);
@@ -1816,27 +1816,46 @@ import coc.view.MainView;
 			return maxV;
 		}
 		
-		private function ascensionPerkSelection(perk:* = null, maxLevel:int = 10):void {
+		private function ascensionPerkSelection(perk:* = null, maxRank:int = 10):void {
 			clearOutput();
+			var maxRank:int = 5;
+			maxRank += maxRankValue();
 			outputText("Perk Effect: " + perk.longDesc);
-			outputText("\nCurrent level: " + player.perkv1(perk) + (maxLevel > 0 ? " / " + maxLevel : " (No maximum level)") + "");
-			if (player.perkv1(perk) >= maxLevel && maxLevel > 0) outputText(" <b>(Maximum)</b>");
+			outputText("\nCurrent level: " + player.perkv1(perk) + " / " + maxRank + "");
+			if (player.perkv1(perk) >= maxRank) outputText(" <b>(Maximum)</b>");
 			var cost:int = player.perkv1(perk) + 1;
-			if (cost > 5) cost = 5;
-			if (player.perkv1(perk) < maxLevel || maxLevel < 0) outputText("\nCost for next level: " + cost);
+			if (cost > 5) {
+				if (cost > 15) {
+					if (cost > 30) cost = 15;
+					else cost = Math.round((cost + 15) / 3);
+				}
+				else {
+					cost = Math.round((cost + 5) / 2);
+				}
+			}
+			if (player.perkv1(perk) < maxRank) outputText("\nCost for next level: " + cost);
 			else outputText("\nCost for next level: <b>N/A</b>");
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
-			if (player.ascensionPerkPoints >= cost && (player.perkv1(perk) < maxLevel || maxLevel < 0)) addButton(0, "Add 1 level", addAscensionPerk, perk, maxLevel);
+			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) < maxRank) addButton(0, "Add 1 level", addAscensionPerk, perk, maxRank);
+			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) == maxRank) addButtonDisabled(0, "Add 1 level", "You've reached max rank for this perk at current tier of ascension. To unlock higher ranks you need to ascend again.");
 			addButton(4, "Back", ascensionPerkMenu);
 		}
-		private function addAscensionPerk(perk:* = null, maxLevel:int = 10):void {
+		private function addAscensionPerk(perk:* = null, maxRank:int = 10):void {
 			var cost:int = player.perkv1(perk) + 1;
-			if (cost > 5) cost = 5;
+			if (cost > 5) {
+				if (cost > 15) {
+					if (cost > 30) cost = 15;
+					else cost = Math.round((cost + 15) / 3);
+				}
+				else {
+					cost = Math.round((cost + 5) / 2);
+				}
+			}
 			player.ascensionPerkPoints -= cost;
 			if (player.findPerk(perk) >= 0) player.addPerkValue(perk, 1, 1);
 			else player.createPerk(perk, 1, 0, 0, 0);
-			ascensionPerkSelection(perk, maxLevel);
+			ascensionPerkSelection(perk, maxRank);
 		}
 		private function ascensionPerkSelection2(perk:* = null, maxRank:int = 10):void {
 			clearOutput();
@@ -1846,7 +1865,15 @@ import coc.view.MainView;
 			outputText("\nCurrent level: " + player.perkv1(perk) + " / " + maxRank + "");
 			if (player.perkv1(perk) >= maxRank) outputText(" <b>(Maximum)</b>");
 			var cost:int = player.perkv1(perk) + 1;
-			if (cost > 5) cost = 5;
+			if (cost > 5) {
+				if (cost > 15) {
+					if (cost > 30) cost = 15;
+					else cost = Math.round((cost + 15) / 3);
+				}
+				else {
+					cost = Math.round((cost + 5) / 2);
+				}
+			}
 			if (player.perkv1(perk) < maxRank) outputText("\nCost for next level: " + cost);
 			else outputText("\nCost for next level: <b>N/A</b>");
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
@@ -1857,7 +1884,15 @@ import coc.view.MainView;
 		}
 		private function addAscensionPerk2(perk:* = null, maxRank:int = 10):void {
 			var cost:int = player.perkv1(perk) + 1;
-			if (cost > 5) cost = 5;
+			if (cost > 5) {
+				if (cost > 15) {
+					if (cost > 30) cost = 15;
+					else cost = Math.round((cost + 15) / 3);
+				}
+				else {
+					cost = Math.round((cost + 5) / 2);
+				}
+			}
 			player.ascensionPerkPoints -= cost;
 			if (player.findPerk(perk) >= 0) player.addPerkValue(perk, 1, 1);
 			else player.createPerk(perk, 1, 0, 0, 0);

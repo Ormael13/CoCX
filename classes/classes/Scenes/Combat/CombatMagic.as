@@ -290,6 +290,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.SagesKnowledge)) {
 			mod += player.perkv1(PerkLib.SagesKnowledge);
 		}
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);

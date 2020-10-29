@@ -2366,6 +2366,8 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		var damage:Number;
 		damage = int(player.level * 10 + 45 + rand(10));
+		damage += scalingBonusIntelligence() * 0.25;
+		damage += scalingBonusWisdom() * 0.25;
 		damage = calcInfernoMod(damage);
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		damage = Math.round(damage);
@@ -2484,7 +2486,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
 		fatigue(20, USEFATG_MAGIC_NOBM);
-		var damage:Number = (player.level * 8 + rand(10) + player.inte / 2 + player.cor / 5);
+		var damage:Number = (player.level * 8 + rand(10) + player.inte / 2 + player.wis / 2 + player.cor / 5);
 		damage = calcInfernoMod(damage);
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		//Amily!

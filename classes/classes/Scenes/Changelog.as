@@ -114,11 +114,12 @@ package classes.Scenes
 			outputText("-New codex entry added to the game: Trolls.\n");
 			outputText("-When exploring Bog PC can meet male troll. There is few possible options to end this encounter from paying gems to fight him. After that he would be repeatable encounter. First 4 enounters are conisdered part1 of his content and all after those part 2.\n");
 			outputText("-If picking to Hunt Him during post figt of part 1 it's posisble to fight him without him holding back. Winning would allow to take trophy for beating him (only if PC pick any other option to leave him). Trophy is worth 4k gems.\n");
-			outputText("-After reaching 100 score on his view of PC it open option to invite him to camp as Follower. And it would lock this option so even lowering this value to 0% will still give only option to bring him as follower.\n");
-			outputText("-When in camp as follower Zenji have following interaction options: Appearance, Training, Spar.\n");//, Talk, Sex and dealing with corrupted glades
-			outputText("-New event perk: Zenji's influence 1. Gained by training with Zenji 5+ times. Effects: Increases strength, toughness & speed cap by 25 (x NG tier).\n");
-			outputText("-New event perk: Zenji's influence 2. Gained by training with Zenji 15+ times. Effects: Increases maximum mana and fatigue by 10%.\n");
-			outputText("-New event perk: Zenji's influence 3. Gained by training with Zenji 30+ times. Effects: Increases strength, toughness, speed, wisdom & intelligence cap by 10%.\n");
+			outputText("-After reaching 100 score on his view of PC it open option to invite him to camp as Follower. And it would lock this option so even lowering this value to 0% will still give only option to bring him as follower. Opposite is possible too: reaching 100 and lock him in Lover path.\n");
+			outputText("-When in camp as follower Zenji have following interaction options: Appearance, Training, Spar, Talk, Sex and dealing with corrupted glades.\n");
+			outputText("-When in camp as follower Zenji have following interaction options: Appearance, Talk and dealing with corrupted glades.\n");
+			outputText("-New event perk: Zenji's influence 1. Gained by training with Zenji 5+ times. Effects: Increases maximum mana and fatigue by 10%.\n");
+			outputText("-New event perk: Zenji's influence 2. Gained by training with Zenji 15+ times. Effects: Reduces effect from curses by 40%.\n");
+			outputText("-New event perk: Zenji's influence 3. Gained by training with Zenji 30+ times. Effects: Reduces physical special cost by 20%. Increase physical special damage by 50% and spellpower by 30%.\n");
 			outputText("-Artemis and Wild Hunt accuracy penalty was removed and max atk value rised form 25 to 60. Cost of both bows rised due to that by 1000 gems.\n");
 			outputText("-Both Enlighted and Corrupted perks will be permable at the same time during ascension to prevent cases when one of them been permed was causing errors in getting all needed perks for 9 tail of balance perk. That would also mean PC must spend 10 not 5 asc points since it's perming 2 perks at once.\n");
 			outputText("-New ascension perks: Ascension: Transhumanism (Str/Tou/Spe/Int/Wis/Lib/Sen) - one for each core stat aside corruption. Each rank rise max cap of related stat by 40.\n");
@@ -128,8 +129,14 @@ package classes.Scenes
 			outputText("-New tier 6 misc lvl-up perk: Lizan Marrow (Final Form). Req. Lizan Marrow (Evolved) perk and lizan score 12+. Effect: Regenerates 1.5% of HP per round in combat and 3% of HP per hour. Additionaly your limit for innate self-regeneration rate increased. When below 25% of max HP regeneration provided by Lizan regeneration doubles. ");
 			outputText("You can't loose by HP until reaching droping into negative health larger than 5% of max HP.\n");
 			outputText("-Chance to meet proc first Phylla event been increased and each one of them after first slowly growing up chance to proc.\n");
-			outputText("-Added classification to shields adding 'Large' and 'Massive' tags. Large shields lower evasion by 20% unless PC have perk Gigant's Grip. Massive ones lower it by 50% and with Gigant's Grip lowers by 20%. Shield bash dmg increased 2x for large and 5x for massive shields.\n");
-			outputText("-\n");
+			outputText("-Added classification to shields adding 'Large' and 'Massive' tags. Large shields lower evasion by 20% unless PC have perk Gigant's Grip. Massive ones lower it by 75% and with Gigant's Grip lowers by 30%. Shield bash dmg increased 2x for large and 5x for massive shields.\n");
+			outputText("-New shield (by Ormael): Spiked Light Shield - obtained by . Block 10, cost 750 gems. When using to block will reflect\n");
+			outputText("-New shield (by Ormael): Spiked Heavy Shield - obtained by . Base block 24, cost 1800 gems. Req. to have 60+ str to reach base block value. \n");
+			outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
+			outputText("-Fire Breath form Fire Lord perk and Hellfire specials additional scalings based on int/wis or additional from wis. Both in the end should feel closer to power of other fire specials now.\n");
+			outputText("-Perk Ascension: Fortune now have max rank (30) and will follow other ascension perks limits on max rank per ascension. Perk Ascension: Wisodm have new max rank of 30. Both perks would now giving 20% of grems/exp more per rank instead of 10%.\n");
+			outputText("-Cost in ascension perk points to get ranks 6 to 15 of asc perks and ranks 16-30 have been increased.\n");
+			outputText("-New cinsumable (by Pyromania): Zenji's Hunt. Obtained once per day when tlaking with Zenji lover. Effect: Restores 25% of PC’s hp, 45 satiety.\n");
 			outputText("-All below changes was coded/added by Liadri and aimozg!!!\n");
 			outputText("-Strength Toughness Speed Inteligence Wisdom Sensitivity refactoring happened the stats are now calculated in a whole new way!\n");
 			outputText("-Great fairy TF Quest and ability have been added.\n");
@@ -161,10 +168,6 @@ package classes.Scenes
 			outputText("-Heart of the storm perk line for Thunderbird, Raiju, Kamaitachi\n");
 			outputText("-Thunderbird and Raiju have better max score\n");
 			outputText("-Added Weapon and Shield Sprites\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -2482,8 +2482,8 @@ public class PerkLib
 				"Allow to increase non-bow range weapons attack up to 200% (Intelligence-based).",
 				"You choose the 'Sharpshooter' perk, allowing to slightly increase non-bow range weapons attack.");
 		public static const ShieldCombat:PerkType = mk("Shield Combat", "Shield Combat",
-				"When you block an attack riposte with a shield bash damaging your opponent.",
-				"You choose the 'Shield Combat' perk, allowing to riposte with a shield bash when you block an attack.");
+				"When you block an attack riposte with a shield bash damaging your opponent. Also minimaly improve block chance.",
+				"You choose the 'Shield Combat' perk, allowing to riposte with a shield bash when you block an attack. Also minimaly improve block chance.");
 		public static const ShieldExpertise:PerkType = mk("Shield Expertise", "Shield Expertise",
 				"When you wearing a shield add quarter of block value to your armor (at least 1).",
 				"You choose the 'Shield Expertise' perk, allowing to increase you armor when using shield.");
@@ -3285,11 +3285,11 @@ public class PerkLib
 		public static const TransformationResistance:PerkType = mk("Transformation Resistance", "Transformation Resistance",
 				"Reduces the likelihood of undergoing a transformation. Disables Bad Ends from transformative items.");
 		public static const ZenjisInfluence1:PerkType = mk("Zenji's influence 1", "Zenji's influence 1",
-				"Increases strength, toughness & speed cap by 25 (x NG tier).");
-		public static const ZenjisInfluence2:PerkType = mk("Zenji's influence 2", "Zenji's influence 2",
 				"Increases maximum mana and fatigue by 10%.");
+		public static const ZenjisInfluence2:PerkType = mk("Zenji's influence 2", "Zenji's influence 2",
+				"Reduces effect from curses by 40%.");
 		public static const ZenjisInfluence3:PerkType = mk("Zenji's influence 3", "Zenji's influence 3",
-				"Increases strength, toughness, speed, wisdom & intelligence cap by 10%.");
+				"Reduces physical special cost by 20%. Increase physical special damage by 50% and spellpower by 30%.");
 
 		// Quest, Event & NPC perks
 		public static const AdvancedLeadership:PerkType = mk("Advanced Leadership", "Advanced Leadership",
@@ -5843,7 +5843,7 @@ public class PerkLib
                 return player.isGoblinoid()
             }, "Goblin race");
 			NukiNutsEvolved.requireLevel(12).requirePerk(NukiNuts).requireCustomFunction(function (player:Player):Boolean {
-				return player.raccoonScore() >= 8 && player.balls > 0 && player.ballSize > 5;
+				return player.raccoonScore() >= 10 && player.balls > 0 && player.ballSize > 5;
 			}, "Tanuki race and large balls");
 			OniMusculatureEvolved.requireLevel(12).requirePerk(OniMusculature).requireCustomFunction(function (player:Player):Boolean {
                 return player.tone >= 100;
@@ -6227,7 +6227,7 @@ public class PerkLib
                 return player.isGoblinoid()
             }, "Goblin race");
 			NukiNutsFinalForm.requireLevel(30).requirePerk(NukiNutsEvolved).requireCustomFunction(function (player:Player):Boolean {
-				return player.raccoonScore() >= 8 && player.balls > 0 && player.ballSize > 5;
+				return player.raccoonScore() >= 12 && player.balls > 0 && player.ballSize > 5;
 			}, "Tanuki race and large balls");
 			OniMusculatureFinalForm.requireLevel(30).requirePerk(OniMusculatureEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.tone >= 100;

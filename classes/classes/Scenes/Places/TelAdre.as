@@ -1085,7 +1085,7 @@ public function kaibaShopMainMenu2():void {
 	menu();
 	//Slot 1 Any one of the following: Undefeated King's Signet, Crown of the Undefeated King, Undefeated King's Destroyer
 	if (flags[kFLAGS.KAIBA_1] == 0) addButton(0, "UnDefKingS", buyItem, jewelries.UNDKINS).hint("Undefeated King's Signet - Increase max wrath by 100. When worn on right hand (slot 1 and 3 for rings) would have additional effects: increase max wrath by another 100 (with base bonus it's +200), generate 6/3 wrath per turn/hour, increase multiplied on Power Attack damage by 1.");
-	if (flags[kFLAGS.KAIBA_1] == 1) addButton(0, "CroUndefKing", buyItem, headjewelries.CUNDKIN).hint("Crown of the Undefeated King - You can't loose by HP until reaching droping into negative health larger than 5% of max HP + 500(scalable). When below 0 HP PC wouldn gain additional 1% of max HP per turn regeneration effect.");
+	if (flags[kFLAGS.KAIBA_1] == 1) addButton(0, "CroUndefKing", buyItem, headjewelries.CUNDKIN).hint("Crown of the Undefeated King - You can't loose by HP until reaching droping into negative health larger than 5% of max HP + 500(scalable). When below 0 HP PC would gain additional 1% of max HP per turn regeneration effect.");
 	if (flags[kFLAGS.KAIBA_1] == 2) addButton(0, "UnDefKingDest", buyItem, weapons.UDKDEST).hint("Undefeated King's Destroyer - Massive mace weapon that will increase PC parry chance by 20%. Have 20% base chance for stun (3 rounds).");
 	//Slot 2 Any one of the following: Flame Lizard ring, Infernal Mouse ring
 	if (flags[kFLAGS.KAIBA_2] == 0) addButton(1, "FlameLizR", buyItem, jewelries.FLLIRNG).hint("Flame Lizard ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
@@ -1098,8 +1098,7 @@ public function kaibaShopMainMenu2():void {
 	//Slot 5 Any one of the following: 
 	//if (flags[kFLAGS.KAIBA_5] == 0) 
 	
-	//addButton(5, "Necklace", buyItem, necklaces.CSNECK);
-	//addButton(6, "Necklace", buyItem, necklaces.CSNECK);
+	//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 	addButton(6, "T.M.Outfit", buyItem, armors.TRMOUTF).hint("Traveling Merchant Outfit -  Increase all gems gained by 100% and increase the potency of gem based ability by 150%, reduce spellcasting cost by 60%.");
 	addButton(7, "W.I.Cloak", buyItem, armors.WALIC).hint("Walpurgis Izalia Cloak -  Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
 	addButton(8, "B.Armor", buyItem, armors.BERA).hint("Berzerker Armor -  Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.");

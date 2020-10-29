@@ -12,7 +12,7 @@ package classes.Items.Shields
 	public class GreatShield extends Shield
 	{
 		
-		public function GreatShield() 
+		public function GreatShield()
 		{
 			super("GreatSh", "GreatShld", "greatshield", "a greatshield", 18, 900, "A large metal shield. \nReq 40 strength to fully use it potential.", "Large");
 		}

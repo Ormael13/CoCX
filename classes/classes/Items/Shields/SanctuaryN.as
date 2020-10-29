@@ -11,7 +11,7 @@ package classes.Items.Shields
 	public class SanctuaryN extends Shield
 	{
 		
-		public function SanctuaryN() 
+		public function SanctuaryN()
 		{
 			super("SanctN", "Sanctuary", "Sanctuary", "a Sanctuary", 21, 1050, "The legendary shield", "Large");
 		}

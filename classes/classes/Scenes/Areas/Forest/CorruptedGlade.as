@@ -13,11 +13,13 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 1 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) { //Extinct if you destroyed 100 Corrupted Glades.
 				if (flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] > 0 && rand(6) == 0) flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]++;
 				if (flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] > 0 && rand(4) == 0) flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]++;
+				if (flags[kFLAGS.ZENJI_DESTROYING_CORRUPTED_GLADES] > 0 && rand(2) == 0) flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]++;
 				if (model.time.days % 3 == 0 && model.time.hours > 23) flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]--; //Decrement by 1 every 3 days.
 			}
 			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] >= 100) { //Extinct state
 				if (flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] > 0) flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] = 0;
 				if (flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] > 0) flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] = 0;
+				if (flags[kFLAGS.ZENJI_DESTROYING_CORRUPTED_GLADES] > 0) flags[kFLAGS.ZENJI_DESTROYING_CORRUPTED_GLADES] = 0;
 			}
 			return false;
 		}

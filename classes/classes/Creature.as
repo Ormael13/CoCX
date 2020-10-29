@@ -3367,6 +3367,7 @@ public class Creature extends Utils
 
 		// <mod name="Predator arms" author="Stadler76">
 		public function claws():String { return clawsPart.descriptionFull(); }
+		public function finger():String { return clawsPart.descriptionFinger(); }
 		// </mod>
 
 		public function legs():String { return lowerBodyPart.legs(); }
@@ -4109,8 +4110,8 @@ public class Creature extends Utils
 			if (hasStatusEffect(StatusEffects.Displacement)) chance += 60;
 			if (game.player.shieldPerk == "Large" && findPerk(PerkLib.GigantGrip) < 0) chance -= 20;
 			if (game.player.shieldPerk == "Massive") {
-				if (findPerk(PerkLib.GigantGrip) < 0) chance -= 50;
-				else chance -= 20;
+				if (findPerk(PerkLib.GigantGrip) < 0) chance -= 75;
+				else chance -= 30;
 			}
 			if (hasStatusEffect(StatusEffects.Flying)) chance += flychance;
 			return chance;

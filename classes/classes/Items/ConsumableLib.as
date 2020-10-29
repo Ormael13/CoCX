@@ -109,6 +109,7 @@ public final class ConsumableLib extends BaseContent
 		public const TRAILMX:SimpleConsumable = mk("TrailMx", "Trail Mix", "a pack of trail mix", 20, "This mix of nuts, dried fruits and berries is lightweight, easy to store and very nutritious.", m.trailMix);
 		public const URTACUM:SimpleConsumable = mk("UrtaCum", "UrtaCum", "a sealed bottle of Urta's cum", 15, "This bottle of Urta's cum looks thick and viscous.  It's quite delicious.", m.urtaCum);
 		public const W_PDDNG:SimpleConsumable = mk("W.Pddng", "W.Pudding", "a slice of winter pudding", 35, "A slice of delicious Winter Pudding.  It smells delicious. \n\nNote: Eating this might cause antlers to grow from your head.", m.winterPudding);
+		public const ZENJI_H:SimpleConsumable = mk("Zenji H", "ZenjiHunt", "a Zenji's Hunt", 30, "Presumably the seared meat of a smaller creature, a gift from your loving troll.", m.zenjiHunt);
 
 		//GROWERS/SHRINKERS
 		public const REDUCTO:Consumable = new Reducto();

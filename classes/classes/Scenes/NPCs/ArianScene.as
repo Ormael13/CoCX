@@ -365,44 +365,66 @@ public function visitAriansHouse():void {
 		else
 			outputText(images.showImage("arianmale-tent"));
 		outputText("You approach the enchanted tent and slip easily inside the doors to the luxurious interior.  ");
-		var temp:int = rand(10);
-		if(temp == 0) {
-			outputText("However, Arian isn't here right now, so you instead make yourself comfortable on the couch.  After a few minutes, Arian [Arian emself] walks in through the entrance.  \"<i>Oh, [name].  I wasn't aware you were here... have you been waiting for long?</i>\" [Arian ey] asks.  You tell [Arian em] not very long.  \"<i>That's good to hear.  So, what can I do for you?</i>\" [Arian ey] asks, with a smile.");
+		if ((flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) && rand(100) < 15) {
+			outputText("As you approach Arian’s tent and enter you overhear the sounds of a bed squeaking coming from [Arian eir] room. You pause for a moment, is Arian jerking off?\n\n");
+			outputText("No, it’s way too noisy and a little too violent for the small lizan. As you get closer to eavesdrop you can hear faint growling… it sounds like Zenji. You never would’ve expected this from Zenji, but apparently he’s managed to subdue Arian. Given the sounds of the moaning, Arian is enjoying [Arian emself] perhaps a little too much.\n\n");
+			outputText("\"<i>Ah… Z-Zenji…</i>\" Arian mutters through pleasured groans.\n\n");
+			outputText("Zenji seemingly only gives a low growl in response.\n\n");
+			outputText("You sigh and wait on Arian’s couch, they’ll finish eventually and Arian will really hear it from you.\n\n");
+			outputText("After a few minutes and several loud moans from the two of them, their pace begins to slow down.\n\n");
+			outputText("Arian emerges from the room after several more minutes pass, flustered with Zenji standing coyly behind him.\n\n");
+			outputText("Arian notices you and blushes, [Arian eir] entire body practically turns red as Zenji casually leaves the tent after giving Arian a kiss on the cheek.\n\n");
+			outputText("You sigh and ask Arian if it was worth it.\n\n");
+			outputText("\"<i>Do you really want me to answer that?</i>\" Arian replies sheepishly.\n\n");
+			outputText("You shake your head. What a horny archmage [Arian ey]’s become, and [Arian ey] deserves some punishment.\n\n");
+			outputText("Arian looks at you with hints of fear in [Arian eir] eyes.You pull [Arian em] down onto your lap, lifting up [Arian eir] robes, revealing [Arian eir] petite behind. You raise [Arian eir] tail up with your free hand, holding it up and leaving [Arian em] unable to defend himself before giving it a firm and swift spank.\n\n");
+			outputText("Arian squeals as you do so. You’re not surprised that [Arian ey]’s enjoying it, but you’re having fun at [Arian eir] expense anyway.\n\n");
+			outputText("After several more spanks [Arian eir] behind is left red from the heat as [Arian ey] kneels on the couch, [Arian eir] ass was pounded too hard from both you and Zenji for [Arian em] to be able to sit properly for quite some time now.\n\n");
+			outputText("You ask if [Arian ey]’s learned his lesson yet. Arian seems even more flustered before giving you a sheepish nod.\n\n");
+			outputText("You decide to leave him for now, he’ll need some time to recover from the entire ordeal.\n\n");
+			doNext(camp.campLoversMenu);
+			return;
 		}
-		else if(temp == 1) {
-			outputText("Inside, the lizan is sitting at a table, fastidiously drinking from a cup of something hot while pouring over an arcane-looking text.  You politely cough to draw [Arian eir] attention and [Arian ey] looks at you, smiling.  \"<i>Hello, [name].  I was just catching up on my studies.  Can I offer you a cup of tea, or maybe something else?</i>\" [Arian ey] asks.");
-		}
-		else if(temp <= 2) {
-			outputText("The lizan is currently busy tinkering with some occult-looking paraphernalia when you find [Arian em].  You politely cough to attract [Arian eir] attention, then do so again when [Arian ey] fails to heed that.  It's only on the third attempt that [Arian ey] looks up apologetically from [Arian eir] work.  \"<i>Ah, [name]; I'm sorry, but I was preoccupied with something.</i>\" [Arian ey] states in an apologetic tone, indicating the mess on [Arian eir] desk.  \"<i>Was there something you wanted?</i>\" [Arian ey] asks.");
-		}
-		else if(temp <= 4) {
-			outputText("The smell of fresh cooking fills the air and you can see Arian happily sitting down at his couch with a plate of something just cooked.  \"<i>Oh, [name]; I was just about to eat, can I offer you a dish?  Or if you'd rather do something else, this can wait,</i>\" the lizan tells you with a smile.");
-		}
-		else if(temp <= 6) {
-			outputText("You don't have to look far to find Arian; [Arian ey]'s currently curled up and asleep on the couch.  As you contemplate whether or not to wake [Arian em], [Arian ey] suddenly stirs and uncoils himself, stretching and yawning hugely in a way that lets you see every last needle-like tooth in [Arian eir] mouth.  [Arian ey] then sees you and gives you a smile. \"<i>Ah, [name]; I was just having a little nap.  Something on your mind?</i>\"");
-		}
-		else if(temp <= 8) {
-			outputText("A strange smell hits your nose as you enter the tent; it takes you a few moments, but then you place it, your ears pricking as you hear Arian letting out some very familiar groans of release.  With a smirk, you sneak up and lean over the couch, looking right into the eyes of Arian, [Arian eir] fingers still glistening with ");
-			if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) {
-				if(flags[kFLAGS.ARIAN_VAGINA] > 0) outputText("mixed sexual fluids");
-				else outputText("jizz");
+		else {
+			var temp:int = rand(10);
+			if(temp == 0) {
+				outputText("However, Arian isn't here right now, so you instead make yourself comfortable on the couch.  After a few minutes, Arian [Arian emself] walks in through the entrance.  \"<i>Oh, [name].  I wasn't aware you were here... have you been waiting for long?</i>\" [Arian ey] asks.  You tell [Arian em] not very long.  \"<i>That's good to hear.  So, what can I do for you?</i>\" [Arian ey] asks, with a smile.");
 			}
-			else outputText("femjizz");
-			outputText(" and, indeed, still hovering over [Arian eir] ");
-			if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) {
-				if(flags[kFLAGS.ARIAN_VAGINA] > 0) outputText("twin sexual slits");
-				else {
-					outputText("cock");
-					if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("s");
+			else if(temp == 1) {
+				outputText("Inside, the lizan is sitting at a table, fastidiously drinking from a cup of something hot while pouring over an arcane-looking text.  You politely cough to draw [Arian eir] attention and [Arian ey] looks at you, smiling.  \"<i>Hello, [name].  I was just catching up on my studies.  Can I offer you a cup of tea, or maybe something else?</i>\" [Arian ey] asks.");
+			}
+			else if(temp <= 2) {
+				outputText("The lizan is currently busy tinkering with some occult-looking paraphernalia when you find [Arian em].  You politely cough to attract [Arian eir] attention, then do so again when [Arian ey] fails to heed that.  It's only on the third attempt that [Arian ey] looks up apologetically from [Arian eir] work.  \"<i>Ah, [name]; I'm sorry, but I was preoccupied with something.</i>\" [Arian ey] states in an apologetic tone, indicating the mess on [Arian eir] desk.  \"<i>Was there something you wanted?</i>\" [Arian ey] asks.");
+			}
+			else if(temp <= 4) {
+				outputText("The smell of fresh cooking fills the air and you can see Arian happily sitting down at his couch with a plate of something just cooked.  \"<i>Oh, [name]; I was just about to eat, can I offer you a dish?  Or if you'd rather do something else, this can wait,</i>\" the lizan tells you with a smile.");
+			}
+			else if(temp <= 6) {
+				outputText("You don't have to look far to find Arian; [Arian ey]'s currently curled up and asleep on the couch.  As you contemplate whether or not to wake [Arian em], [Arian ey] suddenly stirs and uncoils himself, stretching and yawning hugely in a way that lets you see every last needle-like tooth in [Arian eir] mouth.  [Arian ey] then sees you and gives you a smile. \"<i>Ah, [name]; I was just having a little nap.  Something on your mind?</i>\"");
+			}
+			else if(temp <= 8) {
+				outputText("A strange smell hits your nose as you enter the tent; it takes you a few moments, but then you place it, your ears pricking as you hear Arian letting out some very familiar groans of release.  With a smirk, you sneak up and lean over the couch, looking right into the eyes of Arian, [Arian eir] fingers still glistening with ");
+				if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) {
+					if(flags[kFLAGS.ARIAN_VAGINA] > 0) outputText("mixed sexual fluids");
+					else outputText("jizz");
 				}
+				else outputText("femjizz");
+				outputText(" and, indeed, still hovering over [Arian eir] ");
+				if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) {
+					if(flags[kFLAGS.ARIAN_VAGINA] > 0) outputText("twin sexual slits");
+					else {
+						outputText("cock");
+						if(flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText("s");
+					}
+				}
+				else outputText("pussy");
+				outputText(".  For a long moment, [Arian ey] just stares back at you; if lizans could blush, you're certain [Arian ey]'d be red as a beet.  \"<i>[name]! I was- I was just....  Oh, this is embarrassing,</i>\" [Arian ey] mutters, looking at [Arian eir] feet.");
+				
+				outputText("\n\nYou flash the flustered lizan a knowing smile, telling [Arian em] not to worry; there is nothing you haven't seen before under [Arian eir] robes.  Arian shivers in a way that just speaks volumes about [Arian eir] embarrassment.  You ask if, perhaps, [Arian ey] would like you to step outside while [Arian ey] makes [Arian emself] decent?  Not that you mind the sight....");
+				outputText("\n\n\"<i>P-please.</i>\" Arian stammers, still unable to meet your gaze.  You gently tap [Arian em] on the nose and move outside.  A short while later you hear [Arian em] yell, \"<i>C-come in!</i>\"");
+				outputText("\n\nYou can't wipe the smirk off your face, as you return and see that Arian is, indeed, decent and there doesn't seem to be any trace of the mess [Arian ey]'s made earlier.  You walk up to the, still flustered, lizan and tell [Arian em] that if [Arian ey]'s feeling edgy, you'd be happy to help [Arian em] deal with it.");
+				outputText("\n\n\"<i>Th-that's all right....  So, um, you wanted something, [name]?</i>\" [Arian Ey] asks, desperately trying to change the topic.");
 			}
-			else outputText("pussy");
-			outputText(".  For a long moment, [Arian ey] just stares back at you; if lizans could blush, you're certain [Arian ey]'d be red as a beet.  \"<i>[name]! I was- I was just....  Oh, this is embarrassing,</i>\" [Arian ey] mutters, looking at [Arian eir] feet.");
-			
-			outputText("\n\nYou flash the flustered lizan a knowing smile, telling [Arian em] not to worry; there is nothing you haven't seen before under [Arian eir] robes.  Arian shivers in a way that just speaks volumes about [Arian eir] embarrassment.  You ask if, perhaps, [Arian ey] would like you to step outside while [Arian ey] makes [Arian emself] decent?  Not that you mind the sight....");
-			outputText("\n\n\"<i>P-please.</i>\" Arian stammers, still unable to meet your gaze.  You gently tap [Arian em] on the nose and move outside.  A short while later you hear [Arian em] yell, \"<i>C-come in!</i>\"");
-			outputText("\n\nYou can't wipe the smirk off your face, as you return and see that Arian is, indeed, decent and there doesn't seem to be any trace of the mess [Arian ey]'s made earlier.  You walk up to the, still flustered, lizan and tell [Arian em] that if [Arian ey]'s feeling edgy, you'd be happy to help [Arian em] deal with it.");
-			outputText("\n\n\"<i>Th-that's all right....  So, um, you wanted something, [name]?</i>\" [Arian Ey] asks, desperately trying to change the topic.");
 		}
 		arianHomeMenu();
 	}

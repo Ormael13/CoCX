@@ -72,6 +72,7 @@ public function HaveABoysBath():void {
 		if (camp.maleNpcsHotBathCount() > 1) outputText(", much to everyone's annoyance");
 		outputText(". You wish he would just relax and share his tales later.\n\n");
 	}
+	if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) outputText("Zenji rests in the hot spring, his short fur carried by the bubbling water.\n\n");
 	if (emberScene.followerEmber() && flags[kFLAGS.EMBER_GENDER] == 1) outputText("Ember’s body and maleness could easily give all the other boys an inferiority complex.\n\n");
 	if (camp.loversHotBathCount() > 0) {
 		outputText("You discuss your goals with the other guys when a girl's voice ring out from outside the spring.\n\n");

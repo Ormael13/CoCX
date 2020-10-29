@@ -95,6 +95,8 @@ public class Combat extends BaseContent {
     public function physicalCost(mod:Number):Number {
         var costPercent:Number = 100;
         if (player.hasPerk(PerkLib.IronMan)) costPercent -= 50;
+        if (player.hasPerk(PerkLib.ZenjisInfluence3)) costPercent -= 20;
+		if (costPercent < 10) costPercent = 10; 
         mod *= costPercent / 100;
         return mod;
     }
@@ -103,6 +105,7 @@ public class Combat extends BaseContent {
         var costPercent:Number = 100;
         if (player.hasPerk(PerkLib.BowShooting)) costPercent -= player.perkv1(PerkLib.BowShooting);
         //if(player.hasPerk(PerkLib.)) costPercent -= x0; ((tu umieścić perk dający zmniejszenie % kosztu użycia łuku jak IronMan dla fiz specjali ^^))
+        if (costPercent < 10) costPercent = 10; 
         mod *= costPercent / 100;
         return mod;
     }
@@ -4449,7 +4452,8 @@ public class Combat extends BaseContent {
                         if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
                         if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
                         if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
-                        if (player.armor == armors.SPKIMO) damage *= 1.2;
+                        if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+						if (player.armor == armors.SPKIMO) damage *= 1.2;
                         if (player.necklace == necklaces.OBNECK) damage *= 1.2;
                         if (player.hasPerk(PerkLib.GoblinoidBlood)) {
                             if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
@@ -4475,7 +4479,8 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
                 if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
                 if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
-                if (player.armor == armors.SPKIMO) damage *= 1.2;
+                if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+				if (player.armor == armors.SPKIMO) damage *= 1.2;
                 if (player.necklace == necklaces.OBNECK) damage *= 1.2;
                 if (player.hasPerk(PerkLib.GoblinoidBlood)) {
                     if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
@@ -4576,6 +4581,38 @@ public class Combat extends BaseContent {
 
     public function WeaponRangeStatusProcs():void {
 
+    }
+	
+	public function ShieldsStatusProcs():void {
+		var bleed:Boolean = false;
+        var bleedChance:int = 0;
+		//50% bleed chance
+        if (player.shield == shields.SPIL_SH || player.shield == shields.SPIH_SH || player.shield == shields.SPIM_SH) bleedChance += 50;
+		if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType)) bleedChance = 0;
+        if (rand(100) < bleedChance) bleed = true;
+		if (bleed) {
+			if (monster.hasStatusEffect(StatusEffects.HemorrhageShield)) monster.addStatusValue(StatusEffects.HemorrhageShield, 1, 2);
+			else monster.createStatusEffect(StatusEffects.HemorrhageShield, 2, 0.01, 0, 0);
+            if (player.shield == shields.SPIH_SH) monster.addStatusValue(StatusEffects.HemorrhageShield, 2, 0.01);
+            if (player.shield == shields.SPIM_SH) monster.addStatusValue(StatusEffects.HemorrhageShield, 2, 0.04);
+			if (monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your [shield] leave behind.");
+            else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your [shield] leave behind.");
+		}
+	}
+
+    public function ArmorStatusProcs():void {
+		var bleed:Boolean = false;
+        var bleedChance:int = 0;
+		//xx% bleed chance
+        
+		if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType)) bleedChance = 0;
+        if (rand(100) < bleedChance) bleed = true;
+		if (bleed) {
+			if (monster.hasStatusEffect(StatusEffects.HemorrhageArmor)) monster.addStatusValue(StatusEffects.HemorrhageArmor, 1, 2);
+			else monster.createStatusEffect(StatusEffects.HemorrhageArmor, 2, 0.01, 0, 0);
+			if (monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your [armor] leave behind.");
+            else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your [armor] leave behind.");
+		}
     }
 
     public function WrathWeaponsProc():void {
@@ -5766,7 +5803,7 @@ public class Combat extends BaseContent {
             if (monster.lust >= monster.maxLust()) monster.gems += bonusGems3;
         }
         if (player.hasPerk(PerkLib.AscensionFortune)) {
-            monster.gems *= 1 + (player.perkv1(PerkLib.AscensionFortune) * 0.1);
+            monster.gems *= 1 + (player.perkv1(PerkLib.AscensionFortune) * 0.2);
             monster.gems = Math.round(monster.gems);
         }
         if (player.hasPerk(PerkLib.Greedy)){
@@ -8157,7 +8194,8 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
             if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
             if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
-            if (player.armor == armors.SPKIMO) damage *= 1.2;
+            if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+			if (player.armor == armors.SPKIMO) damage *= 1.2;
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
@@ -8250,7 +8288,8 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
             if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
             if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
-            if (player.armor == armors.SPKIMO) damage *= 1.2;
+            if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+			if (player.armor == armors.SPKIMO) damage *= 1.2;
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
@@ -8301,7 +8340,8 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
             if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
             if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
-            if (player.armor == armors.SPKIMO) damage *= 1.2;
+            if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+			if (player.armor == armors.SPKIMO) damage *= 1.2;
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
@@ -8361,7 +8401,8 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
             if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
             if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
-            if (player.armor == armors.SPKIMO) damage *= 1.2;
+            if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+			if (player.armor == armors.SPKIMO) damage *= 1.2;
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
