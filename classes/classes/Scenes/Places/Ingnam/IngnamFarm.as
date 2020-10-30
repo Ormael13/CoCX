@@ -62,10 +62,12 @@ public class IngnamFarm extends BaseContent
 			if (player.str < (40 + (5 * player.newGamePlusMod())) && rand(2) == 0) {
 				outputText("\n\nYou feel a bit stronger from all the hard work you've done.");
 				dynStats("str", 1);
+				player.trainStat("str", 1, 25);
 			}
 			if (player.tou < (40 + (5 * player.newGamePlusMod())) && rand(2) == 0) {
 				outputText("\n\nYour efforts have helped to improve your stamina.");
 				dynStats("tou", 1);
+				player.trainStat("tou", 1, 25);
 			}
 			if (player.findPerk(PerkLib.HistorySlacker) >= 0 || player.findPerk(PerkLib.PastLifeSlacker) >= 0) fatigue(-5);
 			outputText("\n\nYou walk back to Ingnam.");
