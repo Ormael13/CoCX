@@ -1994,28 +1994,28 @@ public class Camp extends NPCAwareContent {
 		clearOutput();
 		outputText("You move to Rathazul’s side alchemy equipment. Using these tools you can process raw natural materials into poultices and medicines. What would you like to craft? THIS IS WIP");
 		//Poultrice
-		addButton(0, "Poultrice", HerbalismCraftItem,CoC.instance.consumables.HEALHERB, "healing herb", "poultrice").hint("Craft a Poultrice using healing herb.\nHealing herbs currently owned "+player.itemCount(CoC.instance.consumables.HEALHERB)+"")
-				.disableIf(player.itemCount(CoC.instance.consumables.HEALHERB) == 0, "You lack the ingrediants to craft this item.\nHealing herbs currently owned "+player.itemCount(CoC.instance.consumables.HEALHERB)+"");
+		addButton(0, "Poultrice", HerbalismCraftItem,CoC.instance.consumables.HEALHERB, "healing herb", "poultrice").hint("Craft a Poultrice using healing herb.\n\nHealing herbs currently owned "+player.itemCount(CoC.instance.consumables.HEALHERB)+"")
+				.disableIf(player.itemCount(CoC.instance.consumables.HEALHERB) == 0, "You lack the ingrediants to craft this item.\n\nHealing herbs currently owned "+player.itemCount(CoC.instance.consumables.HEALHERB)+"");
 		//Energy drink
-		addButton(1, "Energy drink", HerbalismCraftItem,CoC.instance.consumables.MOONGRASS, "moon grass", "energy drink").hint("Craft a Energy drink using moon grass.\nMoon grass currently owned "+player.itemCount(CoC.instance.consumables.MOONGRASS)+"");
-		if (player.herbalismLevel >= 3) button(1).disable("You lack the skill to craft this item.\nRequire Herbalism level 3");
-		if (player.itemCount(CoC.instance.consumables.MOONGRASS) == 0) button(1).disable("You lack the ingrediants to craft this item. \nMoon grass currently owned "+player.itemCount(CoC.instance.consumables.MOONGRASS)+"");
+		addButton(1, "Energy drink", HerbalismCraftItem,CoC.instance.consumables.MOONGRASS, "moon grass", "energy drink").hint("Craft a Energy drink using moon grass.\n\nMoon grass currently owned "+player.itemCount(CoC.instance.consumables.MOONGRASS)+"");
+		if (player.herbalismLevel >= 3) button(1).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 3");
+		if (player.itemCount(CoC.instance.consumables.MOONGRASS) == 0) button(1).disable("You lack the ingrediants to craft this item. \n\nMoon grass currently owned "+player.itemCount(CoC.instance.consumables.MOONGRASS)+"");
 		//Cure
-		addButton(2, "Cure", HerbalismCraftItem,CoC.instance.consumables.SNAKEBANE, "snakebane flower", "cure").hint("Craft a Cure using snakebane flower.\nSnakebane flower currently owned "+player.itemCount(CoC.instance.consumables.SNAKEBANE)+"");
-		if (player.herbalismLevel >= 5) button(2).disable("You lack the skill to craft this item.\nRequire Herbalism level 5");
-		if (player.itemCount(CoC.instance.consumables.SNAKEBANE) == 0) button(2).disable("You lack the ingrediants to craft this item. \nSnakebane flower currently owned "+player.itemCount(CoC.instance.consumables.SNAKEBANE)+"");
+		addButton(2, "Cure", HerbalismCraftItem,CoC.instance.consumables.SNAKEBANE, "snakebane flower", "cure").hint("Craft a Cure using snakebane flower.\n\nSnakebane flower currently owned "+player.itemCount(CoC.instance.consumables.SNAKEBANE)+"");
+		if (player.herbalismLevel >= 5) button(2).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 5");
+		if (player.itemCount(CoC.instance.consumables.SNAKEBANE) == 0) button(2).disable("You lack the ingrediants to craft this item. \n\nSnakebane flower currently owned "+player.itemCount(CoC.instance.consumables.SNAKEBANE)+"");
 		//Painkiller
-		addButton(3, "Painkiller", HerbalismCraftItem,CoC.instance.consumables.IRONWEED, "ironweed", "painkiller").hint("Craft a Painkiller using ironweed.\nIronweed currently owned "+player.itemCount(CoC.instance.consumables.IRONWEED)+"");
-		if (player.herbalismLevel >= 10) button(3).disable("You lack the skill to craft this item.\nRequire Herbalism level 10");
-		if (player.itemCount(CoC.instance.consumables.IRONWEED) == 0) button(3).disable("You lack the ingrediants to craft this item. \nIronweed currently owned "+player.itemCount(CoC.instance.consumables.IRONWEED)+"");
+		addButton(3, "Painkiller", HerbalismCraftItem,CoC.instance.consumables.IRONWEED, "ironweed", "painkiller").hint("Craft a Painkiller using ironweed.\n\nIronweed currently owned "+player.itemCount(CoC.instance.consumables.IRONWEED)+"");
+		if (player.herbalismLevel >= 10) button(3).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 10");
+		if (player.itemCount(CoC.instance.consumables.IRONWEED) == 0) button(3).disable("You lack the ingrediants to craft this item. \n\nIronweed currently owned "+player.itemCount(CoC.instance.consumables.IRONWEED)+"");
 		//Stimulant
-		addButton(4, "Stimulant", HerbalismCraftItem,CoC.instance.consumables.HEALHERB, "blade ferns", "stimulant").hint("Craft a Stimulant using a handfull of blade ferns.\nBlade ferns currently owned "+player.itemCount(CoC.instance.consumables.BLADEFERN)+"");
-		if (player.herbalismLevel >= 10) button(4).disable("You lack the skill to craft this item.\nRequire Herbalism level 10");
-		if (player.itemCount(CoC.instance.consumables.BLADEFERN) == 0) button(4).disable("You lack the ingrediants to craft this item. \nBlade ferns currently owned "+player.itemCount(CoC.instance.consumables.BLADEFERN)+"");
+		addButton(4, "Stimulant", HerbalismCraftItem,CoC.instance.consumables.HEALHERB, "blade ferns", "stimulant").hint("Craft a Stimulant using a handfull of blade ferns.\n\nBlade ferns currently owned "+player.itemCount(CoC.instance.consumables.BLADEFERN)+"");
+		if (player.herbalismLevel >= 10) button(4).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 10");
+		if (player.itemCount(CoC.instance.consumables.BLADEFERN) == 0) button(4).disable("You lack the ingrediants to craft this item. \n\nBlade ferns currently owned "+player.itemCount(CoC.instance.consumables.BLADEFERN)+"");
 		//Perfume
-		addButton(5, "Perfume", HerbalismCraftItem,CoC.instance.consumables.RAUNENECT, "alraune nectar", "perfume").hint("Craft a Perfume using Alraune nectar.\nAlraune nectar currently owned "+player.itemCount(CoC.instance.consumables.RAUNENECT)+"");
-		if (player.herbalismLevel >= 10) button(5).disable("You lack the skill to craft this item.\nRequire Herbalism level 10");
-		if (player.itemCount(CoC.instance.consumables.RAUNENECT) == 0) button(5).disable("You lack the ingrediants to craft this item. \nAlraune nectar currently owned "+player.itemCount(CoC.instance.consumables.RAUNENECT)+"");
+		addButton(5, "Perfume", HerbalismCraftItem,CoC.instance.consumables.RAUNENECT, "alraune nectar", "perfume").hint("Craft a Perfume using Alraune nectar.\n\nAlraune nectar currently owned "+player.itemCount(CoC.instance.consumables.RAUNENECT)+"");
+		if (player.herbalismLevel >= 10) button(5).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 10");
+		if (player.itemCount(CoC.instance.consumables.RAUNENECT) == 0) button(5).disable("You lack the ingrediants to craft this item. \n\nAlraune nectar currently owned "+player.itemCount(CoC.instance.consumables.RAUNENECT)+"");
 		addButton(14, "Back", campActions);
 	}
 
