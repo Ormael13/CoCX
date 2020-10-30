@@ -64,7 +64,7 @@ package classes.Items
 		public const HSWORDS:HookSwords = new HookSwords();
 		public const JRAPIER:JeweledRapier = new JeweledRapier();
 		public const KARMTOU:WeaponWithPerk = new WeaponWithPerk("KarmTou", "KarmicTouch", "karmic gloves", "a pair of karmic gloves", "punch", 0, 400, "A pair of gauntlets, made in shining steel and snow-white cloth. Their touch brings waste into the wicked’s flesh, punishing them in the form of blows more painful then should be.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.5, 0, 0, 0);
-		public const KATANA :Weapon = new Weapon("Katana ","Katana","katana","a katana","keen cut",17,680,"A curved bladed weapon that cuts through flesh with the greatest of ease.", "Large");
+		public const KATANA :Weapon = new Weapon("Katana ","Katana","katana","a katana","keen cut",17,680,"A curved bladed weapon that cuts through flesh with the greatest of ease.");
 		public const KIHAAXE:Weapon = new Weapon("KihaAxe","Greataxe","fiery double-bladed axe","a fiery double-bladed axe","fiery cleave",22,880,"This large, double-bladed axe matches Kiha's axe. It's constantly flaming.", "Large");
 		public const L__AXE :LargeAxe = new LargeAxe();
 		public const L_CLAWS:Weapon = new Weapon("L.Claws","LustyClaws","gauntlet with an aphrodisiac-coated claws","a gauntlet with an aphrodisiac-coated claws","rend",0,200,"Those metal gauntlets have tips of the fingers shaped like natural claws.  They seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.");
