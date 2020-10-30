@@ -1845,7 +1845,7 @@ public class PerkLib
 				"You choose the 'Limit Breaker: Heart (1st stage)' perk, breaking your limits for 'heart' for the first time. (+5% max Lust and Fatigue)");
 		public static const LimitBreakerPsyche1stStage:PerkType = mk("Limit Breaker: Psyche (1st stage)", "Limit Breaker: Psyche (1st stage)",
 				"Breaking your limits for 'psyche' for the first time grants you +10 to max Int, Wis, Lib, Sens (scalable).",
-				"You choose the 'Limit Breaker: Psyche (1st stage)' perk, breaking your limits for 'psyche' for the first time. (+10 to max Int, Wis, Lib (scalable) and +10 to Sens)").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'sens':10});
+				"You choose the 'Limit Breaker: Psyche (1st stage)' perk, breaking your limits for 'psyche' for the first time. (+10 to max Int, Wis, Lib (scalable) and +10 to Sens)").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10});
 		public static const LimitBreakerSoul1stStage:PerkType = mk("Limit Breaker: Soul (1st stage)", "Limit Breaker: Soul (1st stage)",
 				"Breaking your limits for 'soul' for the first time grants you +5% max Mana and Soulforce.",
 				"You choose the 'Limit Breaker: Soul (1st stage)' perk, breaking your limits for 'soul' for the first time. (+5% max Mana and Soulforce)");
@@ -1860,7 +1860,7 @@ public class PerkLib
 				"You choose the 'Limit Breaker: Heart (2nd stage)' perk, breaking your limits for 'heart' for the second time. (+10% max Lust and Fatigue)");
 		public static const LimitBreakerPsyche2ndStage:PerkType = mk("Limit Breaker: Psyche (2nd stage)", "Limit Breaker: Psyche (2nd stage)",
 				"Breaking your limits for 'psyche' for the second time grants you +20 to max Int, Wis, Lib, Sens (scalable).",
-				"You choose the 'Limit Breaker: Psyche (2nd stage)' perk, breaking your limits for 'psyche' for the second time. (+20 to max Int, Wis, Lib (scalable) and +20 to Sens)").withBuffs({'int.mult':0.20,'wis.mult':0.20,'lib.mult':0.20,'sens':20});
+				"You choose the 'Limit Breaker: Psyche (2nd stage)' perk, breaking your limits for 'psyche' for the second time. (+20 to max Int, Wis, Lib (scalable) and +20 to Sens)").withBuffs({'int.mult':0.20,'wis.mult':0.20,'lib.mult':0.20});
 		public static const LimitBreakerSoul2ndStage:PerkType = mk("Limit Breaker: Soul (2nd stage)", "Limit Breaker: Soul (2nd stage)",
 				"Breaking your limits for 'soul' for the second time grants you +10% max Mana and Soulforce.",
 				"You choose the 'Limit Breaker: Soul (2nd stage)' perk, breaking your limits for 'soul' for the second time. (+10% max Mana and Soulforce)");
@@ -3118,7 +3118,7 @@ public class PerkLib
 				"Increase strength modifier on unarmed attack by 100%.");
 		public static const BimboBody:PerkType = mk("Bimbo Body", "Bimbo Body",
 				"Gives the body of a bimbo.  Tits will never stay below a 'DD' cup, libido is raised, lust resistance is raised, and upgrades tease.")
-				.withBuffs({'lib.mult':0.50,'sens':+45});
+				.withBuffs({'lib.mult':0.50,'sens':45});
 		public static const BimboBrains:PerkType = mk("Bimbo Brains", "Bimbo Brains",
 				"Now that you've drank bimbo liquer, you'll never, like, have the attention span and intelligence you once did!  But it's okay, 'cause you get to be so horny an' stuff!").withBuffs({'int.mult':-0.50});
 		public static const BouncyBody:PerkType = mk("Bouncy body", "Bouncy body",
@@ -3196,7 +3196,7 @@ public class PerkLib
 				"It's super hard to think about stuff that like, isn't working out or fucking!").withBuffs({'int.mult':-0.50});
 		public static const FutaForm:PerkType = mk("Futa Form", "Futa Form",
 				"Ensures that your body fits the Futa look (Tits DD+, Dick 8\"+, & Pussy).  Also keeps your lusts burning bright and improves the tease skill.")
-				.withBuffs({'lib.mult':0.50,'sens':+45});
+				.withBuffs({'lib.mult':0.50,'sens':45});
 		public static const GeneticMemory:PerkType = mk("Genetic Memory", "Genetic Memory",
 				"Your body can remember almost any transformation it undergone.");
 		public static const Ghostslinger:PerkType = mk("Ghost-slinger", "Ghost-slinger",
