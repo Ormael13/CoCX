@@ -3,6 +3,7 @@ package classes
 import classes.StatusEffects.Combat.*;
 import classes.StatusEffects.CombatStatusEffect;
 import classes.StatusEffects.HeatEffect;
+import classes.StatusEffects.RutEffect;
 import classes.StatusEffects.VampireThirstEffect;
 
 /**
@@ -24,7 +25,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const UnlockedLightningTattoed:StatusEffectType	 = mk("Unlocked Lightning Tattoed");
 		public static const UnlockedScarTattoed:StatusEffectType		 = mk("Unlocked Scar Tattoed");
 		public static const UnlockedFishGills:StatusEffectType			 = mk("Unlocked Fish Gills");//10 (for line 25)
-		
+
 		public static const UnlockedHumanLowerBody:StatusEffectType 	= mk("Unlocked Human Lower Body");//11 (for line 27)
 		public static const UnlockedHumanSkin:StatusEffectType 			= mk("Unlocked Human Skin");
 		public static const UnlockedHumanArms:StatusEffectType 			= mk("Unlocked Human Arms");
@@ -40,7 +41,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const UnlockedHumanNoWings:StatusEffectType 		= mk("Unlocked Human No Wings");
 		public static const UnlockedHumanNoTail:StatusEffectType 		= mk("Unlocked Human No Tail");
 		public static const UnlockedHumanNoRearBody:StatusEffectType 	= mk("Unlocked Human No Rear Body");//25 (for line 41)
-		
+
 		public static const UnlockedFoxLowerBody:StatusEffectType        = mk("Unlocked Fox Lower Body");//26 (for line 43)
 		public static const UnlockedFoxArms:StatusEffectType             = mk("Unlocked Fox Arms");
 		public static const UnlockedFoxEars:StatusEffectType             = mk("Unlocked Fox Ears");
@@ -242,7 +243,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const IntWisCounter2:StatusEffectType                 = mk("Int Wis Counter 2");
 		public static const LibSensCounter1:StatusEffectType                = mk("Lib Sens Counter 1");
 		public static const LibSensCounter2:StatusEffectType                = mk("Lib Sens Counter 2");
-	
+
 		// Non-combat player perks
 		public static const AchievementsNormalShadowTotal:StatusEffectType  = mk("Achievements (Normal / Shadow / Total)");
 		public static const AdvancingCamp:StatusEffectType                 	= mk("AdvancingCamp");
@@ -507,7 +508,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const ResourceNode1:StatusEffectType                  = mk("Resource Node 1");
 		public static const RiverDungeonA:StatusEffectType          		= mk("River Dungeon A");
 		public static const RiverDungeonFloorRewards:StatusEffectType       = mk("River Dungeon Floor Rewards");
-		public static const Rut:StatusEffectType                            = mk("rut");
+		public static const Rut:StatusEffectType                            = RutEffect.TYPE;
 		public static const SaiyanNumber1a:StatusEffectType          		= mk("Saiyan Number 1a");//NPC status in-game (friend, lover, etc.) / LVL-UP counter value / Training time left for next lvl-up / Wrath multi
 		public static const SaiyanNumber1b:StatusEffectType          		= mk("Saiyan Number 1b");//Str multi / Spe multi / Tou multi / Wis multi
 		public static const SaiyanNumber1c:StatusEffectType          		= mk("Saiyan Number 1c");//Int multi / Lib multi / Sens multi / HP multi
@@ -615,7 +616,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const YukiOnnaKimono:StatusEffectType                 = mk("Yuki Onna Kimono");
 		public static const ZenjiTrainingsCounters1:StatusEffectType        = mk("Zenji Trainings Counters 1");
 		public static const ZenjiTrainingsCounters2:StatusEffectType        = mk("Zenji Trainings Counters 2");
-		
+
 		//Old status plots. DEPRECATED, DO NOT USE. Currently cannot be removed without breaking existing saves.
 		public static const DungeonShutDown:StatusEffectType         = mk("DungeonShutDown");
 		public static const FactoryOmnibusDefeated:StatusEffectType  = mk("FactoryOmnibusDefeated");
@@ -628,7 +629,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const MaraesQuestStart:StatusEffectType        = mk("Marae's Quest Start");
 		public static const MetCorruptMarae:StatusEffectType         = mk("Met Corrupt Marae");
 		public static const MetMarae:StatusEffectType                = mk("Met Marae");
-		
+
 		//Prisoner status effects.
 		public static const PrisonCaptorEllyStatus:StatusEffectType  = mk("prisonCaptorEllyStatus");
 		public static const PrisonCaptorEllyQuest:StatusEffectType   = mk("prisonCaptorEllyQuest");
@@ -637,8 +638,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const PrisonCaptorEllyScruffy:StatusEffectType = mk("prisonCaptorEllyScruffy");
 		public static const PrisonRestraints:StatusEffectType        = mk("prisonRestraint");
 		public static const PrisonCaptorEllyScratch:StatusEffectType = mk("prisonCaptorEllyScatch");
-		
-		
+
+
 		public static const DianaOff:StatusEffectType            = mk("Diana Off");
 		public static const DivaOff:StatusEffectType             = mk("Diva Off");
 		public static const ElectraOff:StatusEffectType          = mk("Electra Off");
@@ -776,7 +777,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const YamataCanon:StatusEffectType 			= mk("Yamata Foxfire Canon");
 		public static const ZenjiModificationsList:StatusEffectType = mk("Zenji Modifications List");
 		public static const ZenjiPreparationsList:StatusEffectType  = mk("Zenji Preparations List");
-		
+
 		//Alchemical buffs
 		public static const AlchIronweed:StatusEffectType       = mk("IronweedEffect");
 		public static const AlchBladeFerns:StatusEffectType     = mk("BladeFernsEffect");
@@ -1030,7 +1031,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownTerror:StatusEffectType              		= mkCombat("Cooldown Terror");
 		public static const CooldownWhitefireBeamCannon:StatusEffectType 		= mkCombat("Cooldown Whitefire Beam Cannon");
 		public static const CooldownWingBuffet:StatusEffectType          		= mkCombat("Cooldown Wing Buffet");
-		
+
 		public static const RemovedArmor:StatusEffectType          = mkCombat("Removed Armor");
 		public static const JCLustLevel:StatusEffectType           = mkCombat("JC Lust Level");
 		public static const MirroredAttack:StatusEffectType        = mkCombat("Mirrored Attack");

@@ -3200,7 +3200,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("\n<font color=\"#0000a0\">Salamander: " + player.salamanderScore() + " (+");
 			outputText("" + (25 * (1 + player.newGamePlusMod())) + " max Str, +" + (25 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + "max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		} else if (player.salamanderScore() >= 4) {
-			outputText("\n<font color=\"#0000a0\">Salamander: " + player.salamanderScore() + " (+");
+			outputText("\n<font color=\"#0000a0\">Half Salamander: " + player.salamanderScore() + " (+");
 			outputText("" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (15 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + "max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		} else if (player.salamanderScore() >= 1) outputText("\n<font color=\"#008000\">Half Salamander: " + player.salamanderScore() + "</font>");
 		else if (player.salamanderScore() < 1) outputText("\n<font color=\"#ff0000\">Half Salamander: 0</font>");

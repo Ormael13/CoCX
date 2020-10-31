@@ -28,11 +28,11 @@ import classes.lists.BreastCup;
 
 public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//Handles all timeChange events for the player. Needed because player is not unique.
-		
+
 		public function PlayerEvents():void {
 			EventParser.timeAwareClassAdd(this);
 		}
-		
+
 		private var campUniqueScene:UniqueCampScenes = new UniqueCampScenes();
 		private var campScenes:CampScenes = new CampScenes();
 		private var checkedTurkey:int; //Make sure we test each of these events just once in timeChangeLarge
@@ -45,7 +45,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			var needNext:Boolean = false;
 			checkedTurkey = 0;
 			checkedDream = 0;
-			
+
 			if (player.cumMultiplier > 19999) player.cumMultiplier = 19999;
 			if (player.ballSize > 400) player.ballSize = 400;
 			var maxSlots:int = inventory.getMaxSlots();
@@ -278,7 +278,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.removeStatusEffect(StatusEffects.WormPlugged);
 					player.knockUpForce(); //Clear worm 'pregnancy'
 				}
-			}				
+			}
 			if (player.hasStatusEffect(StatusEffects.Milked)) { //"Milked"
 				player.addStatusValue(StatusEffects.Milked, 1, -1);
 				if (player.statusEffectv1(StatusEffects.Milked) <= 0) {
@@ -437,7 +437,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.hasKeyItem("Ruby Heart") >= 0) { //Regain slime core
 				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && player.findPerk(PerkLib.SlimeCore) < 0 && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.skinAdj == "slimy" && player.skinDesc == "skin" && player.lowerBody == LowerBody.GOO) {
 					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
-					
+
 					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
 					//(Reduces Fluid Addiction to a 24 hour intake requirement).
 					outputText("(<b>Gained New Perk: Slime Core - Moisture craving builds at a greatly reduced rate.</b>\n)");
@@ -852,27 +852,33 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 				//Player overheat is intensifying
 				if (player.statusEffectv1(StatusEffects.Overheat) == 1) {
-					if (player.hasCock() || (player.gender == 3 && rand(2) == 0)){
+					var intensified:Boolean
+					if (player.isMale() || (player.gender == 3 && rand(2) == 0)){
+						intensified = player.inRut;
 						if (player.goIntoRut(false)) {
-							outputText("\nYour cock aches for a wet snatch to cool itself in. It would seem your burning body has gone into rut.\n");
-							player.statStore.addBuffObject({sen:2}, "Overheat",{text:"Overheat"});
-						} else {
-							outputText("\nYour cock aches for a wet snatch to cool itself in.T Thankfully your rut cannot get any worse then it is now\n");
-							player.statStore.addBuffObject({sen:2}, "Overheat",{text:"Overheat"});
+							if (intensified) {
+								outputText("\nYour cock aches for a wet snatch to cool itself in. It would seem your burning body has gone into rut.\n");
+								player.statStore.addBuffObject({sens:2}, "Overheat",{text:"Overheat"});
+							} else {
+								outputText("\nYour cock aches for a wet snatch to cool itself in. <b>It seems you have went into rut!</b>\n");
+								player.statStore.addBuffObject({sens:2}, "Overheat",{text:"Overheat"});
+							}
 						}
 					} else if (player.hasVagina()){
-						var intensified:Boolean = player.inHeat;
+						intensified = player.inHeat;
 						if (player.goIntoHeat(false)) {
 							if (intensified) {
 								outputText("\nThe hot throbbing in you intensify as your burning body aches for sex. It's difficult NOT to think about a cock slipping inside your moist fuck-tunnel as you realy could use some form of cooling for your furnace.\n");
-								player.statStore.addBuffObject({sen:2}, "Overheat",{text:"Overheat"});
+								player.statStore.addBuffObject({sens:2}, "Overheat",{text:"Overheat"});
 							} else {
-								outputText("\nThe hot throbbing in you intensify as your burning body aches for sex. Thankfully your heat cannot get any worse then it is now\n");
+								outputText("\nThe hot throbbing in you intensify as your burning body aches for sex. <b>It seems you have went into heat!</b>\n");
+								player.statStore.addBuffObject({sens:2}, "Overheat",{text:"Overheat"});
 							}
 						}
 					}
 					needNext = true;
 				}
+
 				//Player overheat is progressing toward active
 				if (player.statusEffectv1(StatusEffects.Overheat) == 0 && player.statusEffectv2(StatusEffects.Overheat) > 0) {
 					player.addStatusValue(StatusEffects.Overheat, 2, -1);
@@ -1085,7 +1091,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						outputText("Sensing that you're hungry as indicated by your growling stomach, the armor-goo stuffs some blue goo into your mouth. You swallow the goo and it makes its way into your stomach. You also can feel some goo being absorbed into your " + player.skinFurScales() + ".");
 						player.hunger = 20;
 					}
-					if (player.hunger < 20) player.hunger = 20; 
+					if (player.hunger < 20) player.hunger = 20;
 				}
 				if (player.hunger > player.maxHunger()) player.hunger = player.maxHunger();
 			}
@@ -2445,13 +2451,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					//happens at first sleep after hitting stage 3 unfertilized
 					//To Wong Foo, Thanks for Everything, Julie Newmar
 					outputText("\nYou sit atop your favorite flower, enjoying the smell of verdure and the sounds of the forest.  The sun is shining brightly and it feels wonderful on your chitin.  Your wings twitch happily in the soft breeze, and it feels good to be alive and doing the colony's work... the only sour note is your heavy, bloated abdomen, so full of unfertilized eggs that it droops, so full it strains your back and pinches your nerves.  Still, it's too nice a day to let that depress you, and you take up your customary song, humming tunelessly but mellifluously as you wait for passers-by.");
-					
+
 					outputText("\n\nYour antennae.type bob - was that someone?  Peering between the trees from the corner of your eye, you can see the figure of another person, and you intensify your hypnotic buzz, trying to draw it closer.  The figure steps into your clearing and out of the shadow; clad in [armor], " + player.mf("he","she") + " is yourself!  Confused, you stop humming and stare into your own face, and the other you takes the opportunity to open " + player.mf("his","her") + " garments, exposing " + player.mf("his","her") + " [cock]!");
-					
+
 					outputText("\n\nStartled, you slip down from your seat and try to run, but the other you has already crossed the clearing and seizes you by the fuzz on your hefty, swollen abdomen; your leg slips, propelling you face-first to the ground.  " + player.mf("He","She") + " pulls you back toward " + player.mf("his","her") + "self and, grabbing one of your chitinous legs, turns you over.  The other you spreads your fuzzed thighs, revealing your soft, wet pussy, and the sweet smell of honey hits your noses.  " + player.mf("His","Her") + " prick hardens intensely and immediately at the aroma of your pheromone-laden nectar, and " + player.mf("he","she") + " pushes it into you without so much as a word of apology, groaning as " + player.mf("he","she") + " begins to rut you mercilessly.  You can feel the sensations of " + player.mf("his","her") + " burning cock as if it were your own, and your legs wrap around your other self instinctively even as your mind recoils in confusion.");
-					
+
 					outputText("\n\nThe other you grunts and locks up as " + player.mf("his","her") + "... your [cock] begins to spurt inside your honey-drooling cunt, and " + player.mf("he","she") + " falls onto you, bottoming out inside; your vagina likewise clenches and squirts your sweet juices.  As " + player.mf("he","she") + " ejaculates, thrusting weakly, you can feel something shifting in you, filling you with pins and needles... it feels like the warm cum " + player.mf("he","she") + "'s filling you with is permeating your entire groin, working its way back toward your abdomen.  It edges up to your massive buildup of eggs, and your body tightens in a second climax at the thought of having your children fertilized-");
-					
+
 					outputText("\n\nYou snap awake, sitting bolt upright.  What in the name of... your [cocks] is softening rapidly, and as you shift, you can feel your cum sloshing in your [armor].  For fuck's sake.");
 					if (player.cumQ() >= 1000) outputText("  It's completely soaked your bedroll, too... you won't be sleeping on this again until you wash it out.  Grumbling, you roll the soggy, white-stained fabric up and stow it.");
 					outputText("  The sensation of wetness inside your own clothes torments you as you try to return to sleep, driving up your lust and making you half-hard once again... the rumbling of eggs in your abdomen, as if they're ready to be laid, doesn't help either.");
@@ -2471,7 +2477,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText(".  It's not long until you feel ");
 					if (player.hasVagina()) outputText("her pussy clenching around you as you orgasm explosively inside, followed by ");
 					outputText("the sensation of warm wetness in your own vagina.  Your prisoner groans as " + player.mf("his","her") + " cock twitches and spasms inside you, spraying your insides with seed; warm, delicious, sticky seed for your eggs.  You can feel it drawing closer to your unfertilized clutch, and as the gooey heat pushes toward them, your head swims, and you finally look into your prey's [face]...");
-					
+
 					outputText("\n\nYour eyes flutter open.  What a strange dream... aw, dammit.  You can feel your [armor] rubbing against your crotch, sodden with cum.  ");
 					if (player.cumQ() > 1000) outputText("It's all over your bedroll, too...");
 					outputText("  Turning over and trying to find a dry spot, you attempt to return to sleep... the wet pressure against your crotch doesn't make it easy, nor do the rumbles in your abdomen, and you're already partway erect by the time you drift off into another erotic dream.  Another traveler passes under you, and you prepare to jump at her; your ovipositor peeks out eagerly and a bead of slime drips from it, running just ahead of the first fertilized egg you'll push into your poor victim...");
@@ -2489,7 +2495,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText(".  It's not long until you feel ");
 					if (player.hasVagina()) outputText("her pussy clenching around you as you orgasm explosively inside, followed by ");
 					outputText("the sensation of warm wetness in your own vagina.  Your prisoner groans as " + player.mf("his","her") + " cock twitches and spasms inside you, spraying your insides with seed; warm, delicious, sticky seed for your eggs.  You can feel it drawing closer to your unfertilized clutch, and as the gooey heat pushes toward them, your head swims, and you finally look into your prey's [face]...");
-					
+
 					outputText("\n\nYour eyes flutter open.  What a strange dream... aw, dammit.  You can feel your [armor] rubbing against your crotch, sodden with cum.  ");
 					if (player.cumQ() > 1000) outputText("It's all over your bedroll, too...");
 					outputText("  Turning over and trying to find a dry spot, you attempt to return to sleep... the wet pressure against your crotch doesn't make it easy, nor do the rumbles in your abdomen, and you're already partway erect by the time you drift off into another erotic dream.  Another traveler passes under you, and you prepare to snare her with your web; your ovipositor peeks out eagerly and a bead of slime drips from it, running just ahead of the first fertilized egg you'll push into your poor victim...");
