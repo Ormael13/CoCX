@@ -725,13 +725,13 @@ public class Combat extends BaseContent {
     public function Poultice():void {
         var power:Number = CalcAlchemyPower();
         HPChange(power,false);
-        outputText("You consumed a potion! power of"+power+"");
+        outputText("You apply the poultice, your wounds closing at high speed. "+power+"");
     }
 
     public function EnergyDrink():void {
         var power:Number = CalcAlchemyPower();
         fatigue(-power);
-        outputText("You consumed a potion! power of"+power+"");
+        outputText("You chug off on your energy drink, feeling rejuvenated with newfound magical energy and stamina. "+power+"");
     }
 
     public function Cure():void {
@@ -741,7 +741,7 @@ public class Combat extends BaseContent {
         player.removeStatusEffect(StatusEffects.FrostburnDoT);
         player.removeStatusEffect(StatusEffects.FrozenLung);
         player.removeStatusEffect(StatusEffects.Hemorrhage);
-        outputText("You consumed a potion!");
+        outputText("You drink up the cure, feeling relieved as your status ailments are cleansed.");
     }
 
     public function Painkiller():void {
@@ -749,7 +749,7 @@ public class Combat extends BaseContent {
         var duration:Number = Math.round(power/5);
         //strenght then Duration in hours
         player.createStatusEffect(StatusEffects.ArmorPotion,power,duration,0,0);
-        outputText("You consumed a potion! power of"+power+"");
+        outputText("You drink up the medicine, feeling any lingering pain recede as your skin hardens like stone. "+power+" "+duration+"");
     }
 
     public function Stimulant():void {
@@ -757,7 +757,7 @@ public class Combat extends BaseContent {
         var duration:Number = Math.round(power/5);
         //strenght then Duration in hours
         player.createStatusEffect(StatusEffects.AttackPotion,power,duration,0,0);
-        outputText("You consumed a potion! power of"+power+"");
+        outputText("You drink up the medicine, feeling stronger and more agile already. "+power+" "+duration+"");
     }
 
     public function Perfume():void {
@@ -765,7 +765,7 @@ public class Combat extends BaseContent {
         var duration:Number = Math.round(power/5);
         //strenght then Duration in hours
         player.createStatusEffect(StatusEffects.ArousalPotion,power,duration,0,0);
-        outputText("You consumed a potion!");
+        outputText("You grab your bottle of Alraune perfume and spray yourself knowingly. Your opponent is going to have issues resisting your charms now. "+power+" "+duration+"");
     }
 
     public function soul1Drill():void {
