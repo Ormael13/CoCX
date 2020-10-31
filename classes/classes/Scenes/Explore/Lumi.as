@@ -66,15 +66,13 @@ public class Lumi extends BaseContent {
             [consumables.KANGAFT,consumables.MGHTYVG],
             [consumables.L_DRAFT,consumables.F_DRAFT],
             [consumables.LABOVA_,consumables.PROBOVA],
-            //[consumables.OVIELIX,consumables.OVIMAX_],
-            [consumables.SDELITE,consumables.S_DREAM],
+            [consumables.GOB_ALE,consumables.GRE_BER],
             [consumables.PIGTRUF,consumables.BOARTRU],
             [consumables.PURHONY,consumables.SPHONEY],
             [consumables.REDVIAL,consumables.VAMPBLD],
             [consumables.C_VEMOM,consumables.P_VEMOM],
 			[consumables.BLACKIN,consumables.ABYSSIN],
             [consumables.ECTOPLS,consumables.PROTPLS],
-            [consumables.C_VEMOM,consumables.P_VEMOM]
         ];
         if(justCheck){
             for each(var improvable:Array in improvables){
@@ -237,7 +235,7 @@ public class Lumi extends BaseContent {
 		outputText("\"<i>Ah, go fegures. True genius is dyin thase days. Sure, I make sex toys and poetions but I think the true arft still is in a functional goblin mech!</i>\"\n\n");
 		outputText("A goblin mech?\n\n");
 		outputText("\"<i>I often forget fome people especially non goblin don’t exactly know what a mech is…basically it’s a sort ov combat confraption a goblin can drive. I have an alpha version jast right dere");
-		if (player.goblinScore() >= 10) {
+		if (player.isGoblinoid()) {
 			outputText("if you have da gems fer it.</i>\"\n\n");
 			outputText("She points at what looks like a goblin sized seat mounted on a weird six legged contraption.\n\n");
 			outputText("\"<i>It can ba customised in dozens of ways if yer smart enough and have da time fer it. Fer only 500 gem it’s yours... Interested?</i>\"\n\n");
@@ -274,7 +272,7 @@ public class Lumi extends BaseContent {
 		outputText("You inquire on the goblin mech.\n\n");
 		outputText("\"<i>Oh ya came back on your decision? Sure I still have it in the backroom. 500 gems as before.</i>\"\n\n");
 		menu();
-		if (player.goblinScore() >= 10) addButton(1, "Yes", lumiGarageYes);
+		if (player.isGoblinoid()) addButton(1, "Yes", lumiGarageYes);
 		else addButtonDisabled(1, "Yes", "You still not enough goblin to get this beauty. Money can't buy everything, ok?");
 		addButton(3, "No", lumiGarageNo);
 	}
@@ -1049,7 +1047,7 @@ public class Lumi extends BaseContent {
 	}
 	
 	public function lumiWorkshop():void {
-		if (player.goblinScore() >= 10) {
+		if (player.isGoblinoid()) {
 			clearOutput();
 			if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
 				outputText("You reply that you're here to perform some tinkering of your own.\n\n");
@@ -1162,11 +1160,11 @@ public class Lumi extends BaseContent {
 		if (player.hasKeyItem("Blueprint - Taser with an overcharged battery") >= 0 && player.hasKeyItem("Taser") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.ENECORE, 5) && player.hasItem(useables.MECHANI, 2)) addButton(1, "Tazer O.B.", lumiWorkshopTaserOverchargeBattery).hint("Taser with an overcharged battery - Increases the Taser’s effectiveness and paralysis duration. - 100+ int, Tazer, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core and 8 hours of work");
 		if (player.hasKeyItem("Blueprint - Taser") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300 && player.hasItem(useables.ENECORE, 1) && player.hasItem(useables.MECHANI, 1)) addButton(1, "Tazer", lumiWorkshopTaser).hint("Tazer - Adds an Tazer option to your mech. - 75+ int, Toolbelt, 10 metal pieces, 300 nails, 1 mechanism, 1 energy core and 8 hours of work");
 		if (player.hasKeyItem("Blueprint - Safety bubble") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 1 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) addButton(2, "Safety bubble", lumiWorkshopSafetyBubble).hint("Safety bubble - Allows you to use the mech underwater. Too fragile for standard combat use but provide fresh air. - 1 metal pieces, 100 nails, 1 energy core and 4 hours of work.");
-		if (player.hasKeyItem("Blueprint - Machine Gun MK3") >= 0 && player.hasKeyItem("Machine Gun MK2") >= 0 && player.inte >= 125 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.MECHANI, 10)) addButton(3, "Machine Gun MK3", lumiWorkshopMachineGunMK3).hint("Machine Gun MK3 - Increase range attack by 80% if using a firearm. Change the firearm text to a goblin machine gun text. - 125+ int, 15 metal pieces, 500 nails, 10 mechanism and 12 hours of work.");
-		if (player.hasKeyItem("Blueprint - Machine Gun MK2") >= 0 && player.hasKeyItem("Machine Gun MK1") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.MECHANI, 5)) addButton(3, "Machine Gun MK2", lumiWorkshopMachineGunMK2).hint("Machine Gun MK2 - Increase range attack by 60% if using a firearm. Change the firearm text to a goblin machine gun text. - 100+ int, 10 metal pieces, 500 nails, 5 mechanism, and 8 hours of work.");
-		if (player.hasKeyItem("Blueprint - Machine Gun MK1") >= 0 && player.hasKeyItem("Repeater Gun") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && player.hasItem(useables.MECHANI, 5)) addButton(3, "Machine Gun MK1", lumiWorkshopMachineGunMK1).hint("Machine Gun MK1 - Increase range attack by 40% if using a firearm. Change the firearm text to a goblin machine gun text. - 75+ int, 10 metal pieces, 200 nails, 5 mechanism and 4 hours of work.");
-		if (player.hasKeyItem("Blueprint - Repeater Gun") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 2 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) addButton(3, "Repeater Gun", lumiWorkshopRepeaterGun).hint("Repeater Gun - Increase range attack by 20% if using a firearm. Change the firearm text to a goblin machine gun text. - 50+ int, 2 metal pieces, 100 nails and 4 hour work.");
-		if (player.hasKeyItem("Blueprint - Dynapunch Glove") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 2 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && player.hasItem(useables.MECHANI, 1)) addButton(4, "Dynapunch G.", lumiWorkshopDynapunchGlove).hint("Dynapunch Glove - Adds a punching option to your mech. - 50+ int, 2 metal pieces, 100 nails, 1 mechanism and 4 hour work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK3") >= 0 && player.hasKeyItem("Machine Gun MK2") >= 0 && player.inte >= 125 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.MECHANI, 10)) addButton(3, "Machine Gun MK3", lumiWorkshopMachineGunMK3).hint("Machine Gun MK3 - Increase range attack by 80% if using a firearm. Change the firearm text to a goblin machine gun text. - 125+ int, Machine Gun MK2, 15 metal pieces, 500 nails, 10 mechanism and 12 hours of work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK2") >= 0 && player.hasKeyItem("Machine Gun MK1") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.MECHANI, 5)) addButton(3, "Machine Gun MK2", lumiWorkshopMachineGunMK2).hint("Machine Gun MK2 - Increase range attack by 60% if using a firearm. Change the firearm text to a goblin machine gun text. - 100+ int, Machine Gun MK1, 10 metal pieces, 500 nails, 5 mechanism, and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK1") >= 0 && player.hasKeyItem("Repeater Gun") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && player.hasItem(useables.MECHANI, 5)) addButton(3, "Machine Gun MK1", lumiWorkshopMachineGunMK1).hint("Machine Gun MK1 - Increase range attack by 40% if using a firearm. Change the firearm text to a goblin machine gun text. - 75+ int, Repeater Gun, 10 metal pieces, 200 nails, 5 mechanism and 4 hours of work.");
+		if (player.hasKeyItem("Blueprint - Repeater Gun") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 2 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) addButton(3, "Repeater Gun", lumiWorkshopRepeaterGun).hint("Repeater Gun - Increase range attack by 20% if using a firearm. Change the firearm text to a goblin machine gun text. - 50+ int, Toolbelt, 2 metal pieces, 100 nails and 4 hour work.");
+		if (player.hasKeyItem("Blueprint - Dynapunch Glove") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 2 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && player.hasItem(useables.MECHANI, 1)) addButton(4, "Dynapunch G.", lumiWorkshopDynapunchGlove).hint("Dynapunch Glove - Adds a punching option to your mech. - 50+ int, Toolbelt, 2 metal pieces, 100 nails, 1 mechanism and 4 hour work.");
 		if (player.hasKeyItem("Blueprint - Whitefire Beam Cannon") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.ENECORE, 5) && player.hasStatusEffect(StatusEffects.KnowsWhitefire)) addButton(5, "Whitefire B.C.", lumiWorkshopWhitefireBeamCannon).hint("Whitefire Beam Cannon - Adds a whitefire beam cannon option to your mech. - 75+ int, knowing Whitefire spell, 20 metal pieces, 500 nails, 5 energy core and 8 hours of work.");
 		if (player.hasKeyItem("Blueprint - Snowball Generator") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.ENECORE, 5) && player.hasStatusEffect(StatusEffects.KnowsIceSpike)) addButton(6, "Snowball G.", lumiWorkshopSnowballGenerator).hint("Snowball Generator - Adds a snowball generator option to your mech. - 75+ int, knowing Ice Spike spell, 20 metal pieces, 500 nails, 5 energy core and 8 hours of work.");
 		if (player.hasKeyItem("Blueprint - Raijin blaster") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 100 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 15 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 500 && player.hasItem(useables.MECHANI, 2) && player.hasItem(useables.ENECORE, 5) && player.hasItem(useables.RPLASMA, 5) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) addButton(7, "Raijin blaster", lumiWorkshopRaijinBlaster).hint("Raijin blaster - Adds a Raijin blaster option to your mech. - 100+ int, knowing Darkness Shard spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core, 5 raiju plasma and 8 hours of work.");
@@ -1221,8 +1219,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Potent Drug injectors", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Potent Drug injectors");
 		player.removeKeyItem("Improved Drug injectors");
-		player.lib += 25;
-		player.sens += 5;
+		player.statStore.addBuffObject({'lib.mult':+25,'sens':+5},'PotentDrugInjector',{text:'Potent Drug injectors'})
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
 		else doNext(camp.returnToCampUseTwelveHours);
@@ -1236,8 +1233,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Improved Drug injectors", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Improved Drug injectors");
 		player.removeKeyItem("Drug injectors");
-		player.lib += 25;
-		player.sens += 5;
+		player.statStore.addBuffObject({'lib.mult':+25,'sens':+5},'ImprovedDrugInjector',{text:'Improved Drug injectors'})
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
 		else doNext(camp.returnToCampUseEightHours);
@@ -1250,8 +1246,7 @@ public class Lumi extends BaseContent {
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Drug injectors is ready.\n\n");
 		player.createKeyItem("Drug injectors", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Drug injectors");
-		player.lib += 25;
-		player.sens += 5;
+		player.statStore.addBuffObject({'lib.mult':+25,'sens':+5},'DrugInjector',{text:'Drug injectors'})
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
 		else doNext(camp.returnToCampUseFourHours);

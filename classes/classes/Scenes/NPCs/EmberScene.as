@@ -210,7 +210,10 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 
 //Approaching Ember (Z)
 		public function emberCampMenu2():void {
-			if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaEmber();
+			if (!player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
+				if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaEmber();
+				else emberCampMenu();
+			}
 			else emberCampMenu();
 		}
 
@@ -3377,12 +3380,10 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			if (flags[kFLAGS.EMBER_OVIPOSITION] == 0) outputText("baby dragon");
 			else outputText("dragon egg");
 			outputText(".  Yawning, you curl up to the dragon for a quick nap of your own.");
-			player.sexReward("cum");
+			player.sexReward("cum", "Vaginal");
 			dynStats("sen", -2);
 			//Preg shit goez hurdur
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
             else player.knockUp(PregnancyStore.PREGNANCY_EMBER, PregnancyStore.INCUBATION_EMBER, 0); //Will always impregnate unless contraceptives are in use
 			player.createStatusEffect(StatusEffects.EmberFuckCooldown, 36, 0, 0, 0);
 			doNext(createCallBackFunction(emberBreedingAfterMathWatchOutForRadioactiveFallout,false));
@@ -4412,7 +4413,6 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\nYou head off yourself, ready to resume the rest of your day.");
 			//2 hours pass, PC's fatigue is healed some, Libido is reduced.
 			fatigue(-20);
-			dynStats("lib", -1);
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		
@@ -4640,6 +4640,9 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("As you call for Ember the dragon simply does not show up. You can see " + emberMF("him", "her") + " in the sky searching angrily for something and even hear " + emberMF("him", "her") + " swear in the distance. Whatever made Ember so mad you don’t want to know. You decide to call " + emberMF("him", "her") + " later so to avoid getting yourself burned as " + emberMF("he", "she") + " indeed start to torch the landscape at random.\n\n");
 			if (player.hasStatusEffect(StatusEffects.CampLunaMishaps2)) player.addStatusValue(StatusEffects.CampLunaMishaps2, 2, 1);
 			else player.createStatusEffect(StatusEffects.CampLunaMishaps2, 0, 1, 0, 0);
+			if (!player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.createStatusEffect(StatusEffects.LunaWasCaugh, 1, 0, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.addStatusValue(StatusEffects.LunaWasCaugh, 1, 1);
+			if (player.statusEffectv1(StatusEffects.LunaWasCaugh) == 3) outputText("<b>That's it, you're sure of it now, it's all Luna's doing!</b>\n\n");
 			doNext(playerMenu);
 		}
 	}

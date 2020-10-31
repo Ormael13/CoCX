@@ -265,11 +265,10 @@ public function TrainingSoulArtsWithChiChi():void {
 				outputText("\"<i>It’s your turn now... I want you to attack this dummy so hard you will feel your bones crack. Do not stop until the pain is so strong you can no longer fight!</i>\"\n\n");
 			}
 			outputText("You spend several hours punching the dummy so hard it actually hurts. You feel blood on your fists and legs by the end, however you also feel sturdier as a result, the pain being lighter than the last time.");
-			if (player.tou < 100) {
-				dynStats("tou", 2);
-			}
+			player.trainStat("tou", +2, 75);
+			player.trainStat("tou", +1, 100);
 			player.HP -= player.maxHP() * 0.5;
-			if (player.tou >= 100) {
+			if (player.touStat.core.value >= 100) {
 				if (player.findPerk(PerkLib.MightyFist) < 0) {
 					player.createPerk(PerkLib.MightyFist, 0, 0, 0, 0);
 					outputText(" <b>You've gained the Mighty Fist perk.</b>");
@@ -285,13 +284,11 @@ public function TrainingSoulArtsWithChiChi():void {
 			outputText("You're ready to begin your training and tell her as such.\n\n");
 			outputText("Chi Chi nods, then proceeds to show you a whole new form of combat, this one much more aggressive than that of the Lotus. Soon you manage to learn a few additional stances, as well as how to control the energy flow in your body to increase the power of an impact. She has you training on the dummies for several hours to increase your stamina. ");
 			outputText("As the flow of your movements and energy starts to become automatic, you discover your kicks and punches have become way stronger.");
-			if (player.str < 100) {
-				dynStats("str", 2);
-			}
-			if (player.spe < 100) {
-				dynStats("spe", 2);
-			}
-			if (player.str >= 100 && player.spe >= 100) {
+			player.trainStat("str", +2, 75);
+			player.trainStat("str", +1, 100);
+			player.trainStat("spe", +2, 75);
+			player.trainStat("spe", +1, 100);
+			if (player.strStat.core.value >= 100 && player.speStat.core.value >= 100) {
 				if (!player.hasStatusEffect(StatusEffects.KnowsOverlimit)) {
 					outputText(" Chi Chi, noticing that you’re training hard, hands you a scroll.\n\n");
 					outputText("\"<i>This is a scroll containing the technique Overlimit. Use it with caution, because if abused, this technique can and WILL kill you.</i>\"\n\n");
@@ -456,7 +453,10 @@ public function SoulskilsManualsShopPunishingKick2():void {
 }
 
 public function ChiChiCampMainMenu2():void {
-	if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaChiChi();
+	if (!player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
+		if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaChiChi();
+		else ChiChiCampMainMenu();
+	}
 	else ChiChiCampMainMenu();
 }
 
@@ -765,6 +765,9 @@ public function mishapsLunaChiChi():void {
 	outputText("That’s quite the surprise. Does the proud fighter she normaly is turn into an awkward village girl the moment shes wet? Well regardless you guess you will have to visit her later because there’s no way she’s letting you approach her right now.\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampLunaMishaps2)) player.addStatusValue(StatusEffects.CampLunaMishaps2, 4, 1);
 	else player.createStatusEffect(StatusEffects.CampLunaMishaps2, 0, 0, 0, 1);
+	if (!player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.createStatusEffect(StatusEffects.LunaWasCaugh, 1, 0, 0, 0);
+	if (player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.addStatusValue(StatusEffects.LunaWasCaugh, 1, 1);
+	if (player.statusEffectv1(StatusEffects.LunaWasCaugh) == 3) outputText("<b>That's it, you're sure of it now, it's all Luna's doing!</b>\n\n");
 	doNext(playerMenu);
 }
 

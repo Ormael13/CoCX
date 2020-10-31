@@ -27,12 +27,12 @@ package classes.Items.Jewelries
 		}
 		
 		override public function playerEquip():Jewelry {
-			game.player.sens += 5;
+			game.player.statStore.addBuff('sens',+5,'RingOfSensitivity',{text:'Ring Of Sensitivity'});
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():Jewelry {
-			game.player.sens -= 5;
+			game.player.statStore.removeBuffs('RingOfSensitivity');
 			return super.playerRemove();
 		}
 		

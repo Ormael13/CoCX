@@ -70,7 +70,8 @@ public final class KitsuneGift extends Consumable {
 
 				outputText("\n\n<b>The kitsune has shared some of its knowledge with you!</b>  But in the process, you've gained some of the kitsune's promiscuous trickster nature...");
 				//Increase INT and Libido, +10 LUST
-				game.player.dynStats("int", 4, "sen", 2, "lus", 10);
+				game.player.dynStats("sen", 2, "lus", 10);
+				player.KnowledgeBonus("int", 4);
 				break;
 
 			//[Thief!]

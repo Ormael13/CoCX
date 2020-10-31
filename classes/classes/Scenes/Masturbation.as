@@ -6,6 +6,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
+import classes.Stats.Buff;
 
 //	import classes.Scenes.NPCs.*;
 public class Masturbation extends BaseContent {
@@ -74,9 +75,12 @@ public class Masturbation extends BaseContent {
 			if (player.tentacleCocks() > 0) {
 				addButton(button++, "Tentabutt", tentacleGoesUpYerPooperNewsAtEleven);
 			}
-			if (player.lowerBody == LowerBody.PLANT_FLOWER) {
+			if (player.isAlraune()) {
 				if (player.hasVagina()) addButton(button++, "Stamenpussy", stamenSelfFuck);
 				addButton(button++, "Stamenbutt", stamenGoesUpYerPooperNewsAtEleven);
+			}
+			if (player.lowerBody == LowerBody.FLOWER_LILIRAUNE) {
+				if (player.hasVagina()) addButton(button++, "TwinYuri", twinYuri);
 			}
 			if (player.canOvipositBee() && player.lust >= 33 && player.biggestCockArea() > 100) {
 				addButton(button++, "LayInCock", getHugeEggsInCawk);
@@ -829,6 +833,24 @@ public class Masturbation extends BaseContent {
 							else outputText("you dream in a depraved kinky fantasia.");
 						}
 						else outputText("You groan and drift into a brief catnap, your rigid erections pulsing and throbbing with continual lust.");
+					}
+					if (player.hasPerk(PerkLib.NukiNutsEvolved)){
+						var cumAmmount:Number = player.cumQ();
+						var payout:Number = 1;
+						//Get rid of extra digits
+						//cumAmmount = int(cumAmmount);
+						//Calculate payout
+						if(cumAmmount > 10) {
+							payout += 2 + int(cumAmmount/100)*2;
+						}
+						//Reduce payout if it would push past
+						if (player.hasPerk(PerkLib.NukiNutsFinalForm)){
+							payout *= 2;
+						}
+						if(payout > 0) {
+							player.gems += payout;
+							outputText("\n\nWhen you wake up you find " + payout + " gems in the puddle of spunge your " + cockDescript(0) + " created.</b>\n\n");
+						}
 					}
 				}
 				//No cock ending
@@ -2178,7 +2200,7 @@ public class Masturbation extends BaseContent {
 				}
 			}
 		
-			dynStats("lib", -1.5, "sen", .75, "cor", .5);
+			dynStats("sen", .75, "cor", .5);
 			flags[kFLAGS.TIMES_MASTURBATED]++;
 			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
 			else player.orgasm();
@@ -2244,7 +2266,7 @@ public class Masturbation extends BaseContent {
 						outputText("Shamed by the depths of your sexual needs, you don the abominable stimulation belt and brace for its eventual ravaging of your needy womanhood. Without waiting for you to touch the activator, the organic portion of the device, sensing your needs, engorges and buries itself in your vagina, beginning to pump with furious speed. The shock of the sudden stimulation convulses you backwards, leaving you writhing on the ground as the horrid symbiote undulates in a luridly sordid manner. You distinctly feel a nodule growing about your clitoris, shifting and changing into a sucker. The suction begins furiously working your clitoris as if it were a miniature penis, slurping, sucking and jerking away, prompting another painfully pleasurable wave of multiple orgasms.\n\n");
 						outputText("You cry in shock as the creature pushes past your cervix and begins injecting your womb with hot, thick cum... or whatever it is that it shoots inside you.  Unlike before, the very sensation of the fluid acts upon your brain and body strangely. The pain dulls and eventually filters from your mind and only the pleasure of the experience remains. The fluid continues pumping in until it overflows. The flooding of your insides leaves you paradoxically ecstatic and revolted. After an unknown amount of time, the thing stops fucking you and it releases its grip of your pelvis, leaving you a sticky, exhausted mess. A part of you wants to try the belt again, but you are too tired to bother cleaning yourself up.");
 						player.orgasm();
-						dynStats("lib", -1, "sen", .75, "cor", 1);
+						dynStats("sen", .75, "cor", 1);
 						doNext(camp.returnToCampUseOneHour);
 					}
 					//High corruption variant
@@ -2252,7 +2274,7 @@ public class Masturbation extends BaseContent {
 						outputText("Barely taking the time to strip yourself down, you quickly slide the belt-shaped beast onto your hips. It immediately clamps down and begins the all-too-familiar plundering of your opening. It barrels deep into your box and quickly latches on your [clit] and the relieving pleasure of its thundering movements quench your need for pleasure. The creature quickly begins streaming its fluids inside you. No longer sensing pain, as you did when you first used the belt, you lay in endless bliss as the warmth of the fluid fills you up. The creature, sensing how much of its juice is in you, stops squirting and begins stirring the jizm it left. The unique pleasure of the hot fluid literally stirring and swirling inside you coaxes a wave of orgasms from your body, which draw the milk even deeper into your womanhood. It almost feels as if your body is absorbing the milk into your deepest recesses with each pelvic contraction.\n\n");
 						outputText("The creature lets out another torrent of cum and repeats the process. Drunk with lust, you are uncertain how you are containing so much spunk without it gushing out, as before. Every time you try to think about it, another orgasm destroys any attempt at rational thought. By the time the thing is done with you, hours and hours have already passed you by. You crash from your hours-long orgasm, exhausted, and can only think of the next opportunity to have the belt about your loins.");
 						player.orgasm();
-						dynStats("lib", -.5, "sen", 1, "cor", 1.5);
+						dynStats("sen", 1, "cor", 1.5);
 						//Game over if fully corrupt!
 						if (player.cor >= 100) doNext(allNaturalSelfStimulationBeltBadEnd);
 						//Otherwise, 4 hours pass!
@@ -2518,9 +2540,9 @@ public class Masturbation extends BaseContent {
 			if (player.lib < 30) dynStats("lib", .5);
 			if (player.lib < 50) dynStats("lib", .5);
 			if (player.lib < 60) dynStats("lib", .5);
-			if (player.sens > 40) player.sens -= 1;
-			if (player.sens > 60) player.sens -= 1;
-			if (player.sens > 80) player.sens -= 1;
+			if (player.sens > 40) player.removeCurse('sens',1)
+			if (player.sens > 60) player.removeCurse('sens',1)
+			if (player.sens > 80) player.removeCurse('sens',1)
 			if (player.tou > 50) dynStats("tou", -1);
 			if (player.tou > 75) dynStats("tou", -1);
 			doNext(camp.returnToCampUseOneHour);
@@ -2575,12 +2597,12 @@ public class Masturbation extends BaseContent {
 				outputText("Denied a single touch, your ");
 				if (player.hasCock()) {
 					if (player.hasVagina())
-						outputText(player.multiCockDescriptLight() + " and " + player.vaginaDescript());
+						outputText(player.multiCockDescriptLight() + " and [pussy]");
 					else outputText(player.cockDescript());
 					//Set as plural if multi dick or dick and vag.
 					if (player.hasVagina() || player.cockTotal() > 1) plural = true;
 				}
-				else outputText(player.vaginaDescript());
+				else outputText("[pussy]");
 				if (plural)
 					outputText(" leak their own fluid, quivering with ache and need that you can't reach to satisfy.");
 				else outputText(" leaks its own fluids, quivering with ache and need that you can't reach to satisfy.");
@@ -3445,6 +3467,15 @@ public class Masturbation extends BaseContent {
 			var x:int = -1;
 			var y:int = -1;
 			var index:int = 0;
+			var tentacle:int;
+			for (tentacle = 0; tentacle < player.cocks.length; tentacle++) {
+				if (player.cocks[tentacle].cockType == CockTypesEnum.TENTACLE ||
+						player.cocks[tentacle].cockType == CockTypesEnum.STAMEN) break;
+			}
+			for (x = tentacle + 1; x < player.cocks.length; x++) { //Find the biggest tentacle cock you've got
+				if ((player.cocks[x].cockType == CockTypesEnum.TENTACLE  ||
+						player.cocks[tentacle].cockType == CockTypesEnum.STAMEN) && player.cocks[x].cArea() > player.cocks[tentacle].cArea()) tentacle = x;
+			}
 			while (index < player.cocks.length) {
 				if (player.cocks[index].cockType == CockTypesEnum.STAMEN) {
 					if (x == -1) x = index;
@@ -3465,7 +3496,13 @@ public class Masturbation extends BaseContent {
 				index++;
 			}
 			clearOutput();
-			doStripCheck();			
+			doStripCheck();
+
+			if(player.isLiliraune())
+			{
+				outputText("\n\n\"<i>Hey sis feel in the mood for a ride?</i>\"\n\n");
+				outputText("\"<i>I was about to suggest that very thing.</i>\"\n\n");
+			}
 			outputText("Aroused your twisting vine stamen perks up like a pet expecting to be fed, and you have to admit that you plan to give your vine exactly what it needs - a hot, slippery slit to nestle inside of. Already, your [vagina] has grown ");
 			if (player.wetness() <= 2)
 				outputText("moist");
@@ -3490,7 +3527,7 @@ public class Masturbation extends BaseContent {
 			outputText("  You twist your wrist down.  That change in direction comes far easier than trying to stroke it. Releasing sets of alien muscles that you had held instinctively, you let your sinuous stamen mounted vine do what it was made to do. You slither it down sinuously, the head pressing heavy and hot against your juicy mound as you press back against it. It slowly spreads your clinging tunnel around its delicious girth one fold at a time.");
 			//Cunt change!
 			player.cuntChange(player.cockArea(x), true, true, false);
-			outputText("\n\nRipples of delight radiate along your " + cockDescript(x) + " as it buries itself as deeply into your velvet tunnel as possible. The stamen stretches you out as it goes, just enough that the trailing stalk is comfortably ensconced in twat. Tugging on the exposed portion, you find yourself pumping wildly on your vine, squeezing it while paroxysms of ecstasy render your fine muscle control useless. The dual sensations of being fucked and dishing out a hot dicking have overlapped into a tangled-up knot inside you. Your wide, squirming stamen mounted vine is getting jacked off by the engorged vine-coil’s motions and slowly leaks liquid pollen over the jerking length.");
+			outputText("\n\nRipples of delight radiate along your " + cockDescript(tentacle) + " as it buries itself as deeply into your velvet tunnel as possible. The stamen stretches you out as it goes, just enough that the trailing stalk is comfortably ensconced in twat. Tugging on the exposed portion, you find yourself pumping wildly on your vine, squeezing it while paroxysms of ecstasy render your fine muscle control useless. The dual sensations of being fucked and dishing out a hot dicking have overlapped into a tangled-up knot inside you. Your wide, squirming stamen mounted vine is getting jacked off by the engorged vine-coil’s motions and slowly leaks liquid pollen over the jerking length.");
 			if (y >= 0) {
 				outputText("  Still aroused, In no time flat you move your second tendril to reach for your unoccupied asshole. There’s a moment of token resistance before you violates your [asshole], but then, there’s only the warm heat of a torrid butt-fuck.");
 				player.buttChange(player.cockArea(y), true, true, false);
@@ -3516,18 +3553,70 @@ public class Masturbation extends BaseContent {
 				player.orgasm();
 				dynStats("sen", (-1*(1 + (player.tentacleCocks() + player.stamenCocks()))));
 			}
+			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 			doNext(camp.returnToCampUseOneHour);
 		}
+
+	private function twinYuri():void {
+		var x:int = -1;
+		var y:int = -1;
+		var index:int = 0;
+		while (index < player.cocks.length) {
+			if (player.cocks[index].cockType == CockTypesEnum.STAMEN) {
+				if (x == -1) x = index;
+			}
+			index++;
+		}
+		//Pick a second dick that isn't the first.
+		index = 0;
+		while (index < player.cocks.length) {
+			if (index != x) {
+				if (y < 0)
+					y = index;
+				else if (rand(2) == 0 && player.cocks[y].cockType != CockTypesEnum.STAMEN)
+					y = index;
+				else if (player.cocks[index].cockType == CockTypesEnum.STAMEN)
+					y = index;
+			}
+			index++;
+		}
+		clearOutput();
+		outputText("You realize how horny you are, your twin sister giving a silent nod.\n\n" +
+				"\"<i>Hey sis feel in the mood for a ride?</i>\"\n\n" +
+				"\"<i>Yeah, we can’t fight properly while aroused like this, close the curtain.</i>\"\n\n" +
+				"She doesn’t need to say another word as you close your petals in order to give yourself some well-needed privacy. " +
+				"You gently insert your finger in her nectar drenched [pussy] as your twin plays with your nectar-laden breast, suckling on your nipples. " +
+				"The two of you moan in delight. Feeling both your [chest] and her [pussy], you can’t help but slip your finger deeper, " +
+				"seeking more pleasure as she mashes and squeezes both of your tits together trying to make you leak that excess nectar out. " +
+				"The connection between your senses is so perfect, it feels like having four sets of hands massaging your cunt and milking your tits at the same time, " +
+				"and the best about it is you can pinpoint your own G spots! You scream together in perfect sync.\n\n" +
+				"\"<i>I’m cummmmmming!!!!</i>\"\n\n" +
+				"The both of you orgasm at the same time, your four breasts and two cunts gushing and filling the pitcher with pints of extra nectar. " +
+				"You reopen your petals and the two of you chuckle.\n\n" +
+				"\"<i>Who needs anyone else when we can just fuck ourselves?</i>\"\n\n" +
+				"\"<i>I think we only do it for variety. Truthfully, I would get bored if it was just us two all the time… Plus, who says no to a threesome?</i>\"\n\n" +
+				"The two of you giggle at this idea as you resume your journey, highly satisfied.");
+		if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			player.orgasmRaijuStyle();
+			dynStats("sen", (1*(1 + (player.tentacleCocks() + player.stamenCocks()))));
+		}
+		else {
+			player.orgasm();
+			dynStats("sen", (-1*(1 + (player.tentacleCocks() + player.stamenCocks()))));
+		}
+		doNext(camp.returnToCampUseOneHour);
+	}
 		
 		//Upon selecting the option to masturbate you should have the option to fuck your own ass if you have a tentacle dick
 		//Replace n with the tentacle cock number
 		private function tentacleGoesUpYerPooperNewsAtEleven():void {
+			var x:int = -1;
 			var tentacle:int;
 			for (tentacle = 0; tentacle < player.cocks.length; tentacle++) {
 				if (player.cocks[tentacle].cockType == CockTypesEnum.TENTACLE ||
 					player.cocks[tentacle].cockType == CockTypesEnum.STAMEN) break;
 			}
-			for (var x:int = tentacle + 1; x < player.cocks.length; x++) { //Find the biggest tentacle cock you've got
+			for (x = tentacle + 1; x < player.cocks.length; x++) { //Find the biggest tentacle cock you've got
 				if ((player.cocks[x].cockType == CockTypesEnum.TENTACLE  ||
 					 player.cocks[tentacle].cockType == CockTypesEnum.STAMEN) && player.cocks[x].cArea() > player.cocks[tentacle].cArea()) tentacle = x;
 			}
@@ -3535,6 +3624,7 @@ public class Masturbation extends BaseContent {
 			//[Standard text for stripping off goes here]
 			doStripCheck();			
 			outputText("You eagerly reveal your flora pecker as it squirms and wriggles on its own, gently caressing the green surface here and there, its coloration changing as you tease yourself.  After toying with your tentacle dick for a while, you decide to get down to business; using your newly acquired shaft muscles, you expertly guide your ever-writhing " + player.cockDescript(tentacle) + " to your back, pointing it toward your buttocks.  You grind the tip against your [butt], making pre-cum flow from your mushroom-like head and smearing it against your " + player.skinFurScales() + ".  Using your own seminal fluid as a natural lube, you press the tip of your " + player.cockDescript(tentacle) + " in front of your own backdoor, stretching your anal opening little by little, careful not to tear your own insides.  This goes on for a while, until you suddenly lose all patience and roughly stuff your own " + player.cockDescript(tentacle) + " at full force inside your colon.");
+
 			//[anal tightness check]
 			player.buttChange(player.cockArea(tentacle), true, true, false);
 			
@@ -3581,6 +3671,24 @@ public class Masturbation extends BaseContent {
 					}
 					else outputText("  You groan and drift into a brief catnap, your rigid erections pulsing and throbbing with continual lust.");
 				}
+				if (player.hasPerk(PerkLib.NukiNutsEvolved)){
+					var cumAmmount:Number = player.cumQ();
+					var payout:Number = 1;
+					//Get rid of extra digits
+					//cumAmmount = int(cumAmmount);
+					//Calculate payout
+					if(cumAmmount > 10) {
+						payout += 2 + int(cumAmmount/100)*2;
+					}
+					//Reduce payout if it would push past
+					if (player.hasPerk(PerkLib.NukiNutsFinalForm)){
+						payout *= 2;
+					}
+					if(payout > 0) {
+						player.gems += payout;
+						outputText("\n\nWhen you wake up you find " + payout + " gems in the puddle of spunge your " + cockDescript(0) + " created.</b>\n\n");
+					}
+				}
 			}
 			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();
@@ -3590,24 +3698,59 @@ public class Masturbation extends BaseContent {
 				player.orgasm();
 				dynStats("sen", -2);
 			}
+			if (player.hasPerk(PerkLib.NukiNutsEvolved)){
+				var cumAmmount:Number = player.cumQ();
+				var payout:Number = 1;
+				//Get rid of extra digits
+				//cumAmmount = int(cumAmmount);
+				//Calculate payout
+				if(cumAmmount > 10) {
+					payout += 2 + int(cumAmmount/100)*2;
+				}
+				//Reduce payout if it would push past
+				if (player.hasPerk(PerkLib.NukiNutsFinalForm)){
+					payout *= 2;
+				}
+				if(payout > 0) {
+					player.gems += payout;
+					outputText("\n\nWhen you wake up you find " + payout + " gems in the puddle of spunge your " + cockDescript(0) + " created.</b>\n\n");
+				}
+			}
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		private function stamenGoesUpYerPooperNewsAtEleven():void {
+			var x:int = -1;
 			var tentacle:int;
 			for (tentacle = 0; tentacle < player.cocks.length; tentacle++) {
 				if (player.cocks[tentacle].cockType == CockTypesEnum.STAMEN) break;
 			}
-			for (var x:int = tentacle + 1; x < player.cocks.length; x++) { //Find the biggest tentacle cock you've got
+			for (x = tentacle + 1; x < player.cocks.length; x++) { //Find the biggest tentacle cock you've got
 				if (player.cocks[tentacle].cockType == CockTypesEnum.STAMEN && player.cocks[x].cArea() > player.cocks[tentacle].cArea()) tentacle = x;
 			}
 			clearOutput();
 			//[Standard text for stripping off goes here]
-			doStripCheck();			
-			outputText("You grab one of your stamen mounted vine, gently caressing the green surface here and there, its coloration changing as you tease yourself. After toying with your vine for a while, you decide to get down to business; using your newly acquired shaft muscles, you expertly guide your stamen to your back, pointing it toward your buttocks. You grind the tip against your [butt], making liquid pollen flow from your stamen head and smearing it against your [skin]. Using your own seminal fluid as a natural lube, you press the tip of your stamen in front of your backdoor, stretching your anal opening little by little, careful not to tear your own insides. This goes on for a while, until you suddenly lose all patience and roughly stuff your own stamen at full force inside your colon.");
+			doStripCheck();
+			if(player.isLiliraune())
+			{
+				outputText("\"<i>Hey sis I’m in the mood for anal today what about you?</i>\"\n\n");
+				outputText("\"<i>That works but don’t you go and pick the largest one for yourself.</i>\"\n\n");
+			}
+			outputText("You ");
+			if(player.isLiliraune()) outputText("both ");
+			outputText("grab one of your stamen mounted vine, gently caressing the green surface here and there, its coloration changing as you tease yourself. After toying with your vine for a while, you decide to get down to business; using your newly acquired shaft muscles, you expertly guide your stamen to your back, pointing it toward your buttocks. You grind the tip against your [butt], making liquid pollen flow from your stamen head and smearing it against your [skin]. Using your own seminal fluid as a natural lube, you");
+			if(player.isLiliraune()) outputText(" and your sister both");
+			outputText(" press the tip of your stamen in front of your backdoor, stretching your anal opening little by little, careful not to tear your own insides. This goes on for a while, until you suddenly lose all patience and roughly stuff your own stamen at full force inside your colon.");
+			if(player.isLiliraune())
+			{
+				outputText("\n\n\"<i>EEEEep! Not so rough sister! you're going to break us apart!</i>\"\n\n");
+				outputText("\"<i>Shut up! You have the stamen up to your bowel!</i>\"\n\n");
+			}
 			//[anal tightness check]
 			player.buttChange(player.cockArea(tentacle), true, true, false);
-			outputText("\n\nThe impetuousness of the act makes you cry in a mixture of pleasure and pain, your moist tight butthole being overloaded with intense sensations. Fortunately the tender and rubbery texture of your vines allows them for more sensitivity, the subtle friction sending tingles from your pitcher all the way up your spine. You shiver from the sheer cocktail of raw pleasure you’re inflicting on your own body. Your vine keeps squirming against your insides, making you quiver and giggle like a whore, until it lodges all the way inside your colon, adopting a more comfortable position. You then proceed to ferociously fuck your own [asshole], stretching it a bit more at every thrust.");
+			outputText("\n\nThe impetuousness of the act makes you ");
+			if(player.isLiliraune()) outputText("both ");
+			outputText("cry in a mixture of pleasure and pain, your moist tight butthole being overloaded with intense sensations. Fortunately the tender and rubbery texture of your vines allows them for more sensitivity, the subtle friction sending tingles from your pitcher all the way up your spine. You shiver from the sheer cocktail of raw pleasure you’re inflicting on your own body. Your vine keeps squirming against your insides, making you quiver and giggle like a whore, until it lodges all the way inside your colon, adopting a more comfortable position. You then proceed to ferociously fuck your own [asshole], stretching it a bit more at every thrust.");
 			outputText("\n\nThe conjugated friction of your vine writhing inside your devastated interior (as well as the rough hanjdob you’re giving yourself) eventually proves too much for your horny body, and all of your stamens releases a massive load, squirting flower juices everywhere inside (and outside) your body. Pressure builds in your ass (and your hands) as pollen flows out of you. You groan and lazily remove your stamen from your anus as you give in to your pleasure-induced drowsiness. You drift into a brief catnap, your stamens mounted vines pulsing and throbbing with continual lust.");
 			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();

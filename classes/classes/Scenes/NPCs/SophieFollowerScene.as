@@ -880,7 +880,7 @@ public function sophieSmallDongTeases():void {
 	
 	flags[kFLAGS.TIMES_MORNING_SOPHIE_FEMDOMMED]++;
 	player.sexReward("vaginalFluids","Dick");
-	dynStats("lib", -1, "sen", 3);
+	dynStats("sen", 3);
 	doNext(playerMenu);
 }
 

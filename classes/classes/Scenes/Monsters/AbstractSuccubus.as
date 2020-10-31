@@ -119,7 +119,7 @@ package classes.Scenes.Monsters
 				else outputText("succubus");
 				outputText(" flicks her wrist, allowing a whip-like cord to slither out from the palm of her clawed hand.  She cracks the whip experimentally, cackling with glee.");
 				createStatusEffect(StatusEffects.WhipReady, 0, 0, 0, 0);
-				str += 20;
+				this.strStat.core.value += 20;
 				this.weaponName = "whip";
 				this.weaponVerb = "brutal whip-crack";
 			}

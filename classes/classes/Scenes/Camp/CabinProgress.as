@@ -268,6 +268,7 @@ import classes.Scenes.SceneLib;
 				addButton(1, "Pickaxe", quarrySitePickaxe);
 			}
 			else addButton(0, "Mine", quarrySiteMine);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 		private function quarrySitePickaxe():void {
 			outputText("\n\nYou pick up the old mining tool. This should prove useful when digging up gems or stone from the landscape.");

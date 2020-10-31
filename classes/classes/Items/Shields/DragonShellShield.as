@@ -10,13 +10,13 @@ import classes.Scenes.SceneLib;
 public class DragonShellShield extends Shield {
 		
 		public function DragonShellShield() {
-			super("DrgnShl", "DrgnShl", "dragon-shell shield", "a dragon-shell shield", 14, 1500, "A durable shield that has been forged from the remains of the dragon egg you found in the swamp.  Absorbs any fluid attacks you can catch, rendering them useless.");
+			super("DrgnShl", "DrgnShl", "dragon-shell shield", "a dragon-shell shield", 17, 1700, "A durable shield that has been forged from the remains of the dragon egg you found in the swamp.  Absorbs any fluid attacks you can catch, rendering them useless.", "Large");
 		}
 		
 		override public function get description():String {
 			var desc:String = game.flags[kFLAGS.EMBER_HATCHED] > 0 ? "A durable shield that has been forged from the dragon eggshell Ember gave you for maxing out " + SceneLib.emberScene.emberMF("his", "her") + " affection." : "A durable shield that has been forged from the remains of the dragon egg you found in the swamp.";
 			//Type
-			desc += "\n\nType: Shield";
+			desc += "\n\nType: Shield (Large)";
 			//Block Rating
 			desc += "\nBlock: " + String(block);
 			//Value

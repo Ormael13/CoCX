@@ -7,6 +7,7 @@ package classes.Scenes.Dungeons
 import classes.CockTypesEnum;
 import classes.EventParser;
 import classes.PerkLib;
+import classes.Scenes.UniqueSexScenes;
 import classes.VaginaClass;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kACHIEVEMENTS;
@@ -37,6 +38,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		
 		public var elDisplacerbeast:DisplacerBeastScene = new DisplacerBeastScene();
 		public var ancientTentacleBeast:TentacleBeastScene = new TentacleBeastScene();
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
 		public function EbonLabyrinth() {}
 		
@@ -87,16 +89,20 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		}
 		public function defeatedByStrayDemon():void {
 			clearOutput();//succubus, incibus or omnibus
-			outputText("Defeated you fall to the ground and look up just in time to see a mace coming for your head. When you wake up you're standing on a podium somewhere else. There's demon everywhere around you screaming numbers. Those demons are brandishing gems around for some reasons.\n\n");
-			outputText("\"<i>One hundred did I hear one hundred for this ");
-			if (player.gender == 3) outputText("herm");
-			else if (player.gender == 1) outputText("man");
-			else outputText("woman");
-			outputText("? One hundred one?!</i>\"\n\n");
-			outputText("You realise what's going on now, they're actually auctioning you at the slave market! You try and break free but your bonds are to tight. Eventually you're sold to an Omnibus who just so happen to be collecting human pets. As time passes she eventually sells you to a new master and then you're sold again to another. It never ends. ");
-			outputText("Guess you will spend the rest of your life in bondage pleasing some demon until it gets bored and sell you off. Maybe, if your lucky, one will fuck you hard enough that you will cum your soul out and you will actualy get to enjoy rather then loath your slave status.\n\n");
-			//[GAME OVER]
-			EventParser.gameOver();
+			if (player.isAlraune()) {
+				uniquuuesexscene.AlrauneDungeonBadEnd();
+			} else {
+				outputText("Defeated you fall to the ground and look up just in time to see a mace coming for your head. When you wake up you're standing on a podium somewhere else. There's demon everywhere around you screaming numbers. Those demons are brandishing gems around for some reasons.\n\n");
+				outputText("\"<i>One hundred did I hear one hundred for this ");
+				if (player.gender == 3) outputText("herm");
+				else if (player.gender == 1) outputText("man");
+				else outputText("woman");
+				outputText("? One hundred one?!</i>\"\n\n");
+				outputText("You realise what's going on now, they're actually auctioning you at the slave market! You try and break free but your bonds are to tight. Eventually you're sold to an Omnibus who just so happen to be collecting human pets. As time passes she eventually sells you to a new master and then you're sold again to another. It never ends. ");
+				outputText("Guess you will spend the rest of your life in bondage pleasing some demon until it gets bored and sell you off. Maybe, if your lucky, one will fuck you hard enough that you will cum your soul out and you will actualy get to enjoy rather then loath your slave status.\n\n");
+				//[GAME OVER]
+				EventParser.gameOver();
+			}
 		}
 		public function defeatedByAncientTentacleBeast():void {
 			clearOutput();
@@ -133,9 +139,13 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		}
 		public function defeatedByMindBreaker():void {
 			clearOutput();
-			outputText("\n\n");
-			//[GAME OVER]
-			EventParser.gameOver();
+			if (player.isAlraune()) {
+				uniquuuesexscene.AlrauneDungeonBadEnd();
+			} else {
+				outputText("\n\n");
+				//[GAME OVER]
+				EventParser.gameOver();
+			}
 		}
 		//Bosses
 		public function defeatedByChaosChimera():void {
@@ -258,6 +268,39 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			EventParser.gameOver();
 		}
 		public function defeatBoosNo6():void {
+			clearOutput();
+			outputText("\n\n");
+			cleanupAfterCombat();
+		}
+		public function defeatedByBoosNo7():void {
+			clearOutput();
+			outputText("\n\n");
+			//[GAME OVER]
+			EventParser.gameOver();
+		}
+		public function defeatBoosNo7():void {
+			clearOutput();
+			outputText("\n\n");
+			cleanupAfterCombat();
+		}
+		public function defeatedByBoosNo8():void {
+			clearOutput();
+			outputText("\n\n");
+			//[GAME OVER]
+			EventParser.gameOver();
+		}
+		public function defeatBoosNo8():void {
+			clearOutput();
+			outputText("\n\n");
+			cleanupAfterCombat();
+		}
+		public function defeatedByBoosNo9():void {
+			clearOutput();
+			outputText("\n\n");
+			//[GAME OVER]
+			EventParser.gameOver();
+		}
+		public function defeatBoosNo9():void {
 			clearOutput();
 			outputText("\n\n");
 			cleanupAfterCombat();
@@ -465,7 +508,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("<b>It's placeholder encounter to test procing boss fight!</b>");
 			startCombat(new DisplacerBeast(), true);
 		}
-		private function encountersRuletteEL():void {
+		private function encountersRuletteEL1():void {
 			if ((rand(100) < player.statusEffectv1(StatusEffects.EbonLabyrinthA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 				var reset:Number = 10;
 				reset -= player.statusEffectv1(StatusEffects.EbonLabyrinthA);
@@ -714,7 +757,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 				encountersFountainOfPurity();
 			}
-			else encountersRuletteEL();
+			else encountersRuletteEL1();
 		}
 		public function checkingELAchievs():void {
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 50 && flags[kFLAGS.EBON_LABYRINTH] == 1) {

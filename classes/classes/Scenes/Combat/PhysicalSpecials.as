@@ -14,7 +14,6 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.JewelryLib;
 import classes.Items.ShieldLib;
 import classes.Items.WeaponLib;
-import classes.Items.UndergarmentLib;
 import classes.PerkLib;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Camp.CampMakeWinions;
@@ -37,36 +36,54 @@ public class PhysicalSpecials extends BaseCombatContent {
 	internal function buildMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		if (!player.isInGoblinMech()) {
-			buttons.add("PowerAttack", powerAttackMenu).hint("Do a single way more powerfull wrath-enhanced melee strike.");
+			bd = buttons.add("PowerAttack", powerAttackMenu).hint("Do a single way more powerfull wrath-enhanced melee strike.");
+			if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			if (player.hasPerk(PerkLib.PowerShot)) {
 				bd = buttons.add("Power Shoot", powerShootMenu).hint("Do a single way more powerfull wrath-enhanced range strike.");
 				if (player.weaponRangePerk != "Bow" || player.weaponRangePerk != "Throwing") {
 					bd.disable("<b>You need to use bow or throwing weapon before you can use Power Shoot.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.haveWeaponForCleave() && player.hasStatusEffect(StatusEffects.KnowsCleave)) buttons.add("Cleave", pcCleave).hint("Deal extra damage to multiple foes. Cause area effect bleed damage.");
+			if (player.haveWeaponForCleave() && player.hasStatusEffect(StatusEffects.KnowsCleave)) {
+				bd = buttons.add("Cleave", pcCleave).hint("Deal extra damage to multiple foes. Cause area effect bleed damage.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
 			if (player.hasPerk(PerkLib.SneakyAttack) && player.haveWeaponForSneakAttack() && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.FrozenSolid) || monster.hasStatusEffect(StatusEffects.StunnedTornado)
-				|| monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind) || monster.hasStatusEffect(StatusEffects.Distracted))) buttons.add("SneakAttack (M)", sneakAttack).hint("Strike the vitals of a stunned, blinded or distracted opponent for heavy damage. (Melee variant)");
+				|| monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind) || monster.hasStatusEffect(StatusEffects.Distracted))) {
+				bd = buttons.add("SneakAttack (M)", sneakAttack).hint("Strike the vitals of a stunned, blinded or distracted opponent for heavy damage. (Melee variant)");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
 			if (player.hasPerk(PerkLib.MarkedForDeath) && player.haveWeaponForSneakAttackRange() && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.FrozenSolid) || monster.hasStatusEffect(StatusEffects.StunnedTornado)
-				|| monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind) || monster.hasStatusEffect(StatusEffects.Distracted))) buttons.add("SneakAttack (R)", sneakAttackRange).hint("Strike the vitals of a stunned, blinded or distracted opponent for heavy damage. (Range variant)");
-			if (player.hasPerk(PerkLib.Feint)) buttons.add("Feint", feint).hint("Attempt to feint an opponent into dropping its guard.");
+				|| monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind) || monster.hasStatusEffect(StatusEffects.Distracted))) {
+				bd = buttons.add("SneakAttack (R)", sneakAttackRange).hint("Strike the vitals of a stunned, blinded or distracted opponent for heavy damage. (Range variant)");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
+			if (player.hasPerk(PerkLib.Feint)) {
+				bd = buttons.add("Feint", feint).hint("Attempt to feint an opponent into dropping its guard.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
 			bd = buttons.add("Charge", charging).hint("Charge your opponent for massive damage. Deals more damage if using a spear or lance. Gains extra damage from the usage of a horn or a pair of horns.");
 			if (player.hasStatusEffect(StatusEffects.CooldownCharging)) {
 				bd.disable("<b>You need more time before you can perform Charge again.</b>\n\n");
 			}
+			if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			if (player.hairType == 4) {
-				buttons.add("AnemoneSting", anemoneSting).hint("Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.", "Anemone Sting");
+				bd = buttons.add("AnemoneSting", anemoneSting).hint("Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.", "Anemone Sting");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Bitez
 			if (player.faceType == Face.SHARK_TEETH) {
-				buttons.add("SharkBite", bite).hint("Attempt to bite your opponent with your shark-teeth.");
+				bd = buttons.add("SharkBite", bite).hint("Attempt to bite your opponent with your shark-teeth.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.faceType == Face.ORCA) {
-				buttons.add("OrcaBite", bite).hint("Bite in your opponent with your sharp teeths causing bleed.");
+				bd = buttons.add("OrcaBite", bite).hint("Bite in your opponent with your sharp teeths causing bleed.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.faceType == Face.WOLF) {
-				buttons.add("ViciousBite", bite).hint("Vicious bite your opponent with your sharp teeths causing bleed.");
+				bd = buttons.add("ViciousBite", bite).hint("Vicious bite your opponent with your sharp teeths causing bleed.");
 				if (player.hasPerk(PerkLib.FreezingBreath)) buttons.add("Frostbite", fenrirFrostbite).hint("You bite in your foe slowly infecting it with cold chill weakening its strength and resolve.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//hydra bite - variant of snake bite
 			if (player.faceType == Face.SNAKE_FANGS || player.hasPerk(PerkLib.VenomGlands)) {
@@ -74,80 +91,102 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd = buttons.add("HydraBite", hydraBiteAttack).hint("Deal as many attacks as pc got heads. Also delivers naga poison for as many time as pc got heads. (lower enemy str and spe)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 					if (player.tailVenom < 25) {
 						bd.disable("You do not have enough venom to use snake bite right now!");
-					}
+					} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 					bd.requireFatigue(physicalCost(10 * player.statusEffectv1(StatusEffects.HydraTailsPlayer)));
 				}
 				else {
 					bd = buttons.add("SnakeBite", nagaBiteAttack).hint("Attempt to bite your opponent and inject venom. (lower enemy str and spe)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 					if (player.tailVenom < 25) {
 						bd.disable("You do not have enough venom to use snake bite right now!");
-					}
+					} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 			}
-			if (player.faceType == Face.SPIDER_FANGS || player.hasPerk(PerkLib.VenomGlands)) {
+			if (player.faceType == Face.SPIDER_FANGS || player.faceType == Face.USHI_ONI_ONNA || player.hasPerk(PerkLib.VenomGlands)) {
 				bd = buttons.add("SpiderBite", spiderBiteAttack).hint("Attempt to bite your opponent and inject venom. (deal lust dmg and lower gradualy enemy lust resistance)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 				if (player.tailVenom < 25) {
 					bd.disable("You do not have enough venom to use spider bite right now!");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Constrict
-			if (player.lowerBody == LowerBody.NAGA) {
-				buttons.add("Constrict", SceneLib.desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail.");
+			if (player.isNaga()) {
+				bd = buttons.add("Constrict", SceneLib.desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			//Grapple
-			if (player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) {
-				buttons.add("Grapple", scyllaGrapple).hint("Attempt to grapple a foe with your tentacles.");
+			//Cancer Grab
+			if (player.lowerBody == LowerBody.CANCER) {
+				bd = buttons.add("Grab", combat.CancerGrab).hint("Grab your opponents with your pincers, then proceed to crush them.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
+			//Dig
+			if (player.lowerBody == LowerBody.CANCER || player.lowerBody == LowerBody.CENTIPEDE || player.lowerBody == LowerBody.FROSTWYRM) {
+				bd = buttons.add("Dig", Dig).hint("Dig underground to escape your opponent attack for a while.");
+				if (player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
+					bd.disable("<b>You can't dig in open water!</b>\n\n");
+				}
 			}
 			//Engulf
 			if (player.lowerBody == LowerBody.GOO) {
-				buttons.add("Engulf", gooEngulf).hint("Attempt to engulf a foe with your body.");
+				bd = buttons.add("Engulf", gooEngulf).hint("Attempt to engulf a foe with your body.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Embrace
 			if ((player.wings.type == Wings.BAT_ARM || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
-				buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
-			}
-			//Pounce
-			if (player.canPounce() && !monster.hasPerk(PerkLib.EnemyGroupType)) {
-				buttons.add("Pounce", catPounce).hint("Pounce and rend your enemy using your claws, this initiate a grapple combo.");
-			}
-			//Grab & Slam
-			if (player.bearpandaScore() >= 10 && !monster.hasPerk(PerkLib.EnemyGroupType)) {
-				buttons.add("Grab", bearGrab).hint("Attempt to grab the opponent in your powerful paws. Does not work on opponent taller than you.");
-				bd = buttons.add("Slam", bearSlam).hint("Furiously slam your target with your powerful paw, staggering and stunning it.");
-				if (player.hasStatusEffect(StatusEffects.CooldownSlamBear)) {
-					bd.disable("<b>You need more time before you can perform Slam again.</b>\n\n");
-				}
-			}
-			//Kick attackuuuu
-			if (player.isTaur() || player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.BUNNY || player.lowerBody == LowerBody.KANGAROO) {
-				bd = buttons.add("Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
-				if (player.hasStatusEffect(StatusEffects.CooldownKick)) {
-					bd.disable("<b>You need more time before you can perform Kick again.</b>\n\n");
-				}
+				bd = buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Gore if mino horns or unicorn/alicorn/bicorn/nightmare horns
 			if (player.horns.type == Horns.COW_MINOTAUR && player.horns.count >= 6) {
-				buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
+				bd = buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if ((player.horns.type == Horns.UNICORN || player.horns.type == Horns.BICORN) && player.horns.count >= 6) {
 				buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horn"+(player.horns.type == Horns.BICORN ? "s":"")+".  This attack is stronger and easier to land with large horn"+(player.horns.type == Horns.BICORN ? "s":"")+".");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Upheaval - requires rhino horns
 			if (player.horns.type == Horns.RHINO && player.horns.count >= 2 && player.faceType == Face.RHINO) {
 				bd = buttons.add("Upheaval", upheavalAttack).hint("Send your foe flying with your dual nose mounted horns. \n");
 				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(30));
 				else bd.requireFatigue(physicalCost(15));
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
+			//Grab & Slam
+			if (player.bearpandaScore() >= 10 && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+				bd = buttons.add("Grab", bearGrab).hint("Attempt to grab the opponent in your powerful paws. Does not work on opponent taller than you.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+				bd = buttons.add("Slam", bearSlam).hint("Furiously slam your target with your powerful paw, staggering and stunning it.");
+				if (player.hasStatusEffect(StatusEffects.CooldownSlamBear)) {
+					bd.disable("<b>You need more time before you can perform Slam again.</b>\n\n");
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
+			//Grapple
+			if (player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) {
+				bd = buttons.add("Grapple", scyllaGrapple).hint("Attempt to grapple a foe with your tentacles.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
+			//Kick
+			if (player.isTaur() || player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.BUNNY || player.lowerBody == LowerBody.KANGAROO) {
+				bd = buttons.add("Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
+				if (player.hasStatusEffect(StatusEffects.CooldownKick)) {
+					bd.disable("<b>You need more time before you can perform Kick again.</b>\n\n");
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
+			//Pounce
+			if (player.canPounce() && !monster.hasPerk(PerkLib.EnemyGroupType)) {
+				bd =buttons.add("Pounce", catPounce).hint("Pounce and rend your enemy using your claws, this initiate a grapple combo.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Infest if infested
 			if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5 && player.hasCock()) {
-				buttons.add("Infest", SceneLib.mountain.wormsScene.playerInfest).hint("The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms. \n\nAlso great for reducing your lust.");
+				bd = buttons.add("Infest", SceneLib.mountain.wormsScene.playerInfest).hint("The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms. \n\nAlso great for reducing your lust.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Kiss supercedes bite.
 			if (player.hasStatusEffect(StatusEffects.LustStickApplied)) {
 				bd = buttons.add("Kiss", kissAttack).hint("Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.");
 				if(player.hasStatusEffect(StatusEffects.Blind)) {
 					bd.disable("There's no way you'd be able to find their lips while you're blind!");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.arms.type == Arms.MANTIS && player.weapon == WeaponLib.FISTS) {
 				bd = buttons.add("Multi Slash", mantisMultiSlash);
@@ -173,6 +212,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						else bd.requireFatigue(24);
 					}
 				}
+			    if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION)) {
 				bd = buttons.add("Sting", playerStinger);
@@ -187,48 +227,49 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd.hint("Attempt to use your " + stingername + " on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on " + period + ", you may have to wait quite a while between stings.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 				if (player.tailVenom < 25) {
 					bd.disable("You do not have enough venom to sting right now!");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
 				if (!player.hasPerk(PerkLib.ManticoreMetabolism)) {
 					bd = buttons.add("Tail Spike", playerTailSpike).hint("Shoot an envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 					if (player.tailVenom < 50 && player.hasPerk(PerkLib.ManticoreMetabolism)) {
-						bd.disable("You do not have enough venom to shoot spikes right now!");
+						bd.disable("You do not have enough venom to shoot a spikes right now!");
 					}
 					else if (player.tailVenom < 25) {
-						bd.disable("You do not have enough venom to shoot spike right now!");
-					}
+						bd.disable("You do not have enough venom to shoot a spike right now!");
+					} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 				if (player.hasPerk(PerkLib.ManticoreMetabolism)) {
 					bd = buttons.add("Tail Spike", playerOmniTailSpike).hint("Shoot a volley of envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 					if (player.tailVenom < 50 && player.hasPerk(PerkLib.ManticoreMetabolism)) {
-						bd.disable("You do not have enough venom to shoot spikes right now!");
+						bd.disable("You do not have enough venom to shoot multiple spikes right now!");
 					}
 					else if (player.tailVenom < 25) {
-						bd.disable("You do not have enough venom to shoot spike right now!");
-					}
+						bd.disable("You do not have enough venom to shoot multiple spikes right now!");
+					} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 			}
 			if (player.tailType == Tail.SPIDER_ADBOMEN) {
 				bd = buttons.add("Web", PCWebAttack).hint("Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  \n\nWeb Amount: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 				if (player.tailVenom < 30) {
 					bd.disable("You do not have enough webbing to shoot right now!");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.tail.isAny(Tail.SHARK, Tail.LIZARD, Tail.KANGAROO, Tail.DRACONIC, Tail.RACCOON, Tail.RED_PANDA)) {
-				buttons.add("Tail Whip", tailWhipAttack).hint("Whip your foe with your tail to enrage them and lower their defense!");
-			}
+				bd = buttons.add("Tail Whip", tailWhipAttack).hint("Whip your foe with your tail to enrage them and lower their defense!");
+			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			if (player.tailType == Tail.SALAMANDER) {
 				bd = buttons.add("Tail Slap", tailSlapAttack).hint("Set ablaze in red-hot flames your tail to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
 				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(80));
 				else bd.requireFatigue(physicalCost(40));
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.tailType == Tail.ORCA) {
 				bd = buttons.add("Tail Smack", tailSmackAttack).hint("Smack your powerful tail at your opponent face.</b>");
 				bd.requireFatigue(physicalCost(40));
 				if (player.hasStatusEffect(StatusEffects.CooldownTailSmack)) {
 					bd.disable("<b>You need more time before you can perform Tail Smack again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasPerk(PerkLib.InkSpray) && player.gender > 0) {
 				var liftWhat:String = player.gender == 1 ? "your cock" : "your front tentacle";
@@ -242,7 +283,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>" + monster.capitalA + monster.short + " is already affected by blind.</b>\n\n");
 				} else if (player.hasStatusEffect(StatusEffects.CooldownInkSpray)) {
 					bd.disable("<b>You need more time before you can shoot ink again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasVagina() && (player.cowScore() >= 9 || player.hasPerk(PerkLib.LactaBovinaOvaries))) {
 				var blaaaast2:String = player.hasPerk(PerkLib.LactaBovinaOvariesFinalForm) ? " (cooldown of 4 rounds before it can be used again)" : "";
@@ -252,7 +293,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasStatusEffect(StatusEffects.CooldownMilkBlast)) {
 					if (player.hasPerk(PerkLib.LactaBovinaOvariesFinalForm)) bd.disable("\n<b>You need more time before you can do it again.</b>");
 					else bd.disable("You can't use it more than once during fight.");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasCock() && (player.minotaurScore() >= 9 || player.hasPerk(PerkLib.MinotaurTesticles))) {
 				var blaaaast1:String = player.hasPerk(PerkLib.MinotaurTesticlesFinalForm) ? " (cooldown of 4 rounds before it can be used again)" : "";
@@ -262,61 +303,83 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasStatusEffect(StatusEffects.CooldownCumCannon)) {
 					if (player.hasPerk(PerkLib.MinotaurTesticlesFinalForm)) bd.disable("\n<b>You need more time before you can do it again.</b>");
 					else bd.disable("You can't use it more than once during fight.");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if ((player.pigScore() >= 8 || player.hasPerk(PerkLib.PigBoarFatFinalForm)) && player.thickness >= minThicknessReq()) {
 				bd = buttons.add("Body Slam", bodySlam).hint("Body slam your opponent (small chance to stun). Damage scale with toughness and thickness.");
 				bd.requireFatigue(physicalCost(50));
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.gooScore() >= 11 || player.magmagooScore() >= 13 || player.darkgooScore() >= 13) {
 				bd = buttons.add("Sling Goo", slinggoo).hint("Throw slime at your opponent, lacing it with your aphrodisiac compound and reduce their speed.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.canFly()) {
 				var flightduration:Number = 6;
 				if (player.hasPerk(PerkLib.AdvancedAerialCombat)) flightduration += 2;
 				if (player.hasPerk(PerkLib.GreaterAerialCombat)) flightduration += 4;
-				buttons.add("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to " + flightduration + " turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
+				bd = buttons.add("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to " + flightduration + " turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
 			}
 			if (player.isShieldsForShieldBash()) {
 				bd = buttons.add("Shield Bash", shieldBash).hint("Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
 				bd.requireFatigue(physicalCost(20));
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.shieldName == "Battle Net") {
 				bd = buttons.add("Entangle", netEntangle).hint("Toss your net at the enemy to entangle it. (cooldown of 8 rounds before it can be used again)");
 				if (player.hasStatusEffect(StatusEffects.CooldownNet)) bd.disable("<b>You need more time before you can do it again.</b>\n\n");
+				else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsSidewinder)) {
 				bd = buttons.add("Sidewinder", archerSidewinder).hint("The pinacle art of the hunter. Once per day draw on your fatigue to shoot a single heavily infused arrow at a beast or animal morph. This attack never miss.");
 				if (player.hasStatusEffect(StatusEffects.CooldownSideWinder)) bd.disable("<b>You already used Sidewinder today.</b>\n\n");
+				else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (monster.plural) {
 				// Whipping
-				if (player.isWeaponsForWhipping()) buttons.add("Whipping", whipping).hint("Attack multiple opponent with your held weapon.  \n\n<b>AoE attack.</b>");
+				if (player.isWeaponsForWhipping()) {
+					bd = buttons.add("Whipping", whipping).hint("Attack multiple opponent with your held weapon.  \n\n<b>AoE attack.</b>");
+					if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+				}
 				// Whirlwind
-				if ((player.isWeaponForWhirlwind() && !player.hasPerk(PerkLib.PowerSweep)) || ((player.isWeaponForWhirlwind() || player.isOneHandedWeapons()) && player.hasPerk(PerkLib.PowerSweep))) buttons.add("Whirlwind", whirlwind).hint("Spin your weapon around to attack multiple enemies at once.  \n\n<b>AoE attack.</b>");
+				if ((player.isWeaponForWhirlwind() && !player.hasPerk(PerkLib.PowerSweep)) || ((player.isWeaponForWhirlwind() || player.isOneHandedWeapons()) && player.hasPerk(PerkLib.PowerSweep))) {
+					bd = buttons.add("Whirlwind", whirlwind).hint("Spin your weapon around to attack multiple enemies at once.  \n\n<b>AoE attack.</b>");
+					if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+				}
 				// Whirlwind (Beast Warrior)
-				if (player.findPerk(PerkLib.JobBeastWarrior) >= 0 && ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon())) buttons.add("F. Whirlwind", whirlwindClaws).hint("Spin yourself around to slash multiple enemies with your claws at once.  \n\n<b>AoE attack.</b>");
+				if (player.findPerk(PerkLib.JobBeastWarrior) >= 0 && ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon())) {
+					bd = buttons.add("F. Whirlwind", whirlwindClaws).hint("Spin yourself around to slash multiple enemies with your claws at once.  \n\n<b>AoE attack.</b>");
+					if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+				}
 				// Barrage
 				if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsBarrage)) {
-					buttons.add("Barrage", archerBarrage).hint("Draw multiple arrow and shoot them all at the same time to hit several target.  \n\n<b>AoE attack.</b>");
+					bd = buttons.add("Barrage", archerBarrage).hint("Draw multiple arrow and shoot them all at the same time to hit several target.  \n\n<b>AoE attack.</b>");
+					if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 			}
-			if (player.lowerBody == LowerBody.PLANT_FLOWER) {
+			if (player.isAlraune() || player.hasPerk(PerkLib.FloralOvaries)) {
 				// Pollen
 				bd = buttons.add("AlraunePollen", AlraunePollen).hint("Release a cloud of your pollen in the air to arouse your foe.");
 				if (player.hasStatusEffect(StatusEffects.AlraunePollen)) bd.disable("<b>You already spread your pollen over battlefield.</b>\n\n");
+			}
+			if (player.isAlraune()) {
 				// Entangle
 				bd = buttons.add("Entangle", AlrauneEntangle).hint("Use your vines to hinder your opponent.");
 				if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) bd.disable("<b>You already entangle your opponent.</b>\n\n");
+				else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) {
 				bd = buttons.add("Strangulate", AlrauneStrangulate).hint("Strangle your opponent with your vines.");
 				bd.requireFatigue(physicalCost(60));
 				if (monster.tallness > 120 || monster.hasPerk(PerkLib.EnemyGigantType)) bd.disable("<b>Your opponent is too tall for Strangulate to have any effect on it.</b>\n\n");
+				else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasKeyItem("Rocket Boots") >= 0 || player.hasKeyItem("Nitro Boots") >= 0) {
 				if (player.hasKeyItem("Nitro Boots") >= 0) bd = buttons.add("Blazing rocket kick", blazingRocketKick).hint("Deal fire damage using your boots. Also burns.");
-				else bd = buttons.add("Rocket kick", blazingRocketKick).hint("Deal fire damage using your boots.");
+				else {
+					bd = buttons.add("Rocket kick", blazingRocketKick).hint("Deal fire damage using your boots.");
+					if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+				}
 			}
 			if (player.arms.type == Arms.GARGOYLE) {
 				bd = buttons.add("Stone Claw", StoneClawAttack).hint("Rend your foe using your sharp stone claws.  \n\nWould go into cooldown after use for: 3 rounds");
@@ -324,7 +387,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else bd.requireFatigue(physicalCost(60));
 				if (player.hasStatusEffect(StatusEffects.CooldownStoneClaw)) {
 					bd.disable("<b>You need more time before you can perform Stone Claw again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.arms.type == Arms.GARGOYLE_2) {
 				bd = buttons.add("Stone Fist", StoneFistAttack).hint("Slam your two fist at your foe and attempt to stun them.  \n\nWould go into cooldown after use for: 3 rounds");
@@ -332,7 +395,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else bd.requireFatigue(physicalCost(60));
 				if (player.hasStatusEffect(StatusEffects.CooldownStoneFist)) {
 					bd.disable("<b>You need more time before you can perform Stone Fist again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.tailType == Tail.GARGOYLE) {
 				bd = buttons.add("Tail Slam", TailSlamAttack).hint("Slam your mace-like tail on your foe's head, dealing severe damage, crushing its defences, and stunning it.  \n\nWould go into cooldown after use for: 5 rounds");
@@ -340,7 +403,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else bd.requireFatigue(physicalCost(30));
 				if (player.hasStatusEffect(StatusEffects.CooldownTailSlam)) {
 					bd.disable("<b>You need more time before you can perform Tail Slam again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.tailType == Tail.GARGOYLE_2) {
 				bd = buttons.add("Tail Cleave", TailCleaveAttack).hint("Swipe your axe-bladed tail, cleaving through multiple opponents and dealing severe bleeding damage.  \n\nWould go into cooldown after use for: 5 rounds");
@@ -348,7 +411,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else bd.requireFatigue(physicalCost(30));
 				if (player.hasStatusEffect(StatusEffects.CooldownTailCleave)) {
 					bd.disable("<b>You need more time before you can perform Tail Cleave again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.wings.type == Wings.GARGOYLE_LIKE_LARGE) {
 				bd = buttons.add("Wing Buffet", WingBuffetAttack).hint("Buffet your foe using your two massive wings, staggering them.  \n\nWould go into cooldown after use for: 6 rounds");
@@ -356,7 +419,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else bd.requireFatigue(physicalCost(30));
 				if (player.hasStatusEffect(StatusEffects.CooldownWingBuffet)) {
 					bd.disable("<b>You need more time before you can perform Wing Buffet again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasPerk(PerkLib.EasterBunnyBalls)) {
 				if (!player.hasPerk(PerkLib.EasterBunnyEggBag) || (player.hasPerk(PerkLib.EasterBunnyEggBag) && flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] == 1)) {
@@ -364,28 +427,20 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.requireFatigue(physicalCost(30));
 					if (flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] == 0) {
 						bd.disable("<b>You need eggs to use this ability.</b>\n\n");
-					}
+					} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 				if (player.hasPerk(PerkLib.EasterBunnyEggBag) && flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] > 1) {
 					bd = buttons.add("Omni Egg throw", OmniEggthrowAttack).hint("Throw one or more of your many stashed bunny eggs blinding and arousing the opponent. These attacks benefit from skills that improve thrown weapons. \n\n"+flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+" egg remaining.");
 					bd.requireFatigue(physicalCost(30));
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.orcaScore() > 10 && player.faceType == Face.ORCA) {
 				bd = buttons.add("Play", orcaPlay).hint("Begin toying with your prey by tossing it in the air, initiating a juggling combo.");
 				bd.requireFatigue(physicalCost(30));
-				if (!monster.hasStatusEffect(StatusEffects.Stunned))
-				{
-					bd.disable("<b>You need the ennemy to be stunned in order to use this ability.</b>\n\n");
-				}
-				if (player.tallness < monster.tallness)
-				{
-					bd.disable("<b>You need the ennemy to be smaller then you in order to use this ability.</b>\n\n");
-				}
-				if (player.hasStatusEffect(StatusEffects.CooldownPlay))
-				{
-					bd.disable("<b>You need more time before you can use Play again.</b>\n\n");
-				}
+				if (!monster.hasStatusEffect(StatusEffects.Stunned)) bd.disable("<b>You need the ennemy to be stunned in order to use this ability.</b>\n\n");
+				else if (player.tallness < monster.tallness) bd.disable("<b>You need the ennemy to be smaller then you in order to use this ability.</b>\n\n");
+				else if (player.hasStatusEffect(StatusEffects.CooldownPlay)) bd.disable("<b>You need more time before you can use Play again.</b>\n\n");
+				else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 		}
 		if (player.isInGoblinMech()) {
@@ -393,67 +448,75 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Dynapunch G.", mechDynapunchGlove).hint("Shoot a springed gloved fist at the opponent with a rocket punch stunning for one round and dealing damage. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownDynapunchGlove)) {
 					bd.disable("<b>You need more time before you can use Dynapunch Glove again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasKeyItem("Taser") >= 0) {
 				if (player.hasKeyItem("Taser with an overcharged battery") >= 0) bd = buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals some lesser lightning damage and stun for 4 rounds. \n\nWould go into cooldown after use for: 8 rounds");
 				else bd = buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals no damage and stun for 2 rounds. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownTazer)) {
 					bd.disable("<b>You need more time before you can use Tazer again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.hasKeyItem("Missile launcher") >= 0) bd = buttons.add("Missile launcher", mechOmniMissile).hint("Fire missile that will cover a wide area of effect.");
-			if (player.hasKeyItem("Omni Missile") >= 0) bd = buttons.add("Omni Missile", mechOmniMissile).hint("Fire omni missiles that will cover a wide area of effect.");
+			if (player.hasKeyItem("Missile launcher") >= 0) {
+				bd = buttons.add("Missile launcher", mechOmniMissile).hint("Fire missile that will cover a wide area of effect.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
+			if (player.hasKeyItem("Omni Missile") >= 0) {
+				bd = buttons.add("Omni Missile", mechOmniMissile).hint("Fire omni missiles that will cover a wide area of effect.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
 			if (player.hasKeyItem("Whitefire Beam Cannon") >= 0) {
 				bd = buttons.add("Whitefire B.C.", mechWhitefireBeamCannon).hint("Shoot with the whitefire beam cannon at enemy burning him. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownWhitefireBeamCannon)) {
 					bd.disable("<b>You need more time before you can use Whitefire Beam Cannon again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasKeyItem("Snowball Generator") >= 0) {
 				bd = buttons.add("Snowball G.", mechSnowballGenerator).hint("Activate the snowball generator taking aim and launching a volley of snowballs at the enemy. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownSnowballGenerator)) {
 					bd.disable("<b>You need more time before you can use Snowball Generator again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasKeyItem("Raijin blaster") >= 0) {
 				bd = buttons.add("Raijin Blaster", mechRaijinBlaster).hint("Activate the raijin blaster taking aim and zapping enemy. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownRaijinBlaster)) {
 					bd.disable("<b>You need more time before you can use Raijin Blaster again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasKeyItem("Gravity shots") >= 0) {
 				bd = buttons.add("Gravity Shots", mechGravityShots).hint("Activate the gravity shots unleashing the gravity sphere at the enemy. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownGravityShots)) {
 					bd.disable("<b>You need more time before you can use Gravity Shots again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasKeyItem("Stimpack Dispenser 1.0") >= 0 || player.hasKeyItem("Medical Dispenser 2.0") >= 0) {
 				if (player.hasKeyItem("Medical Dispenser 2.0") >= 0) bd = buttons.add("Medical Dispenser 2.0", mechStimpackMedicalDispenser).hint("Activate to gain swift improved medical treatment. Be wary of secondary effects. \n\nWould go into cooldown after use for: 15 rounds");
 				else bd = buttons.add("Stimpack Dispenser 1.0", mechStimpackMedicalDispenser).hint("Activate to gain swift medical treatment. Be wary of secondary effects. \n\nWould go into cooldown after use for: 20 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownStimpackDispenser)) {
 					bd.disable("<b>You need more time before you can use "+(player.hasKeyItem("Medical Dispenser 2.0") >= 0 ? "Medical Dispenser":"Stimpack Dispenser")+" again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasKeyItem("Jetpack") >= 0 || player.hasKeyItem("MK2 Jetpack") >= 0) {
-				buttons.add("Jetpack", takeFlightGoglinMech).hint("Make use of your mech jetpack to take flight into the air for up to 5 turns. \n\nWould go into cooldown after use for: 3 rounds");
+				bd = buttons.add("Jetpack", takeFlightGoglinMech).hint("Make use of your mech jetpack to take flight into the air for up to 5 turns. \n\nWould go into cooldown after use for: 3 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownJetpack)) {
 					bd.disable("<b>You need more time before you can use jetpack again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 		}
 	}
 	internal function buildMenuForFlying(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		if (!player.isInGoblinMech()) {
-			buttons.add("Great Dive", combat.greatDive).hint("Make a Great Dive to deal TONS of damage!");
+			bd = buttons.add("Great Dive", combat.greatDive).hint("Make a Great Dive to deal TONS of damage!");
 			//Embrace
 			if ((player.wings.type == Wings.BAT_ARM || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType)) {
-				buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
+				bd = buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Sky Pounce
 			if (player.canPounce() && !monster.hasPerk(PerkLib.EnemyGroupType)) {
-				buttons.add("Skyrend", skyPounce).hint("Land into your enemy dealing damage and initiate a grapple combo. End flight.");
+				bd = buttons.add("Skyrend", skyPounce).hint("Land into your enemy dealing damage and initiate a grapple combo. End flight.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}				
 			//Tornado Strike
 			if (player.couatlScore() >= 11) {
@@ -462,13 +525,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else bd.requireFatigue(physicalCost(60));
 				if (player.hasStatusEffect(StatusEffects.CooldownTornadoStrike)) {
 					bd.disable("<b>You need more time before you can perform Tornado Strike again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Wing Slap
 			if (player.haveWingsForWingSlap()) {
 				bd = buttons.add("Wing Slap", wingSlapAttack).hint("Slap enemy with your wings.");
 				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(80));
 				else bd.requireFatigue(physicalCost(40));
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 		}
 		if (player.isInGoblinMech()) {
@@ -476,28 +540,34 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Dynapunch G.", mechDynapunchGlove).hint("Shoot a springed gloved fist at the opponent with a rocket punch stunning for one round and dealing damage. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownDynapunchGlove)) {
 					bd.disable("<b>You need more time before you can use Dynapunch Glove again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasKeyItem("Taser") >= 0) {
 				if (player.hasKeyItem("Taser with an overcharged battery") >= 0) bd = buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals some lesser lightning damage and stun for 4 rounds. \n\nWould go into cooldown after use for: 8 rounds");
 				else bd = buttons.add("Tazer", mechTazer).hint("A voltage rod set on the mech as an upgrade can be used to temporarily paralyse the opponent. Deals no damage and stun for 2 rounds. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownTazer)) {
 					bd.disable("<b>You need more time before you can use Tazer again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.hasKeyItem("Missile launcher") >= 0) bd = buttons.add("Missile launcher", mechOmniMissile).hint("Fire missile that will cover a wide area of effect.");
-			if (player.hasKeyItem("Omni Missile") >= 0) bd = buttons.add("Omni Missile", mechOmniMissile).hint("Fire omni missiles that will cover a wide area of effect.");
+			if (player.hasKeyItem("Missile launcher") >= 0) {
+				bd = buttons.add("Missile launcher", mechOmniMissile).hint("Fire missile that will cover a wide area of effect.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
+			if (player.hasKeyItem("Omni Missile") >= 0) {
+				bd = buttons.add("Omni Missile", mechOmniMissile).hint("Fire omni missiles that will cover a wide area of effect.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
 			if (player.hasKeyItem("Whitefire Beam Cannon") >= 0) {
 				bd = buttons.add("Whitefire B.C.", mechWhitefireBeamCannon).hint("Shoot with the whitefire beam cannon at enemy burning him. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownWhitefireBeamCannon)) {
 					bd.disable("<b>You need more time before you can use Whitefire Beam Cannon again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasKeyItem("Snowball Generator") >= 0) {
 				bd = buttons.add("Snowball G.", mechSnowballGenerator).hint("Activate the snowball generator taking aim and launching a volley of snowballs at the enemy. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownSnowballGenerator)) {
 					bd.disable("<b>You need more time before you can use Snowball Generator again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasKeyItem("Raijin blaster") >= 0) {
 				bd = buttons.add("Raijin Blaster", mechRaijinBlaster).hint("Activate the raijin blaster taking aim and zapping enemy. \n\nWould go into cooldown after use for: 8 rounds");
@@ -509,15 +579,40 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Gravity Shots", mechGravityShots).hint("Activate the gravity shots unleashing the gravity sphere at the enemy. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownGravityShots)) {
 					bd.disable("<b>You need more time before you can use Gravity Shots again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasKeyItem("Stimpack Dispenser 1.0") >= 0 || player.hasKeyItem("Medical Dispenser 2.0") >= 0) {
 				if (player.hasKeyItem("Medical Dispenser 2.0") >= 0) bd = buttons.add("Medical Dispenser 2.0", mechStimpackMedicalDispenser).hint("Activate to gain swift improved medical treatment. Be wary of secondary effects. \n\nWould go into cooldown after use for: 15 rounds");
 				else bd = buttons.add("Stimpack Dispenser 1.0", mechStimpackMedicalDispenser).hint("Activate to gain swift medical treatment. Be wary of secondary effects. \n\nWould go into cooldown after use for: 20 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownStimpackDispenser)) {
 					bd.disable("<b>You need more time before you can use "+(player.hasKeyItem("Medical Dispenser 2.0") >= 0 ? "Medical Dispenser":"Stimpack Dispenser")+" again.</b>\n\n");
-				}
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
+		}
+	}
+
+	public function checkForElementalEnchantmentAndDoDamage(damage:Number, canUseFist:Boolean = true, canUseWhip:Boolean = true):void{
+		if (player.weapon == weapons.L_WHIP) damage = doFireDamage(damage, true, true);
+		else if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doFireDamage(damage, true, true);
+		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doIceDamage(damage, true, true);
+		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doLightingDamage(damage, true, true);
+		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doDarknessDamage(damage, true, true);
+		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) damage = doFireDamage(damage, true, true);
+		else if ((player.isSwordTypeWeapon() || player.isAxeTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade)){
+			damage += scalingBonusLibido() * 0.20;
+			damage = doDamage(damage, true, true);
+			damage = doFireDamage(Math.round(damage*0.1), true, true);
+			damage = Math.round(damage * 1.1);
+		}
+		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
+			damage = doDamage(damage, true, true);
+			damage = doFireDamage(Math.round(damage*0.1), true, true);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			damage = Math.round(damage * 1.1);
+		}
+		else{
+			damage = Math.round(damage);
+			damage = doDamage(damage, true, true);
 		}
 	}
 	
@@ -579,8 +674,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
 			else damage *= 1.75;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -626,8 +720,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
 			else damage *= 1.75;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -673,8 +766,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
 			else damage *= 1.75;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -720,8 +812,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
 			else damage *= 1.75;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -767,8 +858,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
 			else damage *= 1.75;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -814,8 +904,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
 			else damage *= 1.75;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -862,19 +951,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= 1.75;
 		}
 		damage = Math.round(damage);
-		if (player.weapon == weapons.L_WHIP) damage = doFireDamage(damage, true, true);
-		else if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doFireDamage(damage, true, true);
-		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doIceDamage(damage, true, true);
-		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doLightingDamage(damage, true, true);
-		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doDarknessDamage(damage, true, true);
-		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) damage = doFireDamage(damage, true, true);
-		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
-			damage = doDamage(damage, true, true);
-			damage = doFireDamage(Math.round(damage*0.1), true, true);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
-			damage = Math.round(damage * 1.1);
-		}
-		else damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -921,6 +998,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) powerfistspowervalue *= 1 + player.perkv1(PerkLib.FeralHunter);
 		if (player.hasPerk(PerkLib.JobWarrior)) powerfistspowervalue *= 1.05;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) powerfistspowervalue *= 2;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) powerfistspowervalue *= 1.5;
 		if (player.armor == armors.SPKIMO) powerfistspowervalue *= 1.2;
 		if (player.necklace == necklaces.OBNECK) powerfistspowervalue *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) powerfistspowervalue *= combat.oniRampagePowerMulti();
@@ -1065,6 +1143,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
@@ -1091,11 +1170,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.spe >= 225) damage = doDamage(damage, true, true);
 			if (player.spe >= 300) damage = doDamage(damage, true, true);
 		}
-		else if (player.weapon == weapons.RCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doFireDamage(damage, true, true);
-		else if (player.weapon == weapons.SCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doIceDamage(damage, true, true);
-		else if (player.weapon == weapons.TCLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doLightingDamage(damage, true, true);
-		else if (player.weapon == weapons.ACLAYMO && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doDarknessDamage(damage, true, true);
-		else damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage, false, false);
 		if (crit) {
 			outputText(" <b>Critical!</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -1156,6 +1231,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
@@ -1213,8 +1289,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 				if (player.tailType == Tail.SCORPION) {
 					outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
-					monster.spe -= 2;
-					if (monster.spe < 1) monster.spe = 1;
+					monster.statStore.addBuffObject({spe:-2}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom))
 					{
 						monster.addStatusValue(StatusEffects.NagaVenom,3,1);
@@ -1231,8 +1306,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					else damage += 80;
 					lustdamage *= 0.14;
 					monster.teased(monster.lustVuln * lustdamage);
-					monster.tou -= 2;
-					if (monster.tou < 1) monster.tou = 1;
+					monster.statStore.addBuffObject({tou:-2}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom))
 					{
 						monster.addStatusValue(StatusEffects.NagaVenom,3,1);
@@ -1242,10 +1316,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 				if (player.faceType == Face.SNAKE_FANGS) {
 					outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
-					monster.spe -= 0.4;
-					monster.spe -= 0.4;
-					if (monster.spe < 1) monster.spe = 1;
-					if (monster.spe < 1) monster.spe = 1;
+					monster.statStore.addBuffObject({spe:-1}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom))
 					{
 						monster.addStatusValue(StatusEffects.NagaVenom,2,0.4);
@@ -1440,6 +1511,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
@@ -1465,8 +1537,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= critMulti;
 		}
-		damage = Math.round(damage);
-		damage = doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		if (player.hasPerk(PerkLib.PhantomStrike)) {
 			damage = doDamage(damage, true, true);
 			damage *= 2;
@@ -1537,6 +1608,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.PowerSweep)) {
@@ -1577,7 +1649,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//final touches
 		damage = Math.round(damage);
 		damage *= (monster.damagePercent() / 100);
-		damage = doDamage(damage);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText("Your [weapon] hits few of " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
 		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
@@ -1628,6 +1700,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large") {
@@ -1731,6 +1804,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
@@ -1825,11 +1899,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 				damage += 5 + rand(6);
 			}
 			damage += player.level * 1.5;
-			monster.spe -= damage/2;
+			monster.statStore.addBuffObject({spe:-damage/2}, "Poison",{text:"Poison"});
 			damage = monster.lustVuln * damage;
 			//Clean up down to 1 decimal point
 			damage = Math.round(damage*10)/10;
-			monster.teased(monster.lustVuln * damage);
+			monster.teased(damage);
 		}
 		//New lines and moving on!
 		outputText("\n\n");
@@ -1982,6 +2056,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		damage = Math.round(damage);
+		if (damage < 1) damage = 1;
 		damage = doDamage(damage);
 		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 		if (player.hasPerk(PerkLib.LactaBovinaOvariesFinalForm)) player.lust -= 200;
@@ -2154,8 +2229,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		monster.teased(lustDmgF);
 		if (crit) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
-		monster.spe -= 15;
-		if (monster.spe < 1) monster.spe = 1;
+		monster.statStore.addBuffObject({spe:-15}, "Poison",{text:"Poison"});
 		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		enemyAI();
 	}
@@ -2655,18 +2729,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(!monster.plural) outputText("its");
 		else outputText("their");
 		outputText(" movement.\n\n");
-		var EntangleStrNerf:Number = 0;
-		var EntangleSpeNerf:Number = 0;
-		EntangleStrNerf = Math.round(monster.str * .5);
-		EntangleSpeNerf = Math.round(monster.spe * .5);
-		monster.str -= EntangleStrNerf;
-		monster.spe -= EntangleSpeNerf;
-		if (player.hasPerk(PerkLib.RacialParagon)) EntangleSpeNerf *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) EntangleSpeNerf *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) EntangleSpeNerf *= 1.50;
-		if(monster.str < 1) monster.str = 1;
-		if(monster.spe < 1) monster.spe = 1;
-		player.createStatusEffect(StatusEffects.AlrauneEntangle,EntangleStrNerf,EntangleSpeNerf,0,0);
+		var EntangleNerf:Number;
+		EntangleNerf = 0.5;
+		if (player.hasPerk(PerkLib.RacialParagon)) EntangleNerf = 0.75;
+		if (player.hasPerk(PerkLib.Apex)) EntangleNerf = 0.80;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) EntangleNerf = 0.90;
+		player.createStatusEffect(StatusEffects.AlrauneEntangle,EntangleNerf,EntangleNerf,0,0);
+		monster.statStore.addBuffObject({"str.mult":-EntangleNerf,"spe.mult":-EntangleNerf}, "EntangleNerf",{text:"EntangleNerf"});
 		enemyAI();
 	}
 
@@ -2678,6 +2747,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		damage += player.tou;
 		damage += scalingBonusToughness() * 0.5;
+		if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
@@ -2864,6 +2934,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
@@ -2938,6 +3009,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
@@ -3009,6 +3081,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
@@ -3082,6 +3155,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
@@ -3146,6 +3220,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
@@ -3276,8 +3351,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else {
 			if(!monster.plural) outputText("The adhesive strands cover " + monster.a + monster.short + " with restrictive webbing, greatly slowing " + monster.mf("him","her") + ". ");
 			else outputText("The adhesive strands cover " + monster.a + monster.short + " with restrictive webbing, greatly slowing " + monster.mf("him","her") + ". ");
-			monster.spe -= 45;
-			if(monster.spe < 0) monster.spe = 0;
+			monster.statStore.addBuffObject({spe:-45}, "Web",{text:"Web"});
 		}
 		awardAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB);
 		outputText("\n\n");
@@ -3603,6 +3677,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
@@ -3701,6 +3776,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 			if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 			if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+			if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 			if (player.armor == armors.SPKIMO) damage *= 1.2;
 			if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
@@ -3790,10 +3866,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 11) hydraBiteAttackpoweeeeer();
 		if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12) hydraBiteAttackpoweeeeer();
 		//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
-		monster.str -= 2;
-		monster.spe -= 2;
-		if(monster.str < 1) monster.str = 1;
-		if(monster.spe < 1) monster.spe = 1;
+		monster.statStore.addBuffObject({str:-2,spe:-2}, "Poison",{text:"Poison"});
 		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 		{
 			monster.addStatusValue(StatusEffects.NagaVenom,2,2);
@@ -3817,6 +3890,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) HBD *= 1 + player.perkv1(PerkLib.FeralHunter);
 		if (player.hasPerk(PerkLib.JobWarrior)) HBD *= 1.05;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) HBD *= 2;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) HBD *= 1.5;
 		if (player.armor == armors.SPKIMO) HBD *= 1.2;
 		if (player.necklace == necklaces.OBNECK) HBD *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) HBD *= combat.oniRampagePowerMulti();
@@ -3825,7 +3899,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) HBD *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) HBD *= 1.50;
 		HBD = Math.round(HBD);
-		HBD = doDamage(HBD, true, true);
+		doDamage(HBD, true, true);
 	}
 	public function nagaBiteAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -3850,10 +3924,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//(Otherwise)
 			else outputText("You lunge at the foe headfirst, fangs bared. You manage to catch " + monster.a + monster.short + " off guard, your needle-like fangs penetrating deep into " + monster.pronoun3 + " body. You quickly release your venom, and retreat before " + monster.pronoun1 + " manages to react.");
 			//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
-			monster.str -= 2;
-			monster.spe -= 2;
-			if(monster.str < 1) monster.str = 1;
-			if(monster.spe < 1) monster.spe = 1;
+			monster.statStore.addBuffObject({str:-2,spe:-2}, "Poison",{text:"Poison"});
 			if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 			{
 				monster.addStatusValue(StatusEffects.NagaVenom,2,2);
@@ -3946,17 +4017,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
+		//Frostbite for Fenrir
 		if(rand(player.spe/2 + 40) + 20 > monster.spe/1.5 || monster.hasStatusEffect(StatusEffects.Constricted)) {
 			//(if monster = demons)
 			if(monster.short == "demons") outputText("You look at the crowd for a moment, wondering which of their number you should bite. Your glance lands upon the leader of the group, easily spotted due to his snakeskin cloak. You quickly dart through the demon crowd as it closes in around you and lunge towards the broad form of the leader. You manage to catch the demon off guard, biting it viciously. The merciless cold of your bite transfer to your foe weakening it as you retreat before he manages to react.");
 			//(Otherwise)
 			else outputText("You lunge at the foe headfirst, maw open for a bite. You manage to catch the " + monster.a + monster.short + " off guard, biting it viciously. The merciless cold of your bite transfer to your foe weakening it as you retreat before " + monster.pronoun1 + " manages to react.");
 			//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
-			monster.str -= 5 + rand(5);
-			monster.spe -= 5 + rand(5);
-			if(monster.str < 1) monster.str = 1;
-			if(monster.spe < 1) monster.spe = 1;
+			monster.statStore.addBuffObject({str:-10,spe:-10}, "Poison",{text:"Poison"});
 			if(monster.hasStatusEffect(StatusEffects.Frostbite))
 			{
 				monster.addStatusValue(StatusEffects.Frostbite,1,1);
@@ -4180,6 +4248,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 				if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 				if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+				if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 				if (player.armor == armors.SPKIMO) damage *= 1.2;
 				if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 				if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
@@ -4282,7 +4351,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		chance += player.spe/2;
 		//Hit & calculation
 		if(chance >= rand(100)) {
-			var horns:Number = player.horns.count;
 			if (player.horns.count > 40) player.horns.count = 40;
 			damage = int(player.str + (player.tou / 2) + (player.spe / 2) + (player.level * 2) * 1.2 * (monster.damagePercent() / 100)); //As normal attack + horns length bonus
 			if(damage < 0) damage = 5;
@@ -4415,8 +4483,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			monster.teased(monster.lustVuln * damage);
 		}
 		if (player.tailType == 20) {
-			monster.spe -= 10;
-			if(monster.spe < 1) monster.spe = 1;
+			monster.statStore.addBuffObject({spe:-10}, "Poison",{text:"Poison"});
 		}
 		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 		{
@@ -4497,8 +4564,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
 		monster.teased(monster.lustVuln * lustdamage, false);
 		if (crit) outputText(" <b>Critical!</b>");
-		monster.spe -= 10;
-		if(monster.spe < 1) monster.spe = 1;
+		monster.statStore.addBuffObject({spe:-10}, "Poison",{text:"Poison"});
 		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 		{
 			monster.addStatusValue(StatusEffects.NagaVenom,3,5);
@@ -4506,8 +4572,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 5, 0);
 		//if (!monster.hasStatusEffect(StatusEffects.lustvenom)) monster.createStatusEffect(StatusEffects.lustvenom, 0, 0, 0, 0);
 		//New line before monster attack
-		monster.spe -= (2+rand(3));
-		if(monster.spe < 1) monster.spe = 1;
+		monster.statStore.addBuffObject({spe:-(2+rand(3))}, "Poison",{text:"Poison"});
 		//Use tail mp
 		player.tailVenom -= 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
@@ -4669,7 +4734,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		attack = rand(4);
-		var damage:Number = 0;
+		var damage:Number;
 		switch(attack) {
 				//Success 1:
 			case 1:
@@ -4777,6 +4842,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 			if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 			if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+			if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 			if (player.armor == armors.SPKIMO) damage *= 1.2;
 			if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 			if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
@@ -4820,7 +4886,20 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else doNext(endLustVictory);
 		}
 	}
-	
+
+	public function Dig():void {
+		clearOutput();
+		if(monster.short == "pod") {
+			outputText("You can't grab something you're trapped inside of!");
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		outputText("You dig yourself into the ground, moving out of your opponent’s reach.");
+		monster.createStatusEffect(StatusEffects.Dig,5,0,0,0);
+		enemyAI();
+	}
+
 	public function kick():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
@@ -4918,6 +4997,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
@@ -4989,6 +5069,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.SteelImpact)) damage += ((player.tou - 50) * 0.3);
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.shieldPerk == "Large") damage *= 2;
+		if (player.shieldPerk == "Massive") damage *= 5;
 		damage *= (monster.damagePercent() / 100);
 		var chance:int = Math.floor(monster.statusEffectv1(StatusEffects.TimesBashed) + 1);
 		if (chance > 10) chance = 10;
@@ -5002,6 +5084,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		fatigue(20, USEFATG_PHYSICAL);
+		if (player.shield == shields.SPIL_SH || player.shield == shields.SPIH_SH || player.shield == shields.SPIM_SH) {
+			if (monster.hasStatusEffect(StatusEffects.HemorrhageShield)) monster.addStatusValue(StatusEffects.HemorrhageShield, 1, 3);
+			else monster.createStatusEffect(StatusEffects.HemorrhageShield, 3, 0.02, 0, 0);
+            if (player.shield == shields.SPIH_SH) monster.addStatusValue(StatusEffects.HemorrhageShield, 2, 0.02);
+            if (player.shield == shields.SPIM_SH) monster.addStatusValue(StatusEffects.HemorrhageShield, 2, 0.08);
+			if (monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your [shield] leave behind.");
+            else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your [shield] leave behind.");
+		}
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
@@ -5348,7 +5438,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= 0.5;
 			damage = Math.round(damage);
 			outputText("potent discharge ");
-			damage = doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
 			outputText(" damage!");
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			monster.createStatusEffect(StatusEffects.Stunned,4,0,0,0);
@@ -5447,7 +5537,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		outputText("You press the spiral button and aim, unleashing the gravity sphere at " + monster.a + monster.short + ". ");
 		player.createStatusEffect(StatusEffects.CooldownGravityShots,8,0,0,0);
-		var damage:Number = 0;
+		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModBlack() * 2;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (monster.hasPerk(PerkLib.EnemyGroupType)) damage *= 8;
@@ -5482,7 +5572,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		outputText("You press the BIG lightning button and aim, smirking wide as the Raijin blaster power up your mech zapping " + monster.a + monster.short + " for ");
 		player.createStatusEffect(StatusEffects.CooldownRaijinBlaster,8,0,0,0);
-		var damage:Number = 0;
+		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModWhite() * 2;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (monster.hasPerk(PerkLib.EnemyGroupType)) damage *= 8;
@@ -5530,7 +5620,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		outputText("You activate the snowball generator, taking aim and launching a volley of snowballs at the " + monster.a + monster.short + " for ");
 		player.createStatusEffect(StatusEffects.CooldownSnowballGenerator,8,0,0,0);
-		var damage:Number = 0;
+		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModBlack() * 4;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.armor == armors.GTECHC_) damage *= 1.5;
@@ -5562,7 +5652,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		outputText("You shoot with the Whitefire beam cannon at " + monster.a + monster.short + " burning " + monster.pronoun3 + " badly for ");
 		player.createStatusEffect(StatusEffects.CooldownWhitefireBeamCannon,8,0,0,0);
-		var damage:Number = 0;
+		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModWhite() * 4;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.armor == armors.GTECHC_) damage *= 1.5;
@@ -5620,6 +5710,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.hasPerk(PerkLib.GoblinoidBlood)) {
 			if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
 			if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;

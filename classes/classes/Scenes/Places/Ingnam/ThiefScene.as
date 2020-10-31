@@ -51,7 +51,7 @@ package classes.Scenes.Places.Ingnam
 					if (player.cockThatFits(monster.analCapacity()) >= 0) addButton(0, "Anal Fuck", rapeThiefAnally).hint("The thief definitely needs to learn a lesson not to mess with you. Buttfuck the thief.");
 					else outputText(" <b>Your cock is too big to fit!</b>");
 				}
-				if (player.hasVagina()) addButton(1, "Get Licked", getLicked).hint("Punish the thief by having him lick your " + player.vaginaDescript() + ".");
+				if (player.hasVagina()) addButton(1, "Get Licked", getLicked).hint("Punish the thief by having him lick your [vagina].");
 				addButton(4, "Leave", cleanupAfterCombat);
 				return;
 			}
@@ -71,7 +71,7 @@ package classes.Scenes.Places.Ingnam
 		
 		private function getLicked():void {
 			clearOutput();
-			outputText("You drag the unconscious thief into one of the alleys. The thief wakes up and realize what you're going to do. You " + (player.armor != ArmorLib.NOTHING || player.lowerGarment != UndergarmentLib.NOTHING ? "remove the bottom half of your [armor]" : "") + " to reveal your " + player.vaginaDescript() + (player.hasCock() ? " and " + player.cockDescript(): "") + ".");
+			outputText("You drag the unconscious thief into one of the alleys. The thief wakes up and realize what you're going to do. You " + (player.armor != ArmorLib.NOTHING || player.lowerGarment != UndergarmentLib.NOTHING ? "remove the bottom half of your [armor]" : "") + " to reveal your [vagina]" + (player.hasCock() ? " and " + player.cockDescript(): "") + ".");
 			outputText("\n\n\"<i>Now lick. I want it licked good!</i>\" you tell the thief. The thief lets out a sigh as he licks your [pussy]. You let out a moan in pleasure while he's tongue-fucking your [pussy].");
 			outputText("\n\nEventually, you can hold back no more and your [pussy] spasms, launching femcum");
 			if (player.hasCock()) outputText(" while your [cock] fires ropes of jism");

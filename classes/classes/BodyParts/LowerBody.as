@@ -67,6 +67,13 @@ public class LowerBody extends SaveableBodyPart {
 	public static const MELKIE:int			  	  = 57;
 	public static const CENTIPEDE:int			  = 58;
 	public static const KRAKEN:int                = 59;
+	public static const CRAB:int                  = 60;
+	public static const CANCER:int                = 61;
+	public static const FROSTWYRM:int             = 62;
+	public static const USHI_ONI_ONNA:int         = 63;
+	public static const FLOWER_LILIRAUNE:int	  = 64;
+	public static const WEASEL:int                = 65;
+	public static const GAZER:int                 = 66;
 	// Don't forget to add new types in DebugMenu.as list LOWER_TYPE_CONSTANTS
 	
 	override public function set type(value:int):void {
@@ -340,7 +347,7 @@ public class LowerBody extends SaveableBodyPart {
 		}
 	}
 	public function isDrider():Boolean {
-		return (type == DRIDER);
+		return (type == DRIDER || type == CANCER || type == USHI_ONI_ONNA);
 	}
 	public function isGoo():Boolean {
 		return type == GOO;
@@ -349,7 +356,7 @@ public class LowerBody extends SaveableBodyPart {
 		return legCount == 2;
 	}
 	public function isNaga():Boolean {
-		return type == NAGA || type == HYDRA;
+		return type == NAGA || type == HYDRA || type == FROSTWYRM;
 	}
 
 	public function isTaur():Boolean {
@@ -363,7 +370,10 @@ public class LowerBody extends SaveableBodyPart {
 		return type == KRAKEN;
 	}
 	public function isAlraune():Boolean {
-		return type == PLANT_FLOWER;
+		return type == PLANT_FLOWER || type == FLOWER_LILIRAUNE;
+	}
+	public function isLiliraune():Boolean {
+		return type == FLOWER_LILIRAUNE;
 	}
 	
 	override protected function loadFromOldSave(savedata:Object):void {

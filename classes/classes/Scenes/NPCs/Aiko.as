@@ -137,7 +137,8 @@ import classes.internals.*;
 				}
 				//Block with shield
 				else if (combatBlock(true)) {
-					outputText("<i>\“Just hold still, I promise to make it hurt good!”</i> Aiko yells as you block her ferocious attacks with your [shield].")
+					outputText("<i>\“Just hold still, I promise to make it hurt good!”</i> Aiko yells as you block her ferocious attacks with your [shield].");
+					SceneLib.combat.ShieldsStatusProcs();
 				}
 			} else {
 				var damage:int = int(str) + rand(15);

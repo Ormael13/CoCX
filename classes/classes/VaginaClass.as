@@ -3,8 +3,7 @@
 import classes.BodyParts.IOrifice;
 import classes.internals.Utils;
 
-public class VaginaClass implements IOrifice
-	{
+public class VaginaClass implements IOrifice {
 
         public static const DEFAULT_CLIT_LENGTH:Number = 0.5;
 		
@@ -14,6 +13,7 @@ public class VaginaClass implements IOrifice
 		public static const CAVE_WYRM:int 		= 6;
 		public static const VENOM_DRIPPING:int 	= 7;
 		public static const MANTICORE:int 		= 8;
+		public static const CANCER:int 			= 9;
 		
 		public static const WETNESS_DRY:int       = 0;
 		public static const WETNESS_NORMAL:int    = 1;

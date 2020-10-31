@@ -1,4 +1,4 @@
-﻿package classes 
+﻿package classes
 {
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
@@ -17,7 +17,6 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kACHIEVEMENTS;
-import classes.GlobalFlags.kCOUNTERS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
 import classes.Scenes.Areas.Desert.SandWitchScene;
@@ -25,8 +24,6 @@ import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
-import classes.internals.CountersStorage;
-import classes.internals.RootCounters;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
 
@@ -36,23 +33,30 @@ import coc.view.MainView;
 
 	public class CharCreation extends BaseContent {
 		
-		public const MAX_TOLERANCE_LEVEL:int = 10;				//40 AP
-		public const MAX_MORALSHIFTER_LEVEL:int = 10;			//40 AP
-		public const MAX_DESIRES_LEVEL:int = 25;				//90 AP
-		public const MAX_ENDURANCE_LEVEL:int = 25;				//90 AP
-		public const MAX_HARDINESS_LEVEL:int = 25;				//90 AP
-		public const MAX_SOULPURITY_LEVEL:int = 25;				//90 AP
-		public const MAX_INNERPOWER_LEVEL:int = 25;				//90 AP
-		public const MAX_FURY_LEVEL:int = 25;					//90 AP
-		public const MAX_MYSTICALITY_LEVEL:int = 20;			//90 AP
-		public const MAX_SPIRITUALENLIGHTENMENT_LEVEL:int = 20;	//90 AP
-		public const MAX_WISDOM_LEVEL:int = 5;					//15 AP
-		public const MAX_TRANSHUMANISM_LEVEL:int = 25;			//90 AP
-		public const MAX_FORTUNE_LEVEL:int = -1;				//No maximum level.(845)
-		public const MAX_VIRILITY_LEVEL:int = 10;				//40 AP
-		public const MAX_FERTILITY_LEVEL:int = 10;				//40 AP
-		public const MAX_MILK_FAUCET_LEVEL:int = 25;			//90 AP
-		public const MAX_CUM_HOSE_LEVEL:int = 25;				//90 AP
+		public const MAX_TOLERANCE_LEVEL:int = 10;
+		public const MAX_MORALSHIFTER_LEVEL:int = 10;
+		public const MAX_DESIRES_LEVEL:int = 30;
+		public const MAX_ENDURANCE_LEVEL:int = 30;
+		public const MAX_HARDINESS_LEVEL:int = 30;
+		public const MAX_SOULPURITY_LEVEL:int = 30;
+		public const MAX_INNERPOWER_LEVEL:int = 30;
+		public const MAX_FURY_LEVEL:int = 30;
+		public const MAX_MYSTICALITY_LEVEL:int = 20;
+		public const MAX_SPIRITUALENLIGHTENMENT_LEVEL:int = 20;
+		public const MAX_WISDOM_LEVEL:int = 50;
+		public const MAX_TRANSHUMANISM_LEVEL:int = 30;
+		public const MAX_TRANSHUMANISM_STR_LEVEL:int = 30;
+		public const MAX_TRANSHUMANISM_TOU_LEVEL:int = 30;
+		public const MAX_TRANSHUMANISM_SPE_LEVEL:int = 30;
+		public const MAX_TRANSHUMANISM_INT_LEVEL:int = 30;
+		public const MAX_TRANSHUMANISM_WIS_LEVEL:int = 30;
+		public const MAX_TRANSHUMANISM_LIB_LEVEL:int = 30;
+		public const MAX_TRANSHUMANISM_SEN_LEVEL:int = 30;
+		public const MAX_FORTUNE_LEVEL:int = 50;
+		public const MAX_VIRILITY_LEVEL:int = 10;
+		public const MAX_FERTILITY_LEVEL:int = 10;
+		public const MAX_MILK_FAUCET_LEVEL:int = 25;
+		public const MAX_CUM_HOSE_LEVEL:int = 25;
 		
 		private var specialCharacters:CharSpecial = new CharSpecial();
 		private var customPlayerProfile:Function;
@@ -79,6 +83,7 @@ import coc.view.MainView;
 		
 		public function newGameGo():void {
 			XXCNPC.unloadSavedNPCs();
+			CoC.instance.saves.resetSaveableStates();
 			mainView.eventTestInput.x = -10207.5;
 			mainView.eventTestInput.y = -1055.1;
 			hideStats();
@@ -98,11 +103,11 @@ import coc.view.MainView;
 			mainView.setButtonText(0, "Newgame"); // b1Text.text = "Newgame";
 			//flags[kFLAGS.CUSTOM_PC_ENABLED] = 0;
 			
-			var showSpecialNames:Boolean = true; // achievements[kACHIEVEMENTS.STORY_FINALBOSS] > 0;			
+			var showSpecialNames:Boolean = true; // achievements[kACHIEVEMENTS.STORY_FINALBOSS] > 0;
 			
 			clearOutput();
 			outputText("You grew up in the small village of Ingnam, a remote village with rich traditions, buried deep in the wilds.  Every year for as long as you can remember, your village has chosen a champion to send to the cursed Demon Realm.  Legend has it that in years Ingnam has failed to produce a champion, chaos has reigned over the countryside.  Children disappear, crops wilt, and disease spreads like wildfire.  This year, <b>you</b> have been selected to be the champion.\n\n");
-			//if (showSpecialNames) outputText("\n\n\n\n");			
+			//if (showSpecialNames) outputText("\n\n\n\n");
 			outputText("What is your name?");
 		
 			/*CODE FROM CMACLOAD HERE
@@ -131,7 +136,7 @@ import coc.view.MainView;
 			
 			var preList:Array = [];
 			//function _add(element:Array):void{preList.push({label: element[0], data:element});}
-			//if (CoC_Settings.debugBuild) preList.push( { label: "TestChar", data: [ "TestChar", customTestChar, true, "For debug." ]} );			
+			//if (CoC_Settings.debugBuild) preList.push( { label: "TestChar", data: [ "TestChar", customTestChar, true, "For debug." ]} );
 			for (var t:int = 0; t < specialCharacters.customs.length; t++) preList.push( { label: specialCharacters.customs[t][0], data:specialCharacters.customs[t] } );
 
 			if (showSpecialNames) {
@@ -156,13 +161,6 @@ import coc.view.MainView;
             }
 
 			model.player = player;
-			player.str = 15;
-			player.tou = 15;
-			player.spe = 15;
-			player.inte = 15;
-			player.wis = 15;
-			player.sens = 15;
-			player.lib = 15;
 			player.cor = 15;
 			player.soulforce = 50;
 			player.wrath = 0;
@@ -174,7 +172,7 @@ import coc.view.MainView;
 			player.lust = 15;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				player.XP = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP];
-				player.level = 0;				
+				player.level = 0;
 				player.gems = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS];
 			}
 			player.hairLength = 5;
@@ -403,9 +401,6 @@ import coc.view.MainView;
 			}
 			//Clear plot storage array!
 			CoC.instance.flags = new DefaultDict();
-			var countersStorage:CountersStorage = kCOUNTERS.create();
-			kCOUNTERS.initialize(countersStorage);
-			CoC.instance.counters = new RootCounters(countersStorage);
 			CoC.instance.saves.loadPermObject();
 			//Carry over data if new game plus.
 			if (player.hasKeyItem("Ascension") >= 0) CoC.instance.flags = newFlags;
@@ -468,7 +463,7 @@ import coc.view.MainView;
 			addButton(0, "Man", isAMan);
 			addButton(1, "Woman", isAWoman);
 			if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] > 0) {
-				outputText("\n\nOr a hermaphrodite as you've unlocked hermaphrodite option!");
+				outputText("\n\nOr a hermaphroditeas you've unlocked the option for hermaphrodite.");
 				addButton(2, "Herm", isAHerm);
 			}
 		}
@@ -481,7 +476,7 @@ import coc.view.MainView;
 				completeCharacterCreation(); //Skip character creation, customPlayerProfile will be called in completeCharacterCreation
 			}
 			else {
-				//After character creation the fact that customPlayerProfile is not null will activate a custom player setup 
+				//After character creation the fact that customPlayerProfile is not null will activate a custom player setup
 				outputText("There is something different about you, but first, what is your basic gender?  An individual such as you may later overcome this, of course...\n\n");
 				genericGenderChoice();
 			}
@@ -511,7 +506,7 @@ import coc.view.MainView;
 			else
 				outputText("\n\nThis character have no pre-defined history.");
 				
-			flushOutputTextToGUI();	
+			flushOutputTextToGUI();
 			mainView.nameBox.text = selectedItem.data[0];
 		}
 		
@@ -534,8 +529,8 @@ import coc.view.MainView;
 		private function isAMan():void {
 			//Attributes
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
-				player.str += 3;
-				player.tou += 2;
+				player.strStat.core.value += 3;
+				player.touStat.core.value += 2;
 			}
 			//Body attributes
 			player.fertility = 5;
@@ -565,8 +560,8 @@ import coc.view.MainView;
 		private function isAWoman():void {
 			//Attributes
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
-				player.spe += 3;
-				player.inte += 2;
+				player.speStat.core.value += 3;
+				player.intStat.core.value += 2;
 			}
 			//Body attributes
 			player.fertility = 10;
@@ -592,10 +587,10 @@ import coc.view.MainView;
 		private function isAHerm():void {
 			//Attributes
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
-				player.str+=1;
-				player.tou+=1;
-				player.spe+=1;
-				player.inte+= 1;
+				player.strStat.core.value += 1;
+				player.touStat.core.value += 1;
+				player.speStat.core.value +=1;
+				player.intStat.core.value += 1;
 			}
 			//Body attributes
 			player.fertility = 10;
@@ -630,8 +625,8 @@ import coc.view.MainView;
 		
 		
 		private function buildLeanMale():void {
-			player.str -= 1;
-			player.spe += 1;
+			player.strStat.core.value -= 1;
+			player.speStat.core.value += 1;
 			
 			player.femininity = 34;
 			player.thickness = 30;
@@ -644,8 +639,8 @@ import coc.view.MainView;
 		}
 
 		private function buildSlenderFemale():void {
-			player.str -= 1;
-			player.spe += 1;
+			player.strStat.core.value -= 1;
+			player.speStat.core.value += 1;
 			
 			player.femininity = 66;
 			player.thickness = 30;
@@ -678,9 +673,9 @@ import coc.view.MainView;
 		}
 
 		private function buildThickMale():void {
-			player.spe -= 4;
-			player.str += 2;
-			player.tou += 2;
+			player.speStat.core.value -= 4;
+			player.strStat.core.value += 2;
+			player.touStat.core.value += 2;
 			
 			player.femininity = 29;
 			player.thickness = 70;
@@ -693,9 +688,9 @@ import coc.view.MainView;
 		}
 
 		private function buildCurvyFemale():void {
-			player.spe -= 2;
-			player.str += 1;
-			player.tou += 1;
+			player.speStat.core.value -= 2;
+			player.strStat.core.value += 1;
+			player.touStat.core.value += 1;
 			
 			player.femininity = 71;
 			player.thickness = 70;
@@ -707,8 +702,8 @@ import coc.view.MainView;
 		}
 
 		private function buildGirlyMale():void {
-			player.str -= 2;
-			player.spe += 2;
+			player.strStat.core.value -= 2;
+			player.speStat.core.value += 2;
 			
 			player.femininity = 50;
 			player.thickness = 50;
@@ -721,8 +716,8 @@ import coc.view.MainView;
 		}
 
 		private function buildTomboyishFemale():void {
-			player.str += 1;
-			player.spe -= 1;
+			player.strStat.core.value += 1;
+			player.speStat.core.value -= 1;
 			
 			player.femininity = 56;
 			player.thickness = 50;
@@ -843,7 +838,7 @@ import coc.view.MainView;
 			addButton(5, "Mahogany", confirmComplexion, "mahogany");
 			addButton(6, "Russet", confirmComplexion, "russet");
 			addButton(14, "Back", genericStyleCustomizeMenu);
-		}	
+		}
 		private function confirmComplexion(complexion:String):void {
 			player.skinTone = complexion;
 			genericStyleCustomizeMenu();
@@ -968,7 +963,7 @@ import coc.view.MainView;
 			if (player.gender == 2)
 			{
 				mainView.nameBox.text = "67";
-			}	
+			}
 			if (player.gender == 3)
 			{
 				mainView.nameBox.text = "69";
@@ -1095,7 +1090,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentStrength():void {
 			clearOutput();
-			outputText("Are you stronger than normal? (+"+(50 * player.newGamePlusMod())+" max Strength)\n\nStrength increases your combat damage, and your ability to hold on to an enemy or pull yourself away.");
+			outputText("Are you stronger than normal? (+"+(50 * (player.newGamePlusMod() + 1))+" max Strength)\n\nStrength increases your combat damage, and your ability to hold on to an enemy or pull yourself away.");
 			menu();
 			addButton(0, "Yes", setEndowmentStrength);
 			addButton(1, "No", chooseEndowment, true);
@@ -1103,7 +1098,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentThoughness():void {
 			clearOutput();
-			outputText("Are you unusually tough? (+"+(50 * player.newGamePlusMod())+" max Toughness)\n\nToughness gives you more HP and increases the chances an attack against you will fail to wound you.");
+			outputText("Are you unusually tough? (+"+(50 * (player.newGamePlusMod() + 1))+" max Toughness)\n\nToughness gives you more HP and increases the chances an attack against you will fail to wound you.");
 			menu();
 			addButton(0, "Yes", setEndowmentToughness);
 			addButton(1, "No", chooseEndowment, true);
@@ -1111,7 +1106,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentSpeed():void {
 			clearOutput();
-			outputText("Are you very quick?  (+"+(50 * player.newGamePlusMod())+" max Speed)\n\nSpeed makes it easier to escape combat and grapples.  It also boosts your chances of evading an enemy attack and successfully catching up to enemies who try to run.");
+			outputText("Are you very quick?  (+"+(50 * (player.newGamePlusMod() + 1))+" max Speed)\n\nSpeed makes it easier to escape combat and grapples.  It also boosts your chances of evading an enemy attack and successfully catching up to enemies who try to run.");
 			menu();
 			addButton(0, "Yes", setEndowmentSpeed);
 			addButton(1, "No", chooseEndowment, true);
@@ -1119,7 +1114,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentSmarts():void {
 			clearOutput();
-			outputText("Are you a quick learner?  (+"+(50 * player.newGamePlusMod())+" max Intellect)\n\nIntellect can help you avoid dangerous monsters or work with machinery.  It will also boost the power of any spells you may learn in your travels.");
+			outputText("Are you a quick learner?  (+"+(50 * (player.newGamePlusMod() + 1))+" max Intellect)\n\nIntellect can help you avoid dangerous monsters or work with machinery.  It will also boost the power of any spells you may learn in your travels.");
 			menu();
 			addButton(0, "Yes", setEndowmentSmarts);
 			addButton(1, "No", chooseEndowment, true);
@@ -1127,7 +1122,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentWise():void {
 			clearOutput();
-			outputText("Are you a wise person?  (+"+(50 * player.newGamePlusMod())+" max Wisdom)\n\nWisdom can help you understand mysteries objects or work with soulforce.  It will also boost the power of any soulskills you may learn in your travels.");
+			outputText("Are you a wise person?  (+"+(50 * (player.newGamePlusMod() + 1))+" max Wisdom)\n\nWisdom can help you understand mysteries objects or work with soulforce.  It will also boost the power of any soulskills you may learn in your travels.");
 			menu();
 			addButton(0, "Yes", setEndowmentWise);
 			addButton(1, "No", chooseEndowment, true);
@@ -1135,7 +1130,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentLibido():void {
 			clearOutput();
-			outputText("Do you have an unusually high sex-drive?  (+"+(50 * player.newGamePlusMod())+" max Libido)\n\nLibido affects how quickly your lust builds over time.  You may find a high libido to be more trouble than it's worth...");
+			outputText("Do you have an unusually high sex-drive?  (+"+(50 * (player.newGamePlusMod() + 1))+" max Libido)\n\nLibido affects how quickly your lust builds over time.  You may find a high libido to be more trouble than it's worth...");
 			menu();
 			addButton(0, "Yes", setEndowmentLibido);
 			addButton(1, "No", chooseEndowment, true);
@@ -1143,7 +1138,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentTouch():void {
 			clearOutput();
-			outputText("Is your skin unusually sensitive?  (+"+(50 * player.newGamePlusMod())+" max Sensitivity)\n\nSensitivity affects how easily touches and certain magics will raise your lust.  Very low sensitivity will make it difficult to orgasm.");
+			outputText("Is your skin unusually sensitive?  (+"+(50 * (player.newGamePlusMod() + 1))+" max Sensitivity)\n\nSensitivity affects how easily touches and certain magics will raise your lust.  Very low sensitivity will make it difficult to orgasm.");
 			menu();
 			addButton(0, "Yes", setEndowmentTouch);
 			addButton(1, "No", chooseEndowment, true);
@@ -1310,25 +1305,25 @@ import coc.view.MainView;
 		}
 		public function chooseBloodline():void {
 			clearOutput();
-			outputText("In your veins coursing non-human blood.  What race was your ancestor?");
+			outputText("There is a possibility that you were descended from non-human blood.  Was one of your ancestors non-human, and if so, what were they?");
 			menu();
-			if (player.findPerk(PerkLib.BloodlineDragon) < 0) addButton(0, "Dragon", confirmBloodline, PerkLib.DragonsDescendant);
+			if (player.findPerk(PerkLib.BloodlineDragon) < 0) addButton(0, "Dragon", confirmBloodline, PerkLib.DragonsDescendant).hint("(+2 to dragon score)");
 			else addButtonDisabled(0, "Dragon", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineElf) < 0) addButton(1, "Elf", confirmBloodline, PerkLib.ElfsDescendant);
+			if (player.findPerk(PerkLib.BloodlineElf) < 0) addButton(1, "Elf", confirmBloodline, PerkLib.ElfsDescendant).hint("(+2 to elf score)");
 			else addButtonDisabled(1, "Elf", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineGoblin) < 0) addButton(2, "Goblin", confirmBloodline, PerkLib.GoblinsDescendant);
+			if (player.findPerk(PerkLib.BloodlineGoblin) < 0) addButton(2, "Goblin", confirmBloodline, PerkLib.GoblinsDescendant).hint("(+2 to goblin score)");
 			else addButtonDisabled(2, "Goblin", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineKitsune) < 0) addButton(3, "Kitsune", confirmBloodline, PerkLib.KitsunesDescendant);
+			if (player.findPerk(PerkLib.BloodlineKitsune) < 0) addButton(3, "Kitsune", confirmBloodline, PerkLib.KitsunesDescendant).hint("(+2 to kitsune score)");
 			else addButtonDisabled(3, "Kitsune", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineRaiju) < 0) addButton(4, "Raiju", confirmBloodline, PerkLib.RaijusDescendant);
+			if (player.findPerk(PerkLib.BloodlineRaiju) < 0) addButton(4, "Raiju", confirmBloodline, PerkLib.RaijusDescendant).hint("(+2 to raiju score)");
 			else addButtonDisabled(4, "Raiju", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineMinotaur) < 0) addButton(5, "Minotaur", confirmBloodline, PerkLib.MinotaursDescendant);
+			if (player.findPerk(PerkLib.BloodlineMinotaur) < 0) addButton(5, "Minotaur", confirmBloodline, PerkLib.MinotaursDescendant).hint("(+2 to minotaur score)");
 			else addButtonDisabled(5, "Minotaur", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineOni) < 0) addButton(6, "Oni", confirmBloodline, PerkLib.OnisDescendant);
+			if (player.findPerk(PerkLib.BloodlineOni) < 0) addButton(6, "Oni", confirmBloodline, PerkLib.OnisDescendant).hint("(+2 to oni score)");
 			else addButtonDisabled(6, "Oni", "You already have this bloodline!");
-			if (player.findPerk(PerkLib.BloodlineOrc) < 0) addButton(7, "Orc", confirmBloodline, PerkLib.OrcsDescendant);
+			if (player.findPerk(PerkLib.BloodlineOrc) < 0) addButton(7, "Orc", confirmBloodline, PerkLib.OrcsDescendant).hint("(+2 to orc score)");
 			else addButtonDisabled(7, "Orc", "You already have this bloodline!");
-			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either not have any non-human blood in you or can't pick any new one.It mean you only will get some bonus perk points for start instead new bloodline.");
+			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead new bloodline.)");
 		}
 		
 		private function confirmBloodline(choice:PerkType):void {
@@ -1341,29 +1336,29 @@ import coc.view.MainView;
 					outputText("Your ancestor was an elf?");
 					break;
 				case PerkLib.GoblinsDescendant:
-					outputText("Your ancestor was a goblin");
+					outputText("Your ancestor was a goblin?");
 					break;
 				case PerkLib.KitsunesDescendant:
-					outputText("Your ancestor was a kitsune");
-					break;
-				case PerkLib.RaijusDescendant:
-					outputText("Your ancestor was a raiju");
+					outputText("Your ancestor was a kitsune?");
 					break;
 				case PerkLib.MinotaursDescendant:
-					outputText("Your ancestor was a minotaur");
+					outputText("Your ancestor was a minotaur?");
+					break;
+				case PerkLib.RaijusDescendant:
+					outputText("Your ancestor was a raiju?");
 					break;
 				case PerkLib.OnisDescendant:
-					outputText("Your ancestor was an oni");
+					outputText("Your ancestor was an oni?");
 					break;
 				case PerkLib.OrcsDescendant:
-					outputText("Your ancestor was an orc");
+					outputText("Your ancestor was an orc?");
 					break;
 				default:
 					outputText("Your ancestor was a dragon?");
 			}
 			menu();
 			addButton(0, "Yes", setBloodline, choice);
-			addButton(1, "No", chooseHistory);
+			addButton(1, "No", chooseBloodline);
 		}
 		
 		private function setBloodline(choice:PerkType):void {
@@ -1386,32 +1381,32 @@ import coc.view.MainView;
 			outputText("Before you became a champion, you had other plans for your life.  What were you doing before?");
 			menu();
 			if (player.findPerk(PerkLib.PastLifeAlchemist) < 0) addButton(0, "Alchemy", confirmHistory, PerkLib.HistoryAlchemist);
-			else addButtonDisabled(0, "Alchemy", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(0, "Alchemy", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeCultivator) < 0) addButton(1, "Cultivator", confirmHistory, PerkLib.HistoryCultivator);
-			else addButtonDisabled(1, "Cultivator", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(1, "Cultivator", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeFighter) < 0) addButton(2, "Fighting", confirmHistory, PerkLib.HistoryFighter);
-			else addButtonDisabled(2, "Fighting", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(2, "Fighting", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeFortune) < 0) addButton(3, "Fortune", confirmHistory, PerkLib.HistoryFortune);
-			else addButtonDisabled(3, "Fortune", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(3, "Fortune", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeHealer) < 0) addButton(4, "Healing", confirmHistory, PerkLib.HistoryHealer);
-			else addButtonDisabled(4, "Healing", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(4, "Healing", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeReligious) < 0) addButton(5, "Religion", confirmHistory, PerkLib.HistoryReligious);
-			else addButtonDisabled(5, "Religion", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(5, "Religion", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeScholar) < 0) addButton(6, "Schooling", confirmHistory, PerkLib.HistoryScholar);
-			else addButtonDisabled(6, "Schooling", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(6, "Schooling", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeScout) < 0) addButton(7, "Scout", confirmHistory, PerkLib.HistoryScout);
-			else addButtonDisabled(7, "Scout", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(7, "Scout", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeSlacker) < 0) addButton(8, "Slacking", confirmHistory, PerkLib.HistorySlacker);
-			else addButtonDisabled(8, "Slacking", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(8, "Slacking", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeSlut) < 0) addButton(9, "Slutting", confirmHistory, PerkLib.HistorySlut);
-			else addButtonDisabled(9, "Slutting", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(9, "Slutting", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeSmith) < 0) addButton(10, "Smithing", confirmHistory, PerkLib.HistorySmith);
-			else addButtonDisabled(10, "Smithing", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(10, "Smithing", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeTactician) < 0) addButton(11, "Tactician", confirmHistory, PerkLib.HistoryTactician);
-			else addButtonDisabled(11, "Tactician", "You already have this History as one of Past Lives!");
+			else addButtonDisabled(11, "Tactician", "You already have this History as one of your Past Lives!");
 			if (player.findPerk(PerkLib.PastLifeWhore) < 0) addButton(12, "Whoring", confirmHistory, PerkLib.HistoryWhore);
-			else addButtonDisabled(12, "Whoring", "You already have this History as one of Past Lives!");
-			addButton(14, "None", noHistoryAtAllCuzYouAscendedTooManyTimesAlready).hint("You either never been doing anything before or you have memories of so many past lives you spend all your current live trying to not go postal from those memories. (Yes you not gonna get any History perk only just a few perk points so maybe not use this option till you get all others History perks, ya?)");
+			else addButtonDisabled(12, "Whoring", "You already have this History as one of your Past Lives!");
+			addButton(14, "None", noHistoryAtAllCuzYouAscendedTooManyTimesAlready).hint("Your life hasn't been very specifically focused so far, or you've had so many past lives you can't separate them all. (No history perk, just bonus perk points)");
 			
 		}
 		
@@ -1487,7 +1482,8 @@ import coc.view.MainView;
 			}
 		}
 		private function noHistoryAtAllCuzYouAscendedTooManyTimesAlready():void {
-			player.perkPoints += 12;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 11) player.perkPoints += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] + 1);
+			else player.perkPoints += 12;
 			flags[kFLAGS.HISTORY_PERK_SELECTED] = 1;
 			completeCharacterCreation();
 		}
@@ -1503,7 +1499,7 @@ import coc.view.MainView;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) chooseGameModes();
 			else startTheGame();
 		}
-			
+		
 		public function arrival():void {
 			statScreenRefresh();
 			model.time.hours = 11;
@@ -1563,7 +1559,7 @@ import coc.view.MainView;
 			flags[kFLAGS.HUNGER_ENABLED] = 0;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
 			doNext(startTheGame);
-		}	
+		}
 
 		private function chooseModeSurvival():void {
 			clearOutput();
@@ -1573,7 +1569,7 @@ import coc.view.MainView;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
 			player.hunger = 80;
 			doNext(startTheGame);
-		}	
+		}
 
 		private function chooseModeRealistic():void {
 			clearOutput();
@@ -1583,7 +1579,7 @@ import coc.view.MainView;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
 			player.hunger = 80;
 			doNext(startTheGame);
-		}	
+		}
 
 		private function chooseModeHard():void {
 			clearOutput();
@@ -1625,7 +1621,7 @@ import coc.view.MainView;
 				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
 			}
 			addButton(14, "Back", chooseGameModes);
-		}	
+		}
 
 		private function chooseModeXianxia():void {
 			clearOutput();
@@ -1645,7 +1641,7 @@ import coc.view.MainView;
 		private function chooseSlotHardcore(num:int):void {
 			flags[kFLAGS.HARDCORE_SLOT] = "CoC_" + num;
 			startTheGame();
-		}	
+		}
 
 		//Choose the game mode when called!
 		private function chooseGameModes():void {
@@ -1722,6 +1718,7 @@ import coc.view.MainView;
 			player.createStatusEffect(StatusEffects.IntWisCounter2,0,0,0,0);
 			player.createStatusEffect(StatusEffects.LibSensCounter1,0,0,0,0);
 			player.createStatusEffect(StatusEffects.LibSensCounter2,0,0,0,0);
+			player.sleepUpdateStat();
 			player.HP = player.maxHP();
 			doYesNo(goToIngnam, arrival);
 		}
@@ -1750,16 +1747,16 @@ import coc.view.MainView;
 			addButton(1, "Perk Select(2)", ascensionPerkMenu2).hint("Spend Ascension Perk Points on special perks!", "Perk Selection");
 			addButton(2, "Rare Perks(1)", rarePerks1).hint("Spend Ascension Points on rare special perks!", "Perk Selection");
 			addButton(3, "Rare Perks(2)", rarePerks2).hint("Spend Ascension Points on rare special perks!", "Perk Selection");
-			addButton(5, "Perm Perks", ascensionPermeryMenu).hint("Spend Ascension Perk Points to make certain perks permanent (5 per perk).", "Perk Selection");
+			addButton(5, "Perm Perks", ascensionPermeryMenu).hint("Spend Ascension Perk Points to make certain perks permanent (5/10 points).", "Perk Selection");
 			if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) {
-				if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) < player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) addButton(6, "Perm G.M.(1)", ascensionMetamorphPermeryMenu).hint("Spend Ascension Perk Points to make unlocked Metamorph options permanent. (5 or 25 per perk)", "Perk Selection");
+				if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) < player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) addButton(6, "Perm G.M.(1)", ascensionMetamorphPermeryMenu).hint("Spend Ascension Perk Points to make unlocked Metamorph options permanent. (For five points each, or 25 for human)", "Perk Selection");
 				else addButtonDisabled(6, "Perm G.M.", "You already reached your current limit on permable Metamorph options.");
 			}
 			else addButtonDisabled(6, "Perm G.M.", "You not have Ascension: Transcendental Genetic Memory (Stage 1) perk to use this option.");
-			if (player.ascensionPerkPoints >= 5) addButton(7, "Past Life", historyTopastlife).hint("Spend Ascension Points to change current possesed History perk into Past Life perk (5 per perk).", "Perk Selection");
+			if (player.ascensionPerkPoints >= 5) addButton(7, "Past Life", historyTopastlife).hint("Spend Ascension Points to change current possesed History perk into Past Life perk (5 points).", "Perk Selection");
 			else addButtonDisabled(7, "Past Life", "You not have enough Ascension Perk Points to use this option.");
 			if (player.findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) {
-				if (player.ascensionPerkPoints >= 10) addButton(8, "Bloodline", bloodlineACQ).hint("Spend Ascension Points to change current possesed Descendante perk into Bloodline perk (10 per perk).", "Perk Selection");
+				if (player.ascensionPerkPoints >= 10) addButton(8, "Bloodline", bloodlineACQ).hint("Spend Ascension Points to change current possesed Descendant perk into Bloodline perk (10 points).", "Perk Selection");
 				else addButtonDisabled(8, "Bloodline", "You not have enough Ascension Perk Points to use this option.");
 			}
 			else addButtonDisabled(8, "???", "You not have Ascended enough times or/and have required ascension perk to use this option.");
@@ -1773,7 +1770,7 @@ import coc.view.MainView;
 			menu();
 			addButton(0, "Mysticality", ascensionPerkSelection, PerkLib.AscensionMysticality, MAX_MYSTICALITY_LEVEL, null, PerkLib.AscensionMysticality.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMysticality) + " / " + MAX_MYSTICALITY_LEVEL);
 			addButton(1, "S.Enlight.", ascensionPerkSelection, PerkLib.AscensionSpiritualEnlightenment, MAX_SPIRITUALENLIGHTENMENT_LEVEL, null, PerkLib.AscensionSpiritualEnlightenment.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionSpiritualEnlightenment) + " / " + MAX_SPIRITUALENLIGHTENMENT_LEVEL);
-			addButton(2, "Fortune", ascensionPerkSelection, PerkLib.AscensionFortune, MAX_FORTUNE_LEVEL, null, PerkLib.AscensionFortune.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFortune) + " (No maximum level)");
+			addButton(2, "Fortune", ascensionPerkSelection, PerkLib.AscensionFortune, MAX_FORTUNE_LEVEL, null, PerkLib.AscensionFortune.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFortune) + " / " + MAX_FORTUNE_LEVEL);
 			addButton(3, "Moral Shifter", ascensionPerkSelection, PerkLib.AscensionMoralShifter, MAX_MORALSHIFTER_LEVEL, null, PerkLib.AscensionMoralShifter.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMoralShifter) + " / " + MAX_MORALSHIFTER_LEVEL);
 			addButton(4, "Tolerance", ascensionPerkSelection, PerkLib.AscensionTolerance, MAX_TOLERANCE_LEVEL, null, PerkLib.AscensionTolerance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTolerance) + " / " + MAX_TOLERANCE_LEVEL);
 			addButton(5, "Fertility", ascensionPerkSelection, PerkLib.AscensionFertility, MAX_FERTILITY_LEVEL, null, PerkLib.AscensionFertility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFertility) + " / " + MAX_FERTILITY_LEVEL);
@@ -1797,6 +1794,13 @@ import coc.view.MainView;
 			addButton(4, "Inner Power", ascensionPerkSelection2, PerkLib.AscensionInnerPower, MAX_INNERPOWER_LEVEL, null, PerkLib.AscensionInnerPower.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionInnerPower) + " / " + maxRank);
 			addButton(5, "Fury", ascensionPerkSelection2, PerkLib.AscensionFury, MAX_FURY_LEVEL, null, PerkLib.AscensionFury.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFury) + " / " + maxRank);
 			addButton(6, "Transhuman.", ascensionPerkSelection2, PerkLib.AscensionTranshumanism, MAX_TRANSHUMANISM_LEVEL, null, PerkLib.AscensionTranshumanism.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanism) + " / " + maxRank);
+			addButton(7, "T-Human.ST", ascensionPerkSelection2, PerkLib.AscensionTranshumanismStr, MAX_TRANSHUMANISM_STR_LEVEL, null, PerkLib.AscensionTranshumanismStr.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismStr) + " / " + maxRank);
+			addButton(8, "T-Human.TO", ascensionPerkSelection2, PerkLib.AscensionTranshumanismTou, MAX_TRANSHUMANISM_TOU_LEVEL, null, PerkLib.AscensionTranshumanismTou.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismTou) + " / " + maxRank);
+			addButton(9, "T-Human.SP", ascensionPerkSelection2, PerkLib.AscensionTranshumanismSpe, MAX_TRANSHUMANISM_SPE_LEVEL, null, PerkLib.AscensionTranshumanismSpe.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismSpe) + " / " + maxRank);
+			addButton(10, "T-Human.IN", ascensionPerkSelection2, PerkLib.AscensionTranshumanismInt, MAX_TRANSHUMANISM_INT_LEVEL, null, PerkLib.AscensionTranshumanismInt.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismInt) + " / " + maxRank);
+			addButton(11, "T-Human.WI", ascensionPerkSelection2, PerkLib.AscensionTranshumanismWis, MAX_TRANSHUMANISM_WIS_LEVEL, null, PerkLib.AscensionTranshumanismWis.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismWis) + " / " + maxRank);
+			addButton(12, "T-Human.Li", ascensionPerkSelection2, PerkLib.AscensionTranshumanismLib, MAX_TRANSHUMANISM_LIB_LEVEL, null, PerkLib.AscensionTranshumanismLib.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismLib) + " / " + maxRank);
+			addButton(13, "T-Human.SE", ascensionPerkSelection2, PerkLib.AscensionTranshumanismSen, MAX_TRANSHUMANISM_SEN_LEVEL, null, PerkLib.AscensionTranshumanismSen.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismSen) + " / " + maxRank);
 			addButton(14, "Back", ascensionMenu);
 		}
 		private function maxRankValue():Number {
@@ -1805,34 +1809,54 @@ import coc.view.MainView;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) maxV += 5;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) maxV += 5;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) maxV += 5;
-			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5) maxV += 5;
-			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) maxV += 5;
-			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 7) maxV += 5;
-			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 8) maxV += 5;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5) maxV += 5;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) maxV += 5;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 7) maxV += 5;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 8) maxV += 5;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 9) maxV += 5;
 			return maxV;
 		}
 		
-		private function ascensionPerkSelection(perk:* = null, maxLevel:int = 10):void {
+		private function ascensionPerkSelection(perk:* = null, maxRank:int = 10):void {
 			clearOutput();
+			var maxRank:int = 5;
+			maxRank += maxRankValue();
 			outputText("Perk Effect: " + perk.longDesc);
-			outputText("\nCurrent level: " + player.perkv1(perk) + (maxLevel > 0 ? " / " + maxLevel : " (No maximum level)") + "");
-			if (player.perkv1(perk) >= maxLevel && maxLevel > 0) outputText(" <b>(Maximum)</b>");
+			outputText("\nCurrent level: " + player.perkv1(perk) + " / " + maxRank + "");
+			if (player.perkv1(perk) >= maxRank) outputText(" <b>(Maximum)</b>");
 			var cost:int = player.perkv1(perk) + 1;
-			if (cost > 5) cost = 5;
-			if (player.perkv1(perk) < maxLevel || maxLevel < 0) outputText("\nCost for next level: " + cost);
+			if (cost > 5) {
+				if (cost > 15) {
+					if (cost > 30) cost = 15;
+					else cost = Math.round((cost + 15) / 3);
+				}
+				else {
+					cost = Math.round((cost + 5) / 2);
+				}
+			}
+			if (player.perkv1(perk) < maxRank) outputText("\nCost for next level: " + cost);
 			else outputText("\nCost for next level: <b>N/A</b>");
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
-			if (player.ascensionPerkPoints >= cost && (player.perkv1(perk) < maxLevel || maxLevel < 0)) addButton(0, "Add 1 level", addAscensionPerk, perk, maxLevel);
+			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) < maxRank) addButton(0, "Add 1 level", addAscensionPerk, perk, maxRank);
+			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) == maxRank) addButtonDisabled(0, "Add 1 level", "You've reached max rank for this perk at current tier of ascension. To unlock higher ranks you need to ascend again.");
 			addButton(4, "Back", ascensionPerkMenu);
 		}
-		private function addAscensionPerk(perk:* = null, maxLevel:int = 10):void {
+		private function addAscensionPerk(perk:* = null, maxRank:int = 10):void {
 			var cost:int = player.perkv1(perk) + 1;
-			if (cost > 5) cost = 5;
+			if (cost > 5) {
+				if (cost > 15) {
+					if (cost > 30) cost = 15;
+					else cost = Math.round((cost + 15) / 3);
+				}
+				else {
+					cost = Math.round((cost + 5) / 2);
+				}
+			}
 			player.ascensionPerkPoints -= cost;
 			if (player.findPerk(perk) >= 0) player.addPerkValue(perk, 1, 1);
 			else player.createPerk(perk, 1, 0, 0, 0);
-			ascensionPerkSelection(perk, maxLevel);
+			ascensionPerkSelection(perk, maxRank);
 		}
 		private function ascensionPerkSelection2(perk:* = null, maxRank:int = 10):void {
 			clearOutput();
@@ -1840,20 +1864,36 @@ import coc.view.MainView;
 			maxRank += maxRankValue();
 			outputText("Perk Effect: " + perk.longDesc);
 			outputText("\nCurrent level: " + player.perkv1(perk) + " / " + maxRank + "");
-			if (player.perkv1(perk) >= 25) outputText(" <b>(Maximum)</b>");
+			if (player.perkv1(perk) >= maxRank) outputText(" <b>(Maximum)</b>");
 			var cost:int = player.perkv1(perk) + 1;
-			if (cost > 5) cost = 5;
-			if (player.perkv1(perk) < 25) outputText("\nCost for next level: " + cost);
+			if (cost > 5) {
+				if (cost > 15) {
+					if (cost > 30) cost = 15;
+					else cost = Math.round((cost + 15) / 3);
+				}
+				else {
+					cost = Math.round((cost + 5) / 2);
+				}
+			}
+			if (player.perkv1(perk) < maxRank) outputText("\nCost for next level: " + cost);
 			else outputText("\nCost for next level: <b>N/A</b>");
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
 			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) < maxRank) addButton(0, "Add 1 level", addAscensionPerk2, perk, maxRank);
-			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) == maxRank && player.perkv1(perk) < 20) addButtonDisabled(0, "Add 1 level", "You've reached max rank for this perk at current tier of ascension. To unlock higher ranks you need to ascend again.");
+			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) == maxRank) addButtonDisabled(0, "Add 1 level", "You've reached max rank for this perk at current tier of ascension. To unlock higher ranks you need to ascend again.");
 			addButton(4, "Back", ascensionPerkMenu2);
 		}
 		private function addAscensionPerk2(perk:* = null, maxRank:int = 10):void {
 			var cost:int = player.perkv1(perk) + 1;
-			if (cost > 5) cost = 5;
+			if (cost > 5) {
+				if (cost > 15) {
+					if (cost > 30) cost = 15;
+					else cost = Math.round((cost + 15) / 3);
+				}
+				else {
+					cost = Math.round((cost + 5) / 2);
+				}
+			}
 			player.ascensionPerkPoints -= cost;
 			if (player.findPerk(perk) >= 0) player.addPerkValue(perk, 1, 1);
 			else player.createPerk(perk, 1, 0, 0, 0);
@@ -2328,107 +2368,101 @@ import coc.view.MainView;
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
 			if (page == 1) {
-				if (player.findPerk(PerkLib.CorruptedKitsune) > 0 && player.perkv4(PerkLib.CorruptedKitsune) < 1) addButton(0, "CorruptedK", permanentizePerk1, PerkLib.CorruptedKitsune);
-				else if (player.findPerk(PerkLib.CorruptedKitsune) > 0 && player.perkv4(PerkLib.CorruptedKitsune) > 0) addButtonDisabled(0, "CorruptedK", "Corrupted Kitsune perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "CorruptedK", "Corrupted Kitsune");
-				if (player.findPerk(PerkLib.CorruptedNinetails) > 0 && player.perkv4(PerkLib.CorruptedNinetails) < 1) addButton(1, "CorruptedN", permanentizePerk1, PerkLib.CorruptedNinetails);
-				else if (player.findPerk(PerkLib.CorruptedNinetails) > 0 && player.perkv4(PerkLib.CorruptedNinetails) > 0) addButtonDisabled(1, "CorruptedN", "Corrupted Ninetails perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "CorruptedN", "Corrupted Ninetails");
-				if (player.findPerk(PerkLib.DarkCharm) > 0 && player.perkv4(PerkLib.DarkCharm) < 1) addButton(2, "DarkCharm", permanentizePerk1, PerkLib.DarkCharm);
-				else if (player.findPerk(PerkLib.DarkCharm) > 0 && player.perkv4(PerkLib.DarkCharm) > 0) addButtonDisabled(2, "DarkCharm", "Dark Charm perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "DarkCharm", "Dark Charm");
-				if (player.findPerk(PerkLib.DragonDarknessBreath) > 0 && player.perkv4(PerkLib.DragonDarknessBreath) < 1) addButton(3, "D.DarknessB.", permanentizePerk1, PerkLib.DragonDarknessBreath);
-				else if (player.findPerk(PerkLib.DragonDarknessBreath) > 0 && player.perkv4(PerkLib.DragonDarknessBreath) > 0) addButtonDisabled(3, "D.DarknessB.", "Dragon Darkness Breath perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "D.DarknessB.", "Dragon Darkness Breath");
+				if (player.findPerk(PerkLib.CorruptedKitsune) > 0 && player.perkv4(PerkLib.CorruptedKitsune) < 1 && player.findPerk(PerkLib.CorruptedNinetails) > 0 && player.perkv4(PerkLib.CorruptedNinetails) < 1) addButton(0, "CorruptedK", permanentizePerkCorruptedKitsuneAndNinetails);
+				else if (player.findPerk(PerkLib.CorruptedKitsune) > 0 && player.perkv4(PerkLib.CorruptedKitsune) > 0 && player.findPerk(PerkLib.CorruptedNinetails) > 0 && player.perkv4(PerkLib.CorruptedNinetails) > 0) addButtonDisabled(0, "CorruptedK", "Corrupted Kitsune and Corrupted Ninetails perks are already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(0, "CorruptedK", "Corrupted Kitsune and Corrupted Ninetails");
+				if (player.findPerk(PerkLib.DarkCharm) > 0 && player.perkv4(PerkLib.DarkCharm) < 1) addButton(1, "DarkCharm", permanentizePerk1, PerkLib.DarkCharm);
+				else if (player.findPerk(PerkLib.DarkCharm) > 0 && player.perkv4(PerkLib.DarkCharm) > 0) addButtonDisabled(1, "DarkCharm", "Dark Charm perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(1, "DarkCharm", "Dark Charm");
+				if (player.findPerk(PerkLib.DragonDarknessBreath) > 0 && player.perkv4(PerkLib.DragonDarknessBreath) < 1) addButton(2, "D.DarknessB.", permanentizePerk1, PerkLib.DragonDarknessBreath);
+				else if (player.findPerk(PerkLib.DragonDarknessBreath) > 0 && player.perkv4(PerkLib.DragonDarknessBreath) > 0) addButtonDisabled(2, "D.DarknessB.", "Dragon Darkness Breath perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(2, "D.DarknessB.", "Dragon Darkness Breath");
+				if (player.findPerk(PerkLib.DragonFireBreath) > 0 && player.perkv4(PerkLib.DragonFireBreath) < 1) addButton(3, "D.FireB.", permanentizePerk1, PerkLib.DragonFireBreath);
+				else if (player.findPerk(PerkLib.DragonFireBreath) > 0 && player.perkv4(PerkLib.DragonFireBreath) > 0) addButtonDisabled(3, "D.FireB.", "Dragon Fire Breath perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(3, "D.FireB.", "Dragon Fire Breath");
 				addButton(4, "Next", ascensionPermeryMenu, page + 1);
-				if (player.findPerk(PerkLib.DragonFireBreath) > 0 && player.perkv4(PerkLib.DragonFireBreath) < 1) addButton(5, "D.FireB.", permanentizePerk1, PerkLib.DragonFireBreath);
-				else if (player.findPerk(PerkLib.DragonFireBreath) > 0 && player.perkv4(PerkLib.DragonFireBreath) > 0) addButtonDisabled(5, "D.FireB.", "Dragon Fire Breath perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "D.FireB.", "Dragon Fire Breath");
-				if (player.findPerk(PerkLib.DragonIceBreath) > 0 && player.perkv4(PerkLib.DragonIceBreath) < 1) addButton(6, "D.IceB.", permanentizePerk1, PerkLib.DragonIceBreath);
-				else if (player.findPerk(PerkLib.DragonIceBreath) > 0 && player.perkv4(PerkLib.DragonIceBreath) > 0) addButtonDisabled(6, "D.IceB.", "Dragon Ice Breath perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "D.IceB.", "Dragon Ice Breath");
-				if (player.findPerk(PerkLib.DragonLightningBreath) > 0 && player.perkv4(PerkLib.DragonLightningBreath) < 1) addButton(7, "D.LightningB.", permanentizePerk1, PerkLib.DragonLightningBreath);
-				else if (player.findPerk(PerkLib.DragonLightningBreath) > 0 && player.perkv4(PerkLib.DragonLightningBreath) > 0) addButtonDisabled(7, "D.LightningB.", "Dragon Lightning Breath perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "D.LightningB.", "Dragon Lightning Breath");
-				if (player.findPerk(PerkLib.EnlightenedKitsune) > 0 && player.perkv4(PerkLib.EnlightenedKitsune) < 1) addButton(8, "EnlightenedK", permanentizePerk1, PerkLib.EnlightenedKitsune);
-				else if (player.findPerk(PerkLib.EnlightenedKitsune) > 0 && player.perkv4(PerkLib.EnlightenedKitsune) > 0) addButtonDisabled(8, "EnlightenedK", "Enlightened Kitsune perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "EnlightenedK", "Enlightened Kitsune");
-				if (player.findPerk(PerkLib.EnlightenedNinetails) > 0 && player.perkv4(PerkLib.EnlightenedNinetails) < 1) addButton(10, "EnlightenedN", permanentizePerk1, PerkLib.EnlightenedNinetails);
-				else if (player.findPerk(PerkLib.EnlightenedNinetails) > 0 && player.perkv4(PerkLib.EnlightenedNinetails) > 0) addButtonDisabled(10, "EnlightenedN", "Enlightened Ninetails perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "EnlightenedN", "Enlightened Ninetails");
-				if (player.findPerk(PerkLib.FerasBoonAlpha) > 0 && player.perkv4(PerkLib.FerasBoonAlpha) < 1) addButton(11, "FerasB.A.", permanentizePerk1, PerkLib.FerasBoonAlpha);
-				else if (player.findPerk(PerkLib.FerasBoonAlpha) > 0 && player.perkv4(PerkLib.FerasBoonAlpha) > 0) addButtonDisabled(11, "FerasB.A.", "Feras Boon Alpha perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(11, "FerasB.A.", "Feras Boon Alpha");
-				if (player.findPerk(PerkLib.FerasBoonBreedingBitch) > 0 && player.perkv4(PerkLib.FerasBoonBreedingBitch) < 1) addButton(12, "FerasB.B.B.", permanentizePerk1, PerkLib.FerasBoonBreedingBitch);
-				else if (player.findPerk(PerkLib.FerasBoonBreedingBitch) > 0 && player.perkv4(PerkLib.FerasBoonBreedingBitch) > 0) addButtonDisabled(12, "FerasB.B.B.", "Feras Boon Breeding Bitch perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(12, "FerasB.B.B.", "Feras Boon Breeding Bitch");
-				if (player.findPerk(PerkLib.FerasBoonMilkingTwat) > 0 && player.perkv4(PerkLib.FerasBoonMilkingTwat) < 1) addButton(13, "FerasB.M.T.", permanentizePerk1, PerkLib.FerasBoonMilkingTwat);
-				else if (player.findPerk(PerkLib.FerasBoonMilkingTwat) > 0 && player.perkv4(PerkLib.FerasBoonMilkingTwat) > 0) addButtonDisabled(13, "FerasB.M.T.", "Feras Boon Milking Twat perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(13, "FerasB.M.T.", "Feras Boon Milking Twat");
+				if (player.findPerk(PerkLib.DragonIceBreath) > 0 && player.perkv4(PerkLib.DragonIceBreath) < 1) addButton(5, "D.IceB.", permanentizePerk1, PerkLib.DragonIceBreath);
+				else if (player.findPerk(PerkLib.DragonIceBreath) > 0 && player.perkv4(PerkLib.DragonIceBreath) > 0) addButtonDisabled(5, "D.IceB.", "Dragon Ice Breath perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(5, "D.IceB.", "Dragon Ice Breath");
+				if (player.findPerk(PerkLib.DragonLightningBreath) > 0 && player.perkv4(PerkLib.DragonLightningBreath) < 1) addButton(6, "D.LightningB.", permanentizePerk1, PerkLib.DragonLightningBreath);
+				else if (player.findPerk(PerkLib.DragonLightningBreath) > 0 && player.perkv4(PerkLib.DragonLightningBreath) > 0) addButtonDisabled(6, "D.LightningB.", "Dragon Lightning Breath perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(6, "D.LightningB.", "Dragon Lightning Breath");
+				if (player.findPerk(PerkLib.EnlightenedKitsune) > 0 && player.perkv4(PerkLib.EnlightenedKitsune) < 1 && player.findPerk(PerkLib.EnlightenedNinetails) > 0 && player.perkv4(PerkLib.EnlightenedNinetails) < 1) addButton(7, "EnlightenedK", permanentizePerkEnlightenedKitsuneAndNinetails);
+				else if (player.findPerk(PerkLib.EnlightenedKitsune) > 0 && player.perkv4(PerkLib.EnlightenedKitsune) > 0 && player.findPerk(PerkLib.EnlightenedNinetails) > 0 && player.perkv4(PerkLib.EnlightenedNinetails) > 0) addButtonDisabled(7, "EnlightenedK", "Enlightened Kitsune and Enlightened Ninetails perks are already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(7, "EnlightenedK", "Enlightened Kitsune and Enlightened Ninetails");
+				if (player.findPerk(PerkLib.FerasBoonAlpha) > 0 && player.perkv4(PerkLib.FerasBoonAlpha) < 1) addButton(8, "FerasB.A.", permanentizePerk1, PerkLib.FerasBoonAlpha);
+				else if (player.findPerk(PerkLib.FerasBoonAlpha) > 0 && player.perkv4(PerkLib.FerasBoonAlpha) > 0) addButtonDisabled(8, "FerasB.A.", "Feras Boon Alpha perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(8, "FerasB.A.", "Feras Boon Alpha");
+				if (player.findPerk(PerkLib.FerasBoonBreedingBitch) > 0 && player.perkv4(PerkLib.FerasBoonBreedingBitch) < 1) addButton(10, "FerasB.B.B.", permanentizePerk1, PerkLib.FerasBoonBreedingBitch);
+				else if (player.findPerk(PerkLib.FerasBoonBreedingBitch) > 0 && player.perkv4(PerkLib.FerasBoonBreedingBitch) > 0) addButtonDisabled(10, "FerasB.B.B.", "Feras Boon Breeding Bitch perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(10, "FerasB.B.B.", "Feras Boon Breeding Bitch");
+				if (player.findPerk(PerkLib.FerasBoonMilkingTwat) > 0 && player.perkv4(PerkLib.FerasBoonMilkingTwat) < 1) addButton(11, "FerasB.M.T.", permanentizePerk1, PerkLib.FerasBoonMilkingTwat);
+				else if (player.findPerk(PerkLib.FerasBoonMilkingTwat) > 0 && player.perkv4(PerkLib.FerasBoonMilkingTwat) > 0) addButtonDisabled(11, "FerasB.M.T.", "Feras Boon Milking Twat perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(11, "FerasB.M.T.", "Feras Boon Milking Twat");
+				if (player.findPerk(PerkLib.FerasBoonSeeder) > 0 && player.perkv4(PerkLib.FerasBoonSeeder) < 1) addButton(12, "FerasB.S.", permanentizePerk1, PerkLib.FerasBoonSeeder);
+				else if (player.findPerk(PerkLib.FerasBoonSeeder) > 0 && player.perkv4(PerkLib.FerasBoonSeeder) > 0) addButtonDisabled(12, "FerasB.S.", "Feras Boon Seeder perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(12, "FerasB.S.", "Feras Boon Seeder");
 			}
 			if (page == 2) {
-				if (player.findPerk(PerkLib.FerasBoonSeeder) > 0 && player.perkv4(PerkLib.FerasBoonSeeder) < 1) addButton(0, "FerasB.S.", permanentizePerk2, PerkLib.FerasBoonSeeder);
-				else if (player.findPerk(PerkLib.FerasBoonSeeder) > 0 && player.perkv4(PerkLib.FerasBoonSeeder) > 0) addButtonDisabled(0, "FerasB.S.", "Feras Boon Seeder perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "FerasB.S.", "Feras Boon Seeder");
-				if (player.findPerk(PerkLib.FireLord) > 0 && player.perkv4(PerkLib.FireLord) < 1) addButton(1, "FireLord", permanentizePerk2, PerkLib.FireLord);
-				else if (player.findPerk(PerkLib.FireLord) > 0 && player.perkv4(PerkLib.FireLord) > 0) addButtonDisabled(1, "FireLord", "FireLord perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "FireLord", "FireLord");
-				if (player.findPerk(PerkLib.Flexibility) > 0 && player.perkv4(PerkLib.Flexibility) < 1) addButton(2, "Flexibility", permanentizePerk2, PerkLib.Flexibility);
-				else if (player.findPerk(PerkLib.Flexibility) > 0 && player.perkv4(PerkLib.Flexibility) > 0) addButtonDisabled(2, "Flexibility", "Flexibility perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "Flexibility", "Flexibility");
-				if (player.findPerk(PerkLib.Hellfire) > 0 && player.perkv4(PerkLib.Hellfire) < 1) addButton(3, "Hellfire", permanentizePerk2, PerkLib.Hellfire);
-				else if (player.findPerk(PerkLib.Hellfire) > 0 && player.perkv4(PerkLib.Hellfire) > 0) addButtonDisabled(3, "Hellfire", "Hellfire perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "Hellfire", "Hellfire");
+				if (player.findPerk(PerkLib.FireLord) > 0 && player.perkv4(PerkLib.FireLord) < 1) addButton(0, "FireLord", permanentizePerk2, PerkLib.FireLord);
+				else if (player.findPerk(PerkLib.FireLord) > 0 && player.perkv4(PerkLib.FireLord) > 0) addButtonDisabled(0, "FireLord", "FireLord perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(0, "FireLord", "FireLord");
+				if (player.findPerk(PerkLib.Flexibility) > 0 && player.perkv4(PerkLib.Flexibility) < 1) addButton(1, "Flexibility", permanentizePerk2, PerkLib.Flexibility);
+				else if (player.findPerk(PerkLib.Flexibility) > 0 && player.perkv4(PerkLib.Flexibility) > 0) addButtonDisabled(1, "Flexibility", "Flexibility perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(1, "Flexibility", "Flexibility");
+				if (player.findPerk(PerkLib.Hellfire) > 0 && player.perkv4(PerkLib.Hellfire) < 1) addButton(2, "Hellfire", permanentizePerk2, PerkLib.Hellfire);
+				else if (player.findPerk(PerkLib.Hellfire) > 0 && player.perkv4(PerkLib.Hellfire) > 0) addButtonDisabled(2, "Hellfire", "Hellfire perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(2, "Hellfire", "Hellfire");
+				if (player.findPerk(PerkLib.InkSpray) > 0 && player.perkv4(PerkLib.InkSpray) < 1) addButton(3, "InkSpray", permanentizePerk2, PerkLib.InkSpray);
+				else if (player.findPerk(PerkLib.InkSpray) > 0 && player.perkv4(PerkLib.InkSpray) > 0) addButtonDisabled(3, "InkSpray", "Ink Spray perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(3, "InkSpray", "Ink Spray");
 				addButton(4, "Next", ascensionPermeryMenu, page + 1);
-				if (player.findPerk(PerkLib.InkSpray) > 0 && player.perkv4(PerkLib.InkSpray) < 1) addButton(5, "InkSpray", permanentizePerk2, PerkLib.InkSpray);
-				else if (player.findPerk(PerkLib.InkSpray) > 0 && player.perkv4(PerkLib.InkSpray) > 0) addButtonDisabled(5, "InkSpray", "Ink Spray perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "InkSpray", "Ink Spray");
-				if (player.findPerk(PerkLib.LizanRegeneration) > 0 && player.perkv4(PerkLib.LizanRegeneration) < 1) addButton(6, "LizanRegen", permanentizePerk2, PerkLib.LizanRegeneration);
-				else if (player.findPerk(PerkLib.LizanRegeneration) > 0 && player.perkv4(PerkLib.LizanRegeneration) > 0) addButtonDisabled(6, "LizanRegen", "Lizan Regeneration perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "LizanRegen", "Lizan Regeneration");
-				if (player.findPerk(PerkLib.Lustzerker) > 0 && player.perkv4(PerkLib.Lustzerker) < 1) addButton(7, "Lustzerker", permanentizePerk2, PerkLib.Lustzerker);
-				else if (player.findPerk(PerkLib.Lustzerker) > 0 && player.perkv4(PerkLib.Lustzerker) > 0) addButtonDisabled(7, "Lustzerker", "Lustzerker perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "Lustzerker", "Lustzerker");
-				if (player.findPerk(PerkLib.MagicalFertility) > 0 && player.perkv4(PerkLib.MagicalFertility) < 1) addButton(8, "MagicalF.", permanentizePerk2, PerkLib.MagicalFertility);
-				else if (player.findPerk(PerkLib.MagicalFertility) > 0 && player.perkv4(PerkLib.MagicalFertility) > 0) addButtonDisabled(8, "MagicalF.", "Magical Fertility perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "MagicalF.", "Magical Fertility");
+				if (player.findPerk(PerkLib.LizanRegeneration) > 0 && player.perkv4(PerkLib.LizanRegeneration) < 1) addButton(5, "LizanRegen", permanentizePerk2, PerkLib.LizanRegeneration);
+				else if (player.findPerk(PerkLib.LizanRegeneration) > 0 && player.perkv4(PerkLib.LizanRegeneration) > 0) addButtonDisabled(5, "LizanRegen", "Lizan Regeneration perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(5, "LizanRegen", "Lizan Regeneration");
+				if (player.findPerk(PerkLib.Lustzerker) > 0 && player.perkv4(PerkLib.Lustzerker) < 1) addButton(6, "Lustzerker", permanentizePerk2, PerkLib.Lustzerker);
+				else if (player.findPerk(PerkLib.Lustzerker) > 0 && player.perkv4(PerkLib.Lustzerker) > 0) addButtonDisabled(6, "Lustzerker", "Lustzerker perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(6, "Lustzerker", "Lustzerker");
+				if (player.findPerk(PerkLib.MagicalFertility) > 0 && player.perkv4(PerkLib.MagicalFertility) < 1) addButton(7, "MagicalF.", permanentizePerk2, PerkLib.MagicalFertility);
+				else if (player.findPerk(PerkLib.MagicalFertility) > 0 && player.perkv4(PerkLib.MagicalFertility) > 0) addButtonDisabled(7, "MagicalF.", "Magical Fertility perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(7, "MagicalF.", "Magical Fertility");
+				if (player.findPerk(PerkLib.MagicalVirility) > 0 && player.perkv4(PerkLib.MagicalVirility) < 1) addButton(8, "MagicalV.", permanentizePerk2, PerkLib.MagicalVirility);
+				else if (player.findPerk(PerkLib.MagicalVirility) > 0 && player.perkv4(PerkLib.MagicalVirility) > 0) addButtonDisabled(8, "MagicalV.", "Magical Virility perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(8, "MagicalV.", "Magical Virility");
 				addButton(9, "Previous", ascensionPermeryMenu, page - 1);
-				if (player.findPerk(PerkLib.MagicalVirility) > 0 && player.perkv4(PerkLib.MagicalVirility) < 1) addButton(10, "MagicalV.", permanentizePerk2, PerkLib.MagicalVirility);
-				else if (player.findPerk(PerkLib.MagicalVirility) > 0 && player.perkv4(PerkLib.MagicalVirility) > 0) addButtonDisabled(10, "MagicalV.", "Magical Virility perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(10, "MagicalV.", "Magical Virility");
-				if (player.findPerk(PerkLib.MaraesGiftButtslut) > 0 && player.perkv4(PerkLib.MaraesGiftButtslut) < 1) addButton(11, "MaraesGiftB.", permanentizePerk2, PerkLib.MaraesGiftButtslut);
-				else if (player.findPerk(PerkLib.MaraesGiftButtslut) > 0 && player.perkv4(PerkLib.MaraesGiftButtslut) > 0) addButtonDisabled(11, "MaraesGiftB.", "Maraes Gift Buttslut perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(11, "MaraesGiftB.", "Maraes Gift Buttslut");
-				if (player.findPerk(PerkLib.MaraesGiftFertility) > 0 && player.perkv4(PerkLib.MaraesGiftFertility) < 1) addButton(12, "MaraesGiftF.", permanentizePerk2, PerkLib.MaraesGiftFertility);
-				else if (player.findPerk(PerkLib.MaraesGiftFertility) > 0 && player.perkv4(PerkLib.MaraesGiftFertility) > 0) addButtonDisabled(12, "MaraesGiftF.", "Maraes Gift Fertility perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(12, "MaraesGiftF.", "Maraes Gift Fertility");
-				if (player.findPerk(PerkLib.MaraesGiftProfractory) > 0 && player.perkv4(PerkLib.MaraesGiftProfractory) < 1) addButton(13, "MaraesGiftP.", permanentizePerk2, PerkLib.MaraesGiftProfractory);
-				else if (player.findPerk(PerkLib.MaraesGiftProfractory) > 0 && player.perkv4(PerkLib.MaraesGiftProfractory) > 0) addButtonDisabled(13, "MaraesGiftP.", "Maraes Gift Profractory perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(13, "MaraesGiftP.", "Maraes Gift Profractory");
+				if (player.findPerk(PerkLib.MaraesGiftButtslut) > 0 && player.perkv4(PerkLib.MaraesGiftButtslut) < 1) addButton(10, "MaraesGiftB.", permanentizePerk2, PerkLib.MaraesGiftButtslut);
+				else if (player.findPerk(PerkLib.MaraesGiftButtslut) > 0 && player.perkv4(PerkLib.MaraesGiftButtslut) > 0) addButtonDisabled(10, "MaraesGiftB.", "Maraes Gift Buttslut perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(10, "MaraesGiftB.", "Maraes Gift Buttslut");
+				if (player.findPerk(PerkLib.MaraesGiftFertility) > 0 && player.perkv4(PerkLib.MaraesGiftFertility) < 1) addButton(11, "MaraesGiftF.", permanentizePerk2, PerkLib.MaraesGiftFertility);
+				else if (player.findPerk(PerkLib.MaraesGiftFertility) > 0 && player.perkv4(PerkLib.MaraesGiftFertility) > 0) addButtonDisabled(11, "MaraesGiftF.", "Maraes Gift Fertility perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(11, "MaraesGiftF.", "Maraes Gift Fertility");
+				if (player.findPerk(PerkLib.MaraesGiftProfractory) > 0 && player.perkv4(PerkLib.MaraesGiftProfractory) < 1) addButton(12, "MaraesGiftP.", permanentizePerk2, PerkLib.MaraesGiftProfractory);
+				else if (player.findPerk(PerkLib.MaraesGiftProfractory) > 0 && player.perkv4(PerkLib.MaraesGiftProfractory) > 0) addButtonDisabled(12, "MaraesGiftP.", "Maraes Gift Profractory perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(12, "MaraesGiftP.", "Maraes Gift Profractory");
+				if (player.findPerk(PerkLib.MaraesGiftStud) > 0 && player.perkv4(PerkLib.MaraesGiftStud) < 1) addButton(13, "MaraesGiftS.", permanentizePerk2, PerkLib.MaraesGiftStud);
+				else if (player.findPerk(PerkLib.MaraesGiftStud) > 0 && player.perkv4(PerkLib.MaraesGiftStud) > 0) addButtonDisabled(13, "MaraesGiftS.", "Maraes Gift Stud perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(13, "MaraesGiftS.", "Maraes Gift Stud");
 			}
 			if (page == 3) {
-				if (player.findPerk(PerkLib.MaraesGiftStud) > 0 && player.perkv4(PerkLib.MaraesGiftStud) < 1) addButton(0, "MaraesGiftS.", permanentizePerk3, PerkLib.MaraesGiftStud);
-				else if (player.findPerk(PerkLib.MaraesGiftStud) > 0 && player.perkv4(PerkLib.MaraesGiftStud) > 0) addButtonDisabled(0, "MaraesGiftS.", "Maraes Gift Stud perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "MaraesGiftS.", "Maraes Gift Stud");
-				if (player.findPerk(PerkLib.MilkMaid) > 0 && player.perkv4(PerkLib.MilkMaid) < 1) addButton(1, "MilkMaid", permanentizePerk3, PerkLib.MilkMaid);
-				else if (player.findPerk(PerkLib.MilkMaid) > 0 && player.perkv4(PerkLib.MilkMaid) > 0) addButtonDisabled(1, "MilkMaid", "MilkMaid perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "MilkMaid", "MilkMaid");
-				if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) < 1) addButton(2, "9TKitsOfB", permanentizePerk3, PerkLib.NinetailsKitsuneOfBalance);
-				else if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) addButtonDisabled(2, "9TKitsOfB", "9T Kitsune Of Balance perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "9TKitsOfB", "9T Kitsune Of Balance");
-				if (player.findPerk(PerkLib.OneTrackMind) > 0 && player.perkv4(PerkLib.OneTrackMind) < 1) addButton(3, "OneTrackMind", permanentizePerk3, PerkLib.OneTrackMind);
-				else if (player.findPerk(PerkLib.OneTrackMind) > 0 && player.perkv4(PerkLib.OneTrackMind) > 0) addButtonDisabled(3, "OneTrackMind", "One Track Mind perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "OneTrackMind", "One Track Mind");
+				if (player.findPerk(PerkLib.MilkMaid) > 0 && player.perkv4(PerkLib.MilkMaid) < 1) addButton(0, "MilkMaid", permanentizePerk3, PerkLib.MilkMaid);
+				else if (player.findPerk(PerkLib.MilkMaid) > 0 && player.perkv4(PerkLib.MilkMaid) > 0) addButtonDisabled(0, "MilkMaid", "MilkMaid perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(0, "MilkMaid", "MilkMaid");
+				if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) < 1) addButton(1, "9TKitsOfB", permanentizePerk3, PerkLib.NinetailsKitsuneOfBalance);
+				else if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) addButtonDisabled(1, "9TKitsOfB", "9T Kitsune Of Balance perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(1, "9TKitsOfB", "9T Kitsune Of Balance");
+				if (player.findPerk(PerkLib.OneTrackMind) > 0 && player.perkv4(PerkLib.OneTrackMind) < 1) addButton(2, "OneTrackMind", permanentizePerk3, PerkLib.OneTrackMind);
+				else if (player.findPerk(PerkLib.OneTrackMind) > 0 && player.perkv4(PerkLib.OneTrackMind) > 0) addButtonDisabled(2, "OneTrackMind", "One Track Mind perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(2, "OneTrackMind", "One Track Mind");
+				if (player.findPerk(PerkLib.PureAndLoving) > 0 && player.perkv4(PerkLib.PureAndLoving) < 1) addButton(3, "Pure&Loving", permanentizePerk3, PerkLib.PureAndLoving);
+				else if (player.findPerk(PerkLib.PureAndLoving) > 0 && player.perkv4(PerkLib.PureAndLoving) > 0) addButtonDisabled(3, "Pure&Loving", "Pure And Loving perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(3, "Pure&Loving", "Pure And Loving");
 				//addButton(4, "Next", ascensionPermeryMenu, page + 1);
-				if (player.findPerk(PerkLib.PureAndLoving) > 0 && player.perkv4(PerkLib.PureAndLoving) < 1) addButton(5, "Pure&Loving", permanentizePerk3, PerkLib.PureAndLoving);
-				else if (player.findPerk(PerkLib.PureAndLoving) > 0 && player.perkv4(PerkLib.PureAndLoving) > 0) addButtonDisabled(5, "Pure&Loving", "Pure And Loving perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "Pure&Loving", "Pure And Loving");
-				if (player.findPerk(PerkLib.PurityBlessing) > 0 && player.perkv4(PerkLib.PurityBlessing) < 1) addButton(6, "PurityBlessing", permanentizePerk3, PerkLib.PurityBlessing);
-				else if (player.findPerk(PerkLib.PurityBlessing) > 0 && player.perkv4(PerkLib.PurityBlessing) > 0) addButtonDisabled(6, "PurityBlessing", "Purity Blessing perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "PurityBlessing", "Purity Blessing");
-				if (player.findPerk(PerkLib.SensualLover) > 0 && player.perkv4(PerkLib.SensualLover) < 1) addButton(7, "SensualLover", permanentizePerk3, PerkLib.SensualLover);
-				else if (player.findPerk(PerkLib.SensualLover) > 0 && player.perkv4(PerkLib.SensualLover) > 0) addButtonDisabled(7, "SensualLover", "Sensual Lover perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "SensualLover", "Sensual Lover");
+				if (player.findPerk(PerkLib.PurityBlessing) > 0 && player.perkv4(PerkLib.PurityBlessing) < 1) addButton(5, "PurityBlessing", permanentizePerk3, PerkLib.PurityBlessing);
+				else if (player.findPerk(PerkLib.PurityBlessing) > 0 && player.perkv4(PerkLib.PurityBlessing) > 0) addButtonDisabled(5, "PurityBlessing", "Purity Blessing perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(5, "PurityBlessing", "Purity Blessing");
+				if (player.findPerk(PerkLib.SensualLover) > 0 && player.perkv4(PerkLib.SensualLover) < 1) addButton(6, "SensualLover", permanentizePerk3, PerkLib.SensualLover);
+				else if (player.findPerk(PerkLib.SensualLover) > 0 && player.perkv4(PerkLib.SensualLover) > 0) addButtonDisabled(6, "SensualLover", "Sensual Lover perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(6, "SensualLover", "Sensual Lover");
 				addButton(9, "Previous", ascensionPermeryMenu, page - 1);
 			}
 			addButton(14, "Back", ascensionMenu);
@@ -2463,6 +2497,30 @@ import coc.view.MainView;
 			//Permanentize a perk
 			player.addPerkValue(perk, 4, 1);
 			ascensionPermeryMenu(3);
+		}
+		private function permanentizePerkEnlightenedKitsuneAndNinetails():void {
+			//Not enough points or perk already permed? Cancel.
+			if (player.ascensionPerkPoints < 10) return;
+			if (player.perkv4(PerkLib.EnlightenedKitsune) > 0) return;
+			if (player.perkv4(PerkLib.EnlightenedNinetails) > 0) return;
+			//Deduct points
+			player.ascensionPerkPoints -= 10;
+			//Permanentize a perk
+			player.addPerkValue(PerkLib.EnlightenedKitsune, 4, 1);
+			player.addPerkValue(PerkLib.EnlightenedNinetails, 4, 1);
+			ascensionPermeryMenu(1);
+		}
+		private function permanentizePerkCorruptedKitsuneAndNinetails():void {
+			//Not enough points or perk already permed? Cancel.
+			if (player.ascensionPerkPoints < 10) return;
+			if (player.perkv4(PerkLib.CorruptedKitsune) > 0) return;
+			if (player.perkv4(PerkLib.CorruptedNinetails) > 0) return;
+			//Deduct points
+			player.ascensionPerkPoints -= 10;
+			//Permanentize a perk
+			player.addPerkValue(PerkLib.CorruptedKitsune, 4, 1);
+			player.addPerkValue(PerkLib.CorruptedNinetails, 4, 1);
+			ascensionPermeryMenu(1);
 		}
 		
 		private function ascensionMetamorphPermeryMenu(page:int = 1):void {
@@ -3501,6 +3559,7 @@ import coc.view.MainView;
 			inventory.clearStorage();
 			inventory.clearGearStorage();
 			inventory.initializeGearStorage();
+			player.strtouspeintwislibsenCalculation1();
 			doNext(removeLevelPerks);
 		}
 		
@@ -3531,10 +3590,10 @@ import coc.view.MainView;
 		}
 
 		private function isSpecialKeyItem(keyName:* = null):Boolean {//tylko sky poinson pearl zostawić tutaj
-			return (keyName == "Ascension" || keyName == "Sky Poison Pearl" || keyName == "Nieve's Tear"); 
+			return (keyName == "Ascension" || keyName == "Sky Poison Pearl" || keyName == "Nieve's Tear");
 		}
 
-		private function isSpecialStatus(statusEffects:StatusEffectClass, statusEffect:* = null):Boolean {	
+		private function isSpecialStatus(statusEffects:StatusEffectClass, statusEffect:* = null):Boolean {
 			return (statusEffect == StatusEffects.KnowsWereBeast || statusEffects.value4 == 9000);	//na razie jest tu tylko werebeast
 		}	//ale potem zamienić to na specialne soulskills z każdego z klanów
 	}

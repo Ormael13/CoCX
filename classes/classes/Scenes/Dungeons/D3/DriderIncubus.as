@@ -6,6 +6,7 @@ import classes.CockTypesEnum;
 import classes.PerkLib;
 import classes.Scenes.Areas.Swamp.AbstractSpiderMorph;
 import classes.Scenes.SceneLib;
+import classes.Stats.Buff;
 import classes.StatusEffects;
 
 public class DriderIncubus extends AbstractSpiderMorph
@@ -227,10 +228,9 @@ this.HP -= (this.maxHP() * 0.08);
 				{
 					amount = player.str - 1;
 				}
-				
-				player.str -= amount;
+
+				player.statStore.addBuff("str",-amount,"Poison", {text:"Poisoned!",time:Buff.RATE_HOURS, tick:4})
 				showStatDown('str');
-				player.addStatusValue(StatusEffects.DriderIncubusVenom, 2, amount);
 					
 				//Alternate if PC cannot move
 				outputText("Taking his time, the arachnid demon bares his fangs, easily biting deeply into you. His tongue slides sensually around the wounds as he pumps you full of venom, tasting your fear and desperation. You wince while the venom robs you of your strength.");
@@ -272,8 +272,8 @@ this.HP -= (this.maxHP() * 0.08);
 					{
 						amount = player.str - 1;
 					}
-					
-					player.str -= amount;
+
+					player.statStore.addBuff("str",-amount,"Poison", {text:"Poisoned!",time:Buff.RATE_HOURS, tick:4})
 					showStatDown('str');
 					player.addStatusValue(StatusEffects.DriderIncubusVenom, 2, amount);
 				}				

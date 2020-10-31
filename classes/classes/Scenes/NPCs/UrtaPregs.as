@@ -519,7 +519,7 @@ private function drinkSomeUrtaPostBirthTitMilk():void {
 	else outputText("children");
 	outputText(" together... but that's a poor substitute if you don't ever come back.  Please, be careful with yourself, [name],</i>\" she tells you solemnly.  You kiss her goodbye, giving her shaft a teasing grope then step out of the room.");
 	//Maybe lower Libido by -1?//
-	dynStats("lib", -1, "lus", 10);
+	dynStats("lus", 10);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1508,7 +1508,6 @@ private function weirdUrtaCravingsConclusion():void {
 	else if(player.tongue.type == Tongue.DRACONIC) outputText("draconic ");
 	outputText("tongue.  She yips in surprise, then moans as she eagerly sinks into your embrace, kissing you back with equal passion.  She suddenly breaks it, looking apologetic.  \"<i>Sorry, [name], but if we keep that up, I'll be wanting another round, and I have things to do.</i>\"  She pats your face apologetically and shifts herself, somewhat clumsily, out of the bed, gathering her clothes and starting to dress herself.");
 	outputText("\n\nTaking that as your cue, you do likewise, and the two of you go your separate ways after locking the apartment up behind you.");
-	dynStats("lib", -.5);
 	doNext(camp.returnToCampUseTwoHours);
 }
 
@@ -1602,8 +1601,6 @@ private function urtaRaepsJoo():void {
 	outputText(" and close your eyes, letting sleep take you over even as the fox behind you drools on your back and continues to pound your ass raw.");
 	
 	outputText("\n\nYou come to your senses and notice the amazing softness of the pillow you're laying on.  It feels so good you can't help but dig your head in and rub your cheek against it.  \"<i>You like that, do you?</i>\"  A familiar voice says, sounding rather amused.");
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	player.sexReward("vaginalFluids");
 	dynStats("sen", 3);
 	menu();

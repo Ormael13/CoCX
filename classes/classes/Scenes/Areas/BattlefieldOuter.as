@@ -98,9 +98,15 @@ use namespace CoC;
 					break;
 				case 6:
 					clearOutput();
-					outputText("While exploring the battlefield you find the remains of some metal scraps. At first you think you won't find anything useful there but a metal plate draws your attention, it could be useful later. You put the item in your backpack and head back to camp.\n\n");
-					outputText("<b>You found a metal plate.</b>");
-					flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]++;
+					if (player.level >= 24 && rand(4) == 0) {
+						outputText("You spot something on the ground among various items remains. Taking a closer look, it's a Heavy Spiked Shield. ");
+						inventory.takeItem(shields.SPIH_SH, camp.returnToCampUseOneHour);
+					}
+					else {
+						outputText("While exploring the battlefield you find the remains of some metal scraps. At first you think you won't find anything useful there but a metal plate draws your attention, it could be useful later. You put the item in your backpack and head back to camp.\n\n");
+						outputText("<b>You found a metal plate.</b>");
+						flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]++;
+					}
 					break;
 				default:
 					clearOutput();

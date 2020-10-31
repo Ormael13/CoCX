@@ -269,7 +269,7 @@ public class BasiliskScene extends BaseContent
 		
 			outputText("After about an hour of being forced to stand still and savor your own shameful memories, you find with great relief you can begin to move your toe again.  Hard part's over, now.  Eventually with some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you rub the remnants of sticky saliva off your face and redress before anything else finds you, before groggily picking your way back to camp.  The cum still oozing from your quim and the occasional twinging memory mean that you aren't going to be able to shake free of the experience as easily as you'd like.");
 			//(preg check, or change preg to basilisk if egg)
-			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
             else player.knockUp(PregnancyStore.PREGNANCY_BASILISK, PregnancyStore.INCUBATION_BASILISK);
 			//Egg change - 100% chance
 			if (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {

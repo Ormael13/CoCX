@@ -1047,14 +1047,14 @@ public class MarblePurification extends NPCAwareContent{
 		{
 		 	outputText("she drops herself onto your " + cockDescript(x) + ".  Since your bovine mate isn't in the habit of wearing any form of undergarments, her skirt doesn't really do much to get in the way of penetration.  A shriek of dismay accompanies this act.");
 		 	outputText("\n\nThere is no hesitation after you've been mounted.  Instantly you're being roughly ridden by a beast that has been awakened in Marble, and there is nothing that can stop it.  A loud slapping sound fills the air with each drop of her hips, then they rise up again and drop once more.  What is essentially a hollow jackhammer seems to be running on your lap right now, and its operator's hands are holding firm to your shoulders to make sure you stay in place.");
+			player.sexReward("vaginalFluids", "Dick");
 		}
 		//else if (PC has a vagina and Marble has a cock)
 		else if(player.hasVagina() && flags[kFLAGS.MARBLE_DICK_TYPE] > 0)
 		{
 		 	outputText("she drops herself onto the ground next to you.  Abruptly, she lifts you up and drops your womanhood onto the member you gave her.  Since your bovine mate isn't in the habit of wearing any form of undergarments, her skirt doesn't really do much to get in the way of penetration.  A shriek of dismay accompanies this act.");
 		 	outputText("\n\nThere is no hesitation after you've been invaded, instantly you're being roughly lifted and dropped by a beast that has been awakened in Marble, and there is nothing that can stop it.  A loud slapping sound fills the air with each drop of your hips, only for them to be lifted up and dropped once more.  Your " + hipDescript() + " have been essentially turned into a jackhammer right now, and its operator shows no signs allowing you to stray from your place on her lap.");
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+			player.sexReward("cum", "Vaginal");
 		}
 		//else if (PC has a vagina and Marble does not have a cock)
 		else if(player.hasVagina())
@@ -1065,7 +1065,6 @@ public class MarblePurification extends NPCAwareContent{
 	 	outputText("\n\nRough sex has a tendency to be rather short but eventful.  In this aspect, this particular escapade is no different.  What sets it apart is an incessant chorus of furious shouting and insults from an extremely jealous cow-girl.  It barely takes a minute before a sharp orgasm passes through your bodies, and in almost an instant, it is over.  Your sweaty bodies separate, and you get a chance to see Marble's face once more.  She's crying.");
 	 	outputText("\n\nThe cause of this sadness is rather likely to be from the extreme verbal abuse that a woman red with rage has been heaping at her.  \"<i>What the fuck is wroong with you!?  Having sex like that with my mate right in froont of me while I'm tied up!  You deserve to be locked away, </i>sister<i>.</i>\"  That last word is essentially spat out.  Evidently Clara didn't enjoy the display, nor did Marble particularly care for her response.  The elder sister rises up, and steps towards her sister, fists clenched in furry.");
 		//set lust to 0
-		player.sexReward("Default", "Default",true,false);
 		//Proceed to calm Marble down
 		menu();
 		addButton(0,"Next",calmMurblesFatAssDown);

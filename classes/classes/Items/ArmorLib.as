@@ -5,13 +5,12 @@ package classes.Items
 {
 	import classes.Items.Armors.*;
 	import classes.PerkLib;
-	import classes.PerkType;
 
 	public final class ArmorLib
 	{
 		public static const COMFORTABLE_UNDERCLOTHES:Armor = new ComfortableUnderclothes();
 		public static const NOTHING:Armor = new Nothing();
-//25 za 1 ptk robes, 20 dla light, 40 dla medium i 60 dla heavy, z perkiem/dod. efektem podwaja koszt za każdy
+		//25 za 1 ptk robes, 20 dla light, 40 dla medium i 60 dla heavy, z perkiem/dod. efektem podwaja koszt za każdy
 		public const NOTHING:Armor = new Nothing();
 		public const ADVCLTH:Armor = new Armor("AdvClth","G. Clothes","green adventurer's clothes","a green adventurer's outfit, complete with pointed cap",2,0,50,"A set of comfortable green adventurer's clothes.  It even comes complete with a pointy hat!","Light");
 		public const A_ROBE_:ArmorWithPerk = new ArmorWithPerk("A.Robe","A.Robe","apprentice's robe","an apprentice's robe",0,1,25,"This drab robe lacks adornment, yet retains an air of mysticality. The low quality of the fabric coupled with its mystic air suggests that it is a garment meant for mages in training.","Light",
@@ -36,7 +35,7 @@ package classes.Items
 				PerkLib.SluttySeduction,5,0,0,0,"Your revealing chain bikini allows you access to 'Seduce', an improved form of 'Tease'.", false, false);
 		public const CLSSYCL:Armor = new Armor("ClssyCl", "Suitclothes", "classy suitclothes", "a set of classy suit-clothes", 1, 0, 40, "A set of classy suitclothes.", "Light");
 		public const CTPALAD:CentaurArmor = new CentaurArmor();
-		public const CTBGUAR:CentaurBlackguardArmor = new CentaurBlackguardArmor();
+		//public const CTBGUAR:CentaurBlackguardArmor = new CentaurBlackguardArmor();
 		public const DBARMOR:Armor = new PureMaraeArmor();
 		public const DSCLARM:Armor = new Armor("DSclArm", "D.Scale Armor", "dragonscale armor", "a suit of dragonscale armor", 10, 10, 800, "This armor is cleverly fashioned from dragon scales. It offers high protection while at the same time, quite flexible.", "Medium");
 		public const DSCLROB:Armor = new ArmorWithPerk("DSclRob", "D.Scale Robes", "dragonscale robes", "a dragonscale robes", 0, 10, 500, "This robe is expertly made from dragon scales. It offers high protection while being lightweight and should be comfortable to wear all day.", "Light",
@@ -48,6 +47,7 @@ package classes.Items
 				PerkLib.WizardsEndurance,15,0,0,0);
 		public const EWROBE_:ArmorWithPerk = new ArmorWithPerk("EWRobe","E.W. Robe","ebonweave robe","an ebonweave robe",2,10,600,"This robe is ebonweave, created using refined ebonbloom petals. This robe is as comfortable as cloth yet more protective than chainmail. The cloth has a mystic aura, helpful when working magic.","Light",
 				PerkLib.WizardsEndurance,30,0,0,0);
+		public const FQR:ArmorWithPerk = new FairyQueenRegalia();
 		public const FULLCHN:Armor = new Armor("FullChn","Full Chain","full-body chainmail","a full suit of chainmail armor",8,0,320,"This full suit of chainmail armor covers its wearer from head to toe in protective steel rings.","Medium");
 		public const FULLPLT:Armor = new Armor("FullPlt","Full Plate","full platemail","a suit of full-plate armor",21,0,1260,"A highly protective suit of steel platemail.  It would be hard to find better physical protection than this.","Heavy");
 		public const G_CHANG:Armor = new Armor("G.Chang","GreenChangshan","Green Lunar new year dress (m)","a Green Lunar new year dress (m)",0,0,100,"A simple yet elegant green changshan with dragon motif. This clothing is said to bring in good luck increasing evasiveness and critical chance.","Light");
@@ -113,6 +113,7 @@ package classes.Items
 		public const SS_ROBE:ArmorWithPerk = new ArmorWithPerk("SS.Robe","SS.Robes","spider-silk robes","a spider-silk robes",0,6,300,"This robe looks incredibly comfortable.  It's made from alchemically enhanced spider-silk, and embroidered with what looks like magical glyphs around the sleeves and hood.","Light",
 				PerkLib.WizardsEndurance,30,0,0,0);
 		public const SSARMOR:Armor = new Armor("SSArmor","SS.Armor","spider-silk armor","a suit of spider-silk armor",25,0,1500,"This armor is as white as the driven snow.  It's crafted out of thousands of strands of spider-silk into an impenetrable protective suit.  The surface is slightly spongy, but so tough you wager most blows would bounce right off.","Heavy");
+		public const SCANSC:ArmorWithPerk = new ScandalousSuccubusClothing();
 		public const SWHBIKNI:ArmorWithPerk = new ArmorWithPerk("SWhBikini","S Wh Bikini","Sexy White Bikini","a Sexy White Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light",
 				PerkLib.SluttySeduction,10,0,0,0,"Your revealing chain bikini allows you access to 'Seduce', an improved form of 'Tease'.", false, false);
 		public const SYEBIKNI:ArmorWithPerk = new ArmorWithPerk("SYeBikini","S Ye Bikini","Sexy Yellow Bikini","a Sexy Yellow Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light",
@@ -120,15 +121,18 @@ package classes.Items
 		public const T_BSUIT:ArmorWithPerk = new ArmorWithPerk("T.BSuit","Bodysuit","semi-transparent bodysuit","a semi-transparent, curve-hugging bodysuit",0,0,50,"A semi-transparent bodysuit. It looks like it will cling to all the curves of your body.","Light",
 				PerkLib.SluttySeduction,7,0,0,0,"Your clingy transparent bodysuit allows you access to 'Seduce', an improved form of 'Tease'.");
 		public const TBARMOR:Armor = new MaraeArmor();
+		public const TRMOUTF:Armor = new TravelingMerchantOutfit();
 		public const TRADITC:ArmorWithPerk = new ArmorWithPerk("TraditC","TraditionalCloth","Traditional clothes","a Traditional clothes",0,0,160,"These clothes bear resemblance to the traditional outfit whore by people in He'Xin'Dao on important days however there is something lewd and obscene about this more skimpy variant of the design. These clothes naturally assist soul force manipulation.","Light",
 				PerkLib.SluttySeduction,10,0,0,0,"Your revealing clothes allows you access to 'Seduce', an improved form of 'Tease'.", false, false);
 		public const TRASARM:Armor = new Armor("TraSArm","TraSArmor","training soul armor","a training soul armor",1,1,240,"This set of heavy armor is made using soulmetal but it main purpose is to allow user train soulforce to the uttermost limit for novice soul cultivator.","Heavy");
 		public const TUBETOP:Armor = new Armor("TubeTop","Tube Top","tube top and short shorts","a snug tube top and VERY short shorts",0,0,25,"A clingy tube top and VERY short shorts.","Light");
 		public const W_ROBES:ArmorWithPerk = new ArmorWithPerk("W.Robes","W.Robes","wizard's robes","a wizard's robes",0,1,50,"These robes appear to have once belonged to a female wizard.  They're long with a slit up the side and full billowing sleeves.  The top is surprisingly low cut.  Somehow you know wearing it would aid your spellcasting.","Light",
 				PerkLib.WizardsEndurance,25,0,0,0);
+		public const WALIC:ArmorWithPerk = new WalpurgisIzaliaRobe();
+		public const VLAR:ArmorWithPerk = new VladimirRegalia();
+		public const BERA:Armor = new BerserkerArmor();
 		public const WKIMONO:ArmorWithPerk = new ArmorWithPerk("W.Kimono","W.Kimono","white kimono","a white kimono",0,1,200,"This lovely white kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
 				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
-		public const WIR:ArmorWithPerk = new WalpurgisIzaliaRobe();
 		/*
 		private static function mk(id:String,shortName:String,name:String,longName:String,def:Number,value:Number,description:String,perk:String=""):Armor {
 			return new Armor(id,shortName,name,longName,def,value,description,perk);

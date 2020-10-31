@@ -6,6 +6,7 @@ package classes
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
+import classes.Stats.StatUtils;
 
 import flash.utils.Dictionary;
 
@@ -27,6 +28,7 @@ public class PerkType extends BaseContent
 		private var _desc:String;
 		private var _longDesc:String;
 		private var _keepOnAscension:Boolean;
+		public var buffs:Object;
 		public var defaultValue1:Number = 0;
 		public var defaultValue2:Number = 0;
 		public var defaultValue3:Number = 0;
@@ -63,12 +65,12 @@ public class PerkType extends BaseContent
 		{
 			return _longDesc;
 		}
-		
+
 		public function keepOnAscension(respec:Boolean = false):Boolean
 		{
 			if (_keepOnAscension)
-				return true;						
-			
+				return true;
+
 			return _longDesc != _desc && !respec; // dirty condition
 		}
 
@@ -102,16 +104,6 @@ public class PerkType extends BaseContent
 		 */
 		public var requirements:Array = [];
 
-		/**
-		 * @return "requirement1, requirement2, ..."
-		 */
-		public function allRequirementDesc():String {
-			var s:Array = [];
-			for each (var c:Object in requirements) {
-				if (c.text) s.push(c.text);
-			}
-			return s.join(", ");
-		}
 		public function available(player:Player):Boolean {
 			for each (var c: Object in requirements) {
 				if (!c.fn(player)) return false;
@@ -125,6 +117,7 @@ public class PerkType extends BaseContent
 				text: requirementText,
 				type: internalType
 			});
+
 			return this;
 		}
 
@@ -149,8 +142,20 @@ public class PerkType extends BaseContent
 		}
 		public function requireTou(value:int):PerkType {
 			requirements.push({
-				fn  : fnRequireAttr("tou", value),
-				text: "Toughness " + value,
+				fn  : function(player:Player):Boolean {
+					// return true if player meets perk requirements
+					var Attribute:String = "tou";
+					if(player.hasPerk(PerkLib.IcyFlesh)) Attribute = "inte";
+					if(player.hasPerk(PerkLib.HaltedVitals)) Attribute = "lib";
+					return player[Attribute] >= value;
+				},
+				text: function(player:Player):String {
+					// return true if player meets perk requirements
+					var Attribute:String = "Toughness";
+					if(player.hasPerk(PerkLib.IcyFlesh)) Attribute = "intelligence";
+					if(player.hasPerk(PerkLib.HaltedVitals)) Attribute = "libido";
+					return Attribute +" "+ value;
+				},
 				type: "attr",
 				attr: "tou",
 				value: value
@@ -340,6 +345,56 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
+		public function requireMetabolismMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxMetabolismMutations() > 0;
+				},
+				text: "Free Metabolism Mutation Slot",
+				type: "metabolismmutation"
+			});
+			return this;
+		}
+		public function requireOvariesMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxOvariesMutations() > 0;
+				},
+				text: "Free Ovaries Mutation Slot",
+				type: "ovariesmutation"
+			});
+			return this;
+		}
+		public function requireBallsMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxBallsMutations() > 0;
+				},
+				text: "Free Balls Mutation Slot",
+				type: "ballsmutation"
+			});
+			return this;
+		}
+		public function requireEyesMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxEyesMutations() > 0;
+				},
+				text: "Free Eyes Mutation Slot",
+				type: "eyesmutation"
+			});
+			return this;
+		}
+		public function requirePeripheralNervSysMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxPeripheralNervSysMutations() > 0;
+				},
+				text: "Free Peripheral NervSys Mutation Slot",
+				type: "peripheralnervsysmutation"
+			});
+			return this;
+		}
 		public function requireHungerEnabled():PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {
@@ -427,6 +482,21 @@ public class PerkType extends BaseContent
 				type: "anyperk",
 				perks: perks
 			});
+			return this;
+		}
+
+		public function withBuffs(buffs:Object, showText:Boolean = true):PerkType {
+			this.buffs = buffs
+			var tempText:String = "";
+			if(showText) {
+				var key:String;
+				for (key in this.buffs) {
+					tempText += " " + StatUtils.explainBuff(key, buffs[key]) + ",";
+				}
+				tempText = tempText.slice(0, tempText.length - 1) + "."
+				_desc += tempText;
+				_longDesc += tempText;
+			}
 			return this;
 		}
 	}

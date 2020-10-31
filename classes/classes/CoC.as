@@ -1,4 +1,4 @@
-/* 
+/*
  CoC Main File - This is what loads when the game begins. If you want
 import classes.EngineCore;to start understanding the structure of CoC,
  this is the place to start.
@@ -12,7 +12,6 @@ package classes
 {
 // BREAKING ALL THE RULES.
 import classes.GlobalFlags.kACHIEVEMENTS;
-import classes.GlobalFlags.kCOUNTERS;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Items.*;
@@ -22,8 +21,6 @@ import classes.Scenes.NPCs.JojoScene;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
 import classes.display.SpriteDb;
-import classes.internals.CountersStorage;
-import classes.internals.RootCounters;
 
 import coc.model.GameModel;
 import coc.model.TimeModel;
@@ -72,7 +69,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 28;
+    public var modSaveVersion:Number = 29;
     public var levelCap:Number = 185;
 
     //Used to restrict random drops from overlapping uniques
@@ -145,7 +142,6 @@ public class CoC extends MovieClip
     public var player2:Player;
     public var monster:Monster;
     public var flags:DefaultDict;
-    public var counters:RootCounters;
     public var achievements:DefaultDict;
     private var _gameState:int;
     public var time :TimeModel;
@@ -157,7 +153,6 @@ public class CoC extends MovieClip
     public var testingBlockExiting:Boolean;
 
     public var kFLAGS_REF:*;
-    public var kCOUNTERS_REF:*;
     public var kACHIEVEMENTS_REF:*;
 
     public function get inCombat():Boolean { return _gameState == 1; }
@@ -200,7 +195,6 @@ public class CoC extends MovieClip
         useables = new UseableLib();
 
         this.kFLAGS_REF = kFLAGS;
-        this.kCOUNTERS_REF = kCOUNTERS;
         this.kACHIEVEMENTS_REF = kACHIEVEMENTS;
         // cheat for the parser to be able to find kFLAGS
         // If you're not the parser, DON'T USE THIS
@@ -253,8 +247,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8n10";
-			version = ver + " (<b>Tiny fix</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8o";
+			version = ver + " (<b>Liadri hard work additions (all that she listed briefly in changelog + some of minor thigns from me</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
@@ -295,9 +289,6 @@ public class CoC extends MovieClip
         flags = new DefaultDict();
 
         achievements = new DefaultDict();
-        var countersStorage:CountersStorage = kCOUNTERS.create();
-        kCOUNTERS.initialize(countersStorage);
-        counters = new RootCounters(countersStorage);
 
         ///Used everywhere to establish what the current game state is
         // Key system variables
@@ -455,7 +446,6 @@ public class CoC extends MovieClip
     }
     */
     public static const STAT_GAIN_CLASSIC:int = 0;
-    public static const STAT_GAIN_DAILY:int = 1;
     public function flushOutputTextToGUI():void
     {
         var fmt:TextFormat = mainView.mainText.defaultTextFormat;

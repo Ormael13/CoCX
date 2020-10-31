@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
+import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.UniqueSexScenes;
 
@@ -148,11 +149,8 @@ public function treeMenu(output:Boolean = true):void {
 		} else {
 			addButtonDisabled(2, "TentacleBone");
 		}
-		if(player.countCocksOfType(CockTypesEnum.STAMEN)>4){
-			addButton(3, "TentacleDuel", uniquuuesexscene.alrauneExtraSceneWithHollicyntiaTentacleDuel);
-		} else {
-			addButtonDisabled(2, "TentacleDuel", "Requires <i>a lot</i> of tentacle (or stamen) cocks");
-		}
+		if (player.isAlraune()) addButton(3, "TentacleDuel", uniquuuesexscene.alrauneExtraSceneWithHollicyntiaTentacleDuel);
+		else addButtonDisabled(3, "TentacleDuel", "This scene requires to be an alraune of some kind.");
 		addButton(5,"Drink Sap", haveAMapleSyrupSnack);
 		if(flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(6,"Eat A Fruit", eatHolliFruit);
 		else addButtonDisabled(6,"Eat A Fruit");
@@ -507,8 +505,7 @@ private function rideTheWalrusP3():void {
 	//{- big sensitivity loss, big libido gain, minus lust}
 	player.orgasm();
 	dynStats("lib", 1, "sen", -5);
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+	player.sexReward("cum");
 	if(flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] += 5;
     flags[kFLAGS.TIMES_RIDDEN_FLOWER]++;
     flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
@@ -771,12 +768,10 @@ private function level4RideHollisTentacruels():void {
 	if(!player.isBiped()) outputText("you'd be walking bowlegged for a week, if you had legs.");
 	else outputText("you'll be walking bowlegged for a week!");
 	//empty lust, boost corruption, slimefeed(), +1 cor, -3 sens, +.5 libido
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+	player.sexReward("cum", "Vaginal")
 	player.orgasm();
 	dynStats("lib", .5, "sen", 2, "cor", 1);
 	fertilizeHolli(false);
-	player.slimeFeed();
 	flags[kFLAGS.TIMES_RIDDEN_FLOWER]++;
 	doNext(camp.returnToCampUseOneHour);
 }

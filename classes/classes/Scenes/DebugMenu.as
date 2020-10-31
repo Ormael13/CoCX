@@ -743,6 +743,7 @@ public class DebugMenu extends BaseContent
 			addButton(0,"Head",bodyPartEditorHead);
 			addButton(1,"Skin & Hair",bodyPartEditorSkin);
 			addButton(2,"Torso & Limbs",bodyPartEditorTorso);
+			addButton(3,"AlrauneDebug",AlrauneDebug);
 //			addButton(3,"",bodyPartEditorValues);
 //			addButton(4,"",bodyPartEditorCocks);
 //			addButton(5,"",bodyPartEditorVaginas);
@@ -819,6 +820,7 @@ public class DebugMenu extends BaseContent
 			[Skin.PATTERN_LIGHTNING_SHAPED_TATTOO, "7 LIGHTNING_SHAPED_TATTOO"],
 			[Skin.PATTERN_SCAR_SHAPED_TATTOO, "9 SCAR_SHAPED_TATTOO"],
 			[Skin.PATTERN_WHITE_BLACK_VEINS, "10 PATTERN_WHITE_BLACK_VEINS"],
+			[Skin.PATTERN_USHI_ONI_ONNA_TATTOO, "12 PATTERN_USHI_ONI_ONNA_TATTOO"],
 		];
 		private static const PATTERN_COAT_TYPES:Array = [
 			[Skin.PATTERN_NONE, "0 NONE"],
@@ -1036,6 +1038,8 @@ public class DebugMenu extends BaseContent
 			[Face.GHOST, "48 GHOST"],
 			[Face.JIANGSHI, "49 JIANGSHI"],
 			[Face.YUKI_ONNA, "50 YUKI_ONNA"],
+			[Face.KUDERE, "51 KUDERE"],
+			[Face.USHI_ONI_ONNA, "52 USHI_ONI_ONNA"],
 		];
 		private static const TONGUE_TYPE_CONSTANTS:Array = [
 			[Tongue.HUMAN, "0 HUMAN"],
@@ -1136,6 +1140,10 @@ public class DebugMenu extends BaseContent
 			[Horns.BICORN, "14 BICORN"],
 			[Horns.GHOSTLY_WISPS, "15 GHOSTLY_WISPS"],
 			[Horns.SPELL_TAG, "16 SPELL_TAG"],
+			[Horns.GOATQUAD, "17 GOATQUAD"],
+			[Horns.KRAKEN, "18 KRAKEN"],
+			[Horns.FROSTWYRM, "19 FROSTWYRM"],
+			[Horns.USHI_ONI_ONNA, "20 USHI_ONI_ONNA"],
 		];
 		private static const HORN_COUNT_CONSTANTS:Array = [
 				0,1,2,3,4,
@@ -1234,6 +1242,61 @@ public class DebugMenu extends BaseContent
 			tagDemosSkin();
 			showChangeOptions(bodyPartEditorHead, page, BEARD_LENGTH_CONSTANTS, changeBeardLength);
 		}
+		private function AlrauneDebug():void {
+			outputText("\n\nSet all cocks to tentacle and lower body to alraune!");
+			if (player.cocks.length == 0) {
+				if (player.balls > 0) player.balls = 0;
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.cocks[0].cockType = CockTypesEnum.STAMEN;
+				player.cocks[1].cockType = CockTypesEnum.STAMEN;
+				player.cocks[2].cockType = CockTypesEnum.STAMEN;
+				player.cocks[3].cockType = CockTypesEnum.STAMEN;
+				player.cocks[4].cockType = CockTypesEnum.STAMEN;
+				player.cocks[5].cockType = CockTypesEnum.STAMEN;
+				player.cocks[6].cockType = CockTypesEnum.STAMEN;
+				player.cocks[7].cockType = CockTypesEnum.STAMEN;
+				player.cocks[8].cockType = CockTypesEnum.STAMEN;
+				player.cocks[9].cockType = CockTypesEnum.STAMEN;
+			}
+			if (player.cocks.length > 0) {
+				player.killCocks(-1);
+				if (player.balls > 0) player.balls = 0;
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+				player.cocks[0].cockType = CockTypesEnum.STAMEN;
+				player.cocks[1].cockType = CockTypesEnum.STAMEN;
+				player.cocks[2].cockType = CockTypesEnum.STAMEN;
+				player.cocks[3].cockType = CockTypesEnum.STAMEN;
+				player.cocks[4].cockType = CockTypesEnum.STAMEN;
+				player.cocks[5].cockType = CockTypesEnum.STAMEN;
+				player.cocks[6].cockType = CockTypesEnum.STAMEN;
+				player.cocks[7].cockType = CockTypesEnum.STAMEN;
+				player.cocks[8].cockType = CockTypesEnum.STAMEN;
+				player.cocks[9].cockType = CockTypesEnum.STAMEN;
+			}
+			if (!player.hasStatusEffect(StatusEffects.AlrauneFlower)) player.createStatusEffect(StatusEffects.AlrauneFlower,0,0,0,0);
+			if (player.wings.type == Wings.PLANT) player.wings.type = Wings.NONE;
+			player.lowerBody = LowerBody.PLANT_FLOWER;
+			player.legCount = 12;
+
+		}
 		private function bodyPartEditorTorso():void {
 			menu();
 			dumpPlayerData();
@@ -1292,6 +1355,12 @@ public class DebugMenu extends BaseContent
 			[Arms.JIANGSHI, "39 JIANGSHI"],
 			[Arms.RAIJU_2, "40 RAIJU_2"],
 			[Arms.YUKI_ONNA, "41 YUKI_ONNA"],
+			[Arms.MELKIE, "42 MELKIE"],
+			[Arms.CENTIPEDE, "43 CENTIPEDE"],
+			[Arms.KRAKEN, "44 KRAKEN"],
+			[Arms.FROSTWYRM, "45 FROSTWYRM"],
+			[Arms.CANCER, "46 CANCER"],
+			[Arms.USHI_ONI_ONNA, "47 USHI_ONI_ONNA"],
 		];
 		private static const CLAW_TYPE_CONSTANTS:Array = [
 			[Claws.NORMAL, "0 NORMAL"],
@@ -1353,6 +1422,8 @@ public class DebugMenu extends BaseContent
 			[Tail.HINEZUMI, "43 HINEZUMI"],
 			[Tail.THUNDERBIRD, "44 THUNDERBIRD"],
 			[Tail.BEAR, "45 BEAR"],
+			[Tail.TWINKASHA, "46 TWINKASHA"],
+			[Tail.USHI_ONI_ONNA, "47 USHI_ONI_ONNA"],
 		];
 		private static const TAIL_COUNT_CONSTANTS:Array = [
 			[0,"0"],1,2,3,4,
@@ -1457,6 +1528,13 @@ public class DebugMenu extends BaseContent
 			[LowerBody.GHOST_2, "54 POLTERGEIST"],
 			[LowerBody.JIANGSHI, "55 JIANGSHI"],
 			[LowerBody.YUKI_ONNA, "56 YUKI_ONNA"],
+			[LowerBody.MELKIE, "57 MELKIE"],
+			[LowerBody.CENTIPEDE, "58 CENTIPEDE"],
+			[LowerBody.KRAKEN, "59 KRAKEN"],
+			[LowerBody.CRAB, "60 CRAB"],
+			[LowerBody.CANCER, "61 CANCER"],
+			[LowerBody.FROSTWYRM, "62 FROSTWYRM"],
+			[LowerBody.USHI_ONI_ONNA, "63 USHI_ONI_ONNA"],
 		];
 		private static const LEG_COUNT_CONSTANTS:Array = [
 			1,2,4,6,8,

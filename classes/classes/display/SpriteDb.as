@@ -50,6 +50,8 @@ public class SpriteDb {
 	}
 	[Embed(source="../../../res/sprites/archmage_alvina_shadowmantle2.png")]
 	public static const s_archmage_alvina_shadowmantle2_16bit:Class;
+	[Embed(source="../../../res/sprites/archmage_alvina_shadowmantleConcealed.png")]
+	public static const s_archmage_alvina_shadowmantle2Concealed_16bit:Class;
 	[Embed(source="../../../res/sprites/aria.png")]
 	public static var s_aria:Class;
 	[Embed(source="../../../res/sprites8bit/assmole-old.png")]
@@ -159,6 +161,10 @@ public class SpriteDb {
 	}
 	[Embed(source="../../../res/sprites/crabgirl.png")]
 	public static var s_crabgirl:Class;
+	[Embed(source="../../../res/sprites/crabgirlShop.png")]
+	public static var s_crabgirlShop:Class;
+	[Embed(source="../../../res/sprites/crabboy.png")]
+	public static var s_crabboy:Class;
 	[Embed(source="../../../res/sprites/dickworms.png")]
 	public static var s_dickworms_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/worms-old.png")]
@@ -254,6 +260,8 @@ public class SpriteDb {
 	}
 	[Embed(source="../../../res/sprites/goblin.png")]
 	public static var s_goblin_16bit:Class;
+	[Embed(source="../../../res/sprites/goblinAssassin.png")]
+	public static var s_goblinAssassin:Class;
 	[Embed(source="../../../res/sprites8bit/goblin-old.png")]
 	public static var s_goblin_8bit:Class;
 	public static function get s_goblin(): Class {
@@ -450,6 +458,8 @@ public class SpriteDb {
 	}
 	[Embed(source="../../../res/sprites/luna-maid.png")]
 	public static var s_luna_maid:Class;
+	[Embed(source="../../../res/sprites/Luna-Mooning.png")]
+	public static var s_Luna_Mooning:Class;
 	[Embed(source="../../../res/sprites/lumi.png")]
 	public static var s_lumi_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/lumi-old.png")]
@@ -821,6 +831,8 @@ public class SpriteDb {
 	public static function get s_yvonne(): Class {
 		return is8bit ? s_yvonne_8bit : s_yvonne_16bit;
 	}
+	[Embed(source="../../../res/sprites/zenji_sprite.png")]
+	public static var s_zenji:Class;
 
 	public static function bitmapData(clazz:Class):BitmapData {
 		if (!clazz) return null;

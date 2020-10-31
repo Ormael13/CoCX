@@ -104,6 +104,9 @@ use namespace CoC;
 		public const THHTONG:SimpleUseable = new SimpleUseable("THHTong", "TwoHellhoundTongues", "two hellhound tongues", 35, 
 			"Two tongues taken from a slain hellhound.",
 			"You look at the two hellhound tongues.  They look disgusting but at least it proves you killed another of those wretched beasts.");
+		public const TROLL_T:SimpleUseable = new SimpleUseable("Troll T", "Troll tusk", "a Troll tusk", 4000, 
+			"A Troll tusk.",
+			"You inspect the tusk covered in a series of rings from the tip to the midsection. A trophy of your triumph.\n\nThere’s not much you can do but admire its glory, you grin in satisfaction knowing that cowards get what they deserve. It’ll likely be worth a hefty sum of gems to someone willing to buy it.");
 		public const VIALCLE:SimpleUseable = new SimpleUseable("VialCle", "V.Clear", "a clear vial", 1, 
 			"A clear vial used to dye scales.",
 			"You look at clear vial.  It would help Arian change scales color.");
@@ -116,6 +119,9 @@ use namespace CoC;
 		public const VIALRAI:SimpleUseable = new SimpleUseable("VialRai", "V.Rainbow", "a rainbow vial", 1, 
 			"A rainbow vial used to dye scales.",
 			"You look at rainbow vial.  It would help Arian change scales color.");
+		public const S_SHARD:SimpleUseable = new SimpleUseable("S_SHARD", "S.Shard", "a tarnished shard of metal wich may have been part of a golden weapon", 200,
+			"These appears to be the shard of a shattered weapon. You are no smith and thus have no idea how to reforge this item. Its likely worthless unless...",
+			"These appears to be the shard of a shattered weapon though wich one you do not know. You are no smith and thus have no idea how to reforge this item. From what Vala told you it might have been part of the scepter of the fairy queen. You recall to need 15 shards in total.");
 		//CHEAT ITEM
 		public const DBGWAND:DebugWand = new DebugWand();
 	}

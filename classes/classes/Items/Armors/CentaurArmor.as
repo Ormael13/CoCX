@@ -8,7 +8,7 @@ package classes.Items.Armors
 	import classes.StatusEffects;
 	/**
 	 * ...
-	 * @author 
+	 * @author Liadri
 	 */
 	public class CentaurArmor extends Armor
 	{

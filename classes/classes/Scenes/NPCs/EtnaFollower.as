@@ -196,6 +196,7 @@ public function etnaRapeIntro():void
 	if (player.lust >= 33 && player.hasCock()) addButton(0, "Yes (M)", etnaRapeYesM);
 	if (player.lust >= 33 && player.hasVagina()) addButton(1, "Yes (F)", etnaRapeYesF);
 	addButton(2, "No", etnaRapeNo);
+	if (player.lust >= 33 && player.isAlraune()) addButton(3, "Fill her up!", EtnaFillHerUp);
 	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 }
 
@@ -267,6 +268,76 @@ public function etnaRapeYesF2():void
 	player.sexReward("vaginalFluids");
 	cleanupAfterCombat();
 }
+
+		public function EtnaFillHerUp():void
+		{
+			if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("Etna");
+			else outputText("This manticore");
+			outputText(" is always ready to take a stamen in isn't she? Guess today you will give the happy kitten a treat." +
+					"You tease her as you close in ");
+			if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("\"<i>Hey Etna</i>");
+			else outputText("\"<i>Hey kitty</i>");
+			outputText("<i> you're always hungry for more ain't you?</i>\"\n\n");
+			if(player.isLiliraune()) {
+				outputText("Your other half chuckles. \"<i>Oh of course she's always hungry for more she's</i>\"\n\n");
+				//if(fidel){
+				outputText("<i> been</i>");
+				//}
+				outputText("<i> hunting minotaurs for their cocks</i>");
+				//if(!fidel){
+				outputText("<i> all day long.</i>");
+				//}
+				//if(fidel){
+				//outputText("<i> for like forever until we had her stop it.</i>\"\n\n");
+				//}
+			}
+			if(player.isLiliraune()) {
+				outputText("\"<i>Well </i>");
+				if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("\"<i>Etna</i>");
+				else outputText("\"<i>kitty</i>");
+				outputText("<i> how about we gave you exactly what you want so badly.</i>\"\n\n");
+			} else {
+				outputText("\"<i>Well </i>");
+				if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("\"<i>Etna</i>");
+				else outputText("\"<i>kitty</i>");
+				outputText("<i> how about I give you exactly what you want so badly.</i>\"\n\n");
+			}
+			outputText("She perks up at the mere mention, her tails dripping with pussy drool. " +
+					"You pull her closer without much struggling and align your many stamens as she tucks her tail between her leg and hold " +
+					"the tip with her forepaws, the flower like bulb petals blossoming out in anticipation heck It not only looks like a flower it also smells like one… " +
+					"mmmh so inviting. Come to think of it, flowers are plant pussy and cocks to begin with so aren't you in theory bathing in a giant sexual organ? " +
+					"The though only arouses you all the more." +
+					"Focusing your mind back to the fun, you coil and twist all of your vines together merging them into a single stamen about as twelve time ticker then each of your individual members." +
+					"The rubbing of your many vines against one another is a delightful feeling and it only gets better as you dive into ");
+			if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("Etna");
+			else outputText("the manticore");
+			outputText(" welcoming folds pistoning in and out.\n\n" +
+					"She mewl in delight as your massive composite member begins to slither all the way down her hole. Her tail feeling a member inside instinctively milks and squeezes your omnicocks, " +
+					"instincts kicking in, as the delirious manticore begs you to keep going.\n\n")
+			if(player.isLiliraune()) {
+				outputText("You groan between panting commenting out on this situation. \"<i>Geese, Ahhn!... I knew she was a slut but this is beyond ridiculous. This tail ain't a pussy, it's a living vacuum! Oh fuck keep going girl!</i>\"\n\n" +
+						"Your twin adds up. \"<i>OHHHH...You do realise this hole is just a glorified mouth? Might as well say she's giving us the ultimate blowjob.</i>\"\n\n" +
+						"Annoyed you reply to her. \"<i>Sister I really don't care what that hole is, I'm filling this tail until she get pregnant! And if it doesn't I'll just fill it again. So close to cuming now!</i>\"\n\n");
+			}
+			outputText("The sensation of your stamens sliding against one another only gets better as the manticore tail juice lubricates the space between them. " +
+					"This hole is made for milking semen and as you pump inside your many vines are gently coaxed to orgasm by the walls fleshy feelers.\n\n" +
+					"You ");
+			if(player.isLiliraune()) outputText("and your twin both ");
+			outputText("scream");
+			if(player.isLiliraune()) outputText("s ");
+			outputText(" your release");
+			if(player.isLiliraune()) outputText("s groping each other boobs with both hands firmly and nectar runs down your tits,");
+			outputText(" as your rubbing members explodes all at the same time flooding the pussy tail with enough cum to impregnate twice as many women as you got stamens, " +
+					"the bulge of your fluids running like big fleshy lumps down her tail directly to what is likely her belly.\n\n" +
+					"Patting her belly in contentment the manticore falls down on the ground curling for a quick catnap." +
+					"You head out highly satisfied.");
+			if (flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] < 1) flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] = 1;
+			if (flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] == 2) flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] = 3;
+			if (player.hasStatusEffect(StatusEffects.WildManticore)) player.removeStatusEffect(StatusEffects.WildManticore);
+			etnaAffection(10);
+			player.sexReward("vaginalFluids");
+			cleanupAfterCombat();
+		}
 
 public function etnaRapeNo():void
 {
@@ -384,7 +455,7 @@ public function etnaRapeYandere():void
 	if (player.hasCock()) outputText("as she prepares to feast");
 	else outputText("at the mere thought of finally having sex with you");
 	outputText(".\n\n\"<i>You are mine [name] whether you like it or not! I’ve been unable to think of anything but you for days and it is obvious that we were made for each others body. No one else can douse the fire burning in me like you do!</i>\"\n\n");
-	player.tou -= 5;
+	dynStats("tou", -5);
 	statScreenRefresh();
 	etnaRapesPlayer();
 	if (player.tou >= 30) {
@@ -485,7 +556,10 @@ public function etnaRapeIntro2():void
 }
 
 public function etnaCampMenu2():void {
-	if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaEtna();
+	if (!player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
+		if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaEtna();
+		else etnaCampMenu();
+	}
 	else etnaCampMenu();
 }
 
@@ -593,6 +667,7 @@ public function etnaSexMenu():void
 	if (player.hasCock()) addButton(2, "KittyTitFuck", etnaKittyTitFuck);
 	if (player.hasCock()) addButton(3, "Pussy Opera", etnaPussyOpera);
 	if (player.tailType == 28)  addButton(4, "Share a Drink", etnaShareDrink);
+	if (player.isAlraune()) addButton(5, "Fill her up", EtnaFillHerUp);
 	addButton(14, "Back", etnaCampMenu);
 }
 
@@ -685,6 +760,9 @@ public function mishapsLunaEtna():void {
 	outputText("Well, guess you will come back later then, but herbs? Now that you look at them these herbs indeed look like catnip. You remove them from Etna direct environment for now. Still who would actually do this kind of prank?\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampLunaMishaps2)) player.addStatusValue(StatusEffects.CampLunaMishaps2, 1, 1);
 	else player.createStatusEffect(StatusEffects.CampLunaMishaps2, 1, 0, 0, 0);
+	if (!player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.createStatusEffect(StatusEffects.LunaWasCaugh, 1, 0, 0, 0);
+	if (player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.addStatusValue(StatusEffects.LunaWasCaugh, 1, 1);
+	if (player.statusEffectv1(StatusEffects.LunaWasCaugh) == 3) outputText("<b>That's it, you're sure of it now, it's all Luna's doing!</b>\n\n");
 	doNext(playerMenu);
 }
 

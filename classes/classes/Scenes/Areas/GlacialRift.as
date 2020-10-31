@@ -7,8 +7,13 @@
 package classes.Scenes.Areas 
 {
 import classes.*;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.GlacialRift.*;
@@ -48,7 +53,7 @@ use namespace CoC;
 			if ((flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 || flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] > 0) && flags[kFLAGS.VALARIA_AT_CAMP] == 0 && flags[kFLAGS.TOOK_GOO_ARMOR] == 0 && player.armor != armors.GOOARMR) choice[choice.length] = 6; //Valeria
 			if (rand(3) == 0) choice[choice.length] = 7; //Freebie items!
 			if (rand(15) == 0) choice[choice.length] = 8; //Ornate Chest or cache of gems/pile of stones
-			if (player.faceType == 24 && player.ears.type == 18 && player.arms.type == 10 && player.lowerBody == 33 && player.tailType == 29 && player.hasFur() && player.hairColor == "glacial white" && player.coatColor == "glacial white" && player.hasKeyItem("Fenrir Collar") < 0) choice[choice.length] = 9; //Fenrir ruined shrine
+			if (player.faceType == Face.WOLF && player.ears.type == Ears.WOLF && player.arms.type == Arms.WOLF && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.hasFur() && player.hairColor == "glacial white" && player.coatColor == "glacial white" && player.hasKeyItem("Fenrir Collar") < 0) choice[choice.length] = 9; //Fenrir ruined shrine
 			choice[choice.length] = 10; //Find nothing!
 			
 			//DLC april fools
@@ -248,7 +253,7 @@ use namespace CoC;
 			outputText("\n\nFor a few second cold air wash on your eyes and no matter how much you try to cover them with your hands to end the freezing sensation it won't stop. As your eyes begins to water the chilling finally end, you remove your hand as everything before you looks way clearer especially the snow which no longer blinds you. As you look at your reflection in the water you discover that not only your eyes glow with an unsettling blue aura, from your eyes now emanate a pair of bluish smoke of cold air contrasting with the ambient heat. <b>You now have glowing icy eyes.</b>");
 			outputText("\n\nYou feel the air freeze and condensate around you specifically behind your shoulder blades and all on the length of your spine. Jagged Ice spikes seems to have covered your back but oddly enough you don't feel the cold. <b>Your back is now covered with sharp ice spike constantly cooling the air around you. (Gained Frozen Waste and Cold Mastery perks)</b>");
 			outputText("\n\nYou suddenly feel something raging in you wanting to be unleashed as it slowly climbs out of your chest. It rushes through your throat and you scream a titanic primordial roar as the air in front of you ondulate with a massive drop of temperature and everything covers with a thick layer of solid ice. You massage your throat for a moment noticing as thin volume of condensation constantly escape from your maw. <b>You can now use Freezing Breath and Frostbite.</b>");
-            CoC.instance.mutations.setEyeTypeAndColor(Eyes.FENRIR, "blue");
+            CoC.instance.mutations.setEyeTypeAndColor(Eyes.FENRIR, "glacial blue");
             player.rearBody.type = RearBody.FENRIR_ICE_SPIKES;
 			player.createPerk(PerkLib.ColdMastery, 0, 0, 0, 0);
 			player.createPerk(PerkLib.FreezingBreath, 0, 0, 0, 0);

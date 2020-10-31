@@ -12,6 +12,7 @@ import classes.Items.Armors.LustyMaidensArmor;
 import classes.Scenes.Monsters.Imp;
 import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
+import classes.Stats.Buff;
 import classes.display.SpriteDb;
 
 public class KitsuneScene extends BaseContent
@@ -285,7 +286,7 @@ public class KitsuneScene extends BaseContent
 			doNext(createCallBackFunction2(nonTentaclePCMansion,willing));
 		}
 
-//NON-TENTACLE PC SCENES:
+		//NON-TENTACLE PC SCENES:
 		private function nonTentaclePCMansion(willing:Boolean):void
 		{
 			clearOutput();
@@ -295,13 +296,16 @@ public class KitsuneScene extends BaseContent
 			if (player.tentacleCocks() >= 3) {
 				doNext(tentacleKitsuneWingWangs);
 			}
+			else if (player.isAlraune()) {
+				doNext(alrauneVSKitsune);
+			}
 			else {
-				if (player.hasCock())  doNext(createCallBackFunction(kitsuneMaleOrHermMansion,willing));
+				if (player.hasCock()) doNext(createCallBackFunction(kitsuneMaleOrHermMansion,willing));
 				else doNext(createCallBackFunction(kitsuneFemaleOrGenderless, willing));
 			}
 		}
 
-//Formerly maleOrHerm()
+		//Formerly maleOrHerm()
 		private function kitsuneMaleOrHermMansion(willing:Boolean):void
 		{
 			clearOutput();
@@ -602,7 +606,7 @@ public class KitsuneScene extends BaseContent
 		} // end stillHungry();
 
 
-//3+ Tentacle cocks of 30" or longer
+		//3+ Tentacle cocks of 30" or longer
 		private function tentacleKitsuneWingWangs():void
 		{
 			clearOutput();
@@ -642,6 +646,51 @@ public class KitsuneScene extends BaseContent
 			player.sexReward("vaginalFluids", "Dick");
 			player.sexReward("cum");
 		}
+
+	private function alrauneVSKitsune():void
+	{
+		clearOutput();
+		kitsuneSprite();
+		outputText("\"<i>Oh my!  It looks like we're in for a real treat tonight, sisters...</i>\" the blonde says as she runs her hands along your impressive prehensile endowments.\n\n");
+		outputText("\"<i>Mmm... tentacles... my favorite flavor though these ones are vines.</i>\" the black-haired one chimes in, rubbing her pudgy belly and licking her lips hungrily.  Slipping into the water next to you, each of them takes one of your hulking tentacles into her hands, grinning eagerly.  Working together, they weave their tails through your brace of writhing appendages, cinching tight around the base of each one as their fingers slide along the flexible shafts.  Trails of blue fire dance across each writhing vines, sending you into a shivering, shuddering frenzy, and the three sisters cast each other knowing grins.  Your liquor-addled mind is too foggy by now to resist their advances, " + ((player.lib < 50) ? "slurred protests falling on deaf ears." : "though who would want to?") + "\n\n");
+		outputText("\"<i>Oh, I do so enjoy our work,</i>\" the blonde remarks, running her hand up to the tip of your stamen and squeezing the head experimentally.  She flashes a satisfied smirk at the way your firm flesh yields under her touch, nodding softly.  The tip of one of her tails trails along the underside, tickling you sensually as more coils of fur stroke and knead along the obscene vine.\n\n");
+		outputText("\"<i>We just looooove tentacles,</i>\" the black-haired girl explains to you, giggling like a schoolgirl as one of your obscene tendrils starts moving on its own, sliding down between her legs and threading its way between her expansive ass cheeks.  \"<i>When we see tentacles this thick, long, and...</i>\" she pauses to wrap her lips around the end of your stamen, sliding her tongue along the tip, \"<i>... mmm... juicy.... it's just impossible to contain our excitement.</i>\"\n\n");
+		outputText("As if to illustrate this point, she hungrily swallows almost a foot of your wriggling vine, a trail of spittle hanging out lazily from one corner of her mouth as she swallows carefully along your length.  Your writhing shafts are assaulted on all sides by all manner of touches and caresses; fingers, tongues, tails and breasts all working in glorious harmony to tease and pleasure you.  One tendril instinctively coils around one of the blonde's breasts, squeezing it tightly while the tip pokes and prods the soft flesh, teasing her pert pink nipples.  Moaning in response, she slides her fingers along the base, cool blue flames crackling to life across her fingertips and sending chills through your body.  Each of your thick tentacles swells up incredibly, the kitsune's magic sending jolts of pleasure across the surface.  As the pale flames dance across your vines, you completely loose all samblance of restraints, your vines instinctively entering polination mode! If you were not determined to fuck each of those vixens pregnant before, now you definitively are.\n\n");
+		outputText("\"<i>Hehe, that's how we like it!</i>\"  the blonde says with a chuckle, pressing her body to the squirming brace of vines and moaning in anticipation.\n\n");
+		outputText("You feel something warm prodding you in the side, and look down to find that the redhead has something between her legs that her sisters are lacking.  With one of your undulating cocks curled down between her legs, she begins to grind herself against you, lining up her thick, throbbing member up against one of yours and rubbing her hips back and forth lewdly.  Grabbing a segment of your ropey dick, she coils it around the base of her own, thrusting through the ring of cock flesh and groaning into your ear.\n\n");
+		outputText("Her hot breath cascades across your shoulders, followed shortly by a distinctive minty coolness.  The stark contrast between the two feelings makes you shudder, your chest rising and falling quickly as the pleasure begins to mount.  Your breath is knocked out of you with a startling abruptness as the blonde is thrown down onto your chest, toppled over by her black-haired sister.  With a vine in one hand and the blonde's sizeable breast in the other, the plucky ravenette alternates between the two, sucking, squeezing and stroking while wriggling her plump rear back and forth.  Your hands start to glide across their silky skin of their own accord, groping the supple flesh and stroking their shimmering tails, squeezing their firm breasts and running your fingers through their soft hair.\n\n");
+		outputText("A number of your stamens are ensnared by a group of long black tails, guiding them down to her upended pussy and slowly running the head of one up and down her glistening snatch.  She crawls up over her blonde sister, leaning down to nibble on your ear along with the redhead, and mumbles through her teeth, \"<i>Nn... time for the main course...  Go on, you know you wanna stick it in...  Ravage us.</i>\"\n\n");
+		if(player.isLiliraune()){
+			outputText("Your sister looks at you then shrugs.\n\n" +
+					"\"<i>Might as well give those vixens what they want. A welcoming hole is a fuckable hole to me whatever the owner of it looks like.<i>\"\n\n" +
+					"\"<i>Yea I agree with you there.<i>\"\n\n");
+		}
+		outputText("Without hesitation, your tentacle-dick drills eagerly into her sopping snatch before you can think.  Your moans join hers in a lewd symphony, each of your writhing vines finding its home in one hole or another, sending the three girls into a lust-filled frenzy atop you.  Before long, you lose track of where one girl ends and the others begin, your hands cascading over their soft, supple bodies, intersecting in a carnal mass of flesh, tails, vines and lust.\n\n");
+		outputText("Your vines move of their own accord, ensnaring the three sisters in a densely tangled knot of limbs and tendrils.  The redhead hangs upside-down, dangling by her ankles with a look of utter bliss on her face as her cock is furiously jerked by one of your apprendage, both of her holes being pounded simultaneously by two thick tendrils pistoning in and out alternately.  The black-haired girl is in no less of a predicament, her eyes rolled back and tongue hanging out as her ass is stuffed full of throbbing vines, one hand haphazardly thrusting into her pussy alongside another.\n\n");
+		outputText("\"<i>Uuuoohh... my belly's so fulllll...</i>\" she groans orgasmically, clutching her stomach as your cock snakes its way through her insides, visibly distorting her pudgy belly.  Her body goes slack, hand falling away from her groin as a thick stream of girlcum arcs through the air, her face turning red and her eyes going blank with ecstasy.\n\n");
+		outputText("The blonde is folded double, her thighs spread out while her ankles are hooked behind her head, all six of her tails twitching madly.  Her breasts squash and bulge around your tentacles as they squeeze and coil around them, rubbing lewdly against her nipples.  It seems as though sense has long since been driven from her mind, her mouth hanging agape and her eyes vacant with lust.  Her throat bulges from the intrusion of your cock, pre-cum mixed with drool dribbling down her chin as she eagerly begins to suck on it, thrusting her hips automatically in sync with the undulations of your cocks in her other orifices.\n\n");
+		outputText("The air is filled with the heavy, musky scent of semen as a jet of cum shoots skyward from the redhead's cock, the throbbing member swelling visibly each time she spurts another stream.  The entire deck and the water around you is stained with her seed, she and her sisters all plastered from head to toe with her copious emissions.  The cooling sensation of mint permeates your skin wherever the sticky droplets land on you, making you shudder in pleasure, and the tingling feeling of her seed dribbling down along your tentacle shafts sends an unbearable pleasure to your groin.\n\n");
+		outputText("The three insensate kitsune twitch helplessly in the grips of your tendrils, maddened by pleasure as your magically enhanced tendrils plow away at them without pause, pummeling their abused holes unceasingly.  Every muscle in your body tenses in preparation for an incredible climax, the lust boiling in your loins like a coiling spring.  The pressure builds until you just can't take it any longer, convulsing beneath the three sisters and groaning in ecstasy as your orgasm shoots up each of your shafts simultaneously, swelling from base to tip and releasing your thick load inside of them.\n\n");
+		if (player.cumQ() <= 150) {
+			outputText("Warm streams of pollen flow from each of your stamens, painting the sisters with your seeds inside and out.  Hot pearls of pollen drench the three kitsune, mixing with the redhead's and rolling off of their bodies to dribble into the water.");
+		}
+		else if (player.cumQ() <= 350) {
+			outputText("Thick streams of pollen pour from your stamens, spurting white streaks into the air and painting the sisters with a glistening coat of white, inside and out.  Pearls of plant jizz drip and dribble off their bodies, mixing with the redhead's and rolling off into the water.");
+		}
+		else if (player.cumQ() <= 1000) {
+			outputText("Ribbons of thick, pollen sling into the air, falling across the sisters' bodies and painting their insides with your hot seed.  A thick layer of pollen coats their bodies, matting down hair and dribbling over the edges of their voluptuous curves.");
+		}
+		else if (player.cumQ() <= 2500) {
+			outputText("Thick jets of hot pollen fill the air, arcing high and showering the sisters with streaks of white.  As your vines pump load after load of hot, creamy plant jizz into their abused holes, their abdomens begin to swell up, thin streams spurting out around each of your cocks and dribbling down their curves.  A thick patina of pearly-white cum coats their bodies, matting down their hair and sloughing off of their voluptuous curves in heavy globs.");
+		}
+		else if (player.cumQ() > 2500) {
+			outputText("Thick streams of pollen arc through the air, raining down on the three sisters like a hot shower as ropes of semen splatter across their bodies, streaking them with a heavy mat of plant fluid.  Thick bulges work their way down your obscene vegetal shafts, load after load erupting into their abused holes and making their abdomens begin to swell, expanding ever outward with the weight of your cum.  Before long, pressurized streams are escaping from around your cocks, twin jets of semen spurting from their noses.  Drenched, matted, and utterly stuffed with your virile pollen, the sisters limply hang within the coils of your tendrils, their limbs and tails twitching weakly.");
+		}
+		outputText("\n\nEvery twitch and spasm of your loins finds you feeling a little more fatigued, your eyelids growing heavy with drowsiness as you can feel the life being drained from you.  Panting desperately, the three sisters gradually regain their senses as your flagging tendrils slowly lower them down into the water" + ((player.cumQ() > 1000) ? ", their arms wrapped protectively around their seed-bloated bellies" : "" ) + ".  Exhausted from your ordeal, you let yourself relax into a blissful stupor, only vaguely aware of the feeling of being dragged up onto the deck.  The last thing you see before going unconscious is the three sisters crawling up around you, coaxing your spent vines back to life, their eyes glinting hungrily.");
+		outro();
+		player.sexReward("vaginalFluids", "Dick");
+		player.sexReward("cum");
+	}
 
 		private function outro(tentacles:Boolean = false):void
 		{
@@ -2306,12 +2355,14 @@ public class KitsuneScene extends BaseContent
 				outputText("");
 			}
 			flags[kFLAGS.KITSUNE_SHRINE_VISIT]++;
+			var SphereMastery:Number = 10;
+			if (player.hasPerk(PerkLib.KitsuneThyroidGlandFinalForm)) SphereMastery += 15;
 			//[Read Books] [Meditate] [Steal Statue] - [Leave]
 			menu();
 			addButton(0, "Read Books", readKitsuneBooks);
 			if (flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) addButton(1, "Meditate", meditateLikeAKitsuneEhQuestionMark);
 			if ((player.hasItem(useables.GLDSTAT) || flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) && flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] < 1) addButton(2, "Statue", stealAStatue);
-			if (player.findPerk(PerkLib.StarSphereMastery) > 0 && ((player.hasPerk(PerkLib.KitsuneThyroidGlandFinalForm) && player.perkv1(PerkLib.StarSphereMastery) < 25) || player.perkv1(PerkLib.StarSphereMastery) < 10) && player.gems >= 1000) addButton(3, "Offering", offeringToTaoth);
+			if (player.findPerk(PerkLib.StarSphereMastery) > 0 && player.perkv1(PerkLib.StarSphereMastery) < SphereMastery && player.gems >= 1000) addButton(3, "Offering", offeringToTaoth);
             if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 2) addButton(5, "Ayane", SceneLib.ayaneFollower.ayaneShop);
             if (flags[kFLAGS.AYANE_FOLLOWER] == 1) {
 				addButton(6, "Servant", AyaneServant);
@@ -2331,6 +2382,8 @@ public class KitsuneScene extends BaseContent
 				outputText("It's a rather dry read, but informative.  Chapter after chapter explains the underlying theory of magic, going to almost excruciating levels of detail.  " + ((player.inte < 50) ? "Much of it flies over your head, but the book does manage to clarify a few points.  You close the book and set it back on the shelf, feeling like you've learned something." : "Much of it is merely review, but you do manage to glean a few facts before closing the book and setting it back on the shelf."));
 				//+2 INT, Advance 1hr and return to camp
 				dynStats("int", 2);
+				player.KnowledgeBonus("int",2);
+				player.KnowledgeBonus("wis", 2);
 				doNext(camp.returnToCampUseOneHour);
 			}
 			else if (choice == 1) {
@@ -2343,6 +2396,7 @@ public class KitsuneScene extends BaseContent
 				outputText("You start to flip through the pages, a deep blush slowly forming on your cheeks the further you read into what is clearly an erotic novella of some form.  Graphic descriptions of women being violated by tentacle beasts abound on almost every page, " + ((player.lib < 50) ? "and you slam the book shut before reading further, already feeling a heat building in your groin." : "and you lick your lips hungrily, poring over every line and word of lascivious prose."));
 				//+ 1 LIB, + 5 LUST, Advance 1hr and return to camp
 				dynStats("lib", 1, "lus", 5);
+				player.KnowledgeBonus("lib",1);
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
@@ -2352,7 +2406,7 @@ public class KitsuneScene extends BaseContent
 		{
 			clearOutput();
 			outputText("You leave a generous offering of gems at the shrine of Taoth and pray to the fox god for his support in your quest. Light falls from the sky and seems to condense in your star sphere, as you feel your kitsune powers increasing. When you look down to the offering bowl, you discover it is now empty.\n\n");
-			if (player.perkv1(PerkLib.StarSphereMastery) < 20) player.addPerkValue(PerkLib.StarSphereMastery, 1, 1);
+			player.addPerkValue(PerkLib.StarSphereMastery, 1, 1);
 			player.gems -= 1000;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2375,7 +2429,8 @@ public class KitsuneScene extends BaseContent
 					outputText("You look down and notice a weird ball filled with light sitting on the ground next to you. Somehow you can feel this item is connected to you and also very important. Ayane, noticing what happened, approaches and congratulates you.\n\n");
 					outputText("\"<i>It seems you are a true kitsune now. You formed your own star sphere. Hold on to it dearly, for your true essence resides in your star sphere, and should it be stolen, the thief could control you entirely, forcing you to do whatever it wishes.</i>\"\n\n");
 					outputText("<b>You acquired your own kitsune star sphere.</b>\n\n");
-					dynStats("int", 5, "wis", 5, "lus", -50, "cor", -5);
+					player.statStore.replaceBuffObject({"wis.mult":0.10,"int.mult":0.10}, "KitsuneShrine",{text:"Kitsune shrine Meditation", rate:Buff.RATE_DAYS, tick:7});
+					dynStats("wis", 5,"int", 5, "lus", -50, "cor", -5);
 					player.createPerk(PerkLib.StarSphereMastery, 1, 0, 0, 0);
 					player.createKeyItem("Kitsune Star Sphere", 0, 0, 0, 0);
 					player.consumeItem(consumables.FOXJEWL);
@@ -2387,7 +2442,8 @@ public class KitsuneScene extends BaseContent
 						outputText("As the mystical flames wash over you, your mind is assaulted by a maelstrom of otherworldly knowledge and power.  For a moment it feels as though your mind will be torn asunder, but you are ready.  Your travels and meditations have prepared you well, and you open your mind to accept enlightenment.\n\n");
 						outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into nine tails.  <b>You are now a nine-tails!  Untold cosmic power radiates from your very being!  Use it wisely...</b>");
 						outputText("\n\nYou pause for a moment to reflect on your newfound wisdom, and with a vastly renewed vigor for your quest, you stand and set off for camp.");
-						dynStats("int", 10, "wis", 10, "lus", -100, "cor", -10);
+						player.statStore.replaceBuffObject({"wis.mult":0.10,"int.mult":0.10}, "KitsuneShrine",{text:"Kitsune shrine Meditation", rate:Buff.RATE_DAYS, tick:7});
+						dynStats("wis", 10,"int", 10, "lus", -100, "cor", -10);
 						player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
 					}
 					else outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailCount + 1) + "!");
@@ -2435,7 +2491,8 @@ public class KitsuneScene extends BaseContent
 						outputText("\n\n<b>Genetic Memory: 8th Fox Tail - Memorized!</b>\n\n");
 						player.createStatusEffect(StatusEffects.UnlockedFoxTail8th, 0, 0, 0, 0);
 					}
-					dynStats("int", 5, "wis", 5, "lus", -50, "cor", -5);
+					player.statStore.replaceBuffObject({"wis.mult":0.10,"int.mult":0.10}, "KitsuneShrine",{text:"Kitsune shrine Meditation", rate:Buff.RATE_DAYS, tick:7});
+					dynStats("wis", 5,"int", 5, "lus", -50, "cor", -5);
 					player.consumeItem(consumables.FOXJEWL);
 					player.tailCount++;
 					doNext(camp.returnToCampUseOneHour);
@@ -2447,7 +2504,8 @@ public class KitsuneScene extends BaseContent
 						outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into seven tails.  <b>You are now a seven-tails!  Weak cosmic power radiates from you!  Cultivate it wisely...</b>");
 						outputText("\n\nYou pause for a moment to reflect on your new wisdom, and with a renewed vigor for your quest, you stand and set off for camp.");
 						player.createPerk(PerkLib.EnlightenedKitsune, 0, 0, 0, 0);
-						dynStats("int", 5, "wis", 5, "lus", -50, "cor", -5);
+						player.statStore.replaceBuffObject({"wis.mult":0.10,"int.mult":0.10}, "KitsuneShrine",{text:"Kitsune shrine Meditation", rate:Buff.RATE_DAYS, tick:7});
+						dynStats("wis", 5,"int", 5, "lus", -50, "cor", -5);
 					}
 					else outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailCount + 1) + "!");
 					if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th) && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
@@ -2488,12 +2546,14 @@ public class KitsuneScene extends BaseContent
 					player.tailCount = 2;
 				} else {
 					outputText("As you open your eyes again, you feel as if a great burden has been lifted from your shoulders.\n\nWith a renewed vigor for your quest, you stand up and set off for camp.");
-					dynStats("int", 5, "wis", 5, "lus", -50, "cor", -2);
+					player.statStore.replaceBuffObject({"wis.mult":0.10,"int.mult":0.10}, "KitsuneShrine",{text:"Kitsune shrine Meditation", rate:Buff.RATE_DAYS, tick:7});
+					dynStats("wis", 5,"int", 5, "lus", -50, "cor", -2);
 				}
 			} else {
 				//Normal:
 				outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.  As you open your eyes again, you feel as if a great burden has been lifted from your shoulders.\n\nWith a renewed vigor for your quest, you stand up and set off for camp.");
-				dynStats("int", 5, "wis", 5, "lus", -50, "cor", -2);
+				player.statStore.replaceBuffObject({"wis.mult":0.10,"int.mult":0.10}, "KitsuneShrine",{text:"Kitsune shrine Meditation", rate:Buff.RATE_DAYS, tick:7});
+				dynStats("wis", 5,"int", 5, "lus", -50, "cor", -2);
 				doNext(camp.returnToCampUseOneHour);
 			}
 			var tailzAfter:int = player.tail.count;

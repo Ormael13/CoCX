@@ -14,9 +14,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 	protected function inchesOrCentimetres(...args):String { return Measurements.inchesOrCentimetres.apply(null, args); }
 	protected function shortSuffix(...args):String { return Measurements.shortSuffix.apply(null, args); }
-	private var story:BoundStory;
 	private function init():void {
-        story = new Story("story", CoC.instance.rootStory, "appearance").bind(CoC.instance.context);
     }
 	public function appearance():void {
         //Temp vars
@@ -35,6 +33,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("  It has " + player.faceDesc() + "."); //M/F stuff!
 		describeEyes();
 		describeHairAndEars();
+		describeHairStyle();
 		describeBeard();
 		describeTongue();
 		describeHorns();
@@ -240,7 +239,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("\n");
 	}
 	//Crotchial stuff - mention snake
-	if(player.lowerBody == LowerBody.NAGA && player.gender > 0)
+	if(player.isNaga() && player.gender > 0)
 	{
 		outputText("\nYour sex");
 		if(player.gender == 3 || player.cockTotal() > 1)
@@ -559,7 +558,8 @@ public class PlayerAppearance extends BaseContent {
 				case CockTypesEnum.STAMEN:    outputText("  It is dark green, tampered, and crowned by several colorful balls near the tip that secrete pollen when aroused."); break;
 				case CockTypesEnum.CAT:       outputText("  It ends in a single point, much like a spike, and is covered in small, fleshy barbs. The barbs are larger at the base and shrink in size as they get closer to the tip.  Each of the spines is soft and flexible, and shouldn't be painful for any of your partners."); break;
 				case CockTypesEnum.LIZARD:    outputText("  It's a deep, iridescent purple in color.  Unlike a human penis, the shaft is not smooth, and is instead patterned with multiple bulbous bumps."); break;
-				case CockTypesEnum.CAVE_WYRM: outputText("  It's a deep, glowing neon blue in color.  Unlike a human penis, the shaft is not smooth, and is instead patterned with multiple bulbous bumps."); break;
+				case CockTypesEnum.CAVE_WYRM: outputText("  It's a deep, glowing neon blue in color.  Unlike a human penis, the shaft is not smooth, and is instead patterned with multiple bulbous bumps. It also regularly drips the acidic substance that serves as your cum. In the event you need to fertilise more fragile partner you can slightly alter the composition of your cum to prevent disolving their flesh."); break;
+				case CockTypesEnum.CANCER: 	  outputText("  It constantly drips and produce bubbles."); break;
 				case CockTypesEnum.ANEMONE:   outputText("  The crown is surrounded by tiny tentacles with a venomous, aphrodisiac payload.  At its base a number of similar, longer tentacles have formed, guaranteeing that pleasure will be forced upon your partners."); break;
 				case CockTypesEnum.KANGAROO:  outputText("  It usually lies coiled inside a sheath, but undulates gently and tapers to a point when erect, somewhat like a taproot."); break;
 				case CockTypesEnum.DRAGON:    outputText("  With its tapered tip, there are few holes you wouldn't be able to get into.  It has a strange, knot-like bulb at its base, but doesn't usually flare during arousal as a dog's knot would."); break;
@@ -570,13 +570,14 @@ public class PlayerAppearance extends BaseContent {
 				case CockTypesEnum.ECHIDNA:   outputText("  It is quite a sight to behold, coming well-equipped with four heads."); break;
 				case CockTypesEnum.RED_PANDA: outputText("  It lies protected in a soft, fuzzy sheath."); break;
 				case CockTypesEnum.OOMUKADE:  outputText("  It constantly drips with venom."); break;
+				case CockTypesEnum.USHI_ONI:  outputText("  It's starfish tipped shaft."); break;
 				default: //Nothing here, move along!
 			}
 			// Knot?
 			if (player.cocks[cock_index].knotMultiplier > 1) {
-				if (player.cocks[cock_index].knotMultiplier >= 1.8) 
+				if (player.cocks[cock_index].knotMultiplier >= 1.8)
 					outputText("  The obscenely swollen lump of flesh near the base of your " + player.cockDescript(cock_index) + " looks almost comically mismatched for your cock.");
-				else if (player.cocks[cock_index].knotMultiplier >= 1.4) 
+				else if (player.cocks[cock_index].knotMultiplier >= 1.4)
 					outputText("  A large bulge of flesh nestles just above the bottom of your " + player.cockDescript(cock_index) + ", to ensure it stays where it belongs during mating.");
 				else // knotMultiplier < 1.4
 					outputText("  A small knot of thicker flesh is near the base of your " + player.cockDescript(cock_index) + ", ready to expand to help you lodge it inside a female.");
@@ -599,46 +600,29 @@ public class PlayerAppearance extends BaseContent {
 	{
 		if(player.hasStatusEffect(StatusEffects.Uniball))
 		{
-			if(player.skinType != Skin.GOO)
-				outputText("Your [sack] clings tightly to your groin, holding [balls] snugly against you.");
-			else if(player.skinType == Skin.GOO)
-				outputText("Your [sack] clings tightly to your groin, dripping and holding [balls] snugly against you.");
+			if(player.skinType != Skin.GOO) outputText("Your [sack] clings tightly to your groin, holding [balls] snugly against you.");
+			else if(player.skinType == Skin.GOO) outputText("Your [sack] clings tightly to your groin, dripping and holding [balls] snugly against you.");
 		}
 		else {
 			var sdesc:String;
-			if (player.skin.hasMagicalTattoo()) {
-				sdesc = " covered by magical tattoo";
-			} else if (player.skin.hasBattleTattoo()) {
-				sdesc = " covered by battle tattoo";
-			} else if (player.skin.hasLightningShapedTattoo()) {
-				sdesc = " covered with a few glowing lightning tattoos";
-			} else if (player.skin.hasScarShapedTattoo()) {
-				sdesc = " covered by scar tattoos";
-			} else if (player.skin.hasVenomousMarking()) {
-				sdesc = " covered by venomous marking";
-			} else if (player.skin.hasWhiteBlackVeins()) {
-				sdesc = " covered by [base.color2] veins";
-			} else {
-				sdesc = "";
-			}
+			if (player.skin.hasMagicalTattoo()) sdesc = " covered by magical tattoo";
+			else if (player.skin.hasBattleTattoo()) sdesc = " covered by battle tattoo";
+			else if (player.skin.hasLightningShapedTattoo()) sdesc = " covered with a few glowing lightning tattoos";
+			else if(player.skin.hasWindSweptScars()) sdesc = " covered with scars as if your skin was cut in various place by a windstorm";
+			else if(player.skin.hasOilySkin()) sdesc =" dripping with oily black fluids.";
+			else if (player.skin.hasScarShapedTattoo()) sdesc = " covered by scar tattoos";
+			else if (player.skin.hasVenomousMarking()) sdesc = " covered by venomous marking";
+			else if (player.skin.hasWhiteBlackVeins()) sdesc = " covered by [base.color2] veins";
+			else sdesc = "";
 			var swingsWhere:String;
-			if (player.cockTotal() == 0) {
-				swingsWhere = " where a penis would normally grow.";
-			} else {
-				swingsWhere = " under your [cocks].";
-			}
-			if (player.hasPlainSkinOnly() || player.hasRubberSkin())
-				outputText("A [sack]" + sdesc + " with [balls] swings heavily" + swingsWhere);
-			else if (player.hasFur())
-				outputText("A fuzzy [sack] filled with [balls] swings low" + swingsWhere);
-			else if (player.hasCoatOfType(Skin.CHITIN))
-				outputText("A chitin [sack] hugs your [balls] tightly against your body.");
-			else if (player.hasScales())
-				outputText("A scaly [sack] hugs your [balls] tightly against your body.");
-			else if (player.skinType == Skin.STONE)
-				outputText("A stone-solid sack with [balls] swings heavily" + swingsWhere);
-			else if (player.skinType == Skin.GOO)
-				outputText("An oozing, semi-solid sack with [balls] swings heavily" + swingsWhere);
+			if (player.cockTotal() == 0) swingsWhere = " where a penis would normally grow.";
+			else swingsWhere = " under your [cocks].";
+			if (player.hasPlainSkinOnly() || player.hasRubberSkin()) outputText("A [sack]" + sdesc + " with [balls] swings heavily" + swingsWhere);
+			else if (player.hasFur()) outputText("A fuzzy [sack] filled with [balls] swings low" + swingsWhere);
+			else if (player.hasCoatOfType(Skin.CHITIN)) outputText("A chitin [sack] hugs your [balls] tightly against your body.");
+			else if (player.hasScales()) outputText("A scaly [sack] hugs your [balls] tightly against your body.");
+			else if (player.skinType == Skin.STONE) outputText("A stone-solid sack with [balls] swings heavily" + swingsWhere);
+			else if (player.skinType == Skin.GOO) outputText("An oozing, semi-solid sack with [balls] swings heavily" + swingsWhere);
 		}
 		outputText("  You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ");
 		if(Math.round(player.ballSize) == 1)
@@ -657,6 +641,9 @@ public class PlayerAppearance extends BaseContent {
 		if (player.vaginas.length == 1){
 			if(player.vaginaType() == VaginaClass.EQUINE){
 				outputText("Your " + vaginaDescript(0) + " is deep and wide just like that of a horse. Sometime you lament that most of your partners are no longuer big enought to satisfy you. Inside you have a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+			}
+			else if(player.vaginaType() == VaginaClass.CANCER){
+				outputText("You have a foaming " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
 			}
 			else if (player.lowerBody == LowerBody.MELKIE){
 				outputText("You have two set of vaginal lips one twice as bigger then the other and hidding the smaller within it folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
@@ -681,6 +668,10 @@ public class PlayerAppearance extends BaseContent {
 		if (player.vaginaType() == VaginaClass.VENOM_DRIPPING){
 			outputText("It constantly drools with aphrodisiac venom. ");
 		}
+		if (player.vaginaType() == VaginaClass.CANCER){
+			outputText("It is constantly foaming in anticipation of a potential mate. ");
+		}
+
 		if(player.lib < 50 && player.lust < 50) //not particularly horny
 
 		{
@@ -860,6 +851,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText(", arms, hands and fingers.");
 		if (player.skin.base.pattern == Skin.PATTERN_ORCA_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
 		if (player.skin.base.pattern == Skin.PATTERN_RED_PANDA_UNDERBODY) outputText(" Your body is covered from head to toe in [skin color] with a [skin color2] underbelly, giving to your nimble frame a red-panda appearance.");
+		if (player.skin.base.pattern == Skin.PATTERN_USHI_ONI_ONNA_TATTOO) outputText(" You have strange ushi oni-onna tattoos in your body, they appear in your belly, chest, breasts, shoulders and even face, you don’t know why but some are like a black sheen plate while others are just fur.");
 	}
 
 	public function describeGear():void {
@@ -897,22 +889,37 @@ public class PlayerAppearance extends BaseContent {
 		//Height and race.
 		outputText("You are a ");
 		outputText(Measurements.footInchOrMetres(player.tallness));
-		outputText(" tall [malefemaleherm] [race], with [bodytype].");
+		var pcrace:String = player.race();
+		if (pcrace != "half cow-morph" && pcrace != "half cow-girl" && pcrace != "cow-girl" && pcrace != "cow-girl" && pcrace != "cow-morph"
+				&& pcrace != "minotaur" && pcrace != "half-minotaur"
+				&& pcrace != "alraune" && pcrace != "liliraune"
+				&& pcrace != "half unicorn" && pcrace != "unicorn" && pcrace != "unicornkin" && pcrace != "half alicorn" && pcrace != "alicorn" && pcrace != "alicornkin" && pcrace != "true alicorn"
+				&& pcrace != "half bicorn" && pcrace != "bicorn" && pcrace != "bicornkin" && pcrace != "half nightmare" && pcrace != "nightmare" && pcrace != "nightmarekin" && pcrace != "true nightmare")
+		{
+			outputText(" tall [malefemaleherm] [race], with [bodytype].");
+		}
+		else{
+			outputText(" tall [race], with [bodytype].");
+		}
 	}
 	public function describeLowerBody():void {
-		if (player.isTaur() || player.lowerBody == LowerBody.DRIDER || player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.MELKIE || player.lowerBody == LowerBody.CENTIPEDE || player.lowerBody == LowerBody.PLANT_FLOWER) {
+		if (player.isTaur() || player.lowerBody == LowerBody.DRIDER || player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.MELKIE || player.lowerBody == LowerBody.CENTIPEDE || player.lowerBody == LowerBody.PLANT_FLOWER || player.lowerBody == LowerBody.FLOWER_LILIRAUNE) {
 			if (player.lowerBody == LowerBody.HOOFED)
 				outputText("  From the waist down you have the body of a horse, with all " + num2Text(player.legCount) + " legs capped by hooves.");
 			else if (player.lowerBody == LowerBody.PONY)
 				outputText("  From the waist down you have an incredibly cute and cartoonish parody of a horse's body, with all " + num2Text(player.legCount) + " legs ending in flat, rounded feet.");
 			else if (player.lowerBody == LowerBody.DRIDER)
 				outputText("  Where your legs would normally start you have grown the body of a spider, with " + num2Text(player.legCount) + " spindly legs that sprout from its sides.");
+			else if (player.lowerBody == LowerBody.CANCER)
+				outputText("  Where your legs would normally start you have grown the body of a crab, with " + num2Text(player.legCount-2) + " chitin plated legs and two large pincers capable of tearing steel plating to shreds. A pair of stalk mounted crab eyes on the front of your shell look at your surroundings, giving you a full peripheral vision.");
 			else if (player.lowerBody == LowerBody.SCYLLA)
 				outputText("  Where your legs would normally start you have grown the body of an octopus, with " + num2Text(player.legCount) + " tentacle legs that sprout from your [hips].");
 			else if (player.lowerBody == LowerBody.KRAKEN)
-				outputText("  Where your legs would normally start you've grown the body of a giant squid, with " + num2Text(player.legCount) + " tentacles leg that sprout from your [hips], two of them larger than the others. Your tentacle reaches for up to "+player.tallness*2+" feet in length!");
+				outputText("  Where your legs would normally start you've grown the body of a giant squid, with " + num2Text(player.legCount) + " tentacles leg that sprout from your [hips], two of them larger than the others. Your tentacle reaches for up to "+Measurements.footInchOrMetres(player.tallness * 2)+" feet in length!");
 			else if (player.lowerBody == LowerBody.PLANT_FLOWER)
-				outputText("  Around your waist, the petals of a large pink orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the centre, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud.  While you don't technically have legs anymore, you can still move around on your " + num2Text(player.legCount) + " vine-like stamens.");
+				outputText("  Around your waist, the petals of a large "+player.NakedCoatColor+" orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the centre, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud.  While you don't technically have legs anymore, you can still move around on your " + num2Text(player.legCount) + " vine-like stamens.");
+			else if (player.lowerBody == LowerBody.FLOWER_LILIRAUNE)
+				outputText("  Around your waist, the petals of a large "+player.NakedCoatColor+" orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the center, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud. While you don't technically have legs anymore, you can still move around on your " + num2Text(player.legCount) + " vine-like stamens. You used to be alone in the pitcher, but you now share space with your twin sister, taking turns with her whether it's for battle or sex.");
 			else if (player.lowerBody == LowerBody.MELKIE)
 				outputText("  Beneath your waist your body ends in the tail of a leopard seal. It allows you to swim gracefully in arctic waters. However, when the time to move on land arises, you can part the fur at your waist in order to let your two human legs out and walk on solid ground as the land dwellers do.");
 			else if (player.lowerBody == LowerBody.CENTIPEDE)
@@ -921,7 +928,7 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  Where your legs would normally start you have grown the body of a feral animal, with all " + num2Text(player.legCount) + " legs.");
 		}
 		//Hip info only displays if you aren't a centaur.
-		if (player.isBiped() || player.lowerBody == LowerBody.NAGA) {
+		if (player.isBiped() || player.isNaga()) {
 			if (player.thickness > 70) {
 				outputText("  You have " + hipDescript());
 				if (player.hips.type < 6) {
@@ -1024,7 +1031,7 @@ public class PlayerAppearance extends BaseContent {
 			}
 		}
 		//Non-horse PCs
-		else if (player.isBiped() || player.lowerBody == LowerBody.NAGA) {
+		else if (player.isBiped() || player.isNaga()) {
 			//TUBBY ASS
 			if (player.tone < 60) {
 				outputText(" your " + buttDescript());
@@ -1074,6 +1081,12 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  " + Num2Text(player.legCount) + " digitigrade legs grow downwards from your waist, ending in clawed wolf-like hind-paws.");
 		else if (player.lowerBody == LowerBody.NAGA)
 			outputText("  Below your waist your flesh is fused together into a very long snake-like tail.");
+		else if (player.lowerBody == LowerBody.FROSTWYRM){
+			outputText("  Below your waist your flesh is fused together into a very long snake-like tail easily "+Measurements.footInchOrMetres(player.tallness * 4)+" feet long. " +
+					"Your entire tail length up to the waist is covered with thick snow white fur but is far from vulnerable as underneath the fur is a whole layer of "+player.coatColor+" " +
+					"dragon scales harder than steel and capable of deflecting most weapon.");
+			if (player.tallness > 120)outputText("With a body so large it's no wonder your passage underground can cause tremors.");
+		}
 		//Horse body is placed higher for readability purposes
 		else if (player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS)
 			outputText("  Your " + num2Text(player.legCount) + " perfect lissome legs end in mostly human feet, apart from the horns protruding straight down from the heel that forces you to walk with a sexy, swaying gait.");
@@ -1099,6 +1112,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your " + num2Text(player.legCount) + " furry legs have short thighs and long calves, with even longer feet ending in prominently-nailed toes.");
 		else if (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS)
 			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a reflective black, insectile carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.");
+		else if (player.lowerBody == LowerBody.CRAB)
+			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a reflective "+player.coatColor+", crab like carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.");
 		else if (player.lowerBody == LowerBody.FOX)
 			outputText("  Your " + num2Text(player.legCount) + " legs are crooked into high knees with hocks and long feet, like those of a fox; cute bulbous toes decorate the ends.");
 		else if (player.lowerBody == LowerBody.DRAGON)
@@ -1108,7 +1123,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.lowerBody == LowerBody.CLOVEN_HOOFED)
 			outputText("  " + Num2Text(player.legCount) + " digitigrade legs form below your [hips], ending in cloven hooves.");
 		else if (player.lowerBody == LowerBody.MANTIS)
-			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a shimmering green, insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.");
+			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a shimmering "+player.coatColor+", insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.");
 		else if (player.lowerBody == LowerBody.SHARK && !player.isTaur())
 			outputText("  Your " + num2Text(player.legCount) + " legs are mostly human save for the webing between your toes.");
 		else if (player.lowerBody == LowerBody.SHARK && player.isTaur())
@@ -1143,8 +1158,12 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your " + num2Text(player.legCount) + " legs are covered with a set of warlike tattoo and your feet end with sharp black nails.");
 		else if (player.lowerBody == LowerBody.ELF)
 			outputText("  Your " + num2Text(player.legCount) + " perfect lissom legs end in delicate, but agile elven feet allowing you to move gracefully and swiftly.");
+		else if (player.lowerBody == LowerBody.GAZER)
+			outputText("  Your " + num2Text(player.legCount) + " are human in appearance but drips with oily black fluids. You've not been using them just as much as of late since you are constantly levitating anyway.");
 		else if (player.lowerBody == LowerBody.RAIJU)
 			outputText("  You have " + num2Text(player.legCount) + " fluffy, furred legs that look vaguely like knee high socks. Your pawed feet end in four thick toes, which serve as your main source of balance. You can walk on them as normally as your old plantigrade legs. A thick strand of darkly colored fur breaks out from your ankles, emulating a bolt of lighting in appearance.");
+		else if (player.lowerBody == LowerBody.WEASEL)
+			outputText("  You have " + num2Text(player.legCount) + " fluffy, furred legs like those of a weasel. Your pawed feet end in four thick toes, which serve as your main source of balance. You can walk on them as normally as your old plantigrade legs.");
 		else if (player.lowerBody == LowerBody.RED_PANDA)
 			outputText("  Your " + num2Text(player.legCount) + " legs are equally covered in [skin coat.color] fur, ending on red-panda paws with short claws. They have a nimble and strong build, in case you need to escape from something.");
 		else if (player.lowerBody == LowerBody.AVIAN)
@@ -1184,6 +1203,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  While your legs are human in appearance your body is so rigid due to this pseudo rigor mortis that the only way you found for movement is by hopping around.");
 		else if (player.lowerBody == LowerBody.YUKI_ONNA)
 			outputText("  Your legs are human in appearance albeit for the bluish nails.");
+		else if (player.lowerBody == LowerBody.USHI_ONI_ONNA)
+			outputText("  You have the lower body of a Ushi-"+player.mf("oni","onna")+", it is like the one of a drider except that it is covered in fur with the exoskeleton under it, the usually black sheen legs of a drider are replaced with rough bone ones of an ushi-"+player.mf("oni","onna")+".");
 	}
 	public function describeTail():void {
 		if (player.tailType == Tail.HORSE)
@@ -1228,7 +1249,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("The deadly set of spikes covering the tip regularly drips with your potent venom. When impaling your tail spikes in a prey isn’t enough you can fling them at a target on a whim like the most talented archer.");
 		}
 		if (player.tailType == Tail.MANTIS_ABDOMEN)
-			outputText("  A large insectile mantis-abdomen dangles from just above your backside, bobbing with its own weight as you shift.  It is covered in hard greenish chitinous material.");
+			outputText("  A large insectile mantis-abdomen dangles from just above your backside, bobbing with its own weight as you shift.  It is covered in hard "+player.coatColor+"ish chitinous material.");
 		if (player.tailType == Tail.SHARK) {
 			outputText("  A long shark-tail trails down from your backside, swaying to and fro while giving you a dangerous air.");
 		}
@@ -1314,6 +1335,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.tailType == Tail.RAIJU) {
 			outputText("  Your silky tail extends out from just above your " + assDescript() + ". Its fur is lovely to the touch and almost glows at the tip, letting others know of your lightning based motif.");
 		}
+		else if (player.tailType == Tail.WEASEL) {
+			outputText("  Your short silky tail extends out from just above your " + assDescript() + ". Its fur is lovely to the touch.");
+		}
 		else if (player.tailType == Tail.RED_PANDA) {
 			outputText("  Sprouting from your [ass], you have a long, bushy tail. It has a beautiful pattern of rings in [skin coat.color] fluffy fur. It waves playfully as you walk giving to your step a mesmerizing touch.");
 		}
@@ -1341,6 +1365,12 @@ public class PlayerAppearance extends BaseContent {
 		else if(player.tailType == Tail.BEAR) {
 			outputText("  A cute, furry ursan tail sits up from your backside.");
 		}
+		else if(player.lowerBody == LowerBody.CANCER) {
+			outputText(" On the front of your crab half, covering your privates, is a set of chitinous mandibula covered in feelers, constantly chittering and foaming with your drooling fluids.");
+		}
+		else if(player.tailType == Tail.USHI_ONI_ONNA) {
+			outputText("  You have an Ushi-"+player.mf("oni","onna")+" tail, the furred member is "+(player.tallness > 72 ? "5":"4")+" feet long and prehensile, the tip can shoot web string that are very thick and strong, and produce an arousing substance when in contact with the victim.");
+		}
 	}
 	public function describeArms():void {
 //Wing arms
@@ -1352,7 +1382,11 @@ public class PlayerAppearance extends BaseContent {
 		else if (armType == Arms.SPIDER)
 			outputText("  Shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves from a distance.");
 		else if (armType == Arms.MANTIS)
-			outputText("  Shining green exoskeleton covers your arms from the biceps down with a long and sharp scythes extending from the wrists.");
+			outputText("  Shining "+player.coatColor+" exoskeleton covers your arms from the biceps down with a long and sharp scythes extending from the wrists.");
+		else if (armType == Arms.KAMAITACHI)
+			outputText("  Your arms are covered in "+player.coatColor+" fur up to your shoulders. They end with a pair of five-toed weasel paws armed with claws. Your forearms fur part ways slightly as a pair of long scythes like blades curves outward toward your elbow, sharper than any sword.");
+		else if (armType == Arms.GAZER)
+			outputText("  Your arms are human in appearance but drips with oily black fluid.\n");
 		else if (armType == Arms.BEE)
 			outputText("  Shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves ended with a yellow fuzz from a distance.");
 		else if (armType == Arms.SALAMANDER)
@@ -1440,6 +1474,10 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your arms and hands are human in appearance but your blue nailed hands touch is void of warmth and colder than death.");
 		else if (armType == Arms.CENTIPEDE)
 			outputText("  Your arms and hands are mostly human in shape tipped with sharp purple nails. Intricate flowing purple markings stretch from your hands to your shoulders.");
+		else if (armType == Arms.FROSTWYRM)
+			outputText("  Your forearms are covered with scales which themselves are covered with fur and end with five fingered clawed hands. Your claws are strong enough to dig and tear through next to anything.");
+		else if (armType == Arms.USHI_ONI_ONNA)
+			outputText("  You have Ushi-"+player.mf("oni","onna")+" arms they are longer and thicker than most races, strange pattern of fur begins at you middle biceps and go down until the furred part in your forearms, it extends to your hands where even you fingers had changed to bone like claws.");
 	}
 	public function describeRearBody():void {
 		if (player.rearBody.type == RearBody.FENRIR_ICE_SPIKES) {
@@ -1447,6 +1485,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if (player.rearBody.type == RearBody.LION_MANE) {
 			outputText("  Around your neck there is a thick mane of [skin coat.color] fur. It looks great on you.");
+		}
+		else if (player.rearBody.type == RearBody.FROSTWYRM) {
+			outputText("  Around your neck there is a thick collar of snowy white fur. It looks great on you and, best of all, shields you against the cold.");
 		}
 		else if (player.rearBody.type == RearBody.SHARK_FIN) {
 			outputText("  A large shark-like fin has sprouted between your shoulder blades.  With it you have far more control over swimming underwater.");
@@ -1489,7 +1530,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 	}
 	public function describeWings():void {
-//WINGS!
+	//WINGS!
 		var wingType:Number = player.wings.type;
 		if (wingType == Wings.BEE_LIKE_SMALL)
 			outputText("  A pair of tiny-yet-beautiful bee-wings sprout from your back, too small to allow you to fly.");
@@ -1537,6 +1578,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (wingType == Wings.PLANT) {
 			outputText("  Three pairs of oily, prehensile phalluses sprout from your shoulders and back. From afar, they may look like innocent vines, but up close, each tentacle contain a bulbous head with a leaking cum-slit, perfect for mass breeding.");
 		}
+		else if (wingType == Wings.GAZER) {
+			outputText(" A set of "+player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer)+" tentacle eyestalks expand from your back giving you all around vision. They're gazes are charged with lethal magical powers..");
+		}
 		if (wingType == Wings.BAT_ARM){
 			outputText("  Your large winged arms allow you to fly in a similar fashion to the bats they resemble. You sometimes wrap them around you like a cape when you walk around, so as to keep them from encumbering you. That being said, you far prefer using them for their intended purpose, traveling by flight whenever you can.");
 		}
@@ -1558,8 +1602,14 @@ public class PlayerAppearance extends BaseContent {
 		if (wingType == Wings.THUNDEROUS_AURA){
 			outputText("  You generate so much electricity that the sound of static and voltage follows you around, announcing your arrival.");
 		}
+		if (wingType == Wings.WINDY_AURA){
+			outputText("  An aura of strong wind constantly seems to accompany you wherever you go. You can use it to create tornados and even take flight riding on a dust devil should you need to.");
+		}
 		if (wingType == Wings.LEVITATION){
 			outputText("  You have the ability to levitate in the air should you wish to although you prefer to stay at ground level to not alert your would be victims to your otherworldly nature.");
+		}
+		if (wingType == Wings.FAIRY){
+			outputText("  A large pair of colorful butterfly wings rest on your shoulder blades. Your fairy wings give you a regal appearance fit for fey royalty.");
 		}
 	}
 	public function describeHorns():void {
@@ -1595,6 +1645,12 @@ public class PlayerAppearance extends BaseContent {
 		//Super lizard horns
 		if (player.horns.type == Horns.DRACONIC_X4_12_INCH_LONG)
 			outputText("  Two pairs of horns, roughly a foot long, sprout from the sides of your head.  They sweep back and give you a fearsome look, almost like the dragons from your village's legends.");
+		//Frost wyrm Horns
+		if (player.horns.type == Horns.FROSTWYRM){
+			outputText(" Two large sized spiraling horns grow from the side of your head, similar to those of a ram or frost wyrm. They kind of look great");
+			if (player.lowerBody == LowerBody.FROSTWYRM)outputText(" especially with your fur which makes you look like a sheep serpantine dragon");
+			outputText(".");
+		}
 		//Antlers!
 		if (player.horns.type == Horns.ANTLERS) {
 			if (player.horns.count > 0)
@@ -1657,7 +1713,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (player.horns.type == Horns.ORCHID) {
 			if (player.horns.count > 0)
-				outputText("  A huge pair of orchids grows on each side of your head, their big long petals flopping gaily when you move.");
+				outputText("  A huge pair of "+player.NakedCoatColor+" orchids grows on each side of your head, their big long petals flopping gaily when you move.");
 		}
 		if (player.horns.type == Horns.ONI_X2) {
 			if (player.horns.count > 0)
@@ -1678,6 +1734,10 @@ public class PlayerAppearance extends BaseContent {
 		if (player.horns.type == Horns.KRAKEN) {
 			if (player.horns.count > 0)
 				outputText("  Crowning above your head is a fleshy Kraken hood easily adding you a few extra inch in height.\n");
+		}
+		if (player.horns.type == Horns.USHI_ONI_ONNA) {
+			if (player.horns.count > 0)
+				outputText("  You have a pair of ushi-" + player.mf("oni", "onna") + " horns, both come out of your skull and go upward in a spiral pattern.\n");
 		}
 	}
 	public function describeTongue():void {
@@ -1726,10 +1786,12 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your eyes are solid spheres of inky, alien darkness.");
 		else if(eyeType == Eyes.CAT_SLITS)
 			outputText("  Your [eyecolor] eyes have vertically slit like those of cat.");
+		else if(eyeType == Eyes.CANCER)
+			outputText("  Your eyes look human at first glance, save for their natural [eyecolor] irises covered by a completely transparent layer of protective tissue to protect them against things such as salt and sand in the water.");
 		else if(eyeType == Eyes.GORGON)
 			outputText("  Your [eyecolor] eyes are similar to those of snake-like gorgons with ability to temporally petrify.");
 		else if(eyeType == Eyes.FENRIR)
-			outputText("  Your eyes glows with a freezing blue light icy smoke rising in the air around it.");
+			outputText("  Your [eyecolor] eyes glows with a freezing blue light, icy smoke rising in the air around it.");
 		else if(eyeType == Eyes.MANTICORE)
 			outputText("  Your eyes are similar to those of a cat, with slit pupils. However, their [eyecolor] iris dismiss any links to the regular felines in favor of something way more ominous.");
 		else if(eyeType == Eyes.FOX)
@@ -1748,14 +1810,19 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your [eyecolor] elven eyes looks somewhat human, save for their cat-like vertical slit which draws light right in, allowing you to see with perfect precision both at day and night time.");
 		else if(eyeType == Eyes.RAIJU)
 			outputText("  Your eyes are of an electric [eyecolor] hue that constantly glows with voltage power. They have slitted pupils like those of a beast.");
+		else if(eyeType == Eyes.WEASEL)
+			outputText("  Your [eyecolor] eyes have slitted pupils like those of a weasel.");
 		else if(eyeType == Eyes.VAMPIRE){
 			outputText("  Your eyes looks somewhat normal, but their [eyecolor] irises seem to have the tendency of drawing in people’s gaze, like moths to a flame.");
 		}
 		else if(eyeType == Eyes.GEMSTONES){
 			outputText("  Instead of regular eyes you see through a pair of gemstones that change hue based on your mood.");
 		}
+		else if(eyeType == Eyes.GAZER){
+			outputText("  Your eye sockets have merged together to reform into a single cyclopean eye charged with powerful magical powers. Your almighty gaze is as peerless as its unsettling.");
+		}
 		else if(eyeType == Eyes.FERAL){
-			outputText("  In your eyes sometime dance a green light. It encompass your entire pupil when you let the beast within loose.");
+			outputText("  In your [eyecolor] eyes sometime dance a sinister light. It encompass your entire pupil when you let the beast within loose.");
 		}
 		else if(eyeType == Eyes.GRYPHON){
 			outputText("  Your gifted eyes have a bird-like appearance, having an [eyecolor] sclera and a large, black iris. A thin ring of black separates your sclera from your outer iris.");
@@ -1773,7 +1840,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your [eyecolor], slanted eyes have slitted pupils. They usually seem to gleam with a sort of malice, avarice, or lechery, giving off beady-eyed vibe.");
 		}
 		else if(eyeType == Eyes.CAVE_WYRM){
-			outputText("  Dark blue iris with neon blue eyes pupil that glow in the dark.");
+			outputText("  Dark blue iris with [eyecolor] eyes pupil that glow in the dark.");
 		}
 		else if(eyeType == Eyes.HINEZUMI){
 			outputText("  Your eyes are human-like. However, their [eyecolor] irises are clearly those of an Hinezumi.");
@@ -1793,6 +1860,15 @@ public class PlayerAppearance extends BaseContent {
 		else if(eyeType == Eyes.JIANGSHI){
 			outputText("  Your [eyecolor] eyes, while humans are vacant and devoid of the warmth of life.");
 		}
+		else if(eyeType == Eyes.FROSTWYRM){
+			outputText("  Your [eyecolor] eyes have slitted pupils and dark sclera like those of a frost wyrm.");
+		}
+		else if(eyeType == Eyes.FAIRY){
+			outputText("  Your beautiful [eyecolor] eyes sparkle with the eternal hope and child-like innocence of fairykind.");
+		}
+		else if(eyeType == Eyes.GREMLIN){
+			outputText("  Your [eyecolor] eyes looks human enough though your eyelids are dark, just as if you very tired althought it's more likely traces of your demonic corruption.");
+		}
 		else outputText("  Your eyes are [eyecolor].");
 	}
 	public function describeHairAndEars():void {
@@ -1807,6 +1883,8 @@ public class PlayerAppearance extends BaseContent {
 				if(player.skin.hasMagicalTattoo()) outputText(" covered with [skin color2] magical tattoo");
 				else if(player.skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo");
 				else if(player.skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
+				else if(player.skin.hasWindSweptScars()) outputText(" covered with scars as if your skin was cut in various place by a windstorm");
+				else if(player.skin.hasOilySkin()) outputText(" dripping with oily black fluids.");
 				else if(player.skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos");
 				else if(player.skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
 				outputText(" where your hair should be.");
@@ -1818,7 +1896,7 @@ public class PlayerAppearance extends BaseContent {
 			else if(earType == Ears.DOG)
 				outputText("  A pair of dog ears protrude from your skull, flopping down adorably.");
 			else if(earType == Ears.COW)
-				outputText("  A pair of round, floppy cow ears protrude from the sides of your skull.");
+				outputText("  A pair of round, " + player.hairColor + " floppy cow ears protrude from the sides of your skull.");
 			else if(earType == Ears.ELFIN)
 				outputText("  A pair of large pointy ears stick out from your skull.");
 			else if(earType == Ears.SHARK)
@@ -1865,36 +1943,45 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  A pair of pointed elf-like oni ears stick out from your skull.");
 			else if(earType == Ears.ELVEN)
 				outputText("  A pair of cute, long, elven, pointy ears, bigger than your old human ones and alert to every sound stick out from your skull.");
-			else if(earType == Ears.WEASEL)
+			else if(earType == Ears.GREMLIN){
+				outputText("  A pair of sideways leaning furry ears that flick toward every slight sound. They don’t belong to any known animal but like anything demonic related help improve your devilish charm.");
+				if (silly()){
+					outputText(" With ears like that anyone would be hard pressed to resist the urge to headpat you.");
+				}
+			}
+			else if(earType == Ears.RAIJU)
 				outputText("  A pair of sideways leaning raiju ears that flick toward every slight sound stick out from your skull.");
-			if (earType == Ears.BAT){
+			else if (earType == Ears.WEASEL){
+				outputText("  A pair of two round fuzzy weasel ears covered with [skin coat.color] and alert to sound stick out from your skull.");
+			}
+			else if (earType == Ears.BAT){
 				outputText("  A pair of bat ears sit atop your head, always perked up to catch any stray sound.");
 			}
-			if (earType == Ears.VAMPIRE){
+			else if (earType == Ears.VAMPIRE){
 				outputText("  A pair of pointed elfin ears powerful enough to catch even the heartbeat of those around you stick out from your skull.");
 			}
-			if (earType == Ears.RED_PANDA){
+			else if (earType == Ears.RED_PANDA){
 				outputText("  Big, white furred, red-panda ears lie atop your head, keeping you well aware to your surroundings.");
 			}
-			if (earType == Ears.AVIAN){
+			else if (earType == Ears.AVIAN){
 				outputText("  Two small holes at each side of your head serve you as ears. Hidden by tufts of feathers, they’re almost unnoticeable.");
 			}
-			if (earType == Ears.GRYPHON){
+			else if (earType == Ears.GRYPHON){
 				outputText("  A duo of triangular, streamlined ears are located at each side of your head, helping you to pinpoint sounds. They’re covered in soft, [skin coat.color] fur and end in tufts.");
 			}
-			if (earType == Ears.CAVE_WYRM){
+			else if (earType == Ears.CAVE_WYRM){
 				outputText("  Your ears are furry yet they do not actually belong to any known type of mammal. You suspect them to be related to an ancestry closer to that of the serpentine dragons they emulate.");
 			}
-			if (earType == Ears.BEAR){
+			else if (earType == Ears.BEAR){
 				outputText("  A pair of two round fuzzy bear ears covered with [skin coat.color] and alert to sound stick out from your skull.");
 			}
-			if (earType == Ears.PANDA){
+			else if (earType == Ears.PANDA){
 				outputText("  A pair of two round fuzzy panda ears covered with black fur just like a panda and alert to sound stick out from your skull.");
 			}
-			if (earType == Ears.DISPLACER){
+			else if (earType == Ears.DISPLACER){
 				outputText("  A large long furry ears atop your head, always perked up to catch any stray sound.");
 			}
-			if (earType == Ears.MELKIE){
+			else if (earType == Ears.MELKIE){
 				outputText("  Your furry Melkie ears are long and flat, reaching all the way down to your waist.");
 			}
 			//</mod>
@@ -1927,7 +2014,7 @@ public class PlayerAppearance extends BaseContent {
 			else if(earType == Ears.DOG)
 				outputText("  The [hair] on your head is overlapped by a pair of pointed dog ears.");
 			else if(earType == Ears.COW)
-				outputText("  The [hair] on your head is parted by a pair of rounded cow ears that stick out sideways.");
+				outputText("  The [hair] on your head is parted by a pair of " + player.hairColor + " rounded cow ears that stick out sideways.");
 			else if(earType == Ears.ELFIN)
 				outputText("  The [hair] on your head is parted by a pair of cute pointed ears, bigger than your old human ones.");
 			else if(earType == Ears.CAT)
@@ -1969,9 +2056,14 @@ public class PlayerAppearance extends BaseContent {
 			else if(earType == Ears.ONI)
 				outputText("  The [hair] on your head is parted by a pair of pointed elf-like oni ears.");
 			else if(earType == Ears.ELVEN) {
-				outputText("  The [hair] is parted by a pair of cute, long, elven, pointy ears, bigger than your old human ones and alert to every sound");
+				outputText("  The [hair] is parted by a pair of cute, long, elven, pointy ears, bigger than your old human ones and alert to every sound.");
 				//if (player.hairType == SILKEN) outputText(" .");
-				outputText(".");
+			}
+			else if(earType == Ears.GREMLIN){
+				outputText("  The [hair] is parted by a pair of sideways leaning furry ears that flick toward every slight sound. They don’t belong to any known animal but like anything demonic related help improve your devilish charm.");
+				if (silly()){
+					outputText(" With ears like that anyone would be hard pressed to resist the urge to headpat you.");
+				}
 			}
 			else if(earType == Ears.WEASEL)
 				outputText("  Your [hair] is parted by two sideways leaning raiju ears that flick toward every slight sound.");
@@ -2002,6 +2094,9 @@ public class PlayerAppearance extends BaseContent {
 			if (earType == Ears.DISPLACER){
 				outputText(" The [hair] on your head is parted by large long furry ears atop your head, always perked up to catch any stray sound.");
 			}
+			if (earType == Ears.MELKIE){
+				outputText("The [hair] on your head is parted by your long and flat furry Melkie ears, reaching all the way down to your waist.");
+			}
 			//</mod>
 			if(player.antennae.type == Antennae.MANTIS)
 			{
@@ -2029,6 +2124,38 @@ public class PlayerAppearance extends BaseContent {
 			}
 		}
 	}
+	public function describeHairStyle():void {
+		var hairStyle:Number = player.hairStyle;
+		if(player.hairLength == 0 && (player.hairType == Hair.STORM || player.hairType == Hair.BURNING || player.hairType == Hair.ANEMONE
+				|| player.hairType == Hair.QUILL || player.hairType == Hair.FEATHER || player.hairType == Hair.GORGON || player.hairType == Hair.FLUFFY || player.hairType == Hair.CRAZY)) {
+		}
+		else {
+			if(hairStyle == Hair.PLAIN)
+				outputText("  Your hairs hangs plainly along the side of your head.");
+			else if(hairStyle == Hair.WILD)
+				outputText("  Your hairs are stand up in a wild fashion.")
+			else if(hairStyle == Hair.PONYTAIL)
+				outputText("  Your hairs are tied up into a ponytail.");
+			else if(hairStyle == Hair.LONGTRESSES)
+				outputText("  Your hairs are tied up into a great ponytail.");
+			else if(hairStyle == Hair.TWINPIGTAIL)
+				outputText("  Your hairs are tied up into a pair of pigtail.");
+			else if(hairStyle == Hair.DWARVEN)
+				outputText("  Your hairs are tied up into a dwarven fashion.");
+		}
+	}
+
+	//Call this function when looking for repeatable tattoo conditional text
+	public function tattooAndPatternGeneric():void{
+		if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
+		else if (player.skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
+		else if (player.skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
+		else if(player.skin.hasWindSweptScars()) outputText(" covered with scars as if your skin was cut in various place by a windstorm");
+		else if(player.skin.hasOilySkin())outputText(" dripping with oily black fluids");
+		else if (player.skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
+		else if (player.skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+	}
+
 	public function describeFaceShape():void {
 		// story.display("faceShape");
 		var faceType:Number = player.faceType;
@@ -2052,6 +2179,14 @@ public class PlayerAppearance extends BaseContent {
 				}
 				else if (skin.hasLightningShapedTattoo()) {
 					outputText(" covered with a few glowing lightning tattoos");
+					odd++;
+				}
+				else if(skin.hasWindSweptScars()) {
+					outputText(" covered with scars as if your skin was cut in various place by a windstorm");
+					odd++;
+				}
+				else if(skin.hasOilySkin()){
+					outputText(" dripping with oily black fluids.");
 					odd++;
 				}
 				else if (skin.hasScarShapedTattoo()) {
@@ -2088,9 +2223,6 @@ public class PlayerAppearance extends BaseContent {
 					odd++;
 				}
 			outputText(".");
-			if(player.skin.hasVenomousMarking()) {
-				outputText(" Beneath your shoulder all the way down to your waist your skin is covered with purple venomous marking");
-			}
 
 			if (faceType == Face.SHARK_TEETH)
 				outputText("  A set of razor-sharp, retractable shark-teeth fill your mouth and gives your visage a slightly angular appearance.");
@@ -2120,9 +2252,24 @@ public class PlayerAppearance extends BaseContent {
 				} else {
 					outputText("  In addition, your mouth, while human looking, has sharp yeti fangs not unlike those of a monkey.");
 				}
-			}
-			if(faceType == Face.VAMPIRE){
+			} else if(faceType == Face.VAMPIRE){
+				if (odd == 0){
 				outputText("  Your mouth could pass for human if not for the pair of long and pointy canines you use to tear into your victims to get at their blood.");
+				} else {
+					outputText("  In addition, your mouth could pass for human if not for the pair of long and pointy canines you use to tear into your victims to get at their blood.");
+				}
+			} else if(faceType == Face.VAMPIRE){
+				if (odd == 0){
+					outputText("  Your mouth is human looking all right though your near constant crazy toothy smile isn't exactly helping to make you look sane. A careful onlooker could also easily notice that your canines are longuer and pointier then normal like those of tiny fiends.");
+				} else {
+					outputText("  In addition, your mouth could pass for human if not for your near constant crazy toothy smile isn't exactly helping to make you look sane. A careful onlooker also could easily notice that your canines are longuer and pointier then normal like those of tiny fiends.");
+				}
+			} else if(faceType == Face.FAIRY){
+				if (odd == 0){
+					outputText("  Your fairy nature allows you to always display a pure, cheerful, innocent smile that warms the hearts of those around you.");
+				} else {
+					outputText("  In addition, Your fairy nature allows you to always display a pure, cheerful, innocent smile that warms the hearts of those around you.");
+				}
 			}
 		}
 		else if (faceType == Face.FERRET) {
@@ -2132,16 +2279,10 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if (faceType == Face.RACCOON_MASK) {
 			if (!player.hasCoat()) { //appearance for skinheads
-				outputText("  Your face is human in shape and structure, with [skin bases");
-				if (InCollection(skin.base.color, "ebony", "black"))
-					outputText(", though with your dusky hue, the black raccoon mask you sport isn't properly visible.");
-				else if (skin.hasMagicalTattoo()) outputText(" covered with [skin color2] magical tattoo, though it is decorated with a sly-looking raccoon mask over your eyes.");
-				else if(skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo, though it is decorated with a sly-looking raccoon mask over your eyes.");
-				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos, though it is decorated with a sly-looking raccoon mask over your eyes.");
-				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos, though it is decorated with a sly-looking raccoon mask over your eyes.");
-				else if(skin.hasVenomousMarking()) outputText(" though it is decorated with a sly-looking raccoon mask over your eyes. Everything beneath your shoulder is covered with purple venomous marking");
-				else if (player.skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins, though it is decorated with a sly-looking raccoon mask over your eyes.");
-				else outputText(", though it is decorated with a sly-looking raccoon mask over your eyes.");
+				outputText("  Your face is human in shape and structure, with [skin bases]");
+				if (InCollection(skin.base.color, "ebony", "black")) outputText(", though with your dusky hue, the black raccoon mask you sport isn't properly visible.");
+				tattooAndPatternGeneric();
+				outputText(", though it is decorated with a sly-looking raccoon mask over your eyes.");
 			} else { //appearance furscales
 				//(black/midnight furscales)
 				if (InCollection(skin.base.color, "black", "midnight", "black", "midnight", "black", "midnight"))
@@ -2153,60 +2294,24 @@ public class PlayerAppearance extends BaseContent {
 		else if (faceType == Face.RACCOON) {
 			outputText("  You have a triangular raccoon face, replete with sensitive whiskers and a little black nose; a mask shades the space around your eyes, set apart from your [skin coat] by a band of white.");
 			//(if skin)
-			if (player.hasPlainSkinOnly()) {
-				outputText("  It looks a bit strange with only the skin and no fur.");
-				if (player.skin.hasVenomousMarking()) {
-					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
-				}
-			} else if (skin.hasMagicalTattoo()) {
-				outputText("  It looks a bit strange with only the skin covered with [skin color2] magical tattoo and no fur.");
-			} else if (skin.hasBattleTattoo()) {
-				outputText("  It looks a bit strange with only the skin covered with [skin color2] battle tattoo and no fur.");
-			} else if (skin.hasLightningShapedTattoo()) {
-				outputText("  It looks a bit strange with only the skin covered with a few glowing lightning tattoos and no fur.");
-			} else if (skin.hasScarShapedTattoo()) {
-				outputText("  It looks a bit strange with only the skin covered with a few [skin color2] scar tattoos and no fur.");
-			} else if (player.skin.hasWhiteBlackVeins()) {
-				outputText(" It looks a bit strange with only the skin covered by [skin color2] veins and no fur.");
-			} else if (player.hasScales()) {
-				outputText("  The presence of said scales gives your visage an eerie look, more reptile than mammal.");
-				if (player.skin.hasVenomousMarking()) {
-					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
-				}
-			} else if (skin.hasChitin()) {
-				outputText("  The presence of said chitin gives your visage an eerie look, more insect than mammal.");
-				if (player.skin.hasVenomousMarking()) {
-					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
-				}
+			if (player.hasPlainSkinOnly()){
+				outputText("  It looks a bit strange with only the skin");
+				tattooAndPatternGeneric();
+				outputText("and no fur.");
 			}
+			else if (player.hasScales()) outputText("  The presence of said scales gives your visage an eerie look, more reptile than mammal.");
+			else if (skin.hasChitin()) outputText("  The presence of said chitin gives your visage an eerie look, more insect than mammal.");
 		}
 		else if (faceType == Face.FOX) {
 			outputText("  You have a tapered, shrewd-looking vulpine face with a speckling of downward-curved whiskers just behind the nose.");
 			if (!player.hasCoat()) {
-				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat].");
-				if (player.skin.hasVenomousMarking()) {
-					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
-				}
-			} else if (skin.hasMagicalTattoo()) {
-				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat] covered with [skin color2] magical tattoo.");
-			} else if (skin.hasBattleTattoo()) {
-				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat] covered with [skin color2] battle tattoo.");
-			} else if (skin.hasLightningShapedTattoo()) {
-				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat] covered with a few glowing lightning tattoos.");
-			} else if (skin.hasScarShapedTattoo()) {
-				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat] covered with a few [skin color2] scar tattoos.");
-			} else if (player.skin.hasWhiteBlackVeins()) {
-				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat] covered by [skin color2] veins.");
-			} else if (player.hasFullCoatOfType(Skin.FUR)) {
-				outputText("  A coat of [skin coat] decorates your muzzle.");
-			} else if (skin.isCoverLowMid()) {
-				outputText("  Strangely, [skin coat] adorn your animalistic visage.");
-			} else {
-				outputText("  Strangely, [skin coat] adorn every inch of your animalistic visage.");
-				if (player.skin.hasVenomousMarking()) {
-					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
-				}
+				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat]");
+				tattooAndPatternGeneric();
+				outputText(".");
 			}
+			else if (player.hasFullCoatOfType(Skin.FUR)) outputText("  A coat of [skin coat] decorates your muzzle.");
+			else if (skin.isCoverLowMid()) outputText("  Strangely, [skin coat] adorn your animalistic visage.");
+			else outputText("  Strangely, [skin coat] adorn every inch of your animalistic visage.");
 		}
 		else if (faceType == Face.MOUSE) {
 			//appearance
@@ -2217,19 +2322,12 @@ public class PlayerAppearance extends BaseContent {
 		if (faceType == Face.ANIMAL_TOOTHS) {
 			if (!player.hasCoat()) {
 				outputText("  Your face");
-				if (skin.hasMagicalTattoo()) outputText(" covered with [skin color2] magical tattoo");
-				else if(skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo");
-				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos");
-				else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+				tattooAndPatternGeneric();
 				outputText(" looks human save for your sharp canines.");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  Your face looks human save for your sharp canines.  Your [skin coat.nocolor] is [skin coat.color], hiding your [skin base] underneath.");
 			} else {
 				outputText("  Your face looks human save for your sharp canines, but overlaid with glittering patches of [skin coat].");
-			}
-			if (player.skin.hasVenomousMarking()) {
-				outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
 			}
 			if (player.eyes.type == Eyes.CENTIPEDE){
 				outputText(" You wear a constant expression of sadness, barely drawing attention away from your mouth.\n");
@@ -2239,49 +2337,26 @@ public class PlayerAppearance extends BaseContent {
 		if (faceType == Face.HORSE) {
 			if (!player.hasCoat()) {
 				outputText("  Your face");
-				if (skin.hasMagicalTattoo()) outputText(", covered with [skin color2] magical tattoo,");
-				else if(skin.hasBattleTattoo()) outputText(", covered with [skin color2] battle tattoo,");
-				else if(skin.hasLightningShapedTattoo()) outputText(", covered with a few glowing lightning tattoos,");
-				else if(skin.hasScarShapedTattoo()) outputText(", covered with a few [skin color2] scar tattoos,");
-				else if(skin.hasWhiteBlackVeins()) outputText(", covered by [skin color2] veins,");
+				tattooAndPatternGeneric();
 				outputText("  is equine in shape and structure.  The odd visage is hairless and covered with [skin base]");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  Your face");
 				outputText(" is almost entirely equine in appearance, even having [skin coat].  Underneath the fur, you believe you have [skin base].");
-				if (player.skin.hasVenomousMarking()) {
-					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
-				}
 			} else {
 				outputText("  You have the face and head structure of a horse,");
 				outputText(" overlaid with glittering [skin coat].");
-				if (player.skin.hasVenomousMarking()) {
-					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
-				}
 			}
 		}
 		//dog-face
 		if (faceType == Face.DOG) {
 			if (!player.hasCoat()) {
 				outputText("  You have a dog-like face");
-				if (skin.hasMagicalTattoo()) outputText(" covered with [skin color2] magical tattoo");
-				else if(skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo");
-				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos");
-				else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+				tattooAndPatternGeneric();
 				outputText("  , complete with a wet nose.  The odd visage is hairless and covered with [skin base].");
-				if (player.skin.hasVenomousMarking()) {
-					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
-				}
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a dog's face, complete with wet nose and panting tongue.  You've got [skin coat], hiding your [skin base] underneath your furry visage.");
-				if (player.skin.hasVenomousMarking()) {
-					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
-				}
 			} else {
 				outputText("  You have the facial structure of a dog, wet nose and all, but overlaid with glittering patches of [skin coat]");
-				if (player.skin.hasVenomousMarking()) {
-					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
-				}
 			}
 		}
 		//wolf-face
@@ -2290,15 +2365,8 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  You have a wolf-like face, complete with a wet nose.  ");
 				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ");
 				outputText("The odd visage is hairless and covered with [skin coat]");
-				if (skin.hasMagicalTattoo()) outputText(" covered with [skin color2] magical tattoo");
-				else if(skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo");
-				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos");
-				else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+				tattooAndPatternGeneric();
 				outputText(".");
-				if (player.skin.hasVenomousMarking()) {
-					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
-				}
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a wolf’s face, complete with wet nose a panting tongue and threatening teeth.  ");
 				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ");
@@ -2311,37 +2379,19 @@ public class PlayerAppearance extends BaseContent {
 		if (faceType == Face.WOLF_FANGS) {
 			if (!player.hasCoat()) {
 				outputText("  Your face is human in shape and structure with [skin coat]");
-				if (skin.hasMagicalTattoo()) outputText(" covered with [skin color2] magical tattoo");
-				else if(skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo");
-				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos");
-				else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
 				outputText(". Your mouth is somewhat human save for your wolf-like canines.");
-				if (player.skin.hasVenomousMarking()) {
-					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
-				}
 			} else if (player.hasPartialCoat(Skin.FUR)) {
-				outputText("  Your face looks human save for your wolf-like canines.  You've got [skin coat], hiding your [skin noadj] underneath your furry visage.");
-				if (player.skin.hasVenomousMarking()) {
-					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
-				}
-			} else {
 				outputText("  Your face looks human save for your wolf-like canines, but overlaid with glittering patches of [skin coat].");
+			} else {
+				outputText("  Your face looks human save for your wolf-like canines.  You've got [skin coat], hiding your [skin noadj] underneath your furry visage.");
 			}
 		}
 		//cat-faces
 		if (faceType == Face.CAT || faceType == Face.CHESHIRE) {
 			if (!player.hasCoat()) {
 				outputText("  You have a cat-like face, complete with a cute, moist nose and whiskers.  The [skin] that is revealed by your lack of fur looks quite unusual on so feline a face");
-				if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
-				else if(skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
-				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
-				else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+				tattooAndPatternGeneric();
 				outputText(".");
-				if (player.skin.hasVenomousMarking()) {
-					outputText(" Everything beneath your shoulder all the way down to your waist is covered with purple venomous marking");
-				}
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your [skin coat.nocolor] is [skin coat.color], hiding your [skin base] underneath.");
 			} else {
@@ -2356,7 +2406,12 @@ public class PlayerAppearance extends BaseContent {
 		//Minotaaaauuuur-face
 		if (faceType == Face.COW_MINOTAUR) {
 			if (!player.hasCoat()) {
-				outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Despite your lack of fur elsewhere, your visage does have a short layer of [haircolor] fuzz.");
+				outputText("  You have a face resembling that of a minotaur");
+				if (!player.skin.hasNoPattern()){
+					outputText(",");
+					tattooAndPatternGeneric();
+				}
+				outputText(", with cow-like features, particularly a squared off wet nose.  Despite your lack of fur elsewhere, your visage does have a short layer of [haircolor] fuzz.");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Your [skin coat] thickens noticeably on your head, looking shaggy and more than a little monstrous once laid over your visage.");
 			} else if (player.hasFullCoat()) {
@@ -2368,7 +2423,9 @@ public class PlayerAppearance extends BaseContent {
 		//Lizard-face
 		if (faceType == Face.LIZARD) {
 			if (!player.hasCoat()) {
-				outputText("  You have a face resembling that of a lizard, and with your toothy maw, you have quite a fearsome visage.  The reptilian visage does look a little odd with just [skin].");
+				outputText("  You have a face resembling that of a lizard, and with your toothy maw, you have quite a fearsome visage.  The reptilian visage does look a little odd with just [skin]");
+				tattooAndPatternGeneric();
+				outputText(".");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a face resembling that of a lizard.  Between the toothy maw, pointed snout, and the layer of [skin coat] covering your face, you have quite the fearsome visage.");
 			} else if (player.hasFullCoat()) {
@@ -2402,16 +2459,9 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your face is human in shape and structure with [skin coat]. Your mouth could pass for human if not for your two sharp weasel canines.");
 		}
 		if (faceType == Face.ORC_FANGS) {
-			outputText("  our face is human in shape and structure, with [skin base] ");
-			if (skin.hasMagicalTattoo()) outputText("covered with magical tattoo");
-			else if(skin.hasBattleTattoo()) outputText("covered with battle tattoo");
-			else if(skin.hasLightningShapedTattoo()) outputText("covered with a few glowing lightning tattoos");
-			else if(skin.hasScarShapedTattoo()) outputText("covered in scar-like tattoos");
-			else if(skin.hasWhiteBlackVeins()) outputText("covered by [skin color2] veins");
+			outputText("  Your face is human in shape and structure, with [skin base] ");
+			tattooAndPatternGeneric();
 			outputText(". Your mouth could pass for human if it were not for your two lower canines resembling boar tusks poking out of your mouth.");
-			if (player.skin.hasVenomousMarking()) {
-				outputText(" Beneath your shoulder all the way down to your waist your skin is covered with purple venomous marking");
-			}
 		}
 		if (faceType == Face.ORCA) {
 			if (skin.hasPlainSkinOnly() && player.skinAdj == "glossy" && player.skinTone == "white and black")
@@ -2421,11 +2471,7 @@ public class PlayerAppearance extends BaseContent {
 					outputText("  You have a fairly normal face, with [skin base]. On your cheek you have [skin coat]");
 				} else {
 					outputText("  You have a fairly normal face, with [skin base]");
-					if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
-					else if(skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
-					else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-					else if(skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
-					else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+					tattooAndPatternGeneric();
 				}
 				outputText(".  In addition you have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
@@ -2438,9 +2484,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your face is ");
 			if (!player.hasCoat()) {
 				outputText("bald");
-				if (skin.base.adj == "sexy tattooed") outputText(" covered with magical tattoo");
-				if (skin.base.adj == "battle tattooed") outputText(" covered with battle tattoo");
-				if (skin.base.adj == "lightning shaped tattooed") outputText(" covered with a few glowing lightning tattoos");
+				tattooAndPatternGeneric();
 			} else outputText("covered with [skin coat]");
 			outputText(" and shaped like that of a kangaroo, somewhat rabbit-like except for the extreme length of your odd visage.");
 		}
@@ -2458,11 +2502,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your face is like that of a rhino");
 			if (!player.hasCoat()) {
 				outputText(", with [skin], complete with a long muzzle and a horns on your nose");
-				if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
-				else if(skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
-				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
-				else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+				tattooAndPatternGeneric();
 				outputText(".");
 			}
 			else
@@ -2472,11 +2512,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your odd visage consists of a long, thin echidna snout.");
 			if (!player.hasCoat()) {
 				outputText("  The [skin base]");
-				if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
-				else if(skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
-				else if(skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-				else if(skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
-				else if(skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+				tattooAndPatternGeneric();
 				outputText(" that is revealed by your lack of fur looks quite unusual.");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  It's covered in [skin coat].");
@@ -2488,15 +2524,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your face is like that of a deer, with a nose at the end of your muzzle.");
 			if (!player.hasCoat()) {
 				outputText("  The [skin]");
-				if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
-				else if (skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
-				else if (skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-				else if (skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
-				else if (skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+				tattooAndPatternGeneric();
 				outputText(" that is revealed by your lack of fur looks quite unusual.");
-				if (player.skin.hasVenomousMarking()) {
-					outputText(" Beneath your shoulder all the way down to your waist your skin is covered with purple venomous marking");
-				}
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  It's covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
 			} else {
@@ -2520,854 +2549,832 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (faceType == Face.FIRE_SNAIL) {
 			outputText("  Your face is human in shape and structure");
-			if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
-			else if (skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
-			else if (skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-			else if (skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
-			else if (skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+			tattooAndPatternGeneric();
 			outputText(" but your mouth is drooling from constant arousal.");
-			if (player.skin.hasVenomousMarking()) {
-				outputText(" Beneath your shoulder all the way down to your waist your skin is covered with purple venomous marking");
-			}
 		}
 		if (faceType == Face.GHOST) {
 			outputText("  Your face is in human shape and structure");
-			if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
-			else if (skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
-			else if (skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-			else if (skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
-			else if (skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+			tattooAndPatternGeneric();
 			outputText(". The only thing out of place is the ever present wide smile on your face. Your unsettling smile often hides your true emotions much to the dismay of others.");
-			if (player.skin.hasVenomousMarking()) {
-				outputText(" Beneath your shoulder all the way down to your waist your skin is covered with purple venomous marking");
-			}
 		}
 		if (faceType == Face.JIANGSHI) {
-			outputText("  Your face is human in form and shape but your expression is kind of zombie like.");
+			outputText("  Your face is human in form and shape with " + player.skinTone + " but your expression is kind of zombie like.");
+		}
+		if (faceType == Face.KUDERE) {
+			outputText("  Your face is human in shape and structure with " + player.skinTone + ". The most unsettling thing about it is your complete and constant lack of emotion.");
+			if (!player.hasCoat()) {
+				outputText("  The [skin] is");
+				tattooAndPatternGeneric();
+			} else if (player.hasFullCoatOfType(Skin.FUR)) {
+				outputText("  It's covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
+			} else {
+				outputText("  It's covered in [skin coat], making your face looks even more unusual.");
+			}
 		}
 		if (faceType == Face.YUKI_ONNA) {
-			outputText("  Your face is fully human");
-			if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
-			else if (skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
-			else if (skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-			else if (skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
-			else if (skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
-			outputText(" in appearance although your lips are dyed blue by the cold.");
-			if (player.skin.hasVenomousMarking()) {
-				outputText(" Beneath your shoulder all the way down to your waist your skin is covered with purple venomous marking");
+			outputText("  Your face is fully human in appearance although your lips are dyed blue by the cold.");
+			if (!player.hasCoat()) {
+				outputText("  Your [skin] is");
+				tattooAndPatternGeneric();
+			} else if (player.hasFullCoatOfType(Skin.FUR)) {
+				outputText("  It's covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
+			} else {
+				outputText("  It's covered in [skin coat] that covers your " + player.skinTone + " skin underneath, making your face looks more unusual.");
 			}
+		}
+		if (faceType == Face.USHI_ONI_ONNA) {
+			outputText("  You have the face of a ushi " + player.mf("oni", "onna") + ", you have strange black tattoos circling your eyes and in your mouth small fangs with a weak poison can be seen when you smile or open you mouth.");
+		}
+		//WIP Code reformating of the face section
+		//section for the tatoo
+		//if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo.");
+		//else if (skin.hasBattleTattoo()) outputText(" covered with battle tattoo.");
+		//else if (skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos.");
+		//else if (skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos.");
+		//else if (skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins.");
+		//else outputText(".");
+		//Section for the coat
+		//if (!player.hasPartialCoatNoTypeDeclaration){
+			//if (!player.hasPartialCoat(Skin.FUR)) outputText("  On your cheek you have [skin coat].");
+			//if (!player.hasPartialCoat(Skin.SCALES)){} outputText("  On your cheek you have [skin coat].");
+			//if (!player.hasPartialCoat(Skin.AQUA_SCALES)){} outputText("  On your cheek you have [skin coat].");
+			//if (!player.hasPartialCoat(Skin.CHITIN)){} outputText("  On your cheek you have [skin coat].");
+		//} else if (player.hasFullCoat()) {
+			//if (player.hasFullCoatOfType(Skin.FUR)) outputText("  Your skin is covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
+			//if (player.hasFullCoatOfType(Skin.SCALES)){} outputText("  Your skin is covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
+			//if (player.hasFullCoatOfType(Skin.AQUA_SCALES)){} outputText("  Your skin is covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
+			//if (player.hasFullCoatOfType(Skin.CHITIN)){} outputText("  Your skin is covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
+		//}
+		//Section for below the head
+		if (player.skin.hasVenomousMarking()) {
+			outputText(" Beneath your shoulder all the way down to your waist your skin is covered with purple venomous marking");
 		}
 		//</mod>
 	}
-public function RacialScores():void {
-	clearOutput();
-	outputText("<b>Current racial scores (and bonuses to stats if applicable):</b>\n");
-	//Alicorn
-	if (player.alicornScore() >= 24) outputText("\n<font color=\"#0000a0\">True Alicorn/True Nightmare: " + player.alicornScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, +" + (140 * (1 + player.newGamePlusMod())) + " max Spe, +" + (85 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.alicornScore() >= 12) outputText("\n<font color=\"#0000a0\">Alicorn/Nightmare: " + player.alicornScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (75 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.alicornScore() >= 8) outputText("\n<font color=\"#0000a0\"> Half Alicorn/Half Nightmare: " + player.alicornScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (55 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.alicornScore() >= 1) outputText("\n<font color=\"#008000\">Alicorn/Nightmare: " + player.alicornScore() + "</font>");
-	else if (player.alicornScore() < 1) outputText("\n<font color=\"#ff0000\">Alicorn/Nightmare: 0</font>");
-	//AlicornKin
-	if (player.alicornkinScore() >= 12) outputText("\n<font color=\"#0000a0\">Alicornkin/Nightmarekin: " + player.alicornkinScore() + " (+" + (45 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, +" + (75 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.alicornkinScore() >= 1) outputText("\n<font color=\"#008000\">Alicornkin/Nightmarekin: " + player.alicornkinScore() + "</font>");
-	else if (player.alicornkinScore() < 1) outputText("\n<font color=\"#ff0000\">Alicornkin/Nightmarekin: 0</font>");
-	//Alraune
-	if (player.alrauneScore() >= 10) outputText("\n<font color=\"#0000a0\">Alraune: " + player.alrauneScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.alrauneScore() >= 1) outputText("\n<font color=\"#008000\">Alraune: " + player.alrauneScore() + "</font>");
-	else if (player.alrauneScore() < 1) outputText("\n<font color=\"#ff0000\">Alraune: 0</font>");
-	//Avian
-	if (player.avianScore() >= 9) outputText("\n<font color=\"#0000a0\">Avian-morph: " + player.avianScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (75 * (1 + player.newGamePlusMod())) + " max Spe, +" + (30 * (1 + player.newGamePlusMod())) + " max Intb)</font>");
-	else if (player.avianScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Avian-morph: " + player.avianScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (15 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.avianScore() >= 1) outputText("\n<font color=\"#008000\">Half Avian-morph: " + player.avianScore() + "</font>");
-	else if (player.avianScore() < 1) outputText("\n<font color=\"#ff0000\">Half Avian-morph: 0</font>");
-	//Bat
-	if (player.batScore() >= 10) outputText("\n<font color=\"#0000a0\">Batgirl/Batboy: " + player.batScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Str, +" + (35 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max Int, +" + (45 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.batScore() >= 6) outputText("\n<font color=\"#0000a0\">Half Batgirl/Batboy: " + player.batScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (30 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.batScore() >= 1) outputText("\n<font color=\"#008000\">Half Batgirl/Batboy: " + player.batScore() + "</font>");
-	else if (player.batScore() < 1) outputText("\n<font color=\"#ff0000\">Half Batgirl/Batboy: 0</font>");
-	//Bear/Panda
-	if (player.bearpandaScore() >= 10) outputText("\n<font color=\"#0000a0\">Bear/Panda-morph: " + player.bearpandaScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.bearpandaScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Bear/Panda-morph: " + player.bearpandaScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (5 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.bearpandaScore() >= 1) outputText("\n<font color=\"#008000\">Half Bear/Panda-morph: " + player.bearpandaScore() + "</font>");
-	else if (player.bearpandaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Bear/Panda-morph: 0</font>");
-	//Bee
-	if (player.beeScore() >= 9) outputText("\n<font color=\"#0000a0\">Bee-morph: " + player.beeScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.beeScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Bee-morph: " + player.beeScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (15 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.beeScore() >= 1) outputText("\n<font color=\"#008000\">Half Bee-morph: " + player.beeScore() + "</font>");
-	else if (player.beeScore() < 1) outputText("\n<font color=\"#ff0000\">Half Bee-morph: 0</font>");
-	//Bunny
-	if (player.bunnyScore() >= 10) outputText("\n<font color=\"#0000a0\">Bunny-morph: " + player.bunnyScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (90 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.bunnyScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Bunny-morph: " + player.bunnyScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Str, -" + (5 * (1 + player.newGamePlusMod())) + " max Tou, +" + (55 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.bunnyScore() >= 1) outputText("\n<font color=\"#008000\">Half Bunny-morph: " + player.bunnyScore() + "</font>");
-	else if (player.bunnyScore() < 1) outputText("\n<font color=\"#ff0000\">Half Bunny-morph: 0</font>");
-	//Cat
-	if (player.catScore() >= 8) {
-		outputText("\n<font color=\"#0000a0\">Cat-girl/Cat-boy/Cat Morph: " + player.catScore() + " (");
-		if (player.findPerk(PerkLib.Flexibility) > 0) outputText("+" + (70 * (1 + player.newGamePlusMod())) + " ");
-		else outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Spe, +" + (60 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	}
-	else if (player.catScore() >= 4) {
-		outputText("\n<font color=\"#0000a0\">Half Cat-morph: " + player.catScore() + " (");
-		if (player.findPerk(PerkLib.Flexibility) > 0) {
-			if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
-			else outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
+	public function RacialScores():void {
+		clearOutput();
+		outputText("<b>Current racial scores (and bonuses to stats if applicable):</b>\n");
+		//Alicorn
+		if (player.alicornScore() >= 24) outputText("\n<font color=\"#0000a0\">True Alicorn/True Nightmare: " + player.alicornScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, +" + (140 * (1 + player.newGamePlusMod())) + " max Spe, +" + (85 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.alicornScore() >= 12) outputText("\n<font color=\"#0000a0\">Alicorn/Nightmare: " + player.alicornScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (75 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.alicornScore() >= 8) outputText("\n<font color=\"#0000a0\"> Half Alicorn/Half Nightmare: " + player.alicornScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (55 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.alicornScore() >= 1) outputText("\n<font color=\"#008000\">Alicorn/Nightmare: " + player.alicornScore() + "</font>");
+		else if (player.alicornScore() < 1) outputText("\n<font color=\"#ff0000\">Alicorn/Nightmare: 0</font>");
+		//AlicornKin
+		if (player.alicornkinScore() >= 12) outputText("\n<font color=\"#0000a0\">Alicornkin/Nightmarekin: " + player.alicornkinScore() + " (+" + (45 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, +" + (75 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.alicornkinScore() >= 1) outputText("\n<font color=\"#008000\">Alicornkin/Nightmarekin: " + player.alicornkinScore() + "</font>");
+		else if (player.alicornkinScore() < 1) outputText("\n<font color=\"#ff0000\">Alicornkin/Nightmarekin: 0</font>");
+		//Alraune
+		if(player.lowerBody != LowerBody.FLOWER_LILIRAUNE) {
+			if (player.alrauneScore() >= 17) outputText("\n<font color=\"#0000a0\">Greater Alraune: " + player.alrauneScore() + " (+" + (115 * (1 + player.newGamePlusMod())) + " max Tou, -" + (60 * (1 + player.newGamePlusMod())) + " max Spe, +" + (200 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+			else if (player.alrauneScore() >= 13) outputText("\n<font color=\"#0000a0\">Alraune: " + player.alrauneScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (145 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+			else if (player.alrauneScore() >= 1) outputText("\n<font color=\"#008000\">Alraune: " + player.alrauneScore() + "</font>");
+			else if (player.alrauneScore() < 1) outputText("\n<font color=\"#ff0000\">Alraune: 0</font>");
+		} else {
+		//Liliraune
+			if (player.alrauneScore() >= 17) outputText("\n<font color=\"#0000a0\">Greater Liliraune: " + player.alrauneScore() + " (+" + (115 * (1 + player.newGamePlusMod())) + " max Tou, -" + (60 * (1 + player.newGamePlusMod())) + " max Spe, +" + (200 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+			else if (player.alrauneScore() >= 13) outputText("\n<font color=\"#0000a0\">Liliraune: " + player.alrauneScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (145 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+			else if (player.alrauneScore() >= 1) outputText("\n<font color=\"#008000\">Liliraune: " + player.alrauneScore() + "</font>");
+			else if (player.alrauneScore() < 1) outputText("\n<font color=\"#ff0000\">Liliraune: 0</font>");
 		}
-		else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	}
-	else if (player.catScore() >= 1) outputText("\n<font color=\"#008000\">Half Cat-morph: " + player.catScore() + "</font>");
-	else if (player.catScore() < 1) outputText("\n<font color=\"#ff0000\">Half Cat-morph: 0</font>");
-	//Cave Wyrm
-	if (player.cavewyrmScore() >= 10) outputText("\n<font color=\"#0000a0\">Cave Wyrm: " + player.cavewyrmScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, -" + (30 * (1 + player.newGamePlusMod())) + " max Wis, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.cavewyrmScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Cave Wyrm: " + player.cavewyrmScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (35 * (1 + player.newGamePlusMod())) + " max Tou, -" + (15 * (1 + player.newGamePlusMod())) + " max Wis, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.cavewyrmScore() >= 1) outputText("\n<font color=\"#008000\">Half Cave Wyrm: " + player.cavewyrmScore() + "</font>");
-	else if (player.cavewyrmScore() < 1) outputText("\n<font color=\"#ff0000\">Half Cave Wyrm: 0</font>");
-	//Centaur
-	if (player.centaurScore() >= 8) outputText("\n<font color=\"#0000a0\">Centaur: " + player.centaurScore() + " (+" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-	else if (player.centaurScore() >= 1) outputText("\n<font color=\"#008000\">Centaur: " + player.centaurScore() + "</font>");
-	else if (player.centaurScore() < 1) outputText("\n<font color=\"#ff0000\">Centaur: 0</font>");
-	//Centipede
-	if (player.centipedeScore() >= 8) outputText("\n<font color=\"#0000a0\">Centipede: " + player.centipedeScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
-	if (player.centipedeScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Centipede:" + player.centipedeScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
-	else if (player.centipedeScore() >= 1) outputText("\n<font color=\"#008000\">Centipede: " + player.centipedeScore() + "</font>");
-	else if (player.centipedeScore() < 1) outputText("\n<font color=\"#ff0000\">Centipede: 0</font>");
-	//Cheshire cat
-	if (player.cheshireScore() >= 11) {
-		outputText("\n<font color=\"#0000a0\">Cheshire cat: " + player.cheshireScore() + " (");
-		if (player.findPerk(PerkLib.Flexibility) > 0) {
-			if (player.findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) outputText("+" + (90 * (1 + player.newGamePlusMod())) + " ");
-			else if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (80 * (1 + player.newGamePlusMod())) + " ");
+		//Avian
+		if (player.avianScore() >= 9) outputText("\n<font color=\"#0000a0\">Avian-morph: " + player.avianScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (75 * (1 + player.newGamePlusMod())) + " max Spe, +" + (30 * (1 + player.newGamePlusMod())) + " max Intb)</font>");
+		else if (player.avianScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Avian-morph: " + player.avianScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (15 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.avianScore() >= 1) outputText("\n<font color=\"#008000\">Half Avian-morph: " + player.avianScore() + "</font>");
+		else if (player.avianScore() < 1) outputText("\n<font color=\"#ff0000\">Half Avian-morph: 0</font>");
+		//Bat
+		if (player.batScore() >= 10) outputText("\n<font color=\"#0000a0\">Batgirl/Batboy: " + player.batScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Str, +" + (35 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max Int, +" + (45 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.batScore() >= 6) outputText("\n<font color=\"#0000a0\">Half Batgirl/Batboy: " + player.batScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (30 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.batScore() >= 1) outputText("\n<font color=\"#008000\">Half Batgirl/Batboy: " + player.batScore() + "</font>");
+		else if (player.batScore() < 1) outputText("\n<font color=\"#ff0000\">Half Batgirl/Batboy: 0</font>");
+		//Bear/Panda
+		if (player.bearpandaScore() >= 10) outputText("\n<font color=\"#0000a0\">Bear/Panda-morph: " + player.bearpandaScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.bearpandaScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Bear/Panda-morph: " + player.bearpandaScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (5 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.bearpandaScore() >= 1) outputText("\n<font color=\"#008000\">Half Bear/Panda-morph: " + player.bearpandaScore() + "</font>");
+		else if (player.bearpandaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Bear/Panda-morph: 0</font>");
+		//Bee
+		if (player.beeScore() >= 9) outputText("\n<font color=\"#0000a0\">Bee-morph: " + player.beeScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.beeScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Bee-morph: " + player.beeScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (15 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.beeScore() >= 1) outputText("\n<font color=\"#008000\">Half Bee-morph: " + player.beeScore() + "</font>");
+		else if (player.beeScore() < 1) outputText("\n<font color=\"#ff0000\">Half Bee-morph: 0</font>");
+		//Bunny
+		if (player.bunnyScore() >= 10) outputText("\n<font color=\"#0000a0\">Bunny-morph: " + player.bunnyScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (90 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.bunnyScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Bunny-morph: " + player.bunnyScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Str, -" + (5 * (1 + player.newGamePlusMod())) + " max Tou, +" + (55 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.bunnyScore() >= 1) outputText("\n<font color=\"#008000\">Half Bunny-morph: " + player.bunnyScore() + "</font>");
+		else if (player.bunnyScore() < 1) outputText("\n<font color=\"#ff0000\">Half Bunny-morph: 0</font>");
+		//Cancer
+		if (player.cancerScore() >= 20) outputText("\n<font color=\"#0000a0\">Cancer: " + player.cancerScore() + " (+" + (125 * (1 + player.newGamePlusMod())) + " max Str, +" + (115 * (1 + player.newGamePlusMod())) + " max Tou, +" + (105 * (1 + player.newGamePlusMod())) + " max Spe, -" + (30 * (1 + player.newGamePlusMod())) + " max Int, -" + (15 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+		else if (player.cancerScore() >= 13) outputText("\n<font color=\"#0000a0\">Lesser Cancer: " + player.cancerScore() + " (+" + (105 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Tou, +" + (55 * (1 + player.newGamePlusMod())) + " max Spe, -" + (30 * (1 + player.newGamePlusMod())) + " max Int, -" + (15 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+		else if (player.cancerScore() >= 8) outputText("\n<font color=\"#0000a0\">Lesser Half Cancer: " + player.cancerScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (55 * (1 + player.newGamePlusMod())) + " max Tou, +" + (20* (1 + player.newGamePlusMod())) + " max Spe, -" + (15 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+		else if (player.cancerScore() >= 1) outputText("\n<font color=\"#008000\">Lesser Half Cancer: " + player.cancerScore() + "</font>");
+		else if (player.cancerScore() < 1) outputText("\n<font color=\"#ff0000\">Lesser Half Cancer: 0</font>");
+		//Cat
+		if (player.catScore() >= 8) {
+			outputText("\n<font color=\"#0000a0\">Cat-girl/Cat-boy/Cat Morph: " + player.catScore() + " (");
+			if (player.findPerk(PerkLib.Flexibility) > 0) outputText("+" + (70 * (1 + player.newGamePlusMod())) + " ");
+			else outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
+			outputText("max Spe, +" + (60 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		} else if (player.catScore() >= 4) {
+			outputText("\n<font color=\"#0000a0\">Half Cat-morph: " + player.catScore() + " (");
+			if (player.findPerk(PerkLib.Flexibility) > 0) {
+				if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
+				else outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
+			} else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
+			outputText("max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		} else if (player.catScore() >= 1) outputText("\n<font color=\"#008000\">Half Cat-morph: " + player.catScore() + "</font>");
+		else if (player.catScore() < 1) outputText("\n<font color=\"#ff0000\">Half Cat-morph: 0</font>");
+		//Cave Wyrm
+		if (player.cavewyrmScore() >= 10) outputText("\n<font color=\"#0000a0\">Cave Wyrm: " + player.cavewyrmScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, -" + (30 * (1 + player.newGamePlusMod())) + " max Wis, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.cavewyrmScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Cave Wyrm: " + player.cavewyrmScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (35 * (1 + player.newGamePlusMod())) + " max Tou, -" + (15 * (1 + player.newGamePlusMod())) + " max Wis, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.cavewyrmScore() >= 1) outputText("\n<font color=\"#008000\">Half Cave Wyrm: " + player.cavewyrmScore() + "</font>");
+		else if (player.cavewyrmScore() < 1) outputText("\n<font color=\"#ff0000\">Half Cave Wyrm: 0</font>");
+		//Centaur
+		if (player.centaurScore() >= 8) outputText("\n<font color=\"#0000a0\">Centaur: " + player.centaurScore() + " (+" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		else if (player.centaurScore() >= 1) outputText("\n<font color=\"#008000\">Centaur: " + player.centaurScore() + "</font>");
+		else if (player.centaurScore() < 1) outputText("\n<font color=\"#ff0000\">Centaur: 0</font>");
+		//Centipede
+		if (player.centipedeScore() >= 8) outputText("\n<font color=\"#0000a0\">Centipede: " + player.centipedeScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
+		else if (player.centipedeScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Centipede:" + player.centipedeScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
+		else if (player.centipedeScore() >= 1) outputText("\n<font color=\"#008000\">Half Centipede: " + player.centipedeScore() + "</font>");
+		else if (player.centipedeScore() < 1) outputText("\n<font color=\"#ff0000\">Half Centipede: 0</font>");
+		//Cheshire cat
+		if (player.cheshireScore() >= 11) {
+			outputText("\n<font color=\"#0000a0\">Cheshire cat: " + player.cheshireScore() + " (");
+			if (player.findPerk(PerkLib.Flexibility) > 0) {
+				if (player.findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) outputText("+" + (90 * (1 + player.newGamePlusMod())) + " ");
+				else if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (80 * (1 + player.newGamePlusMod())) + " ");
+				else outputText("+" + (70 * (1 + player.newGamePlusMod())) + " ");
+			} else outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
+			outputText("max Spe, +" + (80 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Sens)</font>");
+		} else if (player.cheshireScore() >= 1) outputText("\n<font color=\"#008000\">Cheshire cat: " + player.cheshireScore() + "</font>");
+		else if (player.cheshireScore() < 1) outputText("\n<font color=\"#ff0000\">Cheshire cat: 0</font>");
+		//CHIMERA
+		outputText("\nCHIMERA: " + player.chimeraScore());
+		//Couatl
+		if (player.couatlScore() >= 11) {
+			outputText("\n<font color=\"#0000a0\">Couatl: " + player.couatlScore() + " (");
+			if (player.isNaga()) outputText("+" + (55 * (1 + player.newGamePlusMod())) + " ");
+			else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
+			outputText("max Str, +" + (25 * (1 + player.newGamePlusMod())) + " max Tou, ");
+			if (player.isNaga()) outputText("+" + (115 * (1 + player.newGamePlusMod())) + " ");
+			else outputText("+" + (100 * (1 + player.newGamePlusMod())) + " ");
+			outputText("max Spe)</font>");//, +" + (50 * (1 + player.newGamePlusMod())) + " max HP
+		} else if (player.couatlScore() >= 1 && player.couatlScore() < 11) outputText("\n<font color=\"#008000\">Couatl: " + player.couatlScore() + "</font>");
+		else if (player.couatlScore() < 1) outputText("\n<font color=\"#ff0000\">Couatl: 0</font>");
+		//Cow
+		if (player.cowScore() >= 10) outputText("\n<font color=\"#0000a0\">Cow-morph: " + player.cowScore() + " (+" + (120 * (1 + player.newGamePlusMod())) + " max Str, +" + (45 * (1 + player.newGamePlusMod())) + " max Tou, -" + (40 * (1 + player.newGamePlusMod())) + " max Spe, -" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (45 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		else if (player.cowScore() >= 4 && player.cowScore() < 9) outputText("\n<font color=\"#0000a0\">Half Cow-morph: " + player.cowScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (10 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int, +" + (20 * (1 + player.newGamePlusMod())) + " max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		else if (player.cowScore() >= 1 && player.cowScore() < 4) outputText("\n<font color=\"#008000\">Half Cow-morph: " + player.cowScore() + "</font>");
+		else if (player.cowScore() < 1) outputText("\n<font color=\"#ff0000\">Half Cow-morph: 0</font>");
+		//Dark Goo
+		if (player.darkgooScore() >= 17) outputText("\n<font color=\"#0000a0\">Dark Slime Queen: " + player.darkgooScore() + " (+" + (115 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (45 * (1 + player.newGamePlusMod())) + " max Int, +" + (145 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.darkgooScore() >= 13) outputText("\n<font color=\"#0000a0\">Dark Slime: " + player.darkgooScore() + " (+" + (90 * (1 + player.newGamePlusMod())) + " max Tou, -" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (45 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.darkgooScore() >= 6) outputText("\n<font color=\"#0000a0\">Half Dark Slime: " + player.darkgooScore() + " (+" + (45 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Spe, +" + (15 * (1 + player.newGamePlusMod())) + " max Int, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.darkgooScore() >= 1) outputText("\n<font color=\"#008000\">Half Dark Slime: " + player.darkgooScore() + "</font>");
+		else if (player.darkgooScore() < 1) outputText("\n<font color=\"#ff0000\">Half Dark Slime: 0</font>");
+		//Deer
+		if (player.deerScore() >= 4) outputText("\n<font color=\"#0000a0\">Deer-morph: " + player.deerScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
+		else if (player.deerScore() >= 1 && player.deerScore() < 4) outputText("\n<font color=\"#008000\">Deer-morph: " + player.deerScore() + "</font>");
+		else if (player.deerScore() < 1) outputText("\n<font color=\"#ff0000\">Deer-morph: 0</font>");
+		//Demon
+		if (player.demonScore() >= 16 && player.hasPerk(PerkLib.Phylactery)) outputText("\n<font color=\"#0000a0\">Succub/Incubus: " + player.demonScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib, +" + (100 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		else if (player.demonScore() >= 11) outputText("\n<font color=\"#0000a0\">Succubi-kin/Incubi-kin: " + player.demonScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib, +" + (100 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		else if (player.demonScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Succubus/Incubus: " + player.demonScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Spe, +" + (15 * (1 + player.newGamePlusMod())) + " max Int, +" + (45 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		else if (player.demonScore() >= 1) outputText("\n<font color=\"#008000\">Half Succubus/Incubus: " + player.demonScore() + "</font>");
+		else if (player.demonScore() < 1) outputText("\n<font color=\"#ff0000\">Half Succubus/Incubus: 0</font>");
+		//Devil
+		if (player.devilkinScore() >= 16 && player.hasPerk(PerkLib.Phylactery)) {
+			if (player.devilkinScore() >= 21) {
+				outputText("\n<font color=\"#0000a0\">Archdevil: " + player.devilkinScore() + " (+" + (105 * (1 + player.newGamePlusMod())) + " max Str, +" + (150 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib");
+				outputText(", +" + (40 * (1 + player.newGamePlusMod())) + " min Sens, +" + (320 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+			} else {
+				outputText("\n<font color=\"#0000a0\">Devil: " + player.devilkinScore() + " (+" + (95 * (1 + player.newGamePlusMod())) + " max Str, +" + (85 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib");
+				outputText(", +" + (40 * (1 + player.newGamePlusMod())) + " min Sens, +" + (230 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+			}
+		} else if (player.devilkinScore() >= 11) {
+			outputText("\n<font color=\"#0000a0\">Devilkin: " + player.devilkinScore() + " (+" + (65 * (1 + player.newGamePlusMod())) + " max Str, -" + (20 * (1 + player.newGamePlusMod())) + " max Spe, +" + (60 * (1 + player.newGamePlusMod())) + " max Int, +" + (75 * (1 + player.newGamePlusMod())) + " max Lib");
+			outputText(", +" + (25 * (1 + player.newGamePlusMod())) + " min Sens, +" + (150 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		} else if (player.devilkinScore() >= 7) {
+			outputText("\n<font color=\"#0000a0\">Half fiend: " + player.devilkinScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib");
+			outputText(", +" + (10 * (1 + player.newGamePlusMod())) + " min Sens, +" + (75 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		} else if (player.devilkinScore() >= 1) outputText("\n<font color=\"#008000\">Half fiend: " + player.devilkinScore() + "</font>");
+		else if (player.devilkinScore() < 1) outputText("\n<font color=\"#ff0000\">Half fiend: 0</font>");
+		//Displacer beast
+		if (player.displacerbeastScore() >= 14) {
+			outputText("\n<font color=\"#0000a0\">Displacer Beast: " + player.displacerbeastScore() + " (+" + (95 * (1 + player.newGamePlusMod())) + " max Str, ");
+			if (player.findPerk(PerkLib.Flexibility) > 0) {
+				if (player.findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) outputText("+" + (130 * (1 + player.newGamePlusMod())) + " ");
+				if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (120 * (1 + player.newGamePlusMod())) + " ");
+				else outputText("+" + (110 * (1 + player.newGamePlusMod())) + " ");
+			} else outputText("+" + (100 * (1 + player.newGamePlusMod())) + " ");
+			outputText("max Spe, -" + (25 * (1 + player.newGamePlusMod())) + " max Int, -" + (20 * (1 + player.newGamePlusMod())) + " max Wis, +" + (60 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		} else if (player.displacerbeastScore() >= 1) outputText("\n<font color=\"#008000\">Displacer Beast: " + player.displacerbeastScore() + "</font>");
+		else if (player.displacerbeastScore() < 1) outputText("\n<font color=\"#ff0000\">Displacer Beast: 0</font>");
+		//Dog
+		if (player.dogScore() >= 4) outputText("\n<font color=\"#0000a0\">Dog-morph: " + player.dogScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Spe, -" + (5 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.dogScore() >= 1 && player.dogScore() < 4) outputText("\n<font color=\"#008000\">Dog-morph: " + player.dogScore() + "</font>");
+		else if (player.dogScore() < 1) outputText("\n<font color=\"#ff0000\">Dog-morph: 0</font>");
+		//Dragon
+		if (player.dragonScore() >= 28) {
+			outputText("\n<font color=\"#0000a0\">Ancient Dragon: " + player.dragonScore() + " (+");
+			if (player.findPerk(PerkLib.DraconicLungsFinalForm) >= 0) outputText((105 * (1 + player.newGamePlusMod())) + " max Str, +" + (110 * (1 + player.newGamePlusMod())) + " max Tou, +" + (55 * (1 + player.newGamePlusMod())));
+			else if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) outputText((100 * (1 + player.newGamePlusMod())) + " max Str, +" + (105 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())));
+			else if (player.findPerk(PerkLib.DraconicLungs) >= 0) outputText((100 * (1 + player.newGamePlusMod())) + " max Str, +" + (100 * (1 + player.newGamePlusMod())) + " max Tou, +" + (45 * (1 + player.newGamePlusMod())));
+			else outputText((100 * (1 + player.newGamePlusMod())) + " max Str, +" + (100 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())));
+			outputText(" max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max Int, +" + (50 * (1 + player.newGamePlusMod())) + " max Wis, +" + (20 * (1 + player.newGamePlusMod())) + " max Lib, +" + (400 * (1 + player.newGamePlusMod())) + " max HP, +" + (10 * (1 + player.newGamePlusMod())) + " Armor, +20% max Soulforce)</font>");
+		} else if (player.dragonScore() >= 20) {
+			outputText("\n<font color=\"#0000a0\">Elder Dragon: " + player.dragonScore() + " (+");
+			if (player.findPerk(PerkLib.DraconicLungsFinalForm) >= 0) outputText((100 * (1 + player.newGamePlusMod())) + " max Str, +" + (105 * (1 + player.newGamePlusMod())) + " max Tou, +" + (35 * (1 + player.newGamePlusMod())));
+			else if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) outputText((95 * (1 + player.newGamePlusMod())) + " max Str, +" + (100 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())));
+			else if (player.findPerk(PerkLib.DraconicLungs) >= 0) outputText((95 * (1 + player.newGamePlusMod())) + " max Str, +" + (95 * (1 + player.newGamePlusMod())) + " max Tou, +" + (25 * (1 + player.newGamePlusMod())));
+			else outputText((95 * (1 + player.newGamePlusMod())) + " max Str, +" + (95 * (1 + player.newGamePlusMod())) + " max Tou, +" + (20 * (1 + player.newGamePlusMod())));
+			outputText(" max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Wis, +" + (10 * (1 + player.newGamePlusMod())) + " max Lib, +" + (300 * (1 + player.newGamePlusMod())) + " max HP, +" + (4 * (1 + player.newGamePlusMod())) + " Armor, +10% max Soulforce)</font>");
+		} else if (player.dragonScore() >= 10) {
+			outputText("\n<font color=\"#0000a0\">Dragon: " + player.dragonScore() + " (+");
+			if (player.findPerk(PerkLib.DraconicLungsFinalForm) >= 0) outputText((55 * (1 + player.newGamePlusMod())) + " max Str, +" + (50 * (1 + player.newGamePlusMod())) + " max Tou, +" + (25 * (1 + player.newGamePlusMod())));
+			else if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) outputText((50 * (1 + player.newGamePlusMod())) + " max Str, +" + (45 * (1 + player.newGamePlusMod())) + " max Tou, +" + (20 * (1 + player.newGamePlusMod())));
+			else if (player.findPerk(PerkLib.DraconicLungs) >= 0) outputText((50 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (15 * (1 + player.newGamePlusMod())));
+			else outputText((50 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (10 * (1 + player.newGamePlusMod())));
+			outputText(" max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (20 * (1 + player.newGamePlusMod())) + " max Wis, +" + (10 * (1 + player.newGamePlusMod())) + " max Lib, +" + (200 * (1 + player.newGamePlusMod())) + " max HP, +" + (1 * (1 + player.newGamePlusMod())) + " Armor)</font>");
+		} else if (player.dragonScore() >= 4) outputText("\n<font color=\"#0000a0\">Half-Dragon: " + player.dragonScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (15 * (1 + player.newGamePlusMod())) + " max Tou, +" + (15 * (1 + player.newGamePlusMod())) + " max Int, +" + (15 * (1 + player.newGamePlusMod())) + " max Wis, +" + (100 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		else if (player.dragonScore() >= 1) outputText("\n<font color=\"#008000\">Half-Dragon: " + player.dragonScore() + "</font>");
+		else if (player.dragonScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Dragon: 0</font>");
+		//Dragonne
+		outputText("\nDragonne: " + player.dragonneScore());
+		//Easter Bunny
+		if (player.easterbunnyScore() >= 1) {
+			if (player.hasPerk(PerkLib.EasterBunnyBalls)) {
+				if (player.easterbunnyScore() >= 15) outputText("\n<font color=\"#0000a0\">True Easter Bunny: " + player.easterbunnyScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (105 * (1 + player.newGamePlusMod())) + " max Spe, +" + (150 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+				else if (player.easterbunnyScore() >= 12) outputText("\n<font color=\"#0000a0\">Easter Bunny: " + player.easterbunnyScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (120 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+				else if (player.easterbunnyScore() >= 1) outputText("\n<font color=\"#008000\">Easter Bunny: " + player.easterbunnyScore() + "</font>");
+			} else outputText("\n<font color=\"#ff0000\">Easter Bunny (Require Easter bunny balls): " + player.easterbunnyScore() + "</font>");
+		} else if (player.easterbunnyScore() < 1) outputText("\n<font color=\"#ff0000\">Easter Bunny (Require Easter bunny balls): 0</font>");
+		//Echidna
+		outputText("\nEchidna: " + player.echidnaScore());
+		//Elf
+		if (player.elfScore() >= 11) {
+			outputText("\n<font color=\"#0000a0\">Elf: " + player.elfScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Str, -" + (15 * (1 + player.newGamePlusMod())) + " max Tou, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (80 * (1 + player.newGamePlusMod())) + " max Int, +" + (60 * (1 + player.newGamePlusMod())) + " max Wis, ");
+			outputText("+" + (30 * (1 + player.newGamePlusMod())) + " max Sens, +" + (30 * (1 + player.newGamePlusMod())) + " min Sens, +20% max Mana)</font>");
+		} else if (player.elfScore() >= 5) {
+			outputText("\n<font color=\"#0000a0\">Half Elf: " + player.elfScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, +" + (30 * (1 + player.newGamePlusMod())) + " max Wis, ");
+			outputText("+" + (15 * (1 + player.newGamePlusMod())) + " max Sens, +" + (15 * (1 + player.newGamePlusMod())) + " min Sens, +10% max Mana)</font>");
+		} else if (player.elfScore() >= 1 && player.elfScore() < 5) outputText("\n<font color=\"#008000\">Half Elf: " + player.elfScore() + "</font>");
+		else if (player.elfScore() < 1) outputText("\n<font color=\"#ff0000\">Half Elf: 0</font>");
+		//Ferret
+		outputText("\nFerret-morph: " + player.ferretScore());
+		//Fire snail
+		if (player.firesnailScore() >= 15) outputText("\n<font color=\"#0000a0\">Fire Snail: " + player.firesnailScore() + " (+" + (65 * (1 + player.newGamePlusMod())) + " max Str, +" + (140 * (1 + player.newGamePlusMod())) + " max Tou, -" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " max Sens, +" + (50 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
+		else if (player.firesnailScore() >= 1 && player.firesnailScore() < 15) outputText("\n<font color=\"#008000\">Fire Snail: " + player.firesnailScore() + "</font>");
+		else if (player.firesnailScore() < 1) outputText("\n<font color=\"#ff0000\">Fire Snail: 0</font>");
+		//Fox
+		if (player.foxScore() >= 7) outputText("\n<font color=\"#0000a0\">Fox-morph: " + player.foxScore() + " (-" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (55 * (1 + player.newGamePlusMod())) + " max Int, +" + (20 * (1 + player.newGamePlusMod())) + " max Fatigue)</font>");
+		else if (player.foxScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Fox: " + player.foxScore() + " (-" + (5 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (25 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.foxScore() >= 1) outputText("\n<font color=\"#008000\">Half Fox: " + player.foxScore() + "</font>");
+		else if (player.foxScore() < 1) outputText("\n<font color=\"#ff0000\">Half Fox: 0</font>");
+		//Fairy
+		if (player.fairyScore() >= 18) outputText("\n<font color=\"#0000a0\">Greater Fairy: " + player.fairyScore() + " (-" + (25 * (1 + player.newGamePlusMod())) + " max Str, -" + (25 * (1 + player.newGamePlusMod())) + " max Tou, +" + (140 * (1 + player.newGamePlusMod())) + " max Spe, +" + (200 * (1 + player.newGamePlusMod())) + " max Int, +" + (20 * (1 + player.newGamePlusMod())) + " max max Sens)</font>");
+		else if (player.fairyScore() >= 1) outputText("\n<font color=\"#008000\">Greater Fairy: " + player.fairyScore() + "</font>");
+		else if (player.fairyScore() < 1) outputText("\n<font color=\"#ff0000\">Greater Fairy: 0</font>");
+		//Frost Wyrm
+		if (player.frostWyrmScore() >= 20) outputText("\n<font color=\"#0000a0\">Greater Frost Wyrm: " + player.frostWyrmScore() + " (+" + (135 * (1 + player.newGamePlusMod())) + " max Str, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (115 * (1 + player.newGamePlusMod())) + " max Tou, -" + (90 * (1 + player.newGamePlusMod())) + " max Int, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.frostWyrmScore() >= 18) outputText("\n<font color=\"#0000a0\">Frost Wyrm: " + player.frostWyrmScore() + " (+" + (125 * (1 + player.newGamePlusMod())) + " max Str, +" + (75 * (1 + player.newGamePlusMod())) + " max Spe, +" + (110 * (1 + player.newGamePlusMod())) + " max Tou, -" + (90 * (1 + player.newGamePlusMod())) + " max Int, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.frostWyrmScore() >= 10) outputText("\n<font color=\"#0000a0\">Half Frost Wyrm: " + player.frostWyrmScore() + " (+" + (90 * (1 + player.newGamePlusMod())) + " max Str, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, +" + (60 * (1 + player.newGamePlusMod())) + " max Tou, -" + (90 * (1 + player.newGamePlusMod())) + " max Int, +" + (30 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.frostWyrmScore() >= 1) outputText("\n<font color=\"#008000\">Frost Wyrm: " + player.frostWyrmScore() + "</font>");
+		else if (player.frostWyrmScore() < 1) outputText("\n<font color=\"#ff0000\">Frost Wyrm: 0</font>");
+		//GARGOYLE
+		if (player.gargoyleScore() >= 20 && player.hasPerk(PerkLib.GargoylePure)) {
+			outputText("\n<font color=\"#0000a0\">PURE GARGOYLE: " + player.gargoyleScore() + " (+");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText((165 * (1 + player.newGamePlusMod())) + " max Str, +" + (250 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (30 * (1 + player.newGamePlusMod())));
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText((50 * (1 + player.newGamePlusMod())) + " max Str, +" + (250 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (165 * (1 + player.newGamePlusMod())));
+			outputText(" max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Wis, -" + (10 * (1 + player.newGamePlusMod())) + " max Lib, -" + (10 * (1 + player.newGamePlusMod())) + " max Sens, +");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText((60 * (1 + player.newGamePlusMod())) + " Armor, +" + (10 + (1 * player.newGamePlusMod())) + " spell resistance");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText((10 * (1 + player.newGamePlusMod())) + " Armor, +" + (60 + (1 * player.newGamePlusMod())) + " spell resistance");
+			outputText(")</font>");
+		} else if (player.gargoyleScore() >= 20 && player.hasPerk(PerkLib.GargoyleCorrupted)) {
+			outputText("\n<font color=\"#0000a0\">CORRUPTED GARGOYLE: " + player.gargoyleScore() + " (+");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText((165 * (1 + player.newGamePlusMod())) + " max Str, +" + (250 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (30 * (1 + player.newGamePlusMod())));
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText((50 * (1 + player.newGamePlusMod())) + " max Str, +" + (250 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (165 * (1 + player.newGamePlusMod())));
+			outputText(" max Int, -" + (10 * (1 + player.newGamePlusMod())) + " max Wis, +" + (80 * (1 + player.newGamePlusMod())) + " max Lib, +15 min Sens, +");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText((60 * (1 + player.newGamePlusMod())) + " Armor, +" + (10 + (1 * player.newGamePlusMod())) + " spell resistance");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText((10 * (1 + player.newGamePlusMod())) + " Armor, +" + (60 + (1 * player.newGamePlusMod())) + " spell resistance");
+			outputText(")</font>");
+		} else if (player.gargoyleScore() >= 1) outputText("\n<font color=\"#008000\">GARGOYLE: " + player.gargoyleScore() + "</font>");
+		else if (player.gargoyleScore() < 1) outputText("\n<font color=\"#ff0000\">GARGOYLE: 0</font>");
+		//Goblin
+		if (player.goblinScore() >= 10) outputText("\n<font color=\"#0000a0\">Goblin: " + player.goblinScore() + " (-" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (75 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.goblinScore() >= 1) outputText("\n<font color=\"#008000\">Goblin: " + player.goblinScore() + "</font>");
+		else if (player.goblinScore() < 1) outputText("\n<font color=\"#ff0000\">Goblin: 0</font>");
+		//Gremlin
+		if (player.gremlinScore() >= 18) outputText("\n<font color=\"#0000a0\">High Gremlin: " + player.gremlinScore() + " (-" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (135 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib, +" + (20 * (1 + player.newGamePlusMod())) + " min sens)</font>");
+		if (player.gremlinScore() >= 15) outputText("\n<font color=\"#0000a0\">Gremlin: " + player.gremlinScore() + " (-" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (75 * (1 + player.newGamePlusMod())) + " max Spe, +" + (120 * (1 + player.newGamePlusMod())) + " max Int, +" + (115 * (1 + player.newGamePlusMod())) + " max Lib, +" + (20 * (1 + player.newGamePlusMod())) + " min sens)</font>");
+		else if (player.gremlinScore() >= 1) outputText("\n<font color=\"#008000\">Gremlin: " + player.gremlinScore() + "</font>");
+		else if (player.gremlinScore() < 1) outputText("\n<font color=\"#ff0000\">Gremlin: 0</font>");
+		//Goo
+		if (player.gooScore() >= 15) outputText("\n<font color=\"#0000a0\">Slime Queen: " + player.gooScore() + " (+" + (115 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (160 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.gooScore() >= 11) outputText("\n<font color=\"#0000a0\">Slime: " + player.gooScore() + " (+" + (105 * (1 + player.newGamePlusMod())) + " max Tou, -" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.gooScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Slime: " + player.gooScore() + " (+" + (45 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.gooScore() >= 1) outputText("\n<font color=\"#008000\">Half Slime: " + player.gooScore() + "</font>");
+		else if (player.gooScore() < 1) outputText("\n<font color=\"#ff0000\">Half Slime: 0</font>");
+		//Gorgon
+		if (player.gorgonScore() >= 11) {
+			outputText("\n<font color=\"#0000a0\">Gorgon: " + player.gorgonScore() + " (");
+			if (player.isNaga()) outputText("+" + (65 * (1 + player.newGamePlusMod())) + " ");
+			else outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
+			outputText("max Str, +" + (45 * (1 + player.newGamePlusMod())) + " max Tou, ");
+			if (player.isNaga()) outputText("+" + (85 * (1 + player.newGamePlusMod())) + " ");
 			else outputText("+" + (70 * (1 + player.newGamePlusMod())) + " ");
-		}
-		else outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Spe, +" + (80 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Sens)</font>");
-	}
-	else if (player.cheshireScore() >= 1) outputText("\n<font color=\"#008000\">Cheshire cat: " + player.cheshireScore() + "</font>");
-	else if (player.cheshireScore() < 1) outputText("\n<font color=\"#ff0000\">Cheshire cat: 0</font>");
-	//CHIMERA
-	outputText("\nCHIMERA: " + player.chimeraScore());
-	//Couatl
-	if (player.couatlScore() >= 11) {
-		outputText("\n<font color=\"#0000a0\">Couatl: " + player.couatlScore() + " (");
-		if (player.isNaga()) outputText("+" + (55 * (1 + player.newGamePlusMod())) + " ");
-		else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Str, +" + (25 * (1 + player.newGamePlusMod())) + " max Tou, ");
-		if (player.isNaga()) outputText("+" + (115 * (1 + player.newGamePlusMod())) + " ");
-		else outputText("+" + (100 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Spe)</font>");//, +" + (50 * (1 + player.newGamePlusMod())) + " max HP
-	}
-	else if (player.couatlScore() >= 1 && player.couatlScore() < 11) outputText("\n<font color=\"#008000\">Couatl: " + player.couatlScore() + "</font>");
-	else if (player.couatlScore() < 1) outputText("\n<font color=\"#ff0000\">Couatl: 0</font>");
-	//Cow
-	if (player.cowScore() >= 9) {
-		outputText("\n<font color=\"#0000a0\">Cow-morph: " + player.cowScore() + " (+" + (120 * (1 + player.newGamePlusMod())) + " max Str, +" + (45 * (1 + player.newGamePlusMod())) + " max Tou, -" + (40 * (1 + player.newGamePlusMod())) + " max Spe, -" + (20 * (1 + player.newGamePlusMod())) + " max Int");
-		outputText(", +" + (45 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-	}
-	else if (player.cowScore() >= 4 && player.cowScore() < 9) {
-		outputText("\n<font color=\"#0000a0\">Half Cow-morph: " + player.cowScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (10 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int");
-		outputText(", +" + (20 * (1 + player.newGamePlusMod())) + " max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-	}
-	else if (player.cowScore() >= 1 && player.cowScore() < 4) outputText("\n<font color=\"#008000\">Half Cow-morph: " + player.cowScore() + "</font>");
-	else if (player.cowScore() < 1) outputText("\n<font color=\"#ff0000\">Half Cow-morph: 0</font>");
-	//Dark Goo
-	if (player.darkgooScore() >= 17) outputText("\n<font color=\"#0000a0\">Dark Slime Queen: " + player.darkgooScore() + " (+" + (115 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (45 * (1 + player.newGamePlusMod())) + " max Int, +" + (145 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.darkgooScore() >= 13) outputText("\n<font color=\"#0000a0\">Dark Slime: " + player.darkgooScore() + " (+" + (90 * (1 + player.newGamePlusMod())) + " max Tou, -" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (45 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.darkgooScore() >= 6) outputText("\n<font color=\"#0000a0\">Half Dark Slime: " + player.darkgooScore() + " (+" + (45 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Spe, +" + (15 * (1 + player.newGamePlusMod())) + " max Int, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.darkgooScore() >= 1) outputText("\n<font color=\"#008000\">Half Dark Slime: " + player.darkgooScore() + "</font>");
-	else if (player.darkgooScore() < 1) outputText("\n<font color=\"#ff0000\">Half Dark Slime: 0</font>");
-	//Deer
-	if (player.deerScore() >= 4) outputText("\n<font color=\"#0000a0\">Deer-morph: " + player.deerScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
-	else if (player.deerScore() >= 1 && player.deerScore() < 4) outputText("\n<font color=\"#008000\">Deer-morph: " + player.deerScore() + "</font>");
-	else if (player.deerScore() < 1) outputText("\n<font color=\"#ff0000\">Deer-morph: 0</font>");
-	//Demon
-	if (player.demonScore() >= 16 && player.hasStatusEffect(StatusEffects.PlayerPhylactery)) outputText("\n<font color=\"#0000a0\">Succub/Incubus: " + player.demonScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib, +" + (100 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-	else if (player.demonScore() >= 11) outputText("\n<font color=\"#0000a0\">Succubi-kin/Incubi-kin: " + player.demonScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib, +" + (100 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-	else if (player.demonScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Succubus/Incubus: " + player.demonScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Spe, +" + (15 * (1 + player.newGamePlusMod())) + " max Int, +" + (45 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-	else if (player.demonScore() >= 1) outputText("\n<font color=\"#008000\">Half Succubus/Incubus: " + player.demonScore() + "</font>");
-	else if (player.demonScore() < 1) outputText("\n<font color=\"#ff0000\">Half Succubus/Incubus: 0</font>");
-	//Devil
-	if (player.devilkinScore() >= 16 && player.hasStatusEffect(StatusEffects.PlayerPhylactery)) {
-		if (player.devilkinScore() >= 21) {
-			outputText("\n<font color=\"#0000a0\">Archdevil: " + player.devilkinScore() + " (+" + (105 * (1 + player.newGamePlusMod())) + " max Str, +" + (150 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib");
-			outputText(", +" + (40 * (1 + player.newGamePlusMod())) + " min Sens, +" + (320 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-		}
-		else {
-			outputText("\n<font color=\"#0000a0\">Devil: " + player.devilkinScore() + " (+" + (95 * (1 + player.newGamePlusMod())) + " max Str, +" + (85 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib");
-			outputText(", +" + (40 * (1 + player.newGamePlusMod())) + " min Sens, +" + (230 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-		}
-	}
-	else if (player.devilkinScore() >= 11) {
-		outputText("\n<font color=\"#0000a0\">Devilkin: " + player.devilkinScore() + " (+" + (65 * (1 + player.newGamePlusMod())) + " max Str, -" + (20 * (1 + player.newGamePlusMod())) + " max Spe, +" + (60 * (1 + player.newGamePlusMod())) + " max Int, +" + (75 * (1 + player.newGamePlusMod())) + " max Lib");
-		outputText(", +" + (25 * (1 + player.newGamePlusMod())) + " min Sens, +" + (150 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-	}
-	else if (player.devilkinScore() >= 7) {
-		outputText("\n<font color=\"#0000a0\">Half fiend: " + player.devilkinScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib");
-		outputText(", +" + (10 * (1 + player.newGamePlusMod())) + " min Sens, +" + (75 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-	}
-	else if (player.devilkinScore() >= 1) outputText("\n<font color=\"#008000\">Half fiend: " + player.devilkinScore() + "</font>");
-	else if (player.devilkinScore() < 1) outputText("\n<font color=\"#ff0000\">Half fiend: 0</font>");
-	//Displacer beast
-	if (player.displacerbeastScore() >= 14) {
-		outputText("\n<font color=\"#0000a0\">Displacer Beast: " + player.displacerbeastScore() + " (+" + (95 * (1 + player.newGamePlusMod())) + " max Str, ");
-		if (player.findPerk(PerkLib.Flexibility) > 0) {
-			if (player.findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) outputText("+" + (130 * (1 + player.newGamePlusMod())) + " ");
-			if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (120 * (1 + player.newGamePlusMod())) + " ");
-			else outputText("+" + (110 * (1 + player.newGamePlusMod())) + " ");
-		}
-		else outputText("+" + (100 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Spe, -" + (25 * (1 + player.newGamePlusMod())) + " max Int, -" + (20 * (1 + player.newGamePlusMod())) + " max Wis, +" + (60 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	}
-	else if (player.displacerbeastScore() >= 1) outputText("\n<font color=\"#008000\">Displacer Beast: " + player.displacerbeastScore() + "</font>");
-	else if (player.displacerbeastScore() < 1) outputText("\n<font color=\"#ff0000\">Displacer Beast: 0</font>");
-	//Dog
-	if (player.dogScore() >= 4) outputText("\n<font color=\"#0000a0\">Dog-morph: " + player.dogScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Spe, -" + (5 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.dogScore() >= 1 && player.dogScore() < 4) outputText("\n<font color=\"#008000\">Dog-morph: " + player.dogScore() + "</font>");
-	else if (player.dogScore() < 1) outputText("\n<font color=\"#ff0000\">Dog-morph: 0</font>");
-	//Dragon
-	if (player.dragonScore() >= 28) {
-		outputText("\n<font color=\"#0000a0\">Ancient Dragon: " + player.dragonScore() + " (+");
-		if (player.findPerk(PerkLib.DraconicLungsFinalForm) >= 0) outputText((105 * (1 + player.newGamePlusMod())) + " max Str, +" + (110 * (1 + player.newGamePlusMod())) + " max Tou, +" + (55 * (1 + player.newGamePlusMod())));
-		else if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) outputText((100 * (1 + player.newGamePlusMod())) + " max Str, +" + (105 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())));
-		else if (player.findPerk(PerkLib.DraconicLungs) >= 0) outputText((100 * (1 + player.newGamePlusMod())) + " max Str, +" + (100 * (1 + player.newGamePlusMod())) + " max Tou, +" + (45 * (1 + player.newGamePlusMod())));
-		else outputText((100 * (1 + player.newGamePlusMod())) + " max Str, +" + (100 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())));
-		outputText(" max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max Int, +" + (50 * (1 + player.newGamePlusMod())) + " max Wis, +" + (20 * (1 + player.newGamePlusMod())) + " max Lib, +" + (400 * (1 + player.newGamePlusMod())) + " max HP, +" + (10 * (1 + player.newGamePlusMod())) + " Armor, +20% max Soulforce)</font>");
-	}
-	else if (player.dragonScore() >= 20) {
-		outputText("\n<font color=\"#0000a0\">Elder Dragon: " + player.dragonScore() + " (+");
-		if (player.findPerk(PerkLib.DraconicLungsFinalForm) >= 0) outputText((100 * (1 + player.newGamePlusMod())) + " max Str, +" + (105 * (1 + player.newGamePlusMod())) + " max Tou, +" + (35 * (1 + player.newGamePlusMod())));
-		else if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) outputText((95 * (1 + player.newGamePlusMod())) + " max Str, +" + (100 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())));
-		else if (player.findPerk(PerkLib.DraconicLungs) >= 0) outputText((95 * (1 + player.newGamePlusMod())) + " max Str, +" + (95 * (1 + player.newGamePlusMod())) + " max Tou, +" + (25 * (1 + player.newGamePlusMod())));
-		else outputText((95 * (1 + player.newGamePlusMod())) + " max Str, +" + (95 * (1 + player.newGamePlusMod())) + " max Tou, +" + (20 * (1 + player.newGamePlusMod())));
-		outputText(" max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Wis, +" + (10 * (1 + player.newGamePlusMod())) + " max Lib, +" + (300 * (1 + player.newGamePlusMod())) + " max HP, +" + (4 * (1 + player.newGamePlusMod())) + " Armor, +10% max Soulforce)</font>");
-	}
-	else if (player.dragonScore() >= 10) {
-		outputText("\n<font color=\"#0000a0\">Dragon: " + player.dragonScore() + " (+");
-		if (player.findPerk(PerkLib.DraconicLungsFinalForm) >= 0) outputText((55 * (1 + player.newGamePlusMod())) + " max Str, +" + (50 * (1 + player.newGamePlusMod())) + " max Tou, +" + (25 * (1 + player.newGamePlusMod())));
-		else if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) outputText((50 * (1 + player.newGamePlusMod())) + " max Str, +" + (45 * (1 + player.newGamePlusMod())) + " max Tou, +" + (20 * (1 + player.newGamePlusMod())));
-		else if (player.findPerk(PerkLib.DraconicLungs) >= 0) outputText((50 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (15 * (1 + player.newGamePlusMod())));
-		else outputText((50 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (10 * (1 + player.newGamePlusMod())));
-		outputText(" max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (20 * (1 + player.newGamePlusMod())) + " max Wis, +" + (10 * (1 + player.newGamePlusMod())) + " max Lib, +" + (200 * (1 + player.newGamePlusMod())) + " max HP, +" + (1 * (1 + player.newGamePlusMod())) + " Armor)</font>");
-	}
-	else if (player.dragonScore() >= 4) outputText("\n<font color=\"#0000a0\">Half-Dragon: " + player.dragonScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (15 * (1 + player.newGamePlusMod())) + " max Tou, +" + (15 * (1 + player.newGamePlusMod())) + " max Int, +" + (15 * (1 + player.newGamePlusMod())) + " max Wis, +" + (100 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-	else if (player.dragonScore() >= 1) outputText("\n<font color=\"#008000\">Half-Dragon: " + player.dragonScore() + "</font>");
-	else if (player.dragonScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Dragon: 0</font>");
-	//Dragonne
-	outputText("\nDragonne: " + player.dragonneScore());
-	//Easter Bunny
-	if (player.easterbunnyScore() >= 1) {
-		if (player.hasPerk(PerkLib.EasterBunnyBalls)) {
-			if (player.easterbunnyScore() >= 15) outputText("\n<font color=\"#0000a0\">True Easter Bunny: " + player.easterbunnyScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (105 * (1 + player.newGamePlusMod())) + " max Spe, +" + (150 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-			else if (player.easterbunnyScore() >= 12) outputText("\n<font color=\"#0000a0\">Easter Bunny: " + player.easterbunnyScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (120 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-			else if (player.easterbunnyScore() >= 1) outputText("\n<font color=\"#008000\">Easter Bunny: " + player.easterbunnyScore() + "</font>");
-		}
-		else outputText("\n<font color=\"#ff0000\">Easter Bunny (Require Easter bunny balls): " + player.easterbunnyScore() + "</font>");
-	}
-	else if (player.easterbunnyScore() < 1) outputText("\n<font color=\"#ff0000\">Easter Bunny (Require Easter bunny balls): 0</font>");
-	//Echidna
-	outputText("\nEchidna: " + player.echidnaScore());
-	//Elf
-	if (player.elfScore() >= 11) {
-		outputText("\n<font color=\"#0000a0\">Elf: " + player.elfScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Str, -" + (15 * (1 + player.newGamePlusMod())) + " max Tou, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (80 * (1 + player.newGamePlusMod())) + " max Int, +" + (60 * (1 + player.newGamePlusMod())) + " max Wis, ");
-		outputText("+" + (30 * (1 + player.newGamePlusMod())) + " max Sens, +" + (30 * (1 + player.newGamePlusMod())) + " min Sens, +20% max Mana)</font>");
-	}
-	else if (player.elfScore() >= 5) {
-		outputText("\n<font color=\"#0000a0\">Half Elf: " + player.elfScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, +" + (30 * (1 + player.newGamePlusMod())) + " max Wis, ");
-		outputText("+" + (15 * (1 + player.newGamePlusMod())) + " max Sens, +" + (15 * (1 + player.newGamePlusMod())) + " min Sens, +10% max Mana)</font>");
-	}
-	else if (player.elfScore() >= 1 && player.elfScore() < 5) outputText("\n<font color=\"#008000\">Half Elf: " + player.elfScore() + "</font>");
-	else if (player.elfScore() < 1) outputText("\n<font color=\"#ff0000\">Half Elf: 0</font>");
-	//Ferret
-	outputText("\nFerret-morph: " + player.ferretScore());
-	//Fire snail
-	if (player.firesnailScore() >= 15) outputText("\n<font color=\"#0000a0\">Fire Snail: " + player.firesnailScore() + " (+" + (65 * (1 + player.newGamePlusMod())) + " max Str, +" + (140 * (1 + player.newGamePlusMod())) + " max Tou, -" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " max Sens, +" + (50 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
-	else if (player.firesnailScore() >= 1 && player.firesnailScore() < 15) outputText("\n<font color=\"#008000\">Fire Snail: " + player.firesnailScore() + "</font>");
-	else if (player.firesnailScore() < 1) outputText("\n<font color=\"#ff0000\">Fire Snail: 0</font>");
-	//Fox
-	if (player.foxScore() >= 7) outputText("\n<font color=\"#0000a0\">Fox-morph: " + player.foxScore() + " (-" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (55 * (1 + player.newGamePlusMod())) + " max Int, +" + (20 * (1 + player.newGamePlusMod())) + " max Fatigue)</font>");
-	else if (player.foxScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Fox: " + player.foxScore() + " (-" + (5 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (25 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.foxScore() >= 1) outputText("\n<font color=\"#008000\">Half Fox: " + player.foxScore() + "</font>");
-	else if (player.foxScore() < 1) outputText("\n<font color=\"#ff0000\">Half Fox: 0</font>");
-	//GARGOYLE
-	if (player.gargoyleScore() >= 20 && player.hasPerk(PerkLib.GargoylePure)) {
-		outputText("\n<font color=\"#0000a0\">PURE GARGOYLE: " + player.gargoyleScore() + " (+");
-		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText((165 * (1 + player.newGamePlusMod())) + " max Str, +" + (250 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (30 * (1 + player.newGamePlusMod())));
-		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText((50 * (1 + player.newGamePlusMod())) + " max Str, +" + (250 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (165 * (1 + player.newGamePlusMod())));
-		outputText(" max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Wis, -" + (10 * (1 + player.newGamePlusMod())) + " max Lib, -" + (10 * (1 + player.newGamePlusMod())) + " max Sens, +");
-		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText((60 * (1 + player.newGamePlusMod())) + " Armor, +" + (10 + (1 * player.newGamePlusMod())) + " spell resistance");
-		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText((10 * (1 + player.newGamePlusMod())) + " Armor, +" + (60 + (1 * player.newGamePlusMod())) + " spell resistance");
-		outputText(")</font>");
-	}
-	else if (player.gargoyleScore() >= 20 && player.hasPerk(PerkLib.GargoyleCorrupted)) {
-		outputText("\n<font color=\"#0000a0\">CORRUPTED GARGOYLE: " + player.gargoyleScore() + " (+");
-		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText((165 * (1 + player.newGamePlusMod())) + " max Str, +" + (250 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (30 * (1 + player.newGamePlusMod())));
-		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText((50 * (1 + player.newGamePlusMod())) + " max Str, +" + (250 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (165 * (1 + player.newGamePlusMod())));
-		outputText(" max Int, -" + (10 * (1 + player.newGamePlusMod())) + " max Wis, +" + (80 * (1 + player.newGamePlusMod())) + " max Lib, +15 min Sens, +");
-		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText((60 * (1 + player.newGamePlusMod())) + " Armor, +" + (10 + (1 * player.newGamePlusMod())) + " spell resistance");
-		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText((10 * (1 + player.newGamePlusMod())) + " Armor, +" + (60 + (1 * player.newGamePlusMod())) + " spell resistance");
-		outputText(")</font>");
-	}
-	else if (player.gargoyleScore() >= 1) outputText("\n<font color=\"#008000\">GARGOYLE: " + player.gargoyleScore() + "</font>");
-	else if (player.gargoyleScore() < 1) outputText("\n<font color=\"#ff0000\">GARGOYLE: 0</font>");
-	//Goblin
-	if (player.goblinScore() >= 10) outputText("\n<font color=\"#0000a0\">Goblin: " + player.goblinScore() + " (-" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (75 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.goblinScore() >= 1) outputText("\n<font color=\"#008000\">Goblin: " + player.goblinScore() + "</font>");
-	else if (player.goblinScore() < 1) outputText("\n<font color=\"#ff0000\">Goblin: 0</font>");
-	//Goo
-	if (player.gooScore() >= 15) outputText("\n<font color=\"#0000a0\">Slime Queen: " + player.gooScore() + " (+" + (115 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (160 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.gooScore() >= 11) outputText("\n<font color=\"#0000a0\">Slime: " + player.gooScore() + " (+" + (105 * (1 + player.newGamePlusMod())) + " max Tou, -" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.gooScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Slime: " + player.gooScore() + " (+" + (45 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.gooScore() >= 1) outputText("\n<font color=\"#008000\">Half Slime: " + player.gooScore() + "</font>");
-	else if (player.gooScore() < 1) outputText("\n<font color=\"#ff0000\">Half Slime: 0</font>");
-	//Gorgon
-	if (player.gorgonScore() >= 11) {
-		outputText("\n<font color=\"#0000a0\">Gorgon: " + player.gorgonScore() + " (");
-		if (player.isNaga()) outputText("+" + (65 * (1 + player.newGamePlusMod())) + " ");
-		else outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Str, +" + (45 * (1 + player.newGamePlusMod())) + " max Tou, ");
-		if (player.isNaga()) outputText("+" + (85 * (1 + player.newGamePlusMod())) + " ");
-		else outputText("+" + (70 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-	}
-	else if (player.gorgonScore() >= 1) outputText("\n<font color=\"#008000\">Gorgon: " + player.gorgonScore() + "</font>");
-	else if (player.gorgonScore() < 1) outputText("\n<font color=\"#ff0000\">Gorgon: 0</font>");
-	//GRAND CHIMERA
-	outputText("\nGRAND CHIMERA: " + player.grandchimeraScore());
-	//Harpy
-	if (player.harpyScore() >= 8) outputText("\n<font color=\"#0000a0\">Harpy: " + player.harpyScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (60 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.harpyScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Harpy: " + player.harpyScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (30 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.harpyScore() >= 1) outputText("\n<font color=\"#008000\">Half Harpy: " + player.harpyScore() + "</font>");
-	else if (player.harpyScore() < 1) outputText("\n<font color=\"#ff0000\">Half Harpy: 0</font>");
-	//Hellcat
-	if (player.hellcatScore() >= 17 && player.tailType == Tail.TWINKASHA && player.tailCount == 2) {
-		outputText("\n<font color=\"#0000a0\">Kasha: " + player.hellcatScore() + " (");
-		if (player.findPerk(PerkLib.Flexibility) > 0) {
-			if (player.findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) outputText("+" + (100 * (1 + player.newGamePlusMod())) + " ");
-			else if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (90 * (1 + player.newGamePlusMod())) + " ");
-			else outputText("+" + (80 * (1 + player.newGamePlusMod())) + " ");
-		}
-		else outputText("+" + (70 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Spe, +" + (125 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " min/max Sens)</font>");
-	}
-	else if (player.hellcatScore() >= 10) {
-		outputText("\n<font color=\"#0000a0\">Hellcat: " + player.hellcatScore() + " (");
-		if (player.findPerk(PerkLib.Flexibility) > 0) {
-			if (player.findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) outputText("+" + (70 * (1 + player.newGamePlusMod())) + " ");
-			else if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
-			else outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
-		}
-		else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Spe, +" + (70 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " min/max Sens)</font>");
-	}
-	else if (player.hellcatScore() >= 1 && player.hellcatScore() < 10) outputText("\n<font color=\"#008000\">Hellcat: " + player.hellcatScore() + "</font>");
-	else if (player.hellcatScore() < 1) outputText("\n<font color=\"#ff0000\">Hellcat: 0</font>");
-	//Horse
-	if (player.horseScore() >= 7) outputText("\n<font color=\"#0000a0\">Horse-morph: " + player.horseScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Tou, +" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (70 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-	else if (player.horseScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Horse-morph: " + player.horseScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-	else if (player.horseScore() >= 1) outputText("\n<font color=\"#008000\">Half Horse-morph: " + player.horseScore() + "</font>");
-	else if (player.horseScore() < 1) outputText("\n<font color=\"#ff0000\">Half Horse-morph: 0</font>");
-	//HUMANITY
-	if (player.humanScore() == player.humanMaxScore()) outputText("\n<font color=\"#0000a0\">HUMANITY: " + player.humanMaxScore() + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-	else if (player.humanScore() == player.humanMaxScore() - 1) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 1) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-	else if (player.humanScore() == player.humanMaxScore() - 2) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 2) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-	else if (player.humanScore() == player.humanMaxScore() - 3) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 3) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-	else if (player.humanScore() == player.humanMaxScore() - 4) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 4) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-	else if (player.humanScore() == player.humanMaxScore() - 5) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 5) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-	else if (player.humanScore() == player.humanMaxScore() - 6) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 6) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-	else if (player.humanScore() == player.humanMaxScore() - 7) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 7) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-	else if (player.humanScore() == player.humanMaxScore() - 8) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 8) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-	else if (player.humanScore() == player.humanMaxScore() - 9) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 9) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-	else if (player.humanScore() < player.humanMaxScore() - 9) outputText("\n<font color=\"#008000\">HUMANITY: " + player.humanScore() + "</font>");
-	//Hydra
-	if (player.hydraScore() >= 14) {
-		if (player.lowerBody == LowerBody.HYDRA) {
-			if (player.hydraScore() >= 29) {
-				outputText("\n<font color=\"#0000a0\">Legendary Hydra: " + player.hydraScore() + " (+");
-				if (player.isNaga()) outputText(""+(175 * (1 + player.newGamePlusMod()))+"");
-				else outputText(""+(160 * (1 + player.newGamePlusMod()))+"");
-				outputText(" max Str, +" + (145 * (1 + player.newGamePlusMod())) + " max Tou, +");
-				if (player.isNaga()) outputText(""+(145 * (1 + player.newGamePlusMod()))+"");
-				else outputText(""+(130 * (1 + player.newGamePlusMod()))+"");
-				outputText(" max Spe)</font>");
-			}
-			else if (player.hydraScore() >= 24) {
-				outputText("\n<font color=\"#0000a0\">Ancient Hydra: " + player.hydraScore() + " (+");
-				if (player.isNaga()) outputText(""+(145 * (1 + player.newGamePlusMod()))+"");
-				else outputText(""+(130 * (1 + player.newGamePlusMod()))+"");
-				outputText(" max Str, +" + (125 * (1 + player.newGamePlusMod())) + " max Tou, +");
-				if (player.isNaga()) outputText(""+(120 * (1 + player.newGamePlusMod()))+"");
-				else outputText(""+(105 * (1 + player.newGamePlusMod()))+"");
-				outputText(" max Spe)</font>");
-			}
-			else if (player.hydraScore() >= 19) {
-				outputText("\n<font color=\"#0000a0\">Greater Hydra: " + player.hydraScore() + " (+");
-				if (player.isNaga()) outputText(""+(135 * (1 + player.newGamePlusMod()))+"");
-				else outputText(""+(120 * (1 + player.newGamePlusMod()))+"");
-				outputText(" max Str, +" + (105 * (1 + player.newGamePlusMod())) + " max Tou, +");
-				if (player.isNaga()) outputText(""+(75 * (1 + player.newGamePlusMod()))+"");
-				else outputText(""+(60 * (1 + player.newGamePlusMod()))+"");
-				outputText(" max Spe)</font>");
-			}
-			else {
-				outputText("\n<font color=\"#0000a0\">Hydra: " + player.hydraScore() + " (+");
-				if (player.isNaga()) outputText(""+(115 * (1 + player.newGamePlusMod()))+"");
-				else outputText(""+(100 * (1 + player.newGamePlusMod()))+"");
-				outputText(" max Str, +" + (50 * (1 + player.newGamePlusMod())) + " max Tou, +");
-				if (player.isNaga()) outputText(""+(75 * (1 + player.newGamePlusMod()))+"");
-				else outputText(""+(60 * (1 + player.newGamePlusMod()))+"");
-				outputText(" max Spe)</font>");
-			}
-		}
-		else outputText("\n<font color=\"#008000\">Hydra: " + player.hydraScore() + "</font>");
-	}
-	else if (player.hydraScore() >= 1 && player.hydraScore() < 14) outputText("\n<font color=\"#008000\">Hydra: " + player.hydraScore() + "</font>");
-	else if (player.hydraScore() < 1) outputText("\n<font color=\"#ff0000\">Hydra: 0</font>");
-	//INTERNAL CHIMERICAL DISPOSITION
-	if (player.internalChimeraScore() >= 1) {
-		outputText("\n<font color=\"#0000a0\">INTERNAL CHIMERICAL DISPOSITION: (" + player.internalChimeraRating() + ") " + player.internalChimeraScore() + " (+" + (5 * player.internalChimeraScore() * (1 + player.newGamePlusMod())) + " max Str / Tou / Spe / Int / Wis / Lib)</font>");
-	}
-	else if (player.internalChimeraScore() < 1) outputText("\nINTERNAL CHIMERICAL DISPOSITION: 0</font>");
-	//Jabberwocky
-	if (player.jabberwockyScore() >= 20) {
-		outputText("\n<font color=\"#0000a0\">Greater Jabberwocky: " + player.jabberwockyScore() + " (+" + (95 * (1 + player.newGamePlusMod())) + " max Str, +");
-		if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) outputText((100 * (1 + player.newGamePlusMod())) + " max Tou, +" + (110 * (1 + player.newGamePlusMod())));
-		else if (player.findPerk(PerkLib.DraconicLungs) >= 0) outputText((95 * (1 + player.newGamePlusMod())) + " max Tou, +" + (105 * (1 + player.newGamePlusMod())));
-		else outputText((95 * (1 + player.newGamePlusMod())) + " max Tou, +" + (100 * (1 + player.newGamePlusMod())));
-		outputText(" max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, -" + (50 * (1 + player.newGamePlusMod())) + " max Wis, +" + (20 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	}
-	else if (player.jabberwockyScore() >= 10) {
-		outputText("\n<font color=\"#0000a0\">Jabberwocky: " + player.jabberwockyScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +");
-		if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) outputText((45 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())));
-		else if (player.findPerk(PerkLib.DraconicLungs) >= 0) outputText((40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (55 * (1 + player.newGamePlusMod())));
-		else outputText((40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())));
-		outputText(" max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Int, -" + (20 * (1 + player.newGamePlusMod())) + " max Wis, +" + (10 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	}
-	else if (player.jabberwockyScore() >= 1 && player.jabberwockyScore() < 10) outputText("\n<font color=\"#008000\">Jabberwocky: " + player.jabberwockyScore() + "</font>");
-	else if (player.jabberwockyScore() < 1) outputText("\n<font color=\"#ff0000\">Jabberwocky: 0</font>");
-	//JIANGSHI
-	if (player.jiangshiScore() >= 20) {
-		outputText("\n<font color=\"#0000a0\">JIANGSHI: " + player.jiangshiScore() + " (+" + (140 * (1 + player.newGamePlusMod())) + " max Str, +" + (100 * (1 + player.newGamePlusMod())) + " max Tou, -" + (90 * (1 + player.newGamePlusMod())) + " min Spe, -" + (90 * (1 + player.newGamePlusMod())) + " min Int, ");
-		outputText("+" + (110 * (1 + player.newGamePlusMod())) + " max Wis, +" + (130 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	}
-	else if (player.jiangshiScore() < 20) outputText("\n<font color=\"#008000\">JIANGSHI: " + player.jiangshiScore() + "</font>");
-	//Kangaroo
-	if (player.kangaScore() >= 4) outputText("\n<font color=\"#0000a0\">Kangaroo-morph: " + player.kangaScore() + " (+" + (5 * (1 + player.newGamePlusMod())) + " max Tou, +" + (15 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
-	else if (player.kangaScore() >= 1) outputText("\n<font color=\"#008000\">Kangaroo-morph: " + player.kangaScore() + "</font>");
-	else if (player.kangaScore() < 1) outputText("\n<font color=\"#ff0000\">Kangaroo-morph: 0</font>");
-	//if (player.kitshooScore() >= 6) outputText("\n<font color=\"#0000a0\">Kitshoo: " + player.kitshooScore() + "</font>");
-	//else if (player.kitshooScore() >= 1 && player.kitshooScore() < 6) outputText("\n<font color=\"#008000\">Kitshoo: " + player.kitshooScore() + "</font>");
-	//else if (player.kitshooScore() < 1) outputText("\n<font color=\"#ff0000\">Kitshoo: 0</font>");
-	//Kitsune
-	if (player.kitsuneScore() >= 6) {
-		if (player.tailType == Tail.FOX && player.tailCount >= 2 && player.kitsuneScore() >= 12) {
-			if (player.tailCount < 9) outputText("\n<font color=\"#0000a0\">Kitsune:");
-			else if (player.tailCount == 9) outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune:");
-			outputText(" " + player.kitsuneScore() + " (-" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (70 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Wis, +" + (20 * (1 + player.newGamePlusMod())) + " max Lib, ");
-			if (player.tailCount < 9) {
+			outputText("max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		} else if (player.gorgonScore() >= 1) outputText("\n<font color=\"#008000\">Gorgon: " + player.gorgonScore() + "</font>");
+		else if (player.gorgonScore() < 1) outputText("\n<font color=\"#ff0000\">Gorgon: 0</font>");
+		//GRAND CHIMERA
+		outputText("\nGRAND CHIMERA: " + player.grandchimeraScore());
+		//Harpy
+		if (player.harpyScore() >= 8) outputText("\n<font color=\"#0000a0\">Harpy: " + player.harpyScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (60 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.harpyScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Harpy: " + player.harpyScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (30 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.harpyScore() >= 1) outputText("\n<font color=\"#008000\">Half Harpy: " + player.harpyScore() + "</font>");
+		else if (player.harpyScore() < 1) outputText("\n<font color=\"#ff0000\">Half Harpy: 0</font>");
+		//Hellcat
+		if (player.hellcatScore() >= 17 && player.tailType == Tail.TWINKASHA && player.tailCount == 2) {
+			outputText("\n<font color=\"#0000a0\">Kasha: " + player.hellcatScore() + " (");
+			if (player.findPerk(PerkLib.Flexibility) > 0) {
+				if (player.findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) outputText("+" + (100 * (1 + player.newGamePlusMod())) + " ");
+				else if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (90 * (1 + player.newGamePlusMod())) + " ");
+				else outputText("+" + (80 * (1 + player.newGamePlusMod())) + " ");
+			} else outputText("+" + (70 * (1 + player.newGamePlusMod())) + " ");
+			outputText("max Spe, +" + (125 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " min/max Sens)</font>");
+		} else if (player.hellcatScore() >= 10) {
+			outputText("\n<font color=\"#0000a0\">Hellcat: " + player.hellcatScore() + " (");
+			if (player.findPerk(PerkLib.Flexibility) > 0) {
+				if (player.findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) outputText("+" + (70 * (1 + player.newGamePlusMod())) + " ");
+				else if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
+				else outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
+			} else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
+			outputText("max Spe, +" + (70 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " min/max Sens)</font>");
+		} else if (player.hellcatScore() >= 1 && player.hellcatScore() < 10) outputText("\n<font color=\"#008000\">Hellcat: " + player.hellcatScore() + "</font>");
+		else if (player.hellcatScore() < 1) outputText("\n<font color=\"#ff0000\">Hellcat: 0</font>");
+		//Horse
+		if (player.horseScore() >= 7) outputText("\n<font color=\"#0000a0\">Horse-morph: " + player.horseScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Tou, +" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (70 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		else if (player.horseScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Horse-morph: " + player.horseScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		else if (player.horseScore() >= 1) outputText("\n<font color=\"#008000\">Half Horse-morph: " + player.horseScore() + "</font>");
+		else if (player.horseScore() < 1) outputText("\n<font color=\"#ff0000\">Half Horse-morph: 0</font>");
+		//HUMANITY
+		if (player.humanScore() == player.humanMaxScore()) outputText("\n<font color=\"#0000a0\">HUMANITY: " + player.humanMaxScore() + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
+		else if (player.humanScore() == player.humanMaxScore() - 1) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 1) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
+		else if (player.humanScore() == player.humanMaxScore() - 2) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 2) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
+		else if (player.humanScore() == player.humanMaxScore() - 3) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 3) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
+		else if (player.humanScore() == player.humanMaxScore() - 4) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 4) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
+		else if (player.humanScore() == player.humanMaxScore() - 5) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 5) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
+		else if (player.humanScore() == player.humanMaxScore() - 6) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 6) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
+		else if (player.humanScore() == player.humanMaxScore() - 7) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 7) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
+		else if (player.humanScore() == player.humanMaxScore() - 8) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 8) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
+		else if (player.humanScore() == player.humanMaxScore() - 9) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 9) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
+		else if (player.humanScore() < player.humanMaxScore() - 9) outputText("\n<font color=\"#008000\">HUMANITY: " + player.humanScore() + "</font>");
+		//Hydra
+		if (player.hydraScore() >= 14) {
+			if (player.lowerBody == LowerBody.HYDRA) {
+				if (player.hydraScore() >= 29) {
+					outputText("\n<font color=\"#0000a0\">Legendary Hydra: " + player.hydraScore() + " (+");
+					if (player.isNaga()) outputText("" + (175 * (1 + player.newGamePlusMod())) + "");
+					else outputText("" + (160 * (1 + player.newGamePlusMod())) + "");
+					outputText(" max Str, +" + (145 * (1 + player.newGamePlusMod())) + " max Tou, +");
+					if (player.isNaga()) outputText("" + (145 * (1 + player.newGamePlusMod())) + "");
+					else outputText("" + (130 * (1 + player.newGamePlusMod())) + "");
+					outputText(" max Spe)</font>");
+				} else if (player.hydraScore() >= 24) {
+					outputText("\n<font color=\"#0000a0\">Ancient Hydra: " + player.hydraScore() + " (+");
+					if (player.isNaga()) outputText("" + (145 * (1 + player.newGamePlusMod())) + "");
+					else outputText("" + (130 * (1 + player.newGamePlusMod())) + "");
+					outputText(" max Str, +" + (125 * (1 + player.newGamePlusMod())) + " max Tou, +");
+					if (player.isNaga()) outputText("" + (120 * (1 + player.newGamePlusMod())) + "");
+					else outputText("" + (105 * (1 + player.newGamePlusMod())) + "");
+					outputText(" max Spe)</font>");
+				} else if (player.hydraScore() >= 19) {
+					outputText("\n<font color=\"#0000a0\">Greater Hydra: " + player.hydraScore() + " (+");
+					if (player.isNaga()) outputText("" + (135 * (1 + player.newGamePlusMod())) + "");
+					else outputText("" + (120 * (1 + player.newGamePlusMod())) + "");
+					outputText(" max Str, +" + (105 * (1 + player.newGamePlusMod())) + " max Tou, +");
+					if (player.isNaga()) outputText("" + (75 * (1 + player.newGamePlusMod())) + "");
+					else outputText("" + (60 * (1 + player.newGamePlusMod())) + "");
+					outputText(" max Spe)</font>");
+				} else {
+					outputText("\n<font color=\"#0000a0\">Hydra: " + player.hydraScore() + " (+");
+					if (player.isNaga()) outputText("" + (115 * (1 + player.newGamePlusMod())) + "");
+					else outputText("" + (100 * (1 + player.newGamePlusMod())) + "");
+					outputText(" max Str, +" + (50 * (1 + player.newGamePlusMod())) + " max Tou, +");
+					if (player.isNaga()) outputText("" + (75 * (1 + player.newGamePlusMod())) + "");
+					else outputText("" + (60 * (1 + player.newGamePlusMod())) + "");
+					outputText(" max Spe)</font>");
+				}
+			} else outputText("\n<font color=\"#008000\">Hydra: " + player.hydraScore() + "</font>");
+		} else if (player.hydraScore() >= 1 && player.hydraScore() < 14) outputText("\n<font color=\"#008000\">Hydra: " + player.hydraScore() + "</font>");
+		else if (player.hydraScore() < 1) outputText("\n<font color=\"#ff0000\">Hydra: 0</font>");
+		//INTERNAL CHIMERICAL DISPOSITION
+		if (player.internalChimeraScore() >= 1) {
+			outputText("\n<font color=\"#0000a0\">INTERNAL CHIMERICAL DISPOSITION: (" + player.internalChimeraRating() + ") " + player.internalChimeraScore() + " (+" + (5 * player.internalChimeraScore() * (1 + player.newGamePlusMod())) + " max Str / Tou / Spe / Int / Wis / Lib)</font>");
+		} else if (player.internalChimeraScore() < 1) outputText("\nINTERNAL CHIMERICAL DISPOSITION: 0</font>");
+		//Jabberwocky
+		if (player.jabberwockyScore() >= 20) {
+			outputText("\n<font color=\"#0000a0\">Greater Jabberwocky: " + player.jabberwockyScore() + " (+" + (95 * (1 + player.newGamePlusMod())) + " max Str, +");
+			if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) outputText((100 * (1 + player.newGamePlusMod())) + " max Tou, +" + (110 * (1 + player.newGamePlusMod())));
+			else if (player.findPerk(PerkLib.DraconicLungs) >= 0) outputText((95 * (1 + player.newGamePlusMod())) + " max Tou, +" + (105 * (1 + player.newGamePlusMod())));
+			else outputText((95 * (1 + player.newGamePlusMod())) + " max Tou, +" + (100 * (1 + player.newGamePlusMod())));
+			outputText(" max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, -" + (50 * (1 + player.newGamePlusMod())) + " max Wis, +" + (20 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		} else if (player.jabberwockyScore() >= 10) {
+			outputText("\n<font color=\"#0000a0\">Jabberwocky: " + player.jabberwockyScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +");
+			if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) outputText((45 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())));
+			else if (player.findPerk(PerkLib.DraconicLungs) >= 0) outputText((40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (55 * (1 + player.newGamePlusMod())));
+			else outputText((40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())));
+			outputText(" max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Int, -" + (20 * (1 + player.newGamePlusMod())) + " max Wis, +" + (10 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		} else if (player.jabberwockyScore() >= 1 && player.jabberwockyScore() < 10) outputText("\n<font color=\"#008000\">Jabberwocky: " + player.jabberwockyScore() + "</font>");
+		else if (player.jabberwockyScore() < 1) outputText("\n<font color=\"#ff0000\">Jabberwocky: 0</font>");
+		//Jiangshi
+		if (player.jiangshiScore() >= 20) {
+			outputText("\n<font color=\"#0000a0\">Jiangshi: " + player.jiangshiScore() + " (+" + (150 * (1 + player.newGamePlusMod())) + " max Str, -" + (90 * (1 + player.newGamePlusMod())) + " min Spe, -" + (90 * (1 + player.newGamePlusMod())) + " min Int, ");
+			outputText("+" + (130 * (1 + player.newGamePlusMod())) + " max Wis, +" + (200 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		} else if (player.jiangshiScore() < 20) outputText("\n<font color=\"#008000\">Jiangshi: " + player.jiangshiScore() + "</font>");
+		//Kangaroo
+		if (player.kangaScore() >= 4) outputText("\n<font color=\"#0000a0\">Kangaroo-morph: " + player.kangaScore() + " (+" + (5 * (1 + player.newGamePlusMod())) + " max Tou, +" + (15 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
+		else if (player.kangaScore() >= 1) outputText("\n<font color=\"#008000\">Kangaroo-morph: " + player.kangaScore() + "</font>");
+		else if (player.kangaScore() < 1) outputText("\n<font color=\"#ff0000\">Kangaroo-morph: 0</font>");
+		//if (player.kitshooScore() >= 6) outputText("\n<font color=\"#0000a0\">Kitshoo: " + player.kitshooScore() + "</font>");
+		//else if (player.kitshooScore() >= 1 && player.kitshooScore() < 6) outputText("\n<font color=\"#008000\">Kitshoo: " + player.kitshooScore() + "</font>");
+		//else if (player.kitshooScore() < 1) outputText("\n<font color=\"#ff0000\">Kitshoo: 0</font>");
+		//Kitsune
+		if (player.kitsuneScore() >= 6) {
+			if (player.tailType == Tail.FOX && player.tailCount >= 2 && player.kitsuneScore() >= 12) {
+				if (player.tailCount < 9) outputText("\n<font color=\"#0000a0\">Kitsune:");
+				else if (player.tailCount == 9) outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune:");
+				outputText(" " + player.kitsuneScore() + " (-" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (70 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Wis, +" + (20 * (1 + player.newGamePlusMod())) + " max Lib, ");
+				if (player.tailCount < 9) {
+					outputText("+" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue, +20% max Soulforce)</font>");
+				} else if (player.tailCount == 9) {
+					outputText("+" + (300 * (1 + player.newGamePlusMod())) + " max Fatigue, +40% max Soulforce)</font>");
+				}
+			} else {
+				outputText("\n<font color=\"#0000a0\">Kitsune: " + player.kitsuneScore() + " (-" + (40 * (1 + player.newGamePlusMod())) + " max Str, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Lib, ");
 				outputText("+" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue, +20% max Soulforce)</font>");
 			}
-			else if (player.tailCount == 9) {
-				outputText("+" + (300 * (1 + player.newGamePlusMod())) + " max Fatigue, +40% max Soulforce)</font>");
-			}
-		}
-		else {
-			outputText("\n<font color=\"#0000a0\">Kitsune: " + player.kitsuneScore() + " (-" + (40 * (1 + player.newGamePlusMod())) + " max Str, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Lib, ");
+		} else if (player.kitsuneScore() >= 5) {
+			outputText("\n<font color=\"#0000a0\">Half Kitsune: " + player.kitsuneScore() + " (-" + (35 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Spe, +" + (30 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Lib, +" + (20 * (1 + player.newGamePlusMod())) + " max Lib, ");
 			outputText("+" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue, +20% max Soulforce)</font>");
-		}
-	}
-	else if (player.kitsuneScore() >= 5) {
-		outputText("\n<font color=\"#0000a0\">Half Kitsune: " + player.kitsuneScore() + " (-" + (35 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Spe, +" + (30 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Lib, +" + (20 * (1 + player.newGamePlusMod())) + " max Lib, ");
-		outputText("+" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue, +20% max Soulforce)</font>");
-	}
-	else if (player.kitsuneScore() >= 1 && player.kitsuneScore() < 5) outputText("\n<font color=\"#008000\">Half Kitsune: " + player.kitsuneScore() + "</font>");
-	else if (player.kitsuneScore() < 1) outputText("\n<font color=\"#ff0000\">Half Kitsune: 0</font>");
-	//Lizard
-	if (player.lizardScore() >= 8) outputText("\n<font color=\"#0000a0\">Lizard-morph: " + player.lizardScore() + " (+" + (70 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())) + " max Int, +" + (30 * (1 + player.newGamePlusMod())) + " max Fatigue)</font>");
-	else if (player.lizardScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Lizard-morph: " + player.lizardScore() + " (+" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (30 * (1 + player.newGamePlusMod())) + " max Fatigue)</font>");
-	else if (player.lizardScore() >= 1) outputText("\n<font color=\"#008000\">Half Lizard-morph: " + player.lizardScore() + "</font>");
-	else if (player.lizardScore() < 1) outputText("\n<font color=\"#ff0000\">Half Lizard-morph: 0</font>");
-	//Magma Goo
-	if (player.magmagooScore() >= 17) outputText("\n<font color=\"#0000a0\">Magma Slime Queen: " + player.magmagooScore() + " (+" + (45 * (1 + player.newGamePlusMod())) + " max Str, +" + (115 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (145 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.magmagooScore() >= 13) outputText("\n<font color=\"#0000a0\">Magma Slime: " + player.magmagooScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Str, +" + (100 * (1 + player.newGamePlusMod())) + " max Tou, -" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.magmagooScore() >= 6) outputText("\n<font color=\"#0000a0\">Half Magma Slime: " + player.magmagooScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (45 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.magmagooScore() >= 1) outputText("\n<font color=\"#008000\">Half Magma Slime: " + player.magmagooScore() + "</font>");
-	else if (player.magmagooScore() < 1) outputText("\n<font color=\"#ff0000\">Half Magma Slime: 0</font>");
-	//Manticore
-	if (player.manticoreScore() >= 13) {
-		outputText("\n<font color=\"#0000a0\">Manticore: " + player.manticoreScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Spe, +" + (65 * (1 + player.newGamePlusMod())) + " max Int, +" + (60 * (1 + player.newGamePlusMod())) + " max Lib, +" + (30 * (1 + player.newGamePlusMod())) + " min Sens, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-	}
-	else if (player.manticoreScore() >= 6 && player.manticoreScore() < 12) {
-		outputText("\n<font color=\"#0000a0\">Half Manticore: " + player.manticoreScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (25 * (1 + player.newGamePlusMod())) + " max Int, +" + (30 * (1 + player.newGamePlusMod())) + " max Lib, +" + (15 * (1 + player.newGamePlusMod())) + " min Sens, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-	}
-	else if (player.manticoreScore() >= 1 && player.manticoreScore() < 6) outputText("\n<font color=\"#008000\">Half Manticore: " + player.manticoreScore() + "</font>");
-	else if (player.manticoreScore() < 1) outputText("\n<font color=\"#ff0000\">Half Manticore: 0</font>");
-	//Mantis
-	if (player.mantisScore() >= 12) {
-		outputText("\n<font color=\"#0000a0\">Mantis-morph: " + player.mantisScore() + " (-" + (40 * (1 + player.newGamePlusMod())) + " max Str, +" + (60 * (1 + player.newGamePlusMod())) + " max Tou, +");
-		if (player.findPerk(PerkLib.MantislikeAgilityEvolved) >= 0) {
-			if (player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (185 * (1 + player.newGamePlusMod())));
-			else if ((player.skinType == Skin.SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(Skin.CHITIN)) outputText("" + (175 * (1 + player.newGamePlusMod())));
-			else if (player.skinType == Skin.SCALES) outputText("" + (165 * (1 + player.newGamePlusMod())));
-			else if (player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (155 * (1 + player.newGamePlusMod())));
-			else outputText("" + (140 * (1 + player.newGamePlusMod())) + " ");
-		}
-		else if (player.findPerk(PerkLib.MantislikeAgility) >= 0) {
-			if (player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (160 * (1 + player.newGamePlusMod())));
-			else if ((player.skinType == Skin.SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(Skin.CHITIN)) outputText("" + (155 * (1 + player.newGamePlusMod())));
-			else if (player.skinType == Skin.SCALES) outputText("" + (150 * (1 + player.newGamePlusMod())));
-			else if (player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (175 * (1 + player.newGamePlusMod())));
-			else outputText("" + (140 * (1 + player.newGamePlusMod())));
-		}
-		else outputText("" + (140 * (1 + player.newGamePlusMod())));
-		outputText(" max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	}
-	else if (player.mantisScore() >= 6) {
-		outputText("\n<font color=\"#0000a0\">Half Mantis-morph: " + player.mantisScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +");
-		if (player.findPerk(PerkLib.MantislikeAgilityEvolved) >= 0) {
-			if (player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (110 * (1 + player.newGamePlusMod())));
-			else if ((player.skinType == Skin.SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(Skin.CHITIN)) outputText("" + (100 * (1 + player.newGamePlusMod())));
-			else if (player.skinType == Skin.SCALES) outputText("" + (90 * (1 + player.newGamePlusMod())));
-			else if (player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (80 * (1 + player.newGamePlusMod())));
-			else outputText("" + (70 * (1 + player.newGamePlusMod())) + " ");
-		}
-		else if (player.findPerk(PerkLib.MantislikeAgility) >= 0) {
-			if (player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (90 * (1 + player.newGamePlusMod())));
-			else if ((player.skinType == Skin.SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(Skin.CHITIN)) outputText("" + (85 * (1 + player.newGamePlusMod())));
-			else if (player.skinType == Skin.SCALES) outputText("" + (80 * (1 + player.newGamePlusMod())));
-			else if (player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (75 * (1 + player.newGamePlusMod())));
-			else outputText("" + (70 * (1 + player.newGamePlusMod())));
-		}
-		else outputText("" + (70 * (1 + player.newGamePlusMod())));
-		outputText(" max Spe, +" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	}
-	else if (player.mantisScore() >= 1 && player.mantisScore() < 6) outputText("\n<font color=\"#008000\">Half Mantis-morph: " + player.mantisScore() + "</font>");
-	else if (player.mantisScore() < 1) outputText("\n<font color=\"#ff0000\">Half Mantis-morph: 0</font>");
-	//Melkie
-	if (player.melkieScore() >= 21) outputText("\n<font color=\"#0000a0\">Elder Melkie: " + player.melkieScore() + " (+" + (140 * (1 + player.newGamePlusMod())) + " max Spe, +" + (140 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib, +" + (65 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
-	else if (player.melkieScore() >= 18) outputText("\n<font color=\"#0000a0\">Melkie: " + player.melkieScore() + " (+" + (120 * (1 + player.newGamePlusMod())) + " max Spe, +" + (120 * (1 + player.newGamePlusMod())) + " max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
-	else if (player.melkieScore() >= 8) outputText("\n<font color=\"#0000a0\">Half Melkie: " + player.melkieScore() + " (+" + (55 * (1 + player.newGamePlusMod())) + " max Spe, +" + (55 * (1 + player.newGamePlusMod())) + " max Int, +" + (35 * (1 + player.newGamePlusMod())) + " max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
-	else if (player.melkieScore() >= 1) outputText("\n<font color=\"#008000\">Half Melkie: " + player.melkieScore() + "</font>");
-	else if (player.melkieScore() < 1) outputText("\n<font color=\"#ff0000\">Half Melkie: 0</font>");
-	//Minotaur
-	if (player.minotaurScore() >= 9) {
-		outputText("\n<font color=\"#0000a0\">Minotaur: " + player.minotaurScore() + " (+" + (120 * (1 + player.newGamePlusMod())) + " max Str, +" + (45 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Spe, -" + (40 * (1 + player.newGamePlusMod())) + " max Int");
-		outputText(", -" + (45 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-	}
-	else if (player.minotaurScore() >= 4) {
-		outputText("\n<font color=\"#0000a0\">Half Minotaur: " + player.minotaurScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (10 * (1 + player.newGamePlusMod())) + " max Tou, -" + (10 * (1 + player.newGamePlusMod())) + " max Spe, -" + (20 * (1 + player.newGamePlusMod())) + " max Int");
-		outputText(", -" + (20 * (1 + player.newGamePlusMod())) + " max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-	}
-	else if (player.minotaurScore() >= 1) outputText("\n<font color=\"#008000\">Half Minotaur: " + player.minotaurScore() + "</font>");
-	else if (player.minotaurScore() < 1) outputText("\n<font color=\"#ff0000\">Half Minotaur: 0</font>");
-	//Mouse & Hinezumi
-	if (player.mouseScore() >= 8) {
-		if (player.mouseScore() >= 15 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI) outputText("\n<font color=\"#0000a0\">Hinezumi: " + player.mouseScore() + " (+" + (75 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (80 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
-		else if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI) outputText("\n<font color=\"#0000a0\">Hinezumi: " + player.mouseScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
-		else outputText("\n<font color=\"#0000a0\">Mouse-morph: " + player.mouseScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
-	}
-	else if (player.mouseScore() >= 4) outputText("\n<font color=\"#0000a0\">Mouse girl/boy: " + player.mouseScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (30 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
-	else if (player.mouseScore() >= 1) outputText("\n<font color=\"#008000\">Mouse girl/boy: " + player.mouseScore() + "</font>");
-	else if (player.mouseScore() < 1) outputText("\n<font color=\"#ff0000\">Mouse girl/boy: 0</font>");
-	//Naga
-	if (player.nagaScore() >= 8) {
-		outputText("\n<font color=\"#0000a0\">Naga: " + player.nagaScore() + " (");
-		if (player.isNaga()) outputText("+" + (55 * (1 + player.newGamePlusMod())) + " ");
-		else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Tou, ");
-		if (player.isNaga()) outputText("+" + (75 * (1 + player.newGamePlusMod())) + " ");
-		else outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Spe)</font>");
-	}
-	else if (player.nagaScore() >= 4) {
-		outputText("\n<font color=\"#0000a0\">Half-Naga: " + player.nagaScore() + " (");
-		if (player.isNaga()) outputText("+" + (35 * (1 + player.newGamePlusMod())) + " max Str, +" + (55 * (1 + player.newGamePlusMod())) + " ");
-		else outputText("+" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Spe)</font>");
-	}
-	else if (player.nagaScore() >= 1 && player.nagaScore() < 4) outputText("\n<font color=\"#008000\">Half-Naga: " + player.nagaScore() + "</font>");
-	else if (player.nagaScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Naga: 0</font>");
-	//Nekomata
-	if (player.nekomataScore() >= 10) {
-		if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) outputText("\n<font color=\"#0000a0\">Elder Nekomata: " + player.nekomataScore() + " (");
-		else outputText("\n<font color=\"#0000a0\">Nekomata: " + player.nekomataScore() + " (");
-		if (player.findPerk(PerkLib.Flexibility) > 0) {
-			if (player.findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) outputText("+" + (70 * (1 + player.newGamePlusMod())) + " ");
-			else if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
-			else outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
-		}
-		else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
-		if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) outputText("max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Wis, +20% max Soulforce)</font>");
-		else outputText("max Spe, +" + (30 * (1 + player.newGamePlusMod())) + " max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Wis, +10% max Soulforce)</font>");
-	}
-	else if (player.nekomataScore() >= 1) outputText("\n<font color=\"#008000\">Nekomata: " + player.nekomataScore() + "</font>");
-	else if (player.nekomataScore() < 1) outputText("\n<font color=\"#ff0000\">Nekomata: 0</font>");
-	//Oni
-	if (player.oniScore() >= 15) outputText("\n<font color=\"#0000a0\">Oni: " + player.oniScore() + " (+" + (120 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (55 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
-	else if (player.oniScore() >= 12) outputText("\n<font color=\"#0000a0\">Oni: " + player.oniScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Str, +" + (60 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
-	else if (player.oniScore() >= 6) outputText("\n<font color=\"#0000a0\">Half Oni: " + player.oniScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, -" + (10 * (1 + player.newGamePlusMod())) + " max Int, +" + (20 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
-	else if (player.oniScore() >= 1) outputText("\n<font color=\"#008000\">Half Oni: " + player.oniScore() + "</font>");
-	else if (player.oniScore() < 1) outputText("\n<font color=\"#ff0000\">Half Oni: 0</font>");
-	//Oomukade
-	if (player.oomukadeScore() >= 18) outputText("\n<font color=\"#0000a0\">Elder Oomukade: " + player.oomukadeScore() + " (+" + (125 * (1 + player.newGamePlusMod())) + " max Str, +" + (45 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, +" + (110 * (1 + player.newGamePlusMod())) + " max Lib, -" + (50 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
-	if (player.oomukadeScore() >= 15) outputText("\n<font color=\"#0000a0\">Oomukade: " + player.oomukadeScore() + " (+" + (75 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (110 * (1 + player.newGamePlusMod())) + " max Lib, -" + (50 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
-	else if (player.oomukadeScore() >= 1) outputText("\n<font color=\"#008000\">Oomukade: " + player.oomukadeScore() + "</font>");
-	else if (player.oomukadeScore() < 1) outputText("\n<font color=\"#ff0000\">Oomukade: 0</font>");
-	//Orc
-	/*if (player.orcScore() >= 11) outputText("\n<font color=\"#0000a0\">High Orc: " + player.orcScore() + " (+" + (130 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (10 * (1 + player.newGamePlusMod())) + " max Spe, -" + (30 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib, +20% max Wrath)</font>");
-	else */if (player.orcScore() >= 11) outputText("\n<font color=\"#0000a0\">Orc: " + player.orcScore() + " (+" + (130 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (10 * (1 + player.newGamePlusMod())) + " max Spe, -" + (30 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib, +20% max Wrath)</font>");
-	else if (player.orcScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Orc: " + player.orcScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (15 * (1 + player.newGamePlusMod())) + " max Tou, +" + (5 * (1 + player.newGamePlusMod())) + " max Spe, -" + (15 * (1 + player.newGamePlusMod())) + " max Int, +" + (10 * (1 + player.newGamePlusMod())) + " max Lib, +10% max Wrath)</font>");
-	else if (player.orcScore() >= 1) outputText("\n<font color=\"#008000\">Half Orc: " + player.orcScore() + "</font>");
-	else if (player.orcScore() < 1) outputText("\n<font color=\"#ff0000\">Half Orc: 0</font>");
-	//Orca
-	if (player.orcaScore() >= 20) outputText("\n<font color=\"#0000a0\">Great Orca-boy/girl: " + player.orcaScore() + " (+" + (140 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, +" + (100 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
-	else if (player.orcaScore() >= 17) outputText("\n<font color=\"#0000a0\">Orca-boy/girl: " + player.orcaScore() + " (+" + (125 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (100 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
-	else if (player.orcaScore() >= 6) outputText("\n<font color=\"#0000a0\">Half Orca-boy/girl: " + player.orcaScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (35 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
-	else if (player.orcaScore() >= 1) outputText("\n<font color=\"#008000\">Half Orca-boy/girl: " + player.orcaScore() + "</font>");
-	else if (player.orcaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Orca-boy/girl: 0</font>");
-	//Phantom > Poltergeist
-	if (player.poltergeistScore() >= 18) outputText("\n<font color=\"#0000a0\">Eldritch Poltergeist: " + player.poltergeistScore() + " (-" + (45 * (1 + player.newGamePlusMod())) + " max Str, -" + (45 * (1 + player.newGamePlusMod())) + " max Tou, +" + (150 * (1 + player.newGamePlusMod())) + " max Spe, +" + (150 * (1 + player.newGamePlusMod())) + " max Int, +" + (60 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
-	else if (player.poltergeistScore() >= 12) outputText("\n<font color=\"#0000a0\">Poltergeist: " + player.poltergeistScore() + " (-" + (25 * (1 + player.newGamePlusMod())) + " max Str, -" + (25 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (90 * (1 + player.newGamePlusMod())) + " max Int, +" + (45 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
-	else if (player.poltergeistScore() >= 6) outputText("\n<font color=\"#0000a0\">Phantom: " + player.poltergeistScore() + " (-" + (15 * (1 + player.newGamePlusMod())) + " max Str, -" + (15 * (1 + player.newGamePlusMod())) + " max Tou, +" + (45 * (1 + player.newGamePlusMod())) + " max Spe, +" + (45 * (1 + player.newGamePlusMod())) + " max Int, +" + (30 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
-	else if (player.poltergeistScore() >= 1) outputText("\n<font color=\"#008000\">Phantom: " + player.poltergeistScore() + "</font>");
-	else if (player.poltergeistScore() < 1) outputText("\n<font color=\"#ff0000\">Phantom: 0</font>");
-	//Phoenix
-	if (player.phoenixScore() >= 10) outputText("\n<font color=\"#0000a0\">Phoenix: " + player.phoenixScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-	else if (player.phoenixScore() >= 1) outputText("\n<font color=\"#008000\">Phoenix: " + player.phoenixScore() + "</font>");
-	else if (player.phoenixScore() < 1) outputText("\n<font color=\"#ff0000\">Phoenix: 0</font>");
-	//Pig
-	if (player.pigScore() >= 15) outputText("\n<font color=\"#0000a0\">Boar-morph: " + player.pigScore() + " (+" + (125 * (1 + player.newGamePlusMod())) + " max Str, +" + (125 * (1 + player.newGamePlusMod())) + " to max Tou, -" + (15 * (1 + player.newGamePlusMod())) + " to max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.pigScore() >= 10) outputText("\n<font color=\"#0000a0\">Pig-morph: " + player.pigScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (120 * (1 + player.newGamePlusMod())) + " to max Tou, -" + (15 * (1 + player.newGamePlusMod())) + " to max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int, -" + (5 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
-	else if (player.pigScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Pig-morph: " + player.pigScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (60 * (1 + player.newGamePlusMod())) + " to max Tou, -" + (10 * (1 + player.newGamePlusMod())) + " to max Spe, -" + (5 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.pigScore() >= 1) outputText("\n<font color=\"#008000\">Half Pig-morph: " + player.pigScore() + "</font>");
-	else if (player.pigScore() < 1) outputText("\n<font color=\"#ff0000\">Half Pig-morph: 0</font>");
-	//Treant/Dryad
-	if (player.plantScore() >= 7) outputText("\n<font color=\"#0000a0\">Treant/Dryad: " + player.plantScore() + " (+" + (25 * (1 + player.newGamePlusMod())) + " max Str, +" + (100 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (10 * (1 + player.newGamePlusMod())) + " Armor)</font>");
-	else if (player.plantScore() >= 6) outputText("\n<font color=\"#0000a0\">Treant/Dryad: " + player.plantScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Tou, -" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (8 * (1 + player.newGamePlusMod())) + " Armor)</font>");
-	else if (player.plantScore() >= 5) outputText("\n<font color=\"#0000a0\">Plant-morph: " + player.plantScore() + " (+" + (10 * (1 + player.newGamePlusMod())) + " max Str, +" + (50 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Spe, +" + (4 * (1 + player.newGamePlusMod())) + " Armor)</font>");
-	else if (player.plantScore() >= 4) outputText("\n<font color=\"#0000a0\">Plant-morph: " + player.plantScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Tou, -" + (10 * (1 + player.newGamePlusMod())) + " max Spe, +" + (2 * (1 + player.newGamePlusMod())) + " Armor)</font>");
-	else if (player.plantScore() >= 1) outputText("\n<font color=\"#008000\">Plant-morph: " + player.plantScore() + "</font>");
-	else if (player.plantScore() < 1) outputText("\n<font color=\"#ff0000\">Plant-morph: 0</font>");
-	//Raccon
-	if (player.raccoonScore() >= 4) outputText("\n<font color=\"#0000a0\">Raccoon-morph: " + player.raccoonScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
-	else if (player.raccoonScore() >= 1) outputText("\n<font color=\"#008000\">Raccoon-morph: " + player.raccoonScore() + "</font>");
-	else if (player.raccoonScore() < 1) outputText("\n<font color=\"#ff0000\">Raccoon-morph: 0</font>");
-	//Raiju
-	if (player.raijuScore() >= 10) outputText("\n<font color=\"#0000a0\">Raiju: " + player.raijuScore() + " (+" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " max Sens, +" + (50 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
-	else if (player.raijuScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Raiju: " + player.raijuScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Spe, +" + (25 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Sens, +" + (25 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
-	else if (player.raijuScore() >= 1) outputText("\n<font color=\"#008000\">Half Raiju: " + player.raijuScore() + "</font>");
-	else if (player.raijuScore() < 1) outputText("\n<font color=\"#ff0000\">Half Raiju: 0</font>");
-	//Red Panda
-	if (player.redpandaScore() >= 8) outputText("\n<font color=\"#0000a0\">Red Panda-morph: " + player.redpandaScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (75 * (1 + player.newGamePlusMod())) + " max Spe, +" + (30 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.redpandaScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Red Panda-morph: " + player.redpandaScore() + " (+" + (45 * (1 + player.newGamePlusMod())) + " max Spe, +" + (15 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.redpandaScore() >= 1) outputText("\n<font color=\"#008000\">Half Red Panda-morph: " + player.redpandaScore() + "</font>");
-	else if (player.redpandaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Red Panda-morph: 0</font>");
-	//Rhino
-	if (player.rhinoScore() >= 4) outputText("\n<font color=\"#0000a0\">Rhino-morph: " + player.rhinoScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (15 * (1 + player.newGamePlusMod())) + " max Tou, -" + (10 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-	else if (player.rhinoScore() >= 1) outputText("\n<font color=\"#008000\">Rhino-morph: " + player.rhinoScore() + "</font>");
-	else if (player.rhinoScore() < 1) outputText("\n<font color=\"#ff0000\">Rhino-morph: 0</font>");
-	//Salamander
-	if (player.salamanderScore() >= 7) {
-		outputText("\n<font color=\"#0000a0\">Salamander: " + player.salamanderScore() + " (+");
-		if (player.findPerk(PerkLib.SalamanderAdrenalGlands) > 0 && player.findPerk(PerkLib.SalamanderAdrenalGlandsEvolved) > 0) outputText("" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (35 * (1 + player.newGamePlusMod())) + " max Tou, +" + (5 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " ");
-		else if (player.findPerk(PerkLib.SalamanderAdrenalGlands) > 0) outputText("" + (25 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (45 * (1 + player.newGamePlusMod())) + " ");
-		else outputText("" + (25 * (1 + player.newGamePlusMod())) + " max Str, +" + (25 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-	}
-	else if (player.salamanderScore() >= 4) {
-		outputText("\n<font color=\"#0000a0\">Half Salamander: " + player.salamanderScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, ");
-		if (player.findPerk(PerkLib.SalamanderAdrenalGlands) > 0) outputText("+" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (35 * (1 + player.newGamePlusMod())) + " ");
-		else outputText("+" + (15 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-	}
-	else if (player.salamanderScore() >= 1) outputText("\n<font color=\"#008000\">Half Salamander: " + player.salamanderScore() + "</font>");
-	else if (player.salamanderScore() < 1) outputText("\n<font color=\"#ff0000\">Half Salamander: 0</font>");
-	//Satyr
-	if (player.satyrScore() >= 4) outputText("\n<font color=\"#0000a0\">Satyr: " + player.satyrScore() + " (+" + (5 * (1 + player.newGamePlusMod())) + " max Str, +" + (5 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
-	else if (player.satyrScore() >= 1) outputText("\n<font color=\"#008000\">Satyr: " + player.satyrScore() + "</font>");
-	else if (player.satyrScore() < 1) outputText("\n<font color=\"#ff0000\">Satyr: 0</font>");/*
+		} else if (player.kitsuneScore() >= 1 && player.kitsuneScore() < 5) outputText("\n<font color=\"#008000\">Half Kitsune: " + player.kitsuneScore() + "</font>");
+		else if (player.kitsuneScore() < 1) outputText("\n<font color=\"#ff0000\">Half Kitsune: 0</font>");
+		//Lizard
+		if (player.lizardScore() >= 8) outputText("\n<font color=\"#0000a0\">Lizard-morph: " + player.lizardScore() + " (+" + (70 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())) + " max Int, +" + (30 * (1 + player.newGamePlusMod())) + " max Fatigue)</font>");
+		else if (player.lizardScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Lizard-morph: " + player.lizardScore() + " (+" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (30 * (1 + player.newGamePlusMod())) + " max Fatigue)</font>");
+		else if (player.lizardScore() >= 1) outputText("\n<font color=\"#008000\">Half Lizard-morph: " + player.lizardScore() + "</font>");
+		else if (player.lizardScore() < 1) outputText("\n<font color=\"#ff0000\">Half Lizard-morph: 0</font>");
+		//Magma Goo
+		if (player.magmagooScore() >= 17) outputText("\n<font color=\"#0000a0\">Magma Slime Queen: " + player.magmagooScore() + " (+" + (45 * (1 + player.newGamePlusMod())) + " max Str, +" + (115 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (145 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.magmagooScore() >= 13) outputText("\n<font color=\"#0000a0\">Magma Slime: " + player.magmagooScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Str, +" + (100 * (1 + player.newGamePlusMod())) + " max Tou, -" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.magmagooScore() >= 6) outputText("\n<font color=\"#0000a0\">Half Magma Slime: " + player.magmagooScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (45 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.magmagooScore() >= 1) outputText("\n<font color=\"#008000\">Half Magma Slime: " + player.magmagooScore() + "</font>");
+		else if (player.magmagooScore() < 1) outputText("\n<font color=\"#ff0000\">Half Magma Slime: 0</font>");
+		//Manticore
+		if (player.manticoreScore() >= 13) {
+			outputText("\n<font color=\"#0000a0\">Manticore: " + player.manticoreScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Spe, +" + (65 * (1 + player.newGamePlusMod())) + " max Int, +" + (60 * (1 + player.newGamePlusMod())) + " max Lib, +" + (30 * (1 + player.newGamePlusMod())) + " min Sens, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		} else if (player.manticoreScore() >= 6 && player.manticoreScore() < 12) {
+			outputText("\n<font color=\"#0000a0\">Half Manticore: " + player.manticoreScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (25 * (1 + player.newGamePlusMod())) + " max Int, +" + (30 * (1 + player.newGamePlusMod())) + " max Lib, +" + (15 * (1 + player.newGamePlusMod())) + " min Sens, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		} else if (player.manticoreScore() >= 1 && player.manticoreScore() < 6) outputText("\n<font color=\"#008000\">Half Manticore: " + player.manticoreScore() + "</font>");
+		else if (player.manticoreScore() < 1) outputText("\n<font color=\"#ff0000\">Half Manticore: 0</font>");
+		//Mantis
+		if (player.mantisScore() >= 12) {
+			outputText("\n<font color=\"#0000a0\">Mantis-morph: " + player.mantisScore() + " (-" + (40 * (1 + player.newGamePlusMod())) + " max Str, +" + (60 * (1 + player.newGamePlusMod())) + " max Tou, +");
+			if (player.findPerk(PerkLib.MantislikeAgilityEvolved) >= 0) {
+				if (player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (185 * (1 + player.newGamePlusMod())));
+				else if ((player.skinType == Skin.SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(Skin.CHITIN)) outputText("" + (175 * (1 + player.newGamePlusMod())));
+				else if (player.skinType == Skin.SCALES) outputText("" + (165 * (1 + player.newGamePlusMod())));
+				else if (player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (155 * (1 + player.newGamePlusMod())));
+				else outputText("" + (140 * (1 + player.newGamePlusMod())) + " ");
+			} else if (player.findPerk(PerkLib.MantislikeAgility) >= 0) {
+				if (player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (160 * (1 + player.newGamePlusMod())));
+				else if ((player.skinType == Skin.SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(Skin.CHITIN)) outputText("" + (155 * (1 + player.newGamePlusMod())));
+				else if (player.skinType == Skin.SCALES) outputText("" + (150 * (1 + player.newGamePlusMod())));
+				else if (player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (175 * (1 + player.newGamePlusMod())));
+				else outputText("" + (140 * (1 + player.newGamePlusMod())));
+			} else outputText("" + (140 * (1 + player.newGamePlusMod())));
+			outputText(" max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		} else if (player.mantisScore() >= 6) {
+			outputText("\n<font color=\"#0000a0\">Half Mantis-morph: " + player.mantisScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +");
+			if (player.findPerk(PerkLib.MantislikeAgilityEvolved) >= 0) {
+				if (player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (110 * (1 + player.newGamePlusMod())));
+				else if ((player.skinType == Skin.SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(Skin.CHITIN)) outputText("" + (100 * (1 + player.newGamePlusMod())));
+				else if (player.skinType == Skin.SCALES) outputText("" + (90 * (1 + player.newGamePlusMod())));
+				else if (player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (80 * (1 + player.newGamePlusMod())));
+				else outputText("" + (70 * (1 + player.newGamePlusMod())) + " ");
+			} else if (player.findPerk(PerkLib.MantislikeAgility) >= 0) {
+				if (player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (90 * (1 + player.newGamePlusMod())));
+				else if ((player.skinType == Skin.SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(Skin.CHITIN)) outputText("" + (85 * (1 + player.newGamePlusMod())));
+				else if (player.skinType == Skin.SCALES) outputText("" + (80 * (1 + player.newGamePlusMod())));
+				else if (player.findPerk(PerkLib.ThickSkin) >= 0) outputText("" + (75 * (1 + player.newGamePlusMod())));
+				else outputText("" + (70 * (1 + player.newGamePlusMod())));
+			} else outputText("" + (70 * (1 + player.newGamePlusMod())));
+			outputText(" max Spe, +" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		} else if (player.mantisScore() >= 1 && player.mantisScore() < 6) outputText("\n<font color=\"#008000\">Half Mantis-morph: " + player.mantisScore() + "</font>");
+		else if (player.mantisScore() < 1) outputText("\n<font color=\"#ff0000\">Half Mantis-morph: 0</font>");
+		//Melkie
+		if (player.melkieScore() >= 21) outputText("\n<font color=\"#0000a0\">Elder Melkie: " + player.melkieScore() + " (+" + (140 * (1 + player.newGamePlusMod())) + " max Spe, +" + (140 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib, +" + (65 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
+		else if (player.melkieScore() >= 18) outputText("\n<font color=\"#0000a0\">Melkie: " + player.melkieScore() + " (+" + (120 * (1 + player.newGamePlusMod())) + " max Spe, +" + (120 * (1 + player.newGamePlusMod())) + " max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
+		else if (player.melkieScore() >= 8) outputText("\n<font color=\"#0000a0\">Half Melkie: " + player.melkieScore() + " (+" + (55 * (1 + player.newGamePlusMod())) + " max Spe, +" + (55 * (1 + player.newGamePlusMod())) + " max Int, +" + (35 * (1 + player.newGamePlusMod())) + " max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
+		else if (player.melkieScore() >= 1) outputText("\n<font color=\"#008000\">Half Melkie: " + player.melkieScore() + "</font>");
+		else if (player.melkieScore() < 1) outputText("\n<font color=\"#ff0000\">Half Melkie: 0</font>");
+		//Minotaur
+		if (player.minotaurScore() >= 9) {
+			outputText("\n<font color=\"#0000a0\">Minotaur: " + player.minotaurScore() + " (+" + (120 * (1 + player.newGamePlusMod())) + " max Str, +" + (45 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Spe, -" + (40 * (1 + player.newGamePlusMod())) + " max Int");
+			outputText(", -" + (45 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		} else if (player.minotaurScore() >= 4) {
+			outputText("\n<font color=\"#0000a0\">Half Minotaur: " + player.minotaurScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (10 * (1 + player.newGamePlusMod())) + " max Tou, -" + (10 * (1 + player.newGamePlusMod())) + " max Spe, -" + (20 * (1 + player.newGamePlusMod())) + " max Int");
+			outputText(", -" + (20 * (1 + player.newGamePlusMod())) + " max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		} else if (player.minotaurScore() >= 1) outputText("\n<font color=\"#008000\">Half Minotaur: " + player.minotaurScore() + "</font>");
+		else if (player.minotaurScore() < 1) outputText("\n<font color=\"#ff0000\">Half Minotaur: 0</font>");
+		//Mouse & Hinezumi
+		if (player.mouseScore() >= 8) {
+			if (player.mouseScore() >= 15 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI) outputText("\n<font color=\"#0000a0\">Hinezumi: " + player.mouseScore() + " (+" + (75 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (80 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+			else if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI) outputText("\n<font color=\"#0000a0\">Hinezumi: " + player.mouseScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+			else outputText("\n<font color=\"#0000a0\">Mouse-morph: " + player.mouseScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (80 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+		} else if (player.mouseScore() >= 4) outputText("\n<font color=\"#0000a0\">Mouse girl/boy: " + player.mouseScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (30 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+		else if (player.mouseScore() >= 1) outputText("\n<font color=\"#008000\">Mouse girl/boy: " + player.mouseScore() + "</font>");
+		else if (player.mouseScore() < 1) outputText("\n<font color=\"#ff0000\">Mouse girl/boy: 0</font>");
+		//Naga
+		if (player.nagaScore() >= 8) {
+			outputText("\n<font color=\"#0000a0\">Naga: " + player.nagaScore() + " (");
+			if (player.isNaga()) outputText("+" + (55 * (1 + player.newGamePlusMod())) + " ");
+			else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
+			outputText("max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Tou, ");
+			if (player.isNaga()) outputText("+" + (75 * (1 + player.newGamePlusMod())) + " ");
+			else outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
+			outputText("max Spe)</font>");
+		} else if (player.nagaScore() >= 4) {
+			outputText("\n<font color=\"#0000a0\">Half-Naga: " + player.nagaScore() + " (");
+			if (player.isNaga()) outputText("+" + (35 * (1 + player.newGamePlusMod())) + " max Str, +" + (55 * (1 + player.newGamePlusMod())) + " ");
+			else outputText("+" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " ");
+			outputText("max Spe)</font>");
+		} else if (player.nagaScore() >= 1 && player.nagaScore() < 4) outputText("\n<font color=\"#008000\">Half-Naga: " + player.nagaScore() + "</font>");
+		else if (player.nagaScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Naga: 0</font>");
+		//Nekomata
+		if (player.nekomataScore() >= 10) {
+			if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) outputText("\n<font color=\"#0000a0\">Elder Nekomata: " + player.nekomataScore() + " (");
+			else outputText("\n<font color=\"#0000a0\">Nekomata: " + player.nekomataScore() + " (");
+			if (player.findPerk(PerkLib.Flexibility) > 0) {
+				if (player.findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) outputText("+" + (70 * (1 + player.newGamePlusMod())) + " ");
+				else if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
+				else outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
+			} else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
+			if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) outputText("max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Wis, +20% max Soulforce)</font>");
+			else outputText("max Spe, +" + (30 * (1 + player.newGamePlusMod())) + " max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Wis, +10% max Soulforce)</font>");
+		} else if (player.nekomataScore() >= 1) outputText("\n<font color=\"#008000\">Nekomata: " + player.nekomataScore() + "</font>");
+		else if (player.nekomataScore() < 1) outputText("\n<font color=\"#ff0000\">Nekomata: 0</font>");
+		//Oni
+		if (player.oniScore() >= 15) outputText("\n<font color=\"#0000a0\">Oni: " + player.oniScore() + " (+" + (120 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (55 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+		else if (player.oniScore() >= 12) outputText("\n<font color=\"#0000a0\">Oni: " + player.oniScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Str, +" + (60 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+		else if (player.oniScore() >= 6) outputText("\n<font color=\"#0000a0\">Half Oni: " + player.oniScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, -" + (10 * (1 + player.newGamePlusMod())) + " max Int, +" + (20 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+		else if (player.oniScore() >= 1) outputText("\n<font color=\"#008000\">Half Oni: " + player.oniScore() + "</font>");
+		else if (player.oniScore() < 1) outputText("\n<font color=\"#ff0000\">Half Oni: 0</font>");
+		//Oomukade
+		if (player.oomukadeScore() >= 18) outputText("\n<font color=\"#0000a0\">Elder Oomukade: " + player.oomukadeScore() + " (+" + (125 * (1 + player.newGamePlusMod())) + " max Str, +" + (45 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, +" + (110 * (1 + player.newGamePlusMod())) + " max Lib, -" + (50 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+		if (player.oomukadeScore() >= 15) outputText("\n<font color=\"#0000a0\">Oomukade: " + player.oomukadeScore() + " (+" + (75 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (110 * (1 + player.newGamePlusMod())) + " max Lib, -" + (50 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+		else if (player.oomukadeScore() >= 1) outputText("\n<font color=\"#008000\">Oomukade: " + player.oomukadeScore() + "</font>");
+		else if (player.oomukadeScore() < 1) outputText("\n<font color=\"#ff0000\">Oomukade: 0</font>");
+		//Orc
+		/*if (player.orcScore() >= 11) outputText("\n<font color=\"#0000a0\">High Orc: " + player.orcScore() + " (+" + (130 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (10 * (1 + player.newGamePlusMod())) + " max Spe, -" + (30 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib, +20% max Wrath)</font>");
+        else */
+		if (player.orcScore() >= 11) outputText("\n<font color=\"#0000a0\">Orc: " + player.orcScore() + " (+" + (130 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (10 * (1 + player.newGamePlusMod())) + " max Spe, -" + (30 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib, +20% max Wrath)</font>");
+		else if (player.orcScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Orc: " + player.orcScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (15 * (1 + player.newGamePlusMod())) + " max Tou, +" + (5 * (1 + player.newGamePlusMod())) + " max Spe, -" + (15 * (1 + player.newGamePlusMod())) + " max Int, +" + (10 * (1 + player.newGamePlusMod())) + " max Lib, +10% max Wrath)</font>");
+		else if (player.orcScore() >= 1) outputText("\n<font color=\"#008000\">Half Orc: " + player.orcScore() + "</font>");
+		else if (player.orcScore() < 1) outputText("\n<font color=\"#ff0000\">Half Orc: 0</font>");
+		//Orca
+		if (player.orcaScore() >= 20) outputText("\n<font color=\"#0000a0\">Great Orca-boy/girl: " + player.orcaScore() + " (+" + (140 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, +" + (100 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
+		else if (player.orcaScore() >= 17) outputText("\n<font color=\"#0000a0\">Orca-boy/girl: " + player.orcaScore() + " (+" + (125 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (100 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
+		else if (player.orcaScore() >= 6) outputText("\n<font color=\"#0000a0\">Half Orca-boy/girl: " + player.orcaScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (35 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
+		else if (player.orcaScore() >= 1) outputText("\n<font color=\"#008000\">Half Orca-boy/girl: " + player.orcaScore() + "</font>");
+		else if (player.orcaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Orca-boy/girl: 0</font>");
+		//Phantom > Poltergeist
+		if (player.poltergeistScore() >= 18) outputText("\n<font color=\"#0000a0\">Eldritch Poltergeist: " + player.poltergeistScore() + " (-" + (45 * (1 + player.newGamePlusMod())) + " max Str, -" + (45 * (1 + player.newGamePlusMod())) + " max Tou, +" + (150 * (1 + player.newGamePlusMod())) + " max Spe, +" + (150 * (1 + player.newGamePlusMod())) + " max Int, +" + (60 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+		else if (player.poltergeistScore() >= 12) outputText("\n<font color=\"#0000a0\">Poltergeist: " + player.poltergeistScore() + " (-" + (25 * (1 + player.newGamePlusMod())) + " max Str, -" + (25 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (90 * (1 + player.newGamePlusMod())) + " max Int, +" + (45 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+		else if (player.poltergeistScore() >= 6) outputText("\n<font color=\"#0000a0\">Phantom: " + player.poltergeistScore() + " (-" + (15 * (1 + player.newGamePlusMod())) + " max Str, -" + (15 * (1 + player.newGamePlusMod())) + " max Tou, +" + (45 * (1 + player.newGamePlusMod())) + " max Spe, +" + (45 * (1 + player.newGamePlusMod())) + " max Int, +" + (30 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+		else if (player.poltergeistScore() >= 1) outputText("\n<font color=\"#008000\">Phantom: " + player.poltergeistScore() + "</font>");
+		else if (player.poltergeistScore() < 1) outputText("\n<font color=\"#ff0000\">Phantom: 0</font>");
+		//Phoenix
+		if (player.phoenixScore() >= 10) outputText("\n<font color=\"#0000a0\">Phoenix: " + player.phoenixScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		else if (player.phoenixScore() >= 1) outputText("\n<font color=\"#008000\">Phoenix: " + player.phoenixScore() + "</font>");
+		else if (player.phoenixScore() < 1) outputText("\n<font color=\"#ff0000\">Phoenix: 0</font>");
+		//Pig
+		if (player.pigScore() >= 15) outputText("\n<font color=\"#0000a0\">Boar-morph: " + player.pigScore() + " (+" + (125 * (1 + player.newGamePlusMod())) + " max Str, +" + (125 * (1 + player.newGamePlusMod())) + " to max Tou, -" + (15 * (1 + player.newGamePlusMod())) + " to max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.pigScore() >= 10) outputText("\n<font color=\"#0000a0\">Pig-morph: " + player.pigScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (120 * (1 + player.newGamePlusMod())) + " to max Tou, -" + (15 * (1 + player.newGamePlusMod())) + " to max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int, -" + (5 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+		else if (player.pigScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Pig-morph: " + player.pigScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (60 * (1 + player.newGamePlusMod())) + " to max Tou, -" + (10 * (1 + player.newGamePlusMod())) + " to max Spe, -" + (5 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.pigScore() >= 1) outputText("\n<font color=\"#008000\">Half Pig-morph: " + player.pigScore() + "</font>");
+		else if (player.pigScore() < 1) outputText("\n<font color=\"#ff0000\">Half Pig-morph: 0</font>");
+		//Treant/Dryad
+		if (player.plantScore() >= 7) outputText("\n<font color=\"#0000a0\">Treant/Dryad: " + player.plantScore() + " (+" + (25 * (1 + player.newGamePlusMod())) + " max Str, +" + (100 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (10 * (1 + player.newGamePlusMod())) + " Armor)</font>");
+		else if (player.plantScore() >= 6) outputText("\n<font color=\"#0000a0\">Treant/Dryad: " + player.plantScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Tou, -" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (8 * (1 + player.newGamePlusMod())) + " Armor)</font>");
+		else if (player.plantScore() >= 5) outputText("\n<font color=\"#0000a0\">Plant-morph: " + player.plantScore() + " (+" + (10 * (1 + player.newGamePlusMod())) + " max Str, +" + (50 * (1 + player.newGamePlusMod())) + " max Tou, -" + (20 * (1 + player.newGamePlusMod())) + " max Spe, +" + (4 * (1 + player.newGamePlusMod())) + " Armor)</font>");
+		else if (player.plantScore() >= 4) outputText("\n<font color=\"#0000a0\">Plant-morph: " + player.plantScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Tou, -" + (10 * (1 + player.newGamePlusMod())) + " max Spe, +" + (2 * (1 + player.newGamePlusMod())) + " Armor)</font>");
+		else if (player.plantScore() >= 1) outputText("\n<font color=\"#008000\">Plant-morph: " + player.plantScore() + "</font>");
+		else if (player.plantScore() < 1) outputText("\n<font color=\"#ff0000\">Plant-morph: 0</font>");
+		//Raccon
+		if (player.raccoonScore() >= 17 && player.balls > 0 && player.ballSize > 5) outputText("\n<font color=\"#0000a0\">-Greater Tanuki: " + player.raccoonScore() + " (+" + (105 * (1 + player.newGamePlusMod())) + " max Spe, +" + (150 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.raccoonScore() >= 14 && player.balls > 0 && player.ballSize > 5) outputText("\n<font color=\"#0000a0\">Tanuki: " + player.raccoonScore() + " (+" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (120 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.raccoonScore() >= 4) outputText("\n<font color=\"#0000a0\">Raccoon-morph: " + player.raccoonScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
+		else if (player.raccoonScore() >= 1) outputText("\n<font color=\"#008000\">Raccoon-morph: " + player.raccoonScore() + "</font>");
+		else if (player.raccoonScore() < 1) outputText("\n<font color=\"#ff0000\">Raccoon-morph: 0</font>");
+		//Raiju
+		if (player.raijuScore() >= 14) outputText("\n<font color=\"#0000a0\">Greater Raiju: " + player.raijuScore() + " (+" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max Int, +" + (120 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " max Sens, +" + (50 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
+		else if (player.raijuScore() >= 10) outputText("\n<font color=\"#0000a0\">Raiju: " + player.raijuScore() + " (+" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " max Sens, +" + (50 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
+		else if (player.raijuScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Raiju: " + player.raijuScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Spe, +" + (25 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Sens, +" + (25 * (1 + player.newGamePlusMod())) + " min Sens)</font>");
+		else if (player.raijuScore() >= 1) outputText("\n<font color=\"#008000\">Half Raiju: " + player.raijuScore() + "</font>");
+		else if (player.raijuScore() < 1) outputText("\n<font color=\"#ff0000\">Half Raiju: 0</font>");
+		//Red Panda
+		if (player.redpandaScore() >= 8) outputText("\n<font color=\"#0000a0\">Red Panda-morph: " + player.redpandaScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (75 * (1 + player.newGamePlusMod())) + " max Spe, +" + (30 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.redpandaScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Red Panda-morph: " + player.redpandaScore() + " (+" + (45 * (1 + player.newGamePlusMod())) + " max Spe, +" + (15 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.redpandaScore() >= 1) outputText("\n<font color=\"#008000\">Half Red Panda-morph: " + player.redpandaScore() + "</font>");
+		else if (player.redpandaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Red Panda-morph: 0</font>");
+		//Rhino
+		if (player.rhinoScore() >= 4) outputText("\n<font color=\"#0000a0\">Rhino-morph: " + player.rhinoScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (15 * (1 + player.newGamePlusMod())) + " max Tou, -" + (10 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		else if (player.rhinoScore() >= 1) outputText("\n<font color=\"#008000\">Rhino-morph: " + player.rhinoScore() + "</font>");
+		else if (player.rhinoScore() < 1) outputText("\n<font color=\"#ff0000\">Rhino-morph: 0</font>");
+		//Salamander
+		if (player.salamanderScore() >= 16) {
+			outputText("\n<font color=\"#0000a0\">Primordial Salamander: " + player.salamanderScore() + " (+");
+			outputText("" + (105 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Tou, +" + (130 * (1 + player.newGamePlusMod())) + "max Lib, +" + (75 * (1 + player.newGamePlusMod())) + " min sens, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		} else if (player.salamanderScore() >= 7) {
+			outputText("\n<font color=\"#0000a0\">Salamander: " + player.salamanderScore() + " (+");
+			outputText("" + (25 * (1 + player.newGamePlusMod())) + " max Str, +" + (25 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + "max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		} else if (player.salamanderScore() >= 4) {
+			outputText("\n<font color=\"#0000a0\">Salamander: " + player.salamanderScore() + " (+");
+			outputText("" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (15 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + "max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		} else if (player.salamanderScore() >= 1) outputText("\n<font color=\"#008000\">Half Salamander: " + player.salamanderScore() + "</font>");
+		else if (player.salamanderScore() < 1) outputText("\n<font color=\"#ff0000\">Half Salamander: 0</font>");
+		//Satyr
+		if (player.satyrScore() >= 4) outputText("\n<font color=\"#0000a0\">Satyr: " + player.satyrScore() + " (+" + (5 * (1 + player.newGamePlusMod())) + " max Str, +" + (5 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
+		else if (player.satyrScore() >= 1) outputText("\n<font color=\"#008000\">Satyr: " + player.satyrScore() + "</font>");
+		else if (player.satyrScore() < 1) outputText("\n<font color=\"#ff0000\">Satyr: 0</font>");/*
 	//Scorpion
 	if (player.scorpionScore() >= ) outputText("\n<font color=\"#0000a0\">Half Scorpion-morph: " + player.scorpionScore() + "</font>");
 	else if (player.scorpionScore() >= 1 && player.scorpionScore() < ) outputText("\n<font color=\"#008000\">Half Scorpion-morph: " + player.scorpionScore() + "</font>");
 	else if (player.scorpionScore() < 1) outputText("\n<font color=\"#ff0000\">Half Scorpion-morph: 0</font>");*/
-	outputText("\nScorpion-morph: " + player.scorpionScore());
-	//Scylla
-	if (player.scyllaScore() >= 17) {
-		outputText("\n<font color=\"#0000a0\">Elder Kraken: " + player.scyllaScore() + " ");
-		if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("(+" + (175 * (1 + player.newGamePlusMod())) + " ");
-		else if (player.isScylla()) outputText("(+" + (165 * (1 + player.newGamePlusMod())) + " ");
-		else if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("(+" + (145 * (1 + player.newGamePlusMod())) + " ");
-		else outputText("(+" + (135 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Str, +" + (60 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())) + " max Int, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		outputText("\nScorpion-morph: " + player.scorpionScore());
+		//Scylla
+		if (player.scyllaScore() >= 17) {
+			outputText("\n<font color=\"#0000a0\">Elder Kraken: " + player.scyllaScore() + " ");
+			if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("(+" + (175 * (1 + player.newGamePlusMod())) + " ");
+			else if (player.isScylla()) outputText("(+" + (165 * (1 + player.newGamePlusMod())) + " ");
+			else if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("(+" + (145 * (1 + player.newGamePlusMod())) + " ");
+			else outputText("(+" + (135 * (1 + player.newGamePlusMod())) + " ");
+			outputText("max Str, +" + (60 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())) + " max Int, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		} else if (player.scyllaScore() >= 12) {
+			outputText("\n<font color=\"#0000a0\">Kraken: " + player.scyllaScore() + " ");
+			if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("(+" + (160 * (1 + player.newGamePlusMod())) + " ");
+			else if (player.isScylla()) outputText("(+" + (150 * (1 + player.newGamePlusMod())) + " ");
+			else if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("(+" + (130 * (1 + player.newGamePlusMod())) + " ");
+			else outputText("(+" + (120 * (1 + player.newGamePlusMod())) + " ");
+			outputText("max Str, +" + (60 * (1 + player.newGamePlusMod())) + " max Int, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		} else if (player.scyllaScore() >= 7) {
+			outputText("\n<font color=\"#0000a0\">Scylla: " + player.scyllaScore() + " ");
+			if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("(+" + (105 * (1 + player.newGamePlusMod())) + " ");
+			else if (player.isScylla()) outputText("(+" + (95 * (1 + player.newGamePlusMod())) + " ");
+			else if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("(+" + (75 * (1 + player.newGamePlusMod())) + " ");
+			else outputText("(+" + (65 * (1 + player.newGamePlusMod())) + " ");
+			outputText("max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		} else if (player.scyllaScore() >= 4) {
+			outputText("\n<font color=\"#0000a0\">Half Scylla: " + player.scyllaScore() + " ");
+			if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("(+" + (80 * (1 + player.newGamePlusMod())) + " ");
+			else if (player.isScylla()) outputText("(+" + (95 * (1 + player.newGamePlusMod())) + " ");
+			else if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("(+" + (50 * (1 + player.newGamePlusMod())) + " ");
+			else outputText("(+" + (40 * (1 + player.newGamePlusMod())) + " ");
+			outputText("max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		} else if (player.scyllaScore() >= 1) outputText("\n<font color=\"#008000\">Half Scylla: " + player.scyllaScore() + "</font>");
+		else if (player.scyllaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Scylla: 0</font>");
+		//Shark
+		if (player.sharkScore() >= 9 && player.vaginas.length > 0 && player.cocks.length > 0) outputText("\n<font color=\"#0000a0\">Tigershark-morph: " + player.sharkScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		else if (player.sharkScore() >= 8) outputText("\n<font color=\"#0000a0\">Shark-morph: " + player.sharkScore() + " (+" + (40 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (10 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.sharkScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Shark-morph: " + player.sharkScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
+		else if (player.sharkScore() >= 1) outputText("\n<font color=\"#008000\">Half Shark-morph: " + player.sharkScore() + "</font>");
+		else if (player.sharkScore() < 1) outputText("\n<font color=\"#ff0000\">Half Shark-morph: 0</font>");
+		//Siren
+		if (player.sirenScore() >= 10) outputText("\n<font color=\"#0000a0\">Siren: " + player.sirenScore() + " (+" + (40 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.sirenScore() >= 1) outputText("\n<font color=\"#008000\">Siren: " + player.sirenScore() + "</font>");
+		else if (player.sirenScore() < 1) outputText("\n<font color=\"#ff0000\">Siren: 0</font>");
+		//Sphinx
+		if (player.sphinxScore() >= 14) {
+			outputText("\n<font color=\"#0000a0\">Sphinx: " + player.sphinxScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, -" + (20 * (1 + player.newGamePlusMod())) + " max Tou, ");
+			if (player.findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) outputText("+" + (70 * (1 + player.newGamePlusMod())) + " ");
+			else if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
+			else if (player.findPerk(PerkLib.Flexibility) > 0) outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
+			else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
+			outputText(" max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
+		} else if (player.sphinxScore() >= 1) outputText("\n<font color=\"#008000\">Sphinx: " + player.sphinxScore() + "</font>");
+		else if (player.sphinxScore() < 1) outputText("\n<font color=\"#ff0000\">Sphinx: 0</font>");
+		//Spider
+		if (player.spiderScore() >= 7) outputText("\n<font color=\"#0000a0\">Spider-morph: " + player.spiderScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (50 * (1 + player.newGamePlusMod())) + " max Tou, +" + (75 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.spiderScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Spider-morph: " + player.spiderScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.spiderScore() >= 1) outputText("\n<font color=\"#008000\">Half Spider-morph: " + player.spiderScore() + "</font>");
+		else if (player.spiderScore() < 1) outputText("\n<font color=\"#ff0000\">Half Spider-morph: 0</font>");
+		//Thunderbird
+		if (player.thunderbirdScore() >= 15) outputText("\n<font color=\"#0000a0\">Greater Thunderbird: " + player.thunderbirdScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (115 * (1 + player.newGamePlusMod())) + " max Spe, +" + (130 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.thunderbirdScore() >= 12) outputText("\n<font color=\"#0000a0\">Thunderbird: " + player.thunderbirdScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (100 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.thunderbirdScore() >= 1) outputText("\n<font color=\"#008000\">Thunderbird: " + player.thunderbirdScore() + "</font>");
+		else if (player.thunderbirdScore() < 1) outputText("\n<font color=\"#ff0000\">Thunderbird: 0</font>");
+		//Ushi Onna
+		if (player.ushionnaScore() >= 11) {
+			outputText("\n<font color=\"#0000a0\">");
+			if (player.statusEffectv1(StatusEffects.UshiOnnaVariant) == 1) outputText("Fiery Ushi-" + player.mf("oni", "onna") + "");
+			else if (player.statusEffectv1(StatusEffects.UshiOnnaVariant) == 2) outputText("Frozen Ushi-" + player.mf("oni", "onna") + "");
+			else if (player.statusEffectv1(StatusEffects.UshiOnnaVariant) == 3) outputText("Sandy Ushi-" + player.mf("oni", "onna") + "");
+			else if (player.statusEffectv1(StatusEffects.UshiOnnaVariant) == 4) outputText("Pure Ushi-" + player.mf("oni", "onna") + "");
+			else if (player.statusEffectv1(StatusEffects.UshiOnnaVariant) == 5) outputText("Wicked Ushi-" + player.mf("oni", "onna") + "");
+			else outputText("Ushi-" + player.mf("oni", "onna") + "");
+			outputText(": " + player.ushionnaScore() + " (+" + (80 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, -" + (40 * (1 + player.newGamePlusMod())) + " max Int, -" + (40 * (1 + player.newGamePlusMod())) + " max Wis, +" + (95 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		}
+		else if (player.ushionnaScore() >= 1) outputText("\n<font color=\"#008000\">Ushi-Onna: " + player.ushionnaScore() + "</font>");
+		else if (player.ushionnaScore() < 1) outputText("\n<font color=\"#ff0000\">Ushi-Onna: 0</font>");
+		//Werewolf
+		if (player.werewolfScore() >= 12) outputText("\n<font color=\"#0000a0\">Werewolf: " + player.werewolfScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, -" + (20 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.wolfScore() >= 1) outputText("\n<font color=\"#008000\">Werewolf: " + player.werewolfScore() + "</font>");
+		else if (player.wolfScore() < 1) outputText("\n<font color=\"#ff0000\">Werewolf: 0</font>");
+		//Wolf
+		if (player.wolfScore() >= 23) outputText("\n<font color=\"#0000a0\">Fenrir: " + player.wolfScore() + " (+" + (135 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Tou, +" + (100 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.wolfScore() >= 7 && player.coatColor == "glacial white") outputText("\n<font color=\"#0000a0\">Winter wolf: " + player.wolfScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.wolfScore() >= 6) outputText("\n<font color=\"#0000a0\">Wolf-morph: " + player.wolfScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.wolfScore() >= 4) outputText("\n<font color=\"#0000a0\">Wolf girl/boy: " + player.wolfScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (10 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.wolfScore() >= 1) outputText("\n<font color=\"#008000\">Wolf girl/boy: " + player.wolfScore() + "</font>");
+		else if (player.wolfScore() < 1) outputText("\n<font color=\"#ff0000\">Wolf girl/boy: 0</font>");
+		//Unicorn
+		if (player.unicornScore() >= 24) outputText("\n<font color=\"#0000a0\">True Unicorn/True Bicorn: " + player.unicornScore() + " (+" + (75 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, +" + (115 * (1 + player.newGamePlusMod())) + " max Spe, +" + (120 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.unicornScore() >= 12) outputText("\n<font color=\"#0000a0\">Unicorn/Bicorn: " + player.unicornScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (105 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.unicornScore() >= 8) outputText("\n<font color=\"#0000a0\">Half Unicorn/Half Bicorn: " + player.unicornScore() + " (+" + (25 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (55 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.unicornScore() >= 1) outputText("\n<font color=\"#008000\">Unicorn/Bicorn: " + player.unicornScore() + "</font>");
+		else if (player.unicornScore() < 1) outputText("\n<font color=\"#ff0000\">Unicorn/Bicorn: 0</font>");
+		//UnicornKin
+		if (player.unicornkinScore() >= 12) outputText("\n<font color=\"#0000a0\">Unicornkin/Bicornkin: " + player.unicornkinScore() + " (+" + (55 * (1 + player.newGamePlusMod())) + " max Tou, +" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (85 * (1 + player.newGamePlusMod())) + " max Int)</font>");
+		else if (player.unicornkinScore() >= 1) outputText("\n<font color=\"#008000\">Unicorn/Bicorn: " + player.unicornkinScore() + "</font>");
+		else if (player.unicornkinScore() < 1) outputText("\n<font color=\"#ff0000\">Unicornkin/Bicornkin: 0</font>");
+		//Vampire
+		if (player.vampireScore() >= 18) outputText("\n<font color=\"#0000a0\">Pureblood Vampire: " + player.vampireScore() + " (+" + (65 * (1 + player.newGamePlusMod())) + " max Str, +" + (65 * (1 + player.newGamePlusMod())) + " max Spe, +" + (65 * (1 + player.newGamePlusMod())) + " max Int, +" + (75 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.vampireScore() >= 10) outputText("\n<font color=\"#0000a0\">Vampire: " + player.vampireScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Str, +" + (35 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max Int, +" + (45 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.vampireScore() >= 6) outputText("\n<font color=\"#0000a0\">Dhampir: " + player.vampireScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (30 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.vampireScore() >= 1) outputText("\n<font color=\"#008000\">Dhampir: " + player.vampireScore() + "</font>");
+		else if (player.vampireScore() < 1) outputText("\n<font color=\"#ff0000\">Dhampir: 0</font>");
+		//Vouivre
+		if (player.vouivreScore() >= 11) {
+			outputText("\n<font color=\"#0000a0\">Vouivre: " + player.vouivreScore() + " (");
+			if (player.isNaga()) outputText("+" + (25 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())) + " ");
+			else outputText("+" + (10 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (35 * (1 + player.newGamePlusMod())) + " ");
+			outputText("max Spe, +" + (10 * (1 + player.newGamePlusMod())) + " max Int, -" + (20 * (1 + player.newGamePlusMod())) + " max Wis)</font>");//, +" + (50 * (1 + player.newGamePlusMod())) + " max HP
+		} else if (player.vouivreScore() >= 1 && player.vouivreScore() < 11) outputText("\n<font color=\"#008000\">Vouivre: " + player.vouivreScore() + "</font>");
+		else if (player.vouivreScore() < 1) outputText("\n<font color=\"#ff0000\">Vouivre: 0</font>");
+		//Yeti
+		if (player.yetiScore() >= 14) outputText("\n<font color=\"#0000a0\">Yeti: " + player.yetiScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())) + " max Spe, -" + (70 * (1 + player.newGamePlusMod())) + " max Int, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.yetiScore() >= 7) outputText("\n<font color=\"#0000a0\">Half Yeti: " + player.yetiScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (25 * (1 + player.newGamePlusMod())) + " max Spe, -" + (35 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
+		else if (player.yetiScore() >= 1) outputText("\n<font color=\"#008000\">Half Yeti: " + player.yetiScore() + "</font>");
+		else if (player.yetiScore() < 1) outputText("\n<font color=\"#ff0000\">Half Yeti: 0</font>");
+		//Yggdrasil
+		if (player.yggdrasilScore() >= 10) outputText("\n<font color=\"#0000a0\">Yggdrasil: " + player.yggdrasilScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Wis, -" + (50 * (1 + player.newGamePlusMod())) + " max Lib, +" + (10 * (1 + player.newGamePlusMod())) + " Armor)</font>");
+		else if (player.yggdrasilScore() >= 1) outputText("\n<font color=\"#008000\">Yggdrasil: " + player.yggdrasilScore() + "</font>");
+		else if (player.yggdrasilScore() < 1) outputText("\n<font color=\"#ff0000\">Yggdrasil: 0</font>");
+		//Yuki Onna
+		if (player.yukiOnnaScore() >= 14) outputText("\n<font color=\"#0000a0\">Yuki Onna: " + player.yukiOnnaScore() + " (+" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (140 * (1 + player.newGamePlusMod())) + " max Int, +" + (70 * (1 + player.newGamePlusMod())) + " max Wis, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib" + (player.hasPerk(PerkLib.IcyFlesh) ? ", max Tou fixed at 1" : "") + ")</font>");
+		else if (player.yukiOnnaScore() >= 1) outputText("\n<font color=\"#008000\">Yuki Onna: " + player.yukiOnnaScore() + "</font>");
+		else if (player.yukiOnnaScore() < 1) outputText("\n<font color=\"#ff0000\">Yuki Onna: 0</font>");
+		menu();
+		addButton(0, "Next", playerMenu);
 	}
-	else if (player.scyllaScore() >= 12) {
-		outputText("\n<font color=\"#0000a0\">Kraken: " + player.scyllaScore() + " ");
-		if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("(+" + (160 * (1 + player.newGamePlusMod())) + " ");
-		else if (player.isScylla()) outputText("(+" + (150 * (1 + player.newGamePlusMod())) + " ");
-		else if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("(+" + (130 * (1 + player.newGamePlusMod())) + " ");
-		else outputText("(+" + (120 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Str, +" + (60 * (1 + player.newGamePlusMod())) + " max Int, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-	}
-	else if (player.scyllaScore() >= 7) {
-		outputText("\n<font color=\"#0000a0\">Scylla: " + player.scyllaScore() + " ");
-		if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("(+" + (105 * (1 + player.newGamePlusMod())) + " ");
-		else if (player.isScylla()) outputText("(+" + (95 * (1 + player.newGamePlusMod())) + " ");
-		else if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("(+" + (75 * (1 + player.newGamePlusMod())) + " ");
-		else outputText("(+" + (65 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Int, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-	}
-	else if (player.scyllaScore() >= 4) {
-		outputText("\n<font color=\"#0000a0\">Half Scylla: " + player.scyllaScore() + " ");
-		if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("(+" + (80 * (1 + player.newGamePlusMod())) + " ");
-		else if (player.isScylla()) outputText("(+" + (95 * (1 + player.newGamePlusMod())) + " ");
-		else if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("(+" + (50 * (1 + player.newGamePlusMod())) + " ");
-		else outputText("(+" + (40 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-	}
-	else if (player.scyllaScore() >= 1) outputText("\n<font color=\"#008000\">Half Scylla: " + player.scyllaScore() + "</font>");
-	else if (player.scyllaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Scylla: 0</font>");
-	//Shark
-	if (player.sharkScore() >= 9 && player.vaginas.length > 0 && player.cocks.length > 0) outputText("\n<font color=\"#0000a0\">Tigershark-morph: " + player.sharkScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-	else if (player.sharkScore() >= 8) outputText("\n<font color=\"#0000a0\">Shark-morph: " + player.sharkScore() + " (+" + (40 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (10 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.sharkScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Shark-morph: " + player.sharkScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
-	else if (player.sharkScore() >= 1) outputText("\n<font color=\"#008000\">Half Shark-morph: " + player.sharkScore() + "</font>");
-	else if (player.sharkScore() < 1) outputText("\n<font color=\"#ff0000\">Half Shark-morph: 0</font>");
-	//Siren
-	if (player.sirenScore() >= 10) outputText("\n<font color=\"#0000a0\">Siren: " + player.sirenScore() + " (+" + (40 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (40 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.sirenScore() >= 1) outputText("\n<font color=\"#008000\">Siren: " + player.sirenScore() + "</font>");
-	else if (player.sirenScore() < 1) outputText("\n<font color=\"#ff0000\">Siren: 0</font>");
-	//Sphinx
-	if (player.sphinxScore() >= 14) {
-		outputText("\n<font color=\"#0000a0\">Sphinx: " + player.sphinxScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, -" + (20 * (1 + player.newGamePlusMod())) + " max Tou, ");
-		if (player.findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) outputText("+" + (70 * (1 + player.newGamePlusMod())) + " ");
-		else if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("+" + (60 * (1 + player.newGamePlusMod())) + " ");
-		else if (player.findPerk(PerkLib.Flexibility) > 0) outputText("+" + (50 * (1 + player.newGamePlusMod())) + " ");
-		else outputText("+" + (40 * (1 + player.newGamePlusMod())) + " ");
-		outputText(" max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Int, +" + (40 * (1 + player.newGamePlusMod())) + " max Wis)</font>");
-	}
-	else if (player.sphinxScore() >= 1) outputText("\n<font color=\"#008000\">Sphinx: " + player.sphinxScore() + "</font>");
-	else if (player.sphinxScore() < 1) outputText("\n<font color=\"#ff0000\">Sphinx: 0</font>");
-	//Spider
-	if (player.spiderScore() >= 7) outputText("\n<font color=\"#0000a0\">Spider-morph: " + player.spiderScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (50 * (1 + player.newGamePlusMod())) + " max Tou, +" + (75 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.spiderScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Spider-morph: " + player.spiderScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.spiderScore() >= 1) outputText("\n<font color=\"#008000\">Half Spider-morph: " + player.spiderScore() + "</font>");
-	else if (player.spiderScore() < 1) outputText("\n<font color=\"#ff0000\">Half Spider-morph: 0</font>");
-	//Thunderbird
-	if (player.thunderbirdScore() >= 12) outputText("\n<font color=\"#0000a0\">Thunderbird: " + player.thunderbirdScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (100 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.thunderbirdScore() >= 1) outputText("\n<font color=\"#008000\">Thunderbird: " + player.thunderbirdScore() + "</font>");
-	else if (player.thunderbirdScore() < 1) outputText("\n<font color=\"#ff0000\">Thunderbird: 0</font>");
-	//Werewolf
-	if (player.werewolfScore() >= 12) outputText("\n<font color=\"#0000a0\">Werewolf: " + player.werewolfScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, -" + (20 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.wolfScore() >= 1) outputText("\n<font color=\"#008000\">Werewolf: " + player.werewolfScore() + "</font>");
-	else if (player.wolfScore() < 1) outputText("\n<font color=\"#ff0000\">Werewolf: 0</font>");
-	//Wolf
-	if (player.wolfScore() >= 10) outputText("\n<font color=\"#0000a0\">Fenrir: " + player.wolfScore() + " (+" + (60 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Tou, +" + (60 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.wolfScore() >= 7 && player.coatColor == "glacial white") outputText("\n<font color=\"#0000a0\">Winter wolf: " + player.wolfScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.wolfScore() >= 6) outputText("\n<font color=\"#0000a0\">Wolf-morph: " + player.wolfScore() + " (+" + (30 * (1 + player.newGamePlusMod())) + " max Str, +" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.wolfScore() >= 4) outputText("\n<font color=\"#0000a0\">Wolf girl/boy: " + player.wolfScore() + " (+" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (10 * (1 + player.newGamePlusMod())) + " max Spe, -" + (10 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.wolfScore() >= 1) outputText("\n<font color=\"#008000\">Wolf girl/boy: " + player.wolfScore() + "</font>");
-	else if (player.wolfScore() < 1) outputText("\n<font color=\"#ff0000\">Wolf girl/boy: 0</font>");
-	//Unicorn
-	if (player.unicornScore() >= 24) outputText("\n<font color=\"#0000a0\">True Unicorn/True Bicorn: " + player.unicornScore() + " (+" + (75 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, +" + (115 * (1 + player.newGamePlusMod())) + " max Spe, +" + (120 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.unicornScore() >= 12) outputText("\n<font color=\"#0000a0\">Unicorn/Bicorn: " + player.unicornScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Tou, +" + (90 * (1 + player.newGamePlusMod())) + " max Spe, +" + (105 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.unicornScore() >= 8) outputText("\n<font color=\"#0000a0\">Half Unicorn/Half Bicorn: " + player.unicornScore() + " (+" + (25 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + " max Spe, +" + (55 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.unicornScore() >= 1) outputText("\n<font color=\"#008000\">Unicorn/Bicorn: " + player.unicornScore() + "</font>");
-	else if (player.unicornScore() < 1) outputText("\n<font color=\"#ff0000\">Unicorn/Bicorn: 0</font>");
-	//UnicornKin
-	if (player.unicornkinScore() >= 12) outputText("\n<font color=\"#0000a0\">Unicornkin/Bicornkin: " + player.unicornkinScore() + " (+" + (55 * (1 + player.newGamePlusMod())) + " max Tou, +" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (85 * (1 + player.newGamePlusMod())) + " max Int)</font>");
-	else if (player.unicornkinScore() >= 1) outputText("\n<font color=\"#008000\">Unicorn/Bicorn: " + player.unicornkinScore() + "</font>");
-	else if (player.unicornkinScore() < 1) outputText("\n<font color=\"#ff0000\">Unicornkin/Bicornkin: 0</font>");
-	//Vampire
-	if (player.vampireScore() >= 18) outputText("\n<font color=\"#0000a0\">Pureblood Vampire: " + player.vampireScore() + " (+" + (65 * (1 + player.newGamePlusMod())) + " max Str, +" + (65 * (1 + player.newGamePlusMod())) + " max Spe, +" + (65 * (1 + player.newGamePlusMod())) + " max Int, +" + (75 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.vampireScore() >= 10) outputText("\n<font color=\"#0000a0\">Vampire: " + player.vampireScore() + " (+" + (35 * (1 + player.newGamePlusMod())) + " max Str, +" + (35 * (1 + player.newGamePlusMod())) + " max Spe, +" + (35 * (1 + player.newGamePlusMod())) + " max Int, +" + (45 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.vampireScore() >= 6) outputText("\n<font color=\"#0000a0\">Dhampir: " + player.vampireScore() + " (+" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (30 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.vampireScore() >= 1) outputText("\n<font color=\"#008000\">Dhampir: " + player.vampireScore() + "</font>");
-	else if (player.vampireScore() < 1) outputText("\n<font color=\"#ff0000\">Dhampir: 0</font>");
-	//Vouivre
-	if (player.vouivreScore() >= 11) {
-		outputText("\n<font color=\"#0000a0\">Vouivre: " + player.vouivreScore() + " (");
-		if (player.isNaga()) outputText("+" + (25 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())) + " ");
-		else outputText("+" + (10 * (1 + player.newGamePlusMod())) + " max Str, -" + (10 * (1 + player.newGamePlusMod())) + " max Tou, +" + (35 * (1 + player.newGamePlusMod())) + " ");
-		outputText("max Spe, +" + (10 * (1 + player.newGamePlusMod())) + " max Int, -" + (20 * (1 + player.newGamePlusMod())) + " max Wis)</font>");//, +" + (50 * (1 + player.newGamePlusMod())) + " max HP
-	}
-	else if (player.vouivreScore() >= 1 && player.vouivreScore() < 11) outputText("\n<font color=\"#008000\">Vouivre: " + player.vouivreScore() + "</font>");
-	else if (player.vouivreScore() < 1) outputText("\n<font color=\"#ff0000\">Vouivre: 0</font>");
-	//Yeti
-	if (player.yetiScore() >= 14) outputText("\n<font color=\"#0000a0\">Yeti: " + player.yetiScore() + " (+" + (100 * (1 + player.newGamePlusMod())) + " max Str, +" + (80 * (1 + player.newGamePlusMod())) + " max Tou, +" + (50 * (1 + player.newGamePlusMod())) + " max Spe, -" + (70 * (1 + player.newGamePlusMod())) + " max Int, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.yetiScore() >= 7) outputText("\n<font color=\"#0000a0\">Half Yeti: " + player.yetiScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (40 * (1 + player.newGamePlusMod())) + " max Tou, +" + (25 * (1 + player.newGamePlusMod())) + " max Spe, -" + (35 * (1 + player.newGamePlusMod())) + " max Int, +" + (25 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
-	else if (player.yetiScore() >= 1) outputText("\n<font color=\"#008000\">Half Yeti: " + player.yetiScore() + "</font>");
-	else if (player.yetiScore() < 1) outputText("\n<font color=\"#ff0000\">Half Yeti: 0</font>");
-	//Yggdrasil
-	if (player.yggdrasilScore() >= 10) outputText("\n<font color=\"#0000a0\">Yggdrasil: " + player.yggdrasilScore() + " (+" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Tou, -" + (50 * (1 + player.newGamePlusMod())) + " max Spe, +" + (50 * (1 + player.newGamePlusMod())) + " max Int, +" + (80 * (1 + player.newGamePlusMod())) + " max Wis, -" + (50 * (1 + player.newGamePlusMod())) + " max Lib, +" + (10 * (1 + player.newGamePlusMod())) + " Armor)</font>");
-	else if (player.yggdrasilScore() >= 1) outputText("\n<font color=\"#008000\">Yggdrasil: " + player.yggdrasilScore() + "</font>");
-	else if (player.yggdrasilScore() < 1) outputText("\n<font color=\"#ff0000\">Yggdrasil: 0</font>");
-	//Yuki Onna
-	if (player.yukiOnnaScore() >= 14) outputText("\n<font color=\"#0000a0\">Yuki Onna: " + player.yukiOnnaScore() + " (+" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (140 * (1 + player.newGamePlusMod())) + " max Int, +" + (70 * (1 + player.newGamePlusMod())) + " max Wis, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib"+(player.hasPerk(PerkLib.IcyFlesh) ? ", max Tou fixed at 1":"")+")</font>");
-	else if (player.yukiOnnaScore() >= 1) outputText("\n<font color=\"#008000\">Yuki Onna: " + player.yukiOnnaScore() + "</font>");
-	else if (player.yukiOnnaScore() < 1) outputText("\n<font color=\"#ff0000\">Yuki Onna: 0</font>");
-	menu();
-	addButton(0, "Next", playerMenu);
-}
 
-public function GenderForcedSetting():void {
-	clearOutput();
-	outputText("This menu allows you to choose if the game will treat your character as a female or a male. Using the automatic option will let the game orginal system do the work instead of setting your sex in one or another way.");
-	menu();
-	addButton(0, "Next", playerMenu);
-	if (flags[kFLAGS.MALE_OR_FEMALE] == 0) addButtonDisabled(1, "Auto", "It's currently used setting option.");
-	else addButton(1, "Auto", GenderForcedSettingAuto);
-	if (flags[kFLAGS.MALE_OR_FEMALE] == 1) addButtonDisabled(2, "Male", "It's currently used setting option.");
-	else addButton(2, "Male", GenderForcedSettingMale);
-	if (flags[kFLAGS.MALE_OR_FEMALE] == 2) addButtonDisabled(3, "Female", "It's currently used setting option.");
-	else addButton(3, "Female", GenderForcedSettingFemale);
-}
+	public function GenderForcedSetting():void {
+		clearOutput();
+		outputText("This menu allows you to choose if the game will treat your character as a female or a male. Using the automatic option will let the game orginal system do the work instead of setting your sex in one or another way.");
+		menu();
+		addButton(0, "Next", playerMenu);
+		if (flags[kFLAGS.MALE_OR_FEMALE] == 0) addButtonDisabled(1, "Auto", "It's currently used setting option.");
+		else addButton(1, "Auto", GenderForcedSettingAuto);
+		if (flags[kFLAGS.MALE_OR_FEMALE] == 1) addButtonDisabled(2, "Male", "It's currently used setting option.");
+		else addButton(2, "Male", GenderForcedSettingMale);
+		if (flags[kFLAGS.MALE_OR_FEMALE] == 2) addButtonDisabled(3, "Female", "It's currently used setting option.");
+		else addButton(3, "Female", GenderForcedSettingFemale);
+	}
 
-public function GenderForcedSettingAuto():void {
-	flags[kFLAGS.MALE_OR_FEMALE] = 0;
-	doNext(GenderForcedSetting);
-}
+	public function GenderForcedSettingAuto():void {
+		flags[kFLAGS.MALE_OR_FEMALE] = 0;
+		doNext(GenderForcedSetting);
+	}
 
-public function GenderForcedSettingMale():void {
-	flags[kFLAGS.MALE_OR_FEMALE] = 1;
-	doNext(GenderForcedSetting);
-}
+	public function GenderForcedSettingMale():void {
+		flags[kFLAGS.MALE_OR_FEMALE] = 1;
+		doNext(GenderForcedSetting);
+	}
 
-public function GenderForcedSettingFemale():void {
-	flags[kFLAGS.MALE_OR_FEMALE] = 2;
-	doNext(GenderForcedSetting);
-}
+	public function GenderForcedSettingFemale():void {
+		flags[kFLAGS.MALE_OR_FEMALE] = 2;
+		doNext(GenderForcedSetting);
+	}
 
-private function campActionsReflect():void {
-	clearOutput();
-	outputText("You sit down on your sleeping "+(flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "bed":"bag")+" and contemplate your current outlook on life. You have been through much and became bigger, better, way more than what you once were.");
-	if (player.race() != player.startingRace) outputText(" While you were formerly a " + player.startingRace + " you now are a " + player.race() + " for  better or for worse and have decided to live this new life to its fullest.");
-	var oldmaxes:Object = player.getAllMaxStats();
-	var strStat:Number = oldmaxes.str;
-	var touStat:Number = oldmaxes.tou;
-	var speStat:Number = oldmaxes.spe;
-	var inteStat:Number = oldmaxes.inte;
-	var wisStat:Number = oldmaxes.wis;
-	var libStat:Number = oldmaxes.lib;
-	var sensStat:Number = oldmaxes.sens;
-	player.strtouspeintwislibsenCalculation2();
-	var newmaxes:Object = player.getAllMaxStats();
-	var strStat1:Number = newmaxes.str;
-	var touStat1:Number = newmaxes.tou;
-	var speStat1:Number = newmaxes.spe;
-	var inteStat1:Number = newmaxes.inte;
-	var wisStat1:Number = newmaxes.wis;
-	var libStat1:Number = newmaxes.lib;
-	var sensStat1:Number = newmaxes.sens;
-	if (strStat != strStat1 || touStat != touStat1 || speStat!= speStat1 || inteStat!= inteStat1 || wisStat != wisStat1 || libStat != libStat1 || sensStat != sensStat1) outputText(" As if this reflection unlocked some hidden door in you, you feel your body awaken with newfound vigor and might. Let your adversaries come, you are ready for them now!");
-	if (strStat != strStat1) player.str = Math.round(player.str * (strStat1/strStat));
-	if (touStat != touStat1) player.tou = Math.round(player.tou * (touStat1/touStat));
-	if (speStat!= speStat1) player.spe = Math.round(player.spe * (speStat1/speStat));
-	if (inteStat!= inteStat1) player.inte = Math.round(player.inte * (inteStat1/inteStat));
-	if (wisStat != wisStat1) player.wis = Math.round(player.wis * (wisStat1/wisStat));
-	if (libStat != libStat1) player.lib = Math.round(player.lib * (libStat1/libStat));
-	if (sensStat != sensStat1) player.sens = Math.round(player.sens * (sensStat1/sensStat));
-	doNext(playerMenu);
-}
+	private function campActionsReflect():void {
+		clearOutput();
+		outputText("You sit down on your sleeping " + (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "bed" : "bag") + " and contemplate your current outlook on life. You have been through much and became bigger, better, way more than what you once were.");
+		if (player.race() != player.startingRace) outputText(" While you were formerly a " + player.startingRace + " you now are a " + player.race() + " for  better or for worse and have decided to live this new life to its fullest.");
+		player.strtouspeintwislibsenCalculation2();
+		outputText(" As if this reflection unlocked some hidden door in you, you feel your body awaken with newfound vigor and might. Let your adversaries come, you are ready for them now!");
+		doNext(playerMenu);
+	}
 
 	public function sockDescript(index:int):void {
 		outputText("  ");
@@ -3392,8 +3399,7 @@ private function campActionsReflect():void {
 			else
 				outputText(" that fits your coeurl cock perfectly");
 			outputText(".  Just wearing it makes you feel stronger and more powerful.");
-		}
-		else if (player.cocks[index].sock == "red")
+		} else if (player.cocks[index].sock == "red")
 			outputText("It's covered by a red cock-sock that seems to glow.  Just wearing it makes you feel a bit powerful.");
 		else if (player.cocks[index].sock == "green")
 			outputText("It's covered by a green cock-sock that seems to glow.  Just wearing it makes you feel a bit healthier.");

@@ -27,12 +27,12 @@ package classes.Items.Jewelries
 		}
 		
 		override public function playerEquip():Jewelry {
-			game.player.spe += 5;
+			game.player.statStore.addBuff('spe',+5,'RingOfSpeed',{text:'Ring Of Speed'});
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():Jewelry {
-			game.player.spe -= 5;
+			game.player.statStore.removeBuffs('RingOfSpeed');
 			return super.playerRemove();
 		}
 		

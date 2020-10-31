@@ -65,6 +65,48 @@ use namespace CoC;
 		
 		public function DisplacerBeast() 
 		{
+			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
+				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
+					initStrTouSpeInte(184, 184, 270, 96);
+					initWisLibSensCor(96, 160, 80, 30);
+					this.weaponAttack = 52;
+					this.armorDef = 46;
+					this.armorMDef = 46;
+					this.bonusHP = 300;
+					this.bonusLust = 80;
+					this.level = 68;
+				}
+				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 50) {
+					initStrTouSpeInte(173, 173, 240, 86);
+					initWisLibSensCor(86, 140, 70, 30);
+					this.weaponAttack = 46;
+					this.armorDef = 43;
+					this.armorMDef = 43;
+					this.bonusHP = 200;
+					this.bonusLust = 60;
+					this.level = 64;
+				}
+				else {
+					initStrTouSpeInte(152, 152, 210, 76);
+					initWisLibSensCor(76, 120, 60, 30);
+					this.weaponAttack = 40;
+					this.armorDef = 40;
+					this.armorMDef = 40;
+					this.bonusHP = 100;
+					this.bonusLust = 40;
+					this.level = 60;
+				}
+			}
+			else {
+				initStrTouSpeInte(152, 152, 210, 76);
+				initWisLibSensCor(76, 120, 60, 30);
+				this.weaponAttack = 40;
+				this.armorDef = 40;
+				this.armorMDef = 40;
+				this.bonusHP = 100;
+				this.bonusLust = 20;
+				this.level = 60;
+			}
 			this.a = "the ";
 			this.short = "displacer beast";
 			this.imageName = "displacer beast";
@@ -79,22 +121,14 @@ use namespace CoC;
 			this.skinTone = "";
 			this.hairColor = "";
 			this.hairLength = 9;
-			initStrTouSpeInte(152, 152, 210, 76);
-			initWisLibSensCor(76, 120, 60, 30);
 			this.weaponName = "claws";
 			this.weaponVerb= "slash";
-			this.weaponAttack = 40;
 			this.armorName = "fur";
-			this.armorDef = 40;
-			this.armorMDef = 40;
-			this.bonusHP = 100;
 			this.wrath = 130;
-			this.bonusLust = 20;
 			this.lustVuln = .35;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 60;
 			this.gems = rand(20) + 70;
+			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.drop = new ChainedDrop().
 					add(useables.EBONBLO,1/20).
 					add(consumables.D_FRUIT,0.7);

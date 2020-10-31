@@ -139,15 +139,39 @@ use namespace CoC;
 		{
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB))  {
 				this.short = "stray incubus";
-				initStrTouSpeInte(255, 170, 195, 165);
-				initWisLibSensCor(165, 165, 105, 100);
-				this.weaponAttack = 32;
-				this.armorDef = 36;
-				this.armorMDef = 6;
-				this.bonusHP = 1000;
-				this.bonusLust = 80;
-				this.level = 62;
-				this.additionalXP = 500;
+				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
+					initStrTouSpeInte(275, 190, 215, 175);
+					initWisLibSensCor(175, 181, 125, 100);
+					this.weaponAttack = 38;
+					this.armorDef = 48;
+					this.armorMDef = 8;
+					this.bonusHP = 3000;
+					this.bonusLust = 240;
+					this.level = 70;
+					this.additionalXP = 1000;
+				}
+				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 50) {
+					initStrTouSpeInte(265, 180, 205, 170);
+					initWisLibSensCor(170, 173, 115, 100);
+					this.weaponAttack = 35;
+					this.armorDef = 42;
+					this.armorMDef = 7;
+					this.bonusHP = 2000;
+					this.bonusLust = 160;
+					this.level = 66;
+					this.additionalXP = 750;
+				}
+				else {
+					initStrTouSpeInte(255, 170, 195, 165);
+					initWisLibSensCor(165, 165, 105, 100);
+					this.weaponAttack = 32;
+					this.armorDef = 36;
+					this.armorMDef = 6;
+					this.bonusHP = 1000;
+					this.bonusLust = 80;
+					this.level = 62;
+					this.additionalXP = 500;
+				}
 			}
 			else {
 				this.short = "incubus";

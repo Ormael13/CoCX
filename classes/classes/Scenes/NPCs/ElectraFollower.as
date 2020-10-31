@@ -256,7 +256,7 @@ public function electraSex():void {
 	outputText("Electra is smiling wide with that weaselly, naughty grin of hers.\n\n");
 	outputText("\"<i>Oh my… so how do you plan to take me?"+((player.raijuScore() < 10 || player.thunderbirdScore() < 12) ? " Keep in mind any bodily contact will result in a discharge, I can't help it." : "")+"</i>\"");
 	menu();
-	if (player.raijuScore() >= 10) {
+	if (player.raijuScore() >= 10 || player.thunderbirdScore() >= 12) {
 		addButton(0, "Charge up", ElectraSeXChargeUp);
 		addButton(1, "Volt Transfer", ElectraVoltTransfer);
 	}

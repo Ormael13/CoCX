@@ -48,10 +48,12 @@ import classes.Scenes.NPCs.Electra;
 import classes.Scenes.NPCs.Neisa;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
+import classes.Scenes.NPCs.Zenji;
 import classes.Scenes.Places.Boat.Marae;
 import classes.Player;
 import classes.Items.*;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
+import classes.Stats.Buff;
 
 use namespace CoC;
 	
@@ -194,7 +196,7 @@ use namespace CoC;
 			else
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
 			outputText("<b>PC Speed %:</b> " + player.getMaxStats("spe") + "\n");
-			if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
+		*/	if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
 				outputText("<b>TelAdre Tripxi Guns general timer:</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxi) + "\n");
 				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) {
 					outputText("<b>TelAdre Tripxi Guns 1 (v1):</b> " + player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) + " (Desert Eagle)\n");
@@ -233,7 +235,7 @@ use namespace CoC;
 					outputText("<b>TelAdre Tripxi Guns 6 (v4):</b> " + player.statusEffectv4(StatusEffects.TelAdreTripxiGuns6) + "\n");
 				}
 			}
-		*/	outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
+			outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
 			menu();
 			if (player.hasPerk(PerkLib.EnergyDependent)) addButtonDisabled(0, "Cultivate", "You're unable to recover soulforce by cultivating.");
 			else addButton(0, "Cultivate", SoulforceRegeneration).hint("Spend some time on restoring some of the used soulforce.");
@@ -263,8 +265,7 @@ use namespace CoC;
 			addButton(5, "Enemies", EnemiesMenu).hint("For spawning various enemies to test fight them.");
 			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(7, "Body State", BodyStateMenu).hint("For more precise adjusting of few other body values or parts than Stats Adj option.");
-			if (player.hasPerk(PerkLib.Metamorph)) addButton(8, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Metamorph all options unlock.");
-			addButton(9, "ClickItOnce", AddMaxBackpack2).hint("setup change for lessen engine load on max stat calculations. Will work only once so not need to click it twice (no it won't bug if you click so unless you like clicking really not click it more than once...");
+			if (player.hasPerk(PerkLib.Metamorph)) addButton(8, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Metamorph all options unlock.")
 			addButton(10, "-2-", submenucuzwhynot).hint("Other test option that not fit anywhere else and etc.");
 			addButton(11, "PerkGalore1", PerkGalore1);
 			addButton(12, "PerkGalore2", PerkGalore2);
@@ -273,12 +274,13 @@ use namespace CoC;
 		}
 		public function submenucuzwhynot():void {
 			menu();
-			addButton(4, "ClickItOnce", AddMaxBackpack3).hint("Fixing possible mess ups form bimbo/bro/futa body to PC");
+			//addButton(4, "ClickItOnce", AddMaxBackpack3).hint("");
 			addButton(6, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(7, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
 			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
 			addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
 			if ((player.hasPerk(PerkLib.TitanGripEx) && !player.hasPerk(PerkLib.GigantGripEx)) || player.hasPerk(PerkLib.LegendaryGolemMaker)) addButton(10, "PerkFixes", AddMaxBackpack).hint("Fix testers saves perks for Giant's Grip (Ex) and above Epic Golem maker");
+			addButton(11, "ChimeraUprising", AddMaxBackpack4).hint("Use only ONCE if PC from older save have chimerical body perks above Basic stage.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function AddMaxBackpack():void {
@@ -293,28 +295,43 @@ use namespace CoC;
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack2():void {
-			if (!player.hasStatusEffect(StatusEffects.StrTouSpeCounter1)) {
-				player.createStatusEffect(StatusEffects.StrTouSpeCounter1, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.StrTouSpeCounter2, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.IntWisCounter1, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.IntWisCounter2, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.LibSensCounter1, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.LibSensCounter2, 0, 0, 0, 0);
-				player.strtouspeintwislibsenCalculation1();
-				player.strtouspeintwislibsenCalculation2();
-			}
-			doNext(SoulforceCheats);
+			
+			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack3():void {
-			if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) {
-				if (player.hasPerk(PerkLib.BimboBody)) player.removePerk(PerkLib.BimboBody);
-				if (player.hasPerk(PerkLib.BimboBrains)) player.removePerk(PerkLib.BimboBrains);
-				if (player.hasPerk(PerkLib.BroBody)) player.removePerk(PerkLib.BroBody);
-				if (player.hasPerk(PerkLib.BroBrains)) player.removePerk(PerkLib.BroBrains);
-				if (player.hasPerk(PerkLib.FutaForm)) player.removePerk(PerkLib.FutaForm);
-				if (player.hasPerk(PerkLib.FutaFaculties)) player.removePerk(PerkLib.FutaFaculties);
-			}
+			
 			doNext(SoulforceCheats);
+		}
+		public function AddMaxBackpack4():void {
+			if (player.hasPerk(PerkLib.ChimericalBodySemiAdvancedStage)) {
+				player.removePerk(PerkLib.ChimericalBodySemiAdvancedStage);
+				player.createPerk(PerkLib.ChimericalBodySemiImprovedStage, 0, 0, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodyAdvancedStage)) {
+				player.removePerk(PerkLib.ChimericalBodyAdvancedStage);
+				player.createPerk(PerkLib.ChimericalBodyImprovedStage, 0, 0, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage)) {
+				player.removePerk(PerkLib.ChimericalBodySemiSuperiorStage);
+				player.createPerk(PerkLib.ChimericalBodySemiAdvancedStage, 0, 0, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySuperiorStage)) {
+				player.removePerk(PerkLib.ChimericalBodySuperiorStage);
+				player.createPerk(PerkLib.ChimericalBodyAdvancedStage, 0, 0, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySemiPeerlessStage)) {
+				player.removePerk(PerkLib.ChimericalBodySemiPeerlessStage);
+				player.createPerk(PerkLib.ChimericalBodySemiSuperiorStage, 0, 0, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodyPeerlessStage)) {
+				player.removePerk(PerkLib.ChimericalBodyPeerlessStage);
+				player.createPerk(PerkLib.ChimericalBodySuperiorStage, 0, 0, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySemiEpicStage)) {
+				player.removePerk(PerkLib.ChimericalBodySemiEpicStage);
+				player.createPerk(PerkLib.ChimericalBodySemiPeerlessStage, 0, 0, 0, 0);
+			}
+			doNext(submenucuzwhynot);
 		}
 public function FightAria():void {
 	clearOutput();
@@ -974,7 +991,6 @@ public function FightHellfireSnail():void {
 			addButton(9, "Wis", StatsMenuWis).hint("Adj Wis.");
 			addButton(10, "Tone/Thicc/Fem", StatsMenuToneThicknessFeminity).hint("Adj Tone/Thickness/Feminity.");
 			addButton(11, "Lib", StatsMenuLib).hint("Adj Lib.");
-			addButton(12, "Sens", StatsMenuSens).hint("Adj Sens.");
 			addButton(13, "Cor", StatsMenuCor).hint("Adj Cor.");
 			addButton(14, "Back", SoulforceCheats);
 		}
@@ -1062,20 +1078,6 @@ public function FightHellfireSnail():void {
 			addButton(9, "Lib Down 5", SubLib5).hint("Substract 1000 from Lib.");
 			addButton(14, "Back", StatsAscensionMenu);
 		}
-		public function StatsMenuSens():void {
-			menu();
-			addButton(0, "Sens Up 1", AddSens1).hint("Add 1 to Sens.");
-			addButton(5, "Sens Down 1", SubSens1).hint("Substract 1 from Sens.");
-			addButton(1, "Sens Up 2", AddSens2).hint("Add 10 to Sens.");
-			addButton(6, "Sens Down 2", SubSens2).hint("Substract 10 from Sens.");
-			addButton(2, "Sens Up 3", AddSens3).hint("Add 50 to Sens.");
-			addButton(7, "Sens Down 3", SubSens3).hint("Substract 50 from Sens.");
-			addButton(3, "Sens Up 4", AddSens4).hint("Add 200 to Sens.");
-			addButton(8, "Sens Down 4", SubSens4).hint("Substract 200 from Sens.");
-			addButton(4, "Sens Up 5", AddSens5).hint("Add 1000 to Sens.");
-			addButton(9, "Sens Down 5", SubSens5).hint("Substract 1000 from Sens.");
-			addButton(14, "Back", StatsAscensionMenu);
-		}
 		public function StatsMenuCor():void {
 			menu();
 			addButton(0, "Cor Up 1", AddCor1).hint("Add 1 to Cor.");
@@ -1114,7 +1116,8 @@ public function FightHellfireSnail():void {
 			addButton(5, "Add EXP 1", AddEXP1).hint("Add 100 EXP.");
 			addButton(6, "Add EXP 2", AddEXP2).hint("Add 1000 EXP.");
 			addButton(7, "Add EXP 3", AddEXP3).hint("Add 10000 EXP.");
-			addButton(8, "Add EXP 4", AddEXP4).hint("Add 100000 EXP.");
+			//addButton(8, "Add EXP 4", AddEXP4).hint("Add 100000 EXP.");
+			addButton(8, "Test dynamic stat", TestDynamicStats).hint("Test Dynamic stats.");
 			if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) < 0) addButton(10, "Trib Perks", TribulationPerks).hint("Add 2 Tribulation perks.");
 			if (player.findPerk(PerkLib.SoulAncestor) < 0) addButton(11, "10-12 St.", Stage10to12SoulPerks).hint("Add all soul cultivator related perks for stages 10-12 of cultivation.");
 			if (player.level < CoC.instance.levelCap) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
@@ -1576,6 +1579,7 @@ public function FightHellfireSnail():void {
 			addButton(7, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
 			addButton(8, "HBA Armor", AddHBAArmor).hint("Add 1 HBA Armor for testing purposes.");
 			addButton(9, "YODrops", AddYukiOnnaStuff).hint("Add both Yuki Onna equipment drops for testing purposes.");
+			addButton(10, "SpikeShields", AddSpikedShields).hint("Add set of two spiked shields of various sizes and weight for testing purposes.");
 			addButton(11, "GobMechPrime", AddGoblinMechPrime).hint("Add 1 Goblin Mech Prime for testing purposes.");
 			addButton(12, "MatrixArmory1", AddTheSeerHairpinAndCo).hint("Adds: 1 Eldritch Staff, 1 master Gloves, 1 Gnoll Throwing Axes, 1 Hodr's Bow, 1 Truestrike Sword, 1 Sceptre of Command, 1 Demonic Scythe, 1 Seer's Hairpin, Sakura Petal Kimono, Oni bead necklace");
 			addButton(13, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
@@ -1585,7 +1589,7 @@ public function FightHellfireSnail():void {
 			menu();
 			if (page == 1) {
 				addButton(0, "Fox Jewel", AddFoxJewel).hint("Add 1 Fox Jewel.");
-				addButton(1, "Methir Crytal", AddMethir).hint("Add 1 crystal Melts.");
+				addButton(1, "CDI", AddCurrentDebugItem).hint("Add 1 Gun.");
 				//addButton(2, "", ).hint("Add 1 .");
 				//addButton(3, "", ).hint("Add 1 .");
 				//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
@@ -1605,14 +1609,15 @@ public function FightHellfireSnail():void {
 				addButton(0, "SkybornSeed", AddSkybornSeed).hint("Add 1 Skyborn Seed.");
 				addButton(1, "F.Fish", AddFreshFish).hint("Add 1 Fresh Fish.");
 				addButton(2, "BehemothCum", AddBehemothCum).hint("Add 1 bottle of Behemoth Cum.");
-				//addButton(3, "", ).hint("Add 1 .");
+				addButton(3, "TGOGossamer", AddThickGreenOnnaGossamer).hint("Add 1 Thick Green Onna Gossamer.");
 				addButton(4, "WhiteIceS.", AddWhiteIceShard).hint("White Ice Shard");
 				addButton(5, "Enigmanium", AddEnigmanium).hint("Add 1 vial of Enigmanium.");
 				addButton(6, "Skelp", AddSkelp).hint("Add 1 Skelp (WIP Melkie TF).");
 				addButton(7, "Naga Oils", AddGorgonOil).hint("Add 1 vial of Gorgon, Vouivre and Couatl Oil.");
 				addButton(8, "VT RV WF", AddVoltageTopaz).hint("Add 1 Voltage Topaz, 1 vial of Red Blood (Bat TF) and 1 Wonder Fruit.");
 				addButton(9, "DSJ HS FSS", AddDarkSlimeJelly).hint("Add 1 Dark Slime Jelly, 1 Hydra Scale and 1 Fire Snail Saliva.");
-				//addButton(10, "", ).hint("Add 1 .");
+				addButton(10, "Fafnir tear", AddFTear).hint("Add 1 Fafnir tear (WIP Frost wyrm TF).");
+				addButton(11, "Bubblegum", AddBubble).hint("Add 1 Bubblegum (WIP Cancer TF).");
 				//addButton(11, "", ).hint("Add 1 .");
 				if (player.findPerk(PerkLib.ElementalConjurerMindAndBodySacrifice) < 0) addButton(12, "E.Pearls", AddThePearls).hint("Add all three Elemental Pearls.");
 				addButton(13, "-1-", NonEquipmentMenu, page - 1);
@@ -1632,7 +1637,7 @@ public function FightHellfireSnail():void {
 				addButton(7, "ChitinShard", AddBeeChitin).hint("Add 1 Chitin shard.");
 				addButton(8, "GreenGel", AddGreenGel).hint("Add 1 Green Gel.");
 				addButton(9, "DragonScale", AddDragonscale).hint("Add 1 Dragonscale.");
-				//addButton(10, "", ).hint("Add 1 .");
+				addButton(10, "S.Shard", AddShard).hint("Add 1 S.Shard.");//addButton(10, "", ).hint("Add 1 .");
 				//addButton(11, "", ).hint("Add 1 .");
 				//addButton(12, "", ).hint("Add 1 .");
 				addButton(13, "-2-", MaterialMenu, page + 1);
@@ -1662,11 +1667,12 @@ public function FightHellfireSnail():void {
 				addButton(0, "FightForPearl", FightForPearl).hint("Test fight to get Sky Poison Pearl legally (aside we cheat to start fight)");
 				addButton(1, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
 				addButton(2, "Pierce", FightPierce).hint("Test fight with Pierce.");
+				addButton(2, "FairyTest", FairyTest).hint("Become a fairy.");
 				//addButton(3, "", ).hint("Test fight with .");
 				//addButton(4, "", ).hint("Test fight with .");
 				//addButton(5, "", ).hint("Test fight with .");
 				//addButton(6, "", ).hint("Test fight with .");
-				//addButton(7, "", ).hint("Test fight with .");
+				addButton(7, "Zenji", FightZenji).hint("Test fight with Zenji.");
 				addButton(8, "Sonya", FightSonya).hint("Test fight with Sonya.");
 				addButton(9, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
 				addButton(10, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
@@ -1740,6 +1746,10 @@ public function FightHellfireSnail():void {
 			outputText("\n\n<b>(Gained 1 Dragonscale!)</b>\n\n");
 			inventory.takeItem(useables.D_SCALE, curry(MaterialMenu, 1));
 		}
+		public function AddShard():void {
+			outputText("\n\n<b>(Gained 1 Shard!)</b>\n\n");
+			inventory.takeItem(useables.S_SHARD, curry(MaterialMenu, 1));
+		}
 		public function AddFreshFish():void {
 			outputText("\n\n<b>(Gained 1 Fresh Fish!)</b>\n\n");
 			inventory.takeItem(consumables.FREFISH, curry(NonEquipmentMenu, 2));
@@ -1792,6 +1802,18 @@ public function FightHellfireSnail():void {
 			outputText("\n\n<b>(Gained 1 Skelp!)</b>\n\n");
 			inventory.takeItem(consumables.SKELP__, curry(NonEquipmentMenu, 2));
 		}
+		public function AddFTear():void {
+			outputText("\n\n<b>(Gained 1 Fafnir Tear!)</b>\n\n");
+			inventory.takeItem(consumables.F_TEAR, curry(NonEquipmentMenu, 2));
+		}
+		public function AddBubble():void {
+			outputText("\n\n<b>(Gained 1 Bubblegum!)</b>\n\n");
+			inventory.takeItem(consumables.BUBBLEG, curry(NonEquipmentMenu, 2));
+		}
+		public function AddThickGreenOnnaGossamer():void {
+			outputText("\n\n<b>(Gained 1 Thick Green Onna Gossamer!)</b>\n\n");
+			inventory.takeItem(consumables.WHITEIS, SoulforceCheats);
+		}
 		public function AddWhiteIceShard():void {
 			outputText("\n\n<b>(Gained 1 White Ice Shard!)</b>\n\n");
 			inventory.takeItem(consumables.WHITEIS, SoulforceCheats);
@@ -1823,6 +1845,10 @@ public function FightHellfireSnail():void {
 		public function AddMethir():void {
 			outputText("\n\n<b>(Gained 1 Methir crystal!)</b>\n\n");
 			inventory.takeItem(consumables.METHIRC, curry(NonEquipmentMenu, 1));
+		}
+		public function AddCurrentDebugItem():void {
+			outputText("\n\n<b>(Gained 1 Testing gun!)</b>\n\n");
+			inventory.takeItem(weaponsrange.M1CERBE, curry(NonEquipmentMenu, 1));
 		}
 		public function AddSkybornSeed():void {
 			outputText("\n\n<b>(Gained 1 Skyborn Seed!)</b>\n\n");
@@ -1935,197 +1961,172 @@ public function FightHellfireSnail():void {
 			doNext(StatsAscensionMenu);
 		}
 		public function AddStr1():void {
-			player.str = player.str + 1;
+			player.strStat.core.value += 1;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function AddStr2():void {
-			player.str = player.str + 10;
+			player.strStat.core.value += 10;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function AddStr3():void {
-			player.str = player.str + 50;
+			player.strStat.core.value += 50;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function AddStr4():void {
-			player.str = player.str + 200;
+			player.strStat.core.value += 200;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function AddStr5():void {
-			player.str = player.str + 1000;
+			player.strStat.core.value += 1000;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function AddTou1():void {
-			player.tou = player.tou + 1;
+			player.touStat.core.value += 1;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function AddTou2():void {
-			player.tou = player.tou + 10;
+			player.touStat.core.value += 10;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function AddTou3():void {
-			player.tou = player.tou + 50;
+			player.touStat.core.value += 50;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function AddTou4():void {
-			player.tou = player.tou + 200;
+			player.touStat.core.value += 200;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function AddTou5():void {
-			player.tou = player.tou + 1000;
+			player.touStat.core.value += 1000;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function AddSpe1():void {
-			player.spe = player.spe + 1;
+			player.speStat.core.value += 1;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function AddSpe2():void {
-			player.spe = player.spe + 10;
+			player.speStat.core.value += 10;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function AddSpe3():void {
-			player.spe = player.spe + 50;
+			player.speStat.core.value += 50;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function AddSpe4():void {
-			player.spe = player.spe + 200;
+			player.speStat.core.value += 200;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function AddSpe5():void {
-			player.spe = player.spe + 1000;
+			player.speStat.core.value += 1000;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function AddInte1():void {
-			player.inte = player.inte + 1;
+			player.intStat.core.value += 1;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function AddInte2():void {
-			player.inte = player.inte + 10;
+			player.intStat.core.value += 10;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function AddInte3():void {
-			player.inte = player.inte + 50;
+			player.intStat.core.value += 50;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function AddInte4():void {
-			player.inte = player.inte + 200;
+			player.intStat.core.value += 200;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function AddInte5():void {
-			player.inte = player.inte + 1000;
+			player.intStat.core.value += 1000;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function AddWis1():void {
-			player.wis = player.wis + 1;
+			player.wisStat.core.value += 1;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function AddWis2():void {
-			player.wis = player.wis + 10;
+			player.wisStat.core.value += 10;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function AddWis3():void {
-			player.wis = player.wis + 50;
+			player.wisStat.core.value += 50;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function AddWis4():void {
-			player.wis = player.wis + 200;
+			player.wisStat.core.value += 200;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function AddWis5():void {
-			player.wis = player.wis + 1000;
+			player.wisStat.core.value += 1000;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function AddLib1():void {
-			player.lib = player.lib + 1;
+			player.libStat.core.value += 1;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function AddLib2():void {
-			player.lib = player.lib + 10;
+			player.libStat.core.value += 10;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function AddLib3():void {
-			player.lib = player.lib + 50;
+			player.libStat.core.value += 50;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function AddLib4():void {
-			player.lib = player.lib + 200;
+			player.libStat.core.value += 200;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function AddLib5():void {
-			player.lib = player.lib + 1000;
+			player.libStat.core.value += 1000;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
-		public function AddSens1():void {
-			player.sens = player.sens + 1;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function AddSens2():void {
-			player.sens = player.sens + 10;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function AddSens3():void {
-			player.sens = player.sens + 50;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function AddSens4():void {
-			player.sens = player.sens + 200;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function AddSens5():void {
-			player.sens = player.sens + 1000;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
 		public function AddCor1():void {
-			player.cor = player.cor + 1;
+			dynStats("cor", 1);
 			statScreenRefresh();
 			StatsMenuCor();
 		}
 		public function AddCor2():void {
-			player.cor = player.cor + 5;
+			dynStats("cor", 5);
 			statScreenRefresh();
 			StatsMenuCor();
 		}
 		public function AddCor3():void {
-			player.cor = player.cor + 10;
+			dynStats("cor", 10);
 			statScreenRefresh();
 			StatsMenuCor();
 		}
 		public function AddCor4():void {
-			player.cor = player.cor + 50;
+			dynStats("cor", 50);
 			statScreenRefresh();
 			StatsMenuCor();
 		}
@@ -2160,197 +2161,172 @@ public function FightHellfireSnail():void {
 			StatsMenuToneThicknessFeminity();
 		}
 		public function SubStr1():void {
-			player.str = player.str - 1;
+			player.strStat.core.value -= 1;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function SubStr2():void {
-			player.str = player.str - 10;
+			player.strStat.core.value -= 10;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function SubStr3():void {
-			player.str = player.str - 50;
+			player.strStat.core.value -= 50;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function SubStr4():void {
-			player.str = player.str - 200;
+			player.strStat.core.value -= 200;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function SubStr5():void {
-			player.str = player.str - 1000;
+			player.strStat.core.value -= 1000;
 			statScreenRefresh();
 			StatsMenuStr();
 		}
 		public function SubTou1():void {
-			player.tou = player.tou - 1;
+			player.touStat.core.value -= 1;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function SubTou2():void {
-			player.tou = player.tou - 10;
+			player.touStat.core.value -= 10;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function SubTou3():void {
-			player.tou = player.tou - 50;
+			player.touStat.core.value -= 50;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function SubTou4():void {
-			player.tou = player.tou - 200;
+			player.touStat.core.value -= 200;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function SubTou5():void {
-			player.tou = player.tou - 1000;
+			player.touStat.core.value -= 1000;
 			statScreenRefresh();
 			StatsMenuTou();
 		}
 		public function SubSpe1():void {
-			player.spe = player.spe - 1;
+			player.speStat.core.value -= 1;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function SubSpe2():void {
-			player.spe = player.spe - 10;
+			player.speStat.core.value -= 10;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function SubSpe3():void {
-			player.spe = player.spe - 50;
+			player.speStat.core.value -= 50;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function SubSpe4():void {
-			player.spe = player.spe - 200;
+			player.speStat.core.value -= 200;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function SubSpe5():void {
-			player.spe = player.spe - 1000;
+			player.speStat.core.value -= 1000;
 			statScreenRefresh();
 			StatsMenuSpe();
 		}
 		public function SubInte1():void {
-			player.inte = player.inte - 1;
+			player.intStat.core.value -= 1;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function SubInte2():void {
-			player.inte = player.inte - 10;
+			player.intStat.core.value -= 10;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function SubInte3():void {
-			player.inte = player.inte - 50;
+			player.intStat.core.value -= 50;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function SubInte4():void {
-			player.inte = player.inte - 200;
+			player.intStat.core.value -= 200;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function SubInte5():void {
-			player.inte = player.inte - 1000;
+			player.intStat.core.value -= 1000;
 			statScreenRefresh();
 			StatsMenuInte();
 		}
 		public function SubWis1():void {
-			player.wis = player.wis - 1;
+			player.wisStat.core.value -= 1;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function SubWis2():void {
-			player.wis = player.wis - 10;
+			player.wisStat.core.value -= 10;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function SubWis3():void {
-			player.wis = player.wis - 50;
+			player.wisStat.core.value -= 50;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function SubWis4():void {
-			player.wis = player.wis - 200;
+			player.wisStat.core.value -= 200;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function SubWis5():void {
-			player.wis = player.wis - 1000;
+			player.wisStat.core.value -= 1000;
 			statScreenRefresh();
 			StatsMenuWis();
 		}
 		public function SubLib1():void {
-			player.lib = player.lib - 1;
+			player.libStat.core.value -= 1;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function SubLib2():void {
-			player.lib = player.lib - 10;
+			player.libStat.core.value -= 10;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function SubLib3():void {
-			player.lib = player.lib - 50;
+			player.libStat.core.value -= 50;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function SubLib4():void {
-			player.lib = player.lib - 200;
+			player.libStat.core.value -= 200;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
 		public function SubLib5():void {
-			player.lib = player.lib - 1000;
+			player.libStat.core.value -= 1000;
 			statScreenRefresh();
 			StatsMenuLib();
 		}
-		public function SubSens1():void {
-			player.sens = player.sens - 1;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function SubSens2():void {
-			player.sens = player.sens - 10;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function SubSens3():void {
-			player.sens = player.sens - 50;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function SubSens4():void {
-			player.sens = player.sens - 200;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
-		public function SubSens5():void {
-			player.sens = player.sens - 1000;
-			statScreenRefresh();
-			StatsMenuSens();
-		}
 		public function SubCor1():void {
-			player.cor = player.cor - 1;
+			dynStats("cor", -1);
 			statScreenRefresh();
 			StatsMenuCor();
 		}
 		public function SubCor2():void {
-			player.cor = player.cor - 5;
+			dynStats("cor", -5);
 			statScreenRefresh();
 			StatsMenuCor();
 		}
 		public function SubCor3():void {
-			player.cor = player.cor - 10;
+			dynStats("cor", -10);
 			statScreenRefresh();
 			StatsMenuCor();
 		}
 		public function SubCor4():void {
-			player.cor = player.cor - 50;
+			dynStats("cor", -50);
 			statScreenRefresh();
 			StatsMenuCor();
 		}
@@ -2426,6 +2402,10 @@ public function FightHellfireSnail():void {
 			statScreenRefresh();
 			PerksGemsEXPLvL();
 		}
+		public function TestDynamicStats():void {
+			player.statStore.addBuff('sens',+10,'tag',{text:'Debug buff!', rate: Buff.RATE_HOURS, tick: 1});
+			statScreenRefresh();
+		}
 		public function AddLvL1():void {
 			player.level = player.level + 1;
 			player.statPoints += 5;
@@ -2465,6 +2445,14 @@ public function FightHellfireSnail():void {
 		public function AddYukiOnnaStuff2():void {
 			outputText("\n\n<b>(Gained 2nd Yuki Onna item!)</b>\n\n");
 			inventory.takeItem(headjewelries.SNOWFH, EquipmentMenu);
+		}
+		public function AddSpikedShields():void {
+			outputText("\n\n<b>(Gained Heavy Spiked Shield!)</b>\n\n");
+			inventory.takeItem(shields.SPIH_SH, AddSpikedShields2);
+		}
+		public function AddSpikedShields2():void {
+			outputText("\n\n<b>(Gained Massive Spiked Shield!)</b>\n\n");
+			inventory.takeItem(shields.SPIM_SH, EquipmentMenu);
 		}
 		public function AddGoblinMechPrime():void {
 			outputText("\n\n<b>(Gained 1 Goblin Mech Prime!)</b>\n\n");
@@ -2534,6 +2522,36 @@ public function FightHellfireSnail():void {
 			clearOutput();
 			outputText("Entering battle with Pierce! Enjoy ^^");
 			startCombat(new Pierce());
+		}
+		public function FairyTest():void {
+			clearOutput();
+			outputText("FAIRYTIME ^^");
+			player.faceType = Face.FAIRY;
+			player.tongue.type = Tongue.ELF;
+			player.eyes.type = Eyes.FAIRY
+			player.ears.type = Ears.ELVEN
+			player.hairType = Hair.FAIRY;
+			player.tailType = Tail.NONE
+			player.arms.type = Arms.ELF
+			player.lowerBody = LowerBody.ELF;
+			player.wings.type = Wings.FAIRY;
+			player.skinType = Skin.PLAIN
+			player.skinAdj = "flawless";
+			player.removeCock(0, player.cockTotal());
+			player.skin.coverage = Skin.COVERAGE_NONE;
+			var growth:int = 1 + rand(3);
+			if (player.breastRows.length > 0) {
+				if (player.breastRows[0].breastRating < 2 && rand(3) == 0) growth++;
+				if (player.breastRows[0].breastRating < 5 && rand(4) == 0) growth++;
+				if (player.breastRows[0].breastRating < 6 && rand(5) == 0) growth++;
+			}
+			player.createPerk(PerkLib.TransformationImmunity,0,0,0,0);
+		}
+		public function FightZenji():void {
+			clearOutput();
+			outputText("Entering battle with Zenji! Enjoy ^^");
+			flags[kFLAGS.ZENJI_PROGRESS] = 1;
+			startCombat(new Zenji());
 		}
 		public function FightSonya():void {
 			clearOutput();
@@ -3578,8 +3596,11 @@ public function FightHellfireSnail():void {
 			else addButtonDisabled(2, "KitsuMansion", "");
 			if (flags[kFLAGS.SOUL_SENSE_IZUMI] >= 3) addButton(3, "Izumi", IzumiEnc).hint("Req. 300+ soulforce");
 			else addButtonDisabled(3, "Izumi", "");
+			//next page button?
 			if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] >= 3) addButton(5, "Priscilla", PriscillaEnc).hint("Req. 320+ soulforce");
 			else addButtonDisabled(5, "Priscilla", "");
+			//Sheila find
+			//previous page button?
 			if (flags[kFLAGS.SOUL_SENSE_WORLD_TREE] >= 1) addButton(10, "WorldTree", findWorldTree).hint("Req. 100+ soulforce");
 			else addButtonDisabled(10, "WorldTree", "");
 			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) addButton(13, "Giacomo", findGiacomo).hint("Req. 100+ soulforce");
@@ -3666,4 +3687,4 @@ public function FightHellfireSnail():void {
 			}
 		}
 	}
-}
+}

@@ -81,14 +81,13 @@ package classes.Scenes.Areas.GlacialRift
 				outputText("You feel like you nearly died for that matter so Yu finding you was timely indeed. You thank her for the save.\n\n");
 				outputText("\"<i>Yu did nothing big. If [name] want for heart warmth though [name] should ask Yu, not sketchy girl in blizzard.</i>\"\n\n");
 				outputText("You will remember that one.\n\n");
-				if (player.tou > 30) player.tou -= 30;
-				else player.tou = 1;
+				player.addCurse("tou", 30);
 			}
 			else {
 				if (rand(3) == 0) player.skinTone = "snow white";
 				else {
 					if (rand(2) == 0) player.skinTone = "pale blue";
-					else player.skinTone == "glacial white";
+					else player.skinTone = "glacial white";
 				}
 				player.skinAdj = "cold";
 				outputText("At first it felt horribly cold like you were dying, then the sensation began to fade as you finally felt yourself getting warmer. Or is it truly that you are getting warmer in the first place? Seeking to feel more you pull her closer and she rewards you by gently sliding a finger into your folds. You gasp in her mouth, taking a deep breath of fresh cold air. Cold? Hot? You no longer really care as you are too lost in this smooth little world just between you and her. Her pale white skin touching yours, making you shiver exquisitely. ");

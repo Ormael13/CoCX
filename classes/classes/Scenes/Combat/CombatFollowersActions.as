@@ -490,38 +490,41 @@ import classes.StatusEffects;
 		public function excelliaCombatActions():void {
 			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerExcellia) > 0) {
-				var choice10:Number = rand(20);
-				if (player.hasPerk(PerkLib.MotivationSu)) {
-					if (choice10 == 0) excelliaCombatActions0();
-					if (choice10 >= 1 && choice10 < 10) mitziCombatActions1();
-					if (choice10 >= 10 && choice10 < 14) mitziCombatActions2();
-					if (choice10 >= 14 && choice10 < 17) mitziCombatActions3();
-					if (choice10 >= 17) mitziCombatActions4();
-				}
-				else if (player.hasPerk(PerkLib.MotivationEx)) {
-					if (choice10 < 4) excelliaCombatActions0();
-					if (choice10 >= 4 && choice10 < 12) mitziCombatActions1();
-					if (choice10 >= 12 && choice10 < 15) mitziCombatActions2();
-					if (choice10 >= 15 && choice10 < 18) mitziCombatActions3();
-					if (choice10 == 18 || choice10 == 19) mitziCombatActions4();
-				}
-				else if (player.hasPerk(PerkLib.Motivation)) {
-					if (choice10 < 7) excelliaCombatActions0();
-					if (choice10 >= 7 && choice10 < 13) mitziCombatActions1();
-					if (choice10 >= 13 && choice10 < 16) mitziCombatActions2();
-					if (choice10 == 16 || choice10 == 17) mitziCombatActions3();
-					if (choice10 == 18 || choice10 == 19) mitziCombatActions4();
-				}
+				if (player.HP < player.maxHP() * .5) excelliaCombatActions5();
 				else {
-					if (choice10 < 10) excelliaCombatActions0();
-					if (choice10 >= 10 && choice10 < 14) mitziCombatActions1();
-					if (choice10 == 14 || choice10 == 15) mitziCombatActions2();
-					if (choice10 == 16 || choice10 == 17) mitziCombatActions3();
-					if (choice10 == 18 || choice10 == 19) mitziCombatActions4();
+					var choice10:Number = rand(20);
+					if (player.hasPerk(PerkLib.MotivationSu)) {
+						if (choice10 == 0) excelliaCombatActions0();
+						if (choice10 >= 1 && choice10 < 10) excelliaCombatActions1();
+						if (choice10 >= 10 && choice10 < 14) excelliaCombatActions2();
+						if (choice10 >= 14 && choice10 < 17) excelliaCombatActions3();
+						if (choice10 >= 17) excelliaCombatActions4();
+					}
+					else if (player.hasPerk(PerkLib.MotivationEx)) {
+						if (choice10 < 4) excelliaCombatActions0();
+						if (choice10 >= 4 && choice10 < 12) excelliaCombatActions1();
+						if (choice10 >= 12 && choice10 < 15) excelliaCombatActions2();
+						if (choice10 >= 15 && choice10 < 18) excelliaCombatActions3();
+						if (choice10 == 18 || choice10 == 19) excelliaCombatActions4();
+					}
+					else if (player.hasPerk(PerkLib.Motivation)) {
+						if (choice10 < 7) excelliaCombatActions0();
+						if (choice10 >= 7 && choice10 < 13) excelliaCombatActions1();
+						if (choice10 >= 13 && choice10 < 16) excelliaCombatActions2();
+						if (choice10 == 16 || choice10 == 17) excelliaCombatActions3();
+						if (choice10 == 18 || choice10 == 19) excelliaCombatActions4();
+					}
+					else {
+						if (choice10 < 10) excelliaCombatActions0();
+						if (choice10 >= 10 && choice10 < 14) excelliaCombatActions1();
+						if (choice10 == 14 || choice10 == 15) excelliaCombatActions2();
+						if (choice10 == 16 || choice10 == 17) excelliaCombatActions3();
+						if (choice10 == 18 || choice10 == 19) excelliaCombatActions4();
+					}
 				}
 			}
 			else {
-				outputText("Mitzi grabs a couple needles off her belt along with her daughters and adopts a fighting stance.\n\n");
+				outputText("Excellia drops into a fighting stance, ready to take on " + monster.a + monster.short + ".\n\n");
 				player.addStatusValue(StatusEffects.CombatFollowerExcellia, 4, 1);
 			}
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
@@ -534,7 +537,45 @@ import classes.StatusEffects;
 			}
 		}
 		public function excelliaCombatActions0():void {
-			outputText("Mitzi and her daughters stand by, waiting for an opportunity to attack.\n\n");
+			outputText("Excellia glares at " + monster.a + monster.short + ", looking for an opportunity to strike\n\n");
+		}
+		public function excelliaCombatActions1():void {
+			var dmg7:Number = player.statusEffectv1(StatusEffects.CombatFollowerExcellia);
+			dmg7 += scalingBonusStrengthCompanion() * 0.25;
+			dmg7 = Math.round(dmg7);
+			doDamage(dmg7);
+			outputText("Excellia moos out as she charges at " + monster.a + monster.short + " at full force, delivering a devastating blow. (" + String(dmg7) + ")\n\n");
+		}
+		public function excelliaCombatActions2():void {
+			var dmg8:Number = player.statusEffectv1(StatusEffects.CombatFollowerExcellia);
+			dmg8 += scalingBonusStrengthCompanion() * 0.35;
+			dmg8 = Math.round(dmg8);
+			doDamage(dmg8);
+			outputText("Excellia lunges at " + monster.a + monster.short + ", throwing her full weight at " + monster.pronoun2 + " for " + String(dmg8) + " damage.\n\n");
+		}
+		public function excelliaCombatActions3():void {
+			var dmg9:Number = player.statusEffectv2(StatusEffects.CombatFollowerExcellia);
+			doDamage(dmg9);
+			outputText("Excellia smirks as she stares down " + monster.a + monster.short + ". She lunges at " + monster.pronoun2 + " with a hip check, effectively knocking back and dazing " + monster.pronoun2 + ".  (" + String(dmg9) + ")\n\n");
+			if (!monster.hasStatusEffect(StatusEffects.LoweredAccuracy)) monster.createStatusEffect(StatusEffects.LoweredAccuracy, 40, 0, 0, 0);
+		}
+		public function excelliaCombatActions4():void {
+			var dmg10:Number = player.statusEffectv1(StatusEffects.CombatFollowerExcellia);
+			var unarmedExcellia:Number = player.statusEffectv2(StatusEffects.CombatFollowerExcellia);
+			unarmedExcellia *= (1.6 + 0.15 * rand(7));
+			dmg10 += scalingBonusStrengthCompanion() * 0.5;
+			dmg10 += unarmedExcellia;
+			dmg10 = Math.round(dmg10);
+			doDamage(dmg10);
+			outputText("Excellia lets out a battle cry as she charges at " + monster.a + monster.short + ". She thrashes, headbutts, and kicks " + monster.pronoun2 + " with one powerful blow after another.  (" + String(dmg10) + ")\n\n");
+		}
+		public function excelliaCombatActions5():void {
+			outputText("Excellia gasps when notices that you're hurt.\n\n");
+			outputText("\"<i>[name]! Hang on!</i>\"\n\n");
+			outputText("She quickly grabs you and shoves you down onto one of her leaking nipples. The restorative milk squirts into your mouth, giving you a burst of energy and healing some of your wounds.\n\n");
+			HPChange(Math.round(player.maxHP() * .25), true);
+            dynStats("lus", 5);
+            fatigue(-50);
 		}
 		
 		public function amilyCombatActions():void {

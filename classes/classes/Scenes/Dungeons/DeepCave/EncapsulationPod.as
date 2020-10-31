@@ -27,7 +27,7 @@ import classes.internals.*;
 					outputText(ballsDescriptLight() + " ");
 					if(player.hasVagina()) outputText("and ");
 				}
-				if(player.hasVagina()) outputText(player.vaginaDescript() + " ");
+				if(player.hasVagina()) outputText("[vagina]");
 				else if(player.balls == 0) outputText("taint ");
 				outputText("as they climb ever-further up your body.  In spite of yourself, you feel the touch of arousal licking at your thoughts.\n");
 				if(player.lust < 35) {

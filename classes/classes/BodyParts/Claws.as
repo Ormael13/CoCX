@@ -40,6 +40,17 @@ public class Claws extends SaveableBodyPart {
 		return "fingernails";
 	}
 
+	public function descriptionFinger():String {
+		var toneText:String = tone == "" ? " " : (", " + tone + " ");
+		switch (type) {
+			case NORMAL: return "fingernail";
+			case LIZARD: return "short curved" + toneText + "claw";
+			case DRAGON: return "powerful, thick curved" + toneText + "claw";
+			// Since mander arms are hardcoded and the others are NYI, we're done here for now
+		}
+		return "fingernail";
+	}
+
 	override protected function loadFromOldSave(savedata:Object):void {
 		type = intOr(savedata.clawType,NORMAL);
 		tone = stringOr(savedata.clawTone,"");

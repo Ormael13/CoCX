@@ -32,7 +32,7 @@ import classes.internals.*;
 			outputText("Alvina moans a word of power, squirting in orgasmic pleasure as a nova of black magic explodes from her. Unable to dodge, you are squarely hit by the energy wave and feel your arousal and sensitivity rise.\n\n");
 			lustDmg = Math.round(lustDmg);
 			player.dynStats("lus", lustDmg, "scale", false);
-			player.sens += 10;
+			player.addCurse("sens", 10);
 		}
 		
 		private function alvinaPolarMidnight():void {
@@ -87,17 +87,18 @@ import classes.internals.*;
 		}
 		
 		private function alvinaSoulTear():void {
-			if (!hasStatusEffect(StatusEffects.SoulTear)) {
-				outputText("\"<i>Most demons steal souls through sex. I have a more academic approach to it. Do not worry, you will still writhe in pleasure and reach orgasm as I tear it out of your chest!</i>\"\n\n");
-				outputText("You see a set of dark tendrils of black magic surging around her body, like grasping claws, ready to bury themselves in you. You need to stop that incantation before she strikes you with it!\n\n");
-				createStatusEffect(StatusEffects.SoulTear, 0, 0, 0, 0);
-			}
-			else {
+			if (hasStatusEffect(StatusEffects.SoulTear)) {
 				var damage:Number = player.maxHP();
 				if (player.minHP() < 0) damage -= player.minHP();
 				outputText("You barely register in disbelief as the tendrils rush for you like some horrible monsters out of your worst nightmares. These creatures have a mind of their own and even as you try to run away, they plunge into your chest and grab something before forcefully tearing it out. You scream in anguish as your soul is torn from your body. (" + damage + ")\n\n");
+				createStatusEffect(StatusEffects.AbilityCooldown4, 5, 0, 0, 0);
 				removeStatusEffect(StatusEffects.SoulTear);
 				player.HP -= damage;
+			}
+			else {
+				outputText("\"<i>Most demons steal souls through sex. I have a more academic approach to it. Do not worry, you will still writhe in pleasure and reach orgasm as I tear it out of your chest!</i>\"\n\n");
+				outputText("You see a set of dark tendrils of black magic surging around her body, like grasping claws, ready to bury themselves in you. You need to stop that incantation before she strikes you with it!\n\n");
+				createStatusEffect(StatusEffects.SoulTear, 0, 0, 0, 0);
 			}
 		}
 		
@@ -141,9 +142,9 @@ import classes.internals.*;
 			if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere)) {
 				outputText("Little she know that you have the ability to completely remove yourself from existence if only for a brief moment thanks to ");
 				if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere)) outputText("being everywhere and nowhere at the same time, a living paradox");
-				//outputText("(if titania)your Faerie magic(end of cut)");
 				outputText(". You are barely conscious of the blades colliding together at your previous position with a deafening crash as you appear a few yards away!\n\n");
 			}
+			else if (player.fairyScore() >= 18) outputText("You avoid the attack thanks to your Faerie magic flickering out of reality just as the blades collides.\n\n");
 			else if (player.displacerbeastScore() >= 13) outputText("Little she know that you have the ability to displace yourself out of such deadly attacks, You are barely conscious of the blades colliding together at your previous position with a deafening crash as you appear a few yards away!\n\n");
 			else {
 				var damage:Number = player.maxHP() * 1.1;
@@ -152,7 +153,7 @@ import classes.internals.*;
 				if (player.shieldBlock > 0) damage -= 0.01 * player.maxHP() * combatBlock2();
 				if (damage < 1) damage = 0;
 				player.HP -= damage;
-				if (player.HP < player.minHP()) outputText("You dodge, deflect, parry and block as good as you can to take as little damage as possible yet are still impaled a fair hundred times!");
+				if (player.HP <= player.minHP()) outputText("You dodge, deflect, parry and block as good as you can to take as little damage as possible yet are still impaled a fair hundred times!");
 				else {
 					outputText("Realising that you are still alive Alvina applaud your resilience in annoyance. The fight is far from over but what matters is that you can win.");
 					createStatusEffect(StatusEffects.TimeStopUsed, 0, 0, 0, 0);

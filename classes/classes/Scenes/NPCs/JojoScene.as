@@ -1046,11 +1046,12 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 		else if (player.cor > 40)
 			cleanse -= 1;
 		dynStats("cor", cleanse - player.countCockSocks("alabaster"));
-		if (player.str < 45) dynStats("str", 1); //Str boost to 45
-		if (player.tou < 45) dynStats("tou", 1); //Tou boost to 45
-		if (player.spe < 75) dynStats("spe", 1); //Speed boost to 75
-		if (player.inte < 80) dynStats("int", 1); //Int boost to 80
-		if (player.lib > 0) dynStats("lib", -1); //Libido lower to 15
+		player.trainStat("str", +1, 50);
+		player.trainStat("tou", +1, 50);
+		player.trainStat("spe", +1, 50);
+		player.trainStat("int", +1, 50);
+		player.trainStat("wis", +1, 50);
+		player.trainStat("wis", +1, 100);
 		flags[kFLAGS.JOJO_LAST_MEDITATION] = model.time.days;
 		player.addStatusValue(StatusEffects.JojoMeditationCount, 1, 1);
 	}
@@ -1196,14 +1197,12 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				}
 				
 				outputText("\n\nYou stand on wobbly legs, happy to have so thoroughly fucked such a chaste and good-natured creature.  You vow to do it again soon, realizing you feel more clearheaded, if a bit more evil.");
-				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-				player.sexReward("cum");
+				player.sexReward("cum","Vaginal");
 				dynStats("lib", -10, "cor", 4);
 				monk+=1;
 				
 				//Preggers chance!
-				if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 				else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 			}
 			else if (player.gender == 3) 
@@ -1288,7 +1287,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				//Preggers chance!
 				player.sexReward("cum");
 				player.sexReward("Default", "Default",true,false);
-				if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 				else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 			}
 		}
@@ -1366,10 +1365,9 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 					dynStats("lib", 2, "cor", 1);
 				}
 				//Preggers chance!
-				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-				if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-				if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 				else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
+				player.sexReward("cum","Vaginal");
 			}
 			if(player.gender == 3) {
 				if (player.isBiped()) outputText("You spread your legs and crook your finger");
@@ -1409,8 +1407,8 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 					dynStats("lib", 2, "cor", 1);
 				}
 				//Preggers chance!
-				player.sexReward("cum");
-				if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				player.sexReward("cum","Vaginal");
+				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 				else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 			}
 		}
@@ -1518,7 +1516,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				player.cuntChange(3, true);
 				//Preggers chance!
 				player.sexReward("cum");
-				if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 				else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 				//The end
 				if(player.lib > 50 && player.cor > 80) {
@@ -1556,16 +1554,6 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				outputText("Jojo glares down at you, and begins praying, slowly laying prayer papers all over your battered form.  You feel rage that quickly dissipates, replaced with a calm sense of peace.  You quickly lose consciousness, but are happy he defeated you.\n\nWhen you wake, you discover a note:\n\"<i>The fighting allowed me to exorcise most of your inner demons.  A part of me wanted to seek revenge for what you had done to me, but I know it was the taint on your soul that was responsible.  If we meet again I would be happy to meditate with you.\n\n          -Jojo.</i>\"");
 				player.orgasm();
 				dynStats("lib", -10., "cor", -15);
-				if (player.lib < 10) {
-					player.lib = 0;
-					dynStats("lib", 15);
-				}
-				if (player.cockTotal() == 1) player.lib = 15;
-				if (player.vaginas.length == 1) player.lib += 10;
-				if (player.cockTotal() > 1) player.lib += 5;
-				if (player.horseCocks() > 0) player.lib += 3;
-				if (player.dogCocks() > 0) player.lib += 2;
-				if (player.biggestLactation() >= 1) player.lib += 2;
 				monk = 0;
 			}
 			else {
@@ -1584,7 +1572,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 						outputText("You black out as Jojo cums AGAIN, forcing a river of spunk from your already over-filled uterus.");
 						player.cuntChange(monster.cocks[0].cockThickness, true);
 						//Preggers chance!
-						if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+						if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 						else player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE + 82, 101); //Jojo's kids take longer for some reason
 					}
 					if (player.gender == 0) {
@@ -1709,7 +1697,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 			}
 			outputText("You cry out in pleasure as your orgasm floods through your body, causing your juices to splash out around your mouse slut's cock" + (player.hasCock() ? ", and your own [cocks] to explode with thick splashes of your hot cum across his chest and belly" : "") + ". You stay seated on his hips until your orgasm fades, then with a sigh of pleasure you stand off of him and dismiss him with a wave of your hand.  ");
 			//Preggers chance!
-			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 			else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 			player.sexReward("cum");
 			dynStats("cor", 0.5);
@@ -2376,7 +2364,7 @@ public function meditateInForest():void {
 	clearOutput();
 	outputText("Jojo smiles and leads you off the path to a small peaceful clearing.  There is a stump in the center, polished smooth and curved in a way to be comfortable.  He gestures for you to sit, and instructs you to meditate.\n\nAn indeterminate amount of time passes, but you feel more in control of yourself.  Jojo congratulates you, but offers a warning as well.  \"<i>Be ever mindful of your current state, and seek me out before you lose yourself to the taints of this world.  Perhaps someday this tainted world can be made right again.</i>\"");
 	
-	dynStats("str", .5, "tou", .5, "int", .5, "lib", -1, "lus", -5, "cor", (-1 - player.countCockSocks("alabaster")));
+	dynStats("str", .5, "tou", .5, "int", .5, "wis", .5,"lib", -1, "lus", -5, "cor", (-1 - player.countCockSocks("alabaster")));
 	
 	if (!player.hasStatusEffect(StatusEffects.JojoMeditationCount))
 		player.createStatusEffect(StatusEffects.JojoMeditationCount, 1, 0, 0, 0);
@@ -2454,7 +2442,10 @@ public function refuseOfferOfHelp():void
 }
 
 public function jojoCamp2():void {
-	if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaJojo();
+	if (!player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
+		if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaJojo();
+		else jojoCamp();
+	}
 	else jojoCamp();
 }
 
@@ -3039,10 +3030,31 @@ public function apparantlyJojoDOESlift():void
 		outputText(enlightenedBlurbs[rand(enlightenedBlurbs.length)] + "\n\n");
 	}
 	//Boost attributes!
-	if (player.str < 50) dynStats("str", 0.5);
-	if (player.str < 80) dynStats("str", 0.5);
-	if (player.inte < 50) dynStats("inte", 0.5);
-	if (player.inte < 80) dynStats("inte", 0.5);
+	if (player.strStat.core.value < 50) {
+		dynStats("str", 1); //Str boost to 45
+		player.strStat.core.value += .5;
+	}
+	if (player.strStat.core.value < 80) {
+		dynStats("str", 1); //Str boost to 45
+		player.strStat.core.value += .5;
+	}
+	if (player.intStat.core.value < 50){
+		dynStats("int", 1); //Int boost to 80
+		player.intStat.core.value += .5;
+	}
+	if (player.intStat.core.value < 80){
+		dynStats("int", 1); //Int boost to 80
+		player.intStat.core.value += .5;
+	}
+	if (player.wisStat.core.value < 50){
+		dynStats("wis", 1); //Wisdom boost to 100
+		player.wisStat.core.value += .5;
+	}
+	if (player.wisStat.core.value < 100){
+		dynStats("wis", 1); //Wisdom boost to 100
+		player.wisStat.core.value += .5;
+	}
+
 	menu();
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -3060,9 +3072,9 @@ public function wormRemoval():void {
 	//Infestation purged. Hit Points reduced to 10% of MAX. Corruption -20.
 	if (player.HP > int(player.maxHP() * .5)) player.HP = int(player.maxHP() * .5);
 	player.damageHunger(30);
-	player.sens = 11;
+	player.removeCurse("sens", 100);
 	player.removeStatusEffect(StatusEffects.Infested);
-	dynStats("sen", -1, "lus", -99, "cor", -15);
+	dynStats("lus", -99, "cor", -15);
 	player.orgasm();
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -3279,7 +3291,7 @@ private function getVagFuckedByMouse():void {
 	dynStats("sens", 1, "cor", -1);
 	flags[kFLAGS.JOJO_VAGINAL_CATCH_COUNTER]++;
 	flags[kFLAGS.JOJO_SEX_COUNTER]++;
-	if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 	else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82, (jojoCumQ() < 2000 ? 100 - (jojoCumQ() / 50) : 60));
 	player.sexReward("cum");
 	doNext(camp.returnToCampUseOneHour);
@@ -3329,6 +3341,9 @@ public function mishapsLunaJojo():void {
 	outputText("Jojo is looking at the ground in front of his training area in annoyance. Seems someone has drawn an ugly imp in the dirt using red paint and the imp happens to be jerking a 10 foot long cock. You spot Luna in the distance, cleaning the area with a smile. Surely it couldn’t have been her.\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampLunaMishaps1)) player.addStatusValue(StatusEffects.CampLunaMishaps1, 2, 1);
 	else player.createStatusEffect(StatusEffects.CampLunaMishaps1, 0, 1, 0, 0);
+	if (!player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.createStatusEffect(StatusEffects.LunaWasCaugh, 1, 0, 0, 0);
+	if (player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.addStatusValue(StatusEffects.LunaWasCaugh, 1, 1);
+	if (player.statusEffectv1(StatusEffects.LunaWasCaugh) == 3) outputText("<b>That's it, you're sure of it now, it's all Luna's doing!</b>\n\n");
 	doNext(playerMenu);
 }
 

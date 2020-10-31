@@ -14,7 +14,7 @@ package classes.Items.Weapons
 		
 		public function BeautifulStaff() 
 		{
-			super("B.Staff", "B.Staff", "beautiful staff", "a beautiful shining staff", "smack", 2, 160, "This beautiful staff shines brilliantly in the light, showing the flawless craftsmanship.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this taff.", "Staff", PerkLib.WizardsFocus, 0, 0, 0, 0);
+			super("B.Staff", "B.Staff", "beautiful staff", "a beautiful shining staff", "smack", 2, 160, "This beautiful staff shines brilliantly in the light, showing the flawless craftsmanship.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this staff.", "Staff", PerkLib.WizardsFocus, 0, 0, 0, 0);
 		}
 		
 		override public function get description():String {

@@ -58,7 +58,7 @@ public class ShouldraScene extends NPCAwareContent implements TimeAwareInterface
 		}
 	
 		public function timeChangeLarge():Boolean {
-            if (shouldraFollower.followerShouldra() && flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN] == 0 && CoC.instance.model.time.hours == 3) {
+            if (shouldraFollower.followerShouldra() && flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN] == 0 && camp.IsSleeping) {
                 flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN] = -1;
 				shouldraFollower.shouldraDream1();
 				return true;
@@ -69,7 +69,7 @@ public class ShouldraScene extends NPCAwareContent implements TimeAwareInterface
                 return true;
 			}
 			//Ghostgirl pissed off dreams
-			if (shouldraFollower.followerShouldra() && flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -236 && model.time.hours == 3 && player.gender > 0 && !prison.inPrison) {
+			if (shouldraFollower.followerShouldra() && flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -236 && camp.IsSleeping && player.gender > 0 && !prison.inPrison) {
                 SceneLib.shouldraFollower.nightTimeShouldraRapesThePC();
                 return true;
 			}

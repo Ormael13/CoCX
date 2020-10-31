@@ -327,6 +327,16 @@ import classes.Items.JewelryLib;
 
 		public function pregnancyUpdate():Boolean { return false; }
 
+		/**
+		 * Returns key item instance by name, or null if no such key item possessed.
+		 */
+		public function getKeyItem(keyName:String):KeyItemClass {
+			for (var i:int = 0; i<keyItems.length; i++) {
+				if (keyItems[i].keyName == keyName) return keyItems[i];
+			}
+			return null;
+		}
+
 		//Create a keyItem
 		public function createKeyItem(keyName:String, value1:Number, value2:Number, value3:Number, value4:Number):void
 		{
@@ -630,6 +640,7 @@ import classes.Items.JewelryLib;
 				min -= maxHP() * 0.08;
 				min -= (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}//nastepny diehard to 5% i 1000
+			if (findPerk(PerkLib.LizanMarrowFinalForm) >= 0) min -= maxHP() * 0.05;
 			if (findPerk(PerkLib.OrcAdrenalGlandsFinalForm) >= 0 || game.player.orcScore() >= 11) {
 				if (findPerk(PerkLib.Ferocity) >= 0) min -= maxHP() * 0.07;
 				if (findPerk(PerkLib.OrcAdrenalGlands) >= 0) min -= maxHP() * 0.01;
@@ -721,6 +732,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.UnlockEndurance4thStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 6;
 			var multimax:Number = 1;
+			if (findPerk(PerkLib.ZenjisInfluence1) >= 0) multimax += 0.1;
 			if (findPerk(PerkLib.LimitBreakerHeart1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerHeart2ndStage) >= 0) multimax += 0.1;
 			max *= multimax;
@@ -1031,6 +1043,7 @@ import classes.Items.JewelryLib;
 				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0 && inte >= 100) multimax += 0.3;
 				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0 && inte >= 125) multimax += 0.4;
 			}
+			if (findPerk(PerkLib.ZenjisInfluence1) >= 0) multimax += 0.1;
 			if (findPerk(PerkLib.AscensionInnerPower) >= 0) max += perkv1(PerkLib.AscensionInnerPower) * 40;
 			if (jewelryEffectId == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude2;
@@ -1123,6 +1136,7 @@ import classes.Items.JewelryLib;
 			//if (game.player.dragonScore() >= 11) max += 25;//pig races having max hunger bonus too?
 			if (findPerk(PerkLib.EzekielBlessing) >= 0) max += 50;
 			if (findPerk(PerkLib.ManticoreMetabolismEvolved) >= 0) max += 50;
+			if (findPerk(PerkLib.DisplacerMetabolismEvolved) >= 0) max += 50;
 			// (findPerk(PerkLib.) >= 0 && game.player.humanScore() < 5) max += 100;
 			// jak bedzie mieć chimeryczna nature to kolejny boost to max hunger moze...150 lub nawet 200 ^^
 			if (findPerk(PerkLib.IronStomach) >= 0) max += 50;

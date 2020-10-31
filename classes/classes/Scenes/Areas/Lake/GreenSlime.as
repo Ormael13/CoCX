@@ -21,9 +21,12 @@ public class GreenSlime extends Monster
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) SceneLib.combat.cleanupAfterCombatImpl();//doNext(SceneLib.combat.cleanupAfterCombatImpl)
 			else {
 				var temp3:Function = null;
-				if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
+				if (player.pcCanUseUniqueSexScene())
+				{
+					temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
+				}
 				//Boobfeed.
-				else if (player.hasStatusEffect(StatusEffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) {
+				if (player.hasStatusEffect(StatusEffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) {
 					//Eligable to rape
 					if(player.lust >= 33 && player.gender > 0) {
 						outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?");

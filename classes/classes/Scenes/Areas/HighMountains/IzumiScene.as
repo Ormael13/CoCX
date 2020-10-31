@@ -4,6 +4,7 @@ import classes.*;
 import classes.BodyParts.Horns;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.UniqueSexScenes;
+import classes.Stats.Buff;
 
 /**
 	 * Izumi, the fuckhuge Oni. TOUCH THE FLUFFY HORN.
@@ -235,7 +236,7 @@ import classes.Scenes.UniqueSexScenes;
 				outputText("“<i>Hm?</i>” the shadow grunts, then speaks.  “<i>Oh?  Now how did you find your way in here, I wonder?</i>”  The voice is deep, rich and undeniably female, but has a gravelly edge to it like a cross between magma and molten chocolate.  You hear the hiss of indrawn breath and a small light flares up briefly in the darkness, then the shadow speaks again.  “<i>Well, whatever. It’s been a while since I had company, ");
 				if (player.minotaurScore() > 3) outputText("plus it looks like you're thinking with the head on top of your neck, rather than the head between your legs, unlike the stupid brutes who usually wander around these parts.  ");
 				else if (player.dogScore() > 3) outputText("plus it looks like you'd actually be able to resist chasing down a stick, if I threw one outta' the cave.  ");
-				else if (player.goblinScore() > 3) outputText("plus you don't seem to be as insufferable as the rest of those little green whores who trollop around these parts, hunting their next lay.  ");
+				else if (player.isGoblinoid()) outputText("plus you don't seem to be as insufferable as the rest of those little green whores who trollop around these parts, hunting their next lay.  ");
 				else if (player.demonScore() > 3) outputText("plus you're not forever going on about corruption this, enslavement that, demonic taint the other, unlike the insufferable clods who usually wander around these parts.  ");
 				else if (player.harpyScore() > 3) outputText("plus you're not screeching incessantly, like the feathery sluts who usually flap their way around these parts.  They're lucky they </i>can<i> fly, 'cause I'd give them something to really squawk about if I could get my hands on them.  ");
 				else if (player.lizardScore() > 3) outputText("plus, you don't have the same creepy eyes that the scaley idiots from around these parts keep trying to use on me.  ");
@@ -334,65 +335,11 @@ import classes.Scenes.UniqueSexScenes;
 				deltaLib *= 2;
 				lustMod *= 2;
 			}
-
-			player.createStatusEffect(StatusEffects.IzumisPipeSmoke, SMOKE_DURATION, deltaSpd, deltaSns, deltaLib);
-			
-			// Can't use dynStats for this, because stats() has a chained modifier to incoming sens changes that could turn this value into 8x what we expected it to be
-			player.spe += deltaSpd;
-			player.sens += deltaSns;
-			player.lib += deltaLib;
-			var maxes:Object = player.getAllMaxStats();
-			if (player.spe <= 0) player.spe = 1;
-			if (player.sens >= maxes.sens) player.sens = maxes.sens;
-			if (player.lib >= maxes.lib) player.lib = maxes.lib;
-			
+			player.statStore.addBuffObject({'spe':+deltaSpd,'sens':+deltaSns,'lib':+deltaLib},'IzumiSmoke',{text:'Izumi Pipe Smoke', rate:Buff.RATE_HOURS, tick: 24})
 			showStatDown('spe');
 			showStatUp('sens');
 			showStatUp('lib');
-			
 			dynStats("lus", lustMod);
-		}
-
-		// Update the duration of the pipe smoke effect
-		public function updateSmokeDuration(hours:int):void
-		{
-			var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.IzumisPipeSmoke);
-
-			if (sac)
-			{
-				sac.value1 -= hours;
-
-				if (sac.value1 <= 0)
-				{
-					this.smokeEffectWearsOff();
-				}
-			}
-		}
-
-		// Method to contain removal mechanics + scene text to spit out
-		protected function smokeEffectWearsOff():void
-		{
-			var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.IzumisPipeSmoke);
-
-			if (sac)
-			{
-				player.spe += Math.abs(sac.value2);
-				player.sens -= sac.value3;
-				player.lib -= sac.value4;
-				
-				if (player.sens > 100) player.sens = 100;
-				var max:int = player.getMaxStats("spe");
-				if (player.spe > max) player.spe = max;
-				if (player.lib <= 0) player.lib = 1;
-				
-				showStatUp('spe');
-				showStatDown('sens');
-				showStatDown('lib');
-				
-				outputText("\n<b>You groan softly as your thoughts begin to clear somewhat.  It looks like the effects of Izumi's pipe smoke have worn off.</b>\n");
-				
-				player.removeStatusEffect(StatusEffects.IzumisPipeSmoke);
-			}
 		}
 
 		// Actual introduction scene content for pipesmokin

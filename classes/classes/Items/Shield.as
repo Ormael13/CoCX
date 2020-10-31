@@ -35,6 +35,8 @@ public class Shield extends Useable //Equipable
 			var desc:String = _description;
 			//Type
 			desc += "\n\nType: Shield";
+			if (perk == "Massive") desc += "(Massive)";
+			else if (perk == "Large") desc += "(Large)";
 			//Block Rating
 			desc += "\nBlock: " + String(block);
 			//Value
@@ -61,6 +63,10 @@ public class Shield extends Useable //Equipable
 			}
 			else if (game.player.hasPerk(PerkLib.Rigidity)) {
 				outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
+				return false;
+			}
+			else if (game.player.shieldPerk == "Massive" && game.player.findPerk(PerkLib.GigantGrip) < 0) {
+				outputText("This shield requires use of both hands. Unequip your current melee weapon before equipping it. ");
 				return false;
 			}
 			return true;

@@ -135,8 +135,8 @@ public class Ceraph extends Monster
 				//(+10 str/toughness, 1 level, and 10 xp reward.)
 				XP += 20;
 				level += 2;
-				str += 15;
-				tou += 15;
+				this.strStat.core.value += 15;
+				this.touStat.core.value += 15;
 				HP += 100;
 				lust = (maxLust() * 0.33);
 				player.dynStats("lus", 30);
@@ -161,7 +161,7 @@ public class Ceraph extends Monster
 			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.");
 			}
-			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 15 && player.armorName == "red, high-society bodysuit") {
+			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 15 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("With Raphael's teachings and the easy movement afforded by your bodysuit, you easily anticipate and sidestep " + a + short + "'s attack.");
 			}
 			//Determine damage - str modified by enemy toughness!
@@ -208,7 +208,7 @@ public class Ceraph extends Monster
 			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.");
 			}
-			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 15 && player.armorName == "red, high-society bodysuit") {
+			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 15 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("With Raphael's teachings and the easy movement afforded by your bodysuit, you easily anticipate and sidestep " + a + short + "'s attack.");
 			}
 			else {

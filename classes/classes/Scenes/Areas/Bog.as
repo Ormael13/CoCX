@@ -35,6 +35,26 @@ public class Bog extends BaseContent
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
+			//Zenji
+			if (rand(5) == 0 && flags[kFLAGS.ZENJI_PROGRESS] != -1 && (flags[kFLAGS.ZENJI_PROGRESS] < 8 || flags[kFLAGS.ZENJI_PROGRESS] == 10)) {
+				if (flags[kFLAGS.ZENJI_PROGRESS] >= 4) {
+					if (flags[kFLAGS.ZENJI_PROGRESS] == 6) {
+						if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] == 100) {
+							if (flags[kFLAGS.ZENJI_PROGRESS] == 7) SceneLib.zenjiScene.followerZenjiRepeatOffer();
+							else SceneLib.zenjiScene.followerZenjiFirstTimeOffer();
+						}
+						else if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] == 0) {
+							if (flags[kFLAGS.ZENJI_PROGRESS] == 10) SceneLib.zenjiScene.loverZenjiRepeatOffer();
+							else SceneLib.zenjiScene.loverZenjiFirstTimeOffer();
+						}
+						else SceneLib.zenjiScene.part2TrollEncounterRepeat();
+					}
+					else SceneLib.zenjiScene.part2TrollEncounterFirst();
+				}
+				else if (flags[kFLAGS.ZENJI_PROGRESS] > 0 && flags[kFLAGS.ZENJI_PROGRESS] < 4) SceneLib.zenjiScene.part1TrollEncounterRepeat();
+				else if (flags[kFLAGS.ZENJI_PROGRESS] == 0) SceneLib.zenjiScene.part1TrollEncounter();
+				return;
+			}
 			if ((isHalloween() && (date.fullYear > flags[kFLAGS.TREACLE_MINE_YEAR_DONE]) && flags[kFLAGS.BOG_EXPLORED] % 4 == 0) && (flags[kFLAGS.PHOUKA_LORE] > 0)) {
 				phoukaScene.phoukaHalloween(); //Must have met them enough times to know what they're called, have some idea of their normal behaviour
 				return;

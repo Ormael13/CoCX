@@ -121,7 +121,7 @@ private function postfightoptions():void {
 		if (player.canOvipositSpider() || (player.canOvipositBee() && player.gender > 0)) addButton(8, "Lay Eggs", layEggsInAMinotaurSpiderLike);
 		if ((temp2 == null || rand(2) == 0) && player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(9, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 		if (player.findPerk(PerkLib.Feeder) >= 0) addButton(10, "Nurse", minotaurDrinksMilkNewsAtEleven);
-		if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(11, "Vine in Butt", alrauneVineInButtScene);
+		if (player.isAlraune()) addButton(11, "Vine in Butt", alrauneVineInButtScene);
 	}
 	addButton(12, "Kill", killMinotaur);
 	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
@@ -437,13 +437,19 @@ private function alrauneVineInButtScene():void
 {
 	clearOutput();
 	outputText("The minotaur drops his arm. Transfixed by your a cluster of hard, plant-like stamens in front of his face, he barely notices as you move closer. Your vines grab his arm firmly, making certain there will be no retaliation during the pleasure. By the look on his face, and the state of his torn, rolled up loincloth, though, you doubt that will be a problem. You smirk, justifying to yourself that you are raping this beast because this is how this world works as you maneuver your obscene group of hard, squirming stamens towards his tailhole.\n\n");
-//	outputText("\"<i>You should have watered me.  It was so much harder to grow without proper nutrients</i>\"\n\n");
-	outputText("Your vines mounted stamen slams into his tailhole, spreading it wider as you thrust in and out of the opening, relishing in the feeling of the rough, yet lubricated insides of the minotaur. With your squirming vine stamens successfully embedded in the minotaur, you move your pitcher closer, positioning your " + vaginaDescript(0) + " to take the minotaur’s enormous length into yourself. You feel his member deliciously slide in, and feel the beast’s hot breath radiate as he starts panting in lust.");
+	if(player.isLiliraune())
+	{
+		outputText("\n\n\"<i>Aw sister, ain't he looking cute. For once, he is on the receiving end…</i>\"\n\n");
+		outputText("\"<i>Don’t be fooled, he's only doing this because he hopes we’ll take turns on his cock and that we will. After we get a taste of his butt of course.</i>\"\n\n");
+	}
+	outputText("Y");
+	if(player.isLiliraune()) outputText("ou both giggle as y");
+	outputText("our vines mounted stamen slams into his tailhole, spreading it wider as you thrust in and out of the opening, relishing in the feeling of the rough, yet lubricated insides of the minotaur. With your squirming vine stamens successfully embedded in the minotaur, you move your pitcher closer, positioning your " + vaginaDescript(0) + " to take the minotaur’s enormous length into yourself. You feel his member deliciously slide in, and feel the beast’s hot breath radiate as he starts panting in lust.");
 	//Check for stetchiness!
 	player.cuntChange(monster.cockArea(0), true);
 	outputText("Your remaining stamens wave around the minotaur, tending to his balls, weaving around his limbs, and generally rubbing and throbbing all over him, spreading liquid pollen around and through him, leaving both of you moaning in pleasure. Your vines throb and pulse, quickening in pace as you can feel the pollen swelling in your pitcher. They wave madly, and then, just as their motion makes you dizzy, you feel them stiffen suddenly, and start spewing their load all in and across the minotaur. You gasp and pause, collapsing on the strong back of the minotaur, basking in the afterglow.");
 	statScreenRefresh();
-	if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
     else player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 	player.sexReward("Default","Dick",true,false);
 	player.sexReward("cum","Vaginal");
@@ -490,7 +496,7 @@ private function girlRapeAMinotaur():void {
 	player.sexReward("cum","Vaginal");
 	dynStats("spe", -.5, "int", -.5, "sen", 1.5, "cor", 1);
 	//Preggers chance!
-	if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
     else player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
 	cleanupAfterCombat();
 }
@@ -510,7 +516,7 @@ private function minotaurGetsRapedByHerms():void {
 	player.sexReward("Default","Dick",true,false);
 	dynStats("spe", -.5, "int", -.5, "sen", 1.5, "cor", 1);
 	//Preggers chance!
-	if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
     else player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
 	cleanupAfterCombat();
 }
@@ -584,7 +590,6 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 			startCombat(new Minotaur());
 			return;
 		}
-		
 		outputText("Suddenly you're grabbed from behind, your arms held together by a single massive, furry hand. A heavy, snorting breath brushes the top of your head. You turn your neck to see a massive bull-man. His impressive dick presses ");
 		
 		if (player.isTaur())
@@ -657,7 +662,7 @@ if (doSFWloss() && CoC.instance.inCombat) { //No rape in SFW mode.
 			dynStats("tou", -.5, "sen", 1, "lus", -5, "cor", 1);
 		}
 		//Preggers chance!
-		if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+		if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
         else player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
 		player.sexReward("cum","Vaginal");
 	}

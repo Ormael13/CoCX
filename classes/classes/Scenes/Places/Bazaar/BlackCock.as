@@ -43,25 +43,6 @@ import classes.lists.Gender;
 			//Frida's sprite code goes here
 		}
 		
-		private function applyAndysSmokeEffect():void {
-			if (player.hasStatusEffect(StatusEffects.AndysSmoke)) {
-				if (player.statusEffectv2(StatusEffects.AndysSmoke) > -15) { //Maximum speed loss is -15.
-					player.addStatusValue(StatusEffects.AndysSmoke, 2, -5);
-					dynStats("spe", -5);
-				}
-				if (player.statusEffectv3(StatusEffects.AndysSmoke) < 15) { //Maximum intelligence boost is 15.
-					player.addStatusValue(StatusEffects.AndysSmoke, 3, 5);
-					dynStats("int", 5);
-				}
-				player.changeStatusValue(StatusEffects.AndysSmoke, 1, 8);
-			}
-			else {
-				player.createStatusEffect(StatusEffects.AndysSmoke, 8, -5, 5, 0);
-				dynStats("spe", -5, "int", 5);
-			}
-			
-		}
-		
 		public function blackCockDescription():void {
 			if (isHolidays()) outputText("\n\nThere is also a large marquee-style tent made with black canvas. Smoke rises out of an open flap in the rear. There is a wooden sign next to the front flap depicting a small black rooster; beneath its yellow feet the words \"The Black Cock\" are etched into the old sign. Around the sign there is a festive Christmas wreath with flickering candles. The smell of greasy food and sweets wafts out of the open entrance.");
 			else outputText("\n\nThere is also a large marquee-style tent made with black canvas. Smoke rises from a metal pipe sticking out of a hole in the top. You see a wooden sign next to the front flap depicting a small black rooster; beneath its yellow feet the words \"The Black Cock\" are etched into the old sign. The smell of greasy food and sweets wafts out of the open entrance.");
@@ -185,7 +166,7 @@ import classes.lists.Gender;
 				doNext(checkFoodMenu);
 				return;
 			}
-			if ((player.hunger >= 90 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.hasStatusEffect(StatusEffects.Fullness) && flags[kFLAGS.HUNGER_ENABLED] == 0)) {
+			if ((player.hunger >= (player.maxHunger() - 10) && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.hasStatusEffect(StatusEffects.Fullness) && flags[kFLAGS.HUNGER_ENABLED] == 0)) {
 				outputText("<b>You are too full to consider eating that.</b>");
 				doNext(checkFoodMenu);
 				return;
@@ -214,12 +195,12 @@ import classes.lists.Gender;
 				case "P. Potatoes":
 					player.refillHunger(70);
 					if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(player.maxThicknessCap(), 2);
-					if (flags[kFLAGS.HUNGER_ENABLED] == 0 || (rand(2) == 0 && player.hunger >= 80)) player.butt.type++;
+					if (flags[kFLAGS.HUNGER_ENABLED] == 0 || (rand(2) == 0 && player.hunger >= (player.maxHunger() * 0.8))) player.butt.type++;
 					break;
 				case "Spicy Chilli":
 					player.refillHunger(60);
 					if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(player.maxThicknessCap(), 1);
-					if (flags[kFLAGS.HUNGER_ENABLED] == 0 || (rand(2) == 0 && player.hunger >= 80)) player.hips.type++;
+					if (flags[kFLAGS.HUNGER_ENABLED] == 0 || (rand(2) == 0 && player.hunger >= (player.maxHunger() * 0.8))) player.hips.type++;
 					break;
 				case "Prot. Shake":
 					player.refillHunger(30);
@@ -660,7 +641,7 @@ import classes.lists.Gender;
 			}
 			player.gems -= 5;
 			statScreenRefresh();
-			applyAndysSmokeEffect();
+			player.buff("AndySmoke").forHours(7).addStats({'int.mult':0.05,'spe.mult':-0.05}).withText("Andy Smoke");
 			outputText("\n\nWhat do you want to do?");
 			menu();
 			addButton(0, "Grab It", grabAndysDongAfterSmoking).hint("That cock looks fun to play with!");
@@ -996,7 +977,7 @@ import classes.lists.Gender;
 		}
 		
 		private function vagOrAss(vaginal:Boolean):String {
-			if (vaginal) return player.vaginaDescript();
+			if (vaginal) return "[vagina]";
 			else return assDescript();
 		}
 		
@@ -1100,7 +1081,7 @@ import classes.lists.Gender;
 				outputText("\n\nThe two of you talk, holding an engaging conversation that discusses a range of unimportant but interesting topics. When his dick and knot finally deflate and send a cascade of satyr spunk dripping from your used hole you stay for a minute and enjoy his company. After a short time the two of you rise and you reward him with a kiss before grabbing your [armor] and pulling it on as you head back to camp.");
 			}
 			if (player.hasVagina()) {
-				if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 				else player.knockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR, 50); //2x chance of pregnancy
 			}
 			else player.buttKnockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR, 50);
@@ -1222,9 +1203,8 @@ import classes.lists.Gender;
 				outputText("\n\nThe Rhino puts a hand covered in your juices in front of your [face], \"<i>Lick it.</i>\" He commands and in your post-orgasmic state you don't even think about it, you just stick your [tongue] out and lap up a bit of your own cum. He tugs his giant dick from your wrecked ass and gives it a gentle palming, a silent thank you for the quick break from work.");
 			}
 			outputText("\n\nAs he helps you clean up he tells you how much he likes your ass. After chatting for a little bit he tells you he has to get back to work. As you walk out the tent flap all eyes are on you. After a few moments one of the satyrs sticks his fingers to his lips and gives a high pitched wolf whistle. Some of the tables with people in them erupt in stomping and clapping. Harry's harpy wife catches your eye and gives you a conspiratorial wink, rubbing her pussy through her tight little cut off pants as she watches you leave.");
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 			flags[kFLAGS.BLACK_COCK_HARRY_SEX_COUNTER]++;
+			player.sexReward("cum");
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1269,7 +1249,7 @@ import classes.lists.Gender;
 				doNext(enterTheBlackCock);
 				return;
 			}
-			if ((player.hunger >= 90 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.hasStatusEffect(StatusEffects.Fullness) && flags[kFLAGS.HUNGER_ENABLED] == 0)) {
+			if ((player.hunger >= (player.maxHunger() - 10) && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.hasStatusEffect(StatusEffects.Fullness) && flags[kFLAGS.HUNGER_ENABLED] == 0)) {
 				outputText("<b>You are too full to consider ordering that that.</b>");
 				doNext(enterTheBlackCock);
 				return;
@@ -1395,11 +1375,10 @@ import classes.lists.Gender;
 			player.orgasm();
 			fatigue(25);
 			dynStats("lib", 1, "sens", 2, "cor", 1);
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-			if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
-			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 			else if (player.hasVagina()) player.knockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR);
 			player.buttKnockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR);
+			player.sexReward("cum","Anal");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		

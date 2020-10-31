@@ -794,7 +794,7 @@ private function curingJiangshi():void {
 		player.removePerk(PerkLib.LifeLeech);
 		player.removePerk(PerkLib.Undeath);
 		player.removePerk(PerkLib.EnergyDependent);
-		player.removeStatusEffect(StatusEffects.EnergyDependent);
+		player.statStore.removeBuffs("Energy Vampire");
 		outputText("Done with this place you head back to camp.\n\n");
 		outputText("<b>(Lost Perks: Halted vitals, Super strength, Poison nails, Rigidity, Life leech, Undeath, Energy dependent)</b>\n\n");
 		player.strtouspeintwislibsenCalculation2();
@@ -816,17 +816,17 @@ private function craftingSoulGem():void {
 	clearOutput();
 	outputText("\"<i>Wait, you want me to craft a soul gem!? What do you even intend to do with it? These things are used to capture and hold souls!</i>\"\n\n");
 	outputText("You remind her that it’s your business, telling her that in the end it will serve a greater purpose.\n\n");
-	if (player.hasItem(consumables.S_WATER, 5) && player.hasItem(consumables.ECTOPLS, 5) && player.gems >= 2000) {
-		player.destroyItems(consumables.S_WATER, 5);
-		player.destroyItems(consumables.ECTOPLS, 5);
-		player.gems -= 2000;
+	if (player.hasItem(consumables.S_WATER, 1) && player.hasItem(consumables.ECTOPLS, 1) && player.gems >= 2500) {
+		player.destroyItems(consumables.S_WATER, 1);
+		player.destroyItems(consumables.ECTOPLS, 1);
+		player.gems -= 2500;
 		statScreenRefresh();
 		outputText("\"<i>I hope you know what you're doing. Hand me the recipe and materials, and I will get to work.</i>\"");
 		player.createStatusEffect(StatusEffects.SoulGemCrafting,24,0,0,0);
 		doNext(camp.returnToCampUseOneHour);
 	}
 	else {
-		outputText("\"<i>Regardless, I can’t craft a soul gem without the proper materials. Gather me 5 Ectoplasm, 5 vials of Pure Spring Water, and 2000 gems for the miscellaneous reagents.</i>\"");
+		outputText("\"<i>Regardless, I can’t craft a soul gem without the proper materials. Gather me Ectoplasm, vial of Pure Spring Water, and 2500 gems for the miscellaneous reagents.</i>\"");
 		doNext(meetEvangeline);
 	}
 }

@@ -20,7 +20,7 @@ public class Sheila extends Monster
 		//special 1: frog punch (med-high damage, slightly lower accuracy than reg attack, deals minor concussion which adds 5-10 pts fatigue, may stun pc and prevent attack, misses while blinded or misfires on pcs under 3'6")
 		private function sheilaFrogPunch():void {
 			var damage:Number = 0;
-			spe -= 30;
+			speStat.core.value -= 30;
 			//Midget misfire (if PC < 3'6"):
 			if(player.tallness < 42 && rand(2) == 0) {
 				outputText("Sheila bounces up to you and crouches low, curling her body like a watchspring.  She uncoils with her fist aimed at your jaw, but you easily perform a crouch of your own and duck under her lanky form, unbending yourself to push her legs up as she flies harmlessly overhead.  You can hear a partial shriek before she crashes face-first into the dirt behind you. ");
@@ -52,13 +52,13 @@ public class Sheila extends Monster
 				if(damage < 1) damage = 2;
 				damage = player.takePhysDamage(damage, true);
 			}
-			spe += 30;
+			speStat.core.value += 30;
 		}
 
 		//special 2: flying kick rabbit punch (high damage, much lower accuracy than reg attack, deals concussion which adds 10-15 pts fatigue, may stun pc and prevent attack)
 		private function sheilaFlyingKick():void {
 			var damage:Number = 0;
-			spe -= 60;
+			speStat.core.value -= 60;
 			//Miss:
 			if(player.getEvasionRoll() || (hasStatusEffect(StatusEffects.Blind) && rand(3) == 0)) {
 				outputText("Sheila squats down, then bounds explosively toward you!  She swings her leg out in front to kick, but you roll to the side and she slips past your shoulder.  You hear an \"<i>Oof!</i>\" as she lands on her butt behind you.  When you turn to look, she's already back to her feet, rubbing her smarting posterior and looking a bit embarrassed.");
@@ -80,7 +80,7 @@ public class Sheila extends Monster
 				damage = player.takePhysDamage(damage, true);
 				EngineCore.fatigue(10+rand(6));
 			}
-			spe += 60;
+			speStat.core.value += 60;
 		}
 
 
@@ -114,19 +114,9 @@ public class Sheila extends Monster
 				else outputText("riding your dick to the hilt");
 				outputText(" run rampant inside your head and crowd out everything else.  \"<i>Did you see it, [name]?  My love for you?</i>\" Sheila asks, smiling.  God, did you ever!  You can hardly focus on anything!");
 				//big (20+) int drop and big lib-based lust gain if successful, locks Infest command for the fight if successful, always misses if Sheila is blinded
-				if(!hasStatusEffect(StatusEffects.TwuWuv)) {
-					createStatusEffect(StatusEffects.TwuWuv,0,0,0,0);
+				if(!player.statStore.hasBuff("SheilaCorruption")) {
 					var counter:int = 40+rand(5);
-					showStatDown( 'inte' );
-					// inteDown.visible = true;
-					// inteUp.visible = false;
-					while(counter > 0) {
-						if(player.inte >= 2) {
-							player.inte--;
-							addStatusValue(StatusEffects.TwuWuv,1,1);
-						}
-						counter--;
-					}
+					player.buff("SheilaCorruption").addStat("int",-counter).combatPermanent()
 				}
 				player.dynStats("lus", 30 + player.lib/10 + player.cor/10);
 			}
@@ -308,9 +298,9 @@ public class Sheila extends Monster
 			var bonusHP:Number = 200;
 			if (sheilaDemon) {
 				//-slightly slower, has much more stamina, intel, and HP now
-				this.spe -= 15 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.tou += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.inte += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.speStat.core.value -= 15 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.touStat.core.value += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.intStat.core.value += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				bonusHP += 200;
 				this.bonusLust = 30;
 				lust= 50;

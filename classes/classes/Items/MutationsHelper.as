@@ -66,6 +66,15 @@ import classes.BodyParts.Wings;
 			changes++;
 		}
 
+		public function growPartialChitin(color:String,coverage:int=Skin.COVERAGE_LOW):void {
+			if (player.hasScales()) outputText("\n\nYour [skin coat.color] scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of [skin coat.type].  At last the itching stops as <b>you brush a few more loose scales from the new chitin exoskeleton that covers some of your body.</b>");
+			else if (player.hasFur()) outputText("Your skin suddenly feels itchy as your [skin coat.type] begins falling out in clumps, <b>revealing smooth chitin</b> underneath thought most of your body is still covered with normal human skin.");
+			else if (player.hasFur()) outputText("Your skin suddenly feels itchy as some of your chitin begins falling out, <b>revealing smooth human</b> underneath thought some of your body is still covered chitin.");
+			else outputText("\n\nAn itchy feeling springs up over every inch of your [skin.type].  As you scratch yourself madly, you feel some area of your skin hardening until <b>you are partialy covered in chitin.</b>");
+			player.skin.growCoat(Skin.CHITIN,{color:color},coverage);
+			changes++;
+		}
+
 		public function growChitin(color:String,coverage:int=Skin.COVERAGE_HIGH):void {
 			if (player.hasScales()) outputText("\n\nYour [skin coat.color] scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of [skin coat.type].  At last the itching stops as <b>you brush a few more loose scales from your new chitin exoskeleton.</b>");
 			else if (player.hasFur()) outputText("Your skin suddenly feels itchy as your [skin coat.type] begins falling out in clumps, <b>revealing smooth chitin</b> underneath.");
@@ -165,6 +174,7 @@ import classes.BodyParts.Wings;
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away and scythe shrinking until it vanish completly.  The glossy green coating is soon gone, leaving [skin base.type] behind.");
 					break;
 				case Arms.SPIDER:
+				case Arms.USHI_ONI_ONNA:
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving [skin base.type] behind.");
 					break;
 				case Arms.HARPY:
@@ -339,12 +349,15 @@ import classes.BodyParts.Wings;
 		[Arms.BEAR, null],
 		[Arms.BEE, StatusEffects.UnlockedBeeArms],
 		[Arms.BOAR, StatusEffects.UnlockedBoarArms],
+		[Arms.CANCER, null],
 		[Arms.CAT, StatusEffects.UnlockedCatArms],
+		[Arms.CENTIPEDE, null],
 		[Arms.DISPLACER, StatusEffects.UnlockedDisplacerArms],
 		[Arms.DRAGON, StatusEffects.UnlockedDraconicArms],
 		[Arms.DEVIL, StatusEffects.UnlockedDevilArms],
 		[Arms.ELF, StatusEffects.UnlockedElfArms],
 		[Arms.FOX, StatusEffects.UnlockedFoxArms],
+		[Arms.FROSTWYRM, null],
 		[Arms.GARGOYLE, null],
 		[Arms.GARGOYLE_2, null],
 		[Arms.GHOST, null],
@@ -356,9 +369,11 @@ import classes.BodyParts.Wings;
 		[Arms.HYDRA, null],
 		[Arms.JIANGSHI, null],
 		[Arms.KITSUNE, StatusEffects.UnlockedKitsuneArms],
+		[Arms.KRAKEN, null],
 		[Arms.LION, StatusEffects.UnlockedLionArms],
 		[Arms.LIZARD, StatusEffects.UnlockedLizardArms],
 		[Arms.MANTIS, StatusEffects.UnlockedMantisArms],
+		[Arms.MELKIE, null],
 		[Arms.ONI, StatusEffects.UnlockedOniArms],
 		[Arms.ORC, StatusEffects.UnlockedOrcArms],
 		[Arms.ORCA, StatusEffects.UnlockedOrcaArms],
@@ -373,6 +388,7 @@ import classes.BodyParts.Wings;
 		[Arms.SHARK, StatusEffects.UnlockedSharkArms],
 		[Arms.SPHINX, StatusEffects.UnlockedSphinxArms],
 		[Arms.SPIDER, StatusEffects.UnlockedSpiderArms],
+		[Arms.USHI_ONI_ONNA, null],
 		[Arms.WOLF, null],
 		[Arms.YETI, null],
 		[Arms.YUKI_ONNA, null],
@@ -487,6 +503,7 @@ import classes.BodyParts.Wings;
 		[Face.JABBERWOCKY, null],
 		[Face.JIANGSHI, null],
 		[Face.KANGAROO, null],
+		[Face.KUDERE, null],
 		[Face.LIZARD, StatusEffects.UnlockedLizardFace],
 		[Face.MANTICORE, StatusEffects.UnlockedManticoreFace],
 		[Face.MOUSE, null],
@@ -505,6 +522,7 @@ import classes.BodyParts.Wings;
 		[Face.SHARK_TEETH, StatusEffects.UnlockedSharkTeeth],
 		[Face.SNAKE_FANGS, StatusEffects.UnlockedSnakeFangs],
 		[Face.SPIDER_FANGS, StatusEffects.UnlockedSpiderFangs],
+		[Face.USHI_ONI_ONNA, null],
 		[Face.VAMPIRE, StatusEffects.UnlockedVampireFace],
 		[Face.WOLF, null],
 		[Face.WOLF_FANGS, null],
@@ -558,9 +576,12 @@ import classes.BodyParts.Wings;
 		[Horns.DEMON, StatusEffects.UnlockedDemonHorns],
 		[Horns.DRACONIC_X2, StatusEffects.UnlockedDraconicX2],
 		[Horns.DRACONIC_X4_12_INCH_LONG, StatusEffects.UnlockedDraconicX4],
+		[Horns.FROSTWYRM, null],
 		[Horns.GARGOYLE, null],
 		[Horns.GHOSTLY_WISPS, null],
 		[Horns.GOAT, StatusEffects.UnlockedGoatHorns],
+		[Horns.GOATQUAD, null],
+		[Horns.KRAKEN, null],
 		[Horns.NONE, StatusEffects.UnlockedHumanNoHorns],
 		[Horns.OAK, null],
 		[Horns.ONI, StatusEffects.UnlockedOniSingleHorn],
@@ -569,6 +590,7 @@ import classes.BodyParts.Wings;
 		[Horns.RHINO, null],
 		[Horns.SPELL_TAG, null],
 		[Horns.UNICORN, StatusEffects.UnlockedUnicornHorn],
+		[Horns.USHI_ONI_ONNA, null],
 	]);
 
 	public function setLowerBody(lowerBody:int):Boolean {
@@ -579,10 +601,13 @@ import classes.BodyParts.Wings;
 		[LowerBody.BEAR, null],
 		[LowerBody.BEE, StatusEffects.UnlockedBeeLegs],
 		[LowerBody.BUNNY, null],
+		[LowerBody.CANCER, null],
 		[LowerBody.CAT, StatusEffects.UnlockedCatLegs],
 		[LowerBody.CENTAUR, null],
+		[LowerBody.CENTIPEDE, null],
 		[LowerBody.CHITINOUS_SPIDER_LEGS, StatusEffects.UnlockedSpiderLegs],
 		[LowerBody.CLOVEN_HOOFED, StatusEffects.UnlockedClovenHoofedLegs],
+		[LowerBody.CRAB, null],
 		[LowerBody.DEERTAUR, null],
 		[LowerBody.DEMONIC_CLAWS, StatusEffects.UnlockedDemonClawedLegs],
 		[LowerBody.DEMONIC_HIGH_HEELS, StatusEffects.UnlockedDemonHighHeels],
@@ -594,6 +619,7 @@ import classes.BodyParts.Wings;
 		[LowerBody.FERRET, null],
 		[LowerBody.FIRE_SNAIL, null],
 		[LowerBody.FOX, StatusEffects.UnlockedFoxLowerBody],
+		[LowerBody.FROSTWYRM, null],
 		[LowerBody.GARGOYLE, null],
 		[LowerBody.GARGOYLE_2, null],
 		[LowerBody.GHOST, null],
@@ -607,9 +633,11 @@ import classes.BodyParts.Wings;
 		[LowerBody.HYDRA, null],
 		[LowerBody.JIANGSHI, null],
 		[LowerBody.KANGAROO, null],
+		[LowerBody.KRAKEN, null],
 		[LowerBody.LION, StatusEffects.UnlockedLionLegs],
 		[LowerBody.LIZARD, StatusEffects.UnlockedLizardLegs],
 		[LowerBody.MANTIS, StatusEffects.UnlockedMantisLegs],
+		[LowerBody.MELKIE, null],
 		[LowerBody.MOUSE, null],
 		[LowerBody.NAGA, StatusEffects.UnlockedSnakeLowerBody],
 		[LowerBody.ONI, StatusEffects.UnlockedOniLegs],
@@ -625,6 +653,7 @@ import classes.BodyParts.Wings;
 		[LowerBody.SALAMANDER, StatusEffects.UnlockedSalamanderLegs],
 		[LowerBody.SCYLLA, null],
 		[LowerBody.SHARK, StatusEffects.UnlockedSharkLegs],
+		[LowerBody.USHI_ONI_ONNA, null],
 		[LowerBody.WOLF, null],
 		[LowerBody.YETI, null],
 		[LowerBody.YGG_ROOT_CLAWS, null],
@@ -730,6 +759,8 @@ import classes.BodyParts.Wings;
 		[Tail.SHARK, StatusEffects.UnlockedSharkTail],
 		[Tail.SPIDER_ADBOMEN, StatusEffects.UnlockedSpiderTail],
 		[Tail.THUNDERBIRD, null],
+		[Tail.TWINKASHA, null],
+		[Tail.USHI_ONI_ONNA, null],
 		[Tail.WOLF, null],
 		[Tail.YGGDRASIL, null],
 	]);

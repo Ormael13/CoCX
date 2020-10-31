@@ -59,8 +59,7 @@ package classes.Items.Consumables
 				player.createPerk(PerkLib.ThickSkin, 0, 0, 0, 0);
 			}
 			outputText("\n\nAfter the sensations pass, your [skin.type] feels a little less receptive to touch.");
-			dynStats("sen", -3);
-			if (player.sens < 1) player.sens = 1;
+			player.removeCurse("sens", 5)
 			player.refillHunger(20);
 			
 			return false;

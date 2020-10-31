@@ -200,8 +200,8 @@ public class PerkMenu extends BaseContent {
 		}
 		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0 || player.jiangshiScore() >= 20) {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] != 0) addButton(5, "Normal", toggleflag, kFLAGS.FERAL_COMBAT_MODE, false);
-			if (((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(8, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
-			else addButtonDisabled(8, "Feral", "You not meet all req. to use this. Need to not have any melee weapon equipped OR have equipped gaunlet with any type of artifical claws.");
+			if (((player.weaponName == "fists" && player.hasNaturalWeapons) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(8, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
+			else addButtonDisabled(8, "Feral", "You do not meet all req. to use this. You need to be unarmed and possess a natural weapon OR to have equipped gaunlet with any type of artifical claws.");
 		}
 		if (player.findPerk(PerkLib.Poisoning) >= 0 && flags[kFLAGS.ENVENOMED_MELEE_ATTACK] != 0) addButton(9, "None", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,false);
 		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) {
@@ -536,7 +536,12 @@ public class PerkMenu extends BaseContent {
 				for each (var cond:Object in ptype.requirements) {
 					if (cond.fn(player)) color=(darkTheme()?'#ffffff':'#000000');
 					else color=darkTheme()?'#ff4444':'#aa2222';
-					reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
+					if (cond.text is String){
+						reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
+					}
+					else {
+						reqs.push("<font color='"+color+"'>"+cond.text(player)+"</font>");
+					}
 				}
 				outputText("<ul><li><b>Requires:</b> " + reqs.join(", ")+".</li></ul>");
 			} else {

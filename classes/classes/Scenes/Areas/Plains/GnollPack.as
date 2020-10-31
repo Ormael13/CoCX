@@ -82,7 +82,7 @@ package classes.Scenes.Areas.Plains
 			}
 			if (hasStatusEffect(StatusEffects.Fear)) {
 				if (statusEffectv1(StatusEffects.Fear) == 0) {
-					this.spe += statusEffectv2(StatusEffects.Fear);
+					this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
 					removeStatusEffect(StatusEffects.Fear);
 					outputText("Your foes shake free of their fear and ready themselves for battle.");
 				}

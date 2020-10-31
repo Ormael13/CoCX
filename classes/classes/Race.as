@@ -1,4 +1,6 @@
 package classes {
+import flash.utils.getAliasName;
+
 public class Race {
     public static const ALL_RACES:/*Race*/Array = [];
 
@@ -79,9 +81,16 @@ public class Race {
     public static const JIANGSHI:Race = new Race("Jiangshi",75);
     public static const POLTERGEIST:Race = new Race("Poltergeist",76);
     public static const BANSHEE:Race = new Race("Banshee",77);
-    public static const MELKIE:Race = new Race("Yuki Onna",78);
+    public static const MELKIE:Race = new Race("Melkie",78);
     public static const EASTERBUNNY:Race = new Race("Easter Bunny",79);
     public static const CENTIPEDE:Race = new Race("Centipede",80);
+    public static const FROSTWYRM:Race = new Race("Frost Wyrm",81);
+    public static const CANCER:Race = new Race("Cancer",82);
+    public static const USHIONNA:Race = new Race("Ushi-Onna",83);
+    public static const FAIRY:Race = new Race("Fairy",84);
+    public static const GREMLIN:Race = new Race("Gremlin",85);
+    public static const KAMAITACHI:Race = new Race("Kamaitachi",86);
+    public static const GAZER:Race = new Race("Gazer",87);
 
     public var name:String;
     public var id:int;
@@ -90,6 +99,7 @@ public class Race {
         this.name = _name;
         this.id = _id;
         ALL_RACES[_id] = this;
+        //ALL_RACES.sort(getAliasName.length)
     }
 
     }

@@ -41,14 +41,14 @@ public class Centaurinum extends Consumable{
 		clearOutput();
 		outputText("You down the potion, grimacing at the strong taste.");
 		//Speed up to 100
-		if (changes < changeLimit && player.spe < 100 && rand(3) == 0) {
+		if (changes < changeLimit && rand(3) == 0) {
 			changes++;
 			outputText("\n\nAfter drinking the potion, you feel a bit faster.");
-			dynStats("spe", 3);
+			player.MutagenBonus("spe", 3);
 		}
 		//Toughness up to 80!
-		if (changes < changeLimit && player.tou < 80 && rand(3) == 0) {
-			dynStats("tou", 2);
+		if (changes < changeLimit && rand(3) == 0) {
+			player.MutagenBonus("tou", 2);
 			outputText("\n\nYour body and skin both thicken noticeably.  You pinch your [skin.type] experimentally and marvel at how much tougher it has gotten.");
 			changes++;
 		}
@@ -74,34 +74,39 @@ public class Centaurinum extends Consumable{
 						temp = player.addHorseCock();
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("lib", 5, "sen", 4, "lus", 35);
+						dynStats("sen", 4, "lus", 35);
+						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType == CockTypesEnum.DOG) {
 						temp = player.addHorseCock();
 						outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.DOG) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("lib", 5, "sen", 4, "lus", 35);
+						dynStats("sen", 4, "lus", 35);
+						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
 						temp = player.addHorseCock();
 						outputText("\n\nYour [cock] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your [cock] as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("lib", 5, "sen", 4, "lus", 35);
+						dynStats("sen", 4, "lus", 35)
+						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType.Index > 4) {
 						outputText("\n\nYour [cock] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your [cock] as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
 						temp = player.addHorseCock();
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("lib", 5, "sen", 4, "lus", 35);
+						dynStats("sen", 4, "lus", 35);
+						player.MutagenBonus("lib", 5);
 					}
 					if (temp3 == 1) outputText("  <b>Your penis has transformed into a horse's!</b>");
 				}
 				//MULTICOCK
 				else {
-					dynStats("lib", 5, "sen", 4, "lus", 35);
+					dynStats("sen", 4, "lus", 35);
+					player.MutagenBonus("lib", 5);
 					temp = player.addHorseCock();
 					outputText("\n\nOne of your penises begins to feel strange.  You pull down your clothes to take a look and see the skin of your " + player.cockDescript(temp) + " darkening to a mottled brown and black pattern.");
 					if (temp == -1) {
@@ -176,7 +181,8 @@ public class Centaurinum extends Consumable{
 				if (player.cor >= 30 && player.cor < 60) outputText("  You wonder why you thought such odd things, but they have a certain appeal.");
 				if (player.cor >= 60 && player.cor < 90) outputText("  You relish your twisted fantasies, hoping to dream of them again.");
 				if (player.cor >= 90) outputText("  You flush hotly and give a twisted smile, resolving to find a fitting subject to rape and relive your fantasies.");
-				dynStats("lib", .5, "lus", 10);
+				dynStats("lus", 10);
+				player.MutagenBonus("lib", 1);
 			}
 			//Chance of ball growth if not 3" yet
 			if (rand(2) == 0 && changes < changeLimit && player.ballSize <= 3 && player.horseCocks() > 0) {
@@ -184,13 +190,15 @@ public class Centaurinum extends Consumable{
 					player.balls = 2;
 					player.ballSize = 1;
 					outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
-					dynStats("lib", 2, "lus", 5);
+					dynStats("lus", 5);
+					player.MutagenBonus("lib", 2);
 				}
 				else {
 					player.ballSize++;
 					if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + Appearance.ballsDescription(false, true, player) + " have grown larger than a human's.");
 					if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your [sack].  Walking becomes difficult as you discover your " + Appearance.ballsDescription(false, true, player) + " have enlarged again.");
-					dynStats("lib", 1, "lus", 3);
+					dynStats("lus", 3);
+					player.MutagenBonus("lib", 1);
 				}
 				changes++;
 			}
@@ -273,7 +281,7 @@ public class Centaurinum extends Consumable{
 			if (player.gender > 0) {
 				outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the back legs on your centaur body.");
 			}
-			dynStats("spe", 3);
+			player.MutagenBonus("spe", 3);
 			mutations.setLowerBody(LowerBody.HOOFED);
 			player.legCount = 4;
 		}
@@ -291,9 +299,18 @@ public class Centaurinum extends Consumable{
 			//Catch-all
 			else outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a feral beast!</b>");
 			if (player.gender > 0) outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the hind legs of your body.");
-			dynStats("spe", 3);
+			if ((player.lowerBody == LowerBody.HUMAN && player.arms.type != Arms.KITSUNE) || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS
+					|| player.lowerBody == LowerBody.AVIAN || player.lowerBody == LowerBody.HARPY || player.lowerBody == LowerBody.BEE || player.lowerBody == LowerBody.ELF)
+			{
+				outputText("\n\n <b>Furthermore your feets turned into hooves!</b>");
+				mutations.setLowerBody(LowerBody.HOOFED);
+			}
+			else if (player.lowerBody == LowerBody.HUMAN && player.arms.type == Arms.KITSUNE){
+				outputText("\n\n <b>Furthermore your feet turned into fox paws!</b>");
+				mutations.setLowerBody(LowerBody.FOX);
+			}
+			player.MutagenBonus("spe", 3);
 			//outputText("  A coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have hooves in place of your feet!</b>");
-			mutations.setLowerBody(LowerBody.HOOFED);
 			player.legCount = 4;
 			//dynStats("cor", 0);
 			changes++;

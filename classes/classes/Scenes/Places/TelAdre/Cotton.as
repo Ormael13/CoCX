@@ -76,16 +76,16 @@ private function pregCottonChance(bonusMult:Number = 1):void {
 private function cottonPregPCChance():void {
 	//No kids yet - lucky!
 	if(flags[kFLAGS.COTTON_KID_COUNT] == 0 && flags[kFLAGS.COTTON_HERBS_OFF] == 0) {
-		if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+		if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 		else player.knockUp(PregnancyStore.PREGNANCY_COTTON, PregnancyStore.INCUBATION_COTTON, 600);
 	}
 	else {
 		if (flags[kFLAGS.COTTON_HERBS_OFF] == 0) {
-			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 			else player.knockUp(PregnancyStore.PREGNANCY_COTTON, PregnancyStore.INCUBATION_COTTON, 1000);
 		}
 		else {
-			if (player.goblinScore() > 9) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 			else player.knockUp(PregnancyStore.PREGNANCY_COTTON, PregnancyStore.INCUBATION_COTTON, 100);
 		}
 	}
@@ -1090,6 +1090,8 @@ public function cottonTantricSex():void {
 	outputText("After a few minutes, you feel your strength ebbing back into you and you get up. Cotton does the same, and you both spend the time to clean the mat of the results of your escapades, before retreating to the showers to clean each other up. Once that's over, you both leave the gym hand-in-hand, with Cotton giving your hand a final squeeze before you depart to your camp.");
 	player.orgasm();
 	dynStats("tou", .25, "spe", .25, "lib", -.25, "sen", -.25);
+	player.trainStat("tou", +1, 75);
+	player.trainStat("spe", +1, 100);
 	if(player.hasVagina()) cottonPregPCChance();
 	doNext(camp.returnToCampUseOneHour);
 }

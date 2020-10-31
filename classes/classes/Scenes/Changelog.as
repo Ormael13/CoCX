@@ -64,19 +64,111 @@ package classes.Scenes
 			outputText("-All changes for 0.8n9 was due to hard work of our glorious lady Liadri. With a bit of Lia Twist.\n");
 			outputText("-Golem scavenging got texts instead of placeholder texts. (Texts ofc also sponsored by Lia Twist and coded by me ;) )\n");
 			outputText("-Fixed bugs: error in cat tf that would cause text to become bolded, golemancer shop 2 items been unbuyable\n\n");
-			outputText("<b>Version 0.8n10:</b>\n\n");
+			outputText("<b>Version 0.8n10 (Tiny fix):</b>\n\n");
 			outputText("-Urta lvl, stats been slight increased. Her stunning mov now just have 66% chance to stun instead smth that felt around 20%.\n");
-			outputText("-Fixed bugs: Eastern Bunny tf not giving eastern bunny balls\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Eastern Bunny tf not giving eastern bunny balls\n\n");
 			outputText("<b>Version 0.8o:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
-			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
-			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
-			//outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");
-			//outputText("-After beating Minotaur King PC could in vanilla take Excellia as npc back to camp. Just that in mods it was never followed thing. Not anymore and now we all can enjoy cow slut in camp same as we already enjoy Mitzi. But there will be choice to make: break Excellia even more and make her camp Slave or start helping her restore her clear mins and keep as Follower?\n");
-			//outputText("-Each of Excellia versions will have few interactions (including pregnancy). Fixing excellia will take ~30 ingame days and will req. to use at the end one De-Bimbo potion. Each interaction before she's fixed will be worth of one day of natural recovery. And each Debimbo potion is worth of 10 days (so yeah those rich PC's can just feed her 3 potions to instant fix her).\n");
-			//outputText("-Fixed Excellia will move to Lovers tab and add option to sleep with her, show up at hot springs or assist in fights as henchman.\n");
-			//outputText("-Added Mitzi and Excellia kids counter tracker to Stats page under Children subpage.\n");
-			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
+			outputText("-New tier 0 misc lvl-up perk: Displacer Metabolism. Req. Free metabolism mutation slot and 8+ pts in displacer beast score. Effect: Allows you to gain a boost of speed after an intake of milk and double the damage of displacer beast claws attacks.\n");
+			outputText("-New tier 2 libido lvl-up perk: Straddle. Req. Job: Courtesan perk and 65+ lib. Effect: You may now perform the straddle action in battle against stunned foes. Initiating a grappling stance.\n");
+			outputText("-New tier 2 misc lvl-up perk: Displacer Metabolism (Evolved). Req. Displacer Metabolism perk and 12+ pts in displacer beast score. Effect: Increase by (10 * NG tier) boost of speed for a five hours longer after an intake of milk and increase max Hunger cap by 50 (if PC have Hunger bar active).\n");
+			outputText("-New tier 4 misc lvl-up perk: Chimerical Body: Semi-Improved Stage. Req. Chimerical Body: Basic Stage and 12+ points in Internal Chimerical Disposition score. Effect: delay by another 5 points appearing effect of negative HP regeneration and +1 to racial score when PC have first racial specific mutation perk.\n");
+			outputText("-New tier 4 libido lvl-up perk: Improved Straddle. Req. Straddle perk and 130+ lib. Effect: Increase the straddle maneuver maximum duration by two rounds.\n");
+			outputText("-New tier 5 misc  lvl-up perk: Chimerical Body: Improved Stage. Req. Chimerical Body: Semi-Improved Stage and 18+ points in Internal Chimerical Disposition score. Effect: delay by another 6 points appearing effect of negative HP regeneration, +0.05 to multi for Str/Tou/Spe/Int/Wis, +0.10 for multi for Lib and +5 sens.\n");
+			outputText("-New tier 6 misc lvl-up perk: Lizan Marrow (Final Form). Req. Lizan Marrow (Evolved) perk and lizan score 12+. Effect: Regenerates 1.5% of HP per round in combat and 3% of HP per hour. Additionaly your limit for innate self-regeneration rate increased. When below 25% of max HP regeneration provided by Lizan regeneration doubles. ");
+			outputText("You can't loose by HP until reaching droping into negative health larger than 5% of max HP.\n");
+			outputText("-New ascension perks: Ascension: Transhumanism (Str/Tou/Spe/Int/Wis/Lib) - one for each core stat aside sensitivity and corruption. Each rank rise max cap of related stat by 8.\n");
+			outputText("-New event perk: Zenji's influence 1. Gained by training with Zenji 5+ times. Effects: Increases maximum mana and fatigue by 10%.\n");
+			outputText("-New event perk: Zenji's influence 2. Gained by training with Zenji 15+ times. Effects: Reduces effect from curses by 40%.\n");
+			outputText("-New event perk: Zenji's influence 3. Gained by training with Zenji 30+ times. Effects: Reduces physical special cost by 20%. Increase physical special damage by 50% and spellpower by 30%.\n");
+			outputText("-New armor (by Liadri): Scandalous Succubus Clothing - buyable at Kaiba shop in Tel'Adre. Cost 6000 gems. Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.\n");
+			outputText("-New shield (by Ormael): Spiked Light Shield - buyable at Yvonne shop (armor shop) in Tel'Adre. Block 10, cost 750 gems. When using to block will reflect\n");
+			outputText("-New shield (by Ormael): Spiked Heavy Shield - obtained by finding it at Battlefield while been lvl 24+. Base block 24, cost 1800 gems. Req. to have 60+ str to reach base block value. \n");
+			outputText("-New consumable (by Pyromania): Zenji's Hunt. Obtained once per day when tlaking with Zenji lover. Effect: Restores 25% of PC’s hp, 45 satiety.\n");
+			outputText("-New TF item: Fafnir Tear. Currently found in Yu shop. Allow to change into Frost Wyrm race with race bonuses at 10/18/20+: +90/125/135 to max Str (scal), +60/75/90 to max Spe (scal), +60/110/115 to max Tou (scal), -90/90/90 to max Int (scal), +30/50/50 to max Lib (scal).\n");
+			outputText("-New body part - horns: Frost Wyrm horns. Req. Animal tooths\n");
+			outputText("-New body part - eyes: Frost Wyrm eyes. Req. Animal tooths\n");
+			outputText("-New body part - rear body: Frost Wyrm rear body. Req. Frost Wyrm arms\n");
+			outputText("-New body part - lower body: Frost Wyrm lower body. No Req.\n");
+			outputText("-New body part - arms: Frost Wyrm arms. Req. Frost Wyrm lower body\n");
+			outputText("-New TF item: Bubblegum candy. Currently found in Yu shop. Allow to change into Cancer race with race bonuses at 8/13/20+: +60/105/125 to max Str (scal), +20/55/105 to max Spe (scal), +55/80/115 to max Tou (scal), -0/30/30 to max Int (scal), -15/15/15 to max Wis (scal).\n");
+			outputText("-New body part - face: Kudere face. No Req.\n");
+			outputText("-New body part - eyes: Cancer eyes. Req. Kudere face\n");
+			outputText("-New body part - lower body: Crab lower body. No Req.\n");
+			outputText("-New body part - lower body: Cancer lower body. Req. Crab lower body\n");
+			outputText("-New P. Special: Straddle. Type of grapple move like naga coiling. This grapple efficiency is based on libido and only function on single target humanoids.\n");
+			outputText("-New P. Special: Cancer Grab. Req. to have lower body of Cancer. Type of grapple move like naga coiling.\n");
+			outputText("-New P. Special: Dig. Req. to have lower body of Cancer, Centipede or Frost Wyrm. Dig underground to escape your opponent attack for a while. (Liadri)\n");
+			outputText("-New P. Special: Grab. Req. lower body of cancer. Type of grapple move. Grab your opponents with your pincers, then proceed to crush them. (Liadri)\n");
+			outputText("-PC would gain 10 stat poins per level up instead of 5. Below lvl 7 it will increase from 10 stat points to 20 per lvl-up.\n");
+			outputText("-Hex magic spells gotten dmg calculation changed. (Liadri)\n");
+			outputText("-Magic menu have be seperated into groups: White, Black, Grey and Hex. (Liadri)\n");
+			outputText("-Luna can be caugh after she disable 3 npc's. It would add then option to her interactions to confront her about it. (Liadri)\n");
+			outputText("-Mobs in Ebon labyrinth would have stats scaling up with amount of passed by room each 50 rooms they stats and level would grow. (Untill room 150 currently)\n");
+			outputText("-Draconic Lungs perks also would boost Frost Wyrm racial score.\n");
+			outputText("-Manticore metabolism now would req. also free metabolism mutation slot.\n");
+			outputText("-Nekomata mane tf effect req. now to having twin cat tails.\n");
+			outputText("-After beating Minotaur King PC could in vanilla take Excellia as npc back to camp. Just that in mods it was never followed thing. Not anymore and now we all can enjoy cow slut in camp same as we already enjoy Mitzi. But there will be choice to make: break Excellia even more and make her camp Slave or start helping her restore her clear mins and keep as Follower?\n");
+			outputText("-Each of Excellia versions will have few interactions (including pregnancy). Fixing Excellia will take ~30 ingame days and will req. to use at the end one De-Bimbo potion. Each interaction before she's fixed will be worth of one day of natural recovery. And each Debimbo potion is worth of 10 days (so yeah those rich PC's can just feed her 3 potions to instant fix her).\n");
+			outputText("-Fixed Excellia will move to Lovers tab and add option to sleep with her, show up at hot springs or assist in fights as henchman.\n");
+			outputText("-Added Mitzi and Excellia kids counter tracker to Stats page under Children subpage.\n");
+			outputText("-New M. Special: Displacement. Req. 11+ in displacer beast score. Teleport around to avoid your opponents attacks. (Liadri)\n");
+			outputText("-New event perk: Displacer Milk Addict. Causes you to crave milk frequently. (Liadri)\n");
+			outputText("-New enemy encounter: Cancer (male and female variant) (lvl 40 - Beach)\n");
+			outputText("-New possible debuff on monsters that will make them ocassionaly miss like they would been under blind debuff: Lowered Accuracy.\n");
+			outputText("-New codex entry added to the game: Trolls.\n");
+			outputText("-When exploring Bog PC can meet male troll. There is few possible options to end this encounter from paying gems to fight him. After that he would be repeatable encounter. First 4 enounters are conisdered part1 of his content and all after those part 2.\n");
+			outputText("-If picking to Hunt Him during post figt of part 1 it's posisble to fight him without him holding back. Winning would allow to take trophy for beating him (only if PC pick any other option to leave him). Trophy is worth 4k gems.\n");
+			outputText("-After reaching 100 score on his view of PC it open option to invite him to camp as Follower. And it would lock this option so even lowering this value to 0% will still give only option to bring him as follower. Opposite is possible too: reaching 100 and lock him in Lover path.\n");
+			outputText("-When in camp as follower Zenji have following interaction options: Appearance, Training, Spar, Talk, Sex and dealing with corrupted glades.\n");
+			outputText("-When in camp as follower Zenji have following interaction options: Appearance, Talk, Give Item and dealing with corrupted glades.\n");
+			outputText("-HYallowen event that can be proc with Lover Zenji (one chance to do it so not waste it). Possible reward is 10% magic resistance effect until hallowen ends.\n");
+			outputText("-Artemis and Wild Hunt accuracy penalty was removed and max atk value rised from 25 to 60. Cost of both bows rised due to that by 1000 gems.\n");
+			outputText("-Both Enlighted and Corrupted perks will be permable at the same time during ascension to prevent cases when one of them been permed was causing errors in getting all needed perks for 9 tail of balance perk. That would also mean PC must spend 10 not 5 asc points since it's perming 2 perks at once.\n");
+			outputText("-Limit on some of ascension perks was rised by 5 (meaning one more new game need to be played to reach new cap).\n");
+			outputText("-Limited amount of perks gained by picking 'None' history option to be only as many as current NG tier until ng 11+ at which point it will give fixed amount of perk points (that can change if we get more history options thou).\n");
+			outputText("-Due to adding two new chimera body perk between Basic stage and Semi-Advanced Stage all of perks in line form Semi-Advanced had updated bonsues to stats (including making all sensitivity bonsues been now flat due to stats rework by Lia/Aimozg and acting like negative penatly - for this one part first three perks also been adjusted to account for that)\n");
+			outputText("-Chance to meet proc first Phylla event been increased and each one of them after first slowly growing up chance to proc.\n");
+			outputText("-Added classification to shields adding 'Large' and 'Massive' tags. Large shields lower evasion by 20% unless PC have perk Gigant's Grip. Massive ones lower it by 75% and with Gigant's Grip lowers by 30%. Shield bash dmg increased 2x for large and 5x for massive shields.\n");
+			outputText("-Fire Breath form Fire Lord perk and Hellfire specials additional scalings based on int/wis or additional from wis. Both in the end should feel closer to power of other fire specials now.\n");
+			outputText("-Perk Ascension: Fortune now have max rank (50) and will follow other ascension perks limits on max rank per ascension. Perk Ascension: Wisdom have new max rank of 50. Both perks would now giving 20% of grems/exp more per rank instead of 10%.\n");
+			outputText("-Cost in ascension perk points to get ranks 6 to 15 of asc perks and ranks 16-30 have been increased.\n");
+			outputText("-All below changes was coded/added by Liadri and aimozg!!!\n");
+			outputText("-Strength Toughness Speed Inteligence Wisdom Sensitivity refactoring happened the stats are now calculated in a whole new way!\n");
+			outputText("-Great fairy TF Quest and ability have been added.\n");
+			outputText("-Great fairy Regalia was added to the game.\n");
+			outputText("-Hair styles have been added to the Salon it is now possible to customise your hairs.\n");
+			outputText("-Fixed Bicorn aura lust damage to be less ridiculous (Still very powerful thought itl likely obliterate anything below your levels at level 20 if you have very high libido/int score).\n");
+			outputText("-Added Twin Heart and Ecliptic Mind to Chimera score confirmation for the purpose of unlocking chimera perks.\n");
+			outputText("-Added Luna Nurse ability the option to heal cursed stats however the Nurse ability now has a 1 day cooldown.\n");
+			outputText("-Curses to stats have started to appear!\n");
+			outputText("-Alraune has been massively upgraded\n");
+			outputText("-Fenrir has been massively upgraded\n");
+			outputText("-New Berserker armor at Kaiba\n");
+			outputText("-Marble Milk is now a buff\n");
+			outputText("-Kitsune shrine is now a buff\n");
+			outputText("-Liliraune was added to the game along with plenty of sex scenes and in character chats\n");
+			outputText("-Vampire drain now restore satiety\n");
+			outputText("-Salamander score was updated\n");
+			outputText("-New ability Flame Blade\n");
+			outputText("-New Status Overheat\n");
+			outputText("-New Sex scenes Heat transfer and Cooldown\n");
+			outputText("-Several new sex scenes gives sex EXP\n");
+			outputText("-Gremlin race was added to the game\n");
+			outputText("-JIANGSHI HP NOW SCALES OF LIBIDO\n");
+			outputText("-Manticore and displacer feeding euphoria now stacks up to 50% but only at the rate of 5 per stacks furthermore they last longuer\n");
+			outputText("-Alchemical, Mutagenic and Knowledge bonus added to the game. Read book drink potions and use transformative to stack them each up to 20%\n");
+			outputText("-You can now escape from Alraune using the torch and alraune has now customised text when trying to escape witheout it\n");
+			outputText("-Thunderbird can now use Lust Storm\n");
+			outputText("-Biggest Bags are now properly displayed as costing\n");
+			outputText("-Heart of the storm perk line for Thunderbird, Raiju, Kamaitachi\n");
+			outputText("-Thunderbird and Raiju have better max score\n");
+			outputText("-Added Weapon and Shield Sprites\n");
+			outputText("-Fixed bugs: Lizan Regeneration been gained and lost repeadly, perks desc in one of creation PC stages showing incorectly amount of boosting max cap for stat, chance to pick Bite Me option at certain NPC more than once, food been unaccesable above 90 hunger in Black Cock, several bugs in Easter bunny TF, Tripxi dialogues to look more interactive and ");
+			outputText("changes location names to Kaiba and Tripxi shop in Tel Adre to be more in tune with the theme, Unicorn/Bicorn aura endless procing when pc has no horn, Unicorn/Bicorn aura procing messages in loops when pc doesnt have ecliptic mind, straddles duration to actualy not being endless, Alraune lower body displaying a penis in viewer, ");
+			outputText("a few viewer issue for cave wyrm eyes fox eyes and cat eyes, haircolor not switching to midnight black when turning into a hellcat, the trice damned Green Slime bug, declining bloodline choice progressing to history choice menu, not hidden button for stone buildings @carpenter, dual firearms greying out shoot button, Aiko scenes parser errors\n\n");/*ostatni punkt changelogu
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -88,7 +180,11 @@ package classes.Scenes
 			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-Fixed bugs: \n\n");
+			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
+			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
+			//outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");
+			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
+			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
@@ -104,6 +200,7 @@ package classes.Scenes
 			outputText("-New necklace (by Ormael):  - obtained by . Cost xx0 gems. \n");
 			outputText("-New head accesory (by Ormael):  - obtained by . Cost xx0 gems. \n");
 			outputText("-New ring (by Ormael):  - obtained by . Cost xx0 gems. \n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
@@ -139,7 +236,25 @@ package classes.Scenes
 			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("-\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -180,6 +295,10 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -1367,7 +1486,7 @@ package classes.Scenes
 			outputText("-New tier 5 libido lvl-up perk: Colder Lust. Req. Cold Lust and Advanced Self-Control perks, 150+ in lib. Effect: Lustzerking not lower magical resistance and bonus to atk increase by another 10 pts. If Lustzerking is used alongside Berzerking total bonus will be increase to 400% instead 200%.\n");
 			outputText("-New tier 5 misc lvl-up perk: Advanced Aerobatics. Req. Aerobatics perk, 120+ spe and 90+ str. Effect: Increase melee/range acc when flying by 50%. So when PC would fly melee acc would be increased by 40% and range acc by 20%.\n");
 			outputText("-New tier 5 misc lvl-up perk: Draconic Lungs (Final Form). Req. Draconic Lungs (Evolved) perk and 16+ pts in dragon score. Effect: +1 to dragon score, slight increased str/tou/spe, increase dragon breath attacks power and allows to use breath attack from combining all 4 basic breath types more often.\n");
-			outputText("-New tier 5 misc lvl-up perk: Kitsune Thyroid Gland (Final Form). Req. Kitsune Thyroid Gland (Evolved) perk and 12+ pts in kitsune score. Effect: +1 to kitsune score, Star Sphere Mastery perk can be rised to rank 25, each rank of Star Sphere will regen additionaly 3 pts of soulforce/mana, Terror speed debuf increased to 50. \n");
+			outputText("-New tier 5 misc lvl-up perk: Kitsune Thyroid Gland (Final Form). Req. Kitsune Thyroid Gland (Evolved) perk and 12+ pts in kitsune score. Effect: +1 to kitsune score, Star Sphere Mastery perk can be rised to rank 25, each rank of Star Sphere will regen additionaly 3 pts of soulforce/mana, Terror speed debuf increased to 50. ");
 			outputText("Increase speed debuff on Terror from 20 to 50, increase evasion boost on Illusion from 10% to 20%, +5 to max Spe, +5 to max Wis, +5 to max Int (scalable).\n");
 			outputText("-New tier 5 misc lvl-up perk: Oni Musculature (Final Form). Req. Oni Musculature (Evolved) perk, 100+ tone and oni score 12+. Effect: +1 to oni score, Oni Rampage dmg multiplier increased to 6x, it duration increased by 3 turns and cooldown decreased by 1 turn; +30 to max tone and +15 to max str (scalable).\n");
 			outputText("-New tier 5 misc lvl-up perk: Hollow Fangs (Final Form). Req. Hollow Fangs (Evolved) perk and vampire score 12+. Effect: +1 to vampire score, +5 to max Vampire Thirst stacks, increase by 7% healing effect and by 50% dealt lust dmg when drinking enemy blood, gains 2 stacks of Vampire Thirst from Vampire Bite special.\n");

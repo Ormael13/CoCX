@@ -1,6 +1,6 @@
 /**
  * ...
- * @author Zavos
+ * @author Liadri
  */
 package classes.Items.Armors 
 {
@@ -14,7 +14,7 @@ import classes.StatusEffects;
 
 		public function WalpurgisIzaliaRobe()
 		{
-			super("W.I.Robe","W.I.Robe","Walpurgis Izalia robes","a Walpurgis Izalia robes",0,30,2000,"This black robes conceal most of the user's body when closed but turns into an open cape when the users wills it. Very similar to the clothes of the hellcat witches cabal this robe include golden filigree shaped like fiery tongues and troubling arcane design. Rumored to have been the prized clothes of the legendary Izalia herself who created the original whitefire.","Light",
+			super("W.I.Cloak","W.I.Cloak","Walpurgis Izalia Cloak","a Walpurgis Izalia Cloak",0,30,12000,"This black cloak is very similar to the clothes of the hellcat witches cabal this cloak include golden filigree shaped like fiery tongues and troubling arcane design. Rumored to have been the prized cloak of the legendary Izalia herself who created the original whitefire.","Light",
 					PerkLib.WizardsAndDaoistsEndurance,60,0,0,0);
 		}
 

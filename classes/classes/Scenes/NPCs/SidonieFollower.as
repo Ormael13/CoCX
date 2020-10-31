@@ -67,7 +67,7 @@ package classes.Scenes.NPCs
 			outputText("Sidonie angrily turns back, and with a loud ‘thud’ she knocks the air out of the hyena warrior’s lungs, rendering her unconscious..\n\n");
 			outputText("\"<i>Stupid bitch!</i>\" she yells, beating the senseless hyena on the ground with her hoof. \"<i>I’m gonna...No, please. Not in front of this " + player.mf("guy","girl") + " that I’ve just met...</i>\"\n\n");
 			outputText("Trying to calm her down, you ask her what’s wrong, and if the dart was poisoned, how you could help her looking for any antidote.\n\n");
-			outputText("\"<i>No, [name], I think that isn’t not poison. That bitch drugged me with one of those lust-inducing mixes that they trade with those goblin sluts. Sorry, but would you mind if...</i>\"\n\n");
+			outputText("\"<i>No, [name], I think that isn’t poison. That bitch drugged me with one of those lust-inducing mixes that they trade with those goblin sluts. Sorry, but would you mind if...</i>\"\n\n");
 			outputText("Then you see it. Until now hidden by the loose cloth covering her, the unmistakable tent of a growing erection makes appearance. Given by the size of the bulge made by the half-erect member, you can guess that the thing is almost twenty inches big. Quickly guessing what she’s saying, you ask her if she needs some privacy. ");
 			outputText("Sidonie nodes eagerly, and you walk aways some steps and turn your back, since nothing else can be done in the sea of grass. Still, you manage to hear her moans and unmistakable sound of cum splashing the ground.\n\n");
 			outputText("Once that uncomfortable moment passes, you return with her, only to find the horse-girl much more composed, albeit still heavy breathing from her resent orgasm.\n\n");

@@ -46,7 +46,7 @@ import classes.internals.*;
 				return;
 			}
 			//("Misdirection"
-			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
 				//See below, removes the attack count once it hits rock bottom.
 				if(statusEffectv1(StatusEffects.Attacks) == 0) removeStatusEffect(StatusEffects.Attacks);
@@ -124,7 +124,7 @@ import classes.internals.*;
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s thrown spear.\n");
 			}
 			//("Misdirection"
-			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' thrown spear.\n");
 			}
 			//Determine if cat'ed
@@ -168,7 +168,7 @@ import classes.internals.*;
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s snap-kick.\n");
 			}
 			//("Misdirection"
-			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' snap-kick.\n");
 			}
 			//Determine if cat'ed
@@ -246,7 +246,7 @@ import classes.internals.*;
 				}
 			}
 //("Misdirection"
-			if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
 				//See below, removes the attack count once it hits rock bottom.
 				if (statusEffectv1(StatusEffects.Attacks) == 0) removeStatusEffect(StatusEffects.Attacks);

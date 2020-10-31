@@ -183,6 +183,7 @@ public class FetishZealotScene extends AbstractLakeContent
 					}
 					outputText("pushing your pleasure to incredible levels at an impressive rate.  Though, to your amazement, you hear your student give a gasp of pleasure just before you yourself are pushed over the edge.  The student had surpassed the teacher.\n\n");
 				}
+				player.sexReward("cum");
 			}
 			else {
 				outputText("You're standing in front of your student behind your desk in your empty classroom.  You are in your regular dress clothes; a formal backless blouse and short semi skirt that only blocks the front from view, plus your two inch tall high heels.  Your student is wearing the standard male student uniform, a collection of pieces of material held together with straps, that will all fall away easily when one gets pulled; but otherwise gives full coverage.\n\n");
@@ -209,8 +210,7 @@ public class FetishZealotScene extends AbstractLakeContent
 						outputText("Your [cocks] spasms and covers you with a liberal amount of your own fluids.  ");
 					}
 					outputText("After a moment, your student pulls out of you and helps you back up.\n\n");
-					if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-					if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+					player.sexReward("cum", "Vaginal");
 				}
 			}
 			//Wrapping things up

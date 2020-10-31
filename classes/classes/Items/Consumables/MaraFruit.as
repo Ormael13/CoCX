@@ -41,15 +41,15 @@ public class MaraFruit extends Consumable{
 		clearOutput();
 		outputText("Biting into it, sweet juices seem to explode from the flesh, dribbling down your chin.  It tastes like a dessert and you chow down, happily munching away.  In no time flat, you're down to just a core.");
 		//-Increase strength up to 80.
-		if (player.str < 80 && changes < changeLimit && rand(4) == 0) {
+		if (changes < changeLimit && rand(4) == 0) {
 			outputText("\n\nYour fill your muscles filling with plants might.");
-			dynStats("str", 1);
+			player.MutagenBonus("str", 1);
 			changes++;
 		}
 		//-Increase toughness up to 100.
-		if (player.tou < 100 && changes < changeLimit && rand(4) == 0) {
+		if (changes < changeLimit && rand(4) == 0) {
 			outputText("\n\nYour body suddenly feels tougher and more resilient just like a tree.");
-			dynStats("tou", 1);
+			player.MutagenBonus("tou", 1);
 			changes++;
 		}
 		//-Reduces speed down to 60.
@@ -222,7 +222,7 @@ public class MaraFruit extends Consumable{
 		}
 		//insert here turning into bark skin so it req. at least 2x use of mara fruit a także dodać wymaganie posiadanie już plant arms i legs
 		//Legs
-		if (player.skin.hasPlainSkinOnly() && (player.skinTone == "leaf green" || player.skinTone == "lime green" || player.skinTone == "turquoise") && changes < changeLimit && rand(3) == 0) {
+		if (player.skin.hasPlainSkinOnly() && (player.skinTone == "leaf green" || player.skinTone == "lime green" || player.skinTone == "turquoise" || player.skinTone == "light green") && changes < changeLimit && rand(3) == 0) {
 			//Males/genderless get clawed feet
 			if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
 				if (player.lowerBody != LowerBody.PLANT_ROOT_CLAWS) {
@@ -267,6 +267,12 @@ public class MaraFruit extends Consumable{
 			changes++;
 			mutations.setEarType(Ears.ELFIN);
 		}
+		var plant_eyeColor:Array = ["light purple", "green", "light green"];
+		if ((!InCollection(player.eyes.colour, plant_eyeColor) && changes < changeLimit && rand(4) == 0)) {
+			player.eyes.colour = randomChoice(plant_eyeColor);
+			outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady yourself and open your eyes, you realize something seems different, as if the nerves have been optimized.  Your vision has been changed somehow absorbing more light then normal. When you go look into a water puddle you notice your the changes in full. <b>Your eyes color has changed to "+player.eyes.colour+".</b>");
+			changes++;
+		}
 		//Face
 		if (player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {
 			changes++;
@@ -290,7 +296,7 @@ public class MaraFruit extends Consumable{
 		if (player.hairColor != "green" && !player.isGargoyle() && rand(3) == 0 && changes < changeLimit)
 		{
 			outputText("\n\nAt first it looks like nothing changed but then you realize all the hair on your body has shifted to a verdant green color.  <b>You now have green hair.</b>");
-			player.hairColor = "green";
+			player.hairColorOnly = "green";
 		}
 		//Horns
 		if ((player.hairType == Hair.LEAF || player.hairType == Hair.GRASS) && changes < changeLimit && rand(2) == 0) {
@@ -310,10 +316,12 @@ public class MaraFruit extends Consumable{
 				if (player.horns.count == 0 && player.horns.type == Horns.NONE) {
 					outputText("\n\nA spot on each side of your head has been getting steadily sorer.  You’re beginning to think about finding somewhere quiet to take a look at it when it suddenly and rather shockingly bursts, allowing something hand-sized to bloom out from your [hair]. A huge orchids is now flourishing their floppy petals and stamen above your head!  <b>You've grown twin orchid flowers!</b>");
 					mutations.setHornType(Horns.ORCHID, 2);
+					player.coatColor = "pink";
 				}
 				if (player.horns.count > 0 && player.horns.type != Horns.ORCHID) {
 					outputText("\n\nYour old horns slowly crumbling away until nothing is left.  Then a spot on each side of your head has been getting steadily sorer.  You’re beginning to think about finding somewhere quiet to take a look at it when it suddenly and rather shockingly bursts, allowing something hand-sized to bloom out from your [hair]. A huge pair of orchids is now flourishing their floppy petals and stamen above your head!  <b>You've grown a pair of orchid flowers!</b>");
 					mutations.setHornType(Horns.ORCHID, 2);
+					player.coatColor = "pink";
 				}
 			}
 			changes++;
@@ -331,6 +339,7 @@ public class MaraFruit extends Consumable{
 			if (player.tailType != 0) mutations.setTailType(0);
 			mutations.setWingType(Wings.NONE, "non-existant");
 			mutations.setLowerBody(LowerBody.PLANT_FLOWER);
+			player.coatColor = "pink";
 			player.legCount = 12;
 			changes++;
 		}

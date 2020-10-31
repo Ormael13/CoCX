@@ -273,7 +273,7 @@ public class PhoenixScene extends BaseContent
 			outputText("\n\nYou gingerly take a couple of steps, all too aware of the stinging of your stretched ass, before stopping as something begins to seep down your inner thigh. Your heart sinks as you reach back behind you, fingers trailing between your legs until you find a streak of wet, still slightly warm. ");
 			outputText("\n\nAlmost too afraid to look, you bring your fingers back around to find them covered with a layer of cum, groaning out loud as you quickly piece together that the phoenix must’ve decided to blow her last load in your now-impossibly sensitive ass. The gentle sloshing in your gut coupled with how much warm spunk is now leaking out of your abused body leaves you to suspect that the girl took her time with you. After grabbing your scattered gear as quickly as possible and finding your gem pouch a little lighter, you start to hobble back to camp, desperate for some rest after this ordeal. ");
 			outputText("\n\nToo pained to redress yourself, the spunk dripping from you marks out your path back down the mountain, almost as if the gods are making sure you have a way of finding the route back for another round.");
-			dynStats("str", -2);
+			player.addCurse("str",2);
 			dynStats("tou", -2);
 			doNext(camp.returnToCampUseFourHours);
 		}
@@ -302,7 +302,7 @@ public class PhoenixScene extends BaseContent
 			}
 			if (player.gender == 0) outputText("r body spasms with pleasure");
 			outputText(". \"<i>I hope you've learned your lesson,</i>\" she says as she pulls her cock out of your leaking backdoor. She wipes her cock clean on your [armor], before she moves her loincloth back in place. \"<i>See you around!</i>\" The phoenix says with a wink as she walks off.");
-			dynStats("str", -1);
+			player.addCurse("str",1);
 			player.sexReward("Default","Default",true,false);
 			cleanupAfterCombat();
 		}

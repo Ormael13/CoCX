@@ -63,9 +63,9 @@ public function DefeatedHellCatCatcock():void {
 	outputText("You gleefully walk out to your prize and shove her on her back to take a look at the 10 inch joystick between her legs. The hellcat look at you confused.\n\n");
 	outputText("\"<i>Nya?? Are you seriously doing this? Next time why not just skip defending yourself and get to it right away?</i>\"\n\n");
 	outputText("You squeeze her cock painfully. Who said she had right to talk back? You make it quite clear that you will do with her what you want and only what you want wich swiftly swipe away that coy smirk of hers. Now that positions have been clearly determined you move over the hellcat in order to slowly align you pussy with that barbed cock of hers. You sigh as her barbs one by one slide past your lips tickling your walls with devilish pleasure. ");
-	outputText("Only once your unwilling partner is gully in fo you begin to slide up along the length savoring the multitude of caresse that goes with the movement. You moan loud and high as you grab the catgirl orbs for support, enjoying yourself as growing sensation of heat permeate your pussy. The heat travels everywhere in your body until it lands in your brain. ");
-	outputText("You are do distracted by the overload of sensations that you forget your partner who reaching her own orgasm flood your burning pussy with a welcome load of catjizz. You thought this would end the heat but it only makes it worse, the hot cum bubbling in your pussy only seems to make the heat in your brain more intense. You need to fuck, you desperately need to fuck!\n\n");
-	outputText("The catgirl does not seem to mind as you repetitively ravish her cock. Only when she pass out from exhaustion do you realise her cum is only intensifying the heat. You kick her in frustration as you head back to camp. <b>It would seem you have gone into heat!</b>");
+	outputText("Only once your unwilling partner is fully in for you begin to slide up along the length savoring the multitude of caresse that goes with the movement. You moan loud and high as you grab the catgirl orbs for support, enjoying yourself as growing sensation of heat permeate your pussy. The heat travels everywhere in your body until it lands in your brain. ");
+	outputText("You are too distracted by the overload of sensations that you forget your partner who reaching her own orgasm flood your burning pussy with a welcome load of catjizz. You thought this would end the heat but it only makes it worse, the hot cum bubbling in your pussy only seems to make the heat in your brain more intense. You need to fuck, you desperately need to fuck!\n\n");
+	outputText("The catgirl does not seem to mind as you repetitively ravish her cock. Only when she passes out from exhaustion do you realise her cum is only intensifying the heat. You kick her in frustration as you head back to camp. <b>It would seem you have gone into heat!</b>");
 	player.goIntoHeat(false);
 	player.sexReward("cum","Vaginal");
 	cleanupAfterCombat();
@@ -258,6 +258,7 @@ public function WitchesSabbathThirdVisitYes():void {
 	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningHair)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningHair, 0, 0, 0, 0);
 	outputText(" Your skin tingle with residual heat as well, progressively and delightfully burning toward a ashen hue.");
 	player.skinTone = "ashen";
+	player.hairColor = "midnight black";
 	player.coatColor = "midnight black";
 	outputText(" Speaking of fire you having some hellish hot thoughts right now. You really wish you could stick that cock of yours in some cunt or get yourself filled good and hell with a body like yours going in heat likely is going to be a recurring two sided joke. <b>You were altered and transformed into a Hellcat!</b>");
 	if (rand(2) == 0) player.goIntoRut(false);

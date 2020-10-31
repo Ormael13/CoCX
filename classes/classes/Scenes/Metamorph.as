@@ -37,7 +37,7 @@ public function accessMetamorphMenu():void {
 	outputText("<i>Bonus to max soulforce: " + 50 * (1 + player.perkv1(PerkLib.Metamorph)) + "</i>\n\n");
 	outputText("<b>Race added to Metamorph:\n");
 	outputText("Alicorn, Bat, Bee, Bicorn, Boar, Cat, Cheshire Cat, Cow, Couatl, Demon, Devil, Displacer Beast, Dragon, Elf, Fox, Gorgon, Harpy, Hellcat, Horse, Human, Kitsune, Lizard, Manticore, Mantis, Minotaur, Naga, Nekomata, Nightmare, Oni, Orc, Orca, Phoenix, Pig, Raiju, Red Panda, Salamander, Shark, Sphinx, Spider (+Drider), Unicorn, Vampire</b>");
-	menu();
+	menu();/*
 	if (player.hasPerk(PerkLib.MetamorphEx)) {
 		addButton(5, "Page Ex (1)", accessPageEx1MetamorphMenu);
 		//addButton(6, "Page Ex (2)", accessPageEx2MetamorphMenu);
@@ -47,7 +47,7 @@ public function accessMetamorphMenu():void {
 		addButtonDisabled(5, "Page Ex (1)", "Req. to have Metamorph (Ex) to open this options.");
 		//addButtonDisabled(6, "Page Ex (2)", "Req. to have Metamorph (Ex) to open this options.");
 		//addButtonDisabled(7, "Page Ex (3)", "Req. to have Metamorph (Ex) to open this options.");
-	}
+	}*/
 	addButton(10, "Page 1", accessPage1MetamorphMenu).hint("Hair, Face, Tongue, Eyes, Ears, Horns");
 	addButton(11, "Page 2", accessPage2MetamorphMenu).hint("Arms, Wings, Legs");
 	addButton(12, "Page 3", accessPage3MetamorphMenu).hint("Skin, Skin Patterns/Tattoes, Rear Body, Antennae, Gills, Tail");

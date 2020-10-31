@@ -24,7 +24,7 @@ public class HellHound extends Monster
 			if(player.findPerk(PerkLib.Evade) >= 0 && player.spe >= 35 && rand(3) != 0) {
 				outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you.  You easily avoid the wave, diving to the side and making the most of your talents at evasion.");
 			}
-			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 20 && player.armorName == "red, high-society bodysuit") {
+			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 20 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s fire.\n");
 			}
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && player.spe > 30 && rand(10) != 0) {
@@ -65,11 +65,11 @@ public class HellHound extends Monster
 				}
 				else {
 					outputText("The hellhound sniffs your scent again, seemingly gaining more and more energy as he circles faster around you.");
-					spe = 100;	
+					speStat.core.value = 100;	
 				}
 			}
 			else {
-				spe += 40;
+				speStat.core.value += 40;
 				outputText("The hellhound keeps his four eyes on you as he sniffs the ground where you were moments ago. He raises his heads back up and gives you a fiery grin - he seems to have acquired your scent!  It'll be hard to get away now...");
 				player.createStatusEffect(StatusEffects.NoFlee,0,0,0,0);
 			}
@@ -84,7 +84,7 @@ public class HellHound extends Monster
 				if (hpVictory) {
 					outputText("The hellhound's flames dim and the heads let out a whine before the creature slumps down, defeated and nearly unconscious.", true);
 					//Rape if not naga, turned on, and girl that can fit!
-					if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) {
+					if (player.hasVagina() && player.lust >= 33) {
 						outputText("  You find yourself musing that you could probably take advantage of the poor 'doggy'.  Do you fuck it?");
 						SceneLib.mountain.hellHoundScene.hellHoundPostFightSexScenes();
 					} else {

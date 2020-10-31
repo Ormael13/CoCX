@@ -616,11 +616,9 @@ private function loseButtGinity():void {
 		outputText("With exhausted panting the only sound from both Ro'gar and yourself, you take a few moments to catch your breath.  Ro'gar affectionately nuzzles you before letting you get to your feet, holding you until he's sure you can stand easily.  The pair of you share a knowing look and Ro'gar grins at you.  \"<i>You're amazin', [name].  You're welcome anytime ya like.</i>\"  He gives you a tender embrace as you collect your things and walk on wobbly legs toward the door, still feeling cum running down your legs" + (player.armorDescript() != "gear" ? " beneath your garments" : "") + ".  The orc sees you off with a wave and a toothy grin.\n\n");
 		//<Lust sated, slimefeed>
 	}
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
+	player.sexReward("cum");
 	player.orgasm();
 	dynStats("sen", 2);
-	player.slimeFeed();
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -739,13 +737,9 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 			player.ballSize = 3;
 		}
 		if(player.inte > 35) {
-			player.inte = 35;
 			dynStats("int", -0.1);
 		}
-		if(player.lib < 50) {
-			player.lib = 50;
-			dynStats("lib", .1);
-		}
+		player.trainStat("lib", 1, 75);
 		outputText("\n\n");
 		//(Tits b' gone) 
 		if(player.biggestTitSize() >= 1) {
@@ -788,7 +782,6 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 		if(player.thickness < player.maxThicknessCap()) {
 			player.modThickness(player.maxThicknessCap(),(player.maxThicknessCap() * 0.5));
 		}
-		if(player.inte > 21) player.inte = 21;
 		dynStats("str", 33,"tou", 33, "int", -1, "lib", 4, "lus", 40);
 		changed = true;
 		player.removePerk(PerkLib.Feeder);

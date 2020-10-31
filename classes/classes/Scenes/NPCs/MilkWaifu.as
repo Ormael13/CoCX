@@ -365,6 +365,7 @@ private function milkBathTime():void {
 	if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) count++;
 	if(emberScene.followerEmber()) count++;
 	if(kihaFollower.followerKiha()) count++;
+	if(flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) count++;
 	if(count >= 3) {
 		outputText("  Then again, if you're getting a bath, maybe the rest of your friends might like to join you?");
 		addButton(2,"Comm.Bath",communalBath);
@@ -427,8 +428,12 @@ private function communalBath():void {
 	//{If PC has Kiha:
 	if (kihaFollower.followerKiha()) {
 		outputText("\n\nKiha, your dear dusky dragoness, wanders over to see what the commotion is, but turns her nose up at the sight of you bathing in breastmilk.  \"<i>Ew.  How the hell can you just...  wallow in that?  Disgusting!</i>\"");
-		if (silly() && player.str > 80 && player.spe > 80) outputText("  Without warning Kiha, you grab her. \"<i>HEY, what are you doing, doofus?</i>\" she yells as you finally pull her into the milky bath. \"<i>What have you done, idiot!? Fine, I'll bathe. Are you happy? Baka!</i>\" she grumbles.")
+		if (silly() && player.str > 80 && player.spe > 80) outputText("  Without warning Kiha, you grab her. \"<i>HEY, what are you doing, doofus?</i>\" she yells as you finally pull her into the milky bath. \"<i>What have you done, idiot!? Fine, I'll bathe. Are you happy? Baka!</i>\" she grumbles.");
 	}
+	
+	//{If PC has Zenji:
+	if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) outputText("\n\n\"<i>Milk bath?</i>\" Zenji asks, \"<i>Haha! What will dey tink of next?</i>\" He says looking at the bath, \"<i>¡Chévere! Good vibes, good times!</i>\" He says as he hops in.");
+	
 	//[Combine]
 	outputText("\n\nSurrounded by friends and lovers, you relax in the pool, leaning your arms back over the rim and closing your eyes, sighing contentedly.  Your friends splash and play with each other, happy to enjoy a few blissful, normal moments away from the cares of the world, away from the demons, and the monsters, and the horror their world has become.  The waves displace beside you, milk parting as a pair of giant jugs move over to you; you look down to see " + flags[kFLAGS.MILK_NAME] + " curling up in your arm.  Her giant teats float atop the waters, boyantly swaying with a strange grace atop the sea of their own making.");
 	
@@ -589,8 +594,6 @@ private function drinkAndFapturbate():void {
 	if(flags[kFLAGS.MILK_SIZE] == 0) outputText("drags her gigantic tits over the puddly, milk-slicked floor");
 	else outputText("stumbles away, tenderly cupping her bright-red teats");
 	outputText(".  Smirking and sexually sated, you pop the drain in the tub and stand there while the sex-scented lactic bathwater runs out the drain.  A quick toweling off later, and you're ready to go, feeling slightly refreshed and fairly sated.  It does take you a little longer to get your [armor] equally dry and back in place, but you manage.");
-	if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-	if (player.jiangshiScore() >= 20 && player.statusEffectv1(StatusEffects.EnergyDependent) < 45) player.EnergyDependentRestore();
 	player.sexReward("milk");
 	fatigue(-33);
 	doNext(camp.returnToCampUseOneHour);

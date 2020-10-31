@@ -22,6 +22,7 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
 import classes.Scenes.SceneLib;
+import classes.Stats.Buff;
 
 use namespace CoC;
 	
@@ -106,8 +107,8 @@ use namespace CoC;
 				outputText("Would you like to pray and if yes to who?");
 				menu();
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) addButton(0, "Marae", PlayerPrayAtTempleMaraeAltair).hint("Pray to Marae for empowered white magic.");
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) addButton(1, "Taoth", PlayerPrayAtTempleTaothAltair).hint("Pray the trickster god for an increase to your Agility, (if kitsune)kitsune powers (end of cut) and guile.");
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFenrir)) addButton(2, "Fenrir", PlayerPrayAtTempleFenrirAltair).hint("Pray to the god sharing your body for an increase to your might.");
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 && !player.statStore.hasBuff("TaothBlessing")) addButton(1, "Taoth", PlayerPrayAtTempleTaothAltair).hint("Pray the trickster god for an increase to your Agility, (if kitsune)kitsune powers (end of cut) and guile.");
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 && !player.statStore.hasBuff("FenrirBlessing")) addButton(2, "Fenrir", PlayerPrayAtTempleFenrirAltair).hint("Pray to the god sharing your body for an increase to your might.");
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFera)) addButton(3, "Fera", PlayerPrayAtTempleFeraAltair).hint("Pray the fallen goddess Fera for an increase to your innuendo and resilience to desire.");
 				addButton(14, "Back", templemainmenu);
 			}
@@ -128,23 +129,17 @@ use namespace CoC;
 			}
 		}
 		public function loosingTaothBlessing():void {
-			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineTaoth)) {
+			if (player.statStore.hasBuff("TaothBlessing")) {
 				outputText("You chose to pray a different Deity losing the favor of the first to gain the bonus of the other.\n");
 				outputText("<b>You lost the Blessing of Divine Agency - Taoth</b>\n");
-				var tempSpe:int = player.statusEffectv2(StatusEffects.BlessingOfDivineTaoth);
-				player.removeStatusEffect(StatusEffects.BlessingOfDivineTaoth);
-				dynStats("spe", -tempSpe);
+				player.statStore.removeBuffs("TaothBlessing");
 			}
 		}
 		public function loosingFenrirBlessing():void {
-			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineFenrir)) {
+			if (player.statStore.hasBuff("FenrirBlessing")) {
 				outputText("You chose to pray a different Deity losing the favor of the first to gain the bonus of the other.\n");
 				outputText("<b>You lost the Blessing of Divine Agency - Fenrir</b>\n");
-				var tempStr:int = player.statusEffectv2(StatusEffects.BlessingOfDivineFenrir);
-				var tempTou:int = player.statusEffectv3(StatusEffects.BlessingOfDivineFenrir);
-				player.removeStatusEffect(StatusEffects.BlessingOfDivineFenrir);
-				dynStats("str", -tempStr);
-				dynStats("tou", -tempTou);
+				player.statStore.removeBuffs("FenrirBlessing");
 			}
 		}
 		public function loosingFeraBlessing():void {
@@ -186,15 +181,9 @@ use namespace CoC;
 			loosingFenrirBlessing();
 			loosingFeraBlessing();
 			outputText("<b>You gained the Blessing of Divine Agency - Taoth for 7 days</b>");
-			var temp1:Number = 0;
-			var tempSpe:Number = 0;
-			temp1 += player.spe * 0.1;
-			temp1 = Math.round(temp1);
 			player.createStatusEffect(StatusEffects.BlessingOfDivineTaoth, 169, 0, 0, 0);
-			tempSpe = temp1;
-			player.changeStatusValue(StatusEffects.BlessingOfDivineTaoth,2,tempSpe);
 			mainView.statsView.showStatUp('spe');
-			player.spe += player.statusEffectv2(StatusEffects.BlessingOfDivineTaoth);
+			player.statStore.replaceBuffObject({ 'spe.mult': 0.1}, 'TaothBlessing', { text: 'Taoth Blessing', rate: Buff.RATE_DAYS, tick: 7 });
 			if (player.HP < player.maxHP()) player.HP = player.maxHP();
 			dynStats("cor", -10);
 			statScreenRefresh();
@@ -207,23 +196,9 @@ use namespace CoC;
 			loosingTaothBlessing();
 			loosingFeraBlessing();
 			outputText("<b>You gained the Blessing of Divine Agency - Fenrir for 7 days</b>");
-			var temp1:Number = 0;
-			var temp2:Number = 0;
-			var tempStr:Number = 0;
-			var tempTou:Number = 0;
-			temp1 += player.str * 0.1;
-			temp2 += player.tou * 0.1;
-			temp1 = Math.round(temp1);
-			temp2 = Math.round(temp2);
-			player.createStatusEffect(StatusEffects.BlessingOfDivineFenrir, 169, 0, 0, 0);
-			tempStr = temp1;
-			tempTou = temp2;
-			player.changeStatusValue(StatusEffects.BlessingOfDivineFenrir,2,tempStr);
-			player.changeStatusValue(StatusEffects.BlessingOfDivineFenrir,3,tempTou);
+			player.statStore.replaceBuffObject({ 'str.mult': 0.1, 'tou.mult': 0.1}, 'FenrirBlessing', { text: 'Fenrir Blessing', rate: Buff.RATE_DAYS, tick: 7 });
 			mainView.statsView.showStatUp('str');
 			mainView.statsView.showStatUp('tou');
-			player.str += player.statusEffectv2(StatusEffects.BlessingOfDivineFenrir);
-			player.tou += player.statusEffectv3(StatusEffects.BlessingOfDivineFenrir);
 			if (player.HP < player.maxHP()) player.HP = player.maxHP();
 			dynStats("cor", -10);
 			statScreenRefresh();
@@ -1167,9 +1142,9 @@ use namespace CoC;
 			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 0) outputText("\n\nThere's a block where its chest would be.\n\n");
 			if ((!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) < 1) && (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) < 1 || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) < 1)) outputText("There's a block where its crotch would be.");
 			else {
-				outputText("At statue crotch ");
+				outputText("At the statue crotch ");
 				if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) > 1) {
-					outputText("there is ");
+					outputText("hangs a ");
 					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 2) outputText("4 inch");
 					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 3) outputText("4.5 inch");
 					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 4) outputText("5 inch");
@@ -1192,21 +1167,28 @@ use namespace CoC;
 					}
 					outputText(".");
 				}
-				if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 1 && player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) < 2) outputText("there is no cock.");
+				if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 1 && player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) > 1) {
+					outputText(" rests a pair of ");
+					if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 2) outputText("large");
+					if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 3) outputText("baseball-sized");
+					if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 4) outputText("apple-sized");
+					if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 5) outputText("grapefruit-sized");
+					outputText(" balls.");
+				}
 				if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) > 0) {
 					if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) == 2) {
 						if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) > 1) outputText(" Beneath it");
-						if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) > 1) outputText(" Beneath them");
-						outputText(" there is a tight vagina, with a tiny clit.");
+						else if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) > 1) outputText(" Beneath them");
+						outputText(" is a tight vagina, with a tiny clit.");
 					}
 					else outputText("");
 				}
 			}
-			outputText("\n\nAll details in its");
+			outputText("\n\nAll the details in its");
 			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 2) outputText(" bat");
 			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 1) outputText(" feathered");
 			outputText(" wings ");
-			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] >= 1) outputText("are completed, wings folded behind its back");
+			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] >= 1) outputText("are completed and the wings folded behind its back");
 			else outputText("have yet to be done");
 			outputText(".\n\nIt's arms ");
 			if (player.statusEffectv4(StatusEffects.GargoyleTFSettingTracker1) == 1) outputText("ends with a set of bestial four fingered sharp stone claws");
@@ -1744,6 +1726,14 @@ use namespace CoC;
 				player.removePerk(PerkLib.HinezumiBurningBloodFinalForm);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.DisplacerMetabolism)) {
+				player.removePerk(PerkLib.DisplacerMetabolism);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.DisplacerMetabolismEvolved)) {
+				player.removePerk(PerkLib.DisplacerMetabolismEvolved);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.DraconicLungs)) {
 				player.removePerk(PerkLib.DraconicLungs);
 				player.perkPoints += 1;
@@ -1780,6 +1770,18 @@ use namespace CoC;
 				player.removePerk(PerkLib.EasterBunnyEggBagFinalForm);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.FloralOvaries)) {
+				player.removePerk(PerkLib.FloralOvaries);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.FloralOvariesEvolved)) {
+				player.removePerk(PerkLib.FloralOvariesEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.FloralOvariesFinalForm)) {
+				player.removePerk(PerkLib.FloralOvariesFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.FrozenHeart)) {
 				player.removePerk(PerkLib.FrozenHeart);
 				player.perkPoints += 1;
@@ -1792,12 +1794,36 @@ use namespace CoC;
 				player.removePerk(PerkLib.FrozenHeartFinalForm);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.GazerEye)) {
+				player.removePerk(PerkLib.GazerEye);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.GazerEyeEvolved)) {
+				player.removePerk(PerkLib.GazerEyeEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) {
+				player.removePerk(PerkLib.GazerEyeFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.GorgonsEyes)) {
 				player.removePerk(PerkLib.GorgonsEyes);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.GorgonsEyesEvolved)) {
 				player.removePerk(PerkLib.GorgonsEyesEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HeartOfTheStorm)) {
+				player.removePerk(PerkLib.HeartOfTheStorm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HeartOfTheStormEvolved)) {
+				player.removePerk(PerkLib.HeartOfTheStormEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HeartOfTheStormFinalForm)) {
+				player.removePerk(PerkLib.HeartOfTheStormFinalForm);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.HellcatParathyroidGlands)) {
@@ -1868,6 +1894,10 @@ use namespace CoC;
 				player.removePerk(PerkLib.LizanMarrowEvolved);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.LizanMarrowFinalForm)) {
+				player.removePerk(PerkLib.LizanMarrowFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.ManticoreMetabolism)) {
 				player.removePerk(PerkLib.ManticoreMetabolism);
 				player.perkPoints += 1;
@@ -1921,15 +1951,27 @@ use namespace CoC;
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.NekomataThyroidGland)) {
-				player.removePerk(PerkLib.HinezumiBurningBlood);
+				player.removePerk(PerkLib.NekomataThyroidGland);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.NekomataThyroidGlandEvolved)) {
-				player.removePerk(PerkLib.HinezumiBurningBloodEvolved);
+				player.removePerk(PerkLib.NekomataThyroidGlandEvolved);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.NekomataThyroidGlandFinalForm)) {
-				player.removePerk(PerkLib.HinezumiBurningBloodFinalForm);
+				player.removePerk(PerkLib.NekomataThyroidGlandFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.NukiNuts)) {
+				player.removePerk(PerkLib.NukiNuts);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.NukiNutsEvolved)) {
+				player.removePerk(PerkLib.NukiNutsEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.NukiNutsFinalForm)) {
+				player.removePerk(PerkLib.NukiNutsFinalForm);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.ObsidianHeart)) {
@@ -2024,6 +2066,18 @@ use namespace CoC;
 				player.removePerk(PerkLib.VampiricBloodsteamFinalForm);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.EclipticMind)) {
+				player.removePerk(PerkLib.EclipticMind);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.EclipticMindEvolved)) {
+				player.removePerk(PerkLib.EclipticMindEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.EclipticMindFinalForm)) {
+				player.removePerk(PerkLib.EclipticMindFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.VenomGlands)) {
 				player.removePerk(PerkLib.VenomGlands);
 				player.perkPoints += 1;
@@ -2041,11 +2095,11 @@ use namespace CoC;
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.WhaleFatEvolved)) {
-				player.removePerk(PerkLib.WhaleFat);
+				player.removePerk(PerkLib.WhaleFatEvolved);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.WhaleFatFinalForm)) {
-				player.removePerk(PerkLib.WhaleFat);
+				player.removePerk(PerkLib.WhaleFatFinalForm);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.ChimericalBodyInitialStage)){
@@ -2058,6 +2112,14 @@ use namespace CoC;
 			}
 			if (player.hasPerk(PerkLib.ChimericalBodyBasicStage)){
 				player.removePerk(PerkLib.ChimericalBodyBasicStage);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage)){
+				player.removePerk(PerkLib.ChimericalBodySemiImprovedStage);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodyImprovedStage)){
+				player.removePerk(PerkLib.ChimericalBodyImprovedStage);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.ChimericalBodySemiAdvancedStage)){
@@ -2082,6 +2144,10 @@ use namespace CoC;
 			}
 			if (player.hasPerk(PerkLib.ChimericalBodyPeerlessStage)) {
 				player.removePerk(PerkLib.ChimericalBodyPeerlessStage);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodySemiEpicStage)) {
+				player.removePerk(PerkLib.ChimericalBodySemiEpicStage);
 				player.perkPoints += 1;
 			}
 			becomingGargoyleYes3();

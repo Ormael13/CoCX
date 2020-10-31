@@ -53,12 +53,14 @@ public class TatteredScroll extends Consumable {
 					player.boostLactation(.7);
 					outputText("Your breasts feel fuller... riper... like your next milking could be even bigger.  ");
 				}
-				dynStats("lib", 1, "sen", 4, "lus", 15);
+				dynStats("sen", 4, "lus", 15);
+				player.KnowledgeBonus("lib", 1);
 			}
 			if (player.biggestLactation() == 0) {
 				outputText("A pleasurable release suddenly erupts from your nipples!  Twin streams of milk are spraying from your breasts, soaking into the ground immediately.  It stops all too soon, though a voice in your head assures you that you can lactate quite often now.  ");
 				player.boostLactation(1);
-				dynStats("lib", .5, "sen", 1, "lus", 10);
+				dynStats("sen", 1, "lus", 10);
+				player.KnowledgeBonus("lib", 1);
 			}
 			outputText("\n\nYour mouth curls into a sick smile and, with a voice that isn't your own, speaks, \"<i>I ALWAYS get what I want, dear...</i>\"");
 			doNext(camp.returnToCampUseOneHour);
