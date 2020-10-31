@@ -723,18 +723,21 @@ public class Combat extends BaseContent {
     }
 
     public function Poultice():void {
+        clearOutput();
         var power:Number = CalcAlchemyPower();
         HPChange(power,false);
         outputText("You apply the poultice, your wounds closing at high speed. "+power+"");
     }
 
     public function EnergyDrink():void {
+        clearOutput();
         var power:Number = CalcAlchemyPower();
         fatigue(-power);
         outputText("You chug off on your energy drink, feeling rejuvenated with newfound magical energy and stamina. "+power+"");
     }
 
     public function Cure():void {
+        clearOutput();
         player.buff("Poison").remove();
         player.removeStatusEffect(StatusEffects.BurnDoT);
         player.removeStatusEffect(StatusEffects.BurnDoT2);
@@ -745,6 +748,7 @@ public class Combat extends BaseContent {
     }
 
     public function Painkiller():void {
+        clearOutput();
         var power:Number = CalcAlchemyPower()/5; //needs to be calculated in gamel
         var duration:Number = Math.round(power/5);
         //strenght then Duration in hours
@@ -753,6 +757,7 @@ public class Combat extends BaseContent {
     }
 
     public function Stimulant():void {
+        clearOutput();
         var power:Number = CalcAlchemyPower()/5; //needs to be calculated in gamel
         var duration:Number = Math.round(power/5);
         //strenght then Duration in hours
@@ -761,6 +766,7 @@ public class Combat extends BaseContent {
     }
 
     public function Perfume():void {
+        clearOutput();
         var power:Number = CalcAlchemyPower()/5; //needs to be calculated in gamel
         var duration:Number = Math.round(power/5);
         //strenght then Duration in hours
