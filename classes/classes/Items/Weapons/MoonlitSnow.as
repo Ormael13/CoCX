@@ -8,7 +8,7 @@ public class MoonlitSnow extends Weapon
 		public function MoonlitSnow() 
 		{
 			super(
-				"Moonlit Snow","Moonlit Snow","Moonlit Snow","a Moonlit Snow","slash",32,2560,
+				"Moonlit Snow","Moonlit Snow","Moonlit Snow","a Moonlit Snow","slash",40,2560,
 				"This blessed katana is made in shining steel and heavily decorated with silver and blue sapphires. When used by a pure-hearted knight, the divine will within guides each strike, making it much deadlier.", "Large"
 			);
 		}
