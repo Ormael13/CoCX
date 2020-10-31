@@ -187,8 +187,10 @@ public class CoCButton extends Block {
 	 * @return this
 	 */
 	public function disableIf(condition:Boolean, toolTipText:String=null):CoCButton {
-		enabled = !condition;
-		if (toolTipText!==null) this.toolTipText = condition?toolTipText:"";
+		if (condition) {
+			enabled = false;
+			if (toolTipText !== null) this.toolTipText = toolTipText;
+		}
 		return this;
 	}
 	/**

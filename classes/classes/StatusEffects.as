@@ -796,7 +796,10 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const AlraunePollen:StatusEffectType             = mkCombat("Alraune Pollen");
 		public static const AmilyVenom:StatusEffectType                = AmilyVenomDebuff.TYPE;
 		public static const AnemoneVenom:StatusEffectType              = AnemoneVenomDebuff.TYPE;
+		public static const ArmorPotion:StatusEffectType               = mk("Painkiller");
+		public static const ArousalPotion:StatusEffectType             = mk("Perfume");
 		public static const AttackDisabled:StatusEffectType            = mkCombat("Attack Disabled");
+		public static const AttackPotion:StatusEffectType              = mk("Stimulant");
 		public static const Bammed1:StatusEffectType                   = mkCombat("Bammed1");//v1 - melee attack	v2 - range attack
 		public static const Bammed2:StatusEffectType                   = mkCombat("Bammed2");//v1 - p. specials		v2 - m. specials
 		public static const BarkSkin:StatusEffectType                  = mkCombat("Bark Skin");

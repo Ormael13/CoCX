@@ -96,7 +96,7 @@ public class Combat extends BaseContent {
         var costPercent:Number = 100;
         if (player.hasPerk(PerkLib.IronMan)) costPercent -= 50;
         if (player.hasPerk(PerkLib.ZenjisInfluence3)) costPercent -= 20;
-		if (costPercent < 10) costPercent = 10; 
+		if (costPercent < 10) costPercent = 10;
         mod *= costPercent / 100;
         return mod;
     }
@@ -105,7 +105,7 @@ public class Combat extends BaseContent {
         var costPercent:Number = 100;
         if (player.hasPerk(PerkLib.BowShooting)) costPercent -= player.perkv1(PerkLib.BowShooting);
         //if(player.hasPerk(PerkLib.)) costPercent -= x0; ((tu umieścić perk dający zmniejszenie % kosztu użycia łuku jak IronMan dla fiz specjali ^^))
-        if (costPercent < 10) costPercent = 10; 
+        if (costPercent < 10) costPercent = 10;
         mod *= costPercent / 100;
         return mod;
     }
@@ -714,29 +714,58 @@ public class Combat extends BaseContent {
     }
 
     //ALCHEMY ZONE
+    public function CalcAlchemyPower():Number{
+        var power:Number = 0;
+        power += scalingBonusWisdom();
+        power += player.herbalismLevel;
+        power = Math.round(power);
+        return power;
+    }
 
-    public function Poultrice():void {
-
+    public function Poultice():void {
+        var power:Number = CalcAlchemyPower();
+        HPChange(power,false);
+        outputText("You consumed a potion! power of"+power+"");
     }
 
     public function EnergyDrink():void {
-
+        var power:Number = CalcAlchemyPower();
+        fatigue(-power);
+        outputText("You consumed a potion! power of"+power+"");
     }
 
     public function Cure():void {
-
+        player.buff("Poison").remove();
+        player.removeStatusEffect(StatusEffects.BurnDoT);
+        player.removeStatusEffect(StatusEffects.BurnDoT2);
+        player.removeStatusEffect(StatusEffects.FrostburnDoT);
+        player.removeStatusEffect(StatusEffects.FrozenLung);
+        player.removeStatusEffect(StatusEffects.Hemorrhage);
+        outputText("You consumed a potion!");
     }
 
     public function Painkiller():void {
-
+        var power:Number = CalcAlchemyPower()/5; //needs to be calculated in gamel
+        var duration:Number = Math.round(power/5);
+        //strenght then Duration in hours
+        player.createStatusEffect(StatusEffects.ArmorPotion,power,duration,0,0);
+        outputText("You consumed a potion! power of"+power+"");
     }
 
     public function Stimulant():void {
-
+        var power:Number = CalcAlchemyPower()/5; //needs to be calculated in gamel
+        var duration:Number = Math.round(power/5);
+        //strenght then Duration in hours
+        player.createStatusEffect(StatusEffects.AttackPotion,power,duration,0,0);
+        outputText("You consumed a potion! power of"+power+"");
     }
 
     public function Perfume():void {
-
+        var power:Number = CalcAlchemyPower()/5; //needs to be calculated in gamel
+        var duration:Number = Math.round(power/5);
+        //strenght then Duration in hours
+        player.createStatusEffect(StatusEffects.ArousalPotion,power,duration,0,0);
+        outputText("You consumed a potion!");
     }
 
     public function soul1Drill():void {
@@ -4582,7 +4611,7 @@ public class Combat extends BaseContent {
     public function WeaponRangeStatusProcs():void {
 
     }
-	
+
 	public function ShieldsStatusProcs():void {
 		var bleed:Boolean = false;
         var bleedChance:int = 0;
@@ -4604,7 +4633,7 @@ public class Combat extends BaseContent {
 		var bleed:Boolean = false;
         var bleedChance:int = 0;
 		//xx% bleed chance
-        
+
 		if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType)) bleedChance = 0;
         if (rand(100) < bleedChance) bleed = true;
 		if (bleed) {

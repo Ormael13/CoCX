@@ -55,7 +55,7 @@ use namespace CoC;
 	 * @author Yoffy
 	 */
 	public class Player extends Character {
-		
+
 		public function Player() {
 			//Item things
 			itemSlot1 = new ItemSlotClass();
@@ -80,15 +80,15 @@ use namespace CoC;
 			itemSlot20 = new ItemSlotClass();
 			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5, itemSlot6, itemSlot7, itemSlot8, itemSlot9, itemSlot10, itemSlot11, itemSlot12, itemSlot13, itemSlot14, itemSlot15, itemSlot16, itemSlot17, itemSlot18, itemSlot19, itemSlot20];
 		}
-		
+
 		protected final function outputText(text:String, clear:Boolean = false):void
 		{
 			if (clear) EngineCore.clearOutputTextOnly();
 			EngineCore.outputText(text);
 		}
-		
+
 		public var startingRace:String = "human";
-		
+
 		//Autosave
 		public var slotName:String = "VOID";
 		public var autoSave:Boolean = false;
@@ -104,15 +104,15 @@ use namespace CoC;
 		//Teasing attributes
 		public var teaseLevel:Number = 0;
 		public var teaseXP:Number = 0;
-		
+
 		//Prison stats
 		public var hunger:Number = 0; //Also used in survival and realistic mode
 		public var obey:Number = 0;
 		public var esteem:Number = 0;
 		public var will:Number = 0;
-		
+
 		public var obeySoftCap:Boolean = true;
-		
+
 		//Perks used to store 'queued' perk buys
 		public var perkPoints:Number = 0;
 		public var statPoints:Number = 0;
@@ -160,10 +160,10 @@ use namespace CoC;
 		public var itemSlot19:ItemSlotClass;
 		public var itemSlot20:ItemSlotClass;
 		public var itemSlots:Array;
-		
+
 		public var prisonItemSlots:Array = [];
 		public var previouslyWornClothes:Array = []; //For tracking achievement.
-		
+
 		private var _weapon:Weapon = WeaponLib.FISTS;
 		private var _weaponRange:WeaponRange = WeaponRangeLib.NOTHING;
 		private var _armor:Armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
@@ -262,12 +262,12 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.headjewelryName.");
 		}
-		
+
 		override public function set headjewelryEffectId(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.headjewelryEffectId.");
 		}
-		
+
 		override public function set headjewelryEffectMagnitude(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.headjewelryEffectMagnitude.");
@@ -277,7 +277,7 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.headjewelryPerk.");
 		}
-		
+
 		override public function set headjewelryValue(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.headjewelryValue.");
@@ -288,12 +288,12 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.necklaceName.");
 		}
-		
+
 		override public function set necklaceEffectId(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.necklaceEffectId.");
 		}
-		
+
 		override public function set necklaceEffectMagnitude(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.necklaceEffectMagnitude.");
@@ -303,7 +303,7 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.necklacePerk.");
 		}
-		
+
 		override public function set necklaceValue(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.necklaceValue.");
@@ -314,12 +314,12 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryName.");
 		}
-		
+
 		override public function set jewelryEffectId(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryEffectId.");
 		}
-		
+
 		override public function set jewelryEffectMagnitude(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryEffectMagnitude.");
@@ -329,7 +329,7 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryPerk.");
 		}
-		
+
 		override public function set jewelryValue(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryValue.");
@@ -338,12 +338,12 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryName2.");
 		}
-		
+
 		override public function set jewelryEffectId2(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryEffectId2.");
 		}
-		
+
 		override public function set jewelryEffectMagnitude2(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryEffectMagnitude2.");
@@ -353,7 +353,7 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryPerk2.");
 		}
-		
+
 		override public function set jewelryValue2(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryValue2.");
@@ -364,33 +364,33 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.shieldName.");
 		}
-		
+
 		override public function set shieldBlock(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.shieldBlock.");
 		}
-		
+
 		override public function set shieldPerk(value:String):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.shieldPerk.");
 		}
-		
+
 		override public function set shieldValue(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.shieldValue.");
 		}
-		
+
 		//override public function set undergarments
 		override public function set upperGarmentName(value:String):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.upperGarmentName.");
 		}
-		
+
 		override public function set upperGarmentPerk(value:String):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.upperGarmentPerk.");
 		}
-		
+
 		override public function set upperGarmentValue(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.upperGarmentValue.");
@@ -400,12 +400,12 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.lowerGarmentName.");
 		}
-		
+
 		override public function set lowerGarmentPerk(value:String):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.lowerGarmentPerk.");
 		}
-		
+
 		override public function set lowerGarmentValue(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.lowerGarmentValue.");
@@ -416,12 +416,12 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.vehiclesName.");
 		}
-		
+
 		override public function set vehiclesEffectId(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.vehiclesEffectId.");
 		}
-		
+
 		override public function set vehiclesEffectMagnitude(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.vehiclesEffectMagnitude.");
@@ -431,13 +431,13 @@ use namespace CoC;
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.vehiclesPerk.");
 		}
-		
+
 		override public function set vehiclesValue(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.vehiclesValue.");
 		}
-		
-		
+
+
 		public function get modArmorName():String
 		{
 			if (_modArmorName == null) _modArmorName = "";
@@ -1186,7 +1186,7 @@ use namespace CoC;
 		public function set ammo(value:int):void {
 			flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = value;
 		}
-		
+
 		//override public function get headjewelries.
 		override public function get headjewelryName():String {
 			return _headjewelry.name;
@@ -1203,7 +1203,7 @@ use namespace CoC;
 		override public function get headjewelryValue():Number {
 			return _headjewelry.value;
 		}
-		
+
 		//override public function get necklaces.
 		override public function get necklaceName():String {
 			return _necklace.name;
@@ -1220,7 +1220,7 @@ use namespace CoC;
 		override public function get necklaceValue():Number {
 			return _necklace.value;
 		}
-		
+
 		//override public function get jewelries.
 		override public function get jewelryName():String {
 			return _jewelry.name;
@@ -1282,7 +1282,7 @@ use namespace CoC;
 		override public function get jewelryValue4():Number {
 			return _jewelry4.value;
 		}
-		
+
 		//override public function get vehicle.
 		override public function get vehiclesName():String {
 			return _vehicle.name;
@@ -1299,7 +1299,7 @@ use namespace CoC;
 		override public function get vehiclesValue():Number {
 			return _vehicle.value;
 		}
-		
+
 		//Shields for Bash
 		public function isShieldsForShieldBash():Boolean
 		{
@@ -1355,7 +1355,7 @@ use namespace CoC;
 		{
 			return _upperGarment;
 		}
-		
+
 		override public function get lowerGarmentName():String {
 			return _lowerGarment.name;
 		}
@@ -1369,12 +1369,12 @@ use namespace CoC;
 		{
 			return _lowerGarment;
 		}
-		
+
 		public function get armor():Armor
 		{
 			return _armor;
 		}
-		
+
 		public function setArmor(newArmor:Armor):Armor {
 			//Returns the old armor, allowing the caller to discard it, store it or try to place it in the player's inventory
 			//Can return null, in which case caller should discard.
@@ -1386,7 +1386,7 @@ use namespace CoC;
 			_armor = newArmor.playerEquip(); //The armor can also choose to equip something else - useful for Ceraph's trap armor
 			return oldArmor;
 		}
-		
+
 		/*
 		public function set armor(value:Armor):void
 		{
@@ -1420,7 +1420,7 @@ use namespace CoC;
 			_weapon = newWeapon.playerEquip(); //The weapon can also choose to equip something else
 			return oldWeapon;
 		}
-		
+
 		/*
 		public function set weapon(value:Weapon):void
 		{
@@ -1437,13 +1437,13 @@ use namespace CoC;
 		{
 			this._weapon = value;
 		}
-		
+
 		//Range Weapon, added by Ormael
 		public function get weaponRange():WeaponRange
 		{
 			return _weaponRange;
 		}
-		
+
 		public function setWeaponRange(newWeaponRange:WeaponRange):WeaponRange {
 			//Returns the old shield, allowing the caller to discard it, store it or try to place it in the player's inventory
 			//Can return null, in which case caller should discard.
@@ -1455,13 +1455,13 @@ use namespace CoC;
 			_weaponRange = newWeaponRange.playerEquip();
 			return oldWeaponRange;
 		}
-		
+
 		// in case you don't want to call the value.equip
 		public function setWeaponRangeHiddenField(value:WeaponRange):void
 		{
 			this._weaponRange = value;
 		}
-		
+
 		//Head Jewelry, added by Ormael
 		public function get headJewelry():HeadJewelry
 		{
@@ -1484,7 +1484,7 @@ use namespace CoC;
 		{
 			this._headjewelry = value;
 		}
-		
+
 		//Necklace, added by Ormael
 		public function get necklace():Necklace
 		{
@@ -1507,7 +1507,7 @@ use namespace CoC;
 		{
 			this._necklace = value;
 		}
-		
+
 		//Jewelry, added by Kitteh6660
 		public function get jewelry():Jewelry
 		{
@@ -1530,7 +1530,7 @@ use namespace CoC;
 		{
 			this._jewelry = value;
 		}
-		
+
 		public function get jewelry2():Jewelry
 		{
 			return _jewelry2;
@@ -1552,7 +1552,7 @@ use namespace CoC;
 		{
 			this._jewelry2 = value;
 		}
-		
+
 		public function get jewelry3():Jewelry
 		{
 			return _jewelry3;
@@ -1574,7 +1574,7 @@ use namespace CoC;
 		{
 			this._jewelry3 = value;
 		}
-		
+
 		public function get jewelry4():Jewelry
 		{
 			return _jewelry4;
@@ -1596,7 +1596,7 @@ use namespace CoC;
 		{
 			this._jewelry4 = value;
 		}
-		
+
 		public function setShield(newShield:Shield):Shield {
 			//Returns the old shield, allowing the caller to discard it, store it or try to place it in the player's inventory
 			//Can return null, in which case caller should discard.
@@ -1608,7 +1608,7 @@ use namespace CoC;
 			_shield = newShield.playerEquip(); //The shield can also choose to equip something else.
 			return oldShield;
 		}
-		
+
 		// in case you don't want to call the value.equip
 		public function setShieldHiddenField(value:Shield):void
 		{
@@ -1637,14 +1637,14 @@ use namespace CoC;
 			}
 			return oldUndergarment;
 		}
-		
+
 		// in case you don't want to call the value.equip
 		public function setUndergarmentHiddenField(value:Undergarment, type:int):void
 		{
 			if (type == UndergarmentLib.TYPE_UPPERWEAR) this._upperGarment = value;
 			else this._lowerGarment = value;
 		}
-		
+
 		//Vehicles, added by Ormael
 		public function get vehicles():Vehicles
 		{
@@ -1667,11 +1667,44 @@ use namespace CoC;
 		{
 			this._vehicle = value;
 		}
-		
+
+		// Potions
+		/**
+		 * Array of objects { type: PotionType, count: Number }
+		 */
+		public var potions:Array = [];
+		public function numberOfPotions(pt: PotionType): Number {
+			for (var i:int = 0; i < potions.length; i++){
+				if (potions[i].type == pt) {
+					return potions[i].count;
+				}
+			}
+			return 0;
+		}
+		public function setNumberOfPotions(pt: PotionType, count: Number): void {
+			for (var i:int = 0; i < potions.length; i++) {
+				if (potions[i].type == pt) {
+					if (count <= 0) { // remove the potion
+						potions.splice(i, 1);
+					} else {
+						potions[i].count = count;
+					}
+					return;
+				}
+			}
+			// did not find a potion entry, create new
+			if (count > 0) {
+				potions.push( { type: pt, count: count });
+			}
+		}
+		public function changeNumberOfPotions(pt: PotionType, change: Number): void {
+			setNumberOfPotions(pt, numberOfPotions(pt) + change);
+		}
+
 		public override function lustPercent():Number {
 			var lust:Number = 100;
 			var minLustCap:Number = 25;
-			
+
 			//++++++++++++++++++++++++++++++++++++++++++++++++++
 			//ADDITIVE REDUCTIONS
 			//THESE ARE FLAT BONUSES WITH LITTLE TO NO DOWNSIDE
@@ -1926,7 +1959,7 @@ use namespace CoC;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) damageMultiplier *= 1.3;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damageMultiplier *= 1.5;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damageMultiplier *= 2;
-			
+
 			//Opponents can critical too!
 			var critChanceMonster:int = 5;
 			if (CoC.instance.monster.findPerk(PerkLib.Tactician) >= 0 && CoC.instance.monster.inte >= 50) {
@@ -3858,7 +3891,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return internalChimeraRatingCounter;
 		}//każdy nowy chimerical body perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle
-		
+
 		//Determine Inner Chimera Score
 		public function internalChimeraScore():Number {
 			Begin("Player","racialScore","internalChimeraScore");
@@ -4077,7 +4110,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return internalChimeraCounter;
 		}
-		
+
 		//Determine Chimera Race Rating
 		public function chimeraScore():Number {
 			Begin("Player","racialScore","chimera");
@@ -4230,11 +4263,11 @@ use namespace CoC;
 				chimeraCounter++;
 			if (darkgooScore() >= 13)
 				chimeraCounter++;
-			
+
 			End("Player","racialScore");
 			return chimeraCounter;
 		}
-		
+
 		//Determine Grand Chimera Race Rating
 		public function grandchimeraScore():Number {
 			Begin("Player","racialScore","grandchimera");
@@ -4283,7 +4316,7 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (darkgooScore() >= 17)
 				grandchimeraCounter++;
-			
+
 			End("Player","racialScore");
 			return grandchimeraCounter;
 		}
@@ -5456,7 +5489,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return dragonCounter;
 		}
-		
+
 		//Determine Jabberwocky Rating
 		public function jabberwockyScore():Number {
 			Begin("Player","racialScore","jabberwocky");
@@ -6614,7 +6647,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return oomukadeCounter;
 		}
-		
+
 		//Elf score
 		public function elfScore():Number {
 			Begin("Player","racialScore","elf");
@@ -6746,7 +6779,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return frostWyrmCounter;
 		}
-		
+
 		//Orc score
 		public function orcScore():Number {
 			Begin("Player","racialScore","orc");
@@ -7070,7 +7103,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return mutantCounter;
 		}
-		
+
 		//scorpion score
 		public function scorpionScore():Number {
 			Begin("Player","racialScore","scorpion");
@@ -7092,7 +7125,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return scorpionCounter;
 		}
-		
+
 		//Mantis score
 		public function mantisScore():Number {
 			Begin("Player","racialScore","mantis");
@@ -7152,7 +7185,7 @@ use namespace CoC;
 		//Thunder Mantis score
 		//4 eyes - adj spider 4 eyes desc
 		//var. of arms, legs, wings, tail, ears
-		
+
 		//Salamander score
 		public function salamanderScore():Number {
 			Begin("Player","racialScore","salamander");
@@ -7211,7 +7244,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return salamanderCounter;
 		}
-		
+
 		//Cave Wyrm score
 		public function cavewyrmScore():Number {
 			Begin("Player","racialScore","cavewyrm");
@@ -7257,7 +7290,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return cavewyrmCounter;
 		}
-		
+
 		//Yeti score
 		public function yetiScore():Number {
 			Begin("Player","racialScore","yeti");
@@ -7945,7 +7978,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return alicornCounter;
 		}
-		
+
 		//Determine Phoenix Rating
 		public function phoenixScore():Number {
 			Begin("Player","racialScore","phoenix");
@@ -7984,7 +8017,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return phoenixCounter;
 		}
-		
+
 		//Scylla score
 		public function scyllaScore():Number {
 			Begin("Player","racialScore","scylla");
@@ -8039,7 +8072,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return scyllaCounter;
 		}//potem tentacle dick lub scylla vag też bedą sie liczyć do wyniku)
-		
+
 		//Determine Kitshoo Rating
 		public function kitshooScore():Number {
 			Begin("Player","racialScore","kitshoo");
@@ -8105,7 +8138,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return kitshooCounter;
 		}
-		
+
 		//plant score
 		public function plantScore():Number {
 			Begin("Player","racialScore","plant");
@@ -8153,7 +8186,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return plantCounter;
 		}
-		
+
 		public function alrauneScore():Number {
 			Begin("Player","racialScore","alraune");
 			var alrauneCounter:Number = 0;
@@ -8198,7 +8231,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return alrauneCounter;
 		}
-		
+
 		public function yggdrasilScore():Number {
 			Begin("Player","racialScore","yggdrasil");
 			var yggdrasilCounter:Number = 0;
@@ -8361,7 +8394,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return sirenCounter;
 		}
-		
+
 		public function pigScore():Number {
 			Begin("Player","racialScore","pig");
 			var pigCounter:Number = 0;
@@ -8424,7 +8457,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return pigCounter;
 		}
-		
+
 		public function satyrScore():Number {
 			Begin("Player","racialScore","satyr");
 			var satyrCounter:Number = 0;
@@ -8453,7 +8486,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return satyrCounter;
 		}
-		
+
 		public function rhinoScore():Number {
 			Begin("Player","racialScore","rhino");
 			var rhinoCounter:Number = 0;
@@ -8480,7 +8513,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return rhinoCounter;
 		}
-		
+
 		public function echidnaScore():Number {
 			Begin("Player","racialScore","echidna");
 			var echidnaCounter:Number = 0;
@@ -8505,7 +8538,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return echidnaCounter;
 		}
-		
+
 		public function ushionnaScore():Number {
 			Begin("Player","racialScore","ushionna");
 			var ushionnaCounter:Number = 0;
@@ -8534,7 +8567,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return ushionnaCounter;
 		}
-		
+
 		public function deerScore():Number {
 			Begin("Player","racialScore","deer");
 			var deerCounter:Number = 0;
@@ -8563,7 +8596,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return deerCounter;
 		}
-		
+
 		//Dragonne
 		public function dragonneScore():Number {
 			Begin("Player","racialScore","dragonne");
@@ -8591,7 +8624,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return dragonneCounter;
 		}
-		
+
 		//Manticore
 		public function manticoreScore():Number {
 			Begin("Player","racialScore","manticore");
@@ -8643,7 +8676,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return manticoreCounter;
 		}
-		
+
 		//Red Panda
 		public function redpandaScore():Number {
 			Begin("Player","racialScore","redpanda");
@@ -8673,7 +8706,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return redpandaCounter;
 		}
-		
+
 		//Bear or Panda
 		public function bearpandaScore():Number {
 			Begin("Player","racialScore","bearpanda");
@@ -8707,7 +8740,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return bearpandaCounter;
 		}
-		
+
 		//Determine Avian Rating
 		public function avianScore():Number {
 			Begin("Player","racialScore","avian");
@@ -8741,7 +8774,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return avianCounter;
 		}
-		
+
 		//Bat
 		public function batScore():int {
             Begin("Player","racialScore","bat");
@@ -8775,7 +8808,7 @@ use namespace CoC;
 			End("Player","racialScore");
 			return counter < 0? 0:counter;
 		}
-		
+
 		//Vampire
 		public function vampireScore():int {
             Begin("Player","racialScore","vampire");
@@ -9034,7 +9067,7 @@ use namespace CoC;
 			prestigeJobs3 -= currentPrestigeJobs();
 			return prestigeJobs3;
 		}
-		
+
 		public function maxHeartMutations():Number {
 			var heartMutations:Number = 1;
 			if (findPerk(PerkLib.BlackHeart) >= 0)
@@ -9244,7 +9277,7 @@ use namespace CoC;
 				total = int.MAX_VALUE;
 			return total;
 		}
-		
+
 		public function isLactating():Boolean
 		{
 			return lactationQ() > 0;
@@ -9363,7 +9396,7 @@ use namespace CoC;
 			dynStats("lus", 0, "scale", false);
 			EngineCore.statScreenRefresh();
 		}
-		
+
 		/**
 		 * Damages player's hunger. 'amnt' is how much to deduct.
 		 * @param	amnt
@@ -9375,7 +9408,7 @@ use namespace CoC;
 			if (hunger < oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) CoC.instance.mainView.statsView.showStatDown('hunger');
 			dynStats("lus", 0, "scale", false);
 		}
-		
+
 		public function corruptionTolerance():int {
 			var temp:int = perkv1(PerkLib.AscensionTolerance) * 5;
 			if (flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) temp += 100;
@@ -9387,7 +9420,7 @@ use namespace CoC;
 		public function corAdjustedDown():Number {
 			return boundFloat(0, cor - corruptionTolerance(), 100);
 		}
-		
+
 		public function newGamePlusMod():int {
 			var temp:int = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			//Constrains value between 0 and 5.
@@ -9395,7 +9428,7 @@ use namespace CoC;
 			if (temp > 5) temp = 5;
 			return temp;
 		}
-		
+
 		public function buttChangeDisplay():void
 		{	//Allows the test for stretching and the text output to be separated
 			if (ass.analLooseness == 5) outputText("<b>Your " + Appearance.assholeDescript(this) + " is stretched even wider, capable of taking even the largest of demons and beasts.</b>");
@@ -9491,24 +9524,24 @@ use namespace CoC;
 			if (upperGarment == UndergarmentLib.NOTHING && lowerGarment == UndergarmentLib.NOTHING && armor == ArmorLib.NOTHING) text = nakedText;
 			return text;
 		}
-		
+
 		public function clothedOrNaked(clothedText:String, nakedText:String = ""):String
 		{
 			return (armorDescript() != "gear" ? clothedText : nakedText);
 		}
-		
+
 		public function clothedOrNakedLower(clothedText:String, nakedText:String = ""):String
 		{
 			return (armorName != "gear" && (armorName != "lethicite armor" && lowerGarmentName == "nothing") && !isTaur() ? clothedText : nakedText);
 		}
-		
+
 		public function addToWornClothesArray(armor:Armor):void {
 			for (var i:int = 0; i < previouslyWornClothes.length; i++) {
 				if (previouslyWornClothes[i] == armor.shortName) return; //Already have?
 			}
 			previouslyWornClothes.push(armor.shortName);
 		}
-		
+
 		public function shrinkTits(ignore_hyper_happy:Boolean=false):void
 		{
 			if (flags[kFLAGS.HYPER_HAPPY] && !ignore_hyper_happy)
@@ -9755,7 +9788,7 @@ use namespace CoC;
 			var minCor:int = 0;
 			//Minimum Libido
 			if (this.gender > 0) minLib += 5;
-	
+
 			if (this.armorName == "lusty maiden's armor") {
 				if (minLib < 50) minLib = 50;
 			}
@@ -9945,7 +9978,7 @@ use namespace CoC;
 			if (min > minCap) min = minCap;
 			return min;
 		}
-	
+
 		public function maxToneCap():Number {
 			var maxToneCap:Number = 100;
 			if (findPerk(PerkLib.OniMusculature) >= 0) maxToneCap += 10;
@@ -9997,7 +10030,7 @@ use namespace CoC;
 			addStatusValue(StatusEffects.IntWisCounter1, 2, maxWisCap1);
 			addStatusValue(StatusEffects.LibSensCounter1, 1, maxLibCap1);
 		}
-		
+
 		public function strtouspeintwislibsenCalculation2():void {
 			removeStatusEffect(StatusEffects.StrTouSpeCounter2);
 			createStatusEffect(StatusEffects.StrTouSpeCounter2,0,0,0,0);
@@ -11407,11 +11440,11 @@ use namespace CoC;
 			}
 			return minslot;
 		}
-		
+
 		public function hasItem(itype:ItemType, minQuantity:int = 1):Boolean {
 			return itemCount(itype) >= minQuantity;
 		}
-		
+
 		public function itemCount(itype:ItemType):int {
 			var count:int = 0;
 			for each (var itemSlot:ItemSlotClass in itemSlots){
@@ -11619,7 +11652,7 @@ use namespace CoC;
 		public function modCumMultiplier(delta:Number):Number
 		{
 			trace("modCumMultiplier called with: " + delta);
-		
+
 			if (delta == 0) {
 				trace( "Whoops! modCumMuliplier called with 0... aborting..." );
 				return delta;
@@ -11650,7 +11683,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.BigCock) >= 0) bigCock = true;
 			return cocks[cockNum].growCock(lengthDelta, bigCock);
 		}
-		
+
 		public function increaseEachCock(lengthDelta:Number):Number
 		{
 			var totalGrowth:Number = 0;
@@ -11658,10 +11691,10 @@ use namespace CoC;
 				trace( "increaseEachCock at: " + i);
 				totalGrowth += increaseCock(i as Number, lengthDelta);
 			}
-			
+
 			return totalGrowth;
 		}
-		
+
 		// Attempts to put the player in heat (or deeper in heat).
 		// Returns true if successful, false if not.
 		// The player cannot go into heat if she is already pregnant or is a he.
@@ -11674,7 +11707,7 @@ use namespace CoC;
 				// No vagina or already pregnant, can't go into heat.
 				return false;
 			}
-			
+
 			//Already in heat, intensify further.
 			if (inHeat) {
 				if(output) {
@@ -11695,7 +11728,7 @@ use namespace CoC;
 			}
 			return true;
 		}
-		
+
 		// Attempts to put the player in rut (or deeper in heat).
 		// Returns true if successful, false if not.
 		// The player cannot go into heat if he is a she.
@@ -11708,7 +11741,7 @@ use namespace CoC;
 				// No cocks, can't go into rut.
 				return false;
 			}
-			
+
 			//Has rut, intensify it!
 			if (inRut) {
 				if(output) {
@@ -11724,13 +11757,13 @@ use namespace CoC;
 				if(output) {
 					outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!");
 				}
-				
+
 				//v1 - bonus cum production
 				//v2 - bonus libido
 				//v3 - time remaining!
 				createStatusEffect(StatusEffects.Rut, 150 * intensity, (50 * intensity)/100, 100 * intensity, 0);
 			}
-			
+
 			return true;
 		}
 
@@ -11775,11 +11808,17 @@ use namespace CoC;
 				}
 				//Level dat shit up!
 				if (herbalismLevel < maxHerbalismLevel() && herbalismXP >= HerbExpToLevelUp()) {
-					outputText("\n<b>Herbalism skill leveled up to " + (herbalismLevel + 1) + "!</b>");
+					outputText("\n\n<b>Herbalism skill leveled up to " + (herbalismLevel + 1) + "!</b>");
 					herbalismLevel++;
 					herbalismXP = 0;
 				}
 			}
+		}
+
+		public function usePotion(pt:PotionType):void {
+			pt.effect();
+			changeNumberOfPotions(pt, -1);
+			EngineCore.doNext(EventParser.playerMenu);
 		}
 
 
@@ -12054,7 +12093,7 @@ use namespace CoC;
 				orgasm(otype);
 			}
 		}
-		
+
 		public function EnergyDependentRestore():void {
 			var intBuff:Number = buff("Energy Vampire").getValueOfStatBuff("int.mult");
 			var speBuff:Number = buff("Energy Vampire").getValueOfStatBuff("spe.mult");
@@ -12069,7 +12108,7 @@ use namespace CoC;
 			if (soulforce > maxSoulforce()) soulforce = maxSoulforce();
 			outputText(" You feel slightly more alive from the soulforce you vampirised from your sexual partner orgasm.");
 		}
-		
+
 		protected override function maxHP_base():Number {
 			var max:Number = super.maxHP_base();
 			if (alicornScore() >= 12) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -12088,7 +12127,7 @@ use namespace CoC;
 			if (scyllaScore() >= 12) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (unicornScore() >= 12) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.ElementalBondFlesh) && statusEffectv1(StatusEffects.SummonedElementals) >= 2) max += maxLust_ElementalBondFleshMulti() * statusEffectv1(StatusEffects.SummonedElementals);
-			
+
 			return max;
 		}
 		protected override function maxLust_base():Number {
@@ -12149,7 +12188,7 @@ use namespace CoC;
 		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {
 			//Easy mode cuts lust gains!
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && dlust > 0 && scale) dlust /= 2;
-			
+
 			//Set original values to begin tracking for up/down values if
 			//they aren't set yet.
 			//These are reset when up/down arrows are hidden with
@@ -12181,14 +12220,14 @@ use namespace CoC;
 					if (dlib > 0) dlib *= 2;
 					if (dlib < 0) dlib /= 2;
 				}
-				
+
 				// Uma's Perkshit
 				if (findPerk(PerkLib.ChiReflowLust) >= 0 && dlib > 0) dlib *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
 				if (findPerk(PerkLib.ChiReflowLust) >= 0 && dsens > 0) dsens *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
-				
+
 				//Apply lust changes in NG+.
 				dlust *= 1 + (newGamePlusMod() * 0.2);
-				
+
 				//lust resistance
 				if (dlust > 0 && scale) dlust *= EngineCore.lustPercent() / 100;
 				if (dlib > 0 && findPerk(PerkLib.PurityBlessing) >= 0) dlib *= 0.75;
@@ -12198,15 +12237,15 @@ use namespace CoC;
 				if (findPerk(PerkLib.AscensionMoralShifter) >= 0) dcor *= 1 + (perkv1(PerkLib.AscensionMoralShifter) * 0.2);
 				if (findPerk(PerkLib.Lycanthropy) >= 0) dcor *= 1.2;
 				if (hasStatusEffect(StatusEffects.BlessingOfDivineFera)) dcor *= 2;
-				
+
 				if (sens > 50 && dsens > 0) dsens /= 2;
 				if (sens > 75 && dsens > 0) dsens /= 2;
 				if (sens > 90 && dsens > 0) dsens /= 2;
 				if (sens > 50 && dsens < 0) dsens *= 2;
 				if (sens > 75 && dsens < 0) dsens *= 2;
 				if (sens > 90 && dsens < 0) dsens *= 2;
-				
-				
+
+
 				//Bonus gain for perks!
 				if (findPerk(PerkLib.Strong) >= 0) dstr += dstr * perk(findPerk(PerkLib.Strong)).value1;
 				if (findPerk(PerkLib.Tough) >= 0) dtou += dtou * perk(findPerk(PerkLib.Tough)).value1;
@@ -12215,7 +12254,7 @@ use namespace CoC;
 				if (findPerk(PerkLib.Wise) >= 0) dwis += dwis * perk(findPerk(PerkLib.Wise)).value1;
 				if (findPerk(PerkLib.Lusty) >= 0) dlib += dlib * perk(findPerk(PerkLib.Lusty)).value1;
 				if (findPerk(PerkLib.Sensitive) >= 0) dsens += dsens * perk(findPerk(PerkLib.Sensitive)).value1;
-				
+
 				// Uma's Str Cap from Perks (Moved to max stats)
 				/*if (findPerk(PerkLib.ChiReflowSpeed) >= 0)
 				{
