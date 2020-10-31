@@ -300,6 +300,11 @@ public class Camp extends NPCAwareContent {
 				return;
 			}
 		}
+		if (Holidays.isHalloween() && flags[kFLAGS.ZENJI_PROGRESS] == 11 && (model.time.hours >= 6 && model.time.hours < 9) && player.statusEffectv4(StatusEffects.ZenjiZList) == 0) {
+			hideMenus();
+			SceneLib.zenjiScene.loverZenjiHalloweenEvent();
+			return;
+		}
 		if (SceneLib.helScene.followerHel()) {
 			if (helFollower.isHeliaBirthday() && flags[kFLAGS.HEL_FOLLOWER_LEVEL] >= 2 && flags[kFLAGS.HELIA_BIRTHDAY_OFFERED] == 0) {
 				hideMenus();
@@ -4281,10 +4286,10 @@ public function wakeFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 28) {
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 28) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 29;
 			clearOutput();
-			outputText("Text.");
+			outputText("Obligatory save update cuz we not have one of those for... long time ^^ PS. Making Chimera (Mostly) Great Again (After You get New Chimera Perks Naturaly)");
 			if (flags[kFLAGS.STAT_GAIN_MODE] == CoC.STAT_GAIN_CLASSIC) {
 				if (player.level > 6) player.statPoints += ((5 * player.level) + 60);
 				else player.statPoints += (10 * player.level);
@@ -4317,10 +4322,23 @@ public function wakeFromBadEnd():void {
 				player.removePerk(PerkLib.ChimericalBodySemiEpicStage);
 				player.createPerk(PerkLib.ChimericalBodySemiPeerlessStage, 0, 0, 0, 0);
 			}
+			if (player.perkv1(PerkLib.AscensionWisdom) > 50) {
+				var refund:int = 0;
+				refund += player.perkv1(PerkLib.AscensionWisdom) - 50;
+				player.setPerkValue(PerkLib.AscensionWisdom, 1, 50);
+				player.ascensionPerkPoints += refund;
+			}
+			var SphereMastery:Number = 10;
+			if (player.hasPerk(PerkLib.KitsuneThyroidGlandFinalForm)) SphereMastery += 15;
+			if (player.perkv1(PerkLib.StarSphereMastery) > SphereMastery) {
+				player.gems += (1000 * (player.perkv1(PerkLib.StarSphereMastery) - SphereMastery));
+				player.removePerk(PerkLib.StarSphereMastery);
+				player.createPerk(PerkLib.StarSphereMastery, SphereMastery, 0, 0, 0);
+			}
 			doNext(doCamp);
 			return;
 		}
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 29) {
+	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 29) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 30;
 			clearOutput();
 			outputText("Text.");
@@ -4766,17 +4784,17 @@ public function wakeFromBadEnd():void {
 		if (player.internalChimeraScore() >= 32) awardAchievement("Elder Chimera", kACHIEVEMENTS.GENERAL_ELDER_CHIMERA);
 		if (player.internalChimeraScore() >= 64) awardAchievement("Legendary Chimera", kACHIEVEMENTS.GENERAL_LEGENDARY_CHIMERA);
 		if (player.internalChimeraScore() >= 128) awardAchievement("Ultimate Lifeform", kACHIEVEMENTS.GENERAL_ULTIMATE_LIFEFORM);
-		if (player.str >= 50 && player.tou >= 50 && player.spe >= 50 && player.inte >= 50 && player.wis >= 50 && player.lib >= 40 && player.sens >= 20) awardAchievement("Jack of All Trades", kACHIEVEMENTS.GENERAL_STATS_50);
-		if (player.str >= 100 && player.tou >= 100 && player.spe >= 100 && player.inte >= 100 && player.wis >= 100 && player.lib >= 80 && player.sens >= 40) awardAchievement("Incredible Stats", kACHIEVEMENTS.GENERAL_STATS_100);
-		if (player.str >= 150 && player.tou >= 150 && player.spe >= 150 && player.inte >= 150 && player.wis >= 150 && player.lib >= 120 && player.sens >= 60) awardAchievement("Anmazing Stats", kACHIEVEMENTS.GENERAL_STATS_150);
-		if (player.str >= 200 && player.tou >= 200 && player.spe >= 200 && player.inte >= 200 && player.wis >= 200 && player.lib >= 160 && player.sens >= 80) awardAchievement("Superhuman Stats", kACHIEVEMENTS.GENERAL_STATS_200);
-		if (player.str >= 300 && player.tou >= 300 && player.spe >= 300 && player.inte >= 300 && player.wis >= 300 && player.lib >= 240 && player.sens >= 120) awardAchievement("Inhuman Stats", kACHIEVEMENTS.GENERAL_STATS_300);
-		if (player.str >= 500 && player.tou >= 500 && player.spe >= 500 && player.inte >= 500 && player.wis >= 500 && player.lib >= 400 && player.sens >= 200) awardAchievement("Epic Stats", kACHIEVEMENTS.GENERAL_STATS_500);
-		if (player.str >= 1000 && player.tou >= 1000 && player.spe >= 1000 && player.inte >= 1000 && player.wis >= 1000 && player.lib >= 800 && player.sens >= 400) awardAchievement("Legendary Stats", kACHIEVEMENTS.GENERAL_STATS_1000);
-		if (player.str >= 2000 && player.tou >= 2000 && player.spe >= 2000 && player.inte >= 2000 && player.wis >= 2000 && player.lib >= 1600 && player.sens >= 800) awardAchievement("Mythical Stats", kACHIEVEMENTS.GENERAL_STATS_2000);
-		if (player.str >= 5000 && player.tou >= 5000 && player.spe >= 5000 && player.inte >= 5000 && player.wis >= 5000 && player.lib >= 4000 && player.sens >= 2000) awardAchievement("Transcendental Stats", kACHIEVEMENTS.GENERAL_STATS_5000);
-		if (player.str >= 15000 && player.tou >= 15000 && player.spe >= 15000 && player.inte >= 15000 && player.wis >= 15000 && player.lib >= 12000 && player.sens >= 6000) awardAchievement("Divine Stats", kACHIEVEMENTS.GENERAL_STATS_15000);
-		if (player.str >= 268445279 && player.tou >= 268445279 && player.spe >= 268445279 && player.inte >= 268445279 && player.wis >= 268445279) awardAchievement("OPK", kACHIEVEMENTS.GENERAL_STATS_2000);
+		if (player.str >= 50 && player.tou >= 50 && player.spe >= 50 && player.inte >= 50 && player.wis >= 50 && player.lib >= 40 && player.sens >= 5) awardAchievement("Jack of All Trades", kACHIEVEMENTS.GENERAL_STATS_50);
+		if (player.str >= 100 && player.tou >= 100 && player.spe >= 100 && player.inte >= 100 && player.wis >= 100 && player.lib >= 80 && player.sens >= 10) awardAchievement("Incredible Stats", kACHIEVEMENTS.GENERAL_STATS_100);
+		if (player.str >= 150 && player.tou >= 150 && player.spe >= 150 && player.inte >= 150 && player.wis >= 150 && player.lib >= 120 && player.sens >= 15) awardAchievement("Anmazing Stats", kACHIEVEMENTS.GENERAL_STATS_150);
+		if (player.str >= 200 && player.tou >= 200 && player.spe >= 200 && player.inte >= 200 && player.wis >= 200 && player.lib >= 160 && player.sens >= 20) awardAchievement("Superhuman Stats", kACHIEVEMENTS.GENERAL_STATS_200);
+		if (player.str >= 300 && player.tou >= 300 && player.spe >= 300 && player.inte >= 300 && player.wis >= 300 && player.lib >= 240 && player.sens >= 30) awardAchievement("Inhuman Stats", kACHIEVEMENTS.GENERAL_STATS_300);
+		if (player.str >= 500 && player.tou >= 500 && player.spe >= 500 && player.inte >= 500 && player.wis >= 500 && player.lib >= 400 && player.sens >= 50) awardAchievement("Epic Stats", kACHIEVEMENTS.GENERAL_STATS_500);
+		if (player.str >= 1000 && player.tou >= 1000 && player.spe >= 1000 && player.inte >= 1000 && player.wis >= 1000 && player.lib >= 800 && player.sens >= 100) awardAchievement("Legendary Stats", kACHIEVEMENTS.GENERAL_STATS_1000);
+		if (player.str >= 2000 && player.tou >= 2000 && player.spe >= 2000 && player.inte >= 2000 && player.wis >= 2000 && player.lib >= 1600 && player.sens >= 200) awardAchievement("Mythical Stats", kACHIEVEMENTS.GENERAL_STATS_2000);
+		if (player.str >= 5000 && player.tou >= 5000 && player.spe >= 5000 && player.inte >= 5000 && player.wis >= 5000 && player.lib >= 4000 && player.sens >= 500) awardAchievement("Transcendental Stats", kACHIEVEMENTS.GENERAL_STATS_5000);
+		if (player.str >= 15000 && player.tou >= 15000 && player.spe >= 15000 && player.inte >= 15000 && player.wis >= 15000 && player.lib >= 12000 && player.sens >= 1500) awardAchievement("Divine Stats", kACHIEVEMENTS.GENERAL_STATS_15000);
+		if (player.str >= 268445279 && player.tou >= 268445279 && player.spe >= 268445279 && player.inte >= 268445279 && player.wis >= 268445279) awardAchievement("OPK", kACHIEVEMENTS.GENERAL_STATS_OPK);
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCHIZOPHRENIA] >= 4) awardAchievement("Schizophrenic", kACHIEVEMENTS.GENERAL_SCHIZO);
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_CLEAN_SLATE] >= 2) awardAchievement("Clean Slate", kACHIEVEMENTS.GENERAL_CLEAN_SLATE);
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] >= 100) awardAchievement("I'm No Lumberjack", kACHIEVEMENTS.GENERAL_IM_NO_LUMBERJACK);

@@ -189,6 +189,7 @@ public class MainMenu extends BaseContent {
 		outputText("<li> Coalsack (Anzu the Avian Deity, Arian App desc, option to change his/her scales color)</li>");
 		outputText("<li> Lord Snakebite (Centipede TF, part of Ghost TF rework, Mitzi & Excellia X-packs)</li>");
 		outputText("<li> T0uchMe (part of Ghost TF rework)</li>");
+		outputText("<li> Pyromania (Zenji the troll)</li>");
 		outputText("<li> Apex (part of Michiko)</li>");
 		outputText("<li> Dxasmodeus (Tentacles, Worms, Giacomo)</li>");
 		outputText("<li> Kirbster (Christmas Bunny Trap)</li>");

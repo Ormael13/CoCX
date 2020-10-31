@@ -249,7 +249,7 @@ use namespace CoC;
 				else addButton(6, "Metamorf", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");//używanie metamorfowania z użyciem soulforce
 			}
 			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
-			addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
+			//addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul king to soul ancestor w momencie robienia release version
 		public function SoulforceCheats():void {
@@ -1579,7 +1579,7 @@ public function FightHellfireSnail():void {
 			addButton(7, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
 			addButton(8, "HBA Armor", AddHBAArmor).hint("Add 1 HBA Armor for testing purposes.");
 			addButton(9, "YODrops", AddYukiOnnaStuff).hint("Add both Yuki Onna equipment drops for testing purposes.");
-			addButton(10, "SpikeShields", AddSpikedShields).hint("Add set of three spiked shields of various sizes and weight for testing purposes.");
+			addButton(10, "SpikeShields", AddSpikedShields).hint("Add set of two spiked shields of various sizes and weight for testing purposes.");
 			addButton(11, "GobMechPrime", AddGoblinMechPrime).hint("Add 1 Goblin Mech Prime for testing purposes.");
 			addButton(12, "MatrixArmory1", AddTheSeerHairpinAndCo).hint("Adds: 1 Eldritch Staff, 1 master Gloves, 1 Gnoll Throwing Axes, 1 Hodr's Bow, 1 Truestrike Sword, 1 Sceptre of Command, 1 Demonic Scythe, 1 Seer's Hairpin, Sakura Petal Kimono, Oni bead necklace");
 			addButton(13, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
@@ -2451,14 +2451,10 @@ public function FightHellfireSnail():void {
 			inventory.takeItem(headjewelries.SNOWFH, EquipmentMenu);
 		}
 		public function AddSpikedShields():void {
-			outputText("\n\n<b>(Gained Light Spiked Shield!)</b>\n\n");
-			inventory.takeItem(shields.SPIL_SH, AddSpikedShields2);
+			outputText("\n\n<b>(Gained Heavy Spiked Shield!)</b>\n\n");
+			inventory.takeItem(shields.SPIH_SH, AddSpikedShields2);
 		}
 		public function AddSpikedShields2():void {
-			outputText("\n\n<b>(Gained Heavy Spiked Shield!)</b>\n\n");
-			inventory.takeItem(shields.SPIH_SH, AddSpikedShields3);
-		}
-		public function AddSpikedShields3():void {
 			outputText("\n\n<b>(Gained Massive Spiked Shield!)</b>\n\n");
 			inventory.takeItem(shields.SPIM_SH, EquipmentMenu);
 		}

@@ -26,9 +26,9 @@ public class YvonneArmorShop extends Shop {
         addButton(6,    armors.SAMUARM.shortName,   confirmBuy, armors.SAMUARM);
         addButton(7,    shields.BUCKLER.shortName,  confirmBuy, shields.BUCKLER);
         addButton(8,    shields.KITE_SH.shortName,  confirmBuy, shields.KITE_SH);
-        addButton(9,    shields.GREATSH.shortName,  confirmBuy, shields.GREATSH);
-        addButton(10,   shields.TOWERSH.shortName,  confirmBuy, shields.TOWERSH);
-
+        addButton(9,   	shields.SPIL_SH.shortName,  confirmBuy, shields.SPIL_SH);
+        addButton(10,   shields.GREATSH.shortName,  confirmBuy, shields.GREATSH);
+        addButton(11,   shields.TOWERSH.shortName,  confirmBuy, shields.TOWERSH);
         if (player.hasKeyItem("Dragon Eggshell") >= 0 && player.gems >= 200) {
             addButton(12, "Eggshell", SceneLib.emberScene.getSomeStuff);
         }

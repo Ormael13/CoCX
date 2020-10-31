@@ -972,6 +972,7 @@ public function loverZenjiOfferYes():void {
 	outputText("<b>Zenji has joined you as a lover.</b>\n\n");
 	player.createStatusEffect(StatusEffects.ZenjiModificationsList,0,0,15,7);
 	player.createStatusEffect(StatusEffects.ZenjiPreparationsList,0,0,0,0);
+	player.createStatusEffect(StatusEffects.ZenjiZList,0,0,0,0);
 	flags[kFLAGS.ZENJI_PROGRESS] = 11;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1325,7 +1326,7 @@ public function loverZenjiGiveItemLotion():void {
 }
 public function loverZenjiGiveItemLotionYes():void {
 	outputText("You rub your fingers beneath his underarms. He brings his hands up behind his head, flexing both of his arms for you.\n\n");
-	outputText("\"<i>Ya seem ta like dat, dontcha..?</i>\" Before you can react Zenji has forcefully shoved your face into his armpit. You struggle briefly but quickly come to accept him. \"<i>Go ahead, take a sniff, [player]. Ya know ya want to, I see de way you’ve been eyeing me.</i>\"\n\n");
+	outputText("\"<i>Ya seem ta like dat, dontcha..?</i>\" Before you can react Zenji has forcefully shoved your face into his armpit. You struggle briefly but quickly come to accept him. \"<i>Go ahead, take a sniff, [name]. Ya know ya want to, I see de way you’ve been eyeing me.</i>\"\n\n");
 	outputText("You bury your head deeper into his pits, they’re so dense, muscular, and fuzzy. Something about his gentle musk is enthralling. It’s a mix of sweat, rain, and grass, combined into a pleasant earthy aroma. It's intoxicating, you can't resist getting in closer to the faint beads of sweat trapped within his fur.\n\n");
 	outputText("You press your nose against his fur, he lowers his flexing arm to pull you closer to him, locking you beneath his pit. You feel a little dizzy from his overwhelmingly masculine aroma. You continue sniffing him, it’s almost too intense and his aura has gotten you even more flustered. You need him more than you ever had before. His presence has you completely enraptured.");
 	outputText("\"<i>Hah, dis is de price ya pay fa being a curious little tease. Ya better like it, because you’re trapped here now.</i>\"\n\n");
@@ -1469,7 +1470,7 @@ public function loverZenjiGiveItemReductoTusks():void {
 public function loverZenjiGiveItemReductoNevermind():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
-	outputText("After a second thought, you decide that you don’t want to increase the size of anything personal to him. You put it away, stating that you’ve decided against it.\n\n");
+	outputText("After a second thought, you decide that you don’t want to decrease the size of anything personal to him. You put it away, stating that you’ve decided against it.\n\n");
 	outputText("Zenji nods respectfully.\n\n");
 	doNext(loverZenjiGiveItem);
 }
@@ -1500,12 +1501,6 @@ public function loverZenji3():void {
 	outputText("Zenji nods softly, \"<i>Now, what do ya want ta talk about?</i>\"\n\n");
 }
 
-public function loverZenji4():void {
-	spriteSelect(SpriteDb.s_zenji);
-	clearOutput();
-	outputText("Zenji nods softly, \"<i>Now, what do ya want ta talk about?</i>\"\n\n");
-}
-
 public function loverZenjiGlades():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
@@ -1526,6 +1521,98 @@ public function loverZenjiMainCampMenuLeave():void {
 	outputText("You realize that you don’t have anything you need from him at this moment, you apologize and take your leave.\n\n");
 	outputText("Zenji gives you a small nod as he dismisses you.\n\n");
 	doNext(camp.campLoversMenu);
+}
+
+public function loverZenjiHalloweenEvent():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("You wake up feeling rested, but suddenly you feel the presence of someone near you.\n\n");
+	outputText("You shift around and notice Zenji sitting beside you, he appears disconcerted.\n\n");
+	outputText("\"<i>[name]!</i>\" Zenji says, \"<i>I… I’m glad ya are safe, it just dat… Dese are strange times for me… De time of da year and all… Many trolls back at my home know dis to be de time when de dead become restless.</i>\"\n\n");
+	outputText("He shifts around uneasily, \"<i>I never actually knew if dis was real, but de thought of it scared me when I was a child.</i>\"\n\n");
+	outputText("You rub the sleep from your eyes and take a proper look at him. His face shows genuine concern for you, but you realize that he’s wearing face paint. Before waking you up he seems to have covered his face with burgundy and white patterns.\n\n");
+	outputText("\"<i>When de dead rise up from de ground, dey know dey haven’t eaten since forever. Dese dead are after someting, anyting to eat… Any troll knows not ta hurt another troll, but de dead only see dead trolls as trolls… We would crush up some of de leaves we had around da jungle and mix water to make de face paint. De paint would make us look dead and dey would ignore us.</i>\"\n\n");
+	outputText("Zenji places two wooden bowls of paint beside you, one white and the other burgundy.\n\n");
+	outputText("Zenji brings you in for a brief embrace, \"<i>Dat’s why I’m here, to protect ya [name].</i>\"\n\n");
+	outputText("He pulls aways and dips his fingers into the bowl, \"<i>Don’ worry, it’s just crushed up leaves and water, I’m wearin’ some right now. It won’t stain or dry out, I made sure of dat.</i>\"\n\n");
+	outputText("You get up to your knees and consider for a moment, do you want to be wearing face paint like this for a while?\n\n");
+	menu();
+	addButton(1, "Yes", loverZenjiHalloweenEventYes);
+	addButton(3, "No", loverZenjiHalloweenEventNo);
+}
+public function loverZenjiHalloweenEventYes():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("Zenji continues uninterrupted, his right hand now carrying a small coating of burgundy paint. With paternal gentleness, he rubs his thumb across your face, creating a series of ceremonial markings.\n\n");
+	outputText("He coats his left hand in the white paint, continuing drawing markings over your face, he pauses for a moment, his green eyes fixate onto yours. \"<i>Even behind de mask of death, your beauty shines through.</i>\"\n\n");
+	outputText("He glances over your face, now covered by his ceremonial paint. \"<i>It’s a good look on ya [name], maybe I did a betta job on you dan I did ta myself.</i>\" He gives a soft chuckle.\n\n");
+	outputText("<b><i>Face Paint gives +10% magic resistance</i></b>\n\n");
+	player.addStatusValue(StatusEffects.ZenjiZList, 4, 2);
+	doNext(camp.returnToCampUseOneHour);
+}
+public function loverZenjiHalloweenEventNo():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("You hold up a hand, telling Zenji that while you appreciate the offer, you are sure you can take care of yourself and don’t need the face paint.\n\n");
+	outputText("Zenji seems hurt by your request, completely at a loss for words.\n\n");
+	outputText("\"<i>I…</i>\" He shakes his head, \"<i>Dere is bravery, dere is ‘uperstition, but dis… I can’t protect ya from de dead when ya aren’t handled for it, but you said you’re a champion and… I… I will do anything for you, even if I disagree.</i>\"\n\n");
+	outputText("He packs up the bowls of paint and leaves you to get ready for the morning.\n\n");
+	player.addStatusValue(StatusEffects.ZenjiZList, 4, 1);
+	doNext(camp.returnToCampUseOneHour);
+}
+public function loverZenjiHalloweenEventEnding():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("Zenji walks up to you, he seems less tense than he has been lately.\n\n");
+	outputText("\"<i>[name], de time of de dead is ova, we can wash off de paint now, lest we invite death to dis camp.</i>\" He says, rubbing a hand over his chin.\n\n");
+	outputText("Zenji guides you to the stream, he climbs down into it. He reaches a hand toward you, beckoning for you to join him.\n\n");
+	outputText("You take off your outerwear before holding his hand as he brings you into the cool water. \"<i>It’s nice to be in de stream sometimes, ya know, [name]?</i>\"\n\n");
+	outputText("You nod, it does feel nice to be carried by the water.\n\n");
+	outputText("Zenji crouches down, bringing himself closer to the water, \"<i>I’m gonna wash dis paint off you now.</i>\"\n\n");
+	outputText("He brings a hand out of the water, his fur now completely soaked. He uses his hand almost like an impromptu rag, gently rubbing away the paint from your face. He rubs his thumb across your cheek affectionately, \"<i>No matta what, your beauty has always shone through.</i>\"\n\n");
+	outputText("He looks into your eyes with intent, longing to be with you. You spend a moment being cradled by him before you feel something prod at your [legs]. You jump slightly at the intrusion.\n\n");
+	outputText("\"<i>Ah, sorry [name]...</i>\" Zenji says, blushing, \"<i>It’s just… It’s been some time since I had such a clear view of your face, you were always stunning… but now…</i>\" Zenji shakes himself out of it, \"<i>No, let’s finish getting dis paint off before we do anyting. Besides, it looks like I’m done cleaning you up, now it’s my turn.</i>\"\n\n");
+	outputText("Zenji submerges his head into the stream before rising back out. His mohawk flops down and the short fur on his face droops from the weight of the water.\n\n");
+	outputText("You spend some time cleaning off the paint from him, it’s surprisingly easy to remove and it doesn’t take long before you’re done.\n\n");
+	outputText("Zenji caresses your face gently before smothering you into his chest. He’s still bulging through his loincloth.\n\n");
+	outputText("Zenji looks down at you, \"<i>Let’s get outta de water, okay?</i>\"\n\n");
+	outputText("It’d be a shame to just get out of the water so soon, do you want to reward him for helping you out with such a dangerous time?\n\n");
+	menu();
+	addButton(1, "Blow Him", loverZenjiHalloweenEventEndingBlowHim);
+	addButton(3, "Dry Off", loverZenjiHalloweenEventEndingDryOff);
+}
+public function loverZenjiHalloweenEventEndingBlowHim():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("You stop him right there, as you have something else in mind you want to do before leaving the stream.\n\n");
+	outputText("You tell Zenji to sit on the edge of the stream, you have a special reward for him since he kept you safe during such a dangerous time.\n\n");
+	outputText("He does so, his legs still within the water as you walk up to him. You pull down his loincloth, revealing the troll’s manhood.\n\n");
+	outputText("Zenji gives a small smirk, \"<i>Just can’t keep away can ya? I feel de same way…</i>\"\n\n");
+	outputText("You kneel before him, the water going up to your torso. You glide a finger up his shaft, leaning in close to smell his musk. The usual scent of his musk has been washed away, but it’s not completely gone.\n\n");
+	outputText("You place your lips at the head of his penis, the salty taste of his pre reaches your [tongue] as you gently tease at his tip. Zenji growls softly at your ministrations as water slides down from his toned abs onto your face. Zenji gently wipes the water away as you continue doing your best to grab hold of every last inch of him within your mouth.\n\n");
+	outputText("You continue slurping up his pre and bobbing up and down his shaft when you feel him buck a little harder against you. He grabs hold onto the back of your head and pushes you down onto him. He growls softly with pent up need.\n\n");
+	outputText("You try to back up, but he’s intent on getting himself off, losing his control over you.\n\n");
+	outputText("\"<i>D-don stop [name]! So close… So good…</i>\" He thrusts himself into you slightly, desperate to get as much out of this as he can. You do your best to make sure that you don’t neglect any part of him.\n\n");
+	outputText("He pushes you back slightly as he stands up. You feel the water around you stir as you wrap your arms around his legs for support. Zenji continues thrusting into your mouth with complete abandon.\n\n");
+	outputText("He lets loose a low moan as you feel his length throb on your [tongue]. His climax hits hard as you feel "+(player.statusEffectv2(StatusEffects.ZenjiModificationsList) < 1700 ? "rivers of spunk jet directly down your throat":"waves and waves of punk surge directly down your throat. You choke slightly at the sheer force of his seed, but you do your best to swallow as much as you can before coughing out the rest. Zenji continues cumming onto you before his orgasm finally dies down")+".\n\n");
+	outputText("Zenji strokes your head affectionately, \"<i>Got a little carried away dere… Ya are getting really good at this…</i>\"\n\n");
+	outputText("You look up to meet his gaze and give him a sly smile.\n\n");
+	outputText("Zenji lifts you completely out of the water. You are supported only by his strong arms as he carefully places you on the ground outside the stream. He lifts himself out to join you on the ground.\n\n");
+	outputText("Zenji pats himself down, rubbing some of the water off his fur, \"<i>Gonna be wet for some time now, water doesn’ come out easily from troll fur.</i>\" He gives you a longing glance, \"<i>But dat’s okay, I got you ta keep me company.</i>\" He lifts your chin to his and plants a soft kiss onto your lips.\n\n");
+	outputText("You spend some time relaxing with him before you’ve dried off, ready to continue your day.\n\n");
+	player.refillHunger(15);
+	player.addStatusValue(StatusEffects.ZenjiZList, 4, -2);
+	doNext(camp.returnToCampUseOneHour);
+}
+public function loverZenjiHalloweenEventEndingDryOff():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	outputText("You nod, ready to leave the stream’s embrace.\n\n");
+	outputText("Zenji lifts you completely out of the water. You are supported only by his strong arms as he carefully places you on the ground outside the stream. He lifts himself out to join you on the ground.\n\n");
+	outputText("Zenji pats himself down, rubbing some of the water off his fur, \"<i>Gonna be wet for some time now, water doesn’ come out easily from troll fur.</i>\" He gives you a longing glance, \"<i>But dat’s okay, I got you ta keep me company.</i>\" He lifts your chin to his and plants a soft kiss onto your lips.\n\n");
+	outputText("You spend some time relaxing with him before you’ve dried off, ready to continue your day.\n\n");
+	player.addStatusValue(StatusEffects.ZenjiZList, 4, -2);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //ZENJI MARRIAGE
@@ -1549,4 +1636,4 @@ public function marryZenji3():void {
 }
 
 	}
-}
+}

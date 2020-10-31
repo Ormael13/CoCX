@@ -2042,6 +2042,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.ass.analWetness = 2;
 				needNext = true;
 			}
+			if (!Holidays.isHalloween() && flags[kFLAGS.ZENJI_PROGRESS] == 11 && player.statusEffectv4(StatusEffects.ZenjiZList) == 2 && rand(5) < 2) {
+				SceneLib.zenjiScene.loverZenjiHalloweenEventEnding();
+				needNext = true;
+			}
 			if (player.pregnancyIncubation <= 0 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) { //Fixing Egg Preg Preglocked Glitch
 				player.knockUpForce(); //Clear Pregnancy
 			}

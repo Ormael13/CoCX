@@ -1995,10 +1995,6 @@ use namespace CoC;
 			if (findPerk(PerkLib.NakedTruth) >= 0 && spe >= 75 && lib >= 60 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing")) {
 				mult -= 10;
 			}
-			//--STATUS AFFECTS--
-			if (statusEffectv1(StatusEffects.OniRampage) > 0) {
-				mult -= 20;
-			}
 			if (hasPerk(PerkLib.MelkieLung)) {
 				mult -= 5;
 			}
@@ -2007,6 +2003,13 @@ use namespace CoC;
 			}
 			if (hasPerk(PerkLib.MelkieLungFinalForm)) {
 				mult -= 15;
+			}
+			//--STATUS AFFECTS--
+			if (statusEffectv1(StatusEffects.OniRampage) > 0) {
+				mult -= 20;
+			}
+			if (statusEffectv4(StatusEffects.ZenjiZList) == 2) {
+				mult -= 10;
 			}
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
@@ -9856,6 +9859,13 @@ use namespace CoC;
 			if (this.fairyScore() >= 18) minSen += 20;
 			//Rings
 			if (this.jewelryName == "Ring of Libido") minLib += 5;
+			if (this.jewelryName2 == "Ring of Libido") minLib += 5;
+			if (this.jewelryName3 == "Ring of Libido") minLib += 5;
+			if (this.jewelryName4 == "Ring of Libido") minLib += 5;
+			if (this.jewelryName == "Ring of Sensitivity") minSen += 5;
+			if (this.jewelryName2 == "Ring of Sensitivity") minSen += 5;
+			if (this.jewelryName3 == "Ring of Sensitivity") minSen += 5;
+			if (this.jewelryName4 == "Ring of Sensitivity") minSen += 5;
 			//Other
 			if (this.hasPerk(PerkLib.GoblinoidBlood)) {
 				if (this.hasKeyItem("Drug injectors") >= 0) {
@@ -10002,7 +10012,7 @@ use namespace CoC;
 			removeStatusEffect(StatusEffects.IntWisCounter1);
 			createStatusEffect(StatusEffects.IntWisCounter1,0,0,0,0);
 			removeStatusEffect(StatusEffects.LibSensCounter1);
-			createStatusEffect(StatusEffects.LibSensCounter1, 0, 0, 0, 0);
+			createStatusEffect(StatusEffects.LibSensCounter1,0,0,0,0);
 			var newGamePlusMod:int = this.newGamePlusMod() + 1;
 			var maxStrCap1:Number = 0;
 			var maxTouCap1:Number = 0;
@@ -10037,7 +10047,7 @@ use namespace CoC;
 			removeStatusEffect(StatusEffects.IntWisCounter2);
 			createStatusEffect(StatusEffects.IntWisCounter2,0,0,0,0);
 			removeStatusEffect(StatusEffects.LibSensCounter2);
-			createStatusEffect(StatusEffects.LibSensCounter2, 0, 0, 0, 0);
+			createStatusEffect(StatusEffects.LibSensCounter2,0,0,0,0);
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			var maxStrCap2:Number = 0;
 			var maxTouCap2:Number = 0;

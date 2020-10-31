@@ -2355,12 +2355,14 @@ public class KitsuneScene extends BaseContent
 				outputText("");
 			}
 			flags[kFLAGS.KITSUNE_SHRINE_VISIT]++;
+			var SphereMastery:Number = 10;
+			if (player.hasPerk(PerkLib.KitsuneThyroidGlandFinalForm)) SphereMastery += 15;
 			//[Read Books] [Meditate] [Steal Statue] - [Leave]
 			menu();
 			addButton(0, "Read Books", readKitsuneBooks);
 			if (flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) addButton(1, "Meditate", meditateLikeAKitsuneEhQuestionMark);
 			if ((player.hasItem(useables.GLDSTAT) || flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) && flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] < 1) addButton(2, "Statue", stealAStatue);
-			if (player.findPerk(PerkLib.StarSphereMastery) > 0 && ((player.hasPerk(PerkLib.KitsuneThyroidGlandFinalForm) && player.perkv1(PerkLib.StarSphereMastery) < 25) || player.perkv1(PerkLib.StarSphereMastery) < 10) && player.gems >= 1000) addButton(3, "Offering", offeringToTaoth);
+			if (player.findPerk(PerkLib.StarSphereMastery) > 0 && player.perkv1(PerkLib.StarSphereMastery) < SphereMastery && player.gems >= 1000) addButton(3, "Offering", offeringToTaoth);
             if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 2) addButton(5, "Ayane", SceneLib.ayaneFollower.ayaneShop);
             if (flags[kFLAGS.AYANE_FOLLOWER] == 1) {
 				addButton(6, "Servant", AyaneServant);
@@ -2404,7 +2406,7 @@ public class KitsuneScene extends BaseContent
 		{
 			clearOutput();
 			outputText("You leave a generous offering of gems at the shrine of Taoth and pray to the fox god for his support in your quest. Light falls from the sky and seems to condense in your star sphere, as you feel your kitsune powers increasing. When you look down to the offering bowl, you discover it is now empty.\n\n");
-			if (player.perkv1(PerkLib.StarSphereMastery) < 20) player.addPerkValue(PerkLib.StarSphereMastery, 1, 1);
+			player.addPerkValue(PerkLib.StarSphereMastery, 1, 1);
 			player.gems -= 1000;
 			doNext(camp.returnToCampUseOneHour);
 		}
