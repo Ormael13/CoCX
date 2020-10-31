@@ -62,7 +62,7 @@ import coc.xlogic.ExecContext;
 					PlayerHasAnAxe: player.isAxeTypeWeapon(),
 					PlayerHasAHammer: player.isMaceHammerTypeWeapon(),
 					PlayerHasASpear: player.isSpearTypeWeapon(),
-					PlayerHasKatana: player.weapon == game.weapons.BLETTER  || player.weapon == game.weapons.KATANA || player.weapon == game.weapons.MASAMUN,
+					PlayerHasKatana: player.weapon == game.weapons.NODACHI  || player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.MARAKUMO || player.weapon == game.weapons.BLETTER  || player.weapon == game.weapons.KATANA || player.weapon == game.weapons.MASAMUN,
 					PlayerHasRapier: player.weapon == game.weapons.B_WIDOW || player.weapon == game.weapons.DRAPIER || player.weapon == game.weapons.JRAPIER || player.weapon == game.weapons.Q_GUARD || player.weapon == game.weapons.RRAPIER || player.weapon == game.weapons.LRAPIER,
 					PlayerHasAShield: player.shieldName != "nothing" && player.shield != game.shields.SPI_FOC,
 					PlayerHasSanctuary: player.shieldName != "nothing",

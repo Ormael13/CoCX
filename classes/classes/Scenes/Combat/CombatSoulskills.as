@@ -507,7 +507,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			else if (monster.cor < 90) damage = Math.round(damage * 1.3);
 			else damage = Math.round(damage * 1.4);
 		}
-		if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG) {
+		if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.MARAKUMO || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG) {
 			if (monster.cor >= 66) damage = Math.round(damage * 1.0);
 			else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
 			else if (monster.cor >= 25) damage = Math.round(damage * 1.2);

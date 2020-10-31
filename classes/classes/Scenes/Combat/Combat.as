@@ -4665,7 +4665,7 @@ public class Combat extends BaseContent {
     }
 
     public function WrathWeaponsProc():void {
-        if (player.weapon == weapons.BLETTER) {
+        if (player.weapon == weapons.BLETTER || player.weapon == weapons.MARAKUMO) {
             player.takePhysDamage(player.maxHP() * 0.02);
             if (player.HP <= player.minHP()) {
                 doNext(endHpLoss);
