@@ -29,6 +29,8 @@ package classes.Items
 		public const BFWHIP :Weapon = new BFWhip();
 		public const B_SCARB:Weapon = new Weapon("B.ScarB", "B.ScarBlade", "broken scarred blade", "a broken scarred blade", "slash", 12, 480, "This saber, made from lethicite-imbued metal, seems to no longer seek flesh; whatever demonic properties in this weapon is gone now but it's still an effective weapon.");
 		public const BLETTER:BloodLetter = new BloodLetter();
+		public const MOONLIT:MoonlitSnow = new MoonlitSnow();
+		public const MARAKUMO:Marakumo = new Marakumo();
 		public const B_WIDOW:BlackWidow = new BlackWidow();
 		public const CLAWS  :Weapon = new Weapon("Claws","Claws","gauntlet with claws","a gauntlet with claws","rend",0,100,"Those metal gauntlets have tips of the fingers shaped like sharp natural claws.  Though they lacks the damaging potential of other weapons, they have a chance to leave bleeding wounds.");
 		public const CLAYMOR:Weapon = new LargeClaymore();
