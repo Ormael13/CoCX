@@ -651,28 +651,28 @@ public class PerkLib
 				"You choose the 'Cheetah VI' perk, granting +1 extra maximum HP for each point of speed.");
 		public static const ChimericalBodyAdvancedStage:PerkType = mk("Chimerical Body: Advanced Stage", "Chimerical Body: Advanced Stage",
 				"Your chimerical body attained Advanced Stage. (negate up to 8 racial perk points negative effects)",
-				"You choose the 'Chimerical Body: Advanced Stage' perk. Constant mutations rised your body adaptiveness to advanced level.").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.15,'int.mult':0.05,'wis.mult':0.10});
+				"You choose the 'Chimerical Body: Advanced Stage' perk. Constant mutations rised your body adaptiveness to advanced level.").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.15,'int.mult':0.05,'wis.mult':0.10,'sens':5});
 		public static const ChimericalBodyBasicStage:PerkType = mk("Chimerical Body: Basic Stage", "Chimerical Body: Basic Stage",
 				"Your chimerical body attained Basic Stage. (negate up to 4 racial perk points negative effects)",
-				"You choose the 'Chimerical Body: Basic Stage' perk. Your body reach adaptation stage for most base type of chimera.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.10});
+				"You choose the 'Chimerical Body: Basic Stage' perk. Your body reach adaptation stage for most base type of chimera.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.10,'sens':5});
 		public static const ChimericalBodyEpicStage:PerkType = mk("Chimerical Body: Epic Stage", "Chimerical Body: Epic Stage",
 				"Your chimerical body attained Epic Stage. (negate up to 14 racial perk points negative effects)",
-				"You choose the 'Chimerical Body: Epic Stage' perk. Constant mutations rised your body adaptiveness to Epic level.").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.20,'wis.mult':0.20,'lib.mult':0.15});
+				"You choose the 'Chimerical Body: Epic Stage' perk. Constant mutations rised your body adaptiveness to Epic level.").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.20,'wis.mult':0.20,'lib.mult':0.15,'sens':15});
 		public static const ChimericalBodyImprovedStage:PerkType = mk("Chimerical Body: Improved Stage", "Chimerical Body: Improved Stage",
 				"Your chimerical body attained Improved Stage. (negate up to 6 racial perk points negative effects)",
-				"You choose the 'Chimerical Body: Improved Stage' perk. Constant mutations rised your body adaptiveness into improved level.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05,'lib.mult':0.10});
+				"You choose the 'Chimerical Body: Improved Stage' perk. Constant mutations rised your body adaptiveness into improved level.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05,'lib.mult':0.10,'sens':5});
 		public static const ChimericalBodyInitialStage:PerkType = mk("Chimerical Body: Initial Stage", "Chimerical Body: Initial Stage",
 				"Your chimerical body attained Initial Stage. (negate up to 2 racial perk points negative effects)",
 				"You choose the 'Chimerical Body: Initial Stage' perk. Constant mutations causing your body to slowly start adapt to increased metabolism needs.").withBuffs({'tou.mult':0.05,'lib.mult':0.05});
 		public static const ChimericalBodyPeerlessStage:PerkType = mk("Chimerical Body: Peerless Stage", "Chimerical Body: Peerless Stage",
 				"Your chimerical body attained Peerless Stage. (negate up to 12 racial perk points negative effects)",
-				"You choose the 'Chimerical Body: Peerless Stage' perk. Constant mutations rised your body adaptiveness to peerless level.").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.05});
+				"You choose the 'Chimerical Body: Peerless Stage' perk. Constant mutations rised your body adaptiveness to peerless level.").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.05,'sens':10});
 		public static const ChimericalBodySuperiorStage:PerkType = mk("Chimerical Body: Superior Stage", "Chimerical Body: Superior Stage",
 				"Your chimerical body attained Superior Stage. (negate up to 10 racial perk points negative effects)",
-				"You choose the 'Chimerical Body: Superior Stage' perk. Constant mutations rised your body adaptiveness to superior level.").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.05});
+				"You choose the 'Chimerical Body: Superior Stage' perk. Constant mutations rised your body adaptiveness to superior level.").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.05,'sens':5});
 		public static const ChimericalBodySemiAdvancedStage:PerkType = mk("Chimerical Body: Semi-Advanced Stage", "Chimerical Body: Semi-Advanced Stage",
 				"Your chimerical body attained Semi-Advanced Stage. (negate up to 7 racial perk points negative effects)",
-				"You choose the 'Chimerical Body: Semi-Advanced Stage' perk. Constant mutations rised your body adaptiveness beyond improved level.").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05,'lib.mult':0.05});
+				"You choose the 'Chimerical Body: Semi-Advanced Stage' perk. Constant mutations rised your body adaptiveness beyond improved level.").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05,'lib.mult':0.05,'sens':5});
 		public static const ChimericalBodySemiBasicStage:PerkType = mk("Chimerical Body: Semi-Basic Stage", "Chimerical Body: Semi-Basic Stage",
 				"Your chimerical body attained Semi-Basic Stage. (negate up to 3 racial perk points negative effects)",
 				"You choose the 'Chimerical Body: Semi-Basic Stage' perk. Your body will reach apex stage of adaptation for most base type of chimera.").withBuffs({'str.mult':0.05,'spe.mult':0.05,'int.mult':0.05});
@@ -684,7 +684,7 @@ public class PerkLib
 				"You choose the 'Chimerical Body: Semi-Improved Stage' perk. Constant mutations rised your body adaptiveness beyond basic level.");
 		public static const ChimericalBodySemiPeerlessStage:PerkType = mk("Chimerical Body: Semi-Peerless Stage", "Chimerical Body: Semi-Peerless Stage",
 				"Your chimerical body attained Semi-Peerless Stage. (negate up to 11 racial perk points negative effects)",
-				"You choose the 'Chimerical Body: Semi-Peerless Stage' perk. Constant mutations rised your body adaptiveness beyond superior level.").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.05,'wis.mult':0.05,'lib.mult':0.10});
+				"You choose the 'Chimerical Body: Semi-Peerless Stage' perk. Constant mutations rised your body adaptiveness beyond superior level.").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.05,'wis.mult':0.05,'lib.mult':0.10,'sens':10});
 		public static const ChimericalBodySemiSuperiorStage:PerkType = mk("Chimerical Body: Semi-Superior Stage", "Chimerical Body: Semi-Superior Stage",
 				"Your chimerical body attained Semi-Superior Stage. (negate up to 9 racial perk points negative effects // +1 to racial score when PC have second racial specific mutation perk)",
 				"You choose the 'Chimerical Body: Semi-Superior Stage' perk. Constant mutations rised your body adaptiveness beyond advanced level.");
@@ -828,7 +828,7 @@ public class PerkLib
 				"You choose 'Defence Stance' perk, training to master you defence pose.");
 		public static const DeityJobMunchkin:PerkType = mk("Deity Job: Munchkin", "Deity Job: Munchkin",
 				"You're Munchkin, an ultimate being that possess a god-like body and powers. +25% to all stats.",
-				"You choose 'Deity Job: Munchkin' perk, becoming an ultimate being with a god-like body and powers. +25% to all stats.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,"int.mult":0.25,'wis.mult':0.25,'lib.mult':0.25}, false);
+				"You choose 'Deity Job: Munchkin' perk, becoming an ultimate being with a god-like body and powers. +25% to all stats.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,"int.mult":0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':25}, false);
 		public static const DemonicDesireI:PerkType = mk("Demonic Desire I", "Demonic Desire I",
 				"+1 extra LP per point of libido.",
 				"You choose the 'Demonic Desire I' perk, granting an extra maximum LP for each point of libido.");
@@ -854,7 +854,7 @@ public class PerkLib
 				"You can't loose by HP until reaching droping into negative health larger than 2% of max HP + 200(scalable). When below 0 HP would lose 1% of max HP per turn.",
 				"You choose the 'Diehard' perk, allowing to contiue fight even when below 0 HP.");
 		public static const DisplacerMetabolism:PerkType = mk("Displacer Metabolism", "Displacer Metabolism",
-				"Allows you to gain a boost of speed for a few hours after an intake of cum and allow attack twice with tail spike per turn.",
+				"Allows you to gain a boost of speed after an intake of milk and double the damage of displacer beast claws attacks.",
 				"You choose the 'Displacer Metabolism' perk, allows you to gain a boost of speed after an intake of milk and double the damage of displacer beast claws attacks.");
 		public static const DisplacerMetabolismEvolved:PerkType = mk("Displacer Metabolism (Evolved)", "Displacer Metabolism (Evolved)",
 				"Increase by (10 * NG tier) boost of speed for a five hours longer after an intake of milk and increase max Hunger cap by 50 (if PC have Hunger bar active).",
@@ -1589,7 +1589,7 @@ public class PerkLib
 				"You choose the 'Improving Nature's Blueprints (Natural Weapons)' perk, allowing you to use Charge Weapon even without holding any weapon and slight boost unarmed attacks when using Crinos Shape.");
 		public static const ImprovingNaturesBlueprintsApexPredator:PerkType = mk("Improving Nature's Blueprints (Apex Predator)", "Improving Nature's Blueprints (Apex Predator)",
 				"Changing negative bonuses to max Int and Wis from Job: Beast Warrior is the same value positive bonuses. While using Crinos shape increasing natural regeneration by 2% of max HP per turn.",
-				"You choose the 'Improving Nature's Blueprints (Apex Predator)' perk, allowing you to become an Apex Predator that isn't dull and slow witted along with increased regeneration while using Crinos Shape.").withBuffs({'int.mult':0.5,'wis.mult':0.10});
+				"You choose the 'Improving Nature's Blueprints (Apex Predator)' perk, allowing you to become an Apex Predator that isn't dull and slow witted along with increased regeneration while using Crinos Shape.").withBuffs({'int.mult':0.10,'wis.mult':0.10});
 		public static const InControl:PerkType = mk("In Control", "In Control",
 				"You are in control of your desires, that's it... except another 10% soul force gain.",
 				"You choose the 'In Control' perk, gaining +10% max Soulforce.");
@@ -1679,7 +1679,7 @@ public class PerkLib
 				"You choose the 'Iron Stomach' perk, reducing the fatigue cost of physical special attacks by 50%");*/
 		public static const JobAllRounder:PerkType = mk("Job: All-Rounder", "Job: All-Rounder",
 				"You've combined all basic jobs training effects into an all-round fighting style. +10% to all stats",
-				"You choose 'Job: All-Rounder' perk, to combine effects of training in all six basic jobs. +10% to all stats").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.10}, false);
+				"You choose 'Job: All-Rounder' perk, to combine effects of training in all six basic jobs. +10% to all stats").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.10,'sens':6}, false);
 		public static const JobBeastWarrior:PerkType = mk("Job: Beast Warrior", "Job: Beast Warrior",
 				"You've trained to use of your own body and natural weapons to their limits in fights.",
 				"You choose 'Job: Beast Warrior' perk, training yourself in the art of feral combat.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05, "int.mult":-0.05, "wis.mult":-0.05});
@@ -2959,7 +2959,7 @@ public class PerkLib
 				"You choose the 'Whale fat' perk, making your more resilient against physical attacks and increasing the duration of Juggle by 1 round while playing.").withBuffs({'tou.mult':0.10});
 		public static const WhaleFatFinalForm:PerkType = mk("Whale fat (Final Form)", "Whale fat (Final Form)",
 				"Your whale fat further increase your damage reduction against physical attacks and the duration of juggle is increased by 1 additionnal round. Juggle can now be used a third time",
-				"You choose the 'Whale fat' perk, making your more resilient against physical attacks and Juggle can now be used a third time while playing.").withBuffs({'tou.mult':0.15});
+				"You choose the 'Whale fat' perk, making your more resilient against physical attacks and Juggle can now be used a third time while playing.").withBuffs({'tou.mult':0.20});
 		public static const Whipping:PerkType = mk("Whipping", "Whipping",
 				"Whipping special deal increased damage based on current strength.",
 				"You choose the 'Whipping' perk, making your Whipping special stronger.");
@@ -3173,7 +3173,7 @@ public class PerkLib
 		public static const EnlightenedNinetails:PerkType = mk("Enlightened Nine-tails", "Enlightened Nine-tails",
 				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells.",null,true);
 		public static const EzekielBlessing:PerkType = mk("Ezekiel Blessing", "Ezekiel Blessing",
-				"You've recived blessing of Ezekiel enhancing your body and mind. +5% to all stats.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05,'lib.mult':0.05}, false);
+				"You've recived blessing of Ezekiel enhancing your body and mind. +5% to all stats.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05,'lib.mult':0.05,'sens':5}, false);
 		public static const Feeder:PerkType = mk("Feeder", "Feeder",
 				"Lactation does not decrease and gives a compulsion to breastfeed others.");
 		public static const FenrirSpikedCollar:PerkType = mk("Fenrir spiked collar", "Fenrir spiked collar",
@@ -3309,7 +3309,7 @@ public class PerkLib
 				"Greatly empower the tease ability.");
 		public static const ElvenBounty:ElvenBountyPerk = new ElvenBountyPerk();
 		public static const FclassHeavenTribulationSurvivor:PerkType = mk("F class Heaven Tribulation Survivor", "F class Heaven Tribulation Survivor",
-				"You have survived third trial on cultivation path: F class Heaven Tribulation. +20% to all stats.").withBuffs({'str.mult':0.20,'tou.mult':0.20,'spe.mult':0.20,'int.mult':0.20,'wis.mult':0.20,'lib.mult':0.20}, false);
+				"You have survived third trial on cultivation path: F class Heaven Tribulation. +20% to all stats.").withBuffs({'str.mult':0.20,'tou.mult':0.20,'spe.mult':0.20,'int.mult':0.20,'wis.mult':0.20,'lib.mult':0.20,'sens':20}, false);
 		public static const FeralHunter:FeralHunterPerk = new FeralHunterPerk();
 		public static const FerasBoonAlpha:PerkType = mk("Fera's Boon - Alpha", "Fera's Boon - Alpha",
 				"Increases the rate your cum builds up and cum production in general.");
@@ -3330,9 +3330,9 @@ public class PerkLib
 		public static const GargoylePure:PerkType = mk("Gargoyle", "Pure Gargoyle",
 				"Need to gain sustenance from soulforce to stay alive.");
 		public static const GclassHeavenTribulationSurvivor:PerkType = mk("G class Heaven Tribulation Survivor", "G class Heaven Tribulation Survivor",
-				"You have survived second trial on cultivation path: G class Heaven Tribulation. +15% to all stats.").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.15,'wis.mult':0.15,'lib.mult':0.15}, false);
+				"You have survived second trial on cultivation path: G class Heaven Tribulation. +15% to all stats.").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.15,'wis.mult':0.15,'lib.mult':0.15,'sens':15}, false);
 		public static const HclassHeavenTribulationSurvivor:PerkType = mk("H class Heaven Tribulation Survivor", "H class Heaven Tribulation Survivor",
-				"You have survived first trial on cultivation path: H class Heaven Tribulation. +10% to all stats.").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.10}, false);
+				"You have survived first trial on cultivation path: H class Heaven Tribulation. +10% to all stats.").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.10,'sens':10}, false);
 		public static const Hellfire:PerkType = mk("Hellfire", "Hellfire",
 				"Grants a corrupted fire breath attack, like the hellhounds in the mountains.");
 		public static const IntermediateLeadership:PerkType = mk("Intermediate Leadership", "Intermediate Leadership",
