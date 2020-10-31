@@ -193,7 +193,11 @@ public class TentacleBeast extends Monster
 			this.lustVuln = 0.8;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = rand(25)+10;
-			this.drop = new WeightedDrop(null, 1);
+			this.drop = new WeightedDrop().addMany(1,consumables.HEALHERB,
+					consumables.MOONGRASS,
+					consumables.SNAKEBANE,
+					consumables.IRONWEED,
+					consumables.BLADEFERN);
 			this.special1 = tentaclePhysicalAttack;
 			this.special2 = tentacleEntwine;
 			this.tailType = Tail.DEMONIC;

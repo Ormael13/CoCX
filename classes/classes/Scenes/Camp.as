@@ -2030,9 +2030,13 @@ public class Camp extends NPCAwareContent {
 	public function HerbalismCraftItem2(ItemID:SimpleConsumable, IngrediantName:String, CraftingResult:PotionType){
 		clearOutput();
 		player.changeNumberOfPotions(CraftingResult,+1);
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) player.changeNumberOfPotions(CraftingResult,+2);
 		outputText("You spend the better part of the next hour refining the "+IngrediantName+" into a "+CraftingResult.name+" adding it to your bag.");
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) outputText("Your natural knowledge of herbalism allowed you two craft two additionnal "+CraftingResult.name+".");
 		player.destroyItems(ItemID, 1);
 		player.herbXP(20+player.level);
+		if (player.hasPerk(PerkLib.PlantKnowledge)) player.herbXP(20+player.level);
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) player.herbXP(20+player.level);
 		doNext(HerbalismMenu);
 	}
 

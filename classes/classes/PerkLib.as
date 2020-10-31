@@ -3098,6 +3098,8 @@ public class PerkLib
 		// Mutation perks
 		public static const AcidSpit:PerkType = mk("Acid Spit", "Acid Spit",
 				"Allows access to a cave wyrm acid spit attack.");
+		public static const AlrauneNectar:PerkType = mk("Alraune Nectar", "Alraune Nectar",
+				"You yourself produce an endless supply of alraune nectar.");
 		public static const AzureflameBreath:PerkType = mk("Azureflame Breath", "Azureflame Breath",
 				"Allows access to a cave wyrm azureflame breath attack.");
 		public static const Androgyny:PerkType = mk("Androgyny", "Androgyny",
@@ -3252,8 +3254,10 @@ public class PerkLib
 				"Causes you to crave minotaur cum frequently.  You cannot shake this addiction.");
 		public static const MinotaurCumResistance:PerkType = mk("Minotaur Cum Resistance", "Minotaur Cum Resistance",
 				"You can never become a Minotaur Cum Addict. Grants immunity to Minotaur Cum addiction.");
+		public static const NaturalHerbalism:PerkType = mk("Natural herbalism", "Natural herbalism",
+			"Gain three times as many herbs and items from gathering and crafting. Poultice heals for 50% more. Gain alchemist experience faster.");
 		public static const Necromancy:PerkType = mk("Necromancy", "Necromancy",
-				"Black magic effectiveness is increased by 50%. Soulforce regenerate passively by 2%.");//, Hex and Necromancy		 and recharge 1 round faster
+				"Black magic effectiveness is increased by 50%. Soulforce regenerate passively by 2%.");//, Hex and Necromancy		 and recharge 1 round faster\
 		public static const NinetailsKitsuneOfBalance:PerkType = mk("Nine-tails Kitsune of Balance", "Nine-tails Kitsune of Balance",
 				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  You tread narrow path between corruption and true enlightment maintaining balance that allow to fuse both sides powers.",null,true);
 		public static const Oviposition:PerkType = mk("Oviposition", "Oviposition",
@@ -3262,6 +3266,8 @@ public class PerkLib
 				"Thanks to your ghostly form, throwing weapons and firearms now drains some of your ectoplasm with each use instead of using ammunition. (+5% dmg)");
 		public static const PhoenixFireBreath:PerkType = mk("Phoenix fire breath", "Phoenix fire breath",
 				"Allows access to a phoenix fire breath attack.");
+		public static const PlantKnowledge:PerkType = mk("Plant knowledge", "Plant knowledge",
+				"Your nature as a plant gives you an instinctual knowledge of herbalism. Add some of your libido to your herbalism skill scaling and gain herbalism experience faster.");
 		public static const PoisonNails:PerkType = mk("Poison nails", "Poison nails",
 				"Your nails inflict a deadly poison on strike, damaging your foe’s toughness, speed and arousing them.");
 		public static const PurityBlessing:PerkType = mk("Purity Blessing", "Purity Blessing",

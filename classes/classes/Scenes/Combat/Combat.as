@@ -23,6 +23,7 @@ import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Monster;
 import classes.PerkLib;
+import classes.PotionType;
 import classes.Scenes.Areas.Beach.Gorgon;
 import classes.Scenes.Areas.Caves.DisplacerBeast;
 import classes.Scenes.Areas.Desert.Naga;
@@ -717,6 +718,7 @@ public class Combat extends BaseContent {
     public function CalcAlchemyPower():Number{
         var power:Number = 0;
         power += scalingBonusWisdom();
+        if (player.hasPerk(PerkLib.PlantKnowledge)) power += scalingBonusLibido();
         power += player.herbalismLevel;
         power = Math.round(power);
         return power;
@@ -725,15 +727,16 @@ public class Combat extends BaseContent {
     public function Poultice():void {
         clearOutput();
         var power:Number = CalcAlchemyPower();
+        if (player.hasPerk(PerkLib.NaturalHerbalism)) power *= 2;
         HPChange(power,false);
-        outputText("You apply the poultice, your wounds closing at high speed. "+power+"");
+        outputText("You apply the poultice, your wounds closing at high speed. Healed for "+power+"");
     }
 
     public function EnergyDrink():void {
         clearOutput();
         var power:Number = CalcAlchemyPower();
         fatigue(-power);
-        outputText("You chug off on your energy drink, feeling rejuvenated with newfound magical energy and stamina. "+power+"");
+        outputText("You chug off on your energy drink, feeling rejuvenated with newfound magical energy and stamina. Recovered "+power+" ressources.");
     }
 
     public function Cure():void {
@@ -749,7 +752,7 @@ public class Combat extends BaseContent {
 
     public function Painkiller():void {
         clearOutput();
-        var power:Number = CalcAlchemyPower()/5; //needs to be calculated in gamel
+        var power:Number = CalcAlchemyPower()/5; //needs to be calculated in game
         var duration:Number = Math.round(power/5);
         //strenght then Duration in hours
         player.createStatusEffect(StatusEffects.ArmorPotion,power,duration,0,0);
@@ -758,7 +761,7 @@ public class Combat extends BaseContent {
 
     public function Stimulant():void {
         clearOutput();
-        var power:Number = CalcAlchemyPower()/5; //needs to be calculated in gamel
+        var power:Number = CalcAlchemyPower()/5; //needs to be calculated in game
         var duration:Number = Math.round(power/5);
         //strenght then Duration in hours
         player.createStatusEffect(StatusEffects.AttackPotion,power,duration,0,0);
@@ -767,11 +770,17 @@ public class Combat extends BaseContent {
 
     public function Perfume():void {
         clearOutput();
-        var power:Number = CalcAlchemyPower()/5; //needs to be calculated in gamel
+        var power:Number = CalcAlchemyPower()/5; //needs to be calculated in game
         var duration:Number = Math.round(power/5);
         //strenght then Duration in hours
-        player.createStatusEffect(StatusEffects.ArousalPotion,power,duration,0,0);
-        outputText("You grab your bottle of Alraune perfume and spray yourself knowingly. Your opponent is going to have issues resisting your charms now. "+power+" "+duration+"");
+        if (!player.isAlraune()){
+            outputText("You grab your bottle of Alraune perfume and spray yourself knowingly. Your opponent is going to have issues resisting your charms now. "+power+" "+duration+"");
+            player.createStatusEffect(StatusEffects.ArousalPotion,power,duration,0,0);
+        }
+        else {
+            outputText("You grab your bottle of Alraune perfume and almost spray yourself before remembering that you actualy already produce your own perfume, heck you are bathing into it! You slap yourself before puting back the item in your bag... what a dummy.");
+            player.changeNumberOfPotions(PotionType.PERFUME, +1);
+        }
     }
 
     public function soul1Drill():void {
@@ -6162,6 +6171,40 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
             else monster.lust += monster.lustVuln * (2 + rand(4));
         }
+        //Perfume
+        if ((player.hasPerk(PerkLib.AlrauneNectar) || player.hasStatusEffect(StatusEffects.ArousalPotion)) && monster.lustVuln > 0) {
+            if (player.isAlraune()){
+                if (monster.lust < (monster.maxLust() * 0.5)) outputText("The perfumed scent of your nectar messes with [monster a] [monster name] but does not have any visible effects just yet.\n\n");
+                else if (monster.lust < (monster.maxLust() * 0.6)) {
+                    if (!monster.plural) outputText(monster.capitalA + monster.short + " starts to squirm a little from your nectar scent.\n\n");
+                    else outputText(monster.capitalA + monster.short + " start to squirm a little from your nectar perfumed scent.\n\n");
+                } else if (monster.lust < (monster.maxLust() * 0.75)) outputText("The perfumed scent of your nectar seems to be visibly affecting [monster a] [monster name], making [monster him] squirm uncomfortably.\n\n");
+                else if (monster.lust < (monster.maxLust() * 0.85)) {
+                    if (!monster.plural) outputText(monster.capitalA + monster.short + "'s skin colors red as [monster he] inadvertently basks in your scent.\n\n");
+                    else outputText(monster.capitalA + monster.short + "' skin colors red as [monster he] inadvertently bask in your scent.\n\n");
+                } else {
+                    if (!monster.plural) outputText("The effects of your perfumed scent are quite pronounced on [monster a] [monster name] as [monster he] begins to shake and steal glances at your body.\n\n");
+                    else outputText("The effects of your perfumed scent are quite pronounced on [monster a] [monster name] as [monster he] begin to shake and steal glances at your body.\n\n");
+                }
+            } else {
+                if (monster.lust < (monster.maxLust() * 0.5)) outputText("The perfume messes with [monster a] [monster name] but does not have any visible effects just yet.\n\n");
+                else if (monster.lust < (monster.maxLust() * 0.6)) {
+                    if (!monster.plural) outputText(monster.capitalA + monster.short + " starts to squirm a little from your nectar scent.\n\n");
+                    else outputText(monster.capitalA + monster.short + " start to squirm a little from your nectar perfumed scent.\n\n");
+                } else if (monster.lust < (monster.maxLust() * 0.75)) outputText("The perfume seems to be visibly affecting [monster a] [monster name], making [monster him] squirm uncomfortably.\n\n");
+                else if (monster.lust < (monster.maxLust() * 0.85)) {
+                    if (!monster.plural) outputText(monster.capitalA + monster.short + "'s skin colors red as [monster he] inadvertently basks in your perfume.\n\n");
+                    else outputText(monster.capitalA + monster.short + "' skin colors red as [monster he] inadvertently bask in your scent.\n\n");
+                } else {
+                    if (!monster.plural) outputText("The effects of your perfume are quite pronounced on [monster a] [monster name] as [monster he] begins to shake and steal glances at your body.\n\n");
+                    else outputText("The effects of your perfume are quite pronounced on [monster a] [monster name] as [monster he] begin to shake and steal glances at your body.\n\n");
+                }
+            }
+            var power:Number = CalcAlchemyPower()/5;
+            if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
+            else monster.lust += monster.lustVuln * (2 + rand(4));
+        }
+
         //Unicorn and Bicorn aura
         //Unicorn
         if (player.hasPerk(PerkLib.AuraOfPurity)) {
