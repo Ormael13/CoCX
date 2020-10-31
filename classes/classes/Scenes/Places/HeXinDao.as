@@ -465,6 +465,8 @@ public class HeXinDao extends BaseContent
             addButton(3, "TrapOil", buyItem,consumables.TRAPOIL,sayLine(consumables.TRAPOIL,"sand trap"),onBuyString).hint("Buy a vial of trap oil.");
             addButton(4, "Icicle", buyItem,consumables.ICICLE_,sayLine(consumables.ICICLE_,"ice shard"),onBuyString).hint("Buy an icicle.");
             addButton(5, "S.Delight", buyItem,consumables.SDELITE,sayLine(consumables.SDELITE,"Succubi's Delight"),onBuyString).hint("Buy a bottle of 'Succubi's Delight'.");
+            addButton(5, "W.Emerald", buyItem,consumables.W_EMERALD,sayLine(consumables.W_EMERALD,"Windstorm Emerald"),onBuyString).hint("Buy a 'Windstorm Emerald'.");
+
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
         }

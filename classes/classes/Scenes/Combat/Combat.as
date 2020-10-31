@@ -613,7 +613,7 @@ public class Combat extends BaseContent {
     internal function buildOtherActions(buttons:ButtonDataList):void {
         var bd:ButtonData;
         buttons.add("Surrender", combat.surrender, "Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
-        if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) ||
+        if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) ||
                 ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) || player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) || player.hasStatusEffect(StatusEffects.SoulDrill1)) {
             buttons.add("Melee Opt", CoC.instance.perkMenu.doubleAttackOptions, "You can adjust your melee attack settings.");
         }
@@ -3503,16 +3503,17 @@ public class Combat extends BaseContent {
                     outputText("You slash at your opponent with your scythes leaving deep wounds");
                     if (player.arms.type == Arms.KAMAITACHI){
                         outputText(" that bleeds profusely");
-                        if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
-                        else {
-                            monster.removeStatusEffect(StatusEffects.SharkBiteBleed);
-                            monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
-                        }
                     }
                     outputText(".");
                 }
-                ExtraNaturalWeaponAttack(DamageMultiplier);
-                ExtraNaturalWeaponAttack(DamageMultiplier);
+                if (player.arms.type == Arms.KAMAITACHI){
+                    ExtraNaturalWeaponAttack(DamageMultiplier, "KamaitachiScythe");
+                    ExtraNaturalWeaponAttack(DamageMultiplier, "KamaitachiScythe");
+                }
+                else{
+                    ExtraNaturalWeaponAttack(DamageMultiplier);
+                    ExtraNaturalWeaponAttack(DamageMultiplier);
+                }
                 outputText("\n");
                 if (player.arms.type == Arms.WOLF && player.hasPerk(PerkLib.Lycanthropy)){
                     if (flags[kFLAGS.LUNA_MOON_CYCLE] != 7){
@@ -3631,15 +3632,15 @@ public class Combat extends BaseContent {
             //Unique attack Kamaitachi Three way Cut
             if (player.hasKamaitachiThreeWayCut() || player.arms.type == Arms.KAMAITACHI){
                 outputText("You strike at blinding speed almost seeming to divide yourself into multiple copies, and slash with your scythes again. Initiating a three way cut combo\n");
-                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack(1, "KamaitachiScythe");
                 if (player.hasABiteAttack()) {
                     outputText("You head in for a bite sinking your teeth in.");
                     ExtraNaturalWeaponAttack();
                     outputText("\n");
                 }
                 outputText("You swirl for two more scythe slash.");
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack(1, "KamaitachiScythe");
+                ExtraNaturalWeaponAttack(1, "KamaitachiScythe");
                 outputText("\n");
                 if (player.hasABiteAttack()) {
                     outputText("You lunge for a final bite drawing blood out.");
@@ -4436,7 +4437,7 @@ public class Combat extends BaseContent {
     }
 
 
-    public function ExtraNaturalWeaponAttack(FeraldamageMultiplier:Number = 1):void {
+    public function ExtraNaturalWeaponAttack(FeraldamageMultiplier:Number = 1, SpecialEffect:String = ""):void {
         var accMelee:Number = 0;
         accMelee += (meleeAccuracy() / 2);
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) accMelee -= flags[kFLAGS.ATTACKS_ACCURACY];
@@ -4487,6 +4488,10 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
             //One final round
             damage = Math.round(damage);
+            if (SpecialEffect == "KamaitachiScythe"){
+                if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,0,0,0,0);
+                else monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, player.spe*2);
+            }
             // Have to put it before doDamage, because doDamage applies the change, as well as status effects and shit.
             if (monster is Doppleganger) {
                 if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -6982,6 +6987,14 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownTailCleave);
             } else {
                 player.addStatusValue(StatusEffects.CooldownTailCleave, 1, -1);
+            }
+        }
+        //Wind Scythe
+        if (player.hasStatusEffect(StatusEffects.CooldownWindScythe)) {
+            if (player.statusEffectv1(StatusEffects.CooldownWindScythe) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownWindScythe);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownWindScythe, 1, -1);
             }
         }
         //Wing Buffet
@@ -10338,7 +10351,15 @@ public class Combat extends BaseContent {
 
     public function takeFlight():void {
         clearOutput();
-        outputText("You open you wing taking flight.\n\n");
+        if (player.wings.type == Wings.WINDY_AURA && player.arms.type == Arms.KAMAITACHI){
+            outputText("You create a small cyclone to ride upon and lift yourself up in the air.\n\n");
+        }
+        else if (player.wings.type == Wings.THUNDEROUS_AURA){
+            outputText("You take flight letting the storm carry you up.\n\n");
+        }
+        else{
+            outputText("You open you wing taking flight.\n\n");
+        }
         player.createStatusEffect(StatusEffects.Flying, 7, 0, 0, 0);
         if (player.findPerk(PerkLib.HeartOfTheStormFinalForm)) player.addStatusValue(StatusEffects.Flying, 1, 999);
         if (player.findPerk(PerkLib.Resolute) < 0) {

@@ -6295,7 +6295,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.EasterBunnyBalls) && balls >= 2)
 				bunnyCounter = 0;
 			if (ears.type != Ears.BUNNY)
-				bunnyCounter++;
+				bunnyCounter = 0;
 			if (isGargoyle()) bunnyCounter = 0;
 			bunnyCounter = finalRacialScore(bunnyCounter, Race.BUNNY);
 			End("Player","racialScore");
@@ -6852,7 +6852,7 @@ use namespace CoC;
 				raijuCounter++;
 			if (eyes.type == Eyes.RAIJU)
 				raijuCounter++;
-			if (faceType == Face.RAIJU_FANGS)
+			if (faceType == Face.WEASEL)
 				raijuCounter++;
 			if (arms.type == Arms.RAIJU || arms.type == Arms.RAIJU_2)
 				raijuCounter++;
@@ -6904,7 +6904,7 @@ use namespace CoC;
 				thunderbirdCounter++;
 			if (eyes.type == Eyes.RAIJU)
 				thunderbirdCounter++;
-			if (faceType == Face.HUMAN || faceType == Face.RAIJU_FANGS)
+			if (faceType == Face.HUMAN || faceType == Face.WEASEL)
 				thunderbirdCounter++;
 			if (arms.type == Arms.HARPY)
 				thunderbirdCounter++;
@@ -6956,7 +6956,7 @@ use namespace CoC;
 				KamaitachiCounter++;
 			if (eyes.colour == "golden")
 				KamaitachiCounter++;
-			if (faceType == Face.RAIJU_FANGS)
+			if (faceType == Face.WEASEL)
 				KamaitachiCounter++;
 			if (arms.type == Arms.KAMAITACHI)
 				KamaitachiCounter++;
@@ -6970,9 +6970,9 @@ use namespace CoC;
 				KamaitachiCounter++;
 			if (hairType == Hair.WINDSWEPT)
 				KamaitachiCounter++;
-			if (hairColor == "blonde" || hairColor == "yellow" || hairColor == "caramel" || hairColor == "brown")
+			if (hairColor == "blonde" || hairColor == "yellow" || hairColor == "caramel" || hairColor == "brown" || hairColor == "emerald")
 				KamaitachiCounter++;
-			if (coatColor == "blonde" || hairColor == "yellow" || hairColor == "caramel" || hairColor == "brown")
+			if (coatColor == "blonde" || coatColor == "yellow" || coatColor == "caramel" || coatColor == "brown" || coatColor == "emerald")
 				KamaitachiCounter++;
 			if (findPerk(PerkLib.HeartOfTheStorm) >= 0)
 				KamaitachiCounter++;
@@ -8914,7 +8914,7 @@ use namespace CoC;
 		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 12); }
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }
 		public function isNightCreature():Boolean { return (vampireScore() >= 10 || batScore() >= 6 || jiangshiScore() >= 20);}
-		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || faceType == Face.VAMPIRE || faceType == Face.SHARK_TEETH || faceType == Face.WOLF_FANGS || faceType == Face.PANDA || faceType == Face.YETI_FANGS || faceType == Face.WOLF || faceType == Face.SPIDER_FANGS || faceType == Face.ANIMAL_TOOTHS || faceType == Face.CAT_CANINES || faceType == Face.CAT || faceType == Face.MANTICORE || faceType == Face.SALAMANDER_FANGS || faceType == Face.RAIJU_FANGS || faceType == Face.SNAKE_FANGS || faceType == Face.FOX || faceType == Face.BEAR || faceType == Face.DRAGON_FANGS || faceType == Face.DRAGON || faceType == Face.DOG || faceType == Face.FERRET || faceType == Face.ORCA || faceType == Face.LIZARD || faceType == Face.DEVIL_FANGS);}
+		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || faceType == Face.VAMPIRE || faceType == Face.SHARK_TEETH || faceType == Face.WOLF_FANGS || faceType == Face.PANDA || faceType == Face.YETI_FANGS || faceType == Face.WOLF || faceType == Face.SPIDER_FANGS || faceType == Face.ANIMAL_TOOTHS || faceType == Face.CAT_CANINES || faceType == Face.CAT || faceType == Face.MANTICORE || faceType == Face.SALAMANDER_FANGS || faceType == Face.WEASEL || faceType == Face.SNAKE_FANGS || faceType == Face.FOX || faceType == Face.BEAR || faceType == Face.DRAGON_FANGS || faceType == Face.DRAGON || faceType == Face.DOG || faceType == Face.FERRET || faceType == Face.ORCA || faceType == Face.LIZARD || faceType == Face.DEVIL_FANGS);}
 		public function hasAClawAttack():Boolean { return (arms.type == Arms.GARGOYLE || arms.type == Arms.WOLF || arms.type == Arms.CAT || arms.type == Arms.FROSTWYRM || arms.type == Arms.LIZARD || arms.type == Arms.DRAGON || arms.type == Arms.KITSUNE || arms.type == Arms.FOX || arms.type == Arms.DEVIL || arms.type == Arms.DISPLACER || arms.type == Arms.BEAR || arms.type == Arms.JIANGSHI || arms.type == Arms.LION || arms.type == Arms.MANTIS || arms.type == Arms.KAMAITACHI);}
 		public function hasAWingAttack():Boolean { return (wings.type == Wings.DRACONIC_HUGE || wings.type == Wings.NIGHTMARE || wings.type == Wings.MANTICORE_LIKE_LARGE || wings.type == Wings.GARGOYLE_LIKE_LARGE);}
 		public function hasAGoreAttack():Boolean { return (horns.type == Horns.UNICORN || horns.type == Horns.BICORN || horns.type == Horns.COW_MINOTAUR || horns.type == Horns.FROSTWYRM);}
@@ -10538,6 +10538,29 @@ use namespace CoC;
 					maxLibCap2 += 30;
 				}
 			}//+10/10-20
+			if (kamaitachiScore() >= 7) {
+				if (raijuScore() >= 18) {
+					maxStrCap2 -= 35;
+					maxSpeCap2 += 200;
+					maxIntCap2 += 55;
+					maxWisCap2 += 100;
+					minSen += 50;
+				}
+				else if (raijuScore() >= 15) {
+					maxStrCap2 -= 20;
+					maxSpeCap2 += 155;
+					maxIntCap2 += 45;
+					maxWisCap2 += 70;
+					minSen += 25;
+				}
+				else {
+					maxStrCap2 -= 10;
+					maxSpeCap2 += 70;
+					maxIntCap2 += 20;
+					maxWisCap2 += 40;
+					minSen += 10;
+				}
+			}
 			if (sirenScore() >= 10) {
 				maxStrCap2 += 40;
 				maxSpeCap2 += 70;

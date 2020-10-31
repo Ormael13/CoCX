@@ -712,8 +712,8 @@
         <cell rect="391,223,59,32" name="ears/naga" dx="75" dy="37"/>
         <cell rect="451,190,59,65" name="ears_bg/bunny" dx="75" dy="4"/>
         <cell rect="451,256,59,65" name="ears/bunny" dx="75" dy="4"/>
-        <cell rect="511,190,89,65" name="ears_bg/weasel" dx="60" dy="4"/>
-        <cell rect="511,256,89,65" name="ears/weasel" dx="60" dy="4"/>
+        <cell rect="511,190,89,65" name="ears_bg/raiju" dx="60" dy="4"/>
+        <cell rect="511,256,89,65" name="ears/raiju" dx="60" dy="4"/>
         <cell rect="601,190,29,65" name="ears_bg/bear" dx="90" dy="4"/>
         <cell rect="601,256,29,65" name="ears/bear" dx="90" dy="4"/>
         <cell rect="631,190,29,65" name="ears_bg/panda" dx="90" dy="8"/>
@@ -1372,15 +1372,15 @@
                 <show part="ears/goat"/>
                 <show part="ears_bg/goat"/>
             </case>
-            <case values="Ears.WEASEL, Ears.GREMLIN">
-                <show part="ears/weasel"/>
-                <show part="ears_bg/weasel"/>
+            <case values="Ears.RAIJU, Ears.GREMLIN">
+                <show part="ears/raiju"/>
+                <show part="ears_bg/raiju"/>
             </case>
 			<case values="Ears.PANDA">
                 <show part="ears/panda"/>
                 <show part="ears_bg/panda"/>
             </case>
-			<case values="Ears.BEAR">
+			<case values="Ears.BEAR,Ears.WEASEL">
                 <show part="ears/bear"/>
                 <show part="ears_bg/bear"/>
             </case>
@@ -1415,7 +1415,7 @@
             <case values="Eyes.BLACK_EYES_SAND_TRAP">
                 <show part="eyes/sandtrap"/>
             </case>
-            <case values="Eyes.FOX,Eyes,Eyes.CAT_SLITS,Eyes.REPTILIAN,Eyes.SNAKE,Eyes.GORGON,Eyes.DRAGON,Eyes.ONI,Eyes.ELF,Eyes.VAMPIRE">
+            <case values="Eyes.FOX,Eyes,Eyes.CAT_SLITS,Eyes.REPTILIAN,Eyes.SNAKE,Eyes.GORGON,Eyes.DRAGON,Eyes.ONI,Eyes.ELF,Eyes.VAMPIRE,Eyes.WEASEL">
                 <show part="eyes/cat"/>
             </case>
             <case values="Eyes.DEVIL,Eyes.FROSTWYRM">
@@ -1812,7 +1812,7 @@
 			<case values="Face.RACCOON,Face.FERRET">
                 <show part="face/racoon"/>
             </case>
-            <case values="Face.SALAMANDER_FANGS,Face.SHARPTEETH,Face.VAMPIRE,Face.YETI_FANGS,Face.ONI_TEETH,Face.DRAGON_FANGS,Face.RAIJU_FANGS,Face.DEVIL_FANGS,Face.ANIMAL_TOOTHS,Face.WOLF_FANGS,Face.SNAKE_FANGS,Face.CAT_CANINES,Face.MANTICORE">
+            <case values="Face.SALAMANDER_FANGS,Face.SHARPTEETH,Face.VAMPIRE,Face.YETI_FANGS,Face.ONI_TEETH,Face.DRAGON_FANGS,Face.WEASEL,Face.DEVIL_FANGS,Face.ANIMAL_TOOTHS,Face.WOLF_FANGS,Face.SNAKE_FANGS,Face.CAT_CANINES,Face.MANTICORE">
                 <show part="face/human_fang"/>
                 <if test="eyes.type= Eyes.CENTIPEDE">
                     <hide part="face/human_fang"/>
@@ -1981,9 +1981,9 @@
 				<show part="hands_bg/blade-kamaitachiMantis"/>
             </case>
 			<case values="Arms.KAMAITACHI">
-                <show part="hands/fur"/>
+                <show part="hands/furracoon"/>
 				<show part="hands/blade-kamaitachiMantis"/>
-                <show part="hands_bg/fur"/>
+                <show part="hands_bg/furracoon"/>
 				<show part="hands_bg/blade-kamaitachiMantis"/>
             </case>
             <case values="Arms.BEE">
@@ -2218,7 +2218,7 @@
 					</else>
 				</if>
             </case>
-			<case values="Arms.RACCOON,Arms.FOX,Arms.SPHINX">
+			<case values="Arms.RACCOON,Arms.FOX,Arms.SPHINX,Arms.WEASEL">
                 <show part="hands/furracoon"/>
                 <show part="hands_bg/furracoon"/>
             </case>
@@ -2307,7 +2307,7 @@
                     </default>
                 </switch>
             </case>
-            <case values="LowerBody.BUNNY,LowerBody.KANGAROO,LowerBody.CAT,LowerBody.DOG,LowerBody.FOX,LowerBody.RAIJU,LowerBody.CANINE,LowerBody.RACCOON,LowerBody.FERRET,LowerBody.MOUSE,LowerBody.HINEZUMI,LowerBody.BEAR">
+            <case values="LowerBody.BUNNY,LowerBody.KANGAROO,LowerBody.CAT,LowerBody.DOG,LowerBody.FOX,LowerBody.RAIJU,LowerBody.CANINE,LowerBody.WEASEL,LowerBody.RACCOON,LowerBody.FERRET,LowerBody.MOUSE,LowerBody.HINEZUMI,LowerBody.BEAR">
                 <switch>
                     <case test="legCount==4">
                         <hide part="legs/*"/>
@@ -2328,13 +2328,13 @@
 					<case test="lowerBody==LowerBody.FOX">
 						<show part="feet/furracoon"/>
 					</case>
-					<case test="lowerBody==LowerBody.BUNNY">
-						<show part="feet/bunny"/>
-					</case>
 					<case test="lowerBody==LowerBody.RACCOON">
 						<show part="feet/furracoon"/>
 					</case>
 					<case test="lowerBody==LowerBody.FERRET">
+						<show part="feet/furracoon"/>
+					</case>
+					<case test="lowerBody==LowerBody.WEASEL">
 						<show part="feet/furracoon"/>
 					</case>
 					<case test="lowerBody==LowerBody.BEAR">
@@ -2821,6 +2821,9 @@
 			<case values="Wings.THUNDEROUS_AURA">
                 <show part="aura/thunderaura"/>
             </case>
+			<case values="Wings.WINDY_AURA">
+                <show part="aura/windyaura"/>
+            </case>
 			<case values="Wings.VAMPIRE">
                 <show part="overclothe/vampire"/>
 				<show part="wings_bg/vampire_bg"/>
@@ -2976,6 +2979,14 @@
 					<show part="tail/cow_taur"/>
 					<else>
 						<show part="tail/cow"/>
+					</else>
+				</if>
+            </case>
+			<case values="Tail.WEASEL">
+				<if test="isTaur()">
+					<show part="tail/kamaitachi_taur"/>
+					<else>
+						<show part="tail/kamaitachi"/>
 					</else>
 				</if>
             </case>

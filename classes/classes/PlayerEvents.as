@@ -904,17 +904,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						player.buff("EasterBunnyBalls").setStat("lib.mult",changeLib).withText("Easter Bunny Balls");
 					}
 					if (player.ballSize > 3 && player.ballSize < 4) {
-						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head. Your balls have increased enought that you are ready to lay your eggs.");
+						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head. Your balls have increased enought that you are ready to lay your eggs.\n");
 					}
 					if (player.ballSize > 4) {
-						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head, as the size of your increasingly growing balls remind you that you need to expel those eggs one way or another before they become too big.");
+						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head, as the size of your increasingly growing balls remind you that you need to expel those eggs one way or another before they become too big.\n");
 					}
 				}
 
 				//Armor daily event
 				//Scandalous succubus armor corruption updates
 				if (player.armor == armors.SCANSC && player.cor < 100) {
-					outputText("Corruption seethes from the succubus clothes into you.");
+					outputText("\nCorruption seethes from the succubus clothes into you.\n");
 					player.cor += 5;
 				}
 			}
@@ -1406,15 +1406,46 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.IcyFlesh);
 				needNext = true;
 			}
-			//Fire Affinity
-			if ((player.salamanderScore() >= 4 || player.phoenixScore() >= 10 || player.hellcatScore() >= 10 || player.firesnailScore() >= 15 || (player.mouseScore() >= 12 && player.lowerBody == LowerBody.HINEZUMI && player.arms.type == Arms.HINEZUMI && player.tailType == Tail.HINEZUMI)) && player.findPerk(PerkLib.FireAffinity) < 0) {
-				outputText("\nYou suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until your finaly at ease with your bodily heat. You doubt any more heat is gunna make you more incomfortable then this as you quietly soak in the soothing warmth your body naturaly produce. Its like your body is made out of living fire.\n\n(<b>Gained Perk: Fire Affinity</b>)\n");
-				player.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
+			//Alraune perks
+			if (player.isAlraune() && !player.hasPerk(PerkLib.AlrauneNectar)){
+				outputText("\nYour nectar now produce a delicious scent that is sure to draw in partners. <b>Gained Perk: Alraune Nectar</b>\n");
+				player.createPerk(PerkLib.AlrauneNectar, 0,0,0,0);
 				needNext = true;
 			}
-			else if ((player.salamanderScore() < 4 && player.phoenixScore() < 10 && player.hellcatScore() < 10 && player.firesnailScore() < 15 && player.mouseScore() < 12 && player.lowerBody != LowerBody.HINEZUMI && player.arms.type != Arms.HINEZUMI && player.tailType != Tail.HINEZUMI) && player.findPerk(PerkLib.FireAffinity) >= 0) {
-				outputText("\nYou suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.\n\n<b>(Lost Perk: Fire Affinity)</b>\n");
-				player.removePerk(PerkLib.FireAffinity);
+			if (player.isAlraune() && !player.hasPerk(PerkLib.PlantKnowledge)){
+				outputText("\nIt would seem you aquired additionnal skills in herbalism thanks to behing a plant yourself. <b>Gained Perk: Plant Knowledge</b>\n");
+				player.createPerk(PerkLib.AlrauneNectar, 0,0,0,0);
+				needNext = true;
+			}
+			if (!player.isAlraune() && player.hasPerk(PerkLib.AlrauneNectar)){
+				outputText("\nAs you no longuer have a pitcher to produce nectar your scent has became more like that of an ordinary human. <b>Lost Perk: Alraune Nectar</b>\n");
+				player.removePerk(PerkLib.AlrauneNectar);
+				needNext = true;
+			}
+			if (!player.isAlraune() && player.hasPerk(PerkLib.PlantKnowledge)){
+				outputText("\nNo longuer a plant you lost some of your innate floral knowledge. <b>Lost Perk: Plant Knowledge</b>\n");
+				player.removePerk(PerkLib.PlantKnowledge);
+				needNext = true;
+			}
+			//Kamaitachi perks
+			if (player.arms.type == Arms.KAMAITACHI && !player.hasPerk(PerkLib.CursedWound)){
+				outputText("\nYour kamaitachi blades shines with a sharp, deadly glow. Those will clearly leaves deadly wounds. <b>Gained Perk: Cursed Wound</b>\n");
+				player.createPerk(PerkLib.CursedWound, 0,0,0,0);
+				needNext = true;
+			}
+			if (player.arms.type != Arms.KAMAITACHI && player.hasPerk(PerkLib.CursedWound)){
+				outputText("\nLacking a pair of kamaitachi scythe you can no longer inflict your trademark cursed kamaitachi wounds. <b>Lost Perk: Cursed Wound</b>\n");
+				player.removePerk(PerkLib.CursedWound);
+				needNext = true;
+			}
+			if (player.kamaitachiScore() >=10 && !player.hasPerk(PerkLib.NaturalHerbalism)){
+				outputText("\nGreat knowledges flows throught you mind as you become more Kamaitachi like. It dawns on you that you have aquired a natural affinity for medicine and herbalism, something your species is famous for, heck you can identify every single plant near your camp by name and species now. How usefull!\n");
+				player.createPerk(PerkLib.NaturalHerbalism, 0,0,0,0);
+				needNext = true;
+			}
+			if (player.kamaitachiScore() <10 && player.hasPerk(PerkLib.NaturalHerbalism)){
+				outputText("\nNo longuer a Kamaitachi, you seem to have lost your knack for herbs and medicines. <b>Lost Perks: Natural Herbalism</b>)\n");
+				player.removePerk(PerkLib.NaturalHerbalism);
 				needNext = true;
 			}
 			//Aquatic Affinity
@@ -1430,6 +1461,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.rearBody.type == RearBody.ORCA_BLOWHOLE) outputText("\nYou take a deep breath in then out. It seems you can no longer hold your breath like the whales do. It will take some using to.</b>\n");
 				outputText("\n<b>(Lost Perk: Aquatic Affinity)</b>\n");
 				player.removePerk(PerkLib.AquaticAffinity);
+				needNext = true;
+			}
+			//Fire Affinity
+			if ((player.salamanderScore() >= 4 || player.phoenixScore() >= 10 || player.hellcatScore() >= 10 || player.firesnailScore() >= 15 || (player.mouseScore() >= 12 && player.lowerBody == LowerBody.HINEZUMI && player.arms.type == Arms.HINEZUMI && player.tailType == Tail.HINEZUMI)) && player.findPerk(PerkLib.FireAffinity) < 0) {
+				outputText("\nYou suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until your finaly at ease with your bodily heat. You doubt any more heat is gunna make you more incomfortable then this as you quietly soak in the soothing warmth your body naturaly produce. Its like your body is made out of living fire.\n\n(<b>Gained Perk: Fire Affinity</b>)\n");
+				player.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
+				needNext = true;
+			}
+			else if ((player.salamanderScore() < 4 && player.phoenixScore() < 10 && player.hellcatScore() < 10 && player.firesnailScore() < 15 && player.mouseScore() < 12 && player.lowerBody != LowerBody.HINEZUMI && player.arms.type != Arms.HINEZUMI && player.tailType != Tail.HINEZUMI) && player.findPerk(PerkLib.FireAffinity) >= 0) {
+				outputText("\nYou suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.\n\n<b>(Lost Perk: Fire Affinity)</b>\n");
+				player.removePerk(PerkLib.FireAffinity);
 				needNext = true;
 			}
 			//Lightning Affinity

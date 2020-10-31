@@ -7168,7 +7168,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Feathery Hair
-        if (player.hairType != 1 && changes < changeLimit && player.faceType == Face.HUMAN && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0) {
+        if (player.hairType != Hair.FEATHER && changes < changeLimit && player.faceType == Face.HUMAN && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0) {
             outputText("\n\nA tingling starts in your scalp, getting worse and worse until you're itching like mad, the feathery strands of your hair tickling your fingertips while you scratch like a dog itching a flea. When you pull back your hand, you're treated to the sight of downy fluff trailing from your fingernails. A realization dawns on you - you have feathers for hair, just like a harpy!");
             setHairType(Hair.FEATHER);
             changes++;
@@ -9570,22 +9570,22 @@ public final class Mutations extends MutationsHelper {
             removeWings();
             changes++;
         }
-        if (player.rearBody.type == RearBody.RAIJU_MANE && player.faceType != Face.RAIJU_FANGS && changes < changeLimit && rand(3) == 0) {
+        if (player.rearBody.type == RearBody.RAIJU_MANE && player.faceType != Face.WEASEL && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nY");
             if (player.faceType != Face.HUMAN) outputText("our face suddenly mold back into it’s former human shape. However y");
             outputText("ou feel your two canines grow bigger and slightly sharper, not unlike those of a weasel or in your case a raiju. <b>You now have raiju canines.</b>");
-            setFaceType(Face.RAIJU_FANGS);
+            setFaceType(Face.WEASEL);
             changes++;
         }
-        if (player.faceType == Face.RAIJU_FANGS && player.ears.type != Ears.WEASEL && changes < changeLimit && rand(3) == 0) {
+        if (player.faceType == Face.WEASEL && player.ears.type != Ears.RAIJU && changes < changeLimit && rand(3) == 0) {
             if (player.ears.type == Ears.HUMAN) {
                 outputText("\n\nYour ears twitch as jolts of lightning flows through them, replacing all sound with crackling pops. You moan as the lightning arcs up to the top of your head before fanning out to the side. Hearing suddenly returns as you run your hands across your <b>new raiju ears!</b>");
-                setEarType(Ears.WEASEL);
+                setEarType(Ears.RAIJU);
             } else humanizeEars();
             changes++;
         }
         var raiju_eyes_color:Array = ["blue", "green", "turquoise"];
-        if (player.ears.type == Ears.WEASEL && player.eyes.type != Eyes.RAIJU && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type == Ears.RAIJU && player.eyes.type != Eyes.RAIJU && changes < changeLimit && rand(3) == 0) {
             if (player.eyes.type == Eyes.HUMAN) {
                 player.eyes.colour = randomChoice(raiju_eyes_color);
                 outputText("\n\nBright lights flash into your vision as your eyes glow with electric light. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>glowing [eyecolor] bestial slitted eyes staring back at you.</b>");
@@ -9740,7 +9740,7 @@ public final class Mutations extends MutationsHelper {
             setRearBody(RearBody.RAIJU_MANE);
             changes++;
         }
-        if (player.rearBody.type == RearBody.RAIJU_MANE && player.faceType != Face.HUMAN && player.faceType != Face.RAIJU_FANGS && changes < changeLimit && rand(3) == 0) {
+        if (player.rearBody.type == RearBody.RAIJU_MANE && player.faceType != Face.HUMAN && player.faceType != Face.WEASEL && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nYour visage twists painfully, returning to a more normal human shape, albeit with flawless skin.  <b>Your face is human again!</b>");
             setFaceType(Face.HUMAN);
             changes++;
@@ -9792,6 +9792,7 @@ public final class Mutations extends MutationsHelper {
         var changes:Number = 0;
         var changeLimit:Number = 1;
         var temp2:Number = 0;
+        var kamaitachi_hair:Array = ["blonde","yellow","caramel","brown","emerald"];
         if (itemused) {
             if (rand(2) == 0) changeLimit++;
             if (rand(3) == 0) changeLimit++;
@@ -9831,104 +9832,133 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //Physical
-        var raiju_hair:Array = ["purple", "light blue", "yellow", "white", "lilac", "green"];
-        if (!InCollection(player.hairColor, raiju_hair) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-            player.hairColor = randomChoice(raiju_hair);
-            outputText("\n\nYour hair stands up on end as bolts of lightning run through each strand, changing them to a <b>[haircolor] color!</b>");
+        if (!InCollection(player.hairColor, kamaitachi_hair) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+            player.hairColor = randomChoice(kamaitachi_hair);
+            outputText("\n\nYour hair tingles as the strands turns <b>[haircolor]!</b>");
         }
-        if (player.lowerBody != LowerBody.RAIJU && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+
+        if (!player.hasFur() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+            var color1:String = randomChoice(kamaitachi_hair);
+            if (player.hasScales()) {
+                //set new skinTone
+                outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] scales.  Panicked, you look down and realize that your scales are falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + color1 + " fur grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the scales is easy to remove.  <b>Your body is now partially covered with small patches of fur!</b>");
+            }
+            if (player.hasChitin()) {
+                //set new skinTone
+                outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] chitin.  Panicked, you look down and realize that your chitin is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + color1 + " fur grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the chitin is easy to remove.  <b>Your body is now partially covered with small patches of fur!</b>");
+            }
+            //(no scales and chitin)
+            else {
+                outputText("\n\nYou feel your skin shift as fur grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  <b>Your body is now partially covered with small patches of " + color1 + " fur.</b>");
+            }
+            player.skin.growCoat(Skin.FUR, {color: color1}, Skin.COVERAGE_LOW);
+        }
+
+        //get partial fur from full if pc face is human
+        if (player.hasFur() && rand(3) == 0 && changes < changeLimit && (player.skin.coverage == Skin.COVERAGE_COMPLETE || player.skin.coverage == Skin.COVERAGE_HIGH)) {
+            var color1:String = randomChoice(kamaitachi_hair);
+            outputText("\n\nWhat used to be a dense coat of fur begins to fall in patches on the ground leaving you with just enough fur to cover some area of your body.  <b>Some area of your body are now partially covered with fur!</b>");
+            player.skin.coverage = Skin.COVERAGE_LOW;
+            player.coatColor = color1;
+            changes++;
+        }
+
+        if (player.lowerBody != LowerBody.WEASEL && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
-                outputText("\n\nYou have trouble standing as multiple flashes of sensation run across your legs. Sitting down before you accidentally hurt yourself, you watch with apprehension as your legs begin to shift, fluffy patches of fur traveling up your legs until they reach your knees. You yelp as the bones in your feet split and rearrange themselves into paws. Eventually, the sensation ebbs and you slowly get used to your <b>Raiju paws!</b>");
-                setLowerBody(LowerBody.RAIJU);
+                outputText("\n\nYou have trouble standing as multiple flashes of sensation run across your legs. Sitting down before you accidentally hurt yourself," +
+                        " you watch with apprehension as your legs begin to shift, fluffy patches of fur traveling up your legs until they reach your knees. " +
+                        "You yelp as the bones in your feet split and rearrange themselves into paws. " +
+                        "Eventually, the sensation ebbs and you slowly get used to your new <b>weasel paws!</b>");
+                setLowerBody(LowerBody.WEASEL);
             } else humanizeLowerBody();
             changes++;
         }
-        if (player.lowerBody == LowerBody.RAIJU && player.arms.type != Arms.RAIJU && changes < changeLimit && rand(3) == 0) {
+        if (player.lowerBody == LowerBody.WEASEL && player.arms.type != Arms.WEASEL && player.arms.type != Arms.KAMAITACHI && changes < changeLimit && rand(3) == 0) {
             if (player.arms.type == Arms.HUMAN) {
-                outputText("\n\nYour nails tingle as they elongate into white claws! They look quite dangerous, but you feel the strange need to use them to stimulate your ");
-                if (player.gender == 1 || player.gender == 3) outputText("[cock]");
-                if (player.gender == 3) outputText(" and ");
-                if (player.gender > 1) outputText("[clit]");
-                outputText(". ");
-                if (player.cor >= 50) outputText("You give a lusty smile, thinking that it wouldn't be so bad...");
-                else outputText("You scowl, shaking away the impure thoughts.");
-                setArmType(Arms.RAIJU);
+                outputText("\n\nYour arms begins cover with fur and you watch spellbound as your nails elongate into small sharp animal claws. " +
+                        "They aren't exactly strong enough to deal damage but they'll be fine if you ever want to scratch yourself. " +
+                        "<b>You now have furry animal arms with paw-like hands not unlike those of a weasel.</b>");
+                setArmType(Arms.WEASEL);
+                if (player.coatColor == "") player.coatColor = player.hairColor;
             } else humanizeArms();
             changes++;
         }
-        if (player.arms.type == Arms.RAIJU && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou shiver in delight as fur begins to form on your forearms, high voltage running along from your shoulders to your fingertips. Before you know it your hands turned to paws and your sharp nails to vicious looking claws coated with electricity. You can't wait to wrap those around a juicy cock or dip them into a waiting snatch.");
+        if (player.arms.type == Arms.WEASEL && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\nSomething in your arm bones begins to shift as they suddenly curve and grow awkwardly through the skin, " +
+                    "piercing through your fur like a spike. Now juting outside of your wrists like a pair of natural tonfas, " +
+                    "the bones begin to reshape, polish and alter itself, fully taking on the consistency of steel! " +
+                    "You admire your two Kamaitachi scythes with stupor, they are sharp and hard enough to leave clean deep cuts even in the hardest " +
+                    "material and light enough that you can swing them around as if they weren't even there to begin with, lighter than air indeed. " +
+                    "Enemies better fear you now that you got those <b>Kamaitachi arm-scythes.</b>");
             if (player.coatColor == "") player.coatColor = player.hairColor;
-            setArmType(Arms.RAIJU_2);
+            setArmType(Arms.KAMAITACHI);
             changes++;
         }
-        if (player.arms.type == Arms.RAIJU_2 && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nFur falls of your arms as your pawed hands revert back to human ones. Almost human ones actually as you nail retained their claw like sharpness.");
-            setArmType(Arms.RAIJU);
+        if (player.arms.type == Arms.KAMAITACHI && player.tailType != Tail.WEASEL && changes < changeLimit && rand(3) == 0) {
+            if (player.tailType == Tail.NONE) outputText("\n\nA pressure builds in your backside. " +
+                    "You feel under your waist and discover an odd bump that seems to be growing larger by the moment. " +
+                    "In seconds it passes between your fingers and bursts out the back of your ass into a tail which gets covered with a " +
+                    "thick coat of fur entirely from the base to the tip. <b>You now have a weasel tail.</b>");
+            else outputText("\n\nSomething weird happens with your tail as it begins to change into something else. " +
+                    "Within seconds the shape and coverage becomes closer to what you would expect of a weasel tail. <b>You now have a silky weasel tail!</b>");
+            setTailType(Tail.WEASEL);
             changes++;
         }
-        if (player.arms.type == Arms.RAIJU && player.tailType != Tail.RAIJU && changes < changeLimit && rand(3) == 0) {
-            if (player.tailType == Tail.NONE) outputText("\n\nYou yelp as a huge lightning bolt bursts out of the area just above your ass. You watch in amazement as it twists and curls, slowly becoming thicker and thicker before it fizzles out, <b>leaving you with a silky Raiju tail!</b>");
-            else outputText("\n\nYou nearly jump out of your skin as your tail bursts into a huge lightning bolt. You watch as it curls and twists around before it fizzles out.  <b>You now have a silky Raiju tail!</b>");
-            setTailType(Tail.RAIJU);
+        if (player.arms.type == Arms.KAMAITACHI && player.wings.type == Wings.NONE && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\nWinds begin to amass around you as if the prelude to a gathering storm. " +
+                    "At first you think you are about to be attacked before you realise it’s all your doing. " +
+                    "Merely by thinking about it the wind suddenly blows into a raging tornado carrying you up before you seize control and give it just enough " +
+                    "strength to uplift you into its currents. It would seem you have gained the infamous wind control power of the kamaitachi achieving mastery " +
+                    "over it. Well this is going to be fun to play with. <b>You now have the ability to control winds as the Kamaitachi do using your windy aura!</b>");
+            setWingType(Wings.WINDY_AURA, "windy aura");
             changes++;
         }
-        if (player.tailType == Tail.RAIJU && player.rearBody.type != RearBody.RAIJU_MANE && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nThe base of your neck tingles with delight as little sparks travel across your skin. Strands of hair quickly grow in, giving you a [haircolor] collar of fur around your neck. Several strands of your new fur collar are quite dark, arcing around it like lightning.");
-            setRearBody(RearBody.RAIJU_MANE);
-            changes++;
-        }
-        if (player.rearBody.type == RearBody.RAIJU_MANE && player.wings.type == Wings.NONE && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou've become so charged in electricity that your movements are sometimes accompanied by the sound of static. <b>It's going to be difficult to hide your presence with that thunderous aura of yours.</b>");
-            setWingType(Wings.THUNDEROUS_AURA, "thunderous aura");
-            changes++;
-        }
-        if (player.wings.type != Wings.THUNDEROUS_AURA && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.wings.type != Wings.WINDY_AURA && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             removeWings();
             changes++;
         }
-        if (player.rearBody.type == RearBody.RAIJU_MANE && player.faceType != Face.RAIJU_FANGS && changes < changeLimit && rand(3) == 0) {
+        if (player.faceType != Face.WEASEL && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nY");
             if (player.faceType != Face.HUMAN) outputText("our face suddenly mold back into it’s former human shape. However y");
-            outputText("ou feel your two canines grow bigger and slightly sharper, not unlike those of a weasel or in your case a raiju. <b>You now have raiju canines.</b>");
-            setFaceType(Face.RAIJU_FANGS);
+            outputText("ou feel your two canines grow bigger and slightly sharper, not unlike those of a weasel or in your case a kamaitachi. <b>You now have weasel canines.</b>");
+            setFaceType(Face.WEASEL);
             changes++;
         }
-        if (player.faceType == Face.RAIJU_FANGS && player.ears.type != Ears.WEASEL && changes < changeLimit && rand(3) == 0) {
+        if (player.faceType == Face.WEASEL && player.ears.type != Ears.WEASEL && changes < changeLimit && rand(3) == 0) {
             if (player.ears.type == Ears.HUMAN) {
-                outputText("\n\nYour ears twitch as jolts of lightning flows through them, replacing all sound with crackling pops. You moan as the lightning arcs up to the top of your head before fanning out to the side. Hearing suddenly returns as you run your hands across your <b>new raiju ears!</b>");
+                outputText("\n\nYour ears suddenly stretch painfully, making you scream in pain as they move toward the top of your head, growing rounder and bigger. " +
+                        "Putting your hands to your ears you discover they are now covered with a fair amount of dark fur. <b>You now have weasel ears.</b>");
                 setEarType(Ears.WEASEL);
             } else humanizeEars();
             changes++;
         }
-        var raiju_eyes_color:Array = ["blue", "green", "turquoise"];
-        if (player.ears.type == Ears.WEASEL && player.eyes.type != Eyes.RAIJU && changes < changeLimit && rand(3) == 0) {
+        var raiju_eyes_color:Array = ["golden"];
+        if (player.ears.type == Ears.WEASEL && player.eyes.type != Eyes.WEASEL && changes < changeLimit && rand(3) == 0) {
             if (player.eyes.type == Eyes.HUMAN) {
                 player.eyes.colour = randomChoice(raiju_eyes_color);
-                outputText("\n\nBright lights flash into your vision as your eyes glow with electric light. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>glowing [eyecolor] bestial slitted eyes staring back at you.</b>");
-                setEyeType(Eyes.RAIJU);
+                outputText("\n\nA sudden gust of wind send sand into your face. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>[eyecolor] bestial slitted eyes staring back at you not unlike those of a weasel.</b>");
+                setEyeType(Eyes.WEASEL);
             } else humanizeEyes();
             changes++;
         }
-        if (player.hairType != 11 && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nThe ends of your hair seem to split before a quick jolt smacks you in the back of the head. Irritated and confused, you rub the back of your head only to get a small zap in return. You wander over to a puddle and make note of several glowing strands of hair shaped like the typical stylized lightning bolt. There's even a single strand that floats just off the side of your face!");//<b></b>
-            setHairType(Hair.STORM);
+        if (player.hairType != Hair.WINDSWEPT && changes < changeLimit && rand(4) == 0) {
+            outputText("\n\nThe sharp winds of your aura suddenly blow into your hair, some of the strands being cut clean." +
+                    " To your absolute surprise when you look them up your hair has now taken on a shape more fit to hang around without encumbering" +
+                    " you when in the middle of a windstorm, helping your aerodynamism. Oh well if they ever grow again you will probably tie them back into a braid." +
+                    " <b>You now have windswept hair.</b>");//<b></b>
+            player.hairLength = 1;
+            setHairType(Hair.WINDSWEPT);
             changes++;
         }
-        if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYou suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>");
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
-                outputText("\n\n<b>Genetic Memory: Lighting Tattoed Skin - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
-            }
-            player.skin.base.pattern = Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
-            player.skin.base.adj = "lightning shaped tattooed";
-            changes++;
-        }
-        if (player.hairType != 4 && player.hairLength < 26 && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
-            temp2 += 1 + rand(3);
-            outputText("\n\nYour hair tingles as it grows longer, adding " + temp2 + " inches of length to your scalp.");
-            player.hairLength += temp2;
+        if (!player.skin.hasWindSweptScars() && player.wings.type == Wings.WINDY_AURA && rand(3) == 0 && changes < changeLimit) {
+            outputText("\n\nYou scream in pain as your aura flares again, leaving clean cuts all over your body. The cuts glows green for an instant before taking back on a more ordinary brown tone, closing into what looks like innocuous scars at first glance." +
+                    " <b>Clearly those new windswept scars of yours actually improves your wind control, marking you as a full Kamaitachi.</b>");
+            //if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
+            //    outputText("\n\n<b>Genetic Memory: Lighting Tattoed Skin - Memorized!</b>\n\n");
+            //    player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
+            //}
+            player.skin.base.pattern = Skin.PATTERN_SCAR_WINDSWEPT;
+            player.skin.base.adj = "windswept scars";
             changes++;
         }
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -11644,7 +11674,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(3) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         changeLimit += additionalTransformationChances();
-            var Coon_HairColor:Array = ["brown", "chocolate", "tan", "caramel"];
+        var Coon_HairColor:Array = ["brown", "chocolate", "tan", "caramel"];
         //stat gains:
         //gain speed to ceiling of 80
         if (rand(3) == 0 && changes < changeLimit) {

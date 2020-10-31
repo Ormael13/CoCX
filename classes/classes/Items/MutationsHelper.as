@@ -431,9 +431,10 @@ import classes.BodyParts.Wings;
 		[Ears.SHARK, null],
 		[Ears.SNAKE, StatusEffects.UnlockedSnakeEars],
 		[Ears.VAMPIRE, StatusEffects.UnlockedVampireEars],
-		[Ears.WEASEL, StatusEffects.UnlockedRaijuEars],
+		[Ears.RAIJU, StatusEffects.UnlockedRaijuEars],
 		[Ears.WOLF, null],
 		[Ears.YETI, null],
+		[Ears.WEASEL, null],
 	]);
 
 	public function setEyeType(eyeType:int):Boolean {
@@ -515,7 +516,7 @@ import classes.BodyParts.Wings;
 		[Face.PLANT_DRAGON, null],
 		[Face.RACCOON, null],
 		[Face.RACCOON_MASK, null],
-		[Face.RAIJU_FANGS, StatusEffects.UnlockedRaijuFace],
+		[Face.WEASEL, StatusEffects.UnlockedRaijuFace],
 		[Face.RED_PANDA, StatusEffects.UnlockedRedPandaFace],
 		[Face.RHINO, null],
 		[Face.SALAMANDER_FANGS, StatusEffects.UnlockedSalamanderFace],

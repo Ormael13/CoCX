@@ -233,7 +233,11 @@ use namespace CoC;
 					break;
 				default:
 					clearOutput();
-					outputText("You spend an hour trudging through the bleak and bitingly cold glaciers but you don’t find anything interesting. But on your way back you feel you're a little more used to traveling through this harsh area.");
+					outputText("You spend an hour trudging through the bleak and bitingly cold glaciers but you don’t find anything interesting. ");
+					if (player.tou < 50){
+						outputText("But on your way back you feel you're a little more used to traveling through this harsh area.");
+						player.trainStat("tou", +1, 50);
+					}
 					dynStats("tou", .5);
 					doNext(camp.returnToCampUseOneHour);
 			}
