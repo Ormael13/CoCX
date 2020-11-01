@@ -923,7 +923,7 @@ use namespace CoC;
 		//Sword-type weapons
 		public function isSwordTypeWeapon():Boolean {
 			return weapon == game.weapons.ACLAYMO || weapon == game.weapons.B_SCARB || weapon == game.weapons.B_SWORD || weapon == game.weapons.BFSWORD || weapon == game.weapons.BFTHSWORD || weapon == game.weapons.CLAYMOR || weapon == game.weapons.DBFSWO || weapon == game.weapons.DSWORD_ || weapon == game.weapons.EBNYBLD || weapon == game.weapons.EXCALIB
-			 || weapon == game.weapons.HSWORDS || weapon == game.weapons.NODACHI || weapon == game.weapons.NPHBLDE || weapon == game.weapons.PRURUMI || weapon == game.weapons.RCLAYMO || weapon == game.weapons.S_BLADE || weapon == game.weapons.SCARBLD || weapon == game.weapons.SCIMITR || weapon == game.weapons.SCLAYMO || weapon == game.weapons.SNAKESW
+			 || weapon == game.weapons.HSWORDS || weapon == game.weapons.NPHBLDE || weapon == game.weapons.PRURUMI || weapon == game.weapons.RCLAYMO || weapon == game.weapons.S_BLADE || weapon == game.weapons.SCARBLD || weapon == game.weapons.SCIMITR || weapon == game.weapons.SCLAYMO || weapon == game.weapons.SNAKESW
 			 || weapon == game.weapons.TCLAYMO || weapon == game.weapons.TRSTSWO || weapon == game.weapons.VBLADE || weapon == game.weapons.WDBLADE || weapon == game.weapons.WGSWORD || weapon == game.weapons.ZWNDER;
 		}
 		//Axe-type weapons
@@ -936,7 +936,7 @@ use namespace CoC;
 		}
 		//Dueling sword-type weapons (rapier & katana)
 		public function isDuelingTypeWeapon():Boolean {
-			return weapon == game.weapons.MOONLIT ||weapon == game.weapons.MARAKUMO || weapon == game.weapons.BLETTER || weapon == game.weapons.B_WIDOW || weapon == game.weapons.DRAPIER || weapon == game.weapons.JRAPIER || weapon == game.weapons.KATANA || weapon == game.weapons.MASAMUN || weapon == game.weapons.Q_GUARD || weapon == game.weapons.RRAPIER || weapon == game.weapons.LRAPIER;
+			return weapon == game.weapons.NODACHI || game.weapons.MOONLIT || weapon == game.weapons.MARAKUMO || weapon == game.weapons.BLETTER || weapon == game.weapons.B_WIDOW || weapon == game.weapons.DRAPIER || weapon == game.weapons.JRAPIER || weapon == game.weapons.KATANA || weapon == game.weapons.MASAMUN || weapon == game.weapons.Q_GUARD || weapon == game.weapons.RRAPIER || weapon == game.weapons.LRAPIER;
 		}
 		//Spear-type
 		public function isSpearTypeWeapon():Boolean {
