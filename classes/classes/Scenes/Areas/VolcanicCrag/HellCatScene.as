@@ -137,7 +137,7 @@ public function WitchesSabbath():void {
 		else {
 			outputText("As you explore the crag you run into a hooded figure with a cape walking silently toward you, looks to be another hellcat witch. You stride toward her to say hello. She greets you as you get in range.\n\n");
 			outputText("\"<i>Great day sister how well are you weathering the warmth?</i>\"\n\n");
-			outputText("She then stop as if she smelled something then look at your crotch in confusion.\n\n");
+			outputText("She then stop as if she smelled something then look at your body in confusion.\n\n");
 			outputText("\"<i>Hey what happened there! Ah no worry sister, I’m going to fix this dreadful curse for you.</i>\"\n\n");
 			outputText("She’s definitively about to perform magic on you, do you let her?");
 			menu();
@@ -250,7 +250,7 @@ public function WitchesSabbathThirdVisitYes():void {
 	outputText(" The heat is almost gone, it heads for your tail exploding there in a sheath of flame before spiraling toward your head.");
 	mutations.setTailType(Tail.BURNING);
 	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningTail)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningTail, 0, 0, 0, 0);
-	outputText(" All of these pleasurable changes are driving you insane with pleasure to the point you would try to cry but just as soon as a tear pearls out of your eye it evaporates as two small flames leaks from their corners instead.");
+	outputText(" All of these pleasurable changes are driving you insane with desire to the point you would try to cry but just as soon as a tear pearls out of your eye it evaporates as two small flames leaks from their corners instead.");
 	mutations.setEyeTypeAndColor(Eyes.INFERNAL,"ember");
 	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes)) player.createStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes, 0, 0, 0, 0);
 	outputText(" In a final spectacular explosion your hair is set ablaze, the fire refusing to be put out until it literally replaces them.");
@@ -272,6 +272,8 @@ public function WitchesSabbathFourthVisitYeahSure():void {
 }
 public function WitchesSabbathFourthVisitYeahSure2():void {
 	outputText("You moan, feeling overwhelming heat build in your nethers as ");
+	var playerWasAlreadyHerm:Boolean = false
+	if (player.hasCock() && player.catCocks() >= 1) playerWasAlreadyHerm = true;
 	if (!player.hasCock() || (player.hasCock() && player.catCocks() == 0)) {
 		if (player.hasVagina()) reformallcockstokittycocks2();
 		if (!player.hasVagina()) {
@@ -283,7 +285,37 @@ public function WitchesSabbathFourthVisitYeahSure2():void {
 		outputText("the skin beneath your dick begins to pull apart into a pair of sensitive lips. You can’t help but draw a furry digit inside moaning in delight as you begin to finger yourself to orgasm, as the magic settles higher in, sparks of pleasure shooting in your mind as it creates a waiting womb and ready ovaries, you lose it and squirts, splattering the soil with your juice. ");
 		player.createVagina();
 	}
-	outputText("The hellcat nod with a satisfied smile.\n\n\"<i>All over now. I don’t know how you lost your endowment, must have been transformatives. Come and see me if that ever happens again.</i>\"\n\n");
+	if (player.breastRows[0].breastRating < 1) player.breastRows[0].breastRating = 5 + rand(5);
+	else player.breastRows[0].breastRating += 5 + rand(5);
+	if (player.hips.type < 12 || player.butt.type < 12) {
+		if (player.hips.type < 12 && player.butt.type < 12) {
+			player.butt.type = 12;
+			player.hips.type = 12;
+		}
+		else if (player.hips.type < 12) player.hips.type = 12;
+		else player.butt.type = 12;
+	}
+	if (player.tone > 0) player.tone = 0;
+	player.modFem(100, 100);
+	if (playerWasAlreadyHerm) outputText(" your body begins to change.");
+	outputText(" The heat heads for your tail exploding there in a sheath of flame before spiraling toward your head.");
+	mutations.setTailType(Tail.BURNING);
+	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningTail)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningTail, 0, 0, 0, 0);
+	outputText(" All of these pleasurable changes are driving you insane with desire to the point you would try to cry but just as soon as a tear pearls out of your eye it evaporates as two small flames leaks from their corners instead.");
+	mutations.setEyeTypeAndColor(Eyes.INFERNAL,"ember");
+	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes)) player.createStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes, 0, 0, 0, 0);
+	outputText(" In a final spectacular explosion your hair is set ablaze, the fire refusing to be put out until it literally replaces them.");
+	mutations.setHairType(Hair.BURNING);
+	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningHair)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningHair, 0, 0, 0, 0);
+	outputText(" Your skin tingle with residual heat as well, progressively and delightfully burning toward a ashen hue.");
+	player.skinTone = "ashen";
+	player.hairColor = "midnight black";
+	player.coatColor = "midnight black";
+	outputText(" Speaking of fire you having some hellish hot thoughts right now. You really wish you could stick that cock of yours in some cunt or get yourself filled good.");
+	if (rand(2) == 0) player.goIntoRut(false);
+	else player.goIntoHeat(false);
+
+	outputText("The hellcat nod with a satisfied smile.\n\n\"<i>All over now. I don’t know how your body became warped, must have been transformatives. Come and see me if that ever happens again.</i>\"\n\n");
 	outputText("She waves off and leave you there to enjoy your new toys. After a few minute pleasuring yourself in order to kill that raging erection and aching pussy you head back to camp.");
 	if (flags[kFLAGS.WITCHES_SABBATH] > 5) {
 		flags[kFLAGS.WITCHES_SABBATH] -= 2;

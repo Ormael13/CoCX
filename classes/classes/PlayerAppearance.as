@@ -849,6 +849,9 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" covered with [skin coat]");
 		}
 		outputText(", arms, hands and fingers.");
+		if (player.skin.base.pattern != Skin.PATTERN_NONE && player.skin.coverage < Skin.COVERAGE_MEDIUM){
+			outputText(" Your skin is also covered in various place with "+player.skin.base.adj+".");
+		}
 		if (player.skin.base.pattern == Skin.PATTERN_ORCA_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
 		if (player.skin.base.pattern == Skin.PATTERN_RED_PANDA_UNDERBODY) outputText(" Your body is covered from head to toe in [skin color] with a [skin color2] underbelly, giving to your nimble frame a red-panda appearance.");
 		if (player.skin.base.pattern == Skin.PATTERN_USHI_ONI_ONNA_TATTOO) outputText(" You have strange ushi oni-onna tattoos in your body, they appear in your belly, chest, breasts, shoulders and even face, you don’t know why but some are like a black sheen plate while others are just fur.");
@@ -2065,8 +2068,10 @@ public class PlayerAppearance extends BaseContent {
 					outputText(" With ears like that anyone would be hard pressed to resist the urge to headpat you.");
 				}
 			}
-			else if(earType == Ears.WEASEL)
+			else if(earType == Ears.RAIJU)
 				outputText("  Your [hair] is parted by two sideways leaning raiju ears that flick toward every slight sound.");
+			else if(earType == Ears.WEASEL)
+				outputText("  Your [hair] is parted by two sideways leaning weasel ears that flick toward every slight sound.");
 			if (earType == Ears.BAT){
 				outputText("  The [hair] on your head is parted by large bat ears atop your head, always perked up to catch any stray sound.");
 			}
@@ -2455,7 +2460,7 @@ public class PlayerAppearance extends BaseContent {
 		if (faceType == Face.ONI_TEETH) {
 			outputText("  Your face is human in shape and structure with [skin coat]. Your mouth could pass for human if not for your two large ogre like canines.");
 		}
-		if (faceType == Face.RAIJU_FANGS) {
+		if (faceType == Face.WEASEL) {
 			outputText("  Your face is human in shape and structure with [skin coat]. Your mouth could pass for human if not for your two sharp weasel canines.");
 		}
 		if (faceType == Face.ORC_FANGS) {
@@ -2992,6 +2997,12 @@ public class PlayerAppearance extends BaseContent {
 			outputText("\n<font color=\"#0000a0\">Jiangshi: " + player.jiangshiScore() + " (+" + (150 * (1 + player.newGamePlusMod())) + " max Str, -" + (90 * (1 + player.newGamePlusMod())) + " min Spe, -" + (90 * (1 + player.newGamePlusMod())) + " min Int, ");
 			outputText("+" + (130 * (1 + player.newGamePlusMod())) + " max Wis, +" + (200 * (1 + player.newGamePlusMod())) + " max Lib)</font>");
 		} else if (player.jiangshiScore() < 20) outputText("\n<font color=\"#008000\">Jiangshi: " + player.jiangshiScore() + "</font>");
+		//Kamaitachi
+		if (player.kamaitachiScore() >= 18) outputText("\n<font color=\"#0000a0\">Greater Kamaitachi: " + player.kamaitachiScore() + " (-" + (35 * (1 + player.newGamePlusMod())) + " max Str, +" + (200 * (1 + player.newGamePlusMod())) + " max Spe, +" + (55 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Wis, +" + (50 * (1 + player.newGamePlusMod())) + " sens)</font>");
+		else if (player.kamaitachiScore() >= 15) outputText("\n<font color=\"#0000a0\">Kamaitachi: " + player.kamaitachiScore() + " (-" + (20 * (1 + player.newGamePlusMod())) + " max Str, +" + (155 * (1 + player.newGamePlusMod())) + " max Spe, +" + (45 * (1 + player.newGamePlusMod())) + " max Int, +" + (70 * (1 + player.newGamePlusMod())) + " max Wis, +" + (25 * (1 + player.newGamePlusMod())) + " sens)</font>");
+		else if (player.kamaitachiScore() >= 7) outputText("\n<font color=\"#0000a0\">Half Kamaitachi: " + player.kamaitachiScore() + " (-" + (10 * (1 + player.newGamePlusMod())) + " max Str, +" + (70 * (1 + player.newGamePlusMod())) + " max Spe, +" + (20 * (1 + player.newGamePlusMod())) + " max Int, +" + (35 * (1 + player.newGamePlusMod())) + " max Wis, +" + (10 * (1 + player.newGamePlusMod())) + " sens)</font>");
+		else if (player.kamaitachiScore() >= 1) outputText("\n<font color=\"#008000\">Half Kamaitachi: " + player.kamaitachiScore() + "</font>");
+		else if (player.kamaitachiScore() < 1) outputText("\n<font color=\"#ff0000\">Half Raiju: 0</font>");
 		//Kangaroo
 		if (player.kangaScore() >= 4) outputText("\n<font color=\"#0000a0\">Kangaroo-morph: " + player.kangaScore() + " (+" + (5 * (1 + player.newGamePlusMod())) + " max Tou, +" + (15 * (1 + player.newGamePlusMod())) + " max Spe)</font>");
 		else if (player.kangaScore() >= 1) outputText("\n<font color=\"#008000\">Kangaroo-morph: " + player.kangaScore() + "</font>");
@@ -3200,7 +3211,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("\n<font color=\"#0000a0\">Salamander: " + player.salamanderScore() + " (+");
 			outputText("" + (25 * (1 + player.newGamePlusMod())) + " max Str, +" + (25 * (1 + player.newGamePlusMod())) + " max Tou, +" + (40 * (1 + player.newGamePlusMod())) + "max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		} else if (player.salamanderScore() >= 4) {
-			outputText("\n<font color=\"#0000a0\">Salamander: " + player.salamanderScore() + " (+");
+			outputText("\n<font color=\"#0000a0\">Half Salamander: " + player.salamanderScore() + " (+");
 			outputText("" + (15 * (1 + player.newGamePlusMod())) + " max Str, +" + (15 * (1 + player.newGamePlusMod())) + " max Tou, +" + (30 * (1 + player.newGamePlusMod())) + "max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		} else if (player.salamanderScore() >= 1) outputText("\n<font color=\"#008000\">Half Salamander: " + player.salamanderScore() + "</font>");
 		else if (player.salamanderScore() < 1) outputText("\n<font color=\"#ff0000\">Half Salamander: 0</font>");

@@ -227,6 +227,7 @@ use namespace CoC;
 				}
 				else {
 					outputText("  You bet you could cover the same distance even faster next time.\n");
+					player.trainStat("spe",+1,50);
 					dynStats("spe", .75);
 				}
 				doNext(camp.returnToCampUseOneHour);

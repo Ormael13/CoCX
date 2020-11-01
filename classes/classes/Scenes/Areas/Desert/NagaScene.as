@@ -13,7 +13,7 @@ public class NagaScene extends BaseContent{
 		private var isGorgon:Boolean=false;
 
         public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+
 		public function NagaScene(gorgon:Boolean = false) {
             if (gorgon) {
 				isGorgon=gorgon;
@@ -807,8 +807,7 @@ public function nagaFUCKSJOOOOOO():void {
 		if(player.biggestLactation() > 1) {
 			outputText(", sharing with you some of your delicious milk");
 		}
-		outputText("."); 
-    	//(If pregnant)
+		outputText(".");//(If pregnant)
 		if(player.pregnancyIncubation > 0) {
             outputText("  As you finally reach your next climax, the " + gorgonOrNaga);
 			outputText(" pokes her tongue a little bit deeper inside your mouth, reaching to the back of your throat.");

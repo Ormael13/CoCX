@@ -234,6 +234,14 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("<b>You need more time before you can use Sonic scream again.</b>\n\n");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
+		if (player.kamaitachiScore() >= 10 && player.arms.type == Arms.KAMAITACHI) {
+			bd = buttons.add("Wind scythe", WindScythe).hint("Create a sharp wave of wind, slashing everything in its path for heavy bleed damage. More powerful against groups. \n", "Wind Scythe");
+			bd.requireFatigue(spellCost(50));
+			//Not Ready Yet:
+			if(player.hasStatusEffect(StatusEffects.CooldownWindScythe)) {
+				bd.disable("You need time to gather enought winds to unleash a wind scythe again.");
+			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+		}
 		if (player.hasPerk(PerkLib.DragonFireBreath)) {
 			bd = buttons.add("Dragon(Fire)", dragonfireBreath);
 			if (player.hasPerk(PerkLib.DraconicLungs)) {
@@ -4454,6 +4462,101 @@ public class MagicSpecials extends BaseCombatContent {
 		doNext(playerMenu);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
+	}
+
+	public function WindScythe():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		fatigue(50, USEFATG_MAGIC_NOBM);
+		player.createStatusEffect(StatusEffects.CooldownWindScythe,5,0,0,0);
+		var damage:Number = 0;
+		damage += scalingBonusSpeed();// * 0.5
+		damage += scalingBonusWisdom();// * 0.5
+		damage += rand(player.level + player.kamaitachiScore());
+		if (player.hasPerk(PerkLib.HeartOfTheStorm)) damage *= 1.5;
+		if (player.hasPerk(PerkLib.HeartOfTheStormEvolved)) damage *= 1.5;
+		if (player.hasPerk(PerkLib.HeartOfTheStormFinalForm)) damage *= 1.5;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		damage = Math.round(damage);
+		//Shell
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
+			outputText("As soon as your winds touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+			enemyAI();
+			return;
+		}
+		//Amily!
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
+			enemyAI();
+			return;
+		}
+		if (monster is LivingStatue)
+		{
+			outputText("The winds courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
+			enemyAI();
+			return;
+		}
+		else if (monster is Lethice && (monster as Lethice).fightPhase == 2)
+		{
+			//Attack gains burn DoT for 2-3 turns.
+			outputText("You gather winds around you and unleash them on the horde of demons like a tidal wave, scarring and bleeding their tainted flesh. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!\n\n");
+			damage = int(player.level * 8 + 25 + rand(10));
+			damage *= 1.75;
+			outputText(" (" + damage + ")");
+			monster.HP -= damage;
+			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,player.spe*10,1,0,0);
+			else{
+				monster.createStatusEffect(StatusEffects.KamaitachiBleed, player.spe*10, 1, 0, 0);
+				outputText("\n\nYour attack greatly worsened the bleeding your opponents suffers.");
+			}
+			combatRoundOver();
+			return;
+		}
+		outputText("You gather winds around you and unleash them on your opponent into a deadly gust sharper then any blade, its so powerful that even the environs crumble around " + monster.pronoun2 + ".  " + monster.capitalA + monster.short + " does " + monster.pronoun3 + " best to avoid it, but windstorm is too fast.");
+		if(monster.hasStatusEffect(StatusEffects.Sandstorm)) {
+			outputText("  <b>Your wind are massively dissipated by the swirling vortex, causing them to hit with far less force!</b>");
+			damage = Math.round(0.5 * damage);
+		}
+		//Miss:
+		if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+			outputText("  Against all odds, " + monster.a + monster.short + " manages to avoid your deadly winds. " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
+		}
+		//Special enemy avoidances
+		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
+			outputText("Vala beats her wings with surprising strength, somehow countering your attack with winds of her owns!\n\n");
+		}
+		else {
+			if(!monster.hasPerk(PerkLib.Resolute)) {
+				outputText("  " + monster.capitalA + monster.short + " reels as your windstorm slams into " + monster.pronoun2 + " with full force leaving behind deep wounds!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back. ");
+				monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
+			}
+			else {
+				outputText("  " + monster.capitalA + monster.short + " reels as your windstorm slams into " + monster.pronoun2 + " with full force leaving behind deep wounds!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+				if(!monster.plural) outputText("is ");
+				else outputText("are");
+				outputText("too resolute to be stunned by your attack.</b> ");
+			}
+			damage = doDamage(damage, true, true);
+			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,player.spe*10,0,0,0);
+			else {
+				monster.createStatusEffect(StatusEffects.KamaitachiBleed, player.spe*10, 1, 0, 0);
+				outputText("\n\nYour attack greatly worsened the bleeding your opponent suffers.");
+			}
+		}
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
+		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+		{
+			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			enemyAI();
+		}
+		else combatRoundOver();
 	}
 
 	public function ElementalAspectAir():void {

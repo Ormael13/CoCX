@@ -435,7 +435,8 @@ public class DebugMenu extends BaseContent
 			weaponArray.push(weaponsrange.BOWOLD_);
 			weaponArray.push(weaponsrange.LCROSBW);
 			weaponArray.push(weaponsrange.FLINTLK);
-			
+			weaponArray.push(weapons.UGATANA);
+
 			//------------
 			// Shields
 			//------------
@@ -821,6 +822,7 @@ public class DebugMenu extends BaseContent
 			[Skin.PATTERN_SCAR_SHAPED_TATTOO, "9 SCAR_SHAPED_TATTOO"],
 			[Skin.PATTERN_WHITE_BLACK_VEINS, "10 PATTERN_WHITE_BLACK_VEINS"],
 			[Skin.PATTERN_USHI_ONI_ONNA_TATTOO, "12 PATTERN_USHI_ONI_ONNA_TATTOO"],
+			[Skin.PATTERN_SCAR_WINDSWEPT, "13 PATTERN_SCAR_WINDSWEPT"],
 		];
 		private static const PATTERN_COAT_TYPES:Array = [
 			[Skin.PATTERN_NONE, "0 NONE"],
@@ -1019,7 +1021,7 @@ public class DebugMenu extends BaseContent
 			[Face.DRAGON_FANGS, "30 DRAGON_FANGS"],
 			[Face.DEVIL_FANGS, "31 DEVIL_FANGS"],
 			[Face.ONI_TEETH, "32 ONI_TEETH"],
-			[Face.RAIJU_FANGS, "33 RAIJU_FANGS"],
+			[Face.WEASEL, "33 WEASEL"],
 			[Face.VAMPIRE, "34 VAMPIRE"],
 			[Face.VAMPIRE, "34 VAMPIRE"],
 			[Face.BUCKTOOTH, "35 BUCKTOOTH"],
@@ -1110,17 +1112,20 @@ public class DebugMenu extends BaseContent
 			[Ears.GOAT, "23 GOAT"],
 			[Ears.ONI, "24 ONI"],
 			[Ears.ELVEN, "25 ELVEN"],
-			[Ears.WEASEL, "26 WEASEL"],
-			[Ears.BAT, "27 BAT"],
-			[Ears.VAMPIRE, "28 VAMPIRE"],
-			[Ears.RED_PANDA, "29 RED_PANDA"],
-			[Ears.AVIAN, "30 AVIAN"],
-			[Ears.GRYPHON, "31 GRYPHON"],
-			[Ears.CAVE_WYRM, "32 CAVE_WYRM"],
-			[Ears.BEAR, "33 BEAR"],
-			[Ears.PANDA, "34 PANDA"],
-			[Ears.SHARK, "35 SHARK"],
-			[Ears.DISPLACER, "36 DISPLACER"],
+			[Ears.RAIJU, "27 RAIJU"],
+			[Ears.BAT, "28 BAT"],
+			[Ears.VAMPIRE, "29 VAMPIRE"],
+			[Ears.RED_PANDA, "30 RED_PANDA"],
+			[Ears.AVIAN, "31 AVIAN"],
+			[Ears.GRYPHON, "32 GRYPHON"],
+			[Ears.CAVE_WYRM, "33 CAVE_WYRM"],
+			[Ears.BEAR, "34 BEAR"],
+			[Ears.PANDA, "35 PANDA"],
+			[Ears.SHARK, "36 SHARK"],
+			[Ears.DISPLACER, "37 DISPLACER"],
+			[Ears.MELKIE, "38 MELKIE"],
+			[Ears.GREMLIN, "39 GREMLIN"],
+			[Ears.WEASEL, "40 WEASEL"],
 		];
 		private static const HORN_TYPE_CONSTANTS:Array    = [
 			[Horns.NONE, "0 NONE"],

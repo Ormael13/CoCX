@@ -23,6 +23,7 @@ import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Monster;
 import classes.PerkLib;
+import classes.PotionType;
 import classes.Scenes.Areas.Beach.Gorgon;
 import classes.Scenes.Areas.Caves.DisplacerBeast;
 import classes.Scenes.Areas.Desert.Naga;
@@ -96,7 +97,7 @@ public class Combat extends BaseContent {
         var costPercent:Number = 100;
         if (player.hasPerk(PerkLib.IronMan)) costPercent -= 50;
         if (player.hasPerk(PerkLib.ZenjisInfluence3)) costPercent -= 20;
-		if (costPercent < 10) costPercent = 10; 
+		if (costPercent < 10) costPercent = 10;
         mod *= costPercent / 100;
         return mod;
     }
@@ -105,7 +106,7 @@ public class Combat extends BaseContent {
         var costPercent:Number = 100;
         if (player.hasPerk(PerkLib.BowShooting)) costPercent -= player.perkv1(PerkLib.BowShooting);
         //if(player.hasPerk(PerkLib.)) costPercent -= x0; ((tu umieścić perk dający zmniejszenie % kosztu użycia łuku jak IronMan dla fiz specjali ^^))
-        if (costPercent < 10) costPercent = 10; 
+        if (costPercent < 10) costPercent = 10;
         mod *= costPercent / 100;
         return mod;
     }
@@ -612,7 +613,7 @@ public class Combat extends BaseContent {
     internal function buildOtherActions(buttons:ButtonDataList):void {
         var bd:ButtonData;
         buttons.add("Surrender", combat.surrender, "Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
-        if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) ||
+        if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) ||
                 ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) || player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) || player.hasStatusEffect(StatusEffects.SoulDrill1)) {
             buttons.add("Melee Opt", CoC.instance.perkMenu.doubleAttackOptions, "You can adjust your melee attack settings.");
         }
@@ -714,29 +715,72 @@ public class Combat extends BaseContent {
     }
 
     //ALCHEMY ZONE
+    public function CalcAlchemyPower():Number{
+        var power:Number = 0;
+        power += scalingBonusWisdom();
+        if (player.hasPerk(PerkLib.PlantKnowledge)) power += scalingBonusLibido();
+        power += player.herbalismLevel;
+        power = Math.round(power);
+        return power;
+    }
 
-    public function Poultrice():void {
-
+    public function Poultice():void {
+        clearOutput();
+        var power:Number = CalcAlchemyPower();
+        if (player.hasPerk(PerkLib.NaturalHerbalism)) power *= 2;
+        HPChange(power,false);
+        outputText("You apply the poultice, your wounds closing at high speed. Healed for "+power+"");
     }
 
     public function EnergyDrink():void {
-
+        clearOutput();
+        var power:Number = CalcAlchemyPower();
+        fatigue(-power);
+        outputText("You chug off on your energy drink, feeling rejuvenated with newfound magical energy and stamina. Recovered "+power+" ressources.");
     }
 
     public function Cure():void {
-
+        clearOutput();
+        player.buff("Poison").remove();
+        player.removeStatusEffect(StatusEffects.BurnDoT);
+        player.removeStatusEffect(StatusEffects.BurnDoT2);
+        player.removeStatusEffect(StatusEffects.FrostburnDoT);
+        player.removeStatusEffect(StatusEffects.FrozenLung);
+        player.removeStatusEffect(StatusEffects.Hemorrhage);
+        outputText("You drink up the cure, feeling relieved as your status ailments are cleansed.");
     }
 
     public function Painkiller():void {
-
+        clearOutput();
+        var power:Number = CalcAlchemyPower()/5; //needs to be calculated in game
+        var duration:Number = Math.round(power/5);
+        //strenght then Duration in hours
+        player.createStatusEffect(StatusEffects.ArmorPotion,power,duration,0,0);
+        outputText("You drink up the medicine, feeling any lingering pain recede as your skin hardens like stone. "+power+" "+duration+"");
     }
 
     public function Stimulant():void {
-
+        clearOutput();
+        var power:Number = CalcAlchemyPower()/5; //needs to be calculated in game
+        var duration:Number = Math.round(power/5);
+        //strenght then Duration in hours
+        player.createStatusEffect(StatusEffects.AttackPotion,power,duration,0,0);
+        outputText("You drink up the medicine, feeling stronger and more agile already. "+power+" "+duration+"");
     }
 
     public function Perfume():void {
-
+        clearOutput();
+        var power:Number = CalcAlchemyPower()/5; //needs to be calculated in game
+        var duration:Number = Math.round(power/5);
+        //strenght then Duration in hours
+        if (!player.isAlraune()){
+            outputText("You grab your bottle of Alraune perfume and spray yourself knowingly. Your opponent is going to have issues resisting your charms now. "+power+" "+duration+"");
+            player.createStatusEffect(StatusEffects.ArousalPotion,power,duration,0,0);
+        }
+        else {
+            outputText("You grab your bottle of Alraune perfume and almost spray yourself before remembering that you actualy already produce your own perfume, heck you are bathing into it! You slap yourself before puting back the item in your bag... what a dummy.");
+            player.changeNumberOfPotions(PotionType.PERFUME, +1);
+        }
     }
 
     public function soul1Drill():void {
@@ -846,6 +890,7 @@ public class Combat extends BaseContent {
         if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) unarmed *= 1.1;
         if (player.findPerk(PerkLib.Lycanthropy) >= 0) unarmed += 8 * (1 + player.newGamePlusMod());
         if (player.arms.type == Arms.MANTIS) unarmed += 15 * (1 + player.newGamePlusMod());
+        if (player.arms.type == Arms.KAMAITACHI) unarmed += 15 * (1 + player.newGamePlusMod());
         if (player.arms.type == Arms.YETI || player.arms.type == Arms.CAT) unarmed += 5 * (1 + player.newGamePlusMod());
         if (player.arms.type == Arms.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
         if (player.arms.type == Arms.BEAR) unarmed += 5 * (1 + player.newGamePlusMod());
@@ -3459,16 +3504,17 @@ public class Combat extends BaseContent {
                     outputText("You slash at your opponent with your scythes leaving deep wounds");
                     if (player.arms.type == Arms.KAMAITACHI){
                         outputText(" that bleeds profusely");
-                        if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
-                        else {
-                            monster.removeStatusEffect(StatusEffects.SharkBiteBleed);
-                            monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
-                        }
                     }
                     outputText(".");
                 }
-                ExtraNaturalWeaponAttack(DamageMultiplier);
-                ExtraNaturalWeaponAttack(DamageMultiplier);
+                if (player.arms.type == Arms.KAMAITACHI){
+                    ExtraNaturalWeaponAttack(DamageMultiplier, "KamaitachiScythe");
+                    ExtraNaturalWeaponAttack(DamageMultiplier, "KamaitachiScythe");
+                }
+                else{
+                    ExtraNaturalWeaponAttack(DamageMultiplier);
+                    ExtraNaturalWeaponAttack(DamageMultiplier);
+                }
                 outputText("\n");
                 if (player.arms.type == Arms.WOLF && player.hasPerk(PerkLib.Lycanthropy)){
                     if (flags[kFLAGS.LUNA_MOON_CYCLE] != 7){
@@ -3587,15 +3633,15 @@ public class Combat extends BaseContent {
             //Unique attack Kamaitachi Three way Cut
             if (player.hasKamaitachiThreeWayCut() || player.arms.type == Arms.KAMAITACHI){
                 outputText("You strike at blinding speed almost seeming to divide yourself into multiple copies, and slash with your scythes again. Initiating a three way cut combo\n");
-                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack(1, "KamaitachiScythe");
                 if (player.hasABiteAttack()) {
                     outputText("You head in for a bite sinking your teeth in.");
                     ExtraNaturalWeaponAttack();
                     outputText("\n");
                 }
                 outputText("You swirl for two more scythe slash.");
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack(1, "KamaitachiScythe");
+                ExtraNaturalWeaponAttack(1, "KamaitachiScythe");
                 outputText("\n");
                 if (player.hasABiteAttack()) {
                     outputText("You lunge for a final bite drawing blood out.");
@@ -3823,14 +3869,14 @@ public class Combat extends BaseContent {
                 if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
                 if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
             }
-            if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU) {
+            if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MOONLIT || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU) {
                 if (monster.cor < 33) damage = Math.round(damage * 1.0);
                 else if (monster.cor < 50) damage = Math.round(damage * 1.1);
                 else if (monster.cor < 75) damage = Math.round(damage * 1.2);
                 else if (monster.cor < 90) damage = Math.round(damage * 1.3);
                 else damage = Math.round(damage * 1.4);
             }
-            if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG) {
+            if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.C_BLADE || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG) {
                 if (monster.cor >= 66) damage = Math.round(damage * 1.0);
                 else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
                 else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
@@ -4392,7 +4438,7 @@ public class Combat extends BaseContent {
     }
 
 
-    public function ExtraNaturalWeaponAttack(FeraldamageMultiplier:Number = 1):void {
+    public function ExtraNaturalWeaponAttack(FeraldamageMultiplier:Number = 1, SpecialEffect:String = ""):void {
         var accMelee:Number = 0;
         accMelee += (meleeAccuracy() / 2);
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) accMelee -= flags[kFLAGS.ATTACKS_ACCURACY];
@@ -4443,6 +4489,10 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
             //One final round
             damage = Math.round(damage);
+            if (SpecialEffect == "KamaitachiScythe"){
+                if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,0,0,0,0);
+                else monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, player.spe*2);
+            }
             // Have to put it before doDamage, because doDamage applies the change, as well as status effects and shit.
             if (monster is Doppleganger) {
                 if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -4582,7 +4632,7 @@ public class Combat extends BaseContent {
     public function WeaponRangeStatusProcs():void {
 
     }
-	
+
 	public function ShieldsStatusProcs():void {
 		var bleed:Boolean = false;
         var bleedChance:int = 0;
@@ -4604,7 +4654,7 @@ public class Combat extends BaseContent {
 		var bleed:Boolean = false;
         var bleedChance:int = 0;
 		//xx% bleed chance
-        
+
 		if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType)) bleedChance = 0;
         if (rand(100) < bleedChance) bleed = true;
 		if (bleed) {
@@ -4616,7 +4666,7 @@ public class Combat extends BaseContent {
     }
 
     public function WrathWeaponsProc():void {
-        if (player.weapon == weapons.BLETTER) {
+        if (player.weapon == weapons.BLETTER || player.weapon == weapons.C_BLADE) {
             player.takePhysDamage(player.maxHP() * 0.02);
             if (player.HP <= player.minHP()) {
                 doNext(endHpLoss);
@@ -6127,6 +6177,40 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
             else monster.lust += monster.lustVuln * (2 + rand(4));
         }
+        //Perfume
+        if ((player.hasPerk(PerkLib.AlrauneNectar) || player.hasStatusEffect(StatusEffects.ArousalPotion)) && monster.lustVuln > 0) {
+            if (player.isAlraune()){
+                if (monster.lust < (monster.maxLust() * 0.5)) outputText("The perfumed scent of your nectar messes with [monster a] [monster name] but does not have any visible effects just yet.\n\n");
+                else if (monster.lust < (monster.maxLust() * 0.6)) {
+                    if (!monster.plural) outputText(monster.capitalA + monster.short + " starts to squirm a little from your nectar scent.\n\n");
+                    else outputText(monster.capitalA + monster.short + " start to squirm a little from your nectar perfumed scent.\n\n");
+                } else if (monster.lust < (monster.maxLust() * 0.75)) outputText("The perfumed scent of your nectar seems to be visibly affecting [monster a] [monster name], making [monster him] squirm uncomfortably.\n\n");
+                else if (monster.lust < (monster.maxLust() * 0.85)) {
+                    if (!monster.plural) outputText(monster.capitalA + monster.short + "'s skin colors red as [monster he] inadvertently basks in your scent.\n\n");
+                    else outputText(monster.capitalA + monster.short + "' skin colors red as [monster he] inadvertently bask in your scent.\n\n");
+                } else {
+                    if (!monster.plural) outputText("The effects of your perfumed scent are quite pronounced on [monster a] [monster name] as [monster he] begins to shake and steal glances at your body.\n\n");
+                    else outputText("The effects of your perfumed scent are quite pronounced on [monster a] [monster name] as [monster he] begin to shake and steal glances at your body.\n\n");
+                }
+            } else {
+                if (monster.lust < (monster.maxLust() * 0.5)) outputText("The perfume messes with [monster a] [monster name] but does not have any visible effects just yet.\n\n");
+                else if (monster.lust < (monster.maxLust() * 0.6)) {
+                    if (!monster.plural) outputText(monster.capitalA + monster.short + " starts to squirm a little from your nectar scent.\n\n");
+                    else outputText(monster.capitalA + monster.short + " start to squirm a little from your nectar perfumed scent.\n\n");
+                } else if (monster.lust < (monster.maxLust() * 0.75)) outputText("The perfume seems to be visibly affecting [monster a] [monster name], making [monster him] squirm uncomfortably.\n\n");
+                else if (monster.lust < (monster.maxLust() * 0.85)) {
+                    if (!monster.plural) outputText(monster.capitalA + monster.short + "'s skin colors red as [monster he] inadvertently basks in your perfume.\n\n");
+                    else outputText(monster.capitalA + monster.short + "' skin colors red as [monster he] inadvertently bask in your scent.\n\n");
+                } else {
+                    if (!monster.plural) outputText("The effects of your perfume are quite pronounced on [monster a] [monster name] as [monster he] begins to shake and steal glances at your body.\n\n");
+                    else outputText("The effects of your perfume are quite pronounced on [monster a] [monster name] as [monster he] begin to shake and steal glances at your body.\n\n");
+                }
+            }
+            var power:Number = CalcAlchemyPower()/5;
+            if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
+            else monster.lust += monster.lustVuln * (2 + rand(4));
+        }
+
         //Unicorn and Bicorn aura
         //Unicorn
         if (player.hasPerk(PerkLib.AuraOfPurity)) {
@@ -6904,6 +6988,14 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownTailCleave);
             } else {
                 player.addStatusValue(StatusEffects.CooldownTailCleave, 1, -1);
+            }
+        }
+        //Wind Scythe
+        if (player.hasStatusEffect(StatusEffects.CooldownWindScythe)) {
+            if (player.statusEffectv1(StatusEffects.CooldownWindScythe) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownWindScythe);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownWindScythe, 1, -1);
             }
         }
         //Wing Buffet
@@ -10260,7 +10352,15 @@ public class Combat extends BaseContent {
 
     public function takeFlight():void {
         clearOutput();
-        outputText("You open you wing taking flight.\n\n");
+        if (player.wings.type == Wings.WINDY_AURA && player.arms.type == Arms.KAMAITACHI){
+            outputText("You create a small cyclone to ride upon and lift yourself up in the air.\n\n");
+        }
+        else if (player.wings.type == Wings.THUNDEROUS_AURA){
+            outputText("You take flight letting the storm carry you up.\n\n");
+        }
+        else{
+            outputText("You open you wing taking flight.\n\n");
+        }
         player.createStatusEffect(StatusEffects.Flying, 7, 0, 0, 0);
         if (player.findPerk(PerkLib.HeartOfTheStormFinalForm)) player.addStatusValue(StatusEffects.Flying, 1, 999);
         if (player.findPerk(PerkLib.Resolute) < 0) {

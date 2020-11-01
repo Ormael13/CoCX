@@ -12,6 +12,7 @@ import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
 import classes.display.SpriteDb;
+import classes.internals.WeightedDrop;
 
 public class Alraune extends Monster
 	{
@@ -182,7 +183,15 @@ public class Alraune extends Monster
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 24;
 			this.gems = rand(20) + 5;
-			this.drop = new ChainedDrop().add(consumables.MARAFRU, 1 / 6);
+			this.drop = new WeightedDrop().
+			add(consumables.RAUNENECT,7).
+			addMany(1,consumables.MARAFRU,
+					consumables.HEALHERB,
+					consumables.MOONGRASS,
+					consumables.SNAKEBANE,
+					consumables.IRONWEED,
+					consumables.BLADEFERN);
+			//this.drop = new ChainedDrop().add(consumables.MARAFRU, 1 / 6);
 				//	.add(consumables.W__BOOK, 1 / 4)
 				//	.add(consumables.BEEHONY, 1 / 2)
 				//	.elseDrop(useables.B_CHITN);

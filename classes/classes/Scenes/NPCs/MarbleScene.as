@@ -1621,6 +1621,8 @@ public function postAddictionFarmHelpings():void {
 	if(player.findPerk(PerkLib.MarbleResistant) >= 0) outputText("She assures you that you can't get addicted to it again if you don't drink her milk directly from her breasts.");
 	//(randomly raise either str or spd)
 	dynStats("str", rand(2),"spe", rand(2));
+	player.trainStat("str", 1, 50);
+	player.trainStat("spe", 1, 50);
 	//(player gets a bottle of Marble's milk)
 	inventory.takeItem(consumables.M__MILK, camp.returnToCampUseOneHour);
 }

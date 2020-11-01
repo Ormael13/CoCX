@@ -3,7 +3,7 @@ import classes.StatusEffectClass;
 import classes.StatusEffectType;
 
     public class RutEffect extends StatusEffectClass {
-        public static const TYPE:StatusEffectType = register("rut", HeatEffect);
+        public static const TYPE:StatusEffectType = register("rut", RutEffect);
         public function RutEffect() {
             super(TYPE);
         }

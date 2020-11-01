@@ -1432,7 +1432,7 @@ package classes.Scenes
 			outputText("-New tier 1 speed lvl-up perk: Job: Rogue. Req. Job: Ranger and Evade perks; 25+ in both str and spe. Effect: +5 to max Str/Spe (scalable) and +5% to evasion.\n");
 			outputText("-New tier 1 speed lvl-up perk: Starlight Strikes. Req. Job: Rogue perk and 60+ spe. Effect: Increase atk for small weapons.\n");
 			outputText("-New tier 1 speed lvl-up perk: Dual Wield (Small). Req. Job: Rogue perk. Effect: Allow to wield any dual small sized weapons.\n");
-			outputText("-New tier 1 speed lvl-up perk: Sneaky attack. Req. Job: Rogue perk. Effect: Adding when using small weapon or dueling one (rapier/katana) 'Sneak attack' to P. Specials that deal one single attack with 200% of dmg to stunned, blinded or distracted enemies.\n");
+			outputText("-New tier 1 speed lvl-up perk: Sneaky attack. Req. Job: Rogue perk. Effect: Adding when using small or dueling weapon (rapier/katana) 'Sneak attack' to P. Specials that deal one single attack with 200% of dmg to stunned, blinded or distracted enemies.\n");
 			outputText("-New tier 1 speed lvl-up perk: Double Attack (Small). Req. Job: Rogue perk and 40+ spe. Effect: Allow to attack 2 times per turn with 'small' weapons (daggers).\n");
 			outputText("-New tier 2 speed lvl-up perk: Triple Attack (Small). Req. Double Attack (Small) perk and 55+ spe. Effect: Allow to attack 3 times per turn with 'small' weapons (daggers).\n");
 			outputText("-New tier 2 speed lvl-up perk: Quadruple Attack (Small). Req. Triple Attack (Small) perk and 70+ spe. Effect: Allow to attack 4 times per turn with 'small' weapons (daggers).\n");
