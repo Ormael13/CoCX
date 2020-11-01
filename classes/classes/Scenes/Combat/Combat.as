@@ -3876,7 +3876,7 @@ public class Combat extends BaseContent {
                 else if (monster.cor < 90) damage = Math.round(damage * 1.3);
                 else damage = Math.round(damage * 1.4);
             }
-            if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.MARAKUMO || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG) {
+            if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.C_BLADE || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG) {
                 if (monster.cor >= 66) damage = Math.round(damage * 1.0);
                 else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
                 else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
@@ -4666,7 +4666,7 @@ public class Combat extends BaseContent {
     }
 
     public function WrathWeaponsProc():void {
-        if (player.weapon == weapons.BLETTER || player.weapon == weapons.MARAKUMO) {
+        if (player.weapon == weapons.BLETTER || player.weapon == weapons.C_BLADE) {
             player.takePhysDamage(player.maxHP() * 0.02);
             if (player.HP <= player.minHP()) {
                 doNext(endHpLoss);

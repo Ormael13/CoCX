@@ -303,7 +303,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[weapons.KATANA, weapons.MASAMUN, weapons.BLETTER],
 			[weapons.W_STAFF, weapons.U_STAFF, weapons.N_STAFF],
 			//	[weapons.DEMSCYT,		weapons.LHSCYTH,		null],
-			[weapons.NODACHI, weapons.MOONLIT, weapons.MARAKUMO],
+			[weapons.UGATANA, weapons.MOONLIT, weapons.C_BLADE],
 			[weapons.L__AXE, weapons.WG_GAXE, weapons.DE_GAXE],
 			[weapons.SPEAR, weapons.SESPEAR, weapons.DSSPEAR],
 			[weapons.JRAPIER, weapons.Q_GUARD, weapons.B_WIDOW],

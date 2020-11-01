@@ -30,7 +30,7 @@ package classes.Items
 		public const B_SCARB:Weapon = new Weapon("B.ScarB", "B.ScarBlade", "broken scarred blade", "a broken scarred blade", "slash", 12, 480, "This saber, made from lethicite-imbued metal, seems to no longer seek flesh; whatever demonic properties in this weapon is gone now but it's still an effective weapon.");
 		public const BLETTER:BloodLetter = new BloodLetter();
 		public const MOONLIT:MoonlitSnow = new MoonlitSnow();
-		public const MARAKUMO:Marakumo = new Marakumo();
+		public const C_BLADE:ChaosBlade = new ChaosBlade();
 		public const B_WIDOW:BlackWidow = new BlackWidow();
 		public const CLAWS  :Weapon = new Weapon("Claws","Claws","gauntlet with claws","a gauntlet with claws","rend",0,100,"Those metal gauntlets have tips of the fingers shaped like sharp natural claws.  Though they lacks the damaging potential of other weapons, they have a chance to leave bleeding wounds.");
 		public const CLAYMOR:Weapon = new LargeClaymore();
@@ -66,7 +66,7 @@ package classes.Items
 		public const HSWORDS:HookSwords = new HookSwords();
 		public const JRAPIER:JeweledRapier = new JeweledRapier();
 		public const KARMTOU:WeaponWithPerk = new WeaponWithPerk("KarmTou", "KarmicTouch", "karmic gloves", "a pair of karmic gloves", "punch", 0, 400, "A pair of gauntlets, made in shining steel and snow-white cloth. Their touch brings waste into the wicked’s flesh, punishing them in the form of blows more painful then should be.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.5, 0, 0, 0);
-		public const KATANA :Weapon = new Weapon("Katana ","Katana","katana","a katana","keen cut",17,680,"A curved bladed weapon that cuts through flesh with the greatest of ease.");
+		public const KATANA :Weapon = new Weapon("Katana ","Katana","katana","a katana","keen cut",17,680,"A curved bladed weapon that cuts through flesh with the greatest of ease.", "Large");
 		public const KIHAAXE:Weapon = new Weapon("KihaAxe","Greataxe","fiery double-bladed axe","a fiery double-bladed axe","fiery cleave",22,880,"This large, double-bladed axe matches Kiha's axe. It's constantly flaming.", "Large");
 		public const L__AXE :LargeAxe = new LargeAxe();
 		public const L_CLAWS:Weapon = new Weapon("L.Claws","LustyClaws","gauntlet with an aphrodisiac-coated claws","a gauntlet with an aphrodisiac-coated claws","rend",0,200,"Those metal gauntlets have tips of the fingers shaped like natural claws.  They seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.");
@@ -135,7 +135,9 @@ package classes.Items
 		public const WGSWORD:Wardensgreatsword = new Wardensgreatsword();
 		public const YAMARG :WeaponWithPerk = new WeaponWithPerk("YamaRG", "YamaRajaGrasp", "Yama-Raja gloves", "a pair of Yama-Raja gloves", "punch", 0, 400, "These black gloves are made in black leather and an ebony alloy. Their corrupt touch seeks to destroy the pure and innocent. As such, it will seek the weak points of its victims when striking.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.5, 0, 0, 0);
 		public const ZWNDER :Zweihander = new Zweihander();
-		
+		public const UGATANA :Weapon = new Weapon("Uchigatana ","Uchigatana","Uchigatana","a Uchigatana","keen cut",17,680,"A one handed curved bladed weapon that cuts through flesh with the greatest of ease. Can also be wielded with both hands.");
+
+
 		/*
 		private static function mk(id:String,shortName:String,name:String,longName:String,verb:String,attack:Number,value:Number,description:String,perk:String=""):Weapon {
 			return new Weapon(id,shortName,name,longName,verb,attack,value,description,perk);
