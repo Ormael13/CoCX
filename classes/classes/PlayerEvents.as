@@ -1414,7 +1414,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.isAlraune() && !player.hasPerk(PerkLib.PlantKnowledge)){
 				outputText("\nIt would seem you aquired additionnal skills in herbalism thanks to behing a plant yourself. <b>Gained Perk: Plant Knowledge</b>\n");
-				player.createPerk(PerkLib.AlrauneNectar, 0,0,0,0);
+				player.createPerk(PerkLib.PlantKnowledge, 0,0,0,0);
 				needNext = true;
 			}
 			if (!player.isAlraune() && player.hasPerk(PerkLib.AlrauneNectar)){
