@@ -2014,7 +2014,7 @@ public class Camp extends NPCAwareContent {
 		if (player.herbalismLevel >= 10) button(3).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 10");
 		if (player.itemCount(CoC.instance.consumables.IRONWEED) == 0) button(3).disable("You lack the ingrediants to craft this item. \n\nIronweed currently owned "+player.itemCount(CoC.instance.consumables.IRONWEED)+"");
 		//Stimulant
-		addButton(4, "Stimulant", HerbalismCraftItem,CoC.instance.consumables.HEALHERB, "blade ferns", PotionType.STIMULANT).hint("Craft a Stimulant using a handfull of blade ferns.\n\nBlade ferns currently owned "+player.itemCount(CoC.instance.consumables.BLADEFERN)+"");
+		addButton(4, "Stimulant", HerbalismCraftItem,CoC.instance.consumables.BLADEFERN, "blade ferns", PotionType.STIMULANT).hint("Craft a Stimulant using a handfull of blade ferns.\n\nBlade ferns currently owned "+player.itemCount(CoC.instance.consumables.BLADEFERN)+"");
 		if (player.herbalismLevel >= 10) button(4).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 10");
 		if (player.itemCount(CoC.instance.consumables.BLADEFERN) == 0) button(4).disable("You lack the ingrediants to craft this item. \n\nBlade ferns currently owned "+player.itemCount(CoC.instance.consumables.BLADEFERN)+"");
 		//Perfume
@@ -2035,9 +2035,13 @@ public class Camp extends NPCAwareContent {
 	public function HerbalismCraftItem2(ItemID:SimpleConsumable, IngrediantName:String, CraftingResult:PotionType){
 		clearOutput();
 		player.changeNumberOfPotions(CraftingResult,+1);
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) player.changeNumberOfPotions(CraftingResult,+2);
+		if (player.hasPerk(PerkLib.NaturalHerbalism)){
+			player.changeNumberOfPotions(CraftingResult,+2);
+		}
 		outputText("You spend the better part of the next hour refining the "+IngrediantName+" into a "+CraftingResult.name+" adding it to your bag.");
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) outputText("Your natural knowledge of herbalism allowed you two craft two additionnal "+CraftingResult.name+".");
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) {
+			outputText("Your natural knowledge of herbalism allowed you two craft two additionnal "+CraftingResult.name+".");
+		}
 		player.destroyItems(ItemID, 1);
 		player.herbXP(20+player.level);
 		if (player.hasPerk(PerkLib.PlantKnowledge)) player.herbXP(20+player.level);
