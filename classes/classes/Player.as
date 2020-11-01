@@ -2868,6 +2868,7 @@ use namespace CoC;
 				{name: 'vampire', score: vampireScore(), minscore: 6},
 				{name: 'jiangshi', score: jiangshiScore(), minscore: 20},
 				{name: 'gargoyle', score: gargoyleScore(), minscore: 20},
+				{name: 'kamaitachi', score: kamaitachiScore(), minscore: 7},
 			];
 
 			ScoreList = ScoreList.filter(function(element:Object, index:int, array:Array):Boolean {
@@ -3582,6 +3583,17 @@ use namespace CoC;
 					} else {
 						if (isTaur()) race = "half orc-taur";
 						else race = "half orc";
+					}
+				}
+			}
+			if (TopRace == "kamaitachi") {
+				if (TopScore >= 7) {
+					if (TopScore >= 18) {
+						race = "Greater kamaitachi";
+					} else if (TopScore >= 15) {
+						race = "kamaitachi";
+					} else {
+						race = "half kamaitachi";
 					}
 				}
 			}

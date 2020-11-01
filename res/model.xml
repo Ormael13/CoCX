@@ -3262,6 +3262,10 @@
 				<show part="arms_bg_pattern/Blightning"/>
 				<show part="legs_pattern/Blightning"/>	
             </case>
+			<case values="Skin.PATTERN_SCAR_WINDSWEPT">
+				<show part="torso_pattern/BwindScars"/>
+				<show part="legs_pattern/BwindScars"/>	
+            </case>
 			<case values="Skin.PATTERN_TIGER_STRIPES">
 				<show part="breasts_pattern/Bstripe"/>
 				<show part="breasts_pattern/Bpstripe"/>
