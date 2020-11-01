@@ -135,7 +135,7 @@ package classes.Items
 		public const WGSWORD:Wardensgreatsword = new Wardensgreatsword();
 		public const YAMARG :WeaponWithPerk = new WeaponWithPerk("YamaRG", "YamaRajaGrasp", "Yama-Raja gloves", "a pair of Yama-Raja gloves", "punch", 0, 400, "These black gloves are made in black leather and an ebony alloy. Their corrupt touch seeks to destroy the pure and innocent. As such, it will seek the weak points of its victims when striking.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.5, 0, 0, 0);
 		public const ZWNDER :Zweihander = new Zweihander();
-		public const UGATANA :Weapon = new Weapon("Uchigatana ","Uchigatana","Uchigatana","a Uchigatana","keen cut",17,680,"A one handed curved bladed weapon that cuts through flesh with the greatest of ease. Can also be wielded with both hands.");
+		public const UGATANA :Weapon = new Weapon("Uchigatana ","Uchigatana","Uchigatana","a Uchigatana","keen cut",15,680,"A one handed curved bladed weapon that cuts through flesh with the greatest of ease. Can also be wielded with both hands.", "Hybrid");
 
 
 		/*

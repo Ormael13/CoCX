@@ -1037,6 +1037,9 @@ use namespace CoC;
 			if (findPerk(PerkLib.LightningStrikes) >= 0 && spe >= 60 && (weaponPerk != "Massive" || weaponPerk != "Large" || weaponPerk != "Dual Large" || weaponPerk != "Small" || weaponPerk != "Dual Small" || !isFistOrFistWeapon())) {
 				attack += ((spe - 50) * 0.3);
 			}//45-105-165
+			if (weaponPerk == "Hybrid" && shieldName == "nothing"){
+				attack *= 1.5;
+			}
 			if (findPerk(PerkLib.StarlightStrikes) >= 0 && spe >= 60 && (weaponPerk == "Small" || weaponPerk == "Dual Small")) {
 				attack += ((spe - 50) * 0.2);
 			}
