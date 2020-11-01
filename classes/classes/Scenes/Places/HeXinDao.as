@@ -600,7 +600,7 @@ public class HeXinDao extends BaseContent
         //if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(3, armors.LAYOARM.shortName, weaponBuy, armors.LAYOARM);
         //addButton(2, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic light armor made of soulmetal
         //addButton(0, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic heavy armor made of soulmetal
-        addButton(1, weapons.UGATANA.shortName, weaponBuy, weapons.UGATANA);//basic armor made of soulmetal that works with unhindered perk xD czyli coś ala bikini lub ogólnie tylko underwear z fragmentami zbroi lewitującymi wokół postaci i tylko w wypadku ataku wroga przesuwające sie aby przyjąć atak
+        addButton(0, weapons.UGATANA.shortName, weaponBuy, weapons.UGATANA);//basic armor made of soulmetal that works with unhindered perk xD czyli coś ala bikini lub ogólnie tylko underwear z fragmentami zbroi lewitującymi wokół postaci i tylko w wypadku ataku wroga przesuwające sie aby przyjąć atak
         if (player.level >= 6) addButton(5, consumables.BANGBM1.shortName, weaponBuy, consumables.BANGBM1);
 		else addButtonDisabled(5, "???", "Req. lvl 6+");
         if (player.level >= 24) addButton(6, consumables.BANGBM2.shortName, weaponBuy, consumables.BANGBM2);
