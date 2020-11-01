@@ -1439,7 +1439,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (player.kamaitachiScore() >=10 && !player.hasPerk(PerkLib.NaturalHerbalism)){
-				outputText("\nGreat knowledges flows throught you mind as you become more Kamaitachi like. It dawns on you that you have aquired a natural affinity for medicine and herbalism, something your species is famous for, heck you can identify every single plant near your camp by name and species now. How usefull!\n");
+				outputText("\nGreat knowledges flows throught you mind as you become more Kamaitachi like. " +
+						"It dawns on you that you have aquired a natural affinity for medicine and herbalism, " +
+						"something your species is famous for, heck you can identify every single plant near your camp by name and species now. " +
+						"<b>Gained Perk: Natural Herbalism</b>\n");
 				player.createPerk(PerkLib.NaturalHerbalism, 0,0,0,0);
 				needNext = true;
 			}

@@ -5475,7 +5475,7 @@ public class PerkLib
                 return player.mouseScore() >= 12;
             }, "Mouse race");
 			HeartOfTheStorm.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-						return player.raijuScore() >= 6 || player.thunderbirdScore() >= 10;
+						return player.raijuScore() >= 6 || player.thunderbirdScore() >= 10 || player.kamaitachiScore() >= 10;
 			}, "Stormborn race");
 			HollowFangs.requireMouthMutationSlot().requirePerk(VampiricBloodsteam)
 				.requireCustomFunction(function (player:Player):Boolean {
@@ -5653,7 +5653,7 @@ public class PerkLib
                 return player.mouseScore() >= 12;
             }, "Mouse race");
 			HeartOfTheStormEvolved.requireLevel(6).requirePerk(HeartOfTheStorm).requireCustomFunction(function (player:Player):Boolean {
-				return player.raijuScore() >= 9 || player.thunderbirdScore() >= 11;
+				return player.raijuScore() >= 9 || player.thunderbirdScore() >= 11 || player.kamaitachiScore() >= 11;
 			}, "Stormborn race");
 			ManticoreMetabolismEvolved.requireLevel(6)
 				.requirePerk(ManticoreMetabolism)
@@ -5988,7 +5988,7 @@ public class PerkLib
                 return player.mouseScore() >= 12;
             }, "Mouse race");
 			HeartOfTheStormFinalForm.requireLevel(18).requirePerk(HeartOfTheStormEvolved).requireCustomFunction(function (player:Player):Boolean {
-				return player.raijuScore() >= 12 || player.thunderbirdScore() >= 12;
+				return player.raijuScore() >= 12 || player.thunderbirdScore() >= 12 || player.kamaitachiScore() >= 12;
 			}, "Stormborn race");
             LactaBovinaOvariesEvolved.requireLevel(18)
 				.requirePerk(LactaBovinaOvaries)
