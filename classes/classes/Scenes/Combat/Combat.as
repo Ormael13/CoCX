@@ -890,6 +890,7 @@ public class Combat extends BaseContent {
         if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) unarmed *= 1.1;
         if (player.findPerk(PerkLib.Lycanthropy) >= 0) unarmed += 8 * (1 + player.newGamePlusMod());
         if (player.arms.type == Arms.MANTIS) unarmed += 15 * (1 + player.newGamePlusMod());
+        if (player.arms.type == Arms.KAMAITACHI) unarmed += 15 * (1 + player.newGamePlusMod());
         if (player.arms.type == Arms.YETI || player.arms.type == Arms.CAT) unarmed += 5 * (1 + player.newGamePlusMod());
         if (player.arms.type == Arms.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
         if (player.arms.type == Arms.BEAR) unarmed += 5 * (1 + player.newGamePlusMod());
