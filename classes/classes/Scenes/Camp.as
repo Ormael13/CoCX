@@ -1552,6 +1552,7 @@ public class Camp extends NPCAwareContent {
 						}
 					}
 				}
+				outputText("\n\n");
 				buttons.add("Zenji", SceneLib.zenjiScene.loverZenjiMainCampMenu).hint("Visit Zenji the troll.");
 			}
 			//Nieve (jako, ze jest sezonowym camp member powinna byc na koncu listy...chyba, ze zrobie cos w stylu utworzenia mini lodowej jaskini dla niej)
@@ -1758,6 +1759,7 @@ public class Camp extends NPCAwareContent {
 					else outputText("Zenji is around your camp, it looks like he’s polishing his tusks and brushing his teeth with something.");
 				}
 			}
+			outputText("\n\n");
 			buttons.add("Zenji", SceneLib.zenjiScene.followerZenjiMainCampMenu).hint("Visit Zenji the troll.");
 		}
 			//Helspawn
@@ -4346,8 +4348,6 @@ public function wakeFromBadEnd():void {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 30;
 			clearOutput();
 			outputText("Text.");
-			if (player.level > 6) player.statPoints += ((5 * player.level) + 60);
-			else player.statPoints += (10 * player.level);
 			doNext(doCamp);
 			return;
 		}
@@ -4845,6 +4845,7 @@ public function wakeFromBadEnd():void {
 		if (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) awardAchievement("Guardian of Notre-Dame", kACHIEVEMENTS.EPIC_GUARDIAN_OF_NOTRE_DAME);
 		if (player.hasPerk(PerkLib.Phylactery)) awardAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA);
 		if (player.jiangshiScore() >= 20) awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
+		//yuki onna achiev - Let It Go!!!
 
 		if (player.hasStatusEffect(StatusEffects.AchievementsNormalShadowTotal)) {
 			//Shadow

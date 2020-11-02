@@ -9856,10 +9856,10 @@ public final class Mutations extends MutationsHelper {
 
         //get partial fur from full if pc face is human
         if (player.hasFur() && rand(3) == 0 && changes < changeLimit && (player.skin.coverage == Skin.COVERAGE_COMPLETE || player.skin.coverage == Skin.COVERAGE_HIGH)) {
-            var color1:String = randomChoice(kamaitachi_hair);
+            var color2:String = randomChoice(kamaitachi_hair);
             outputText("\n\nWhat used to be a dense coat of fur begins to fall in patches on the ground leaving you with just enough fur to cover some area of your body.  <b>Some area of your body are now partially covered with fur!</b>");
             player.skin.coverage = Skin.COVERAGE_LOW;
-            player.coatColor = color1;
+            player.coatColor = color2;
             changes++;
         }
 

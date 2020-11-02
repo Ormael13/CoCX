@@ -203,7 +203,7 @@ import flash.utils.getQualifiedClassName;
 			var temp:Number = 100 + this.level * 15 + this.bonusHP;
 			var baseStat:Number = 0;
 			if (findPerk(PerkLib.IcyFlesh) >= 0) baseStat += this.inte;
-			if (findPerk(PerkLib.HaltedVitals) >= 0) baseStat += this.lib;
+			else if (findPerk(PerkLib.HaltedVitals) >= 0) baseStat += this.lib;
 			else baseStat += this.tou;
 			temp += (baseStat);
 			if (baseStat >= 21) temp += (baseStat*2);
