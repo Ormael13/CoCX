@@ -3699,21 +3699,21 @@ public class Masturbation extends BaseContent {
 				dynStats("sen", -2);
 			}
 			if (player.hasPerk(PerkLib.NukiNutsEvolved)){
-				var cumAmmount:Number = player.cumQ();
-				var payout:Number = 1;
+				var cumAmmount1:Number = player.cumQ();
+				var payout1:Number = 1;
 				//Get rid of extra digits
 				//cumAmmount = int(cumAmmount);
 				//Calculate payout
-				if(cumAmmount > 10) {
-					payout += 2 + int(cumAmmount/100)*2;
+				if(cumAmmount1 > 10) {
+					payout1 += 2 + int(cumAmmount1/100)*2;
 				}
 				//Reduce payout if it would push past
 				if (player.hasPerk(PerkLib.NukiNutsFinalForm)){
-					payout *= 2;
+					payout1 *= 2;
 				}
-				if(payout > 0) {
-					player.gems += payout;
-					outputText("\n\nWhen you wake up you find " + payout + " gems in the puddle of spunge your " + cockDescript(0) + " created.</b>\n\n");
+				if(payout1 > 0) {
+					player.gems += payout1;
+					outputText("\n\nWhen you wake up you find " + payout1 + " gems in the puddle of spunge your " + cockDescript(0) + " created.</b>\n\n");
 				}
 			}
 			doNext(camp.returnToCampUseOneHour);

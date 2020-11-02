@@ -2542,15 +2542,15 @@ import flash.utils.getQualifiedClassName;
 			if(hasStatusEffect(StatusEffects.KamaitachiBleed)) {
 				//This wounds never heals unless by magic
 				//Deal damage if still wounded.
-				var store3:Number = (player.str + player.spe) * 2;
-				if (game.player.findPerk(PerkLib.ThirstForBlood) >= 0) store3 *= 1.5;
-				store3 = Math.round(store3);
-				if (statusEffectv2(StatusEffects.KamaitachiBleed) > 0) store3 *= statusEffectv2(StatusEffects.KamaitachiBleed);
-				store3 += statusEffectv1(StatusEffects.KamaitachiBleed); //Kamaitachi bleed stacks on itself growing ever stronger
-				store3 += maxHP()*0.02;
-				store3 = SceneLib.combat.doDamage(store3);
-				if(plural) outputText(capitalA + short + " bleed profusely from the deep wounds your scythes left behind. <b>(<font color=\"#800000\">" + store3 + "</font>)</b>\n\n");
-				else outputText(capitalA + short + " bleeds profusely from the deep wounds your scythes left behind. <b>(<font color=\"#800000\">" + store3 + "</font>)</b>\n\n");
+				var store13:Number = (player.str + player.spe) * 2;
+				if (game.player.findPerk(PerkLib.ThirstForBlood) >= 0) store13 *= 1.5;
+				store13 = Math.round(store13);
+				if (statusEffectv2(StatusEffects.KamaitachiBleed) > 0) store13 *= statusEffectv2(StatusEffects.KamaitachiBleed);
+				store13 += statusEffectv1(StatusEffects.KamaitachiBleed); //Kamaitachi bleed stacks on itself growing ever stronger
+				store13 += maxHP()*0.02;
+				store13 = SceneLib.combat.doDamage(store13);
+				if(plural) outputText(capitalA + short + " bleed profusely from the deep wounds your scythes left behind. <b>(<font color=\"#800000\">" + store13 + "</font>)</b>\n\n");
+				else outputText(capitalA + short + " bleeds profusely from the deep wounds your scythes left behind. <b>(<font color=\"#800000\">" + store13 + "</font>)</b>\n\n");
 			}
 			if(hasStatusEffect(StatusEffects.GoreBleed)) {
 				//Countdown to heal

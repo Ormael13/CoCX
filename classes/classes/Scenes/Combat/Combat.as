@@ -1132,9 +1132,9 @@ public class Combat extends BaseContent {
                     } else {
                         player.wrath -= multimeleesmallattacksCost;
                         if (player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && player.weaponPerk == "Dual Small") {
-                            if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 8) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 3;
-                            else if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 4) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
-                            else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
+                            if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 8) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 6;
+                            else if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 4) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 4;
+                            else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
                         }
                     }
                 }
