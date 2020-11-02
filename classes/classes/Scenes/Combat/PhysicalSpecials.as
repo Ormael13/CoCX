@@ -40,7 +40,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			if (player.hasPerk(PerkLib.PowerShot)) {
 				bd = buttons.add("Power Shoot", powerShootMenu).hint("Do a single way more powerfull wrath-enhanced range strike.");
-				if (player.weaponRangePerk != "Bow" || player.weaponRangePerk != "Throwing") {
+				if (player.weaponRangePerk != "Bow" && player.weaponRangePerk != "Throwing") {
 					bd.disable("<b>You need to use bow or throwing weapon before you can use Power Shoot.</b>\n\n");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}

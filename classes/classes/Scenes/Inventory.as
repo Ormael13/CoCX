@@ -197,21 +197,31 @@ use namespace CoC;
 			EngineCore.displayHeader("Potions");
 			//List all availlable potions quantity
 			outputText("<b><u>Availlable potions:</u></b>\n");
-			outputText("<b>Poultrice:</b> : " + player.getKeyItem("poultrice").value1 + ")\n");
+			for (var ID:String in PotionType.ALL_POTIONS) {
+				var potionType: PotionType = PotionType.ALL_POTIONS[ID];
+				var potionCount: Number = player.numberOfPotions(potionType);
+				outputText("<b>"+potionType.name+":</b> : " + potionCount + ")\n");
+			}
+			/*
+			outputText("<b>Poultice:</b> : " + player.getKeyItem("poultice").value1 + ")\n");
 			outputText("<b>Energy drink:</b> : " + player.getKeyItem("energy drink").value1 + ")\n");
 			outputText("<b>Cure:</b> : " + player.getKeyItem("cure").value1 + ")\n");
 			outputText("<b>Painkiller:</b> : " + player.getKeyItem("painkiller").value1 + ")\n");
 			outputText("<b>Stimulant:</b> : " + player.getKeyItem("stimulant").value1 + ")\n");
 			outputText("<b>Perfume:</b> : " + player.getKeyItem("perfume").value1 + ")\n");
-			outputText("\n\nWhich item will you use? (To discard unwanted items, hold Shift then click the item.)");
+			*/
+			outputText("\n\nWhich item will you use?");
+
 			menu();
-			addButton(0, "Poultrice", SceneLib.combat.Poultrice, false).disableIf(player.getKeyItem("poultrice").value1 == 0); //Player returns to the combat menu on cancel
-			addButton(1, "Energy drink", SceneLib.combat.EnergyDrink, false).disableIf(player.getKeyItem("energy drink").value1 == 0); //Player returns to the combat menu on cancel
-			addButton(2, "Cure", SceneLib.combat.Cure, false).disableIf(player.getKeyItem("cure").value1 == 0); //Player returns to the combat menu on cancel
-			addButton(3, "Painkiller", SceneLib.combat.Painkiller, false).disableIf(player.getKeyItem("painkiller").value1 == 0); //Player returns to the combat menu on cancel
-			addButton(4, "Stimulant", SceneLib.combat.Stimulant, false).disableIf(player.getKeyItem("stimulant").value1 == 0); //Player returns to the combat menu on cancel
-			addButton(5, "Perfume", SceneLib.combat.Perfume, false).disableIf(player.getKeyItem("perfume").value1 == 0); //Player returns to the combat menu on cancel
-			//Button for alchemical items
+			var position:Number = 0;
+			for (ID in PotionType.ALL_POTIONS) {
+				potionType = PotionType.ALL_POTIONS[ID];
+				potionCount = player.numberOfPotions(potionType);
+				var potionEffect:Function = potionType.effect;
+				addButton(position, potionType.name, player.usePotion, potionType).disableIf(potionCount == 0);
+				position++;
+			}
+
 			addButton(14, "Back", SceneLib.combat.combatMenu, false); //Player returns to the combat menu on cancel
 //Gone		menuLoc = 1;
 

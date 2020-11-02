@@ -1552,6 +1552,7 @@ public class Camp extends NPCAwareContent {
 						}
 					}
 				}
+				outputText("\n\n");
 				buttons.add("Zenji", SceneLib.zenjiScene.loverZenjiMainCampMenu).hint("Visit Zenji the troll.");
 			}
 			//Nieve (jako, ze jest sezonowym camp member powinna byc na koncu listy...chyba, ze zrobie cos w stylu utworzenia mini lodowej jaskini dla niej)
@@ -1758,6 +1759,7 @@ public class Camp extends NPCAwareContent {
 					else outputText("Zenji is around your camp, it looks like he’s polishing his tusks and brushing his teeth with something.");
 				}
 			}
+			outputText("\n\n");
 			buttons.add("Zenji", SceneLib.zenjiScene.followerZenjiMainCampMenu).hint("Visit Zenji the troll.");
 		}
 			//Helspawn
@@ -1997,44 +1999,56 @@ public class Camp extends NPCAwareContent {
 		hideMenus();
 		menu();
 		clearOutput();
-		outputText("You move to Rathazul’s side alchemy equipment. Using these tools you can process raw natural materials into poultices and medicines. What would you like to craft? THIS IS WIP");
+		outputText("You move to Rathazul’s side alchemy equipment. Using these tools you can process raw natural materials into poultices and medicines.\n\nWhat would you like to craft?");
 		//Poultrice
-		addButton(0, "Poultrice", HerbalismCraftItem,CoC.instance.consumables.HEALHERB, "healing herb", "poultrice").hint("Craft a Poultrice using healing herb.\nHealing herbs currently owned "+player.itemCount(CoC.instance.consumables.HEALHERB)+"")
-				.disableIf(player.itemCount(CoC.instance.consumables.HEALHERB) == 0, "You lack the ingrediants to craft this item.\nHealing herbs currently owned "+player.itemCount(CoC.instance.consumables.HEALHERB)+"");
+		addButton(0, "Poultice", HerbalismCraftItem,CoC.instance.consumables.HEALHERB, "healing herb", PotionType.POULTICE).hint("Craft a Poultrice using healing herb.\n\nHealing herbs currently owned "+player.itemCount(CoC.instance.consumables.HEALHERB)+"")
+				.disableIf(player.itemCount(CoC.instance.consumables.HEALHERB) == 0, "You lack the ingrediants to craft this item.\n\nHealing herbs currently owned "+player.itemCount(CoC.instance.consumables.HEALHERB)+"");
 		//Energy drink
-		addButton(1, "Energy drink", HerbalismCraftItem,CoC.instance.consumables.MOONGRASS, "moon grass", "energy drink").hint("Craft a Energy drink using moon grass.\nMoon grass currently owned "+player.itemCount(CoC.instance.consumables.MOONGRASS)+"");
-		if (player.herbalismLevel >= 3) button(1).disable("You lack the skill to craft this item.\nRequire Herbalism level 3");
-		if (player.itemCount(CoC.instance.consumables.MOONGRASS) == 0) button(1).disable("You lack the ingrediants to craft this item. \nMoon grass currently owned "+player.itemCount(CoC.instance.consumables.MOONGRASS)+"");
+		addButton(1, "Energy drink", HerbalismCraftItem,CoC.instance.consumables.MOONGRASS, "moon grass", PotionType.ENERGYDRINK).hint("Craft a Energy drink using moon grass.\n\nMoon grass currently owned "+player.itemCount(CoC.instance.consumables.MOONGRASS)+"");
+		if (player.herbalismLevel < 3) button(1).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 3");
+		if (player.itemCount(CoC.instance.consumables.MOONGRASS) == 0) button(1).disable("You lack the ingrediants to craft this item. \n\nMoon grass currently owned "+player.itemCount(CoC.instance.consumables.MOONGRASS)+"");
 		//Cure
-		addButton(2, "Cure", HerbalismCraftItem,CoC.instance.consumables.SNAKEBANE, "snakebane flower", "cure").hint("Craft a Cure using snakebane flower.\nSnakebane flower currently owned "+player.itemCount(CoC.instance.consumables.SNAKEBANE)+"");
-		if (player.herbalismLevel >= 5) button(2).disable("You lack the skill to craft this item.\nRequire Herbalism level 5");
-		if (player.itemCount(CoC.instance.consumables.SNAKEBANE) == 0) button(2).disable("You lack the ingrediants to craft this item. \nSnakebane flower currently owned "+player.itemCount(CoC.instance.consumables.SNAKEBANE)+"");
+		addButton(2, "Cure", HerbalismCraftItem,CoC.instance.consumables.SNAKEBANE, "snakebane flower", PotionType.CURE).hint("Craft a Cure using snakebane flower.\n\nSnakebane flower currently owned "+player.itemCount(CoC.instance.consumables.SNAKEBANE)+"");
+		if (player.herbalismLevel < 5) button(2).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 5");
+		if (player.itemCount(CoC.instance.consumables.SNAKEBANE) == 0) button(2).disable("You lack the ingrediants to craft this item. \n\nSnakebane flower currently owned "+player.itemCount(CoC.instance.consumables.SNAKEBANE)+"");
 		//Painkiller
-		addButton(3, "Painkiller", HerbalismCraftItem,CoC.instance.consumables.IRONWEED, "ironweed", "painkiller").hint("Craft a Painkiller using ironweed.\nIronweed currently owned "+player.itemCount(CoC.instance.consumables.IRONWEED)+"");
-		if (player.herbalismLevel >= 10) button(3).disable("You lack the skill to craft this item.\nRequire Herbalism level 10");
-		if (player.itemCount(CoC.instance.consumables.IRONWEED) == 0) button(3).disable("You lack the ingrediants to craft this item. \nIronweed currently owned "+player.itemCount(CoC.instance.consumables.IRONWEED)+"");
+		addButton(3, "Painkiller", HerbalismCraftItem,CoC.instance.consumables.IRONWEED, "ironweed", PotionType.PAINKILLER).hint("Craft a Painkiller using ironweed.\n\nIronweed currently owned "+player.itemCount(CoC.instance.consumables.IRONWEED)+"");
+		if (player.herbalismLevel < 10) button(3).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 10");
+		if (player.itemCount(CoC.instance.consumables.IRONWEED) == 0) button(3).disable("You lack the ingrediants to craft this item. \n\nIronweed currently owned "+player.itemCount(CoC.instance.consumables.IRONWEED)+"");
 		//Stimulant
-		addButton(4, "Stimulant", HerbalismCraftItem,CoC.instance.consumables.HEALHERB, "blade ferns", "stimulant").hint("Craft a Stimulant using a handfull of blade ferns.\nBlade ferns currently owned "+player.itemCount(CoC.instance.consumables.BLADEFERN)+"");
-		if (player.herbalismLevel >= 10) button(4).disable("You lack the skill to craft this item.\nRequire Herbalism level 10");
-		if (player.itemCount(CoC.instance.consumables.BLADEFERN) == 0) button(4).disable("You lack the ingrediants to craft this item. \nBlade ferns currently owned "+player.itemCount(CoC.instance.consumables.BLADEFERN)+"");
+		addButton(4, "Stimulant", HerbalismCraftItem,CoC.instance.consumables.BLADEFERN, "blade ferns", PotionType.STIMULANT).hint("Craft a Stimulant using a handfull of blade ferns.\n\nBlade ferns currently owned "+player.itemCount(CoC.instance.consumables.BLADEFERN)+"");
+		if (player.herbalismLevel < 10) button(4).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 10");
+		if (player.itemCount(CoC.instance.consumables.BLADEFERN) == 0) button(4).disable("You lack the ingrediants to craft this item. \n\nBlade ferns currently owned "+player.itemCount(CoC.instance.consumables.BLADEFERN)+"");
 		//Perfume
-		addButton(5, "Perfume", HerbalismCraftItem,CoC.instance.consumables.RAUNENECT, "alraune nectar", "perfume").hint("Craft a Perfume using Alraune nectar.\nAlraune nectar currently owned "+player.itemCount(CoC.instance.consumables.RAUNENECT)+"");
-		if (player.herbalismLevel >= 10) button(5).disable("You lack the skill to craft this item.\nRequire Herbalism level 10");
-		if (player.itemCount(CoC.instance.consumables.RAUNENECT) == 0) button(5).disable("You lack the ingrediants to craft this item. \nAlraune nectar currently owned "+player.itemCount(CoC.instance.consumables.RAUNENECT)+"");
+		addButton(5, "Perfume", HerbalismCraftItem,CoC.instance.consumables.RAUNENECT, "alraune nectar", PotionType.PERFUME).hint("Craft a Perfume using Alraune nectar.\n\nAlraune nectar currently owned "+player.itemCount(CoC.instance.consumables.RAUNENECT)+"");
+		if (player.herbalismLevel < 10) button(5).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 10");
+		if (player.itemCount(CoC.instance.consumables.RAUNENECT) == 0) button(5).disable("You lack the ingrediants to craft this item. \n\nAlraune nectar currently owned "+player.itemCount(CoC.instance.consumables.RAUNENECT)+"");
 		addButton(14, "Back", campActions);
 	}
 
-	private function HerbalismCraftItem(ItemID:SimpleConsumable, IngrediantName:String, KeyItemName:String):void{
+	private function HerbalismCraftItem(ItemID:SimpleConsumable, IngrediantName:String, CraftingResult:PotionType):void {
 		clearOutput();
-		if (player.hasKeyItem(KeyItemName)){
-			player.getKeyItem(KeyItemName).value1 += 1;
+		menu();
+		outputText("Refine "+IngrediantName+" into a "+CraftingResult.name+"?");
+		addButton(0, "Craft", HerbalismCraftItem2, ItemID, IngrediantName, CraftingResult);
+		addButton(1, "Cancel", HerbalismMenu);
+	}
+
+	public function HerbalismCraftItem2(ItemID:SimpleConsumable, IngrediantName:String, CraftingResult:PotionType):void {
+		clearOutput();
+		player.changeNumberOfPotions(CraftingResult,+1);
+		if (player.hasPerk(PerkLib.NaturalHerbalism)){
+			player.changeNumberOfPotions(CraftingResult,+2);
 		}
-		else {
-			player.createKeyItem(KeyItemName, 1, 0, 0, 0);
+		outputText("You spend the better part of the next hour refining the "+IngrediantName+" into a "+CraftingResult.name+" adding it to your bag.");
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) {
+			outputText("Your natural knowledge of herbalism allowed you two craft two additionnal "+CraftingResult.name+".");
 		}
-		outputText("You spend the better part of the next hour refining the "+IngrediantName+" into a "+KeyItemName+" adding it to your bag.");
 		player.destroyItems(ItemID, 1);
 		player.herbXP(20+player.level);
+		if (player.hasPerk(PerkLib.PlantKnowledge)) player.herbXP(20+player.level);
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) player.herbXP(20+player.level);
+		doNext(HerbalismMenu);
 	}
 
 	private function MagicWardMenu():void {
@@ -4315,10 +4329,10 @@ public function wakeFromBadEnd():void {
 				player.createPerk(PerkLib.ChimericalBodySemiPeerlessStage, 0, 0, 0, 0);
 			}
 			if (player.perkv1(PerkLib.AscensionWisdom) > 50) {
-				var refund:int = 0;
-				refund += player.perkv1(PerkLib.AscensionWisdom) - 50;
+				var refund1:int = 0;
+				refund1 += player.perkv1(PerkLib.AscensionWisdom) - 50;
 				player.setPerkValue(PerkLib.AscensionWisdom, 1, 50);
-				player.ascensionPerkPoints += refund;
+				player.ascensionPerkPoints += refund1;
 			}
 			var SphereMastery:Number = 10;
 			if (player.hasPerk(PerkLib.KitsuneThyroidGlandFinalForm)) SphereMastery += 15;
@@ -4831,6 +4845,7 @@ public function wakeFromBadEnd():void {
 		if (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) awardAchievement("Guardian of Notre-Dame", kACHIEVEMENTS.EPIC_GUARDIAN_OF_NOTRE_DAME);
 		if (player.hasPerk(PerkLib.Phylactery)) awardAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA);
 		if (player.jiangshiScore() >= 20) awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
+		//yuki onna achiev - Let It Go!!!
 
 		if (player.hasStatusEffect(StatusEffects.AchievementsNormalShadowTotal)) {
 			//Shadow

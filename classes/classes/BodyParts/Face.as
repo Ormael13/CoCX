@@ -39,7 +39,7 @@ public class Face extends SaveableBodyPart {
 	public static const DRAGON_FANGS:int	 = 30;
 	public static const DEVIL_FANGS:int 	 = 31;
 	public static const ONI_TEETH:int   	 = 32;
-	public static const RAIJU_FANGS:int 	 = 33;
+	public static const WEASEL:int 	 		 = 33;
 	public static const VAMPIRE:int     	 = 34;
 	public static const BUCKTOOTH:int   	 = 35;
 	public static const JABBERWOCKY:int 	 = 36;

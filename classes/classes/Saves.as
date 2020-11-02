@@ -878,6 +878,9 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.lust = player.lust;
 		saveFile.data.teaseLevel = player.teaseLevel;
 		saveFile.data.teaseXP = player.teaseXP;
+		//Herbalism
+		saveFile.data.herbalismLevel = player.herbalismLevel;
+		saveFile.data.herbalismXP = player.herbalismXP;
 		//Prison STATS
 		saveFile.data.hunger = player.hunger;
 		saveFile.data.esteem = player.esteem;
@@ -1066,7 +1069,14 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.keyItems[i].value3 = player.keyItems[i].value3;
 			saveFile.data.keyItems[i].value4 = player.keyItems[i].value4;
 		}
-		//Set storage slot array
+		// Potions
+		saveFile.data.potions = [];
+		for (i = 0; i < player.potions.length; i++) {
+			saveFile.data.potions[i] = {};
+			saveFile.data.potions[i].id = player.potions[i].type.ID;
+			saveFile.data.potions[i].count = player.potions[i].count;
+		}
+		// Set storage slot array
 		for (i = 0; i < itemStorageGet().length; i++)
 		{
 			saveFile.data.itemStorage.push([]);
@@ -1794,6 +1804,15 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.teaseLevel = 0;
 		else
 			player.teaseLevel = saveFile.data.teaseLevel;
+		//Herbalism
+		if (saveFile.data.herbalismXP == undefined)
+			player.herbalismXP = 0;
+		else
+			player.herbalismXP = saveFile.data.herbalismXP;
+		if (saveFile.data.herbalismLevel == undefined)
+			player.herbalismLevel = 0;
+		else
+			player.herbalismLevel = saveFile.data.herbalismLevel;
 		//Prison STATS
 		if (saveFile.data.hunger == undefined)
 			player.hunger = 50;
@@ -2374,6 +2393,20 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else {
 			for (i = 0; i < saveFile.data.isabellaOffspringData.length; i += 2) {
 				SceneLib.isabellaScene.isabellaOffspringData.push(saveFile.data.isabellaOffspringData[i], saveFile.data.isabellaOffspringData[i+1])
+			}
+		}
+
+		// Potions
+		if (saveFile.data.potions) {
+			for (i = 0; i< saveFile.data.potions.length; i++) {
+				var potionId:String = saveFile.data.potions[i].id;
+				var potionCount:Number = saveFile.data.potions[i].count;
+				var potionType:PotionType = PotionType.ALL_POTIONS[potionId];
+				if (potionType) {
+					player.potions.push( { type: potionType, count: potionCount});
+				} else {
+					trace("/!\\ Unknown potion ID "+ potionId);
+				}
 			}
 		}
 

@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes 
+package classes.Scenes
 {
 import classes.*;
 import classes.BodyParts.Antennae;
@@ -56,14 +56,14 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Stats.Buff;
 
 use namespace CoC;
-	
+
 	public class Soulforce extends BaseContent
 	{
 		public var tamaniDaughtersScene:TamainsDaughtersScene = new TamainsDaughtersScene();
 		public var tamaniScene:TamaniScene = new TamaniScene();
 		public var izumiScenes:IzumiScene = new IzumiScene();
 		public var wolrdtreeScene:WorldTree = new WorldTree();
-		
+
 		public function accessSoulforceMenu():void {
 			clearOutput();
 			if (player.level >= 1 && player.findPerk(PerkLib.JobSoulCultivator) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 0) flags[kFLAGS.SOUL_CULTIVATION] += 1;
@@ -295,11 +295,11 @@ use namespace CoC;
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack2():void {
-			
+
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack3():void {
-			
+
 			doNext(SoulforceCheats);
 		}
 		public function AddMaxBackpack4():void {
@@ -1228,7 +1228,7 @@ public function FightHellfireSnail():void {
 			}
 			BodyStateMenu();
 		}
-		
+
 				/*if (player.breastRows.length == 0) {
 					outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
 					player.createBreastRow();
@@ -1638,7 +1638,7 @@ public function FightHellfireSnail():void {
 				addButton(8, "GreenGel", AddGreenGel).hint("Add 1 Green Gel.");
 				addButton(9, "DragonScale", AddDragonscale).hint("Add 1 Dragonscale.");
 				addButton(10, "S.Shard", AddShard).hint("Add 1 S.Shard.");//addButton(10, "", ).hint("Add 1 .");
-				//addButton(11, "", ).hint("Add 1 .");
+				addButton(11, "HEALHERB", AddHerb).hint("Add 1 HEALHERB.");
 				//addButton(12, "", ).hint("Add 1 .");
 				addButton(13, "-2-", MaterialMenu, page + 1);
 				addButton(14, "Back", SoulforceCheats);
@@ -1699,7 +1699,7 @@ public function FightHellfireSnail():void {
 				addButton(14, "Back", SoulforceCheats);
 			}
 		}
-		
+
 		public function AddEnergyCore():void {
 			outputText("\n\n<b>(Gained 1 Energy Core!)</b>\n\n");
 			inventory.takeItem(useables.ENECORE, curry(MaterialMenu, 2));
@@ -1749,6 +1749,10 @@ public function FightHellfireSnail():void {
 		public function AddShard():void {
 			outputText("\n\n<b>(Gained 1 Shard!)</b>\n\n");
 			inventory.takeItem(useables.S_SHARD, curry(MaterialMenu, 1));
+		}
+		public function AddHerb():void {
+			outputText("\n\n<b>(Gained 1 Shard!)</b>\n\n");
+			inventory.takeItem(consumables.HEALHERB, curry(MaterialMenu, 1));
 		}
 		public function AddFreshFish():void {
 			outputText("\n\n<b>(Gained 1 Fresh Fish!)</b>\n\n");
@@ -3663,7 +3667,7 @@ public function FightHellfireSnail():void {
 				doNext(SoulSense);
 			}
 		}
-		
+
 		public function findWorldTree():void {
 			if (player.soulforce >= 100) {
 				player.soulforce -= 100;
@@ -3687,4 +3691,4 @@ public function FightHellfireSnail():void {
 			}
 		}
 	}
-}
+}

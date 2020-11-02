@@ -465,6 +465,8 @@ public class HeXinDao extends BaseContent
             addButton(3, "TrapOil", buyItem,consumables.TRAPOIL,sayLine(consumables.TRAPOIL,"sand trap"),onBuyString).hint("Buy a vial of trap oil.");
             addButton(4, "Icicle", buyItem,consumables.ICICLE_,sayLine(consumables.ICICLE_,"ice shard"),onBuyString).hint("Buy an icicle.");
             addButton(5, "S.Delight", buyItem,consumables.SDELITE,sayLine(consumables.SDELITE,"Succubi's Delight"),onBuyString).hint("Buy a bottle of 'Succubi's Delight'.");
+            addButton(5, "W.Emerald", buyItem,consumables.W_EMERALD,sayLine(consumables.W_EMERALD,"Windstorm Emerald"),onBuyString).hint("Buy a 'Windstorm Emerald'.");
+
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
         }
@@ -547,7 +549,7 @@ public class HeXinDao extends BaseContent
         addButton(1, "Shelf 1", soulequipmentshelf1);
         addButton(2, "Shelf 2", soulequipmentshelf2);
         addButton(3, "Shelf 3", soulequipmentshelf3);//armors and consumable
-        //addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
+		//addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
         //addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD
         //addButton(12, "Talk", ).hint("Tak with .");
         addButton(5, undergarments.STSHIRT.shortName, weaponBuy, undergarments.STSHIRT);
@@ -572,33 +574,34 @@ public class HeXinDao extends BaseContent
 		addButton(8, weapons.SNAKESW.shortName, weaponBuy, weapons.SNAKESW);
 		//addButton(9, Changdao
         addButton(10, weapons.FLYWHIS.shortName, weaponBuy, weapons.FLYWHIS);
-        addButton(11, shields.MABRACE.shortName, weaponBuy, shields.MABRACE);
+        addButton(11, weapons.CHAKRAM.shortName, weaponBuy, weapons.CHAKRAM);
+        addButton(12, shields.MABRACE.shortName, weaponBuy, shields.MABRACE);
         addButton(14, "Back", serenamerchant);
     }
     public function soulequipmentshelf2():void {
         menu();
-        addButton(0, weapons.KATANA.shortName, weaponBuy, weapons.KATANA);
-        addButton(1, weapons.NODACHI.shortName, weaponBuy, weapons.NODACHI);
-        addButton(2, weapons.RCLAYMO.shortName, weaponBuy, weapons.RCLAYMO);
-        addButton(3, weapons.SCLAYMO.shortName, weaponBuy, weapons.SCLAYMO);
-        addButton(4, weapons.RIBBON.shortName, weaponBuy, weapons.RIBBON);
+        addButton(0, weapons.UGATANA.shortName, weaponBuy, weapons.UGATANA);
+        addButton(1, weapons.KATANA.shortName, weaponBuy, weapons.KATANA);
+        addButton(2, weapons.NODACHI.shortName, weaponBuy, weapons.NODACHI);
+        addButton(3, weapons.RCLAYMO.shortName, weaponBuy, weapons.RCLAYMO);
+        addButton(4, weapons.SCLAYMO.shortName, weaponBuy, weapons.SCLAYMO);
         addButton(5, weapons.S_GAUNT.shortName, weaponBuy, weapons.S_GAUNT);
         addButton(6, weapons.CLAWS.shortName, weaponBuy, weapons.CLAWS);
-        addButton(7, weapons.TCLAYMO.shortName, weaponBuy, weapons.TCLAYMO);
-        addButton(8, weapons.ACLAYMO.shortName, weaponBuy, weapons.ACLAYMO);
-        addButton(9, weapons.WHIP.shortName, weaponBuy, weapons.WHIP);
-        addButton(10, weapons.PWHIP.shortName, weaponBuy, weapons.PWHIP);
-        addButton(11, weapons.ZWNDER.shortName, weaponBuy, weapons.ZWNDER);
-        addButton(12, weapons.PRURUMI.shortName, weaponBuy, weapons.PRURUMI);
-        addButton(13, weapons.CHAKRAM.shortName, weaponBuy, weapons.CHAKRAM);
+        addButton(7, weapons.RIBBON.shortName, weaponBuy, weapons.RIBBON);
+        addButton(8, weapons.TCLAYMO.shortName, weaponBuy, weapons.TCLAYMO);
+        addButton(9, weapons.ACLAYMO.shortName, weaponBuy, weapons.ACLAYMO);
+        addButton(10, weapons.WHIP.shortName, weaponBuy, weapons.WHIP);
+        addButton(11, weapons.PWHIP.shortName, weaponBuy, weapons.PWHIP);
+        addButton(12, weapons.ZWNDER.shortName, weaponBuy, weapons.ZWNDER);
+        addButton(13, weapons.PRURUMI.shortName, weaponBuy, weapons.PRURUMI);
         addButton(14, "Back", serenamerchant);
     }
     public function soulequipmentshelf3():void {
         menu();
         //if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(3, armors.LAYOARM.shortName, weaponBuy, armors.LAYOARM);
+        //addButton(1, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic armor made of soulmetal that works with unhindered perk xD czyli coś ala bikini lub ogólnie tylko underwear z fragmentami zbroi lewitującymi wokół postaci i tylko w wypadku ataku wroga przesuwające sie aby przyjąć atak
         //addButton(2, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic light armor made of soulmetal
         //addButton(0, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic heavy armor made of soulmetal
-        //addButton(1, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic armor made of soulmetal that works with unhindered perk xD czyli coś ala bikini lub ogólnie tylko underwear z fragmentami zbroi lewitującymi wokół postaci i tylko w wypadku ataku wroga przesuwające sie aby przyjąć atak
         if (player.level >= 6) addButton(5, consumables.BANGBM1.shortName, weaponBuy, consumables.BANGBM1);
 		else addButtonDisabled(5, "???", "Req. lvl 6+");
         if (player.level >= 24) addButton(6, consumables.BANGBM2.shortName, weaponBuy, consumables.BANGBM2);

@@ -354,6 +354,7 @@ private function talkWhitney():void {
 	if(player.inte100 < 20) dynStats("int", 1);
 	if(player.inte100 < 30) dynStats("int", .5);
 	if(player.inte100 < 40) dynStats("int", .5);
+	player.trainStat("int", 1, 25);
 	dynStats("lus", -5);
 	doNext(camp.returnToCampUseOneHour);
 	//+3 int if less than 15, +2 int if less 20, +1 int if less than 30, +.5 int if less than 40.
@@ -377,6 +378,7 @@ private function breastMilkerNoPurchase():void {
 	if (player.inte100 < 20) dynStats("int", 1);
 	if (player.inte100 < 30) dynStats("int", .5);
 	if (player.inte100 < 40) dynStats("int", .5);
+	player.trainStat("int", 1, 25);
 }
 
 public function workFarm():void {
@@ -454,6 +456,8 @@ public function workFarm():void {
 		//always +1 str/tou till 25, then 50% chance.
 		if (player.str100 <= 25 || rand(2) == 0) dynStats("str", 1);
 		if (player.tou100 <= 25 || rand(2) == 0) dynStats("tou", 1);
+		player.trainStat("str", 1, 50);
+		player.trainStat("tou", 1, 50);
 		player.gems += 5;
 		fatigue(20);
 		doNext(camp.returnToCampUseOneHour);
@@ -465,6 +469,8 @@ public function workFarm():void {
 	//always +1 spe/tou till 25, then 50% chance.
 	if (player.spe100 <= 25 || rand(2) == 0) dynStats("spe", 1);
 	if (player.tou100 <= 25 || rand(2) == 0) dynStats("tou", 1);
+	player.trainStat("spe", 1, 25);
+	player.trainStat("tou", 1, 25);
 	fatigue(20);
 	//(75% chance normal pepper, 25% chance \"<i>rare</i>\" pepper)
 	var itype:ItemType;
@@ -565,21 +571,25 @@ public function exploreFarm():void {
 		//Less than 30 speed (+2 speed)
 		if(player.spe100 < 30) {
 			dynStats("spe", 2);
+			player.trainStat("spe", 1, 50);
 			outputText("Whitney easily outpaces you, leaving you so far behind that she laps around the farm twice for each pass you make.");
 		}
 		//Less than 50 speed (+1 speed)
 		else if(player.spe100 < 50) {
 			dynStats("spe", 1);
+			player.trainStat("spe", 1, 50);
 			outputText("Whitney is still faster than you, and manages to get far enough ahead of you to disappear from time to time.");
 		}
 		//Less than 70 speed (+.75 speed)
 		else if(player.spe100 < 70) {
 			dynStats("spe", .75);
+			player.trainStat("spe", 1, 50);
 			outputText("Whitney and you are evenly matched, and the two of you run together for a while, each pushing yourself harder in an effort to best the other.");
 		}
 		//Else (+.5 speed)
 		else {
 			dynStats("spe", .5);
+			player.trainStat("spe", 1, 50);
 			outputText("Whitney falls behind, unable to cope with your speed as you tear around the farm.");
 		}
 		outputText("\n\nAfterwards, the both of you lie back against a tree, panting heavily and exchanging pleasantries.  Once you've both had a chance to rest, she bids you farewell and returns to her labors, leaving you to journey home to camp.");

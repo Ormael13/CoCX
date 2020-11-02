@@ -183,9 +183,9 @@ private function accessPage3FaceMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedOniFace) && player.faceType == Face.ONI_TEETH) addButtonDisabled(4, "Oni", "You already have oni fangs.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedOniFace) && player.faceType != Face.ONI_TEETH && player.soulforce < 100) addButtonDisabled(4, "Oni", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(4, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedRaijuFace) && player.faceType != Face.RAIJU_FANGS && player.soulforce >= 100) addButton(5, "Raiju", metamorphRaijuFace);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuFace) && player.faceType == Face.RAIJU_FANGS) addButtonDisabled(5, "Raiju", "You already have raiju fangs.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuFace) && player.faceType != Face.RAIJU_FANGS && player.soulforce < 100) addButtonDisabled(5, "Raiju", "You not have enough Soulforce for this metamorphosis.");
+	if (player.hasStatusEffect(StatusEffects.UnlockedRaijuFace) && player.faceType != Face.WEASEL && player.soulforce >= 100) addButton(5, "Raiju", metamorphRaijuFace);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuFace) && player.faceType == Face.WEASEL) addButtonDisabled(5, "Raiju", "You already have weasel fangs.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuFace) && player.faceType != Face.WEASEL && player.soulforce < 100) addButtonDisabled(5, "Raiju", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(5, "???", "You not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedVampireFace) && player.faceType != Face.VAMPIRE && player.soulforce >= 100) addButton(6, "Vampire", metamorphVampireFace);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireFace) && player.faceType == Face.VAMPIRE) addButtonDisabled(6, "Vampire", "You already have vampire fangs.");
@@ -2179,7 +2179,7 @@ private function metamorphRaijuFace():void {
 	player.soulforce -= 100;
 	if (player.faceType != Face.HUMAN) outputText("our face suddenly mold back into it’s former human shape. However y");
 	outputText("ou feel your two canines grow bigger and slightly sharper, not unlike those of a weasel or in your case a raiju. <b>You now have raiju canines.</b>");
-	player.faceType = Face.RAIJU_FANGS;
+	player.faceType = Face.WEASEL;
 	doNext(accessPage3FaceMenu);
 }
 private function metamorphRaijuMane():void {
@@ -3474,4 +3474,4 @@ private function restoreHumanArms():void {
 	player.arms.type = Arms.HUMAN;
 }
 	}
-}
+}
