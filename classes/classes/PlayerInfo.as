@@ -1107,19 +1107,16 @@ public class PlayerInfo extends BaseContent {
 			//może też dodać ascension perk aby móc dostawać 6 lub nawet wiecej stat points na lvl up?
 			clearOutput();
 			outputText("<b>You are now level " + num2Text(player.level) + "!</b>");
-			if (flags[kFLAGS.STAT_GAIN_MODE] == CoC.STAT_GAIN_CLASSIC) {
-				if (player.level > 6) {
-					player.statPoints += 5;
-					outputText("\n\nYou have gained five attribute points and one perk point!");
-				}
-				else {
-					player.statPoints += 10;
-					outputText("\n\nYou have gained ten attribute points and two perk points!");
-				}
-			} else {
-				if (player.level > 6) outputText("\n\nYou have gained one perk point!");
-				else outputText("\n\nYou have gained two perk points!");
+			if (player.level > 6) {
+				player.statPoints += 5;
+				outputText("\n\nYou have gained five attribute points and one perk point!");
 			}
+			else {
+				player.statPoints += 10;
+				outputText("\n\nYou have gained ten attribute points and two perk points!");
+			}
+			if (player.level > 6) outputText("\n\nYou have gained one perk point!");
+			else outputText("\n\nYou have gained two perk points!");
 
 			if (player.statPoints>0) {
 				doNext(attributeMenu);

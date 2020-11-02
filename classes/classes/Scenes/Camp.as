@@ -2024,7 +2024,7 @@ public class Camp extends NPCAwareContent {
 		addButton(14, "Back", campActions);
 	}
 
-	private function HerbalismCraftItem(ItemID:SimpleConsumable, IngrediantName:String, CraftingResult:PotionType):void{
+	private function HerbalismCraftItem(ItemID:SimpleConsumable, IngrediantName:String, CraftingResult:PotionType):void {
 		clearOutput();
 		menu();
 		outputText("Refine "+IngrediantName+" into a "+CraftingResult.name+"?");
@@ -2032,7 +2032,7 @@ public class Camp extends NPCAwareContent {
 		addButton(1, "Cancel", HerbalismMenu);
 	}
 
-	public function HerbalismCraftItem2(ItemID:SimpleConsumable, IngrediantName:String, CraftingResult:PotionType){
+	public function HerbalismCraftItem2(ItemID:SimpleConsumable, IngrediantName:String, CraftingResult:PotionType):void {
 		clearOutput();
 		player.changeNumberOfPotions(CraftingResult,+1);
 		if (player.hasPerk(PerkLib.NaturalHerbalism)){
@@ -4327,10 +4327,10 @@ public function wakeFromBadEnd():void {
 				player.createPerk(PerkLib.ChimericalBodySemiPeerlessStage, 0, 0, 0, 0);
 			}
 			if (player.perkv1(PerkLib.AscensionWisdom) > 50) {
-				var refund:int = 0;
-				refund += player.perkv1(PerkLib.AscensionWisdom) - 50;
+				var refund1:int = 0;
+				refund1 += player.perkv1(PerkLib.AscensionWisdom) - 50;
 				player.setPerkValue(PerkLib.AscensionWisdom, 1, 50);
-				player.ascensionPerkPoints += refund;
+				player.ascensionPerkPoints += refund1;
 			}
 			var SphereMastery:Number = 10;
 			if (player.hasPerk(PerkLib.KitsuneThyroidGlandFinalForm)) SphereMastery += 15;
@@ -4346,6 +4346,8 @@ public function wakeFromBadEnd():void {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 30;
 			clearOutput();
 			outputText("Text.");
+			if (player.level > 6) player.statPoints += ((5 * player.level) + 60);
+			else player.statPoints += (10 * player.level);
 			doNext(doCamp);
 			return;
 		}
