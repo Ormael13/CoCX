@@ -878,6 +878,9 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.lust = player.lust;
 		saveFile.data.teaseLevel = player.teaseLevel;
 		saveFile.data.teaseXP = player.teaseXP;
+		//Herbalism
+		saveFile.data.herbalismLevel = player.herbalismLevel;
+		saveFile.data.herbalismXP = player.herbalismXP;
 		//Prison STATS
 		saveFile.data.hunger = player.hunger;
 		saveFile.data.esteem = player.esteem;
@@ -1801,6 +1804,15 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.teaseLevel = 0;
 		else
 			player.teaseLevel = saveFile.data.teaseLevel;
+		//Herbalism
+		if (saveFile.data.herbalismXP == undefined)
+			player.herbalismXP = 0;
+		else
+			player.herbalismXP = saveFile.data.herbalismXP;
+		if (saveFile.data.herbalismLevel == undefined)
+			player.herbalismLevel = 0;
+		else
+			player.herbalismLevel = saveFile.data.herbalismLevel;
 		//Prison STATS
 		if (saveFile.data.hunger == undefined)
 			player.hunger = 50;
