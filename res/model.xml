@@ -290,7 +290,12 @@
         <cell rect="801,90,49,59" name="torso_pattern/Bvenom" dx="79" dy="64"/>
         <cell rect="951,90,49,59" name="torso_pattern/BgazerTar" dx="79" dy="64"/>
         <cell rect="1001,90,49,59" name="torso_pattern/BwindScars" dx="79" dy="64"/>
-        <cell rect="911,611,90,90" name="full_pattern/Undine" dx="59" dy="35"/>
+        <cell rect="911,611,90,90" name="full_pattern/undine" dx="59" dy="35"/>
+        <cell rect="101,1304,99,119" name="full_pattern/gnome" dx="53" dy="20"/>
+        <cell rect="911,520,90,90" name="full_pattern/IgnisTop" dx="62" dy="22"/>
+        <cell rect="820,611,90,90" name="full_pattern/IgnisBottom" dx="63" dy="79"/>
+        <cell rect="1002,520,90,90" name="full_pattern/sylphTop" dx="60" dy="46"/>
+        <cell rect="1093,520,90,90" name="full_pattern/sylphBottom" dx="60" dy="85"/>
         <cell rect="1,150,49,59" name="arms_bg/human" dx="56" dy="64"/>
         <cell rect="51,150,49,59" name="arms_bg/fur" dx="56" dy="64"/>
         <cell rect="551,150,49,59" name="arms_bg/furracoon" dx="56" dy="64"/>
@@ -319,7 +324,7 @@
         <cell rect="501,150,49,59" name="arms_bg_pattern/Blightning" dx="56" dy="64"/>
         <cell rect="601,150,49,59" name="arms_bg_pattern/Btatoo" dx="56" dy="64"/>
         <cell rect="951,150,49,59" name="arms_bg_pattern/Bvenom" dx="56" dy="64"/>
-        <cell rect="1,210,49,59" name="arms/human" dx="105" dy="64"/>
+        <cell rect="1,210,49,59" name="arms/human" dx="104" dy="64"/>
         <cell rect="51,210,49,59" name="arms/fur" dx="104" dy="64"/>
         <cell rect="551,210,49,59" name="arms/furracoon" dx="104" dy="64"/>
         <cell rect="101,210,49,59" name="arms/chitin" dx="104" dy="64"/>
@@ -364,7 +369,7 @@
         <cell rect="451,210,49,59" name="arms_pattern/Bstripe" dx="104" dy="64"/>
         <cell rect="501,210,49,59" name="arms_pattern/Blightning" dx="104" dy="64"/>
         <cell rect="651,210,49,59" name="arms_pattern/Btatoo" dx="104" dy="64"/>
-		<cell rect="1001,150,49,59" name="arms_pattern/Undine" dx="59" dy="35"/>
+        <cell rect="1001,150,49,59" name="arms_pattern/undine" dx="59" dy="35"/>
         <cell rect="1001,210,49,59" name="arms_pattern/Bvenom" dx="104" dy="64"/>
         <cell rect="1,270,49,59" name="hands_bg/fur" dx="56" dy="64"/>
         <cell rect="601,270,49,59" name="hands_bg/furracoon" dx="56" dy="64"/>
@@ -405,6 +410,8 @@
         <cell rect="651,330,49,59" name="hands/frostWyrmright" dx="98" dy="72"/>
         <cell rect="801,330,49,59" name="hands/blade-kamaitachiMantis" dx="104" dy="64"/>
         <cell rect="751,330,49,59" name="hands/wendigo" dx="104" dy="64"/>
+        <cell rect="1051,150,49,59" name="hands/gnomeLeft" dx="63" dy="42"/>
+        <cell rect="1051,210,49,59" name="hands/gnomeRight" dx="60" dy="46"/>
         <cell rect="951,210,49,59" name="hands_fg/wraithrightlewd" dx="105" dy="48"/>
         <cell rect="351,330,49,59" name="overhands/fire" dx="104" dy="64"/>
         <cell rect="1,390,49,59" name="legs/human" dx="79" dy="115"/>
@@ -443,7 +450,7 @@
         <cell rect="274,611,90,90" name="legs/manticore_sit_pscales" dx="60" dy="61"/>
         <cell rect="365,611,90,90" name="legs/manticore_sit_chitin" dx="60" dy="61"/>
         <cell rect="547,611,90,90" name="legs/gargoyle_sit" dx="60" dy="61"/>
-        <cell rect="729,611,90,90" name="legs/elemental" dx="65" dy="99"/>
+        <cell rect="729,611,90,90" name="legs/elemental" dx="57" dy="97"/>
         <cell rect="451,390,49,59" name="legs_pattern/Bstripe" dx="79" dy="115"/>
         <cell rect="501,390,49,59" name="legs_pattern/Blightning" dx="79" dy="115"/>
         <cell rect="601,390,49,59" name="legs_pattern/Btatoo" dx="79" dy="115"/>
@@ -456,6 +463,9 @@
         <cell rect="751,390,49,59" name="feet/yeti" dx="79" dy="115"/>
         <cell rect="547,973,90,90" name="feet/kumiho" dx="62" dy="68"/>
         <cell rect="638,611,90,90" name="feet/bunny" dx="59" dy="92"/>
+        <cell rect="1093,611,90,90" name="feet/gnome" dx="59" dy="100"/>
+        <cell rect="701,450,49,49" name="feet/sylph" dx="82" dy="117"/>
+        <cell rect="1002,611,90,90" name="legs_bg/gnome" dx="58" dy="93"/>
         <cell rect="151,450,49,59" name="overfeet/fire" dx="79" dy="115"/>
         <cell rect="701,90,49,59" name="muscle/muscle" dx="79" dy="64"/>
         <cell rect="401,90,49,59" name="clothe/krakenM" dx="79" dy="64"/>
@@ -642,9 +652,9 @@
         <cell rect="541,350,89,164" name="hair/yukionna" dx="61" dy="4"/>
         <cell rect="631,350,89,164" name="hair_bg/yukionna" dx="61" dy="4"/>
         <cell rect="721,350,89,164" name="hair_bg/longTresse" dx="50" dy="19"/>
-        <cell rect="241,70,59,65" name="hair/Undine" dx="75" dy="21"/>
-        <cell rect="811,350,89,164" name="hair_bg/Undine" dx="62" dy="22"/>
-        <cell rect="811,251,89,98" name="fullbody/Undine" dx="55" dy="91"/>
+        <cell rect="241,70,59,65" name="hair/undine" dx="75" dy="21"/>
+        <cell rect="811,350,89,164" name="hair_bg/undine" dx="62" dy="22"/>
+        <cell rect="811,251,89,98" name="fullbody/undine" dx="55" dy="91"/>
         <cell rect="1,449,28,30" name="hair/hairHood" dx="91" dy="39"/>
         <cell rect="1,482,28,30" name="hair/hairHoodFire" dx="91" dy="39"/>
     </spritemap>
