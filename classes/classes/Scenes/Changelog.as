@@ -29,8 +29,9 @@ package classes.Scenes
 		private function Changelog33():void {
 			clearOutput();
 			outputText("<b>Version 0.8o2:</b>\n\n");
-			outputText("-Nodachi moved to massive wepaon section increasing base atk form 25 to 65 and cost form 100 to 2600 gems.\n");
-			outputText("-\n");
+			outputText("-New weapons from Liadri (1h katana and it upgr. versions from Celess): Uchigatana, Moonlit Snow, Chaos Blade\n");
+			outputText("-Nodachi moved to massive weapon section increasing base atk form 25 to 65 and cost from 100 to 2600 gems.\n");
+			outputText("-Fixed bugs: Various fixes from Liadri for many errors from last build, DeBimo offer form Rathazul not including Joy or Excellia in camp\n\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -42,7 +43,6 @@ package classes.Scenes
 			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-Fixed bugs: DeBimo offer form Rathazul not including Joy or Excellia in camp\n\n\n");/*ostatni punkt changelogu
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");

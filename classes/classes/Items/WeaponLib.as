@@ -29,12 +29,11 @@ package classes.Items
 		public const BFWHIP :Weapon = new BFWhip();
 		public const B_SCARB:Weapon = new Weapon("B.ScarB", "B.ScarBlade", "broken scarred blade", "a broken scarred blade", "slash", 12, 480, "This saber, made from lethicite-imbued metal, seems to no longer seek flesh; whatever demonic properties in this weapon is gone now but it's still an effective weapon.");
 		public const BLETTER:BloodLetter = new BloodLetter();
-		public const MOONLIT:MoonlitSnow = new MoonlitSnow();
-		public const C_BLADE:ChaosBlade = new ChaosBlade();
 		public const B_WIDOW:BlackWidow = new BlackWidow();
 		public const CLAWS  :Weapon = new Weapon("Claws","Claws","gauntlet with claws","a gauntlet with claws","rend",0,100,"Those metal gauntlets have tips of the fingers shaped like sharp natural claws.  Though they lacks the damaging potential of other weapons, they have a chance to leave bleeding wounds.");
 		public const CLAYMOR:Weapon = new LargeClaymore();
 		public const CNTWHIP:CatONineTailWhip = new CatONineTailWhip();
+		public const C_BLADE:ChaosBlade = new ChaosBlade();
 		public const DWARWA :DwarvenWaraxe = new DwarvenWaraxe();
 		public const DAGGER :Weapon = new Weapon("Dagger ","Dagger","dagger","a dagger","stab",3,120,"A small blade.  Preferred weapon for the rogues.", "Small");
 		public const DAGWHIP:Weapon = new Weapon("DagWhip","DaggerWhip","dagger whip","a dagger whip","whip-like slash",5,200,"A small blade that is tied to the wrist by an 8 ft. cloth.  Could be used to attack few enemies at once.", "Small");
@@ -81,6 +80,7 @@ package classes.Items
 		public const MACGRSW:Weapon = new Weapon("Macgrsw","Mach.greatsword","Machine Greatsword","a Machine Greatsword","slash",19,4415,"This greatsword is half invention and half weapon. Instead of a sharp straight blade, the weapon’s sides are a set of metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. Very good for cutting down trees too.", "Large");
 		public const MASAMUN:Masamune = new Masamune();
 		public const MASTGLO:WeaponWithPerk = new WeaponWithPerk("MastGlo", "MasterGloves", "Master Gloves", "a Master Gloves", "punch", 0, 400, "These gloves belonged to Chi Chi. They seem to naturally strengthen the soulforce techniques of the user.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.4, 0, 0, 0);
+		public const MOONLIT:MoonlitSnow = new MoonlitSnow();
 		public const N_STAFF:NocturnusStaff = new NocturnusStaff();
 		public const NTWHIP :NineTailWhip = new NineTailWhip();
 		public const NODACHI:Nodachi = new Nodachi();
@@ -124,6 +124,7 @@ package classes.Items
 		public const TRSTSWO:Weapon = new Weapon("TrStSwo","TruestrikeSword", "Truestrike sword", "a Truestrike sword", "slash", 5, 400, "Lia will write desc of it...soon.");
 		public const U_STAFF:UnicornStaff = new UnicornStaff();
 		public const UDKDEST:UndefeatedKingDestroyer = new UndefeatedKingDestroyer();
+		public const UGATANA:Weapon = new Weapon("Uchigatana ","Uchigatana","Uchigatana","a Uchigatana","keen cut",15,680,"A one handed curved bladed weapon that cuts through flesh with the greatest of ease. Can also be wielded with both hands.", "Hybrid");
 		public const URTAHLB:Weapon = new Weapon("UrtaHlb","UrtaHlb","halberd","a halberd","slash",50,2000,"Urta's halberd. How did you manage to get this?","Large");
 		public const VBLADE :Weapon = new Weapon("V.Blade","V.Blade", "V.Blade", "a V.Blade", "slash", 28, 2240, "A peculiar sword. The letter V is engraved into the blade perhaps its former owner name.");
 		public const W_STAFF:WizardsStaff = new WizardsStaff();
@@ -135,7 +136,6 @@ package classes.Items
 		public const WGSWORD:Wardensgreatsword = new Wardensgreatsword();
 		public const YAMARG :WeaponWithPerk = new WeaponWithPerk("YamaRG", "YamaRajaGrasp", "Yama-Raja gloves", "a pair of Yama-Raja gloves", "punch", 0, 400, "These black gloves are made in black leather and an ebony alloy. Their corrupt touch seeks to destroy the pure and innocent. As such, it will seek the weak points of its victims when striking.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.5, 0, 0, 0);
 		public const ZWNDER :Zweihander = new Zweihander();
-		public const UGATANA :Weapon = new Weapon("Uchigatana ","Uchigatana","Uchigatana","a Uchigatana","keen cut",15,680,"A one handed curved bladed weapon that cuts through flesh with the greatest of ease. Can also be wielded with both hands.", "Hybrid");
 
 
 		/*
