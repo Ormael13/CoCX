@@ -753,8 +753,8 @@ public class Combat extends BaseContent {
 
     public function Painkiller():void {
         clearOutput();
-        var power:Number = CalcAlchemyPower()/20; //needs to be calculated in game
-        var duration:Number = Math.round(power/100);
+        var power:Number = (CalcAlchemyPower()*0.05)+10; //needs to be calculated in game
+        var duration:Number = Math.round(power/100)+5;
         //strenght then Duration in hours
         player.createStatusEffect(StatusEffects.ArmorPotion,power,duration,0,0);
         outputText("You drink up the medicine, feeling any lingering pain recede as your skin hardens like stone. "+power+" "+duration+"");
@@ -762,8 +762,8 @@ public class Combat extends BaseContent {
 
     public function Stimulant():void {
         clearOutput();
-        var power:Number = CalcAlchemyPower()/20; //needs to be calculated in game
-        var duration:Number = Math.round(power/100);
+        var power:Number = (CalcAlchemyPower()*0.05)+10; //needs to be calculated in game
+        var duration:Number = Math.round(power/100)+5;
         //strenght then Duration in hours
         player.createStatusEffect(StatusEffects.AttackPotion,power,duration,0,0);
         outputText("You drink up the medicine, feeling stronger and more agile already. "+power+" "+duration+"");
@@ -771,8 +771,8 @@ public class Combat extends BaseContent {
 
     public function Perfume():void {
         clearOutput();
-        var power:Number = CalcAlchemyPower()/5; //needs to be calculated in game
-        var duration:Number = Math.round(power/5);
+        var power:Number = (CalcAlchemyPower()*0.05)+10; //needs to be calculated in game
+        var duration:Number = Math.round(power/100)+5;
         //strenght then Duration in hours
         if (!player.isAlraune()){
             outputText("You grab your bottle of Alraune perfume and spray yourself knowingly. Your opponent is going to have issues resisting your charms now. "+power+" "+duration+"");
