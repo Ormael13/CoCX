@@ -719,7 +719,7 @@ public class Combat extends BaseContent {
         var power:Number = 0;
         power += scalingBonusWisdom();
         if (player.hasPerk(PerkLib.PlantKnowledge)) power += scalingBonusLibido();
-        power += player.herbalismLevel;
+        power += player.herbalismLevel*10;
         power = Math.round(power);
         return power;
     }
@@ -727,6 +727,7 @@ public class Combat extends BaseContent {
     public function Poultice():void {
         clearOutput();
         var power:Number = CalcAlchemyPower();
+        power += (player.maxHP()*0.25)+(power*0.01*player.maxHP());
         if (player.hasPerk(PerkLib.NaturalHerbalism)) power *= 2;
         HPChange(power,false);
         outputText("You apply the poultice, your wounds closing at high speed. Healed for "+power+"");
@@ -734,7 +735,7 @@ public class Combat extends BaseContent {
 
     public function EnergyDrink():void {
         clearOutput();
-        var power:Number = CalcAlchemyPower();
+        var power:Number = CalcAlchemyPower()*5;
         fatigue(-power);
         outputText("You chug off on your energy drink, feeling rejuvenated with newfound magical energy and stamina. Recovered "+power+" ressources.");
     }
