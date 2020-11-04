@@ -187,6 +187,8 @@ public class Alraune extends Monster
 			add(consumables.RAUNENECT,7).
 			addMany(1,consumables.MARAFRU,
 					consumables.HEALHERB,
+					consumables.HEALHERB,
+					consumables.HEALHERB,
 					consumables.MOONGRASS,
 					consumables.SNAKEBANE,
 					consumables.IRONWEED,

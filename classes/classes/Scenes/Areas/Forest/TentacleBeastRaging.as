@@ -121,7 +121,13 @@ public class TentacleBeastRaging extends Monster
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 12;
 			this.gems = rand(7)+3;
-			this.drop = new WeightedDrop(null, 1);
+			this.drop = new WeightedDrop().addMany(1,consumables.HEALHERB,
+					consumables.HEALHERB,
+					consumables.HEALHERB,
+					consumables.MOONGRASS,
+					consumables.SNAKEBANE,
+					consumables.IRONWEED,
+					consumables.BLADEFERN);
 			this.tailType = Tail.DEMONIC;
 			this.createPerk(PerkLib.EnemyFeralType, 0, 0, 0, 0);
 			checkMonster();

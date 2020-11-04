@@ -194,6 +194,8 @@ public class TentacleBeast extends Monster
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = rand(25)+10;
 			this.drop = new WeightedDrop().addMany(1,consumables.HEALHERB,
+					consumables.HEALHERB,
+					consumables.HEALHERB,
 					consumables.MOONGRASS,
 					consumables.SNAKEBANE,
 					consumables.IRONWEED,
