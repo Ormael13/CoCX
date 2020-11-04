@@ -753,8 +753,8 @@ public class Combat extends BaseContent {
 
     public function Painkiller():void {
         clearOutput();
-        var power:Number = CalcAlchemyPower()/5; //needs to be calculated in game
-        var duration:Number = Math.round(power/5);
+        var power:Number = CalcAlchemyPower()/20; //needs to be calculated in game
+        var duration:Number = Math.round(power/100);
         //strenght then Duration in hours
         player.createStatusEffect(StatusEffects.ArmorPotion,power,duration,0,0);
         outputText("You drink up the medicine, feeling any lingering pain recede as your skin hardens like stone. "+power+" "+duration+"");
@@ -762,8 +762,8 @@ public class Combat extends BaseContent {
 
     public function Stimulant():void {
         clearOutput();
-        var power:Number = CalcAlchemyPower()/5; //needs to be calculated in game
-        var duration:Number = Math.round(power/5);
+        var power:Number = CalcAlchemyPower()/20; //needs to be calculated in game
+        var duration:Number = Math.round(power/100);
         //strenght then Duration in hours
         player.createStatusEffect(StatusEffects.AttackPotion,power,duration,0,0);
         outputText("You drink up the medicine, feeling stronger and more agile already. "+power+" "+duration+"");
