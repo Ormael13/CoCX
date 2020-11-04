@@ -719,7 +719,7 @@ public class Combat extends BaseContent {
         var power:Number = 0;
         power += scalingBonusWisdom();
         if (player.hasPerk(PerkLib.PlantKnowledge)) power += scalingBonusLibido();
-        power += player.herbalismLevel;
+        power += player.herbalismLevel*10;
         power = Math.round(power);
         return power;
     }
@@ -727,6 +727,7 @@ public class Combat extends BaseContent {
     public function Poultice():void {
         clearOutput();
         var power:Number = CalcAlchemyPower();
+        power += (player.maxHP()*0.25)+(power*0.01*player.maxHP());
         if (player.hasPerk(PerkLib.NaturalHerbalism)) power *= 2;
         HPChange(power,false);
         outputText("You apply the poultice, your wounds closing at high speed. Healed for "+power+"");
@@ -734,7 +735,7 @@ public class Combat extends BaseContent {
 
     public function EnergyDrink():void {
         clearOutput();
-        var power:Number = CalcAlchemyPower();
+        var power:Number = CalcAlchemyPower()*5;
         fatigue(-power);
         outputText("You chug off on your energy drink, feeling rejuvenated with newfound magical energy and stamina. Recovered "+power+" ressources.");
     }
@@ -752,8 +753,8 @@ public class Combat extends BaseContent {
 
     public function Painkiller():void {
         clearOutput();
-        var power:Number = CalcAlchemyPower()/5; //needs to be calculated in game
-        var duration:Number = Math.round(power/5);
+        var power:Number = (CalcAlchemyPower()*0.05)+10; //needs to be calculated in game
+        var duration:Number = Math.round(power/100)+5;
         //strenght then Duration in hours
         player.createStatusEffect(StatusEffects.ArmorPotion,power,duration,0,0);
         outputText("You drink up the medicine, feeling any lingering pain recede as your skin hardens like stone. "+power+" "+duration+"");
@@ -761,8 +762,8 @@ public class Combat extends BaseContent {
 
     public function Stimulant():void {
         clearOutput();
-        var power:Number = CalcAlchemyPower()/5; //needs to be calculated in game
-        var duration:Number = Math.round(power/5);
+        var power:Number = (CalcAlchemyPower()*0.05)+10; //needs to be calculated in game
+        var duration:Number = Math.round(power/100)+5;
         //strenght then Duration in hours
         player.createStatusEffect(StatusEffects.AttackPotion,power,duration,0,0);
         outputText("You drink up the medicine, feeling stronger and more agile already. "+power+" "+duration+"");
@@ -770,8 +771,8 @@ public class Combat extends BaseContent {
 
     public function Perfume():void {
         clearOutput();
-        var power:Number = CalcAlchemyPower()/5; //needs to be calculated in game
-        var duration:Number = Math.round(power/5);
+        var power:Number = (CalcAlchemyPower()*0.05)+10; //needs to be calculated in game
+        var duration:Number = Math.round(power/100)+5;
         //strenght then Duration in hours
         if (!player.isAlraune()){
             outputText("You grab your bottle of Alraune perfume and spray yourself knowingly. Your opponent is going to have issues resisting your charms now. "+power+" "+duration+"");

@@ -655,6 +655,9 @@
         <cell rect="241,70,59,65" name="hair/undine" dx="75" dy="21"/>
         <cell rect="811,350,89,164" name="hair_bg/undine" dx="62" dy="22"/>
         <cell rect="811,251,89,98" name="fullbody/undine" dx="55" dy="91"/>
+        <cell rect="301,136,59,65" name="hairTop/sylph" dx="85" dy="1"/>
+        <cell rect="361,136,59,65" name="hairLeft/sylph" dx="54" dy="26"/>
+        <cell rect="421,136,59,65" name="hairRight/sylph" dx="98" dy="26"/>
         <cell rect="1,449,28,30" name="hair/hairHood" dx="91" dy="39"/>
         <cell rect="1,482,28,30" name="hair/hairHoodFire" dx="91" dy="39"/>
     </spritemap>
@@ -1120,6 +1123,8 @@
         <layer name="antennae"/>
         <layer name="horns"/>
         <layer name="ears"/>
+		<layer name="hairTop"/>
+		<layer name="hairRight"/>
 		<layer name="hair"/>
         <layer name="eyes"/>
 		<layer name="forehead"/>
@@ -1163,6 +1168,7 @@
 		<layer name="rearbody"/>
 		<layer name="clothCape"/>
 		<layer name="hair_bg"/>
+		<layer name="hairLeft"/>
 		<layer name="wings"/>
 		<layer name="tailAccessory"/>
         <layer name="tail_fg"/>
