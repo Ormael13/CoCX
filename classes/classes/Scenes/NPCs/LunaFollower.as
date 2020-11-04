@@ -811,7 +811,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			outputText("\n\nYou moan and groan, immensely enjoying her ministrations. You place a hand atop her head to guide her as she begins speeding up. Your knees begin feeling weak as she pleasures you, the rapid movements of her head and heat of her moist mouth is almost too much to bear for you. Muttering a quick warning, your cock throbs with your impending release and a few more moments you explode. Luna takes you to the hilt in her mouth again, making sure to drink down every bit of your delicious spooge");
 			if (player.cocks.length > 1) outputText(" while your other tool" + (player.cocks.length == 2 ? "" : "s") + " unload their payloads");
 			outputText(".\n\nMaking sure that she’s swallowed every last bit of cum");
-			if (player.cumQ() >= 2000) outputText(", your massive load making her look a couple months into pregnancy (end)");
+			if (player.cumQ() >= 2000) outputText(", your massive load making her look a couple months into pregnancy");
 			else if (player.cumQ() >= 1000) outputText(", her belly slightly inflated from the impressive load you just fed her");
 			outputText(", she pulls back and bows her head.\n\n");
 			outputText("\"<i>Was that pleasing, " + player.mf("Master","Mistress") + "?</i>\" You pat her on the head and tell her it was magnificent, thanking her for the pleasant session.\n\n");
