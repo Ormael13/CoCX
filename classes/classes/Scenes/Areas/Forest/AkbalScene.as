@@ -908,7 +908,7 @@ public class AkbalScene extends BaseContent
 				dynStats("cor", 4 + rand(8));
 				//[+ 1-2 Speed]
 				dynStats("spe", 1 + rand(2));
-				player.sexReward("cum");
+				player.sexReward("cum","Anal");
 				//[Chance of butt growth]
 				if (player.butt.type < 8)
 				{
@@ -1670,6 +1670,7 @@ public class AkbalScene extends BaseContent
 				//[if (hasVagina = true)
 				if (player.hasVagina())
 					outputText("\n\nYour [vagina] releases a flood of creamy fluid as your body continues to convulse.  Your orgasm lasts for several minutes in which you paint Akbal with the evidence of how much he has pleased you.");
+				player.sexReward("cum", "Vaginal", true, false);
 				//{genderless}
 				if (player.gender == 0)
 					outputText("\n\nYour body begins to convulse as you call out. Your [ass] feels as though the demon’s dick is a lightning rod expelling a constant torrent of elation.");

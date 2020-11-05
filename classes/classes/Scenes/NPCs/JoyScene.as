@@ -1626,7 +1626,7 @@ import classes.lists.Gender;
 			outputText("\n\nShe shakes her head rapidly, ears flapping in the air, then gives a loud, deliberate swallow. \"<i>Mmm... I taste yummy, don't I, lover " + player.mf("boy", "girl") + "?</i>\" She giggles.");
 			outputText("\n\nYour only reply is to tap her nose and leave with a giggle of your own.");
 			dynStats("lus", 20 + (player.lib / 5) + (player.cor / 10), "cor", -0.5);
-			player.sexReward("cum");
+			player.sexReward("cum","Lips");
 			flags[kFLAGS.JOJO_BLOWJOB_XP]++;
 			incrementJoysCockFondness(1);
 			doNext(camp.returnToCampUseOneHour);

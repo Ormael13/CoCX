@@ -627,7 +627,7 @@ private function loseToIzma():void {
 		outputText("You remain where you are, waiting for the strength to flow into your limbs and for some of the abundance of sexual fluids to vacate your stuffed entrails before you dress yourself and leave.  You had no idea that Izma could take charge in such a fierce manner... but, at the same time, you find yourself actually liking it.  A part of you wonders if you could see her that way again...");
 		//(Izmafight - 1)
 		flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON]--;
-		player.sexReward("cum");
+		player.sexReward("cum","Anal");
 	}
 	//Female Loss:
 	else if(player.gender == 2) {
@@ -679,7 +679,7 @@ private function loseToIzma():void {
 		outputText("You remain where you are, waiting for the strength to flow into your limbs and for some of the abundance of sexual fluids to vacate your " + vaginaDescript(0) + " before you dress yourself and leave.  You had no idea that Izma could take charge in such a fierce manner... but, at the same time, you find yourself actually liking it.  A part of you wonders if you could see her that way again...");
 		//(Izmafight minus 1)
 		flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON]--;
-		player.sexReward("cum");
+		player.sexReward("cum","Vaginal");
 	}
 	//Loss Scene- Herm 
 	else {
@@ -762,7 +762,7 @@ private function loseToIzma():void {
 	//Izmafight -5: 
 	else outputText("  You embrace the dreams fully, desperate to cling to them as long as you can. It's getting so hard to care about your former mission anymore; why fight the demons when you can just give it up and surrender yourself to Izma? Yes... such a strong, powerful, worthy alpha she is; Izma is all you need. Let her take control of your life, why don't you?");
 	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH.id;
-	player.sexReward("cum");
+	player.sexReward("cum","Vaginal");
 	cleanupAfterCombat();
 }
 
@@ -916,7 +916,7 @@ private function useVagooOnIzmaWin():void {
 	outputText("\n\n");
 
 	outputText("After a few more minutes of vigorous fucking, Izma grunts and roars in an animalistic fashion as she orgasms, jets of hot musky spunk pumping into your depths.  You cry out in pleasure, your inner walls clamping down on her cock and milking every available drop of jizz she has.  After a while you manage to recover and stumble onto your feet.  \"<i>Hey, wait a sec,</i>\" Izma says weakly as you start to leave.  She goes to her storage chest and retrieves a crumpled leaf, then holds it out to you with a smile.  \"<i>Here, take this.  It's an anti-pregnancy herb.</i>\" Do you take it?");
-	player.sexReward("cum");
+	player.sexReward("cum","Vaginal");
 	//[yes/no]
 	doYesNo(eatIzmasLeafAfterRapinHer,dontEatIzamsLeafAfterRape);
 }
@@ -1106,7 +1106,7 @@ private function nonFightIzmaSmexPAINUS():void {
 	outputText("\"<i>Thanks for that...</i>\" Izma whispers, stumbling onto her feet and retrieving her clothing.  \"<i>Feel free to come back for some more... or maybe we could do something a little more intense, if you want.</i>\" A bashful smile spreads across her face.  It's a little hard to tell with her skin color, but you can almost see a blush.  You smile at Izma and nod, before gathering your own gear and setting off for camp, your tongue constantly darting around your mouth in search of any remainders of Izma's seed.\n\n");
 	//(lust -100, gain 1 t-shark toof, Izmacounter+1)
 	flags[kFLAGS.IZMA_ENCOUNTER_COUNTER]++;
-	player.sexReward("cum");
+	player.sexReward("cum","Lips");
 	inventory.takeItem(consumables.TSTOOTH, camp.returnToCampUseOneHour);
 }
 
@@ -1151,7 +1151,7 @@ private function nonFightIzmaSmexCUNTPUSSYSNATCHQUIM():void {
 	outputText("You don't get long to contemplate it, sitting up alongside Izma.  \"<i>Phew... now, you are something else.  We're going to do this again some time,</i>\" Izma says, licking her lips and handing you the promised payment.  You smile, more than excited to take her up on the offer.  You stand up then and get dressed, departing for camp feeling very satisfied.\n\n");
 	//(lust minus 100, gain 1 t-shark tooth, Izmacounter +1)
 	flags[kFLAGS.IZMA_ENCOUNTER_COUNTER]++;
-	player.sexReward("cum");
+	player.sexReward("cum","Lips");
 	inventory.takeItem(consumables.TSTOOTH, camp.returnToCampUseOneHour);
 }
 
@@ -1420,7 +1420,7 @@ private function izmaLakeDominate():void {
 		outputText("The two of you get dress after awhile, have some small talk, and then you make your way back to camp.");
 		player.slimeFeed();
 	}
-	player.sexReward("cum");
+	player.sexReward("cum","Anal");
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1651,7 +1651,7 @@ private function submitToLakeIzma():void {
 		}
 		else outputText("gives you a decidedly unchaste kiss before she helps you up.  You dress yourself and head back to camp feeling very sated.");
 	}
-	player.sexReward("cum");
+	player.sexReward("cum","Vaginal");
 	dynStats("sen", 2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2084,7 +2084,7 @@ private function followerIzmaTakesItInPooper():void {
 	//(10; resume here for dickless)
 	if(!player.hasCock()) outputText("After a few minutes, she pulls her shrinking cock out of you and gives you a deep kiss. \"<i>Thanks for that,</i>\" she says, \"<i>...my Alpha.</i>\"  She jogs off to the river to clean off.  After a minute you follow her, with her cum dripping out of your well-used anus.");
 	if(player.hasCock()) player.sexReward("Default","Dick",true,false);
-	player.sexReward("cum");
+	player.sexReward("cum","Anal");
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }

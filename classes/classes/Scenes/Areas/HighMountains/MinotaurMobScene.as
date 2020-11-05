@@ -395,7 +395,8 @@ private function nonAddictMinotaurGangBang():void {
 	//Preggers chance!
 	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
     else player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR, 75);
-	player.sexReward("cum");
+	player.sexReward("cum","Anal");
+	player.sexReward("cum","Vaginal");
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", -.5, "cor", 1);
 	player.minoCumAddiction(20);
     if (CoC.instance.inCombat) cleanupAfterCombat();
@@ -489,7 +490,8 @@ private function loseToMinoMobVeryPregnant():void {
 		else outputText("we wouldn't want to ruin our favorite toy would we?");
 		outputText("  Look at her, she's smiling with a dick in her mouth while she passes out.  Mom's the best.</i>\"");
 	}
-	player.sexReward("cum");
+	player.sexReward("cum","Anal");
+	player.sexReward("cum","Vaginal");
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "cor", 1);
 	player.minoCumAddiction(15);
     if (CoC.instance.inCombat) cleanupAfterCombat();
@@ -592,7 +594,8 @@ private function analSpearSemiPregMinotaurGangbang():void {
 	outputText(".  Hands gently lower you to the ground");
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 5) outputText(", but you're positioned with your ass in the air.  A voice calls out, \"<i>Okay, Mom's pretty out of it.  One at a time and don't damage her, okay?</i>\"\n\nGiggling dreamily, you're fucked repeatedly, spunk squirting from your anus with every thrust.  You pass out like that, feeling quite satisfied.");
 	else outputText(".  They step back and admire their handiwork while you float through your narcotic-infused haze.");
-	player.sexReward("cum");
+	player.sexReward("cum","Anal");
+	player.sexReward("cum","Vaginal");
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "cor", 1);
 	player.minoCumAddiction(15);
     if (CoC.instance.inCombat) cleanupAfterCombat();
@@ -819,7 +822,7 @@ private function victoryAllThePenetrationsMinotaurGangBang():void {
 	//Preggers chance!
 	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
     else player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR, 75);
-	player.sexReward("cum");
+	player.sexReward("cum","Vaginal");
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", -.5, "cor", 1);
 	player.minoCumAddiction(20);
     if (CoC.instance.inCombat)
@@ -1002,7 +1005,7 @@ private function victoryBJNippleFuckMinotaurGang():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] < 5) outputText("relax and fan themselves while giving you lusty looks");
 	else outputText("stare gloomily at the lucky three before turning to regard your form again with unrepentant lust");
 	outputText(".  You re-dress sensually, giving them as much of a show as you dare, not even bothering to wipe the cum-coating from your " + player.skinFurScales() + " before you finish slipping into your [armor] and depart.");
-	player.sexReward("cum");
+	player.sexReward("cum","Lips");
 	dynStats("spe", -.5, "int", -.5, "sen", -1, "cor", 1);
 	player.minoCumAddiction(10);
     if (CoC.instance.inCombat)

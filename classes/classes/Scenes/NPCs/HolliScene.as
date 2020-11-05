@@ -505,7 +505,7 @@ private function rideTheWalrusP3():void {
 	//{- big sensitivity loss, big libido gain, minus lust}
 	player.orgasm();
 	dynStats("lib", 1, "sen", -5);
-	player.sexReward("cum");
+	player.sexReward("cum","Vaginal");
 	if(flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] += 5;
     flags[kFLAGS.TIMES_RIDDEN_FLOWER]++;
     flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;

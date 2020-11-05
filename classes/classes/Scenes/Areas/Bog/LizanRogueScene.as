@@ -344,7 +344,8 @@ public class LizanRogueScene extends BaseContent
 			player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS);
 			player.createStatusEffect(StatusEffects.Eggs, rand(6), 0, rand(3) + 5, 0);
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
+			player.sexReward("cum","Anal");
 			doNext(camp.returnToCampUseOneHour);
             if (CoC.instance.inCombat) cleanupAfterCombat();
         }

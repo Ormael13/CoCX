@@ -234,7 +234,7 @@ private function dickwieldersLoseToSandTarps():void {
 	outputText("\n\nYou awaken a while later, wearily getting to your feet and looking around.  You are standing in a featureless stretch of desert... there is no suggestion of the sandtrap, or indeed that you are in the same place where it caught you.  A fair amount of time has passed though, judging by the sky above you.  Perhaps it was all a particularly lucid mirage?  A sensation of... fullness in your abdomen suggests otherwise.  Clutching your bowels uneasily, you make your way back to camp.");
 	monster.createStatusEffect(StatusEffects.Fertilized,0,0,0,0);
 	sandTrapPregChance();
-	player.sexReward("cum");
+	player.sexReward("Default","Anal");
 	dynStats("lib", 1);
 	//reduce lust, increase lib, slimefeed, reset hours since cum
 	cleanupAfterCombat();
@@ -267,7 +267,8 @@ private function chicksLoseToSandTarp():void {
 	outputText("\n\nYou awaken a while later, staggering to your feet and looking around.  You are standing in a featureless stretch of the desert... there is no suggestion of the sandtrap, or indeed that you are in the same place where it caught you.  A fair amount of time has passed though, judging by the sky above you.  Perhaps it was all a particularly lucid mirage?  A sensation of... fullness in your abdomen suggests otherwise.  Clutching your bowels uneasily, you make your way back to camp.");
 	//buttpreg only if RNG decided trap was fertilized, reduce lust, increase lib, simefeed
 	if(monster.hasStatusEffect(StatusEffects.Fertilized)) sandTrapPregChance();
-	player.sexReward("cum");
+	player.sexReward("Default","Anal");
+	player.sexReward("cum","Vaginal");
 	dynStats("lib", 1);
 	//reduce lust, increase lib, slimefeed, reset hours since cum
 	cleanupAfterCombat();
@@ -301,7 +302,7 @@ private function genderlessLoss():void {
 	//butteggpreg only if RNG has trap with fertilized eggs, reduce lust, increase lib, slimefeed
 	sandTrapPregChance();
 
-	player.sexReward("cum");
+	player.sexReward("Default","Anal");
 	dynStats("lib", 1);
 	//reduce lust, increase lib, slimefeed, reset hours since cum
 	cleanupAfterCombat();

@@ -2318,7 +2318,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\nEmber makes the best face of disgust " + emberMF("he", "she") + " can manage.  \"<i>Argh!  I need a bath!  Now!</i>\"  And with a quick spin, " + emberMF("he", "she") + " dashes off to find a stream.  You watch " + emberMF("him", "her") + " go and smile bitterly; you've grown used to how the dragon behaves and you know " + emberMF("he", "she") + " really did enjoy " + emberMF("him", "her") + "self, but the act might be getting a bit tiresome.  Grabbing a handful of dried grass, you wipe the worst smears of sexual fluids from your body, redress yourself, and head lazily back to the camp.");
 			//(+Affection, minus lust, reset hours since cum, slimefeed)
 			emberAffection(6);
-			player.sexReward("cum");
+			player.sexReward("cum","Anal");
 			dynStats("sen", 3);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2421,7 +2421,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			else outputText("increasingly leery of " + emberMF("his", "her") + " batty behavior");
 			outputText(", then pick yourself up to head back to the camp.");
 			//(+Affection, lust, reset hours since cum, slimefeed)
-			player.sexReward("cum");
+			player.sexReward("cum","Lips");
 			emberAffection(6);
 			dynStats("lus", 10 + player.lib / 10);
 			doNext(camp.returnToCampUseOneHour);
@@ -3167,7 +3167,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("  Mmm... you can feel your own second orgasm coming in hot.  Maybe after another 4 or 5, you'll let the dragon go...");
 
 			outputText("\n\nEventually, exhausted, belly stuffed with dragon-spunk to the point you look ready to birth a pair of dragon toddlers, and feeling incredibly well-sated, you lay on Ember's chest, cuddling your limp, utterly drained lover.  The dragon is fast asleep, having passed out from exhaustion, and you amuse yourself by listening to " + emberMF("his", "her") + " heart beating as " + emberMF("he", "she") + " inhales and exhales softly in " + emberMF("his", "her") + " sleep.  To be honest, you could use a nap too, and you pass out atop " + emberMF("him", "her") + ".");
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
 			dynStats("sen", -2);
 			if (player.lib > 50) dynStats("lib", -3);
 			player.slimeFeed();

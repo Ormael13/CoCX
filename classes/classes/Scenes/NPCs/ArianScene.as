@@ -2254,7 +2254,7 @@ private function suckAriansDick():void {
 	
 	outputText("\n\n\"<i>Uuuh... see you soon?</i>\"");
 	outputText("\n\nYou throw [Arian em] a smirk over your shoulder, shake your [ass] for [Arian eir] benefit, and head on out.");
-	player.sexReward("cum");
+	player.sexReward("cum", "Lips");
 	dynStats("lus", 10+player.lib/5);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2412,7 +2412,7 @@ private function getPenetratedByArianAndHisHitlerMustache():void {
 	outputText("\n\nYou decide to drop the subject for the moment and tell [Arian em] that as enjoyable as it was to spend time with [Arian em], you must return to your duties now.  Arian simply nods, wearing [Arian eir] best stoic expression.  \"<i>I understand... but, please, come back when you can, all right?</i>\"  You smile and tell [Arian em] you will, caressing [Arian eir] scaly cheek, then with a cheeky grin, let [Arian em] know that next time you expect at least four more performances from [Arian em].  Arian's eyes bulge at your suggestion, half in fear and half in lust.  \"<i>I... I can't possibly do that!  I mean, I don't have the energy,</i>\"  [Arian Ey] declares, swallowing audibly and averting [Arian eir] eyes.");
 	
 	outputText("\n\nGrinning, you pull [Arian em] into a final kiss, telling [Arian em] this is just something for [Arian em] to think about.  Having said that, you quickly redress and excuse yourself, leaving one flustered lizan behind to rest.");
-	player.sexReward("cum");
+	player.sexReward("cum","Vaginal");
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }

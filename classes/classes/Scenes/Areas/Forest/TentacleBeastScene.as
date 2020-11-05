@@ -167,7 +167,8 @@ internal function tentacleVictoryRape():void {
 			outputText("You quickly reach a cunt-cramping orgasm, which forces the creature to unload a torrent of hot, musky fluids inside you. You feel bloated and stuffed as the beast reflexively sprays the entire contents of its seminal sacs... or whatever it stores its cum in... inside you. With a quick squeeze, you start expelling the tentacle, which prompts the creature to withdraw its tendril and leave your body. You walk away well satisfied while the abomination is too exhausted to move.");
 		}
 	}
-	player.sexReward("cum")
+	player.sexReward("cum","Anal")
+	player.sexReward("cum","Lips")
 	cleanupAfterCombat();
 }
 
@@ -267,7 +268,8 @@ internal function tentacleLossRape():void {
 		if(player.balls > 0) outputText("Your balls have overfilled the creature!\n\n");
 		else outputText("Your cum has overfilled the creature!\n\n");
 		outputText("One last jerk from the creature breaks your hold and it pulls itself away from your member, excess cum spilling everywhere and flying through the air as it flops about. Clearly overwhelmed, the beast lumbers clumsily back into the bush. You laugh to yourself as you made the creature taste its own proverbial medicine as its efforts to overwhelm you completely backfired.");
-		player.sexReward("Cum");
+		player.sexReward("cum","Anal")
+		player.sexReward("cum","Lips")
 		dynStats("str", 0.5,"spe", -.5, "int", -1, "lib", 5, "sen", 1, "cor", 1);
 		monster.HP = 0;
 		if (player.HP == 0) player.HP++;
@@ -351,7 +353,8 @@ internal function tentacleLossRape():void {
 			}
 			outputText("The tentacles holding you release, leaking fluids everywhere.  You delight in giving one of the larger ones a hard stomp, as a reminder not to trifle with you.");
 			//end (victory)
-			player.sexReward("Cum");
+			player.sexReward("cum","Anal")
+			player.sexReward("cum","Lips")
 			dynStats("tou", .5, "spe", -.5, "int", -.5, "lib", 1, "sen", 1, "cor", 1);
 			player.boostLactation(.5);
 			monster.HP = 0;
@@ -378,7 +381,8 @@ internal function tentacleLossRape():void {
 			player.buttChange(40,true,true,false);
 			outputText("  It continues to violate your ass until you black out from exhaustion, the number of loads you've released no longer countable.");
 			//end (loss)
-			player.sexReward("Cum");
+			player.sexReward("cum","Anal")
+			player.sexReward("cum","Lips")
 			dynStats("tou", 1, "int", -.5, "lib", 2, "sen", 1, "cor", .5);
             if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseTwoHours);
@@ -388,7 +392,8 @@ internal function tentacleLossRape():void {
 		if(player.hasCock() && player.cumQ() < 1500 && player.ass.analLooseness >= 0) {
 			outputText("Just as you think it's over, the tentacle inside your " + assholeDescript() + " begins to swell massively, causing another surge of cum to leave you, and another, and another.  It continues to violate your ass until you black out from exhaustion, the number of loads you've released no longer countable.");
 			//end (loss)
-			player.sexReward("Cum");
+			player.sexReward("cum","Anal")
+			player.sexReward("cum","Lips")
 			dynStats("tou", 1, "int", -.5, "lib", 2, "sen", 1, "cor", .5);
             if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseTwoHours);
@@ -400,7 +405,9 @@ internal function tentacleLossRape():void {
 			player.buttChange(40,true,true,false);
 			outputText("  It continues to violate your ass until you black out from exhaustion, the number of times you've orgasmed no longer countable.");
 			//end (loss)
-			player.sexReward("Cum");
+			player.sexReward("cum","Vaginal")
+			player.sexReward("cum","Anal")
+			player.sexReward("cum","Lips")
 			dynStats("tou", 1, "int", -.5, "lib", 2, "sen", 1, "cor", .5);
             if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseTwoHours);
@@ -416,7 +423,8 @@ internal function tentacleLossRape():void {
 			if(player.balls > 0) outputText("r " + ballsDescriptLight());
 			outputText(" empty and you turn around to leave, giving the spunk covered mass a swift kick as a reminder of your superiority.");
 			//end (victory)
-			player.sexReward("Cum");
+			player.sexReward("cum","Anal")
+			player.sexReward("cum","Lips")
 			dynStats("tou", .5, "spe", -.5, "int", -.5, "lib", 1, "sen", 1, "cor", 1);
 			monster.HP = 0;
 			if (player.HP == 0) player.HP++;
@@ -425,7 +433,7 @@ internal function tentacleLossRape():void {
 			return;
 		}
 		//end (loss)
-		player.sexReward("Cum");
+		player.sexReward("cum");
 		dynStats("tou", 1, "int", -.5, "lib", 2, "sen", 1, "cor", .5);
         if (CoC.instance.inCombat) cleanupAfterCombat();
         else doNext(camp.returnToCampUseTwoHours);
@@ -433,7 +441,6 @@ internal function tentacleLossRape():void {
 	}
 	//Milk surprise!
 	if(player.biggestLactation() >= 3.5 && player.gender > 0) {
-		player.sexReward("Cum");
 		outputText("Before you can react the creature has wrapped a long, sinewy tendril around each of your legs.  A third tendril quickly circles your waist.  You can feel the creature's strength immediately and wince as it tightens its grip.  The constricting pain is followed by a tingling, almost burning sensation, which you quickly recognize means the beast has injected you with some kind of poison.  A warm sensation floods your body and you realize with a start the poison is actually an aphrodisiac.\n\n");
 		dynStats("lib", 2);
 		outputText("You feel light-headed as the drug spreads through your body quickly.  Your ");
@@ -474,13 +481,16 @@ internal function tentacleLossRape():void {
 			else outputText("The beast senses your excitement and with beguiling speed swiftly impales your " + vaginaDescript(0) + " with one of its massive, knobbly tentacles but before you can even digest the invasion another tentacle impales itself on your [cock], the anus like opening gaping to envelope you.  The double assault drives your body wild, and you begin pumping back against the invader and thrusting your [cock] deeper into its tight fuck hole.\n\n");
 			if(player.cuntChange(20,true)) outputText("\n");
 			outputText("\n");
+			player.sexReward("cum", "Vaginal");
 		}
 		outputText("You slowly become aware that the beast has slowed its assault on your genitals and soon stops altogether, withdrawing entirely.  The beast lets out an audible gurgle and you smile as you feel the tentacles re-double their assault on your " + nippleDescript(0) + "s.  The beast slowly lifts you off the ground with its strong tentacles, suspending you about three feet off the ground before flipping you over.  You hang suspended in the air, your [allbreasts] dangling lewdly under you.  Suddenly you feel the desire to \"<i>moo</i>\" as the attack on your aching " + nippleDescript(0) + "s continues.  The tentacles continue their assault for what seems like hours, but then you gradually sense the tentacles beginning to slow.  Another gurgling sound confirms your suspicions - the beast wants your milk, but it's obvious you have far too much to offer!  You grin wickedly when the beast's tentacles begin to sag, quickly reaching up to fondle and massage your " + breastDescript(0) + ".  The stimulation causes even more milk to gush down the tentacles length.  After a few moments of the increased assault the beast groans and releases you, the tentacles popping off your nipples audibly, spraying your milk about as they release you.\n\n");
 		//[Female/Herm]
 		if(player.gender >= 2) outputText("Your [allbreasts] ache, but you can tell immediately they are not depleted.  More milk dribbles as the tentacles try to retreat, and you grin, hardly satisfied with the beast's attack.  You reach between your thighs, seizing the nearest knobbly tentacle.  The beast is so sated it offers no resistance as you begin to pound your " + vaginaDescript(0) + " with the living dildo.  The idea of turning the tables on the raping beast spurs you on to new heights and you cum quickly around the knobbly shaft, your cunt spasming and milking the bumpy tentacle hard.  As you finish with the tentacle the beast gives a final gurgle and retreats into the forest.");
 		//[Male]
 		else outputText("You feel your " + nippleDescript(0) + "s dribbling milk as the tentacles attempt their retreat.  You realize the beast has nowhere near drained you and you grin eagerly as your [cock] throbs mightily.  You reach back and seize the nearest knobby tentacle, the beast offering no resistance as you shove your [cock] into the tight, puckered orifice.  You moan in delight, grunting happily as you fuck the tight hole wildly.  The thought of turning the tables on the raping beast drives you closer to the edge; soon you bury all of your cock into the tight fuck tool and unload your massive torrent of cum into the tentacle.  Your hot cum gushes into the beast and you can feel the tentacle throb and squirm in protest as you fill the beast even more.  After your [cock] slips free the beast lets out a final gurgle of defeat and slithers away into the forest.");
-		player.sexReward("Cum");
+		player.sexReward("cum", "Anal");
+		player.sexReward("Default","Tits")
+		player.sexReward("Detault","Nipples")
 		dynStats("tou", .5, "spe", -.5, "int", -.5, "lib", 1, "sen", 1, "cor", 1);
 		player.boostLactation(.5);
 		monster.HP = 0;
@@ -541,7 +551,7 @@ internal function tentacleLossRape():void {
 }
 
 private function tentacleRapeContinuation():void {
-	player.sexReward("Cum");
+	player.sexReward("cum");
 	dynStats("tou", 1, "int", -.5, "lib", 2, "sen", 1, "cor", .5);
 	clearOutput();
 	spriteSelect(100);

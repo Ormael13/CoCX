@@ -173,7 +173,7 @@ public class NightmareScene extends BaseContent
 			}
 			player.createPerk(PerkLib.BicornBlessing, 0, 0, 0, 0);
 			player.cor = 100;
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
 			player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
 			player.addStatusValue(StatusEffects.CanMeetNightmare, 1, 1);
 			CelessScene.instance.nightmareDefeated();
