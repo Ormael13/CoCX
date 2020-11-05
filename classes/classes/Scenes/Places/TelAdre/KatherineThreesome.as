@@ -286,7 +286,8 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			}
 			outputText("\n\nKath collapses on top of you, spent.  Urta twists you around enough to give you and Kath each a kiss.  “<i>Thanks [name], that’s exactly what I needed.</i>”\n\n");
 			outputText("“<i>Me too,</i>” purrs Kath as she snuggles up against your back for a nap.  You stick around long enough for " + katherine.cockMultiple("Katherine’s knot", "Kath’s knots") + " to slide out, then you’re on your way - leaving Kath and Urta to take care of each other.");
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
+			player.sexReward("cum","Anal");
 			player.orgasm();
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(false);
@@ -646,7 +647,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 				outputText("expanding against " + (player.isTaur() ? "your rump" : "the small of your back") + ".  The air is forced from Urta’s lungs and you get pushed to the ground as both your lovers collapse against you.\n\nYou smile to yourself and flex " + (player.hasVagina() ? "the muscles in your pussy" : "your sphincter") + ", milking Urta’s cock.  She may be packed with Kath’s sperm but Urta is still Urta.  She responds by gripping your " + (player.isTaur() ? "flanks" : "hips") + " once more");
 			outputText(".\n\nDespite her cum-stuffed belly she starts fucking you at a blistering pace, determined to fill you as she has been filled.  The feeling is exquisite and when you look " + (player.isNaga() ? "down" : "back") + " you see that Kath has taken Urta’s balls in hand.  She grins at you and starts massaging them while she whispers encouragement in Urta’s ear.\n\n");
 			outputText("At last you feel the delightful blast of cum inside you.  Urta pulls your body against hers and floods you with her hot, sticky juices.  Your stomach muscles give out, unable to contain the load Urta pumps inside you.  Her throbbing cock brings you release and you cum, joining your lovers in ecstasy." + (player.hasCock() ? "  Your own cock contributes to the mess by spraying the floorboards with your wasted seed." : ""));
-			player.sexReward("cum");
+			player.sexReward("cum","Anal");
 			sandwichCommonEnd(); //Play the common end
 		}
 

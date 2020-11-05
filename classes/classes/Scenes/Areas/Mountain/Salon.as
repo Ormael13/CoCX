@@ -627,7 +627,7 @@ private function minotaurCumBukkakeInSalon():void {
 	//[NEXT]
 	player.orgasm();
 	dynStats("lib", 2, "sen", 2, "cor", 2);
-	player.sexReward("cum");
+	player.sexReward("cum","Lips");
 	doNext(minotaurSalonFollowUp);
 }
 private function minotaurSalonFollowUp():void {

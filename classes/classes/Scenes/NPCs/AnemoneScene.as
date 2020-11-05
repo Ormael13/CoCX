@@ -279,7 +279,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 				outputText("The anemone's eyes roll back in her head as she reaches her climax first, hips shaking and penis squirting a glob of semen that drools down the side.  ");
 				//[(Flexibility cat perk)
 				if (player.findPerk(PerkLib.Flexibility) >= 0) outputText("You lean down and take the anemone's cock in your own mouth as she continues orgasming, swallowing the cool, slippery jism -- it tastes not salty and fishy as you'd hoped but somewhat faintly like algae.  The anemone, recovering her wits a bit, looks at you blankly, as though she can't fathom why anyone would want to drink <i>her</i> ejaculate instead of the other way around.  Your eyes twinkle mirthfully in response as you suck and swallow the last of her jizz.  ");
-				player.sexReward("cum");
+				player.sexReward("cum","Vaginal");
 				outputText("Your own orgasm takes a bit longer, but the convulsing walls of her pussy do their best to help you arrive and the feelers along her labia writhe against your [cocks] in the same tempo, injecting the last of their venom.  With a deep, final thrust, " + sMultiCockDesc() + " erupts in her pussy.  ");
 				//[(big skeet)
 				if (player.cumQ() > 500) {
@@ -415,7 +415,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 			anemonePreg();
 			//(reduce lust to min, pregnancy check)
 			//(pass 1 hour, reset lust to min or min+10 if big or greater skeet)
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
 			cleanupAfterCombat();
 		}
 
@@ -631,7 +631,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 				outputText("After several minutes of this final orgasm you fall backwards into the shallow water with a splash and pass out with a look of bliss, floating on a surface made choppy by your hectic ride.  The poor anemone takes a while longer to collect herself, then slowly pulls her limp dick out of your " + vaginaDescript(0) + " and tugs you up the beach past the tideline so you won't roll facedown in the water while you're unconscious.  She bends down and kisses you, tracing your " + nippleDescript(0) + "; too spent to hold up her hair, it drapes over your prone form as she leans and releases a last shot of her drug to ensure that your dreams will be of her.");
 				anemonePreg();
 				//(reduce lust to min, add 10 lust, pregnancy check)
-				player.sexReward("cum");
+				player.sexReward("cum","Vaginal");
 				dynStats("lib", 1, "lus", 10);
 				cleanupAfterCombat();
 			}
@@ -1735,7 +1735,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 				outputText("\n\nYou pull away from her and stagger to your feet, then redress.  Kid A lies on the ground, already asleep from her exertion; you step over her with a grin.");
 				//anemone preg chance, slimefeed, reduce lust by 100, if Kidswag = 1 set Kidswag = 2
 				anemonePreg();
-				player.sexReward("cum");
+				player.sexReward("cum","Vaginal");
 				if (flags[kFLAGS.ANEMONE_KID] == 1) flags[kFLAGS.ANEMONE_KID] = 2;
 				doNext(camp.returnToCampUseEightHours);
 				return true;

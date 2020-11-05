@@ -157,7 +157,8 @@ public class InfestedHellhoundScene extends BaseContent
 				else
 					player.createStatusEffect(StatusEffects.WormPlugged, 1 + rand(5), 0, 0, 0);
 				player.knockUpForce(PregnancyStore.PREGNANCY_WORM_STUFFED, 100 + player.statusEffectv1(StatusEffects.WormPlugged)); //Will be cleared when the WormPlugged effect ends
-				player.sexReward("cum");
+				player.sexReward("cum","Vaginal");
+				player.sexReward("cum","Anal");
 				dynStats("lib", 1, "cor", 1);
 				cleanupAfterCombat();
 			}
@@ -189,7 +190,7 @@ public class InfestedHellhoundScene extends BaseContent
 				outputText("Unable to support yourself any longer, you collapse, your hips held up by the demonic black dog-dick lodged in your orifice.  They keep cumming and cumming, until your body takes a slow slide off to the ground.  Your eyes drift closed, lulled to sleep by the squirming warmth plugging your " + assholeDescript() + " and coating your back.");
 				outputText("  ");
 				player.buttChange(monster.cockArea(0), true);
-				player.sexReward("cum");
+				player.sexReward("cum","Anal");
 				dynStats("lib", 1, "cor", 1);
 				cleanupAfterCombat();
 			}

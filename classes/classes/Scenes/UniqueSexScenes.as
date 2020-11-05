@@ -26,8 +26,8 @@ package classes.Scenes
 			outputText(" The both of you are moaning like wanton whores and lost in sensations by now, but neither of you want to lose to the other in this desperate duel of endurance and sexual skill. Soon your mind is going blank from the vigorous fucking but you don’t care. You won’t allow yourself to orgasm before Holli does. Eventually, unable to hold anymore, the both of you scream your defeat together as your stamens explode, filling each others wombs to the brim. There’s so much liquid pollen pumped into you and you can feel your bloated stomach groan under the pressure. You can’t help but cup it with your hand in motherly delight. Holli isn't looking any better, it will probably take hours for her belly to deflate.\n\n");
 			outputText("\"<i>I... want a rematch...No way I'll stop at a tie!</i>\"\n\n");
 			outputText("That won’t be today though. You're so packed up with plant cum that without even checking your odds, you're pretty sure you are pregnant. You doubt Holli can hold any more of your pollen either, so you dress back up, highly satisfied and somewhat smug, leaving Holli to her personal frustration.");
-			player.sexReward("cum");
-			player.sexReward("vaginalFluids");
+			player.sexReward("cum","Vaginal");
+			player.sexReward("vaginalFluids","Dick");
 			player.sexReward("saliva");
 			statScreenRefresh();
 			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
@@ -62,8 +62,8 @@ package classes.Scenes
 					"\"<i>Oh, I’m positive it did… she should be giving birth to our seedling in no time.</i>\"\n\n" +
 					"Your bellies aren’t any better, though the pregnancy will soon move down to the pitcher, " +
 					"and you fantasize at the idea of giving birth, the two of you hoping for the best as you head back to camp.");
-			player.sexReward("cum");
-			player.sexReward("vaginalFluids");
+			player.sexReward("cum","Vaginal");
+			player.sexReward("vaginalFluids","Dick");
 			player.sexReward("saliva");
 			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 			statScreenRefresh();
@@ -92,8 +92,8 @@ package classes.Scenes
 					"While your twin takes care of his mouth, unable to wait any longer, you pull him to you, impaling your nectar drenched hole on his cock. You begin to slide yourself up and down, making lewd wet noises as you forcefully milk your former opponent's stamen. Pollination feels so wonderful! You fawn over him, moving into your drugged victim’s open arms and before long, it’s hard to figure out which of you is the most addicted. Your sister suddenly breaks the sloppy kiss, her mouth and his still linked by a strand of saliva, as your mate finally bottoms out and fills your flower with his seed, you and your sister achieve a second orgasm.\n\n" +
 					"Highly satisfied, the both of you deposit him back on the ground with little ceremony, half conscious from the massive drug-induced orgasm your pollen put him under. You and your twin can’t help but hope the seed took, " +
 					"daydreaming of your children to come as you seal your vaginas shut to prevent the load from escaping.");
-			player.sexReward("cum");
-			player.sexReward("vaginalFluids");
+			player.sexReward("cum","Vaginal");
+			player.sexReward("vaginalFluids","Dick");
 			player.sexReward("saliva");
 			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 			statScreenRefresh();
@@ -290,8 +290,8 @@ package classes.Scenes
 			outputText("drooling precum at the mere thought of getting a shot at your lovely pussy, something you will be more than happy to let him do. Looking at you with half lidded eyes, he lets you take control entirely. You finally reel him into your nectar bath and kiss him, lubing up his stamen with your nectar. He makes a cute moan as you prepare him for the next step, drooling with delight at the idea of getting what you want.\n\n");
 			outputText("Unable to wait any longer, you pull him to you, impaling your nectar drenched hole on his cock. You begin to slide yourself up and down, making lewd wet noises as you forcefully milk your former opponent's stamen. Pollination feels so wonderful! You fawn over him, moving into your drugged victim’s open arms and before long it’s hard to figure which of you is the most addicted, as you kiss him with the passion of a longtime lover. You break the sloppy kiss, your mouths still linked by a strand of saliva, as your mate finally bottoms out and fills your flower with his seed.\n\n");
 			outputText("Highly satisfied, you deposit him back on the ground with little ceremony, half conscious from the massive drugged induced orgasm your pollen claimed from him. You can’t help but hope it took, daydreaming of your children to come as you seal your vagina shut to prevent the load from escaping.");
-			player.sexReward("cum");
-			player.sexReward("vaginal");
+			player.sexReward("cum","Vaginal");
+			player.sexReward("vaginalFluids","Dick");
 			statScreenRefresh();
 			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 			cleanupAfterCombat();
@@ -304,7 +304,8 @@ package classes.Scenes
 			outputText("You share a bath with her, washing her body thoroughly with your syrupy nectar until she’s as slimy and ready as you are. Your ambient pollen and various aphrodisiacs only serve to turn her on more, her skin a flushed shade of pink under your sticky nectar, making her squirt from the smallest stimulation, like your heated breath against her neck. You caress her skin, making sure not to leave any area untouched, as you pull your vines into the bath, slowly aligning your cunny and hers with your stamens.\n\n");
 			outputText("She lazily gasps in surprise and delight as you insert yourself in her, filling her ass and cunt in just the perfect way with your thick vines. You aren't left wanting either, expertly fucking your pussy in a way only your own stamens can manage. You moan in unison with your partner as your stamens work both your and her holes in perfect synchronization. Nectar and pussy juice mix in the bath, as the pair of you reach orgasm after orgasm, pumping your respective bodies full of fluids. Reaching your peak for the last time with a shuddering cry, you slowly pull the girl out of your flower and deposit her back on the ground, leaving her unconscious but satisfied as you caress her belly still full of your semen.\n\n");
 			outputText("Your own belly isn’t any better, and you fantasise at the idea of giving birth hoping it took as you head back to camp.");
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
+			player.sexReward("vaginalFluids","Dick");
 			statScreenRefresh();
 			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 			cleanupAfterCombat();
@@ -440,8 +441,8 @@ package classes.Scenes
 			outputText("everywhere in the vicinity. You can see the pulse of your flames as a small embery glow in every thrust of [monster his] hips as [monster he] keeps fiercely masturbating in an attempt to expel the lust.\n\n" +
 					"You leave your writhing lust receptacle there, it's unlikely [monster he] will stop masturbating anytime soon.");
 			//We give both sex reward so to end player rut or heat in the event pc has either
-			player.sexReward("cum");
-			player.sexReward("vaginalFluids");
+			if (monster.hasCock()) player.sexReward("cum");
+			if (monster.hasVagina()) player.sexReward("vaginalFluids");
 			cleanupAfterCombat();
 		}
 
@@ -472,7 +473,7 @@ package classes.Scenes
 			player.HP = player.maxHP();
 			player.mana = player.maxMana();
 			player.soulforce = player.maxSoulforce();
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
 			cleanupAfterCombat();
 		}
 //this.pronoun1 = "he";

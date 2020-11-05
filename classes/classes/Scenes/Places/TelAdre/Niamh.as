@@ -884,7 +884,7 @@ private function barBeerOrgyTits():void {
 		else if(player.cockTotal() > 1) outputText("  Various girls around the room are patting their bellies and giving you sultry looks while your cum continues to drip from their pussies.  You passively wonder if any of them might indeed be hauling around some larger pregnant bellies in a few days, but you try to push those thoughts from your head.  At the moment they seem happy.");
 		// IF [player has pussy]
 		if (player.hasVagina()) {
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
 			outputText("  You walk slightly bow legged out of the bar.  Cum is still dripping from your snatch and will likely continue to do so for a while.");
 			//IF [player is not pregnant]
 			if(player.pregnancyType == 0) outputText("  You can't help but wonder how virile those dog morphs might have been as their cum and the cum of other customers sloshes around inside your uterus.");

@@ -365,7 +365,7 @@ private function vaginalDomHollisTentacruels():void {
 	outputText(".  The second time, you make it up.  Holli is a mess.  Everything from the shoulders up is glazed white, while the rest of her body has strings of seed dangling like obscene Christmas ornaments.  Around you, there's small puddles of seed rapidly vanishing into the wasted earth - each of the other tentacles erupted with its brothers, spurting uselessly as you ignored it.");
 	outputText("\n\nYou give Holli a peck on her cheek, savoring the flavor and say, \"<i>Good girl.</i>\"  Then, you get dressed, trying to ignore the squishing wetness between your thighs.");
 	fertilizeHolli(false);
-	player.sexReward("cum");
+	player.sexReward("cum","Vaginal");
 	dynStats("sen", -2, "cor", 1);
 	doNext(camp.returnToCampUseOneHour);
 }

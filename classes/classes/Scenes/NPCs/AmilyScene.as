@@ -3299,7 +3299,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				else outputText("For a guy?</i>\"\n\n");
 
 				outputText("You shrug, uncertain. Slowly, Amily sits up and gets off of you. \"<i>I... um... thank you.</i>\" She says, then quickly steals a kiss from you before running off. She's in such a hurry that she's clear over on the other side of the camp before you can tell her that she left her pants behind.");
-				player.sexReward("cum");
+				player.sexReward("cum","Dick");
 				doNext(camp.returnToCampUseOneHour);
 				dynStats("int", .25, "lus", 10);
 				return;
@@ -3341,7 +3341,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 					else player.knockUp(PregnancyStore.PREGNANCY_AMILY, PregnancyStore.INCUBATION_MOUSE);
 				}
-				player.sexReward("cum");
+				player.sexReward("cum","Dick");
 				dynStats("sen", -1);
 			}
 			doNext(camp.returnToCampUseOneHour);
@@ -4865,7 +4865,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//Preg chanceeee
 			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
             else player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE);
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
 			dynStats("sen", -2, "cor", 2);
 
 			doNext(camp.returnToCampUseOneHour);
@@ -5035,7 +5035,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			else outputText("\"<i>...Does it make me a lesbian, that I love this so much? Or am I just so lonely for company that even another woman is good?</i>\" Amily asks. Then she musters the energy to shake her head. \"<i>It doesn't matter. I love you.</i>\"\n\n");
 
 			outputText("Your own strength returning to you, you sit up and smile at your mousey lover before giving her a deep kiss, tasting your juices and letting her get a taste of her own. Then you redress yourself and return to your camp.");
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
 			flags[kFLAGS.AMILY_TIMES_FUCKED_FEMPC]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -5088,7 +5088,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				else player.knockUp(PregnancyStore.PREGNANCY_AMILY, PregnancyStore.INCUBATION_MOUSE);
 			}
 			outputText("</i>\"  Chuckling softly, you lay there and embrace your lover for a time and then, reluctantly, you get dressed and leave.");
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
 			flags[kFLAGS.AMILY_HERM_TIMES_FUCKED_BY_FEMPC]++;
 			flags[kFLAGS.AMILY_FUCK_COUNTER]++;
 			doNext(camp.returnToCampUseOneHour);
@@ -7381,7 +7381,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("Now filled with cum, you roll onto your side, taking a now-sleeping Amily with you.  Urta crawls into bed after you, gently stroking your cheek and giving you little kisses on the shoulders and neck.  You don't even mind as her cum drips out of you onto the floor, mixed lewdly with your girlcum and Amily's.  Exhausted, you close your eyes to a final kiss from Urta.\n\n");
 
 			outputText("\"<i>Mmm,</i>\" she purrs, giving your cheek a last stroke with her thumb.  \"<i>We gotta do this again sometime.</i>\"\n\n");
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
 			dynStats("sen", -2);
 			outputText("You couldn't agree more.");
 			doNext(urtaXAmilyAfterMurrrath);
@@ -7483,7 +7483,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("With a shuddering sigh, Amily dismounts you, and you roll onto your side next to her, reaching back to caress her cheek and tell her how wonderful she did.  She wraps her arms around you, hooking a leg around your waist softly, and the two of you lie there and cuddle for some time.\n\n");
 			outputText("\"<i>Mm... you know... maybe we should do this again sometime,</i>\" she says with a devious smirk, kissing your cheek.");
 			flags[kFLAGS.AMILY_TIMES_BUTTFUCKED_PC]++;
-			player.sexReward("cum");
+			player.sexReward("cum","Anal");
 			dynStats("sen", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}

@@ -249,7 +249,7 @@ private function bunbunFucksYourVag():void {
 		if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
         else player.knockUp(PregnancyStore.PREGNANCY_BUNNY, PregnancyStore.INCUBATION_BUNNY_BABY, 60);
 	}
-	player.sexReward("cum");
+	player.sexReward("cum","Vaginal");
 	dynStats("lib", 1, "sen", -3);
 	doNext(camp.returnToCampUseEightHours);
 }
@@ -338,7 +338,7 @@ private function bunbunFucksPCInAss():void {
 	outputText("She walks away, her puffy tail twitching with the breeze while your eyes drift closed.");
 	//(Easter ass-preg + 8 hours pass)
 	player.buttKnockUp(PregnancyStore.PREGNANCY_BUNNY, PregnancyStore.INCUBATION_BUNNY_EGGS, 1, 1);
-	player.sexReward("cum");
+	player.sexReward("cum","Anal");
 	dynStats("lib", 1, "sen", 1);
 	doNext(camp.returnToCampUseEightHours);
 }
@@ -520,7 +520,8 @@ private function bunbun69():void {
 			player.tailType = Tail.RABBIT;
 			player.ears.type = Ears.BUNNY;
 			doNext(camp.returnToCampUseOneHour);
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", 1, "sen", 1);
 		}
 		//REGULAR SHOW
@@ -576,7 +577,8 @@ private function bunbun69():void {
 			player.tailType = Tail.RABBIT;
 			player.ears.type = Ears.BUNNY;
 			doNext(camp.returnToCampUseOneHour);
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", 1, "sen", 1);
 		}
 	}
@@ -616,7 +618,7 @@ private function bunbun69():void {
 		player.tailType = Tail.RABBIT;
 		player.ears.type = Ears.BUNNY;
 		doNext(camp.returnToCampUseOneHour);
-		player.sexReward("cum");
+		player.sexReward("cum","Vaginal");
 		dynStats("lib", 1, "sen", 1);
 	}
 }
@@ -974,7 +976,7 @@ private function getEggflated():void {
 	}
 	outputText(player.modThickness(player.maxThicknessCap(),3));
 	outputText(player.modTone(0,3));
-	player.sexReward("cum");
+	player.sexReward("cum","Vaginal");
 	dynStats("lib", 1, "sen", -3);
 	doNext(camp.returnToCampUseEightHours);
 }

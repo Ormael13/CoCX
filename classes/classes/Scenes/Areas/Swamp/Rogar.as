@@ -616,7 +616,7 @@ private function loseButtGinity():void {
 		outputText("With exhausted panting the only sound from both Ro'gar and yourself, you take a few moments to catch your breath.  Ro'gar affectionately nuzzles you before letting you get to your feet, holding you until he's sure you can stand easily.  The pair of you share a knowing look and Ro'gar grins at you.  \"<i>You're amazin', [name].  You're welcome anytime ya like.</i>\"  He gives you a tender embrace as you collect your things and walk on wobbly legs toward the door, still feeling cum running down your legs" + (player.armorDescript() != "gear" ? " beneath your garments" : "") + ".  The orc sees you off with a wave and a toothy grin.\n\n");
 		//<Lust sated, slimefeed>
 	}
-	player.sexReward("cum");
+	player.sexReward("cum","Anal");
 	player.orgasm();
 	dynStats("sen", 2);
 	doNext(camp.returnToCampUseOneHour);
