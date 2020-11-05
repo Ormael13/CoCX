@@ -275,6 +275,7 @@ use namespace CoC;
 		public function submenucuzwhynot():void {
 			menu();
 			//addButton(4, "ClickItOnce", AddMaxBackpack3).hint("");
+			addButton(4, "ClickItOnce", AddMaxBackpack3).hint("Fixing Lover Zenji missing one status effect needed for his sex scenes menu.");
 			addButton(6, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(7, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
 			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
@@ -295,11 +296,11 @@ use namespace CoC;
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack2():void {
-
+			
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack3():void {
-
+			if (!player.hasStatusEffect(StatusEffects.ZenjiZList)) player.createStatusEffect(StatusEffects.ZenjiZList,0,0,0,0);
 			doNext(SoulforceCheats);
 		}
 		public function AddMaxBackpack4():void {
