@@ -5625,7 +5625,7 @@ use namespace CoC;
 				goblinCounter += 1;
 			if (findPerk(PerkLib.GoblinsDescendant) >= 0 || findPerk(PerkLib.BloodlineGoblin) >= 0)
 				goblinCounter += 2;
-			if (skinTone != "pale yellow" && skinTone != "grayish-blue" && skinTone != "green" && skinTone != "dark green" && skinTone == "emerald")
+			if (skinTone != "pale yellow" && skinTone != "grayish-blue" && skinTone != "green" && skinTone != "dark green" && skinTone != "emerald")
 				goblinCounter = 0;
 			if (ears.type != Ears.ELFIN)
 				goblinCounter = 0;

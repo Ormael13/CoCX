@@ -245,11 +245,13 @@
         <key src="#114477" base="chitin2" transform="darken(50)"/>
         <key src="#FFE9CC" base="skin" transform="lighten(25)"/>
         <key src="#FACE8D" base="skin"/>
+		<key src="#e7be82" base="skin" transform="darken(8)"/>
         <key src="#BC9B6D" base="skin" transform="darken(25)"/>
         <key src="#7C6647" base="skin" transform="darken(50)"/>
         <key src="#1C0F0F" base="skin" transform="darken(75)"/>
         <key src="#FFCCCC" base="skin2" transform="lighten(25)"/>
         <key src="#FF9999" base="skin2"/>
+		<key src="#eb8d8d" base="skin2" transform="darken(8)"/>
         <key src="#BB7777" base="skin2" transform="darken(25)"/>
         <key src="#884444" base="skin2" transform="darken(50)"/>
         <key src="#221111" base="skin2" transform="darken(75)"/>
@@ -764,6 +766,7 @@
         <cell rect="181,429,29,30" name="horns_bg/frostWyrm" dx="74" dy="26"/>
         <cell rect="301,396,59,65" name="horns_overclothe/deer" dx="74" dy="-5"/>
         <cell rect="1,470,59,65" name="antennae/bee" dx="75" dy="4"/>
+		<cell rect="301,70,29,32" name="faceShading/faceShading" dx="90" dy="37"/>
     </spritemap>
     <spritemap file="lewd.png">
         <cell rect="11,80,49,29" name="breasts/0" dx="79" dy="68"/>
@@ -1035,6 +1038,8 @@
         <cell rect="759,561,83,139" name="tail/wendigo_taur" dx="144" dy="49"/>
         <cell rect="508,351,82,69" name="tail/kamaitachi" dx="95" dy="87"/>
         <cell rect="508,351,82,69" name="tail/kamaitachi_taur" dx="144" dy="50"/>
+        <cell rect="170,71,168,139" name="tail/ratatoskr" dx="58" dy="15"/>
+        <cell rect="170,71,168,139" name="tail/ratatoskr_taur" dx="101" dy="21"/>
         <cell rect="1,1015,173,156" name="tail/fox1" dx="4" dy="31"/>
         <cell rect="1,1015,173,156" name="tail/fox1_taur" dx="60" dy="47"/>
         <cell rect="523,858,173,156" name="tail/fox2" dx="16" dy="36"/>
@@ -1130,6 +1135,7 @@
 		<layer name="forehead"/>
         <layer name="ears_bg"/>
 
+		<layer name="faceShading"/>
         <layer name="face"/>
         <layer name="head"/>
 
