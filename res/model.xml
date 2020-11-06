@@ -637,6 +637,8 @@
         <cell rect="361,350,89,98" name="hair_bg/02" dx="60" dy="5"/>
         <cell rect="61,70,59,65" name="hair/feather" dx="75" dy="21"/>
         <cell rect="61,136,59,65" name="hair_bg/feather" dx="75" dy="21"/>
+		<cell rect="481,136,59,65" name="hair/ratatoskr" dx="75" dy="21"/>
+        <cell rect="541,136,59,65" name="hair_bg/ratatoskr" dx="75" dy="21"/>
         <cell rect="121,70,59,65" name="hair/gorgon" dx="75" dy="21"/>
         <cell rect="121,136,59,65" name="hair_bg/gorgon" dx="75" dy="21"/>
         <cell rect="1,251,89,98" name="hair/slime" dx="60" dy="4"/>
