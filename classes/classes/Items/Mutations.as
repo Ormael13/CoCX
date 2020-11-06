@@ -28,7 +28,7 @@ public final class Mutations extends MutationsHelper {
 
     public static const gooSkinColors:Array = ["green", "magenta", "blue", "cerulean", "emerald", "pink"];
     public static const magmagooSkinColors:Array = ["red", "orange", "reddish orange"];
-    public static const darkgooSkinColors:Array = ["indigo", "light purple", "purple", "purplish black"];
+    public static const darkgooSkinColors:Array = ["indigo", "light purple", "purple", "purplish black", "dark purple"];
     public static const oniEyeColors:Array = ["red", "orange", "yellow", "green"];
     // import classes.ItemSlotClass;
 

@@ -5834,7 +5834,7 @@ use namespace CoC;
 		{
 			Begin("Player","racialScore","darkgoo");
 			var darkgooCounter:Number = 0;
-			if (skinTone == "indigo" || skinTone == "light purple" || skinTone == "purple" || skinTone == "purplish black") {
+			if (skinTone == "indigo" || skinTone == "light purple" || skinTone == "purple" || skinTone == "purplish black" || skinTone == "dark purple") {
 				darkgooCounter++;
 				if (hairType == Hair.GOO)
 					darkgooCounter++;
