@@ -24,9 +24,9 @@ public class EventParser {
     private static var _campSet:Boolean = false;
 
     public static function playerMenu():void {
-        if (CoC.instance.flags[kFLAGS.CHARVIEW_STYLE] != 2) {
+        if (CoC.instance.flags[kFLAGS.CHARVIEW_STYLE] != 0) { // if not display always
             CoC.instance.mainViewManager.hidePlayerDoll();
-        } else {
+        } else { // if display always
             CoC.instance.mainViewManager.showPlayerDoll(false);
         }
         if (!CoC.instance.inCombat) {
@@ -88,7 +88,7 @@ public class EventParser {
         }
         CoC.instance.inCombat = false;
         DungeonAbstractContent.dungeonLoc = 0; //Replaces inDungeon = false;
-		
+
 		if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 			if (CoC.instance.player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) CoC.instance.player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
 			CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthA);

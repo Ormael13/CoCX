@@ -32,7 +32,7 @@ import coc.view.MainView;
 //import flash.events.MouseEvent;
 
 	public class CharCreation extends BaseContent {
-		
+
 		public const MAX_TOLERANCE_LEVEL:int = 10;
 		public const MAX_MORALSHIFTER_LEVEL:int = 10;
 		public const MAX_DESIRES_LEVEL:int = 30;
@@ -57,19 +57,19 @@ import coc.view.MainView;
 		public const MAX_FERTILITY_LEVEL:int = 10;
 		public const MAX_MILK_FAUCET_LEVEL:int = 25;
 		public const MAX_CUM_HOSE_LEVEL:int = 25;
-		
+
 		private var specialCharacters:CharSpecial = new CharSpecial();
 		private var customPlayerProfile:Function;
-		
+
 //		private var boxNames:ComboBox;
-		
+
 		public function CharCreation() {}
-		
+
 		public function newGameFromScratch():void {
 			flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = 0;
 			newGameGo();
 		}
-		
+
 		public function newGamePlus():void {
 			flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = player.XP;
 			if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] == 0) flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = 1;
@@ -80,7 +80,7 @@ import coc.view.MainView;
 			flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] = player.gems;
 			newGameGo();
 		}
-		
+
 		public function newGameGo():void {
 			XXCNPC.unloadSavedNPCs();
 			CoC.instance.saves.resetSaveableStates();
@@ -102,14 +102,14 @@ import coc.view.MainView;
 			var sprite:Boolean = flags[kFLAGS.SHOW_SPRITES_FLAG];
 			mainView.setButtonText(0, "Newgame"); // b1Text.text = "Newgame";
 			//flags[kFLAGS.CUSTOM_PC_ENABLED] = 0;
-			
+
 			var showSpecialNames:Boolean = true; // achievements[kACHIEVEMENTS.STORY_FINALBOSS] > 0;
-			
+
 			clearOutput();
 			outputText("You grew up in the small village of Ingnam, a remote village with rich traditions, buried deep in the wilds.  Every year for as long as you can remember, your village has chosen a champion to send to the cursed Demon Realm.  Legend has it that in years Ingnam has failed to produce a champion, chaos has reigned over the countryside.  Children disappear, crops wilt, and disease spreads like wildfire.  This year, <b>you</b> have been selected to be the champion.\n\n");
 			//if (showSpecialNames) outputText("\n\n\n\n");
 			outputText("What is your name?");
-		
+
 			/*CODE FROM CMACLOAD HERE
 			Multiple line case. A text field GeneralTextField, positioning a movieclip AskQuestions below it
 			GeneralTextField.wordWrap = true;
@@ -119,21 +119,21 @@ import coc.view.MainView;
 			AskQuestions._y = GeneralTextField._y + 3 + GeneralTextField._height;
 			again replace _x, _y, _width with x, y, width*/
 			//mainView.mainText.autoSize = true;
-		
+
 			//mainView.mainText.autoSize = TextFieldAutoSize.LEFT;
 			menu();
 			addButton(0, "OK", chooseName);
 		//	simpleChoices("OK",10034,"",0,"",0,"",0,"",0);
 			mainView.nameBox.x = mainView.mainText.x + 5;
 			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
-		
+
 			//OLD
 			//mainView.nameBox.x = 510;
 			//mainView.nameBox.y = 265;
 			mainView.nameBox.text = "";
 			mainView.nameBox.maxChars = 16;
 			mainView.nameBox.restrict = null;
-			
+
 			var preList:Array = [];
 			//function _add(element:Array):void{preList.push({label: element[0], data:element});}
 			//if (CoC_Settings.debugBuild) preList.push( { label: "TestChar", data: [ "TestChar", customTestChar, true, "For debug." ]} );
@@ -411,7 +411,7 @@ import coc.view.MainView;
 			model.time.hours = 0;
 			model.time.minutes = 0;
 		}
-		
+
 		private function chooseName():void {
 			if (CoC.instance.testingBlockExiting) {
 				// We're running under the testing script.
@@ -456,7 +456,7 @@ import coc.view.MainView;
 				genericGenderChoice();
 			}
 		}
-		
+
 		private function genericGenderChoice():void {
 			outputText("Are you a man or a woman?");
 			menu();
@@ -467,7 +467,7 @@ import coc.view.MainView;
 				addButton(2, "Herm", isAHerm);
 			}
 		}
-		
+
 		private function useCustomProfile():void {
 			clearOutput();
 			if (specialName(player.short) != null) {
@@ -481,7 +481,7 @@ import coc.view.MainView;
 				genericGenderChoice();
 			}
 		}
-		
+
 		private function noCustomProfile():void {
 			clearOutput();
 			customPlayerProfile = null;
@@ -493,23 +493,23 @@ import coc.view.MainView;
 				addButton(2, "Herm", isAHerm);
 			}
 		}
-		
+
 		private function selectName(selectedItem:*):void {
 			if (selectedItem.data[0].length > 16) // not a name
 				return;
-			
+
 			clearOutput();
-			
+
 			outputText("<b>" + selectedItem.data[0] + ":</b> " + selectedItem.data[3]);
 			if(selectedItem.data[2])
 				outputText("\n\nThis character have pre-defined history.");
 			else
 				outputText("\n\nThis character have no pre-defined history.");
-				
+
 			flushOutputTextToGUI();
 			mainView.nameBox.text = selectedItem.data[0];
 		}
-		
+
 		//Determines if has character creation bonuses
 		internal function customName(arg:String):Function {
 			for (var i:int = 0; i < specialCharacters.customs.length; i++)
@@ -517,7 +517,7 @@ import coc.view.MainView;
 					return specialCharacters.customs[i][1];
 			return specialName(arg); //Must check against the special name list as well
 		}
-		
+
 		//Does PC skip creation?
 		private function specialName(arg:String):Function {
 			for (var i:int = 0; i < specialCharacters.customs.length; i++)
@@ -525,7 +525,7 @@ import coc.view.MainView;
 					return specialCharacters.customs[i][1];
 			return null;
 		}
-		
+
 		private function isAMan():void {
 			//Attributes
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
@@ -537,7 +537,7 @@ import coc.view.MainView;
 			player.hairLength = 1;
 			player.tallness = 71;
 			player.tone = 60;
-			
+
 			//Genetalia
 			player.balls = 2;
 			player.ballSize = 1;
@@ -547,10 +547,10 @@ import coc.view.MainView;
 			player.cocks[0].cockThickness = 1;
 			player.cocks[0].cockType = CockTypesEnum.HUMAN;
 			player.cocks[0].knotMultiplier = 1;
-			
+
 			//Breasts
 			player.createBreastRow();
-			
+
 			//Choices
 			clearOutput();
 			outputText("You are a man.  Your upbringing has provided you an advantage in strength and toughness.\n\nWhat type of build do you have?");
@@ -568,16 +568,16 @@ import coc.view.MainView;
 			player.hairLength = 10;
 			player.tallness = 67;
 			player.tone = 30;
-			
+
 			//Genetalia
 			player.balls = 0;
 			player.ballSize = 0;
 			player.createVagina();
 			player.clitLength = 0.5;
-			
+
 			//Breasts
 			player.createBreastRow();
-			
+
 			//Choices
 			clearOutput();
 			outputText("You are a woman.  Your upbringing has provided you an advantage in speed and intellect.\n\nWhat type of build do you have?");
@@ -597,7 +597,7 @@ import coc.view.MainView;
 			player.hairLength = 10;
 			player.tallness = 69;
 			player.tone = 45;
-			
+
 			//Genetalia
 			player.createVagina();
 			player.clitLength = .5;
@@ -606,10 +606,10 @@ import coc.view.MainView;
 			player.cocks[0].cockThickness = 1;
 			player.cocks[0].cockType = CockTypesEnum.HUMAN;
 			player.cocks[0].knotMultiplier = 1;
-			
+
 			//Breasts
 			player.createBreastRow();
-			
+
 			//Choices
 			clearOutput();
 			outputText("\n\nYou are a hermaphrodite.  Your upbringing has provided you an average in stats.\n\nWhat type of build do you have?");
@@ -622,16 +622,16 @@ import coc.view.MainView;
 			addButton(6, "Mas. Average", buildAverageMale).hint("Masculine build. \n\nWill make you a maleherm.", "Masculine, Average");
 			addButton(7, "Mas. Thick", buildThickMale).hint("Masculine build. \n\nWill make you a maleherm.", "Masculine, Thick");
 		}
-		
-		
+
+
 		private function buildLeanMale():void {
 			player.strStat.core.value -= 1;
 			player.speStat.core.value += 1;
-			
+
 			player.femininity = 34;
 			player.thickness = 30;
 			player.tone += 5;
-			
+
 			player.breastRows[0].breastRating = BreastCup.FLAT;
 			player.butt.type = Butt.RATING_TIGHT;
 			player.hips.type = Hips.RATING_SLENDER;
@@ -641,11 +641,11 @@ import coc.view.MainView;
 		private function buildSlenderFemale():void {
 			player.strStat.core.value -= 1;
 			player.speStat.core.value += 1;
-			
+
 			player.femininity = 66;
 			player.thickness = 30;
 			player.tone += 5;
-			
+
 			player.breastRows[0].breastRating = BreastCup.B;
 			player.butt.type = Butt.RATING_TIGHT;
 			player.hips.type = Hips.RATING_AMPLE;
@@ -655,7 +655,7 @@ import coc.view.MainView;
 		private function buildAverageMale():void {
 			player.femininity = 30;
 			player.thickness = 50;
-			
+
 			player.breastRows[0].breastRating = BreastCup.FLAT;
 			player.butt.type = Butt.RATING_AVERAGE;
 			player.hips.type = Hips.RATING_AVERAGE;
@@ -665,7 +665,7 @@ import coc.view.MainView;
 		private function buildAverageFemale():void {
 			player.femininity = 70;
 			player.thickness = 50;
-			
+
 			player.breastRows[0].breastRating = BreastCup.C;
 			player.butt.type = Butt.RATING_NOTICEABLE;
 			player.hips.type = Hips.RATING_AMPLE;
@@ -676,11 +676,11 @@ import coc.view.MainView;
 			player.speStat.core.value -= 4;
 			player.strStat.core.value += 2;
 			player.touStat.core.value += 2;
-			
+
 			player.femininity = 29;
 			player.thickness = 70;
 			player.tone -= 5;
-			
+
 			player.breastRows[0].breastRating = BreastCup.FLAT;
 			player.butt.type = Butt.RATING_NOTICEABLE;
 			player.hips.type = Hips.RATING_AVERAGE;
@@ -691,10 +691,10 @@ import coc.view.MainView;
 			player.speStat.core.value -= 2;
 			player.strStat.core.value += 1;
 			player.touStat.core.value += 1;
-			
+
 			player.femininity = 71;
 			player.thickness = 70;
-			
+
 			player.breastRows[0].breastRating = BreastCup.D;
 			player.butt.type = Butt.RATING_LARGE;
 			player.hips.type = Hips.RATING_CURVY;
@@ -704,11 +704,11 @@ import coc.view.MainView;
 		private function buildGirlyMale():void {
 			player.strStat.core.value -= 2;
 			player.speStat.core.value += 2;
-			
+
 			player.femininity = 50;
 			player.thickness = 50;
 			player.tone = 26;
-			
+
 			player.breastRows[0].breastRating = BreastCup.A;
 			player.butt.type = Butt.RATING_NOTICEABLE;
 			player.hips.type = Hips.RATING_SLENDER;
@@ -718,11 +718,11 @@ import coc.view.MainView;
 		private function buildTomboyishFemale():void {
 			player.strStat.core.value += 1;
 			player.speStat.core.value -= 1;
-			
+
 			player.femininity = 56;
 			player.thickness = 50;
 			player.tone = 50;
-			
+
 			player.breastRows[0].breastRating = BreastCup.A;
 			player.butt.type = Butt.RATING_TIGHT;
 			player.hips.type = Hips.RATING_SLENDER;
@@ -763,7 +763,7 @@ import coc.view.MainView;
 			//chooseEndowment(false);
 			chooseEyesColor();
 		}
-		
+
 		private function chooseEyesColor():void {
 			clearOutput();
 			outputText("What is your eyes color?");
@@ -797,7 +797,7 @@ import coc.view.MainView;
 			mainView.nameBox.visible = false;
 			mainView.nameBox.maxChars = 16;
 			mainView.nameBox.restrict = null;
-			
+
 			outputText("You can finalize your appearance customization before you proceed to perk selection. You will be able to alter your appearance through the usage of certain items.\n\n");
 			outputText("Height: " + Math.floor(player.tallness / 12) + "'" + player.tallness % 12 + "\"\n");
 			outputText("Skin tone: " + player.skinTone + "\n");
@@ -909,7 +909,7 @@ import coc.view.MainView;
 			player.beardLength = choiceLength;
 			menuBeardSettings();
 		}
-		
+
 		//-----------------
 		//-- EYES COLOURS
 		//-----------------
@@ -1143,7 +1143,7 @@ import coc.view.MainView;
 			addButton(0, "Yes", setEndowmentTouch);
 			addButton(1, "No", chooseEndowment, true);
 		}
-		
+
 		private function confirmEndowmentPerversion():void {
 			clearOutput();
 			clearOutput();
@@ -1208,7 +1208,7 @@ import coc.view.MainView;
 			if (player.findPerk(PerkLib.Strong) < 0) player.createPerk(PerkLib.Strong, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
-		
+
 		private function setEndowmentToughness():void {
 			player.tone += 5;
 			player.thickness += 5;
@@ -1216,41 +1216,41 @@ import coc.view.MainView;
 			player.HP = EngineCore.maxHP();
 			chooseBloodlineorNot();
 		}
-		
+
 		private function setEndowmentSpeed():void {
 			player.tone += 10;
 			if (player.findPerk(PerkLib.Fast) < 0) player.createPerk(PerkLib.Fast, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
-		
+
 		private function setEndowmentSmarts():void {
 			player.thickness -= 5;
 			if (player.findPerk(PerkLib.Smart) < 0) player.createPerk(PerkLib.Smart, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
-		
+
 		private function setEndowmentWise():void {
 			player.thickness -= 5;
 			if (player.findPerk(PerkLib.Wise) < 0) player.createPerk(PerkLib.Wise, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
-		
+
 		private function setEndowmentLibido():void {
 			if (player.findPerk(PerkLib.Lusty) < 0) player.createPerk(PerkLib.Lusty, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
-		
+
 		private function setEndowmentTouch():void {
 			if (player.findPerk(PerkLib.Sensitive) < 0) player.createPerk(PerkLib.Sensitive, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
-		
+
 		private function setEndowmentPerversion():void {
 			player.cor += 5;
 			if (player.findPerk(PerkLib.Pervert) < 0) player.createPerk(PerkLib.Pervert, 1, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
-		
+
 		private function setEndowmentBigCock():void {
 			player.femininity -= 10;
 			player.cocks[0].cockLength = 8;
@@ -1259,28 +1259,28 @@ import coc.view.MainView;
 			if (player.findPerk(PerkLib.BigCock) < 0) player.createPerk(PerkLib.BigCock, 1.25, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
-		
+
 		private function setEndowmentMessyOrgasms():void {
 			player.femininity -= 5;
 			player.cumMultiplier = 2;
 			if (player.findPerk(PerkLib.MessyOrgasms) < 0) player.createPerk(PerkLib.MessyOrgasms, 1.5, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
-		
+
 		private function setEndowmentBigBreasts():void {
 			player.femininity += 10;
 			player.breastRows[0].breastRating += 2;
 			if (player.findPerk(PerkLib.BigTits) < 0) player.createPerk(PerkLib.BigTits, 1.5, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
-		
+
 		private function setEndowmentBigClit():void {
 			player.femininity -= 10;
 			player.clitLength = 1;
 			if (player.findPerk(PerkLib.BigClit) < 0) player.createPerk(PerkLib.BigClit, 1.25, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
-		
+
 		private function setEndowmentFertile():void {
 			player.femininity += 10;
 			player.fertility += 50;
@@ -1288,14 +1288,14 @@ import coc.view.MainView;
 			if (player.findPerk(PerkLib.Fertile) < 0) player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
-		
+
 		private function setEndowmentWetVagina():void {
 			player.femininity += 15;
 			player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_WET;
 			if (player.findPerk(PerkLib.WetPussy) < 0) player.createPerk(PerkLib.WetPussy, 2, 0, 0, 0);
 			chooseBloodlineorNot();
 		}
-		
+
 		//-----------------
 		//-- BLOODLINE PERKS
 		//-----------------
@@ -1325,7 +1325,7 @@ import coc.view.MainView;
 			else addButtonDisabled(7, "Orc", "You already have this bloodline!");
 			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead new bloodline.)");
 		}
-		
+
 		private function confirmBloodline(choice:PerkType):void {
 			clearOutput();
 			switch (choice) {
@@ -1360,7 +1360,7 @@ import coc.view.MainView;
 			addButton(0, "Yes", setBloodline, choice);
 			addButton(1, "No", chooseBloodline);
 		}
-		
+
 		private function setBloodline(choice:PerkType):void {
 			player.createPerk(choice, 0, 0, 0, 0);
 			chooseHistory();
@@ -1369,7 +1369,7 @@ import coc.view.MainView;
 			player.perkPoints += 12;
 			chooseHistory();
 		}
-		
+
 		//-----------------
 		//-- HISTORY PERKS
 		//-----------------
@@ -1407,9 +1407,9 @@ import coc.view.MainView;
 			if (player.findPerk(PerkLib.PastLifeWhore) < 0) addButton(12, "Whoring", confirmHistory, PerkLib.HistoryWhore);
 			else addButtonDisabled(12, "Whoring", "You already have this History as one of your Past Lives!");
 			addButton(14, "None", noHistoryAtAllCuzYouAscendedTooManyTimesAlready).hint("Your life hasn't been very specifically focused so far, or you've had so many past lives you can't separate them all. (No history perk, just bonus perk points)");
-			
+
 		}
-		
+
 		private function confirmHistory(choice:PerkType):void {
 			clearOutput();
 			switch (choice) {
@@ -1487,7 +1487,7 @@ import coc.view.MainView;
 			flags[kFLAGS.HISTORY_PERK_SELECTED] = 1;
 			completeCharacterCreation();
 		}
-		
+
 		private function completeCharacterCreation():void {
 			clearOutput();
 			if (customPlayerProfile != null) {
@@ -1499,7 +1499,7 @@ import coc.view.MainView;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) chooseGameModes();
 			else startTheGame();
 		}
-		
+
 		public function arrival():void {
 			statScreenRefresh();
 			model.time.hours = 11;
@@ -1516,7 +1516,7 @@ import coc.view.MainView;
 			dynStats("lus", 15);
 			doNext(arrivalPartTwo);
 		}
-		
+
 		private function arrivalPartTwo():void {
 			clearOutput();
 			hideUpDown();
@@ -1530,7 +1530,7 @@ import coc.view.MainView;
 			outputText("The imp says, \"<i>I'm amazed you aren't already chasing down my cock, human.  The last Champion was an eager whore for me by the time she woke up.  This lust draft made sure of it.</i>\"");
 			doNext(arrivalPartThree);
 		}
-		
+
 		private function arrivalPartThree():void {
 			clearOutput();
 			hideUpDown();
@@ -1540,7 +1540,7 @@ import coc.view.MainView;
 			outputText("Your pleasure at defeating the demon ebbs as you consider how you've already been defiled.  You swear to yourself you will find the demon responsible for doing this to you and the other Champions, and destroy him AND his pet imp.");
 			doNext(arrivalPartFour);
 		}
-		
+
 		private function arrivalPartFour():void {
 			clearOutput();
 			hideUpDown();
@@ -1548,7 +1548,7 @@ import coc.view.MainView;
 			awardAchievement("Newcomer", kACHIEVEMENTS.STORY_NEWCOMER, true, true);
 			doNext(playerMenu);
 		}
-		
+
 		//-----------------
 		//-- GAME MODES
 		//-----------------
@@ -1727,7 +1727,7 @@ import coc.view.MainView;
 			model.time.days = -(1 * (1 + player.newGamePlusMod()));
 			model.time.hours = 8;
 			flags[kFLAGS.IN_INGNAM] = 1;
-			SceneLib.ingnam.menuIngnam();
+			playerMenu();
 		}
 
 		//-----------------
@@ -1816,7 +1816,7 @@ import coc.view.MainView;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 9) maxV += 5;
 			return maxV;
 		}
-		
+
 		private function ascensionPerkSelection(perk:* = null, maxRank:int = 10):void {
 			clearOutput();
 			var maxRank:int = 5;
@@ -1899,7 +1899,7 @@ import coc.view.MainView;
 			else player.createPerk(perk, 1, 0, 0, 0);
 			ascensionPerkSelection2(perk, maxRank);
 		}
-		
+
 		private function rarePerks1():void {
 			clearOutput();
 			outputText("You can spend your Ascension Perk Points on rare special perks not available at level-up!");
@@ -2086,7 +2086,7 @@ import coc.view.MainView;
 			outputText("Your gained Natural Metamorph perk.");
 			doNext(rarePerks1);
 		}
-		
+
 		private function rarePerks2():void {
 			clearOutput();
 			outputText("You can spend your Ascension Perk Points on rare special perks not available at level-up!");
@@ -2302,7 +2302,7 @@ import coc.view.MainView;
 			clearOutput();
 			outputText("Your History perk became your Past Life perk.");
 		}
-		
+
 		private function bloodlineACQ():void {
 			if (player.findPerk(PerkLib.DragonsDescendant) >= 0) {
 				player.removePerk(PerkLib.DragonsDescendant);
@@ -2361,7 +2361,7 @@ import coc.view.MainView;
 			clearOutput();
 			outputText("Your have gained new Bloodline.");
 		}
-		
+
 		private function ascensionPermeryMenu(page:int = 1):void {
 			clearOutput();
 			outputText("For the price of five points, you can make certain perks permanent and they will carry over in future ascensions. In addition, if the perks come from transformations, they will stay even if you no longer meet the requirements.");
@@ -2522,7 +2522,7 @@ import coc.view.MainView;
 			player.addPerkValue(PerkLib.CorruptedNinetails, 4, 1);
 			ascensionPermeryMenu(1);
 		}
-		
+
 		private function ascensionMetamorphPermeryMenu(page:int = 1):void {
 			clearOutput();
 			outputText("For the price of five points, you can make unlocked Metamorph options permanent (up to current limit) and they will carry over in future ascensions.");
@@ -2779,7 +2779,7 @@ import coc.view.MainView;
 				else addButtonDisabled(13, "Shark Teeth", "Shark Teeth");
 			}
 			if (page == 8) {
-				
+
 				if (player.hasStatusEffect(StatusEffects.UnlockedSharkTail) && player.statusEffectv4(StatusEffects.UnlockedSharkTail) < 9000) addButton(0, "Shark Tail", permanentizeStatusEffect8, StatusEffects.UnlockedSharkTail);
 				else if (player.hasStatusEffect(StatusEffects.UnlockedSharkTail) && player.statusEffectv4(StatusEffects.UnlockedSharkTail) == 9000) addButtonDisabled(0, "Shark Tail", "Shark Tail option is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(0, "Shark Tail", "Shark Tail");
@@ -3486,7 +3486,7 @@ import coc.view.MainView;
 			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 2, 1);
 			ascensionMetamorphPermeryMenu(23);
 		}*/
-		
+
 		private function renamePrompt():void {
 			clearOutput();
 			outputText("You may choose to change your name.");
@@ -3502,7 +3502,7 @@ import coc.view.MainView;
 			mainView.nameBox.x = mainView.mainText.x + 5;
 			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 		}
-		
+
 		private function reincarnatePrompt():void {
 			clearOutput();
 			outputText("Would you like to reincarnate and start a new life as a Champion?");
@@ -3562,7 +3562,7 @@ import coc.view.MainView;
 			player.strtouspeintwislibsenCalculation1();
 			doNext(removeLevelPerks);
 		}
-		
+
 		private function removeLevelPerks():void {
 			clearOutput();
 			player.perkPoints = player.level - 1;
@@ -3579,12 +3579,12 @@ import coc.view.MainView;
 			outputText("After looking around the room for a while, you look into the mirror and begin to recollect who you are...");
 			doNext(routeToGenderChoiceReincarnation);
 		}
-		
+
 		private function routeToGenderChoiceReincarnation():void {
 			clearOutput();
 			genericGenderChoice();
 		}
-		
+
 		private function isAscensionPerk(perk:PerkClass, respec:Boolean = false):Boolean {
 			return perk.ptype.keepOnAscension(respec) || (perk.value4 > 0);
 		}

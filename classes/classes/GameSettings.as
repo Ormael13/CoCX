@@ -534,13 +534,13 @@ public class GameSettings extends BaseContent {
 		outputText("\nChar View Style: ");
 		switch (flags[kFLAGS.CHARVIEW_STYLE]) {
 			case 0:
-				outputText("<font color=\"#008000\"><b>NEW</b></font>\n Viewer is inline with text");
+				outputText("<font color=\"#000080\"><b>ALWAYS</b></font>\n Viewer is shown at left, always visible");
 				break;
 			case 1:
 				outputText("<font color=\"#800000\"><b>OLD</b></font>\n Viewer is shown at left");
 				break;
 			case 2:
-				outputText("<font color=\"#000080\"><b>ALWAYS</b></font>\n Viewer is shown at left, always visible");
+				outputText("<font color=\"#008000\"><b>NEW</b></font>\n Viewer is inline with text");
 				break;
 		}
 		outputText("\n\n");
