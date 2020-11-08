@@ -28,13 +28,14 @@ package classes.Scenes
 		}
 		private function Changelog33():void {
 			clearOutput();
-			outputText("<b>Version 0.8o2:</b>\n\n");
+			outputText("<b>Version 0.8o2 (Fixes, fixes and 3 new weapons):</b>\n\n");
 			outputText("-New weapons from Liadri (1h katana and it upgr. versions from Celess): Uchigatana, Moonlit Snow, Chaos Blade\n");
 			outputText("-Nodachi moved to massive weapon section increasing base atk form 25 to 65 and cost from 100 to 2600 gems.\n");
-			outputText("-Fixed bugs: Various fixes from Liadri for many errors from last build, DeBimo offer form Rathazul not including Joy or Excellia in camp\n\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fixed bugs: Various fixes from Liadri for many errors from last build, DeBimo offer from Rathazul not including Joy or Excellia in camp\n\n");
+			outputText("<b>Version 0.8o3:</b>\n\n");
+			outputText("-1 new achievment. (1 shadow one)\n");//s	s
+			outputText("-Explore option named 42 was moced to silly mode.\n");
+			outputText("-Follower Zenji now scales up to PC lvl cap (150 > 185). He will also have grasualy increasing other combat stats beside raw stats and Xp reward for beating him will be much higher.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -43,6 +44,7 @@ package classes.Scenes
 			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-Fixed bugs: \n\n");/*ostatni punkt changelogu
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");
@@ -99,13 +101,12 @@ package classes.Scenes
 			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -10725,7 +10725,7 @@ public class Combat extends BaseContent {
         var changeBy:Number = 0.50;
         if (stat <= 10000) {
             if (stat <= 100) {
-                scale = (2 / 6) + ((int(stat / 100) / 20) * (1 / 6));
+                scale = (2 / 6) + (int(stat / 20) * (1 / 6));
                 changeBy = 0.25;
             } else {
                 scale = 1 + (int((stat - 100) / 50) * 0.25);

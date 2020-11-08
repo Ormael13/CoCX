@@ -2879,6 +2879,10 @@ public class Creature extends Utils
 		{
 			return game.player.armorName == "nothing" && game.player.upperGarmentName == "nothing" && game.player.lowerGarmentName == "nothing";
 		}
+		public function isNaked2():Boolean
+		{
+			return game.player.upperGarmentName == "nothing" && game.player.lowerGarmentName == "nothing";
+		}
 
 		//Crit immunity
 		public function isImmuneToCrits():Boolean

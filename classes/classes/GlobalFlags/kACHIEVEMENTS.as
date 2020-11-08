@@ -422,7 +422,7 @@ package classes.GlobalFlags
 		public static const REALISTIC_CHAMPION_NEEDS_FOOD_2:int		= 375;
 		public static const REALISTIC_CHAMPION_NEEDS_FOOD_3:int		= 376;
 		public static const REALISTIC_CHAMPION_NEEDS_FOOD_4:int		= 377;
-		public static const UNKNOWN_ACHIEVEMENT_378:int				= 378;
+		public static const EPIC_LET_IT_GO:int						= 378;
 		public static const UNKNOWN_ACHIEVEMENT_379:int				= 379;
 		public static const UNKNOWN_ACHIEVEMENT_380:int				= 380;
 		public static const UNKNOWN_ACHIEVEMENT_381:int				= 381;
