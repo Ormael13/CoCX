@@ -70,6 +70,13 @@ public class MainViewManager extends BaseContent {
 		setTheme();
         mainView.statsView.refreshStats(CoC.instance);
     }
+	public function updateCharviewIfNeeded():void {
+		if (flags[kFLAGS.CHARVIEW_STYLE] != 0) { // if not display always
+			hidePlayerDoll();
+		} else { // if display always
+			showPlayerDoll(false);
+		}
+	}
 	public function showPlayerDoll(reload:Boolean=false):void {
 		//tweenOutStats();
 		if (reload) mainView.charView.reload("external");

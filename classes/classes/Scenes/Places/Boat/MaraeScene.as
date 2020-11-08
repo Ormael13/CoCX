@@ -12,7 +12,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 		public function MaraeScene() {
 			EventParser.timeAwareClassAdd(this);
 		}
-		
+
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
@@ -35,7 +35,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 			}
 			return false;
 		}
-		
+
 		public function timeChangeLarge():Boolean {
 			return false;
 		}
@@ -80,7 +80,7 @@ public function encounterMarae():void {
 			outputText("You approach Marae's tree, watching the goddess flow out of the tree's bark as if it was made of liquid.  Just as before, she appears as the top half of a woman, naked from the waist up, with her back merging into the tree's trunk.\n\n");
 			if(player.cor > 66 + player.corruptionTolerance() && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
 				outputText("She bellows in rage, \"<i>I told you, begone!</i>\"\n\nYou turn tail and head back to your boat, knowing you cannot compete with her power directly.");
-				if (player.level >= 30) outputText("  f course, you could probably try to overthrow her."); 
+				if (player.level >= 30) outputText("  f course, you could probably try to overthrow her.");
 				doNext(camp.returnToCampUseOneHour);
 			}
 			else
@@ -289,6 +289,7 @@ private function alraunezeMeYes0():void {
 	if (player.wings.type == Wings.PLANT) player.wings.type = Wings.NONE;
 	player.lowerBody = LowerBody.PLANT_FLOWER;
 	player.legCount = 12;
+	CoC.instance.mainViewManager.updateCharviewIfNeeded();
 	doNext(camp.returnToCampUseTwoHours);
 }
 
@@ -297,7 +298,7 @@ private function promptFightMarae1():void {
 	clearOutput();
 	outputText("Are you sure you want to fight Marae? She is the life-goddess of Mareth. This is going to be extremely difficult battle.");
 	doYesNo(initiateFightMarae, encounterMarae);
-}	
+}
 
 private function promptFightMarae2():void {
 	clearOutput();
@@ -325,7 +326,7 @@ public function initiateFightMarae():void {
 	}
 	outputText("\n\nIt's a fight!");
 	startCombat(new Marae(), true);
-}	
+}
 
 //Lose against Marae
 public function loseAgainstMarae():void {
@@ -356,15 +357,15 @@ public function winAgainstMarae():void {
 		{
 			outputText("You summon your magical fire and finish off Marae for the last time. You can hear her screaming as she's withering and shriveling up. While she's on fire, you turn your attention elsewhere.");
 		}
-		else 
+		else
 		{
 			outputText("You raise your [weapon] and finish off Marae at last. The corrupted goddess is no more. All the tentacles shrivel up and die. Afterwards, you turn your attention elsewhere.");
 		}
-		if (!player.hasKeyItem("Marae's Lethicite") >= 0) 
+		if (!player.hasKeyItem("Marae's Lethicite") >= 0)
 		{
 			outputText("\n\nSomething shiny catches your eye. Clearly, this has to be Marae's lethicite!");
 			outputText("\n<b>(Key Item Gained: Marae's Lethicite!)</b>");
-			
+
 			player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
 		}
 		outputText("\n\nAfter the death of a corrupted physical goddess, you see something odd. There is a pile of intact shards of bark. They looks large and thick enough to be workable. You give it an experiment punch. ");
@@ -392,7 +393,7 @@ public function winAgainstMarae():void {
 		cleanupAfterCombat();
 		inventory.takeItem(useables.DBAPLAT, camp.returnToCampUseOneHour);
 	}
-}	
+}
 
 private function maraeBadEnd():void {
 	spriteSelect(40);

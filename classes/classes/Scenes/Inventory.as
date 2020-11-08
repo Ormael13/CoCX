@@ -794,6 +794,7 @@ use namespace CoC;
 					//and for the Kitsune Gift (which may show a sub-menu if the player has a full inventory)
 //				if (!item.hasSubMenu()) itemGoNext(); //Don't call itemGoNext if there's a sub menu, otherwise it would never be displayed
 			}
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 
 		private function takeItemFull(itype:ItemType, showUseNow:Boolean, source:ItemSlotClass, page:int = 1):void {
@@ -1047,9 +1048,11 @@ use namespace CoC;
 				manageEquipment(1);
 			}
 			else takeItem(player.setWeapon(WeaponLib.FISTS), inventoryMenu);
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		private function unequipWeaponRange():void {
 			takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), inventoryMenu);
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipShield():void {
 			if (player.shieldName == "Aether (Sin)") {
@@ -1058,6 +1061,7 @@ use namespace CoC;
 				manageEquipment(1);
 			}
 			else takeItem(player.setShield(ShieldLib.NOTHING), inventoryMenu);
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipArmor():void {
 			if (player.armorName == "goo armor") { //Valeria belongs in the camp, not in your inventory!
@@ -1066,33 +1070,43 @@ use namespace CoC;
 				manageEquipment(1);
 			}
 			else takeItem(player.setArmor(ArmorLib.NOTHING), inventoryMenu);
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipUpperwear():void {
 			takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR), inventoryMenu);
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipLowerwear():void {
 			takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR), inventoryMenu);
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipHeadJewel():void {
 			takeItem(player.setHeadJewelry(HeadJewelryLib.NOTHING), inventoryMenu);
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipNecklace():void {
 			takeItem(player.setNecklace(NecklaceLib.NOTHING), inventoryMenu);
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipJewel1():void {
 			takeItem(player.setJewelry(JewelryLib.NOTHING), inventoryMenu);
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipJewel2():void {
 			takeItem(player.setJewelry2(JewelryLib.NOTHING), inventoryMenu);
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipJewel3():void {
 			takeItem(player.setJewelry3(JewelryLib.NOTHING), inventoryMenu);
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipJewel4():void {
 			takeItem(player.setJewelry4(JewelryLib.NOTHING), inventoryMenu);
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipVehicle():void {
 			takeItem(player.setVehicle(VehiclesLib.NOTHING), inventoryMenu);
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 
 		//Pick item to take from storage

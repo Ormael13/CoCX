@@ -24,11 +24,7 @@ public class EventParser {
     private static var _campSet:Boolean = false;
 
     public static function playerMenu():void {
-        if (CoC.instance.flags[kFLAGS.CHARVIEW_STYLE] != 0) { // if not display always
-            CoC.instance.mainViewManager.hidePlayerDoll();
-        } else { // if display always
-            CoC.instance.mainViewManager.showPlayerDoll(false);
-        }
+        CoC.instance.mainViewManager.updateCharviewIfNeeded();
         if (!CoC.instance.inCombat) {
             CoC.instance.spriteSelect(-1);
         }
