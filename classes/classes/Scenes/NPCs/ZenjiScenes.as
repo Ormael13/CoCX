@@ -38,7 +38,7 @@ public function part1TrollEncounter():void {
 	outputText("As you are trekking your way through the foliage of the bog, clearing a path through the flora and making sure to watch your step, you are suddenly halted by a deep, brassy voice coming from nearby.\n\n");
 	outputText("\"<i>Ahaha, ¿Que eres? A new one steps into my grounds.</i>\" The voice speaks with a slight lisp and a vaguely spanish accent.\n\n");
 	outputText("You turn to your left and see what looks to be a tall, muscular humanoid. He is easily over 8 feet tall, standing on a tree branch and hanging onto one above him with his muscular arms over his head. He's covered head to toe in dense fuzz with a fairly long tail sprouting behind him. He is supporting a very large and intimidatingly muscular physique. You’re not quite sure who or what he could be."+(flags[kFLAGS.ROGAR_PHASE] > 0 ? " You think that perhaps he’s an orc like Ro’Gar, but he doesn’t have the same body shape, completely different facial structure and has far more fur on his body.":"")+"\n\n");
-	outputText("\"<i>Heheh, If you want to enter I don't ask for much, ya see?</i>\" He chuckles, \"<i>You can pay  a toll for de troll, 25 gems to enter, or perhaps you have something else to offer, something dat could require a lot from you if you tink you can take de challenge.</i>\"\n\n");
+	outputText("\"<i>Heheh, If you want to enter I don't ask for much, ya see?</i>\" he chuckles, \"<i>You can pay  a toll for de troll, 25 gems to enter, or perhaps you have something else to offer, something dat could require a lot from you if you tink you can take de challenge.</i>\"\n\n");
 	outputText("You sigh, it's pretty much the same thing, all anybody asks for in this land is either sex or gems and this alleged troll as he called himself seems no different. You consider if giving him proper payment is worth it.\n\n");
 	if (flags[kFLAGS.CODEX_ENTRY_TROLLS] <= 0) {
 		flags[kFLAGS.CODEX_ENTRY_TROLLS] = 1;
@@ -69,7 +69,7 @@ public function part1TrollEncounterRepeat():void {
 
 public function part1TrollEncounterLeave():void {
 	outputText("You decide that it's not worth paying whatever he's demanding to venture into who knows where.\n\n");
-	outputText("\"<i>Eh? You’re just gonna leave me like dat? You don' want ta even try to fight me?</i>\" He chuckles, \"<i>Your loss.</i>\"\n\n");
+	outputText("\"<i>Eh? You’re just gonna leave me like dat? You don' want ta even try to fight me?</i>\" he chuckles, \"<i>Your loss.</i>\"\n\n");
 	outputText("You return back to your camp following the path that you made along your way.\n\n");
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -94,14 +94,14 @@ public function part1TrollEncounterFightPCDefeated():void {
 	else {
 		outputText("The troll looks down at you, \"<i>Qué lástima. Now dat is a sorry sight…</i>\"\n\n");
 		outputText("You see him rifling through your gem pouch. His fur is so soft as it tickles your skin. You’re desperate for his touch, you want him so badly as you lean closer to him.\n\n");
-		outputText("\"<i>Get off of me!</i>\" He shouts, throwing you to the ground. You hit the ground and the world grows dim before you black out.\n\n");
+		outputText("\"<i>Get off of me!</i>\" he shouts, throwing you to the ground. You hit the ground and the world grows dim before you black out.\n\n");
 	}
 	cleanupAfterCombat();
 }
 
 public function part1TrollEncounterFightZenjiDefeated():void {
 	clearOutput();
-	outputText("The troll staggers backward, unable to fight anymore. \"<i>Heh... ya bested me...</i>\" He coughs, \"<i>Go on, ya can enter... I jus need a break...</i>\"\n\n");
+	outputText("The troll staggers backward, unable to fight anymore. \"<i>Heh... ya bested me...</i>\" he coughs, \"<i>Go on, ya can enter... I jus need a break...</i>\"\n\n");
 	outputText("He struggles a moment before he tumbles away, nowhere to be seen.\n\n");
 	zenjiPerspectiveOnPlayer(4);
 	menu();
@@ -121,7 +121,7 @@ public function part1TrollEncounterFightZenjiDefeatedHuntHim():void {
 		outputText("You attempt to track him by the strong scent you remember him giving off, following the trail through the dense swamp, past the thicket of bog flora. After several minutes you notice that the scent is starting to grow stronger, and the markings of disturbed and displaced life as well as objects become more apparent. He is close, your prize is nigh.\n\n");
 		outputText("You see the troll tending to his wounds atop a tree, almost completely recovered from the last ordeal. His ears twitch as he turns to look at you.\n\n");
 		outputText("He says nothing as he peers toward you, eyeing you carefully, sensing the danger he’s in. He didn’t actually think he’d be able to escape you, did he?\n\n");
-		outputText("A minute passes before he breaks the silence, \"<i>Come to finish me off?</i>\" He says with a growl.\n\n");
+		outputText("A minute passes before he breaks the silence, \"<i>Come to finish me off?</i>\" he asks with a growl.\n\n");
 		outputText("You adopt a fighting stance, that was your intention afterall.\n\n");
 		outputText("\"<i>I shoulda just killed you last time we met, I guess I was still blinded by my past, running away from my problems... I won’t hesitate.</i>\"\n\n");
 		cleanupAfterCombat(part1TrollEncounterFightZenjiDefeatedHuntHim2);
@@ -139,18 +139,18 @@ public function part1TrollEncounterFightTOTHEDEATHPCDefeated():void {
 	if (player.HP <= player.minHP()) {
 		outputText("You fall to the ground, bruised and beaten, wounds too severe for you to walk off right now.\n\n");
 		if (player.cor < 90) {
-			outputText("\"<i>Qué lástima</i>\" He growls, \"<i>Not even worth my time.</i>\"\n\n");
+			outputText("\"<i>Qué lástima,</i>\" Hhe growls, \"<i>Not even worth my time.</i>\"\n\n");
 			outputText("He walks off, nowhere to be seen. The world grows hazy as you pass out from exhaustion.\n\n");
 			cleanupAfterCombat();
 		}
 		else {
-			outputText("\"<i>Vile creature.</i>\" He growls, \"<i>It’s time ta rid dis world of filth like you. One. By. One.</i>\" He picks up his spear, lining up the tip to your throat before impaling you with one swift motion. You choke, gasping for air, reaching up in desperation. The world grows hazy as you feel reality release its grip on you. The last thing you see is his spear going in for a coup de grâce.\n\n");
+			outputText("\"<i>Vile creature,</i>\" he growls, \"<i>It’s time ta rid dis world of filth like you. One. By. One.</i>\" He picks up his spear, lining up the tip to your throat before impaling you with one swift motion. You choke, gasping for air, reaching up in desperation. The world grows hazy as you feel reality release its grip on you. The last thing you see is his spear going in for a coup de grâce.\n\n");
 			EventParser.gameOver();
 		}
 	}
 	else {
 		outputText("You fall to the ground, too aroused to fight any longer, your senses overwhelm you before the masculine scent of his dense musk.\n\n");
-		outputText("\"<i>Pathetic.</i>\" He mutters, \"<i>Dat’s all demons like you want, I’d best kill you before you bother someone else.</i>\"\n\n");
+		outputText("\"<i>Pathetic,</i>\" he mutters, \"<i>Dat’s all demons like you want, I’d best kill you before you bother someone else.</i>\"\n\n");
 		outputText("He picks up his spear, lining up the tip to your throat before impaling you with one swift motion. You choke, gasping for air, reaching up in desperation. The world grows hazy as you feel reality release its grip on you. The last thing you see is his spear going in for a coup de grâce.\n\n");
 		EventParser.gameOver();
 	}
@@ -159,7 +159,7 @@ public function part1TrollEncounterFightTOTHEDEATHPCDefeated():void {
 public function part1TrollEncounterFightTOTHEDEATHZenjiDefeated():void {
 	clearOutput();
 	outputText("The troll falls to the ground, severely wounded, unable to fight any longer. He struggles to regain his footing, desperately clinging onto the spear he has impaled to the ground.\n\n");
-	outputText("\"<i>I will not wither!</i>\" He grunts, \"<i>I WILL NOT FALL!</i>\" His voice trembles as he struggles to stand up before you, adopting a fighting stance. His legs buckle as he collapses, blood rushes down his face as he’s bleeding out, despite his attempts to regenerate.\n\n");
+	outputText("\"<i>I will not wither!</i>\" he grunts, \"<i>I WILL NOT FALL!</i>\" His voice trembles as he struggles to stand up before you, adopting a fighting stance. His legs buckle as he collapses, blood rushes down his face as he’s bleeding out, despite his attempts to regenerate.\n\n");
 	outputText("You grin in satisfaction, considering what you want to do with your prey in his final moments.\n\n");
 	menu();
 	addButton(1, "Kill him", part1TrollEncounterFightTOTHEDEATHZenjiDefeatedKillHim).hint("He doesn’t deserve to live anymore");
@@ -169,7 +169,7 @@ public function part1TrollEncounterFightTOTHEDEATHZenjiDefeated():void {
 public function part1TrollEncounterFightTOTHEDEATHZenjiDefeatedKillHim():void {
 	clearOutput();
 	outputText("You smirk in satisfaction, has he learned his lesson yet or does he need one final example? Cowards never get to hide, now you can claim your prize once and for all.\n\n");
-	outputText("You approach him, he looks toward you with bleak defiance. \"<i>I… won't… give up..!</i>\" He sputters, choking on his blood. \"<i>You will die, scum like you does not deserve to live!</i>\"\n\n");
+	outputText("You approach him, he looks toward you with bleak defiance. \"<i>I… won't… give up..!</i>\" he sputters, choking on his blood. \"<i>You will die, scum like you does not deserve to live!</i>\"\n\n");
 	outputText("Such bold words for a coward, after all he was the one who ran away first. You notice one of his tusks is covered in a series of rings, it must be special to him so you forcefully grip onto it. His eyes tremble in fear as he tries to shake you off. He is at your mercy, desperately looking toward you, practically begging for his life with his wordless glance. You ponder how much a troll tusk would be worth if you pawn it, perhaps it’s easier to hold it as a trophy.\n\n");
 	outputText("You tighten your grip on it, twisting it around slowly. He howls in agony as you draw more blood from his jaw. It doesn’t take long with the constant twisting, turning and yanking on your prize before you pry it from his maw with an audible snap. The troll howls in pain, tears streaming down his face as you have detached his pride and honor.\n\n");
 	outputText("You figure with just how sharp it seems, it’d be a fitting way to end him, with something he seemingly is so fond of. You slide down your trophy down his throat, circling his jugular before impaling him in one swift motion. He gasps, struggling for air as he attempts to pry your hands away from him. Blood pours out from his vain struggling as you press the tusk deeper through his skin. Eventually, his efforts die down before his arms grow limp. You withdraw the tusk, it’s engorged in troll blood, another spoil of war. The troll lies dead beneath you, a shame he didn’t put up more of a fight.\n\n");
@@ -218,7 +218,7 @@ public function part1TrollEncounterChallangeStrength():void {
 	if (player.str < (120 + (player.newGamePlusMod() * 24))) {
 		outputText("You hold on with all your might, after some time you grow tired and begin kicking your legs in an attempt to get the blood flowing back into you. You look over to the troll who's hanging on with no signs of struggle.\n\n");
 		outputText("Tired, you drop, unable to support yourself anymore.\n\n");
-		outputText("\"<i>Ahahah, you are a weak little one, try harda next time.</i>\" He says dropping to the ground.\n\n");
+		outputText("\"<i>Ahahah, you are a weak little one, try harda next time,</i>\" he says, dropping to the ground.\n\n");
 		outputText("Bested by his strength, you decide to return home.\n\n");
 		zenjiPerspectiveOnPlayer(-4);
 		doNext(camp.returnToCampUseOneHour);
@@ -226,14 +226,14 @@ public function part1TrollEncounterChallangeStrength():void {
 	else if (player.str < (145 + (player.newGamePlusMod() * 29))) {
 		outputText("You hold on with all your might, after a while you begin to grow tired and begin rocking back and forth to support yourself. You look over and you see the troll beginning to strain, it appears he's beginning to have trouble supporting himself as well.\n\n");
 		outputText("After a few moments, you can't support yourself anymore and drop down to the ground.\n\n");
-		outputText("\"<i>Heheh, you are a weak little one, you gotta do better dan dat next time.</i>\" He says dropping to the ground.\n\n");
+		outputText("\"<i>Heheh, you are a weak little one, you gotta do better dan dat next time,</i>\" he says, dropping to the ground.\n\n");
 		outputText("Bested by his strength, you decide to return home.\n\n");
 		zenjiPerspectiveOnPlayer(-4);
 		doNext(camp.returnToCampUseOneHour);
 	}
 	else {
 		outputText("You hold on with all your might, after a while your arms start to grow weary. You look over to the troll and notice him straining to keep his composure. After a moment he drops with an exasperated breath, and you drop down after him.\n\n");
-		outputText("\"<i>Hah... you are strong... stronger dan I expected, I'll let you pass, you can enter.</i>\" He says breathlessly.\n\n");
+		outputText("\"<i>Hah... you are strong... stronger dan I expected, I'll let you pass, you can enter,</i>\" he states breathlessly.\n\n");
 		zenjiPerspectiveOnPlayer(4);
 		part1TrollEncounterRewards();
 	}
@@ -250,7 +250,7 @@ public function part1TrollEncounterChallangeToughness():void {
 	if (player.tou < (115 + (player.newGamePlusMod() * 23))) {
 		outputText("After some time of holding the rock above your head, your arms begin to grow weary, the rock, despite not being too heavy, is beginning to put a burden on your arms as its weight begins to feel like it's increasing. You look over to the troll who seems to be having no trouble carrying his rock above his head.\n\n");
 		outputText("Unable to support the rock anymore, you drop in on the ground and give your tired arms a chance to rest.\n\n");
-		outputText("\"<i>Heheh, you are a weak little one, try harda next time.</i>\" He says dropping the rock onto the ground.\n\n");
+		outputText("\"<i>Heheh, you are a weak little one, try harda next time,</i>\" he says dropping the rock onto the ground.\n\n");
 		outputText("Bested by his toughness, you decide to return home.\n\n");
 		zenjiPerspectiveOnPlayer(-4);
 		doNext(camp.returnToCampUseOneHour);
@@ -258,7 +258,7 @@ public function part1TrollEncounterChallangeToughness():void {
 	else if (player.tou < (140 + (player.newGamePlusMod() * 28))) {
 		outputText("After some time of holding the rock above your head, your arms begin to grow weary, the rock, despite not being too heavy, is beginning to put a burden on your arms as its weight begins to feel like it's increasing. You look over to the troll who seems to be showing signs of struggle holding the rock over his head.\n\n");
 		outputText("Unable to support the rock anymore, you drop in on the ground and give your tired arms a chance to rest.\n\n");
-		outputText("\"<i>Heheh, you are a weak little one, you gotta do better dan dat next time.</i>\" He says dropping the rock onto the ground.\n\n");
+		outputText("\"<i>Heheh, you are a weak little one, you gotta do better dan dat next time,</i>\" he says dropping the rock onto the ground.\n\n");
 		outputText("Bested by his toughness, you decide to return home.\n\n");
 		zenjiPerspectiveOnPlayer(-4);
 		doNext(camp.returnToCampUseOneHour);
@@ -266,7 +266,7 @@ public function part1TrollEncounterChallangeToughness():void {
 	else {
 		outputText("After some time of holding the rock above your head, your arms begin to grow weary, the rock starting to put a burden on your arms. You look over to the troll who's struggling to support the rock with his arms.\n\n");
 		outputText("After a moment he drops to rock to the ground.\n\n");
-		outputText("\"<i>Hah... You are tough... tougher dan I expected, I'll let you pass, you can enter.</i>\" He says breathlessly.\n\n");
+		outputText("\"<i>Hah... You are tough... tougher dan I expected, I'll let you pass, you can enter,</i>\" he states breathlessly.\n\n");
 		zenjiPerspectiveOnPlayer(4);
 		part1TrollEncounterRewards();
 	}
@@ -280,21 +280,21 @@ public function part1TrollEncounterChallangeSpeed():void {
 	outputText("Seems simple enough, you wait for his command, and on his queue, you race over to the tree.\n\n");
 	if (player.spe < (135 + (player.newGamePlusMod() * 27))) {
 		outputText("You sprint over to the tree as fast as you can, but the troll is obviously much faster than you are, he beats you to the tree by a considerable amount of time.\n\n");
-		outputText("\"<i>Heheh, you are a weak little one, try harda next time.</i>\" He says leaning back against the tree.\n\n");
+		outputText("\"<i>Heheh, you are a weak little one, try harda next time,</i>\" he says leaning back against the tree.\n\n");
 		outputText("Bested by his speed, you decide to return home.\n\n");
 		zenjiPerspectiveOnPlayer(-4);
 		doNext(camp.returnToCampUseOneHour);
 	}
 	else if (player.spe < (155 + (player.newGamePlusMod() * 31))) {
 		outputText("You sprint over to the tree as fast as you can, you stay close to the troll, but he's just faster than you are, it's close, but he beats you to the tree by a few seconds.\n\n");
-		outputText("\"<i>Heheh, you are a weak little one, you gotta do better dan dat next time.</i>\" He says leaning back against the tree.\n\n");
+		outputText("\"<i>Heheh, you are a weak little one, you gotta do better dan dat next time,</i>\" he says leaning back against the tree.\n\n");
 		outputText("Bested by his speed, you decide to return home.\n\n");
 		zenjiPerspectiveOnPlayer(-4);
 		doNext(camp.returnToCampUseOneHour);
 	}
 	else {
 		outputText("You sprint over to the tree as fast as you can, you steadily succeed the troll, you're faster than he is and you beat him to the tree.\n\n");
-		outputText("\"<i>Hah... Ya fast... faster dan I expected, I'll let you pass, you can enter.</i>\" He says breathlessly.\n\n");
+		outputText("\"<i>Hah... Ya fast... faster dan I expected, I'll let you pass, you can enter,</i>\" he says breathlessly.\n\n");
 		zenjiPerspectiveOnPlayer(4);
 		part1TrollEncounterRewards();
 	}
@@ -309,14 +309,14 @@ public function part1TrollEncounterChallangeIntelligence():void {
 	outputText("Seems simple enough, you grab the stick and prepare to duel him on his command.\n\n");
 	if (player.inte < (100 + (player.newGamePlusMod() * 20))) {
 		outputText("He pauses for a moment and attempts to strike you with the branch, you start by deflecting him, and do your best to deliver an overhead counter strike, but he already saw your attack coming and strikes you from below.\n\n");
-		outputText("\"<i>Heheh, you are a weak little one, try harda next time.</i>\" He says, straightening his back.\n\n");
+		outputText("\"<i>Heheh, you are a weak little one, try harda next time,</i>\" he says, straightening his back.\n\n");
 		outputText("Bested by his intelligence, you decide to return home.\n\n");
 		zenjiPerspectiveOnPlayer(-4);
 		doNext(camp.returnToCampUseOneHour);
 	}
 	else if (player.inte < (125 + (player.newGamePlusMod() * 25))) {
 		outputText("He pauses for a moment and attempts to strike you with the branch, you deflect his oncoming attack, but you do not let your guard down, he's ready for you to strike, and you are not so keen on giving him an opening. You wait for his next strike, ready to deflect him, but he fakes you out and strikes you from the other side.\n\n");
-		outputText("\"<i>Heheh, you are a weak little one, you've gotta do better dan dat next time.</i>\" He says, straightening his back.\n\n");
+		outputText("\"<i>Heheh, you are a weak little one, you've gotta do better dan dat next time,</i>\" he says, straightening his back.\n\n");
 		outputText("Bested by his intelligence, you decide to return home.\n\n");
 		zenjiPerspectiveOnPlayer(-4);
 		doNext(camp.returnToCampUseOneHour);
@@ -324,7 +324,7 @@ public function part1TrollEncounterChallangeIntelligence():void {
 	else {
 		outputText("He pauses for a moment and attempts to strike you with the branch, you deflect his oncoming attack. He's quite predictable, read like an open book. He likes to strike and expose your weakness if you go for a counter attack, and his fake outs are easy to notice.\n\n");
 		outputText("You wait for a good opening and strike before he lands a hit on you. You manage to hit him before you do, he seems stunned for a moment.\n\n");
-		outputText("\"<i>Hah... Ya smart... smarter dan I expected, I’ll let you pass, you can enter.</i>\" He says breathlessly.\n\n");
+		outputText("\"<i>Hah... Ya smart... smarter dan I expected, I’ll let you pass, you can enter,</i>\" he says breathlessly.\n\n");
 		zenjiPerspectiveOnPlayer(4);
 		part1TrollEncounterRewards();
 	}
@@ -342,7 +342,7 @@ public function part1TrollEncounterChallangeWisdom():void {
 		outputText("You inspect the rocks, it's likely the biggest rock would harbor the most insects, so that would be your best guess. You tell the troll that you're ready to compare results.\n\n");
 		outputText("The troll looks over and you flip the rock, but there's hardly anything under the rock, you're surprised that such a large rock harbored such few insects.\n\n");
 		outputText("Sure enough, when the troll flips over the rock he's chosen there's far more insects than what was under yours.\n\n");
-		outputText("\"<i>Heheh, not the wisest little one, try harda next time.</i>\" He says.\n\n");
+		outputText("\"<i>Heheh, not the wisest little one, try harda next time,</i>\" he says.\n\n");
 		zenjiPerspectiveOnPlayer(-4);
 		doNext(camp.returnToCampUseOneHour);
 	}
@@ -350,7 +350,7 @@ public function part1TrollEncounterChallangeWisdom():void {
 		outputText("You inspect the rocks, remembering what he said about how the moss can be poisonous if dry, you feel around for the dampest rock, and when you think you've found the best one, you tell the troll that you're ready to compare results.\n\n");
 		outputText("The troll looks over and you flip the rock, there are not as many insects as you would've hoped.\n\n");
 		outputText("Sure enough, when the troll flips over the rock he's chosen there are noticeably some more bugs than what was under yours.\n\n");
-		outputText("\"<i>Heheh, not the wisest little one, you gotta do better dan dat next time.</i>\" He says.\n\n");
+		outputText("\"<i>Heheh, not the wisest little one, you gotta do better dan dat next time,</i>\" he says.\n\n");
 		zenjiPerspectiveOnPlayer(-4);
 		doNext(camp.returnToCampUseOneHour);
 	}
@@ -358,7 +358,7 @@ public function part1TrollEncounterChallangeWisdom():void {
 		outputText("You inspect the rocks, remembering what he said about how the moss can be poisonous if dry, you inspect the rocks carefully, making sure to peel the moss back to make sure it's damp all the way through. Once you've found the ideal rock, you tell the troll you're ready to compare results.\n\n");
 		outputText("The troll looks over and you flip the rock, there's definitely plenty of insects.\n\n");
 		outputText("When the troll flips over the rock he's chosen there are definitely not as many insects as you have under yours.\n\n");
-		outputText("\"<i>Hah... ya are quite wise... wiser dan I expected, I'll let you pass, you can enter.</i>\" He says bowing before you.\n\n");
+		outputText("\"<i>Hah... ya are quite wise... wiser dan I expected, I'll let you pass, you can enter,</i>\" he says bowing before you.\n\n");
 		zenjiPerspectiveOnPlayer(4);
 		part1TrollEncounterRewards();
 	}
@@ -369,7 +369,7 @@ public function part1TrollEncounterSex():void {
 	outputText("You take him on his offer and decide that you're willing to pay his toll with your body.\n\n");
 	outputText("\"<i>Ehhh, what?</i>\" He raises an eyebrow at you, \"<i>Now, now, don't be hasty, I didn' offer dat.</i>\"\n\n");
 	outputText("You're not sure what to say, he's actually declining an offering for sex?\n\n");
-	outputText("\"<i>Ya know, you really are bold, I'll tell ya what,</i>\" He says as he hops off the tree, \"<i>If you can best me in one of the challenges of my choosing, I’ll let ya pass, it's a good deal, no?</i>\"\n\n");
+	outputText("\"<i>Ya know, you really are bold, I'll tell ya what,</i>\" he says as he hops off the tree, \"<i>If you can best me in one of the challenges of my choosing, I’ll let ya pass, it's a good deal, no?</i>\"\n\n");
 	menu();
 	addButton(1, "Challenge?", part1TrollEncounterChallange);
 	addButton(3, "Leave", part1TrollEncounterLeave);
@@ -402,7 +402,7 @@ public function part2TrollEncounterFirst():void {
 	clearOutput();
 	outputText("As you are maneuvering your way through the dense bog, careful not to let the wildlife best you at your adventure, you hear a familiar voice ring through the trees.\n\n");
 	outputText("\"<i>Ahaha! It’s you again! Welcome, welcome!</i>\" A male voice rings through the thicket and a familiar troll leaps down from the trees, \"<i>Me temo que no nos hemos presentado adecuadamente.</i>\"\n\n");
-	outputText("He holds a hand over his chest. \"<i>Me llamo Zenji, and who am I gifted ta meet again once more?</i>\" He says leaning close and raising an eyebrow toward you.\n\n");
+	outputText("He holds a hand over his chest. \"<i>Me llamo Zenji, and who am I gifted ta meet again once more?</i>\" he says leaning close and raising an eyebrow toward you.\n\n");
 	outputText("You state your name.\n\n");
 	if (player.cor >= 50) outputText("enji gives you a sideways glance, almost as if he doesn't trust you. \"<i>If dat is de truth, it's nice ta meet you, [name]</i>\"\n\n");
 	else outputText("\"<i>Ahah, [name], so dat is your name, a pleasure ta get to really know ya.</i>\" He replies.\n\n");
@@ -765,7 +765,7 @@ public function followerZenjiMainCampMenuTrainingIntelligence():void {
 	outputText("You follow his instructions and place the flat rock on your head, shifting around slightly until you feel it’s stable on the top of your head.\n\n");
 	outputText("\"<i>A smart person knows deir limits and what dey’re capable of. But dey also know dat it may not be easy ta do everyting. Consider what needs ta be done first, but know what you are capable of doing.</i>\"\n\n");
 	outputText("Zenji stands up, but he gestures for you to remain seated. After a moment he returns with a book. You can’t say you actively see him read, but he must have some way he’s gotten his intelligence.\n\n");
-	outputText("\"<i>I wantcha ta read dis, not de entire ting, just dis page.</i>\" He says as he opens the book for you.\n\n");
+	outputText("\"<i>I wantcha ta read dis, not de entire ting, just dis page,</i>\" he says as he opens the book for you.\n\n");
 	outputText("You being looking over the page, it’s about somatic components for casting spells and ways to strengthen spells as you cast them. As you read the page, you almost forget about the rock you’re trying to support. You quickly catch yourself and keep it up before it slips down. Is this what he was talking about with knowing your limits?\n\n");
 	outputText("\"<i>Now, I want ya ta focus your mind, try ta focus some magic into your hands.</i>\"\n\n");
 	outputText("You focus your efforts into conjuring a spell with some help from the book all while keeping the stone balanced on top of your head. You take a deep breath, but it’s not terribly difficult, even if you have to constantly shift your head to keep the stone steady. The magic you’re trying to conjure is unstable as you’re trying to focus your efforts in keeping the stone stead.\n\n");
@@ -843,7 +843,7 @@ public function followerZenjiSparPCDefeated():void {
 public function followerZenjiSparZenjiDefeated():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
-	outputText("Zenji crouches down and holds up a hand, \"<i>Enough! Enough... you are too good at dis.</i>\" He says breathlessly, \"<i>Don' worry 'bout me, I learned a few tricks to recova.</i>\" Zenji takes a deep breath and stands up. \"<i>Dat was fun, we should do it again lata, no?</i>\"\n\n");
+	outputText("Zenji crouches down and holds up a hand, \"<i>Enough! Enough... you are too good at dis.</i>\" He tries to catch his breath, \"<i>Don' worry 'bout me, I learned a few tricks to recova.</i>\" Zenji takes a deep breath and stands up. \"<i>Dat was fun, we should do it again lata, no?</i>\"\n\n");
 	outputText("You tell Zenji you'd need a moment before you could consider fighting him again.\n\n");
 	cleanupAfterCombat();
 }
@@ -1039,7 +1039,7 @@ public function loverZenjiMainCampMenuAppearance():void {
 	if (player.statusEffectv3(StatusEffects.ZenjiModificationsList) == 32) outputText("16 inches long and 2.6");
 	outputText(" inches thick, the only part of him not covered in hair. Below that is his fuzzy pair of gonads, swaying beneath him, each normally about 3 inches across.");
 	if (player.statusEffectv2(StatusEffects.ZenjiModificationsList) >= 998700) outputText(" He produces so much cum now that he is permanently leaking a steady stream of cum from his tip. Somehow you know a part of him is loving every moment of the lewdness.");
-	outputText("\n\nZenji remains fixated on surveying your camp as you examine him, \"<i>If ya want to get a little closer ya don' hafta ask.</i>\" He says giving you a gentle pat on the shoulder.\n\n");
+	outputText("\n\nZenji remains fixated on surveying your camp as you examine him, \"<i>If ya want to get a little closer ya don' hafta ask,</i>\" he says giving you a gentle pat on the shoulder.\n\n");
 	menu();
 	addButton(14, "Back", loverZenjiMainCampMenu);
 }
@@ -1103,7 +1103,7 @@ public function loverZenjiTalksChildren():void {
 	outputText("You ask Zenji how the children are doing.\n\n");
 	outputText("Zenji smiles softly, \"<i>De baby is doing fine, dey grow up so fast, I can already see de tusks coming in.</i>\"\n\n");
 	outputText("Zenji leads you to his bedroll, [childname1]"+flags[kFLAGS.ZENJI_KID_1_NAME]+" "+(flags[kFLAGS.ZENJI_KID_2_NAME] != 0 ? "and "+flags[kFLAGS.ZENJI_KID_2_NAME]+" are":" is")+" sleeping peacefully in a nest of herbs.\n\n");
-	outputText("Zenji leans close to whisper to you, \"<i>Best not ta wake dem up, it takes forever to get them to sleep.</i>\" He says, wrapping an arm around you. \"<i>Dey are truly our precious child, I cannot tank ya enough for helping me do dis. I'm sure you'll enjoy raising dem wit me.</i>\" Zenji lets out a content sigh, \"<i>It'll be a moment for their hair ta come in, so keep close, and make sure dey're warm so dey can grow up loved properly, any child dat doesn't get enough love won’t be a good adult.</i>\" Zenji pulls you in for a soft peck on the lips, \"<i>And I know we got enough love to share.</i>\" He says, caressing your face.\n\n");
+	outputText("Zenji leans close to whisper to you, \"<i>Best not ta wake dem up, it takes forever to get them to sleep,</i>\" he states, wrapping an arm around you. \"<i>Dey are truly our precious child, I cannot tank ya enough for helping me do dis. I'm sure you'll enjoy raising dem wit me.</i>\" Zenji lets out a content sigh, \"<i>It'll be a moment for their hair ta come in, so keep close, and make sure dey're warm so dey can grow up loved properly, any child dat doesn't get enough love won’t be a good adult.</i>\" Zenji pulls you in for a soft peck on the lips, \"<i>And I know we got enough love to share,</i>\" he croons, caressing your face.\n\n");
 	outputText("You smile at him as you spend some time with your children, Zenji is a very tender father as you’ve grown to expect. His gruff exterior can mask just how caring and gentle he truly is. His presence is soft as the two of you play with your children. Despite his masculine figure and beefy body, he has a gentle touch and it shows with the way he treats your children.\n\n");
 	outputText("After nearly an hour of spending time with your children, you decide it’s best to continue with your day for now, but you’ll be sure that Zenji won't be a lonely father to the children.\n\n");
 	if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
@@ -1329,11 +1329,11 @@ public function loverZenjiGiveItem():void {
 	if (player.hasItem(consumables.CLEARLN) || player.hasItem(consumables.ROUGHLN) || player.hasItem(consumables.SEXY_LN) || player.hasItem(consumables.SMTH_LN)) addButton(0, "Lotion", loverZenjiGiveItemLotion).hint("Give him some lotion to smooth out his cozy fur.");
 	else addButtonDisabled(0, "Lotion", "Need 1 of any Lotion bought at Rathazul shop. (wip tooltip)");
 	if (player.hasItem(consumables.GROPLUS)) addButton(1, "GroPlus", loverZenjiGiveItemGroPlus).hint("Increase the size of certain parts.");
-	else addButtonDisabled(1, "GroPlus", "Need 1 GroPlus. (wip tooltip)");
+	else addButtonDisabled(1, "GroPlus", "You do not have this item to offer.");
 	if (player.hasItem(consumables.REDUCTO)) addButton(2, "Reducto", loverZenjiGiveItemReducto);
-	else addButtonDisabled(2, "Reducto", "Need 1 Reducto. (wip tooltip)");
+	else addButtonDisabled(2, "Reducto", "You do not have this item to offer.");
 	if (player.hasItem(consumables.TROLFIG)) addButton(3, "TrollFig", loverZenjiGiveItemTrollFig).hint("Give Zenji a troll fig, he must like them, right?");
-	else addButtonDisabled(3, "TrollFig", "Need 1 Troll Fig. (wip tooltip)");
+	else addButtonDisabled(3, "TrollFig", "You do not have this item to offer");
 	addButton(4, "Back", loverZenjiGiveItemBack);
 }
 
@@ -1382,9 +1382,9 @@ public function loverZenjiGiveItemLotionNo():void {
 	outputText("\"<i>Neva change [name]... You complete me, I will always love you.</i>\" He pulls you closer into his embrace. His kiss is slow and firm, filled with the passion of someone who would take their life for you. You run your fingers through his beard as his hands roam around your form for a moment. He gives you a loving squeeze before breaking the link, \"<i>I'm with you [name], don't you forget it, there is always someone out there for you in dis world.</i>\"\n\n");
 	outputText("You grin at him softly, but you’re not finished yet. Zenji smiles at you in response. Your hands roam behind him, groping his perfectly shaped behind as your hands work to his tail. His tail sways softly in your grasp, gently worming around in barely contained excitement. You pull on his tail slightly, feeding your hands down his length as you make sure to coat the rest of his tail in the oil. You make sure to gently close your fingers around the tuft of hair at the tip of his tail. It’s incredibly soft and inviting.\n\n");
 	outputText("Once his tail is finished, you work down his toned legs, making sure not to neglect any inch of his toned, hairy body. Zenji flexes his legs softly for you as you work your way down to his muscular calves. Once you’re finished coating every last inch of his legs you look up at him, asking if he likes the present you gave him as you stand up.\n\n");
-	outputText("He gently strokes the top of your head, his longing gaze set on your eyes. \"<i>Thank you for de lotion, it was a nice present.</i>\" He rubs a hand through his chest tuft, \"<i>I can feel de change already, I like it.</i>\" He grabs your hand, gliding you over his chest as well, \"<i>I hope you'll enjoy it more dan I will though...</i>\" He says giving a soft smirk.\n\n");
+	outputText("He gently strokes the top of your head, his longing gaze set on your eyes. \"<i>Thank you for de lotion, it was a nice present.</i>\" He rubs a hand through his chest tuft, \"<i>I can feel de change already, I like it.</i>\" He grabs your hand, gliding you over his chest as well, \"<i>I hope you'll enjoy it more dan I will though...</i>\" he remarks, giving a soft smirk.\n\n");
 	outputText("You tell him that is something for a little later as you slowly pull away from him.\n\n");
-	outputText("Alright, alright, jus' tell me when ya want ta do someting later, Dere's someting I need ta check up on. \"<i>Now, what do ya want ta talk about?</i>\" He says, dismissing you.\n\n");
+	outputText("Alright, alright, jus' tell me when ya want ta do someting later, Dere's someting I need ta check up on. \"\n\n");
 	doNext(loverZenjiGiveItem);
 }
 
@@ -1430,7 +1430,7 @@ public function loverZenjiGiveItemGroPlusTusks():void {
 	clearOutput();
 	if (player.statusEffectv4(StatusEffects.ZenjiModificationsList) == 1) {
 		outputText("You tell Zenji that you miss his old, larger tusks and want to feel the safety of them once more.\n\n");
-		outputText("\"<i>Really?</i>\" He says, giving you an inquisitive look, \"<i>Sure... If that's what you want, then so be it. I was kinda missing my old tusks anyway.</i>\" Zenji reaches a hand up to his lips, pulling them back as he takes the needle in the other hand and injects the liquid into the base of his tusks. He takes a sharp breath as he does so.\n\n");
+		outputText("\"<i>Really?</i>\" he asks, giving you an inquisitive look, \"<i>Sure... If that's what you want, then so be it. I was kinda missing my old tusks anyway.</i>\" Zenji reaches a hand up to his lips, pulling them back as he takes the needle in the other hand and injects the liquid into the base of his tusks. He takes a sharp breath as he does so.\n\n");
 		outputText("It doesn't take long before you notice his small nibblers grow back into his much larger, original tusk length. You see him shake his head briefly.\n\n");
 		outputText("\"<i>Back to my big tusks again!/i>\" He gives you a longing look, \"<i>Is dis what you like? You like my tusks big and strong like dis?</i>\"\n\n");
 		outputText("You nod, why else would you have asked him for this?\n\n");
@@ -1497,7 +1497,7 @@ public function loverZenjiGiveItemReductoTusks():void {
 		outputText("You pull him in, kissing him witlessly, he is shocked for a moment, but after your advance he pulls you closer to him, returning the favor. Soon he presses you onto the ground.\n\n");
 		outputText("\"<i>You know I love you too… I've always wanted to do something like this...</i>\"\n\n");
 		outputText("He lifts your [armor] before giving you a loving lick over your stomach, his tongue is wet and sticky, you shudder in delight as he makes his way up to your chest. He moves upward and gives you a peck on the cheek.\n\n");
-		outputText("\"<i>I guess there's always a reason to look for the good things when given a chance.</i>\" He says with a content smile.\n\n");
+		outputText("\"<i>I guess there's always a reason to look for the good things when given a chance,</i>\" he states with a content smile.\n\n");
 		outputText("You give him a small laugh, glad he's enjoying his new tusks. Zenji helps you up before giving you a small nuzzle. \"<i>Thank you, [name], this will be interesting, I'm glad ya could help me discover something new.</i>\"\n\n");
 		outputText("He presses his forehead against yours before standing up, bringing you with him. After a moment together you’re ready to continue your day.\n\n");
 		player.addStatusValue(StatusEffects.ZenjiModificationsList, 4, -6);
@@ -1535,7 +1535,7 @@ public function loverZenjiGiveItemTrollFig():void {
 	outputText("Zenji gives you a soft smile, \"<i>[name]... I dunno what ta say… Tank you. You know dey say, ‘Don’t feed da troll’, but I like it when ya give me food. Dis is really kind of ya. It was so hard fa me ta find any of dese on my own, but ya really seem ta have an eye fa finding interesting tings.</i>\"\n\n");
 	outputText("You tell Zenji to bring "+(player.tallness < 78 ? "you up so you can feed him. He wraps you within his strong arms, pulling you close to him. You gently caress his cheek once you’re finally pressed against him":"his face to you so you can feed him. He gives you a gentle smile as he draws closer. Once he’s near, you gently caress his cheek")+".\n\n");
 	outputText("He opens his mouth for you, awaiting the treat as you gently press it onto his tongue. He happily closes his mouth, staring directly at you with trusting eyes. After chewing for a moment he finally swallows. \"<i>Ya found a juicy one, dey’re de best ones.</i>\" He states. \"<i>Dat’s de good stuff, thank you, [name].</i>\"\n\n");
-	outputText("Zenji pulls you in for a hug, \"<i>Neva change, you are always filled with surprises.</i>\" He says before giving you a soft kiss on the lips.\n\n");
+	outputText("Zenji pulls you in for a hug, \"<i>Neva change, you are always filled with surprises.</i>\" He gives you a warm smile before pulling you into a soft kiss.\n\n");
 	outputText("You tell him that you’re always happy to make him happy.\n\n");
 	if (player.statusEffectv2(StatusEffects.ZenjiModificationsList) >= 998700) {
 		outputText("You can feel even more cum run down your [legs]. You look up and Zenji is panting softly as he tries to give you a cheeky grin.\n\n");
@@ -1572,7 +1572,7 @@ public function loverZenjiSex():void {
 			outputText("Zenji gives you a long, loving lick across your cheek, \"<i>I know you need it just as much as I do, I need you so badly, [name]... You smell so good… Please [name], I need you now, right now.</i>\" He looks into your eyes with overeagerness, his tail wraps around you in anticipation.\n\n");
 			outputText("His breath stutters, he’s desperate to take you now, you can tell that he wants to breed you, claim you as his. You’ve pushed him into a rut with your very presence. What do you want to do with him?\n\n");
 		}
-		else outputText("He eyes the camp warily before giving a small chuckle, \"<i>When I first met you… I never thought I’d want to get this close to you… but all dat training, all dose spars…</i>\" Zenji’s eyes stray for a moment before returning to yours, \"<i>Well, your beauty is captivating, [name].</i>\" Zenji pauses for a moment, taking in a small breath, \"<i>What didja have in mind?</i>\" He says, gently caressing your cheek.\n\n");
+		else outputText("He eyes the camp warily before giving a small chuckle, \"<i>When I first met you… I never thought I’d want to get this close to you… but all dat training, all dose spars…</i>\" Zenji’s eyes stray for a moment before returning to yours, \"<i>Well, your beauty is captivating, [name].</i>\" Zenji pauses for a moment, taking in a small breath, \"<i>What didja have in mind?</i>\" he asks, gently caressing your cheek.\n\n");
 	}
 	menu();
 	addButton(3, "Blow Him", loverZenjiSexBlowHim).hint("Perform fellatio on Zenji");
@@ -1607,8 +1607,8 @@ public function loverZenjiSex():void {
 			else addButtonDisabled(10, "Get Blown", "You need a penis for this scene.");
 		}
 		else {
-			addButtonDisabled(9, "Get Licked", "Zenji tusks are too big for this scene.");
-			addButtonDisabled(10, "Get Blown", "Zenji tusks are too big for this scene.");
+			addButtonDisabled(9, "Get Licked", "Zenji's tusks are too big for this scene.");
+			addButtonDisabled(10, "Get Blown", "Zenji's tusks are too big for this scene.");
 		}
 	}
 	else {
@@ -1649,19 +1649,19 @@ public function loverZenjiTakeAnal():void {
 	outputText("\n\n\"<i>Dat's a good champion… Taking it all in one go.</i>\"\n\n");
 	outputText("Zenji begins breathing heavily as he slowly thrusts into you, he does not keep the slow rhythm for long as he begins picking up the pace with each thrust. You can feel his toned legs press against you as he rocks your body with each thrust. His powerful body protectively over you, crashing against you with each pump.\n\n");
 	outputText("You squirm in pleasure, but his dense hands keep you locked in place beneath him, you lean back, grabbing one of his fuzzy hands and guiding it to your chest and he follows, gently teasing your pecs with his soft fingers. You ");
-	if (player.hasCock()) outputText("bring your [hand] down as you begin masturbating yourself");
+	if (player.hasCock()) outputText("bring your grasp down as you begin masturbating yourself");
 	else outputText("rub your fingers against your clit and begin fingering yourself in tandem with his thrusts");
 	outputText(".\n\nYou sigh in pleasure as he tenderly fondles you, tweaking softly at your nipples with his soft, furry fingers. His muscular arm grazes your stomach, his pounding becomes more frantic as he steadily reaches his climax, you can feel yourself reaching the edge as well.\n\n");
 	outputText("Zenji leans down further, his abs pressed against your back, completely wrapping you within his arms as he thrusts into you with tremendous vigor. You cry in delight as you finally climax, ");
 	if (player.hasCock()) outputText("shooting ropes of cum all over the ground beneath you");
 	else outputText(" girl cum leaking from your lips, sliding down your body");
 	outputText(". Zenji isn't finished yet, he displays his superior endurance as he continues thrusting into you.\n\n");
-	outputText("\"<i>Not. done. yet...</i>\" He says, gritting through his teeth.\n\n");
+	outputText("\"<i>Not. done. yet...</i>\" he says, gritting through his teeth.\n\n");
 	outputText("He keeps pounding away at you, thrusting with firm strokes. You can feel his hefty balls brush up against you with each stroke as he lets loose a low growl. He's so close now, you beg for him to cum, you want to feel him, you need his seed inside you. Zenji is completely out of it, fucking you with complete wanton desire, desperate to fill you with his cum. Finally, with a tremendous howl and one last powerful thrust, Zenji climaxes within your ass. Your body quakes from the force of his impact as his dick throbs intensely, desperate to stuff your hole with everything he has to give. He lets out a deep sigh as he relaxes. ");
 	if (player.statusEffectv2(StatusEffects.ZenjiModificationsList) >= 4700) outputText("He is pumping so much cum into you, it leaks out as you feel your stomach distend slightly from the copious load he has to offer as the rest stills out onto the bedroll beneath you.");
 	else outputText("His load is dense, you feel yourself being filled by the sheer amount he has to offer.\n\n");
 	outputText("\n\nZenji pulls out of you, copious strings of cum still leaking from the tip of his length as he pulls you around to face him. He stares longingly into your eyes once more as he leans forward, his tusks gently graze your cheeks as he plants a kiss on your lips. With no other choice, you fall into his caress. After a moment he breaks the embrace, but he still holds you tightly in his dense arms. He spends another minute embracing you before letting you go. He cleans you up before helping you get dressed.\n\n");
-	outputText("\"<i>Don' hesitate to ask me for a favor like dis, I will always have de time for you.</i>\" He says as he stands up, ready to continue the day.\n\n");
+	outputText("\"<i>Don' hesitate to ask me for a favor like dis, I will always have de time for you,</i>\" he states as he stands up, ready to continue the day.\n\n");
 	player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
 	player.sexReward("cum","Anal");
 	doNext(camp.returnToCampUseOneHour);
@@ -1686,7 +1686,7 @@ public function loverZenjiTakeVaginal():void {
 	outputText("\n\nWithout breaking the kiss, he pulls you above his length, finally giving him a chance to penetrate you.\n\n");
 	if (player.vaginalCapacity() < 10) {
 		outputText("His manhood presses into your tight snatch, gently stretching out your walls. He feels so big inside you as he presses deeper, gently bucking into you."+(player.statusEffectv3(StatusEffects.ZenjiModificationsList) == 32 ? " His shaft is so painfully large. Maybe making him so huge wasn’t the best idea.":"")+"\n\n");
-		outputText("Zenji breaks the tender kiss for a moment, \"<i>So small, [name], you will grow to like it, don' worry, I will make sure of dat.</i>\" He says in a soft growling tone as his tail gently caresses your figure.\n\n");
+		outputText("Zenji breaks the tender kiss for a moment, \"<i>So small, [name], you will grow to like it, don' worry, I will make sure of dat,</i>\" he says in a soft growling tone as his tail gently caresses your figure.\n\n");
 	}
 	else if (player.vaginalCapacity() < 80) outputText("His manhood presses into your moist snatch, gently pressing his way into you. He feels so good inside you as he presses deeper, gently bucking into you.\n\n");
 	else outputText("His manhood presses into your moist snatch, gently digging his way into you. It doesn't take long before he starts bucking into you.\n\n");
@@ -1759,9 +1759,9 @@ public function loverZenjiSexBlowHim():void {
 	outputText("You glide a finger down his shaft, the only part of him not covered in fur, but his balls are dense and fuzzy. You spend a moment toying with his soft, heavy balls. He’s virile as ever, just waiting for the chance to dump his next load on you. You spend a moment getting closer to his warm, fuzzy balls. You gently rub a finger along his fuzzy sac before leaning in closer, letting loose your breath onto him. You bring your mouth closer, gently licking his sack. The musky scent of his dick is more intense from so far beneath him as you lick his balls. His balls are loose and bobble slightly from your [tongue] pressing against him. Zenji’s soft moans reassure you that he’s enjoying the foreplay. There’s some enjoyment in pleasing him despite the dense fuzz on your [tongue].\n\n");
 	outputText("Once you’ve played enough with his sack, you shift up his length hovering just above his manhood, breathing softly onto his skin. The natural scent of him is even more intense down here. Zenji squirms slightly, he is very turned on by your performance. You place your lips at the head of his penis, the salty taste of his pre reaches your [tongue] as you gently tease at his tip.\n\n");
 	if (player.statusEffectv3(StatusEffects.ZenjiModificationsList) == 32) outputText("Zenji blushes softly, \"<i>[name]... Are… are you sure ya can handle dis..? I… I fear I am too big for ya…</i>\" You reply with a determined glance. You made him this big for a reason, if you can’t give him the worship he deserves then what’s the point? You put your efforts into licking around his shaft. Zenji sits awkwardly, unsure of what to do with such a large length.\n\n");
-	else outputText("\"<i>Da's some reward ya got for me.</i>\" He says as you make your way down his length. He gently starts moving his hips to try to push more of himself into you, but he refrains from being too aggressive.\n\n");
+	else outputText("\"<i>Da's some reward ya got for me,</i>\" he says as you make your way down his length. He gently starts moving his hips to try to push more of himself into you, but he refrains from being too aggressive.\n\n");
 	outputText("You start with your head at the side of his shaft, rubbing your hand across the tip as you lick around his base.\n\n");
-	outputText("\"<i>You’re so good at dis, [name]...</i>\" He says as he gently thrusts against you, pressing his palm against your head, pushing your face into his crotch. Your face is nestled into his treasure trail, his pubic hair is very dense. \"<i>Yeah… breathe it all in for me, [name].</i>\"\n\n");
+	outputText("\"<i>You’re so good at dis, [name]...</i>\" he says as he gently thrusts against you, pressing his palm against your head, pushing your face into his crotch. Your face is nestled into his treasure trail, his pubic hair is very dense. \"<i>Yeah… breathe it all in for me, [name].</i>\"\n\n");
 	outputText("You continue licking up his pre and inhaling his earthy musk while bobbing up and down his shaft. As you do so, you feel him buck a little harder against you. You spend more time wrapping your [tongue] around him, trying to get a taste of every last inch he has to offer. You move your head to the tip of his erection. You gently pry your [tongue] underneath his foreskin. Zenji squirms at your intrusion as you shift your [tongue] around his tip. You give him a sly grin as you lick around his salty tip.\n\n");
 	outputText("You press your lips over his girth, wrapping your mouth completely around him as you continue moving up and down his shaft, his stamina is greater than you expected. You look up at your lover, his eyes closed in pleasure as you suddenly get a taste of pre. His small grunts of pleasure inspire you, but he doesn't seem close to finished.\n\n");
 	outputText("You keep a steady pace, bobbing your head up and down for what feels like ages, wrapping your [tongue] around his length, doing your best to pleasure him. You look up at him again for reassurance, his gaze locks with yours as he gives you an affectionate rub on the head with his strong hands. His masculine features are illuminated from the lower angle, you can’t help but feel slightly more aroused at the sight of such a handsome face. Your jaw begins to grow tired, but then his erection begins to twitch as he nears his climax.\n\n");
@@ -1844,10 +1844,10 @@ public function loverZenjiPregnantSex():void {
 	clearOutput();
 	if (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyType == PregnancyStore.PREGNANCY_SPIDER || player.pregnancyType == PregnancyStore.PREGNANCY_DRIDER_EGGS || player.pregnancyType == PregnancyStore.PREGNANCY_FROG_GIRL) {
 		outputText("You tell Zenji that you want him to be gentle, you may be pregnant, but you still crave the touch of your lover.\n\n");
-		outputText("Zenji gives you a gentle smile, \"<i>You are still beautiful to me, no matta what.</i>\" He says, stroking your pregnancy bulge. His cheeks blush slightly as he strokes his hand over you. \"<i>Someting about you like dis though… It’s making me want you even more…</i>\" He says, growing even more flushed.\n\n");
+		outputText("Zenji gives you a gentle smile, \"<i>You are still beautiful to me, no matta what,</i>\" he reassures, stroking your pregnancy bulge. His cheeks blush slightly as he strokes his hand over you. \"<i>Someting about you like dis though… It’s making me want you even more…</i>\" he says, growing even more flushed.\n\n");
 	}
 	else if (player.pregnancyType == PregnancyStore.PREGNANCY_ZENJI) {
-		outputText("Before you can consider what you want to do, Zenji cuts you off, \"<i>You are very beautiful, have I told you dis, [name]?</i>\" He says, giving you a toothy grin, his tone almost predatory.\n\n");
+		outputText("Before you can consider what you want to do, Zenji cuts you off, \"<i>You are very beautiful, have I told you dis, [name]?</i>\" he says, giving you a toothy grin, his tone almost predatory.\n\n");
 		outputText("\"<i>If you don’ mind, I know exactly what I wanna do,</i>\" he says, leaning in, giving you a loving lick across the cheek.\n\n");
 	}
 	else {
@@ -1857,8 +1857,8 @@ public function loverZenjiPregnantSex():void {
 		outputText("Zenji shakes his head softly again. \"<i>I...</i>\" He takes a deep breath, finally taking in the strength to look you in the eyes again, \"<i>I'll do it... for you... for us, [name].</i>\"\n\n");
 	}
 	outputText("Zenji stands at your side, helping you get out of your [armor] with slow deliberate motions, carefully gliding his hands around your pregnant frame. The soft hair on his hands tickles you gently as his tender touch undresses you. His tail reaches around, gently rubbing the underside of your pregnancy bulge. He blushes when he touches your pregnancy bulge, he is very much attracted to you like this, not like he could hide his affection for you beneath his loincloth anyway.\n\n");
-	outputText("Once you're fully undressed Zenji takes off his loincloth as well, he struggles to pull it down past his erection. Once he’s taken it off you take a glimpse at his balls, definitely a bit larger than usual. He places a finger into his mouth, lathering his index finger in saliva. He leans closer to you, gently teasing your clit as he toys with you. His touch is gentle as he leans closer to you, blushing softly.\n\n");
-	outputText("\"<i>I can't tell ya just how beautiful you are like dis...</i>\" He says, \"<i>Are ya ready for ya big bad troll ta show you how much he loves you?</i>\"\n\n");
+	outputText("Once you're fully undressed, Zenji takes off his loincloth as well, he struggles to pull it down past his erection. Once he’s taken it off you take a glimpse at his balls, definitely a bit larger than usual. He places a finger into his mouth, lathering his index finger in saliva. He leans closer to you, gently teasing your clit as he toys with you, blushing softly.\n\n");
+	outputText("\"<i>I can't tell ya just how beautiful you are like dis...</i>\" he says, \"<i>Are ya ready for ya big bad troll ta show you how much he loves you?</i>\"\n\n");
 	outputText("You squirm beneath his touch, ready for him, desperate for his warmth.\n\n");
 	outputText("He stops playing with your moist box as he slowly pulls you down with him, placing you in his lap as he rests his back against a tree. You are comfortably nestled within his fuzzy embrace, he spends a little more time toying with your rosebud, teasing you gently as his free hand fondles your breasts. His dick is firmly pressed against your backside, foreskin pulled back slightly from his stiff erection, aching for its entry. Finally, you tell him you can't handle it anymore. Zenji nuzzles your head softly with his beard as he gently lifts you, his tip barely grazing your labia, almost as if it were mocking you. Slowly, he lowers you down onto him, spearing you on his prick as he gives a low, hungry growl.\n\n");
 	player.cuntChange(15,true,true,false);
@@ -1866,7 +1866,7 @@ public function loverZenjiPregnantSex():void {
 	else if (player.vaginalCapacity() < 80) outputText("His manhood presses into your moist snatch, gently pressing his way into you. He feels so good inside you as he presses deeper, pushing against your walls, his pace slow and gentle.\n\n");
 	else outputText("His manhood presses into your moist snatch, gently pressing his way into you. While he may not be the biggest you've had, he is skilled and you couldn't wish for anyone better.\n\n");
 	outputText("Zenji gently strokes at your baby bulge, sniffing you intently as he slowly pumps into you, mindful of the child you're carrying.\n\n");
-	outputText("\"<i>[name]</i>\" He whispers in a shallow tone, \"<i>I can't tell you how hot you're making me... Ya really are a beautiful mother... there are no words to tell you how much I love you.</i>\"\n\n");
+	outputText("\"<i>[name],</i>\" he whispers in a shallow tone, \"<i>I can't tell you how hot you're making me... Ya really are a beautiful mother... there are no words to tell you how much I love you.</i>\"\n\n");
 	outputText("You lean back into his embrace, content in basking within the comfort of your lover's affection. You urge him to go a little faster.\n\n");
 	outputText("Zenji growls softly as he picks up the pace, tenderly brushing his face against yours while fondling your body with his hands. You can feel his length twitching within you, he's nearing the edge, but you're not ready yet. Zenji groans in desperation, unwilling to release so quickly as he loses his pace, but his shaft still pulses with need."+(player.statusEffectv3(StatusEffects.ZenjiModificationsList) == 32 ? " He is so huge, the outline of his bulge shows through your stomach.":"")+"\n\n");
 	outputText("Zenji reaches his hand down to your clit, frigging you as he slowly pumps into your moist cunt, desperately trying to get you off first. You can feel how hard he is blushing from this, is he ashamed that he’s about to get off first? He's leaking so much pre he might as well be cumming. Slowly he picks up the pace once more. His pants become strained, aching for release, but he is determined not to cum just yet.\n\n");
@@ -1874,7 +1874,7 @@ public function loverZenjiPregnantSex():void {
 	outputText("Zenji grunts with force as he grabs onto your hips, pulling you down with his thrusts, the force he rocks you with finally pushes you over the edge as you catch the release you so crave. Zenji howls into your ear as he finally cums, the warmth of his seed spilling past your cervix. So much cum is leaking from him, you're surprised he held so much as it seeps out past your lips. Zenji doesn’t stop thrusting, his grunts become more aggressive as he continues pumping into you, still in orgasm. ");
 	outputText("You feel him heave, panting wildly as he groans softly. His hands roam around your form, clutching you closer, making sure that you can take in every last drop of cum he has to offer. There’s far too much for you to handle and it continuously leaks out past your netherlips, spilling onto his legs, trickling down to the floor beneath him.\n\n");
 	outputText("Zenji growls softly as he deflates from within you, his shaft slides out, still leaking copious amounts of cum, but he doesn’t go completely flaccid.\n\n");
-	outputText("\"<i>Dat was...</i>\" Zenji is still panting, unable to make out his words, \"<i>When a male troll is with dey’re mate, especially when dey’re pregnant we jus’... I get all dese feelings for you, I need you even more, I can’t tink straight when I’m around ya.</i>\" He says, catching his breath.\n\n");
+	outputText("\"<i>Dat was...</i>\" Zenji is still panting, unable to make out his words, \"<i>When a male troll is with dey’re mate, especially when dey’re pregnant we jus’... I get all dese feelings for you, I need you even more, I can’t tink straight when I’m around ya,</i>\" he says, catching his breath.\n\n");
 	outputText("You are touched by his words and you tell him that you're honored to be able to have a family together.\n\n");
 	outputText("You spend a moment within his embrace as he fondles your body, tenderly stroking your stomach.\n\n");
 	outputText("You notice Zenji has gotten hard again, his shaft still leaking cum and twitching with need, desperate to stuff you again… has he even finished his first orgasm?\n\n");
@@ -1896,7 +1896,7 @@ public function loverZenjiHotSpring():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
 	outputText("You tell Zenji that since you have a hot spring now, you were wondering if he would like to join you in it.\n\n");
-	outputText("Zenji gives you a wary grin, \"<i>De hot spring? Not really my ting, but of course I’d love ta join ya.</i>\" He says, reaching out his hand. You grab hold of him as he walks you to the hot spring.\n\n");
+	outputText("Zenji gives you a wary grin, \"<i>De hot spring? Not really my ting, but of course I’d love ta join ya,</i>\" he states, reaching out his hand. You grab hold of him as he walks you to the hot spring.\n\n");
 	outputText("Zenji slowly dips himself into the water, \"<i>Sure is warm…</i>\"\n\n");
 	if (player.isNaked()) outputText("You slide into the water beside him.\n\n");
 	else {
@@ -1914,11 +1914,11 @@ public function loverZenjiHotSpring():void {
 }
 public function loverZenjiHotSpringRelax():void {
 	outputText("You sink into Zenji’s warm fur, being carried gently by the warm bubbling water. Zenji leans his head onto yours.\n\n");
-	outputText("\"<i>I know I said hot springs aren’t my ting, but I could get used ta dis.</i>\" He says softly.\n\n");
+	outputText("\"<i>I know I said hot springs aren’t my ting, but I could get used ta dis,</i>\" he remarks softly.\n\n");
 	outputText("You spend some time relaxing in the hot spring with Zenji. The warmth of your lover and the heat of the water is calming. Zenji gently strokes your head before wrapping his arm around you and pulling you closer to him. He rests his head against you before slowly closing his eyes, getting drowsy from the heat. You decide that all you want to do right now is just spend some quality time beside him. You spend the rest of the hour sitting beside Zenji.\n\n");
 	outputText("Zenji stirs softly, you notice he’s sweating a lot, \"<i>I tink it’s about time we get outta de spring, I don’t wanna spend too much time in da water.</i>\" Zenji waits for your affirmation, in which you agree.\n\n");
 	outputText("Zenji picks you up out of the water as he steps out with you in his arms. Zenji is soaked, from his midriff and lower, his hair drips slightly from the weight of the water.\n\n");
-	outputText("\"<i>Dat was nice,</i>\" He says, placing you down and wiping the sweat from his brow, \"<i>We should do it again sometime.</i>\"\n\n");
+	outputText("\"<i>Dat was nice,</i>\" he says, placing you down and wiping the sweat from his brow, \"<i>We should do it again sometime.</i>\"\n\n");
 	outputText("You agree, the hot spring is surely a lot hotter with him in it.\n\n");
 	outputText("Zenji chuckles softly before sitting next to you, drying the two of you off with a towel. Once both of you are dried up Zenji pulls you in for a hug. \"<i>Dried off and ready ta continue da day!</i>\"\n\n");
 	outputText("You smile back at Zenji, with his support you feel like nothing can get in your way.\n\n");
@@ -1928,14 +1928,14 @@ public function loverZenjiHotSpringRelax():void {
 public function loverZenjiHotSpringRideAnal():void{
 	outputText("You look up at Zenji with a sly smirk.\n\n");
 	outputText("Zenji gives you a slightly concerned look, \"<i>I know dat look, ya are up ta someting, [name].</i>\"\n\n");
-	outputText("You inch closer to him, telling him that he’s even hotter than the water right now. You rest yourself on his lap, rear pressed against his crotch.\n\n");
+	outputText("You inch closer to him, telling him that he’s even hotter than the water right now. You rest yourself on his lap, [butt] pressed against his crotch.\n\n");
 	outputText("Zenji raises his hands in the air defensively, \"<i>Ah, [name], you… if you wanted ta cuddle ya don’t have ta be so…</i>\" Zenji gives a small chuckle, \"<i>Dat’s just like you, gettin what ya want when ya want it.</i>\"\n\n");
 	outputText("You tilt your head back, reaching a hand up to caress his face, running your fingers through his beard.\n\n");
-	outputText("Zenji lowers his hands, wrapping them around your torso. \"<i>Looks like you’re all mine now, [name]. You’re not getting away dis time.</i>\" He says as he leans closer, your back pressed against his firm abs.\n\n");
+	outputText("Zenji lowers his hands, wrapping them around your torso. \"<i>Looks like you’re all mine now, [name]. You’re not getting away dis time,</i>\" he croons as he leans closer, your back pressed against his firm abs.\n\n");
 	outputText("You lower your free hand toward his crotch, gently lifting his loincloth as you shake your hips for him. Zenji flinches slightly at your intrusion, \"<i>Handsy, ain’tcha?</i>\"\n\n");
 	outputText("You give a small snicker in response, but Zenji is not hiding his arousal. You lift yourself above his lap, allowing the water to carry you as you slide his loincloth down his legs.\n\n");
-	outputText("Zenji blushes softly, \"<i>[name]... you really know how to tease a troll…</i>\" He says in a husky whisper. Zenji seems to be warming up to the idea of penetrating you right here as his manhood rises, pressing against your rear. His strong hands grab you by the hips.\n\n");
-	outputText("\"<i>I can’t take it anymore if ya are gonna toy around wit me like dis… So I betta take you first!</i>\" He says in a mocking tone. Zenji aligns himself with your backdoor, the bubbling water surrounds you as he pulls you down, spearing you over his length.\n\n");
+	outputText("Zenji blushes softly, \"<i>[name]... you really know how to tease a troll…</i>\" he mutters in a husky whisper. Zenji seems to be warming up to the idea of penetrating you right here as his manhood rises, pressing against your rear. His strong hands grab you by the hips.\n\n");
+	outputText("\"<i>I can’t take it anymore if ya are gonna toy around wit me like dis… So I betta take you first!</i>\" Zenji aligns himself with your backdoor, the bubbling water surrounds you as he pulls you down, spearing you over his length.\n\n");
 	player.buttChange(15,true,true,false);
 	if (player.analCapacity() < 7) outputText("His lengthy shaft presses its way deep inside of your tight anus, you feel yourself stretch over his considerable manhood."+(player.statusEffectv3(StatusEffects.ZenjiModificationsList) == 32 ? " The water makes it a bit easier to adjust to his intense size.":"")+"\n\n");
 	else if (player.analCapacity() < 56) outputText("His lengthy shaft presses into you, you can feel him accommodating your [ass] as he presses further and further with each thrust.\n\n");
@@ -1965,9 +1965,9 @@ public function loverZenjiHotSpringRideVaginal():void{
 	outputText("You inch closer to him, telling him that he’s definitely hotter than the water right now. You rest yourself on his lap, your hips pressed against his.\n\n");
 	outputText("Zenji raises his hands in the air defensively, \"<i>Ah, [name], you… if you wanted ta cuddle ya don’t have ta be so…</i>\" Zenji gives a small chuckle, \"<i>Dat’s just like ya, gettin what ya want when ya want it.</i>\"\n\n");
 	outputText("You look up at him, gazing longingly into his eyes.\n\n");
-	outputText("Zenji lowers his hands, wrapping them around your torso. \"<i>If you keep giving me dat look I won’t be able ta resist you anymore...</i>\" He says, pulling you closer to him.\n\n");
+	outputText("Zenji lowers his hands, wrapping them around your torso. \"<i>If you keep giving me dat look I won’t be able ta resist you anymore...</i>\" he says, pulling you closer to him.\n\n");
 	outputText("You can feel something poke at you from underneath the water, you give him a taunting grin as Zenji blushes softly. You reach a hand down, pulling his loincloth down his legs as it is carried off by the hotspring. Once it’s out of the way, you shift around and wrap your legs around his waist.\n\n");
-	outputText("Zenji blushes harder, \"<i>[name]... you really know how to tease a troll…</i>\" He says in a husky whisper. Zenji seems to be warming up to the idea of penetrating you right here as his manhood rises, pressed against you. His strong hands grab you by the hips. \"<i>You are really asking fa dis… and now you’re mine, [name].</i>\" You feel his fuzzy hand lower slightly to gently grope at your [ass] as he gives you a soft growl. Soon you can feel him prod the tip of his length against your lips before finally bringing himself to penetrate you.\n\n");
+	outputText("Zenji blushes harder, \"<i>[name]... you really know how to tease a troll…</i>\" he mutters in a husky whisper. Zenji seems to be warming up to the idea of penetrating you right here as his manhood rises, pressed against you. His strong hands grab you by the hips. \"<i>You are really asking fa dis… and now you’re mine, [name].</i>\" You feel his fuzzy hand lower slightly to gently grope at your [ass] as he gives you a soft growl. Soon you can feel him prod the tip of his length against your lips before finally bringing himself to penetrate you.\n\n");
 	player.cuntChange(15,true,true,false);
 	if (player.vaginalCapacity() <= 9) outputText("His manhood presses into your tight snatch, gently stretching out your walls. He is so big, but you need him now even more."+(player.statusEffectv3(StatusEffects.ZenjiModificationsList) == 32 ? "The water makes it easier to adjust to his intense size.":"")+"\n\n");
 	else if (player.vaginalCapacity() < 79) outputText("His manhood presses into your moist snatch, gently pressing his way into you. He feels so good inside you as he presses deeper, his pace slow and gentle.\n\n");
@@ -1997,13 +1997,13 @@ public function loverZenjiSexGetFingered():void {
 	outputText("You shift around so that your back is pressed against his abs. You bring his strong, dense hands down to your loins, guiding his hands to your lips.\n\n");
 	if (!player.isNaked()) outputText("You pull down your [armor], giving Zenji room to finger you.\n\n");
 	outputText("\"<i>Ah, I see how it is… You like a hands-on approach...</i>\" Zenji says as he pulls his fingers up to his mouth, lathering them briefly before returning to your clit. His free hand roams around your torso as his other hand gets down to work on your rosebud. You squirm softly beneath his touch, he is far more skilled at this than anyone should be.\n\n");
-	outputText("\"<i>Haha, ya really like dis, don’tcha?</i>\" He says teasingly. \"<i>Tell me, you like being held by ya big bad troll, right [name]?</i>\" His tail lifts to your vagina, teasing you slightly before gently caressing your form.\n\n");
+	outputText("\"<i>Haha, ya really like dis, don’tcha?</i>\" he says teasingly. \"<i>Tell me, you like being held by ya big bad troll, right [name]?</i>\" His tail lifts to your vagina, teasing you slightly before gently caressing your form.\n\n");
 	outputText("You give a sharp breath in response, getting caught up in his deft hands. Zenji continues teasing your clit, fondling you in steady circular motions as his other fingers prod past your lips, exploring the walls of your vagina. You moan softly as his other hand reaches up to your chin, holding you tightly, pressing his chest to your back.\n\n");
-	outputText("\"<i>Now... Now, you are mine…</i>\" He says with a growl as he leans closer to you, giving your cheek a long, loving lick as he continues fingering you. You quiver in delight at his tongue."+(player.isBiped() ? " Zenji sensually strokes your thighs, teasing you gently.":"")+"\n\n");
+	outputText("\"<i>Now... Now, you are mine…</i>\" he growls as he leans closer to you, giving your cheek a long, loving lick as he continues fingering you. You quiver in delight at his tongue."+(player.isBiped() ? " Zenji sensually strokes your thighs, teasing you gently.":"")+"\n\n");
 	outputText("Zenji crooks his finger within your vagina, testing your limits and seeing how far he can dig his large finger into you. He spends time slowly rubbing your clit with his thumb and continually fingering you.\n\n");
 	outputText("You moan softly again as he gently caresses your face. You can’t take the teasing anymore as you feel pressure building up within your loins, you’re ready to come for him again. Your legs grow weary as Zenji holds onto your form tightly. You cry out in pleasure as you cum into his awaiting fingers, girlcum drips past your lips down his fingers.\n\n");
-	outputText("\"<i>Didja like dat, [name]?</i>\" He asks, knowing very well the answer.\n\n");
-	outputText("You nod softly as Zenji turns you around to face him. He pulls you in, planting a hungry kiss onto your lips. \"<i>Good…</i>\" He says after breaking the link, strands of saliva drip from the two of you as he pulls away.\n\n");
+	outputText("\"<i>Didja like dat, [name]?</i>\" he asks, knowing very well the answer.\n\n");
+	outputText("You nod softly as Zenji turns you around to face him. He pulls you in, planting a hungry kiss onto your lips. \"<i>Good…</i>\" he croons after breaking the link, strands of saliva drip from the two of you as he pulls away.\n\n");
 	if (!player.isNaked()) outputText("Zenji helps pull your clothes back up once you’ve recovered from your high.\n\n");
 	outputText("\"<i>Now den… As much as I do like spending time wit ya, dere’s other tings I need ta attend to.</i>\" Zenji says, giving you a gentle kiss on the cheek before leaving.\n\n");
 	player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
@@ -2019,10 +2019,10 @@ public function loverZenjiSexGetHandjob():void {
 	if (!player.isNaked()) outputText("You pull down your [armor], giving Zenji room to give you a handjob.\n\n");
 	outputText("\"<i>Ah, I see how it is… If ya want ya reward, den ya betta get ta work first.</i>\" Zenji says as he pulls his fingers up to your mouth. You wrap your [tongue] around his hands, licking them briefly, lubing up his fingers for him. His free hand roams around your torso as his other hand reaches down to get to work on your length. Your length rests comfortably in his large hands. Something about getting a handjob from his soft hands is fascinating. You can’t say that you’ve seen him jerk off within your camp, how is he so good at this?\n\n");
 	outputText("He continues stroking your shaft in long repeated strokes, \"<i>Ya really enjoy dis, I can tell, [name].</i>\" You groan softly in response as his other hand reaches up to your chin, holding you tightly, pressing his chest to your back.\n\n");
-	outputText("\"<i>You’re not getting off dat easily, [name]...</i>\" He says, smirking softly as he leans closer to you, giving your cheek a long, loving lick as he continues stroking your manhood. His tail reaches up to your erection as he uses the tip of his tail to tease your sensitive manhood. He continues working his tail around the tip of your shaft, teasing you softly before his tail lowers to caress your form.\n\n");
+	outputText("\"<i>You’re not getting off dat easily, [name]...</i>\" he says, smirking softly as he leans closer to you, giving your cheek a long, loving lick as he continues stroking your manhood. His tail reaches up to your erection as he uses the tip of his tail to tease your sensitive manhood. He continues working his tail around the tip of your shaft, teasing you softly before his tail lowers to caress your form.\n\n");
 	outputText("You breathe softly as he gently caresses your face. You can’t take the teasing anymore as you feel pressure building up within your loins, your shaft begins twitching within his grasp. Sensing your impending orgasm, Zenji’s grip on you tightens as his strokes become faster. Your legs grow weary as Zenji holds onto your form tightly. Grinding against his crotch softly, you cry out in pleasure. Finally cumming into his awaiting fingers, ropes of cum shoot into the air, eventually dribbling down to his fingers.\n\n");
 	outputText("\"<i>Didja like dat, [name]?</i>\" He asks, knowing the answer very well.\n\n");
-	outputText("You nod softly as Zenji turns you around to face him. He pulls you in, planting a hungry kiss onto your lips. \"<i>Good…</i>\" He says after breaking the link, stands of saliva drip from the two of you as he pulls away.\n\n");
+	outputText("You nod softly as Zenji turns you around to face him. He pulls you in, planting a hungry kiss onto your lips. \"<i>Good…</i>\" he says after breaking the link, stands of saliva drip from the two of you as he pulls away.\n\n");
 	if (!player.isNaked()) outputText("Zenji helps pull your clothes back up once you’ve recovered from your high.\n\n");
 	outputText("\"<i>Now den… As much as I do like spending time wit ya, dere’s other tings I need ta attend to.</i>\" Zenji says, giving you a gentle kiss on the cheek before leaving.\n\n");
 	player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
@@ -2072,9 +2072,9 @@ public function loverZenjiSexGetBlown():void {
 	if (player.tallness > 82) outputText("reaching eye level with you");
 	else if (player.tallness > 60) outputText("his height towering over you");
 	else outputText("picking you up with him");
-	outputText(". \"<i>Did ya like that [name]?</i>\" He says, giving you a longing gaze as he wraps his arms over you.\n\n");
+	outputText(". \"<i>Did ya like that [name]?</i>\" he says, giving you a longing gaze as he wraps his arms over you.\n\n");
 	outputText("You nod, telling him he did better than you imagined. Zenji gives a small chuckle at your response.\n\n");
-	outputText("\"<i>Well, I hope ya would be willing to return the favor later, hmm?</i>\" He says giving a taunting grin.\n\n");
+	outputText("\"<i>Well, I hope ya would be willing to return the favor later, hmm?</i>\" he teases, giving a taunting grin.\n\n");
 	outputText("You tell him you'll consider it. You give him a brief kiss before you gently break out of his embrace, ready to start your day again.\n\n");
 	player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
 	player.sexReward("Default","Dick",true,false);
@@ -2222,7 +2222,7 @@ public function loverZenjiHalloweenEventEnding():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
 	outputText("Zenji walks up to you, he seems less tense than he has been lately.\n\n");
-	outputText("\"<i>[name], de time of de dead is ova, we can wash off de paint now, lest we invite death to dis camp.</i>\" He says, rubbing a hand over his chin.\n\n");
+	outputText("\"<i>[name], de time of de dead is ova, we can wash off de paint now, lest we invite death to dis camp,</i>\" he says, rubbing a hand over his chin.\n\n");
 	outputText("Zenji guides you to the stream, he climbs down into it. He reaches a hand toward you, beckoning for you to join him.\n\n");
 	outputText("You take off your outerwear before holding his hand as he brings you into the cool water. \"<i>It’s nice to be in de stream sometimes, ya know, [name]?</i>\"\n\n");
 	outputText("You nod, it does feel nice to be carried by the water.\n\n");
@@ -2284,7 +2284,7 @@ public function birthScene():void {
 	outputText("\"<i>Feel de rhythm of ya body, push with the convulsions, I know you can do dis.</i>\" Zenji's words of assurance help you concentrate.\n\n");
 	outputText("You lie down, screaming as Zenji kneels beside you, awaiting the child that you're about to bring into this world.\n\n");
 	outputText("After an hour of pain and screaming, you've finally released the child from your womb.\n\n");
-	outputText("Zenji cheers as he gently strokes your stomach, \"<i>I never doubted ya for a second [name].</i>\" He says before he cuts the umbilical cord from the baby with his tusks. \"<i>Tradition states dat de father always cuts de cord wit his tusks. I hope ya don' mind.</i>\"\n\n");
+	outputText("Zenji cheers as he gently strokes your stomach, \"<i>I never doubted ya for a second [name],</i>\" he says before he cuts the umbilical cord from the baby with his tusks. \"<i>Tradition states dat de father always cuts de cord wit his tusks. I hope ya don' mind.</i>\"\n\n");
 	outputText("You're thankful he's here, but now you want to see the child you've brought into this world together.\n\n");
 	outputText("Zenji gently picks up the baby in his arms, inspecting them, \"<i>Yep, it’s a "+(flags[kFLAGS.ZENJI_KID_1_NAME] == 0 ? "boy":"girl")+" alright. De tusks haven't grown in yet, so it is best ta nurse dem while ya can so dey can grow big strong tusks like me.</i>\" He places your child on your chest, you pull "+(flags[kFLAGS.ZENJI_KID_1_NAME] == 0 ? "him":"her")+" closer so that they can latch onto you. Maternal pride overwhelms you as you begin crying tears of joy. Zenji leans down and nuzzles his face against yours, rubbing his beard affectionately against you, \"<i>Ya will be a fine mother, [name] I'm glad dat we can raise a family together… I love you [name]. Do ya know what ya wanna name dem..?</i>\"\n\n");
 	menu();
@@ -2307,7 +2307,7 @@ private function applyZenjikidName():void {
 	{
 		clearOutput();
 		if(mainView.nameBox.text == "") outputText("<b>You must select a name.</b>");
-		else if(mainView.nameBox.text == "Zenji") outputText("\"<i>Dey can’t have my name! Pick another.</i>\"");
+		else if(mainView.nameBox.text == "Zenji") outputText("\"<i>I'm honored, but dey can’t have my name! Pick another.</i>\"");
 		menu();
 		mainView.nameBox.x = mainView.mainText.x + 5;
 		mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
@@ -2319,8 +2319,8 @@ private function applyZenjikidName():void {
 	mainView.nameBox.visible = false;
 	clearOutput();
 	outputText("\n\n\n");
-	if (flags[kFLAGS.ZENJI_KID_1_NAME] != 0) outputText("\"<i>"+flags[kFLAGS.ZENJI_KID_1_NAME]+"... I like dat name…'</i>\" He says with a smile.\n\n");
-	else outputText("\"<i>"+flags[kFLAGS.ZENJI_KID_2_NAME]+"... I like dat name…'</i>\" He says with a smile.\n\n");
+	if (flags[kFLAGS.ZENJI_KID_1_NAME] != 0) outputText("\"<i>"+flags[kFLAGS.ZENJI_KID_1_NAME]+"... I like dat name…'</i>\" he states with a smile.\n\n");
+	else outputText("\"<i>"+flags[kFLAGS.ZENJI_KID_2_NAME]+"... I like dat name…'</i>\" he states with a smile.\n\n");
 	outputText("Zenji relaxes by your side as you drift off to sleep within his protection, exhausted from giving birth.");
 	doNext(camp.returnToCampUseTwoHours);
 }
