@@ -1677,7 +1677,7 @@ public class Combat extends BaseContent {
             if (player.gender == 3) outputText("aching cock and thirsty pussy towards the nearest thing willing to fuck it.");
             if (player.gender == 0) outputText("groin, before remember there is nothing there to caress.");
         }
-        dynStats("lus", 10 + player.sens / 10);
+        dynStats("lus", 10 + player.effectiveSensitivity() / 10);
     }
 
     internal function wait():void {
@@ -1737,13 +1737,13 @@ public class Combat extends BaseContent {
             if (monster is CaiLin && flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin");
             else outputText("The [monster name]");
             outputText("'s grip on you tightens as you relax into the stimulating pressure.");
-            dynStats("lus", player.sens / 5 + 5);
+            dynStats("lus", player.effectiveSensitivity() / 5 + 5);
             player.takePhysDamage(5 + rand(5));
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.ScyllaBind)) {
             clearOutput();
             outputText("You're being squeezed tightly by the scylla’s powerful tentacles. That's without mentioning the fact she's rubbing in your sensitive place quite a bit, giving you a knowing grin.");
-            dynStats("lus", player.sens / 4 + 20);
+            dynStats("lus", player.effectiveSensitivity() / 4 + 20);
             player.takePhysDamage(100 + rand(40));
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.WolfHold)) {
@@ -1767,7 +1767,7 @@ public class Combat extends BaseContent {
             else if (player.hasVagina())
                 outputText("The creature continues sucking your clit and now has latched two more suckers on your nipples, amplifying your growing lust. You must escape or you will become a mere toy to this thing!");
             else outputText("The creature continues probing at your asshole and has now latched " + num2Text(player.totalNipples()) + " more suckers onto your nipples, amplifying your growing lust.  You must escape or you will become a mere toy to this thing!");
-            dynStats("lus", (8 + player.sens / 10));
+            dynStats("lus", (8 + player.effectiveSensitivity() / 10));
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
             clearOutput();
@@ -1886,7 +1886,7 @@ public class Combat extends BaseContent {
                 if (monster is CaiLin && flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin");
                 else outputText("The [monster name]");
                 outputText("'s grip on you tightens as you struggle to break free from the stimulating pressure.");
-                dynStats("lus", player.sens / 10 + 2);
+                dynStats("lus", player.effectiveSensitivity() / 10 + 2);
                 if (monster is Naga) player.takePhysDamage(7 + rand(5));
                 if (monster is Gorgon) player.takePhysDamage(17 + rand(15));
                 if (monster is CaiLin) player.takePhysDamage(10 + rand(8));
@@ -1903,7 +1903,7 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.ScyllaBind);
             } else {
                 outputText("Despite all of your struggle she manage to maintain her hold on you.");
-                dynStats("lus", player.sens / 5 + 5);
+                dynStats("lus", player.effectiveSensitivity() / 5 + 5);
                 player.takePhysDamage(100 + rand(80));
             }
             skipMonsterAction = true;
@@ -1952,7 +1952,7 @@ public class Combat extends BaseContent {
                 else if (player.hasVagina())
                     outputText("The creature continues sucking your clit and now has latched two more suckers on your nipples, amplifying your growing lust. You must escape or you will become a mere toy to this thing!");
                 else outputText("The creature continues probing at your asshole and has now latched " + num2Text(player.totalNipples()) + " more suckers onto your nipples, amplifying your growing lust.  You must escape or you will become a mere toy to this thing!");
-                dynStats("lus", (3 + player.sens / 10 + player.lib / 20));
+                dynStats("lus", (3 + player.effectiveSensitivity() / 10 + player.lib / 20));
                 skipMonsterAction = true;
             }
         }
@@ -6533,11 +6533,11 @@ public class Combat extends BaseContent {
             } else {
                 outputText("The orb continues vibrating in your ass, doing its best to arouse you.\n\n");
             }
-            dynStats("lus", 7 + int(player.sens) / 10);
+            dynStats("lus", 7 + int(player.effectiveSensitivity()) / 10);
         }
         if (player.hasStatusEffect(StatusEffects.RaijuStaticDischarge)) {
             outputText("The raiju electricity stored in your body continuously tingle around your genitals!\n\n");
-            dynStats("lus", 14 + int(player.sens) / 8);
+            dynStats("lus", 14 + int(player.effectiveSensitivity()) / 8);
         }
         if (player.hasStatusEffect(StatusEffects.KissOfDeath)) {
             //Effect
@@ -6547,7 +6547,7 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.DemonSeed)) {
             outputText("You feel something shift inside you, making you feel warm.  Finding the desire to fight this... hunk gets harder and harder.\n\n");
-            dynStats("lus", (player.statusEffectv1(StatusEffects.DemonSeed) + int(player.sens / 30) + int(player.lib / 30) + int(player.cor / 30)));
+            dynStats("lus", (player.statusEffectv1(StatusEffects.DemonSeed) + int(player.effectiveSensitivity() / 30) + int(player.lib / 30) + int(player.cor / 30)));
         }
         if (player.inHeat && player.vaginas.length > 0 && monster.cockTotal() > 0) {
             dynStats("lus", (rand(player.lib / 5) + 3 + rand(5)));
@@ -10192,7 +10192,7 @@ public class Combat extends BaseContent {
                 else {
                     outputText("You try to shake off the fog and run but the anemone slinks over to you and her tentacles wrap around your waist.  <i>\"Stay?\"</i> she asks, pressing her small breasts into you as a tentacle slides inside your [armor] and down to your nethers.  The combined stimulation of the rubbing and the tingling venom causes your knees to buckle, hampering your resolve and ending your escape attempt.");
                     //(gain lust, temp lose spd/str)
-                    (monster as Anemone).applyVenom((4 + player.sens / 20));
+                    (monster as Anemone).applyVenom((4 + player.effectiveSensitivity() / 20));
                     combatRoundOver();
                     return;
                 }
@@ -10224,7 +10224,7 @@ public class Combat extends BaseContent {
                 else {
                     outputText("You try to shake off the fog and run but the anemone slinks over to you and her tentacles wrap around your waist.  <i>\"Stay?\"</i> she asks, pressing her small breasts into you as a tentacle slides inside your [armor] and down to your nethers.  The combined stimulation of the rubbing and the tingling venom causes your knees to buckle, hampering your resolve and ending your escape attempt.");
                     //(gain lust, temp lose spd/str)
-                    (monster as SeaAnemone).applyVenom((4 + player.sens / 20));
+                    (monster as SeaAnemone).applyVenom((4 + player.effectiveSensitivity() / 20));
                     combatRoundOver();
                     return;
                 }
@@ -10679,12 +10679,26 @@ public class Combat extends BaseContent {
     private function ghostRealStrengthCompanion():Number {
         var ghostRealStrCompanion:Number = 0;
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAlvina);
+        if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAlvina);
+        if (flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAlvina);
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAmily);
+        if (flags[kFLAGS.PLAYER_COMPANION_2] == "Amily") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAmily);
+        if (flags[kFLAGS.PLAYER_COMPANION_3] == "Amily") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAmily);
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAurora);
+        if (flags[kFLAGS.PLAYER_COMPANION_2] == "Aurora") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAurora);
+        if (flags[kFLAGS.PLAYER_COMPANION_3] == "Aurora") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAurora);
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerEtna);
+        if (flags[kFLAGS.PLAYER_COMPANION_2] == "Etna") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerEtna);
+        if (flags[kFLAGS.PLAYER_COMPANION_3] == "Etna") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerEtna);
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerExcellia);
+        if (flags[kFLAGS.PLAYER_COMPANION_2] == "Excellia") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerExcellia);
+        if (flags[kFLAGS.PLAYER_COMPANION_3] == "Excellia") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerExcellia);
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMitzi);
+        if (flags[kFLAGS.PLAYER_COMPANION_2] == "Mitzi") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMitzi);
+        if (flags[kFLAGS.PLAYER_COMPANION_3] == "Mitzi") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMitzi);
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerNeisa);
+        if (flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerNeisa);
+        if (flags[kFLAGS.PLAYER_COMPANION_3] == "Neisa") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerNeisa);
         return ghostRealStrCompanion;
     }
 
@@ -10693,6 +10707,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.ElvishPeripheralNervSys)) ghostSpe += (5 + (5 * (player.newGamePlusMod())));
         if (player.hasPerk(PerkLib.ElvishPeripheralNervSysEvolved)) ghostSpe += (10 + (10 * (player.newGamePlusMod())));
         if (player.hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm)) ghostSpe += (15 + (15 * (player.newGamePlusMod())));
+        if (player.hasPerk(PerkLib.MantislikeAgilityFinalForm)) ghostSpe += (30 + (30 * (player.newGamePlusMod())));
         ghostSpe = Math.round(ghostSpe);
         return ghostSpe;
     }
@@ -10706,6 +10721,8 @@ public class Combat extends BaseContent {
     private function ghostRealIntelligenceCompanion():Number {
         var ghostRealInteCompanion:Number = 0;
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") ghostRealInteCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
+        if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina") ghostRealInteCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
+        if (flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina") ghostRealInteCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
         return ghostRealInteCompanion;
     }
 

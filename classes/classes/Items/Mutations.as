@@ -16278,6 +16278,28 @@ public final class Mutations extends MutationsHelper {
         }
 
     }
+	
+	public function trollFig(player:Player):void {
+		player.slimeFeed();
+        //init variables
+        var changes:Number = 0;
+        var changeLimit:Number = 1;
+        var boobsGrew:Boolean = false;
+        //Temporary storage
+        var temp:Number = 0;
+        var temp2:Number = 0;
+        var temp3:Number = 0;
+        //Randomly choose affects limit
+        if (rand(4) == 0) changeLimit++;
+        if (rand(4) == 0) changeLimit++;
+        if (rand(4) == 0) changeLimit++;
+        changeLimit += additionalTransformationChances();
+        clearOutput();
+        outputText("You bite into the fig, it’s sour, very sour. Trolls are supposed to enjoy this?");
+		
+		player.refillHunger(20);
+        flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+	}
 
     public function skelp(player:Player):void {
         player.slimeFeed();

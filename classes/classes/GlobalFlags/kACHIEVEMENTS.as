@@ -423,7 +423,7 @@ package classes.GlobalFlags
 		public static const REALISTIC_CHAMPION_NEEDS_FOOD_3:int		= 376;
 		public static const REALISTIC_CHAMPION_NEEDS_FOOD_4:int		= 377;
 		public static const EPIC_LET_IT_GO:int						= 378;
-		public static const UNKNOWN_ACHIEVEMENT_379:int				= 379;
+		public static const GENERAL_VIRILITY_GOD:int				= 379;
 		public static const UNKNOWN_ACHIEVEMENT_380:int				= 380;
 		public static const UNKNOWN_ACHIEVEMENT_381:int				= 381;
 		public static const UNKNOWN_ACHIEVEMENT_382:int				= 382;
@@ -434,6 +434,16 @@ package classes.GlobalFlags
 		public static const UNKNOWN_ACHIEVEMENT_387:int				= 387;
 		public static const UNKNOWN_ACHIEVEMENT_388:int				= 388;
 		public static const UNKNOWN_ACHIEVEMENT_389:int				= 389;
+		public static const UNKNOWN_ACHIEVEMENT_390:int				= 390;
+		public static const UNKNOWN_ACHIEVEMENT_391:int				= 391;
+		public static const UNKNOWN_ACHIEVEMENT_392:int				= 392;
+		public static const UNKNOWN_ACHIEVEMENT_393:int				= 393;
+		public static const UNKNOWN_ACHIEVEMENT_394:int				= 394;
+		public static const UNKNOWN_ACHIEVEMENT_395:int				= 395;
+		public static const UNKNOWN_ACHIEVEMENT_396:int				= 396;
+		public static const UNKNOWN_ACHIEVEMENT_397:int				= 397;
+		public static const UNKNOWN_ACHIEVEMENT_398:int				= 398;
+		public static const UNKNOWN_ACHIEVEMENT_399:int				= 399;
 		
 	}
 

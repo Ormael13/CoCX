@@ -291,7 +291,7 @@ public function ElectraSexPlayer():void {
 	return;
 }
 public function PlayerSexElectraPostSpar():void {
-	/*if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.ELECTRA_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 1;
 		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.ELECTRA_LVL_UP] == 1) {
@@ -299,14 +299,20 @@ public function PlayerSexElectraPostSpar():void {
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 30, 0);
 			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ELECTRA_LVL_UP] = 2;
-		}
+		}/*
 		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.ELECTRA_LVL_UP] == 2) {
 			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 36);
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 36, 0);
 			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ELECTRA_LVL_UP] = 3;
 		}
-	}*/
+		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 7 && flags[kFLAGS.ELECTRA_LVL_UP] == 3) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 42);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 42, 0);
+			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ELECTRA_LVL_UP] = 4;
+		}*/
+	}
 	PlayerSexElectra();
 }
 public function PlayerSexElectra():void {

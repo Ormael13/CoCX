@@ -183,7 +183,7 @@ public class Holli extends Monster
 			//lower monster lust by medium-lots and apply med sens-based lust damage
 			lust -= 20;
 			if (lust < 20) lust = 20;
-			player.dynStats("lus", 15 + player.sens / 5);
+			player.dynStats("lus", 15 + player.effectiveSensitivity() / 5);
 		}
 
 //heal -Z

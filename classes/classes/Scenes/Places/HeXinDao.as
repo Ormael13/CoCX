@@ -183,7 +183,7 @@ public class HeXinDao extends BaseContent
         addButton(3, "SoulArrow", ermaswiftarrowmerchant);
 		if (flags[kFLAGS.NEISA_FOLLOWER] == 0) addButton(4, "Dungeon", entranceToRiverDungeon);
 		else {
-			if (flags[kFLAGS.PLAYER_COMPANION_1] != "") addButton(4, "Dungeon", entranceToRiverDungeon);
+			if (flags[kFLAGS.PLAYER_COMPANION_1] != "" || flags[kFLAGS.PLAYER_COMPANION_2] != "" || flags[kFLAGS.PLAYER_COMPANION_3] != "") addButton(4, "Dungeon", entranceToRiverDungeon);
 			else addButtonDisabled(4, "Dungeon", "Seems you need to find someone to form party with you.");
 		}
         //addButton(5, "", ); siedziba lokalnej grupy zrzeszającej soul cultivators - PC aby potem pojsc dalej bedzie musial dolaczyc tutaj (pomyslec nad wiarygodnym sposobem zmuszenia go do tego - moze jakies ciekawe itemy/inne rzeczy dla czlonkow beda a miejsce sie zwolni jak wywala tak goblinke tworzynie golemow, ktora potem oczywiscie wcisnie sie do obozu PC aby w spokoju rozwijac sie w tworzeniu golemow itp.)

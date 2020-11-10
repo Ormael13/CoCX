@@ -27,8 +27,8 @@ package classes.Items.Weapons
 			var desc:String = _description;
 			//Type
 			desc += "\n\nType: Weapon ";
-			if (game.player.statusEffectv4(StatusEffects.AetherTwins1) == 1) "(Gaunlet)";
-			else "(Gaunlet)";
+			if (game.player.statusEffectv4(StatusEffects.AetherTwins1) == 1) "(Gauntlet)";
+			else "(Gauntlet)";
 			//Attack
 			desc += "\nAttack: " + String(attack);
 			//Value

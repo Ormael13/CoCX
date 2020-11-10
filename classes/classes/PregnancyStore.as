@@ -47,6 +47,7 @@ package classes
 		public static const PREGNANCY_ALRAUNE:int				=  38;
 		public static const PREGNANCY_CELESS:int				=  39;
 		public static const PREGNANCY_GOBLIN:int				=  40;
+		public static const PREGNANCY_ZENJI:int                 =  41;
 		
 		public static const PREG_NOT_PREGANT:int                =   0; //The PREG_* consts are returned by the size function
 		public static const PREG_NO_SIGNS_UNKNOWN:int           =   1; //NPC has conceived but doesn’t know she’s pregnant, no visible signs
@@ -100,6 +101,7 @@ package classes
 		public static const INCUBATION_GOBLIN:int				= 168;
 		public static const INCUBATION_MITZI:int				= 312;
 		public static const INCUBATION_EXCELLIA:int				= 480;
+		public static const INCUBATION_ZENJI:int                = 720;
 		
 		private static const MAX_FLAG_VALUE:int                 = 2999;
 		private static const PREG_TYPE_MASK:int                 = 0x0000FFFF; //Should be safe with 65535 different pregnancy types

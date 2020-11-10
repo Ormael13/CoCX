@@ -2679,7 +2679,7 @@ import flash.utils.getQualifiedClassName;
 				//when Entwined
 				outputText("You are bound tightly in the kitsune's tails.  <b>The only thing you can do is try to struggle free!</b>\n\n");
 				outputText("Stimulated by the coils of fur, you find yourself growing more and more aroused...\n\n");
-				player.dynStats("lus", 5+player.sens/10);
+				player.dynStats("lus", 5+player.effectiveSensitivity()/10);
 			}
 			if(hasStatusEffect(StatusEffects.QueenBind)) {
 				outputText("You're utterly restrained by the Harpy Queen's magical ropes!\n\n");

@@ -67,7 +67,7 @@ public class Ceraph extends Monster
 			else {
 				if (rand(2) == 0) {
 					outputText("Ceraph cuddles up against you, embracing you tenderly.  Her more-than-ample bosom crushes against your flank, and her demonic prick grinds and rubs against your [skin.type], smearing it with her juices.  Her hands slide over your bound form, sneaking underneath your [armor] to caress you more intimately while you're at her mercy.");
-					player.dynStats("lus", 9 + player.sens / 10);
+					player.dynStats("lus", 9 + player.effectiveSensitivity() / 10);
 				}
 				//[SPECIAL 2 WHILE PC RESTRAINED]
 				else {

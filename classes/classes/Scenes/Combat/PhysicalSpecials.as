@@ -4078,13 +4078,19 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (monster.plural) {
 			if (player.hasPerk(PerkLib.MantislikeAgility)) {
-				if (player.hasPerk(PerkLib.MantislikeAgilityEvolved) && player.hasPerk(PerkLib.TrachealSystemEvolved)) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 10;
+				if (player.hasPerk(PerkLib.MantislikeAgilityEvolved) && player.hasPerk(PerkLib.TrachealSystemEvolved)) {
+					if (player.hasPerk(PerkLib.MantislikeAgilityFinalForm) && player.hasPerk(PerkLib.TrachealSystemFinalForm)) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 15;
+					else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 10;
+				}
 				else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 6;
 			}
 			else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 3;
 			
 		}
-		else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 1;
+		else {
+			if (player.hasPerk(PerkLib.MantislikeAgilityFinalForm) && player.hasPerk(PerkLib.TrachealSystemFinalForm)) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 2;
+			else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 1;
+		}
 		mantisMultipleAttacks();
 	}
 	public function mantisMultipleAttacks():void {

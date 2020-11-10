@@ -81,7 +81,7 @@ use namespace CoC;
 		private function zenjiRegenerate():void {
 			mana -= Math.round(maxMana() * 0.2);
 			var heal:Number = 0;
-			heal += Math.round(maxHP() * 0.2);
+			heal += Math.round(maxHP() * 0.35);
 			heal += inteligencescalingbonus();
 			heal += wisdomscalingbonus();
 			if (this.short == "Zenji") outputText("Zenji crouches down for a moment and clutches at his wounds, \"<i>Dis is noting!</i>\" He shouts, \"<i>Ya gotta try harda dan dat!</i>\" And before your eyes, his wounds close as he heals for " + heal + ".");

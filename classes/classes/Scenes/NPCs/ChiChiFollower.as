@@ -570,9 +570,9 @@ public function chichiSex():void {
 		outputText("Chi Chi blushes then gives a categorical “No”, causing you to ask her why.\n\n");
 		outputText("\"<i>Sorry, but I won’t. While the first time was fine, I want our relationship to proceed to the next level before we truly move to that step. And yes, unlike most monks, I can actually marry. Also, you would need to show your strength by defeating an oni first, I ain't going out with a nobody… well, at least not officially.</i>\"\n\n");
 		menu();
-		if (player.hasStatusEffect(StatusEffects.ChiChiWeddingS)) addButton(1, "Weeding", chichiSex1);
-		else if (flags[kFLAGS.MARRIAGE_FLAG] != 0 && flags[kFLAGS.MARRIAGE_FLAG] != 1) addButtonDisabled(1, "Weeding", "You already married someone else.");
-		else addButtonDisabled(1, "Weeding", "Need to beat some oni.");
+		if (player.hasStatusEffect(StatusEffects.ChiChiWeddingS)) addButton(1, "Wedding", chichiSex1);
+		else if (flags[kFLAGS.MARRIAGE_FLAG] != 0 && flags[kFLAGS.MARRIAGE_FLAG] != 1) addButtonDisabled(1, "Wedding", "You already married someone else.");
+		else addButtonDisabled(1, "Wedding", "Need to beat some oni.");
 		addButton(3, "Later", chichiSex0);
 	}
 	else {

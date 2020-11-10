@@ -1914,6 +1914,10 @@ use namespace CoC;
 				player.removePerk(PerkLib.MantislikeAgilityEvolved);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.MantislikeAgilityFinalForm)) {
+				player.removePerk(PerkLib.MantislikeAgilityFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.MelkieLung)) {
 				player.removePerk(PerkLib.MelkieLung);
 				player.perkPoints += 1;

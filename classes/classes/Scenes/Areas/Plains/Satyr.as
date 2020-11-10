@@ -99,7 +99,7 @@ public class Satyr extends Monster
 				outputText("You fall with a <b>THUD</b> and the Satyr doesn't even bother to undress you before he begins rubbing his massive cock on your body until he comes, soiling your [armor] and " + player.skinFurScales() + " with slimy, hot cum.  As it rubs into your body, you shiver with unwanted arousal.");
 				//large-ish sensitivity based lust increase if hit.)(This also relieves him of some of his lust, though not completely.)
 				lust -= 50;
-				player.dynStats("lus", (player.sens/5+20));
+				player.dynStats("lus", (player.effectiveSensitivity()/5+20));
 			}
 		}
 		

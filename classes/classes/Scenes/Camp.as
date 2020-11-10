@@ -1515,6 +1515,11 @@ public class Camp extends NPCAwareContent {
 			if (flags[kFLAGS.ZENJI_PROGRESS] == 11) {
 				if (model.time.hours >= 7 && model.time.hours <= 18) {
 					if (slavesCount() > 0 && rand(5) == 0) outputText("Zenji is keeping a close eye on some of your more corrupt camp members, ensuring that they don’t cause any harm.");
+					else if (player.statusEffectv2(StatusEffects.ZenjiModificationsList) >= 998700 && rand(5) == 0) outputText("Zenji is around your camp, it’s impossible to miss him as he strokes his length as cascades of cum leak from his erection.");
+					else if ((flags[kFLAGS.ZENJI_KID_1_NAME] != 0 || flags[kFLAGS.ZENJI_KID_2_NAME] != 0) && rand(5) == 0) {
+						if (rand(2) == 0) outputText("Zenji is at his bedroll, playing around with your child.");
+						else outputText("Zenji is around your camp, he remains vigilant, surveying the area for danger atop a tree.");
+					}
 					else {
 						var z:int = rand(7);
 						switch (z) {
@@ -1543,12 +1548,15 @@ public class Camp extends NPCAwareContent {
 					}
 				}
 				else {
-					if (rand(4) == 0) outputText("Zenji is around your camp, he gives a small yawn before shaking himself awake.");
+					if ((flags[kFLAGS.ZENJI_KID_1_NAME] != 0 || flags[kFLAGS.ZENJI_KID_2_NAME] != 0) && rand(5) == 0) outputText("Zenji is currently lying down on his bedroll, with your child sleeping atop his torso, as Zenji gently strokes their head.");
 					else {
-						if (rand(3) == 0) outputText("Zenji is around your camp, it looks like he’s polishing his tusks and brushing his teeth with something.");
+						if (rand(4) == 0) outputText("Zenji is around your camp, he gives a small yawn before shaking himself awake.");
 						else {
-							if (rand(2) == 0) outputText("Zenji is around your camp, he is coating his fur in some ashes as he grooms himself.");
-							else outputText("With how dark it is, Zenji is keeping much closer to you, making sure that you’re safe. His eyes never seem to stray from you.");
+							if (rand(3) == 0) outputText("Zenji is around your camp, it looks like he’s polishing his tusks and brushing his teeth with something.");
+							else {
+								if (rand(2) == 0) outputText("Zenji is around your camp, he is coating his fur in some ashes as he grooms himself.");
+								else outputText("With how dark it is, Zenji is keeping much closer to you, making sure that you’re safe. His eyes never seem to stray from you.");
+							}
 						}
 					}
 				}
@@ -2095,11 +2103,11 @@ private function SparrableNPCsMenu():void {
 	if (player.hasPerk(PerkLib.BasicLeadership)) {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_1]);
 		else outputText(", (no combat companion)");
-	}/*
+	}
 	if (player.hasPerk(PerkLib.IntermediateLeadership)) {
 		if (flags[kFLAGS.PLAYER_COMPANION_2] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_2]);
 		else outputText(", (no combat companion)");
-	}
+	}/*
 	if (player.hasPerk(PerkLib.AdvancedLeadership)) {
 		if (flags[kFLAGS.PLAYER_COMPANION_3] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_3]);
 		else outputText(", (no combat companion)");
@@ -3542,6 +3550,8 @@ public function wakeFromBadEnd():void {
 		childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + izmaScene.totalIzmaChildren() + isabellaScene.totalIsabellaChildren() + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren());
 		childPerformance += (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + flags[kFLAGS.KELLY_KIDS] + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] + flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] + joyScene.getTotalLitters() + SceneLib.excelliaFollower.totalExcelliaChildren());
 		childPerformance += ((flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4) + (flags[kFLAGS.LYNNETTE_BABY_COUNT] / 4) + (flags[kFLAGS.ANT_KIDS] / 100) + (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] / 4) + (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] / 4) + (flags[kFLAGS.MITZI_DAUGHTERS] / 4));
+		if (flags[kFLAGS.ZENJI_KID_1_NAME] != 0) childPerformance++;
+		if (flags[kFLAGS.ZENJI_KID_2_NAME] != 0) childPerformance++;
 		performancePointsPrediction += Math.sqrt(childPerformance);
 		//Level
 		performancePointsPrediction += player.level;
@@ -3655,6 +3665,8 @@ public function wakeFromBadEnd():void {
 		if (followerKiha() && kihaFollower.totalKihaChildren() > 0) pop += kihaFollower.totalKihaChildren();
 		if (marbleFollower() && flags[kFLAGS.MARBLE_KIDS] > 0) pop += flags[kFLAGS.MARBLE_KIDS];
 		if (flags[kFLAGS.ANT_WAIFU] > 0 && (flags[kFLAGS.ANT_KIDS] > 0 || flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)) pop += (flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT]);
+		if (flags[kFLAGS.ZENJI_KID_1_NAME] != 0) pop++;
+		if (flags[kFLAGS.ZENJI_KID_2_NAME] != 0) pop++;
 		//------------
 		//Return number!
 		return pop;
@@ -4347,7 +4359,8 @@ public function wakeFromBadEnd():void {
 	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 29) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 30;
 			clearOutput();
-			outputText("Text.");
+			outputText("Zenji going to town... HARD");
+			if (!player.hasStatusEffect(StatusEffects.ZenjiZList)) player.createStatusEffect(StatusEffects.ZenjiZList,0,0,0,0);
 			doNext(doCamp);
 			return;
 		}
@@ -4769,7 +4782,7 @@ public function wakeFromBadEnd():void {
 		//if (slavesCount() >= 12) awardAchievement("Meet Your " + player.mf("Master", "Mistress") + " (3)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_3);
 		if (slavesCount() >= 6 && slavesOptionalCount() >= 2) awardAchievement("Slaver (1)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE);
 		//if (slavesCount() >= 12 && slavesOptionalCount() >= 4) awardAchievement("Slaver (2)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE_2);
-		//if (slavesCount() >= 18 && slavesOptionalCount() >= 6) awardAchievement("Slaver (3)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE_3);//dodać dodatkowych opcjonalnych Slaves tutaj i dać licznik opcjonalnych z każdym achiev wymagającym wicej np. 2-4-6?
+		//if (slavesCount() >= 18 && slavesOptionalCount() >= 6) awardAchievement("Slaver (3)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE_3);//dodać dodatkowych opcjonalnych Slaves tutaj i dać licznik opcjonalnych z każdym achiev wymagającym wiecej np. 2-4-6?
 		if (followersCount() + loversCount() + slavesCount() >= 19) awardAchievement("All Your People are Belong to Me (1)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME);
 		if (followersCount() + loversCount() + slavesCount() >= 38) awardAchievement("All Your People are Belong to Me (2)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME_2);
 		//if (followersCount() + loversCount() + slavesCount() >= 57) awardAchievement("All Your People are Belong to Me (3)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME_3);
@@ -4828,8 +4841,8 @@ public function wakeFromBadEnd():void {
 		if (player.newGamePlusMod() >= 2) awardAchievement("xXx: The Return of Mareth Champion", kACHIEVEMENTS.EPIC_XXX_THE_RETURN_OF_MARETH_CHAMPION);
 		if (player.newGamePlusMod() >= 3) awardAchievement("xXx 4", kACHIEVEMENTS.EPIC_XXX_4);
 		if (player.newGamePlusMod() >= 4) awardAchievement("xXx 5: Mareth's Judgment_Day", kACHIEVEMENTS.EPIC_XXX5_MARETHS_JUDGMENT_DAY);
-		if (player.newGamePlusMod() >= 5) awardAchievement("xXx 6: Rise of the Demons", kACHIEVEMENTS.EPIC_XXX6_RISE_OF_THE_DEMONS);/*
-	if (player.newGamePlusMod() >= 6) awardAchievement("xXx 7: Salvation", kACHIEVEMENTS.EPIC_XXX7_SALVATION);
+		if (player.newGamePlusMod() >= 5) awardAchievement("xXx 6: Rise of the Demons", kACHIEVEMENTS.EPIC_XXX6_RISE_OF_THE_DEMONS);
+		if (player.newGamePlusMod() >= 6) awardAchievement("xXx 7: Salvation", kACHIEVEMENTS.EPIC_XXX7_SALVATION);/*
 	if (player.newGamePlusMod() >= 7) awardAchievement("xXx 8: Genisys", kACHIEVEMENTS.EPIC_XXX8_GENISYS);
 	if (player.newGamePlusMod() >= 8) awardAchievement("xXx 9: Dark Fate", kACHIEVEMENTS.EPIC_XXX9_DARK_FATE);*/
 

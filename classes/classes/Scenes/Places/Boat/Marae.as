@@ -22,8 +22,9 @@ public class Marae extends Monster
 			else
 			{
 				outputText("but you fail and get hit instead! The feel of the tentacles left your groin slightly warmer. ");
-				var damage:int = (eBaseStrengthDamage() + rand(str));
-				player.dynStats("lust", rand(15) + 30);
+				var damage:int = ((eBaseStrengthDamage() + rand(str)) * 2.5);
+				damage = Math.round(damage);
+				player.dynStats("lust", rand(25) + 50);
 				player.takePhysDamage(damage, true);
 			}
 		}
@@ -43,7 +44,7 @@ public class Marae extends Monster
 			else
 			{
 				outputText("You attempt to slap away the tentacles but it's too late! The tentacles tickle your groin and you can feel your [ass] being teased! \"<i>You know you want me!</i>\" Marae giggles. ");
-				var lustDmg:int = (25 + rand(player.cor / 10) + rand(player.sens / 5) + rand(player.lib / 10) + rand(25)) * (EngineCore.lustPercent() / 100);
+				var lustDmg:int = (100 + rand(player.cor / 5) + rand(player.effectiveSensitivity() / 5) + rand(player.lib / 5) + rand(50)) * (EngineCore.lustPercent() / 100);
 				player.dynStats("lust", lustDmg, "scale", false);
 				outputText("(+" + lustDmg + " lust)");
 				
@@ -62,7 +63,8 @@ public class Marae extends Monster
 			else {
 				outputText("Without warning, the lightning hits you! Surge of electricity rushes through you painfully. ");
 				if (player.cor >= 50) outputText("The intensity of the pain is unbearable. ");
-				var damage:int = 250 + eBaseIntelligenceDamage() + eBaseWisdomDamage() + (player.cor * 10);
+				var damage:int = (1100 + rand(150) + eBaseIntelligenceDamage() + eBaseWisdomDamage() + (player.cor * 20)) * 2.5;
+				damage = Math.round(damage);
 				player.takeLightningDamage(damage, true);
 			}
 			if (hasStatusEffect(StatusEffects.Uber)) removeStatusEffect(StatusEffects.Uber);
@@ -126,10 +128,10 @@ public class Marae extends Monster
 				initWisLibSensCor(310, 600, 410, 100);
 				this.weaponName = "tentacles";
 				this.weaponVerb="slap";
-				this.armorDef = 1000;
-				this.armorMDef = 1000;
+				this.armorDef = 1500;
+				this.armorMDef = 1500;
 				this.weaponAttack = 100;
-				this.bonusHP += 500;
+				this.bonusHP += 2500;
 				this.bonusLust += 1000;
 				this.additionalXP = 3000;
 				this.special1 = tentacleAttack;
@@ -145,19 +147,19 @@ public class Marae extends Monster
 				initWisLibSensCor(260, 120, 290, 0);
 				this.weaponName = "fists";
 				this.weaponVerb="wrathful punch";
-				this.armorDef = 1400;
-				this.armorMDef = 1400;
+				this.armorDef = 2100;
+				this.armorMDef = 2100;
 				this.weaponAttack = 150;
-				this.bonusHP += 5000;
+				this.bonusHP += 25000;
 				this.bonusLust += 100;
 				this.additionalXP = 4000;
 				this.special1 = smite;
 				if (game.flags[kFLAGS.MINERVA_TOWER_TREE] > 0) {
-					this.armorDef = 600;
-					this.armorMDef = 600;
+					this.armorDef = 900;
+					this.armorMDef = 900;
 					this.strStat.core.value += 260;
 					this.touStat.core.value += 260;
-					this.bonusHP += 4000;
+					this.bonusHP += 20000;
 					this.additionalXP += 2000;
 					this.createPerk(PerkLib.MonsterRegeneration, 9, 0, 0, 0);
 				}

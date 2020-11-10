@@ -1304,6 +1304,26 @@ public class Pregnancy extends NPCAwareContent {
                     displayedUpdate = true;
                 }
             }
+            //Zenji Pregnancy
+            else if (player.pregnancyType == PregnancyStore.PREGNANCY_ZENJI) {
+                if (player.pregnancyIncubation == 700) {
+                    EngineCore.outputText("As you are resting at your camp, you suddenly feel a pair of fuzzy hands grasp at your shoulders. Zenji leans down and gives you a small sniff.\n\n");
+                    EngineCore.outputText("\"<i>Ahaha! [name]! You're pregnant! I'm so glad we've made it dis far.</i>\" He says, caressing your face tenderly as he moves in front of you. \"<i>I need ya to know someting… I don’t tink we’ll be able to have more dan two children, it’s a bit complicated [name], but I don’t tink I am able ta give you anyting more, I’m sorry… Still, having a family wit ya is more dan anyting I could ask for.</i>\"\n\n");
+                    EngineCore.outputText("You look down at your stomach and upon careful examination you realize that you are, in fact, pregnant. You smile at him and tell him you’re more than happy to have children with him.\n\n");
+                    EngineCore.outputText("Zenji blushes softly, \"<i>It is a pleasure, [name], I will protect our family until de very end.</i>\" He says, hugging you gently as his tail wraps around you.");
+                    displayedUpdate = true;
+                }
+                if (player.pregnancyIncubation == 480) {
+                    EngineCore.outputText("<b>You can feel gentle kicking within your stomach. Reflexively you turn you gaze toward Zenji and he gives you a heartwarming smile in response.</b>");
+                    displayedUpdate = true;
+                }
+                if (player.pregnancyIncubation == 240) {
+                    EngineCore.outputText("Your balance shifts as the time for pregnancy draws closer. Zenji quickly rushes to your side, \"<i>Everyting okay, [name]?</i>\"\n\n");
+					EngineCore.outputText("You nod, stating that you’re not quite ready to give birth yet.\n\n");
+                    EngineCore.outputText("Zenji holds you close to him, wrapping you within his strong arms, \"<i>I’ll be ready for you, [name]... We’re in dis togetha.</i>\"\n\n");
+					displayedUpdate = true;
+                }
+            }
             //Behemoth Pregnancy
             else if (player.pregnancyType == PregnancyStore.PREGNANCY_BEHEMOTH) {
                 if (player.pregnancyIncubation == 1152) {
@@ -1761,6 +1781,12 @@ public class Pregnancy extends NPCAwareContent {
         if (player.pregnancyType == PregnancyStore.PREGNANCY_CELESS && player.pregnancyIncubation == 1){
             player.knockUpForce(); //Clear Pregnancy
             CelessScene.instance.birthScene();
+            return false;
+        }
+        //Give birth to Zenji kid
+        if (player.pregnancyType == PregnancyStore.PREGNANCY_ZENJI && player.pregnancyIncubation == 1){
+            player.knockUpForce(); //Clear Pregnancy
+            SceneLib.zenjiScene.birthScene();
             return false;
         }
         //Give birth if it's time (to an imp!)

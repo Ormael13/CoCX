@@ -20,7 +20,7 @@ import classes.StatusEffects.Combat.ParalyzeVenomDebuff;
 			}
 			else {
 				outputText(" You cry out as the bottle shatters, exploding in a yellow cloud that blows over you. You gag and cough and suddenly your hands are reaching to your crotch as if on their own. You yank back, but feel a hot haze washing across your exposed body.");
-				player.dynStats("lus", (25 + player.lib/20 + player.sens/5));
+				player.dynStats("lus", (25 + player.lib/20 + player.effectiveSensitivity()/5));
 			}
 		}
 		

@@ -1801,6 +1801,31 @@ use namespace CoC;
 			return lust;
 		}
 
+		public function effectiveLibido():Number {
+			var mins:Object = getAllMinStats();
+			var baseLib:Number = lib;
+			var finalLib:Number = 1;
+			if (finalLib < 0.05) finalLib = 0.05;
+			baseLib = Math.round(baseLib * finalLib);
+			if (baseLib < mins.lib) baseLib = mins.lib;
+			return baseLib;
+		}
+
+		public function effectiveSensitivity():Number {
+			var mins:Object = getAllMinStats();
+			var baseSens:Number = sens;
+			var finalSens:Number = 1;
+			if (hasPerk(PerkLib.Desensitization)) finalSens -= 0.05;
+			if (hasPerk(PerkLib.GreaterDesensitization)) finalSens -= 0.1;
+			if (hasPerk(PerkLib.EpicDesensitization)) finalSens -= 0.15;
+			if (hasPerk(PerkLib.LegendaryDesensitization)) finalSens -= 0.2;
+			if (hasPerk(PerkLib.MythicalDesensitization)) finalSens -= 0.25;
+			if (finalSens < 0.05) finalSens = 0.05;
+			baseSens = Math.round(baseSens * finalSens);
+			if (baseSens < mins.sens) baseSens = mins.sens;
+			return baseSens;
+		}
+
 		public function bouncybodyDR():Number {
 			var bbDR:Number = 0.25;
 			if (hasPerk(PerkLib.NaturalPunchingBag)) bbDR += 0.05;
@@ -3848,14 +3873,14 @@ use namespace CoC;
 				humanCounter++;
 			if (skin.base.pattern == Skin.PATTERN_NONE)
 				humanCounter++;
-			humanCounter += (99 - internalChimeraScore());
+			humanCounter += (100 - internalChimeraScore());
 			if (isGargoyle()) humanCounter = 0;
 			End("Player","racialScore");
 			return humanCounter;
 		}
 
 		public function humanMaxScore():Number {
-			var humanMaxCounter:Number = 116;//17 + 99 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
+			var humanMaxCounter:Number = 117;//17 + 100 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
 			return humanMaxCounter;
 		}
 
@@ -4032,8 +4057,8 @@ use namespace CoC;
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.MantislikeAgilityEvolved) >= 0)
 				internalChimeraCounter++;
-			//if (findPerk(PerkLib.) >= 0)
-			//	internalChimeraCounter++;
+			if (findPerk(PerkLib.MantislikeAgilityFinalForm) >= 0)
+				internalChimeraCounter++;
 			if (findPerk(PerkLib.MelkieLung) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.MelkieLungEvolved) >= 0)
@@ -7182,12 +7207,14 @@ use namespace CoC;
 				mantisCounter++;
 			if (findPerk(PerkLib.MantislikeAgilityEvolved) >= 0)
 				mantisCounter++;
+			if (findPerk(PerkLib.MantislikeAgilityFinalForm) >= 0)
+				mantisCounter++;
 			if ((findPerk(PerkLib.TrachealSystem) >= 0 || findPerk(PerkLib.MantislikeAgility) >= 0) && findPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
 				mantisCounter++;
 			if ((findPerk(PerkLib.TrachealSystemEvolved) >= 0 || findPerk(PerkLib.MantislikeAgilityEvolved) >= 0) && findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0)
 				mantisCounter++;
-			//if ((findPerk(PerkLib.TrachealSystemEvolved) >= 0 || findPerk(PerkLib.) >= 0) && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
-			//	mantisCounter++;
+			if ((findPerk(PerkLib.TrachealSystemFinalForm) >= 0 || findPerk(PerkLib.MantislikeAgilityFinalForm) >= 0) && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
+				mantisCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				mantisCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && mantisCounter >= 4)
@@ -10473,11 +10500,18 @@ use namespace CoC;
 				}
 			}//+20/10-20
 			if (kitsuneScore() >= 5) {
-				if (kitsuneScore() >= 12 && tailType == 13 && tailCount == 9) {
+				if (kitsuneScore() >= 12 && tailType == 13 && tailCount >= 2) {
 					maxStrCap2 -= 50;
 					maxSpeCap2 += 40;
 					maxIntCap2 += 70;
 					maxWisCap2 += 100;
+					maxLibCap2 += 20;
+				}
+				else if (kitsuneScore() >= 6) {
+					maxStrCap2 -= 40;
+					maxSpeCap2 += 25;
+					maxIntCap2 += 35;
+					maxWisCap2 += 45;
 					maxLibCap2 += 20;
 				}
 				else {
@@ -10833,6 +10867,21 @@ use namespace CoC;
 					maxIntCap2 += 10;
 				}
 			}//+35/30-40
+			if (findPerk(PerkLib.MantislikeAgility) >= 0) {
+				if (hasCoatOfType(Skin.CHITIN) && findPerk(PerkLib.ThickSkin) >= 0) maxSpeCap2 += 15;
+				if ((skinType == Skin.SCALES && findPerk(PerkLib.ThickSkin) >= 0) || hasCoatOfType(Skin.CHITIN)) maxSpeCap2 += 10;
+				if (skinType == Skin.SCALES || findPerk(PerkLib.ThickSkin) >= 0) maxSpeCap2 += 5;
+			}
+			if (findPerk(PerkLib.MantislikeAgilityEvolved) >= 0) {
+				if (hasCoatOfType(Skin.CHITIN) && findPerk(PerkLib.ThickSkin) >= 0) maxSpeCap2 += 30;
+				if ((skinType == Skin.SCALES && findPerk(PerkLib.ThickSkin) >= 0) || hasCoatOfType(Skin.CHITIN)) maxSpeCap2 += 20;
+				if (skinType == Skin.SCALES || findPerk(PerkLib.ThickSkin) >= 0) maxSpeCap2 += 10;
+			}
+			if (findPerk(PerkLib.MantislikeAgilityFinalForm) >= 0) {
+				if (hasCoatOfType(Skin.CHITIN) && findPerk(PerkLib.ThickSkin) >= 0) maxSpeCap2 += 45;
+				if ((skinType == Skin.SCALES && findPerk(PerkLib.ThickSkin) >= 0) || hasCoatOfType(Skin.CHITIN)) maxSpeCap2 += 30;
+				if (skinType == Skin.SCALES || findPerk(PerkLib.ThickSkin) >= 0) maxSpeCap2 += 15;
+			}
 			if (salamanderScore() >= 4) {
 				if (salamanderScore() >= 16) {
 					maxStrCap2 += 105;

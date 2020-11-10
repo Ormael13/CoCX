@@ -456,7 +456,10 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Intelligence Cap:</b> " + Math.floor(player.intStat.max) + "\n";
 		combatStats += "<b>Wisdom Cap:</b> " + Math.floor(player.wisStat.max) + "\n";
 		combatStats += "<b>Libido Cap:</b> " + Math.floor(player.libStat.max) + "\n";
+		combatStats += "<i>Libido Sensitivity:</i> " + Math.floor(player.effectiveLibido()) + "\n";
+		combatStats += "<i>Libido Minimum:</i> " + mins.lib + "\n";
 		combatStats += "<b>Sensitivity Cap:</b> " + Math.floor(player.sensStat.max) + "\n";
+		combatStats += "<i>Effective Sensitivity:</i> " + Math.floor(player.effectiveSensitivity()) + "\n";
 		combatStats += "<i>Sensitivity Minimum:</i> " + mins.sens + "\n";
 		combatStats += "<i>Corruption Minimum:</i> " + mins.cor + "\n";
 		combatStats += "\n";
@@ -809,15 +812,20 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.ZENJI_PROGRESS] > 0) {
 			interpersonStats += "<b>Zenji's perspective on player:</b> " + Math.round(flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER]) + "%\n";
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 8) {
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) {
 				interpersonStats += "<b>Zenji status:</b> Follower\n";
 				interpersonStats += "<b>Zenji lvl:</b> ";
-				if (player.level > 149) interpersonStats += "150";
+				if (player.level > 184) interpersonStats += "185";
 				else if (player.level > 24) interpersonStats += ""+player.level+"";
 				else interpersonStats += "25";
 				interpersonStats += "\n";
 			}
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 9) interpersonStats += "<b>Zenji status:</b> Lover\n";
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 11) {
+				interpersonStats += "<b>Zenji status:</b> Lover\n";
+				interpersonStats += "<b>Zenji Cum Production:</b> " + addComma(Math.round(1300 + player.statusEffectv2(StatusEffects.ZenjiModificationsList))) + "mL\n";
+				if (flags[kFLAGS.ZENJI_KID_1_NAME] != 0) interpersonStats += "<b>Zenji Firstborn Name:</b> "+flags[kFLAGS.ZENJI_KID_1_NAME]+"\n";
+				if (flags[kFLAGS.ZENJI_KID_2_NAME] != 0) interpersonStats += "<b>Zenji Secondborn Name:</b> "+flags[kFLAGS.ZENJI_KID_2_NAME]+"\n";
+			}
 		}
 
 		if (interpersonStats != "")

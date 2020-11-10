@@ -26,7 +26,7 @@ package classes.Scenes.Monsters
 				if (temp == 0) {
 					outputText("ass");
 					damage = 4;
-					player.dynStats("lus", 6 + int(player.sens / 20));
+					player.dynStats("lus", 6 + int(player.effectiveSensitivity() / 20));
 				}
 				//Whip yo tits!
 				if (temp == 1) {
@@ -37,7 +37,7 @@ package classes.Scenes.Monsters
 						outputText(" but you feel no pain thanks to your protection");
 						damage = 0;
 					}
-					player.dynStats("lus", 4 + int(player.sens / 15));
+					player.dynStats("lus", 4 + int(player.effectiveSensitivity() / 15));
 				}
 				//Whip yo groin
 				if (temp == 2) {

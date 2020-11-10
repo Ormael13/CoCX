@@ -270,7 +270,7 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 			{
 				if (!(player.getEvasionRoll()))
 				{
-					damage += 2 + rand(1 + player.lib / 20) + rand(1 + player.sens / 20);
+					damage += 2 + rand(1 + player.lib / 20) + rand(1 + player.effectiveSensitivity() / 20);
 				}
 			}
 			

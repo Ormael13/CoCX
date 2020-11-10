@@ -1591,7 +1591,7 @@ public function FightHellfireSnail():void {
 			if (page == 1) {
 				addButton(0, "Fox Jewel", AddFoxJewel).hint("Add 1 Fox Jewel.");
 				addButton(1, "CDI", AddCurrentDebugItem).hint("Add 1 Gun.");
-				//addButton(2, "", ).hint("Add 1 .");
+				addButton(2, "TrollFig", AddTrollFig).hint("Add 1 Troll Fig.");
 				//addButton(3, "", ).hint("Add 1 .");
 				//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
 				//addButton(5, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
@@ -1752,7 +1752,7 @@ public function FightHellfireSnail():void {
 			inventory.takeItem(useables.S_SHARD, curry(MaterialMenu, 1));
 		}
 		public function AddHerb():void {
-			outputText("\n\n<b>(Gained 1 Shard!)</b>\n\n");
+			outputText("\n\n<b>(Gained 1 Healing Herb!)</b>\n\n");
 			inventory.takeItem(consumables.HEALHERB, curry(MaterialMenu, 1));
 		}
 		public function AddFreshFish():void {
@@ -1786,6 +1786,10 @@ public function FightHellfireSnail():void {
 		public function AddFireSnailSaliva():void {
 			outputText("\n\n<b>(Gained 1 Fire Snail Saliva!)</b>\n\n");
 			inventory.takeItem(consumables.FSNAILS, curry(NonEquipmentMenu, 2));
+		}
+		public function AddTrollFig():void {
+			outputText("\n\n<b>(Gained 1 Troll Fig!)</b>\n\n");
+			inventory.takeItem(consumables.TROLFIG, curry(NonEquipmentMenu, 1));
 		}
 		public function AddGorgonOil():void {
 			outputText("\n\n<b>(Gained 1 vial of Gorgon Oil!)</b>\n\n");
