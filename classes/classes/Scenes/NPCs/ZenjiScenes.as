@@ -94,7 +94,7 @@ public function part1TrollEncounterFightPCDefeated():void {
 	else {
 		outputText("The troll looks down at you, \"<i>Qué lástima. Now dat is a sorry sight…</i>\"\n\n");
 		outputText("You see him rifling through your gem pouch. His fur is so soft as it tickles your skin. You’re desperate for his touch, you want him so badly as you lean closer to him.\n\n");
-		outputText("\"<i>Get off of me!</i>\ he shouts, throwing you to the ground. You hit the ground and the world grows dim before you black out.\n\n");
+		outputText("\"<i>Get off of me!</i>\" he shouts, throwing you to the ground. You hit the ground and the world grows dim before you black out.\n\n");
 	}
 	cleanupAfterCombat();
 }
