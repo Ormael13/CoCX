@@ -2,21 +2,21 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.GlacialRift 
+package classes.Scenes.Areas.GlacialRift
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.WeaponLib;
 	import classes.CoC;
 	import classes.BodyParts.*;
-	
-	public class YukiOnnaScene extends BaseContent 
+
+	public class YukiOnnaScene extends BaseContent
 	{
-		
-		public function YukiOnnaScene() 
+
+		public function YukiOnnaScene()
 		{
 		}
-		
+
 		public function encounterYukiOnna():void {
 			clearOutput();
 			if (player.hasStatusEffect(StatusEffects.MetYukiOnna)) {
@@ -122,6 +122,7 @@ package classes.Scenes.Areas.GlacialRift
 				player.createPerk(PerkLib.IcyFlesh, 0, 0, 0, 0);
 				player.femininity = 100;
 			}
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			if (CoC.instance.inCombat) cleanupAfterCombat();
 			else doNext(camp.returnToCampUseEightHours);
 		}
@@ -149,7 +150,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("The climate suddenly turn to an all out snowstorm as the Yuki Onna lift from the ground.\n\n");
 			startCombat(new YukiOnna());
 		}
-		
+
 		public function loseToYukiOnna():void {
 			clearOutput();
 			if (player.statusEffectv1(StatusEffects.MetYukiOnna) == 1) {
@@ -174,7 +175,7 @@ package classes.Scenes.Areas.GlacialRift
 				encounterYukiOnnaYes();
 			}
 		}
-		
+
 		public function winAgainstYukiOnna():void {
 			menu();
 			outputText("In defeat the Yuki Onna screams before vanishing in the intensifying blizzard covers her escape as the world around you turns white with snow, ice and sleet. This said she doesn't leave without warning, likely you will meet her again sooner or later.\n\n");
@@ -184,7 +185,7 @@ package classes.Scenes.Areas.GlacialRift
 			player.lust = player.minLust();
 			cleanupAfterCombat();
 		}
-		
+
 	}
 
 }

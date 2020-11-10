@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.HighMountains 
+package classes.Scenes.Areas.HighMountains
 {
 import classes.*;
 import classes.BodyParts.Antennae;
@@ -25,20 +25,20 @@ import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 
 use namespace CoC;
-	
+
 	public class TempleOfTheDivine extends BaseContent
 	{
-		
-		public function TempleOfTheDivine() 
+
+		public function TempleOfTheDivine()
 		{}
-		
+
 		public function sapphireAffection(changes:Number = 0):Number
 		{
 			flags[kFLAGS.SAPPHIRE_AFFECTION] += changes;
 			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 100) flags[kFLAGS.SAPPHIRE_AFFECTION] = 100;
 			return flags[kFLAGS.SAPPHIRE_AFFECTION];
 		}
-		
+
 		public function firstvisitintro():void {
 			flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] = 1;
 			flags[kFLAGS.SAPPHIRE_TALKS] = 0;
@@ -66,10 +66,10 @@ use namespace CoC;
 			outputText("\n\nHer name seems to be somewhat appropriate, her eyes glowing with a faint, azure hue. As you ponder these details, the gargoyle turns her back to you, taking flight towards one of the pillars in the room.\n\n\"<i>You are welcome to visit this place as often as you see fit. However, I will be watching you.</i>\"\n\n<b>You can now visit the Temple of the Divines!</b>");
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function repeatvisitintro():void {
 			clearOutput();
-			outputText("You decide to make a trip to the temple. However as soon as you enter the sacred ground, Sapphire screeches and takes flight, spear at the ready. Luckily, she calms down once she recognizes you, assuming a relaxed pose in the middle of the temple.");			
+			outputText("You decide to make a trip to the temple. However as soon as you enter the sacred ground, Sapphire screeches and takes flight, spear at the ready. Luckily, she calms down once she recognizes you, assuming a relaxed pose in the middle of the temple.");
 			outputText("\n\n\"<i>Well, hello there! Nice to see you again [name]. You're welcome here, as usual... So are you here to pray?");
 			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 99) outputText(" Or perhaps you're here for something more... mutually agreeable, instead?");
 			outputText("</i>\"");
@@ -100,7 +100,7 @@ use namespace CoC;
 			addButton(7, "Basement", templeBasement).hint("Visit the temple basement.");
 			addButton(14,"Leave", camp.returnToCampUseOneHour);
 		}
-		
+
 		public function PlayerPrayAtTemple():void {
 			clearOutput();
 			if (anyOfAltairsRepaired()) {
@@ -150,7 +150,7 @@ use namespace CoC;
 			}
 		}
 		public function loosing__Blessing():void {
-			
+
 		}
 		public function PlayerPrayAtTempleMaraeAltair():void {
 			clearOutput();
@@ -226,7 +226,7 @@ use namespace CoC;
 			outputText("<b>You gained the Blessing of Divine Agency - __ for 7 days</b>");
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function TempleAltairsRebuildMenu():void {
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 2) {
 				clearOutput();
@@ -338,7 +338,7 @@ use namespace CoC;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS]++;
 			doNext(camp.returnToCampUseEightHours);
 		}
-		
+
 		public function currentStateOfTemple():void {
 			clearOutput();
 			outputText("The Altar of Marae ");
@@ -374,7 +374,7 @@ use namespace CoC;
 			}
 			doNext(TempleAltairsRebuildMenu);
 		}
-		
+
 		public function puttingBSwordOrExcaliburOnAltair():void {
 			clearOutput();
 			if (player.weapon == weapons.B_SWORD || player.hasItem(weapons.B_SWORD, 1)) {
@@ -427,7 +427,7 @@ use namespace CoC;
 			player.addStatusValue(StatusEffects.TempleOfTheDivineTracker,3,-2);
 			inventory.takeItem(consumables.P_PEARL, templemainmenu);
 		}
-		
+
 		public function sapphiremenu():void {
 			clearOutput();
 			outputText("You admit that you were actually looking for her, a response which she seems happy about, as she casually sits next to you and starts conversing.\n\n");
@@ -522,7 +522,7 @@ use namespace CoC;
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
-		
+
 		public function SapphireGargoyleDoubleTailfuck():void {
 			clearOutput();
 			outputText("You check Sapphire’s tail then look at yours. An idea sparks in your mind as you tell Sapphire to get on all fours.\n\n");
@@ -654,7 +654,7 @@ use namespace CoC;
 			player.sexReward("Default","Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function krystalonyxmenu():void {
 			clearOutput();
 			outputText("Waving over at " + flags[kFLAGS.ONYX_NAME] + ", you ask ");
@@ -725,7 +725,7 @@ use namespace CoC;
 			if (player.hasCock() && (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2)) addButton(4, "Fuck Her", KrystalFuckHer).hint("How about a feel of that rocky hole?");
 			addButton(14, "Back", templemainmenu);
 		}
-		
+
 		public function KrystalOnyxTailFuck():void {
 			clearOutput();
 			outputText("Lying under ");
@@ -989,7 +989,7 @@ use namespace CoC;
 			player.sexReward("Default","Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function templeBasement():void {
 			clearOutput();
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 2) {
@@ -1009,7 +1009,7 @@ use namespace CoC;
 				addButton(1, "Alabaster", chooseToWorkOnAlabasterStatue);
 			}
 		}
-		
+
 		public function strangeBookOfGolems():void {
 			clearOutput();
 			outputText("This book seems to explain the process of crafting a Gargoyle in length. It seems to imply your friend up there may have been made out from the soul of a willing sacrifice or a long dead person. Will you read it?");
@@ -1036,7 +1036,7 @@ use namespace CoC;
 			}
 			doNext(templeBasement);
 		}
-		
+
 		public function makingNewGargoyle():void {
 			if (flags[kFLAGS.ONYX_GENDER] >= 1) makingNewGargoylePart4();
 			else makingNewGargoylePart1();
@@ -1109,7 +1109,7 @@ use namespace CoC;
 			player.removeKeyItem("Black Soul Gem");
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function currentStateOfStatue():void {
 			clearOutput();
 			outputText("This statue looks like ");
@@ -1241,7 +1241,7 @@ use namespace CoC;
 			outputText("You decide to come back later to finish the work.");
 			doNext(templemainmenu);
 		}
-		
+
 		public function chooseToWorkOnMarbleStatue():void {
 			flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 1;
 			flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] = 1;
@@ -1256,7 +1256,7 @@ use namespace CoC;
 			flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 0;
 			currentStateOfStatue();
 		}
-		
+
 		public function SculptFrameAndFace():void {
 			menu();
 			addButton(0, "Feminine", SculptFeminineFrameAndFace).hint("Sculpt a feminine frame and face.");
@@ -1279,7 +1279,7 @@ use namespace CoC;
 			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 3, 0, 0, 0);
 			SecondPartOfSculptingText();
 		}
-		
+
 		public function SculptWings():void {
 			menu();
 			addButton(0, "Bat", SculptBatWings).hint("Sculpt bat wings.");
@@ -1294,7 +1294,7 @@ use namespace CoC;
 			flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 1;
 			SecondPartOfSculptingText();
 		}
-		
+
 		public function SculptTail():void {
 			menu();
 			addButton(0, "Mace", SculptMaceTail).hint("Sculpt mace shaped tail tip.");
@@ -1311,7 +1311,7 @@ use namespace CoC;
 			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 2, 0, 0);
 			SecondPartOfSculptingText();
 		}
-		
+
 		public function SculptLegs():void {
 			menu();
 			addButton(0, "Clawed", SculptClawedLegs).hint("Sculpt clawed legs.");
@@ -1328,7 +1328,7 @@ use namespace CoC;
 			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 0, 2, 0);
 			SecondPartOfSculptingText();
 		}
-		
+
 		public function SculptArms():void {
 			menu();
 			addButton(0, "Clawed", SculptClawedArms).hint("Sculpt clawed arms.");
@@ -1345,7 +1345,7 @@ use namespace CoC;
 			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 0, 0, 2);
 			SecondPartOfSculptingText();
 		}
-		
+
 		public function SculptHair():void {
 			menu();
 			addButton(0, "Bald", SculptBald).hint("Sculpt bald head.");
@@ -1374,7 +1374,7 @@ use namespace CoC;
 			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 4, 0, 0, 0);
 			SecondPartOfSculptingText();
 		}
-		
+
 		public function SculptChest():void {
 			menu();
 			addButton(0, "Flat", SculptFlat).hint("Sculpt flat chest.");
@@ -1421,7 +1421,7 @@ use namespace CoC;
 			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 7, 0, 0);
 			SecondPartOfSculptingText();
 		}
-		
+
 		public function SculptPussy():void {
 			menu();
 			if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) != 1) addButton(0, "No", SculptPussyNo).hint("Don't sculpt pussy.");
@@ -1438,7 +1438,7 @@ use namespace CoC;
 			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 2, 0, 0, 0);
 			SecondPartOfSculptingText();
 		}
-		
+
 		public function SculptCock():void {
 			menu();
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) != 1) addButton(0, "None", SculptNoCock).hint("Don't sculpt cock.");
@@ -1515,7 +1515,7 @@ use namespace CoC;
 			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 12, 0);
 			SecondPartOfSculptingText();
 		}
-		
+
 		public function SculptBalls():void {
 			menu();
 			addButton(0, "No", SculptBallsNo).hint("Don't sculpt balls.");
@@ -1552,14 +1552,14 @@ use namespace CoC;
 			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 5, 0, 0);
 			SecondPartOfSculptingText();
 		}
-		
+
 		public function SecondPartOfSculptingText():void {
 			clearOutput();
 			outputText("You work for six hours, sculpting the statue part to your liking with an artist's passion, then head back to camp for a break.");
 			flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS]++;
 			doNext(camp.returnToCampUseSixHours);
 		}
-		
+
 		public function becomingGargoyle():void {
 			clearOutput();
 			if (player.hasKeyItem("Gargoyle demonic researches") >= 0 && player.hasItem(useables.SOULGEM, 1) && flags[kFLAGS.GARGOYLE_QUEST] < 6) flags[kFLAGS.GARGOYLE_QUEST] = 6;
@@ -1602,7 +1602,7 @@ use namespace CoC;
 			else addButtonDisabled(1, "Minotaur", "Need Minotaur Blood vial for this option");
 			addButton(2, "Back", templeBasement)
 		}
-		
+
 		public function becomingGargoyleYesOwnBlood():void {
 			clearOutput();
 			player.createPerk(PerkLib.GargoylePure, 0, 0, 0, 0);
@@ -2185,6 +2185,7 @@ use namespace CoC;
 			player.strtouspeintwislibsenCalculation2();
 			player.destroyItems(useables.SOULGEM, 1);
 			outputText("After the weird feelings subside, you pick up what is your actual pedestal and move it to your camp.\n\n");
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			doNext(camp.returnToCampUseFourHours);
 		}
 	}

@@ -3113,7 +3113,23 @@ use namespace CoC;
 			if (TopRace == "kitsune") {
 				if (TopScore >= 5) {
 					if (tailType == 13 && tailCount >= 2 && kitsuneScore() >= 6) {
-						if (TopScore >= 12) {
+						if (TopScore >= 21) {
+							if (tailCount == 9 && isTaur()) {
+								race = "Inari-taur";
+							} else if (tailCount == 9) {
+								race = "Inari";
+							} else {
+								race = "kitsune";
+							}
+						} else if (TopScore >= 18) {
+							if (tailCount == 9 && isTaur()) {
+								race = "Enlightened nine tailed kitsune-taur";
+							} else if (tailCount == 9) {
+								race = "Enlightened nine tailed kitsune";
+							} else {
+								race = "kitsune";
+							}
+						} else if (TopScore >= 12) {
 							if (tailCount == 9 && isTaur()) {
 								race = "nine tailed kitsune-taur";
 							} else if (tailCount == 9) {
@@ -10500,26 +10516,37 @@ use namespace CoC;
 				}
 			}//+20/10-20
 			if (kitsuneScore() >= 5) {
-				if (kitsuneScore() >= 12 && tailType == 13 && tailCount >= 2) {
+				if (kitsuneScore() >= 21 && tailType == 13 && tailCount == 9) {
 					maxStrCap2 -= 50;
-					maxSpeCap2 += 40;
-					maxIntCap2 += 70;
-					maxWisCap2 += 100;
-					maxLibCap2 += 20;
+					maxSpeCap2 += 35;
+					maxIntCap2 += 150;
+					maxWisCap2 += 150;
+					maxLibCap2 += 80;
+					minSen += 50;
 				}
-				else if (kitsuneScore() >= 6) {
-					maxStrCap2 -= 40;
-					maxSpeCap2 += 25;
-					maxIntCap2 += 35;
-					maxWisCap2 += 45;
-					maxLibCap2 += 20;
+				if (kitsuneScore() >= 18 && tailType == 13 && tailCount == 9) {
+					maxStrCap2 -= 50;
+					maxSpeCap2 += 30;
+					maxIntCap2 += 130;
+					maxWisCap2 += 130;
+					maxLibCap2 += 80;
+					minSen += 50;
+				}
+				if (kitsuneScore() >= 12 && tailType == 13 && tailCount == 9) {
+					maxStrCap2 -= 50;
+					maxSpeCap2 += 30;
+					maxIntCap2 += 100;
+					maxWisCap2 += 100;
+					maxLibCap2 += 50;
+					minSen += 50;
 				}
 				else {
 					maxStrCap2 -= 35;
 					maxSpeCap2 += 20;
-					maxIntCap2 += 30;
-					maxWisCap2 += 40;
+					maxIntCap2 += 35;
+					maxWisCap2 += 35;
 					maxLibCap2 += 20;
+					minSen += 50;
 				}
 			}//+50/50-60
 		/*	if (kitshooScore() >= 6) {
