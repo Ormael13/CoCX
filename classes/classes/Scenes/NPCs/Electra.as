@@ -52,7 +52,7 @@ use namespace CoC;
 			if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 1) outputText("Electra");
 			else outputText("The raiju");
 			outputText(" touches you with her claw and you feel some of her electricity rush and course through your body, slowly building your arousal. This is very bad! There is no telling how long you will be able to stand it.");
-			var discharge:Number = 4 + int(player.sens) / 8;
+			var discharge:Number = 4 + int(player.effectiveSensitivity()) / 8;
 			if (player.hasStatusEffect(StatusEffects.RaijuStaticDischarge)) {
 				outputText(" Her repeated touches increase the voltage!!!!");
 				discharge += 4;
@@ -175,6 +175,15 @@ use namespace CoC;
 				this.bonusHP = 250;
 				this.level = 48;
 			}
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 5) {
+				initStrTouSpeInte(100, 190, 180, 190);
+				initWisLibSensCor(190, 340, 240, 80);
+				this.weaponAttack = 24;
+				this.armorDef = 36;
+				this.armorMDef = 50;
+				this.bonusHP = 300;
+				this.level = 54;
+			}
 			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,60,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("E"));
@@ -219,6 +228,10 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.ELECTRA_LVL_UP] >= 4) {
 				this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.ELECTRA_LVL_UP] >= 5) {
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
 			checkMonster();

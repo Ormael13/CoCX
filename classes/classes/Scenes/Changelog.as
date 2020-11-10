@@ -33,23 +33,32 @@ package classes.Scenes
 			outputText("-Nodachi moved to massive weapon section increasing base atk form 25 to 65 and cost from 100 to 2600 gems.\n");
 			outputText("-Fixed bugs: Various fixes from Liadri for many errors from last build, DeBimo offer from Rathazul not including Joy or Excellia in camp\n\n");
 			outputText("<b>Version 0.8o3:</b>\n\n");
-			outputText("-1 new achievment. (1 shadow one)\n");//s	s
-			outputText("-Explore option named 42 was moced to silly mode.\n");
-			outputText("-Follower Zenji now scales up to PC lvl cap (150 > 185). He will also have grasualy increasing other combat stats beside raw stats and Xp reward for beating him will be much higher.\n");
+			outputText("-New tier 0 sensitivity lvl-up perk: Desensitization. Req. 10+ sens. Effect: Negative effects of sensitivity are reduced by 5%.\n");
+			outputText("-New tier 5 sensitivity lvl-up perk: Greater Desensitization. Req. Desensitization perk and 20+ sens. Effect: Negative effects of sensitivity are reduced by 10%.\n");
+			outputText("-New tier 10 sensitivity lvl-up perk: Epic Desensitization. Req. Greater Desensitization perk and 50+ sens. Effect: Negative effects of sensitivity are reduced by 15%.\n");
+			outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
+			outputText("-New tier 20 sensitivity lvl-up perk: Mythical Desensitization. Req. Legendary Desensitization perk and 200+ sens. Effect: Negative effects of sensitivity are reduced by 25%.\n");
+			outputText("-3 new achievments. (3 shadow ones)\n");	
+			outputText("-Explore option named 42 was moved to silly mode.\n");
+			outputText("-Follower Zenji now scales up to PC lvl cap (150 > 185). He will also have gradualy increasing other combat stats beside raw stats and XP reward for beating him will be much higher.\n");
+			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
+			outputText("-Lover Zenji got more sex scenes. Also Lover Zenji can impregnate PC - pregnancy takes 30 days and first three kids can be named.\n");
+			outputText("-New tier 5 misc lvl-up perk: Mantis-like Agility (Final Form). Req. Mantis-like Agility (Evolved) perk and mantis score 15+. Effect: triple speed bouses gained from Mantis-like Agility perk and 30 pts of phantom Spe (scalable).\n");
+			outputText("-All ascension perks from tab named 'Perk Select(2)' have increased max rank by 5.\n");
+			outputText("-As some crazy dungeon delver PC's went as far as 1000th room in Ebon labyrinth there would be placed chest with EXP in each 10th room aside boos rooms till that 1000th room.\n");
+			outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");//,  (lvl xx)
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
+			outputText("-\n");//New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies. Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-Fixed bugs: \n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Luna event not happening in forest after PC fire her at first Full Moon event conclusion, some minor errors in calculation and display bonuses for kitsunes\n\n");/*ostatni punkt changelogu
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
-			//outputText("-Increased max lvl camp npc's can attain after reaching end of training: Electra (lvl 36)\n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
-			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
@@ -101,12 +110,8 @@ package classes.Scenes
 			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

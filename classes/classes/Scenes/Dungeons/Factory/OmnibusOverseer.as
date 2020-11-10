@@ -64,7 +64,7 @@ public class OmnibusOverseer extends Monster
 						player.dynStats("lus", 5);
 					}
 				}
-				player.dynStats("lus", 7 + player.sens / 20);
+				player.dynStats("lus", 7 + player.effectiveSensitivity() / 20);
 				if (player.biggestLactation() > 1) outputText("Milk dribbles from your [allbreasts] in sympathy.");
 			}
 		}

@@ -144,7 +144,7 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 										outputText("Your hands knead and caress your " + player.breastDescript(0) + ", eagerly touching every inch of soft flesh.  You gasp when you realize what you're doing and pull them away");
 										if (player.cor < 50) outputText(", angry at yourself for falling prey to the demon's directions");
 										outputText(".");
-										dynStats("lus", 5 + player.sens / 10);
+										dynStats("lus", 5 + player.effectiveSensitivity() / 10);
 									}
 									outputText("</b>\n");
 									needNext = true;
@@ -625,7 +625,7 @@ public function exgartuanCombatUpdate():Boolean {
 					break;
 			}
 			//(+lust! Possible + enemy lust)
-			dynStats("lus", 2+player.sens/10);
+			dynStats("lus", 2+player.effectiveSensitivity()/10);
 			if(rand(3) == 0) monster.lust += 5 + monster.lib/10;
 			return true;
 		}

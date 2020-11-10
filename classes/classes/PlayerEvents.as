@@ -264,7 +264,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (rand(5) == 0) {
 						flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] = 1;
 						outputText("\nA sudden gush of semen-coated worms noisily slurps out of your womb.  It runs down your legs as the worms do their damnedest to escape.  The feeling of so many squiggling forms squirting through your cunt-lips turns you on more than you'd like to admit.  You wonder why they stayed as long as they did, and some part of you worries that their stay may have reduced your capacity to bear children, though in a place like this that might be a blessing.\n");
-						player.dynStats("lus", 2 + player.sens / 10);
+						player.dynStats("lus", 2 + player.effectiveSensitivity() / 10);
 						if (player.fertility > 5) player.fertility -= (1 + Math.round(player.fertility / 4));
 						player.addStatusValue(StatusEffects.WormPlugged, 1, -1); //Lower chances
 						if (player.statusEffectv1(StatusEffects.WormPlugged) <= 0) { //Remove if too low
@@ -289,7 +289,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.hasStatusEffect(StatusEffects.Jizzpants)) {
 				outputText("\nYour [armor] squishes wetly with all the semen you unloaded into them, arousing you more and more with every movement.\n");
-				player.dynStats("lus", 10 + player.sens / 5);
+				player.dynStats("lus", 10 + player.effectiveSensitivity() / 5);
 				player.removeStatusEffect(StatusEffects.Jizzpants);
 				needNext = true;
 			}

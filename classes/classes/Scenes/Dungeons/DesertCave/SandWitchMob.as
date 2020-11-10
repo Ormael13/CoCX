@@ -105,7 +105,7 @@ public class SandWitchMob extends Monster
 					
 				}
 				player.createStatusEffect(StatusEffects.LustStones,bonus,0,0,0);
-				player.dynStats("lus", bonus * 2 + 5 + player.sens/7);
+				player.dynStats("lus", bonus * 2 + 5 + player.effectiveSensitivity()/7);
 			}
 			//[If attack misses]
 			else {

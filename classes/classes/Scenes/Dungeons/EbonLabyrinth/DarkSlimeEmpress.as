@@ -53,7 +53,7 @@ use namespace CoC;
 		private function gooSlimeBarrageD():void {
 			var td:Number = 7 + rand(5);
 			td += player.lib / 8;
-			td += player.sens / 8;
+			td += player.effectiveSensitivity() / 8;
 			td = Math.round(td);
 			td = td * (EngineCore.lustPercent() / 100);
 			if (!hasStatusEffect(StatusEffects.LingeringSlime)) createStatusEffect(StatusEffects.LingeringSlime, 0, 0, 0, 0);

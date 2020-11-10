@@ -201,12 +201,12 @@ import classes.internals.*;
 			//<Hyena Attack 4 – Arousal Attack – Highly Successful>
 			if(player.cor + player.lib > chance + 50) {
 				outputText("A wry grin spreads across the gnoll's face before she sprints towards you.  Too fast to follow, she flies forward, and you desperately brace for an impact that doesn't come.  Instead of striking you, two spotted paws clamp behind your neck and pull your head down, planting your face against her leather loincloth.  A powerful, musky smell burns in your nose and the feel of firm flesh behind the flimsy leather leaves a tingling sensation along your face.  She holds you there, pressed against her groin for several moments, desire growing deep within your body, before you find the strength and will to pull away.  The amazon grins, letting you stumble back as you try to fight off the feel of her body.\n\n");
-				player.dynStats("lus", (25 + player.lib/20 + player.sens/5));
+				player.dynStats("lus", (25 + player.lib/20 + player.effectiveSensitivity()/5));
 			}
 			//<Hyena Attack 4 – Arousal Attack – Mildly Successful>
 			else if(20 + player.cor + player.lib > chance) {
 				outputText("A lazy grin spreads across the gnoll's face before she sprints towards you.  Too fast to follow, she flies forward, and you desperately brace for an impact that doesn't come.  Instead of striking you, two spotted paws clamp behind your neck and pull your head down, planting your face against her leather loincloth.  A powerful, musky smell burns in your nose and the feel of firm flesh behind the flimsy leather leaves a tingling sensation along your face.  Instinctively, you tear away from the hold, stumbling away from the sensations filling your mind, though some desire remains kindled within you.");
-				player.dynStats("lus", (15 + player.lib/20 + player.sens/5));
+				player.dynStats("lus", (15 + player.lib/20 + player.effectiveSensitivity()/5));
 			}
 			//<Hyena Attack 4 – Arousal Attack – Unsuccessful>
 			else {

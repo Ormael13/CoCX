@@ -112,14 +112,14 @@ import classes.Scenes.SceneLib;
 				else outputText(" your anus until it puckers, craving something to fill it - anything.");
 			}
 			
-			player.dynStats("lus+", 8 + (player.lib / 10) + (player.sens / 10));
+			player.dynStats("lus+", 8 + (player.lib / 10) + (player.effectiveSensitivity() / 10));
 		}
 		
 		private function aphrodisiacSquirt():void
 		{
 			outputText("The centaur grabs her heavy tits and casually squeezes the prodding, hard nipples that cap them.  A trickle of rose moisture trickles out, dripping down the underside of her bust to glisten wetly in the light.  Spellbound for the moment, you look on in wonder at the display of demonic lactations.  A faint sweetness lingers in the air, and you lick your lips without meaning to.  Then, she squeezes down to spray a torrent of pink-tinged breastmilk directly at you, splitting into so many forks of fluid that you have no hope to dodge.");
 			
-			player.dynStats("lus+", 8 + (player.lib / 10) + (player.sens / 10));
+			player.dynStats("lus+", 8 + (player.lib / 10) + (player.effectiveSensitivity() / 10));
 
 			if (player.lust < .3*player.maxLust()) outputText("\n\nYou close your mouth tight and endure the shimmering shower, trying your damnedest to resist the effects of this insidious liquid.  Wherever it strikes you, it vanishes soon after, absorbed directly into your body.");
 			else if (player.lust < .4*player.maxLust()) outputText("\n\nYour heart beats faster.");
@@ -177,7 +177,7 @@ import classes.Scenes.SceneLib;
 				//(OH SHIT YOU GUNNA GET FUKKED)
 				outputText("The chanting reaches a crescendo before you can stop it, and as the nine-foot woman points at you, you barely have time to enunciate a single curse.  Her spell is upon you.  There's a flash of crimson light, seemingly as bright as the sun, and then you're hit with a wave of lust so strong it might as well be a physical force.  It slaps you hard enough to send you reeling, even while your heart pumps every spare drop of blood south.  You cry out at the forced arousal, blubbering wildly as the pleasure mounts and images of you and your foe locked together in every sexual position imaginable flood your consciousness.");
 				
-				player.dynStats("lus+", 20 + (player.lib / 6) + (player.sens / 6));
+				player.dynStats("lus+", 20 + (player.lib / 6) + (player.effectiveSensitivity() / 6));
 			}
 		}
 		
@@ -200,9 +200,9 @@ import classes.Scenes.SceneLib;
 			}
 
 			// Resistance-esque check, idk I threw this terrible shit together
-			if (player.inte * (2 / _hypnoCockUses) > rand((player.lib / 3) + (player.sens / 3) + (player.cor / 3)))
+			if (player.inte * (2 / _hypnoCockUses) > rand((player.lib / 3) + (player.effectiveSensitivity() / 3) + (player.cor / 3)))
 			{
-				player.dynStats("lus+", 2 + rand((player.lib / 20) + (player.sens / 20)));
+				player.dynStats("lus+", 2 + rand((player.lib / 20) + (player.effectiveSensitivity() / 20)));
 				
 				if (player.lust <= .33*player.maxLust()) outputText("\n\nA warning thought jars you out of the cock-induced reverie with a start - this demon was going to hypnotize you, likely trying to seduce you into submission.  Not this time!  You tear yourself away and look her in the eye triumphantly.");
 				else if (player.lust <= .66*player.maxLust()) outputText("\n\nA quiet voice pipes up somewhere inside you and warns that something is amiss.  It's enough to stir you from your stupor, kindling your willpower to wrest your view from your foe's gently bobbing fuck-log.  You look her in the eye triumphantly.");
@@ -210,7 +210,7 @@ import classes.Scenes.SceneLib;
 			}
 			else
 			{
-				player.dynStats("lus+", 20 + 2 * _hypnoCockUses + 2 + rand((player.lib / 10) + (player.sens / 10)));
+				player.dynStats("lus+", 20 + 2 * _hypnoCockUses + 2 + rand((player.lib / 10) + (player.effectiveSensitivity() / 10)));
 				
 				outputText("Down it bobs, slowly hanging lower and lower... SMACK!  Up it goes, taking your bedazzled eyes along for the ride.  \"<i>That's a good " + player.mf("boy", "girl") + ",</i>\" the dick's director whispers, \"<i>Just follow the tempo and let it fill your mind, oozing inside you with each thump.</i>\"");
 				outputText("\n\nFuck!  She's right, it's getting awfully hard to think about anything else.  You fixate further on the cock, unwilling or unable to look away.");

@@ -187,6 +187,7 @@ public final class ConsumableLib extends BaseContent
 		public const AIRWEED:SimpleConsumable = mk("Airweed", "Airweed", "an Airweed", 10, "Upon consumption, this magic seaweed grants water breathing for 24 hours.", m.airweed);
 		public const AKBALSL:Consumable = new AkbalSaliva();
 		public const ALCTHUN:SimpleConsumable = mk("AlcThun", "Alch.Thunder", "an Alchemical Thunder", 50, "Lightning in a bottle. Add heavy electricity damage to your weapon for a limited time upon use.", m.buffAlchemicalThunder);
+		public const BALLOFL:BallsOfFlame = new BallsOfFlame();
 		public const BANGB_M:MiniBangBall = new MiniBangBall();
 		public const BANGBM1:BangBallMk1 = new BangBallMk1();
 		public const BANGBM2:BangBallMk2 = new BangBallMk2();
@@ -317,6 +318,7 @@ public final class ConsumableLib extends BaseContent
 		public const STRFLOW:SimpleConsumable = mk("StrFlow", "StrangeFlower", "a strange flower", 20, "This weird flower has two pistils instead of one. You feel a strange connection to it.", m.strangeFlower);
 		public const TGOGODD:SimpleConsumable = mk("TGOGoss", "TGOnnaGoss", "a Thick Green Onna Gossamer", 6, "Those strands of green gossamer are rougher than those of driders. It looks edible, but the smell of musk and milk makes you a little dizzy.", curry(m.thickGossamer, 0));
 		public const TRAPOIL:SimpleConsumable = mk("TrapOil", "TrapOil", "a vial of trap oil", 6, "A round, opaque glass vial filled with a clear, viscous fluid.  It has a symbol inscribed on it, a circle with a cross and arrow pointing out of it in opposite directions.  It looks and smells entirely innocuous.", m.trapOil);
+		public const TROLFIG:SimpleConsumable = mk("TrolFig", "TrollFig", "a Troll Fig", 12, "A hairy fig that's a common delicacy among trolls, it’s said that it infuses the consumer with tremendous insight.", m.trollFig);
 		public const TSCROLL:TatteredScroll = new TatteredScroll();
 		public const TSTOOTH:SimpleConsumable = mk("TSTooth", "TSTooth", "a glowing tiger shark tooth", 6, "This looks like a normal shark tooth, though with an odd purple glow.", curry(m.sharkTooth, 1));
 		public const UNICORN:AbstractEquinum = new AbstractEquinum(1, "Unicorn", "Unicornum", "a vial of Unicornum", 40, "This is a long flared vial with a small label that reads, \"<i>Unicornum</i>\".  It is likely this potion is tied to unicorns in some way.");

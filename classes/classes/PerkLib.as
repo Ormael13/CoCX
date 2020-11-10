@@ -240,6 +240,21 @@ public class PerkLib
 				"Seductive experience causes your tease attacks to be 15% more effective.", null, true);
 
 		// Ordinary (levelup) perks
+		public static const Desensitization:PerkType = mk("Desensitization", "Desensitization",
+				"Negative effects of sensitivity are reduced by 5%.",
+				"You choose the 'Desensitization' perk, decreasing negative effects of sensitivity by 5%.");
+		public static const GreaterDesensitization:PerkType = mk("Greater Desensitization", "Greater Desensitization",
+				"Negative effects of sensitivity are reduced by 10%.",
+				"You choose the 'Greater Desensitization' perk, decreasing negative effects of sensitivity by 10%.");
+		public static const EpicDesensitization:PerkType = mk("Epic Desensitization", "Epic Desensitization",
+				"Negative effects of sensitivity are reduced by 15%.",
+				"You choose the 'Epic Desensitization' perk, decreasing negative effects of sensitivity by 15%.");
+		public static const LegendaryDesensitization:PerkType = mk("Legendary Desensitization", "Legendary Desensitization",
+				"Negative effects of sensitivity are reduced by 20%.",
+				"You choose the 'Legendary Desensitization' perk, decreasing negative effects of sensitivity by 20%.");
+		public static const MythicalDesensitization:PerkType = mk("Mythical Desensitization", "Mythical Desensitization",
+				"Negative effects of sensitivity are reduced by 25%.",
+				"You choose the 'Mythical Desensitization' perk, decreasing negative effects of sensitivity by 25%.");
 		public static const HexKnowledge:PerkType = mk("Hex Knowledge", "Hex Knowledge",
 				"Allow to cast hex magic spells as long corruption is 80+, locks out access to white spells and deal 20% more dmg when using black or hex magic to attack pure enemies.",
 				"You choose the 'Hex Knowledge' perk, gaining access to hex magic.");
@@ -1044,13 +1059,13 @@ public class PerkLib
 				"You choose 'Elements of the Ortodox Path' perk, your time spent on studing elements allowed to be able call those meantioned in more ortodox writings.");
 		public static const ElvishPeripheralNervSys:PerkType = mk("Elvish Peripheral NervSys", "Elvish Peripheral NervSys",
 				"Your Elvish Peripheral NervSys is giving you 5 pts of phantom Spe (scalable) and allow to keep Elven Sense even without elf arms/legs.",
-				"You choose the 'Elvish Peripheral NervSys' perk, due to repeadly balancing on line between life and death your peripheral nervous system started to work like that of elfs.").withBuffs({'spe.mult':0.05});
+				"You choose the 'Elvish Peripheral NervSys' perk, due to repeadly balancing on line between life and death your peripheral nervous system started to work like that of elfs.");
 		public static const ElvishPeripheralNervSysEvolved:PerkType = mk("Elvish Peripheral NervSys (Evolved)", "Elvish Peripheral NervSys (Evolved)",
 				"Your Elvish Peripheral NervSys is giving you 10 pts of phantom Spe (scalable)",
-				"You choose the 'Elvish Peripheral NervSys (Evolved)' perk, your peripheral nervous system continue subtile changes leading to be more elf-like.").withBuffs({'spe.mult':0.10});
+				"You choose the 'Elvish Peripheral NervSys (Evolved)' perk, your peripheral nervous system continue subtile changes leading to be more elf-like.").withBuffs({'spe.mult':0.05});
 		public static const ElvishPeripheralNervSysFinalForm:PerkType = mk("Elvish Peripheral NervSys (Final Form)", "Elvish Peripheral NervSys (Final Form)",
 				"Your Elvish Peripheral NervSys is giving you 15 pts of phantom Spe (scalable), increase your natural evasion, decrease melee/range accuracy penalty when using multiattack options.",
-				"You choose the 'Elvish Peripheral NervSys (Final Form)' perk, your peripheral nervous system reached it final changes to reassamble elvish peripheral nervous system.").withBuffs({'spe.mult':0.15});
+				"You choose the 'Elvish Peripheral NervSys (Final Form)' perk, your peripheral nervous system reached it final changes to reassamble elvish peripheral nervous system.").withBuffs({'spe.mult':0.05});
 		public static const Embodiment:PerkType = mk("Embodiment", "Embodiment",
 				"You embody the principles of the monks... as usual you should only expect the 10% soulforce gain.",
 				"You choose the 'Embodiment' perk, gaining +10% max Soulforce.");
@@ -1953,7 +1968,10 @@ public class PerkLib
 				"You choose the 'Mantis-like Agility' perk, by becoming much more mantis-like your body musculature started to slowly adapt to existance of exoskeleton.");
 		public static const MantislikeAgilityEvolved:PerkType = mk("Mantis-like Agility (Evolved)", "Mantis-like Agility (Evolved)",
 				"Your evolved musculature providing you with even higher increase to agility and speed. If somehow you would have some type of natural armor or even thicker skin this increase would be even bigger.",
-				"You choose the 'Mantis-like Agility (Evolved)' perk, by becoming much more mantis-like your body musculature started to slowly adapt to existance of exoskeleton.").withBuffs({'spe.mult':20});
+				"You choose the 'Mantis-like Agility (Evolved)' perk, by becoming much more mantis-like your body musculature started to slowly adapt to existance of exoskeleton.");
+		public static const MantislikeAgilityFinalForm:PerkType = mk("Mantis-like Agility (Final Form)", "Mantis-like Agility (Final Form)",
+				"Your musculature providing you with much higher increase to agility and speed than before. With some type of natural armor or even thicker skin this increase would be even larger.",
+				"You choose the 'Mantis-like Agility (Final Form)' perk, your body musculature started fully adapt to existance of exoskeleton.");
 		public static const Manyshot:PerkType = mk("Manyshot", "Manyshot",
 				"You always shoot two arrows instead of one on your first strike.",
 				"You choose the 'Manyshot' perk, to always shoot two arrows instead of one on your first strike.");
@@ -5252,6 +5270,7 @@ public class PerkLib
             //------------
             //Slot 6 - Tier 0
             EyesOfTheHunterNovice.requireSen(25);
+            Desensitization.requireSen(10);
 			//.requireMinSens(25);
             //Tier 1 Sensitivity Perks
             EyesOfTheHunterAdept.requireSen(50)
@@ -5264,6 +5283,9 @@ public class PerkLib
             //Tier 3 Sensitivity Perks
             //Tier 4 Sensitivity Perks
             //Tier 5 Sensitivity Perks
+            GreaterDesensitization.requireSen(20)
+                    .requirePerk(Desensitization)
+                    .requireLevel(30);
             //Tier 6 Sensitivity Perks
 			EpicSensitivity.requireSen(10)
                     .requireLevel(36);
@@ -5271,6 +5293,9 @@ public class PerkLib
             //Tier 8 Sensitivity Perks
             //Tier 9 Sensitivity Perks
             //Tier 10 Sensitivity Perks
+            EpicDesensitization.requireSen(50)
+                    .requirePerk(GreaterDesensitization)
+                    .requireLevel(60);
             //Tier 11 Sensitivity Perks
             LegendarySensitivity.requireSen(15)
                     .requirePerk(EpicSensitivity)
@@ -5279,6 +5304,9 @@ public class PerkLib
             //Tier 13 Sensitivity Perks
             //Tier 14 Sensitivity Perks
             //Tier 15 Sensitivity Perks
+            LegendaryDesensitization.requireSen(100)
+                    .requirePerk(EpicDesensitization)
+                    .requireLevel(90);
             //Tier 16 Sensitivity Perks
             MythicalSensitivity.requireSen(20)
                     .requirePerk(LegendarySensitivity)
@@ -5287,6 +5315,9 @@ public class PerkLib
             //Tier 18 Sensitivity Perks
             //Tier 19 Sensitivity Perks
             //Tier 20 Sensitivity Perks
+            MythicalDesensitization.requireSen(200)
+                    .requirePerk(LegendaryDesensitization)
+                    .requireLevel(120);
             //Tier 21 Sensitivity Perks
             //------------
             // CORRUPTION
@@ -6231,6 +6262,9 @@ public class PerkLib
                 .requireCustomFunction(function (player:Player):Boolean {
                 return player.kitsuneScore() >= 12;
             }, "Kitsune race");
+            MantislikeAgilityFinalForm.requireLevel(30).requirePerk(MantislikeAgilityEvolved).requireCustomFunction(function (player:Player):Boolean {
+                return player.mantisScore() >= 15;
+            }, "Mantis race");
             NaturalPunchingBagFinalForm.requireLevel(30).requirePerk(NaturalPunchingBagEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.isGoblinoid()
             }, "Goblin race");

@@ -3460,7 +3460,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		outputText("Holding out your palms, you conjure an ethereal blue on one palm and corrupted purple flame on other which dances across your fingertips.  After well practised move of fusing them both into one of mixed colors ball of fire you launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling azure and lavender sparks everywhere.  ");
-		var damage:Number = (scalingBonusWisdom() * 0.5) + (scalingBonusIntelligence() * 0.5);
+		var damage:Number = scalingBonusWisdom() + scalingBonusIntelligence();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -3484,6 +3484,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//Hosohi No Tama and Fusion bonus damage
 		if (player.hasPerk(PerkLib.KitsuneThyroidGlandEvolved)) fusedfoxfiredmgmulti += 1;
 		damage *= fusedfoxfiredmgmulti;
+		damage = Math.round(damage * 1.4);
 		//High damage to goes.
 		if(monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		//Using fire attacks on the goo]

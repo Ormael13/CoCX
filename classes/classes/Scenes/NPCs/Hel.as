@@ -123,7 +123,7 @@ public class Hel extends Monster
 			//Attack 3 – Lust – Cleavage (Failure)
 			else {
 				outputText("To your surprise, the salamander suddenly yanks up her top, letting her hefty breasts hang free in the air; her small, bright pink nipples quickly harden from either arousal or temperature.  Before you can take your eyes off her impressive rack, she jumps at you.  One of her scaled arms encircles your waist, and the other forcefully shoves your face into her cleavage.  She jiggles her tits around your face for a moment before you're able to break free, though you can feel a distinct heat rising in your loins.  As quickly as they were revealed, the breasts are concealed again and your opponent is ready for more combat!");
-				var lust:Number = 20 + rand(10) + player.sens/10 + rand(player.lib/20);
+				var lust:Number = 20 + rand(10) + player.effectiveSensitivity()/10 + rand(player.lib/20);
 				player.dynStats("lus", lust);
 				//Apply resistance
 				lust *= EngineCore.lustPercent()/100;
