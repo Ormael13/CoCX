@@ -139,7 +139,7 @@ public function part1TrollEncounterFightTOTHEDEATHPCDefeated():void {
 	if (player.HP <= player.minHP()) {
 		outputText("You fall to the ground, bruised and beaten, wounds too severe for you to walk off right now.\n\n");
 		if (player.cor < 90) {
-			outputText("\"<i>Qué lástima,</i>\" Hhe growls, \"<i>Not even worth my time.</i>\"\n\n");
+			outputText("\"<i>Qué lástima,</i>\" he growls, \"<i>Not even worth my time.</i>\"\n\n");
 			outputText("He walks off, nowhere to be seen. The world grows hazy as you pass out from exhaustion.\n\n");
 			cleanupAfterCombat();
 		}
