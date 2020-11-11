@@ -262,7 +262,7 @@ use namespace CoC;
 				this.armorMDef = 13;
 				this.bonusHP = 500;
 				this.level = 96;
-			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100
+			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,60,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("E"));

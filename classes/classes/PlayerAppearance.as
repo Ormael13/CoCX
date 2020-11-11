@@ -3030,8 +3030,8 @@ public class PlayerAppearance extends BaseContent {
 		if (player.kitsuneScore() >= 9 && player.tailType == Tail.FOX && player.tailCount >= 2) {
 			if (player.kitsuneScore() >= 14) {
 				if (player.tailCount == 9 && player.kitsuneScore() >= 18 && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
-					if (player.kitsuneScore() >= 21) outputText("\n<font color=\"#0000a0\">Inari: " + player.kitsuneScore() + " (-50% to Str racial multi, +40% to Spe racial multi, +145% to Int racial multi, +160% to Wis racial multi, +80% to Lib racial multi, +60 to Sens, +" + (1000 * (1 + player.newGamePlusMod())) + " max Fatigue, +100% max Soulforce)</font>");
-					else outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune of Balance: " + player.kitsuneScore() + " (-45% to Str racial multi, +35% to Spe racial multi, +125% to Int racial multi, +140% to Wis racial multi, +60% to Lib racial multi, +45 to Sens, +" + (500 * (1 + player.newGamePlusMod())) + " max Fatigue, +65% max Soulforce)</font>");
+					if (player.kitsuneScore() >= 21) outputText("\n<font color=\"#0000a0\">Inari: " + player.kitsuneScore() + " (-50% to Str racial multi, +40% to Spe racial multi, +135% to Int racial multi, +170% to Wis racial multi, +80% to Lib racial multi, +60 to Sens, +" + (1000 * (1 + player.newGamePlusMod())) + " max Fatigue, +100% max Soulforce)</font>");
+					else outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune of Balance: " + player.kitsuneScore() + " (-45% to Str racial multi, +35% to Spe racial multi, +120% to Int racial multi, +145% to Wis racial multi, +60% to Lib racial multi, +45 to Sens, +" + (500 * (1 + player.newGamePlusMod())) + " max Fatigue, +65% max Soulforce)</font>");
 				}
 				else outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune: " + player.kitsuneScore() + " (-40% to Str racial multi, +30% to Spe racial multi, +95% to Int racial multi, +110% to Wis racial multi, +45% to Lib racial multi, +30 to Sens, +" + (300 * (1 + player.newGamePlusMod())) + " max Fatigue, +40% max Soulforce)</font>");
 			}
@@ -3436,4 +3436,4 @@ public class PlayerAppearance extends BaseContent {
 		else outputText("<b>Yo, this is an error.</b>");
 	}
 }
-}
+}

@@ -195,7 +195,7 @@ use namespace CoC;
 				this.armorDef = 35;
 				this.armorMDef = 10;
 				this.level = 98;
-			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100
+			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.a = "";
 			this.short = "Ceani";
 			this.long = "You are sparing with Ceani the orca morph. While she is normally smiling all the time this time around she looks like an angry beast about to tear you to shreds. You realise only now how scary her sharp teeth are let alone that massive harpoon she wields. Both strong and swift, she easily proves that underneath her friendly, and at time goofy, demeanor she still is a deadly fighter most people on mareth would rather avoid the wrath of.";

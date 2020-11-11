@@ -10,13 +10,44 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
+import classes.internals.SaveableState;
 import coc.view.ButtonDataList;
 	
-	public class ZenjiScenes extends NPCAwareContent
+	public class ZenjiScenes extends NPCAwareContent implements SaveableState
 	{
-		
+		public static var Z1stKid:String;
+		public static var Z2ndKid:String;
+
+		public function stateObjectName():String {
+			return "ZenjiScenes";
+		}
+
+		public function resetState():void {
+			Z1stKid = "";
+			Z2ndKid = "";
+		}
+
+		public function saveToObject():Object {
+			return {
+				"Z1stKid": Z1stKid,
+				"Z2ndKid": Z2ndKid
+			};
+		}
+
+		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
+			if (o) {
+				Z1stKid = o["Z1stKid"];
+				Z2ndKid = o["Z2ndKid"];
+			} else {
+				// loading from old save
+				resetState();
+			}
+		}
+
 		public function ZenjiScenes() 
-		{}
+		{
+			Saves.registerSaveableState(this);
+		}
 	
 public function zenjiPerspectiveOnPlayer(changes:Number = 0):Number
 {
@@ -1053,7 +1084,7 @@ public function loverZenjiTalks():void {
 	addButton(0, "Himself", loverZenjiTalksHimself).hint("Get to know him a little more.");
 	addButton(1, "Trolls", loverZenjiTalksTrolls).hint("Get to know a little more about trolls.");
 	addButton(2, "Yourself", loverZenjiTalksYourself).hint("Tell Zenji more about yourself.");
-	if (flags[kFLAGS.ZENJI_KID_1_NAME] != 0 || flags[kFLAGS.ZENJI_KID_2_NAME] != 0) addButton(3, "Children", loverZenjiTalksChildren);
+	if (flags[kFLAGS.ZENJI_KIDS] > 0) addButton(3, "Children", loverZenjiTalksChildren).hint("Talk to Zenji about your children.");
 	addButton(5, "Showoff", loverZenjiShowoff).hint("Have Zenji display his strength for you to admire.");
 	addButton(6, "Comfort", loverZenjiComfort).hint("Spend a tender moment with him. Now with free headpats.");
 	if (player.statusEffectv1(StatusEffects.ZenjiModificationsList) == 0) addButton(7, "Food", loverZenjiFood).hint("Zenji seems like he has something he wants to give you.");
@@ -1102,7 +1133,7 @@ public function loverZenjiTalksChildren():void {
 	clearOutput();
 	outputText("You ask Zenji how the children are doing.\n\n");
 	outputText("Zenji smiles softly, \"<i>De baby is doing fine, dey grow up so fast, I can already see de tusks coming in.</i>\"\n\n");
-	outputText("Zenji leads you to his bedroll, [childname1]"+flags[kFLAGS.ZENJI_KID_1_NAME]+" "+(flags[kFLAGS.ZENJI_KID_2_NAME] != 0 ? "and "+flags[kFLAGS.ZENJI_KID_2_NAME]+" are":" is")+" sleeping peacefully in a nest of herbs.\n\n");
+	outputText("Zenji leads you to his bedroll, your "+(flags[kFLAGS.ZENJI_KIDS] == 1 ? ""+Z1stKid+" is":"children are")+" sleeping peacefully in a nest of herbs.\n\n");
 	outputText("Zenji leans close to whisper to you, \"<i>Best not ta wake dem up, it takes forever to get them to sleep,</i>\" he states, wrapping an arm around you. \"<i>Dey are truly our precious child, I cannot tank ya enough for helping me do dis. I'm sure you'll enjoy raising dem wit me.</i>\" Zenji lets out a content sigh, \"<i>It'll be a moment for their hair ta come in, so keep close, and make sure dey're warm so dey can grow up loved properly, any child dat doesn't get enough love won’t be a good adult.</i>\" Zenji pulls you in for a soft peck on the lips, \"<i>And I know we got enough love to share,</i>\" he croons, caressing your face.\n\n");
 	outputText("You smile at him as you spend some time with your children, Zenji is a very tender father as you’ve grown to expect. His gruff exterior can mask just how caring and gentle he truly is. His presence is soft as the two of you play with your children. Despite his masculine figure and beefy body, he has a gentle touch and it shows with the way he treats your children.\n\n");
 	outputText("After nearly an hour of spending time with your children, you decide it’s best to continue with your day for now, but you’ll be sure that Zenji won't be a lonely father to the children.\n\n");
@@ -1703,10 +1734,8 @@ public function loverZenjiTakeVaginal():void {
 	outputText("Zenji releases you, helping you clean up from the mess of his huge orgasm and get dressed. Finally, you are ready to continue your day.\n\n");
 	player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
 	player.sexReward("cum", "Vaginal");
-	if (rand(100) < 15 && flags[kFLAGS.ZENJI_KID_2_NAME] == 0) {
-		if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
-		else player.knockUp(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
-	}
+	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	else player.knockUp(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1983,10 +2012,8 @@ public function loverZenjiHotSpringRideVaginal():void{
 	outputText("Zenji looks down at his soaked loincloth, \"<i>Ugh… I did not tink dis through, I need ta get another piece of cloth.</i>\"\n\n");
 	player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
 	player.sexReward("cum", "Vaginal");
-	if (rand(100) < 15 && flags[kFLAGS.ZENJI_KID_2_NAME] == 0) {
-		if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
-		else player.knockUp(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
-	}
+	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	else player.knockUp(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -2276,6 +2303,7 @@ public function loverZenjiHalloweenEventEndingDryOff():void {
 public function birthScene():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
+	flags[kFLAGS.ZENJI_KIDS]++;
 	outputText("It's finally time, you feel yourself losing balance as your cervix begins convulsing, this baby is coming out, now! You cry in pain as you start to feel contractions as your abdominal muscles attempt to push out your child.\n\n");
 	outputText("In no time Zenji is already by your side, \"<i>¡Ay miércoles! [name]! I'm here! I can tell someting was up. The baby is coming, I can feel it.</i>\"\n\n");
 	outputText("You groan in pain, ready to give birth, hoping for a healthy child. Zenji has placed you on his bedroll, cushioned out with an assortment of different herbs.");
@@ -2286,14 +2314,17 @@ public function birthScene():void {
 	outputText("After an hour of pain and screaming, you've finally released the child from your womb.\n\n");
 	outputText("Zenji cheers as he gently strokes your stomach, \"<i>I never doubted ya for a second [name],</i>\" he says before he cuts the umbilical cord from the baby with his tusks. \"<i>Tradition states dat de father always cuts de cord wit his tusks. I hope ya don' mind.</i>\"\n\n");
 	outputText("You're thankful he's here, but now you want to see the child you've brought into this world together.\n\n");
-	outputText("Zenji gently picks up the baby in his arms, inspecting them, \"<i>Yep, it’s a "+(flags[kFLAGS.ZENJI_KID_1_NAME] == 0 ? "boy":"girl")+" alright. De tusks haven't grown in yet, so it is best ta nurse dem while ya can so dey can grow big strong tusks like me.</i>\" He places your child on your chest, you pull "+(flags[kFLAGS.ZENJI_KID_1_NAME] == 0 ? "him":"her")+" closer so that they can latch onto you. Maternal pride overwhelms you as you begin crying tears of joy. Zenji leans down and nuzzles his face against yours, rubbing his beard affectionately against you, \"<i>Ya will be a fine mother, [name] I'm glad dat we can raise a family together… I love you [name]. Do ya know what ya wanna name dem..?</i>\"\n\n");
-	menu();
-	addButton(0,"Next",applyZenjikidName);
-	mainView.nameBox.text = "";
-	mainView.nameBox.visible = true;
-	mainView.nameBox.width = 165;
-	mainView.nameBox.x = mainView.mainText.x + 5;
-	mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
+	outputText("Zenji gently picks up the baby in his arms, inspecting them, \"<i>Yep, it’s a "+(!Z1stKid ? "boy":"girl")+" alright. De tusks haven't grown in yet, so it is best ta nurse dem while ya can so dey can grow big strong tusks like me.</i>\" He places your child on your chest, you pull "+(!Z1stKid ? "him":"her")+" closer so that they can latch onto you. Maternal pride overwhelms you as you begin crying tears of joy. Zenji leans down and nuzzles his face against yours, rubbing his beard affectionately against you, \"<i>Ya will be a fine mother, [name] I'm glad dat we can raise a family together… I love you [name]. Do ya know what ya wanna name dem..?</i>\"\n\n");
+	if (flags[kFLAGS.ZENJI_KIDS] > 2) doNext(applyZenjikidName2);
+	else {
+		menu();
+		addButton(0,"Next",applyZenjikidName);
+		mainView.nameBox.text = "";
+		mainView.nameBox.visible = true;
+		mainView.nameBox.width = 165;
+		mainView.nameBox.x = mainView.mainText.x + 5;
+		mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
+	}
 }
 private function applyZenjikidName():void {
 	spriteSelect(SpriteDb.s_zenji);
@@ -2314,14 +2345,19 @@ private function applyZenjikidName():void {
 		addButton(0,"Next",applyZenjikidName);
 		return;
 	}
-	if (flags[kFLAGS.ZENJI_KID_1_NAME] == 0) flags[kFLAGS.ZENJI_KID_1_NAME] = mainView.nameBox.text;
-	else flags[kFLAGS.ZENJI_KID_2_NAME] = mainView.nameBox.text;
+	if (Z1stKid == "") Z1stKid = mainView.nameBox.text;
+	else Z2ndKid = mainView.nameBox.text;
 	mainView.nameBox.visible = false;
 	clearOutput();
 	outputText("\n\n\n");
-	if (flags[kFLAGS.ZENJI_KID_1_NAME] != 0) outputText("\"<i>"+flags[kFLAGS.ZENJI_KID_1_NAME]+"... I like dat name…'</i>\" he states with a smile.\n\n");
-	else outputText("\"<i>"+flags[kFLAGS.ZENJI_KID_2_NAME]+"... I like dat name…'</i>\" he states with a smile.\n\n");
+	if (Z1stKid != "") outputText("\"<i>"+Z1stKid+"... I like dat name…'</i>\" he states with a smile.\n\n");
+	else outputText("\"<i>"+Z2ndKid+"... I like dat name…'</i>\" he states with a smile.\n\n");
 	outputText("Zenji relaxes by your side as you drift off to sleep within his protection, exhausted from giving birth.");
+	doNext(camp.returnToCampUseTwoHours);
+}
+private function applyZenjikidName2():void {
+	outputText("Zenji gives you a gentle stare as he gently caresses your child, \"<i>Actually, Ya know... I was thinkin’, and I thought I should name dem dis time.</i>\"\n\n");
+	outputText("He scoops up your baby once they detach from your breast. \"<i>What will daddy name you?</i>\" he croons, taking his child to his nest.\n\n");
 	doNext(camp.returnToCampUseTwoHours);
 }
 
@@ -2346,4 +2382,4 @@ public function marryZenji3():void {
 }
 
 	}
-}
+}

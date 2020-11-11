@@ -22,29 +22,33 @@ use namespace CoC;
 			if (flags[kFLAGS.KINDRA_ARROWS_SHOT] >= 240) cost -= 5;
 			return cost;
 		}
+		public function soulskillMulti():Number {
+			var multi:Number = 1;
+			if (findPerk(PerkLib.DaoistCultivator) >= 0) multi += 0.1;
+			if (findPerk(PerkLib.DaoistApprenticeStage) >= 0) multi += 0.2;
+			if (findPerk(PerkLib.DaoistWarriorStage) >= 0) multi += 0.3;
+			if (findPerk(PerkLib.DaoistElderStage) >= 0) multi += 0.4;
+			return multi;
+		}
 		
 		public function KindraFireBow01():void {
 			KindraFireBow();
 		}
-		
 		public function KindraFireBow02():void {
 			KindraFireBow();
 			KindraFireBow();
 		}
-		
 		public function KindraFireBow03():void {
 			KindraFireBow();
 			KindraFireBow();
 			KindraFireBow();
 		}
-		
 		public function KindraFireBow04():void {
 			KindraFireBow();
 			KindraFireBow();
 			KindraFireBow();
 			KindraFireBow();
 		}
-		
 		public function KindraFireBow05():void {
 			KindraFireBow();
 			KindraFireBow();
@@ -52,7 +56,6 @@ use namespace CoC;
 			KindraFireBow();
 			KindraFireBow();
 		}
-		
 		public function KindraFireBow06():void {
 			KindraFireBow();
 			KindraFireBow();
@@ -91,7 +94,17 @@ use namespace CoC;
 			if (flags[kFLAGS.KINDRA_AFFECTION] < 5) outputText("Sheep-morph archer");
 			if (flags[kFLAGS.KINDRA_AFFECTION] >= 5) outputText("Kindra");
 			outputText(" gulps down a bottle of sheep milk.\n");
-			if (flags[kFLAGS.KINDRA_LVL_UP] >= 7) {
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 15) {
+				fatigue -= 240;
+				if (lust >= 81) lust -= 80;
+				else lust = 0;
+			}
+			else if (flags[kFLAGS.KINDRA_LVL_UP] >= 11) {
+				fatigue -= 180;
+				if (lust >= 61) lust -= 60;
+				else lust = 0;
+			}
+			else if (flags[kFLAGS.KINDRA_LVL_UP] >= 7) {
 				fatigue -= 120;
 				if (lust >= 41) lust -= 40;
 				else lust = 0;
@@ -105,9 +118,10 @@ use namespace CoC;
 		
 		public function KindraManyBirdsSoulskill():void {
 			outputText("Kindra thrust her hand outwards with deadly intent, and in the blink of an eye a crystals shoots towards you.  Crystals hits you, dealing ");
-			var soulforcecost:int = 10;// * soulskillCost() * soulskillcostmulti()
+			var soulforcecost:int = 9;
 			soulforce -= soulforcecost;
-			var damage:Number = inteligencescalingbonus();
+			var damage:Number = wisdomscalingbonus();
+			damage *= soulskillMulti();
 			if (damage < 10) damage = 10;
 			damage = Math.round(damage);
 			player.takeMagicDamage(damage, true);
@@ -124,60 +138,66 @@ use namespace CoC;
 				if (HPRatio() > .9 || soulforce < 100) removeStatusEffect(StatusEffects.MonsterVPT);
 				else soulforce -= 100;
 			}
-			if (flags[kFLAGS.KINDRA_LVL_UP] >= 11) {
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 15) {
 				if (fatigue < (maxFatigue() - (bowShooting() * 6))) {
 					if (rand(2) == 0) {
-						KindraFireBow04();
-						if (fatigue >= 60) KindraDrinkSheepMilk();
+						if (fatigue >= 240) KindraDrinkSheepMilk();
+						else KindraFireBow04();
 					}
 					else {
 						if (rand(2) == 0) {
-							KindraFireBow05();
-							if (fatigue >= 60) KindraDrinkSheepMilk();
+							if (fatigue >= 240) KindraDrinkSheepMilk();
+							else KindraFireBow05();
 						}
 						else KindraFireBow06();
 					}
 				}
 				else {
-					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
+					if (rand(3) == 0 && fatigue >= 240) KindraDrinkSheepMilk();
 					else {
 						if (rand(2) == 0 && soulforce >= 10) KindraManyBirdsSoulskill();
 						else eAttack();
 					}
 				}
 			}
-			if (flags[kFLAGS.KINDRA_LVL_UP] == 9 || flags[kFLAGS.KINDRA_LVL_UP] == 10) {
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 11 && flags[kFLAGS.KINDRA_LVL_UP] < 15) {
 				if (fatigue < (maxFatigue() - (bowShooting() * 6))) {
 					if (rand(2) == 0) {
-						KindraFireBow04();
-						if (fatigue >= 60) KindraDrinkSheepMilk();
+						if (fatigue >= 180) KindraDrinkSheepMilk();
+						else KindraFireBow04();
 					}
 					else {
 						if (rand(2) == 0) {
-							KindraFireBow05();
-							if (fatigue >= 60) KindraDrinkSheepMilk();
+							if (fatigue >= 180) KindraDrinkSheepMilk();
+							else KindraFireBow05();
 						}
 						else KindraFireBow06();
 					}
 				}
 				else {
-					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
+					if (rand(3) == 0 && fatigue >= 180) KindraDrinkSheepMilk();
 					else {
 						if (rand(2) == 0 && soulforce >= 10) KindraManyBirdsSoulskill();
 						else eAttack();
 					}
 				}
 			}
-			if (flags[kFLAGS.KINDRA_LVL_UP] == 7 || flags[kFLAGS.KINDRA_LVL_UP] == 8) {
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 7 && flags[kFLAGS.KINDRA_LVL_UP] < 11) {
 				if (fatigue < (maxFatigue() - (bowShooting() * 6))) {
-					if (rand(2) == 0) KindraFireBow04();
+					if (rand(2) == 0) {
+						if (fatigue >= 120) KindraDrinkSheepMilk();
+						else KindraFireBow04();
+					}
 					else {
-						if (rand(2) == 0) KindraFireBow05();
+						if (rand(2) == 0) {
+							if (fatigue >= 120) KindraDrinkSheepMilk();
+							else KindraFireBow05();
+						}
 						else KindraFireBow06();
 					}
 				}
 				else {
-					if (rand(3) == 0 && fatigue >= 60) KindraDrinkSheepMilk();
+					if (rand(3) == 0 && fatigue >= 120) KindraDrinkSheepMilk();
 					else eAttack();
 				}
 			}
@@ -260,13 +280,13 @@ use namespace CoC;
 					this.weaponRangeName = "bow";
 					this.armorName = "clothes";
 				}
-				if (flags[kFLAGS.KINDRA_LVL_UP] >= 7 && flags[kFLAGS.KINDRA_LVL_UP] < 11) {
+				if (flags[kFLAGS.KINDRA_LVL_UP] >= 7 && flags[kFLAGS.KINDRA_LVL_UP] < 15) {
 					this.long = "You fight against Kindra.";//6'4"
 					this.weaponName = "sharp dagger";
 					this.weaponRangeName = "long bow";
 					this.armorName = "light leather armor";
 				}
-				if (flags[kFLAGS.KINDRA_LVL_UP] >= 11) {
+				if (flags[kFLAGS.KINDRA_LVL_UP] >= 15) {
 					this.long = "You fight against Kindra.";//6'4"
 					this.weaponName = "sharp tri-dagger";
 					this.weaponRangeName = "long composite bow";//potem jak stanie sie wiecej niż sheep-morph kolejna zmiana łuku
@@ -354,7 +374,7 @@ use namespace CoC;
 				this.level = 57;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 9) {
-				initStrTouSpeInte(140, 190, 310, 170);
+				initStrTouSpeInte(140, 190, 305, 170);
 				initWisLibSensCor(170, 90, 70, 10);
 				this.weaponAttack = 18;
 				this.weaponRangeAttack = 60;
@@ -364,7 +384,7 @@ use namespace CoC;
 				this.level = 63;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 10) {
-				initStrTouSpeInte(160, 210, 350, 180);
+				initStrTouSpeInte(160, 210, 340, 180);
 				initWisLibSensCor(180, 110, 80, 10);
 				this.weaponAttack = 19;
 				this.weaponRangeAttack = 65;
@@ -374,14 +394,74 @@ use namespace CoC;
 				this.level = 69;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 11) {
-				initStrTouSpeInte(180, 230, 390, 190);
+				initStrTouSpeInte(180, 230, 375, 190);
 				initWisLibSensCor(190, 130, 90, 10);
-				this.weaponAttack = 24;
-				this.weaponRangeAttack = 100;
-				this.armorDef = 33;
-				this.armorMDef = 12;
-				this.bonusHP = 450;
+				this.weaponAttack = 20;
+				this.weaponRangeAttack = 70;
+				this.armorDef = 24;
+				this.armorMDef = 7;
+				this.bonusHP = 400;
 				this.level = 75;
+			}
+			if (flags[kFLAGS.KINDRA_LVL_UP] == 12) {
+				initStrTouSpeInte(200, 250, 410, 200);
+				initWisLibSensCor(200, 150, 100, 10);
+				this.weaponAttack = 21;
+				this.weaponRangeAttack = 75;
+				this.armorDef = 26;
+				this.armorMDef = 8;
+				this.bonusHP = 420;
+				this.level = 81;
+			}
+			if (flags[kFLAGS.KINDRA_LVL_UP] == 13) {
+				initStrTouSpeInte(220, 270, 445, 210);
+				initWisLibSensCor(210, 170, 110, 10);
+				this.weaponAttack = 22;
+				this.weaponRangeAttack = 80;
+				this.armorDef = 28;
+				this.armorMDef = 9;
+				this.bonusHP = 440;
+				this.level = 87;
+			}
+			if (flags[kFLAGS.KINDRA_LVL_UP] == 14) {
+				initStrTouSpeInte(240, 290, 480, 220);
+				initWisLibSensCor(220, 190, 120, 10);
+				this.weaponAttack = 23;
+				this.weaponRangeAttack = 85;
+				this.armorDef = 30;
+				this.armorMDef = 10;
+				this.bonusHP = 460;
+				this.level = 93;
+			}
+			if (flags[kFLAGS.KINDRA_LVL_UP] == 15) {
+				initStrTouSpeInte(260, 310, 515, 230);
+				initWisLibSensCor(230, 210, 130, 10);
+				this.weaponAttack = 24;
+				this.weaponRangeAttack = 90;
+				this.armorDef = 45;
+				this.armorMDef = 15;
+				this.bonusHP = 480;
+				this.level = 99;
+			}
+			if (flags[kFLAGS.KINDRA_LVL_UP] == 16) {
+				initStrTouSpeInte(300, 350, 585, 250);
+				initWisLibSensCor(250, 250, 150, 10);
+				this.weaponAttack = 30;
+				this.weaponRangeAttack = 120;
+				this.armorDef = 50;
+				this.armorMDef = 17;
+				this.bonusHP = 600;
+				this.level = 105;
+			}
+			if (flags[kFLAGS.KINDRA_LVL_UP] == 17) {
+				initStrTouSpeInte(340, 390, 655, 270);
+				initWisLibSensCor(270, 290, 170, 10);
+				this.weaponAttack = 32;
+				this.weaponRangeAttack = 130;
+				this.armorDef = 55;
+				this.armorMDef = 19;
+				this.bonusHP = 650;
+				this.level = 111;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 6) {
 				this.drop = new ChainedDrop().
@@ -440,31 +520,49 @@ use namespace CoC;
 				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 7) {
-				this.createPerk(PerkLib.ArchersStaminaI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.NaturesSpringI, 0, 0, 0, 0);
 				this.createPerk(PerkLib.PrestigeJobArcaneArcher, 0, 0, 0, 0);
 				this.createPerk(PerkLib.GclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 8) {
 				this.createPerk(PerkLib.AdvancedEndurance, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToImprovedSelfControl, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 9) {
 				this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 10) {
 				this.createPerk(PerkLib.HalfStepToSuperiorEndurance, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToAdvancedSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.FclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 11) {
 				this.createPerk(PerkLib.AdvancedSelfControl, 0, 0, 0, 0);
-				this.createPerk(PerkLib.PrestigeJobSoulArcher, 0, 0, 0, 0);
+				this.createPerk(PerkLib.DaoistCultivator, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulTyrant, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 12) {
 				this.createPerk(PerkLib.SuperiorEndurance, 0, 0, 0, 0);
+				this.createPerk(PerkLib.DaoistApprenticeStage, 0, 0, 0, 0);
+				this.createPerk(PerkLib.PrestigeJobSoulArcher, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 13) {
+				this.createPerk(PerkLib.HalfStepToSuperiorSelfControl, 0, 0, 0, 0);
 				this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulKing, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 14) {
+				this.createPerk(PerkLib.HalfStepToPeerlessEndurance, 0, 0, 0, 0);
+				this.createPerk(PerkLib.DaoistWarriorStage, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 15) {
+				this.createPerk(PerkLib.SuperiorSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.DaoistElderStage, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulEmperor, 0, 0, 0, 0);
 			}
 			//if (flags[kFLAGS.KINDRA_LVL_UP] >= ) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);kiedy zacznie sie KindraQuest
 			checkMonster();

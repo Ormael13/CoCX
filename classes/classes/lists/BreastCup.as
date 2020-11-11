@@ -201,5 +201,6 @@ public class BreastCup {
 	public static const HYPER_ZZZ:int       = 197;
 	public static const HYPER_ZZZ_LARGE:int = 198;
 	public static const JACQUES00:int       = 199;
+	public static const LIA:int       		= 200;
 }
 }

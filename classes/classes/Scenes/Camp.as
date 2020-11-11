@@ -1516,8 +1516,8 @@ public class Camp extends NPCAwareContent {
 				if (model.time.hours >= 7 && model.time.hours <= 18) {
 					if (slavesCount() > 0 && rand(5) == 0) outputText("Zenji is keeping a close eye on some of your more corrupt camp members, ensuring that they don’t cause any harm.");
 					else if (player.statusEffectv2(StatusEffects.ZenjiModificationsList) >= 998700 && rand(5) == 0) outputText("Zenji is around your camp, it’s impossible to miss him as he strokes his length as cascades of cum leak from his erection.");
-					else if ((flags[kFLAGS.ZENJI_KID_1_NAME] != 0 || flags[kFLAGS.ZENJI_KID_2_NAME] != 0) && rand(5) == 0) {
-						if (rand(2) == 0) outputText("Zenji is at his bedroll, playing around with your child.");
+					else if (ZenjiScenes.Z1stKid != "" && rand(5) == 0) {
+						if (rand(2) == 0) outputText("Zenji is at his bedroll, playing around with "+(flags[kFLAGS.ZENJI_KIDS] == 1 ? ""+ZenjiScenes.Z1stKid+"":"some of the children you've made")+".");
 						else outputText("Zenji is around your camp, he remains vigilant, surveying the area for danger atop a tree.");
 					}
 					else {
@@ -1548,7 +1548,7 @@ public class Camp extends NPCAwareContent {
 					}
 				}
 				else {
-					if ((flags[kFLAGS.ZENJI_KID_1_NAME] != 0 || flags[kFLAGS.ZENJI_KID_2_NAME] != 0) && rand(5) == 0) outputText("Zenji is currently lying down on his bedroll, with your child sleeping atop his torso, as Zenji gently strokes their head.");
+					if (ZenjiScenes.Z1stKid != "" && rand(5) == 0) outputText("Zenji is currently lying down on his bedroll, with "+(flags[kFLAGS.ZENJI_KIDS] == 1 ? ""+ZenjiScenes.Z1stKid+"":"one of the children you've made")+" sleeping atop his torso, as Zenji gently strokes their head.");
 					else {
 						if (rand(4) == 0) outputText("Zenji is around your camp, he gives a small yawn before shaking himself awake.");
 						else {
@@ -3548,10 +3548,8 @@ public function wakeFromBadEnd():void {
 		//Children
 		var childPerformance:int = 0;
 		childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + izmaScene.totalIzmaChildren() + isabellaScene.totalIsabellaChildren() + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren());
-		childPerformance += (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + flags[kFLAGS.KELLY_KIDS] + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] + flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] + joyScene.getTotalLitters() + SceneLib.excelliaFollower.totalExcelliaChildren());
+		childPerformance += (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + flags[kFLAGS.KELLY_KIDS] + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] + flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] + joyScene.getTotalLitters() + SceneLib.excelliaFollower.totalExcelliaChildren() + flags[kFLAGS.ZENJI_KIDS]);
 		childPerformance += ((flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4) + (flags[kFLAGS.LYNNETTE_BABY_COUNT] / 4) + (flags[kFLAGS.ANT_KIDS] / 100) + (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] / 4) + (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] / 4) + (flags[kFLAGS.MITZI_DAUGHTERS] / 4));
-		if (flags[kFLAGS.ZENJI_KID_1_NAME] != 0) childPerformance++;
-		if (flags[kFLAGS.ZENJI_KID_2_NAME] != 0) childPerformance++;
 		performancePointsPrediction += Math.sqrt(childPerformance);
 		//Level
 		performancePointsPrediction += player.level;
@@ -3665,8 +3663,7 @@ public function wakeFromBadEnd():void {
 		if (followerKiha() && kihaFollower.totalKihaChildren() > 0) pop += kihaFollower.totalKihaChildren();
 		if (marbleFollower() && flags[kFLAGS.MARBLE_KIDS] > 0) pop += flags[kFLAGS.MARBLE_KIDS];
 		if (flags[kFLAGS.ANT_WAIFU] > 0 && (flags[kFLAGS.ANT_KIDS] > 0 || flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)) pop += (flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT]);
-		if (flags[kFLAGS.ZENJI_KID_1_NAME] != 0) pop++;
-		if (flags[kFLAGS.ZENJI_KID_2_NAME] != 0) pop++;
+		if (flags[kFLAGS.ZENJI_KIDS] > 0) pop += flags[kFLAGS.ZENJI_KIDS];
 		//------------
 		//Return number!
 		return pop;
@@ -4888,3 +4885,4 @@ public function wakeFromBadEnd():void {
         */
 	}
 }
+

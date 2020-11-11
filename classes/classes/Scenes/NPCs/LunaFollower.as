@@ -342,6 +342,66 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.LUNA_LVL_UP] = 5;
 				}
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 7 && flags[kFLAGS.LUNA_LVL_UP] == 5) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 42);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 42, 0, 0, 0);
+					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.LUNA_LVL_UP] = 6;
+				}
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.LUNA_LVL_UP] == 6) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 48);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 48, 0, 0, 0);
+					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.LUNA_LVL_UP] = 7;
+				}
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.LUNA_LVL_UP] == 7) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 54);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 54, 0, 0, 0);
+					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.LUNA_LVL_UP] = 8;
+				}
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.LUNA_LVL_UP] == 8) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 60);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 60, 0, 0, 0);
+					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.LUNA_LVL_UP] = 9;
+				}
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.LUNA_LVL_UP] == 9) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 66);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 66, 0, 0, 0);
+					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.LUNA_LVL_UP] = 10;
+				}
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.LUNA_LVL_UP] == 10) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 72);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 72, 0, 0, 0);
+					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.LUNA_LVL_UP] = 11;
+				}
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.LUNA_LVL_UP] == 11) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 78);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 78, 0, 0, 0);
+					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.LUNA_LVL_UP] = 12;
+				}
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.LUNA_LVL_UP] == 12) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 84);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 84, 0, 0, 0);
+					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.LUNA_LVL_UP] = 13;
+				}
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 15 && flags[kFLAGS.LUNA_LVL_UP] == 13) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 90);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 90, 0, 0, 0);
+					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.LUNA_LVL_UP] = 14;
+				}
+				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 16 && flags[kFLAGS.LUNA_LVL_UP] == 14) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, 96);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 96, 0, 0, 0);
+					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.LUNA_LVL_UP] = 15;
+				}
 			}
 			cleanupAfterCombat();
 			doNext(camp.returnToCampUseOneHour);
