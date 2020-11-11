@@ -50,7 +50,7 @@ public function siegweirdFirstEncounterPostFight():void
 	outputText("You kick the imp away and take the sword. You can only hope he’s still near where you last saw him.\n\n");
 	outputText("You eventually find him not too far from where you first met him. He notices you and quickly approaches, the heavy sound of his geaves smash against the ground until he halts before you.\n\n");
 	outputText("\"<i>“My sword! Thank you, you have a paladin’s deepest gratitude.”</i>\" \n\n He removes his helmet, revealing a purely white ursine face, he appears to be a polar bear. \n\n\"<i>“You may call me Siegweird, friend…”</i>\" his voice trails off slightly before his eyes regain focus onto you, \"");
-	outputText("\"<i>“And you are?”</i> \n\n You state your name. \n\n\"<i>“Wonderful, it is a pleasure to meet you, [name]. Perhaps we could venture together, I’m sure that you are wholly capable of fighting off demons as well.”</i>\"");
+	outputText("\"<i>“And you are?”</i> \n\n You state your name. \n\n\"<i>Wonderful, it is a pleasure to meet you, [name]. Perhaps we could venture together, I’m sure that you are wholly capable of fighting off demons as well.</i>\"");
 	cleanupAfterCombat();
 	if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3) siegweirdFirstEncounterPostFightAnotherFight();
 	else siegweirdFirstEncounterPostFightJoin();
@@ -94,7 +94,7 @@ public function siegweirdFirstEncounterPostFightJoinNo():void
 public function siegweirdFirstEncounterPostFightAnotherFight():void
 {
 	outputText("The suit of armor notices your demonic outlook as his helmet slowly illuminates with a brilliant golden light. You can see an enraged expression on his face before it’s too bright to see anything within his helmet.\n\n");
-	outputText("\"<i>“No! Can’t believe I was helped out by a demon! Have I been so blind? Was this all a test? NO! I WILL NOT FAIL! I WILL PURGE YOU AND YOUR CORRUPTION FROM THIS LAND, FIEND!”</i>\"");
+	outputText("\"<i>No! Can’t believe I was helped out by a demon! Have I been so blind? Was this all a test? NO! I WILL NOT FAIL! I WILL PURGE YOU AND YOUR CORRUPTION FROM THIS LAND, FIEND!”</i>\"");
 	startCombat(new Siegweird());
 }
 public function siegweirdFirstEncounterPostFightAnotherFightWon():void
