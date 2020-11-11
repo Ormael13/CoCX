@@ -2468,9 +2468,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					LunaFollower.Nursed = false;
 				}
 			}
+			if (isNightTime && !camp.IsWaitingResting){
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && (flags[kFLAGS.LUNA_JEALOUSY] >= 400 || flags[kFLAGS.LUNA_FOLLOWER] > 6) && player.gender > 0 && player.hasStatusEffect(StatusEffects.LunaWasWarned) && !player.hasStatusEffect(StatusEffects.LunaOff)) {
+					LunaFullMoonScene = true;
+					return true;
+				}
+			}
 			//Wrap it up
 			return needNext;
 		}
+
+		private var LunaFullMoonScene: Boolean = false;
 
 		public function timeChangeLarge():Boolean {
             if (rand(4) == 0 && Holidays.isHolidays() && player.gender > 0 && camp.IsSleeping && flags[kFLAGS.XMAS_CHICKEN_YEAR] < CoC.instance.date.fullYear) {
@@ -2485,11 +2493,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
                 Holidays.datTurkeyRumpMeeting(); //TURKEY SURPRISE
                 return true;
 			}
-			if (isNightTime && camp.IsWaitingResting){
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && (flags[kFLAGS.LUNA_JEALOUSY] >= 400 || flags[kFLAGS.LUNA_FOLLOWER] > 6) && player.gender > 0 && player.hasStatusEffect(StatusEffects.LunaWasWarned) && !player.hasStatusEffect(StatusEffects.LunaOff)) {
-					SceneLib.lunaFollower.fullMoonEvent(true);
-					return true;
-				}
+
+			if (LunaFullMoonScene){
+				SceneLib.lunaFollower.fullMoonEvent(true);
+				LunaFullMoonScene = false;
+				return true;
 			}
             if (checkedDream++ == 0 && camp.IsSleeping && camp.CanDream) { //You can only have one dream each night (NEEDS TO BE FIXED)
 				camp.CanDream = false;

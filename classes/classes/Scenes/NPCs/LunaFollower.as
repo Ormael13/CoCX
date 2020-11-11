@@ -2,7 +2,7 @@
  * ...
  * @author Liandri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.BodyParts.Antennae;
@@ -61,8 +61,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				resetState();
 			}
 		}
-		
-		public function LunaFollower() 
+
+		public function LunaFollower()
 		{
 			Saves.registerSaveableState(this);
 		}
@@ -80,7 +80,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (flags[kFLAGS.LUNA_JEALOUSY] < 0) flags[kFLAGS.LUNA_JEALOUSY] = 0;
 			return flags[kFLAGS.LUNA_JEALOUSY];
 		}
-		
+
 		public function mainLunaMenu():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
@@ -115,7 +115,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				addButton(14, "Leave", camp.campFollowers);
 			}
 		}
-		
+
 		public function LunaAppearance():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
@@ -131,7 +131,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function talkMenuLuna():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
@@ -206,7 +206,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			clearOutput();
 			outputText("Luna loses all color the moment she sees that expression on your face but still attempt to start the conversation.\n\n\"<i>Oh uh is something on the good " + player.mf("master","mistress") + " mind?</i>\"\n\n" +
 					"Hell that there is something, you know everything about how she's been sneakily making tons of trouble around camp in an attempt to stop anyone else from talking to you and you are not exactly happy about it.\n\n" +
-					"\"<i>But master/mistress, you have been ignoring me for weeks. I labor for you freely only wishing for the slightest acknowledgement yet you gave me none.</i>");
+					"\"<i>But " + player.mf("Master","Mistress") + ", you have been ignoring me for weeks. I labor for you freely only wishing for the slightest acknowledgement yet you gave me none.</i>");
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) outputText("\"<i>What is my unconditional love even worth to you? Am I but an object free for you to dispose of once you tire of it? What of my feelings as a person?</i>\"");
 			outputText("\n\nShe is kind of right come to think of it, you definitely have been neglecting her and this was her way of desperately attempting to draw attention to herself. " +
 					"You promise Luna that you will be more considerate of her from now on. This said she has to stop these acts of passive aggression here and now. She winces her teeth but nods.");
@@ -292,7 +292,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			outputText("Surging with newfound strenght and barely satiated your eyes now focus back on Luna, lust overwhelming your cursed body. You must have her... NOW!\n\n");
 			doNext(sexMenuDominateHer);
 		}
-		
+
 		public function sparLuna():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
@@ -364,7 +364,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			cleanupAfterCombat();
 			doNext(sexMenuDominateHer);
 		}
-		
+
 		public function mealLuna():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
@@ -389,7 +389,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
-		
+
 		public function nurseLuna():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
@@ -421,7 +421,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			outputText("You decide to leave her hanging. If she wants you to fuck her, she will have to do better than that. She’s a little frustrated by your lack of an erotic response, but does not comment on it.");
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function lunaSleepToggle():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
@@ -464,7 +464,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			menu();
 			addButton(0, "Dominate", sexMenuDominateHer);
 		}
-		
+
 		public function warrningAboutJelously():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
@@ -689,7 +689,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			cleanupAfterCombat();
 			doNext(sexMenuDominateHer);
 		}
-		
+
 		public function sexMenuMain():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
@@ -879,7 +879,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			player.sexReward("Default", "Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function sexMenuDominateHerIntro():void {
 			spriteSelect(SpriteDb.s_Luna_Mooning);
 			clearOutput();

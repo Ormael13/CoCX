@@ -964,7 +964,7 @@ public class Camp extends NPCAwareContent {
 		}
 		addButton(12, "Wait", doWaitMenu).hint("Wait for one to eigth hours. Or until the night comes.");
 		if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(12, "Rest", restMenu).hint("Rest for one to eight hours. Or until fully healed / night comes.");
-		if((isNightTime && !canExploreAtNight) || (!isNightTime && canExploreAtNight)) {
+		if(((model.time.hours <= 5 || model.time.hours >= 21) && !canExploreAtNight) || (!isNightTime && canExploreAtNight)) {
 			addButton(12, "Sleep", doSleep).hint("Turn yourself in for the night.");
 			if(isAWerewolf && flags[kFLAGS.LUNA_MOON_CYCLE] == 8) {
 				addButtonDisabled(12, "Sleep", "Try as you may you cannot find sleep tonight. The damn moon won't let you rest as your urges to hunt and fuck are on the rise.");
