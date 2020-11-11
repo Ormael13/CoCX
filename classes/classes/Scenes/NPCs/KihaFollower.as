@@ -2095,6 +2095,30 @@ private function lvlUpCheckup():void {
 			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.KIHA_LVL_UP] = 9;
 		}
+		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.KIHA_LVL_UP] == 9) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 3, 78);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 78, 0);
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 10;
+		}
+		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.KIHA_LVL_UP] == 10) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 3, 84);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 84, 0);
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 11;
+		}
+		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] == 15 && flags[kFLAGS.KIHA_LVL_UP] == 11) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 3, 90);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 90, 0);
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 12;
+		}
+		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] == 16 && flags[kFLAGS.KIHA_LVL_UP] == 12) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 3, 96);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 96, 0);
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 13;
+		}
 	}
 }
 

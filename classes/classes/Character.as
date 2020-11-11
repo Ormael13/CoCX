@@ -670,8 +670,17 @@ import classes.Items.JewelryLib;
 			if (game.player.dragonScore() >= 20) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.dragonScore() >= 28) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.foxScore() >= 7) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.kitsuneScore() >= 5 && game.player.tailType == 13 && game.player.tailCount >= 2 && game.player.tailCount < 9) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.kitsuneScore() >= 12 && game.player.tailType == 13 && game.player.tailCount == 9) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.kitsuneScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.kitsuneScore() >= 9 && game.player.tailType == 13 && game.player.tailCount >= 2) {
+				max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (game.player.kitsuneScore() >= 14 && game.player.tailCount == 9) {
+					max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+					if (game.player.kitsuneScore() >= 18 && findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0) {
+						max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+						if (game.player.kitsuneScore() >= 21) max += (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+					}
+				}
+			}
 			if (game.player.lizardScore() >= 4) max += (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.unicornScore() >= 10) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.ArchersStaminaI) >= 0) max += Math.round(spe);
@@ -829,8 +838,17 @@ import classes.Items.JewelryLib;
 			if (game.player.alicornScore() >= 12) multimax += 0.2;
 			if (game.player.dragonScore() >= 20) multimax += 0.1;
 			if (game.player.dragonScore() >= 28) multimax += 0.1;
-			if (game.player.kitsuneScore() >= 5 && game.player.tailType == 13 && game.player.tailCount >= 2 && game.player.tailCount < 9) multimax += 0.2;
-			if (game.player.kitsuneScore() >= 12 && game.player.tailType == 13 && game.player.tailCount == 9) multimax += 0.4;
+			if (game.player.kitsuneScore() >= 5) multimax += 0.1;
+			if (game.player.kitsuneScore() >= 9 && game.player.tailType == 13 && game.player.tailCount >= 2) {
+				multimax += 0.1;
+				if (game.player.kitsuneScore() >= 14 && game.player.tailCount == 9) {
+					multimax += 0.2;
+					if (game.player.kitsuneScore() >= 18 && findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0) {
+						multimax += 0.25;
+						if (game.player.kitsuneScore() >= 21) multimax += 0.35;
+					}
+				}
+			}
 			if (game.player.nekomataScore() >= 10) multimax += 0.1;
 			if (game.player.nekomataScore() >= 12 && game.player.tailType == 8 && game.player.tailCount == 2) multimax += 0.2;
 			if (game.player.unicornScore() >= 10) multimax += 0.1;

@@ -535,7 +535,7 @@ public function etnaRapeIntro2():void
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 72);
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 8;
-		}/*
+		}
 		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.ETNA_LVL_UP] == 8) {
 			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 78);
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 78);
@@ -547,7 +547,13 @@ public function etnaRapeIntro2():void
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 84);
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 10;
-		}*/
+		}
+		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 15 && flags[kFLAGS.ETNA_LVL_UP] == 10) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 90);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 90);
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 11;
+		}
 	}
 	menu();
 	if (player.lust >= 33 && player.hasCock()) addButton(0, "Yes (M)", etnaRapeYesM);

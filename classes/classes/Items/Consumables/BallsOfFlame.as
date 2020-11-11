@@ -8,6 +8,7 @@ package classes.Items.Consumables
 	import classes.PerkLib;
 	//import classes.Monster;
 	import classes.internals.Utils;
+	import classes.Scenes.SceneLib;
 
 	public class BallsOfFlame extends Consumable {
 		
@@ -42,8 +43,8 @@ package classes.Items.Consumables
 					else damage *= 2;
 				}
 				if (game.monster.findPerk(PerkLib.EnemyGroupType) >= 0) damage *= 5;
-				outputText(game.monster.capitalA + game.monster.short + " is hit with the bangball!  It breaks apart as it lacerates " + game.monster.pronoun2 + ". <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-				game.monster.HP -= damage;
+				outputText(game.monster.capitalA + game.monster.short + " is hit with the Balls of Flame!  They breaks apart as they lacerates " + game.monster.pronoun2 + ". ");
+				damage = SceneLib.combat.doFireDamage(damage, true, true);
 				if (game.monster.HP < game.monster.minHP()) game.monster.HP = game.monster.minHP() - 1;
 			}
 			return(false);

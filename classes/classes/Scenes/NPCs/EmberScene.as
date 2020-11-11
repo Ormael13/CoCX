@@ -2142,6 +2142,30 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.EMBER_LVL_UP] = 9;
 				}
+				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 13 && flags[kFLAGS.EMBER_LVL_UP] == 9) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 78);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 78, 0, 0, 0);
+					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.EMBER_LVL_UP] = 10;
+				}
+				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 14 && flags[kFLAGS.EMBER_LVL_UP] == 10) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 84);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 84, 0, 0, 0);
+					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.EMBER_LVL_UP] = 11;
+				}
+				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 15 && flags[kFLAGS.EMBER_LVL_UP] == 11) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 90);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 90, 0, 0, 0);
+					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.EMBER_LVL_UP] = 12;
+				}
+				if (flags[kFLAGS.EMBER_DEFEATS_COUNTER] == 16 && flags[kFLAGS.EMBER_LVL_UP] == 12) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 1, 96);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 96, 0, 0, 0);
+					flags[kFLAGS.EMBER_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.EMBER_LVL_UP] = 13;
+				}
 			}
 			cleanupAfterCombat();
 		}

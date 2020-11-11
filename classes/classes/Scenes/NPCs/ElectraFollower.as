@@ -299,7 +299,7 @@ public function PlayerSexElectraPostSpar():void {
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 30, 0);
 			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ELECTRA_LVL_UP] = 2;
-		}/*
+		}
 		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.ELECTRA_LVL_UP] == 2) {
 			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 36);
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 36, 0);
@@ -311,7 +311,55 @@ public function PlayerSexElectraPostSpar():void {
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 42, 0);
 			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ELECTRA_LVL_UP] = 4;
-		}*/
+		}
+		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.ELECTRA_LVL_UP] == 4) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 48);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 48, 0);
+			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ELECTRA_LVL_UP] = 5;
+		}
+		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.ELECTRA_LVL_UP] == 5) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 54);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 54, 0);
+			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ELECTRA_LVL_UP] = 6;
+		}
+		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.ELECTRA_LVL_UP] == 6) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 60);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 60, 0);
+			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ELECTRA_LVL_UP] = 7;
+		}
+		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.ELECTRA_LVL_UP] == 7) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 66);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 66, 0);
+			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ELECTRA_LVL_UP] = 8;
+		}
+		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.ELECTRA_LVL_UP] == 8) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 72);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 72, 0);
+			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ELECTRA_LVL_UP] = 9;
+		}
+		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.ELECTRA_LVL_UP] == 9) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 78);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 78, 0);
+			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ELECTRA_LVL_UP] = 10;
+		}
+		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.ELECTRA_LVL_UP] == 10) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 84);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 84, 0);
+			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ELECTRA_LVL_UP] = 11;
+		}
+		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 15 && flags[kFLAGS.ELECTRA_LVL_UP] == 11) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 90);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 90, 0);
+			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ELECTRA_LVL_UP] = 12;
+		}
 	}
 	PlayerSexElectra();
 }
