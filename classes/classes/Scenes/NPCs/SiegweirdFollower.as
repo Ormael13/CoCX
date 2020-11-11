@@ -103,7 +103,7 @@ public function siegweirdFirstEncounterPostFightAnotherFightWon():void
 	outputText("The radiance he once emitted has now faded to the dull luster of his blood-stained armor. \"<i>I was too weak…</i>\" He mumbles, not looking up to face you. \“<i>I cannot do anything… I amount to nothing… Who was I fooling..?</i>\"\n\n");
 	outputText("You approach the knight, he’s still mumbling words of self-depreciation, hardly paying any attention to you at this point. \n\n");
 	outputText("You pick him up by the helmet, his limp body does not attempt fighting back, he’s utterly defeated. His massive limbs are weighing him down, lifting him is almost a struggle as his entire body desperately clutches onto the force of gravity.\n\n");
-	outputText("He looks past you, still mumbling to himself,\"<i>I’m nothing… worthless… Marae was wrong to trust me to carry out their duties.</i>\"\n\n Is this knight going to shut up?\n\n");
+	outputText("He looks past you, still mumbling to himself,\"<i> I’m nothing… worthless… Marae was wrong to trust me to carry out their duties.</i>\"\n\n Is this knight going to shut up?\n\n");
 	outputText("You tighten your grip around him before twisting his neck with an audible snap. Finally, some peace from his mutterings.You drop his corpse onto the ground, it falls with a heavy clang. What a pity; his body lies there, now utterly lifeless. You collect his holy symbol as proof of his demise. Alvina will be content with your success.\n\n");
 	outputText("<b>You obtained Siegweird's holy symbol!</b>\n\n");
 	player.createKeyItem("Siegweird's holy symbol", 0, 0, 0, 0);
