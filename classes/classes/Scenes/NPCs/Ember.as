@@ -49,6 +49,7 @@ public class Ember extends Monster
 				else damage += ((str + weaponAttack) - rand(player.tou) - player.armorDef);
 				if (flags[kFLAGS.EMBER_LVL_UP] >= 1) damage += (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.1));
 				if (flags[kFLAGS.EMBER_LVL_UP] >= 8) damage += (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.2));
+				if (flags[kFLAGS.EMBER_LVL_UP] >= 13) damage *= (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.2));
 				if(damage <= 0) outputText("Ember's claws scrape noisily but harmlessly off your [armor].");
 				else {
 					outputText("Ember's claws rip into you, leaving stinging wounds. ");
@@ -82,6 +83,7 @@ public class Ember extends Monster
 					if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0 || player.findPerk(PerkLib.FireAffinity) >= 0) damage2 *= 1.6;
 					if (flags[kFLAGS.EMBER_LVL_UP] >= 1) damage2 *= (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.1));
 					if (flags[kFLAGS.EMBER_LVL_UP] >= 8) damage2 *= (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.2));
+					if (flags[kFLAGS.EMBER_LVL_UP] >= 13) damage2 *= (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.2));
 					damage2 = Math.round(damage2);
 					damage2 = player.takeMagicDamage(damage2, true);
 				}
@@ -107,6 +109,7 @@ public class Ember extends Monster
 				damage3 += ((str + weaponAttack + 100) - rand(player.tou) - player.armorDef);
 				if (flags[kFLAGS.EMBER_LVL_UP] >= 1) damage3 *= (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.1));
 				if (flags[kFLAGS.EMBER_LVL_UP] >= 8) damage3 *= (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.2));
+				if (flags[kFLAGS.EMBER_LVL_UP] >= 13) damage3 *= (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.2));
 				outputText("  The tail slams into you with bone-cracking force, knocking you heavily to the ground even as the spines jab you wickedly.  You gasp for breath in pain and shock, but manage to struggle to your feet again. ");
 				damage3 = player.takePhysDamage(damage3, true);
 			}
@@ -130,6 +133,7 @@ public class Ember extends Monster
 				var damage4:Number = 10 + rand(10);
 				if (flags[kFLAGS.EMBER_LVL_UP] >= 1) damage4 *= (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.1));
 				if (flags[kFLAGS.EMBER_LVL_UP] >= 8) damage4 *= (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.2));
+				if (flags[kFLAGS.EMBER_LVL_UP] >= 13) damage4 *= (1 + (flags[kFLAGS.EMBER_LVL_UP] * 0.2));
 				damage4 = player.takePhysDamage(damage4, true);
 			}
 		}
@@ -268,7 +272,7 @@ public class Ember extends Monster
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 8) {
 				initStrTouSpeInte(340, 310, 220, 210);
-				initWisLibSensCor(210, 120, 75, game.flags[kFLAGS.EMBER_COR]);
+				initWisLibSensCor(210, 130, 75, game.flags[kFLAGS.EMBER_COR]);
 				this.weaponAttack = 92;
 				this.armorDef = 210;
 				this.armorMDef = 210;
@@ -277,7 +281,7 @@ public class Ember extends Monster
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 9) {
 				initStrTouSpeInte(370, 340, 235, 225);
-				initWisLibSensCor(225, 120, 80, game.flags[kFLAGS.EMBER_COR]);
+				initWisLibSensCor(225, 140, 80, game.flags[kFLAGS.EMBER_COR]);
 				this.weaponAttack = 99;
 				this.armorDef = 230;
 				this.armorMDef = 230;
@@ -285,14 +289,41 @@ public class Ember extends Monster
 				this.level = 74;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 10) {
-				initStrTouSpeInte(410, 380, 260, 250);
-				initWisLibSensCor(250, 120, 80, game.flags[kFLAGS.EMBER_COR]);
+				initStrTouSpeInte(400, 370, 250, 240);
+				initWisLibSensCor(240, 150, 85, game.flags[kFLAGS.EMBER_COR]);
 				this.weaponAttack = 106;
-				this.armorDef = 260;
-				this.armorMDef = 260;
-				this.bonusHP = 2700;
+				this.armorDef = 250;
+				this.armorMDef = 250;
+				this.bonusHP = 2600;
 				this.level = 80;
 			}
+			if (flags[kFLAGS.EMBER_LVL_UP] == 11) {
+				initStrTouSpeInte(430, 400, 265, 255);
+				initWisLibSensCor(255, 160, 90, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 113;
+				this.armorDef = 270;
+				this.armorMDef = 270;
+				this.bonusHP = 2800;
+				this.level = 86;
+			}
+			if (flags[kFLAGS.EMBER_LVL_UP] == 12) {
+				initStrTouSpeInte(460, 430, 280, 270);
+				initWisLibSensCor(270, 170, 95, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 120;
+				this.armorDef = 290;
+				this.armorMDef = 290;
+				this.bonusHP = 3000;
+				this.level = 92;
+			}
+			if (flags[kFLAGS.EMBER_LVL_UP] == 13) {
+				initStrTouSpeInte(490, 460, 295, 285);
+				initWisLibSensCor(285, 180, 100, game.flags[kFLAGS.EMBER_COR]);
+				this.weaponAttack = 127;
+				this.armorDef = 310;
+				this.armorMDef = 310;
+				this.bonusHP = 3200;
+				this.level = 98;
+			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100
 			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = rand(8) + 70;
@@ -337,6 +368,12 @@ public class Ember extends Monster
 				this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
 				this.createPerk(PerkLib.AdvancedSelfControl, 0, 0, 0, 0);
 			}
+			if (flags[kFLAGS.EMBER_LVL_UP] >= 11) this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
+			if (flags[kFLAGS.EMBER_LVL_UP] >= 12) {
+				this.createPerk(PerkLib.LegendaryStrength, 0, 0, 0, 0);
+				this.createPerk(PerkLib.HalfStepToSuperiorSelfControl, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.EMBER_LVL_UP] >= 13) this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

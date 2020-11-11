@@ -606,8 +606,16 @@ public class HeXinDao extends BaseContent
 		else addButtonDisabled(5, "???", "Req. lvl 6+");
         if (player.level >= 24) addButton(6, consumables.BANGBM2.shortName, weaponBuy, consumables.BANGBM2);
         else addButtonDisabled(6, "???", "Req. lvl 24+");
-        if (player.level >= 42) addButton(7, consumables.BANGBM3.shortName, weaponBuy, consumables.BANGBM3);
-        else addButtonDisabled(7, "???", "Req. lvl 42+");
+        if (player.level >= 42) {
+			addButton(7, consumables.BANGBM3.shortName, weaponBuy, consumables.BANGBM3);
+			addButton(8, consumables.BALLOFL.shortName, weaponBuy, consumables.BALLOFL);
+			addButton(9, consumables.BANGBM3.shortName, weaponBuy, consumables.BANGBM3);
+		}
+        else {
+			addButtonDisabled(7, "???", "Req. lvl 42+");
+			addButtonDisabled(8, "???", "Req. lvl 42+");
+			addButtonDisabled(9, "???", "Req. lvl 42+");
+		}
         addButton(10, consumables.BANGB_M.shortName, weaponBuy, consumables.BANGB_M);
         addButton(11, consumables.W_STICK.shortName, weaponBuy, consumables.W_STICK);
         addButton(14, "Back", serenamerchant);

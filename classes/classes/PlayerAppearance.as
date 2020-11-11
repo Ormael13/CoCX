@@ -2990,7 +2990,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.hydraScore() < 1) outputText("\n<font color=\"#ff0000\">Hydra: 0</font>");
 		//INTERNAL CHIMERICAL DISPOSITION
 		if (player.internalChimeraScore() >= 1) {
-			outputText("\n<font color=\"#0000a0\">INTERNAL CHIMERICAL DISPOSITION: (" + player.internalChimeraRating() + ") " + player.internalChimeraScore() + " (+" + (5 * (1 + player.newGamePlusMod())) + "% to Str racial multi / Tou / Spe / Int / Wis / Lib)</font>");
+			outputText("\n<font color=\"#0000a0\">INTERNAL CHIMERICAL DISPOSITION: (" + player.internalChimeraRating() + ") " + player.internalChimeraScore() + " (+" + (5 * player.internalChimeraScore()) + "% to Str racial multi / Tou / Spe / Int / Wis / Lib and +" + (5 * player.internalChimeraScore()) + " to Sens)</font>");
 		} else if (player.internalChimeraScore() < 1) outputText("\nINTERNAL CHIMERICAL DISPOSITION: 0</font>");
 		//Jabberwocky
 		if (player.jabberwockyScore() >= 20) {
@@ -3010,10 +3010,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.jabberwockyScore() >= 1 && player.jabberwockyScore() < 10) outputText("\n<font color=\"#008000\">Jabberwocky: " + player.jabberwockyScore() + "</font>");
 		else if (player.jabberwockyScore() < 1) outputText("\n<font color=\"#ff0000\">Jabberwocky: 0</font>");
 		//Jiangshi
-		if (player.jiangshiScore() >= 20) {
-			outputText("\n<font color=\"#0000a0\">Jiangshi: " + player.jiangshiScore() + " (+150% to Str racial multi, -90 min Spe, -90 min Int, ");
-			outputText("+130% to Wis racial multi, +200% to Lib racial multi)</font>");
-		} else if (player.jiangshiScore() < 20) outputText("\n<font color=\"#008000\">Jiangshi: " + player.jiangshiScore() + "</font>");
+		if (player.jiangshiScore() >= 20) outputText("\n<font color=\"#0000a0\">Jiangshi: " + player.jiangshiScore() + " (+150% to Str racial multi, -90 min Spe, -90 min Int, +130% to Wis racial multi, +200% to Lib racial multi)</font>");
+		else if (player.jiangshiScore() < 20) outputText("\n<font color=\"#008000\">Jiangshi: " + player.jiangshiScore() + "</font>");
 		//Kamaitachi
 		if (player.kamaitachiScore() >= 18) outputText("\n<font color=\"#0000a0\">Greater Kamaitachi: " + player.kamaitachiScore() + " (-35% to Str racial multi, +200% to Spe racial multi, +55% to Int racial multi, +100% to Wis racial multi, +50 sens)</font>");
 		else if (player.kamaitachiScore() >= 15) outputText("\n<font color=\"#0000a0\">Kamaitachi: " + player.kamaitachiScore() + " (-20% to Str racial multi, +155% to Spe racial multi, +45% to Int racial multi, +70% to Wis racial multi, +25 sens)</font>");
@@ -3029,44 +3027,18 @@ public class PlayerAppearance extends BaseContent {
 		//else if (player.kitshooScore() >= 1 && player.kitshooScore() < 6) outputText("\n<font color=\"#008000\">Kitshoo: " + player.kitshooScore() + "</font>");
 		//else if (player.kitshooScore() < 1) outputText("\n<font color=\"#ff0000\">Kitshoo: 0</font>");
 		//Kitsune
-		if (player.kitsuneScore() >= 6) {
-			if (player.tailType == Tail.FOX && player.tailCount >= 2 && player.kitsuneScore() >= 18) {
-				if (player.tailCount < 9) outputText("\n<font color=\"#0000a0\">Kitsune:");
-				else if (player.tailCount == 9) outputText("\n<font color=\"#0000a0\">Inari:");
-				outputText(" " + player.kitsuneScore() + " (-" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (35 * (1 + player.newGamePlusMod())) + " max Spe, +" + (150 * (1 + player.newGamePlusMod())) + " max Int, +" + (150 * (1 + player.newGamePlusMod())) + " max Wis, +" + (80 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " sens,");
-				if (player.tailCount < 9) {
-					outputText("+" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue, +20% max Soulforce)</font>");
-				} else if (player.tailCount == 9) {
-					outputText("+" + (300 * (1 + player.newGamePlusMod())) + " max Fatigue, +40% max Soulforce)</font>");
+		if (player.kitsuneScore() >= 9 && player.tailType == Tail.FOX && player.tailCount >= 2) {
+			if (player.kitsuneScore() >= 14) {
+				if (player.tailCount == 9 && player.kitsuneScore() >= 18 && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+					if (player.kitsuneScore() >= 21) outputText("\n<font color=\"#0000a0\">Inari: " + player.kitsuneScore() + " (-50% to Str racial multi, +40% to Spe racial multi, +145% to Int racial multi, +160% to Wis racial multi, +80% to Lib racial multi, +60 to Sens, +" + (1000 * (1 + player.newGamePlusMod())) + " max Fatigue, +100% max Soulforce)</font>");
+					else outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune of Balance: " + player.kitsuneScore() + " (-45% to Str racial multi, +35% to Spe racial multi, +125% to Int racial multi, +140% to Wis racial multi, +60% to Lib racial multi, +45 to Sens, +" + (500 * (1 + player.newGamePlusMod())) + " max Fatigue, +65% max Soulforce)</font>");
 				}
+				else outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune: " + player.kitsuneScore() + " (-40% to Str racial multi, +30% to Spe racial multi, +95% to Int racial multi, +110% to Wis racial multi, +45% to Lib racial multi, +30 to Sens, +" + (300 * (1 + player.newGamePlusMod())) + " max Fatigue, +40% max Soulforce)</font>");
 			}
-			else if (player.tailType == Tail.FOX && player.tailCount >= 2 && player.kitsuneScore() >= 18) {
-				if (player.tailCount < 9) outputText("\n<font color=\"#0000a0\">Kitsune:");
-				else if (player.tailCount == 9) outputText("\n<font color=\"#0000a0\">Enligthened Kitsune:");
-				outputText(" " + player.kitsuneScore() + " (-" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (130 * (1 + player.newGamePlusMod())) + " max Int, +" + (130 * (1 + player.newGamePlusMod())) + " max Wis, +" + (80 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " sens, ");
-				if (player.tailCount < 9) {
-					outputText("+" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue, +20% max Soulforce)</font>");
-				} else if (player.tailCount == 9) {
-					outputText("+" + (300 * (1 + player.newGamePlusMod())) + " max Fatigue, +40% max Soulforce)</font>");
-				}
-			}
-			else if (player.tailType == Tail.FOX && player.tailCount >= 2 && player.kitsuneScore() >= 12) {
-				if (player.tailCount < 9) outputText("\n<font color=\"#0000a0\">Kitsune:");
-				else if (player.tailCount == 9) outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune:");
-				outputText(" " + player.kitsuneScore() + " (-" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Wis, +" + (50 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " sens, ");
-				if (player.tailCount < 9) {
-					outputText("+" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue, +20% max Soulforce)</font>");
-				} else if (player.tailCount == 9) {
-					outputText("+" + (300 * (1 + player.newGamePlusMod())) + " max Fatigue, +40% max Soulforce)</font>");
-				}
-			} else {
-				outputText("\n<font color=\"#0000a0\">Kitsune: " + player.kitsuneScore() + " (-" + (50 * (1 + player.newGamePlusMod())) + " max Str, +" + (30 * (1 + player.newGamePlusMod())) + " max Spe, +" + (100 * (1 + player.newGamePlusMod())) + " max Int, +" + (100 * (1 + player.newGamePlusMod())) + " max Wis, +" + (40 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " sens, ");
-				outputText("+" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue, +20% max Soulforce)</font>");
-			}
-		} else if (player.kitsuneScore() >= 5) {
-			outputText("\n<font color=\"#0000a0\">Half Kitsune: " + player.kitsuneScore() + " (-" + (35 * (1 + player.newGamePlusMod())) + " max Str, +" + (20 * (1 + player.newGamePlusMod())) + " max Spe, +" + (30 * (1 + player.newGamePlusMod())) + " max Int, +" + (35 * (1 + player.newGamePlusMod())) + " max Wis, +" + (20 * (1 + player.newGamePlusMod())) + " max Lib, +" + (50 * (1 + player.newGamePlusMod())) + " sens, ");
-			outputText("+" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue, +20% max Soulforce)</font>");
-		} else if (player.kitsuneScore() >= 1 && player.kitsuneScore() < 5) outputText("\n<font color=\"#008000\">Half Kitsune: " + player.kitsuneScore() + "</font>");
+			else outputText("\n<font color=\"#0000a0\">Kitsune: " + player.kitsuneScore() + " (-35% to Str racial multi, +25% to Spe racial multi, +60% to Int racial multi, +70% to Wis racial multi, +30% to Lib racial multi, +20 to Sens, +" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue, +20% max Soulforce)</font>");
+		}
+		else if (player.kitsuneScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Kitsune: " + player.kitsuneScore() + " (-30% to Str racial multi, +20% to Spe racial multi, +35% to Int racial multi, +40% to Wis racial multi, +25% to Lib racial multi, +15 to Sens, +" + (50 * (1 + player.newGamePlusMod())) + " max Fatigue, +10% max Soulforce)</font>");
+		else if (player.kitsuneScore() >= 1 && player.kitsuneScore() < 5) outputText("\n<font color=\"#008000\">Half Kitsune: " + player.kitsuneScore() + "</font>");
 		else if (player.kitsuneScore() < 1) outputText("\n<font color=\"#ff0000\">Half Kitsune: 0</font>");
 		//Lizard
 		if (player.lizardScore() >= 8) outputText("\n<font color=\"#0000a0\">Lizard-morph: " + player.lizardScore() + " (+70% to Tou racial multi, +50% to Int racial multi, +" + (30 * (1 + player.newGamePlusMod())) + " max Fatigue)</font>");

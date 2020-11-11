@@ -240,21 +240,6 @@ public class PerkLib
 				"Seductive experience causes your tease attacks to be 15% more effective.", null, true);
 
 		// Ordinary (levelup) perks
-		public static const Desensitization:PerkType = mk("Desensitization", "Desensitization",
-				"Negative effects of sensitivity are reduced by 5%.",
-				"You choose the 'Desensitization' perk, decreasing negative effects of sensitivity by 5%.");
-		public static const GreaterDesensitization:PerkType = mk("Greater Desensitization", "Greater Desensitization",
-				"Negative effects of sensitivity are reduced by 10%.",
-				"You choose the 'Greater Desensitization' perk, decreasing negative effects of sensitivity by 10%.");
-		public static const EpicDesensitization:PerkType = mk("Epic Desensitization", "Epic Desensitization",
-				"Negative effects of sensitivity are reduced by 15%.",
-				"You choose the 'Epic Desensitization' perk, decreasing negative effects of sensitivity by 15%.");
-		public static const LegendaryDesensitization:PerkType = mk("Legendary Desensitization", "Legendary Desensitization",
-				"Negative effects of sensitivity are reduced by 20%.",
-				"You choose the 'Legendary Desensitization' perk, decreasing negative effects of sensitivity by 20%.");
-		public static const MythicalDesensitization:PerkType = mk("Mythical Desensitization", "Mythical Desensitization",
-				"Negative effects of sensitivity are reduced by 25%.",
-				"You choose the 'Mythical Desensitization' perk, decreasing negative effects of sensitivity by 25%.");
 		public static const HexKnowledge:PerkType = mk("Hex Knowledge", "Hex Knowledge",
 				"Allow to cast hex magic spells as long corruption is 80+, locks out access to white spells and deal 20% more dmg when using black or hex magic to attack pure enemies.",
 				"You choose the 'Hex Knowledge' perk, gaining access to hex magic.");
@@ -862,6 +847,9 @@ public class PerkLib
 		public static const DemonicDesireVI:PerkType = mk("Demonic Desire VI", "Demonic Desire VI",
 				"+1 extra LP per point of libido.",
 				"You choose the 'Demonic Desire VI' perk, granting an extra maximum LP for each point of libido.");
+		public static const Desensitization:PerkType = mk("Desensitization", "Desensitization",
+				"Negative effects of sensitivity are reduced by 5%.",
+				"You choose the 'Desensitization' perk, decreasing negative effects of sensitivity by 5%.");
 		public static const DevastatingCharge:PerkType = mk("Devastating charge", "Devastating charge",
 				"When using the charge action you have a 20% chance to stun the opponent for a round. Charge is 50% more powerful.",
 				"You choose the 'Devastating charge' perk, when using the charge action you have a 20% chance to stun the opponent for a round. Charge is 50% more powerful.");
@@ -1090,6 +1078,9 @@ public class PerkLib
 		public static const EpicBrute:PerkType = mk("Epic Brute", "Epic Brute",
 				"You have improved your striking strength to epic level. (add 80 pts of phantom Str (scalable))",
 				"You choose the 'Epic Brute' perk, improving your striking strength to epic level. (add 80 pts of phantom Str (scalable))");
+		public static const EpicDesensitization:PerkType = mk("Epic Desensitization", "Epic Desensitization",
+				"Negative effects of sensitivity are reduced by 15%.",
+				"You choose the 'Epic Desensitization' perk, decreasing negative effects of sensitivity by 15%.");
 		public static const EpicDiehard:PerkType = mk("Epic Diehard", "Epic Diehard",
 				"You can't loose by HP until reaching droping into negative health larger than 8% of max HP + 800(scalable). HP limit cumulative with other Diehard perks and when below 0 HP will not longer loose 1% of max HP per turn.",
 				"You choose the 'Epic Diehard' perk, getting third upgrade of Diehard effect.");
@@ -1368,6 +1359,9 @@ public class PerkLib
 		public static const GreaterCrinosShape:PerkType = mk("Greater Crinos Shape", "Greater Crinos Shape",
 				"Crinos Shape increase to physical might rise to 80% of str/tou/spe.",
 				"You choose the 'Greater Crinos Shape' perk, gaining another increase to phys stats boost in Crinos Shape (+80%).");
+		public static const GreaterDesensitization:PerkType = mk("Greater Desensitization", "Greater Desensitization",
+				"Negative effects of sensitivity are reduced by 10%.",
+				"You choose the 'Greater Desensitization' perk, decreasing negative effects of sensitivity by 10%.");
 		public static const GreaterDiehard:PerkType = mk("Greater Diehard", "Greater Diehard",
 				"You can't loose by HP until reaching droping into negative health larger than 6% of max HP + 600(scalable). HP limit cumulative with other Diehard perks.",
 				"You choose the 'Greater Diehard' perk, getting second increase to limit of maintaining Diehard effects.");
@@ -1800,6 +1794,9 @@ public class PerkLib
 		public static const LegendaryBrute:PerkType = mk("Legendary Brute", "Legendary Brute",
 				"You have improved your striking strength to epic level. (add 100 pts of phantom Str (scalable))",
 				"You choose the 'Legendary Brute' perk, improving your striking strength to epic level. (add 100 pts of phantom Str (scalable))");
+		public static const LegendaryDesensitization:PerkType = mk("Legendary Desensitization", "Legendary Desensitization",
+				"Negative effects of sensitivity are reduced by 20%.",
+				"You choose the 'Legendary Desensitization' perk, decreasing negative effects of sensitivity by 20%.");
 		public static const LegendaryEndurance:PerkType = mk("Legendary Endurance", "Legendary Endurance",
 				"Increases maximum fatigue by 10000.",
 				"You choose the 'Legendary Endurance' perk. Thanks to your legendary physical conditioning, your maximum fatigue has been increased by 10000!");
@@ -2077,6 +2074,9 @@ public class PerkLib
 		public static const MythicalBrute:PerkType = mk("Mythical Brute", "Mythical Brute",
 				"You have improved your striking strength to epic level. (add 120 pts of phantom Str (scalable))",
 				"You choose the 'Mythical Brute' perk, improving your striking strength to epic level. (add 120 pts of phantom Str (scalable))");
+		public static const MythicalDesensitization:PerkType = mk("Mythical Desensitization", "Mythical Desensitization",
+				"Negative effects of sensitivity are reduced by 25%.",
+				"You choose the 'Mythical Desensitization' perk, decreasing negative effects of sensitivity by 25%.");
 		public static const MythicalEndurance:PerkType = mk("Mythical Endurance", "Mythical Endurance",
 				"Increases maximum fatigue by 20000.",
 				"You choose the 'Mythical Endurance' perk. Thanks to your mythical physical conditioning, your maximum fatigue has been increased by 20000!");

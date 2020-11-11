@@ -650,19 +650,31 @@ public function sparringWithCeaniWon():void
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 66, 0);
 			flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.CEANI_LVL_UP] = 5;
-		}/*
-		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 12 && flags[kFLAGS.CEANI_LVL_UP] == 4) {
+		}
+		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 12 && flags[kFLAGS.CEANI_LVL_UP] == 5) {
 			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, 72);
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 72, 0);
 			flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.CEANI_LVL_UP] = 6;
 		}
-		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 13 && flags[kFLAGS.CEANI_LVL_UP] == 4) {
+		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 13 && flags[kFLAGS.CEANI_LVL_UP] == 6) {
 			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, 78);
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 78, 0);
 			flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.CEANI_LVL_UP] = 7;
-		}*/
+		}
+		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 14 && flags[kFLAGS.CEANI_LVL_UP] == 7) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, 84);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 84, 0);
+			flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.CEANI_LVL_UP] = 8;
+		}
+		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 15 && flags[kFLAGS.CEANI_LVL_UP] == 8) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, 90);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 90, 0);
+			flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.CEANI_LVL_UP] = 9;
+		}
 	}
 	cleanupAfterCombat();
 }

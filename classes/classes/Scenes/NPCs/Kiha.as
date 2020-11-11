@@ -35,6 +35,7 @@ public class Kiha extends Monster
 				damage += 5;
 				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
 				if (flags[kFLAGS.KIHA_LVL_UP] >= 8) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.2));
+				if (flags[kFLAGS.KIHA_LVL_UP] >= 13) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.3));
 				damage = Math.round(damage);
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 					player.addStatusValue(StatusEffects.Blizzard, 1, -1);
@@ -77,6 +78,7 @@ public class Kiha extends Monster
 				var damage:int = int((str) - (player.armorDef));
 				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
 				if (flags[kFLAGS.KIHA_LVL_UP] >= 8) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.2));
+				if (flags[kFLAGS.KIHA_LVL_UP] >= 13) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.3));
 				damage = Math.round(damage);
 				outputText("Before you can react, you're struck by the power of her blows, feeling an intense pain in your chest as each fist makes contact.  With a final thrust, you're pushed backwards onto the ground; the dragoness smiles as she pulls her axe out of the ground, her hands still steaming from the fingertips. ");
 				damage = player.takeFireDamage(damage, true);
@@ -106,6 +108,7 @@ public class Kiha extends Monster
 				var damage:Number = Math.round(90 + rand(10) + (player.newGamePlusMod() * 30));
 				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
 				if (flags[kFLAGS.KIHA_LVL_UP] >= 8) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.2));
+				if (flags[kFLAGS.KIHA_LVL_UP] >= 13) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.3));
 				damage = Math.round(damage);
 				outputText("You try to avoid the flames, but you're too slow!  The inferno slams into you, setting you alight!  You drop and roll on the ground, putting out the fires as fast as you can.  As soon as the flames are out, you climb back up, smelling of smoke and soot. ");
 				damage = player.takeFireDamage(damage, true);
@@ -141,6 +144,7 @@ public class Kiha extends Monster
 			var flame:int = level + rand(6);
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) flame *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 8) flame *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.2));
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 13) flame *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.3));
 			flame = Math.round(flame);
 			outputText("\nAn afterwash of flames trails behind her blow, immolating you! ");
 			flame = player.takeFireDamage(flame, true);
@@ -303,6 +307,42 @@ public class Kiha extends Monster
 				this.bonusHP = 1800;
 				this.level = 75;
 			}
+			if (flags[kFLAGS.KIHA_LVL_UP] == 10) {
+				initStrTouSpeInte(335, 330, 335, 160);
+				initWisLibSensCor(160, 250, 135, 66);
+				this.weaponAttack = 128;
+				this.armorDef = 185;
+				this.armorMDef = 75;
+				this.bonusHP = 2000;
+				this.level = 81;
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] == 11) {
+				initStrTouSpeInte(360, 355, 360, 170);
+				initWisLibSensCor(170, 270, 135, 66);
+				this.weaponAttack = 138;
+				this.armorDef = 200;
+				this.armorMDef = 80;
+				this.bonusHP = 2200;
+				this.level = 87;
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] == 12) {
+				initStrTouSpeInte(385, 380, 385, 180);
+				initWisLibSensCor(180, 290, 135, 66);
+				this.weaponAttack = 148;
+				this.armorDef = 215;
+				this.armorMDef = 85;
+				this.bonusHP = 2400;
+				this.level = 93;
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] == 13) {
+				initStrTouSpeInte(410, 405, 410, 190);
+				initWisLibSensCor(190, 310, 135, 66);
+				this.weaponAttack = 158;
+				this.armorDef = 230;
+				this.armorMDef = 90;
+				this.bonusHP = 2600;
+				this.level = 99;
+			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100
 			this.weaponName = "double-bladed axe";
 			this.weaponVerb="fiery cleave";
 			this.armorName = "thick scales";
@@ -350,21 +390,25 @@ public class Kiha extends Monster
 				this.createPerk(PerkLib.HalfStepToAdvancedTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 9) {
-				//this.createPerk(PerkLib., 0, 0, 0, 0);
+				this.createPerk(PerkLib.LizanMarrowEvolved, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicLibido, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 10) {
 				this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 				this.createPerk(PerkLib.AdvancedTranquilness, 0, 0, 0, 0);
-			}/*
+			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 11) {
-				this.createPerk(PerkLib., 0, 0, 0, 0);
-				this.createPerk(PerkLib., 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicLifeline, 0, 0, 0, 0);
+				this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 12) {
-				this.createPerk(PerkLib.LizanMarrowEvolved, 0, 0, 0, 0);
-				this.createPerk(PerkLib., 0, 0, 0, 0);
-			}*/
+				this.createPerk(PerkLib.LizanMarrowFinalForm, 0, 0, 0, 0);
+				this.createPerk(PerkLib.HalfStepToSuperiorTranquilness, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 13) {
+				this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
+				this.createPerk(PerkLib.LegendaryLibido, 0, 0, 0, 0);
+			}
 			this.createPerk(PerkLib.Lifeline, 0, 0, 0, 0);
 			checkMonster();
 		}

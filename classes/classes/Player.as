@@ -3112,7 +3112,7 @@ use namespace CoC;
 			}
 			if (TopRace == "kitsune") {
 				if (TopScore >= 5) {
-					if (tailType == 13 && tailCount >= 2 && kitsuneScore() >= 6) {
+					if (tailType == 13 && tailCount >= 2 && kitsuneScore() >= 9) {
 						if (TopScore >= 21) {
 							if (tailCount == 9 && isTaur()) {
 								race = "Inari-taur";
@@ -3123,13 +3123,13 @@ use namespace CoC;
 							}
 						} else if (TopScore >= 18) {
 							if (tailCount == 9 && isTaur()) {
-								race = "Enlightened nine tailed kitsune-taur";
+								race = "nine tailed kitsune-taur of balance";
 							} else if (tailCount == 9) {
-								race = "Enlightened nine tailed kitsune";
+								race = "nine tailed kitsune of balance";
 							} else {
 								race = "kitsune";
 							}
-						} else if (TopScore >= 12) {
+						} else if (TopScore >= 14) {
 							if (tailCount == 9 && isTaur()) {
 								race = "nine tailed kitsune-taur";
 							} else if (tailCount == 9) {
@@ -4200,7 +4200,7 @@ use namespace CoC;
 				chimeraCounter++;
 //			if (ferretScore() >= 4)
 //				chimeraCounter++;
-			if (kitsuneScore() >= 6 && tailType == 13 && tailCount >= 2)
+			if (kitsuneScore() >= 9 && tailType == 13 && tailCount >= 2)
 				chimeraCounter++;
 			if (horseScore() >= 7)
 				chimeraCounter++;
@@ -4343,7 +4343,7 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (ferretScore() >= 4)
 				grandchimeraCounter++;
-			if (kitsuneScore() >= 12 && tailType == 13 && tailCount == 9)
+			if (kitsuneScore() >= 14 && tailType == 13 && tailCount == 9)
 				grandchimeraCounter++;
 			if (demonScore() >= 16 && hasPerk(PerkLib.Phylactery))
 				grandchimeraCounter++;
@@ -10516,37 +10516,49 @@ use namespace CoC;
 				}
 			}//+20/10-20
 			if (kitsuneScore() >= 5) {
-				if (kitsuneScore() >= 21 && tailType == 13 && tailCount == 9) {
-					maxStrCap2 -= 50;
-					maxSpeCap2 += 35;
-					maxIntCap2 += 150;
-					maxWisCap2 += 150;
-					maxLibCap2 += 80;
-					minSen += 50;
-				}
-				if (kitsuneScore() >= 18 && tailType == 13 && tailCount == 9) {
-					maxStrCap2 -= 50;
-					maxSpeCap2 += 30;
-					maxIntCap2 += 130;
-					maxWisCap2 += 130;
-					maxLibCap2 += 80;
-					minSen += 50;
-				}
-				if (kitsuneScore() >= 12 && tailType == 13 && tailCount == 9) {
-					maxStrCap2 -= 50;
-					maxSpeCap2 += 30;
-					maxIntCap2 += 100;
-					maxWisCap2 += 100;
-					maxLibCap2 += 50;
-					minSen += 50;
+				if (kitsuneScore() >= 9 && tailType == 13 && tailCount >= 2) {
+					if (kitsuneScore() >= 14 && tailCount == 9) {
+						if (kitsuneScore() >= 21 && findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+							maxStrCap2 -= 50;
+							maxSpeCap2 += 40;
+							maxIntCap2 += 145;
+							maxWisCap2 += 160;
+							maxLibCap2 += 80;
+							minSen += 60;
+						}//315(425)
+						else if (kitsuneScore() >= 18 && findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+							maxStrCap2 -= 45;
+							maxSpeCap2 += 35;
+							maxIntCap2 += 125;
+							maxWisCap2 += 140;
+							maxLibCap2 += 60;
+							minSen += 45;
+						}
+						else {
+							maxStrCap2 -= 40;
+							maxSpeCap2 += 30;
+							maxIntCap2 += 95;
+							maxWisCap2 += 110;
+							maxLibCap2 += 45;
+							minSen += 30;
+						}
+					}
+					else {
+						maxStrCap2 -= 35;
+						maxSpeCap2 += 25;
+						maxIntCap2 += 60;
+						maxWisCap2 += 70;
+						maxLibCap2 += 30;
+						minSen += 20;
+					}
 				}
 				else {
-					maxStrCap2 -= 35;
+					maxStrCap2 -= 30;
 					maxSpeCap2 += 20;
 					maxIntCap2 += 35;
-					maxWisCap2 += 35;
-					maxLibCap2 += 20;
-					minSen += 50;
+					maxWisCap2 += 40;
+					maxLibCap2 += 25;
+					minSen += 15;
 				}
 			}//+50/50-60
 		/*	if (kitshooScore() >= 6) {
@@ -12404,3 +12416,4 @@ use namespace CoC;
 		}
 	}
 }
+

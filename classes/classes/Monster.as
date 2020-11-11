@@ -1252,12 +1252,6 @@ import flash.utils.getQualifiedClassName;
 
 		public function Monster()
 		{
-			this.strStat.core.max = Infinity;
-			this.speStat.core.max = Infinity;
-			this.touStat.core.max = Infinity;
-			this.intStat.core.max = Infinity;
-			this.wisStat.core.max = Infinity;
-			this.libStat.core.max = Infinity;
 			// trace("Generic Monster Constructor!");
 
 			//// INSTRUCTIONS
@@ -3118,6 +3112,8 @@ import flash.utils.getQualifiedClassName;
 		}
 		public function prepareForCombat():void {
 			var bonusStatsAmp:Number = 0.2;
+			if (hasPerk(PerkLib.MantislikeAgility)) this.speStat.core.value += (10 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.MantislikeAgilityEvolved)) this.speStat.core.value += (20 * (1 + newGamePlusMod()));
 			if (level > 25) bonusStatsAmp += 0.1*((int)(level-1)/25);
 			bonusAscStr += bonusStatsAmp * str * newGamePlusMod();
 			bonusAscTou += bonusStatsAmp * tou * newGamePlusMod();

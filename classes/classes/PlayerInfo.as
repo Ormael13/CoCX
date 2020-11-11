@@ -539,6 +539,7 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.AURORA_LVL] >= 1) {
 			//interpersonStats += "<b>Aurora:</b> " + Math.round(flags[kFLAGS.GALIA_AFFECTION]) + "%\n";
+			/*if (flags[kFLAGS.AURORA_LVL] == 14) interpersonStats += "<b>Aurora lvl:</b> 79\n";
 			if (flags[kFLAGS.AURORA_LVL] == 13) interpersonStats += "<b>Aurora lvl:</b> 73\n";
 			if (flags[kFLAGS.AURORA_LVL] == 12) interpersonStats += "<b>Aurora lvl:</b> 67\n";
 			if (flags[kFLAGS.AURORA_LVL] == 11) interpersonStats += "<b>Aurora lvl:</b> 61\n";
@@ -547,7 +548,7 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.AURORA_LVL] == 8) interpersonStats += "<b>Aurora lvl:</b> 43\n";
 			if (flags[kFLAGS.AURORA_LVL] == 7) interpersonStats += "<b>Aurora lvl:</b> 37\n";
 			if (flags[kFLAGS.AURORA_LVL] == 6) interpersonStats += "<b>Aurora lvl:</b> 31\n";
-			if (flags[kFLAGS.AURORA_LVL] == 5) interpersonStats += "<b>Aurora lvl:</b> 25\n";
+			if (flags[kFLAGS.AURORA_LVL] == 5) interpersonStats += "<b>Aurora lvl:</b> 25\n";*/
 			if (flags[kFLAGS.AURORA_LVL] == 4) interpersonStats += "<b>Aurora lvl:</b> 19\n";
 			if (flags[kFLAGS.AURORA_LVL] == 3) interpersonStats += "<b>Aurora lvl:</b> 13\n";
 			if (flags[kFLAGS.AURORA_LVL] == 2) interpersonStats += "<b>Aurora lvl:</b> 7\n";
@@ -561,6 +562,10 @@ public class PlayerInfo extends BaseContent {
         if (flags[kFLAGS.CEANI_AFFECTION] > 0)
 			interpersonStats += "<b>Ceani Affection:</b> " + Math.round(flags[kFLAGS.CEANI_AFFECTION]) + "%\n";
 			if (flags[kFLAGS.CEANI_FOLLOWER] == 1) {
+				if (flags[kFLAGS.CEANI_LVL_UP] == 9) interpersonStats += "<b>Ceani lvl:</b> 98\n";
+				if (flags[kFLAGS.CEANI_LVL_UP] == 8) interpersonStats += "<b>Ceani lvl:</b> 92\n";
+				if (flags[kFLAGS.CEANI_LVL_UP] == 7) interpersonStats += "<b>Ceani lvl:</b> 86\n";
+				if (flags[kFLAGS.CEANI_LVL_UP] == 6) interpersonStats += "<b>Ceani lvl:</b> 80\n";
 				if (flags[kFLAGS.CEANI_LVL_UP] == 5) interpersonStats += "<b>Ceani lvl:</b> 74\n";
 				if (flags[kFLAGS.CEANI_LVL_UP] == 4) interpersonStats += "<b>Ceani lvl:</b> 68\n";
 				if (flags[kFLAGS.CEANI_LVL_UP] == 3) interpersonStats += "<b>Ceani lvl:</b> 60\n";
@@ -621,6 +626,9 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.ETNA_AFFECTION] > 0) {
 			interpersonStats += "<b>Etna Affection:</b> " + Math.round(flags[kFLAGS.ETNA_AFFECTION]) + "%\n";
+			if (flags[kFLAGS.ETNA_LVL_UP] == 11) interpersonStats += "<b>Etna lvl:</b> 96\n";
+			if (flags[kFLAGS.ETNA_LVL_UP] == 10) interpersonStats += "<b>Etna lvl:</b> 90\n";
+			if (flags[kFLAGS.ETNA_LVL_UP] == 9) interpersonStats += "<b>Etna lvl:</b> 84\n";
 			if (flags[kFLAGS.ETNA_LVL_UP] == 8) interpersonStats += "<b>Etna lvl:</b> 78\n";
 			if (flags[kFLAGS.ETNA_LVL_UP] == 7) interpersonStats += "<b>Etna lvl:</b> 72\n";
 			if (flags[kFLAGS.ETNA_LVL_UP] == 6) interpersonStats += "<b>Etna lvl:</b> 66\n";
@@ -634,6 +642,12 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.ELECTRA_AFFECTION] > 0)
 			interpersonStats += "<b>Electra Affection:</b> " + Math.round(flags[kFLAGS.ELECTRA_AFFECTION]) + "%\n";
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 12) interpersonStats += "<b>Electra lvl:</b> 96\n";
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 11) interpersonStats += "<b>Electra lvl:</b> 90\n";
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 10) interpersonStats += "<b>Electra lvl:</b> 84\n";
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 9) interpersonStats += "<b>Electra lvl:</b> 78\n";
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 8) interpersonStats += "<b>Electra lvl:</b> 72\n";
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 7) interpersonStats += "<b>Electra lvl:</b> 66\n";
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 6) interpersonStats += "<b>Electra lvl:</b> 60\n";
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 5) interpersonStats += "<b>Electra lvl:</b> 54\n";
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 4) interpersonStats += "<b>Electra lvl:</b> 48\n";
@@ -643,7 +657,11 @@ public class PlayerInfo extends BaseContent {
 
 		if (SceneLib.emberScene.emberAffection() > 0) {
             interpersonStats += "<b>Ember Affection:</b> " + Math.round(SceneLib.emberScene.emberAffection()) + "%\n";
-            if (flags[kFLAGS.EMBER_LVL_UP] == 9) interpersonStats += "<b>Ember lvl:</b> 74\n";
+            if (flags[kFLAGS.EMBER_LVL_UP] == 13) interpersonStats += "<b>Ember lvl:</b> 98\n";
+			if (flags[kFLAGS.EMBER_LVL_UP] == 12) interpersonStats += "<b>Ember lvl:</b> 92\n";
+			if (flags[kFLAGS.EMBER_LVL_UP] == 11) interpersonStats += "<b>Ember lvl:</b> 86\n";
+			if (flags[kFLAGS.EMBER_LVL_UP] == 10) interpersonStats += "<b>Ember lvl:</b> 80\n";
+			if (flags[kFLAGS.EMBER_LVL_UP] == 9) interpersonStats += "<b>Ember lvl:</b> 74\n";
 			if (flags[kFLAGS.EMBER_LVL_UP] == 8) interpersonStats += "<b>Ember lvl:</b> 68\n";
 			if (flags[kFLAGS.EMBER_LVL_UP] == 7) interpersonStats += "<b>Ember lvl:</b> 62\n";
 			if (flags[kFLAGS.EMBER_LVL_UP] == 6) interpersonStats += "<b>Ember lvl:</b> 56\n";
@@ -675,6 +693,10 @@ public class PlayerInfo extends BaseContent {
                 interpersonStats += Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n";
 			else
 				interpersonStats += "100%\n";
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 13) interpersonStats += "<b>Isabella lvl:</b> 98\n";
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 12) interpersonStats += "<b>Isabella lvl:</b> 92\n";
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 11) interpersonStats += "<b>Isabella lvl:</b> 86\n";
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 10) interpersonStats += "<b>Isabella lvl:</b> 80\n";
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 9) interpersonStats += "<b>Isabella lvl:</b> 74\n";
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 8) interpersonStats += "<b>Isabella lvl:</b> 68\n";
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 7) interpersonStats += "<b>Isabella lvl:</b> 62\n";
@@ -712,6 +734,10 @@ public class PlayerInfo extends BaseContent {
                 interpersonStats += "<b>Kiha Affection:</b> " + 100 + "%\n";
 			else
 				interpersonStats += "<b>Kiha Affection:</b> " + Math.round(flags[kFLAGS.KIHA_AFFECTION]) + "%\n";
+			if (flags[kFLAGS.KIHA_LVL_UP] == 13) interpersonStats += "<b>Kiha lvl:</b> 99\n";
+			if (flags[kFLAGS.KIHA_LVL_UP] == 12) interpersonStats += "<b>Kiha lvl:</b> 93\n";
+			if (flags[kFLAGS.KIHA_LVL_UP] == 11) interpersonStats += "<b>Kiha lvl:</b> 87\n";
+			if (flags[kFLAGS.KIHA_LVL_UP] == 10) interpersonStats += "<b>Kiha lvl:</b> 81\n";
 			if (flags[kFLAGS.KIHA_LVL_UP] == 9) interpersonStats += "<b>Kiha lvl:</b> 75\n";
 			if (flags[kFLAGS.KIHA_LVL_UP] == 8) interpersonStats += "<b>Kiha lvl:</b> 69\n";
 			if (flags[kFLAGS.KIHA_LVL_UP] == 7) interpersonStats += "<b>Kiha lvl:</b> 63\n";
@@ -884,6 +910,8 @@ public class PlayerInfo extends BaseContent {
 
 		// Begin Outside camp NPC's Stats
 		var outsideCampNpcsStats:String = "";
+		if (flags[kFLAGS.AKBAL_LVL_UP] == 13) outsideCampNpcsStats += "<b>Akbal lvl:</b> 98\n";
+		if (flags[kFLAGS.AKBAL_LVL_UP] == 12) outsideCampNpcsStats += "<b>Akbal lvl:</b> 92\n";
 		if (flags[kFLAGS.AKBAL_LVL_UP] == 11) outsideCampNpcsStats += "<b>Akbal lvl:</b> 86\n";
 		if (flags[kFLAGS.AKBAL_LVL_UP] == 10) outsideCampNpcsStats += "<b>Akbal lvl:</b> 80 (current max lvl he can reach)\n";
 		if (flags[kFLAGS.AKBAL_LVL_UP] == 9) outsideCampNpcsStats += "<b>Akbal lvl:</b> 74\n";
@@ -908,6 +936,7 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.IZUMI_LVL_UP] == 2) outsideCampNpcsStats += "<b>Izumi lvl:</b> 42\n";
 		if (flags[kFLAGS.IZUMI_LVL_UP] == 1) outsideCampNpcsStats += "<b>Izumi lvl:</b> 36\n";
 		if (flags[kFLAGS.IZUMI_LVL_UP] < 1) outsideCampNpcsStats += "<b>Izumi lvl:</b> 30\n";
+		if (flags[kFLAGS.MINERVA_LVL_UP] == 12) outsideCampNpcsStats += "<b>Minerva lvl:</b> 95\n";
 		if (flags[kFLAGS.MINERVA_LVL_UP] == 11) outsideCampNpcsStats += "<b>Minerva lvl:</b> 89\n";
 		if (flags[kFLAGS.MINERVA_LVL_UP] == 10) outsideCampNpcsStats += "<b>Minerva lvl:</b> 83 (current max lvl she can reach)\n";
 		if (flags[kFLAGS.MINERVA_LVL_UP] == 9) outsideCampNpcsStats += "<b>Minerva lvl:</b> 77\n";
