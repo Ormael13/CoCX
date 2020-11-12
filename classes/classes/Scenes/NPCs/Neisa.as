@@ -15,23 +15,6 @@ import classes.Scenes.SceneLib;
 		
 		public function Neisa() 
 		{//  She's snarling at you from behind her massive shield, stamping her hooves in irritation as she prepares to lay into you.  Her skin is dusky, nearly chocolate except for a few white spots spattered over her body.  She wears a tight silk shirt and a corset that barely supports her bountiful breasts, but it's hard to get a good look at them behind her giant shield.
-			this.a = "";
-			this.short = "Neisa";
-			this.imageName = "Neisa";
-			this.long = "Neisa is a seven foot tall, raven-haired shield maiden.";
-			// this.plural = false;
-			this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
-			this.createStatusEffect(StatusEffects.BonusVCapacity, 45, 0, 0, 0);
-			createBreastRow(Appearance.breastCupInverse("I"));
-			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
-			this.createStatusEffect(StatusEffects.BonusACapacity,38,0,0,0);
-			this.tallness = 7*12+6;
-			this.hips.type = Hips.RATING_CURVY + 2;
-			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "dusky";
-			this.hairColor = "red";
-			this.hairLength = 13;
 			if (flags[kFLAGS.NEISA_LVL_UP] == 1) {
 				initStrTouSpeInte(50, 80, 50, 44);
 				initWisLibSensCor(44, 52, 25, 50);
@@ -68,6 +51,77 @@ import classes.Scenes.SceneLib;
 				this.bonusHP = 800;
 				this.level = 21;
 			}
+			if (flags[kFLAGS.NEISA_LVL_UP] == 5) {
+				initStrTouSpeInte(110, 168, 90, 76);
+				initWisLibSensCor(76, 76, 45, 50);
+				this.weaponAttack = 24;
+				this.armorDef = 32;
+				this.armorMDef = 8;
+				this.bonusHP = 1000;
+				this.level = 27;
+			}
+			if (flags[kFLAGS.NEISA_LVL_UP] == 6) {
+				initStrTouSpeInte(125, 190, 100, 84);
+				initWisLibSensCor(84, 82, 50, 50);
+				this.weaponAttack = 27;
+				this.armorDef = 40;
+				this.armorMDef = 10;
+				this.bonusHP = 1200;
+				this.level = 33;
+			}
+			if (flags[kFLAGS.NEISA_LVL_UP] == 7) {
+				initStrTouSpeInte(140, 212, 110, 92);
+				initWisLibSensCor(92, 88, 55, 50);
+				this.weaponAttack = 30;
+				this.armorDef = 48;
+				this.armorMDef = 12;
+				this.bonusHP = 1400;
+				this.level = 39;
+			}
+			if (flags[kFLAGS.NEISA_LVL_UP] == 8) {
+				initStrTouSpeInte(155, 234, 120, 100);
+				initWisLibSensCor(100, 94, 60, 50);
+				this.weaponAttack = 33;
+				this.armorDef = 56;
+				this.armorMDef = 14;
+				this.bonusHP = 1600;
+				this.level = 45;
+			}
+			if (flags[kFLAGS.NEISA_LVL_UP] == 9) {
+				initStrTouSpeInte(170, 256, 130, 108);
+				initWisLibSensCor(108, 100, 65, 50);
+				this.weaponAttack = 36;
+				this.armorDef = 64;
+				this.armorMDef = 16;
+				this.bonusHP = 1800;
+				this.level = 51;
+			}
+			if (flags[kFLAGS.NEISA_LVL_UP] == 10) {
+				initStrTouSpeInte(185, 278, 140, 116);
+				initWisLibSensCor(116, 106, 70, 50);
+				this.weaponAttack = 39;
+				this.armorDef = 72;
+				this.armorMDef = 18;
+				this.bonusHP = 2000;
+				this.level = 57;
+			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear) (also makes npc use new better gear)
+			this.a = "";
+			this.short = "Neisa";
+			this.imageName = "Neisa";
+			this.long = "Neisa is a seven foot tall, raven-haired shield maiden.";
+			// this.plural = false;
+			this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 45, 0, 0, 0);
+			createBreastRow(Appearance.breastCupInverse("I"));
+			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.createStatusEffect(StatusEffects.BonusACapacity,38,0,0,0);
+			this.tallness = 7*12+6;
+			this.hips.type = Hips.RATING_CURVY + 2;
+			this.butt.type = Butt.RATING_LARGE + 1;
+			this.skinTone = "dusky";
+			this.hairColor = "red";
+			this.hairLength = 13;
 			this.weaponName = "bastard sword and giant shield";
 			this.weaponVerb="slash";
 			this.armorName = "heavy plate armor";
@@ -89,34 +143,44 @@ import classes.Scenes.SceneLib;
 			this.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.LizanMarrow, 0, 0, 0, 0);
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 2) {
-				this.createPerk(PerkLib.CatlikeNimblenessEvolved, 0, 0, 0, 0);
-				this.createPerk(PerkLib.GorgonsEyesEvolved, 0, 0, 0, 0);
-				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 3) {
+				this.createPerk(PerkLib.CatlikeNimblenessEvolved, 0, 0, 0, 0);
+				this.createPerk(PerkLib.GorgonsEyesEvolved, 0, 0, 0, 0);
 				this.createPerk(PerkLib.DraconicLungsEvolved, 0, 0, 0, 0);
 				this.createPerk(PerkLib.LizanMarrowEvolved, 0, 0, 0, 0);
-				this.createPerk(PerkLib.OniMusculatureEvolved, 0, 0, 0, 0);
-				this.createPerk(PerkLib.OrcAdrenalGlandsEvolved, 0, 0, 0, 0);
-				this.createPerk(PerkLib.PigBoarFatEvolved, 0, 0, 0, 0);
-			}//nastepny lvl-up bedzie problemem z brakującymi stopniami perków rasowych :(
+			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 4) {
-				this.createPerk(PerkLib.LactaBovinaOvariesEvolved, 0, 0, 0, 0);
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 5) {
+				this.createPerk(PerkLib.OniMusculatureEvolved, 0, 0, 0, 0);
+				this.createPerk(PerkLib.OrcAdrenalGlandsEvolved, 0, 0, 0, 0);
+				this.createPerk(PerkLib.PigBoarFatEvolved, 0, 0, 0, 0);
+				this.createPerk(PerkLib.LactaBovinaOvariesEvolved, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.NEISA_LVL_UP] >= 6) {
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
-			if (flags[kFLAGS.NEISA_LVL_UP] >= 6) {
+			if (flags[kFLAGS.NEISA_LVL_UP] >= 7) {
 				this.createPerk(PerkLib.DraconicLungsFinalForm, 0, 0, 0, 0);
 				this.createPerk(PerkLib.OniMusculatureFinalForm, 0, 0, 0, 0);
 				this.createPerk(PerkLib.OrcAdrenalGlandsFinalForm, 0, 0, 0, 0);
 				this.createPerk(PerkLib.PigBoarFatFinalForm, 0, 0, 0, 0);
 			}
-			if (flags[kFLAGS.NEISA_LVL_UP] >= 7) {
+			if (flags[kFLAGS.NEISA_LVL_UP] >= 8) {
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.NEISA_LVL_UP] >= 9) {
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.NEISA_LVL_UP] >= 10) {
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}

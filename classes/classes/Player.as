@@ -574,6 +574,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) armorDef += 6 * newGamePlusMod;
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) armorDef += 9 * newGamePlusMod;
 			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) armorDef += 12 * newGamePlusMod;
+			if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) armorDef += 15 * newGamePlusMod;
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
 			if (findPerk(PerkLib.Agility) >= 0) {
@@ -756,7 +757,8 @@ use namespace CoC;
 			}
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) armorMDef += 4 * newGamePlusMod;
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) armorMDef += 6 * newGamePlusMod;
-			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) armorMDef += 8 * newGamePlusMod;/*
+			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) armorMDef += 8 * newGamePlusMod;
+			if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) armorMDef += 10 * newGamePlusMod;/*
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
 			if (findPerk(PerkLib.Agility) >= 0) {
@@ -10541,16 +10543,16 @@ use namespace CoC;
 						if (kitsuneScore() >= 21 && findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
 							maxStrCap2 -= 50;
 							maxSpeCap2 += 40;
-							maxIntCap2 += 145;
-							maxWisCap2 += 160;
+							maxIntCap2 += 135;
+							maxWisCap2 += 170;
 							maxLibCap2 += 80;
 							minSen += 60;
 						}//315(425)
 						else if (kitsuneScore() >= 18 && findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
 							maxStrCap2 -= 45;
 							maxSpeCap2 += 35;
-							maxIntCap2 += 125;
-							maxWisCap2 += 140;
+							maxIntCap2 += 120;
+							maxWisCap2 += 145;
 							maxLibCap2 += 60;
 							minSen += 45;
 						}

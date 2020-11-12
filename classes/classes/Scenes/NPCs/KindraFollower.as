@@ -110,6 +110,30 @@ public function wonFightWithKindra():void {
 			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.KINDRA_LVL_UP] = 11;
 		}
+		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.KINDRA_LVL_UP] == 11) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, 78);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 78, 0, 0, 0);
+			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KINDRA_LVL_UP] = 12;
+		}
+		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.KINDRA_LVL_UP] == 12) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, 84);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 84, 0, 0, 0);
+			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KINDRA_LVL_UP] = 13;
+		}
+		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] == 15 && flags[kFLAGS.KINDRA_LVL_UP] == 13) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, 90);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 90, 0, 0, 0);
+			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KINDRA_LVL_UP] = 14;
+		}
+		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] == 16 && flags[kFLAGS.KINDRA_LVL_UP] == 14) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, 96);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 96, 0, 0, 0);
+			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KINDRA_LVL_UP] = 15;
+		}
 	}
 	kindraAffection(1);
 	cleanupAfterCombat();

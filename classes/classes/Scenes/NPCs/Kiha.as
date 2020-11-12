@@ -342,7 +342,7 @@ public class Kiha extends Monster
 				this.armorMDef = 90;
 				this.bonusHP = 2600;
 				this.level = 99;
-			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100
+			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.weaponName = "double-bladed axe";
 			this.weaponVerb="fiery cleave";
 			this.armorName = "thick scales";

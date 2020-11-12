@@ -323,7 +323,7 @@ public class Ember extends Monster
 				this.armorMDef = 310;
 				this.bonusHP = 3200;
 				this.level = 98;
-			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100
+			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = rand(8) + 70;

@@ -343,7 +343,7 @@ public class Isabella extends Monster
 				this.armorMDef = 30;
 				this.bonusHP = 3200;
 				this.level = 98;
-			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100
+			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.weaponName = "giant shield";
 			this.weaponVerb="smash";
 			this.armorName = "giant shield";

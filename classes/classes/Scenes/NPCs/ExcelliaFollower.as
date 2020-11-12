@@ -521,7 +521,7 @@ public function ExcelliaCampMakeSlaveAppearance():void {
 	outputText("She has a somewhat tight anus between her cheeks where it should be.\n\n");
 	outputText("When Excellia catches you staring, she giggles then lifts up her tail, displaying her somewhat tight ass and wet pussy.\n\n");
 	menu();
-	addButton(14, "Back", ExcelliaCampMainMenuFixHer);
+	addButton(14, "Back", ExcelliaCampMainMenuMakeSlave);
 }
 public function ExcelliaCampMakeSlaveHerself():void {
 	clearOutput();
@@ -562,7 +562,7 @@ public function ExcelliaCampMakeSlaveSexGetMilkDrink():void {
 public function ExcelliaCampMakeSlaveSexGetMilkBottle():void {
 	//spriteSelect(SpriteDb.s_electra);
 	outputText("You could use a delicious creamy beverage on the go. You pull out a glass bottle then hold it under Excellia's tits. She grabs her nipples then starts milking herself. A steady stream of her milk pours into the bottle until it's filled to the brim. You cork it then stash it away patting your slutty dairy cow on the head. <b>You obtained Excellia's Milk.</b>\n\n");
-	inventory.takeItem(consumables.EXCMILK, ExcelliaCampMainMenuFixHer);
+	inventory.takeItem(consumables.EXCMILK, ExcelliaCampMainMenuMakeSlave);
 	cheatTime(1/4);
 }
 public function ExcelliaCampMakeSlaveGiveItems():void {

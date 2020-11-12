@@ -733,6 +733,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.AscensionEndurance) >= 0) max += perkv1(PerkLib.AscensionEndurance) * 30;
 			max += level * 5;
 			if (findPerk(PerkLib.UnlockEndurance) >= 0) max += level * 5;
@@ -880,6 +881,7 @@ import classes.Items.JewelryLib;
 				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) multimax += 0.1;
 				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) multimax += 0.15;
 				if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) multimax += 0.2;
+				if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) multimax += 0.25;
 				//if (flags[kFLAGS.UNLOCKED_MERIDIANS] > 0) multimax += flags[kFLAGS.UNLOCKED_MERIDIANS] * 0.05;
 				//if (findPerk(PerkLib.Ascension) >= 0) multimax += perkv1(PerkLib.Ascension) * 0.01;
 				
@@ -1102,6 +1104,7 @@ import classes.Items.JewelryLib;
 				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.1;
 				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.15;
 				if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.2;
+				if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.25;
 			}
 			maxven *= multimaxven;
 			maxven = Math.round(maxven);
@@ -1168,6 +1171,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += 20;
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += 30;
 			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) max += 40;
+			if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) max += 50;
 			if (max > 1759) max = 1759;//obecnie max to 1750
 			return max;
 		}
