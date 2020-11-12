@@ -50,7 +50,7 @@ public function siegweirdFirstEncounterPostFight():void
 	outputText("You kick the imp away and take the sword. You can only hope he’s still near where you last saw him.\n\n");
 	outputText("You eventually find him not too far from where you first met him. He notices you and quickly approaches, the heavy sound of his geaves smash against the ground until he halts before you.\n\n");
 	outputText("\"<i>“My sword! Thank you, you have a paladin’s deepest gratitude.”</i>\" \n\n He removes his helmet, revealing a purely white ursine face, he appears to be a polar bear. \n\n\"<i>“You may call me Siegweird, friend…”</i>\" his voice trails off slightly before his eyes regain focus onto you, \"");
-	outputText("\"<i>“And you are?”</i> \n\n You state your name. \n\n\"<i>“Wonderful, it is a pleasure to meet you, [name]. Perhaps we could venture together, I’m sure that you are wholly capable of fighting off demons as well.”</i>\"");
+	outputText("\"<i>“And you are?”</i> \n\n You state your name. \n\n\"<i>Wonderful, it is a pleasure to meet you, [name]. Perhaps we could venture together, I’m sure that you are wholly capable of fighting off demons as well.</i>\"");
 	cleanupAfterCombat();
 	if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3) siegweirdFirstEncounterPostFightAnotherFight();
 	else siegweirdFirstEncounterPostFightJoin();
@@ -69,7 +69,7 @@ public function siegweirdFirstEncounterPostFightJoinYes():void
 	outputText("You would gladly have someone such as him in your camp.\n\n His face curls into a grin from ear to ear, \“<i>Thank you, [name]. I… I will not disappoint you! Now, lead the way, I will walk alongside you.</i>\”");
 	outputText("\n\n You guide Siegweird to your camp, he smiles softly as he surveys the area.\n\n Once he’s found a place he’s content with he quickly builds a fire pit before reaching into his knapsack and pulling out a large cast iron pot.\n\n");
 	outputText("He sets everything up before igniting the flame.\n\n\"<i>I got some Soup! Call it a hero's feast, [name]. Feel free to ask me for some if you’re ever hungry.</i>\"");
-	outputText("<b>Siegweird has joined you as a follower.</b>\n\n");
+	outputText("\n\n<b>Siegweird has joined you as a follower.</b>\n\n");
 	flags[kFLAGS.ALVINA_FOLLOWER] = 12;
 	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2.5) {
 		flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 4;
@@ -94,16 +94,16 @@ public function siegweirdFirstEncounterPostFightJoinNo():void
 public function siegweirdFirstEncounterPostFightAnotherFight():void
 {
 	outputText("The suit of armor notices your demonic outlook as his helmet slowly illuminates with a brilliant golden light. You can see an enraged expression on his face before it’s too bright to see anything within his helmet.\n\n");
-	outputText("\"<i>“No! Can’t believe I was helped out by a demon! Have I been so blind? Was this all a test? NO! I WILL NOT FAIL! I WILL PURGE YOU AND YOUR CORRUPTION FROM THIS LAND, FIEND!”</i>\"");
+	outputText("\"<i>No! Can’t believe I was helped out by a demon! Have I been so blind? Was this all a test? NO! I WILL NOT FAIL! I WILL PURGE YOU AND YOUR CORRUPTION FROM THIS LAND, FIEND!”</i>\"");
 	startCombat(new Siegweird());
 }
 public function siegweirdFirstEncounterPostFightAnotherFightWon():void
 {
 	outputText("Siegweird stumbles back, falling to his knees, unable to fight any longer. The glowing radiance from his eyes dim as his helm ceases to glow. He keeps himself propped up as he clutches onto his massive sword, head lowered to the ground. A golden, pearly substance cascades from his helmet, pooling on the ground before him before he falls prone on the ground.\n\n");
-	outputText("The radiance he once emitted has now faded to the dull luster of his blood-stained armor. \"<i>I was too weak…</i>\" He mumbles, not looking up to face you. \“<i>I cannot do anything… I amount to nothing… Who was I fooling..?</i>\"\n\n");
+	outputText("The radiance he once emitted has now faded to the dull luster of his blood-stained armor. \"<i>I was too weak…</i>\" he mumbles, not looking up to face you. \“<i>I cannot do anything… I amount to nothing… Who was I fooling..?</i>\"\n\n");
 	outputText("You approach the knight, he’s still mumbling words of self-depreciation, hardly paying any attention to you at this point. \n\n");
 	outputText("You pick him up by the helmet, his limp body does not attempt fighting back, he’s utterly defeated. His massive limbs are weighing him down, lifting him is almost a struggle as his entire body desperately clutches onto the force of gravity.\n\n");
-	outputText("He looks past you, still mumbling to himself,\"<i>I’m nothing… worthless… Marae was wrong to trust me to carry out their duties.</i>\"\n\n Is this knight going to shut up?\n\n");
+	outputText("He looks past you, still mumbling to himself, \"<i> I’m nothing… worthless… Marae was wrong to trust me to carry out their duties.</i>\"\n\n Is this knight going to shut up?\n\n");
 	outputText("You tighten your grip around him before twisting his neck with an audible snap. Finally, some peace from his mutterings.You drop his corpse onto the ground, it falls with a heavy clang. What a pity; his body lies there, now utterly lifeless. You collect his holy symbol as proof of his demise. Alvina will be content with your success.\n\n");
 	outputText("<b>You obtained Siegweird's holy symbol!</b>\n\n");
 	player.createKeyItem("Siegweird's holy symbol", 0, 0, 0, 0);
@@ -122,7 +122,7 @@ public function siegweirdRepeatEncounterPostFight():void
 		clearOutput();
 		outputText("It takes a while to find Siegweird. For a guy completely covered in full plate, he moves surprisingly fast along the blight ridge.\n\nHe seems to be in search of something… You’re positive the object of his search is someone you’ve gotten to know quite well recently.\n\n");
 		outputText("He’s quick to notice you, despite the fact that you haven’t made any attempt to announce your presence.\n\n");
-		outputText("\"<i>So, you came back after all... I should've known... You've been working with this witch from the start haven't you?” he shakes his head, “Even went so far as to sell your soul to her? I don't know what she promised you but in the end you will come to regret it, be it by my blade or by some twisted machinations she may have prepared for you.</i>\"\n\n");
+		outputText("\"<i>So, you came back after all... I should've known... You've been working with this witch from the start haven't you?” he shakes his head, “The voices in my head tell me ‘run away’, but I will not turn back, lest I go astray. I don't know what she promised you but in the end you will come to regret it, be it by my blade or by some twisted machinations she may have prepared for you.</i>\"\n\n");
 		outputText("You’re here for his life and his pendant. You know you’re not leaving without it..\n\n");
 		outputText("He raises his greatsword to his gauntlet, running his hand over it, infusing it with holy energy before pointing it toward you.");
 		outputText("\"<i>You’re going to have to pry it from my cold, dead hands, fiend.</i>\"\n\n");
@@ -285,8 +285,8 @@ public function siegweirdCampStudy():void
 	}
 	else {
 		outputText("Seigweird eyes you narrowly, \"<i>Yes, you are ready to learn, we shall work together. </i>\"\n\n");
-		outputText("He takes a deep breath, \"<i>We will start with the fundamentals. White magic has been practiced for millennia by priests and knights. It’s been mainly used to imbue equipment or regenerate wounds. Alas, through the darker arts, of which I will not speak of, has developed a more direct version of this ability in the form of the heal spell, something which even today is still viewed as a blasphemy by most devout practitioners. I will now lay down a few pieces of equipment on the ground. I want you to take your time and enchant each of them with magic. This should improve your casting endurance as well as the quality of your enchantments\"\n\n");
-		outputText("developed a more direct version of this ability in the form of the heal spell, something which even today is still viewed as a blasphemy by most practitioners of the Way of the White. I will now lay down a few pieces of equipment on the ground. ");
+		outputText("He takes a deep breath, \"<i>We will start with the fundamentals. White magic has been practiced for millennia by priests and knights. It’s been mainly used to imbue equipment or regenerate wounds. Alas, through the darker arts, of which I will not speak of, has developed a more direct version of this ability in the form of the heal spell, something which even today is still viewed as a blasphemy by most devout practitioners. I will now lay down a few pieces of equipment on the ground. I want you to take your time and enchant each of them with magic. This should improve your casting endurance as well as the quality of your enchantments");
+		outputText("\n\n");
 		outputText("I want you to take your time and enchant each of them with magic. This should improve your casting endurance as well as the quality of your enchantments.</i>\"\n\n");
 		if (player.inte > 70 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 6) {
 			outputText("A few pieces was a literal joke on the bear’s part, what he displayed was nothing short of his full inventory! You spend the entire day enchanting armor pieces and weapons. It's quite an exhausting task but you eventually finish enchanting the last item. In the end, it wasn’t as exhausting as before and, truth be told, you have tons of energy left! Siegweird takes a look at your work, nodding..\n\n");

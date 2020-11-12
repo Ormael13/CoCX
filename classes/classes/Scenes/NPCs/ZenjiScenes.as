@@ -1036,7 +1036,7 @@ public function loverZenjiMainCampMenu():void {
 			if (player.pregnancyType == PregnancyStore.PREGNANCY_ZENJI) {
 				outputText("You approach Zenji and he eyes your form. He seems almost mesmerized by your figure.\n\n");
 				outputText("You ask Zenji if he’s alright.\n\n");
-				outputText("Zenji blinks softly as he reaches a hand out to your pregnant form, \"<i>[name]... you’re… you’re just so beautiful… You’re everyting to me, [name]. I’m yours forever, don’ you forget it.</i>\" He finally breaks away from his trance, looking you in the eyes, \"<i>But… is der someting you wanted?</i>\"\n\n");
+				outputText("Zenji blinks softly as he reaches a hand out to your form, \"<i>[name]... you’re… you’re just so beautiful… You’re everyting to me, [name]. I’m yours forever, don’ you forget it.</i>\" He finally breaks away from his trance, looking you in the eyes, \"<i>But… is der someting you wanted?</i>\"\n\n");
 			}
 			else if (player.cor < 1 && rand(2) == 0) {
 				outputText("You approach Zenji and he greets you with a warm smile.\n\n");
