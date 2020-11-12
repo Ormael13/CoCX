@@ -1608,6 +1608,18 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.TitanicStrength);
 				needNext = true;
 			}
+			//Lacta bovine immubities
+			if (player.cowScore() >= 10 && player.findPerk(PerkLib.LactaBovineImmunity) < 0) {
+				outputText("\nAs you become more of a lacta bovine you become increasingly obsessed with thoughts of horsecocks and cum sloshing balls, namely minotaur balls. While you are aware you naturaly became addicted to minotaur cum you also know your nature as a lacta bovine will protect you from most of its harmful effects allowing you to sample the substance to your heart content witheout risks.");
+				outputText(".\n\n<b>(Gained the Lacta Bovine Immunity perk!)</b>\n");
+				player.createPerk(PerkLib.LactaBovineImmunity, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.cowScore() < 10 && player.findPerk(PerkLib.LactaBovineImmunity) >= 0) {
+				outputText("\nYour mind clears up as you cease to obsess over minotaur dicks this is also a sign that you are no longuer cow enought to be immune to the harmful effect of minotaur cum.\n\n<b>(Lost the Lacta Bovine Immunity perk!)</b>\n");
+				player.removePerk(PerkLib.LactaBovineImmunity);
+				needNext = true;
+			}
 			//Bull Strength
 			if ((player.minotaurScore() >= 15 || player.cowScore() >= 15) && player.findPerk(PerkLib.BullStrength) < 0) {
 				outputText("\nWhoa you feel tremendous power accumulate in ");

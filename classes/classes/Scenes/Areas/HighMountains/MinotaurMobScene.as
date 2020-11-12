@@ -58,7 +58,7 @@ public function meetMinotaurSons():void {
 	//First Meeting
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00325] == 1) {
 		//(Non-Addicted) 	
-		if(!player.minotaurAddicted()) {
+		if(!player.minotaurAddicted() && !player.hasPerk(PerkLib.LactaBovineImmunity)) {
 			outputText("You explore the hilly, almost cliff-like high mountains, searching for the next fight, item, or discovery that will put you closer to your goal.  The hot sun beats down on your back like a baleful flame, seeming to cook you in your [armor] with every step you take.  You raise an arm to mop away the sweat that streams down your brow, but as you lower it, you're confronted with a most unwelcome sight.\n\n");
 	
 			outputText("Three minotaurs have appeared from behind the rust-red rocks, arranged in a crude half-circle with you at the center.  Two of them are huge, powerfully-built bulls, stomping their hooved feet and snorting idly as they circle you.  Judging from the similar shapes and sizes of their muzzles and eyes, you'd guess they were brothers.  The last one, however, is everything his brothers aren't.  Where they have huge, hulking muscles, his are soft and barely visible.  He's comparatively tiny, only a little over five feet tall, and everything from his expression to his dainty steps reeks of shyness and femininity.  You find yourself wondering if he's even a real minotaur.\n\n");
@@ -112,7 +112,7 @@ public function meetMinotaurSons():void {
 		//Non tribe size
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] < 20) {
 			//[Non Addicted Repeat] 
-			if(!player.minotaurAddicted()) {
+			if(!player.minotaurAddicted() && !player.hasPerk(PerkLib.LactaBovineImmunity)) {
 				outputText("It doesn't take long for your exploration into the mountains to bring you face-to-face with your minotaur offspring once again.  There're " + num2Text(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326]) + " of them here, arranged around you in a loose semicircle.  You can smell their familiar and arousing odor in the air; while it brings a tingle to your nethers, you're determined to resist it.  ");
 				if(player.wetness() <= 2) outputText("A trickle of wetness runs down your [leg] almost immediately.");
 				else if(player.wetness() <= 4) outputText("A steady flow of your juices soaks your [legs] almost immediately, just from the scent invading your nostrils.");
@@ -164,7 +164,7 @@ public function meetMinotaurSons():void {
 		//Tribe sized
 		else {
 			//[Repeat Tribe-Size Non-Addict] 
-			if(!player.minotaurAddicted()) {
+			if(!player.minotaurAddicted() && !player.hasPerk(PerkLib.LactaBovineImmunity)) {
 				outputText("While exploring, you once again manage to stumble into your sons' territory.  You can practically see the musk, hanging so heavily in the air that it could be cut with a blade.  Somewhere in the distance, grunts and moos of pleasure ring out, echoing off the rocky cliff-sides.  Clearly one of your boys has found a willing female to expand the tribe with, and they seem to be procreating with rabid enthusiasm, from the sounds you're hearing.  You find yourself starting to envision big, strong hands, squeezing your hips and guiding you onto a fat shaft to be mounted and bred.\n\n");
 
 				outputText("A bemused snort rouses you from the day-dream, and you're now face-to-face with the largest of your sons once again.  He sneers and grunts, \"<i>Hey Mom... ");
@@ -523,7 +523,7 @@ private function analSpearSemiPregMinotaurGangbang():void {
 	outputText("That wonderful, salty-sweet, ooey-gooey taste hits your tongue, promising your taste-buds a trip into heaven and sending your tongue to a wagging, licking frenzy.  The drugged-up pre-spooge slops around your mouth, relaxing your throat to let more and more of that bestial prick violate your throat.  Three bumps of prepuce bounce through your lips as inches more slide down your gullet, and a perverse, confused part of your mind hopes that whatever you birth is enjoying the coming high as much as you.  Looking forward, you get to see the beast-man's taut, fur-covered musculature coming closer until your nose is nuzzling the thick fuzz.  Heavy, grapefruit sized-orbs press against your chin, and you realize that bloated horse-cock is completely inside you, pulsing happily while the heavy balls churn and bounce against you.\n\n");
 	
 	outputText("\"<i>Fuck ma, how do you keep your throat so tight and still swallow dick like a pro?</i>\" queries the voice of your current oral fixation, while his heavy fingers slide through your " + hairDescript() + ".  You're too busy licking the heavenly shaft, feeling the urethra bulge with each dollop of aphrodisiac it releases into your hungry stomach.  The stud's fingers twist your hair, just barely painfully, drawing you out of your drug-seeking daze long enough to make a gurgling noise of assent.  Smirking, the minotaur hollers, \"<i>Come on, somebody take her ass already.  ");
-	if(!player.minotaurAddicted()) outputText("We've got to get mom so high on us that she'll float back to her camp and come crawling back to us tomorrow.");
+	if(!player.minotaurAddicted() && !player.hasPerk(PerkLib.LactaBovineImmunity)) outputText("We've got to get mom so high on us that she'll float back to her camp and come crawling back to us tomorrow.");
 	else outputText("We've gotta get mom her fix.");
 	outputText("  Then, we can try and hunt a succubus to make into our blowjob bitch.");
 	outputText("</i>\"\n\n");
@@ -634,7 +634,7 @@ private function victoryMinotaurGangTitFuck():void {
 	outputText("\"<i>Oh, boys,</i>\" you coo while you advance, hips swaying in a sinuous display of sexuality.  \"<i>I should have taught you some manners.</i>\"  You reach down and give the closest disobedient stud a tight squeeze between two of his rings of prepuce.  He grunts in pain while you watch the head become flared by the suddenly displaced blood.  You tease, \"<i>Now, I think it's time for some punishment.  Don't you think you deserve to be punished?</i>\"\n\n");
 	
 	outputText("\"<i>Y-Yes Mom,</i>\" rumbles the defeated beast.  You release him, watching as he slumps back and exhales a tired moo of relief.  The poor boy is so pent up, so needy, that you don't mind indulging him and his brothers a little bit.  ");
-	if(player.minotaurAddicted()) outputText("Of course it helps that pleasing them will give you exactly what you want - more of that delicious, wondrous cock-cream.  ");
+	if(player.minotaurAddicted() || player.hasPerk(PerkLib.LactaBovineImmunity)) outputText("Of course it helps that pleasing them will give you exactly what you want - more of that delicious, wondrous cock-cream.  ");
 	outputText("\"<i>Fantastic.  You're good boys, I know you are.  Now come over here.  Yes, you too - all of you come to mommy.  I'm going to punish the lot of you.</i>\"\n\n");
 	
 	outputText("You lower yourself down ");
@@ -677,7 +677,7 @@ private function victoryMinotaurGangTitFuck():void {
 		outputText(" and pulls you down, ramming the fat flare of his dick into your throat a split second before he cums.  The salty deluge fills your throat to the brim before it rolls down into your stomach, adding the already full load inside you.  You hum in happiness as you're stuffed with spunk.  The added throat vibration keeps your femmy son spurting nice and long for you.\n\n");
 		
 		outputText("The narcotic sludge in your brain thickens up even more, slowing your thoughts until they're a soupy, semen-filled mess.  You giggle and lick your lips clean once the minitaur pulls his slumping shaft free, mere seconds before a fresh wave of goo soaks them.  The studs in between your tits - you had forgotten about them!  They're grunting and letting out low moos in pleasure in time with the geysering jizz they spout.  It runs over your already-soaked shape like a mudslide flowing down a mountain, glazing you from head to toe in fragrant minotaur mess.  One of your satisfied sons places a bottle under your dripping tits, commenting, \"<i>Why don't you save some of this for later Mom, ");
-		if(player.minotaurAddicted()) outputText("I'd hate to see you go mad with need around a lesser beast.");
+		if(player.minotaurAddicted() || player.hasPerk(PerkLib.LactaBovineImmunity)) outputText("I'd hate to see you go mad with need around a lesser beast.");
 		else outputText("This will be so much better once you learn to need it.");
 		outputText("</i>\"\n\n");
 		
@@ -705,7 +705,7 @@ private function victoryMinotaurGangTitFuck():void {
 		outputText("The minitaur wobbles unsteadily, completely unused to having such a wet and gentle hold squeezing down on his shaft.  He whines, \"<i>Mom I-I-I'm g-gonna... ungh... blow!</i>\"  The obedient fem-o-taur squirts with reckless abandon, his smaller shaft not even clearing your cleavage, but he still manages to make even more of a mess than before.  ");
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] > 3) outputText("His glaze spurts up along the opening created by his larger brother's shaft, and soon he too is cumming, obediently orgasming for you.  ");
 		outputText("One of the previously sated brothers produces a bottle and places it in front of you, letting it fill with cum before he corks it off.  He grunts, \"<i>");
-		if(!player.minotaurAddicted()) outputText("Maybe we can get Mom completely hooked.  Then we won't have to fight her?");
+		if(!player.minotaurAddicted() && !player.hasPerk(PerkLib.LactaBovineImmunity)) outputText("Maybe we can get Mom completely hooked.  Then we won't have to fight her?");
 		else outputText("That'll be a nice snack for her later.  We wouldn't want her to lose control around lesser species.");
 		outputText("</i>\"\n\n");
 		
@@ -997,7 +997,7 @@ private function victoryBJNippleFuckMinotaurGang():void {
 	outputText(".\n\n");
 	
 	outputText("The two cumming studs pull out of the tight holes as your convulsing fingertips milk their balls, squeezing the heavy sacks uncontrollably.  Ropes of potent, drug-laced spooge spatter across your " + chestDesc() + ", shoulders, and face, just in time for the cock plugging your mouth to explode in orgasm with the force of a bursting dam.  You're utterly soaked in seed, both inside and out - an incestuous whore through and through.  The two largest minotaurs finally exhaust their reserves and step back, high-fiving as they go.  Your smaller, girlish boy takes longer to finish, but by the time he does you feel positively stuffed.  It will be quite some time before you're hungry for a");
-	if(!player.minotaurAddicted()) outputText(" 'meal'");
+	if(!player.minotaurAddicted() && !player.hasPerk(PerkLib.LactaBovineImmunity)) outputText(" 'meal'");
 	else outputText("nother fix");
 	outputText(".\n\n");
 	
