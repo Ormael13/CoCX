@@ -3237,12 +3237,16 @@ use namespace CoC;
 			//	race = "corrupted mutant";
 			if (TopRace == "minotaur") {
 				if (TopScore >= 4)
-					if (TopScore >= 10) race = "minotaur";
+					if (TopScore >= 10) race = "elder minotaur";
+					else if (TopScore >= 10) race = "minotaur";
 					else race = "half-minotaur";
 			}
 			if (TopRace == "cow") {
 				if (TopScore >= 4) {
-					if (TopScore >= 10) {
+					if (TopScore >= 15) {
+						race = "Lacta Bovine";
+					}
+					else if (TopScore >= 10) {
 						race = "cow-";
 						race += mf("morph", "girl");
 					} else {
@@ -4563,6 +4567,8 @@ use namespace CoC;
 				if (vaginas.length > 0)
 					cowCounter++;
 				if (cocks.length > 0)
+					cowCounter -= 8;
+				if (balls > 0)
 					cowCounter -= 8;
 			}
 			if (findPerk(PerkLib.LactaBovinaOvaries) >= 0)
@@ -10116,7 +10122,14 @@ use namespace CoC;
 			var minSen:Number = 0;
 			//Alter max stats depending on race (+15 za pkt)
 			if (cowScore() >= 4) {
-				if (cowScore() >= 10) {
+				if (cowScore() >= 15) {
+					maxStrCap2 += 170;
+					maxTouCap2 += 45;
+					maxSpeCap2 -= 40;
+					maxIntCap2 -= 20;
+					maxLibCap2 += 70;
+				}
+				else if (cowScore() >= 10) {
 					maxStrCap2 += 120;
 					maxTouCap2 += 45;
 					maxSpeCap2 -= 40;
@@ -10132,7 +10145,14 @@ use namespace CoC;
 				}
 			}//+20/10-20
 			if (minotaurScore() >= 4) {
-				if (minotaurScore() >= 10) {
+				if (minotaurScore() >= 15) {
+					maxStrCap2 += 170;
+					maxTouCap2 += 45;
+					maxSpeCap2 -= 20;
+					maxIntCap2 -= 40;
+					maxLibCap2 += 70;
+				}
+				else if (minotaurScore() >= 10) {
 					maxStrCap2 += 120;
 					maxTouCap2 += 45;
 					maxSpeCap2 -= 20;
@@ -11377,6 +11397,14 @@ use namespace CoC;
 			strtouspeintwislibsenCalculation2();
 			if (hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tallness*4))}, 'Titanic Strength', { text: 'Titanic Strength' });
 			if (!hasPerk(PerkLib.TitanicStrength) && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
+			if (hasPerk(PerkLib.BullStrength)){
+				var power:Number = 0;
+				if(cowScore() >=15) power = lactationQ()*0.001;
+				if(minotaurScore() >=15) power = cumCapacity()*0.001;
+				if (power > 0.5) power = 0.5;
+				statStore.replaceBuffObject({'str.mult':(Math.round(power))}, 'Bull Strength', { text: 'Bull Strength' });
+			}
+			if (!hasPerk(PerkLib.BullStrength) && statStore.hasBuff('Bull Strength')) statStore.removeBuffs('Bull Strength');
 			statStore.replaceBuffObject({
 				"str.mult":statusEffectv1(StatusEffects.StrTouSpeCounter2)/100,
 				"tou.mult":statusEffectv2(StatusEffects.StrTouSpeCounter2)/100,
@@ -12416,4 +12444,3 @@ use namespace CoC;
 		}
 	}
 }
-
