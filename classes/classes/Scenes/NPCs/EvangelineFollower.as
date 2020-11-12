@@ -647,7 +647,7 @@ private function LvLUp():void {
 private function Give1Gem():void {
 	clearOutput();
 	outputText("Reaching into your purse you take out a single gem and hands over it to her.");
-	outputText("\n\n\"<i>So stingy...</i>\" she mumble.");
+	outputText("\n\n\"<i>So stingy...</i>\" she mumbles.");
 	player.gems -= 1;
 	flags[kFLAGS.EVANGELINE_GEMS_PURSE]++;
 	outputText("\n\nEvangeline gem purse: " + flags[kFLAGS.EVANGELINE_GEMS_PURSE] + " gems");
@@ -658,7 +658,7 @@ private function Give1Gem():void {
 private function Give10Gems():void {
 	clearOutput();
 	outputText("Reaching into your purse you take out a few gems and hands over it to her.");
-	outputText("\n\n\"<i>Not much but still something,</i>\" she mumble.");
+	outputText("\n\n\"<i>Thanks...</i>\" she mumbles.");
 	player.gems -= 10;
 	flags[kFLAGS.EVANGELINE_GEMS_PURSE] += 10;
 	outputText("\n\nEvangeline gem purse: " + flags[kFLAGS.EVANGELINE_GEMS_PURSE] + " gems");
@@ -669,7 +669,7 @@ private function Give10Gems():void {
 private function Give100Gems():void {
 	clearOutput();
 	outputText("Reaching into your purse you take out around a hundred gems and hands over it to her.");
-	outputText("\n\n\"<i>Thank you,</i>\" she mumble.");
+	outputText("\n\n\"<i>Thank you,</i>\" she mumbles.");
 	player.gems -= 100;
 	flags[kFLAGS.EVANGELINE_GEMS_PURSE] += 100;
 	outputText("\n\nEvangeline gem purse: " + flags[kFLAGS.EVANGELINE_GEMS_PURSE] + " gems");

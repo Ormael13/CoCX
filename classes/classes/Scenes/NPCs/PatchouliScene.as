@@ -303,7 +303,7 @@ public class PatchouliScene extends NPCAwareContent {
 
 			function patchouliExploreWonderlandStay():void {
 				outputText("You decide to stay regardless of the cat’s thoughts on the matter and hear a roar somewhere in the forest. Patchouli whimpers in terror and tries to hide.\n\n");
-				outputText("\"<i>It’s too late, were both dead. Jabberwocky is here!!!</i>\"\n\n");
+				outputText("\"<i>It’s too late, we're both dead. Jabberwocky is here!!!</i>\"\n\n");
 				outputText("Just as he says this, a massive shape splits the nearby trees wide to pass. It looks like a dragon with pink scales, bat wings and funnily enough two large buck teeth, similar to a rabbit. The overgrown dragon-rabbit thing suddenly speaks.\n\n");
 				outputText("\"<i>You were told never to come back, cat! You will pay for your insolence, along with this outsider.</i>\"\n\n");
 				outputText("The rabbit dragon breathes a stream of fire to the sky and charges.\n\n");
