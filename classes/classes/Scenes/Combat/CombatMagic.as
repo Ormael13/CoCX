@@ -2420,7 +2420,7 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 		clearOutput();
-		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent.  Above you starting to form small dark cloud that soon becoming quite wide and long.  Then almost endless rain of ice shards start to downpour on " + monster.a + monster.short + " and the rest of your surrounding!\n");
+		outputText("You narrow your eyes, focusing on the force of your lust and willpower as you narrow your eyes with deadly intent. A dark cloud coalesces above you, stretching further until there is nothing but an eerie darkness above you. You narrow your gaze at  " + monster.a + monster.short + " as countless razor-like shards of ice rain upon your opponent.\n");
 		var damage:Number = scalingBonusIntelligence() * spellMod();
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -2570,7 +2570,7 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 		clearOutput();
-		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent.  Around you starting to form small vortex of flames that soon becoming quite wide.  Then with a single thought you sends all that fire like a unstoppable storm toward " + monster.a + monster.short + " and the rest of your surrounding!\n");
+		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent.  Around you starting to form small vortex of flames that expand into a vicious gout of flames.  With a single thought, you send a pillar of flames at " + monster.a + monster.short + ". You intend to leave nothing but ashes!\n");
 		var damage:Number = scalingBonusIntelligence() * spellMod();
 		//Determine if critical hit!
 		var crit:Boolean = false;
