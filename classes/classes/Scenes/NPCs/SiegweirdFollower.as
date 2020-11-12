@@ -100,10 +100,10 @@ public function siegweirdFirstEncounterPostFightAnotherFight():void
 public function siegweirdFirstEncounterPostFightAnotherFightWon():void
 {
 	outputText("Siegweird stumbles back, falling to his knees, unable to fight any longer. The glowing radiance from his eyes dim as his helm ceases to glow. He keeps himself propped up as he clutches onto his massive sword, head lowered to the ground. A golden, pearly substance cascades from his helmet, pooling on the ground before him before he falls prone on the ground.\n\n");
-	outputText("The radiance he once emitted has now faded to the dull luster of his blood-stained armor. \"<i>I was too weak…</i>\" He mumbles, not looking up to face you. \“<i>I cannot do anything… I amount to nothing… Who was I fooling..?</i>\"\n\n");
+	outputText("The radiance he once emitted has now faded to the dull luster of his blood-stained armor. \"<i>I was too weak…</i>\" he mumbles, not looking up to face you. \“<i>I cannot do anything… I amount to nothing… Who was I fooling..?</i>\"\n\n");
 	outputText("You approach the knight, he’s still mumbling words of self-depreciation, hardly paying any attention to you at this point. \n\n");
 	outputText("You pick him up by the helmet, his limp body does not attempt fighting back, he’s utterly defeated. His massive limbs are weighing him down, lifting him is almost a struggle as his entire body desperately clutches onto the force of gravity.\n\n");
-	outputText("He looks past you, still mumbling to himself,\"<i> I’m nothing… worthless… Marae was wrong to trust me to carry out their duties.</i>\"\n\n Is this knight going to shut up?\n\n");
+	outputText("He looks past you, still mumbling to himself, \"<i> I’m nothing… worthless… Marae was wrong to trust me to carry out their duties.</i>\"\n\n Is this knight going to shut up?\n\n");
 	outputText("You tighten your grip around him before twisting his neck with an audible snap. Finally, some peace from his mutterings.You drop his corpse onto the ground, it falls with a heavy clang. What a pity; his body lies there, now utterly lifeless. You collect his holy symbol as proof of his demise. Alvina will be content with your success.\n\n");
 	outputText("<b>You obtained Siegweird's holy symbol!</b>\n\n");
 	player.createKeyItem("Siegweird's holy symbol", 0, 0, 0, 0);
@@ -122,7 +122,7 @@ public function siegweirdRepeatEncounterPostFight():void
 		clearOutput();
 		outputText("It takes a while to find Siegweird. For a guy completely covered in full plate, he moves surprisingly fast along the blight ridge.\n\nHe seems to be in search of something… You’re positive the object of his search is someone you’ve gotten to know quite well recently.\n\n");
 		outputText("He’s quick to notice you, despite the fact that you haven’t made any attempt to announce your presence.\n\n");
-		outputText("\"<i>So, you came back after all... I should've known... You've been working with this witch from the start haven't you?” he shakes his head, “Even went so far as to sell your soul to her? I don't know what she promised you but in the end you will come to regret it, be it by my blade or by some twisted machinations she may have prepared for you.</i>\"\n\n");
+		outputText("\"<i>So, you came back after all... I should've known... You've been working with this witch from the start haven't you?” he shakes his head, “The voices in my head tell me ‘run away’, but I will not turn back, lest I go astray. I don't know what she promised you but in the end you will come to regret it, be it by my blade or by some twisted machinations she may have prepared for you.</i>\"\n\n");
 		outputText("You’re here for his life and his pendant. You know you’re not leaving without it..\n\n");
 		outputText("He raises his greatsword to his gauntlet, running his hand over it, infusing it with holy energy before pointing it toward you.");
 		outputText("\"<i>You’re going to have to pry it from my cold, dead hands, fiend.</i>\"\n\n");
