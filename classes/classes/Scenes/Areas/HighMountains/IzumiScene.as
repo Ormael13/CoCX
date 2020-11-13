@@ -1470,6 +1470,10 @@ import classes.Stats.Buff;
 					flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.IZUMI_LVL_UP] = 10;
 				}
+				if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 11 && flags[kFLAGS.IZUMI_LVL_UP] == 10) {
+					flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.IZUMI_LVL_UP] = 11;
+				}
 			}
 			if (!player.hasStatusEffect(StatusEffects.ChiChiWeddingS)) player.createStatusEffect(StatusEffects.ChiChiWeddingS,0,0,0,0);
 			clearOutput();

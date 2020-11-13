@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Items.Consumables
+package classes.Items.Consumables 
 {
 	import classes.Items.Consumable;
 	import classes.PerkLib;
@@ -10,11 +10,11 @@ package classes.Items.Consumables
 	import classes.internals.Utils;
 	import classes.Scenes.SceneLib;
 
-	public class BallsOfFlame extends Consumable {
+	public class PoisonedBalls extends Consumable {
 		
-		public function BallsOfFlame() 
+		public function PoisonedBalls() 
 		{
-			super("BallOFl", "BallsOfFlame", "a Balls of Flame", 60, "Three ball-shaped throwing weapons.  Though good for only a single use, they're guaranteed to do medium to high damage to solo or weak group of enemies if they hits.  Inflicts 1440 to 8640 fire damage.");
+			super("PoisonB", "PoisonedBalls", "a Poisoned Balls", 60, "Three ball-shaped throwing weapons.  Though good for only a single use, they're guaranteed to do medium to high damage to solo or weak group of enemies if they hits.  Inflicts 1440 to 8640 poison damage.");
 		}
 		
 		override public function canUse():Boolean {
@@ -25,13 +25,13 @@ package classes.Items.Consumables
 		
 		override public function useItem():Boolean {
 			clearOutput();
-			outputText("You toss balls of flame at your foe");
+			outputText("You toss poisoned balls at your foe");
 			if (game.monster.findPerk(PerkLib.EnemyGroupType) >= 0) outputText("s");
 			outputText("!  They flies straight and true, almost as if they has a mind of their own as they arcs towards " + game.monster.a + game.monster.short + "!\n");
 			if (game.monster.spe - 320 > Utils.rand(100) + 1) { //1% dodge for each point of speed over 320
 				outputText("Somehow " + game.monster.a + game.monster.short + "'");
 				if (!game.monster.plural) outputText("s");
-				outputText(" incredible speed allows " + game.monster.pronoun2 + " to avoid the balls!  The deadly spheres shatters in small fire explosion when they impacts something in the distance.");
+				outputText(" incredible speed allows " + game.monster.pronoun2 + " to avoid the balls!  The deadly spheres shatters when they impacts something in the distance. For a moment area around impact is engulfed in the cloud of poison.");
 			}
 			else { //Not dodged
 				var damage:Number = 1440 + Utils.rand(721);
@@ -43,8 +43,8 @@ package classes.Items.Consumables
 					else damage *= 2;
 				}
 				if (game.monster.findPerk(PerkLib.EnemyGroupType) >= 0) damage *= 5;
-				outputText(game.monster.capitalA + game.monster.short + " is hit with the Balls of Flame!  They breaks apart as they burns " + game.monster.pronoun2 + ". ");
-				damage = SceneLib.combat.doFireDamage(damage, true, true);
+				outputText(game.monster.capitalA + game.monster.short + " is hit with the Poisoned Balls!  They breaks apart poisoning " + game.monster.pronoun2 + ". ");
+				damage = SceneLib.combat.doPoisonDamage(damage, true, true);
 				if (game.monster.HP < game.monster.minHP()) game.monster.HP = game.monster.minHP() - 1;
 			}
 			return(false);

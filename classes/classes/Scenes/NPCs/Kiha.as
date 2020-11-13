@@ -192,31 +192,6 @@ public class Kiha extends Monster
 
 		public function Kiha()
 		{
-			this.a = "";
-			this.short = "Kiha";
-			this.imageName = "kiha";
-			this.long = "Kiha is standing across from you, holding a double-bladed axe that's nearly as big as she is.  She's six feet tall, and her leathery wings span nearly twelve feet extended.  Her eyes are pure crimson, save for a black slit in the center, and a pair of thick draconic horns sprout from her forehead, arcing over her ruby-colored hair to point behind her.  Dim red scales cover her arms, legs, back, and strong-looking tail, providing what protection they might to large areas of her body.  The few glimpses of exposed skin are dark, almost chocolate in color, broken only by a few stray scales on the underside of her bosom and on her cheekbones.  ";
-			if (game.flags[kFLAGS.KIHA_UNDERGARMENTS] > 0)
-				this.long += "Damp patch forms in her silk " + (game.flags[kFLAGS.KIHA_UNDERGARMENTS] == 1 ? "panties" : "loincloth") + ", regardless of her state of arousal.  Despite her near nudity, Kiha stands with the confidence and poise of a trained fighter.";
-			else 
-				this.long += "Her vagina constantly glistens with moisture, regardless of her state of arousal.  Despite her nudity, Kiha stands with the confidence and poise of a trained fighter.";
-			// this.plural = false;
-			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
-			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
-			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = AssClass.LOOSENESS_LOOSE;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
-			this.createStatusEffect(StatusEffects.BonusACapacity,40,0,0,0);
-			this.tallness = 6*12+1;
-			this.hips.type = Hips.RATING_AMPLE;
-			this.butt.type = Butt.RATING_AVERAGE + 1;
-			this.lowerBody = LowerBody.HOOFED;
-			this.skin.coverage = Skin.COVERAGE_MEDIUM;
-			this.skin.base.color = "dark";
-			this.skin.coat.color = "red";
-			this.skin.coat.type = Skin.SCALES;
-			this.hairColor = "red";
-			this.hairLength = 3;
 			if (flags[kFLAGS.KIHA_LVL_UP] < 1) {
 				initStrTouSpeInte(85, 80, 85, 60);
 				initWisLibSensCor(60, 50, 45, 66);
@@ -343,6 +318,31 @@ public class Kiha extends Monster
 				this.bonusHP = 2600;
 				this.level = 99;
 			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
+			this.a = "";
+			this.short = "Kiha";
+			this.imageName = "kiha";
+			this.long = "Kiha is standing across from you, holding a double-bladed axe that's nearly as big as she is.  She's six feet tall, and her leathery wings span nearly twelve feet extended.  Her eyes are pure crimson, save for a black slit in the center, and a pair of thick draconic horns sprout from her forehead, arcing over her ruby-colored hair to point behind her.  Dim red scales cover her arms, legs, back, and strong-looking tail, providing what protection they might to large areas of her body.  The few glimpses of exposed skin are dark, almost chocolate in color, broken only by a few stray scales on the underside of her bosom and on her cheekbones.  ";
+			if (game.flags[kFLAGS.KIHA_UNDERGARMENTS] > 0)
+				this.long += "Damp patch forms in her silk " + (game.flags[kFLAGS.KIHA_UNDERGARMENTS] == 1 ? "panties" : "loincloth") + ", regardless of her state of arousal.  Despite her near nudity, Kiha stands with the confidence and poise of a trained fighter.";
+			else 
+				this.long += "Her vagina constantly glistens with moisture, regardless of her state of arousal.  Despite her nudity, Kiha stands with the confidence and poise of a trained fighter.";
+			// this.plural = false;
+			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
+			createBreastRow(Appearance.breastCupInverse("D"));
+			this.ass.analLooseness = AssClass.LOOSENESS_LOOSE;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.createStatusEffect(StatusEffects.BonusACapacity,40,0,0,0);
+			this.tallness = 6*12+1;
+			this.hips.type = Hips.RATING_AMPLE;
+			this.butt.type = Butt.RATING_AVERAGE + 1;
+			this.lowerBody = LowerBody.HOOFED;
+			this.skin.coverage = Skin.COVERAGE_MEDIUM;
+			this.skin.base.color = "dark";
+			this.skin.coat.color = "red";
+			this.skin.coat.type = Skin.SCALES;
+			this.hairColor = "red";
+			this.hairLength = 3;
 			this.weaponName = "double-bladed axe";
 			this.weaponVerb="fiery cleave";
 			this.armorName = "thick scales";

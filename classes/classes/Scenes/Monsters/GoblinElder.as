@@ -255,7 +255,7 @@ public class GoblinElder extends Goblin
 				this.weaponAttack = 80;
 				this.armorDef = 111;
 				this.armorMDef = 45;
-				this.bonusHP =2250;
+				this.bonusHP = 2250;
 				this.level = 86;
 			}
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 10) {
@@ -267,6 +267,15 @@ public class GoblinElder extends Goblin
 				this.bonusHP = 2400;
 				this.level = 92;
 			}
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 11) {
+				initStrTouSpeInte(335, 205, 258, 340);
+				initWisLibSensCor(340, 120, 90, 45);
+				this.weaponAttack = 90;
+				this.armorDef = 125;
+				this.armorMDef = 51;
+				this.bonusHP = 2550;
+				this.level = 98;
+			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.a = "the ";
 			this.short = "goblin elder";
 			if (flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER] > 0) {
@@ -319,6 +328,7 @@ public class GoblinElder extends Goblin
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] >= 8) this.createPerk(PerkLib.PrestigeJobSpellKnight, 0, 0, 0, 0);
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] >= 9) this.createPerk(PerkLib.EpicLifeline, 0, 0, 0, 0);
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] >= 10) this.createPerk(PerkLib.MythicalToughness, 0, 0, 0, 0);
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] >= 11) this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

@@ -124,6 +124,16 @@ public class Izumi extends Monster
 				this.level = 90;
 				this.additionalXP = 500;
 			}
+			if (flags[kFLAGS.IZUMI_LVL_UP] == 11) {
+				initStrTouSpeInte(545, 460, 315, 240);
+				initWisLibSensCor(240, 160, 90, 15);
+				this.weaponAttack = 140;
+				this.armorDef = 32;
+				this.armorMDef = 21;
+				this.bonusHP = 3400;
+				this.level = 96;
+				this.additionalXP = 550;
+			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.a = "";
 			this.short = "Izumi";
 			this.imageName = "izumi";
@@ -160,6 +170,7 @@ public class Izumi extends Monster
 			if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
 			if (flags[kFLAGS.IZUMI_LVL_UP] >= 9) this.createPerk(PerkLib.PrestigeJobBerserker, 0, 0, 0, 0);
 			if (flags[kFLAGS.IZUMI_LVL_UP] >= 10) this.createPerk(PerkLib.MythicalStrength, 0, 0, 0, 0);
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 11) this.createPerk(PerkLib.OniMusculature, 0, 0, 0, 0);
 			checkMonster();
 		}
 
@@ -257,6 +268,8 @@ public class Izumi extends Monster
 		{
 			outputText("Quick as a flash, Izumi lashes out with her free hand, aiming for your head.");
 			var damage:int = int((str + 175) - rand(player.tou) - player.armorDef);
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) damage += 50;
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) damage += 50;
 			if (player.getEvasionRoll())
 			{
 				outputText("  You deftly dodge under the lightning-quick punch.");
@@ -284,12 +297,16 @@ public class Izumi extends Monster
 			if (player.cor >= 50 || player.lib >= 50 || player.sens >= 50)
 			{
 				outputText("You fall backwards and stagger away, already feeling a flush of warmth colouring your cheeks, trying to drag your mind back to the fight and away from... other things.");
-				player.dynStats("lus", 10 + player.lib / 10);
+				if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) player.dynStats("lus", 30 + player.lib / 10);
+				else if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) player.dynStats("lus", 20 + player.lib / 10);
+				else player.dynStats("lus", 10 + player.lib / 10);
 			}
 			else
 			{
 				outputText("You furrow a brow at the Oni's ineffectual attack, not entirely sure if she was intending to hurt you or turn you on.  Her thighs did look rather tantalizing though...");
-				player.dynStats("lus", 5 + player.lib / 20);
+				if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) player.dynStats("lus", 15 + player.lib / 20);
+				else if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) player.dynStats("lus", 10 + player.lib / 20);
+				else player.dynStats("lus", 5 + player.lib / 20);
 			}
 		}
 		
@@ -361,6 +378,8 @@ public class Izumi extends Monster
 			outputText("The hit is extreme enough to leave you dazed for a moment, splayed out across the floor.  When you rouse yourself back to full consciousness a few seconds later, the cave is still echoing with the sound of the impact, a testament to the strength of the Oni - and your resilience.");
 			
 			var damage:int = int ((str + 225) - rand(player.tou) - player.armorDef);
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) damage += 100;
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) damage += 100;
 			player.takePhysDamage(damage, true);
 		}
 		
@@ -430,7 +449,9 @@ public class Izumi extends Monster
 			outputText("first into Izumi - specifically, into her chest.  Shocked by suddenly having your face rammed into the pillowy soft expanse of Izumi’s bust, you rear back only to be slammed straight back into the mountainous expanse by Izumi’s arm.");
 			
 			player.createStatusEffect(StatusEffects.Titsmother, 0, 0, 0, 0);
-			player.dynStats("lus", (player.lib / 15) + 5 + rand(5));
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) player.dynStats("lus", (player.lib / 15) + 15 + rand(15));
+			else if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) player.dynStats("lus", (player.lib / 15) + 10 + rand(10));
+			else player.dynStats("lus", (player.lib / 15) + 5 + rand(5));
 		}
 		
 		// Remove the effect post-combat

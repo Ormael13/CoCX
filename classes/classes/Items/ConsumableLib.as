@@ -188,6 +188,7 @@ public final class ConsumableLib extends BaseContent
 		public const AKBALSL:Consumable = new AkbalSaliva();
 		public const ALCTHUN:SimpleConsumable = mk("AlcThun", "Alch.Thunder", "an Alchemical Thunder", 50, "Lightning in a bottle. Add heavy electricity damage to your weapon for a limited time upon use.", m.buffAlchemicalThunder);
 		public const BALLOFL:BallsOfFlame = new BallsOfFlame();
+		public const BALLOTD:BallsOfTheDarkness = new BallsOfTheDarkness();
 		public const BANGB_M:MiniBangBall = new MiniBangBall();
 		public const BANGBM1:BangBallMk1 = new BangBallMk1();
 		public const BANGBM2:BangBallMk2 = new BangBallMk2();
@@ -204,8 +205,9 @@ public final class ConsumableLib extends BaseContent
 		public const EXTSERM:HairExtensionSerum = new HairExtensionSerum();
 		public const F_DRAFT:SimpleConsumable = mk("F.Draft", "FuckDraft", "a vial of roiling red fluid labeled \"Fuck Draft\"", 6, "This vial of red fluid bubbles constantly inside the glass, as if eager to escape.  It smells very strongly, though its odor is difficult to identify.  The word \"Fuck\" is inscribed on the side of the vial.", curry(m.lustDraft, true));
 		public const F_TEAR:SimpleConsumable = mk("F.Tear", "FafnirTear", "a Fafnir Tear", 15, "This beautiful flower only grows in the snow. It somehow digs its way and survives even in the harsh climate of the rift.", m.FafnirTear);
-		public const INCOINS:SimpleConsumable = mk("IncOIns", "IncenOfIns", "an incense of Insight", 15, "These sticks, when burned, are rumored to fill an area with an incense that allows for deep meditation and granting greater insight.", m.incenseOfInsight);
+		public const FROZENB:FrozenBalls = new FrozenBalls();
 		public const H_PILL:Consumable = new HealPill();
+		public const INCOINS:SimpleConsumable = mk("IncOIns", "IncenOfIns", "an incense of Insight", 15, "These sticks, when burned, are rumored to fill an area with an incense that allows for deep meditation and granting greater insight.", m.incenseOfInsight);
 		public const MH_PILL:SimpleConsumable = mk("MH.Pill", "M.Heal Pill", "a medium healing pill", 15, "A medium healing pill that's guaranteed to heal you by a bit.", m.mediumhealpill);
 		public const BH_PILL:SimpleConsumable = mk("BH.Pill", "B.Heal Pill", "a big healing pill", 42, "A big healing pill that's guaranteed to heal you by a bit.", m.bighealpill);
 		public const HRBCNT:Consumable = new HerbalContraceptive();
@@ -221,7 +223,8 @@ public final class ConsumableLib extends BaseContent
 		public const NUMBOIL:Consumable = new NumbingOil();
 		public const OVIELIX:OvipositionElixir = new OvipositionElixir();
         public const PEPPWHT:SimpleConsumable = mk("PeppWht", "PeppWht", "a vial of peppermint white", 120, "This tightly corked glass bottle gives of a pepperminty smell and reminds you of the winter holidays.  How odd.", m.peppermintwhite);
-        public const PONAILS:SimpleConsumable = mk("PONails", "pack of nails", "a pack of nails", 20, "It looks like a pack of nails that may still have between 10 and 30 nails inside.", m.packOfNails);
+        public const POISONB:PoisonedBalls = new PoisonedBalls();
+		public const PONAILS:SimpleConsumable = mk("PONails", "pack of nails", "a pack of nails", 20, "It looks like a pack of nails that may still have between 10 and 30 nails inside.", m.packOfNails);
 		public const PPHILTR:Consumable = new PurityPhilter();
 		public const PRNPKR :Consumable = new PrincessPucker();
 		public const SAPILL_:SimpleConsumable = mk("SAPill", "Small Angry Pill", "a small angry pill", 20, "A small pill that's guaranteed to makes you a bit more angry.", m.smallangrypill);
@@ -229,6 +232,7 @@ public final class ConsumableLib extends BaseContent
 		public const SMART_T:Consumable = new ScholarsTea();
 		public const STRASCA:SimpleConsumable = mk("StraSCa", "StrawberryShortcake", "a Strawberry shortcake", 30, "A delicious-looking shortcake found primarily in wonderland.", m.strawberryShortcake);
 		public const TCLEAVE:SimpleConsumable = mk("TCleave", "TCleave", "a tome for Cleave special", 10, "This tome would teach you how to use Cleave special.", m.tomeofcleave);
+		public const THUNDBl:ThunderBalls = new ThunderBalls();
 		public const VITAL_T:Consumable = new VitalityTincture();
 		public const VIXEN_T:SimpleConsumable = mk("Vixen T", "Vixen T.", "a cup of vixen tea", 15, "An exotic tea made by kitsunes. This herbal infusion is rumored to improve your expertise and expand your sexual knowledge.", m.vixenTea);
 		public const W_STICK:WingStick = new WingStick();

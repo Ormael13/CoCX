@@ -1734,6 +1734,30 @@ use namespace CoC;
 				player.removePerk(PerkLib.DisplacerMetabolismEvolved);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.DraconicBones)) {
+				player.removePerk(PerkLib.DraconicBones);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.DraconicBonesEvolved)) {
+				player.removePerk(PerkLib.DraconicBonesEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.DraconicBonesFinalForm)) {
+				player.removePerk(PerkLib.DraconicBonesFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.DraconicHeart)) {
+				player.removePerk(PerkLib.DraconicHeart);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.DraconicHeartEvolved)) {
+				player.removePerk(PerkLib.DraconicHeartEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.DraconicHeartFinalForm)) {
+				player.removePerk(PerkLib.DraconicHeartFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.DraconicLungs)) {
 				player.removePerk(PerkLib.DraconicLungs);
 				player.perkPoints += 1;

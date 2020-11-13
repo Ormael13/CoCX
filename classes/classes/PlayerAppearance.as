@@ -2783,31 +2783,16 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.dogScore() >= 1 && player.dogScore() < 4) outputText("\n<font color=\"#008000\">Dog-morph: " + player.dogScore() + "</font>");
 		else if (player.dogScore() < 1) outputText("\n<font color=\"#ff0000\">Dog-morph: 0</font>");
 		//Dragon
-		if (player.dragonScore() >= 28) {
-			outputText("\n<font color=\"#0000a0\">Ancient Dragon: " + player.dragonScore() + " (+");
-			if (player.findPerk(PerkLib.DraconicLungsFinalForm) >= 0) outputText("105% to Str racial multi, +110% to Tou racial multi, +55");
-			else if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) outputText("100% to Str racial multi, +105% to Tou racial multi, +50");
-			else if (player.findPerk(PerkLib.DraconicLungs) >= 0) outputText("100% to Str racial multi, +100% to Tou racial multi, +45");
-			else outputText("100% to Str racial multi, +100% to Tou racial multi, +40");
-			outputText("% to Spe racial multi, +50% to Int racial multi, +50% to Wis racial multi, +20% to Lib racial multi, +" + (400 * (1 + player.newGamePlusMod())) + " max HP, +" + (10 * (1 + player.newGamePlusMod())) + " Armor, +20% max Soulforce)</font>");
+		if (player.dragonScore() >= 30) {
+			outputText("\n<font color=\"#0000a0\">Ancient Dragon: " + player.dragonScore() + " (+90% to Str / Tou / Spe racial multi, +80% to Int / Wis racial multi, +60% to Lib racial multi, +40 to min Sen, ");
+			outputText("+30% max HP, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust, +" + (200 * (1 + player.newGamePlusMod())) + " max Fatigue, +" + (10 * (1 + player.newGamePlusMod())) + " Armor / Magic Resistance)</font>");
 		}
 		else if (player.dragonScore() >= 20) {
-			outputText("\n<font color=\"#0000a0\">Elder Dragon: " + player.dragonScore() + " (+");
-			if (player.findPerk(PerkLib.DraconicLungsFinalForm) >= 0) outputText("100% to Str racial multi, +105% to Tou racial multi, +35");
-			else if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) outputText("95% to Str racial multi, +100% to Tou racial multi, +30");
-			else if (player.findPerk(PerkLib.DraconicLungs) >= 0) outputText("95% to Str racial multi, +95% to Tou racial multi, +25");
-			else outputText("95% to Str racial multi, +95% to Tou racial multi, +20");
-			outputText("% to Spe racial multi, +40% to Int racial multi, +40% to Wis racial multi, +10% to Lib racial multi, +" + (300 * (1 + player.newGamePlusMod())) + " max HP, +" + (4 * (1 + player.newGamePlusMod())) + " Armor, +10% max Soulforce)</font>");
+			outputText("\n<font color=\"#0000a0\">Elder Dragon: " + player.dragonScore() + " (+60% to Str / Tou / Spe racial multi, +55% to Int / Wis racial multi, +40% to Lib racial multi, +30 to min Sen, ");
+			outputText("+20% max HP, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust, +" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue, +" + (4 * (1 + player.newGamePlusMod())) + " Armor / Magic Resistance)</font>");
 		}
-		else if (player.dragonScore() >= 10) {
-			outputText("\n<font color=\"#0000a0\">Dragon: " + player.dragonScore() + " (+");
-			if (player.findPerk(PerkLib.DraconicLungsFinalForm) >= 0) outputText("55% to Str racial multi, +50% to Tou racial multi, +25");
-			else if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) outputText("50% to Str racial multi, +45% to Tou racial multi, +20");
-			else if (player.findPerk(PerkLib.DraconicLungs) >= 0) outputText("50% to Str racial multi, +40% to Tou racial multi, +15");
-			else outputText("50% to Str racial multi, +40% to Tou racial multi, +10");
-			outputText("% to Spe racial multi, +20% to Int racial multi, +20% to Wis racial multi, +10% to Lib racial multi, +" + (200 * (1 + player.newGamePlusMod())) + " max HP, +" + (1 + player.newGamePlusMod()) + " Armor)</font>");
-		}
-		else if (player.dragonScore() >= 4) outputText("\n<font color=\"#0000a0\">Half-Dragon: " + player.dragonScore() + " (+15% to Str racial multi, +15% to Tou racial multi, +15% to Int racial multi, +15% to Wis racial multi, +" + (100 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		else if (player.dragonScore() >= 12) outputText("\n<font color=\"#0000a0\">Dragon: " + player.dragonScore() + " (+40% to Str / Tou / Spe racial multi, +30% to Int / Wis racial multi, +20% to Lib racial multi, +20 to min Sen, +10% max HP, +" + (1 + player.newGamePlusMod()) + " Armor / Magic Resistance)</font>");
+		else if (player.dragonScore() >= 5) outputText("\n<font color=\"#0000a0\">Half-Dragon: " + player.dragonScore() + " (+15% to Str / Tou / Int / Wis / Lib racial multi, +15 to min Sen, +5% max HP)</font>");
 		else if (player.dragonScore() >= 1) outputText("\n<font color=\"#008000\">Half-Dragon: " + player.dragonScore() + "</font>");
 		else if (player.dragonScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Dragon: 0</font>");
 		//Dragonne
@@ -3031,14 +3016,14 @@ public class PlayerAppearance extends BaseContent {
 		if (player.kitsuneScore() >= 9 && player.tailType == Tail.FOX && player.tailCount >= 2) {
 			if (player.kitsuneScore() >= 14) {
 				if (player.tailCount == 9 && player.kitsuneScore() >= 18 && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
-					if (player.kitsuneScore() >= 21) outputText("\n<font color=\"#0000a0\">Inari: " + player.kitsuneScore() + " (-50% to Str racial multi, +40% to Spe racial multi, +135% to Int racial multi, +170% to Wis racial multi, +80% to Lib racial multi, +60 to Sens, +" + (1000 * (1 + player.newGamePlusMod())) + " max Fatigue, +100% max Soulforce)</font>");
-					else outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune of Balance: " + player.kitsuneScore() + " (-45% to Str racial multi, +35% to Spe racial multi, +120% to Int racial multi, +145% to Wis racial multi, +60% to Lib racial multi, +45 to Sens, +" + (500 * (1 + player.newGamePlusMod())) + " max Fatigue, +65% max Soulforce)</font>");
+					if (player.kitsuneScore() >= 21) outputText("\n<font color=\"#0000a0\">Inari: " + player.kitsuneScore() + " (-50% to Str racial multi, +40% to Spe racial multi, +135% to Int racial multi, +170% to Wis racial multi, +80% to Lib racial multi, +60 to min Sens, +" + (1000 * (1 + player.newGamePlusMod())) + " max Fatigue, +100% max Soulforce)</font>");
+					else outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune of Balance: " + player.kitsuneScore() + " (-45% to Str racial multi, +35% to Spe racial multi, +120% to Int racial multi, +145% to Wis racial multi, +60% to Lib racial multi, +45 to min Sens, +" + (500 * (1 + player.newGamePlusMod())) + " max Fatigue, +65% max Soulforce)</font>");
 				}
-				else outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune: " + player.kitsuneScore() + " (-40% to Str racial multi, +30% to Spe racial multi, +95% to Int racial multi, +110% to Wis racial multi, +45% to Lib racial multi, +30 to Sens, +" + (300 * (1 + player.newGamePlusMod())) + " max Fatigue, +40% max Soulforce)</font>");
+				else outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune: " + player.kitsuneScore() + " (-40% to Str racial multi, +30% to Spe racial multi, +95% to Int racial multi, +110% to Wis racial multi, +45% to Lib racial multi, +30 to min Sens, +" + (300 * (1 + player.newGamePlusMod())) + " max Fatigue, +40% max Soulforce)</font>");
 			}
-			else outputText("\n<font color=\"#0000a0\">Kitsune: " + player.kitsuneScore() + " (-35% to Str racial multi, +25% to Spe racial multi, +60% to Int racial multi, +70% to Wis racial multi, +30% to Lib racial multi, +20 to Sens, +" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue, +20% max Soulforce)</font>");
+			else outputText("\n<font color=\"#0000a0\">Kitsune: " + player.kitsuneScore() + " (-35% to Str racial multi, +25% to Spe racial multi, +60% to Int racial multi, +70% to Wis racial multi, +30% to Lib racial multi, +20 to min Sens, +" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue, +20% max Soulforce)</font>");
 		}
-		else if (player.kitsuneScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Kitsune: " + player.kitsuneScore() + " (-30% to Str racial multi, +20% to Spe racial multi, +35% to Int racial multi, +40% to Wis racial multi, +25% to Lib racial multi, +15 to Sens, +" + (50 * (1 + player.newGamePlusMod())) + " max Fatigue, +10% max Soulforce)</font>");
+		else if (player.kitsuneScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Kitsune: " + player.kitsuneScore() + " (-30% to Str racial multi, +20% to Spe racial multi, +35% to Int racial multi, +40% to Wis racial multi, +25% to Lib racial multi, +15 to min Sens, +" + (50 * (1 + player.newGamePlusMod())) + " max Fatigue, +10% max Soulforce)</font>");
 		else if (player.kitsuneScore() >= 1 && player.kitsuneScore() < 5) outputText("\n<font color=\"#008000\">Half Kitsune: " + player.kitsuneScore() + "</font>");
 		else if (player.kitsuneScore() < 1) outputText("\n<font color=\"#ff0000\">Half Kitsune: 0</font>");
 		//Lizard
@@ -3237,23 +3222,25 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.scorpionScore() < 1) outputText("\n<font color=\"#ff0000\">Half Scorpion-morph: 0</font>");*/
 		outputText("\nScorpion-morph: " + player.scorpionScore());
 		//Scylla
-		if (player.scyllaScore() >= 17) {
-			outputText("\n<font color=\"#0000a0\">Elder Kraken: " + player.scyllaScore() + " (+");
-			if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("175");
-			else if (player.isScylla()) outputText("165");
-			else if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("145");
-			else outputText("(+135 ");
-			outputText("% to Str racial multi, +60% to Tou racial multi, +60% to Int racial multi, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		if (player.scyllaScore() >= 12 && player.isKraken()) {
+			if (player.scyllaScore() >= 17) {
+				outputText("\n<font color=\"#0000a0\">Elder Kraken: " + player.scyllaScore() + " (+");
+				if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("175");
+				else if (player.isScylla()) outputText("165");
+				else if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("145");
+				else outputText("(+135 ");
+				outputText("% to Str racial multi, +60% to Tou racial multi, +60% to Int racial multi, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+			}
+			else {
+				outputText("\n<font color=\"#0000a0\">Kraken: " + player.scyllaScore() + " (+");
+				if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("160");
+				else if (player.isScylla()) outputText("150");
+				else if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("130");
+				else outputText("120");
+				outputText("% to Str racial multi, +60% to Int racial multi, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+			}
 		}
-		else if (player.scyllaScore() >= 12) {
-			outputText("\n<font color=\"#0000a0\">Kraken: " + player.scyllaScore() + " (+");
-			if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("160");
-			else if (player.isScylla()) outputText("150");
-			else if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("130");
-			else outputText("120");
-			outputText("% to Str racial multi, +60% to Int racial multi, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-		}
-		else if (player.scyllaScore() >= 7) {
+		else if (player.scyllaScore() >= 7 && player.isScylla()) {
 			outputText("\n<font color=\"#0000a0\">Scylla: " + player.scyllaScore() + " (+");
 			if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("105");
 			else if (player.isScylla()) outputText("95");
@@ -3357,7 +3344,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.yetiScore() >= 1) outputText("\n<font color=\"#008000\">Half Yeti: " + player.yetiScore() + "</font>");
 		else if (player.yetiScore() < 1) outputText("\n<font color=\"#ff0000\">Half Yeti: 0</font>");
 		//Yggdrasil
-		if (player.yggdrasilScore() >= 10) outputText("\n<font color=\"#0000a0\">Yggdrasil: " + player.yggdrasilScore() + " (+50% to Str racial multi, +70% to Tou racial multi, -50% to Spe racial multi, +50% to Int racial multi, +80% to Wis racial multi, -50% to Lib racial multi, +" + (10 * (1 + player.newGamePlusMod())) + " Armor)</font>");
+		if (player.yggdrasilScore() >= 10) outputText("\n<font color=\"#0000a0\">Yggdrasil: " + player.yggdrasilScore() + " (+50% to Str racial multi, +70% to Tou racial multi, -50% to Spe racial multi, +50% to Int racial multi, +80% to Wis racial multi, -50% to Lib racial multi, +" + (10 * (1 + player.newGamePlusMod())) + " Armor / Magic Resistance)</font>");
 		else if (player.yggdrasilScore() >= 1) outputText("\n<font color=\"#008000\">Yggdrasil: " + player.yggdrasilScore() + "</font>");
 		else if (player.yggdrasilScore() < 1) outputText("\n<font color=\"#ff0000\">Yggdrasil: 0</font>");
 		//Yuki Onna
@@ -3438,4 +3425,4 @@ public class PlayerAppearance extends BaseContent {
 		else outputText("<b>Yo, this is an error.</b>");
 	}
 }
-}
+}

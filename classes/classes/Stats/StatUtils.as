@@ -146,7 +146,7 @@ public class StatUtils {
 		["str", "Strength"],
 		["tou", "Toughness"],
 		["spe", "Speed"],
-		["int", "Inteligence"],
+		["int", "Intelligence"],
 		["wis", "Wisdom"],
 		["lib", "Libido"],
 		["sens", "Sensitivity"]
@@ -156,7 +156,7 @@ public class StatUtils {
 		["str.mult", "Strength"],
 		["tou.mult", "Toughness"],
 		["spe.mult", "Speed"],
-		["int.mult", "Inteligence"],
+		["int.mult", "Intelligence"],
 		["wis.mult", "Wisdom"],
 		["lib.mult", "Libido"],
 	]);
