@@ -3637,9 +3637,9 @@ use namespace CoC;
 			}
 			if (TopRace == "frost wyrm") {
 				if (TopScore >= 10) {
-					if (TopScore >= 26) {
+					if (TopScore >= 29) {
 						race = "great frost wyrm";
-					} else if (TopScore >= 18){
+					} else if (TopScore >= 20){
 						race = "frost wyrm";
 					} else {
 						race = "half frost wyrm";
@@ -10835,16 +10835,16 @@ use namespace CoC;
 				}
 			}
 			if (frostWyrmScore() >= 10) {
-				if (frostWyrmScore() >= 26) {
-					maxStrCap2 += 180;
+				if (frostWyrmScore() >= 29) {
+					maxStrCap2 += 200;
 					maxSpeCap2 += 90;
 					maxTouCap2 += 160;
 					maxIntCap2 -= 90;
-					maxLibCap2 += 50;
-				} else if (frostWyrmScore() >= 18) {
-					maxStrCap2 += 125;
+					maxLibCap2 += 75;
+				} else if (frostWyrmScore() >= 20) {
+					maxStrCap2 += 140;
 					maxSpeCap2 += 75;
-					maxTouCap2 += 110;
+					maxTouCap2 += 125;
 					maxIntCap2 -= 90;
 					maxLibCap2 += 50;
 				} else {
