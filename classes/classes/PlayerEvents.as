@@ -1629,7 +1629,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.BullStrength, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if ((player.minotaurScore() < 15 || player.cowScore() < 15) && player.findPerk(PerkLib.BullStrength) >= 0) {
+			if ((player.minotaurScore() < 15 && player.cowScore() < 15) && player.findPerk(PerkLib.BullStrength) >= 0) {
 				outputText("\nYou feel weaker punyer it looks like you lost the benefit of your bull strength. Probably because you are no longuer bovine like enought.\n\n<b>(Lost the Bull Strength perk!)</b>\n");
 				player.removePerk(PerkLib.BullStrength);
 				needNext = true;
