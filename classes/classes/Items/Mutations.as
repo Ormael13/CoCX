@@ -14329,6 +14329,12 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed ears covered in small scales</b>.  You bet they look cute!");
             changes++;
         }
+        //Gain Dragon Ears
+        if (changes < changeLimit && rand(3) == 0 && player.ears.type != Ears.DRAGON) {
+            setEarType(Ears.DRAGON);
+            outputText("\n\nA prickling sensation suddenly fills your ears; unpleasant, but hardly painful.  It grows and grows until you can't stand it any more, and reach up to scratch at them.  To your surprise, you find them melting away like overheated candles.  You panic as they fade into nothingness, leaving you momentarily deaf and dazed, stumbling around in confusion.  Then, all of a sudden, hearing returns to you.  Gratefully investigating, you find you now have a pair of reptilian ear-holes, one on either side of your head.  A sudden pain strikes your temples, and you feel bony spikes bursting through the sides of your head, three on either side, which are quickly sheathed in folds of skin to resemble fins.  With a little patience, you begin to adjust these fins just like ears to aid your hearing.  <b>You now have dragon ears!</b>");
+            changes++;
+        }
         //Gain Frost wyrm Eyes
         if (player.eyes.type != Eyes.FROSTWYRM && rand(3) == 0 && changes < changeLimit) {
             setEyeTypeAndColor(Eyes.FROSTWYRM, "yellow");
