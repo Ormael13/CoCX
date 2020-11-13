@@ -6789,7 +6789,7 @@ use namespace CoC;
 		public function frostWyrmScore():Number {
 			Begin("Player","racialScore","frost wyrm");
 			var frostWyrmCounter:Number = 0;
-			if (ears.type == Ears.SNAKE)
+			if (ears.type == Ears.SNAKE || ears.type == Ears.DRAGON)
 				frostWyrmCounter++;
 			if (eyes.type == Eyes.FROSTWYRM)
 				frostWyrmCounter++;
