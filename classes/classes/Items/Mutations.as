@@ -14325,13 +14325,19 @@ public final class Mutations extends MutationsHelper {
         }
         //Gain frost wyrm Ears
         if (changes < changeLimit && rand(3) == 0 && player.ears.type != Ears.SNAKE) {
-            CoC.instance.mutations.setEarType(Ears.SNAKE);
+            setEarType(Ears.SNAKE);
             outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed ears covered in small scales</b>.  You bet they look cute!");
+            changes++;
+        }
+        //Gain Dragon Ears
+        if (changes < changeLimit && rand(3) == 0 && player.ears.type != Ears.DRAGON) {
+            setEarType(Ears.DRAGON);
+            outputText("\n\nA prickling sensation suddenly fills your ears; unpleasant, but hardly painful.  It grows and grows until you can't stand it any more, and reach up to scratch at them.  To your surprise, you find them melting away like overheated candles.  You panic as they fade into nothingness, leaving you momentarily deaf and dazed, stumbling around in confusion.  Then, all of a sudden, hearing returns to you.  Gratefully investigating, you find you now have a pair of reptilian ear-holes, one on either side of your head.  A sudden pain strikes your temples, and you feel bony spikes bursting through the sides of your head, three on either side, which are quickly sheathed in folds of skin to resemble fins.  With a little patience, you begin to adjust these fins just like ears to aid your hearing.  <b>You now have dragon ears!</b>");
             changes++;
         }
         //Gain Frost wyrm Eyes
         if (player.eyes.type != Eyes.FROSTWYRM && rand(3) == 0 && changes < changeLimit) {
-            CoC.instance.mutations.setEyeTypeAndColor(Eyes.FROSTWYRM, "yellow");
+            setEyeTypeAndColor(Eyes.FROSTWYRM, "yellow");
             outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil and black sclera like that of a frost wyrm. <b>You now have frost wyrm eyes!</b>.");
             changes++;
         }
@@ -14346,14 +14352,14 @@ public final class Mutations extends MutationsHelper {
         //Gain Dragon Tongue
         if (changes < changeLimit && rand(3) == 0 && player.tongue.type != Tongue.DRACONIC) {
             outputText("\n\nYour tongue suddenly falls out of your mouth and begins undulating as it grows longer.  For a moment it swings wildly, completely out of control; but then settles down and you find you can control it at will, almost like a limb.  You're able to stretch it to nearly 4 feet and retract it back into your mouth to the point it looks like a normal human tongue.  <b>You now have a draconic tongue.</b>");
-            CoC.instance.mutations.setTongueType(Tongue.DRACONIC);
+            setTongueType(Tongue.DRACONIC);
             changes++;
             //Note: This type of tongue should be eligible for all things you can do with demon tongue... Dunno if it's best attaching a boolean just to change the description or creating a whole new tongue type.
         }
         //Hair Color
-        if (!InCollection(player.hairColor, wyrmHairColor) < changeLimit && rand(3) == 0) {
+        if (!InCollection(player.hairColor, wyrmHairColor) && changes < changeLimit && rand(3) == 0) {
             player.hairColorOnly = randomChoice(wyrmHairColor);
-            outputText("\n\nYour head tingles as something in your hair change, the strands flashing for an instant before they turn " + player.hairColor + " just like those of a frost wyrm.<");
+            outputText("\n\nYour head tingles as something in your hair change, the strands flashing for an instant before they turn <b>" + player.hairColor + " just like those of a frost wyrm.</b><");
             changes++;
         }
         //Coat
@@ -14394,11 +14400,9 @@ public final class Mutations extends MutationsHelper {
                     outputText("\n\nHowever this doesnt last long as changes begins to overcome your legs again.");
                 }
                 outputText("\n\nYou find it increasingly harder to keep standing as your legs start feeling weak. " +
-                        "You swiftly collapse, unable to maintain your own weight as your legs begins to changes.");
-                //(If used in combat, you lose a turn here. Half-corrupted Jojo and the Naga won't attack you during that period, but other monsters will)
-                //FUCK NO
-                outputText("\n\nTrying to get back up, you realize that the skin on the inner sides of your thighs is merging together like it was being sewn by an invisible needle.");
-                outputText("  The process continues through the length of your [legs], eventually reaching your [feet].  " +
+                        "You swiftly collapse, unable to maintain your own weight as your legs begins to changes." +
+                        "\n\nTrying to get back up, you realize that the skin on the inner sides of your thighs is merging together like it was being sewn by an invisible needle." +
+                        " The process continues through the length of your [legs], eventually reaching your [feet].  " +
                         "Just when you think that the transformation is over, you find yourself pinned to the ground by an overwhelming sensation of pain. " +
                         "You hear the horrible sound of your bones snapping, fusing together and changing into something else while you contort in unthinkable agony. " +
                         "Sometime later you feel the pain begin to ease and you lay on the ground, spent by the terrible experience. Once you feel you've recovered, you try to stand, " +

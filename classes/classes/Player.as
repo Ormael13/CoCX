@@ -533,9 +533,11 @@ use namespace CoC;
 			if (arms.type == Arms.YETI) armorDef += (1 * newGamePlusMod);
 			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER) armorDef += (2 * newGamePlusMod);
 			if (arms.type == Arms.DRAGON) armorDef += (3 * newGamePlusMod);
+			if (arms.type == Arms.FROSTWYRM) armorDef += (3 * newGamePlusMod);
 			if (arms.type == Arms.HYDRA) armorDef += (4 * newGamePlusMod);
 			if (tailType == Tail.SPIDER_ADBOMEN || tailType == Tail.MANTIS_ABDOMEN || tailType == Tail.BEE_ABDOMEN) armorDef += (2 * newGamePlusMod);
 			if (tailType == Tail.DRACONIC) armorDef += (3 * newGamePlusMod);
+			if (lowerBody == LowerBody.FROSTWYRM) armorDef += (5 * newGamePlusMod);
 			if (lowerBody == LowerBody.YETI) armorDef += (1 * newGamePlusMod);
 			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER) armorDef += (2 * newGamePlusMod);
 			if (lowerBody == LowerBody.DRAGON) armorDef += (3 * newGamePlusMod);
@@ -724,9 +726,11 @@ use namespace CoC;
 			if (arms.type == Arms.YETI) armorMDef += (1 * newGamePlusMod);
 			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER) armorMDef += (2 * newGamePlusMod);
 			if (arms.type == Arms.DRAGON) armorMDef += (3 * newGamePlusMod);
+			if (arms.type == Arms.FROSTWYRM) armorMDef += (3 * newGamePlusMod);
 			if (arms.type == Arms.HYDRA) armorMDef += (4 * newGamePlusMod);
 			if (tailType == Tail.SPIDER_ADBOMEN || tailType == Tail.MANTIS_ABDOMEN || tailType == Tail.BEE_ABDOMEN) armorMDef += (2 * newGamePlusMod);
 			if (tailType == Tail.DRACONIC) armorMDef += (3 * newGamePlusMod);
+			if (tailType == LowerBody.FROSTWYRM) armorMDef += (5 * newGamePlusMod);
 			if (lowerBody == LowerBody.YETI) armorMDef += (1 * newGamePlusMod);
 			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER) armorMDef += (2 * newGamePlusMod);
 			if (lowerBody == LowerBody.DRAGON) armorMDef += (3 * newGamePlusMod);
@@ -3633,9 +3637,9 @@ use namespace CoC;
 			}
 			if (TopRace == "frost wyrm") {
 				if (TopScore >= 10) {
-					if (TopScore >= 20) {
+					if (TopScore >= 29) {
 						race = "great frost wyrm";
-					} else if (TopScore >= 18){
+					} else if (TopScore >= 20){
 						race = "frost wyrm";
 					} else {
 						race = "half frost wyrm";
@@ -6806,7 +6810,7 @@ use namespace CoC;
 		public function frostWyrmScore():Number {
 			Begin("Player","racialScore","frost wyrm");
 			var frostWyrmCounter:Number = 0;
-			if (ears.type == Ears.SNAKE)
+			if (ears.type == Ears.SNAKE || ears.type == Ears.DRAGON)
 				frostWyrmCounter++;
 			if (eyes.type == Eyes.FROSTWYRM)
 				frostWyrmCounter++;
@@ -6848,12 +6852,26 @@ use namespace CoC;
 				frostWyrmCounter++;
 			if (hasPerk(PerkLib.DraconicLungsFinalForm))
 				frostWyrmCounter++;
-			if (hasPerk(PerkLib.DraconicLungs) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+			if (hasPerk(PerkLib.DraconicBones))
 				frostWyrmCounter++;
-			if (findPerk(PerkLib.DraconicLungsEvolved) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+			if (hasPerk(PerkLib.DraconicBonesEvolved))
 				frostWyrmCounter++;
-			if (hasPerk(PerkLib.DraconicLungsFinalForm) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+			if (hasPerk(PerkLib.DraconicBonesFinalForm))
 				frostWyrmCounter++;
+			if (hasPerk(PerkLib.DraconicHeart))
+				frostWyrmCounter++;
+			if (hasPerk(PerkLib.DraconicHeartEvolved))
+				frostWyrmCounter++;
+			if (hasPerk(PerkLib.DraconicHeartFinalForm))
+				frostWyrmCounter++;
+			if ((hasPerk(PerkLib.DraconicBones) || hasPerk(PerkLib.DraconicHeart) || hasPerk(PerkLib.DraconicLungs)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+				frostWyrmCounter++;
+			if ((hasPerk(PerkLib.DraconicBonesEvolved) || hasPerk(PerkLib.DraconicHeartEvolved) || hasPerk(PerkLib.DraconicLungsEvolved)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+				frostWyrmCounter++;
+			if ((hasPerk(PerkLib.DraconicBonesFinalForm) || hasPerk(PerkLib.DraconicHeartFinalForm) || hasPerk(PerkLib.DraconicLungsFinalForm)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+				frostWyrmCounter++;
+			if (hasPerk(PerkLib.DragonsDescendant) || hasPerk(PerkLib.BloodlineDragon))
+				frostWyrmCounter += 2;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				frostWyrmCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && frostWyrmCounter >= 4)
@@ -10817,16 +10835,16 @@ use namespace CoC;
 				}
 			}
 			if (frostWyrmScore() >= 10) {
-				if (frostWyrmScore() >= 20) {
-					maxStrCap2 += 135;
+				if (frostWyrmScore() >= 29) {
+					maxStrCap2 += 200;
 					maxSpeCap2 += 90;
-					maxTouCap2 += 115;
+					maxTouCap2 += 160;
 					maxIntCap2 -= 90;
-					maxLibCap2 += 50;
-				} else if (frostWyrmScore() >= 18) {
-					maxStrCap2 += 125;
+					maxLibCap2 += 75;
+				} else if (frostWyrmScore() >= 20) {
+					maxStrCap2 += 140;
 					maxSpeCap2 += 75;
-					maxTouCap2 += 110;
+					maxTouCap2 += 125;
 					maxIntCap2 -= 90;
 					maxLibCap2 += 50;
 				} else {
@@ -11346,8 +11364,15 @@ use namespace CoC;
 				}
 			}
 			if (isNaga()) {
-				maxStrCap2 += 15;
-				maxSpeCap2 += 15;
+				if(lowerBody == LowerBody.FROSTWYRM){
+					maxStrCap2 += 20;
+					maxTouCap2 += 10;
+				}
+				else
+				{
+					maxStrCap2 += 15;
+					maxSpeCap2 += 15;
+				}
 			}
 			if (isTaur()) {
 				maxSpeCap2 += 20;

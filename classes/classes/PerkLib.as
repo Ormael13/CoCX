@@ -3,7 +3,9 @@
  */
 package classes
 {
+import classes.BodyParts.Arms;
 import classes.BodyParts.Face;
+import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Perks.*;
@@ -5508,22 +5510,22 @@ public class PerkLib
 			}, "Displacer beast");
 			DraconicBones.requireBonesAndMarrowMutationSlot()
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.arms.type == 15;
+                return (player.arms.type == Arms.DRAGON || player.arms.type == Arms.FROSTWYRM);
 				}, "Dragon arms")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.lowerBody == 18;
+                return (player.lowerBody == LowerBody.DRAGON || player.lowerBody == LowerBody.FROSTWYRM);
 				}, "Dragon legs")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.tailType == 14;
+                return (player.tailType == Tail.DRACONIC || player.lowerBody == LowerBody.FROSTWYRM);
 				}, "Dragon tail")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.dragonScore() >= 5);
+                return (player.dragonScore() >= 5 || player.frostWyrmScore() >= 10);
             }, "Dragon race");
 			DraconicHeart.requireHeartMutationSlot()
                 .requirePerk(DraconicBones)
                 .requirePerk(DraconicLungs)
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.dragonScore() >= 5);
+                return (player.dragonScore() >= 5 || player.frostWyrmScore() >= 10);
             }, "Dragon race");
 			DraconicLungs.requireLungsMutationSlot()
 				.requirePerk(DragonFireBreath)
@@ -5911,14 +5913,14 @@ public class PerkLib
                     .requirePerk(DraconicHeart)
                     .requirePerk(DraconicLungs)
                     .requireCustomFunction(function (player:Player):Boolean {
-						return (player.dragonScore() >= 10);
+						return (player.dragonScore() >= 10 || player.frostWyrmScore() >= 10);
                     }, "Dragon race");
 			DraconicHeartEvolved.requireLevel(12)
                     .requirePerk(DraconicBones)
                     .requirePerk(DraconicHeart)
                     .requirePerk(DraconicLungs)
                     .requireCustomFunction(function (player:Player):Boolean {
-						return (player.dragonScore() >= 10);
+						return (player.dragonScore() >= 10 || player.frostWyrmScore() >= 10);
                     }, "Dragon race");
 			DraconicLungsEvolved.requireLevel(12)
                     .requirePerk(DraconicBones)
@@ -6321,21 +6323,21 @@ public class PerkLib
                     .requirePerk(DraconicHeartEvolved)
                     .requirePerk(DraconicLungsEvolved)
                     .requireCustomFunction(function (player:Player):Boolean {
-						return (player.dragonScore() >= 15);
+						return (player.dragonScore() >= 15 || player.frostWyrmScore() >= 15);
                     }, "Dragon race");
 			DraconicHeartFinalForm.requireLevel(30)
                     .requirePerk(DraconicBonesEvolved)
                     .requirePerk(DraconicHeartEvolved)
                     .requirePerk(DraconicLungsEvolved)
                     .requireCustomFunction(function (player:Player):Boolean {
-						return (player.dragonScore() >= 15);
+						return (player.dragonScore() >= 15 || player.frostWyrmScore() >= 15);
                     }, "Dragon race");
 			DraconicLungsFinalForm.requireLevel(30)
                     .requirePerk(DraconicBonesEvolved)
                     .requirePerk(DraconicHeartEvolved)
                     .requirePerk(DraconicLungsEvolved)
                     .requireCustomFunction(function (player:Player):Boolean {
-						return (player.dragonScore() >= 15 || player.frostWyrmScore() >= 16);
+						return (player.dragonScore() >= 15 || player.frostWyrmScore() >= 15);
                     }, "Dragon race and its variants");
 			EasterBunnyEggBagFinalForm.requireLevel(30).requirePerk(EasterBunnyEggBagEvolved).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
