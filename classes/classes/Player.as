@@ -6831,6 +6831,18 @@ use namespace CoC;
 				frostWyrmCounter++;
 			if (findPerk(PerkLib.DraconicLungsFinalForm) >= 0)
 				frostWyrmCounter++;
+			if (findPerk(PerkLib.DraconicLungs) >= 0)
+				frostWyrmCounter++;
+			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0)
+				frostWyrmCounter++;
+			if (findPerk(PerkLib.DraconicLungsFinalForm) >= 0)
+				frostWyrmCounter++;
+			if (findPerk(PerkLib.DraconicLungs) >= 0)
+				frostWyrmCounter++;
+			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0)
+				frostWyrmCounter++;
+			if (findPerk(PerkLib.DraconicLungsFinalForm) >= 0)
+				frostWyrmCounter++;
 			if (findPerk(PerkLib.DraconicLungs) >= 0 && findPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
 				frostWyrmCounter++;
 			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0)
