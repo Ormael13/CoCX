@@ -3498,7 +3498,8 @@ public class Combat extends BaseContent {
             //DOING EXTRA CLAW ATTACKS
             if (player.hasAClawAttack()) {
                 var DamageMultiplier:Number = 1;
-                if (!player.arms.type == Arms.MANTIS && !player.arms.type == Arms.KAMAITACHI){
+                if (player.arms.type == Arms.FROSTWYRM) DamageMultiplier = 2;
+                if (player.arms.type != Arms.MANTIS && player.arms.type != Arms.KAMAITACHI){
                     outputText("You claw viciously at your opponent tearing away at its flesh.");
                 }
                 else {
@@ -3575,6 +3576,8 @@ public class Combat extends BaseContent {
             }
             //TAIL SLAPPING FOR THE KILL
             if (player.hasATailSlapAttack()) {
+                var TailDamageMultiplier:Number = 1;
+                if (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.FROSTWYRM) TailDamageMultiplier = 3;
                 if (player.tail.type == Tail.MANTICORE_PUSSYTAIL){
                     outputText("You hiss and raise your tail. You strike at blinding speed impaling your opponent twice with your spike");
                     if (player.tailVenom >= 5) {
@@ -3611,7 +3614,7 @@ public class Combat extends BaseContent {
                     if (player.tail.type == Tail.SALAMANDER) outputText(" setting your target on fire");
                     if (player.tail.type == Tail.GARGOYLE) outputText(" leaving it dazed");
                     outputText(".")
-                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack(TailDamageMultiplier);
                     outputText("\n");
                 }
             }
