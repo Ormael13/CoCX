@@ -1608,6 +1608,32 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.TitanicStrength);
 				needNext = true;
 			}
+			//Lacta bovine immubities
+			if (player.cowScore() >= 10 && player.findPerk(PerkLib.LactaBovineImmunity) < 0) {
+				outputText("\nAs you become more of a lacta bovine you become increasingly obsessed with thoughts of horsecocks and cum sloshing balls, namely minotaur balls. While you are aware you naturaly became addicted to minotaur cum you also know your nature as a lacta bovine will protect you from most of its harmful effects allowing you to sample the substance to your heart content witheout risks.");
+				outputText(".\n\n<b>(Gained the Lacta Bovine Immunity perk!)</b>\n");
+				player.createPerk(PerkLib.LactaBovineImmunity, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.cowScore() < 10 && player.findPerk(PerkLib.LactaBovineImmunity) >= 0) {
+				outputText("\nYour mind clears up as you cease to obsess over minotaur dicks this is also a sign that you are no longuer cow enought to be immune to the harmful effect of minotaur cum.\n\n<b>(Lost the Lacta Bovine Immunity perk!)</b>\n");
+				player.removePerk(PerkLib.LactaBovineImmunity);
+				needNext = true;
+			}
+			//Bull Strength
+			if ((player.minotaurScore() >= 15 || player.cowScore() >= 15) && player.findPerk(PerkLib.BullStrength) < 0) {
+				outputText("\nWhoa you feel tremendous power accumulate in ");
+				if (player.minotaurScore() >= 15) outputText("your balls. It fills your body with bovine strength, nourishing your muscle with manly power. They say having big balls makes you stronguer well its not like you can deny the correlation anymore!");
+				if (player.cowScore() >= 15) outputText("your mammaries. It fills your body with bovine strength, nourishing your muscle with milky power. Talk about storing all your might into your jugs!");
+				outputText(".\n\n<b>(Gained Bull Strength perk!)</b>\n");
+				player.createPerk(PerkLib.BullStrength, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if ((player.minotaurScore() < 15 && player.cowScore() < 15) && player.findPerk(PerkLib.BullStrength) >= 0) {
+				outputText("\nYou feel weaker punyer it looks like you lost the benefit of your bull strength. Probably because you are no longuer bovine like enought.\n\n<b>(Lost the Bull Strength perk!)</b>\n");
+				player.removePerk(PerkLib.BullStrength);
+				needNext = true;
+			}
 			//Soul Sense
 			if (player.maxSoulforce() >= 200 && player.findPerk(PerkLib.SoulApprentice) >= 0 && player.findPerk(PerkLib.SoulSense) < 0) {
 				outputText("\nDuring a casual walk around your camp you suddenly notice, or rather feel, something unexpected. Your surrounding blurs for a moment, to be replaced with a forest. You notice a goblin strolling nearby. Suddenly, she stops and slowly looks around, staring directly at you. A moment later, your vision of the forest becomes blurry, eventually fading away to be replaced by your camp and its surroundings. ");

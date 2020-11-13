@@ -126,11 +126,11 @@ use namespace CoC;
 				return;
 			}
 			//10% chance to mino encounter rate if addicted
-			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 && rand(10) == 0) {
+			if ((flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 || player.hasPerk(PerkLib.LactaBovineImmunity)) && rand(10) == 0) {
 				spriteSelect(44);
 				//Cum addictus interruptus!  LOL HARRY POTTERFAG
 				//Withdrawl auto-fuck!
-				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) {
+				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3 || player.hasPerk(PerkLib.LactaBovineImmunity)) {
                     SceneLib.mountain.minotaurScene.minoAddictionFuck();
                     return;
 				}

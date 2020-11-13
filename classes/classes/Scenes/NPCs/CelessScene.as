@@ -214,7 +214,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 					"The time passes and eventually both of you head back to camp, your daughter still sporting a wide smile from all the fun she had, none the wiser about your little altercation with that moron of an imp.\n\n" +
 					"As innocent as a day can be in Mareth, even if you had to force the issue. But if it’s for the sake of your daughter having a happy childhood, you would gladly beat this whole crazy realm into submission.")
 		}
-		_age++;
+		_age+=72;
 		doNext(camp.returnToCampUseOneHour);
 	}
 

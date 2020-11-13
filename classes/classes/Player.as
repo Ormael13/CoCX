@@ -3239,12 +3239,16 @@ use namespace CoC;
 			//	race = "corrupted mutant";
 			if (TopRace == "minotaur") {
 				if (TopScore >= 4)
-					if (TopScore >= 10) race = "minotaur";
+					if (TopScore >= 10) race = "elder minotaur";
+					else if (TopScore >= 10) race = "minotaur";
 					else race = "half-minotaur";
 			}
 			if (TopRace == "cow") {
 				if (TopScore >= 4) {
-					if (TopScore >= 10) {
+					if (TopScore >= 15) {
+						race = "Lacta Bovine";
+					}
+					else if (TopScore >= 10) {
 						race = "cow-";
 						race += mf("morph", "girl");
 					} else {
@@ -4554,7 +4558,7 @@ use namespace CoC;
 					cowCounter++;
 				if (arms.type == Arms.HUMAN)
 					cowCounter++;
-				if (hasFur() || hasPartialCoat(Skin.FUR))
+				if (hasFur() || hasPartialCoat(Skin.FUR) || hasPlainSkinOnly())
 					cowCounter++;
 				if (biggestTitSize() > 4)
 					cowCounter++;
@@ -4566,7 +4570,11 @@ use namespace CoC;
 					cowCounter++;
 				if (cocks.length > 0)
 					cowCounter -= 8;
+				if (balls > 0)
+					cowCounter -= 8;
 			}
+			if (findPerk(PerkLib.Feeder) >= 0)
+				cowCounter++;
 			if (findPerk(PerkLib.LactaBovinaOvaries) >= 0)
 				cowCounter++;
 			if (findPerk(PerkLib.LactaBovinaOvariesEvolved) >= 0)
@@ -9535,7 +9543,7 @@ use namespace CoC;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 60) raw /= 2;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 80) raw /= 2;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 90) raw /= 2;
-			if(findPerk(PerkLib.MinotaurCumResistance) >= 0 || findPerk(PerkLib.ManticoreCumAddict) >= 0 || findPerk(PerkLib.HaltedVitals) >= 0) raw *= 0;
+			if(findPerk(PerkLib.MinotaurCumResistance) >= 0 || findPerk(PerkLib.ManticoreCumAddict) >= 0 || findPerk(PerkLib.HaltedVitals) >= 0 || findPerk(PerkLib.LactaBovineImmunity) >= 0) raw *= 0;
 			//If in withdrawl, readdiction is potent!
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) raw += 10;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) raw += 5;
@@ -9543,12 +9551,11 @@ use namespace CoC;
 			//PUT SOME CAPS ON DAT' SHIT
 			if(raw > 50) raw = 50;
 			if(raw < -50) raw = -50;
-			if(findPerk(PerkLib.ManticoreCumAddict) < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] += raw;
+			if(findPerk(PerkLib.ManticoreCumAddict) < 0 || findPerk(PerkLib.LactaBovineImmunity) < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] += raw;
 			//Recheck to make sure shit didn't break
 			if(findPerk(PerkLib.MinotaurCumResistance) >= 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0; //Never get addicted!
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 120) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 120;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
-
 		}
 
 		public function hasSpells():Boolean
@@ -10118,7 +10125,14 @@ use namespace CoC;
 			var minSen:Number = 0;
 			//Alter max stats depending on race (+15 za pkt)
 			if (cowScore() >= 4) {
-				if (cowScore() >= 10) {
+				if (cowScore() >= 15) {
+					maxStrCap2 += 170;
+					maxTouCap2 += 45;
+					maxSpeCap2 -= 40;
+					maxIntCap2 -= 20;
+					maxLibCap2 += 70;
+				}
+				else if (cowScore() >= 10) {
 					maxStrCap2 += 120;
 					maxTouCap2 += 45;
 					maxSpeCap2 -= 40;
@@ -10134,7 +10148,14 @@ use namespace CoC;
 				}
 			}//+20/10-20
 			if (minotaurScore() >= 4) {
-				if (minotaurScore() >= 10) {
+				if (minotaurScore() >= 15) {
+					maxStrCap2 += 170;
+					maxTouCap2 += 45;
+					maxSpeCap2 -= 20;
+					maxIntCap2 -= 40;
+					maxLibCap2 += 70;
+				}
+				else if (minotaurScore() >= 10) {
 					maxStrCap2 += 120;
 					maxTouCap2 += 45;
 					maxSpeCap2 -= 20;
@@ -11379,6 +11400,14 @@ use namespace CoC;
 			strtouspeintwislibsenCalculation2();
 			if (hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tallness*4))}, 'Titanic Strength', { text: 'Titanic Strength' });
 			if (!hasPerk(PerkLib.TitanicStrength) && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
+			if (hasPerk(PerkLib.BullStrength)){
+				var power:Number = 0;
+				if(cowScore() >=15) power = lactationQ()*0.001;
+				if(minotaurScore() >=15) power = cumCapacity()*0.001;
+				if (power > 0.5) power = 0.5;
+				statStore.replaceBuffObject({'str.mult':(Math.round(power))}, 'Bull Strength', { text: 'Bull Strength' });
+			}
+			if (!hasPerk(PerkLib.BullStrength) && statStore.hasBuff('Bull Strength')) statStore.removeBuffs('Bull Strength');
 			statStore.replaceBuffObject({
 				"str.mult":statusEffectv1(StatusEffects.StrTouSpeCounter2)/100,
 				"tou.mult":statusEffectv2(StatusEffects.StrTouSpeCounter2)/100,
@@ -12418,4 +12447,3 @@ use namespace CoC;
 		}
 	}
 }
-

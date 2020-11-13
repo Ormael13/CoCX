@@ -27,7 +27,7 @@ public function minoVictoryRapeChoices():void {
 	spriteSelect(44);
 	var feedposit:String = "B. Feed";
 	clearOutput();
-	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1) {
+	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.hasPerk(PerkLib.LactaBovineImmunity) || player.hasPerk(PerkLib.ManticoreCumAddict)) {
 		outputText("Smiling down at your vanquished foe, you feel a familiar hunger growing within you.  What do you do?");
 	}
 	//Not an addict
@@ -112,8 +112,8 @@ private function postfightoptions():void {
 		if (player.gender == 3 && x >= 0 && !player.isTaur()) addButton(2, "Use Both", minotaurGetsRapedByHerms);
 		if (tentaRape != null) addButton(3, "TentacleDick", rapeMinotaurTentacles);
 		if (urethralPen != null) addButton(4, "UrethraFuck", minoUrethralPen);
-		if (filled != null) addButton(5, "Get Filled", takeMinoCumDirectly);
-		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {
+		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || player.hasPerk(PerkLib.LactaBovineImmunity) || player.hasPerk(PerkLib.ManticoreCumAddict)) {
+			addButton(5, "Get Filled", takeMinoCumDirectly);
 			if(player.biggestTitSize() >= 5 && !player.isNaga()) addButton(6, "Titfuck Him", minoGetsTitFucked);
 			if(player.isNaga()) addButton(6, "ProstateMilk", minoGetsTitFucked);
 		}
