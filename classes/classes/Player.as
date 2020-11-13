@@ -3637,7 +3637,7 @@ use namespace CoC;
 			}
 			if (TopRace == "frost wyrm") {
 				if (TopScore >= 10) {
-					if (TopScore >= 20) {
+					if (TopScore >= 26) {
 						race = "great frost wyrm";
 					} else if (TopScore >= 18){
 						race = "frost wyrm";
@@ -6852,12 +6852,26 @@ use namespace CoC;
 				frostWyrmCounter++;
 			if (hasPerk(PerkLib.DraconicLungsFinalForm))
 				frostWyrmCounter++;
-			if (hasPerk(PerkLib.DraconicLungs) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+			if (hasPerk(PerkLib.DraconicBones))
 				frostWyrmCounter++;
-			if (findPerk(PerkLib.DraconicLungsEvolved) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+			if (hasPerk(PerkLib.DraconicBonesEvolved))
 				frostWyrmCounter++;
-			if (hasPerk(PerkLib.DraconicLungsFinalForm) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+			if (hasPerk(PerkLib.DraconicBonesFinalForm))
 				frostWyrmCounter++;
+			if (hasPerk(PerkLib.DraconicHeart))
+				frostWyrmCounter++;
+			if (hasPerk(PerkLib.DraconicHeartEvolved))
+				frostWyrmCounter++;
+			if (hasPerk(PerkLib.DraconicHeartFinalForm))
+				frostWyrmCounter++;
+			if ((hasPerk(PerkLib.DraconicBones) || hasPerk(PerkLib.DraconicHeart) || hasPerk(PerkLib.DraconicLungs)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+				frostWyrmCounter++;
+			if ((hasPerk(PerkLib.DraconicBonesEvolved) || hasPerk(PerkLib.DraconicHeartEvolved) || hasPerk(PerkLib.DraconicLungsEvolved)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+				frostWyrmCounter++;
+			if ((hasPerk(PerkLib.DraconicBonesFinalForm) || hasPerk(PerkLib.DraconicHeartFinalForm) || hasPerk(PerkLib.DraconicLungsFinalForm)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+				frostWyrmCounter++;
+			if (hasPerk(PerkLib.DragonsDescendant) || hasPerk(PerkLib.BloodlineDragon))
+				frostWyrmCounter += 2;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				frostWyrmCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && frostWyrmCounter >= 4)
@@ -10821,10 +10835,10 @@ use namespace CoC;
 				}
 			}
 			if (frostWyrmScore() >= 10) {
-				if (frostWyrmScore() >= 20) {
-					maxStrCap2 += 135;
+				if (frostWyrmScore() >= 26) {
+					maxStrCap2 += 180;
 					maxSpeCap2 += 90;
-					maxTouCap2 += 115;
+					maxTouCap2 += 160;
 					maxIntCap2 -= 90;
 					maxLibCap2 += 50;
 				} else if (frostWyrmScore() >= 18) {
@@ -11350,8 +11364,15 @@ use namespace CoC;
 				}
 			}
 			if (isNaga()) {
-				maxStrCap2 += 15;
-				maxSpeCap2 += 15;
+				if(lowerBody == LowerBody.FROSTWYRM){
+					maxStrCap2 += 20;
+					maxTouCap2 += 10;
+				}
+				else
+				{
+					maxStrCap2 += 15;
+					maxSpeCap2 += 15;
+				}
 			}
 			if (isTaur()) {
 				maxSpeCap2 += 20;
