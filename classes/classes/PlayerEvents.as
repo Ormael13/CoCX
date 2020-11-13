@@ -1623,8 +1623,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Bull Strength
 			if ((player.minotaurScore() >= 15 || player.cowScore() >= 15) && player.findPerk(PerkLib.BullStrength) < 0) {
 				outputText("\nWhoa you feel tremendous power accumulate in ");
-				if (player.minotaurScore() >= 15) outputText(" your balls. It fills your body with bovine strength, nourishing your muscle with manly power. They say having big balls makes you stronguer well its not like you can deny the correlation anymore!");
-				if (player.cowScore() >= 15) outputText(" your mammaries. It fills your body with bovine strength, nourishing your muscle with milky power. Talk about storing all your might into your jugs!");
+				if (player.minotaurScore() >= 15) outputText("your balls. It fills your body with bovine strength, nourishing your muscle with manly power. They say having big balls makes you stronguer well its not like you can deny the correlation anymore!");
+				if (player.cowScore() >= 15) outputText("your mammaries. It fills your body with bovine strength, nourishing your muscle with milky power. Talk about storing all your might into your jugs!");
 				outputText(".\n\n<b>(Gained Bull Strength perk!)</b>\n");
 				player.createPerk(PerkLib.BullStrength, 0, 0, 0, 0);
 				needNext = true;
