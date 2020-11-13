@@ -3571,7 +3571,7 @@ public class Combat extends BaseContent {
                     monster.removeStatusEffect(StatusEffects.GoreBleed);
                     monster.createStatusEffect(StatusEffects.GoreBleed,16,0,0,0);
                 }
-                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack(1.5);
                 outputText("\n");
             }
             //TAIL SLAPPING FOR THE KILL
