@@ -21,11 +21,11 @@ public function siegweirdFirstEncounter():void
 	//spriteSelect(SpriteDb.);
 	clearOutput();
 	outputText("As you are traveling through the blight ridge you notice something, or someone sticking out like a beacon of light amongst the corpses. It is a tall, masculine figure adorned in full plate armor. The being stands faced away from you, bent toward the ground as if in search of something\n\n");
-	outputText("\"He radiates a strong divine aura, it is clear that corruption is the furthest thing you could draw from him. Should you approach him? Unfortunately for you, this choice is not yours to make as the figure turns around to face you. The interior of his helmet is too dim to make out who or what is inside.\"\n\n");
+	outputText("He radiates a strong divine aura, it is clear that corruption is the furthest thing you could draw from him. Should you approach him? Unfortunately for you, this choice is not yours to make as the figure turns around to face you. The interior of his helmet is too dim to make out who or what is inside.\n\n");
 	outputText("He slowly approaches you, the clang of heavy metal slams against the ground with each heavy footstep. His pace grows slower, nearing a complete halt as he seems to survey you with intensity. Despite his tall stance, there’s an air of uncertainty hovering around him.\n\n");
-	outputText("He raises an arm, as if to grab your attention, \"<i>“You there. I… Um… I could really use some help, would you be willing to offer some?”</i>\"\n\n");
-	outputText("He mumbles softly to himself.\n\n His gaze shifts back to meet yours, speaking before you have a chance to decide if you want to help him or not. \"<i>“An imp has stolen my sword… It’s more than an ordinary sword. It is my holy greatsword. I would be indebted to you if you could find it for me… I would go, but…”</i>\"\n\n");
-	outputText("\"He shakes his head softly before shifting his attention back to you. He doesn’t say a word, so you take this time to decide if you want to help him or not.\"");
+	outputText("He raises an arm, as if to grab your attention, \"<i>You there. I… Um… I could really use some help, would you be willing to offer some?</i>\"\n\n");
+	outputText("He mumbles softly to himself.\n\nHis gaze shifts back to meet yours, speaking before you have a chance to decide if you want to help him or not. \"<i>An imp has stolen my sword… It’s more than an ordinary sword. It is my holy greatsword. I would be indebted to you if you could find it for me… I would go, but…</i>\"\n\n");
+	outputText("He shakes his head softly before shifting his attention back to you. He doesn’t say a word, so you take this time to decide if you want to help him or not.\n");
 	menu();
 	addButton(1, "Help him", siegweirdFirstEncounterHelpHim).hint("Helping him may lead to recrutiment (if all went according to the plan) so that will lock out chance to get Alvina. So think carefully fi you sure you want get him over Alvina.");
 	addButton(3, "Do not help him", siegweirdFirstEncounterDoNotHelpHim).hint("Later on PC will be still able meet him and get offer to help.");
@@ -122,7 +122,7 @@ public function siegweirdRepeatEncounterPostFight():void
 		clearOutput();
 		outputText("It takes a while to find Siegweird. For a guy completely covered in full plate, he moves surprisingly fast along the blight ridge.\n\nHe seems to be in search of something… You’re positive the object of his search is someone you’ve gotten to know quite well recently.\n\n");
 		outputText("He’s quick to notice you, despite the fact that you haven’t made any attempt to announce your presence.\n\n");
-		outputText("\"<i>So, you came back after all... I should've known... You've been working with this witch from the start haven't you?” he shakes his head, “The voices in my head tell me ‘run away’, but I will not turn back, lest I go astray. I don't know what she promised you but in the end you will come to regret it, be it by my blade or by some twisted machinations she may have prepared for you.</i>\"\n\n");
+		outputText("\"<i>So, you came back after all... I should've known... You've been working with this witch from the start haven't you?</i>\” He shakes his head, \"<i>The voices in my head tell me ‘run away’, but I will not turn back, lest I go astray. I don't know what she promised you but in the end you will come to regret it, be it by my blade or by some twisted machinations she may have prepared for you.</i>\"\n\n");
 		outputText("You’re here for his life and his pendant. You know you’re not leaving without it..\n\n");
 		outputText("He raises his greatsword to his gauntlet, running his hand over it, infusing it with holy energy before pointing it toward you.");
 		outputText("\"<i>You’re going to have to pry it from my cold, dead hands, fiend.</i>\"\n\n");
