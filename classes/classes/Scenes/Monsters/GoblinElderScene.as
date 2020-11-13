@@ -248,6 +248,10 @@ public class GoblinElderScene extends BaseContent
 					flags[kFLAGS.PRISCILLA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.PRISCILLA_LVL_UP] = 10;
 				}
+				if (flags[kFLAGS.PRISCILLA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.PRISCILLA_LVL_UP] == 10) {
+					flags[kFLAGS.PRISCILLA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.PRISCILLA_LVL_UP] = 11;
+				}
 			}
 			//If cant rape or breastfeed
 			if (player.lust < 30 && !player.hasStatusEffect(StatusEffects.Feeder)) {

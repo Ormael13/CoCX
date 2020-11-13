@@ -1930,6 +1930,14 @@ import coc.view.MainView;
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.internalChimeraScore() >= 30 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation02) < 0) addButtonDisabled(btn, "A.O.M.(3rd)", "You need to buy Additional Organ Mutation (2nd Stage) perk first.");
 			else addButtonDisabled(btn, "A.O.M.(3rd)", "You need ascend more times and have 30+ in internal mutation score to buy this perk.");
 			btn++;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 7 && player.internalChimeraScore() >= 40 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0) {
+				if (player.ascensionPerkPoints >= 80 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation04) < 0) addButton(btn, "A.O.M.(4th)", perkAdditionalOrganMutation04).hint("Perk allowing to get one more slot for the same iternal organ mutations. (As an example: 5 slots instead 4 for heart related mutations)\n\nCost: 80 points");
+				else if (player.ascensionPerkPoints < 80) addButtonDisabled(btn, "A.O.M.(4th)", "You not have enough ascension perk points!");
+				else addButtonDisabled(btn, "A.O.M.(4th)", "You already bought Additional Organ Mutation (4th Stage) perk.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 7 && player.internalChimeraScore() >= 40 && player.findPerk(PerkLib.AscensionAdditionalOrganMutation03) < 0) addButtonDisabled(btn, "A.O.M.(4th)", "You need to buy Additional Organ Mutation (3rd Stage) perk first.");
+			else addButtonDisabled(btn, "A.O.M.(4th)", "You need ascend more times and have 40+ in internal mutation score to buy this perk.");
+			btn++;
 			if (player.ascensionPerkPoints >= 5 && player.findPerk(PerkLib.AscensionBuildingPrestige01) < 0) addButton(btn, "B.Prestige(1st)", perkBuildingPrestige01).hint("Perk allowing to get one more slot for prestige job perks.\n\nCost: 5 points");
 			else if (player.ascensionPerkPoints < 5) addButtonDisabled(btn, "B.Prestige(1st)", "You not have enough ascension perk points!");
 			else addButtonDisabled(btn, "B.Prestige(1st)", "You already bought Building Prestige (1st Stage) perk.");
@@ -1966,6 +1974,14 @@ import coc.view.MainView;
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && player.findPerk(PerkLib.AscensionBuildingPrestige04) < 0) addButtonDisabled(btn, "B.Prestige(5th)", "You need to buy Building Prestige (4th Stage) perk first.");
 			else addButtonDisabled(btn, "B.Prestige(5th)", "You need ascend more times to buy this perk.");
 			btn++;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.findPerk(PerkLib.AscensionBuildingPrestige05) >= 0) {
+				if (player.ascensionPerkPoints >= 30 && player.findPerk(PerkLib.AscensionBuildingPrestige06) < 0) addButton(btn, "B.Prestige(6th)", perkBuildingPrestige06).hint("Perk allowing to get one more slot for prestige job perks.\n\nCost: 30 points");
+				else if (player.ascensionPerkPoints < 30) addButtonDisabled(btn, "B.Prestige(6th)", "You not have enough ascension perk points!");
+				else addButtonDisabled(btn, "B.Prestige(6th)", "You already bought Building Prestige (6th Stage) perk.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.findPerk(PerkLib.AscensionBuildingPrestige05) < 0) addButtonDisabled(btn, "B.Prestige(6th)", "You need to buy Building Prestige (5th Stage) perk first.");
+			else addButtonDisabled(btn, "B.Prestige(6th)", "You need ascend more times to buy this perk.");
+			btn++;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionHybridTheory) >= 0) {
 				if (player.ascensionPerkPoints >= 20 && player.findPerk(PerkLib.AscensionCruelChimerasThesis) < 0) addButton(btn, "C Chimera's T", perkCruelChimerasThesis).hint("Perk allowing reduce by one req. race points to recive race bonuses (still req. min 8 race points to work).\n\nCost: 20 points");
 				else if (player.ascensionPerkPoints < 20) addButtonDisabled(btn, "C Chimera's T", "You not have enough ascension perk points!");
@@ -1990,9 +2006,6 @@ import coc.view.MainView;
 			else if (player.ascensionPerkPoints < 10 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButtonDisabled(btn, "HybridTheory", "You not have enough ascension perk points!");
 			else addButtonDisabled(btn, "HybridTheory", "You already bought Hybrid Theory perk.");
 			btn++;
-			if (player.ascensionPerkPoints >= 30 && player.findPerk(PerkLib.AscensionNaturalMetamorph) < 0) addButton(btn, "N.Metamorph", perkNaturalMetamorph).hint("Perk allowing to start with perks Genetic Memory and Metamorph.\n\nCost: 30 points");
-			else if (player.ascensionPerkPoints < 30 && player.findPerk(PerkLib.AscensionNaturalMetamorph) < 0) addButtonDisabled(btn, "N.Metamorph", "You not have enough ascension perk points!");
-			else addButtonDisabled(btn, "N.Metamorph", "You already bought Natural Metamorph perk.");
 			addButton(14, "Back", ascensionMenu);
 		}
 		private function perkAdditionalOrganMutation01():void {
@@ -2014,6 +2027,13 @@ import coc.view.MainView;
 			player.createPerk(PerkLib.AscensionAdditionalOrganMutation03,0,0,0,1);
 			clearOutput();
 			outputText("Your gained Additional Organ Mutation (3rd Stage) perk.");
+			doNext(rarePerks1);
+		}
+		private function perkAdditionalOrganMutation04():void {
+			player.ascensionPerkPoints -= 80;
+			player.createPerk(PerkLib.AscensionAdditionalOrganMutation04,0,0,0,1);
+			clearOutput();
+			outputText("Your gained Additional Organ Mutation (4th Stage) perk.");
 			doNext(rarePerks1);
 		}
 		private function perkBuildingPrestige01():void {
@@ -2051,6 +2071,13 @@ import coc.view.MainView;
 			outputText("Your gained Building Prestige (5th Stage) perk.");
 			doNext(rarePerks1);
 		}
+		private function perkBuildingPrestige06():void {
+			player.ascensionPerkPoints -= 30;
+			player.createPerk(PerkLib.AscensionBuildingPrestige06,0,0,0,1);
+			clearOutput();
+			outputText("Your gained Building Prestige (6th Stage) perk.");
+			doNext(rarePerks1);
+		}
 		private function perkCruelChimerasThesis():void {
 			player.ascensionPerkPoints -= 20;
 			player.createPerk(PerkLib.AscensionCruelChimerasThesis,0,0,0,1);
@@ -2079,13 +2106,6 @@ import coc.view.MainView;
 			outputText("Your gained Hybrid Theory perk.");
 			doNext(rarePerks1);
 		}
-		private function perkNaturalMetamorph():void {
-			player.ascensionPerkPoints -= 30;
-			player.createPerk(PerkLib.AscensionNaturalMetamorph,0,0,0,1);
-			clearOutput();
-			outputText("Your gained Natural Metamorph perk.");
-			doNext(rarePerks1);
-		}
 
 		private function rarePerks2():void {
 			clearOutput();
@@ -2093,6 +2113,10 @@ import coc.view.MainView;
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
 			var btn:int = 0;
+			if (player.ascensionPerkPoints >= 30 && player.findPerk(PerkLib.AscensionNaturalMetamorph) < 0) addButton(btn, "N.Metamorph", perkNaturalMetamorph).hint("Perk allowing to start with perks Genetic Memory and Metamorph.\n\nCost: 30 points");
+			else if (player.ascensionPerkPoints < 30 && player.findPerk(PerkLib.AscensionNaturalMetamorph) < 0) addButtonDisabled(btn, "N.Metamorph", "You not have enough ascension perk points!");
+			else addButtonDisabled(btn, "N.Metamorph", "You already bought Natural Metamorph perk.");
+			btn++;
 			if (player.findPerk(PerkLib.AscensionNaturalMetamorph) >= 0) {
 				if (player.ascensionPerkPoints >= 15 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1) < 0) addButton(btn, "T.G.M.(S1)", perkTranscendentalGeneticMemoryStage1).hint("Perk allowing to retain up to 15 unlocked options from Metamorph menu.\n\nCost: 15 points");
 				else if (player.ascensionPerkPoints < 15 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1) < 0) addButtonDisabled(btn, "T.G.M.(S1)", "You not have enough ascension perk points!");
@@ -2132,6 +2156,14 @@ import coc.view.MainView;
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4) < 0) addButtonDisabled(btn, "T.G.M.(S5)", "You need to buy Transcendental Genetic Memory (Stage 4) perk first.");
 			else addButtonDisabled(btn, "T.G.M.(S5)", "You need ascend more times to buy this perk.");
 			btn++;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5) >= 0) {
+				if (player.ascensionPerkPoints >= 90 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6) < 0) addButton(btn, "T.G.M.(S6)", perkTranscendentalGeneticMemoryStage6).hint("Perk allowing to retain up to 90(225) unlocked options from Metamorph menu.\n\nCost: 90 points");
+				else if (player.ascensionPerkPoints < 90) addButtonDisabled(btn, "T.G.M.(S6)", "You not have enough ascension perk points!");
+				else addButtonDisabled(btn, "T.G.M.(S6)", "You already bought Transcendental Genetic Memory (Stage 6) perk.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5) < 0) addButtonDisabled(btn, "T.G.M.(S6)", "You need to buy Transcendental Genetic Memory (Stage 5) perk first.");
+			else addButtonDisabled(btn, "T.G.M.(S6)", "You need ascend more times to buy this perk.");
+			btn++;
 			if (player.ascensionPerkPoints >= 5 && player.findPerk(PerkLib.AscensionUnderdog) < 0) addButton(btn, "Underdog", perkUnderdog).hint("Perk allowing to double increase to base exp gains for fighting enemies above PC level, increasing max lvl diff when bonus still increase from 20 to 40 above current PC lvl.\n\nCost: 5 points");// And... to live up to underdog role PC will 'accidentally' find few places to further power-up.
 			else if (player.ascensionPerkPoints < 5 && player.findPerk(PerkLib.AscensionUnderdog) < 0) addButtonDisabled(btn, "Underdog", "You not have enough ascension perk points!");
 			else addButtonDisabled(btn, "Underdog", "You already bought Underdog perk.");
@@ -2148,20 +2180,34 @@ import coc.view.MainView;
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionUnlockedPotential) < 0) addButtonDisabled(btn, "U.Potent2nd", "You need to buy Unlocked Potential perk first.");
 			else addButtonDisabled(btn, "U.Potent2nd", "You need ascend more times to buy this perk.");
 			btn++;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) {
+				if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionUnlockedPotential3rdStage) < 0) addButton(btn, "U.Potent3rd", perkUnlockedPotential3rdStage).hint("Perk allowing to have increase passive gains of max hp, lust and fatigue at each lvl-up.\n\nCost: 10 point");
+				else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "U.Potent3rd", "You not have enough ascension perk points!");
+				else addButtonDisabled(btn, "U.Potent3rd", "You already bought Unlocked Potential (3rd Stage) perk.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.findPerk(PerkLib.AscensionUnlockedPotential3rdStage) < 0) addButtonDisabled(btn, "U.Potent3rd", "You need to buy Unlocked Potential (2nd Stage) perk first.");
+			else addButtonDisabled(btn, "U.Potent3rd", "You need ascend more times to buy this perk.");
+			btn++;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.findPerk(PerkLib.AscensionUnlockedPotential3rdStage) >= 0) {
+				if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionUnlockedPotential4thStage) < 0) addButton(btn, "U.Potent4th", perkUnlockedPotential4thStage).hint("Perk allowing to have increase passive gains of max wrath, mana and soulforce at each lvl-up.\n\nCost: 10 point");
+				else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "U.Potent4th", "You not have enough ascension perk points!");
+				else addButtonDisabled(btn, "U.Potent4th", "You already bought Unlocked Potential (4th Stage) perk.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.findPerk(PerkLib.AscensionUnlockedPotential4thStage) < 0) addButtonDisabled(btn, "U.Potent4th", "You need to buy Unlocked Potential (3rd Stage) perk first.");
+			else addButtonDisabled(btn, "U.Potent4th", "You need ascend more times to buy this perk.");
 			btn++;
 		//	if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButton(btn, "HybridTheory", perkHybridTheory).hint("Perk allowing reduce by one req. race points to recive race bonuses (still req. min 3 race points to work).\n\nCost: 10 points");
 		//	else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "HybridTheory", "You not have enough ascension perk points!");
 		//	else addButtonDisabled(btn, "HybridTheory", "You already bought this perk.");
 		//	btn++;
-		//	if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButton(btn, "HybridTheory", perkHybridTheory).hint("Perk allowing reduce by one req. race points to recive race bonuses (still req. min 3 race points to work).\n\nCost: 10 points");
-		//	else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "HybridTheory", "You not have enough ascension perk points!");
-		//	else addButtonDisabled(btn, "HybridTheory", "You already bought this perk.");
-		//	btn++;
-		//	if (player.ascensionPerkPoints >= 10 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButton(btn, "HybridTheory", perkHybridTheory).hint("Perk allowing reduce by one req. race points to recive race bonuses (still req. min 3 race points to work).\n\nCost: 10 points");
-		//	else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "HybridTheory", "You not have enough ascension perk points!");
-		//	else addButtonDisabled(btn, "HybridTheory", "You already bought this perk.");
-		//	btn++;
 			addButton(14, "Back", ascensionMenu);
+		}
+		private function perkNaturalMetamorph():void {
+			player.ascensionPerkPoints -= 30;
+			player.createPerk(PerkLib.AscensionNaturalMetamorph,0,0,0,1);
+			clearOutput();
+			outputText("Your gained Natural Metamorph perk.");
+			doNext(rarePerks2);
 		}
 		private function perkTranscendentalGeneticMemoryStage1():void {
 			player.ascensionPerkPoints -= 15;
@@ -2203,6 +2249,14 @@ import coc.view.MainView;
 			outputText("Your gained Transcendental Genetic Memory (Stage 5) perk.");
 			doNext(rarePerks2);
 		}
+		private function perkTranscendentalGeneticMemoryStage6():void {
+			player.ascensionPerkPoints -= 90;
+			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6, 0, 0, 0, 1);
+			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 90);
+			clearOutput();
+			outputText("Your gained Transcendental Genetic Memory (Stage 6) perk.");
+			doNext(rarePerks2);
+		}
 		private function perkUnderdog():void {
 			player.ascensionPerkPoints -= 5;
 			player.createPerk(PerkLib.AscensionUnderdog,0,0,0,1);
@@ -2222,6 +2276,20 @@ import coc.view.MainView;
 			player.createPerk(PerkLib.AscensionUnlockedPotential2ndStage,0,0,0,1);
 			clearOutput();
 			outputText("Your gained Unlocked Potential (2nd Stage) perk.");
+			doNext(rarePerks2);
+		}
+		private function perkUnlockedPotential3rdStage():void {
+			player.ascensionPerkPoints -= 10;
+			player.createPerk(PerkLib.AscensionUnlockedPotential3rdStage,0,0,0,1);
+			clearOutput();
+			outputText("Your gained Unlocked Potential (3rd Stage) perk.");
+			doNext(rarePerks2);
+		}
+		private function perkUnlockedPotential4thStage():void {
+			player.ascensionPerkPoints -= 10;
+			player.createPerk(PerkLib.AscensionUnlockedPotential4thStage,0,0,0,1);
+			clearOutput();
+			outputText("Your gained Unlocked Potential (4th Stage) perk.");
 			doNext(rarePerks2);
 		}
 

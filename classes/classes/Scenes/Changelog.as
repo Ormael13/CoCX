@@ -39,33 +39,49 @@ package classes.Scenes
 			outputText("-New tier 10 sensitivity lvl-up perk: Epic Desensitization. Req. Greater Desensitization perk and 50+ sens. Effect: Negative effects of sensitivity are reduced by 15%.\n");
 			outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
 			outputText("-New tier 20 sensitivity lvl-up perk: Mythical Desensitization. Req. Legendary Desensitization perk and 200+ sens. Effect: Negative effects of sensitivity are reduced by 25%.\n");
+			outputText("-New consumable items (by Ormael): Balls of Flame, Frozen Balls, THUNDERballs, Balls of the Darkness, Poisoned Balls - buyable at Serena shop in HXD (Shelf 3 - all of them req. lvl 42+ to be accessable). Each costs 60 gems and deal same damage as bangball mk 3 but with elemental affix (fire, ice, lighting, darkness, poison).\n");
 			outputText("-3 new achievments. (3 shadow ones)\n");	
 			outputText("-Explore option named 42 was moved to silly mode.\n");
 			outputText("-Follower Zenji now scales up to PC lvl cap (150 > 185). He will also have gradualy increasing other combat stats beside raw stats and XP reward for beating him will be much higher.\n");
 			outputText("-All ascension perks from tab named 'Perk Select(2)' have increased max rank by 5.\n");
 			outputText("-As some crazy dungeon delver PC's went as far as 1000th room in Ebon labyrinth there would be placed chest with EXP in each 10th room aside boos rooms till that 1000th room.\n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
-			outputText("-Lover Zenji got more sex scenes. Also Lover Zenji can impregnate PC - pregnancy takes 30 days and first three kids can be named.\n");
+			outputText("-Lover Zenji got more sex scenes. Also Lover Zenji can impregnate PC - pregnancy takes 30 days and first two kids can be named.\n");
 			outputText("-Increased max lvl camp npc's can attain after reaching end of training: Ceani (lvl 98), Etna (lvl 96), Electra (lvl 96), Ember (lvl 98), Isabella (lvl 98), Kiha (lvl 99), Kindra (lvl 99), Luna (lvl 99)\n");
+			outputText("-Increased max lvl npc's outside camp can attain: Akbal (lvl 98), Izumi (lvl 96), Minerva (lvl 95), Priscilla (lvl 98)\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
-			outputText("-Kitsune racial bonuses been slight reorganized with adding 3 ore higher tiers of bonuses: first for nine tails that before not have any diff in stats from other kitsunes, ninetail of balance and Inari.\n");
-			outputText("-\n");//Increased max lvl camp npc's can attain: Minerva (lvl xx), Priscilla (lvl xx)
+			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
+			outputText("-Kitsune racial bonuses been slight reorganized with adding 3 more higher tiers of bonuses: first for nine tails that before not have any diff in stats from other kitsunes, ninetail of balance and Inari.\n");
+			outputText("-Dragon racial bonuses was changed to be less of spreaded and more balanced. And a bit rising req. score for reaching half-dragon and dragon stages. % Bonus to max Soulforce been replaced with % bonus to max HP.\n");
+			outputText("-New rare ascension perk -> Ascension: Additional Organ Mutation (4th Stage). Req. Ascension: Additional Organ Mutation (3rd Stage) perk, 40+ in internal chimera score and be at eighth ascension. It costs 80 asc points and will give 1 more slot for organ mutations. Like heart, muscles or mouth related racial mutation perks.\n");
+			outputText("-New rare ascension perk -> Ascension: Ascension: Transcendental Genetic Memory (Stage 5). Req. Ascension: Transcendental Genetic Memory (Stage 4) perk and be at fifth ascension. It cost 40 asc points and allow to perm up to 90 selected Metamorph options. (with prev perks it give max cap of 315)\n");
+			outputText("-New rare ascension perk -> Ascension: Building Prestige (6th Stage). Req. Ascension: Building Prestige (5th Stage) perk and be at fifth ascension. It costs 30 asc points and will give 1 more slot for Prestige Jobs.\n");
+			outputText("-New rare ascension perk -> Ascension: Unlocked Potential (3rd Stage). Req. Ascension: Unlocked Potential (2nd Stage) and be at third ascension. It costs 10 asc points and will give +2 to max lust, +6 to max fatigue and +20 to max HP at each lvl-up.\n");
+			outputText("-New rare ascension perk -> Ascension: Unlocked Potential (4th Stage). Req. Ascension: Unlocked Potential (3rd Stage) and be at fourth ascension. It costs 10 asc points and will give +2 to max wrath, +6 to max soulforce and +12 to max mana at each lvl-up.\n");
+			outputText("-New tier 0 misc lvl-up perk: Draconic Bones. Req. Free bones and marrow mutation slot, dragon arms, dragon legs, dragon tail and 5+ pts in dragon score. Effect: Basic strengthening of your body bone structure. (+10 to unarmed attack)\n");
+			outputText("-New tier 0 misc lvl-up perk: Draconic Heart. Req. Free heart mutation slot, Draconic Bones perk, Draconic Lungs perk, 5+ pts in dragon score. Effect: Your heart was strengthened to better handle your changing body. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen)\n");
+			outputText("-New tier 2 misc lvl-up perk: Draconic Bones (Evolved). Req. Draconic Bones, Draconic Heart, Draconic Lungs perks and 10+ pts in dragon score. Effect: Advanced strengthening of your body bone structure. (+10 to unarmed attack, +5% to damage reduction against physical and magical attacks, +5% of max core Tou as phantom Tou)\n");
+			outputText("-New tier 2 misc lvl-up perk: Draconic Heart (Evolved). Req. Draconic Bones, Draconic Heart, Draconic Lungs perks and 10+ pts in dragon score. Effect: Each heartbeat fills your body with great power. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen, +5% of max core Str as phantom Str)\n");
+			outputText("-New tier 5 misc lvl-up perk: Draconic Bones (Final Form). Req. Draconic Bones (Evolved), Draconic Heart (Evolved), Draconic Lungs (Evolved) perks and 15+ pts in dragon score. Effect: Strengthening of your body bone structure to pseudo-dragon grade. (+20 to unarmed attack, +50% to unarmed atk, +5% to damage reduction against physical and magical attacks, +10% of max core Tou as phantom Tou)\n");
+			outputText("-New tier 5 misc lvl-up perk: Draconic Heart (Final Form). Req. Draconic Heart (Evolved), Draconic Heart (Evolved), Draconic Lungs (Evolved) perks and 15+ pts in dragon score. Effect: Your heart metamorphosis reached pseudo-dragon level. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen, +1% HP regen, +10% of max core Str as phantom Str)\n");
+			outputText("-New tier 13 misc lvl-up perk: Chimerical Body: Epic Stage. Req. Chimerical Body: Semi-Epic Stage perk and 99+ points in Internal Chimerical Disposition score. Effect: Your chimerical body attained Epic Stage. (negate up to 14 racial perk points negative effects) (+10% to Str/Tou/Spe racial multi, +20% to Int/Wis racial multi, +15% to Lib racial multi, +10 to Sens)\n");
+			outputText("-Draconic Lungs perks stat bonuses to str and tou was changed into bonuses to spe. Also Evolved and Final Form perk from this perk line granting +5%/+10% of max core Spe as phantom Spe\n");
+			outputText("-Lizan Marrow perk have now additional req. of having free bones and marrow mutation slot. Kitsune Thyroid Gland perk also now req. free thyroid gland mutation slot.\n");
 			outputText("-\n");
-			outputText("-\n");//add bang ball items flavored for fire/ice/lighting/darkness/poison
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies. Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-Fixed bugs: Luna event not happening in forest after PC fire her at first Full Moon event conclusion, some minor errors in calculation and display bonuses for kitsunes, some of Slave Excellia scenes sending back to Fixed Excellia\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Bugfixes / Typo fixing by Pyromania & Liadri, Luna event not happening in forest after PC fire her at first Full Moon event conclusion, some minor errors in calculation and display bonuses for kitsunes, some of Slave Excellia scenes sending back to Fixed Excellia, game ocassionaly incorrectly desc monsters in combat due to forced PC gender setting\n\n");/*ostatni punkt changelogu
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New soulskill: Devourer. Req. ... Devour up to 400 lust and wrath from enemy transfering 50% of it back to player. Cooldown: 3 turns.\n");
 			//outputText("-(Heavy WIP) Raging Inferno now boost by 10% fire spells/attacks damage and each turn spend without casting fire spell lower that bonus damage by 10% till it return to 100%.\n");
-			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			//outputText("-New enemy possible to encounter during Bog exploration: Dark Elf Ranger - lvl 39\n");
 			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
 			//outputText("\n");cel na 0.8: dodać kitsune/nekomanta TF
@@ -82,7 +98,6 @@ package classes.Scenes
 			outputText("-New event perk: . Gained by . Effects: \n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
-			outputText("-New tier 11 misc lvl-up perk: Chimerical Body: Epic Stage. Req. Chimerical Body: Semi-Epic Stage perk and 72+ points in Internal Chimerical Disposition score. Effect: delay by another 12 points appearing effect of negative HP regeneration and +5 to max Lib/Sens (scalable), +10 to max Str/Tou/Spe/Int/Wis (scalable).\n");
 			outputText("-New tier 12 misc lvl-up perk: Chimerical Body: ... Stage. Req. Chimerical Body: Epic Stage perk and xx+ points in Internal Chimerical Disposition score. Effect: delay by another xx points appearing effect of negative HP regeneration and +5 to max Lib/Sens (scalable), +10 to max Str/Tou/Spe/Int/Wis (scalable).\n");
 			outputText("-New tier ?? misc lvl-up perk: Creationism. Req. Perfection perk. Effect: number of possible effects of transformatives +1.\n");
 			outputText("-New tier ?? misc lvl-up perk: All-Seeing. Req. Soul Powered perk. Effect: +10% max soulforce.\n");
@@ -147,9 +162,6 @@ package classes.Scenes
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
@@ -171,18 +183,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -299,7 +299,7 @@ package classes.Scenes
 			outputText("-New armor (by Liadri): Scandalous Succubus Clothing - buyable at Kaiba shop in Tel'Adre. Cost 6000 gems. Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.\n");
 			outputText("-New shield (by Ormael): Spiked Light Shield - buyable at Yvonne shop (armor shop) in Tel'Adre. Block 10, cost 750 gems. When using to block will reflect\n");
 			outputText("-New shield (by Ormael): Spiked Heavy Shield - obtained by finding it at Battlefield while been lvl 24+. Base block 24, cost 1800 gems. Req. to have 60+ str to reach base block value. \n");
-			outputText("-New consumable (by Pyromania): Zenji's Hunt. Obtained once per day when tlaking with Zenji lover. Effect: Restores 25% of PC’s hp, 45 satiety.\n");
+			outputText("-New consumable (by Pyromania): Zenji's Hunt. Obtained once per day when talking with Zenji lover. Effect: Restores 25% of PC’s hp, 45 satiety.\n");
 			outputText("-New TF item: Fafnir Tear. Currently found in Yu shop. Allow to change into Frost Wyrm race with race bonuses at 10/18/20+: +90/125/135 to max Str (scal), +60/75/90 to max Spe (scal), +60/110/115 to max Tou (scal), -90/90/90 to max Int (scal), +30/50/50 to max Lib (scal).\n");
 			outputText("-New body part - horns: Frost Wyrm horns. Req. Animal tooths\n");
 			outputText("-New body part - eyes: Frost Wyrm eyes. Req. Animal tooths\n");

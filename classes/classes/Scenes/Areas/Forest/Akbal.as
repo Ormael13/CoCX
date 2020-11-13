@@ -43,7 +43,8 @@ public class Akbal extends Monster
 			//*Normal Attack A - 
 			if (rand(2) == 0) {
 				//(medium HP damage)
-				if (flags[kFLAGS.AKBAL_LVL_UP] >= 8) damage = int((str + 20 + weaponAttack) - Math.random() * (player.tou) - player.armorDef);
+				if (flags[kFLAGS.AKBAL_LVL_UP] >= 12) damage = int((str + 40 + weaponAttack) - Math.random() * (player.tou) - player.armorDef);
+				else if (flags[kFLAGS.AKBAL_LVL_UP] >= 8) damage = int((str + 20 + weaponAttack) - Math.random() * (player.tou) - player.armorDef);
 				else if (flags[kFLAGS.AKBAL_LVL_UP] >= 4) damage = int((str + 10 + weaponAttack) - Math.random() * (player.tou) - player.armorDef);
 				else damage = int((str + 5 + weaponAttack) - Math.random() * (player.tou) - player.armorDef);
 				if (damage <= 0) {
@@ -59,7 +60,8 @@ public class Akbal extends Monster
 				}
 			} else { //*Normal Attack B
 				//(high HP damage)
-				if (flags[kFLAGS.AKBAL_LVL_UP] >= 8) damage = int((str + 120 + weaponAttack) - Math.random() * (player.tou) - player.armorDef);
+				if (flags[kFLAGS.AKBAL_LVL_UP] >= 12) damage = int((str + 240 + weaponAttack) - Math.random() * (player.tou) - player.armorDef);
+				else if (flags[kFLAGS.AKBAL_LVL_UP] >= 8) damage = int((str + 120 + weaponAttack) - Math.random() * (player.tou) - player.armorDef);
 				else if (flags[kFLAGS.AKBAL_LVL_UP] >= 4) damage = int((str + 60 + weaponAttack) - Math.random() * (player.tou) - player.armorDef);
 				else damage = int((str + 30 + weaponAttack) - Math.random() * (player.tou) - player.armorDef);
 				if (damage == 0) {
@@ -288,6 +290,36 @@ public class Akbal extends Monster
 				this.level = 80;
 				this.additionalXP = 550;
 			}
+			if (flags[kFLAGS.AKBAL_LVL_UP] == 11) {
+				initStrTouSpeInte(204, 309, 240, 225);
+				initWisLibSensCor(224, 267, 160, 100);
+				this.weaponAttack = 50;
+				this.armorDef = 32;
+				this.armorMDef = 64;
+				this.bonusHP = 1200;
+				this.level = 86;
+				this.additionalXP = 600;
+			}
+			if (flags[kFLAGS.AKBAL_LVL_UP] == 12) {
+				initStrTouSpeInte(217, 329, 255, 234);
+				initWisLibSensCor(233, 284, 170, 100);
+				this.weaponAttack = 53;
+				this.armorDef = 34;
+				this.armorMDef = 68;
+				this.bonusHP = 1300;
+				this.level = 92;
+				this.additionalXP = 650;
+			}
+			if (flags[kFLAGS.AKBAL_LVL_UP] == 13) {
+				initStrTouSpeInte(230, 349, 270, 243);
+				initWisLibSensCor(242, 301, 180, 100);
+				this.weaponAttack = 56;
+				this.armorDef = 36;
+				this.armorMDef = 72;
+				this.bonusHP = 1400;
+				this.level = 98;
+				this.additionalXP = 700;
+			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.a = "";
 			this.short = "Akbal";
 			this.imageName = "akbal";
@@ -341,6 +373,9 @@ public class Akbal extends Monster
 			if (flags[kFLAGS.AKBAL_LVL_UP] >= 8) this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
 			if (flags[kFLAGS.AKBAL_LVL_UP] >= 9) this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			if (flags[kFLAGS.AKBAL_LVL_UP] >= 10) this.createPerk(PerkLib.PrestigeJobTempest, 0, 0, 0, 0);
+			if (flags[kFLAGS.AKBAL_LVL_UP] >= 11) this.createPerk(PerkLib.CatlikeNimblenessEvolved, 0, 0, 0, 0);
+			if (flags[kFLAGS.AKBAL_LVL_UP] >= 12) this.createPerk(PerkLib.MythicalSpeed, 0, 0, 0, 0);
+			if (flags[kFLAGS.AKBAL_LVL_UP] >= 13) this.createPerk(PerkLib.CatlikeNimblenessFinalForm, 0, 0, 0, 0);
 			checkMonster();
 		}
 

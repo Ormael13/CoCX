@@ -1339,7 +1339,7 @@ import flash.utils.getQualifiedClassName;
 
 			//// 9. Primary stats.
 			///*REQUIRED*/ initStrTouSpeInte(,,,);
-			///*REQUIRED*/ initLibSensCor(,,);
+			///*REQUIRED*/ initWisLibSensCor(,,);
 
 			//// 10. Weapon
 			///*REQUIRED*/ this.weaponName = "weaponName";
@@ -2980,9 +2980,9 @@ import flash.utils.getQualifiedClassName;
 				else addStatusValue(StatusEffects.EnemyLoweredDamageH,1,-1);
 			}
 			//regeneration perks for monsters
-			if (((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.LizanMarrowFinalForm) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0
-			|| findPerk(PerkLib.ImprovedLifeline) >= 0 || findPerk(PerkLib.GreaterLifeline) >= 0 || findPerk(PerkLib.EpicLifeline) >= 0 || findPerk(PerkLib.IcyFlesh) >= 0 || findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0
-			|| hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxHP()) && (this.HP > 0))) {
+			if (((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.LizanMarrowFinalForm) >= 0 || findPerk(PerkLib.DraconicHeartFinalForm) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0
+			|| findPerk(PerkLib.Lifeline) >= 0 || findPerk(PerkLib.ImprovedLifeline) >= 0 || findPerk(PerkLib.GreaterLifeline) >= 0 || findPerk(PerkLib.EpicLifeline) >= 0 || findPerk(PerkLib.IcyFlesh) >= 0 || findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0
+			|| findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxHP()) && (this.HP > 0))) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				if (findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + newGamePlusMod()));
@@ -2995,6 +2995,7 @@ import flash.utils.getQualifiedClassName;
 					healingPercent += 1.5;
 					if (this.HP < (this.maxHP() * 0.25)) healingPercent += 4.5;
 				}
+				if (findPerk(PerkLib.DraconicHeartFinalForm) >= 0) healingPercent += 1;
 				if (findPerk(PerkLib.IcyFlesh) >= 0) healingPercent += 1;
 				if (findPerk(PerkLib.BodyCultivator) >= 0) healingPercent += 0.5;
 				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
@@ -3046,6 +3047,9 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.SoulEmperor) >= 0) soulforceRecovery += 5;
 				if (findPerk(PerkLib.SoulAncestor) >= 0) soulforceRecovery += 5;
 				if (findPerk(PerkLib.DaoistCultivator) >= 0) soulforceRecoveryMulti += 0.5;
+				if (findPerk(PerkLib.DraconicHeart) >= 0) manaRecovery += 4;
+				if (findPerk(PerkLib.DraconicHeartEvolved) >= 0) manaRecovery += 4;
+				if (findPerk(PerkLib.DraconicHeartFinalForm) >= 0) manaRecovery += 4;
 				soulforceRecovery *= soulforceRecoveryMulti;
 				addSoulforce(soulforceRecovery);
 			}
@@ -3057,6 +3061,9 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0) manaRecovery += 10;
 				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0) manaRecovery += 15;
 				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0) manaRecovery += 20;
+				if (findPerk(PerkLib.DraconicHeart) >= 0) manaRecovery += 5;
+				if (findPerk(PerkLib.DraconicHeartEvolved) >= 0) manaRecovery += 5;
+				if (findPerk(PerkLib.DraconicHeartFinalForm) >= 0) manaRecovery += 5;
 				if (findPerk(PerkLib.GreyMage) >= 0) manaRecoveryMulti += 0.5;
 				if (findPerk(PerkLib.GreyArchmage) >= 0) manaRecoveryMulti += 1.5;
 				if (findPerk(PerkLib.ManaAffinityI) >= 0) manaRecoveryMulti += (0.2 * (1 + newGamePlusMod()));
@@ -3235,4 +3242,4 @@ import flash.utils.getQualifiedClassName;
 			armorMDef += ((int)(1 + armorMDef / 10)) * newGamePlusMod();
 		}
 	}
-}
+}

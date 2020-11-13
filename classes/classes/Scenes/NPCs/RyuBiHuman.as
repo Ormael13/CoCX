@@ -49,9 +49,6 @@ public class RyuBiHuman extends Monster
 			this.level = 42;
 			this.gems = 15 + rand(8);
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);//zamienić na worek of spirit stones ^^
-			this.horns.type = Horns.DRACONIC_X4_12_INCH_LONG;
-			this.horns.count = 4;
-			this.tailType = Tail.DRACONIC;
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGodType, 0, 0, 0, 0);
 			checkMonster();

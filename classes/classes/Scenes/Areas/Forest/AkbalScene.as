@@ -64,6 +64,18 @@ public class AkbalScene extends BaseContent
 					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.AKBAL_LVL_UP] = 10;
 				}
+				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 11 && flags[kFLAGS.AKBAL_LVL_UP] == 10) {
+					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.AKBAL_LVL_UP] = 11;
+				}
+				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 12 && flags[kFLAGS.AKBAL_LVL_UP] == 11) {
+					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.AKBAL_LVL_UP] = 12;
+				}
+				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 13 && flags[kFLAGS.AKBAL_LVL_UP] == 12) {
+					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.AKBAL_LVL_UP] = 13;
+				}
 			}
 			if (hpVictory) {//[General Victory]
 				/*if(rand(10) == 0) {

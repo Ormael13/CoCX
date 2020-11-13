@@ -517,6 +517,7 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.UnlockBody3rdStage) >= 0) max += level * 15;
 			if (findPerk(PerkLib.UnlockBody4thStage) >= 0) max += level * 15;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 20;
+			if (findPerk(PerkLib.AscensionUnlockedPotential3rdStage) >= 0) max += level * 20;
 			if (jewelryEffectId == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude3;
@@ -598,6 +599,7 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.UnlockArdor3rdStage) >= 0) max += level;
 			if (findPerk(PerkLib.UnlockArdor4thStage) >= 0) max += level;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 2;
+			if (findPerk(PerkLib.AscensionUnlockedPotential3rdStage) >= 0) max += level * 2;
 			if (findPerk(PerkLib.LimitBreakerHeart1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerHeart2ndStage) >= 0) multimax += 0.1;
 			max *= multimax;
@@ -607,6 +609,10 @@ public class Creature extends Utils
 		protected function maxHP_mult():Number {
 			var maxHP_mult1:Number = 1;
 			maxHP_mult1 += (countCockSocks("green") * 0.02);
+			if (game.player.dragonScore() >= 5) maxHP_mult1 += 0.05;
+			if (game.player.dragonScore() >= 12) maxHP_mult1 += 0.05;
+			if (game.player.dragonScore() >= 20) maxHP_mult1 += 0.1;
+			if (game.player.dragonScore() >= 30) maxHP_mult1 += 0.1;
 			if (game.player.vehiclesName == "Goblin Mech Alpha") {
 				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.2;
 				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.35;
@@ -2997,27 +3003,18 @@ public class Creature extends Utils
 			else
 				return mf(male, female);
 		}
-		public function looksMale():Boolean {
-			return !looksFemale();
-		}
 		
-		public function looksFemale():Boolean {
-			var tits:Number = biggestTitSize();
-			switch(gender) {
-				case Gender.GENDER_HERM:
-                case Gender.GENDER_NONE:
-                    return ((tits >= 3 || tits == 2 && femininity >= 15 || tits == 1 && femininity >= 40 || femininity >= 65) && (flags[kFLAGS.MALE_OR_FEMALE] == 0 || flags[kFLAGS.MALE_OR_FEMALE] == 2));
-				case Gender.GENDER_MALE:
-                    return ((tits >= 3 && femininity >= 5 || tits == 2 && femininity >= 35 || tits == 1 && femininity >= 65 || femininity >= 95) && (flags[kFLAGS.MALE_OR_FEMALE] == 0 || flags[kFLAGS.MALE_OR_FEMALE] == 2));
-                case Gender.GENDER_FEMALE:
-                    return ((tits > 1 || tits == 1 && femininity >= 15 || femininity >= 45) && (flags[kFLAGS.MALE_OR_FEMALE] == 0 || flags[kFLAGS.MALE_OR_FEMALE] == 2));
-				default: return false;
-			}
-		}
 		//Rewritten!
 		public function mf(male:String, female:String):String
 		{
-			return looksMale() ? male : female;
+			if (hasCock() && hasVagina()) // herm
+				return (biggestTitSize() >= 3 || biggestTitSize() == 2 && femininity >= 15 || biggestTitSize() == 1 && femininity >= 40 || femininity >= 65) ? female : male;
+			if (hasCock()) // male
+				return (biggestTitSize() >= 3 && femininity >= 5 || biggestTitSize() == 2 && femininity >= 35 || biggestTitSize() == 1 && femininity >= 65 || femininity >= 95) ? female : male;
+			if (hasVagina()) // pure female
+				return (biggestTitSize() >= 3 || femininity >= 75) ? female : male;
+			// genderless
+			return (biggestTitSize() >= 3 || biggestTitSize() == 2 && femininity >= 15 || biggestTitSize() == 1 && femininity >= 40 || femininity >= 65) ? female : male;
 		}
 		
 		public function maleFemaleHerm(caps:Boolean = false):String

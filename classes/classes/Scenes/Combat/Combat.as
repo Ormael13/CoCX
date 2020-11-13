@@ -908,6 +908,9 @@ public class Combat extends BaseContent {
         if (player.lowerBody == LowerBody.BEAR) unarmed += 5 * (1 + player.newGamePlusMod());
         if (player.lowerBody == LowerBody.CANCER) unarmed += 12 * (1 + player.newGamePlusMod());
         if (player.tailType == Tail.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
+        if (player.hasPerk(PerkLib.DraconicBones)) unarmed += 10 * (1 + player.newGamePlusMod());
+        if (player.hasPerk(PerkLib.DraconicBonesEvolved)) unarmed += 10 * (1 + player.newGamePlusMod());
+        if (player.hasPerk(PerkLib.DraconicBonesFinalForm)) unarmed += 20 * (1 + player.newGamePlusMod());
         if (player.hasKeyItem("Rocket Boots") >= 0) unarmed += 2;
         if (player.hasKeyItem("Nitro Boots") >= 0) unarmed += 4;
         if (player.hasPerk(PerkLib.Brawn)) unarmedMulti += .05;
@@ -916,6 +919,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.EpicBrawn)) unarmedMulti += .2;
         if (player.hasPerk(PerkLib.LegendaryBrawn)) unarmedMulti += .25;
         if (player.hasPerk(PerkLib.MythicalBrawn)) unarmedMulti += .3;
+        if (player.hasPerk(PerkLib.DraconicBonesFinalForm)) unarmedMulti += .5;
         unarmed *= unarmedMulti;
         unarmed = Math.round(unarmed);
         return unarmed;
@@ -6315,18 +6319,15 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmgA *= 1.50;
             if (player.hasPerk(PerkLib.Apex)) lustDmgA *= 1.50;
             if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgA *= 1.50;
-            if (player.hasPerk(PerkLib.FloralOvaries)) lustDmgA *= 1.25;
+            if (player.hasPerk(PerkLib.FloralOvaries)) lustDmgA *= 1.2;
             if (player.hasPerk(PerkLib.FloralOvariesEvolved)) {
-                if (monster.isMaleOrHerm()) lustDmgA *= 1.50;
+                if (monster.isMaleOrHerm()) lustDmgA *= 1.5;
                 lustDmgA *= 1.25;
             }
             if (player.hasPerk(PerkLib.FloralOvariesFinalForm)) {
-                if (rand(100) > 80) {
-                    monster.createStatusEffect(StatusEffects.Fascinated,0,0,0,0);
-                }
-                lustDmgA *= 1.25;
+                if (rand(100) > 69) monster.createStatusEffect(StatusEffects.Fascinated,0,0,0,0);
+                lustDmgA *= 1.3;
             }
-
             if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
             if (monster.lust < (monster.maxLust() * 0.5)) outputText(monster.capitalA + monster.short + " breaths in your pollen but does not have any visible effects just yet.");
             else if (monster.lust < (monster.maxLust() * 0.6)) {
@@ -7490,7 +7491,8 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.LizanMarrowFinalForm) && player.HP < 1) healingPercent -= 1;
             if (healingPercent > maximumRegeneration()) healingPercent = maximumRegeneration();
             HPChange(Math.round((player.maxHP() * healingPercent / 100) + nonPercentBasedRegeneration()), false);
-        } else {
+        }
+		else {
             //Regeneration
             healingPercent = 0;
             healingPercent += PercentBasedRegeneration() * 2;
@@ -7525,6 +7527,7 @@ public class Combat extends BaseContent {
 			maxPercentRegen += 1.5;
 			if (player.HP < (player.maxHP() * 0.25)) maxPercentRegen += 4.5;
 		}
+		if (player.hasPerk(PerkLib.DraconicHeartFinalForm)) maxPercentRegen += 1;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if (player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 1;
         if (player.hasPerk(PerkLib.BodyCultivator)) maxPercentRegen += 0.5;
@@ -7561,6 +7564,7 @@ public class Combat extends BaseContent {
 			maxRegen += 1.5;
 			if (player.HP < (player.maxHP() * 0.25)) maxRegen += 4.5;
 		}
+		if (player.hasPerk(PerkLib.DraconicHeartFinalForm)) maxRegen += 1;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if ((player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater)) && player.hasPerk(PerkLib.AquaticAffinity) && player.necklaceName == "Magic coral and pearl necklace") maxRegen += 1;
         if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) maxRegen += 2;
@@ -7598,6 +7602,9 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.CorruptedKitsune)) fatiguecombatrecovery += 1;
         if (player.hasPerk(PerkLib.MasteredDefenceStance)) fatiguecombatrecovery += 1;
         if (player.hasPerk(PerkLib.PerfectDefenceStance)) fatiguecombatrecovery += 1;
+        if (player.hasPerk(PerkLib.DraconicHeart)) fatiguecombatrecovery += 1;
+        if (player.hasPerk(PerkLib.DraconicHeartEvolved)) fatiguecombatrecovery += 1;
+        if (player.hasPerk(PerkLib.DraconicHeartFinalForm)) fatiguecombatrecovery += 1;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) fatiguecombatrecovery += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         fatiguecombatrecovery *= fatigueRecoveryMultiplier();
         fatiguecombatrecovery = Math.round(fatiguecombatrecovery);
@@ -7617,7 +7624,8 @@ public class Combat extends BaseContent {
             gainedsoulforce = Math.round(gainedsoulforce);
             if (player.hasPerk(PerkLib.EnergyDependent)) gainedsoulforce = 0;
             EngineCore.SoulforceChange(gainedsoulforce, false);
-        } else {
+        }
+		else {
             gainedsoulforce += soulforceregeneration2() * 2;
             gainedsoulforce *= soulforceRecoveryMultiplier();
             if (player.hasPerk(PerkLib.Necromancy)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
@@ -7643,6 +7651,9 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.SoulKing)) soulforceregen += 5;
         if (player.hasPerk(PerkLib.SoulEmperor)) soulforceregen += 5;
         if (player.hasPerk(PerkLib.SoulAncestor)) soulforceregen += 5;
+        if (player.hasPerk(PerkLib.DraconicHeart)) soulforceregen += 4;
+        if (player.hasPerk(PerkLib.DraconicHeartEvolved)) soulforceregen += 4;
+        if (player.hasPerk(PerkLib.DraconicHeartFinalForm)) soulforceregen += 4;
         if (player.hasPerk(PerkLib.KitsuneThyroidGlandFinalForm) && player.hasPerk(PerkLib.StarSphereMastery)) soulforceregen += (player.perkv1(PerkLib.StarSphereMastery) * 3);
         return soulforceregen;
     }
@@ -7670,7 +7681,8 @@ public class Combat extends BaseContent {
             if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedmana *= 2;
             gainedmana = Math.round(gainedmana);
             EngineCore.ManaChange(gainedmana, false);
-        } else {
+        }
+		else {
             gainedmana += manaregeneration2() * 2;
             gainedmana *= manaRecoveryMultiplier();
             gainedmana = Math.round(gainedmana);
@@ -7686,6 +7698,9 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.ArcaneRegenerationMajor)) manaregen += 10;
         if (player.hasPerk(PerkLib.ArcaneRegenerationEpic)) manaregen += 15;
         if (player.hasPerk(PerkLib.ArcaneRegenerationLegendary)) manaregen += 20;
+        if (player.hasPerk(PerkLib.DraconicHeart)) manaregen += 5;
+        if (player.hasPerk(PerkLib.DraconicHeartEvolved)) manaregen += 5;
+        if (player.hasPerk(PerkLib.DraconicHeartFinalForm)) manaregen += 5;
         if (player.hasPerk(PerkLib.KitsuneThyroidGlandFinalForm) && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 3);
         return manaregen;
     }
@@ -7694,21 +7709,22 @@ public class Combat extends BaseContent {
         var gainedwrath:Number = 0;
         if (combat) {
             var BonusWrathMult:Number = 1;
-            if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
+            if (player.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.2;
             gainedwrath += wrathregeneration2() * 2 * BonusWrathMult;
-            if (player.hasStatusEffect(StatusEffects.Berzerking)) gainedwrath += 6*BonusWrathMult;
-            if (player.hasStatusEffect(StatusEffects.Lustzerking)) gainedwrath += 6*BonusWrathMult;
-            if (player.hasStatusEffect(StatusEffects.Rage)) gainedwrath += 6*BonusWrathMult;
-            if (player.hasStatusEffect(StatusEffects.OniRampage)) gainedwrath += 12*BonusWrathMult;
+            if (player.hasStatusEffect(StatusEffects.Berzerking)) gainedwrath += 6 * BonusWrathMult;
+            if (player.hasStatusEffect(StatusEffects.Lustzerking)) gainedwrath += 6 * BonusWrathMult;
+            if (player.hasStatusEffect(StatusEffects.Rage)) gainedwrath += 6 * BonusWrathMult;
+            if (player.hasStatusEffect(StatusEffects.OniRampage)) gainedwrath += 12 * BonusWrathMult;
             if (player.statStore.hasBuff("CrinosShape")) {
                 gainedwrath += 2;
-                if (player.hasPerk(PerkLib.ImprovedCrinosShape)) gainedwrath += 4*BonusWrathMult;
-                if (player.hasPerk(PerkLib.GreaterCrinosShape)) gainedwrath += 6*BonusWrathMult;
-                if (player.hasPerk(PerkLib.MasterCrinosShape)) gainedwrath += 8*BonusWrathMult;
+                if (player.hasPerk(PerkLib.ImprovedCrinosShape)) gainedwrath += 4 * BonusWrathMult;
+                if (player.hasPerk(PerkLib.GreaterCrinosShape)) gainedwrath += 6 * BonusWrathMult;
+                if (player.hasPerk(PerkLib.MasterCrinosShape)) gainedwrath += 8 * BonusWrathMult;
             }
-            if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) gainedwrath *= 2*BonusWrathMult;
+            if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) gainedwrath *= 2 * BonusWrathMult;
             EngineCore.WrathChange(gainedwrath, false);
-        } else {
+        }
+		else {
             gainedwrath += wrathregeneration2();
             EngineCore.WrathChange(gainedwrath, false);
         }
@@ -7717,7 +7733,7 @@ public class Combat extends BaseContent {
     public function wrathregeneration2():Number {
         var wrathregen:Number = 0;
         var BonusWrathMult:Number = 1;
-        if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult += 1;
+        if (player.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult += 1;
         if (player.hasPerk(PerkLib.DoubleAttackSmall)) wrathregen += 1;
         if (player.hasPerk(PerkLib.TripleAttackSmall)) wrathregen += 1;
         if (player.hasPerk(PerkLib.QuadrupleAttackSmall)) wrathregen += 1;
@@ -7749,6 +7765,9 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.Lustzerker)) wrathregen += 2;
         if (player.hasPerk(PerkLib.Rage)) wrathregen += 2;
         if (player.hasPerk(PerkLib.Anger)) wrathregen += 2;
+        if (player.hasPerk(PerkLib.DraconicHeart)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.DraconicHeartEvolved)) wrathregen += 1;
+        if (player.hasPerk(PerkLib.DraconicHeartFinalForm)) wrathregen += 1;
         if (player.hasPerk(PerkLib.OrcAdrenalGlandsFinalForm)) wrathregen += 4;
         if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) wrathregen += 4;
         if (player.necklace == necklaces.CSNECK) {
@@ -10657,34 +10676,36 @@ public class Combat extends BaseContent {
     }
 
     public function ghostStrength():Number {
-        var ghostStr:Number = 0;
-        var ghostStrMulti:Number = 1;
-        if (player.hasPerk(PerkLib.Brute)) ghostStr += (20 + (10 * (player.newGamePlusMod())));
-        if (player.hasPerk(PerkLib.ImprovedBrute)) ghostStr += (40 + (20 * player.newGamePlusMod()));
-        if (player.hasPerk(PerkLib.GreaterBrute)) ghostStr += (60 + (30 * player.newGamePlusMod()));
-        if (player.hasPerk(PerkLib.EpicBrute)) ghostStr += (80 + (40 * player.newGamePlusMod()));
-        if (player.hasPerk(PerkLib.LegendaryBrute)) ghostStr += (100 + (50 * player.newGamePlusMod()));
-        if (player.hasPerk(PerkLib.MythicalBrute)) ghostStr += (120 + (60 * player.newGamePlusMod()));
-        if (player.hasPerk(PerkLib.Brawn)) ghostStrMulti += .05;
-        if (player.hasPerk(PerkLib.ImprovedBrawn)) ghostStrMulti += .1;
-        if (player.hasPerk(PerkLib.GreaterBrawn)) ghostStrMulti += .15;
-        if (player.hasPerk(PerkLib.EpicBrawn)) ghostStrMulti += .2;
-        if (player.hasPerk(PerkLib.LegendaryBrawn)) ghostStrMulti += .25;
-        if (player.hasPerk(PerkLib.MythicalBrawn)) ghostStrMulti += .3;
-        if (player.hasPerk(PerkLib.OrcAdrenalGlands)) ghostStr += (5 + (5 * (player.newGamePlusMod())));
-        if (player.hasPerk(PerkLib.OrcAdrenalGlandsEvolved)) ghostStr += (10 + (10 * (player.newGamePlusMod())));
-        if (player.hasPerk(PerkLib.OrcAdrenalGlandsFinalForm)) ghostStr += (15 + (15 * (player.newGamePlusMod())));
+        var ghostStr:Number = player.strStat.max;
+        var ghostStrMulti:Number = 0;
+        var ghostStrMulti2:Number = 1;
+        if (player.hasPerk(PerkLib.Brute)) ghostStrMulti += 0.2;
+        if (player.hasPerk(PerkLib.ImprovedBrute)) ghostStrMulti += 0.4;
+        if (player.hasPerk(PerkLib.GreaterBrute)) ghostStrMulti += 0.6;
+        if (player.hasPerk(PerkLib.EpicBrute)) ghostStrMulti += 0.8;
+        if (player.hasPerk(PerkLib.LegendaryBrute)) ghostStrMulti += 1;
+        if (player.hasPerk(PerkLib.MythicalBrute)) ghostStrMulti += 1.2;
+        if (player.hasPerk(PerkLib.Brawn)) ghostStrMulti2 += .1;
+        if (player.hasPerk(PerkLib.ImprovedBrawn)) ghostStrMulti2 += .15;
+        if (player.hasPerk(PerkLib.GreaterBrawn)) ghostStrMulti2 += .2;
+        if (player.hasPerk(PerkLib.EpicBrawn)) ghostStrMulti2 += .25;
+        if (player.hasPerk(PerkLib.LegendaryBrawn)) ghostStrMulti2 += .3;
+        if (player.hasPerk(PerkLib.MythicalBrawn)) ghostStrMulti2 += .35;
+        if (player.hasPerk(PerkLib.DraconicHeartEvolved)) ghostStrMulti += 0.05;
+        if (player.hasPerk(PerkLib.DraconicHeartFinalForm)) ghostStrMulti += 0.1;
+        if (player.hasPerk(PerkLib.OrcAdrenalGlands)) ghostStrMulti += 0.05;
+        if (player.hasPerk(PerkLib.OrcAdrenalGlandsEvolved)) ghostStrMulti += 0.1;
+        if (player.hasPerk(PerkLib.OrcAdrenalGlandsFinalForm)) ghostStrMulti += 0.15;
         ghostStr *= ghostStrMulti;
+        ghostStr *= ghostStrMulti2;
         ghostStr = Math.round(ghostStr);
         return ghostStr;
     }
-
     private function ghostRealStrength():Number {
         var ghostRealStr:Number = player.str;
         ghostRealStr += ghostStrength();
         return ghostRealStr;
     }
-
     private function ghostRealStrengthCompanion():Number {
         var ghostRealStrCompanion:Number = 0;
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAlvina);
@@ -10712,19 +10733,37 @@ public class Combat extends BaseContent {
     }
 
     public function ghostSpeed():Number {
-        var ghostSpe:Number = 0;
-        if (player.hasPerk(PerkLib.ElvishPeripheralNervSys)) ghostSpe += (5 + (5 * (player.newGamePlusMod())));
-        if (player.hasPerk(PerkLib.ElvishPeripheralNervSysEvolved)) ghostSpe += (10 + (10 * (player.newGamePlusMod())));
-        if (player.hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm)) ghostSpe += (15 + (15 * (player.newGamePlusMod())));
-        if (player.hasPerk(PerkLib.MantislikeAgilityFinalForm)) ghostSpe += (30 + (30 * (player.newGamePlusMod())));
+        var ghostSpe:Number = player.speStat.max;
+        var ghostSpeMulti:Number = 0;
+        if (player.hasPerk(PerkLib.DraconicLungsEvolved)) ghostSpeMulti += 0.05;
+        if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) ghostSpeMulti += 0.1;
+        if (player.hasPerk(PerkLib.ElvishPeripheralNervSys)) ghostSpeMulti += 0.05;
+        if (player.hasPerk(PerkLib.ElvishPeripheralNervSysEvolved)) ghostSpeMulti += 0.1;
+        if (player.hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm)) ghostSpeMulti += 0.15;
+        if (player.hasPerk(PerkLib.MantislikeAgilityFinalForm)) ghostSpeMulti += 0.3;
+        ghostSpe *= ghostSpeMulti;
         ghostSpe = Math.round(ghostSpe);
         return ghostSpe;
     }
-
     private function ghostRealSpeed():Number {
         var ghostRealSpe:Number = player.spe;
         ghostRealSpe += ghostSpeed();
         return ghostRealSpe;
+    }
+	
+	public function ghostToughness():Number {
+		var ghostTou:Number = player.touStat.max;
+        var ghostTouMulti:Number = 0;
+        if (player.hasPerk(PerkLib.DraconicBonesEvolved)) ghostTouMulti += 0.05;
+        if (player.hasPerk(PerkLib.DraconicBonesFinalForm)) ghostTouMulti += 0.1;
+		ghostTou *= ghostTouMulti;
+        ghostTou = Math.round(ghostTou);
+        return ghostTou;
+	}
+    private function ghostRealToughness():Number {
+        var ghostRealTou:Number = player.tou;
+        ghostRealTou += ghostToughness();
+        return ghostRealTou;
     }
 
     private function ghostRealIntelligenceCompanion():Number {
@@ -10771,7 +10810,7 @@ public class Combat extends BaseContent {
     }
 
     public function scalingBonusToughness():Number {
-        return inteWisLibScale(player.tou);
+        return inteWisLibScale(ghostRealToughness());
     }
 
     public function scalingBonusSpeed():Number {
@@ -10799,3 +10838,4 @@ public class Combat extends BaseContent {
     }
 }
 }
+

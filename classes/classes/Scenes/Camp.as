@@ -3299,7 +3299,8 @@ public function wakeFromBadEnd():void {
 		fatigueAmount -= player.str / 5;
 		fatigueAmount -= player.tou / 10;
 		fatigueAmount -= player.spe / 10;
-		if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
+		if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) fatigueAmount -= 10;
 		fatigueAmount /= (helpers + 1);
 		if (fatigueAmount < 15) fatigueAmount = 15;
 		fatigue(fatigueAmount);
@@ -3584,6 +3585,16 @@ public function wakeFromBadEnd():void {
 					fatigue += 6;
 				}
 				if (player.findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) {
+					wrath += 2;
+					mana += 12;
+					soulforce += 6;
+				}
+				if (player.findPerk(PerkLib.AscensionUnlockedPotential3rdStage) >= 0) {
+					hp += 20;
+					lust += 2;
+					fatigue += 6;
+				}
+				if (player.findPerk(PerkLib.AscensionUnlockedPotential4thStage) >= 0) {
 					wrath += 2;
 					mana += 12;
 					soulforce += 6;
@@ -4358,6 +4369,7 @@ public function wakeFromBadEnd():void {
 			clearOutput();
 			outputText("Zenji going to town... HARD");
 			if (!player.hasStatusEffect(StatusEffects.ZenjiZList)) player.createStatusEffect(StatusEffects.ZenjiZList,0,0,0,0);
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) player.createStatusEffect(StatusEffects.TrainingNPCsTimersReduction, 6, 0, 0, 0);
 			doNext(doCamp);
 			return;
 		}
@@ -4885,4 +4897,3 @@ public function wakeFromBadEnd():void {
         */
 	}
 }
-

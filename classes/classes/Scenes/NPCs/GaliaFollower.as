@@ -51,7 +51,7 @@ import classes.Scenes.NPCs.Galia;
 		}
 		public function GaliaLostSparring():void {
 			clearOutput();
-			outputText("After a longer moment Galia calm down and only say few words with low voice before walking away to her rest place. \"<i>You won this time but i'll win next time.</i>\"");
+			outputText("After a longer moment Galia calm down and only say few words with low voice before walking away to her resting place. \"<i>You won this time but I'll win next time.</i>\"");
 			/*if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 				if (flags[kFLAGS.GALIA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.GALIA_DEFEATS_COUNTER]++;
 				else flags[kFLAGS.GALIA_DEFEATS_COUNTER] = 1;
@@ -72,6 +72,12 @@ import classes.Scenes.NPCs.Galia;
 					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 12, 0, 0);
 					flags[kFLAGS.GALIA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.GALIA_LVL_UP] = 4;
+				}
+				if (flags[kFLAGS.GALIA_DEFEATS_COUNTER] == 3 && flags[kFLAGS.GALIA_LVL_UP] == 4) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 2, 12);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 12, 0, 0);
+					flags[kFLAGS.GALIA_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.GALIA_LVL_UP] = 5
 				}
 			}*/
 			cleanupAfterCombat();

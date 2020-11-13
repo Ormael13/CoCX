@@ -607,14 +607,22 @@ public class HeXinDao extends BaseContent
         if (player.level >= 24) addButton(6, consumables.BANGBM2.shortName, weaponBuy, consumables.BANGBM2);
         else addButtonDisabled(6, "???", "Req. lvl 24+");
         if (player.level >= 42) {
+			addButton(0, consumables.BALLOFL.shortName, weaponBuy, consumables.BALLOFL);
+			addButton(1, consumables.FROZENB.shortName, weaponBuy, consumables.FROZENB);
+			addButton(2, consumables.THUNDBl.shortName, weaponBuy, consumables.THUNDBl);
+			addButton(3, consumables.BALLOTD.shortName, weaponBuy, consumables.BALLOTD);
+			addButton(4, consumables.POISONB.shortName, weaponBuy, consumables.POISONB);
 			addButton(7, consumables.BANGBM3.shortName, weaponBuy, consumables.BANGBM3);
-			addButton(8, consumables.BALLOFL.shortName, weaponBuy, consumables.BALLOFL);
-			addButton(9, consumables.BANGBM3.shortName, weaponBuy, consumables.BANGBM3);
+			addButton(8, consumables.BANGBM3.shortName, weaponBuy, consumables.BANGBM3);
 		}
         else {
+			addButtonDisabled(0, "???", "Req. lvl 42+");
+			addButtonDisabled(1, "???", "Req. lvl 42+");
+			addButtonDisabled(2, "???", "Req. lvl 42+");
+			addButtonDisabled(3, "???", "Req. lvl 42+");
+			addButtonDisabled(4, "???", "Req. lvl 42+");
 			addButtonDisabled(7, "???", "Req. lvl 42+");
 			addButtonDisabled(8, "???", "Req. lvl 42+");
-			addButtonDisabled(9, "???", "Req. lvl 42+");
 		}
         addButton(10, consumables.BANGB_M.shortName, weaponBuy, consumables.BANGB_M);
         addButton(11, consumables.W_STICK.shortName, weaponBuy, consumables.W_STICK);
@@ -1104,4 +1112,4 @@ public function soularena():void {
         doNext(camp.returnToCampUseOneHour);
     }
 }
-}
+}

@@ -1525,6 +1525,14 @@ internal function beatUpDatSharpie():void {
 			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.MINERVA_LVL_UP] = 10;
 		}
+		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.MINERVA_LVL_UP] == 10) {
+			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.MINERVA_LVL_UP] = 11;
+		}
+		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.MINERVA_LVL_UP] == 11) {
+			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.MINERVA_LVL_UP] = 12;
+		}
 	}
 	//Win by damage
 	if(monster.HP < 1) {
