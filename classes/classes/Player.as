@@ -4558,7 +4558,7 @@ use namespace CoC;
 					cowCounter++;
 				if (arms.type == Arms.HUMAN)
 					cowCounter++;
-				if (hasFur() || hasPartialCoat(Skin.FUR))
+				if (hasFur() || hasPartialCoat(Skin.FUR) || hasPlainSkinOnly())
 					cowCounter++;
 				if (biggestTitSize() > 4)
 					cowCounter++;
@@ -4573,6 +4573,8 @@ use namespace CoC;
 				if (balls > 0)
 					cowCounter -= 8;
 			}
+			if (findPerk(PerkLib.Feeder) >= 0)
+				cowCounter++;
 			if (findPerk(PerkLib.LactaBovinaOvaries) >= 0)
 				cowCounter++;
 			if (findPerk(PerkLib.LactaBovinaOvariesEvolved) >= 0)
