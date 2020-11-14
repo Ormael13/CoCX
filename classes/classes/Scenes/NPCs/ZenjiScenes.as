@@ -1038,9 +1038,9 @@ public function loverZenjiMainCampMenu():void {
 				outputText("You ask Zenji if he’s alright.\n\n");
 				outputText("Zenji blinks softly as he reaches a hand out to your form, \"<i>[name]... you’re… you’re just so beautiful… You’re everyting to me, [name]. I’m yours forever, don’ you forget it.</i>\" He finally breaks away from his trance, looking you in the eyes, \"<i>But… is der someting you wanted?</i>\"\n\n");
 			}
-			else if (player.cor < 1 && rand(2) == 0) {
+			else if (player.cor < 1 ) {
 				outputText("You approach Zenji and he greets you with a warm smile.\n\n");
-				outputText("\"<i>If it isn’t my precious little sweetheart.</i>\" He croons, giving you an affectionate head pat. \"<i>Is there something you wanted?</i>\"\n\n");
+				outputText("\"<i>If it isn’t my precious little sweetheart.</i>\" he croons, giving you an affectionate head pat. \"<i>Is there something you wanted?</i>\"\n\n");
 			}
 			else outputText("You approach Zenji and he looks down at you, raising an eyebrow, \"<i>¿Si, flaca?</i>\"\n\n");
 		}
