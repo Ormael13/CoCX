@@ -1664,7 +1664,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.statStore.replaceBuffObject({'sens':10,'lib.mult':0.50},'DrugInjector',{text:'Improved Drug injectors'})
 				}
 				if (player.hasKeyItem("Potent Drug injectors")){
-					player.statStore.replaceBuffObject({'sens':15,'lib.mult':0.5},'DrugInjector',{text:'Potent Drug injectors'})
+					player.statStore.replaceBuffObject({'sens':15,'lib.mult':0.75},'DrugInjector',{text:'Potent Drug injectors'})
 				}
 				if (player.hasKeyItem("Power bracer") >= 0) {
 					player.statStore.replaceBuffObject({'str.mult':0.50},'Power bracer',{text:'Power bracer'})
