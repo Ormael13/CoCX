@@ -5528,10 +5528,8 @@ public class PerkLib
                 return (player.dragonScore() >= 5 || player.frostWyrmScore() >= 10);
             }, "Dragon race");
 			DraconicLungs.requireLungsMutationSlot()
-				.requirePerk(DragonFireBreath)
-                .requirePerk(DragonIceBreath)
-                .requirePerk(DragonLightningBreath)
-                .requirePerk(DragonDarknessBreath).requireCustomFunction(function (player:Player):Boolean {
+				.requireAnyPerk (DragonFireBreath, DragonIceBreath, DragonLightningBreath, DragonDarknessBreath)
+				.requireCustomFunction(function (player:Player):Boolean {
                 return (player.dragonScore() >= 5 || player.frostWyrmScore() >= 10);
             }, "Dragon race and its variants");
 			EasterBunnyEggBag.requireBallsMutationSlot().requirePerk(EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
