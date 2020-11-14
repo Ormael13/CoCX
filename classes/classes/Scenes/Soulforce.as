@@ -3609,12 +3609,14 @@ public function FightHellfireSnail():void {
 			//next page button?
 			if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] >= 3) addButton(5, "Priscilla", PriscillaEnc).hint("Req. 320+ soulforce");
 			else addButtonDisabled(5, "Priscilla", "");
+			 addButtonDisabled(6, "Mino Sons", "");
 			//Sheila find
 			//previous page button?
 			if (flags[kFLAGS.SOUL_SENSE_WORLD_TREE] >= 1) addButton(10, "WorldTree", findWorldTree).hint("Req. 100+ soulforce");
 			else addButtonDisabled(10, "WorldTree", "");
-			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) addButton(13, "Giacomo", findGiacomo).hint("Req. 100+ soulforce");
-			else addButtonDisabled(13, "Giacomo", "");
+			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) addButton(12, "Giacomo", findGiacomo).hint("Req. 100+ soulforce");
+			else addButtonDisabled(12, "Giacomo", "");
+			addButtonDisabled(13, "???", "Draw into your soulforce for soulsensing. (Comming Soon)")
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		public function TamaniEnc():void {

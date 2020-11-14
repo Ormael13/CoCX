@@ -10676,7 +10676,7 @@ public class Combat extends BaseContent {
     }
 
     public function ghostStrength():Number {
-        var ghostStr:Number = player.strStat.max;
+        var ghostStr:Number = player.strStat.core.value;
         var ghostStrMulti:Number = 0;
         var ghostStrMulti2:Number = 1;
         if (player.hasPerk(PerkLib.Brute)) ghostStrMulti += 0.2;
@@ -10733,7 +10733,7 @@ public class Combat extends BaseContent {
     }
 
     public function ghostSpeed():Number {
-        var ghostSpe:Number = player.speStat.max;
+        var ghostSpe:Number = player.speStat.core.value;
         var ghostSpeMulti:Number = 0;
         if (player.hasPerk(PerkLib.DraconicLungsEvolved)) ghostSpeMulti += 0.05;
         if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) ghostSpeMulti += 0.1;
@@ -10752,7 +10752,7 @@ public class Combat extends BaseContent {
     }
 	
 	public function ghostToughness():Number {
-		var ghostTou:Number = player.touStat.max;
+		var ghostTou:Number = player.touStat.core.value;
         var ghostTouMulti:Number = 0;
         if (player.hasPerk(PerkLib.DraconicBonesEvolved)) ghostTouMulti += 0.05;
         if (player.hasPerk(PerkLib.DraconicBonesFinalForm)) ghostTouMulti += 0.1;
@@ -10838,4 +10838,4 @@ public class Combat extends BaseContent {
     }
 }
 }
-
+
