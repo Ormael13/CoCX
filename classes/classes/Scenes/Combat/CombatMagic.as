@@ -1619,13 +1619,15 @@ public class CombatMagic extends BaseCombatContent {
 			var oldHPratio:Number = player.hp100/100;
 
 			var buffValues:Object = {"tou.mult":tempTou/100};
+
 			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) {
 				buffValues["int.mult"] = tempInt/100;
+				if (buffValues["int.mult"] > player.intStat.mult.value*0.5) buffValues["int.mult"] = player.intStat.mult.value*0.5;
 			} else {
 				buffValues["str.mult"] = tempStr/100;
+				if (buffValues["str.mult"] > player.intStat.mult.value*0.5) buffValues["str.mult"] = player.intStat.mult.value*0.5;
 			}
 			player.buff("Might").setStats(buffValues).combatTemporary(MightDuration);
-
 			player.HP = oldHPratio*player.maxHP();
 			statScreenRefresh();
 		};

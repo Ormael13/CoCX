@@ -1808,6 +1808,10 @@
 					<hide part="face/human"/>
 					<show part="face/demonlewd"/>
 				</if>
+				<if test="cor &gt;=100">
+					<hide part="face/human"/>
+					<show part="face/fairySmile"/>
+				</if>
 				<if test="cor &gt;=100 and lowerBody == LowerBody.FLOWER_LILIRAUNE">
 					<hide part="face/*"/>
 					<show part="face/lilirauneCorruptedSmile"/>
