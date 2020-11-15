@@ -1786,8 +1786,8 @@ public class Pregnancy extends NPCAwareContent {
         //Give birth to Zenji kid
         if (player.pregnancyType == PregnancyStore.PREGNANCY_ZENJI && player.pregnancyIncubation == 1){
             player.knockUpForce(); //Clear Pregnancy
+			flags[kFLAGS.EVENT_PARSER_ESCAPE] = 1;//Do not doNext to camp, pregnancy event set ups menu - also if this flag is used can skip adding "return false/true;"
             SceneLib.zenjiScene.birthScene();
-            return false;
         }
         //Give birth if it's time (to an imp!)
         if (player.pregnancyIncubation == 1 && player.pregnancyType == PregnancyStore.PREGNANCY_IMP) {

@@ -452,12 +452,13 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Strength Cap:</b> " + Math.floor(player.strStat.max) + "\n";
 		combatStats += "<i>Ghost Strength:</i> +" + Math.floor(combat.ghostStrength()) + "\n";
 		combatStats += "<b>Toughness Cap:</b> " + Math.floor(player.touStat.max) + "\n";
+		combatStats += "<i>Ghost Toughness:</i> +" + Math.floor(combat.ghostToughness()) + "\n";
 		combatStats += "<b>Speed Cap:</b> " + Math.floor(player.speStat.max) + "\n";
 		combatStats += "<i>Ghost Speed:</i> +" + Math.floor(combat.ghostSpeed()) + "\n";
 		combatStats += "<b>Intelligence Cap:</b> " + Math.floor(player.intStat.max) + "\n";
 		combatStats += "<b>Wisdom Cap:</b> " + Math.floor(player.wisStat.max) + "\n";
 		combatStats += "<b>Libido Cap:</b> " + Math.floor(player.libStat.max) + "\n";
-		combatStats += "<i>Libido Sensitivity:</i> " + Math.floor(player.effectiveLibido()) + "\n";
+		combatStats += "<i>Effective Libido:</i> " + Math.floor(player.effectiveLibido()) + "\n";
 		combatStats += "<i>Libido Minimum:</i> " + mins.lib + "\n";
 		combatStats += "<b>Sensitivity Cap:</b> " + Math.floor(player.sensStat.max) + "\n";
 		combatStats += "<i>Effective Sensitivity:</i> " + Math.floor(player.effectiveSensitivity()) + "\n";
@@ -641,7 +642,7 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.ETNA_LVL_UP] < 1) interpersonStats += "<b>Etna lvl:</b> 30\n";
 		}
 
-		if (flags[kFLAGS.ELECTRA_AFFECTION] > 0)
+		if (flags[kFLAGS.ELECTRA_AFFECTION] > 0) {
 			interpersonStats += "<b>Electra Affection:</b> " + Math.round(flags[kFLAGS.ELECTRA_AFFECTION]) + "%\n";
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 12) interpersonStats += "<b>Electra lvl:</b> 96\n";
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 11) interpersonStats += "<b>Electra lvl:</b> 90\n";
@@ -655,6 +656,7 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 3) interpersonStats += "<b>Electra lvl:</b> 42\n";
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 2) interpersonStats += "<b>Electra lvl:</b> 36\n";
 			if (flags[kFLAGS.ELECTRA_LVL_UP] < 2) interpersonStats += "<b>Electra lvl:</b> 30\n";
+		}
 
 		if (SceneLib.emberScene.emberAffection() > 0) {
             interpersonStats += "<b>Ember Affection:</b> " + Math.round(SceneLib.emberScene.emberAffection()) + "%\n";
@@ -864,8 +866,8 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.ZENJI_PROGRESS] == 11) {
 				interpersonStats += "<b>Zenji status:</b> Lover\n";
 				interpersonStats += "<b>Zenji Cum Production:</b> " + addComma(Math.round(1300 + player.statusEffectv2(StatusEffects.ZenjiModificationsList))) + "mL\n";
-				if (ZenjiScenes.Z1stKid != "") interpersonStats += "<b>Zenji Firstborn Name:</b> "+ZenjiScenes.Z1stKid+"\n";
-				if (ZenjiScenes.Z2ndKid != "") interpersonStats += "<b>Zenji Secondborn Name:</b> "+ZenjiScenes.Z2ndKid+"\n";
+				if (ZenjiScenes.Z1stKid != "") interpersonStats += "<b>Zenji Firstborn (Male) Name:</b> "+ZenjiScenes.Z1stKid+"\n";
+				if (ZenjiScenes.Z2ndKid != "") interpersonStats += "<b>Zenji Secondborn (Female) Name:</b> "+ZenjiScenes.Z2ndKid+"\n";
 			}
 		}
 
@@ -1494,3 +1496,4 @@ public class PlayerInfo extends BaseContent {
 
 }
 }
+

@@ -2545,7 +2545,7 @@ private function applyZenjikidName():void {
 		// Stuff a name in the box and go go go
 		mainView.nameBox.text = "Zenji kiddo";
 	}
-	else if(mainView.nameBox.text == "" || mainView.nameBox.text == "0" || mainView.nameBox.text == "Zenji") 
+	else if (mainView.nameBox.text == "" || mainView.nameBox.text == "0" || mainView.nameBox.text == "Zenji") 
 	{
 		clearOutput();
 		if (mainView.nameBox.text == "" || mainView.nameBox.text == "0") outputText("<b>You must select a name.</b>");
@@ -2577,6 +2577,7 @@ private function applyZenjikidName():void {
 private function applyZenjikidName2():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
+	flags[kFLAGS.ZENJI_KIDS]++;
 	outputText("Zenji gives you a gentle stare as he gently caresses your child, \"<i>Actually, Ya know... I was thinkin’, and I thought I should name dem dis time.</i>\"\n\n");
 	outputText("He scoops up your baby once they detach from your breast. \"<i>What will daddy name you?</i>\" he croons, taking his child to his nest.\n\n");
 	doNext(camp.returnToCampUseTwoHours);
