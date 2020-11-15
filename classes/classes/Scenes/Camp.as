@@ -18,6 +18,7 @@ import classes.Scenes.Dungeons.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao;
 import classes.lists.Gender;
+import classes.display.SpriteDb;
 
 import coc.view.CoCButton;
 import coc.view.ButtonDataList;
@@ -2769,6 +2770,41 @@ private function SparrableNPCsMenu():void {
 				}
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Arian" && arianScene.arianFollower()) {
 				arianScene.sleepWithArian();
+				return;
+			} else if (flags[kFLAGS.SLEEP_WITH] == "Zenji" && arianScene.arianFollower()) {
+				//SceneLib.zenjiScene.loverZenjiSleepWith(timeQ);
+				spriteSelect(SpriteDb.s_zenji);
+				if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0) {
+					outputText("You approach Zenji, ready to call it a day and spend the rest of your night with him in your cabin.\n\n");
+					outputText("As you approach him, you ask if he wouldn’t mind spending the night with you as well. Zenji caresses your cheek with his soft and fuzzy hand, \"<i>Of course, [name]. If dat is ya request, den who would I be ta deny it?</i>\" His hand slides down to your shoulder, giving it a gentle squeeze before letting you go.\n\n");
+					outputText("You grab onto Zenji’s hand, to which he responds by giving your palm a gentle squeeze. After a moment of holding his hand you realize what you were about to do and lead him to your cabin. Breaking the hand hold, he opens the door for you, letting you in first as you guide him to your bedroom.\n\n");
+					outputText("You take off your [armor], leaving you "+(player.isNaked2() ? "completely naked":"left in your underwear")+", Zenji strips off his loincloth, getting comfortable with you as well. It doesn't take long before he begins sporting an erection, you consider for a moment if you want to have sex with him before bed.");
+					menu();
+					if (player.hasVagina()) addButton(1, "Get Penetrated", SceneLib.zenjiScene.loverZenjiSleepWithGetPenetrated);
+					else addButtonDisabled(1, "Get Penetrated", "You need a vagina for this scene.");
+					addButton(2,"Catch Anal", SceneLib.zenjiScene.loverZenjiSleepWithCatchAnal);
+					addButton(3,"No Sex", SceneLib.zenjiScene.loverZenjiSleepWithNoSex);
+				}
+				else {
+					outputText("You approach Zenji, ready to call it a day, and spend the rest of the night with him.\n\n");
+					outputText("As you approach, you ask him if he has any room in his bedroll for you. Zenji gives a wary glance around the camp, \"<i>Alright, [name], I will watch over you tonight, but I don’ wanna do anyting else. It doesn't feel safe letting my guard down when it’s so late, especially out in de open.</i>\"\n\n");
+					outputText("You sigh, you suppose that if you had somewhere safe to sleep in during the night he’d be more open to doing something with you. At least it’s better than sleeping alone.\n\n");
+					outputText("You curl up with Zenji in his sleeping roll, planning on sleeping for " + num2Text(timeQ) + " hours.");
+					if (player.tailType != Tail.NONE) outputText(" As you lie beside him, you feel his tail coil around you, you reflexively bring your [tail] to tangle with his, the two of you locking tails each other.");
+					else outputText(" As you lie beside him, you can feel his tail coil around you, protectively stroking your [legs].");
+					if (player.tailType == Tail.FOX) outputText(" You hate to admit it, but Zenji’s tail just might almost kind of rival yours in terms of how soft and cuddly it is.");
+					outputText("\n\nHe pulls you closer to his fuzzy body, \"<i>Good night, [name].</i>\"\n\n");
+					if (silly() && rand(5) == 0) {
+						outputText("You are jolted awake by a strange sound in the middle of the night. Fear overwhelms you for a moment as you survey your surroundings, but your cabin is empty. You remain wary for a moment, not willing to rest easy just yet.\n\n");
+						outputText("You nearly jump by the faint sound of groaning from beneath you. You cautiously peer over the edge of the mattress to be met with Zenji rubbing the side of his head softly.\n\n");
+						outputText("He looks up at you, \"<i>Ack, [name]... Ya kicked me off de bed...</i>\"\n\n");
+						outputText("You apologize as you help him back up with you.\n\n");
+						outputText("\"<i>No worries, I'll just be sure t' keep ya tighter in my arms so ya don't try to kick me away again. Heheh...</i>\"\n\n");
+						outputText("With that, Zenji wraps his strong arms around you as you ready yourself to sleep for another " + num2Text(timeQ) + " hours.\n");
+					}
+					//menu();
+					//addButton(0,"Next", sleepWrapper);
+				}
 				return;
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Excellia" && flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) {
 				outputText("When you head to bed for the night, Excellia is already there waiting. You lay down next to her and get comfortable. She wraps her arms around you and pulls you into her warm embrace nuzzling your neck.");

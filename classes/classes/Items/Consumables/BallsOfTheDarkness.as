@@ -25,7 +25,7 @@ package classes.Items.Consumables
 		
 		override public function useItem():Boolean {
 			clearOutput();
-			outputText("You toss balls of the darkness at your foe");
+			outputText("You toss Balls of the Darkness at your foe");
 			if (game.monster.findPerk(PerkLib.EnemyGroupType) >= 0) outputText("s");
 			outputText("!  They flies straight and true, almost as if they has a mind of their own as they arcs towards " + game.monster.a + game.monster.short + "!\n");
 			if (game.monster.spe - 320 > Utils.rand(100) + 1) { //1% dodge for each point of speed over 320

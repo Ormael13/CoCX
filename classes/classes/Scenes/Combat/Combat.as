@@ -850,6 +850,8 @@ public class Combat extends BaseContent {
     public function stopChanneledSpecial():void {
         clearOutput();
         outputText("You decided to stop preparing your super ultra hyper mega fabious attack!\n\n");
+		if (player.hasPerk(PerkLib.RagingInfernoSu) && player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, -1);
+		//if (player.hasPerk(PerkLib.) && player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, -1);
         player.removeStatusEffect(StatusEffects.ChanneledAttack);
         player.removeStatusEffect(StatusEffects.ChanneledAttackType);
         combatRoundOver();
@@ -891,21 +893,19 @@ public class Combat extends BaseContent {
         }
         if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) unarmed *= 1.1;
         if (player.findPerk(PerkLib.Lycanthropy) >= 0) unarmed += 8 * (1 + player.newGamePlusMod());
-        if (player.arms.type == Arms.MANTIS) unarmed += 15 * (1 + player.newGamePlusMod());
-        if (player.arms.type == Arms.KAMAITACHI) unarmed += 15 * (1 + player.newGamePlusMod());
-        if (player.arms.type == Arms.YETI || player.arms.type == Arms.CAT) unarmed += 5 * (1 + player.newGamePlusMod());
-        if (player.arms.type == Arms.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
-        if (player.arms.type == Arms.BEAR) unarmed += 5 * (1 + player.newGamePlusMod());
+		if (player.arms.type == Arms.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
+        if (player.arms.type == Arms.YETI || player.arms.type == Arms.BEAR) unarmed += 5 * (1 + player.newGamePlusMod());
+        if (player.arms.type == Arms.CAT || player.arms.type == Arms.LION) unarmed += 6 * (1 + player.newGamePlusMod());
         if (player.arms.type == Arms.FROSTWYRM) unarmed += 12 * (1 + player.newGamePlusMod());
+        if (player.arms.type == Arms.MANTIS || player.arms.type == Arms.KAMAITACHI) unarmed += 15 * (1 + player.newGamePlusMod());
         if (player.arms.type == Arms.DISPLACER) {
             unarmed += 6 * (1 + player.newGamePlusMod());
             if (player.findPerk(PerkLib.DisplacerMetabolism) >= 0) unarmed += 6 * (1 + player.newGamePlusMod());
             if (player.findPerk(PerkLib.DisplacerMetabolismEvolved) >= 0) unarmed += 6 * (1 + player.newGamePlusMod());
         }
-        if (player.arms.type == Arms.CAT || player.arms.type == Arms.LION) unarmed += 6 * (1 + player.newGamePlusMod());
-        if (player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LION) unarmed += 6 * (1 + player.newGamePlusMod());
         if (player.lowerBody == LowerBody.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
         if (player.lowerBody == LowerBody.BEAR) unarmed += 5 * (1 + player.newGamePlusMod());
+        if (player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LION) unarmed += 6 * (1 + player.newGamePlusMod());
         if (player.lowerBody == LowerBody.CANCER) unarmed += 12 * (1 + player.newGamePlusMod());
         if (player.tailType == Tail.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.DraconicBones)) unarmed += 10 * (1 + player.newGamePlusMod());
@@ -5895,7 +5895,7 @@ public class Combat extends BaseContent {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
         hideUpDown();
         if (player.hasStatusEffect(StatusEffects.MinotaurKingMusk)) {
-            dynStats("lus+", 3);
+            dynStats("lus", 3);
         }
         if (player.hasStatusEffect(StatusEffects.Sealed)) {
             //Countdown and remove as necessary
@@ -5949,12 +5949,9 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles)) {
             player.addStatusValue(StatusEffects.LethicesRapeTentacles, 1, -1);
-
             if (player.statusEffectv3(StatusEffects.LethicesRapeTentacles) != 0) {
                 player.addStatusValue(StatusEffects.LethicesRapeTentacles, 2, 1);
-
                 var tentaround:Number = player.statusEffectv2(StatusEffects.LethicesRapeTentacles);
-
                 if (tentaround == 1) {
                     outputText("Taking advantage of your helpless state, the tentacles wind deeper under your [armor], caressing your [nipples] and coating your [butt] in slippery goo. One even seeks out your crotch, none-too-gently prodding around for weak points.\n\n");
                     dynStats("lus", 5);
@@ -6008,6 +6005,32 @@ public class Combat extends BaseContent {
                 }
                 player.removeStatusEffect(StatusEffects.LethicesRapeTentacles);
             }
+        }
+        if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) {
+            if (player.statusEffectv4(StatusEffects.CounterEclipsingShadow) > 0) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 4, -1);
+            if (player.statusEffectv1(StatusEffects.CounterEclipsingShadow) > 0 && player.statusEffectv3(StatusEffects.CounterEclipsingShadow) == 0) {
+				player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, -4);
+			}
+        }
+        if (player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) {
+            if (player.statusEffectv4(StatusEffects.CounterGlacialStorm) > 0) player.addStatusValue(StatusEffects.CounterGlacialStorm, 4, -1);
+            if (player.statusEffectv1(StatusEffects.CounterGlacialStorm) > 0 && player.statusEffectv3(StatusEffects.CounterGlacialStorm) == 0) {
+				player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, -4);
+			}
+        }
+        if (player.hasStatusEffect(StatusEffects.CounterHighVoltage)) {
+            if (player.statusEffectv4(StatusEffects.CounterHighVoltage) > 0) player.addStatusValue(StatusEffects.CounterHighVoltage, 4, -1);
+            if (player.statusEffectv1(StatusEffects.CounterHighVoltage) > 0 && player.statusEffectv3(StatusEffects.CounterHighVoltage) == 0) {
+				player.addStatusValue(StatusEffects.CounterHighVoltage, 1, -4);
+			}
+        }
+        if (player.hasStatusEffect(StatusEffects.CounterRagingInferno)) {
+            if (player.statusEffectv4(StatusEffects.CounterRagingInferno) > 0) player.addStatusValue(StatusEffects.CounterRagingInferno, 4, -1);
+            if (player.statusEffectv1(StatusEffects.CounterRagingInferno) > 0 && player.statusEffectv3(StatusEffects.CounterRagingInferno) == 0) {
+				if (player.hasPerk(PerkLib.RagingInfernoSu)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, -2);
+				else if (player.hasPerk(PerkLib.RagingInfernoEx)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, -3);
+				player.addStatusValue(StatusEffects.CounterRagingInferno, 1, -4);
+			}//v3 = 1 - jesli chaneluje zaklecie/special to nie traci wzmocnienia
         }
         monster.combatRoundUpdate();
         //[Silence warning]
@@ -10597,7 +10620,6 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.SeersInsight)) modss += player.perkv1(PerkLib.SeersInsight);
         if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modss *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
         if (player.necklaceName == "Yin Yang Amulet") modss += .15;
-        if (player.shieldName == "spirit focus") modss += .2;
         if (player.armorName == "Traditional clothes") modss += .4;
         modss = Math.round(modss * 100) / 100;
         return modss;
@@ -10612,6 +10634,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.BodyCultivatorsFocus)) modssp += player.perkv1(PerkLib.BodyCultivatorsFocus);
         if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssp *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
         if (player.necklaceName == "Yin Yang Amulet") modssp += .15;
+        if (player.armorName == "Traditional clothes") modssp += .4;
         modssp = Math.round(modssp * 100) / 100;
         return modssp;
     }
@@ -10648,7 +10671,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.SeersInsight)) modssm += player.perkv1(PerkLib.SeersInsight);
         if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssm *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
         if (player.necklaceName == "Yin Yang Amulet") modssm += .15;
-        if (player.shieldName == "spirit focus") modssm += .2;
+        if (player.shieldName == "spirit focus") modssm += .25;
+        if (player.armorName == "Traditional clothes") modssm += .4;
         modssm = Math.round(modssm * 100) / 100;
         return modssm;
     }
@@ -10676,7 +10700,7 @@ public class Combat extends BaseContent {
     }
 
     public function ghostStrength():Number {
-        var ghostStr:Number = player.strStat.max;
+        var ghostStr:Number = player.strStat.core.value;
         var ghostStrMulti:Number = 0;
         var ghostStrMulti2:Number = 1;
         if (player.hasPerk(PerkLib.Brute)) ghostStrMulti += 0.2;
@@ -10733,7 +10757,7 @@ public class Combat extends BaseContent {
     }
 
     public function ghostSpeed():Number {
-        var ghostSpe:Number = player.speStat.max;
+        var ghostSpe:Number = player.speStat.core.value;
         var ghostSpeMulti:Number = 0;
         if (player.hasPerk(PerkLib.DraconicLungsEvolved)) ghostSpeMulti += 0.05;
         if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) ghostSpeMulti += 0.1;
@@ -10752,7 +10776,7 @@ public class Combat extends BaseContent {
     }
 	
 	public function ghostToughness():Number {
-		var ghostTou:Number = player.touStat.max;
+		var ghostTou:Number = player.touStat.core.value;
         var ghostTouMulti:Number = 0;
         if (player.hasPerk(PerkLib.DraconicBonesEvolved)) ghostTouMulti += 0.05;
         if (player.hasPerk(PerkLib.DraconicBonesFinalForm)) ghostTouMulti += 0.1;
@@ -10838,4 +10862,3 @@ public class Combat extends BaseContent {
     }
 }
 }
-

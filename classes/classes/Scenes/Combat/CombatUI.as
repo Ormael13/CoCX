@@ -469,12 +469,12 @@ public class CombatUI extends BaseCombatContent {
 		combat.magic.buildBlackMenu(blackSpellButtons);
 		combat.magic.buildGreyMenu(greySpellButtons);
 		combat.magic.buildHexMenu(hexSpellButtons);
-		if (whiteSpellButtons.length > 0) buttons.add("White Spells", curry(submenu,whiteSpellButtons, submenuSpells, 0, false)).hint("Open your white spell book");
-		if (blackSpellButtons.length > 0) buttons.add("Black Spells", curry(submenu,blackSpellButtons, submenuSpells, 0, false)).hint("Open your black spell book");
-		if (player.hasPerk(PerkLib.PrestigeJobGreySage)){
-			if (greySpellButtons.length > 0) buttons.add("Grey Spells", curry(submenu,greySpellButtons, submenuSpells, 0, false)).hint("Open your grey spell book");
+		if (whiteSpellButtons.length > 0) buttons.add("White Spells", curry(submenu,whiteSpellButtons, submenuSpells, 0, false)).hint("Open your White magic book");
+		if (blackSpellButtons.length > 0) buttons.add("Black Spells", curry(submenu,blackSpellButtons, submenuSpells, 0, false)).hint("Open your Black magic book");
+		if (player.hasPerk(PerkLib.PrestigeJobGreySage)) {
+			if (greySpellButtons.length > 0) buttons.add("Grey Spells", curry(submenu,greySpellButtons, submenuSpells, 0, false)).hint("Open your Grey magic book");
 		}
-		if (player.hasPerk(PerkLib.HexKnowledge)){
+		if (player.hasPerk(PerkLib.HexKnowledge)) {
 			if (hexSpellButtons.length > 0) buttons.add("Hexes", curry(submenu,hexSpellButtons, submenuSpells, 0, false)).hint("Open your Hex grimoire");
 		}
 	}

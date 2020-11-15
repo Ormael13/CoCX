@@ -268,6 +268,15 @@ public class PerkLib
 		public static const DraconicHeartFinalForm:PerkType = mk("Draconic Heart (Final Form)", "Draconic Heart (Final Form)",
 				"Your heart metamorphosis reached pseudo-dragon level. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen, +1% HP regen, +10% of max core Str as phantom Str)",
 				"You choose the 'Draconic Heart (Final Form)' perk. Your heart metamorphosis reached pseudo-dragon level. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen, +1% HP regen, +10% of max core Str as phantom Str)").withBuffs({'str.mult':0.20});
+		public static const DrakeLungs:PerkType = mk("Drake Lungs", "Drake Lungs",
+				"Increases the power of dragon breath attack. (+200% to dragon breath damage that race is using)",
+				"You choose the 'Drake Lungs' perk. Increases the power of dragon breath attack.").withBuffs({'spe.mult':0.05});
+		public static const DrakeLungsEvolved:PerkType = mk("Drake Lungs (Evolved)", "Drake Lungs (Evolved)",
+				"Further increases increases dragon breath attack power. (+200% to dragon breath damage that race is using)",
+				"You choose the 'Drake Lungs (Evolved)' perk. Further increases increases dragon breath attack power.").withBuffs({'spe.mult':0.10});
+		public static const DrakeLungsFinalForm:PerkType = mk("Drake Lungs (Final Form)", "Drake Lungs (Final Form)",
+				"Allows to use breath attack more often with increase to it power. (+200% to dragon breath damage that race is using AND breath usable once per combat)",
+				"You choose the 'Drake Lungs (Final Form)' perk. Allows to use breath attack more often with increase to it power.").withBuffs({'spe.mult':0.20});
 		public static const FloralOvaries:PerkType = mk("Floral Ovaries", "Floral Ovaries",
 				"Increase the potency of Alraune pollen.",
 				"You choose the 'Floral Ovaries' perk. Increase the potency of Alraune pollen.").withBuffs({'lib.mult':0.05});
@@ -915,13 +924,13 @@ public class PerkLib
 				"Allows you to perform two range attacks per round.",
 				"You choose the 'Double Strike' perk.  This allows you to make two range attacks.");
 		public static const DraconicLungs:PerkType = mk("Draconic Lungs", "Draconic Lungs",
-				"Allows to use breath attack more often.",
+				"Allows to use breath attack more often. (All dragon breaths usable once per combat)",
 				"You choose the 'Draconic Lungs' perk. Allows to use breath attack more often.").withBuffs({'spe.mult':0.05});
 		public static const DraconicLungsEvolved:PerkType = mk("Draconic Lungs (Evolved)", "Draconic Lungs (Evolved)",
-				"Increases threefold the power of dragon breath attacks. (+5% of max core Spe as phantom Spe)",
+				"Increases threefold the power of dragon breath attacks. (+200% to dragon breaths damage, +5% of max core Spe as phantom Spe)",
 				"You choose the 'Draconic Lungs (Evolved)' perk. Increases threefold the power of dragon breath attacks.").withBuffs({'spe.mult':0.10});
 		public static const DraconicLungsFinalForm:PerkType = mk("Draconic Lungs (Final Form)", "Draconic Lungs (Final Form)",
-				"Further increases dragon breath attacks power and allows to combine all 4 basic breath types more often. (+10% of max core Spe as phantom Spe)",
+				"Further increases dragon breath attacks power and allows to combine all 4 basic breath types more often. (+400% to dragon breaths damage, +10% of max core Spe as phantom Spe)",
 				"You choose the 'Draconic Lungs (Final Form)' perk. Further increases increases dragon breath attacks power and allows to combine all 4 basic breath types more often.").withBuffs({'spe.mult':0.20});
 		public static const DualWield:PerkType = mk("Dual Wield", "Dual Wield",
 				"Allows you to wield two normal sized melee weapons (excluding staffs).",
@@ -2420,10 +2429,16 @@ public class PerkLib
 				"Increasing crit chance by up to 50% in berserk state that would reset after succesful crit attack.",
 				"You choose the 'Rage' perk, increasing crit chance by up to 50% in berserk state until next crit attack.");
 		public static const RagingInferno:PerkType = mk("Raging Inferno", "Raging Inferno",
-				"Cumulative 20% damage increase for every subsequent fire spell without interruption.",
-				"You choose the 'Raging Inferno' perk. Cumulative 20% damage increase for every subsequent fire spell without interruption.");
-				//"Cumulative 10% damage increase for every subsequent fire spell. Each turn without casted fire spell lower damage by 10%.",
-				//"You choose the 'Raging Inferno' perk. Cumulative 10% damage increase for every subsequent fire spell.");
+				//"Cumulative 20% damage increase for every subsequent fire spell without interruption.",
+				//"You choose the 'Raging Inferno' perk. Cumulative 20% damage increase for every subsequent fire spell without interruption.");
+				"Cumulative 20% damage increase for every subsequent fire spell. Each turn without casted fire spell lower damage by 20%.",
+				"You choose the 'Raging Inferno' perk. Cumulative 20% damage increase for every subsequent fire spell. Each turn without casted fire spell lower damage by 20%.");
+		public static const RagingInfernoEx:PerkType = mk("Raging Inferno (Ex)", "Raging Inferno (Ex)",
+				"Increase to cumulative damage by 10%. Penalty for turn without casted fire spell decreased by 5%.",
+				"You choose the 'Raging Inferno (Ex)' perk. Increase to cumulative damage by 10%. Penalty for turn without casted fire spell decreased by 5%.");
+		public static const RagingInfernoSu:PerkType = mk("Raging Inferno (Su)", "Raging Inferno (Su)",
+				"Prevent decay of cumulative damage increase bonus when channeling fire based attack. Penalty for turn without casted fire spell decreased by another 5%.",
+				"You choose the 'Raging Inferno (Su)' perk. Prevent decay of cumulative damage increase bonus when channeling fire based attack. Penalty for turn without casted fire spell decreased by another 5%.");
 		public static const RapidReload:PerkType = mk("Rapid Reload", "Rapid Reload",
 				"Allow to not spend whole turn to use Reload button as long PC got enough fatigue.",
 				"You choose the 'Rapid Reload' perk, lowering time needed to reload ammo for range weapons like pistols.");
@@ -4670,6 +4685,10 @@ public class PerkLib
             EverLastingBuffs.requirePerk(JobEnchanter)
                     .requireInt(160)
                     .requireLevel(30);
+            RagingInfernoEx.requirePerk(GrandArchmage)
+                    .requirePerk(RagingInferno)
+                    .requireLevel(30)
+                    .requireInt(150);
             UnlockForce2ndStage.requirePerk(UnlockForce)
                     .requireInt(125)
                     .requireLevel(30);
@@ -4741,6 +4760,10 @@ public class PerkLib
                     .requireInt(300)
                     .requirePerk(PeerlessSpirituality)
                     .requireLevel(54);
+            RagingInfernoSu.requirePerk(GrandArchmage3rdCircle)
+                    .requirePerk(RagingInfernoEx)
+                    .requireLevel(54)
+                    .requireInt(300);
             //Tier 10 Intelligence perks
             GreyArchmage.requirePerk(GreyMage)
                     .requireInt(275)
@@ -5511,27 +5534,33 @@ public class PerkLib
 			DraconicBones.requireBonesAndMarrowMutationSlot()
 				.requireCustomFunction(function (player:Player):Boolean {
                 return (player.arms.type == Arms.DRAGON || player.arms.type == Arms.FROSTWYRM);
-				}, "Dragon arms")
+				}, "Dragon race or its variants arms")
 				.requireCustomFunction(function (player:Player):Boolean {
                 return (player.lowerBody == LowerBody.DRAGON || player.lowerBody == LowerBody.FROSTWYRM);
-				}, "Dragon legs")
+				}, "Dragon race or its variants legs")
 				.requireCustomFunction(function (player:Player):Boolean {
                 return (player.tailType == Tail.DRACONIC || player.lowerBody == LowerBody.FROSTWYRM);
-				}, "Dragon tail")
+				}, "Dragon race or its variants tail")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.dragonScore() >= 5 || player.frostWyrmScore() >= 10);
-            }, "Dragon race");
+                return (player.dragonScore() >= 8 || player.frostWyrmScore() >= 10);
+            }, "Dragon race or its variants");
 			DraconicHeart.requireHeartMutationSlot()
                 .requirePerk(DraconicBones)
-                .requirePerk(DraconicLungs)
+                .requireAnyPerk(DraconicLungs, DrakeLungs)
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.dragonScore() >= 5 || player.frostWyrmScore() >= 10);
-            }, "Dragon race");
+                return (player.dragonScore() >= 8 || player.frostWyrmScore() >= 10);
+            }, "Dragon race or its variants");
 			DraconicLungs.requireLungsMutationSlot()
-				.requireAnyPerk (DragonFireBreath, DragonIceBreath, DragonLightningBreath, DragonDarknessBreath)
+				        .requirePerk(DragonFireBreath)
+                .requirePerk(DragonIceBreath)
+                .requirePerk(DragonLightningBreath)
+                .requirePerk(DragonDarknessBreath).requireCustomFunction(function (player:Player):Boolean {
+                return (player.dragonScore() >= 8);
+            }, "Dragon race");
+			DrakeLungs.requireLungsMutationSlot().requireAnyPerk(DragonFireBreath, DragonIceBreath, DragonLightningBreath, DragonDarknessBreath)
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.dragonScore() >= 5 || player.frostWyrmScore() >= 10);
-            }, "Dragon race and its variants");
+                return (player.frostWyrmScore() >= 10 || player.jabberwockyScore() >= 10 || player.vouivreScore() >= 11);
+            }, "Variants of the dragon race");
 			EasterBunnyEggBag.requireBallsMutationSlot().requirePerk(EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
 			}, "Easter Bunny race and Easter bunny balls.");
@@ -5909,24 +5938,28 @@ public class PerkLib
             DraconicBonesEvolved.requireLevel(12)
                     .requirePerk(DraconicBones)
                     .requirePerk(DraconicHeart)
-                    .requirePerk(DraconicLungs)
+                    .requireAnyPerk(DraconicLungs, DrakeLungs)
                     .requireCustomFunction(function (player:Player):Boolean {
-						return (player.dragonScore() >= 10 || player.frostWyrmScore() >= 10);
-                    }, "Dragon race");
+						return (player.dragonScore() >= 12 || player.frostWyrmScore() >= 12);
+            }, "Dragon race or its variants");
 			DraconicHeartEvolved.requireLevel(12)
                     .requirePerk(DraconicBones)
                     .requirePerk(DraconicHeart)
-                    .requirePerk(DraconicLungs)
+                    .requireAnyPerk(DraconicLungs, DrakeLungs)
                     .requireCustomFunction(function (player:Player):Boolean {
-						return (player.dragonScore() >= 10 || player.frostWyrmScore() >= 10);
-                    }, "Dragon race");
+						return (player.dragonScore() >= 12 || player.frostWyrmScore() >= 12);
+            }, "Dragon race or its variants");
 			DraconicLungsEvolved.requireLevel(12)
                     .requirePerk(DraconicBones)
                     .requirePerk(DraconicHeart)
                     .requirePerk(DraconicLungs)
                     .requireCustomFunction(function (player:Player):Boolean {
-						return (player.dragonScore() >= 10 || player.frostWyrmScore() >= 10);
-                    }, "Dragon race and its variants");
+						return (player.dragonScore() >= 12);
+            }, "Dragon race");
+			DrakeLungsEvolved.requireLevel(12).requirePerk(DrakeLungs)
+                    .requireCustomFunction(function (player:Player):Boolean {
+						return (player.frostWyrmScore() >= 12 || player.jabberwockyScore() >= 11 || player.vouivreScore() >= 12);
+            }, "Variants of the dragon race");
 			EasterBunnyEggBagEvolved.requireLevel(12).requirePerk(EasterBunnyEggBag).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
 			}, "Easter Bunny race and Easter bunny balls.");
@@ -6185,10 +6218,10 @@ public class PerkLib
                 return player.demonScore() >= 14;
             }, "Demon race");
 			CatlikeNimblenessFinalForm.requireLevel(24)
-					.requirePerk(CatlikeNimblenessEvolved)
-					.requireCustomFunction(function (player:Player):Boolean {
-						return player.catScore() >= 8 || player.nekomataScore() >= 8 || player.displacerbeastScore() >= 8 || player.hellcatScore() >= 8 || player.cheshireScore() >= 8;
-					}, "Any cat race");
+				.requirePerk(CatlikeNimblenessEvolved)
+				.requireCustomFunction(function (player:Player):Boolean {
+					return player.catScore() >= 8 || player.nekomataScore() >= 8 || player.displacerbeastScore() >= 8 || player.hellcatScore() >= 8 || player.cheshireScore() >= 8;
+			}, "Any cat race");
             FrozenHeartFinalForm.requireLevel(24)
 				.requirePerk(FrozenHeartEvolved)
 				.requireCustomFunction(function (player:Player):Boolean {
@@ -6201,7 +6234,7 @@ public class PerkLib
 				.requirePerk(ObsidianHeartEvolved)
 				.requireCor(100)
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.devilkinScore() >= 14;
+					return player.devilkinScore() >= 14;
             }, "Devil race");
             TrachealSystemFinalForm.requireLevel(24).requirePerk(TrachealSystemEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.beeScore() >= 12 || player.mantisScore() >= 12 || player.scorpionScore() >= 12 || player.spiderScore() >= 12 || player.cancerScore() >= 12;
@@ -6209,7 +6242,7 @@ public class PerkLib
             TwinHeartFinalForm.requireLevel(24)
 				.requirePerk(TwinHeartEvolved)
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.centaurScore() >= 12 || player.unicornScore() >= 12 || player.cancerScore() >= 12;
+					return player.centaurScore() >= 12 || player.unicornScore() >= 12 || player.cancerScore() >= 12;
             }, "Tauric or Unicorn race");
 			VenomGlandsFinalForm.requireLevel(24).requirePerk(VenomGlandsEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.spiderScore() >= 12 || player.nagaScore() >= 12 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12 || player.hydraScore() >= 12;
@@ -6317,26 +6350,30 @@ public class PerkLib
                     .requirePerk(JobAllRounder);
             //Tier 5
             DraconicBonesFinalForm.requireLevel(30)
-                    .requirePerk(DraconicBonesEvolved)
-                    .requirePerk(DraconicHeartEvolved)
-                    .requirePerk(DraconicLungsEvolved)
-                    .requireCustomFunction(function (player:Player):Boolean {
-						return (player.dragonScore() >= 15 || player.frostWyrmScore() >= 15);
-                    }, "Dragon race");
+                .requirePerk(DraconicBonesEvolved)
+                .requirePerk(DraconicHeartEvolved)
+                .requireAnyPerk(DraconicLungsEvolved, DrakeLungsEvolved)
+                .requireCustomFunction(function (player:Player):Boolean {
+					return (player.dragonScore() >= 16 || player.frostWyrmScore() >= 15);
+            }, "Dragon race or its variants");
 			DraconicHeartFinalForm.requireLevel(30)
-                    .requirePerk(DraconicBonesEvolved)
-                    .requirePerk(DraconicHeartEvolved)
-                    .requirePerk(DraconicLungsEvolved)
-                    .requireCustomFunction(function (player:Player):Boolean {
-						return (player.dragonScore() >= 15 || player.frostWyrmScore() >= 15);
-                    }, "Dragon race");
+                .requirePerk(DraconicBonesEvolved)
+                .requirePerk(DraconicHeartEvolved)
+                .requireAnyPerk(DraconicLungsEvolved, DrakeLungsEvolved)
+                .requireCustomFunction(function (player:Player):Boolean {
+					return (player.dragonScore() >= 16 || player.frostWyrmScore() >= 15);
+            }, "Dragon race or its variants");
 			DraconicLungsFinalForm.requireLevel(30)
-                    .requirePerk(DraconicBonesEvolved)
-                    .requirePerk(DraconicHeartEvolved)
-                    .requirePerk(DraconicLungsEvolved)
-                    .requireCustomFunction(function (player:Player):Boolean {
-						return (player.dragonScore() >= 15 || player.frostWyrmScore() >= 15);
-                    }, "Dragon race and its variants");
+                .requirePerk(DraconicBonesEvolved)
+                .requirePerk(DraconicHeartEvolved)
+                .requirePerk(DraconicLungsEvolved)
+                .requireCustomFunction(function (player:Player):Boolean {
+					return (player.dragonScore() >= 16);
+            }, "Dragon race");
+			DrakeLungsFinalForm.requireLevel(30).requirePerk(DrakeLungsEvolved)
+                 .requireCustomFunction(function (player:Player):Boolean {
+					return (player.frostWyrmScore() >= 15 || player.jabberwockyScore() >= 12 || player.vouivreScore() >= 13);
+            }, "Variants of the dragon race");
 			EasterBunnyEggBagFinalForm.requireLevel(30).requirePerk(EasterBunnyEggBagEvolved).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
 			}, "Easter Bunny race and Easter bunny balls.");

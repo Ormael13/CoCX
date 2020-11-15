@@ -144,6 +144,12 @@ public class BaseCombatContent extends BaseContent {
 	protected function soulskillMod():Number {
 		return combat.soulskillMod();
 	}
+	protected function soulskillPhysicalMod():Number {
+		return combat.soulskillPhysicalMod();
+	}
+	protected function soulskillMagicalMod():Number {
+		return combat.soulskillMagicalMod();
+	}
 	protected function scalingBonusStrength():Number {
 		return combat.scalingBonusStrength();
 	}

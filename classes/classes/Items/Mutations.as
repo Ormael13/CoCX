@@ -1600,7 +1600,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //Animal tooth face
-        if (rand(2) == 0 && changes < changeLimit && player.faceType != Face.ANIMAL_TOOTHS && player.hasPartialCoat(Skin.FUR)) {
+        if (rand(2) == 0 && changes < changeLimit && player.faceType != Face.ANIMAL_TOOTHS && player.hasFur()) {
             outputText("\n\n");
             if (player.faceType != Face.HUMAN) outputText("Your face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
             outputText("You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. <b>Your mouth is now filled with wolf like canines.</b>");
@@ -1608,7 +1608,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Wolf face
-        if (rand(2) == 0 && changes < changeLimit && player.faceType == Face.ANIMAL_TOOTHS && player.hasFullCoatOfType(Skin.FUR)) {
+        if (rand(2) == 0 && changes < changeLimit && player.faceType == Face.ANIMAL_TOOTHS && player.hasFur()) {
             outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting reforming into something... different, your screams turning into a howl as the change ends. You go to find a puddle in order to view your reflection...  <b>Your face looks like the one of a feral looking wolf composed of a maw jagged with threatening canines a wet muzzle and a animalistic tongue.</b>");
             setFaceType(Face.WOLF);
             changes++;
@@ -5023,7 +5023,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nIt seems vouivre oil has awaked some kind of power within you... your throat and chest feel very sore, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon fire breath!</b>)");
             player.createPerk(PerkLib.DragonFireBreath, 0, 0, 0, 0);
             changes++;
-        }
+        }/*
         if (type == 1 && player.dragonScore() >= 4 && changes < changeLimit && player.findPerk(PerkLib.DragonIceBreath) < 0) {
             outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
             outputText("\n\nIt seems vouivre oil has awaked some kind of power within you... your throat and chest feel very cold, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon ice breath!</b>)");
@@ -5041,7 +5041,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nIt seems vouivre oil has awaked some kind of power within you... your throat and chest feel very... strange and you can't put a finger what this feeling exactly is, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon ice breath!</b>)");
             player.createPerk(PerkLib.DragonDarknessBreath, 0, 0, 0, 0);
             changes++;
-        }
+        }*/
         if (type == 3 && player.hydraScore() >= 14 && changes < changeLimit && player.findPerk(PerkLib.HydraAcidBreath) < 0) {
             outputText("\n\nYou feel sick, like very sick as if your stomach was bubbling up. You spontaneously vomit from all the heads below your waist but what comes out is not vomit. Your hydra heads retches out on the ground in front of you which is doused with smoking green fluids which begins to smoke right away as your powerful acid begin to dissolve whatever is beneath it. <b>It would seem you have developed the ability to use the hydra's infamous breath weapon.</b>  (<b>Gained Perk: Hydra acid breath!</b>)");
             player.createPerk(PerkLib.HydraAcidBreath, 0, 0, 0, 0);

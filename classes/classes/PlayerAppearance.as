@@ -2812,16 +2812,16 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.dogScore() >= 1 && player.dogScore() < 4) outputText("\n<font color=\"#008000\">Dog-morph: " + player.dogScore() + "</font>");
 		else if (player.dogScore() < 1) outputText("\n<font color=\"#ff0000\">Dog-morph: 0</font>");
 		//Dragon
-		if (player.dragonScore() >= 30) {
-			outputText("\n<font color=\"#0000a0\">Ancient Dragon: " + player.dragonScore() + " (+90% to Str / Tou / Spe racial multi, +80% to Int / Wis racial multi, +60% to Lib racial multi, +40 to min Sen, ");
+		if (player.dragonScore() >= 32) {
+			outputText("\n<font color=\"#0000a0\">Ancient Dragon: " + player.dragonScore() + " (+100% to Str / Tou / Spe racial multi, +80% to Int / Wis racial multi, +60% to Lib racial multi, +40 to min Sen, ");
 			outputText("+30% max HP, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust, +" + (200 * (1 + player.newGamePlusMod())) + " max Fatigue, +" + (10 * (1 + player.newGamePlusMod())) + " Armor / Magic Resistance)</font>");
 		}
-		else if (player.dragonScore() >= 20) {
-			outputText("\n<font color=\"#0000a0\">Elder Dragon: " + player.dragonScore() + " (+60% to Str / Tou / Spe racial multi, +55% to Int / Wis racial multi, +40% to Lib racial multi, +30 to min Sen, ");
+		else if (player.dragonScore() >= 24) {
+			outputText("\n<font color=\"#0000a0\">Elder Dragon: " + player.dragonScore() + " (+80% to Str / Tou / Spe racial multi, +70% to Int / Wis racial multi, +40% to Lib racial multi, +30 to min Sen, ");
 			outputText("+20% max HP, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust, +" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue, +" + (4 * (1 + player.newGamePlusMod())) + " Armor / Magic Resistance)</font>");
 		}
-		else if (player.dragonScore() >= 12) outputText("\n<font color=\"#0000a0\">Dragon: " + player.dragonScore() + " (+40% to Str / Tou / Spe racial multi, +30% to Int / Wis racial multi, +20% to Lib racial multi, +20 to min Sen, +10% max HP, +" + (1 + player.newGamePlusMod()) + " Armor / Magic Resistance)</font>");
-		else if (player.dragonScore() >= 5) outputText("\n<font color=\"#0000a0\">Half-Dragon: " + player.dragonScore() + " (+15% to Str / Tou / Int / Wis / Lib racial multi, +15 to min Sen, +5% max HP)</font>");
+		else if (player.dragonScore() >= 16) outputText("\n<font color=\"#0000a0\">Dragon: " + player.dragonScore() + " (+50% to Str / Tou / Spe racial multi, +40% to Int / Wis racial multi, +30% to Lib racial multi, +20 to min Sen, +10% max HP, +" + (1 + player.newGamePlusMod()) + " Armor / Magic Resistance)</font>");
+		else if (player.dragonScore() >= 8) outputText("\n<font color=\"#0000a0\">Half-Dragon: " + player.dragonScore() + " (+25% to Str / Tou / Spe racial multi, +20% to Int / Wis / Lib racial multi, +15 to min Sen, +5% max HP)</font>");
 		else if (player.dragonScore() >= 1) outputText("\n<font color=\"#008000\">Half-Dragon: " + player.dragonScore() + "</font>");
 		else if (player.dragonScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Dragon: 0</font>");
 		//Dragonne
@@ -2862,8 +2862,8 @@ public class PlayerAppearance extends BaseContent {
 		if (player.frostWyrmScore() >= 26) outputText("\n<font color=\"#0000a0\">Greater Frost Wyrm: " + player.frostWyrmScore() + " (+200% to Str racial multi, +90% to Spe racial multi, +160% to Tou racial multi, -90% to Int racial multi, +75% to Lib racial multi)</font>");
 		else if (player.frostWyrmScore() >= 18) outputText("\n<font color=\"#0000a0\">Frost Wyrm: " + player.frostWyrmScore() + " (+140% to Str racial multi, +75% to Spe racial multi, +125% to Tou racial multi, -90% to Int racial multi, +50% to Lib racial multi)</font>");
 		else if (player.frostWyrmScore() >= 10) outputText("\n<font color=\"#0000a0\">Half Frost Wyrm: " + player.frostWyrmScore() + " (+90% to Str racial multi, +60% to Spe racial multi, +60% to Tou racial multi, -90% to Int racial multi, +30% to Lib racial multi)</font>");
-		else if (player.frostWyrmScore() >= 1) outputText("\n<font color=\"#008000\">Frost Wyrm: " + player.frostWyrmScore() + "</font>");
-		else if (player.frostWyrmScore() < 1) outputText("\n<font color=\"#ff0000\">Frost Wyrm: 0</font>");
+		else if (player.frostWyrmScore() >= 1) outputText("\n<font color=\"#008000\">Half Frost Wyrm: " + player.frostWyrmScore() + "</font>");
+		else if (player.frostWyrmScore() < 1) outputText("\n<font color=\"#ff0000\">Half Frost Wyrm: 0</font>");
 		//GARGOYLE
 		if (player.gargoyleScore() >= 20 && player.hasPerk(PerkLib.GargoylePure)) {
 			outputText("\n<font color=\"#0000a0\">PURE GARGOYLE: " + player.gargoyleScore() + " (+");
@@ -3008,20 +3008,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("\n<font color=\"#0000a0\">INTERNAL CHIMERICAL DISPOSITION: (" + player.internalChimeraRating() + ") " + player.internalChimeraScore() + " (+" + (5 * player.internalChimeraScore()) + "% to Str racial multi / Tou / Spe / Int / Wis / Lib and +" + (5 * player.internalChimeraScore()) + " to Sens)</font>");
 		} else if (player.internalChimeraScore() < 1) outputText("\nINTERNAL CHIMERICAL DISPOSITION: 0</font>");
 		//Jabberwocky
-		if (player.jabberwockyScore() >= 20) {
-			outputText("\n<font color=\"#0000a0\">Greater Jabberwocky: " + player.jabberwockyScore() + " (+95% to Str racial multi, +");
-			if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) outputText("100% to Tou racial multi, +110");
-			else if (player.findPerk(PerkLib.DraconicLungs) >= 0) outputText("95% to Tou racial multi, +105");
-			else outputText("95% to Tou racial multi, +100");
-			outputText("% to Spe racial multi, +40% to Int racial multi, -50% to Wis racial multi, +20% to Lib racial multi)</font>");
-		}
-		else if (player.jabberwockyScore() >= 10) {
-			outputText("\n<font color=\"#0000a0\">Jabberwocky: " + player.jabberwockyScore() + " (+50% to Str racial multi, +");
-			if (player.findPerk(PerkLib.DraconicLungsEvolved) >= 0) outputText("45% to Tou racial multi, +60");
-			else if (player.findPerk(PerkLib.DraconicLungs) >= 0) outputText("40% to Tou racial multi, +55");
-			else outputText("40% to Tou racial multi, +50");
-			outputText("% to Spe racial multi, +20% to Int racial multi, -20% to Wis racial multi, +10% to Lib racial multi)</font>");
-		}
+		if (player.jabberwockyScore() >= 20) outputText("\n<font color=\"#0000a0\">Greater Jabberwocky: " + player.jabberwockyScore() + " (+95% to Str racial multi, +95% to Tou racial multi, +100% to Spe racial multi, +40% to Int racial multi, -50% to Wis racial multi, +20% to Lib racial multi)</font>");
+		else if (player.jabberwockyScore() >= 10) outputText("\n<font color=\"#0000a0\">Jabberwocky: " + player.jabberwockyScore() + " (+50% to Str racial multi, +40% to Tou racial multi, +50% to Spe racial multi, +20% to Int racial multi, -20% to Wis racial multi, +10% to Lib racial multi)</font>");
 		else if (player.jabberwockyScore() >= 1 && player.jabberwockyScore() < 10) outputText("\n<font color=\"#008000\">Jabberwocky: " + player.jabberwockyScore() + "</font>");
 		else if (player.jabberwockyScore() < 1) outputText("\n<font color=\"#ff0000\">Jabberwocky: 0</font>");
 		//Jiangshi

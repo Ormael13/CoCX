@@ -244,7 +244,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonFireBreath)) {
 			bd = buttons.add("Dragon(Fire)", dragonfireBreath);
-			if (player.hasPerk(PerkLib.DraconicLungs)) {
+			if (player.hasPerk(PerkLib.DraconicLungs) || player.hasPerk(PerkLib.DrakeLungsFinalForm)) {
 				bd.hint("Unleash fire from your mouth. This can only be done once per fight. \n", "Dragon Fire Breath");
 			} else {
 				bd.hint("Unleash fire from your mouth. This can only be done once a day. \n", "Dragon Fire Breath");
@@ -257,7 +257,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonIceBreath)) {
 			bd = buttons.add("Dragon(Ice)", dragoniceBreath);
-			if (player.hasPerk(PerkLib.DraconicLungs)) {
+			if (player.hasPerk(PerkLib.DraconicLungs) || player.hasPerk(PerkLib.DrakeLungsFinalForm)) {
 				bd.hint("Unleash ice from your mouth. This can only be done once per fight. \n", "Dragon Ice Breath");
 			} else {
 				bd.hint("Unleash ice from your mouth. This can only be done once a day. \n", "Dragon Ice Breath");
@@ -270,7 +270,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonLightningBreath)) {
 			bd = buttons.add("Dragon(Light)", dragonlightningBreath);
-			if (player.hasPerk(PerkLib.DraconicLungs)) {
+			if (player.hasPerk(PerkLib.DraconicLungs) || player.hasPerk(PerkLib.DrakeLungsFinalForm)) {
 				bd.hint("Unleash lightning from your mouth. This can only be done once per fight. \n", "Dragon Lightning Breath");
 			} else {
 				bd.hint("Unleash lightning from your mouth. This can only be done once a day. \n", "Dragon Lightning Breath");
@@ -283,7 +283,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonDarknessBreath)) {
 			bd = buttons.add("Dragon(Dark)", dragondarknessBreath);
-			if (player.hasPerk(PerkLib.DraconicLungs)) {
+			if (player.hasPerk(PerkLib.DraconicLungs) || player.hasPerk(PerkLib.DrakeLungsFinalForm)) {
 				bd.hint("Unleash darkness from your mouth. This can only be done once per fight. \n", "Dragon Darkness Breath");
 			} else {
 				bd.hint("Unleash darkness from your mouth. This can only be done once a day. \n", "Dragon Darkness Breath");
@@ -294,7 +294,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if (player.hasPerk(PerkLib.DraconicLungsFinalForm) || (player.dragonScore() >= 12 && player.hasPerk(PerkLib.DraconicLungs))) {
+		if (player.hasPerk(PerkLib.DraconicLungsFinalForm) || (player.dragonScore() >= 16 && player.hasPerk(PerkLib.DraconicLungs))) {
 			bd = buttons.add("TrueDragonBreath", trueDragonBreath);
 			if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) {
 				bd.hint("Unleash all four elements fused together from your mouth. This can only be done once per fight. \n", "True Dragon Breath");
@@ -1858,20 +1858,25 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(50, USEFATG_MAGIC_NOBM);
 		player.createStatusEffect(StatusEffects.DragonFireBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
-		damage += scalingBonusIntelligence();// * 0.5
-		damage += scalingBonusWisdom();// * 0.5
+		var damult:Number = 1;
+		damage += scalingBonusIntelligence();
+		damage += scalingBonusWisdom();
 		damage *= 1 + (rand(51) / 100);
 		damage = calcInfernoMod(damage);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damage *= 3;
-		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damage *= 5;
+		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 2;
+		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 4;
+		if (player.hasPerk(PerkLib.DrakeLungs)) damult += 2;
+		if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 2;
+		if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 2;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		damage *= damult;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -1981,21 +1986,26 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(50, USEFATG_MAGIC_NOBM);
 		player.createStatusEffect(StatusEffects.DragonIceBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
-		damage += scalingBonusIntelligence();// * 0.5
-		damage += scalingBonusWisdom();// * 0.5
+		var damult:Number = 1;
+		damage += scalingBonusIntelligence();
+		damage += scalingBonusWisdom();
 		damage *= 1 + (rand(51) / 100);
 		damage = calcGlacialMod(damage);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damage *= 3;
-		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damage *= 5;
+		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 2;
+		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 4;
+		if (player.hasPerk(PerkLib.DrakeLungs)) damult += 2;
+		if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 2;
+		if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 2;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		damage *= damult;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -2071,21 +2081,26 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(50, USEFATG_MAGIC_NOBM);
 		player.createStatusEffect(StatusEffects.DragonLightningBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
-		damage += scalingBonusIntelligence();// * 0.5
-		damage += scalingBonusWisdom();// * 0.5
+		var damult:Number = 1;
+		damage += scalingBonusIntelligence();
+		damage += scalingBonusWisdom();
 		damage *= 1 + (rand(51) / 100);
 		damage = calcVoltageMod(damage);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damage *= 3;
-		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damage *= 5;
+		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 2;
+		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 4;
+		if (player.hasPerk(PerkLib.DrakeLungs)) damult += 2;
+		if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 2;
+		if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 2;
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		damage *= damult;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -2161,20 +2176,25 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(50, USEFATG_MAGIC_NOBM);
 		player.createStatusEffect(StatusEffects.DragonDarknessBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
-		damage += scalingBonusIntelligence();// * 0.5
-		damage += scalingBonusWisdom();// * 0.5
+		var damult:Number = 1;
+		damage += scalingBonusIntelligence();
+		damage += scalingBonusWisdom();
 		damage *= 1 + (rand(51) / 100);
 		damage = calcEclypseMod(damage);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damage *= 3;
-		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damage *= 5;
+		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 2;
+		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 4;
+		if (player.hasPerk(PerkLib.DrakeLungs)) damult += 2;
+		if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 2;
+		if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 2;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		damage *= damult;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -2251,30 +2271,38 @@ public class MagicSpecials extends BaseCombatContent {
 			player.createStatusEffect(StatusEffects.DragonBreathCooldown,0,0,0,0);
 			player.removeStatusEffect(StatusEffects.ChanneledAttack);
 			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
+			if (player.hasPerk(PerkLib.RagingInfernoSu) && player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, -1);
+			/*if (player.hasPerk(PerkLib.) && player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, -1);
+			if (player.hasPerk(PerkLib.) && player.hasStatusEffect(StatusEffects.CounterHighVoltage)) player.addStatusValue(StatusEffects.CounterHighVoltage, 3, -1);
+			if (player.hasPerk(PerkLib.) && player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 3, -1);*/
 			var damage:Number = 0;
-			damage += scalingBonusIntelligence();// * 0.5
-			damage += scalingBonusWisdom();// * 0.5
+			var damult:Number = 1;
+			damage += scalingBonusIntelligence() * 4;
+			damage += scalingBonusWisdom() * 4;
 			damage *= 1 + (rand(51) / 100);
-			/*damage = calcInfernoMod(damage);
+			damage = calcInfernoMod(damage);
 			damage = calcGlacialMod(damage);
 			damage = calcVoltageMod(damage);
-			damage = calcEclypseMod(damage);*/
+			damage = calcEclypseMod(damage);
 			if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 				player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 				damage *= 1.5;
 			}
-			if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damage *= 3;
-			if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damage *= 5;
+			if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 2;
+			if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 4;
+			if (player.hasPerk(PerkLib.DrakeLungs)) damult += 2;
+			if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 2;
+			if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 2;
 			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + ((player.lust100 * 0.01) * 0.25));
 			if (combat.wearingWinterScarf()) damage *= 1.05;
 			if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
-			damage *= 10;
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+			damage *= damult;
 			damage = Math.round(damage);
 			//Shell
 			if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -2350,6 +2378,10 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You open your jaw, collecting all your draconic power into your chest. The light of your mixed power coalescing in your throat as you focus.\n\n");
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 4, 0, 0, 0);
+			if (player.hasPerk(PerkLib.RagingInfernoSu)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, 1);
+			/*if (player.hasPerk(PerkLib.)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, 1);
+			if (player.hasPerk(PerkLib.)) player.addStatusValue(StatusEffects.CounterHighVoltage, 3, 1);
+			if (player.hasPerk(PerkLib.)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 3, 1);*/
 			enemyAI();
 		}
 		
@@ -3133,7 +3165,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else damage *= 0.2;
 		var nekomatasfiredmgmulti:Number = 1;
 		nekomatasfiredmgmulti += spellMod() - 1;
-		nekomatasfiredmgmulti += soulskillMod() - 1;
+		nekomatasfiredmgmulti += soulskillMagicalMod() - 1;
 		//Bonus damage
 		//jakieś bonusy do obrażeń dodawać tu
 		damage *= nekomatasfiredmgmulti;
@@ -3149,7 +3181,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
-		var lustDmg:Number = monster.lustVuln * ((player.inte / 10 + player.wis / 10) * ((spellMod() + soulskillMod()) / 2) + rand(monster.lib + monster.cor) / 5);
+		var lustDmg:Number = monster.lustVuln * ((player.inte / 10 + player.wis / 10) * ((spellMod() + soulskillMagicalMod()) / 2) + rand(monster.lib + monster.cor) / 5);
 		if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
 		if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
@@ -3239,7 +3271,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage *= 0.25;
 		var basicfoxfiredmgmulti:Number = 1;
 		basicfoxfiredmgmulti += spellMod() - 1;
-		basicfoxfiredmgmulti += soulskillMod() - 1;
+		basicfoxfiredmgmulti += soulskillMagicalMod() - 1;
 		if (player.shieldName == "spirit focus") basicfoxfiredmgmulti += .2;
 		if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono" || player.armorName == "black kimono") basicfoxfiredmgmulti += .2;
 		if (player.headjewelryName == "fox hairpin") basicfoxfiredmgmulti += .2;
@@ -3260,7 +3292,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
-		var lustDmg:Number = monster.lustVuln * ((player.inte / 12 + player.wis / 8) * ((spellMod() + soulskillMod()) / 2) + rand(monster.lib + monster.cor) / 5);
+		var lustDmg:Number = monster.lustVuln * ((player.inte / 12 + player.wis / 8) * ((spellMod() + soulskillMagicalMod()) / 2) + rand(monster.lib + monster.cor) / 5);
 		if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
 		if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
@@ -3353,7 +3385,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.CorruptedNinetails) && player.tailType == Tail.FOX && player.tailCount == 9) damage *= 0.5;
 		var corruptedfoxfiredmgmulti:Number = 1;
 		corruptedfoxfiredmgmulti += spellMod() - 1;
-		corruptedfoxfiredmgmulti += soulskillMod() - 1;
+		corruptedfoxfiredmgmulti += soulskillMagicalMod() - 1;
 		if (player.shieldName == "spirit focus") corruptedfoxfiredmgmulti += .2;
 		if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono" || player.armorName == "black kimono") corruptedfoxfiredmgmulti += .2;
 		if (player.headjewelryName == "fox hairpin") corruptedfoxfiredmgmulti += .2;
@@ -3380,7 +3412,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
-		var lustDmg:Number = monster.lustVuln * ((player.inte / 12 + player.wis / 8) * ((spellMod() + soulskillMod()) / 2) + rand(monster.lib + monster.cor) / 5);
+		var lustDmg:Number = monster.lustVuln * ((player.inte / 12 + player.wis / 8) * ((spellMod() + soulskillMagicalMod()) / 2) + rand(monster.lib + monster.cor) / 5);
 		if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
 		if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
@@ -3475,7 +3507,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.tailType == Tail.FOX && player.tailCount == 9) damage *= 2;
 		var fusedfoxfiredmgmulti:Number = 1;
 		fusedfoxfiredmgmulti += spellMod() - 1;
-		fusedfoxfiredmgmulti += soulskillMod() - 1;
+		fusedfoxfiredmgmulti += soulskillMagicalMod() - 1;
 		if (player.shieldName == "spirit focus") fusedfoxfiredmgmulti += .2;
 		if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono" || player.armorName == "black kimono") fusedfoxfiredmgmulti += .2;
 		if (player.headjewelryName == "fox hairpin") fusedfoxfiredmgmulti += .2;
@@ -3497,7 +3529,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
-		var lustDmg:Number = monster.lustVuln * ((player.inte / 11 + player.wis / 7) * ((spellMod() + soulskillMod()) / 2) + rand(monster.lib + monster.cor) / 5);
+		var lustDmg:Number = monster.lustVuln * ((player.inte / 11 + player.wis / 7) * ((spellMod() + soulskillMagicalMod()) / 2) + rand(monster.lib + monster.cor) / 5);
 		if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
 		if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
@@ -3591,7 +3623,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EnlightenedNinetails) && player.tailType == Tail.FOX && player.tailCount == 9) damage *= 2;
 		var purefoxfiredmgmulti:Number = 1;
 		purefoxfiredmgmulti += spellMod() - 1;
-		purefoxfiredmgmulti += soulskillMod() - 1;
+		purefoxfiredmgmulti += soulskillMagicalMod() - 1;
 		if (player.shieldName == "spirit focus") purefoxfiredmgmulti += .2;
 		if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono" || player.armorName == "black kimono") purefoxfiredmgmulti += .2;
 		if (player.headjewelryName == "fox hairpin") purefoxfiredmgmulti += .2;
@@ -3617,7 +3649,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
-		var lustDmg:Number = monster.lustVuln * ((player.inte / 12 + player.wis / 8) * ((spellMod() + soulskillMod()) / 2) + rand(monster.lib + monster.cor) / 5);
+		var lustDmg:Number = monster.lustVuln * ((player.inte / 12 + player.wis / 8) * ((spellMod() + soulskillMagicalMod()) / 2) + rand(monster.lib + monster.cor) / 5);
 		if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
 		if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 			if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");

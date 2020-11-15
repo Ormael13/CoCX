@@ -36,6 +36,7 @@ public class Weapon extends Useable //Equipable
 			desc += "\n\nType: Melee Weapon ";
 			if (perk == "Massive") desc += "(Massive)";
 			else if (perk == "Large") desc += "(Large)";
+			else if (perk == "Hybrid") desc += "(Hybrid)";
 			else if (perk == "Small") desc += "(Small)";
 			else if (perk == "Staff") desc += "(Staff)";
 			else if (perk == "Wand") desc += "(Wand)";
