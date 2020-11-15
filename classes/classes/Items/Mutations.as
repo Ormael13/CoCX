@@ -9787,6 +9787,166 @@ public final class Mutations extends MutationsHelper {
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
 
+    public function smartyNuts(itemused:Boolean, player:Player):void {
+        if (itemused) clearOutput();
+        var changes:Number = 0;
+        var changeLimit:Number = 1;
+        var temp2:Number = 0;
+        var Ratatoskr_Colour:Array = ["brown","light brown","caramel","chocolate","russet"];
+        var Ratatoskr_EyeColour:Array = ["green","light green","emerald"];
+        if (itemused) {
+            if (rand(2) == 0) changeLimit++;
+            if (rand(3) == 0) changeLimit++;
+            changeLimit += additionalTransformationChances();
+            outputText("You chew at the nuts and begin to shake as your body is overcome with changes...");
+        }
+        //Stats
+        if (rand(4) == 0 && changes < changeLimit) {
+            outputText("\n\nYou begin to feel way smarter as you start remembering about anything you've read or heard with ever increasing clarity.");
+            MutagenBonus("int", 2);
+            if (player.inte < 60) MutagenBonus("int", 2);
+            changes++;
+        }
+        if (rand(3) == 0 && changes < changeLimit) {
+            changes++;
+            outputText("\n\nA chill runs through your spine, leaving you feeling like your reflexes are quicker and your body faster.");
+            //Speed gains diminish as it rises.
+            if (player.spe < 40) MutagenBonus("spe", .5);
+            if (player.spe < 75) MutagenBonus("spe", .5);
+            MutagenBonus("spe", .5);
+        }
+        //[decrease Strength] (to some floor) // I figured 15 was fair, but you're in a better position to judge that than I am.
+        if (changes < changeLimit && rand(3) == 0) {
+            outputText("\n\nYou can feel your muscles softening as they slowly relax, becoming a tad weaker than before.  Who needs physical strength when you are this smart?  You tilt your head a bit, wondering where that thought came from.");
+            dynStats("str", -1);
+            if (player.str > 60) dynStats("str", -1);
+            if (player.str > 80) dynStats("str", -1);
+            if (player.str > 90) dynStats("str", -1);
+            changes++;
+        }
+        //[decrease Toughness] (to some floor) // 20 or so was my thought here
+        if (changes < changeLimit && rand(3) == 0) {
+            if (player.tou < 60) outputText("\n\nYou feel your skin becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your supple skin isn't going to offer you much protection.");
+            else outputText("\n\nYou feel your skin becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your hide isn't quite as tough as it used to be.");
+            dynStats("tou", -1);
+            if (player.tou > 60) dynStats("tou", -1);
+            if (player.tou > 80) dynStats("tou", -1);
+            if (player.tou > 90) dynStats("tou", -1);
+            changes++;
+        }
+        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        //Physical
+        if (!InCollection(player.hairColor, Ratatoskr_Colour) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+            player.hairColor = randomChoice(Ratatoskr_Colour);
+            outputText("\n\nYour hair tingles as the strands turns <b>[haircolor]!</b>");
+        }
+
+        if (!player.hasFur() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+            var color1:String = randomChoice(Ratatoskr_Colour);
+            if (player.hasScales()) {
+                //set new skinTone
+                outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] scales.  Panicked, you look down and realize that your scales are falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + color1 + " fur grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the scales is easy to remove.  <b>Your body is now partially covered with small patches of fur!</b>");
+            }
+            if (player.hasChitin()) {
+                //set new skinTone
+                outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] chitin.  Panicked, you look down and realize that your chitin is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + color1 + " fur grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the chitin is easy to remove.  <b>Your body is now partially covered with small patches of fur!</b>");
+            }
+            //(no scales and chitin)
+            else {
+                outputText("\n\nYou feel your skin shift as fur grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  <b>Your body is now partially covered with small patches of " + color1 + " fur.</b>");
+            }
+            player.skin.growCoat(Skin.FUR, {color: color1}, Skin.COVERAGE_LOW);
+        }
+
+        //get partial fur from full if pc face is human
+        if (player.hasFur() && rand(3) == 0 && changes < changeLimit && (player.skin.coverage == Skin.COVERAGE_COMPLETE || player.skin.coverage == Skin.COVERAGE_HIGH)) {
+            var color2:String = randomChoice(Ratatoskr_Colour);
+            outputText("\n\nWhat used to be a dense coat of fur begins to fall in patches on the ground leaving you with just enough fur to cover some area of your body.  <b>Some area of your body are now partially covered with fur!</b>");
+            player.skin.coverage = Skin.COVERAGE_LOW;
+            player.coatColor = color2;
+            changes++;
+        }
+
+        if (player.lowerBody != LowerBody.SQUIRREL && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+            if (player.lowerBody == LowerBody.HUMAN) {
+                outputText("\n\nYou have trouble standing as multiple flashes of sensation run across your legs. " +
+                        "Sitting down before you accidentally hurt yourself, you watch with apprehension as your legs begin to shift, " +
+                        "fluffy patches of fur traveling up your legs until they reach your knees. " +
+                        "You yelp as the bones in your feet split and rearrange themselves into paws." +
+                        "Eventually, the sensation ebbs and you slowly get used to your <b>squirrel paws!</b>");
+                setLowerBody(LowerBody.SQUIRREL);
+            } else humanizeLowerBody();
+            changes++;
+        }
+        if (player.lowerBody == LowerBody.SQUIRREL && player.arms.type != Arms.SQUIRREL && changes < changeLimit && rand(3) == 0) {
+            if (player.arms.type == Arms.HUMAN) {
+                outputText("\n\nYour nails tingle as they elongate into white claws. A coat of fur then begins to form up from your wrist to your elbows, " +
+                        "coating your forearms like bracers. Your hands feels stronger in every way, heck" +
+                        "<b> with these new claws you could just climb and stick to any surface just like a squirrel.</b>");
+                setArmType(Arms.SQUIRREL);
+                if (player.coatColor == "") player.coatColor = player.hairColor;
+            } else humanizeArms();
+            changes++;
+        }
+
+        if (player.faceType != Face.SMUG && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\nY");
+            if (player.faceType != Face.HUMAN) outputText("our face begins to change as if melting, becoming more human however");
+            outputText("ou suddenly feel pain in your mouth as if something had suddenly grown." +
+                    " At first you think nothing happened but after double checking you confirm that your buck teeth are slightly larger than normal." +
+                    " <b>Your face is now human save for your two buck teeth like those of a squirrel.</b>");
+            setFaceType(Face.SMUG);
+            changes++;
+        }
+        if (player.faceType == Face.SMUG && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\nA wave of lightheadedness hits you and you black out. In your unconsciousness, you dream of chewing - food, wood, cloth, " +
+                    "paper, leather, even metal... whatever you can fit in your mouth, " +
+                    "even if it doesn’t taste like anything though, what you dream most of is big hard nuts. For several minutes you just chew and chew your way " +
+                    "through a parade of ordinary objects, savoring the texture of each one against your teeth, until finally you awaken. Your teeth work, " +
+                    "feeling longer and more prominent than before, and you hunt up your reflection. <b>Your face has shifted to resemble a squirrel’s!</b>");
+            setFaceType(Face.SQUIRREL);
+            changes++;
+        }
+        if ((player.faceType == Face.SMUG || player.faceType == Face.SQUIRREL) && player.ears.type != Ears.SQUIRREL && changes < changeLimit && rand(3) == 0) {
+            if (player.ears.type == Ears.HUMAN) {
+                outputText("\n\nYour ears suddenly stretch painfully, making you scream in pain as they move towards the top of your head, growing bigger. " +
+                        "Putting your hands to your ears you discover they are now covered with a fair amount of fur. " +
+                        " <b>You now have squirrel ears.</b>");
+                setEarType(Ears.SQUIRREL);
+            } else humanizeEars();
+            changes++;
+        }
+        if (player.ears.type == Ears.SQUIRREL && player.eyes.type != Eyes.RATATOSKR && changes < changeLimit && rand(3) == 0) {
+            if (player.eyes.type == Eyes.HUMAN) {
+                player.eyes.colour = randomChoice(Ratatoskr_EyeColour);
+                outputText("\n\nGeeze you know so much now it's like everyone around you is an idiot. How come they don't know about this and that is beyond you." +
+                        " <b>It's going to be hard to wipe away that somewhat permanent know it all smug expression from your face when you’re spreading words around your [eyecolor] eyes looking down teasingly on about everyone.</b>");
+                setEyeType(Eyes.RATATOSKR);
+            } else humanizeEyes();
+            changes++;
+        }
+        if (player.hairType != Hair.RATATOSKR && changes < changeLimit && rand(4) == 0) {
+            outputText("\n\nYou feel an itch in your hair and frustratedly go check on what is going on. To your surprise your hair took on a striped pattern" +
+                    " <b>like those of a ratatoskr.</b>");//<b></b>
+            player.hairLength = 1;
+            setHairType(Hair.RATATOSKR);
+            changes++;
+        }
+        if (player.arms.type == Arms.SQUIRREL && player.tailType != Tail.SQUIRREL && changes < changeLimit && rand(3) == 0) {
+            if (player.tailType == Tail.NONE) outputText("\n\nA pressure builds in your backside. " +
+                    "You feel under your clothes and discover an odd bump that seems to be growing larger by the moment. " +
+                    "In seconds it passes between your fingers and bursts out the back of your clothes, " +
+                    "it grows most of the way to the ground before suddenly curving back up, turning easily twice as big as you are. " +
+                    "A thick coat of light and [coat color] striped fur covers it entirely from the base to the tip. " +
+                    "Well it's going to be hard to hide this huge thing, especially since it curls and puffs up just <b>like a squirrel tail.</b>");
+            else outputText("\n\nSomething weird happens with your tail as it begins to change into something else. " +
+                    "Within seconds the shape and coverage becomes closer to what you would expect of a squirrel tail. <b>You now have a squirrel tail!</b>");
+            setTailType(Tail.SQUIRREL);
+            changes++;
+        }
+        flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+    }
+
     public function windstormEmerald(itemused:Boolean, player:Player):void {
         if (itemused) clearOutput();
         var changes:Number = 0;

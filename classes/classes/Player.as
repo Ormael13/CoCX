@@ -3666,6 +3666,17 @@ use namespace CoC;
 					}
 				}
 			}
+			if (TopRace == "ratatoskr") {
+				if (TopScore >= 6) {
+					if (TopScore >= 18) {
+						race = "ratatoskr";
+					} else if (TopScore >= 15) {
+						race = "squirrel morph";
+					} else {
+						race = "half squirrel morph";
+					}
+				}
+			}
 			if (TopRace == "raiju") {
 				if (TopScore >= 5) {
 					if (TopScore >= 10) {
@@ -7012,6 +7023,8 @@ use namespace CoC;
 				ratatoskrCounter++;
 			if (arms.type == Arms.SQUIRREL)
 				ratatoskrCounter++;
+			if (tongue.type == Tongue.RATATOSKR)
+				ratatoskrCounter++;
 			if (lowerBody == LowerBody.SQUIRREL)
 				ratatoskrCounter++;
 			if (tailType == Tail.SQUIRREL)
@@ -7040,7 +7053,7 @@ use namespace CoC;
 			//	ratatoskrCounter++;
 			//if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0 && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
 			//	ratatoskrCounter++;
-			//if (findPerk(PerkLib.RaijusDescendant) >= 0 || findPerk(PerkLib.BloodlineRaiju) >= 0)
+			//if (findPerk(PerkLib.RatatoskrsDescendant) >= 0 || findPerk(PerkLib.BloodlineRatatoskr) >= 0)
 			//	ratatoskrCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				ratatoskrCounter += 50;
@@ -10816,14 +10829,14 @@ use namespace CoC;
 				}
 			}//+10/10-20
 			if (kamaitachiScore() >= 7) {
-				if (raijuScore() >= 18) {
+				if (kamaitachiScore() >= 18) {
 					maxStrCap2 -= 35;
 					maxSpeCap2 += 200;
 					maxIntCap2 += 55;
 					maxWisCap2 += 100;
 					minSen += 50;
 				}
-				else if (raijuScore() >= 15) {
+				else if (kamaitachiScore() >= 15) {
 					maxStrCap2 -= 20;
 					maxSpeCap2 += 155;
 					maxIntCap2 += 45;
@@ -10836,6 +10849,23 @@ use namespace CoC;
 					maxIntCap2 += 20;
 					maxWisCap2 += 40;
 					minSen += 10;
+				}
+			}
+			if (ratatoskrScore() >= 6) {
+				if (ratatoskrScore() >= 18) {
+					maxStrCap2 -= 20;
+					maxSpeCap2 += 140;
+					maxIntCap2 += 150;
+				}
+				else if (ratatoskrScore() >= 15) {
+					maxStrCap2 -= 20;
+					maxSpeCap2 += 120;
+					maxIntCap2 += 125;
+				}
+				else {
+					maxStrCap2 -= 10;
+					maxSpeCap2 += 60;
+					maxIntCap2 += 40;
 				}
 			}
 			if (sirenScore() >= 10) {

@@ -84,11 +84,13 @@ public class Appearance extends Utils
 				else if (i_creature.hairType == Hair.FLUFFY) description += "fluffy ";
 				else if (i_creature.hairType == Hair.GRASS) description += "grass-";
 				else if (i_creature.hairType == Hair.SILKEN) description += "silk-like ";
+				else if (i_creature.hairType == Hair.FAIRY) description += "otherworldly, silk-like and almost translucent ";
 				else if (i_creature.hairType == Hair.BURNING) description += "burning ";
 				else if (i_creature.hairType == Hair.SNOWY) description += "snowy ";
 				else if (i_creature.hairType == Hair.CRAZY) description += "crazy ";
 				description += "mane";
 				if (i_creature.hairType == Hair.STORM) description += ". The tips ends with glowing lightning shaped locks";
+				if (i_creature.hairType == Hair.RATATOSKR) description += ". They are stripped at the center with light tips not unlike the head of a chipmunk or Ratatoskr.";
 				return description;
 			}
 			//if medium length refer to as locks sometimes
@@ -108,11 +110,13 @@ public class Appearance extends Utils
 			else if (i_creature.hairType == Hair.FLUFFY) description += "fluffy ";
 			else if (i_creature.hairType == Hair.GRASS) description += "grass-";
 			else if (i_creature.hairType == Hair.SILKEN) description += "silk-like ";
+			else if (i_creature.hairType == Hair.FAIRY) description += "otherworldly, silk-like and almost translucent ";
 			else if (i_creature.hairType == Hair.SNOWY) description += "snowy ";
 			else if (i_creature.hairType == Hair.CRAZY) description += "crazy ";
 			if (i_creature.hairType == Hair.BURNING) description += "mane of fire that burns things only when you wish it to";
 			else description += "hair";
 			if (i_creature.hairType == Hair.STORM) description += ". The tips ends with glowing lightning shaped locks";
+			if (i_creature.hairType == Hair.RATATOSKR) description += ". They are stripped at the center with light tips not unlike the head of a chipmunk or Ratatoskr.";
 			else if (i_creature.hairType == Hair.SNOWY) {
 				description += " are human in appearance but snow flurries regularly nest within them";
 				if (i_creature.rearBody.type == RearBody.GLACIAL_AURA) description += " your bone chilling aura might have something to do with that";
@@ -2517,9 +2521,11 @@ public class Appearance extends Utils
 					[Hair.FLUFFY, "fluffy"],
 					[Hair.GRASS, "grass"],
 					[Hair.SILKEN, "silk-like"],
-					[Hair.STORM, "glowing lightning shaped"],
-					[Hair.SNOWY, "snowy"],
 					[Hair.FAIRY, "otherworldly, silk-like and almost translucent"]
+					[Hair.CRAZY, "crazy"],
+					[Hair.STORM, "glowing lightning shaped"],
+					[Hair.RATATOSKR, "striped"],
+					[Hair.SNOWY, "snowy"],
 				]
 		);
 		public static const DEFAULT_BEARD_NAMES:Object = createMapFromPairs(

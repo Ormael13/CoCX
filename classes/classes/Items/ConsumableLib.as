@@ -317,6 +317,7 @@ public final class ConsumableLib extends BaseContent
 		public const SKELP__:SimpleConsumable = mk("Skelp  ", "Skelp", "a skelp", 15, "A form of Kelp used by the Melkie as seasoning for their food. Very tasty but can result in transformation if used uncooked.", m.skelp);
 		public const SKYSEED:SimpleConsumable = mk("SkySeed", "SkybornSeed", "a skyborn seed", 10, "A smallish, ovular nut-like fruit, with a hard greenish-blue shell that gives off a pleasant aroma.", curry(m.skybornSeed, 0));
 		public const SNAKOIL:SimpleConsumable = mk("SnakOil", "SnakeOil", "a vial of snake oil", 6, "A vial the size of your fist made of dark brown glass. It contains what appears to be an oily, yellowish liquid. The odor is abominable.", m.snakeOil);
+		public const SMRTNUT:SimpleConsumable = mk("SmartyNuts", "SmartyNuts", "a smarty nut", 6, "A special nut highly prized by Ratatoskr's. Rumors are it makes you smarter.", m.smartyNuts);
 		public const SPHONEY:Consumable		  = new BeeHoney(false, true);
 		public const SRMSEED:SimpleConsumable = mk("SrmSeed", "StormSeed", "a storm seed", 20, "This magical seed radiate a faint aura of static as if struck by lightning.", m.stormSeed);
 		public const STRFLOW:SimpleConsumable = mk("StrFlow", "StrangeFlower", "a strange flower", 20, "This weird flower has two pistils instead of one. You feel a strange connection to it.", m.strangeFlower);
@@ -339,6 +340,7 @@ public final class ConsumableLib extends BaseContent
 		//Wolf Pepper chyba jest nieużywanym itemem ale jesli jednak gdzie byl uzyty zostawie go nie wycietego a w przyszłosci zrobic z niego prawdziwy wolf TF ^^
 		public const WOLF_PP:SimpleConsumable = mk("Wolf Pp", "WolfPepper", "a Wolf pepper", 10, "The pepper is shiny and black, bulbous at the base but long and narrow at the tip.  It has a fuzzy feel to it and it smells spicy.", curry(m.caninePepper, 6));
 		public const YETICUM:SimpleConsumable = mk("YetiCum", "YetiCum", "a bottle of Yeti Cum", 6, "This looks like some cum from a yeti. It looks potent and you can’t help but ponder about its effect.", m.yetiCum);
+
 
 		public const LARGE_EGGS:Array = [L_BLKEG,L_BLUEG,L_BRNEG,L_PNKEG,L_PRPEG,L_WHTEG];
 		public const SMALL_EGGS:Array = [BLACKEG,BLUEEGG,BROWNEG,PINKEGG,PURPLEG,WHITEEG];
