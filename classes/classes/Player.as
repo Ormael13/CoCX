@@ -7068,6 +7068,63 @@ use namespace CoC;
 			return raijuCounter;
 		}
 
+		//Raiju score
+		public function ratatoskrScore():Number {
+			Begin("Player","racialScore","ratatoskr");
+			var ratatoskrCounter:Number = 0;
+			if (ears.type == Ears.SQUIRREL)
+				ratatoskrCounter++;
+			if (eyes.type == Eyes.RATATOSKR)
+				ratatoskrCounter++;
+			if (eyes.colour == "green" || eyes.colour == "light green" || eyes.colour == "emerald")
+				ratatoskrCounter++;
+			if (faceType == Face.SMUG || faceType == Face.SQUIRREL)
+				ratatoskrCounter++;
+			if (arms.type == Arms.SQUIRREL)
+				ratatoskrCounter++;
+			if (lowerBody == LowerBody.SQUIRREL)
+				ratatoskrCounter++;
+			if (tailType == Tail.SQUIRREL)
+				ratatoskrCounter++;
+			if (wings.type == Wings.NONE)
+				ratatoskrCounter++;
+			if (rearBody.type == RearBody.NONE)
+				ratatoskrCounter++;
+			if (hairType == Hair.RATATOSKR)
+				ratatoskrCounter++;
+			if (hairColor == "brown" || hairColor == "light brown" || hairColor == "caramel" || hairColor == "chocolate" || hairColor == "russet")
+				ratatoskrCounter++;
+			if (coatColor == "brown" || coatColor == "light brown" || coatColor == "caramel" || coatColor == "chocolate" || hairColor == "russet")
+				ratatoskrCounter++;
+			if (hasCoatOfType(Skin.FUR) || hasPartialCoat(Skin.FUR))
+				ratatoskrCounter += 1;
+			//if (findPerk(PerkLib.HeartOfTheStorm) >= 0)
+			//	ratatoskrCounter++;
+			//if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0)
+			//	ratatoskrCounter++;
+			//if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0)
+			//	ratatoskrCounter++;
+			//if (findPerk(PerkLib.HeartOfTheStorm) >= 0 && findPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
+			//	ratatoskrCounter++;
+			//if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0)
+			//	ratatoskrCounter++;
+			//if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0 && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
+			//	ratatoskrCounter++;
+			//if (findPerk(PerkLib.RaijusDescendant) >= 0 || findPerk(PerkLib.BloodlineRaiju) >= 0)
+			//	ratatoskrCounter += 2;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				ratatoskrCounter += 50;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && ratatoskrCounter >= 4)
+				ratatoskrCounter += 1;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && ratatoskrCounter >= 8)
+				ratatoskrCounter += 1;
+			if (isGargoyle()) ratatoskrCounter = 0;
+			ratatoskrCounter = finalRacialScore(ratatoskrCounter, Race.RAIJU);
+			End("Player","racialScore");
+			return ratatoskrCounter;
+		}
+
+
 		//Thunderbird score
 		public function thunderbirdScore():Number {
 			Begin("Player","racialScore","thunderbird");
@@ -7132,6 +7189,8 @@ use namespace CoC;
 				KamaitachiCounter++;
 			if (arms.type == Arms.KAMAITACHI)
 				KamaitachiCounter++;
+			if (hasCoatOfType(Skin.FUR) || hasPartialCoat(Skin.FUR))
+				KamaitachiCounter += 1;
 			if (wings.type == Wings.WINDY_AURA)
 				KamaitachiCounter += 3;
 			if (lowerBody == LowerBody.WEASEL)

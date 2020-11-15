@@ -5537,7 +5537,7 @@ public class PerkLib
                 return (player.dragonScore() >= 8 || player.frostWyrmScore() >= 10);
             }, "Dragon race or its variants");
 			DraconicLungs.requireLungsMutationSlot()
-				.requirePerk(DragonFireBreath)
+				        .requirePerk(DragonFireBreath)
                 .requirePerk(DragonIceBreath)
                 .requirePerk(DragonLightningBreath)
                 .requirePerk(DragonDarknessBreath).requireCustomFunction(function (player:Player):Boolean {

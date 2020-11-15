@@ -1590,10 +1590,11 @@ public class CombatMagic extends BaseCombatContent {
 			else tempStr = MightBoost;
 			var oldHPratio:Number = player.hp100/100;
 			var buffValues:Object = {"tou.mult":tempTou/100};
+
 			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) {
-				buffValues["int.mult"] = tempInt/100;
+				buffValues["int.mult"] = Math.min( tempInt/100, player.intStat.mult.value/2);
 			} else {
-				buffValues["str.mult"] = tempStr/100;
+				buffValues["str.mult"] = Math.min( tempStr/100, player.strStat.mult.value/2);
 			}
 			player.buff("Might").setStats(buffValues).combatTemporary(MightDuration);
 			player.HP = oldHPratio*player.maxHP();
