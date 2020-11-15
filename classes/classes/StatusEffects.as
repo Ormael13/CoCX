@@ -1035,9 +1035,13 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownTazer:StatusEffectType               		= mkCombat("Cooldown Tazer");
 		public static const CooldownTornadoStrike:StatusEffectType       		= mkCombat("Cooldown Tornado Strike");
 		public static const CooldownTerror:StatusEffectType              		= mkCombat("Cooldown Terror");
-		public static const CooldownWindScythe:StatusEffectType       			= mkCombat("Wind scythe Cooldown");
+		public static const CooldownWindScythe:StatusEffectType       			= mkCombat("Cooldown Wind Scythe");
 		public static const CooldownWhitefireBeamCannon:StatusEffectType 		= mkCombat("Cooldown Whitefire Beam Cannon");
 		public static const CooldownWingBuffet:StatusEffectType          		= mkCombat("Cooldown Wing Buffet");
+		public static const CounterEclipsingShadow:StatusEffectType             = mkCombat("Counter EclipsinShadow");
+		public static const CounterGlacialStorm:StatusEffectType              	= mkCombat("Counter Glacial Storm");
+		public static const CounterHighVoltage:StatusEffectType              	= mkCombat("Counter High Voltage");
+		public static const CounterRagingInferno:StatusEffectType              	= mkCombat("Counter Raging Inferno");
 
 		public static const RemovedArmor:StatusEffectType          = mkCombat("Removed Armor");
 		public static const JCLustLevel:StatusEffectType           = mkCombat("JC Lust Level");

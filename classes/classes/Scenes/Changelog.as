@@ -74,9 +74,9 @@ package classes.Scenes
 			outputText("-New tier 5 misc lvl-up perk: Drake Lungs (Final Form). Req. Drake Lungs (Evolved) perk and 15+/12+/13+ pts in frost wyrm/jabberwocky/vouivre score. Effect: Allows to use breath attack more often with increase to it power. (+200% to dragon breath damage that race is using and allowing to use it once per combat instead of once per day)\n");
 			outputText("-Buff spells been changed (again) and now would be not as OP especialy due to new stats system been implemented. Well time to get used to new way buffs works. For the balance ^^\n");
 			outputText("-Winter wolf full look easier to get without pain to get req. of specific stage of fur coverage (now just have fur and you golden ^^).\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New tier 5 intelligence lvl-up perk: Raging Inferno (Ex). Req. Raging Inferno perk, Grand Archmage perk and 150+ int. Effect: Increase to cumulative damage by 10%. Penalty for turn without casted fire spell decreased by 5%.\n");
+			outputText("-New tier 9 intelligence lvl-up perk: Raging Inferno (Su). Req. Raging Inferno (Ex) perk, Grand Archmage (3rd circle) perk and 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling fire based attack. Penalty for turn without casted fire spell decreased by another 5%.\n");
+			outputText("-Raging Inferno, x, x, x perks effects was changed to boost respective elemental damage by 20% and each turn without casted the same element spell/special lowering damage bonus by 20% instead of reseting it fully.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

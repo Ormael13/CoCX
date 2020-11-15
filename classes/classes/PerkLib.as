@@ -2429,10 +2429,16 @@ public class PerkLib
 				"Increasing crit chance by up to 50% in berserk state that would reset after succesful crit attack.",
 				"You choose the 'Rage' perk, increasing crit chance by up to 50% in berserk state until next crit attack.");
 		public static const RagingInferno:PerkType = mk("Raging Inferno", "Raging Inferno",
-				"Cumulative 20% damage increase for every subsequent fire spell without interruption.",
-				"You choose the 'Raging Inferno' perk. Cumulative 20% damage increase for every subsequent fire spell without interruption.");
-				//"Cumulative 10% damage increase for every subsequent fire spell. Each turn without casted fire spell lower damage by 10%.",
-				//"You choose the 'Raging Inferno' perk. Cumulative 10% damage increase for every subsequent fire spell.");
+				//"Cumulative 20% damage increase for every subsequent fire spell without interruption.",
+				//"You choose the 'Raging Inferno' perk. Cumulative 20% damage increase for every subsequent fire spell without interruption.");
+				"Cumulative 20% damage increase for every subsequent fire spell. Each turn without casted fire spell lower damage by 20%.",
+				"You choose the 'Raging Inferno' perk. Cumulative 20% damage increase for every subsequent fire spell. Each turn without casted fire spell lower damage by 20%.");
+		public static const RagingInfernoEx:PerkType = mk("Raging Inferno (Ex)", "Raging Inferno (Ex)",
+				"Increase to cumulative damage by 10%. Penalty for turn without casted fire spell decreased by 5%.",
+				"You choose the 'Raging Inferno (Ex)' perk. Increase to cumulative damage by 10%. Penalty for turn without casted fire spell decreased by 5%.");
+		public static const RagingInfernoSu:PerkType = mk("Raging Inferno (Su)", "Raging Inferno (Su)",
+				"Prevent decay of cumulative damage increase bonus when channeling fire based attack. Penalty for turn without casted fire spell decreased by another 5%.",
+				"You choose the 'Raging Inferno (Su)' perk. Prevent decay of cumulative damage increase bonus when channeling fire based attack. Penalty for turn without casted fire spell decreased by another 5%.");
 		public static const RapidReload:PerkType = mk("Rapid Reload", "Rapid Reload",
 				"Allow to not spend whole turn to use Reload button as long PC got enough fatigue.",
 				"You choose the 'Rapid Reload' perk, lowering time needed to reload ammo for range weapons like pistols.");
@@ -4679,6 +4685,10 @@ public class PerkLib
             EverLastingBuffs.requirePerk(JobEnchanter)
                     .requireInt(160)
                     .requireLevel(30);
+            RagingInfernoEx.requirePerk(GrandArchmage)
+                    .requirePerk(RagingInferno)
+                    .requireLevel(30)
+                    .requireInt(150);
             UnlockForce2ndStage.requirePerk(UnlockForce)
                     .requireInt(125)
                     .requireLevel(30);
@@ -4750,6 +4760,10 @@ public class PerkLib
                     .requireInt(300)
                     .requirePerk(PeerlessSpirituality)
                     .requireLevel(54);
+            RagingInfernoSu.requirePerk(GrandArchmage3rdCircle)
+                    .requirePerk(RagingInfernoEx)
+                    .requireLevel(54)
+                    .requireInt(300);
             //Tier 10 Intelligence perks
             GreyArchmage.requirePerk(GreyMage)
                     .requireInt(275)

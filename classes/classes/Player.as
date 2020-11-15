@@ -2866,6 +2866,7 @@ use namespace CoC;
 				{name: 'kangaroo', score: kangaScore(), minscore: 4},
 				{name: 'shark', score: sharkScore(), minscore: 4},
 				{name: 'harpy', score: harpyScore(), minscore: 4},
+				{name: 'spider', score: spiderScore(), minscore: 4},
 				{name: 'orca', score: orcaScore(), minscore: 6},
 				{name: 'oni', score: oniScore(), minscore: 6},
 				{name: 'elf', score: elfScore(), minscore: 5},

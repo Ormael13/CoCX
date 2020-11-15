@@ -419,7 +419,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			damage += damage1;
 		}
 		//soulskill mod effect
-		damage *= combat.soulskillPhysicalMod();
+		damage *= soulskillPhysicalMod();
 		//other bonuses
 		if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
 		if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;
@@ -533,7 +533,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			damage += damage1;
 		}
 		//soulskill mod effect
-		damage *= combat.soulskillPhysicalMod();
+		damage *= soulskillPhysicalMod();
 		//group enemies bonus
 		if (monster.plural == true) damage *= 5;
 		//other bonuses
@@ -1501,7 +1501,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 //triple strike bonus
 	 damage *= 3;
 	 //soulskill mod effect
-	 damage *= combat.soulskillPhysicalMod();
+	 damage *= soulskillPhysicalMod();
 	 //final touches
 	 damage *= (monster.damagePercent() / 100);
 	 damage = doDamage(damage);

@@ -72,7 +72,8 @@ public class CombatMagic extends BaseCombatContent {
 	}
 
 	internal function cleanupAfterCombatImpl():void {
-		fireMagicLastTurn = -100;
+		if (player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.removeStatusEffect(StatusEffects.CounterRagingInferno);
+		//fireMagicLastTurn = -100;
 		iceMagicLastTurn = -100;
 		lightningMagicLastTurn = -100;
 		darknessMagicLastTurn = -100;
@@ -668,30 +669,26 @@ public class CombatMagic extends BaseCombatContent {
 
 
 	private var fireMagicLastTurn:int = -100;
-	private var fireMagicCumulated:int = 0;/*
+	private var fireMagicCumulated:int = 0;
 	internal function calcInfernoModImpl(damage:Number):int {
 		if (player.hasPerk(PerkLib.RagingInferno)) {
+			if (!player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.createStatusEffect(StatusEffects.CounterRagingInferno,0,0,0,0);
 			var multiplier:Number = 1;
-			if (combatRound - fireMagicLastTurn == 2) {
-				if (fireMagicCumulated > 0) outputText("Traces of your previously used fire magic are still here, and you use them to empower another spell!\n\n");
-				multiplier += fireMagicCumulated * 0.05;
+			if (player.statusEffectv1(StatusEffects.CounterRagingInferno) == 0) outputText("Unfortunately, traces of your previously used fire magic are too weak to be used.\n\n");
+			else {
+				outputText("Traces of your previously used fire magic are still here, and you use them to empower another spell!\n\n");
+				multiplier += player.statusEffectv1(StatusEffects.CounterRagingInferno) * 0.05;
 				damage = Math.round(damage * multiplier);
-				fireMagicCumulated += 2;
-				//if (player.hasPerk(PerkLib.)) fireMagicCumulated++;
-				//if (player.hasPerk(PerkLib.)) fireMagicCumulated++;
-				// XXX: Message?
-			} else {
-				if (combatRound - fireMagicLastTurn > 2 && fireMagicCumulated > 0) {
-					if (fireMagicLastTurn == 2) fireMagicCumulated = 0;
-					else fireMagicCumulated -= 2;
-				}
-				if (fireMagicCumulated == 0) outputText("Unfortunately, traces of your previously used fire magic are too weak to be used.\n\n");
 			}
-			fireMagicLastTurn = combatRound;
+			if (player.statusEffectv4(StatusEffects.CounterRagingInferno) == 0) {
+				player.addStatusValue(StatusEffects.CounterRagingInferno, 4, 1);
+				if (player.hasPerk(PerkLib.RagingInfernoEx)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 6);
+				else player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 4);
+			}
 		}
 		return damage;
-	}*/
-	internal function calcInfernoModImpl(damage:Number):int {
+	}
+	internal function calcInfernoModImpl2(damage:Number):int {
 		if (player.hasPerk(PerkLib.RagingInferno)) {
 			var multiplier:Number = 1;
 			if (combatRound - fireMagicLastTurn == 2) {
@@ -2419,6 +2416,9 @@ public class CombatMagic extends BaseCombatContent {
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
 		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
+			player.removeStatusEffect(StatusEffects.ChanneledAttack);
+			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
+			//if (player.hasPerk(PerkLib.) && player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, -1);
 			outputText("You drain the heat out of the air around your foe, causing its temperature to plummet far below its freezing point in an instant, effectively flash freezing your enemy for \n");
 			var damage:Number = scalingBonusIntelligence() * spellMod() * 24;
 			//Determine if critical hit!
@@ -2487,7 +2487,8 @@ public class CombatMagic extends BaseCombatContent {
 			outputText("You begin to channel magic, the air temperature dropping around you.");
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 5, 0, 0, 0);
-			player.createStatusEffect(StatusEffects.CooldownSpellBlackTier3,12,0,0,0);
+			player.createStatusEffect(StatusEffects.CooldownSpellBlackTier3, 12, 0, 0, 0);
+			//if (player.hasPerk(PerkLib.)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, 1);
 			outputText("\n\n");
 			enemyAI();
 		}
@@ -2568,6 +2569,9 @@ public class CombatMagic extends BaseCombatContent {
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
 		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
+			player.removeStatusEffect(StatusEffects.ChanneledAttack);
+			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
+			if (player.hasPerk(PerkLib.RagingInfernoSu) && player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, -1);
 			outputText("You call out to the celestial vault, knocking some rocks out of orbit and into a crash course towards your opponents.\n\n");
 			var damage:Number = (scalingBonusIntelligence() * spellMod())*3;
 			//Determine if critical hit!
@@ -2667,7 +2671,8 @@ public class CombatMagic extends BaseCombatContent {
 			outputText("You begin to channel magic, the sky reddening above you.");
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 6, 0, 0, 0);
-			player.createStatusEffect(StatusEffects.CooldownSpellWhiteTier3,12,0,0,0);
+			player.createStatusEffect(StatusEffects.CooldownSpellWhiteTier3, 12, 0, 0, 0);
+			if (player.hasPerk(PerkLib.RagingInfernoSu)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, 1);
 			outputText("\n\n");
 			enemyAI();
 		}
@@ -3388,4 +3393,4 @@ public class CombatMagic extends BaseCombatContent {
 		return false;
 	}
 }
-}
+}

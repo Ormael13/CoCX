@@ -997,6 +997,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						player.createStatusEffect(StatusEffects.PCDaughtersWorkshopSpareParts,nails,metalpieces,mechanism,energycore);
 					}
 				}
+				if (flags[kFLAGS.SLEEP_WITH] == "Zenji") {
+					if (player.statusEffectv2(StatusEffects.ZenjiZList) == 0) SceneLib.zenjiScene.loverZenjiSleepWithMorning();
+					if (player.statusEffectv2(StatusEffects.ZenjiZList) == 1) SceneLib.zenjiScene.loverZenjiSleepWithGetPenetratedMorning();
+					if (player.statusEffectv2(StatusEffects.ZenjiZList) == 2) SceneLib.zenjiScene.loverZenjiSleepWithCatchAnalMorning();
+					if (player.statusEffectv2(StatusEffects.ZenjiZList) == 3) SceneLib.zenjiScene.loverZenjiSleepWithNoSexMorning();
+					needNext = true;
+				}
 			}
 			return needNext;
 		}
@@ -2662,3 +2669,4 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//End of Interface Implementation
 	}
 }
+
