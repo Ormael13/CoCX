@@ -426,7 +426,7 @@ public class HeXinDao extends BaseContent
         }
 		function Tier3():void {
 			menu();
-            addButton(0, "W.Emerald", buyItem,consumables.W_EMERALD,sayLine(consumables.W_EMERALD,"kamaitachi"),onBuyString).hint("Buy a 'Windstorm Emerald'.");
+            addButton(0, "W.Emerald", buyItem,consumables.W_EMRLD,sayLine(consumables.W_EMRLD,"kamaitachi"),onBuyString).hint("Buy a 'Windstorm Emerald'.");
             addButton(1, "W.Fruit", buyItem,consumables.W_FRUIT,sayLine(consumables.W_FRUIT,"cat"),onBuyString).hint("Buy a piece of whisker-fruit.");
             addButton(2, "WetCloth", buyItem,consumables.WETCLTH,sayLine(consumables.WETCLTH,"goo"),onBuyString).hint("Buy a wet cloth dripping with slippery slime.");
             addButton(3, "YetiCum", buyItem,consumables.YETICUM,sayLine(consumables.YETICUM,"yeti"),onBuyString).hint("Buy a bottle of Yeti Cum.");
