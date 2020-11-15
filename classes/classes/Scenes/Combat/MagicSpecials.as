@@ -244,7 +244,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonFireBreath)) {
 			bd = buttons.add("Dragon(Fire)", dragonfireBreath);
-			if (player.hasPerk(PerkLib.DraconicLungs)) {
+			if (player.hasPerk(PerkLib.DraconicLungs) || player.hasPerk(PerkLib.DrakeLungsFinalForm)) {
 				bd.hint("Unleash fire from your mouth. This can only be done once per fight. \n", "Dragon Fire Breath");
 			} else {
 				bd.hint("Unleash fire from your mouth. This can only be done once a day. \n", "Dragon Fire Breath");
@@ -257,7 +257,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonIceBreath)) {
 			bd = buttons.add("Dragon(Ice)", dragoniceBreath);
-			if (player.hasPerk(PerkLib.DraconicLungs)) {
+			if (player.hasPerk(PerkLib.DraconicLungs) || player.hasPerk(PerkLib.DrakeLungsFinalForm)) {
 				bd.hint("Unleash ice from your mouth. This can only be done once per fight. \n", "Dragon Ice Breath");
 			} else {
 				bd.hint("Unleash ice from your mouth. This can only be done once a day. \n", "Dragon Ice Breath");
@@ -270,7 +270,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonLightningBreath)) {
 			bd = buttons.add("Dragon(Light)", dragonlightningBreath);
-			if (player.hasPerk(PerkLib.DraconicLungs)) {
+			if (player.hasPerk(PerkLib.DraconicLungs) || player.hasPerk(PerkLib.DrakeLungsFinalForm)) {
 				bd.hint("Unleash lightning from your mouth. This can only be done once per fight. \n", "Dragon Lightning Breath");
 			} else {
 				bd.hint("Unleash lightning from your mouth. This can only be done once a day. \n", "Dragon Lightning Breath");
@@ -283,7 +283,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonDarknessBreath)) {
 			bd = buttons.add("Dragon(Dark)", dragondarknessBreath);
-			if (player.hasPerk(PerkLib.DraconicLungs)) {
+			if (player.hasPerk(PerkLib.DraconicLungs) || player.hasPerk(PerkLib.DrakeLungsFinalForm)) {
 				bd.hint("Unleash darkness from your mouth. This can only be done once per fight. \n", "Dragon Darkness Breath");
 			} else {
 				bd.hint("Unleash darkness from your mouth. This can only be done once a day. \n", "Dragon Darkness Breath");
@@ -294,7 +294,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if (player.hasPerk(PerkLib.DraconicLungsFinalForm) || (player.dragonScore() >= 12 && player.hasPerk(PerkLib.DraconicLungs))) {
+		if (player.hasPerk(PerkLib.DraconicLungsFinalForm) || (player.dragonScore() >= 16 && player.hasPerk(PerkLib.DraconicLungs))) {
 			bd = buttons.add("TrueDragonBreath", trueDragonBreath);
 			if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) {
 				bd.hint("Unleash all four elements fused together from your mouth. This can only be done once per fight. \n", "True Dragon Breath");
@@ -1858,20 +1858,25 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(50, USEFATG_MAGIC_NOBM);
 		player.createStatusEffect(StatusEffects.DragonFireBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
-		damage += scalingBonusIntelligence();// * 0.5
-		damage += scalingBonusWisdom();// * 0.5
+		var damult:Number = 1;
+		damage += scalingBonusIntelligence() * 0.5;
+		damage += scalingBonusWisdom() * 0.5;
 		damage *= 1 + (rand(51) / 100);
 		damage = calcInfernoMod(damage);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damage *= 3;
-		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damage *= 5;
+		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 2;
+		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 4;
+		if (player.hasPerk(PerkLib.DrakeLungs)) damult += 2;
+		if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 2;
+		if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 2;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		damage *= damult;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -1981,21 +1986,26 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(50, USEFATG_MAGIC_NOBM);
 		player.createStatusEffect(StatusEffects.DragonIceBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
-		damage += scalingBonusIntelligence();// * 0.5
-		damage += scalingBonusWisdom();// * 0.5
+		var damult:Number = 1;
+		damage += scalingBonusIntelligence() * 0.5;
+		damage += scalingBonusWisdom() * 0.5;
 		damage *= 1 + (rand(51) / 100);
 		damage = calcGlacialMod(damage);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damage *= 3;
-		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damage *= 5;
+		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 2;
+		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 4;
+		if (player.hasPerk(PerkLib.DrakeLungs)) damult += 2;
+		if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 2;
+		if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 2;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		damage *= damult;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -2071,21 +2081,26 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(50, USEFATG_MAGIC_NOBM);
 		player.createStatusEffect(StatusEffects.DragonLightningBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
-		damage += scalingBonusIntelligence();// * 0.5
-		damage += scalingBonusWisdom();// * 0.5
+		var damult:Number = 1;
+		damage += scalingBonusIntelligence() * 0.5;
+		damage += scalingBonusWisdom() * 0.5;
 		damage *= 1 + (rand(51) / 100);
 		damage = calcVoltageMod(damage);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damage *= 3;
-		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damage *= 5;
+		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 2;
+		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 4;
+		if (player.hasPerk(PerkLib.DrakeLungs)) damult += 2;
+		if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 2;
+		if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 2;
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		damage *= damult;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -2161,20 +2176,25 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(50, USEFATG_MAGIC_NOBM);
 		player.createStatusEffect(StatusEffects.DragonDarknessBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
-		damage += scalingBonusIntelligence();// * 0.5
-		damage += scalingBonusWisdom();// * 0.5
+		var damult:Number = 1;
+		damage += scalingBonusIntelligence() * 0.5;
+		damage += scalingBonusWisdom() * 0.5;
 		damage *= 1 + (rand(51) / 100);
 		damage = calcEclypseMod(damage);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damage *= 3;
-		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damage *= 5;
+		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 2;
+		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 4;
+		if (player.hasPerk(PerkLib.DrakeLungs)) damult += 2;
+		if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 2;
+		if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 2;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		damage *= damult;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -2252,29 +2272,33 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.ChanneledAttack);
 			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
 			var damage:Number = 0;
-			damage += scalingBonusIntelligence();// * 0.5
-			damage += scalingBonusWisdom();// * 0.5
+			var damult:Number = 1;
+			damage += scalingBonusIntelligence() * 2;
+			damage += scalingBonusWisdom() * 2;
 			damage *= 1 + (rand(51) / 100);
-			/*damage = calcInfernoMod(damage);
+			damage = calcInfernoMod(damage);
 			damage = calcGlacialMod(damage);
 			damage = calcVoltageMod(damage);
-			damage = calcEclypseMod(damage);*/
+			damage = calcEclypseMod(damage);
 			if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 				player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 				damage *= 1.5;
 			}
-			if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damage *= 3;
-			if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damage *= 5;
+			if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 2;
+			if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 4;
+			if (player.hasPerk(PerkLib.DrakeLungs)) damult += 2;
+			if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 2;
+			if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 2;
 			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + ((player.lust100 * 0.01) * 0.25));
 			if (combat.wearingWinterScarf()) damage *= 1.05;
 			if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
-			damage *= 10;
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+			damage *= damult;
 			damage = Math.round(damage);
 			//Shell
 			if(monster.hasStatusEffect(StatusEffects.Shell)) {

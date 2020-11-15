@@ -667,8 +667,8 @@ import classes.Items.JewelryLib;
 		{
 			var max:Number = 150;
 			if (game.player.alicornScore() >= 12) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.dragonScore() >= 20) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.dragonScore() >= 30) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.dragonScore() >= 24) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.dragonScore() >= 32) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.foxScore() >= 7) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.kitsuneScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.kitsuneScore() >= 9 && game.player.tailType == 13 && game.player.tailCount >= 2) {
@@ -1154,7 +1154,7 @@ import classes.Items.JewelryLib;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 37) max += 35;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 38) max += 35;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 39) max += 35;
-			if (game.player.dragonScore() >= 20) max += 50;
+			if (game.player.dragonScore() >= 24) max += 50;
 			if (game.player.dragonScore() >= 28) max += 50;
 			//if (game.player.dragonScore() >= 11) max += 25;//pig races having max hunger bonus too?
 			if (findPerk(PerkLib.EzekielBlessing) >= 0) max += 50;

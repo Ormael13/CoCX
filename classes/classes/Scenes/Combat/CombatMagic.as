@@ -634,6 +634,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	public function spellChargeWeaponCostMultiplier():Number {
 		var spellChargeWeaponMultiplier:Number = 1;
+		spellChargeWeaponMultiplier *= spellChargeWeaponWeaponSizeManaCost();
 		if (player.hasStatusEffect(StatusEffects.SiegweirdTraining)) spellChargeWeaponMultiplier *= 0.5;
 		if (player.hasPerk(PerkLib.EverLastingBuffs)) spellChargeWeaponMultiplier *= 2;
 		if (player.hasPerk(PerkLib.EternalyLastingBuffs)) spellChargeWeaponMultiplier *= 2;
@@ -642,6 +643,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	public function spellChargeArmorCostMultiplier():Number {
 		var spellChargeArmorMultiplier:Number = 1;
+		spellChargeArmorMultiplier *= spellChargeArmorType();
 		if (player.hasStatusEffect(StatusEffects.SiegweirdTraining)) spellChargeArmorMultiplier *= 0.5;
 		if (player.hasPerk(PerkLib.EverLastingBuffs)) spellChargeArmorMultiplier *= 2;
 		if (player.hasPerk(PerkLib.EternalyLastingBuffs)) spellChargeArmorMultiplier *= 2;
@@ -1563,42 +1565,17 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellMight(silent:Boolean = false):void {
 
 		var doEffect:Function = function():* {
-			var MightBoost:Number = 10;
-			if (player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) MightBoost += 5;
-			if (player.hasPerk(PerkLib.Spellpower) && player.inte >= 50) MightBoost += 5;
-			if (player.hasPerk(PerkLib.Mage) && player.inte >= 50) MightBoost += 10;
-			if (player.hasPerk(PerkLib.GrandMage) && player.inte >= 75) MightBoost += 15;
-			if (player.hasPerk(PerkLib.FocusedMind) && player.inte >= 50) MightBoost += 10;
-			if (player.hasPerk(PerkLib.Channeling) && player.inte >= 60) MightBoost += 10;
-			if (player.hasPerk(PerkLib.Archmage) && player.inte >= 100) MightBoost += 20;
-			if (player.hasPerk(PerkLib.GrandArchmage) && player.inte >= 125) MightBoost += 25;
-			if (player.hasPerk(PerkLib.GrandArchmage2ndCircle) && player.inte >= 150) MightBoost += 30;
-			if (player.hasPerk(PerkLib.GrandArchmage3rdCircle) && player.inte >= 175) MightBoost += 35;
-			if (player.hasPerk(PerkLib.GreyMage) && player.inte >= 200) MightBoost += 40;
-			if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 225) MightBoost += 45;
-			if (player.hasPerk(PerkLib.JobEnchanter) && player.inte >= 50) MightBoost += 5;
-			if (player.hasPerk(PerkLib.Battlemage) && player.inte >= 50) MightBoost += 15;
-			if (player.hasPerk(PerkLib.JobSwordsman)) MightBoost -= 10;
-			if (player.hasPerk(PerkLib.JobBrawler)) MightBoost -= 10;
-			if (player.hasPerk(PerkLib.JobDervish)) MightBoost -= 10;
-			if (player.hasPerk(PerkLib.IronFistsI)) MightBoost -= 10;
-			if (player.hasPerk(PerkLib.JobMonk)) MightBoost -= 15;
-			if (player.hasPerk(PerkLib.Berzerker)) MightBoost -= 15;
-			if (player.hasPerk(PerkLib.Lustzerker)) MightBoost -= 15;
-			if (player.hasPerk(PerkLib.WeaponMastery)) MightBoost -= 15;
-			if (player.hasPerk(PerkLib.WeaponGrandMastery)) MightBoost -= 25;
-			if (player.hasPerk(PerkLib.HeavyArmorProficiency)) MightBoost -= 15;
-			if (player.hasPerk(PerkLib.AyoArmorProficiency)) MightBoost -= 20;
-			if (player.hasPerk(PerkLib.Agility)) MightBoost -= 10;
-			if (player.hasPerk(PerkLib.LightningStrikes)) MightBoost -= 10;
-			if (player.hasPerk(PerkLib.StarlightStrikes)) MightBoost -= 10;
-			if (player.hasPerk(PerkLib.BodyCultivator)) MightBoost -= 5;
-		//	MightBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
+			var MightBoostCap:Number = 1.5;
+			MightBoostCap *= player.intStat.core.max;
+			MightBoostCap = Math.round(MightBoostCap);
+			var MightBoost:Number = player.intStat.core.value;
+			//MightBoost += Math.round(player.intStat.max * 0.1); - może tylko jak bedzie mieć perk z prestige job: magus / warock / inny związany z spells
 			if (MightBoost < 10) MightBoost = 10;
 			if (player.hasPerk(PerkLib.JobEnchanter)) MightBoost *= 1.2;
 			MightBoost *= spellModBlack();
-			MightBoost = FnHelpers.FN.logScale(MightBoost,MightABC,10);
+			//MightBoost = FnHelpers.FN.logScale(MightBoost,MightABC,10);
 			MightBoost = Math.round(MightBoost);
+			if (MightBoost > MightBoostCap) MightBoost = MightBoostCap;
 			var MightDuration:Number = 5;
 			if (player.hasPerk(PerkLib.LongerLastingBuffsI)) MightDuration += 1;
 			if (player.hasPerk(PerkLib.LongerLastingBuffsII)) MightDuration += 1;
@@ -1609,15 +1586,9 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.EverLastingBuffs)) MightDuration += 5;
 			if (player.hasPerk(PerkLib.EternalyLastingBuffs)) MightDuration += 5;
 			tempTou = MightBoost;
-			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) {
-				var MightIntBoost:Number = 0;
-				MightIntBoost += 25 * spellModBlack() * (1 + player.newGamePlusMod());
-				tempInt = MightIntBoost;
-			} else {
-				tempStr = MightBoost;
-			}
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) tempInt = Math.round(MightBoost * 1.25);
+			else tempStr = MightBoost;
 			var oldHPratio:Number = player.hp100/100;
-
 			var buffValues:Object = {"tou.mult":tempTou/100};
 
 			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) {
@@ -1693,43 +1664,17 @@ public class CombatMagic extends BaseCombatContent {
 	public function spellBlink(silent:Boolean = false):void {
 
 		var doEffect:Function = function():* {
-			var BlinkBoost:Number = 10;
-			if (player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) BlinkBoost += 5;
-			if (player.hasPerk(PerkLib.Spellpower) && player.inte >= 50) BlinkBoost += 5;
-			if (player.hasPerk(PerkLib.Mage) && player.inte >= 50) BlinkBoost += 10;
-			if (player.hasPerk(PerkLib.GrandMage) && player.inte >= 75) BlinkBoost += 15;
-			if (player.hasPerk(PerkLib.FocusedMind) && player.inte >= 50) BlinkBoost += 10;
-			if (player.hasPerk(PerkLib.Channeling) && player.inte >= 60) BlinkBoost += 10;
-			if (player.hasPerk(PerkLib.Archmage) && player.inte >= 100) BlinkBoost += 20;
-			if (player.hasPerk(PerkLib.GrandArchmage) && player.inte >= 125) BlinkBoost += 25;
-			if (player.hasPerk(PerkLib.GrandArchmage2ndCircle) && player.inte >= 150) BlinkBoost += 30;
-			if (player.hasPerk(PerkLib.GrandArchmage3rdCircle) && player.inte >= 175) BlinkBoost += 35;
-			if (player.hasPerk(PerkLib.GreyMage) && player.inte >= 200) BlinkBoost += 40;
-			if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 225) BlinkBoost += 45;
-			if (player.hasPerk(PerkLib.JobEnchanter) && player.inte >= 50) BlinkBoost += 5;
-			if (player.hasPerk(PerkLib.Battleflash) && player.inte >= 50) BlinkBoost += 15;
-			if (player.hasPerk(PerkLib.JobSwordsman)) BlinkBoost -= 10;
-			if (player.hasPerk(PerkLib.JobBrawler)) BlinkBoost -= 10;
-			if (player.hasPerk(PerkLib.JobDervish)) BlinkBoost -= 10;
-			if (player.hasPerk(PerkLib.IronFistsI)) BlinkBoost -= 10;
-			if (player.hasPerk(PerkLib.JobMonk)) BlinkBoost -= 15;
-			if (player.hasPerk(PerkLib.Berzerker)) BlinkBoost -= 15;
-			if (player.hasPerk(PerkLib.Lustzerker)) BlinkBoost -= 15;
-			if (player.hasPerk(PerkLib.WeaponMastery)) BlinkBoost -= 15;
-			if (player.hasPerk(PerkLib.WeaponGrandMastery)) BlinkBoost -= 25;
-			if (player.hasPerk(PerkLib.HeavyArmorProficiency)) BlinkBoost -= 15;
-			if (player.hasPerk(PerkLib.AyoArmorProficiency)) BlinkBoost -= 20;
-			if (player.hasPerk(PerkLib.Agility)) BlinkBoost -= 10;
-			if (player.hasPerk(PerkLib.LightningStrikes)) BlinkBoost -= 10;
-			if (player.hasPerk(PerkLib.StarlightStrikes)) BlinkBoost -= 10;
-			if (player.hasPerk(PerkLib.BodyCultivator)) BlinkBoost -= 5;
-		//	BlinkBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
+			var BlinkBoostCap:Number = 2;
+			BlinkBoostCap *= player.intStat.core.max;
+			var BlinkBoost:Number = player.intStat.core.value;
+			//BlinkBoost += Math.round(player.intStat.max * 0.1); - może tylko jak bedzie mieć perk z prestige job: magus / warock / inny związany z spells
 			if (BlinkBoost < 10) BlinkBoost = 10;
 			BlinkBoost *= 1.2;
 			if (player.hasPerk(PerkLib.JobEnchanter)) BlinkBoost *= 1.25;
 			BlinkBoost *= spellModBlack();
-			BlinkBoost = FnHelpers.FN.logScale(BlinkBoost,BlinkABC,10);
+			//BlinkBoost = FnHelpers.FN.logScale(BlinkBoost,BlinkABC,10);
 			BlinkBoost = Math.round(BlinkBoost);
+			if (BlinkBoost > BlinkBoostCap) BlinkBoost = BlinkBoostCap;
 			var BlinkDuration:Number = 5;
 			if (player.hasPerk(PerkLib.LongerLastingBuffsI)) BlinkDuration += 1;
 			if (player.hasPerk(PerkLib.LongerLastingBuffsII)) BlinkDuration += 1;
@@ -1740,11 +1685,13 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.EverLastingBuffs)) BlinkDuration += 5;
 			if (player.hasPerk(PerkLib.EternalyLastingBuffs)) BlinkDuration += 5;
 			tempSpe = BlinkBoost;
+			var oldHPratio:Number = player.hp100/100;
 			//if(player.spe + temp > 100) tempSpe = 100 - player.spe;
 			mainView.statsView.showStatUp('spe');
 			// strUp.visible = true;
 			// strDown.visible = false;
 			player.buff("Blink").setStats({"spe.mult":tempSpe/100}).combatTemporary(BlinkDuration);
+			player.HP = oldHPratio*player.maxHP();
 			statScreenRefresh();
 		};
 
@@ -2807,42 +2754,15 @@ public class CombatMagic extends BaseCombatContent {
 	private static const ChargeWeaponABC:Object = FnHelpers.FN.buildLogScaleABC(10,100,1000,10,100);
 //(15) Charge Weapon – boosts your weapon attack value by 5 + (player.inte/10) * SpellMod till the end of combat.
 	public function spellChargeWeapon(silent:Boolean = false):void {
-		var ChargeWeaponBoost:Number = 10;
-		if (player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) ChargeWeaponBoost += 5;
-		if (player.hasPerk(PerkLib.Spellpower) && player.inte >= 50) ChargeWeaponBoost += 5;
-		if (player.hasPerk(PerkLib.Mage) && player.inte >= 50) ChargeWeaponBoost += 10;
-		if (player.hasPerk(PerkLib.GrandMage) && player.inte >= 75) ChargeWeaponBoost += 15;
-		if (player.hasPerk(PerkLib.FocusedMind) && player.inte >= 50) ChargeWeaponBoost += 10;
-		if (player.hasPerk(PerkLib.Channeling) && player.inte >= 60) ChargeWeaponBoost += 10;
-		if (player.hasPerk(PerkLib.Archmage) && player.inte >= 100) ChargeWeaponBoost += 20;
-		if (player.hasPerk(PerkLib.GrandArchmage) && player.inte >= 125) ChargeWeaponBoost += 25;
-		if (player.hasPerk(PerkLib.GrandArchmage2ndCircle) && player.inte >= 150) ChargeWeaponBoost += 30;
-		if (player.hasPerk(PerkLib.GrandArchmage3rdCircle) && player.inte >= 175) ChargeWeaponBoost += 35;
-		if (player.hasPerk(PerkLib.GreyMage) && player.inte >= 200) ChargeWeaponBoost += 40;
-		if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 225) ChargeWeaponBoost += 45;
-		if (player.hasPerk(PerkLib.JobEnchanter) && player.inte >= 50) ChargeWeaponBoost += 5;
-		if (player.hasPerk(PerkLib.Spellsword) && player.inte >= 50) ChargeWeaponBoost += 15;
-		if (player.hasPerk(PerkLib.JobSwordsman)) ChargeWeaponBoost -= 10;
-		if (player.hasPerk(PerkLib.JobBrawler)) ChargeWeaponBoost -= 10;
-		if (player.hasPerk(PerkLib.JobDervish)) ChargeWeaponBoost -= 10;
-		if (player.hasPerk(PerkLib.IronFistsI)) ChargeWeaponBoost -= 10;
-		if (player.hasPerk(PerkLib.JobMonk)) ChargeWeaponBoost -= 15;
-		if (player.hasPerk(PerkLib.Berzerker)) ChargeWeaponBoost -= 15;
-		if (player.hasPerk(PerkLib.Lustzerker)) ChargeWeaponBoost -= 15;
-		if (player.hasPerk(PerkLib.WeaponMastery)) ChargeWeaponBoost -= 15;
-		if (player.hasPerk(PerkLib.WeaponGrandMastery)) ChargeWeaponBoost -= 25;
-		if (player.hasPerk(PerkLib.HeavyArmorProficiency)) ChargeWeaponBoost -= 15;
-		if (player.hasPerk(PerkLib.AyoArmorProficiency)) ChargeWeaponBoost -= 15;
-		if (player.hasPerk(PerkLib.Agility)) ChargeWeaponBoost -= 10;
-		if (player.hasPerk(PerkLib.LightningStrikes)) ChargeWeaponBoost -= 10;
-		if (player.hasPerk(PerkLib.StarlightStrikes)) ChargeWeaponBoost -= 10;
-		if (player.hasPerk(PerkLib.BodyCultivator)) ChargeWeaponBoost -= 5;
-	//	ChargeWeaponBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
-		if (ChargeWeaponBoost < 10) ChargeWeaponBoost = 10;
-		ChargeWeaponBoost *= 1.5;
+		var ChargeWeaponBoostCap:Number = 4;
+		var ChargeWeaponBoost:Number = 5;
+		ChargeWeaponBoostCap *= ChargeWeaponBoost;
+		//ChargeWeaponBoost += Math.round(player.intStat.max * 0.1); - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
 		if (player.hasPerk(PerkLib.JobEnchanter)) ChargeWeaponBoost *= 1.2;
 		ChargeWeaponBoost *= spellModWhite();
-		ChargeWeaponBoost = FnHelpers.FN.logScale(ChargeWeaponBoost,ChargeWeaponABC,10);
+		//ChargeWeaponBoost = FnHelpers.FN.logScale(ChargeWeaponBoost,ChargeWeaponABC,10);
+		if (ChargeWeaponBoost > ChargeWeaponBoostCap) ChargeWeaponBoost = ChargeWeaponBoostCap;
+		ChargeWeaponBoost *= spellChargeWeaponWeaponSize();
 		ChargeWeaponBoost = Math.round(ChargeWeaponBoost);
 		var ChargeWeaponDuration:Number = 5;
 		if (player.hasPerk(PerkLib.LongerLastingBuffsI)) ChargeWeaponDuration += 1;
@@ -2878,6 +2798,22 @@ public class CombatMagic extends BaseCombatContent {
 		spellPerkUnlock();
 		enemyAI();
 	}
+	public function spellChargeWeaponWeaponSize():Number {
+		var ab12:Number = 1;
+		if (player.weaponPerk == "" || player.weaponPerk == "Dual") ab12 *= 2;
+		if (player.weaponPerk == "Hybrid") ab12 *= 2.5;
+		if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") ab12 *= 3;
+		if (player.weaponPerk == "Massive") ab12 *= 4;
+		return ab12;
+	}
+	public function spellChargeWeaponWeaponSizeManaCost():Number {
+		var ba21:Number = 1;
+		if (player.weaponPerk == "" || player.weaponPerk == "Dual Small") ba21 *= 2;
+		if (player.weaponPerk == "Hybrid") ba21 *= 3;
+		if (player.weaponPerk == "Large" || player.weaponPerk == "Dual") ba21 *= 4;
+		if (player.weaponPerk == "Massive" || player.weaponPerk == "Dual Large") ba21 *= 8;
+		return ba21;
+	}
 
 	/**
 	 * Generates from (x1,x2,x3,y1,y2) log-scale parameters (a,b,c) that will return:
@@ -2888,41 +2824,15 @@ public class CombatMagic extends BaseCombatContent {
 	private static const ChargeArmorABC:Object = FnHelpers.FN.buildLogScaleABC(10,100,1000,10,100);
 //(35) Charge Armor – boosts your armor value by 5 + (player.inte/10) * SpellMod till the end of combat.
 	public function spellChargeArmor(silent:Boolean = false):void {
-		var ChargeArmorBoost:Number = 10;
-		if (player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) ChargeArmorBoost += 5;
-		if (player.hasPerk(PerkLib.Spellpower) && player.inte >= 50) ChargeArmorBoost += 5;
-		if (player.hasPerk(PerkLib.Mage) && player.inte >= 50) ChargeArmorBoost += 10;
-		if (player.hasPerk(PerkLib.GrandMage) && player.inte >= 75) ChargeArmorBoost += 15;
-		if (player.hasPerk(PerkLib.FocusedMind) && player.inte >= 50) ChargeArmorBoost += 10;
-		if (player.hasPerk(PerkLib.Channeling) && player.inte >= 60) ChargeArmorBoost += 10;
-		if (player.hasPerk(PerkLib.Archmage) && player.inte >= 100) ChargeArmorBoost += 20;
-		if (player.hasPerk(PerkLib.GrandArchmage) && player.inte >= 125) ChargeArmorBoost += 25;
-		if (player.hasPerk(PerkLib.GrandArchmage2ndCircle) && player.inte >= 150) ChargeArmorBoost += 30;
-		if (player.hasPerk(PerkLib.GrandArchmage3rdCircle) && player.inte >= 175) ChargeArmorBoost += 35;
-		if (player.hasPerk(PerkLib.GreyMage) && player.inte >= 200) ChargeArmorBoost += 40;
-		if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 225) ChargeArmorBoost += 45;
-		if (player.hasPerk(PerkLib.JobEnchanter) && player.inte >= 50) ChargeArmorBoost += 5;
-		if (player.hasPerk(PerkLib.Spellarmor) && player.inte >= 50) ChargeArmorBoost += 15;
-		if (player.hasPerk(PerkLib.JobSwordsman)) ChargeArmorBoost -= 10;
-		if (player.hasPerk(PerkLib.JobBrawler)) ChargeArmorBoost -= 10;
-		if (player.hasPerk(PerkLib.JobDervish)) ChargeArmorBoost -= 10;
-		if (player.hasPerk(PerkLib.IronFistsI)) ChargeArmorBoost -= 10;
-		if (player.hasPerk(PerkLib.JobMonk)) ChargeArmorBoost -= 15;
-		if (player.hasPerk(PerkLib.Berzerker)) ChargeArmorBoost -= 15;
-		if (player.hasPerk(PerkLib.Lustzerker)) ChargeArmorBoost -= 15;
-		if (player.hasPerk(PerkLib.WeaponMastery)) ChargeArmorBoost -= 15;
-		if (player.hasPerk(PerkLib.WeaponGrandMastery)) ChargeArmorBoost -= 25;
-		if (player.hasPerk(PerkLib.HeavyArmorProficiency)) ChargeArmorBoost -= 15;
-		if (player.hasPerk(PerkLib.AyoArmorProficiency)) ChargeArmorBoost -= 15;
-		if (player.hasPerk(PerkLib.Agility)) ChargeArmorBoost -= 10;
-		if (player.hasPerk(PerkLib.LightningStrikes)) ChargeArmorBoost -= 10;
-		if (player.hasPerk(PerkLib.StarlightStrikes)) ChargeArmorBoost -= 10;
-		if (player.hasPerk(PerkLib.BodyCultivator)) ChargeArmorBoost -= 5;
-	//	ChargeArmorBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
-		if (ChargeArmorBoost < 10) ChargeArmorBoost = 10;
+		var ChargeArmorBoostCap:Number = 4;
+		var ChargeArmorBoost:Number = 5;
+		ChargeArmorBoostCap *= ChargeArmorBoost;
+		//ChargeArmorBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
 		if (player.hasPerk(PerkLib.JobEnchanter)) ChargeArmorBoost *= 1.2;
 		ChargeArmorBoost *= spellModWhite();
-		ChargeArmorBoost = FnHelpers.FN.logScale(ChargeArmorBoost,ChargeArmorABC,10);
+		//ChargeArmorBoost = FnHelpers.FN.logScale(ChargeArmorBoost,ChargeArmorABC,10);
+		if (ChargeArmorBoost > ChargeArmorBoostCap) ChargeArmorBoost = ChargeArmorBoostCap;
+		ChargeArmorBoost *= spellChargeArmorType();
 		ChargeArmorBoost = Math.round(ChargeArmorBoost);
 		var ChargeArmorDuration:Number = 5;
 		if (player.hasPerk(PerkLib.LongerLastingBuffsI)) ChargeArmorDuration += 1;
@@ -2961,6 +2871,14 @@ public class CombatMagic extends BaseCombatContent {
 		spellPerkUnlock();
 		enemyAI();
 	}
+	public function spellChargeArmorType():Number {
+		var a12b:Number = 1;
+		if (player.armorPerk == "Medium") a12b *= 2;
+		if (player.armorPerk == "Heavy") a12b *= 3;
+		if (player.armorPerk == "Ayo") a12b *= 4;
+		return a12b;
+	}
+	
 	public function spellHeal():void {
 		clearOutput();
 		doNext(combatMenu);
