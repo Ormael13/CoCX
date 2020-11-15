@@ -101,7 +101,7 @@ package classes
 		public static const INCUBATION_GOBLIN:int				= 168;
 		public static const INCUBATION_MITZI:int				= 312;
 		public static const INCUBATION_EXCELLIA:int				= 480;
-		public static const INCUBATION_ZENJI:int                = 12;//720
+		public static const INCUBATION_ZENJI:int                = 720;
 		
 		private static const MAX_FLAG_VALUE:int                 = 2999;
 		private static const PREG_TYPE_MASK:int                 = 0x0000FFFF; //Should be safe with 65535 different pregnancy types

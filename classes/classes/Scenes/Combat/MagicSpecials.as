@@ -2279,14 +2279,14 @@ public class MagicSpecials extends BaseCombatContent {
 			var damult:Number = 1;
 			damage += scalingBonusIntelligence() * 5;
 			damage += scalingBonusWisdom() * 5;
-			damage *= 1 + (rand(51) / 100);
+			damage *= 1.5 + (rand(101) / 100);
 			damage = calcInfernoMod(damage);
 			damage = calcGlacialMod(damage);
 			damage = calcVoltageMod(damage);
 			damage = calcEclypseMod(damage);
 			if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 				player.removeStatusEffect(StatusEffects.DragonBreathBoost);
-				damage *= 1.5;
+				damage *= 3;
 			}
 			if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 3;
 			if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 6;
