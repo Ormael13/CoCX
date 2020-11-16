@@ -1415,9 +1415,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Alraune perks
-			if (player.isAlraune() && !player.hasPerk(PerkLib.AlrauneNectar)){
-				outputText("\nYour nectar now produce a delicious scent that is sure to draw in partners. <b>Gained Perk: Alraune Nectar</b>\n");
-				player.createPerk(PerkLib.AlrauneNectar, 0,0,0,0);
+			if (player.isAlraune() && (!player.hasPerk(PerkLib.AlrauneNectar) || player.vaginaType() != VaginaClass.ALRAUNE)){
+				if (player.vaginaType() != VaginaClass.ALRAUNE){
+					player.vaginaType(VaginaClass.ALRAUNE);
+					outputText("\nYour flower now produces a delicious nectar the scent of wich is sure to draw in partners.");
+				}
+				if (!player.hasPerk(PerkLib.AlrauneNectar)){
+					outputText(" <b>Gained Perk: Alraune Nectar</b>");
+					player.createPerk(PerkLib.AlrauneNectar, 0,0,0,0);
+				}
+				outputText("\n");
 				needNext = true;
 			}
 			if (player.isAlraune() && !player.hasPerk(PerkLib.PlantKnowledge)){
@@ -1428,6 +1435,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (!player.isAlraune() && player.hasPerk(PerkLib.AlrauneNectar)){
 				outputText("\nAs you no longuer have a pitcher to produce nectar your scent has became more like that of an ordinary human. <b>Lost Perk: Alraune Nectar</b>\n");
 				player.removePerk(PerkLib.AlrauneNectar);
+				player.vaginaType(VaginaClass.HUMAN);
 				needNext = true;
 			}
 			if (!player.isAlraune() && player.hasPerk(PerkLib.PlantKnowledge)){
@@ -2669,4 +2677,3 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//End of Interface Implementation
 	}
 }
-

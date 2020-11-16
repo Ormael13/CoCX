@@ -655,11 +655,10 @@ public class PlayerAppearance extends BaseContent {
 						"Your manticore vagina is so sensitive that you can't help but moan musical note out loud when touching yourself.");
 			}
 			else{
-            outputText("You have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+            	outputText("You have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
 			}
 		}
-		if(player.vaginas[0].virgin)
-			outputText(" and an intact hymen");
+		if(player.vaginas[0].virgin) outputText(" and an intact hymen");
 		outputText(".  ");
 		if (player.vaginas.length > 1){
             outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clits each.  ");
@@ -670,10 +669,15 @@ public class PlayerAppearance extends BaseContent {
 		if (player.vaginaType() == VaginaClass.VENOM_DRIPPING){
 			outputText("It constantly drools with aphrodisiac venom. ");
 		}
+		if (player.vaginaType() == VaginaClass.ALRAUNE){
+			outputText("Your vagina secretes aphrodisiac-like nectar, ensuring any stamen that parts your petals are sufficiently lubricated and ready to fertilize you. ");
+		}
 		if (player.vaginaType() == VaginaClass.CANCER){
 			outputText("It is constantly foaming in anticipation of a potential mate. ");
 		}
-
+		if(player.vaginaType() == VaginaClass.DEMONIC){
+			outputText("Your demonic vagina, unlike a normal pussy, feels and acts akin to a mouth that allows you to taste and savor the flavor of the cum injected within as if it landed on your tongue. Your sensitive walls are also prehensile, and you can control them to milk a cock just as well as your hand could. ");
+		}
 		if(player.lib < 50 && player.lust < 50) //not particularly horny
 
 		{

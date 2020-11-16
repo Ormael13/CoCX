@@ -1234,6 +1234,10 @@ public final class Mutations extends MutationsHelper {
                     else outputText("Your [vagina]s gush fluids down your legs as you spontaneously orgasm, leaving a thick puddle of pussy-juice on the ground.  It is rapidly absorbed by the earth.");
                     player.orgasm();
                     if (tainted) dynStats("cor", 1);
+                    if (player.vaginaType() != VaginaClass.DEMONIC){
+                        if (player.vaginas.length == 1) outputText("Pressure begins building within your loins and your first instinct is to start fiercely fingering yourself in an effort to improve the pleasure, and to your surprise, your vaginal lips seem to reflexively clench around your fingers to kiss you. Wait, no, they're LITERALLY kissing your fingers. Where the hell did your cunt acquire such dexterity? Just as you ponder this question, hunger seizes you over as the taste of sweat rushes to your mouth. Not your upper mouth, but the one between your legs has managed to taste the faint salty sweat coating your fingers! You can now taste and milk cum like never before using your <b>brand new succubus cunt!</b>");
+                        player.vaginaType(VaginaClass.DEMONIC);
+                    }
                 }
                 if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) {
                     if (player.vaginas.length == 1) outputText("Your pussy feels hot and juicy, aroused and tender.  You cannot resist as your hands dive into your [vagina].  You quickly orgasm, squirting fluids everywhere.  <b>You are now a squirter</b>.");

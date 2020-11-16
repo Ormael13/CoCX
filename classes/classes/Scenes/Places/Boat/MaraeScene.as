@@ -289,6 +289,7 @@ private function alraunezeMeYes0():void {
 	if (player.wings.type == Wings.PLANT) player.wings.type = Wings.NONE;
 	player.lowerBody = LowerBody.PLANT_FLOWER;
 	player.legCount = 12;
+	player.vaginaType(VaginaClass.ALRAUNE);
 	CoC.instance.mainViewManager.updateCharviewIfNeeded();
 	doNext(camp.returnToCampUseTwoHours);
 }

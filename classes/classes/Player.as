@@ -4513,7 +4513,7 @@ use namespace CoC;
 			if (lowerBody == LowerBody.DEMONIC_HIGH_HEELS || lowerBody == LowerBody.DEMONIC_CLAWS)
 				demonCounter++;
 				demonCounter2++;
-			if (demonCocks() > 0)
+			if (demonCocks() > 0 || (hasVagina() && vaginaType() == VaginaClass.DEMONIC))
 				demonCounter++;
 			if (cor >= 50) {
 				if (horns.type == Horns.DEMON && horns.count > 4)
@@ -4589,6 +4589,8 @@ use namespace CoC;
 			if (eyes.type == Eyes.DEVIL || eyes.type == Eyes.GOAT)
 				devilkinCounter++;
 			if (tallness < 48)
+				devilkinCounter++;
+			if (horseCocks() > 0 || (hasVagina() && vaginaType() == VaginaClass.DEMONIC))
 				devilkinCounter++;
 			if (cor >= 60)
 				devilkinCounter++;
@@ -8469,7 +8471,7 @@ use namespace CoC;
 				alrauneCounter += 5;
 			if (stamenCocks() > 0)
 				alrauneCounter++;
-			if (hasVagina())
+			if (hasVagina() && (vaginaType() == VaginaClass.ALRAUNE))
 				alrauneCounter++;
 			if (findPerk(PerkLib.FloralOvaries) >= 0)
 				alrauneCounter++;
@@ -8897,6 +8899,8 @@ use namespace CoC;
 			if (tailType == Tail.MANTICORE_PUSSYTAIL)
 				manticoreCounter += 2;
 			if (rearBody.type == RearBody.LION_MANE)
+				manticoreCounter++;
+			if (vaginaType() == VaginaClass.MANTICORE)
 				manticoreCounter++;
 			if (arms.type == Arms.LION)
 				manticoreCounter++;
