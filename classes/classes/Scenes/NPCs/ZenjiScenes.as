@@ -276,7 +276,7 @@ public function part1TrollEncounterChallangeToughness():void {
 	outputText("\"<i>Ahaha, so you tink you can best me at ma toughness? I will see just how tough you are.</i>\"\n\n");
 	outputText("He leads you to a pile of rocks within the area, there he gestures to a large boulder, \"<i>Toughness be about he resilient one is, how much can you handle, how much can you take before ya break?</i>\"\n\n");
 	outputText("The troll eyes you carefully, then walks over to the pile of rocks and places it by your feet, \"<i>Dis rock looks like a good size for ya.</i>\"\n\n");
-	outputText("He grabs a rock and places it at his foot, \"<i>I want ya ta hold dis rock high above your head wit only two arms, as high as your arms can reach, first one to drop loses.</i>\"\n\n");
+	outputText("He grabs a rock and places it at his foot, \"<i>I want ya ta hold dis rock high above your head wit only two arms as high as your arms can reach, first one to drop loses.</i>\"\n\n");
 	outputText("Seems simple enough, you wait for his command and on queue, you hold the rock high above your head as high as your arms will let you.\n\n");
 	if (player.tou < (115 + (player.newGamePlusMod() * 23))) {
 		outputText("After some time of holding the rock above your head, your arms begin to grow weary, the rock, despite not being too heavy, is beginning to put a burden on your arms as its weight begins to feel like it's increasing. You look over to the troll who seems to be having no trouble carrying his rock above his head.\n\n");
@@ -408,7 +408,7 @@ public function part1TrollEncounterSex():void {
 
 public function part1TrollEncounterPayWithGems():void {
 	player.gems -= 25;
-	outputText("You pull out 25 gems from your gem pouch, as you do so he hops down from the tree. He holds out a four-fingered palm, awaiting your payment and you fork the gems over. The entire time he looks directly into your eyes, but at the same time there seems to be a tinge of disappointment within his.\n\n");
+	outputText("You pull out 25 gems from your gem pouch as you do so he hops down from the tree. He holds out a four-fingered palm, awaiting your payment and you fork the gems over. The entire time he looks directly into your eyes, but at the same time there seems to be a tinge of disappointment within his.\n\n");
 	outputText("As you enter the opening in the bog you search around the area and wonder what makes it so special that he wanted to guard it against you.\n\n");
 	part1TrollEncounterRewards();
 }
@@ -493,7 +493,7 @@ public function part2TrollEncounterRepeat():void {
 	outputText("As you are traversing in the bog, you note that you’re near the clearing where Zenji usually resides.\n\n");
 	outputText("It doesn't take long until he hops down to greet you, seemingly out of nowhere.\n\n");
 	if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] <= 30) {
-		outputText("\"<i>It’s you again, [name], my friend.</i>\" Zenji welcomes, but there’s concern in his words, \"<i>I… I kinda missed you… Are ya doing well? Maybe… Er… I guess we can still train or spar..?</i>\"\n\nZenji seems very unsure of his words, as he wants to offer something else but refuses to. He shakes his head, as if to clear a thought from his mind as he returns to a more neutral stance.\n\n");
+		outputText("\"<i>It’s you again, [name], my friend.</i>\" Zenji welcomes, but there’s concern in his words, \"<i>I… I kinda missed you… Are ya doing well? Maybe… Er… I guess we can still train or spar..?</i>\"\n\nZenji seems very unsure of his words as if he wants to offer something else but refuses to. He shakes his head as if to clear a thought from his mind as he returns to a more neutral stance.\n\n");
 	}
 	else outputText("\"<i>Ah, [name],</i>\" he welcomes, \"<i>What brings ya here? Didja want to train or perhaps go for anoda sparring match?</i>\"\n\nYou consider the few options, it appears he doesn’t want to talk about anything else.\n\n");
 	menu();
@@ -1381,7 +1381,7 @@ public function loverZenjiGiveItemLotion():void {
 	outputText("You nod your head and tell him this will give him that extra edge for being cuddly.\n\n");
 	outputText("Zenji gives you a soft smile as he nods back, signifying that he's ready for the oil. You uncork the bottle of lotion, lathering some on your hands before gently applying the contents onto his soft hair.\n\n");
 	outputText("He snickers softly as you lather his hair in the lotion. \"<i>Ha, ahaha! Careful!</i>\" He squirms slightly, obviously a bit ticklish, but his face tells you that he's enjoying it. You make way with lathering the lotion all over his body, coating his hair in the slick salve, and thoroughly rubbing it in.\n\n");
-	outputText("You slide your fingers across his muscular arm. It can be hard to notice sometimes, but you can see and feel his bicep veins underneath all the hair. You continue massaging the lotion into his hair, getting a feel for his toned triceps and dense biceps. As you move to his other arm, he raises it for you, flexing his massive biceps, showing off just how muscular he is. As you rub your fingers through his solid arm he gives you a smug grin, hoping to entice you with just the size of his body alone. \"<i>Yeah, I have been working out, as ya can see…</i>\"\n\n");
+	outputText("You slide your fingers across his muscular arm. It can be hard to notice sometimes, but you can see and feel his bicep veins underneath all the hair. You continue massaging the lotion into his hair, getting a feel for his toned triceps and dense biceps. As you move to his other arm, he raises it for you, flexing his massive biceps, showing off just how muscular he is. As you rub your fingers through his solid arm he gives you a smug grin, hoping to entice you with just the size of his body alone. \"<i>Yeah, I have been working out as ya can see…</i>\"\n\n");
 	outputText("You smirk in response, he can be such a showoff sometimes, but it is kind of cute.\n\n");
 	outputText("You rub your hands along his shoulders before working towards his manly pectorals. You feel his pecs twitch slightly at your touch as you apply the cool lotion.\n\n");
 	outputText("As your hands reach his collar, you clasp your fingers around the colorful beaded necklace around his neck. It’s simple and doesn’t seem like it’s made with anything too expensive.\n\n");
@@ -1765,7 +1765,7 @@ public function loverZenjiPitchAnal():void {
 	outputText("You reach around over him, grabbing his throbbing manhood as you begin to jerk him off. You dig a finger underneath his foreskin, toying with his glans.\n\n");
 	outputText("\"<i>Ah! [name]... D-don’t stop…</i>\" Zenji moans, his tail reflexively coils around your waist, holding onto you for support.\n\n");
 	outputText("You obey his request as you continue jerking off his shaft. Zenji buries his face into his pillow, growling softly.\n\n");
-	outputText("You continue thrusting, his ass is fairly tight, as he slowly bucks against you, trying to get a feel for your length.\n\n");
+	outputText("You continue thrusting, his ass is fairly tight as he slowly bucks against you, trying to get a feel for your length.\n\n");
 	outputText("Trying to see if you can awaken something deeper within him, you buck into him as hard as you can.\n\n");
 	outputText("Zenji yelps in response as you feel a surge of pre leak down onto your fingers.\n\n");
 	outputText("You laugh at his vulnerability, he seems to enjoy it when you go rough, so you continue bucking into him with greater vigor. It doesn’t last long though as you feel yourself nearing your climax.\n\n");
@@ -1982,7 +1982,7 @@ public function loverZenjiHotSpringRideAnal():void{
 	else if (player.hasCock()) outputText("Girlcum drips out past your lips, mixing into the bubbling water");
 	else outputText("Girlcum drips out past your lips, mixing into the bubbling water");
 	outputText(" as you try to milk his dick of everything it’s worth.\n\n");
-	outputText("Zenji grabs onto you tightly with a stern hiss, as he finally cums within your rear, his erection pulsing with need as he unloads everything he has. His grip loosens as he pumps several loads into your awaiting backdoor, the cum out slightly into the hot spring due to the sheer volume.\n\n");
+	outputText("Zenji grabs onto you tightly with a stern hiss as he finally cums within your rear, his erection pulsing with need as he unloads everything he has. His grip loosens as he pumps several loads into your awaiting backdoor, the cum out slightly into the hot spring due to the sheer volume.\n\n");
 	outputText("Zenji finally relaxes as you rest above him, being carried gently by the water. You notice he’s sweating profusely.\n\n");
 	outputText("\"<i>So… hot… it’s so hot, [name]. Let’s get out of de hotspring…</i>\" He pants exasperatedly as he reaches for his loincloth. Zenji stands up as he grabs onto your hand. He climbs out of the hotspring before pulling you up with him. He pulls you over his stomach as he lies on the ground briefly with you.\n\n");
 	outputText("You rest on top of him for a moment, wiping the sweat from his face, moving down and rubbing his hot and sweaty arms before you decide to dry off with him. His tail swishes along the ground beneath affectionately you while you scrape off his sweat.\n\n");
@@ -2067,7 +2067,7 @@ public function loverZenjiSexGetLicked():void {
 	clearOutput();
 	outputText("You ask Zenji that now since he has smaller tusks if he's willing to give you a little treat in return.\n\n");
 	outputText("Zenji gives a small chuckle, \"<i>Is that de only reason ya wanted me to have small tusks? Well, I can imagine what ya want and I can't lie, I’ve been wanting ta do the same.</i>\"\n\n");
-	outputText("You lie down on the ground as Zenji pulls down your [armor], as he unveils your moist cooter.\n\n");
+	outputText("You lie down on the ground as Zenji pulls down your [armor] as he unveils your [vagina].\n\n");
 	outputText("He leans close, you can feel his breath on your labia as he bends closer, he starts by gently licking your outer walls, teasing your box with his long tongue. He gently presses his ashen tongue against your clit before sliding his way past your netherlips.\n\n");
 	outputText("You shudder at his ministrations, how is he so talented at this despite his lack of experience? He doesn't stop as he presses deeper into your womb, licking his way into you as he eats you out.\n\n");
 	outputText("His mouth is pressed against your lips as he drags his tongue around your canals, making sure to cover the parts of you that he's neglected. You can feel the pressure building up within your loins, you beg him to continue, you're so close now. He keeps going at you, licking his way around you before you finally find yourself cumming. ");
@@ -2127,7 +2127,7 @@ public function loverZenjiSexTease():void {
 	if (player.isNaga()) {
 		outputText("You slither closer, wrapping your tail around his length, teasing him with light touches. Zenji restrains from thrusting into you, he groans loudly with need, desperate for your scaly embrace. You glide the slender tip of your tail across his length, drifting yourself around the tip of his head. You continue sliding around his length, teasing him as he whimpers with need. You lift his heavy sack with your tail before letting it fall back to his crotch with a small thud.\n\n");
 		outputText("You slowly wrap your tail around his girthy erection, the volumes of pre he’s already leaked onto himself gives you easier access to sliding your tail up and down his shaft. Zenji’s chest heaves, panting with greater need. He reaches his strong hands down to his girth, grabbing onto the base of your tail as he desperately humps into you, trying to get himself off by using you.\n\n");
-		outputText("Not wanting him to forget who’s in charge you quickly slip out of his strong grip easily due to the sheer amount of pre that’s coated your tail. You whip your tail up to his face, flicking his nose causing him to flinch, as you scold him again for being a naughty troll. Zenji’s mouth is agape, panting slowly and heavily, as he lowers his hands submissively, letting you take control of him again. It appears he’s finally figured out who’s in charge now. ");
+		outputText("Not wanting him to forget who’s in charge you quickly slip out of his strong grip easily due to the sheer amount of pre that’s coated your tail. You whip your tail up to his face, flicking his nose causing him to flinch as you scold him again for being a naughty troll. Zenji’s mouth is agape, panting slowly and heavily as he lowers his hands submissively, letting you take control of him again. It appears he’s finally figured out who’s in charge now. ");
 		outputText("You coil around his body, shifting around him and making sure he can’t move within your grasp, once he’s firmly trapped within beneath you, you continue working yourself around him. His thick erection pulsates within your grasp. Zenji grunts with need, gripping the earth beneath him, digging up the ground with his fists. More pre leaks out onto your tail. You can feel his length twitch, he’s ready to cum, do you let him?\n\n");
 		menu();
 		addButton(1, "Yes", loverZenjiSexTeaseNagaYes);
@@ -2136,7 +2136,7 @@ public function loverZenjiSexTease():void {
 	if (player.isBiped()) {
 		outputText("You inch closer, hovering your toes around his length, teasing him with light touches. Zenji restrains from thrusting into you, he groans loudly with need, desperate for your embrace. You glide your toes across his length, clenching around his girthy shaft drifting yourself around the tip of his head, sliding up and down his length, teasing him as he whimpers with need. You press your toes against his large sack, teasing him gently. You shift your presence underneath him as you lift his balls, letting them fall back against his crotch with a small thud.\n\n");
 		outputText("You slowly clench your toes around his girthy erection, the volumes of pre he’s already leaked onto himself gives you easier access to sliding your foot up and down his shaft. Zenji’s chest heaves, panting with greater need. He reaches his strong hands down to his girth, grabbing onto your foot as he desperately humps into you, trying to get himself off by using you.\n\n");
-		outputText("Not wanting him to forget who’s in charge you quickly slip out of his strong grip easily due to the sheer amount of pre that’s coated your foot. You whip your foot up to his face, flicking his nose with your toes, causing him to flinch, as you scold him again for being a naughty troll. Zenji’s mouth is agape, panting slowly and heavily, as he lowers his hands submissively, letting you take control of him again. It appears he’s finally figured out who’s in charge now. You continue working yourself around him, his erection pulsating within your grasp. Zenji grunts with need, gripping the earth beneath him, digging up the ground with his fists. More pre leaks out onto your toes. You can feel his length twitch, he’s ready to cum, do you let him?\n\n");
+		outputText("Not wanting him to forget who’s in charge you quickly slip out of his strong grip easily due to the sheer amount of pre that’s coated your foot. You whip your foot up to his face, flicking his nose with your toes, causing him to flinch as you scold him again for being a naughty troll. Zenji’s mouth is agape, panting slowly and heavily as he lowers his hands submissively, letting you take control of him again. It appears he’s finally figured out who’s in charge now. You continue working yourself around him, his erection pulsating within your grasp. Zenji grunts with need, gripping the earth beneath him, digging up the ground with his fists. More pre leaks out onto your toes. You can feel his length twitch, he’s ready to cum, do you let him?\n\n");
 		menu();
 		addButton(1, "Yes", loverZenjiSexTeaseBipedalYes);
 		addButton(3, "No", loverZenjiSexTeaseBipedalNo);
@@ -2485,7 +2485,7 @@ public function loverZenjiHalloweenEventEnding():void {
 public function loverZenjiHalloweenEventEndingBlowHim():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
-	outputText("You stop him right there, as you have something else in mind you want to do before leaving the stream.\n\n");
+	outputText("You stop him right there as you have something else in mind you want to do before leaving the stream.\n\n");
 	outputText("You tell Zenji to sit on the edge of the stream, you have a special reward for him since he kept you safe during such a dangerous time.\n\n");
 	outputText("He does so, his legs still within the water as you walk up to him. You pull down his loincloth, revealing the troll’s manhood.\n\n");
 	outputText("Zenji gives a small smirk, \"<i>Just can’t keep away can ya? I feel de same way…</i>\"\n\n");
