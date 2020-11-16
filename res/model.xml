@@ -1811,11 +1811,11 @@
             <case values="Face.HUMAN">
 				<show part="face/human"/>
 				<if test="cor &gt;=50">
-					<hide part="face/human"/>
+					<hide part="face/*"/>
 					<show part="face/demonlewd"/>
 				</if>
 				<if test="cor &gt;=100">
-					<hide part="face/human"/>
+					<hide part="face/*"/>
 					<show part="face/fairySmile"/>
 				</if>
 				<if test="cor &gt;=100 and lowerBody == LowerBody.FLOWER_LILIRAUNE">
