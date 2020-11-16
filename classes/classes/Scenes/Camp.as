@@ -1678,7 +1678,7 @@ public class Camp extends NPCAwareContent {
 			}
 			//Siegweird
 			if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) {
-				outputText("Siegweird is in your camp, his armor set to the side while he reads a book.\n\n");
+				outputText("Siegweird is in your [camp], his armor set to the side while he reads a book.\n\n");
 				buttons.add("Siegweird", SceneLib.siegweirdFollower.siegweirdMainCampMenu).hint("Check up on Siegweird.");
 			}
 			//Ember

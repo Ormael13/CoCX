@@ -68,9 +68,9 @@ public function HaveABoysBath():void {
 	if (flags[kFLAGS.IZMA_BROFIED] == 1) outputText("Since Ismael is a true guy now, he was allowed to bath with the boys.\n\n");
 	if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) outputText("Sitting near you, Konstantin relaxes and stretches his limbs. His large and thick build dwarf those from the other guys. While chit-chatting, he friendly puts one arm around you, and with the other he shamelessly washes his gigantic manhood, earning no few stares and some blushes from the other boys.\n\n");
     if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) {
-		outputText("Siegweird is sitting at the edge of the spring, clad in only his padded leather armor");
-		if (camp.maleNpcsHotBathCount() > 1) outputText(", he seems worried, keeping mostly to himself");
-		outputText(". Perhaps the heat isn't for everyone.\n\n");
+		outputText("Siegweird is at the edge of the hotspring, he's stipped down to his padded leather pants and only has his feet in the bubbling water.");
+		if (camp.maleNpcsHotBathCount() > 1) outputText(", he seems extremely nervous around all the other people");
+		outputText(". Maybe he's not one for the heat.\n\n");
 	}
 	if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) outputText("Zenji rests in the hot spring, his short fur carried by the bubbling water.\n\n");
 	if (emberScene.followerEmber() && flags[kFLAGS.EMBER_GENDER] == 1) outputText("Ember’s body and maleness could easily give all the other boys an inferiority complex.\n\n");
