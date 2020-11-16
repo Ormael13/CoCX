@@ -2210,33 +2210,7 @@ private function zenjiSleepToggle():void {
 private function sleepWith(arg:String = ""):void {
 	flags[kFLAGS.SLEEP_WITH] = arg;
 }
-/*
-public function loverZenjiSleepWith(timeQ:Number):void {
-	spriteSelect(SpriteDb.s_zenji);
-	if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0) {
-		outputText("You tell Zenji that you don't want him to watch over your camp tonight, instead, you want to spend the night with him in the cabin you've built.\n\n");
-		outputText("Zenji caresses your cheek with his soft and fuzzy hand, \"<i>If dat is ya wish, den who am I to deny ya request?</i>\" His hand slides down to your shoulder, giving it a gentle squeeze before letting you go.\n\n");
-		outputText("You grab onto Zenji’s hand, to which he responds by giving your palm a gentle squeeze. After a moment of holding his hand you realize what you were about to do and lead him to your cabin. Breaking the hand hold, he opens the door for you, letting you in first as you guide him to your bedroom.\n\n");
-		outputText("You take off your [armor], leaving you "+(player.isNaked2() ? "completely naked":"left in your underwear")+", Zenji strips off his loincloth, getting comfortable with you as well. It doesn't take long before he begins sporting an erection, you consider for a moment if you want to have sex with him before bed.\n\n");
-		menu();
-		if (player.hasVagina()) addButton(1, "Get Penetrated", loverZenjiSleepWithGetPenetrated);
-		else addButtonDisabled(1, "Get Penetrated", "You need a vagina for this scene.");
-		addButton(2,"Catch Anal", loverZenjiSleepWithCatchAnal);
-		addButton(3,"No Sex", loverZenjiSleepWithNoSex);
-	}
-	else {
-		outputText("You approach Zenji, ready to call it a day, and spend the rest of the night with him.\n\n");
-		outputText("As you approach, you ask him if he has any room in his bedroll for you. Zenji gives a wary glance around the camp, \"<i>Alright, [name], I will watch over you tonight, but I don’ wanna do anyting else. It doesn't feel safe letting my guard down when it’s so late, especially out in de open.</i>\"\n\n");
-		outputText("You sigh, you suppose that if you had somewhere safe to sleep in during the night he’d be more open to doing something with you. At least it’s better than sleeping alone.\n\n");
-		outputText("You curl up with Zenji in his sleeping roll, planning on sleeping for " + num2Text(timeQ) + " hours.");
-		if (player.tailType != Tail.NONE) outputText(" As you lie beside him, you feel his tail coil around you, you reflexively bring your [tail] to tangle with his, the two of you locking tails each other.");
-		else outputText(" As you lie beside him, you can feel his tail coil around you, protectively stroking your [legs].");
-		if (player.tailType == Tail.FOX) outputText(" You hate to admit it, but Zenji’s tail just might almost kind of rival yours in terms of how soft and cuddly it is.");
-		outputText("\n\nHe pulls you closer to his fuzzy body, \"<i>Good night, [name].</i>\"\n\n");
-		menu();
-		addButton(0,"Next",camp.sleepWrapper);
-	}
-}*/
+
 public function loverZenjiSleepWithMorning():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
@@ -2360,7 +2334,7 @@ public function loverZenjiSleepWithGetPenetratedMorning():void {
 	outputText("Zenji finally releases his grasp on you to stretch, liberating you from his enticing musk. You take the moment of deliverance to stretch.\n\n");
 	outputText("You look down, remembering just how hefty of a load Zenji poured out onto you, you’re not sure how or when exactly, but at some point, Zenji has cleaned the two of you off.\n\n");
 	outputText("Zenji helps you get dressed as he puts his loincloth on. \"<i>Ya ready for another day, champion?</i>\"\n\n");
-	outputText("You nod, ready for sure, but now you have the support of your lover backing you up. You tell him as you reach your hand up and give him a scratch behind his ear.\n\n");
+	outputText("You nod, ready for sure, but now you have the support of your lover backing you up. You tell him as you reach your [finger] up and give him a scratch behind his ear.\n\n");
 	outputText("Zenji sighs softly as he sinks into your ministrations, he’s like putty in your hands. \"<i>R-right dere, [name]... yeah… dat’s de spot…</i>\" He says with his eyes closed, as his ears twitch slightly. You can hear his tail swishing happily behind him like an excited puppy.\n\n");
 	outputText("You laugh, you’re not used to this side of him. It would seem his ears are quite the soft spot for him.\n\n");
 	outputText("As much as you enjoy toying with him you decide that you must continue with your day. You finally break the trance you’ve brought him in.\n\n");
@@ -2379,7 +2353,7 @@ public function loverZenjiSleepWithCatchAnalMorning():void {
 	outputText("Zenji finally releases his grasp on you to stretch, liberating you from his enticing musk. You take the moment of deliverance to stretch.\n\n");
 	outputText("You look down, remembering just how hefty of a load Zenji poured out onto you, you’re not sure how or when exactly, but at some point, Zenji has cleaned the two of you off.\n\n");
 	outputText("Zenji helps you get dressed as he puts his loincloth on. \"<i>Ya ready for another day, champion?</i>\"\n\n");
-	outputText("You nod, ready for sure, but now you have the support of your lover backing you up. You tell him as you reach your hand up and give him a scratch behind his ear.\n\n");
+	outputText("You nod, ready for sure, but now you have the support of your lover backing you up. You tell him as you reach your [finger] up and give him a scratch behind his ear.\n\n");
 	outputText("Zenji sighs softly as he sinks into your ministrations, he’s like putty in your hands. \"<i>R-right dere, [name]... yeah… dat’s de spot…</i>\" He says with his eyes closed, as his ears twitch slightly. You can hear his tail swishing happily behind him like an excited puppy.\n\n");
 	outputText("You laugh, you’re not used to this side of him. It would seem his ears are quite the soft spot for him.\n\n");
 	outputText("As much as you enjoy toying with him you decide that you must continue with your day. You finally break the trance you’ve brought him in.\n\n");

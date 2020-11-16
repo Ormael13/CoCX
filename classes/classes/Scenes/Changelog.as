@@ -49,10 +49,10 @@ package classes.Scenes
 			outputText("-3 new achievments. (3 shadow ones)\n");	
 			outputText("-Explore option named 42 was moved to silly mode.\n");
 			outputText("-Follower Zenji now scales up to PC lvl cap (150 > 185). He will also have gradualy increasing other combat stats beside raw stats and XP reward for beating him will be much higher.\n");
+			outputText("-Lover Zenji got more sex scenes. Lover Zenji also can impregnate PC - pregnancy takes 30 days and first two kids can be named.\n");
 			outputText("-All ascension perks from tab named 'Perk Select(2)' have increased max rank by 5.\n");
 			outputText("-As some crazy dungeon delver PC's went as far as 1000th room in Ebon labyrinth there would be placed chest with EXP in each 10th room aside boos rooms till that 1000th room.\n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
-			outputText("-Lover Zenji got more sex scenes. Also Lover Zenji can impregnate PC - pregnancy takes 30 days and first two kids can be named.\n");
 			outputText("-Increased max lvl camp npc's can attain after reaching end of training: Ceani (lvl 98), Etna (lvl 96), Electra (lvl 96), Ember (lvl 98), Isabella (lvl 98), Kiha (lvl 99), Kindra (lvl 99), Luna (lvl 99)\n");
 			outputText("-Increased max lvl npc's outside camp can attain: Akbal (lvl 98), Izumi (lvl 96), Minerva (lvl 95), Priscilla (lvl 98)\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 0,1,4
@@ -77,7 +77,7 @@ package classes.Scenes
 			outputText("-New tier 5 intelligence lvl-up perk: Raging Inferno (Ex). Req. Raging Inferno perk, Grand Archmage perk and 150+ int. Effect: Increase to cumulative damage by 10%. Penalty for turn without casted fire spell decreased by 5%.\n");
 			outputText("-New tier 9 intelligence lvl-up perk: Raging Inferno (Su). Req. Raging Inferno (Ex) perk, Grand Archmage (3rd circle) perk and 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling fire based attack. Penalty for turn without casted fire spell decreased by another 5%.\n");
 			outputText("-Raging Inferno, x, x, x perks effects was changed to boost respective elemental damage by 20% and each turn without casted the same element spell/special lowering damage bonus by 20% instead of reseting it fully.\n");
-			outputText("-\n");
+			outputText("-Lover Zenji get new options: Sleep With (variants for having or not cabin), x, x\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
