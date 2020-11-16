@@ -44,6 +44,7 @@ public function auroraCampMenu():void {
 		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") addButton(5, "Team", auroraHenchmanOption).hint("Ask Aurora to stay in camp.");
 		else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Aurora about accompaning you.");
 	}
+	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 	addButton(14, "Back", camp.campFollowers);
 }
 

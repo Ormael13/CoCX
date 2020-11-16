@@ -159,6 +159,7 @@ public function ExcelliaCampMainMenuFixHer2():void {
 			else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia") addButton(5, "Team", excelliaHenchmanOption).hint("Ask Excellia to stay in camp.");
 			else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Excellia about accompaning you.");
 		}
+		else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 		if (flags[kFLAGS.SLEEP_WITH] != "Excellia") addButton(6, "Sleep With", ExcelliaCampFixHerSleepToggle);
 		else addButton(6, "Sleep Alone", ExcelliaCampFixHerSleepToggle);
 	}

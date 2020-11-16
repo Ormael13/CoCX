@@ -5135,8 +5135,6 @@ use namespace CoC;
 				nekomataCounter++;
 			if (lowerBody == LowerBody.CAT)
 				nekomataCounter++;
-			if (rearBody.type == RearBody.NONE)
-				nekomataCounter++;
 			if (hasPartialCoat(Skin.FUR))
 				nekomataCounter++;
 			if (findPerk(PerkLib.Flexibility) > 0)
@@ -6877,34 +6875,43 @@ use namespace CoC;
 		public function frostWyrmScore():Number {
 			Begin("Player","racialScore","frost wyrm");
 			var frostWyrmCounter:Number = 0;
+			var frostWyrmCounter2:Number = 0;
 			if (ears.type == Ears.SNAKE || ears.type == Ears.DRAGON)
 				frostWyrmCounter++;
+				frostWyrmCounter2++;
 			if (eyes.type == Eyes.FROSTWYRM)
 				frostWyrmCounter++;
+				frostWyrmCounter2++;
 			if (faceType == Face.ANIMAL_TOOTHS)
 				frostWyrmCounter++;
+				frostWyrmCounter2++;
 			if (tongue.type == Tongue.DRACONIC)
 				frostWyrmCounter++;
+				frostWyrmCounter2++;
 			if (arms.type == Arms.FROSTWYRM)
 				frostWyrmCounter++;
+				frostWyrmCounter2++;
 			if (lowerBody == LowerBody.FROSTWYRM)
-				frostWyrmCounter+=3;
+				frostWyrmCounter += 3;
+				frostWyrmCounter2 += 3;
 			if (rearBody.type == RearBody.FROSTWYRM)
 				frostWyrmCounter++;
+				frostWyrmCounter2++;
 			if (wings.type == Wings.NONE)
 				frostWyrmCounter += 4;
+				frostWyrmCounter2 += 4;
+			if (hasPartialCoat(Skin.DRAGON_SCALES) || hasCoatOfType(Skin.DRAGON_SCALES))
+				frostWyrmCounter++;
+				frostWyrmCounter2++;
+			if (horns.type == Horns.FROSTWYRM)
+				frostWyrmCounter += 2;
+				frostWyrmCounter2 += 2;
+			if (horns.type == Horns.DRACONIC_X4_12_INCH_LONG || horns.type == Horns.DRACONIC_X2)
+				frostWyrmCounter -= 2;
 			if (hairColor == "white" || hairColor == "snow white" || hairColor == "glacial white" || hairColor == "silver" || hairColor == "platinum silver")
 				frostWyrmCounter++;
 			if (coatColor == "bluish black" || coatColor == "dark grey" || coatColor == "black" || coatColor == "midnight black" || coatColor == "midnight")
 				frostWyrmCounter++;
-			if (tallness > 120 && frostWyrmCounter >= 10)
-				frostWyrmCounter++;
-			if (hasPartialCoat(Skin.DRAGON_SCALES) || hasCoatOfType(Skin.DRAGON_SCALES))
-				frostWyrmCounter++;
-			if (horns.type == Horns.FROSTWYRM)
-				frostWyrmCounter += 2;
-			if (horns.type == Horns.DRACONIC_X4_12_INCH_LONG || horns.type == Horns.DRACONIC_X2)
-				frostWyrmCounter -= 2;
 			if (dragonCocks() > 0)
 				frostWyrmCounter++;
 			if (hasCock() && cocks.length < 6)
@@ -6913,6 +6920,8 @@ use namespace CoC;
 				frostWyrmCounter++;
 			if (lowerBody != LowerBody.FROSTWYRM)
 				frostWyrmCounter=0;
+			if (tallness > 120 && frostWyrmCounter >= 10)
+				frostWyrmCounter++;
 			if (hasPerk(PerkLib.DragonIceBreath))
 				frostWyrmCounter++;
 			if (hasPerk(PerkLib.DraconicBones))
@@ -6947,6 +6956,7 @@ use namespace CoC;
 				frostWyrmCounter += 1;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && frostWyrmCounter >= 8)
 				frostWyrmCounter += 1;
+			if (frostWyrmCounter2 < 5) frostWyrmCounter = frostWyrmCounter2;
 			if (isGargoyle()) frostWyrmCounter = 0;
 			frostWyrmCounter = finalRacialScore(frostWyrmCounter, Race.FROSTWYRM);
 			End("Player","racialScore");
@@ -11788,6 +11798,7 @@ use namespace CoC;
 			if(statusEffectv4(StatusEffects.CombatFollowerMitzi) > 0) addStatusValue(StatusEffects.CombatFollowerMitzi, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerNeisa) > 0) addStatusValue(StatusEffects.CombatFollowerNeisa, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerSiegweird) > 0) addStatusValue(StatusEffects.CombatFollowerSiegweird, 4, -1);
+			if(statusEffectv4(StatusEffects.CombatFollowerZenji) > 0) addStatusValue(StatusEffects.CombatFollowerZenji, 4, -1);
 
 			// All CombatStatusEffects are removed here
 			for (var a:/*StatusEffectClass*/Array=statusEffects.slice(),n:int=a.length,i:int=0;i<n;i++) {

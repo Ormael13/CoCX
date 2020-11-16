@@ -17,6 +17,7 @@ import coc.view.ButtonDataList;
 	{
 		public static var Z1stKid:String;
 		public static var Z2ndKid:String;
+		public static var ZenjiNightWatch:Number;
 
 		public function stateObjectName():String {
 			return "ZenjiScenes";
@@ -25,12 +26,14 @@ import coc.view.ButtonDataList;
 		public function resetState():void {
 			Z1stKid = "";
 			Z2ndKid = "";
+			ZenjiNightWatch = 0;
 		}
 
 		public function saveToObject():Object {
 			return {
 				"Z1stKid": Z1stKid,
-				"Z2ndKid": Z2ndKid
+				"Z2ndKid": Z2ndKid,
+				"ZenjiNightWatch": ZenjiNightWatch
 			};
 		}
 
@@ -38,6 +41,7 @@ import coc.view.ButtonDataList;
 			if (o) {
 				Z1stKid = o["Z1stKid"];
 				Z2ndKid = o["Z2ndKid"];
+				ZenjiNightWatch = o["ZenjiNightWatch"];
 			} else {
 				// loading from old save
 				resetState();
@@ -1050,8 +1054,13 @@ public function loverZenjiMainCampMenu():void {
 	addButton(1, "Talk", loverZenjiTalks).hint("Talk to Zenji.");
 	addButton(2, "Sex", loverZenjiSex).hint("Perhaps the hunk could be open to share an intimate moment with you.");
 	if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) addButton(3, "Glades", loverZenjiGlades).hint("Have Zenji help you in destroying the corrupted glades.");
-	addButtonDisabled(4, "Nightwatch", "NYI");
-	addButtonDisabled(5, "Team", "NYI");
+	addButton(4, "Nightwatch", loverZenjiNightWatch).hint("Toggle Zenji’s night watch on or off.");
+	if (player.hasPerk(PerkLib.BasicLeadership)) {
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Assist Me", zenjiHenchmanOption).hint("Ask Zenji to join you in adventures outside camp.");
+		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") addButton(5, "Assist Me", zenjiHenchmanOption).hint("Ask Zenji to stay in camp.");
+		else addButtonDisabled(5, "Assist Me", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Zenji about accompaning you.");
+	}
+	else addButtonDisabled(5, "Assist Me", "You need to have at least Basic Leadership to form a team.");
 	addButton(6, "Give Item", loverZenjiGiveItem);//.hint("Talk to Zenji.")
 	if (flags[kFLAGS.SLEEP_WITH] != "Zenji") addButton(7, "Sleep With", zenjiSleepToggle).hint("Spend your nights with Zenji.");
 	else addButton(7, "Sleep Alone", zenjiSleepToggle).hint("Stop sleeping with Zenji.");
@@ -2390,6 +2399,55 @@ public function loverZenjiGlades():void {
 		flags[kFLAGS.ZENJI_DESTROYING_CORRUPTED_GLADES] = 0;
 	}
 	doNext(loverZenjiMainCampMenu);
+}
+
+public function loverZenjiNightWatch():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	if (ZenjiNightWatch == 0) {
+		outputText("You tell Zenji that you want him to watch over the camp at night.\n\n");
+		outputText("Zenji pats his chest with his fist before giving you a half salute, \"<i>Te protegeré con mi vida, flaca.</i>\"\n\n");
+		ZenjiNightWatch = 1;
+	}
+	else {
+		outputText("You tell Zenji you don't want him to watch over the camp at night, he deserves some rest after all.\n\n");
+		outputText("Zenji shakes his head softly, \"<i>If dat be ya wish, so be it, but I won't hesitate to kill anyone who threatens you.</i>\"\n\n");
+		ZenjiNightWatch = 0;
+	}
+	doNext(loverZenjiMainCampMenu);
+}
+
+public function zenjiHenchmanOption():void
+{
+	clearOutput();
+	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+		outputText("Zenji readies his spear before flexing his arms, \"<i>¡Vamanos, flaca!</i>\"\n\n");
+		outputText("Zenji is now following you around.\n\n");
+		var strZenji:Number = 50;
+		var meleeAtkZenji:Number = 145;
+		if (player.level > 25 && player.level < 185) {
+			strZenji += 29 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			meleeAtkZenji += 5 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+		}
+		else if (player.level >= 185) {
+			strZenji += 957 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			meleeAtkZenji += 165 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+		}
+		strZenji *= (1 + (0.2 * player.newGamePlusMod()));
+		strZenji = Math.round(strZenji);
+		meleeAtkZenji += (1 + (int)(meleeAtkZenji / 5)) * player.newGamePlusMod();
+		player.createStatusEffect(StatusEffects.CombatFollowerZenji, strZenji, meleeAtkZenji, 0, 0);
+		flags[kFLAGS.PLAYER_COMPANION_1] = "Zenji";
+	}
+	else {
+		outputText("You tell Zenji that you don't want him to assist you in combat anymore.\n\n");
+		outputText("Zenji raises an eyebrow at you, \"<i>If dat's whatchu want, I will guard de camp, but you stay safe out dere.</i>\"\n\n");
+		outputText("Aurora is no longer following you around.\n\n");
+		player.removeStatusEffect(StatusEffects.CombatFollowerZenji);
+		flags[kFLAGS.PLAYER_COMPANION_1] = "";
+	}
+	doNext(loverZenjiMainCampMenu);
+	cheatTime(1/12);
 }
 
 public function loverZenjiMainCampMenuLeave():void {

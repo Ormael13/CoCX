@@ -317,6 +317,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CombatFollowerMitzi:StatusEffectType			= mk("Combat Follower: Mitzi");
 		public static const CombatFollowerNeisa:StatusEffectType			= mk("Combat Follower: Neisa");
 		public static const CombatFollowerSiegweird:StatusEffectType		= mk("Combat Follower: Siegweird");
+		public static const CombatFollowerZenji:StatusEffectType			= mk("Combat Follower: Zenji");
 		public static const Contraceptives:StatusEffectType                 = mk("Contraceptives");
 		public static const CuntStretched:StatusEffectType                  = mk("CuntStretched");
 		public static const DefenseCanopy:StatusEffectType                  = mk("Defense: Canopy");

@@ -7,6 +7,7 @@ import classes.Items.ShieldLib;
 import classes.Items.UndergarmentLib;
 import classes.Items.WeaponLib;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
+import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.internals.Utils;
@@ -588,6 +589,10 @@ public class EventParser {
                 }
                 else if (flags[kFLAGS.ANEMONE_WATCH] > 0) {
                     EngineCore.outputText("\n<b>Your sleep is momentarily disturbed by the sound of tiny clawed feet skittering away in all directions.  When you sit up, you can make out Kid A holding a struggling, concussed imp in a headlock and wearing a famished expression.  You catch her eye and she sheepishly retreats to a more urbane distance before beginning her noisy meal.</b>\n");
+                    return 1;
+                }
+                else if (ZenjiScenes.ZenjiNightWatch == 1) {
+                    EngineCore.outputText("\n<b>Zenji informs you that he managed to fend off creatures that tried to assault you during the night.</b>\n");
                     return 1;
                 }
                 else if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "") && (player.inte / 5) >= Utils.rand(15)) {

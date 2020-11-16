@@ -221,10 +221,13 @@ public function alvinaMainCampMenu():void
 		if (flags[kFLAGS.ALVINA_FOLLOWER] == 16 || flags[kFLAGS.ALVINA_FOLLOWER] == 18) addButton(2, "Confession", alvinaMainCampMenuConfession).hint("If you not know what it mean then... whatever I lost faith in your player intelligance.");
 	}
 	else addButtonDisabled(2, "???", "Need to finish Advanced Study to unlock this option.");
-	if (player.hasPerk(PerkLib.BasicLeadership) && flags[kFLAGS.ALVINA_FOLLOWER] >= 19) {
-		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(4, "Team", alvinaHenchmanOption).hint("Ask Alvina to join you in adventures outside camp.");
-		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") addButton(4, "Team", alvinaHenchmanOption).hint("Ask Alvina to stay in camp.");
-		else addButtonDisabled(4, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Alvina about accompaning you.");
+	if (flags[kFLAGS.ALVINA_FOLLOWER] >= 19) {
+		if (player.hasPerk(PerkLib.BasicLeadership)) {
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", alvinaHenchmanOption).hint("Ask Alvina to join you in adventures outside camp.");
+			else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") addButton(5, "Team", alvinaHenchmanOption).hint("Ask Alvina to stay in camp.");
+			else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Alvina about accompaning you.");
+		}
+		else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 	}
 	if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) addButtonDisabled(10, "Study", "You already completed basic Study.");
 	else addButton(10, "Study", alvinaCampStudy);
