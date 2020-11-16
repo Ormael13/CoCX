@@ -1335,7 +1335,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				}
 				if(player.biggestLactation() >= 1.5 && player.biggestTitSize() > 2 && player.mostBreastsPerRow() >= 2 && player.breastRows.length >= 1) outputText("Every sensual peak within you is mirrored with small spurts of milk from your nipples.  It eventually trickles down to Jojo's tongue, spurring his efforts on.  ");
 				outputText("The mousey gets more and more in to eating your box, making it harder and harder to stave off an orgasm.  You wrap ");
-				if(player.lowerBody == LowerBody.NAGA) outputText("your coils ");
+				if(player.isNaga()) outputText("your coils ");
 				else if(player.lowerBody == LowerBody.GOO) outputText("your jiggling goo ");
 				else outputText("your thighs ");
 				outputText("around his head and quiver with passion, ");

@@ -29,7 +29,7 @@ public function nagaEncounter():void {
 	//Create status if needed
 	if(!player.hasStatusEffect(StatusEffects.Naga)) player.createStatusEffect(StatusEffects.Naga,0,0,0,0);
 	clearOutput();
-	if (player.lowerBody == LowerBody.NAGA && flags[kFLAGS.SAMIRAH_FOLLOWER] < 5) {
+	if (player.isNaga() && flags[kFLAGS.SAMIRAH_FOLLOWER] < 5) {
 		if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 5) {
 			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 1) flags[kFLAGS.SAMIRAH_FOLLOWER] = 1;
 			else flags[kFLAGS.SAMIRAH_FOLLOWER]++;
@@ -58,7 +58,7 @@ public function nagaEncounter():void {
 		}
 		outputText("She lets out a soft moan and leans her head forward, pressing her lips against yours. You squeeze her body even more firmly against yours in response, the tips of your tails wrapping around one another. You open your mouth slightly and press your tongue against her lips. She offers no resistance and you begin caressing the inside of her mouth with your tongue, circling her fangs as she uses her own tongue to gently stroke ");
 		//[If player has fangs]
-		if(player.faceType == Face.SNAKE_FANGS) outputText("your own.");
+		if(player.faceType == Face.SNAKE_FANGS || player.faceType == Face.DRAGON_FANGS || player.faceType == Face.SALAMANDER_FANGS || player.faceType == Face.SPIDER_FANGS || player.faceType == Face.YETI_FANGS || player.faceType == Face.DEVIL_FANGS || player.faceType == Face.ORC_FANGS || player.faceType == Face.WOLF_FANGS) outputText("your own.");
 		//[player has no fangs]
 		else outputText("the inside of your mouth.");
 		outputText("\n\n");
@@ -152,7 +152,7 @@ public function nagaEncounter():void {
 		dynStats("lus", player.lib/5);
 		return;
 	}
-	if (player.lowerBody == LowerBody.NAGA && (flags[kFLAGS.SAMIRAH_FOLLOWER] >= 5 && flags[kFLAGS.SAMIRAH_FOLLOWER] < 10)) {
+	if (player.isNaga() && (flags[kFLAGS.SAMIRAH_FOLLOWER] >= 5 && flags[kFLAGS.SAMIRAH_FOLLOWER] < 10)) {
 		SceneLib.samirah.desertEncounters();
 		return;
 	}

@@ -67,7 +67,7 @@
 <model name="demo" dir="./res/charview/" width="200" height="220" scale="2" originX="15" originY="10">
     <palette>
         <!--Colors common for skin/hair/fur/scales/... go here. Can be overriden later-->
-                    <common>
+            <common>
             <color name="albino">#f2f2e8</color>
             <color name="aqua">#00cccc</color>
             <color name="ashen">#817d79</color>
@@ -126,6 +126,7 @@
             <color name="white">#e6e6eb</color>
             <color name="yellow">#edef6b</color>
             <color name="aphotic blue-black">#08155e</color>
+			<color name="bluish black">#22263a</color>
             <color name="ashen grayish-blue">#93b6c8</color>
             <color name="creamy-white">#f2ebde</color>
             <color name="crimson platinum">#d56c6c</color>
@@ -698,7 +699,7 @@
         <cell rect="421,110,29,32" name="face/cheshire" dx="90" dy="37"/>
         <cell rect="451,110,29,32" name="face/panda" dx="90" dy="37"/>
         <cell rect="481,110,29,32" name="face/bovine" dx="90" dy="37"/>
-        <cell rect="511,110,29,32" name="face/demonlewd" dx="90" dy="37"/>
+        <cell rect="511,110,29,32" name="face/demonlewd" dx="90" dy="38"/>
         <cell rect="541,110,29,32" name="face/ghost" dx="91" dy="38"/>
         <cell rect="571,110,29,32" name="face/melancholic" dx="91" dy="38"/>
         <cell rect="601,110,29,32" name="face/caveWyrm" dx="91" dy="38"/>

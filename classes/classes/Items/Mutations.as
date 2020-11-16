@@ -3427,10 +3427,10 @@ public final class Mutations extends MutationsHelper {
                 changes++;
                 if (player.lowerBody == LowerBody.HUMAN) outputText("\n\nYou stagger as your feet change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
                 if (player.lowerBody == LowerBody.DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
-                if (player.lowerBody == LowerBody.NAGA) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
+                if (player.isNaga()) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
                 if (player.lowerBody == LowerBody.MELKIE) humanizeLowerBody();
                 //Catch-all
-                if (player.lowerBody > LowerBody.NAGA) outputText("\n\nYou stagger as your [feet] change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
+                if (player.isNaga()) outputText("\n\nYou stagger as your [feet] change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
                 outputText("  A coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have hooves in place of your feet!</b>");
                 setLowerBody(LowerBody.HOOFED);
                 player.legCount = 2;
@@ -14407,9 +14407,9 @@ public final class Mutations extends MutationsHelper {
 
         //Libido
         if (rand(2) == 0 && changes < changeLimit) {
-            outputText("\n\n A knot of fire in your gut doubles you over but passes after a few moments. " +
+            outputText("\n\nA knot of fire in your gut doubles you over but passes after a few moments. " +
                     "As you straighten you can feel the need seeping into you, puddling in your nethers."
-                    + "An instinctive desire to mate spreads through you, increasing your lust and boosting your sex-drive.");
+                    + " An instinctive desire to mate spreads through you, increasing your lust and boosting your sex-drive.");
             MutagenBonus("lib", 10);
             changes++;
         }
