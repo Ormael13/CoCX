@@ -68,12 +68,13 @@ public function MitziCampMainMenu2():void {
 	addButton(2, "Camp", mitziCamp);
 	if (player.hasPerk(PerkLib.BasicLeadership)) {
 		if (flags[kFLAGS.MITZI_DAUGHTERS] >= 6) {
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(3, "Assist me", mitziHenchmanOption).hint("Ask Mitzi to join you in adventures outside camp.");
-			else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") addButton(3, "Assist me", mitziHenchmanOption).hint("Ask Mitzi to stay in camp.");
-			else addButtonDisabled(3, "Assist me", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Mitzi about accompaning you.");
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Assist me", mitziHenchmanOption).hint("Ask Mitzi to join you in adventures outside camp.");
+			else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") addButton(5, "Assist me", mitziHenchmanOption).hint("Ask Mitzi to stay in camp.");
+			else addButtonDisabled(5, "Assist me", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Mitzi about accompaning you.");
 		}
-		else addButtonDisabled(3, "Assist me", "She not have enought daughters (6+) to accompaning you.");
+		else addButtonDisabled(5, "Assist me", "She not have enought daughters (6+) to accompaning you.");
 	}
+	else addButtonDisabled(5, "Assist me", "You need to have at least Basic Leadership to form a team with Mitzi.");
 	addButton(4, "Sex", mitziSexMenu);
 	addButton(14, "Back", camp.campFollowers);
 }

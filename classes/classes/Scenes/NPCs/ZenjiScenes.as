@@ -17,6 +17,7 @@ import coc.view.ButtonDataList;
 	{
 		public static var Z1stKid:String;
 		public static var Z2ndKid:String;
+		public static var ZenjiNightWatch:Number;
 
 		public function stateObjectName():String {
 			return "ZenjiScenes";
@@ -25,12 +26,14 @@ import coc.view.ButtonDataList;
 		public function resetState():void {
 			Z1stKid = "";
 			Z2ndKid = "";
+			ZenjiNightWatch = 0;
 		}
 
 		public function saveToObject():Object {
 			return {
 				"Z1stKid": Z1stKid,
-				"Z2ndKid": Z2ndKid
+				"Z2ndKid": Z2ndKid,
+				"ZenjiNightWatch": ZenjiNightWatch
 			};
 		}
 
@@ -38,6 +41,7 @@ import coc.view.ButtonDataList;
 			if (o) {
 				Z1stKid = o["Z1stKid"];
 				Z2ndKid = o["Z2ndKid"];
+				ZenjiNightWatch = o["ZenjiNightWatch"];
 			} else {
 				// loading from old save
 				resetState();
@@ -276,7 +280,7 @@ public function part1TrollEncounterChallangeToughness():void {
 	outputText("\"<i>Ahaha, so you tink you can best me at ma toughness? I will see just how tough you are.</i>\"\n\n");
 	outputText("He leads you to a pile of rocks within the area, there he gestures to a large boulder, \"<i>Toughness be about he resilient one is, how much can you handle, how much can you take before ya break?</i>\"\n\n");
 	outputText("The troll eyes you carefully, then walks over to the pile of rocks and places it by your feet, \"<i>Dis rock looks like a good size for ya.</i>\"\n\n");
-	outputText("He grabs a rock and places it at his foot, \"<i>I want ya ta hold dis rock high above your head wit only two arms, as high as your arms can reach, first one to drop loses.</i>\"\n\n");
+	outputText("He grabs a rock and places it at his foot, \"<i>I want ya ta hold dis rock high above your head wit only two arms as high as your arms can reach, first one to drop loses.</i>\"\n\n");
 	outputText("Seems simple enough, you wait for his command and on queue, you hold the rock high above your head as high as your arms will let you.\n\n");
 	if (player.tou < (115 + (player.newGamePlusMod() * 23))) {
 		outputText("After some time of holding the rock above your head, your arms begin to grow weary, the rock, despite not being too heavy, is beginning to put a burden on your arms as its weight begins to feel like it's increasing. You look over to the troll who seems to be having no trouble carrying his rock above his head.\n\n");
@@ -408,7 +412,7 @@ public function part1TrollEncounterSex():void {
 
 public function part1TrollEncounterPayWithGems():void {
 	player.gems -= 25;
-	outputText("You pull out 25 gems from your gem pouch, as you do so he hops down from the tree. He holds out a four-fingered palm, awaiting your payment and you fork the gems over. The entire time he looks directly into your eyes, but at the same time there seems to be a tinge of disappointment within his.\n\n");
+	outputText("You pull out 25 gems from your gem pouch as you do so he hops down from the tree. He holds out a four-fingered palm, awaiting your payment and you fork the gems over. The entire time he looks directly into your eyes, but at the same time there seems to be a tinge of disappointment within his.\n\n");
 	outputText("As you enter the opening in the bog you search around the area and wonder what makes it so special that he wanted to guard it against you.\n\n");
 	part1TrollEncounterRewards();
 }
@@ -493,7 +497,7 @@ public function part2TrollEncounterRepeat():void {
 	outputText("As you are traversing in the bog, you note that you’re near the clearing where Zenji usually resides.\n\n");
 	outputText("It doesn't take long until he hops down to greet you, seemingly out of nowhere.\n\n");
 	if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] <= 30) {
-		outputText("\"<i>It’s you again, [name], my friend.</i>\" Zenji welcomes, but there’s concern in his words, \"<i>I… I kinda missed you… Are ya doing well? Maybe… Er… I guess we can still train or spar..?</i>\"\n\nZenji seems very unsure of his words, as he wants to offer something else but refuses to. He shakes his head, as if to clear a thought from his mind as he returns to a more neutral stance.\n\n");
+		outputText("\"<i>It’s you again, [name], my friend.</i>\" Zenji welcomes, but there’s concern in his words, \"<i>I… I kinda missed you… Are ya doing well? Maybe… Er… I guess we can still train or spar..?</i>\"\n\nZenji seems very unsure of his words as if he wants to offer something else but refuses to. He shakes his head as if to clear a thought from his mind as he returns to a more neutral stance.\n\n");
 	}
 	else outputText("\"<i>Ah, [name],</i>\" he welcomes, \"<i>What brings ya here? Didja want to train or perhaps go for anoda sparring match?</i>\"\n\nYou consider the few options, it appears he doesn’t want to talk about anything else.\n\n");
 	menu();
@@ -1050,8 +1054,13 @@ public function loverZenjiMainCampMenu():void {
 	addButton(1, "Talk", loverZenjiTalks).hint("Talk to Zenji.");
 	addButton(2, "Sex", loverZenjiSex).hint("Perhaps the hunk could be open to share an intimate moment with you.");
 	if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) addButton(3, "Glades", loverZenjiGlades).hint("Have Zenji help you in destroying the corrupted glades.");
-	addButtonDisabled(4, "Nightwatch", "NYI");
-	addButtonDisabled(5, "Team", "NYI");
+	addButton(4, "Nightwatch", loverZenjiNightWatch).hint("Toggle Zenji’s night watch on or off.");
+	if (player.hasPerk(PerkLib.BasicLeadership)) {
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Assist Me", zenjiHenchmanOption).hint("Ask Zenji to join you in adventures outside camp.");
+		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") addButton(5, "Assist Me", zenjiHenchmanOption).hint("Ask Zenji to stay in camp.");
+		else addButtonDisabled(5, "Assist Me", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Zenji about accompaning you.");
+	}
+	else addButtonDisabled(5, "Assist Me", "You need to have at least Basic Leadership to form a team.");
 	addButton(6, "Give Item", loverZenjiGiveItem);//.hint("Talk to Zenji.")
 	if (flags[kFLAGS.SLEEP_WITH] != "Zenji") addButton(7, "Sleep With", zenjiSleepToggle).hint("Spend your nights with Zenji.");
 	else addButton(7, "Sleep Alone", zenjiSleepToggle).hint("Stop sleeping with Zenji.");
@@ -1381,7 +1390,7 @@ public function loverZenjiGiveItemLotion():void {
 	outputText("You nod your head and tell him this will give him that extra edge for being cuddly.\n\n");
 	outputText("Zenji gives you a soft smile as he nods back, signifying that he's ready for the oil. You uncork the bottle of lotion, lathering some on your hands before gently applying the contents onto his soft hair.\n\n");
 	outputText("He snickers softly as you lather his hair in the lotion. \"<i>Ha, ahaha! Careful!</i>\" He squirms slightly, obviously a bit ticklish, but his face tells you that he's enjoying it. You make way with lathering the lotion all over his body, coating his hair in the slick salve, and thoroughly rubbing it in.\n\n");
-	outputText("You slide your fingers across his muscular arm. It can be hard to notice sometimes, but you can see and feel his bicep veins underneath all the hair. You continue massaging the lotion into his hair, getting a feel for his toned triceps and dense biceps. As you move to his other arm, he raises it for you, flexing his massive biceps, showing off just how muscular he is. As you rub your fingers through his solid arm he gives you a smug grin, hoping to entice you with just the size of his body alone. \"<i>Yeah, I have been working out, as ya can see…</i>\"\n\n");
+	outputText("You slide your fingers across his muscular arm. It can be hard to notice sometimes, but you can see and feel his bicep veins underneath all the hair. You continue massaging the lotion into his hair, getting a feel for his toned triceps and dense biceps. As you move to his other arm, he raises it for you, flexing his massive biceps, showing off just how muscular he is. As you rub your fingers through his solid arm he gives you a smug grin, hoping to entice you with just the size of his body alone. \"<i>Yeah, I have been working out as ya can see…</i>\"\n\n");
 	outputText("You smirk in response, he can be such a showoff sometimes, but it is kind of cute.\n\n");
 	outputText("You rub your hands along his shoulders before working towards his manly pectorals. You feel his pecs twitch slightly at your touch as you apply the cool lotion.\n\n");
 	outputText("As your hands reach his collar, you clasp your fingers around the colorful beaded necklace around his neck. It’s simple and doesn’t seem like it’s made with anything too expensive.\n\n");
@@ -1737,8 +1746,8 @@ public function loverZenjiTakeVaginal():void {
 	outputText("Zenji releases you, helping you clean up from the mess of his huge orgasm and get dressed. Finally, you are ready to continue your day.\n\n");
 	player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
 	player.sexReward("cum", "Vaginal");
-	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
-	else player.knockUp(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
+	if (player.isGoblinoid()) player.knockUpForce(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	else player.knockUpForce(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1765,7 +1774,7 @@ public function loverZenjiPitchAnal():void {
 	outputText("You reach around over him, grabbing his throbbing manhood as you begin to jerk him off. You dig a finger underneath his foreskin, toying with his glans.\n\n");
 	outputText("\"<i>Ah! [name]... D-don’t stop…</i>\" Zenji moans, his tail reflexively coils around your waist, holding onto you for support.\n\n");
 	outputText("You obey his request as you continue jerking off his shaft. Zenji buries his face into his pillow, growling softly.\n\n");
-	outputText("You continue thrusting, his ass is fairly tight, as he slowly bucks against you, trying to get a feel for your length.\n\n");
+	outputText("You continue thrusting, his ass is fairly tight as he slowly bucks against you, trying to get a feel for your length.\n\n");
 	outputText("Trying to see if you can awaken something deeper within him, you buck into him as hard as you can.\n\n");
 	outputText("Zenji yelps in response as you feel a surge of pre leak down onto your fingers.\n\n");
 	outputText("You laugh at his vulnerability, he seems to enjoy it when you go rough, so you continue bucking into him with greater vigor. It doesn’t last long though as you feel yourself nearing your climax.\n\n");
@@ -1982,7 +1991,7 @@ public function loverZenjiHotSpringRideAnal():void{
 	else if (player.hasCock()) outputText("Girlcum drips out past your lips, mixing into the bubbling water");
 	else outputText("Girlcum drips out past your lips, mixing into the bubbling water");
 	outputText(" as you try to milk his dick of everything it’s worth.\n\n");
-	outputText("Zenji grabs onto you tightly with a stern hiss, as he finally cums within your rear, his erection pulsing with need as he unloads everything he has. His grip loosens as he pumps several loads into your awaiting backdoor, the cum out slightly into the hot spring due to the sheer volume.\n\n");
+	outputText("Zenji grabs onto you tightly with a stern hiss as he finally cums within your rear, his erection pulsing with need as he unloads everything he has. His grip loosens as he pumps several loads into your awaiting backdoor, the cum out slightly into the hot spring due to the sheer volume.\n\n");
 	outputText("Zenji finally relaxes as you rest above him, being carried gently by the water. You notice he’s sweating profusely.\n\n");
 	outputText("\"<i>So… hot… it’s so hot, [name]. Let’s get out of de hotspring…</i>\" He pants exasperatedly as he reaches for his loincloth. Zenji stands up as he grabs onto your hand. He climbs out of the hotspring before pulling you up with him. He pulls you over his stomach as he lies on the ground briefly with you.\n\n");
 	outputText("You rest on top of him for a moment, wiping the sweat from his face, moving down and rubbing his hot and sweaty arms before you decide to dry off with him. His tail swishes along the ground beneath affectionately you while you scrape off his sweat.\n\n");
@@ -2017,8 +2026,8 @@ public function loverZenjiHotSpringRideVaginal():void{
 	outputText("Zenji looks down at his soaked loincloth, \"<i>Ugh… I did not tink dis through, I need ta get another piece of cloth.</i>\"\n\n");
 	player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
 	player.sexReward("cum", "Vaginal");
-	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
-	else player.knockUp(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
+	if (player.isGoblinoid()) player.knockUpForce(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	else player.knockUpForce(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -2067,7 +2076,7 @@ public function loverZenjiSexGetLicked():void {
 	clearOutput();
 	outputText("You ask Zenji that now since he has smaller tusks if he's willing to give you a little treat in return.\n\n");
 	outputText("Zenji gives a small chuckle, \"<i>Is that de only reason ya wanted me to have small tusks? Well, I can imagine what ya want and I can't lie, I’ve been wanting ta do the same.</i>\"\n\n");
-	outputText("You lie down on the ground as Zenji pulls down your [armor], as he unveils your moist cooter.\n\n");
+	outputText("You lie down on the ground as Zenji pulls down your [armor] as he unveils your [vagina].\n\n");
 	outputText("He leans close, you can feel his breath on your labia as he bends closer, he starts by gently licking your outer walls, teasing your box with his long tongue. He gently presses his ashen tongue against your clit before sliding his way past your netherlips.\n\n");
 	outputText("You shudder at his ministrations, how is he so talented at this despite his lack of experience? He doesn't stop as he presses deeper into your womb, licking his way into you as he eats you out.\n\n");
 	outputText("His mouth is pressed against your lips as he drags his tongue around your canals, making sure to cover the parts of you that he's neglected. You can feel the pressure building up within your loins, you beg him to continue, you're so close now. He keeps going at you, licking his way around you before you finally find yourself cumming. ");
@@ -2127,7 +2136,7 @@ public function loverZenjiSexTease():void {
 	if (player.isNaga()) {
 		outputText("You slither closer, wrapping your tail around his length, teasing him with light touches. Zenji restrains from thrusting into you, he groans loudly with need, desperate for your scaly embrace. You glide the slender tip of your tail across his length, drifting yourself around the tip of his head. You continue sliding around his length, teasing him as he whimpers with need. You lift his heavy sack with your tail before letting it fall back to his crotch with a small thud.\n\n");
 		outputText("You slowly wrap your tail around his girthy erection, the volumes of pre he’s already leaked onto himself gives you easier access to sliding your tail up and down his shaft. Zenji’s chest heaves, panting with greater need. He reaches his strong hands down to his girth, grabbing onto the base of your tail as he desperately humps into you, trying to get himself off by using you.\n\n");
-		outputText("Not wanting him to forget who’s in charge you quickly slip out of his strong grip easily due to the sheer amount of pre that’s coated your tail. You whip your tail up to his face, flicking his nose causing him to flinch, as you scold him again for being a naughty troll. Zenji’s mouth is agape, panting slowly and heavily, as he lowers his hands submissively, letting you take control of him again. It appears he’s finally figured out who’s in charge now. ");
+		outputText("Not wanting him to forget who’s in charge you quickly slip out of his strong grip easily due to the sheer amount of pre that’s coated your tail. You whip your tail up to his face, flicking his nose causing him to flinch as you scold him again for being a naughty troll. Zenji’s mouth is agape, panting slowly and heavily as he lowers his hands submissively, letting you take control of him again. It appears he’s finally figured out who’s in charge now. ");
 		outputText("You coil around his body, shifting around him and making sure he can’t move within your grasp, once he’s firmly trapped within beneath you, you continue working yourself around him. His thick erection pulsates within your grasp. Zenji grunts with need, gripping the earth beneath him, digging up the ground with his fists. More pre leaks out onto your tail. You can feel his length twitch, he’s ready to cum, do you let him?\n\n");
 		menu();
 		addButton(1, "Yes", loverZenjiSexTeaseNagaYes);
@@ -2136,7 +2145,7 @@ public function loverZenjiSexTease():void {
 	if (player.isBiped()) {
 		outputText("You inch closer, hovering your toes around his length, teasing him with light touches. Zenji restrains from thrusting into you, he groans loudly with need, desperate for your embrace. You glide your toes across his length, clenching around his girthy shaft drifting yourself around the tip of his head, sliding up and down his length, teasing him as he whimpers with need. You press your toes against his large sack, teasing him gently. You shift your presence underneath him as you lift his balls, letting them fall back against his crotch with a small thud.\n\n");
 		outputText("You slowly clench your toes around his girthy erection, the volumes of pre he’s already leaked onto himself gives you easier access to sliding your foot up and down his shaft. Zenji’s chest heaves, panting with greater need. He reaches his strong hands down to his girth, grabbing onto your foot as he desperately humps into you, trying to get himself off by using you.\n\n");
-		outputText("Not wanting him to forget who’s in charge you quickly slip out of his strong grip easily due to the sheer amount of pre that’s coated your foot. You whip your foot up to his face, flicking his nose with your toes, causing him to flinch, as you scold him again for being a naughty troll. Zenji’s mouth is agape, panting slowly and heavily, as he lowers his hands submissively, letting you take control of him again. It appears he’s finally figured out who’s in charge now. You continue working yourself around him, his erection pulsating within your grasp. Zenji grunts with need, gripping the earth beneath him, digging up the ground with his fists. More pre leaks out onto your toes. You can feel his length twitch, he’s ready to cum, do you let him?\n\n");
+		outputText("Not wanting him to forget who’s in charge you quickly slip out of his strong grip easily due to the sheer amount of pre that’s coated your foot. You whip your foot up to his face, flicking his nose with your toes, causing him to flinch as you scold him again for being a naughty troll. Zenji’s mouth is agape, panting slowly and heavily as he lowers his hands submissively, letting you take control of him again. It appears he’s finally figured out who’s in charge now. You continue working yourself around him, his erection pulsating within your grasp. Zenji grunts with need, gripping the earth beneath him, digging up the ground with his fists. More pre leaks out onto your toes. You can feel his length twitch, he’s ready to cum, do you let him?\n\n");
 		menu();
 		addButton(1, "Yes", loverZenjiSexTeaseBipedalYes);
 		addButton(3, "No", loverZenjiSexTeaseBipedalNo);
@@ -2210,33 +2219,7 @@ private function zenjiSleepToggle():void {
 private function sleepWith(arg:String = ""):void {
 	flags[kFLAGS.SLEEP_WITH] = arg;
 }
-/*
-public function loverZenjiSleepWith(timeQ:Number):void {
-	spriteSelect(SpriteDb.s_zenji);
-	if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0) {
-		outputText("You tell Zenji that you don't want him to watch over your camp tonight, instead, you want to spend the night with him in the cabin you've built.\n\n");
-		outputText("Zenji caresses your cheek with his soft and fuzzy hand, \"<i>If dat is ya wish, den who am I to deny ya request?</i>\" His hand slides down to your shoulder, giving it a gentle squeeze before letting you go.\n\n");
-		outputText("You grab onto Zenji’s hand, to which he responds by giving your palm a gentle squeeze. After a moment of holding his hand you realize what you were about to do and lead him to your cabin. Breaking the hand hold, he opens the door for you, letting you in first as you guide him to your bedroom.\n\n");
-		outputText("You take off your [armor], leaving you "+(player.isNaked2() ? "completely naked":"left in your underwear")+", Zenji strips off his loincloth, getting comfortable with you as well. It doesn't take long before he begins sporting an erection, you consider for a moment if you want to have sex with him before bed.\n\n");
-		menu();
-		if (player.hasVagina()) addButton(1, "Get Penetrated", loverZenjiSleepWithGetPenetrated);
-		else addButtonDisabled(1, "Get Penetrated", "You need a vagina for this scene.");
-		addButton(2,"Catch Anal", loverZenjiSleepWithCatchAnal);
-		addButton(3,"No Sex", loverZenjiSleepWithNoSex);
-	}
-	else {
-		outputText("You approach Zenji, ready to call it a day, and spend the rest of the night with him.\n\n");
-		outputText("As you approach, you ask him if he has any room in his bedroll for you. Zenji gives a wary glance around the camp, \"<i>Alright, [name], I will watch over you tonight, but I don’ wanna do anyting else. It doesn't feel safe letting my guard down when it’s so late, especially out in de open.</i>\"\n\n");
-		outputText("You sigh, you suppose that if you had somewhere safe to sleep in during the night he’d be more open to doing something with you. At least it’s better than sleeping alone.\n\n");
-		outputText("You curl up with Zenji in his sleeping roll, planning on sleeping for " + num2Text(timeQ) + " hours.");
-		if (player.tailType != Tail.NONE) outputText(" As you lie beside him, you feel his tail coil around you, you reflexively bring your [tail] to tangle with his, the two of you locking tails each other.");
-		else outputText(" As you lie beside him, you can feel his tail coil around you, protectively stroking your [legs].");
-		if (player.tailType == Tail.FOX) outputText(" You hate to admit it, but Zenji’s tail just might almost kind of rival yours in terms of how soft and cuddly it is.");
-		outputText("\n\nHe pulls you closer to his fuzzy body, \"<i>Good night, [name].</i>\"\n\n");
-		menu();
-		addButton(0,"Next",camp.sleepWrapper);
-	}
-}*/
+
 public function loverZenjiSleepWithMorning():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
@@ -2248,7 +2231,7 @@ public function loverZenjiSleepWithMorning():void {
 	outputText("Zenji sighs softly as he sinks into your ministrations, he’s like putty in your hands. \"<i>R-right dere, [name]... yeah… dat’s de spot…</i>\" He says with his eyes closed, as his ears twitch slightly. You can hear his tail swishing happily behind him like an excited puppy.\n\n");
 	outputText("You laugh, you’re not used to this side of him. It would seem his ears are quite the soft spot for him.\n\n");
 	outputText("As much as you enjoy toying with him you decide that you must continue with your day. You finally break the trance you’ve brought him in.\n\n");
-	outputText("Zenji seems visibly disheartened when you remove your [hand] from his ear before he blushes softly. Before you can say anything, he reaches his hand out to hold yours, \"<i>Let's get on wit de day den.</i>\"\n\n");
+	outputText("Zenji seems visibly disheartened when you remove your [finger] from his ear before he blushes softly. Before you can say anything, he reaches his hand out to hold yours, \"<i>Let's get on wit de day den.</i>\"\n\n");
 	outputText("You spend a moment looking into his eyes, holding your hand with his. You know you can take on any challenge with him by your side. The day ahead waits for you to put that thought to the test.");
 	doNext(playerMenu);
 }
@@ -2292,8 +2275,8 @@ public function loverZenjiSleepWithGetPenetrated(timeQ:Number):void {
 	outputText("\"<i>Dat... was amazing...</i>\" He whispers as his tail coils around you, \"<i>Sleep tight, [name]...</i>\"\n\n");
 	outputText("Zenji gently strokes your back as he curls up with you.\n\n");
 	outputText("You plan on sleeping for " + num2Text(timeQ) + " hours.\n\n");
-	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
-	else player.knockUp(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
+	if (player.isGoblinoid()) player.knockUpForce(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	else player.knockUpForce(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
 	player.addStatusValue(StatusEffects.ZenjiZList, 2, 1);
 	menu();
 	addButton(0,"Next",camp.sleepWrapper);
@@ -2360,11 +2343,11 @@ public function loverZenjiSleepWithGetPenetratedMorning():void {
 	outputText("Zenji finally releases his grasp on you to stretch, liberating you from his enticing musk. You take the moment of deliverance to stretch.\n\n");
 	outputText("You look down, remembering just how hefty of a load Zenji poured out onto you, you’re not sure how or when exactly, but at some point, Zenji has cleaned the two of you off.\n\n");
 	outputText("Zenji helps you get dressed as he puts his loincloth on. \"<i>Ya ready for another day, champion?</i>\"\n\n");
-	outputText("You nod, ready for sure, but now you have the support of your lover backing you up. You tell him as you reach your [hand] up and give him a scratch behind his ear.\n\n");
+	outputText("You nod, ready for sure, but now you have the support of your lover backing you up. You tell him as you reach your [finger] up and give him a scratch behind his ear.\n\n");
 	outputText("Zenji sighs softly as he sinks into your ministrations, he’s like putty in your hands. \"<i>R-right dere, [name]... yeah… dat’s de spot…</i>\" He says with his eyes closed, as his ears twitch slightly. You can hear his tail swishing happily behind him like an excited puppy.\n\n");
 	outputText("You laugh, you’re not used to this side of him. It would seem his ears are quite the soft spot for him.\n\n");
 	outputText("As much as you enjoy toying with him you decide that you must continue with your day. You finally break the trance you’ve brought him in.\n\n");
-	outputText("Zenji seems visibly disheartened when you remove your [hand] from his ear before he blushes softly. \"<i>D-dat… dat was nice… I-I can’t believe you had me under ya fingers like dat…</i>\" He scratches behind his ear softly. \"<i>Let's get on wit de day den.</i>\"\n\n");
+	outputText("Zenji seems visibly disheartened when you remove your [finger] from his ear before he blushes softly. \"<i>D-dat… dat was nice… I-I can’t believe you had me under ya fingers like dat…</i>\" He scratches behind his ear softly. \"<i>Let's get on wit de day den.</i>\"\n\n");
 	outputText("You give him a knowing smile, maybe you’ll find another time to mess with him.");
 	player.addStatusValue(StatusEffects.ZenjiZList, 2, -1);
 	doNext(playerMenu);
@@ -2379,11 +2362,11 @@ public function loverZenjiSleepWithCatchAnalMorning():void {
 	outputText("Zenji finally releases his grasp on you to stretch, liberating you from his enticing musk. You take the moment of deliverance to stretch.\n\n");
 	outputText("You look down, remembering just how hefty of a load Zenji poured out onto you, you’re not sure how or when exactly, but at some point, Zenji has cleaned the two of you off.\n\n");
 	outputText("Zenji helps you get dressed as he puts his loincloth on. \"<i>Ya ready for another day, champion?</i>\"\n\n");
-	outputText("You nod, ready for sure, but now you have the support of your lover backing you up. You tell him as you reach your [hand] up and give him a scratch behind his ear.\n\n");
+	outputText("You nod, ready for sure, but now you have the support of your lover backing you up. You tell him as you reach your [finger] up and give him a scratch behind his ear.\n\n");
 	outputText("Zenji sighs softly as he sinks into your ministrations, he’s like putty in your hands. \"<i>R-right dere, [name]... yeah… dat’s de spot…</i>\" He says with his eyes closed, as his ears twitch slightly. You can hear his tail swishing happily behind him like an excited puppy.\n\n");
 	outputText("You laugh, you’re not used to this side of him. It would seem his ears are quite the soft spot for him.\n\n");
 	outputText("As much as you enjoy toying with him you decide that you must continue with your day. You finally break the trance you’ve brought him in.\n\n");
-	outputText("Zenji seems visibly disheartened when you remove your [hand] from his ear before he blushes softly. \"<i>D-dat… dat was nice… I-I can’t believe you had must under ya fingers like dat…</i>\" He scratches behind his ear softly. \"<i>Let's get on wit de day den.</i>\"\n\n");
+	outputText("Zenji seems visibly disheartened when you remove your [finger] from his ear before he blushes softly. \"<i>D-dat… dat was nice… I-I can’t believe you had must under ya fingers like dat…</i>\" He scratches behind his ear softly. \"<i>Let's get on wit de day den.</i>\"\n\n");
 	outputText("You give him a knowing smile, maybe you’ll find another time to mess with him.");
 	player.addStatusValue(StatusEffects.ZenjiZList, 2, -2);
 	doNext(playerMenu);
@@ -2416,6 +2399,55 @@ public function loverZenjiGlades():void {
 		flags[kFLAGS.ZENJI_DESTROYING_CORRUPTED_GLADES] = 0;
 	}
 	doNext(loverZenjiMainCampMenu);
+}
+
+public function loverZenjiNightWatch():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	if (ZenjiNightWatch == 0) {
+		outputText("You tell Zenji that you want him to watch over the camp at night.\n\n");
+		outputText("Zenji pats his chest with his fist before giving you a half salute, \"<i>Te protegeré con mi vida, flaca.</i>\"\n\n");
+		ZenjiNightWatch = 1;
+	}
+	else {
+		outputText("You tell Zenji you don't want him to watch over the camp at night, he deserves some rest after all.\n\n");
+		outputText("Zenji shakes his head softly, \"<i>If dat be ya wish, so be it, but I won't hesitate to kill anyone who threatens you.</i>\"\n\n");
+		ZenjiNightWatch = 0;
+	}
+	doNext(loverZenjiMainCampMenu);
+}
+
+public function zenjiHenchmanOption():void
+{
+	clearOutput();
+	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+		outputText("Zenji readies his spear before flexing his arms, \"<i>¡Vamanos, flaca!</i>\"\n\n");
+		outputText("Zenji is now following you around.\n\n");
+		var strZenji:Number = 50;
+		var meleeAtkZenji:Number = 145;
+		if (player.level > 25 && player.level < 185) {
+			strZenji += 29 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			meleeAtkZenji += 5 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+		}
+		else if (player.level >= 185) {
+			strZenji += 957 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			meleeAtkZenji += 165 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+		}
+		strZenji *= (1 + (0.2 * player.newGamePlusMod()));
+		strZenji = Math.round(strZenji);
+		meleeAtkZenji += (1 + (int)(meleeAtkZenji / 5)) * player.newGamePlusMod();
+		player.createStatusEffect(StatusEffects.CombatFollowerZenji, strZenji, meleeAtkZenji, 0, 0);
+		flags[kFLAGS.PLAYER_COMPANION_1] = "Zenji";
+	}
+	else {
+		outputText("You tell Zenji that you don't want him to assist you in combat anymore.\n\n");
+		outputText("Zenji raises an eyebrow at you, \"<i>If dat's whatchu want, I will guard de camp, but you stay safe out dere.</i>\"\n\n");
+		outputText("Aurora is no longer following you around.\n\n");
+		player.removeStatusEffect(StatusEffects.CombatFollowerZenji);
+		flags[kFLAGS.PLAYER_COMPANION_1] = "";
+	}
+	doNext(loverZenjiMainCampMenu);
+	cheatTime(1/12);
 }
 
 public function loverZenjiMainCampMenuLeave():void {
@@ -2485,7 +2517,7 @@ public function loverZenjiHalloweenEventEnding():void {
 public function loverZenjiHalloweenEventEndingBlowHim():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
-	outputText("You stop him right there, as you have something else in mind you want to do before leaving the stream.\n\n");
+	outputText("You stop him right there as you have something else in mind you want to do before leaving the stream.\n\n");
 	outputText("You tell Zenji to sit on the edge of the stream, you have a special reward for him since he kept you safe during such a dangerous time.\n\n");
 	outputText("He does so, his legs still within the water as you walk up to him. You pull down his loincloth, revealing the troll’s manhood.\n\n");
 	outputText("Zenji gives a small smirk, \"<i>Just can’t keep away can ya? I feel de same way…</i>\"\n\n");
@@ -2545,7 +2577,7 @@ private function applyZenjikidName():void {
 		// Stuff a name in the box and go go go
 		mainView.nameBox.text = "Zenji kiddo";
 	}
-	else if(mainView.nameBox.text == "" || mainView.nameBox.text == "0" || mainView.nameBox.text == "Zenji") 
+	else if (mainView.nameBox.text == "" || mainView.nameBox.text == "0" || mainView.nameBox.text == "Zenji") 
 	{
 		clearOutput();
 		if (mainView.nameBox.text == "" || mainView.nameBox.text == "0") outputText("<b>You must select a name.</b>");
@@ -2577,6 +2609,7 @@ private function applyZenjikidName():void {
 private function applyZenjikidName2():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
+	flags[kFLAGS.ZENJI_KIDS]++;
 	outputText("Zenji gives you a gentle stare as he gently caresses your child, \"<i>Actually, Ya know... I was thinkin’, and I thought I should name dem dis time.</i>\"\n\n");
 	outputText("He scoops up your baby once they detach from your breast. \"<i>What will daddy name you?</i>\" he croons, taking his child to his nest.\n\n");
 	doNext(camp.returnToCampUseTwoHours);

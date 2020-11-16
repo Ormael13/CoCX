@@ -1867,11 +1867,11 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 2;
-		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 4;
-		if (player.hasPerk(PerkLib.DrakeLungs)) damult += 2;
-		if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 2;
-		if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 2;
+		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 3;
+		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 6;
+		if (player.hasPerk(PerkLib.DrakeLungs)) damult += 3;
+		if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 3;
+		if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 3;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
@@ -1995,11 +1995,11 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 2;
-		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 4;
-		if (player.hasPerk(PerkLib.DrakeLungs)) damult += 2;
-		if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 2;
-		if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 2;
+		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 3;
+		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 6;
+		if (player.hasPerk(PerkLib.DrakeLungs)) damult += 3;
+		if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 3;
+		if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 3;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
@@ -2090,11 +2090,11 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 2;
-		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 4;
-		if (player.hasPerk(PerkLib.DrakeLungs)) damult += 2;
-		if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 2;
-		if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 2;
+		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 3;
+		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 6;
+		if (player.hasPerk(PerkLib.DrakeLungs)) damult += 3;
+		if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 3;
+		if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 3;
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
@@ -2185,11 +2185,11 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 2;
-		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 4;
-		if (player.hasPerk(PerkLib.DrakeLungs)) damult += 2;
-		if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 2;
-		if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 2;
+		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 3;
+		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 6;
+		if (player.hasPerk(PerkLib.DrakeLungs)) damult += 3;
+		if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 3;
+		if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 3;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
@@ -2277,22 +2277,22 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.) && player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 3, -1);*/
 			var damage:Number = 0;
 			var damult:Number = 1;
-			damage += scalingBonusIntelligence() * 4;
-			damage += scalingBonusWisdom() * 4;
-			damage *= 1 + (rand(51) / 100);
+			damage += scalingBonusIntelligence() * 5;
+			damage += scalingBonusWisdom() * 5;
+			damage *= 1.5 + (rand(101) / 100);
 			damage = calcInfernoMod(damage);
 			damage = calcGlacialMod(damage);
 			damage = calcVoltageMod(damage);
 			damage = calcEclypseMod(damage);
 			if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 				player.removeStatusEffect(StatusEffects.DragonBreathBoost);
-				damage *= 1.5;
+				damage *= 3;
 			}
-			if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 2;
-			if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 4;
-			if (player.hasPerk(PerkLib.DrakeLungs)) damult += 2;
-			if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 2;
-			if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 2;
+			if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 3;
+			if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 6;
+			if (player.hasPerk(PerkLib.DrakeLungs)) damult += 3;
+			if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 3;
+			if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 3;
 			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 1.25;

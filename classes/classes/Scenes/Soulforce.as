@@ -274,6 +274,8 @@ use namespace CoC;
 		}
 		public function submenucuzwhynot():void {
 			menu();
+			addButton(0, "ClickItOnce", AddMaxBackpack00).hint("Zenji spawning pool");
+			addButton(1, "ClickItOnce", AddMaxBackpack01).hint("Instant-house + bed");
 			//addButton(4, "ClickItOnce", AddMaxBackpack3).hint("");
 			if (!player.hasStatusEffect(StatusEffects.ZenjiZList)) addButton(4, "ClickItOnce", AddMaxBackpack3).hint("Fixing Lover Zenji missing one status effect needed for his sex scenes menu.");
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2 && !player.hasStatusEffect(StatusEffects.TrainingNPCsTimersReduction)) addButton(5, "ClickItDoIt", AddMaxBackpack2).hint("Adding one status effect needed for sparring ring upgrades effect.");
@@ -284,6 +286,19 @@ use namespace CoC;
 			if ((player.hasPerk(PerkLib.TitanGripEx) && !player.hasPerk(PerkLib.GigantGripEx)) || player.hasPerk(PerkLib.LegendaryGolemMaker)) addButton(10, "PerkFixes", AddMaxBackpack).hint("Fix testers saves perks for Giant's Grip (Ex) and above Epic Golem maker");
 			addButton(11, "ChimeraUprising", AddMaxBackpack4).hint("Use only ONCE if PC from older save have chimerical body perks above Basic stage.");
 			addButton(14, "Back", SoulforceCheats);
+		}
+		public function AddMaxBackpack00():void {
+			player.createStatusEffect(StatusEffects.ZenjiModificationsList,0,0,15,7);
+			player.createStatusEffect(StatusEffects.ZenjiPreparationsList,0,0,0,0);
+			player.createStatusEffect(StatusEffects.ZenjiZList,0,0,0,0);
+			flags[kFLAGS.ZENJI_PROGRESS] = 11;
+			flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] = 0;
+			doNext(submenucuzwhynot);
+		}
+		public function AddMaxBackpack01():void {
+			flags[kFLAGS.CAMP_BUILT_CABIN] = 1;
+			flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] = 1;
+			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack():void {
 			if (player.hasPerk(PerkLib.TitanGripEx)) {

@@ -227,9 +227,9 @@ use namespace CoC;
 					this.speStat.core.value += 891 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.intStat.core.value += 825 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.wisStat.core.value += 891 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-					this.weaponAttack += 165;
-					this.armorDef += 165;
-					this.armorMDef += 660;
+					this.weaponAttack += 165 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.armorDef += 165 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.armorMDef += 660 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.additionalXP += 825;
 				}
 				else this.level = 25;

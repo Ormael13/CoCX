@@ -112,6 +112,7 @@ public function neisaCampMenu():void {
 		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") addButton(5, "Team", neisaHenchmanOption).hint("Ask Neisa to stay in camp.");
 		else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Neisa about accompaning you.");
 	}
+	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 	addButton(14, "Back", camp.campFollowers);
 }
 

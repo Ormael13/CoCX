@@ -2674,21 +2674,22 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				addButton(2, "Make Love", fuckTheMouseBitch);
 				addButton(3, "Give Present", giveAmilyAPresent);
 				addButton(4, (flags[kFLAGS.AMILY_NOT_FURRY] == 0 ? "Defur" : "Refuzz"), (flags[kFLAGS.AMILY_NOT_FURRY] == 0 ? amilyDefurryOfferAtCamp: refuzzAmily));
-				//If no fight yet, have option to introduce Urta and Amily
-				if(player.gender > 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_VISITING_URTA] == 0 && (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] >= 5 || urtaLove()) && !SceneLib.urtaQuest.urtaBusy())
-				{
-					if (output) outputText("<b>You could take Amily on a date to Tel'Adre, and perhaps even introduce her to Urta!</b>\n\n");
-					addButton(5, "Date", dateNightFirstTime).hint("Take Amily on a date to Tel'Adre?");
+				if (player.hasPerk(PerkLib.BasicLeadership)) {
+					if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", amilyHenchmanOption).hint("Ask Amily to join you in adventures outside camp.");
+					else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") addButton(5, "Team", amilyHenchmanOption).hint("Ask Amily to stay in camp.");
+					else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Amily about accompaning you.");
 				}
+				else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 				if (flags[kFLAGS.AMILY_OVIPOSITION_UNLOCKED] > 0 && player.canOviposit()) addButton(6, "Lay Eggs", layEggsInAmily).hint("Unload your eggs into Amily's ass.");
 				if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) {
 					if (flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] == 0) addButton(7, "Destroy Glades", amilyDestroyGladesToggle).hint("Request Amily to destroy any corrupted glades she can find.");
 					else addButton(7, "Stop Destroying", amilyDestroyGladesToggle).hint("Request Amily to stop destroying the corrupted glades.");
 				}
-				if (player.hasPerk(PerkLib.BasicLeadership)) {
-					if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(10, "Team", amilyHenchmanOption).hint("Ask Amily to join you in adventures outside camp.");
-					else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") addButton(10, "Team", amilyHenchmanOption).hint("Ask Amily to stay in camp.");
-					else addButtonDisabled(10, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Amily about accompaning you.");
+				//If no fight yet, have option to introduce Urta and Amily
+				if(player.gender > 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_VISITING_URTA] == 0 && (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] >= 5 || urtaLove()) && !SceneLib.urtaQuest.urtaBusy())
+				{
+					if (output) outputText("<b>You could take Amily on a date to Tel'Adre, and perhaps even introduce her to Urta!</b>\n\n");
+					addButton(8, "Date", dateNightFirstTime).hint("Take Amily on a date to Tel'Adre?");
 				}
 				addButton(14, "Leave", camp.campLoversMenu);
 			}

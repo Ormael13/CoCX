@@ -1516,34 +1516,34 @@ public class Camp extends NPCAwareContent {
 			if (flags[kFLAGS.ZENJI_PROGRESS] == 11) {
 				if (model.time.hours >= 7 && model.time.hours <= 18) {
 					if (slavesCount() > 0 && rand(5) == 0) outputText("Zenji is keeping a close eye on some of your more corrupt camp members, ensuring that they don’t cause any harm.");
-					else if (player.statusEffectv2(StatusEffects.ZenjiModificationsList) >= 998700 && rand(5) == 0) outputText("Zenji is around your camp, it’s impossible to miss him as he strokes his length as cascades of cum leak from his erection.");
+					else if (player.statusEffectv2(StatusEffects.ZenjiModificationsList) >= 998700 && rand(5) == 0) outputText("Zenji is around your [camp], it’s impossible to miss him as he strokes his length as cascades of cum leak from his erection.");
 					else if (ZenjiScenes.Z1stKid != "" && rand(5) == 0) {
 						if (rand(2) == 0) outputText("Zenji is at his bedroll, playing around with "+(flags[kFLAGS.ZENJI_KIDS] == 1 ? ""+ZenjiScenes.Z1stKid+"":"some of the children you've made")+".");
-						else outputText("Zenji is around your camp, he remains vigilant, surveying the area for danger atop a tree.");
+						else outputText("Zenji is around your [camp], he remains vigilant, surveying the area for danger atop a tree.");
 					}
 					else {
 						var z:int = rand(7);
 						switch (z) {
 							case 0:
-								outputText("Zenji is around your camp, he remains vigilant, surveying the area for danger atop a tree.");
+								outputText("Zenji is around your [camp], he remains vigilant, surveying the area for danger atop a tree.");
 								break;
 							case 1:
-								outputText("Zenji is around your camp, you see him doing a routine of stretches and working out.");
+								outputText("Zenji is around your [camp], you see him doing a routine of stretches and working out.");
 								break;
 							case 2:
-								outputText("Zenji is around your camp, he is looking at you with intent almost as if you were his child.");
+								outputText("Zenji is around your [camp], he is looking at you with intent almost as if you were his child.");
 								break;
 							case 3:
-								outputText("Zenji is around your camp, he is eyeing some of your followers warily, almost as if he doesn’t trust them.");
+								outputText("Zenji is around your [camp], he is eyeing some of your followers warily, almost as if he doesn’t trust them.");
 								break;
 							case 4:
-								outputText("Zenji is around your camp, his ears twitch attentively to any signs of danger.");
+								outputText("Zenji is around your [camp], his ears twitch attentively to any signs of danger.");
 								break;
 							case 5:
-								outputText("Zenji is around your camp, he’s gently stroking the brush of his tail, running his fingers through them almost worriedly as he surveys his surroundings.");
+								outputText("Zenji is around your [camp], he’s gently stroking the brush of his tail, running his fingers through them almost worriedly as he surveys his surroundings.");
 								break;
 							case 6:
-								outputText("Zenji is around your camp, he appears to be eating some cooked meat.");
+								outputText("Zenji is around your [camp], he appears to be eating some cooked meat.");
 								break;
 						}
 					}
@@ -1551,11 +1551,11 @@ public class Camp extends NPCAwareContent {
 				else {
 					if (ZenjiScenes.Z1stKid != "" && rand(5) == 0) outputText("Zenji is currently lying down on his bedroll, with "+(flags[kFLAGS.ZENJI_KIDS] == 1 ? ""+ZenjiScenes.Z1stKid+"":"one of the children you've made")+" sleeping atop his torso, as Zenji gently strokes their head.");
 					else {
-						if (rand(4) == 0) outputText("Zenji is around your camp, he gives a small yawn before shaking himself awake.");
+						if (rand(4) == 0) outputText("Zenji is around your [camp], he gives a small yawn before shaking himself awake.");
 						else {
-							if (rand(3) == 0) outputText("Zenji is around your camp, it looks like he’s polishing his tusks and brushing his teeth with something.");
+							if (rand(3) == 0) outputText("Zenji is around your [camp], it looks like he’s polishing his tusks and brushing his teeth with something.");
 							else {
-								if (rand(2) == 0) outputText("Zenji is around your camp, he is coating his fur in some ashes as he grooms himself.");
+								if (rand(2) == 0) outputText("Zenji is around your [camp], he is coating his fur in some ashes as he grooms himself.");
 								else outputText("With how dark it is, Zenji is keeping much closer to you, making sure that you’re safe. His eyes never seem to stray from you.");
 							}
 						}
@@ -1678,7 +1678,7 @@ public class Camp extends NPCAwareContent {
 			}
 			//Siegweird
 			if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) {
-				outputText("The regular pensive 'Mmmmmm' by the campfire and the delicious smell of soup reminds you that Siegweird the paladin is now residing in your [camp].\n\n");
+				outputText("Siegweird is in your [camp], his armor set to the side while he reads a book.\n\n");
 				buttons.add("Siegweird", SceneLib.siegweirdFollower.siegweirdMainCampMenu).hint("Check up on Siegweird.");
 			}
 			//Ember
@@ -1755,17 +1755,17 @@ public class Camp extends NPCAwareContent {
 		//Zenji folower
 		if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) {
 			if (model.time.hours >= 7 && model.time.hours <= 18) {
-				if (rand(3) == 0) outputText("Zenji is around your camp, you see him currently relaxing atop a tree.");
+				if (rand(3) == 0) outputText("Zenji is around your [camp], you see him currently relaxing atop a tree.");
 				else {
-					if (rand(2) == 0) outputText("Zenji is around your camp, you see him doing a routine of stretches.");
-					else outputText("Zenji is around your camp, you see him doing some push-ups.");
+					if (rand(2) == 0) outputText("Zenji is around your [camp], you see him doing a routine of stretches.");
+					else outputText("Zenji is around your [camp], you see him doing some push-ups.");
 				}
 			}
 			else {
-				if (rand(3) == 0) outputText("Zenji is around your camp, you see him resting on his bedroll.");
+				if (rand(3) == 0) outputText("Zenji is around your [camp], you see him resting on his bedroll.");
 				else {
-					if (rand(2) == 0) outputText("Zenji is around your camp, he is coating his fur in some ashes as he grooms himself.");
-					else outputText("Zenji is around your camp, it looks like he’s polishing his tusks and brushing his teeth with something.");
+					if (rand(2) == 0) outputText("Zenji is around your [camp], he is coating his fur in some ashes as he grooms himself.");
+					else outputText("Zenji is around your [camp], it looks like he’s polishing his tusks and brushing his teeth with something.");
 				}
 			}
 			outputText("\n\n");
@@ -2771,8 +2771,7 @@ private function SparrableNPCsMenu():void {
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Arian" && arianScene.arianFollower()) {
 				arianScene.sleepWithArian();
 				return;
-			} else if (flags[kFLAGS.SLEEP_WITH] == "Zenji" && arianScene.arianFollower()) {
-				//SceneLib.zenjiScene.loverZenjiSleepWith(timeQ);
+			} else if (flags[kFLAGS.SLEEP_WITH] == "Zenji" && flags[kFLAGS.ZENJI_PROGRESS] == 11) {
 				spriteSelect(SpriteDb.s_zenji);
 				if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0) {
 					outputText("You approach Zenji, ready to call it a day and spend the rest of your night with him in your cabin.\n\n");
@@ -2780,10 +2779,10 @@ private function SparrableNPCsMenu():void {
 					outputText("You grab onto Zenji’s hand, to which he responds by giving your palm a gentle squeeze. After a moment of holding his hand you realize what you were about to do and lead him to your cabin. Breaking the hand hold, he opens the door for you, letting you in first as you guide him to your bedroom.\n\n");
 					outputText("You take off your [armor], leaving you "+(player.isNaked2() ? "completely naked":"left in your underwear")+", Zenji strips off his loincloth, getting comfortable with you as well. It doesn't take long before he begins sporting an erection, you consider for a moment if you want to have sex with him before bed.");
 					menu();
-					if (player.hasVagina()) addButton(1, "Get Penetrated", SceneLib.zenjiScene.loverZenjiSleepWithGetPenetrated);
+					if (player.hasVagina()) addButton(1, "Get Penetrated", curry(SceneLib.zenjiScene.loverZenjiSleepWithGetPenetrated, timeQ));
 					else addButtonDisabled(1, "Get Penetrated", "You need a vagina for this scene.");
-					addButton(2,"Catch Anal", SceneLib.zenjiScene.loverZenjiSleepWithCatchAnal);
-					addButton(3,"No Sex", SceneLib.zenjiScene.loverZenjiSleepWithNoSex);
+					addButton(2,"Catch Anal", curry(SceneLib.zenjiScene.loverZenjiSleepWithCatchAnal, timeQ));
+					addButton(3,"No Sex", curry(SceneLib.zenjiScene.loverZenjiSleepWithNoSex, timeQ));
 				}
 				else {
 					outputText("You approach Zenji, ready to call it a day, and spend the rest of the night with him.\n\n");
@@ -2802,8 +2801,8 @@ private function SparrableNPCsMenu():void {
 						outputText("\"<i>No worries, I'll just be sure t' keep ya tighter in my arms so ya don't try to kick me away again. Heheh...</i>\"\n\n");
 						outputText("With that, Zenji wraps his strong arms around you as you ready yourself to sleep for another " + num2Text(timeQ) + " hours.\n");
 					}
-					//menu();
-					//addButton(0,"Next", sleepWrapper);
+					menu();
+					addButton(0,"Next", sleepWrapper);
 				}
 				return;
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Excellia" && flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) {

@@ -176,7 +176,8 @@ public function ElectraCampMainMenu():void {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to join you in adventures outside camp.");
 		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to stay in camp.");
 		else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Etna about accompaning you.");
-	}*/
+	}
+	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");*/
 	addButton(14, "Back", camp.campLoversMenu);
 }
 
