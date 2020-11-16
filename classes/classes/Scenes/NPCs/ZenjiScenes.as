@@ -1737,8 +1737,8 @@ public function loverZenjiTakeVaginal():void {
 	outputText("Zenji releases you, helping you clean up from the mess of his huge orgasm and get dressed. Finally, you are ready to continue your day.\n\n");
 	player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
 	player.sexReward("cum", "Vaginal");
-	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
-	else player.knockUp(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
+	if (player.isGoblinoid()) player.knockUpForce(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	else player.knockUpForce(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -2017,8 +2017,8 @@ public function loverZenjiHotSpringRideVaginal():void{
 	outputText("Zenji looks down at his soaked loincloth, \"<i>Ugh… I did not tink dis through, I need ta get another piece of cloth.</i>\"\n\n");
 	player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
 	player.sexReward("cum", "Vaginal");
-	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
-	else player.knockUp(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
+	if (player.isGoblinoid()) player.knockUpForce(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	else player.knockUpForce(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -2292,8 +2292,8 @@ public function loverZenjiSleepWithGetPenetrated(timeQ:Number):void {
 	outputText("\"<i>Dat... was amazing...</i>\" He whispers as his tail coils around you, \"<i>Sleep tight, [name]...</i>\"\n\n");
 	outputText("Zenji gently strokes your back as he curls up with you.\n\n");
 	outputText("You plan on sleeping for " + num2Text(timeQ) + " hours.\n\n");
-	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
-	else player.knockUp(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
+	if (player.isGoblinoid()) player.knockUpForce(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	else player.knockUpForce(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
 	player.addStatusValue(StatusEffects.ZenjiZList, 2, 1);
 	menu();
 	addButton(0,"Next",camp.sleepWrapper);
