@@ -2521,7 +2521,7 @@ public class Appearance extends Utils
 					[Hair.FLUFFY, "fluffy"],
 					[Hair.GRASS, "grass"],
 					[Hair.SILKEN, "silk-like"],
-					[Hair.FAIRY, "otherworldly, silk-like and almost translucent"]
+					[Hair.FAIRY, "otherworldly, silk-like and almost translucent"],
 					[Hair.CRAZY, "crazy"],
 					[Hair.STORM, "glowing lightning shaped"],
 					[Hair.RATATOSKR, "striped"],
@@ -2589,7 +2589,7 @@ public class Appearance extends Utils
 					[Face.GHOST, "ghost"],
 					[Face.JIANGSHI, "jiangshi"],
 					[Face.YUKI_ONNA, "yuki onna"],
-					[Face.FAIRY, "fairy"]
+					[Face.FAIRY, "fairy"],
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2603,7 +2603,7 @@ public class Appearance extends Utils
 					[Tongue.ELF, "elf"],
 					[Tongue.DOG, "dog"],
 					[Tongue.CAVE_WYRM, "draconic"],
-					[Tongue.GHOST, "ghost"]
+					[Tongue.GHOST, "ghost"],
 				]
 		);
 		public static const DEFAULT_EYES_NAMES:Object = createMapFromPairs(
@@ -2635,7 +2635,7 @@ public class Appearance extends Utils
 					[Eyes.FIRE_SNAIL, "fire snail"],
 					[Eyes.GHOST, "ghost"],
 					[Eyes.JIANGSHI, "jiangshi"],
-					[Eyes.FAIRY, "fairy"]
+					[Eyes.FAIRY, "fairy"],
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
@@ -2675,7 +2675,7 @@ public class Appearance extends Utils
 					[Ears.BEAR, "bear"],
 					[Ears.PANDA, "panda"],
 					[Ears.SHARK, "shark"],
-					[Ears.DISPLACER, "displacer"]
+					[Ears.DISPLACER, "displacer"],
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2697,7 +2697,7 @@ public class Appearance extends Utils
 					[Horns.BICORN, "bicorn"],
 					[Horns.GHOSTLY_WISPS, "ghostly wisps"],
 					[Horns.SPELL_TAG, "spell tag"],
-					[Horns.FROSTWYRM, "frost wyrm"]
+					[Horns.FROSTWYRM, "frost wyrm"],
 				]
 		);
 		public static const DEFAULT_ANTENNAE_NAMES:Object = createMapFromPairs(
@@ -2706,7 +2706,7 @@ public class Appearance extends Utils
 					[Antennae.BEE, "bee"],
 					[Antennae.MANTIS, "mantis"],
 					[Antennae.FIRE_SNAIL, "fire snail"],
-					[Antennae.MOTH, "moth"]
+					[Antennae.MOTH, "moth"],
 				]
 		);
 		public static const DEFAULT_ARM_NAMES:Object = createMapFromPairs(
@@ -2752,7 +2752,7 @@ public class Appearance extends Utils
 					[Arms.JIANGSHI, "jiangshi"],
 					[Arms.RAIJU_2, "raiju paws"],
 					[Arms.YUKI_ONNA, "yuki onna"],
-					[Arms.FROSTWYRM, "frost wyrm"]
+					[Arms.FROSTWYRM, "frost wyrm"],
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2795,7 +2795,7 @@ public class Appearance extends Utils
 					[Tail.GARGOYLE_2, "axe-shaped gargoyle"],
 					[Tail.AVIAN, "avian"],
 					[Tail.GRIFFIN, "griffin"],
-					[Tail.CAVE_WYRM, "cave wyrm"]
+					[Tail.CAVE_WYRM, "cave wyrm"],
 				]
 		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(
@@ -2831,7 +2831,7 @@ public class Appearance extends Utils
 					[Wings.NIGHTMARE, "leathery"],
 					[Wings.ETHEREAL_WINGS, "etheral tendrils"],
 					[Wings.THUNDEROUS_AURA, "thunderous aura"],
-					[Wings.FAIRY, "fairy"]
+					[Wings.FAIRY, "fairy"],
 				]
 		);
 		public static const DEFAULT_WING_DESCS:Object = createMapFromPairs(
@@ -2866,7 +2866,7 @@ public class Appearance extends Utils
 					[Wings.ETHEREAL_WINGS, "etheral tendrils"],
 					[Wings.THUNDEROUS_AURA, "thunderous aura"],
 					[Wings.LEVITATION, "levitation"],
-					[Wings.FAIRY, "butterfly"]
+					[Wings.FAIRY, "butterfly"],
 				]
 		);
 		public static const DEFAULT_LOWER_BODY_NAMES:Object = createMapFromPairs(
