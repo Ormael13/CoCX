@@ -2248,7 +2248,7 @@ public function loverZenjiSleepWithMorning():void {
 	outputText("Zenji sighs softly as he sinks into your ministrations, he’s like putty in your hands. \"<i>R-right dere, [name]... yeah… dat’s de spot…</i>\" He says with his eyes closed, as his ears twitch slightly. You can hear his tail swishing happily behind him like an excited puppy.\n\n");
 	outputText("You laugh, you’re not used to this side of him. It would seem his ears are quite the soft spot for him.\n\n");
 	outputText("As much as you enjoy toying with him you decide that you must continue with your day. You finally break the trance you’ve brought him in.\n\n");
-	outputText("Zenji seems visibly disheartened when you remove your [hand] from his ear before he blushes softly. Before you can say anything, he reaches his hand out to hold yours, \"<i>Let's get on wit de day den.</i>\"\n\n");
+	outputText("Zenji seems visibly disheartened when you remove your [finger] from his ear before he blushes softly. Before you can say anything, he reaches his hand out to hold yours, \"<i>Let's get on wit de day den.</i>\"\n\n");
 	outputText("You spend a moment looking into his eyes, holding your hand with his. You know you can take on any challenge with him by your side. The day ahead waits for you to put that thought to the test.");
 	doNext(playerMenu);
 }
@@ -2360,11 +2360,11 @@ public function loverZenjiSleepWithGetPenetratedMorning():void {
 	outputText("Zenji finally releases his grasp on you to stretch, liberating you from his enticing musk. You take the moment of deliverance to stretch.\n\n");
 	outputText("You look down, remembering just how hefty of a load Zenji poured out onto you, you’re not sure how or when exactly, but at some point, Zenji has cleaned the two of you off.\n\n");
 	outputText("Zenji helps you get dressed as he puts his loincloth on. \"<i>Ya ready for another day, champion?</i>\"\n\n");
-	outputText("You nod, ready for sure, but now you have the support of your lover backing you up. You tell him as you reach your [hand] up and give him a scratch behind his ear.\n\n");
+	outputText("You nod, ready for sure, but now you have the support of your lover backing you up. You tell him as you reach your hand up and give him a scratch behind his ear.\n\n");
 	outputText("Zenji sighs softly as he sinks into your ministrations, he’s like putty in your hands. \"<i>R-right dere, [name]... yeah… dat’s de spot…</i>\" He says with his eyes closed, as his ears twitch slightly. You can hear his tail swishing happily behind him like an excited puppy.\n\n");
 	outputText("You laugh, you’re not used to this side of him. It would seem his ears are quite the soft spot for him.\n\n");
 	outputText("As much as you enjoy toying with him you decide that you must continue with your day. You finally break the trance you’ve brought him in.\n\n");
-	outputText("Zenji seems visibly disheartened when you remove your [hand] from his ear before he blushes softly. \"<i>D-dat… dat was nice… I-I can’t believe you had me under ya fingers like dat…</i>\" He scratches behind his ear softly. \"<i>Let's get on wit de day den.</i>\"\n\n");
+	outputText("Zenji seems visibly disheartened when you remove your [finger] from his ear before he blushes softly. \"<i>D-dat… dat was nice… I-I can’t believe you had me under ya fingers like dat…</i>\" He scratches behind his ear softly. \"<i>Let's get on wit de day den.</i>\"\n\n");
 	outputText("You give him a knowing smile, maybe you’ll find another time to mess with him.");
 	player.addStatusValue(StatusEffects.ZenjiZList, 2, -1);
 	doNext(playerMenu);
@@ -2379,11 +2379,11 @@ public function loverZenjiSleepWithCatchAnalMorning():void {
 	outputText("Zenji finally releases his grasp on you to stretch, liberating you from his enticing musk. You take the moment of deliverance to stretch.\n\n");
 	outputText("You look down, remembering just how hefty of a load Zenji poured out onto you, you’re not sure how or when exactly, but at some point, Zenji has cleaned the two of you off.\n\n");
 	outputText("Zenji helps you get dressed as he puts his loincloth on. \"<i>Ya ready for another day, champion?</i>\"\n\n");
-	outputText("You nod, ready for sure, but now you have the support of your lover backing you up. You tell him as you reach your [hand] up and give him a scratch behind his ear.\n\n");
+	outputText("You nod, ready for sure, but now you have the support of your lover backing you up. You tell him as you reach your hand up and give him a scratch behind his ear.\n\n");
 	outputText("Zenji sighs softly as he sinks into your ministrations, he’s like putty in your hands. \"<i>R-right dere, [name]... yeah… dat’s de spot…</i>\" He says with his eyes closed, as his ears twitch slightly. You can hear his tail swishing happily behind him like an excited puppy.\n\n");
 	outputText("You laugh, you’re not used to this side of him. It would seem his ears are quite the soft spot for him.\n\n");
 	outputText("As much as you enjoy toying with him you decide that you must continue with your day. You finally break the trance you’ve brought him in.\n\n");
-	outputText("Zenji seems visibly disheartened when you remove your [hand] from his ear before he blushes softly. \"<i>D-dat… dat was nice… I-I can’t believe you had must under ya fingers like dat…</i>\" He scratches behind his ear softly. \"<i>Let's get on wit de day den.</i>\"\n\n");
+	outputText("Zenji seems visibly disheartened when you remove your [finger] from his ear before he blushes softly. \"<i>D-dat… dat was nice… I-I can’t believe you had must under ya fingers like dat…</i>\" He scratches behind his ear softly. \"<i>Let's get on wit de day den.</i>\"\n\n");
 	outputText("You give him a knowing smile, maybe you’ll find another time to mess with him.");
 	player.addStatusValue(StatusEffects.ZenjiZList, 2, -2);
 	doNext(playerMenu);

@@ -68,9 +68,9 @@ public function HaveABoysBath():void {
 	if (flags[kFLAGS.IZMA_BROFIED] == 1) outputText("Since Ismael is a true guy now, he was allowed to bath with the boys.\n\n");
 	if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) outputText("Sitting near you, Konstantin relaxes and stretches his limbs. His large and thick build dwarf those from the other guys. While chit-chatting, he friendly puts one arm around you, and with the other he shamelessly washes his gigantic manhood, earning no few stares and some blushes from the other boys.\n\n");
     if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) {
-		outputText("Siegweird is bragging about his epic adventures in the corner");
-		if (camp.maleNpcsHotBathCount() > 1) outputText(", much to everyone's annoyance");
-		outputText(". You wish he would just relax and share his tales later.\n\n");
+		outputText("Siegweird is sitting at the edge of the spring, clad in only his padded leather armor");
+		if (camp.maleNpcsHotBathCount() > 1) outputText(", he seems worried, keeping mostly to himself");
+		outputText(". Perhaps the heat isn't for everyone.\n\n");
 	}
 	if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) outputText("Zenji rests in the hot spring, his short fur carried by the bubbling water.\n\n");
 	if (emberScene.followerEmber() && flags[kFLAGS.EMBER_GENDER] == 1) outputText("Ember’s body and maleness could easily give all the other boys an inferiority complex.\n\n");
@@ -113,7 +113,7 @@ public function PeepingTom3():void {
 	if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_COCK_SIZE] < 1) outputText("Joy is quite silent for once, you expected her to constantly blabber lewd comments about everyone's nudity.\n\n");
 	if (followerKiha()) outputText("Kiha definitely doesn’t have a size complex, with her huge breasts leaving most of the other girls in the shade.\n\n");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5) outputText("Chi Chi, while small, easily sports a bigger cup than Amily.\n\n");
-	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) outputText("Alvina does not seem to care about her breast size. Her dark charms and unholy attraction aura does everything for her. Naturally nobody but you can see she’s there as usual. She look at you for a split second winking. Clearly she knows you are looking but as you expected of the demoness she really does not care.\n\n");
+	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) outputText("Alvina does not seem to care about her breast size. Her dark charms and unholy attraction aura does everything for her. Naturally nobody but you can see she’s there as usual. Suddenly she gives you a subtle, yet coy wink. Clearly she knows you are looking but as you expected of the demoness she really does not care.\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) outputText("Marble easily has the largest pair here, beating all of the other girls without contest. They’re probably the milkiest too.\n\n");
 	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) outputText("Isabella sings as she bathes, which is not surprising. You assume they’re folk songs from her home.\n\n");
 	if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
@@ -130,7 +130,7 @@ public function PeepingTom3():void {
 		if (flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("While not entirely a girl, Izma is womanly enough that she was still accepted in the bath, her crotch well hidden behind a cloth.\n\n");
 		else outputText("While she was not always a girl, Izma is womanly enough that she was still accepted in the bath.\n\n");
 	}
-	if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) outputText("As a naga, Samirah take a lot of space in the bath. You're glad you made it big enough to hold as many people as necessary.\n\n");
+	if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) outputText("As a naga, Samirah takes a lot of space in the bath. You're glad you made it big enough to hold as many people as necessary.\n\n");
 	if (flags[kFLAGS.DIANA_FOLLOWER] > 5 && !player.hasStatusEffect(StatusEffects.DianaOff)) outputText("Diana is resting next to a set of medicinal and aromatic oils she regularly spray in the bath.\n\n");
 	//if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) Michiko
 	if (flags[kFLAGS.MITZI_RECRUITED] >= 4) outputText("Your resident goblin Mitzi saunters over, looking excited. She strips what little clothing she wears then climbs into the warm waters. Her large tits help her stay afloat as she lays back and relaxes, letting out a sigh of relief.\n\n");
@@ -185,7 +185,7 @@ public function HaveAGirlBath():void {
 		if (player.kitsuneScore() >= 5) outputText(" and yours");
 		outputText(".\n\n");
 	}
-	if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) outputText("As a naga Samirah take a lot of space in the bath. You're glad you made it big enough to hold as many people as necessary.\n\n");
+	if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) outputText("As a naga Samirah takes a lot of space in the bath. You're glad you made it big enough to hold as many people as necessary.\n\n");
 	if (flags[kFLAGS.DIANA_FOLLOWER] > 5 && !player.hasStatusEffect(StatusEffects.DianaOff)) outputText("Diana is resting next to a set of medicinal and aromatic oils she regularly spray in the bath. Can’t say this is not welcome.\n\n");
 	//if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) Michiko
 	if (flags[kFLAGS.MITZI_RECRUITED] >= 4) outputText("Your resident goblin Mitzi saunters over, looking excited. She strips what little clothing she wears then climbs into the warm waters. Her large tits help her stay afloat as she lays back and relaxes, letting out a sigh of relief.\n\n");
