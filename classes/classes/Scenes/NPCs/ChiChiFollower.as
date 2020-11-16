@@ -593,7 +593,7 @@ public function chichiSex0():void {
 }
 public function chichiSex1():void {
 	outputText("Well sure. If it will make her happy, you will propose to her.");
-	if ((player.hasItem(jewelries.POWRRNG, 1) || player.hasItem(jewelries.RPOWRNG, 1)) && flags[kFLAGS.SAPPHIRE_TALKS] >= 4) {
+	if (player.hasItem(jewelries.ENDGRNG, 1) && flags[kFLAGS.SAPPHIRE_TALKS] >= 4) {
 		outputText(" You have the ruby ring on you, but is this really the time?\n\n");
 		menu();
 		addButton(1, "Yes", chichiSex3).hint("Taking this step leads to a fight. Save your game!");
@@ -602,7 +602,7 @@ public function chichiSex1():void {
 	else {
 		outputText(" You ");
 		if (flags[kFLAGS.SAPPHIRE_TALKS] < 4) {
-			if (!player.hasItem(jewelries.POWRRNG, 1) && !player.hasItem(jewelries.RPOWRNG, 1)) outputText("also realize to your annoyance that not only are you missing a wedding ring but the two of you will need a holy place to recite your vows, one with a still working altar of Marae and active priestess. Come to think of it her favorite color was red maybe a ruby ring would do.");
+			if (!player.hasItem(jewelries.ENDGRNG, 1)) outputText("also realize to your annoyance that not only are you missing a wedding ring but the two of you will need a holy place to recite your vows, one with a still working altar of Marae and active priestess. Come to think of it her favorite color was red maybe a ruby ring would do.");
 			outputText("realise to your annoyance that the two of you will need a holy place to recite your vows, one with a still working altar of Marae and active priestess likely.");
 		}
 		else outputText("realize however that to properly propose to her, you would need an engagement ring, preferably a ruby one.");
@@ -621,6 +621,7 @@ public function chichiSex3():void {
 	outputText("\"<i>A..are you serious???!!! You idiot! Y..you're...really?!”</i>\"\n\n");
 	outputText("Chi Chi is at a loss for words. It takes her an entire minute to come back from the shock of your proposal, but she finally answers in the clearest manner she can.\n\n");
 	outputText("\"<i>Yes…I will.</i>\"\n\n");
+	player.destroyItems(jewelries.ENDGRNG, 1);
 	player.HP = player.maxHP();
 	player.fatigue = 0;
 	player.mana = player.maxMana();

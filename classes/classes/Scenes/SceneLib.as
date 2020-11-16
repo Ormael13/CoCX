@@ -182,6 +182,8 @@ public class SceneLib {
 
     public static var rathazul:Rathazul = new Rathazul();
 
+    public static var ryubi:RyuBiFollower = new RyuBiFollower();
+
     public static var siegweirdFollower:SiegweirdFollower = new SiegweirdFollower();
 
     public static var sheilaScene:SheilaScene = new SheilaScene();
