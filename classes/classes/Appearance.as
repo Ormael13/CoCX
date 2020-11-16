@@ -2590,6 +2590,8 @@ public class Appearance extends Utils
 					[Face.JIANGSHI, "jiangshi"],
 					[Face.YUKI_ONNA, "yuki onna"],
 					[Face.FAIRY, "fairy"],
+					[Face.SQUIRREL, "squirrel"],
+					[Face.SMUG, "smug"],
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2604,6 +2606,7 @@ public class Appearance extends Utils
 					[Tongue.DOG, "dog"],
 					[Tongue.CAVE_WYRM, "draconic"],
 					[Tongue.GHOST, "ghost"],
+					[Tongue.RATATOSKR, "ratatoskr"],
 				]
 		);
 		public static const DEFAULT_EYES_NAMES:Object = createMapFromPairs(
@@ -2636,6 +2639,8 @@ public class Appearance extends Utils
 					[Eyes.GHOST, "ghost"],
 					[Eyes.JIANGSHI, "jiangshi"],
 					[Eyes.FAIRY, "fairy"],
+					[Eyes.WEASEL, "weasel"],
+					[Eyes.RATATOSKR, "ratatoskr"],
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
@@ -2676,6 +2681,7 @@ public class Appearance extends Utils
 					[Ears.PANDA, "panda"],
 					[Ears.SHARK, "shark"],
 					[Ears.DISPLACER, "displacer"],
+					[Ears.SQUIRREL, "squirrel"],
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2753,6 +2759,9 @@ public class Appearance extends Utils
 					[Arms.RAIJU_2, "raiju paws"],
 					[Arms.YUKI_ONNA, "yuki onna"],
 					[Arms.FROSTWYRM, "frost wyrm"],
+					[Arms.WEASEL, "weasel"],
+					[Arms.KAMAITACHI, "kamaitachi"],
+					[Arms.SQUIRREL, "squirrel"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2796,6 +2805,7 @@ public class Appearance extends Utils
 					[Tail.AVIAN, "avian"],
 					[Tail.GRIFFIN, "griffin"],
 					[Tail.CAVE_WYRM, "cave wyrm"],
+					[Tail.SQUIRREL, "squirrel"]
 				]
 		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(
@@ -2926,7 +2936,9 @@ public class Appearance extends Utils
 					[LowerBody.GHOST_2, "poltergeist"],
 					[LowerBody.JIANGSHI, "jiangshi"],
 					[LowerBody.YUKI_ONNA, "yuki onna"],
-					[LowerBody.FROSTWYRM, "frost wyrm"]
+					[LowerBody.FROSTWYRM, "frost wyrm"],
+					[LowerBody.WEASEL, "weasel"],
+					[LowerBody.SQUIRREL, "squirrel"]
 				]
 		);
 		// <mod name="Dragon patch" author="Stadler76">
@@ -2964,7 +2976,13 @@ public class Appearance extends Utils
 				[
 					[VaginaClass.HUMAN, "human"],
 					[VaginaClass.EQUINE, "equine"],
-					[VaginaClass.BLACK_SAND_TRAP, "black sandtrap"]
+					[VaginaClass.BLACK_SAND_TRAP, "black sandtrap"],
+					[VaginaClass.CAVE_WYRM, "acidic"],
+					[VaginaClass.VENOM_DRIPPING, "venom dripping"],
+					[VaginaClass.MANTICORE, "ultrasensitive"],
+					[VaginaClass.CANCER, "foaming"],
+					[VaginaClass.DEMONIC, "fiendish"],
+					[VaginaClass.ALRAUNE, "floral"]
 				]
 		);
 
