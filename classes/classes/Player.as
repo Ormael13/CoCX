@@ -9695,7 +9695,7 @@ use namespace CoC;
 				}
 				if (hunger > oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) CoC.instance.mainView.statsView.showStatUp('hunger');
 				//game.dynStats("lus", 0, "scale", false);
-				if (nl) outputText("\n");
+				if (nl) outputText("\n\n");
 				//Messages
 				if (hunger < maxHunger() * 0.1) outputText("<b>You still need to eat more. </b>");
 				else if (hunger >= maxHunger() * 0.1 && hunger < maxHunger() * 0.25) outputText("<b>You are no longer starving but you still need to eat more. </b>");

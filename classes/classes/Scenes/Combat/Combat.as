@@ -8923,7 +8923,7 @@ public class Combat extends BaseContent {
             if (player.statusEffectv1(StatusEffects.StraddleRoundLeft) <= 0) {
                 monster.removeStatusEffect(StatusEffects.Straddle);
                 player.removeStatusEffect(StatusEffects.StraddleRoundLeft);
-                outputText("Your opponent finaly manage to struggle free of your grapple!");
+                outputText("\n\nYour opponent finaly manage to struggle free of your grapple!\n\n");
             }
         }
         enemyAI();
