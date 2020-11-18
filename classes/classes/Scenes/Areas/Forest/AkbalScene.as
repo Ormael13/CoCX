@@ -204,7 +204,7 @@ public class AkbalScene extends BaseContent
 				primary = 0;
 			clearOutput();
 			//Naga RAPPUUUUUU
-			if (player.lowerBody == LowerBody.NAGA)
+			if (player.isNaga())
 			{
 				outputText("You slither around the demon cat's form, wrapping him up until a scared whimper rises from his chest.  You continue to tighten your coils around Akbal until he's gasping for breath.  You ask him if he's going to be a good little demon for you.  He nods.\n\n");
 
@@ -870,7 +870,7 @@ public class AkbalScene extends BaseContent
 			}
 			clearOutput();
 			//Naga variant goez here
-			if (player.lowerBody == LowerBody.NAGA)
+			if (player.isNaga())
 			{
 				outputText(images.showImage("akbal-deepwoods-naga-sumbitanal"));
 				outputText("After a few moments of thinking you nod to Akbal and the masculine voice in your head commands you to disrobe. You take off your [armor], setting it aside moments before the demon is upon you.\n\n");

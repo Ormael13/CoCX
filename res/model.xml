@@ -67,7 +67,7 @@
 <model name="demo" dir="./res/charview/" width="200" height="220" scale="2" originX="15" originY="10">
     <palette>
         <!--Colors common for skin/hair/fur/scales/... go here. Can be overriden later-->
-                    <common>
+            <common>
             <color name="albino">#f2f2e8</color>
             <color name="aqua">#00cccc</color>
             <color name="ashen">#817d79</color>
@@ -126,6 +126,7 @@
             <color name="white">#e6e6eb</color>
             <color name="yellow">#edef6b</color>
             <color name="aphotic blue-black">#08155e</color>
+			<color name="bluish black">#22263a</color>
             <color name="ashen grayish-blue">#93b6c8</color>
             <color name="creamy-white">#f2ebde</color>
             <color name="crimson platinum">#d56c6c</color>
@@ -698,7 +699,7 @@
         <cell rect="421,110,29,32" name="face/cheshire" dx="90" dy="37"/>
         <cell rect="451,110,29,32" name="face/panda" dx="90" dy="37"/>
         <cell rect="481,110,29,32" name="face/bovine" dx="90" dy="37"/>
-        <cell rect="511,110,29,32" name="face/demonlewd" dx="90" dy="37"/>
+        <cell rect="511,110,29,32" name="face/demonlewd" dx="90" dy="38"/>
         <cell rect="541,110,29,32" name="face/ghost" dx="91" dy="38"/>
         <cell rect="571,110,29,32" name="face/melancholic" dx="91" dy="38"/>
         <cell rect="601,110,29,32" name="face/caveWyrm" dx="91" dy="38"/>
@@ -764,7 +765,8 @@
         <cell rect="421,330,29,32" name="horns/unicorn" dx="86" dy="24"/>
         <cell rect="421,363,29,32" name="horns/bicorn" dx="83" dy="23"/>
         <cell rect="451,363,29,32" name="horns/2oni" dx="89" dy="40"/>
-        <cell rect="181,396,29,30" name="horns/frostWyrm" dx="106" dy="26"/>
+		<cell rect="211,396,29,30" name="horns/frostWyrm" dx="105" dy="23"/>
+        <cell rect="211,429,29,30" name="horns/frostWyrmLeft" dx="73" dy="23"/>
         <cell rect="1,330,59,65" name="horns_bg/orchid" dx="73" dy="4"/>
         <cell rect="61,330,59,65" name="horns_bg/devil" dx="72" dy="4"/>
         <cell rect="121,330,59,65" name="horns_bg/cow" dx="75" dy="4"/>
@@ -773,7 +775,8 @@
         <cell rect="361,330,59,65" name="horns_bg/dragon" dx="75" dy="4"/>
         <cell rect="421,396,59,65" name="horns_bg/ghost" dx="73" dy="8"/>
         <cell rect="631,330,87,65" name="horns_bg/devilquad" dx="59" dy="2"/>
-        <cell rect="181,429,29,30" name="horns_bg/frostWyrm" dx="74" dy="26"/>
+		<cell rect="181,396,29,30" name="horns_bg/frostWyrm" dx="105" dy="23"/>
+        <cell rect="181,429,29,30" name="horns_bg/frostWyrmLeft" dx="73" dy="23"/>
         <cell rect="301,396,59,65" name="horns_overclothe/deer" dx="74" dy="-5"/>
         <cell rect="1,470,59,65" name="antennae/bee" dx="75" dy="4"/>
         <cell rect="301,70,29,32" name="faceShading/faceShading" dx="90" dy="37"/>
@@ -1346,8 +1349,10 @@
                 <show part="horns_bg/kraken"/>
             </case>
             <case values="Horns.FROSTWYRM">
+				<show part="horns/frostWyrm"/>
+                <show part="horns/frostWyrmLeft"/>
                 <show part="horns_bg/frostWyrm"/>
-                <show part="horns/frostWyrm"/>
+                <show part="horns_bg/frostWyrmLeft"/>
             </case>
         </switch>
 
@@ -1811,11 +1816,11 @@
             <case values="Face.HUMAN">
 				<show part="face/human"/>
 				<if test="cor &gt;=50">
-					<hide part="face/human"/>
+					<hide part="face/*"/>
 					<show part="face/demonlewd"/>
 				</if>
 				<if test="cor &gt;=100">
-					<hide part="face/human"/>
+					<hide part="face/*"/>
 					<show part="face/fairySmile"/>
 				</if>
 				<if test="cor &gt;=100 and lowerBody == LowerBody.FLOWER_LILIRAUNE">
@@ -3251,7 +3256,7 @@
             </default>
             </switch>
             <show part="balls$taur/B$skinx$ballsz$taur"/>
-			<if test="lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER or lowerBody == LowerBody.FLOWER_LILIRAUNE">
+			<if test="lowerBody == LowerBody.NAGA or lowerBody == LowerBody.HYDRA or lowerBody == LowerBody.FROSTWYRM or lowerBody == LowerBody.MELKIE or lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER or lowerBody == LowerBody.FLOWER_LILIRAUNE">
 				<hide part="balls/*"/>
 				<hide part="balls_taur/*"/>
 			</if>

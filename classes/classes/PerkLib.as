@@ -5873,8 +5873,8 @@ public class PerkLib
             ClawTraining.requirePerk(JobBeastWarrior)
 					.requireLevel(6)
 					.requireCustomFunction(function (player:Player):Boolean {
-					return player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon();
-					}, "Any claws");
+					return player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon();
+					}, "Any natural weapon");
             JobHealer.requireAdvancedJobSlot()
 					.requireAnyPerk(JobSorcerer, JobSoulCultivator)
 					.requireLevel(6)
@@ -6094,8 +6094,8 @@ public class PerkLib
             ExtraClawAttack.requireLevel(12)
                     .requirePerk(ClawTraining)
 					.requireCustomFunction(function (player:Player):Boolean {
-					return player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon();
-					}, "Any claws");
+					return player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon();
+					}, "Any natural weapon");
             NaturalHealingMinor.requireLevel(12)
                     .requirePerk(WisenedHealer)
                     .requireInt(15)
@@ -6200,8 +6200,8 @@ public class PerkLib
             MultiClawAttack.requireLevel(18)
                     .requirePerk(ExtraClawAttack)
 					.requireCustomFunction(function (player:Player):Boolean {
-					return player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon();
-					}, "Any claws");
+					return player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon();
+					}, "Any natural weapon");
 			SpinAttack.requireLevel(18)
 					.requirePerk(Aerobatics)
 					.requireStr(60)
@@ -6304,8 +6304,8 @@ public class PerkLib
             ClawingFlurry.requireLevel(24)
                     .requirePerk(MultiClawAttack)
 					.requireCustomFunction(function (player:Player):Boolean {
-					return player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon();
-					}, "Any claws");
+					return player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon();
+					}, "Any natural weapon");
             CheatDeath.requireLevel(24)
                     .requirePerk(CloseToDeath)
                     .requireInt(100)

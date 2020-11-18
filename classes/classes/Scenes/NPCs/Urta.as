@@ -2526,7 +2526,7 @@ private function makeUrtaSitOnYourLapWithScylla():void {
 
 	outputText(images.showImage("urta-scylla-lapfuck"));
 	outputText("You smirk at the drunken fox and inform her in no uncertain words that you'll do more than watch.  She blinks at you, her inebriated mind unable to process new thoughts as you stalk forwards and sit behind her on the crate");
-	if(player.lowerBody == LowerBody.NAGA) outputText(", snaking your tail around her legs");
+	if(player.isNaga()) outputText(", snaking your tail around her legs");
 	else if(player.lowerBody == LowerBody.GOO) outputText(", enveloping her legs with your goo");
 	else outputText(", straddling your [legs] around her hips");
 	outputText(".  You grab her narrow waist and pull her up, dragging Scylla's cock-locked head up with her and aligning your " + cockDescript(x) + " with her backdoor before you start to lower her back down.  ");

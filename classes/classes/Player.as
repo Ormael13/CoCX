@@ -3673,6 +3673,17 @@ use namespace CoC;
 					}
 				}
 			}
+			if (TopRace == "ratatoskr") {
+				if (TopScore >= 6) {
+					if (TopScore >= 18) {
+						race = "ratatoskr";
+					} else if (TopScore >= 15) {
+						race = "squirrel morph";
+					} else {
+						race = "half squirrel morph";
+					}
+				}
+			}
 			if (TopRace == "raiju") {
 				if (TopScore >= 5) {
 					if (TopScore >= 10) {
@@ -4502,7 +4513,7 @@ use namespace CoC;
 			if (lowerBody == LowerBody.DEMONIC_HIGH_HEELS || lowerBody == LowerBody.DEMONIC_CLAWS)
 				demonCounter++;
 				demonCounter2++;
-			if (demonCocks() > 0)
+			if (demonCocks() > 0 || (hasVagina() && vaginaType() == VaginaClass.DEMONIC))
 				demonCounter++;
 			if (cor >= 50) {
 				if (horns.type == Horns.DEMON && horns.count > 4)
@@ -4578,6 +4589,8 @@ use namespace CoC;
 			if (eyes.type == Eyes.DEVIL || eyes.type == Eyes.GOAT)
 				devilkinCounter++;
 			if (tallness < 48)
+				devilkinCounter++;
+			if (horseCocks() > 0 || (hasVagina() && vaginaType() == VaginaClass.DEMONIC))
 				devilkinCounter++;
 			if (cor >= 60)
 				devilkinCounter++;
@@ -7093,6 +7106,8 @@ use namespace CoC;
 				ratatoskrCounter++;
 			if (arms.type == Arms.SQUIRREL)
 				ratatoskrCounter++;
+			if (tongue.type == Tongue.RATATOSKR)
+				ratatoskrCounter++;
 			if (lowerBody == LowerBody.SQUIRREL)
 				ratatoskrCounter++;
 			if (tailType == Tail.SQUIRREL)
@@ -7121,7 +7136,7 @@ use namespace CoC;
 			//	ratatoskrCounter++;
 			//if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0 && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
 			//	ratatoskrCounter++;
-			//if (findPerk(PerkLib.RaijusDescendant) >= 0 || findPerk(PerkLib.BloodlineRaiju) >= 0)
+			//if (findPerk(PerkLib.RatatoskrsDescendant) >= 0 || findPerk(PerkLib.BloodlineRatatoskr) >= 0)
 			//	ratatoskrCounter += 2;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				ratatoskrCounter += 50;
@@ -8466,7 +8481,7 @@ use namespace CoC;
 				alrauneCounter += 5;
 			if (stamenCocks() > 0)
 				alrauneCounter++;
-			if (hasVagina())
+			if (hasVagina() && (vaginaType() == VaginaClass.ALRAUNE))
 				alrauneCounter++;
 			if (findPerk(PerkLib.FloralOvaries) >= 0)
 				alrauneCounter++;
@@ -8894,6 +8909,8 @@ use namespace CoC;
 			if (tailType == Tail.MANTICORE_PUSSYTAIL)
 				manticoreCounter += 2;
 			if (rearBody.type == RearBody.LION_MANE)
+				manticoreCounter++;
+			if (vaginaType() == VaginaClass.MANTICORE)
 				manticoreCounter++;
 			if (arms.type == Arms.LION)
 				manticoreCounter++;
@@ -9678,7 +9695,7 @@ use namespace CoC;
 				}
 				if (hunger > oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) CoC.instance.mainView.statsView.showStatUp('hunger');
 				//game.dynStats("lus", 0, "scale", false);
-				if (nl) outputText("\n");
+				if (nl) outputText("\n\n");
 				//Messages
 				if (hunger < maxHunger() * 0.1) outputText("<b>You still need to eat more. </b>");
 				else if (hunger >= maxHunger() * 0.1 && hunger < maxHunger() * 0.25) outputText("<b>You are no longer starving but you still need to eat more. </b>");
@@ -10911,14 +10928,14 @@ use namespace CoC;
 				}
 			}//+10/10-20
 			if (kamaitachiScore() >= 7) {
-				if (raijuScore() >= 18) {
+				if (kamaitachiScore() >= 18) {
 					maxStrCap2 -= 35;
 					maxSpeCap2 += 200;
 					maxIntCap2 += 55;
 					maxWisCap2 += 100;
 					minSen += 50;
 				}
-				else if (raijuScore() >= 15) {
+				else if (kamaitachiScore() >= 15) {
 					maxStrCap2 -= 20;
 					maxSpeCap2 += 155;
 					maxIntCap2 += 45;
@@ -10931,6 +10948,23 @@ use namespace CoC;
 					maxIntCap2 += 20;
 					maxWisCap2 += 40;
 					minSen += 10;
+				}
+			}
+			if (ratatoskrScore() >= 6) {
+				if (ratatoskrScore() >= 18) {
+					maxStrCap2 -= 20;
+					maxSpeCap2 += 140;
+					maxIntCap2 += 150;
+				}
+				else if (ratatoskrScore() >= 15) {
+					maxStrCap2 -= 20;
+					maxSpeCap2 += 120;
+					maxIntCap2 += 125;
+				}
+				else {
+					maxStrCap2 -= 10;
+					maxSpeCap2 += 60;
+					maxIntCap2 += 40;
 				}
 			}
 			if (sirenScore() >= 10) {
@@ -12343,7 +12377,7 @@ use namespace CoC;
         /**
 		 * fluidtype: "cum", "vaginalFluids", "saliva", "milk", "Default".
          *
-		 * type: 'n', 'Anal', 'Dick', 'Lips', 'Tits', 'Nipples', 'Ovi', 'VaginalAnal', 'DickAnal', 'Default', 'Generic'
+		 * type: 'n', 'Vaginal', 'Anal', 'Dick', 'Lips', 'Tits', 'Nipples', 'Ovi', 'VaginalAnal', 'DickAnal', 'Default', 'Generic'
 		 */
 		public function sexReward(fluidtype:String = 'Default', type:String = 'Default', real:Boolean = true, Wasfluidinvolved:Boolean = true):void
 		{
@@ -12711,4 +12745,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}

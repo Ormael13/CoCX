@@ -655,11 +655,10 @@ public class PlayerAppearance extends BaseContent {
 						"Your manticore vagina is so sensitive that you can't help but moan musical note out loud when touching yourself.");
 			}
 			else{
-            outputText("You have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+            	outputText("You have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
 			}
 		}
-		if(player.vaginas[0].virgin)
-			outputText(" and an intact hymen");
+		if(player.vaginas[0].virgin) outputText(" and an intact hymen");
 		outputText(".  ");
 		if (player.vaginas.length > 1){
             outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clits each.  ");
@@ -670,10 +669,15 @@ public class PlayerAppearance extends BaseContent {
 		if (player.vaginaType() == VaginaClass.VENOM_DRIPPING){
 			outputText("It constantly drools with aphrodisiac venom. ");
 		}
+		if (player.vaginaType() == VaginaClass.ALRAUNE){
+			outputText("Your vagina secretes aphrodisiac-like nectar, ensuring any stamen that parts your petals are sufficiently lubricated and ready to fertilize you. ");
+		}
 		if (player.vaginaType() == VaginaClass.CANCER){
 			outputText("It is constantly foaming in anticipation of a potential mate. ");
 		}
-
+		if(player.vaginaType() == VaginaClass.DEMONIC){
+			outputText("Your demonic vagina, unlike a normal pussy, feels and acts akin to a mouth that allows you to taste and savor the flavor of the cum injected within as if it landed on your tongue. Your sensitive walls are also prehensile, and you can control them to milk a cock just as well as your hand could. ");
+		}
 		if(player.lib < 50 && player.lust < 50) //not particularly horny
 
 		{
@@ -1167,6 +1171,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your " + num2Text(player.legCount) + " are human in appearance but drips with oily black fluids. You've not been using them just as much as of late since you are constantly levitating anyway.");
 		else if (player.lowerBody == LowerBody.RAIJU)
 			outputText("  You have " + num2Text(player.legCount) + " fluffy, furred legs that look vaguely like knee high socks. Your pawed feet end in four thick toes, which serve as your main source of balance. You can walk on them as normally as your old plantigrade legs. A thick strand of darkly colored fur breaks out from your ankles, emulating a bolt of lighting in appearance.");
+		else if (player.lowerBody == LowerBody.SQUIRREL)
+			outputText("  You have " + num2Text(player.legCount) + " fluffy, furred legs are covered in [skin coat.color] fur up to the thigh. They end with digitigrade squirrel paws.");
 		else if (player.lowerBody == LowerBody.WEASEL)
 			outputText("  You have " + num2Text(player.legCount) + " fluffy, furred legs like those of a weasel. Your pawed feet end in four thick toes, which serve as your main source of balance. You can walk on them as normally as your old plantigrade legs.");
 		else if (player.lowerBody == LowerBody.RED_PANDA)
@@ -1376,6 +1382,9 @@ public class PlayerAppearance extends BaseContent {
 		else if(player.tailType == Tail.USHI_ONI_ONNA) {
 			outputText("  You have an Ushi-"+player.mf("oni","onna")+" tail, the furred member is "+(player.tallness > 72 ? "5":"4")+" feet long and prehensile, the tip can shoot web string that are very thick and strong, and produce an arousing substance when in contact with the victim.");
 		}
+		else if(player.tailType == Tail.SQUIRREL) {
+			outputText(" At your back is a big long striped furry tail that curves up like that of a squirrel.");
+		}
 	}
 	public function describeArms():void {
 //Wing arms
@@ -1440,6 +1449,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your forearms are covered with dense fur upon which an electric current runs free. Your pawed hands end with sharp claws capable of delivering powerful discharges.");
 		else if (armType == Arms.RED_PANDA)
 			outputText("  Soft, black-brown fluff cover your arms. Your paws have cute, pink paw pads and short claws.");
+		else if (armType == Arms.SQUIRREL)
+			outputText("  Your arms are covered in [skin coat.color] fur up to your shoulder. They end with a pair of five-toed squirrel paws armed with claws which if needed can assist you into climbing trees.\n");
 		else if (armType == Arms.CAT)
 			outputText("  Your arms are covered in [skin coat.color] fur up to your shoulder. They end with a pair of five-toed cat paws armed with lethal claws.");
 		else if (armType == Arms.AVIAN)
@@ -1767,6 +1778,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  A slowly undulating neon blue tongue that glow in the dark occasionally slips from between your lips.  It hangs nearly two feet long when you let the whole thing slide out, though you can retract it to appear normal.");
 		else if (player.tongue.type == Tongue.GHOST)
 			outputText("  Occasionally a long transparent tongue slicks out of your mouth, stretching out about a foot in length.");
+		else if (player.tongue.type == Tongue.RATATOSKR)
+			outputText("  Your tongue is human in appearance but way more dexterous at handling words, able to form sentences and words so good it becomes art or so bad that it bleeds the ears and drives who hear them insane.");
 	}
 	public function describeBeard():void {
 //Beards!
@@ -1815,6 +1828,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your [eyecolor] elven eyes looks somewhat human, save for their cat-like vertical slit which draws light right in, allowing you to see with perfect precision both at day and night time.");
 		else if(eyeType == Eyes.RAIJU)
 			outputText("  Your eyes are of an electric [eyecolor] hue that constantly glows with voltage power. They have slitted pupils like those of a beast.");
+		else if(eyeType == Eyes.RATATOSKR)
+			outputText("  Your [eyecolor] eyes have slitted pupils like those of a Ratatoskr. Your know it all smug expression plastered in them at all time upsets quite a few.");
 		else if(eyeType == Eyes.WEASEL)
 			outputText("  Your [eyecolor] eyes have slitted pupils like those of a weasel.");
 		else if(eyeType == Eyes.VAMPIRE){
@@ -1926,6 +1941,8 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  A pair of pointy, floppy pig ears have sprouted from the top of your head.");
 			else if (earType == Ears.RHINO)
 				outputText("  A pair of open tubular rhino ears protrude from your head.");
+			else if (earType == Ears.SQUIRREL)
+				outputText("  A pair of sideways round squirrel ears that flick toward every slight sound.");
 			else if (earType == Ears.ECHIDNA)
 				outputText("  A pair of small rounded openings appear on your head that are your ears.");
 			else if (earType == Ears.DEER)
@@ -2042,6 +2059,8 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  The [hair] on your head is parted by a pair of pointy, floppy pig ears. They often flick about when you’re not thinking about it.");
 			else if(earType == Ears.RHINO)
 				outputText("  The [hair] on your head is parted by a pair of tubular rhino ears.");
+			else if (earType == Ears.SQUIRREL)
+				outputText("  The [hair] on your head is parted by a pair of sideways round squirrel ears that flick toward every slight sound.");
 			else if(earType == Ears.ECHIDNA)
 				outputText("  Your [hair] makes it near-impossible to see the small, rounded openings that are your ears.");
 			else if(earType == Ears.DEER)
@@ -2235,6 +2254,8 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  A set of razor-sharp, retractable shark-teeth fill your mouth and gives your visage a slightly angular appearance.");
 			else if (faceType == Face.BUNNY)
 				outputText("  The constant twitches of your nose and the length of your incisors gives your visage a hint of bunny-like cuteness.");
+			else if (faceType == Face.SMUG)
+				outputText("  the length of your incisors gives your visage a hint of squirrel-like cuteness. This said once in a while you can't help but smirk smuggly at your interlocutors.");
 			else if (faceType == Face.SPIDER_FANGS)
 				outputText("  A set of retractable, needle-like fangs sit in place of your canines and are ready to dispense their venom.");
 			else if (faceType == Face.FERRET_MASK)
@@ -2364,6 +2385,18 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  You have a dog's face, complete with wet nose and panting tongue.  You've got [skin coat], hiding your [skin base] underneath your furry visage.");
 			} else {
 				outputText("  You have the facial structure of a dog, wet nose and all, but overlaid with glittering patches of [skin coat]");
+			}
+		}
+		//Squirrel-face
+		if (faceType == Face.SQUIRREL) {
+			if (!player.hasCoat()) {
+				outputText("  You have a squirrel-like face");
+				tattooAndPatternGeneric();
+				outputText("  , complete with a twitching nose.  The odd visage is hairless and covered with [skin base].");
+			} else if (player.hasFullCoatOfType(Skin.FUR)) {
+				outputText("  You have a squirrel's face, complete with twitching nose and two incisors.  You've got [skin coat], hiding your [skin base] underneath your furry visage.");
+			} else {
+				outputText("  You have the facial structure of a squirrel, twitching nose incisors and all, but overlaid with glittering patches of [skin coat]");
 			}
 		}
 		//wolf-face
@@ -2991,7 +3024,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.kamaitachiScore() >= 15) outputText("\n<font color=\"#0000a0\">Kamaitachi: " + player.kamaitachiScore() + " (-20% to Str racial multi, +155% to Spe racial multi, +45% to Int racial multi, +70% to Wis racial multi, +25 sens)</font>");
 		else if (player.kamaitachiScore() >= 7) outputText("\n<font color=\"#0000a0\">Half Kamaitachi: " + player.kamaitachiScore() + " (-10% to Str racial multi, +70% to Spe racial multi, +20% to Int racial multi, +35% to Wis racial multi, +10 sens)</font>");
 		else if (player.kamaitachiScore() >= 1) outputText("\n<font color=\"#008000\">Half Kamaitachi: " + player.kamaitachiScore() + "</font>");
-		else if (player.kamaitachiScore() < 1) outputText("\n<font color=\"#ff0000\">Half Raiju: 0</font>");
+		else if (player.kamaitachiScore() < 1) outputText("\n<font color=\"#ff0000\">Half Kamaitachi: 0</font>");
 		//Kangaroo
 		if (player.kangaScore() >= 4) outputText("\n<font color=\"#0000a0\">Kangaroo-morph: " + player.kangaScore() + " (+5% to Tou racial multi, +15% to Spe racial multi)</font>");
 		else if (player.kangaScore() >= 1) outputText("\n<font color=\"#008000\">Kangaroo-morph: " + player.kangaScore() + "</font>");
@@ -3185,6 +3218,12 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.raijuScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Raiju: " + player.raijuScore() + " (+35% to Spe racial multi, +25% to Int racial multi, +40% to Lib racial multi, +25 max Sens, +25 min Sens)</font>");
 		else if (player.raijuScore() >= 1) outputText("\n<font color=\"#008000\">Half Raiju: " + player.raijuScore() + "</font>");
 		else if (player.raijuScore() < 1) outputText("\n<font color=\"#ff0000\">Half Raiju: 0</font>");
+		//Ratatoskr
+		if (player.ratatoskrScore() >= 18) outputText("\n<font color=\"#0000a0\">Ratatoskr: " + player.ratatoskrScore() + " (-20% to Str racial multi, +140% to Spe racial multi, +150% to Int racial multi)</font>");
+		else if (player.ratatoskrScore() >= 15) outputText("\n<font color=\"#0000a0\">Squirrel morph: " + player.ratatoskrScore() + " (-20% to Str racial multi, +120% to Spe racial multi, +125% to Int racial multi)</font>");
+		else if (player.ratatoskrScore() >= 6) outputText("\n<font color=\"#0000a0\">Half Squirrel morph: " + player.ratatoskrScore() + " (-10% to Str racial multi, +60% to Spe racial multi, +40% to Int racial multi)</font>");
+		else if (player.ratatoskrScore() >= 1) outputText("\n<font color=\"#008000\">Half Squirrel morph: " + player.ratatoskrScore() + "</font>");
+		else if (player.ratatoskrScore() < 1) outputText("\n<font color=\"#ff0000\">Half Squirrel morph: 0</font>");
 		//Red Panda
 		if (player.redpandaScore() >= 8) outputText("\n<font color=\"#0000a0\">Red Panda-morph: " + player.redpandaScore() + " (+15% to Str racial multi, +75% to Spe racial multi, +30% to Int racial multi)</font>");
 		else if (player.redpandaScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Red Panda-morph: " + player.redpandaScore() + " (+45% to Spe racial multi, +15% to Int racial multi)</font>");

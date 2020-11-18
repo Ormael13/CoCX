@@ -596,7 +596,7 @@ public class Exploration extends BaseContent
 					if (player.lowerBody == LowerBody.HUMAN) outputText("inside your footwear, between your toes");
 					if (player.lowerBody == LowerBody.HOOFED) outputText("in your hooves");
 					if (player.lowerBody == LowerBody.DOG) outputText("in your paws");
-					if (player.lowerBody == LowerBody.NAGA) outputText("in your scales");
+					if (player.isNaga()) outputText("in your scales");
 					outputText(".\n\n<b>You've discovered the Desert!</b>");
 					player.exploredDesert = 1;
 					player.explored++;

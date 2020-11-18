@@ -19,11 +19,11 @@ import classes.StatusEffects;
 					PerkLib.SluttySeduction,15,0,0,0,"Your incredibly revealing outfits allows you access to 'Seduce', an improved form of 'Tease'.",false,false);
 		}
 
-		override public function canUse():Boolean{
-			if (game.player.isFemale() && (!game.player.isTaur() || !game.player.lowerBody == LowerBody.NAGA || !game.player.lowerBody == LowerBody.SCYLLA || !game.player.lowerBody == LowerBody.KRAKEN || !game.player.lowerBody == LowerBody.CENTIPEDE || !game.player.lowerBody == LowerBody.GOO || !game.player.lowerBody == LowerBody.MELKIE || !game.player.lowerBody == LowerBody.DRIDER)){return true}
-			outputText("This armor is designed for females let alone females with normal two legged bodies.");
-			return false;
-		}
+		//override public function canUse():Boolean{
+		//	if (game.player.isFemale() && (!game.player.isTaur() || !game.player.lowerBody == LowerBody.NAGA || !game.player.lowerBody == LowerBody.SCYLLA || !game.player.lowerBody == LowerBody.KRAKEN || !game.player.lowerBody == LowerBody.CENTIPEDE || !game.player.lowerBody == LowerBody.GOO || !game.player.lowerBody == LowerBody.MELKIE || !game.player.lowerBody == LowerBody.DRIDER)){return true}
+		//	outputText("This armor is designed for females let alone females with normal two legged bodies.");
+		//	return false;
+		//}
 
 		override public function playerEquip():Armor {
 			while (game.player.findPerk(PerkLib.ScandalousSuccubusClothing) >= 0) game.player.removePerk(PerkLib.ScandalousSuccubusClothing);

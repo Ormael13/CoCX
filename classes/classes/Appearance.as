@@ -84,11 +84,13 @@ public class Appearance extends Utils
 				else if (i_creature.hairType == Hair.FLUFFY) description += "fluffy ";
 				else if (i_creature.hairType == Hair.GRASS) description += "grass-";
 				else if (i_creature.hairType == Hair.SILKEN) description += "silk-like ";
+				else if (i_creature.hairType == Hair.FAIRY) description += "otherworldly, silk-like and almost translucent ";
 				else if (i_creature.hairType == Hair.BURNING) description += "burning ";
 				else if (i_creature.hairType == Hair.SNOWY) description += "snowy ";
 				else if (i_creature.hairType == Hair.CRAZY) description += "crazy ";
 				description += "mane";
 				if (i_creature.hairType == Hair.STORM) description += ". The tips ends with glowing lightning shaped locks";
+				if (i_creature.hairType == Hair.RATATOSKR) description += ". They are stripped at the center with light tips not unlike the head of a chipmunk or Ratatoskr.";
 				return description;
 			}
 			//if medium length refer to as locks sometimes
@@ -108,11 +110,13 @@ public class Appearance extends Utils
 			else if (i_creature.hairType == Hair.FLUFFY) description += "fluffy ";
 			else if (i_creature.hairType == Hair.GRASS) description += "grass-";
 			else if (i_creature.hairType == Hair.SILKEN) description += "silk-like ";
+			else if (i_creature.hairType == Hair.FAIRY) description += "otherworldly, silk-like and almost translucent ";
 			else if (i_creature.hairType == Hair.SNOWY) description += "snowy ";
 			else if (i_creature.hairType == Hair.CRAZY) description += "crazy ";
 			if (i_creature.hairType == Hair.BURNING) description += "mane of fire that burns things only when you wish it to";
 			else description += "hair";
 			if (i_creature.hairType == Hair.STORM) description += ". The tips ends with glowing lightning shaped locks";
+			if (i_creature.hairType == Hair.RATATOSKR) description += ". They are stripped at the center with light tips not unlike the head of a chipmunk or Ratatoskr.";
 			else if (i_creature.hairType == Hair.SNOWY) {
 				description += " are human in appearance but snow flurries regularly nest within them";
 				if (i_creature.rearBody.type == RearBody.GLACIAL_AURA) description += " your bone chilling aura might have something to do with that";
@@ -2517,9 +2521,11 @@ public class Appearance extends Utils
 					[Hair.FLUFFY, "fluffy"],
 					[Hair.GRASS, "grass"],
 					[Hair.SILKEN, "silk-like"],
+					[Hair.FAIRY, "otherworldly, silk-like and almost translucent"],
+					[Hair.CRAZY, "crazy"],
 					[Hair.STORM, "glowing lightning shaped"],
+					[Hair.RATATOSKR, "striped"],
 					[Hair.SNOWY, "snowy"],
-					[Hair.FAIRY, "otherworldly, silk-like and almost translucent"]
 				]
 		);
 		public static const DEFAULT_BEARD_NAMES:Object = createMapFromPairs(
@@ -2583,7 +2589,9 @@ public class Appearance extends Utils
 					[Face.GHOST, "ghost"],
 					[Face.JIANGSHI, "jiangshi"],
 					[Face.YUKI_ONNA, "yuki onna"],
-					[Face.FAIRY, "fairy"]
+					[Face.FAIRY, "fairy"],
+					[Face.SQUIRREL, "squirrel"],
+					[Face.SMUG, "smug"],
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2597,7 +2605,8 @@ public class Appearance extends Utils
 					[Tongue.ELF, "elf"],
 					[Tongue.DOG, "dog"],
 					[Tongue.CAVE_WYRM, "draconic"],
-					[Tongue.GHOST, "ghost"]
+					[Tongue.GHOST, "ghost"],
+					[Tongue.RATATOSKR, "ratatoskr"],
 				]
 		);
 		public static const DEFAULT_EYES_NAMES:Object = createMapFromPairs(
@@ -2629,7 +2638,9 @@ public class Appearance extends Utils
 					[Eyes.FIRE_SNAIL, "fire snail"],
 					[Eyes.GHOST, "ghost"],
 					[Eyes.JIANGSHI, "jiangshi"],
-					[Eyes.FAIRY, "fairy"]
+					[Eyes.FAIRY, "fairy"],
+					[Eyes.WEASEL, "weasel"],
+					[Eyes.RATATOSKR, "ratatoskr"],
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
@@ -2669,7 +2680,8 @@ public class Appearance extends Utils
 					[Ears.BEAR, "bear"],
 					[Ears.PANDA, "panda"],
 					[Ears.SHARK, "shark"],
-					[Ears.DISPLACER, "displacer"]
+					[Ears.DISPLACER, "displacer"],
+					[Ears.SQUIRREL, "squirrel"],
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2691,7 +2703,7 @@ public class Appearance extends Utils
 					[Horns.BICORN, "bicorn"],
 					[Horns.GHOSTLY_WISPS, "ghostly wisps"],
 					[Horns.SPELL_TAG, "spell tag"],
-					[Horns.FROSTWYRM, "frost wyrm"]
+					[Horns.FROSTWYRM, "frost wyrm"],
 				]
 		);
 		public static const DEFAULT_ANTENNAE_NAMES:Object = createMapFromPairs(
@@ -2700,7 +2712,7 @@ public class Appearance extends Utils
 					[Antennae.BEE, "bee"],
 					[Antennae.MANTIS, "mantis"],
 					[Antennae.FIRE_SNAIL, "fire snail"],
-					[Antennae.MOTH, "moth"]
+					[Antennae.MOTH, "moth"],
 				]
 		);
 		public static const DEFAULT_ARM_NAMES:Object = createMapFromPairs(
@@ -2746,7 +2758,10 @@ public class Appearance extends Utils
 					[Arms.JIANGSHI, "jiangshi"],
 					[Arms.RAIJU_2, "raiju paws"],
 					[Arms.YUKI_ONNA, "yuki onna"],
-					[Arms.FROSTWYRM, "frost wyrm"]
+					[Arms.FROSTWYRM, "frost wyrm"],
+					[Arms.WEASEL, "weasel"],
+					[Arms.KAMAITACHI, "kamaitachi"],
+					[Arms.SQUIRREL, "squirrel"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2789,7 +2804,8 @@ public class Appearance extends Utils
 					[Tail.GARGOYLE_2, "axe-shaped gargoyle"],
 					[Tail.AVIAN, "avian"],
 					[Tail.GRIFFIN, "griffin"],
-					[Tail.CAVE_WYRM, "cave wyrm"]
+					[Tail.CAVE_WYRM, "cave wyrm"],
+					[Tail.SQUIRREL, "squirrel"]
 				]
 		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(
@@ -2825,7 +2841,7 @@ public class Appearance extends Utils
 					[Wings.NIGHTMARE, "leathery"],
 					[Wings.ETHEREAL_WINGS, "etheral tendrils"],
 					[Wings.THUNDEROUS_AURA, "thunderous aura"],
-					[Wings.FAIRY, "fairy"]
+					[Wings.FAIRY, "fairy"],
 				]
 		);
 		public static const DEFAULT_WING_DESCS:Object = createMapFromPairs(
@@ -2860,7 +2876,7 @@ public class Appearance extends Utils
 					[Wings.ETHEREAL_WINGS, "etheral tendrils"],
 					[Wings.THUNDEROUS_AURA, "thunderous aura"],
 					[Wings.LEVITATION, "levitation"],
-					[Wings.FAIRY, "butterfly"]
+					[Wings.FAIRY, "butterfly"],
 				]
 		);
 		public static const DEFAULT_LOWER_BODY_NAMES:Object = createMapFromPairs(
@@ -2920,7 +2936,9 @@ public class Appearance extends Utils
 					[LowerBody.GHOST_2, "poltergeist"],
 					[LowerBody.JIANGSHI, "jiangshi"],
 					[LowerBody.YUKI_ONNA, "yuki onna"],
-					[LowerBody.FROSTWYRM, "frost wyrm"]
+					[LowerBody.FROSTWYRM, "frost wyrm"],
+					[LowerBody.WEASEL, "weasel"],
+					[LowerBody.SQUIRREL, "squirrel"]
 				]
 		);
 		// <mod name="Dragon patch" author="Stadler76">
@@ -2958,7 +2976,13 @@ public class Appearance extends Utils
 				[
 					[VaginaClass.HUMAN, "human"],
 					[VaginaClass.EQUINE, "equine"],
-					[VaginaClass.BLACK_SAND_TRAP, "black sandtrap"]
+					[VaginaClass.BLACK_SAND_TRAP, "black sandtrap"],
+					[VaginaClass.CAVE_WYRM, "acidic"],
+					[VaginaClass.VENOM_DRIPPING, "venom dripping"],
+					[VaginaClass.MANTICORE, "ultrasensitive"],
+					[VaginaClass.CANCER, "foaming"],
+					[VaginaClass.DEMONIC, "fiendish"],
+					[VaginaClass.ALRAUNE, "floral"]
 				]
 		);
 
