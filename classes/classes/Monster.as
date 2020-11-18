@@ -2805,8 +2805,18 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.RegenInhibitor,1,-1);
 				//Heal wounds
 				if (statusEffectv1(StatusEffects.RegenInhibitor) <= 0) {
-					if (this is Hydra) outputText("The hydra sighs in relief as her wounds resume regenerating!\n\n");
+					outputText(capitalA + short + " sighs in relief as " + pronoun3 + " wounds resume regenerating!\n\n");
 					removeStatusEffect(StatusEffects.RegenInhibitor);
+				}
+			}
+			//Regen Inhibitor
+			if (hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.HydraRegenerationDisabled,1,-1);
+				//Heal wounds
+				if (statusEffectv1(StatusEffects.HydraRegenerationDisabled) <= 0) {
+					if (this is Hydra) outputText(capitalA + short + " sighs in relief as " + pronoun3 + " wounds resume regenerating!\n\n");
+					removeStatusEffect(StatusEffects.HydraRegenerationDisabled);
 				}
 			}
 			//Ice DoT
@@ -3000,8 +3010,8 @@ import flash.utils.getQualifiedClassName;
 			}
 			//regeneration perks for monsters
 			if (((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.LizanMarrowFinalForm) >= 0 || findPerk(PerkLib.DraconicHeartFinalForm) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0
-			|| findPerk(PerkLib.Lifeline) >= 0 || findPerk(PerkLib.ImprovedLifeline) >= 0 || findPerk(PerkLib.GreaterLifeline) >= 0 || findPerk(PerkLib.EpicLifeline) >= 0 || findPerk(PerkLib.IcyFlesh) >= 0 || findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0
-			|| findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxHP()) && (this.HP > 0))) {
+			|| findPerk(PerkLib.HydraRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0 || findPerk(PerkLib.ImprovedLifeline) >= 0 || findPerk(PerkLib.GreaterLifeline) >= 0 || findPerk(PerkLib.EpicLifeline) >= 0 || findPerk(PerkLib.IcyFlesh) >= 0 || findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0
+			|| findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxHP()) && (this.HP > 0))) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				if (findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + newGamePlusMod()));
@@ -3015,6 +3025,7 @@ import flash.utils.getQualifiedClassName;
 					if (this.HP < (this.maxHP() * 0.25)) healingPercent += 4.5;
 				}
 				if (findPerk(PerkLib.DraconicHeartFinalForm) >= 0) healingPercent += 1;
+				if (findPerk(PerkLib.HydraRegeneration) >= 0 && !hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) healingPercent += 1 * perkv1(PerkLib.HydraRegeneration);
 				if (findPerk(PerkLib.IcyFlesh) >= 0) healingPercent += 1;
 				if (findPerk(PerkLib.BodyCultivator) >= 0) healingPercent += 0.5;
 				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;

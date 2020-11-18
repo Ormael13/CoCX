@@ -280,7 +280,7 @@ use namespace CoC;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
-			this.createPerk(PerkLib.MonsterRegeneration, 0.5, 0, 0, 0);
+			this.createPerk(PerkLib.HydraRegeneration, 0.5, 0, 0, 0);
 			this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			if ((flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) && this.level >= 40) this.createPerk(PerkLib.Resolute, 0, 0, 0, 0);

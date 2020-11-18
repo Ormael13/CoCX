@@ -106,7 +106,7 @@ public class CancerAttack extends Monster
 		}
 
 		private function Guillotine():void {
-			var damage:Number = 0;
+			var damage:Number = rand(weaponAttack);
 			outputText("The cancer begins to crush you inside [monster his] pincers. It hurts!! You can almost hear your bones breaking!");
 			damage += eBaseStrengthDamage() * 2;
 			damage = Math.round(damage);
@@ -115,7 +115,7 @@ public class CancerAttack extends Monster
 		}
 
 		private function Slam():void {
-			var damage:Number = 0;
+			var damage:Number = rand(weaponAttack)
 			outputText("The cancer slams [monster his] giant pincer on you like a hammer.");
 			damage += eBaseStrengthDamage() * 2;
 			damage = Math.round(damage);
@@ -159,8 +159,8 @@ public class CancerAttack extends Monster
 			this.skinTone = "light";
 			this.hairColor = "pale brown";
 			this.hairLength = 15;
-			initStrTouSpeInte(170, 190, 80, 40);
-			initWisLibSensCor(40, 150, 80, 100);
+			initStrTouSpeInte(167, 185, 149, 42);
+			initWisLibSensCor(41, 144, 82, 30);
 			this.weaponName = "pincers";
 			this.weaponVerb="pincer";
 			this.weaponAttack = 69;
@@ -168,16 +168,13 @@ public class CancerAttack extends Monster
 			this.armorDef = 90;
 			this.armorMDef = 10;
 			this.bonusHP = 200;
-			this.bonusLust = 200;
+			this.bonusLust = 50;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 40;
-			this.gems = rand(60)+20;
+			this.level = 37;
+			this.gems = rand(40)+40;
 			this.drop = new WeightedDrop().addMany(1, consumables.BUBBLEG);
-			this.special1 = SceneLib.combat.packAttack;
-			this.special2 = SceneLib.combat.lustAttack;
 			this.tailType = Tail.NONE;
-			//this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

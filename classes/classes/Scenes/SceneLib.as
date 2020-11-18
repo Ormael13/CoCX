@@ -2,6 +2,7 @@ package classes.Scenes {
 import classes.CoC;
 import classes.Items.Mutations;
 import classes.Scenes.Areas.*;
+import classes.Scenes.Areas.Bog.TrollScenes;
 import classes.Scenes.Areas.Caves.DisplacerBeastScene;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Areas.GlacialRift.FrostGiantScene;
@@ -87,6 +88,8 @@ public class SceneLib {
     public static var goblinShamanScene:GoblinShamanScene = new GoblinShamanScene();
 
     public static var goblinElderScene:GoblinElderScene = new GoblinElderScene();
+
+    public static var trollScene:TrollScenes = new TrollScenes();
 	
 	public static var displacerbeastScene:DisplacerBeastScene = new DisplacerBeastScene();
 

@@ -2831,8 +2831,7 @@ use namespace CoC;
 		}
 
 		//Camp Development Stage
-		public function campDevelopmentStage():String
-		{
+		public function campDevelopmentStage():String {
 			var descC:String;
 			if (hasStatusEffect(StatusEffects.AdvancingCamp)) {
 				/*if (statusEffectv1(StatusEffects.AdvancingCamp) ) descC = "city";
@@ -2841,12 +2840,10 @@ use namespace CoC;
 				else */descC = "hamlet";
 			}
 			else descC = "camp";
-
 			return descC;
 		}
 
 		public function race():String {
-
 			var race:String = "human";
 			var ScoreList:Array = [
 				{name: 'human', score: 1, minscore: 1},

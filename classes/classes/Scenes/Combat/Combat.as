@@ -488,7 +488,7 @@ public class Combat extends BaseContent {
     public function isPlayerBound():Boolean {
         var bound:Boolean = false;
         if (player.hasStatusEffect(StatusEffects.HarpyBind) || player.hasStatusEffect(StatusEffects.GooBind) || player.hasStatusEffect(StatusEffects.TentacleBind) || player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.ScyllaBind)
-                || player.hasStatusEffect(StatusEffects.WolfHold) || monster.hasStatusEffect(StatusEffects.QueenBind) || monster.hasStatusEffect(StatusEffects.PCTailTangle)) bound = true;
+                || player.hasStatusEffect(StatusEffects.WolfHold) || player.hasStatusEffect(StatusEffects.TrollHold) || monster.hasStatusEffect(StatusEffects.QueenBind) || monster.hasStatusEffect(StatusEffects.PCTailTangle)) bound = true;
         if (player.hasStatusEffect(StatusEffects.HolliConstrict)) bound = true;
         if (player.hasStatusEffect(StatusEffects.GooArmorBind)) bound = true;
         if (monster.hasStatusEffect(StatusEffects.MinotaurEntangled)) {
@@ -1768,6 +1768,10 @@ public class Combat extends BaseContent {
                 player.takePhysDamage(5 + rand(5));
             }
             skipMonsterAction = true;
+        } else if (player.hasStatusEffect(StatusEffects.TrollHold)) {
+            clearOutput();
+            outputText("You don’t feel motivated, something about his strong arms and soothing fur is getting to you, it’s not so bad once you really sink into him.");
+            skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.HolliConstrict)) {
             (monster as Holli).waitForHolliConstrict(true);
             skipMonsterAction = true;
@@ -1941,7 +1945,18 @@ public class Combat extends BaseContent {
                 }
             }
             skipMonsterAction = true;
-        } else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
+        } else if (player.hasStatusEffect(StatusEffects.TrollHold)) {
+			clearOutput();
+			outputText("You squirm violently, trying to shake out of his grasp. ");
+			if (rand(3) == 0 || rand(80) < player.str / 1.5 || player.hasPerk(PerkLib.FluidBody)) {
+                outputText("You break free of his grasp, pushing him away, disorienting him for a moment.");
+                player.removeStatusEffect(StatusEffects.TrollHold);
+            } else {
+				outputText("He maintains a fierce grip on you.");
+                player.takePhysDamage(7 + rand(5));
+			}
+            skipMonsterAction = true;
+		} else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
             if (monster as FrostGiant) (monster as FrostGiant).giantGrabStruggle();
             if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantGrabStruggle();
             skipMonsterAction = true;
@@ -5024,6 +5039,7 @@ public class Combat extends BaseContent {
 
     public function monsterLevelAdjustment():Number {
         var monsterLevelAdjustment:Number = 0;
+		//perks like god type enemy
         return monsterLevelAdjustment;
     }
 
@@ -5124,6 +5140,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
         if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+        if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -5194,6 +5211,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
         if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.925;
         if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
         if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
         if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
@@ -5242,12 +5260,12 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
         if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
-        if (monster.hasStatusEffect(StatusEffects.MonsterRegen)) {
+        if (monster.hasPerk(PerkLib.HydraRegeneration)) {
             if (monster.short == "Hydra") {
-				monster.createStatusEffect(StatusEffects.RegenInhibitor, 5, 0, 0, 0);
+				monster.createStatusEffect(StatusEffects.HydraRegenerationDisabled, 5, 0, 0, 0);
 				outputText(" The hydra hisses in anger as her wound cauterised, preventing regeneration. It's the time to strike!");
 			}
-			if (monster.short == "troll" || monster.short == "Zenji") monster.createStatusEffect(StatusEffects.RegenInhibitor, 2, 0, 0, 0);
+			if (monster.short == "adult troll male" || monster.short == "adult troll female" || monster.short == "troll" || monster.short == "Zenji") monster.createStatusEffect(StatusEffects.HydraRegenerationDisabled, 2, 0, 0, 0);
         }
         if (monster.hasStatusEffect(StatusEffects.IceArmor)) {
             monster.addStatusValue(StatusEffects.IceArmor, 1, -1);
@@ -5281,6 +5299,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
         if (monster.hasStatusEffect(StatusEffects.FrostburnDoT) && monster.statusEffectv3(StatusEffects.FrostburnDoT) > 0) damage *= (1 + (0.5 * monster.statusEffectv3(StatusEffects.FrostburnDoT)));
+        if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
         if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
         if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
         if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
@@ -5361,6 +5380,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
         if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+        if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
         if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
         if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
         if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
@@ -5440,6 +5460,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
         if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+        if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
         if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.2;
         if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.5;
         if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 2;
@@ -5514,6 +5535,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
         if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+        if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {

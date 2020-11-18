@@ -1763,7 +1763,6 @@ public function loverZenjiPitchAnal():void {
 		outputText("Zenji takes a deep breath \"<i>You’ll be de first one… I… Yes, dis is what I want, I want you to take me, [name].</i>\"\n\n");
 		player.addStatusValue(StatusEffects.ZenjiZList, 4, 1);
 	}
-	player.buttChange(15,true,true,false);
 	outputText("Zenji kneels on his bedroll, \"<i>I… I’m ready for ya, [name].</i>\"\n\n");
 	if (player.tallness < 60) outputText("You follow behind him, mounting his massive body to the best of your abilities while getting a good grasp of his frame. Your erection rises to full mast as you align it to his rear.");
 	else if (player.tallness < 108) outputText("You follow behind him, your manhood already reaching full length as you align yourself with his rear. You ask him if he’s ready, he gives a quiet nod. You take a firm grasp on his muscular rear.");
