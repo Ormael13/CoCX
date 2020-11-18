@@ -77,8 +77,8 @@ package classes.Scenes
 			outputText("-New tier 5 intelligence lvl-up perk: Raging Inferno (Ex). Req. Raging Inferno perk, Grand Archmage perk and 150+ int. Effect: Increase to cumulative damage by 10%. Penalty for turn without casted fire spell decreased by 5%.\n");
 			outputText("-New tier 9 intelligence lvl-up perk: Raging Inferno (Su). Req. Raging Inferno (Ex) perk, Grand Archmage (3rd circle) perk and 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling fire based attack. Penalty for turn without casted fire spell decreased by another 5%.\n");
 			outputText("-Raging Inferno, x, x, x perks effects was changed to boost respective elemental damage by 20% and each turn without casted the same element spell/special lowering damage bonus by 20% instead of reseting it fully.\n");
-			outputText("-Lover Zenji get new options: Sleep With (variants for having or not cabin), x, x\n");
-			outputText("-\n");
+			outputText("-Lover Zenji get new options: Sleep With (variants for having or not cabin), Nightwatch, x\n");
+			outputText("-New ring (by Liadri): Engagement Ring - buyable at jewelry shop in Tel'Adre in Special Rings shelf. Cost 200 gems. Required in wedding ceremonies. Will be used during event.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -139,7 +139,36 @@ package classes.Scenes
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -183,6 +212,21 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -46,9 +46,12 @@ public class RyuBiHuman extends Monster
 			this.lust = 20;
 			this.lustVuln = .25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 42;
+			this.level = 90;
 			this.gems = 15 + rand(8);
-			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);//zamienić na worek of spirit stones ^^
+			this.drop = new ChainedDrop().
+					add(consumables.BAGOCA1, 1).
+					add(consumables.BAGOCA2, 0.7).
+					add(consumables.BAGOCA3, 0.4);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGodType, 0, 0, 0, 0);
 			checkMonster();

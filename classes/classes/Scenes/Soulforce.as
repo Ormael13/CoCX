@@ -3633,7 +3633,7 @@ public function FightHellfireSnail():void {
 			//button 11
 			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) addButton(12, "Giacomo", findGiacomo).hint("Req. 100+ soulforce");
 			else addButtonDisabled(12, "Giacomo", "");
-			addButtonDisabled(13, "???", "Draw into your soulforce for soulsensing. (Comming Soon)")
+			addButton(13, "???", theUnknown).hint("Draw into your soulforce for soulsensing.");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		public function TamaniEnc():void {
@@ -3643,7 +3643,7 @@ public function FightHellfireSnail():void {
 				tamaniScene.encounterTamani();
 			}
 			else {
-				outputText("Your current soulforce is too low.");
+				outputText("\n\nYour current soulforce is too low.");
 				doNext(SoulSense);
 			}
 		}
@@ -3654,7 +3654,7 @@ public function FightHellfireSnail():void {
 				tamaniDaughtersScene.encounterTamanisDaughters();
 			}
 			else {
-				outputText("Your current soulforce is too low.");
+				outputText("\n\nYour current soulforce is too low.");
 				doNext(SoulSense);
 			}
 		}
@@ -3665,7 +3665,7 @@ public function FightHellfireSnail():void {
 				SceneLib.kitsuneScene.enterTheTrickster();
 			}
 			else {
-				outputText("Your current soulforce is too low.");
+				outputText("\n\nYour current soulforce is too low.");
 				doNext(SoulSense);
 			}
 		}
@@ -3676,7 +3676,7 @@ public function FightHellfireSnail():void {
 				izumiScenes.encounter();
 			}
 			else {
-				outputText("Your current soulforce is too low.");
+				outputText("\n\nYour current soulforce is too low.");
 				doNext(SoulSense);
 			}
 		}
@@ -3688,11 +3688,13 @@ public function FightHellfireSnail():void {
 				spriteSelect(122);
 			}
 			else {
-				outputText("Your current soulforce is too low.");
+				outputText("\n\nYour current soulforce is too low.");
 				doNext(SoulSense);
 			}
 		}
-
+		//button 6
+		//button 7
+		//button 8
 		public function findWorldTree():void {
 			if (player.soulforce >= 100) {
 				player.soulforce -= 100;
@@ -3700,10 +3702,11 @@ public function FightHellfireSnail():void {
 				wolrdtreeScene.YggdrasilDiscovery();
 			}
 			else {
-				outputText("Your current soulforce is too low.");
+				outputText("\n\nYour current soulforce is too low.");
 				doNext(SoulSense);
 			}
 		}
+		//button 11
 		public function findGiacomo():void {
 			if (player.soulforce >= 100) {
 				player.soulforce -= 100;
@@ -3711,7 +3714,18 @@ public function FightHellfireSnail():void {
 				SceneLib.giacomoShop.giacomoEncounter();
 			}
 			else {
-				outputText("Your current soulforce is too low.");
+				outputText("\n\nYour current soulforce is too low.");
+				doNext(SoulSense);
+			}
+		}
+		public function theUnknown():void {
+			if (player.soulforce >= 100) {
+				player.soulforce -= 100;
+				statScreenRefresh();
+				SceneLib.ryubi.RyuBiEnterTheDragon();
+			}
+			else {
+				outputText("\n\nYour current soulforce is too low.");
 				doNext(SoulSense);
 			}
 		}

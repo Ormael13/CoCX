@@ -86,6 +86,7 @@ public class JewelryShop extends Shop {
         var button:int = 0;
         addButton(button++, jewelries.LTHCRNG.shortName, confirmBuy, jewelries.LTHCRNG);
         addButton(button++, jewelries.PURERNG.shortName, confirmBuy, jewelries.PURERNG);
+        addButton(button++, jewelries.ENDGRNG.shortName, confirmBuy, jewelries.ENDGRNG);
         addButton(14, "Back", inside);
     }
     private function enchantedRings1():void{
