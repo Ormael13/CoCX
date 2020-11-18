@@ -770,12 +770,12 @@ import classes.StatusEffects;
 			outputText("Zenji charges at " + monster.a + monster.short + ", knocking them down and pinning them beneath him with his spear. <b>(<font color=\"#800000\">" + String(dmg13) + "</font>)</b> Zenji has " + monster.a + monster.short + " pinned beneath him. \"<i>And stay down!</i>\" Zenji shouts. " + monster.capitalA + monster.short + " struggles beneath him before finally shaking him off.\n\n");
 		}
 		public function zenjiCombatActions5():void {
-			outputText("Seeing your injuries, Zenji quickly rushes to your side, \"<i>It’s okay [name]... I’m here for you…</i>\" He says, wrapping you within his arms, completely shielding you from your enemies. ");
-			outputText("\"<i>It’s… okay… I won’t let them hurt you… I will endure it all for you so you don’t have to. I’d do anything for you.</i>\" He whispers, gently rubbing a hand over your wounds, helping you recover slightly.\n\n");
+			outputText("Seeing your injuries, Zenji quickly rushes to your side, \"<i>It’s okay [name]... I’m here for you…</i>\" he says, wrapping you within his arms, completely shielding you from your enemies. ");
+			outputText("\"<i>It’s… okay… I won’t let them hurt you… I will endure it all for you so you don’t have to. I’d do anything for you.</i>\" He gently rubs a hand over your wounds, helping you recover slightly.\n\n");
 			HPChange(Math.round(player.maxHP() * .1), true);
 			player.addStatusValue(StatusEffects.CombatFollowerZenji, 3, 1);
 			if (player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 1) outputText(" Zenji remains weary, but he stands as if he were completely unaffected by the physical trauma he just endured.");
-			else outputText(" Zenji seems much worse for wear after protecting you. \"<i>I’m fine.</i>\" He mumbles, but it’s apparent that he’s sustained some heavy damage.");
+			else outputText("Zenji seems much worse for wear after protecting you, \"<i>I’m fine.</i>\" he mumbles, but it’s apparent that he’s sustained heavy damage.");
 		}/*
 		
 		public function divaCombatActions():void {
