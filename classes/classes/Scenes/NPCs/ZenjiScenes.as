@@ -2228,7 +2228,7 @@ public function loverZenjiSleepWithMorning():void {
 	outputText("You assure him that you did, it’s nice spending the night with him.\n\n");
 	outputText("\"<i>We got a whole day ahead of us now, best ta get to it.</i>\" He replies, disentangling his tail from you while helping you get up, ready to start the day.\n\n");
 	outputText("You nod, ready to start the day, but now you have the support of your lover backing you up. You tell him as you reach your hand up and give him a scratch behind his ear.\n\n");
-	outputText("Zenji sighs softly as he sinks into your ministrations, he’s like putty in your hands. \"<i>R-right dere, [name]... yeah… dat’s de spot…</i>\" he says with his eyes closed, as his ears twitch slightly. You can hear his tail swishing happily behind him like an excited puppy.\n\n");
+	outputText("Zenji sighs softly as he sinks into your ministrations, he’s like putty in your hands. \"<i>R-right dere, [name]... yeah… dat’s de spot…</i>\" he says with his eyes closed as his ears twitch slightly. You can hear his tail swishing happily behind him like an excited puppy.\n\n");
 	outputText("You laugh, you’re not used to this side of him. It would seem his ears are quite the soft spot for him.\n\n");
 	outputText("As much as you enjoy toying with him you decide that you must continue with your day. You finally break the trance you’ve brought him in.\n\n");
 	outputText("Zenji seems visibly disheartened when you remove your [finger] from his ear before he blushes softly. Before you can say anything, he reaches his hand out to hold yours, \"<i>Let's get on wit de day den.</i>\"\n\n");
@@ -2260,7 +2260,7 @@ public function loverZenjiSleepWithGetPenetrated(timeQ:Number):void {
 	outputText("\"<i>Haha, you can beg betta dan dat.</i>\"\n\n");
 	outputText("You grab hold of his larger hand, caressing your face with him, giving his fuzzy finger a small lick before pleading, you need him to go faster, you want him to go faster, you're desperate for his touch, for him, you need him now more than ever, you need to be bred with every ounce of love he has to offer.\n\n");
 	outputText("\"<i>Much betta...</i>\" He whispers. Your words of desperation are more than enough for him as he begins picking up the pace. Zenji growls softly as he buries himself deeper into your womb, thrusting with greater passion. You feel your body rocked to the very core as he presses his hips against you, trying to bury his length as deep as it will go within you, making sure not to leave a single inch of your inner walls unscratched. It doesn't take long before a familiar pressure builds up within your loins. ");
-	outputText("You moan softly and beg him not to stop. You throw your head back as you find yourself cumming over him, your [legs] squeeze around him harder, as your vagina clamps tightly around him, trying to milk his dick of everything he has.\n\n");
+	outputText("You moan softly and beg him not to stop. You throw your head back as you find yourself cumming over him, your [legs] squeeze around him harder as your vagina clamps tightly around him, trying to milk his dick of everything he has.\n\n");
 	outputText("Zenji gives you a cocky smile as he slowly pulls out, his lack of presence within you is agony. \"<i>We're not done until I'm done...</i>\" he growls. \"<i>Sit up an' open wide,</i>\" he states, patting your head gently, \"<i>It’s time for a little treat...</i>\"\n\n");
 	outputText("You crawl up to your knees and he pulls his length up, ready for you to blow him. You desperately place your lips at the tip of his rock hard length, licking up all the precum he has to offer. \"<i>Ya really are good at dis...</i>\" he says between moans. He grabs the back of your head and presses you into him. You ");
 	if (player.gender == 0) outputText("slowly fondle your body as you blow Zenji");
@@ -2336,7 +2336,7 @@ public function loverZenjiSleepWithNoSex(timeQ:Number):void {
 public function loverZenjiSleepWithGetPenetratedMorning():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
-	outputText("You wake up the next morning, as you open your eyes, your face is still nestled in Zenji's chest tuft between his manly pectorals. You feel a soothing sense of comfort as you awaken. Zenji is gently rubbing your back with slow and repeated motions. Daylight pours into the room and you give a small yawn and look up at Zenji, his eyes are rested upon your face.\n\n");
+	outputText("You wake up the next morning. As you open your eyes your face is still nestled in Zenji's chest tuft between his manly pectorals. You feel a soothing sense of comfort as you awaken. Zenji is gently rubbing your back with slow and repeated motions. Daylight pours into the room and you give a small yawn and look up at Zenji, his eyes are rested upon your face.\n\n");
 	outputText("\"<i>Good morning [name]. Sleep well?</i>\" He asks, giving you a gentle smile.\n\n");
 	outputText("You tell him that indeed you did and are hoping to do this again with him.\n\n");
 	outputText("Zenji strokes the top of your head, \"<i>Dis is nice, spending da night together, I'm glad ya enjoyed it as much as I did</i>\" He pulls you closer to him for a peck on the lips.\n\n");
@@ -2344,7 +2344,7 @@ public function loverZenjiSleepWithGetPenetratedMorning():void {
 	outputText("You look down, remembering just how hefty of a load Zenji poured out onto you, you’re not sure how or when exactly, but at some point, Zenji has cleaned the two of you off.\n\n");
 	outputText("Zenji helps you get dressed as he puts his loincloth on. \"<i>Ya ready for another day, champion?</i>\"\n\n");
 	outputText("You nod, ready for sure, but now you have the support of your lover backing you up. You tell him as you reach your [finger] up and give him a scratch behind his ear.\n\n");
-	outputText("Zenji sighs softly as he sinks into your ministrations, he’s like putty in your hands. \"<i>R-right dere, [name]... yeah… dat’s de spot…</i>\" he states with his eyes closed, as his ears twitch slightly. You can hear his tail swishing happily behind him like an excited puppy.\n\n");
+	outputText("Zenji sighs softly as he sinks into your ministrations, he’s like putty in your hands. \"<i>R-right dere, [name]... yeah… dat’s de spot…</i>\" he states with his eyes closed as his ears twitch slightly. You can hear his tail swishing happily behind him like an excited puppy.\n\n");
 	outputText("You laugh, you’re not used to this side of him. It would seem his ears are quite the soft spot for him.\n\n");
 	outputText("As much as you enjoy toying with him you decide that you must continue with your day. You finally break the trance you’ve brought him in.\n\n");
 	outputText("Zenji seems visibly disheartened when you remove your [finger] from his ear before he blushes softly. \"<i>D-dat… dat was nice… I-I can’t believe you had me under ya fingers like dat…</i>\" He scratches behind his ear softly. \"<i>Let's get on wit de day den.</i>\"\n\n");
@@ -2363,7 +2363,7 @@ public function loverZenjiSleepWithCatchAnalMorning():void {
 	outputText("You look down, remembering just how hefty of a load Zenji poured out onto you, you’re not sure how or when exactly, but at some point, Zenji has cleaned the two of you off.\n\n");
 	outputText("Zenji helps you get dressed as he puts his loincloth on. \"<i>Ya ready for another day, champion?</i>\"\n\n");
 	outputText("You nod, ready for sure, but now you have the support of your lover backing you up. You tell him as you reach your [finger] up and give him a scratch behind his ear.\n\n");
-	outputText("Zenji sighs softly as he sinks into your ministrations, he’s like putty in your hands. \"<i>R-right dere, [name]... yeah… dat’s de spot…</i>\" he states with his eyes closed, as his ears twitch slightly. You can hear his tail swishing happily behind him like an excited puppy.\n\n");
+	outputText("Zenji sighs softly as he sinks into your ministrations, he’s like putty in your hands. \"<i>R-right dere, [name]... yeah… dat’s de spot…</i>\" he states with his eyes closed as his ears twitch slightly. You can hear his tail swishing happily behind him like an excited puppy.\n\n");
 	outputText("You laugh, you’re not used to this side of him. It would seem his ears are quite the soft spot for him.\n\n");
 	outputText("As much as you enjoy toying with him you decide that you must continue with your day. You finally break the trance you’ve brought him in.\n\n");
 	outputText("Zenji seems visibly disheartened when you remove your [finger] from his ear before he blushes softly. \"<i>D-dat… dat was nice… I-I can’t believe you had must under ya fingers like dat…</i>\" He scratches behind his ear softly. \"<i>Let's get on wit de day den.</i>\"\n\n");
