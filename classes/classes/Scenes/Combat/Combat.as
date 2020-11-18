@@ -3623,7 +3623,7 @@ public class Combat extends BaseContent {
                 }
             }
             //Unique attack Mantis Prayer
-            if (player.hasMantisPrayerAttack()){
+            if (player.mantisScore() >= 12 || player.arms.type == Arms.MANTIS){
                 if(player.hasStatusEffect(StatusEffects.InvisibleOrStealth)){
                     outputText("Taking advantage of your opponent obliviousness you strike four more times with your scythes.");
                     ExtraNaturalWeaponAttack();
@@ -3640,7 +3640,7 @@ public class Combat extends BaseContent {
                 }
             }
             //Unique attack Kamaitachi Three way Cut
-            if (player.hasKamaitachiThreeWayCut() || player.arms.type == Arms.KAMAITACHI){
+            if (player.kamaitachiScore() >= 12 || player.arms.type == Arms.KAMAITACHI){
                 outputText("You strike at blinding speed almost seeming to divide yourself into multiple copies, and slash with your scythes again. Initiating a three way cut combo\n");
                 ExtraNaturalWeaponAttack(1, "KamaitachiScythe");
                 if (player.hasABiteAttack()) {
