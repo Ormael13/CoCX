@@ -329,8 +329,10 @@ import flash.utils.getQualifiedClassName;
 			if (statusEffectv2(StatusEffects.SaiyanNumber2a) > 0) multimax += statusEffectv2(StatusEffects.SaiyanNumber2a);
 			if (statusEffectv2(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv2(StatusEffects.SaiyanNumber3a);
 			temp *= multimax;
-			if (findPerk(PerkLib.ShieldWielder) >= 0) temp *= 1.5;
-			if (findPerk(PerkLib.EnemyGigantType) >= 0) temp *= 3;
+			if (findPerk(PerkLib.ShieldWielder) >= 0) temp *= 1.2;
+			if (findPerk(PerkLib.EnemyHugeType) >= 0) temp *= 1.5;
+			if (findPerk(PerkLib.EnemyGigantType) >= 0) temp *= 2.25;
+			if (findPerk(PerkLib.EnemyColossalType) >= 0) temp *= 3;
 			if (findPerk(PerkLib.EnemyGroupType) >= 0) temp *= 5;
 			temp *= stats_multi_based_on_misc();
 			temp = Math.round(temp);
@@ -714,7 +716,7 @@ import flash.utils.getQualifiedClassName;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp *= 4;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 4) temp *= 5;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 5) temp *= 6;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp *= 7;//dla gier powyżej obecnego ostantinego NG+ posiadającego nowe perki dla graczy
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp *= 7;//dla gier powyżej obecnego ostatniego NG+ posiadającego nowe perki dla graczy
 			if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 5;
 			if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 10;
 			if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 25;
@@ -849,8 +851,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasStatusEffect(StatusEffects.OniRampage)) damage *= 2;
 			if (hasStatusEffect(StatusEffects.Hypermode)) damage *= 10;
 			//monster exclusive perks bonus
-			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
-			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
+			damage *= eBaseMultis();
 			//other
 			if (hasStatusEffect(StatusEffects.Bloodlust)) damage *= (1 + (0.1 * statusEffectv2(StatusEffects.Bloodlust)));
 			if (findPerk(PerkLib.JobWarrior) < 0 && findPerk(PerkLib.JobBeastWarrior) < 0 && wrath >= 200) {
@@ -912,8 +913,7 @@ import flash.utils.getQualifiedClassName;
 			if (str >= 4001) damage += (str - 4000);*/
 			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
 			//monster exclusive perks bonus
-			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
-			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
+			damage *= eBaseMultis();
 			damage = Math.round(damage);
 			return damage;
 		}
@@ -939,8 +939,7 @@ import flash.utils.getQualifiedClassName;
 			if (tou >= 4001) damage += (tou - 4000);*/
 			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
 			//monster exclusive perks bonus
-			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
-			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
+			damage *= eBaseMultis();
 			damage = Math.round(damage);
 			return damage;
 		}
@@ -966,8 +965,7 @@ import flash.utils.getQualifiedClassName;
 			if (spe >= 4001) damage += (spe - 4000);*/
 			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
 			//monster exclusive perks bonus
-			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
-			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
+			damage *= eBaseMultis();
 			damage = Math.round(damage);
 			return damage;
 		}
@@ -992,8 +990,7 @@ import flash.utils.getQualifiedClassName;
 			if (inte >= 3951) damage += (inte - 3950);
 			if (inte >= 4001) damage += (inte - 4000);*/
 			//monster exclusive perks bonus
-			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
-			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
+			damage *= eBaseMultis();
 			damage = Math.round(damage);
 			return damage;
 		}
@@ -1018,10 +1015,18 @@ import flash.utils.getQualifiedClassName;
 			if (wis >= 3951) damage += (wis - 3950);
 			if (wis >= 4001) damage += (wis - 4000);*/
 			//monster exclusive perks bonus
-			if (findPerk(PerkLib.EnemyBossType) >= 0) damage *= 2;
-			if (findPerk(PerkLib.EnemyGigantType) >= 0) damage *= 3;
+			damage *= eBaseMultis();
 			damage = Math.round(damage);
 			return damage;
+		}
+
+		private function eBaseMultis():Number {
+			var datNumber:Number = 1;
+			if (findPerk(PerkLib.EnemyBossType) >= 0) datNumber *= 2;
+			if (findPerk(PerkLib.EnemyHugeType) >= 0) datNumber *= 2;
+			if (findPerk(PerkLib.EnemyGigantType) >= 0) datNumber *= 4;
+			if (findPerk(PerkLib.EnemyColossalType) >= 0) datNumber *= 6;
+			return datNumber;
 		}
 
 		private function inteligencescalingbonusMonster(stat:int):Number{
@@ -1197,7 +1202,9 @@ import flash.utils.getQualifiedClassName;
 				var minXP:Number = 1;
 				if (findPerk(PerkLib.ShieldWielder) >= 0) minXP *= 1.5;
 				if (findPerk(PerkLib.EnemyBossType) >= 0) minXP *= 2;
-				if (findPerk(PerkLib.EnemyGigantType) >= 0) minXP *= 3;
+				if (findPerk(PerkLib.EnemyHugeType) >= 0) minXP *= 2;
+				if (findPerk(PerkLib.EnemyGigantType) >= 0) minXP *= 4;
+				if (findPerk(PerkLib.EnemyColossalType) >= 0) minXP *= 6;
 				if (findPerk(PerkLib.EnemyGroupType) >= 0) minXP *= 5;
 				if (this.humanityBoostExpValue() > 0) minXP += this.humanityBoostExpValue();
 				return Math.round(minXP);
@@ -1220,7 +1227,9 @@ import flash.utils.getQualifiedClassName;
 			var specENtypes:Number = 1;
 			if (findPerk(PerkLib.ShieldWielder) >= 0) specENtypes *= 1.5;
 			if (findPerk(PerkLib.EnemyBossType) >= 0) specENtypes *= 2;
-			if (findPerk(PerkLib.EnemyGigantType) >= 0) specENtypes *= 3;
+			if (findPerk(PerkLib.EnemyHugeType) >= 0) specENtypes *= 2;
+			if (findPerk(PerkLib.EnemyGigantType) >= 0) specENtypes *= 4;
+			if (findPerk(PerkLib.EnemyColossalType) >= 0) specENtypes *= 6;
 			if (findPerk(PerkLib.EnemyGroupType) >= 0) specENtypes *= 5;
 			return specENtypes;
 		}
@@ -1776,6 +1785,16 @@ import flash.utils.getQualifiedClassName;
 			if (evasionResult != null) { // Failsafe fur unhandled
 				outputText("Using your superior combat skills you manage to avoid attack completely.\n");
 				return true;
+			}
+			//Zenji parry enemy attack
+			if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji)) {
+				var parryChance:Number = 25;
+				if (player.statusEffectv4(StatusEffects.CombatFollowerZenji) > 1) parryChance += 15;
+				if (rand(100) > parryChance) {
+					outputText("" + capitalA + short + " goes in for a strike, but Zenji is able to intervene, blocking any opening they have on you, leaving you safe behind him.\n\n");
+					outputText("\"<i>You’re gonna have ta try harda dan dat!</i>\" Zenji shouts.");
+					return true;
+				}
 			}
 			//Parry with weapon
 			if (combatParry()) {
@@ -3240,6 +3259,33 @@ import flash.utils.getQualifiedClassName;
 			}*/
 			armorDef += ((int)(1 + armorDef / 10)) * newGamePlusMod();
 			armorMDef += ((int)(1 + armorMDef / 10)) * newGamePlusMod();
+			if (hasPerk(PerkLib.EnemyHugeType)) {
+				this.strStat.core.value += Math.round(this.strStat.core.value * 0.1);
+				this.touStat.core.value += Math.round(this.touStat.core.value * 0.1);
+				this.speStat.core.value += Math.round(this.speStat.core.value * 0.05);
+				weaponAttack += Math.round(weaponAttack * 0.05);
+				if (weaponRangeAttack > 0) weaponRangeAttack += Math.round(weaponRangeAttack * 0.05);
+				armorDef += Math.round(armorDef * 0.05);
+				armorMDef += Math.round(armorMDef * 0.05);
+			}
+			if (hasPerk(PerkLib.EnemyGigantType)) {
+				this.strStat.core.value += Math.round(this.strStat.core.value * 0.25);
+				this.touStat.core.value += Math.round(this.touStat.core.value * 0.25);
+				this.speStat.core.value += Math.round(this.speStat.core.value * 0.1);
+				weaponAttack += Math.round(weaponAttack * 0.15);
+				if (weaponRangeAttack > 0) weaponRangeAttack += Math.round(weaponRangeAttack * 0.15);
+				armorDef += Math.round(armorDef * 0.15);
+				armorMDef += Math.round(armorMDef * 0.15);
+			}
+			if (hasPerk(PerkLib.EnemyColossalType)) {
+				this.strStat.core.value += Math.round(this.strStat.core.value * 0.75);
+				this.touStat.core.value += Math.round(this.touStat.core.value * 0.75);
+				this.speStat.core.value += Math.round(this.speStat.core.value * 0.15);
+				weaponAttack += Math.round(weaponAttack * 0.5);
+				if (weaponRangeAttack > 0) weaponRangeAttack += Math.round(weaponRangeAttack * 0.5);
+				armorDef += Math.round(armorDef * 0.5);
+				armorMDef += Math.round(armorMDef * 0.5);
+			}
 		}
 	}
 }
