@@ -68,7 +68,7 @@ public function HaveABoysBath():void {
 	if (flags[kFLAGS.IZMA_BROFIED] == 1) outputText("Since Ismael is a true guy now, he was allowed to bath with the boys.\n\n");
 	if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) outputText("Sitting near you, Konstantin relaxes and stretches his limbs. His large and thick build dwarf those from the other guys. While chit-chatting, he friendly puts one arm around you, and with the other he shamelessly washes his gigantic manhood, earning no few stares and some blushes from the other boys.\n\n");
     if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) {
-		outputText("Siegweird is at the edge of the hotspring, he's stipped down to his padded leather pants and only has his feet in the bubbling water.");
+		outputText("Siegweird is at the edge of the hotspring, he's stipped down to his padded leather pants and only has his feet in the bubbling water");
 		if (camp.maleNpcsHotBathCount() > 1) outputText(", he seems extremely nervous around all the other people");
 		outputText(". Maybe he's not one for the heat.\n\n");
 	}
