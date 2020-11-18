@@ -39,6 +39,7 @@ import classes.Scenes.Monsters.DarkElfSlaver;
 import classes.Scenes.Monsters.DarkElfSniper;
 import classes.Scenes.Monsters.Malikore;
 import classes.Scenes.Monsters.Manticore;
+import classes.Scenes.Monsters.Oozaru;
 import classes.Scenes.NPCs.Alvina;
 import classes.Scenes.NPCs.Aria;
 import classes.Scenes.NPCs.Aurora;
@@ -2830,7 +2831,7 @@ public function FightHellfireSnail():void {
 			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 16;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
-				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.headjewelryName == "training soul ring") {
+				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring") {
 				var bonussoulforce:Number = 0;
 				bonussoulforce += SoulforceGainedFromCultivation1();
 				flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
@@ -2870,7 +2871,7 @@ public function FightHellfireSnail():void {
 			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 52;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
-				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.headjewelryName == "training soul ring") {
+				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring") {
 				var bonussoulforce:Number = 0;
 				bonussoulforce += SoulforceGainedFromCultivation1() * 2;
 				flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
@@ -2910,7 +2911,7 @@ public function FightHellfireSnail():void {
 			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 124;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
-				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.headjewelryName == "training soul ring") {
+				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring") {
 				var bonussoulforce:Number = 0;
 				bonussoulforce += SoulforceGainedFromCultivation1() * 4;
 				flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
@@ -2950,7 +2951,7 @@ public function FightHellfireSnail():void {
 			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 196;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
-				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.headjewelryName == "training soul ring") {
+				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring") {
 				var bonussoulforce:Number = 0;
 				bonussoulforce += SoulforceGainedFromCultivation1() * 6;
 				flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
@@ -2990,7 +2991,7 @@ public function FightHellfireSnail():void {
 			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 268;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
-				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.headjewelryName == "training soul ring") {
+				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring") {
 				var bonussoulforce:Number = 0;
 				bonussoulforce += SoulforceGainedFromCultivation1() * 8;
 				flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
@@ -3006,7 +3007,7 @@ public function FightHellfireSnail():void {
 		public function SoulforceGainedFromCultivation1():Number {
 			var cumulativegains:Number = 0;
 			if (player.weaponName == "training soul axe" && player.weaponRangeName == "training soul crossbow" && player.shieldName == "training soul buckler" && player.armorName == "training soul armor" && player.upperGarmentName == "soul training shirt" && player.lowerGarmentName == "soul training panties"
-				&& player.headjewelryName == "training soul hairpin" && player.necklaceName == "training soul necklace" && player.headjewelryName == "training soul ring") {
+				&& player.headjewelryName == "training soul hairpin" && player.necklaceName == "training soul necklace" && player.jewelryName == "training soul ring") {
 				cumulativegains += 13;//+45% jak wszystkie 9 slotów - każdy kolejny dodany slot dodaje kolejne 5%
 			}
 			else {
@@ -3032,7 +3033,7 @@ public function FightHellfireSnail():void {
 			if (player.lowerGarmentName == "soul training panties") bonussoulforce2 += 200;
 			if (player.headjewelryName == "training soul hairpin") bonussoulforce2 += 200;
 			if (player.necklaceName == "training soul necklace") bonussoulforce2 += 300;
-				if (player.jewelryName == "training soul ring") bonussoulforce2 += 100;
+			if (player.jewelryName == "training soul ring") bonussoulforce2 += 100;
 			if ((bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]) > 0) {
 				if ((bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]) > flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2]) flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] += flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2];
 				else flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] += (bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]);
@@ -3722,7 +3723,13 @@ public function FightHellfireSnail():void {
 			if (player.soulforce >= 100) {
 				player.soulforce -= 100;
 				statScreenRefresh();
-				SceneLib.ryubi.RyuBiEnterTheDragon();
+				if (rand(2) == 0) {
+					clearOutput();
+					outputText("A gigantic monkey and you. (placeholder text for now so not mind it and just kick the monkey ass)");
+					flags[kFLAGS.SAIYAN_ENEMY_NUMBER_COUNTER] = 1;
+					startCombat(new Oozaru());
+				}
+				else SceneLib.ryubi.RyuBiEnterTheDragon();
 			}
 			else {
 				outputText("\n\nYour current soulforce is too low.");

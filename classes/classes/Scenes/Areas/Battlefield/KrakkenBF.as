@@ -48,7 +48,7 @@ public class KrakkenBF extends Monster
 			this.gems = 0;
 			this.drop = new WeightedDrop(consumables.SPPEARL, 1);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-			this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);

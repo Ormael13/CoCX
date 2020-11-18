@@ -712,6 +712,12 @@ public class Combat extends BaseContent {
                 bd.disable("You need more time before you can use Devourer again.");
             }
         }
+		if ((monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.Polymorphed) || monster.hasStatusEffect(StatusEffects.Sleep) || monster.hasStatusEffect(StatusEffects.Fascinated)) && (player.fatigueLeft() > combat.physicalCost(20)) && player.hasPerk(PerkLib.HollowFangsEvolved)) {
+			bd = buttons.add("Bite", VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
+		}// || monster.hasStatusEffect(StatusEffects.InvisibleOrStealth)
+		if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji) && (player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 3)) {
+			bd = buttons.add("Heal Zenji", HealZenji);
+		}
     }
 
     //ALCHEMY ZONE
@@ -1583,7 +1589,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
             if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
             if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-            if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+            if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
             if (player.hasPerk(PerkLib.GoblinoidBlood)) {
                 if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
                 if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
@@ -2771,7 +2777,7 @@ public class Combat extends BaseContent {
                 if (player.weaponRange == weaponsrange.ADBSCAT) damage *= 2;
                 if (player.weaponRange == weaponsrange.TRFATBI || player.weaponRange == weaponsrange.DERPLAU) damage *= 5;
             }
-            if (player.hasPerk(PerkLib.ExplosiveCartridge) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+            if (player.hasPerk(PerkLib.ExplosiveCartridge) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
             if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.5;
             //other effects
             if (player.weaponRange == weaponsrange.M1CERBE) {
@@ -3500,7 +3506,7 @@ public class Combat extends BaseContent {
                 }
             }
             //DOING EXTRA CLAW ATTACKS
-            if (player.hasAClawAttack()) {
+            if (player.haveNaturalClaws()) {
                 var DamageMultiplier:Number = 1;
                 if (player.arms.type == Arms.FROSTWYRM) DamageMultiplier = 2;
                 if (player.arms.type != Arms.MANTIS && player.arms.type != Arms.KAMAITACHI){
@@ -3623,7 +3629,7 @@ public class Combat extends BaseContent {
                 }
             }
             //Unique attack Mantis Prayer
-            if (player.hasMantisPrayerAttack()){
+            if (player.mantisScore() >= 12 && player.arms.type == Arms.MANTIS){
                 if(player.hasStatusEffect(StatusEffects.InvisibleOrStealth)){
                     outputText("Taking advantage of your opponent obliviousness you strike four more times with your scythes.");
                     ExtraNaturalWeaponAttack();
@@ -3640,7 +3646,7 @@ public class Combat extends BaseContent {
                 }
             }
             //Unique attack Kamaitachi Three way Cut
-            if (player.hasKamaitachiThreeWayCut() || player.arms.type == Arms.KAMAITACHI){
+            if (player.kamaitachiScore() >= 12 && player.arms.type == Arms.KAMAITACHI){
                 outputText("You strike at blinding speed almost seeming to divide yourself into multiple copies, and slash with your scythes again. Initiating a three way cut combo\n");
                 ExtraNaturalWeaponAttack(1, "KamaitachiScythe");
                 if (player.hasABiteAttack()) {
@@ -4012,7 +4018,7 @@ public class Combat extends BaseContent {
                         if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
                         if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
                         if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-                        if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+                        if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
                         if (player.armor == armors.SPKIMO) damage *= 1.2;
                         if (player.necklace == necklaces.OBNECK) damage *= 1.2;
                         if (player.hasPerk(PerkLib.GoblinoidBlood)) {
@@ -4053,7 +4059,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
                 if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
                 if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-                if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+                if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
                 if (player.armor == armors.SPKIMO) damage *= 1.2;
                 if (player.necklace == necklaces.OBNECK) damage *= 1.2;
                 if (player.hasPerk(PerkLib.GoblinoidBlood)) {
@@ -4510,7 +4516,7 @@ public class Combat extends BaseContent {
                         if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
                         if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
                         if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-                        if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+                        if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
                         if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 						if (player.armor == armors.SPKIMO) damage *= 1.2;
                         if (player.necklace == necklaces.OBNECK) damage *= 1.2;
@@ -4537,7 +4543,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
                 if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
                 if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-                if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+                if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
                 if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 				if (player.armor == armors.SPKIMO) damage *= 1.2;
                 if (player.necklace == necklaces.OBNECK) damage *= 1.2;
@@ -7481,6 +7487,8 @@ public class Combat extends BaseContent {
                 outputText("<b></b>\n\n");
             } else player.addStatusValue(StatusEffects.SecondWindRegen, 2, -1);
         }
+		if (player.statusEffectv3(StatusEffects.CombatFollowerZenji) > 0 && (player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 3)) player.addStatusValue(StatusEffects.CombatFollowerZenji, 3, 1);
+		if (player.statusEffectv4(StatusEffects.CombatFollowerZenji) > 1) player.addStatusValue(StatusEffects.CombatFollowerZenji, 4, -1);
         if (player.hasStatusEffect(StatusEffects.BladeDance)) player.removeStatusEffect(StatusEffects.BladeDance);
         if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) player.removeStatusEffect(StatusEffects.ResonanceVolley);
         if (player.hasStatusEffect(StatusEffects.Defend)) player.removeStatusEffect(StatusEffects.Defend);
@@ -8057,7 +8065,7 @@ public class Combat extends BaseContent {
                 if (monster.hasPerk(PerkLib.EnemyConstructType)) generalTypes.push("Construct");
                 if (monster.hasPerk(PerkLib.EnemyFeralType)) generalTypes.push("Feral");
                 if (monster.hasPerk(PerkLib.EnemyGhostType)) generalTypes.push("Ghost");
-                if (monster.hasPerk(PerkLib.EnemyGigantType)) generalTypes.push("Gigant");
+                if (monster.hasPerk(PerkLib.EnemyHugeType)) generalTypes.push("Gigant");
                 if (monster.hasPerk(PerkLib.EnemyGooType)) generalTypes.push("Goo");
                 if (monster.hasPerk(PerkLib.EnemyGroupType)) generalTypes.push("Group");
                 if (monster.hasPerk(PerkLib.EnemyPlantType)) generalTypes.push("Plant");
@@ -8334,7 +8342,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
             if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
             if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-            if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+            if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
             if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 			if (player.armor == armors.SPKIMO) damage *= 1.2;
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
@@ -8428,7 +8436,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
             if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
             if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-            if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+            if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
             if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 			if (player.armor == armors.SPKIMO) damage *= 1.2;
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
@@ -8480,7 +8488,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
             if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
             if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-            if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+            if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
             if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 			if (player.armor == armors.SPKIMO) damage *= 1.2;
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
@@ -8541,7 +8549,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
             if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
             if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-            if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyGigantType))) damage *= 2;
+            if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
             if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 			if (player.armor == armors.SPKIMO) damage *= 1.2;
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
@@ -10023,6 +10031,15 @@ public class Combat extends BaseContent {
         player.dynStats("lus", 15);
         enemyAI();
     }
+	
+	//Heal Zenji
+    public function HealZenji():void {
+        outputText("Noticing the injuries Zenji has sustained in efforts to protect you, you channel some magic to heal him.\n\n");
+		outputText("Zenji readies his spear, wedging himself between you and your opponent, \"<i>I am stronger! Thank you, [name]!</i>\"\n\n");
+        var recharge:Number = player.statusEffectv3(StatusEffects.CombatFollowerZenji); 
+		player.addStatusValue(StatusEffects.CombatFollowerZenji, 3, -recharge);
+        enemyAI();
+    }
 
     public function runAway(callHook:Boolean = true):void {
         if (callHook && monster.onPcRunAttempt != null) {
@@ -10335,6 +10352,18 @@ public class Combat extends BaseContent {
             doNext(camp.returnToCampUseOneHour);
             return;
         }
+		else if (onlyZenjiRunnawayTrain()) {
+			outputText("You tell Zenji that you need to run, you can't handle these opponents.");
+			outputText("\n\nZenji immediately hoists you on his shoulder and makes a break for it");
+			if (rand(4) > 0) {
+				outputText(", leaving your opponent in the dust.");
+				inCombat = false;
+				clearStatuses(false);
+				doNext(camp.returnToCampUseOneHour);
+				return;
+			}
+			else outputText(". Despite his best attempt, he is unable to drag the two of you to safety. He stumbles, barely managing to gently set you on the ground as you resume combat.");
+		}
         //FAIL FLEE
         else {
             if (monster.short == "Holli") {
@@ -10392,6 +10421,14 @@ public class Combat extends BaseContent {
         outputText("\n\n");
         enemyAI();
     }
+	public function onlyZenjiRunnawayTrain():Boolean {
+		var partySize:Number = 1;
+		if (flags[kFLAGS.PLAYER_COMPANION_1] != "") partySize += 1;
+		if (flags[kFLAGS.PLAYER_COMPANION_2] != "") partySize += 1;
+		if (flags[kFLAGS.PLAYER_COMPANION_3] != "") partySize += 1;
+		if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji) && partySize == 2) return true;
+		else return false;
+	}
 
     public function struggleCreepingDoom():void {
         outputText("You shake away the pests in disgust, managing to get rid of them for a time.\n\n");

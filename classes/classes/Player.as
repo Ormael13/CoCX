@@ -868,8 +868,8 @@ use namespace CoC;
 		//Natural Claws (arm types and weapons that can substitude them)
 		public function haveNaturalClaws():Boolean
 		{
-			return arms.type == Arms.KITSUNE || arms.type == Arms.CAT || arms.type == Arms.DEVIL || arms.type == Arms.DISPLACER || arms.type == Arms.DRAGON || arms.type == Arms.FOX || arms.type == Arms.GARGOYLE || arms.type == Arms.LION || arms.type == Arms.WOLF
-			 || arms.type == Arms.LIZARD || arms.type == Arms.RAIJU || arms.type == Arms.RAIJU_2 || arms.type == Arms.RED_PANDA || arms.type == Arms.SALAMANDER || arms.type == Arms.HYDRA || arms.type == Arms.JIANGSHI;
+			return arms.type == Arms.KITSUNE || arms.type == Arms.CAT || arms.type == Arms.DEVIL || arms.type == Arms.DISPLACER || arms.type == Arms.DRAGON || arms.type == Arms.FOX || arms.type == Arms.GARGOYLE || arms.type == Arms.LION || arms.type == Arms.WOLF || arms.type == Arms.LIZARD || arms.type == Arms.RAIJU || arms.type == Arms.RAIJU_2
+			 || arms.type == Arms.RED_PANDA || arms.type == Arms.SALAMANDER || arms.type == Arms.HYDRA || arms.type == Arms.JIANGSHI || arms.type == Arms.FROSTWYRM || arms.type == Arms.BEAR || arms.type == Arms.MANTIS || arms.type == Arms.KAMAITACHI;
 		}
 		public function haveNaturalClawsTypeWeapon():Boolean
 		{
@@ -1954,7 +1954,8 @@ use namespace CoC;
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
-				if (hasStatusEffect(StatusEffects.ManaShield) && damage < mana) {
+				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
+				else if (hasStatusEffect(StatusEffects.ManaShield) && damage < mana) {
 					mana -= damage;
 					if (display) {
 						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
@@ -2025,7 +2026,7 @@ use namespace CoC;
 			}
 			//Apply damage resistance percentage.
 			damage *= damagePercent() / 100;
-			if (damageMultiplier < 0.2) damageMultiplier = 0;
+			if (damageMultiplier < 0) damageMultiplier = 0;
 			return int(damage * damageMultiplier);
 		}
 
@@ -2090,7 +2091,8 @@ use namespace CoC;
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
-				if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
+				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
+				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
 					mana -= damage / 2;
 					if (display) {
 						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
@@ -2156,7 +2158,7 @@ use namespace CoC;
 			}
 			//Apply magic damage resistance percentage.
 			damage *= damageMagicalPercent() / 100;
-			if (magicdamageMultiplier < 0.2) magicdamageMultiplier = 0;
+			if (magicdamageMultiplier < 0) magicdamageMultiplier = 0;
 			return int(damage * magicdamageMultiplier);
 		}
 
@@ -2186,7 +2188,8 @@ use namespace CoC;
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
-				if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
+				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
+				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
 					mana -= damage / 2;
 					if (display) {
 						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
@@ -2256,7 +2259,7 @@ use namespace CoC;
 			}
 			//Apply fire damage resistance percentage.
 			damage *= damageFirePercent() / 100;
-			if (firedamageMultiplier < 0.2) firedamageMultiplier = 0;
+			if (firedamageMultiplier < 0) firedamageMultiplier = 0;
 			return int(damage * firedamageMultiplier);
 		}
 
@@ -2294,7 +2297,8 @@ use namespace CoC;
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
-				if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
+				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
+				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
 					mana -= damage / 2;
 					if (display) {
 						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
@@ -2360,7 +2364,7 @@ use namespace CoC;
 			}
 			//Apply ice damage resistance percentage.
 			damage *= damageIcePercent() / 100;
-			if (icedamageMultiplier < 0.2) icedamageMultiplier = 0;
+			if (icedamageMultiplier < 0) icedamageMultiplier = 0;
 			return int(damage * icedamageMultiplier);
 		}
 
@@ -2392,7 +2396,8 @@ use namespace CoC;
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
-				if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
+				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
+				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
 					mana -= damage / 2;
 					if (display) {
 						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
@@ -2458,7 +2463,7 @@ use namespace CoC;
 			}
 			//Apply lightning damage resistance percentage.
 			damage *= damageLightningPercent() / 100;
-			if (lightningdamageMultiplier < 0.2) lightningdamageMultiplier = 0;
+			if (lightningdamageMultiplier < 0) lightningdamageMultiplier = 0;
 			return int(damage * lightningdamageMultiplier);
 		}
 
@@ -2484,7 +2489,8 @@ use namespace CoC;
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
-				if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
+				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
+				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
 					mana -= damage / 2;
 					if (display) {
 						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
@@ -2550,7 +2556,7 @@ use namespace CoC;
 			}
 			//Apply darkness damage resistance percentage.
 			damage *= damageDarknessPercent() / 100;
-			if (darknessdamageMultiplier < 0.2) darknessdamageMultiplier = 0;
+			if (darknessdamageMultiplier < 0) darknessdamageMultiplier = 0;
 			return int(damage * darknessdamageMultiplier);
 		}
 
@@ -2578,7 +2584,8 @@ use namespace CoC;
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
-				if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
+				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
+				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
 					mana -= damage / 2;
 					if (display) {
 						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
@@ -2644,8 +2651,19 @@ use namespace CoC;
 			}
 			//Apply poison damage resistance percentage.
 			damage *= damagePoisonPercent() / 100;
-			if (poisondamageMultiplier < 0.2) poisondamageMultiplier = 0;
+			if (poisondamageMultiplier < 0) poisondamageMultiplier = 0;
 			return int(damage * poisondamageMultiplier);
+		}
+
+		public function henchmanBasedInvulnerabilityFrame():Boolean {
+			if (statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || statusEffectv3(StatusEffects.CombatFollowerZenji) == 3) return true;
+			else return false;
+		}
+		public function henchmanBasedInvulnerabilityFrameTexts():void {
+			if (statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || statusEffectv3(StatusEffects.CombatFollowerZenji) == 3) {
+				outputText(" Zenji grits his teeth as he shields you, enduring several strikes from your opponent.");
+				addStatusValue(StatusEffects.CombatFollowerZenji, 3, 1);
+			}
 		}
 
 		/**
@@ -9188,13 +9206,10 @@ use namespace CoC;
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }
 		public function isNightCreature():Boolean { return (vampireScore() >= 10 || batScore() >= 6 || jiangshiScore() >= 20);}
 		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || faceType == Face.VAMPIRE || faceType == Face.SHARK_TEETH || faceType == Face.WOLF_FANGS || faceType == Face.PANDA || faceType == Face.YETI_FANGS || faceType == Face.WOLF || faceType == Face.SPIDER_FANGS || faceType == Face.ANIMAL_TOOTHS || faceType == Face.CAT_CANINES || faceType == Face.CAT || faceType == Face.MANTICORE || faceType == Face.SALAMANDER_FANGS || faceType == Face.WEASEL || faceType == Face.SNAKE_FANGS || faceType == Face.FOX || faceType == Face.BEAR || faceType == Face.DRAGON_FANGS || faceType == Face.DRAGON || faceType == Face.DOG || faceType == Face.FERRET || faceType == Face.ORCA || faceType == Face.LIZARD || faceType == Face.DEVIL_FANGS);}
-		public function hasAClawAttack():Boolean { return (arms.type == Arms.GARGOYLE || arms.type == Arms.WOLF || arms.type == Arms.CAT || arms.type == Arms.FROSTWYRM || arms.type == Arms.LIZARD || arms.type == Arms.DRAGON || arms.type == Arms.KITSUNE || arms.type == Arms.FOX || arms.type == Arms.DEVIL || arms.type == Arms.DISPLACER || arms.type == Arms.BEAR || arms.type == Arms.JIANGSHI || arms.type == Arms.LION || arms.type == Arms.MANTIS || arms.type == Arms.KAMAITACHI);}
 		public function hasAWingAttack():Boolean { return (wings.type == Wings.DRACONIC_HUGE || wings.type == Wings.NIGHTMARE || wings.type == Wings.MANTICORE_LIKE_LARGE || wings.type == Wings.GARGOYLE_LIKE_LARGE);}
 		public function hasAGoreAttack():Boolean { return (horns.type == Horns.UNICORN || horns.type == Horns.BICORN || horns.type == Horns.COW_MINOTAUR || horns.type == Horns.FROSTWYRM);}
 		public function hasATailSlapAttack():Boolean { return (tail.type == Tail.DRACONIC || tail.type == Tail.LIZARD || tail.type == Tail.SALAMANDER || tail.type == Tail.ORCA || tail.type == Tail.SHARK || tail.type == Tail.CAVE_WYRM || tail.type == Tail.GARGOYLE || tail.type == Tail.GARGOYLE_2 || tail.type == Tail.MANTICORE_PUSSYTAIL || tail.type == Tail.SCORPION || tail.type == Tail.BEE_ABDOMEN || lowerBody == LowerBody.FROSTWYRM || lowerBody == LowerBody.NAGA);}
-		public function hasMantisPrayerAttack():Boolean { return (mantisScore() >= 12); }
-		public function hasKamaitachiThreeWayCut():Boolean { return (kamaitachiScore() >= 12); }
-		public function hasNaturalWeapons():Boolean { return (hasABiteAttack() || hasAClawAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasMantisPrayerAttack() || hasKamaitachiThreeWayCut()); }
+		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() ||hasABiteAttack() ||  hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack()); }
 
 		//TODO: (logosK) elderSlime, succubus pussy/demonic eyes, arachne, wasp, lactabovine/slut, sleipnir, hellhound, ryu, quetzalcoatl, eredar, anihilan,
 

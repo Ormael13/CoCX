@@ -66,7 +66,7 @@ public class CombatUI extends BaseCombatContent {
 		var btnOther:CoCButton      = button(9);
 		var btnSpecial1:CoCButton   = button(10);
 		var btnSpecial2:CoCButton   = button(11);
-		//var btnSpecial3:CoCButton   = button(12);
+		var btnSpecial3:CoCButton   = button(12);
 		var btnFantasize:CoCButton  = button(13);
 		var btnRun:CoCButton        = button(14);
 		/*
@@ -447,9 +447,6 @@ public class CombatUI extends BaseCombatContent {
 				}
 			}
 		}
-		if ((monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.Polymorphed) || monster.hasStatusEffect(StatusEffects.Sleep) || monster.hasStatusEffect(StatusEffects.Fascinated)) && (player.fatigueLeft() > combat.physicalCost(20)) && player.hasPerk(PerkLib.HollowFangsEvolved)) {
-			btnSpecial1.show("Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
-		}// || monster.hasStatusEffect(StatusEffects.InvisibleOrStealth)
 	}
 
 	private function BuildSpellBookMenu(buttons:ButtonDataList):void {

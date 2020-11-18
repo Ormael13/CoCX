@@ -202,7 +202,7 @@ public class FrostGiant extends Monster
 			this.a = "the ";
 			this.short = "frost giant";
 			this.imageName = "frost-giant";
-			this.long = "The giant reminds you of the stories you heard as a child in Ingnam, at least twenty feet tall and wider than your height. The giant's skin is a deep, icy blue with patches of frost and ice covering his body in place of armor. Fortunately for you, he's unarmed. Unfortunately for you, being as large as a house has the added benefit of boulders, trees, and handfuls of frozen dirt being ready weapons, all of which is abundant in the area. Plus those hands could probably crush you like a bug. Your battle instincts are definitely going to be tested.";
+			this.long = "The giant reminds you of the stories you heard as a child in Ingnam, at least twenty five feet tall and wider than your height. The giant's skin is a deep, icy blue with patches of frost and ice covering his body in place of armor. Fortunately for you, he's unarmed. Unfortunately for you, being as large as a house has the added benefit of boulders, trees, and handfuls of frozen dirt being ready weapons, all of which is abundant in the area. Plus those hands could probably crush you like a bug. Your battle instincts are definitely going to be tested.";
 			// this.plural = false;
 			this.createCock(36, 4, CockTypesEnum.HUMAN);
 			this.balls = 2;
@@ -211,7 +211,7 @@ public class FrostGiant extends Monster
 			createBreastRow(Appearance.breastCupInverse("flat"));
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
-			this.tallness = 20*12;
+			this.tallness = 25*12;
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.skin.growFur({color:"deep blue"});
