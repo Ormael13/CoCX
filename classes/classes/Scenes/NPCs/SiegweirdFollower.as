@@ -49,8 +49,8 @@ public function siegweirdFirstEncounterPostFight():void
 {
 	outputText("You kick the imp away and take the sword. You can only hope he’s still near where you last saw him.\n\n");
 	outputText("You eventually find him not too far from where you first met him. He notices you and quickly approaches, the heavy sound of his geaves smash against the ground until he halts before you.\n\n");
-	outputText("\"<i>“My sword! Thank you, you have a paladin’s deepest gratitude.”</i>\" \n\n He removes his helmet, revealing a purely white ursine face, he appears to be a polar bear. \n\n\"<i>“You may call me Siegweird, friend…”</i>\" his voice trails off slightly before his eyes regain focus onto you, \"");
-	outputText("\"<i>“And you are?”</i> \n\n You state your name. \n\n\"<i>Wonderful, it is a pleasure to meet you, [name]. Perhaps we could venture together, I’m sure that you are wholly capable of fighting off demons as well.</i>\"");
+	outputText("\"<i>My sword! Thank you, you have a paladin’s deepest gratitude.</i>\" \n\n He removes his helmet, revealing a purely white ursine face, he appears to be a polar bear. \n\n\"<i>You may call me Siegweird, friend…</i>\" his voice trails off slightly before his eyes regain focus onto you, \"");
+	outputText("\"<i>And you are?</i> \n\n You state your name. \n\n\"<i>Wonderful, it is a pleasure to meet you, [name]. Perhaps we could venture together, I’m sure that you are wholly capable of fighting off demons as well.</i>\"");
 	cleanupAfterCombat();
 	if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3) siegweirdFirstEncounterPostFightAnotherFight();
 	else siegweirdFirstEncounterPostFightJoin();
@@ -58,7 +58,7 @@ public function siegweirdFirstEncounterPostFight():void
 public function siegweirdFirstEncounterPostFightJoin():void
 {
 	outputText("A paladin?\n\n");
-	outputText("He stands proudly, \"<i>“Yes, a righteous, holy warrior… I am trained in white magic as well as with this sword. If you’d let me, I’m sure there’s plenty of things we could teach each other.</i>\"\n\n");
+	outputText("He stands proudly, \"<i>Yes, a righteous, holy warrior… I am trained in white magic as well as with this sword. If you’d let me, I’m sure there’s plenty of things we could teach each other.</i>\"\n\n");
 	outputText("Would you like to invite Siegweird to your camp? The presence of someone so vibrantly holy and devout will surely become a nuisance to those who are far more inclined toward corruption.\n\n");
 	menu();
 	addButton(1, "Yes", siegweirdFirstEncounterPostFightJoinYes);
@@ -130,7 +130,7 @@ public function siegweirdRepeatEncounterPostFight():void
 	}
 	else if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) {
 		outputText("It may not be the best to have such a luminous beacon marching in your camp. Not only does his armor cause a ludicrous amount of noise, his powerful aura will surely illuminate your camp for anyone who wants to corrupt the pure. Is he really versed well enough in magic to be worth recruitment?\n\n");
-		outputText("Before you can weigh your options, he speaks up, \"<i>“I would love to spend more time with you, but alas, my quarry vanished from her lair recently. I cannot settle down while evil runs rampant. I must say farewell to you, brave hero, may luck always be on your path. Perhaps one day long from now we will meet again...</i>\"\n\n");
+		outputText("Before you can weigh your options, he speaks up, \"<i>I would love to spend more time with you, but alas, my quarry vanished from her lair recently. I cannot settle down while evil runs rampant. I must say farewell to you, brave hero, may luck always be on your path. Perhaps one day long from now we will meet again...</i>\"\n\n");
 		outputText("He leaves without another word.\n\n");
 		doNext(camp.returnToCampUseOneHour);
 	}
