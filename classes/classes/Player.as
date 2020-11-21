@@ -10192,22 +10192,6 @@ use namespace CoC;
 			if (this.hasPerk(PerkLib.DemonicLethicite)) {minCor+=10;minLib+=10;}
 			if (this.hasPerk(PerkLib.ProductivityDrugs)) {minLib+=this.perkv1(PerkLib.ProductivityDrugs);minCor+=10;}
 			//Minimum Sensitivity
-			if (this.manticoreScore() >= 6) minSen += 30;
-			if (this.manticoreScore() >= 12) minSen += 15;
-			if (this.devilkinScore() >= 7) minSen += 10;
-			if (this.devilkinScore() >= 11) minSen += 5;
-			if (this.devilkinScore() >= 16) minSen += 25;
-			if (this.elfScore() >= 5) minSen += 15;
-			if (this.elfScore() >= 11) minSen += 15;
-			if (this.raijuScore() >= 5) minSen += 25;
-			if (this.raijuScore() >= 10) minSen += 25;
-			if (this.hellcatScore() >= 17) minSen += 50;
-			if (this.hellcatScore() >= 10) minSen += 25;
-			if (this.firesnailScore() >= 15) minSen += 50;
-			if (this.melkieScore() >= 8) minSen += 25;
-			if (this.melkieScore() >= 18) minSen += 25;
-			if (this.melkieScore() >= 21) minSen += 15;
-			if (this.fairyScore() >= 18) minSen += 20;
 			//Rings
 			if (this.jewelryName == "Ring of Libido") minLib += 5;
 			if (this.jewelryName2 == "Ring of Libido") minLib += 5;
@@ -10668,13 +10652,17 @@ use namespace CoC;
 				maxIntCap2 += 80;
 				minSen += 25;
 			}
+			if (this.hellcatScore() >= 17) minSen += 50;
+			if (this.hellcatScore() >= 10) minSen += 25;
+			if (this.firesnailScore() >= 15) minSen += 50;
+			if (this.fairyScore() >= 18) minSen += 20;
 			if (hellcatScore() >= 10) {
 				if (hellcatScore() >= 17) {
 					if (findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) maxSpeCap2 += 100;
 					if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) maxSpeCap2 += 90;
 					if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 80;
 					else maxSpeCap2 += 70;
-					maxIntCap2 += 125;
+					maxIntCap2 += 135;
 					maxLibCap2 += 100;
 					minSen += 50;
 				} else {
@@ -11133,27 +11121,33 @@ use namespace CoC;
 			if (devilkinScore() >= 7) {
 				if (devilkinScore() >= 16 && hasPerk(PerkLib.Phylactery)) {
 					if (devilkinScore() >= 21) {
-						maxStrCap2 += 105;
-						maxIntCap2 += 150;
-						maxLibCap2 += 100;
+						maxStrCap2 += 120;
+						maxSpeCap2 -= 20;
+						maxIntCap2 += 200;
+						maxLibCap2 += 115;
+						minSen += 50;
 					}
 					else {
 						maxStrCap2 += 95;
-						maxIntCap2 += 85;
+						maxSpeCap2 -= 20;
+						maxIntCap2 += 115;
 						maxLibCap2 += 100;
+						minSen += 50;
 					}
 				}
 				else if (devilkinScore() >= 11) {
-					maxStrCap2 += 65;
+					maxStrCap2 += 70;
 					maxSpeCap2 -= 20;
-					maxIntCap2 += 60;
+					maxIntCap2 += 90;
 					maxLibCap2 += 75;
+					minSen += 50;
 				}
 				else {
 					maxStrCap2 += 35;
 					maxSpeCap2 -= 10;
-					maxIntCap2 += 40;
+					maxIntCap2 += 55;
 					maxLibCap2 += 50;
+					minSen += 25;
 				}
 			}//+60/50-60
 			if (rhinoScore() >= 4) {
@@ -11167,15 +11161,23 @@ use namespace CoC;
 				maxSpeCap2 += 5;
 			}//+10/10-20
 			if (manticoreScore() >= 6) {
-				if (manticoreScore() >= 13) {
-					maxSpeCap2 += 100;
-					maxIntCap2 += 65;
-					maxLibCap2 += 60;
+				if (manticoreScore() >= 20) {
+					maxSpeCap2 += 150;
+					maxIntCap2 += 90;
+					maxLibCap2 += 135;
+					minSen += 75;
+				}
+				else if (manticoreScore() >= 15) {
+					maxSpeCap2 += 110;
+					maxIntCap2 += 75;
+					maxLibCap2 += 90;
+					minSen += 50;
 				}
 				else {
-					maxSpeCap2 += 50;
-					maxIntCap2 += 25;
-					maxLibCap2 += 30;
+					maxSpeCap2 += 60;
+					maxIntCap2 += 30;
+					maxLibCap2 += 40;
+					minSen += 25;
 				}
 			}//+60/50-60
 			if (redpandaScore() >= 4) {
@@ -11429,19 +11431,22 @@ use namespace CoC;
 			}
 			if (melkieScore() >= 8) {
 				if (melkieScore() >= 21) {
-					maxSpeCap2 += 140;
-					maxIntCap2 += 140;
+					maxSpeCap2 += 160;
+					maxIntCap2 += 160;
 					maxLibCap2 += 100;
+					minSen += 65;
 				}
 				if (melkieScore() >= 18) {
 					maxSpeCap2 += 120;
 					maxIntCap2 += 120;
 					maxLibCap2 += 80;
+					minSen += 50;
 				}
 				else {
 					maxSpeCap2 += 55;
 					maxIntCap2 += 55;
 					maxLibCap2 += 35;
+					minSen += 25;
 				}
 			}
 

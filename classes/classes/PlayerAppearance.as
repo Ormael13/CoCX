@@ -2791,11 +2791,11 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.demonScore() < 1) outputText("\n<font color=\"#ff0000\">Half Succubus/Incubus: 0</font>");
 		//Devil
 		if (player.devilkinScore() >= 16 && player.hasPerk(PerkLib.Phylactery)) {
-			if (player.devilkinScore() >= 21) outputText("\n<font color=\"#0000a0\">Archdevil: " + player.devilkinScore() + " (+105% to Str racial multi, +150% to Int racial multi, +100% to Lib racial multi, +40 min Sens, +" + (320 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-			else outputText("\n<font color=\"#0000a0\">Devil: " + player.devilkinScore() + " (+95% to Str racial multi, +85% to Int racial multi, +100% to Lib racial multi, +40 min Sens, +" + (230 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+			if (player.devilkinScore() >= 21) outputText("\n<font color=\"#0000a0\">Archdevil: " + player.devilkinScore() + " (+120% to Str racial multi, -20% to Spe racial multi, +200% to Int racial multi, +115% to Lib racial multi, +50 min Sens, +" + (320 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+			else outputText("\n<font color=\"#0000a0\">Devil: " + player.devilkinScore() + " (+95% to Str racial multi, -20% to Spe racial multi, +115% to Int racial multi, +100% to Lib racial multi, +50 min Sens, +" + (230 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		}
-		else if (player.devilkinScore() >= 11) outputText("\n<font color=\"#0000a0\">Devilkin: " + player.devilkinScore() + " (+65% to Str racial multi, -20% to Spe racial multi, +60% to Int racial multi, +75% to Lib racial multi, +25 min Sens, +" + (150 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-		else if (player.devilkinScore() >= 7) outputText("\n<font color=\"#0000a0\">Half fiend: " + player.devilkinScore() + " (+35% to Str racial multi, -10% to Spe racial multi, +40% to Int racial multi, +50% to Lib racial multi, +10 min Sens, +" + (75 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		else if (player.devilkinScore() >= 11) outputText("\n<font color=\"#0000a0\">Devilkin: " + player.devilkinScore() + " (+70% to Str racial multi, -20% to Spe racial multi, +90% to Int racial multi, +75% to Lib racial multi, +50 min Sens, +" + (150 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		else if (player.devilkinScore() >= 7) outputText("\n<font color=\"#0000a0\">Half fiend: " + player.devilkinScore() + " (+35% to Str racial multi, -10% to Spe racial multi, +55% to Int racial multi, +50% to Lib racial multi, +25 min Sens, +" + (75 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		else if (player.devilkinScore() >= 1) outputText("\n<font color=\"#008000\">Half fiend: " + player.devilkinScore() + "</font>");
 		else if (player.devilkinScore() < 1) outputText("\n<font color=\"#ff0000\">Half fiend: 0</font>");
 		//Displacer beast
@@ -2932,7 +2932,7 @@ public class PlayerAppearance extends BaseContent {
 				else outputText("80");
 			}
 			else outputText("70");
-			outputText("% to Spe racial multi, +125% to Int racial multi, +100% to Lib racial multi, +50 min/max Sens)</font>");
+			outputText("% to Spe racial multi, +135% to Int racial multi, +100% to Lib racial multi, +50 min/max Sens)</font>");
 		}
 		else if (player.hellcatScore() >= 10) {
 			outputText("\n<font color=\"#0000a0\">Hellcat: " + player.hellcatScore() + " (+");
@@ -3059,8 +3059,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.magmagooScore() >= 1) outputText("\n<font color=\"#008000\">Half Magma Slime: " + player.magmagooScore() + "</font>");
 		else if (player.magmagooScore() < 1) outputText("\n<font color=\"#ff0000\">Half Magma Slime: 0</font>");
 		//Manticore
-		if (player.manticoreScore() >= 13) outputText("\n<font color=\"#0000a0\">Manticore: " + player.manticoreScore() + " (+100% to Spe racial multi, +65% to Int racial multi, +60% to Lib racial multi, +30 min Sens, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-		else if (player.manticoreScore() >= 6 && player.manticoreScore() < 12) outputText("\n<font color=\"#0000a0\">Half Manticore: " + player.manticoreScore() + " (+50% to Spe racial multi, +25% to Int racial multi, +30% to Lib racial multi, +15 min Sens, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		if (player.manticoreScore() >= 20) outputText("\n<font color=\"#0000a0\">True Manticore: " + player.manticoreScore() + " (+150% to Spe racial multi, +90% to Int racial multi, +135% to Lib racial multi, +75 min Sens, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		else if (player.manticoreScore() >= 15) outputText("\n<font color=\"#0000a0\">Manticore: " + player.manticoreScore() + " (+110% to Spe racial multi, +75% to Int racial multi, +90% to Lib racial multi, +50 min Sens, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		else if (player.manticoreScore() >= 6 && player.manticoreScore() < 12) outputText("\n<font color=\"#0000a0\">Half Manticore: " + player.manticoreScore() + " (+60% to Spe racial multi, +30% to Int racial multi, +40% to Lib racial multi, +25 min Sens, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 		else if (player.manticoreScore() >= 1 && player.manticoreScore() < 6) outputText("\n<font color=\"#008000\">Half Manticore: " + player.manticoreScore() + "</font>");
 		else if (player.manticoreScore() < 1) outputText("\n<font color=\"#ff0000\">Half Manticore: 0</font>");
 		//Mantis
@@ -3106,7 +3107,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.mantisScore() >= 1 && player.mantisScore() < 6) outputText("\n<font color=\"#008000\">Half Mantis-morph: " + player.mantisScore() + "</font>");
 		else if (player.mantisScore() < 1) outputText("\n<font color=\"#ff0000\">Half Mantis-morph: 0</font>");
 		//Melkie
-		if (player.melkieScore() >= 21) outputText("\n<font color=\"#0000a0\">Elder Melkie: " + player.melkieScore() + " (+140% to Spe racial multi, +140% to Int racial multi, +100% to Lib racial multi, +65 min Sens)</font>");
+		if (player.melkieScore() >= 21) outputText("\n<font color=\"#0000a0\">Elder Melkie: " + player.melkieScore() + " (+160% to Spe racial multi, +160% to Int racial multi, +100% to Lib racial multi, +65 min Sens)</font>");
 		else if (player.melkieScore() >= 18) outputText("\n<font color=\"#0000a0\">Melkie: " + player.melkieScore() + " (+120% to Spe racial multi, +120% to Int racial multi, +80% to Lib racial multi, +50 min Sens)</font>");
 		else if (player.melkieScore() >= 8) outputText("\n<font color=\"#0000a0\">Half Melkie: " + player.melkieScore() + " (+55% to Spe racial multi, +55% to Int racial multi, +35% to Lib racial multi, +25 min Sens)</font>");
 		else if (player.melkieScore() >= 1) outputText("\n<font color=\"#008000\">Half Melkie: " + player.melkieScore() + "</font>");
