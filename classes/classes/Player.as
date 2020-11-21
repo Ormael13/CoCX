@@ -3141,7 +3141,7 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "fairy") {
-				if (TopScore >= 18) {
+				if (TopScore >= 19) {
 					race = "great fairy";
 				}
 			}
@@ -5066,7 +5066,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && fairyCounter >= 8)
 				fairyCounter += 1;
 			if (hasPerk(PerkLib.TransformationImmunity))
-				fairyCounter += 4;
+				fairyCounter += 5;
 			if (isGargoyle()) fairyCounter = 0;
 			fairyCounter = finalRacialScore(fairyCounter, Race.FAIRY);
 			End("Player","racialScore");
@@ -10598,10 +10598,10 @@ use namespace CoC;
 					maxIntCap2 += 25;
 				}
 			}
-			if (fairyScore() >= 18) {
+			if (fairyScore() >= 19) {
 				maxStrCap2 -= 25;
 				maxTouCap2 -= 25;
-				maxSpeCap2 += 140;
+				maxSpeCap2 += 155;
 				maxIntCap2 += 200;
 				minSen += 20;
 			}//+10/10-20
@@ -11788,6 +11788,7 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.EverywhereAndNowhere)) {
 				removeStatusEffect(StatusEffects.EverywhereAndNowhere);
 			}
+
 			if(hasStatusEffect(StatusEffects.Displacement)) {
 				removeStatusEffect(StatusEffects.Displacement);
 			}
