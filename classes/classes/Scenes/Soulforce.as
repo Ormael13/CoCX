@@ -291,6 +291,7 @@ use namespace CoC;
 		public function AddMaxBackpack00():void {
 			player.createStatusEffect(StatusEffects.ZenjiModificationsList,0,0,15,7);
 			player.createStatusEffect(StatusEffects.ZenjiPreparationsList,0,0,0,0);
+			player.createStatusEffect(StatusEffects.ZenjiYList,0,0,0,0);
 			player.createStatusEffect(StatusEffects.ZenjiZList,0,0,0,0);
 			flags[kFLAGS.ZENJI_PROGRESS] = 11;
 			flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] = 0;

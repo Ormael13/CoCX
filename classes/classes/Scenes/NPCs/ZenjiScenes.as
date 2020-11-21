@@ -18,6 +18,7 @@ import coc.view.ButtonDataList;
 		public static var Z1stKid:String;
 		public static var Z2ndKid:String;
 		public static var ZenjiNightWatch:Number;
+		public static var ZenjiFood:Boolean;
 
 		public function stateObjectName():String {
 			return "ZenjiScenes";
@@ -27,13 +28,15 @@ import coc.view.ButtonDataList;
 			Z1stKid = "";
 			Z2ndKid = "";
 			ZenjiNightWatch = 0;
+			ZenjiFood = false;
 		}
 
 		public function saveToObject():Object {
 			return {
 				"Z1stKid": Z1stKid,
 				"Z2ndKid": Z2ndKid,
-				"ZenjiNightWatch": ZenjiNightWatch
+				"ZenjiNightWatch": ZenjiNightWatch,
+				"ZenjiFood": ZenjiFood
 			};
 		}
 
@@ -42,6 +45,7 @@ import coc.view.ButtonDataList;
 				Z1stKid = o["Z1stKid"];
 				Z2ndKid = o["Z2ndKid"];
 				ZenjiNightWatch = o["ZenjiNightWatch"];
+				ZenjiFood = o["ZenjiFood"];
 			} else {
 				// loading from old save
 				resetState();
@@ -1097,8 +1101,8 @@ public function loverZenjiTalks():void {
 	if (flags[kFLAGS.ZENJI_KIDS] > 0) addButton(3, "Children", loverZenjiTalksChildren).hint("Talk to Zenji about your children.");
 	addButton(5, "Showoff", loverZenjiShowoff).hint("Have Zenji display his strength for you to admire.");
 	addButton(6, "Comfort", loverZenjiComfort).hint("Spend a tender moment with him. Now with free headpats.");
-	if (player.statusEffectv1(StatusEffects.ZenjiModificationsList) == 0) addButton(7, "Food", loverZenjiFood).hint("Zenji seems like he has something he wants to give you.");
-	else addButtonDisabled(7, "Food", "Zenji does not have any more food to offer you right now, ask again tomorrow.");
+	addButton(7, "Food", loverZenjiFood).hint("Zenji seems like he has something he wants to give you.");
+	button(7).disableIf(ZenjiFood, "Zenji does not have any more food to offer you right now, ask again tomorrow.");
 	addButton(14, "Back", loverZenjiMainCampMenu);
 }
 
@@ -1355,7 +1359,7 @@ public function loverZenjiFood():void {
 	outputText("You're at a loss for words, you didn't expect such a nice gesture. You thank him for his gift and be sure to repay the favor.\n\n");
 	outputText("\"<i>Nah, ya don' have to worry about it, I'd do anything for you, [name]. Remember that I'll always be here for ya.</i>\" He pulls you in for a gentle kiss on the lips, he leaves you be once he ends the embrace.\n\n");
 	if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
-	player.addStatusValue(StatusEffects.ZenjiModificationsList, 1, 1);
+	ZenjiFood = true;
 	inventory.takeItem(consumables.ZENJI_H, loverZenjiTalks);
 	cheatTime2(5);
 }
@@ -2274,6 +2278,7 @@ public function loverZenjiSleepWithGetPenetrated(timeQ:Number):void {
 	outputText("\"<i>Dat... was amazing...</i>\" He whispers as his tail coils around you, \"<i>Sleep tight, [name]...</i>\"\n\n");
 	outputText("Zenji gently strokes your back as he curls up with you.\n\n");
 	outputText("You plan on sleeping for " + num2Text(timeQ) + " hours.\n\n");
+	player.sexReward("cum", "Vaginal");
 	if (player.isGoblinoid()) player.knockUpForce(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 	else player.knockUpForce(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
 	player.addStatusValue(StatusEffects.ZenjiZList, 2, 1);
@@ -2314,6 +2319,7 @@ public function loverZenjiSleepWithCatchAnal(timeQ:Number):void {
 	outputText(".\"<i>Dat… really was someting...</i>\" He whispers as his tail coils around you, \"<i>Sleep tight, [name]...</i>\"\n\n");
 	outputText("Zenji gently caresses your face as he curls up with you.\n\n");
 	outputText("You plan on sleeping for " + num2Text(timeQ) + " hours.\n\n");
+	player.sexReward("cum","Anal");
 	player.addStatusValue(StatusEffects.ZenjiZList, 2, 2);
 	menu();
 	addButton(0,"Next",camp.sleepWrapper);

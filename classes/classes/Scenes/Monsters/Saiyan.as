@@ -287,37 +287,7 @@ import classes.internals.*;
 				this.lustVuln = .8;
 				this.level = 18;
 			}
-			if (flags[kFLAGS.SAIYAN_ENEMY_NUMBER_COUNTER] == 9) {
-				this.long = "";
-				this.createCock(5.5, 1, CockTypesEnum.HUMAN);
-				this.balls = 2;
-				this.ballSize = 2;
-				this.cumMultiplier = 2;
-				createBreastRow(Appearance.breastCupInverse("flat"));
-				this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-				this.ass.analWetness = AssClass.WETNESS_NORMAL;
-				this.tallness = 72;
-				this.hips.type = Hips.RATING_BOYISH;
-				this.butt.type = Butt.RATING_TIGHT;
-				this.skinTone = "light";
-				this.hairColor = "red";
-				this.hairLength = 13;
-				initStrTouSpeInte(130, 195, 330, 200);
-				initWisLibSensCor(200, 230, 110, 80);
-				this.weaponAttack = 54;
-				this.weaponName = "fist";
-				this.weaponVerb="punch";
-				this.armorName = "shorts";
-				this.armorDef = 16;
-				this.armorMDef = 3;
-				this.bonusHP = 200;
-				this.bonusWrath = 100;
-				this.bonusLust = 50;
-				this.lust = 30;
-				this.lustVuln = .8;
-				this.level = 18;
-			}
-			if (flags[kFLAGS.SAIYAN_ENEMY_NUMBER_COUNTER] == 10) {//female
+			if (flags[kFLAGS.SAIYAN_ENEMY_NUMBER_COUNTER] == 9) {//female
 				this.long = "";
 				createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_TIGHT);
 				this.createStatusEffect(StatusEffects.BonusVCapacity,75,0,0,0);

@@ -1135,7 +1135,7 @@ public class Camp extends NPCAwareContent {
 		//if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
 		//if (flags[kFLAGS.GALIA_LVL_UP] >= 1) counter++;
 		//if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) counter++;
-		if (flags[kFLAGS.ZENJI_PROGRESS] == 11) counter++;
+		if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9 || flags[kFLAGS.ZENJI_PROGRESS] == 11) counter++;
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) counter++;
 		if (flags[kFLAGS.MITZI_RECRUITED] >= 4) counter++;
 		if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;

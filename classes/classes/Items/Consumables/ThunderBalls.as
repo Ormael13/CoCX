@@ -14,7 +14,7 @@ package classes.Items.Consumables
 		
 		public function ThunderBalls() 
 		{
-			super("THUNDBl", "THUNDERballs", "a THUNDERballs", 60, "Three ball-shaped throwing weapons.  Though good for only a single use, they're guaranteed to do medium to high damage to solo or weak group of enemies if they hits.  Inflicts 1440 to 8640 lighting damage.");
+			super("THUNDBl", "THUNDERballs", "a THUNDERballs", 60, "Three electrified ball-shaped throwing weapons.  Though good for only a single use, they're guaranteed to do medium to high damage to solo or weak group of enemies if they hit.  Inflicts 1440 to 8640 lighting damage.");
 		}
 		
 		override public function canUse():Boolean {
@@ -27,11 +27,9 @@ package classes.Items.Consumables
 			clearOutput();
 			outputText("You toss THUNDERballs at your foe");
 			if (game.monster.findPerk(PerkLib.EnemyGroupType) >= 0) outputText("s");
-			outputText("!  They flies straight and true, almost as if they has a mind of their own as they arcs towards " + game.monster.a + game.monster.short + "!\n");
+			outputText("!  The shocking spheres fly straight and true, almost as if they are sentient as they arc towards " + game.monster.a + game.monster.short + "!\n");
 			if (game.monster.spe - 320 > Utils.rand(100) + 1) { //1% dodge for each point of speed over 320
-				outputText("Somehow " + game.monster.a + game.monster.short + "'");
-				if (!game.monster.plural) outputText("s");
-				outputText(" incredible speed allows " + game.monster.pronoun2 + " to avoid the balls!  The deadly spheres shatters causing electric discharge when they impacts something in the distance.");
+				outputText("Quick reflexes allow " + game.monster.pronoun2 + " to avoid the balls!  The thunderous spheres shatter far from your opponent, causing electricity discharge as they impact something in the distance.");
 			}
 			else { //Not dodged
 				var damage:Number = 1440 + Utils.rand(721);
@@ -43,7 +41,7 @@ package classes.Items.Consumables
 					else damage *= 2;
 				}
 				if (game.monster.findPerk(PerkLib.EnemyGroupType) >= 0) damage *= 5;
-				outputText(game.monster.capitalA + game.monster.short + " is hit with the THUNDERballs!  They breaks apart as they electrocutes " + game.monster.pronoun2 + ". ");
+				outputText(game.monster.capitalA + game.monster.short + " is hit with the THUNDERballs!  They crackle and shock, electrocuting " + game.monster.pronoun2 + ". ");
 				damage = SceneLib.combat.doLightingDamage(damage, true, true);
 				if (game.monster.HP < game.monster.minHP()) game.monster.HP = game.monster.minHP() - 1;
 			}

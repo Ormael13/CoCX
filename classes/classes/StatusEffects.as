@@ -780,6 +780,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const YamataCanon:StatusEffectType 			= mk("Yamata Foxfire Canon");
 		public static const ZenjiModificationsList:StatusEffectType = mk("Zenji Modifications List");
 		public static const ZenjiPreparationsList:StatusEffectType  = mk("Zenji Preparations List");
+		public static const ZenjiYList:StatusEffectType  			= mk("Zenji Y List");
 		public static const ZenjiZList:StatusEffectType  			= mk("Zenji Z List");
 
 		//Alchemical buffs
@@ -1088,3 +1089,4 @@ import classes.StatusEffects.VampireThirstEffect;
 		}
 	}
 }
+

@@ -230,15 +230,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
-				if (!player.hasPerk(PerkLib.ManticoreMetabolism)) {
+				//if (!player.hasPerk(PerkLib.ManticoreMetabolism)) {
 					bd = buttons.add("Tail Spike", playerTailSpike).hint("Shoot an envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 					if (player.tailVenom < 50 && player.hasPerk(PerkLib.ManticoreMetabolism)) {
-						bd.disable("You do not have enough venom to shoot a spikes right now!");
+						bd.disable("You do not have enough venom to shoot spikes right now!");
 					}
 					else if (player.tailVenom < 25) {
 						bd.disable("You do not have enough venom to shoot a spike right now!");
 					} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
-				}
+				/*}
 				if (player.hasPerk(PerkLib.ManticoreMetabolism)) {
 					bd = buttons.add("Tail Spike", playerOmniTailSpike).hint("Shoot a volley of envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 					if (player.tailVenom < 50 && player.hasPerk(PerkLib.ManticoreMetabolism)) {
@@ -247,7 +247,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					else if (player.tailVenom < 25) {
 						bd.disable("You do not have enough venom to shoot multiple spikes right now!");
 					} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
-				}
+				}*/
 			}
 			if (player.tailType == Tail.SPIDER_ADBOMEN) {
 				bd = buttons.add("Web", PCWebAttack).hint("Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  \n\nWeb Amount: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
@@ -4580,7 +4580,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//New line before monster attack
 		monster.statStore.addBuffObject({spe:-(2+rand(3))}, "Poison",{text:"Poison"});
 		//Use tail mp
-		player.tailVenom -= 5;
+		player.tailVenom -= 25;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		combat.heroBaneProc(damage);
 	}
@@ -4617,6 +4617,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//Sting successful!
 		outputText("You drop on all fours, flinging your tail forward and shooting an envenomed spike at " + monster.a + monster.short + ".");
+		if (player.hasPerk(PerkLib.ClawTraining)) tailspikedamage();
 		tailspikedamage();
 		outputText("\n\n");
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();

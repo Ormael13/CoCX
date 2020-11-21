@@ -22,6 +22,7 @@ import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.LunaFollower;
+import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.VampireThirstEffect;
 import classes.lists.BreastCup;
@@ -841,7 +842,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.ZENJI_PROGRESS] == 11) {
 					if (player.statusEffectv2(StatusEffects.ZenjiPreparationsList) < 20) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 2, 1);
 					if (player.statusEffectv1(StatusEffects.ZenjiModificationsList) > 0) player.addStatusValue(StatusEffects.ZenjiModificationsList, 1, -1);
-					if (player.statusEffectv3(StatusEffects.ZenjiZList) > 0) player.addStatusValue(StatusEffects.ZenjiZList, 3, -player.statusEffectv3(StatusEffects.ZenjiZList));
+					if (player.statusEffectv3(StatusEffects.ZenjiZList) > 0) {
+						var deduce:Number = player.statusEffectv3(StatusEffects.ZenjiZList);
+						player.addStatusValue(StatusEffects.ZenjiZList, 3, -deduce);
+					}
+					ZenjiScenes.ZenjiFood = false;
 				}
 
 				//Kaiba shor stock daily update
