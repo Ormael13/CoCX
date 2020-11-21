@@ -362,7 +362,7 @@ public function siegweirdAdvancedCampStudy():void
 		}
 		else {
 			outputText("You ask Siegweird about those extra lessons.\n\n");
-			outputText("\"Yes, you look about ready to me, so let’s begin with the facts. To channel white magic to its fullest you will also need a holy symbol. While white magic was created by mortals, its origin lies deeper in the roots of divine magic, this belonging to the gods. ");
+			outputText("\"<i>Yes, you look about ready to me, so let’s begin with the facts. To channel white magic to its fullest you will also need a holy symbol. While white magic was created by mortals, its origin lies deeper in the roots of divine magic, this belonging to the gods. ");
 			outputText("Making a holy symbol is as easy as carving a cross out of wood however, the material will increase the potency of the item. Marae is among these deities, her bark has the greatest potency, I wish you well in retrieving it from her. You also need to find a silver ingot, the material would serve as the casing. ");
 			outputText("Finally, a perfect diamond will be the ornament. You should get going and start looking for these items, they are somewhat rare.</i>\"\n\n");
 			player.createStatusEffect(StatusEffects.SiegweirdTraining2, 0, 0, 0, 0);
