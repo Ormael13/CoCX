@@ -285,7 +285,7 @@ public function siegweirdCampStudy():void
 	}
 	else {
 		outputText("Seigweird eyes you narrowly, \"<i>Yes, you are ready to learn, we shall work together. </i>\"\n\n");
-		outputText("He takes a deep breath, \"<i>We will start with the fundamentals. White magic has been practiced for millennia by priests and knights. It’s been mainly used to imbue equipment or regenerate wounds. Alas, through the darker arts, of which I will not speak of, has developed a more direct version of this ability in the form of the heal spell, something which even today is still viewed as a blasphemy by most devout practitioners. I will now lay down a few pieces of equipment on the ground. I want you to take your time and enchant each of them with magic. This should improve your casting endurance as well as the quality of your enchantments");
+		outputText("He takes a deep breath, \"<i>We will start with the fundamentals. White magic has been practiced for ages by priests and knights. It’s typically used to imbue equipment or quickly heal wounds. Keep in mind that white and black magic are two sides of the same coin. While white focuses on the presence of mind, black focuses on the raw power of emotions, not just lust, but the demons harness that emotion to their benefit the most. I prefer white magic as I need to keep a keenness of wit, lest my emotions take control... Anyway, I will now lay down a few pieces of equipment on the ground.  Now, take your time and enchant each of them with magic. Practice makes perfect; regular training will improve your casting endurance as well as the quality of your enchantments");
 		outputText("\n\n");
 		outputText("I want you to take your time and enchant each of them with magic. This should improve your casting endurance as well as the quality of your enchantments.</i>\"\n\n");
 		if (player.inte > 70 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 6) {
@@ -346,7 +346,7 @@ public function siegweirdAdvancedCampStudy():void
 			else player.destroyItems(useables.TBAPLAT, 1);
 			outputText("You bring the ingredients to Siegweird, he inspects them carefully before nodding his head,");
 			outputText("\"<i>Amazing! This’ll take me about a day to complete... I need you to do a favor for me in the meantime. See, I wasn’t wandering the blight ridges for no reason, I was hunting a very specific demoness.</i>\"\n\n");
-			outputText("He sighs softly, \"<i>I was unable to find her during my endeavors... Her name is Alvina, rumored to be the creator of black magic and perhaps even the source of demonic corruption. I don’t know her full story but what I am sure about is that even the other demons whisper her name in hushed tones, so she ought to be fearsome even by their standards. I would request that you find and slay her. Only then would I know you are ready, and I assure you that your efforts will be rewarded.</i>\"\n\n");
+			outputText("He sighs softly, \"<i>I was unable to find her during my endeavors... Her name is Alvina, rumored to be the creator of black magic and perhaps even the source of demonic corruption, but these are only rumors. I don’t know her full story but what I am sure about is that even the other demons whisper her name in hushed tones, so she ought to be fearsome even by their standards. I would request that you find and slay her. Only then would I know you are ready, and I assure you that your efforts will be rewarded.</i>\"\n\n");
 			outputText("Seigweird pauses for a moment before inspecting all of the ingredients within his paw before setting it on the ground.\n\n");
 			outputText("\"<i>Hmm, this’ll be a little more difficult than I thought… You go ahead, [name]...</i>\"\n\n");
 			outputText("His hands begin glowing as he gets to work with making you the holy amulet.\n\n");
@@ -362,7 +362,7 @@ public function siegweirdAdvancedCampStudy():void
 		}
 		else {
 			outputText("You ask Siegweird about those extra lessons.\n\n");
-			outputText("\"Yes, you look about ready to me, so let’s begin with the facts. To channel white magic to its fullest you will also need a holy symbol. While white magic was created by mortals, its origin lies deeper in the roots of divine magic, this belonging to the gods. ");
+			outputText("\"<i>Yes, you look about ready to me, so let’s begin with the facts. To channel white magic to its fullest you will also need a holy symbol. While white magic was created by mortals, its origin lies deeper in the roots of divine magic, this belonging to the gods. ");
 			outputText("Making a holy symbol is as easy as carving a cross out of wood however, the material will increase the potency of the item. Marae is among these deities, her bark has the greatest potency, I wish you well in retrieving it from her. You also need to find a silver ingot, the material would serve as the casing. ");
 			outputText("Finally, a perfect diamond will be the ornament. You should get going and start looking for these items, they are somewhat rare.</i>\"\n\n");
 			player.createStatusEffect(StatusEffects.SiegweirdTraining2, 0, 0, 0, 0);
