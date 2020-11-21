@@ -8932,6 +8932,12 @@ use namespace CoC;
 				manticoreCounter++;
 			if (findPerk(PerkLib.ManticoreMetabolismEvolved) >= 0)
 				manticoreCounter++;
+			if (findPerk(PerkLib.CatlikeNimbleness) >= 0)
+				manticoreCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0)
+				manticoreCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessFinalForm) >= 0)
+				manticoreCounter++;
 			if (findPerk(PerkLib.ManticoreMetabolism) >= 0 && findPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
 				manticoreCounter++;
 			if (findPerk(PerkLib.ManticoreMetabolismEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0)
