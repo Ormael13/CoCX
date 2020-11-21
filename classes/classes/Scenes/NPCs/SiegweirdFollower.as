@@ -49,8 +49,8 @@ public function siegweirdFirstEncounterPostFight():void
 {
 	outputText("You kick the imp away and take the sword. You can only hope he’s still near where you last saw him.\n\n");
 	outputText("You eventually find him not too far from where you first met him. He notices you and quickly approaches, the heavy sound of his geaves smash against the ground until he halts before you.\n\n");
-	outputText("\"<i>“My sword! Thank you, you have a paladin’s deepest gratitude.”</i>\" \n\n He removes his helmet, revealing a purely white ursine face, he appears to be a polar bear. \n\n\"<i>“You may call me Siegweird, friend…”</i>\" his voice trails off slightly before his eyes regain focus onto you, \"");
-	outputText("\"<i>“And you are?”</i> \n\n You state your name. \n\n\"<i>Wonderful, it is a pleasure to meet you, [name]. Perhaps we could venture together, I’m sure that you are wholly capable of fighting off demons as well.</i>\"");
+	outputText("\"<i>My sword! Thank you, you have a paladin’s deepest gratitude.</i>\" \n\n He removes his helmet, revealing a purely white ursine face, he appears to be a polar bear. \n\n\"<i>You may call me Siegweird, friend…</i>\" his voice trails off slightly before his eyes regain focus onto you, \"");
+	outputText("\"<i>And you are?</i> \n\n You state your name. \n\n\"<i>Wonderful, it is a pleasure to meet you, [name]. Perhaps we could venture together, I’m sure that you are wholly capable of fighting off demons as well.</i>\"");
 	cleanupAfterCombat();
 	if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3) siegweirdFirstEncounterPostFightAnotherFight();
 	else siegweirdFirstEncounterPostFightJoin();
@@ -58,7 +58,7 @@ public function siegweirdFirstEncounterPostFight():void
 public function siegweirdFirstEncounterPostFightJoin():void
 {
 	outputText("A paladin?\n\n");
-	outputText("He stands proudly, \"<i>“Yes, a righteous, holy warrior… I am trained in white magic as well as with this sword. If you’d let me, I’m sure there’s plenty of things we could teach each other.</i>\"\n\n");
+	outputText("He stands proudly, \"<i>Yes, a righteous, holy warrior… I am trained in white magic as well as with this sword. If you’d let me, I’m sure there’s plenty of things we could teach each other.</i>\"\n\n");
 	outputText("Would you like to invite Siegweird to your camp? The presence of someone so vibrantly holy and devout will surely become a nuisance to those who are far more inclined toward corruption.\n\n");
 	menu();
 	addButton(1, "Yes", siegweirdFirstEncounterPostFightJoinYes);
@@ -130,7 +130,7 @@ public function siegweirdRepeatEncounterPostFight():void
 	}
 	else if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) {
 		outputText("It may not be the best to have such a luminous beacon marching in your camp. Not only does his armor cause a ludicrous amount of noise, his powerful aura will surely illuminate your camp for anyone who wants to corrupt the pure. Is he really versed well enough in magic to be worth recruitment?\n\n");
-		outputText("Before you can weigh your options, he speaks up, \"<i>“I would love to spend more time with you, but alas, my quarry vanished from her lair recently. I cannot settle down while evil runs rampant. I must say farewell to you, brave hero, may luck always be on your path. Perhaps one day long from now we will meet again...</i>\"\n\n");
+		outputText("Before you can weigh your options, he speaks up, \"<i>I would love to spend more time with you, but alas, my quarry vanished from her lair recently. I cannot settle down while evil runs rampant. I must say farewell to you, brave hero, may luck always be on your path. Perhaps one day long from now we will meet again...</i>\"\n\n");
 		outputText("He leaves without another word.\n\n");
 		doNext(camp.returnToCampUseOneHour);
 	}
@@ -285,7 +285,7 @@ public function siegweirdCampStudy():void
 	}
 	else {
 		outputText("Seigweird eyes you narrowly, \"<i>Yes, you are ready to learn, we shall work together. </i>\"\n\n");
-		outputText("He takes a deep breath, \"<i>We will start with the fundamentals. White magic has been practiced for millennia by priests and knights. It’s been mainly used to imbue equipment or regenerate wounds. Alas, through the darker arts, of which I will not speak of, has developed a more direct version of this ability in the form of the heal spell, something which even today is still viewed as a blasphemy by most devout practitioners. I will now lay down a few pieces of equipment on the ground. I want you to take your time and enchant each of them with magic. This should improve your casting endurance as well as the quality of your enchantments");
+		outputText("He takes a deep breath, \"<i>We will start with the fundamentals. White magic has been practiced for ages by priests and knights. It’s typically used to imbue equipment or quickly heal wounds. Keep in mind that white and black magic are two sides of the same coin. While white focuses on the presence of mind, black focuses on the raw power of emotions, not just lust, but the demons harness that emotion to their benefit the most. I prefer white magic as I need to keep a keenness of wit, lest my emotions take control... Anyway, I will now lay down a few pieces of equipment on the ground.  Now, take your time and enchant each of them with magic. Practice makes perfect; regular training will improve your casting endurance as well as the quality of your enchantments");
 		outputText("\n\n");
 		outputText("I want you to take your time and enchant each of them with magic. This should improve your casting endurance as well as the quality of your enchantments.</i>\"\n\n");
 		if (player.inte > 70 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 6) {
@@ -346,7 +346,7 @@ public function siegweirdAdvancedCampStudy():void
 			else player.destroyItems(useables.TBAPLAT, 1);
 			outputText("You bring the ingredients to Siegweird, he inspects them carefully before nodding his head,");
 			outputText("\"<i>Amazing! This’ll take me about a day to complete... I need you to do a favor for me in the meantime. See, I wasn’t wandering the blight ridges for no reason, I was hunting a very specific demoness.</i>\"\n\n");
-			outputText("He sighs softly, \"<i>I was unable to find her during my endeavors... Her name is Alvina, rumored to be the creator of black magic and perhaps even the source of demonic corruption. I don’t know her full story but what I am sure about is that even the other demons whisper her name in hushed tones, so she ought to be fearsome even by their standards. I would request that you find and slay her. Only then would I know you are ready, and I assure you that your efforts will be rewarded.</i>\"\n\n");
+			outputText("He sighs softly, \"<i>I was unable to find her during my endeavors... Her name is Alvina, rumored to be the creator of black magic and perhaps even the source of demonic corruption, but these are only rumors. I don’t know her full story but what I am sure about is that even the other demons whisper her name in hushed tones, so she ought to be fearsome even by their standards. I would request that you find and slay her. Only then would I know you are ready, and I assure you that your efforts will be rewarded.</i>\"\n\n");
 			outputText("Seigweird pauses for a moment before inspecting all of the ingredients within his paw before setting it on the ground.\n\n");
 			outputText("\"<i>Hmm, this’ll be a little more difficult than I thought… You go ahead, [name]...</i>\"\n\n");
 			outputText("His hands begin glowing as he gets to work with making you the holy amulet.\n\n");
@@ -362,7 +362,7 @@ public function siegweirdAdvancedCampStudy():void
 		}
 		else {
 			outputText("You ask Siegweird about those extra lessons.\n\n");
-			outputText("\"Yes, you look about ready to me, so let’s begin with the facts. To channel white magic to its fullest you will also need a holy symbol. While white magic was created by mortals, its origin lies deeper in the roots of divine magic, this belonging to the gods. ");
+			outputText("\"<i>Yes, you look about ready to me, so let’s begin with the facts. To channel white magic to its fullest you will also need a holy symbol. While white magic was created by mortals, its origin lies deeper in the roots of divine magic, this belonging to the gods. ");
 			outputText("Making a holy symbol is as easy as carving a cross out of wood however, the material will increase the potency of the item. Marae is among these deities, her bark has the greatest potency, I wish you well in retrieving it from her. You also need to find a silver ingot, the material would serve as the casing. ");
 			outputText("Finally, a perfect diamond will be the ornament. You should get going and start looking for these items, they are somewhat rare.</i>\"\n\n");
 			player.createStatusEffect(StatusEffects.SiegweirdTraining2, 0, 0, 0, 0);

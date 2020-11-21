@@ -602,6 +602,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TentacleJojo:StatusEffectType                   = mk("Tentacle Jojo");
 		public static const TensionReleased:StatusEffectType                = mk("TensionReleased");
 		public static const TribulationCountdown:StatusEffectType           = mk("TribulationCountdown");
+		public static const TrollDefeatsCounter:StatusEffectType            = mk("Troll Defeats Counter");
 		public static const TF2:StatusEffectType                            = mk("TF2");
 		public static const TFDealer1:StatusEffectType                      = mk("TF Dealer 1");
 		public static const TookBlessedBow:StatusEffectType               	= mk("Took Blessed Bow");
@@ -779,6 +780,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const YamataCanon:StatusEffectType 			= mk("Yamata Foxfire Canon");
 		public static const ZenjiModificationsList:StatusEffectType = mk("Zenji Modifications List");
 		public static const ZenjiPreparationsList:StatusEffectType  = mk("Zenji Preparations List");
+		public static const ZenjiYList:StatusEffectType  			= mk("Zenji Y List");
 		public static const ZenjiZList:StatusEffectType  			= mk("Zenji Z List");
 
 		//Alchemical buffs
@@ -924,7 +926,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Sealed2:StatusEffectType                   = mkCombat("Sealed2");
 		public static const SecondWindRegen:StatusEffectType           = mkCombat("Second Wind Regen");
 		public static const SharkBiteBleed:StatusEffectType            = mkCombat("Shark Bite Bleed");
-		public static const KamaitachiBleed:StatusEffectType            = mkCombat("Kamaitachi Bleed");
+		public static const KamaitachiBleed:StatusEffectType           = mkCombat("Kamaitachi Bleed");
 		public static const SheilaOil:StatusEffectType                 = mkCombat("Sheila Oil");
 		public static const Shielding:StatusEffectType                 = mkCombat("Shielding");
 		public static const Sleep:StatusEffectType       		   	   = mkCombat("Sleep");
@@ -939,6 +941,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const ThroatPunch:StatusEffectType               = mkCombat("Throat Punch");
 		public static const Titsmother:StatusEffectType                = mkCombat("Titsmother");
 		public static const TranceTransformation:StatusEffectType      = mkCombat("Trance Transformation");
+		public static const TrollHold:StatusEffectType                 = mkCombat("Troll Hold");
 		public static const UBERWEB:StatusEffectType                   = mkCombat("UBERWEB");
 		public static const UnderwaterCombatBoost:StatusEffectType     = mkCombat("UnderwaterCombatBoost");
 		public static const UnderwaterOutOfAir:StatusEffectType        = mkCombat("UnderwaterOutOfAir");
@@ -1086,3 +1089,4 @@ import classes.StatusEffects.VampireThirstEffect;
 		}
 	}
 }
+

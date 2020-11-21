@@ -32,10 +32,21 @@ package classes.Scenes
 			outputText("-New weapons from Liadri (1h katana and it upgr. versions from Celess): Uchigatana, Moonlit Snow, Chaos Blade\n");
 			outputText("-Nodachi moved to massive weapon section increasing base atk form 25 to 65 and cost from 100 to 2600 gems.\n");
 			outputText("-Fixed bugs: Various fixes from Liadri for many errors from last build, DeBimo offer from Rathazul not including Joy or Excellia in camp\n\n");
-			outputText("<b>Version 0.8o3:</b>\n\n");
+			outputText("<b>Version 0.8o3:</b>\n\n");//perk lvl 1,3,4,6,7,8,11,12,14,16,17,18,19
 			outputText("-New tier 0 sensitivity lvl-up perk: Desensitization. Req. 10+ sens. Effect: Negative effects of sensitivity are reduced by 5%.\n");
+			outputText("-New tier 0 misc lvl-up perk: Draconic Bones. Req. Free bones and marrow mutation slot, dragon or its variants arms, dragon or its variants legs, dragon or its variants tail and 8+/10+ pts in dragon/frost wyrm score. Effect: Basic strengthening of your body bone structure. (+10 to unarmed attack)\n");
+			outputText("-New tier 0 misc lvl-up perk: Draconic Heart. Req. Free heart mutation slot, Draconic Bones perk, Draconic/Drake Lungs perk, 8+/10+ pts/frost wyrm in dragon score. Effect: Your heart was strengthened to better handle your changing body. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen)\n");
+			outputText("-New tier 0 misc lvl-up perk: Drake Lungs. Req. Free lungs mutation slot, one of the dragon breaths and 10+/10+/11+ pts in frost wyrm/jabberwocky/vouivre score. Effect: Increases the power of dragon breath attack. (+300% to dragon breath damage that race is using)\n");
+			outputText("-New tier 2 misc lvl-up perk: Draconic Bones (Evolved). Req. Draconic Bones, Draconic Heart, Draconic/Drake Lungs perks and 12+/12+ pts in dragon/frost wyrm score. Effect: Advanced strengthening of your body bone structure. (+10 to unarmed attack, +5% to damage reduction against physical and magical attacks, +5% of max core Tou as phantom Tou)\n");
+			outputText("-New tier 2 misc lvl-up perk: Draconic Heart (Evolved). Req. Draconic Bones, Draconic Heart, Draconic/Drake Lungs perks and 12+/12+ pts in dragon/frost wyrm score. Effect: Each heartbeat fills your body with great power. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen, +5% of max core Str as phantom Str)\n");
+			outputText("-New tier 2 misc lvl-up perk: Drake Lungs (Evolved). Req. Drake Lungs perk and 12+/11+/12+ pts in frost wyrm/jabberwocky/vouivre score. Effect: Further increases increases dragon breath attack power. (+300% to dragon breath damage that race is using)\n");
 			outputText("-New tier 5 sensitivity lvl-up perk: Greater Desensitization. Req. Desensitization perk and 20+ sens. Effect: Negative effects of sensitivity are reduced by 10%.\n");
+			outputText("-New tier 5 misc lvl-up perk: Draconic Bones (Final Form). Req. Draconic Bones (Evolved), Draconic Heart (Evolved), Draconic Lungs/Drake (Evolved) perks and 16+/15+ pts in dragon/frost wyrm score. Effect: Strengthening of your body bone structure to pseudo-dragon grade. (+20 to unarmed attack, +50% to unarmed atk, +5% to damage reduction against physical and magical attacks, +10% of max core Tou as phantom Tou)\n");
+			outputText("-New tier 5 misc lvl-up perk: Draconic Heart (Final Form). Req. Draconic Heart (Evolved), Draconic Heart (Evolved), Draconic Lungs/Drake (Evolved) perks and 16+/15+ pts in dragon/frost wyrm score. Effect: Your heart metamorphosis reached pseudo-dragon level. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen, +1% HP regen, +10% of max core Str as phantom Str)\n");
+			outputText("-New tier 5 misc lvl-up perk: Drake Lungs (Final Form). Req. Drake Lungs (Evolved) perk and 15+/12+/13+ pts in frost wyrm/jabberwocky/vouivre score. Effect: Allows to use breath attack more often with increase to it power. (+300% to dragon breath damage that race is using and allowing to use it once per combat instead of once per day)\n");
 			outputText("-New tier 5 misc lvl-up perk: Mantis-like Agility (Final Form). Req. Mantis-like Agility (Evolved) perk and mantis score 15+. Effect: triple speed bouses gained from Mantis-like Agility perk and 30 pts of phantom Spe (scalable).\n");
+			outputText("-New tier 5 intelligence lvl-up perk: Raging Inferno (Ex). Req. Raging Inferno perk, Grand Archmage perk and 150+ int. Effect: Increase to cumulative damage by 10%. Penalty for turn without casted fire spell decreased by 5%.\n");
+			outputText("-New tier 9 intelligence lvl-up perk: Raging Inferno (Su). Req. Raging Inferno (Ex) perk, Grand Archmage (3rd circle) perk and 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling fire based attack. Penalty for turn without casted fire spell decreased by another 5%.\n");
 			outputText("-New tier 10 sensitivity lvl-up perk: Epic Desensitization. Req. Greater Desensitization perk and 50+ sens. Effect: Negative effects of sensitivity are reduced by 15%.\n");
 			outputText("-New tier 13 misc lvl-up perk: Chimerical Body: Epic Stage. Req. Chimerical Body: Semi-Epic Stage perk and 99+ points in Internal Chimerical Disposition score. Effect: Your chimerical body attained Epic Stage. (negate up to 14 racial perk points negative effects) (+10% to Str/Tou/Spe racial multi, +20% to Int/Wis racial multi, +15% to Lib racial multi, +10 to Sens)\n");
 			outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
@@ -45,13 +56,18 @@ package classes.Scenes
 			outputText("-New rare ascension perk -> Ascension: Building Prestige (6th Stage). Req. Ascension: Building Prestige (5th Stage) perk and be at fifth ascension. It costs 30 asc points and will give 1 more slot for Prestige Jobs.\n");
 			outputText("-New rare ascension perk -> Ascension: Unlocked Potential (3rd Stage). Req. Ascension: Unlocked Potential (2nd Stage) and be at third ascension. It costs 10 asc points and will give +2 to max lust, +6 to max fatigue and +20 to max HP at each lvl-up.\n");
 			outputText("-New rare ascension perk -> Ascension: Unlocked Potential (4th Stage). Req. Ascension: Unlocked Potential (3rd Stage) and be at fourth ascension. It costs 10 asc points and will give +2 to max wrath, +6 to max soulforce and +12 to max mana at each lvl-up.\n");
+			outputText("-New ring (by Liadri): Engagement Ring - buyable at jewelry shop in Tel'Adre in Special Rings shelf. Cost 200 gems. Required in wedding ceremonies. Will be used during event.\n");
 			outputText("-New consumable items (by Ormael): Balls of Flame, Frozen Balls, THUNDERballs, Balls of the Darkness, Poisoned Balls - buyable at Serena shop in HXD (Shelf 3 - all of them req. lvl 42+ to be accessable). Each costs 60 gems and deal same damage as bangball mk 3 but with elemental affix (fire, ice, lighting, darkness, poison).\n");
+			outputText("-Draconic Lungs perks stat bonuses to str and tou was changed into bonuses to spe. Also Evolved and Final Form perk from this perk line granting +5%/+10% of max core Spe as phantom Spe\n");
+			outputText("-Lizan Marrow perk have now additional req. of having free bones and marrow mutation slot. Kitsune Thyroid Gland perk also now req. free thyroid gland mutation slot.\n");
 			outputText("-3 new achievments. (3 shadow ones)\n");	
 			outputText("-Explore option named 42 was moved to silly mode.\n");
 			outputText("-Follower Zenji now scales up to PC lvl cap (150 > 185). He will also have gradualy increasing other combat stats beside raw stats and XP reward for beating him will be much higher.\n");
 			outputText("-Lover Zenji got more sex scenes. Lover Zenji also can impregnate PC - pregnancy takes 30 days and first two kids can be named.\n");
 			outputText("-All ascension perks from tab named 'Perk Select(2)' have increased max rank by 5.\n");
 			outputText("-As some crazy dungeon delver PC's went as far as 1000th room in Ebon labyrinth there would be placed chest with EXP in each 10th room aside boos rooms till that 1000th room.\n");
+			outputText("-Buff spells been changed (again) and now would be not as OP especialy due to new stats system been implemented. Well time to get used to new way buffs works. For the balance ^^\n");
+			outputText("-Winter wolf full look easier to get without pain to get req. of specific stage of fur coverage (now just have fur and you golden ^^).\n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			outputText("-Increased max lvl camp npc's can attain after reaching end of training: Ceani (lvl 98), Etna (lvl 96), Electra (lvl 96), Ember (lvl 98), Isabella (lvl 98), Kiha (lvl 99), Kindra (lvl 99), Luna (lvl 99)\n");
 			outputText("-Increased max lvl npc's outside camp can attain: Akbal (lvl 98), Izumi (lvl 96), Minerva (lvl 95), Priscilla (lvl 98)\n");
@@ -61,24 +77,27 @@ package classes.Scenes
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			outputText("-Kitsune racial bonuses been slight reorganized with adding 3 more higher tiers of bonuses: first for nine tails that before not have any diff in stats from other kitsunes, ninetail of balance and Inari.\n");
 			outputText("-Dragon racial bonuses was changed to be less of spreaded and more balanced. And a bit rising req. score for reaching half-dragon and dragon stages. % Bonus to max Soulforce been replaced with % bonus to max HP.\n");
-			outputText("-New tier 0 misc lvl-up perk: Draconic Bones. Req. Free bones and marrow mutation slot, dragon or its variants arms, dragon or its variants legs, dragon or its variants tail and 8+/10+ pts in dragon/frost wyrm score. Effect: Basic strengthening of your body bone structure. (+10 to unarmed attack)\n");
-			outputText("-New tier 0 misc lvl-up perk: Draconic Heart. Req. Free heart mutation slot, Draconic Bones perk, Draconic/Drake Lungs perk, 8+/10+ pts/frost wyrm in dragon score. Effect: Your heart was strengthened to better handle your changing body. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen)\n");
-			outputText("-New tier 2 misc lvl-up perk: Draconic Bones (Evolved). Req. Draconic Bones, Draconic Heart, Draconic/Drake Lungs perks and 12+/12+ pts in dragon/frost wyrm score. Effect: Advanced strengthening of your body bone structure. (+10 to unarmed attack, +5% to damage reduction against physical and magical attacks, +5% of max core Tou as phantom Tou)\n");
-			outputText("-New tier 2 misc lvl-up perk: Draconic Heart (Evolved). Req. Draconic Bones, Draconic Heart, Draconic/Drake Lungs perks and 12+/12+ pts in dragon/frost wyrm score. Effect: Each heartbeat fills your body with great power. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen, +5% of max core Str as phantom Str)\n");
-			outputText("-New tier 5 misc lvl-up perk: Draconic Bones (Final Form). Req. Draconic Bones (Evolved), Draconic Heart (Evolved), Draconic Lungs/Drake (Evolved) perks and 16+/15+ pts in dragon/frost wyrm score. Effect: Strengthening of your body bone structure to pseudo-dragon grade. (+20 to unarmed attack, +50% to unarmed atk, +5% to damage reduction against physical and magical attacks, +10% of max core Tou as phantom Tou)\n");
-			outputText("-New tier 5 misc lvl-up perk: Draconic Heart (Final Form). Req. Draconic Heart (Evolved), Draconic Heart (Evolved), Draconic Lungs/Drake (Evolved) perks and 16+/15+ pts in dragon/frost wyrm score. Effect: Your heart metamorphosis reached pseudo-dragon level. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen, +1% HP regen, +10% of max core Str as phantom Str)\n");
-			outputText("-Draconic Lungs perks stat bonuses to str and tou was changed into bonuses to spe. Also Evolved and Final Form perk from this perk line granting +5%/+10% of max core Spe as phantom Spe\n");
-			outputText("-Lizan Marrow perk have now additional req. of having free bones and marrow mutation slot. Kitsune Thyroid Gland perk also now req. free thyroid gland mutation slot.\n");
-			outputText("-New tier 0 misc lvl-up perk: Drake Lungs. Req. Free lungs mutation slot, one of the dragon breaths and 10+/10+/11+ pts in frost wyrm/jabberwocky/vouivre score. Effect: Increases the power of dragon breath attack. (+300% to dragon breath damage that race is using)\n");
-			outputText("-New tier 2 misc lvl-up perk: Drake Lungs (Evolved). Req. Drake Lungs perk and 12+/11+/12+ pts in frost wyrm/jabberwocky/vouivre score. Effect: Further increases increases dragon breath attack power. (+300% to dragon breath damage that race is using)\n");
-			outputText("-New tier 5 misc lvl-up perk: Drake Lungs (Final Form). Req. Drake Lungs (Evolved) perk and 15+/12+/13+ pts in frost wyrm/jabberwocky/vouivre score. Effect: Allows to use breath attack more often with increase to it power. (+300% to dragon breath damage that race is using and allowing to use it once per combat instead of once per day)\n");
-			outputText("-Buff spells been changed (again) and now would be not as OP especialy due to new stats system been implemented. Well time to get used to new way buffs works. For the balance ^^\n");
-			outputText("-Winter wolf full look easier to get without pain to get req. of specific stage of fur coverage (now just have fur and you golden ^^).\n");
-			outputText("-New tier 5 intelligence lvl-up perk: Raging Inferno (Ex). Req. Raging Inferno perk, Grand Archmage perk and 150+ int. Effect: Increase to cumulative damage by 10%. Penalty for turn without casted fire spell decreased by 5%.\n");
-			outputText("-New tier 9 intelligence lvl-up perk: Raging Inferno (Su). Req. Raging Inferno (Ex) perk, Grand Archmage (3rd circle) perk and 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling fire based attack. Penalty for turn without casted fire spell decreased by another 5%.\n");
 			outputText("-Raging Inferno, x, x, x perks effects was changed to boost respective elemental damage by 20% and each turn without casted the same element spell/special lowering damage bonus by 20% instead of reseting it fully.\n");
-			outputText("-Lover Zenji get new options: Sleep With (variants for having or not cabin), Nightwatch, x\n");
-			outputText("-New ring (by Liadri): Engagement Ring - buyable at jewelry shop in Tel'Adre in Special Rings shelf. Cost 200 gems. Required in wedding ceremonies. Will be used during event.\n");
+			outputText("-Lover Zenji get new options: Sleep With (variants for having or not cabin), Nightwatch, Assist me (allowing to take him as henchman)\n");
+			outputText("-Added Huge-type enemy perk for monsters and most of current ones that had Gigant-type enemy perks was chanced to this new one. All monsters that are above 22 ft. talk will keep their Gigant-type enemy perk.\n");
+			outputText("-Izumi got taller to not be tiny Oni anymore... and well her hourglass figure followed her increase in height ;)\n");
+			outputText("-New enemies possible to encounter during Bog exploration: Corrupted Troll (Male or Female) - lvl 38\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -88,7 +107,8 @@ package classes.Scenes
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-Fixed bugs: Bugfixes / Typo fixing by Pyromania & Liadri, Luna event not happening in forest after PC fire her at first Full Moon event conclusion, some minor errors in calculation and display bonuses for kitsunes, some of Slave Excellia scenes sending back to Fixed Excellia, game ocassionaly incorrectly desc monsters in combat due to forced PC gender setting\n\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Bugfixes / Typo fixing by Pyromania & Liadri, Luna event not happening in forest after PC fire her at first Full Moon event conclusion, some minor errors in calculation and display bonuses for kitsunes, some of Slave Excellia scenes sending back to Fixed Excellia, game ocassionaly incorrectly desc monsters in combat due to forced PC gender setting, returning from any type of minion setting ");
+			outputText("in middle of combat been treated as new turn, Zenji Food option not always resetting\n\n");/*ostatni punkt changelogu
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
@@ -146,26 +166,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

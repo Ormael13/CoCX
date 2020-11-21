@@ -429,7 +429,7 @@ public final class Mutations extends MutationsHelper {
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.\n\n(Recovered soulforce: 36000)");
             player.soulforce += 36000;
             if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-            if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(125);
+            if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(1250);
             statScreenRefresh();
         }
     }

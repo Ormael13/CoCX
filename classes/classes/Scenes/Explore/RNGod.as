@@ -110,9 +110,15 @@ import classes.VaginaClass;
 			if (rand(2) == 0) this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
 			if (rand(2) == 0) this.createPerk(PerkLib.EnemyFeralType, 0, 0, 0, 0);
 			if (rand(2) == 0) this.createPerk(PerkLib.EnemyGhostType, 0, 0, 0, 0);
-			if (rand(2) == 0) this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);
 			if (rand(2) == 0) this.createPerk(PerkLib.EnemyGooType, 0, 0, 0, 0);
 			if (rand(2) == 0) this.createPerk(PerkLib.EnemyPlantType, 0, 0, 0, 0);
+			if (rand(2) == 0) {
+				if (rand(2) == 0) {
+					if (rand(2) == 0) this.createPerk(PerkLib.EnemyColossalType, 0, 0, 0, 0);
+					else this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);
+				}
+				else this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
+			}
 			if (rand(2) == 0) {
 				if (rand(4) == 0) this.createPerk(PerkLib.LightningNature, 0, 0, 0, 0);
 				else if (rand(3) == 0) this.createPerk(PerkLib.DarknessNature, 0, 0, 0, 0);

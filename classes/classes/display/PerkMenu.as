@@ -60,13 +60,13 @@ public class PerkMenu extends BaseContent {
 		}
 		addButton(10, "Number of", EngineCore.doNothing);
 		addButton(11, "perks: " + player.perks.length, EngineCore.doNothing);
-		if (player.hasPerk(PerkLib.JobLeader)) {
-			outputText("\n<b>You can adjust your Will-o'-the-wisp behaviour during combat.</b>");
-			addButton(14, "Will-o'-the-wisp",WOTWbehaviourOptions);
-		}
 		if (player.hasPerk(PerkLib.DarkRitual)){
 			outputText("\n<b>You can choose if you wish to use dark ritual and sacrifice health to empower your magic.</b>");
 			addButton(12, "D.Ritual",DarkRitualOption);
+		}
+		if (player.hasPerk(PerkLib.JobLeader)) {
+			outputText("\n<b>You can adjust your Will-o'-the-wisp behaviour during combat.</b>");
+			addButton(14, "Will-o'-the-wisp",WOTWbehaviourOptions);
 		}
 	}
 
@@ -170,7 +170,7 @@ public class PerkMenu extends BaseContent {
 		}
 		addButton(9, "Others", doubleAttackOptions2);
 
-		if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu);
+		if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu, false);
         else addButton(14, "Back", displayPerks);
 	}
 	public function doubleAttackOptions2():void {
@@ -284,7 +284,7 @@ public class PerkMenu extends BaseContent {
 			else addButton(7, "All Hexa", doubleStrikeStyle,5);
 		}
 		addButton(13, "Enchantments", doubleStrikeOptions2);
-        if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu);
+        if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu, false);
         else addButton(14, "Back", displayPerks);
 	}
 	public function doubleStrikeOptions2():void {
@@ -426,7 +426,7 @@ public class PerkMenu extends BaseContent {
 		if (elementalConjuerSummons > 1) addButton(10, "NotHelping", setflag,kFLAGS.ELEMENTAL_CONJUER_SUMMONS,1);
 		if (elementalConjuerSummons != 2 && player.hasStatusEffect(StatusEffects.SummonedElementals)) addButton(11, "MeleeAtk", elementalAttackReplacingPCmeleeAttack);
 		if (elementalConjuerSummons != 3 && player.hasStatusEffect(StatusEffects.SummonedElementals) && player.hasPerk(PerkLib.FirstAttackElementals)) addButton(12, "Helping", setflag,kFLAGS.ELEMENTAL_CONJUER_SUMMONS,3);
-		if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu);
+		if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu, false);
         else addButton(14, "Back", displayPerks);
         function elementalAttackReplacingPCmeleeAttack():void {
             flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 2;
@@ -463,7 +463,7 @@ public class PerkMenu extends BaseContent {
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] != 1) addButton(11, "Attacking", golemsAttacking,true);
 
 		var e:MouseEvent;
-		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu);
+		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
 		else addButton(14, "Back", displayPerks);
         function golemsAttacking(attacking:Boolean):void {
             flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] = (attacking)?1:0;
@@ -484,7 +484,7 @@ public class PerkMenu extends BaseContent {
 			addButton(11, "Off", DarkRitualOptionOff);
 		}
 		var e:MouseEvent;
-		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu);
+		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
 		else addButton(14, "Back", displayPerks);
 		function DarkRitualOptionOn():void {
 			player.createStatusEffect(StatusEffects.DarkRitual,0,0,0,0);
@@ -507,7 +507,7 @@ public class PerkMenu extends BaseContent {
 		if (flags[kFLAGS.WILL_O_THE_WISP] != 1) addButton(11, "Commanding", WOTWAttacking,true);
 
 		var e:MouseEvent;
-		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu);
+		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
 		else addButton(14, "Back", displayPerks);
         function WOTWAttacking(attacking:Boolean):void {
             flags[kFLAGS.WILL_O_THE_WISP] = (attacking)?1:0;
