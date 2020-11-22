@@ -3521,7 +3521,7 @@ public class Combat extends BaseContent {
                 }
             }
             //DOING EXTRA CLAW ATTACKS
-            if (player.haveNaturalClaws()) {
+            if (player.hasAClawAttack()) {
                 var DamageMultiplier:Number = 1;
                 if (player.arms.type == Arms.FROSTWYRM) DamageMultiplier = 2;
                 if (player.arms.type != Arms.MANTIS && player.arms.type != Arms.KAMAITACHI){
@@ -3644,7 +3644,7 @@ public class Combat extends BaseContent {
                 }
             }
             //Unique attack Mantis Prayer
-            if (player.mantisScore() >= 12 && player.arms.type == Arms.MANTIS){
+            if (player.mantisScore() >= 12 || player.arms.type == Arms.MANTIS){
                 if(player.hasStatusEffect(StatusEffects.InvisibleOrStealth)){
                     outputText("Taking advantage of your opponent obliviousness you strike four more times with your scythes.");
                     ExtraNaturalWeaponAttack();
@@ -3661,7 +3661,7 @@ public class Combat extends BaseContent {
                 }
             }
             //Unique attack Kamaitachi Three way Cut
-            if (player.kamaitachiScore() >= 12 && player.arms.type == Arms.KAMAITACHI){
+            if (player.kamaitachiScore() >= 12 || player.arms.type == Arms.KAMAITACHI){
                 outputText("You strike at blinding speed almost seeming to divide yourself into multiple copies, and slash with your scythes again. Initiating a three way cut combo\n");
                 ExtraNaturalWeaponAttack(1, "KamaitachiScythe");
                 if (player.hasABiteAttack()) {
@@ -10053,12 +10053,12 @@ public class Combat extends BaseContent {
         player.dynStats("lus", 15);
         enemyAI();
     }
-	
+
 	//Heal Zenji
     public function HealZenji():void {
         outputText("Noticing the injuries Zenji has sustained in efforts to protect you, you channel some magic to heal him.\n\n");
 		outputText("Zenji readies his spear, wedging himself between you and your opponent, \"<i>I am stronger! Thank you, [name]!</i>\"\n\n");
-        var recharge:Number = player.statusEffectv3(StatusEffects.CombatFollowerZenji); 
+        var recharge:Number = player.statusEffectv3(StatusEffects.CombatFollowerZenji);
 		player.addStatusValue(StatusEffects.CombatFollowerZenji, 3, -recharge);
         enemyAI();
     }

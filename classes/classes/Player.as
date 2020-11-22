@@ -3141,7 +3141,7 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "fairy") {
-				if (TopScore >= 18) {
+				if (TopScore >= 19) {
 					race = "great fairy";
 				}
 			}
@@ -5066,7 +5066,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && fairyCounter >= 8)
 				fairyCounter += 1;
 			if (hasPerk(PerkLib.TransformationImmunity))
-				fairyCounter += 4;
+				fairyCounter += 5;
 			if (isGargoyle()) fairyCounter = 0;
 			fairyCounter = finalRacialScore(fairyCounter, Race.FAIRY);
 			End("Player","racialScore");
@@ -8947,6 +8947,12 @@ use namespace CoC;
 				manticoreCounter++;
 			if (findPerk(PerkLib.ManticoreMetabolismEvolved) >= 0)
 				manticoreCounter++;
+			if (findPerk(PerkLib.CatlikeNimbleness) >= 0)
+				manticoreCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0)
+				manticoreCounter++;
+			if (findPerk(PerkLib.CatlikeNimblenessFinalForm) >= 0)
+				manticoreCounter++;
 			if (findPerk(PerkLib.ManticoreMetabolism) >= 0 && findPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
 				manticoreCounter++;
 			if (findPerk(PerkLib.ManticoreMetabolismEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0)
@@ -9202,11 +9208,30 @@ use namespace CoC;
 		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 12); }
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }
 		public function isNightCreature():Boolean { return (vampireScore() >= 10 || batScore() >= 6 || jiangshiScore() >= 20);}
-		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || faceType == Face.VAMPIRE || faceType == Face.SHARK_TEETH || faceType == Face.WOLF_FANGS || faceType == Face.PANDA || faceType == Face.YETI_FANGS || faceType == Face.WOLF || faceType == Face.SPIDER_FANGS || faceType == Face.ANIMAL_TOOTHS || faceType == Face.CAT_CANINES || faceType == Face.CAT || faceType == Face.MANTICORE || faceType == Face.SALAMANDER_FANGS || faceType == Face.WEASEL || faceType == Face.SNAKE_FANGS || faceType == Face.FOX || faceType == Face.BEAR || faceType == Face.DRAGON_FANGS || faceType == Face.DRAGON || faceType == Face.DOG || faceType == Face.FERRET || faceType == Face.ORCA || faceType == Face.LIZARD || faceType == Face.DEVIL_FANGS);}
-		public function hasAWingAttack():Boolean { return (wings.type == Wings.DRACONIC_HUGE || wings.type == Wings.NIGHTMARE || wings.type == Wings.MANTICORE_LIKE_LARGE || wings.type == Wings.GARGOYLE_LIKE_LARGE);}
-		public function hasAGoreAttack():Boolean { return (horns.type == Horns.UNICORN || horns.type == Horns.BICORN || horns.type == Horns.COW_MINOTAUR || horns.type == Horns.FROSTWYRM);}
-		public function hasATailSlapAttack():Boolean { return (tail.type == Tail.DRACONIC || tail.type == Tail.LIZARD || tail.type == Tail.SALAMANDER || tail.type == Tail.ORCA || tail.type == Tail.SHARK || tail.type == Tail.CAVE_WYRM || tail.type == Tail.GARGOYLE || tail.type == Tail.GARGOYLE_2 || tail.type == Tail.MANTICORE_PUSSYTAIL || tail.type == Tail.SCORPION || tail.type == Tail.BEE_ABDOMEN || lowerBody == LowerBody.FROSTWYRM || lowerBody == LowerBody.NAGA);}
-		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() ||hasABiteAttack() ||  hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack()); }
+		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || faceType == Face.VAMPIRE ||
+				faceType == Face.SHARK_TEETH || faceType == Face.WOLF_FANGS || faceType == Face.PANDA || faceType == Face.YETI_FANGS ||
+				faceType == Face.WOLF || faceType == Face.SPIDER_FANGS || faceType == Face.ANIMAL_TOOTHS || faceType == Face.CAT_CANINES ||
+				faceType == Face.CAT || faceType == Face.MANTICORE || faceType == Face.SALAMANDER_FANGS || faceType == Face.WEASEL ||
+				faceType == Face.SNAKE_FANGS || faceType == Face.FOX || faceType == Face.BEAR || faceType == Face.DRAGON_FANGS ||
+				faceType == Face.DRAGON || faceType == Face.DOG || faceType == Face.FERRET || faceType == Face.ORCA || faceType == Face.LIZARD ||
+				faceType == Face.DEVIL_FANGS || faceType == Face.SQUIRREL || faceType == Face.BUNNY || faceType == Face.SMUG
+				|| faceType == Face.BUCKTEETH || faceType == Face.BUCKTOOTH);}
+		public function hasAClawAttack():Boolean { return (arms.type == Arms.GARGOYLE || arms.type == Arms.WOLF
+				|| arms.type == Arms.CAT || arms.type == Arms.FROSTWYRM || arms.type == Arms.LIZARD || arms.type == Arms.DRAGON
+				|| arms.type == Arms.KITSUNE || arms.type == Arms.FOX || arms.type == Arms.DEVIL || arms.type == Arms.DISPLACER
+				|| arms.type == Arms.BEAR || arms.type == Arms.JIANGSHI || arms.type == Arms.LION || arms.type == Arms.MANTIS
+				|| arms.type == Arms.SQUIRREL || arms.type == Arms.WEASEL || arms.type == Arms.KAMAITACHI || arms.type == Arms.RAIJU
+				|| arms.type == Arms.RAIJU_2 || arms.type == Arms.SALAMANDER || arms.type == Arms.HYDRA);}
+		public function hasAWingAttack():Boolean { return (wings.type == Wings.DRACONIC_HUGE || wings.type == Wings.NIGHTMARE
+				|| wings.type == Wings.MANTICORE_LIKE_LARGE || wings.type == Wings.GARGOYLE_LIKE_LARGE);}
+		public function hasAGoreAttack():Boolean { return (horns.type == Horns.UNICORN || horns.type == Horns.BICORN
+				|| horns.type == Horns.COW_MINOTAUR || horns.type == Horns.FROSTWYRM);}
+		public function hasATailSlapAttack():Boolean { return (tail.type == Tail.DRACONIC || tail.type == Tail.LIZARD
+				|| tail.type == Tail.SALAMANDER || tail.type == Tail.ORCA || tail.type == Tail.SHARK || tail.type == Tail.CAVE_WYRM
+				|| tail.type == Tail.GARGOYLE || tail.type == Tail.GARGOYLE_2 || tail.type == Tail.MANTICORE_PUSSYTAIL
+				|| tail.type == Tail.SCORPION || tail.type == Tail.BEE_ABDOMEN || lowerBody == LowerBody.FROSTWYRM
+				|| lowerBody == LowerBody.NAGA);}
+		public function hasNaturalWeapons():Boolean { return (hasABiteAttack() || hasAClawAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack()); }
 
 		//TODO: (logosK) elderSlime, succubus pussy/demonic eyes, arachne, wasp, lactabovine/slut, sleipnir, hellhound, ryu, quetzalcoatl, eredar, anihilan,
 
@@ -10182,22 +10207,6 @@ use namespace CoC;
 			if (this.hasPerk(PerkLib.DemonicLethicite)) {minCor+=10;minLib+=10;}
 			if (this.hasPerk(PerkLib.ProductivityDrugs)) {minLib+=this.perkv1(PerkLib.ProductivityDrugs);minCor+=10;}
 			//Minimum Sensitivity
-			if (this.manticoreScore() >= 6) minSen += 30;
-			if (this.manticoreScore() >= 12) minSen += 15;
-			if (this.devilkinScore() >= 7) minSen += 10;
-			if (this.devilkinScore() >= 11) minSen += 5;
-			if (this.devilkinScore() >= 16) minSen += 25;
-			if (this.elfScore() >= 5) minSen += 15;
-			if (this.elfScore() >= 11) minSen += 15;
-			if (this.raijuScore() >= 5) minSen += 25;
-			if (this.raijuScore() >= 10) minSen += 25;
-			if (this.hellcatScore() >= 17) minSen += 50;
-			if (this.hellcatScore() >= 10) minSen += 25;
-			if (this.firesnailScore() >= 15) minSen += 50;
-			if (this.melkieScore() >= 8) minSen += 25;
-			if (this.melkieScore() >= 18) minSen += 25;
-			if (this.melkieScore() >= 21) minSen += 15;
-			if (this.fairyScore() >= 18) minSen += 20;
 			//Rings
 			if (this.jewelryName == "Ring of Libido") minLib += 5;
 			if (this.jewelryName2 == "Ring of Libido") minLib += 5;
@@ -10589,10 +10598,10 @@ use namespace CoC;
 					maxIntCap2 += 25;
 				}
 			}
-			if (fairyScore() >= 18) {
+			if (fairyScore() >= 19) {
 				maxStrCap2 -= 25;
 				maxTouCap2 -= 25;
-				maxSpeCap2 += 140;
+				maxSpeCap2 += 155;
 				maxIntCap2 += 200;
 				minSen += 20;
 			}//+10/10-20
@@ -10664,7 +10673,7 @@ use namespace CoC;
 					if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) maxSpeCap2 += 90;
 					if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 80;
 					else maxSpeCap2 += 70;
-					maxIntCap2 += 125;
+					maxIntCap2 += 135;
 					maxLibCap2 += 100;
 					minSen += 50;
 				} else {
@@ -11123,27 +11132,33 @@ use namespace CoC;
 			if (devilkinScore() >= 7) {
 				if (devilkinScore() >= 16 && hasPerk(PerkLib.Phylactery)) {
 					if (devilkinScore() >= 21) {
-						maxStrCap2 += 105;
-						maxIntCap2 += 150;
-						maxLibCap2 += 100;
+						maxStrCap2 += 120;
+						maxSpeCap2 -= 20;
+						maxIntCap2 += 200;
+						maxLibCap2 += 115;
+						minSen += 50;
 					}
 					else {
 						maxStrCap2 += 95;
-						maxIntCap2 += 85;
+						maxSpeCap2 -= 20;
+						maxIntCap2 += 115;
 						maxLibCap2 += 100;
+						minSen += 50;
 					}
 				}
 				else if (devilkinScore() >= 11) {
-					maxStrCap2 += 65;
+					maxStrCap2 += 70;
 					maxSpeCap2 -= 20;
-					maxIntCap2 += 60;
+					maxIntCap2 += 90;
 					maxLibCap2 += 75;
+					minSen += 50;
 				}
 				else {
 					maxStrCap2 += 35;
 					maxSpeCap2 -= 10;
-					maxIntCap2 += 40;
+					maxIntCap2 += 55;
 					maxLibCap2 += 50;
+					minSen += 25;
 				}
 			}//+60/50-60
 			if (rhinoScore() >= 4) {
@@ -11157,15 +11172,23 @@ use namespace CoC;
 				maxSpeCap2 += 5;
 			}//+10/10-20
 			if (manticoreScore() >= 6) {
-				if (manticoreScore() >= 13) {
-					maxSpeCap2 += 100;
-					maxIntCap2 += 65;
-					maxLibCap2 += 60;
+				if (manticoreScore() >= 20) {
+					maxSpeCap2 += 150;
+					maxIntCap2 += 90;
+					maxLibCap2 += 135;
+					minSen += 75;
+				}
+				else if (manticoreScore() >= 15) {
+					maxSpeCap2 += 110;
+					maxIntCap2 += 75;
+					maxLibCap2 += 90;
+					minSen += 50;
 				}
 				else {
-					maxSpeCap2 += 50;
-					maxIntCap2 += 25;
-					maxLibCap2 += 30;
+					maxSpeCap2 += 60;
+					maxIntCap2 += 30;
+					maxLibCap2 += 40;
+					minSen += 25;
 				}
 			}//+60/50-60
 			if (redpandaScore() >= 4) {
@@ -11419,19 +11442,22 @@ use namespace CoC;
 			}
 			if (melkieScore() >= 8) {
 				if (melkieScore() >= 21) {
-					maxSpeCap2 += 140;
-					maxIntCap2 += 140;
+					maxSpeCap2 += 160;
+					maxIntCap2 += 160;
 					maxLibCap2 += 100;
+					minSen += 65;
 				}
 				if (melkieScore() >= 18) {
 					maxSpeCap2 += 120;
 					maxIntCap2 += 120;
 					maxLibCap2 += 80;
+					minSen += 50;
 				}
 				else {
 					maxSpeCap2 += 55;
 					maxIntCap2 += 55;
 					maxLibCap2 += 35;
+					minSen += 25;
 				}
 			}
 
@@ -11762,6 +11788,7 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.EverywhereAndNowhere)) {
 				removeStatusEffect(StatusEffects.EverywhereAndNowhere);
 			}
+
 			if(hasStatusEffect(StatusEffects.Displacement)) {
 				removeStatusEffect(StatusEffects.Displacement);
 			}

@@ -4090,7 +4090,7 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.Flexibility) >= 0) chance += 6;
 			if (findPerk(PerkLib.Misdirection) >= 0 && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia")) chance += 10;
 			//if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq()) chance += 10;
-			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "nothing")) chance += 10;
+			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "berserker armor" || game.player.armorName == "nothing")) chance += 10;
 			if (game.player.armor == game.armors.R_CHANG || game.player.armor == game.armors.R_QIPAO || game.player.armor == game.armors.G_CHANG || game.player.armor == game.armors.G_QIPAO || game.player.armor == game.armors.B_CHANG || game.player.armor == game.armors.B_QIPAO || game.player.armor == game.armors.P_CHANG || game.player.armor == game.armors.P_QIPAO) chance += 5;
 			if (game.player.hasKeyItem("Spring Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 10;
 			if (game.player.hasKeyItem("Rocket Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 20;
@@ -4129,6 +4129,7 @@ public class Creature extends Utils
 		public const EVASION_ILLUSION:String = "Illusion";
 		public const EVASION_FLYING:String = "Flying";
 		public const EVASION_CHESHIRE_PHASING:String = "Phasing";
+		public const EVASION_TITANIA_MINIMISE:String = "Minimise";
 
 		/**
 	    * Try to avoid and @return a reason if successfull or null if failed to evade.
@@ -4165,7 +4166,7 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.Flexibility) >= 0 && (roll < 6)) return "Flexibility";
 			if (findPerk(PerkLib.Misdirection) >= 0 && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia") && (roll < 10)) return "Misdirection";
 			//if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq() && (roll < 10)) return "Unhindered";
-			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "nothing") && (roll < 10)) return "Unhindered";
+			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "berserker armor" || game.player.armorName == "nothing") && (roll < 10)) return "Unhindered";
 			if (findPerk(PerkLib.JunglesWanderer) >= 0 && (roll < 35)) return "Jungle's Wanderer";
 			if (hasStatusEffect(StatusEffects.Illusion)) {
 				if (findPerk(PerkLib.KitsuneThyroidGlandFinalForm) >= 0 && roll < 20) return "Illusion";
@@ -4174,6 +4175,7 @@ public class Creature extends Utils
 			if (hasStatusEffect(StatusEffects.Flying) && (roll < flyeavsion)) return "Flying";
 			if (hasStatusEffect(StatusEffects.HurricaneDance) && (roll < 25)) return "Hurricane Dance";
 			if (hasStatusEffect(StatusEffects.BladeDance) && (roll < 30)) return "Blade Dance";
+			if (game.player.cheshireScore() >= 11 && ((!hasStatusEffect(StatusEffects.Minimise) && (roll < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 80)))) return "Minimise";
 			if (game.player.cheshireScore() >= 11 && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 80)))) return "Phasing";
 			if (game.player.displacerbeastScore() >= 11 && ((!hasStatusEffect(StatusEffects.Displacement) && (roll < 30)) || (hasStatusEffect(StatusEffects.Displacement) && (roll < 80)))) return "Displacing";
 			return null;
@@ -4183,6 +4185,30 @@ public class Creature extends Utils
 		{
 			return getEvasionReason(useMonster, attackSpeed) != null;
 		}
+
+		//private function evasionCalc():void { //In development
+			//var evasionValue:Number = 0;
+			//evasionValue += Math.min( 40, spe/25);
+			//if (hasPerk(PerkLib.Flexibility)) evasionValue += 5;
+			//if (hasPerk(PerkLib.CatlikeNimbleness)) evasionValue += 5;
+			//if (hasPerk(PerkLib.CatlikeNimblenessEvolved)) evasionValue += 5;
+			//if (hasPerk(PerkLib.CatlikeNimblenessFinalForm)) evasionValue += 5;
+			//if (hasPerk(PerkLib.ElvenSense)) evasionValue += 5;
+			//if (hasPerk(PerkLib.Evade)) evasionValue += 5;
+			//if (hasPerk(PerkLib.ImprovedEvade)) evasionValue += 10;
+			//if (hasPerk(PerkLib.GreaterEvade)) evasionValue += 15;
+			//if (hasPerk(PerkLib.Spectre && hasPerk(PerkLib.Incorporeality) >= 0)) evasionValue += 10;
+			//if (hasPerk(PerkLib.AdvancedAerialCombat) && isFlying()) evasionValue += 5;
+			//if (hasPerk(PerkLib.GreaterAerialCombat) && isFlying()) evasionValue += 15;
+			//if (game.player.hasKeyItem("Spring Boots") >= 0 && tallness < 48 && isBiped()) evasionValue += 10;
+			//if (game.player.hasKeyItem("Rocket Boots") >= 0 && tallness < 48 && isBiped()) evasionValue += 20;
+			//if (game.player.hasKeyItem("Nitro Boots") >= 0 && tallness < 48 && isBiped()) evasionValue += 30;
+			//if (hasPerk(PerkLib.Unhindered) && (armorName == "arcane bangles" || armorName == "practically indecent steel armor"
+			//|| armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps"
+			//|| armorName == "berserker armor" || armorName == "nothing")) evasionValue += 10;
+			//if (hasPerk(PerkLib.Misdirection) && (armorName == "red, high-society bodysuit"
+			//|| armorName == "Fairy Queen Regalia")) evasionValue += 10;
+		//}
 
 		public function get vagorass():IOrifice {
 			return hasVagina() ? vaginas[0] : ass;
