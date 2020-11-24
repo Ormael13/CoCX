@@ -2377,6 +2377,9 @@
 					<case test="lowerBody==LowerBody.FOX">
 						<show part="feet/furracoon"/>
 					</case>
+					<case test="lowerBody==LowerBody.BUNNY">
+						<show part="feet/bunny"/>
+					</case>
 					<case test="lowerBody==LowerBody.RACCOON">
 						<show part="feet/furracoon"/>
 					</case>
