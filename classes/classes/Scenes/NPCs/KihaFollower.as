@@ -845,7 +845,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 			addButton(2, "Hug", hugFriendWarmKiha).hint("Give the dragoness a hug.");
 			addButton(3, "Sex", kihaSexMenu).hint("Initiate sex session with Kiha.");
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(4, "Spar", sparWithKiha).hint("Do some quick battle with Kiha!");
-			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) {
+			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] >= 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) {
 				if (flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] == 0) addButton(7, "Destroy Glades", kihaDestroyGladesToggle).hint("Request Kiha to destroy any corrupted glades she can find.");
 				else addButton(7, "Stop Destroying", kihaDestroyGladesToggle).hint("Request Kiha to stop destroying the corrupted glades.");
 			}

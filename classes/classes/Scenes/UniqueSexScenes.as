@@ -8,6 +8,10 @@ package classes.Scenes
 	import classes.BodyParts.Arms;
 	import classes.BodyParts.LowerBody;
 	import classes.BodyParts.Tail;
+	import classes.Scenes.Areas.Mountain.HellHound;
+	import classes.Scenes.Areas.Mountain.InfestedHellhound;
+	import classes.Scenes.Areas.Ocean.SeaAnemone;
+	import classes.Scenes.NPCs.Anemone;
 	
 	public class UniqueSexScenes extends BaseContent
 	{
@@ -173,7 +177,10 @@ package classes.Scenes
 			menu();
 			if (player.tailType == Tail.MANTICORE_PUSSYTAIL && monster.hasCock()) addButton(0, "Tail Rape", manticoreTailRapeScene);
 			else addButtonDisabled(0, "Tail Rape", "Req. to have Pussytail and enemy with cock.");
-			if (player.tailType == Tail.HINEZUMI || player.tailType == Tail.SALAMANDER) addButton(1, "Tailpeg", hinezumiTailpegScene);
+			if (player.tailType == Tail.HINEZUMI || player.tailType == Tail.SALAMANDER) {
+				if (monster is Anemone || monster is SeaAnemone || monster is HellHound || monster is InfestedHellhound) addButtonDisabled(1, "Tailpeg", "Req. enemy to have anus.");
+				else addButton(1, "Tailpeg", hinezumiTailpegScene);
+			}
 			else addButtonDisabled(1, "Tailpeg", "Req. to have Hinezumi Tail.");
 			if ((player.gender == 1 || player.gender == 2) && (player.tailType == Tail.HINEZUMI || player.tailType == Tail.MOUSE || player.tailType == Tail.DEMONIC)) addButton(2, "Strangle and rape", strangleAndRapeScene);
 			else addButtonDisabled(2, "Strangle and rape", "Req. to be male or female with hinezumi, mouse or demon tail.");

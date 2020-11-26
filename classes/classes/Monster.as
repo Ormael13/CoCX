@@ -341,6 +341,11 @@ import flash.utils.getQualifiedClassName;
 		public override function maxHP():Number {
             return Math.round(maxHP_base()*maxHP_mult());
         }
+		public override function maxOverHP():Number {
+			var maxOver:Number = maxHP();
+			if (findPerk(PerkLib.HiddenJobBloodDemon) >= 0) maxOver += Math.round(this.tou*5);
+			return maxOver;
+		}
 
 		public override function minHP():Number
 		{
@@ -899,18 +904,8 @@ import flash.utils.getQualifiedClassName;
 			if (str >= 41) damage += (str - 40);
 			if (str >= 61) damage += (str - 60);
 			if (str >= 81) damage += (str - 80);
-			if (str >= 101) damage += tieredBonus(str, 50, 100);/*
-			if (str >= 3501) damage += (str - 3500);
-			if (str >= 3551) damage += (str - 3550);
-			if (str >= 3601) damage += (str - 3600);
-			if (str >= 3651) damage += (str - 3650);
-			if (str >= 3701) damage += (str - 3700);
-			if (str >= 3751) damage += (str - 3750);
-			if (str >= 3801) damage += (str - 3800);
-			if (str >= 3851) damage += (str - 3850);
-			if (str >= 3901) damage += (str - 3900);
-			if (str >= 3951) damage += (str - 3950);
-			if (str >= 4001) damage += (str - 4000);*/
+			if (str >= 101) damage += tieredBonus(str, 50, 100);
+			if (str < 10) damage = 10;
 			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
 			//monster exclusive perks bonus
 			damage *= eBaseMultis();
@@ -925,18 +920,8 @@ import flash.utils.getQualifiedClassName;
 			if (tou >= 41) damage += (tou - 40);
 			if (tou >= 61) damage += (tou - 60);
 			if (tou >= 81) damage += (tou - 80);
-			if (tou >= 101) damage += tieredBonus(tou, 50, 100);/*
-			if (tou >= 3501) damage += (tou - 3500);
-			if (tou >= 3551) damage += (tou - 3550);
-			if (tou >= 3601) damage += (tou - 3600);
-			if (tou >= 3651) damage += (tou - 3650);
-			if (tou >= 3701) damage += (tou - 3700);
-			if (tou >= 3751) damage += (tou - 3750);
-			if (tou >= 3801) damage += (tou - 3800);
-			if (tou >= 3851) damage += (tou - 3850);
-			if (tou >= 3901) damage += (tou - 3900);
-			if (tou >= 3951) damage += (tou - 3950);
-			if (tou >= 4001) damage += (tou - 4000);*/
+			if (tou >= 101) damage += tieredBonus(tou, 50, 100);
+			if (tou < 10) damage = 10;
 			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
 			//monster exclusive perks bonus
 			damage *= eBaseMultis();
@@ -951,18 +936,8 @@ import flash.utils.getQualifiedClassName;
 			if (spe >= 41) damage += (spe - 40);
 			if (spe >= 61) damage += (spe - 60);
 			if (spe >= 81) damage += (spe - 80);
-			if (spe >= 101) damage += tieredBonus(spe, 50, 100);/*
-			if (spe >= 3501) damage += (spe - 3500);
-			if (spe >= 3551) damage += (spe - 3550);
-			if (spe >= 3601) damage += (spe - 3600);
-			if (spe >= 3651) damage += (spe - 3650);
-			if (spe >= 3701) damage += (spe - 3700);
-			if (spe >= 3751) damage += (spe - 3750);
-			if (spe >= 3801) damage += (spe - 3800);
-			if (spe >= 3851) damage += (spe - 3850);
-			if (spe >= 3901) damage += (spe - 3900);
-			if (spe >= 3951) damage += (spe - 3950);
-			if (spe >= 4001) damage += (spe - 4000);*/
+			if (spe >= 101) damage += tieredBonus(spe, 50, 100);
+			if (spe < 10) damage = 10;
 			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
 			//monster exclusive perks bonus
 			damage *= eBaseMultis();
@@ -977,18 +952,8 @@ import flash.utils.getQualifiedClassName;
 			if (inte >= 41) damage += (inte - 40);
 			if (inte >= 61) damage += (inte - 60);
 			if (inte >= 81) damage += (inte - 80);
-			if (inte >= 101) damage += tieredBonus(inte, 50, 100);/*
-			if (inte >= 3501) damage += (inte - 3500);
-			if (inte >= 3551) damage += (inte - 3550);
-			if (inte >= 3601) damage += (inte - 3600);
-			if (inte >= 3651) damage += (inte - 3650);
-			if (inte >= 3701) damage += (inte - 3700);
-			if (inte >= 3751) damage += (inte - 3750);
-			if (inte >= 3801) damage += (inte - 3800);
-			if (inte >= 3851) damage += (inte - 3850);
-			if (inte >= 3901) damage += (inte - 3900);
-			if (inte >= 3951) damage += (inte - 3950);
-			if (inte >= 4001) damage += (inte - 4000);*/
+			if (inte >= 101) damage += tieredBonus(inte, 50, 100);
+			if (inte < 10) damage = 10;
 			//monster exclusive perks bonus
 			damage *= eBaseMultis();
 			damage = Math.round(damage);
@@ -1002,18 +967,8 @@ import flash.utils.getQualifiedClassName;
 			if (wis >= 41) damage += (wis - 40);
 			if (wis >= 61) damage += (wis - 60);
 			if (wis >= 81) damage += (wis - 80);
-			if (wis >= 101) damage += tieredBonus(wis, 50, 100);/*
-			if (wis >= 3501) damage += (wis - 3500);
-			if (wis >= 3551) damage += (wis - 3550);
-			if (wis >= 3601) damage += (wis - 3600);
-			if (wis >= 3651) damage += (wis - 3650);
-			if (wis >= 3701) damage += (wis - 3700);
-			if (wis >= 3751) damage += (wis - 3750);
-			if (wis >= 3801) damage += (wis - 3800);
-			if (wis >= 3851) damage += (wis - 3850);
-			if (wis >= 3901) damage += (wis - 3900);
-			if (wis >= 3951) damage += (wis - 3950);
-			if (wis >= 4001) damage += (wis - 4000);*/
+			if (wis >= 101) damage += tieredBonus(wis, 50, 100);
+			if (wis < 10) damage = 10;
 			//monster exclusive perks bonus
 			damage *= eBaseMultis();
 			damage = Math.round(damage);
@@ -2360,6 +2315,100 @@ import flash.utils.getQualifiedClassName;
 
 		public function combatRoundUpdate():void
 		{
+			
+			//regeneration perks for monsters
+			if (((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.LizanMarrowFinalForm) >= 0 || findPerk(PerkLib.DraconicHeartFinalForm) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0
+			|| findPerk(PerkLib.HydraRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0 || findPerk(PerkLib.ImprovedLifeline) >= 0 || findPerk(PerkLib.GreaterLifeline) >= 0 || findPerk(PerkLib.EpicLifeline) >= 0 || findPerk(PerkLib.IcyFlesh) >= 0 || findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0
+			|| findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxHP()) && (this.HP > 0))) {
+				var healingPercent:Number = 0;
+				var temp2:Number = 0;
+				if (findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.VladimirRegalia) >= 0 && !isNightTime()) healingPercent -= 5;
+				if (findPerk(PerkLib.VladimirRegalia) >= 0 && isNightTime()) healingPercent += 5;
+				if (findPerk(PerkLib.LizanRegeneration) >= 0 && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1.5;
+				if (findPerk(PerkLib.LizanMarrow) >= 0 && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 0.5;
+				if (findPerk(PerkLib.LizanMarrowEvolved) >= 0 && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1;
+				if (findPerk(PerkLib.LizanMarrowFinalForm) >= 0 && !hasStatusEffect(StatusEffects.RegenInhibitor)) {
+					healingPercent += 1.5;
+					if (this.HP < (this.maxHP() * 0.25)) healingPercent += 4.5;
+				}
+				if (findPerk(PerkLib.DraconicHeartFinalForm) >= 0) healingPercent += 1;
+				if (findPerk(PerkLib.HydraRegeneration) >= 0 && !hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) healingPercent += 1 * perkv1(PerkLib.HydraRegeneration);
+				if (findPerk(PerkLib.IcyFlesh) >= 0) healingPercent += 1;
+				if (findPerk(PerkLib.BodyCultivator) >= 0) healingPercent += 0.5;
+				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
+				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
+				if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
+				if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
+				if (findPerk(PerkLib.Ferocity) >= 0 && this.HP < 1) healingPercent -= 1;
+				if (findPerk(PerkLib.EnemyPlantType) >= 0) healingPercent += 1;
+				if (findPerk(PerkLib.MonsterRegeneration) >= 0 && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += perkv1(PerkLib.MonsterRegeneration);
+				if (hasStatusEffect(StatusEffects.MonsterRegen)) healingPercent += statusEffectv2(StatusEffects.MonsterRegen);
+				if (findPerk(PerkLib.Diehard) >= 0 && !findPerk(PerkLib.EpicDiehard) >= 0 && this.HP < 1) healingPercent -= 1;
+				if (findPerk(PerkLib.LizanMarrowFinalForm) >= 0 && this.HP < 1) healingPercent -= 1;
+				temp2 = Math.round(maxHP() * healingPercent / 100);
+				if (findPerk(PerkLib.Lifeline) >= 0) temp2 += (45 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.ImprovedLifeline) >= 0) temp2 += (60 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.GreaterLifeline) >= 0) temp2 += (90 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.EpicLifeline) >= 0) temp2 += (120 * (1 + newGamePlusMod()));
+				if (hasStatusEffect(StatusEffects.MonsterRegen2)) temp2 += statusEffectv2(StatusEffects.MonsterRegen2);
+				if (hasStatusEffect(StatusEffects.MonsterVPT)) temp2 += statusEffectv1(StatusEffects.MonsterVPT);
+				if (temp2 > 0) {
+					temp2 = Math.round(temp2);
+					if (this is ChiChi && (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2 || hasStatusEffect(StatusEffects.MonsterRegen))) {
+						outputText("To your surprise, Chi Chi’s wounds start closing! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
+					}
+					else {
+						outputText("Due to natural regeneration " + short + " recover");
+						if (plural) outputText("s");
+						else outputText("ed");
+						outputText(" some HP! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
+					}
+					addHP(temp2);
+				}
+			}
+			//soulforce and mana regeneration for monsters
+			if (findPerk(PerkLib.JobSoulCultivator) >= 0 && this.soulforce < maxSoulforce()) {
+				var soulforceRecovery:Number = 0;
+				var soulforceRecoveryMulti:Number = 1;
+				if (findPerk(PerkLib.JobSoulCultivator) >= 0) soulforceRecovery += 4;
+				if (findPerk(PerkLib.SoulApprentice) >= 0) soulforceRecovery += 2;
+				if (findPerk(PerkLib.SoulPersonage) >= 0) soulforceRecovery += 2;
+				if (findPerk(PerkLib.SoulWarrior) >= 0) soulforceRecovery += 2;
+				if (findPerk(PerkLib.SoulSprite) >= 0) soulforceRecovery += 3;
+				if (findPerk(PerkLib.SoulScholar) >= 0) soulforceRecovery += 3;
+				if (findPerk(PerkLib.SoulElder) >= 0) soulforceRecovery += 3;
+				if (findPerk(PerkLib.SoulExalt) >= 0) soulforceRecovery += 4;
+				if (findPerk(PerkLib.SoulOverlord) >= 0) soulforceRecovery += 4;
+				if (findPerk(PerkLib.SoulTyrant) >= 0) soulforceRecovery += 4;
+				if (findPerk(PerkLib.SoulKing) >= 0) soulforceRecovery += 5;
+				if (findPerk(PerkLib.SoulEmperor) >= 0) soulforceRecovery += 5;
+				if (findPerk(PerkLib.SoulAncestor) >= 0) soulforceRecovery += 5;
+				if (findPerk(PerkLib.DaoistCultivator) >= 0) soulforceRecoveryMulti += 0.5;
+				if (findPerk(PerkLib.DraconicHeart) >= 0) manaRecovery += 4;
+				if (findPerk(PerkLib.DraconicHeartEvolved) >= 0) manaRecovery += 4;
+				if (findPerk(PerkLib.DraconicHeartFinalForm) >= 0) manaRecovery += 4;
+				soulforceRecovery *= soulforceRecoveryMulti;
+				addSoulforce(soulforceRecovery);
+			}
+			if (findPerk(PerkLib.JobSorcerer) >= 0 && this.mana < maxMana()) {
+				var manaRecovery:Number = 0;
+				var manaRecoveryMulti:Number = 1;
+				if (findPerk(PerkLib.JobSorcerer) >= 0) manaRecovery += 10;
+				if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) manaRecovery += 5;
+				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0) manaRecovery += 10;
+				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0) manaRecovery += 15;
+				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0) manaRecovery += 20;
+				if (findPerk(PerkLib.DraconicHeart) >= 0) manaRecovery += 5;
+				if (findPerk(PerkLib.DraconicHeartEvolved) >= 0) manaRecovery += 5;
+				if (findPerk(PerkLib.DraconicHeartFinalForm) >= 0) manaRecovery += 5;
+				if (findPerk(PerkLib.GreyMage) >= 0) manaRecoveryMulti += 0.5;
+				if (findPerk(PerkLib.GreyArchmage) >= 0) manaRecoveryMulti += 1.5;
+				if (findPerk(PerkLib.ManaAffinityI) >= 0) manaRecoveryMulti += (0.2 * (1 + newGamePlusMod()));
+				manaRecovery *= manaRecoveryMulti;
+				addMana(manaRecovery);
+			}
+			
 			if(hasStatusEffect(StatusEffects.MilkyUrta)) {
 				SceneLib.urtaQuest.milkyUrtaTic();
 			}
@@ -2923,7 +2972,7 @@ import flash.utils.getQualifiedClassName;
 						lustDmg1 += maxLust() * statusEffectv2(StatusEffects.LustDoT);
 						if(plural) outputText(capitalA + short + " are aroused by lingering lust-induncing after-effect. ");
 						else outputText(capitalA + short + " is aroused by lingering lust-induncing after-effect. ");
-						teased(lustDmg1);
+						teased(lustDmg1, false);
 						outputText("\n\n");
 					}
 				}
@@ -2944,7 +2993,7 @@ import flash.utils.getQualifiedClassName;
 						lustDmg2 += maxLust() * statusEffectv2(StatusEffects.LustDoTH);
 						if(plural) outputText(capitalA + short + " are aroused by lingering lust-induncing after-effect. ");
 						else outputText(capitalA + short + " is aroused by lingering lust-induncing after-effect. ");
-						teased(lustDmg2);
+						teased(lustDmg2, false);
 						outputText("\n\n");
 					}
 				}
@@ -2966,40 +3015,50 @@ import flash.utils.getQualifiedClassName;
 			}
 
 			//Consuming darkness
-			if (player.hasStatusEffect(StatusEffects.ConsumingDarkness)) {
-				if (player.statusEffectv1(StatusEffects.ConsumingDarkness) <= 0) player.removeStatusEffect(StatusEffects.ConsumingDarkness);
+			if (hasStatusEffect(StatusEffects.ConsumingDarkness)) {
+				if (statusEffectv1(StatusEffects.ConsumingDarkness) <= 0) removeStatusEffect(StatusEffects.ConsumingDarkness);
 				else {
-					player.addStatusValue(StatusEffects.ConsumingDarkness, 1, -1);
+					addStatusValue(StatusEffects.ConsumingDarkness, 1, -1);
 					outputText("Hungry darkness gnaw at your foe for ");
 					var store11:Number = 0;
 					store11 += statusEffectv2(StatusEffects.ConsumingDarkness);
-					SceneLib.combat.doDarknessDamage(store11, true, true);
-					outputText(" damage!\n\n");
+					store11 *= 0.2;
+					store11 = Math.round(store11);
+					store11 = SceneLib.combat.doDarknessDamage(store11, true, true);
+					outputText("\n\n");
 				}
 			}
 			//Curse of Desire
-			if (player.hasStatusEffect(StatusEffects.CurseOfDesire)) {
-				if (player.statusEffectv1(StatusEffects.CurseOfDesire) <= 0) player.removeStatusEffect(StatusEffects.CurseOfDesire);
+			if (hasStatusEffect(StatusEffects.CurseOfDesire)) {
+				if (statusEffectv1(StatusEffects.CurseOfDesire) <= 0) {
+					if (statusEffectv3(StatusEffects.CurseOfDesire) > 0) lustVuln += statusEffectv3(StatusEffects.CurseOfDesire);
+					removeStatusEffect(StatusEffects.CurseOfDesire);
+				}
 				else {
-					player.addStatusValue(StatusEffects.CurseOfDesire, 1, -1);
+					addStatusValue(StatusEffects.CurseOfDesire, 1, -1);
 					var lustDmg3:Number = 0;
 					lustDmg3 += statusEffectv2(StatusEffects.CurseOfDesire);
+					lustDmg3 *= 0.2;
+					if (lustDmg3 < 1) lustDmg3 = 1;
+					else lustDmg3 = Math.round(lustDmg3);
 					outputText("The curse of desire slowly sap at your victim's resolve and countenance. ");
-					teased(lustDmg3);
+					teased(lustDmg3, false);
 					outputText("\n\n");
 				}
 			}
 
 			//Curse of Weeping
-			if (player.hasStatusEffect(StatusEffects.CurseOfWeeping)) {
-				if (player.statusEffectv1(StatusEffects.CurseOfWeeping) <= 0) player.removeStatusEffect(StatusEffects.CurseOfWeeping);
+			if (hasStatusEffect(StatusEffects.CurseOfWeeping)) {
+				if (statusEffectv1(StatusEffects.CurseOfWeeping) <= 0) removeStatusEffect(StatusEffects.CurseOfWeeping);
 				else {
-					player.addStatusValue(StatusEffects.CurseOfWeeping, 1, -1);
+					addStatusValue(StatusEffects.CurseOfWeeping, 1, -1);
 					outputText("Your foe is bleeding due to your curse. ");
 					var hemorrhage3Damage:Number = 0;
 					hemorrhage3Damage += statusEffectv2(StatusEffects.CurseOfWeeping);
-					SceneLib.combat.doDamage(hemorrhage3Damage);
-					outputText("<b>(<font color=\"#800000\">" + hemorrhage3Damage + "</font>)</b>\n\n");
+					hemorrhage3Damage *= 0.2;
+					hemorrhage3Damage = Math.round(hemorrhage3Damage);
+					hemorrhage3Damage = SceneLib.combat.doDamage(hemorrhage3Damage, true, true);
+					outputText("\n\n");
 				}
 			}
 
@@ -3007,98 +3066,6 @@ import flash.utils.getQualifiedClassName;
 			if (hasStatusEffect(StatusEffects.EnemyLoweredDamageH)) {
 				if (statusEffectv1(StatusEffects.EnemyLoweredDamageH) <= 0) removeStatusEffect(StatusEffects.EnemyLoweredDamageH);
 				else addStatusValue(StatusEffects.EnemyLoweredDamageH,1,-1);
-			}
-			//regeneration perks for monsters
-			if (((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.LizanMarrowFinalForm) >= 0 || findPerk(PerkLib.DraconicHeartFinalForm) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0
-			|| findPerk(PerkLib.HydraRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0 || findPerk(PerkLib.ImprovedLifeline) >= 0 || findPerk(PerkLib.GreaterLifeline) >= 0 || findPerk(PerkLib.EpicLifeline) >= 0 || findPerk(PerkLib.IcyFlesh) >= 0 || findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0
-			|| findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxHP()) && (this.HP > 0))) {
-				var healingPercent:Number = 0;
-				var temp2:Number = 0;
-				if (findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + newGamePlusMod()));
-				if (findPerk(PerkLib.VladimirRegalia) >= 0 && !isNightTime()) healingPercent -= 5;
-				if (findPerk(PerkLib.VladimirRegalia) >= 0 && isNightTime()) healingPercent += 5;
-				if (findPerk(PerkLib.LizanRegeneration) >= 0 && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1.5;
-				if (findPerk(PerkLib.LizanMarrow) >= 0 && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 0.5;
-				if (findPerk(PerkLib.LizanMarrowEvolved) >= 0 && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1;
-				if (findPerk(PerkLib.LizanMarrowFinalForm) >= 0 && !hasStatusEffect(StatusEffects.RegenInhibitor)) {
-					healingPercent += 1.5;
-					if (this.HP < (this.maxHP() * 0.25)) healingPercent += 4.5;
-				}
-				if (findPerk(PerkLib.DraconicHeartFinalForm) >= 0) healingPercent += 1;
-				if (findPerk(PerkLib.HydraRegeneration) >= 0 && !hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) healingPercent += 1 * perkv1(PerkLib.HydraRegeneration);
-				if (findPerk(PerkLib.IcyFlesh) >= 0) healingPercent += 1;
-				if (findPerk(PerkLib.BodyCultivator) >= 0) healingPercent += 0.5;
-				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
-				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
-				if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
-				if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) healingPercent += 0.5;
-				if (findPerk(PerkLib.Ferocity) >= 0 && this.HP < 1) healingPercent -= 1;
-				if (findPerk(PerkLib.EnemyPlantType) >= 0) healingPercent += 1;
-				if (findPerk(PerkLib.MonsterRegeneration) >= 0 && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += perkv1(PerkLib.MonsterRegeneration);
-				if (hasStatusEffect(StatusEffects.MonsterRegen)) healingPercent += statusEffectv2(StatusEffects.MonsterRegen);
-				if (findPerk(PerkLib.Diehard) >= 0 && !findPerk(PerkLib.EpicDiehard) >= 0 && this.HP < 1) healingPercent -= 1;
-				if (findPerk(PerkLib.LizanMarrowFinalForm) >= 0 && this.HP < 1) healingPercent -= 1;
-				temp2 = Math.round(maxHP() * healingPercent / 100);
-				if (findPerk(PerkLib.Lifeline) >= 0) temp2 += (45 * (1 + newGamePlusMod()));
-				if (findPerk(PerkLib.ImprovedLifeline) >= 0) temp2 += (60 * (1 + newGamePlusMod()));
-				if (findPerk(PerkLib.GreaterLifeline) >= 0) temp2 += (90 * (1 + newGamePlusMod()));
-				if (findPerk(PerkLib.EpicLifeline) >= 0) temp2 += (120 * (1 + newGamePlusMod()));
-				if (hasStatusEffect(StatusEffects.MonsterRegen2)) temp2 += statusEffectv2(StatusEffects.MonsterRegen2);
-				if (hasStatusEffect(StatusEffects.MonsterVPT)) temp2 += statusEffectv1(StatusEffects.MonsterVPT);
-				if (temp2 > 0) {
-					temp2 = Math.round(temp2);
-					if (this is ChiChi && (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2 || hasStatusEffect(StatusEffects.MonsterRegen))) {
-						outputText("To your surprise, Chi Chi’s wounds start closing! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
-					}
-					else {
-						outputText("Due to natural regeneration " + short + " recover");
-						if (plural) outputText("s");
-						else outputText("ed");
-						outputText(" some HP! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
-					}
-					addHP(temp2);
-				}
-			}
-			//soulforce and mana regeneration for monsters
-			if (findPerk(PerkLib.JobSoulCultivator) >= 0 && this.soulforce < maxSoulforce()) {
-				var soulforceRecovery:Number = 0;
-				var soulforceRecoveryMulti:Number = 1;
-				if (findPerk(PerkLib.JobSoulCultivator) >= 0) soulforceRecovery += 4;
-				if (findPerk(PerkLib.SoulApprentice) >= 0) soulforceRecovery += 2;
-				if (findPerk(PerkLib.SoulPersonage) >= 0) soulforceRecovery += 2;
-				if (findPerk(PerkLib.SoulWarrior) >= 0) soulforceRecovery += 2;
-				if (findPerk(PerkLib.SoulSprite) >= 0) soulforceRecovery += 3;
-				if (findPerk(PerkLib.SoulScholar) >= 0) soulforceRecovery += 3;
-				if (findPerk(PerkLib.SoulElder) >= 0) soulforceRecovery += 3;
-				if (findPerk(PerkLib.SoulExalt) >= 0) soulforceRecovery += 4;
-				if (findPerk(PerkLib.SoulOverlord) >= 0) soulforceRecovery += 4;
-				if (findPerk(PerkLib.SoulTyrant) >= 0) soulforceRecovery += 4;
-				if (findPerk(PerkLib.SoulKing) >= 0) soulforceRecovery += 5;
-				if (findPerk(PerkLib.SoulEmperor) >= 0) soulforceRecovery += 5;
-				if (findPerk(PerkLib.SoulAncestor) >= 0) soulforceRecovery += 5;
-				if (findPerk(PerkLib.DaoistCultivator) >= 0) soulforceRecoveryMulti += 0.5;
-				if (findPerk(PerkLib.DraconicHeart) >= 0) manaRecovery += 4;
-				if (findPerk(PerkLib.DraconicHeartEvolved) >= 0) manaRecovery += 4;
-				if (findPerk(PerkLib.DraconicHeartFinalForm) >= 0) manaRecovery += 4;
-				soulforceRecovery *= soulforceRecoveryMulti;
-				addSoulforce(soulforceRecovery);
-			}
-			if (findPerk(PerkLib.JobSorcerer) >= 0 && this.mana < maxMana()) {
-				var manaRecovery:Number = 0;
-				var manaRecoveryMulti:Number = 1;
-				if (findPerk(PerkLib.JobSorcerer) >= 0) manaRecovery += 10;
-				if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) manaRecovery += 5;
-				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0) manaRecovery += 10;
-				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0) manaRecovery += 15;
-				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0) manaRecovery += 20;
-				if (findPerk(PerkLib.DraconicHeart) >= 0) manaRecovery += 5;
-				if (findPerk(PerkLib.DraconicHeartEvolved) >= 0) manaRecovery += 5;
-				if (findPerk(PerkLib.DraconicHeartFinalForm) >= 0) manaRecovery += 5;
-				if (findPerk(PerkLib.GreyMage) >= 0) manaRecoveryMulti += 0.5;
-				if (findPerk(PerkLib.GreyArchmage) >= 0) manaRecoveryMulti += 1.5;
-				if (findPerk(PerkLib.ManaAffinityI) >= 0) manaRecoveryMulti += (0.2 * (1 + newGamePlusMod()));
-				manaRecovery *= manaRecoveryMulti;
-				addMana(manaRecovery);
 			}
 		}
 

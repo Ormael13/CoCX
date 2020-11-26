@@ -23,6 +23,14 @@ public class EngineCore {
         return CoC.instance.player.maxHP();
     }
 
+    public static function maxOverHP():Number {
+        return CoC.instance.player.maxOverHP();
+    }
+
+    public static function minHP():Number {
+        return CoC.instance.player.minHP();
+    }
+
     public static function maxSoulforce():Number {
         return CoC.instance.player.maxSoulforce();
     }
@@ -62,13 +70,13 @@ public class EngineCore {
 				if (CoC.instance.player.findPerk(PerkLib.Medic) >= 0) healingFromHealer += 0.2;
 				changeNum *= healingFromHealer;
 			}
-            if (CoC.instance.player.HP + int(changeNum) > maxHP()) {
-                if (CoC.instance.player.HP >= maxHP()) {
+            if (CoC.instance.player.HP + int(changeNum) > maxOverHP()) {
+                if (CoC.instance.player.HP >= maxOverHP()) {
                     if (display) HPChangeNotify(changeNum);
                     return CoC.instance.player.HP - before;
                 }
                 if (display) HPChangeNotify(changeNum);
-                CoC.instance.player.HP = maxHP();
+                CoC.instance.player.HP = maxOverHP();
             }
             else {
                 if (display) HPChangeNotify(changeNum);
@@ -79,9 +87,9 @@ public class EngineCore {
         }
         //Negative HP
         else {
-            if (CoC.instance.player.HP + changeNum <= 0) {
+            if (CoC.instance.player.HP + changeNum <= minHP()) {
                 if (display) HPChangeNotify(changeNum);
-                CoC.instance.player.HP = 0;
+                CoC.instance.player.HP = minHP();
                 CoC.instance.mainView.statsView.showStatDown('hp');
             }
             else {
@@ -97,18 +105,18 @@ public class EngineCore {
 
     public static function HPChangeNotify(changeNum:Number):void {
         if (changeNum == 0) {
-            if (CoC.instance.player.HP >= maxHP())
+            if (CoC.instance.player.HP >= maxOverHP())
                 outputText("You're as healthy as you can be.\n");
         }
         else if (changeNum > 0) {
-            if (CoC.instance.player.HP >= maxHP())
-                outputText("Your HP maxes out at " + maxHP() + ".\n");
+            if (CoC.instance.player.HP >= maxOverHP())
+                outputText("Your HP maxes out at " + maxOverHP() + ".\n");
             else
                 outputText("You gain <b><font color=\"#008000\">" + int(changeNum) + "</font></b> HP.\n");
         }
         else {
-            if (CoC.instance.player.HP <= CoC.instance.player.minHP())
-                outputText("You take <b><font color=\"#800000\">" + int(changeNum * -1) + "</font></b> damage, dropping your HP to "+CoC.instance.player.minHP()+".\n");
+            if (CoC.instance.player.HP <= minHP())
+                outputText("You take <b><font color=\"#800000\">" + int(changeNum * -1) + "</font></b> damage, dropping your HP to "+minHP()+".\n");
             else
                 outputText("You take <b><font color=\"#800000\">" + int(changeNum * -1) + "</font></b> damage.\n");
         }

@@ -780,7 +780,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const YamataCanon:StatusEffectType 			= mk("Yamata Foxfire Canon");
 		public static const ZenjiModificationsList:StatusEffectType = mk("Zenji Modifications List");
 		public static const ZenjiPreparationsList:StatusEffectType  = mk("Zenji Preparations List");
-		public static const ZenjiYList:StatusEffectType  			= mk("Zenji Y List");
 		public static const ZenjiZList:StatusEffectType  			= mk("Zenji Z List");
 
 		//Alchemical buffs
@@ -818,7 +817,9 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Blind:StatusEffectType                     = mkCombat("Blind");
 		public static const Blink:StatusEffectType                     = mkCombat("Blink");
 		public static const Blizzard:StatusEffectType                  = mkCombat("Blizzard");
+		public static const BloodCultivator:StatusEffectType           = mkCombat("Blood Cultivator");
 		public static const Bloodlust:StatusEffectType                 = mkCombat("Bloodlust");
+		public static const BloodMage:StatusEffectType            	   = mkCombat("Blood Mage");
 		public static const Bound:StatusEffectType                     = mkCombat("Bound");
 		public static const BurnDoT:StatusEffectType                   = mkCombat("Burn DoT");
 		public static const BurnDoT2:StatusEffectType                  = mkCombat("Burn DoT 2");
@@ -1089,4 +1090,3 @@ import classes.StatusEffects.VampireThirstEffect;
 		}
 	}
 }
-

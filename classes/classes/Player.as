@@ -116,7 +116,7 @@ use namespace CoC;
 		//Perks used to store 'queued' perk buys
 		public var perkPoints:Number = 0;
 		public var statPoints:Number = 0;
-		//public var superPerkPoints:Number = 0;	perk points for special perks buyable each 6 lvl's ???
+		public var superPerkPoints:Number = 0;
 		public var ascensionPerkPoints:Number = 0;
 
 		public var tempStr:Number = 0;
@@ -859,7 +859,7 @@ use namespace CoC;
 		public function haveWingsForWingSlap():Boolean
 		{
 			return wings.type == Wings.BAT_LIKE_LARGE || wings.type == Wings.FEATHERED_LARGE || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.BAT_LIKE_LARGE_2 || wings.type == Wings.DRACONIC_HUGE || wings.type == Wings.FEATHERED_PHOENIX || wings.type == Wings.FEATHERED_ALICORN || wings.type == Wings.GARGOYLE_LIKE_LARGE || wings.type == Wings.MANTICORE_LIKE_LARGE
-			 || wings.type == Wings.BAT_ARM || wings.type == Wings.VAMPIRE || wings.type == Wings.FEATHERED_AVIAN || wings.type == Wings.NIGHTMARE || wings.type == Wings.FEATHERED_SPHINX;
+			 || wings.type == Wings.BAT_ARM || wings.type == Wings.VAMPIRE || wings.type == Wings.FEATHERED_AVIAN || wings.type == Wings.NIGHTMARE || wings.type == Wings.FEATHERED_SPHINX || wings.type == Wings.DEVILFEATHER;
 		}
 		public function thirdtierWingsForWingSlap():Boolean
 		{
@@ -869,7 +869,7 @@ use namespace CoC;
 		public function haveNaturalClaws():Boolean
 		{
 			return arms.type == Arms.KITSUNE || arms.type == Arms.CAT || arms.type == Arms.DEVIL || arms.type == Arms.DISPLACER || arms.type == Arms.DRAGON || arms.type == Arms.FOX || arms.type == Arms.GARGOYLE || arms.type == Arms.LION || arms.type == Arms.WOLF || arms.type == Arms.LIZARD || arms.type == Arms.RAIJU || arms.type == Arms.RAIJU_2
-			 || arms.type == Arms.RED_PANDA || arms.type == Arms.SALAMANDER || arms.type == Arms.HYDRA || arms.type == Arms.JIANGSHI || arms.type == Arms.FROSTWYRM || arms.type == Arms.BEAR || arms.type == Arms.MANTIS || arms.type == Arms.KAMAITACHI;
+			 || arms.type == Arms.RED_PANDA || arms.type == Arms.SALAMANDER || arms.type == Arms.HYDRA || arms.type == Arms.JIANGSHI || arms.type == Arms.FROSTWYRM || arms.type == Arms.BEAR || arms.type == Arms.MANTIS || arms.type == Arms.KAMAITACHI || arms.type == Arms.SQUIRREL || arms.type == Arms.WEASEL;
 		}
 		public function haveNaturalClawsTypeWeapon():Boolean
 		{
@@ -2858,7 +2858,7 @@ use namespace CoC;
 				{name: 'wolf', score: wolfScore(), minscore: 4},
 				{name: 'werewolf', score: werewolfScore(), minscore: 12},
 				{name: 'fox', score: foxScore(), minscore: 4},
-				{name: 'fairy', score: fairyScore(), minscore: 18},
+				{name: 'fairy', score: fairyScore(), minscore: 19},
 				{name: 'ferret', score: ferretScore(), minscore: 4},
 				{name: 'cat', score: catScore(), minscore: 4},
 				{name: 'sphinx', score: sphinxScore(), minscore: 14},
@@ -2895,7 +2895,7 @@ use namespace CoC;
 				{name: 'echidna', score: echidnaScore(), minscore: 4},
 				{name: 'ushi-onna', score: ushionnaScore(), minscore: 11},
 				{name: 'satyr', score: satyrScore(), minscore: 4},
-				{name: 'manticore', score: manticoreScore(), minscore: 6},
+				{name: 'manticore', score: manticoreScore(), minscore: 7},
 				{name: 'red panda', score: redpandaScore(), minscore: 4},
 				{name: 'bear and panda', score: bearpandaScore(), minscore: 5},
 				{name: 'pig', score: pigScore(), minscore: 5},
@@ -3773,13 +3773,18 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "manticore") {
-				if (TopScore >= 6) {
+				if (TopScore >= 7) {
 					if (isTaur() && lowerBody == LowerBody.LION) {
-						if (TopScore < 12)
-							race = "half manticore-taur";
-						if (TopScore >= 12)
+						if (TopScore >= 20)
+							race = "true manticore-taur";
+						else if (TopScore >= 15)
 							race = "manticore-taur";
-					} else if (TopScore >= 12)
+						else
+							race = "half manticore-taur";
+					}
+					else if (TopScore >= 20)
+						race = "true manticore";
+					else if (TopScore >= 15)
 						race = "manticore";
 					else
 						race = "half manticore";
@@ -4371,7 +4376,7 @@ use namespace CoC;
 				chimeraCounter++;
 //			if (deerScore() >= 4)
 //				chimeraCounter++;
-			if (manticoreScore() >= 12)
+			if (manticoreScore() >= 15)
 				chimeraCounter += 2;
 			if (redpandaScore() >= 8)
 				chimeraCounter++;
@@ -8943,22 +8948,22 @@ use namespace CoC;
 				manticoreCounter++;
 			if (cocks.length > 0)
 				manticoreCounter -= 3;
-			if (findPerk(PerkLib.ManticoreMetabolism) >= 0)
+			if (hasPerk(PerkLib.CatlikeNimbleness))
 				manticoreCounter++;
-			if (findPerk(PerkLib.ManticoreMetabolismEvolved) >= 0)
+			if (hasPerk(PerkLib.CatlikeNimblenessEvolved))
 				manticoreCounter++;
-			if (findPerk(PerkLib.CatlikeNimbleness) >= 0)
+			if (hasPerk(PerkLib.CatlikeNimblenessFinalForm))
 				manticoreCounter++;
-			if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0)
+			if (hasPerk(PerkLib.ManticoreMetabolism))
 				manticoreCounter++;
-			if (findPerk(PerkLib.CatlikeNimblenessFinalForm) >= 0)
+			if (hasPerk(PerkLib.ManticoreMetabolismEvolved))
 				manticoreCounter++;
-			if (findPerk(PerkLib.ManticoreMetabolism) >= 0 && findPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
+			if ((hasPerk(PerkLib.ManticoreMetabolism) || hasPerk(PerkLib.CatlikeNimbleness)) && findPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				manticoreCounter++;
-			if (findPerk(PerkLib.ManticoreMetabolismEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0)
+			if ((hasPerk(PerkLib.ManticoreMetabolismEvolved) || hasPerk(PerkLib.CatlikeNimblenessEvolved)) && findPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				manticoreCounter++;
-			//if (findPerk(PerkLib.) >= 0 && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
-			//	manticoreCounter++;
+			if (hasPerk(PerkLib.CatlikeNimblenessFinalForm) && findPerk(PerkLib.ChimericalBodySemiEpicStage))
+				manticoreCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				manticoreCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && manticoreCounter >= 4)
@@ -9216,12 +9221,6 @@ use namespace CoC;
 				faceType == Face.DRAGON || faceType == Face.DOG || faceType == Face.FERRET || faceType == Face.ORCA || faceType == Face.LIZARD ||
 				faceType == Face.DEVIL_FANGS || faceType == Face.SQUIRREL || faceType == Face.BUNNY || faceType == Face.SMUG
 				|| faceType == Face.BUCKTEETH || faceType == Face.BUCKTOOTH);}
-		public function hasAClawAttack():Boolean { return (arms.type == Arms.GARGOYLE || arms.type == Arms.WOLF
-				|| arms.type == Arms.CAT || arms.type == Arms.FROSTWYRM || arms.type == Arms.LIZARD || arms.type == Arms.DRAGON
-				|| arms.type == Arms.KITSUNE || arms.type == Arms.FOX || arms.type == Arms.DEVIL || arms.type == Arms.DISPLACER
-				|| arms.type == Arms.BEAR || arms.type == Arms.JIANGSHI || arms.type == Arms.LION || arms.type == Arms.MANTIS
-				|| arms.type == Arms.SQUIRREL || arms.type == Arms.WEASEL || arms.type == Arms.KAMAITACHI || arms.type == Arms.RAIJU
-				|| arms.type == Arms.RAIJU_2 || arms.type == Arms.SALAMANDER || arms.type == Arms.HYDRA);}
 		public function hasAWingAttack():Boolean { return (wings.type == Wings.DRACONIC_HUGE || wings.type == Wings.NIGHTMARE
 				|| wings.type == Wings.MANTICORE_LIKE_LARGE || wings.type == Wings.GARGOYLE_LIKE_LARGE);}
 		public function hasAGoreAttack():Boolean { return (horns.type == Horns.UNICORN || horns.type == Horns.BICORN
@@ -9231,7 +9230,7 @@ use namespace CoC;
 				|| tail.type == Tail.GARGOYLE || tail.type == Tail.GARGOYLE_2 || tail.type == Tail.MANTICORE_PUSSYTAIL
 				|| tail.type == Tail.SCORPION || tail.type == Tail.BEE_ABDOMEN || lowerBody == LowerBody.FROSTWYRM
 				|| lowerBody == LowerBody.NAGA);}
-		public function hasNaturalWeapons():Boolean { return (hasABiteAttack() || hasAClawAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack()); }
+		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack()); }
 
 		//TODO: (logosK) elderSlime, succubus pussy/demonic eyes, arachne, wasp, lactabovine/slut, sleipnir, hellhound, ryu, quetzalcoatl, eredar, anihilan,
 
@@ -9315,6 +9314,8 @@ use namespace CoC;
 		}
 		public function currentHiddenJobs():Number {
 			var hiddenJobs1:Number = 0;
+			if (findPerk(PerkLib.HiddenJobBloodDemon) >= 0)
+				hiddenJobs1++;
 			return hiddenJobs1;
 		}
 		public function maxHiddenJobs():Number {
@@ -9617,6 +9618,22 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation04) >= 0)
 				thyroidglandMutations++;
 			return thyroidglandMutations;
+		}
+		public function maxParathyroidGlandMutations():Number {
+			var parathyroidglandMutations:Number = 1;
+			if (findPerk(PerkLib.HellcatParathyroidGlands) >= 0)
+				parathyroidglandMutations--;
+			if (findPerk(PerkLib.KitsuneParathyroidGlands) >= 0)
+				parathyroidglandMutations--;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
+				parathyroidglandMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
+				parathyroidglandMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
+				parathyroidglandMutations++;
+			if (findPerk(PerkLib.AscensionAdditionalOrganMutation04) >= 0)
+				parathyroidglandMutations++;
+			return parathyroidglandMutations;
 		}
 
 		public function lactationQ():Number
@@ -10660,8 +10677,6 @@ use namespace CoC;
 				}
 			}
 			if (cheshireScore() >= 11) {
-				if (findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) maxSpeCap2 += 90;
-				if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) maxSpeCap2 += 80;
 				if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 70;
 				else maxSpeCap2 += 60;
 				maxIntCap2 += 80;
@@ -10669,27 +10684,22 @@ use namespace CoC;
 			}
 			if (hellcatScore() >= 10) {
 				if (hellcatScore() >= 17) {
-					if (findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) maxSpeCap2 += 100;
-					if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) maxSpeCap2 += 90;
 					if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 80;
 					else maxSpeCap2 += 70;
 					maxIntCap2 += 135;
 					maxLibCap2 += 100;
 					minSen += 50;
-				} else {
-					if (findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) maxSpeCap2 += 70;
-					if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) maxSpeCap2 += 60;
+				}
+				else {
 					if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 50;
 					else maxSpeCap2 += 40;
-					maxIntCap2 += 70;
-					maxLibCap2 += 40;
+					maxIntCap2 += 85;
+					maxLibCap2 += 50;
 					minSen += 25;
 				}
 			}
 			if (displacerbeastScore() >= 14) {
 				maxStrCap2 += 95
-				if (findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) maxSpeCap2 += 130;
-				if (findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) maxSpeCap2 += 120;
 				if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 110;
 				else maxSpeCap2 += 100;
 				maxIntCap2 -= 25;
@@ -11033,10 +11043,10 @@ use namespace CoC;
 					maxWisCap2 += 60;
 					minSen += 30;
 				} else {
-					maxStrCap2 -= 10;
+					maxStrCap2 -= 5;
 					maxTouCap2 -= 10;
-					maxSpeCap2 += 40;
-					maxIntCap2 += 40;
+					maxSpeCap2 += 45;
+					maxIntCap2 += 45;
 					maxWisCap2 += 30;
 					minSen += 15;
 				}
@@ -11087,10 +11097,10 @@ use namespace CoC;
 			}//+10/10-20
 			if (raijuScore() >= 5) {
 				if (raijuScore() >= 14) {
-					maxSpeCap2 += 90;
+					maxSpeCap2 += 100;
 					maxIntCap2 += 50;
 					maxLibCap2 += 120;
-					minSen += 50;
+					minSen += 60;
 				}
 				else if (raijuScore() >= 10) {
 					maxSpeCap2 += 70;
@@ -11132,33 +11142,33 @@ use namespace CoC;
 			if (devilkinScore() >= 7) {
 				if (devilkinScore() >= 16 && hasPerk(PerkLib.Phylactery)) {
 					if (devilkinScore() >= 21) {
-						maxStrCap2 += 120;
-						maxSpeCap2 -= 20;
-						maxIntCap2 += 200;
-						maxLibCap2 += 115;
+						maxStrCap2 += 95;
+						maxSpeCap2 -= 30;
+						maxIntCap2 += 180;
+						maxLibCap2 += 120;
 						minSen += 50;
 					}
 					else {
-						maxStrCap2 += 95;
-						maxSpeCap2 -= 20;
-						maxIntCap2 += 115;
+						maxStrCap2 += 75;
+						maxSpeCap2 -= 25;
+						maxIntCap2 += 130;
 						maxLibCap2 += 100;
-						minSen += 50;
+						minSen += 40;
 					}
 				}
 				else if (devilkinScore() >= 11) {
-					maxStrCap2 += 70;
+					maxStrCap2 += 55;
 					maxSpeCap2 -= 20;
-					maxIntCap2 += 90;
-					maxLibCap2 += 75;
-					minSen += 50;
+					maxIntCap2 += 80;
+					maxLibCap2 += 65;
+					minSen += 15;
 				}
 				else {
 					maxStrCap2 += 35;
 					maxSpeCap2 -= 10;
-					maxIntCap2 += 55;
-					maxLibCap2 += 50;
-					minSen += 25;
+					maxIntCap2 += 50;
+					maxLibCap2 += 40;
+					minSen += 10;
 				}
 			}//+60/50-60
 			if (rhinoScore() >= 4) {
@@ -11171,24 +11181,24 @@ use namespace CoC;
 				maxStrCap2 += 5;
 				maxSpeCap2 += 5;
 			}//+10/10-20
-			if (manticoreScore() >= 6) {
+			if (manticoreScore() >= 7) {
 				if (manticoreScore() >= 20) {
-					maxSpeCap2 += 150;
+					maxSpeCap2 += 145;
 					maxIntCap2 += 90;
-					maxLibCap2 += 135;
-					minSen += 75;
+					maxLibCap2 += 125;
+					minSen += 60;
 				}
 				else if (manticoreScore() >= 15) {
 					maxSpeCap2 += 110;
-					maxIntCap2 += 75;
+					maxIntCap2 += 70;
 					maxLibCap2 += 90;
-					minSen += 50;
+					minSen += 45;
 				}
 				else {
-					maxSpeCap2 += 60;
+					maxSpeCap2 += 65;
 					maxIntCap2 += 30;
 					maxLibCap2 += 40;
-					minSen += 25;
+					minSen += 30;
 				}
 			}//+60/50-60
 			if (redpandaScore() >= 4) {
@@ -11442,12 +11452,12 @@ use namespace CoC;
 			}
 			if (melkieScore() >= 8) {
 				if (melkieScore() >= 21) {
-					maxSpeCap2 += 160;
-					maxIntCap2 += 160;
+					maxSpeCap2 += 140;
+					maxIntCap2 += 140;
 					maxLibCap2 += 100;
 					minSen += 65;
 				}
-				if (melkieScore() >= 18) {
+				else if (melkieScore() >= 18) {
 					maxSpeCap2 += 120;
 					maxIntCap2 += 120;
 					maxLibCap2 += 80;
@@ -11488,10 +11498,10 @@ use namespace CoC;
 
 			}
 			if (firesnailScore() >= 15) {
-				maxStrCap2 += 65;
-				maxTouCap2 += 140;
+				maxStrCap2 += 70;
+				maxTouCap2 += 175;
 				maxSpeCap2 -= 80;
-				maxLibCap2 += 100;
+				maxLibCap2 += 110;
 				minSen += 50;
 			}//+30/30-40
 			if (lowerBody == 51 && hydraScore() >= 14) {
@@ -12618,6 +12628,8 @@ use namespace CoC;
 			if (horseScore() >= 4) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (horseScore() >= 7) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (manticoreScore() >= 6) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (manticoreScore() >= 15) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (manticoreScore() >= 20) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (rhinoScore() >= 4) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (scyllaScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (scyllaScore() >= 7) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));

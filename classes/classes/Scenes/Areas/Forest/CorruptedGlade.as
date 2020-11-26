@@ -10,7 +10,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 		}
 		
 		public function timeChange():Boolean {
-			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 1 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) { //Extinct if you destroyed 100 Corrupted Glades.
+			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] >= 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) { //Extinct if you destroyed 100 Corrupted Glades.
 				if (flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] > 0 && rand(6) == 0) flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]++;
 				if (flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] > 0 && rand(4) == 0) flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]++;
 				if (flags[kFLAGS.ZENJI_DESTROYING_CORRUPTED_GLADES] > 0 && rand(2) == 0) flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]++;

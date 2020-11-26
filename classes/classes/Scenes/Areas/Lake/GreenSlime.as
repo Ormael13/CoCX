@@ -66,7 +66,8 @@ public class GreenSlime extends Monster
 		
 		private function lustReduction():void {
 			outputText("The creature collapses backwards as its cohesion begins to give out, and the faint outline of eyes and a mouth form on its face.  Its chest heaves as if it were gasping, and the bolt upright erection it sports visibly quivers and pulses before relaxing slightly.");
-			lust -= 13;
+			if (lust < 20) lust = 0;
+			else lust -= 20;
 			doNext(EventParser.playerMenu);
 		}
 		

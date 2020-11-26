@@ -52,8 +52,7 @@ public class ChameleonGirl extends Monster
 			else if (player.getEvasionRoll()) {
 				var damage2:Number = 1 + rand(10);
 				outputText("The chameleon girl leaps in your direction, rolls, and kicks at you.  You sidestep her flying charge and give her a push from below to ensure she lands face-first in the bog. ");
-				damage2 = SceneLib.combat.doDamage(damage2, true);
-				outputText("<b>(<font color=\"#800000\">" + damage2 + "</font>)</b>");
+				damage2 = SceneLib.combat.doDamage(damage2, true, true);
 			}
 			//Get hit
 			else {

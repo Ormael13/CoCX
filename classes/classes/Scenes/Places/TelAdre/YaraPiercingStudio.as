@@ -249,7 +249,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
                 "Furrite", curry(doConfirm, MAT_FURRITE),
                 "Crimstone", curry(doConfirm, MAT_CRIMSTONE),
                 "", null, "", null, "", null, "", null, "", null,
-                "Back", chooseMaterials);
+                "Back", piercingStudio);
         if (player.gems >= 2000) {
             addButton(4, "Icestone", curry(doConfirm, MAT_ICESTONE));
         }

@@ -207,14 +207,13 @@ public final class Mutations extends MutationsHelper {
         outputText("You take first bite of fruit that Evangeline gave you.  Surprisingly it taste delicious as nothing else you tasted before so without thinking more you ate rest of the fruit.");
         if (player.findPerk(PerkLib.EzekielBlessing) < 0) player.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
         statScreenRefresh();
-        dynStats("str", 5, "tou", 5, "spe", 5, "inte", 5, "lib", 5);
         player.statStore.addBuffObject({
-            "str": 5,
-            "tou": 5,
-            "spe": 5,
-            "int": 5,
-            "lib": 5,
-            'wis': 5
+            "str": 10,
+            "tou": 10,
+            "spe": 10,
+            "int": 10,
+            "wis": 10,
+            "lib": 10
         }, 'EzekielBlessing', {text: 'Ezekiel Blessing'});
         player.refillHunger(50);
     }
@@ -4193,7 +4192,7 @@ public final class Mutations extends MutationsHelper {
             player.antennae.type = Antennae.NONE;
         }
         //Fix Legs!
-        if (player.lowerBody != LowerBody.HUMAN) {
+        if (player.lowerBody != LowerBody.HUMAN && changes < changeLimit) {
             humanizeLowerBody();
             changes++;
         }

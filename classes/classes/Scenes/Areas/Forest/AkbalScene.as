@@ -89,27 +89,31 @@ public class AkbalScene extends BaseContent
 			}
 			else {//[Victory via Lust]
 				outputText("Akbal falls to the ground, unable to go on. Yet a growl still rumbles in his chest, and you quickly recognize the submissive gesture when he bows his head, his cat belly hugging the ground.  His body begins shifting, and soon he has a vaguely humanoid form. You assume this is the form he uses for sex, as his lust is out of control.\n\n");
-				if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0)
-				{
+				menu();
+				addButton(14, "Leave", cleanupAfterCombat);
+				if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 					outputText("You walk around Akbal's beaten and lust crazed form with a smile on your face. The demon's growl continues as he awaits your judgment.");
+					outputText("\n\nDo you rape him?");
 					var vagoo:Function =null;
 					var vagooLick:Function =null;
 					var buttFuck:Function =null;
 					var bikiniTits:Function =null;
-					if (player.hasVagina())
-					{
+					if (player.hasCock()) {
+						buttFuck = rapeAkbal;
+						addButton(0, "Butt-fuck", buttFuck);
+					}
+					if (player.hasVagina()) {
 						vagoo = girlsRapeAkbal;
 						vagooLick = rapeAkbalForcedFemaleOral;
+						addButton(1, "Take Vaginally", vagoo);
+						addButton(2, "Force Lick", vagooLick);
 					}
-					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor)
+					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) {
 						bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
-					if (player.hasCock())
-						buttFuck = rapeAkbal;
-					outputText("\n\nDo you rape him?");
-					//Rape / Don't Rape
-					menu();
+						addButton(3, "B.Titfuck", bikiniTits);
+					}
 					if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
-					addButton(14, "Leave", cleanupAfterCombat);
+					//Rape / Don't Rape
 					//EngineCore.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, );
 					return;
 				}

@@ -438,10 +438,8 @@ public class CombatUI extends BaseCombatContent {
 			} else if (monster is Lethice) {
 				var lethice:Lethice = monster as Lethice;
 				if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles)) {
-					if (player.lust < combat.magic.getWhiteMagicLustCap()
-						&& player.hasStatusEffect(StatusEffects.KnowsWhitefire)
-						&& !player.hasPerk(PerkLib.BloodMage)
-						&& player.mana >= 30) {
+					if (player.lust < combat.magic.getWhiteMagicLustCap() && player.hasStatusEffect(StatusEffects.KnowsWhitefire)
+						&& ((!player.hasPerk(PerkLib.BloodMage) && player.mana >= 30) || (player.hasStatusEffect(StatusEffects.BloodMage) && ((player.HP + 30) > (player.minHP() + 30))))) {
 						btnSpecial1.show("Dispell", lethice.dispellRapetacles);
 					}
 				}

@@ -385,10 +385,19 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				}
 				player.growTits(3, 1, false, 1);
 				scene("strings/forest-unicorn/okay-male");
-				while (player.hasCock()) {
-					player.removeCock(0, 1);
+				if (player.hasCock()) player.killCocks(1);
+				if (player.balls > 0) {
+					player.balls = 0;
+                    player.ballSize = 0;
 				}
+				if (player.butt.type < 6) player.butt.type = 6;
+				if (player.hips.type < 6) player.hips.type = 6;
+				if (player.hairLength < 10) player.hairLength += 10;
+				if (player.thickness < 70) player.thickness = 70;
+				if (player.tone > 30) player.tone = 30;
+				player.fertility += 10;
 				player.createVagina();
+                player.clitLength = .25;
 				addButton(0, "Next", celessUnicornIntro1, 3, true);
 				break;
 			case 3:

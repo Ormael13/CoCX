@@ -35,7 +35,7 @@ import classes.internals.*;
 				this.weaponVerb="punch";
 				this.armorName = "fur";
 				this.lust = 30;
-				this.lustVuln = .98;
+				this.lustVuln = .8;
 				//if (statusEffectv2(StatusEffects.SaiyanNumber1a) == 1) {
 					initStrTouSpeInte(100, 100, 100, 25);
 					initWisLibSensCor(25, 200, 100, 50);

@@ -123,8 +123,17 @@ public class Camp extends NPCAwareContent {
 	public function returnToCampUseEightHours():void {
 		returnToCamp(8);
 	} //Replacement for event number 16;
+	public function returnToCampUseTenHours():void {
+		returnToCamp(10);
+	}
 	public function returnToCampUseTwelveHours():void {
 		returnToCamp(12);
+	}
+	public function returnToCampUseFourteenHours():void {
+		returnToCamp(14);
+	}
+	public function returnToCampUseSixteenHours():void {
+		returnToCamp(16);
 	}
 
 //  SLEEP_WITH:int = 701;
@@ -4406,6 +4415,14 @@ public function wakeFromBadEnd():void {
 			outputText("Zenji going to town... HARD");
 			if (!player.hasStatusEffect(StatusEffects.ZenjiZList)) player.createStatusEffect(StatusEffects.ZenjiZList,0,0,0,0);
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) player.createStatusEffect(StatusEffects.TrainingNPCsTimersReduction, 6, 0, 0, 0);
+			player.statStore.addBuffObject({
+				"str": 5,
+				"tou": 5,
+				"spe": 5,
+				"int": 5,
+				"wis": 5,
+				"lib": 5
+			}, 'EzekielBlessing', {text: 'Ezekiel Blessing'});
 			doNext(doCamp);
 			return;
 		}

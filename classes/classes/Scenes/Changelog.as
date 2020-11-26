@@ -68,6 +68,10 @@ package classes.Scenes
 			outputText("-As some crazy dungeon delver PC's went as far as 1000th room in Ebon labyrinth there would be placed chest with EXP in each 10th room aside boos rooms till that 1000th room.\n");
 			outputText("-Buff spells been changed (again) and now would be not as OP especialy due to new stats system been implemented. Well time to get used to new way buffs works. For the balance ^^\n");
 			outputText("-Winter wolf full look easier to get without pain to get req. of specific stage of fur coverage (now just have fur and you golden ^^).\n");
+			outputText("-Kitsune racial bonuses been slight reorganized with adding 3 more higher tiers of bonuses: first for nine tails that before not have any diff in stats from other kitsunes, ninetail of balance and Inari.\n");
+			outputText("-Dragon racial bonuses was changed to be less of spreaded and more balanced. And a bit rising req. score for reaching half-dragon and dragon stages. % Bonus to max Soulforce been replaced with % bonus to max HP.\n");
+			outputText("-Added Huge-type enemy perk for monsters and most of current ones that had Gigant-type enemy perks was chanced to this new one. All monsters that are above 22 ft. talk will keep their Gigant-type enemy perk.\n");
+			outputText("-Izumi got taller to not be tiny Oni anymore... and well her hourglass figure followed her increase in height ;)\n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			outputText("-Increased max lvl camp npc's can attain after reaching end of training: Ceani (lvl 98), Etna (lvl 96), Electra (lvl 96), Ember (lvl 98), Isabella (lvl 98), Kiha (lvl 99), Kindra (lvl 99), Luna (lvl 99)\n");
 			outputText("-Increased max lvl npc's outside camp can attain: Akbal (lvl 98), Izumi (lvl 96), Minerva (lvl 95), Priscilla (lvl 98)\n");
@@ -75,20 +79,16 @@ package classes.Scenes
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
-			outputText("-Kitsune racial bonuses been slight reorganized with adding 3 more higher tiers of bonuses: first for nine tails that before not have any diff in stats from other kitsunes, ninetail of balance and Inari.\n");
-			outputText("-Dragon racial bonuses was changed to be less of spreaded and more balanced. And a bit rising req. score for reaching half-dragon and dragon stages. % Bonus to max Soulforce been replaced with % bonus to max HP.\n");
 			outputText("-Raging Inferno, x, x, x perks effects was changed to boost respective elemental damage by 20% and each turn without casted the same element spell/special lowering damage bonus by 20% instead of reseting it fully.\n");
 			outputText("-Lover Zenji get new options: Sleep With (variants for having or not cabin), Nightwatch, Assist me (allowing to take him as henchman)\n");
-			outputText("-Added Huge-type enemy perk for monsters and most of current ones that had Gigant-type enemy perks was chanced to this new one. All monsters that are above 22 ft. talk will keep their Gigant-type enemy perk.\n");
-			outputText("-Izumi got taller to not be tiny Oni anymore... and well her hourglass figure followed her increase in height ;)\n");
 			outputText("-New enemies possible to encounter during Bog exploration: Corrupted Troll (Male or Female) - lvl 38\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Few more options in soulforce menu for managing hunger, lust reduction and sf <-> mana conversions.\n");
+			outputText("-Wearing training soul ring in 2nd to 4th ring slot would allow to have them affect recovery of sf or amount of increased bonus sf.\n");
+			outputText("-Change to bonus of recovered sf during cultivatin to only been boosted by races that have bonus to max soulforce as part of racial bonuses (so now only nekomata and kitsune applies).\n");
+			outputText("-Added more cultivate options: 10, 12, 14 and 16 hours long ones.\n");
+			outputText("-Jobs: Enchanter, Eromancer, Healer get a small bonus to mana regenerations (the same like Job: Elemental Conjuer have (+5)). Also amount of mana regen gained by possesing Star Sphere was decreased by 1/3.\n");
+			outputText("-New submenu in Perks page that allow to convert perk points into super perk points or to buy perks for those super perk points.\n");
+			outputText("-New event perk: Hidden Job: Blood Demon. Gained by spending 1 super perk point. Effects: Allow to reach OverMax HP equal to 5x current Tou score, enable toggle to switch between using or not blood instead of mana to power spells (excluding healing type spells).\n");//, allowing to learn Blood magic spells from Red Manuscript
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -108,7 +108,8 @@ package classes.Scenes
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-Fixed bugs: Bugfixes / Typo fixing by Pyromania & Liadri, Luna event not happening in forest after PC fire her at first Full Moon event conclusion, some minor errors in calculation and display bonuses for kitsunes, some of Slave Excellia scenes sending back to Fixed Excellia, game ocassionaly incorrectly desc monsters in combat due to forced PC gender setting, returning from any type of minion setting ");
-			outputText("in middle of combat been treated as new turn, Zenji Food option not always resetting\n\n");/*ostatni punkt changelogu
+			outputText("in middle of combat been treated as new turn, Zenji Food option not always resetting, soultraining ring not been accounted for when cultivating, Akbal lust victory not showing any post combat options sometimes, some of enemies like hellhoud been seen as valid target for tailpeg unique sex scene, Yara's Piercing Studio Rare menu Back button not sending back even to main menu, green slime able to lower it ");
+			outputText("lust below 0, Drider Incubus Anal sex giving PC imps pregnancy, bunny herm scenes on plains still TF-ing PC despite been undead/gargoyle, goblin ale huminizing effect not taking into account PC resistance to been TF'd\n\n");/*ostatni punkt changelogu
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");

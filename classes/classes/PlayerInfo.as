@@ -158,7 +158,7 @@ public class PlayerInfo extends BaseContent {
 
 		miscStats += "<b>Basic Jobs:</b> " + player.currentBasicJobs() + " / 9\n";
 		miscStats += "<b>Advanced Jobs:</b> " + player.currentAdvancedJobs() + " / " + player.maxAdvancedJobs() + "\n";
-		//miscStats += "<b>Hidden Jobs:</b> " + player.currentHiddenJobs() + " / " + player.maxHiddenJobs() + "\n";
+		miscStats += "<b>Hidden Jobs:</b> " + player.currentHiddenJobs() + " / " + player.maxHiddenJobs() + "\n";
 		miscStats += "<b>Prestige Jobs:</b> " + player.currentPrestigeJobs() + " / " + player.maxPrestigeJobs() + "\n";
 		
 		if (player.hasStatusEffect(StatusEffects.AdventureGuildQuestsCounter1)) {
@@ -421,18 +421,18 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Throw Cost (Fatigue): </b> " + combat.oneThrowTotalCost() + "\n";
 		combatStats += "<b>One Bullet Reload Cost (Fatigue): </b> " + combat.oneBulletReloadCost() + "\n";
 		combatStats += "<b>Bow/Crossbow Accuracy (1st range attack):</b> " + (combat.arrowsAccuracy() / 2) + "%\n";
-		if (player.findPerk(PerkLib.DoubleStrike) >= 0) combatStats += "<b>Bow/Crossbow Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - combat.arrowsAccuracyPenalty()) + "%\n";
-		if (player.findPerk(PerkLib.TripleStrike) >= 0) combatStats += "<b>Bow/Crossbow Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 2)) + "%\n";
-		if (player.findPerk(PerkLib.Manyshot) >= 0) combatStats += "<b>Bow/Crossbow Accuracy (4th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 3)) + "%\n";
-		if (player.findPerk(PerkLib.WildQuiver) >= 0) combatStats += "<b>Bow/Crossbow Accuracy (5th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 4)) + "%\n";
-		if (player.findPerk(PerkLib.Multishot) >= 0) combatStats += "<b>Bow/Crossbow Accuracy (6th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 5)) + "%\n";
+		if (player.hasPerk(PerkLib.DoubleStrike)) combatStats += "<b>Bow/Crossbow Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - combat.arrowsAccuracyPenalty()) + "%\n";
+		if (player.hasPerk(PerkLib.TripleStrike)) combatStats += "<b>Bow/Crossbow Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 2)) + "%\n";
+		if (player.hasPerk(PerkLib.Manyshot)) combatStats += "<b>Bow/Crossbow Accuracy (4th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 3)) + "%\n";
+		if (player.hasPerk(PerkLib.WildQuiver)) combatStats += "<b>Bow/Crossbow Accuracy (5th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 4)) + "%\n";
+		if (player.hasPerk(PerkLib.Multishot)) combatStats += "<b>Bow/Crossbow Accuracy (6th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 5)) + "%\n";
 		combatStats += "<b>Throwed Weapon Accuracy (1st range attack):</b> " + (combat.arrowsAccuracy() / 2) + "%\n";
-		if (player.findPerk(PerkLib.DoubleStrike) >= 0) combatStats += "<b>Throwed Weapon Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 15) + "%\n";
-		if (player.findPerk(PerkLib.TripleStrike) >= 0) combatStats += "<b>Throwed Weapon Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 30) + "%\n";
+		if (player.hasPerk(PerkLib.DoubleStrike)) combatStats += "<b>Throwed Weapon Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 15) + "%\n";
+		if (player.hasPerk(PerkLib.TripleStrike)) combatStats += "<b>Throwed Weapon Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 30) + "%\n";
 		combatStats += "<b>Firearms Accuracy (1st range attack):</b> " + (combat.firearmsAccuracy() / 2) + "%\n";
-		if (player.findPerk(PerkLib.AmateurGunslinger) >= 0) combatStats += "<b>Firearms Accuracy (2nd range attack):</b> " + ((combat.firearmsAccuracy() / 2) - 10) + "%\n";
-		if (player.findPerk(PerkLib.ExpertGunslinger) >= 0) combatStats += "<b>Firearms Accuracy (3rd range attack):</b> " + ((combat.firearmsAccuracy() / 2) - 20) + "%\n";
-		if (player.findPerk(PerkLib.MasterGunslinger) >= 0) combatStats += "<b>Firearms Accuracy (4th range attack):</b> " + ((combat.firearmsAccuracy() / 2) - 30) + "%\n";
+		if (player.hasPerk(PerkLib.AmateurGunslinger)) combatStats += "<b>Firearms Accuracy (2nd range attack):</b> " + ((combat.firearmsAccuracy() / 2) - 10) + "%\n";
+		if (player.hasPerk(PerkLib.ExpertGunslinger)) combatStats += "<b>Firearms Accuracy (3rd range attack):</b> " + ((combat.firearmsAccuracy() / 2) - 20) + "%\n";
+		if (player.hasPerk(PerkLib.MasterGunslinger)) combatStats += "<b>Firearms Accuracy (4th range attack):</b> " + ((combat.firearmsAccuracy() / 2) - 30) + "%\n";
 		combatStats += "\n";
 		combatStats += "<b>Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMod()) + "%\n";
 		combatStats += "<b>Physical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillPhysicalMod()) + "%\n";
@@ -440,8 +440,7 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Soulskill Cost:</b> " + Math.round(100 * combat.soulskillCost()) + "%\n";
 		combatStats += "\n";
 		combatStats += "<b>Unarmed:</b> +" + combat.unarmedAttack() + "\n";
-		if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0)
-			combatStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + " / 4\n";
+		if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0) combatStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + " / 4\n";
 
 		if (player.teaseLevel < combat.maxTeaseLevel())
 			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: " + player.teaseXP + " / " + combat.teaseExpToLevelUp() + ")\n";
@@ -472,6 +471,7 @@ public class PlayerInfo extends BaseContent {
 			combatStats += "\n\n";
 		}
 		combatStats += "<b>Minimum HP (reaching it mean HP based defeat):</b> " + player.minHP() + "\n";
+		combatStats += "<b>Over HP (HP amount that can be reached beyond default 100% of Health bar):</b> " + (player.maxOverHP() - player.maxHP()) + "\n";
 		combatStats += "<b>HP Regeneration (%):</b> ~ " + combat.PercentBasedRegeneration() + " % / " + combat.maximumRegeneration() + " % (turn), ~ " + combat.PercentBasedRegeneration() * 2 + " % / " + combat.maximumRegeneration() * 2 + " % (hour)\n";
 		combatStats += "<b>HP Regeneration (Total):</b> ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) + " HP /  turn, ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) * 2 + " HP /  hour\n";
 		combatStats += "<b>Fatigue Recovery:</b> " + combat.fatigueRecovery2() + " / turn\n";
@@ -1457,7 +1457,7 @@ public class PlayerInfo extends BaseContent {
 			outputText("</ul>");
 		}
 		outputText("If you would like to select this perk, click <b>Okay</b>.  Otherwise, select a new perk, or press <b>Skip</b> to make a decision later.\n");
-		if (player.perkPoints>1) outputText("\n\nYou have "+numberOfThings(player.perkPoints,"perk point","perk points")+".\n\n");
+		if (player.perkPoints > 1) outputText("\n\nYou have "+numberOfThings(player.perkPoints,"perk point","perk points")+".\n\n");
 		for each(var p:* in perkList){
 			outputText("<u><a href=\"event:"+perkList.indexOf(p)+"\">"+p.perk.perkName+"</a></u>\n");
 		}
@@ -1492,6 +1492,54 @@ public class PlayerInfo extends BaseContent {
 		} else {
 			doNext(playerMenu);
 		}
+	}
+	
+	public function superPerkBuyMenu(page:int = 1):void {
+		clearOutput();
+		outputText("Placeholder\n");
+		if (player.superPerkPoints > 0) outputText("You have "+numberOfThings(player.superPerkPoints,"super perk point","super perk points")+".\n\n");
+		hideMenus();
+		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
+		menu();
+		if (page == 1) {
+			if (player.superPerkPoints > 0) {
+				if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButtonDisabled(0, "HJ:BD", "You already have this super perk.");
+				else {
+					if (player.freeHiddenJobsSlots() > 0) addButton(0, "HJ:BD", perkHiddenJobBloodDemon).hint("Choose the 'Hidden Job: Blood Demon' super perk. You've trained in arts of blood demons. Beings that reached mastery of using their own or others blood to great effect. (+5x Tou of OverMax HP)");
+					else addButtonDisabled(0, "HJ:BD", "You not have free slot for hidden jobs that allows you to pick this one hidden job.");
+				}
+				//addButton(1, "YPMP", ).hint("Choose the 'Your Pain My Power' super perk. ");
+				addButtonDisabled(1, "YPMP", "Soon.");
+			}
+			else {
+				if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButtonDisabled(0, "HJ:BD", "You already have this perk.");
+				else addButtonDisabled(0, "HJ:BD", "You not have free super perk point to pick this super perk.");
+				addButtonDisabled(1, "YPMP", "You not have free super perk point to pick this super perk.");
+			}
+			if (player.perkPoints > 2) addButton(13, "Convert", superPerkConvertMenu);
+			else addButtonDisabled(13, "Convert", "You need at least 3 perk points to convert them.");
+			addButton(14, "Back", playerMenu);
+		}
+		if (page == 2) {
+			if (player.superPerkPoints > 0) {
+				
+			}
+			addButton(14, "Back", playerMenu);
+		}
+	}
+	private function superPerkConvertMenu():void {
+		clearOutput();
+		outputText("Placeholder");
+		player.perkPoints -= 3;
+		player.superPerkPoints++;
+		doNext(superPerkBuyMenu);
+	}
+	private function perkHiddenJobBloodDemon():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.HiddenJobBloodDemon,0,0,0,0);
+		clearOutput();
+		outputText("Your gained Hidden Job: Blood Demon perk.");
+		doNext(curry(superPerkBuyMenu, 1));
 	}
 
 }

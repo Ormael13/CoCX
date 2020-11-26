@@ -415,6 +415,16 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
+		public function requireParathyroidGlandMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxParathyroidGlandMutations() > 0;
+				},
+				text: "Free Parathyroid Gland Mutation Slot",
+				type: "parathyroidglandmutation"
+			});
+			return this;
+		}
 		public function requireHungerEnabled():PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {

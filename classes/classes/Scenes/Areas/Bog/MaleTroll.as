@@ -18,10 +18,6 @@ import classes.internals.*;
 			else {
 				outputText("You can’t dodge quickly enough as he hoists you above the ground, you are trapped within his clutches.");
 				player.createStatusEffect(StatusEffects.TrollHold,0,0,0,0);
-				outputText("\n\nHe leans in close to you, sniffing you intently as he gives you a long lick across your cheek.");
-				var licklust:Number = (inte / 5) + rand(10);
-				licklust = Math.round(licklust);
-				player.dynStats("lus", licklust, "scale", false);
 			}
 			statScreenRefresh();
 		}

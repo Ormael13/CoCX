@@ -840,6 +840,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function buildWhiteMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		var badLustForWhite:Boolean = player.lust >= getWhiteMagicLustCap();
+		var bloodForBloodGod:Number = (player.HP - player.minHP());
 
 		//WHITE SHITZ
 		if (player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
@@ -850,9 +851,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You are far too aroused to focus on white magic.");
 			} else if (player.hasPerk(PerkLib.HexKnowledge)) {
 				bd.disable("Your chosen path of magic locked out this spell.");
-			} else if(!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(40)) {
 				bd.disable("Your mana is too low to cast this spell.");
-			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40) && player.HP < spellCostWhite(40)) {
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40) && player.HP < spellCostWhite(40)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(40)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier1)) {
 				bd.disable("You need more time before you can cast a first tier white magic spell again.");
@@ -870,9 +873,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You are far too aroused to focus on white magic.");
 			} else if (player.hasPerk(PerkLib.HexKnowledge)) {
 				bd.disable("Your chosen path of magic locked out this spell.");
-			} else if(!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(200)) {
 				bd.disable("Your mana is too low to cast this spell.");
-			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40) && player.HP < spellCostWhite(200)) {
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200) && player.HP < spellCostWhite(200)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(200)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier2)) {
 				bd.disable("You need more time before you can cast a second tier white magic spell again.");
@@ -892,9 +897,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can't use this spell inside small spaces. Unless you want get killed along with your enemies.");
 			} else if (player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
 				bd.disable("You can't use this spell underwater.");
-			} else if(!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(250)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCost(250)) {
 				bd.disable("Your mana is too low to cast this spell.");
-			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(250) && player.HP < spellCost(250)) {
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(250) && player.HP < spellCost(250)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCost(250)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier3)) {
 				bd.disable("You need more time before you can cast Meteor Shower again.");
@@ -912,9 +919,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You are far too aroused to focus on white magic.");
 			} else if (player.hasPerk(PerkLib.HexKnowledge)) {
 				bd.disable("Your chosen path of magic locked out this spell.");
-			} else if(!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(40)) {
 				bd.disable("Your mana is too low to cast this spell.");
-			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40) && player.HP < spellCostWhite(40)) {
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40) && player.HP < spellCostWhite(40)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(40)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier1)) {
 				bd.disable("You need more time before you can cast a first tier white magic spell again.");
@@ -932,9 +941,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You are far too aroused to focus on white magic.");
 			} else if (player.hasPerk(PerkLib.HexKnowledge)) {
 				bd.disable("Your chosen path of magic locked out this spell.");
-			} else if(!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(200)) {
 				bd.disable("Your mana is too low to cast this spell.");
-			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40) && player.HP < spellCostWhite(200)) {
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200) && player.HP < spellCostWhite(200)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(200)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier2)) {
 				bd.disable("You need more time before you can cast a second tier white magic spell again.");
@@ -954,9 +965,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your chosen path of magic locked out this spell.");
 			} else if (monster.hasStatusEffect(StatusEffects.Blind)) {
 				bd.disable(monster.capitalA + monster.short + " is already affected by blind.");
-			} else if(!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(30)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(30)) {
 				bd.disable("Your mana is too low to cast this spell.");
-			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(30) && player.HP < spellCostWhite(30)) {
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(30) && player.HP < spellCostWhite(30)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(30)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
@@ -976,9 +989,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your chosen path of magic locked out this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.ChargeWeapon)){
 				bd.disable("Charge weapon is already active and cannot be cast again.");
-			} else if(!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < (spellCostWhite(30) * spellChargeWeaponCostMultiplier())) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < (spellCostWhite(30) * spellChargeWeaponCostMultiplier())) {
 				bd.disable("Your mana is too low to cast this spell.");
-			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < (spellCostWhite(30) * spellChargeWeaponCostMultiplier()) && player.HP < (spellCostWhite(30) * spellChargeWeaponCostMultiplier())) {
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < (spellCostWhite(30) * spellChargeWeaponCostMultiplier()) && player.HP < (spellCostWhite(30) * spellChargeWeaponCostMultiplier())) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < (spellCostWhite(30) * spellChargeWeaponCostMultiplier())) {
 				bd.disable("Your hp is too low to cast this spell.");
 			}
 		}
@@ -994,9 +1009,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your chosen path of magic locked out this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.ChargeArmor)) {
 				bd.disable("Charge armor is already active and cannot be cast again.");
-			} else if(!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < (spellCostWhite(40) * spellChargeArmorCostMultiplier())) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < (spellCostWhite(40) * spellChargeArmorCostMultiplier())) {
 				bd.disable("Your mana is too low to cast this spell.");
-			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < (spellCostWhite(40) * spellChargeArmorCostMultiplier()) && player.HP < (spellCostWhite(40) * spellChargeArmorCostMultiplier())) {
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < (spellCostWhite(40) * spellChargeArmorCostMultiplier()) && player.HP < (spellCostWhite(40) * spellChargeArmorCostMultiplier())) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < (spellCostWhite(40) * spellChargeArmorCostMultiplier())) {
 				bd.disable("Your hp is too low to cast this spell.");
 			}
 		}
@@ -1022,9 +1039,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your chosen path of magic locked out this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 				bd.disable("Blizzard is already active and cannot be cast again.");
-			} else if(!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(50)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(50)) {
 				bd.disable("Your mana is too low to cast this spell.");
-			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(50) && player.HP < spellCostWhite(50)) {
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(50) && player.HP < spellCostWhite(50)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(50)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
@@ -1037,6 +1056,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function buildBlackMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		var badLustForBlack:Boolean = player.lust < getBlackMagicMinLust();
+		var bloodForBloodGod:Number = (player.HP - player.minHP());
 
 		//BLACK MAGICSKS
 		if (player.hasStatusEffect(StatusEffects.KnowsIceSpike)) {
@@ -1045,9 +1065,11 @@ public class CombatMagic extends BaseCombatContent {
 							"\n\nMana Cost: " + spellCostBlack(40) + "");
 			if (badLustForBlack) {
 				bd.disable("You aren't turned on enough to use any black magics.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(40)) {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40) && player.HP < spellCostBlack(40)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(40)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier1)) {
 				bd.disable("You need more time before you can cast a first tier black magic spell again.");
@@ -1063,9 +1085,11 @@ public class CombatMagic extends BaseCombatContent {
 							"\n\nMana Cost: " + spellCostBlack(200) + "");
 			if (badLustForBlack) {
 				bd.disable("You aren't turned on enough to use any black magics.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(200)) {
 				bd.disable("Your mana is too low to cast this spell.");
-			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40) && player.HP < spellCostBlack(200)) {
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200) && player.HP < spellCostBlack(200)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(200)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier2)) {
 				bd.disable("You need more time before you can cast a second tier black magic spell again.");
@@ -1081,9 +1105,11 @@ public class CombatMagic extends BaseCombatContent {
 							"\n\n<b>AoE Spell and req. 1 turn channeling. Cooldown: 12 turns</b>  \n\nMana Cost: " + spellCost(250) + "");
 			if (badLustForBlack) {
 				bd.disable("You aren't turned on enough to use any black magics.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(250)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCost(250)) {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(250) && player.HP < spellCost(250)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCost(250)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier3)) {
 				bd.disable("You need more time before you can cast Polar Midnight again.");
@@ -1099,9 +1125,11 @@ public class CombatMagic extends BaseCombatContent {
 							"\n\nMana Cost: " + spellCostBlack(40) + "");
 			if (badLustForBlack) {
 				bd.disable("You aren't turned on enough to use any black magics.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(40)) {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40) && player.HP < spellCostBlack(40)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(40)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier1)) {
 				bd.disable("You need more time before you can cast a first tier black magic spell again.");
@@ -1117,9 +1145,11 @@ public class CombatMagic extends BaseCombatContent {
 							"\n\nMana Cost: " + spellCostBlack(200) + "");
 			if (badLustForBlack) {
 				bd.disable("You aren't turned on enough to use any black magics.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(200)) {
 				bd.disable("Your mana is too low to cast this spell.");
-			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40) && player.HP < spellCostBlack(200)) {
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200) && player.HP < spellCostBlack(200)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(200)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier2)) {
 				bd.disable("You need more time before you can cast a second tier black magic spell again.");
@@ -1135,9 +1165,11 @@ public class CombatMagic extends BaseCombatContent {
 							"\n\nMana Cost: " + spellCostBlack(20) + "");
 			if (badLustForBlack) {
 				bd.disable("You aren't turned on enough to use any black magics.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(20)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(20)) {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(20) && player.HP < spellCostBlack(20)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(20)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
@@ -1151,9 +1183,11 @@ public class CombatMagic extends BaseCombatContent {
 							"\n\nMana Cost: " + spellCostBlack(100) + "");
 			if (badLustForBlack) {
 				bd.disable("You aren't turned on enough to use any black magics.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(100)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(100)) {
 				bd.disable("Your mana is too low to cast this spell.");
-			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(20) && player.HP < spellCostBlack(100)) {
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(100) && player.HP < spellCostBlack(100)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(100)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWaveOfEcstasy)) {
 				bd.disable("You need more time before you can cast Wave of Ecstasy again.");
@@ -1171,9 +1205,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You aren't turned on enough to use any black magics.");
 			} else if (player.statStore.hasBuff("Might")) {
 				bd.disable("You are already under the effects of Might and cannot cast it again.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < (spellCostBlack(50) * spellMightCostMultiplier())) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < (spellCostBlack(50) * spellMightCostMultiplier())) {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < (spellCostBlack(50) * spellMightCostMultiplier()) && player.HP < (spellCostBlack(50) * spellMightCostMultiplier())) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < (spellCostBlack(50) * spellMightCostMultiplier())) {
 				bd.disable("Your hp is too low to cast this spell.");
 			}
 		}
@@ -1185,9 +1221,11 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You aren't turned on enough to use any black magics.");
 			} else if (player.statStore.hasBuff("Blink")) {
 				bd.disable("You are already under the effects of Blink and cannot cast it again.");
-			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < (spellCostBlack(40) * spellBlinkCostMultiplier())) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < (spellCostBlack(40) * spellBlinkCostMultiplier())) {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < (spellCostBlack(40) * spellBlinkCostMultiplier()) && player.HP < (spellCostBlack(40) * spellBlinkCostMultiplier())) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < (spellCostBlack(40) * spellBlinkCostMultiplier())) {
 				bd.disable("Your hp is too low to cast this spell.");
 			}
 		}
@@ -1303,6 +1341,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function buildGreyMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		var badLustForGrey:Boolean = player.lust < 50 || player.lust > (player.maxLust() - 50);
+		var bloodForBloodGod:Number = (player.HP - player.minHP());
 
 		// GRAY MAGIC
 		if (player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
@@ -1322,7 +1361,7 @@ public class CombatMagic extends BaseCombatContent {
 							"\n\nMana Cost: " + healCost(50) + "");
 			if (badLustForGrey) {
 				bd.disable("You can't use any grey magics.");
-			} else if(player.mana < healCost(50)) {
+			} else if (player.mana < healCost(50)) {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
@@ -1336,9 +1375,11 @@ public class CombatMagic extends BaseCombatContent {
 			bd = buttons.add("Fire Storm", spellFireStorm).hint("Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Fire Storm that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCost(200) + "");
 			if (badLustForGrey) {
 				bd.disable("You can't use any grey magics.");
-			} else if(!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(200)) {
+			} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCost(200)) {
 				bd.disable("Your mana is too low to cast this spell.");
-			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(200) && player.HP < spellCost(200)) {
+			} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(200) && player.HP < spellCost(200)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCost(200)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
@@ -1351,9 +1392,11 @@ public class CombatMagic extends BaseCombatContent {
 			bd = buttons.add("Ice Rain", spellIceRain).hint("Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Ice Rain that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nMana Cost: " + spellCost(200) + "");
 			if (badLustForGrey) {
 				bd.disable("You can't use any grey magics.");
-			} else if(!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(200)) {
+			} else if(!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCost(200)) {
 				bd.disable("Your mana is too low to cast this spell.");
 			} else if(player.hasPerk(PerkLib.LastResort) && player.mana < spellCost(200) && player.HP < spellCost(200)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCost(200)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
@@ -2219,15 +2262,12 @@ public class CombatMagic extends BaseCombatContent {
 			dynStats("lib", .25, "lus", 15);
 		}
 		else {
-			var consumingdarkness:Number = scalingBonusIntelligence() * spellModBlack();
+			var consumingdarkness:Number = scalingBonusIntelligence() * spellModBlack();// * 0.5
 			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) consumingdarkness = Math.round(consumingdarkness * 1.2);
 			if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) consumingdarkness *= 4;
 			outputText("You call on the power of primordial darkness, which is all too happy to oblige your request of ripping your foe to shreds. The shadows all around you sprouting countless mouths and claws to do just that. " + monster.capitalA + monster.short + " can only scream in surprise, then in pain, at the sudden assault. ");
-			player.createStatusEffect(StatusEffects.ConsumingDarkness, 7, Math.round(consumingdarkness*0.5), 0, 0);
-			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) {
-				consumingdarkness = Math.round(consumingdarkness * 1.2);
-				player.addStatusValue(StatusEffects.ConsumingDarkness, 2, 0.01);
-			}
+			consumingdarkness = Math.round(consumingdarkness);
+			monster.createStatusEffect(StatusEffects.ConsumingDarkness, 7, consumingdarkness, 0, 0);
 			doDarknessDamage(consumingdarkness, true, true);
 		}
 		outputText("\n\n");
@@ -2271,15 +2311,19 @@ public class CombatMagic extends BaseCombatContent {
 			dynStats("lib", .25, "lus", 15);
 		}
 		else {
-			var lustDmg:Number = monster.lustVuln * 0.5 * (player.inte / 5 * spellModBlack() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
-			outputText("You moan in pleasure as you curse your target with lewd thoughts. " + monster.capitalA + monster.short + " pants in arousal, unable to stop the encroaching fantasies you forced on her/him/it/them from having their desired effect. ");
-			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) {
-				lustDmg = Math.round(lustDmg * 1.2);
-				player.addStatusValue(StatusEffects.CurseOfDesire, 2, 0.01);
+			var llr:Number = 0;
+			if (monster.lustVuln != 0) {
+				if (monster.lustVuln < 0.1) llr = monster.lustVuln;
+				else llr = 0.1;
+				monster.lustVuln -= llr;
 			}
+			var lustDmg:Number = monster.lustVuln * (player.inte / 5 * spellModBlack() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+			outputText("You moan in pleasure as you curse your target with lewd thoughts. " + monster.capitalA + monster.short + " pants in arousal, unable to stop the encroaching fantasies you forced on " + monster.pronoun2 + " from having their desired effect. ");
+			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) lustDmg = Math.round(lustDmg * 1.2);
 			lustDmg = Math.round(lustDmg);
-			player.createStatusEffect(StatusEffects.CurseOfDesire, 8, lustDmg*0.05, 0, 0);
-			monster.teased(lustDmg);
+			monster.createStatusEffect(StatusEffects.CurseOfDesire, 8, lustDmg, llr, 0);
+			if (lustDmg < 1) lustDmg = 1;
+			monster.teased(lustDmg, false);
 			dynStats("lus", 10);
 		}
 		outputText("\n\n");
@@ -2324,12 +2368,13 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		else {
 			outputText("You cut deep into your arm, drawing plenty of your blood and letting it flow in a large pattern on the ground as you hex your target with a powerful malediction, causing it to bleed from every orifice. " + monster.capitalA + monster.short + " screams in pain, unable to stop the blood flow. ");
-			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) player.addStatusValue(StatusEffects.CurseOfWeeping, 2, 0.025);
 			HPChange(-(Math.round(player.maxHP() * .5)), false);
 		}
-		var CurseOfWeepingMod:Number = scalingBonusIntelligence() * spellModBlack();
+		var CurseOfWeepingMod:Number = scalingBonusIntelligence() * spellModBlack();// * 0.5
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) CurseOfWeepingMod *= 4;
-		player.createStatusEffect(StatusEffects.CurseOfWeeping, 6, CurseOfWeepingMod, 0, 0);
+		if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) CurseOfWeepingMod = Math.round(CurseOfWeepingMod * 1.2);
+		monster.createStatusEffect(StatusEffects.CurseOfWeeping, 6, CurseOfWeepingMod, 0, 0);
+		doDamage(CurseOfWeepingMod, true, true);
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		statScreenRefresh();
@@ -3393,4 +3438,4 @@ public class CombatMagic extends BaseCombatContent {
 		return false;
 	}
 }
-}
+}

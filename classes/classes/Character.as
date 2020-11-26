@@ -1174,7 +1174,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += 30;
 			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) max += 40;
 			if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) max += 50;
-			if (max > 1759) max = 1759;//obecnie max to 1750
+			if (max > 1850) max = 1850;//obecnie max to 1850
 			return max;
 		}
 

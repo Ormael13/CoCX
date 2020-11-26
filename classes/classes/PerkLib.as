@@ -349,6 +349,15 @@ public class PerkLib
 		public static const CaveWyrmLungsFinalForm:PerkType = mk("Cave Wyrm Lungs (Final Form)", "Cave Wyrm Lungs (Final Form)",
 				".",
 				"You choose the 'Cave Wyrm Lungs (Final Form)' perk, .");
+		public static const KitsuneParathyroidGlands:PerkType = mk("Kitsune Parathyroid Glands", "Kitsune Parathyroid Glands",
+				".",
+				"You choose the 'Kitsune Parathyroid Glands' perk, .");
+		public static const KitsuneParathyroidGlandsEvolved:PerkType = mk("Kitsune Parathyroid Glands (Evolved)", "Kitsune Parathyroid Glands (Evolved)",
+				".",
+				"You choose the 'Kitsune Parathyroid Glands (EvFolved)' perk, .");
+		public static const KitsuneParathyroidGlandsFinalForm:PerkType = mk("Kitsune Parathyroid Glands (Final Form)", "Kitsune Parathyroid Glands (Final Form)",
+				".",
+				"You choose the 'Kitsune Parathyroid Glands (Final Form)' perk, .");
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You choose the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
@@ -657,13 +666,13 @@ public class PerkLib
 				"You choose the 'Catch the blade' perk, giving you a chance to deflect blow with your fists. (Speed-based).");
 		public static const CatlikeNimbleness:PerkType = mk("Cat-like Nimbleness", "Cat-like Nimbleness",
 				"Your transformed joins allows you to move with greater nimbleness, increasing evasion.",
-				"You choose the 'Cat-like Nimbleness' perk. Your transformed joins allows you to move more with greater nimbleness, increasing evasion.").withBuffs({'spe.mult':0.05});
+				"You choose the 'Cat-like Nimbleness' perk. Your transformed joins allows you to move more with greater nimbleness, increasing evasion.");
 		public static const CatlikeNimblenessEvolved:PerkType = mk("Cat-like Nimbleness (Evolved)", "Cat-like Nimbleness (Evolved)",
 				"Your nimble body allows you to move with even better nimbleness than before, further increasing evasion.",
 				"You choose the 'Cat-like Nimbleness (Evolved)' perk. Your nimble body allows you to move with even better nimbleness than before, further increasing evasion.").withBuffs({'spe.mult':0.10});
 		public static const CatlikeNimblenessFinalForm:PerkType = mk("Cat-like Nimbleness (Final Form)", "Cat-like Nimbleness (Final Form)",
 				"Your nimble body allows you to move with even greater nimbleness than before, further increasing evasion.",
-				"You choose the 'Cat-like Nimbleness (Final Form)' perk. Your nimble body allows you to move with even greater nimbleness than before, further increasing evasion.").withBuffs({'spe.mult':0.15});
+				"You choose the 'Cat-like Nimbleness (Final Form)' perk. Your nimble body allows you to move with even greater nimbleness than before, further increasing evasion.").withBuffs({'spe.mult':0.20});
 		public static const Channeling:PerkType = mk("Channeling", "Channeling",
 				"[if (player.inte>=60)" +
 						"Increases base spell strength by 20% and base mana pool by 30." +
@@ -949,13 +958,13 @@ public class PerkLib
 				"Your balls constantly grows until emptied through your cock, producing eggs.");
 		public static const EasterBunnyEggBag:PerkType = mk("Easter Bunny egg bag", "Easter Bunny egg bag",
 				"Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one egg per round. Double cum production.",
-				"Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one egg per round. Double cum production.");
+				"You choose the 'Ecliptic Mind' perk. Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one egg per round. Double cum production.");
 		public static const EasterBunnyEggBagEvolved:PerkType = mk("Easter bunny balls (Evolved)", "Easter bunny balls (Evolved)",
 				"Raise libido by a percentage based on current balls size. Triple cum production.",
-				"Raise libido by a percentage based on current balls size. Triple cum production.");
+				"You choose the 'Easter bunny balls (Evolved)' perk. Raise libido by a percentage based on current balls size. Triple cum production.");
 		public static const EasterBunnyEggBagFinalForm:PerkType = mk("Easter bunny balls (Final Form)", "Easter bunny balls (Final Form)",
 				"Further raise libido by a percentage based on current balls size. Double balls growth rates and double cum production again.\n",
-				"Further raise libido by a percentage based on current balls size. Double balls growth rates and double cum production again.");
+				"You choose the 'Easter bunny balls (Final Form)' perk. Further raise libido by a percentage based on current balls size. Double balls growth rates and double cum production again.");
 		public static const EagleEye:PerkType = mk("Eagle eye", "Eagle eye",
 				"Increase traditional range weapons (like bows) base attack by another 50%.",
 				"You choose the 'Eagle eye' perk, increasing traditional range weapons base attack.");
@@ -964,13 +973,13 @@ public class PerkLib
 				"You choose the 'Eclipsing Shadow' perk. Cumulative 20% damage increase for every subsequent darkness spell without interruption.");
 		public static const EclipticMind:PerkType = mk("Ecliptic Mind", "Ecliptic Mind",
 				"Allows to retains aura at all time, gaining whichever corresponds to your alignment. Empower the effect of your aura based on your purity or corruption score.",
-				"Allows to retains aura at all time, gaining whichever corresponds to your alignment. Empower the effect of your aura based on your purity or corruption score.");
-		public static const EclipticMindEvolved:PerkType = mk("Ecliptic Mind, (Evolved)", "Ecliptic Mind, (Evolved)",
+				"You choose the 'Ecliptic Mind' perk. Allows to retains aura at all time, gaining whichever corresponds to your alignment. Empower the effect of your aura based on your purity or corruption score.");
+		public static const EclipticMindEvolved:PerkType = mk("Ecliptic Mind (Evolved)", "Ecliptic Mind (Evolved)",
 				"Further empower the effect of your aura based on your purity or corruption score. Aura effect is doubled against creatures of the opposite alignment.",
-				"Further empower the effect of your aura based on your purity or corruption score. Aura effect is doubled against creatures of the opposite alignment.");
-		public static const EclipticMindFinalForm:PerkType = mk("Ecliptic Mind, (Final Form)", "Ecliptic Mind, (Final Form)",
+				"You choose the 'Ecliptic Mind (Evolved)' perk. Further empower the effect of your aura based on your purity or corruption score. Aura effect is doubled against creatures of the opposite alignment.");
+		public static const EclipticMindFinalForm:PerkType = mk("Ecliptic Mind (Final Form)", "Ecliptic Mind (Final Form)",
 				"Further empower the effect of your aura based on your purity or corruption score. Aura effect is tripled against creatures of the opposite alignment. Gain minor regeneration based on your alignment.",
-				"Further empower the effect of your aura based on your purity or corruption score. Aura effect is tripled against creatures of the opposite alignment. Gain minor regeneration based on your alignment.");
+				"You choose the 'Ecliptic Mind (Final Form)' perk. Further empower the effect of your aura based on your purity or corruption score. Aura effect is tripled against creatures of the opposite alignment. Gain minor regeneration based on your alignment.");
 		public static const ElementalArrows:PerkType = mk("Elemental Arrows", "Elemental Arrows",
 				"Shoot elemental arrows adding your intelligence to your damage.",
 				"You choose the 'Elemental Arrows' perk, allowing you to shoot elemental arrows.");
@@ -1896,14 +1905,14 @@ public class PerkLib
 				"Breaking your limits for 'body' for the first time grants you +5% max HP and Wrath.",
 				"You choose the 'Limit Breaker: Body (1st stage)' perk, breaking your limits for 'body' for the first time. (+5% max HP and Wrath)");
 		public static const LimitBreakerFlesh1stStage:PerkType = mk("Limit Breaker: Flesh (1st stage)", "Limit Breaker: Flesh (1st stage)",
-				"Breaking your limits for 'flesh' for the first time grants you +10 to max Str, Tou, Spe (scalable).",
-				"You choose the 'Limit Breaker: Flesh (1st stage)' perk, breaking your limits for 'flesh' for the first time. (+10 to max Str, Tou, Spe (scalable))").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10});
+				"Breaking your limits for 'flesh' for the first time.",
+				"You choose the 'Limit Breaker: Flesh (1st stage)' perk, breaking your limits for 'flesh' for the first time.").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10});
 		public static const LimitBreakerHeart1stStage:PerkType = mk("Limit Breaker: Heart (1st stage)", "Limit Breaker: Heart (1st stage)",
 				"Breaking your limits for 'heart' for the first time grants you +5% max Lust and Fatigue.",
 				"You choose the 'Limit Breaker: Heart (1st stage)' perk, breaking your limits for 'heart' for the first time. (+5% max Lust and Fatigue)");
 		public static const LimitBreakerPsyche1stStage:PerkType = mk("Limit Breaker: Psyche (1st stage)", "Limit Breaker: Psyche (1st stage)",
-				"Breaking your limits for 'psyche' for the first time grants you +10 to max Int, Wis, Lib, Sens (scalable).",
-				"You choose the 'Limit Breaker: Psyche (1st stage)' perk, breaking your limits for 'psyche' for the first time. (+10 to max Int, Wis, Lib (scalable) and +10 to Sens)").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'sens':10});
+				"Breaking your limits for 'psyche' for the first time.",
+				"You choose the 'Limit Breaker: Psyche (1st stage)' perk, breaking your limits for 'psyche' for the first time.").withBuffs({'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.10,'sens':10});
 		public static const LimitBreakerSoul1stStage:PerkType = mk("Limit Breaker: Soul (1st stage)", "Limit Breaker: Soul (1st stage)",
 				"Breaking your limits for 'soul' for the first time grants you +5% max Mana and Soulforce.",
 				"You choose the 'Limit Breaker: Soul (1st stage)' perk, breaking your limits for 'soul' for the first time. (+5% max Mana and Soulforce)");
@@ -1911,14 +1920,14 @@ public class PerkLib
 				"Breaking your limits for 'body' for the second time grants you +10% max HP and Wrath.",
 				"You choose the 'Limit Breaker: Body (2nd stage)' perk, breaking your limits for 'body' for the second time. (+10% max HP and Wrath)");
 		public static const LimitBreakerFlesh2ndStage:PerkType = mk("Limit Breaker: Flesh (2nd stage)", "Limit Breaker: Flesh (2nd stage)",
-				"Breaking your limits for 'flesh' for the second time grants you +20 to max Str, Tou, Spe (scalable).",
-				"You choose the 'Limit Breaker: Flesh (2nd stage)' perk, breaking your limits for 'flesh' for the second time. (+20 to max Str, Tou, Spe (scalable))").withBuffs({'str.mult':0.20,'tou.mult':0.20,'spe.mult':0.20});
+				"Breaking your limits for 'flesh' for the second time.",
+				"You choose the 'Limit Breaker: Flesh (2nd stage)' perk, breaking your limits for 'flesh' for the second time.").withBuffs({'str.mult':0.20,'tou.mult':0.20,'spe.mult':0.20});
 		public static const LimitBreakerHeart2ndStage:PerkType = mk("Limit Breaker: Heart (2nd stage)", "Limit Breaker: Heart (2nd stage)",
 				"Breaking your limits for 'heart' for the second time grants you +10% max Lust and Fatigue.",
 				"You choose the 'Limit Breaker: Heart (2nd stage)' perk, breaking your limits for 'heart' for the second time. (+10% max Lust and Fatigue)");
 		public static const LimitBreakerPsyche2ndStage:PerkType = mk("Limit Breaker: Psyche (2nd stage)", "Limit Breaker: Psyche (2nd stage)",
-				"Breaking your limits for 'psyche' for the second time grants you +20 to max Int, Wis, Lib, Sens (scalable).",
-				"You choose the 'Limit Breaker: Psyche (2nd stage)' perk, breaking your limits for 'psyche' for the second time. (+20 to max Int, Wis, Lib (scalable) and +20 to Sens)").withBuffs({'int.mult':0.20,'wis.mult':0.20,'lib.mult':0.20,'sens':20});
+				"Breaking your limits for 'psyche' for the second time.",
+				"You choose the 'Limit Breaker: Psyche (2nd stage)' perk, breaking your limits for 'psyche' for the second time.").withBuffs({'int.mult':0.20,'wis.mult':0.20,'lib.mult':0.20,'sens':20});
 		public static const LimitBreakerSoul2ndStage:PerkType = mk("Limit Breaker: Soul (2nd stage)", "Limit Breaker: Soul (2nd stage)",
 				"Breaking your limits for 'soul' for the second time grants you +10% max Mana and Soulforce.",
 				"You choose the 'Limit Breaker: Soul (2nd stage)' perk, breaking your limits for 'soul' for the second time. (+10% max Mana and Soulforce)");
@@ -3085,6 +3094,7 @@ public class PerkLib
 		public static const JobBarbarian:PerkType = mk("Job: Barbarian", "Job: Barbarian",
 				"You've trained in using large weapons in fights.",
 				"You choose 'Job: Barbarian' perk, training yourself to became Barbarian.").withBuffs({'str.mult':0.20});
+		
 		// Needlework perks
 		public static const ChiReflowAttack:PerkType = mk("Chi Reflow - Attack", "Chi Reflow - Attack",
 				"Regular attacks boosted, but damage resistance decreased.");
@@ -3095,7 +3105,8 @@ public class PerkLib
 		public static const ChiReflowMagic:PerkType = mk("Chi Reflow - Magic", "Chi Reflow - Magic",
 				"Magic attacks boosted, but regular attacks are weaker.");
 		public static const ChiReflowSpeed:PerkType = mk("Chi Reflow - Speed", "Chi Reflow - Speed",
-				"Speed reductions are halved but at the cost of strength").withBuffs({'str.mult':-0.20});
+				"Speed reductions are halved but at the cost of strength").withBuffs({'str.mult': -0.20});
+		
 		// Piercing perks
 		public static const PiercedCrimstone:PiercedCrimstonePerk = new PiercedCrimstonePerk();
 		public static const PiercedIcestone:PiercedIcestonePerk = new PiercedIcestonePerk();
@@ -3104,7 +3115,6 @@ public class PerkLib
 				"Increases chances of encountering 'furry' foes.");
 		public static const PiercedLethite:PerkType = mk("Pierced: Lethite", "Pierced: Lethite",
 				"Increases chances of encountering demonic foes.");
-
 		// Cock sock perks
 		public static const LustyRegeneration:PerkType = mk("Lusty Regeneration", "Lusty Regeneration",
 				"Regenerates 0,5% of HP per round in combat and 1% of HP per hour.");
@@ -3115,7 +3125,7 @@ public class PerkLib
 				"Increases the effects of penis-enlarging transformations.");
 		public static const PhallicRestraint:PerkType = mk("Phallic Restraint", "Phallic Restraint",
 				"Reduces the effects of penis-enlarging transformations.");
-
+		
 		// Non-weapon equipment perks
 		public static const Ambition:AmbitionPerk = new AmbitionPerk();
 		public static const BlindImmunity:PerkType = mk("Blind Immunity", "Blind Immunity", "Gives PC immunity to enemy blinding effects.");
@@ -3136,7 +3146,7 @@ public class PerkLib
 		public static const WizardsEnduranceAndSluttySeduction:WizardsEnduranceAndSluttySeductionPerk = new WizardsEnduranceAndSluttySeductionPerk();
 		public static const WizardsAndDaoistsEndurance:WizardsAndDaoistsEndurancePerk = new WizardsAndDaoistsEndurancePerk();
 		public static const WizardsEndurance:WizardsEndurancePerk = new WizardsEndurancePerk();
-
+		
 		// Melee & Range weapon perks
 		public static const Accuracy1:Accuracy1Perk = new Accuracy1Perk();
 		public static const Accuracy2:Accuracy2Perk = new Accuracy2Perk();
@@ -3155,7 +3165,7 @@ public class PerkLib
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
 		public static const WizardsAndDaoistsFocus:WizardsAndDaoistsFocusPerk = new WizardsAndDaoistsFocusPerk();
 		public static const WizardsFocus:WizardsFocusPerk = new WizardsFocusPerk();
-
+		
 		// Achievement perks
 		public static const BowShooting:BowShootingPerk = new BowShootingPerk();
 		public static const BroodMother:PerkType = mk("Brood Mother", "Brood Mother",
@@ -3164,7 +3174,25 @@ public class PerkLib
 		public static const Cultivation:PerkType = mk("Cultivation", "Cultivation",
 				"Allow to cultivate powers of the soul.",
 				"You choose the 'Cultivation' perk, starting journey of the soul cultivation path!");//potem przerobić na coć innego - moze jak perki do czarów i łuku bedzie dawać jakieś korzyści do soul skills po odpowiednio dużej ilości ich użycia czy cos xD
-
+		
+		// Hidden Jobs perks
+		public static const HiddenJobBloodDemon:PerkType = mk("Hidden Job: Blood Demon", "Hidden Job: Blood Demon",
+				"You've trained in arts of blood demons. Beings that reached mastery of using their own or others blood to great effect. (+5x Tou of OverMax HP)");
+		public static const HiddenJob6:PerkType = mk("Hidden Job: 6", "Hidden Job: 6",
+				"Allowing to use health to substitude using soulforce in almost all soulskills. (+5x Tou of OverMax HP)");
+		public static const YourPainMyPower:PerkType = mk("Your Pain My Power", "Your Pain My Power",
+				"You can absorb 50% of blood spilled by enemy under Bleed effect into your own blood pool. (+5x Tou of OverMax HP)");
+		public static const MyBloodForBloodPuppies:PerkType = mk("My Blood for Blood Puppies", "My Blood for Blood Puppies",
+				". (+5x Tou of OverMax HP)");
+		public static const HiddenJob4:PerkType = mk("Hidden Job: 4", "Hidden Job: 4",
+				".");
+		public static const HiddenJob3:PerkType = mk("Hidden Job: 3", "Hidden Job: 3",
+				".");
+		public static const HiddenJob2:PerkType = mk("Hidden Job: 2", "Hidden Job: 2",
+				".");
+		public static const HiddenJob1:PerkType = mk("Hidden Job: 1", "Hidden Job: 1",
+				".");
+		
 		// Mutation perks
 		public static const AcidSpit:PerkType = mk("Acid Spit", "Acid Spit",
 				"Allows access to a cave wyrm acid spit attack.");
@@ -3247,7 +3275,7 @@ public class PerkLib
 		public static const EnlightenedNinetails:PerkType = mk("Enlightened Nine-tails", "Enlightened Nine-tails",
 				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells.",null,true);
 		public static const EzekielBlessing:PerkType = mk("Ezekiel Blessing", "Ezekiel Blessing",
-				"You've recived blessing of Ezekiel enhancing your body and mind. +5% to all stats.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05,'lib.mult':0.05,'sens':5}, false);
+				"You've recived blessing of Ezekiel enhancing your body and mind. +10 to all stats.").withBuffs({'sens':10}, false);
 		public static const Feeder:PerkType = mk("Feeder", "Feeder",
 				"Lactation does not decrease and gives a compulsion to breastfeed others.");
 		public static const FenrirSpikedCollar:PerkType = mk("Fenrir spiked collar", "Fenrir spiked collar",

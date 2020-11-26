@@ -29,14 +29,19 @@ public class PerkMenu extends BaseContent {
 			temp++;
 		}
 		menu();
-		var button:int = 0;
-		addButton(button++, "Next", playerMenu);
+		addButton(0, "Next", playerMenu);
 		if (player.perkPoints > 0) {
 			outputText("\n<b>You have " + num2Text(player.perkPoints) + " perk point");
 			if(player.perkPoints > 1) outputText("s");
 			outputText(" to spend.</b>");
-			addButton(button++, "Perk Up", CoC.instance.playerInfo.perkBuyMenu);
+			addButton(1, "Perk Up", CoC.instance.playerInfo.perkBuyMenu);
 		}
+		if (player.superPerkPoints > 0) {
+			outputText("\n<b>You have " + num2Text(player.superPerkPoints) + " super perk point");
+			if(player.superPerkPoints > 1) outputText("s");
+			outputText(" to spend.</b>");
+		}
+		addButton(2, "SuperPerk Up", CoC.instance.playerInfo.superPerkBuyMenu);
 		addButton(4, "Database", perkDatabase);
 		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()))) {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
@@ -60,9 +65,10 @@ public class PerkMenu extends BaseContent {
 		}
 		addButton(10, "Number of", EngineCore.doNothing);
 		addButton(11, "perks: " + player.perks.length, EngineCore.doNothing);
-		if (player.hasPerk(PerkLib.DarkRitual)){
-			outputText("\n<b>You can choose if you wish to use dark ritual and sacrifice health to empower your magic.</b>");
-			addButton(12, "D.Ritual",DarkRitualOption);
+		if (player.hasPerk(PerkLib.DarkRitual) || player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
+			if (player.hasPerk(PerkLib.DarkRitual)) outputText("\n<b>You can choose if you wish to use dark ritual and sacrifice health to empower your magic.</b>");
+			if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) outputText("\n<b>You can adjust your Blood Demon hidden job settings.</b>");
+			addButton(13, "Bloody Opt",DarkRitualOption);
 		}
 		if (player.hasPerk(PerkLib.JobLeader)) {
 			outputText("\n<b>You can adjust your Will-o'-the-wisp behaviour during combat.</b>");
@@ -470,18 +476,42 @@ public class PerkMenu extends BaseContent {
             golemsbehaviourOptions();
         }
 	}
-
+	
 	public function DarkRitualOption():void {
 		clearOutput();
 		menu();
-		outputText("Set weither you will be sacrificing blood to empower your magic or not.\n\n");
-		if (!player.hasStatusEffect(StatusEffects.DarkRitual)) {
-			outputText("Dark ritual is currently: <b>Inactive</b>.");
-			addButton(10, "On", DarkRitualOptionOn);
+		if (player.hasPerk(PerkLib.DarkRitual)) {
+			outputText("Set weither you will be sacrificing blood to empower your magic or not.\n\n");
+			if (!player.hasStatusEffect(StatusEffects.DarkRitual)) {
+				outputText("Dark ritual is currently: <b>Inactive</b>.");
+				addButton(10, "On", DarkRitualOptionOn);
+			}
+			if (player.hasStatusEffect(StatusEffects.DarkRitual)) {
+				outputText("Dark ritual is currently: <b>Active</b>.");
+				addButton(11, "Off", DarkRitualOptionOff);
+			}
 		}
-		if (player.hasStatusEffect(StatusEffects.DarkRitual)) {
-			outputText("Dark ritual is currently: <b>Active</b>.");
-			addButton(11, "Off", DarkRitualOptionOff);
+		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
+			outputText("Set if you will be using blood instead of mana to fuel your magic.\n\n");
+			if (!player.hasStatusEffect(StatusEffects.BloodMage)) {
+				outputText("Blood Mage: <b>Inactive</b>.");
+				addButton(0, "On", BloodMageOptionOn);
+			}
+			if (player.hasStatusEffect(StatusEffects.BloodMage)) {
+				outputText("Blood Mage: <b>Active</b>.");
+				addButton(1, "Off", BloodMageOptionOff);
+			}/*
+			if (player.hasPerk(PerkLib.)) {
+				outputText("Set if you will be using blood instead of soulfroce to fuel your soulskills.\n\n");
+				if (!player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+					outputText("Blood Cultivator: <b>Inactive</b>.");
+					addButton(2, "On", BloodCultivatorOptionOn);
+				}
+				if (player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+					outputText("Blood Cultivator: <b>Active</b>.");
+					addButton(3, "Off", BloodCultivatorOptionOff);
+				}
+			}*/
 		}
 		var e:MouseEvent;
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
@@ -492,6 +522,22 @@ public class PerkMenu extends BaseContent {
 		}
 		function DarkRitualOptionOff():void {
 			player.removeStatusEffect(StatusEffects.DarkRitual);
+			DarkRitualOption();
+		}
+		function BloodMageOptionOn():void {
+			player.createStatusEffect(StatusEffects.BloodMage,0,0,0,0);
+			DarkRitualOption();
+		}
+		function BloodMageOptionOff():void {
+			player.removeStatusEffect(StatusEffects.BloodMage);
+			DarkRitualOption();
+		}
+		function BloodCultivatorOptionOn():void {
+			player.createStatusEffect(StatusEffects.BloodCultivator,0,0,0,0);
+			DarkRitualOption();
+		}
+		function BloodCultivatorOptionOff():void {
+			player.removeStatusEffect(StatusEffects.BloodCultivator);
 			DarkRitualOption();
 		}
 	}

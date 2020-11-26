@@ -452,7 +452,7 @@ public class Combat extends BaseContent {
             enemyAI();
         } else {
             outputText("\n\n");
-            doNext(combatMenu);
+            doNext(curry(combatMenu, false));
         }
     }
 
@@ -810,7 +810,7 @@ public class Combat extends BaseContent {
             if (player.level < 90) addButtonDisabled(11, "5", "You soul(current level) is too weak(low) to use this drill setting.");
             else addButton(11, "5", soul1Drill05).hint("Req. 100 SF per turn.");
         }
-        addButton(14, "Back", combat.combatMenu);
+        addButton(14, "Back", combat.combatMenu, false);
     }
 
     public function soul1Drill00():void {
@@ -1309,7 +1309,7 @@ public class Combat extends BaseContent {
         if (player.mana < manaCost) {
             outputText("Your mana is too low to fuel your elemental attack!\n\n");
             flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 1;
-            doNext(combatMenu);
+            doNext(curry(combatMenu, false));
         } else {
             if (manaCost > 0) player.mana -= manaCost;
             elementalattacks(elementType, summonedElementals);
@@ -1771,6 +1771,10 @@ public class Combat extends BaseContent {
         } else if (player.hasStatusEffect(StatusEffects.TrollHold)) {
             clearOutput();
             outputText("You don’t feel motivated, something about his strong arms and soothing fur is getting to you, it’s not so bad once you really sink into him.");
+			outputText("\n\nHe leans in close to you, sniffing you intently as he gives you a long lick across your cheek.");
+			var licklust:Number = (monster.inte / 5) + rand(10);
+			licklust = Math.round(licklust);
+			player.dynStats("lus", licklust, "scale", false);
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.HolliConstrict)) {
             (monster as Holli).waitForHolliConstrict(true);
@@ -1947,13 +1951,16 @@ public class Combat extends BaseContent {
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.TrollHold)) {
 			clearOutput();
-			outputText("You squirm violently, trying to shake out of his grasp. ");
 			if (rand(3) == 0 || rand(80) < player.str / 1.5 || player.hasPerk(PerkLib.FluidBody)) {
-                outputText("You break free of his grasp, pushing him away, disorienting him for a moment.");
+                outputText("You squirm violently, trying to shake out of his grasp. You break free of his grasp, pushing him away, disorienting him for a moment.");
                 player.removeStatusEffect(StatusEffects.TrollHold);
             } else {
-				outputText("He maintains a fierce grip on you.");
+				outputText("The troll clutches onto you tighter as you are pulled deeper into his embrace. Your struggles seem to be in vain as he pokes your body with his pre-leaking erection. The warm fluid makes you flush reflexively, but you cannot give in!");
                 player.takePhysDamage(7 + rand(5));
+				var licklust:Number = (monster.inte / 5) + rand(10) + player.statusEffectv3(StatusEffects.TrollHold);
+				licklust = Math.round(licklust);
+				player.dynStats("lus", licklust, "scale", false);
+				player.addStatusValue(StatusEffects.TrollHold, 3, 1);
 			}
             skipMonsterAction = true;
 		} else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
@@ -3521,7 +3528,7 @@ public class Combat extends BaseContent {
                 }
             }
             //DOING EXTRA CLAW ATTACKS
-            if (player.hasAClawAttack()) {
+            if (player.haveNaturalClaws()) {
                 var DamageMultiplier:Number = 1;
                 if (player.arms.type == Arms.FROSTWYRM) DamageMultiplier = 2;
                 if (player.arms.type != Arms.MANTIS && player.arms.type != Arms.KAMAITACHI){
@@ -3644,7 +3651,7 @@ public class Combat extends BaseContent {
                 }
             }
             //Unique attack Mantis Prayer
-            if (player.mantisScore() >= 12 || player.arms.type == Arms.MANTIS){
+            if (player.mantisScore() >= 12 && player.arms.type == Arms.MANTIS){
                 if(player.hasStatusEffect(StatusEffects.InvisibleOrStealth)){
                     outputText("Taking advantage of your opponent obliviousness you strike four more times with your scythes.");
                     ExtraNaturalWeaponAttack();
@@ -3661,7 +3668,7 @@ public class Combat extends BaseContent {
                 }
             }
             //Unique attack Kamaitachi Three way Cut
-            if (player.kamaitachiScore() >= 12 || player.arms.type == Arms.KAMAITACHI){
+            if (player.kamaitachiScore() >= 12 && player.arms.type == Arms.KAMAITACHI){
                 outputText("You strike at blinding speed almost seeming to divide yourself into multiple copies, and slash with your scythes again. Initiating a three way cut combo\n");
                 ExtraNaturalWeaponAttack(1, "KamaitachiScythe");
                 if (player.hasABiteAttack()) {
@@ -4625,7 +4632,7 @@ public class Combat extends BaseContent {
             }
         }
         //10% Bleed chance
-        if (player.weapon == weapons.CLAWS) bleedChance += 10;
+        if (player.weapon == weapons.CLAWS) bleedChance += 100;
         //25% Bleed chance
         if ((player.weapon == weapons.H_GAUNT || player.weapon == weapons.CNTWHIP || player.weapon == weapons.TRIDAG)) bleedChance += 25;
         //100% bleed chance
@@ -5623,8 +5630,7 @@ public class Combat extends BaseContent {
         }
         //Blood mages use HP for spells
         var damage:Number;
-        if (player.hasPerk(PerkLib.BloodMage)
-                && (type == USEMANA_MAGIC || type == USEMANA_WHITE || type == USEMANA_BLACK)) {
+        if ((player.hasPerk(PerkLib.BloodMage) || player.hasStatusEffect(StatusEffects.BloodMage)) && (type == USEMANA_MAGIC || type == USEMANA_WHITE || type == USEMANA_BLACK)) {
             player.takePhysDamage(mod);
             if (player.hasStatusEffect(StatusEffects.DarkRitual)) {
                 damage = player.maxHP() * 0.1;
@@ -7746,6 +7752,9 @@ public class Combat extends BaseContent {
     public function manaregeneration2():Number {
         var manaregen:Number = 0;
         if (player.hasPerk(PerkLib.JobElementalConjurer)) manaregen += 5;
+        if (player.hasPerk(PerkLib.JobEnchanter)) manaregen += 5;
+        if (player.hasPerk(PerkLib.JobEromancer)) manaregen += 5;
+        if (player.hasPerk(PerkLib.JobHealer)) manaregen += 5;
         if (player.hasPerk(PerkLib.JobSorcerer)) manaregen += 10;
         if (player.hasPerk(PerkLib.ArcaneRegenerationMinor)) manaregen += 5;
         if (player.hasPerk(PerkLib.ArcaneRegenerationMajor)) manaregen += 10;
@@ -7754,7 +7763,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.DraconicHeart)) manaregen += 5;
         if (player.hasPerk(PerkLib.DraconicHeartEvolved)) manaregen += 5;
         if (player.hasPerk(PerkLib.DraconicHeartFinalForm)) manaregen += 5;
-        if (player.hasPerk(PerkLib.KitsuneThyroidGlandFinalForm) && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 3);
+        if (player.hasPerk(PerkLib.KitsuneThyroidGlandFinalForm) && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 2);
         return manaregen;
     }
 

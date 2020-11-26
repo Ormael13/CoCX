@@ -5,6 +5,7 @@ package coc.view {
 import classes.BaseContent;
 import classes.CoC;
 import classes.PerkLib;
+import classes.StatusEffects;
 
 public class ButtonData {
 	public var text:String = "";
@@ -60,9 +61,9 @@ public class ButtonData {
 	 */
 	public function requireSoulforce(cost:Number):ButtonData {
 		toolTipText += "\nSoulforce cost: "+cost;
-		if (CoC.instance.player.soulforce < cost) {
+		if (!CoC.instance.player.hasStatusEffect(StatusEffects.BloodCultivator) && CoC.instance.player.soulforce < cost) {
 			disable();
-			toolTipText += " <b>You are too tired to use this ability.</b>";
+			toolTipText += " <b>Your soulfroce is too low to cast this..</b>";
 		}
 		return this;
 	}
@@ -100,7 +101,7 @@ public class ButtonData {
 	 */
 	public function requireMana(cost:Number, allowBloodMage:Boolean = false):ButtonData {
 		toolTipText += "\nMana cost: "+cost;
-		if (!(allowBloodMage && CoC.instance.player.hasPerk(PerkLib.BloodMage))
+		if (!(allowBloodMage && CoC.instance.player.hasPerk(PerkLib.BloodMage) && CoC.instance.player.hasStatusEffect(StatusEffects.BloodMage))
 			&& CoC.instance.player.mana < cost) {
 			disable();
 			toolTipText += " <b>Your mana is too low to cast this.</b>";

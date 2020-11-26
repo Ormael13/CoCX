@@ -68,7 +68,7 @@ public class RyuBiDragon extends Monster
 				this.weaponAttack = 25;
 				this.armorDef = 25;
 				this.armorMDef = 25;
-				this.lustVuln = .99;
+				this.lustVuln = .01;
 				this.bonusHP = 50;
 				this.bonusLust = 10;
 				this.level = 0;
@@ -80,7 +80,7 @@ public class RyuBiDragon extends Monster
 				this.weaponAttack = 50;
 				this.armorDef = 50;
 				this.armorMDef = 50;
-				this.lustVuln = .98;
+				this.lustVuln = .02;
 				this.bonusHP = 50;
 				this.bonusLust = 10;
 				this.level = 3;
@@ -92,7 +92,7 @@ public class RyuBiDragon extends Monster
 				this.weaponAttack = 7;
 				this.armorDef = 7;
 				this.armorMDef = 7;
-				this.lustVuln = .97;
+				this.lustVuln = .03;
 				this.bonusHP = 100;
 				this.bonusLust = 20;
 				this.level = 6;
@@ -104,7 +104,7 @@ public class RyuBiDragon extends Monster
 				this.weaponAttack = 10;
 				this.armorDef = 10;
 				this.armorMDef = 10;
-				this.lustVuln = .96;
+				this.lustVuln = .04;
 				this.bonusHP = 150;
 				this.bonusLust = 30;
 				this.level = 9;
@@ -116,7 +116,7 @@ public class RyuBiDragon extends Monster
 				this.weaponAttack = 15;
 				this.armorDef = 15;
 				this.armorMDef = 15;
-				this.lustVuln = .95;
+				this.lustVuln = .05;
 				this.bonusHP = 200;
 				this.bonusLust = 40;
 				this.level = 12;
@@ -128,7 +128,7 @@ public class RyuBiDragon extends Monster
 				this.weaponAttack = 20;
 				this.armorDef = 20;
 				this.armorMDef = 20;
-				this.lustVuln = .93;
+				this.lustVuln = .07;
 				this.bonusHP = 250;
 				this.bonusLust = 50;
 				this.level = 15;
@@ -227,9 +227,9 @@ public class RyuBiDragon extends Monster
 			if (flags[kFLAGS.RYUBI_LVL_UP] >= 2) 
 			if (flags[kFLAGS.RYUBI_LVL_UP] >= 3) 
 			if (flags[kFLAGS.RYUBI_LVL_UP] >= 4) 
-			if (flags[kFLAGS.RYUBI_LVL_UP] >= 5) 
-			if (flags[kFLAGS.RYUBI_LVL_UP] >= 6) this.lustVuln = .9;
-			if (flags[kFLAGS.RYUBI_LVL_UP] >= 7) */
+			if (flags[kFLAGS.RYUBI_LVL_UP] >= 5) */
+			if (flags[kFLAGS.RYUBI_LVL_UP] >= 6) this.lustVuln = .1;
+			//if (flags[kFLAGS.RYUBI_LVL_UP] >= 7) 
 			checkMonster();
 		}
 		

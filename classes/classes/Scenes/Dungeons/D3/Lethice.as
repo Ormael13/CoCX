@@ -209,7 +209,8 @@ public class Lethice extends Monster
 			outputText(" spray forth a torrent of white flame, burning the shadowy constructs away in the light of your pure, focused fire. In the span of seconds, Lethice’s spell is gone.");
 
 			EngineCore.doNext(SceneLib.combat.combatMenu);
-			game.player.mana -= 30;
+			if (game.player.hasStatusEffect(StatusEffects.BloodMage)) game.player.HP -= 30;
+			else game.player.mana -= 30;
 			outputText("\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
 			SceneLib.combat.spellPerkUnlock();

@@ -701,7 +701,7 @@ public function followerZenjiMainCampMenu():void {
 	addButton(0, "Appearance", followerZenjiMainCampMenuAppearance).hint("Examine Zenji.");
 	addButton(1, "Talk", followerZenjiTalks).hint("Talk to Zenji.");
 	if (player.lust > 33) addButton(2, "Sex", followerZenjiSex).hint("Perhaps the hunk could be open to share an intimate moment with you.");
-	if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) addButton(3, "Glades", followerZenjiGlades).hint("Ask Zenji for help in destroying the corrupted glades.");
+	if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] >= 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) addButton(3, "Glades", followerZenjiGlades).hint("Ask Zenji for help in destroying the corrupted glades.");
 	addButton(4, "Training", followerZenjiMainCampMenuTraining).hint("Train with Zenji to increase your stats.");
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(5, "Spar", followerZenjiSpar).hint("Spar with Zenji.");
 	else addButtonDisabled(5, "Spar", "You can spar with him, but you need to build a sparring ring first!");
@@ -1057,7 +1057,7 @@ public function loverZenjiMainCampMenu():void {
 	addButton(0, "Appearance", loverZenjiMainCampMenuAppearance).hint("Examine Zenji.");
 	addButton(1, "Talk", loverZenjiTalks).hint("Talk to Zenji.");
 	addButton(2, "Sex", loverZenjiSex).hint("Perhaps the hunk could be open to share an intimate moment with you.");
-	if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) addButton(3, "Glades", loverZenjiGlades).hint("Have Zenji help you in destroying the corrupted glades.");
+	if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] >= 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) addButton(3, "Glades", loverZenjiGlades).hint("Have Zenji help you in destroying the corrupted glades.");
 	addButton(4, "Nightwatch", loverZenjiNightWatch).hint("Toggle Zenji’s night watch on or off.");
 	if (player.hasPerk(PerkLib.BasicLeadership)) {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Assist Me", zenjiHenchmanOption).hint("Ask Zenji to join you in adventures outside camp.");

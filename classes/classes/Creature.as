@@ -528,6 +528,40 @@ public class Creature extends Utils
 			max = Math.round(max);
 			return max;
 		}
+		protected function maxHP_mult():Number {
+			var maxHP_mult1:Number = 1;
+			maxHP_mult1 += (countCockSocks("green") * 0.02);
+			if (game.player.dragonScore() >= 5) maxHP_mult1 += 0.05;
+			if (game.player.dragonScore() >= 16) maxHP_mult1 += 0.05;
+			if (game.player.dragonScore() >= 24) maxHP_mult1 += 0.1;
+			if (game.player.dragonScore() >= 32) maxHP_mult1 += 0.1;
+			if (game.player.vehiclesName == "Goblin Mech Alpha") {
+				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.2;
+				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.35;
+				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.5;
+			}
+			if (game.player.vehiclesName == "Goblin Mech Prime") {
+				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.4;
+				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.7;
+				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 1;
+			}
+			return maxHP_mult1;
+		}
+		public function maxHP():Number {
+			var max:Number = Math.round(maxHP_base()*maxHP_mult());
+			return Math.min(9999999,max);
+		}
+		public function maxOverHP():Number {
+			var maxOver:Number = maxHP();
+			if (findPerk(PerkLib.HiddenJobBloodDemon) >= 0) maxOver += Math.round(tou * 5);
+			//if (findPerk(PerkLib.) >= 0) maxOver += Math.round(tou*5);
+			if (findPerk(PerkLib.YourPainMyPower) >= 0) maxOver += Math.round(tou*5);
+			if (findPerk(PerkLib.MyBloodForBloodPuppies) >= 0) maxOver += Math.round(tou*5);
+			return Math.min(19999999,maxOver);
+		}
+		public function minHP():Number {
+			return 0;
+		}
 		protected function maxLust_base():Number {
 			var max:Number = 100;
 			var multimax:Number = 1;
@@ -606,25 +640,6 @@ public class Creature extends Utils
 			max = Math.round(max);
 			return max;
 		}
-		protected function maxHP_mult():Number {
-			var maxHP_mult1:Number = 1;
-			maxHP_mult1 += (countCockSocks("green") * 0.02);
-			if (game.player.dragonScore() >= 5) maxHP_mult1 += 0.05;
-			if (game.player.dragonScore() >= 16) maxHP_mult1 += 0.05;
-			if (game.player.dragonScore() >= 24) maxHP_mult1 += 0.1;
-			if (game.player.dragonScore() >= 32) maxHP_mult1 += 0.1;
-			if (game.player.vehiclesName == "Goblin Mech Alpha") {
-				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.2;
-				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.35;
-				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.5;
-			}
-			if (game.player.vehiclesName == "Goblin Mech Prime") {
-				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.4;
-				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.7;
-				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 1;
-			}
-			return maxHP_mult1;
-		}
 		protected function maxLust_ElementalBondFleshMulti():Number {
 			var multiValue1a:Number = 1;
 			multiValue1a += (0.2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
@@ -639,13 +654,6 @@ public class Creature extends Utils
 		}
 		public function maxLust_mult():Number {
 			return 1;
-		}
-		public function maxHP():Number {
-			var max:Number = Math.round(maxHP_base()*maxHP_mult());
-			return Math.min(9999999,max);
-		}
-		public function minHP():Number {
-			return 0;
 		}
 		public function maxLust():Number {
 			var max:Number = Math.round(maxLust_base()*maxLust_mult());
@@ -2824,7 +2832,11 @@ public class Creature extends Utils
 			Wings.FEATHERED_ALICORN,
 			Wings.NIGHTMARE,
 			Wings.ETHEREAL_WINGS,
-			//WING_TYPE_IMP_LARGE,
+			Wings.DEVILFEATHER,
+			Wings.FAIRY,
+			//Wings.,
+			//Wings.,
+			//Wings.,
 		];
 
 		//PC can fly?
