@@ -6313,6 +6313,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.EclipticMindEvolved) && monster.cor > player.cor / 2) damage = Math.round(damage * 2);
                 else if (player.hasPerk(PerkLib.EclipticMindFinalForm) && monster.cor > player.cor / 2) damage = Math.round(damage * 3);
                 damage = Math.round(damage);
+                if (damage > (monster.maxHP()/4)) damage = Math.round(monster.maxHP()/4);
                 outputText("Your aura of purity burns [monster a] [monster name] with holy fire for ");
                 doFireDamage(damage, true, true);
                 outputText(" damage!");
@@ -6349,7 +6350,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
             if (player.hasPerk(PerkLib.EclipticMindEvolved) && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 2);
             else if (player.hasPerk(PerkLib.EclipticMindFinalForm) && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 3);
-
+            if (lustDmg > (monster.maxLust()/4)) lustDmg = Math.round(monster.maxLust()/4);
             outputText("[monster A] [monster name] slowly succumbs to [monster his] basest desires as your aura of corruption seeps through [monster him].");
             if (monster.cor < 100) outputText("Your victims purity is slowly becoming increasingly eroded by your seeping corruption.");
             lustDmg = Math.round(lustDmg);
