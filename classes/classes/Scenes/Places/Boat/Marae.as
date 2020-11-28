@@ -96,6 +96,25 @@ public class Marae extends Monster
 				this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
 				removeStatusEffect(StatusEffects.Fear);
 			}
+			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug)) {
+				if (!handleConstricted()) return;
+			}
+			if (hasStatusEffect(StatusEffects.OrcaPlay)) {
+				return;
+			}
+			if (hasStatusEffect(StatusEffects.Straddle)) {
+				return;
+			}
+			if (hasStatusEffect(StatusEffects.Dig)) {
+				outputText("\n\nYour opponent is still looking for you as you remain quietly hiding underground, away from view.");
+				addStatusValue(StatusEffects.Dig, 1, -1);
+				return;
+			}
+			if (hasStatusEffect(StatusEffects.OrcaHasWackedFinish)) {
+				outputText("\n\nYour opponent is still stunned from the powerful blow of your tail.");
+				createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+				return;
+			}
 			var chooser:int = rand(10);
 			if (hasStatusEffect(StatusEffects.Uber)) {
 				smiteHit();

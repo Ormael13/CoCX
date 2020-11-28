@@ -1648,7 +1648,7 @@ private function goJogging():void {
 public function meetingLunaFirstTime():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_luna_maid);
-	outputText("As you wander the streets of Tel'Adre, you see a woman being brutally thrown out of a house along with her belongings. The crowd seems to be ignoring her.  Curious, you walk up to her just in time to see her start to cry. She wears what looks like a formal maid dress. Under her white bonnet, the maid sports short, ashen hair. You decide to break the ice and ask her what's going on. By all means she looks human, which is a surprise to you.\n\n");
+	outputText("As you wander the streets of Tel'Adre, you see a woman being brutally thrown out of a house along with her belongings. The crowd seems to be ignoring her.  Curious, you walk up to her just in time to see her start to cry. She wears what looks like a formal maid dress. Under her white bonnet, the maid sports short, ashen hair. You decide to break the ice and ask her what's going on. By all means, she looks human, which is a surprise to you.\n\n");
 	outputText("\"<i>Why, this is terrible... I’m masterless, and out of a job! What am I going to do?</i>\"\n\n");
 	outputText("What did she do to be fired to begin with?\n\n");
 	outputText("\"<i>Master William’s wife is a liar. She didn’t like me around her husband, so she broke his favorite vase and framed me for it.</i>\"\n\n");
@@ -1667,7 +1667,7 @@ public function meetingLunaFirstTimeLeave():void {
 public function meetingLunaFirstTimeHelp():void {
 	clearOutput();
 	outputText("Now that you think about it, life at camp would be infinitely easier if you had a person like her helping around. How about she comes over to live with you at your camp?\n\n");
-	outputText("\"<i>You.. you would hire me? Even after I’ve been kicked out? Oh this is wonderful! Thank you so much!!</i>\"\n\n");
+	outputText("\"<i>You.. you would hire me? Even after I’ve been kicked out? Oh, this is wonderful, thank you so much!!</i>\"\n\n");
 	doNext(meetingLunaCamp);
 }
 public function meetingLunaRepated():void {
@@ -1689,11 +1689,15 @@ public function meetingLunaRepatedYes():void {
 	doNext(meetingLunaCamp);
 }
 public function meetingLunaCamp():void {
-	outputText("The two of you head back to camp. The maid doesn’t comment on the fact you only have a cabin for a house");
+	outputText("The two of you head back to camp. The maid doesn’t comment on the fact you only have a");
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] == 1) outputText(" cabin ");
+	else outputText(" tent ");
+	outputText("for a house");
 	if (camp.companionsCount() > 2) outputText(", let alone the many people camping next to you");
 	outputText(". In fact, she is practically overjoyed.\n\n");
-	outputText("As the two of you reach the middle of the camp, you finally introduce yourself as [name] champion of Ingnam. She swiftly realises she hasn’t presented herself yet and does so with reverence.\n\n");
-	outputText("\"<i>I’ve forgotten to introduce myself, please forgive me. My name is Luna. As you have probably figured out, I am a maid. Please allow me to call you " + player.mf("Master","Mistress") + " [name] from now on, I will serve you to the best of my abilities.</i>\"\n\n");
+	outputText("As the two of you reach the middle of the camp, you finally introduce yourself as [name], champion of Ingnam. She swiftly realizes she hasn’t presented herself yet and does so with reverence.\n\n");
+	outputText("\"<i>I’ve forgotten to introduce myself, please forgive me. My name is Luna and as you have probably figured out, I am a maid. Please allow me to call you " + player.mf("Master","Mistress") + " [name] from now on, I will serve you to the best of my abilities.</i>\"\n\n");
+	outputText("On this, Luna begins running around all over the camp fixing up anything she deems disorganized. Talk about being on point. It would seem that life in the camp is going to be significantly easier now that she handles the menial chores.\n\n");
 	outputText("(<b>Luna has been added to the Followers menu!</b>)\n\n");
 	flags[kFLAGS.LUNA_FOLLOWER] = 4;
 	flags[kFLAGS.LUNA_LVL_UP] = 0;

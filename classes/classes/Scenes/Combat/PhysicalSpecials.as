@@ -18,6 +18,7 @@ import classes.PerkLib;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Camp.CampMakeWinions;
 import classes.Scenes.Dungeons.D3.LivingStatue;
+import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.NPCs.Anemone;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
@@ -3543,7 +3544,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		if (monster.short == "pod") {
+		if (monster is EncapsulationPod) {
 			clearOutput();
 			outputText("You can't pounce something you're trapped inside of!");
 			//Gone		menuLoc = 1;
@@ -3589,7 +3590,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		if (monster.short == "pod") {
+		if (monster is EncapsulationPod) {
 			clearOutput();
 			outputText("You can't grab something you're trapped inside of!");
 			//Gone		menuLoc = 1;
@@ -3636,7 +3637,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		if (monster.short == "pod") {
+		if (monster is EncapsulationPod) {
 			clearOutput();
 			outputText("You can't slap something you're trapped inside of!");
 			//Gone		menuLoc = 1;
@@ -3732,7 +3733,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		if (monster.short == "pod") {
+		if (monster is EncapsulationPod) {
 			clearOutput();
 			outputText("You can't land into something you're trapped inside of!");
 			//Gone		menuLoc = 1;

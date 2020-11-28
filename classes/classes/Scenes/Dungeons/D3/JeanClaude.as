@@ -21,7 +21,7 @@ import classes.Scenes.SceneLib;
 			eAttack();
 		}
 		
-		override public function doAI():void
+		override protected function performCombatAction():void
 		{
 			doubleAttack();
 		}

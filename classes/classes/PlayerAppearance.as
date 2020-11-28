@@ -1519,7 +1519,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Around your neck is a thick collar of fur reminiscent of a bat's.");
 		}
 		else if (player.rearBody.type == RearBody.WOLF_COLLAR) {
-			outputText("  Around your neck there is a thick coat of [skin coat.color] fur. It looks great on you. That said, you can dismiss every one of your bestial features at any time should the need arise for you to appear human.");
+			outputText("  Around your neck, there is a thick coat of [skin coat.color] fur. It looks great on you. That said, you can dismiss every one of your bestial features at any time should the need arise for you to appear human.");
 		}
 		else if (player.rearBody.type == RearBody.DISPLACER_TENTACLES) {
 			outputText("  On your back grows two tentacles with a pair of thick, heavy feelers. You use them to suck your victims dry of their milk loads as you pump them full of your lewd venom.");
@@ -1843,7 +1843,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your eye sockets have merged together to reform into a single cyclopean eye charged with powerful magical powers. Your almighty gaze is as peerless as its unsettling.");
 		}
 		else if(eyeType == Eyes.FERAL){
-			outputText("  In your [eyecolor] eyes sometime dance a sinister light. It encompass your entire pupil when you let the beast within loose.");
+			outputText("  In your [eyecolor] eyes, sometimes a green light is visibly dancing. Hinting at the beast within. It encompasses your entire pupil when you let it loose.");
 		}
 		else if(eyeType == Eyes.GRYPHON){
 			outputText("  Your gifted eyes have a bird-like appearance, having an [eyecolor] sclera and a large, black iris. A thin ring of black separates your sclera from your outer iris.");
