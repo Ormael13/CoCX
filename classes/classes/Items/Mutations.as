@@ -9819,7 +9819,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("spe", .5);
         }
         //[decrease Strength] (to some floor) // I figured 15 was fair, but you're in a better position to judge that than I am.
-        if (changes < changeLimit && rand(3) == 0) {
+        if (changes < changeLimit && rand(3) == 0 && player.str > 15) {
             outputText("\n\nYou can feel your muscles softening as they slowly relax, becoming a tad weaker than before.  Who needs physical strength when you are this smart?  You tilt your head a bit, wondering where that thought came from.");
             dynStats("str", -1);
             if (player.str > 60) dynStats("str", -1);
@@ -9828,7 +9828,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //[decrease Toughness] (to some floor) // 20 or so was my thought here
-        if (changes < changeLimit && rand(3) == 0) {
+        if (changes < changeLimit && rand(3) == 0 && player.tou > 20) {
             if (player.tou < 60) outputText("\n\nYou feel your skin becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your supple skin isn't going to offer you much protection.");
             else outputText("\n\nYou feel your skin becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your hide isn't quite as tough as it used to be.");
             dynStats("tou", -1);
@@ -9869,7 +9869,11 @@ public final class Mutations extends MutationsHelper {
             player.coatColor = color2;
             changes++;
         }
-
+		if (rand(2) == 0 && player.tallness > 42) {
+            changes++;
+            outputText("\n\nWait is it just you or did the ground get closer? No way, you did become smaller!");
+            player.tallness -= (1 + rand(5));
+        }
         if (player.lowerBody != LowerBody.SQUIRREL && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
                 outputText("\n\nYou have trouble standing as multiple flashes of sensation run across your legs. " +
@@ -9878,7 +9882,8 @@ public final class Mutations extends MutationsHelper {
                         "You yelp as the bones in your feet split and rearrange themselves into paws." +
                         "Eventually, the sensation ebbs and you slowly get used to your <b>squirrel paws!</b>");
                 setLowerBody(LowerBody.SQUIRREL);
-            } else humanizeLowerBody();
+            }
+			else humanizeLowerBody();
             changes++;
         }
         if (player.lowerBody == LowerBody.SQUIRREL && player.arms.type != Arms.SQUIRREL && changes < changeLimit && rand(3) == 0) {
@@ -9888,7 +9893,8 @@ public final class Mutations extends MutationsHelper {
                         "<b> with these new claws you could just climb and stick to any surface just like a squirrel.</b>");
                 setArmType(Arms.SQUIRREL);
                 if (player.coatColor == "") player.coatColor = player.hairColor;
-            } else humanizeArms();
+            }
+			else humanizeArms();
             changes++;
         }
 
@@ -9916,16 +9922,25 @@ public final class Mutations extends MutationsHelper {
                         "Putting your hands to your ears you discover they are now covered with a fair amount of fur. " +
                         " <b>You now have squirrel ears.</b>");
                 setEarType(Ears.SQUIRREL);
-            } else humanizeEars();
+            }
+			else humanizeEars();
             changes++;
         }
+		if ((player.faceType == Face.SMUG || player.faceType == Face.SQUIRREL) && player.tongue.type != Tongue.RATATOSKR && changes < changeLimit && rand(3) == 0) {
+			outputText("\n\nYour tongue begins to feel stingy and dry, your throat too. You have difficulty speaking so you drink some water and try some basic pronunciation exercises. " +
+				"You find out to your absolute surprise you now have a talent with words and linguistics that you didn't use to, heck it's like the range and variety of sounds you can make just doubled. " +
+				" <b>Your skill with words just improved by leaps and bounds with your new Ratatoskr tongue.</b>");
+			setTongueType(Tongue.RATATOSKR);
+			changes++;
+		}
         if (player.ears.type == Ears.SQUIRREL && player.eyes.type != Eyes.RATATOSKR && changes < changeLimit && rand(3) == 0) {
             if (player.eyes.type == Eyes.HUMAN) {
                 player.eyes.colour = randomChoice(Ratatoskr_EyeColour);
                 outputText("\n\nGeeze you know so much now it's like everyone around you is an idiot. How come they don't know about this and that is beyond you." +
                         " <b>It's going to be hard to wipe away that somewhat permanent know it all smug expression from your face when you’re spreading words around your [eyecolor] eyes looking down teasingly on about everyone.</b>");
                 setEyeType(Eyes.RATATOSKR);
-            } else humanizeEyes();
+            }
+			else humanizeEyes();
             changes++;
         }
         if (player.hairType != Hair.RATATOSKR && changes < changeLimit && rand(4) == 0) {
@@ -16976,4 +16991,4 @@ public final class Mutations extends MutationsHelper {
     }
 
 }
-}
+}

@@ -2934,6 +2934,7 @@ use namespace CoC;
 				{name: 'jiangshi', score: jiangshiScore(), minscore: 20},
 				{name: 'gargoyle', score: gargoyleScore(), minscore: 20},
 				{name: 'kamaitachi', score: kamaitachiScore(), minscore: 7},
+				{name: 'ratatoskr', score: ratatoskrScore(), minscore: 6},
 			];
 
 			ScoreList = ScoreList.filter(function(element:Object, index:int, array:Array):Boolean {
@@ -3681,7 +3682,7 @@ use namespace CoC;
 				if (TopScore >= 7) {
 					if (TopScore >= 18) {
 						race = "greater kamaitachi";
-					} else if (TopScore >= 15) {
+					} else if (TopScore >= 14) {
 						race = "kamaitachi";
 					} else {
 						race = "half kamaitachi";
@@ -3692,7 +3693,7 @@ use namespace CoC;
 				if (TopScore >= 6) {
 					if (TopScore >= 18) {
 						race = "ratatoskr";
-					} else if (TopScore >= 15) {
+					} else if (TopScore >= 12) {
 						race = "squirrel morph";
 					} else {
 						race = "half squirrel morph";
@@ -4406,6 +4407,10 @@ use namespace CoC;
 				chimeraCounter++;
 			if (darkgooScore() >= 13)
 				chimeraCounter++;
+			if (kamaitachiScore() >= 14)
+				chimeraCounter++;
+			if (ratatoskrScore() >= 12)
+				chimeraCounter++;
 
 			End("Player","racialScore");
 			return chimeraCounter;
@@ -4458,6 +4463,10 @@ use namespace CoC;
 			if (magmagooScore() >= 17)
 				grandchimeraCounter++;
 			if (darkgooScore() >= 17)
+				grandchimeraCounter++;
+			if (kamaitachiScore() >= 18)
+				grandchimeraCounter++;
+			if (ratatoskrScore() >= 18)
 				grandchimeraCounter++;
 
 			End("Player","racialScore");
@@ -7112,7 +7121,7 @@ use namespace CoC;
 			return raijuCounter;
 		}
 
-		//Raiju score
+		//Ratatoskr score
 		public function ratatoskrScore():Number {
 			Begin("Player","racialScore","ratatoskr");
 			var ratatoskrCounter:Number = 0;
@@ -7143,7 +7152,9 @@ use namespace CoC;
 			if (coatColor == "brown" || coatColor == "light brown" || coatColor == "caramel" || coatColor == "chocolate" || hairColor == "russet")
 				ratatoskrCounter++;
 			if (hasCoatOfType(Skin.FUR) || hasPartialCoat(Skin.FUR))
-				ratatoskrCounter += 1;
+				ratatoskrCounter++;
+			if (tallness < 48)
+				goblinCounter++;
 			//if (findPerk(PerkLib.HeartOfTheStorm) >= 0)
 			//	ratatoskrCounter++;
 			//if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0)
@@ -7165,7 +7176,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && ratatoskrCounter >= 8)
 				ratatoskrCounter += 1;
 			if (isGargoyle()) ratatoskrCounter = 0;
-			ratatoskrCounter = finalRacialScore(ratatoskrCounter, Race.RAIJU);
+			ratatoskrCounter = finalRacialScore(ratatoskrCounter, Race.RATATOSKR);
 			End("Player","racialScore");
 			return ratatoskrCounter;
 		}
@@ -10966,16 +10977,16 @@ use namespace CoC;
 					maxWisCap2 += 100;
 					minSen += 50;
 				}
-				else if (kamaitachiScore() >= 15) {
+				else if (kamaitachiScore() >= 14) {
 					maxStrCap2 -= 20;
-					maxSpeCap2 += 155;
+					maxSpeCap2 += 140;
 					maxIntCap2 += 45;
 					maxWisCap2 += 70;
 					minSen += 25;
 				}
 				else {
 					maxStrCap2 -= 10;
-					maxSpeCap2 += 70;
+					maxSpeCap2 += 65;
 					maxIntCap2 += 20;
 					maxWisCap2 += 40;
 					minSen += 10;
@@ -10983,14 +10994,14 @@ use namespace CoC;
 			}
 			if (ratatoskrScore() >= 6) {
 				if (ratatoskrScore() >= 18) {
-					maxStrCap2 -= 20;
+					maxStrCap2 -= 25;
 					maxSpeCap2 += 140;
-					maxIntCap2 += 150;
+					maxIntCap2 += 155;
 				}
-				else if (ratatoskrScore() >= 15) {
+				else if (ratatoskrScore() >= 12) {
 					maxStrCap2 -= 20;
-					maxSpeCap2 += 120;
-					maxIntCap2 += 125;
+					maxSpeCap2 += 95;
+					maxIntCap2 += 105;
 				}
 				else {
 					maxStrCap2 -= 10;

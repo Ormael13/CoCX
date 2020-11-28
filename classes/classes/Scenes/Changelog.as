@@ -89,6 +89,7 @@ package classes.Scenes
 			outputText("-Jobs: Enchanter, Eromancer, Healer get a small bonus to mana regenerations (the same like Job: Elemental Conjuer have (+5)). Also amount of mana regen gained by possesing Star Sphere was decreased by 1/3.\n");
 			outputText("-New submenu in Perks page that allow to convert perk points into super perk points or to buy perks for those super perk points.\n");
 			outputText("-New event perk: Hidden Job: Blood Demon. Gained by spending 1 super perk point. Effects: Allow to reach OverMax HP equal to 5x current Tou score, enable toggle to switch between using or not blood instead of mana to power spells (excluding healing type spells).\n");//, allowing to learn Blood magic spells from Red Manuscript
+			outputText("-New TF item (by Liandri): Smarty Nuts. Gained by ... Using this item would turn PC into Ratatoskr (squirrel-morph). Racial bonuses for Half squirrel-morph (6+) /  squirrel-morph (12+) / Ratatoskr (18+): -10/20/25% to Str multi, +60/90/140% to Spe multi, +40/95/155% to Int multi\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -100,8 +101,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//, allowing to learn Blood soulskills from Crimson Jade
 			outputText("-\n");
 			outputText("-\n");//New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies. Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
