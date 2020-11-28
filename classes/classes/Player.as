@@ -7154,7 +7154,7 @@ use namespace CoC;
 			if (hasCoatOfType(Skin.FUR) || hasPartialCoat(Skin.FUR))
 				ratatoskrCounter++;
 			if (tallness < 48)
-				goblinCounter++;
+				ratatoskrCounter++;
 			//if (findPerk(PerkLib.HeartOfTheStorm) >= 0)
 			//	ratatoskrCounter++;
 			//if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0)
