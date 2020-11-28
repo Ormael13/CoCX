@@ -759,11 +759,11 @@ public function chichiSexHinezumiYuri():void {
 public function mishapsLunaChiChi():void {
 	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
-	outputText("As you go to visit Chi Chi you hear her scream. Running over to check whats going on you notice the fire mouse is now a sobbing mess, wet with water. You don’t recall her crying before so this must be serious.\n\n");
+	outputText("As you go to visit Chi Chi, you hear her scream. Running over to check what's going on you notice the fire mouse is now a sobbing mess, wet with water. You don’t recall her crying before so this must be serious.\n\n");
 	outputText("\"<i>Why why? Why would someone put a bucket right above my bedroll now I’m all wet and my fire will take hours to rise again!</i>\"\n\n");
-	outputText("She notice you checking her and panic.\n\n");
+	outputText("She notices you checking on her and panic.\n\n");
 	outputText("\"<i>Eep go away [name]! D..don’t look at me!! The last thing I need is you looking at me right now.</i>\"\n\n");
-	outputText("That’s quite the surprise. Does the proud fighter she normaly is turn into an awkward village girl the moment shes wet? Well regardless you guess you will have to visit her later because there’s no way she’s letting you approach her right now.\n\n");
+	outputText("That’s quite a surprise. Does the proud fighter facade drop when she’s wet? Well, regardless you guess you will have to visit her later because there’s no way she’s letting you approach her right now.\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampLunaMishaps2)) player.addStatusValue(StatusEffects.CampLunaMishaps2, 4, 1);
 	else player.createStatusEffect(StatusEffects.CampLunaMishaps2, 0, 0, 0, 1);
 	if (!player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.createStatusEffect(StatusEffects.LunaWasCaugh, 1, 0, 0, 0);

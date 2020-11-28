@@ -3338,7 +3338,8 @@ private function suckJojosCock():void {
 
 public function mishapsLunaJojo():void {
 	clearOutput();
-	outputText("Jojo is looking at the ground in front of his training area in annoyance. Seems someone has drawn an ugly imp in the dirt using red paint and the imp happens to be jerking a 10 foot long cock. You spot Luna in the distance, cleaning the area with a smile. Surely it couldn’t have been her.\n\n");
+	outputText("Jojo is looking at the ground in front of his training area in annoyance. Seems someone has drawn an ugly imp in the dirt using red paint and the imp happens to be jerking a 10 foot long cock." +
+			" There is text along with it, “Give in, you know you want it.” You spot Luna in the distance, cleaning the area with a smile. Surely it couldn’t have been her.\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampLunaMishaps1)) player.addStatusValue(StatusEffects.CampLunaMishaps1, 2, 1);
 	else player.createStatusEffect(StatusEffects.CampLunaMishaps1, 0, 1, 0, 0);
 	if (!player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.createStatusEffect(StatusEffects.LunaWasCaugh, 1, 0, 0, 0);

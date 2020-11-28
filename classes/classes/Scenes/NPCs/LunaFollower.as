@@ -17,7 +17,8 @@ package classes.Scenes.NPCs
 	import classes.BodyParts.Tail;
 	import classes.BodyParts.Tongue;
 	import classes.BodyParts.Wings;
-	import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.SceneLib;
 	import classes.Items.MutationsHelper;
 import classes.Stats.Buff;
@@ -120,12 +121,12 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			if (flags[kFLAGS.LUNA_FOLLOWER] < 7) {
-				outputText("Luna is a human maid. She wears the classic maid uniform and bonnet at all times. Her golden eyes always look to you, paying close attention, waiting for any potential orders. That said, her face is not bad to look at and she could pass for cute. Her ashen hair fits her perfectly.\n\n");
+				outputText("Luna is a human maid. She wears the classic maid uniform and bonnet at all times. Her golden eyes always look to you, paying close attention, waiting for any potential orders. That said, her face is not bad to look at and she could pass for cute. Her ashen hair, partially concealed beneath her white bonnet, fits her perfectly.\n\n");
 				outputText("Luna’s body looks average, with a modest C cup breast size and generally decent female proportions. Her thighs are about that which you would expect of an ordinary human woman. She wears a pair of tidy black shoes on her delicate feet.\n\n");
 			}
 			else {
 				outputText("Luna is a werewolf. While she spends most of the day as a regular human maid, at night or when she’s angry, she turns into a hybrid between human and beast. She normally wears the classic maid uniform and bonnet at all times but prefers to go naked, especially on full moon nights when she risks accidentally destroying her clothes. Her golden eyes ever look at you with attention, waiting for any potential order. ");
-				outputText("You know better and can sometimes spot the flash of a green glow, which is the only warning of the beast within when she assumes human shape. That said, her face is not bad to look at and she could pass for cute, even when she flashes a pair of canines more fitting a wolf than a human or, even that panting tongue of hers. Her ashen hair fits her perfectly, and she makes sure to carefully brush it after a full moon. ");
+				outputText("You know better and can sometimes spot the flash of a green glow, which is the only warning of the beast within when she assumes human shape. That said, her face is not bad to look at and she could pass for cute, even when she flashes a pair of canines more fitting a wolf than a human or, even that panting tongue of hers. Her ashen hair fits her perfectly, and she makes sure to carefully brush and comb it after a full moon so that she appears formal at any given time. Her ears look human but they migrate to the top of her head when she assumes her beast form. ");
 				outputText("Her ears right now look human but migrate to the top of her head when she assumes beast form.\n\nMost of the time, Luna’s body looks about average with a modest C cup breast size and generally decent female proportions. However, on the night of a full moon, her body changes to a shape more befitting her tainted nature. With DD size breasts and an hourglass shape that would make any jaw drop. ");
 				outputText("Her thighs are about the size that you’d expect of an ordinary human woman, at least when the moon isn’t full. She wears a pair of tidy black shoes on her delicate feet but removes them at night, so as to prevent them from exploding when her feet turn into clawed paws.\n\n");
 			}
@@ -152,11 +153,12 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("How long has she worked as a maid?\n\n");
-			outputText("\"<i>Um... it’s  been a while. I recall entering the service at a very young age and bounced from master to master several times. I don’t think that event at the magic shop counts, however.</i>\"\n\n");
+			outputText("\"<i>Um… it’s been a while. I recall entering the service at a very young age and bounced from master to master several times. I don’t think that event at the magic shop counts, however.</i>\"\n\n");
 			outputText("You don’t push the subject, deciding instead to ask her how it feels to be a maid?\n\n");
-			outputText("\"<i>Wonderful actually! I get a person I get to take care of in every possible way and I get tons of resources to do it. Ah, [name], that smile on my master’s face while eating a perfectly cooked meal, that relieved sigh you make when I ease your rest, that peaceful look in your face when you sleep...</i>\"\n\n");
-			outputText("You are starting to ask yourself whether Luna is a maid, or a complete stalker, but then realise that all of this is also part of her job.");
-			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) outputText(" You did however spot a beastly green flash in her eyes as she spoke, so perhaps she is using her job as an excuse to stalk you after all.");
+			outputText("\"<i>Wonderful actually! I work for a person I get to take care of in every possible way and gods be my witness, I have all the resources I need to do it. Ah [name], that smile on my master’s face while eating a perfectly cooked meal. That relieved sigh the master makes when it relaxes, that peaceful look in its face when it sleep…</i>\"\n\n");
+			outputText("You are starting to ask yourself whether Luna is a maid, or a complete stalker, but then realize that all of this is also part of her job.");
+			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) outputText(" You did however spot a beastly green flash in her eyes as she spoke, so perhaps she could be using her job as an excuse to stalk you after all.");
+			if (player.cor >= 60) outputText("\n\nNot that you mind it that much so long as she wilingly offers her body to you when you need it.");
 			lunaJealousy(-100);
 			lunaAffection(2);
 			doNext(camp.returnToCampUseOneHour);
@@ -165,7 +167,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			outputText("Just what can she do for you, exactly? No one in Ingnam was rich enough to employ a maid, and you barely understand what the job exactly entails.\n\n");
-			outputText("\"<i>Well, I am a maid. I do cleaning, cooking, nursing, and even a few side jobs you don’t want to think about, like washing the dishes and pest control. That said, if you ever need anything from me just ask.");
+			outputText("\"<i>Well, I am a maid. I do cleaning, cooking, nursing, and even a few side jobs you don’t want to think about, like washing the dishes and pest control. That being said, if you ever need anything from me just ask.");
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) outputText(" Also, I...I suppose I wouldn’t mind relieving you of any “needs” you may have, that's also part of my job!");
 			outputText("</i>\"\n\nWell, you will make sure to make proper use of her services.\n\n");
 			if (flags[kFLAGS.LUNA_FOLLOWER] < 5) flags[kFLAGS.LUNA_FOLLOWER] = 5;
@@ -180,12 +182,29 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				outputText("She lied to you when she said she was human. Why?\n\n");
 				outputText("\"<i>I used to be human. Or rather... well, it’s very complicated.</i>\"\n\n");
 				outputText("You tell her to go on.\n\n");
-				outputText("\"<i>I came from a different world, not unlike this one. After I landed in Mareth by accident while cleaning the shop, I had to survive in the wild. On one night, a werewolf, not unlike me, attacked me and turned me into the monster I am now. I suspect the original werewolves to be demonic creations engineered to spread this magical disease everywhere. ");
-				outputText("I believe the demons intend to replace the various morphs and any remaining humans like me in Mareth with sex crazed animal hybrids.The disease isn’t limited to the form of a wolf either, as I know that there are werecats out there.</i>\"\n\n");
+				outputText("\"<i>I came from a different world, not unlike this one. After I landed in Mareth by accident while cleaning the shop, I had to survive in the wild. One night a werewolf, not unlike me, attacked me and turned me into the monster I am now. I suspect the original werewolves to be demonic creations engineered to spread this magical disease everywhere. ");
+				outputText("I believe the demons intend to replace the various morphs and any remaining humans like me in Mareth with sex crazed animal hybrids. The disease isn’t limited to the form of a wolf either, as I know that there are werecats out there.</i>\"\n\n");
+				outputText("What about the part when she came to town?\n\n");
+				outputText("\"<i>Oh that one was one hundred percent genuine except I did not run for my life, rather I fought my way there beating the crap out of everything that tried and got the jump on me." +
+						" I was looking pretty miserable by the time I hit town but quickly found a master to serve washed up, combed my messy hair, and put on a proper work uniform. After that it's just been the standard maid life for me." +
+						" I was working as a maid by day and indulging my inner beast by night hunting out of town for anything to satisfy my carnal urges. That all went pretty well until I started working for master William." +
+						" He… well he was something else, I slowly began to lose control and as William's wife got wind of how much I was eyeing her husband she decided to kick me out by any means necessary." +
+						" So uh one day when she was out I drugged his tea and did the whole setup with the rope and bed but she came back early and caught me in the act the rest goes about how you'd expect it." +
+						" She kicked me out of the house and threatened to call the guards if I ever shown up again bitch be lucky it was on a new moon day or I would've bitten her out of anger but it's barely if I can stand my ground when I'm at my weakest.</i>\"\n\n");
+				outputText("Wait she drugged his tea? Has she been inserting any weird seasoning in your food too?\n\n");
+				outputText("\"<i>No why would I do that? Besides");
+				if(!(flags[kFLAGS.MARRIAGE_FLAG] != 0 && flags[kFLAGS.MARRIAGE_FLAG] != 1))outputText(", it's not like your formally married yet and…");
+				outputText(" my body is yours to take any time you desire it " + player.mf("master","mistress") + ".</i>\"\n\n");
+				outputText("She winks playfully, a green glow in her eye. Guess there's no killing that beast inside her but at least you feel safe knowing she won't go so far as to drug and tie you.");
 			}
 			else {
 				outputText("Are your eyes deceiving you, or is she truly a genuine human?\n\n");
 				outputText("\"<i>Well, of course I’m human, I came from a different world. That said, it was an accident, I didn’t come here because I wanted to. See, I used to work cleaning things in a magic shop and accidentally triggered some arcane device that looked like a mirror, it sucked me in and next thing I knew I was in this dimension.</i>\"\n\n");
+				outputText("What happened afterward?\n\n");
+				outputText("\"<i>Well, I ran, it's like no matter I went something would come out and try to hurt me or worse but somehow I managed to find the city of Tel Adre more or less with some help from a woman with black hairs." +
+						" Didn't say her name ever but I recall her intense stare toward me as if she was hoping to see something in me, that stare creeped me out." +
+						" Regardless, thanks to her somewhat vague indication I found the city and got hired for a job.</i>\"\n\n");
+
 			}
 			lunaJealousy(-100);
 			lunaAffection(2);
@@ -204,12 +223,21 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 		public function talkMenuLunaStopJealousy():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
-			outputText("Luna loses all color the moment she sees that expression on your face but still attempt to start the conversation.\n\n\"<i>Oh uh is something on the good " + player.mf("master","mistress") + " mind?</i>\"\n\n" +
+			outputText("Luna loses all color the moment she sees that expression on your face but still attempts to start the conversation." +
+					"\n\n\"<i>Oh, uh, is something on the good " + player.mf("master's","mistress") + " mind?</i>\"\n\n" +
 					"Hell that there is something, you know everything about how she's been sneakily making tons of trouble around camp in an attempt to stop anyone else from talking to you and you are not exactly happy about it.\n\n" +
-					"\"<i>But " + player.mf("Master","Mistress") + ", you have been ignoring me for weeks. I labor for you freely only wishing for the slightest acknowledgement yet you gave me none.</i>");
-			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) outputText("\"<i>What is my unconditional love even worth to you? Am I but an object free for you to dispose of once you tire of it? What of my feelings as a person?</i>\"");
-			outputText("\n\nShe is kind of right come to think of it, you definitely have been neglecting her and this was her way of desperately attempting to draw attention to herself. " +
-					"You promise Luna that you will be more considerate of her from now on. This said she has to stop these acts of passive aggression here and now. She winces her teeth but nods.");
+					"\"<i>But " + player.mf("Master","Mistress") + ", you have been ignoring me for weeks. I labor for you freely only wishing for the slightest acknowledgment yet you gave me none.</i>");
+			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) outputText("\"<i>What is my unconditional love even worth to you? ")
+			outputText("Am I but an object free for you to dispose of once you tire of it? What of my feelings as a person?</i>\"\n\n");
+			if (flags[kFLAGS.LUNA_FOLLOWER] < 6){
+				outputText("While she may have a point, it’s not your job to babysit her all the time, after all, she wanted to be a maid, not some personal caterer, unless she wants to be more than some maid?" +
+					" Relenting, you state that you’ll be sure to give her a little more attention and be more considerate of her from now on. " +
+					"This said she has to stop these acts of passive aggression here and now. She winces her teeth but nods. ");
+			}
+			else {
+				outputText("She is kind of right come to think of it, the werewolf maid labors and work every hours of the desesperate for even a glimpse of your affection and you definitely have been neglecting her. This was her way of desperately attempting to draw attention to herself when you would grant her none. " +
+						"You promise Luna that you will be more considerate of her from now on. This said she has to stop these acts of passive aggression here and now. She winces her teeth but nods. This said the green glow in her eyes tells you that she isn't gunna let you off the hook so easily if you fail to keep your word.");
+			}
 			player.createStatusEffect(StatusEffects.LunaWasWarned, 0,0,0,0);
 			player.removeStatusEffect(StatusEffects.LunaWasCaugh);
 			lunaJealousy(-100);
@@ -222,7 +250,9 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			outputText("So what's it exactly like to be a werewolf? Aside from it making you howl at the moon.\n\n");
 			outputText("\"<i>Well, my hormonal system is totally messed up as the lunar cycle causes me to go into heat.The closer we lycanthropes get to the full moon, the hornier we get, until we all turn into sex crazed beasts willing to go so far as to rape innocent people for a good fuck. That said, sex is not all there is to it. We are all gifted with the ability to change form at will, and I know for a fact that we’re also faster, ");
 			outputText("stronger, and sturdier than any normal morph or human. There is no known permanent cure to lycanthropy. The truth is that, while I could change into something different using transformatives, I think that so long as whatever I transform into is an animal I would still go mad during a full moon. Even worse, my bite can turn about anyone into a lycanthrope the same as me.</i>\"\n\n");
-			outputText("Guess she really is more than just a cute pup.\n\n");
+			outputText("Guess she really is more than just a cute pup. As you ponder the dangers of having her around camp Luna tries to reassure you right away\n\n");
+			outputText("\"<i>Don't you worry " + player.mf("Master","Mistress") + ", I'm not dangerous. Well… so long as you take good care of me that is. I can't control my urges that well if I'm left alone for too long, it gets easier for me to slip and lose control.</i>\"\n\n");
+			outputText("That wasn't reassuring in the least!\n\n");
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 11) flags[kFLAGS.LUNA_FOLLOWER] = 13;
 			else flags[kFLAGS.LUNA_FOLLOWER] = 14;
 			lunaJealousy(-100);
@@ -546,13 +576,14 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) {
 				if (player.hasStatusEffect(StatusEffects.LunaWasWarned)){
 					if (PCIsAwake){
-						outputText("Just as you are about to take a break Luna approaches you tossing her clothes to the side, her intentions quite clear. A few second later Luna is right you already naked and smirking, a green glint dancing in her eyes.\n\n");
+						outputText("Just as you are about to take a break Luna approaches you tossing her clothes to the side, her intentions quite clear. A few second later Luna is right next to you already naked and smirking, a green glint dancing in her eyes.\n\n");
 					} else {
 						outputText("You would close your eyes and sleep, but the sound of footsteps alerts you to the fact that you are not alone unable to find sleep tonight. Luna right above you already naked and smirking, a green glint dancing in her eyes.\n\n");
 					}
 					outputText("\"<i>Sorry [name] I can’t hold myself anymore.</i>\"\n\n");
-					outputText("Oh no it's happening again! Luna is totally going to try and jump you, you can already see her beginning to transform as she prepare to force herself upon you.\n\n");
-					outputText("This is quickly going to get out of hand. How will you answer to her advances?\n\n");
+					outputText("Oh no it's happening again! Luna is totally going to jump you, you can already see her beginning to transform as she prepares to make a second attempt.\n\n");
+					outputText("This is quickly going to get out of hand. How will you answer her advances?\n\n");
+
 				}
 				else{
 					if (PCIsAwake) {
@@ -572,7 +603,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					if (PCIsAwake) outputText("anywhere ");
 					else outputText("to bed ");
 					outputText("without some sex first as Luna intends to bang you one way or another. You've been neglecting her of late and she's not letting you get away with it. " +
-							"Without much surprise, her already naked form indeed takes on a beastial shape. She sits in a waiting position, reminiscent of a good dog waiting on its treat.\n\n");
+							"Unsurprisingly, her already naked form indeed takes on a beastial shape. She sits in a waiting position, reminiscent of a good dog waiting on its treat.\n\n");
 					if (PCIsAwake)outputText("\"<i>Well " + player.mf("Master","Mistress") + ", we can do this two ways, either you resist and I get rough or we can have loving sex here and now. So what will it be?</i>\"\n\n");
 					else outputText("\"<i>Well " + player.mf("Master","Mistress") + ", you already know why I am here, so let's get wild ok? I have been waiting eagerly for this.</i>\"\n\n");
 							flags[kFLAGS.LUNA_JEALOUSY] = 0;
@@ -584,17 +615,21 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				} else {
 					outputText("You would close your eyes and sleep, but the sound of footsteps alerts you to the fact that you are not alone unable to find sleep tonight. Luna right above you already naked and smirking, a green glint dancing in her eyes.\n\n");
 				}
-				outputText("\"<i>I can’t hold it anymore, " + player.mf("Master","Mistress") + ". I tried to but the things you do to me... the things I wish you would do to me... it's been intolerable. It's all your fault, after all you pushed me to do this.</i>\"\n\n");
+				outputText("\"<i>I can’t hold it anymore, " + player.mf("Master","Mistress") + ". I tried to but the things you did to me... the things I wish you would do to me… it's been intolerable. It's all your fault, after all you pushed me to do this.</i>\"\n\n");
 				outputText("What the hell is she talking about, you’ve done nothing of the sort.\n\n");
-				outputText("\"<i>Oh but you've been ignoring and neglecting me again [name], despite your promise, I love you unconditionally but you have hurt me and deep down I'm unsure if the sentiment is even shared, is my love not enough? " +
-						"Is my service not enough? Is my body that I offer to you on display free for you to use at all times not to your liking, " + player.mf("Master","Mistress") + "? " +
-						"Don’t worry, now that the moon is at its peak I’m finally ready, ready to make you realise how much you truly love me, if only for a few minutes I will FINALLY get you to love me. You can’t deny us behing a thing anymore, [name]!</i>\"\n\n");
+				outputText("\"<i>Oh but you've been ignoring and neglecting me again [name], despite your promise, I love you unconditionally but you have hurt me and deep down I'm unsure if the sentiment is even shared, is my love not enough? Is my service not enough? Is my body that I offer to you at every waking moment... on display, and free for you to use at all times, not to your liking, " + player.mf("Master","Mistress") + "? " +
+						"Don’t worry, now that the moon is at its peak I’m finally ready, ready to make you realize how much you truly love me. Even if only for a few minutes I will FINALLY get you to love me. You can’t deny us anymore, [name]!</i>\"\n\n");
 
-				outputText("A green flash appears in her brown eyes as they turn increasingly bestial. Her naked body shivers as fur begins to cover it, her hands and feet turn into paws her irises glow fluorescent green. Fur swiftly cover her arms up to a little under the shoulders and her legs up to the tight. The transformation ends with a bushy tail and a pair of animal ears at the top of her head. ");
-				outputText("She pants in delight at the pleasure of the change, revealing a dog like tongue and canines way too long and sharp to belong on any humans. Just what is she!?\n\n");
-				outputText("\"<i>See? I’m a werewolf, [name]. A fiend created by demonic magic that changes between hybrid and human shape at will. This is the second reason my former master fired me for. I’m a monster. " +
-						"At first I tried to hide it, for your sake, but you’ve been teasing me for so long now I can’t hold it in anymore. I'm going to make you mine!</i>\"\n\n");
-				outputText("This is quickly going to get out of hand. How will you answer to her advances?\n\n");
+				outputText("A green flash appears in her brown eyes as they turn increasingly bestial." +
+						" Her naked body shivers as fur begins to cover it, her hands and feet turn into paws her irises glow fluorescent green." +
+						" Fur swiftly covers her arms up to a little under the shoulders and her legs up to the tight." +
+						" The transformation ends with a bushy tail and a pair of animal ears at the top of her head." +
+						" She pants in delight at the pleasure of the change, revealing a dog like tongue and canines way too long and sharp to belong to any humans." +
+						" Just what is she!?\n\n");
+				outputText("\"<i>See? I’m a werewolf, [name]. A beast created by demonic magic that changes between hybrid and human shape at will. This is the second reason my former master fired me for." +
+						" I’m a monster. At first I tried to hide it, for your sake, but you’ve been teasing me for so long now I can’t hold it in anymore." +
+						" I'm going to make you mine!</i>\"\n\n");
+				outputText("This is quickly going to get out of hand. How will you answer her advances?\n\n");
 				flags[kFLAGS.LUNA_JEALOUSY] = 0;
 			}
 			else {
@@ -609,12 +644,12 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				outputText("A green flash appears in her brown eyes as they turn increasingly bestial. Her naked body shivers as fur begins to cover it, her hands and feet turn into paws her irises glow fluorescent green. Fur swiftly cover her arms up to a little under the shoulders and her legs up to the tight. The transformation ends with a bushy tail and a pair of animal ears at the top of her head. ");
 				outputText("She pants in delight at the pleasure of the change, revealing a dog like tongue and canines way too long and sharp to belong on any humans. Just what is she!?\n\n");
 				outputText("\"<i>See? I’m a werewolf, [name]. A fiend created by demonic magic that changes between hybrid and human shape at will. This is the second reason my former master fired me for. I’m a monster. At first I tried to hide it, for your sake, but you’ve been teasing me for so long now I can’t hold it in anymore, especially with the coming full moon.</i>\"\n\n");
-				outputText("This is quickly going to get out of hand. How will you answer to her advances?\n\n");
+				outputText("This is quickly going to get out of hand. How will you answer her advances?\n\n");
 			}
 			menu();
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) addButton(0, "Accept", fullMoonEventAccept2);
 			else addButton(0, "Accept", fullMoonEventAccept);
-			if (player.dogScore() > 5 || player.wolfScore() > 5) addButtonDisabled(1, "Resist", "Your canine instincts kicks in, there is no way you can resist her advances.");
+			if (player.dogScore() > 5 || player.wolfScore() > 5) addButtonDisabled(1, "Resist", "Your canine instincts kick in, there is no way you can resist her advances.");
 			else addButton(1, "Resist", fullMoonEventResist);
 		}
 		public function fullMoonEventAccept():void {
@@ -919,8 +954,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			clearOutput();
 			outputText("As you mull over your options. Ayane comes over to do her report and stare at you both with wide eyes.\n\n");
 			outputText("\"<i>No way! You’re going to reward the mutt over your devoted priestess? I will have none of that! Luna, I challenge you to a duel to see who makes [name] cum first!</i>\"\n\n");
-			outputText("Luna give her a playful grin in response. \"<i>Challenge accepted, but you cannot hope to win against my spear polishing techniques!</i>\"\n\n");
-			outputText("Ayane cross her arms under her breast. \"<i>Do not underestimate the talents of the kitsunes, we have been at it since Taoth created us! I’m going to fill my belly full of that meal.</i>\"\n\n");
+			outputText("Luna gives her a playful grin in response. \"<i>Challenge accepted, but you cannot hope to win against my spear polishing techniques!</i>\"\n\n");
+			outputText("Ayane crosses her arms under her breast. \"<i>Do not underestimate the talents of the kitsunes, we have been at it since Taoth created us! I’m going to fill my belly full of that meal.</i>\"\n\n");
 			outputText("Whoa, since when did these two get so competitive?! You decide the best way to stop their argument is to order them both to pleasure your [cock] at the same time.\n\n");
 			outputText("They both turn over at the same time yelling \"<i>Can do!</i>\" before throwing off their clothes in one swift motion and getting into position; Ayane under and Luna on top, their pussy and ass aligned together to perfectly sandwich your prick between them. Well now this is a hole you cannot refuse! Your [cock] hardens at the prospect of fucking this new hole just as you finish undressing. While you were busy, you didn’t notice the pair drooling in anticipation of your incoming pole" + (player.cocks.length == 1 ? "" : "s") + ". Foxes and wolves, you guess they're all canid after all. ");
 			outputText("You start to slide your tool" + (player.cocks.length == 1 ? "" : "s") + " between their waiting holes, their joined pussies having done an excellent job of lubricating the whole thing; the two of them moaning as your " + (player.cocks.length == 1 ? "cock grinds" : "cocks grind") + " on their puffed up vaginal flesh. ");
