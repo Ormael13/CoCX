@@ -38,6 +38,7 @@ import classes.Scenes.Areas.HighMountains.Harpy;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
+import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.EbonLabyrinth.ChaosChimera;
@@ -2315,7 +2316,7 @@ public class Combat extends BaseContent {
                 flags[kFLAGS.ARROWS_SHOT]++;
                 bowPerkUnlock();
             }
-            if (monster is EncapsulationPod)
+            if (monster is EncapsulationPod) {
                 outputText("The " + ammoWord + " lodges deep into the pod's fleshy wall");
             } else if (monster.plural) {
                 var textChooser1:int = rand(12);
@@ -2627,7 +2628,7 @@ public class Combat extends BaseContent {
                     outputText("The [weaponrange] bounces harmlessly off [monster a] [monster name].\n\n");
                 }
             }
-            if (monster is EncapsulationPod)
+            if (monster is EncapsulationPod) {
                 outputText("The [weaponrange] lodges deep into the pod's fleshy wall");
             } else if (monster.plural) {
                 var textChooser1:int = rand(12);
@@ -2863,7 +2864,7 @@ public class Combat extends BaseContent {
                     outputText("The " + ammoWord + " bounces harmlessly off [monster a] [monster name].\n\n");
                 }
             }
-            if (monster is EncapsulationPod)
+            if (monster is EncapsulationPod) {
                 outputText("The " + ammoWord + " lodges deep into the pod's fleshy wall");
                 if (player.isInGoblinMech()) {
                     if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot pod using the mech’s repeater gun for ");
@@ -3166,7 +3167,7 @@ public class Combat extends BaseContent {
         else outputText("\n");
         dynStats("lus", lustChange, "scale", false);
         if (player.lust >= player.maxLust()) {
-            if (monster is EncapsulationPod)
+            if (monster is EncapsulationPod) {
                 outputText("<b>You nearly orgasm, but the terror of the situation reasserts itself, muting your body's need for release.  If you don't escape soon, you have no doubt you'll be too fucked up to ever try again!</b>\n\n");
                 player.lust = (player.maxLust() - 1);
                 dynStats("lus", -25);
@@ -8688,7 +8689,7 @@ public class Combat extends BaseContent {
             addButton(0, "Next", combatMenu, false);
             return;
         }
-        if (monster is EncapsulationPod)
+        if (monster is EncapsulationPod) {
             clearOutput();
             outputText("You can't grab something you're trapped inside of!");
             //Gone		menuLoc = 1;
@@ -8811,7 +8812,7 @@ public class Combat extends BaseContent {
                 addButton(0, "Next", combatMenu, false);
                 return;
             }
-            if (monster is EncapsulationPod)
+            if (monster is EncapsulationPod) {
                 clearOutput();
                 outputText("You can't straddle something you are inside off!");
                 //Gone		menuLoc = 1;
