@@ -3543,7 +3543,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		if (monster.short == "pod") {
+		if (monster is EncapsulationPod)
 			clearOutput();
 			outputText("You can't pounce something you're trapped inside of!");
 			//Gone		menuLoc = 1;
@@ -3589,7 +3589,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		if (monster.short == "pod") {
+		if (monster is EncapsulationPod)
 			clearOutput();
 			outputText("You can't grab something you're trapped inside of!");
 			//Gone		menuLoc = 1;
@@ -3636,7 +3636,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		if (monster.short == "pod") {
+		if (monster is EncapsulationPod)
 			clearOutput();
 			outputText("You can't slap something you're trapped inside of!");
 			//Gone		menuLoc = 1;
@@ -3732,7 +3732,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		if (monster.short == "pod") {
+		if (monster is EncapsulationPod)
 			clearOutput();
 			outputText("You can't land into something you're trapped inside of!");
 			//Gone		menuLoc = 1;
