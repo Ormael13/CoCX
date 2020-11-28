@@ -11,7 +11,7 @@ import classes.StatusEffects.Combat.CalledShotDebuff;
 public class Helspawn extends Monster
 	{
 
-		override public function doAI():void
+		override protected function performCombatAction():void
 		{
 			var choices:Array = [];
 			choices[choices.length] = helspawnTwinStrikes;

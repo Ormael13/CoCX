@@ -118,7 +118,7 @@ import classes.Scenes.SceneLib;
 			outputText("\"<i>Oh man I can't wait to go hilt-deep in that pussy... I'm going to wreck " + player.mf("him", "her") + ",</i>\" promises one bull to his brother.  The other laughs and snorts, telling him how he'll have to do the deed during sloppy seconds.  It quickly escalates, and soon, every single one of the beast-men is taunting the others, bickering over how and when they'll get to have you.  While they're wasting their time, it's your chance to act!");
 		}
 
-		override public function doAI():void
+		override protected function performCombatAction():void
 		{
 			game.spriteSelect(94);
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 0;
