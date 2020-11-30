@@ -5079,6 +5079,7 @@ public class Combat extends BaseContent {
             if (monster.statusEffectv3(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
             if (monster.statusEffectv4(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.1 * monster.statusEffectv4(StatusEffects.AcidDoT)));
         }
+		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -5148,6 +5149,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
         if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
@@ -5219,6 +5221,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
         if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.925;
         if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
         if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
@@ -5306,6 +5309,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
         if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasStatusEffect(StatusEffects.FrostburnDoT) && monster.statusEffectv3(StatusEffects.FrostburnDoT) > 0) damage *= (1 + (0.5 * monster.statusEffectv3(StatusEffects.FrostburnDoT)));
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
         if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
@@ -5388,6 +5392,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
         if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
         if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
         if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
@@ -5468,6 +5473,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
         if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
         if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.2;
         if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.5;
@@ -5543,6 +5549,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
         if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
@@ -7063,6 +7070,30 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownWindScythe, 1, -1);
             }
         }
+        //Knowledge overload
+        if (player.hasStatusEffect(StatusEffects.CooldownKnowledgeOverload)) {
+            if (player.statusEffectv1(StatusEffects.CooldownKnowledgeOverload) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownKnowledgeOverload);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownKnowledgeOverload, 1, -1);
+            }
+        }
+        //Provoke
+        if (player.hasStatusEffect(StatusEffects.CooldownProvoke)) {
+            if (player.statusEffectv1(StatusEffects.CooldownProvoke) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownProvoke);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownProvoke, 1, -1);
+            }
+        }
+        //Weird words
+        if (player.hasStatusEffect(StatusEffects.CooldownWeirdWords)) {
+            if (player.statusEffectv1(StatusEffects.CooldownWeirdWords) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownWeirdWords);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownWeirdWords, 1, -1);
+            }
+        }
         //Wing Buffet
         if (player.hasStatusEffect(StatusEffects.CooldownWingBuffet)) {
             if (player.statusEffectv1(StatusEffects.CooldownWingBuffet) <= 0) {
@@ -7581,10 +7612,10 @@ public class Combat extends BaseContent {
         if (player.weapon == weapons.SESPEAR) maxPercentRegen += 2;
         if (player.hasPerk(PerkLib.LustyRegeneration)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.EclipticMindFinalForm)) maxPercentRegen += 1.5;
-        if (player.hasPerk(PerkLib.LizanRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1.5;
-        if (player.hasPerk(PerkLib.LizanMarrow) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 0.5;
-        if (player.hasPerk(PerkLib.LizanMarrowEvolved) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1;
-        if (player.hasPerk(PerkLib.LizanMarrowFinalForm) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) {
+        if (player.hasPerk(PerkLib.LizanRegeneration)) maxPercentRegen += 1.5;
+        if (player.hasPerk(PerkLib.LizanMarrow)) maxPercentRegen += 0.5;
+        if (player.hasPerk(PerkLib.LizanMarrowEvolved)) maxPercentRegen += 1;
+        if (player.hasPerk(PerkLib.LizanMarrowFinalForm)) {
 			maxPercentRegen += 1.5;
 			if (player.HP < (player.maxHP() * 0.25)) maxPercentRegen += 4.5;
 		}
@@ -7618,10 +7649,10 @@ public class Combat extends BaseContent {
         if (player.newGamePlusMod() >= 3) maxRegen += 1;
         if (player.newGamePlusMod() >= 4) maxRegen += 1;
         if (player.newGamePlusMod() >= 5) maxRegen += 1;
-        if (player.hasPerk(PerkLib.LizanRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxRegen += 1.5;
-        if (player.hasPerk(PerkLib.LizanMarrow) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxRegen += 0.5;
-        if (player.hasPerk(PerkLib.LizanMarrowEvolved) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxRegen += 1;
-        if (player.hasPerk(PerkLib.LizanMarrowFinalForm) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) {
+        if (player.hasPerk(PerkLib.LizanRegeneration)) maxRegen += 1.5;
+        if (player.hasPerk(PerkLib.LizanMarrow)) maxRegen += 0.5;
+        if (player.hasPerk(PerkLib.LizanMarrowEvolved)) maxRegen += 1;
+        if (player.hasPerk(PerkLib.LizanMarrowFinalForm)) {
 			maxRegen += 1.5;
 			if (player.HP < (player.maxHP() * 0.25)) maxRegen += 4.5;
 		}

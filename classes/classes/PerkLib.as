@@ -3181,7 +3181,7 @@ public class PerkLib
 		public static const HiddenJob6:PerkType = mk("Hidden Job: 6", "Hidden Job: 6",
 				"Allowing to use health to substitude using soulforce in almost all soulskills. (+5x Tou of OverMax HP)");
 		public static const YourPainMyPower:PerkType = mk("Your Pain My Power", "Your Pain My Power",
-				"You can absorb 50% of blood spilled by enemy under Bleed effect into your own blood pool. (+5x Tou of OverMax HP)");
+				"You can absorb all of blood spilled by enemy under Bleed effects into your own blood pool. (+5x Tou of OverMax HP)");
 		public static const MyBloodForBloodPuppies:PerkType = mk("My Blood for Blood Puppies", "My Blood for Blood Puppies",
 				". (+5x Tou of OverMax HP)");
 		public static const HiddenJob4:PerkType = mk("Hidden Job: 4", "Hidden Job: 4",

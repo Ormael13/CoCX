@@ -855,6 +855,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
 			if (hasStatusEffect(StatusEffects.OniRampage)) damage *= 2;
 			if (hasStatusEffect(StatusEffects.Hypermode)) damage *= 10;
+			if (hasStatusEffect(StatusEffects.Provoke)) damage *= statusEffectv2(StatusEffects.Provoke);
 			//monster exclusive perks bonus
 			damage *= eBaseMultis();
 			//other
@@ -907,6 +908,7 @@ import flash.utils.getQualifiedClassName;
 			if (str >= 101) damage += tieredBonus(str, 50, 100);
 			if (str < 10) damage = 10;
 			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
+			if (hasStatusEffect(StatusEffects.Provoke)) damage *= statusEffectv2(StatusEffects.Provoke);
 			//monster exclusive perks bonus
 			damage *= eBaseMultis();
 			damage = Math.round(damage);
@@ -923,6 +925,7 @@ import flash.utils.getQualifiedClassName;
 			if (tou >= 101) damage += tieredBonus(tou, 50, 100);
 			if (tou < 10) damage = 10;
 			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
+			if (hasStatusEffect(StatusEffects.Provoke)) damage *= statusEffectv2(StatusEffects.Provoke);
 			//monster exclusive perks bonus
 			damage *= eBaseMultis();
 			damage = Math.round(damage);
@@ -939,6 +942,7 @@ import flash.utils.getQualifiedClassName;
 			if (spe >= 101) damage += tieredBonus(spe, 50, 100);
 			if (spe < 10) damage = 10;
 			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
+			if (hasStatusEffect(StatusEffects.Provoke)) damage *= statusEffectv2(StatusEffects.Provoke);
 			//monster exclusive perks bonus
 			damage *= eBaseMultis();
 			damage = Math.round(damage);
@@ -1788,35 +1792,6 @@ import flash.utils.getQualifiedClassName;
 
 		public function doAI():void
 		{
-			if (monsterIsStunned()) {
-				if (!handleStun()) return;
-			}
-			if (hasStatusEffect(StatusEffects.Fear)) {
-				if (!handleFear()) return;
-			}
-			//Exgartuan gets to do stuff!
-			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
-				if (SceneLib.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
-			}
-			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug)) {
-				if (!handleConstricted()) return;
-			}
-			if (hasStatusEffect(StatusEffects.OrcaPlay)) {
-				return;
-			}
-			if (hasStatusEffect(StatusEffects.Straddle)) {
-				return;
-			}
-			if (hasStatusEffect(StatusEffects.Dig)) {
-				outputText("\n\nYour opponent is still looking for you as you remain quietly hiding underground, away from view.");
-				addStatusValue(StatusEffects.Dig, 1, -1);
-				return;
-			}
-			if (hasStatusEffect(StatusEffects.OrcaHasWackedFinish)) {
-				outputText("\n\nYour opponent is still stunned from the powerful blow of your tail.");
-				createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-				return;
-			}
 			if (hasStatusEffect(StatusEffects.AbilityCooldown1) ) {
 				if (statusEffectv1(StatusEffects.AbilityCooldown1) <= 0) {
 					removeStatusEffect(StatusEffects.AbilityCooldown1);
@@ -1856,6 +1831,41 @@ import flash.utils.getQualifiedClassName;
 					weaponAttack -= statusEffectv2(StatusEffects.Lustzerking);
 					removeStatusEffect(StatusEffects.Lustzerking);
 				}
+			}
+			if (monsterIsStunned()) {
+				if (!handleStun()) return;
+			}
+			if (hasStatusEffect(StatusEffects.Fear)) {
+				if (!handleFear()) return;
+			}
+			//Exgartuan gets to do stuff!
+			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
+				if (SceneLib.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
+			}
+			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug)) {
+				if (!handleConstricted()) return;
+			}
+			if (hasStatusEffect(StatusEffects.OrcaPlay)) {
+				return;
+			}
+			if (hasStatusEffect(StatusEffects.Straddle)) {
+				return;
+			}
+			if (hasStatusEffect(StatusEffects.Provoke)) {
+				addStatusValue(StatusEffects.Provoke, 1, -1);
+				if (statusEffectv1(StatusEffects.Provoke) <= 0) armorDef += statusEffectv3(StatusEffects.Provoke);
+				eAttack();
+				return;
+			}
+			if (hasStatusEffect(StatusEffects.Dig)) {
+				outputText("\n\nYour opponent is still looking for you as you remain quietly hiding underground, away from view.");
+				addStatusValue(StatusEffects.Dig, 1, -1);
+				return;
+			}
+			if (hasStatusEffect(StatusEffects.OrcaHasWackedFinish)) {
+				outputText("\n\nYour opponent is still stunned from the powerful blow of your tail.");
+				createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+				return;
 			}
 			//If grappling... TODO implement grappling
 //			if (game.gameState == 2) {

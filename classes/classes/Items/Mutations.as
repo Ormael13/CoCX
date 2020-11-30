@@ -4872,7 +4872,6 @@ public final class Mutations extends MutationsHelper {
         if (player.lowerBody == LowerBody.NAGA && player.lowerBody != LowerBody.HYDRA && rand(4) == 0 && changes < changeLimit && type == 3) {
             outputText("\n\nWith a ripping sound your tail suddenly begins to tear apart, splitting from the junction just below your thigh level into two segments as if cut by a scalpel. Pain doubles up as bones snaps, your tail tip growing into larger bulbs which a few second later turns into snake heads hissing loudly and mirroring your pain ");
             outputText("as blood seeps out of the wound. Finally, the wound left by the splitting of your tail closes at high speed, filling in with new flesh and muscle as your newly acquired hydra regeneration kicks in. <b>You snake tail is now forked with two hydra heads!</b>");
-            if (player.findPerk(PerkLib.LizanRegeneration) < 0) player.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
             if (player.findPerk(PerkLib.HydraRegeneration) < 0) player.createPerk(PerkLib.HydraRegeneration, 0, 0, 0, 0);
             player.createStatusEffect(StatusEffects.HydraTailsPlayer, 2, 0, 0, 0);
             player.tailCount = 2;
@@ -9790,19 +9789,17 @@ public final class Mutations extends MutationsHelper {
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
 
-    public function smartyNuts(itemused:Boolean, player:Player):void {
-        if (itemused) clearOutput();
+    public function smartyNuts(player:Player):void {
+        clearOutput();
         var changes:Number = 0;
         var changeLimit:Number = 1;
         var temp2:Number = 0;
         var Ratatoskr_Colour:Array = ["brown","light brown","caramel","chocolate","russet"];
         var Ratatoskr_EyeColour:Array = ["green","light green","emerald"];
-        if (itemused) {
-            if (rand(2) == 0) changeLimit++;
-            if (rand(3) == 0) changeLimit++;
-            changeLimit += additionalTransformationChances();
-            outputText("You chew at the nuts and begin to shake as your body is overcome with changes...");
-        }
+        if (rand(2) == 0) changeLimit++;
+        if (rand(3) == 0) changeLimit++;
+        changeLimit += additionalTransformationChances();
+        outputText("You chew at the nuts and begin to shake as your body is overcome with changes...");
         //Stats
         if (rand(4) == 0 && changes < changeLimit) {
             outputText("\n\nYou begin to feel way smarter as you start remembering about anything you've read or heard with ever increasing clarity.");

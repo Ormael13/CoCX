@@ -192,7 +192,7 @@ package classes.Scenes
 				num++;
 			}
 			if (num >= 20) awardAchievement("Scholar (1)", kACHIEVEMENTS.GENERAL_SCHOLAR);
-			if (num >= 30) awardAchievement("Scholar (2)", kACHIEVEMENTS.GENERAL_SCHOLAR_2);//aktualnie 35 codex entries exist ingame
+			if (num >= 30) awardAchievement("Scholar (2)", kACHIEVEMENTS.GENERAL_SCHOLAR_2);//aktualnie 36 codex entries exist ingame
 			//if (num >= 40) awardAchievement("Scholar (3)", kACHIEVEMENTS.GENERAL_SCHOLAR_3);
 			return num;
 		}

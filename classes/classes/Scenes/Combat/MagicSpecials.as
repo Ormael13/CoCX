@@ -15,6 +15,7 @@ import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.NPCs.Holli;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Scenes.Codex;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.StatusEffects.VampireThirstEffect;
@@ -23,6 +24,7 @@ import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 
 public class MagicSpecials extends BaseCombatContent {
+	public var codex:Codex = new Codex();
 	public function MagicSpecials() {}
 	internal function applyAutocast2():void {
 		outputText("\n\n");
@@ -486,7 +488,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.fairyScore() >= 18) {
 			bd = buttons.add("Flicker", Flicker).hint("Vanish out of sight for a short time. \n\nWould go into cooldown after use for: 4 rounds");
-			bd.requireMana(physicalCost(40));
+			bd.requireMana(spellCost(40));
 			if (player.hasStatusEffect(StatusEffects.CooldownFlicker)) {
 				bd.disable("You need more time before you can use Flicker again.\n\n");
 			}
@@ -497,7 +499,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.fairyScore() >= 18 && player.hasStatusEffect(StatusEffects.Minimise)) {
 			bd = buttons.add("Enlarge", Enlarge).hint("Grow back to your normal size.");
-			bd.requireMana(physicalCost(40));
+			bd.requireMana(spellCost(40));
 		}
 		if (player.fairyScore() >= 18) {
 			bd = buttons.add("Baleful Polymorph", BalefulPolymorph).hint("Turn an opponent into a cute harmless critter.");
@@ -515,13 +517,29 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.raccoonScore()>=14 && !monster.plural) {
 			bd = buttons.add("Prank", Prank).hint("Distract the enemy for 1 round interupting its action. \n\nWould go into cooldown after use for: 5 rounds", "Prank");
-			if (player.hasStatusEffect(StatusEffects.CooldownTDistraction)) {
+			if (player.hasStatusEffect(StatusEffects.CooldownPrank)) {
 				bd.disable("You need more time before you can prank your opponent again.");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			bd = buttons.add("Money Strike", MoneyStrike).hint("Attack your opponent using magically enhanced money. Damage is based on personal wealth. Cost some gems upon use.", "Money Strike");
 			if (player.gems < 100) bd.disable("You need more gems in order to use Money Strike.");
 			else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
-
+		}
+		if (player.ratatoskrScore() >= 12) {
+			bd = buttons.add("Knowledge overload", KnowledgeOverload).hint("Nonexistant tooltip yet to be written by Lia. \n\nWould go into cooldown after use for: 12 rounds", "Knowledge overload");
+			bd.requireMana(spellCost(80));
+			if (player.hasStatusEffect(StatusEffects.CooldownKnowledgeOverload)) {
+				bd.disable("You need more time before you can use Knowledge overload again.\n\n");
+			}
+			bd = buttons.add("Provoke", Provoke).hint("Nonexistant tooltip yet to be written by Lia. \n\nWould go into cooldown after use for: 6 rounds", "Provoke");
+			bd.requireMana(spellCost(80));
+			if (player.hasStatusEffect(StatusEffects.CooldownProvoke)) {
+				bd.disable("You need more time before you can use Provoke again.\n\n");
+			}
+			bd = buttons.add("Weird words", WeirdWords).hint("Strike at your opponent with weird sentences charged with magic, so hard to comprehend it hurts. More potent based on your personal knowledge. This is an elementless spell. \n\nWould go into cooldown after use for: 4 rounds", "Weird words");
+			bd.requireMana(spellCost(80));
+			if (player.hasStatusEffect(StatusEffects.CooldownWeirdWords)) {
+				bd.disable("You need more time before you can use Weird words again.\n\n");
+			}
 		}
 		if (player.isNaga() && flags[kFLAGS.SAMIRAH_HYPNOSIS] == 6 && !monster.plural) {
 			bd = buttons.add("Tactical Distraction", TacticalDistraction).hint("Make the target lose its current turn forcing it to interrupt whatever it is doing. \n\nWould go into cooldown after use for: 5 rounds", "Tactical Distraction");
@@ -2810,7 +2828,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function returnToNormalShape():void {
 		clearOutput();
 		outputText("Gathering all you willpower you forcefully subduing your inner beast and returning to your normal shape.");
-		player.statStore.removeBuffs("CrinosShape")
+		player.statStore.removeBuffs("CrinosShape");
 		enemyAI();
 	}
 
@@ -2834,10 +2852,60 @@ public class MagicSpecials extends BaseCombatContent {
 
 	public function Prank():void {
 		clearOutput();
-		outputText("You prank " + monster.a + monster.short + " surprising [monster him]. This causes your opponent to temporarily stop what [monster he] was doing for a second, realising too late this was your plan all along.");
-		outputText(" \n\n");
+		outputText("You prank " + monster.a + monster.short + " surprising [monster him]. This causes your opponent to temporarily stop what [monster he] was doing for a second, realising too late this was your plan all along.\n\n");
 		monster.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.CooldownPrank,4,0,0,0);
+		enemyAI();
+	}
+
+	public function KnowledgeOverload():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		useMana(80, 1);
+		player.createStatusEffect(StatusEffects.CooldownKnowledgeOverload,12,0,0,0);
+		outputText("You share some of your well earned knowledge with " + monster.a + monster.short + " who stands there blankly listening to your spiel in confusion. It's going to take [monster him] a moment to come down from the absurd amount of info you forced into [monster his] tiny head"+(monster.plural?"s":"")+".\n\n");
+		var overloadduration:Number = 0;
+		overloadduration += Math.round(codex.checkUnlocked() / 10);
+		monster.createStatusEffect(StatusEffects.Stunned, overloadduration, 0, 0, 0);
+		enemyAI();
+	}
+
+	public function Provoke():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		useMana(80, 1);
+		player.createStatusEffect(StatusEffects.CooldownProvoke,6,0,0,0);
+		outputText("You start out right away with the classic introduction of \"<i>You know, there's a rumor about you, it says that…</i>\" sharing with " + monster.a + monster.short + " the nastiest rumors about [monster him]. In disbelief and absolute rage [monster he] attacks relentlessly in an effort to shut you up. ");
+		outputText("Geeze how susceptible, at least it dropped all forms of defence, throwing caution to the wind to attempt to beat the hell out of you.\n\n");
+		var armordebuff:Number = monster.armorDef;
+		var provokeornah:Number = 1.2;
+		monster.armorDef -= armordebuff;
+		provokeornah += Math.round(codex.checkUnlocked() / 100);
+		monster.createStatusEffect(StatusEffects.Provoke, 3, provokeornah, armordebuff, 0);
+		enemyAI();
+	}
+
+	public function WeirdWords():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		useMana(80, 1);
+		player.createStatusEffect(StatusEffects.CooldownWeirdWords,4,0,0,0);
+		var damage:Number = scalingBonusIntelligence() * spellMod() * 4;
+		damage *= 1 + (codex.checkUnlocked() * 0.01);
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		outputText("You purposely utter a sentence so weird and messed up " + monster.a + monster.short + " grabs [monster his] head with both hands in pain. Ouch, that’s what one calls harmful information. ");
+		damage = doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		outputText("\n\n");
 		enemyAI();
 	}
 
@@ -2872,9 +2940,10 @@ public class MagicSpecials extends BaseCombatContent {
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		if (silly())
-		if (monster.plural)	outputText("Adding insult to injury you scream at your opponent. \"Go buy yourself some friend you losers!\"\n\n");
-		else outputText("Adding insult to injury you scream at your opponent. \"Go buy yourself some friend you loser!\"\n\n");
+		if (silly()) {
+			if (monster.plural)	outputText("Adding insult to injury you scream at your opponent. \"Go buy yourself some friend you losers!\"\n\n");
+			else outputText("Adding insult to injury you scream at your opponent. \"Go buy yourself some friend you loser!\"\n\n");
+		}
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		if (player.gems * 0.99 <= 100) player.gems -= 100;
@@ -2890,7 +2959,7 @@ public class MagicSpecials extends BaseCombatContent {
 
 	public function Minimise():void {
 		clearOutput();
-		useMana(40, 1);
+		useMana(50, 1);
 		var evasionIncrease:Number = 0;
 		if (player.hasPerk(PerkLib.FairyQueenRegalia)) evasionIncrease = 25;
 		outputText("You shrink to your minimum size, evading your opponent as you mock [monster his] attempt to hit you.\n\n");
@@ -4029,6 +4098,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function FaeStorm():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
+		useMana(80, 1);
 		outputText("Your wings start shining with rainbowish light as you charge and unleash a beam of primal energy on " + monster.a + monster.short + ". ");
 		var damage:Number = (scalingBonusIntelligence() * spellMod());
 		//Determine if critical hit!
@@ -4037,6 +4107,7 @@ public class MagicSpecials extends BaseCombatContent {
 		critChance += combatMagicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
+			crit = true;
 			damage *= 1.75;
 		}
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
@@ -4045,7 +4116,6 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = Math.round(damage);
 		damage = doMagicDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-
 		//Randomising secondary effects
 		var EffectList:Array = [];
 		EffectList.push(FaeStormLightning);
@@ -4140,6 +4210,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function BalefulPolymorph():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
+		useMana(80, 1);
 		outputText("You chuckle playfully as you throw this spell on " + monster.a + monster.short + ", turning [monster he] temporarily into a cute harmless ");
 		var chosen:String = randomChoice("rabbit.", "squirrel.", "sheep.", "mouse.", "cat.", "dog.");
 		outputText(chosen+"\n\n");
