@@ -1443,6 +1443,10 @@
                 <show part="ears/caveWyrm"/>
                 <show part="ears_bg/caveWyrm"/>
             </case>
+			  <case values="Ears.SQUIRREL">
+                <show part="ears_bg/ratatoskr"/>
+                <show part="ears_bg/ratatoskrRight"/>
+            </case>
             <default> <!-- TODO RED_PANDA, AVIAN, GRYPHON -->
                 <show part="ears_bg/human"/>
             </default>
@@ -1489,6 +1493,9 @@
             </case>
 			<case values="Eyes.GREMLIN">
                 <show part="eyes/gremlin"/>
+            </case>
+			<case values="Eyes.RATATOSKR">
+                <show part="eyes/centipede"/>
             </case>
             <default>
                 <show part="eyes/human"/>
@@ -1639,6 +1646,19 @@
                         </case>
                         <default>
                             <show part="hair/gremlin"/>
+                        </default>
+                    </switch>
+                </case>
+				<case values="Hair.RATATOSKR">
+					<switch>
+                        <case test="hairLength lt 16">
+							<show part="hair/ratatoskr"/>
+							<show part="hair_bg/ratatoskr"/>
+                        </case>
+                        <default>
+                            <show part="hair/ratatoskr"/>
+							<show part="hair_bg/ratatoskr"/>
+                            <show part="hair_bg/02"/>
                         </default>
                     </switch>
                 </case>
@@ -1848,7 +1868,7 @@
             <case values="Face.LIZARD,Face.DRAGON">
                 <show part="face/reptile"/>
             </case>
-            <case values="Face.BUNNY,Face.BUCKTEETH,Face.JABBERWOCKY,Face.BUCKTOOTH">
+            <case values="Face.BUNNY,Face.BUCKTEETH,Face.JABBERWOCKY,Face.BUCKTOOTH,Face.SQUIRREL">
                 <show part="face/bunny"/>
             </case>
             <case values="Face.SPIDER_FANGS">
@@ -1889,7 +1909,7 @@
 			<case values="Face.COW_MINOTAUR">
                 <show part="face/bovine"/>
             </case>
-			<case values="Face.FAIRY,Face.CRAZY">
+			<case values="Face.FAIRY,Face.CRAZY,Face.SMUG">
                 <show part="face/fairySmile"/>
             </case>
 			<case values="Face.GHOST">
@@ -2034,6 +2054,12 @@
 				<show part="hands/blade-kamaitachiMantis"/>
                 <show part="hands_bg/furracoon"/>
 				<show part="hands_bg/blade-kamaitachiMantis"/>
+            </case>
+			<case values="Arms.SQUIRREL">
+				<show part="hands/furracoon"/>
+				<show part="hands_bg/furracoon"/>
+                <show part="overhands/ratatoskrRight"/>
+                <show part="overhands/ratatoskrLeft"/>			
             </case>
             <case values="Arms.BEE">
                 <hide part="arms/*"/>
@@ -2356,7 +2382,7 @@
                     </default>
                 </switch>
             </case>
-            <case values="LowerBody.BUNNY,LowerBody.KANGAROO,LowerBody.CAT,LowerBody.DOG,LowerBody.FOX,LowerBody.RAIJU,LowerBody.CANINE,LowerBody.WEASEL,LowerBody.RACCOON,LowerBody.FERRET,LowerBody.MOUSE,LowerBody.HINEZUMI,LowerBody.BEAR">
+            <case values="LowerBody.BUNNY,LowerBody.KANGAROO,LowerBody.CAT,LowerBody.DOG,LowerBody.FOX,LowerBody.RAIJU,LowerBody.CANINE,LowerBody.WEASEL,LowerBody.RACCOON,LowerBody.FERRET,LowerBody.MOUSE,LowerBody.HINEZUMI,LowerBody.BEAR,LowerBody.SQUIRREL">
                 <switch>
                     <case test="legCount==4">
                         <hide part="legs/*"/>
@@ -2388,6 +2414,9 @@
 					</case>
 					<case test="lowerBody==LowerBody.WEASEL">
 						<show part="feet/furracoon"/>
+					</case>
+					<case test="lowerBody==LowerBody.SQUIRREL">
+						<show part="feet/ratatoskr"/>
 					</case>
 					<case test="lowerBody==LowerBody.BEAR">
 							<show part="feet/furracoon"/>
@@ -2925,6 +2954,14 @@
 					<show part="tail/mantis_taur"/>
 					<else>
 						<show part="tail/mantis"/>
+					</else>
+				</if>
+            </case>
+			<case values="Tail.SQUIRREL">
+				<if test="isTaur()">
+					<show part="tail/ratatoskr_taur"/>
+					<else>
+						<show part="tail/ratatoskr"/>
 					</else>
 				</if>
             </case>

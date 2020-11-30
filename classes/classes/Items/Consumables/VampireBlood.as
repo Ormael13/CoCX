@@ -70,7 +70,7 @@ public class VampireBlood extends Consumable {
                 Addition: {
                     Eyes:{
                         BodyPart: 'eyes.colour',
-                        ChangeTo: "blood red"
+                        ChangeTo: "blood-red"
                     }
                 }
             }, {
