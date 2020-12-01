@@ -194,6 +194,14 @@ public class PerkLib
 	//			"You are a descendant of your ancestor, who was the child of a human and a (Race). (+2 to  score)");
 	//	public static const Bloodline:PerkType = mk("Bloodline: Demon", "Bloodline: Demon",
 	//			"Your Demonic bloodline appears strongly within you. (+2 to  score)", null, true);
+	//	public static const sDescendant:PerkType = mk("Race's descendant", "Race's descendant",
+	//			"You are a descendant of your ancestor, who was the child of a human and a (Race). (+2 to  score)");
+	//	public static const Bloodline:PerkType = mk("Bloodline: Demon", "Bloodline: Demon",
+	//			"Your Demonic bloodline appears strongly within you. (+2 to  score)", null, true);
+	//	public static const sDescendant:PerkType = mk("Race's descendant", "Race's descendant",
+	//			"You are a descendant of your ancestor, who was the child of a human and a (Race). (+2 to  score)");
+	//	public static const Bloodline:PerkType = mk("Bloodline: Demon", "Bloodline: Demon",
+	//			"Your Demonic bloodline appears strongly within you. (+2 to  score)", null, true);
 
 		// History perks
 		public static const HistoryAlchemist:PerkType = mk("History: Alchemist", "History: Alchemist",
@@ -304,18 +312,27 @@ public class PerkLib
 		//public static const BloodSacrifice:PerkType = mk("Blood Sacrifice", "Blood Sacrifice",
 				//"You are currently sacrificing blood to empower your spells.",
 				//"You are currently sacrificing blood to empower your spells.");
+		public static const RatatoskrSmarts:PerkType = mk("Ratatoskr smarts", "Ratatoskr smarts",
+				"Allows to perma Weird words.",
+				"You choose the 'Ratatoskr smarts' perk, Allows to perma Weird words.").withBuffs({'int.mult':0.05});
+		public static const RatatoskrSmartsEvolved:PerkType = mk("Ratatoskr smarts (Evolved)", "Ratatoskr smarts (Evolved)",
+				"Increase the damage of Weird words by 20%. Lower cooldown of Knowledge overload by 1 turn.",
+				"You choose the 'Ratatoskr smarts (Evolved)' perk, Increase the damage of Weird words by 20%. Lower cooldown of Knowledge overload by 1 turn.").withBuffs({'int.mult':0.10});
+		public static const RatatoskrSmartsFinalForm:PerkType = mk("Ratatoskr smarts (Final Form)", "Ratatoskr smarts (Final Form)",
+				"Increase the damage of Weird words by another 30%. Lower cooldowns of ratatoskr specials by 1 turn. Knowledge is power is now three times as effective.",
+				"You choose the 'Ratatoskr smarts (Final Form)' perk, Increase the damage of Weird words by another 30%. Lower cooldowns of ratatoskr specials by 1 turn. Knowledge is power is now three times as effective.").withBuffs({'int.mult':0.20});
 		public static const TooAngryToDie:PerkType = mk("Too Angry to Die", "Too Angry to Die",
 				"+600 to max Wrath.",//stay alive when berserking at cost of super fast 20% max wrath drain per turn when below min HP or above max Lust (?drain decreased by some specific perks?)?
 				"You choose the 'Too Angry to Die' perk, .");
 		public static const GazerEye:PerkType = mk("Gazer Eye", "Gazer Eye",
 				"Keep true seeing at all times and empower gaze attacks.",
-				"You choose the 'Gazer Eye' perk, .").withBuffs({'int':0.05});
+				"You choose the 'Gazer Eye' perk, .").withBuffs({'int.mult':0.05});
 		public static const GazerEyeEvolved:PerkType = mk("Gazer Eye (Evolved)", "Gazer Eye (Evolved)",
 				"Keep true seeing at all times,empower gaze attacks and empower your ability to cast many spells as a Gazer if available.",
-				"You choose the 'Gazer Eye (Evolved)' perk, .").withBuffs({'lib.mult':0.05,'int':0.10});
+				"You choose the 'Gazer Eye (Evolved)' perk, .").withBuffs({'lib.mult':0.05,'int.mult':0.10});
 		public static const GazerEyeFinalForm:PerkType = mk("Gazer Eye (Final Form)", "Gazer Eye (Final Form)",
 				"Keep true seeing at all times, empower gaze attacks, further empower your ability to cast many spells as a Gazer if available and increase spell critical hit chance by 10%.",
-				"You choose the 'Gazer Eye (Final Form)' perk, .").withBuffs({'lib.mult':0.05,'int':0.10});
+				"You choose the 'Gazer Eye (Final Form)' perk, .").withBuffs({'lib.mult':0.05,'int.mult':0.10});
 		public static const AdvancedGolemancyTheory:PerkType = mk("Advanced Golemancy Theory", "Advanced Golemancy Theory",
 				"Enable option to make steel golems and store 1 such golem.",
 				"You choose the 'Advanced Golemancy Theory' perk, allowing to make steel golems.");
@@ -361,15 +378,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You choose the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You choose the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You choose the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You choose the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You choose the '' perk, .");
@@ -3178,10 +3186,10 @@ public class PerkLib
 		// Hidden Jobs perks
 		public static const HiddenJobBloodDemon:PerkType = mk("Hidden Job: Blood Demon", "Hidden Job: Blood Demon",
 				"You've trained in arts of blood demons. Beings that reached mastery of using their own or others blood to great effect. (+5x Tou of OverMax HP)");
-		public static const HiddenJob6:PerkType = mk("Hidden Job: 6", "Hidden Job: 6",
+		public static const WayOfTheBlood:PerkType = mk("Way of the Blood", "Way of the Blood",
 				"Allowing to use health to substitude using soulforce in almost all soulskills. (+5x Tou of OverMax HP)");
 		public static const YourPainMyPower:PerkType = mk("Your Pain My Power", "Your Pain My Power",
-				"You can absorb all of blood spilled by enemy under Bleed effects into your own blood pool. (+5x Tou of OverMax HP)");
+				"You absorb all of blood spilled and wrath generated by enemy under Bleed effects into yourself. (+5x Tou of OverMax HP)");
 		public static const MyBloodForBloodPuppies:PerkType = mk("My Blood for Blood Puppies", "My Blood for Blood Puppies",
 				". (+5x Tou of OverMax HP)");
 		public static const HiddenJob4:PerkType = mk("Hidden Job: 4", "Hidden Job: 4",
@@ -3327,6 +3335,8 @@ public class PerkLib
 				"Your nimble body has adapted to moving through jungles and forests, evading enemy attacks with ease and making yourself harder to catch. (+35 to the Evasion percentage)");
 		public static const KitsuneEnergyThirst:PerkType = mk("Kitsune hunger", "Kitsune hunger",
 				"You can metabolise sex into life force and can feed from your partners orgasms.");
+		public static const KnowledgeIsPower:PerkType = mk("Knowledge is power", "Knowledge is power",
+				"You become more powerful the more you know about Mareth. Increase spell and physical damage by a percentage based on how much of the codex was read.");
 		public static const LifeLeech:PerkType = mk("Life leech", "Life leech",
 				"Your unarmed strike steals vital energy from your victims, dealing 5% extra damage and restoring 1% mana, health, fatigue and soulforce per hit.");
 		public static const Lycanthropy:PerkType = mk("Lycanthropy", "Lycanthropy",
@@ -5583,7 +5593,7 @@ public class PerkLib
                 return (player.dragonScore() >= 8 || player.frostWyrmScore() >= 10);
             }, "Dragon race or its variants");
 			DraconicLungs.requireLungsMutationSlot()
-				        .requirePerk(DragonFireBreath)
+				.requirePerk(DragonFireBreath)
                 .requirePerk(DragonIceBreath)
                 .requirePerk(DragonLightningBreath)
                 .requirePerk(DragonDarknessBreath).requireCustomFunction(function (player:Player):Boolean {
@@ -5627,7 +5637,7 @@ public class PerkLib
                 return player.mouseScore() >= 12;
             }, "Mouse race");
 			HeartOfTheStorm.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-						return player.raijuScore() >= 6 || player.thunderbirdScore() >= 10 || player.kamaitachiScore() >= 10;
+				return player.raijuScore() >= 6 || player.thunderbirdScore() >= 10 || player.kamaitachiScore() >= 10;
 			}, "Stormborn race");
 			HollowFangs.requireMouthMutationSlot().requirePerk(VampiricBloodsteam)
 				.requireCustomFunction(function (player:Player):Boolean {
@@ -5693,6 +5703,9 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.pigScore() >= 4;
             }, "Pig/Boar race");
+            RatatoskrSmarts.requireCustomFunction(function (player:Player):Boolean {//.requireAdrenalGlandsMutationSlot().requirePerk(Ferocity)
+                return player.ratatoskrScore() >= 4;
+            }, "Squirrel/Ratatoskr race");
             SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(Lustzerker).requireCustomFunction(function (player:Player):Boolean {
                 return player.salamanderScore() >= 4;
             }, "Salamander race");
@@ -5818,6 +5831,9 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.devilkinScore() >= 12;
             }, "Devil race");
+            RatatoskrSmartsEvolved.requireLevel(6).requirePerk(RatatoskrSmarts).requireCustomFunction(function (player:Player):Boolean {
+                return player.ratatoskrScore() >= 8;
+            }, "Squirrel/Ratatoskr race");
             /*ScyllaInkGlandsEvolved.requireLevel(6).requirePerk(ScyllaInkGlands).requireCustomFunction(function (player:Player):Boolean {
                 return player.scyllaScore() >= 10;
             }, "Scylla race");*/
@@ -6184,6 +6200,9 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
 					return player.minotaurScore() >= 8;
             }, "Minotaur race");
+            RatatoskrSmartsFinalForm.requireLevel(18).requirePerk(RatatoskrSmartsEvolved).requireCustomFunction(function (player:Player):Boolean {
+                return player.ratatoskrScore() >= 12;
+            }, "Squirrel/Ratatoskr race");
             ChimericalBodyBasicStage.requirePerk(ChimericalBodySemiBasicStage)
                     .requireLevel(18)
                     .requireCustomFunction(function (player:Player):Boolean {

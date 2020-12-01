@@ -16,6 +16,7 @@ import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.NPCs.Diva;
 import classes.Scenes.NPCs.Holli;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Scenes.Codex;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.StatusEffects;
@@ -25,8 +26,8 @@ import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 
 public class CombatMagic extends BaseCombatContent {
-	public function CombatMagic() {
-	}
+	public var codex:Codex = new Codex();
+	public function CombatMagic() {}
 
 	internal function applyAutocast():void {
 		outputText("\n\n");
@@ -290,6 +291,10 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.SagesKnowledge)) {
 			mod += player.perkv1(PerkLib.SagesKnowledge);
+		}
+		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
+			if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) mod += (Math.round(codex.checkUnlocked() / 100) * 3);
+			else mod += Math.round(codex.checkUnlocked() / 100);
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;

@@ -1200,6 +1200,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.HydraAcidBreath);
 				needNext = true;
 			}
+			//Knowledge is power
+			if (player.ratatoskrScore() >= 12 && player.findPerk(PerkLib.KnowledgeIsPower) < 0) {
+				outputText("\nLia will probably say: it just works.\n\n(<b>Gained Perk: Knowledge is power</b>)");
+				player.createPerk(PerkLib.KnowledgeIsPower, 0, 0, 0, 0);
+				needNext = true;
+			}
+			else if (player.ratatoskrScore() < 12 && player.findPerk(PerkLib.KnowledgeIsPower) >= 0) {// && player.findPerk(PerkLib.LizanMarrow) < 0
+				outputText("\nLia will probably say: it just works.\n\n(<b>Lost Perk: Knowledge is power</b>)");
+				player.removePerk(PerkLib.KnowledgeIsPower);
+				needNext = true;
+			}
 			//Improved venom gland
 			if (flags[kFLAGS.VENOM_TIMES_USED] >= 50 && player.findPerk(PerkLib.ImprovedVenomGland) < 0) {
 				outputText("\nYou feel wonderfully healthy. After using your venom so many time your body finally got acclimated to the presence of your venom gland allowing for increased capacity and production. \n\n(<b>Gained Perk: Improved venom gland</b>)\n");
