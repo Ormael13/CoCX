@@ -525,17 +525,22 @@ public class MagicSpecials extends BaseCombatContent {
 			else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
 		if (player.ratatoskrScore() >= 12) {
-			bd = buttons.add("Knowledge overload", KnowledgeOverload).hint("Nonexistant tooltip yet to be written by Lia. \n\nWould go into cooldown after use for: 12 rounds", "Knowledge overload");
+			var cdko:Number = 12;
+			if (player.hasPerk(PerkLib.RatatoskrSmartsEvolved)) cdko -= 1;
+			if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) cdko -= 1;
+			bd = buttons.add("Knowledge overload", KnowledgeOverload).hint("Nonexistant tooltip yet to be written by Lia. \n\nWould go into cooldown after use for: "+cdko+" rounds", "Knowledge overload");
 			bd.requireMana(spellCost(80));
 			if (player.hasStatusEffect(StatusEffects.CooldownKnowledgeOverload)) {
 				bd.disable("You need more time before you can use Knowledge overload again.\n\n");
 			}
-			bd = buttons.add("Provoke", Provoke).hint("Nonexistant tooltip yet to be written by Lia. \n\nWould go into cooldown after use for: 6 rounds", "Provoke");
+			bd = buttons.add("Provoke", Provoke).hint("Nonexistant tooltip yet to be written by Lia. \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.RatatoskrSmartsFinalForm) ? "5":"6")+" rounds", "Provoke");
 			bd.requireMana(spellCost(80));
 			if (player.hasStatusEffect(StatusEffects.CooldownProvoke)) {
 				bd.disable("You need more time before you can use Provoke again.\n\n");
 			}
-			bd = buttons.add("Weird words", WeirdWords).hint("Strike at your opponent with weird sentences charged with magic, so hard to comprehend it hurts. More potent based on your personal knowledge. This is an elementless spell. \n\nWould go into cooldown after use for: 4 rounds", "Weird words");
+		}
+		if (player.ratatoskrScore() >= 12 || player.hasPerk(PerkLib.RatatoskrSmarts)) {
+			bd = buttons.add("Weird words", WeirdWords).hint("Strike at your opponent with weird sentences charged with magic, so hard to comprehend it hurts. More potent based on your personal knowledge. \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.RatatoskrSmartsFinalForm) ? "3":"4")+" rounds", "Weird words");
 			bd.requireMana(spellCost(80));
 			if (player.hasStatusEffect(StatusEffects.CooldownWeirdWords)) {
 				bd.disable("You need more time before you can use Weird words again.\n\n");
@@ -2862,7 +2867,11 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		useMana(80, 1);
-		player.createStatusEffect(StatusEffects.CooldownKnowledgeOverload,12,0,0,0);
+		if (player.hasPerk(PerkLib.RatatoskrSmartsEvolved)) {
+			if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) player.createStatusEffect(StatusEffects.CooldownKnowledgeOverload,10,0,0,0);
+			else player.createStatusEffect(StatusEffects.CooldownKnowledgeOverload,11,0,0,0);
+		}
+		else player.createStatusEffect(StatusEffects.CooldownKnowledgeOverload,12,0,0,0);
 		outputText("You share some of your well earned knowledge with " + monster.a + monster.short + " who stands there blankly listening to your spiel in confusion. It's going to take [monster him] a moment to come down from the absurd amount of info you forced into [monster his] tiny head"+(monster.plural?"s":"")+".\n\n");
 		var overloadduration:Number = 0;
 		overloadduration += Math.round(codex.checkUnlocked() / 10);
@@ -2874,7 +2883,8 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		useMana(80, 1);
-		player.createStatusEffect(StatusEffects.CooldownProvoke,6,0,0,0);
+		if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) player.createStatusEffect(StatusEffects.CooldownProvoke,5,0,0,0);
+		else player.createStatusEffect(StatusEffects.CooldownProvoke,6,0,0,0);
 		outputText("You start out right away with the classic introduction of \"<i>You know, there's a rumor about you, it says that…</i>\" sharing with " + monster.a + monster.short + " the nastiest rumors about [monster him]. In disbelief and absolute rage [monster he] attacks relentlessly in an effort to shut you up. ");
 		outputText("Geeze how susceptible, at least it dropped all forms of defence, throwing caution to the wind to attempt to beat the hell out of you.\n\n");
 		var armordebuff:Number = monster.armorDef;
@@ -2889,9 +2899,12 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		useMana(80, 1);
-		player.createStatusEffect(StatusEffects.CooldownWeirdWords,4,0,0,0);
+		if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) player.createStatusEffect(StatusEffects.CooldownWeirdWords,3,0,0,0);
+		else player.createStatusEffect(StatusEffects.CooldownWeirdWords,4,0,0,0);
 		var damage:Number = scalingBonusIntelligence() * spellMod() * 4;
 		damage *= 1 + (codex.checkUnlocked() * 0.01);
+		if (player.hasPerk(PerkLib.RatatoskrSmartsEvolved)) damage *= 1.2;
+		if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) damage *= 1.25;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;

@@ -48,6 +48,7 @@ import classes.Scenes.Dungeons.HelDungeon.HarpyMob;
 import classes.Scenes.Dungeons.HelDungeon.HarpyQueen;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Scenes.Codex;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.StatusEffectClass;
@@ -66,6 +67,7 @@ public class Combat extends BaseContent {
     public var soulskills:CombatSoulskills = new CombatSoulskills();
     public var comfoll:CombatFollowersActions = new CombatFollowersActions();
     public var ui:CombatUI = new CombatUI();
+	public var codex:Codex = new Codex();
     public var MDODialogs:Boolean = false; // JA dialogs, look 3875
     public var MDOCount:int = 0; // count of how many times damage was deal
     public var MSGControll:Boolean = false; // need to correctly display damage MSG
@@ -5080,6 +5082,10 @@ public class Combat extends BaseContent {
             if (monster.statusEffectv4(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.1 * monster.statusEffectv4(StatusEffects.AcidDoT)));
         }
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
+		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
+			if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) damage *= (1 + (Math.round(codex.checkUnlocked() / 100) * 3));
+			else damage *= (1 + Math.round(codex.checkUnlocked() / 100));
+		}
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -5100,10 +5106,21 @@ public class Combat extends BaseContent {
         if (damage < 0) damage = 1;
         if (apply) {
             monster.HP -= damage;
+			var WrathGains:Number = 0;
             var BonusWrathMult:Number = 1;
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
-            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
-            else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
+            if (monster.hasPerk(PerkLib.FuelForTheFire)) WrathGains += Math.round((damage / 5)*BonusWrathMult);
+            else WrathGains += Math.round((damage / 10) * BonusWrathMult);
+			if (monster.hasStatusEffect(StatusEffects.IzmaBleed) || monster.hasStatusEffect(StatusEffects.SharkBiteBleed)
+			 || monster.hasStatusEffect(StatusEffects.KamaitachiBleed) || monster.hasStatusEffect(StatusEffects.GoreBleed)
+			 || monster.hasStatusEffect(StatusEffects.Hemorrhage) || monster.hasStatusEffect(StatusEffects.HemorrhageArmor)
+			 || monster.hasStatusEffect(StatusEffects.HemorrhageShield) || monster.hasStatusEffect(StatusEffects.Hemorrhage2)) {
+				player.HP += damage;
+				player.wrath += WrathGains;
+				if (player.HP > (player.maxHP() + player.maxOverHP())) player.HP = player.maxHP() + player.maxOverHP();
+				if (player.wrath > player.maxWrath()) player.wrath = player.maxWrath();
+			}
+			else monster.wrath += WrathGains;
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
         if (display) {
@@ -10625,7 +10642,7 @@ public class Combat extends BaseContent {
         fireDMG *= 2;
         outputText("You start concentrate on the lust flowing in your body, your veins while imaging a joy of sharing flames of love with enemy. Shortly after that lust starts to gather around your hands getting hotter and hotter till it envelop your hands in flames.\n\n");
         outputText("And with almost orgasmic joy, you sends a wave of flames toward " + monster.a + monster.short + " while mumbling about 'sharing the flames of love'.");
-        doDamage(fireDMG);
+		doDamage(fireDMG);
         outputText("\n\n");
         enemyAI();
     }
@@ -10639,7 +10656,7 @@ public class Combat extends BaseContent {
         iceDMG *= 2;
         outputText("You start concentrate on the lust flowing in your body, your veins while imaging a joy of sharing icicles of love with enemy. Shortly after that lust starts to gather around your hands getting colder and colder till it envelop your hands in icicles.\n\n");
         outputText("And with almost orgasmic joy, you sends a wave of ice shards toward " + monster.a + monster.short + " while mumbling about 'sharing the icicles of love'.");
-        doDamage(iceDMG);
+		doDamage(iceDMG);
         outputText("\n\n");
         enemyAI();
     }
@@ -10916,7 +10933,7 @@ public class Combat extends BaseContent {
     private function inteWisLibScale(stat:int):Number {
         var scale:Number = 50.75;
         var changeBy:Number = 0.50;
-        if (stat <= 10000) {
+        if (stat <= 100000) {
             if (stat <= 100) {
                 scale = (2 / 6) + (int(stat / 20) * (1 / 6));
                 changeBy = 0.25;
