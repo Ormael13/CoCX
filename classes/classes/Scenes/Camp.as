@@ -2104,7 +2104,7 @@ public class Camp extends NPCAwareContent {
 	private function strtouspeintwislibsenCalculation1ipol():void {
 		clearOutput();
 		outputText("Placeholder for text on how PC reflect on effects of lvl up perks.");
-		player.strtouspeintwislibsenCalculation1();
+		//player.strtouspeintwislibsenCalculation1();
 		doNext(campMiscActions);
 	}
 
@@ -2880,7 +2880,7 @@ private function SparrableNPCsMenu():void {
 			if (timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n");
 			else outputText("You lie down to resume sleeping for the remaining hour.\n");
 		}
-		player.strtouspeintwislibsenCalculation1();
+		//player.strtouspeintwislibsenCalculation1();
 		player.sleepUpdateStat();
 		goNext(timeQ, true);
 	}
@@ -4343,7 +4343,7 @@ public function wakeFromBadEnd():void {
 				player.createStatusEffect(StatusEffects.IntWisCounter2, 0, 0, 0, 0);
 				player.createStatusEffect(StatusEffects.LibSensCounter1, 0, 0, 0, 0);
 				player.createStatusEffect(StatusEffects.LibSensCounter2, 0, 0, 0, 0);
-				player.strtouspeintwislibsenCalculation1();
+				//player.strtouspeintwislibsenCalculation1();
 				player.strtouspeintwislibsenCalculation2();
 			}
 			if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) {
