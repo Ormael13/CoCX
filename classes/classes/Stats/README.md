@@ -11,11 +11,13 @@
 Str,Tou,Spe,Int,Wis,Lib are all "Primary stats". 
 
 **Primary Stat** - a complex stat, consisting of:
-* core - counter for levelup points and training. 1-100. Cannot hold buffs.
+* core - counter for levelup points and training. 1-100(*). Cannot hold buffs. 
 * bonus - part with additive buffs.
 * mult - part with multiplicative buffs.
 
-**Primary Stat total value = (Core + Bonus) * Multiplier**, minimum 1.
+(*) Max value of 100 can be raised by perks. No max for monsters.
+
+**Primary Stat total value = Core * Multiplier + Bonus**, minimum 1.
 
 **Bonus total value = sum of buffs**, uncapped.
 
@@ -42,7 +44,7 @@ After that, total value of `player.str` would be calculated as:
   - 1.0 initial value
   - 0.2 from "Racial" buff
   
-Total = (20 + 15) * 1.2 = 35 * 1.2 = 42 
+Total = 20 * 1.2 + 15 = 24 + 15 = 39  
 
 ## Stat names
 
