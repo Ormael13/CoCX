@@ -2481,9 +2481,15 @@ public function loverZenjiHalloweenEvent():void {
 public function loverZenjiHalloweenEventYes():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
-	outputText("Zenji continues uninterrupted, his right hand now carrying a small coating of burgundy paint. With paternal gentleness, he rubs his thumb across your face, creating a series of ceremonial markings.\n\n");
-	outputText("He coats his left hand in the white paint, continuing drawing markings over your face, he pauses for a moment, his green eyes fixate onto yours. \"<i>Even behind de mask of death, your beauty shines through.</i>\"\n\n");
-	outputText("He glances over your face, now covered by his ceremonial paint. \"<i>It’s a good look on ya [name], maybe I did a betta job on you dan I did ta myself.</i>\" He gives a soft chuckle.\n\n");
+	outputText("Zenji continues uninterrupted, his right hand now carrying a small coating of burgundy paint.");
+	outputText("With paternal gentleness, he rubs his thumb across your face, creating a series of ceremonial markings. His hands have less fur, you can feel the gentle warmth of his skin press against your face\n\n");
+	outputText("You watch him work his way around you, his mouth unconsciously slightly agape has he focuses all of his attention on you.\n\n ");
+	outputText("He coats his left hand in the white paint, continuing drawing markings over your face, he pauses for a moment, his green eyes fixate onto yours.");
+	outputText("\"<i>Even behind de mask of death, your beauty shines through.</i>\"\n\n");
+	outputText("You can't help but smile at his compliment as he continues rubbing his fingers along your face, the warmth of his touch along with the cool pain is refreshing.");
+	outputText("It doesn't take long until he's finished, making sure not to omit even the slightest detail.");
+	outputText("He glances over your face, now covered by his ceremonial paint. \"<i>It’s a good look on ya [name], maybe I did a betta job on you dan I did ta myself.</i>\""); 
+	outputText("He gives a soft chuckle, eying you before speaking up once more, \"<i>I love you, [name]... I'm happy ya let me do dis wit ya.</i>\"\n\n");
 	outputText("<b><i>Face Paint gives +10% magic resistance</i></b>\n\n");
 	player.addStatusValue(StatusEffects.ZenjiZList, 4, 2);
 	doNext(camp.returnToCampUseOneHour);
