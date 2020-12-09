@@ -233,7 +233,7 @@ public class Kitsune extends Monster
 			this.armorDef = 5;
 			this.armorMDef = 30;
 			this.bonusHP = 120;
-			this.bonusLust = 20;
+			this.bonusLust = 136;
 			this.lust = 20;
 			this.lustVuln = 0.9;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

@@ -67,7 +67,7 @@ use namespace CoC;
 			this.armorDef = 30;
 			this.armorMDef = 0;
 			this.bonusHP = 100;
-			this.bonusLust = 30;
+			this.bonusLust = 130;
 			this.lust = 30;
 			this.lustVuln = .8;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

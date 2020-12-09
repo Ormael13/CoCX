@@ -146,55 +146,69 @@ use namespace CoC;
 				initStrTouSpeInte(90, 90, 80, 110);
 				initWisLibSensCor(110, 60, 40, 50);
 				this.weaponAttack = 30;
+				this.bonusLust = 122;
 				this.level = 22;
 			}
 			if (flags[kFLAGS.CHI_CHI_LVL_UP] == 2) {
 				initStrTouSpeInte(130, 130, 120, 125);
 				initWisLibSensCor(125, 70, 50, 50);
 				this.weaponAttack = 36;
+				this.bonusLust = 151;
 				this.level = 31;
 			}
 			if (flags[kFLAGS.CHI_CHI_LVL_UP] == 3) {
 				initStrTouSpeInte(170, 170, 160, 140);
 				initWisLibSensCor(140, 80, 60, 50);
 				this.weaponAttack = 44;
+				this.bonusLust = 180;
 				this.level = 40;
 			}
 			if (flags[kFLAGS.CHI_CHI_LVL_UP] == 4) {
 				initStrTouSpeInte(210, 210, 200, 155);
 				initWisLibSensCor(155, 90, 70, 50);
 				this.weaponAttack = 50;
+				this.bonusLust = 209;
 				this.level = 49;
 			}
 			if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] == 2 || flags[kFLAGS.CHI_CHI_LVL_UP] == 5) {
 				initStrTouSpeInte(250, 250, 240, 170);
 				initWisLibSensCor(170, 100, 80, 50);
 				this.weaponAttack = 56;
+				this.bonusLust = 238;
 				this.level = 58;
 			}
 			if (flags[kFLAGS.CHI_CHI_LVL_UP] == 6) {
 				initStrTouSpeInte(280, 280, 270, 185);
 				initWisLibSensCor(185, 110, 90, 50);
 				this.weaponAttack = 60;
+				this.bonusLust = 264;
 				this.level = 64;
 			}
 			if (flags[kFLAGS.CHI_CHI_LVL_UP] == 7) {
 				initStrTouSpeInte(310, 340, 300, 200);
 				initWisLibSensCor(200, 120, 100, 50);
 				this.weaponAttack = 64;
+				this.bonusLust = 290;
 				this.level = 70;
 			}
 			if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2 || flags[kFLAGS.CHI_CHI_LVL_UP] == 8) {
 				initStrTouSpeInte(340, 340, 330, 215);
 				initWisLibSensCor(215, 130, 110, 50);
 				this.weaponAttack = 68;
-				if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2) this.level = 58;
-				if (flags[kFLAGS.CHI_CHI_LVL_UP] == 8) this.level = 76;
+				if (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2) {
+					this.level = 58;
+					this.bonusLust = 298;
+				}
+				if (flags[kFLAGS.CHI_CHI_LVL_UP] == 8) {
+					this.level = 76;
+					this.bonusLust = 316;
+				}
 			}
 			if (flags[kFLAGS.CHI_CHI_LVL_UP] == 9) {
 				initStrTouSpeInte(370, 370, 360, 230);
 				initWisLibSensCor(230, 140, 120, 50);
 				this.weaponAttack = 72;
+				this.bonusLust = 342;
 				this.level = 82;
 			}
 			this.a = "";
@@ -218,7 +232,6 @@ use namespace CoC;
 			this.armorDef = 1;
 			this.armorMDef = 10;
 			this.bonusHP = 25000;
-			this.bonusLust = 20;
 			this.lust = 30;
 			this.lustVuln = .8;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

@@ -96,6 +96,7 @@ package classes.Scenes.NPCs
 				this.armorDef = 200;
 				this.armorMDef = 5;
 				this.bonusHP = 800;
+				this.bonusLust = 129;
 				this.level = 9;
 			}
 			if (flags[kFLAGS.LUNA_LVL_UP] == 1) {
@@ -105,6 +106,7 @@ package classes.Scenes.NPCs
 				this.armorDef = 210;
 				this.armorMDef = 6;
 				this.bonusHP = 850;
+				this.bonusLust = 155;
 				this.level = 15;
 			}
 			if (flags[kFLAGS.LUNA_LVL_UP] == 2) {
@@ -114,6 +116,7 @@ package classes.Scenes.NPCs
 				this.armorDef = 220;
 				this.armorMDef = 7;
 				this.bonusHP = 900;
+				this.bonusLust = 181;
 				this.level = 21;
 			}
 			if (flags[kFLAGS.LUNA_LVL_UP] == 3) {
@@ -123,6 +126,7 @@ package classes.Scenes.NPCs
 				this.armorDef = 230;
 				this.armorMDef = 8;
 				this.bonusHP = 950;
+				this.bonusLust = 207;
 				this.level = 27;
 			}
 			if (flags[kFLAGS.LUNA_LVL_UP] == 4) {
@@ -132,6 +136,7 @@ package classes.Scenes.NPCs
 				this.armorDef = 240;
 				this.armorMDef = 9;
 				this.bonusHP = 1000;
+				this.bonusLust = 233;
 				this.level = 33;
 			}
 			if (flags[kFLAGS.LUNA_LVL_UP] == 5) {
@@ -141,6 +146,7 @@ package classes.Scenes.NPCs
 				this.armorDef = 250;
 				this.armorMDef = 10;
 				this.bonusHP = 1050;
+				this.bonusLust = 259;
 				this.level = 39;
 			}
 			if (flags[kFLAGS.LUNA_LVL_UP] == 6) {
@@ -150,6 +156,7 @@ package classes.Scenes.NPCs
 				this.armorDef = 260;
 				this.armorMDef = 11;
 				this.bonusHP = 1100;
+				this.bonusLust = 285;
 				this.level = 45;
 			}
 			if (flags[kFLAGS.LUNA_LVL_UP] == 7) {
@@ -159,6 +166,7 @@ package classes.Scenes.NPCs
 				this.armorDef = 270;
 				this.armorMDef = 12;
 				this.bonusHP = 1150;
+				this.bonusLust = 311;
 				this.level = 51;
 			}
 			if (flags[kFLAGS.LUNA_LVL_UP] == 8) {
@@ -168,6 +176,7 @@ package classes.Scenes.NPCs
 				this.armorDef = 280;
 				this.armorMDef = 13;
 				this.bonusHP = 1200;
+				this.bonusLust = 337;
 				this.level = 57;
 			}
 			if (flags[kFLAGS.LUNA_LVL_UP] == 9) {
@@ -177,6 +186,7 @@ package classes.Scenes.NPCs
 				this.armorDef = 290;
 				this.armorMDef = 14;
 				this.bonusHP = 1250;
+				this.bonusLust = 363;
 				this.level = 63;
 			}
 			if (flags[kFLAGS.LUNA_LVL_UP] == 10) {
@@ -186,6 +196,7 @@ package classes.Scenes.NPCs
 				this.armorDef = 300;
 				this.armorMDef = 15;
 				this.bonusHP = 1300;
+				this.bonusLust = 389;
 				this.level = 69;
 			}
 			if (flags[kFLAGS.LUNA_LVL_UP] == 11) {
@@ -195,6 +206,7 @@ package classes.Scenes.NPCs
 				this.armorDef = 310;
 				this.armorMDef = 16;
 				this.bonusHP = 1400;
+				this.bonusLust = 415;
 				this.level = 75;
 			}
 			if (flags[kFLAGS.LUNA_LVL_UP] == 12) {
@@ -204,6 +216,7 @@ package classes.Scenes.NPCs
 				this.armorDef = 320;
 				this.armorMDef = 17;
 				this.bonusHP = 1450;
+				this.bonusLust = 441;
 				this.level = 81;
 			}
 			if (flags[kFLAGS.LUNA_LVL_UP] == 13) {
@@ -213,6 +226,7 @@ package classes.Scenes.NPCs
 				this.armorDef = 330;
 				this.armorMDef = 18;
 				this.bonusHP = 1500;
+				this.bonusLust = 467;
 				this.level = 87;
 			}
 			if (flags[kFLAGS.LUNA_LVL_UP] == 14) {
@@ -222,6 +236,7 @@ package classes.Scenes.NPCs
 				this.armorDef = 340;
 				this.armorMDef = 19;
 				this.bonusHP = 1550;
+				this.bonusLust = 493;
 				this.level = 93;
 			}
 			if (flags[kFLAGS.LUNA_LVL_UP] == 15) {
@@ -231,6 +246,7 @@ package classes.Scenes.NPCs
 				this.armorDef = 350;
 				this.armorMDef = 20;
 				this.bonusHP = 1600;
+				this.bonusLust = 519;
 				this.level = 99;
 			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.a = "";
@@ -252,7 +268,6 @@ package classes.Scenes.NPCs
 			this.weaponName = "paws";
 			this.weaponVerb="paw-slash";
 			this.armorName = "fur";
-			this.bonusLust = 10;
 			this.lust = 10;
 			this.lustVuln = 0;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

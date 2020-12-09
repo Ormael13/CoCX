@@ -20,7 +20,7 @@ public class MaleSpiderMorph extends AbstractSpiderMorph
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if(pcCameWorms){
-				outputText("\n\nThe spider flashes a predatory grin while she waits it out...");
+				outputText("\n\nThe spider flashes a predatory grin while he waits it out...");
 				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				SceneLib.swamp.maleSpiderMorphScene.loseToMaleSpiderMorph();
@@ -59,7 +59,7 @@ public class MaleSpiderMorph extends AbstractSpiderMorph
 			this.armorPerk = "";
 			this.armorValue = 70;
 			this.bonusHP = 200;
-			this.bonusLust = 10;
+			this.bonusLust = 98;
 			this.lust = 20;
 			this.lustVuln = .6;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

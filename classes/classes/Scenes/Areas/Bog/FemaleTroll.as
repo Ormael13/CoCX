@@ -97,7 +97,7 @@ import classes.internals.*;
 			this.weaponVerb="punch";
 			this.armorName = "green fuzz";
 			this.bonusHP = 350;
-			this.bonusLust = 10;
+			this.bonusLust = 235;
 			this.lust = 20;
 			this.lustVuln = .7;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

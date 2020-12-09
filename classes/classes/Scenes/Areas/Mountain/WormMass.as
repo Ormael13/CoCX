@@ -103,6 +103,7 @@ public class WormMass extends Monster
 			this.armorName = "skin";
 			this.armorDef = 1;
 			this.armorMDef = 0;
+			this.bonusLust = 156;
 			this.lust = 30;
 			this.lustVuln = 0;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
@@ -111,7 +112,7 @@ public class WormMass extends Monster
 			this.special1 = wormAttack;
 			this.special2 = wormsEntice;
 			this.drop = NO_DROP;
-			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			checkMonster();
 		}
 

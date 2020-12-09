@@ -220,6 +220,7 @@ public class Minerva extends Monster
 				this.armorDef = 7;
 				this.armorMDef = 2;
 				this.bonusHP = 470;
+				this.bonusLust = 78;
 				this.level = 23;//potem zrobic jak purification udane to dostaje nieco lvl up i stat up tez
 				this.additionalXP = 50;
 			}
@@ -230,6 +231,7 @@ public class Minerva extends Monster
 				this.armorDef = 9;
 				this.armorMDef = 3;
 				this.bonusHP = 940;
+				this.bonusLust = 105;
 				this.level = 29;
 				this.additionalXP = 100;
 			}
@@ -240,6 +242,7 @@ public class Minerva extends Monster
 				this.armorDef = 11;
 				this.armorMDef = 4;
 				this.bonusHP = 1410;
+				this.bonusLust = 132;
 				this.level = 35;
 				this.additionalXP = 150;
 			}
@@ -250,6 +253,7 @@ public class Minerva extends Monster
 				this.armorDef = 13;
 				this.armorMDef = 5;
 				this.bonusHP = 1880;
+				this.bonusLust = 159;
 				this.level = 41;
 				this.additionalXP = 200;
 			}
@@ -260,6 +264,7 @@ public class Minerva extends Monster
 				this.armorDef = 15;
 				this.armorMDef = 6;
 				this.bonusHP = 2350;
+				this.bonusLust = 186;
 				this.level = 47;
 				this.additionalXP = 250;
 			}
@@ -270,6 +275,7 @@ public class Minerva extends Monster
 				this.armorDef = 17;
 				this.armorMDef = 7;
 				this.bonusHP = 2820;
+				this.bonusLust = 213;
 				this.level = 53;
 				this.additionalXP = 300;
 			}
@@ -280,66 +286,73 @@ public class Minerva extends Monster
 				this.armorDef = 19;
 				this.armorMDef = 8;
 				this.bonusHP = 3290;
+				this.bonusLust = 240;
 				this.level = 59;
 				this.additionalXP = 350;
 			}
 			if (flags[kFLAGS.MINERVA_LVL_UP] == 7) {
 				initStrTouSpeInte(183, 220, 250, 180);
-				initWisLibSensCor(175, 85, 95, 45);
+				initWisLibSensCor(175, 107, 95, 45);
 				this.weaponAttack = 120;
 				this.armorDef = 21;
 				this.armorMDef = 9;
 				this.bonusHP = 3760;
+				this.bonusLust = 267;
 				this.level = 65;
 				this.additionalXP = 400;
 			}
 			if (flags[kFLAGS.MINERVA_LVL_UP] == 8) {
 				initStrTouSpeInte(200, 240, 270, 195);
-				initWisLibSensCor(190, 96, 105, 45);
+				initWisLibSensCor(190, 118, 105, 45);
 				this.weaponAttack = 130;
 				this.armorDef = 23;
 				this.armorMDef = 10;
 				this.bonusHP = 4230;
+				this.bonusLust = 294;
 				this.level = 71;
 				this.additionalXP = 450;
 			}
 			if (flags[kFLAGS.MINERVA_LVL_UP] == 9) {
 				initStrTouSpeInte(217, 260, 290, 210);
-				initWisLibSensCor(205, 85, 115, 45);
+				initWisLibSensCor(205, 129, 115, 45);
 				this.weaponAttack = 140;
 				this.armorDef = 25;
 				this.armorMDef = 11;
 				this.bonusHP = 4700;
+				this.bonusLust = 321;
 				this.level = 77;
 				this.additionalXP = 500;
 			}
 			if (flags[kFLAGS.MINERVA_LVL_UP] == 10) {
 				initStrTouSpeInte(234, 280, 310, 225);
-				initWisLibSensCor(220, 96, 125, 45);
+				initWisLibSensCor(220, 140, 125, 45);
 				this.weaponAttack = 150;
 				this.armorDef = 27;
 				this.armorMDef = 12;
 				this.bonusHP = 5170;
+				this.bonusLust = 348;
 				this.level = 83;
 				this.additionalXP = 550;
 			}
 			if (flags[kFLAGS.MINERVA_LVL_UP] == 10) {
 				initStrTouSpeInte(251, 300, 330, 240);
-				initWisLibSensCor(235, 107, 135, 45);
+				initWisLibSensCor(235, 151, 135, 45);
 				this.weaponAttack = 160;
 				this.armorDef = 29;
 				this.armorMDef = 13;
 				this.bonusHP = 5640;
+				this.bonusLust = 375;
 				this.level = 83;
 				this.additionalXP = 550;
 			}
 			if (flags[kFLAGS.MINERVA_LVL_UP] == 10) {
 				initStrTouSpeInte(268, 320, 350, 255);
-				initWisLibSensCor(250, 118, 145, 45);
+				initWisLibSensCor(250, 162, 145, 45);
 				this.weaponAttack = 170;
 				this.armorDef = 31;
 				this.armorMDef = 14;
 				this.bonusHP = 6110;
+				this.bonusLust = 402;
 				this.level = 83;
 				this.additionalXP = 550;
 			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
@@ -383,7 +396,6 @@ public class Minerva extends Monster
 			this.armorName = game.armors.TUBETOP.name;
 			this.armorPerk = "";
 			this.armorValue = 5;
-			this.bonusLust = 20;
 			this.lust = 20;
 			this.lustVuln = .2;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

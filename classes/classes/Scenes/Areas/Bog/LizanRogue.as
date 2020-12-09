@@ -105,7 +105,7 @@ public class LizanRogue extends Monster
 			this.armorDef = 18;
 			this.armorMDef = 2;
 			this.bonusHP = 350;
-			this.bonusLust = 10;
+			this.bonusLust = 66;
 			this.lust = 20;
 			this.lustVuln = .7;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

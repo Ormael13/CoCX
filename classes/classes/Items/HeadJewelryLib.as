@@ -60,5 +60,4 @@ package classes.Items
 		{
 		}
 	}
-
 }

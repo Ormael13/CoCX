@@ -40,6 +40,7 @@ public class CombatUI extends BaseCombatContent {
 	private var blackSpellButtons:ButtonDataList = new ButtonDataList();
 	private var greySpellButtons:ButtonDataList = new ButtonDataList();
 	private var hexSpellButtons:ButtonDataList = new ButtonDataList();
+	private var bloodSpellButtons:ButtonDataList = new ButtonDataList();
 	private var soulforceButtons:ButtonDataList = new ButtonDataList();
 	private var otherButtons:ButtonDataList = new ButtonDataList();
 	public function mainMenu():void {
@@ -51,6 +52,7 @@ public class CombatUI extends BaseCombatContent {
 		blackSpellButtons.clear();
 		greySpellButtons.clear();
 		hexSpellButtons.clear();
+		bloodSpellButtons.clear();
 		soulforceButtons.clear();
 		otherButtons.clear();
 
@@ -467,6 +469,7 @@ public class CombatUI extends BaseCombatContent {
 		combat.magic.buildBlackMenu(blackSpellButtons);
 		combat.magic.buildGreyMenu(greySpellButtons);
 		combat.magic.buildHexMenu(hexSpellButtons);
+		combat.magic.buildBloodMenu(bloodSpellButtons);
 		if (whiteSpellButtons.length > 0) buttons.add("White Spells", curry(submenu,whiteSpellButtons, submenuSpells, 0, false)).hint("Open your White magic book");
 		if (blackSpellButtons.length > 0) buttons.add("Black Spells", curry(submenu,blackSpellButtons, submenuSpells, 0, false)).hint("Open your Black magic book");
 		if (player.hasPerk(PerkLib.PrestigeJobGreySage)) {
@@ -474,6 +477,9 @@ public class CombatUI extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.HexKnowledge)) {
 			if (hexSpellButtons.length > 0) buttons.add("Hexes", curry(submenu,hexSpellButtons, submenuSpells, 0, false)).hint("Open your Hex grimoire");
+		}
+		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
+			if (bloodSpellButtons.length > 0) buttons.add("Blood Spells", curry(submenu,bloodSpellButtons, submenuSpells, 0, false)).hint("Open your Blood grimoire");
 		}
 	}
 

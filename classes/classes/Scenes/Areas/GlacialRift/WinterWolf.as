@@ -127,7 +127,7 @@ public class WinterWolf extends Monster
 			this.armorDef = 36;
 			this.armorMDef = 27;
 			this.bonusHP = 800;
-			this.bonusLust = 10;
+			this.bonusLust = 82;
 			this.lust = 10;
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

@@ -657,23 +657,22 @@ use namespace CoC;
 			doNext(playerMenu);
 		}
 		
-		//Phoenix Platoon -- PC is Defeated
-		public function phoenixPlatoonMurdersPC():void {
+		//Phoenix Squad -- PC is Defeated
+		public function phoenixSquadMurdersPC():void {
 			clearOutput();
 			outputText("You collapse, too ");
 			if(player.lust >= player.maxLust()) outputText("turned on");
 			else outputText("badly injured");
-			outputText(" to continue the fight.  The platoon of heavy infantry breaks their formation, circling around you with shields still raised, keeping you from making any kind of last-ditch attack.  One prods you with the flat of her blade.  \"<i>Is " + player.mf("he","she") + " down?</i>\"");
-
+			outputText(" to continue the fight.  The squad of heavy infantry breaks their formation, circling around you with shields still raised, keeping you from making any kind of last-ditch attack.  One prods you with the flat of her blade.  \"<i>Is " + player.mf("he","she") + " down?</i>\"");
 			outputText("\n\n\"<i>Yeah,</i>\" another says. \"<i>This one's a goner. Let's bring " + player.mf("him","her") + " up to mom.</i>\"");
 			//(Go to \"<i>Harpy Breeding Slut</i>\" Bad End)
 			doNext(harpyQueenBeatsUpPCBadEnd);
 		}
 		
-		//Phoenix Platoon -- PC is Victorious
-		public function phoenixPlatoonLosesToPC():void {
+		//Phoenix Squad -- PC is Victorious
+		public function phoenixSquadLosesToPC():void {
 			clearOutput();
-			outputText("With one final grunt, the last of the phoenixes collapses onto the pile of defeated warriors you've left in your wake.  The once-mighty platoon of soldiers has been reduced to a bruised, lusty heap of flesh, scales and feathers.  Seeing that the battle is won, you lower your [weapon] and take a look around.");
+			outputText("With one final grunt, the last of the phoenixes collapses onto the pile of defeated warriors you've left in your wake.  The once-mighty squad of soldiers has been reduced to a bruised, lusty heap of flesh, scales and feathers.  Seeing that the battle is won, you lower your [weapon] and take a look around.");
 			flags[kFLAGS.HEL_PHOENIXES_DEFEATED]++;
 			cleanupAfterCombat();
 		}
@@ -1329,7 +1328,7 @@ use namespace CoC;
 			if(flags[kFLAGS.HEL_PHOENIXES_DEFEATED] == 0) {
 				outputText("You ascend the heavy stone steps, circling the tower's walls as you ascend.  You are stopped perhaps half-way to the second main floor on a small terrace level with a wide open view overlooking the vale beneath the high mountains.  As you step onto the mezzanine, you watch with a scowl as a number of tall, muscular hermaphrodites step out from the shadows.  Each is clad in heavy chainmail and wields a scimitar and a blood-red shield, but is otherwise nude, revealing their reptilian pricks and slick pussies.  The soldiers standing before you look like harpies, but they have scaled, humanoid legs, long, fiery tails and their wings are the darkest crimson.  These are phoenixes - the dread half-breed warriors you and Hel are here to stop!");
 				menu();
-				startCombat(new PhoenixPlatoon());
+				startCombat(new PhoenixSquad());
 				doNext(playerMenu);
 				return;
 			}
@@ -1395,5 +1394,4 @@ use namespace CoC;
 			}
 		}
 	}
-
 }

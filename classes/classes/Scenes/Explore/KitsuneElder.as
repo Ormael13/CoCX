@@ -186,7 +186,7 @@ import classes.internals.*;
 			this.armorDef = 25;
 			this.armorMDef = 75;
 			this.bonusHP = 400;
-			this.bonusLust = 20;
+			this.bonusLust = 230;
 			this.bonusMana = 1000;
 			this.bonusSoulforce = 1000;
 			this.lust = 20;

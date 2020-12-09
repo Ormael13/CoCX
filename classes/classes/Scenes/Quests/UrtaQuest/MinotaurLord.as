@@ -197,7 +197,7 @@ use namespace CoC;
 			this.armorDef = 22;
 			this.armorMDef = 3;
 			this.bonusHP = 640 + rand(this.ballSize*4);
-			this.bonusLust = 40 + rand(this.ballSize*3);
+			this.bonusLust = 122 + rand(this.ballSize*3);
 			this.lust = 50;
 			this.lustVuln = 0.33;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
@@ -213,6 +213,7 @@ use namespace CoC;
 			this.tailType = Tail.COW;
 			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			checkMonster();
 		}
 

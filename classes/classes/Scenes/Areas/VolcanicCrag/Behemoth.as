@@ -81,7 +81,7 @@ public class Behemoth extends Monster
 			this.armorDef = 12;
 			this.armorMDef = 2;
 			this.bonusHP = 900;
-			this.bonusLust = 20;
+			this.bonusLust = 90;
 			this.lust = 15;
 			this.lustVuln = 0.3;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

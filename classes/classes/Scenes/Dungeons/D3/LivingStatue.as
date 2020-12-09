@@ -135,6 +135,7 @@ import classes.internals.ChainedDrop;
 					player.createStatusEffect(StatusEffects.KnockedBack, 0, 0, 0, 0);
 					this.createStatusEffect(StatusEffects.KnockedBack, 0, 0, 0, 0); // Applying to mob as a "used ability" marker
 				}
+				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				damage = player.takePhysDamage(damage, true);
 			}
 		}
@@ -149,6 +150,7 @@ import classes.internals.ChainedDrop;
 			else
 			{
 				//Hit
+				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" The concussive strike impacts you with bonecrushing force. ");
 				damage = player.takePhysDamage(damage, true);
 			}
@@ -184,6 +186,7 @@ import classes.internals.ChainedDrop;
 			else
 			{
 				//Hit
+				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" You're squarely struck by the spinning hammer. ");
 				damage = player.takePhysDamage(damage, true);
 			}
@@ -191,29 +194,32 @@ import classes.internals.ChainedDrop;
 		
 		override protected function performCombatAction():void
 		{
-			if (this.HPRatio() < 0.7 && !this.hasStatusEffect(StatusEffects.KnockedBack))
-			{
-				this.backhand();
+			if (hasStatusEffect(StatusEffects.Provoke)) {
+				if (!this.hasStatusEffect(StatusEffects.KnockedBack)) this.backhand();
+				else if (!this.hasStatusEffect(StatusEffects.Disarmed) && player.weaponName != "fists") this.disarm();
+				else {
+					var opts1:Array = [];
+					if (!player.hasStatusEffect(StatusEffects.Blind) && !player.hasStatusEffect(StatusEffects.Stunned)) opts1.push(dirtKick);
+					if (!player.hasStatusEffect(StatusEffects.Blind) && !player.hasStatusEffect(StatusEffects.Stunned)) opts1.push(concussiveBlow);
+					opts1.push(cycloneStrike);
+					opts1.push(cycloneStrike);
+					opts1.push(overhandSmash);
+					opts1[rand(opts1.length)]();
+				}
 			}
-			else if (this.HPRatio() < 0.4 && !this.hasStatusEffect(StatusEffects.Disarmed) && player.weaponName != "fists")
-			{
-				this.disarm();
+			else {
+				if (this.HPRatio() < 0.7 && !this.hasStatusEffect(StatusEffects.KnockedBack)) this.backhand();
+				else if (this.HPRatio() < 0.4 && !this.hasStatusEffect(StatusEffects.Disarmed) && player.weaponName != "fists") this.disarm();
+				else {
+					var opts:Array = [];
+					if (!player.hasStatusEffect(StatusEffects.Blind) && !player.hasStatusEffect(StatusEffects.Stunned)) opts.push(dirtKick);
+					if (!player.hasStatusEffect(StatusEffects.Blind) && !player.hasStatusEffect(StatusEffects.Stunned)) opts.push(concussiveBlow);
+					opts.push(cycloneStrike);
+					opts.push(cycloneStrike);
+					opts.push(overhandSmash);
+					opts[rand(opts.length)]();
+				}
 			}
-			else
-			{
-				var opts:Array = [];
-				
-				if (!player.hasStatusEffect(StatusEffects.Blind) && !player.hasStatusEffect(StatusEffects.Stunned)) opts.push(dirtKick);
-				if (!player.hasStatusEffect(StatusEffects.Blind) && !player.hasStatusEffect(StatusEffects.Stunned)) opts.push(concussiveBlow);
-				opts.push(cycloneStrike);
-				opts.push(cycloneStrike);
-				opts.push(overhandSmash);
-				
-				opts[rand(opts.length)]();
-			}
-			
 		}
-		
 	}
-
 }

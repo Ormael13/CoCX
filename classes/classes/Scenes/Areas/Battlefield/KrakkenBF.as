@@ -41,7 +41,7 @@ public class KrakkenBF extends Monster
 			this.armorDef = 30;
 			this.armorMDef = 30;
 			this.bonusHP = 150;
-			this.bonusLust = 20;
+			this.bonusLust = 160;
 			this.lust = 20;
 			this.lustVuln = .2;
 			this.level = 60;

@@ -289,7 +289,5 @@ public function trainingArcheryWithKindra():void {
 		doNext(meet2Kindra);
 	}
 }
-
 }
-
 }

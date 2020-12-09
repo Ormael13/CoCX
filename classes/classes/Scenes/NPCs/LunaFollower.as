@@ -4,26 +4,26 @@
  */
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.BodyParts.Antennae;
-	import classes.BodyParts.Arms;
-	import classes.BodyParts.Ears;
-	import classes.BodyParts.Eyes;
-	import classes.BodyParts.Face;
-	import classes.BodyParts.Horns;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.RearBody;
-	import classes.BodyParts.Skin;
-	import classes.BodyParts.Tail;
-	import classes.BodyParts.Tongue;
-	import classes.BodyParts.Wings;
+import classes.*;
+import classes.BodyParts.Antennae;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
+import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.SceneLib;
-	import classes.Items.MutationsHelper;
+import classes.Scenes.SceneLib;
+import classes.Items.MutationsHelper;
 import classes.Stats.Buff;
 import classes.display.SpriteDb;
-	import classes.internals.SaveableState;
+import classes.internals.SaveableState;
 
 public class LunaFollower extends NPCAwareContent implements SaveableState
 	{

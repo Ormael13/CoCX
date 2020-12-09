@@ -74,10 +74,13 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function cleanupAfterCombatImpl():void {
 		if (player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.removeStatusEffect(StatusEffects.CounterRagingInferno);
-		//fireMagicLastTurn = -100;
+		if (player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.removeStatusEffect(StatusEffects.CounterGlacialStorm);
+		if (player.hasStatusEffect(StatusEffects.CounterHighVoltage)) player.removeStatusEffect(StatusEffects.CounterHighVoltage);
+		if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) player.removeStatusEffect(StatusEffects.CounterEclipsingShadow);
+		/*fireMagicLastTurn = -100;
 		iceMagicLastTurn = -100;
 		lightningMagicLastTurn = -100;
-		darknessMagicLastTurn = -100;
+		darknessMagicLastTurn = -100;*/
 	}
 
 	internal function spellCostImpl(mod:Number):Number {
@@ -101,6 +104,34 @@ public class CombatMagic extends BaseCombatContent {
 		mod *= costPercent / 100;
 		if (player.hasPerk(PerkLib.BloodMage) && mod < 5) mod = 5;
 		else if (mod < 2) mod = 2;
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+	
+	internal function spellCostBloodImpl(mod:Number):Number {
+		//Addiditive mods
+		var costPercent:Number = 100;
+		if (player.hasPerk(PerkLib.SeersInsight)) costPercent -= (100 * player.perkv1(PerkLib.SeersInsight));
+		if (player.hasPerk(PerkLib.SpellcastingAffinity)) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
+		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
+		if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
+		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
+		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) costPercent -= 10;
+		if (player.hasPerk(PerkLib.WayOfTheBlood)) costPercent -= 10;
+		if (player.hasPerk(PerkLib.YourPainMyPower)) costPercent -= 10;
+		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) costPercent -= 10;
+		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
+		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
+		if (player.weapon == weapons.N_STAFF) costPercent += 200;
+		if (spellModImpl() > 1) costPercent += Math.round(spellModImpl() - 1) * 10;
+		if (player.level >= 24 && player.inte >= 60) costPercent += 50;
+		if (player.level >= 42 && player.inte >= 120) costPercent += 50;
+		if (player.level >= 60 && player.inte >= 180) costPercent += 50;
+		if (player.level >= 78 && player.inte >= 240) costPercent += 50;
+		//Limiting it and multiplicative mods
+		if (costPercent < 5) costPercent = 5;
+		mod *= costPercent / 100;
+		if (mod < 2) mod = 2;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -326,6 +357,17 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
 		if (player.hasStatusEffect(StatusEffects.DarkRitual)) mod *= 3;
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+	
+	internal function spellModBloodImpl():Number {
+		var mod:Number = 0;
+		mod += spellModImpl();
+		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) mod += .2;
+		if (player.hasPerk(PerkLib.WayOfTheBlood)) mod += .2;
+		if (player.hasPerk(PerkLib.YourPainMyPower)) mod += .2;
+		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) mod += .2;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -672,7 +714,6 @@ public class CombatMagic extends BaseCombatContent {
 		return whiteLustCap;
 	}
 
-
 	private var fireMagicLastTurn:int = -100;
 	private var fireMagicCumulated:int = 0;
 	internal function calcInfernoModImpl(damage:Number):int {
@@ -693,151 +734,66 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		return damage;
 	}
-	internal function calcInfernoModImpl2(damage:Number):int {
-		if (player.hasPerk(PerkLib.RagingInferno)) {
-			var multiplier:Number = 1;
-			if (combatRound - fireMagicLastTurn == 2) {
-				outputText("Traces of your previously used fire magic are still here, and you use them to empower another spell!\n\n");
-				switch (fireMagicCumulated) {
-					case 0:
-					case 1:
-						multiplier = 1;
-						break;
-					case 2:
-						multiplier = 1.2;
-						break;
-					case 3:
-						multiplier = 1.35;
-						break;
-					case 4:
-						multiplier = 1.45;
-						break;
-					default:
-						multiplier = 1.5 + ((fireMagicCumulated - 5) * 0.05); //Diminishing returns at max, add 0.05 to multiplier.
-				}
-				damage = Math.round(damage * multiplier);
-				fireMagicCumulated++;
-				// XXX: Message?
-			} else {
-				if (combatRound - fireMagicLastTurn > 2 && fireMagicLastTurn > 0)
-					outputText("Unfortunately, traces of your previously used fire magic are too weak to be used.\n\n");
-				fireMagicCumulated = 1;
-			}
-			fireMagicLastTurn = combatRound;
-		}
-		return damage;
-	}
 
 	private var iceMagicLastTurn:int = -100;
 	private var iceMagicCumulated:int = 0;
-
 	internal function calcGlacialModImpl(damage:Number):int {
 		if (player.hasPerk(PerkLib.GlacialStorm)) {
+			if (!player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.createStatusEffect(StatusEffects.CounterGlacialStorm,0,0,0,0);
 			var multiplier:Number = 1;
-			if (combatRound - iceMagicLastTurn == 2) {
+			if (player.statusEffectv1(StatusEffects.CounterGlacialStorm) == 0) outputText("Unfortunately, traces of your previously used ice magic are too weak to be used.\n\n");
+			else {
 				outputText("Traces of your previously used ice magic are still here, and you use them to empower another spell!\n\n");
-				switch (iceMagicCumulated) {
-					case 0:
-					case 1:
-						multiplier = 1;
-						break;
-					case 2:
-						multiplier = 1.2;
-						break;
-					case 3:
-						multiplier = 1.35;
-						break;
-					case 4:
-						multiplier = 1.45;
-						break;
-					default:
-						multiplier = 1.5 + ((iceMagicCumulated - 5) * 0.05); //Diminishing returns at max, add 0.05 to multiplier.
-				}
+				multiplier += player.statusEffectv1(StatusEffects.CounterGlacialStorm) * 0.05;
 				damage = Math.round(damage * multiplier);
-				iceMagicCumulated++;
-				// XXX: Message?
-			} else {
-				if (combatRound - iceMagicLastTurn > 2 && iceMagicLastTurn > 0)
-					outputText("Unfortunately, traces of your previously used ice magic are too weak to be used.\n\n");
-				iceMagicCumulated = 1;
 			}
-			iceMagicLastTurn = combatRound;
+			if (player.statusEffectv4(StatusEffects.CounterGlacialStorm) == 0) {
+				player.addStatusValue(StatusEffects.CounterGlacialStorm, 4, 1);
+				if (player.hasPerk(PerkLib.GlacialStormEx)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, 6);
+				else player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, 4);
+			}
 		}
 		return damage;
 	}
 
 	private var lightningMagicLastTurn:int = -100;
 	private var lightningMagicCumulated:int = 0;
-
 	internal function calcVoltageModImpl(damage:Number):int {
 		if (player.hasPerk(PerkLib.HighVoltage)) {
+			if (!player.hasStatusEffect(StatusEffects.CounterHighVoltage)) player.createStatusEffect(StatusEffects.CounterHighVoltage,0,0,0,0);
 			var multiplier:Number = 1;
-			if (combatRound - lightningMagicLastTurn == 2) {
+			if (player.statusEffectv1(StatusEffects.CounterHighVoltage) == 0) outputText("Unfortunately, traces of your previously used lightning magic are too weak to be used.\n\n");
+			else {
 				outputText("Traces of your previously used lightning magic are still here, and you use them to empower another spell!\n\n");
-				switch (lightningMagicCumulated) {
-					case 0:
-					case 1:
-						multiplier = 1;
-						break;
-					case 2:
-						multiplier = 1.2;
-						break;
-					case 3:
-						multiplier = 1.35;
-						break;
-					case 4:
-						multiplier = 1.45;
-						break;
-					default:
-						multiplier = 1.5 + ((lightningMagicCumulated - 5) * 0.05); //Diminishing returns at max, add 0.05 to multiplier.
-				}
+				multiplier += player.statusEffectv1(StatusEffects.CounterHighVoltage) * 0.05;
 				damage = Math.round(damage * multiplier);
-				lightningMagicCumulated++;
-				// XXX: Message?
-			} else {
-				if (combatRound - lightningMagicLastTurn > 2 && lightningMagicLastTurn > 0)
-					outputText("Unfortunately, traces of your previously used lightning magic are too weak to be used.\n\n");
-				lightningMagicCumulated = 1;
 			}
-			lightningMagicLastTurn = combatRound;
+			if (player.statusEffectv4(StatusEffects.CounterHighVoltage) == 0) {
+				player.addStatusValue(StatusEffects.CounterHighVoltage, 4, 1);
+				if (player.hasPerk(PerkLib.HighVoltageEx)) player.addStatusValue(StatusEffects.CounterHighVoltage, 1, 6);
+				else player.addStatusValue(StatusEffects.CounterHighVoltage, 1, 4);
+			}
 		}
 		return damage;
 	}
 
 	private var darknessMagicLastTurn:int = -100;
 	private var darknessMagicCumulated:int = 0;
-
 	internal function calcEclypseModImpl(damage:Number):int {
 		if (player.hasPerk(PerkLib.EclipsingShadow)) {
+			if (!player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) player.createStatusEffect(StatusEffects.CounterEclipsingShadow,0,0,0,0);
 			var multiplier:Number = 1;
-			if (combatRound - darknessMagicLastTurn == 2) {
+			if (player.statusEffectv1(StatusEffects.CounterEclipsingShadow) == 0) outputText("Unfortunately, traces of your previously used darkness magic are too weak to be used.\n\n");
+			else {
 				outputText("Traces of your previously used darkness magic are still here, and you use them to empower another spell!\n\n");
-				switch (darknessMagicCumulated) {
-					case 0:
-					case 1:
-						multiplier = 1;
-						break;
-					case 2:
-						multiplier = 1.2;
-						break;
-					case 3:
-						multiplier = 1.35;
-						break;
-					case 4:
-						multiplier = 1.45;
-						break;
-					default:
-						multiplier = 1.5 + ((darknessMagicCumulated - 5) * 0.05); //Diminishing returns at max, add 0.05 to multiplier.
-				}
+				multiplier += player.statusEffectv1(StatusEffects.CounterEclipsingShadow) * 0.05;
 				damage = Math.round(damage * multiplier);
-				darknessMagicCumulated++;
-				// XXX: Message?
-			} else {
-				if (combatRound - darknessMagicLastTurn > 2 && darknessMagicLastTurn > 0)
-					outputText("Unfortunately, traces of your previously used darkness magic are too weak to be used.\n\n");
-				darknessMagicCumulated = 1;
 			}
-			darknessMagicLastTurn = combatRound;
+			if (player.statusEffectv4(StatusEffects.CounterEclipsingShadow) == 0) {
+				player.addStatusValue(StatusEffects.CounterEclipsingShadow, 4, 1);
+				if (player.hasPerk(PerkLib.EclipsingShadowEx)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 6);
+				else player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 4);
+			}
 		}
 		return damage;
 	}
@@ -1408,6 +1364,129 @@ public class CombatMagic extends BaseCombatContent {
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
+		}
+	}
+	
+	public function buildBloodMenu(buttons:ButtonDataList):void {
+		var bd:ButtonData;
+		var bloodForBloodGod:Number = (player.HP - player.minHP());
+		if (player.hasStatusEffect(StatusEffects.KnowsBloodMissiles)) {
+			bd = buttons.add("BloodMissiles", spellBloodMissiles)
+					.hint("Blood Missiles is simple blood spell that will attack foe with five blood spheres.  " +
+							"\n\nBlood Cost: " + spellCostBlood(50) + "");
+			if ((bloodForBloodGod - 1) < spellCostBlood(50)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodMissiles)) {
+				bd.disable("You need more time before you can cast this spell again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsBloodExplosion)) {
+			bd = buttons.add("BloodExplosion", spellBloodExplosion)
+					.hint("Blood Explosion is simple blood spell that will attack foe with blood orb.  \n\n<b>AoE Spell.</b>  " +
+							"\n\nBlood Cost: " + spellCostBlood(200) + "");
+			if ((bloodForBloodGod - 1) < spellCostBlood(200)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodExplosion)) {
+				bd.disable("You need more time before you can cast this spell again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			}
+		}
+	}
+	
+	public function spellBloodMissiles():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		HPChange(spellCostBlood(50), false);
+		player.createStatusEffect(StatusEffects.CooldownSpellBloodMissiles,2,0,0,0);
+		if(handleShell()){return;}
+		outputText("You concentrate, focusing on the power of your blood before drawing it from your body, "+(player.HP < player.maxOverHP() ? "wounds":"skin pores")+". Around you form a few crimson spheres you aim at " + monster.a + monster.short + " !\n\n");
+		var damage:Number = scalingBonusIntelligence() * spellModBlood();
+		if (damage < 10) damage = 10;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		outputText(monster.capitalA + monster.short + " takes ");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		outputText(" damage.");
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else {
+			if (monster is Lethice && (monster as Lethice).fightPhase == 3) {
+				outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			}
+			enemyAI();
+		}
+	}
+	
+	public function spellBloodExplosion():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		HPChange(spellCostBlood(200), false);
+		player.createStatusEffect(StatusEffects.CooldownSpellBloodExplosion,3,0,0,0);
+		if(handleShell()){return;}
+		outputText("You concentrate, focusing on the power of your blood before drawing it from your body, " + (player.HP < player.maxOverHP() ? "wounds":"skin pores") + ". Blood starts to gather above your hand, coalescing into a crimson sphere. ");
+		outputText("It roils as you concentrate on it before aim the orb at " + monster.a + monster.short + ", it brusts and seeps into " + monster.pronoun2 + " on impact as " + monster.pronoun1 + "'" + (monster.plural ? "re":"s") + " afflicted by the magic.\n\n");
+		var damage:Number = scalingBonusIntelligence() * spellModBlood() * 4;
+		if (damage < 10) damage = 10;
+		if (monster.plural) damage *= 5;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		outputText(monster.capitalA + monster.short + " takes ");
+		damage = doMagicDamage(damage, true, true);
+		outputText(" damage.");
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else {
+			if (monster is Lethice && (monster as Lethice).fightPhase == 3) {
+				outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			}
+			enemyAI();
 		}
 	}
 
@@ -2435,10 +2514,10 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		if (monster.plural) damage *= 5;
 		outputText(monster.capitalA + monster.short + " takes ");
-		damage = doIceDamage(damage, true, true);
-		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) {
-			damage = doIceDamage(damage, true, true);
-			damage = doIceDamage(damage, true, true);
+		doIceDamage(damage, true, true);
+		if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) {
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
 		}
 		outputText(" damage.");
 		//Using fire attacks on the goo]
@@ -2449,7 +2528,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
+		if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -2468,7 +2547,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
 			player.removeStatusEffect(StatusEffects.ChanneledAttack);
 			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
-			//if (player.hasPerk(PerkLib.) && player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, -1);
+			if (player.hasPerk(PerkLib.GlacialStormSu) && player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, -1);
 			outputText("You drain the heat out of the air around your foe, causing its temperature to plummet far below its freezing point in an instant, effectively flash freezing your enemy for \n");
 			var damage:Number = scalingBonusIntelligence() * spellMod() * 24;
 			//Determine if critical hit!
@@ -2489,10 +2568,10 @@ public class CombatMagic extends BaseCombatContent {
 			//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bedą dostawać bonusowe obrażenia
 			//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 			if (monster.plural) damage *= 5;
-			damage = doIceDamage(damage, true, true);
-			if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) {
-				damage = doIceDamage(damage, true, true);
-				damage = doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) {
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
 			}
 			outputText(" damage!");
 			//Using fire attacks on the goo]
@@ -2503,7 +2582,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			outputText(" " + monster.a + monster.short + " is encased in a thick layer of ice.\n\n");
 			if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-			if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
+			if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
 			monster.createStatusEffect(StatusEffects.FrozenSolid,5,0,0,0);
 			checkAchievementDamage(damage);
 			flags[kFLAGS.SPELLS_CAST]++;
@@ -2538,7 +2617,7 @@ public class CombatMagic extends BaseCombatContent {
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 5, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.CooldownSpellBlackTier3, 12, 0, 0, 0);
-			//if (player.hasPerk(PerkLib.)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, 1);
+			if (player.hasPerk(PerkLib.GlacialStormSu)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, 1);
 			outputText("\n\n");
 			enemyAI();
 		}
@@ -2588,10 +2667,10 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.plural) damage *= 5;
 		damage = Math.round(damage);
 		outputText(monster.capitalA + monster.short + " takes ");
-		damage = doFireDamage(damage, true, true);
-		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) {
-			damage = doFireDamage(damage, true, true);
-			damage = doFireDamage(damage, true, true);
+		doFireDamage(damage, true, true);
+		if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) {
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
 		}
 		outputText(" damage.");
 		//Using fire attacks on the goo]
@@ -2602,7 +2681,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
+		if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -2639,43 +2718,43 @@ public class CombatMagic extends BaseCombatContent {
 			if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
 			if (monster.plural) damage *= 5;
 			damage = Math.round(damage);
-			damage = doFireDamage(damage, true, true);
-			damage = doFireDamage(damage, true, true);
-			damage = doFireDamage(damage, true, true);
-			damage = doFireDamage(damage, true, true);
-			damage = doFireDamage(damage, true, true);
-			damage = doFireDamage(damage, true, true);
-			damage = doFireDamage(damage, true, true);
-			damage = doFireDamage(damage, true, true);
-			damage = doFireDamage(damage, true, true);
-			damage = doFireDamage(damage, true, true);
-			damage = doFireDamage(damage, true, true);
-			damage = doFireDamage(damage, true, true);
-			if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) {
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
-				damage = doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) {
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
 			}
 			outputText(" damage!");
 			//Using fire attacks on the goo]
@@ -2687,7 +2766,7 @@ public class CombatMagic extends BaseCombatContent {
 			outputText(" " + monster.capitalA + monster.short + " reels from the impact, trying to recover from this devastating assault as a meteor crash in the area.\n\n");
 			if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 			damage *= 10;
-			if (!monster.hasPerk(PerkLib.EnemyGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
+			if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
 			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			checkAchievementDamage(damage);
 			flags[kFLAGS.SPELLS_CAST]++;

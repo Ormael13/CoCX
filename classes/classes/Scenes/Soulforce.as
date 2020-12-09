@@ -29,6 +29,7 @@ import classes.Scenes.Areas.Forest.TentacleBeastRaging;
 import classes.Scenes.Areas.Forest.WorldTree;
 import classes.Scenes.Areas.HighMountains.IzumiScene;
 import classes.Scenes.Dungeons.D3.Lethice;
+import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
@@ -1641,6 +1642,7 @@ use namespace CoC;
 				//addButton(3, "", ).hint("Add 1 .");
 				//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
 				//addButton(5, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
+				addButton(4, "R.Manuscript", AddRedManuscript).hint("Add 1 Red Manuscript.");
 				addButton(5, "ALICORN", AddAlicornium).hint("Add 1 Alicornium.");
 				addButton(6, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
 				addButton(7, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
@@ -1714,7 +1716,7 @@ use namespace CoC;
 				addButton(0, "FightForPearl", FightForPearl).hint("Test fight to get Sky Poison Pearl legally (aside we cheat to start fight)");
 				addButton(1, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
 				addButton(2, "Pierce", FightPierce).hint("Test fight with Pierce.");
-				//addButton(3, "", ).hint("Test fight with .");
+				addButton(3, "SuccGard", FightSuccubusGardener).hint("Test fight with Succubus Gardener. (Also it will glitch right after fight so not start this fight if you got unsaved progress that you not wanna loose as only way to handle post fight glitch is restarting game)");
 				//addButton(4, "", ).hint("Test fight with .");
 				//addButton(5, "", ).hint("Test fight with .");
 				//addButton(6, "", ).hint("Test fight with .");
@@ -1744,6 +1746,11 @@ use namespace CoC;
 				addButton(13, "-1-", EnemiesMenu, page - 1);
 				addButton(14, "Back", SoulforceCheats);
 			}
+		}
+		public function FightSuccubusGardener():void {
+			clearOutput();
+			outputText("Entering battle with Succubus Gardener! Enjoy ^^");
+			startCombat(new SuccubusGardener());
 		}
 
 		public function AddEnergyCore():void {
@@ -2577,6 +2584,10 @@ use namespace CoC;
 		public function AddGreyBook():void {
 			outputText("\n\n<b>(Gained 1 Grey Book!)</b>\n\n");
 			inventory.takeItem(consumables.G__BOOK, curry(NonEquipmentMenu, 1));
+		}
+		public function AddRedManuscript():void {
+			outputText("\n\n<b>(Gained 1 Red Manuscript!)</b>\n\n");
+			inventory.takeItem(consumables.RMANUSC, curry(NonEquipmentMenu, 1));
 		}
 		public function AddThePearls():void {
 			outputText("\n\n<b>(Gained set of items to get all perks countering Elemental Conjuer perks negative effects on stat caps!)</b>\n\n");

@@ -4,6 +4,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.ArmorLib;
 import classes.Items.WeaponLib;
 import classes.Scenes.NPCs.NPCAwareContent;
+import classes.Scenes.NPCs.CelessScene;
 
 public class FollowerInteractions extends NPCAwareContent {
 
@@ -327,6 +328,55 @@ private function TellRathazulJojoIsHarmless():void {
 	outputText("You snort disdainfully and answer, \"<i>It's fine.  He's not interested in you – it's me he wants, and he won't be getting any of me unless I decide to let him.</i>\"\n\n");
 	
 	outputText("With the conversation concluded, Rathazul wanders off, murmuring, \"<i>Oh my, no...</i>\"");
+	doNext(camp.returnToCampUseOneHour);
+}
+
+//[Zenji and Corrupt/Tentacle Jojo]
+internal function zenjiFreaksOverJojo():void {
+	clearOutput();
+	outputText("Zenji approaches you, \"<i>[name]. I do <b>NOT</b> like dat… dat ting. That tentacle mouse thing. It is a horrific monster dat must be destroyed. Now.</i>\"\n\n");
+	outputText("You tell Zenji to wait and let you think about this first, are you going to let him exterminate Jojo?\n\n");
+	outputText("Zenji looks at you with visible disgust, \"<i>It’s me or dat ting, [name]</i>\"\n\n");
+	simpleChoices("", null, "Zenji", zenjiFreaksOverJojo1, "", null, "Jojo", zenjiFreaksOverJojo2, "", null);
+}
+private function zenjiFreaksOverJojo1():void {
+	clearOutput();
+	outputText("You tell Zenji that you love him, and you want him to be with you.\n\n");
+	outputText("Zenji places a hand on your shoulder, \"<i>Smart choice, [name].</i>\" He grabs his spear, \"<i>I’m going to get rid of dis filth from de camp, don’t wait up on me.</i>\"\n\n");
+	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 2;
+	doNext(camp.returnToCampUseOneHour);
+}
+private function zenjiFreaksOverJojo2():void {
+	clearOutput();
+	outputText("You tell Zenji that you made Jojo this way for a reason, you’re not going to just let him go.\n\n");
+	outputText("Zenji gives you a mournful glance, \"<i>I love you, [name]. I was willing to look past your faults for de beauty I saw within you… but dis… dis is not right and you know it. I know it, why can’t you see dat.</i>\"\n\n");
+	outputText("He shakes his head, \"<i>Goodbye [name].</i>\" Zenji says as he leaves, packing up his things before disappearing into the distance.\n\n");
+	flags[kFLAGS.ZENJI_PROGRESS] = -1;
+	doNext(camp.returnToCampUseOneHour);
+}
+
+//[Zenji and Corrupt Celess]
+internal function zenjiFreaksOverCorruptCeless():void {
+	clearOutput();
+	outputText("Zenji approaches you with a stern look on his face. \"<i>[name]. I. Do. Not. Like. Dat. Ting. Dat ting you brought into de camp, I dunno what it is, I don’t want to know how it got here or why. But I must get rid of it, now. It REEKS of corruption and de filth dat plagues dis lang.</i>\"\n\n");
+	outputText("You ask him what he’s talking about and he gestures to Celess. You halt Zenji, do you really want him to get rid of Celess? You can tell by the look on his face that he is disgusted by her. If you choose not to get rid of her he’ll most likely leave forever.\n\n");
+	simpleChoices("", null, "Zenji", zenjiFreaksOverCorruptCeless1, "", null, "Celess", zenjiFreaksOverCorruptCeless2, "", null);
+}
+private function zenjiFreaksOverCorruptCeless1():void {
+	clearOutput();
+	outputText("You tell Zenji that while Celess is your child, perhaps he’s right. You love him, and through all that, he’s something you’d give up the world for, or in this case, Celess.\n\n");
+	outputText("Zenji pulls you in for a tender hug, his strong, muscular arms wrap around you, keeping you close to him for a moment. \"<i>I’m glad you see it my way, [name]. Dere is still hope, always, even in de darkness. Now, I’m gonna get rid of dis… darkness from de camp.</i>\"\n\n");
+	outputText("Zenji picks up his spear and heads off, you don’t want to know how he’s going to do it, but you’re sure you’ll never hear about Celess again.\n\n");
+	CelessScene.instance.setDeadOrRemoved();
+	doNext(camp.returnToCampUseOneHour);
+}
+private function zenjiFreaksOverCorruptCeless2():void {
+	clearOutput();
+	outputText("You tell Zenji that Celess is your child, if he can’t accept that then he should just leave. You love her just as much as you love him, if not more.\n\n");
+	outputText("Zenji is stunned at your words. His shoulders slump and he sighs softly, \"<i>Oh, [name]... What’s gotten into you… I did not tink I’d see anyting like dis from you, and yet… you’re always full of surprises… dis time though… dis time I cannot stick around. It’s not right, you know dat [name], why can’t you see dat as I do?</i>\"\n\n");
+	outputText("Zenji rests his strong hand on your shoulder for a moment, \"<i>Goodbye, [name]. Maybe if you can take time ta reflect on your decisions I may return, but… You’re gonna need a lot of time ta look deep into yourself to see de light within.</i>\"\n\n");
+	outputText("Zenji releases his grasp on you before packing his stuff up and leaving your camp, presumably forever.\n\n");
+	flags[kFLAGS.ZENJI_PROGRESS] = -1;
 	doNext(camp.returnToCampUseOneHour);
 }
 	

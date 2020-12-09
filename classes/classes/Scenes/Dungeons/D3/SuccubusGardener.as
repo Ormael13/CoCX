@@ -33,21 +33,26 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.weaponName = "tentacles";
 			this.weaponVerb = "lash";
-			this.weaponAttack = 29;
+			this.weaponAttack = 30;
 			this.armorName = "tentaclothes";
-			this.armorDef = 12;
-			this.armorMDef = 1;
-			initStrTouSpeInte(100, 125, 110, 100);
+			this.armorDef = 18;
+			this.armorMDef = 3;
+			initStrTouSpeInte(100, 195, 110, 100);
 			initWisLibSensCor(100, 150, 60, 100);
-			this.bonusHP = 1200;
-			this.bonusLust = 40;
+			this.bonusHP = 2500;
+			this.bonusLust = 250;
 			this.fatigue = 0;
 			this.gems = 200 + rand(50);
 			this.level = 40;
 			this.lustVuln = 0;
+			this.drop = NO_DROP;
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
-			this.drop = NO_DROP;
+			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
+			//this.createPerk(PerkLib.Diehard, 0, 0, 0, 0); - czy te perki są jej potrzebne?
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 			createStatusEffect(StatusEffects.TentagrappleCooldown, 10, 0, 0, 0);
@@ -92,7 +97,6 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 			if (player.hasStatusEffect(StatusEffects.ShowerDotEffect))
 			{
 				showerDotEffect();
-				
 				if (player.lust >= player.maxLust()) return;
 			}
 			
@@ -115,7 +119,6 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 				if (this.lust <  40) opts.push(taunt);
 				if (this.lust >= 40) opts.push(motorboat);
 				if (this.lust >= 40) opts.push(tasteTheEcstasy);
-				
 				opts[rand(opts.length)]();
 			}
 			statScreenRefresh();
@@ -141,11 +144,11 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 			{
 				outputText("Tipping herself backward, the succubus gardener lets herself pitch into the writhing tendrils behind her, her mouth opened welcomingly. The tentacles gently catch her, and rather than ravishing her vulnerable form, they merely gather above her parted lips, dribbling thick flows of pink slime. Her throat bobs as she swallows, her injuries vanishing in seconds. The vines push her back up onto her feet. She's smiling a little dopily.");
 				
-				if (this.lustVuln <= 0.15)
+				if (this.lustVuln <= 0.3)
 				{
 					outputText(" <b>You aren't sure, but she seems to be leering at you a little more openly.</b>");
 				}
-				else if (this.lustVuln <= 0.45)
+				else if (this.lustVuln <= 0.6)
 				{
 					outputText(" <b>She's definitely leering at you now.</b>");
 				}
@@ -154,17 +157,16 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 					outputText(" <b>There's no disguising the lecherous look on her face while she eye-humps you.</b>");
 				}
 				
-				if (this.lustVuln <= 0.3) outputText(" Whatever is in that healing nectar must be weakening her self-control.");
+				if (this.lustVuln <= 0.1) outputText(" Whatever is in that healing nectar must be weakening her self-control.");
 			}
-			else
-			{
+			else {
 				outputText("Acting on some unseen signal, the forest of tentacles lurches into action, surrounding its insensate mistress in a veil of wiggling green. A bundle of slime-dripping vines can be spotted through gaps in the verdant veil, hanging over their demonic caretaker with remarkable care, leaking gooey strands of pink into her mouth. Her throat works to swallow it, and when she emerges a second later, her injuries have vanished and her eyes");
 				
-				if (this.lustVuln <= 0.15)
+				if (this.lustVuln <= 0.3)
 				{
 					outputText(" are slightly glassy.");
 				}
-				else if (this.lustVuln <= 0.45)
+				else if (this.lustVuln <= 0.6)
 				{
 					outputText(" are even glassier.");
 				}
@@ -173,11 +175,11 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 					outputText(" are dilated and a little slow.");
 				}
 				
-				if (this.lustVuln <= 0.3) outputText(" Whatever is in that healing nectar must be weakening her self-control.");
+				if (this.lustVuln <= 0.1) outputText(" Whatever is in that healing nectar must be weakening her self-control.");
 			}
 			this.HP = this.maxHP();
-			this.lustVuln += 0.3;
-			this.fatigue += 10;
+			if (this.lustVuln < 0.95) this.lustVuln += 0.1;
+			this.fatigue += 50;
 			if (fatigue >= this.maxFatigue()) { //Exhausted!
 				outputText(" <b>It appears that the vines have run out of pink slime.</b>");
 				fatigue = this.maxFatigue();

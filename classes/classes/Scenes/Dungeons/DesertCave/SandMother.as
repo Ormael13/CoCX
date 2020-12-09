@@ -154,7 +154,7 @@ public class SandMother extends Monster
 			this.armorDef = 10;
 			this.armorMDef = 50;
 			this.bonusHP = 130;
-			this.bonusLust = 30;
+			this.bonusLust = 112;
 			this.lust = 20;
 			this.lustVuln = .6;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

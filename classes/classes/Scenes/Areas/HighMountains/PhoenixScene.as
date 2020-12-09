@@ -319,5 +319,4 @@ public class PhoenixScene extends BaseContent
 			EventParser.gameOver();
 		}
 	}
-
 }

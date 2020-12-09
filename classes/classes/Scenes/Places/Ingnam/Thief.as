@@ -40,7 +40,7 @@ public class Thief extends Monster
 			this.armorName = "leather armor";
 			this.armorDef = 3;
 			this.armorMDef = 0;
-			this.bonusLust = 10;
+			this.bonusLust = 33;
 			this.lust = 25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 1;

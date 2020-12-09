@@ -83,7 +83,7 @@ public class Anemone extends Monster
 			this.armorDef = 10;
 			this.armorMDef = 1;
 			this.bonusHP = 120;
-			this.bonusLust = 20;
+			this.bonusLust = 102;
 			this.lust = 30;
 			this.lustVuln = .9;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

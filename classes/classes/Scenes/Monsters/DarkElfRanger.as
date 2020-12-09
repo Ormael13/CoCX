@@ -58,7 +58,7 @@ public class DarkElfRanger extends DarkElfScout
 			this.armorName = "elven armor";
 			this.armorDef = 12;
 			this.armorMDef = 12;
-			this.bonusLust = 20;
+			this.bonusLust = 189;
 			this.lustVuln = .7;
 			this.lust = 50;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

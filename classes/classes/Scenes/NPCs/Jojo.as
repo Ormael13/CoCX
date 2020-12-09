@@ -99,21 +99,21 @@ public class Jojo extends Monster
 			//Create jojo sex attributes
 			//Variations based on jojo's corruption.
 			if(JojoScene.monk == 3) {
-				this.lust += 30;
+				this.lust += 70;
 				this.cocks[0].cockThickness += .2;
 				this.cocks[0].cockLength += 1.5;
 				this.bonusLust = 10;
 				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 2;
 			}
 			if(JojoScene.monk == 4) {
-				this.lust += 40;
+				this.lust += 85;
 				this.cocks[0].cockThickness += .5;
 				this.cocks[0].cockLength += 3.5;
 				this.bonusLust = 20;
 				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 3;
 			}
 			if(JojoScene.monk == 5) {
-				this.lust += 50;
+				this.lust += 100;
 				this.cocks[0].cockThickness += 1;
 				this.cocks[0].cockLength += 5.5;
 				this.strStat.core.value -= 20 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);

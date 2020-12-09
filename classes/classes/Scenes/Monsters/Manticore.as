@@ -142,7 +142,7 @@ use namespace CoC;
 			this.armorDef = 10;
 			this.armorMDef = 2;
 			this.bonusHP = 100;
-			this.bonusLust = 50;
+			this.bonusLust = 280;
 			this.lust = 30;
 			this.lustVuln = .8;
 			this.level = 30;

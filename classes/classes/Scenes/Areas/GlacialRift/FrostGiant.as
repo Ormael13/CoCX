@@ -226,7 +226,7 @@ public class FrostGiant extends Monster
 			this.armorDef = 180;
 			this.armorMDef = 60;
 			this.bonusHP = 2500;
-			this.bonusLust = 10;
+			this.bonusLust = 115;
 			this.lust = 10;
 			this.lustVuln = 0.3;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

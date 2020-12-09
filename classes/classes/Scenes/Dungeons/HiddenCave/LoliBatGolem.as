@@ -20,6 +20,7 @@ public class LoliBatGolem extends Monster
 			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise thrust!");
 			else
 			{
+				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" It strikes you in the chest. ");
 				damage = player.takePhysDamage(damage, true);
 			}

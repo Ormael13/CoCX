@@ -22,6 +22,7 @@ import classes.Scenes.SceneLib;
 				this.armorDef = 0;
 				this.armorMDef = 0;
 				this.bonusHP = 200;
+				this.bonusLust = 80;
 				this.level = 3;
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] == 2) {
@@ -31,6 +32,7 @@ import classes.Scenes.SceneLib;
 				this.armorDef = 8;
 				this.armorMDef = 2;
 				this.bonusHP = 400;
+				this.bonusLust = 97;
 				this.level = 9;
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] == 3) {
@@ -40,6 +42,7 @@ import classes.Scenes.SceneLib;
 				this.armorDef = 16;
 				this.armorMDef = 4;
 				this.bonusHP = 600;
+				this.bonusLust = 114;
 				this.level = 15;
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] == 4) {
@@ -49,6 +52,7 @@ import classes.Scenes.SceneLib;
 				this.armorDef = 24;
 				this.armorMDef = 6;
 				this.bonusHP = 800;
+				this.bonusLust = 131;
 				this.level = 21;
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] == 5) {
@@ -58,6 +62,7 @@ import classes.Scenes.SceneLib;
 				this.armorDef = 32;
 				this.armorMDef = 8;
 				this.bonusHP = 1000;
+				this.bonusLust = 148;
 				this.level = 27;
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] == 6) {
@@ -67,6 +72,7 @@ import classes.Scenes.SceneLib;
 				this.armorDef = 40;
 				this.armorMDef = 10;
 				this.bonusHP = 1200;
+				this.bonusLust = 165;
 				this.level = 33;
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] == 7) {
@@ -76,6 +82,7 @@ import classes.Scenes.SceneLib;
 				this.armorDef = 48;
 				this.armorMDef = 12;
 				this.bonusHP = 1400;
+				this.bonusLust = 182;
 				this.level = 39;
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] == 8) {
@@ -85,6 +92,7 @@ import classes.Scenes.SceneLib;
 				this.armorDef = 56;
 				this.armorMDef = 14;
 				this.bonusHP = 1600;
+				this.bonusLust = 199;
 				this.level = 45;
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] == 9) {
@@ -94,6 +102,7 @@ import classes.Scenes.SceneLib;
 				this.armorDef = 64;
 				this.armorMDef = 16;
 				this.bonusHP = 1800;
+				this.bonusLust = 216;
 				this.level = 51;
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] == 10) {
@@ -103,6 +112,7 @@ import classes.Scenes.SceneLib;
 				this.armorDef = 72;
 				this.armorMDef = 18;
 				this.bonusHP = 2000;
+				this.bonusLust = 233;
 				this.level = 57;
 			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear) (also makes npc use new better gear)
 			this.a = "";
@@ -127,7 +137,6 @@ import classes.Scenes.SceneLib;
 			this.armorName = "heavy plate armor";
 			this.armorPerk = "";
 			this.armorValue = 70;
-			this.bonusLust = 20;
 			this.lust = 30;
 			this.lustVuln = .35;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

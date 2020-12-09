@@ -142,7 +142,7 @@ public class ImpLord extends Imp
 			this.armorDef = 5;
 			this.armorMDef = 1;
 			this.bonusHP = 100;
-			this.bonusLust = 30;
+			this.bonusLust = 97;
 			this.lust = 30;
 			this.lustVuln = .65;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

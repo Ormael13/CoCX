@@ -882,9 +882,8 @@ public function encounterPureMaraeEndgame():void {
 	}
 	flags[kFLAGS.PURE_MARAE_ENDGAME] = 1;
 	menu();
-	addButton(0, "Bring it on!", initiateFightMarae).hint("Challenge Marae to a fight. This is going to be an extremely HARD boss fight! \n\nRecommended level: 30+");
+	addButton(0, "Bring it on!", initiateFightMarae).hint("Challenge Marae to a fight. This is going to be an extremely HARD boss fight! \n\nRecommended level: 60+");
 	addButton(1, "Not yet!", camp.returnToCampUseOneHour);
 }
-
 }
 }

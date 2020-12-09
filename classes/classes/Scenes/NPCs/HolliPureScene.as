@@ -46,7 +46,7 @@ public function treeMenu():void {
 		addButton(14, "Back", inventory.inventoryMenu);
 	}
 	else if (flags[kFLAGS.FLOWER_LEVEL] == 3) {
-		outputText("The familiar plant has blossomed into a nicely sized tree, though you doubt it has finished growing just yet.  It sports an outstretched canopy with nice, green leaves.  The vaginal flower is still there and is in full bloom, now several feet across and practically dripping with moisture.  Just up the trunk, there's a pair of small, roughly b-cup breasts bulging out of the bark.  They're exquisitely smooth and soft, and they ooze sweet-smelling sap that your tongue would love to taste.  In the canopy above, tentacle vines idly writhe about, though they show no sizes of aggression.");
+		outputText("The familiar plant has blossomed into a nicely sized tree, though you doubt it has finished growing just yet.  It sports an outstretched canopy with nice, green leaves.  The vaginal flower is still there and is in full bloom, now several feet across and practically dripping with moisture.  Just up the trunk, there's a pair of small, roughly b-cup breasts bulging out of the bark.  They're exquisitely smooth and soft, and they ooze sweet-smelling sap that your tongue would love to taste.  In the canopy above, tentacle vines idly writhe about, though they show no signs of aggression.");
 		if(player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
 			outputText("\n\nIt could be burned down with your supernatural fire, but it would definitely tire you.");
 		}
@@ -58,7 +58,12 @@ public function treeMenu():void {
 		addButton(14, "Back", inventory.inventoryMenu);
 	}
 	else if (flags[kFLAGS.FLOWER_LEVEL] == 4) {
-		outputText("Walking over to the edge of your camp, you approach the familiar tree.  It looks innocent enough from a distance, but this image is strained a little but by the tentacles cleverly camouflaged in the foliage!  Once you get closer, the bark splits like a pair of silken curtains, and a female form exposes itself from inside the interior.  Heavy, dripping tits and a fully-unfolded female flower dominate her form, but you drag your eyes up to her own, staring into Holli's golden-brown pupils and black sclera as you greet her.");
+		if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && rand(4) == 0) {
+			outputText("You go up to meet with Holli, but you find Zenji is already there. \"<i>I do not trust you, you reek of de filth dat plagues dis land.</i>\" He says.");
+			outputText("\n\n\"<i>Don't be a prude, troll,</i>\" Holli responds, \"<i>Marae gifted your people with life, why don't you want to share it with me? After all, I know what a troll is capable of when they mate,</i>\" she says coyly.");
+			outputText("\n\n\"<i>And accept de taint you carry? I don' tink so.</i>\" He scoffs. Zenji leaves. Noticing you're approaching Holli, Zenji speaks up to you, \"<i>Be careful around dat ting, I don't trust her, even if she claims she’s from Marae, she has a foul stench about her.</i>\"");
+		}
+		else outputText("Walking over to the edge of your camp, you approach the familiar tree.  It looks innocent enough from a distance, but this image is strained a little but by the tentacles cleverly camouflaged in the foliage!  Once you get closer, the bark splits like a pair of silken curtains, and a female form exposes itself from inside the interior.  Heavy, dripping tits and a fully-unfolded female flower dominate her form, but you drag your eyes up to her own, staring into Holli's golden-brown pupils and black sclera as you greet her.");
 		outputText("\n\n\"<i>Welcome back, [name].  ");
 		if(rand(2) == 0) outputText("Did you come for a drink?  I've built up lots of nectar for you.  Surely, a sip would be refreshing for you...");
 		else outputText("How may I help you?  Tell me your wish so that I can try fulfill it.");
@@ -475,6 +480,5 @@ private function toggleHolliGuard():void {
 	menu();
 	addButton(0,"Next",treeMenu);
 }
-
 }
 }

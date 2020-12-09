@@ -694,7 +694,5 @@ public class PatchouliScene extends NPCAwareContent {
 			}
 		}
 	}
-
-
 }
 }

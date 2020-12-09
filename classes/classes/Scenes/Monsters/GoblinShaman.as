@@ -159,7 +159,7 @@ public class GoblinShaman extends Goblin
 			this.armorMDef = 36;
 			this.fatigue = 0;
 			this.bonusHP = 375;
-			this.bonusLust = 20;
+			this.bonusLust = 114;
 			this.lust = 35;
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

@@ -147,7 +147,7 @@ import classes.internals.ChainedDrop;
 			this.armorDef = 27;
 			this.armorMDef = 12;
 			this.bonusHP = 200;
-			this.bonusLust = 20;
+			this.bonusLust = 221;//lib+sens+lvl
 			this.lust = 20 + rand(40);
 			this.lustVuln = 0.9;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

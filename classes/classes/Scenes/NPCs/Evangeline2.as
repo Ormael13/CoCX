@@ -318,7 +318,7 @@ public class Evangeline2 extends Monster
 				this.armorDef = 11;
 				this.armorMDef = 5;
 				this.bonusHP = 210;
-				this.bonusLust = 40;
+				this.bonusLust = 74;
 				this.lustVuln = .8;
 				this.lust = 40;
 				this.additionalXP += 35;
@@ -341,7 +341,7 @@ public class Evangeline2 extends Monster
 				this.armorDef = 16;
 				this.armorMDef = 5;
 				this.bonusHP = 240;
-				this.bonusLust = 40;
+				this.bonusLust = 76;
 				this.lustVuln = .8;
 				this.lust = 70;
 				this.additionalXP += 40;
@@ -365,7 +365,7 @@ public class Evangeline2 extends Monster
 				this.armorDef = 16;
 				this.armorMDef = 5;
 				this.bonusHP = 270;
-				this.bonusLust = 40;
+				this.bonusLust = 78;
 				this.lustVuln = .8;
 				this.lust = 70;
 				this.additionalXP += 45;
@@ -390,7 +390,7 @@ public class Evangeline2 extends Monster
 				this.armorDef = 16;
 				this.armorMDef = 10;
 				this.bonusHP = 330;
-				this.bonusLust = 40;//Jak zyska perk BoosTierEnemy wtedy bonus lust musi wzrosnac do 50 z 40 wiec do tego czasu nie ma bonus lust bedzie na 40 stał
+				this.bonusLust = 82;
 				this.lust = 70;
 				this.lustVuln = .75;//im bedziej poteżna bedzie tym bliżej 0 powinno być czyli trudniej ją lustem pobijać ^^
 				this.additionalXP += 55;
@@ -417,7 +417,7 @@ public class Evangeline2 extends Monster
 				this.armorDef = 16;
 				this.armorMDef = 10;
 				this.bonusHP = 360;
-				this.bonusLust = 40;
+				this.bonusLust = 84;
 				this.lust = 70;
 				this.lustVuln = .75;
 				this.additionalXP += 60;
@@ -437,7 +437,6 @@ public class Evangeline2 extends Monster
 			this.fatigue = 0;
 			this.gems = 0;
 			this.drop = NO_DROP;
-			this.libStat.core.value += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);

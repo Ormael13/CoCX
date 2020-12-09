@@ -164,7 +164,7 @@ public class Imp extends Monster
 			this.armorName = "leathery skin";
 			this.armorDef = 1;
 			this.armorMDef = 0;
-			this.bonusLust = 30;
+			this.bonusLust = 91;
 			this.lust = 40;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 1;

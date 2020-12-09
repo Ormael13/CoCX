@@ -103,7 +103,7 @@ public class OmnibusOverseer extends Monster
 			this.armorDef = 18;
 			this.armorMDef = 2;
 			this.bonusHP = 400;
-			this.bonusLust = 50;
+			this.bonusLust = 176;
 			this.lust = 20;
 			this.lustVuln = 0.75;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

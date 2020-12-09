@@ -249,7 +249,7 @@ import classes.internals.*;
 			this.armorMDef = 50;
 			this.bonusHP = 200000;
 			this.bonusMana = 15000;
-			this.bonusLust = 40;
+			this.bonusLust = 590;
 			this.lust = 30;
 			if (hasStatusEffect(StatusEffects.Maleficium)) this.lustVuln = 0.75;
 			else this.lustVuln = 0.5;

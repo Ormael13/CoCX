@@ -117,7 +117,7 @@ package classes.Scenes.Camp
 			this.armorName = "dragon scales";
 			this.armorDef = 2000;
 			this.armorMDef = 10;
-			this.bonusLust = 30;
+			this.bonusLust = 120;
 			this.lustVuln = .6;
 			this.lust = 50;
 			this.level = 60;

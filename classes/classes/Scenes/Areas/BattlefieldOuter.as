@@ -39,7 +39,7 @@ use namespace CoC;
 			}
 			//Diana
 			if (flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(10) == 0) {
-				SceneLib.dianaScene.repeatLakeEnc();
+				SceneLib.dianaScene.repeatBattlefieldEnc();
 				return;
 			}
 			//Ted

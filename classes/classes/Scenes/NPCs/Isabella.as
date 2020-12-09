@@ -225,6 +225,7 @@ public class Isabella extends Monster
 				this.armorDef = 16;
 				this.armorMDef = 4;
 				this.bonusHP = 600;
+				this.bonusLust = 109;
 				this.level = 20;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 1) {
@@ -234,6 +235,7 @@ public class Isabella extends Monster
 				this.armorDef = 24;
 				this.armorMDef = 6;
 				this.bonusHP = 800;
+				this.bonusLust = 126;
 				this.level = 26;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 2) {
@@ -243,6 +245,7 @@ public class Isabella extends Monster
 				this.armorDef = 32;
 				this.armorMDef = 8;
 				this.bonusHP = 1000;
+				this.bonusLust = 147;
 				this.level = 32;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 3) {
@@ -252,6 +255,7 @@ public class Isabella extends Monster
 				this.armorDef = 40;
 				this.armorMDef = 10;
 				this.bonusHP = 1200;
+				this.bonusLust = 168;
 				this.level = 38;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 4) {
@@ -261,6 +265,7 @@ public class Isabella extends Monster
 				this.armorDef = 48;
 				this.armorMDef = 12;
 				this.bonusHP = 1400;
+				this.bonusLust = 189;
 				this.level = 44;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 5) {
@@ -270,6 +275,7 @@ public class Isabella extends Monster
 				this.armorDef = 54;
 				this.armorMDef = 14;
 				this.bonusHP = 1600;
+				this.bonusLust = 210;
 				this.level = 50;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 6) {
@@ -279,6 +285,7 @@ public class Isabella extends Monster
 				this.armorDef = 62;
 				this.armorMDef = 16;
 				this.bonusHP = 1800;
+				this.bonusLust = 231;
 				this.level = 56;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 7) {
@@ -288,6 +295,7 @@ public class Isabella extends Monster
 				this.armorDef = 70;
 				this.armorMDef = 18;
 				this.bonusHP = 2000;
+				this.bonusLust = 252;
 				this.level = 62;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 8) {
@@ -297,6 +305,7 @@ public class Isabella extends Monster
 				this.armorDef = 78;
 				this.armorMDef = 20;
 				this.bonusHP = 2200;
+				this.bonusLust = 273;
 				this.level = 68;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 9) {
@@ -306,6 +315,7 @@ public class Isabella extends Monster
 				this.armorDef = 86;
 				this.armorMDef = 22;
 				this.bonusHP = 2400;
+				this.bonusLust = 294;
 				this.level = 74;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 10) {
@@ -315,6 +325,7 @@ public class Isabella extends Monster
 				this.armorDef = 94;
 				this.armorMDef = 24;
 				this.bonusHP = 2600;
+				this.bonusLust = 315;
 				this.level = 80;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 11) {
@@ -324,6 +335,7 @@ public class Isabella extends Monster
 				this.armorDef = 102;
 				this.armorMDef = 26;
 				this.bonusHP = 2800;
+				this.bonusLust = 336;
 				this.level = 86;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 12) {
@@ -333,6 +345,7 @@ public class Isabella extends Monster
 				this.armorDef = 110;
 				this.armorMDef = 28;
 				this.bonusHP = 3000;
+				this.bonusLust = 357;
 				this.level = 92;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 13) {
@@ -342,6 +355,7 @@ public class Isabella extends Monster
 				this.armorDef = 118;
 				this.armorMDef = 30;
 				this.bonusHP = 3200;
+				this.bonusLust = 378;
 				this.level = 98;
 			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.weaponName = "giant shield";
@@ -349,7 +363,6 @@ public class Isabella extends Monster
 			this.armorName = "giant shield";
 			this.armorPerk = "";
 			this.armorValue = 70;
-			this.bonusLust = 20;
 			this.lust = 30;
 			this.lustVuln = .35;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

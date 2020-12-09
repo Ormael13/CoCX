@@ -150,7 +150,7 @@ import classes.internals.*;
 			this.skinTone = "crimson";
 			this.hairColor = "black";
 			this.hairLength = 8;
-			initStrTouSpeInte(120, 140, 100, 70);
+			initStrTouSpeInte(124, 150, 104, 70);
 			initWisLibSensCor(70, 15, 10, 55);
 			this.weaponName = "dual scimitars";
 			this.weaponVerb="slash";
@@ -161,15 +161,16 @@ import classes.internals.*;
 			this.armorDef = 14;
 			this.armorMDef = 2;
 			this.bonusHP = 1750;
-			this.bonusLust = 40;
+			this.bonusLust = 55;
 			this.lust = 0;
 			this.lustVuln = .15;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 30;
+			this.level = 33;
 			this.additionalXP = 300;
 			this.drop = new WeightedDrop().add(weapons.SCIMITR, 1);
 			this.gems = 300;
 			this.special1 = scimitarSpecial;
+			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			checkMonster();
 		}
 	}

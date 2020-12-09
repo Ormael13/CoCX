@@ -47,19 +47,15 @@ import classes.Scenes.SceneLib;
 			if (player.hasKeyItem("Marae's Lethicite") >= 0) outputText(" easily as big as Marae's.");
 			else outputText(" like the purple crystals in the factory, only this one is three times as big.");
 			outputText("\n\n<b>Lethicite acquired!</b>");
-			
 			player.createKeyItem("Stone Statue Lethicite", 0, 0, 0, 0);
-
-cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			cleanupAfterCombat(SceneLib.d3.resumeFromFight);
         }
 		
 		public function fuckinMarbleOP(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			clearOutput();
 			outputText("You slump to your knees, overwhelmed and unable to see the shadow of the falling hammer. Your last thoughts are of regret.");
-			
 			EventParser.gameOver();
 		}
 	}
-
 }

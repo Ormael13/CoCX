@@ -1289,7 +1289,6 @@ private function finalGayFinallee(road:int = 0):void {
 		player.orgasm();
 		dynStats("sen", 5);
 		model.time.days++;
-		
 		model.time.hours = 6;
 		//Lust sated
 		//Gained 1 lust draft, lost a few gems(9 or so?)
@@ -1298,13 +1297,11 @@ private function finalGayFinallee(road:int = 0):void {
 		//Time set to morning
 	}
 }
-
 	//Prisoner mod!
 	private function investigateBackAlley():void {
 		clearOutput();
 		outputText("Your curiousity draws you half way down a dark alleyway between two tents. In the gloom ahead you see what appears to be a cage wagon, and hear the sounds of guttural voices engaged in boisterous conversation. Inexplicably you find yourself struck by an unwholesome sense of foreboding. <b>Even from here that cage looks like it is designed to carry people off to somewhere very unpleasant, some place where your life could be turned upside down and the rules you have become accustomed to in this world may no longer apply.</b> You take a long moment to consider turning back. Do you throw caution to the wind and investigate further?");
         doYesNo(SceneLib.prison.goDirectlyToPrisonDoNotPassGoDoNotCollect200Gems, enterTheBazaarAndMenu);
     }
-
 }
 }

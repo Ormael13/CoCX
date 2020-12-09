@@ -897,7 +897,8 @@ use namespace CoC;
 		//Some other checks
 		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 12); }
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }
-		public function isNightCreature():Boolean { return (vampireScore() >= 10 || batScore() >= 6 || jiangshiScore() >= 20);}
+		public function isNightCreature():Boolean { return (vampireScore() >= 10 || batScore() >= 6 || jiangshiScore() >= 20); }
+		public function isHavingEnhancedHearing():Boolean { return (ears.type == Ears.ELVEN); }	
 		//Weapons for Whirlwind
 		public function isWeaponForWhirlwind():Boolean
 		{
@@ -3659,10 +3660,15 @@ use namespace CoC;
 			}
 			if (TopRace == "oni") {
 				if (TopScore) {
-					if (TopScore >= 12) {
+					if (TopScore >= 18) {
+						if (isTaur()) race = "elder oni-taur";
+						else race = "elder oni";
+					}
+					else if (TopScore >= 12) {
 						if (isTaur()) race = "oni-taur";
 						else race = "oni";
-					} else {
+					}
+					else {
 						if (isTaur()) race = "half oni-taur";
 						else race = "half oni";
 					}
@@ -4334,7 +4340,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (sharkScore() >= 8)
 				chimeraCounter++;
-			if (orcaScore() >= 17)
+			if (orcaScore() >= 14)
 				chimeraCounter++;
 			if (oniScore() >= 12)
 				chimeraCounter++;
@@ -4465,9 +4471,11 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (lowerBody == 51 && hydraScore() >= 19)
 				grandchimeraCounter++;
-/*			if (oniScore() >= 12)
+			if (oniScore() >= 18)
 				grandchimeraCounter++;
-			if (elfScore() >= 11)
+			if (orcaScore() >= 20)
+				grandchimeraCounter++;
+/*			if (elfScore() >= 11)
 				grandchimeraCounter++;
 			if (orcScore() >= 11)
 				grandchimeraCounter++;
@@ -6790,11 +6798,15 @@ use namespace CoC;
 				oniCounter++;
 			if (skin.base.pattern == Skin.PATTERN_BATTLE_TATTOO)
 				oniCounter++;
+			if (rearBody.type == RearBody.NONE)
+				oniCounter++;
 			if (tailType == Tail.NONE)
 				oniCounter++;
-			if (tone >= 75)
+			if (tone >= 80)
 				oniCounter++;
-			if (tone >= 150 && oniCounter >= 4)
+			if (tone >= 120 && oniCounter >= 4)
+				oniCounter++;
+			if (tone >= 160 && oniCounter >= 8)
 				oniCounter++;
 			if ((hasVagina() && biggestTitSize() >= 19) || (cocks.length > 18))
 				oniCounter++;
@@ -9185,6 +9197,8 @@ use namespace CoC;
 				counter++;
 			if ((findPerk(PerkLib.VampiricBloodsteamFinalForm) >= 0 || findPerk(PerkLib.HollowFangsFinalForm) >= 0) && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
 				counter++;
+			if (findPerk(PerkLib.VampiresDescendant) >= 0 || findPerk(PerkLib.BloodlineVampire) >= 0)
+				counter += 2;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && counter >= 4)
 				counter++;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && counter >= 8)
@@ -9747,7 +9761,7 @@ use namespace CoC;
 				if (findPerk(PerkLib.IronStomachEx) >= 0) overeatingLimit += 10;
 				if (findPerk(PerkLib.IronStomachSu) >= 0) overeatingLimit += 15;/*(perki muszą dać zwiekszenie limitu przejedzenia sie bez przyrostu wagi powyżej 10 ^^)
 				overeatingLimit += 10;overating perk chyba			perki overating dające stałe utrzymywanie hunger powyżej limitu max hunger dopóki hunger naturalnie nie zostanie zużyty xD
-				overeatingLimit += 20;overeating ex perk chyba		achiev polegający na przeżyciu x dni bez jedzenie czegokolwiek wic każde podniesienie hunger resetuje ten timer xD
+				overeatingLimit += 20;overeating ex perk chyba		achiev polegający na przeżyciu x dni bez jedzenie czegokolwiek wiec każde podniesienie hunger resetuje ten timer xD
 				overeatingLimit += 40;overeating su perk chyba*/
 				hunger += amnt;
 				if (hunger > maxHunger()) {
@@ -9892,8 +9906,8 @@ use namespace CoC;
 
 		public function spellCount():Number
 		{
-			return [StatusEffects.KnowsArcticGale, StatusEffects.KnowsArouse, StatusEffects.KnowsBlind, StatusEffects.KnowsBlink, StatusEffects.KnowsBlizzard, StatusEffects.KnowsChainLighting, StatusEffects.KnowsCharge, StatusEffects.KnowsChargeA, StatusEffects.KnowsDarknessShard, StatusEffects.KnowsDuskWave, StatusEffects.KnowsFireStorm, StatusEffects.KnowsHeal,
-			StatusEffects.KnowsIceRain, StatusEffects.KnowsIceSpike,StatusEffects.KnowsLightningBolt, StatusEffects.KnowsManaShield,StatusEffects.KnowsMight,StatusEffects.KnowsNosferatu,StatusEffects.KnowsRegenerate,StatusEffects.KnowsWhitefire]
+			return [StatusEffects.KnowsArcticGale, StatusEffects.KnowsArouse, StatusEffects.KnowsBlind, StatusEffects.KnowsBlink, StatusEffects.KnowsBlizzard, StatusEffects.KnowsBloodExplosion, StatusEffects.KnowsBloodMissiles, StatusEffects.KnowsChainLighting, StatusEffects.KnowsCharge, StatusEffects.KnowsChargeA, StatusEffects.KnowsDarknessShard, StatusEffects.KnowsDuskWave,
+			StatusEffects.KnowsFireStorm, StatusEffects.KnowsHeal, StatusEffects.KnowsIceRain, StatusEffects.KnowsIceSpike,StatusEffects.KnowsLightningBolt, StatusEffects.KnowsManaShield,StatusEffects.KnowsMight,StatusEffects.KnowsNosferatu,StatusEffects.KnowsRegenerate,StatusEffects.KnowsWhitefire]
 					.filter(function(item:StatusEffectType, index:int, array:Array):Boolean{
 						return this.hasStatusEffect(item);},this)
 					.length;
@@ -10985,10 +10999,10 @@ use namespace CoC;
 					maxTouCap2 += 70;
 					maxSpeCap2 += 100;
 				}
-				else if (orcaScore() >= 17) {
-					maxStrCap2 += 125;
+				else if (orcaScore() >= 14) {
+					maxStrCap2 += 100;
 					maxTouCap2 += 40;
-					maxSpeCap2 += 100;
+					maxSpeCap2 += 70;
 				}
 				else {
 					maxStrCap2 += 35;
@@ -10997,7 +11011,13 @@ use namespace CoC;
 				}
 			}//+10/10-20
 			if (oniScore() >= 6) {
-				if (oniScore() >= 12) {
+				if (oniScore() >= 18) {
+					maxStrCap2 += 150;
+					maxTouCap2 += 90;
+					maxIntCap2 -= 30;
+					maxWisCap2 += 60;
+				}
+				else if (oniScore() >= 12) {
 					maxStrCap2 += 100;
 					maxTouCap2 += 60;
 					maxIntCap2 -= 20;
@@ -11207,7 +11227,7 @@ use namespace CoC;
 					maxSpeCap2 -= 15;
 					maxIntCap2 -= 10;
 				}
-				else if (pigScore() >= 10 && pigScore() < 15) {
+				else if (pigScore() >= 10) {
 					maxStrCap2 += 60;
 					maxTouCap2 += 120;
 					maxSpeCap2 -= 15;

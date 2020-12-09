@@ -581,5 +581,4 @@ public class HiddenCave extends DungeonAbstractContent
 			inventory.takeItem(weapons.ERIBBON, roomLStorageW);
 		}
 	}
-
 }

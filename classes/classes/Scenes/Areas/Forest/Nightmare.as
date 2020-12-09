@@ -167,7 +167,7 @@ package classes.Scenes.Areas.Forest
 			this.armorDef = 4;
 			this.armorMDef = 20;
 			this.bonusHP = 1000;
-			this.bonusLust = 10;
+			this.bonusLust = 220;
 			this.lust = 20;
 			this.lustVuln = .85;
 			this.level = 20;

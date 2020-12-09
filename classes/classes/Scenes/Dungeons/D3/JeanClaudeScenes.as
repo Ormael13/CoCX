@@ -368,7 +368,5 @@ import classes.StatusEffects;
 				EventParser.gameOver();
 			}
 		}
-		
 	}
-
 }

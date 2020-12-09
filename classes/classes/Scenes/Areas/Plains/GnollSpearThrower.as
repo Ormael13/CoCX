@@ -356,7 +356,7 @@ import classes.internals.*;
 			this.armorDef = 7;
 			this.armorMDef = 1;
 			this.bonusHP = 500;
-			this.bonusLust = 10;
+			this.bonusLust = 123;
 			this.lust = 30;
 			this.lustVuln = .35;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

@@ -34,7 +34,7 @@ public class MinotaurKing extends Monster
 			this.armorDef = 80;
 			this.armorMDef = 8;
 			this.bonusHP = 2000;
-			this.bonusLust = 100;
+			this.bonusLust = 277;
 			this.gems = 600 + rand(200);
 			this.additionalXP = 2000;
 			this.level = 47;
@@ -43,6 +43,7 @@ public class MinotaurKing extends Monster
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			this.drop = NO_DROP;
 			drop = new WeightedDrop(consumables.PROMEAD, 1);
 			//I don’t know if we ever got multiple item drops set up for CoC. If we did, have this guy drop a five-stack of God’s Mead for the Lethice fight. Otherwise, perhaps drop a single item that will full heal once?

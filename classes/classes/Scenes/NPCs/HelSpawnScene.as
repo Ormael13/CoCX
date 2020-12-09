@@ -1610,7 +1610,5 @@ private function noHuntingBitches():void {
 	outputText("\n\nWith that settled, you sit down as Hel passes out something that must be akin to dinner for her family - mostly booze and ration - and soon you're enjoying a meal with the rowdy family, laughing at Hel's ribald jokes or Hakon's old war stories.  Eventually, Hakon and Kiri leave, waving goodbye until the next time they can visit.");
 	doNext(camp.returnToCampUseOneHour);
 }
-
-
 }
 }

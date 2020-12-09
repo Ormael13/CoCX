@@ -1202,12 +1202,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Knowledge is power
 			if (player.ratatoskrScore() >= 12 && player.findPerk(PerkLib.KnowledgeIsPower) < 0) {
-				outputText("\nLia will probably say: it just works.\n\n(<b>Gained Perk: Knowledge is power</b>)");
+				outputText("\nBecoming more of a Ratatoskr your memory seems to have grown and as such the ability the analyze and properly catalogue your opponents many weaknesses as well as new fighting skills you gained the Knowledge is Power perk!\n\n(<b>Gained Perk: Knowledge is power</b>)");
 				player.createPerk(PerkLib.KnowledgeIsPower, 0, 0, 0, 0);
 				needNext = true;
 			}
 			else if (player.ratatoskrScore() < 12 && player.findPerk(PerkLib.KnowledgeIsPower) >= 0) {// && player.findPerk(PerkLib.LizanMarrow) < 0
-				outputText("\nLia will probably say: it just works.\n\n(<b>Lost Perk: Knowledge is power</b>)");
+				outputText("\nBecoming less of a Ratatoskr your memory has become hazy, your wits slowing down to that of a standard human.\n\n(<b>Lost Perk: Knowledge is power</b>)");
 				player.removePerk(PerkLib.KnowledgeIsPower);
 				needNext = true;
 			}
@@ -1792,6 +1792,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 1 && rand(4) == 0) {
 				outputText("\nWhile wandering around the border of your camp, you randomly kick a rock and a stream of water sprays out. Surprised, you touch the water, discovering it to be startlingly hot. An idea comes to your mind. You get a shovel, digging around the fountaining water which soon turns into a small pool. This is the perfect place to build a hot spring. You smile, delighted at the idea of being able to take frequent baths in it! You resolve to get to work as soon as possible.");
 				flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS]++;
+				needNext = true;
+			}
+			//Marae corrupted or killed + Zenji
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && (flags[kFLAGS.MET_MARAE_CORRUPTED] >= 1 || flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) && ZenjiScenes.ZenjiMarae == false) {
+				outputText("\nZenji approaches you, \"<i>[name]. I.. I felt someting, not long ago. Someting terrible has happened, I feel it deep within me.</i>\"");
+				outputText("\n\nHe pulls you into his protective arms, \"<i>Stay close, [name], dis world just doesn’t feel right anymore.</i>\"");
+				ZenjiScenes.ZenjiMarae = true;
 				needNext = true;
 			}
 			//Tail Hunger

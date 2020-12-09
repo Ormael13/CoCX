@@ -181,7 +181,7 @@ public class SandWitchMob extends Monster
 			this.armorPerk = "";
 			this.armorValue = 5;
 			this.bonusHP = 100;
-			this.bonusLust = 100;
+			this.bonusLust = 102;
 			this.lust = 30;
 			this.lustVuln = .5;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

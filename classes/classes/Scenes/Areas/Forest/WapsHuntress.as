@@ -52,6 +52,7 @@ import classes.StatusEffects.Combat.ParalyzeVenomDebuff;
 			this.armorDef = 42;
 			this.armorMDef = 21;
 			this.bonusHP = 300;
+			this.bonusLust = 264;//lib+sens+lvl
 			this.level = 48;
 			this.gems = rand(38) + 24;
 			this.drop = new ChainedDrop().add(consumables.OVIELIX, 1 / 4)

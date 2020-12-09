@@ -201,7 +201,7 @@ public class Hel extends Monster
 			this.armorPerk = "";
 			this.armorValue = 50;
 			this.bonusHP = 300;
-			this.bonusLust = 20;
+			this.bonusLust = 116;
 			this.lust = 30;
 			this.lustVuln = .35;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

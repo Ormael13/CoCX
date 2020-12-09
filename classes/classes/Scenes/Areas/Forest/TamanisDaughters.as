@@ -128,8 +128,8 @@ public class TamanisDaughters extends Goblin
 			this.armorMDef = 1;
 			this.bonusHP = 50 + (int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2) * 15);
 			if (bonusHP > 3350) bonusHP = 3350;
-			this.bonusLust = 20 + (int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2) * 10);
-			if (bonusLust > 1920) bonusLust = 1920;
+			this.bonusLust = 148 + (int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2) * 10);
+			if (bonusLust > 2048) bonusLust = 2048;
 			this.lust = 30;
 			this.lustVuln = .65;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
@@ -145,7 +145,8 @@ public class TamanisDaughters extends Goblin
 							consumables.PURPDYE);
 			this.special1 = goblinDrugAttack;
 			this.special2 = goblinTeaseAttack;
-			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 20) this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
+			else this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			checkMonster();
 		}
 

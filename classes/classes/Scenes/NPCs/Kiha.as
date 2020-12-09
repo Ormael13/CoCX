@@ -199,6 +199,7 @@ public class Kiha extends Monster
 				this.armorDef = 35;
 				this.armorMDef = 25;
 				this.bonusHP = 500;
+				this.bonusLust = 116;
 				this.level = 21;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 1) {
@@ -208,6 +209,7 @@ public class Kiha extends Monster
 				this.armorDef = 50;
 				this.armorMDef = 30;
 				this.bonusHP = 600;
+				this.bonusLust = 152;
 				this.level = 27;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 2) {
@@ -217,6 +219,7 @@ public class Kiha extends Monster
 				this.armorDef = 65;
 				this.armorMDef = 35;
 				this.bonusHP = 700;
+				this.bonusLust = 188;
 				this.level = 33;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 3) {
@@ -226,6 +229,7 @@ public class Kiha extends Monster
 				this.armorDef = 80;
 				this.armorMDef = 40;
 				this.bonusHP = 800;
+				this.bonusLust = 224;
 				this.level = 39;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 4) {
@@ -235,6 +239,7 @@ public class Kiha extends Monster
 				this.armorDef = 95;
 				this.armorMDef = 45;
 				this.bonusHP = 900;
+				this.bonusLust = 260;
 				this.level = 45;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 5) {
@@ -244,6 +249,7 @@ public class Kiha extends Monster
 				this.armorDef = 110;
 				this.armorMDef = 50;
 				this.bonusHP = 1000;
+				this.bonusLust = 296;
 				this.level = 51;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 6) {
@@ -253,6 +259,7 @@ public class Kiha extends Monster
 				this.armorDef = 125;
 				this.armorMDef = 55;
 				this.bonusHP = 1200;
+				this.bonusLust = 332;
 				this.level = 57;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 7) {
@@ -262,6 +269,7 @@ public class Kiha extends Monster
 				this.armorDef = 140;
 				this.armorMDef = 60;
 				this.bonusHP = 1400;
+				this.bonusLust = 368;
 				this.level = 63;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 8) {
@@ -271,6 +279,7 @@ public class Kiha extends Monster
 				this.armorDef = 155;
 				this.armorMDef = 65;
 				this.bonusHP = 1600;
+				this.bonusLust = 404;
 				this.level = 69;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 9) {
@@ -280,42 +289,47 @@ public class Kiha extends Monster
 				this.armorDef = 170;
 				this.armorMDef = 70;
 				this.bonusHP = 1800;
+				this.bonusLust = 440;
 				this.level = 75;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 10) {
 				initStrTouSpeInte(335, 330, 335, 160);
-				initWisLibSensCor(160, 250, 135, 66);
+				initWisLibSensCor(160, 250, 145, 66);
 				this.weaponAttack = 128;
 				this.armorDef = 185;
 				this.armorMDef = 75;
 				this.bonusHP = 2000;
+				this.bonusLust = 476;
 				this.level = 81;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 11) {
 				initStrTouSpeInte(360, 355, 360, 170);
-				initWisLibSensCor(170, 270, 135, 66);
+				initWisLibSensCor(170, 270, 155, 66);
 				this.weaponAttack = 138;
 				this.armorDef = 200;
 				this.armorMDef = 80;
 				this.bonusHP = 2200;
+				this.bonusLust = 512;
 				this.level = 87;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 12) {
 				initStrTouSpeInte(385, 380, 385, 180);
-				initWisLibSensCor(180, 290, 135, 66);
+				initWisLibSensCor(180, 290, 165, 66);
 				this.weaponAttack = 148;
 				this.armorDef = 215;
 				this.armorMDef = 85;
 				this.bonusHP = 2400;
+				this.bonusLust = 548;
 				this.level = 93;
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] == 13) {
 				initStrTouSpeInte(410, 405, 410, 190);
-				initWisLibSensCor(190, 310, 135, 66);
+				initWisLibSensCor(190, 310, 175, 66);
 				this.weaponAttack = 158;
 				this.armorDef = 230;
 				this.armorMDef = 90;
 				this.bonusHP = 2600;
+				this.bonusLust = 584;
 				this.level = 99;
 			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.a = "";
@@ -346,9 +360,7 @@ public class Kiha extends Monster
 			this.weaponName = "double-bladed axe";
 			this.weaponVerb="fiery cleave";
 			this.armorName = "thick scales";
-			if (game.flags[kFLAGS.KIHA_UNDERGARMENTS] > 0)
-				this.armorDef += (2 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			this.bonusLust = 20;
+			if (game.flags[kFLAGS.KIHA_UNDERGARMENTS] > 0) this.armorDef += (2 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			this.lust = 10;
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

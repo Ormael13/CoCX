@@ -87,7 +87,7 @@ public class GoblinWarrior extends Goblin
 			this.armorDef = 12;
 			this.armorMDef = 1;
 			this.bonusHP = 400;
-			this.bonusLust = 20;
+			this.bonusLust = 106;
 			this.lust = 50;
 			this.lustVuln = 0.44;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

@@ -1154,12 +1154,23 @@ import classes.Items.JewelryLib;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 37) max += 35;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 38) max += 35;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 39) max += 35;
+			if (game.player.dragonScore() >= 16) max += 50;
 			if (game.player.dragonScore() >= 24) max += 50;
-			if (game.player.dragonScore() >= 28) max += 50;
-			//if (game.player.dragonScore() >= 11) max += 25;//pig races having max hunger bonus too?
+			if (game.player.pigScore() >= 5) max += 10;
+			if (game.player.pigScore() >= 10) max += 15;
+			if (game.player.pigScore() >= 15) max += 20;
+			if (game.player.orcaScore() >= 6) max += 15;
+			if (game.player.orcaScore() >= 14) max += 20;
+			if (game.player.orcaScore() >= 20) max += 25;
 			if (findPerk(PerkLib.EzekielBlessing) >= 0) max += 50;
-			if (findPerk(PerkLib.ManticoreMetabolismEvolved) >= 0) max += 50;
 			if (findPerk(PerkLib.DisplacerMetabolismEvolved) >= 0) max += 50;
+			if (findPerk(PerkLib.ManticoreMetabolismEvolved) >= 0) max += 50;
+			if (findPerk(PerkLib.PigBoarFat) >= 0) max += 5;
+			if (findPerk(PerkLib.PigBoarFatEvolved) >= 0) max += 10;
+			if (findPerk(PerkLib.PigBoarFatFinalForm) >= 0) max += 20;
+			if (findPerk(PerkLib.WhaleFat) >= 0) max += 5;
+			if (findPerk(PerkLib.WhaleFatEvolved) >= 0) max += 10;
+			if (findPerk(PerkLib.WhaleFatFinalForm) >= 0) max += 20;
 			// (findPerk(PerkLib.) >= 0 && game.player.humanScore() < 5) max += 100;
 			// jak bedzie mieć chimeryczna nature to kolejny boost to max hunger moze...150 lub nawet 200 ^^
 			if (findPerk(PerkLib.IronStomach) >= 0) max += 50;
@@ -1174,7 +1185,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += 30;
 			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) max += 40;
 			if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) max += 50;
-			if (max > 1850) max = 1850;//obecnie max to 1850
+			if (max > 2030) max = 2030;//obecnie max to 2030
 			return max;
 		}
 

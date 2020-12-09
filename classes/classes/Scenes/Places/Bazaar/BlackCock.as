@@ -2103,5 +2103,4 @@ import classes.lists.Gender;
 			//outputText("\n\n<b>Mystery meat transformations are not yet implemented.</b>");
 		}
 	}
-
 }

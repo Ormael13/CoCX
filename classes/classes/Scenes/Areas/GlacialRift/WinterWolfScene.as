@@ -86,5 +86,4 @@ package classes.Scenes.Areas.GlacialRift
 			cleanupAfterCombat();
 		}
 	}
-
 }

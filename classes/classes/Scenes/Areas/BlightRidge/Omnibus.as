@@ -44,7 +44,7 @@ use namespace CoC;
 					this.armorDef = 72;
 					this.armorMDef = 12;
 					this.bonusHP = 3450;
-					this.bonusLust = 240;
+					this.bonusLust = 380;
 					this.level = 74;
 					this.additionalXP = 1400;
 				}
@@ -55,7 +55,7 @@ use namespace CoC;
 					this.armorDef = 60;
 					this.armorMDef = 10;
 					this.bonusHP = 2300;
-					this.bonusLust = 160;
+					this.bonusLust = 358;
 					this.level = 70;
 					this.additionalXP = 1050;
 				}
@@ -66,7 +66,7 @@ use namespace CoC;
 					this.armorDef = 48;
 					this.armorMDef = 8;
 					this.bonusHP = 1150;
-					this.bonusLust = 80;
+					this.bonusLust = 336;
 					this.level = 66;
 					this.additionalXP = 700;
 				}
@@ -79,7 +79,7 @@ use namespace CoC;
 				this.armorDef = 24;
 				this.armorMDef = 4;
 				this.bonusHP = 575;
-				this.bonusLust = 40;
+				this.bonusLust = 209;
 				this.level = 29;
 				this.additionalXP = 70;
 			}

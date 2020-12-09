@@ -316,7 +316,7 @@ public class Ceraph extends Monster
 			this.armorDef = 10;
 			this.armorMDef = 10;
 			this.bonusHP = 200;
-			this.bonusLust = 40;
+			this.bonusLust = 104;
 			this.lust = 30;
 			this.lustVuln = 0.75;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

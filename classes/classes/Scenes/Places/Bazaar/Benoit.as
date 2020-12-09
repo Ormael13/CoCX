@@ -1841,6 +1841,5 @@ public function femoitSexIntro():void
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}
-	
 }
 }

@@ -66,6 +66,7 @@ import classes.internals.ChainedDrop;
 			this.armorDef = 90;
 			this.armorMDef = 9;
 			this.bonusHP = 200;
+			this.bonusLust = 1355;
 			this.level = 135;
 			this.gems = rand(25) + 15;
 			this.drop = new ChainedDrop().add(consumables.MARAFRU, 1 / 6);

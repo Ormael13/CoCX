@@ -21,5 +21,4 @@ package classes.Items
 		{
 		}
 	}
-	
 }

@@ -115,7 +115,7 @@ public class TentacleBeastRaging extends Monster
 			this.armorMDef = 0;
 			this.bonusHP = 40;
 			this.bonusWrath = 100;
-			this.bonusLust = 20;
+			this.bonusLust = 122;
 			this.lust = 10;
 			this.lustVuln = 0.8;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

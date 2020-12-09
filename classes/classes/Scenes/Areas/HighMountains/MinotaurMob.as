@@ -189,7 +189,7 @@ import classes.Scenes.SceneLib;
 			if((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 2 > 13) lustVuln = .3;
 			else lustVuln -= (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 0.02;
 			this.bonusHP = bonusHP;
-			this.bonusLust = 20 * Math.round((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
+			this.bonusLust = 115 * Math.round((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
 			this.lust = 30;
 			this.lustVuln = lustVuln;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
@@ -200,7 +200,8 @@ import classes.Scenes.SceneLib;
 			this.tailType = Tail.COW;
 			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
 			this.drop = NO_DROP;
-			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00328] > 20) this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
+			else this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();
 		}

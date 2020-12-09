@@ -175,6 +175,7 @@ public class GoblinElder extends Goblin
 				this.armorDef = 48;
 				this.armorMDef = 18;
 				this.bonusHP = 900;
+				this.bonusLust = 132;
 				this.level = 32;
 			}
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 1) {
@@ -184,6 +185,7 @@ public class GoblinElder extends Goblin
 				this.armorDef = 55;
 				this.armorMDef = 21;
 				this.bonusHP = 1050;
+				this.bonusLust = 148;
 				this.level = 38;
 			}
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 2) {
@@ -193,6 +195,7 @@ public class GoblinElder extends Goblin
 				this.armorDef = 62;
 				this.armorMDef = 24;
 				this.bonusHP = 1200;
+				this.bonusLust = 164;
 				this.level = 44;
 			}
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 3) {
@@ -202,6 +205,7 @@ public class GoblinElder extends Goblin
 				this.armorDef = 69;
 				this.armorMDef = 27;
 				this.bonusHP = 1350;
+				this.bonusLust = 180;
 				this.level = 50;
 			}
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 4) {
@@ -211,6 +215,7 @@ public class GoblinElder extends Goblin
 				this.armorDef = 76;
 				this.armorMDef = 30;
 				this.bonusHP = 1500;
+				this.bonusLust = 196;
 				this.level = 56;
 			}
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 5) {
@@ -220,6 +225,7 @@ public class GoblinElder extends Goblin
 				this.armorDef = 83;
 				this.armorMDef = 33;
 				this.bonusHP = 1650;
+				this.bonusLust = 212;
 				this.level = 62;
 			}
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 6) {
@@ -229,6 +235,7 @@ public class GoblinElder extends Goblin
 				this.armorDef = 90;
 				this.armorMDef = 36;
 				this.bonusHP = 1800;
+				this.bonusLust = 228;
 				this.level = 68;
 			}
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 7) {
@@ -238,6 +245,7 @@ public class GoblinElder extends Goblin
 				this.armorDef = 97;
 				this.armorMDef = 39;
 				this.bonusHP = 1950;
+				this.bonusLust = 244;
 				this.level = 74;
 			}
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 8) {
@@ -247,6 +255,7 @@ public class GoblinElder extends Goblin
 				this.armorDef = 104;
 				this.armorMDef = 42;
 				this.bonusHP = 2100;
+				this.bonusLust = 260;
 				this.level = 80;
 			}
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 9) {
@@ -256,6 +265,7 @@ public class GoblinElder extends Goblin
 				this.armorDef = 111;
 				this.armorMDef = 45;
 				this.bonusHP = 2250;
+				this.bonusLust = 276;
 				this.level = 86;
 			}
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 10) {
@@ -265,6 +275,7 @@ public class GoblinElder extends Goblin
 				this.armorDef = 118;
 				this.armorMDef = 48;
 				this.bonusHP = 2400;
+				this.bonusLust = 292;
 				this.level = 92;
 			}
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 11) {
@@ -274,6 +285,7 @@ public class GoblinElder extends Goblin
 				this.armorDef = 125;
 				this.armorMDef = 51;
 				this.bonusHP = 2550;
+				this.bonusLust = 308;
 				this.level = 98;
 			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.a = "the ";
@@ -300,7 +312,6 @@ public class GoblinElder extends Goblin
 			this.weaponVerb = "slash";
 			this.armorName = "bone armor";
 			this.fatigue = 0;
-			this.bonusLust = 20;
 			this.lust = 35;
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

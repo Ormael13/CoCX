@@ -144,7 +144,7 @@ public class ChameleonGirl extends Monster
 			this.armorDef = 30;
 			this.armorMDef = 3;
 			this.bonusHP = 350;
-			this.bonusLust = 10;
+			this.bonusLust = 133;
 			this.lust = 30;
 			this.lustVuln = .25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

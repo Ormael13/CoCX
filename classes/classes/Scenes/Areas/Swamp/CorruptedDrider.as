@@ -155,11 +155,12 @@ import classes.internals.*;
 			this.a = "the ";
 			this.short = "corrupted drider";
 			this.imageName = "corrupteddrider";
-			this.long = "This particular spider-woman is a drider - a creature with a humanoid top half and the lower body of a giant arachnid.  From a quick glance, you can tell that this one has fallen deeply to corruption.  She is utterly nude, exposing her four well-rounded, D-cup breasts with their shiny black nipples.  "+(pierced?"Gold piercings and chains link the curvy tits together, crossing in front of her four mounds in an 'x' pattern.  ":"")+"On her face and forehead, a sextet of lust-filled, " + skinTone + " eyes gaze back at you.  Behind her, the monster-girl's " + hairColor + " hair drapes down her back like a cloak.  The drider's lips seem to shine with a light all their own, and a steady trickle of purple, reflective fluid beads and drips from them.  At her waist, there's a juicy looking snatch with a large, highly visible clit.  From time to time it pulsates and grows, turning part-way into a demon-dick.  Her spider-half has eight spindly legs with black and " + hairColor + " stripes - a menacing display if ever you've seen one.";
+			this.long = "This particular spider-woman is a drider - a creature with a humanoid top half and the lower body of a giant arachnid.  From a quick glance, you can tell that this one has fallen deeply to corruption.  She is utterly nude, exposing her four well-rounded, DD-cup breasts with their shiny black nipples.  "+(pierced?"Gold piercings and chains link the curvy tits together, crossing in front of her four mounds in an 'x' pattern.  ":"")+"On her face and forehead, a sextet of lust-filled, " + skinTone + " eyes gaze back at you.  Behind her, the monster-girl's " + hairColor + " hair drapes down her back like a cloak.  The drider's lips seem to shine with a light all their own, and a steady trickle of purple, reflective fluid beads and drips from them.  At her waist, there's a juicy looking snatch with a large, highly visible clit.  From time to time it pulsates and grows, turning part-way into a demon-dick.  Her spider-half has eight spindly legs with black and " + hairColor + " stripes - a menacing display if ever you've seen one.";
 			// this.plural = false;
 			this.createCock(9,2,CockTypesEnum.DEMON);
 			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 70, 0, 0, 0);
+			createBreastRow(Appearance.breastCupInverse("DD"));
 			createBreastRow(Appearance.breastCupInverse("DD"));
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
@@ -183,7 +184,7 @@ import classes.internals.*;
 			if (pierced) {
 				this.nipplesPierced = 1;
 				this.bonusHP = 400;
-				this.bonusLust = 30;
+				this.bonusLust = 153;
 				this.lust = 35;
 				this.lustVuln = .25;
 				this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
@@ -191,7 +192,7 @@ import classes.internals.*;
 				this.gems = rand(15) + 35;
 			} else {
 				this.bonusHP = 300;
-				this.bonusLust = 20;
+				this.bonusLust = 151;
 				this.lust = 30;
 				this.lustVuln = .4;
 				this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
@@ -200,7 +201,8 @@ import classes.internals.*;
 			}
 			this.drop = new WeightedDrop().add(consumables.B_GOSSR,5)
 					.add(useables.T_SSILK,1)
-					.add(null,4);
+					.add(null, 4);
+			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			checkMonster();
 		}
 

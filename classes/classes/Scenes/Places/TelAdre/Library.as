@@ -293,4 +293,3 @@ private function talkToMali():void {
 }
 	}
 }
-

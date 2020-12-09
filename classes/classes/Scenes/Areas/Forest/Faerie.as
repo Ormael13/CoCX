@@ -292,6 +292,5 @@ private function faerieCaptureHJ():void {
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
-
 }
 }

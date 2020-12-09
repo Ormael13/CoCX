@@ -188,6 +188,7 @@ use namespace CoC;
 				this.armorDef = 12;
 				this.armorMDef = 10;
 				this.bonusHP = 100;
+				this.bonusLust = 410;
 				this.level = 30;
 			}
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 2) {
@@ -197,6 +198,7 @@ use namespace CoC;
 				this.armorDef = 18;
 				this.armorMDef = 20;
 				this.bonusHP = 150;
+				this.bonusLust = 466;
 				this.level = 36;
 			}
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 3) {
@@ -206,6 +208,7 @@ use namespace CoC;
 				this.armorDef = 24;
 				this.armorMDef = 30;
 				this.bonusHP = 200;
+				this.bonusLust = 522;
 				this.level = 42;
 			}
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 4) {
@@ -215,6 +218,7 @@ use namespace CoC;
 				this.armorDef = 30;
 				this.armorMDef = 40;
 				this.bonusHP = 250;
+				this.bonusLust = 578;
 				this.level = 48;
 			}
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 5) {
@@ -224,6 +228,7 @@ use namespace CoC;
 				this.armorDef = 36;
 				this.armorMDef = 50;
 				this.bonusHP = 300;
+				this.bonusLust = 624;
 				this.level = 54;
 			}
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 6) {
@@ -233,6 +238,7 @@ use namespace CoC;
 				this.armorDef = 42;
 				this.armorMDef = 60;
 				this.bonusHP = 350;
+				this.bonusLust = 690;
 				this.level = 60;
 			}
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 7) {
@@ -242,6 +248,7 @@ use namespace CoC;
 				this.armorDef = 48;
 				this.armorMDef = 70;
 				this.bonusHP = 400;
+				this.bonusLust = 746;
 				this.level = 66;
 			}
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 8) {
@@ -251,6 +258,7 @@ use namespace CoC;
 				this.armorDef = 54;
 				this.armorMDef = 80;
 				this.bonusHP = 450;
+				this.bonusLust = 802;
 				this.level = 72;
 			}
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 9) {
@@ -260,6 +268,7 @@ use namespace CoC;
 				this.armorDef = 60;
 				this.armorMDef = 90;
 				this.bonusHP = 500;
+				this.bonusLust = 858;
 				this.level = 78;
 			}
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 10) {
@@ -269,6 +278,7 @@ use namespace CoC;
 				this.armorDef = 66;
 				this.armorMDef = 100;
 				this.bonusHP = 550;
+				this.bonusLust = 914;
 				this.level = 84;
 			}
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 11) {
@@ -278,6 +288,7 @@ use namespace CoC;
 				this.armorDef = 72;
 				this.armorMDef = 110;
 				this.bonusHP = 600;
+				this.bonusLust = 950;
 				this.level = 90;
 			}
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 12) {
@@ -287,6 +298,7 @@ use namespace CoC;
 				this.armorDef = 78;
 				this.armorMDef = 120;
 				this.bonusHP = 650;
+				this.bonusLust = 986;
 				this.level = 96;
 			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_TIGHT);
@@ -304,7 +316,6 @@ use namespace CoC;
 			this.weaponName = "claw";
 			this.weaponVerb="claw-slash";
 			this.armorName = "indecent spider silk robe";
-			this.bonusLust = 50;
 			this.lust = 30;
 			this.lustVuln = .8;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

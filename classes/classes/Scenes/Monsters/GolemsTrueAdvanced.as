@@ -22,6 +22,7 @@ package classes.Scenes.Monsters
 			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise swings!");
 			else
 			{
+				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" They hits you square in the chest from a few different angles. ");
 				damage = player.takePhysDamage(damage, true);
 			}
@@ -34,6 +35,7 @@ package classes.Scenes.Monsters
 			if (damage <= 0 || rand(100) < 25 || player.getEvasionRoll()) outputText(" You're able to sidestep it just in time.");
 			else
 			{
+				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" The concussive strikes impacts you with a bonecrushing force. ");
 				damage = player.takePhysDamage(damage, true);
 			}
@@ -41,18 +43,26 @@ package classes.Scenes.Monsters
 		
 		override protected function performCombatAction():void
 		{
-			if (this.HPRatio() < 0.6) {
-				var choice2:Number = rand(5);
-				if (choice2 < 3) eAttack();
-				if (choice2 == 3) backhand();
-				if (choice2 == 4) overhandSmash();
+			if (hasStatusEffect(StatusEffects.Provoke)) {
+				var choiceP:Number = rand(3);
+				if (choiceP == 0) eAttack();
+				if (choiceP == 1) backhand();
+				if (choiceP == 2) overhandSmash();
 			}
-			else if (this.HPRatio() < 0.8) {
-				var choice1:Number = rand(4);
-				if (choice1 < 3) eAttack();
-				if (choice1 == 3) backhand();
+			else {
+				if (this.HPRatio() < 0.6) {
+					var choice2:Number = rand(5);
+					if (choice2 < 3) eAttack();
+					if (choice2 == 3) backhand();
+					if (choice2 == 4) overhandSmash();
+				}
+				else if (this.HPRatio() < 0.8) {
+					var choice1:Number = rand(4);
+					if (choice1 < 3) eAttack();
+					if (choice1 == 3) backhand();
+				}
+				else eAttack();
 			}
-			else eAttack();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -85,7 +95,6 @@ package classes.Scenes.Monsters
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
-			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

@@ -124,7 +124,7 @@ public class IgnisArenaSeer extends Monster
 			this.armorDef = 20;
 			this.armorMDef = 50;
 			this.bonusHP = 120;
-			this.bonusLust = 20;
+			this.bonusLust = 200;
 			this.lust = 20;
 			this.lustVuln = 0.9;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

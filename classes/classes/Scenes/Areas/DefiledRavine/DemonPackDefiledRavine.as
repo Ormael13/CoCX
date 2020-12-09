@@ -67,7 +67,7 @@ import classes.internals.WeightedDrop;
 			this.armorDef = 35;
 			this.armorMDef = 5;
 			this.bonusHP = 1000;
-			this.bonusLust = 200;
+			this.bonusLust = 201;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 41;
@@ -82,7 +82,7 @@ import classes.internals.WeightedDrop;
 			this.tailType = TAIL_TYPE_DEMONIC;
 			this.horns.type = HORNS_DEMON;
 			this.horns.count = 2;
-			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}

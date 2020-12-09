@@ -27,13 +27,11 @@ import classes.VaginaClass;
 			this.long = "You’re facing RNGod. As randomness of it telling " + player.mf("he", "she") +"'s probably stronger than you so why fight " + player.mf("him", "her") +"? Some rumors say that " + player.mf("he", "she") +"'s Lady Godiva parent. Crazy isn't it?";
 			this.plural = false;
 			this.tallness = player.tallness;
-			if (player.balls > 0)
-			{
+			if (player.balls > 0) {
 				this.balls = player.balls;
 				this.ballSize = player.ballSize;
 			}
-			else
-			{
+			else {
 				this.balls = 0;
 				this.ballSize = 0;
 			}
@@ -53,7 +51,7 @@ import classes.VaginaClass;
 			this.armorMDef = player.armorMDef + rand(player.armorMDef);
 			this.armorName = player.armorName;
 			this.bonusHP = 2500 * (1 + rand(10));
-			this.bonusLust = 100 * (1 + rand(10));
+			this.bonusLust = (player.level + rand(16) + Math.round(player.lib * 1.2) + rand(player.lib) + Math.round(player.sens * 1.2) + rand(player.sens)) * (1 + rand(3));
 			this.bonusMana = 100 * (1 + rand(10));
 			this.bonusSoulforce = 100 * (1 + rand(10));
 			this.lustVuln = 0.1 * (1 + rand(10));
@@ -62,31 +60,27 @@ import classes.VaginaClass;
 			this.level = player.level + rand(16);
 			this.ass.analLooseness = player.ass.analLooseness;
 			this.ass.analWetness = player.ass.analWetness;
-			if (player.cocks.length > 0)
-			{
+			if (player.cocks.length > 0) {
 				for (var i:int = 0; i < player.cocks.length; i++)
 				{
 					this.createCock((player.cocks[i] as Cock).cockLength, (player.cocks[i] as Cock).cockThickness, (player.cocks[i] as Cock).cockType);
 				}
 			}
-			if (player.vaginas.length > 0)
-			{
+			if (player.vaginas.length > 0) {
 				this.createVagina();
 				(this.vaginas[0] as VaginaClass).vaginalLooseness = player.vaginas[0].vaginalLooseness;
 				(this.vaginas[0] as VaginaClass).vaginalWetness = player.vaginas[0].vaginalWetness;
 				(this.vaginas[0] as VaginaClass).virgin = player.vaginas[0].virgin;
 			}
 			//Genderless get forced to have a cunny
-			if (player.vaginas.length == 0 && player.cocks.length == 0)
-			{
+			if (player.vaginas.length == 0 && player.cocks.length == 0) {
 				this.createVagina();
 				(this.vaginas[0] as VaginaClass).vaginalLooseness = 2;
 				(this.vaginas[0] as VaginaClass).vaginalWetness = 6;
 				(this.vaginas[0] as VaginaClass).virgin = false;
 			}
 			this.breastRows = [];
-			for (i = 0; i < player.breastRows.length; i++)
-			{
+			for (i = 0; i < player.breastRows.length; i++) {
 				this.createBreastRow();
 				var tbr:BreastRowClass = this.breastRows[i];
 				var sbr:BreastRowClass = player.breastRows[i];
@@ -127,7 +121,5 @@ import classes.VaginaClass;
 			}
 			checkMonster();
 		}
-		
 	}
-
 }

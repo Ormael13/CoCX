@@ -564,11 +564,13 @@ import classes.internals.*;
 				initWisLibSensCor(200, 80, 130, game.flags[kFLAGS.AIKO_CORRUPTION]);
 				this.level = 58;
 				this.tail.count = 8;
+				this.bonusLust = 268;
 			} else {
 				initStrTouSpeInte(45, 55, 180, 170);
 				initWisLibSensCor(170, 70, 115, game.flags[kFLAGS.AIKO_CORRUPTION]);
 				this.level = 48;
 				this.tail.count = 7;
+				this.bonusLust = 233;
 			}
 			this.gems = rand(10) + 30;
 			this.drop = new WeightedDrop(consumables.FOXJEWL, 1);
