@@ -707,7 +707,7 @@
         <cell rect="1,150,29,32" name="eyes/human" dx="90" dy="37"/>
         <cell rect="31,150,29,32" name="eyes/devil" dx="90" dy="37"/>
         <cell rect="61,150,29,32" name="eyes/cat" dx="90" dy="37"/>
-        <cell rect="91,150,29,32" name="eyes/spider" dx="90" dy="37"/>
+        <cell rect="91,150,29,32" name="horns/spider" dx="90" dy="36"/>
         <cell rect="121,150,29,32" name="eyes/sandtrap" dx="90" dy="37"/>
         <cell rect="151,150,29,32" name="eyes/manticore" dx="90" dy="37"/>
         <cell rect="181,150,29,32" name="eyes/orca" dx="90" dy="37"/>
@@ -765,7 +765,7 @@
         <cell rect="421,330,29,32" name="horns/unicorn" dx="86" dy="24"/>
         <cell rect="421,363,29,32" name="horns/bicorn" dx="83" dy="23"/>
         <cell rect="451,363,29,32" name="horns/2oni" dx="89" dy="40"/>
-		<cell rect="211,396,29,30" name="horns/frostWyrm" dx="105" dy="23"/>
+        <cell rect="211,396,29,30" name="horns/frostWyrm" dx="105" dy="23"/>
         <cell rect="211,429,29,30" name="horns/frostWyrmLeft" dx="73" dy="23"/>
         <cell rect="1,330,59,65" name="horns_bg/orchid" dx="73" dy="4"/>
         <cell rect="61,330,59,65" name="horns_bg/devil" dx="72" dy="4"/>
@@ -775,7 +775,7 @@
         <cell rect="361,330,59,65" name="horns_bg/dragon" dx="75" dy="4"/>
         <cell rect="421,396,59,65" name="horns_bg/ghost" dx="73" dy="8"/>
         <cell rect="631,330,87,65" name="horns_bg/devilquad" dx="59" dy="2"/>
-		<cell rect="181,396,29,30" name="horns_bg/frostWyrm" dx="105" dy="23"/>
+        <cell rect="181,396,29,30" name="horns_bg/frostWyrm" dx="105" dy="23"/>
         <cell rect="181,429,29,30" name="horns_bg/frostWyrmLeft" dx="73" dy="23"/>
         <cell rect="301,396,59,65" name="horns_overclothe/deer" dx="74" dy="-5"/>
         <cell rect="1,470,59,65" name="antennae/bee" dx="75" dy="4"/>
@@ -1459,7 +1459,8 @@
                 <show part="eyes/human"/>
             </case>
             <case values="Eyes.FOUR_SPIDER_EYES">
-                <show part="eyes/spider"/>
+                <show part="horns/spider"/>
+				<show part="eyes/human"/>
             </case>
             <case values="Eyes.BLACK_EYES_SAND_TRAP">
                 <show part="eyes/sandtrap"/>
@@ -1872,7 +1873,7 @@
                 <show part="face/bunny"/>
             </case>
             <case values="Face.SPIDER_FANGS">
-                <show part="face/spider"/>
+                <show part="face/human_fang"/>
             </case>
             <case values="Face.RACCOON_MASK,Face.FERRET_MASK">
                 <show part="face/racoon_mask"/>
@@ -2040,6 +2041,10 @@
 				</if>
             </case>
             <case values="Arms.CHITIN">
+                <show part="hands/chitin2"/>
+                <show part="hands_bg/chitin2"/>
+            </case>
+			<case values="Arms.SPIDER">
                 <show part="hands/chitin2"/>
                 <show part="hands_bg/chitin2"/>
             </case>
