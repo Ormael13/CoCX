@@ -8702,7 +8702,7 @@ public final class Mutations extends MutationsHelper {
         //Appearance Changes
         //***************
         //(Ears become pointed if not human)
-        if (player.ears.type != Ears.HUMAN && player.ears.type != Ears.ELFIN && rand(4) == 0 && changes < changeLimit) {
+        if (player.ears.type != Ears.ELFIN && rand(4) == 0 && changes < changeLimit) {
             outputText("\n\nYour ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, pointed elfin ears.</b>");
             setEarType(Ears.ELFIN);
             changes++;
@@ -8710,10 +8710,10 @@ public final class Mutations extends MutationsHelper {
         //(Fur/Scales fall out replaced by chitin)
         if (!player.hasCoatOfType(Skin.CHITIN) && (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
             if (player.hasCoat()) {
-                outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your [skin coat] [skin coat.isare] falling to the ground, revealing flawless, almost pearly-white chitin underneath.");
+                outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your [skin coat] [skin coat.isare] falling to the ground, revealing flawless, black chitin underneath.");
             } else outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your skin stating to harden turning slowly into chitin.");
-            outputText("  <b>You now have pale white chitin exoskeleton covering your body.</b>");
-            player.skin.growCoat(Skin.CHITIN, {color: "pale white"});
+            outputText("  <b>You now have black chitin exoskeleton partialy covering your body.</b>");
+            player.skin.growCoat(Skin.CHITIN, {color: "black"}, Skin.COVERAGE_LOW);
             if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
                 outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);
@@ -8771,7 +8771,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //(Arms to carapace-covered arms)
-        if (!InCollection(Arms.GARGOYLE, Arms.SPIDER) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (player.arms.type != Arms.SPIDER && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
             if (player.arms.type == Arms.HARPY || player.arms.type == Arms.HUMAN) {
                 //(Bird pretext)
@@ -8784,6 +8784,7 @@ public final class Mutations extends MutationsHelper {
                 else outputText("You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.");
             }
             setArmType(Arms.SPIDER);
+            player.coatColor = "black";
             changes++;
         }
         if ((player.isTaur() || player.isGoo() || player.isNaga() || player.isScylla() || player.isAlraune())
@@ -8812,6 +8813,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nStarting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs.  From the waist down, your strength completely deserts you, leaving you to fall hard on your " + buttDescript() + " in the dirt.  With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf.  It crests up your knee to envelop the joint in a many-faceted onyx coating.  Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton.  From a distance it would look almost like a black, thigh-high boot, but you know the truth.  <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>");
             setLowerBody(LowerBody.CHITINOUS_SPIDER_LEGS);
             player.legCount = 2;
+            player.coatColor = "black";
             changes++;
         }
         //(Tail becomes spider abdomen GRANT WEB ATTACK)
@@ -8824,6 +8826,7 @@ public final class Mutations extends MutationsHelper {
             setTailType(Tail.SPIDER_ADBOMEN);
             player.tailVenom = 5;
             player.tailRecharge = 5;
+            player.coatColor = "black";
             changes++;
         }
         //(Drider Item Only: Carapace-Clad Legs to Drider Legs)
@@ -8831,6 +8834,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nJust like when your legs changed to those of a spider-morph, you find yourself suddenly paralyzed below the waist.  Your dark, reflective legs splay out and drop you flat on your back.   Before you can sit up, you feel tiny feelers of pain mixed with warmth and tingling running through them.  Terrified at the thought of all the horrible changes that could be wracking your body, you slowly sit up, expecting to find yourself turned into some incomprehensible monstrosity from the waist down.  As if to confirm your suspicions, the first thing you see is that your legs have transformed into eight long, spindly legs.  Instead of joining directly with your hips, they now connect with the spider-like body that has sprouted in place of where your legs would normally start.  Your abdomen has gotten even larger as well.  Once the strength returns to your new, eight-legged lower body, you struggle up onto your pointed 'feet', and wobble around, trying to get your balance.  As you experiment with your new form, you find you're even able to twist the spider half of your body down between your legs in an emulation of your old, bipedal stance.  That might prove useful should you ever want to engage in 'normal' sexual positions, particularly since your " + buttDescript() + " is still positioned just above the start of your arachnid half.  <b>You're now a drider.</b>");
             setLowerBody(LowerBody.DRIDER);
             player.legCount = 8;
+            player.coatColor = "black";
             changes++;
         }
         // Remove gills
@@ -16403,6 +16407,7 @@ public final class Mutations extends MutationsHelper {
         if (((type == 1 && player.lowerBody != LowerBody.DRIDER && player.lowerBody != LowerBody.CHITINOUS_SPIDER_LEGS) || (type != 1 && player.lowerBody != LowerBody.CHITINOUS_SPIDER_LEGS)) && (!player.isGoo() && !player.isNaga() && !player.isTaur() && !player.isScylla()) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nStarting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs.  From the waist down, your strength completely deserts you, leaving you to fall hard on your " + buttDescript() + " in the dirt.  With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf.  It crests up your knee to envelop the joint in a many-faceted onyx coating.  Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton.  From a distance it would look almost like a black, thigh-high boot, but you know the truth.  <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>");
             setLowerBody(LowerBody.CHITINOUS_SPIDER_LEGS);
+            player.coatColor = "black";
             player.legCount = 2;
             changes++;
         }
@@ -16420,6 +16425,7 @@ public final class Mutations extends MutationsHelper {
         if (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && rand(4) == 0 && player.tailType == Tail.SPIDER_ADBOMEN) {
             outputText("\n\nJust like when your legs changed to those of a spider-morph, you find yourself suddenly paralyzed below the waist.  Your dark, reflective legs splay out and drop you flat on your back.   Before you can sit up, you feel tiny feelers of pain mixed with warmth and tingling running through them.  Terrified at the thought of all the horrible changes that could be wracking your body, you slowly sit up, expecting to find yourself turned into some incomprehensible monstrosity from the waist down.  As if to confirm your suspicions, the first thing you see is that your legs have transformed into eight long, spindly legs.  Instead of joining directly with your hips, they now connect with the spider-like body that has sprouted in place of where your legs would normally start.  Your abdomen has gotten even larger as well.  Once the strength returns to your new, eight-legged lower body, you struggle up onto your pointed 'feet', and wobble around, trying to get your balance.  As you experiment with your new form, you find you're even able to twist the spider half of your body down between your legs in an emulation of your old, bipedal stance.  That might prove useful should you ever want to engage in 'normal' sexual positions, particularly since your " + buttDescript() + " is still positioned just above the start of your arachnid half.  <b>You're now a drider.</b>");
             setLowerBody(LowerBody.DRIDER);
+            player.coatColor = "black";
             player.legCount = 8;
             changes++;
         }
@@ -16427,12 +16433,14 @@ public final class Mutations extends MutationsHelper {
         if (player.isDrider() && player.tailType == Tail.USHI_ONI_ONNA && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nYour spider body trembles, an intense pressure forming under the chitin, at the same time your plates fall to the ground and " + player.hairColor + " fur begins to sprout all over your abdomen. You wince in pain from the sudden growth, your drider legs chitin falls off as well,  getting thicker and harder turning into bone. After the torturous session, you look back to see <b>you now have an Ushi-" + player.mf("Oni", "Onna") + " lower body with an internal skeleton and fur.</b>");
             setLowerBody(LowerBody.USHI_ONI_ONNA);
+            player.coatColor = "black";
             changes++;
         }
         //Ushi oni/onna arms
         if (player.arms.type == Arms.SPIDER && player.arms.type != Arms.USHI_ONI_ONNA && player.lowerBody == LowerBody.USHI_ONI_ONNA && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nYour onyx exoskeleton begins to itch. You begin to scratch at it incessantly until you can see " + player.hairColor + " fur begin to sprout from your arms from the biceps down, forming a diamond spiral where the fur meets skin. Your fingers begin to shake and sink into your hands as 4 huge strong claws grow in their places. <b>After the painful experience you see that you now have Ushi-" + player.mf("Oni", "Onna") + " bestial arms.</b>");
             setArmType(Arms.USHI_ONI_ONNA);
+            player.coatColor = "black";
             changes++;
         }
         //(Arms to carapace-covered arms)
@@ -16449,6 +16457,7 @@ public final class Mutations extends MutationsHelper {
                 else outputText("You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.");
             }
             setArmType(Arms.SPIDER);
+            player.coatColor = "black";
             changes++;
         }
         //Ushi oni/onna fangs

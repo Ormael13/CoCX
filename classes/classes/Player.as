@@ -5467,9 +5467,9 @@ use namespace CoC;
 				spiderCounter += 2;
 			if (tailType == Tail.SPIDER_ADBOMEN)
 				spiderCounter++;
-			if (!hasCoatOfType(Skin.CHITIN) && spiderCounter > 0)
+			if (!hasPartialCoat(Skin.CHITIN) && spiderCounter > 0)
 				spiderCounter--;
-			if (hasCoatOfType(Skin.CHITIN))
+			if (hasPartialCoat(Skin.CHITIN))
 				spiderCounter++;
 			if (spiderCounter > 0 && findPerk(PerkLib.TrachealSystem) >= 0)
 				spiderCounter++;
