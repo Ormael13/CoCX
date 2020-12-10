@@ -385,7 +385,7 @@ import flash.utils.getQualifiedClassName;
 			var anotherOne:Number = this.bonusLust;
 			if (findPerk(PerkLib.EnemyGroupType) >= 0) anotherOne *= 5;
 			if (findPerk(PerkLib.EnemyLargeGroupType) >= 0) anotherOne *= 10;
-			anotherOne *= newGamePlusMod();
+			anotherOne *= (1 + newGamePlusMod());
 			temp += anotherOne;
 			var multimax:Number = 1;
 			if (findPerk(PerkLib.LimitBreakerHeart1stStage) >= 0) multimax += 0.05;
@@ -399,8 +399,7 @@ import flash.utils.getQualifiedClassName;
 			return temp;
 		}
 
-		public override function maxFatigue():Number
-		{
+		public override function maxFatigue():Number {
 			//Base fatigue
 			var temp:Number = 100 + this.level * 5;
 			//Apply perks
@@ -445,8 +444,7 @@ import flash.utils.getQualifiedClassName;
 			return temp;
 		}
 
-		public override function maxSoulforce():Number
-		{
+		public override function maxSoulforce():Number {
 			//Base soulforce
 			var temp:Number = 50 + this.bonusSoulforce;
 			if (findPerk(PerkLib.JobSoulCultivator) >= 0) {
@@ -515,8 +513,7 @@ import flash.utils.getQualifiedClassName;
 			return temp;
 		}
 
-		public override function maxWrath():Number
-		{
+		public override function maxWrath():Number {
 			//Base wrath
 			var temp:Number = 250 + this.bonusWrath;
 			if (findPerk(PerkLib.DoubleAttack) >= 0) temp += 10;
@@ -587,8 +584,7 @@ import flash.utils.getQualifiedClassName;
 			return temp;
 		}
 
-		public override function maxMana():Number
-		{
+		public override function maxMana():Number {
 			//Base mana
 			var temp:Number = 200 + this.level * 10 + this.bonusMana;
 			if (findPerk(PerkLib.BasicSpirituality) >= 0) temp += 45;

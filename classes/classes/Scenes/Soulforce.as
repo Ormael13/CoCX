@@ -34,6 +34,7 @@ import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Explore.Pierce;
+import classes.Scenes.Explore.TheDummy;
 import classes.Scenes.Monsters.DarkElfRanger;
 import classes.Scenes.Monsters.DarkElfScout;
 import classes.Scenes.Monsters.DarkElfSlaver;
@@ -295,7 +296,7 @@ use namespace CoC;
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function AddMaxBackpack03():void {
-			outputText("A11 th4t Prestige is Y0urs to T4ke!!!");
+			outputText("\n\nA11 th4t Prestige is Y0urs to T4ke!!!");
 			if (!player.hasPerk(PerkLib.PrestigeJobArcaneArcher)) player.createPerk(PerkLib.PrestigeJobArcaneArcher, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobBerserker)) player.createPerk(PerkLib.PrestigeJobBerserker, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobGreySage)) player.createPerk(PerkLib.PrestigeJobGreySage, 0, 0, 0, 0);
@@ -1717,7 +1718,7 @@ use namespace CoC;
 				addButton(1, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
 				addButton(2, "Pierce", FightPierce).hint("Test fight with Pierce.");
 				addButton(3, "SuccGard", FightSuccubusGardener).hint("Test fight with Succubus Gardener. (Also it will glitch right after fight so not start this fight if you got unsaved progress that you not wanna loose as only way to handle post fight glitch is restarting game)");
-				//addButton(4, "", ).hint("Test fight with .");
+				addButton(4, "The Dummy", FightTheDummy).hint("Fight with The Dummy.");
 				//addButton(5, "", ).hint("Test fight with .");
 				//addButton(6, "", ).hint("Test fight with .");
 				addButton(7, "Zenji", FightZenji).hint("Test fight with Zenji.");
@@ -1746,6 +1747,11 @@ use namespace CoC;
 				addButton(13, "-1-", EnemiesMenu, page - 1);
 				addButton(14, "Back", SoulforceCheats);
 			}
+		}
+		public function FightTheDummy():void {
+			clearOutput();
+			outputText("Entering battle with The Dummy! Enjoy ^^");
+			startCombat(new TheDummy());
 		}
 		public function FightSuccubusGardener():void {
 			clearOutput();

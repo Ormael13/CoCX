@@ -86,7 +86,7 @@ Buff the stat. If buff already present, **increase** it.
 ----
 
 ```js
-player.buff("Poison").addStat("str", -10);
+player.buff("Poison").setStat("str", -10);
 ```
 Buff the stat. If buff already present, **reset** it.
 

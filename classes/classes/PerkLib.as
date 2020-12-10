@@ -2291,10 +2291,10 @@ public class PerkLib
 				"Your altered musculature increased again your natural strenght and tone limit. Dmg multi from Oni Rampage increased to 6x, it duration increased by 3 turns and cooldown decreased by 3 turns. Drunken Power boost increased to 6x.",
 				"You choose the 'Oni Musculature (Final Form)' perk. Your oni musculature changes boosted your oni specials once again.").withBuffs({'str.mult':0.15});
 		public static const OrcAdrenalGlands:PerkType = mk("Orc Adrenal Glands", "Orc Adrenal Glands",
-				"Your Orc adrenal glands are increasing Ferocity limit by 2%, +5% of max core Str as phantom Str.",
+				"Your Orc adrenal glands are increasing Ferocity limit by 1%, +5% of max core Str as phantom Str.",
 				"You choose the 'Orc Adrenal Glands' perk, due to repeadly balancing on line between life and death your adrenal glands mutated.");
 		public static const OrcAdrenalGlandsEvolved:PerkType = mk("Orc Adrenal Glands (Evolved)", "Orc Adrenal Glands (Evolved)",
-				"Your Orc adrenal glands are increasing Ferocity limit by 3%, +10% of max core Str as phantom Str, increase your natural strenght and tone.",
+				"Your Orc adrenal glands are increasing Ferocity limit by 2%, +10% of max core Str as phantom Str, increase your natural strenght and tone.",
 				"You choose the 'Orc Adrenal Glands (Evolved)' perk. Your adrenal glands changes boosted your orc innate abilities once again.").withBuffs({'str.mult':0.5});
 		public static const OrcAdrenalGlandsFinalForm:PerkType = mk("Orc Adrenal Glands (Final Form)", "Orc Adrenal Glands (Final Form)",
 				"Your Orc adrenal glands are giving you +15% of max core Str as phantom Str, increase your natural strenght, boost natural wrath generation rate, allow to use Ferocity even when been no longer an orc.",

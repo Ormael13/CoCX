@@ -77,10 +77,6 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.removeStatusEffect(StatusEffects.CounterGlacialStorm);
 		if (player.hasStatusEffect(StatusEffects.CounterHighVoltage)) player.removeStatusEffect(StatusEffects.CounterHighVoltage);
 		if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) player.removeStatusEffect(StatusEffects.CounterEclipsingShadow);
-		/*fireMagicLastTurn = -100;
-		iceMagicLastTurn = -100;
-		lightningMagicLastTurn = -100;
-		darknessMagicLastTurn = -100;*/
 	}
 
 	internal function spellCostImpl(mod:Number):Number {
@@ -714,85 +710,101 @@ public class CombatMagic extends BaseCombatContent {
 		return whiteLustCap;
 	}
 
-	private var fireMagicLastTurn:int = -100;
-	private var fireMagicCumulated:int = 0;
 	internal function calcInfernoModImpl(damage:Number):int {
 		if (player.hasPerk(PerkLib.RagingInferno)) {
-			if (!player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.createStatusEffect(StatusEffects.CounterRagingInferno,0,0,0,0);
-			var multiplier:Number = 1;
-			if (player.statusEffectv1(StatusEffects.CounterRagingInferno) == 0) outputText("Unfortunately, traces of your previously used fire magic are too weak to be used.\n\n");
-			else {
-				outputText("Traces of your previously used fire magic are still here, and you use them to empower another spell!\n\n");
-				multiplier += player.statusEffectv1(StatusEffects.CounterRagingInferno) * 0.05;
-				damage = Math.round(damage * multiplier);
+			if (player.hasStatusEffect(StatusEffects.CounterRagingInferno)) {
+				var multiplier:Number = 1;
+				if (player.statusEffectv1(StatusEffects.CounterRagingInferno) == 0) outputText("Unfortunately, traces of your previously used fire magic are too weak to be used.\n\n");
+				else {
+					outputText("Traces of your previously used fire magic are still here, and you use them to empower another spell!\n\n");
+					multiplier += player.statusEffectv1(StatusEffects.CounterRagingInferno) * 0.05;
+					damage = Math.round(damage * multiplier);
+				}
+				if (player.statusEffectv4(StatusEffects.CounterRagingInferno) == 0) {
+					player.addStatusValue(StatusEffects.CounterRagingInferno, 4, 1);
+					if (player.hasPerk(PerkLib.RagingInfernoEx)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 6);
+					else player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 4);
+				}
+				player.addStatusValue(StatusEffects.CounterRagingInferno, 2, 1);
 			}
-			if (player.statusEffectv4(StatusEffects.CounterRagingInferno) == 0) {
-				player.addStatusValue(StatusEffects.CounterRagingInferno, 4, 1);
-				if (player.hasPerk(PerkLib.RagingInfernoEx)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 6);
-				else player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 4);
+			else {
+				if (player.hasPerk(PerkLib.RagingInfernoEx)) player.createStatusEffect(StatusEffects.CounterRagingInferno,6,1,0,1);
+				else player.createStatusEffect(StatusEffects.CounterRagingInferno,4,1,0,1);
 			}
 		}
 		return damage;
 	}
 
-	private var iceMagicLastTurn:int = -100;
-	private var iceMagicCumulated:int = 0;
 	internal function calcGlacialModImpl(damage:Number):int {
 		if (player.hasPerk(PerkLib.GlacialStorm)) {
-			if (!player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.createStatusEffect(StatusEffects.CounterGlacialStorm,0,0,0,0);
-			var multiplier:Number = 1;
-			if (player.statusEffectv1(StatusEffects.CounterGlacialStorm) == 0) outputText("Unfortunately, traces of your previously used ice magic are too weak to be used.\n\n");
-			else {
-				outputText("Traces of your previously used ice magic are still here, and you use them to empower another spell!\n\n");
-				multiplier += player.statusEffectv1(StatusEffects.CounterGlacialStorm) * 0.05;
-				damage = Math.round(damage * multiplier);
+			if (player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) {
+				var multiplier:Number = 1;
+				if (player.statusEffectv1(StatusEffects.CounterGlacialStorm) == 0) outputText("Unfortunately, traces of your previously used ice magic are too weak to be used.\n\n");
+				else {
+					outputText("Traces of your previously used ice magic are still here, and you use them to empower another spell!\n\n");
+					multiplier += player.statusEffectv1(StatusEffects.CounterGlacialStorm) * 0.05;
+					damage = Math.round(damage * multiplier);
+				}
+				if (player.statusEffectv4(StatusEffects.CounterGlacialStorm) == 0) {
+					player.addStatusValue(StatusEffects.CounterGlacialStorm, 4, 1);
+					if (player.hasPerk(PerkLib.GlacialStormEx)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, 6);
+					else player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, 4);
+				}
+				player.addStatusValue(StatusEffects.CounterGlacialStorm, 2, 1);
 			}
-			if (player.statusEffectv4(StatusEffects.CounterGlacialStorm) == 0) {
-				player.addStatusValue(StatusEffects.CounterGlacialStorm, 4, 1);
-				if (player.hasPerk(PerkLib.GlacialStormEx)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, 6);
-				else player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, 4);
+			else {
+				if (player.hasPerk(PerkLib.GlacialStormEx)) player.createStatusEffect(StatusEffects.CounterGlacialStorm,6,1,0,1);
+				else player.createStatusEffect(StatusEffects.CounterGlacialStorm,4,1,0,1);
 			}
 		}
 		return damage;
 	}
 
-	private var lightningMagicLastTurn:int = -100;
-	private var lightningMagicCumulated:int = 0;
 	internal function calcVoltageModImpl(damage:Number):int {
 		if (player.hasPerk(PerkLib.HighVoltage)) {
-			if (!player.hasStatusEffect(StatusEffects.CounterHighVoltage)) player.createStatusEffect(StatusEffects.CounterHighVoltage,0,0,0,0);
-			var multiplier:Number = 1;
-			if (player.statusEffectv1(StatusEffects.CounterHighVoltage) == 0) outputText("Unfortunately, traces of your previously used lightning magic are too weak to be used.\n\n");
-			else {
-				outputText("Traces of your previously used lightning magic are still here, and you use them to empower another spell!\n\n");
-				multiplier += player.statusEffectv1(StatusEffects.CounterHighVoltage) * 0.05;
-				damage = Math.round(damage * multiplier);
+			if (player.hasStatusEffect(StatusEffects.CounterHighVoltage)) {
+				var multiplier:Number = 1;
+				if (player.statusEffectv1(StatusEffects.CounterHighVoltage) == 0) outputText("Unfortunately, traces of your previously used lightning magic are too weak to be used.\n\n");
+				else {
+					outputText("Traces of your previously used lightning magic are still here, and you use them to empower another spell!\n\n");
+					multiplier += player.statusEffectv1(StatusEffects.CounterHighVoltage) * 0.05;
+					damage = Math.round(damage * multiplier);
+				}
+				if (player.statusEffectv4(StatusEffects.CounterHighVoltage) == 0) {
+					player.addStatusValue(StatusEffects.CounterHighVoltage, 4, 1);
+					if (player.hasPerk(PerkLib.HighVoltageEx)) player.addStatusValue(StatusEffects.CounterHighVoltage, 1, 6);
+					else player.addStatusValue(StatusEffects.CounterHighVoltage, 1, 4);
+				}
+				player.addStatusValue(StatusEffects.CounterHighVoltage, 2, 1);
 			}
-			if (player.statusEffectv4(StatusEffects.CounterHighVoltage) == 0) {
-				player.addStatusValue(StatusEffects.CounterHighVoltage, 4, 1);
-				if (player.hasPerk(PerkLib.HighVoltageEx)) player.addStatusValue(StatusEffects.CounterHighVoltage, 1, 6);
-				else player.addStatusValue(StatusEffects.CounterHighVoltage, 1, 4);
+			else {
+				if (player.hasPerk(PerkLib.HighVoltageEx)) player.createStatusEffect(StatusEffects.CounterHighVoltage,6,1,0,1);
+				else player.createStatusEffect(StatusEffects.CounterHighVoltage,4,1,0,1);
 			}
 		}
 		return damage;
 	}
 
-	private var darknessMagicLastTurn:int = -100;
-	private var darknessMagicCumulated:int = 0;
 	internal function calcEclypseModImpl(damage:Number):int {
 		if (player.hasPerk(PerkLib.EclipsingShadow)) {
-			if (!player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) player.createStatusEffect(StatusEffects.CounterEclipsingShadow,0,0,0,0);
-			var multiplier:Number = 1;
-			if (player.statusEffectv1(StatusEffects.CounterEclipsingShadow) == 0) outputText("Unfortunately, traces of your previously used darkness magic are too weak to be used.\n\n");
-			else {
-				outputText("Traces of your previously used darkness magic are still here, and you use them to empower another spell!\n\n");
-				multiplier += player.statusEffectv1(StatusEffects.CounterEclipsingShadow) * 0.05;
-				damage = Math.round(damage * multiplier);
+			if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) {
+				var multiplier:Number = 1;
+				if (player.statusEffectv1(StatusEffects.CounterEclipsingShadow) == 0) outputText("Unfortunately, traces of your previously used darkness magic are too weak to be used.\n\n");
+				else {
+					outputText("Traces of your previously used darkness magic are still here, and you use them to empower another spell!\n\n");
+					multiplier += player.statusEffectv1(StatusEffects.CounterEclipsingShadow) * 0.05;
+					damage = Math.round(damage * multiplier);
+				}
+				if (player.statusEffectv4(StatusEffects.CounterEclipsingShadow) == 0) {
+					player.addStatusValue(StatusEffects.CounterEclipsingShadow, 4, 1);
+					if (player.hasPerk(PerkLib.EclipsingShadowEx)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 6);
+					else player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 4);
+				}
+				player.addStatusValue(StatusEffects.CounterEclipsingShadow, 2, 1);
 			}
-			if (player.statusEffectv4(StatusEffects.CounterEclipsingShadow) == 0) {
-				player.addStatusValue(StatusEffects.CounterEclipsingShadow, 4, 1);
-				if (player.hasPerk(PerkLib.EclipsingShadowEx)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 6);
-				else player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 4);
+			else {
+				if (player.hasPerk(PerkLib.EclipsingShadowEx)) player.createStatusEffect(StatusEffects.CounterEclipsingShadow,6,1,0,1);
+				else player.createStatusEffect(StatusEffects.CounterEclipsingShadow,4,1,0,1);
 			}
 		}
 		return damage;
