@@ -3,6 +3,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
+import classes.Scenes.Areas.Ocean.UnderwaterSharkGirlsPack;
 import classes.Scenes.UniqueSexScenes;
 
 public class SharkGirlScene extends AbstractBoatContent{
@@ -99,6 +100,18 @@ public function oceanTigersharkGirlEncounter():void {
 	startCombat(new UnderwaterTigersharkGirl());
 	spriteSelect(32);
 }
+public function oceanSharkGirlsPackEncounter():void {
+	clearOutput();
+	spriteSelect(32);
+	outputText("As you row your boat through this ocean, something feels... off. You're not quite sure how to describe it"+(silly() ? " as a weird music start playing in background similar to \"<i>Dun dun, dun dun, dun dun dun dun</i>\"":"")+". You see several large fins rising out of the water ahead of you and before you can react your boat is hit by a powerful collision, sending you straight into the water. As you look around you see several shark girls as well as their alpha tiger shark circling you, grinning widely with. most likely, very bad intentions in store for you. This is gonna be a hard battle!\n\n");
+	if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
+		flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
+		outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
+	}
+	outputText("You are under attack by a shark girls pack!");
+	startCombat(new UnderwaterSharkGirlsPack());
+	spriteSelect(32);
+}
 
 //Victory Sex. Herms should get a choice between the two scenes:
 internal function sharkWinChoices():void {
@@ -155,6 +168,18 @@ public function oceanTigerSharkWinChoices():void {
 		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 	}
 }
+public function oceanSharkspackWinChoices():void {
+	spriteSelect(32);
+	clearOutput();
+	outputText("The shark girl frenzy breaks formation before your might, leaving their weakest member behind. Well, you could have fun with her but are you in the mood to begin with?");
+	menu();
+	addButton(0, "Leave", cleanupAfterCombat);
+	if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+		if (player.hasCock()) addButton(1, "Fuck Her", sharkgirlOceanDickFuck2);
+		if (player.hasVagina()) addButton(2, "Sixty nine", sharkgirlOceanSixtyNine2);
+		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+	}
+}
 
 //Male and Herm: 
 private function sharkgirlDickFuck():void {
@@ -183,7 +208,7 @@ private function sharkgirlDickFuck():void {
 		outputText("\n\nThe shark girl cries out in orgasm, her pussy tightening as the feelers wrap around your cock. The pleasure drives you over the edge, and you pump your load of cum into her needy pussy, the feelers milking you for every drop you have. You pull out, satisfied, and as you turn to leave you see the shark girl rubbing cum into her cunt and winking at you.");
 	}
 	cleanupAfterCombat();
-	player.orgasm();
+	player.sexReward("Default","Dick",true,false);
 	dynStats("sen", -1);
 	if(player.cor < 33) dynStats("cor", 1);
 }
@@ -218,7 +243,7 @@ private function sharkgirlOceanDickFuck():void {
 	if (flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] == 2) outputText("tiger ");
 	outputText("shark girl cries out in orgasm, her pussy tightening as the feelers wrap around your cock. The pleasure drives you over the edge, and you pump your load of cum into her needy pussy, the feelers milking you for every drop you have. You pull out, satisfied, then grab the shark slut and dump her back in the water as you ready to leave.\n\n");
 	cleanupAfterCombat();
-	player.orgasm();
+	player.sexReward("Default","Dick",true,false);
 	dynStats("sen", -1);
 }
 
@@ -249,7 +274,7 @@ private function sharkgirlSixtyNine():void {
 		outputText("Thoroughly satisfied, you leave the shark girl on the ground covered in your fluids and depart for your camp.");
 	}
 	cleanupAfterCombat();
-	player.orgasm();
+	player.sexReward("saliva");
 	dynStats("sen", -1);
 	if(player.cor < 33) dynStats("cor", 1);
 }
@@ -284,7 +309,7 @@ private function sharkgirlOceanSixtyNine():void {
 	if (flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] == 2) outputText("tiger ");
 	outputText("shark girl back in the water before departing for your camp.\n\n");
 	cleanupAfterCombat();
-	player.orgasm();
+	player.sexReward("saliva");
 	dynStats("sen", -1);
 }
 
@@ -407,7 +432,7 @@ internal function sharkLossRape():void {
 		outputText("The shark girl eventually sighs happily and relaxes her grip on your hair, pulling your head away a few inches. \"<i>Not bad bitch, not bad. Now get on your back.</i>\" You obey your mistress's command and flop onto your back. A sense of joy fills you as she positions her crotch in front of your face and moves her own head between your legs. You quickly resume eating her out, and this time she joins in the feast. It's not too long before the two of you orgasm, spraying girl-cum onto each other's faces.\n\n");
 		outputText("The shark girl stands to leave and winks at you before diving back into the water. You eventually pass out from the exertion.");
 		//(Corruption +2, Intelligence -4)
-		player.orgasm();
+		player.sexReward("saliva");
 		if(player.cor < 30) dynStats("cor", 1);
 		cleanupAfterCombat();
 		return;
@@ -426,7 +451,7 @@ internal function sharkLossRape():void {
 		outputText("The shark girl has no such qualms and rides you like a mechanical bull, hammering up and down your [cock] with incredible speed. It certainly feels nice, but the rough nature of the ride also certainly hurts. You'll be walking funny for a while after this, that's for sure.\n\n");
 		
 		outputText("Eventually, her vagina clamps down on your cock and she cries out in orgasm. You grunt loudly and cum a few seconds after, pumping your seed into her womb. The shark girl leans over and plants a tiny kiss on your lips. \"<i>Good boy. I'll be sure to see you again</i>\". She gets up again and you watch her re-enter the water before you pass out.");
-		player.orgasm();
+		player.sexReward("Default","Dick",true,false);
 		dynStats("sen", 1);
 		if(player.cor < 30) dynStats("cor", 1);
 		cleanupAfterCombat();
@@ -444,7 +469,7 @@ public function sharkLossOceanRape():void {
 	spriteSelect(70);
 	sharkLossOceanRape2();
 }
-public function tigersharksharkLossOceanRape():void {
+public function tigersharkLossOceanRape():void {
 	if (flags[kFLAGS.SFW_MODE] > 0) {
 		doSFWloss();
 		cleanupAfterCombat();
@@ -454,6 +479,16 @@ public function tigersharksharkLossOceanRape():void {
 	spriteSelect(32);
 	sharkLossOceanRape2();
 }
+public function sharkspackLossOceanRape():void {
+	if (flags[kFLAGS.SFW_MODE] > 0) {
+		doSFWloss();
+		cleanupAfterCombat();
+		return;
+	}
+	clearOutput();
+	spriteSelect(32);
+	sharkLossOceanRape3();
+}
 public function sharkLossOceanRape2():void {	
 	outputText("Defeated, you pathetically try to swim back to the boat but the ");
 	if (flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] == 2) outputText("tiger ");
@@ -461,7 +496,7 @@ public function sharkLossOceanRape2():void {
 	outputText(".\n\n\"<i>I will be loud and clear with you ");
 	if (player.hasCock()) outputText("boy");
 	else outputText("lass");
-	outputText(".\n\nYou’re going to satisfy my needs, because if you don’t I will rip a huge chunk out of you.!</i>\"\n\n");
+	outputText(".\n\nYou’re going to satisfy my needs, because if you don’t I will rip a huge chunk out of you!</i>\"\n\n");
 	outputText("She flashes her teeth to make her statement and you nod right away in understanding, she ain’t bloody kidding!\n\n");
 	outputText("shark girl is faster than you. She grabs your leg and pulls you into the depths");
 	if (flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] == 2) {
@@ -472,6 +507,7 @@ public function sharkLossOceanRape2():void {
 		outputText("Somehow her dominance turns you on and while at first you were reluctant to do this you now eagerly suck her cock off for all it’s worth. The tiger shark girl skull fucks you until she finally achieves satisfaction. Without warning, your throat is flooded with a torrent of salty tigershark cum and bulges from the sheer size of the load.\n\n");
 		outputText("The tiger shark girl, satisfied, pulls your head off of her dick and carries you back to your boat.\n\n");
 		outputText("\"<i>Come back anytime you want to get raped again, bitch. I need more cumbuckets like you to empty my load.</i>\"\n\n");
+		player.sexReward("cum");
 	}
 	else {
 		outputText("She swiftly grabs hold of your hairs and pull you down to her nethers.\n\n\"<i>");
@@ -482,11 +518,26 @@ public function sharkLossOceanRape2():void {
 		outputText("Somehow her dominance turns you on and while at first you were reluctant to do this, you now eagerly use your mouth to create a seal around her cunt. The shark girl moans in delight as you give it your all to properly get her off. She screams in extasy as the taste of salty girlcum floods your mouth. Knowing better than to disappoint her you drink it all in.\n\n");
 		outputText("The shark girl, satisfied, pulls your head off her cunt and carries you back to your boat.\n\n");
 		outputText("\"<i>Come back anytime you want to get raped again, bitch. I need more sluts like you to lick my cunt.</i>\"\n\n");
+		player.sexReward("vaginalFluids");
 	}
 	outputText("She swims back into the depths, leaving you dazed to rest in your boat.\n\n");
-	player.orgasm();
 	cleanupAfterCombat();
 }
+public function sharkLossOceanRape3():void {
+	outputText("Unable to fight further, you watch in horror as the shark girls circling you close in, grabbing you from all sides.\n\n");
+	outputText("\"<i>Get that fresh meat, girls!</i>\"\n\n");
+	outputText("Before you know it, you have one using your head as a seat while the others are using your hands and feet as makeshift dildos, your crotch being used by the tiger shark alpha as a tribute. "+(player.canSwimUnderwater() ? "":"One of them force feeds you some kind of algae and for some reason you manage to breathe. Well, at least you won’t drown while being raped. ")+"You feel the orgasm of the shark girls come way before yours as their cunts squeeze and drench your limbs in somewhat slimy waters.\n\n");
+	outputText("\"<i>Mark that piece of meat with cum, girls!</i>\"\n\nThe other girls join in and squirt all over you, covering you in shark girl cum. Finally, you feel the tigershark cuming along with you, filling ");
+	if (player.hasVagina()) {
+		if (player.hasCock()) outputText("your pussy and hers with");
+		else outputText("your needy pussy full of her");
+	}
+	else outputText("her pussy with your");
+	outputText(" cum. You doze off in a content sleep while being carried away by the waves.\n\nYou wake up in your boat with your equipment piled next to you. Thankfully, the sharks didn't feel like keeping you as their plaything.\n\n");
+	player.sexReward("Default", "Default", true, false);
+	cleanupAfterCombat();
+}
+
     //RAEP SOME FUKKIN SHARKGIRLZ NIGGA
     private function sharkGirlGetsDildoed():void {
         EngineCore.clearOutput();

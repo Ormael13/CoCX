@@ -163,7 +163,7 @@ import classes.Scenes.Monsters.Goblin;
 			this.armorDef = 36;
 			this.armorMDef = 3;
 			this.bonusHP = 1200;
-			this.bonusLust = 100;
+			this.bonusLust = 290;
 			this.lust = 50;
 			this.lustVuln = 0.44;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

@@ -40,7 +40,7 @@ import classes.Scenes.SceneLib;
 			this.armorDef = 26;
 			this.armorMDef = 6;
 			this.bonusHP = 1800;
-			this.bonusLust = 40;
+			this.bonusLust = 221;
 			this.gems = 300 + rand(90);
 			this.level = 41;
 			this.lustVuln = 0.6;
@@ -49,6 +49,7 @@ import classes.Scenes.SceneLib;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			this.drop = NO_DROP;
 			this.checkMonster();
 		}

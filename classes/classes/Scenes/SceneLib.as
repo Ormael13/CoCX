@@ -7,6 +7,7 @@ import classes.Scenes.Areas.Caves.DisplacerBeastScene;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Areas.GlacialRift.FrostGiantScene;
 import classes.Scenes.Areas.GlacialRift.YuWinterGearShop;
+import classes.Scenes.Areas.Ocean.ScyllaScene;
 import classes.Scenes.Combat.Combat;
 import classes.Scenes.Dungeons.AnzuPalace.AnzuScene;
 import classes.Scenes.Dungeons.D3.D3;
@@ -40,6 +41,8 @@ public class SceneLib {
     public static var beach:Beach = new Beach();
 
     public static var blightridge:BlightRidge = new BlightRidge();
+
+    public static var defiledravine:DefiledRavine = new DefiledRavine();
 
     public static var bog:Bog = new Bog();
 
@@ -222,6 +225,8 @@ public class SceneLib {
     public static var zenjiScene:ZenjiScenes = new ZenjiScenes();
 
     public static var sharkgirlScene:SharkGirlScene = new SharkGirlScene();
+
+    public static var scyllaScene:ScyllaScene = new ScyllaScene();
 
     public static var bazaar:Bazaar = new Bazaar();
 

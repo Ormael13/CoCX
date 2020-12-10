@@ -1450,7 +1450,5 @@ public class CeraphScene extends NPCAwareContent
                 cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
-
-
 	}
 }

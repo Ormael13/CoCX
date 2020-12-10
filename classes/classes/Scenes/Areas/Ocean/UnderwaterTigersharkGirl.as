@@ -15,13 +15,13 @@ public class UnderwaterTigersharkGirl extends Monster
 		private function sharkTease():void {
 			game.spriteSelect(70);
 			if(rand(2) == 0) {
-				outputText("You charge at the shark girl, prepared to strike again, but stop dead in your tracks when she turns around and wiggles her toned ass towards you. It distracts you long enough for her tail to swing out and smack you. She coos, \"<i>Aw... You really do like me!</i>\" ");
+				outputText("You charge at the tiger shark girl, prepared to strike again, but stop dead in your tracks when she turns around and wiggles her toned ass towards you. It distracts you long enough for her tail to swing out and smack you. She coos, \"<i>Aw... You really do like me!</i>\" ");
 				//(Small health damage, medium lust build).
 				player.takePhysDamage(12+rand(12), true);
 				player.dynStats("lus", (12+(player.lib/10)));
 			}
 			else {
-				outputText("You pull your [weapon] back, getting a swimming start to land another attack. The Shark girl smirks and pulls up her bikini top, shaking her perky breasts in your direction. You stop abruptly, aroused by the sight just long enough for the shark girl to kick you across the face and knock you away.  She teases, \"<i>Aw, don't worry baby, you're gonna get the full package in a moment!</i>\" ");
+				outputText("You pull your [weapon] back, getting a swimming start to land another attack. The tiger shark girl smirks and pulls up her bikini top, shaking her perky breasts in your direction. You stop abruptly, aroused by the sight just long enough for the shark girl to kick you across the face and knock you away.  She teases, \"<i>Aw, don't worry baby, you're gonna get the full package in a moment!</i>\" ");
 				//(Small health damage, medium lust build)
 				player.takePhysDamage(12+rand(12), true);
 				player.dynStats("lus", (6+(player.lib/5)));
@@ -43,7 +43,7 @@ public class UnderwaterTigersharkGirl extends Monster
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.sharkgirlScene.tigersharksharkLossOceanRape();
+			SceneLib.sharkgirlScene.tigersharkLossOceanRape();
 		}
 		
 		public function UnderwaterTigersharkGirl() 
@@ -68,21 +68,21 @@ public class UnderwaterTigersharkGirl extends Monster
 			this.skinTone = "striped orange";
 			this.hairColor = "silver";
 			this.hairLength = 20;
-			initStrTouSpeInte(250, 170, 205, 110);
-			initWisLibSensCor(110, 120, 25, 40);
+			initStrTouSpeInte(265, 170, 218, 114);
+			initWisLibSensCor(114, 130, 45, 40);
 			this.weaponName = "shark teeth";
 			this.weaponVerb="bite";
-			this.weaponAttack = 66;
+			this.weaponAttack = 74;
 			this.armorName = "tough skin";
-			this.armorDef = 20;
-			this.armorMDef = 2;
-			this.bonusHP = 500;
-			this.bonusLust = 20;
+			this.armorDef = 21;
+			this.armorMDef = 3;
+			this.bonusHP = 750;
+			this.bonusLust = 235;
 			this.lust = 20;
-			this.lustVuln = .20;
+			this.lustVuln = .3;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 56;
-			this.gems = rand(15) + 10;
+			this.level = 60;
+			this.gems = rand(35) + 30;
 			this.drop = new WeightedDrop().
 					add(consumables.L_DRAFT,3).
 					add(armors.S_SWMWR,1).

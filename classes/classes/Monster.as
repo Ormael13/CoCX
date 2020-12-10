@@ -19,6 +19,7 @@ import classes.Items.WeaponLib;
 import classes.Items.WeaponRangeLib;
 import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
+import classes.Scenes.Areas.Ocean.UnderwaterSharkGirlsPack;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
 import classes.Scenes.Camp;
 import classes.Scenes.Combat.Combat;
@@ -28,6 +29,7 @@ import classes.Scenes.Dungeons.EbonLabyrinth.Hydra;
 import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
 import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
 import classes.Scenes.NPCs.ChiChi;
+import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
 import classes.Scenes.SceneLib;
@@ -210,84 +212,13 @@ import flash.utils.getQualifiedClassName;
 			if (baseStat >= 41) temp += (baseStat*3);
 			if (baseStat >= 61) temp += (baseStat*4);
 			if (baseStat >= 81) temp += (baseStat*5);
-			if (baseStat >= 101) temp += (baseStat*6);
-			if (baseStat >= 151) temp += (baseStat*8);
-			if (baseStat >= 201) temp += (baseStat*10);
-			if (baseStat >= 251) temp += (baseStat*12);
-			if (baseStat >= 301) temp += (baseStat*14);
-			if (baseStat >= 351) temp += (baseStat*16);
-			if (baseStat >= 401) temp += (baseStat*18);
-			if (baseStat >= 451) temp += (baseStat*20);
-			if (baseStat >= 501) temp += (baseStat*22);
-			if (baseStat >= 551) temp += (baseStat*24);
-			if (baseStat >= 601) temp += (baseStat*26);
-			if (baseStat >= 651) temp += (baseStat*28);
-			if (baseStat >= 701) temp += (baseStat*30);
-			if (baseStat >= 751) temp += (baseStat*32);
-			if (baseStat >= 801) temp += (baseStat*34);
-			if (baseStat >= 851) temp += (baseStat*36);
-			if (baseStat >= 901) temp += (baseStat*38);
-			if (baseStat >= 951) temp += (baseStat*40);
-			if (baseStat >= 1001) temp += (baseStat*42);
-			if (baseStat >= 1051) temp += (baseStat*44);
-			if (baseStat >= 1101) temp += (baseStat*46);
-			if (baseStat >= 1151) temp += (baseStat*48);
-			if (baseStat >= 1201) temp += (baseStat*50);
-			if (baseStat >= 1251) temp += (baseStat*52);
-			if (baseStat >= 1301) temp += (baseStat*54);
-			if (baseStat >= 1351) temp += (baseStat*56);
-			if (baseStat >= 1401) temp += (baseStat*58);
-			if (baseStat >= 1451) temp += (baseStat*60);
-			if (baseStat >= 1501) temp += (baseStat*62);
-			if (baseStat >= 1551) temp += (baseStat*64);
-			if (baseStat >= 1601) temp += (baseStat*66);
-			if (baseStat >= 1651) temp += (baseStat*68);
-			if (baseStat >= 1701) temp += (baseStat*70);
-			if (baseStat >= 1751) temp += (baseStat*72);
-			if (baseStat >= 1801) temp += (baseStat*74);
-			if (baseStat >= 1851) temp += (baseStat*76);
-			if (baseStat >= 1901) temp += (baseStat*78);
-			if (baseStat >= 1951) temp += (baseStat*80);
-			if (baseStat >= 2001) temp += (baseStat*82);
-			if (baseStat >= 2051) temp += (baseStat*84);
-			if (baseStat >= 2101) temp += (baseStat*86);
-			if (baseStat >= 2151) temp += (baseStat*88);
-			if (baseStat >= 2201) temp += (baseStat*90);
-			if (baseStat >= 2251) temp += (baseStat*92);
-			if (baseStat >= 2301) temp += (baseStat*94);
-			if (baseStat >= 2351) temp += (baseStat*96);
-			if (baseStat >= 2401) temp += (baseStat*98);
-			if (baseStat >= 2451) temp += (baseStat*100);
-			if (baseStat >= 2501) temp += (baseStat*102);
-			if (baseStat >= 2551) temp += (baseStat*104);
-			if (baseStat >= 2601) temp += (baseStat*106);
-			if (baseStat >= 2651) temp += (baseStat*108);
-			if (baseStat >= 2701) temp += (baseStat*110);
-			if (baseStat >= 2751) temp += (baseStat*112);
-			if (baseStat >= 2801) temp += (baseStat*114);
-			if (baseStat >= 2851) temp += (baseStat*116);
-			if (baseStat >= 2901) temp += (baseStat*118);
-			if (baseStat >= 2951) temp += (baseStat*120);
-			if (baseStat >= 3001) temp += (baseStat*122);
-			if (baseStat >= 3051) temp += (baseStat*124);
-			if (baseStat >= 3101) temp += (baseStat*126);
-			if (baseStat >= 3151) temp += (baseStat*128);
-			if (baseStat >= 3201) temp += (baseStat*130);
-			if (baseStat >= 3251) temp += (baseStat*132);
-			if (baseStat >= 3301) temp += (baseStat*134);
-			if (baseStat >= 3351) temp += (baseStat*136);
-			if (baseStat >= 3401) temp += (baseStat*138);
-			if (baseStat >= 3451) temp += (baseStat*140);
-			if (baseStat >= 3501) temp += (baseStat*142);
-			if (baseStat >= 3551) temp += (baseStat*144);
-			if (baseStat >= 3601) temp += (baseStat*146);
-			if (baseStat >= 3651) temp += (baseStat*148);
-			if (baseStat >= 3701) temp += (baseStat*150);
-			if (baseStat >= 3751) temp += (baseStat*152);
-			if (baseStat >= 3801) temp += (baseStat*154);
-			if (baseStat >= 3851) temp += (baseStat*156);
-			if (baseStat >= 3901) temp += (baseStat*158);
-			if (baseStat >= 3951) temp += (baseStat*160);
+			var multiplier:Number = 6;
+			for (var threshold:Number = 101; threshold >= 4999951; threshold += 50) {
+				if (baseStat >= threshold) {
+					temp += baseStat*multiplier;
+					multiplier += 2;
+				} else break;
+			}
 			//Apply NG+, NG++, NG+++, etc.
 			temp += this.bonusAscMaxHP * newGamePlusMod();
 			//Apply perks
@@ -334,6 +265,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) temp *= 2.25;
 			if (findPerk(PerkLib.EnemyColossalType) >= 0) temp *= 3;
 			if (findPerk(PerkLib.EnemyGroupType) >= 0) temp *= 5;
+			if (findPerk(PerkLib.EnemyLargeGroupType) >= 0) temp *= 10;
 			temp *= stats_multi_based_on_misc();
 			temp = Math.round(temp);
 			return temp;
@@ -343,12 +275,25 @@ import flash.utils.getQualifiedClassName;
         }
 		public override function maxOverHP():Number {
 			var maxOver:Number = maxHP();
-			if (findPerk(PerkLib.HiddenJobBloodDemon) >= 0) maxOver += Math.round(this.tou*5);
+			if (findPerk(PerkLib.HiddenJobBloodDemon) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 5);
+				else maxOver += Math.round(this.tou*5);
+			}
+			if (findPerk(PerkLib.WayOfTheBlood) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 5);
+				else maxOver += Math.round(this.tou*5);
+			}
+			if (findPerk(PerkLib.YourPainMyPower) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 5);
+				else maxOver += Math.round(this.tou*5);
+			}
+			if (findPerk(PerkLib.MyBloodForBloodPuppies) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 5);
+				else maxOver += Math.round(this.tou*5);
+			}
 			return maxOver;
 		}
-
-		public override function minHP():Number
-		{
+		public override function minHP():Number {
 			var min:Number = 0;
 			if (findPerk(PerkLib.Diehard) >= 0) {
 				min -= maxHP() * 0.02;
@@ -383,25 +328,27 @@ import flash.utils.getQualifiedClassName;
 			return min;
 		}
 
-		public function addHP(hp:Number):void{
+		public function addHP(hp:Number):void {
 			this.HP += hp;
-			if (this.HP<0) this.HP = 0;
-			else if (this.HP > maxHP()) this.HP = maxHP();
+			if (this.HP <= minHP()) this.HP = minHP();
+			else if (this.HP > maxOverHP()) this.HP = maxOverHP();
 		}
-
-		public function addSoulforce(soulforce:Number):void{
+		public function addSoulforce(soulforce:Number):void {
 			this.soulforce += soulforce;
 			if (this.soulforce > maxSoulforce()) this.soulforce = maxSoulforce();
 		}
-
-		public function addMana(mana:Number):void{
+		public function addMana(mana:Number):void {
 			this.mana += mana;
 			if (this.mana > maxMana()) this.mana = maxMana();
 		}
 
 		protected override function maxLust_base():Number {
 			//Base lust
-			var temp:Number = 70 + this.bonusLust;
+			var temp:Number = 100 + this.level * 2;
+			if (this.level >= 24) temp += (this.level - 23) * 3;
+			if (this.level >= 42) temp += (this.level - 42) * 5;
+			if (this.level >= 72) temp += (this.level - 72) * 10;
+			if (this.level >= 102) temp += (this.level - 102) * 20;
 			//Apply perks
 			if (findPerk(PerkLib.BasicSelfControl) >= 0) temp += 15;
 			if (findPerk(PerkLib.HalfStepToImprovedSelfControl) >= 0) temp += 25;
@@ -435,12 +382,11 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.UnlockArdor3rdStage) >= 0) temp += level;
 			if (findPerk(PerkLib.UnlockArdor4thStage) >= 0) temp += level;
 			//Apply NG+, NG++, NG+++, etc.
-			temp += this.bonusLust * newGamePlusMod();
-			temp += this.level * 2;
-			if (this.level >= 24) temp += (this.level - 23) * 3;
-			if (this.level >= 42) temp += (this.level - 42) * 5;
-			if (this.level >= 72) temp += (this.level - 72) * 10;
-			if (this.level >= 102) temp += (this.level - 102) * 20;
+			var anotherOne:Number = this.bonusLust;
+			if (findPerk(PerkLib.EnemyGroupType) >= 0) anotherOne *= 5;
+			if (findPerk(PerkLib.EnemyLargeGroupType) >= 0) anotherOne *= 10;
+			anotherOne *= (1 + newGamePlusMod());
+			temp += anotherOne;
 			var multimax:Number = 1;
 			if (findPerk(PerkLib.LimitBreakerHeart1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerHeart2ndStage) >= 0) multimax += 0.1;
@@ -453,8 +399,7 @@ import flash.utils.getQualifiedClassName;
 			return temp;
 		}
 
-		public override function maxFatigue():Number
-		{
+		public override function maxFatigue():Number {
 			//Base fatigue
 			var temp:Number = 100 + this.level * 5;
 			//Apply perks
@@ -499,8 +444,7 @@ import flash.utils.getQualifiedClassName;
 			return temp;
 		}
 
-		public override function maxSoulforce():Number
-		{
+		public override function maxSoulforce():Number {
 			//Base soulforce
 			var temp:Number = 50 + this.bonusSoulforce;
 			if (findPerk(PerkLib.JobSoulCultivator) >= 0) {
@@ -538,7 +482,7 @@ import flash.utils.getQualifiedClassName;
 				if (this.level >= 40) temp += 80;
 			}
 			if (findPerk(PerkLib.InsightfulResourcesI) >= 0) temp += Math.round((this.wis*5) * (1 + newGamePlusMod()));
-			if (findPerk(PerkLib.FleshBodyApprenticeStage) >= 0) {
+			if (findPerk(PerkLib.DaoistApprenticeStage) >= 0) {
 				if (findPerk(PerkLib.SoulApprentice) >= 0) temp += 30;
 				if (findPerk(PerkLib.SoulPersonage) >= 0) temp += 30;
 				if (findPerk(PerkLib.SoulWarrior) >= 0) temp += 30;
@@ -569,8 +513,7 @@ import flash.utils.getQualifiedClassName;
 			return temp;
 		}
 
-		public override function maxWrath():Number
-		{
+		public override function maxWrath():Number {
 			//Base wrath
 			var temp:Number = 250 + this.bonusWrath;
 			if (findPerk(PerkLib.DoubleAttack) >= 0) temp += 10;
@@ -626,6 +569,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.EnemyFeralType) >= 0) {
 				temp += 500;
 				if (findPerk(PerkLib.EnemyGroupType) >= 0) temp += 2000;
+				if (findPerk(PerkLib.EnemyLargeGroupType) >= 0) temp += 4000;
 			}
 			var multimax:Number = 1;
 			if (findPerk(PerkLib.LimitBreakerBody1stStage) >= 0) multimax += 0.05;
@@ -640,8 +584,7 @@ import flash.utils.getQualifiedClassName;
 			return temp;
 		}
 
-		public override function maxMana():Number
-		{
+		public override function maxMana():Number {
 			//Base mana
 			var temp:Number = 200 + this.level * 10 + this.bonusMana;
 			if (findPerk(PerkLib.BasicSpirituality) >= 0) temp += 45;
@@ -700,7 +643,7 @@ import flash.utils.getQualifiedClassName;
 		}
 
 		private function stats_multi_based_on_misc():Number {
-			var temp:Number = 1.0;
+			var temp:Number = 1;
 			if (findPerk(PerkLib.EnemyEliteType) >= 0) temp += 1;
 			if (findPerk(PerkLib.EnemyChampionType) >= 0) temp += 2;
 			if (findPerk(PerkLib.EnemyBossType) >= 0) temp += 3;
@@ -726,6 +669,7 @@ import flash.utils.getQualifiedClassName;
 			if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 10;
 			if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 25;
 			if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 100;
+			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) temp = 1;
 			return temp;
 		}
 
@@ -979,19 +923,10 @@ import flash.utils.getQualifiedClassName;
 			return damage;
 		}
 
-		private function eBaseMultis():Number {
-			var datNumber:Number = 1;
-			if (findPerk(PerkLib.EnemyBossType) >= 0) datNumber *= 2;
-			if (findPerk(PerkLib.EnemyHugeType) >= 0) datNumber *= 2;
-			if (findPerk(PerkLib.EnemyGigantType) >= 0) datNumber *= 4;
-			if (findPerk(PerkLib.EnemyColossalType) >= 0) datNumber *= 6;
-			return datNumber;
-		}
-
 		private function inteligencescalingbonusMonster(stat:int):Number{
 			var scale:Number = 250.75;
 			var changeBy:Number = 0.50;
-			if(stat <= 50000){
+			if(stat <= 5000000){
 				if(stat <= 100){
 					scale = (2/6) + ((int(stat/100)/20) * (1/6));
 					changeBy = 0.25;
@@ -999,129 +934,25 @@ import flash.utils.getQualifiedClassName;
 					scale = 1 + (int((stat - 100)/50) * 0.25);
 				}
 			}
-			return (stat * scale) + rand(stat * (scale + changeBy));
+			return Math.round((stat * scale) + rand(stat * (scale + changeBy)) * eBaseMultis());
 		}
 		public function inteligencescalingbonus():Number {
 			return inteligencescalingbonusMonster(inte);
-		}/*
-		public function inteligencescalingbonus():Number {
-			var inteligencescalingvalue:Number = 0;
-			if (inte >= 4001 && inte < 4051) inteligencescalingvalue += ((inte * 20.75) + rand(inte * 21.25));
-			if (inte >= 4051 && inte < 4101) inteligencescalingvalue += ((inte * 21) + rand(inte * 21.5));
-			if (inte >= 4101 && inte < 4151) inteligencescalingvalue += ((inte * 21.25) + rand(inte * 21.75));
-			if (inte >= 4151 && inte < 4201) inteligencescalingvalue += ((inte * 21.5) + rand(inte * 22));
-			if (inte >= 4201 && inte < 4251) inteligencescalingvalue += ((inte * 21.75) + rand(inte * 22.25));
-			if (inte >= 4251 && inte < 4301) inteligencescalingvalue += ((inte * 22) + rand(inte * 22.5));
-			if (inte >= 4301 && inte < 4351) inteligencescalingvalue += ((inte * 22.25) + rand(inte * 22.75));
-			if (inte >= 4351 && inte < 4401) inteligencescalingvalue += ((inte * 22.5) + rand(inte * 23));
-			if (inte >= 4401 && inte < 4451) inteligencescalingvalue += ((inte * 22.75) + rand(inte * 23.25));
-			if (inte >= 4451 && inte < 4501) inteligencescalingvalue += ((inte * 23) + rand(inte * 23.5));
-			if (inte >= 4501 && inte < 4551) inteligencescalingvalue += ((inte * 23.25) + rand(inte * 23.75));
-			if (inte >= 4551 && inte < 4601) inteligencescalingvalue += ((inte * 23.5) + rand(inte * 24));
-			if (inte >= 4601 && inte < 4651) inteligencescalingvalue += ((inte * 23.75) + rand(inte * 24.25));
-			if (inte >= 4651 && inte < 4701) inteligencescalingvalue += ((inte * 24) + rand(inte * 24.5));
-			if (inte >= 4701 && inte < 4751) inteligencescalingvalue += ((inte * 24.25) + rand(inte * 24.75));
-			if (inte >= 4751 && inte < 4801) inteligencescalingvalue += ((inte * 24.5) + rand(inte * 25));
-			if (inte >= 4801 && inte < 4851) inteligencescalingvalue += ((inte * 24.75) + rand(inte * 25.25));
-			if (inte >= 4851 && inte < 4901) inteligencescalingvalue += ((inte * 25) + rand(inte * 25.5));
-			if (inte >= 4901 && inte < 4951) inteligencescalingvalue += ((inte * 25.25) + rand(inte * 25.75));
-			if (inte >= 4951 && inte < 5001) inteligencescalingvalue += ((inte * 25.5) + rand(inte * 26));
-			if (inte >= 5001) inteligencescalingvalue += ((inte * 25.75) + rand(inte * 26.25));
-			else inteligencescalingvalue += (inte/3 + rand(inte/2));
-			return inteligencescalingvalue;
-		}*/
-
+		}
 		public function wisdomscalingbonus():Number {
 			return inteligencescalingbonusMonster(wis);
-		}/*
-		public function wisdomscalingbonus():Number {
-			var wisdomscalingvalue:Number = 0;
-			if (wis >= 21 && wis < 41) wisdomscalingvalue += (wis / 2 + rand((wis * 3) / 4));
-			if (wis >= 41 && wis < 61) wisdomscalingvalue += ((wis * 2) / 3 + rand(wis));
-			if (wis >= 61 && wis < 81) wisdomscalingvalue += ((wis * 5) / 6 + rand(wis * 1.25));
-			if (wis >= 81 && wis < 101) wisdomscalingvalue += (wis + rand(wis * 1.5));
-			if (wis >= 101 && wis < 151) wisdomscalingvalue += ((wis * 1.25) + rand(wis * 1.75));
-			if (wis >= 151 && wis < 201) wisdomscalingvalue += ((wis * 1.5) + rand(wis * 2));
-			if (wis >= 201 && wis < 251) wisdomscalingvalue += ((wis * 1.75) + rand(wis * 2.25));
-			if (wis >= 251 && wis < 301) wisdomscalingvalue += ((wis * 2) + rand(wis * 2.5));
-			if (wis >= 301 && wis < 351) wisdomscalingvalue += ((wis * 2.25) + rand(wis * 2.75));
-			if (wis >= 351 && wis < 401) wisdomscalingvalue += ((wis * 2.5) + rand(wis * 3));
-			if (wis >= 401 && wis < 451) wisdomscalingvalue += ((wis * 2.75) + rand(wis * 3.25));
-			if (wis >= 451 && wis < 501) wisdomscalingvalue += ((wis * 3) + rand(wis * 3.5));
-			if (wis >= 501 && wis < 551) wisdomscalingvalue += ((wis * 3.25) + rand(wis * 3.75));
-			if (wis >= 551 && wis < 601) wisdomscalingvalue += ((wis * 3.5) + rand(wis * 4));
-			if (wis >= 601 && wis < 651) wisdomscalingvalue += ((wis * 3.75) + rand(wis * 4.25));
-			if (wis >= 651 && wis < 701) wisdomscalingvalue += ((wis * 4) + rand(wis * 4.5));
-			if (wis >= 701 && wis < 751) wisdomscalingvalue += ((wis * 4.25) + rand(wis * 4.75));
-			if (wis >= 751 && wis < 801) wisdomscalingvalue += ((wis * 4.5) + rand(wis * 5));
-			if (wis >= 801 && wis < 851) wisdomscalingvalue += ((wis * 4.75) + rand(wis * 5.25));
-			if (wis >= 851 && wis < 901) wisdomscalingvalue += ((wis * 5) + rand(wis * 5.5));
-			if (wis >= 901 && wis < 951) wisdomscalingvalue += ((wis * 5.25) + rand(wis * 5.75));
-			if (wis >= 951 && wis < 1001) wisdomscalingvalue += ((wis * 5.5) + rand(wis * 6));
-			if (wis >= 1001 && wis < 1051) wisdomscalingvalue += ((wis * 5.75) + rand(wis * 6.25));
-			if (wis >= 1051 && wis < 1101) wisdomscalingvalue += ((wis * 6) + rand(wis * 6.5));
-			if (wis >= 1101 && wis < 1151) wisdomscalingvalue += ((wis * 6.25) + rand(wis * 6.75));
-			if (wis >= 1151 && wis < 1201) wisdomscalingvalue += ((wis * 6.5) + rand(wis * 7));
-			if (wis >= 1201 && wis < 1251) wisdomscalingvalue += ((wis * 6.75) + rand(wis * 7.25));
-			if (wis >= 1251 && wis < 1301) wisdomscalingvalue += ((wis * 7) + rand(wis * 7.5));
-			if (wis >= 1301 && wis < 1351) wisdomscalingvalue += ((wis * 7.25) + rand(wis * 7.75));
-			if (wis >= 1351 && wis < 1401) wisdomscalingvalue += ((wis * 7.5) + rand(wis * 8));
-			if (wis >= 1401 && wis < 1451) wisdomscalingvalue += ((wis * 7.75) + rand(wis * 8.25));
-			if (wis >= 1451 && wis < 1501) wisdomscalingvalue += ((wis * 8) + rand(wis * 8.5));
-			if (wis >= 1501 && wis < 1551) wisdomscalingvalue += ((wis * 8.25) + rand(wis * 8.75));
-			if (wis >= 1551 && wis < 1601) wisdomscalingvalue += ((wis * 8.5) + rand(wis * 9));
-			if (wis >= 1601 && wis < 1651) wisdomscalingvalue += ((wis * 8.75) + rand(wis * 9.25));
-			if (wis >= 1651 && wis < 1701) wisdomscalingvalue += ((wis * 9) + rand(wis * 9.5));
-			if (wis >= 1701 && wis < 1751) wisdomscalingvalue += ((wis * 9.25) + rand(wis * 9.75));
-			if (wis >= 1751 && wis < 1801) wisdomscalingvalue += ((wis * 9.5) + rand(wis * 10));
-			if (wis >= 1801 && wis < 1851) wisdomscalingvalue += ((wis * 9.75) + rand(wis * 10.25));
-			if (wis >= 1851 && wis < 1901) wisdomscalingvalue += ((wis * 10) + rand(wis * 10.5));
-			if (wis >= 1901 && wis < 1951) wisdomscalingvalue += ((wis * 10.25) + rand(wis * 10.75));
-			if (wis >= 1951 && wis < 2001) wisdomscalingvalue += ((wis * 10.5) + rand(wis * 11));
-			if (wis >= 2001 && wis < 2051) wisdomscalingvalue += ((wis * 10.75) + rand(wis * 11.25));
-			if (wis >= 2051 && wis < 2101) wisdomscalingvalue += ((wis * 11) + rand(wis * 11.5));
-			if (wis >= 2101 && wis < 2151) wisdomscalingvalue += ((wis * 11.15) + rand(wis * 11.75));
-			if (wis >= 2151 && wis < 2201) wisdomscalingvalue += ((wis * 11.5) + rand(wis * 12));
-			if (wis >= 2201 && wis < 2251) wisdomscalingvalue += ((wis * 11.75) + rand(wis * 12.25));
-			if (wis >= 2251 && wis < 2301) wisdomscalingvalue += ((wis * 12) + rand(wis * 12.5));
-			if (wis >= 2301 && wis < 2351) wisdomscalingvalue += ((wis * 12.25) + rand(wis * 12.75));
-			if (wis >= 2351 && wis < 2401) wisdomscalingvalue += ((wis * 12.5) + rand(wis * 13));
-			if (wis >= 2401 && wis < 2451) wisdomscalingvalue += ((wis * 12.75) + rand(wis * 13.25));
-			if (wis >= 2451 && wis < 2501) wisdomscalingvalue += ((wis * 13) + rand(wis * 13.5));
-			if (wis >= 2501 && wis < 2551) wisdomscalingvalue += ((wis * 13.25) + rand(wis * 13.75));
-			if (wis >= 2551 && wis < 2601) wisdomscalingvalue += ((wis * 13.5) + rand(wis * 14));
-			if (wis >= 2601 && wis < 2651) wisdomscalingvalue += ((wis * 13.75) + rand(wis * 14.25));
-			if (wis >= 2651 && wis < 2701) wisdomscalingvalue += ((wis * 14) + rand(wis * 14.5));
-			if (wis >= 2701 && wis < 2751) wisdomscalingvalue += ((wis * 14.25) + rand(wis * 14.75));
-			if (wis >= 2751 && wis < 2801) wisdomscalingvalue += ((wis * 14.5) + rand(wis * 15));
-			if (wis >= 2801 && wis < 2851) wisdomscalingvalue += ((wis * 14.75) + rand(wis * 15.25));
-			if (wis >= 2851 && wis < 2901) wisdomscalingvalue += ((wis * 15) + rand(wis * 15.5));
-			if (wis >= 2901 && wis < 2951) wisdomscalingvalue += ((wis * 15.25) + rand(wis * 15.75));
-			if (wis >= 2951 && wis < 3001) wisdomscalingvalue += ((wis * 15.5) + rand(wis * 16));
-			if (wis >= 3001 && wis < 3051) wisdomscalingvalue += ((wis * 15.75) + rand(wis * 16.25));
-			if (wis >= 3051 && wis < 3101) wisdomscalingvalue += ((wis * 16) + rand(wis * 16.5));
-			if (wis >= 3101 && wis < 3151) wisdomscalingvalue += ((wis * 16.15) + rand(wis * 16.75));
-			if (wis >= 3151 && wis < 3201) wisdomscalingvalue += ((wis * 16.5) + rand(wis * 17));
-			if (wis >= 3201 && wis < 3251) wisdomscalingvalue += ((wis * 16.75) + rand(wis * 17.25));
-			if (wis >= 3251 && wis < 3301) wisdomscalingvalue += ((wis * 17) + rand(wis * 17.5));
-			if (wis >= 3301 && wis < 3351) wisdomscalingvalue += ((wis * 17.25) + rand(wis * 17.75));
-			if (wis >= 3351 && wis < 3401) wisdomscalingvalue += ((wis * 17.5) + rand(wis * 18));
-			if (wis >= 3401 && wis < 3451) wisdomscalingvalue += ((wis * 17.75) + rand(wis * 18.25));
-			if (wis >= 3451 && wis < 3501) wisdomscalingvalue += ((wis * 18) + rand(wis * 18.5));
-			if (wis >= 3501 && wis < 3551) wisdomscalingvalue += ((wis * 18.25) + rand(wis * 18.75));
-			if (wis >= 3551 && wis < 3601) wisdomscalingvalue += ((wis * 18.5) + rand(wis * 19));
-			if (wis >= 3601 && wis < 3651) wisdomscalingvalue += ((wis * 18.75) + rand(wis * 19.25));
-			if (wis >= 3651 && wis < 3701) wisdomscalingvalue += ((wis * 19) + rand(wis * 19.5));
-			if (wis >= 3701 && wis < 3751) wisdomscalingvalue += ((wis * 19.25) + rand(wis * 19.75));
-			if (wis >= 3751 && wis < 3801) wisdomscalingvalue += ((wis * 19.5) + rand(wis * 20));
-			if (wis >= 3801 && wis < 3851) wisdomscalingvalue += ((wis * 19.75) + rand(wis * 20.25));
-			if (wis >= 3851 && wis < 3901) wisdomscalingvalue += ((wis * 20) + rand(wis * 20.5));
-			if (wis >= 3901 && wis < 3951) wisdomscalingvalue += ((wis * 20.25) + rand(wis * 20.75));
-			if (wis >= 3951 && wis < 4001) wisdomscalingvalue += ((wis * 20.5) + rand(wis * 21));
-			if (wis >= 4001) wisdomscalingvalue += ((wis * 20.75) + rand(wis * 21.25));
-			else wisdomscalingvalue += (wis/3 + rand(wis/2));
-			return wisdomscalingvalue;
-		}*/
+		}
+
+		private function eBaseMultis():Number {
+			var datNumber:Number = 1;
+			if (level >= 1) datNumber += 0.01;
+			if (findPerk(PerkLib.EnemyBossType) >= 0) datNumber *= 2;
+			if (findPerk(PerkLib.EnemyHugeType) >= 0) datNumber *= 2;
+			if (findPerk(PerkLib.EnemyGigantType) >= 0) datNumber *= 4;
+			if (findPerk(PerkLib.EnemyColossalType) >= 0) datNumber *= 6;
+			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) datNumber = 1;
+			return datNumber;
+		}
 
 		/**
 		 * @return randomized damage reduced by player stats
@@ -1165,6 +996,7 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.EnemyGigantType) >= 0) minXP *= 4;
 				if (findPerk(PerkLib.EnemyColossalType) >= 0) minXP *= 6;
 				if (findPerk(PerkLib.EnemyGroupType) >= 0) minXP *= 5;
+				if (findPerk(PerkLib.EnemyLargeGroupType) >= 0) minXP *= 10;
 				if (this.humanityBoostExpValue() > 0) minXP += this.humanityBoostExpValue();
 				return Math.round(minXP);
 			}
@@ -1190,6 +1022,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) specENtypes *= 4;
 			if (findPerk(PerkLib.EnemyColossalType) >= 0) specENtypes *= 6;
 			if (findPerk(PerkLib.EnemyGroupType) >= 0) specENtypes *= 5;
+			if (findPerk(PerkLib.EnemyLargeGroupType) >= 0) specENtypes *= 10;
 			return specENtypes;
 		}
 		protected function humanity():Number
@@ -1836,7 +1669,14 @@ import flash.utils.getQualifiedClassName;
 				if (!handleStun()) return;
 			}
 			if (hasStatusEffect(StatusEffects.Fear)) {
-				if (!handleFear()) return;
+				if (this is Marae) {
+					outputText("\n\n\"<i>You think I'm afraid of anything? Foolish mortal.</i>\" Marae snarls.");
+					this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
+					removeStatusEffect(StatusEffects.Fear);
+				}
+				else {
+					if (!handleFear()) return;
+				}
 			}
 			//Exgartuan gets to do stuff!
 			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
@@ -1853,9 +1693,11 @@ import flash.utils.getQualifiedClassName;
 			}
 			if (hasStatusEffect(StatusEffects.Provoke)) {
 				addStatusValue(StatusEffects.Provoke, 1, -1);
-				if (statusEffectv1(StatusEffects.Provoke) <= 0) armorDef += statusEffectv3(StatusEffects.Provoke);
-				eAttack();
-				return;
+				if (!hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.EnemyFleshConstructType)) {
+					if (statusEffectv1(StatusEffects.Provoke) <= 0) armorDef += statusEffectv3(StatusEffects.Provoke);
+					eAttack();
+					return;
+				}
 			}
 			if (hasStatusEffect(StatusEffects.Dig)) {
 				outputText("\n\nYour opponent is still looking for you as you remain quietly hiding underground, away from view.");
@@ -2055,7 +1897,13 @@ import flash.utils.getQualifiedClassName;
 			else if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled)) EngineCore.outputText(capitalA + short + " try to hit you but is unable to reach you!");
 			else {
 				if (plural) EngineCore.outputText("Your foes are too dazed from your last hit to strike back!");
-				else EngineCore.outputText("Your foe is too dazed from your last hit to strike back!");
+				else {
+					EngineCore.outputText("Your foe is too dazed from your last hit to strike back!");
+					if (hasStatusEffect(StatusEffects.Uber) && this is Marae) {
+						EngineCore.outputText(" You've managed to interrupt her smite attack!");
+						removeStatusEffect(StatusEffects.Uber);
+					}
+				}
 			}
 			return false;
 		}
@@ -2329,7 +2177,7 @@ import flash.utils.getQualifiedClassName;
 			//regeneration perks for monsters
 			if (((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.LizanMarrowFinalForm) >= 0 || findPerk(PerkLib.DraconicHeartFinalForm) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0
 			|| findPerk(PerkLib.HydraRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0 || findPerk(PerkLib.ImprovedLifeline) >= 0 || findPerk(PerkLib.GreaterLifeline) >= 0 || findPerk(PerkLib.EpicLifeline) >= 0 || findPerk(PerkLib.IcyFlesh) >= 0 || findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0
-			|| findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxHP()) && (this.HP > 0))) {
+			|| findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0 || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				if (findPerk(PerkLib.Regeneration) >= 0) healingPercent += (0.5 * (1 + newGamePlusMod()));
@@ -2575,7 +2423,8 @@ import flash.utils.getQualifiedClassName;
 			}
 			if(hasStatusEffect(StatusEffects.IzmaBleed)) {
 				//Countdown to heal
-				addStatusValue(StatusEffects.IzmaBleed, 1, -1);
+				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.IzmaBleed, 1, -2);
+				else addStatusValue(StatusEffects.IzmaBleed, 1, -1);
 				if (statusEffectv2(StatusEffects.IzmaBleed) > 0) addStatusValue(StatusEffects.IzmaBleed, 2, -1);
 				if (statusEffectv4(StatusEffects.IzmaBleed) == 1) addStatusValue(StatusEffects.IzmaBleed, 4, -1);
 				//Heal wounds
@@ -2597,7 +2446,8 @@ import flash.utils.getQualifiedClassName;
 			}
 			if(hasStatusEffect(StatusEffects.SharkBiteBleed)) {
 				//Countdown to heal
-				addStatusValue(StatusEffects.SharkBiteBleed,1,-1);
+				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.SharkBiteBleed, 1, -2);
+				else addStatusValue(StatusEffects.SharkBiteBleed,1,-1);
 				//Heal wounds
 				if(statusEffectv1(StatusEffects.SharkBiteBleed) <= 0) {
 					outputText("The bite wounds you left on " + a + short + " stop bleeding so profusely.\n\n");
@@ -2629,7 +2479,8 @@ import flash.utils.getQualifiedClassName;
 			}
 			if(hasStatusEffect(StatusEffects.GoreBleed)) {
 				//Countdown to heal
-				addStatusValue(StatusEffects.GoreBleed,1,-1);
+				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.GoreBleed, 1, -2);
+				else addStatusValue(StatusEffects.GoreBleed,1,-1);
 				//Heal wounds
 				if(statusEffectv1(StatusEffects.GoreBleed) <= 0) {
 					outputText("The ");
@@ -2660,9 +2511,18 @@ import flash.utils.getQualifiedClassName;
 			}
 			if(hasStatusEffect(StatusEffects.Hemorrhage) || hasStatusEffect(StatusEffects.HemorrhageArmor) || hasStatusEffect(StatusEffects.HemorrhageShield)) {
 				//Countdown to heal
-				if (hasStatusEffect(StatusEffects.Hemorrhage)) addStatusValue(StatusEffects.Hemorrhage, 1, -1);
-				if (hasStatusEffect(StatusEffects.HemorrhageArmor)) addStatusValue(StatusEffects.HemorrhageArmor, 1, -1);
-				if (hasStatusEffect(StatusEffects.HemorrhageShield)) addStatusValue(StatusEffects.HemorrhageShield, 1, -1);
+				if (hasStatusEffect(StatusEffects.Hemorrhage)) {
+					if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.Hemorrhage, 1, -2);
+					else addStatusValue(StatusEffects.Hemorrhage, 1, -1);
+				}
+				if (hasStatusEffect(StatusEffects.HemorrhageArmor)) {
+					if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.HemorrhageArmor, 1, -2);
+					else addStatusValue(StatusEffects.HemorrhageArmor, 1, -1);
+				}
+				if (hasStatusEffect(StatusEffects.HemorrhageShield)) {
+					if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.HemorrhageShield, 1, -2);
+					else addStatusValue(StatusEffects.HemorrhageShield, 1, -1);
+				}
 				//Heal wounds
 				if (statusEffectv1(StatusEffects.Hemorrhage) <= 0 || statusEffectv1(StatusEffects.HemorrhageArmor) <= 0 || statusEffectv1(StatusEffects.HemorrhageShield) <= 0) {
 					outputText("The wounds you left on " + a + short + " stop bleeding so profusely.\n\n");
@@ -2683,7 +2543,8 @@ import flash.utils.getQualifiedClassName;
 			}
 			if(hasStatusEffect(StatusEffects.Hemorrhage2)) {
 				//Countdown to heal
-				addStatusValue(StatusEffects.Hemorrhage2, 1, -1);
+				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.Hemorrhage2, 1, -2);
+				else addStatusValue(StatusEffects.Hemorrhage2, 1, -1);
 				//Heal wounds
 				if (statusEffectv1(StatusEffects.Hemorrhage2) <= 0) {
 					outputText("The wounds your companion left on " + a + short + " stop bleeding so profusely.\n\n");
@@ -2699,7 +2560,9 @@ import flash.utils.getQualifiedClassName;
 				}
 			}
 			if (hasStatusEffect(StatusEffects.Bloodlust)) {
-				if (this is UnderwaterSharkGirl || this is UnderwaterTigersharkGirl) outputText("As blood flows through the water the shark girl grows increasingly vicious. ");
+				if (this is UnderwaterSharkGirl || this is UnderwaterTigersharkGirl || this is UnderwaterSharkGirlsPack) {
+					outputText("As blood flows through the water the "+(this is UnderwaterTigersharkGirl ? "tiger ":"")+"shark girl"+(this is UnderwaterSharkGirlsPack ? "s":"")+" grows increasingly vicious. ");
+				}
 			}
 			if(hasStatusEffect(StatusEffects.MonsterRegen)) {
 				if(statusEffectv1(StatusEffects.MonsterRegen) <= 0)
@@ -2781,12 +2644,12 @@ import flash.utils.getQualifiedClassName;
 						if(temp == 3) outputText("She winks at you and licks her lips, and you can't help but imagine her tongue sliding all over your body.  You regain composure moments before throwing yourself at her.  That was close.\n\n");
 					}
 				}
-				if (this is Alraune) {
+				if (this is Alraune || this is Marae) {
 					if(player.lust < (player.maxLust() * 0.33)) outputText("The pollen in the air gradually increase your arousal.\n\n");
 					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("The pollen in the air is getting to you.\n\n");
 					if(player.lust >= (player.maxLust() * 0.66)) outputText("You flush bright red with desire as the lust in the air worms its way inside you.\n\n");
 				}
-				player.dynStats("lus", (3 + int(player.lib/20 + player.cor/30)));
+				player.dynStats("lus", (3 + int(player.lib/20 + player.cor/25)));
 			}
 			//immolation DoT
 			if (hasStatusEffect(StatusEffects.ImmolationDoT)) {

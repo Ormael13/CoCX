@@ -5,51 +5,55 @@
 package classes.Scenes.NPCs 
 {
 	import classes.*;
+	import classes.BodyParts.Butt;
+	import classes.BodyParts.Hips;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.internals.*;
 	
 	public class Jeniffer extends Monster
 	{
-		override protected function performCombatAction():void {
-			var choice:Number = rand(2);
-			if (choice == 0) eAttack();
-			if (choice == 1) {
-				if (!player.hasStatusEffect(StatusEffects.IzmaBleed) && rand(2) == 0) Specials1();
-				else eAttack();
+		public function Specials2():void {
+			outputText("The golem's visage twists into a grimace of irritation, and it swings its hand at you in a vicious backhand.");
+			var damage:Number = Math.round(((str + weaponAttack) * 3) - rand(player.tou+player.armorDef));
+			//Dodge
+			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise swing!");
+			else
+			{
+				outputText(" It hits you square in the chest. ");
+				damage = player.takePhysDamage(damage, true);
 			}
 		}
 		
 		public function Specials1():void {
 			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
+			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText("J1c blindly tries to clinch you, but misses completely.\n");
 				return;
 			}
 			//Determine if dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
 				outputText("J1c tries to clinch you, but you use your speed to keep just out of reach.\n");
 				return;
 			}
 			//Determine if evaded
-			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("J1c tries to clinch you, but she didn't count on your skills in evasion.  You manage to sidestep her at the last second.\n");
 				return;
 			}
 			//("Misdirection"
-			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+			if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("J1c ducks and weaves forward to clinch you, but thanks to Raphael's teachings, you're easily able to misguide her and avoid the clumsy grab.\n");
 				return;
 			}
 			//Determine if cat'ed
-			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
+			if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("J1c tries to lock you in a clinch, but your cat-like flexibility makes it easy to twist away from her grab.\n");
 				return;
 			}
-			var damage:Number = 0;
-			damage = Math.round(130 - rand(player.tou+player.armorDef));
-			if(damage < 0) damage = 0;
+			var damage:Number = Math.round((str + weaponAttack) - rand(player.tou+player.armorDef));
+			if (damage < 0) damage = 0;
 			outputText("J1c ducks and jinks, working to close quarters, and clinches you. Unable to get your weapon into play, you can only ");
-			if(player.armorDef >= 10 || damage == 0) {
+			if (player.armorDef >= 10 || damage == 0) {
 				//(armor-dependent Health damage, fullplate, chain, scale, and bee chitin armor are unaffected, has a chance to inflict 'Bleed' damage which removes 4-10% of health for the next three turns if successful)
 				outputText("writhe as she painfully drags the sharp end of the metal shards on her golem forearm down your back");
 				player.createStatusEffect(StatusEffects.IzmaBleed,3,0,0,0);
@@ -59,32 +63,138 @@ package classes.Scenes.NPCs
 			player.takePhysDamage(damage, true);
 		}
 		
+		override protected function performCombatAction():void {
+			if (flags[kFLAGS.JENIFFER_LVL_UP] >= 1 && flags[kFLAGS.JENIFFER_LVL_UP] < 4) {
+				var choice1:Number = rand(2);
+				if (choice1 == 0) eAttack();
+				if (choice1 == 1) {
+					if (!player.hasStatusEffect(StatusEffects.IzmaBleed) && rand(2) == 0) Specials1();
+					else eAttack();
+				}
+			}
+			if (flags[kFLAGS.JENIFFER_LVL_UP] < 1) {
+				var choice0:Number = rand(2);
+				if (choice0 == 0) eAttack();
+				if (choice0 == 1) {
+					if (!player.hasStatusEffect(StatusEffects.IzmaBleed) && rand(2) == 0) Specials1();
+					else eAttack();
+				}
+			}
+		}
+		
 		public function Jeniffer() 
 		{
 			this.a = "the ";
-			this.short = "J1c golem";
-			this.imageName = "J1c golem";
-			this.long = "You're currently fighting a golemancer controling personaly created golem called J1c. It's ten feet tall with general shape of a female but lacking any fine details. It stone body is covered with soulmetal plates in many placed and from it looks like using spike covered fists to smash enemies. Despite been controled by a goblin it construction greatly reduce effects of most of sexual moves.";
-			this.plural = false;
-			initStrTouSpeInte(120, 120, 20, 10);
-			initWisLibSensCor(10, 10, 10, 50);
-			this.lustVuln = .1;
-			this.tallness = 120;
-			this.createBreastRow(0, 1);
-			initGenderless();
-			this.drop = new ChainedDrop()
-					.add(useables.GOLCORE, 1/4);
-			this.level = 15;
-			//this.bonusHP = 200;
-			this.weaponName = "spiked fists";
-			this.weaponVerb = "smash";
-			this.weaponAttack = 36;
-			this.armorName = "stone covered by soulmetal plating";
-			this.armorDef = 45;
-			this.armorMDef = 45;
-			this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
+			if (flags[kFLAGS.JENIFFER_LVL_UP] < 1) {
+				this.short = "J1c golem";
+				this.imageName = "J1Golem";
+				this.long = "You're currently fighting a golemancer controling personaly created golem called J1c. It's six feet tall with general shape of a female but lacking any fine details. It stone body is covered with thin soulmetal plates in many placed and from it looks like using spike covered fists to smash enemies. Only goblin's head isn't protected showing her green skin, pointed ears, and purple hair.";
+				createBreastRow(Appearance.breastCupInverse("A"));
+				this.tallness = 72;
+				initStrTouSpeInte(30, 60, 10, 100);
+				initWisLibSensCor(100, 10, 10, 50);
+				this.weaponName = "spiked fists";
+				this.weaponVerb = "smash";
+				this.weaponAttack = 18;
+				this.armorName = "stone covered by thin soulmetal plating";
+				this.armorDef = 50;
+				this.armorMDef = 50;
+				this.bonusHP = 100;
+				this.bonusLust = 35;
+				this.lustVuln = .2;
+				this.level = 15;
+			}
+			if (flags[kFLAGS.JENIFFER_LVL_UP] == 1) {
+				this.short = "J2a golem";
+				this.long = "You're currently fighting a golemancer controling personaly created golem called J2a. It's twelve feet tall with general shape of a female but lacking any fine details. It stone body is covered with soulmetal plates in many placed and it looks like using lance to stab enemies.  Only goblin's head isn't protected showing her green skin, pointed ears, and purple hair.";
+				this.tallness = 144;
+				initStrTouSpeInte(35, 70, 20, 100);
+				initWisLibSensCor(100, 15, 20, 50);
+				this.weaponAttack = 36;
+				this.armorDef = 100;
+				this.armorMDef = 100;
+				this.bonusHP = 200;
+				this.bonusLust = 56;
+				this.level = 21;
+			}
+			if (flags[kFLAGS.JENIFFER_LVL_UP] == 2) {
+				this.short = "J2b golem";
+				this.imageName = "J2Golem";
+				this.long = "You're currently fighting a golemancer controling personaly created golem called J2a. It's fourteen feet tall with general shape of a female but lacking any fine details. It stone body is covered with soulmetal plates in many placed and it looks like using lance to stab enemies.  Only goblin's head isn't protected showing her green skin, pointed ears, and purple hair.";
+				this.tallness = 168;
+				initStrTouSpeInte(35, 70, 20, 100);
+				initWisLibSensCor(100, 15, 20, 50);
+				this.weaponAttack = 44;
+				this.armorDef = 125;
+				this.armorMDef = 125;
+				this.bonusHP = 200;
+				this.bonusLust = 56;
+				this.level = 27;
+			}
+			if (flags[kFLAGS.JENIFFER_LVL_UP] == 3) {
+				this.short = "J2c golem";
+				this.imageName = "J2Golem";
+				this.long = "You're currently fighting a golemancer controling personaly created golem called J2a. It's sixteen feet tall with general shape of a female but lacking any fine details. It stone body is covered with soulmetal plates in many placed and it looks like using lance to stab enemies.  Only goblin's head isn't protected showing her green skin, pointed ears, and purple hair.";
+				this.tallness = 192;
+				initStrTouSpeInte(35, 70, 20, 100);
+				initWisLibSensCor(100, 15, 20, 50);
+				this.weaponAttack = 52;
+				this.armorDef = 150;
+				this.armorMDef = 150;
+				this.bonusHP = 200;
+				this.bonusLust = 56;
+				this.level = 33;
+			}
+			if (flags[kFLAGS.JENIFFER_LVL_UP] >= 1 && flags[kFLAGS.JENIFFER_LVL_UP] < 4) {
+				this.imageName = "J2Golem";
+				createBreastRow(Appearance.breastCupInverse("B"));
+				this.weaponName = "lance";
+				this.weaponVerb = "piercing stab";
+				this.armorName = "magically enhanced stone covered by soulmetal plating";
+				this.lustVuln = .15;
+			}
+			if (flags[kFLAGS.JENIFFER_LVL_UP] >= 4 && flags[kFLAGS.JENIFFER_LVL_UP] < 7) {//lub później niż 7 upgrade
+				this.imageName = "J3Golem";
+				createBreastRow(Appearance.breastCupInverse("C"));
+				this.weaponName = "lance";
+				this.weaponVerb = "piercing stab";
+				this.armorName = "(cos zamiast kamieni) covered by (soulmetal plating)";//coś lepszego od zwykłych soulmetal plates
+				this.lustVuln = .1;
+			}
+			if (flags[kFLAGS.JENIFFER_LVL_UP] >= 7 && flags[kFLAGS.JENIFFER_LVL_UP] < 11) {
+				this.imageName = "J4Golem";
+				createBreastRow(Appearance.breastCupInverse("D"));
+				this.weaponName = "lance";
+				this.weaponVerb = "piercing stab";
+				this.armorName = "magically enhanced (cos zamiast kamieni) covered by (soulmetal plating)";
+				this.lustVuln = .05;
+			}
+			this.plural = false;//J3 - thirty, J4 - ninety
+			this.createVagina(false, VaginaClass.WETNESS_DRY, VaginaClass.LOOSENESS_TIGHT);
+			this.createStatusEffect(StatusEffects.BonusVCapacity,10,0,0,0);
+			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
+			this.hips.type = Hips.RATING_BOYISH;
+			this.butt.type = Butt.RATING_BUTTLESS;
+			this.skinTone = "dark green";
+			this.hairColor = "purple";
+			this.hairLength = 4;
+			this.drop = NO_DROP;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
-			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
+			if (flags[kFLAGS.JENIFFER_LVL_UP] >= 1) {
+				this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
+				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.JENIFFER_LVL_UP] >= 2) {
+				this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.JENIFFER_LVL_UP] >= 3) {
+				this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
+			}
 			checkMonster();
 		}
 		

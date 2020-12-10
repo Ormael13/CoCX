@@ -91,7 +91,7 @@ public class ImpWarlord extends Imp
 			this.armorDef = 17;
 			this.armorMDef = 1;
 			this.bonusHP = 350;
-			this.bonusLust = 30;
+			this.bonusLust = 122;
 			this.lust = 30;
 			this.lustVuln = .4;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

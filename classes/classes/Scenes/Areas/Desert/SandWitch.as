@@ -83,7 +83,7 @@ public class SandWitch extends Monster
 			this.armorDef = 2;
 			this.armorMDef = 10;
 			this.bonusHP = 100;
-			this.bonusLust = 20;
+			this.bonusLust = 102;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 7;
@@ -95,6 +95,7 @@ public class SandWitch extends Monster
 					consumables.LABOVA_,
 					consumables.W__BOOK,
 					consumables.B__BOOK,
+					consumables.RMANUSC,
 					null);
 			this.special1 = lustMagicAttack;
 			this.special2 = special2;

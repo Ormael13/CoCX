@@ -142,7 +142,7 @@ public class SandTrap extends Monster
 			this.armorDef = 20;
 			this.armorMDef = 2;
 			this.bonusHP = 100;
-			this.bonusLust = 20;
+			this.bonusLust = 110;
 			this.lust = 20;
 			this.lustVuln = .55;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

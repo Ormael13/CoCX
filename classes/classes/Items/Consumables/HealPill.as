@@ -22,7 +22,7 @@ import classes.PerkLib;
 			var rand:int = Math.random() * 100;
 			outputText("You pop the small pill into your mouth and swallow. ");
 			
-			if (player.HP < player.maxHP()) {
+			if (player.HP < player.maxOverHP()) {
 				if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) EngineCore.HPChange(Math.round((50 + player.tou) * 2), true);
 				else if ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagEvolved)) || player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) EngineCore.HPChange(Math.round((50 + player.tou) * 1.5), true);
 				else EngineCore.HPChange(50 + player.tou, true);

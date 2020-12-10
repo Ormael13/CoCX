@@ -133,7 +133,7 @@ public class BeeGirl extends Monster {
 			this.armorDef = 12;
 			this.armorMDef = 2;
 			this.bonusHP = 40;
-			this.bonusLust = 20;
+			this.bonusLust = 121;
 			this.lust = 20 + rand(40);
 			this.lustVuln = 0.9;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

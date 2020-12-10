@@ -9,27 +9,41 @@ package classes.Scenes.Monsters
 	import classes.CoC;
 	import classes.GlobalFlags.kFLAGS;
 	
-	public class GargoyleBasic extends AbstractGargoyle
+	public class GargoyleMBasic extends AbstractGargoyle
 	{
 		override protected function performCombatAction():void
 		{
-			if (this.HPRatio() < 0.9) {
-				var choice:Number = rand(6);
-				if (choice < 3) eAttack();
-				if (choice == 3) GargoyleStoneClawAttack();
-				if (choice == 4) {
+			if (hasStatusEffect(StatusEffects.Provoke)) {
+				var choiceP:Number = rand(3);
+				if (choiceP == 0) GargoyleStoneClawAttack();
+				if (choiceP == 1) {
 					if (hasStatusEffect(StatusEffects.AbilityCooldown1)) GargoyleStoneClawAttack();
 					else GargoyleTailSlamAttack();
 				}
-				if (choice == 5) {
-					if (hasStatusEffect(StatusEffects.AbilityCooldown2)) GargoyleStoneClawAttack();
+				if (choiceP == 2) {
+					if (hasStatusEffect(StatusEffects.AbilityCooldown3)) GargoyleStoneClawAttack();
 					else GargoyleWingBuffetAttack();
 				}
 			}
-			else eAttack();
+			else {
+				if (this.HPRatio() < 0.9) {
+					var choice:Number = rand(6);
+					if (choice < 3) eAttack();
+					if (choice == 3) GargoyleStoneClawAttack();
+					if (choice == 4) {
+						if (hasStatusEffect(StatusEffects.AbilityCooldown1)) GargoyleStoneClawAttack();
+						else GargoyleTailSlamAttack();
+					}
+					if (choice == 5) {
+						if (hasStatusEffect(StatusEffects.AbilityCooldown3)) GargoyleStoneClawAttack();
+						else GargoyleWingBuffetAttack();
+					}
+				}
+				else eAttack();
+			}
 		}
 		
-		public function GargoyleBasic() 
+		public function GargoyleMBasic() 
 		{
 			this.a = "the ";
 			this.short = "basic gargoyle";
@@ -53,14 +67,9 @@ package classes.Scenes.Monsters
 			this.armorName = "stone";
 			this.armorDef = 75;
 			this.armorMDef = 75;
-			this.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
-			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
-			this.createPerk(PerkLib.Sentience, 0, 0, 0, 0);
 			checkMonster();
 		}
-		
 	}
-
 }

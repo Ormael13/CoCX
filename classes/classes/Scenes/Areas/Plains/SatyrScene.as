@@ -470,7 +470,5 @@ public function satyrBirth(vag:Boolean):void {
 	//badabingbadaboom
 	flags[kFLAGS.SATYR_KIDS]++;
 }
-
-
 }
 }

@@ -241,7 +241,7 @@ import classes.VaginaClass;
 			faceType = player.faceType;
 			skin.setAllProps(player.skin.saveToObject());
 			this.bonusHP = 500;
-			this.bonusLust = 40;
+			this.bonusLust = player.lib + player.sens + player.level;
 			this.weaponName = player.weaponName;
 			this.weaponAttack = player.weaponAttack;
 			this.weaponVerb = player.weaponVerb;

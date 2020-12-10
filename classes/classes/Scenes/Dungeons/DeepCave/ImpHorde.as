@@ -20,7 +20,7 @@ public class ImpHorde extends Monster
 			//(½ chance during any round):
 			if(rand(2) == 0) {
 				outputText("\nOne of the tiny demons latches onto one of your [legs] and starts humping it.  You shake the little bastard off and keep fighting!");
-				player.dynStats("lus", 1);
+				player.dynStats("lus", 3);
 			}
 		}
 		
@@ -32,7 +32,7 @@ public class ImpHorde extends Monster
 			else {
 				//(OH SHIT IT GOES OFF) 
 				//+50 lust!
-				player.dynStats("lus", 50);
+				player.dynStats("lus", 500);
 				outputText("The imps in the back finish their spell-casting, and point at you in unison.  A wave of pure arousal hits you with the force of a freight train.   Your equipment rubs across your suddenly violently sensitive " + nippleDescript(0));
 				if(player.biggestLactation() > 1) outputText(" as they begin to drip milk");
 				outputText(".  The lower portions of your coverings ");
@@ -224,7 +224,7 @@ public class ImpHorde extends Monster
 			this.armorDef = 6;
 			this.armorMDef = 1;
 			this.bonusHP = 800;
-			this.bonusLust = 150;
+			this.bonusLust = 114;
 			this.lust = 10;
 			this.lustVuln = .5;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
@@ -237,7 +237,7 @@ public class ImpHorde extends Monster
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
-			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}

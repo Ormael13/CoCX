@@ -26,11 +26,22 @@ package classes.Items.Armors
 			else return 5;
 		}
 		
+		override public function playerEquip():Armor {
+			
+			return super.playerEquip();
+		}
+		
+		override public function playerRemove():Armor {
+			
+			return super.playerRemove();
+		}
+		
 		override public function canUse():Boolean {
-			if (game.player.tallness >= 80) {
+			if (game.player.str >= 40 && game.player.tallness >= 72) {
 				return false;
 			}
-			outputText("You aren't tall enough to wear this kimono!  ");
+			if (game.player.str < 40) outputText("You aren't strong enough to wear this armor!  Unless you likes to move slower than snail and hit weaked than wet noddle!  ");
+			else outputText("You aren't tall enough to wear this armor!  ");
 			return true;
 		}
 	}

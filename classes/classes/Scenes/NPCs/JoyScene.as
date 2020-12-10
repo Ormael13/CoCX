@@ -2289,5 +2289,4 @@ import classes.lists.Gender;
 			doNext(playerMenu);
 		}
 	}
-
 }

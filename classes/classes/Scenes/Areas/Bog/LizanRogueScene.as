@@ -449,5 +449,4 @@ public class LizanRogueScene extends BaseContent
 			cleanupAfterCombat();
 		}
 	}
-
 }

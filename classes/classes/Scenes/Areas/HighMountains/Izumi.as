@@ -21,6 +21,7 @@ public class Izumi extends Monster
 				this.armorDef = 14;
 				this.armorMDef = 10;
 				this.bonusHP = 800;
+				this.bonusLust = 85;
 				this.level = 30;
 				this.additionalXP = 150;
 			}
@@ -31,6 +32,7 @@ public class Izumi extends Monster
 				this.armorDef = 15;
 				this.armorMDef = 11;
 				this.bonusHP = 1000;
+				this.bonusLust = 106;
 				this.level = 36;
 				this.additionalXP = 175;
 			}
@@ -41,6 +43,7 @@ public class Izumi extends Monster
 				this.armorDef = 17;
 				this.armorMDef = 12;
 				this.bonusHP = 1200;
+				this.bonusLust = 127;
 				this.level = 42;
 				this.additionalXP = 200;
 			}
@@ -51,6 +54,7 @@ public class Izumi extends Monster
 				this.armorDef = 18;
 				this.armorMDef = 13;
 				this.bonusHP = 1400;
+				this.bonusLust = 148;
 				this.level = 48;
 				this.additionalXP = 225;
 			}
@@ -61,6 +65,7 @@ public class Izumi extends Monster
 				this.armorDef = 20;
 				this.armorMDef = 14;
 				this.bonusHP = 1600;
+				this.bonusLust = 169;
 				this.level = 54;
 				this.additionalXP = 250;
 			}
@@ -71,6 +76,7 @@ public class Izumi extends Monster
 				this.armorDef = 21;
 				this.armorMDef = 15;
 				this.bonusHP = 1800;
+				this.bonusLust = 190;
 				this.level = 60;
 				this.additionalXP = 275;
 			}
@@ -81,6 +87,7 @@ public class Izumi extends Monster
 				this.armorDef = 23;
 				this.armorMDef = 16;
 				this.bonusHP = 2000;
+				this.bonusLust = 211;
 				this.level = 66;
 				this.additionalXP = 300;
 			}
@@ -91,6 +98,7 @@ public class Izumi extends Monster
 				this.armorDef = 24;
 				this.armorMDef = 17;
 				this.bonusHP = 2200;
+				this.bonusLust = 232;
 				this.level = 72;
 				this.additionalXP = 350;
 			}
@@ -101,6 +109,7 @@ public class Izumi extends Monster
 				this.armorDef = 26;
 				this.armorMDef = 18;
 				this.bonusHP = 2400;
+				this.bonusLust = 253;
 				this.level = 78;
 				this.additionalXP = 400;
 			}
@@ -111,6 +120,7 @@ public class Izumi extends Monster
 				this.armorDef = 28;
 				this.armorMDef = 19;
 				this.bonusHP = 2600;
+				this.bonusLust = 274;
 				this.level = 84;
 				this.additionalXP = 450;
 			}
@@ -121,6 +131,7 @@ public class Izumi extends Monster
 				this.armorDef = 30;
 				this.armorMDef = 20;
 				this.bonusHP = 3000;
+				this.bonusLust = 295;
 				this.level = 90;
 				this.additionalXP = 500;
 			}
@@ -131,6 +142,7 @@ public class Izumi extends Monster
 				this.armorDef = 32;
 				this.armorMDef = 21;
 				this.bonusHP = 3400;
+				this.bonusLust = 316;
 				this.level = 96;
 				this.additionalXP = 550;
 			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
@@ -152,7 +164,6 @@ public class Izumi extends Monster
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
 			this.armorName = "silken kimono";
-			this.bonusLust = 10;
 			this.lust = 10;
 			this.lustVuln = 0.33;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

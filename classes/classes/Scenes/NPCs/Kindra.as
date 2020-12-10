@@ -301,6 +301,7 @@ use namespace CoC;
 				this.armorDef = 5;
 				this.armorMDef = 5;
 				this.bonusHP = 50;
+				this.bonusLust = 90;
 				this.level = 20;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 2) {
@@ -311,6 +312,7 @@ use namespace CoC;
 				this.armorDef = 5;
 				this.armorMDef = 5;
 				this.bonusHP = 100;
+				this.bonusLust = 95;
 				this.level = 25;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 3) {
@@ -321,6 +323,7 @@ use namespace CoC;
 				this.armorDef = 5;
 				this.armorMDef = 5;
 				this.bonusHP = 150;
+				this.bonusLust = 100;
 				this.level = 30;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 4) {
@@ -331,6 +334,7 @@ use namespace CoC;
 				this.armorDef = 5;
 				this.armorMDef = 5;
 				this.bonusHP = 200;
+				this.bonusLust = 105;
 				this.level = 35;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 5) {
@@ -341,6 +345,7 @@ use namespace CoC;
 				this.armorDef = 5;
 				this.armorMDef = 5;
 				this.bonusHP = 250;
+				this.bonusLust = 110;
 				this.level = 40;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 6) {
@@ -351,6 +356,7 @@ use namespace CoC;
 				this.armorDef = 5;
 				this.armorMDef = 5;
 				this.bonusHP = 300;
+				this.bonusLust = 115;
 				this.level = 45;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 7) {
@@ -361,6 +367,7 @@ use namespace CoC;
 				this.armorDef = 16;
 				this.armorMDef = 5;
 				this.bonusHP = 320;
+				this.bonusLust = 151;
 				this.level = 51;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 8) {
@@ -371,6 +378,7 @@ use namespace CoC;
 				this.armorDef = 18;
 				this.armorMDef = 5;
 				this.bonusHP = 340;
+				this.bonusLust = 187;
 				this.level = 57;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 9) {
@@ -381,6 +389,7 @@ use namespace CoC;
 				this.armorDef = 20;
 				this.armorMDef = 5;
 				this.bonusHP = 360;
+				this.bonusLust = 223;
 				this.level = 63;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 10) {
@@ -391,6 +400,7 @@ use namespace CoC;
 				this.armorDef = 22;
 				this.armorMDef = 6;
 				this.bonusHP = 380;
+				this.bonusLust = 259;
 				this.level = 69;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 11) {
@@ -401,6 +411,7 @@ use namespace CoC;
 				this.armorDef = 24;
 				this.armorMDef = 7;
 				this.bonusHP = 400;
+				this.bonusLust = 295;
 				this.level = 75;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 12) {
@@ -411,6 +422,7 @@ use namespace CoC;
 				this.armorDef = 26;
 				this.armorMDef = 8;
 				this.bonusHP = 420;
+				this.bonusLust = 331;
 				this.level = 81;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 13) {
@@ -421,6 +433,7 @@ use namespace CoC;
 				this.armorDef = 28;
 				this.armorMDef = 9;
 				this.bonusHP = 440;
+				this.bonusLust = 367;
 				this.level = 87;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 14) {
@@ -431,6 +444,7 @@ use namespace CoC;
 				this.armorDef = 30;
 				this.armorMDef = 10;
 				this.bonusHP = 460;
+				this.bonusLust = 403;
 				this.level = 93;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 15) {
@@ -441,6 +455,7 @@ use namespace CoC;
 				this.armorDef = 45;
 				this.armorMDef = 15;
 				this.bonusHP = 480;
+				this.bonusLust = 439;
 				this.level = 99;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 16) {
@@ -451,6 +466,7 @@ use namespace CoC;
 				this.armorDef = 50;
 				this.armorMDef = 17;
 				this.bonusHP = 600;
+				this.bonusLust = 505;
 				this.level = 105;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 17) {
@@ -461,6 +477,7 @@ use namespace CoC;
 				this.armorDef = 55;
 				this.armorMDef = 19;
 				this.bonusHP = 650;
+				this.bonusLust = 571;
 				this.level = 111;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 6) {
@@ -487,7 +504,6 @@ use namespace CoC;
 			this.hairLength = 4;
 			this.weaponVerb= "stab";
 			this.weaponRangeVerb= "shoot";
-			this.bonusLust = 10;
 			this.lust = 20;
 			this.lustVuln = .95;
 			this.gems = 0;

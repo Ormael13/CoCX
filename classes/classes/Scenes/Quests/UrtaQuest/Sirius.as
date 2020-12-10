@@ -124,7 +124,7 @@ public class Sirius extends Naga
 			this.armorDef = 31;
 			this.armorMDef = 31;
 			this.bonusHP = 400;
-			this.bonusLust = 20;
+			this.bonusLust = 104;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 24;

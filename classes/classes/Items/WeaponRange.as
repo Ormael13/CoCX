@@ -43,8 +43,8 @@ public class WeaponRange extends Useable //Equipable
 			else if (perk == "Rifle") desc += "(Rifle)";
 			else if (perk == "2H Firearm") desc += "(2H Firearm)";
 			else if (verb == "Dual Firearms") desc += "(Dual Firearms)";
+			else if (verb == "Quad Firearms") desc += "(Quad Firearms)";
 			else if (perk == "Throwing") desc += "(Throwing)";
-		//	else if (verb == "slash" || verb == "keen cut") desc += "(Sword)";
 		//	else if (name.indexOf("staff") >= 0) desc += "(Staff)";
 			//Attack
 			desc += "\nRange Attack: " + String(attack);

@@ -81,6 +81,7 @@ use namespace CoC;
 				this.armorDef = 225;
 				this.armorMDef = 225;
 				this.bonusHP = 12500;
+				this.bonusLust = 525;
 				this.level = 65;
 				this.gems = 200 + rand(80);
 			}
@@ -90,6 +91,7 @@ use namespace CoC;
 				this.armorDef = 300;
 				this.armorMDef = 300;
 				this.bonusHP = 25000;
+				this.bonusLust = 580;
 				this.level = 70;
 				this.gems = 250 + rand(90);
 			}
@@ -99,6 +101,7 @@ use namespace CoC;
 				this.armorDef = 375;
 				this.armorMDef = 375;
 				this.bonusHP = 37500;
+				this.bonusLust = 635;
 				this.level = 75;
 				this.gems = 300 + rand(100);
 			}
@@ -125,7 +128,6 @@ use namespace CoC;
 			this.weaponVerb="punch";
 			this.weaponAttack = 5;
 			this.armorName = "sticky glistering skin";
-			this.bonusLust = 10;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.drop = new WeightedDrop(consumables.FSNAILS, 1);

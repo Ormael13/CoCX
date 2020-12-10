@@ -29,7 +29,7 @@ package classes.Scenes.Camp
 			this.long = "You're currently facing H class Heaven Tribulation. A small gathering of thinder clouds that sends down thunders to test any soul cultivator dreaming to break to Soul Sprite stage.";
 			this.plural = false;
 			initStrTouSpeInte(20, 20, 10, 10);
-			initLibSensCor(10, 10, 50);
+			initWisLibSensCor(10, 10, 10, 50);
 			this.lustVuln = 0;
 			this.tallness = 144;
 			this.createBreastRow(0, 1);
@@ -38,15 +38,15 @@ package classes.Scenes.Camp
 					.add(useables.GOLCORE, 1/4);
 			this.level = 10;
 			this.bonusHP = 230;
+			this.bonusLust = 30;
 			this.additionalXP = 100;
 			this.weaponName = "tribulation thunder";
 			this.weaponVerb = "strike down";
-			this.weaponAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.weaponAttack = 20;
 			this.armorName = "tribulation clouds";
 			this.armorDef = 0;
 			this.armorMDef = 0;
 			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
-			this.newgamebonusHP = 140;
 			checkMonster();
 		}
 		

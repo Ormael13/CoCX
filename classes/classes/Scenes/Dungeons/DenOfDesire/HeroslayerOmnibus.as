@@ -180,7 +180,7 @@ public class HeroslayerOmnibus extends Monster
 			this.armorDef = 1;
 			this.armorMDef = 75;
 			this.bonusHP = 2500;
-			this.bonusLust = 50;
+			this.bonusLust = 200;
 			this.lust = 30;
 			this.lustVuln = 0.75;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

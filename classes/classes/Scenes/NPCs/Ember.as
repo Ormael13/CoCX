@@ -205,6 +205,7 @@ public class Ember extends Monster
 				this.armorDef = 54;
 				this.armorMDef = 54;
 				this.bonusHP = 800;
+				this.bonusLust = 105 + (game.flags[kFLAGS.EMBER_AFFECTION] / 5);
 				this.level = 20;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 1) {
@@ -214,6 +215,7 @@ public class Ember extends Monster
 				this.armorDef = 73;
 				this.armorMDef = 73;
 				this.bonusHP = 900;
+				this.bonusLust = 126 + (game.flags[kFLAGS.EMBER_AFFECTION] / 5);
 				this.level = 26;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 2) {
@@ -223,6 +225,7 @@ public class Ember extends Monster
 				this.armorDef = 92;
 				this.armorMDef = 92;
 				this.bonusHP = 1000;
+				this.bonusLust = 147 + (game.flags[kFLAGS.EMBER_AFFECTION] / 5);
 				this.level = 32;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 3) {
@@ -232,6 +235,7 @@ public class Ember extends Monster
 				this.armorDef = 111;
 				this.armorMDef = 111;
 				this.bonusHP = 1200;
+				this.bonusLust = 168 + (game.flags[kFLAGS.EMBER_AFFECTION] / 5);
 				this.level = 38;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 4) {
@@ -241,6 +245,7 @@ public class Ember extends Monster
 				this.armorDef = 130;
 				this.armorMDef = 130;
 				this.bonusHP = 1400;
+				this.bonusLust = 189 + (game.flags[kFLAGS.EMBER_AFFECTION] / 5);
 				this.level = 44;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 5) {
@@ -250,6 +255,7 @@ public class Ember extends Monster
 				this.armorDef = 150;
 				this.armorMDef = 150;
 				this.bonusHP = 1600;
+				this.bonusLust = 210 + (game.flags[kFLAGS.EMBER_AFFECTION] / 5);
 				this.level = 50;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 6) {
@@ -259,6 +265,7 @@ public class Ember extends Monster
 				this.armorDef = 170;
 				this.armorMDef = 170;
 				this.bonusHP = 1800;
+				this.bonusLust = 231 + (game.flags[kFLAGS.EMBER_AFFECTION] / 5);
 				this.level = 56;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 7) {
@@ -268,6 +275,7 @@ public class Ember extends Monster
 				this.armorDef = 190;
 				this.armorMDef = 190;
 				this.bonusHP = 2000;
+				this.bonusLust = 252 + (game.flags[kFLAGS.EMBER_AFFECTION] / 5);
 				this.level = 62;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 8) {
@@ -277,6 +285,7 @@ public class Ember extends Monster
 				this.armorDef = 210;
 				this.armorMDef = 210;
 				this.bonusHP = 2200;
+				this.bonusLust = 273 + (game.flags[kFLAGS.EMBER_AFFECTION] / 5);
 				this.level = 68;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 9) {
@@ -286,6 +295,7 @@ public class Ember extends Monster
 				this.armorDef = 230;
 				this.armorMDef = 230;
 				this.bonusHP = 2400;
+				this.bonusLust = 294 + (game.flags[kFLAGS.EMBER_AFFECTION] / 5);
 				this.level = 74;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 10) {
@@ -295,6 +305,7 @@ public class Ember extends Monster
 				this.armorDef = 250;
 				this.armorMDef = 250;
 				this.bonusHP = 2600;
+				this.bonusLust = 315 + (game.flags[kFLAGS.EMBER_AFFECTION] / 5);
 				this.level = 80;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 11) {
@@ -304,6 +315,7 @@ public class Ember extends Monster
 				this.armorDef = 270;
 				this.armorMDef = 270;
 				this.bonusHP = 2800;
+				this.bonusLust = 336 + (game.flags[kFLAGS.EMBER_AFFECTION] / 5);
 				this.level = 86;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 12) {
@@ -313,6 +325,7 @@ public class Ember extends Monster
 				this.armorDef = 290;
 				this.armorMDef = 290;
 				this.bonusHP = 3000;
+				this.bonusLust = 357 + (game.flags[kFLAGS.EMBER_AFFECTION] / 5);
 				this.level = 92;
 			}
 			if (flags[kFLAGS.EMBER_LVL_UP] == 13) {
@@ -322,6 +335,7 @@ public class Ember extends Monster
 				this.armorDef = 310;
 				this.armorMDef = 310;
 				this.bonusHP = 3200;
+				this.bonusLust = 378 + (game.flags[kFLAGS.EMBER_AFFECTION] / 5);
 				this.level = 98;
 			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
@@ -335,7 +349,6 @@ public class Ember extends Monster
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
 			this.armorName = "scales";
-			this.bonusLust = 10 + (game.flags[kFLAGS.EMBER_AFFECTION] / 5);
 			this.lust = 20;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = 0;

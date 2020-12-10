@@ -1050,6 +1050,5 @@ public function rathazulAprilFoolPart3():void {
 	player.createKeyItem("Rathazul's Purity Elixir", 0, 0, 0, 0);
 	doNext(returnToRathazulMenu);
 }
-
 }
 }

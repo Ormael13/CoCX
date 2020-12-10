@@ -899,6 +899,5 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 				else outputText("Not what you expected, but at least you got off.");
 			}			
 		}
-
 	}
 }

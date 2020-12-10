@@ -138,7 +138,7 @@ public class DarkElfScout extends Monster
 			this.armorName = "elven armor";
 			this.armorDef = 4;
 			this.armorMDef = 4;
-			this.bonusLust = 20;
+			this.bonusLust = 125;
 			this.lustVuln = .7;
 			this.lust = 50;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

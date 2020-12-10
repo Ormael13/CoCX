@@ -69,7 +69,7 @@ import classes.internals.*;
 			this.weaponVerb="piercing stab";
 			this.armorName = "blue bikini";
 			this.bonusHP = 200;
-			this.bonusLust = 50;
+			this.bonusLust = 182;
 			this.lust = 30;
 			this.lustVuln = .8;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

@@ -188,7 +188,7 @@ use namespace CoC;
 			this.armorDef = 120;
 			this.armorMDef = 20;
 			this.bonusHP = 100000;
-			this.bonusLust = 40;
+			this.bonusLust = 270;
 			this.gems = 200 + rand(80);
 			this.additionalXP = 1500;
 			this.level = 70;

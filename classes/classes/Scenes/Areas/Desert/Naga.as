@@ -148,7 +148,7 @@ public class Naga extends Monster
 			this.armorName = "scales";
 			this.armorDef = 10;
 			this.armorMDef = 5;
-			this.bonusLust = 10;
+			this.bonusLust = 119;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 9;

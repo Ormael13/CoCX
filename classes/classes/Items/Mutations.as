@@ -249,7 +249,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         var rand:int = Math.random() * 100;
         outputText("You pop the medium pill into your mouth and swallow. ");
-        if (player.HP < player.maxHP()) {
+        if (player.HP < player.maxOverHP()) {
             if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) HPChange(Math.round((50 + player.tou) * 6), true);
             else if ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagEvolved)) || player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) HPChange(Math.round((50 + player.tou) * 4.5), true);
             else HPChange((50 + player.tou) * 3, true);
@@ -269,11 +269,10 @@ public final class Mutations extends MutationsHelper {
         }
         statScreenRefresh();
     }
-
     public function bighealpill(player:Player):void {
         var rand:int = Math.random() * 100;
         outputText("You pop the big pill into your mouth and swallow. ");
-        if (player.HP < player.maxHP()) {
+        if (player.HP < player.maxOverHP()) {
             if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) HPChange(Math.round((50 + player.tou) * 18), true);
             else if ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagEvolved)) || player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) HPChange(Math.round((50 + player.tou) * 13.5), true);
             else HPChange((50 + player.tou) * 9, true);
@@ -308,13 +307,11 @@ public final class Mutations extends MutationsHelper {
         outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of three steams of mystical energies spreading in your body.");
         if (player.findPerk(PerkLib.ElementalConjurerMindAndBodyResolve) < 0) player.createPerk(PerkLib.ElementalConjurerMindAndBodyResolve, 0, 0, 0, 0);
     }
-
     public function middlegradeelementalPearl(player:Player):void {
         clearOutput();
         outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of five steams of mystical energies spreading in your body.");
         if (player.findPerk(PerkLib.ElementalConjurerMindAndBodyDedication) < 0) player.createPerk(PerkLib.ElementalConjurerMindAndBodyDedication, 0, 0, 0, 0);
     }
-
     public function highgradeelementalPearl(player:Player):void {
         clearOutput();
         outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of seven steams of mystical energies spreading in your body.");
@@ -326,20 +323,42 @@ public final class Mutations extends MutationsHelper {
         var SSA:Number = 2 + rand(2);
         outputText("You open bag to find " + SSA + " spirit stones inside.");
         flags[kFLAGS.SPIRIT_STONES] += SSA;
+		statScreenRefresh();
     }
-
     public function bagofcosmosA2(player:Player):void {
         clearOutput();
         var SSA:Number = 3 + rand(3);
         outputText("You open bag to find " + SSA + " spirit stones inside.");
         flags[kFLAGS.SPIRIT_STONES] += SSA;
+		statScreenRefresh();
     }
-
     public function bagofcosmosA3(player:Player):void {
         clearOutput();
         var SSA:Number = 4 + rand(4);
         outputText("You open bag to find " + SSA + " spirit stones inside.");
         flags[kFLAGS.SPIRIT_STONES] += SSA;
+		statScreenRefresh();
+    }
+    public function bagofcosmosA4(player:Player):void {
+        clearOutput();
+        var SSA:Number = 5 + rand(5);
+        outputText("You open bag to find " + SSA + " spirit stones inside.");
+        flags[kFLAGS.SPIRIT_STONES] += SSA;
+		statScreenRefresh();
+    }
+    public function bagofcosmosA5(player:Player):void {
+        clearOutput();
+        var SSA:Number = 6 + rand(6);
+        outputText("You open bag to find " + SSA + " spirit stones inside.");
+        flags[kFLAGS.SPIRIT_STONES] += SSA;
+		statScreenRefresh();
+    }
+    public function bagofcosmosA6(player:Player):void {
+        clearOutput();
+        var SSA:Number = 7 + rand(7);
+        outputText("You open bag to find " + SSA + " spirit stones inside.");
+        flags[kFLAGS.SPIRIT_STONES] += SSA;
+		statScreenRefresh();
     }
 
     public function bagofcosmos(player:Player):void {
@@ -372,7 +391,6 @@ public final class Mutations extends MutationsHelper {
             statScreenRefresh();
         }
     }
-
     public function lowgradesoulforcerecoverypill2(player:Player):void {
         outputText("You open the bottle and start to cram the pills in your mouth, then swallowing them all.  ");
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
@@ -384,7 +402,6 @@ public final class Mutations extends MutationsHelper {
             statScreenRefresh();
         }
     }
-
     public function midgradesoulforcerecoverypill(player:Player):void {
         outputText("You cram the pill in your mouth and swallow it.  ");
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
@@ -396,7 +413,6 @@ public final class Mutations extends MutationsHelper {
             statScreenRefresh();
         }
     }
-
     public function midgradesoulforcerecoverypill2(player:Player):void {
         outputText("You open the bottle and start to cram the pills in your mouth, then swallowing them all.  ");
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
@@ -408,7 +424,6 @@ public final class Mutations extends MutationsHelper {
             statScreenRefresh();
         }
     }
-
     public function highgradesoulforcerecoverypill(player:Player):void {
         outputText("You cram the pill in your mouth and swallow it.  ");
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
@@ -420,7 +435,6 @@ public final class Mutations extends MutationsHelper {
             statScreenRefresh();
         }
     }
-
     public function highgradesoulforcerecoverypill2(player:Player):void {
         outputText("You open the bottle and start to cram the pills in your mouth, then swallowing them all.  ");
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
@@ -461,7 +475,6 @@ public final class Mutations extends MutationsHelper {
             if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
         }
     }
-
     public function sextuplethrustmanual(player:Player):void {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulPersonage) && player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) {
@@ -482,7 +495,6 @@ public final class Mutations extends MutationsHelper {
             if (!player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
         }
     }
-
     public function nonuplethrustmanual(player:Player):void {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulSprite) && player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) {
@@ -509,7 +521,7 @@ public final class Mutations extends MutationsHelper {
         if (!player.hasStatusEffect(StatusEffects.KnowsYinYangBlast)) {
             outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Hail of Blades.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
             outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skills: Yin Palm, Yang Fist, Yin Yang Blast.</b>");//yin penetrating armor/mresist but weak maybe giving intenrnal bleed/dmg dot and yang high dmg but reduced by armor/mresist and stunning - combined yin yang blast giving internal bleeding and stun and damage that is sum of both attacks
-            player.createStatusEffect(StatusEffects.KnowsHailOfBlades, 0, 0, 0, 0);
+            player.createStatusEffect(StatusEffects.KnowsYinYangBlast, 0, 0, 0, 0);
             return;
         }
         if (player.hasStatusEffect(StatusEffects.KnowsYinYangBlast)) {
@@ -563,7 +575,6 @@ public final class Mutations extends MutationsHelper {
             if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
         }
     }
-
     public function hailofbladesmanual2(player:Player):void {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulPersonage) && player.hasStatusEffect(StatusEffects.KnowsHailOfBlades)) {
@@ -584,7 +595,6 @@ public final class Mutations extends MutationsHelper {
             if (!player.hasStatusEffect(StatusEffects.KnowsHailOfBlades)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
         }
     }
-
     public function hailofbladesmanual3(player:Player):void {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulPersonage) && player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfBlades)) {
@@ -605,7 +615,6 @@ public final class Mutations extends MutationsHelper {
             if (!player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfBlades)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
         }
     }
-
     public function hailofbladesmanual4(player:Player):void {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulPersonage) && player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfMoonBlades)) {
@@ -694,6 +703,13 @@ public final class Mutations extends MutationsHelper {
         }
     }
 
+    public function higherrankflamesoflovemanual(player:Player):void {
+        clearOutput();
+        outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into (burning hot) flames.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+        outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love ( Rank).</b>");
+        player.createStatusEffect(StatusEffects.KnowsSoulBlast, 0, 0, 0, 0);
+    }
+
     public function basiciciclesoflovemanual(player:Player):void {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulApprentice)) {
@@ -714,25 +730,18 @@ public final class Mutations extends MutationsHelper {
         }
     }
 
-    public function devourermanual(player:Player):void {
-        clearOutput();
-        outputText("You open the manual, and discover it seems to be almost unreadable.  It looks like it would teach reader to use some sort of soul skill but it seems all very fragmentary.  In no time at all you've read the whole thing and like others manuscripts it start to disappears into thin air.  Left without anything you thinking about next action when some new thought start to keep circling in your mind. The more it circle it seems to seemly literaly ");
-        outputText("'suck you in'.  You try stop it but it's too late.  last not devoured thought you have before blank out is.. 'would i at least not hit groun...'\n\nAfter unknown amount of time you wakes up on the floor with seared into your mind knowledge on <b>new soul skill: Devourer.</b>");
-        player.createStatusEffect(StatusEffects.KnowsHeavensDevourer, 1, 0, 0, 0);
-    }
-
-    public function higherrankflamesoflovemanual(player:Player):void {
-        clearOutput();
-        outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into (burning hot) flames.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-        outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love ( Rank).</b>");
-        player.createStatusEffect(StatusEffects.KnowsSoulBlast, 0, 0, 0, 0);
-    }
-
     public function higherrankiciclesoflovemanual(player:Player):void {
         clearOutput();
         outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into (freezing cold) icicles.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
         outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Icicles of Love ( Rank).</b>");
         player.createStatusEffect(StatusEffects.KnowsSoulBlast, 0, 0, 0, 0);
+    }
+
+    public function devourermanual(player:Player):void {
+        clearOutput();
+        outputText("You open the manual, and discover it seems to be almost unreadable.  It looks like it would teach reader to use some sort of soul skill but it seems all very fragmentary.  In no time at all you've read the whole thing and like others manuscripts it start to disappears into thin air.  Left without anything you thinking about next action when some new thought start to keep circling in your mind. The more it circle it seems to seemly literaly ");
+        outputText("'suck you in'.  You try stop it but it's too late.  last not devoured thought you have before blank out is.. 'would i at least not hit groun...'\n\nAfter unknown amount of time you wakes up on the floor with seared into your mind knowledge on <b>new soul skill: Devourer.</b>");
+        player.createStatusEffect(StatusEffects.KnowsHeavensDevourer, 1, 0, 0, 0);
     }
 
     public function verydilutedarcaneregenconcotion(player:Player):void {
@@ -741,14 +750,12 @@ public final class Mutations extends MutationsHelper {
         if (player.mana > player.maxMana()) player.mana = player.maxMana();
         statScreenRefresh();
     }
-
     public function dilutedarcaneregenconcotion(player:Player):void {
         outputText("You grab your mana potion, pull the cork off and swiftly chug it down.\n\n(Recovered mana: 1200)");
         player.mana += 1200;
         if (player.mana > player.maxMana()) player.mana = player.maxMana();
         statScreenRefresh();
     }
-
     public function arcaneregenconcotion(player:Player):void {
         outputText("You grab your mana potion, pull the cork off and swiftly chug it down.\n\n(Recovered mana: 7200)");
         player.mana += 7200;
@@ -1074,7 +1081,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("lib", 1);
         }
         //(Healing – if hurt and uber-addicted (hasperk))
-        if (player.HP < player.maxHP() && player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {
+        if (player.HP < player.maxOverHP() && player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {
             outputText("\n\nThe fire of your arousal consumes your body, leaving vitality in its wake.  You feel much better!");
             HPChange(int(player.maxHP() / 4), false);
         }
@@ -3797,6 +3804,50 @@ public final class Mutations extends MutationsHelper {
             player.createStatusEffect(StatusEffects.KnowsMentalShield, 0, 0, 0, 0);
         }*/
     }
+	
+	public function redManuscript(player:Player):void {
+		clearOutput();
+        outputText("You open the red manuscript and discover it to be an instructional on the use of blood magic.  The book shares generic information about blood magic, generally what you'd expect anyway - how to draw it using your blood as well as the positive and negative effects of repeated use.  It doesn't take long to read a few pages, but before you can stow it away for later, the book vanishes within your hands. The same metallic scent lingers on your [claws], the lingering smell of blood is stained on you... at least for the time being.");
+        if (player.inte < 30) {
+            outputText("\n\nYou feel greatly enlightened by your time spent reading.");
+            KnowledgeBonus("int", 4);
+        } else if (player.inte < 60) {
+            outputText("\n\nSpending some time reading was probably good for you, and you definitely feel smarter for it.");
+            KnowledgeBonus("int", 2);
+        } else if (player.inte < 90) {
+            outputText("\n\nAfter reading the small tome your already quick mind feels invigorated.");
+            KnowledgeBonus("int", 1);
+        } else {
+            outputText("\n\nThe contents of the manuscript did little for your already considerable intellect.");
+            KnowledgeBonus("int", 0.6);
+        }
+		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
+			//Smart enough for Blood Missiles and doesnt have it
+			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsBloodMissiles)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Missiles.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodMissiles, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Blood Explosion and doesnt have it
+			if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodExplosion)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Explosion.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodExplosion, 0, 0, 0, 0);
+				return;
+			}/*
+			//Smart enough for  and doesnt have it
+			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: .</b>");
+				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for  and doesnt have it
+			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: .</b>");
+				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+				return;
+			}*/
+		}
+	}
 
     public function lustDraft(fuck:Boolean, player:Player):void {
         player.slimeFeed();
@@ -16970,7 +17021,6 @@ public final class Mutations extends MutationsHelper {
         outputText("You drink the nectar and almost right away regret it as liquid lust rushes through you.");
         player.refillHunger(15);
         dynStats("lus", (30 + rand(player.lib / 10)), "scale", false);
-
         //ORGAZMO
         if (player.lust >= player.maxLust() && !CoC.instance.inCombat) {
             outputText("\n\nThe arousal from the nectar overwhelms your senses and causes you to spontaneously orgasm.");
@@ -16995,6 +17045,5 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\n");
         }
     }
-
 }
 }

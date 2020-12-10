@@ -105,5 +105,4 @@ package classes.Items
 		{
 		}
 	}
-
 }

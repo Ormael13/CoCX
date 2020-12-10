@@ -1208,5 +1208,3 @@ private function phaseTwoOfIncest(daughter:int):void {
 }
 }
 }
-
-

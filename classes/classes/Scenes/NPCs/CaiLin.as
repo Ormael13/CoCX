@@ -208,6 +208,7 @@ public class CaiLin extends Monster
 				this.armorDef = 40;
 				this.armorMDef = 30;
 				this.bonusHP = 300;
+				this.bonusLust = 70;
 				this.lustVuln = .9;
 				this.level = 20;
 			}
@@ -215,7 +216,7 @@ public class CaiLin extends Monster
 				this.long = "You are fighting Cai'Lin. Despite that she not looking exactly the same as other gorgon due to huge parts of her skin not covered in seven-colored scales, striped in a pattern reminiscent of the dunes around you. Scaleless areas includes most of her face, front torso and abdomen. Instead of bifurcating into legs, her hips elongate into a snake's body which stretches far out behind her, leaving a long and curving trail in the sand.  She's wearing only make-shift bra over her A-cup breasts and simple loincloth. In her mouth you can see a pair of sharp, venomous fangs and a long forked tongue moving rapidly as she hisses at you.";
 				this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);//każde 2 lvl up podwyższają wetness
 				this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);//zwieksza sie czy tez nie?
-				createBreastRow(Appearance.breastCupInverse("B"));//wpierw wzrost do B na 1,2 lvl-up potem do C na 3,4 i do D na 5,6 a dodtkowe urośnicie jak użyje jakiś TF
+				createBreastRow(Appearance.breastCupInverse("B"));//wpierw wzrost do B na 1,2 lvl-up potem do C na 3,4 i do D na 5,6 a dodtkowe urośnicie jak użyje jakiś TF - albo zostaje na A i potem użycie itemów zmienić może rozmiar tylko
 				this.tallness = 6*12;//potem z każdą zmianą dodawać jej 2 wzrostu tak aby ostatecznie osiągneła coś koło 6*12+10
 				this.hairLength = 12;
 				initStrTouSpeInte(90, 120, 110, 70);//lvl-up daje +15, +20, +15, +20
@@ -224,6 +225,7 @@ public class CaiLin extends Monster
 				this.armorDef = 40;
 				this.armorMDef = 30;
 				this.bonusHP = 400;
+				this.bonusLust = 100;
 				this.lustVuln = .8;//każdy lvl up to kolejne 0.1 niżej
 				this.level = 25;//każdy lvl up to +5 lvl-i chyba xD
 				this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
@@ -240,7 +242,6 @@ public class CaiLin extends Monster
 			this.weaponName = "claws";
 			this.weaponVerb="claw-slash";
 			this.armorName = "scales";
-			this.bonusLust = 10;
 			this.lust = 30;
 			this.fatigue = 0;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

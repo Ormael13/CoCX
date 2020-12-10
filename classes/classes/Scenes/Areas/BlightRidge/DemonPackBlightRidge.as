@@ -103,7 +103,7 @@ public class DemonPackBlightRidge extends Monster
 			this.armorDef = 30;
 			this.armorMDef = 3;
 			this.bonusHP = 500;
-			this.bonusLust = 200;
+			this.bonusLust = 170;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 30;
@@ -118,7 +118,7 @@ public class DemonPackBlightRidge extends Monster
 			this.tailType = Tail.DEMONIC;
 			this.horns.type = Horns.DEMON;
 			this.horns.count = 2;
-			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}

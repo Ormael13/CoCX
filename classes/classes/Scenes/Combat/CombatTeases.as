@@ -1503,7 +1503,7 @@ public class CombatTeases extends BaseCombatContent {
 				damage *= 1.75;
 			}
 			if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
-			if (player.hasPerk(PerkLib.ArouseTheAudience) && player.hasPerk(PerkLib.EnemyGroupType)) damage *= 1.5;
+			if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) damage *= 1.5;
 			damage = (damage + rand(bonusDamage)) * monster.lustVuln;
 			damage = Math.round(damage);
 			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 15) {

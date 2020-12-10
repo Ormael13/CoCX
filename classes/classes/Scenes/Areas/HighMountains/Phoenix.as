@@ -13,7 +13,7 @@ import classes.internals.ChainedDrop;
 
 public class Phoenix extends Monster
 	{
-		protected function doubleSlash():void {
+		public function doubleSlash():void {
 			outputText("You fall back under a hail of feints and jabs as your enemy darts at you, swinging furiously. The sheer number of blows the phoenix lays against you is incredible, forcing you backwards as you try to deflect the flurry of deadly strikes.  ");
 			if (player.getEvasionRoll()) {
 				outputText("You are able to parry one of her blows with enough force to push her back, giving you a little more breathing room.");
@@ -33,7 +33,7 @@ public class Phoenix extends Monster
 			}
 		}
 		
-		protected function phoenixFireBreath():void {
+		public function phoenixFireBreathA():void {
 			if (!hasStatusEffect(StatusEffects.Uber)) {
 				outputText("Suddenly the phoenix disengages from you and loops through the air, giving out a loud cry before she starts to barrel down at you. She’s clearly building up for something, so you’d better wait until she makes her move if you want a chance to dodge!");
 				createStatusEffect(StatusEffects.Uber, 0, 0, 0, 0);
@@ -60,7 +60,7 @@ public class Phoenix extends Monster
 			}
 		}
 		
-		protected function lustBang():void {
+		public function lustBang():void {
 			outputText("\"<i>Here, CATCH!</i>\" The phoenix shouts, lobbing a small, circular canister at you before ducking behind her sturdy shield. Oh shit!");
 			if (player.getEvasionRoll()) {
 				outputText("Luckily, the metal cylinder bounces off the uneven terrain of the mountain, giving you just enough time to dive away as a huge cloud of pink erupts into the air. The phoenix glances around her shield, face darkening as she sees you readying yourself for another strike instead of writhing on the ground in an oversensitive pile of lust.");
@@ -81,7 +81,7 @@ public class Phoenix extends Monster
 		{
 			var choice:Number = rand(4);
 			if (hasStatusEffect(StatusEffects.Uber)) {
-				phoenixFireBreath();
+				phoenixFireBreathA();
 				return;
 			}
 			switch (choice) {
@@ -92,7 +92,7 @@ public class Phoenix extends Monster
 					doubleSlash();
 					break;
 				case 2:
-					phoenixFireBreath();
+					phoenixFireBreathA();
 					break;
 				case 3:
 					lustBang();
@@ -149,7 +149,7 @@ public class Phoenix extends Monster
 			this.armorDef = 37;
 			this.armorMDef = 18;
 			this.bonusHP = 800;
-			this.bonusLust = 10;
+			this.bonusLust = 110;
 			this.lust = 10;
 			this.lustVuln = .7;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
@@ -159,9 +159,6 @@ public class Phoenix extends Monster
 					.add(weapons.SCIMITR,1/20)
 					.elseDrop(consumables.NOCELIQ);
 			this.wings.type = Wings.FEATHERED_PHOENIX;
-			this.special1 = doubleSlash;
-			this.special2 = phoenixFireBreath;
-			this.special3 = lustBang;
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
 			checkMonster();

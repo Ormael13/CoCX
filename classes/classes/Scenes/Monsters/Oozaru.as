@@ -44,7 +44,7 @@ import classes.internals.*;
 					this.armorMDef = 50;
 					this.bonusHP = 100;
 					this.bonusWrath = 25;
-					this.bonusLust = 50;
+					this.bonusLust = 318;
 					this.level = 18;
 				//}
 			}

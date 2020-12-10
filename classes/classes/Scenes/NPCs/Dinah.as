@@ -70,7 +70,9 @@ import classes.internals.*;
 		}
 		public function SpellMod():Number {
 			var mod2:Number = 1;
+			if (findPerk(PerkLib.GrandMage) >= 0) mod2 += .3;
 			if (findPerk(PerkLib.Channeling) >= 0) mod2 += .2;
+			if (findPerk(PerkLib.Mage) >= 0) mod2 += .1;
 			if (findPerk(PerkLib.Spellpower) >= 0) mod2 += .1;
 			if (findPerk(PerkLib.JobSorcerer) >= 0) mod2 += .1;
 			return mod2;
@@ -357,7 +359,7 @@ import classes.internals.*;
 				this.armorMDef = 6;
 				this.armorName = "fur";
 				this.bonusHP = 30;
-				this.bonusLust = 10;
+				this.bonusLust = 42;
 				this.lustVuln = .9;
 				this.level = 2;
 				this.drop = NO_DROP;
@@ -381,7 +383,7 @@ import classes.internals.*;
 				this.armorMDef = 30;
 				this.bonusHP = 60;
 				this.bonusMana = 50;
-				this.bonusLust = 12;
+				this.bonusLust = 78;
 				this.level = 8;
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] == 2) {
@@ -392,7 +394,7 @@ import classes.internals.*;
 				this.armorMDef = 32;
 				this.bonusHP = 90;
 				this.bonusMana = 100;
-				this.bonusLust = 14;
+				this.bonusLust = 114;
 				this.level = 14;
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] == 3) {
@@ -403,7 +405,7 @@ import classes.internals.*;
 				this.armorMDef = 33;
 				this.bonusHP = 120;
 				this.bonusMana = 150;
-				this.bonusLust = 16;
+				this.bonusLust = 150;
 				this.level = 20;
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] == 4) {
@@ -414,7 +416,7 @@ import classes.internals.*;
 				this.armorMDef = 35;
 				this.bonusHP = 150;
 				this.bonusMana = 200;
-				this.bonusLust = 18;
+				this.bonusLust = 186;
 				this.level = 26;
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] == 5) {
@@ -425,7 +427,7 @@ import classes.internals.*;
 				this.armorMDef = 36;
 				this.bonusHP = 180;
 				this.bonusMana = 250;
-				this.bonusLust = 20;
+				this.bonusLust = 222;
 				this.level = 32;
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] == 6) {
@@ -436,7 +438,7 @@ import classes.internals.*;
 				this.armorMDef = 38;
 				this.bonusHP = 210;
 				this.bonusMana = 300;
-				this.bonusLust = 22;
+				this.bonusLust = 258;
 				this.level = 38;
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] == 7) {
@@ -447,8 +449,30 @@ import classes.internals.*;
 				this.armorMDef = 39;
 				this.bonusHP = 240;
 				this.bonusMana = 350;
-				this.bonusLust = 24;
+				this.bonusLust = 294;
 				this.level = 44;
+			}
+			if (flags[kFLAGS.DINAH_LVL_UP] == 8) {
+				initStrTouSpeInte(100, 60, 340, 220);
+				initWisLibSensCor(110, 180, 100, 50);
+				this.weaponAttack = 75;
+				this.armorDef = 54;
+				this.armorMDef = 40;
+				this.bonusHP = 270;
+				this.bonusMana = 400;
+				this.bonusLust = 330;
+				this.level = 50;
+			}
+			if (flags[kFLAGS.DINAH_LVL_UP] == 9) {
+				initStrTouSpeInte(110, 65, 380, 240);
+				initWisLibSensCor(120, 200, 110, 50);
+				this.weaponAttack = 80;
+				this.armorDef = 56;
+				this.armorMDef = 41;
+				this.bonusHP = 300;
+				this.bonusMana = 450;
+				this.bonusLust = 366;
+				this.level = 56;
 			}
 			createBreastRow(game.flags[kFLAGS.DINAH_CUP_SIZE]);
 			this.hips.type = Hips.RATING_BOYISH+game.flags[kFLAGS.DINAH_HIPS_ASS_SIZE];
@@ -515,7 +539,7 @@ import classes.internals.*;
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 5) {
 				this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
 				this.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
-				this.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
+				this.createPerk(PerkLib.ImprovedSpirituality, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 6) {
 				this.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
@@ -524,19 +548,26 @@ import classes.internals.*;
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 7) {
 				this.createPerk(PerkLib.DaoistWarriorStage, 0, 0, 0, 0);
-				//this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
-				//this.createPerk(PerkLib.MindOverBodyI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicIntelligence, 0, 0, 0, 0);
+				this.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 8) {
 				this.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
-				//this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
-				//this.createPerk(PerkLib.MindOverBodyI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicWisdom, 0, 0, 0, 0);
+				this.createPerk(PerkLib.Mage, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 9) {
 				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
-				//this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
-				//this.createPerk(PerkLib.MindOverBodyI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.HalfStepToAdvancedSpirituality, 0, 0, 0, 0);
+				this.createPerk(PerkLib.GrandMage, 0, 0, 0, 0);
 			}
+			/*if (flags[kFLAGS.DINAH_LVL_UP] >= 10) {
+				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.DINAH_LVL_UP] >= 11) x
+			if (flags[kFLAGS.DINAH_LVL_UP] >= 12) x*/
 			checkMonster();
 		}
 	}

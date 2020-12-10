@@ -126,7 +126,7 @@ public class Yeti extends Monster
 			this.armorDef = 60;
 			this.armorMDef = 20;
 			this.bonusHP = 2000;
-			this.bonusLust = 10;
+			this.bonusLust = 120;
 			this.lust = 10;
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

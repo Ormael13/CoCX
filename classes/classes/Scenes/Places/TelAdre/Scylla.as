@@ -1872,8 +1872,5 @@ private function scyllaFurryFoursomePartDues():void
 	flags[kFLAGS.SCYLLA_FURRY_FOURSOME_COUNT]++;
 	doNext(camp.returnToCampUseOneHour);
 }
-
-
-
 	}
 }

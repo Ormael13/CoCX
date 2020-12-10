@@ -521,6 +521,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You need more time before you can prank your opponent again.");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			bd = buttons.add("Money Strike", MoneyStrike).hint("Attack your opponent using magically enhanced money. Damage is based on personal wealth. Cost some gems upon use.", "Money Strike");
+			bd.requireFatigue(spellCost(40),true);
 			if (player.gems < 100) bd.disable("You need more gems in order to use Money Strike.");
 			else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
@@ -528,12 +529,12 @@ public class MagicSpecials extends BaseCombatContent {
 			var cdko:Number = 12;
 			if (player.hasPerk(PerkLib.RatatoskrSmartsEvolved)) cdko -= 1;
 			if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) cdko -= 1;
-			bd = buttons.add("Knowledge overload", KnowledgeOverload).hint("Nonexistant tooltip yet to be written by Lia. \n\nWould go into cooldown after use for: "+cdko+" rounds", "Knowledge overload");
+			bd = buttons.add("Knowledge overload", KnowledgeOverload).hint("Stun your opponents by overflowing their head with knowledge. \n\nWould go into cooldown after use for: "+cdko+" rounds", "Knowledge overload");
 			bd.requireMana(spellCost(80));
 			if (player.hasStatusEffect(StatusEffects.CooldownKnowledgeOverload)) {
 				bd.disable("You need more time before you can use Knowledge overload again.\n\n");
 			}
-			bd = buttons.add("Provoke", Provoke).hint("Nonexistant tooltip yet to be written by Lia. \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.RatatoskrSmartsFinalForm) ? "5":"6")+" rounds", "Provoke");
+			bd = buttons.add("Provoke", Provoke).hint("Insult your opponent and cause it to fly into a murderous rage increasing its damage but negating its defences and ability to do anything but attack blindly with physical strikes. \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.RatatoskrSmartsFinalForm) ? "5":"6")+" rounds", "Provoke");
 			bd.requireMana(spellCost(80));
 			if (player.hasStatusEffect(StatusEffects.CooldownProvoke)) {
 				bd.disable("You need more time before you can use Provoke again.\n\n");
@@ -701,7 +702,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownFreezingBreath,10,0,0,0);
 		var damage:Number = int(player.level * (8 + player.wolfScore()) + rand(60));
 		damage = calcGlacialMod(damage);
-		if (monster.hasPerk(PerkLib.EnemyGroupType)) damage *= 5;
+		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
@@ -886,7 +887,7 @@ public class MagicSpecials extends BaseCombatContent {
 			var lustDmgF:Number = monster.lustVuln * 3 * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 			lustDmgF += IntligenceModifier;
 			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmgF *= 1.5;
-			if (monster.hasPerk(PerkLib.EnemyGroupType)) {
+			if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
 				if (player.hasPerk(PerkLib.ArouseTheAudience)) lustDmgF *= 7.5;
 				else lustDmgF *= 5;
 			}
@@ -1026,7 +1027,7 @@ public class MagicSpecials extends BaseCombatContent {
 				lustDmgF *= 1.75;
 			}
 			if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
-			if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) lustDmgF *= 1.5;
+			if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && (monster.findPerk(PerkLib.EnemyGroupType) >= 0 || monster.hasPerk(PerkLib.EnemyLargeGroupType))) lustDmgF *= 1.5;
 			lustDmgF = lustDmgF * monster.lustVuln;
 			if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0) lustDmgF *= 1.1;
 			if (player.findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) lustDmgF *= 1.2;
@@ -1151,7 +1152,7 @@ public class MagicSpecials extends BaseCombatContent {
 			lustDmgF *= 1.75;
 		}
 		if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
-		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) lustDmgF *= 1.5;
+		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && (monster.findPerk(PerkLib.EnemyGroupType) >= 0 || monster.hasPerk(PerkLib.EnemyLargeGroupType))) lustDmgF *= 1.5;
 		if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0) damage *= 1.1;
 		if (player.findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) damage *= 1.2;
 		if (player.findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) damage *= 1.3;
@@ -1255,7 +1256,7 @@ public class MagicSpecials extends BaseCombatContent {
 			lustDmgF *= 1.75;
 		}
 		if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
-		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) lustDmgF *= 1.5;
+		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && (monster.findPerk(PerkLib.EnemyGroupType) >= 0 || monster.hasPerk(PerkLib.EnemyLargeGroupType))) lustDmgF *= 1.5;
 		if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0) lustDmgF *= 1.1;
 		if (player.findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) lustDmgF *= 1.2;
 		if (player.findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) lustDmgF *= 1.3;
@@ -1723,7 +1724,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("You spit a blob of neon blue acid at " + monster.a + monster.short + " your corrosive fluids burning at "+(monster.hasPerk(PerkLib.EnemyGroupType) ? "their" : "" + monster.pronoun3 + "")+" flesh.");
+		outputText("You spit a blob of neon blue acid at " + monster.a + monster.short + " your corrosive fluids burning at "+((monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) ? "their" : "" + monster.pronoun3 + "")+" flesh.");
 		//Miss:
 		if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			outputText("  Despite the heavy impact caused by your attack, " + monster.a + monster.short + " manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
@@ -2295,9 +2296,9 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.ChanneledAttack);
 			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
 			if (player.hasPerk(PerkLib.RagingInfernoSu) && player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, -1);
-			/*if (player.hasPerk(PerkLib.) && player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, -1);
-			if (player.hasPerk(PerkLib.) && player.hasStatusEffect(StatusEffects.CounterHighVoltage)) player.addStatusValue(StatusEffects.CounterHighVoltage, 3, -1);
-			if (player.hasPerk(PerkLib.) && player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 3, -1);*/
+			if (player.hasPerk(PerkLib.GlacialStormSu) && player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, -1);
+			if (player.hasPerk(PerkLib.HighVoltageSu) && player.hasStatusEffect(StatusEffects.CounterHighVoltage)) player.addStatusValue(StatusEffects.CounterHighVoltage, 3, -1);
+			if (player.hasPerk(PerkLib.EclipsingShadowSu) && player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 3, -1);
 			var damage:Number = 0;
 			var damult:Number = 1;
 			damage += scalingBonusIntelligence() * 5;
@@ -2402,9 +2403,9 @@ public class MagicSpecials extends BaseCombatContent {
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 4, 0, 0, 0);
 			if (player.hasPerk(PerkLib.RagingInfernoSu)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, 1);
-			/*if (player.hasPerk(PerkLib.)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, 1);
-			if (player.hasPerk(PerkLib.)) player.addStatusValue(StatusEffects.CounterHighVoltage, 3, 1);
-			if (player.hasPerk(PerkLib.)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 3, 1);*/
+			if (player.hasPerk(PerkLib.GlacialStormSu)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, 1);
+			if (player.hasPerk(PerkLib.HighVoltageSu)) player.addStatusValue(StatusEffects.CounterHighVoltage, 3, 1);
+			if (player.hasPerk(PerkLib.EclipsingShadowSu)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 3, 1);
 			enemyAI();
 		}
 		
@@ -4006,7 +4007,7 @@ public class MagicSpecials extends BaseCombatContent {
 			lustDmgF *= 1.75;
 		}
 		if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
-		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && player.findPerk(PerkLib.EnemyGroupType) >= 0) lustDmgF *= 1.5;
+		if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && (monster.findPerk(PerkLib.EnemyGroupType) >= 0 || monster.hasPerk(PerkLib.EnemyLargeGroupType))) lustDmgF *= 1.5;
 		lustDmgF = lustDmgF * monster.lustVuln;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
@@ -4564,7 +4565,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		var damage:Number = 0;
 		damage += scalingBonusIntelligence()+scalingBonusToughness()+scalingBonusLibido();
-		if (monster.hasPerk(PerkLib.EnemyGroupType)) damage *= 5;
+		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;

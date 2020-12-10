@@ -779,7 +779,7 @@ public class DebugMenu extends BaseContent
 			addButton(14, "Back", bodyPartEditorRoot);
 		}
 		private static const COLOR_CONSTANTS:Array = [
-			"albino", "aqua", "ashen", "auburn", "black", "blond", "blonde", "blue", "bronzed", "brown", "caramel",
+			"albino", "aqua", "ashen", "auburn", "black", "blond", "blonde", "blood-red", "blue", "bronzed", "brown", "caramel",
 			"cerulean", "chocolate", "crimson", "crystal", "dark", "dusky", "ebony", "emerald", "fair",
 			"golden", "gray", "green", "indigo", "light", "mahogany", "metallic", "midnight", "olive", "orange",
 			"peach", "pink", "purple", "red", "russet", "sable", "sanguine", "silky", "silver",
@@ -1970,5 +1970,4 @@ public class DebugMenu extends BaseContent
 			if (pY < 2) toggleSlot(slot + 5);
 		}
 	}
-
 }

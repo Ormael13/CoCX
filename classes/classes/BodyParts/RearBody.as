@@ -15,7 +15,7 @@ public class RearBody extends BodyPart {
 	public static const DISPLACER_TENTACLES:int	= 11;
 	public static const SNAIL_SHELL:int			= 12;
 	public static const METAMORPHIC_GOO:int		= 13;
-	//public static const METAMORPHIC_GOO:int		= 14;//button 0 on 2nd page of metamorph
+	//public static const thundermantisrearbody:int		= 14;//button 0 on 2nd page of metamorph
 	public static const GHOSTLY_AURA:int		= 15;
 	public static const YETI_FUR:int			= 16;
 	public static const GLACIAL_AURA:int		= 17;

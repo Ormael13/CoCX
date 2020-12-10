@@ -21,6 +21,8 @@ use namespace CoC;
 		{
 		}
 		
+		//lvl 35 enemy for sure added
+		
 		public var darkelfScene:DarkElfScene = new DarkElfScene();
 	}
 }

@@ -201,7 +201,7 @@ public class Syth extends Monster
 			this.hairLength = 1;
 			initStrTouSpeInte(160, 120, 70, 60);
 			initWisLibSensCor(60, 120, 25, 70);
-			this.weaponName = "pair of big fucking swords";
+			this.weaponName = "pair of big fucking swords";//later make him wield 'pair of big fucking two handed swords' 
 			this.weaponVerb= "slash";
 			this.weaponAttack = 56;
 			this.armorName = "scales";
@@ -209,7 +209,7 @@ public class Syth extends Monster
 			this.armorMDef = 9;
 			this.bonusHP = 300;
 			this.additionalXP = 300;
-			this.bonusLust = 20;
+			this.bonusLust = 175;
 			this.lust = 30;
 			this.lustVuln = .2;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

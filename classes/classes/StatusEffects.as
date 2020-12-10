@@ -402,6 +402,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KnowsBlind:StatusEffectType                     = mk("Knows Blind");
 		public static const KnowsBlink:StatusEffectType                     = mk("Knows Blink");
 		public static const KnowsBlizzard:StatusEffectType                  = mk("Knows Blizzard");
+		public static const KnowsBloodExplosion:StatusEffectType            = mk("Knows Blood Explosion");
+		public static const KnowsBloodMissiles:StatusEffectType             = mk("Knows Blood Missiles");
 		public static const KnowsCharge:StatusEffectType                    = mk("Knows Charge");//Charge Weapon
 		public static const KnowsChargeA:StatusEffectType                   = mk("Knows Charge Armor");
 		public static const KnowsCleave:StatusEffectType                    = mk("Knows Cleave");
@@ -1024,6 +1026,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownSpellBlackTier1:StatusEffectType       		= mkCombat("Cooldown Spell Black magic tier 1");
 		public static const CooldownSpellBlackTier2:StatusEffectType      		= mkCombat("Cooldown Spell Black magic tier 2");
 		public static const CooldownSpellBlackTier3:StatusEffectType      		= mkCombat("Cooldown Spell Black magic tier 3");
+		public static const CooldownSpellBloodExplosion:StatusEffectType     	= mkCombat("Cooldown Spell Blood Explosion");
+		public static const CooldownSpellBloodMissiles:StatusEffectType     	= mkCombat("Cooldown Spell Blood Missiles");
 		public static const CooldownSpellRegenerate:StatusEffectType     		= mkCombat("Cooldown Spell Regenerate");
 		public static const CooldownSpellWaveOfEcstasy:StatusEffectType  		= mkCombat("Cooldown Spell Wave of Ecstasy");
 		public static const CooldownSpellWhiteTier1:StatusEffectType      		= mkCombat("Cooldown Spell White magic tier 1");

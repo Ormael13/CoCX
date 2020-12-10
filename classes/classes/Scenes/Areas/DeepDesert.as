@@ -7,6 +7,7 @@ package classes.Scenes.Areas
 {
 	public class DeepDesert 
 	{
+		//public var gorgonScene:GorgonScene = new GorgonScene();przenieść do deep desert potem
 		
 		public function DeepDesert() 
 		{

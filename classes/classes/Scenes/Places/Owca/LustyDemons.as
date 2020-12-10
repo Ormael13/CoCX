@@ -86,7 +86,7 @@ public class LustyDemons extends Monster
 			this.armorMDef = 1;
 			//6 attacks: 5 from demons (10 damage each), 1 from Vapula (80 damage), 200 gems, 200 xp, 700 hp*/
 			this.bonusHP = 1200;
-			this.bonusLust = 350;
+			this.bonusLust = 208;
 			this.lust = 30;
 			this.lustVuln = .3;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
@@ -103,7 +103,7 @@ public class LustyDemons extends Monster
 					add(armors.NURSECL,3).
 					add(armors.BONSTRP,2).
 					add(consumables.IMPFOOD, 1);
-			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			createStatusEffect(StatusEffects.Vapula,0,0,0,0);
 			checkMonster();

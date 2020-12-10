@@ -124,7 +124,7 @@ public class Harpy extends Monster
 			this.armorDef = 10;
 			this.armorMDef = 1;
 			this.bonusHP = 200;
-			this.bonusLust = 20;
+			this.bonusLust = 120;
 			this.lust = 10;
 			this.lustVuln = .7;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

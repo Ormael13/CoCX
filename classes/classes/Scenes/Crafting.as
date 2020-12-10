@@ -141,5 +141,4 @@ package classes.Scenes
 			inventory.takeItem(itemResult, accessCraftingMenu);
 		}
 	}
-
 }

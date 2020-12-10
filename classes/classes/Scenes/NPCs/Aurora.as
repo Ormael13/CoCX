@@ -454,6 +454,7 @@ use namespace CoC;
 				this.armorDef = 105;
 				this.armorMDef = 105;
 				this.bonusHP = 100;
+				this.bonusLust = 31;
 				this.level = 1;
 			}
 			if (flags[kFLAGS.AURORA_LVL] == 2) {
@@ -463,6 +464,7 @@ use namespace CoC;
 				this.armorDef = 105;
 				this.armorMDef = 105;
 				this.bonusHP = 700;
+				this.bonusLust = 52;
 				this.level = 7;
 			}
 			if (flags[kFLAGS.AURORA_LVL] == 3) {
@@ -472,6 +474,7 @@ use namespace CoC;
 				this.armorDef = 112;
 				this.armorMDef = 112;
 				this.bonusHP = 1300;
+				this.bonusLust = 73;
 				this.level = 13;
 			}
 			if (flags[kFLAGS.AURORA_LVL] == 4) {
@@ -481,6 +484,7 @@ use namespace CoC;
 				this.armorDef = 112;
 				this.armorMDef = 112;
 				this.bonusHP = 1900;
+				this.bonusLust = 94;
 				this.level = 19;
 			}
 			if (flags[kFLAGS.AURORA_LVL] == 5) {
@@ -490,6 +494,7 @@ use namespace CoC;
 				this.armorDef = 119;
 				this.armorMDef = 119;
 				this.bonusHP = 2500;
+				this.bonusLust = 115;
 				this.level = 25;
 			}
 			if (flags[kFLAGS.AURORA_LVL] == 6) {
@@ -499,6 +504,7 @@ use namespace CoC;
 				this.armorDef = 119;
 				this.armorMDef = 119;
 				this.bonusHP = 3100;
+				this.bonusLust = 136;
 				this.level = 31;
 			}
 			if (flags[kFLAGS.AURORA_LVL] == 7) {
@@ -508,6 +514,7 @@ use namespace CoC;
 				this.armorDef = 126;
 				this.armorMDef = 126;
 				this.bonusHP = 3700;
+				this.bonusLust = 157;
 				this.level = 37;
 			}
 			if (flags[kFLAGS.AURORA_LVL] == 8) {
@@ -517,6 +524,7 @@ use namespace CoC;
 				this.armorDef = 126;
 				this.armorMDef = 126;
 				this.bonusHP = 4300;
+				this.bonusLust = 178;
 				this.level = 43;
 			}
 			if (flags[kFLAGS.AURORA_LVL] == 9) {
@@ -526,6 +534,7 @@ use namespace CoC;
 				this.armorDef = 133;
 				this.armorMDef = 133;
 				this.bonusHP = 4900;
+				this.bonusLust = 199;
 				this.level = 49;
 			}
 			if (flags[kFLAGS.AURORA_LVL] == 10) {
@@ -535,6 +544,7 @@ use namespace CoC;
 				this.armorDef = 135;
 				this.armorMDef = 135;
 				this.bonusHP = 5000;
+				this.bonusLust = 224;
 				this.bonusWrath = 100;
 				this.bonusSoulforce = 400;
 				this.level = 55;
@@ -546,6 +556,7 @@ use namespace CoC;
 				this.armorDef = 137;
 				this.armorMDef = 137;
 				this.bonusHP = 5100;
+				this.bonusLust = 249;
 				this.bonusWrath = 200;
 				this.bonusSoulforce = 800;
 				this.level = 61;
@@ -557,21 +568,23 @@ use namespace CoC;
 				this.armorDef = 139;
 				this.armorMDef = 139;
 				this.bonusHP = 5200;
+				this.bonusLust = 274;
 				this.bonusWrath = 300;
 				this.bonusSoulforce = 1200;
 				this.level = 67;
 			}
 			if (flags[kFLAGS.AURORA_LVL] == 13) {
 				initStrTouSpeInte(342, 404, 466, 124);
-				initWisLibSensCor(152, 145, 62, 50);
+				initWisLibSensCor(152, 160, 66, 50);
 				this.weaponAttack = 109;
 				this.armorDef = 141;
 				this.armorMDef = 141;
 				this.bonusHP = 5300;
+				this.bonusLust = 299;
 				this.bonusWrath = 400;
 				this.bonusSoulforce = 1600;
 				this.level = 73;
-			}
+			}//na 100+ lvl zrobić event aby ją w flesh gargoyle zmienić?
 			if (flags[kFLAGS.AURORA_LVL] < 5) this.lustVuln = .5;
 			if (flags[kFLAGS.AURORA_LVL] >= 5 && flags[kFLAGS.AURORA_LVL] < 8) this.lustVuln = .4;
 			if (flags[kFLAGS.AURORA_LVL] >= 8 && flags[kFLAGS.AURORA_LVL] < 13) this.lustVuln = .3;
@@ -596,7 +609,6 @@ use namespace CoC;
 			this.weaponName = "claws";
 			this.weaponVerb = "claw-slash";
 			this.armorName = "stone skin";
-			this.bonusLust = 20;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 0;
 			this.drop = NO_DROP;

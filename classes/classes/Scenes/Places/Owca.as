@@ -1090,6 +1090,5 @@ private function enslaveVapulaAsACuntWielder():void {
 	//Chance to trigger imp gangbang is increased by 7%!
 	cleanupAfterCombat();
 }
-	
 }
 }

@@ -233,7 +233,7 @@ public class ImpOverlord extends Imp
 			this.armorDef = 20;
 			this.armorMDef = 10;
 			this.bonusHP = 600;
-			this.bonusLust = 30;
+			this.bonusLust = 131;
 			this.lust = 30;
 			this.lustVuln = .3;
 			this.fatigue = 0;

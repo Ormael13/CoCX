@@ -162,6 +162,7 @@ use namespace CoC;
 				this.armorDef = 10;
 				this.armorMDef = 2;
 				this.bonusHP = 100;
+				this.bonusLust = 280;
 				this.level = 30;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 1) {
@@ -171,6 +172,7 @@ use namespace CoC;
 				this.armorDef = 12;
 				this.armorMDef = 3;
 				this.bonusHP = 150;
+				this.bonusLust = 316;
 				this.level = 36;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 2) {
@@ -180,6 +182,7 @@ use namespace CoC;
 				this.armorDef = 14;
 				this.armorMDef = 4;
 				this.bonusHP = 150;
+				this.bonusLust = 352;
 				this.level = 42;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 3) {
@@ -189,6 +192,7 @@ use namespace CoC;
 				this.armorDef = 16;
 				this.armorMDef = 5;
 				this.bonusHP = 200;
+				this.bonusLust = 388;
 				this.level = 48;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 4) {
@@ -198,6 +202,7 @@ use namespace CoC;
 				this.armorDef = 18;
 				this.armorMDef = 6;
 				this.bonusHP = 200;
+				this.bonusLust = 424;
 				this.level = 54;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 5) {
@@ -207,6 +212,7 @@ use namespace CoC;
 				this.armorDef = 20;
 				this.armorMDef = 7;
 				this.bonusHP = 250;
+				this.bonusLust = 460;
 				this.level = 60;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 6) {
@@ -216,6 +222,7 @@ use namespace CoC;
 				this.armorDef = 22;
 				this.armorMDef = 8;
 				this.bonusHP = 250;
+				this.bonusLust = 496;
 				this.level = 66;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 7) {
@@ -225,6 +232,7 @@ use namespace CoC;
 				this.armorDef = 24;
 				this.armorMDef = 9;
 				this.bonusHP = 300;
+				this.bonusLust = 532;
 				this.level = 72;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 8) {
@@ -234,6 +242,7 @@ use namespace CoC;
 				this.armorDef = 26;
 				this.armorMDef = 10;
 				this.bonusHP = 300;
+				this.bonusLust = 568;
 				this.level = 78;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 9) {
@@ -243,6 +252,7 @@ use namespace CoC;
 				this.armorDef = 28;
 				this.armorMDef = 11;
 				this.bonusHP = 400;
+				this.bonusLust = 604;
 				this.level = 84;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 10) {
@@ -252,6 +262,7 @@ use namespace CoC;
 				this.armorDef = 30;
 				this.armorMDef = 12;
 				this.bonusHP = 400;
+				this.bonusLust = 640;
 				this.level = 90;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 11) {
@@ -261,6 +272,7 @@ use namespace CoC;
 				this.armorDef = 32;
 				this.armorMDef = 13;
 				this.bonusHP = 500;
+				this.bonusLust = 676;
 				this.level = 96;
 			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_TIGHT);
@@ -278,7 +290,6 @@ use namespace CoC;
 			this.weaponName = "claw";
 			this.weaponVerb="claw-slash";
 			this.armorName = "skimpy black bikini";
-			this.bonusLust = 50;
 			this.lust = 30;
 			this.lustVuln = .8;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

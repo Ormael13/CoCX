@@ -14,39 +14,67 @@ use namespace CoC;
 	public class Jinx extends Monster
 	{
 		private function jinxBaseAttack():void {
-			jinxAyotechPistol();
-			jinxAyotechPistol();
-			jinxAyotechPistol();
-		}
-		
-		private function jinxAyotechPistol():void {
-			outputText("Ayotech maniac casually fire an ayotech pistol at you with high skill.");
+			outputText("Ayotech maniac casually fires "+this.weaponRangeName+" at you with high skill. ");
 			if (player.hasStatusEffect(StatusEffects.WindWall)) {
-				outputText(" That is then stopped by wind wall.");
+				outputText("That is then stopped by wind wall.");
 				player.addStatusValue(StatusEffects.WindWall,2,-1);
 			}
 			else {
-				var damage:Number = 0;
-				damage += this.weaponRangeAttack * 20;
-				player.takePhysDamage(damage, true);
+				jinxBaseAttackDamage();
+				jinxBaseAttackDamage();
+				jinxBaseAttackDamage();
 			}
 			outputText("\n\n");
 		}
+		private function jinxBaseAttackDamage():void {
+			var damage:Number = 0;
+			damage += this.weaponRangeAttack * 20;
+			player.takePhysDamage(damage, true);
+		}
 		private function jinxAyotechCanon():void {
-			outputText("Ayotech maniac casually fire an ayotech canon at you with high skill.");
+			mana -= 50;
+			if (EngineCore.silly()) this.weaponRangeName = "Fishbones";
+			else this.weaponRangeName = "ayotech canon";
+			outputText("Ayotech maniac casually fires "+this.weaponRangeName+" at you with high skill. ");
 			if (player.hasStatusEffect(StatusEffects.WindWall)) {
-				outputText(" Still your wind wall manages to stops it.");
-				player.addStatusValue(StatusEffects.WindWall,2,-1);
+				outputText("Still your wind wall manages to stops it.");
+				player.addStatusValue(StatusEffects.WindWall,2,-3);
 			}
 			else {
-				this.weaponRangeName = "ayotech canon";
-				this.weaponRangeAttack *= 3;
 				var damage:Number = 0;
-				damage += this.weaponRangeAttack * 20;
+				damage += this.weaponRangeAttack * 100;
+				//jeśli pc ma team atak jest traktowany jako aoe ^^
 				player.takePhysDamage(damage, true);
-				this.weaponRangeName = "ayotech pistol";
-				this.weaponRangeAttack /= 3;
 			}
+			if (EngineCore.silly()) this.weaponRangeName = "Pow-Pow";
+			else this.weaponRangeName = "ayotech minigun";
+			outputText("\n\n");
+		}
+		
+		private function jinxAyotechPistol():void {
+			if (EngineCore.silly()) this.weaponRangeName = "Zapper";
+			else this.weaponRangeName = "ayotech pistol";
+			var damage:Number = 0;
+			damage += this.weaponRangeAttack * 20;
+			player.takePhysDamage(damage, true);
+			if (EngineCore.silly()) this.weaponRangeName = "Pow-Pow";
+			else this.weaponRangeName = "ayotech minigun";
+			outputText("\n\n");//speed debuff on pc for few rounds
+		}
+		
+		private function jinxAyotechGrenades():void {
+			outputText("Ayotech maniac casually throws "+(EngineCore.silly()?"Flame Chompers":"ayotech grenades")+" at you with high skill. ");//stun for 1-2 turns
+		}
+		
+		private function jinxAyotechSuperRocket():void {
+			if (EngineCore.silly()) this.weaponRangeName = "Super Mega Death Rocket";
+			else this.weaponRangeName = "ayotech rocket";
+			var damage:Number = 0;
+			damage += this.weaponRangeAttack * 20;
+			player.takePhysDamage(damage, true);
+			//jeśli pc ma team atak jest traktowany jako aoe ^^
+			if (EngineCore.silly()) this.weaponRangeName = "Pow-Pow";
+			else this.weaponRangeName = "ayotech minigun";
 			outputText("\n\n");
 		}
 		
@@ -54,8 +82,13 @@ use namespace CoC;
 		{
 			var choice:Number = rand(2);
 			if (choice == 0) jinxBaseAttack();
-			if (choice == 1) jinxAyotechCanon();
-			//if (choice == 2) sythAttack1();
+			if (choice == 1) {
+				if ((mana - 50) >= 0) jinxAyotechCanon();
+				else jinxBaseAttack();
+			}
+			//if (choice == 2) jinxAyotechPistol();
+			//if (choice == 3) jinxAyotechGrenades();
+			//if (choice == 4) jinxAyotechSuperRocket();
 		}
 		
 		public function Jinx() 
@@ -79,21 +112,23 @@ use namespace CoC;
 			this.hairLength = 20;
 			initStrTouSpeInte(50, 50, 40, 40);
 			initWisLibSensCor(40, 20, 10, 50);
-			this.lustVuln = 0.85;
-			this.drop = NO_DROP;
-			//this.drop = new ChainedDrop()
-			//		.add(useables.GOLCORE, 1/4);
-			this.level = 15;
-			//this.bonusHP = 200;
 			this.weaponName = "ayotech gaunlets";
 			this.weaponVerb = "smash";
 			this.weaponAttack = 16;
-			this.weaponRangeName = "ayotech pistol";
+			if (EngineCore.silly()) this.weaponRangeName = "Pow-Pow";
+			else this.weaponRangeName = "ayotech minigun";
 			this.weaponRangeVerb = "shoot";
 			this.weaponRangeAttack = 12;
 			this.armorName = "light ayo armor";//zamienić na coś innego?
 			this.armorDef = 30;
 			this.armorMDef = 5;
+			//this.bonusHP = 200;
+			this.bonusLust = 45;
+			this.lustVuln = 0.85;
+			this.drop = NO_DROP;
+			//this.drop = new ChainedDrop()
+			//		.add(useables.GOLCORE, 1/4);
+			this.level = 15;
 			//this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
 			checkMonster();
 		}

@@ -177,7 +177,7 @@ public class Alraune extends Monster
 			this.armorDef = 45;
 			this.armorMDef = 5;
 			this.bonusHP = 100;
-			this.bonusLust = 20;
+			this.bonusLust = 174;
 			this.lust = 20 + rand(40);
 			this.lustVuln = 0.2;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
@@ -193,10 +193,6 @@ public class Alraune extends Monster
 					consumables.SNAKEBANE,
 					consumables.IRONWEED,
 					consumables.BLADEFERN);
-			//this.drop = new ChainedDrop().add(consumables.MARAFRU, 1 / 6);
-				//	.add(consumables.W__BOOK, 1 / 4)
-				//	.add(consumables.BEEHONY, 1 / 2)
-				//	.elseDrop(useables.B_CHITN);
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyPlantType, 0, 0, 0, 0);
 			//this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);

@@ -199,7 +199,7 @@ public class IncubusMechanic extends Monster {
 			this.armorDef = 12;
 			this.armorMDef = 1;
 			this.bonusHP = 350;
-			this.bonusLust = 40;
+			this.bonusLust = 164;
 			this.lust = 50;
 			this.lustVuln = .5;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
@@ -211,6 +211,7 @@ public class IncubusMechanic extends Monster {
 				this.gems += rand(30) + 60;
 				this.additionalXP += 250;
 				this.level += 24;
+				this.bonusLust += 24;
 				this.bonusHP += 600 + (60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.strStat.core.value += 50 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.touStat.core.value += 50 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);

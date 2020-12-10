@@ -728,5 +728,4 @@ public class Punishments extends BaseContent
 			doNext(playerMenu);
 		}
 	}
-
 }

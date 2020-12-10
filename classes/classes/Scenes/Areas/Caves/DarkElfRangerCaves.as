@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Caves 
+package classes.Scenes.Areas.Caves
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -32,7 +32,7 @@ import classes.internals.*;
 			this.hairColor = "silver";
 			this.hairLength = 13;
 			initStrTouSpeInte(115, 170, 230, 125);
-			initWisLibSensCor(125, 78, 88, 94);
+			initWisLibSensCor(125, 78, 88, 90);
 			this.weaponName = "dagger";
 			this.weaponVerb= "stab";
 			this.weaponAttack = 5;
@@ -42,7 +42,7 @@ import classes.internals.*;
 			this.armorName = "elven armor";
 			this.armorDef = 15;
 			this.armorMDef = 15;
-			this.bonusLust = 20;
+			this.bonusLust = 214;
 			this.lustVuln = .7;
 			this.lust = 50;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

@@ -24,6 +24,7 @@ public class GolemsDummy extends AbstractGolem
 			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise swings!");
 			else
 			{
+				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" They hits you square in the chest from a few different angles. ");
 				damage = player.takePhysDamage(damage, true);
 			}
@@ -31,12 +32,19 @@ public class GolemsDummy extends AbstractGolem
 		
 		override protected function performCombatAction():void
 		{
-			if (this.HPRatio() < 0.75) {
-				var choice:Number = rand(4);
-				if (choice < 3) eAttack();
-				if (choice == 3) backhand();
+			if (hasStatusEffect(StatusEffects.Provoke)) {
+				var choiceP:Number = rand(4);
+				if (choiceP < 2) eAttack();
+				if (choiceP > 1) backhand();
 			}
-			else eAttack();
+			else {
+				if (this.HPRatio() < 0.75) {
+					var choice:Number = rand(4);
+					if (choice < 3) eAttack();
+					if (choice == 3) backhand();
+				}
+				else eAttack();
+			}
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -71,7 +79,6 @@ public class GolemsDummy extends AbstractGolem
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
-			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		
