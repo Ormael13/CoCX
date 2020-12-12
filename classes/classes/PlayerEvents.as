@@ -473,6 +473,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText("\n<b>You no longer feel the need to stockpile fluids in your body. Geeze just how much of a slut did this make you?</b>\n");
 					player.removeStatusEffect(StatusEffects.SlimeCraving);
 					player.removeStatusEffect(StatusEffects.SlimeCravingFeed);
+					player.buff("Fluid Growth").remove();
 					needNext = true;
 				}
 				else { //Slime core reduces fluid need rate
