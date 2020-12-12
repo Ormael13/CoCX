@@ -9861,12 +9861,12 @@ use namespace CoC;
 					createStatusEffect(StatusEffects.SlimeCravingFeed,0,0,0,0);
 				}
 				refillHunger(30);
+				slimeGrowth();
 			}
 			if (findPerk(PerkLib.Diapause) >= 0) {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] += 3 + rand(3);
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 1;
 			}
-			slimeGrowth();
 			if (isGargoyle() && hasPerk(PerkLib.GargoyleCorrupted)) refillGargoyleHunger(30);
 			if (jiangshiScore() >= 20 && hasPerk(PerkLib.EnergyDependent)) EnergyDependentRestore();
 		}
@@ -12424,15 +12424,16 @@ use namespace CoC;
 
 		public function slimeGrowth():void {
 			if (hasStatusEffect(StatusEffects.SlimeCraving)) {
-				if (findPerk(PerkLib.SlimeMetabolismEvolved) >= 0) {
-					buff("Fluid Growth").addStats({"tou.mult": 0.02}).withText("Fluid Growth!").forHours(10);
+				var time:Number = 4;
+				if (hasPerk(PerkLib.SlimeMetabolismEvolved)) {
+					buff("Fluid Growth").addStats({"tou.mult": 0.02}).withText("Fluid Growth!");
 					if (hasPerk(PerkLib.DarkSlimeCore)){
-						buff("Fluid Growth").addStats({"int.mult": 0.02}).withText("Fluid Growth!").forHours(10);
+						buff("Fluid Growth").addStats({"int.mult": 0.02}).withText("Fluid Growth!");
 					}
 				} else {
-					buff("Fluid Growth").addStats({"tou.mult": 0.02}).withText("Fluid Growth!").forHours(10);
+					buff("Fluid Growth").addStats({"tou.mult": 0.02}).withText("Fluid Growth!");
 					if (hasPerk(PerkLib.DarkSlimeCore)){
-						buff("Fluid Growth").addStats({"int.mult": 0.02}).withText("Fluid Growth!").forHours(10);
+						buff("Fluid Growth").addStats({"int.mult": 0.02}).withText("Fluid Growth!");
 					}
 				}
 			}

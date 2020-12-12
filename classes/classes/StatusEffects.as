@@ -848,6 +848,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Disarmed:StatusEffectType                  = mkCombat("Disarmed");
 		public static const Displacement:StatusEffectType      		   = mkCombat("Displacer beast displacement");
 		public static const DisplacerPlug:StatusEffectType             = mkCombat("Displacer Plugged for milking");
+		public static const SlimeInsert:StatusEffectType               = mkCombat("Slime Inserted itself into opponent");
 		public static const Distracted:StatusEffectType                = mkCombat("Distracted");
 		public static const DistractedEnemySupporter:StatusEffectType  = mkCombat("Distracted Enemy Supporter");
 		public static const DriderKiss:StatusEffectType                = mkCombat("Drider Kiss");

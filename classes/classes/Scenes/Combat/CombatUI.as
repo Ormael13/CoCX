@@ -312,6 +312,9 @@ public class CombatUI extends BaseCombatContent {
 		} else if (monster.hasStatusEffect(StatusEffects.DisplacerPlug)) {
 			menu();
 			addButton(0, "Feed", combat.DisplacerFeed).hint("Milk your victim's breast with your tentacles!");
+		} else if (monster.hasStatusEffect(StatusEffects.SlimeInsert)) {
+			menu();
+			addButton(0, "Rape", combat.SlimeRapeFeed).hint("Violate your opponent from the inside!");
 		} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 			menu();
 			if (monster.statusEffectv1(StatusEffects.Dig) > 0){

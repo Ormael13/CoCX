@@ -9007,7 +9007,10 @@ public class Combat extends BaseContent {
         if (player.tail.type == Tail.LIZARD || player.tail.type == Tail.CAVE_WYRM || player.tail.type == Tail.SALAMANDER) TeaseFunctionList.push(RandomTeaseButtfuckTail);
         if (player.lowerBody == LowerBody.PLANT_FLOWER) TeaseFunctionList.push(RandomTeaseAlraune);
         if (player.rearBody.type == RearBody.DISPLACER_TENTACLES) TeaseFunctionList.push(RandomTeaseDisplacerMilkingInitiate);
-        if (player.lowerBody == LowerBody.GOO) TeaseFunctionList.push(RandomTeaseSlime);
+        if (player.lowerBody == LowerBody.GOO){
+            TeaseFunctionList.push(RandomTeaseSlime);
+            TeaseFunctionList.push(RandomTeaseSlimeInsert());
+        }
         if (player.countCocksOfType(CockTypesEnum.ANEMONE) > 0) TeaseFunctionList.push(RandomTeaseAnemone);
         if (player.hasPerk(PerkLib.ElectrifiedDesire)) TeaseFunctionList.push(RandomTeaseRaiju);
         if (player.harpyScore() >= 8) TeaseFunctionList.push(RandomTeaseHarpy);
@@ -9258,22 +9261,34 @@ public class Combat extends BaseContent {
     }
 
     public function RandomTeaseSlime():void {
-        outputText("You take no time and begins flooding yourself into [monster a] [monster name] vulnerable ");
+        outputText("You take no time and begins violating [monster a] [monster name] vulnerable ");
         if (monster.hasVagina()) outputText("pussy");
         if (monster.hasVagina() && monster.hasCock()) outputText(" and ");
         if (monster.hasCock() > 0) outputText(" urethra");
-        outputText("molding yourself to cause [monster him] a maximum amount of pleasure and maximise the fluid output.");
-        if (monster.hasCock()) outputText("You gasp in delight as you reach the fresh cum storage of your opponent feeding straith from the tap wich cause [monster him] no short amount of pleasure as you mess [monster him] inside.");
+        outputText("molding yourself into various sex toys to cause [monster him] a maximum amount of pleasure and maximise the fluid output.");
         if (monster.hasVagina() && monster.hasCock()) outputText("Meanwhile, deep");
         if (monster.hasVagina() && !monster.hasCock()) outputText("Once deep");
-        if (monster.hasVagina()) outputText(" inside [monster his] vagina, you begin viciously bumping into as many of [monster his] sensitive spot as you can going past the cervix straith into [monster his] womb, coaxing numerous loud moans from your playtoy.");
-        outputText("Eventualy forcefull contractions force you back out of your opponent wich look like it barely survived your stay inside of [monster him]." +
-                "Aww thats to bad because this journey was quite delicious to you and you intend to go right back in first chance you get.");
+        if (monster.hasVagina()) outputText(" inside [monster his] vagina, you begin viciously bumping into as many of [monster his] sensitive spot, coaxing numerous loud moans from your partner.");
+        outputText("Eventualy forcefull contractions force you back out of your opponent wich look like it sure enjoyed it." +
+                "Thats nice because you intend to to do it again first chance you get.");
         StraddleDamage *= 1+(scalingBonusToughness()*2/100+scalingBonusLibido()*2/100);
         StraddleDamage = Math.round(StraddleDamage);
-        player.slimeFeed();
         monster.teased(monster.lustVuln * StraddleDamage, false);
         if (Randomcrit) outputText(" <b>Critical!</b>");
+    }
+
+    public function RandomTeaseSlimeInsert():void {
+        outputText("Hungry for fluids you begin to forcefully inject yourself into your opponent body using every availlable orifice as an entryway. ");
+        if (monster.hasCock()) outputText("Within seconds you reach the fresh cum storage of your opponent feeding straith from the tap wich cause [monster him] no short amount of pleasure as you mess [monster him] inside. ");
+        if (monster.balls > 0) outputText("Your victims balls double in size the veins pulsing as your slushing presense causes them to easily triple in volume. You get a firm grip on your victims gonad ready to milk them for what the are worth. ");
+        if (monster.hasVagina() && monster.hasCock()) outputText("Unsatisfied with your victim's cock alone, you go for the herm other treasure invading your victim deep");
+        if (monster.hasVagina() && !monster.hasCock()) outputText("Once deep");
+        if (monster.hasVagina()) outputText(" inside [monster his] vagina all the way past the servix and reaching into the womb.");
+        outputText("Whatever is left of you you pour straith into your victim ass, fully flooding [monster his] innards all the way to the stomach, causing your body to bloat your opponents belly. <b>Its snacking time!</b>");
+        var DurationLeft:int = player.statusEffectv1(StatusEffects.StraddleRoundLeft);
+        monster.createStatusEffect(StatusEffects.SlimeInsert, 2 + rand(3), DurationLeft, 0, 0);
+        player.removeStatusEffect(StatusEffects.StraddleRoundLeft);
+        monster.removeStatusEffect(StatusEffects.Straddle);
     }
 
     public function StraddleLeggoMyEggo():void {
@@ -9922,6 +9937,117 @@ public class Combat extends BaseContent {
                 EngineCore.changeFatigue(-(100 + (player.spe*2)));
                 player.displacerFeed();
                 player.addStatusValue(StatusEffects.DisplacerPlug,3,+1);
+            }
+        }
+        //Nuttin honey
+        outputText("\n\n");
+        if (monster.lust >= monster.maxLust()) {
+            doNext(endLustVictory);
+            return;
+        }
+        enemyAI();
+    }
+
+    public function SlimeRapeFeed():void {
+        clearOutput();
+        if (monster.lustVuln == 0) {
+            outputText("Despite your best effort you can't seem to stimulate your opponent using your fluidic body. Your foe clearly does not experience lust in the same way as you.\n\n");
+            enemyAI();
+            return;
+        }
+        //(Otherwise)
+        else {
+            wrathregeneration();
+            fatigueRecovery();
+            manaregeneration();
+            soulforceregeneration();
+            var damage:Number;
+            var bimbo:Boolean = false;
+            var bro:Boolean = false;
+            var futa:Boolean = false;
+            //==============================
+            //Determine basic success chance.
+            //==============================
+            //10% for seduction perk
+            if (player.hasPerk(PerkLib.BimboBody)) bimbo = true;
+            if (player.hasPerk(PerkLib.BroBody)) bro = true;
+            if (player.hasPerk(PerkLib.FutaForm)) futa = true;
+            //==============================
+            //Determine basic damage.
+            //==============================
+            damage = 6 + rand(3);
+            if (player.hasPerk(PerkLib.SensualLover)) {
+                damage += 2;
+            }
+            if (player.hasPerk(PerkLib.Seduction)) damage += 5;
+            //+ slutty armor bonus
+            if (player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
+            if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+            //10% for bimbo shits
+            if (bimbo || bro || futa) {
+                damage += 5;
+            }
+            if (player.findPerk(PerkLib.FlawlessBody) >= 0) damage += 10;
+            damage += scalingBonusLibido() * 0.1;
+            damage += player.teaseLevel;
+            damage += rand(7);
+            //partial skins bonuses
+            switch (player.coatType()) {
+                case Skin.FUR:
+                    damage += (1 + player.newGamePlusMod());
+                    break;
+                case Skin.SCALES:
+                    damage += (2 * (1 + player.newGamePlusMod()));
+                    break;
+                case Skin.CHITIN:
+                    damage += (3 * (1 + player.newGamePlusMod()));
+                    break;
+                case Skin.BARK:
+                    damage += (4 * (1 + player.newGamePlusMod()));
+                    break;
+            }
+            outputText("You begin to forcefully rape " + monster.capitalA + monster.short +" from the inside wrecking [monster his] body as you attempt to extract fluids from [monster his] abused genitals.");
+            //NERF TEASE DAMAGE
+            damage += scalingBonusLibido();
+            damage *= 0.25;
+            damage = Math.round(damage);
+            var damagemultiplier:Number = 1;
+            if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += historyWhoreBonus();
+            if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
+            if (player.hasPerk(PerkLib.SuperSensual)) damagemultiplier += 0.5;
+            if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= 1.50;
+            if (player.hasPerk(PerkLib.Apex)) damagemultiplier *= 1.50;
+            if (player.hasPerk(PerkLib.AlphaAndOmega)) damagemultiplier *= 1.50;
+            if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
+            damage *= damagemultiplier;
+            //Determine if critical tease!
+            var crit:Boolean = false;
+            var critChance:int = 5;
+            if (player.hasPerk(PerkLib.CriticalPerformance)) {
+                if (player.lib <= 100) critChance += player.lib / 5;
+                if (player.lib > 100) critChance += 20;
+            }
+            if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+            if (rand(100) < critChance) {
+                crit = true;
+                damage *= 1.75;
+            }
+            monster.teased(monster.lustVuln * damage, false);
+            if (crit) outputText(" <b>Critical!</b>");
+            teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+            if (monster.lust>100)
+            {
+                outputText("\n\nYour partner cums, achieving orgasm from excessive arousal. You drool in bliss as an extra huge load of fluids is injected into your body.");
+                if (player.hunger < player.maxHunger())
+                {
+                    player.refillHunger(10, false);
+                }
+                if (player.HP < player.maxHP()) {
+                    EngineCore.HPChange(100 + (player.tou*2), true);
+                }
+                EngineCore.changeFatigue(-(100 + (player.spe*2)));
+                player.slimeFeed();
+                player.addStatusValue(StatusEffects.SlimeInsert,3,+1);
             }
         }
         //Nuttin honey
