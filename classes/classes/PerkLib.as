@@ -3503,6 +3503,8 @@ public class PerkLib
 				"Regular fist attacks now have a chance to cause stun and fist damage is increased by 5 (x NG tier).");
 		public static const Misdirection:PerkType = mk("Misdirection", "Misdirection",
 				"Grants additional evasion chances while wearing Raphael's red bodysuit.");
+		public static const MorphicWeaponry:PerkType = mk("Morphic Weaponry", "Morphic Weaponry",
+				"Gains a number of extra tentacle-like natural weapon attacks based on your level (+1 per 10 level).");
 		public static const OmnibusGift:PerkType = mk("Omnibus' Gift", "Omnibus' Gift",
 				"Increases minimum lust but provides some lust resistance.");
 		public static const OneTrackMind:PerkType = mk("One Track Mind", "One Track Mind",

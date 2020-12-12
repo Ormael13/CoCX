@@ -3539,13 +3539,13 @@ public class Combat extends BaseContent {
             }
             //DOING EXTRA CLAW ATTACKS
             if (player.haveNaturalClaws()) {
-                var DamageMultiplier:Number = 1;
-                if (player.arms.type == Arms.FROSTWYRM) DamageMultiplier = 2;
+                var ClawDamageMultiplier:Number = 1;
+                if (player.arms.type == Arms.FROSTWYRM) ClawDamageMultiplier = 2;
                 if (player.arms.type != Arms.MANTIS && player.arms.type != Arms.KAMAITACHI){
                     outputText("You claw viciously at your opponent tearing away at its flesh.");
                 }
                 else {
-                    DamageMultiplier *= 1.5;
+                    ClawDamageMultiplier *= 1.5;
                     outputText("You slash at your opponent with your scythes leaving deep wounds");
                     if (player.arms.type == Arms.KAMAITACHI){
                         outputText(" that bleeds profusely");
@@ -3553,12 +3553,12 @@ public class Combat extends BaseContent {
                     outputText(".");
                 }
                 if (player.arms.type == Arms.KAMAITACHI){
-                    ExtraNaturalWeaponAttack(DamageMultiplier, "KamaitachiScythe");
-                    ExtraNaturalWeaponAttack(DamageMultiplier, "KamaitachiScythe");
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe");
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe");
                 }
                 else{
-                    ExtraNaturalWeaponAttack(DamageMultiplier);
-                    ExtraNaturalWeaponAttack(DamageMultiplier);
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier);
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier);
                 }
                 outputText("\n");
                 if (player.arms.type == Arms.WOLF && player.hasPerk(PerkLib.Lycanthropy)){
@@ -3695,6 +3695,18 @@ public class Combat extends BaseContent {
                     ExtraNaturalWeaponAttack();
                     outputText("\n");
                 }
+            }
+            //Unique attack Slime
+            if (player.hasPerk(PerkLib.MorphicWeaponry)) {
+                outputText("You form tentacles out of your slimy body and batter your opponent with them.");
+                var TentacleDamageMultiplier:Number = Math.round(player.level/10);
+                ExtraNaturalWeaponAttack(0.5);
+            }
+
+            //Unique attack Alraune
+            if (player.lowerBody == LowerBody.FLOWER_LILIRAUNE || player.lowerBody == LowerBody.PLANT_FLOWER) {
+                outputText("You lash at your opponent with your many vines striking twele times.");
+                ExtraNaturalWeaponAttack(6);
             }
         }
         // Do all other attacks

@@ -521,6 +521,19 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.rearBody.type = RearBody.NONE;
 				needNext = true;
 			}
+			if (!player.findPerk(PerkLib.MorphicWeaponry) && (player.darkgooScore() >= 17 || player.gooScore() >= 15 || player.magmagooScore() >= 17) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") > 50){
+				player.createPerk(PerkLib.MorphicWeaponry,0,0,0,0);
+				outputText("\nYour body has become so bloated with fluids and so large that you gain the ability to use your excess mass to form any number of additionnal tendrils wich you can use to attack your opponents.\n(<b>Gained New Perk: Morphic Weaponry.</b>\n>\n");
+			}
+			if (player.findPerk(PerkLib.MorphicWeaponry) && ((player.darkgooScore() >= 17 && player.gooScore() >= 15 && player.magmagooScore() >= 17) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") <= 50)){
+				player.removePerk(PerkLib.MorphicWeaponry);
+				if((player.darkgooScore() >= 17 && player.gooScore() >= 15 && player.magmagooScore() >= 17)){
+					outputText("\nAs you are mo longuer a slime, you can't use the morphic weaponry ability anymore.\n(<b>Lost Perk: Morphic Weaponry.</b>\n>\n");
+				}
+				else{
+					outputText("\nHaving lost fluids, you no longuer have enought body mass to produce extra tendril attacks.\n(<b>Lost Perk: Morphic Weaponry.</b>\n>\n");
+				}
+			}
 			if (player.hasStatusEffect(StatusEffects.Fullness)) {
 				player.addStatusValue(StatusEffects.Fullness, 1, -1);
 				if (player.statusEffectv1(StatusEffects.Fullness) <= 0) player.removeStatusEffect(StatusEffects.Fullness);
