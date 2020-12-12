@@ -10342,7 +10342,7 @@ public class Combat extends BaseContent {
             return;
         }
         if (monster.hasStatusEffect(StatusEffects.AlrauneRunDisabled)) {
-            if (player.hasKeyItem("Torch") > 0){
+            if (player.hasKeyItem("Torch")){
                 clearOutput();
                 outputText("You burn away the vines and run for it, much to the frustration of the [monster name]. You’re thankful that she’s this slow.\n");
                 inCombat = false;
