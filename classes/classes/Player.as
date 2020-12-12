@@ -12431,9 +12431,9 @@ use namespace CoC;
 						buff("Fluid Growth").addStats({"int.mult": 0.02}).withText("Fluid Growth!");
 					}
 				} else {
-					buff("Fluid Growth").addStats({"tou.mult": 0.02}).withText("Fluid Growth!");
+					buff("Fluid Growth").addStats({"tou.mult": 0.01}).withText("Fluid Growth!");
 					if (hasPerk(PerkLib.DarkSlimeCore)){
-						buff("Fluid Growth").addStats({"int.mult": 0.02}).withText("Fluid Growth!");
+						buff("Fluid Growth").addStats({"int.mult": 0.01}).withText("Fluid Growth!");
 					}
 				}
 			}
