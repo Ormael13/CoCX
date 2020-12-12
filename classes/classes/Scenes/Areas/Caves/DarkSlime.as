@@ -149,8 +149,7 @@ use namespace CoC;
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			/*if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) */SceneLib.dungeons.ebonlabyrinth.defeatedByDarkSlime();
-			//else SceneLib.lake.gooGirlScene.getBeatByGooGirl();
+			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) SceneLib.dungeons.ebonlabyrinth.defeatedByDarkSlime();
 		}
 		
 		public function DarkSlime() 

@@ -467,7 +467,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		private function pitchTorch():void {
 			spriteSelect(23);
 			clearOutput();
-			if (player.hasKeyItem("Torch") >= 0) {
+			if (player.hasKeyItem("Torch") > 0) {
 				outputText("<b>You already have Torch.</b>");
 				doNext(bookMenu);
 				return;

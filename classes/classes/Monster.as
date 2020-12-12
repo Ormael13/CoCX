@@ -1775,6 +1775,21 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.DisplacerPlug, 1, -1);
 				return false;
 			}
+			if (hasStatusEffect(StatusEffects.SlimeInsert)) {
+				EngineCore.outputText("" + capitalA + short + " struggle to force you out of [monster his] body.");
+				if (statusEffectv1(StatusEffects.SlimeInsert) <= 0) {
+					EngineCore.outputText("" + capitalA + short +" struggle to force you out of [monster his] body.");
+					if (statusEffectv3(StatusEffects.SlimeInsert) >= 1) {
+						EngineCore.outputText("You drool in pleasure, your opponent fluids still floating within your body.");
+					} else {
+						EngineCore.outputText("You sigh in frustration as you couldn't extract anything from your unwilling partner.");
+					}
+					createStatusEffect(StatusEffects.Straddle, statusEffectv2(StatusEffects.SlimeInsert),0,0,0);
+					removeStatusEffect(StatusEffects.SlimeInsert);
+				}
+				addStatusValue(StatusEffects.SlimeInsert, 1, -1);
+				return false;
+			}
 			else if (player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) {
 			EngineCore.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.");
 			if (statusEffectv1(StatusEffects.ConstrictedScylla) <= 0) {

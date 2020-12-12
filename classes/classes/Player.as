@@ -893,7 +893,7 @@ use namespace CoC;
 				|| tail.type == Tail.GARGOYLE || tail.type == Tail.GARGOYLE_2 || tail.type == Tail.MANTICORE_PUSSYTAIL
 				|| tail.type == Tail.SCORPION || tail.type == Tail.BEE_ABDOMEN || lowerBody == LowerBody.FROSTWYRM
 				|| lowerBody == LowerBody.NAGA);}
-		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack());}
+		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasPerk(PerkLib.MorphicWeaponry) || isAlraune());}
 		//Some other checks
 		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 12); }
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }
@@ -6060,13 +6060,15 @@ use namespace CoC;
 					darkgooCounter++;
 				if (lowerBody == LowerBody.GOO)
 					darkgooCounter += 3;
+				if (eyes.colour = "red")
+					darkgooCounter ++;
 				if (rearBody.type == RearBody.METAMORPHIC_GOO)
 					darkgooCounter += 2;
 				if (hasGooSkin() && skinAdj == "slimy") {
 					darkgooCounter++;
 					if (faceType == Face.HUMAN)
 						darkgooCounter++;
-					if (eyes.type == Eyes.HUMAN || eyes.type == Eyes.DEVIL)
+					if (eyes.type == Eyes.HUMAN || eyes.type == Eyes.FIENDISH)
 						darkgooCounter++;
 					if (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN)
 						darkgooCounter++;
@@ -6086,8 +6088,8 @@ use namespace CoC;
 				darkgooCounter++;
 			if (hasStatusEffect(StatusEffects.SlimeCraving))
 				darkgooCounter++;
-			//if (findPerk(PerkLib.SlimeCore) >= 0)
-			//	darkgooCounter++;
+			if (findPerk(PerkLib.DarkSlimeCore) >= 0)
+				darkgooCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				darkgooCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && darkgooCounter >= 4)
@@ -9859,6 +9861,7 @@ use namespace CoC;
 					createStatusEffect(StatusEffects.SlimeCravingFeed,0,0,0,0);
 				}
 				refillHunger(30);
+				slimeGrowth();
 			}
 			if (findPerk(PerkLib.Diapause) >= 0) {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] += 3 + rand(3);
@@ -12410,6 +12413,27 @@ use namespace CoC;
 				} else {
 					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < 0.50) {
 						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(10);
+					}
+				}
+			}
+			EngineCore.HPChange(Math.round(maxHP() * .2), true);
+			cumOmeter(40);
+			cor += 2;
+			refillHunger(100);
+		}
+
+		public function slimeGrowth():void {
+			if (hasStatusEffect(StatusEffects.SlimeCraving)) {
+				var time:Number = 4;
+				if (hasPerk(PerkLib.SlimeMetabolismEvolved)) {
+					buff("Fluid Growth").addStats({"tou.mult": 0.02}).withText("Fluid Growth!");
+					if (hasPerk(PerkLib.DarkSlimeCore)){
+						buff("Fluid Growth").addStats({"int.mult": 0.02}).withText("Fluid Growth!");
+					}
+				} else {
+					buff("Fluid Growth").addStats({"tou.mult": 0.01}).withText("Fluid Growth!");
+					if (hasPerk(PerkLib.DarkSlimeCore)){
+						buff("Fluid Growth").addStats({"int.mult": 0.01}).withText("Fluid Growth!");
 					}
 				}
 			}
