@@ -6060,13 +6060,15 @@ use namespace CoC;
 					darkgooCounter++;
 				if (lowerBody == LowerBody.GOO)
 					darkgooCounter += 3;
+				if (eyes.colour = "red")
+					darkgooCounter ++;
 				if (rearBody.type == RearBody.METAMORPHIC_GOO)
 					darkgooCounter += 2;
 				if (hasGooSkin() && skinAdj == "slimy") {
 					darkgooCounter++;
 					if (faceType == Face.HUMAN)
 						darkgooCounter++;
-					if (eyes.type == Eyes.HUMAN || eyes.type == Eyes.DEVIL)
+					if (eyes.type == Eyes.HUMAN || eyes.type == Eyes.FIENDISH)
 						darkgooCounter++;
 					if (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN)
 						darkgooCounter++;
@@ -6086,8 +6088,8 @@ use namespace CoC;
 				darkgooCounter++;
 			if (hasStatusEffect(StatusEffects.SlimeCraving))
 				darkgooCounter++;
-			//if (findPerk(PerkLib.SlimeCore) >= 0)
-			//	darkgooCounter++;
+			if (findPerk(PerkLib.DarkSlimeCore) >= 0)
+				darkgooCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				darkgooCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && darkgooCounter >= 4)
@@ -9864,6 +9866,7 @@ use namespace CoC;
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] += 3 + rand(3);
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 1;
 			}
+			slimeGrowth();
 			if (isGargoyle() && hasPerk(PerkLib.GargoyleCorrupted)) refillGargoyleHunger(30);
 			if (jiangshiScore() >= 20 && hasPerk(PerkLib.EnergyDependent)) EnergyDependentRestore();
 		}
@@ -12410,6 +12413,26 @@ use namespace CoC;
 				} else {
 					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < 0.50) {
 						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(10);
+					}
+				}
+			}
+			EngineCore.HPChange(Math.round(maxHP() * .2), true);
+			cumOmeter(40);
+			cor += 2;
+			refillHunger(100);
+		}
+
+		public function slimeGrowth():void {
+			if (hasStatusEffect(StatusEffects.SlimeCraving)) {
+				if (findPerk(PerkLib.SlimeMetabolismEvolved) >= 0) {
+					buff("Fluid Growth").addStats({"tou.mult": 0.02}).withText("Fluid Growth!").forHours(10);
+					if (hasPerk(PerkLib.DarkSlimeCore)){
+						buff("Fluid Growth").addStats({"int.mult": 0.02}).withText("Fluid Growth!").forHours(10);
+					}
+				} else {
+					buff("Fluid Growth").addStats({"tou.mult": 0.02}).withText("Fluid Growth!").forHours(10);
+					if (hasPerk(PerkLib.DarkSlimeCore)){
+						buff("Fluid Growth").addStats({"int.mult": 0.02}).withText("Fluid Growth!").forHours(10);
 					}
 				}
 			}

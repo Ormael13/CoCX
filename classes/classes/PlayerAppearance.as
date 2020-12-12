@@ -1815,6 +1815,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your eyes are similar to those of a cat, with slit pupils. However, their [eyecolor] iris dismiss any links to the regular felines in favor of something way more ominous.");
 		else if(eyeType == Eyes.FOX)
 			outputText("  Your [eyecolor] eyes looks like those of a fox with a slit in the middle.");
+		else if(eyeType == Eyes.FIENDISH)
+			outputText("  Your [eyecolor] eyes looks like those of a fiend with a slit in the middle.");
 		else if(eyeType == Eyes.REPTILIAN)
 			outputText("  Your eyes looks like those of a reptile with [eyecolor] irises and a slit.");
 		else if(eyeType == Eyes.SNAKE)

@@ -6,15 +6,19 @@ package classes.Scenes.Areas.Caves
 {
 	import classes.*;
 	import classes.Items.Shields.DarkAegis;
-	import classes.internals.*;
+import classes.Scenes.Dungeons.EbonLabyrinth;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 	
 	public class DarkSlimeScene extends BaseContent
 	{
-		
+		public var elDarkSlime:EbonLabyrinth = new EbonLabyrinth();
 		public function DarkSlimeScene() 
 		{
 		}
+
+
 
 public function cavesDarkSlimeEncounter():void {
 	clearOutput();
@@ -43,15 +47,23 @@ public function beatingDarkSlime():void {
 	clearOutput();
 	outputText("You smirk as the creature falls to the ground, flattened in every possible way.\n\n");
 	outputText("\"<i>L..look I did not mean to try and eat you… I mean yes I did but it’s just the instincts I need fluids and…</i>\"\n\n");
+	outputText("The slime now clearly defeated you consider your options. You could rape her but then realise it might as well be EXACTLY what she wants. Heck there's no telling if she won’t turn the table on you. What do you do with her?");
 	menu();
 	addButton(1, "Scram", beatingDarkSlimeScram);
 	addButton(2, "Use her", beatingDarkSlimeUseHer);
+	addButton(3, "Letz rape", LetzRape);
 }
+
+public function LetzRape():void {
+	SceneLib.dungeons.ebonlabyrinth.defeatedByDarkSlimeLetHer(true)
+}
+
 public function beatingDarkSlimeScram():void {
 	clearOutput();
 	outputText("You silence her pathetic excuses and tell her to get the fuck away. Something to which she gladly complies with.\n\n");
 	cleanupAfterCombat();
 }
+
 public function beatingDarkSlimeUseHer():void {
 	clearOutput();
 	outputText("You silence her pathetic excuses and tell her to regain shape right fucking now, the fun is about to begin.\n\n");
@@ -66,14 +78,17 @@ public function beatingDarkSlimeUseHer():void {
 	addButton(1, "Nope", beatingDarkSlimeUseHerNope);
 	addButton(2, "Fill", beatingDarkSlimeUseHerFillMyAssWithGoo).hint("Fill my ass with goo");
 }
+
 public function beatingDarkSlimeUseHerNope():void {
 	outputText("Nah no anal for today.\n\n");
 	beatingDarkSlimeUseHer2();
 }
+
 public function beatingDarkSlimeUseHerFillMyAssWithGoo():void {
 	outputText("Yea some anal would be appreciated too. Your malleable toy gets the message and slowly floods into your pucker widening inside in just the right way.\n\n");
 	beatingDarkSlimeUseHer2();
 }
+
 public function beatingDarkSlimeUseHer2():void {
 	outputText("Regardless of the number of tendrils massaging you in every right way, your having one hell of a great session. The slime is pleasing you in a rhythmic tempo not unlike that of your heartbeat its body pulsing with every small drop of fluid you produce. At this rate, you won’t be able to hold off any further and the slime knowing it speeds up its pace eager for the reward.\n\n");
 	outputText("You cum magnificently your fluids mixing and flooding in the slime’s body mass. You almost doze off to sleep too but the mass of the slime moving off from you jar you awake, guess she does not double up as a real bed for resting purposes. She waves off goodbye as she takes her departure leaving you there to ponder who truly raped who.\n\n");

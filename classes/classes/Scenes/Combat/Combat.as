@@ -328,7 +328,7 @@ public class Combat extends BaseContent {
     }
 
 //combat is over. Clear shit out and go to main
-    public function cleanupAfterCombatImpl(nextFunc:Function = null):void {
+    public function cleanupAfterCombatImpl(nextFunc:Function = null, gemloss:Boolean = true, gemGain:Boolean = true):void {
         magic.cleanupAfterCombatImpl();
         if (nextFunc == null) nextFunc = camp.returnToCampUseOneHour;
         if (prison.inPrison && prison.prisonCombatWinEvent != null) nextFunc = prison.prisonCombatWinEvent;
@@ -378,7 +378,7 @@ public class Combat extends BaseContent {
                 if (gemsLost > player.gems) gemsLost = player.gems;
                 var timePasses:int = monster.handleCombatLossText(inDungeon, gemsLost); //Allows monsters to customize the loss text and the amount of time lost
                 if (player.hasStatusEffect(StatusEffects.SoulArena) || (monster.short == "Hellfire Snail" && player.hasPerk(PerkLib.FireAffinity))) timePasses = 1;
-                player.gems -= gemsLost;
+                if (gemloss) player.gems -= gemsLost;
                 if (monster.perkv3(PerkLib.NoGemsLost) > 0) player.gems += monster.perkv3(PerkLib.NoGemsLost);
                 inCombat = false;
                 if (player.hasStatusEffect(StatusEffects.SoulArena)) player.removeStatusEffect(StatusEffects.SoulArena);
@@ -10204,7 +10204,7 @@ public class Combat extends BaseContent {
             return;
         }
         if (monster.hasStatusEffect(StatusEffects.AlrauneRunDisabled)) {
-            if (player.hasKeyItem("Torch")){
+            if (player.hasKeyItem("Torch") > 0){
                 clearOutput();
                 outputText("You burn away the vines and run for it, much to the frustration of the [monster name]. You’re thankful that she’s this slow.\n");
                 inCombat = false;
@@ -11017,4 +11017,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib);
     }
 }
-}
+}
