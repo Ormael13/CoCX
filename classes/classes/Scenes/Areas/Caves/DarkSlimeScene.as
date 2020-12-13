@@ -8,6 +8,7 @@ package classes.Scenes.Areas.Caves
 	import classes.Items.Shields.DarkAegis;
 import classes.Scenes.Dungeons.EbonLabyrinth;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 	
@@ -21,7 +22,7 @@ import classes.internals.*;
 
 public function cavesDarkSlimeEncounter():void {
 	clearOutput();
-//	spriteSelect(32);
+    spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
 	if (player.gooScore() >= 11 || player.magmagooScore() >= 13 || player.darkgooScore() >= 13) {
 		outputText("You take the turn at the end of the cave and run right into a dark slime. For a few second the both of you consider each other before the slime shrugs and simply asks.\n\n");
 		outputText("\"<i>No luck finding fluids that way?</i>\"");
@@ -44,6 +45,7 @@ public function cavesDarkSlimeEncounter():void {
 
 public function beatingDarkSlime():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
 	outputText("You smirk as the creature falls to the ground, flattened in every possible way.\n\n");
 	outputText("\"<i>L..look I did not mean to try and eat you… I mean yes I did but it’s just the instincts I need fluids and…</i>\"\n\n");
 	outputText("The slime now clearly defeated you consider your options. You could rape her but then realise it might as well be EXACTLY what she wants. Heck there's no telling if she won’t turn the table on you. What do you do with her?");
@@ -59,12 +61,14 @@ public function LetzRape():void {
 
 public function beatingDarkSlimeScram():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
 	outputText("You silence her pathetic excuses and tell her to get the fuck away. Something to which she gladly complies with.\n\n");
 	cleanupAfterCombat();
 }
 
 public function beatingDarkSlimeUseHer():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
 	outputText("You silence her pathetic excuses and tell her to regain shape right fucking now, the fun is about to begin.\n\n");
 	outputText("The grape-colored jelly girl obeys without question molding itself into something you can fuck with.\n\n");
 	outputText("She makes a mischievous smile understanding that she may get that meal after all and turns into what appears to be a bed, with slimy sheets and a pillow. Well now, this is a most interesting proposal. You lay down in the slime bed and order her to show you her talents double time.\n\n");

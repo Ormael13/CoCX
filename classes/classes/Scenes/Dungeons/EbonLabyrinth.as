@@ -91,17 +91,20 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		}
 		public function defeatedByDarkSlime():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
 			menu();
 			outputText("As the dark slime approaches, it occurs to you that the only thing she is after are your fluids. You can either let her or struggle. What will you do?\n\n");
 			addButton(0, "Let her", defeatedByDarkSlimeLetHer);
 			addButton(1, "Struggle", defeatedByDarkSlimeStruggle);
-			if (!player.hasKeyItem("Torch")) {
+			//var test:Number = player.hasKeyItem("Torch");
+			if (player.hasKeyItem("Torch") < 0) {
 				addButtonDisabled(1, "Struggle", "You have nothing to hold her at bay!")
 			}
 		}
 
 		public function defeatedByDarkSlimeStruggle():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
 			outputText("You refuse to end up as a meal to a slime and, unable to pose a decent fight, you keep the thing at bay using a torch.\n\n");
 			outputText("\"<i>Not fair! Put that out, damn thing hurts like a bitch. Fucking knew I should have put more work on my fire wards!</i>\"\n\n");
 			outputText("Aha! So she can’t stand fire, huh? Well too bad for her, as you proceed to crawl away from the slime keeping the torch between you and her so she can’t approach. Eventually, you manage to stand up and begin running from the, somewhat disappointed, slime girl.\n\n");
@@ -109,6 +112,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		}
 		public function defeatedByDarkSlimeLetHer(letzRape:Boolean = false):void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
 			if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)){
 				outputText("The slime moves to you, licks you and then recoils in frustration.\n\n");
 				outputText("\"<i>Just what the hell have you done to your body! You’re outright inedible, I can’t actually eat that!" +
@@ -642,6 +646,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				if (choice == 1) {
 					//spriteSelect(25);
 					if (player.gooScore() >= 11 || player.magmagooScore() >= 13 || player.darkgooScore() >= 13) {
+						spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
 						outputText("You take the turn at the end of the corridor and run right into a dark slime. For a few second the both of you consider each other before the slime shrugs and simply asks.\n\n");
 						outputText("\"<i>No luck finding fluids that way?</i>\"");
 						outputText("You didn’t find any and if you did you would have pumped it out until it ran dry.\n\n");
@@ -649,6 +654,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 						outputText("Well that was easy… you can only guess slimes don’t get much out of other slimes’ bodies. You proceed deeper into the labyrinth unhindered, though, you wish you indeed had found someone to milk the fluids off.\n\n");
 					}
 					else {
+						spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
 						outputText("As you wander into a new corridor you come face to face with a purplish jelly-like woman. She giggles upon spotting you, her small, sphere-shaped core emitting an ominous light as she surges toward you with a gooey smile.\n\n");
 						outputText("\"<i>Dinner is served! Your fluids are mine, so surrender them now intruder and I promise to make it very pleasurable for you!</i>\"");
 						startCombat(new DarkSlime(), true);
