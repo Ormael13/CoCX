@@ -2648,7 +2648,7 @@ private function applyZenjikidName2():void {
 
 public function mishapsLunaZenji():void {
 	clearOutput();
-	outputText("You notice Zenji surveying the camp for potential danger. As he hops off the tree he usually resides on top of you notice a rope trap quickly close in on his ankle. Zenji is swept clean off his feet from the ground and hung upside down.\n\n");
+	outputText("You notice Zenji surveying the camp for potential danger. As he hops off the tree he usually resides on top of, you notice a rope trap quickly close in on his ankle. Zenji is swept clean off his feet from the ground and hung upside down.\n\n");
 	outputText("You notice a figure not too far off, trying to hold the rope up. You can’t quite see who it is from the bushes. Unfortunately, they must have underestimated just how much Zenji weighs as the rope slips from their hands.\n\n");
 	outputText("Zenji screams in terror as he drops several feet from the air, crashing down on his head. You wince the moment he crashes into the ground. Your gaze narrows on the figure hiding in the bushes, but they’ve already run away. You could’ve sworn you saw a made outfit or something, but it couldn’t have been Luna, right? It doesn’t matter as you rush to Zenji to make sure he’s alright.\n\n");
 	outputText("You inspect Zenji. He’s knocked completely unconscious but breathing steadily. It looks like he’ll be out of it for the time being.\n\n");

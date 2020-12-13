@@ -6,9 +6,9 @@ package classes.Scenes.Areas.Caves
 {
 	import classes.*;
 	import classes.Items.Shields.DarkAegis;
-import classes.Scenes.Dungeons.EbonLabyrinth;
-import classes.Scenes.SceneLib;
-import classes.internals.*;
+	//import classes.Scenes.Dungeons.EbonLabyrinth;
+	import classes.Scenes.SceneLib;
+	import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 	
 	public class DarkSlimeScene extends BaseContent

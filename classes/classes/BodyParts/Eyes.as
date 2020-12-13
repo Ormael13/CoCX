@@ -30,7 +30,7 @@ public class Eyes extends BodyPart {
 	public static const FIRE_SNAIL:int			 = 25;
 	public static const GHOST:int				 = 26;
 	public static const JIANGSHI:int			 = 27;
-	public static const GOAT:int			     = 28;
+	public static const GOAT:int			     = 28;//button 0 on 3rd page of metamorph
 	public static const CENTIPEDE:int			 = 29;
 	public static const KRAKEN:int			     = 30;
 	public static const FROSTWYRM:int			 = 31;

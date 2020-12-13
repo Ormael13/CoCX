@@ -1087,24 +1087,27 @@ public function kaibaShopMainMenu2():void {
 	if (flags[kFLAGS.KAIBA_1] == 0) addButton(0, "UnDefKingS", buyItem, jewelries.UNDKINS).hint("Undefeated King's Signet - Increase max wrath by 100. When worn on right hand (slot 1 and 3 for rings) would have additional effects: increase max wrath by another 100 (with base bonus it's +200), generate 6/3 wrath per turn/hour, increase multiplied on Power Attack damage by 1.");
 	if (flags[kFLAGS.KAIBA_1] == 1) addButton(0, "CroUndefKing", buyItem, headjewelries.CUNDKIN).hint("Crown of the Undefeated King - You can't loose by HP until reaching droping into negative health larger than 5% of max HP + 500(scalable). When below 0 HP PC would gain additional 1% of max HP per turn regeneration effect.");
 	if (flags[kFLAGS.KAIBA_1] == 2) addButton(0, "UnDefKingDest", buyItem, weapons.UDKDEST).hint("Undefeated King's Destroyer - Massive mace weapon that will increase PC parry chance by 20%. Have 20% base chance for stun (3 rounds).");
-	//Slot 2 Any one of the following: Flame Lizard ring, Infernal Mouse ring
+	//Slot 2 Any one of the following: Flame Lizard ring, Infernal Mouse ring, Crinos Shape necklace, Berzerker Armor
 	if (flags[kFLAGS.KAIBA_2] == 0) addButton(1, "FlameLizR", buyItem, jewelries.FLLIRNG).hint("Flame Lizard ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
 	if (flags[kFLAGS.KAIBA_2] == 1) addButton(1, "InferMouseR", buyItem, jewelries.INMORNG).hint("Infernal Mouse ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Blazing battle spirit.");
+	if (flags[kFLAGS.KAIBA_2] == 2) addButton(1, "C.S.Necklace", buyItem, necklaces.CSNECK).hint("Crinos Shape necklace - Allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior.");
+    if (flags[kFLAGS.KAIBA_2] == 3) addButton(1, "B.Armor", buyItem, armors.BERA).hint("Berzerker Armor -  Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.");
 	//Slot 3 Any one of the following: Ring of deadeye aim, Ring of Ambidexty
 	if (flags[kFLAGS.KAIBA_3] == 0) addButton(2, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Remove range accuracy penalty when flying and increase range accuracy by 20%.");
 	if (flags[kFLAGS.KAIBA_3] == 1) addButton(2, "R.Ambidexty", buyItem, jewelries.RNGAMBI).hint("Ring of Ambidexty - Remove melee accuracy penalty when flying and increase melee accuracy by 15%.");
-	//Slot 4 Any one of the following: 
-	//if (flags[kFLAGS.KAIBA_4] == 0) 
+	//Slot 4 Any one of the following: HB helmet, HB armor, HB mech
+	if (flags[kFLAGS.KAIBA_4] == 0) addButton(3, "HBHelmet", buyItem, headjewelries.HBHELM).hint("HB helmet - Increase armor by 5 and magic resistance by 4.");
+	if (flags[kFLAGS.KAIBA_4] == 1) addButton(3, "HBArmor", buyItem, armors.HBARMOR).hint("HB armor - Increasing it armor/resistance when power up by soulforce.");
+	//later put her lower body armor part of HB set
+	if (flags[kFLAGS.KAIBA_4] == 2) addButton(3, "HBMech", buyItem, vehicles.HB_MECH).hint("Howling Banshee Mech - Elven battle mech. Upgradable if you know any goblin willing to work on it.");
 	//Slot 5 Any one of the following: 
 	//if (flags[kFLAGS.KAIBA_5] == 0) 
 	
 	//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
-	addButton(6, "T.M.Outfit", buyItem, armors.TRMOUTF).hint("Traveling Merchant Outfit -  Increase all gems gained by 100% and increase the potency of gem based ability by 150%, reduce spellcasting cost by 60%.");
-	addButton(7, "W.I.Cloak", buyItem, armors.WALIC).hint("Walpurgis Izalia Cloak -  Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
-	addButton(8, "B.Armor", buyItem, armors.BERA).hint("Berzerker Armor -  Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.");
+	addButton(7, "T.M.Outfit", buyItem, armors.TRMOUTF).hint("Traveling Merchant Outfit -  Increase all gems gained by 100% and increase the potency of gem based ability by 150%, reduce spellcasting cost by 60%.");
+	addButton(8, "W.I.Cloak", buyItem, armors.WALIC).hint("Walpurgis Izalia Cloak -  Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
 	addButton(9, "S.S.Clothing", buyItem, armors.SCANSC).hint("Scandalous Succubus Clothing - Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.");
-	addButton(10, "C.S.Necklace", buyItem, necklaces.CSNECK).hint("Crinos Shape necklace - Allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior.");
-    addButton(11, "Soul Drill", buyItem, weapons.SDRILL).hint("Soul Drill - 1H large weapon that can deal more damage the more soulforce is feed to it each turn.");
+	addButton(11, "Soul Drill", buyItem, weapons.SDRILL).hint("Soul Drill - 1H large weapon that can deal more damage the more soulforce is feed to it each turn.");
 	addButton(12, "Hodr's bow", buyItem, weaponsrange.BOWHODR).hint("Hodr's bow - Bow that would apply blindess status or deal increased damage to blinded targets.");
 	addButton(13, "Avelynn", buyItem, weaponsrange.AVELYNN).hint("Avelynn - Crossbow that will shoot two additional bolts each time.");
 	addButton(14, "Leave", telAdreMenu);

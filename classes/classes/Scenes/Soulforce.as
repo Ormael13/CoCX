@@ -2550,7 +2550,7 @@ use namespace CoC;
 		}
 		public function AddHBAArmor():void {
 			outputText("\n\n<b>(Gained 1 HBA Armor!)</b>\n\n");
-			inventory.takeItem(armors.HBA_ARM, EquipmentMenu);
+			inventory.takeItem(armors.HBARMOR, EquipmentMenu);
 		}
 		public function AddYukiOnnaStuff():void {
 			outputText("\n\n<b>(Gained 1st Yuki Onna item!)</b>\n\n");
@@ -4004,7 +4004,7 @@ use namespace CoC;
 			//button 11
 			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) addButton(12, "Giacomo", findGiacomo).hint("Req. 100+ soulforce");
 			else addButtonDisabled(12, "Giacomo", "");
-			addButton(13, "???", theUnknown).hint("Draw into your soulforce for soulsensing.");
+			//addButton(13, "???", theUnknown).hint("Draw into your soulforce for soulsensing.");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		public function TamaniEnc():void {

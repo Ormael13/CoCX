@@ -547,9 +547,10 @@ public class HeXinDao extends BaseContent
         outputText("After entering the shop with a sign saying 'Equipment' over the doors you see a few shelves filled with various weapons, shields, armors and even more rare items like rings or necklaces. Behind the desk that looks like a central point of the shop you see a woman that seems to have mixed races traits. A shark face and a tail that sometimes show up on either side of the desk which is contrasting to its feather covered arms that are not looking at all like shark ones and more similar to bird wings.");
         outputText("\n\n\"<i>Greeting dear customer. I'm Serena and this is my humble shop. Look around and if something catch your eyes let me know,</i>\" she say all that almost on one breath after noticing your near.");
         menu();
-        addButton(1, "Shelf 1", soulequipmentshelf1);
-        addButton(2, "Shelf 2", soulequipmentshelf2);
-        addButton(3, "Shelf 3", soulequipmentshelf3);//armors and consumable
+        addButton(1, "Shelf 1", soulequipmentshelf1).hint("Misc");
+        addButton(2, "Shelf 2", soulequipmentshelf2).hint("Weapons");
+        addButton(3, "Shelf 3", soulequipmentshelf3).hint("Consumables");
+        addButton(4, "Shelf 4", soulequipmentshelf4).hint("Armors");
 		//addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
         //addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD
         //addButton(12, "Talk", ).hint("Tak with .");
@@ -599,10 +600,6 @@ public class HeXinDao extends BaseContent
     }
     public function soulequipmentshelf3():void {
         menu();
-        //if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(3, armors.LAYOARM.shortName, weaponBuy, armors.LAYOARM);
-        //addButton(1, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic armor made of soulmetal that works with unhindered perk xD czyli coś ala bikini lub ogólnie tylko underwear z fragmentami zbroi lewitującymi wokół postaci i tylko w wypadku ataku wroga przesuwające sie aby przyjąć atak
-        //addButton(2, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic light armor made of soulmetal
-        //addButton(0, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic heavy armor made of soulmetal
         if (player.level >= 6) addButton(5, consumables.BANGBM1.shortName, weaponBuy, consumables.BANGBM1);
 		else addButtonDisabled(5, "???", "Req. lvl 6+");
         if (player.level >= 24) addButton(6, consumables.BANGBM2.shortName, weaponBuy, consumables.BANGBM2);
@@ -627,6 +624,17 @@ public class HeXinDao extends BaseContent
 		}
         addButton(10, consumables.BANGB_M.shortName, weaponBuy, consumables.BANGB_M);
         addButton(11, consumables.W_STICK.shortName, weaponBuy, consumables.W_STICK);
+        addButton(14, "Back", serenamerchant);
+    }
+    public function soulequipmentshelf4():void {
+        menu();
+        if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(0, armors.LAYOARM.shortName, weaponBuy, armors.LAYOARM);
+		else addButtonDisabled(0, "???", "Req. Soul Apprentice");
+        if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(1, armors.HAYOARM.shortName, weaponBuy, armors.HAYOARM);
+		else addButtonDisabled(1, "???", "Req. Soul Personage");
+        //addButton(11, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic armor made of soulmetal that works with unhindered perk xD czyli coś ala bikini lub ogólnie tylko underwear z fragmentami zbroi lewitującymi wokół postaci i tylko w wypadku ataku wroga przesuwające sie aby przyjąć atak
+        //addButton(12, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic light armor made of soulmetal
+        //addButton(10, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic heavy armor made of soulmetal
         addButton(14, "Back", serenamerchant);
     }
 

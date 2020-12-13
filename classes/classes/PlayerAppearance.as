@@ -873,7 +873,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" and [shield] as your shield");
 		outputText(".");
 		if (player.headjewelryName != "nothing") {
-			if (player.headjewelryPerk == "Helm") outputText(" On your head is " + player.headjewelryName + ".");
+			if (player.headjewelryPerk == "Helmet") outputText(" On your head is " + player.headjewelryName + ".");
 			else outputText(" In your hair is " + player.headjewelryName + ".");
 		}
 		if (player.necklaceName != "nothing")

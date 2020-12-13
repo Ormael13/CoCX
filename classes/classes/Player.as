@@ -632,6 +632,7 @@ use namespace CoC;
 				}
 				armorDef += goblinbracerBonus;
 			}
+			if (headjewelryName == "HB helmet") armorDef += 5;
 			if (vehiclesName == "Goblin Mech Alpha") {
 				armorDef += 10;
 				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 5;
@@ -643,6 +644,12 @@ use namespace CoC;
 				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 10;
 				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 20;
 				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 30;
+			}
+			if (vehiclesName == "Howling Banshee Mech") {
+				armorDef += 15;
+				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 8;
+				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 16;
+				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 24;
 			}
 			armorDef = Math.round(armorDef);
 			//Berzerking removes armor
@@ -811,6 +818,7 @@ use namespace CoC;
 				}
 				armorMDef += goblinbracerBonus;
 			}
+			if (headjewelryName == "HB helmet") armorMDef += 4;
 			if (vehiclesName == "Goblin Mech Alpha") {
 				armorMDef += 10;
 				if (hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0) armorMDef += 5;
@@ -822,6 +830,12 @@ use namespace CoC;
 				if (hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0) armorMDef += 10;
 				if (hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0) armorMDef += 20;
 				if (hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0) armorMDef += 30;
+			}
+			if (vehiclesName == "Howling Banshee Mech") {
+				armorMDef += 15;
+				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorMDef += 8;
+				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorMDef += 16;
+				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorMDef += 24;
 			}
 			armorMDef = Math.round(armorMDef);
 			//Berzerking/Lustzerking removes magic resistance
@@ -1006,6 +1020,11 @@ use namespace CoC;
 		{
 			return weaponRange == game.weaponsrange.TRFATBI;//weaponRange == game.weaponsrange.TRFATBI ||
 		}
+		//Is in Ayo armor
+		public function isInAyoArmor():Boolean
+		{
+			return armorPerk == "Light Ayo" || armorPerk == "Heavy Ayo";
+		}
 		//Is in goblin mech
 		public function isInGoblinMech():Boolean
 		{
@@ -1017,7 +1036,16 @@ use namespace CoC;
 			return weaponRange == game.weaponsrange.ADBSCAT || weaponRange == game.weaponsrange.ADBSHOT || weaponRange == game.weaponsrange.BLUNDER || weaponRange == game.weaponsrange.DESEAGL || weaponRange == game.weaponsrange.DUEL_P_ || weaponRange == game.weaponsrange.FLINTLK || weaponRange == game.weaponsrange.HARPGUN || weaponRange == game.weaponsrange.IVIARG_
 			 || weaponRange == game.weaponsrange.M1CERBE || weaponRange == game.weaponsrange.TOUHOM3 || weaponRange == game.weaponsrange.TWINGRA || weaponRange == game.weaponsrange.TDPISTO || weaponRange == game.weaponsrange.DPISTOL;
 		}
-		//Is in ... mech (med sized races mech)(have upgrade option to allow smaller than medium races pilot it)
+		//Is in medium sized mech (med sized races mech)(have upgrade option to allow smaller than medium races pilot it)
+		public function isInMediumSizedMech():Boolean
+		{
+			return vehicles == game.vehicles.HB_MECH;// || vehicles == game.vehicles.GOBMPRI
+		}
+		//Is using howling banshee mech friendly range weapons
+		public function isUsingHowlingBansheeMechFriendlyRangeWeapons():Boolean
+		{
+			return weaponRangePerk == "Bow" || weaponRangePerk == "Crossbow";
+		}
 		//Is in ... mech (large sized races mech)(have upgrade option to allow smaller than large races pilot it)
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
@@ -1915,7 +1943,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.ImmovableObject) && tou >= 75) {
 				mult -= 10;
 			}
-			if (hasPerk(PerkLib.AyoArmorProficiency) && tou >= 75 && armorPerk == "Ayo") {
+			if (hasPerk(PerkLib.AyoArmorProficiency) && tou >= 75 && (armorPerk == "Light Ayo" || armorPerk == "Heavy Ayo")) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.HeavyArmorProficiency) && tou >= 75 && armorPerk == "Heavy") {
@@ -1951,6 +1979,13 @@ use namespace CoC;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
+			if (jewelryEffectId == JewelryLib.MODIFIER_PHYS_R) mult -= jewelryEffectMagnitude;
+			if (jewelryEffectId2 == JewelryLib.MODIFIER_PHYS_R) mult -= jewelryEffectMagnitude2;
+			if (jewelryEffectId3 == JewelryLib.MODIFIER_PHYS_R) mult -= jewelryEffectMagnitude3;
+			if (jewelryEffectId4 == JewelryLib.MODIFIER_PHYS_R) mult -= jewelryEffectMagnitude4;
+			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_PHYS_R) mult -= headjewelryEffectMagnitude;
+			if (necklaceEffectId == NecklaceLib.MODIFIER_PHYS_R) mult -= necklaceEffectMagnitude;
+			if (jewelryEffectId == JewelryLib.MODIFIER_PHYS_R && jewelryEffectId2 == JewelryLib.MODIFIER_PHYS_R && jewelryEffectId3 == JewelryLib.MODIFIER_PHYS_R && jewelryEffectId4 == JewelryLib.MODIFIER_PHYS_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_PHYS_R && necklaceEffectId == NecklaceLib.MODIFIER_PHYS_R) mult -= 9;
 			//Defend = 35-95% reduction
 			if (hasStatusEffect(StatusEffects.Defend)) {
 				if (hasPerk(PerkLib.DefenceStance) && tou >= 80) {
@@ -2088,6 +2123,13 @@ use namespace CoC;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
+			if (jewelryEffectId == JewelryLib.MODIFIER_MAGIC_R) mult -= jewelryEffectMagnitude;
+			if (jewelryEffectId2 == JewelryLib.MODIFIER_MAGIC_R) mult -= jewelryEffectMagnitude2;
+			if (jewelryEffectId3 == JewelryLib.MODIFIER_MAGIC_R) mult -= jewelryEffectMagnitude3;
+			if (jewelryEffectId4 == JewelryLib.MODIFIER_MAGIC_R) mult -= jewelryEffectMagnitude4;
+			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_MAGIC_R) mult -= headjewelryEffectMagnitude;
+			if (necklaceEffectId == NecklaceLib.MODIFIER_MAGIC_R) mult -= necklaceEffectMagnitude;
+			if (jewelryEffectId == JewelryLib.MODIFIER_MAGIC_R && jewelryEffectId2 == JewelryLib.MODIFIER_MAGIC_R && jewelryEffectId3 == JewelryLib.MODIFIER_MAGIC_R && jewelryEffectId4 == JewelryLib.MODIFIER_MAGIC_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_MAGIC_R && necklaceEffectId == NecklaceLib.MODIFIER_MAGIC_R) mult -= 6;
 			//Defend = 35-95% reduction
 			if (hasStatusEffect(StatusEffects.Defend)) {
 				if (hasPerk(PerkLib.DefenceStance) && tou >= 80) {
@@ -5866,6 +5908,8 @@ use namespace CoC;
 				gremlinCounter++;
 			if (hairType == Hair.CRAZY)
 				gremlinCounter++;
+			if (eyes.type == Eyes.GREMLIN && (eyes.colour == "red" || eyes.colour == "yellow" || eyes.colour == "purple" || eyes.colour == "orange"))
+				gremlinCounter++;
 			if (tallness < 48)
 				gremlinCounter+=2;
 			if (hasVagina())
@@ -5873,8 +5917,6 @@ use namespace CoC;
 			if (hasPlainSkinOnly()) {
 				gremlinCounter++;
 				if (skinTone == "light" || skinTone == "tan" || skinTone == "dark")
-					gremlinCounter++;
-				if (eyes.type == Eyes.GREMLIN && (eyes.colour == "red" || eyes.colour == "yellow" || eyes.colour == "purple" || eyes.colour == "orange"))
 					gremlinCounter++;
 				if (hairColor == "emerald" || hairColor == "green" || hairColor == "dark green" || hairColor == "aqua" || hairColor == "light green")
 					gremlinCounter++;

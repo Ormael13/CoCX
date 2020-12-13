@@ -1454,7 +1454,9 @@ public class Combat extends BaseContent {
     public function basemechmeleeattacks():void {
         flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
         clearOutput();
-        if (player.isInGoblinMech()) var weapon:String = "sawblade";
+        var weapon:String = "";
+        if (player.isInGoblinMech()) weapon = "saw blade";
+		if (player.vehicles == vehicles.HB_MECH) weapon = "power blade";
         if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0 && !isWieldingRangedWeapon()) {
             outputText("You attempt to attack, but at the last moment your mech wrenches away, preventing you from even coming close to landing a blow!  ");
             if (monster is ChaosChimera) outputText("Curse");
@@ -1559,11 +1561,14 @@ public class Combat extends BaseContent {
             enemyAI();
             return;
         }
-        if (player.isInGoblinMech()) meleeDamageAccSawblade();
+        baseMechMeleeAttacksDamage();
     }
 
-    public function meleeDamageAccSawblade():void {
+    public function baseMechMeleeAttacksDamage():void {
         var damage:Number = 0;
+		var weapon:String = "";
+        if (player.isInGoblinMech()) weapon = "saw blade";
+		if (player.vehicles == vehicles.HB_MECH) weapon = "twin power blades";
         //------------
         // DAMAGE
         //------------
@@ -1572,11 +1577,16 @@ public class Combat extends BaseContent {
         damage += player.str;
         damage += scalingBonusStrength() * 0.25;
         if (damage < 10) damage = 10;
-        damage *= 1.3;
-        if (player.armor == armors.GTECHC_) damage *= 1.5;
-        if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
-        if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
-        if (player.vehicles == vehicles.GOBMPRI) damage *= 1.5;
+		if (player.isInGoblinMech()) {
+			damage *= 1.3;
+			if (player.armor == armors.GTECHC_) damage *= 1.5;
+			if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
+			if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
+			if (player.vehicles == vehicles.GOBMPRI) damage *= 1.5;
+		}
+        if (player.vehicles == vehicles.HB_MECH) {
+			
+		}
         //Bonus sand trap damage!
         if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
         //Determine if critical hit!
@@ -1600,20 +1610,19 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
             if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
             if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
-            if (player.hasPerk(PerkLib.GoblinoidBlood)) {
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.isInGoblinMech()) {
                 if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
                 if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
                 if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
             }
         }
-
-
         if (damage <= 0) {
             damage = 0;
             outputText("Your attacks are deflected or blocked by [monster a] [monster name].");
         } else {
-            outputText("You activate the mech’s saw blade, intent on slicing your opponent in half. " + monster.capitalA + monster.short + " takes ");
-            damage = doDamage(damage, true, true);
+            outputText("You activate the mech’s "+weapon+", intent on slicing your opponent in half. " + monster.capitalA + monster.short + " takes ");
+            doDamage(damage, true, true);
+			if (player.vehicles == vehicles.HB_MECH) doDamage(damage, true, true);
             outputText(" damage.");
             if (crit) {
                 outputText("<b>Critical! </b>");
@@ -2179,6 +2188,7 @@ public class Combat extends BaseContent {
             if ((player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.ADBSHOT) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
             if (player.weaponRangePerk == "Dual Firearms") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 2;
         }
+		if (player.vehicles == vehicles.HB_MECH) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
 //	if (player.weaponRangePerk == "Rifle") {
         //fatigue(50, USEFATG_BOW);	//wstawić tutaj typ redukcji kosztów jak dla physical specials
 //	}
@@ -2222,7 +2232,7 @@ public class Combat extends BaseContent {
                 if (player.weaponRangePerk == "Crossbow") outputText("bolt");
                 if (player.weaponRangePerk == "Throwing") outputText("projectile");
                 if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") outputText("" + ammoWord + "");
-                if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2) outputText("s");
+				if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2) outputText("s");
                 outputText(" thunks into Isabella's shield, completely blocked by the wall of steel.\n\n");
             }
             if (SceneLib.isabellaFollowerScene.isabellaAccent())
@@ -2283,13 +2293,14 @@ public class Combat extends BaseContent {
         }
         if (player.weaponRangePerk == "Throwing") throwWeapon();
         if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") shootWeapon();
+		if (player.vehicles == vehicles.HB_MECH) multiArrowsStrike();
     }
 
     public function multiArrowsStrike():void {
         var accRange:Number = 0;
         accRange += (arrowsAccuracy() / 2);
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
-        if (player.weaponRangeName == "Guided bow") accRange = 100;
+        if (player.weaponRangeName == "Guided bow" || player.vehicles == vehicles.HB_MECH) accRange = 100;
         fatigue(oneArrowTotalCost());
         var weaponRangePerk:String = player.weaponRangePerk;
         var ammoWord:String;
@@ -2304,11 +2315,18 @@ public class Combat extends BaseContent {
         if (rand(100) < accRange) {
             var damage:Number = 0;
             if (weaponRangePerk == "Bow") {
+				if (player.vehicles == vehicles.HB_MECH) damage += player.weaponRangeAttack * 10;
                 damage += player.spe;
                 damage += scalingBonusSpeed() * 0.2;
                 if (damage < 10) damage = 10;
             }
-            if (weaponRangePerk == "Crossbow") damage += player.weaponRangeAttack * 10;
+            if (weaponRangePerk == "Crossbow") {
+				damage += player.weaponRangeAttack * 10;
+				if (player.vehicles == vehicles.HB_MECH) {
+					damage += player.spe;
+					damage += scalingBonusSpeed() * 0.2;
+				}
+			}
             if (player.findPerk(PerkLib.DeadlyAim) < 0) damage *= (monster.damageRangePercent() / 100);
             //Weapon addition!
             if (player.weaponRangeAttack < 51) damage *= (1 + (player.weaponRangeAttack * 0.03));
@@ -2966,27 +2984,27 @@ public class Combat extends BaseContent {
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
                 if (player.weaponRange == weaponsrange.TOUHOM3) {
                     outputText(" ");
-                    damage = doDamage(damage, true, true);
+                    doDamage(damage, true, true);
                     if (crit) outputText(" <b>*Critical Hit!*</b>");
                     if (player.hasPerk(PerkLib.AmateurGunslinger)) {
                         outputText(" ");
-                        damage = doDamage(damage, true, true);
+                        doDamage(damage, true, true);
                         if (crit) outputText(" <b>*Critical Hit!*</b>");
                         outputText(" ");
-                        damage = doDamage(damage, true, true);
+                        doDamage(damage, true, true);
                         if (crit) outputText(" <b>*Critical Hit!*</b>");
                     }
                     if (player.hasPerk(PerkLib.ExpertGunslinger)) {
                         outputText(" ");
-                        damage = doDamage(damage, true, true);
+                        doDamage(damage, true, true);
                         if (crit) outputText(" <b>*Critical Hit!*</b>");
                         outputText(" ");
-                        damage = doDamage(damage, true, true);
+                        doDamage(damage, true, true);
                         if (crit) outputText(" <b>*Critical Hit!*</b>");
                     }
                     if (player.hasPerk(PerkLib.MasterGunslinger)) {
                         outputText(" ");
-                        damage = doDamage(damage, true, true);
+                        doDamage(damage, true, true);
                         if (crit) outputText(" <b>*Critical Hit!*</b>");
                         outputText(" ");
                         doDamage(damage, true, true);
@@ -2999,11 +3017,11 @@ public class Combat extends BaseContent {
             } else {
                 if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0)) {
                     outputText(".  It's clearly very painful. ");
-                    damage = doDamage(damage, true, true);
+                    doDamage(damage, true, true);
                 } else {
                     if (!MSGControll) {
                         outputText(".  It's clearly very painful. ");
-                        damage = doDamage(damage, true, true);
+                        doDamage(damage, true, true);
                     }
                     if (crit) outputText(" <b>*Critical Hit!*</b>");
                     //	if (flaga dla efektu arouse arrow) outputText(" tekst dla arouse arrow effect.");

@@ -20,6 +20,12 @@ package classes.Scenes
 			Changelog33();
 		}
 		//zrobić do 2021 na świeta event z reniferami i nie odblokowywać go do ok. 20-24 grudnia 2021 xD
+		private function Changelog35():void {
+			clearOutput();
+			menu();
+			addButton(0, "Next", Changelog34);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
+		}
 		private function Changelog34():void {
 			clearOutput();
 			menu();
@@ -32,7 +38,7 @@ package classes.Scenes
 			outputText("-New weapons from Liadri (1h katana and it upgr. versions from Celess): Uchigatana, Moonlit Snow, Chaos Blade\n");
 			outputText("-Nodachi moved to massive weapon section increasing base atk form 25 to 65 and cost from 100 to 2600 gems.\n");
 			outputText("-Fixed bugs: Various fixes from Liadri for many errors from last build, DeBimo offer from Rathazul not including Joy or Excellia in camp\n\n");
-			outputText("<b>Version 0.8o3:</b>\n\n");//perk lvl 1,3,4,6,7,8,11,12,14,16,17,18,19
+			outputText("<b>Version 0.8o3:</b>\n\n");//perk lvl 4,6,7,8,11,12,14,16,17,18,19
 			outputText("-New tier 0 sensitivity lvl-up perk: Desensitization. Req. 10+ sens. Effect: Negative effects of sensitivity are reduced by 5%.\n");
 			outputText("-New tier 0 misc lvl-up perk: Draconic Bones. Req. Free bones and marrow mutation slot, dragon or its variants arms, dragon or its variants legs, dragon or its variants tail and 8+/10+ pts in dragon/frost wyrm score. Effect: Basic strengthening of your body bone structure. (+10 to unarmed attack)\n");
 			outputText("-New tier 0 misc lvl-up perk: Draconic Heart. Req. Free heart mutation slot, Draconic Bones perk, Draconic/Drake Lungs perk, 8+/10+ pts/frost wyrm in dragon score. Effect: Your heart was strengthened to better handle your changing body. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen)\n");
@@ -69,7 +75,11 @@ package classes.Scenes
 			outputText("-New consumable items (by Ormael): Balls of Flame, Frozen Balls, THUNDERballs, Balls of the Darkness, Poisoned Balls - buyable at Serena shop in HXD (Shelf 3 - all of them req. lvl 42+ to be accessable). Each costs 60 gems and deal same damage as bangball mk 3 but with elemental affix (fire, ice, lighting, darkness, poison).\n");
 			outputText("-Draconic Lungs perks stat bonuses to str and tou was changed into bonuses to spe. Also Evolved and Final Form perk from this perk line granting +5%/+10% of max core Spe as phantom Spe\n");
 			outputText("-Lizan Marrow perk have now additional req. of having free bones and marrow mutation slot. Kitsune Thyroid Gland perk also now req. free thyroid gland mutation slot.\n");
-			outputText("-4 new achievments. (3 shadow ones)\n");	
+			outputText("-New enemies possible to encounter during Bog exploration: Corrupted Troll (Male or Female) - lvl 38\n");
+			outputText("-New enemies possible to encounter during Ocean exploration: Shark Girls Pack - lvl 65, Scylla - lvl 70.\n");
+			outputText("-New enemy possible to encounter when exploring Beach: Goo Girl (Beach variant) - lvl 34\n");
+			outputText("-Arena have now in challange section 2nd type of gargoyle enemy (this one is more of female-like one with axe tail instead of mace tail).\n");
+			outputText("-5 new achievments. (4 shadow ones)\n");	
 			outputText("-Explore option named 42 was moved to silly mode.\n");
 			outputText("-Follower Zenji now scales up to PC lvl cap (150 > 185). He will also have gradualy increasing other combat stats beside raw stats and XP reward for beating him will be much higher.\n");
 			outputText("-Lover Zenji got more sex scenes. Lover Zenji also can impregnate PC - pregnancy takes 30 days and first two kids can be named.\n");
@@ -86,6 +96,13 @@ package classes.Scenes
 			outputText("-Change to bonus of recovered sf during cultivatin to only been boosted by races that have bonus to max soulforce as part of racial bonuses (so now only nekomata and kitsune applies).\n");
 			outputText("-Added more cultivate options: 10, 12, 14 and 16 hours long ones.\n");
 			outputText("-Jobs: Enchanter, Eromancer, Healer get a small bonus to mana regenerations (the same like Job: Elemental Conjuer have (+5)). Also amount of mana regen gained by possesing Star Sphere was decreased by 1/3.\n");
+			outputText("-Raging Inferno, Glacial Storm, High Voltage, Eclipsing Shadow perks effects was changed to boost respective elemental damage by 20% and each turn without casted the same element spell/special lowering damage bonus by 20% instead of reseting it fully.\n");
+			outputText("-Easy Mode is now toggle instead of difficulty setting. But it can only be toggled when pc play on lower than Hard difficulty.\n");
+			outputText("-Shark Girl and Tigershark Girl at Ocean got both rised level a stats a bit to respectively lvl 55 and 60.\n");
+			outputText("-Phoenix Platoon was renamed into Phoenix Squad. Also most of enemies in Phoenix Tower get minor lvl/stats boost (really it's nothing large ;))\n");
+			outputText("-Succubus Gardener get bit more beefy on HP section and her heal would lower lust resistance bit less and cost more of her stamina. And IF by chance PC make her heal up enough times to reach 0% lust resistance she still could use heal up few more times but they won;t lower her resistance (cuz it's already 0% right?)\n");
+			outputText("-Marae got bit of attention too ^^ She got perk here or there and new moves added to both pure and corrupted versions. A hint for them: You all remember that Marae is the one to make PC int Alraune, right?\n");
+			outputText("-Been pig/boar or orca would now extend hunger bar. Similary each racial mutation perk for those races will increase it too.\n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			outputText("-Increased max lvl camp npc's can attain after reaching end of training: Ceani (lvl 98), Diana (lvl 69), Dinah (lvl 56), Etna (lvl 96), Electra (lvl 96), Ember (lvl 98), Isabella (lvl 98), Kiha (lvl 99), Kindra (lvl 99), Luna (lvl 99)\n");
 			outputText("-Increased max lvl npc's outside camp can attain: Akbal (lvl 98), Izumi (lvl 96), Minerva (lvl 95), Priscilla (lvl 98)\n");
@@ -93,9 +110,7 @@ package classes.Scenes
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
-			outputText("-Raging Inferno, Glacial Storm, High Voltage, Eclipsing Shadow perks effects was changed to boost respective elemental damage by 20% and each turn without casted the same element spell/special lowering damage bonus by 20% instead of reseting it fully.\n");
 			outputText("-Lover Zenji get new options: Sleep With (variants for having or not cabin), Nightwatch, Assist me (allowing to take him as henchman)\n");
-			outputText("-New enemies possible to encounter during Bog exploration: Corrupted Troll (Male or Female) - lvl 38\n");
 			outputText("-New submenu in Perks page that allow to convert perk points into super perk points or to buy perks for those super perk points.\n");
 			outputText("-New event perk: Hidden Job: Blood Demon. Gained by spending 1 super perk point. Effects: Allow to reach OverMax HP equal to 5x current Tou score, -10% blood spells cost, +20% blood spells power, enable toggle to switch between using or not blood instead of mana to power spells (excluding few special cases), allowing to learn Blood magic spells from Red Manuscript.\n");
 			outputText("-New TF item (by Liandri): Smarty Nuts. Gained by ... Using this item would turn PC into Ratatoskr (squirrel-morph). Racial bonuses for Half squirrel-morph (6+) /  squirrel-morph (12+) / Ratatoskr (18+): -10/20/25% to Str multi, +60/90/140% to Spe multi, +40/95/155% to Int multi\n");
@@ -109,19 +124,32 @@ package classes.Scenes
 			outputText("-New item: Red Manuscript. Dropped by Sand Witch or Cum Witch. Allow to learn Blood Spells when PC have Hidden Job: Blood Demon.\n");
 			outputText("-New Blood Spell: Blood Missiles - learned from Red Manuscript. Cost 50 health. Deal magic dmg and have cooldown of 2 turns.\n");//and deal AoE ice dmg and stun enemies for 5 turns. Have 1 turn channel time and cooldown of 12 turns.
 			outputText("-New Blood Spell: Blood Explosion - learned from Red Manuscript. Cost 200 health. Deal AoE magic dmg and have cooldown of 3 turns.\n");
-			outputText("-Easy Mode is now toggle instead of difficulty setting. But it can only be toggled when pc play on lower than Hard difficulty.\n");
-			outputText("-New enemies possible to encounter during Ocean exploration: Shark Girls Pack - lvl 65, Scylla - lvl 70.\n");
-			outputText("-Shark Girl and Tigershark Girl at Ocean got both rised level a stats a bit to respectively lvl 55 and 60.\n");
-			outputText("-Arena have now in challange section 2nd type of gargoyle enemy (this one is more of female-like one with axe tail instead of mace tail).\n");
-			outputText("-New enemy possible to encounter when exploring Beach: Goo Girl (Beach variant) - lvl 34\n");
 			outputText("-Added Large Group-type enemy perk for large monsters groups (if description say about having above 20 it would be then considered large group). And so some of monsters advanced to not be just Group but Large Group. Compared to bonuses form Group type enemy boosts those enemies gets is 10x instead of 5x.\n");
-			outputText("-Phoenix Platoon was renamed into Phoenix Squad. Also most of enemies in Phoenix Tower get minor lvl/stats boost (really it's nothing large ;))\n");
-			outputText("-Succubus Gardener get bit more beefy on HP section and her heal would lower lust resistance bit less and cost more of her stamina. And IF by chance PC make her heal up enough times to reach 0% lust resistance she still could use heal up few more times but they won;t lower her resistance (cuz it's already 0% right?)\n");
-			outputText("-Marae got bit of attention too ^^ She got perk here or there and new moves added to both pure and corrupted versions. A hint for them: You all remember that Marae is the one to make PC int Alraune, right?\n");
-			outputText("-Been pig/boar or orca would now extend hunger bar. Similary each racial mutation perk for those races will increase it too.\n");
-			outputText("-Oni race now could reach 3rd stage of bonuses (+150% to Str racial multi, +90% to Tou racial multi, -30% to Int racial multi, +60% to Wis racial multi) and been called Elder Oni on app screen.\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-Oni race now could reach 3rd stage of bonuses (+150% to Str racial multi, +90% to Tou racial multi, -30% to Int racial multi, +60% to Wis racial multi) and been called Elder Oni on app screen.\n");
+			outputText("-New necklace (by Ormael): Necklace of magical protection - buyable at Jewel shop in Tel'Adre. Cost 8000 gems. Increase magical resistance by 10%.\n");
+			outputText("-New necklace (by Ormael): Necklace of physical protection - buyable at Jewel shop in Tel'Adre. Cost 8000 gems. Increase physical resistance by 15%.\n");
+			outputText("-New head jewelery/accesory/misc (by Ormael): crown of magical protection - buyable at Jewel shop in Tel'Adre. Cost 6400 gems. Increase magical resistance by 8%.\n");
+			outputText("-New head jewelery/accesory/misc (by Ormael): crown of physical protection - buyable at Jewel shop in Tel'Adre. Cost 6400 gems. Increase physical resistance by 12%.\n");
+			outputText("-New ring (by Ormael): ring of magical protection - buyable at Jewel shop in Tel'Adre. Cost 1600 gems. Increase magical resistance by 2%.\n");
+			outputText("-New ring (by Ormael): ring of physical protection - buyable at Jewel shop in Tel'Adre. Cost 1600 gems. Increase physical resistance by 3%.\n");
+			outputText("-New armor (by Ormael): Light Ayo Armor - buyable at Serena shop in HXD after reaching Soul Apprentice. Cost 5600 gems. Req. 20+ str/spe to put on. Unpowered it grants 36 armor / 6 resistance and lower str/spe by 10. Powered it grants 60 armor / 10 resistance and giving +10% to str/spe multi.\n");
+			outputText("-New armor (by Ormael): Heavy Ayo Armor - buyable at Serena shop in HXD after reaching Soul Personage. Cost 14000 gems. Req. 40+ str/spe to put on. Unpowered it grants 72 armor / 12 resistance and lower str/spe by 20. Powered it grants 120 armor / 20 resistance and giving +20% to str/spe multi.\n");
+			outputText("-New armor (by Ormael): HB armor - buyable at Kaiba shop in Tel'Adre. Cost 7200 gems. Req. 20+ str/spe to put on. Unpowered it grants 30 armor / 24 resistance and lower str/spe by 10. Powered it grants 50 armor / 40 resistance and giving +6%/+20% to str/spe multi.\n");
+			outputText("-Ayo Armors require periodical injection of soulforce to stay in 'powered' state. Depending on armor it can drain form 60 to 120 SF per hour. Menu to transfer SF to armor and later activate armor is in Unequip/Misc menu in Inventory. Also when PC taking off such type of armor all remaining in it SF is transfered into PC. In case that would make PC SF goes over the max capacity all over the top amount of SF is lost.\n");
+			outputText("-In unequip menu if PC not have specific slot item equipped button will be greyed out (even if PC not yet possible to equip item in that slot (like ring 2nd to 4th)). Also bit of rearrange buttons on first page preparing for future new slot for equipment to be added..\n");
+			outputText("-New head jewelery/accesory/misc (by Ormael): HB Helmet - buyable at Kaiba shop in Tel'Adre. Cost 720 gems. Increase armor by 5 and magic resistance by 4.\n");
+			outputText("-New vehicle (by Ormael): Howling Banshee Mech - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems. Would increase Armor and Magic Resistance by 15 and giving +15%/+10%/+25% to str/tou/spe multi. Can be upgraded by using blueprint and materials (by PC goblin or any other capable to do this goblin npc).\n");
+			outputText("-New enemies possible to encounter during Blight Ridge exploration: Corrupted Basic Flesh Golem - lvl 35, Corrupted Basic Flesh Golem - lvl 36.\n");
+			//outputText("-New enemies possible to encounter during Bog exploration: Glacial Troll (Male or Female) - lvl (70-100)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");//New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies. Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
 			outputText("-Fixed bugs: Bugfixes / Typo fixing by Pyromania & Liadri, Luna event not happening in forest after PC fire her at first Full Moon event conclusion, some minor errors in calculation and display bonuses for kitsunes, some of Slave Excellia scenes sending back to Fixed Excellia, game ocassionaly incorrectly desc monsters in combat due to forced PC gender setting, returning from any type of minion setting ");
 			outputText("in middle of combat been treated as new turn, Zenji Food option not always resetting, soultraining ring not been accounted for when cultivating, Akbal lust victory not showing any post combat options sometimes, some of enemies like hellhoud been seen as valid target for tailpeg unique sex scene, Yara's Piercing Studio Rare menu Back button not sending back even to main menu, green slime able to lower it ");
@@ -200,7 +228,17 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -252,6 +290,24 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

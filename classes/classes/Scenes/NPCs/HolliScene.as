@@ -296,7 +296,7 @@ private function destroyDatFukkinTree2():void {
 }
 private function letZeFuckingSproutLive2():void {
 	clearOutput();
-	outputText("You tell Zenji that he shouldn’t destroy the plant, neither of you knows what exactly it’s here for or even it’s corrupted.\n\n");
+	outputText("You tell Zenji that he shouldn’t destroy the plant, neither of you knows what exactly it’s here for or even if it’s corrupted.\n\n");
 	outputText("Zenji peers at the plant suspiciously. \"<i>I know danger when I see it, [name], and dis plant is up to no good.” He takes a deep breath, “But if you tink you can handle whatever it grows up to be, den so be it. But don’ say I didn’ warn you…</i>\"\n\n");
 	ZenjiScenes.ZenjiHolli = true;
 	doNext(playerMenu);

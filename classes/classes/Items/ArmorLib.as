@@ -10,7 +10,7 @@ package classes.Items
 	{
 		public static const COMFORTABLE_UNDERCLOTHES:Armor = new ComfortableUnderclothes();
 		public static const NOTHING:Armor = new Nothing();
-		//25 za 1 ptk robes, 20 dla light, 40 dla medium i 60 dla heavy, z perkiem/dod. efektem podwaja koszt za każdy
+		//25 za 1 ptk robes, 20 dla light, 40 dla medium, 60 dla heavy, 80 dla light ayo i 100 dla heavy ayo, z perkiem/dod. efektem podwaja koszt za każdy
 		public const NOTHING:Armor = new Nothing();
 		public const ADVCLTH:Armor = new Armor("AdvClth","G. Clothes","green adventurer's clothes","a green adventurer's outfit, complete with pointed cap",2,0,50,"A set of comfortable green adventurer's clothes.  It even comes complete with a pointy hat!","Light");
 		public const A_ROBE_:ArmorWithPerk = new ArmorWithPerk("A.Robe","A.Robe","apprentice's robe","an apprentice's robe",0,1,25,"This drab robe lacks adornment, yet retains an air of mysticality. The low quality of the fabric coupled with its mystic air suggests that it is a garment meant for mages in training.","Light",
@@ -56,7 +56,8 @@ package classes.Items
 		public const GTECHC_:GoblinTechnomancerClothes = new GoblinTechnomancerClothes();
 		public const GOOARMR:GooArmor = new GooArmor();
 		public const H_GARB_:HereticsGarb = new HereticsGarb();
-		public const HBA_ARM:HBAspArmor = new HBAspArmor();
+		public const HBARMOR:HBArmor = new HBArmor();
+		public const HAYOARM:HeavyAyoArmor = new HeavyAyoArmor();
 		public const I_CORST:InquisitorsCorset = new InquisitorsCorset();
 		public const I_ROBES:InquisitorsRobes = new InquisitorsRobes();
 		public const INDECST:ArmorWithPerk = new ArmorWithPerk("IndecSt","Indec StAr","practically indecent steel armor","a suit of practically indecent steel armor",5,0,400,"This suit of steel 'armor' has two round disks that barely cover the nipples, a tight chainmail bikini, and circular butt-plates.","Medium",

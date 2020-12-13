@@ -36,7 +36,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	//------------
 	internal function buildMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
-		if (!player.isInGoblinMech()) {
+		if (!player.isInGoblinMech() && !player.isInMediumSizedMech()) {
 			bd = buttons.add("PowerAttack", powerAttackMenu).hint("Do a single way more powerfull wrath-enhanced melee strike.");
 			if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			if (player.hasPerk(PerkLib.PowerShot)) {
@@ -504,10 +504,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 		}
+		if (player.vehicles == vehicles.HB_MECH) {
+			
+		}
 	}
 	internal function buildMenuForFlying(buttons:ButtonDataList):void {
 		var bd:ButtonData;
-		if (!player.isInGoblinMech()) {
+		if (!player.isInGoblinMech() && !player.isInMediumSizedMech()) {
 			bd = buttons.add("Great Dive", combat.greatDive).hint("Make a Great Dive to deal TONS of damage!");
 			//Embrace
 			if ((player.wings.type == Wings.BAT_ARM || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
@@ -589,6 +592,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You need more time before you can use "+(player.hasKeyItem("Medical Dispenser 2.0") >= 0 ? "Medical Dispenser":"Stimpack Dispenser")+" again.</b>\n\n");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
+		}
+		if (player.vehicles == vehicles.HB_MECH) {
+			
 		}
 	}
 

@@ -18,7 +18,7 @@ package classes.Scenes.Areas.Bog
 			clearOutput();
 			outputText("As you are wandering through the bog you are suddenly halted by a noise very near. You turn around and see a large man leaping towards you. You barely have enough time to dodge him as he tumbles in front of you, quickly springing up to his feet. His physique is supported by a very muscular build and his face is adorned with tusks jutting from his mouth, he seems very agitated. ");
 			outputText("It doesn’t take long before you notice his lusty gaze towards you and his manhood already fully erect. He is definitely corrupt and if you’re not careful you may be his next victim.");
-			startCombat(new MaleTroll());
+			startCombat(new CorruptedMaleTroll());
 		}
 		public function encounterAdultMaleTrollLost():void {
 			clearOutput();
@@ -129,7 +129,7 @@ package classes.Scenes.Areas.Bog
 		public function encounterAdultFemaleTroll():void {
 			clearOutput();//\"<i></i>\"
 			outputText("As you are wandering through the bog you are suddenly halted by a noise very near. You turn around and see a large woman leaping towards you. You barely have enough time to dodge her as she tumbles in front of you, quickly springing up to her feet. Her physique is supported by a very muscular build and her face is adorned with tusks jutting from her mouth, she seems very agitated. It doesn’t take long before you notice her lusty gaze towards you and her nether lips dripping beads of lubricant. She is definitely corrupt and if you’re not careful you may be her next victim.\n\n");
-			startCombat(new FemaleTroll());
+			startCombat(new CorruptedFemaleTroll());
 		}
 		public function encounterAdultFemaleTrollLost():void {
 			clearOutput();

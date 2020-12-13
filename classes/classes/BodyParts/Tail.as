@@ -63,6 +63,7 @@ public class Tail extends SaveableBodyPart {
 	public static const USHI_ONI_ONNA:int		= 47;
 	public static const WEASEL:int				= 48;
 	public static const SQUIRREL:int			= 49;
+	public static const MONKEY:int				= 50;
 	// Don't forget to add new types in DebugMenu.as list TAIL_TYPE_CONSTANTS
 
 	override public function set type(value:int):void {
