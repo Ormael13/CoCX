@@ -524,7 +524,7 @@
         <cell rect="122,1430,173,186" name="legs_bg/liliraune" dx="2" dy="39"/>
         <cell rect="470,956,173,156" name="fullbody/femalejiangshi" dx="16" dy="23"/>
         <cell rect="470,1272,173,156" name="fullbody/malejiangshi" dx="16" dy="23"/>
-        <cell rect="260,620,21,28" name="neck/goocore" dx="95" dy="67"/>
+        <cell rect="260,620,21,28" name="neck/darkGooCore" dx="95" dy="67"/>
         <cell rect="162,59,54,31" name="neck/manticore" dx="77" dy="47"/>
         <cell rect="217,59,54,31" name="neck/weasel" dx="77" dy="50"/>
         <cell rect="162,27,54,31" name="neck/centipede" dx="77" dy="49"/>
@@ -1465,7 +1465,7 @@
             <case values="Eyes.BLACK_EYES_SAND_TRAP">
                 <show part="eyes/sandtrap"/>
             </case>
-            <case values="Eyes.FOX,Eyes,Eyes.CAT_SLITS,Eyes.REPTILIAN,Eyes.SNAKE,Eyes.GORGON,Eyes.DRAGON,Eyes.ONI,Eyes.ELF,Eyes.VAMPIRE,Eyes.WEASEL">
+            <case values="Eyes.FOX,Eyes,Eyes.CAT_SLITS,Eyes.REPTILIAN,Eyes.SNAKE,Eyes.GORGON,Eyes.DRAGON,Eyes.ONI,Eyes.ELF,Eyes.VAMPIRE,Eyes.WEASEL,Eyes.FIENDISH">
                 <show part="eyes/cat"/>
             </case>
             <case values="Eyes.DEVIL,Eyes.FROSTWYRM">
@@ -3481,6 +3481,11 @@
 		</if>
 		<if test="lowerBody == LowerBody.CENTIPEDE">
 			<hide part="legs_pattern/*"/>
+		</if>
+		
+		<!-- SLIME CORES -->
+		<if test="DarkSlimeCore">
+			<show part="neck/darkGooCore"/>
 		</if>
 
 		<!-- FULL BODY AND DRESS AREA -->
