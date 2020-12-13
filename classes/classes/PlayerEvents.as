@@ -488,12 +488,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						}
 						if (player.spe > 1) player.addStatusValue(StatusEffects.SlimeCraving, 3, 0.1); //Keep track of how much has been taken from speed
 						player.dynStats("str",-1,"spe", -0.1, "lus", 2);
-						if (player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") != 0) {
-							player.buff("Fluid Growth").addStats({"tou.mult": -0.04}).withText("Fluid Growth!");
-						}
-						if (player.buff("Fluid Growth").getValueOfStatBuff("int.mult") != 0) {
-							player.buff("Fluid Growth").addStats({"int.mult": -0.04}).withText("Fluid Growth!");
-						}
+						player.buff("Fluid Growth").addStat("tou.mult",-0.04,0).withText("Fluid Growth!");
+						player.buff("Fluid Growth").addStat("int.mult",-0.04,0).withText("Fluid Growth!");
 						player.addStatusValue(StatusEffects.SlimeCraving, 2, 0.1); //Keep track of how much has been taken from strength
 					}
 				}

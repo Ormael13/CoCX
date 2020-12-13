@@ -2581,10 +2581,6 @@ public class CombatMagic extends BaseCombatContent {
 			//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 			if (monster.plural) damage *= 5;
 			doIceDamage(damage, true, true);
-			if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) {
-				doIceDamage(damage, true, true);
-				doIceDamage(damage, true, true);
-			}
 			outputText(" damage!");
 			//Using fire attacks on the goo]
 			//if(monster.short == "goo-girl") {
@@ -2714,58 +2710,24 @@ public class CombatMagic extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
 			if (player.hasPerk(PerkLib.RagingInfernoSu) && player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, -1);
 			outputText("You call out to the celestial vault, knocking some rocks out of orbit and into a crash course towards your opponents.\n\n");
-			var damage:Number = (scalingBonusIntelligence() * spellMod())*3;
-			//Determine if critical hit!
-			var crit:Boolean = false;
-			var critChance:int = 5;
-			critChance += combatMagicalCritical();
-			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-			if (rand(100) < critChance) {
-				crit = true;
-				damage *= 1.75;
-			}
-			//High damage to goes.
-			damage = calcInfernoMod(damage);
-			if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
-			if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
-			if (monster.plural) damage *= 5;
-			damage = Math.round(damage);
-			doFireDamage(damage, true, true);
-			doFireDamage(damage, true, true);
-			doFireDamage(damage, true, true);
-			doFireDamage(damage, true, true);
-			doFireDamage(damage, true, true);
-			doFireDamage(damage, true, true);
-			doFireDamage(damage, true, true);
-			doFireDamage(damage, true, true);
-			doFireDamage(damage, true, true);
-			doFireDamage(damage, true, true);
-			doFireDamage(damage, true, true);
-			doFireDamage(damage, true, true);
-			if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) {
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
+			var meteor:Number = 11;
+			while (meteor-->0){
+				var damage:Number = (scalingBonusIntelligence() * spellMod())*3;
+				//Determine if critical hit!
+				//High damage to goes.
+				damage = calcInfernoMod(damage);
+				if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
+				if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
+				if (monster.plural) damage *= 5;
+				damage = Math.round(damage);
+				var crit:Boolean = false;
+				var critChance:int = 5;
+				critChance += combatMagicalCritical();
+				if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+				if (rand(100) < critChance) {
+					crit = true;
+					damage *= 1.75;
+				}
 				doFireDamage(damage, true, true);
 			}
 			outputText(" damage!");

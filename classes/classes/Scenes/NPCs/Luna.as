@@ -18,7 +18,7 @@ package classes.Scenes.NPCs
 		public var lunaScene:LunaFollower = SceneLib.lunaFollower;
 		
 		public function usingClawCombo():void {
-			outputText("Luna attempts to rend you with her claws.");
+			outputText("Luna attempts to rend you with her claws.\n");
 			eAttack();
 			eAttack();
 			eAttack();

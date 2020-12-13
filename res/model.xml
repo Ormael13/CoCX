@@ -1991,6 +1991,7 @@
 									<show part="arms/demonlewd"/>
 									<show part="arms_fg/demonlewd"/>
 									<if test="PlayerHasAWeapon">
+										<show part="arms_bg/human"/>
 										<else>
 											<hide part="arms_bg/*"/>
 											<hide part="hands_bg/*"/>
@@ -2011,6 +2012,7 @@
 										<show part="arms/demonlewd"/>
 										<show part="arms_fg/demonlewd"/>
 										<if test="PlayerHasAWeapon">
+											<show part="arms_bg/human"/>
 											<else>
 												<hide part="arms_bg/*"/>
 												<hide part="hands_bg/*"/>
@@ -2037,7 +2039,14 @@
 					<hide part="arms/*"/>
 					<hide part="arms_bg/*"/>
 					<show part="arms/demonlewd"/>
-					<show part="arms_bg/demonlewd"/>
+					<if test="PlayerHasAWeapon">
+						<show part="arms_bg/human"/>
+						<else>
+							<hide part="arms_bg/*"/>
+							<hide part="hands_bg/*"/>
+							<show part="arms_bg/demonlewd"/>
+						</else>
+					</if>
 				</if>
             </case>
             <case values="Arms.CHITIN">
