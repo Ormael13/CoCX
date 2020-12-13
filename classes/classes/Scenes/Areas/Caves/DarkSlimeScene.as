@@ -13,7 +13,6 @@ import classes.internals.*;
 	
 	public class DarkSlimeScene extends BaseContent
 	{
-		public var elDarkSlime:EbonLabyrinth = new EbonLabyrinth();
 		public function DarkSlimeScene() 
 		{
 		}

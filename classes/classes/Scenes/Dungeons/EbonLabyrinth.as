@@ -167,7 +167,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				player.rearBody.type = RearBody.METAMORPHIC_GOO;
 				player.skin.setBaseOnly({adj: "slimy", type: Skin.GOO});
 				var darkgooSkinColors:Array = ["indigo", "light purple", "purple", "purplish black", "dark purple"];
-				var choosencolor = randomChoice(darkgooSkinColors);
+				var choosencolor:String = randomChoice(darkgooSkinColors);
 				player.skin.base.color = choosencolor;
 				player.hairColor = choosencolor;
 				player.eyes.type = Eyes.FIENDISH;
