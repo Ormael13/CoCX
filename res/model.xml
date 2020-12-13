@@ -2040,7 +2040,7 @@
 					<hide part="arms_bg/*"/>
 					<show part="arms/demonlewd"/>
 					<if test="PlayerHasAWeapon">
-                        <show part="arms_bg/human"/>
+						<show part="arms_bg/human"/>
 						<else>
 							<hide part="arms_bg/*"/>
 							<hide part="hands_bg/*"/>

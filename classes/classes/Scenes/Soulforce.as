@@ -1871,6 +1871,7 @@ use namespace CoC;
 		}
 		public function AddFTear():void {
 			outputText("\n\n<b>(Gained 1 Fafnir Tear!)</b>\n\n");
+			outputText("Weapon types: "+[player.isStaffTypeWeapon(),player.isSwordTypeWeapon(),player.isAxeTypeWeapon(),player.isMaceHammerTypeWeapon(),player.isSpearTypeWeapon(),player.isSpearTypeWeapon(),player.isDuelingTypeWeapon()].join());
 			inventory.takeItem(consumables.F_TEAR, curry(NonEquipmentMenu, 2));
 		}
 		public function AddBubble():void {
