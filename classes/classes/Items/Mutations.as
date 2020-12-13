@@ -16977,11 +16977,13 @@ public final class Mutations extends MutationsHelper {
     }
 
     public function hardBiscuits(player:Player):void {
+        clearOutput();
         outputText("You eat the flavorless biscuits. It satisfies your hunger a bit, but not much else.");
         player.refillHunger(15);
     }
 
     public function trailMix(player:Player):void {
+        clearOutput();
         outputText("You eat the trail mix. You got energy boost from it!");
         player.refillHunger(30);
         fatigue(-20);
@@ -16990,33 +16992,67 @@ public final class Mutations extends MutationsHelper {
 
     //ALCHEMICAL ITEMS
     public function HealingHerb(player:Player):void {
+        clearOutput();
         outputText("You eat up the herb, your wounds closing at high speed.");
+        var power:Number = 1;
+        power += (player.maxHP()*0.25)+(power*0.01*player.maxHP());
+        if (player.hasPerk(PerkLib.NaturalHerbalism)) power *= 2;
+        HPChange(power,false);
         player.refillHunger(15);
+        player.herbXP(5+player.level);
+        if (player.hasPerk(PerkLib.PlantKnowledge)) player.herbXP(5+player.level);
+        if (player.hasPerk(PerkLib.NaturalHerbalism)) player.herbXP(5+player.level);
     }
 
     public function MoonGrass(player:Player):void {
+        clearOutput();
+        var power:Number = 20;
+        fatigue(-power);
         outputText("You eat up the grass, feeling rejuvenated with newfound magical energy and stamina.");
         player.refillHunger(15);
+        player.herbXP(5+player.level);
+        if (player.hasPerk(PerkLib.PlantKnowledge)) player.herbXP(5+player.level);
+        if (player.hasPerk(PerkLib.NaturalHerbalism)) player.herbXP(5+player.level);
     }
 
     public function SnakeFlower(player:Player):void {
+        clearOutput();
+        player.buff("Poison").remove();
         outputText("You eat up the flower, feeling relieved as the poison is expelled from your body.");
         player.refillHunger(15);
+        player.herbXP(5+player.level);
+        if (player.hasPerk(PerkLib.PlantKnowledge)) player.herbXP(5+player.level);
+        if (player.hasPerk(PerkLib.NaturalHerbalism)) player.herbXP(5+player.level);
     }
 
     public function Ironweed(player:Player):void {
+        clearOutput();
+        var power:Number = 10; //needs to be calculated in game
+        var duration:Number = Math.round(power/100)+5;
+        //strenght then Duration in hours
+        player.createStatusEffect(StatusEffects.ArmorPotion,power,duration,0,0);
         outputText("You eat up the weed, feeling any lingering pain recede as your skin hardens like stone.");
         player.refillHunger(15)
         player.createStatusEffect(StatusEffects.AlchIronweed, 6, 0, 0, 0);
+        player.herbXP(5+player.level);
+        if (player.hasPerk(PerkLib.PlantKnowledge)) player.herbXP(5+player.level);
+        if (player.hasPerk(PerkLib.NaturalHerbalism)) player.herbXP(5+player.level);
     }
 
     public function BladeFerns(player:Player):void {
+        clearOutput();
+        var power:Number = 10; //needs to be calculated in game
+        var duration:Number = Math.round(power/100)+5;
         outputText("You eat up the fern, feeling stronger and more agile already.");
         player.refillHunger(15);
         player.createStatusEffect(StatusEffects.AlchBladeFerns, 6, 0, 0, 0);
+        player.herbXP(5+player.level);
+        if (player.hasPerk(PerkLib.PlantKnowledge)) player.herbXP(5+player.level);
+        if (player.hasPerk(PerkLib.NaturalHerbalism)) player.herbXP(5+player.level);
     }
 
     public function AlrauneNectar(player:Player):void {
+        clearOutput();
         player.slimeFeed();
         outputText("You drink the nectar and almost right away regret it as liquid lust rushes through you.");
         player.refillHunger(15);
@@ -17044,6 +17080,9 @@ public final class Mutations extends MutationsHelper {
             if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.addStatusValue(StatusEffects.RaijuLightningStatus, 1, 24);
             outputText("\n\n");
         }
+        player.herbXP(5+player.level);
+        if (player.hasPerk(PerkLib.PlantKnowledge)) player.herbXP(5+player.level);
+        if (player.hasPerk(PerkLib.NaturalHerbalism)) player.herbXP(5+player.level);
     }
 }
 }
