@@ -14,6 +14,8 @@ import classes.BodyParts.Hair;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.CockTypesEnum;
 import classes.EventParser;
@@ -89,13 +91,15 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		}
 		public function defeatedByDarkSlime():void {
 			clearOutput();
+			menu();
 			outputText("As the dark slime approaches, it occurs to you that the only thing she is after are your fluids. You can either let her or struggle. What will you do?\n\n");
-			addButton(1, "Let her", defeatedByDarkSlimeStruggle);
-			addButton(2, "Struggle", defeatedByDarkSlimeLetHer);
+			addButton(0, "Let her", defeatedByDarkSlimeLetHer);
+			addButton(1, "Struggle", defeatedByDarkSlimeStruggle);
 			if (!player.hasKeyItem("Torch")) {
-				addButtonDisabled(2, "Struggle", "You have nothing to hold her at bay!")
+				addButtonDisabled(1, "Struggle", "You have nothing to hold her at bay!")
 			}
 		}
+
 		public function defeatedByDarkSlimeStruggle():void {
 			clearOutput();
 			outputText("You refuse to end up as a meal to a slime and, unable to pose a decent fight, you keep the thing at bay using a torch.\n\n");
@@ -103,7 +107,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("Aha! So she can’t stand fire, huh? Well too bad for her, as you proceed to crawl away from the slime keeping the torch between you and her so she can’t approach. Eventually, you manage to stand up and begin running from the, somewhat disappointed, slime girl.\n\n");
 			cleanupAfterCombat();
 		}
-		public function defeatedByDarkSlimeLetHer(letzRape:Boolean):void {
+		public function defeatedByDarkSlimeLetHer(letzRape:Boolean = false):void {
 			clearOutput();
 			if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)){
 				outputText("The slime moves to you, licks you and then recoils in frustration.\n\n");
@@ -160,7 +164,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 						" Your whole skin is as sensitive as an erogenous zone, and for a while you begin to drip in delight as every single stimulation brings insane levels of pleasure to you, it will take some time getting used to this." +
 						" You don’t have much time to think over this matter, as a sudden hunger takes hold of you. You thirst, your body mass thirsts for fluids… the fluids of others!" +
 						" You set out with a drooling pleasure addled smile looking for a fleshling to feed from.\n\n");
-				outputText("<b>You have been transformed into a dark slime!<b>\n\n");
+				outputText("<b>You have been transformed into a dark slime!</b>\n\n");
 				player.hairType = Hair.GOO;
 				player.arms.type = Arms.GOO;
 				player.lowerBody = LowerBody.GOO;
@@ -169,20 +173,25 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				var darkgooSkinColors:Array = ["indigo", "light purple", "purple", "purplish black", "dark purple"];
 				var choosencolor:String = randomChoice(darkgooSkinColors);
 				player.skin.base.color = choosencolor;
+				player.skin.base.pattern = Skin.PATTERN_NONE;
 				player.hairColor = choosencolor;
 				player.eyes.type = Eyes.FIENDISH;
 				player.eyes.colour = "red";
 				player.ears.type = Ears.ELFIN;
+				player.faceType = Face.HUMAN;
+				player.tongue.type = Tongue.HUMAN;
 				player.createVagina()
 				if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 9000, 0, 0, 0);
 				else player.addStatusValue(StatusEffects.BonusVCapacity, 1, 9000);
 				player.antennae.type = Antennae.NONE;
 				player.wings.type = Wings.NONE;
+				player.tail.type = Tail.NONE;
 				player.gills.type = Gills.NONE;
 				if (!player.hasStatusEffect(StatusEffects.SlimeCraving)) {
 					player.createStatusEffect(StatusEffects.SlimeCraving, 0, 0, 0, 1); //Value four indicates this tracks strength and speed separately
 				}
 				if (!player.hasPerk(PerkLib.DarkSlimeCore)) player.createPerk(PerkLib.DarkSlimeCore, 0,0,0,0);
+				CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			}
 			cleanupAfterCombat();
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)){
