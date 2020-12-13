@@ -50,7 +50,6 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		private var _cuteScene:int = 1;
 		
 		public var elDisplacerbeast:DisplacerBeastScene = new DisplacerBeastScene();
-		public var elDarkSlime:DarkSlimeScene = new DarkSlimeScene();
 		public var ancientTentacleBeast:TentacleBeastScene = new TentacleBeastScene();
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
@@ -93,7 +92,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("As the dark slime approaches, it occurs to you that the only thing she is after are your fluids. You can either let her or struggle. What will you do?\n\n");
 			addButton(1, "Let her", defeatedByDarkSlimeStruggle);
 			addButton(2, "Struggle", defeatedByDarkSlimeLetHer);
-			if (player.hasKeyItem("Torch") == 0) {
+			if (!player.hasKeyItem("Torch")) {
 				addButtonDisabled(2, "Struggle", "You have nothing to hold her at bay!")
 			}
 		}
@@ -168,7 +167,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				player.rearBody.type = RearBody.METAMORPHIC_GOO;
 				player.skin.setBaseOnly({adj: "slimy", type: Skin.GOO});
 				var darkgooSkinColors:Array = ["indigo", "light purple", "purple", "purplish black", "dark purple"];
-				var choosencolor = randomChoice(darkgooSkinColors);
+				var choosencolor:String = randomChoice(darkgooSkinColors);
 				player.skin.base.color = choosencolor;
 				player.hairColor = choosencolor;
 				player.eyes.type = Eyes.FIENDISH;
