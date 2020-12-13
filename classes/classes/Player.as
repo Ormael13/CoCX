@@ -6060,7 +6060,7 @@ use namespace CoC;
 					darkgooCounter++;
 				if (lowerBody == LowerBody.GOO)
 					darkgooCounter += 3;
-				if (eyes.colour = "red")
+				if (eyes.colour == "red")
 					darkgooCounter ++;
 				if (rearBody.type == RearBody.METAMORPHIC_GOO)
 					darkgooCounter += 2;

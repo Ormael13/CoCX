@@ -50,7 +50,6 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		private var _cuteScene:int = 1;
 		
 		public var elDisplacerbeast:DisplacerBeastScene = new DisplacerBeastScene();
-		public var elDarkSlime:DarkSlimeScene = new DarkSlimeScene();
 		public var ancientTentacleBeast:TentacleBeastScene = new TentacleBeastScene();
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
