@@ -30,6 +30,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 		public var mutations:MutationsHelper = new MutationsHelper();
 		public static var Nursed:Boolean;
 		public static var NursedCooldown:int;
+		public static var Sated:Boolean;
+		public static var SatedCooldown:int;
 
 		public function stateObjectName():String {
 			return "LunaFollower";
@@ -38,24 +40,36 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 		public function resetState():void {
 			Nursed = false;
 			NursedCooldown = 0;
+			Sated = false;
+			SatedCooldown = 0;
 		}
 
 		public function saveToObject():Object {
 			return {
 				"LunaNursed": Nursed,
-				"LunaNursedCooldown": NursedCooldown
+				"LunaNursedCooldown": NursedCooldown,
+				"LunaSated": Sated,
+				"LunaSatedCooldown": SatedCooldown
 			};
 		}
 
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 			if (o) {
 				Nursed = o["LunaNursed"];
+				Sated = o["LunaSated"];
 				if ("LunaNursedCooldown" in o) {
 					// new save, can load
 					NursedCooldown = o["LunaNursedCooldown"];
 				} else {
 					// old save, still need to set NursedCooldown  to something
 					NursedCooldown = 0;
+				}
+				if ("LunaSatedCooldown" in o) {
+					// new save, can load
+					SatedCooldown = o["LunaSatedCooldown"];
+				} else {
+					// old save, still need to set NursedCooldown  to something
+					SatedCooldown = 0;
 				}
 			} else {
 				// loading from old save
@@ -573,6 +587,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 		public function fullMoonEvent(PCIsAwake:Boolean = false, PCWalkedToLunaAtmaxJealousy:Boolean = false):void {
 			spriteSelect(SpriteDb.s_Luna_Mooning);
 			clearOutput();
+			flags[kFLAGS.LUNA_JEALOUSY] = 0;
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) {
 				if (player.hasStatusEffect(StatusEffects.LunaWasWarned)){
 					if (PCIsAwake){
@@ -583,7 +598,6 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					outputText("\"<i>Sorry [name] I can’t hold myself anymore.</i>\"\n\n");
 					outputText("Oh no it's happening again! Luna is totally going to jump you, you can already see her beginning to transform as she prepares to make a second attempt.\n\n");
 					outputText("This is quickly going to get out of hand. How will you answer her advances?\n\n");
-
 				}
 				else{
 					if (PCIsAwake) {
@@ -606,7 +620,6 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 							"Unsurprisingly, her already naked form indeed takes on a beastial shape. She sits in a waiting position, reminiscent of a good dog waiting on its treat.\n\n");
 					if (PCIsAwake)outputText("\"<i>Well " + player.mf("Master","Mistress") + ", we can do this two ways, either you resist and I get rough or we can have loving sex here and now. So what will it be?</i>\"\n\n");
 					else outputText("\"<i>Well " + player.mf("Master","Mistress") + ", you already know why I am here, so let's get wild ok? I have been waiting eagerly for this.</i>\"\n\n");
-							flags[kFLAGS.LUNA_JEALOUSY] = 0;
 				}
 			}
 			else if (player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
@@ -630,7 +643,6 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 						" I’m a monster. At first I tried to hide it, for your sake, but you’ve been teasing me for so long now I can’t hold it in anymore." +
 						" I'm going to make you mine!</i>\"\n\n");
 				outputText("This is quickly going to get out of hand. How will you answer her advances?\n\n");
-				flags[kFLAGS.LUNA_JEALOUSY] = 0;
 			}
 			else {
 				if (PCIsAwake){
@@ -646,6 +658,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				outputText("\"<i>See? I’m a werewolf, [name]. A fiend created by demonic magic that changes between hybrid and human shape at will. This is the second reason my former master fired me for. I’m a monster. At first I tried to hide it, for your sake, but you’ve been teasing me for so long now I can’t hold it in anymore, especially with the coming full moon.</i>\"\n\n");
 				outputText("This is quickly going to get out of hand. How will you answer her advances?\n\n");
 			}
+			Sated = true;
+			SatedCooldown = 24;
 			menu();
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) addButton(0, "Accept", fullMoonEventAccept2);
 			else addButton(0, "Accept", fullMoonEventAccept);
