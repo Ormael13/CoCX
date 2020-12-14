@@ -9610,7 +9610,7 @@ use namespace CoC;
 			var ballsMutations:Number = 1;
 			if (findPerk(PerkLib.MinotaurTesticles) >= 0)
 				ballsMutations--;
-			if (findPerk(PerkLib.EasterBunnyBalls) >= 0)
+			if (findPerk(PerkLib.EasterBunnyEggBag) >= 0)
 				ballsMutations--;
 			if (findPerk(PerkLib.NukiNuts) >= 0)
 				ballsMutations--;

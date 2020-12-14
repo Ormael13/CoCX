@@ -4964,7 +4964,6 @@ public class Combat extends BaseContent {
             } else {
                 lower_threshold += (percent - 20); // if Monster SPE lower, then we deal more likely good damage
             }
-
             if ((lower_threshold < 15) && (!isBowDamageMDO)) { // Lowest possible value for melee
                 lower_threshold = 15;
                 if ((lower_threshold < 10) && (isBowDamageMDO)) // Lowest possible value for bow
@@ -5009,7 +5008,6 @@ public class Combat extends BaseContent {
                     random_value = b;
                 }
             }
-
             function firstLetterUpperCase(strData:String):String  // for text
             {
                 var strArray:Array = strData.split(' ');
@@ -5019,7 +5017,6 @@ public class Combat extends BaseContent {
                 }
                 return newArray.join(' ');
             }
-
             // damage dialogs for just attack
             if ((MDODialogs) && (!isBowDamageMDO) && (MDOCount == 1)) {
                 if (lock) {
@@ -5053,7 +5050,6 @@ public class Combat extends BaseContent {
             }
             random_value /= 100; // back to %
             // damage math
-
             damage *= random_value;
             damage = Math.round(damage);
             isBowDamageMDO = false;

@@ -3629,7 +3629,7 @@ public function wakeFromBadEnd():void {
 				var soulforce:int = 0;
 				var wrath:int = 0;
 				var lust:int = 0;
-				var statpoints:int = 10;
+				var statpoints:int = 5;
 				var perkpoints:int = 1;
 				if (player.findPerk(PerkLib.AscensionUnlockedPotential) >= 0) {
 					hp += 20;
@@ -3676,7 +3676,7 @@ public function wakeFromBadEnd():void {
 				if (player.findPerk(PerkLib.UnlockArdor3rdStage) >= 0) lust += 1;
 				if (player.findPerk(PerkLib.UnlockArdor4thStage) >= 0) lust += 1;
 				if (player.level < 6) {
-					statpoints += 10;
+					statpoints += 5;
 					perkpoints += 1;
 				}
 				mainView.levelButton.toolTipText = "Level up to increase your maximum HP by " + hp + ", maximum Fatigue by " + fatigue + ", maximum Mana by " + mana + ", maximum Soulforce by " + soulforce + ", maximum Wrath by " + wrath + " and maximum Lust by " + lust + "; gain " + statpoints + " attribute points and " + perkpoints + " perk points.";
