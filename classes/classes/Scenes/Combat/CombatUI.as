@@ -98,7 +98,7 @@ public class CombatUI extends BaseCombatContent {
 			} else if (player.isInGoblinMech()) {
 				btnMelee.show("Sawblade", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech sawblade.  Damage done is determined by your strength and weapon.");
 			}*/
-			if (player.isInGoblinMech() || player.isInMediumSizedMech()) {
+			if (player.isInGoblinMech() || player.isInNonGoblinMech()) {
 				var weapon:String = "";
 				if (player.isInGoblinMech()) weapon = "saw blade";
 				if (player.vehicles == vehicles.HB_MECH) weapon = "twin power blades";
@@ -189,11 +189,11 @@ public class CombatUI extends BaseCombatContent {
 		if (player.isFlying()) combat.pspecials.buildMenuForFlying(physpButtons);
 		else combat.pspecials.buildMenu(physpButtons);
 		if (physpButtons.length > 0) {
-			if (player.isInGoblinMech() || player.isInMediumSizedMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
+			if (player.isInGoblinMech() || player.isInNonGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
 			else btnPSpecials.show("P. Specials", submenuPhySpecials, "Physical special attack menu.", "Physical Specials");
 		}
 		if (!player.isFlying() && monster.isFlying() && !player.canFly()) {
-			if (player.isInGoblinMech() || player.isInMediumSizedMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
+			if (player.isInGoblinMech() || player.isInNonGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
 			else btnPSpecials.disable("No way you could reach an opponent in the air with p. specials.");
 		}
 		// Submenu - Magical Specials

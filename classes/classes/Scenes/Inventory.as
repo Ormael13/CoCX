@@ -287,7 +287,9 @@ use namespace CoC;
 			clearOutput();
 			var currentArmorSFDrainrate:Number = 0;
 			if (player.armor == armors.LAYOARM) currentArmorSFDrainrate += 60;
-			if (player.armor == armors.HBARMOR) currentArmorSFDrainrate += 80;
+			if (player.armor == armors.HBARMOR) {
+				currentArmorSFDrainrate += 80;
+			}
 			if (player.armor == armors.HAYOARM) currentArmorSFDrainrate += 120;
 			maxSFCapacity = 0;
 			if (player.armor == armors.LAYOARM) maxSFCapacity += 1500;

@@ -1037,7 +1037,7 @@ use namespace CoC;
 			 || weaponRange == game.weaponsrange.M1CERBE || weaponRange == game.weaponsrange.TOUHOM3 || weaponRange == game.weaponsrange.TWINGRA || weaponRange == game.weaponsrange.TDPISTO || weaponRange == game.weaponsrange.DPISTOL;
 		}
 		//Is in medium sized mech (med sized races mech)(have upgrade option to allow smaller than medium races pilot it)
-		public function isInMediumSizedMech():Boolean
+		public function isInNonGoblinMech():Boolean
 		{
 			return vehicles == game.vehicles.HB_MECH;// || vehicles == game.vehicles.GOBMPRI
 		}

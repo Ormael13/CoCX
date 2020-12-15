@@ -1585,7 +1585,8 @@ public class Combat extends BaseContent {
 			if (player.vehicles == vehicles.GOBMPRI) damage *= 1.5;
 		}
         if (player.vehicles == vehicles.HB_MECH) {
-			
+			//if (player.armor == armors.HBARMOR) damage *= 1.1;
+			//if (player.headJewelry == headjewelries.HBHELM) damage *= 1.05;
 		}
         //Bonus sand trap damage!
         if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);

@@ -1824,8 +1824,7 @@ import coc.view.MainView;
 
 		private function ascensionPerkSelection(perk:* = null, maxRank:int = 10):void {
 			clearOutput();
-			var maxRank:int = 5;
-			maxRank += maxRankValue();
+			maxRank = Math.min( 5 + maxRankValue(), maxRank );
 			outputText("Perk Effect: " + perk.longDesc);
 			outputText("\nCurrent level: " + player.perkv1(perk) + " / " + maxRank + "");
 			if (player.perkv1(perk) >= maxRank) outputText(" <b>(Maximum)</b>");
@@ -1865,8 +1864,7 @@ import coc.view.MainView;
 		}
 		private function ascensionPerkSelection2(perk:* = null, maxRank:int = 10):void {
 			clearOutput();
-			var maxRank:int = 5;
-			maxRank += maxRankValue();
+			maxRank = Math.min( 5 + maxRankValue(), maxRank );
 			outputText("Perk Effect: " + perk.longDesc);
 			outputText("\nCurrent level: " + player.perkv1(perk) + " / " + maxRank + "");
 			if (player.perkv1(perk) >= maxRank) outputText(" <b>(Maximum)</b>");
