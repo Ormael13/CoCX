@@ -13,21 +13,17 @@ package classes.Items.Vehicles
 		
 		public function HowlingBansheeMech() 
 		{
-			super("HB Mech", "HowlingBansheeMech", "Howling Banshee Mech", "a Howling Banshee Mech", 0, 0, 1000, "This twenty meters tall mech is equipped with a comfortable seat, fit for an elf. It white bipedal frame covered with white armor plates is customisable. \n\nType: Elf Mech \nBase value: 500","Mech");
+			super("HB Mech", "HowlingBansheeMech", "Howling Banshee Mech", "a Howling Banshee Mech", 0, 0, 1000, "This twenty meters tall mech is equipped with a comfortable seat, fit for a medium sized person. It white bipedal frame covered with white armor plates is customisable. \n\nType: Howling Banshee Mech \nBase value: 1000","Mech");
 		}
 		
 		override public function canUse():Boolean {
 			if (!super.canUse()) {
 				return false;
 			}
-			if (game.player.elfScore() < 11) { //Elf
-				outputText("No way you’re going into this mechanical thing. You aren't an Elf and as such you can't used to cockpit designed specificaly with their anathomy in mind.\n\n");
-				return false;
-			}
 			if (game.player.tallness < 84) { //Shorter than 7 ft
 				outputText("You aren't tall enough to properly use this vehicle.\n\n");
 				return false;
-			}
+			}//bonus to piloting HBmech if elf subtype especialy psionic elf / eldar ^^
 			return true;
 		}
 		

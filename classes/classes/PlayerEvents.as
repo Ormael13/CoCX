@@ -205,6 +205,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.armor == armors.LAYOARM) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 60;
 				if (player.armor == armors.HBARMOR) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 80;
 				if (player.armor == armors.HAYOARM) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 120;
+				if (player.vehicles == vehicles.HB_MECH) {
+					/*if (upgrade 1) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= ?40?;
+					else */flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 60;
+				}
 				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < 0) {
 					player.buff("Ayo Armor").remove();
 					flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
@@ -905,7 +909,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				flags[kFLAGS.KAIBA_1] = rand(3);
 				flags[kFLAGS.KAIBA_2] = rand(4);
 				flags[kFLAGS.KAIBA_3] = rand(2);
-				flags[kFLAGS.KAIBA_4] = rand(3);
+				flags[kFLAGS.KAIBA_4] = rand(4);
 
 				//Racial perk daily effect Area
 
@@ -1799,9 +1803,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				inventory.takeItem(vehicles.GOBMPRI, null);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Howling Banshee Mech" && (player.elfScore() < 11 || player.tallness < 84)) {
-				if (player.elfScore() < 11) outputText("No way you’re going into this mechanical thing. You aren't an Elf and as such you can't used to cockpit designed specificaly with their anathomy in mind.\n\n");
-				else outputText("You aren't tall enough to properly use this vehicle anymore.\n\n");
+			if (player.vehiclesName == "Howling Banshee Mech" && player.tallness < 84) {
+				outputText("You aren't tall enough to properly use this vehicle anymore.\n\n");
 				var oldHPratio:Number = player.hp100/100;
 				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) {
 					var oldMax:Number = player.maxOverHP();

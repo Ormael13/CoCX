@@ -134,13 +134,13 @@ package classes.Scenes
 			outputText("-New ring (by Ormael): ring of physical protection - buyable at Jewel shop in Tel'Adre. Cost 1600 gems. Increase physical resistance by 3%.\n");
 			outputText("-New armor (by Ormael): Light Ayo Armor - buyable at Serena shop in HXD after reaching Soul Apprentice. Cost 5600 gems. Req. 20+ str/spe to put on. Unpowered it grants 36 armor / 6 resistance and lower str/spe by 10. Powered it grants 60 armor / 10 resistance and giving +10% to str/spe multi.\n");
 			outputText("-New armor (by Ormael): Heavy Ayo Armor - buyable at Serena shop in HXD after reaching Soul Personage. Cost 14000 gems. Req. 40+ str/spe to put on. Unpowered it grants 72 armor / 12 resistance and lower str/spe by 20. Powered it grants 120 armor / 20 resistance and giving +20% to str/spe multi.\n");
-			outputText("-New armor (by Ormael): HB armor - buyable at Kaiba shop in Tel'Adre. Cost 7200 gems. Req. 20+ str/spe to put on. Unpowered it grants 30 armor / 24 resistance and lower str/spe by 10. Powered it grants 50 armor / 40 resistance and giving +6%/+20% to str/spe multi.\n");
+			outputText("-New armor (by Ormael): HB armor - buyable at Kaiba shop in Tel'Adre. Cost 14400 gems. Req. 20+ str/spe to put on. Unpowered it grants 30 armor / 24 resistance and lower str/spe by 10. Powered it grants 50 armor / 40 resistance and giving +6%/+20% to str/spe multi. Increase melee/range weapon damage of Howling Banshee Mech by 50%.\n");
 			outputText("-Ayo Armors require periodical injection of soulforce to stay in 'powered' state. Depending on armor it can drain form 60 to 120 SF per hour. Menu to transfer SF to armor and later activate armor is in Unequip/Misc menu in Inventory. Also when PC taking off such type of armor all remaining in it SF is transfered into PC. In case that would make PC SF goes over the max capacity all over the top amount of SF is lost.\n");
-			outputText("-In unequip menu if PC not have specific slot item equipped button will be greyed out (even if PC not yet possible to equip item in that slot (like ring 2nd to 4th)). Also bit of rearrange buttons on first page preparing for future new slot for equipment to be added..\n");
-			outputText("-New head jewelery/accesory/misc (by Ormael): HB Helmet - buyable at Kaiba shop in Tel'Adre. Cost 720 gems. Increase armor by 5 and magic resistance by 4.\n");
-			outputText("-New vehicle (by Ormael): Howling Banshee Mech - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems. Would increase Armor and Magic Resistance by 15 and giving +15%/+10%/+25% to str/tou/spe multi. Can be upgraded by using blueprint and materials (by PC goblin or any other capable to do this goblin npc).\n");
+			outputText("-In unequip menu if PC not have specific slot item equipped button will be greyed out (even if PC not yet possible to equip item in that slot (like ring 2nd to 4th)). Also bit of rearrange buttons on first page preparing for future new slot for equipment to be added.\n");
+			outputText("-New head jewelery/accesory/misc (by Ormael): HB Helmet - buyable at Kaiba shop in Tel'Adre. Cost 1440 gems. Increase armor by 5 and magic resistance by 4. Increase melee/range weapon damage of Howling Banshee Mech by 20%.\n");
 			outputText("-New enemies possible to encounter during Blight Ridge exploration: Corrupted Basic Flesh Golem - lvl 35, Corrupted Basic Flesh Golem - lvl 36.\n");
-			//outputText("-New enemies possible to encounter during Bog exploration: Glacial Troll (Male or Female) - lvl (70-100)\n");
+			outputText("-New underwear (upper) (by Ormael): HB shirt - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems, 4 armor / 3 resistance, reduces fire/ice/electric damage taken by 10%, increase soulforce stored and usable by ayo armor by 150 and increase melee/range weapon damage of Howling Banshee Mech by 5%.\n");
+			outputText("-New underwear (lower) (by Ormael): HB shorts - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems, 4 armor / 3 resistance, reduces fire/ice/electric damage taken by 10%, increase soulforce stored and usable by ayo armor by 150 and increase melee/range weapon damage of Howling Banshee Mech by 5%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -162,8 +162,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New enemies possible to encounter during Bog exploration: Glacial Troll (Male or Female) - lvl (70-100)
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -179,6 +178,8 @@ package classes.Scenes
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");//New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies. Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
+			//outputText("-New vehicle (by Ormael): Howling Banshee Mech - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems. Would increase Armor and Magic Resistance by 15 and giving +15%/+10%/+25% to str/tou/spe multi. ");
+			//outputText("When used with any ayo armor it would increase soulforce drain from armor by 60 units, increase soulforce stored and usable by ayo armor by 1,000 and boost mech meele/range weapon damage by 25%. Can be upgraded by using blueprint and materials (by PC goblin or any other capable to do this goblin npc).\n");
 			outputText("-Fixed bugs: Bugfixes / Typo fixing by Pyromania & Liadri, Luna event not happening in forest after PC fire her at first Full Moon event conclusion, some minor errors in calculation and display bonuses for kitsunes, some of Slave Excellia scenes sending back to Fixed Excellia, game ocassionaly incorrectly desc monsters in combat due to forced PC gender setting, returning from any type of minion setting ");
 			outputText("in middle of combat been treated as new turn, Zenji Food option not always resetting, soultraining ring not been accounted for when cultivating, Akbal lust victory not showing any post combat options sometimes, some of enemies like hellhoud been seen as valid target for tailpeg unique sex scene, Yara's Piercing Studio Rare menu Back button not sending back even to main menu, green slime able to lower it ");
 			outputText("lust below 0, Drider Incubus Anal sex giving PC imps pregnancy, bunny herm scenes on plains still TF-ing PC despite been undead/gargoyle, goblin ale huminizing effect not taking into account PC resistance to been TF'd, missing fatigue cost check on Money Strike, Diana not able to level up after joining camp, Many Birds soulskill dealing damage twice, some of attacks incorrect texts, some enemy perks ");

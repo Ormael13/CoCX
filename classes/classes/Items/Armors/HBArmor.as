@@ -13,7 +13,7 @@ package classes.Items.Armors
 		
 		public function HBArmor() 
 		{
-			super("HBArmor","HBArmor","HB armor","a HB armor",50,40,7200,"This white suit of armor is more than just platemail - it was reverse engineered from almost intact armor of elf-like offworlders. It protective properties would increase as long user is capable to feed it on regular basis with soulforce.","Light Ayo");
+			super("HBArmor","HBArmor","HB armor","a HB armor",50,40,14400,"This white suit of armor is more than just platemail - it was reverse engineered from almost intact armor of elf-like offworlders. It protective properties would increase as long user is capable to feed it on regular basis with soulforce.","Light Ayo");
 		}
 		
 		override public function get def():Number { 

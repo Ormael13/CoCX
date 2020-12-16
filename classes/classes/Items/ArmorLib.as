@@ -21,6 +21,7 @@ package classes.Items
 		public const B_DRESS:Armor = new Armor("B.Dress","Long Dress","long ballroom dress patterned with sequins","a ballroom dress patterned with sequins",0,0,40,"A long ballroom dress patterned with sequins.  Perfect for important occasions.","Medium");
 		public const B_QIPAO:Armor = new Armor("B.Qipao","BlueQipao","Blue Lunar new year dress (f)","a Blue Lunar new year dress (f)",0,0,100,"A simple yet elegant blue qipao with floral motif. This dress is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const BEEARMR:Armor = new BeeArmor();
+		public const BERA:Armor = new BerserkerArmor();
 		public const BIMBOSK:ArmorWithPerk = new ArmorWithPerk("BimboSk","BimboSk","bimbo skirt","a skirt that looks like it belongs on a bimbo",1,0,40,"A tight, cleavage-inducing halter top and an extremely short miniskirt.  The sexual allure of this item is undoubtable.","Light",
 				PerkLib.SluttySeduction,10,0,0,0,"Your delightfully slutty yet upbeat garb helps you seduce your foes!", false, false);
 		public const BLIZZ_K:BlizzardKimono = new BlizzardKimono();
@@ -131,7 +132,6 @@ package classes.Items
 				PerkLib.WizardsEndurance,25,0,0,0);
 		public const WALIC:ArmorWithPerk = new WalpurgisIzaliaRobe();
 		public const VLAR:ArmorWithPerk = new VladimirRegalia();
-		public const BERA:Armor = new BerserkerArmor();
 		public const WKIMONO:ArmorWithPerk = new ArmorWithPerk("W.Kimono","W.Kimono","white kimono","a white kimono",0,1,200,"This lovely white kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
 				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
 		/*

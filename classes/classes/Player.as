@@ -2230,6 +2230,8 @@ use namespace CoC;
 
 		public override function damageFirePercent():Number {
 			var mult:Number = damageMagicalPercent();
+			if (upperGarmentName == "HB shirt") mult -= 10;
+			if (lowerGarmentName == "HB shorts") mult -= 10;
 			if (findPerk(PerkLib.FromTheFrozenWaste) >= 0 || findPerk(PerkLib.ColdAffinity) >= 0) mult += 100;
 			if (findPerk(PerkLib.FireAffinity) >= 0) mult -= 50;
 			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1) && (statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1) > 0)) mult -= statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1);
@@ -2331,12 +2333,14 @@ use namespace CoC;
 
 		public override function damageIcePercent():Number {
 			var mult:Number = damageMagicalPercent();
+			if (upperGarmentName == "Fur bikini top") mult -= 10;
+			if (lowerGarmentName == "Fur loincloth" || lowerGarmentName == "Fur panty") mult -= 10;
+			if (upperGarmentName == "HB shirt") mult -= 10;
+			if (lowerGarmentName == "HB shorts") mult -= 10;
+			if (necklaceName == "Blue Winter scarf") mult -= 20;
 			if (findPerk(PerkLib.FromTheFrozenWaste) >= 0 || findPerk(PerkLib.ColdAffinity) >= 0) mult -= 50;
 			if (findPerk(PerkLib.IcyFlesh) >= 0) mult -= 40;
 			if (findPerk(PerkLib.FireAffinity) >= 0) mult += 100;
-			if (upperGarmentName == "Fur bikini top") mult -= 10;
-			if (lowerGarmentName == "Fur loincloth" || lowerGarmentName == "Fur panty") mult -= 10;
-			if (necklaceName == "Blue Winter scarf") mult -= 20;
 			if (jewelryEffectId == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude3;
@@ -2439,6 +2443,8 @@ use namespace CoC;
 			if (armorName == "Goblin Technomancer clothes") mult -= 25;
 			if (upperGarmentName == "Technomancer bra") mult -= 15;
 			if (lowerGarmentName == "Technomancer panties") mult -= 15;
+			if (upperGarmentName == "HB shirt") mult -= 10;
+			if (lowerGarmentName == "HB shorts") mult -= 10;
 			if (findPerk(PerkLib.LightningAffinity) >= 0) mult -= 50;
 			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) mult -= 10;
 			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) mult -= 30;

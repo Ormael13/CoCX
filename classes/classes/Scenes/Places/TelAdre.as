@@ -1095,11 +1095,12 @@ public function kaibaShopMainMenu2():void {
 	//Slot 3 Any one of the following: Ring of deadeye aim, Ring of Ambidexty
 	if (flags[kFLAGS.KAIBA_3] == 0) addButton(2, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Remove range accuracy penalty when flying and increase range accuracy by 20%.");
 	if (flags[kFLAGS.KAIBA_3] == 1) addButton(2, "R.Ambidexty", buyItem, jewelries.RNGAMBI).hint("Ring of Ambidexty - Remove melee accuracy penalty when flying and increase melee accuracy by 15%.");
-	//Slot 4 Any one of the following: HB helmet, HB armor, HB mech
+	//Slot 4 Any one of the following: HB helmet, HB armor, HB shirt, HB shorts
 	if (flags[kFLAGS.KAIBA_4] == 0) addButton(3, "HBHelmet", buyItem, headjewelries.HBHELM).hint("HB helmet - Increase armor by 5 and magic resistance by 4.");
 	if (flags[kFLAGS.KAIBA_4] == 1) addButton(3, "HBArmor", buyItem, armors.HBARMOR).hint("HB armor - Increasing it armor/resistance when power up by soulforce.");
 	//later put her lower body armor part of HB set
-	if (flags[kFLAGS.KAIBA_4] == 2) addButton(3, "HBMech", buyItem, vehicles.HB_MECH).hint("Howling Banshee Mech - Elven battle mech. Upgradable if you know any goblin willing to work on it.");
+	if (flags[kFLAGS.KAIBA_4] == 2) addButton(3, "HBShirt", buyItem, undergarments.HBSHIRT).hint("HB Shirt - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
+	if (flags[kFLAGS.KAIBA_4] == 3) addButton(3, "HBShorts", buyItem, undergarments.HBSHORT).hint("HB Shorts - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
 	//Slot 5 Any one of the following: 
 	//if (flags[kFLAGS.KAIBA_5] == 0) 
 	

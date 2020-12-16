@@ -28,6 +28,7 @@ package classes.Items
 		public const EW_LBRA:Undergarment = new Undergarment("EW.LBra", "E.W. Laced Bra", "ebonweave laced bra", "an ebonweave laced bra", TYPE_UPPERWEAR, 900, ". \n\nType: Undergarment (Upper)");
 		public const EW_VEST:Undergarment = new Undergarment("EW.Vest", "E.W. Vest", "ebonweave vest", "an ebonweave vest", TYPE_UPPERWEAR, 900, "This vest is ebonweave, created using refined ebonbloom petals. Elastic, form-fitting and somewhat transparent, this comfortable vest will display your curves, masculine or feminine. \n\nType: Undergarment (Upper)");
 		public const F_B_TOP:Undergarment = new Undergarment("F.B.Top", "F.Bikini Top", "Fur bikini top", "a pair of Fur bikini top", TYPE_UPPERWEAR, 600, "This white fur bikini made from a material similar to yeti furs help reduce the effect of cold environment. (+10% ice resistance) \n\nType: Undergarment (Upper)");
+		public const HBSHIRT:Undergarment = new Undergarment("HBShirt", "HBShirt", "HB shirt", "a HB shirt", TYPE_UPPERWEAR, 1500, "A white shirt made from fabric capable to conduct soulforce. \n\nType: Undergarment (Upper)");
 		public const LTX_BRA:Undergarment = new Undergarment("Ltx.Bra", "Latex Bra", "latex bra", "a pair of latex bra", TYPE_UPPERWEAR, 250, "This bra is black and shiny, obviously made of latex. It's designed to fit snugly against your breasts. \n\nType: Undergarment (Upper)");
 		public const SS_BRA :Undergarment = new Undergarment("SS. Bra", "S.Silk Bra", "spider-silk bra", "a pair of spider-silk bra", TYPE_UPPERWEAR, 1000, "This bra looks incredibly comfortable. It's as white as snow and finely woven with hundreds of strands of spider silk. \n\nType: Undergarment (Upper)");
 		public const SSSHIRT:Undergarment = new Undergarment("SSShirt", "S.Silk Shirt", "spider-silk shirt", "a spider-silk shirt", TYPE_UPPERWEAR, 1000, "A comfortable undershirt.  It's as white as snow and woven with hundreds of strands of fine spider silk. \n\nType: Undergarment (Upper)");
@@ -45,6 +46,7 @@ package classes.Items
 		public const F_LOIN_:Undergarment = new Undergarment("F. Loin", "Fur Loin", "Fur loincloth", "a Fur loincloth", TYPE_LOWERWEAR, 600, "This white fur loincloth made from a material similar to yeti furs help reduce the effect of cold environment. (+10% ice resistance) \n\nType: Undergarment (Lower)", "NagaWearable");
 		public const F_PANTY:Undergarment = new Undergarment("F.Panty", "Fur Panty", "Fur panty", "a pair of Fur panty", TYPE_LOWERWEAR, 600, "This white fur panty made from a material similar to yeti furs help reduce the effect of cold environment. (+10% ice resistance) \n\nType: Undergarment (Lower)");
 		public const GARTERS:Undergarment = new Undergarment("Garters", "Garters", "stockings and garters", "a pair of stockings and garters", TYPE_LOWERWEAR, DEFAULT_VALUE, "These pairs of stockings, garters and lingerie are perfect for seducing your partner! \n\nType: Undergarment (Lower)");
+		public const HBSHORT:Undergarment = new Undergarment("HBPanty", "HBShorts", "HB shorts", "a pair of HB shorts", TYPE_LOWERWEAR, 1500, "Those white long shorts are made from fabric capable to conduct soulforce. \n\nType: Undergarment (Lower)");
 		public const LTXSHRT:Undergarment = new Undergarment("LtxShrt", "LatexShorts", "latex shorts", "a pair of latex shorts", TYPE_LOWERWEAR, 300, "These shorts are black and shiny, obviously made of latex. It's designed to fit snugly against your form. \n\nType: Undergarment (Lower)");
 		public const LTXTHNG:Undergarment = new Undergarment("LtxThng", "LatexThong", "latex thong", "a pair of latex thong", TYPE_LOWERWEAR, 300, "This thong is black and shiny, obviously made of latex. It's designed to fit snugly against your form. \n\nType: Undergarment (Lower)");
 		public const R_JOCK :RunedEbonweaveJock = new RunedEbonweaveJock();
@@ -57,7 +59,5 @@ package classes.Items
 		public function UndergarmentLib() 
 		{
 		}
-		
 	}
-
 }

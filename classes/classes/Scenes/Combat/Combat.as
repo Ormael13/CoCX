@@ -1585,8 +1585,11 @@ public class Combat extends BaseContent {
 			if (player.vehicles == vehicles.GOBMPRI) damage *= 1.5;
 		}
         if (player.vehicles == vehicles.HB_MECH) {
-			//if (player.armor == armors.HBARMOR) damage *= 1.1;
-			//if (player.headJewelry == headjewelries.HBHELM) damage *= 1.05;
+			if (player.armor == armors.HBARMOR) damage *= 1.5;
+			if (player.headJewelry == headjewelries.HBHELM) damage *= 1.2;
+            if (player.upperGarment == undergarments.HBSHIRT) damage *= 1.05;
+            if (player.lowerGarment == undergarments.HBSHORT) damage *= 1.05;
+			if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) damage *= 1.25;
 		}
         //Bonus sand trap damage!
         if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
@@ -2335,6 +2338,13 @@ public class Combat extends BaseContent {
             else if (player.weaponRangeAttack >= 101 && player.weaponRangeAttack < 151) damage *= (3.75 + ((player.weaponRangeAttack - 100) * 0.02));
             else if (player.weaponRangeAttack >= 151 && player.weaponRangeAttack < 201) damage *= (4.75 + ((player.weaponRangeAttack - 150) * 0.015));
             else damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
+			if (player.vehicles == vehicles.HB_MECH) {
+				if (player.armor == armors.HBARMOR) damage *= 1.5;
+				if (player.headJewelry == headjewelries.HBHELM) damage *= 1.2;
+                if (player.upperGarment == undergarments.HBSHIRT) damage *= 1.05;
+                if (player.lowerGarment == undergarments.HBSHORT) damage *= 1.05;
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) damage *= 1.25;
+			}
             if (damage == 0) {
                 if (monster.inte > 0) {
                     outputText(monster.capitalA + monster.short + " shrugs as the " + ammoWord + " bounces off them harmlessly.\n\n");

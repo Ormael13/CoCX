@@ -287,14 +287,23 @@ use namespace CoC;
 			clearOutput();
 			var currentArmorSFDrainrate:Number = 0;
 			if (player.armor == armors.LAYOARM) currentArmorSFDrainrate += 60;
-			if (player.armor == armors.HBARMOR) {
-				currentArmorSFDrainrate += 80;
-			}
+			if (player.armor == armors.HBARMOR) currentArmorSFDrainrate += 80;
 			if (player.armor == armors.HAYOARM) currentArmorSFDrainrate += 120;
+			if (player.vehicles == vehicles.HB_MECH) {
+				/*if (upgrade 1) currentArmorSFDrainrate += ?40?;
+				else */currentArmorSFDrainrate += 60;
+			}
 			maxSFCapacity = 0;
 			if (player.armor == armors.LAYOARM) maxSFCapacity += 1500;
-			if (player.armor == armors.HBARMOR) maxSFCapacity += 2000;
+			if (player.armor == armors.HBARMOR) {
+				maxSFCapacity += 2000;
+				if (player.headJewelry == headjewelries.HBHELM) maxSFCapacity += 400;
+			}
 			if (player.armor == armors.HAYOARM) maxSFCapacity += 3000;
+			if (player.upperGarment == undergarments.HBSHIRT) maxSFCapacity += 150;
+			if (player.lowerGarment == undergarments.HBSHORT) maxSFCapacity += 150;
+			if (player.vehicles == vehicles.HB_MECH) maxSFCapacity += 1000;
+			if (player.vehicles == vehicles.HB_MECH) maxSFCapacity += 1000;
 			outputText("Currently used Ayo Armor name: "+player.armorName+"\n\n");
 			outputText("Currently used Ayo Armor soulforce drain rate (per hour): "+currentArmorSFDrainrate+"\n\n");
 			outputText("Soulforce reserves in armor: "+flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR]+" / "+maxSFCapacity+"\n\n");
