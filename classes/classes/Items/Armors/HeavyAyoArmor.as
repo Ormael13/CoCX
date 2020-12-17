@@ -12,7 +12,7 @@ package classes.Items.Armors
 	public class HeavyAyoArmor extends Armor {
 		
 		public function HeavyAyoArmor() {//100 * armor + mres
-			super("HAyoArm","HAyoArm","heavy ayo armor","a heavy ayo armor",120,20,14000,"This suit of armor is more than typical heavy armor - it have added pieces of Ayo Tech that increase by a large margin it properties as long user is capable to feed it on regular basis with soulforce.","Heavy Ayo");
+			super("HAyoArm","HAyoArm","heavy ayo armor","a heavy ayo armor",120,20,14000,"This suit of armor is more than typical heavy armor - it have added pieces of Ayo Tech that increase by a huge margin it properties as long user is capable to feed it on regular basis with soulforce.","Heavy Ayo");
 		}
 		
 		override public function get def():Number { 

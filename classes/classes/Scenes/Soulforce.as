@@ -1624,7 +1624,7 @@ use namespace CoC;
 				addButton(2, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Bastet Whip.");
 				addButton(3, "NineTailWhip", AddNineTailWhip).hint("Add 1 Nine Tail Whip.");
 				addButton(4, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
-				//addButton(5, "UH Ayo Arm", AddUltraHeavyAyoArmor).hint("Add 1 Ultra heavy Ayo Armor for testing purposes.");
+				addButton(5, "UH Ayo Arm", AddUltraHeavyAyoArmor).hint("Add 1 Ultra heavy Ayo Armor for testing purposes.");
 				//6
 				//7
 				addButton(8, "HB Mech", AddHBMech).hint("Add 1 Howling Banshee Mech for testing purposes.");
@@ -1793,7 +1793,7 @@ use namespace CoC;
 		}
 		public function AddUltraHeavyAyoArmor():void {
 			outputText("\n\n<b>(Gained 1 Ultra Heavy Ayo Armor!)</b>\n\n");
-			inventory.takeItem(armors.LAYOARM, curry(EquipmentMenu, 1));
+			inventory.takeItem(armors.UHAYOARM, curry(EquipmentMenu, 1));
 		}
 		public function AddHBMech():void {
 			outputText("\n\n<b>(Gained 1 Howling Banshee Mech!)</b>\n\n");

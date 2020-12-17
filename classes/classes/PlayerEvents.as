@@ -203,8 +203,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Ayo Armors SF drain
 			if (player.isInAyoArmor() && flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) {
 				if (player.armor == armors.LAYOARM) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 60;
-				if (player.armor == armors.HBARMOR) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 80;
 				if (player.armor == armors.HAYOARM) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 120;
+				if (player.armor == armors.UHAYOARM) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 240;
+				if (player.armor == armors.HBARMOR) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 180;
 				if (player.vehicles == vehicles.HB_MECH) {
 					/*if (upgrade 1) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= ?40?;
 					else */flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 60;
@@ -213,8 +214,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.buff("Ayo Armor").remove();
 					flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
 					outputText("\nYour ayo armor power reserves reached bottom. With a silent hiss armor depowers itself making you feel slower and heavier.\n");
-					if (player.armor == armors.LAYOARM || player.armor == armors.HBARMOR) player.buff("Ayo Armor").addStats( {"str": -10, "spe": -10} );
+					if (player.armor == armors.LAYOARM) player.buff("Ayo Armor").addStats( {"str": -10, "spe": -10} );
 					if (player.armor == armors.HAYOARM) player.buff("Ayo Armor").addStats( {"str": -20, "spe": -20} );
+					if (player.armor == armors.UHAYOARM) player.buff("Ayo Armor").addStats( {"str": -50, "spe": -50} );
+					if (player.armor == armors.HBARMOR) player.buff("Ayo Armor").addStats( {"str": -30, "spe": -30} );
 					EngineCore.statScreenRefresh();
 					needNext = true;
 				}
@@ -906,10 +909,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 
 				//Kaiba shor stock daily update
-				flags[kFLAGS.KAIBA_1] = rand(3);
-				flags[kFLAGS.KAIBA_2] = rand(4);
-				flags[kFLAGS.KAIBA_3] = rand(2);
-				flags[kFLAGS.KAIBA_4] = rand(4);
+				flags[kFLAGS.KAIBA_0] = rand(3);
+				flags[kFLAGS.KAIBA_1] = rand(4);
+				flags[kFLAGS.KAIBA_2] = rand(2);
+				flags[kFLAGS.KAIBA_3] = rand(4);
+				flags[kFLAGS.KAIBA_4] = rand(3);
+				flags[kFLAGS.KAIBA_5] = rand(3);
 
 				//Racial perk daily effect Area
 

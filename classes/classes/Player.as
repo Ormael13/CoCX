@@ -1023,7 +1023,7 @@ use namespace CoC;
 		//Is in Ayo armor
 		public function isInAyoArmor():Boolean
 		{
-			return armorPerk == "Light Ayo" || armorPerk == "Heavy Ayo";
+			return armorPerk == "Light Ayo" || armorPerk == "Heavy Ayo" || armorPerk == "Ultra Heavy Ayo";
 		}
 		//Is in goblin mech
 		public function isInGoblinMech():Boolean
