@@ -2982,7 +2982,8 @@ public class Appearance extends Utils
 					[VaginaClass.MANTICORE, "ultrasensitive"],
 					[VaginaClass.CANCER, "foaming"],
 					[VaginaClass.DEMONIC, "fiendish"],
-					[VaginaClass.ALRAUNE, "floral"]
+					[VaginaClass.ALRAUNE, "floral"],
+					[VaginaClass.SCYLLA, "maw-like"]
 				]
 		);
 

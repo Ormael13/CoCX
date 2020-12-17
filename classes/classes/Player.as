@@ -8365,7 +8365,9 @@ use namespace CoC;
 				scyllaCounter++;
 			if (faceType != Face.HUMAN)
 				scyllaCounter--;
-			if (eyes.type == Eyes.KRAKEN)
+			if (hairType == Hair.NORMAL)
+				scyllaCounter++;
+			if (eyes.type == Eyes.KRAKEN || eyes.type == Eyes.HUMAN)
 				scyllaCounter++;
 			if (ears.type == Ears.ELFIN)
 				scyllaCounter++;
@@ -8386,6 +8388,10 @@ use namespace CoC;
 			if (InCollection(eyes.colour, krakenEyeColor))
 				scyllaCounter++;
 			if (tallness > 96)
+				scyllaCounter++;
+			if (wings.type > Wings.NONE)
+				scyllaCounter+=2;
+			if (hasVagina() && (vaginaType() == VaginaClass.SCYLLA))
 				scyllaCounter++;
 			if (findPerk(PerkLib.InkSpray) >= 0)
 				scyllaCounter++;
