@@ -3708,6 +3708,32 @@ public class Combat extends BaseContent {
                 outputText("You lash at your opponent with your many vines striking twele times.");
                 ExtraNaturalWeaponAttack(6);
             }
+
+            //Unique TENTACLES STRIKES
+            if ((player.isScylla() || player.isKraken()) && player.tallness >= 70){
+                if(player.hasStatusEffect(StatusEffects.InvisibleOrStealth)){
+                    outputText("You raise your tentacles and begin to violently slam them against your opponent as if you were trying to wreck a ship.");
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    if(player.isKraken()){
+                        ExtraNaturalWeaponAttack();
+                        ExtraNaturalWeaponAttack();
+                    }
+                    outputText("\n");
+                }
+                else{
+                    outputText("You lunge for two additional scythe slash.");
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    outputText("\n");
+                }
+            }
         }
         // Do all other attacks
         meleeDamageAcc();

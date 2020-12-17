@@ -122,8 +122,18 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			else{
 				if(!letzRape){
 					outputText("You simply stay still as the slime slowly flows over you, covering your legs to prevent your escape.\n\n");
+					outputText("\"<i>Mmmm...a prey that doesn’t resist. How delicious…. Nice body, too. Quite the catch I have found, huh. I think I will help myself.</i>\"\n\n");
 				}
-				outputText("\"<i>Mmmm...a prey that doesn’t resist. How delicious…. Nice body, too. Quite the catch I have found, huh. I think I will help myself.</i>\"\n\n");
+				else{
+					outputText("You smirk and proceed to play with the slime’s body, discarding your gear to the side as you prepare for some nice relief. " +
+							"However the moment your naked body comes into contact with her she swiftly uses her mass to shift the position, " +
+							"forcing you on your back as she now towers over you.\n\n" +
+							"\"<i>Hehehe… you poor idiot you thought you could just rape the rapist? I got you right where I wanted and now that you're naked I can proceed with what I had in mind, starting with making you more compliant.</i>\"\n\n" +
+							"You realise the depth of your mistake as your body begins to tingle. " +
+							"Obviously her fluids are filled with aphrodisiacs and they began affecting you the moment you were in contact with her body. " +
+							"Now that you are weakened by your own arousal the slime has no issue taking over, some of her drool falling over your chest as she slowly covers you. " +
+							"Eventually, you are left floating inside her body as she forces you to sit, a slimy hand holding you up. ");
+				}
 				outputText("Some of her drool falls over your chest as the slime slowly covers you. Eventually, you are left floating inside her body as she forces you to sit, a slimy hand holding you up. You aren’t even granted the dignity of undressing yourself as the slime forcefully makes your gear float off with her oozing masses. ");
 				if(player.hasVagina()) outputText("You barely register your nakedness as your pussy is forced open, your eyes going wide as the slime fills you with a solid dick shaped goo mass. At first you try to close your pussy to keep it out, but the more you tighten, the deeper it goes… forcefully fucking you through the small hole no other cock but hers could enter! Your struggle is short lived, your lips opening wide again as the goo methodically fucks you up to the cervix. ");
 				if(player.hasCock()){
