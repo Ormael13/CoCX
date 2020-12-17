@@ -3722,15 +3722,9 @@ public class Combat extends BaseContent {
                     ExtraNaturalWeaponAttack();
                     ExtraNaturalWeaponAttack();
                     if(player.isKraken()){
-                        ExtraNaturalWeaponAttack();
-                        ExtraNaturalWeaponAttack();
+                        ExtraNaturalWeaponAttack(1.5);
+                        ExtraNaturalWeaponAttack(1.5);
                     }
-                    outputText("\n");
-                }
-                else{
-                    outputText("You lunge for two additional scythe slash.");
-                    ExtraNaturalWeaponAttack();
-                    ExtraNaturalWeaponAttack();
                     outputText("\n");
                 }
             }
