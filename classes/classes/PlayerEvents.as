@@ -2577,7 +2577,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					LunaFollower.Nursed = false;
 				}
 			}
-			if (isNightTime && !camp.IsWaitingResting){
+			//Luna mooning reset
+			if (LunaFollower.Sated) {
+				LunaFollower.SatedCooldown -= 1
+				if (LunaFollower.SatedCooldown == 0)
+				{
+					LunaFollower.Sated = false;
+				}
+			}
+			if (isNightTime && !camp.IsWaitingResting && !LunaFollower.Sated){
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && (flags[kFLAGS.LUNA_JEALOUSY] >= 400 || flags[kFLAGS.LUNA_FOLLOWER] > 6) && player.gender > 0 && player.hasStatusEffect(StatusEffects.LunaWasWarned) && !player.hasStatusEffect(StatusEffects.LunaOff)) {
 					LunaFullMoonScene = true;
 					return true;
@@ -2604,7 +2612,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 
 			if (LunaFullMoonScene){
-				SceneLib.lunaFollower.fullMoonEvent(true);
+				if (camp.IsSleeping)
+				{
+					SceneLib.lunaFollower.fullMoonEvent();
+				}
+				else
+				{
+					SceneLib.lunaFollower.fullMoonEvent(true);
+				}
 				LunaFullMoonScene = false;
 				return true;
 			}

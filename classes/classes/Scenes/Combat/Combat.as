@@ -3737,6 +3737,26 @@ public class Combat extends BaseContent {
                 outputText("You lash at your opponent with your many vines striking twele times.");
                 ExtraNaturalWeaponAttack(6);
             }
+
+            //Unique TENTACLES STRIKES
+            if ((player.isScylla() || player.isKraken()) && player.tallness >= 70){
+                if(player.hasStatusEffect(StatusEffects.InvisibleOrStealth)){
+                    outputText("You raise your tentacles and begin to violently slam them against your opponent as if you were trying to wreck a ship.");
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    if(player.isKraken()){
+                        ExtraNaturalWeaponAttack(1.5);
+                        ExtraNaturalWeaponAttack(1.5);
+                    }
+                    outputText("\n");
+                }
+            }
         }
         // Do all other attacks
         meleeDamageAcc();
@@ -10367,7 +10387,7 @@ public class Combat extends BaseContent {
             return;
         }
         if (monster.hasStatusEffect(StatusEffects.AlrauneRunDisabled)) {
-            if (player.hasKeyItem("Torch")){
+            if (player.hasKeyItem("Torch") < 0){
                 clearOutput();
                 outputText("You burn away the vines and run for it, much to the frustration of the [monster name]. You’re thankful that she’s this slow.\n");
                 inCombat = false;

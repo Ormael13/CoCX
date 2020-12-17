@@ -907,7 +907,7 @@ use namespace CoC;
 				|| tail.type == Tail.GARGOYLE || tail.type == Tail.GARGOYLE_2 || tail.type == Tail.MANTICORE_PUSSYTAIL
 				|| tail.type == Tail.SCORPION || tail.type == Tail.BEE_ABDOMEN || lowerBody == LowerBody.FROSTWYRM
 				|| lowerBody == LowerBody.NAGA);}
-		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasPerk(PerkLib.MorphicWeaponry) || isAlraune());}
+		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasPerk(PerkLib.MorphicWeaponry) || isAlraune() || isScylla() || isKraken());}
 		//Some other checks
 		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 12); }
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }
@@ -8413,7 +8413,9 @@ use namespace CoC;
 				scyllaCounter++;
 			if (faceType != Face.HUMAN)
 				scyllaCounter--;
-			if (eyes.type == Eyes.KRAKEN)
+			if (hairType == Hair.NORMAL)
+				scyllaCounter++;
+			if (eyes.type == Eyes.KRAKEN || eyes.type == Eyes.HUMAN)
 				scyllaCounter++;
 			if (ears.type == Ears.ELFIN)
 				scyllaCounter++;
@@ -8434,6 +8436,10 @@ use namespace CoC;
 			if (InCollection(eyes.colour, krakenEyeColor))
 				scyllaCounter++;
 			if (tallness > 96)
+				scyllaCounter++;
+			if (wings.type > Wings.NONE)
+				scyllaCounter+=2;
+			if (hasVagina() && (vaginaType() == VaginaClass.SCYLLA))
 				scyllaCounter++;
 			if (findPerk(PerkLib.InkSpray) >= 0)
 				scyllaCounter++;

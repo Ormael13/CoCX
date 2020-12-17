@@ -644,11 +644,14 @@ public class PlayerAppearance extends BaseContent {
 			if(player.vaginaType() == VaginaClass.EQUINE){
 				outputText("Your " + vaginaDescript(0) + " is deep and wide just like that of a horse. Sometime you lament that most of your partners are no longuer big enought to satisfy you. Inside you have a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
 			}
+			else if (player.lowerBody == LowerBody.MELKIE){
+				outputText("You have two set of vaginal lips one twice as bigger then the other and hidding the smaller within it folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+			}
 			else if(player.vaginaType() == VaginaClass.CANCER){
 				outputText("You have a foaming " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
 			}
-			else if (player.lowerBody == LowerBody.MELKIE){
-				outputText("You have two set of vaginal lips one twice as bigger then the other and hidding the smaller within it folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+			else if (player.vaginaType() == VaginaClass.SCYLLA){
+				outputText("you have a " + vaginaDescript(0) + " with no clit. Instead, several concentric rings of small nubs line up the walls of your gaping maw of a vagina, each easily as sensitive as a human clitoris would be.");
 			}
 			else if (player.vaginaType() == VaginaClass.MANTICORE){
 				outputText("You have a ultrasensitive " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit. " +
