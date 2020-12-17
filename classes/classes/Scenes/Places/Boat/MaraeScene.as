@@ -112,7 +112,6 @@ public function encounterMarae():void {
 				}
 			}
 		}
-
 	}
 	//Dungeon inoperable
 	else {
@@ -144,14 +143,14 @@ public function encounterMarae():void {
 					addButton(2, "Accept", maraeBadEnd);
 					addButton(3, "Prank", maraeStealLethicite, true, null, null, "Play a practical joke on the corrupted goddess and pretend to steal her Lethicite. Why would you do this?", "Practical Joke");
 					addButton(4, "FIGHT!", promptFightMarae1);
-
 			}
 			//Repeat corrupt meeting
 			else {
 				outputText("Marae smiles and leans forwards, cupping her breasts in her hands.  Amazingly, she flows out from the tree, standing as a free woman before you.  She massages her G-sized breasts, winking lewdly and pinching her shining purplish nipples, squeezing out droplets of honey-colored sap.  She blows you a kiss while the flower at her groin opens welcomingly.  She moans, \"<i>Reconsider my offer yet, [name]?  I won't force you, but don't you want to spend eternity in heaven with a living goddess?</i>\"");
-				//Yes - accept, No- run
-				doYesNo(maraeBadEnd, runFromPervertedGoddess);
-				addButton(3, "FIGHT!", promptFightMarae1);
+				menu();
+				addButton(0, "Run", runFromPervertedGoddess);
+				addButton(2, "Accept", maraeBadEnd);
+				addButton(4, "FIGHT!", promptFightMarae1);
 			}
 		}
 	}
@@ -342,7 +341,6 @@ public function loseAgainstMarae():void {
 		else outputText("Your desire to keep fighting has been slain by your overwhelming lust and you collapse. \"<i>Control your urges and get some rest, champion,</i>\" Marae says. You finally black out from your lust. \n\nBy the time you wake up, you find yourself in your camp.");
 		cleanupAfterCombat();
 	}
-
 }
 
 public function winAgainstMarae():void {
@@ -404,19 +402,10 @@ private function maraeBadEnd():void {
 	outputText("She approaches you, her breasts swinging pendulously and dripping sap.   Mesmerized by her swaying mammaries, you watch until she mashes you into them with an enormous hug.  A hand traces down your chest to your groin");
 	if(player.gender == 0) outputText(" where it pauses in momentary confusion");
 	outputText(".  She giggles and presses your face into her one of her verdant nipples.  You open your mouth to accept the purplish-green bud, licking and suckling it, encouraging her sweet sap to flow into your hungry mouth.  She gushes fluids and pulls you tightly against her tits, crushing you with soft flesh.\n\n");
-
 	outputText("The sap inside you makes your throat and belly tingle warmly, as if you had taken a strong drink.   Her milk-sap flows so quickly that you have to gulp it down to keep up.  Tiny burps escape your mouth every now and then as you work to gulp down the tainted treat.  You feel happy and secure, nestled in the bosom of a lust goddess.  ");
 	if(player.statusEffectv3(StatusEffects.Marble) > 0) outputText("Any thought or need to drink Marble's milk vanishes from your mind and body.  ");
 	outputText("Foggy euphoria seems to float into your mind, making it difficult to think of anything but emptying the nipple in front of you.   You feel the last few drops splash on your tongue before unnatural strength breaks the seal, yanking you away and forcing a fresh dripping tit into your lips.\n\n");
-
-	if(player.cocks.length == 0) {
-		outputText("A building sense of pressure grows in your groin, bulging the flesh of your crotch out.  You ignore it, focusing on suckling more of the sweet fluids from your goddess' breasts.   The warmth in your middle feels like it's dripping down into that new bulge, making it tingle with sensitivity.  You ignore it, and lash your tongue across the slippery nipple in your mouth, being rewarded with another warm blast of syrupy sap.   Your mind fills with an impenetrable haze of lust, overcoming any logic with thoughts of raw sex intermingled with animal desire. You're pulled back again by that unholy strength, fighting to get one last lick on that nipple.  Your [legs] and " + hipDescript() + " shake with lust, driven mad by sweet desire.  Marae reaches down to cup your groin, and blinds you with intense sensation.  She guides your gaze down to a new appendage that's sprouted from your needy groin – <b>a tentacle dick</b>!  It wavers to and fro, coiling on itself and tasting the air like a snake.\n\n");
-		player.createCock();
-		player.cocks[0].cockLength = 36;
-		player.cocks[0].cockThickness = 2;
-		player.cocks[0].cockType = CockTypesEnum.TENTACLE;
-	}
-	else {
+	if (player.hasCock()) {
 		outputText("You drink deeply, suckling her thick syrupy milk with strength born of an instantaneous addiction.  The desire to attain more of her 'milk' overrides any other thoughts, clouding over them like a dense morning fog.  The slick nipples feel like they tense and squirm in your mouth as you draw every last bit of their delicious cargo into your greedy gullet.  You " + hipDescript() + " twitch and squirm, throbbing and hard, making your [cocks] bob in the air.   Heedless of your groin's incessant begging, you work the nipple in your mouth as if it was your whole world, trying to pleasure as much as suckle.  You can feel your [cocks] squirming in the air  as if reaching for her.  Wait, squirming!?  You're pulled back from her nipple and given the chance to look down, where ");
 		if(player.tentacleCocks() < player.cockTotal()) {
 			for(var i:int = player.cocks.length; i >= 0; i--){
@@ -425,9 +414,14 @@ private function maraeBadEnd():void {
 		}
 		outputText("<b>you see your [cocks] waving around, seeking a nearby orifice to fuck!</b>\n\n");
 	}
-
+	else {
+		outputText("A building sense of pressure grows in your groin, bulging the flesh of your crotch out.  You ignore it, focusing on suckling more of the sweet fluids from your goddess' breasts.   The warmth in your middle feels like it's dripping down into that new bulge, making it tingle with sensitivity.  You ignore it, and lash your tongue across the slippery nipple in your mouth, being rewarded with another warm blast of syrupy sap.   Your mind fills with an impenetrable haze of lust, overcoming any logic with thoughts of raw sex intermingled with animal desire. You're pulled back again by that unholy strength, fighting to get one last lick on that nipple.  Your [legs] and " + hipDescript() + " shake with lust, driven mad by sweet desire.  Marae reaches down to cup your groin, and blinds you with intense sensation.  She guides your gaze down to a new appendage that's sprouted from your needy groin – <b>a tentacle dick</b>!  It wavers to and fro, coiling on itself and tasting the air like a snake.\n\n");
+		player.createCock();
+		player.cocks[0].cockLength = 36;
+		player.cocks[0].cockThickness = 2;
+		player.cocks[0].cockType = CockTypesEnum.TENTACLE;
+	}
 	outputText("\"<i>Yum,</i>\" whispers Marae, throwing you against her tree and advancing confidently, \"<i>nothing feels quite as good as burying a squirming tentacle into some hot wet cunt's pussy and asshole.</i>\" She beckons you closer and begins advancing on you.  Your body edges closer of its own volition, as if she has a hook buried in your groin and pulling you away from the tree, towards her needy flower.   When she closes within a few feet, your " + multiCockDescript() + " splits into a dozen different appendages, each waving in the air with licentious intent.  Before you can react, they lash forwards, wrapping her arms and legs tightly, hauling her onto two central tendrils.  In seconds, your primary tentacle-dick buries itself up to her cervix, pressing roughly against her internal opening while it squirms like a trapped snake inside her cunt.  The secondary cock-vine manages to penetrate her bum with ease, tingling as lubricant splatters around the rough penetration.\n\n");
-
 	outputText("You don't really know what's going on anymore.  You're leaning against a tree while your crotch is forcefully double-teaming both of a goddess' holes.  You're too full of warmth and arousal to do anything about it, so you slump down and enjoy it.  Marae cries and moans like a bitch in heat, clearly enjoying the two wriggling tendrils working her over.  Sap leaks from her nipples, and a few spare tentacles immediately latch on, their tips forming into twisted lips.  You can <b>taste</b> the flavor... with your tentacles.  The fog in your mind thickens, and you squeeze another tentacle into her ass without thinking about it.   One more erupts from the bundle at your crotch, and latches onto the goddess' clit, locking her in a state of near-constant orgasm.   Her orgasms milk your cocks with violent muscle contracts, actually managing to pull the member buried inside her through her cervix and into her womb.  It's too much and you start to cum, blacking out from the intensity of it.\n\n");
 	outputText("<b>Some time passes...</b>\n\n");
 	outputText("You're still on the island with Marae impaled on two of the wriggling monstrosities you call your cocks.    You haven't pulled free in days, but why would you?  Your bodies are made for each other, a pile of wriggling fuckmeat with holes that drink your cum like the desert drinks water, and a once-hero who lives to sate his mass of seething tentacles.   The two of you are two halves of the same puzzle, locked together in an endless orgy.  You fondly remember watching the shining liquid that was once your soul drip from the wet folds of her flower-petals, crystallizing into a tiny rock much smaller than Marae's own.");

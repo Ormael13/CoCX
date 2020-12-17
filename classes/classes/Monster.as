@@ -342,6 +342,9 @@ import flash.utils.getQualifiedClassName;
 			if (this.mana > maxMana()) this.mana = maxMana();
 		}
 
+		public override function maxLust():Number {
+            return Math.round(maxLust_base()*maxLust_mult());
+        }
 		protected override function maxLust_base():Number {
 			//Base lust
 			var temp:Number = 100 + this.level * 2;

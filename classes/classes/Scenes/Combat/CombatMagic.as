@@ -2983,7 +2983,8 @@ public class CombatMagic extends BaseCombatContent {
 		var a12b:Number = 1;
 		if (player.armorPerk == "Medium") a12b *= 2;
 		if (player.armorPerk == "Heavy") a12b *= 3;
-		if (player.armorPerk == "Ayo") a12b *= 4;
+		if (player.armorPerk == "Light Ayo") a12b *= 4;
+		if (player.armorPerk == "Heavy Ayo") a12b *= 5;
 		return a12b;
 	}
 	

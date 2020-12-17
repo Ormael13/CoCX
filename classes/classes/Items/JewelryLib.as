@@ -43,6 +43,7 @@ package classes.Items
 		public static const MODIFIER_POIS_R:int = 			16;
 		public static const MODIFIER_MAGIC_R:int = 			17;
 		public static const MODIFIER_LUST_R:int = 			18;
+		public static const MODIFIER_PHYS_R:int = 			19;
 		
 		public static const DEFAULT_VALUE:Number = 6;
 		
@@ -69,6 +70,8 @@ package classes.Items
 		public const DARKRNG:Jewelry = new Jewelry("DarkRng", "Dark Ring", "ring of darkness protection", "an enchanted onyx ring of darkness protection", MODIFIER_DARK_R, 5, 800, "This ring is topped with onyx gemstone. It is said that this will make you protected from darkness. \n\nType: Jewelry (Ring) \nBase value: 800 \nSpecial: Increases darkness resistance by 5%.","Ring");
 		public const POISRNG:Jewelry = new Jewelry("PoisRng", "Pois Ring", "ring of poison protection", "an enchanted pearl ring of poison protection", MODIFIER_POIS_R, 5, 800, "This ring is topped with pearl. It is said that this will make you protected from poison. \n\nType: Jewelry (Ring) \nBase value: 800 \nSpecial: Increases poison resistance by 5%.","Ring");
 		public const LUSTRNG:Jewelry = new Jewelry("LustRng", "Lust Ring", "ring of lust protection", "an enchanted amethyst ring of lust protection", MODIFIER_LUST_R, 5, 1200, "This ring is topped with amethyst gemstone. It is said that this will make you protected from lust. \n\nType: Jewelry (Ring) \nBase value: 1,200 \nSpecial: Increases lust resistance by 5%.","Ring");
+		public const MAGIRNG:Jewelry = new Jewelry("MagiRng", "Magic Ring", "ring of magical protection", "an enchanted pyrite ring of magical protection", MODIFIER_MAGIC_R, 2, 1600, "This ring is topped with pyrite gemstone. It is said that this will make you protected from magic. \n\nType: Jewelry (Ring) \nBase value: 1,600 \nSpecial: Increases magic resistance by 2%.","Ring");
+		public const PHYSRNG:Jewelry = new Jewelry("PhysRng", "Phys Ring", "ring of physical protection", "an enchanted hematite ring of physical protection", MODIFIER_PHYS_R, 3, 1600, "This ring is topped with hematite gemstone. It is said that this will make you protected from physical harm. \n\nType: Jewelry (Ring) \nBase value: 1,600 \nSpecial: Increases physical resistance by 3%.","Ring");
 		//armor, mag resis protection rings
 		public const UNDKINS:Jewelry = new Jewelry("UndKinS", "UndefKingSignet", "Undefeated King's Signet", "an Undefeated King's Signet", MODIFIER_WR, 100, 2000, "A signet that belonged in the past to the king, which claimed to be undefeated. But then how it get into your hands?","Ring");
 		public const FLLIRNG:Jewelry = new Jewelry("FlLiRng", "FlameLizardRing", "Flame Lizard ring", "an Flame Lizard ring", MODIFIER_WR, 75, 3200, "Ring is encrusted with a few small emerald, peridot and carnelian gemstones. Usefull to use Lustzerker or boost it. \n\nType: Jewelry (Ring) \nBase value: 1,000 \nSpecial: Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.","Ring");

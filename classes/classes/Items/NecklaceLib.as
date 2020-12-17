@@ -25,6 +25,7 @@ package classes.Items
 		public static const MODIFIER_POIS_R:int = 			13;
 		public static const MODIFIER_MAGIC_R:int = 			14;
 		public static const MODIFIER_LUST_R:int = 			15;
+		public static const MODIFIER_PHYS_R:int = 			16;
 		
 		public static const DEFAULT_VALUE:Number = 6;
 		
@@ -47,6 +48,8 @@ package classes.Items
 		public const DARKNEC:Necklace = new Necklace("DarkNec", "Dark Neck", "necklace of darkness protection", "an enchanted necklace of darkness protection", MODIFIER_DARK_R, 25, 4000, "This necklace is topped with onyx gemstones. It is said that this will make you protected from darkness. \n\nType: Jewelry (Necklace) \nBase value: 4,000 \nSpecial: Increases darkness resistance by 25%.","Necklace");
 		public const POISNEC:Necklace = new Necklace("PoisNec", "Pois Neck", "necklace of poison protection", "an enchanted necklace of poison protection", MODIFIER_POIS_R, 25, 4000, "This necklace is topped with pearls. It is said that this will make you protected from poison. \n\nType: Jewelry (Necklace) \nBase value: 4,000 \nSpecial: Increases poison resistance by 25%.","Necklace");
 		public const LUSTNEC:Necklace = new Necklace("LustNec", "Lust Neck", "necklace of lust protection", "an enchanted necklace of lust protection", MODIFIER_LUST_R, 25, 6000, "This necklace is topped with amethyst gemstones. It is said that this will make you protected from lust. \n\nType: Jewelry (Necklace) \nBase value: 6,000 \nSpecial: Increases lust resistance by 25%.","Necklace");
+		public const MAGINEC:Necklace = new Necklace("MagiNec", "Magic Neck", "necklace of magical protection", "an enchanted necklace of magical protection", MODIFIER_MAGIC_R, 10, 8000, "This necklace is topped with pyrite gemstones. It is said that this will make you protected from magic. \n\nType: Jewelry (Necklace) \nBase value: 8,000 \nSpecial: Increases magic resistance by 10%.","Necklace");
+		public const PHYSNEC:Necklace = new Necklace("PhysNec", "Phys Neck", "necklace of physical protection", "an enchanted necklace of physical protection", MODIFIER_PHYS_R, 15, 8000, "This necklace is topped with hematite gemstones. It is said that this will make you protected from physical harm. \n\nType: Jewelry (Necklace) \nBase value: 8,000 \nSpecial: Increases physical resistance by 15%.","Necklace");
 		//armor, mag resis protection necklaces........
 		public const NECKINT:NecklaceOfIntelligence = new NecklaceOfIntelligence();
 		public const NECKLIB:NecklaceOfLibido = new NecklaceOfLibido();

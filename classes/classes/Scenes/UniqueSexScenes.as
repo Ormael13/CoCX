@@ -320,14 +320,14 @@ package classes.Scenes
 
 		public function raijuVoltTransfer():void {
 			clearOutput();
-			outputText("You ponder what to do with your defeated opponent then realize your body is overflowing with static. Your opponent shudders as you grab " + monster.pronoun2 + " by the neck.\n\n");
-			outputText("\"<i>Do you know how charged I am right now? I’ll need to get rid of that before I lose my mind. Thankfully you came along at the perfect moment.</i>\"\n\n");
-			outputText("" + monster.capitalA + monster.short + " only understands what you mean when you kiss " + monster.pronoun2 + ", your static starting to lick " + monster.pronoun3 + " skin, leaving a tingle of pleasure and arousal as you start to vent your electricity out.\n\n");
+			outputText("Your static arcs through your entire being as you stand before your opponent. Thoughts race through you as you gaze at your prey. Your opponent shudders as you grab " + monster.pronoun2 + " by the neck.\n\n");
+			outputText("You're losing your mind, you need them to know how much you need this. You want them to squirm beneath your touch. You want them to feel what you feel. More arcs of electricity jolt through you as lust overrides your senses. Your opponent can only helplessly wait for you take your next course of action... Your entire body is tingling in anticipation, craving for more\"\n\n");
+			outputText("" + monster.capitalA + monster.short + " trembles as you kiss " + monster.pronoun2 + ", your static starting to jolt along " + monster.pronoun3 + " skin. As you vent out your electiricity, you can only feel the squirms of pleasure mixed with arousal beneath you.\n\n");
 			outputText("Voltage rushes out of your body as it transfers to your victim");
 			if (monster.hasCock()) outputText(" wrapping and sheathing around " + monster.pronoun3 + " penis,");
 			if (monster.biggestTitSize() >= 1) outputText(" massaging the shape of " + monster.pronoun3 + " " + monster.breastDescript(0) + ",");
 			if (monster.hasVagina()) outputText(" licking the entrance of " + monster.pronoun3 + " pussy");
-			outputText(" and spreading across the rest of " + monster.pronoun3 + " skin. You smile in contentment as the haze of lust progressively clears from your mind which is the opposite of what can be said for your victim. The excess of your static slowly passes into " + monster.a + monster.short + " prone form and you almost achieve climax from the relief as you purge all of this bad energy out of yourself.\n\n");
+			outputText(" and spreading across the rest of " + monster.pronoun3 + " skin. You smile, contended as the haze of lust progressively dissipates from your mind. Unfortunately, your victim will not have the same pleasure you do from release. The excess of your static slowly passes into " + monster.a + monster.short + " prone form and you almost achieve climax from the relief as you purge all of this bad energy out of yourself.\n\n");
 			outputText("Your victim, however, is not so lucky. As you pour in your lust " + monster.pronoun1 + " begins to completely lose control, attempting to fiercely masturbate this excess of desire out, to no avail. As you are close to done your partner is a wrecked mess on the floor, desperate to gain release but unable to achieve it fully as the supernatural electricity keeps building " + monster.pronoun3 + " desire way beyond normal, obliterating self-restraint and pride along the way. You move away from " + monster.a + monster.short + " just as " + monster.pronoun3 + " hands begin to draw fluids out of " + monster.pronoun3 + " lust filled endowment. ");
 			outputText("You stay clear as your victim’s lust explodes, spewing ");
 			if (monster.hasCock()) outputText("cum");
@@ -352,13 +352,13 @@ package classes.Scenes
 
 		public function TentacleRape():void {
 			clearOutput();
-			outputText("As your opponent falls defeated on the ground it dawns on you the slut needs to be severely punished. " +
-					"She wanted to rape you? Well you're going to give her a whole new definition to the term.\n\n" +
-					"You pick up the defeated woman, easily lifting her by the leg with one of your tentacles, holding her upside down.\n\n" +
-					"<i>”Wait, what are you doing?! Stop!”</i>\n\n" +
-					"You pull her to you, smiling widely as you reply.\n\n" +
-					"<i>“What's wrong? You were so eager to fuck me just a second ago. You won’t back down after such a bold attempt, right?" +
-					" Not that you have a choice in this matter.”/i>\n\n" +
+			outputText("As your opponent falls defeated on the ground, it dawns on your prey is in desperate need of some punishment. " +
+					"She wanted to rape you? Well, you're going to open her vocabulary to an entirely new definiton of the term.\n\n" +
+					"You pick up the defeated woman, easily lifting her by the leg with one of your tentacles as she's helplessly held upside down.\n\n" +
+					"She quickly cries out in protest, <i>”Wait, what are you doing?! Stop!”</i>\n\n" +
+					"You pull her to you, smiling widely as you begin to return her question with mockery.\n\n" +
+					"Were she not so eager to fuck you just a second ago? Is this not what she wanted? It's not like she's going to back now, is she?" +
+					" Not that she has a choice in this matter anymore.\n\n" +
 					"You pay her no further heed as you methodically proceed to brutally strip every single piece clothing she had from her body. " +
 					"Once she's suitably naked, you grab her other leg with a second tentacle and spread her wide, exposing her pussy for the entire world to see as you prepare to break her mind with the most intense set of penetrations she ever had. " +
 					"You insert one tentacle... then a second, and so on, the girl eyes going wider after each insertion. " +

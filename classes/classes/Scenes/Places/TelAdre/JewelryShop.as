@@ -25,6 +25,7 @@ public class JewelryShop extends Shop {
         addButton(4, "Other materials", otherMaterials);
 		addButton(5, "Other jewelries", normalRings2);
 		addButton(6, "Other jewelries", normalRings3);
+		addButton(7, "Other jewelries", normalRings4);
 		//3 i 4 for necklaces and head accesories - maybe more buttons then move Jewelry Box i statue do niższego rzedu
         addButton(10, "Jewelry box",curry(confirmBuy, null, 500, "Equipment Storage - Jewelry Box"));
         addButton(11, useables.GLDSTAT.shortName, confirmBuy, useables.GLDSTAT);
@@ -68,6 +69,16 @@ public class JewelryShop extends Shop {
         addButton(button++, necklaces.NECKWIS.shortName, confirmBuy, necklaces.NECKWIS);
         addButton(14, "Back", inside);
     }
+    private function normalRings4():void {
+        clearOutput();
+        menu();
+        var button:int = 0;
+        addButton(button++, headjewelries.PHYSCRO.shortName, confirmBuy, headjewelries.PHYSCRO);
+        addButton(button++, headjewelries.CROWLIB.shortName, confirmBuy, headjewelries.CROWLIB);
+        addButton(button++, necklaces.PHYSNEC.shortName, confirmBuy, necklaces.PHYSNEC);
+        addButton(button++, necklaces.MAGINEC.shortName, confirmBuy, necklaces.MAGINEC);
+        addButton(14, "Back", inside);
+    }
     private function normalRings():void {
         clearOutput();
         display("normalRings");
@@ -103,6 +114,8 @@ public class JewelryShop extends Shop {
         addButton(button++, jewelries.LIFERNG.shortName, confirmBuy, jewelries.LIFERNG);
         addButton(button++, jewelries.WRATRNG.shortName, confirmBuy, jewelries.WRATRNG);
         addButton(button++, jewelries.MANARNG.shortName, confirmBuy, jewelries.MANARNG);
+        addButton(button++, jewelries.PHYSRNG.shortName, confirmBuy, jewelries.PHYSRNG);
+        addButton(button++, jewelries.MAGIRNG.shortName, confirmBuy, jewelries.MAGIRNG);
         addButton(14,"Back",inside);
     }
     private function enchantedRings2():void{

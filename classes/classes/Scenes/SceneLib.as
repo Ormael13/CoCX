@@ -263,6 +263,8 @@ public class SceneLib {
     public static var aikoScene:AikoScene = new AikoScene();
 	
 	public static var glacialYuShop:YuWinterGearShop = new YuWinterGearShop();
+	
+	public static var fleshGolemScenes:FleshGolemScene = new FleshGolemScene();
 
     public function SceneLib() {
     }

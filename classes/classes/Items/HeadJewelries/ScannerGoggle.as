@@ -13,7 +13,7 @@ package classes.Items.HeadJewelries
 		
 		public function ScannerGoggle() 
 		{
-			super("Scangog", "Scangoggle", "Scanner goggle", "a Scanner goggle", 0, 0, 4030, "This set of goggles naturally include a user interface and scanner, revealing information about your opponents.","Helm");
+			super("Scangog", "Scangoggle", "Scanner goggle", "a Scanner goggle", 0, 0, 4030, "This set of goggles naturally include a user interface and scanner, revealing information about your opponents.","Helmet");
 		}
 		
 		override public function canUse():Boolean {

@@ -34,7 +34,7 @@ use namespace CoC;
 			//choice[choice.length] = 0; //Mino Incubus (lvl 46)
 			//choice[choice.length] = 0; // (lvl 51)
 			//choice[choice.length] = 0; // (lvl 57)
-			//choice[choice.length] = 0; // (lvl 61)
+			//choice[choice.length] = 0; //Corrupted Improved Flesh Golem (lvl 59)/Corrupted Improved Flesh Golems(lvl 61)
 			choice[choice.length] = 0; //Imp Food
 			if (rand(4) == 0) choice[choice.length] = 1; //Find nothing! The rand will be removed from this once the Blight Ridge is populated with more encounters.
 			

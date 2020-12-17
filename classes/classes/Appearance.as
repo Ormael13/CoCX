@@ -2626,6 +2626,7 @@ public class Appearance extends Utils
 					[Eyes.ONI, "oni"],
 					[Eyes.ELF, "elf"],
 					[Eyes.RAIJU, "raiju"],
+					[Eyes.VAMPIRE, "vampire"],
 					[Eyes.GEMSTONES, "gemstones"],
 					[Eyes.FERAL, "feral"],
 					[Eyes.GRYPHON, "gryphon"],
@@ -2638,9 +2639,17 @@ public class Appearance extends Utils
 					[Eyes.FIRE_SNAIL, "fire snail"],
 					[Eyes.GHOST, "ghost"],
 					[Eyes.JIANGSHI, "jiangshi"],
+					[Eyes.GOAT, "goat"],
+					[Eyes.CENTIPEDE, "centipede"],
+					[Eyes.KRAKEN, "kraken"],
+					[Eyes.FROSTWYRM, "frost wyrm"],
+					[Eyes.CANCER, "cancer"],
 					[Eyes.FAIRY, "fairy"],
+					[Eyes.GREMLIN, "gremlin"],
 					[Eyes.WEASEL, "weasel"],
+					[Eyes.GAZER, "gazer"],
 					[Eyes.RATATOSKR, "ratatoskr"],
+					[Eyes.FIENDISH, "fiendish"],
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
@@ -2805,7 +2814,8 @@ public class Appearance extends Utils
 					[Tail.AVIAN, "avian"],
 					[Tail.GRIFFIN, "griffin"],
 					[Tail.CAVE_WYRM, "cave wyrm"],
-					[Tail.SQUIRREL, "squirrel"]
+					[Tail.SQUIRREL, "squirrel"],
+					[Tail.MONKEY, "monkey"]
 				]
 		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(

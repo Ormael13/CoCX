@@ -15,7 +15,7 @@ package classes.Items.Vehicles
 		
 		public function GoblinMechPrime() 
 		{
-			super("GobMPri", "GoblinMechPrime", "Goblin Mech Prime", "a Goblin Mech Prime", 0, 0, 2000, "A customisable goblin invention, this six-legged, large mech is equipped with a comfortable seat, fit for a goblin or a rather small person. The prime design, unlike the more common model, sports a better armature and energy management, which improves both the defensive and offensive capacity of the mech. \n\nType: Goblin Mech \nBase value: 500","Mech");
+			super("GobMPri", "GoblinMechPrime", "Goblin Mech Prime", "a Goblin Mech Prime", 0, 0, 2000, "A customisable goblin invention, this six-legged, large mech is equipped with a comfortable seat, fit for a goblin or a rather small person. The prime design, unlike the more common model, sports a better armature and energy management, which improves both the defensive and offensive capacity of the mech. \n\nType: Goblin Mech \nBase value: 2000","Mech");
 		}
 		
 		override public function canUse():Boolean {

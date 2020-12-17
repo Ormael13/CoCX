@@ -200,6 +200,25 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.removeStatusEffect(StatusEffects.CampSparingNpcsTimers6);
 				}
 			}
+			//Ayo Armors SF drain
+			if (player.isInAyoArmor() && flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) {
+				if (player.armor == armors.LAYOARM) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 60;
+				if (player.armor == armors.HBARMOR) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 80;
+				if (player.armor == armors.HAYOARM) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 120;
+				if (player.vehicles == vehicles.HB_MECH) {
+					/*if (upgrade 1) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= ?40?;
+					else */flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 60;
+				}
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < 0) {
+					player.buff("Ayo Armor").remove();
+					flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
+					outputText("\nYour ayo armor power reserves reached bottom. With a silent hiss armor depowers itself making you feel slower and heavier.\n");
+					if (player.armor == armors.LAYOARM || player.armor == armors.HBARMOR) player.buff("Ayo Armor").addStats( {"str": -10, "spe": -10} );
+					if (player.armor == armors.HAYOARM) player.buff("Ayo Armor").addStats( {"str": -20, "spe": -20} );
+					EngineCore.statScreenRefresh();
+					needNext = true;
+				}
+			}
 			//Sidonie checks
 			if (flags[kFLAGS.SIDONIE_RECOLLECTION] > 0) flags[kFLAGS.SIDONIE_RECOLLECTION]--;
 			if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) {
@@ -888,8 +907,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 				//Kaiba shor stock daily update
 				flags[kFLAGS.KAIBA_1] = rand(3);
-				flags[kFLAGS.KAIBA_2] = rand(2);
+				flags[kFLAGS.KAIBA_2] = rand(4);
 				flags[kFLAGS.KAIBA_3] = rand(2);
+				flags[kFLAGS.KAIBA_4] = rand(4);
 
 				//Racial perk daily effect Area
 
@@ -1761,49 +1781,42 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.BouncyBody);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Goblin Mech Alpha") {
-				if (player.elfScore() >= 11) { //Elf
-					outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
-					if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.2;
-					if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.35;
-					if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) player.HP /= 1.5;
-					player.HP = Math.round(player.HP);
-					player.setVehicle(VehiclesLib.NOTHING);
-					inventory.takeItem(vehicles.GOBMALP, null);
-					needNext = true;
-				}
-				if (player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE) { //Taller than 4 ft or having wings/tail
-					outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
-					if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.2;
-					if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.35;
-					if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) player.HP /= 1.5;
-					player.HP = Math.round(player.HP);
-					player.setVehicle(VehiclesLib.NOTHING);
-					inventory.takeItem(vehicles.GOBMALP, null);
-					needNext = true;
-				}
+			if (player.vehiclesName == "Goblin Mech Alpha" && (player.elfScore() >= 11 || player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE)) { //Elf OR Taller than 4 ft or having wings/tail
+				if (player.elfScore() >= 11) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
+				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.2;
+				if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.35;
+				if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) player.HP /= 1.5;
+				player.HP = Math.round(player.HP);
+				player.setVehicle(VehiclesLib.NOTHING);
+				inventory.takeItem(vehicles.GOBMALP, null);
+				needNext = true;
 			}
-			if (player.vehiclesName == "Goblin Mech Prime") {
-				if (player.elfScore() >= 11) { //Elf
-					outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
-					if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.4;
-					if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.7;
-					if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) player.HP /= 2;
-					player.HP = Math.round(player.HP);
-					player.setVehicle(VehiclesLib.NOTHING);
-					inventory.takeItem(vehicles.GOBMPRI, null);
-					needNext = true;
+			if (player.vehiclesName == "Goblin Mech Prime" && (player.elfScore() >= 11 || player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE)) { //Elf OR Taller than 4 ft or having wings/tail
+				if (player.elfScore() >= 11) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
+				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.4;
+				if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.7;
+				if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) player.HP /= 2;
+				player.HP = Math.round(player.HP);
+				player.setVehicle(VehiclesLib.NOTHING);
+				inventory.takeItem(vehicles.GOBMPRI, null);
+				needNext = true;
+			}
+			if (player.vehiclesName == "Howling Banshee Mech" && player.tallness < 84) {
+				outputText("You aren't tall enough to properly use this vehicle anymore.\n\n");
+				var oldHPratio:Number = player.hp100/100;
+				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) {
+					var oldMax:Number = player.maxOverHP();
+					player.buff("HB Mech").remove();
+					player.HP *= (player.maxOverHP() / oldMax);
 				}
-				if (player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE) { //Taller than 4 ft or having wings/tail
-					outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
-					if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.4;
-					if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.7;
-					if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) player.HP /= 2;
-					player.HP = Math.round(player.HP);
-					player.setVehicle(VehiclesLib.NOTHING);
-					inventory.takeItem(vehicles.GOBMPRI, null);
-					needNext = true;
-				}
+				else player.buff("HB Mech").remove();
+				player.HP = oldHPratio*player.maxHP();
+				player.HP = Math.round(player.HP);
+				player.setVehicle(VehiclesLib.NOTHING);
+				inventory.takeItem(vehicles.HB_MECH, null);
+				needNext = true;
 			}
 			//H class Heaven Tribulation
 			//		if (player.level >= 24 && player.findPerk(PerkLib.SoulApprentice) >= 0 && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) < 0) {

@@ -7,6 +7,7 @@ package classes.Scenes.Monsters
 import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
@@ -25,7 +26,7 @@ import classes.internals.*;
 		
 		public function Saiyan() 
 		{
-			if (flags[kFLAGS.SAIYAN_ENEMY_NUMBER_COUNTER] == 1) {//female
+			if (flags[kFLAGS.SAIYAN_ENEMY_NUMBER_COUNTER] == 1) {//female (change her to diff female stats)
 				this.long = "";
 				createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_TIGHT);
 				this.createStatusEffect(StatusEffects.BonusVCapacity,75,0,0,0);
@@ -324,7 +325,7 @@ import classes.internals.*;
 					add(armors.S_SWMWR,1/12).
 					add(consumables.L_DRAFT,1/4).
 					add(consumables.MANTICV,0.7);
-			//this.tailType = Tail.MANTICORE_PUSSYTAIL;
+			this.tailType = Tail.MONKEY;
 			this.tailRecharge = 0;
 			checkMonster();
 		}
